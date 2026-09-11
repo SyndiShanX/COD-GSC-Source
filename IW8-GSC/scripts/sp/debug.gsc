@@ -7,124 +7,124 @@ function entity_count() {}
 
 function entity_count_hud() {}
 
-function get_total_count_color(var0) {}
+function get_total_count_color(var_0) {}
 
 function adjust_entcounthud_pos() {}
 
-function set_entity_count_hud(var0, var1, var2) {}
+function set_entity_count_hud(var_0, var_1, var_2) {}
 
-function entity_count_delta(var0, var1) {}
+function entity_count_delta(var_0, var_1) {}
 
-function adjust_entity_count_hud_color(var0) {}
+function adjust_entity_count_hud_color(var_0) {}
 
-function get_entity_count_list(var0, var1) {
-  var2 = getEntArray();
-  var3 = [];
+function get_entity_count_list(var_0, var_1) {
+  var_2 = getEntArray();
+  var_3 = [];
 
-  if(!isDefined(var0)) {
-    var0 = 0;
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  foreach(var8, var5 in var2) {
-    if(!isDefined(var5.classname)) {
-      var6 = "UNKNOWN?";
+  foreach(var_8, var_5 in var_2) {
+    if(!isDefined(var_5.classname)) {
+      var_6 = "UNKNOWN?";
     } else {
-      var6 = var5.classname;
+      var_6 = var_5.classname;
     }
 
-    if(var0) {
-      if(isai(var5)) {
-        var6 = "actors";
-      } else if(isspawner(var5)) {
-        var7 = getsubstr(var6, 0, 5);
+    if(var_0) {
+      if(isai(var_5)) {
+        var_6 = "actors";
+      } else if(isspawner(var_5)) {
+        var_7 = getsubstr(var_6, 0, 5);
 
-        if(var7 == "actor") {
-          var6 = "AI_spawners";
+        if(var_7 == "actor") {
+          var_6 = "AI_spawners";
         } else {
-          var6 = "vehicle_spawners";
+          var_6 = "vehicle_spawners";
         }
-      } else if(isDefined(var5.createfx_ent)) {
-        var6 = var5.classname + " CREATEFX";
-      } else if(!isDefined(var5.code_classname)) {} else if(var5.code_classname == "script_model") {
-        if(var5.model == "tag_origin") {
-          var6 = "script_model TAG_ORIGIN";
+      } else if(isDefined(var_5.createfx_ent)) {
+        var_6 = var_5.classname + " CREATEFX";
+      } else if(!isDefined(var_5.code_classname)) {} else if(var_5.code_classname == "script_model") {
+        if(var_5.model == "tag_origin") {
+          var_6 = "script_model TAG_ORIGIN";
         }
-      } else if(var5.code_classname == "trigger_multiple") {
-        var7 = getsubstr(var6, 0, 22);
+      } else if(var_5.code_classname == "trigger_multiple") {
+        var_7 = getsubstr(var_6, 0, 22);
 
-        if(var7 == "trigger_multiple_bcs_") {
-          var6 = "trigger_multiple_bcs";
+        if(var_7 == "trigger_multiple_bcs_") {
+          var_6 = "trigger_multiple_bcs";
         } else {
-          var6 = "trigger_multiple";
+          var_6 = "trigger_multiple";
         }
       } else {
-        var7 = getsubstr(var6.code_classname, 0, 10);
+        var_7 = getsubstr(var_6.code_classname, 0, 10);
 
-        if(var7 == "weapon_iw8") {
-          var8 = "weapons";
+        if(var_7 == "weapon_iw8") {
+          var_8 = "weapons";
         }
 
-        var7 = getsubstr(var6.code_classname, 0, 5);
+        var_7 = getsubstr(var_6.code_classname, 0, 5);
 
-        if(var7 == "actor") {
-          var8 = "drones";
+        if(var_7 == "actor") {
+          var_8 = "drones";
         }
       }
     } else {
-      if(isDefined(var6.createfx_ent)) {
-        var8 = "CREATEFX " + var6.classname;
+      if(isDefined(var_6.createfx_ent)) {
+        var_8 = "CREATEFX " + var_6.classname;
       }
 
-      if(var8 == "script_model") {
-        var8 += " " + var6.model;
+      if(var_8 == "script_model") {
+        var_8 += " " + var_6.model;
       }
     }
 
-    if(!isDefined(var4[var8])) {
-      var4 = 0;
+    if(!isDefined(var_4[var_8])) {
+      var_4 = 0;
     }
 
-    var4++;
+    var_4++;
   }
 
-  var5 = undefined;
-  var7 = undefined;
+  var_5 = undefined;
+  var_7 = undefined;
 
-  if(!isDefined(var2) || !var2) {
-    var4 = sort_by_key(var4);
+  if(!isDefined(var_2) || !var_2) {
+    var_4 = sort_by_key(var_4);
   }
 
-  return var4;
+  return var_4;
 }
 
-function sort_by_key(var0) {
-  var1 = getarraykeys(var0);
+function sort_by_key(var_0) {
+  var_1 = getarraykeys(var_0);
 
-  for(var2 = 0; var2 < var1.size - 1; var2++) {
-    for(var3 = var2 + 1; var3 < var1.size; var3++) {
-      if(stricmp(var1[var2], var1[var3]) > 0) {
-        var4 = var1[var3];
-        var1 = var1[var2];
-        var1 = var4;
+  for(var_2 = 0; var_2 < var_1.size - 1; var_2++) {
+    for(var_3 = var_2 + 1; var_3 < var_1.size; var_3++) {
+      if(stricmp(var_1[var_2], var_1[var_3]) > 0) {
+        var_4 = var_1[var_3];
+        var_1 = var_1[var_2];
+        var_1 = var_4;
       }
     }
   }
 
-  var5 = [];
-  var2 = 0;
+  var_5 = [];
+  var_2 = 0;
 
-  if(var2 < var1.size) {
-    GscBinSkip0(0x2e, var1[var2], var0[var1[var2]]);
+  if(var_2 < var_1.size) {
+    GscBinSkip0(0x2e, var_1[var_2], var_0[var_1[var_2]]);
   }
 
-  return var5;
+  return var_5;
 }
 
-function debug_enemypos(var0) {
-  var1 = getaiarray();
+function debug_enemypos(var_0) {
+  var_1 = getaiarray();
 
-  for(var2 = 0; var2 < var1.size; var2++) {
-    if(var1[var2] getentitynumber() != var0) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    if(var_1[var_2] getentitynumber() != var_0) {
       continue;
     }
 
@@ -133,15 +133,15 @@ function debug_enemypos(var0) {
   }
 }
 
-function debug_stopenemypos(var0) {
-  var1 = getaiarray();
+function debug_stopenemypos(var_0) {
+  var_1 = getaiarray();
 
-  for(var2 = 0; var2 < var1.size; var2++) {
-    if(var1[var2] getentitynumber() != var0) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    if(var_1[var_2] getentitynumber() != var_0) {
       continue;
     }
 
-    var1[var2] notify("stop_drawing_enemy_pos");
+    var_1[var_2] notify("stop_drawing_enemy_pos");
     break;
   }
 }
@@ -159,127 +159,127 @@ function debug_enemyposproc() {
       continue;
     }
 
-    var0 = scripts\anim\utility::getenemysightpos();
+    var_0 = scripts\anim\utility::getenemysightpos();
   }
 }
 
 function debug_enemyposreplay() {
-  var0 = getaiarray();
-  var1 = undefined;
-  var2 = 0;
+  var_0 = getaiarray();
+  var_1 = undefined;
+  var_2 = 0;
 
-  while(var2 < var0.size) {
-    var1 = var0[var2];
+  while(var_2 < var_0.size) {
+    var_1 = var_0[var_2];
 
-    if(!isalive(var1)) {} else {
-      if(isDefined(var1.lastenemysightpos)) {}
+    if(!isalive(var_1)) {} else {
+      if(isDefined(var_1.lastenemysightpos)) {}
 
-      if(isDefined(var1.goodshootpos)) {
-        if(var1 isbadguy()) {
-          var3 = (1, 0, 0);
+      if(isDefined(var_1.goodshootpos)) {
+        if(var_1 isbadguy()) {
+          var_3 = (1, 0, 0);
         } else {
-          var3 = (0, 0, 1);
+          var_3 = (0, 0, 1);
         }
 
-        var4 = var2.origin + (0, 0, 54);
+        var_4 = var_2.origin + (0, 0, 54);
 
-        if(isDefined(var2.node)) {
-          if(var2.node.type == "Cover Left") {
-            var5 = 1;
-            var4 = anglestoright(var2.node.angles);
-            var4 *= -32;
-            var4 = (var4[0], var4[1], 64);
-            var4 = var2.node.origin + var4;
-          } else if(var2.node.type == "Cover Right") {
-            var5 = 1;
-            var4 = anglestoright(var2.node.angles);
-            var4 *= 32;
-            var4 = (var4[0], var4[1], 64);
-            var4 = var2.node.origin + var4;
+        if(isDefined(var_2.node)) {
+          if(var_2.node.type == "Cover Left") {
+            var_5 = 1;
+            var_4 = anglestoright(var_2.node.angles);
+            var_4 *= -32;
+            var_4 = (var_4[0], var_4[1], 64);
+            var_4 = var_2.node.origin + var_4;
+          } else if(var_2.node.type == "Cover Right") {
+            var_5 = 1;
+            var_4 = anglestoright(var_2.node.angles);
+            var_4 *= 32;
+            var_4 = (var_4[0], var_4[1], 64);
+            var_4 = var_2.node.origin + var_4;
           }
         }
 
-        scripts\engine\utility::draw_arrow(var4, var2.goodshootpos, var3);
+        scripts\engine\utility::draw_arrow(var_4, var_2.goodshootpos, var_3);
       }
     }
 
-    var3++;
+    var_3++;
   }
 
   if(true) {
     return;
   }
 
-  if(!isalive(var2)) {
+  if(!isalive(var_2)) {
     return;
   }
 
-  if(isalive(var2.enemy)) {}
+  if(isalive(var_2.enemy)) {}
 
-  if(isDefined(var2.lastenemysightpos)) {}
+  if(isDefined(var_2.lastenemysightpos)) {}
 
-  if(isalive(var2.goodenemy)) {}
+  if(isalive(var_2.goodenemy)) {}
 
-  if(!var2 scripts\anim\utility::hasenemysightpos()) {
+  if(!var_2 scripts\anim\utility::hasenemysightpos()) {
     return;
   }
 
-  var6 = var2 scripts\anim\utility::getenemysightpos();
+  var_6 = var_2 scripts\anim\utility::getenemysightpos();
 
-  if(isDefined(var2.goodshootpos)) {
-    return;
-  }
-}
-
-function drawenttag(var0) {}
-
-function drawtag(var0, var1, var2) {
-  if(isDefined(self.model) && scripts\engine\utility::hastag(self.model, var0)) {
-    var3 = self gettagorigin(var0);
-    var4 = self gettagangles(var0);
-    drawarrow(var3, var4, var1, var2);
+  if(isDefined(var_2.goodshootpos)) {
     return;
   }
 }
 
-function drawarrow(var0, var1, var2, var3) {
-  var4 = 10;
-  var5 = anglesToForward(var1);
-  var6 = var5 * var4;
-  var7 = var5 * var4 * 0.8;
-  var8 = anglestoright(var1);
-  var9 = var8 * var4 * -0.2;
-  var10 = var8 * var4 * 0.2;
-  var11 = anglestoup(var1);
-  var8 *= var4;
-  var11 *= var4;
-  var12 = (0.9, 0.2, 0.2);
-  var13 = (0.2, 0.9, 0.2);
-  var14 = (0.2, 0.2, 0.9);
+function drawenttag(var_0) {}
 
-  if(isDefined(var2)) {
-    var12 = var2;
-    var13 = var2;
-    var14 = var2;
-  }
-
-  if(!isDefined(var3)) {
-    var3 = 1;
+function drawtag(var_0, var_1, var_2) {
+  if(isDefined(self.model) && scripts\engine\utility::hastag(self.model, var_0)) {
+    var_3 = self gettagorigin(var_0);
+    var_4 = self gettagangles(var_0);
+    drawarrow(var_3, var_4, var_1, var_2);
+    return;
   }
 }
 
-function drawtagforever(var0, var1) {
+function drawarrow(var_0, var_1, var_2, var_3) {
+  var_4 = 10;
+  var_5 = anglesToForward(var_1);
+  var_6 = var_5 * var_4;
+  var_7 = var_5 * var_4 * 0.8;
+  var_8 = anglestoright(var_1);
+  var_9 = var_8 * var_4 * -0.2;
+  var_10 = var_8 * var_4 * 0.2;
+  var_11 = anglestoup(var_1);
+  var_8 *= var_4;
+  var_11 *= var_4;
+  var_12 = (0.9, 0.2, 0.2);
+  var_13 = (0.2, 0.9, 0.2);
+  var_14 = (0.2, 0.2, 0.9);
+
+  if(isDefined(var_2)) {
+    var_12 = var_2;
+    var_13 = var_2;
+    var_14 = var_2;
+  }
+
+  if(!isDefined(var_3)) {
+    var_3 = 1;
+  }
+}
+
+function drawtagforever(var_0, var_1) {
   for(;;) {
     if(!isDefined(self)) {
       return;
     }
 
-    drawtag(var0, var1);
+    drawtag(var_0, var_1);
     wait 0.05;
   }
 }
 
-function dragtaguntildeath(var0, var1) {
+function dragtaguntildeath(var_0, var_1) {
   self endon("death");
 
   for(;;) {
@@ -291,17 +291,17 @@ function dragtaguntildeath(var0, var1) {
       break;
     }
 
-    drawtag(var0, var1);
+    drawtag(var_0, var_1);
     wait 0.05;
   }
 }
 
-function viewtag(var0, var1) {
-  if(var0 == "ai") {
-    var2 = getaiarray();
+function viewtag(var_0, var_1) {
+  if(var_0 == "ai") {
+    var_2 = getaiarray();
 
-    for(var3 = 0; var3 < var2.size; var3++) {
-      drawtag(var2[var3], var1);
+    for(var_3 = 0; var_3 < var_2.size; var_3++) {
+      drawtag(var_2[var_3], var_1);
     }
 
     return;
@@ -310,57 +310,57 @@ function viewtag(var0, var1) {
 
 function debug_corner() {
   level.player.ignoreme = 1;
-  var0 = getallnodes();
-  var1 = [];
+  var_0 = getallnodes();
+  var_1 = [];
 
-  for(var2 = 0; var2 < var0.size; var2++) {
-    if(var0[var2].type == "Cover Left") {
-      var1 = var0[var2];
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    if(var_0[var_2].type == "Cover Left") {
+      var_1 = var_0[var_2];
     }
 
-    if(var0[var2].type == "Cover Right") {
-      var1 = var0[var2];
+    if(var_0[var_2].type == "Cover Right") {
+      var_1 = var_0[var_2];
     }
   }
 
-  var3 = getaiarray();
+  var_3 = getaiarray();
 
-  for(var2 = 0; var2 < var3.size; var2++) {
-    var3[var2] delete();
+  for(var_2 = 0; var_2 < var_3.size; var_2++) {
+    var_3[var_2] delete();
   }
 
   level.debugspawners = getspawnerarray();
   level.activenodes = [];
   level.completednodes = [];
 
-  for(var2 = 0; var2 < level.debugspawners.size; var2++) {
-    level.debugspawners[var2].targetname = "blah";
+  for(var_2 = 0; var_2 < level.debugspawners.size; var_2++) {
+    level.debugspawners[var_2].targetname = "blah";
   }
 
-  var4 = 0;
+  var_4 = 0;
 
-  for(var2 = 0; var2 < 30; var2++) {
-    if(var2 >= var1.size) {
+  for(var_2 = 0; var_2 < 30; var_2++) {
+    if(var_2 >= var_1.size) {
       break;
     }
 
     thread covertest();
-    var4++;
+    var_4++;
   }
 
-  if(var1.size <= 30) {
+  if(var_1.size <= 30) {
     return;
   }
 
   for(;;) {
     level waittill("debug_next_corner");
 
-    if(var4 >= var1.size) {
-      var4 = 0;
+    if(var_4 >= var_1.size) {
+      var_4 = 0;
     }
 
     thread covertest();
-    var4++;
+    var_4++;
   }
 }
 
@@ -369,50 +369,50 @@ function covertest() {
 }
 
 function coversetupanim() {
-  var0 = undefined;
-  var1 = undefined;
+  var_0 = undefined;
+  var_1 = undefined;
 
   for(;;) {
-    for(var2 = 0; var2 < level.debugspawners.size; var2++) {
+    for(var_2 = 0; var_2 < level.debugspawners.size; var_2++) {
       wait 0.05;
-      var1 = level.debugspawners[var2];
-      var3 = 0;
+      var_1 = level.debugspawners[var_2];
+      var_3 = 0;
 
-      for(var4 = 0; var4 < level.activenodes.size; var4++) {
-        if(distance(level.activenodes[var4].origin, self.origin) > 250) {
+      for(var_4 = 0; var_4 < level.activenodes.size; var_4++) {
+        if(distance(level.activenodes[var_4].origin, self.origin) > 250) {
           continue;
         }
 
-        var3 = 1;
+        var_3 = 1;
         break;
       }
 
-      if(var3) {
+      if(var_3) {
         continue;
       }
 
-      var5 = 0;
+      var_5 = 0;
 
-      for(var4 = 0; var4 < level.completednodes.size; var4++) {
-        if(level.completednodes[var4] != self) {
+      for(var_4 = 0; var_4 < level.completednodes.size; var_4++) {
+        if(level.completednodes[var_4] != self) {
           continue;
         }
 
-        var5 = 1;
+        var_5 = 1;
         break;
       }
 
-      if(var5) {
+      if(var_5) {
         continue;
       }
 
       level.activenodes[level.activenodes.size] = self;
-      var1.origin = self.origin;
-      var1.angles = self.angles;
-      var1.count = 1;
-      var0 = var1 stalingradspawn();
+      var_1.origin = self.origin;
+      var_1.angles = self.angles;
+      var_1.count = 1;
+      var_0 = var_1 stalingradspawn();
 
-      if(scripts\common\ai::spawn_failed(var0)) {
+      if(scripts\common\ai::spawn_failed(var_0)) {
         removeactivespawner(self);
         continue;
       }
@@ -420,52 +420,52 @@ function coversetupanim() {
       break;
     }
 
-    if(isalive(var0)) {
+    if(isalive(var_0)) {
       break;
     }
   }
 
   wait 1;
 
-  if(isalive(var0)) {
-    var0.ignoreme = 1;
-    var0.team = "neutral";
-    var0 setgoalpos(var0.origin);
+  if(isalive(var_0)) {
+    var_0.ignoreme = 1;
+    var_0.team = "neutral";
+    var_0 setgoalpos(var_0.origin);
     thread createline(self.origin);
-    var0 thread scripts\engine\sp\utility::debugorigin();
-    thread createlineconstantly(var0);
-    var0 waittill("death");
+    var_0 thread scripts\engine\sp\utility::debugorigin();
+    thread createlineconstantly(var_0);
+    var_0 waittill("death");
   }
 
   removeactivespawner(self);
   level.completednodes[level.completednodes.size] = self;
 }
 
-function removeactivespawner(var0) {
-  var1 = [];
+function removeactivespawner(var_0) {
+  var_1 = [];
 
-  for(var2 = 0; var2 < level.activenodes.size; var2++) {
-    if(level.activenodes[var2] == var0) {
+  for(var_2 = 0; var_2 < level.activenodes.size; var_2++) {
+    if(level.activenodes[var_2] == var_0) {
       continue;
     }
 
-    var1 = level.activenodes[var2];
+    var_1 = level.activenodes[var_2];
   }
 
-  level.activenodes = var1;
+  level.activenodes = var_1;
 }
 
-function createline(var0) {
+function createline(var_0) {
   for(;;) {
     wait 0.05;
   }
 }
 
-function createlineconstantly(var0) {
-  var1 = undefined;
+function createlineconstantly(var_0) {
+  var_1 = undefined;
 
-  while(isalive(var0)) {
-    var1 = var0.origin;
+  while(isalive(var_0)) {
+    var_1 = var_0.origin;
     wait 0.05;
   }
 
@@ -490,26 +490,26 @@ function debugmisstimeoff() {
   self notify("stopdebugmisstime");
 }
 
-function debugjump(var0) {}
+function debugjump(var_0) {}
 
-function add_debugdvar_func(var0, var1, var2, var3) {
+function add_debugdvar_func(var_0, var_1, var_2, var_3) {
   if(!isDefined(level.debug.dvarfuncs)) {
     level.debug.dvarfuncs = [];
   }
 
-  setdvarifuninitialized(var0, "");
-  var4 = spawnStruct();
-  var4.func = var1;
+  setdvarifuninitialized(var_0, "");
+  var_4 = spawnStruct();
+  var_4.func = var_1;
 
-  if(isDefined(var2)) {
-    var4.threaded = var2;
+  if(isDefined(var_2)) {
+    var_4.threaded = var_2;
   }
 
-  if(isDefined(var3)) {
-    var4.unarchived = var3;
+  if(isDefined(var_3)) {
+    var_4.unarchived = var_3;
   }
 
-  level.debug.dvarfuncs[var0] = var4;
+  level.debug.dvarfuncs[var_0] = var_4;
 }
 
 function debugdvars() {}
@@ -529,98 +529,98 @@ function debug_fxlighting() {}
 function debug_fxlighting_buttons() {}
 
 function showdebugtrace() {
-  var0 = undefined;
-  var1 = undefined;
-  var0 = (15.1859, -12.2822, 4.071);
-  var1 = (947.2, -10918, 64.9514);
+  var_0 = undefined;
+  var_1 = undefined;
+  var_0 = (15.1859, -12.2822, 4.071);
+  var_1 = (947.2, -10918, 64.9514);
 
   for(;;) {
     wait 0.05;
-    var2 = var0;
-    var3 = var1;
+    var_2 = var_0;
+    var_3 = var_1;
 
-    if(!isDefined(var0)) {
-      var2 = level.tracestart;
+    if(!isDefined(var_0)) {
+      var_2 = level.tracestart;
     }
 
-    if(!isDefined(var1)) {
-      var3 = level.player getEye();
+    if(!isDefined(var_1)) {
+      var_3 = level.player getEye();
     }
 
-    var4 = scripts\engine\trace::_bullet_trace(var2, var3, 0, undefined);
+    var_4 = scripts\engine\trace::_bullet_trace(var_2, var_3, 0, undefined);
   }
 }
 
 function debug_character_count() {
-  var0 = newhudelem();
-  var0.alignx = "left";
-  var0.aligny = "middle";
-  var0.x = 10;
-  var0.y = 100;
-  var0.label = &"DEBUG_DRONES";
-  var0.alpha = 0;
-  var1 = newhudelem();
-  var1.alignx = "left";
-  var1.aligny = "middle";
-  var1.x = 10;
-  var1.y = 115;
-  var1.label = &"DEBUG_ALLIES";
-  var1.alpha = 0;
-  var2 = newhudelem();
-  var2.alignx = "left";
-  var2.aligny = "middle";
-  var2.x = 10;
-  var2.y = 130;
-  var2.label = &"DEBUG_AXIS";
-  var2.alpha = 0;
-  var3 = newhudelem();
-  var3.alignx = "left";
-  var3.aligny = "middle";
-  var3.x = 10;
-  var3.y = 145;
-  var3.label = &"DEBUG_VEHICLES";
-  var3.alpha = 0;
-  var4 = newhudelem();
-  var4.alignx = "left";
-  var4.aligny = "middle";
-  var4.x = 10;
-  var4.y = 160;
-  var4.label = &"DEBUG_TOTAL";
-  var4.alpha = 0;
-  var5 = "off";
+  var_0 = newhudelem();
+  var_0.alignx = "left";
+  var_0.aligny = "middle";
+  var_0.x = 10;
+  var_0.y = 100;
+  var_0.label = &"DEBUG_DRONES";
+  var_0.alpha = 0;
+  var_1 = newhudelem();
+  var_1.alignx = "left";
+  var_1.aligny = "middle";
+  var_1.x = 10;
+  var_1.y = 115;
+  var_1.label = &"DEBUG_ALLIES";
+  var_1.alpha = 0;
+  var_2 = newhudelem();
+  var_2.alignx = "left";
+  var_2.aligny = "middle";
+  var_2.x = 10;
+  var_2.y = 130;
+  var_2.label = &"DEBUG_AXIS";
+  var_2.alpha = 0;
+  var_3 = newhudelem();
+  var_3.alignx = "left";
+  var_3.aligny = "middle";
+  var_3.x = 10;
+  var_3.y = 145;
+  var_3.label = &"DEBUG_VEHICLES";
+  var_3.alpha = 0;
+  var_4 = newhudelem();
+  var_4.alignx = "left";
+  var_4.aligny = "middle";
+  var_4.x = 10;
+  var_4.y = 160;
+  var_4.label = &"DEBUG_TOTAL";
+  var_4.alpha = 0;
+  var_5 = "off";
 
   for(;;) {
-    var6 = getDvar("debug_character_count");
+    var_6 = getDvar("debug_character_count");
 
-    if(var6 == "off") {
-      if(var6 != var5) {
-        var0.alpha = 0;
-        var1.alpha = 0;
-        var2.alpha = 0;
-        var3.alpha = 0;
-        var4.alpha = 0;
-        var5 = var6;
+    if(var_6 == "off") {
+      if(var_6 != var_5) {
+        var_0.alpha = 0;
+        var_1.alpha = 0;
+        var_2.alpha = 0;
+        var_3.alpha = 0;
+        var_4.alpha = 0;
+        var_5 = var_6;
       }
 
       wait 0.25;
       continue;
-    } else if(var6 != var5) {
-      var0.alpha = 1;
-      var1.alpha = 1;
-      var2.alpha = 1;
-      var3.alpha = 1;
-      var4.alpha = 1;
-      var5 = var6;
+    } else if(var_6 != var_5) {
+      var_0.alpha = 1;
+      var_1.alpha = 1;
+      var_2.alpha = 1;
+      var_3.alpha = 1;
+      var_4.alpha = 1;
+      var_5 = var_6;
     }
 
-    var7 = getEntArray("drone", "targetname").size;
-    var0 setvalue(var7);
-    var8 = getaiarray("allies").size;
-    var1 setvalue(var8);
-    var9 = getaiarray("bad_guys").size;
-    var2 setvalue(var9);
-    var3 setvalue(getEntArray("script_vehicle", "classname").size);
-    var4 setvalue(var7 + var8 + var9);
+    var_7 = getEntArray("drone", "targetname").size;
+    var_0 setvalue(var_7);
+    var_8 = getaiarray("allies").size;
+    var_1 setvalue(var_8);
+    var_9 = getaiarray("bad_guys").size;
+    var_2 setvalue(var_9);
+    var_3 setvalue(getEntArray("script_vehicle", "classname").size);
+    var_4 setvalue(var_7 + var_8 + var_9);
     wait 0.25;
   }
 }
@@ -641,83 +641,83 @@ function debug_nuke() {}
 
 function camera() {
   wait 0.05;
-  var0 = getEntArray("camera", "targetname");
+  var_0 = getEntArray("camera", "targetname");
 
-  for(var1 = 0;; var1++) {
-    jumpiffalse(var1 < var0.size) LOC_0000006a;
-    var2 = getEnt(var0[var1].target, "targetname");
-    var0[var1].origin2 = var2.origin;
-    var0[var1].angles = vectortoangles(var2.origin - var0[var1].origin);
+  for(var_1 = 0;; var_1++) {
+    jumpiffalse(var_1 < var_0.size) LOC_0000006a;
+    var_2 = getEnt(var_0[var_1].target, "targetname");
+    var_0[var_1].origin2 = var_2.origin;
+    var_0[var_1].angles = vectortoangles(var_2.origin - var_0[var_1].origin);
   }
 
   for(;;) {
-    var3 = getaiarray("axis");
+    var_3 = getaiarray("axis");
 
-    if(!var3.size) {
+    if(!var_3.size) {
       freeplayer();
       wait 0.5;
       continue;
     }
 
-    var4 = [];
+    var_4 = [];
 
-    for(var1 = 0; var1 < var0.size; var1++) {
-      for(var5 = 0; var5 < var3.size; var5++) {
-        if(distance(var0[var1].origin, var3[var5].origin) > 256) {
+    for(var_1 = 0; var_1 < var_0.size; var_1++) {
+      for(var_5 = 0; var_5 < var_3.size; var_5++) {
+        if(distance(var_0[var_1].origin, var_3[var_5].origin) > 256) {
           continue;
         }
 
-        var4 = var0[var1];
+        var_4 = var_0[var_1];
         break;
       }
     }
 
-    if(!var4.size) {
+    if(!var_4.size) {
       freeplayer();
       wait 0.5;
       continue;
     }
 
-    var6 = [];
+    var_6 = [];
 
-    for(var1 = 0; var1 < var4.size; var1++) {
-      var7 = var4[var1];
-      var8 = var7.origin2;
-      var9 = var7.origin;
-      var10 = vectortoangles((var9[0], var9[1], var9[2]) - (var8[0], var8[1], var8[2]));
-      var11 = (0, var10[1], 0);
-      var12 = anglesToForward(var11);
-      var10 = vectorNormalize(var9 - level.player.origin);
-      var13 = vectordot(var12, var10);
+    for(var_1 = 0; var_1 < var_4.size; var_1++) {
+      var_7 = var_4[var_1];
+      var_8 = var_7.origin2;
+      var_9 = var_7.origin;
+      var_10 = vectortoangles((var_9[0], var_9[1], var_9[2]) - (var_8[0], var_8[1], var_8[2]));
+      var_11 = (0, var_10[1], 0);
+      var_12 = anglesToForward(var_11);
+      var_10 = vectorNormalize(var_9 - level.player.origin);
+      var_13 = vectordot(var_12, var_10);
 
-      if(var13 < 0.85) {
+      if(var_13 < 0.85) {
         continue;
       }
 
-      var6 = var7;
+      var_6 = var_7;
     }
 
-    if(!var6.size) {
+    if(!var_6.size) {
       freeplayer();
       wait 0.5;
       continue;
     }
 
-    var14 = distance(level.player.origin, var6[0].origin);
-    var15 = var6[0];
+    var_14 = distance(level.player.origin, var_6[0].origin);
+    var_15 = var_6[0];
 
-    for(var1 = 1; var1 < var6.size; var1++) {
-      var16 = distance(level.player.origin, var6[var1].origin);
+    for(var_1 = 1; var_1 < var_6.size; var_1++) {
+      var_16 = distance(level.player.origin, var_6[var_1].origin);
 
-      if(var16 > var14) {
+      if(var_16 > var_14) {
         continue;
       }
 
-      var15 = var6[var1];
-      var14 = var16;
+      var_15 = var_6[var_1];
+      var_14 = var_16;
     }
 
-    setplayertocamera(var15);
+    setplayertocamera(var_15);
     wait 3;
   }
 }
@@ -726,24 +726,24 @@ function freeplayer() {
   setDvar("LTNQQOMQSO", "0");
 }
 
-function setplayertocamera(var0) {
+function setplayertocamera(var_0) {
   setDvar("LTNQQOMQSO", "2");
 }
 
 function deathspawnerpreview() {
   waittillframeend();
 
-  for(var0 = 0; var0 < 50; var0++) {
-    if(!isDefined(level.deathspawnerents[var0])) {
+  for(var_0 = 0; var_0 < 50; var_0++) {
+    if(!isDefined(level.deathspawnerents[var_0])) {
       continue;
     }
 
-    var1 = level.deathspawnerents[var0];
+    var_1 = level.deathspawnerents[var_0];
 
-    for(var2 = 0; var2 < var1.size; var2++) {
-      var3 = var1[var2];
+    for(var_2 = 0; var_2 < var_1.size; var_2++) {
+      var_3 = var_1[var_2];
 
-      if(isDefined(var3.truecount)) {}
+      if(isDefined(var_3.truecount)) {}
     }
   }
 }
@@ -758,7 +758,7 @@ function watchminimap() {
 }
 
 function updateminimapsetting() {
-  var0 = getdvarfloat("scr_requiredMapAspectRatio", 1);
+  var_0 = getdvarfloat("scr_requiredMapAspectRatio", 1);
 
   if(!isDefined(level.minimapcornertargetname)) {
     setDvar("scr_minimap_corner_targetname", "minimap_corner");
@@ -770,109 +770,109 @@ function updateminimapsetting() {
     level.minimapheight = 0;
   }
 
-  var1 = getdvarfloat("scr_minimap_height");
-  var2 = getDvar("scr_minimap_corner_targetname");
+  var_1 = getdvarfloat("scr_minimap_height");
+  var_2 = getDvar("scr_minimap_corner_targetname");
 
-  if(var1 != level.minimapheight || var2 != level.minimapcornertargetname) {
+  if(var_1 != level.minimapheight || var_2 != level.minimapcornertargetname) {
     if(isDefined(level.minimaporigin)) {
       level.minimapplayer unlink();
       level.minimaporigin delete();
       level notify("end_draw_map_bounds");
     }
 
-    if(var1 > 0) {
-      level.minimapheight = var1;
-      level.minimapcornertargetname = var2;
-      var3 = level.player;
-      var4 = getEntArray(var2, "targetname");
+    if(var_1 > 0) {
+      level.minimapheight = var_1;
+      level.minimapcornertargetname = var_2;
+      var_3 = level.player;
+      var_4 = getEntArray(var_2, "targetname");
 
-      if(var4.size == 2) {
-        var5 = var4[0].origin + var4[1].origin;
-        var5 = (var5[0] * 0.5, var5[1] * 0.5, var5[2] * 0.5);
-        var6 = (var4[0].origin[0], var4[0].origin[1], var5[2]);
-        var7 = (var4[0].origin[0], var4[0].origin[1], var5[2]);
+      if(var_4.size == 2) {
+        var_5 = var_4[0].origin + var_4[1].origin;
+        var_5 = (var_5[0] * 0.5, var_5[1] * 0.5, var_5[2] * 0.5);
+        var_6 = (var_4[0].origin[0], var_4[0].origin[1], var_5[2]);
+        var_7 = (var_4[0].origin[0], var_4[0].origin[1], var_5[2]);
 
-        if(var4[1].origin[0] > var4[0].origin[0]) {
-          var6 = (var4[1].origin[0], var6[1], var6[2]);
+        if(var_4[1].origin[0] > var_4[0].origin[0]) {
+          var_6 = (var_4[1].origin[0], var_6[1], var_6[2]);
         } else {
-          var7 = (var4[1].origin[0], var7[1], var7[2]);
+          var_7 = (var_4[1].origin[0], var_7[1], var_7[2]);
         }
 
-        if(var4[1].origin[1] > var4[0].origin[1]) {
-          var6 = (var6[0], var4[1].origin[1], var6[2]);
+        if(var_4[1].origin[1] > var_4[0].origin[1]) {
+          var_6 = (var_6[0], var_4[1].origin[1], var_6[2]);
         } else {
-          var7 = (var7[0], var4[1].origin[1], var7[2]);
+          var_7 = (var_7[0], var_4[1].origin[1], var_7[2]);
         }
 
-        var8 = var6 - var5;
-        var5 = (var5[0], var5[1], var5[2] + var1);
-        var9 = spawn("script_origin", var3.origin);
-        var10 = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
-        var11 = (var10[1], 0 - var10[0], 0);
-        var12 = vectordot(var10, var8);
+        var_8 = var_6 - var_5;
+        var_5 = (var_5[0], var_5[1], var_5[2] + var_1);
+        var_9 = spawn("script_origin", var_3.origin);
+        var_10 = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
+        var_11 = (var_10[1], 0 - var_10[0], 0);
+        var_12 = vectordot(var_10, var_8);
 
-        if(var12 < 0) {
-          var12 = 0 - var12;
+        if(var_12 < 0) {
+          var_12 = 0 - var_12;
         }
 
-        var13 = vectordot(var11, var8);
+        var_13 = vectordot(var_11, var_8);
 
-        if(var13 < 0) {
-          var13 = 0 - var13;
+        if(var_13 < 0) {
+          var_13 = 0 - var_13;
         }
 
-        if(var0 > 0) {
-          var14 = var13 / var12;
+        if(var_0 > 0) {
+          var_14 = var_13 / var_12;
 
-          if(var14 < var0) {
-            var15 = var0 / var14;
-            var13 *= var15;
-            var16 = vecscale(var11, vectordot(var11, var6 - var5) * (var15 - 1));
-            var7 -= var16;
-            var6 += var16;
+          if(var_14 < var_0) {
+            var_15 = var_0 / var_14;
+            var_13 *= var_15;
+            var_16 = vecscale(var_11, vectordot(var_11, var_6 - var_5) * (var_15 - 1));
+            var_7 -= var_16;
+            var_6 += var_16;
           } else {
-            var15 = var16 / var2;
-            var14 *= var15;
-            var16 = vecscale(var12, vectordot(var12, var8 - var7) * (var15 - 1));
-            var9 -= var16;
-            var8 += var16;
+            var_15 = var_16 / var_2;
+            var_14 *= var_15;
+            var_16 = vecscale(var_12, vectordot(var_12, var_8 - var_7) * (var_15 - 1));
+            var_9 -= var_16;
+            var_8 += var_16;
           }
         }
 
         if(isplatformpc()) {
-          var17 = 1.77778;
-          var18 = 2 * atan(var15 * 0.8 / var3);
-          var19 = 2 * atan(var14 * var17 * 0.8 / var3);
+          var_17 = 1.77778;
+          var_18 = 2 * atan(var_15 * 0.8 / var_3);
+          var_19 = 2 * atan(var_14 * var_17 * 0.8 / var_3);
         } else {
-          var17 = 1.33333;
-          var18 = 2 * atan(var19 * 1.05 / var6);
-          var19 = 2 * atan(var18 * var17 * 1.05 / var6);
+          var_17 = 1.33333;
+          var_18 = 2 * atan(var_19 * 1.05 / var_6);
+          var_19 = 2 * atan(var_18 * var_17 * 1.05 / var_6);
         }
 
-        if(var18 > var19) {
-          var20 = var18;
+        if(var_18 > var_19) {
+          var_20 = var_18;
         } else {
-          var20 = var20;
+          var_20 = var_20;
         }
 
-        var21 = var7 - 1000;
+        var_21 = var_7 - 1000;
 
-        if(var21 < 16) {
-          var21 = 16;
+        if(var_21 < 16) {
+          var_21 = 16;
         }
 
-        if(var21 > 10000) {
-          var21 = 10000;
+        if(var_21 > 10000) {
+          var_21 = 10000;
         }
 
-        var9 playerlinktoabsolute(var15);
-        var15.origin = var11 + (0, 0, -62);
-        var15.angles = (90, getnorthyaw(), 0);
-        var9 giveweapon("defaultweapon");
-        setsaveddvar("QTSPTNLOL", var20);
-        level.minimapplayer = var9;
-        level.minimaporigin = var15;
-        thread drawminimapbounds(var11, var13, var12);
+        var_9 playerlinktoabsolute(var_15);
+        var_15.origin = var_11 + (0, 0, -62);
+        var_15.angles = (90, getnorthyaw(), 0);
+        var_9 giveweapon("defaultweapon");
+        setsaveddvar("QTSPTNLOL", var_20);
+        level.minimapplayer = var_9;
+        level.minimaporigin = var_15;
+        thread drawminimapbounds(var_11, var_13, var_12);
         return;
       }
 
@@ -884,101 +884,101 @@ function updateminimapsetting() {
 }
 
 function getchains() {
-  var0 = [];
-  var0 = getEntArray("minimap_line", "script_noteworthy");
-  var1 = [];
+  var_0 = [];
+  var_0 = getEntArray("minimap_line", "script_noteworthy");
+  var_1 = [];
 
-  for(var2 = 0; var2 < var0.size; var2++) {
-    var1 = getchain(var0[var2]);
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    var_1 = getchain(var_0[var_2]);
   }
 
-  return var1;
+  return var_1;
 }
 
 function getchain() {
-  var0 = [];
-  var1 = self;
+  var_0 = [];
+  var_1 = self;
 
-  while(isDefined(var1)) {
-    var0 = var1;
+  while(isDefined(var_1)) {
+    var_0 = var_1;
 
-    if(!isDefined(var1) || !isDefined(var1.target)) {
+    if(!isDefined(var_1) || !isDefined(var_1.target)) {
       break;
     }
 
-    var1 = getEnt(var1.target, "targetname");
+    var_1 = getEnt(var_1.target, "targetname");
 
-    if(isDefined(var1) && var1 == var0[0]) {
-      var0 = var1;
+    if(isDefined(var_1) && var_1 == var_0[0]) {
+      var_0 = var_1;
       break;
     }
   }
 
-  var2 = [];
+  var_2 = [];
 
-  for(var3 = 0; var3 < var0.size; var3++) {
-    var2 = var0[var3].origin;
+  for(var_3 = 0; var_3 < var_0.size; var_3++) {
+    var_2 = var_0[var_3].origin;
   }
 
-  return var2;
+  return var_2;
 }
 
-function vecscale(var0, var1) {
-  return (var0[0] * var1, var0[1] * var1, var0[2] * var1);
+function vecscale(var_0, var_1) {
+  return (var_0[0] * var_1, var_0[1] * var_1, var_0[2] * var_1);
 }
 
-function drawminimapbounds(var0, var1, var2) {
+function drawminimapbounds(var_0, var_1, var_2) {
   level notify("end_draw_map_bounds");
   level endon("end_draw_map_bounds");
-  var3 = var0[2] - var2[2];
-  var4 = length(var1 - var2);
-  var5 = var1 - var0;
-  var5 = vectorNormalize((var5[0], var5[1], 0));
-  var1 += vecscale(var5, var4 * 1 / 800 * 0);
-  var6 = var2 - var0;
-  var6 = vectorNormalize((var6[0], var6[1], 0));
-  var2 += vecscale(var6, var4 * 1 / 800 * 0);
-  var7 = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
-  var8 = var2 - var1;
-  var9 = vecscale(var7, vectordot(var8, var7));
-  var10 = vecscale(var7, abs(vectordot(var8, var7)));
-  var11 = var1;
-  var12 = var1 + var9;
-  var13 = var2;
-  var14 = var2 - var9;
-  var15 = vecscale(var1 + var2, 0.5) + vecscale(var10, 0.51);
-  var16 = var4 * 0.003;
-  var17 = getchains();
+  var_3 = var_0[2] - var_2[2];
+  var_4 = length(var_1 - var_2);
+  var_5 = var_1 - var_0;
+  var_5 = vectorNormalize((var_5[0], var_5[1], 0));
+  var_1 += vecscale(var_5, var_4 * 1 / 800 * 0);
+  var_6 = var_2 - var_0;
+  var_6 = vectorNormalize((var_6[0], var_6[1], 0));
+  var_2 += vecscale(var_6, var_4 * 1 / 800 * 0);
+  var_7 = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
+  var_8 = var_2 - var_1;
+  var_9 = vecscale(var_7, vectordot(var_8, var_7));
+  var_10 = vecscale(var_7, abs(vectordot(var_8, var_7)));
+  var_11 = var_1;
+  var_12 = var_1 + var_9;
+  var_13 = var_2;
+  var_14 = var_2 - var_9;
+  var_15 = vecscale(var_1 + var_2, 0.5) + vecscale(var_10, 0.51);
+  var_16 = var_4 * 0.003;
+  var_17 = getchains();
 
   for(;;) {
-    scripts\engine\utility::array_levelthread(var17, &scripts\engine\utility::plot_points);
+    scripts\engine\utility::array_levelthread(var_17, &scripts\engine\utility::plot_points);
     wait 0.05;
   }
 }
 
 function debug_colornodes() {
   wait 0.05;
-  var0 = getaiarray();
-  var1 = [];
+  var_0 = getaiarray();
+  var_1 = [];
   GscBinSkip0(0x2e, "axis", []);
 }
 
-function draw_colornodes(var0, var1) {
-  var2 = getarraykeys(var0[var1]);
+function draw_colornodes(var_0, var_1) {
+  var_2 = getarraykeys(var_0[var_1]);
 
-  for(var3 = 0; var3 < var2.size; var3++) {
-    var4 = (1, 1, 1);
-    var4 = level.color_debug[getsubstr(var2[var3], 0, 1)];
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
+    var_4 = (1, 1, 1);
+    var_4 = level.color_debug[getsubstr(var_2[var_3], 0, 1)];
 
-    if(isDefined(level.colornodes_debug_array[var1][var2[var3]])) {
-      var5 = level.colornodes_debug_array[var1][var2[var3]];
+    if(isDefined(level.colornodes_debug_array[var_1][var_2[var_3]])) {
+      var_5 = level.colornodes_debug_array[var_1][var_2[var_3]];
 
-      for(var6 = 0; var6 < var5.size; var6++) {}
+      for(var_6 = 0; var_6 < var_5.size; var_6++) {}
     }
 
-    if(isDefined(level.colorvolumes_debug_array[var1][var2[var3]])) {
-      var7 = level.colorvolumes_debug_array[var1][var2[var3]];
-      thread scripts\engine\utility::draw_entity_bounds(var7, 0.05, var4, 0);
+    if(isDefined(level.colorvolumes_debug_array[var_1][var_2[var_3]])) {
+      var_7 = level.colorvolumes_debug_array[var_1][var_2[var_3]];
+      thread scripts\engine\utility::draw_entity_bounds(var_7, 0.05, var_4, 0);
     }
   }
 }
@@ -1010,17 +1010,17 @@ function try_to_draw_line_to_node() {
     return;
   }
 
-  var0 = get_team_substr();
+  var_0 = get_team_substr();
 
-  if(!isDefined(var0)) {
-    var1 = level.arrays_of_colorcoded_volumes[scripts\sp\colors::get_team()][self.currentcolorcode];
+  if(!isDefined(var_0)) {
+    var_1 = level.arrays_of_colorcoded_volumes[scripts\sp\colors::get_team()][self.currentcolorcode];
 
-    if(isDefined(var1)) {}
+    if(isDefined(var_1)) {}
 
     return;
   }
 
-  if(!issubstr(var1, self.script_forcecolor)) {
+  if(!issubstr(var_1, self.script_forcecolor)) {
     return;
   }
 }
@@ -1032,45 +1032,45 @@ function debugthreat() {
 
 function debugthreatcalc() {}
 
-function displaythreat(var0, var1) {
-  if(self.team == var0.team) {
+function displaythreat(var_0, var_1) {
+  if(self.team == var_0.team) {
     return;
   }
 
-  var2 = 0;
-  var2 += self.threatbias;
-  var3 = 0;
-  var3 += var0.threatbias;
-  var4 = undefined;
+  var_2 = 0;
+  var_2 += self.threatbias;
+  var_3 = 0;
+  var_3 += var_0.threatbias;
+  var_4 = undefined;
 
-  if(isDefined(var1)) {
-    var4 = self getthreatbiasgroup();
+  if(isDefined(var_1)) {
+    var_4 = self getthreatbiasgroup();
 
-    if(isDefined(var4)) {
-      var3 += getthreatbias(var1, var4);
-      var2 += getthreatbias(var4, var1);
+    if(isDefined(var_4)) {
+      var_3 += getthreatbias(var_1, var_4);
+      var_2 += getthreatbias(var_4, var_1);
     }
   }
 
-  if(var0.ignoreme || var3 < -900000) {
-    var3 = "Ignore";
+  if(var_0.ignoreme || var_3 < -900000) {
+    var_3 = "Ignore";
   }
 
-  if(self.ignoreme || var2 < -900000) {
-    var2 = "Ignore";
+  if(self.ignoreme || var_2 < -900000) {
+    var_2 = "Ignore";
   }
 
-  var5 = 20;
-  var6 = (1, 0.5, 0.2);
-  var7 = (0.2, 0.5, 1);
-  var8 = !isPlayer(self) && self.pacifist;
+  var_5 = 20;
+  var_6 = (1, 0.5, 0.2);
+  var_7 = (0.2, 0.5, 1);
+  var_8 = !isPlayer(self) && self.pacifist;
 
-  for(var9 = 0; var9 <= var5; var9++) {
-    if(isDefined(var1)) {}
+  for(var_9 = 0; var_9 <= var_5; var_9++) {
+    if(isDefined(var_1)) {}
 
-    if(isDefined(var4)) {}
+    if(isDefined(var_4)) {}
 
-    if(var8) {}
+    if(var_8) {}
 
     wait 0.05;
   }
@@ -1087,79 +1087,79 @@ function debugcolorfriendlies() {
 }
 
 function get_script_palette() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, "r", (1, 0, 0));
 }
 
 function draw_color_friendlies() {
   level endon("updated_color_friendlies");
-  var0 = getarraykeys(level.debug_color_friendlies);
-  var1 = [];
-  var2 = [];
-  GscBinSkip0(0x2e, var2.size, "r");
+  var_0 = getarraykeys(level.debug_color_friendlies);
+  var_1 = [];
+  var_2 = [];
+  GscBinSkip0(0x2e, var_2.size, "r");
 }
 
-function get_alias_from_stored(var0) {
-  if(!isDefined(level.animsound_aliases[var0.animname])) {
+function get_alias_from_stored(var_0) {
+  if(!isDefined(level.animsound_aliases[var_0.animname])) {
     return;
   }
 
-  if(!isDefined(level.animsound_aliases[var0.animname][var0.anime])) {
+  if(!isDefined(level.animsound_aliases[var_0.animname][var_0.anime])) {
     return;
   }
 
-  if(!isDefined(level.animsound_aliases[var0.animname][var0.anime][var0.notetrack])) {
+  if(!isDefined(level.animsound_aliases[var_0.animname][var_0.anime][var_0.notetrack])) {
     return;
   }
 
-  return level.animsound_aliases[var0.animname][var0.anime][var0.notetrack]["soundalias"];
+  return level.animsound_aliases[var_0.animname][var_0.anime][var_0.notetrack]["soundalias"];
 }
 
-function is_from_animsound(var0, var1, var2) {
-  return isDefined(level.animsound_aliases[var0][var1][var2]["created_by_animSound"]);
+function is_from_animsound(var_0, var_1, var_2) {
+  return isDefined(level.animsound_aliases[var_0][var_1][var_2]["created_by_animSound"]);
 }
 
-function debug_animsoundtag(var0) {}
+function debug_animsoundtag(var_0) {}
 
 function debug_animsoundtagselected() {}
 
-function tag_sound(var0, var1) {
+function tag_sound(var_0, var_1) {
   if(!isDefined(level.animsound_tagged)) {
     return;
   }
 
-  if(!isDefined(level.animsound_tagged.animsounds[var1])) {
+  if(!isDefined(level.animsound_tagged.animsounds[var_1])) {
     return;
   }
 
-  var2 = level.animsound_tagged.animsounds[var1];
-  var3 = get_alias_from_stored(var2);
+  var_2 = level.animsound_tagged.animsounds[var_1];
+  var_3 = get_alias_from_stored(var_2);
 
-  if(!isDefined(var3) || is_from_animsound(var2.animname, var2.anime, var2.notetrack)) {
-    level.animsound_aliases[var2.animname][var2.anime][var2.notetrack]["soundalias"] = var0;
-    level.animsound_aliases[var2.animname][var2.anime][var2.notetrack]["created_by_animSound"] = 1;
+  if(!isDefined(var_3) || is_from_animsound(var_2.animname, var_2.anime, var_2.notetrack)) {
+    level.animsound_aliases[var_2.animname][var_2.anime][var_2.notetrack]["soundalias"] = var_0;
+    level.animsound_aliases[var_2.animname][var_2.anime][var_2.notetrack]["created_by_animSound"] = 1;
     return;
   }
 }
 
-function find_new_chase_target(var0) {}
+function find_new_chase_target(var_0) {}
 
-function chasecam(var0) {
+function chasecam(var_0) {
   if(!isDefined(level.chase_cam_last_num)) {
     level.chase_cam_last_num = -1;
   }
 
-  if(level.chase_cam_last_num == var0) {
+  if(level.chase_cam_last_num == var_0) {
     return;
   }
 
-  find_new_chase_target(var0);
+  find_new_chase_target(var_0);
 
   if(!isDefined(level.chase_cam_target)) {
     return;
   }
 
-  level.chase_cam_last_num = var0;
+  level.chase_cam_last_num = var_0;
 
   if(!isDefined(level.chase_cam_ent)) {
     level.chase_cam_ent = level.chase_cam_target scripts\engine\utility::spawn_tag_origin();
@@ -1168,10 +1168,10 @@ function chasecam(var0) {
   thread chasecam_onent(level.chase_cam_target);
 }
 
-function chasecam_onent(var0) {
+function chasecam_onent(var_0) {
   level notify("new_chasecam");
   level endon("new_chasecam");
-  var0 endon("death");
+  var_0 endon("death");
   level.player unlink();
   level.player playerlinktoblend(level.chase_cam_ent, "tag_origin", 2, 0.5, 0.5);
   wait 2;
@@ -1184,33 +1184,33 @@ function chasecam_onent(var0) {
       return;
     }
 
-    var1 = level.chase_cam_target.origin;
-    var2 = level.chase_cam_target.angles;
-    var3 = anglesToForward(var2);
-    var3 *= 200;
-    var1 += var3;
-    var2 = level.player getplayerangles();
-    var3 = anglesToForward(var2);
-    var3 *= -200;
-    level.chase_cam_ent moveTo(var1 + var3, 0.2);
+    var_1 = level.chase_cam_target.origin;
+    var_2 = level.chase_cam_target.angles;
+    var_3 = anglesToForward(var_2);
+    var_3 *= 200;
+    var_1 += var_3;
+    var_2 = level.player getplayerangles();
+    var_3 = anglesToForward(var_2);
+    var_3 *= -200;
+    level.chase_cam_ent moveTo(var_1 + var_3, 0.2);
   }
 }
 
 function viewfx() {
-  foreach(var1 in level.createfxent) {
-    if(isDefined(var1.looper)) {}
+  foreach(var_1 in level.createfxent) {
+    if(isDefined(var_1.looper)) {}
   }
 }
 
-function add_key(var0, var1) {}
+function add_key(var_0, var_1) {}
 
-function print_vehicle_info(var0) {
+function print_vehicle_info(var_0) {
   if(!isDefined(level.vnum)) {
     level.vnum = 9500;
   }
 
   level.vnum++;
-  var1 = "bridge_helpers";
+  var_1 = "bridge_helpers";
   add_key("origin", self.origin[0] + " " + self.origin[1] + " " + self.origin[2]);
   add_key("angles", self.angles[0] + " " + self.angles[1] + " " + self.angles[2]);
   add_key("targetname", "helper_model");
@@ -1219,201 +1219,201 @@ function print_vehicle_info(var0) {
   add_key("spawnflags", "4");
   add_key("_color", "0.443137 0.443137 1.000000");
 
-  if(isDefined(var0)) {
-    add_key("script_noteworthy", var0);
+  if(isDefined(var_0)) {
+    add_key("script_noteworthy", var_0);
   }
 }
 
-function draw_dot_for_ent(var0) {}
+function draw_dot_for_ent(var_0) {}
 
 function draw_dot_for_guy() {
-  var0 = level.player getplayerangles();
-  var1 = anglesToForward(var0);
-  var2 = level.player getEye();
-  var3 = self getEye();
-  var4 = vectortoangles(var3 - var2);
-  var5 = anglesToForward(var4);
-  var6 = vectordot(var5, var1);
+  var_0 = level.player getplayerangles();
+  var_1 = anglesToForward(var_0);
+  var_2 = level.player getEye();
+  var_3 = self getEye();
+  var_4 = vectortoangles(var_3 - var_2);
+  var_5 = anglesToForward(var_4);
+  var_6 = vectordot(var_5, var_1);
 }
 
 function measure() {}
 
 function take_weapons_away() {
-  var0 = spawnStruct();
-  var0.weapons = level.player getweaponslistall();
-  var0.clip_ammo = [];
-  var0.stock_ammo = [];
+  var_0 = spawnStruct();
+  var_0.weapons = level.player getweaponslistall();
+  var_0.clip_ammo = [];
+  var_0.stock_ammo = [];
 
-  foreach(var2 in var0.weapons) {
-    var0.clip_ammo[var3] = level.player getweaponammoclip(var2);
-    var0.stock_ammo[var3] = level.player getweaponammostock(var2);
+  foreach(var_2 in var_0.weapons) {
+    var_0.clip_ammo[var_3] = level.player getweaponammoclip(var_2);
+    var_0.stock_ammo[var_3] = level.player getweaponammostock(var_2);
   }
 
   level.player takeallweapons();
-  return var0;
+  return var_0;
 }
 
-function give_weapons_back(var0) {
-  var1 = -1;
+function give_weapons_back(var_0) {
+  var_1 = -1;
 
-  foreach(var4, var3 in var0.weapons) {
-    level.player giveweapon(var3);
+  foreach(var_4, var_3 in var_0.weapons) {
+    level.player giveweapon(var_3);
 
-    if(var3.ismelee) {
-      level.player assignweaponmeleeslot(var3);
+    if(var_3.ismelee) {
+      level.player assignweaponmeleeslot(var_3);
       continue;
     }
 
-    if(var1 < 0) {
-      var1 = var4;
+    if(var_1 < 0) {
+      var_1 = var_4;
     }
 
-    if(isDefined(var0.clip_ammo[var4])) {
-      level.player setweaponammoclip(var3, var0.clip_ammo[var4]);
+    if(isDefined(var_0.clip_ammo[var_4])) {
+      level.player setweaponammoclip(var_3, var_0.clip_ammo[var_4]);
     }
 
-    if(isDefined(var0.stock_ammo[var4])) {
-      level.player setweaponammostock(var3, var0.stock_ammo[var4]);
+    if(isDefined(var_0.stock_ammo[var_4])) {
+      level.player setweaponammostock(var_3, var_0.stock_ammo[var_4]);
     }
   }
 
-  level.player switchtoweapon(var0.weapons[var1]);
+  level.player switchtoweapon(var_0.weapons[var_1]);
 }
 
-function debug_cursor(var0) {
+function debug_cursor(var_0) {
   level.debug.cursor_pos = (0, 0, 0);
   level notify("stop_debug_cursor");
   level endon("stop_debug_cursor");
-  jumpiftrue(isDefined(var0)) LOC_00000032;
-  var0 = 0;
+  jumpiftrue(isDefined(var_0)) LOC_00000032;
+  var_0 = 0;
 
   for(;;) {
-    var1 = level.player getEye();
-    var2 = anglesToForward(level.player getplayerangles());
+    var_1 = level.player getEye();
+    var_2 = anglesToForward(level.player getplayerangles());
 
-    if(var0) {
-      var3 = var1 + var2 * 1000;
+    if(var_0) {
+      var_3 = var_1 + var_2 * 1000;
     } else {
-      var3 = var1 + var2 * 10000;
+      var_3 = var_1 + var_2 * 10000;
     }
 
-    var4 = scripts\engine\trace::_bullet_trace(var1, var3, 0);
+    var_4 = scripts\engine\trace::_bullet_trace(var_1, var_3, 0);
 
-    if(var0) {
-      level.debug.cursor_pos = getclosestpointonnavmesh(var4["position"]) + (0, 0, -2);
+    if(var_0) {
+      level.debug.cursor_pos = getclosestpointonnavmesh(var_4["position"]) + (0, 0, -2);
     } else {
-      level.debug.cursor_pos = var4["position"];
+      level.debug.cursor_pos = var_4["position"];
     }
 
     waitframe();
   }
 }
 
-function draw_debug_cross(var0) {
+function draw_debug_cross(var_0) {
   level endon("stop_debug_cursor");
-  var1 = 4;
-  var2 = (1, 1, 1);
-  var3 = 1;
-  var4 = 1;
+  var_1 = 4;
+  var_2 = (1, 1, 1);
+  var_3 = 1;
+  var_4 = 1;
 }
 
-function draw_spawner(var0, var1, var2, var3, var4) {
-  if(!isDefined(var1)) {
-    var1 = (0, 0, 0);
+function draw_spawner(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_1)) {
+    var_1 = (0, 0, 0);
   }
 
-  if(!isDefined(var3)) {
-    var3 = 1;
+  if(!isDefined(var_3)) {
+    var_3 = 1;
   }
 
-  if(!isDefined(var4)) {
-    var4 = 0;
+  if(!isDefined(var_4)) {
+    var_4 = 0;
   }
 
-  var5 = anglestoup(var1);
-  var6 = anglesToForward(var1);
-  var7 = var0 + var5 * 72 * 0.5;
-  var8 = var7 + var6 * 32;
-  draw_small_arrow(var7, var8, var2, var3, var4);
-  draw_box(var0, var2, var1, [32, 72], var3, var4);
+  var_5 = anglestoup(var_1);
+  var_6 = anglesToForward(var_1);
+  var_7 = var_0 + var_5 * 72 * 0.5;
+  var_8 = var_7 + var_6 * 32;
+  draw_small_arrow(var_7, var_8, var_2, var_3, var_4);
+  draw_box(var_0, var_2, var_1, [32, 72], var_3, var_4);
 }
 
-function draw_node(var0, var1, var2, var3, var4, var5) {
-  if(!isDefined(var1)) {
-    var1 = (0, 0, 0);
+function draw_node(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(!isDefined(var_1)) {
+    var_1 = (0, 0, 0);
   }
 
-  if(!isDefined(var3)) {
-    var3 = 32;
+  if(!isDefined(var_3)) {
+    var_3 = 32;
   }
 
-  if(!isDefined(var4)) {
-    var4 = 1;
+  if(!isDefined(var_4)) {
+    var_4 = 1;
   }
 
-  if(!isDefined(var5)) {
-    var5 = 0;
+  if(!isDefined(var_5)) {
+    var_5 = 0;
   }
 
-  var6 = anglestoup(var1);
-  var7 = anglesToForward(var1);
-  var8 = var0 + var6 * var3 * 0.5;
-  var9 = var8 + var7 * var3;
-  draw_small_arrow(var8, var9, var2, var4, var5);
-  draw_box(var0, var2, var1, var3, var4, var5);
+  var_6 = anglestoup(var_1);
+  var_7 = anglesToForward(var_1);
+  var_8 = var_0 + var_6 * var_3 * 0.5;
+  var_9 = var_8 + var_7 * var_3;
+  draw_small_arrow(var_8, var_9, var_2, var_4, var_5);
+  draw_box(var_0, var_2, var_1, var_3, var_4, var_5);
 }
 
-function draw_small_arrow(var0, var1, var2, var3, var4) {
-  if(!isDefined(var3)) {
-    var3 = 1;
+function draw_small_arrow(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_3)) {
+    var_3 = 1;
   }
 
-  if(!isDefined(var4)) {
-    var4 = 0;
+  if(!isDefined(var_4)) {
+    var_4 = 0;
   }
 
-  var5 = vectortoangles(var1 - var0);
-  var6 = length(var1 - var0);
-  var7 = anglesToForward(var5);
-  var8 = var7 * var6;
-  var9 = 5;
-  var10 = var7 * (var6 - var9);
-  var11 = anglestoright(var5);
-  var12 = var11 * var9 * -1;
-  var13 = var11 * var9;
+  var_5 = vectortoangles(var_1 - var_0);
+  var_6 = length(var_1 - var_0);
+  var_7 = anglesToForward(var_5);
+  var_8 = var_7 * var_6;
+  var_9 = 5;
+  var_10 = var_7 * (var_6 - var_9);
+  var_11 = anglestoright(var_5);
+  var_12 = var_11 * var_9 * -1;
+  var_13 = var_11 * var_9;
 }
 
-function draw_box(var0, var1, var2, var3, var4, var5) {
-  if(!isDefined(var3)) {
-    var6 = 32;
-    var7 = 32;
-  } else if(!isarray(var5)) {
-    var6 = var5;
-    var7 = var5;
+function draw_box(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(!isDefined(var_3)) {
+    var_6 = 32;
+    var_7 = 32;
+  } else if(!isarray(var_5)) {
+    var_6 = var_5;
+    var_7 = var_5;
   } else {
-    var6 = var7[0];
-    var7 = var7[1];
+    var_6 = var_7[0];
+    var_7 = var_7[1];
   }
 
-  if(!isDefined(var6)) {
-    var6 = (0, 0, 0);
+  if(!isDefined(var_6)) {
+    var_6 = (0, 0, 0);
   }
 
-  if(!isDefined(var6)) {
-    var6 = 1;
+  if(!isDefined(var_6)) {
+    var_6 = 1;
   }
 
-  if(!isDefined(var7)) {
-    var7 = 0;
+  if(!isDefined(var_7)) {
+    var_7 = 0;
   }
 
-  var8 = anglesToForward(var6);
-  var9 = anglestoright(var6);
-  var10 = anglestoup(var6);
-  var11 = var4 + var8 * var6 * 0.5;
-  var11 += var9 * var6 * 0.5;
-  var12 = [];
-  GscBinSkip0(0x2e, var12.size, var11);
+  var_8 = anglesToForward(var_6);
+  var_9 = anglestoright(var_6);
+  var_10 = anglestoup(var_6);
+  var_11 = var_4 + var_8 * var_6 * 0.5;
+  var_11 += var_9 * var_6 * 0.5;
+  var_12 = [];
+  GscBinSkip0(0x2e, var_12.size, var_11);
 }
 
 function print_timer() {}
@@ -1423,22 +1423,22 @@ function display_ai_group_info() {
     return;
   }
 
-  foreach(var1 in level._ai_group) {
-    foreach(var3 in var1.ai) {
-      if(isalive(var3)) {
-        if(var3.team == "axis") {
-          var4 = (1, 0, 0);
+  foreach(var_1 in level._ai_group) {
+    foreach(var_3 in var_1.ai) {
+      if(isalive(var_3)) {
+        if(var_3.team == "axis") {
+          var_4 = (1, 0, 0);
         } else {
-          var4 = (0, 1, 0);
+          var_4 = (0, 1, 0);
         }
       }
     }
 
-    var3 = undefined;
-    var6 = undefined;
+    var_3 = undefined;
+    var_6 = undefined;
   }
 
-  var1 = undefined;
+  var_1 = undefined;
 }
 
 function show_animnames() {}

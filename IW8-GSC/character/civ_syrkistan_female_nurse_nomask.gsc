@@ -33,6 +33,6 @@ function main_mp() {
   scripts\code\character::attachhead("civilian_syrkistan_female_head_no_hair", xmodelalias\civilian_syrkistan_female_head_no_hair::main());
 }
 
-function precache_mp(var0) {
-  level.agent_definition[var0]["animclass"] = "civilian_female";
+function precache_mp(var_0) {
+  level.agent_definition[var_0]["animclass"] = "civilian_female";
 }

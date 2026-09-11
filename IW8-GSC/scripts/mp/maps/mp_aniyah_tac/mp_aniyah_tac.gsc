@@ -23,7 +23,7 @@ function main() {
 }
 
 function battle_tracks_vehicleoccupancyenter() {
-  var0 = [];
+  var_0 = [];
 
   switch (scripts\mp\utility\game::getgametype()) {
     case "war":
@@ -35,32 +35,32 @@ function battle_tracks_vehicleoccupancyenter() {
     case "grind":
     case "cranked":
     case "conf":
-      GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_tdm_spawn_axis_start", (5934, -82, 262), (0, 206, 0)));
+      GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_tdm_spawn_axis_start", (5934, -82, 262), (0, 206, 0)));
 
     case "dom":
-      GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_dom_spawn_axis_start", (5934, -82, 262), (0, 206, 0)));
+      GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_dom_spawn_axis_start", (5934, -82, 262), (0, 206, 0)));
   }
 
-  if(var0.size > 0) {
-    scripts\mp\spawnlogic::bdiedonce(var0);
+  if(var_0.size > 0) {
+    scripts\mp\spawnlogic::bdiedonce(var_0);
     return;
   }
 }
 
 function player_exfil_struct() {
-  var0 = getEnt("player32x32x256", "targetname");
-  var1 = spawn("script_model", (1652, -706, 604));
-  var1.angles = (0, 0, 0);
-  var1 clonebrushmodeltoscriptmodel(var0);
-  var2 = getEnt("player32x32x256", "targetname");
-  var3 = spawn("script_model", (1918, 106, 626));
-  var3.angles = (0, 0, 0);
-  var3 clonebrushmodeltoscriptmodel(var2);
-  var4 = getEnt("player256x256x8", "targetname");
-  var5 = spawn("script_model", (1670, -267, 458.5));
-  var5.angles = (270, 0, 0);
-  var5 clonebrushmodeltoscriptmodel(var4);
-  var6 = spawn("trigger_radius", (2268, -1961, 360), 0, 800, 800);
-  var6.targetname = "OutOfBounds";
+  var_0 = getEnt("player32x32x256", "targetname");
+  var_1 = spawn("script_model", (1652, -706, 604));
+  var_1.angles = (0, 0, 0);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = getEnt("player32x32x256", "targetname");
+  var_3 = spawn("script_model", (1918, 106, 626));
+  var_3.angles = (0, 0, 0);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
+  var_4 = getEnt("player256x256x8", "targetname");
+  var_5 = spawn("script_model", (1670, -267, 458.5));
+  var_5.angles = (270, 0, 0);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_6 = spawn("trigger_radius", (2268, -1961, 360), 0, 800, 800);
+  var_6.targetname = "OutOfBounds";
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
 }

@@ -29,78 +29,78 @@ function was_headshot() {
   return self.damagelocation == "helmet" || self.damagelocation == "head" || self.damagelocation == "neck";
 }
 
-function register_kill(var0, var1, var2, var3) {
-  var4 = self;
+function register_kill(var_0, var_1, var_2, var_3) {
+  var_4 = self;
 
   if(isDefined(self.owner)) {
-    var4 = self.owner;
+    var_4 = self.owner;
   }
 
-  if(!isPlayer(var4)) {
+  if(!isPlayer(var_4)) {
     if(isDefined(level.pmc_match) && level.pmc_match) {
-      var4 = level.players[randomint(level.players.size)];
+      var_4 = level.players[randomint(level.players.size)];
     }
   }
 
-  if(!isPlayer(var4)) {
+  if(!isPlayer(var_4)) {
     return;
   }
 
-  if(isDefined(level.skip_pilot_kill_count) && isDefined(var0.drivingvehicle) && var0.drivingvehicle) {
+  if(isDefined(level.skip_pilot_kill_count) && isDefined(var_0.drivingvehicle) && var_0.drivingvehicle) {
     return;
   }
 
-  var4.stats["kills"]++;
+  var_4.stats["kills"]++;
 
-  if(isDefined(var0)) {
-    if(was_headshot(var0)) {
-      var4.stats["headshots"]++;
+  if(isDefined(var_0)) {
+    if(was_headshot(var_0)) {
+      var_4.stats["headshots"]++;
     }
 
-    if(isDefined(var0.juggernaut)) {
-      var4.stats["kills_juggernaut"]++;
+    if(isDefined(var_0.juggernaut)) {
+      var_4.stats["kills_juggernaut"]++;
     }
 
-    if(isDefined(var0.issentrygun)) {
-      var4.stats["kills_sentry"]++;
+    if(isDefined(var_0.issentrygun)) {
+      var_4.stats["kills_sentry"]++;
     }
 
-    if(var0.code_classname == "script_vehicle") {
-      var4.stats["kills_vehicle"]++;
+    if(var_0.code_classname == "script_vehicle") {
+      var_4.stats["kills_vehicle"]++;
 
-      if(isDefined(var0.riders)) {
-        foreach(var6 in var0.riders) {
-          if(isDefined(var6)) {
-            register_kill(var4, var6, var1, var2, var3);
+      if(isDefined(var_0.riders)) {
+        foreach(var_6 in var_0.riders) {
+          if(isDefined(var_6)) {
+            register_kill(var_4, var_6, var_1, var_2, var_3);
           }
         }
       }
     }
   }
 
-  if(cause_is_explosive(var1)) {
-    var4.stats["kills_explosives"]++;
+  if(cause_is_explosive(var_1)) {
+    var_4.stats["kills_explosives"]++;
   }
 
-  if(isDefined(var2)) {
-    var8 = asmdevgetallstates(var2);
+  if(isDefined(var_2)) {
+    var_8 = asmdevgetallstates(var_2);
   } else {
-    var8 = var8 getcurrentweapon();
+    var_8 = var_8 getcurrentweapon();
   }
 
-  if(issubstr(tolower(var2), "melee")) {
-    var8.stats["kills_melee"]++;
+  if(issubstr(tolower(var_2), "melee")) {
+    var_8.stats["kills_melee"]++;
 
-    if(weaponinventorytype(var8) == "primary") {
+    if(weaponinventorytype(var_8) == "primary") {
       return;
     }
   }
 
-  if(is_new_weapon(var8, var8)) {
-    register_new_weapon(var8, var8);
+  if(is_new_weapon(var_8, var_8)) {
+    register_new_weapon(var_8, var_8);
   }
 
-  var8.stats["weapon"][createheadicon(var8)].kills++;
+  var_8.stats["weapon"][createheadicon(var_8)].kills++;
 }
 
 function register_shot_hit() {
@@ -114,13 +114,13 @@ function register_shot_hit() {
 
   self.registeringshothit = 1;
   self.stats["shots_hit"]++;
-  var0 = self getcurrentweapon();
+  var_0 = self getcurrentweapon();
 
-  if(is_new_weapon(var0)) {
-    register_new_weapon(var0);
+  if(is_new_weapon(var_0)) {
+    register_new_weapon(var_0);
   }
 
-  self.stats["weapon"][createheadicon(var0)].shots_hit++;
+  self.stats["weapon"][createheadicon(var_0)].shots_hit++;
   waittillframeend();
   self.registeringshothit = undefined;
 }
@@ -130,34 +130,34 @@ function shots_fired_recorder() {
 
   for(;;) {
     self waittill("weapon_fired");
-    var0 = self getcurrentweapon();
+    var_0 = self getcurrentweapon();
 
-    if(!isDefined(var0) || !scripts\sp\utility::isprimaryweapon(var0)) {
+    if(!isDefined(var_0) || !scripts\sp\utility::isprimaryweapon(var_0)) {
       continue;
     }
 
     self.stats["shots_fired"]++;
 
-    if(is_new_weapon(var0)) {
-      register_new_weapon(var0);
+    if(is_new_weapon(var_0)) {
+      register_new_weapon(var_0);
     }
 
-    self.stats["weapon"][createheadicon(var0)].shots_fired++;
+    self.stats["weapon"][createheadicon(var_0)].shots_fired++;
   }
 }
 
-function is_new_weapon(var0) {
-  if(isDefined(self.stats["weapon"][createheadicon(var0)])) {
+function is_new_weapon(var_0) {
+  if(isDefined(self.stats["weapon"][createheadicon(var_0)])) {
     return false;
   }
 
   return true;
 }
 
-function cause_is_explosive(var0) {
-  var0 = tolower(var0);
+function cause_is_explosive(var_0) {
+  var_0 = tolower(var_0);
 
-  switch (var0) {
+  switch (var_0) {
     case "splash":
     case "mod_explosive":
     case "mod_projectile_splash":
@@ -172,96 +172,96 @@ function cause_is_explosive(var0) {
   return false;
 }
 
-function register_new_weapon(var0) {
-  var1 = createheadicon(var0);
-  self.stats["weapon"][var1] = spawnStruct();
-  self.stats["weapon"][var1].name = var1;
-  self.stats["weapon"][var1].shots_fired = 0;
-  self.stats["weapon"][var1].shots_hit = 0;
-  self.stats["weapon"][var1].kills = 0;
+function register_new_weapon(var_0) {
+  var_1 = createheadicon(var_0);
+  self.stats["weapon"][var_1] = spawnStruct();
+  self.stats["weapon"][var_1].name = var_1;
+  self.stats["weapon"][var_1].shots_fired = 0;
+  self.stats["weapon"][var_1].shots_hit = 0;
+  self.stats["weapon"][var_1].kills = 0;
 }
 
 function set_stat_dvars() {
-  var0 = 1;
+  var_0 = 1;
 
-  foreach(var2 in level.players) {
-    setDvar("stats_" + var0 + "_kills_melee", var2.stats["kills_melee"]);
-    setDvar("stats_" + var0 + "_kills_juggernaut", var2.stats["kills_juggernaut"]);
-    setDvar("stats_" + var0 + "_kills_explosives", var2.stats["kills_explosives"]);
-    setDvar("stats_" + var0 + "_kills_vehicle", var2.stats["kills_vehicle"]);
-    setDvar("stats_" + var0 + "_kills_sentry", var2.stats["kills_sentry"]);
-    var3 = get_best_weapons(var2, 5);
+  foreach(var_2 in level.players) {
+    setDvar("stats_" + var_0 + "_kills_melee", var_2.stats["kills_melee"]);
+    setDvar("stats_" + var_0 + "_kills_juggernaut", var_2.stats["kills_juggernaut"]);
+    setDvar("stats_" + var_0 + "_kills_explosives", var_2.stats["kills_explosives"]);
+    setDvar("stats_" + var_0 + "_kills_vehicle", var_2.stats["kills_vehicle"]);
+    setDvar("stats_" + var_0 + "_kills_sentry", var_2.stats["kills_sentry"]);
+    var_3 = get_best_weapons(var_2, 5);
 
-    foreach(var5 in var3) {
-      var5.accuracy = 0;
+    foreach(var_5 in var_3) {
+      var_5.accuracy = 0;
 
-      if(var5.shots_fired > 0) {
-        var5.accuracy = int(var5.shots_hit / var5.shots_fired * 100);
+      if(var_5.shots_fired > 0) {
+        var_5.accuracy = int(var_5.shots_hit / var_5.shots_fired * 100);
       }
     }
 
-    for(var7 = 1; var7 < 6; var7++) {
-      setDvar("stats_" + var0 + "_weapon" + var7 + "_name", " ");
-      setDvar("stats_" + var0 + "_weapon" + var7 + "_kills", " ");
-      setDvar("stats_" + var0 + "_weapon" + var7 + "_shots", " ");
-      setDvar("stats_" + var0 + "_weapon" + var7 + "_accuracy", " ");
+    for(var_7 = 1; var_7 < 6; var_7++) {
+      setDvar("stats_" + var_0 + "_weapon" + var_7 + "_name", " ");
+      setDvar("stats_" + var_0 + "_weapon" + var_7 + "_kills", " ");
+      setDvar("stats_" + var_0 + "_weapon" + var_7 + "_shots", " ");
+      setDvar("stats_" + var_0 + "_weapon" + var_7 + "_accuracy", " ");
     }
 
-    for(var7 = 0; var7 < var3.size; var7++) {
-      if(!isDefined(var3[var7])) {
+    for(var_7 = 0; var_7 < var_3.size; var_7++) {
+      if(!isDefined(var_3[var_7])) {
         break;
       }
 
-      setDvar("stats_" + var0 + "_weapon" + var7 + 1 + "_name", var3[var7].name);
-      setDvar("stats_" + var0 + "_weapon" + var7 + 1 + "_kills", var3[var7].kills);
-      setDvar("stats_" + var0 + "_weapon" + var7 + 1 + "_shots", var3[var7].shots_fired);
-      setDvar("stats_" + var0 + "_weapon" + var7 + 1 + "_accuracy", var3[var7].accuracy + "%");
+      setDvar("stats_" + var_0 + "_weapon" + var_7 + 1 + "_name", var_3[var_7].name);
+      setDvar("stats_" + var_0 + "_weapon" + var_7 + 1 + "_kills", var_3[var_7].kills);
+      setDvar("stats_" + var_0 + "_weapon" + var_7 + 1 + "_shots", var_3[var_7].shots_fired);
+      setDvar("stats_" + var_0 + "_weapon" + var_7 + 1 + "_accuracy", var_3[var_7].accuracy + "%");
     }
 
-    var0++;
+    var_0++;
   }
 }
 
-function get_best_weapons(var0) {
-  var1 = [];
+function get_best_weapons(var_0) {
+  var_1 = [];
 
-  for(var2 = 0; var2 < var0; var2++) {
-    var1 = get_weapon_with_most_kills(var1);
+  for(var_2 = 0; var_2 < var_0; var_2++) {
+    var_1 = get_weapon_with_most_kills(var_1);
   }
 
-  return var1;
+  return var_1;
 }
 
-function get_weapon_with_most_kills(var0) {
-  if(!isDefined(var0)) {
-    var0 = [];
+function get_weapon_with_most_kills(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = [];
   }
 
-  var1 = undefined;
+  var_1 = undefined;
 
-  foreach(var3 in self.stats["weapon"]) {
-    var4 = 0;
+  foreach(var_3 in self.stats["weapon"]) {
+    var_4 = 0;
 
-    foreach(var6 in var0) {
-      if(var3.name == var6.name) {
-        var4 = 1;
+    foreach(var_6 in var_0) {
+      if(var_3.name == var_6.name) {
+        var_4 = 1;
         break;
       }
     }
 
-    if(var4) {
+    if(var_4) {
       continue;
     }
 
-    if(!isDefined(var1)) {
-      var1 = var3;
+    if(!isDefined(var_1)) {
+      var_1 = var_3;
       continue;
     }
 
-    if(var3.kills > var1.kills) {
-      var1 = var3;
+    if(var_3.kills > var_1.kills) {
+      var_1 = var_3;
     }
   }
 
-  return var1;
+  return var_1;
 }

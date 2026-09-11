@@ -3,33 +3,33 @@
  * Script: scripts\mp\infilexfil\umike_infil.gsc
 *************************************************/
 
-function umike_init(var0) {
-  initanims(var0);
-  var1 = [];
+function umike_init(var_0) {
+  initanims(var_0);
+  var_1 = [];
   GscBinSkip0(0x2e, 0, [0, 1, 2, 3, 4, 5]);
 }
 
-function umike_spawn(var0, var1, var2, var3) {
-  var4 = scripts\engine\utility::getStruct(var1, "targetname");
-  var5 = spawn("script_origin", var4.origin);
-  var5.angles = var4.angles;
-  var5.scene_node = var4;
+function umike_spawn(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\engine\utility::getStruct(var_1, "targetname");
+  var_5 = spawn("script_origin", var_4.origin);
+  var_5.angles = var_4.angles;
+  var_5.scene_node = var_4;
 
-  if(isDefined(var4.target)) {
-    var5.path = getvehiclenode(var4.target, "targetname");
+  if(isDefined(var_4.target)) {
+    var_5.path = getvehiclenode(var_4.target, "targetname");
   }
 
-  thread infilthink(var5, var0);
-  return var5;
+  thread infilthink(var_5, var_0);
+  return var_5;
 }
 
-function umike_get_length(var0) {
-  var1 = getanimlength(level.scr_anim["slot_0"]["umike_infil_" + var0]);
-  var1 += getanimlength(level.scr_anim["slot_0"]["umike_infil_" + var0 + "_exit"]);
-  return var1;
+function umike_get_length(var_0) {
+  var_1 = getanimlength(level.scr_anim["slot_0"]["umike_infil_" + var_0]);
+  var_1 += getanimlength(level.scr_anim["slot_0"]["umike_infil_" + var_0 + "_exit"]);
+  return var_1;
 }
 
-function player_umike_infil_think(var0, var1) {
+function player_umike_infil_think(var_0, var_1) {
   self endon("player_free_spot");
 
   if(isPlayer(self)) {
@@ -37,11 +37,11 @@ function player_umike_infil_think(var0, var1) {
   }
 
   thread player_infil_end();
-  var2 = var0.linktoent gettagorigin("tag_body_animate");
-  var3 = var0.linktoent gettagangles("tag_body_animate");
-  thread scripts\mp\utility\infilexfil::infil_player_rig_updated("slot_" + var1, var2, var3);
+  var_2 = var_0.linktoent gettagorigin("tag_body_animate");
+  var_3 = var_0.linktoent gettagangles("tag_body_animate");
+  thread scripts\mp\utility\infilexfil::infil_player_rig_updated("slot_" + var_1, var_2, var_3);
   self.player_rig.weapon_state_func = &scripts\mp\utility\infilexfil::handleweaponstatenotetrack;
-  self.player_rig linkTo(var0.linktoent, "tag_body_animate", (0, 0, 0), (0, 0, 0));
+  self.player_rig linkTo(var_0.linktoent, "tag_body_animate", (0, 0, 0), (0, 0, 0));
 
   if(istrue(level.interactiveinfil) && !isai(self)) {
     giveinteractiveinfilweapon();
@@ -57,8 +57,8 @@ function player_umike_infil_think(var0, var1) {
   self clearsoundsubmix("mp_infil_umike", 2);
 
   if(isDefined(self.team) && self.team != "spectator") {
-    var4 = [];
-    GscBinSkip0(0x2e, var4.size, "mp_infil_mix_musicheavy");
+    var_4 = [];
+    GscBinSkip0(0x2e, var_4.size, "mp_infil_mix_musicheavy");
   }
 
   if(istrue(level.interactiveinfil) && !isai(self)) {
@@ -67,8 +67,8 @@ function player_umike_infil_think(var0, var1) {
 
   self setcinematicmotionoverride("disabled");
   self lerpviewangleclamp(1, 0.25, 0.25, 120, 120, 60, 10);
-  var1.linktoent scripts\mp\anim::anim_player_solo(self, self.player_rig, "umike_infil_" + var1.subtype, "tag_body_animate");
-  var1.linktoent scripts\mp\anim::anim_player_solo(self, self.player_rig, "umike_infil_" + var1.subtype + "_exit", "tag_body_animate");
+  var_1.linktoent scripts\mp\anim::anim_player_solo(self, self.player_rig, "umike_infil_" + var_1.subtype, "tag_body_animate");
+  var_1.linktoent scripts\mp\anim::anim_player_solo(self, self.player_rig, "umike_infil_" + var_1.subtype + "_exit", "tag_body_animate");
   thread clear_infil_ambient_zone();
 
   if(isDefined(self.player_rig) && self.player_rig islinked()) {
@@ -113,15 +113,15 @@ function player_van_disconnect() {
   }
 }
 
-function infilthink(var0, var1) {
-  var2 = getdvarfloat("NMORQOTSK", 0.2);
+function infilthink(var_0, var_1) {
+  var_2 = getdvarfloat("NMORQOTSK", 0.2);
 
-  foreach(var4 in getEntArray("infil_delete", "script_noteworthy")) {
-    var4 delete();
+  foreach(var_4 in getEntArray("infil_delete", "script_noteworthy")) {
+    var_4 delete();
   }
 
-  thread vehiclethink(var0, self.scene_node, var1);
-  thread actorthink(var0, self.scene_node, var1);
+  thread vehiclethink(var_0, self.scene_node, var_1);
+  thread actorthink(var_0, self.scene_node, var_1);
   level waittill("infil_started");
   setDvar("TLMMOPMSK", 1);
   setDvar("NMORQOTSK", 1);
@@ -134,15 +134,15 @@ function infilthink(var0, var1) {
   level waittill("prematch_over");
   waitframe();
   setDvar("TLMMOPMSK", 0);
-  setDvar("NMORQOTSK", var2);
+  setDvar("NMORQOTSK", var_2);
 
   while(isDefined(self.actors)) {
     waitframe();
   }
 
   if(isDefined(self.cleanupents)) {
-    foreach(var4 in self.cleanupents) {
-      var4 delete();
+    foreach(var_4 in self.cleanupents) {
+      var_4 delete();
     }
   }
 
@@ -150,54 +150,54 @@ function infilthink(var0, var1) {
   self delete();
 }
 
-function vehiclethink(var0, var1, var2, var3) {
-  self.linktoent = spawninfilvehicle(var1, var0, var2);
+function vehiclethink(var_0, var_1, var_2, var_3) {
+  self.linktoent = spawninfilvehicle(var_1, var_0, var_2);
 
   if(isDefined(self.path)) {
-    thread vehiclethinkpath(var0, var1, var2, var3);
+    thread vehiclethinkpath(var_0, var_1, var_2, var_3);
   } else {
-    thread vehiclethinkmodel(var0, var1, var2, var3);
+    thread vehiclethinkmodel(var_0, var_1, var_2, var_3);
   }
 
   level waittill("prematch_over");
-  var4 = getEnt("umike_clip", "targetname");
+  var_4 = getEnt("umike_clip", "targetname");
 
-  if(isDefined(var4)) {
-    var5 = spawn("script_model", self.linktoent.origin);
-    var5.angles = self.linktoent.angles;
-    var5 clonebrushmodeltoscriptmodel(var4);
-    var5 disconnectPaths();
+  if(isDefined(var_4)) {
+    var_5 = spawn("script_model", self.linktoent.origin);
+    var_5.angles = self.linktoent.angles;
+    var_5 clonebrushmodeltoscriptmodel(var_4);
+    var_5 disconnectPaths();
   }
 
   if(istrue(self.linktoent.shouldfree)) {
     self.linktoent makecorpse();
   }
 
-  game["infil"]["types"][self.type][var2]["persistentVehicle"] = &spawnpersistentvehicle;
-  game["infil"]["types"][self.type][var2]["vehicleOrg"] = self.linktoent.origin;
-  game["infil"]["types"][self.type][var2]["vehicleAng"] = self.linktoent.angles;
+  game["infil"]["types"][self.type][var_2]["persistentVehicle"] = &spawnpersistentvehicle;
+  game["infil"]["types"][self.type][var_2]["vehicleOrg"] = self.linktoent.origin;
+  game["infil"]["types"][self.type][var_2]["vehicleAng"] = self.linktoent.angles;
 }
 
-function spawnpersistentvehicle(var0, var1) {
-  var2 = game["infil"]["types"][var0][var1]["vehicleOrg"];
-  var3 = game["infil"]["types"][var0][var1]["vehicleAng"];
-  var4 = spawnVehicle("veh8_mil_lnd_umike_infil", "umike", "umike", var2, var3);
-  var4.animname = "umikeVeh";
-  var4 vehicle_turnengineoff();
-  var5 = getEnt("umike_clip", "targetname");
+function spawnpersistentvehicle(var_0, var_1) {
+  var_2 = game["infil"]["types"][var_0][var_1]["vehicleOrg"];
+  var_3 = game["infil"]["types"][var_0][var_1]["vehicleAng"];
+  var_4 = spawnVehicle("veh8_mil_lnd_umike_infil", "umike", "umike", var_2, var_3);
+  var_4.animname = "umikeVeh";
+  var_4 vehicle_turnengineoff();
+  var_5 = getEnt("umike_clip", "targetname");
 
-  if(isDefined(var5)) {
-    var6 = spawn("script_model", var2);
-    var6.angles = var3;
-    var6 clonebrushmodeltoscriptmodel(var5);
+  if(isDefined(var_5)) {
+    var_6 = spawn("script_model", var_2);
+    var_6.angles = var_3;
+    var_6 clonebrushmodeltoscriptmodel(var_5);
     return;
   }
 }
 
-function vehiclethinkpath(var0, var1, var2, var3) {
+function vehiclethinkpath(var_0, var_1, var_2, var_3) {
   level waittill("infil_started");
   thread vehiclefollowpath(self.linktoent);
-  thread scripts\common\anim::anim_single_solo(self.linktoent, "umike_infil_" + var2 + "_path");
+  thread scripts\common\anim::anim_single_solo(self.linktoent, "umike_infil_" + var_2 + "_path");
   thread play_tailgate_sfx();
   self.linktoent setscriptablepartstate("dustFX", "normal");
   self.linktoent setscriptablepartstate("exhaustFX", "active");
@@ -218,10 +218,10 @@ function vehiclethinkpath(var0, var1, var2, var3) {
   }
 }
 
-function vehiclethinkmodel(var0, var1, var2, var3) {
-  scripts\common\anim::anim_first_frame_solo(self.linktoent, "umike_infil_" + var2);
+function vehiclethinkmodel(var_0, var_1, var_2, var_3) {
+  scripts\common\anim::anim_first_frame_solo(self.linktoent, "umike_infil_" + var_2);
   level waittill("infil_started");
-  thread scripts\common\anim::anim_single_solo(self.linktoent, "umike_infil_" + var2);
+  thread scripts\common\anim::anim_single_solo(self.linktoent, "umike_infil_" + var_2);
   thread play_tailgate_sfx();
   self.linktoent setscriptablepartstate("dustFX", "normal");
   self.linktoent setscriptablepartstate("exhaustFX", "active");
@@ -243,79 +243,79 @@ function vehiclethinkmodel(var0, var1, var2, var3) {
 }
 
 function play_tailgate_sfx() {
-  var0 = self gettagorigin("tag_exhaust");
-  var1 = spawn("script_model", var0);
-  var1 linkTo(self, "tag_exhaust");
+  var_0 = self gettagorigin("tag_exhaust");
+  var_1 = spawn("script_model", var_0);
+  var_1 linkTo(self, "tag_exhaust");
   wait 6.5;
-  var1 playsoundonmovingent("mp_infil_umike_exit_tailgate");
+  var_1 playsoundonmovingent("mp_infil_umike_exit_tailgate");
   wait 20;
-  var1 delete();
+  var_1 delete();
 }
 
-function flapsthink(var0, var1, var2, var3) {
-  self.linktoent scripts\common\anim::anim_first_frame_solo(self.linktoent.flaps, "umike_infil_" + var2, "tag_body_animate");
+function flapsthink(var_0, var_1, var_2, var_3) {
+  self.linktoent scripts\common\anim::anim_first_frame_solo(self.linktoent.flaps, "umike_infil_" + var_2, "tag_body_animate");
   level waittill("infil_started");
-  self.linktoent thread scripts\common\anim::anim_single_solo(self.linktoent.flaps, "umike_infil_" + var2, "tag_body_animate");
+  self.linktoent thread scripts\common\anim::anim_single_solo(self.linktoent.flaps, "umike_infil_" + var_2, "tag_body_animate");
 }
 
-function spawninfilvehicle(var0, var1, var2) {
+function spawninfilvehicle(var_0, var_1, var_2) {
   if(isDefined(self.path)) {
-    var3 = self.path.origin;
-    var4 = self.path.angles;
-    var5 = spawnVehicle(scripts\engine\utility::ter_op(var1 == "allies", "veh8_mil_lnd_umike_allied_infil", "veh8_mil_lnd_umike_infil"), "umike", "umike", var3, var4);
-    var5.animname = "umikeVeh";
-    var5.shouldfree = 1;
+    var_3 = self.path.origin;
+    var_4 = self.path.angles;
+    var_5 = spawnVehicle(scripts\engine\utility::ter_op(var_1 == "allies", "veh8_mil_lnd_umike_allied_infil", "veh8_mil_lnd_umike_infil"), "umike", "umike", var_3, var_4);
+    var_5.animname = "umikeVeh";
+    var_5.shouldfree = 1;
   } else {
-    var5 = spawn("script_model", var1.origin);
-    var5.angles = var1.angles;
-    var5 setModel("veh8_mil_lnd_umike_infil");
-    var5.animname = "umike";
-    var5 scripts\common\anim::setanimtree();
+    var_5 = spawn("script_model", var_1.origin);
+    var_5.angles = var_1.angles;
+    var_5 setModel("veh8_mil_lnd_umike_infil");
+    var_5.animname = "umike";
+    var_5 scripts\common\anim::setanimtree();
   }
 
-  var5.infil = self;
-  var5 setCanDamage(0);
+  var_5.infil = self;
+  var_5 setCanDamage(0);
   thread vehicleplaysounds();
-  return var5;
+  return var_5;
 }
 
 function vehicleplaysounds() {
-  var0 = self;
-  var0 vehicle_turnengineoff();
-  var1 = var0 gettagorigin("tag_light_front_left");
-  var2 = spawn("script_model", var1);
-  var2 linkTo(var0, "tag_light_front_left");
-  var3 = var0 gettagorigin("tag_exhaust");
-  var4 = spawn("script_model", var3);
-  var4 linkTo(var0, "tag_exhaust");
-  var2 playLoopSound("mp_infil_umike_engine_front_lp");
-  var4 playLoopSound("mp_infil_umike_engine_rear_lp");
+  var_0 = self;
+  var_0 vehicle_turnengineoff();
+  var_1 = var_0 gettagorigin("tag_light_front_left");
+  var_2 = spawn("script_model", var_1);
+  var_2 linkTo(var_0, "tag_light_front_left");
+  var_3 = var_0 gettagorigin("tag_exhaust");
+  var_4 = spawn("script_model", var_3);
+  var_4 linkTo(var_0, "tag_exhaust");
+  var_2 playLoopSound("mp_infil_umike_engine_front_lp");
+  var_4 playLoopSound("mp_infil_umike_engine_rear_lp");
   level waittill("infil_started");
   wait 2.5;
-  var2 playsoundonmovingent("mp_infil_umike_engine_stop_front");
-  var4 playsoundonmovingent("mp_infil_umike_engine_stop_rear");
+  var_2 playsoundonmovingent("mp_infil_umike_engine_stop_front");
+  var_4 playsoundonmovingent("mp_infil_umike_engine_stop_rear");
   wait 1;
-  var2 stoploopsound();
-  var4 stoploopsound();
+  var_2 stoploopsound();
+  var_4 stoploopsound();
   wait 2;
   level waittill("prematch_over");
   wait 5;
-  var2 delete();
-  var4 delete();
+  var_2 delete();
+  var_4 delete();
 }
 
-function vehiclefollowpath(var0) {
+function vehiclefollowpath(var_0) {
   self endon("death");
   self endon("stop_follow_path");
-  self startpath(var0);
+  self startpath(var_0);
 
-  for(var1 = getvehiclenode(var0.target, "targetname"); isDefined(var1); var1 = getvehiclenode(var1.target, "targetname")) {
-    var1 waittill("trigger");
+  for(var_1 = getvehiclenode(var_0.target, "targetname"); isDefined(var_1); var_1 = getvehiclenode(var_1.target, "targetname")) {
+    var_1 waittill("trigger");
 
-    if(isDefined(var1.script_unload)) {
+    if(isDefined(var_1.script_unload)) {
       self vehicle_setspeedimmediate(0, 30, 30);
 
-      for(var2 = self vehicle_getspeed(); var2 > 1; var2 = self vehicle_getspeed()) {
+      for(var_2 = self vehicle_getspeed(); var_2 > 1; var_2 = self vehicle_getspeed()) {
         wait 0.1;
       }
 
@@ -325,89 +325,89 @@ function vehiclefollowpath(var0) {
         wait 0.1;
       }
 
-      if(isDefined(var1.target)) {
+      if(isDefined(var_1.target)) {
         self resumespeed(10);
       }
     }
 
-    if(!isDefined(var1.target)) {
+    if(!isDefined(var_1.target)) {
       break;
     }
   }
 
   self vehicle_setspeedimmediate(0, 30, 30);
 
-  for(var2 = self vehicle_getspeed(); var2 > 1; var2 = self vehicle_getspeed()) {
+  for(var_2 = self vehicle_getspeed(); var_2 > 1; var_2 = self vehicle_getspeed()) {
     wait 0.1;
   }
 }
 
-function actorthink(var0, var1, var2, var3) {
-  thread spawnactors(var0, var2, var3);
-  self.linktoent scripts\common\anim::anim_first_frame(self.actors, "umike_infil_" + var2, "tag_body_animate");
+function actorthink(var_0, var_1, var_2, var_3) {
+  thread spawnactors(var_0, var_2, var_3);
+  self.linktoent scripts\common\anim::anim_first_frame(self.actors, "umike_infil_" + var_2, "tag_body_animate");
   level waittill("infil_started");
-  self.linktoent thread scripts\common\anim::anim_single(self.actors, "umike_infil_" + var2, "tag_body_animate");
-  self.actors[0].head scriptmodelplayanim(level.scr_anim[self.actors[0].animname]["umike_infil_" + var2]);
+  self.linktoent thread scripts\common\anim::anim_single(self.actors, "umike_infil_" + var_2, "tag_body_animate");
+  self.actors[0].head scriptmodelplayanim(level.scr_anim[self.actors[0].animname]["umike_infil_" + var_2]);
   level waittill("prematch_over");
 
-  foreach(var5 in self.actors) {
-    if(isDefined(var5)) {
-      var5 delete();
+  foreach(var_5 in self.actors) {
+    if(isDefined(var_5)) {
+      var_5 delete();
     }
   }
 
   self.actors = undefined;
 }
 
-function spawnactors(var0, var1, var2) {
+function spawnactors(var_0, var_1, var_2) {
   if(!isDefined(self.actors)) {
     self.actors = [];
   }
 
-  var3 = getdriverassets(var0);
-  self.actors[self.actors.size] = spawn_anim_model(self.linktoent, "driver", "tag_body_animate", var3.body, var3.head);
+  var_3 = getdriverassets(var_0);
+  self.actors[self.actors.size] = spawn_anim_model(self.linktoent, "driver", "tag_body_animate", var_3.body, var_3.head);
 
-  foreach(var5 in self.actors) {
-    var5.infil = self;
+  foreach(var_5 in self.actors) {
+    var_5.infil = self;
   }
 }
 
-function spawn_anim_model(var0, var1, var2, var3, var4) {
-  var5 = spawn("script_model", (0, 0, 0));
-  var5 setModel(var2);
+function spawn_anim_model(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = spawn("script_model", (0, 0, 0));
+  var_5 setModel(var_2);
 
-  if(isDefined(var3)) {
-    var6 = spawn("script_model", (0, 0, 0));
-    var6 setModel(var3);
-    var6 linkTo(var5, "j_spine4", (0, 0, 0), (0, 0, 0));
-    var5.head = var6;
-    var5 thread scripts\engine\utility::delete_on_death(var6);
+  if(isDefined(var_3)) {
+    var_6 = spawn("script_model", (0, 0, 0));
+    var_6 setModel(var_3);
+    var_6 linkTo(var_5, "j_spine4", (0, 0, 0), (0, 0, 0));
+    var_5.head = var_6;
+    var_5 thread scripts\engine\utility::delete_on_death(var_6);
   }
 
-  if(isDefined(var4)) {
-    var7 = spawn("script_model", (0, 0, 0));
-    var7 setModel(var4);
-    var7 linkTo(var5, "j_gun", (0, 0, 0), (0, 0, 0));
-    var5 thread scripts\engine\utility::delete_on_death(var7);
-    var5.weapon = var7;
+  if(isDefined(var_4)) {
+    var_7 = spawn("script_model", (0, 0, 0));
+    var_7 setModel(var_4);
+    var_7 linkTo(var_5, "j_gun", (0, 0, 0), (0, 0, 0));
+    var_5 thread scripts\engine\utility::delete_on_death(var_7);
+    var_5.weapon = var_7;
   }
 
-  var5.animname = var0;
-  var5 scripts\common\anim::setanimtree();
+  var_5.animname = var_0;
+  var_5 scripts\common\anim::setanimtree();
 
-  if(isDefined(var1)) {
-    thread scripts\engine\utility::delete_on_death(var5);
-    var5 linkTo(self, var1, (0, 0, 0), (0, 0, 0));
+  if(isDefined(var_1)) {
+    thread scripts\engine\utility::delete_on_death(var_5);
+    var_5 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   }
 
-  return var5;
+  return var_5;
 }
 
-function initanims(var0) {
-  script_model_alpha_anims(var0);
-  vehicles_alpha_anims(var0);
+function initanims(var_0) {
+  script_model_alpha_anims(var_0);
+  vehicles_alpha_anims(var_0);
 
-  switch (var0) {
+  switch (var_0) {
     case "alpha":
       scripts\common\anim::addnotetrack_customfunction("slot_0", "80_instant", &scripts\mp\utility\infilexfil::player_fov_80_instant, "umike_infil_alpha");
       scripts\common\anim::addnotetrack_customfunction("slot_1", "80_instant", &scripts\mp\utility\infilexfil::player_fov_80_instant, "umike_infil_alpha");
@@ -561,8 +561,8 @@ function initanims(var0) {
 
 #using_animtree("");
 
-function script_model_alpha_anims(var0) {
-  switch (var0) {
+function script_model_alpha_anims(var_0) {
+  switch (var_0) {
     case "alpha":
       level.scr_animtree["driver"] = #animtree;
       level.scr_anim["driver"]["umike_infil_alpha"] = $mp_infil_umike_driver;
@@ -678,8 +678,8 @@ function script_model_alpha_anims(var0) {
   }
 }
 
-function vehicles_alpha_anims(var0) {
-  switch (var0) {
+function vehicles_alpha_anims(var_0) {
+  switch (var_0) {
     case "alpha":
       level.scr_animtree["umikeVeh"] = #animtree;
       level.scr_anim["umikeVeh"]["umike_infil_alpha_path"] = $mp_infil_umike_vehicle_tailgate;
@@ -691,61 +691,61 @@ function vehicles_alpha_anims(var0) {
   }
 }
 
-function commander_play_sound_func(var0, var1, var2) {
-  foreach(var4 in self.infil.players) {
-    self playsoundtoplayer(var0, var4);
+function commander_play_sound_func(var_0, var_1, var_2) {
+  foreach(var_4 in self.infil.players) {
+    self playsoundtoplayer(var_0, var_4);
   }
 }
 
-function mp_infil_umike_exit_jump_land_sfx(var0) {
-  var0 playsoundonmovingent("mp_infil_umike_exit_jump_land");
+function mp_infil_umike_exit_jump_land_sfx(var_0) {
+  var_0 playsoundonmovingent("mp_infil_umike_exit_jump_land");
 }
 
-function mp_infil_umike_exit_npc_step_sfx(var0) {
-  if(isPlayer(var0)) {
-    var0 playlocalsound("mp_infil_umike_exit_plr_step");
+function mp_infil_umike_exit_npc_step_sfx(var_0) {
+  if(isPlayer(var_0)) {
+    var_0 playlocalsound("mp_infil_umike_exit_plr_step");
     return;
   }
 
-  var0 playsoundonmovingent("mp_infil_umike_exit_npc_step");
+  var_0 playsoundonmovingent("mp_infil_umike_exit_npc_step");
 }
 
-function mp_infil_umike_exit_suspension_creak(var0) {
-  if(isDefined(var0.animname)) {
-    var1 = "mp_infil_umike_exit_suspension_creak_" + var0.animname;
+function mp_infil_umike_exit_suspension_creak(var_0) {
+  if(isDefined(var_0.animname)) {
+    var_1 = "mp_infil_umike_exit_suspension_creak_" + var_0.animname;
   } else {
-    var1 = "mp_infil_umike_exit_suspension_creak_slot_0";
+    var_1 = "mp_infil_umike_exit_suspension_creak_slot_0";
   }
 
-  var1 playsoundonmovingent(var1);
+  var_1 playsoundonmovingent(var_1);
 }
 
-function umike_cam_shake_ground(var0) {
-  var1 = var0.player;
-  var1 notify("stop_cam_shake");
-  var1 playrumbleonpositionforclient("ground_pound_land", var1.origin);
-  var1 setscriptablepartstate("wind", "0", 0);
+function umike_cam_shake_ground(var_0) {
+  var_1 = var_0.player;
+  var_1 notify("stop_cam_shake");
+  var_1 playrumbleonpositionforclient("ground_pound_land", var_1.origin);
+  var_1 setscriptablepartstate("wind", "0", 0);
 }
 
 function giveinteractiveinfilweapon() {
-  var0 = getcompleteweaponname("iw8_sn_alpha50infil_mp", ["rec_alpha50", "front_alpha50", "back_alpha50", "mag_alpha50", "acog_alpha50", "gunperk_adsup"]);
-  scripts\cp_mp\utility\inventory_utility::_giveweapon(var0, undefined, undefined, 1);
+  var_0 = getcompleteweaponname("iw8_sn_alpha50infil_mp", ["rec_alpha50", "front_alpha50", "back_alpha50", "mag_alpha50", "acog_alpha50", "gunperk_adsup"]);
+  scripts\cp_mp\utility\inventory_utility::_giveweapon(var_0, undefined, undefined, 1);
   scripts\common\utility::allow_weapon_switch(1);
-  var1 = scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var0, 0);
+  var_1 = scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var_0, 0);
 
-  if(var1) {
-    self.infilweapon = var0;
+  if(var_1) {
+    self.infilweapon = var_0;
     scripts\common\utility::allow_weapon_switch(0);
     scripts\mp\utility\weapon::setrecoilscale(0, 50);
   } else {
-    scripts\cp_mp\utility\inventory_utility::_takeweapon(var0);
+    scripts\cp_mp\utility\inventory_utility::_takeweapon(var_0);
     scripts\cp_mp\utility\inventory_utility::forcevalidweapon();
   }
 
-  return var1;
+  return var_1;
 }
 
-function allowinteractivecombat(var0) {
+function allowinteractivecombat(var_0) {
   self endon("player_free_spot");
   thread ineractivecombatmessaging();
   wait level.interactiveinfilstart;
@@ -785,22 +785,22 @@ function ineractivecombatmessaging() {
   self iprintlnbold("Targets Marked! Take them out!");
 }
 
-function interactiveinfilthink(var0) {
+function interactiveinfilthink(var_0) {
   thread manageinteractivecombattargets(level);
 }
 
-function manageinteractivecombattargets(var0) {
+function manageinteractivecombattargets(var_0) {
   while(!isDefined(level.infiltargets)) {
     waitframe();
   }
 
-  foreach(var2 in level.infiltargets["axis"]) {
-    thread targetdamagethink(var2);
+  foreach(var_2 in level.infiltargets["axis"]) {
+    thread targetdamagethink(var_2);
     thread deleteoninfilcomplete();
   }
 }
 
-function targetdamagethink(var0) {
+function targetdamagethink(var_0) {
   level endon("prematch_over");
 
   if(istrue(self.isbonus)) {
@@ -810,17 +810,17 @@ function targetdamagethink(var0) {
   }
 
   wait level.interactiveinfilstart;
-  var1 = scripts\mp\utility\outline::outlineenableforteam(self, var0, scripts\engine\utility::ter_op(istrue(self.isbonus), "outline_depth_red", "outline_depth_orange"), "level_script");
+  var_1 = scripts\mp\utility\outline::outlineenableforteam(self, var_0, scripts\engine\utility::ter_op(istrue(self.isbonus), "outline_depth_red", "outline_depth_orange"), "level_script");
 
   for(;;) {
-    self waittill("damage", var2, var3, var4, var5, var6, var7, var8, var9, var10, var11);
+    self waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 
-    if(var2 >= self.health) {
-      scripts\mp\utility\outline::outlinedisable(var1, self);
+    if(var_2 >= self.health) {
+      scripts\mp\utility\outline::outlinedisable(var_1, self);
 
       if(istrue(self.isbonus)) {
-        var3 thread scripts\mp\rank::giverankxp("infil_bonus", 1000);
-        var3 thread scripts\mp\rank::scoreeventpopup("infil_bonus");
+        var_3 thread scripts\mp\rank::giverankxp("infil_bonus", 1000);
+        var_3 thread scripts\mp\rank::scoreeventpopup("infil_bonus");
       }
 
       break;
@@ -843,60 +843,60 @@ function deleteoninfilcomplete() {
   self suicide();
 }
 
-function getcommanderassets(var0) {
-  var1 = spawnStruct();
-  var1.body = "body_mp_helicopter_crew";
-  var1.head = "head_mp_helicopter_crew";
+function getcommanderassets(var_0) {
+  var_1 = spawnStruct();
+  var_1.body = "body_mp_helicopter_crew";
+  var_1.head = "head_mp_helicopter_crew";
 
   switch (level.mapname) {
     case "mp_raid":
-      if(var0 == "allies") {
-        var1.body = "body_hero_price_woodland";
-        var1.head = "head_sc_m_green";
+      if(var_0 == "allies") {
+        var_1.body = "body_hero_price_woodland";
+        var_1.head = "head_sc_m_green";
       } else {
-        var1.body = "body_spetsnaz_cqc";
-        var1.head = "head_sc_m_androsov";
+        var_1.body = "body_spetsnaz_cqc";
+        var_1.head = "head_sc_m_androsov";
       }
 
       break;
     case "mp_cave_am":
     case "mp_cave":
-      if(var0 == "allies") {
-        var1.body = "body_usmc_basic_ar_4";
-        var1.head = "head_sc_m_valladares";
+      if(var_0 == "allies") {
+        var_1.body = "body_usmc_basic_ar_4";
+        var_1.head = "head_sc_m_valladares";
       } else {
-        var1.body = "body_al_qatala_desert_06";
-        var1.head = "head_sc_m_alai";
+        var_1.body = "body_al_qatala_desert_06";
+        var_1.head = "head_sc_m_alai";
       }
 
       break;
   }
 
-  return var1;
+  return var_1;
 }
 
-function getdriverassets(var0) {
-  var1 = spawnStruct();
-  var1.body = "body_mp_western_fireteam_west_smg_1_1";
-  var1.head = "head_mp_western_fireteam_west_smg_2_1";
+function getdriverassets(var_0) {
+  var_1 = spawnStruct();
+  var_1.body = "body_mp_western_fireteam_west_smg_1_1";
+  var_1.head = "head_mp_western_fireteam_west_smg_2_1";
 
   switch (level.mapname) {
     default:
-      if(var0 == "allies") {
-        var1.body = "body_mp_western_fireteam_west_smg_1_1";
-        var1.head = "head_mp_western_fireteam_west_smg_2_1";
+      if(var_0 == "allies") {
+        var_1.body = "body_mp_western_fireteam_west_smg_1_1";
+        var_1.head = "head_mp_western_fireteam_west_smg_2_1";
       } else {
-        var1.body = "body_mp_eastern_fireteam_east_sg_no_sling";
-        var1.head = "head_me_eastern_fireteam_east_smg_3";
+        var_1.body = "body_mp_eastern_fireteam_east_sg_no_sling";
+        var_1.head = "head_me_eastern_fireteam_east_smg_3";
       }
 
       break;
   }
 
-  return var1;
+  return var_1;
 }
 
-function reducewind(var0) {
-  var1 = var0.player;
-  var1 setscriptablepartstate("wind", "10", 0);
+function reducewind(var_0) {
+  var_1 = var_0.player;
+  var_1 setscriptablepartstate("wind", "10", 0);
 }

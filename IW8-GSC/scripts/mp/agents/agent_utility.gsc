@@ -3,17 +3,17 @@
  * Script: scripts\mp\agents\agent_utility.gsc
 ***********************************************/
 
-function agentfunc(var0) {
-  return level.agent_funcs[self.agent_type][var0];
+function agentfunc(var_0) {
+  return level.agent_funcs[self.agent_type][var_0];
 }
 
-function set_agent_team(var0, var1) {
-  self.team = var0;
-  self.agentteam = var0;
-  self.pers["team"] = var0;
-  self.owner = var1;
-  self setotherent(var1);
-  self setentityowner(var1);
+function set_agent_team(var_0, var_1) {
+  self.team = var_0;
+  self.agentteam = var_0;
+  self.pers["team"] = var_0;
+  self.owner = var_1;
+  self setotherent(var_1);
+  self setentityowner(var_1);
 }
 
 function initagentscriptvariables() {
@@ -34,8 +34,8 @@ function initagentscriptvariables() {
   initplayerscriptvariables(0);
 }
 
-function initplayerscriptvariables(var0) {
-  if(!var0) {
+function initplayerscriptvariables(var_0) {
+  if(!var_0) {
     self.class = undefined;
     self.lastclass = undefined;
     self.movespeedscaler = undefined;
@@ -78,21 +78,21 @@ function initplayerscriptvariables(var0) {
   }
 }
 
-function getfreeagent(var0) {
-  var1 = undefined;
+function getfreeagent(var_0) {
+  var_1 = undefined;
 
   if(isDefined(level.agentarray)) {
-    foreach(var3 in level.agentarray) {
-      if(!isDefined(var3.isactive) || !var3.isactive) {
-        if(isDefined(var3.waitingtodeactivate) && var3.waitingtodeactivate) {
+    foreach(var_3 in level.agentarray) {
+      if(!isDefined(var_3.isactive) || !var_3.isactive) {
+        if(isDefined(var_3.waitingtodeactivate) && var_3.waitingtodeactivate) {
           continue;
         }
 
-        var1 = var3;
-        initagentscriptvariables(var1);
+        var_1 = var_3;
+        initagentscriptvariables(var_1);
 
-        if(isDefined(var0)) {
-          var1.agent_type = var0;
+        if(isDefined(var_0)) {
+          var_1.agent_type = var_0;
         }
 
         break;
@@ -100,7 +100,7 @@ function getfreeagent(var0) {
     }
   }
 
-  return var1;
+  return var_1;
 }
 
 function activateagent() {
@@ -127,11 +127,11 @@ function deactivateagentdelayed() {
   self.connecttime = undefined;
   self.waitingtodeactivate = undefined;
 
-  foreach(var1 in level.characters) {
-    if(isDefined(var1.attackers)) {
-      foreach(var3 in var1.attackers) {
-        if(var3 == self) {
-          var1.attackers[var4] = undefined;
+  foreach(var_1 in level.characters) {
+    if(isDefined(var_1.attackers)) {
+      foreach(var_3 in var_1.attackers) {
+        if(var_3 == self) {
+          var_1.attackers[var_4] = undefined;
         }
       }
     }
@@ -145,177 +145,177 @@ function deactivateagentdelayed() {
   self notify("disconnect");
 }
 
-function getnumactiveagents(var0) {
-  if(!isDefined(var0)) {
-    var0 = "all";
+function getnumactiveagents(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = "all";
   }
 
-  var1 = getactiveagentsoftype(var0);
-  return var1.size;
+  var_1 = getactiveagentsoftype(var_0);
+  return var_1.size;
 }
 
-function getactiveagentsoftype(var0) {
-  var1 = [];
+function getactiveagentsoftype(var_0) {
+  var_1 = [];
 
   if(!isDefined(level.agentarray)) {
-    return var1;
+    return var_1;
   }
 
-  foreach(var3 in level.agentarray) {
-    if(isDefined(var3.isactive) && var3.isactive) {
-      if(var0 == "all" || var3.agent_type == var0) {
-        var1 = var3;
+  foreach(var_3 in level.agentarray) {
+    if(isDefined(var_3.isactive) && var_3.isactive) {
+      if(var_0 == "all" || var_3.agent_type == var_0) {
+        var_1 = var_3;
       }
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function getnumownedactiveagents(var0) {
-  return getnumownedactiveagentsbytype(var0, "all");
+function getnumownedactiveagents(var_0) {
+  return getnumownedactiveagentsbytype(var_0, "all");
 }
 
-function getnumownedactiveagentsbytype(var0, var1) {
-  var2 = 0;
+function getnumownedactiveagentsbytype(var_0, var_1) {
+  var_2 = 0;
 
   if(!isDefined(level.agentarray)) {
-    return var2;
+    return var_2;
   }
 
-  foreach(var4 in level.agentarray) {
-    if(isDefined(var4.isactive) && var4.isactive) {
-      if(isDefined(var4.owner) && var4.owner == var0) {
-        if(var1 == "all" && var4.agent_type != "alien" || var4.agent_type == var1) {
-          var2++;
+  foreach(var_4 in level.agentarray) {
+    if(isDefined(var_4.isactive) && var_4.isactive) {
+      if(isDefined(var_4.owner) && var_4.owner == var_0) {
+        if(var_1 == "all" && var_4.agent_type != "alien" || var_4.agent_type == var_1) {
+          var_2++;
         }
       }
     }
   }
 
-  return var2;
+  return var_2;
 }
 
-function getnumownedagentsonteambytype(var0, var1) {
-  var2 = 0;
+function getnumownedagentsonteambytype(var_0, var_1) {
+  var_2 = 0;
 
   if(!isDefined(level.agentarray)) {
-    return var2;
+    return var_2;
   }
 
-  foreach(var4 in level.agentarray) {
-    if(isDefined(var4.isactive) && var4.isactive) {
-      if(isDefined(var4.team) && var4.team == var0) {
-        if(var1 == "all" && var4.agent_type != "alien" || var4.agent_type == var1) {
-          var2++;
+  foreach(var_4 in level.agentarray) {
+    if(isDefined(var_4.isactive) && var_4.isactive) {
+      if(isDefined(var_4.team) && var_4.team == var_0) {
+        if(var_1 == "all" && var_4.agent_type != "alien" || var_4.agent_type == var_1) {
+          var_2++;
         }
       }
     }
   }
 
-  return var2;
+  return var_2;
 }
 
-function getvalidspawnpathnodenearplayer(var0, var1) {
-  var2 = getnodesinradius(self.origin, 350, 64, 128, "Path");
+function getvalidspawnpathnodenearplayer(var_0, var_1) {
+  var_2 = getnodesinradius(self.origin, 350, 64, 128, "Path");
 
-  if(!isDefined(var2) || var2.size == 0) {
+  if(!isDefined(var_2) || var_2.size == 0) {
     return undefined;
   }
 
   if(isDefined(level.waterdeletez) && isDefined(level.trigunderwater)) {
-    var3 = var2;
-    var2 = [];
+    var_3 = var_2;
+    var_2 = [];
 
-    foreach(var5 in var3) {
-      if(var5.origin[2] > level.waterdeletez || !ispointinvolume(var5.origin, level.trigunderwater)) {
-        var2 = var5;
+    foreach(var_5 in var_3) {
+      if(var_5.origin[2] > level.waterdeletez || !ispointinvolume(var_5.origin, level.trigunderwater)) {
+        var_2 = var_5;
       }
     }
   }
 
-  var7 = anglesToForward(self.angles);
-  var8 = -10;
-  var9 = scripts\mp\spawnlogic::getplayertraceheight(self);
-  var10 = (0, 0, var9);
+  var_7 = anglesToForward(self.angles);
+  var_8 = -10;
+  var_9 = scripts\mp\spawnlogic::getplayertraceheight(self);
+  var_10 = (0, 0, var_9);
 
-  if(!isDefined(var0)) {
-    var0 = 0;
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  var11 = [];
-  var12 = [];
+  var_11 = [];
+  var_12 = [];
 
-  foreach(var14 in var2) {
-    if(!var14 doesnodeallowstance("stand") || isDefined(var14.no_agent_spawn)) {
+  foreach(var_14 in var_2) {
+    if(!var_14 doesnodeallowstance("stand") || isDefined(var_14.no_agent_spawn)) {
       continue;
     }
 
-    var15 = vectorNormalize(var14.origin - self.origin);
-    var16 = vectordot(var7, var15);
+    var_15 = vectorNormalize(var_14.origin - self.origin);
+    var_16 = vectordot(var_7, var_15);
 
-    for(var17 = 0; var17 < var12.size; var17++) {
-      if(var16 > var12[var17]) {
-        for(var18 = var12.size; var18 > var17; var18--) {
-          var12 = var12[var18 - 1];
-          var11 = var11[var18 - 1];
+    for(var_17 = 0; var_17 < var_12.size; var_17++) {
+      if(var_16 > var_12[var_17]) {
+        for(var_18 = var_12.size; var_18 > var_17; var_18--) {
+          var_12 = var_12[var_18 - 1];
+          var_11 = var_11[var_18 - 1];
         }
 
         break;
       }
     }
 
-    var11 = var14;
-    var12 = var16;
+    var_11 = var_14;
+    var_12 = var_16;
   }
 
-  for(var17 = 0; var17 < var11.size; var17++) {
-    var14 = var11[var17];
-    var20 = self.origin + var10;
-    var21 = var14.origin + var10;
+  for(var_17 = 0; var_17 < var_11.size; var_17++) {
+    var_14 = var_11[var_17];
+    var_20 = self.origin + var_10;
+    var_21 = var_14.origin + var_10;
 
-    if(var17 > 0) {
+    if(var_17 > 0) {
       wait 0.05;
     }
 
-    if(!sighttracepassed(var20, var21, 0, self)) {
+    if(!sighttracepassed(var_20, var_21, 0, self)) {
       continue;
     }
 
-    if(var1) {
-      if(var17 > 0) {
+    if(var_1) {
+      if(var_17 > 0) {
         wait 0.05;
       }
 
-      var22 = playerphysicstrace(var14.origin + var10, var14.origin);
+      var_22 = playerphysicstrace(var_14.origin + var_10, var_14.origin);
 
-      if(distancesquared(var22, var14.origin) > 1) {
+      if(distancesquared(var_22, var_14.origin) > 1) {
         continue;
       }
     }
 
-    if(var0) {
-      if(var17 > 0) {
+    if(var_0) {
+      if(var_17 > 0) {
         wait 0.05;
       }
 
-      var22 = physicstrace(var20, var21);
+      var_22 = physicstrace(var_20, var_21);
 
-      if(distancesquared(var22, var21) > 1) {
+      if(distancesquared(var_22, var_21) > 1) {
         continue;
       }
     }
 
-    return var14;
+    return var_14;
   }
 }
 
-function killagent(var0) {
-  var0 dodamage(var0.health + 500000, var0.origin);
+function killagent(var_0) {
+  var_0 dodamage(var_0.health + 500000, var_0.origin);
 }
 
 function killdog() {

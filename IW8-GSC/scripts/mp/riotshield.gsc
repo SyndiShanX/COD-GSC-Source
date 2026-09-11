@@ -3,79 +3,79 @@
  * Script: scripts\mp\riotshield.gsc
 ***********************************************/
 
-function isriotshield(var0) {
-  if(issameweapon(var0) && nullweapon(var0)) {
+function isriotshield(var_0) {
+  if(issameweapon(var_0) && nullweapon(var_0)) {
     return false;
   }
 
-  if(isstring(var0) && var0 == "none") {
+  if(isstring(var_0) && var_0 == "none") {
     return false;
   }
 
-  return weapontype(var0) == "riotshield";
+  return weapontype(var_0) == "riotshield";
 }
 
 function riotshield_hasweapon() {
-  var0 = 0;
-  var1 = self getweaponslistprimaries();
+  var_0 = 0;
+  var_1 = self getweaponslistprimaries();
 
-  foreach(var3 in var1) {
-    if(isriotshield(var3)) {
-      var0 = 1;
+  foreach(var_3 in var_1) {
+    if(isriotshield(var_3)) {
+      var_0 = 1;
       break;
     }
   }
 
-  return var0;
+  return var_0;
 }
 
 function riotshield_hastwo() {
-  var0 = 0;
-  var1 = self getweaponslistprimaries();
+  var_0 = 0;
+  var_1 = self getweaponslistprimaries();
 
-  foreach(var3 in var1) {
-    if(isriotshield(var3)) {
-      var0++;
+  foreach(var_3 in var_1) {
+    if(isriotshield(var_3)) {
+      var_0++;
     }
 
-    if(var0 == 2) {
+    if(var_0 == 2) {
       break;
     }
   }
 
-  return var0 == 2;
+  return var_0 == 2;
 }
 
-function riotshield_attach(var0, var1) {
-  var2 = undefined;
+function riotshield_attach(var_0, var_1) {
+  var_2 = undefined;
 
-  if(var0) {
-    self.riotshieldmodel = var1;
-    var2 = "j_shield_ri";
+  if(var_0) {
+    self.riotshieldmodel = var_1;
+    var_2 = "j_shield_ri";
   } else {
-    self.riotshieldmodelstowed = var1;
-    var2 = "tag_shield_back";
+    self.riotshieldmodelstowed = var_1;
+    var_2 = "tag_shield_back";
   }
 
-  self attachshieldmodel(var1, var2, 0, !var0);
+  self attachshieldmodel(var_1, var_2, 0, !var_0);
   self.hasriotshield = riotshield_hasweapon();
 }
 
-function riotshield_detach(var0) {
-  var1 = undefined;
-  var2 = undefined;
+function riotshield_detach(var_0) {
+  var_1 = undefined;
+  var_2 = undefined;
 
-  if(var0) {
-    var1 = self.riotshieldmodel;
-    var2 = "j_shield_ri";
+  if(var_0) {
+    var_1 = self.riotshieldmodel;
+    var_2 = "j_shield_ri";
   } else {
-    var1 = self.riotshieldmodelstowed;
-    var2 = "tag_shield_back";
+    var_1 = self.riotshieldmodelstowed;
+    var_2 = "tag_shield_back";
   }
 
-  self detachshieldmodel(var1, var2);
+  self detachshieldmodel(var_1, var_2);
 
-  if(var0) {
+  if(var_0) {
     self.riotshieldmodel = undefined;
   } else {
     self.riotshieldmodelstowed = undefined;
@@ -84,30 +84,30 @@ function riotshield_detach(var0) {
   self.hasriotshield = riotshield_hasweapon();
 }
 
-function riotshield_move(var0) {
-  var1 = undefined;
-  var2 = undefined;
-  var3 = undefined;
+function riotshield_move(var_0) {
+  var_1 = undefined;
+  var_2 = undefined;
+  var_3 = undefined;
 
-  if(var0) {
-    var3 = self.riotshieldmodel;
-    var1 = "j_shield_ri";
-    var2 = "tag_shield_back";
+  if(var_0) {
+    var_3 = self.riotshieldmodel;
+    var_1 = "j_shield_ri";
+    var_2 = "tag_shield_back";
   } else {
-    var3 = self.riotshieldmodelstowed;
-    var1 = "tag_shield_back";
-    var2 = "j_shield_ri";
+    var_3 = self.riotshieldmodelstowed;
+    var_1 = "tag_shield_back";
+    var_2 = "j_shield_ri";
   }
 
-  self moveshieldmodel(var3, var1, var2, var0);
+  self moveshieldmodel(var_3, var_1, var_2, var_0);
 
-  if(var0) {
-    self.riotshieldmodelstowed = var3;
+  if(var_0) {
+    self.riotshieldmodelstowed = var_3;
     self.riotshieldmodel = undefined;
     return;
   }
 
-  self.riotshieldmodel = var3;
+  self.riotshieldmodel = var_3;
   self.riotshieldmodelstowed = undefined;
 }
 
@@ -118,14 +118,14 @@ function riotshield_clear() {
 }
 
 function riotshield_getmodel() {
-  var0 = self getweaponslistprimaries();
+  var_0 = self getweaponslistprimaries();
 
-  foreach(var2 in var0) {
-    if(isriotshield(var2)) {
-      var3 = getweaponmodel(var2);
+  foreach(var_2 in var_0) {
+    if(isriotshield(var_2)) {
+      var_3 = getweaponmodel(var_2);
 
-      if(var3 != "") {
-        return var3;
+      if(var_3 != "") {
+        return var_3;
       }
     }
   }

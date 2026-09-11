@@ -4,9 +4,9 @@
 ***********************************************/
 
 function vehicle_treads() {
-  var0 = self.classname;
+  var_0 = self.classname;
 
-  if(!isDefined(level.vehicle.templates.surface_effects[var0])) {
+  if(!isDefined(level.vehicle.templates.surface_effects[var_0])) {
     return;
   }
 
@@ -32,68 +32,68 @@ function do_multiple_treads() {
   self endon("kill_treads_forever");
 
   for(;;) {
-    var0 = tread_wait();
+    var_0 = tread_wait();
 
-    if(var0 == -1) {
+    if(var_0 == -1) {
       wait 0.1;
       continue;
     }
 
-    tread(self, var0, "tag_wheel_back_left", "back_left", 0);
+    tread(self, var_0, "tag_wheel_back_left", "back_left", 0);
     wait 0.05;
-    tread(self, var0, "tag_wheel_back_right", "back_right", 0);
+    tread(self, var_0, "tag_wheel_back_right", "back_right", 0);
     wait 0.05;
   }
 }
 
 function tread_wait() {
-  var0 = self vehicle_getspeed();
+  var_0 = self vehicle_getspeed();
 
-  if(!var0) {
+  if(!var_0) {
     return -1;
   }
 
-  var0 *= 17.6;
-  var1 = 1 / var0;
-  var1 = clamp(var1 * 35, 0.1, 0.3);
+  var_0 *= 17.6;
+  var_1 = 1 / var_0;
+  var_1 = clamp(var_1 * 35, 0.1, 0.3);
 
   if(isDefined(self.treadfx_freq_scale)) {
-    var1 *= self.treadfx_freq_scale;
+    var_1 *= self.treadfx_freq_scale;
   }
 
-  wait var1;
-  return var1;
+  wait var_1;
+  return var_1;
 }
 
-function tread(var0, var1, var2, var3, var4, var5) {
-  var6 = get_treadfx(self, var3);
+function tread(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = get_treadfx(self, var_3);
 
-  if(!isDefined(var6)) {
+  if(!isDefined(var_6)) {
     return;
   }
 
-  var7 = var0 gettagangles(var2);
-  var8 = anglesToForward(var7);
-  var9 = self gettagorigin(var2);
+  var_7 = var_0 gettagangles(var_2);
+  var_8 = anglesToForward(var_7);
+  var_9 = self gettagorigin(var_2);
 
-  if(var4) {
-    var10 = self gettagorigin(var5);
-    var9 = (var9 + var10) / 2;
+  if(var_4) {
+    var_10 = self gettagorigin(var_5);
+    var_9 = (var_9 + var_10) / 2;
   }
 
-  playFX(var6, var9, anglestoup(var7), var8 * var1);
+  playFX(var_6, var_9, anglestoup(var_7), var_8 * var_1);
 }
 
-function get_treadfx(var0, var1) {
-  var2 = self getwheelsurface(var1);
+function get_treadfx(var_0, var_1) {
+  var_2 = self getwheelsurface(var_1);
 
-  if(!isDefined(var0.vehicletype)) {
-    var3 = -1;
-    return var3;
+  if(!isDefined(var_0.vehicletype)) {
+    var_3 = -1;
+    return var_3;
   }
 
-  var4 = var1.classname;
-  return scripts\common\vehicle_code::get_vehicle_effect(var4, var3);
+  var_4 = var_1.classname;
+  return scripts\common\vehicle_code::get_vehicle_effect(var_4, var_3);
 }
 
 function do_single_tread() {
@@ -101,13 +101,13 @@ function do_single_tread() {
   self endon("kill_treads_forever");
 
   for(;;) {
-    var0 = tread_wait();
+    var_0 = tread_wait();
 
-    if(var0 == -1) {
+    if(var_0 == -1) {
       wait 0.1;
       continue;
     }
 
-    tread(self, var0, "tag_wheel_back_left", "back_left", 1, "tag_wheel_back_right");
+    tread(self, var_0, "tag_wheel_back_left", "back_left", 1, "tag_wheel_back_right");
   }
 }

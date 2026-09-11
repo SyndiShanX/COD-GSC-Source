@@ -32,24 +32,24 @@ function cell_escape_start() {
 }
 
 function cell_escape_main() {
-  var0 = getEnt("bed_collision", "targetname");
-  var0 delete();
-  var1 = getEnt("check_allow_mantle_hud", "targetname");
-  var1 thread scripts\sp\maps\captive\captive_util::check_allow_mantle_hud();
+  var_0 = getEnt("bed_collision", "targetname");
+  var_0 delete();
+  var_1 = getEnt("check_allow_mantle_hud", "targetname");
+  var_1 thread scripts\sp\maps\captive\captive_util::check_allow_mantle_hud();
   scripts\engine\sp\objectives::objective_update("objective", "current", undefined, &"CAPTIVE/OBJ_ESCAPE_CELL_DESC", &"CAPTIVE/OBJ_ESCAPE_CELL");
   scripts\sp\maps\captive\captive_util::setup_noisemaker_pickups();
   scripts\sp\player\teenagefarah::set_to_combat_speed();
   thread check_pickup_noisemaker();
-  var2 = ["dx_vom_far_cell_escape_spoon_60", "dx_vom_far_cell_escape_spoon_70", "dx_vom_far_cell_escape_spoon_80"];
-  level.player thread scripts\sp\maps\captive\captive_util::nagtill_delayed(20, "left_cell", var2, 20, 1.3, 50);
+  var_2 = ["dx_vom_far_cell_escape_spoon_60", "dx_vom_far_cell_escape_spoon_70", "dx_vom_far_cell_escape_spoon_80"];
+  level.player thread scripts\sp\maps\captive\captive_util::nagtill_delayed(20, "left_cell", var_2, 20, 1.3, 50);
   thread spoon_check();
   scripts\sp\maps\captive\captive_util::init_low_vent_covers();
-  var3 = scripts\engine\utility::getStruct("stone_respawner", "targetname");
+  var_3 = scripts\engine\utility::getStruct("stone_respawner", "targetname");
   thread stone_respawner_check();
-  var4 = getEnt("cell_door_button", "targetname");
-  var4 setCanDamage(1);
-  var4.health = 1000000;
-  var4 thread scripts\sp\maps\captive\captive_util::cell_door_button_check();
+  var_4 = getEnt("cell_door_button", "targetname");
+  var_4 setCanDamage(1);
+  var_4.health = 1000000;
+  var_4 thread scripts\sp\maps\captive\captive_util::cell_door_button_check();
   scripts\engine\utility::flag_wait("got_spoon");
   scripts\sp\player\teenagefarah::teenage_farah_stealth_setup();
   level.player.currentpronespeedscale = 0;
@@ -73,7 +73,7 @@ function cell_escape_main() {
   }
 
   level thread scripts\sp\maps\captive\captive_vo::vo_ce_pickedup_first_rock();
-  scripts\sp\maps\captive\captive_lighting::button_dof(var4);
+  scripts\sp\maps\captive\captive_lighting::button_dof(var_4);
   scripts\engine\utility::flag_wait("hit_celldoor_button");
 
   if(scripts\engine\sp\utility::in_realism_mode()) {
@@ -83,13 +83,13 @@ function cell_escape_main() {
   scripts\engine\utility::flag_set("aimed_noisemaker");
   scripts\engine\utility::flag_set("threw_noisemaker");
   level notify("stop_stone_respawner");
-  var3 scripts\sp\player\cursor_hint::remove_cursor_hint();
+  var_3 scripts\sp\player\cursor_hint::remove_cursor_hint();
   level.disablenoisemakers = 1;
   scripts\sp\equipment\noisemaker::noisemakersdisablecursors();
   scripts\sp\maps\captive\captive_lighting::dof_off();
   level thread scripts\sp\maps\captive\captive_vo::vo_ce_hit_button();
-  var5 = level.player getcurrentoffhand("secondaryoffhand");
-  level.player scripts\engine\sp\utility::take_offhand(var5);
+  var_5 = level.player getcurrentoffhand("secondaryoffhand");
+  level.player scripts\engine\sp\utility::take_offhand(var_5);
   thread scripts\sp\analytics::analytics_kleenex_update("Open 1st grate to hit button");
   thread scripts\engine\sp\utility::autosave_by_name("cellblock_escape");
 }
@@ -99,24 +99,24 @@ function cell_escape_catchup() {
     return;
   }
 
-  var0 = getEnt("bed_collision", "targetname");
-  var0 delete();
+  var_0 = getEnt("bed_collision", "targetname");
+  var_0 delete();
   scripts\engine\utility::flag_set("got_spoon");
   scripts\engine\utility::flag_set("hit_celldoor_button");
   scripts\engine\utility::flag_set("threw_noisemaker");
   scripts\engine\utility::flag_set("aimed_noisemaker");
   scripts\sp\maps\captive\captive_util::cell_open_doors(1);
   scripts\sp\maps\captive\captive_util::init_low_vent_covers();
-  var1 = getEntArray("first_low_vent", "script_noteworthy");
+  var_1 = getEntArray("first_low_vent", "script_noteworthy");
 
-  foreach(var3 in var1) {
-    var3 delete();
+  foreach(var_3 in var_1) {
+    var_3 delete();
   }
 
-  var5 = getEnt("cell_door_button", "targetname");
-  var5 setCanDamage(1);
-  var5.health = 1000000;
-  var5 thread scripts\sp\maps\captive\captive_util::cell_door_button_check();
+  var_5 = getEnt("cell_door_button", "targetname");
+  var_5 setCanDamage(1);
+  var_5.health = 1000000;
+  var_5 thread scripts\sp\maps\captive\captive_util::cell_door_button_check();
   scripts\engine\sp\objectives::objective_update("objective", "current", undefined, &"CAPTIVE/OBJ_ESCAPE_CELL_DESC", &"CAPTIVE/OBJ_ESCAPE_CELL");
 }
 
@@ -124,8 +124,8 @@ function spoon_check() {
   scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"CAPTIVE/CURSOR_PICKUP", 360, 128, 64, 1);
   self waittill("trigger");
 
-  foreach(var1 in level.lowventcovers) {
-    var1.frontinteract notify("clear_interact");
+  foreach(var_1 in level.lowventcovers) {
+    var_1.frontinteract notify("clear_interact");
   }
 
   self delete();
@@ -158,14 +158,14 @@ function stone_respawner_check() {
     self waittill("trigger");
     scripts\sp\equipment\noisemaker::noisemakersdisablecursors();
     level thread scripts\sp\maps\captive\captive_vo::vo_ce_dig_in_respawner();
-    var0 = scripts\engine\sp\utility::spawn_anim_model("rock", level.breakanimref.origin, level.breakanimref.angles);
+    var_0 = scripts\engine\sp\utility::spawn_anim_model("rock", level.breakanimref.origin, level.breakanimref.angles);
     level.breakanimref scripts\sp\player_rig::link_player_to_rig("rock_pile_dig", "crouch", undefined, undefined, undefined, undefined, undefined, undefined, undefined, 1);
     level.player_rig attach("weapon_wm_me_spoonshank", "tag_accessory_right");
-    level.breakanimref scripts\common\anim::anim_single([level.player_rig, var0], "rock_pile_dig");
+    level.breakanimref scripts\common\anim::anim_single([level.player_rig, var_0], "rock_pile_dig");
     level.player_rig detach("weapon_wm_me_spoonshank", "tag_accessory_right");
     scripts\sp\player_rig::unlink_player_from_rig(0, "stand");
-    var0 delete();
-    var1 = level.player getammocount("noisemaker");
+    var_0 delete();
+    var_1 = level.player getammocount("noisemaker");
 
     if(isDefined(level.spawnednoisemakerpickup)) {
       level.spawnednoisemakerpickup delete();
@@ -193,9 +193,9 @@ function stone_respawner_cursor_check() {
       wait 0.5;
     }
 
-    var0 = level.player getammocount("noisemaker");
+    var_0 = level.player getammocount("noisemaker");
 
-    if(var0 == 0) {
+    if(var_0 == 0) {
       scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"CAPTIVE/CURSOR_DIG", 360, 128);
     }
   }
@@ -206,10 +206,10 @@ function stone_respawn_pool_check() {
   level endon("stop_stone_respawner");
 
   for(;;) {
-    level.player waittill("noisemaker_settled", var0);
+    level.player waittill("noisemaker_settled", var_0);
 
-    if(var0.model == "captive_thrown_rock") {
-      level.spawnednoisemakerpickup = var0;
+    if(var_0.model == "captive_thrown_rock") {
+      level.spawnednoisemakerpickup = var_0;
     }
   }
 }
@@ -250,11 +250,11 @@ function check_pickup_noisemaker() {
 function check_aiming_noisemaker() {
   level endon("hit_celldoor_button");
   level.player waittill("secondary_offhand_pressed");
-  var0 = level.player getcurrentoffhand("secondaryoffhand");
+  var_0 = level.player getcurrentoffhand("secondaryoffhand");
   scripts\engine\utility::flag_clear("threw_noisemaker");
 
-  if(isDefined(var0)) {
-    if(var0.basename == "noisemaker") {
+  if(isDefined(var_0)) {
+    if(var_0.basename == "noisemaker") {
       scripts\engine\utility::flag_set("aimed_noisemaker");
       return;
     }

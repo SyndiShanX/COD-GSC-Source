@@ -3,16 +3,16 @@
  * Script: scripts\cp\utility\join_team_aggregator.gsc
 *******************************************************/
 
-function onplayerjointeam(var0) {
-  foreach(var2 in level.onjointeamcallbacks) {
-    self[[var2]](var0);
+function onplayerjointeam(var_0) {
+  foreach(var_2 in level.onjointeamcallbacks) {
+    self[[var_2]](var_0);
   }
 }
 
-function registeronplayerjointeamcallback(var0) {
+function registeronplayerjointeamcallback(var_0) {
   if(!isDefined(level.onjointeamcallbacks)) {
     level.onjointeamcallbacks = [];
   }
 
-  level.onjointeamcallbacks[level.onjointeamcallbacks.size] = var0;
+  level.onjointeamcallbacks[level.onjointeamcallbacks.size] = var_0;
 }

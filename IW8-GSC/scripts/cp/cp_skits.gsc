@@ -33,81 +33,81 @@ function skit_fx() {
   level.g_effect["cellphone_glow"] = loadfx("vfx/iw7/levels/piccadilly/vfx_pic_phone_light_01.vfx");
 }
 
-function add_spawn_skit(var0, var1) {
-  var2 = spawnStruct();
-  var2.skit_name = var0;
-  var2.skit_func = var1;
-  level.spawn_skits[var0] = var2;
+function add_spawn_skit(var_0, var_1) {
+  var_2 = spawnStruct();
+  var_2.skit_name = var_0;
+  var_2.skit_func = var_1;
+  level.spawn_skits[var_0] = var_2;
 }
 
-function hostage_rescue_fight(var0, var1, var2, var3) {
-  var4 = scripts\mp\mp_agent::spawnnewagentaitype(var2, var0.origin, var0.angles);
-  var5 = scripts\mp\mp_agent::spawnnewagentaitype(var3, var1.origin, var1.angles);
-  setup_fight_guy(var4);
-  setup_fight_guy(var5);
-  var6 = var4 scripts\asm\asm::asm_lookupanimfromalias("animscripted", "fight1_attacker");
-  var7 = var4 scripts\asm\asm::asm_getxanim("animscripted", var6);
-  var8 = var5 scripts\asm\asm::asm_lookupanimfromalias("animscripted", "fight1_victim");
-  var9 = var5 scripts\asm\asm::asm_getxanim("animscripted", var8);
-  var4 aisetanim("animscripted", var6);
-  var5 aisetanim("animscripted", var8);
-  var5.deathstate = "animscripted";
-  var5.deathalias = "fight1_victim_death";
-  var10 = 30;
-  thread waitfor_death(var4, var10, var5, &death_fight1);
-  thread waitfor_save(var5, var4);
-  var5 scripts\engine\utility::ref_143c0(30, "saved", "death");
+function hostage_rescue_fight(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\mp\mp_agent::spawnnewagentaitype(var_2, var_0.origin, var_0.angles);
+  var_5 = scripts\mp\mp_agent::spawnnewagentaitype(var_3, var_1.origin, var_1.angles);
+  setup_fight_guy(var_4);
+  setup_fight_guy(var_5);
+  var_6 = var_4 scripts\asm\asm::asm_lookupanimfromalias("animscripted", "fight1_attacker");
+  var_7 = var_4 scripts\asm\asm::asm_getxanim("animscripted", var_6);
+  var_8 = var_5 scripts\asm\asm::asm_lookupanimfromalias("animscripted", "fight1_victim");
+  var_9 = var_5 scripts\asm\asm::asm_getxanim("animscripted", var_8);
+  var_4 aisetanim("animscripted", var_6);
+  var_5 aisetanim("animscripted", var_8);
+  var_5.deathstate = "animscripted";
+  var_5.deathalias = "fight1_victim_death";
+  var_10 = 30;
+  thread waitfor_death(var_4, var_10, var_5, &death_fight1);
+  thread waitfor_save(var_5, var_4);
+  var_5 scripts\engine\utility::ref_143c0(30, "saved", "death");
 }
 
-function hostage_rescue_meatshield(var0, var1, var2, var3, var4, var5, var6) {
-  if(!isDefined(var4)) {
-    var4 = scripts\mp\mp_agent::spawnnewagentaitype(var2, var0.origin, var0.angles);
+function hostage_rescue_meatshield(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if(!isDefined(var_4)) {
+    var_4 = scripts\mp\mp_agent::spawnnewagentaitype(var_2, var_0.origin, var_0.angles);
   }
 
-  if(!isDefined(var5)) {
-    var5 = scripts\mp\mp_agent::spawnnewagentaitype(var3, var1.origin, var1.angles);
+  if(!isDefined(var_5)) {
+    var_5 = scripts\mp\mp_agent::spawnnewagentaitype(var_3, var_1.origin, var_1.angles);
   }
 
-  setup_fight_guy(var4);
-  setup_fight_guy(var5);
-  var7 = scripts\cp\cp_weapon::buildweapon("iw8_pi_golf21_mp", ["none", "none", "none", "none", "none", "none"], "none", "none");
-  var4 giveweapon(var7);
-  var4.og_weapon = var4.weapon;
-  var4 setspawnweapon(var7);
-  var4 scripts\common\utility::initweapon(var7);
-  var4 scripts\anim\shared::placeweaponon(var7, "right");
-  var4 scripts\anim\shared::placeweaponon(var4.weapon, "back");
-  var4.sidearm = var7;
-  var4.deathstate = "animscripted";
-  var4.deathalias = "fight3_attacker_death";
-  var8 = var4 scripts\asm\asm::asm_lookupanimfromalias("animscripted", "fight3_attacker");
-  var9 = var4 scripts\asm\asm::asm_getxanim("animscripted", var8);
-  var10 = var5 scripts\asm\asm::asm_lookupanimfromalias("animscripted", "fight3_victim");
-  var11 = var5 scripts\asm\asm::asm_getxanim("animscripted", var10);
-  var4 aisetanim("animscripted", var8);
-  var5 aisetanim("animscripted", var10);
-  var12 = getanimlength(var9);
-  var13 = var12 * 5;
+  setup_fight_guy(var_4);
+  setup_fight_guy(var_5);
+  var_7 = scripts\cp\cp_weapon::buildweapon("iw8_pi_golf21_mp", ["none", "none", "none", "none", "none", "none"], "none", "none");
+  var_4 giveweapon(var_7);
+  var_4.og_weapon = var_4.weapon;
+  var_4 setspawnweapon(var_7);
+  var_4 scripts\common\utility::initweapon(var_7);
+  var_4 scripts\anim\shared::placeweaponon(var_7, "right");
+  var_4 scripts\anim\shared::placeweaponon(var_4.weapon, "back");
+  var_4.sidearm = var_7;
+  var_4.deathstate = "animscripted";
+  var_4.deathalias = "fight3_attacker_death";
+  var_8 = var_4 scripts\asm\asm::asm_lookupanimfromalias("animscripted", "fight3_attacker");
+  var_9 = var_4 scripts\asm\asm::asm_getxanim("animscripted", var_8);
+  var_10 = var_5 scripts\asm\asm::asm_lookupanimfromalias("animscripted", "fight3_victim");
+  var_11 = var_5 scripts\asm\asm::asm_getxanim("animscripted", var_10);
+  var_4 aisetanim("animscripted", var_8);
+  var_5 aisetanim("animscripted", var_10);
+  var_12 = getanimlength(var_9);
+  var_13 = var_12 * 5;
 
-  if(isDefined(var6)) {
-    var13 = var6;
+  if(isDefined(var_6)) {
+    var_13 = var_6;
   }
 
-  thread waitfor_death(var4, var13, var5, &death_fight2);
-  thread waitfor_save(var5, var4);
-  var14 = gettime() + var12 * 5 * 1000;
+  thread waitfor_death(var_4, var_13, var_5, &death_fight2);
+  thread waitfor_save(var_5, var_4);
+  var_14 = gettime() + var_12 * 5 * 1000;
 
-  if(isDefined(var6)) {
-    var14 = gettime() + var6 * 1000;
+  if(isDefined(var_6)) {
+    var_14 = gettime() + var_6 * 1000;
   }
 
-  thread fight_idle(level, var14, var5, var4, var12, var8);
+  thread fight_idle(level, var_14, var_5, var_4, var_12, var_8);
 }
 
 function victim_saved_shield() {
-  var0 = scripts\asm\asm::asm_lookupanimfromalias("animscripted", "fight3_victim_saved");
-  var1 = scripts\asm\asm::asm_getxanim("animscripted", var0);
-  self aisetanim("animscripted", var0);
+  var_0 = scripts\asm\asm::asm_lookupanimfromalias("animscripted", "fight3_victim_saved");
+  var_1 = scripts\asm\asm::asm_getxanim("animscripted", var_0);
+  self aisetanim("animscripted", var_0);
   wait 2;
   reset_guy(self);
 
@@ -118,24 +118,24 @@ function victim_saved_shield() {
   }
 }
 
-function fight_idle(var0, var1, var2, var3, var4, var5) {
-  var1 endon("death");
-  var2 endon("death");
+function fight_idle(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_1 endon("death");
+  var_2 endon("death");
 
-  if(var0 <= 0) {
+  if(var_0 <= 0) {
     for(;;) {
-      wait var3;
-      var2 aisetanim("animscripted", var4);
-      var1 aisetanim("animscripted", var5);
+      wait var_3;
+      var_2 aisetanim("animscripted", var_4);
+      var_1 aisetanim("animscripted", var_5);
     }
 
     return;
   }
 
-  while(gettime() < var0) {
-    wait var3;
-    var2 aisetanim("animscripted", var4);
-    var1 aisetanim("animscripted", var5);
+  while(gettime() < var_0) {
+    wait var_3;
+    var_2 aisetanim("animscripted", var_4);
+    var_1 aisetanim("animscripted", var_5);
   }
 }
 
@@ -152,13 +152,13 @@ function setup_anim_guy() {
   self.playing_skit = 1;
 }
 
-function death_fight2(var0) {
+function death_fight2(var_0) {
   self endon("death");
-  var0.deathstate = "animscripted";
-  var0.deathalias = "fight3_victim_death";
+  var_0.deathstate = "animscripted";
+  var_0.deathalias = "fight3_victim_death";
   magicbullet(self.sidearm, self gettagorigin("tag_flash"), anglesToForward(self gettagangles("tag_flash")) * 1000);
-  self shoot(10, var0, 1, 1);
-  var0 dodamage(var0.health + 100, var0.origin);
+  self shoot(10, var_0, 1, 1);
+  var_0 dodamage(var_0.health + 100, var_0.origin);
   scripts\asm\shared\mp\utility::burndowntime("fight3_attacker_win");
   self giveweapon(self.og_weapon);
   self setspawnweapon(self.og_weapon);
@@ -167,10 +167,10 @@ function death_fight2(var0) {
   reset_guy(self);
 }
 
-function death_fight1(var0) {
-  var0.deathstate = "animscripted";
-  var0.deathalias = "fight1_victim_death";
-  var0 dodamage(var0.health + 100, var0.origin);
+function death_fight1(var_0) {
+  var_0.deathstate = "animscripted";
+  var_0.deathalias = "fight1_victim_death";
+  var_0 dodamage(var_0.health + 100, var_0.origin);
   reset_guy(self);
 }
 
@@ -191,45 +191,45 @@ function victim_killed_fight2() {
   reset_guy(self);
 }
 
-function waitfor_death(var0, var1, var2, var3) {
+function waitfor_death(var_0, var_1, var_2, var_3) {
   self endon("scene_interrupt");
-  var4 = scripts\engine\utility::waittill_any_ents_or_timeout_return(var0, self, "death", var1, "death");
+  var_4 = scripts\engine\utility::waittill_any_ents_or_timeout_return(var_0, self, "death", var_1, "death");
 
-  if(isDefined(var4) && var4 == "timeout") {
-    self thread[[var2]](var1);
+  if(isDefined(var_4) && var_4 == "timeout") {
+    self thread[[var_2]](var_1);
     return;
   }
 
-  if(isalive(var1)) {
-    var1 notify("saved");
+  if(isalive(var_1)) {
+    var_1 notify("saved");
   }
 
   if(isalive(self)) {
-    self thread[[var3]]();
+    self thread[[var_3]]();
     return;
   }
 }
 
-function waitfor_save(var0, var1) {
+function waitfor_save(var_0, var_1) {
   self endon("death");
   self waittill("saved");
 
-  if(isDefined(var1)) {
-    self[[var1]]();
+  if(isDefined(var_1)) {
+    self[[var_1]]();
     return;
   }
 }
 
-function reset_guy(var0) {
-  var0 allowedstances("prone", "stand", "crouch");
-  var0 scripts\asm\shared\mp\utility::bunkercounteruav();
-  var0 setlookatentity();
-  var0.headlook_enabled = 1;
-  var0.disableautolookat = 0;
-  var0.deathstate = undefined;
-  var0.deathalias = undefined;
-  var0.ignoreall = 0;
-  var0.playing_skit = undefined;
+function reset_guy(var_0) {
+  var_0 allowedstances("prone", "stand", "crouch");
+  var_0 scripts\asm\shared\mp\utility::bunkercounteruav();
+  var_0 setlookatentity();
+  var_0.headlook_enabled = 1;
+  var_0.disableautolookat = 0;
+  var_0.deathstate = undefined;
+  var_0.deathalias = undefined;
+  var_0.ignoreall = 0;
+  var_0.playing_skit = undefined;
 
   if(isDefined(self.anchor)) {
     self.anchor delete();
@@ -237,7 +237,7 @@ function reset_guy(var0) {
   }
 }
 
-function stealth_sitting_laptop(var0) {
+function stealth_sitting_laptop(var_0) {
   if(scripts\cp\coop_stealth::ref_132d7()) {
     self._blackboard.idlenode = spawnStruct();
     self._blackboard.idlenode.script_idle = "sit_laptop";
@@ -257,10 +257,10 @@ function stealth_sitting_laptop(var0) {
   }
 
   if(!have_props_spawned()) {
-    var1 = spawn_chair(var0);
-    thread stealth_sit_react(var1, "sitting_laptop_react", "reb_stl_idle_sit_laptop_react_chair");
-    thread stealth_sit_death(var1, "reb_stl_idle_sit_laptop_death02_2_chair");
-    var2 = spawn_table();
+    var_1 = spawn_chair(var_0);
+    thread stealth_sit_react(var_1, "sitting_laptop_react", "reb_stl_idle_sit_laptop_react_chair");
+    thread stealth_sit_death(var_1, "reb_stl_idle_sit_laptop_death02_2_chair");
+    var_2 = spawn_table();
     set_props_spawned();
   }
 
@@ -274,7 +274,7 @@ function stealth_sitting_laptop(var0) {
   thread stealth_sit_idle("sitting_laptop_idle");
 }
 
-function stealth_sitting_pistol(var0) {
+function stealth_sitting_pistol(var_0) {
   if(scripts\cp\coop_stealth::ref_132d7()) {
     self._blackboard.idlenode = spawnStruct();
     self._blackboard.idlenode.script_idle = "sit_pistol_clean";
@@ -294,10 +294,10 @@ function stealth_sitting_pistol(var0) {
   }
 
   if(!have_props_spawned()) {
-    var1 = spawn_chair(var0);
-    thread stealth_sit_react(var1, "sitting_pistol_react", "reb_stl_idle_sit_gunmaintenance_react_chair");
-    thread stealth_sit_death(var1, "reb_stl_idle_sit_gunmaintenance_death01_6_chair");
-    var2 = spawn_table();
+    var_1 = spawn_chair(var_0);
+    thread stealth_sit_react(var_1, "sitting_pistol_react", "reb_stl_idle_sit_gunmaintenance_react_chair");
+    thread stealth_sit_death(var_1, "reb_stl_idle_sit_gunmaintenance_death01_6_chair");
+    var_2 = spawn_table();
     set_props_spawned();
   }
 
@@ -315,19 +315,19 @@ function crouching_phone() {
   thread idle_crouching_phone("sitting_cellphone_idle");
 }
 
-function idle_crouching_phone(var0) {
+function idle_crouching_phone(var_0) {
   self endon("death");
   self endon("alerted");
   thread ai_notetrack_loop("smoking");
 
   for(;;) {
     smoking_idle_start("smoking_idle_start");
-    scripts\asm\shared\mp\utility::burndowntime(var0);
+    scripts\asm\shared\mp\utility::burndowntime(var_0);
     smoking_idle_end("smoking_idle_end");
   }
 }
 
-function stealth_sitting_cell_no_props(var0) {
+function stealth_sitting_cell_no_props(var_0) {
   if(scripts\cp\coop_stealth::ref_132d7()) {
     self._blackboard.idlenode = spawnStruct();
     self._blackboard.idlenode.script_idle = "sit_cellphone";
@@ -343,9 +343,9 @@ function stealth_sitting_cell_no_props(var0) {
   }
 
   if(!have_props_spawned()) {
-    var1 = spawn_chair(var0);
-    thread stealth_sit_react(var1, "sitting_cellphone_react", "reb_stl_idle_sit_phone01_react_chair");
-    thread stealth_sit_death(var1, "reb_stl_idle_sit_phone01_death02_4_chair");
+    var_1 = spawn_chair(var_0);
+    thread stealth_sit_react(var_1, "sitting_cellphone_react", "reb_stl_idle_sit_phone01_react_chair");
+    thread stealth_sit_death(var_1, "reb_stl_idle_sit_phone01_death02_4_chair");
     set_props_spawned();
   }
 
@@ -358,7 +358,7 @@ function stealth_sitting_cell_no_props(var0) {
   thread stealth_sit_idle("sitting_cellphone_idle");
 }
 
-function stealth_sitting_cell(var0) {
+function stealth_sitting_cell(var_0) {
   if(scripts\cp\coop_stealth::ref_132d7()) {
     self._blackboard.idlenode = spawnStruct();
     self._blackboard.idlenode.script_idle = "sit_cellphone";
@@ -378,10 +378,10 @@ function stealth_sitting_cell(var0) {
   }
 
   if(!have_props_spawned()) {
-    var1 = spawn_chair(var0);
-    thread stealth_sit_react(var1, "sitting_cellphone_react", "reb_stl_idle_sit_phone01_react_chair");
-    thread stealth_sit_death(var1, "reb_stl_idle_sit_phone01_death02_4_chair");
-    var2 = spawn_table();
+    var_1 = spawn_chair(var_0);
+    thread stealth_sit_react(var_1, "sitting_cellphone_react", "reb_stl_idle_sit_phone01_react_chair");
+    thread stealth_sit_death(var_1, "reb_stl_idle_sit_phone01_death02_4_chair");
+    var_2 = spawn_table();
     set_props_spawned();
   }
 
@@ -394,7 +394,7 @@ function stealth_sitting_cell(var0) {
   thread stealth_sit_idle("sitting_cellphone_idle");
 }
 
-function stealth_sitting_sleep(var0) {
+function stealth_sitting_sleep(var_0) {
   if(scripts\cp\coop_stealth::ref_132d7()) {
     self._blackboard.idlenode = spawnStruct();
     self._blackboard.idlenode.script_idle = "sit_sleeping";
@@ -410,9 +410,9 @@ function stealth_sitting_sleep(var0) {
   }
 
   if(!have_props_spawned()) {
-    var1 = spawn_chair(var0);
-    thread stealth_sit_react(var1, "sitting_sleeping_react", "reb_stl_idle_sit_sleeping_react_chair");
-    thread stealth_sit_death(var1, "reb_stl_idle_sit_sleeping_death01_chair");
+    var_1 = spawn_chair(var_0);
+    thread stealth_sit_react(var_1, "sitting_sleeping_react", "reb_stl_idle_sit_sleeping_react_chair");
+    thread stealth_sit_death(var_1, "reb_stl_idle_sit_sleeping_death01_chair");
     set_props_spawned();
   }
 
@@ -423,31 +423,31 @@ function stealth_sitting_sleep(var0) {
 }
 
 function spawn_table() {
-  var0 = spawn("script_model", self.origin + anglesToForward(self.angles) * 32);
-  var0.angles = self.angles + (0, 90, 0);
-  var0 setModel("furniture_table_folding_01_open");
-  var0 disconnectPaths();
+  var_0 = spawn("script_model", self.origin + anglesToForward(self.angles) * 32);
+  var_0.angles = self.angles + (0, 90, 0);
+  var_0 setModel("furniture_table_folding_01_open");
+  var_0 disconnectPaths();
 }
 
-function spawn_chair(var0) {
-  if(!isDefined(var0)) {
-    var0 = spawn("script_model", self.origin + anglesToForward(self.angles) * -8);
-    var0.angles = self.angles;
-    var0 setModel("cp_disco_folding_chair_lod0");
-    var0 disconnectPaths();
+function spawn_chair(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = spawn("script_model", self.origin + anglesToForward(self.angles) * -8);
+    var_0.angles = self.angles;
+    var_0 setModel("cp_disco_folding_chair_lod0");
+    var_0 disconnectPaths();
   }
 
-  return var0;
+  return var_0;
 }
 
-function stealth_sit_idle(var0) {
+function stealth_sit_idle(var_0) {
   self endon("death");
   self endon("alerted");
   self endon("enter_combat");
-  scripts\asm\shared\mp\utility::bunkerinteriorkeypads(var0);
+  scripts\asm\shared\mp\utility::bunkerinteriorkeypads(var_0);
 }
 
-function stealth_sit_react(var0, var1, var2) {
+function stealth_sit_react(var_0, var_1, var_2) {
   self endon("death");
   self waittill("alerted");
   scripts\cp\cp_modular_spawning::set_kill_off_time(20);
@@ -460,32 +460,32 @@ function stealth_sit_react(var0, var1, var2) {
     self.idle_prop = undefined;
   }
 
-  var0 scriptmodelplayanimdeltamotion(var2);
-  scripts\asm\shared\mp\utility::burndowntime(var1);
-  var0 scriptmodelclearanim();
-  var0 physicslaunchserver(var0.origin, (0, 0, 15));
+  var_0 scriptmodelplayanimdeltamotion(var_2);
+  scripts\asm\shared\mp\utility::burndowntime(var_1);
+  var_0 scriptmodelclearanim();
+  var_0 physicslaunchserver(var_0.origin, (0, 0, 15));
   reset_guy(self);
 }
 
-function stealth_sit_death(var0, var1) {
+function stealth_sit_death(var_0, var_1) {
   self endon("alerted");
-  var2 = undefined;
+  var_2 = undefined;
 
   if(isDefined(self.idle_prop)) {
-    var2 = self.idle_prop;
+    var_2 = self.idle_prop;
   }
 
   self waittill("death");
 
-  if(isDefined(var2)) {
-    var2 unlink();
-    var2 physicslaunchserver(var2.origin, (0, 0, -10));
+  if(isDefined(var_2)) {
+    var_2 unlink();
+    var_2 physicslaunchserver(var_2.origin, (0, 0, -10));
   }
 
-  var0 scriptmodelplayanimdeltamotion(var1);
+  var_0 scriptmodelplayanimdeltamotion(var_1);
   wait 1;
-  var0 scriptmodelclearanim();
-  var0 physicslaunchserver(var0.origin, (0, 0, 15));
+  var_0 scriptmodelclearanim();
+  var_0 physicslaunchserver(var_0.origin, (0, 0, 15));
 }
 
 function smoking() {
@@ -507,7 +507,7 @@ function smoking() {
   thread smoking_death("smoking_death");
 }
 
-function smoking_idle(var0) {
+function smoking_idle(var_0) {
   level endon("weapons_free");
   self endon("death");
   self endon("alerted");
@@ -515,7 +515,7 @@ function smoking_idle(var0) {
 
   for(;;) {
     smoking_idle_start("smoking_idle_start");
-    scripts\asm\shared\mp\utility::burndowntime(var0);
+    scripts\asm\shared\mp\utility::burndowntime(var_0);
     smoking_idle_end("smoking_idle_end");
     ai_smoking_cleanup();
 
@@ -528,19 +528,19 @@ function smoking_idle(var0) {
   }
 }
 
-function smoking_idle_start(var0) {
+function smoking_idle_start(var_0) {
   self endon("death");
   self endon("alerted");
-  scripts\asm\shared\mp\utility::burndowntime(var0);
+  scripts\asm\shared\mp\utility::burndowntime(var_0);
 }
 
-function smoking_idle_end(var0) {
+function smoking_idle_end(var_0) {
   self endon("death");
   self endon("alerted");
-  scripts\asm\shared\mp\utility::burndowntime(var0);
+  scripts\asm\shared\mp\utility::burndowntime(var_0);
 }
 
-function smoking_react(var0) {
+function smoking_react(var_0) {
   self endon("death");
   self endon("cancel_loop");
   level scripts\cp\utility::add_wait(&scripts\cp\utility::waittill_msg, "weapons_free");
@@ -557,51 +557,51 @@ function smoking_react(var0) {
     self.idle_prop = undefined;
   }
 
-  scripts\asm\shared\mp\utility::burndowntime(var0);
+  scripts\asm\shared\mp\utility::burndowntime(var_0);
   reset_guy(self);
 }
 
-function smoking_death(var0) {
+function smoking_death(var_0) {
   self endon("alerted");
   self endon("cancel_loop");
   self waittill("death");
   ai_smoking_cleanup();
 }
 
-function ai_notetrack_loop(var0) {
+function ai_notetrack_loop(var_0) {
   self endon("death");
   self notify("ai_notetrack_Loop");
   self endon("ai_notetrack_Loop");
   self endon("alerted");
 
   for(;;) {
-    self waittill("animscripted", var1);
+    self waittill("animscripted", var_1);
 
-    if(!isDefined(var1)) {
-      var1 = ["undefined"];
+    if(!isDefined(var_1)) {
+      var_1 = ["undefined"];
     }
 
-    if(!isarray(var1)) {
-      var1 = [var1];
+    if(!isarray(var_1)) {
+      var_1 = [var_1];
     }
 
-    var2 = undefined;
+    var_2 = undefined;
 
-    foreach(var4 in var1) {
-      if(var0 == "smoking") {
-        ai_notehandler_smoking(var4);
+    foreach(var_4 in var_1) {
+      if(var_0 == "smoking") {
+        ai_notehandler_smoking(var_4);
         continue;
       }
 
-      if(var0 == "standing_cellphone") {
-        ai_notehandler_cellphone(var4);
+      if(var_0 == "standing_cellphone") {
+        ai_notehandler_cellphone(var_4);
       }
     }
   }
 }
 
-function ai_notehandler_smoking(var0) {
-  switch (var0) {
+function ai_notehandler_smoking(var_0) {
+  switch (var_0) {
     case "attach":
       playFXOnTag(level.g_effect["cigarette_unlit"], self, "tag_accessory_right");
       break;
@@ -628,8 +628,8 @@ function ai_smoking_blowsmoke() {
 
   for(;;) {
     playFX(level.g_effect["cigarette_smoke"], self getEye() - (0, 0, 2), anglesToForward(self gettagangles("tag_eye")));
-    var0 = randomintrange(5, 8);
-    wait var0;
+    var_0 = randomintrange(5, 8);
+    wait var_0;
   }
 }
 
@@ -643,7 +643,7 @@ function ai_smoking_cleanup() {
   }
 }
 
-function standing_cellphone(var0) {
+function standing_cellphone(var_0) {
   if(scripts\cp\coop_stealth::ref_132d7()) {
     self._blackboard.idlenode = spawnStruct();
     self._blackboard.idlenode.script_idle = "cellphone";
@@ -652,49 +652,49 @@ function standing_cellphone(var0) {
     return;
   }
 
-  if(!isDefined(var0)) {
-    var0 = 1;
+  if(!isDefined(var_0)) {
+    var_0 = 1;
   }
 
   setup_anim_guy();
   self.deathstate = "animscripted";
   self.deathalias = "stand_cellphone_death";
   thread ai_notetrack_loop("standing_cellphone");
-  thread standing_cellphone_anim_seq(var0);
+  thread standing_cellphone_anim_seq(var_0);
 }
 
-function standing_cellphone_anim_seq(var0) {
+function standing_cellphone_anim_seq(var_0) {
   self endon("death");
   self endon("alerted");
   thread cellphone_react("smoking_react");
   standing_cellphone_anim("stand_cellphone_intro");
 
-  if(var0 > 0) {
-    standing_cellphone_loop("stand_cellphone_loop", var0);
+  if(var_0 > 0) {
+    standing_cellphone_loop("stand_cellphone_loop", var_0);
   }
 
   standing_cellphone_anim("stand_cellphone_exit");
 }
 
-function standing_cellphone_anim(var0) {
+function standing_cellphone_anim(var_0) {
   self endon("death");
   self endon("alerted");
-  scripts\asm\shared\mp\utility::burndowntime(var0);
+  scripts\asm\shared\mp\utility::burndowntime(var_0);
 }
 
-function standing_cellphone_loop(var0, var1) {
+function standing_cellphone_loop(var_0, var_1) {
   level endon("weapons_free");
   self endon("death");
   self endon("alerted");
-  scripts\asm\shared\mp\utility::bunkeropened(var0, var1);
+  scripts\asm\shared\mp\utility::bunkeropened(var_0, var_1);
   reset_guy(self);
 }
 
-function ai_notehandler_cellphone(var0) {
+function ai_notehandler_cellphone(var_0) {
   self endon("death");
   self endon("alerted");
 
-  switch (var0) {
+  switch (var_0) {
     case "attach":
       self.idle_prop = scripts\common\anim::anim_link_tag_model("offhand_wm_smartphone", "tag_accessory_right");
       break;
@@ -708,7 +708,7 @@ function ai_notehandler_cellphone(var0) {
   }
 }
 
-function cellphone_react(var0) {
+function cellphone_react(var_0) {
   self endon("death");
   level scripts\cp\utility::add_wait(&scripts\cp\utility::waittill_msg, "weapons_free");
   scripts\cp\utility::add_wait(&scripts\engine\utility::ref_143a5, "alerted", "checking_friendly_corpse");
@@ -724,7 +724,7 @@ function cellphone_react(var0) {
     self.idle_prop = undefined;
   }
 
-  scripts\asm\shared\mp\utility::burndowntime(var0);
+  scripts\asm\shared\mp\utility::burndowntime(var_0);
   reset_guy(self);
 }
 
@@ -752,17 +752,17 @@ function movequestobjicon() {
   self.ignoreall = 1;
   self.ignoreme = 1;
   self takeallweapons();
-  var0 = scripts\cp\cp_weapon::buildweapon("iw8_fists_mp", [], "none", "none", -1);
-  self giveweapon(var0);
-  scripts\anim\shared::forceuseweapon(var0, "primary");
+  var_0 = scripts\cp\cp_weapon::buildweapon("iw8_fists_mp", [], "none", "none", -1);
+  self giveweapon(var_0);
+  scripts\anim\shared::forceuseweapon(var_0, "primary");
   wait 0.5;
-  var1 = scripts\engine\utility::getclosest(self.origin, level.players);
-  self setlookatentity(var1);
+  var_1 = scripts\engine\utility::getclosest(self.origin, level.players);
+  self setlookatentity(var_1);
   wait 0.5;
   setup_anim_guy();
-  var2 = ["cap_ff_010_cheer_scene_civ01", "cap_ff_010_cheer_scene_civ02", "cap_ff_010_cheer_scene_civ03", "cap_ff_010_cheer_scene_civ04", "cap_ff_010_cheer_scene_civ06", "cap_ff_010_cheer_scene_civ07", "cap_ff_010_cheer_scene_civ08", "cap_ff_010_cheer_scene_civ09", "cap_ff_010_cheer_scene_civ10", "cap_ff_010_cheer_scene_civ11", "cap_ff_010_cheer_scene_civ12", "cap_ff_010_cheer_scene_civ13"];
-  var3 = [];
-  GscBinSkip0(0x2e, var3.size, [ &play_looping_skit_anim, "animscripted2", var2, undefined, undefined]);
+  var_2 = ["cap_ff_010_cheer_scene_civ01", "cap_ff_010_cheer_scene_civ02", "cap_ff_010_cheer_scene_civ03", "cap_ff_010_cheer_scene_civ04", "cap_ff_010_cheer_scene_civ06", "cap_ff_010_cheer_scene_civ07", "cap_ff_010_cheer_scene_civ08", "cap_ff_010_cheer_scene_civ09", "cap_ff_010_cheer_scene_civ10", "cap_ff_010_cheer_scene_civ11", "cap_ff_010_cheer_scene_civ12", "cap_ff_010_cheer_scene_civ13"];
+  var_3 = [];
+  GscBinSkip0(0x2e, var_3.size, [ &play_looping_skit_anim, "animscripted2", var_2, undefined, undefined]);
 }
 
 function setup_gulag_weapon_check() {
@@ -773,163 +773,163 @@ function checkin_guard_idle() {
   self endon("death");
   self endon("alerted");
   setup_anim_guy();
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, [ &play_looping_skit_anim, "animscripted2", "cp_informant_checkin_sit_idle", 2, self.spawnpoint]);
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, [ &play_looping_skit_anim, "animscripted2", "cp_informant_checkin_sit_idle", 2, self.spawnpoint]);
 }
 
-function play_anim_sequence(var0, var1, var2) {
-  jumpiffalse(isDefined(var2)) LOC_000000aa;
+function play_anim_sequence(var_0, var_1, var_2) {
+  jumpiffalse(isDefined(var_2)) LOC_000000aa;
 
-  for(var3 = 0; var3 < var2.size; var3++) {
-    var4 = var2[var3];
-    var5 = var4[0];
-    var6 = scripts\engine\utility::ter_op(isDefined(var4[1]), var4[1], undefined);
-    var7 = scripts\engine\utility::ter_op(isDefined(var4[2]), var4[2], undefined);
-    var8 = scripts\engine\utility::ter_op(isDefined(var4[3]), var4[3], undefined);
-    var9 = scripts\engine\utility::ter_op(isDefined(var4[4]), var4[4], undefined);
-    var10 = scripts\engine\utility::ter_op(isDefined(var4[5]), var4[5], undefined);
-    var11 = scripts\engine\utility::ter_op(isDefined(var4[6]), var4[6], undefined);
-    self childthread[[var5]](var6, var7, var8, var9, var10);
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
+    var_4 = var_2[var_3];
+    var_5 = var_4[0];
+    var_6 = scripts\engine\utility::ter_op(isDefined(var_4[1]), var_4[1], undefined);
+    var_7 = scripts\engine\utility::ter_op(isDefined(var_4[2]), var_4[2], undefined);
+    var_8 = scripts\engine\utility::ter_op(isDefined(var_4[3]), var_4[3], undefined);
+    var_9 = scripts\engine\utility::ter_op(isDefined(var_4[4]), var_4[4], undefined);
+    var_10 = scripts\engine\utility::ter_op(isDefined(var_4[5]), var_4[5], undefined);
+    var_11 = scripts\engine\utility::ter_op(isDefined(var_4[6]), var_4[6], undefined);
+    self childthread[[var_5]](var_6, var_7, var_8, var_9, var_10);
   }
 
   for(;;) {
-    for(var12 = 0; var12 < var0.size; var12++) {
-      var4 = var0[var12];
-      var5 = var4[0];
-      var6 = scripts\engine\utility::ter_op(isDefined(var4[1]), var4[1], undefined);
-      var7 = scripts\engine\utility::ter_op(isDefined(var4[2]), var4[2], undefined);
-      var8 = scripts\engine\utility::ter_op(isDefined(var4[3]), var4[3], undefined);
-      var9 = scripts\engine\utility::ter_op(isDefined(var4[4]), var4[4], undefined);
-      self[[var5]](var6, var7, var8, var9);
+    for(var_12 = 0; var_12 < var_0.size; var_12++) {
+      var_4 = var_0[var_12];
+      var_5 = var_4[0];
+      var_6 = scripts\engine\utility::ter_op(isDefined(var_4[1]), var_4[1], undefined);
+      var_7 = scripts\engine\utility::ter_op(isDefined(var_4[2]), var_4[2], undefined);
+      var_8 = scripts\engine\utility::ter_op(isDefined(var_4[3]), var_4[3], undefined);
+      var_9 = scripts\engine\utility::ter_op(isDefined(var_4[4]), var_4[4], undefined);
+      self[[var_5]](var_6, var_7, var_8, var_9);
     }
 
-    if(!istrue(var1)) {
+    if(!istrue(var_1)) {
       break;
     }
   }
 }
 
-function play_looping_skit_anim(var0, var1, var2, var3) {
+function play_looping_skit_anim(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
   level endon("end_current_skit_anim");
   self endon("end_current_skit_anim");
 
-  if(isDefined(var1) && !isarray(var1)) {
-    var4 = [var1];
-    var1 = var4;
-    var4 = undefined;
+  if(isDefined(var_1) && !isarray(var_1)) {
+    var_4 = [var_1];
+    var_1 = var_4;
+    var_4 = undefined;
   }
 
-  var5 = scripts\engine\utility::random(var1);
+  var_5 = scripts\engine\utility::random(var_1);
 
-  if(!isDefined(var0)) {
-    var0 = "animscripted";
+  if(!isDefined(var_0)) {
+    var_0 = "animscripted";
   }
 
-  var6 = scripts\asm\asm::asm_lookupanimfromalias(var0, var5);
-  var7 = scripts\asm\asm::asm_getxanim(var0, var6);
-  var8 = 0;
-  var9 = undefined;
-  var10 = undefined;
+  var_6 = scripts\asm\asm::asm_lookupanimfromalias(var_0, var_5);
+  var_7 = scripts\asm\asm::asm_getxanim(var_0, var_6);
+  var_8 = 0;
+  var_9 = undefined;
+  var_10 = undefined;
 
-  if(isDefined(var3)) {
-    var9 = var3.origin;
-    var10 = var3.angles;
+  if(isDefined(var_3)) {
+    var_9 = var_3.origin;
+    var_10 = var_3.angles;
   }
 
   for(;;) {
-    if(isDefined(var3)) {
-      var11 = getstartorigin(var9, var10, var7);
-      var12 = getstartangles(var9, var10, var7);
+    if(isDefined(var_3)) {
+      var_11 = getstartorigin(var_9, var_10, var_7);
+      var_12 = getstartangles(var_9, var_10, var_7);
       self dontinterpolate();
-      self forceteleport(var11, var12);
+      self forceteleport(var_11, var_12);
       self notify("actor_position_determined");
     }
 
-    self aisetanim(var0, var6);
-    wait getanimlength(var7);
+    self aisetanim(var_0, var_6);
+    wait getanimlength(var_7);
 
-    if(isDefined(var2)) {
-      var8++;
+    if(isDefined(var_2)) {
+      var_8++;
 
-      if(var8 >= var2) {
+      if(var_8 >= var_2) {
         return;
       }
     }
   }
 }
 
-function play_single_skit_anim(var0, var1, var2, var3) {
+function play_single_skit_anim(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
   level endon("end_current_skit_anim");
   self endon("end_current_skit_anim");
 
-  if(isDefined(var1) && !isarray(var1)) {
-    var4 = [var1];
-    var1 = var4;
-    var4 = undefined;
+  if(isDefined(var_1) && !isarray(var_1)) {
+    var_4 = [var_1];
+    var_1 = var_4;
+    var_4 = undefined;
   }
 
-  var5 = scripts\engine\utility::random(var1);
+  var_5 = scripts\engine\utility::random(var_1);
 
-  if(!isDefined(var0)) {
-    var0 = "animscripted";
+  if(!isDefined(var_0)) {
+    var_0 = "animscripted";
   }
 
-  var6 = scripts\asm\asm::asm_lookupanimfromalias(var0, var5);
-  var7 = scripts\asm\asm::asm_getxanim(var0, var6);
-  var8 = undefined;
-  var9 = undefined;
+  var_6 = scripts\asm\asm::asm_lookupanimfromalias(var_0, var_5);
+  var_7 = scripts\asm\asm::asm_getxanim(var_0, var_6);
+  var_8 = undefined;
+  var_9 = undefined;
 
-  if(isDefined(var2)) {
-    var8 = var2.origin;
-    var9 = var2.angles;
+  if(isDefined(var_2)) {
+    var_8 = var_2.origin;
+    var_9 = var_2.angles;
   }
 
-  if(isDefined(var2)) {
-    var10 = getstartorigin(var8, var9, var7);
-    var11 = getstartangles(var8, var9, var7);
+  if(isDefined(var_2)) {
+    var_10 = getstartorigin(var_8, var_9, var_7);
+    var_11 = getstartangles(var_8, var_9, var_7);
     self dontinterpolate();
-    self forceteleport(var10, var11);
+    self forceteleport(var_10, var_11);
     self notify("actor_position_determined");
   }
 
-  self aisetanim(var0, var6);
-  wait getanimlength(var7);
+  self aisetanim(var_0, var_6);
+  wait getanimlength(var_7);
 }
 
-function spawn_skit_prop(var0, var1, var2, var3, var4) {
-  if(isDefined(var0)) {
-    self waittill(var0);
+function spawn_skit_prop(var_0, var_1, var_2, var_3, var_4) {
+  if(isDefined(var_0)) {
+    self waittill(var_0);
   }
 
-  if(isbuiltinfunction(var1)) {
-    var1 = self[[var1]]();
+  if(isbuiltinfunction(var_1)) {
+    var_1 = self[[var_1]]();
   }
 
-  if(isbuiltinfunction(var2)) {
-    var2 = self[[var2]]();
+  if(isbuiltinfunction(var_2)) {
+    var_2 = self[[var_2]]();
   }
 
-  var5 = spawn("script_model", var1);
-  var5.angles = self.angles;
-  var5 setModel(var3);
+  var_5 = spawn("script_model", var_1);
+  var_5.angles = self.angles;
+  var_5 setModel(var_3);
 
-  if(istrue(var4)) {
-    var5 disconnectPaths();
+  if(istrue(var_4)) {
+    var_5 disconnectPaths();
   }
 
-  return var5;
+  return var_5;
 }
 
 function get_position_from_actor() {
-  var0 = self gettagorigin("j_mainroot");
-  thread scripts\engine\utility::draw_line_for_time(var0, var0 + (0, 0, 128), 1, 1, 1, 30);
-  return var0;
+  var_0 = self gettagorigin("j_mainroot");
+  thread scripts\engine\utility::draw_line_for_time(var_0, var_0 + (0, 0, 128), 1, 1, 1, 30);
+  return var_0;
 }
 
 function get_angles_from_actor() {
-  var0 = self gettagangles("j_mainroot");
-  thread scripts\engine\utility::draw_angles(var0, var0 + (0, 0, 128), 1, 1, 1, 30);
-  return var0;
+  var_0 = self gettagangles("j_mainroot");
+  thread scripts\engine\utility::draw_angles(var_0, var_0 + (0, 0, 128), 1, 1, 1, 30);
+  return var_0;
 }

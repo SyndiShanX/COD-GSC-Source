@@ -11,15 +11,15 @@ function main() {
 
 function initializematchrules() {
   scripts\mp\utility\game::setcommonrulesfrommatchrulesdata();
-  var0 = getmatchrulesdata("assaultData", "roundLength");
-  setdynamicdvar("scr_assault_timelimit", var0);
-  scripts\mp\utility\game::registertimelimitdvar("assault", var0);
-  var1 = getmatchrulesdata("assaultData", "roundSwitch");
-  setdynamicdvar("scr_assault_roundswitch", var1);
-  scripts\mp\utility\game::registerroundswitchdvar("assault", var1, 0, 9);
-  var2 = getmatchrulesdata("commonOption", "scoreLimit");
-  setdynamicdvar("scr_assault_winlimit", var2);
-  scripts\mp\utility\game::registerwinlimitdvar("assault", var2);
+  var_0 = getmatchrulesdata("assaultData", "roundLength");
+  setdynamicdvar("scr_assault_timelimit", var_0);
+  scripts\mp\utility\game::registertimelimitdvar("assault", var_0);
+  var_1 = getmatchrulesdata("assaultData", "roundSwitch");
+  setdynamicdvar("scr_assault_roundswitch", var_1);
+  scripts\mp\utility\game::registerroundswitchdvar("assault", var_1, 0, 9);
+  var_2 = getmatchrulesdata("commonOption", "scoreLimit");
+  setdynamicdvar("scr_assault_winlimit", var_2);
+  scripts\mp\utility\game::registerwinlimitdvar("assault", var_2);
   setdynamicdvar("scr_assault_bombtimer", getmatchrulesdata("assaultData", "bombTimer"));
   setdynamicdvar("scr_assault_planttime", getmatchrulesdata("assaultData", "plantTime"));
   setdynamicdvar("scr_assault_defusetime", getmatchrulesdata("assaultData", "defuseTime"));
@@ -44,10 +44,10 @@ function onstartgametype() {
   }
 
   if(game["switchedsides"]) {
-    var0 = game["attackers"];
-    var1 = game["defenders"];
-    game["attackers"] = var1;
-    game["defenders"] = var0;
+    var_0 = game["attackers"];
+    var_1 = game["defenders"];
+    game["attackers"] = var_1;
+    game["defenders"] = var_0;
   }
 
   setclientnamemode("manual_change");
@@ -84,33 +84,33 @@ function initspawns() {
   initbombsitespawns("defender");
 }
 
-function initbombsitespawns(var0) {
-  level.assaultspawns[var0] = [];
-  var1 = "mp_assault_spawn_" + var0;
-  var2 = scripts\mp\spawnlogic::getspawnpointarray(var1);
+function initbombsitespawns(var_0) {
+  level.assaultspawns[var_0] = [];
+  var_1 = "mp_assault_spawn_" + var_0;
+  var_2 = scripts\mp\spawnlogic::getspawnpointarray(var_1);
 
-  foreach(var4 in var2) {
-    var5 = var4.script_noteworthy;
+  foreach(var_4 in var_2) {
+    var_5 = var_4.script_noteworthy;
 
-    if(!isDefined(level.assaultspawns[var0][var5])) {
-      level.assaultspawns[var0][var5] = [];
+    if(!isDefined(level.assaultspawns[var_0][var_5])) {
+      level.assaultspawns[var_0][var_5] = [];
     }
 
-    level.assaultspawns[var0][var5][level.assaultspawns[var0][var5].size] = var4;
+    level.assaultspawns[var_0][var_5][level.assaultspawns[var_0][var_5].size] = var_4;
   }
 }
 
 function getspawnpoint() {
-  var0 = self.pers["team"];
-  var1 = "defender";
+  var_0 = self.pers["team"];
+  var_1 = "defender";
 
-  if(var0 == game["attackers"]) {
-    var1 = "attacker";
+  if(var_0 == game["attackers"]) {
+    var_1 = "attacker";
   }
 
   jumpiffalse(level.ingraceperiod) LOC_00000054;
-  var2 = scripts\mp\spawnlogic::getspawnpointarray("mp_assault_spawn_" + var1 + "_start");
-  var3 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var2);
+  var_2 = scripts\mp\spawnlogic::getspawnpointarray("mp_assault_spawn_" + var_1 + "_start");
+  var_3 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_2);
   goto LOC_00000078;
 }
 
@@ -135,75 +135,75 @@ function onspawnplayer() {
 
   level notify("spawned_player");
   setuppingwatcher();
-  var0 = getdvarint("scr_allow_highjump");
-  self allowhighjump(var0);
-  self allowhighjump(var0);
-  self allowboostjump(var0);
+  var_0 = getdvarint("scr_allow_highjump");
+  self allowhighjump(var_0);
+  self allowhighjump(var_0);
+  self allowboostjump(var_0);
 }
 
-function onplayerkilled(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
+function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   self setclientomnvar("ui_carrying_bomb", 0);
   thread checkallowspectating();
 }
 
 function checkallowspectating() {
   waitframe();
-  var0 = 0;
+  var_0 = 0;
 
   if(!scripts\mp\utility\teams::getteamdata(game["attackers"], "aliveCount")) {
     level.spectateoverride[game["attackers"]].allowenemyspectate = 1;
-    var0 = 1;
+    var_0 = 1;
   }
 
   if(!scripts\mp\utility\teams::getteamdata(game["defenders"], "aliveCount")) {
     level.spectateoverride[game["defenders"]].allowenemyspectate = 1;
-    var0 = 1;
+    var_0 = 1;
   }
 
-  if(var0) {
+  if(var_0) {
     scripts\mp\spectating::updatespectatesettings();
     return;
   }
 }
 
-function sd_endgame(var0, var1) {
-  foreach(var3 in level.players) {
-    if(!isai(var3)) {
-      var3 setclientomnvar("ui_objective_state", 0);
+function sd_endgame(var_0, var_1) {
+  foreach(var_3 in level.players) {
+    if(!isai(var_3)) {
+      var_3 setclientomnvar("ui_objective_state", 0);
     }
   }
 
-  level.finalkillcam_winner = var0;
+  level.finalkillcam_winner = var_0;
 
-  if(var1 == game["end_reason"]["target_destroyed"] || var1 == game["end_reason"]["bomb_defused"]) {
-    if(!isDefined(level.finalkillcam_killcamentityindex[var0]) || level.finalkillcam_killcamentityindex[var0] != level.curobj.killcamentnum) {
+  if(var_1 == game["end_reason"]["target_destroyed"] || var_1 == game["end_reason"]["bomb_defused"]) {
+    if(!isDefined(level.finalkillcam_killcamentityindex[var_0]) || level.finalkillcam_killcamentityindex[var_0] != level.curobj.killcamentnum) {
       scripts\mp\final_killcam::erasefinalkillcam();
     }
   }
 
-  thread scripts\mp\gamelogic::endgame(var0, var1);
+  thread scripts\mp\gamelogic::endgame(var_0, var_1);
 }
 
-function onnormaldeath(var0, var1, var2, var3, var4, var5) {
-  var6 = scripts\mp\rank::getscoreinfovalue("kill");
-  var7 = var0.team;
+function onnormaldeath(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = scripts\mp\rank::getscoreinfovalue("kill");
+  var_7 = var_0.team;
 
-  if(var0.isplanting) {
-    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var2, "planting");
-    var1 scripts\mp\utility\stats::incpersstat("defends", 1);
-    var1 scripts\mp\persistence::statsetchild("round", "defends", var1.pers["defends"]);
+  if(var_0.isplanting) {
+    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_2, "planting");
+    var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
+    var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
     return;
   }
 
-  if(var0.isbombcarrier) {
-    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var2, "carrying");
+  if(var_0.isbombcarrier) {
+    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_2, "carrying");
     return;
   }
 
-  if(var0.isdefusing) {
-    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var2, "defusing");
-    var1 scripts\mp\utility\stats::incpersstat("defends", 1);
-    var1 scripts\mp\persistence::statsetchild("round", "defends", var1.pers["defends"]);
+  if(var_0.isdefusing) {
+    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_2, "defusing");
+    var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
+    var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
     return;
   }
 }
@@ -211,9 +211,9 @@ function onnormaldeath(var0, var1, var2, var3, var4, var5) {
 function ontimelimit() {
   sd_endgame(game["defenders"], game["end_reason"]["time_limit_reached"]);
 
-  foreach(var1 in level.players) {
-    if(isDefined(var1.bombplantweapon)) {
-      var1 scripts\cp_mp\utility\inventory_utility::_takeweapon(var1.bombplantweapon);
+  foreach(var_1 in level.players) {
+    if(isDefined(var_1.bombplantweapon)) {
+      var_1 scripts\cp_mp\utility\inventory_utility::_takeweapon(var_1.bombplantweapon);
       break;
     }
   }
@@ -235,7 +235,7 @@ function setspecialloadout() {
   }
 }
 
-function isplayeroutsideofcurbombsite(var0) {
+function isplayeroutsideofcurbombsite(var_0) {
   if(isDefined(level.curbombzone)) {
     return self istouching(level.curbombzone.trigger);
   }
@@ -245,23 +245,23 @@ function isplayeroutsideofcurbombsite(var0) {
 
 function initializeobjectives() {
   level.firsttimebomb = 1;
-  var0 = getEntArray("bombzone", "targetname");
-  level.objectives = var0;
+  var_0 = getEntArray("bombzone", "targetname");
+  level.objectives = var_0;
   level.curobjectiveindex = 0;
   level.curobj = setupnextobjective(level.curobjectiveindex);
 }
 
-function setupnextobjective(var0) {
-  var1 = level.objectives[var0];
-  var2 = var1.script_noteworthy;
+function setupnextobjective(var_0) {
+  var_1 = level.objectives[var_0];
+  var_2 = var_1.script_noteworthy;
 
-  if(!isDefined(var2)) {
-    var2 = "bombzone";
+  if(!isDefined(var_2)) {
+    var_2 = "bombzone";
   }
 
-  var3 = undefined;
+  var_3 = undefined;
 
-  switch (var2) {
+  switch (var_2) {
     case "bombzone":
       if(isDefined(level.firsttimebomb)) {
         scripts\mp\gametypes\obj_bombzone::bombzone_setupbombcase("sd_bomb");
@@ -270,12 +270,12 @@ function setupnextobjective(var0) {
         scripts\mp\gametypes\obj_bombzone::advancebombcase();
       }
 
-      var3 = scripts\mp\gametypes\obj_bombzone::setupobjective(var0);
+      var_3 = scripts\mp\gametypes\obj_bombzone::setupobjective(var_0);
       scripts\mp\utility\dialog::leaderdialog("offense_obj", game["attackers"]);
       scripts\mp\utility\dialog::leaderdialog("defense_obj", game["defenders"]);
       break;
     case "dompoint":
-      var3 = scripts\mp\gametypes\obj_dom::setupobjective(level.objectives[var0]);
+      var_3 = scripts\mp\gametypes\obj_dom::setupobjective(level.objectives[var_0]);
       break;
     case "payload":
       break;
@@ -283,25 +283,25 @@ function setupnextobjective(var0) {
       break;
   }
 
-  return var3;
+  return var_3;
 }
 
-function onobjectivecomplete(var0, var1, var2, var3, var4) {
-  switch (var0) {
+function onobjectivecomplete(var_0, var_1, var_2, var_3, var_4) {
+  switch (var_0) {
     case "dompoint":
-      ondompointobjectivecomplete(var1, var2, var3, var4);
+      ondompointobjectivecomplete(var_1, var_2, var_3, var_4);
       break;
     case "bombzone":
-      onbombzoneobjectivecomplete(var1, var2, var3, var4);
+      onbombzoneobjectivecomplete(var_1, var_2, var_3, var_4);
       break;
   }
 
-  if(var3 == game["attackers"]) {
+  if(var_3 == game["attackers"]) {
     level.curobjectiveindex++;
 
     if(level.curobjectiveindex < level.objectives.size) {
-      var5 = scripts\mp\utility\dvars::getwatcheddvar("addObjectiveTime");
-      scripts\mp\utility\dvars::setoverridewatchdvar("timelimit", scripts\mp\utility\game::gettimelimit() + var5);
+      var_5 = scripts\mp\utility\dvars::getwatcheddvar("addObjectiveTime");
+      scripts\mp\utility\dvars::setoverridewatchdvar("timelimit", scripts\mp\utility\game::gettimelimit() + var_5);
       restarttimer();
       level.curobj = setupnextobjective(level.curobjectiveindex);
       return;
@@ -314,20 +314,20 @@ function onobjectivecomplete(var0, var1, var2, var3, var4) {
   }
 }
 
-function ondompointobjectivecomplete(var0, var1, var2, var3) {
-  var4 = var1.team;
+function ondompointobjectivecomplete(var_0, var_1, var_2, var_3) {
+  var_4 = var_1.team;
 
-  if(var3 == "neutral") {
-    var5 = scripts\mp\utility\game::getotherteam(var4)[0];
-    thread scripts\mp\utility\print::printandsoundoneveryone(var4, var5, undefined, undefined, "mp_dom_flag_captured", undefined, var1);
-    scripts\mp\utility\dialog::statusdialog("secured" + self.label, var4, 1);
-    scripts\mp\utility\dialog::statusdialog("lost_" + self.label, var5, 1);
+  if(var_3 == "neutral") {
+    var_5 = scripts\mp\utility\game::getotherteam(var_4)[0];
+    thread scripts\mp\utility\print::printandsoundoneveryone(var_4, var_5, undefined, undefined, "mp_dom_flag_captured", undefined, var_1);
+    scripts\mp\utility\dialog::statusdialog("secured" + self.label, var_4, 1);
+    scripts\mp\utility\dialog::statusdialog("lost_" + self.label, var_5, 1);
     return;
   }
 }
 
-function onbombzoneobjectivecomplete(var0, var1, var2, var3) {
-  if(var2 == game["defenders"]) {
+function onbombzoneobjectivecomplete(var_0, var_1, var_2, var_3) {
+  if(var_2 == game["defenders"]) {
     restarttimer();
     thread scripts\mp\gametypes\obj_bombzone::respawnbombcase();
     level.curobj = scripts\mp\gametypes\obj_bombzone::setupobjective(level.curobjectiveindex);
@@ -371,44 +371,44 @@ function waitforplayerping() {
 function doping() {
   self endon("disconnect");
   level endon("game_ended");
-  var0 = self getEye();
-  var1 = var0 + anglesToForward(self getplayerangles()) * 2000;
-  var2 = scripts\engine\trace::ray_trace(var0, var1, self);
-  var3 = var2["entity"];
-  var4 = "WAYPOINT";
-  var5 = (1, 1, 1);
+  var_0 = self getEye();
+  var_1 = var_0 + anglesToForward(self getplayerangles()) * 2000;
+  var_2 = scripts\engine\trace::ray_trace(var_0, var_1, self);
+  var_3 = var_2["entity"];
+  var_4 = "WAYPOINT";
+  var_5 = (1, 1, 1);
 
-  if(isDefined(var3)) {
-    if(isDefined(var3.team) && var3.team != self.team) {
-      var5 = (1, 0, 0);
+  if(isDefined(var_3)) {
+    if(isDefined(var_3.team) && var_3.team != self.team) {
+      var_5 = (1, 0, 0);
 
-      if(isPlayer(var3)) {
-        var4 = "KILL";
+      if(isPlayer(var_3)) {
+        var_4 = "KILL";
         self notify("enemy_sighted");
       } else {
-        var4 = "DESTROY";
+        var_4 = "DESTROY";
       }
 
       return;
     }
 
-    if(isDefined(var3.script_gameobjectname)) {
-      if(var3.script_gameobjectname == "bombzone") {
+    if(isDefined(var_3.script_gameobjectname)) {
+      if(var_3.script_gameobjectname == "bombzone") {
         if(self.team == game["attackers"]) {
-          var4 = "ATTACK";
-          var5 = (1, 1, 0);
+          var_4 = "ATTACK";
+          var_5 = (1, 1, 0);
         } else {
-          var4 = "DEFEND";
-          var5 = (0, 0, 1);
+          var_4 = "DEFEND";
+          var_5 = (0, 0, 1);
         }
 
         return;
       }
 
-      if(var3.script_gameobjectname == "sd") {
+      if(var_3.script_gameobjectname == "sd") {
         if(self.team == game["attackers"]) {
-          var4 = "OBJECTIVE";
-          var5 = (1, 1, 0);
+          var_4 = "OBJECTIVE";
+          var_5 = (1, 1, 0);
         }
       }
     }

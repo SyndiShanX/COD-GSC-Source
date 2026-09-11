@@ -3,84 +3,84 @@
  * Script: scripts\cp\cp_convoy_manager.gsc
 ***********************************************/
 
-function allow_stealing_from_player_car(var0) {
+function allow_stealing_from_player_car(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.can_steal_hvt = var0;
+    self.settings.can_steal_hvt = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.can_steal_hvt = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.can_steal_hvt = var_0;
     }
 
     return;
   }
 }
 
-function allow_picking_up_hvts(var0) {
+function allow_picking_up_hvts(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.can_pickup_hvt = var0;
+    self.settings.can_pickup_hvt = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.can_pickup_hvt = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.can_pickup_hvt = var_0;
     }
 
     return;
   }
 }
 
-function set_hide_icon_on_pickup_target(var0) {
+function set_hide_icon_on_pickup_target(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.hide_icon_on_pickup = var0;
+    self.settings.hide_icon_on_pickup = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.hide_icon_on_pickup = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.hide_icon_on_pickup = var_0;
     }
 
     return;
   }
 }
 
-function spawn_convoy_from_type(var0, var1, var2, var3, var4, var5, var6, var7) {
-  if(!isDefined(var6)) {
-    var6 = "axis";
+function spawn_convoy_from_type(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  if(!isDefined(var_6)) {
+    var_6 = "axis";
   }
 
-  var8 = level scripts\cp\cp_convoy_manager_code::spawn_convoy(var0, var1, var2, var3, var4, var5, var6, var7);
-  return var8;
+  var_8 = level scripts\cp\cp_convoy_manager_code::spawn_convoy(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7);
+  return var_8;
 }
 
-function set_convoy_target(var0, var1, var2, var3) {
-  thread scripts\cp\cp_convoy_manager_code::change_convoy_objective_target(var0, var1, var2, var3);
+function set_convoy_target(var_0, var_1, var_2, var_3) {
+  thread scripts\cp\cp_convoy_manager_code::change_convoy_objective_target(var_0, var_1, var_2, var_3);
 }
 
-function set_convoy_targeted_hvt(var0) {
+function set_convoy_targeted_hvt(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.targeted_hvt = var0;
+    self.targeted_hvt = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.targeted_hvt = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.targeted_hvt = var_0;
     }
 
     return;
   }
 }
 
-function set_roaming(var0) {
+function set_roaming(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.roaming = var0;
+    self.settings.roaming = var_0;
 
-    if(istrue(var0)) {
+    if(istrue(var_0)) {
       scripts\cp\cp_convoy_manager_code::set_roaming();
       return;
     }
@@ -90,103 +90,103 @@ function set_roaming(var0) {
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.roaming = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.roaming = var_0;
 
-      if(istrue(var0)) {
-        var2 scripts\cp\cp_convoy_manager_code::set_roaming();
+      if(istrue(var_0)) {
+        var_2 scripts\cp\cp_convoy_manager_code::set_roaming();
         continue;
       }
 
-      var2 notify("reset_path");
+      var_2 notify("reset_path");
     }
 
     return;
   }
 }
 
-function ref_130ed(var0) {
+function ref_130ed(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.ref_13898 = var0;
+    self.settings.ref_13898 = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.ref_13898 = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.ref_13898 = var_0;
     }
 
     return;
   }
 }
 
-function set_suspend_at_end_path(var0) {
+function set_suspend_at_end_path(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.suspend_at_end_path = var0;
+    self.settings.suspend_at_end_path = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.suspend_at_end_path = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.suspend_at_end_path = var_0;
     }
 
     return;
   }
 }
 
-function ref_130fe(var0) {
+function ref_130fe(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.ref_13f14 = var0;
+    self.settings.ref_13f14 = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.ref_13f14 = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.ref_13f14 = var_0;
     }
 
     return;
   }
 }
 
-function set_use_path_speeds_modifier(var0) {
+function set_use_path_speeds_modifier(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.use_path_speeds = var0;
+    self.settings.use_path_speeds = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.use_path_speeds = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.use_path_speeds = var_0;
     }
 
     return;
   }
 }
 
-function set_path_jitter(var0) {
+function set_path_jitter(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.path_jitter = var0;
+    self.settings.path_jitter = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.path_jitter = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.path_jitter = var_0;
     }
 
     return;
   }
 }
 
-function set_convoy_durations_modifier(var0) {
+function set_convoy_durations_modifier(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.cp_speed = var0;
+    self.settings.cp_speed = var_0;
 
-    foreach(var2 in self.spawned_vehicles) {
-      if(isent(var2)) {
-        var2.cp_speed = var0;
+    foreach(var_2 in self.spawned_vehicles) {
+      if(isent(var_2)) {
+        var_2.cp_speed = var_0;
       }
     }
 
@@ -194,10 +194,10 @@ function set_convoy_durations_modifier(var0) {
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var5 in level.all_convoys) {
-      foreach(var2 in var5.spawned_vehicles) {
-        if(isent(var2)) {
-          var2.cp_speed = var0;
+    foreach(var_5 in level.all_convoys) {
+      foreach(var_2 in var_5.spawned_vehicles) {
+        if(isent(var_2)) {
+          var_2.cp_speed = var_0;
         }
       }
     }
@@ -206,71 +206,71 @@ function set_convoy_durations_modifier(var0) {
   }
 }
 
-function ref_1307d(var0) {
+function ref_1307d(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    scripts\cp\cp_convoy_manager_code::toggle_trucks_disable_leave(var0);
+    scripts\cp\cp_convoy_manager_code::toggle_trucks_disable_leave(var_0);
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2 scripts\cp\cp_convoy_manager_code::toggle_trucks_disable_leave(var0);
+    foreach(var_2 in level.all_convoys) {
+      var_2 scripts\cp\cp_convoy_manager_code::toggle_trucks_disable_leave(var_0);
     }
 
     return;
   }
 }
 
-function attach_smuggler_loot(var0, var1, var2) {
+function attach_smuggler_loot(var_0, var_1, var_2) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    scripts\cp\cp_convoy_manager_code::handle_smuggler_loot_attach(var0, var1, var2);
+    scripts\cp\cp_convoy_manager_code::handle_smuggler_loot_attach(var_0, var_1, var_2);
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var4 in level.all_convoys) {
-      var4 scripts\cp\cp_convoy_manager_code::handle_smuggler_loot_attach(var0, var1, var2);
+    foreach(var_4 in level.all_convoys) {
+      var_4 scripts\cp\cp_convoy_manager_code::handle_smuggler_loot_attach(var_0, var_1, var_2);
     }
 
     return;
   }
 }
 
-function keep_smuggler_loot_on_death(var0, var1, var2) {
+function keep_smuggler_loot_on_death(var_0, var_1, var_2) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    scripts\cp\cp_convoy_manager_code::handle_smuggler_loot_drop(var0, var1, var2);
+    scripts\cp\cp_convoy_manager_code::handle_smuggler_loot_drop(var_0, var_1, var_2);
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var4 in level.all_convoys) {
-      var4 scripts\cp\cp_convoy_manager_code::handle_smuggler_loot_drop(var0, var1, var2);
+    foreach(var_4 in level.all_convoys) {
+      var_4 scripts\cp\cp_convoy_manager_code::handle_smuggler_loot_drop(var_0, var_1, var_2);
     }
 
     return;
   }
 }
 
-function get_smuggler_loot_amount(var0) {
+function get_smuggler_loot_amount(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
     if(isDefined(self) && isDefined(self.attached_barrels)) {
-      var1 = 0;
+      var_1 = 0;
 
-      for(var2 = 0; var2 < self.attached_barrels.size; var2++) {
-        if(isent(self.attached_barrels[var2])) {
-          if(!istrue(var0)) {
-            if(!istrue(self.attached_barrels[var2].loot_marked)) {
-              var1++;
+      for(var_2 = 0; var_2 < self.attached_barrels.size; var_2++) {
+        if(isent(self.attached_barrels[var_2])) {
+          if(!istrue(var_0)) {
+            if(!istrue(self.attached_barrels[var_2].loot_marked)) {
+              var_1++;
             }
 
             continue;
           }
 
-          var1++;
+          var_1++;
         }
       }
 
-      return var1;
+      return var_1;
     }
   }
 
@@ -293,65 +293,65 @@ function get_convoy_targeted_hvt() {
   return undefined;
 }
 
-function set_convoy_lookahead_dist(var0) {
+function set_convoy_lookahead_dist(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.lookahead = var0;
+    self.settings.lookahead = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.lookahead = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.lookahead = var_0;
     }
 
     return;
   }
 }
 
-function set_unload_at_target(var0) {
+function set_unload_at_target(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.unload_at_target = var0;
+    self.settings.unload_at_target = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.unload_at_target = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.unload_at_target = var_0;
     }
 
     return;
   }
 }
 
-function set_stop_all_cars(var0) {
+function set_stop_all_cars(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.enable_stop_all_cars = var0;
+    self.settings.enable_stop_all_cars = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.enable_stop_all_cars = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.enable_stop_all_cars = var_0;
     }
 
     return;
   }
 }
 
-function toggle_convoy_wheel_outlines(var0) {
+function toggle_convoy_wheel_outlines(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    foreach(var2 in self.main_truck.wheel_tags) {
-      level thread scripts\cp\cp_convoy_manager_code::toggle_tire_outlines(self.main_truck, var2, var0);
+    foreach(var_2 in self.main_truck.wheel_tags) {
+      level thread scripts\cp\cp_convoy_manager_code::toggle_tire_outlines(self.main_truck, var_2, var_0);
     }
 
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var5 in level.all_convoys) {
-      if(isDefined(var5.main_truck) && isent(var5.main_truck)) {
-        foreach(var2 in var5.main_truck.wheel_tags) {
-          level thread scripts\cp\cp_convoy_manager_code::toggle_tire_outlines(var5.main_truck, var2, var0);
+    foreach(var_5 in level.all_convoys) {
+      if(isDefined(var_5.main_truck) && isent(var_5.main_truck)) {
+        foreach(var_2 in var_5.main_truck.wheel_tags) {
+          level thread scripts\cp\cp_convoy_manager_code::toggle_tire_outlines(var_5.main_truck, var_2, var_0);
         }
       }
     }
@@ -360,79 +360,79 @@ function toggle_convoy_wheel_outlines(var0) {
   }
 }
 
-function set_attach_objective_icon(var0, var1) {
+function set_attach_objective_icon(var_0, var_1) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.attach_icon = var0;
-    scripts\cp\cp_convoy_manager_code::objective_icon_attach_to_center_vehicle(var0, var1);
+    self.settings.attach_icon = var_0;
+    scripts\cp\cp_convoy_manager_code::objective_icon_attach_to_center_vehicle(var_0, var_1);
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var3 in level.all_convoys) {
-      var3.settings.attach_icon = var0;
-      var3 scripts\cp\cp_convoy_manager_code::objective_icon_attach_to_center_vehicle(var0, var1);
+    foreach(var_3 in level.all_convoys) {
+      var_3.settings.attach_icon = var_0;
+      var_3 scripts\cp\cp_convoy_manager_code::objective_icon_attach_to_center_vehicle(var_0, var_1);
     }
 
     return;
   }
 }
 
-function set_objective_icon_label(var0) {
+function set_objective_icon_label(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    scripts\cp\cp_convoy_manager_code::objective_icon_show_label(var0);
+    scripts\cp\cp_convoy_manager_code::objective_icon_show_label(var_0);
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2 scripts\cp\cp_convoy_manager_code::objective_icon_show_label(var0);
+    foreach(var_2 in level.all_convoys) {
+      var_2 scripts\cp\cp_convoy_manager_code::objective_icon_show_label(var_0);
     }
 
     return;
   }
 }
 
-function show_objective_icon(var0, var1) {
+function show_objective_icon(var_0, var_1) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    scripts\cp\cp_convoy_manager_code::objective_icon_show(var0, var1);
+    scripts\cp\cp_convoy_manager_code::objective_icon_show(var_0, var_1);
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var3 in level.all_convoys) {
-      var3 scripts\cp\cp_convoy_manager_code::objective_icon_show(var0, var1);
+    foreach(var_3 in level.all_convoys) {
+      var_3 scripts\cp\cp_convoy_manager_code::objective_icon_show(var_0, var_1);
     }
 
     return;
   }
 }
 
-function show_health_on_objective_icon(var0) {
+function show_health_on_objective_icon(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.show_health = var0;
-    scripts\cp\cp_convoy_manager_code::objective_icon_show_health(var0);
+    self.settings.show_health = var_0;
+    scripts\cp\cp_convoy_manager_code::objective_icon_show_health(var_0);
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.show_health = var0;
-      var2 scripts\cp\cp_convoy_manager_code::objective_icon_show_health(var0);
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.show_health = var_0;
+      var_2 scripts\cp\cp_convoy_manager_code::objective_icon_show_health(var_0);
     }
 
     return;
   }
 }
 
-function set_objective_struct(var0) {
+function set_objective_struct(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    scripts\cp\cp_convoy_manager_code::objective_icon_override(var0);
+    scripts\cp\cp_convoy_manager_code::objective_icon_override(var_0);
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2 scripts\cp\cp_convoy_manager_code::objective_icon_override(var0);
+    foreach(var_2 in level.all_convoys) {
+      var_2 scripts\cp\cp_convoy_manager_code::objective_icon_override(var_0);
     }
 
     return;
@@ -447,101 +447,101 @@ function get_objective_struct() {
   return undefined;
 }
 
-function enable_defeat_on_kill_backup(var0) {
+function enable_defeat_on_kill_backup(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.defeated_on_kill_backup = var0;
+    self.settings.defeated_on_kill_backup = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.defeated_on_kill_backup = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.defeated_on_kill_backup = var_0;
     }
 
     return;
   }
 }
 
-function set_soldier_backup_deposit_names(var0) {
+function set_soldier_backup_deposit_names(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.backup_deposit_names = var0;
+    self.settings.backup_deposit_names = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.backup_deposit_names = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.backup_deposit_names = var_0;
     }
 
     return;
   }
 }
 
-function toggle_vo_on_hvt_pickup(var0) {
+function toggle_vo_on_hvt_pickup(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.toggle_vo_on_hvt_pickup = var0;
+    self.settings.toggle_vo_on_hvt_pickup = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.toggle_vo_on_hvt_pickup = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.toggle_vo_on_hvt_pickup = var_0;
     }
 
     return;
   }
 }
 
-function toggle_vo_on_convoy_death(var0) {
+function toggle_vo_on_convoy_death(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.toggle_vo_on_convoy_death = var0;
+    self.settings.toggle_vo_on_convoy_death = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.toggle_vo_on_convoy_death = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.toggle_vo_on_convoy_death = var_0;
     }
 
     return;
   }
 }
 
-function toggle_vo_on_nearby_convoy(var0) {
+function toggle_vo_on_nearby_convoy(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.toggle_vo_on_nearby_convoy = var0;
+    self.settings.toggle_vo_on_nearby_convoy = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.toggle_vo_on_nearby_convoy = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.toggle_vo_on_nearby_convoy = var_0;
     }
 
     return;
   }
 }
 
-function toggle_vo_on_hvt_rescued(var0) {
+function toggle_vo_on_hvt_rescued(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.toggle_vo_on_hvt_rescued = var0;
+    self.settings.toggle_vo_on_hvt_rescued = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.toggle_vo_on_hvt_rescued = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.toggle_vo_on_hvt_rescued = var_0;
     }
 
     return;
   }
 }
 
-function allow_recruiting_nearby_soldiers(var0, var1) {
+function allow_recruiting_nearby_soldiers(var_0, var_1) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.recruit_enable = var0;
+    self.settings.recruit_enable = var_0;
 
-    if(istrue(var1)) {
+    if(istrue(var_1)) {
       level thread scripts\cp\cp_convoy_manager_code::attempt_new_pulse_set(self);
       return;
     }
@@ -550,11 +550,11 @@ function allow_recruiting_nearby_soldiers(var0, var1) {
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var3 in level.all_convoys) {
-      var3.settings.recruit_enable = var0;
+    foreach(var_3 in level.all_convoys) {
+      var_3.settings.recruit_enable = var_0;
 
-      if(istrue(var1)) {
-        level thread scripts\cp\cp_convoy_manager_code::attempt_new_pulse_set(var3);
+      if(istrue(var_1)) {
+        level thread scripts\cp\cp_convoy_manager_code::attempt_new_pulse_set(var_3);
       }
     }
 
@@ -562,244 +562,244 @@ function allow_recruiting_nearby_soldiers(var0, var1) {
   }
 }
 
-function allow_recruiting_juggernauts(var0) {
+function allow_recruiting_juggernauts(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.recruit_juggs = var0;
+    self.settings.recruit_juggs = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.recruit_juggs = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.recruit_juggs = var_0;
     }
 
     return;
   }
 }
 
-function set_recruited_goal_distance(var0) {
+function set_recruited_goal_distance(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.goal_distance = var0;
+    self.settings.goal_distance = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.goal_distance = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.goal_distance = var_0;
     }
 
     return;
   }
 }
 
-function set_recruiting_distance(var0) {
+function set_recruiting_distance(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.recruit_distance = var0;
+    self.settings.recruit_distance = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.recruit_distance = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.recruit_distance = var_0;
     }
 
     return;
   }
 }
 
-function set_recruiting_amount(var0) {
+function set_recruiting_amount(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.recruit_amount = var0;
+    self.settings.recruit_amount = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.recruit_amount = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.recruit_amount = var_0;
     }
 
     return;
   }
 }
 
-function set_recruiting_time_btwn(var0) {
+function set_recruiting_time_btwn(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.recruit_time_between = var0;
+    self.settings.recruit_time_between = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.recruit_time_between = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.recruit_time_between = var_0;
     }
 
     return;
   }
 }
 
-function set_recruiting_time_until(var0) {
+function set_recruiting_time_until(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.recruit_time_until = var0;
+    self.settings.recruit_time_until = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.recruit_time_until = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.recruit_time_until = var_0;
     }
 
     return;
   }
 }
 
-function allow_routing_to_any_vehicles(var0) {
+function allow_routing_to_any_vehicles(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.route_to_any_veh = var0;
+    self.settings.route_to_any_veh = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.route_to_any_veh = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.route_to_any_veh = var_0;
     }
 
     return;
   }
 }
 
-function allow_routing_to_backup_vehicles(var0) {
+function allow_routing_to_backup_vehicles(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.route_to_other_veh = var0;
+    self.settings.route_to_other_veh = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.route_to_other_veh = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.route_to_other_veh = var_0;
     }
 
     return;
   }
 }
 
-function allow_routing_to_backup_support_vehicles(var0) {
+function allow_routing_to_backup_support_vehicles(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.route_to_other_support_veh = var0;
+    self.settings.route_to_other_support_veh = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.route_to_other_support_veh = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.route_to_other_support_veh = var_0;
     }
 
     return;
   }
 }
 
-function set_soldier_pickup_to_origin(var0) {
+function set_soldier_pickup_to_origin(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.pickup_uses_origin = var0;
+    self.settings.pickup_uses_origin = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.pickup_uses_origin = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.pickup_uses_origin = var_0;
     }
 
     return;
   }
 }
 
-function set_amount_cars_to_compromise(var0) {
+function set_amount_cars_to_compromise(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.amount_to_compromise = var0;
-    self.amount_to_compromise_left = var0;
+    self.settings.amount_to_compromise = var_0;
+    self.amount_to_compromise_left = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.amount_to_compromise = var0;
-      var2.amount_to_compromise_left = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.amount_to_compromise = var_0;
+      var_2.amount_to_compromise_left = var_0;
     }
 
     return;
   }
 }
 
-function set_center_compromises(var0) {
+function set_center_compromises(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.center_compromises = var0;
+    self.settings.center_compromises = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.center_compromises = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.center_compromises = var_0;
     }
 
     return;
   }
 }
 
-function set_can_compromise_before_1st_target(var0) {
+function set_can_compromise_before_1st_target(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.can_compromise_before_first_target = var0;
+    self.settings.can_compromise_before_first_target = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.can_compromise_before_first_target = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.can_compromise_before_first_target = var_0;
     }
 
     return;
   }
 }
 
-function set_compromise_megahealth(var0) {
+function set_compromise_megahealth(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.long_low_health = var0;
+    self.settings.long_low_health = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.long_low_health = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.long_low_health = var_0;
     }
 
     return;
   }
 }
 
-function set_healthdrain_on_lowhealth(var0) {
+function set_healthdrain_on_lowhealth(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.health_drain = var0;
+    self.settings.health_drain = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.health_drain = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.health_drain = var_0;
     }
 
     return;
   }
 }
 
-function set_center_hull_invulnerable(var0) {
+function set_center_hull_invulnerable(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.center_invulnerable = var0;
-    self.main_truck.hull_invulnerable = var0;
+    self.settings.center_invulnerable = var_0;
+    self.main_truck.hull_invulnerable = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.center_invulnerable = var0;
-      var2.main_truck.hull_invulnerable = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.center_invulnerable = var_0;
+      var_2.main_truck.hull_invulnerable = var_0;
     }
 
     return;
@@ -813,104 +813,104 @@ function compromise_center_truck() {
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var1 in level.all_convoys) {
-      scripts\cp\cp_convoy_manager_code::main_truck_compromise(var1);
+    foreach(var_1 in level.all_convoys) {
+      scripts\cp\cp_convoy_manager_code::main_truck_compromise(var_1);
     }
 
     return;
   }
 }
 
-function set_despawn_at_farz(var0) {
+function set_despawn_at_farz(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.distance_z = var0;
+    self.settings.distance_z = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.distance_z = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.distance_z = var_0;
     }
 
     return;
   }
 }
 
-function set_despawn_at_distance(var0) {
+function set_despawn_at_distance(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.despawn_dist_enable = var0;
+    self.settings.despawn_dist_enable = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.despawn_dist_enable = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.despawn_dist_enable = var_0;
     }
 
     return;
   }
 }
 
-function set_despawn_distance(var0) {
+function set_despawn_distance(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.despawn_dist = var0;
+    self.settings.despawn_dist = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2.settings.despawn_dist = var0;
+    foreach(var_2 in level.all_convoys) {
+      var_2.settings.despawn_dist = var_0;
     }
 
     return;
   }
 }
 
-function delay_kill_convoy_ents(var0, var1) {
+function delay_kill_convoy_ents(var_0, var_1) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    if(istrue(var1)) {
-      scripts\cp\cp_convoy_manager_code::kill_convoy_all_safe(var0);
+    if(istrue(var_1)) {
+      scripts\cp\cp_convoy_manager_code::kill_convoy_all_safe(var_0);
       return;
     }
 
-    scripts\cp\cp_convoy_manager_code::kill_convoy_all(self, var0);
+    scripts\cp\cp_convoy_manager_code::kill_convoy_all(self, var_0);
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var3 in level.all_convoys) {
-      if(istrue(var1)) {
-        var3 scripts\cp\cp_convoy_manager_code::kill_convoy_all_safe(var0);
+    foreach(var_3 in level.all_convoys) {
+      if(istrue(var_1)) {
+        var_3 scripts\cp\cp_convoy_manager_code::kill_convoy_all_safe(var_0);
         continue;
       }
 
-      var3 scripts\cp\cp_convoy_manager_code::kill_convoy_all(var3, var0);
+      var_3 scripts\cp\cp_convoy_manager_code::kill_convoy_all(var_3, var_0);
     }
 
     return;
   }
 }
 
-function delay_kill_main_truck(var0) {
+function delay_kill_main_truck(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    scripts\cp\cp_convoy_manager_code::kill_main_truck(self, var0);
+    scripts\cp\cp_convoy_manager_code::kill_main_truck(self, var_0);
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var2 in level.all_convoys) {
-      var2 scripts\cp\cp_convoy_manager_code::kill_main_truck(var2, var0);
+    foreach(var_2 in level.all_convoys) {
+      var_2 scripts\cp\cp_convoy_manager_code::kill_main_truck(var_2, var_0);
     }
 
     return;
   }
 }
 
-function delay_kill_convoy_accessories(var0) {
+function delay_kill_convoy_accessories(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    for(var1 = 0; var1 < self.spawned_vehicles.size; var1++) {
-      if(isalive(self.spawned_vehicles[var1])) {
-        self.spawned_vehicles[var1] scripts\cp\cp_convoy_manager_code::delete_accessories(var0);
+    for(var_1 = 0; var_1 < self.spawned_vehicles.size; var_1++) {
+      if(isalive(self.spawned_vehicles[var_1])) {
+        self.spawned_vehicles[var_1] scripts\cp\cp_convoy_manager_code::delete_accessories(var_0);
       }
     }
 
@@ -918,10 +918,10 @@ function delay_kill_convoy_accessories(var0) {
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
-    foreach(var3 in level.all_convoys) {
-      for(var1 = 0; var1 < var3.spawned_vehicles.size; var1++) {
-        if(isalive(var3.spawned_vehicles[var1])) {
-          var3.spawned_vehicles[var1] scripts\cp\cp_convoy_manager_code::delete_accessories(var0);
+    foreach(var_3 in level.all_convoys) {
+      for(var_1 = 0; var_1 < var_3.spawned_vehicles.size; var_1++) {
+        if(isalive(var_3.spawned_vehicles[var_1])) {
+          var_3.spawned_vehicles[var_1] scripts\cp\cp_convoy_manager_code::delete_accessories(var_0);
         }
       }
     }
@@ -930,13 +930,13 @@ function delay_kill_convoy_accessories(var0) {
   }
 }
 
-function delay_kill_convoy_riders(var0) {
+function delay_kill_convoy_riders(var_0) {
   if(!scripts\cp\cp_convoy_manager_code::is_convoy()) {
     return;
   }
 }
 
-function route_towards_exit(var0, var1) {
+function route_towards_exit(var_0, var_1) {
   if(!scripts\cp\cp_convoy_manager_code::is_convoy()) {
     return;
   }

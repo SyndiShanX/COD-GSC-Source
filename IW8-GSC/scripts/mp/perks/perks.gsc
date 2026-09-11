@@ -294,14 +294,14 @@ function init() {
   registerscriptperk("blackhat_mp");
   registerscriptperk("flare_mp");
   registerscriptperk("serum_gadget", undefined, undefined, ["penalty_stun_more", "specialty_extendedmelee_s4", "specialty_hardmelee", "penalty_louder"]);
-  var0 = scripts\mp\passives::getweapontypepassives();
+  var_0 = scripts\mp\passives::getweapontypepassives();
 
-  foreach(var2 in var0) {
-    level.scriptperks[var2] = 1;
-    var3 = scripts\mp\passives::getpassiveperk(var2);
+  foreach(var_2 in var_0) {
+    level.scriptperks[var_2] = 1;
+    var_3 = scripts\mp\passives::getpassiveperk(var_2);
 
-    if(isDefined(var3)) {
-      level.extraperkmap[var2] = [var3];
+    if(isDefined(var_3)) {
+      level.extraperkmap[var_2] = [var_3];
     }
   }
 
@@ -344,29 +344,29 @@ function init() {
   thread onplayerconnect();
 }
 
-function registerscriptperk(var0, var1, var2, var3) {
-  registerperk(var0, 1, var1, var2, var3);
+function registerscriptperk(var_0, var_1, var_2, var_3) {
+  registerperk(var_0, 1, var_1, var_2, var_3);
 }
 
-function registercodeperkinfo(var0, var1, var2, var3) {
-  registerperk(var0, 0, var1, var2, var3);
+function registercodeperkinfo(var_0, var_1, var_2, var_3) {
+  registerperk(var_0, 0, var_1, var_2, var_3);
 }
 
-function registerperk(var0, var1, var2, var3, var4) {
-  if(istrue(var1)) {
-    level.scriptperks[var0] = 1;
+function registerperk(var_0, var_1, var_2, var_3, var_4) {
+  if(istrue(var_1)) {
+    level.scriptperks[var_0] = 1;
   }
 
-  if(isDefined(var2)) {
-    level.perksetfuncs[var0] = var2;
+  if(isDefined(var_2)) {
+    level.perksetfuncs[var_0] = var_2;
   }
 
-  if(isDefined(var3)) {
-    level.perkunsetfuncs[var0] = var3;
+  if(isDefined(var_3)) {
+    level.perkunsetfuncs[var_0] = var_3;
   }
 
-  if(isDefined(var4)) {
-    level.extraperkmap[var0] = var4;
+  if(isDefined(var_4)) {
+    level.extraperkmap[var_0] = var_4;
     return;
   }
 }
@@ -376,22 +376,22 @@ function menurigperkparsetable() {
     level.menurigperks = [];
   }
 
-  for(var0 = 0;; var0++) {
-    var1 = tablelookupbyrow("mp/menuRigPerks.csv", var0, 0);
+  for(var_0 = 0;; var_0++) {
+    var_1 = tablelookupbyrow("mp/menuRigPerks.csv", var_0, 0);
 
-    if(var1 == "") {
+    if(var_1 == "") {
       break;
     }
 
-    var2 = tablelookupbyrow("mp/menuRigPerks.csv", var0, 1);
-    var3 = tablelookupbyrow("mp/menuRigPerks.csv", var0, 2);
-    var4 = spawnStruct();
-    var4.id = var1;
-    var4.ref = var3;
-    var4.archetype = var2;
+    var_2 = tablelookupbyrow("mp/menuRigPerks.csv", var_0, 1);
+    var_3 = tablelookupbyrow("mp/menuRigPerks.csv", var_0, 2);
+    var_4 = spawnStruct();
+    var_4.id = var_1;
+    var_4.ref = var_3;
+    var_4.archetype = var_2;
 
-    if(!isDefined(level.menurigperks[var3])) {
-      level.menurigperks[var3] = var4;
+    if(!isDefined(level.menurigperks[var_3])) {
+      level.menurigperks[var_3] = var_4;
     }
   }
 }
@@ -401,22 +401,22 @@ function menuperkparsetable() {
     level.menuperks = [];
   }
 
-  for(var0 = 0;; var0++) {
-    var1 = tablelookupbyrow("mp/menuPerks.csv", var0, 0);
+  for(var_0 = 0;; var_0++) {
+    var_1 = tablelookupbyrow("mp/menuPerks.csv", var_0, 0);
 
-    if(var1 == "") {
+    if(var_1 == "") {
       break;
     }
 
-    var2 = tablelookupbyrow("mp/menuPerks.csv", var0, 1);
-    var3 = tablelookupbyrow("mp/menuPerks.csv", var0, 2);
-    var4 = spawnStruct();
-    var4.name = var3;
-    var4.ref = var3;
-    var4.slot = var2;
+    var_2 = tablelookupbyrow("mp/menuPerks.csv", var_0, 1);
+    var_3 = tablelookupbyrow("mp/menuPerks.csv", var_0, 2);
+    var_4 = spawnStruct();
+    var_4.name = var_3;
+    var_4.ref = var_3;
+    var_4.slot = var_2;
 
-    if(!isDefined(level.menuperks[var3])) {
-      level.menuperks[var3] = var4;
+    if(!isDefined(level.menuperks[var_3])) {
+      level.menuperks[var_3] = var_4;
     }
   }
 }
@@ -428,32 +428,32 @@ function initperktable() {
 
   level.perksbyid = [];
 
-  for(var0 = 0;; var0++) {
-    var1 = tablelookupbyrow("mp/perkTable.csv", var0, 0);
+  for(var_0 = 0;; var_0++) {
+    var_1 = tablelookupbyrow("mp/perkTable.csv", var_0, 0);
 
-    if(var1 == "") {
+    if(var_1 == "") {
       break;
     }
 
-    var2 = tablelookupbyrow("mp/perkTable.csv", var0, 1);
-    var3 = tablelookupbyrow("mp/perkTable.csv", var0, 16);
-    var4 = tablelookupbyrow("mp/perkTable.csv", var0, 17);
-    var5 = tablelookupbyrow("mp/perkTable.csv", var0, 18);
-    var6 = spawnStruct();
-    var6.ref = var2;
-    var6.id = int(var1);
-    var6.specialist = int(var3);
-    var6.ref_136d1 = int(var4);
+    var_2 = tablelookupbyrow("mp/perkTable.csv", var_0, 1);
+    var_3 = tablelookupbyrow("mp/perkTable.csv", var_0, 16);
+    var_4 = tablelookupbyrow("mp/perkTable.csv", var_0, 17);
+    var_5 = tablelookupbyrow("mp/perkTable.csv", var_0, 18);
+    var_6 = spawnStruct();
+    var_6.ref = var_2;
+    var_6.id = int(var_1);
+    var_6.specialist = int(var_3);
+    var_6.ref_136d1 = int(var_4);
 
-    if(var5 != "") {
-      game["dialog"][var2] = var5;
+    if(var_5 != "") {
+      game["dialog"][var_2] = var_5;
     }
 
-    if(!isDefined(level.perktable[var2])) {
-      level.perktable[var2] = var6;
+    if(!isDefined(level.perktable[var_2])) {
+      level.perktable[var_2] = var_6;
     }
 
-    level.perksbyid[var6.id] = var6.ref;
+    level.perksbyid[var_6.id] = var_6.ref;
   }
 }
 
@@ -464,43 +464,43 @@ function initspecialistkillstreaks() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("specialist_perk_bonus", undefined, &ref_1208e);
 }
 
-function onspecialistkillstreakavailable(var0) {
-  var1 = getspecialistperkforstreak(var0.streakname);
-  scripts\mp\utility\perk::giveperk(var1);
+function onspecialistkillstreakavailable(var_0) {
+  var_1 = getspecialistperkforstreak(var_0.streakname);
+  scripts\mp\utility\perk::giveperk(var_1);
 }
 
-function getspecialistperkforstreak(var0) {
-  var1 = getspecialistindexforstreak(var0);
+function getspecialistperkforstreak(var_0) {
+  var_1 = getspecialistindexforstreak(var_0);
 
-  if(var1 == -1) {
+  if(var_1 == -1) {
     return undefined;
   }
 
-  return self.classstruct.loadoutextraperks[var1];
+  return self.classstruct.loadoutextraperks[var_1];
 }
 
-function getspecialistindexforstreak(var0) {
-  if(!isDefined(var0)) {
+function getspecialistindexforstreak(var_0) {
+  if(!isDefined(var_0)) {
     return -1;
   }
 
-  if(var0 == "specialist_perk_1") {
+  if(var_0 == "specialist_perk_1") {
     return 0;
   }
 
-  if(var0 == "specialist_perk_2") {
+  if(var_0 == "specialist_perk_2") {
     return 1;
   }
 
-  if(var0 == "specialist_perk_3") {
+  if(var_0 == "specialist_perk_3") {
     return 2;
   }
 
   return -1;
 }
 
-function usescriptablemeleeblood(var0) {
-  switch (var0) {
+function usescriptablemeleeblood(var_0) {
+  switch (var_0) {
     case "specialist_perk_bonus":
     case "specialist_perk_3":
     case "specialist_perk_2":
@@ -511,12 +511,12 @@ function usescriptablemeleeblood(var0) {
   }
 }
 
-function ref_1208e(var0) {
+function ref_1208e(var_0) {
   bears();
 }
 
-function battle_tracks_tryinittogglestate(var0) {
-  switch (var0) {
+function battle_tracks_tryinittogglestate(var_0) {
+  switch (var_0) {
     case "yellow":
       big_door_watcher();
       break;
@@ -529,16 +529,16 @@ function battle_tracks_tryinittogglestate(var0) {
     case "":
       break;
     default:
-      scripts\mp\utility\perk::giveperk(var0);
+      scripts\mp\utility\perk::giveperk(var_0);
       break;
   }
 }
 
-function hudcost(var0) {
-  if(issubstr(var0, "brloot_perk_point_")) {
-    var1 = getsubstr(var0, 18);
+function hudcost(var_0) {
+  if(issubstr(var_0, "brloot_perk_point_")) {
+    var_1 = getsubstr(var_0, 18);
 
-    switch (var1) {
+    switch (var_1) {
       case "amped":
         return "specialty_warhead";
       case "battle_hardened":
@@ -584,7 +584,7 @@ function hudcost(var0) {
       case "blue":
       case "yellow":
       case "red":
-        return var1;
+        return var_1;
       default:
         return "";
     }
@@ -625,18 +625,18 @@ function battle_tracks_gettrackindex() {
 }
 
 function bears() {
-  foreach(var1 in level.perktable) {
-    var2 = scripts\engine\utility::ter_op(scripts\mp\utility\game::getgametype() == "br", istrue(var1.ref_136d1), istrue(var1.specialist));
+  foreach(var_1 in level.perktable) {
+    var_2 = scripts\engine\utility::ter_op(scripts\mp\utility\game::getgametype() == "br", istrue(var_1.ref_136d1), istrue(var_1.specialist));
 
-    if(!var2) {
+    if(!var_2) {
       continue;
     }
 
-    if(equipmentisrestricted(var1.ref)) {
+    if(equipmentisrestricted(var_1.ref)) {
       continue;
     }
 
-    scripts\mp\utility\perk::giveperk(var1.ref);
+    scripts\mp\utility\perk::giveperk(var_1.ref);
   }
 
   scripts\mp\utility\perk::giveperk("specialty_specialist_bonus");
@@ -660,18 +660,18 @@ function bears() {
 }
 
 function ref_12c25() {
-  foreach(var1 in level.perktable) {
-    var2 = scripts\engine\utility::ter_op(scripts\mp\utility\game::getgametype() == "br", istrue(var1.ref_136d1), istrue(var1.specialist));
+  foreach(var_1 in level.perktable) {
+    var_2 = scripts\engine\utility::ter_op(scripts\mp\utility\game::getgametype() == "br", istrue(var_1.ref_136d1), istrue(var_1.specialist));
 
-    if(!var2) {
+    if(!var_2) {
       continue;
     }
 
-    if(equipmentisrestricted(var1.ref)) {
+    if(equipmentisrestricted(var_1.ref)) {
       continue;
     }
 
-    scripts\mp\utility\perk::removeperk(var1.ref);
+    scripts\mp\utility\perk::removeperk(var_1.ref);
   }
 
   scripts\mp\utility\perk::removeperk("specialty_specialist_bonus");
@@ -695,34 +695,34 @@ function ref_12c25() {
 }
 
 function getavailableperks() {
-  var0 = [];
+  var_0 = [];
 
-  foreach(var2 in level.menuperks) {
-    if(scripts\mp\utility\perk::_hasperk(var2.name)) {
+  foreach(var_2 in level.menuperks) {
+    if(scripts\mp\utility\perk::_hasperk(var_2.name)) {
       continue;
     }
 
-    var0 = var2.name;
+    var_0 = var_2.name;
   }
 
-  return var0;
+  return var_0;
 }
 
-function getperkslot(var0) {
-  var1 = level.menuperks[var0];
+function getperkslot(var_0) {
+  var_1 = level.menuperks[var_0];
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return undefined;
   }
 
-  return int(var1.slot);
+  return int(var_1.slot);
 }
 
-function validateperk(var0) {
+function validateperk(var_0) {
   if(!scripts\mp\utility\perk::perksenabled()) {
-    var0 = "specialty_null";
+    var_0 = "specialty_null";
   } else {
-    switch (var0) {
+    switch (var_0) {
       case "specialty_corpse_steal":
       case "specialty_chain_reaction":
       case "specialty_deadeye":
@@ -800,20 +800,20 @@ function validateperk(var0) {
       case "specialty_stun_resistance":
         break;
       default:
-        var0 = "specialty_null";
+        var_0 = "specialty_null";
         break;
     }
   }
 
-  return var0;
+  return var_0;
 }
 
 function onplayerconnect() {
   for(;;) {
-    level waittill("connected", var0);
-    var0.perks = [];
-    var0.perksblocked = [];
-    var0.weaponlist = [];
+    level waittill("connected", var_0);
+    var_0.perks = [];
+    var_0.perksblocked = [];
+    var_0.weaponlist = [];
   }
 }
 
@@ -847,99 +847,99 @@ function initperkdvars() {
   }
 }
 
-function giveperks(var0, var1) {
-  var1 = scripts\engine\utility::ter_op(isDefined(var1), var1, 1);
+function giveperks(var_0, var_1) {
+  var_1 = scripts\engine\utility::ter_op(isDefined(var_1), var_1, 1);
 
-  foreach(var3 in var0) {
-    if(var1) {
-      var3 = validateperk(var3);
+  foreach(var_3 in var_0) {
+    if(var_1) {
+      var_3 = validateperk(var_3);
     }
 
-    if(var3 != "specialty_null") {
-      scripts\mp\class::loadout_giveperk(var3);
+    if(var_3 != "specialty_null") {
+      scripts\mp\class::loadout_giveperk(var_3);
     }
   }
 }
 
-function _setperk(var0) {
+function _setperk(var_0) {
   if(!isDefined(self.perks)) {
     self.perks = [];
   }
 
-  if(!isDefined(self.perks[var0])) {
-    self.perks[var0] = 1;
+  if(!isDefined(self.perks[var_0])) {
+    self.perks[var_0] = 1;
   } else {
-    self.perks[var0]++;
+    self.perks[var_0]++;
   }
 
-  if(self.perks[var0] == 1 && !isDefined(self.perksblocked[var0])) {
-    _setperkinternal(var0);
+  if(self.perks[var_0] == 1 && !isDefined(self.perksblocked[var_0])) {
+    _setperkinternal(var_0);
     return;
   }
 }
 
-function _setperkinternal(var0) {
-  var1 = level.perksetfuncs[var0];
+function _setperkinternal(var_0) {
+  var_1 = level.perksetfuncs[var_0];
 
-  if(isDefined(var1)) {
-    self thread[[var1]]();
+  if(isDefined(var_1)) {
+    self thread[[var_1]]();
   }
 
-  self setperk(var0, !isDefined(level.scriptperks[var0]));
+  self setperk(var_0, !isDefined(level.scriptperks[var_0]));
 }
 
-function _setextraperks(var0) {
-  if(isDefined(level.extraperkmap[var0])) {
-    foreach(var2 in level.extraperkmap[var0]) {
-      _setperk(var2);
-      _setextraperks(var2);
+function _setextraperks(var_0) {
+  if(isDefined(level.extraperkmap[var_0])) {
+    foreach(var_2 in level.extraperkmap[var_0]) {
+      _setperk(var_2);
+      _setextraperks(var_2);
     }
 
     return;
   }
 }
 
-function _unsetextraperks(var0) {
-  if(isDefined(level.extraperkmap[var0])) {
-    foreach(var2 in level.extraperkmap[var0]) {
-      _unsetperk(var2);
-      _unsetextraperks(var2);
+function _unsetextraperks(var_0) {
+  if(isDefined(level.extraperkmap[var_0])) {
+    foreach(var_2 in level.extraperkmap[var_0]) {
+      _unsetperk(var_2);
+      _unsetextraperks(var_2);
     }
 
     return;
   }
 }
 
-function _unsetperk(var0) {
-  if(!isDefined(self.perks[var0])) {
+function _unsetperk(var_0) {
+  if(!isDefined(self.perks[var_0])) {
     return;
   }
 
-  self.perks[var0]--;
+  self.perks[var_0]--;
 
-  if(self.perks[var0] == 0) {
-    if(!isDefined(self.perksblocked[var0])) {
-      _unsetperkinternal(var0);
+  if(self.perks[var_0] == 0) {
+    if(!isDefined(self.perksblocked[var_0])) {
+      _unsetperkinternal(var_0);
     }
 
-    self.perks[var0] = undefined;
+    self.perks[var_0] = undefined;
     return;
   }
 }
 
-function _unsetperkinternal(var0) {
-  if(isDefined(level.perkunsetfuncs[var0])) {
-    self thread[[level.perkunsetfuncs[var0]]]();
+function _unsetperkinternal(var_0) {
+  if(isDefined(level.perkunsetfuncs[var_0])) {
+    self thread[[level.perkunsetfuncs[var_0]]]();
   }
 
-  self unsetperk(var0, !isDefined(level.scriptperks[var0]));
+  self unsetperk(var_0, !isDefined(level.scriptperks[var_0]));
 }
 
 function _clearperks() {
   if(isDefined(self.perks)) {
-    foreach(var1 in self.perks) {
-      if(isDefined(level.perkunsetfuncs[var2])) {
-        self[[level.perkunsetfuncs[var2]]]();
+    foreach(var_1 in self.perks) {
+      if(isDefined(level.perkunsetfuncs[var_2])) {
+        self[[level.perkunsetfuncs[var_2]]]();
       }
     }
   }
@@ -949,16 +949,16 @@ function _clearperks() {
   self clearperks();
 }
 
-function removeinvalidperks(var0) {
-  var1 = [];
+function removeinvalidperks(var_0) {
+  var_1 = [];
 
-  foreach(var3 in var0) {
-    if(validateperk(var3) != "specialty_null") {
-      var1 = var3;
+  foreach(var_3 in var_0) {
+    if(validateperk(var_3) != "specialty_null") {
+      var_1 = var_3;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
 function giveperksafterspawn() {
@@ -972,13 +972,13 @@ function giveperksafterspawn() {
   scripts\mp\class::loadout_giveperk("specialty_gas_grenade_resist");
 
   if(self.avoidkillstreakonspawntimer > 0) {
-    var0 = self.avoidkillstreakonspawntimer;
+    var_0 = self.avoidkillstreakonspawntimer;
 
     if(istrue(self.inspawncamera)) {
-      var0 += scripts\mp\spawncamera::room_door_windows();
+      var_0 += scripts\mp\spawncamera::room_door_windows();
     }
 
-    wait var0;
+    wait var_0;
   }
 
   if(scripts\mp\utility\killstreak::isplayerkillstreak(self) && isDefined(self.playerproxyagent) && isalive(self.playerproxyagent)) {
@@ -992,46 +992,46 @@ function giveperksafterspawn() {
   self notify("removed_spawn_perks");
 }
 
-function updateactiveperks(var0, var1, var2, var3, var4, var5, var6, var7) {
-  var8 = isDefined(var0) && isPlayer(var0);
-  var9 = scripts\mp\utility\weapon::isthrowingknife(var5);
-  var10 = var9 && isDefined(var0) && isDefined(var0.classname) && var0.classname == "grenade";
-  var11 = isDefined(var1) && isPlayer(var1) && var1 != var2;
+function updateactiveperks(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  var_8 = isDefined(var_0) && isPlayer(var_0);
+  var_9 = scripts\mp\utility\weapon::isthrowingknife(var_5);
+  var_10 = var_9 && isDefined(var_0) && isDefined(var_0.classname) && var_0.classname == "grenade";
+  var_11 = isDefined(var_1) && isPlayer(var_1) && var_1 != var_2;
 
-  if(var11 && (var8 || var10)) {
-    var1.waittoopenaltbunker = gettime();
-    thread scripts\mp\perks\weaponpassives::updateweaponpassivesonkill(var0, var1, var2, var3, var4, var5, var6, var7);
+  if(var_11 && (var_8 || var_10)) {
+    var_1.waittoopenaltbunker = gettime();
+    thread scripts\mp\perks\weaponpassives::updateweaponpassivesonkill(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7);
 
-    if(var1 scripts\mp\utility\perk::_hasperk("specialty_triggerhappy")) {
-      var1 thread scripts\mp\perks\perkfunctions::settriggerhappyinternal();
+    if(var_1 scripts\mp\utility\perk::_hasperk("specialty_triggerhappy")) {
+      var_1 thread scripts\mp\perks\perkfunctions::settriggerhappyinternal();
     }
 
-    if(var1 scripts\mp\utility\perk::_hasperk("specialty_boom")) {
-      var2 thread scripts\mp\perks\perkfunctions::setboominternal(var1);
+    if(var_1 scripts\mp\utility\perk::_hasperk("specialty_boom")) {
+      var_2 thread scripts\mp\perks\perkfunctions::setboominternal(var_1);
     }
 
-    if(var1 scripts\mp\utility\perk::_hasperk("specialty_deadeye")) {
-      var1.deadeyekillcount++;
+    if(var_1 scripts\mp\utility\perk::_hasperk("specialty_deadeye")) {
+      var_1.deadeyekillcount++;
     }
 
-    var12 = var1.pers["abilityRecharging"];
+    var_12 = var_1.pers["abilityRecharging"];
 
-    if(isDefined(var12) && var12) {
-      var1 notify("abilityFastRecharge");
+    if(isDefined(var_12) && var_12) {
+      var_1 notify("abilityFastRecharge");
     }
 
-    var13 = var1.pers["abilityOn"];
+    var_13 = var_1.pers["abilityOn"];
 
-    if(isDefined(var13) && var13) {
-      var1 notify("abilityExtraTime");
+    if(isDefined(var_13) && var_13) {
+      var_1 notify("abilityExtraTime");
     }
 
-    if(var1 scripts\mp\utility\perk::_hasperk("specialty_super_sprint_kill_refresh")) {
-      var1 scripts\mp\perks\perkfunctions::supersprintkillrefresh_onkill();
+    if(var_1 scripts\mp\utility\perk::_hasperk("specialty_super_sprint_kill_refresh")) {
+      var_1 scripts\mp\perks\perkfunctions::supersprintkillrefresh_onkill();
     }
 
-    if(var1 scripts\mp\utility\perk::_hasperk("specialty_reduce_regen_delay_on_kill")) {
-      var1 scripts\mp\perks\perkfunctions::regendelayreduce_onkill();
+    if(var_1 scripts\mp\utility\perk::_hasperk("specialty_reduce_regen_delay_on_kill")) {
+      var_1 scripts\mp\perks\perkfunctions::regendelayreduce_onkill();
       return;
     }
 
@@ -1039,53 +1039,53 @@ function updateactiveperks(var0, var1, var2, var3, var4, var5, var6, var7) {
   }
 }
 
-function setomnvarsforperklist(var0, var1) {
-  var2 = [];
+function setomnvarsforperklist(var_0, var_1) {
+  var_2 = [];
 
-  foreach(var4 in var1) {
-    if(!isDefined(level.perktable[var4])) {
+  foreach(var_4 in var_1) {
+    if(!isDefined(level.perktable[var_4])) {
       continue;
     }
 
-    var5 = getperkslot(var4);
+    var_5 = getperkslot(var_4);
 
-    if(!isDefined(var5)) {
+    if(!isDefined(var_5)) {
       continue;
     }
 
-    if(!isDefined(var2[var5])) {
-      var2 = [];
+    if(!isDefined(var_2[var_5])) {
+      var_2 = [];
     }
 
-    var2[var2[var5].size] = level.perktable[var4].id;
+    var_2[var_2[var_5].size] = level.perktable[var_4].id;
   }
 
-  var7 = [];
+  var_7 = [];
 
-  for(var5 = 1; var5 < 4; var5++) {
-    if(isDefined(var2[var5])) {
-      foreach(var4 in var2[var5]) {
-        var7 = var4;
+  for(var_5 = 1; var_5 < 4; var_5++) {
+    if(isDefined(var_2[var_5])) {
+      foreach(var_4 in var_2[var_5]) {
+        var_7 = var_4;
       }
     }
   }
 
-  for(var10 = 0; var10 < 6; var10++) {
-    var11 = var7[var10];
+  for(var_10 = 0; var_10 < 6; var_10++) {
+    var_11 = var_7[var_10];
 
-    if(!isDefined(var11)) {
-      var11 = -1;
+    if(!isDefined(var_11)) {
+      var_11 = -1;
     }
 
-    self setclientomnvar(var0 + var10, var11);
+    self setclientomnvar(var_0 + var_10, var_11);
   }
 }
 
-function isperkinloadout(var0) {
-  var1 = self.pers["loadoutPerks"];
+function isperkinloadout(var_0) {
+  var_1 = self.pers["loadoutPerks"];
 
-  foreach(var3 in var1) {
-    if(var3 == var0) {
+  foreach(var_3 in var_1) {
+    if(var_3 == var_0) {
       return true;
     }
   }
@@ -1093,10 +1093,10 @@ function isperkinloadout(var0) {
   return false;
 }
 
-function getperkid(var0) {
-  if(!isDefined(var0) || !isDefined(level.perktable[var0])) {
+function getperkid(var_0) {
+  if(!isDefined(var_0) || !isDefined(level.perktable[var_0])) {
     return 0;
   }
 
-  return level.perktable[var0].id;
+  return level.perktable[var_0].id;
 }

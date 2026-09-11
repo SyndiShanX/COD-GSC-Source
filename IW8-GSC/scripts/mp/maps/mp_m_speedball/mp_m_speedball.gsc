@@ -31,27 +31,27 @@ function main() {
 
 function signallightsthink() {
   wait 2;
-  var0 = getscriptablearray("scriptable_stationary_trainyard_signal_lights_01_spdball", "classname");
+  var_0 = getscriptablearray("scriptable_stationary_trainyard_signal_lights_01_spdball", "classname");
 
-  if(var0.size == 0) {
+  if(var_0.size == 0) {
     return;
   }
 
-  foreach(var2 in var0) {
-    var2 setscriptablepartstate("light", "light_red");
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("light", "light_red");
   }
 
   if(!scripts\mp\flags::gameflag("prematch_done")) {
     level scripts\mp\flags::gameflagwait("prematch_done");
   }
 
-  foreach(var2 in var0) {
-    var2 setscriptablepartstate("light", "light_green");
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("light", "light_green");
   }
 
   wait 3;
 
-  foreach(var2 in var0) {
-    var2 setscriptablepartstate("light", "light_red");
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("light", "light_red");
   }
 }

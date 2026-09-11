@@ -4,13 +4,13 @@
 ***********************************************/
 
 function minefields() {
-  var0 = getEntArray("minefield", "targetname");
+  var_0 = getEntArray("minefield", "targetname");
 
-  if(var0.size > 0) {
+  if(var_0.size > 0) {
     level._effect["mine_explosion"] = loadfx("vfx/core/expl/weap/gre/vfx_exp_gre_dirt_cg");
   }
 
-  for(var1 = 0; var1 < var0.size; var1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     thread minefield_think();
   }
 }
@@ -19,15 +19,15 @@ function minefield_think() {
   scripts\mp\flags::gameflagwait("prematch_done");
 
   for(;;) {
-    self waittill("trigger", var0);
+    self waittill("trigger", var_0);
 
-    if(isPlayer(var0)) {
-      thread minefield_kill(var0);
+    if(isPlayer(var_0)) {
+      thread minefield_kill(var_0);
     }
   }
 }
 
-function minefield_kill(var0) {
+function minefield_kill(var_0) {
   if(isDefined(self.minefield)) {
     return;
   }
@@ -36,12 +36,12 @@ function minefield_kill(var0) {
   wait 0.5;
   wait randomfloat(0.5);
 
-  if(isDefined(self) && self istouching(var0)) {
-    var1 = self getorigin();
-    var2 = 300;
-    var3 = 2000;
-    var4 = 50;
-    radiusdamage(var1, var2, var3, var4);
+  if(isDefined(self) && self istouching(var_0)) {
+    var_1 = self getorigin();
+    var_2 = 300;
+    var_3 = 2000;
+    var_4 = 50;
+    radiusdamage(var_1, var_2, var_3, var_4);
   }
 
   self.minefield = undefined;

@@ -32,50 +32,50 @@ function bot_siege_manager_think() {
   for(;;) {
     level.siege_bot_team_need_flags = [];
 
-    foreach(var1 in level.players) {
-      if(!scripts\mp\utility\player::isreallyalive(var1) && var1.hasspawned) {
-        if(var1.team != "spectator" && var1.team != "neutral") {
-          level.siege_bot_team_need_flags[var1.team] = 1;
+    foreach(var_1 in level.players) {
+      if(!scripts\mp\utility\player::isreallyalive(var_1) && var_1.hasspawned) {
+        if(var_1.team != "spectator" && var_1.team != "neutral") {
+          level.siege_bot_team_need_flags[var_1.team] = 1;
         }
       }
     }
 
-    var3 = [];
+    var_3 = [];
 
-    foreach(var5 in level.objectives) {
-      var6 = var5 scripts\mp\gameobjects::getownerteam();
+    foreach(var_5 in level.objectives) {
+      var_6 = var_5 scripts\mp\gameobjects::getownerteam();
 
-      if(var6 != "neutral") {
-        if(!isDefined(var3[var6])) {
-          var3 = 1;
+      if(var_6 != "neutral") {
+        if(!isDefined(var_3[var_6])) {
+          var_3 = 1;
           continue;
         }
 
-        var3++;
+        var_3++;
       }
     }
 
-    foreach(var6, var9 in var3) {
-      if(var9 >= 2) {
-        var10 = scripts\mp\utility\game::getotherteam(var6)[0];
-        level.siege_bot_team_need_flags[var10] = 1;
+    foreach(var_6, var_9 in var_3) {
+      if(var_9 >= 2) {
+        var_10 = scripts\mp\utility\game::getotherteam(var_6)[0];
+        level.siege_bot_team_need_flags[var_10] = 1;
 
-        if(var9 == 2 && !istrue(level.ref_13391[var6])) {
+        if(var_9 == 2 && !istrue(level.ref_13391[var_6])) {
           if(randomint(100) > 75) {
-            level.siege_bot_team_need_flags[var6] = 1;
+            level.siege_bot_team_need_flags[var_6] = 1;
           } else {
-            level.ref_13391[var6] = 0;
+            level.ref_13391[var_6] = 0;
           }
 
-          level.ref_13390[var6] = 1;
+          level.ref_13390[var_6] = 1;
         }
 
         continue;
       }
 
-      if(var9 < 2 && istrue(level.ref_13390[var6])) {
-        level.ref_13390[var6] = 0;
-        level.ref_13391[var6] = 0;
+      if(var_9 < 2 && istrue(level.ref_13390[var_6])) {
+        level.ref_13390[var_6] = 0;
+        level.ref_13391[var_6] = 0;
       }
     }
 
@@ -116,26 +116,26 @@ function bot_siege_think() {
 }
 
 function bot_choose_flag() {
-  var0 = undefined;
-  var1 = undefined;
+  var_0 = undefined;
+  var_1 = undefined;
 
-  foreach(var3 in level.objectives) {
-    var4 = var3 scripts\mp\gameobjects::getownerteam();
+  foreach(var_3 in level.objectives) {
+    var_4 = var_3 scripts\mp\gameobjects::getownerteam();
 
-    if(var4 != self.team) {
-      var5 = distancesquared(self.origin, var3.trigger.origin);
+    if(var_4 != self.team) {
+      var_5 = distancesquared(self.origin, var_3.trigger.origin);
 
-      if(!isDefined(var1) || var5 < var1) {
-        var1 = var5;
-        var0 = var3;
+      if(!isDefined(var_1) || var_5 < var_1) {
+        var_1 = var_5;
+        var_0 = var_3;
       }
     }
   }
 
-  if(isDefined(var0)) {
-    if(!isDefined(self.goalflag) || self.goalflag != var0) {
-      self.goalflag = var0;
-      scripts\mp\bots\bots_strategy::bot_capture_point(var0.trigger.origin, 100);
+  if(isDefined(var_0)) {
+    if(!isDefined(self.goalflag) || self.goalflag != var_0) {
+      self.goalflag = var_0;
+      scripts\mp\bots\bots_strategy::bot_capture_point(var_0.trigger.origin, 100);
       return;
     }
 

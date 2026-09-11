@@ -22,26 +22,26 @@ function setup_bot_sotf() {
   level.bots_gametype_handles_class_choice = 1;
 }
 
-function sotf_should_stop_seeking_weapon(var0) {
+function sotf_should_stop_seeking_weapon(var_0) {
   if(scripts\mp\bots\bots_util::bot_get_total_gun_ammo() > 0) {
-    var1 = scripts\mp\utility\weapon::getweapongroup(self getcurrentweapon());
+    var_1 = scripts\mp\utility\weapon::getweapongroup(self getcurrentweapon());
 
-    if(isDefined(var0.object)) {
-      var2 = var0.object.classname;
+    if(isDefined(var_0.object)) {
+      var_2 = var_0.object.classname;
 
-      if(scripts\engine\utility::string_starts_with(var2, "weapon_")) {
-        var2 = getsubstr(var2, 7);
+      if(scripts\engine\utility::string_starts_with(var_2, "weapon_")) {
+        var_2 = getsubstr(var_2, 7);
       }
 
-      var3 = scripts\mp\utility\weapon::getweapongroup(var2);
+      var_3 = scripts\mp\utility\weapon::getweapongroup(var_2);
 
-      if(!bot_weapon_is_better_class(var1, var3)) {
+      if(!bot_weapon_is_better_class(var_1, var_3)) {
         return true;
       }
     }
   }
 
-  if(!isDefined(var0.object)) {
+  if(!isDefined(var_0.object)) {
     return true;
   }
 
@@ -55,44 +55,44 @@ function sotf_bot_think_seek_dropped_weapons() {
   level endon("game_ended");
 
   for(;;) {
-    var0 = 0;
+    var_0 = 0;
 
     if(self[[level.bot_funcs["should_pickup_weapons"]]]() && !scripts\mp\bots\bots_util::bot_is_remote_or_linked()) {
       if(scripts\mp\bots\bots_util::bot_out_of_ammo()) {
-        var1 = getEntArray("dropped_weapon", "targetname");
-        var2 = scripts\engine\utility::get_array_of_closest(self.origin, var1);
+        var_1 = getEntArray("dropped_weapon", "targetname");
+        var_2 = scripts\engine\utility::get_array_of_closest(self.origin, var_1);
 
-        if(var2.size > 0) {
-          var3 = var2[0];
-          scripts\mp\bots\bots::bot_seek_dropped_weapon(var3);
+        if(var_2.size > 0) {
+          var_3 = var_2[0];
+          scripts\mp\bots\bots::bot_seek_dropped_weapon(var_3);
         }
       } else {
-        var1 = getEntArray("dropped_weapon", "targetname");
-        var2 = scripts\engine\utility::get_array_of_closest(self.origin, var1);
+        var_1 = getEntArray("dropped_weapon", "targetname");
+        var_2 = scripts\engine\utility::get_array_of_closest(self.origin, var_1);
 
-        if(var2.size > 0) {
-          var4 = self getnearestnode();
+        if(var_2.size > 0) {
+          var_4 = self getnearestnode();
 
-          if(isDefined(var4)) {
-            var5 = scripts\mp\utility\weapon::getweapongroup(self getcurrentweapon());
+          if(isDefined(var_4)) {
+            var_5 = scripts\mp\utility\weapon::getweapongroup(self getcurrentweapon());
 
-            foreach(var3 in var2) {
-              var7 = var3.classname;
+            foreach(var_3 in var_2) {
+              var_7 = var_3.classname;
 
-              if(scripts\engine\utility::string_starts_with(var7, "weapon_")) {
-                var7 = getsubstr(var7, 7);
+              if(scripts\engine\utility::string_starts_with(var_7, "weapon_")) {
+                var_7 = getsubstr(var_7, 7);
               }
 
-              var8 = scripts\mp\utility\weapon::getweapongroup(var7);
+              var_8 = scripts\mp\utility\weapon::getweapongroup(var_7);
 
-              if(bot_weapon_is_better_class(var5, var8)) {
-                if(!isDefined(var3.calculated_nearest_node) || !var3.calculated_nearest_node) {
-                  var3.nearest_node = getclosestnodeinsight(var3.origin);
-                  var3.calculated_nearest_node = 1;
+              if(bot_weapon_is_better_class(var_5, var_8)) {
+                if(!isDefined(var_3.calculated_nearest_node) || !var_3.calculated_nearest_node) {
+                  var_3.nearest_node = getclosestnodeinsight(var_3.origin);
+                  var_3.calculated_nearest_node = 1;
                 }
 
-                if(isDefined(var3.nearest_node) && nodesvisible(var4, var3.nearest_node, 1)) {
-                  scripts\mp\bots\bots::bot_seek_dropped_weapon(var3);
+                if(isDefined(var_3.nearest_node) && nodesvisible(var_4, var_3.nearest_node, 1)) {
+                  scripts\mp\bots\bots::bot_seek_dropped_weapon(var_3);
                   break;
                 }
               }
@@ -106,46 +106,46 @@ function sotf_bot_think_seek_dropped_weapons() {
   }
 }
 
-function bot_rank_weapon_class(var0) {
-  var1 = 0;
+function bot_rank_weapon_class(var_0) {
+  var_1 = 0;
 
-  switch (var0) {
+  switch (var_0) {
     case "weapon_other":
     case "weapon_projectile":
     case "weapon_explosive":
     case "weapon_grenade":
       break;
     case "weapon_pistol":
-      var1 = 1;
+      var_1 = 1;
       break;
     case "weapon_dmr":
     case "weapon_sniper":
-      var1 = 2;
+      var_1 = 2;
       break;
     case "weapon_shotgun":
     case "weapon_lmg":
     case "weapon_assault":
     case "weapon_smg":
     case "weapon_tactical":
-      var1 = 3;
+      var_1 = 3;
       break;
   }
 
-  return var1;
+  return var_1;
 }
 
-function bot_weapon_is_better_class(var0, var1) {
-  var2 = bot_rank_weapon_class(var0);
-  var3 = bot_rank_weapon_class(var1);
-  return var3 > var2;
+function bot_weapon_is_better_class(var_0, var_1) {
+  var_2 = bot_rank_weapon_class(var_0);
+  var_3 = bot_rank_weapon_class(var_1);
+  return var_3 > var_2;
 }
 
 function sotf_crate_low_ammo_check() {
-  var0 = self getcurrentweapon();
-  var1 = self getweaponammoclip(var0);
-  var2 = self getweaponammostock(var0);
-  var3 = weaponclipsize(var0);
-  return var1 + var2 < var3 * 0.25;
+  var_0 = self getcurrentweapon();
+  var_1 = self getweaponammoclip(var_0);
+  var_2 = self getweaponammostock(var_0);
+  var_3 = weaponclipsize(var_0);
+  return var_1 + var_2 < var_3 * 0.25;
 }
 
 function sotf_crate_should_claim() {
@@ -156,13 +156,13 @@ function sotf_crate_wait_use() {
   scripts\mp\bots\bots_util::bot_waittill_out_of_combat_or_time(5000);
 }
 
-function sotf_crate_in_range(var0) {
+function sotf_crate_in_range(var_0) {
   return true;
 }
 
-function sotf_crate_can_use(var0) {
-  if(scripts\mp\bots\bots::crate_can_use_always(var0)) {
-    if(isDefined(var0) && isDefined(var0.bots_used) && scripts\engine\utility::array_contains(var0.bots_used, self)) {
+function sotf_crate_can_use(var_0) {
+  if(scripts\mp\bots\bots::crate_can_use_always(var_0)) {
+    if(isDefined(var_0) && isDefined(var_0.bots_used) && scripts\engine\utility::array_contains(var_0.bots_used, self)) {
       if(scripts\mp\bots\bots_util::bot_out_of_ammo()) {
         return true;
       } else {
@@ -170,9 +170,9 @@ function sotf_crate_can_use(var0) {
       }
     }
 
-    var1 = scripts\mp\utility\weapon::getweapongroup(self getcurrentweapon());
+    var_1 = scripts\mp\utility\weapon::getweapongroup(self getcurrentweapon());
 
-    if(bot_rank_weapon_class(var1) <= 1) {
+    if(bot_rank_weapon_class(var_1) <= 1) {
       return true;
     }
 

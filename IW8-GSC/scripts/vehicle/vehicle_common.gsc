@@ -3,18 +3,18 @@
  * Script: scripts\vehicle\vehicle_common.gsc
 ***********************************************/
 
-function requestentervehicle(var0, var1, var2, var3) {
+function requestentervehicle(var_0, var_1, var_2, var_3) {
   self.vehiclerequest = spawnStruct();
-  self.vehiclerequest.vehicle = var0;
-  self.vehiclerequest.chosenvehicleposition = var2;
-  self.vehiclerequest.chosenvehicleanimpos = var3;
-  self.vehiclerequest.spawninvehicle = var1;
+  self.vehiclerequest.vehicle = var_0;
+  self.vehiclerequest.chosenvehicleposition = var_2;
+  self.vehiclerequest.chosenvehicleanimpos = var_3;
+  self.vehiclerequest.spawninvehicle = var_1;
 }
 
 function waitforentervehicle() {
-  var0 = scripts\engine\utility::ref_143af("entervehicle", "death", "long_death", "failedentervehicle");
+  var_0 = scripts\engine\utility::ref_143af("entervehicle", "death", "long_death", "failedentervehicle");
 
-  if(var0 != "entervehicle") {
+  if(var_0 != "entervehicle") {
     return false;
   }
 
@@ -30,8 +30,8 @@ function waitforarrivedatvehicle() {
   }
 }
 
-function entervehicle(var0, var1, var2, var3) {
-  requestentervehicle(var0, var1, var2, var3);
+function entervehicle(var_0, var_1, var_2, var_3) {
+  requestentervehicle(var_0, var_1, var_2, var_3);
   return waitforentervehicle();
 }
 

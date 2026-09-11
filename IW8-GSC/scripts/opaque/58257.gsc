@@ -14,13 +14,13 @@ function vehicle_compass_setteamfriendlyto() {
 }
 
 function vehicle_compass_init() {
-  var0 = 0;
+  var_0 = 0;
 
-  foreach(var2 in level.vehicle_damage_cp_init) {
-    foreach(var4 in var2) {
-      var0++;
+  foreach(var_2 in level.vehicle_damage_cp_init) {
+    foreach(var_4 in var_2) {
+      var_0++;
 
-      if(var0 >= getdvarint("scr_jammer_max_num", 20)) {
+      if(var_0 >= getdvarint("scr_jammer_max_num", 20)) {
         return false;
       }
     }
@@ -29,7 +29,7 @@ function vehicle_compass_init() {
   return true;
 }
 
-function vehicle_compass_instanceisregistered(var0) {
+function vehicle_compass_instanceisregistered(var_0) {
   jumpiftrue(vehicle_compass_init()) LOC_00000033;
   self playlocalsound("br_pickup_deny");
   scripts\mp\hud_message::showerrormessage("MP_BR_INGAME_TU_WZ335/JAMMER_MAX");
@@ -38,7 +38,7 @@ function vehicle_compass_instanceisregistered(var0) {
     jammer_refundsuper();
   }
 
-  var0 delete();
+  var_0 delete();
   return;
 }
 
@@ -58,31 +58,31 @@ function vehicle_compass_playerspawnedcallback() {}
 
 function vehicle_cp_create() {}
 
-function vehicle_compass_mp_init(var0) {
+function vehicle_compass_mp_init(var_0) {
   scripts\mp\damage::monitordamage(level.vehicle_damage_applytabletovehicle, "hitequip", &vehicle_compass_setplayerfriendlyto, &vehicle_compass_show, 0);
 }
 
-function vehicle_compass_show(var0) {
-  var1 = var0.attacker;
-  var2 = var0.objweapon;
-  var3 = var0.meansofdeath;
-  var4 = var0.damage;
-  var5 = var4;
-  var5 = scripts\mp\damage::handlemeleedamage(var2, var3, var5);
-  var5 = scripts\mp\damage::handleapdamage(var2, var3, var5);
-  scripts\mp\weapons::equipmenthit(self.owner, var1, var2, var3);
-  return var5;
+function vehicle_compass_show(var_0) {
+  var_1 = var_0.attacker;
+  var_2 = var_0.objweapon;
+  var_3 = var_0.meansofdeath;
+  var_4 = var_0.damage;
+  var_5 = var_4;
+  var_5 = scripts\mp\damage::handlemeleedamage(var_2, var_3, var_5);
+  var_5 = scripts\mp\damage::handleapdamage(var_2, var_3, var_5);
+  scripts\mp\weapons::equipmenthit(self.owner, var_1, var_2, var_3);
+  return var_5;
 }
 
-function vehicle_compass_setplayerfriendlyto(var0) {
-  var1 = var0.attacker;
+function vehicle_compass_setplayerfriendlyto(var_0) {
+  var_1 = var_0.attacker;
 
-  if(isDefined(self.owner) && istrue(scripts\cp_mp\utility\player_utility::playersareenemies(self.owner, var1))) {
-    var1 scripts\mp\battlechatter_mp::equipmentdestroyed(self);
-    var1 scripts\mp\killstreaks\killstreaks::givescoreforequipment(self);
-    var2 = self.owner getentitynumber();
+  if(isDefined(self.owner) && istrue(scripts\cp_mp\utility\player_utility::playersareenemies(self.owner, var_1))) {
+    var_1 scripts\mp\battlechatter_mp::equipmentdestroyed(self);
+    var_1 scripts\mp\killstreaks\killstreaks::givescoreforequipment(self);
+    var_2 = self.owner getentitynumber();
 
-    if(level.vehicle_damage_cp_init[var2].size > 1) {
+    if(level.vehicle_damage_cp_init[var_2].size > 1) {
       self.owner thread scripts\mp\utility\dialog::leaderdialogonplayer("ja_destroyed_m");
     } else {
       self.owner thread scripts\mp\utility\dialog::leaderdialogonplayer("ja_destroyed_s");
@@ -122,69 +122,69 @@ function vehicle_compass_mp_shouldbevisibletoplayer() {
   self delete();
 }
 
-function jammer_empapplied(var0) {
-  if(isDefined(self.owner) && istrue(scripts\cp_mp\utility\player_utility::playersareenemies(self.owner, var0.attacker))) {
-    playFXOnTag(scripts\engine\utility::getfx("emp_person_stun"), var0.victim, "tag_origin");
-    vehicle_compass_setplayerfriendlyto(var0);
+function jammer_empapplied(var_0) {
+  if(isDefined(self.owner) && istrue(scripts\cp_mp\utility\player_utility::playersareenemies(self.owner, var_0.attacker))) {
+    playFXOnTag(scripts\engine\utility::getfx("emp_person_stun"), var_0.victim, "tag_origin");
+    vehicle_compass_setplayerfriendlyto(var_0);
     return;
   }
 }
 
-function vehicle_createlate(var0) {
+function vehicle_createlate(var_0) {
   self endon("death");
   self endon("leaving");
   self endon("explode");
   self endon("scramble_super_finished");
 
-  if(!isDefined(var0)) {
-    var0 = self.owner;
+  if(!isDefined(var_0)) {
+    var_0 = self.owner;
   }
 
   self.enemiesaffectedbyscambler = [];
-  var1 = 0;
-  var2 = level.vehicle_damage_beginburndown;
-  var3 = physics_createcontents(["physicscontents_player"]);
+  var_1 = 0;
+  var_2 = level.vehicle_damage_beginburndown;
+  var_3 = physics_createcontents(["physicscontents_player"]);
 
   for(;;) {
-    var4 = self.origin;
-    var5 = (var2, var2, 3000);
-    var6 = var4 - var5;
-    var7 = var4 + var5;
-    var8 = physics_aabbbroadphasequery(var6, var7, var3, []);
+    var_4 = self.origin;
+    var_5 = (var_2, var_2, 3000);
+    var_6 = var_4 - var_5;
+    var_7 = var_4 + var_5;
+    var_8 = physics_aabbbroadphasequery(var_6, var_7, var_3, []);
 
-    foreach(var10 in var8) {
-      if(isPlayer(var10)) {
-        var11 = var10;
-        var12 = 0;
-        var13 = distance2dsquared(self.origin, var11.origin);
-        var14 = var2 * var2;
+    foreach(var_10 in var_8) {
+      if(isPlayer(var_10)) {
+        var_11 = var_10;
+        var_12 = 0;
+        var_13 = distance2dsquared(self.origin, var_11.origin);
+        var_14 = var_2 * var_2;
 
-        if(isDefined(var11) && var13 < var14 && var11 scripts\cp_mp\utility\player_utility::_isalive() && !var12) {
-          if(var1 || level.teambased && var11.team != self.team && var11.team != "spectator" || !level.teambased && var11 != self.owner) {
-            if(var11 scripts\cp_mp\utility\player_utility::isusingremote()) {
+        if(isDefined(var_11) && var_13 < var_14 && var_11 scripts\cp_mp\utility\player_utility::_isalive() && !var_12) {
+          if(var_1 || level.teambased && var_11.team != self.team && var_11.team != "spectator" || !level.teambased && var_11 != self.owner) {
+            if(var_11 scripts\cp_mp\utility\player_utility::isusingremote()) {
               continue;
             }
 
-            if(ref_124c3(var11, self)) {
+            if(ref_124c3(var_11, self)) {
               continue;
             }
 
-            vehicle_compass_updatevisibilityforplayer(var11, 1, self, var1);
-            var11.useautorespawn = 1;
+            vehicle_compass_updatevisibilityforplayer(var_11, 1, self, var_1);
+            var_11.useautorespawn = 1;
             continue;
           }
 
-          if(ref_124c3(var11, self)) {
-            vehicle_compass_updatevisibilityforplayer(var11, 0, self, var1);
+          if(ref_124c3(var_11, self)) {
+            vehicle_compass_updatevisibilityforplayer(var_11, 0, self, var_1);
           }
         }
       }
     }
 
-    foreach(var17 in self.enemiesaffectedbyscambler) {
-      if(!scripts\engine\utility::array_contains(var8, var17)) {
-        if(ref_124c3(var17, self)) {
-          vehicle_compass_updatevisibilityforplayer(var17, 0, self, var1);
+    foreach(var_17 in self.enemiesaffectedbyscambler) {
+      if(!scripts\engine\utility::array_contains(var_8, var_17)) {
+        if(ref_124c3(var_17, self)) {
+          vehicle_compass_updatevisibilityforplayer(var_17, 0, self, var_1);
         }
       }
     }
@@ -194,87 +194,87 @@ function vehicle_createlate(var0) {
 }
 
 function vehicle_compass_registerinstance() {
-  var2 = 0;
-  var3 = undefined;
+  var_2 = 0;
+  var_3 = undefined;
 
   if(isDefined(level.supportdrones) && level.supportdrones.size > 0) {
-    foreach(var5 in level.supportdrones) {
-      if(var5.helperdronetype != "scrambler_drone_guard") {
+    foreach(var_5 in level.supportdrones) {
+      if(var_5.helperdronetype != "scrambler_drone_guard") {
         continue;
       }
 
       if(level.teambased) {
-        if(!isDefined(var1) && var5.team == self.team) {
-          var3 = var5.friendliesaffectedbyscrambler;
+        if(!isDefined(var_1) && var_5.team == self.team) {
+          var_3 = var_5.friendliesaffectedbyscrambler;
         } else {
-          var3 = var5.enemiesaffectedbyscambler;
+          var_3 = var_5.enemiesaffectedbyscambler;
         }
-      } else if(!isDefined(var1) && var5.owner == self) {
-        var3 = var5.friendliesaffectedbyscrambler;
+      } else if(!isDefined(var_1) && var_5.owner == self) {
+        var_3 = var_5.friendliesaffectedbyscrambler;
       } else {
-        var3 = var5.enemiesaffectedbyscambler;
+        var_3 = var_5.enemiesaffectedbyscambler;
       }
 
-      if(!isDefined(var3)) {
+      if(!isDefined(var_3)) {
         continue;
       }
 
-      if(var3.size > 0) {
-        foreach(var7 in var3) {
-          if(self == var7 || isDefined(var7.owner) && self == var7.owner) {
-            var2 = 1;
+      if(var_3.size > 0) {
+        foreach(var_7 in var_3) {
+          if(self == var_7 || isDefined(var_7.owner) && self == var_7.owner) {
+            var_2 = 1;
             break;
           }
         }
 
-        if(istrue(var2)) {
+        if(istrue(var_2)) {
           break;
         }
       }
     }
 
-    var1 = undefined;
-    var3 = undefined;
+    var_1 = undefined;
+    var_3 = undefined;
   }
 
   return < error > ;
 }
 
-function vehicle_compass_updatevisibilityforplayer(var0, var1, var2) {
-  var3 = self;
+function vehicle_compass_updatevisibilityforplayer(var_0, var_1, var_2) {
+  var_3 = self;
 
-  if(istrue(var0)) {
-    if(!scripts\engine\utility::array_contains(var1.enemiesaffectedbyscambler, var3)) {
-      var1.enemiesaffectedbyscambler[var1.enemiesaffectedbyscambler.size] = var3;
+  if(istrue(var_0)) {
+    if(!scripts\engine\utility::array_contains(var_1.enemiesaffectedbyscambler, var_3)) {
+      var_1.enemiesaffectedbyscambler[var_1.enemiesaffectedbyscambler.size] = var_3;
     }
 
-    if(!isDefined(var3.scrambledby)) {
-      var3.scrambledby = [var1];
+    if(!isDefined(var_3.scrambledby)) {
+      var_3.scrambledby = [var_1];
       thread vehicle_create();
     } else {
-      var3.scrambledby[var3.scrambledby.size] = var1;
+      var_3.scrambledby[var_3.scrambledby.size] = var_1;
     }
 
-    thread vehicle_compass_shouldbevisibletoplayer(var3, var1);
+    thread vehicle_compass_shouldbevisibletoplayer(var_3, var_1);
     return;
   }
 
-  if(isDefined(var3)) {
-    if(scripts\engine\utility::array_contains(var1.enemiesaffectedbyscambler, var3)) {
-      var1.enemiesaffectedbyscambler = scripts\engine\utility::array_remove(var1.enemiesaffectedbyscambler, var3);
+  if(isDefined(var_3)) {
+    if(scripts\engine\utility::array_contains(var_1.enemiesaffectedbyscambler, var_3)) {
+      var_1.enemiesaffectedbyscambler = scripts\engine\utility::array_remove(var_1.enemiesaffectedbyscambler, var_3);
     } else {
-      var1.enemiesaffectedbyscambler = scripts\engine\utility::array_removeundefined(var1.enemiesaffectedbyscambler);
+      var_1.enemiesaffectedbyscambler = scripts\engine\utility::array_removeundefined(var_1.enemiesaffectedbyscambler);
     }
 
-    var3.scrambledby = scripts\engine\utility::array_remove(var3.scrambledby, var1);
+    var_3.scrambledby = scripts\engine\utility::array_remove(var_3.scrambledby, var_1);
 
-    if(var3.scrambledby.size == 0) {
-      var3.scrambledby = undefined;
-      stop_jammer_scramble(var3, var3.currentscramblerstrength);
-      var3.previousscramblerstrength = undefined;
-      var3.currentscramblerstrength = undefined;
-      var3.useautorespawn = 0;
-      var3 notify("scrambler_off");
+    if(var_3.scrambledby.size == 0) {
+      var_3.scrambledby = undefined;
+      stop_jammer_scramble(var_3, var_3.currentscramblerstrength);
+      var_3.previousscramblerstrength = undefined;
+      var_3.currentscramblerstrength = undefined;
+      var_3.useautorespawn = 0;
+      var_3 notify("scrambler_off");
       return;
     }
 
@@ -282,80 +282,80 @@ function vehicle_compass_updatevisibilityforplayer(var0, var1, var2) {
   }
 }
 
-function vehicle_compass_shouldbevisibletoplayer(var0, var1) {
+function vehicle_compass_shouldbevisibletoplayer(var_0, var_1) {
   level endon("game_ended");
   scripts\engine\utility::ref_143a5("death", "scramble_off");
 
-  if(ref_124c3(var0)) {
+  if(ref_124c3(var_0)) {
     if(isDefined(self)) {
-      if(isDefined(var0) && isDefined(var0.enemiesaffectedbyscambler)) {
-        var0.enemiesaffectedbyscambler = scripts\engine\utility::array_remove(var0.enemiesaffectedbyscambler, self);
+      if(isDefined(var_0) && isDefined(var_0.enemiesaffectedbyscambler)) {
+        var_0.enemiesaffectedbyscambler = scripts\engine\utility::array_remove(var_0.enemiesaffectedbyscambler, self);
       }
     }
 
-    vehicle_compass_updatevisibilityforplayer(0, var0, var1);
+    vehicle_compass_updatevisibilityforplayer(0, var_0, var_1);
     return;
   }
 }
 
-function ref_124c3(var0) {
-  return isDefined(self.scrambledby) && scripts\engine\utility::array_contains(self.scrambledby, var0);
+function ref_124c3(var_0) {
+  return isDefined(self.scrambledby) && scripts\engine\utility::array_contains(self.scrambledby, var_0);
 }
 
-function vehicle_create(var0) {
+function vehicle_create(var_0) {
   self endon("death");
   self endon("scramble_off");
   self endon("disconnect");
-  var1 = 0;
-  var2 = 0;
-  var3 = level.vehicle_damage_beginburndown;
-  var4 = var3 * var3;
+  var_1 = 0;
+  var_2 = 0;
+  var_3 = level.vehicle_damage_beginburndown;
+  var_4 = var_3 * var_3;
 
   for(;;) {
     if(!isDefined(self.scrambledby)) {
       return;
     }
 
-    foreach(var6 in self.scrambledby) {
-      var7 = distance2dsquared(var6.origin, self.origin);
-      level.loot_setitemcount = var7;
-      var8 = 0;
-      var2 = 0;
+    foreach(var_6 in self.scrambledby) {
+      var_7 = distance2dsquared(var_6.origin, self.origin);
+      level.loot_setitemcount = var_7;
+      var_8 = 0;
+      var_2 = 0;
 
-      if(var7 > var4) {
-        var8 = 0;
-      } else if(var7 >= var4 * 0.8) {
-        var8 = 1;
-      } else if(var7 >= var4 * 0.6) {
-        var8 = 2;
-      } else if(var7 >= var4 * 0.4) {
-        var8 = 3;
-      } else if(var7 >= var4 * 0.2) {
-        var8 = 4;
+      if(var_7 > var_4) {
+        var_8 = 0;
+      } else if(var_7 >= var_4 * 0.8) {
+        var_8 = 1;
+      } else if(var_7 >= var_4 * 0.6) {
+        var_8 = 2;
+      } else if(var_7 >= var_4 * 0.4) {
+        var_8 = 3;
+      } else if(var_7 >= var_4 * 0.2) {
+        var_8 = 4;
       } else {
-        var8 = 5;
+        var_8 = 5;
       }
 
-      if(var8 > var2) {
-        var2 = var8;
+      if(var_8 > var_2) {
+        var_2 = var_8;
       }
     }
 
-    if(var1 == 0 || var2 != var1) {
-      self.previousscramblerstrength = var1;
-      self.currentscramblerstrength = var2;
+    if(var_1 == 0 || var_2 != var_1) {
+      self.previousscramblerstrength = var_1;
+      self.currentscramblerstrength = var_2;
 
       if(self.previousscramblerstrength > 1) {
-        var10 = self.previousscramblerstrength;
+        var_10 = self.previousscramblerstrength;
       }
 
       if(self.currentscramblerstrength > 1) {
-        var10 = self.currentscramblerstrength;
+        var_10 = self.currentscramblerstrength;
       }
 
-      stop_jammer_scramble(var1);
-      play_jammer_scramble(var2);
-      var1 = var2;
+      stop_jammer_scramble(var_1);
+      play_jammer_scramble(var_2);
+      var_1 = var_2;
     }
 
     wait 1;
@@ -366,16 +366,16 @@ function vehicle_compass_playerjoinedteamcallback() {
   self notify("scramble_super_finished");
 
   if(isDefined(self.enemiesaffectedbyscambler) && self.enemiesaffectedbyscambler.size > 0) {
-    foreach(var1 in self.enemiesaffectedbyscambler) {
-      if(isDefined(var1)) {
-        var2 = var1;
+    foreach(var_1 in self.enemiesaffectedbyscambler) {
+      if(isDefined(var_1)) {
+        var_2 = var_1;
 
-        if(isDefined(var2.owner)) {
-          var2 = var2.owner;
+        if(isDefined(var_2.owner)) {
+          var_2 = var_2.owner;
         }
 
-        if(ref_124c3(var2, self)) {
-          vehicle_compass_updatevisibilityforplayer(var2, 0, self);
+        if(ref_124c3(var_2, self)) {
+          vehicle_compass_updatevisibilityforplayer(var_2, 0, self);
         }
       }
     }
@@ -384,48 +384,48 @@ function vehicle_compass_playerjoinedteamcallback() {
   }
 }
 
-function vehicle_compass_updatevisibilityforallplayers(var0, var1) {
-  var2 = var0 getentitynumber();
-  var3 = [];
+function vehicle_compass_updatevisibilityforallplayers(var_0, var_1) {
+  var_2 = var_0 getentitynumber();
+  var_3 = [];
 
-  for(var4 = 0; var4 < level.vehicle_damage_cp_init[var2].size; var4++) {
-    var5 = level.vehicle_damage_cp_init[var2][var4];
+  for(var_4 = 0; var_4 < level.vehicle_damage_cp_init[var_2].size; var_4++) {
+    var_5 = level.vehicle_damage_cp_init[var_2][var_4];
 
-    if(var5 != var1) {
-      var3 = var5;
+    if(var_5 != var_1) {
+      var_3 = var_5;
     }
   }
 
-  level.vehicle_damage_cp_init[var2] = var3;
+  level.vehicle_damage_cp_init[var_2] = var_3;
 }
 
-function vehicle_compass_infect_shouldbevisibletoplayer(var0, var1) {
-  var2 = var0 getentitynumber();
+function vehicle_compass_infect_shouldbevisibletoplayer(var_0, var_1) {
+  var_2 = var_0 getentitynumber();
 
-  if(!isDefined(level.vehicle_damage_cp_init[var2])) {
-    level.vehicle_damage_cp_init[var2] = [];
+  if(!isDefined(level.vehicle_damage_cp_init[var_2])) {
+    level.vehicle_damage_cp_init[var_2] = [];
   }
 
-  var3 = level.vehicle_damage_cp_init[var2].size;
+  var_3 = level.vehicle_damage_cp_init[var_2].size;
 
-  if(var3 + 1 > 1) {
-    vehicle_compass_mp_shouldbevisibletoplayer(level.vehicle_damage_cp_init[var2][0]);
-    var3--;
+  if(var_3 + 1 > 1) {
+    vehicle_compass_mp_shouldbevisibletoplayer(level.vehicle_damage_cp_init[var_2][0]);
+    var_3--;
   }
 
-  level.vehicle_damage_cp_init[var2][var3] = var1;
+  level.vehicle_damage_cp_init[var_2][var_3] = var_1;
 }
 
-function vehicle_compass_updateallvisibilityforplayer(var0) {
-  vehicle_compass_updatevisibilityforallplayers(var0, self);
+function vehicle_compass_updateallvisibilityforplayer(var_0) {
+  vehicle_compass_updatevisibilityforallplayers(var_0, self);
   vehicle_compass_infect_shouldbevisibletoplayer(self.owner, self);
   self.scrambleent.team = self.owner.team;
   self.scrambleent makescrambler(self.owner);
   self setscriptablepartstate("hacked", "active", 0);
 }
 
-function play_jammer_scramble(var0) {
-  if(var0 == 0) {
+function play_jammer_scramble(var_0) {
+  if(var_0 == 0) {
     return;
   }
 
@@ -433,26 +433,26 @@ function play_jammer_scramble(var0) {
     self.—$ Š #ˆ½ Ö› Ê #!¡«5‘ = ³èB = [];
   }
 
-  var1 = self.—$ Š #ˆ½ Ö› Ê #!¡«5‘ = ³èB[var0];
+  var_1 = self.—$ Š #ˆ½ Ö› Ê #!¡«5‘ = ³èB[var_0];
 
-  if(!isDefined(var1)) {
-    var1 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  self.—$ Š #ˆ½ Ö› Ê #!¡«5‘ = ³èB[var0] = var1 + 1;
+  self.—$ Š #ˆ½ Ö› Ê #!¡«5‘ = ³èB[var_0] = var_1 + 1;
   _update_jammer_scramble();
 }
 
-function stop_jammer_scramble(var0) {
-  if(var0 == 0) {
+function stop_jammer_scramble(var_0) {
+  if(var_0 == 0) {
     return;
   }
 
-  if(isDefined(self.—$ Š #ˆ½ Ö› Ê #!¡«5‘ = ³èB[var0])) {
-    self.—$ Š #ˆ½ Ö› Ê #!¡«5‘ = ³èB[var0] -= 1;
+  if(isDefined(self.—$ Š #ˆ½ Ö› Ê #!¡«5‘ = ³èB[var_0])) {
+    self.—$ Š #ˆ½ Ö› Ê #!¡«5‘ = ³èB[var_0] -= 1;
 
-    if(self.—$ Š #ˆ½ Ö› Ê #!¡«5‘ = ³èB[var0] == 0) {
-      self.—$ Š #ˆ½ Ö› Ê #!¡«5‘ = ³èB[var0] = undefined;
+    if(self.—$ Š #ˆ½ Ö› Ê #!¡«5‘ = ³èB[var_0] == 0) {
+      self.—$ Š #ˆ½ Ö› Ê #!¡«5‘ = ³èB[var_0] = undefined;
     }
   }
 
@@ -460,15 +460,15 @@ function stop_jammer_scramble(var0) {
 }
 
 function _update_jammer_scramble() {
-  var0 = 0;
+  var_0 = 0;
 
-  foreach(var2 in self.—$ Š #ˆ½ Ö› Ê #!¡«5‘ = ³èB) {
-    if(var3 > var0) {
-      var0 = var3;
+  foreach(var_2 in self.—$ Š #ˆ½ Ö› Ê #!¡«5‘ = ³èB) {
+    if(var_3 > var_0) {
+      var_0 = var_3;
     }
   }
 
-  self setclientomnvar("ui_jammer_strength", var0);
+  self setclientomnvar("ui_jammer_strength", var_0);
 }
 
 function jammer_refundsuper() {
@@ -476,9 +476,9 @@ function jammer_refundsuper() {
   self notify("super_use_finished_lb");
   self notify("super_use_finished");
   scripts\cp\vehicles\vehicle_compass_cp::ref_12097(self.super, 1);
-  var0 = scripts\mp\supers::getcurrentsuper();
+  var_0 = scripts\mp\supers::getcurrentsuper();
   scripts\mp\supers::ref_131c7(0);
   scripts\mp\supers::ref_131c6(0);
-  var0.wasrefunded = 1;
+  var_0.wasrefunded = 1;
   scripts\mp\supers::setsuperbasepoints(scripts\mp\supers::getsuperpointsneeded());
 }

@@ -57,9 +57,9 @@ function main() {
   visionsetmissilecam("missilecam");
   visionsetthermal(game["thermal_vision"]);
   visionsetpain(scripts\engine\utility::ter_op(scripts\cp_mp\utility\game_utility::isnightmap(), "pain_mp_night", "pain_mp"), 0);
-  var0 = getEntArray("lantern_glowFX_origin", "targetname");
+  var_0 = getEntArray("lantern_glowFX_origin", "targetname");
 
-  for(var1 = 0; var1 < var0.size; var1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     thread lanterns();
   }
 
@@ -84,50 +84,50 @@ function main() {
 
   thread scripts\mp\global_fx::main();
 
-  for(var2 = 0; var2 < 7; var2++) {
-    switch (var2) {
+  for(var_2 = 0; var_2 < 7; var_2++) {
+    switch (var_2) {
       case 0:
-        var3 = "trigger_multiple";
+        var_3 = "trigger_multiple";
         break;
       case 1:
-        var3 = "trigger_once";
+        var_3 = "trigger_once";
         break;
       case 2:
-        var3 = "trigger_use";
+        var_3 = "trigger_use";
         break;
       case 3:
-        var3 = "trigger_radius";
+        var_3 = "trigger_radius";
         break;
       case 4:
-        var3 = "trigger_lookat";
+        var_3 = "trigger_lookat";
         break;
       case 5:
-        var3 = "trigger_multiple_arbitrary_up";
+        var_3 = "trigger_multiple_arbitrary_up";
         break;
       default:
-        var3 = "trigger_damage";
+        var_3 = "trigger_damage";
         break;
     }
 
-    var4 = getEntArray(var3, "classname");
+    var_4 = getEntArray(var_3, "classname");
 
-    for(var1 = 0; var1 < var4.size; var1++) {
-      if(isDefined(var4[var1].script_prefab_exploder)) {
-        var4[var1].script_exploder = var4[var1].script_prefab_exploder;
+    for(var_1 = 0; var_1 < var_4.size; var_1++) {
+      if(isDefined(var_4[var_1].script_prefab_exploder)) {
+        var_4[var_1].script_exploder = var_4[var_1].script_prefab_exploder;
       }
 
-      if(isDefined(var4[var1].script_exploder)) {
+      if(isDefined(var_4[var_1].script_exploder)) {
         thread exploder_load(level);
       }
 
-      if(var3 == "trigger_multiple_arbitrary_up") {
-        var5 = var4[var1];
-        var5 setworlduptrigger(1);
+      if(var_3 == "trigger_multiple_arbitrary_up") {
+        var_5 = var_4[var_1];
+        var_5 setworlduptrigger(1);
 
-        if(isDefined(var5.target)) {
-          var6 = getEnt(var5.target, "targetname");
-          var5 enablelinkTo();
-          var5 linkTo(var6);
+        if(isDefined(var_5.target)) {
+          var_6 = getEnt(var_5.target, "targetname");
+          var_5 enablelinkTo();
+          var_5 linkTo(var_6);
         }
       }
     }
@@ -149,13 +149,13 @@ function main() {
   scripts\common\utility::ref_13629();
 }
 
-function exploder_load(var0) {
-  level endon("killexplodertridgers" + var0.script_exploder);
-  var0 waittill("trigger");
+function exploder_load(var_0) {
+  level endon("killexplodertridgers" + var_0.script_exploder);
+  var_0 waittill("trigger");
 
-  if(isDefined(var0.script_chance) && randomfloat(1) > var0.script_chance) {
-    if(isDefined(var0.script_delay)) {
-      wait var0.script_delay;
+  if(isDefined(var_0.script_chance) && randomfloat(1) > var_0.script_chance) {
+    if(isDefined(var_0.script_delay)) {
+      wait var_0.script_delay;
     } else {
       wait 4;
     }
@@ -164,8 +164,8 @@ function exploder_load(var0) {
     return;
   }
 
-  scripts\engine\utility::exploder(var0.script_exploder);
-  level notify("killexplodertridgers" + var0.script_exploder);
+  scripts\engine\utility::exploder(var_0.script_exploder);
+  level notify("killexplodertridgers" + var_0.script_exploder);
 }
 
 function lanterns() {
@@ -177,71 +177,71 @@ function lanterns() {
 }
 
 function setupdestructiblekillcaments() {
-  var0 = getEntArray("scriptable_destructible_vehicle", "targetname");
+  var_0 = getEntArray("scriptable_destructible_vehicle", "targetname");
 
-  foreach(var2 in var0) {
-    var3 = var2.origin + (0, 0, 5);
-    var4 = var2.origin + (0, 0, 128);
-    var5 = scripts\engine\trace::_bullet_trace(var3, var4, 0, var2);
-    var2.killcament = spawn("script_model", var5["position"]);
-    var2.killcament.targetname = "killCamEnt_destructible_vehicle";
-    var2.killcament setscriptmoverkillcam("explosive");
+  foreach(var_2 in var_0) {
+    var_3 = var_2.origin + (0, 0, 5);
+    var_4 = var_2.origin + (0, 0, 128);
+    var_5 = scripts\engine\trace::_bullet_trace(var_3, var_4, 0, var_2);
+    var_2.killcament = spawn("script_model", var_5["position"]);
+    var_2.killcament.targetname = "killCamEnt_destructible_vehicle";
+    var_2.killcament setscriptmoverkillcam("explosive");
     thread deletedestructiblekillcament();
   }
 
-  var7 = getEntArray("scriptable_destructible_barrel", "targetname");
+  var_7 = getEntArray("scriptable_destructible_barrel", "targetname");
 
-  foreach(var2 in var7) {
-    var3 = var2.origin + (0, 0, 5);
-    var4 = var2.origin + (0, 0, 128);
-    var5 = scripts\engine\trace::_bullet_trace(var3, var4, 0, var2);
-    var2.killcament = spawn("script_model", var5["position"]);
-    var2.killcament.targetname = "killCamEnt_explodable_barrel";
-    var2.killcament setscriptmoverkillcam("explosive");
+  foreach(var_2 in var_7) {
+    var_3 = var_2.origin + (0, 0, 5);
+    var_4 = var_2.origin + (0, 0, 128);
+    var_5 = scripts\engine\trace::_bullet_trace(var_3, var_4, 0, var_2);
+    var_2.killcament = spawn("script_model", var_5["position"]);
+    var_2.killcament.targetname = "killCamEnt_explodable_barrel";
+    var_2.killcament setscriptmoverkillcam("explosive");
     thread deletedestructiblekillcament();
   }
 }
 
 function deletedestructiblekillcament() {
   level endon("game_ended");
-  var0 = self.killcament;
-  var0 endon("death");
+  var_0 = self.killcament;
+  var_0 endon("death");
   self waittill("death");
   wait 10;
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
     return;
   }
 }
 
-function filterstructs(var0) {
+function filterstructs(var_0) {
   if(scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_iscodevehicletest() && scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_iscodevehicletestlevel()) {
-    if(var0 scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_isvehiclespawnStruct()) {
+    if(var_0 scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_isvehiclespawnStruct()) {
       return true;
     }
   }
 
-  if(isDefined(var0.script_gameobjectname)) {
-    var1 = var0.script_gameobjectname;
-    var2 = 0;
+  if(isDefined(var_0.script_gameobjectname)) {
+    var_1 = var_0.script_gameobjectname;
+    var_2 = 0;
 
-    if(getsubstr(var1, 0, 1) == "!") {
-      var1 = getsubstr(var1, 1);
-      var2 = 1;
+    if(getsubstr(var_1, 0, 1) == "!") {
+      var_1 = getsubstr(var_1, 1);
+      var_2 = 1;
     }
 
-    if(var2) {
-      if(scripts\mp\utility\game::testgamemodestringlist(var0.script_gameobjectname, scripts\mp\utility\game::getgametype())) {
+    if(var_2) {
+      if(scripts\mp\utility\game::testgamemodestringlist(var_0.script_gameobjectname, scripts\mp\utility\game::getgametype())) {
         return false;
       }
-    } else if(!scripts\mp\utility\game::testgamemodestringlist(var0.script_gameobjectname, scripts\mp\utility\game::getgametype())) {
+    } else if(!scripts\mp\utility\game::testgamemodestringlist(var_0.script_gameobjectname, scripts\mp\utility\game::getgametype())) {
       if(scripts\mp\utility\game::getgametype() == "brtdm") {
-        if(var0 scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_isvehiclespawnStruct()) {
+        if(var_0 scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_isvehiclespawnStruct()) {
           return true;
         }
       } else if(istrue(level.unset_relic_lfo)) {
-        if(var0.script_gameobjectname == "arm") {
+        if(var_0.script_gameobjectname == "arm") {
           return true;
         }
       }
@@ -250,18 +250,18 @@ function filterstructs(var0) {
     }
   }
 
-  var3 = var0.script_noteworthy;
+  var_3 = var_0.script_noteworthy;
 
-  if(isDefined(var3)) {
+  if(isDefined(var_3)) {
     if(level.ref_11ad3 == 1) {
-      if(var3 == "10v10") {
+      if(var_3 == "10v10") {
         return true;
-      } else if(var3 == "6v6") {
+      } else if(var_3 == "6v6") {
         return false;
       }
-    } else if(var3 == "6v6") {
+    } else if(var_3 == "6v6") {
       return true;
-    } else if(var3 == "10v10") {
+    } else if(var_3 == "10v10") {
       return false;
     }
   }

@@ -121,21 +121,21 @@ function player() {
   scripts\common\anim::addnotetrack_customfunction("player_rig", "cut_to_black", &cut_to_back, "final_shot");
 }
 
-function dof_auto_barkov(var0) {
+function dof_auto_barkov(var_0) {
   setsaveddvar("SLSMSSTQP", "1");
   level.barkov scripts\engine\sp\utility::dof_enable_autofocus(2, 5, undefined, undefined, "tag_eye", undefined, 1);
   wait 3;
   setsaveddvar("SLSMSSTQP", "9");
 }
 
-function dof_auto_knife(var0) {
+function dof_auto_knife(var_0) {
   setsaveddvar("SLSMSSTQP", "1");
   level.prompt_knife scripts\engine\sp\utility::dof_enable_autofocus(2, 5, undefined, undefined, "j_gun", undefined, 1);
   wait 2;
   setsaveddvar("SLSMSSTQP", "9");
 }
 
-function dof_auto_knife_prompt(var0) {
+function dof_auto_knife_prompt(var_0) {
   setsaveddvar("SLSMSSTQP", "1");
   level.prompt_knife scripts\engine\sp\utility::dof_enable_autofocus(2, 5, undefined, undefined, "j_gun", undefined, 1);
   wait 2;
@@ -145,52 +145,52 @@ function dof_auto_knife_prompt(var0) {
   scripts\engine\sp\utility::dof_disable_autofocus();
 }
 
-function dof_finale_choke_stab01(var0) {
+function dof_finale_choke_stab01(var_0) {
   setsaveddvar("SLSMSSTQP", "1");
   level.barkov scripts\engine\sp\utility::dof_enable_autofocus(2, 5, undefined, undefined, "tag_eye", undefined, 1);
 }
 
-function dof_finale_choke_stab04(var0) {
+function dof_finale_choke_stab04(var_0) {
   setsaveddvar("SLSMSSTQP", "9");
   wait 1;
   scripts\engine\sp\utility::dof_disable_autofocus();
 }
 
-function cine_cam_change(var0) {
+function cine_cam_change(var_0) {
   scripts\sp\maps\lab\lab_util::cine_letterboxing_down(1.5);
   scripts\engine\utility::flag_set("drone_scene_done");
 }
 
-function setup_prompt_knife(var0) {
+function setup_prompt_knife(var_0) {
   level.prompt_knife show();
   level.knife hide();
 }
 
-function hide_prompt_knife(var0) {
+function hide_prompt_knife(var_0) {
   level.prompt_knife delete();
 }
 
-function attach_player_knife(var0) {
-  level.knife linkTo(var0, "tag_accessory_right", (0, 0, 0), (0, 0, 0));
+function attach_player_knife(var_0) {
+  level.knife linkTo(var_0, "tag_accessory_right", (0, 0, 0), (0, 0, 0));
   level.knife show();
 }
 
-function detach_player_knife(var0) {
+function detach_player_knife(var_0) {
   level.knife hide();
   level.knife unlink();
 }
 
-function link_to_barkov(var0) {
+function link_to_barkov(var_0) {
   level.knife unlink();
   level.knife linkTo(level.barkov, "tag_accessory_right", (0, 0, 0), (0, 0, 0));
 }
 
-function unlink_from_barkov(var0) {
+function unlink_from_barkov(var_0) {
   level.knife unlink();
   level.knife linkTo(level.alt_rig, "tag_accessory_right", (0, 0, 0), (0, 0, 0));
 }
 
-function finale_player_dialogue(var0) {
+function finale_player_dialogue(var_0) {
   level.barkov notify("stop_simple_dialogue");
 
   if(!istrue(level.barkov.iscompletelydead)) {
@@ -219,11 +219,11 @@ function finale_player_dialogue(var0) {
   scripts\sp\utility::giveachievement_wrapper("barkovspit", 1);
 }
 
-function van_scene_start(var0) {
+function van_scene_start(var_0) {
   level.player lerpviewangleclamp(0.3, 0.1, 0.1, 15, 25, 12, 18);
 }
 
-function van_scene_end(var0) {
+function van_scene_end(var_0) {
   level.player_rig.detonator delete();
   level.player lerpviewangleclamp(0.3, 0.1, 0.1, 15, 25, 12, 12);
   wait 3.5;
@@ -232,17 +232,17 @@ function van_scene_end(var0) {
   scripts\sp\player_rig::unlink_player_from_rig();
   level.player scripts\engine\sp\utility::blend_movespeedscale(1, 1);
   level.player lerpfovscalefactor(1, 0.5);
-  var1 = getEnt("van_bomb", "targetname");
-  var1 stopanimScripted();
-  var1 delete();
+  var_1 = getEnt("van_bomb", "targetname");
+  var_1 stopanimScripted();
+  var_1 delete();
   scripts\engine\sp\utility::autosave_by_name("jump_down_done_a");
 }
 
-function gas_door_down(var0) {
-  var0 hide();
+function gas_door_down(var_0) {
+  var_0 hide();
 }
 
-function show_head(var0) {
+function show_head(var_0) {
   level.kyle attach(level.kyle.headmodel);
 
   if(isDefined(level.kyle.hatmodel)) {
@@ -251,64 +251,64 @@ function show_head(var0) {
   }
 }
 
-function cine_lb_down(var0) {
+function cine_lb_down(var_0) {
   scripts\sp\maps\lab\lab_util::cine_letterboxing_down(1.5);
 }
 
-function cine_lb_down_ending(var0) {
+function cine_lb_down_ending(var_0) {
   wait 0.3;
   level.player lerpfovscalefactor(1, 1.5);
   scripts\sp\maps\lab\lab_util::cine_letterboxing_down(1.5);
 }
 
-function final_shot_shake(var0) {
+function final_shot_shake(var_0) {
   level.player setcinematicmotionoverride("iw8_heli_ride");
   wait 1;
-  screenshake(var0.origin, 0.3, 0.3, 0.3, 2, 1.2, 0, 100);
+  screenshake(var_0.origin, 0.3, 0.3, 0.3, 2, 1.2, 0, 100);
 }
 
-function cut_to_back(var0) {
+function cut_to_back(var_0) {
   scripts\sp\maps\lab\lab_util::cine_letterboxing_down(0);
   level.endhud = scripts\sp\maps\lab\lab_finale::fadeoutscreen(0.01);
 }
 
-function juggernaut_add_fov_user_scale_override(var0) {
+function juggernaut_add_fov_user_scale_override(var_0) {
   level.player lerpfovscalefactor(0, 0.5);
 }
 
-function juggernaut_remove_fov_user_scale_override(var0) {
+function juggernaut_remove_fov_user_scale_override(var_0) {
   level.player lerpfovscalefactor(1, 1);
 }
 
-function chem_room_pad_add_fov_user_scale_override(var0) {
+function chem_room_pad_add_fov_user_scale_override(var_0) {
   level.player lerpfovscalefactor(0, 0.5);
 }
 
-function van_bomb_add_fov_user_scale_override(var0) {
+function van_bomb_add_fov_user_scale_override(var_0) {
   level.player lerpfovscalefactor(0, 0.5);
 }
 
-function pipes_bomb_add_fov_user_scale_override(var0) {
+function pipes_bomb_add_fov_user_scale_override(var_0) {
   level.player lerpfovscalefactor(0, 0.5);
 }
 
-function finale_knock_down_add_fov_user_scale_override(var0) {
+function finale_knock_down_add_fov_user_scale_override(var_0) {
   level.player lerpfovscalefactor(0, 0.5);
 }
 
-function finale_choke_stab01_add_fov_user_scale_override(var0) {
+function finale_choke_stab01_add_fov_user_scale_override(var_0) {
   level.player lerpfovscalefactor(0, 0.5);
 }
 
-function finale_stab02_remove_fov_user_scale_override(var0) {
+function finale_stab02_remove_fov_user_scale_override(var_0) {
   level.player lerpfovscalefactor(1, 0.8);
 }
 
-function finale_choke_stab04_remove_fov_user_scale_override(var0) {
+function finale_choke_stab04_remove_fov_user_scale_override(var_0) {
   level.player lerpfovscalefactor(1, 0.6);
 }
 
-function finale_kickoff_sh01_add_fov_user_scale_override(var0) {
+function finale_kickoff_sh01_add_fov_user_scale_override(var_0) {
   level.player lerpfovscalefactor(0, 0.5);
 }
 
@@ -572,21 +572,21 @@ function humans() {
   level.scr_goaltime["nikolai"]["final_shot"] = 0;
 }
 
-function kill_barkov(var0) {
-  var0.ignoreall = 1;
-  var0.diequietly = 1;
-  var0.skipdeathanim = 1;
+function kill_barkov(var_0) {
+  var_0.ignoreall = 1;
+  var_0.diequietly = 1;
+  var_0.skipdeathanim = 1;
 
-  if(isDefined(var0.magic_bullet_shield)) {
-    var0 scripts\common\ai::stop_magic_bullet_shield();
+  if(isDefined(var_0.magic_bullet_shield)) {
+    var_0 scripts\common\ai::stop_magic_bullet_shield();
   }
 
-  var0.allowdeath = 1;
-  var0 startragdoll();
-  var0 kill();
+  var_0.allowdeath = 1;
+  var_0 startragdoll();
+  var_0 kill();
 }
 
-function big_boom(var0) {
+function big_boom(var_0) {
   level notify("boom");
   level.player playSound("scn_lab_finale_expl_lr");
   scripts\engine\utility::exploder("final_explosion");
@@ -594,21 +594,21 @@ function big_boom(var0) {
   roof_collapse_init();
 }
 
-function audio_mix_move1(var0) {
+function audio_mix_move1(var_0) {
   level.player setsoundsubmix("sp_lab_ending_duck_2", 15);
 }
 
-function audio_mix_move2(var0) {
+function audio_mix_move2(var_0) {
   level.player clearsoundsubmix("sp_lab_ending_duck_2", 5);
 }
 
-function audio_mix_move3(var0) {
+function audio_mix_move3(var_0) {
   level.player clearsoundsubmix("sp_lab_ending_duck_1", 5);
   wait 5;
   level.player setsoundsubmix("sp_lab_ending_duck_1", 8);
 }
 
-function audio_mix_move4(var0) {
+function audio_mix_move4(var_0) {
   level.player setsoundsubmix("sp_lab_ending_duck_3", 4);
 }
 
@@ -619,35 +619,35 @@ function roof_collapse_init() {
 
 function collapse_earthquakes() {
   level endon("skip_end_scene");
-  var0 = [0.2, 0.3, 0.1, 0.2, 0.3, 0.1, 0.2, 0.1, 0.1, 0.2, 0.1, 0.2, 0.1, 0.05, 0.1, 0.05];
-  var1 = 0;
-  var2 = 0.22;
-  var3 = 0.95;
+  var_0 = [0.2, 0.3, 0.1, 0.2, 0.3, 0.1, 0.2, 0.1, 0.1, 0.2, 0.1, 0.2, 0.1, 0.05, 0.1, 0.05];
+  var_1 = 0;
+  var_2 = 0.22;
+  var_3 = 0.95;
 
   for(;;) {
-    earthquake(var0[var1], var0[var1] + var3, level.player.origin, 100);
-    wait var0[var1] + var2;
-    var1++;
+    earthquake(var_0[var_1], var_0[var_1] + var_3, level.player.origin, 100);
+    wait var_0[var_1] + var_2;
+    var_1++;
 
-    if(var1 == 9) {
-      var3 = 1;
-      var2 = 0.33;
+    if(var_1 == 9) {
+      var_3 = 1;
+      var_2 = 0.33;
     }
 
-    if(var0.size == var1) {
+    if(var_0.size == var_1) {
       break;
     }
   }
 }
 
-function collapse_thread(var0, var1) {
-  var2 = getscriptablearray(var0, "script_noteworthy");
-  wait var1;
-  var2[0] setscriptablepartstate("base", "dead", 1);
+function collapse_thread(var_0, var_1) {
+  var_2 = getscriptablearray(var_0, "script_noteworthy");
+  wait var_1;
+  var_2[0] setscriptablepartstate("base", "dead", 1);
 }
 
-function weapons_up(var0) {
-  var0 hide();
+function weapons_up(var_0) {
+  var_0 hide();
   level.player enablequickweaponswitch(0);
   level.player showviewmodel();
   level.player modifybasefov(65, 0.5);
@@ -655,79 +655,79 @@ function weapons_up(var0) {
   level.player scripts\common\utility::allow_weapon(1, "player_rig");
 }
 
-function force_stop_anim(var0) {
-  var0 scripts\engine\sp\utility::anim_stopanimScripted();
+function force_stop_anim(var_0) {
+  var_0 scripts\engine\sp\utility::anim_stopanimScripted();
 }
 
-function barkov_death(var0) {
-  var0.allowdeath = 1;
-  var0.diequietly = 1;
-  var0.skipdeathanim = 1;
-  var0.disabledeathorient = 1;
-  var0 delete();
+function barkov_death(var_0) {
+  var_0.allowdeath = 1;
+  var_0.diequietly = 1;
+  var_0.skipdeathanim = 1;
+  var_0.disabledeathorient = 1;
+  var_0 delete();
 }
 
-function farah_swap_mask_back(var0) {
+function farah_swap_mask_back(var_0) {
   level.farah detach("prop_gasmask", "tag_origin");
   level.farah.hatmodel = level.farah.og_hatmodel;
   level.farah attach(level.farah.hatmodel);
 }
 
-function start_detonator(var0) {
+function start_detonator(var_0) {
   level.nikolai detach("offhand_vm_clacker_tactical_sp_cinematic", "tag_accessory_right");
   level.player_rig.detonator show();
 }
 
-function detach_bomb(var0) {
-  var0 detach("offhand_wm_c4_bomb", "tag_accessory_right");
+function detach_bomb(var_0) {
+  var_0 detach("offhand_wm_c4_bomb", "tag_accessory_right");
 
-  if(isDefined(var0.bombnode)) {
-    var1 = getEnt(var0.bombnode.targetname + "_bomb", "targetname");
-    var1 show();
+  if(isDefined(var_0.bombnode)) {
+    var_1 = getEnt(var_0.bombnode.targetname + "_bomb", "targetname");
+    var_1 show();
     wait 1;
-    playFXOnTag(scripts\engine\utility::getfx("vfx_c4_light"), var1, "tag_fx");
+    playFXOnTag(scripts\engine\utility::getfx("vfx_c4_light"), var_1, "tag_fx");
     return;
   }
 }
 
-function dragons_breath_shot(var0) {
+function dragons_breath_shot(var_0) {
   if(scripts\engine\utility::flag("db_enemy_dead")) {
     self.ragdoll_immediate = 0;
     self.diequietly = 0;
     scripts\engine\sp\utility::anim_stopanimScripted();
     scripts\engine\sp\utility::enable_ai_color();
-    var1 = getnode("saved_guy_node", "targetname");
-    thread scripts\sp\spawner::go_to_node(var1);
+    var_1 = getnode("saved_guy_node", "targetname");
+    thread scripts\sp\spawner::go_to_node(var_1);
     return;
   }
 
   scripts\engine\utility::flag_set("dragons_breath_shot");
   level.cp_3_enemy endon("death");
   level.cp_3_enemy endon("weapon_dropped");
-  var2 = scripts\sp\utility::make_weapon("iw8_sh_dpapa12_incendiary");
-  var3 = undefined;
-  var4 = 6;
+  var_2 = scripts\sp\utility::make_weapon("iw8_sh_dpapa12_incendiary");
+  var_3 = undefined;
+  var_4 = 6;
 
-  for(var5 = 0; var5 < var4; var5++) {
+  for(var_5 = 0; var_5 < var_4; var_5++) {
     if(nullweapon(level.cp_3_enemy.weapon)) {
       return;
     }
 
-    var6 = level.cp_3_enemy gettagorigin("tag_flash");
+    var_6 = level.cp_3_enemy gettagorigin("tag_flash");
 
-    if(var5 > 2) {
-      var3 = level.cp_3_enemy gettagorigin("tag_flash") + anglesToForward(level.cp_3_enemy gettagangles("tag_flash")) * 50;
-    } else if(isalive(var1)) {
-      var3 = var1 gettagorigin("j_spine4");
+    if(var_5 > 2) {
+      var_3 = level.cp_3_enemy gettagorigin("tag_flash") + anglesToForward(level.cp_3_enemy gettagangles("tag_flash")) * 50;
+    } else if(isalive(var_1)) {
+      var_3 = var_1 gettagorigin("j_spine4");
     }
 
-    if(isDefined(var3)) {
+    if(isDefined(var_3)) {
       playFXOnTag(level._effect["vfx_muz_dragons_breath_w"], level.cp_3_enemy, "tag_flash");
-      magicbullet(var2, var6, var3, level.cp_3_enemy);
+      magicbullet(var_2, var_6, var_3, level.cp_3_enemy);
     }
 
-    if(var5 == 0) {
-      var1 thread scripts\common\ai::gun_remove();
+    if(var_5 == 0) {
+      var_1 thread scripts\common\ai::gun_remove();
       thread scripts\engine\utility::play_sound_in_space("generic_death_falling_scream");
     }
 
@@ -735,43 +735,43 @@ function dragons_breath_shot(var0) {
   }
 }
 
-function start_tarp_mayhem(var0) {
+function start_tarp_mayhem(var_0) {
   level notify("start_tarp_sim");
   playmayhem("mayh_lab_heli_tarp");
 }
 
-function damage_on_elbow_strike(var0) {
+function damage_on_elbow_strike(var_0) {
   level.player disableinvulnerability();
   level.player shellshock("captive_hit", 1);
   level notify("move_window_light_elbow");
 
   if(level.player.health > 12) {
-    var1 = min(level.player.health - 2, 20);
-    level.player scripts\sp\utility::do_damage(var1, var0.origin, var0, var0, "MOD_MELEE");
+    var_1 = min(level.player.health - 2, 20);
+    level.player scripts\sp\utility::do_damage(var_1, var_0.origin, var_0, var_0, "MOD_MELEE");
   }
 
   level.player playRumbleOnEntity("heavy_1s");
 }
 
-function damage_on_gun_shot(var0) {
+function damage_on_gun_shot(var_0) {
   level.player disableinvulnerability();
 
   if(level.player.health > 12) {
-    var1 = min(level.player.health - 2, 45);
-    level.player scripts\sp\utility::do_damage(var1, var0.origin, var0, var0, "MOD_PISTOL_BULLET");
+    var_1 = min(level.player.health - 2, 45);
+    level.player scripts\sp\utility::do_damage(var_1, var_0.origin, var_0, var_0, "MOD_PISTOL_BULLET");
   }
 
   level.player playRumbleOnEntity("heavy_1s");
 }
 
-function drop_walkie_prop(var0) {
+function drop_walkie_prop(var_0) {
   if(isDefined(level.barkov.propmodel)) {
     level.barkov.propmodel delete();
     return;
   }
 }
 
-function barkov_start_choke_effect(var0) {
+function barkov_start_choke_effect(var_0) {
   if(!isDefined(level.player.breathoverlay)) {
     scripts\sp\maps\lab\lab_finale::setup_breath_overlay();
   }
@@ -786,19 +786,19 @@ function barkov_start_choke_effect(var0) {
   visionsetnaked("lab_ending_sss", 1);
 }
 
-function barkov_shoots(var0) {
+function barkov_shoots(var_0) {
   level.player notify("barkov_crawl_finished");
-  var0 shoot(0.9, level.player);
-  kill_player(var0);
+  var_0 shoot(0.9, level.player);
+  kill_player(var_0);
 }
 
-function kill_player(var0) {
+function kill_player(var_0) {
   if(isalive(level.player)) {
     level.player disableinvulnerability();
   }
 
   if(isalive(level.player)) {
-    level.player scripts\sp\utility::do_damage(level.player.health + 10000, var0.origin, var0, var0, "MOD_PISTOL_BULLET");
+    level.player scripts\sp\utility::do_damage(level.player.health + 10000, var_0.origin, var_0, var_0, "MOD_PISTOL_BULLET");
   }
 
   if(isalive(level.player)) {
@@ -811,70 +811,70 @@ function kill_player(var0) {
   }
 }
 
-function stab_swap_01(var0) {
-  var0.firststabs = 1;
-  var0 setModel("body_villain_barkov_wind_all_stab_1");
+function stab_swap_01(var_0) {
+  var_0.firststabs = 1;
+  var_0 setModel("body_villain_barkov_wind_all_stab_1");
 }
 
-function stab_swap_02(var0) {
-  var0 setModel("body_villain_barkov_wind_all_stab_2");
+function stab_swap_02(var_0) {
+  var_0 setModel("body_villain_barkov_wind_all_stab_2");
 }
 
-function stab_swap_03(var0) {
-  if(isDefined(var0.firststabs) && var0.firststabs) {
-    var0 setModel("body_villain_barkov_wind_all_stab_3");
+function stab_swap_03(var_0) {
+  if(isDefined(var_0.firststabs) && var_0.firststabs) {
+    var_0 setModel("body_villain_barkov_wind_all_stab_3");
     return;
   }
 
-  var0 setModel("body_villain_barkov_wind_gun_stab_3");
+  var_0 setModel("body_villain_barkov_wind_gun_stab_3");
 }
 
-function stab_swap_04(var0) {
-  if(isDefined(var0.firststabs) && var0.firststabs) {
-    var0 setModel("body_villain_barkov_wind_all_stab_4");
+function stab_swap_04(var_0) {
+  if(isDefined(var_0.firststabs) && var_0.firststabs) {
+    var_0 setModel("body_villain_barkov_wind_all_stab_4");
     return;
   }
 
-  var0 setModel("body_villain_barkov_wind_gun_stab_4");
+  var_0 setModel("body_villain_barkov_wind_gun_stab_4");
 }
 
-function stab_swap_05(var0) {
-  if(isDefined(var0.firststabs) && var0.firststabs) {
-    var0 setModel("body_villain_barkov_wind_all_stab_5");
+function stab_swap_05(var_0) {
+  if(isDefined(var_0.firststabs) && var_0.firststabs) {
+    var_0 setModel("body_villain_barkov_wind_all_stab_5");
   } else {
-    var0 setModel("body_villain_barkov_wind_gun_stab_5");
+    var_0 setModel("body_villain_barkov_wind_gun_stab_5");
   }
 
-  var0 detach(var0.headmodel);
-  var0 attach("head_villain_barkov_stab_5_blendshape");
-  var0.headmodel = "head_villain_barkov_stab_5_blendshape";
+  var_0 detach(var_0.headmodel);
+  var_0 attach("head_villain_barkov_stab_5_blendshape");
+  var_0.headmodel = "head_villain_barkov_stab_5_blendshape";
 }
 
-function stab_swap_06(var0) {
-  if(isDefined(var0.firststabs) && var0.firststabs) {
-    var0 setModel("body_villain_barkov_wind_all_stab_6");
+function stab_swap_06(var_0) {
+  if(isDefined(var_0.firststabs) && var_0.firststabs) {
+    var_0 setModel("body_villain_barkov_wind_all_stab_6");
     return;
   }
 
-  var0 setModel("body_villain_barkov_wind_gun_stab_6");
+  var_0 setModel("body_villain_barkov_wind_gun_stab_6");
 }
 
-function say_choke_stab_vo_01(var0) {
+function say_choke_stab_vo_01(var_0) {
   level.player thread scripts\engine\sp\utility::smart_player_dialogue_interrupt("dx_vom_far_finale_heli_kill_bodyshot_36");
-  var0 thread scripts\sp\maps\lab\lab_vo_util::simple_dialogue_on_tag("dx_vom_bkv_finale_heli_kill_bodyshot_39");
-  var0 endon("stop_simple_dialogue");
+  var_0 thread scripts\sp\maps\lab\lab_vo_util::simple_dialogue_on_tag("dx_vom_bkv_finale_heli_kill_bodyshot_39");
+  var_0 endon("stop_simple_dialogue");
   wait lookupsoundlength("dx_vom_bkv_finale_heli_kill_bodyshot_39") / 1000;
-  var0 thread scripts\sp\maps\lab\lab_vo_util::simple_dialogue_on_tag("dx_vom_bkv_finale_heli_kill_bodyshot_40");
+  var_0 thread scripts\sp\maps\lab\lab_vo_util::simple_dialogue_on_tag("dx_vom_bkv_finale_heli_kill_bodyshot_40");
 }
 
-function say_choke_stab_vo_02(var0) {
+function say_choke_stab_vo_02(var_0) {
   level.player thread scripts\engine\sp\utility::smart_player_dialogue_interrupt("dx_vom_far_finale_heli_kill_bodyshot_36");
-  var0 scripts\sp\maps\lab\lab_vo_util::simple_dialogue_on_tag("dx_vom_bkv_finale_heli_kill_bodyshot_30");
+  var_0 scripts\sp\maps\lab\lab_vo_util::simple_dialogue_on_tag("dx_vom_bkv_finale_heli_kill_bodyshot_30");
 }
 
-function say_choke_stab_vo_03(var0) {
+function say_choke_stab_vo_03(var_0) {
   level.player thread scripts\engine\sp\utility::smart_player_dialogue_interrupt("dx_vom_far_finale_heli_kill_bodyshot_36");
-  var0 scripts\sp\maps\lab\lab_vo_util::simple_dialogue_on_tag("dx_vom_bkv_finale_heli_kill_knife_60");
+  var_0 scripts\sp\maps\lab\lab_vo_util::simple_dialogue_on_tag("dx_vom_bkv_finale_heli_kill_knife_60");
 }
 
 function vo_face() {
@@ -967,14 +967,14 @@ function vehicles() {
   level.scr_anim["finale_heli"]["finale_kickoff_sh02"] = % lab_end_010_finale_kickoff_sh02_veh01;
 }
 
-function tank_shake_start(var0) {
+function tank_shake_start(var_0) {
   level endon("stop_shake");
   thread bridge_tank_move_sfx();
 
   for(;;) {
-    var1 = 0.5;
-    var0 screenshakeonentity(0.4, 0.8, 0.4, var1, 0.1, 0.1, 300, 2, 4, 4);
-    wait var1;
+    var_1 = 0.5;
+    var_0 screenshakeonentity(0.4, 0.8, 0.4, var_1, 0.1, 0.1, 300, 2, 4, 4);
+    wait var_1;
   }
 }
 
@@ -992,14 +992,14 @@ function bridge_tank_move_sfx() {
   self playLoopSound("veh_bradley_engine_lp");
 }
 
-function tank_shake_end(var0) {
-  var0 screenshakeonentity(0.4, 0.8, 0.4, 0.7, 0, 0.3, 500, 2, 4, 4);
+function tank_shake_end(var_0) {
+  var_0 screenshakeonentity(0.4, 0.8, 0.4, 0.7, 0, 0.3, 500, 2, 4, 4);
 
-  if(isDefined(var0.tread_sfx)) {
-    var0.tread_sfx scripts\engine\sp\utility::sound_fade_and_delete(2, 1);
+  if(isDefined(var_0.tread_sfx)) {
+    var_0.tread_sfx scripts\engine\sp\utility::sound_fade_and_delete(2, 1);
   }
 
-  var0 thread scripts\sp\maps\lab\lab_hill::tank_engine_sfx();
+  var_0 thread scripts\sp\maps\lab\lab_hill::tank_engine_sfx();
 }
 
 function script_models() {
@@ -1070,53 +1070,53 @@ function script_models() {
   level.scr_weapon["fake_mike"] = ["iw8_pi_mike1911", [], 1];
 }
 
-function hide_mask(var0) {
-  if(isDefined(var0)) {
-    var0 hide();
+function hide_mask(var_0) {
+  if(isDefined(var_0)) {
+    var_0 hide();
     return;
   }
 }
 
-function show_mask(var0) {
-  if(isDefined(var0)) {
-    var0 show();
+function show_mask(var_0) {
+  if(isDefined(var_0)) {
+    var_0 show();
     return;
   }
 }
 
-function ai_masks(var0) {
-  var1 = [level.rebel_1, level.rebel_2, level.farah, level.rebel_3];
-  scripts\sp\maps\lab\lab_util::array_thread_safe(var1, &scripts\sp\maps\lab\lab_util::ai_gas_mask, 1);
+function ai_masks(var_0) {
+  var_1 = [level.rebel_1, level.rebel_2, level.farah, level.rebel_3];
+  scripts\sp\maps\lab\lab_util::array_thread_safe(var_1, &scripts\sp\maps\lab\lab_util::ai_gas_mask, 1);
 }
 
-function mask_is_on(var0) {
+function mask_is_on(var_0) {
   scripts\engine\utility::flag_set("player_mask_on");
 }
 
-function swap_to_fake_cpapa(var0) {
-  var1 = var0 gettagorigin("tag_weapon_right");
-  var2 = var0 gettagangles("tag_weapon_right");
-  var0.fakegun = spawn("script_model", level.finale_heli gettagorigin("tag_origin"));
-  var0.fakegun scripts\common\utility::make_weapon_model(getweaponbasename(var0.weapon), getweaponattachments(var0.weapon), 0);
-  var0.fakegun linkTo(level.finale_heli, "tag_origin", (-145, 40, -141), (174, -45, 90));
-  var0.gun_on_ground = var0.fakegun;
-  var0 scripts\anim\shared::placeweaponon(var0.weapon, "none");
-  var0.dropweapon = 0;
+function swap_to_fake_cpapa(var_0) {
+  var_1 = var_0 gettagorigin("tag_weapon_right");
+  var_2 = var_0 gettagangles("tag_weapon_right");
+  var_0.fakegun = spawn("script_model", level.finale_heli gettagorigin("tag_origin"));
+  var_0.fakegun scripts\common\utility::make_weapon_model(getweaponbasename(var_0.weapon), getweaponattachments(var_0.weapon), 0);
+  var_0.fakegun linkTo(level.finale_heli, "tag_origin", (-145, 40, -141), (174, -45, 90));
+  var_0.gun_on_ground = var_0.fakegun;
+  var_0 scripts\anim\shared::placeweaponon(var_0.weapon, "none");
+  var_0.dropweapon = 0;
 }
 
-function pickup_fake_cpapa(var0) {
-  var0 scripts\sp\anim_notetrack::gun_pickup_right();
+function pickup_fake_cpapa(var_0) {
+  var_0 scripts\sp\anim_notetrack::gun_pickup_right();
 }
 
-function check_health_status(var0) {
-  var0 endon("single anim");
+function check_health_status(var_0) {
+  var_0 endon("single anim");
   wait 0.05;
 
-  while(!istrue(var0.shotduringanim)) {
+  while(!istrue(var_0.shotduringanim)) {
     waitframe();
   }
 
-  var0 notify("single anim", "end");
+  var_0 notify("single anim", "end");
 }
 
 function scriptables() {

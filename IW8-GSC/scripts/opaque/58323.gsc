@@ -11,29 +11,29 @@ function get_random_primary_weapon_obj() {
 }
 
 function get_random_starting_station_name_on_track() {
-  var0 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldataforvehicle("cargo_truck_susp", 1);
-  var0.arenavday = &scripts\cp_mp\vehicles\vehicle_spawn::ref_14211;
+  var_0 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldataforvehicle("cargo_truck_susp", 1);
+  var_0.arenavday = &scripts\cp_mp\vehicles\vehicle_spawn::ref_14211;
 }
 
 function get_random_search_node() {
-  var0 = scripts\cp_mp\vehicles\vehicle_mines::vehicle_mines_getleveldataforvehicle("cargo_truck_susp", 1);
-  var0.frontextents = 165;
-  var0.backextents = 168;
-  var0.leftextents = 57;
-  var0.rightextents = 57;
-  var0.bottomextents = 35;
-  var0.distancetobottom = 50;
-  var0.loscheckoffset = (0, 0, 70);
+  var_0 = scripts\cp_mp\vehicles\vehicle_mines::vehicle_mines_getleveldataforvehicle("cargo_truck_susp", 1);
+  var_0.frontextents = 165;
+  var_0.backextents = 168;
+  var_0.leftextents = 57;
+  var_0.rightextents = 57;
+  var_0.bottomextents = 35;
+  var_0.distancetobottom = 50;
+  var_0.loscheckoffset = (0, 0, 70);
 }
 
-function get_randomize_bomb_label_list(var0, var1) {
-  var2 = _calloutmarkerping_isenemy::get_players_in_mortar_range(var0, var1);
+function get_randomize_bomb_label_list(var_0, var_1) {
+  var_2 = _calloutmarkerping_isenemy::get_players_in_mortar_range(var_0, var_1);
 
-  if(isDefined(var2) && scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_gamemodesupportsrespawn()) {
-    var2.ondeathrespawn = &get_random_station_names_on_track;
+  if(isDefined(var_2) && scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_gamemodesupportsrespawn()) {
+    var_2.ondeathrespawn = &get_random_station_names_on_track;
   }
 
-  return var2;
+  return var_2;
 }
 
 function get_random_station_names_on_track() {
@@ -41,9 +41,9 @@ function get_random_station_names_on_track() {
 }
 
 function get_recent_spawn_time_threshold() {
-  var0 = scripts\cp_mp\vehicles\vehicle_tracking::getvehiclespawndata(self);
-  var1 = spawnStruct();
-  scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(var0, var1);
-  var2 = spawnStruct();
-  var3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("cargo_truck_susp", var1, var2);
+  var_0 = scripts\cp_mp\vehicles\vehicle_tracking::getvehiclespawndata(self);
+  var_1 = spawnStruct();
+  scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(var_0, var_1);
+  var_2 = spawnStruct();
+  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("cargo_truck_susp", var_1, var_2);
 }

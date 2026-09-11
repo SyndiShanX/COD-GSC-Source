@@ -32,8 +32,8 @@ function house_boss_skip_fight_show_intro() {
 
 function house_exit_skip_boss_fight_catchup() {
   scripts\engine\sp\utility::set_start_location("house_exit_start", [level.player]);
-  var0 = scripts\engine\utility::getStructArray("boss_struggle_loc_" + get_current_house_room(level.player), "script_noteworthy");
-  level.boss_struggle_anim_node = scripts\engine\utility::getclosest(level.player.origin, var0);
+  var_0 = scripts\engine\utility::getStructArray("boss_struggle_loc_" + get_current_house_room(level.player), "script_noteworthy");
+  level.boss_struggle_anim_node = scripts\engine\utility::getclosest(level.player.origin, var_0);
   level.boss_kill_sling_model = scripts\engine\sp\utility::spawn_anim_model("boss_kill_sling", level.boss_struggle_anim_node.origin, level.boss_struggle_anim_node.angles);
   level.gas_attack_anim_node = getEnt("gas_attack_street_node", "script_noteworthy");
   level.father_body_model = scripts\engine\sp\utility::spawn_anim_model("farah_father_body", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
@@ -87,50 +87,50 @@ function house_enter_main() {
   level.hadir_body_model attach("head_sc_m_coto");
   level.hadir_body_model.fakeactor_face_anim = 1;
   level.hadir_body_model.animationarchetype = "soldier";
-  var0 = scripts\engine\sp\utility::spawn_anim_model("house_intro_pack", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  var1 = scripts\engine\sp\utility::spawn_anim_model("house_intro_mask", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  var2 = scripts\engine\sp\utility::spawn_anim_model("house_intro_photo", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  var3 = scripts\engine\sp\utility::spawn_anim_model("house_intro_lantern", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  var4 = scripts\engine\sp\utility::spawn_anim_model("house_intro_cupboard", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  var5 = scripts\engine\sp\utility::spawn_anim_model("house_intro_cupboard_b", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  var6 = scripts\engine\sp\utility::spawn_anim_model("house_intro_HadirPhone", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  var_0 = scripts\engine\sp\utility::spawn_anim_model("house_intro_pack", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  var_1 = scripts\engine\sp\utility::spawn_anim_model("house_intro_mask", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  var_2 = scripts\engine\sp\utility::spawn_anim_model("house_intro_photo", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  var_3 = scripts\engine\sp\utility::spawn_anim_model("house_intro_lantern", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  var_4 = scripts\engine\sp\utility::spawn_anim_model("house_intro_cupboard", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  var_5 = scripts\engine\sp\utility::spawn_anim_model("house_intro_cupboard_b", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  var_6 = scripts\engine\sp\utility::spawn_anim_model("house_intro_HadirPhone", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
   level.house_intro_phone_farah_model = scripts\engine\sp\utility::spawn_anim_model("house_intro_FarahPhone", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  var7 = scripts\engine\sp\utility::spawn_anim_model("house_intro_bottle", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  var8 = scripts\engine\sp\utility::spawn_anim_model("house_intro_dresser", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  var9 = scripts\engine\sp\utility::spawn_anim_model("house_intro_hutch", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  var10 = scripts\engine\sp\utility::spawn_anim_model("house_intro_vase", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  var11 = scripts\engine\sp\utility::spawn_anim_model("house_intro_towel", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  var_7 = scripts\engine\sp\utility::spawn_anim_model("house_intro_bottle", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  var_8 = scripts\engine\sp\utility::spawn_anim_model("house_intro_dresser", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  var_9 = scripts\engine\sp\utility::spawn_anim_model("house_intro_hutch", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  var_10 = scripts\engine\sp\utility::spawn_anim_model("house_intro_vase", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  var_11 = scripts\engine\sp\utility::spawn_anim_model("house_intro_towel", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
   thread lantern_fire(level);
   level.hadir_body_model makefakeai();
   level.hadir_body_model.health = 100;
-  var0 scriptmoverdistancefade();
+  var_0 scriptmoverdistancefade();
   level.player allowprone(1);
   level.player allowcrouch(1);
   level.player allowstand(1);
-  thread phone_table_interact(var2, var3, var7, var8, var9, var10, var4, var5, var6, var0, var1);
+  thread phone_table_interact(var_2, var_3, var_7, var_8, var_9, var_10, var_4, var_5, var_6, var_0, var_1);
   wait 36;
   scripts\engine\utility::flag_set("objective_prepare_to_escape");
   thread ambient_house_enter_explosions();
-  var12 = scripts\engine\utility::spawn_tag_origin(level.house_intro_phone_farah_model.origin);
-  var12 scripts\sp\player\cursor_hint::create_cursor_hint("tag_origin", (0, 0, 0), &"HOMETOWN/CELLPHONE", 75, 175, 50, 0);
-  var12 waittill("trigger");
+  var_12 = scripts\engine\utility::spawn_tag_origin(level.house_intro_phone_farah_model.origin);
+  var_12 scripts\sp\player\cursor_hint::create_cursor_hint("tag_origin", (0, 0, 0), &"HOMETOWN/CELLPHONE", 75, 175, 50, 0);
+  var_12 waittill("trigger");
   level notify("player_got_phone");
-  var12 delete();
+  var_12 delete();
   level.dad_phone_blocker = getEnt("dad_phone_blocker", "script_noteworthy");
   level.dad_phone_blocker scripts\engine\sp\utility::hide_entity();
   level notify("kill_random_explos");
   level.dead_dad_blocker scripts\engine\sp\utility::show_entity();
-  var13 = scripts\engine\utility::getStruct("dad_dead_blocker_wall_loc", "script_noteworthy");
-  var14 = level.dead_dad_blocker.origin;
-  level.dead_dad_blocker.origin = var13.origin;
+  var_13 = scripts\engine\utility::getStruct("dad_dead_blocker_wall_loc", "script_noteworthy");
+  var_14 = level.dead_dad_blocker.origin;
+  level.dead_dad_blocker.origin = var_13.origin;
   level.gas_attack_anim_node notify("stop_loop");
   level.gas_attack_anim_node notify("stop_play_anim_and_then_loop");
   thread player_phone_pickup_anim();
-  level.gas_attack_anim_node thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(var2, "SceneB_Phones");
-  level.gas_attack_anim_node thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(var6, "SceneB_Phones");
+  level.gas_attack_anim_node thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(var_2, "SceneB_Phones");
+  level.gas_attack_anim_node thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(var_6, "SceneB_Phones");
   level.gas_attack_anim_node thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.house_intro_phone_farah_model, "SceneB_Phones");
-  level.gas_attack_anim_node thread scripts\sp\maps\hometown\hometown_util::play_anim_and_then_loop(var0, "SceneB_Phones", "house_foyer_idle");
-  level.gas_attack_anim_node thread scripts\sp\maps\hometown\hometown_util::play_anim_and_then_loop(var1, "SceneB_Phones", "house_foyer_idle");
+  level.gas_attack_anim_node thread scripts\sp\maps\hometown\hometown_util::play_anim_and_then_loop(var_0, "SceneB_Phones", "house_foyer_idle");
+  level.gas_attack_anim_node thread scripts\sp\maps\hometown\hometown_util::play_anim_and_then_loop(var_1, "SceneB_Phones", "house_foyer_idle");
   level.gas_attack_anim_node thread scripts\sp\maps\hometown\hometown_util::play_anim_and_then_loop(level.farah_father_ai, "SceneB_Phones", "house_foyer_idle");
   level.gas_attack_anim_node thread scripts\sp\maps\hometown\hometown_util::play_anim_and_then_loop(level.hadir_ai, "SceneB_Phones", "house_foyer_idle");
   level.gas_attack_anim_node scripts\sp\maps\hometown\hometown_util::play_anim_and_then_loop(level.hadir_body_model, "SceneB_Phones", "house_foyer_idle");
@@ -145,7 +145,7 @@ function house_enter_main() {
   level.player.ignoreme = 1;
   scripts\sp\maps\hometown\hometown_util::spawn_goliath_boss();
   scripts\engine\utility::flag_set("russian_entered_house");
-  thread house_enter_goliath_kill(var0);
+  thread house_enter_goliath_kill(var_0);
   level thread scripts\sp\utility::context_melee_enable(1);
   level.goliath_melee_weapon_spawn_count = 0;
   thread goliath_player_death_monitor();
@@ -161,25 +161,25 @@ function house_enter_main() {
   thread vfx_doorgas();
   thread boss_stream_pos();
   thread dad_shot_by_boss_listener();
-  thread hide_bottle_monitor(var7);
+  thread hide_bottle_monitor(var_7);
   thread hadir_helps_dad_monitor();
   thread goliath_sees_player_monitor();
   level notify("dad_dies_start");
   level.gas_attack_anim_node notify("stop_loop");
   level.gas_attack_anim_node notify("stop_play_anim_and_then_loop");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(var0, "house_dad_dies");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(var1, "house_dad_dies");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(var3, "house_dad_dies");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(var_0, "house_dad_dies");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(var_1, "house_dad_dies");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(var_3, "house_dad_dies");
   level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(level.hadir_melee_weapon_pickup, "house_dad_dies");
   level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(level.farah_father_ai, "house_dad_dies");
   level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(level.gas_attack_house_door_model, "house_dad_dies");
   level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(level.goliath_ai, "house_dad_dies");
   level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(level.house_intro_deadbolt_model, "house_dad_dies");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(var7, "house_dad_dies");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(var8, "house_dad_dies");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(var9, "house_dad_dies");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(var10, "house_dad_dies");
-  level.dead_dad_blocker scripts\engine\utility::delaycall(38, &moveto, var14, 5);
+  level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(var_7, "house_dad_dies");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(var_8, "house_dad_dies");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(var_9, "house_dad_dies");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(var_10, "house_dad_dies");
+  level.dead_dad_blocker scripts\engine\utility::delaycall(38, &moveto, var_14, 5);
   thread hadir_dad_dies_scene();
   thread shelf_monitor();
 
@@ -190,9 +190,9 @@ function house_enter_main() {
     level notify("goliath_boss_dead");
     wait 2.5;
     house_boss_skip_fight_show_intro();
-    var0 scripts\engine\sp\utility::anim_stopanimScripted();
-    var1 scripts\engine\sp\utility::anim_stopanimScripted();
-    var3 scripts\engine\sp\utility::anim_stopanimScripted();
+    var_0 scripts\engine\sp\utility::anim_stopanimScripted();
+    var_1 scripts\engine\sp\utility::anim_stopanimScripted();
+    var_3 scripts\engine\sp\utility::anim_stopanimScripted();
     level.hadir_melee_weapon_pickup scripts\engine\sp\utility::anim_stopanimScripted();
     level.farah_father_ai scripts\engine\sp\utility::anim_stopanimScripted();
     level.hadir_ai scripts\engine\sp\utility::anim_stopanimScripted();
@@ -200,13 +200,13 @@ function house_enter_main() {
     level.gas_attack_house_door_model scripts\engine\sp\utility::anim_stopanimScripted();
     level.goliath_ai scripts\engine\sp\utility::anim_stopanimScripted();
     level.house_intro_deadbolt_model scripts\engine\sp\utility::anim_stopanimScripted();
-    var7 scripts\engine\sp\utility::anim_stopanimScripted();
-    var8 scripts\engine\sp\utility::anim_stopanimScripted();
-    var9 scripts\engine\sp\utility::anim_stopanimScripted();
-    var10 scripts\engine\sp\utility::anim_stopanimScripted();
-    level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(var0, "house_dad_dies");
-    level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(var1, "house_dad_dies");
-    level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(var3, "house_dad_dies");
+    var_7 scripts\engine\sp\utility::anim_stopanimScripted();
+    var_8 scripts\engine\sp\utility::anim_stopanimScripted();
+    var_9 scripts\engine\sp\utility::anim_stopanimScripted();
+    var_10 scripts\engine\sp\utility::anim_stopanimScripted();
+    level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(var_0, "house_dad_dies");
+    level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(var_1, "house_dad_dies");
+    level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(var_3, "house_dad_dies");
     level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(level.hadir_melee_weapon_pickup, "house_dad_dies");
     level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(level.farah_father_ai, "house_dad_dies");
     level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(level.hadir_ai, "house_dad_dies");
@@ -214,10 +214,10 @@ function house_enter_main() {
     level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(level.gas_attack_house_door_model, "house_dad_dies");
     level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(level.goliath_ai, "house_dad_dies");
     level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(level.house_intro_deadbolt_model, "house_dad_dies");
-    level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(var7, "house_dad_dies");
-    level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(var8, "house_dad_dies");
-    level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(var9, "house_dad_dies");
-    level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(var10, "house_dad_dies");
+    level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(var_7, "house_dad_dies");
+    level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(var_8, "house_dad_dies");
+    level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(var_9, "house_dad_dies");
+    level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(var_10, "house_dad_dies");
     level.goliath_ai stopsounds();
     level.farah_father_ai stopsounds();
     waitframe();
@@ -225,13 +225,13 @@ function house_enter_main() {
     wait 4;
     thread house_boss_skip_fight_hide_intro();
   } else {
-    var15 = getanimlength(level.scr_anim["generic"]["house_dad_dies"]);
-    wait var15;
+    var_15 = getanimlength(level.scr_anim["generic"]["house_dad_dies"]);
+    wait var_15;
   }
 
   level notify("house_enter_boss_anim_complete");
   level.hadir_melee_weapon_pickup delete();
-  var1 delete();
+  var_1 delete();
   level.player.ignoreme = 0;
   level.player_got_dad_dies_save = 0;
 
@@ -275,9 +275,9 @@ function house_dad_dies_late_save() {
   }
 }
 
-function hide_bottle_monitor(var0) {
+function hide_bottle_monitor(var_0) {
   wait 38.25;
-  var0 hide();
+  var_0 hide();
 }
 
 function late_foyer_save() {
@@ -294,9 +294,9 @@ function late_foyer_save() {
 function hadir_helps_dad_monitor() {
   wait 31;
   level.hadir_body_model scriptmoverdistancefade();
-  var0 = 1296;
+  var_0 = 1296;
 
-  if(distancesquared(level.goliath_ai.origin, level.player.origin) > var0) {
+  if(distancesquared(level.goliath_ai.origin, level.player.origin) > var_0) {
     if(!scripts\engine\utility::flag("disable_autosaves")) {
       scripts\engine\sp\utility::autosave_now_silent();
     }
@@ -341,28 +341,28 @@ function audio_house_boss_enter_music() {
   setmusicstate("mx_hometown_05_house_fight");
 }
 
-function phone_table_interact(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10) {
+function phone_table_interact(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   level.gas_attack_anim_node notify("stop_loop");
   level.gas_attack_anim_node notify("stop_play_anim_and_then_loop");
   thread audio_door_slam_shut();
-  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var0, "SceneB_Phones");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var1, "house_dad_dies");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var_0, "SceneB_Phones");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var_1, "house_dad_dies");
   level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(level.house_intro_deadbolt_model, "house_dad_dies");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var2, "house_dad_dies");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var3, "house_dad_dies");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var4, "house_dad_dies");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var5, "house_dad_dies");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var_2, "house_dad_dies");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var_3, "house_dad_dies");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var_4, "house_dad_dies");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var_5, "house_dad_dies");
   level.gas_attack_anim_node thread scripts\sp\maps\hometown\hometown_util::spawn_thing_play_anim_and_delete("house_intro_towel", "house_find_hadir");
   level.gas_attack_anim_node thread scripts\sp\maps\hometown\hometown_util::spawn_thing_play_anim_and_delete("house_intro_prop01", "house_get_mask_kitchen");
   level.gas_attack_anim_node thread scripts\sp\maps\hometown\hometown_util::spawn_thing_play_anim_and_delete("house_intro_prop02", "house_get_mask_kitchen");
   level.gas_attack_anim_node thread scripts\sp\maps\hometown\hometown_util::spawn_thing_play_anim_and_delete("house_intro_prop03", "house_get_mask_kitchen");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(var6, "house_get_mask_kitchen");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(var7, "house_get_mask_kitchen");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(var_6, "house_get_mask_kitchen");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(var_7, "house_get_mask_kitchen");
   level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(level.gas_attack_house_door_model, "house_find_hadir");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(var8, "house_find_hadir");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(var_8, "house_find_hadir");
   level.gas_attack_anim_node thread scripts\common\anim::anim_single_solo(level.house_intro_phone_farah_model, "house_find_hadir");
-  level.gas_attack_anim_node thread scripts\sp\maps\hometown\hometown_util::play_anim_and_then_loop(var9, "house_find_hadir", "house_find_hadir_idle");
-  level.gas_attack_anim_node thread scripts\sp\maps\hometown\hometown_util::play_anim_and_then_loop(var10, "house_find_hadir", "house_find_hadir_idle");
+  level.gas_attack_anim_node thread scripts\sp\maps\hometown\hometown_util::play_anim_and_then_loop(var_9, "house_find_hadir", "house_find_hadir_idle");
+  level.gas_attack_anim_node thread scripts\sp\maps\hometown\hometown_util::play_anim_and_then_loop(var_10, "house_find_hadir", "house_find_hadir_idle");
   level.gas_attack_anim_node thread scripts\sp\maps\hometown\hometown_util::play_anim_and_then_loop(level.farah_father_ai, "house_find_hadir", "house_find_hadir_idle");
   level.gas_attack_anim_node thread scripts\sp\maps\hometown\hometown_util::play_anim_and_then_loop(level.hadir_ai, "house_find_hadir", "house_find_hadir_idle");
   level.gas_attack_anim_node thread scripts\sp\maps\hometown\hometown_util::play_anim_and_then_loop(level.hadir_body_model, "house_find_hadir", "house_find_hadir_idle");
@@ -382,15 +382,15 @@ function audio_distant_gas_death_scream_handler() {
 }
 
 function audio_distant_gas_death_screams_01() {
-  var0 = randomfloatrange(2, 12);
-  wait var0;
+  var_0 = randomfloatrange(2, 12);
+  wait var_0;
   level endon("death");
-  var1 = spawn("script_origin", (-581, -2769, 95));
+  var_1 = spawn("script_origin", (-581, -2769, 95));
   level.death_01_snd_handle = undefined;
 
   for(;;) {
     if(!isDefined(level.death_01_snd_handle)) {
-      level.death_01_snd_handle = scripts\engine\utility::play_sound_in_space("emt_dist_death_screams", (-581, -2769, 95), 0, var1);
+      level.death_01_snd_handle = scripts\engine\utility::play_sound_in_space("emt_dist_death_screams", (-581, -2769, 95), 0, var_1);
     }
 
     if(scripts\engine\utility::flag("russian_entered_house")) {
@@ -401,13 +401,13 @@ function audio_distant_gas_death_screams_01() {
       break;
     }
 
-    var2 = randomfloatrange(15, 25);
-    wait var2;
+    var_2 = randomfloatrange(15, 25);
+    wait var_2;
     level.death_01_snd_handle = undefined;
   }
 
-  var1 delete();
-  var1 = undefined;
+  var_1 delete();
+  var_1 = undefined;
 
   if(isDefined(level.death_01_snd_handle)) {
     level.death_01_snd_handle = undefined;
@@ -416,15 +416,15 @@ function audio_distant_gas_death_screams_01() {
 }
 
 function audio_distant_gas_death_screams_02() {
-  var0 = randomfloatrange(2, 12);
-  wait var0;
+  var_0 = randomfloatrange(2, 12);
+  wait var_0;
   level endon("death");
-  var1 = spawn("script_origin", (-689, -1618, 74));
+  var_1 = spawn("script_origin", (-689, -1618, 74));
   level.death_02_snd_handle = undefined;
 
   for(;;) {
     if(!isDefined(level.death_02_snd_handle)) {
-      level.death_02_snd_handle = scripts\engine\utility::play_sound_in_space("emt_dist_death_screams", (-689, -1618, 74), 0, var1);
+      level.death_02_snd_handle = scripts\engine\utility::play_sound_in_space("emt_dist_death_screams", (-689, -1618, 74), 0, var_1);
     }
 
     if(scripts\engine\utility::flag("russian_entered_house")) {
@@ -435,13 +435,13 @@ function audio_distant_gas_death_screams_02() {
       break;
     }
 
-    var2 = randomfloatrange(15, 25);
-    wait var2;
+    var_2 = randomfloatrange(15, 25);
+    wait var_2;
     level.death_02_snd_handle = undefined;
   }
 
-  var1 delete();
-  var1 = undefined;
+  var_1 delete();
+  var_1 = undefined;
 
   if(isDefined(level.death_02_snd_handle)) {
     level.death_02_snd_handle = undefined;
@@ -450,15 +450,15 @@ function audio_distant_gas_death_screams_02() {
 }
 
 function audio_distant_gas_death_screams_03() {
-  var0 = randomfloatrange(2, 12);
-  wait var0;
+  var_0 = randomfloatrange(2, 12);
+  wait var_0;
   level endon("death");
-  var1 = spawn("script_origin", (-1843, -1419, 121));
+  var_1 = spawn("script_origin", (-1843, -1419, 121));
   level.death_03_snd_handle = undefined;
 
   for(;;) {
     if(!isDefined(level.death_03_snd_handle)) {
-      level.death_03_snd_handle = scripts\engine\utility::play_sound_in_space("emt_dist_death_screams", (-1843, -1419, 121), 0, var1);
+      level.death_03_snd_handle = scripts\engine\utility::play_sound_in_space("emt_dist_death_screams", (-1843, -1419, 121), 0, var_1);
     }
 
     if(scripts\engine\utility::flag("russian_entered_house")) {
@@ -469,13 +469,13 @@ function audio_distant_gas_death_screams_03() {
       break;
     }
 
-    var2 = randomfloatrange(15, 25);
-    wait var2;
+    var_2 = randomfloatrange(15, 25);
+    wait var_2;
     level.death_03_snd_handle = undefined;
   }
 
-  var1 delete();
-  var1 = undefined;
+  var_1 delete();
+  var_1 = undefined;
 
   if(isDefined(level.death_03_snd_handle)) {
     level.death_03_snd_handle = undefined;
@@ -489,11 +489,11 @@ function shelf_monitor() {
 }
 
 function player_phone_pickup_anim() {
-  var0 = scripts\engine\sp\utility::spawn_anim_model("hometown_player_rig", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  var_0 = scripts\engine\sp\utility::spawn_anim_model("hometown_player_rig", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
   scripts\engine\utility::flag_set("lighting_cellphone_moment");
-  level.player_rig = var0;
+  level.player_rig = var_0;
   level.gas_attack_anim_node thread scripts\sp\player_rig::link_player_to_rig("SceneB_Phones", "stand", 1, 0.5, 1);
-  level.gas_attack_anim_node scripts\common\anim::anim_single_solo(var0, "SceneB_Phones");
+  level.gas_attack_anim_node scripts\common\anim::anim_single_solo(var_0, "SceneB_Phones");
   scripts\sp\player_rig::unlink_player_from_rig(0, "stand");
   level.door_clip_boss_enter solid();
   waitframe();
@@ -507,63 +507,63 @@ function lantern_listener() {
   scripts\engine\utility::flag_set("lantern_break");
 }
 
-function lantern_fire(var0) {
-  playFXOnTag(level._effect["vfx_htown_lantern_flame"], var0, "tag_origin");
+function lantern_fire(var_0) {
+  playFXOnTag(level._effect["vfx_htown_lantern_flame"], var_0, "tag_origin");
   scripts\engine\utility::flag_wait("lantern_break");
   wait 0.1;
-  var1 = scripts\engine\utility::spawn_tag_origin(var0.origin, anglesToForward(var0.angles) * -1);
-  thread sfx_lantern_fire(var0.origin);
-  thread lanter_fire_damage(var0);
-  stopFXOnTag(level._effect["vfx_htown_lantern_flame"], var0, "tag_origin");
-  playFXOnTag(level._effect["vfx_htown_lantern_fire"], var1, "tag_origin");
+  var_1 = scripts\engine\utility::spawn_tag_origin(var_0.origin, anglesToForward(var_0.angles) * -1);
+  thread sfx_lantern_fire(var_0.origin);
+  thread lanter_fire_damage(var_0);
+  stopFXOnTag(level._effect["vfx_htown_lantern_flame"], var_0, "tag_origin");
+  playFXOnTag(level._effect["vfx_htown_lantern_fire"], var_1, "tag_origin");
   thread scripts\engine\utility::exploder("wallfire");
   thread scripts\engine\utility::exploder("ceilingsmoke");
   visionsetnaked("hometown_house_int_postfire", 10);
   scripts\engine\utility::flag_wait("lantern_smoke");
   scripts\engine\utility::flag_wait("lantern_spawned");
-  stopFXOnTag(level._effect["vfx_htown_lantern_fire"], var1, "tag_origin");
+  stopFXOnTag(level._effect["vfx_htown_lantern_fire"], var_1, "tag_origin");
   scripts\engine\utility::stop_exploder("wallfire");
   thread scripts\engine\utility::exploder("wallfire_post");
   scripts\engine\utility::stop_exploder("ceilingsmoke");
   level.lantern_fire_trigger delete();
 }
 
-function lanter_fire_damage(var0) {
+function lanter_fire_damage(var_0) {
   wait 1;
   scripts\engine\utility::flag_set("lantern_spawned");
-  var1 = 5;
-  var2 = 10;
-  var3 = var0.origin - (12, 0, 0);
-  level.lantern_fire_trigger = spawn("trigger_radius_fire", var3, 0, var1, var2);
+  var_1 = 5;
+  var_2 = 10;
+  var_3 = var_0.origin - (12, 0, 0);
+  level.lantern_fire_trigger = spawn("trigger_radius_fire", var_3, 0, var_1, var_2);
   level.lantern_fire_trigger.script_damage = 5;
   thread scripts\sp\trigger::trigger_fire(level.lantern_fire_trigger);
 }
 
-function sfx_lantern_fire(var0) {
-  var1 = spawn("script_origin", (-1349, -2571, 51));
-  var1 playSound("scn_hometown_lantern_fire_ignite");
+function sfx_lantern_fire(var_0) {
+  var_1 = spawn("script_origin", (-1349, -2571, 51));
+  var_1 playSound("scn_hometown_lantern_fire_ignite");
   wait 1;
-  var1 playLoopSound("scn_hometown_lantern_fire_lp");
+  var_1 playLoopSound("scn_hometown_lantern_fire_lp");
   scripts\engine\utility::flag_wait("lantern_smoke");
-  var1 playLoopSound("scn_hometown_lantern_fire_smolder_lp");
+  var_1 playLoopSound("scn_hometown_lantern_fire_smolder_lp");
 }
 
-function house_enter_goliath_kill(var0) {
+function house_enter_goliath_kill(var_0) {
   level endon("house_enter_boss_anim_complete");
-  var1 = 576;
+  var_1 = 576;
 
   for(;;) {
     waitframe();
 
-    if(distancesquared(level.goliath_ai.origin, level.player.origin) > var1) {
+    if(distancesquared(level.goliath_ai.origin, level.player.origin) > var_1) {
       continue;
     }
 
-    var2 = 5;
-    var3 = 60;
-    var4 = (0, 0, 5);
+    var_2 = 5;
+    var_3 = 60;
+    var_4 = (0, 0, 5);
 
-    if(!scripts\engine\trace::capsule_trace_passed(level.player.origin + var4, level.goliath_ai.origin + var4, var2, var3, level.player.angles, [level.player, level.goliath_ai])) {
+    if(!scripts\engine\trace::capsule_trace_passed(level.player.origin + var_4, level.goliath_ai.origin + var_4, var_2, var_3, level.player.angles, [level.player, level.goliath_ai])) {
       continue;
     }
 
@@ -578,52 +578,52 @@ function house_enter_goliath_kill(var0) {
       level.hadir_melee_weapon_pickup delete();
     }
 
-    var5 = "boss_capture_";
-    var6 = scripts\engine\math::get_dot(level.player.origin, level.player.angles, level.goliath_ai.origin);
+    var_5 = "boss_capture_";
+    var_6 = scripts\engine\math::get_dot(level.player.origin, level.player.angles, level.goliath_ai.origin);
 
-    if(var6 >= 0.5) {
-      var5 += "front";
-    } else if(var6 <= -0.5) {
-      var5 += "back";
+    if(var_6 >= 0.5) {
+      var_5 += "front";
+    } else if(var_6 <= -0.5) {
+      var_5 += "back";
     } else {
-      var6 = vectordot(vectorNormalize(level.goliath_ai.origin - level.player.origin), anglestoright(level.player.angles));
+      var_6 = vectordot(vectorNormalize(level.goliath_ai.origin - level.player.origin), anglestoright(level.player.angles));
 
-      if(var6 > 0) {
-        var5 += "right";
+      if(var_6 > 0) {
+        var_5 += "right";
       } else {
-        var5 += "left";
+        var_5 += "left";
       }
     }
 
-    var7 = scripts\engine\utility::spawn_script_origin(level.goliath_ai.origin, vectortoangles(level.player.origin - level.goliath_ai.origin));
+    var_7 = scripts\engine\utility::spawn_script_origin(level.goliath_ai.origin, vectortoangles(level.player.origin - level.goliath_ai.origin));
 
     if(level.player istouching(getEnt("boss_grab_near_door_trigger", "script_noteworthy"))) {
-      var8 = scripts\engine\utility::getStruct("anim_preview_loc_4", "targetname");
-      var7 moveTo(var8.origin, 1);
+      var_8 = scripts\engine\utility::getStruct("anim_preview_loc_4", "targetname");
+      var_7 moveTo(var_8.origin, 1);
     }
 
-    thread kill_dad(var0);
+    thread kill_dad(var_0);
     thread kill_hadir();
     thread goliath_strangle_effects_capture();
-    thread house_enter_animate_and_kill_player(var7, var5);
+    thread house_enter_animate_and_kill_player(var_7, var_5);
     return;
   }
 }
 
-function house_enter_animate_and_kill_player(var0, var1) {
+function house_enter_animate_and_kill_player(var_0, var_1) {
   level.player_rig = scripts\engine\sp\utility::spawn_anim_model("hometown_player_rig", level.player.origin, level.player.angles);
-  var0 scripts\sp\player_rig::link_player_to_rig(var1, "stand", 1, 0.2, 0, 5, 5, 5, 5, 1);
-  var0 thread scripts\common\anim::anim_single([level.goliath_ai, level.player_rig], var1);
+  var_0 scripts\sp\player_rig::link_player_to_rig(var_1, "stand", 1, 0.2, 0, 5, 5, 5, 5, 1);
+  var_0 thread scripts\common\anim::anim_single([level.goliath_ai, level.player_rig], var_1);
   level scripts\sp\player_death::set_custom_death_quote(78);
   wait 3;
   scripts\sp\utility::missionfailedwrapper();
 }
 
-function kill_dad(var0) {
+function kill_dad(var_0) {
   wait 1;
 
-  if(isDefined(var0)) {
-    var0 hide();
+  if(isDefined(var_0)) {
+    var_0 hide();
   }
 
   if(isDefined(level.farah_father_ai)) {
@@ -702,7 +702,7 @@ function house_boss_main() {
     level.farah_father_ai scripts\sp\maps\hometown\hometown_util::kill_and_delete_quietly(level.goliath_ai);
   }
 
-  var0 = scripts\engine\utility::getStruct("buried_start", "targetname");
+  var_0 = scripts\engine\utility::getStruct("buried_start", "targetname");
   waitframe();
   thread house_boss_analytics();
   thread goliath_investigate();
@@ -721,37 +721,37 @@ function house_boss_main() {
 }
 
 function boss_stream_pos() {
-  var0 = scripts\engine\utility::getStruct("boss_stream_pos", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("boss_stream_pos", "script_noteworthy");
   wait 0.1;
-  var1 = spawn("script_model", var0.origin);
-  var1 setModel("body_russian_soldier_boss_stab_1_chest_dad");
+  var_1 = spawn("script_model", var_0.origin);
+  var_1 setModel("body_russian_soldier_boss_stab_1_chest_dad");
   wait 0.1;
-  var2 = spawn("script_model", var0.origin);
-  var2 setModel("body_russian_soldier_boss_stab_2_leg_l_back");
+  var_2 = spawn("script_model", var_0.origin);
+  var_2 setModel("body_russian_soldier_boss_stab_2_leg_l_back");
   wait 0.1;
-  var3 = spawn("script_model", var0.origin);
-  var3 setModel("body_russian_soldier_boss_stab_3_leg_r_back");
+  var_3 = spawn("script_model", var_0.origin);
+  var_3 setModel("body_russian_soldier_boss_stab_3_leg_r_back");
   wait 0.1;
-  var4 = spawn("script_model", var0.origin);
-  var4 setModel("body_russian_soldier_boss_stab_4_neck");
+  var_4 = spawn("script_model", var_0.origin);
+  var_4 setModel("body_russian_soldier_boss_stab_4_neck");
   wait 0.1;
-  var5 = spawn("script_model", var0.origin);
-  var5 setModel("body_russian_soldier_boss_stab_5_chest_a");
+  var_5 = spawn("script_model", var_0.origin);
+  var_5 setModel("body_russian_soldier_boss_stab_5_chest_a");
   wait 0.1;
-  var6 = spawn("script_model", var0.origin);
-  var6 setModel("body_russian_soldier_boss_stab_6_chest_b");
+  var_6 = spawn("script_model", var_0.origin);
+  var_6 setModel("body_russian_soldier_boss_stab_6_chest_b");
   wait 0.1;
-  var7 = spawn("script_model", var0.origin);
-  var7 setModel("body_russian_soldier_boss_stab_7_chest_c");
+  var_7 = spawn("script_model", var_0.origin);
+  var_7 setModel("body_russian_soldier_boss_stab_7_chest_c");
   wait 0.1;
-  var8 = spawn("script_model", var0.origin);
-  var8 setModel("body_russian_soldier_boss_stab_8_chest_d");
+  var_8 = spawn("script_model", var_0.origin);
+  var_8 setModel("body_russian_soldier_boss_stab_8_chest_d");
   wait 0.1;
-  var9 = spawn("script_model", var0.origin);
-  var9 setModel("body_russian_soldier_boss_stab_9_gunshots");
+  var_9 = spawn("script_model", var_0.origin);
+  var_9 setModel("body_russian_soldier_boss_stab_9_gunshots");
   wait 0.1;
-  var10 = spawn("script_model", var0.origin);
-  var10 setModel("body_hero_farahs_father_bloody");
+  var_10 = spawn("script_model", var_0.origin);
+  var_10 setModel("body_hero_farahs_father_bloody");
   wait 0.1;
   level waittill("goliath_boss_dead");
 }
@@ -765,69 +765,69 @@ function house_boss_analytics() {
 
 function weapon_knock_off_room_monitor() {
   level endon("boss_dying");
-  var0 = [];
+  var_0 = [];
 
-  foreach(var2 in getEntArray("house_room_trigger", "targetname")) {
-    var3 = spawnStruct();
-    var3.trigger = var2;
-    var3.smartobjects = [];
-    var0 = var3;
+  foreach(var_2 in getEntArray("house_room_trigger", "targetname")) {
+    var_3 = spawnStruct();
+    var_3.trigger = var_2;
+    var_3.smartobjects = [];
+    var_0 = var_3;
   }
 
-  var5 = [];
+  var_5 = [];
 
-  foreach(var7 in anim.smartobjectpoints) {
-    if(!issubstr(var7.script_smartobject, "knock_off")) {
+  foreach(var_7 in anim.smartobjectpoints) {
+    if(!issubstr(var_7.script_smartobject, "knock_off")) {
       continue;
     }
 
-    var5 = var7;
-    var7.prioritymultiplier = 100;
+    var_5 = var_7;
+    var_7.prioritymultiplier = 100;
 
-    foreach(var9, var3 in var0) {
-      if(ispointinvolume(var7.origin, var3.trigger)) {
-        var7.room = var9;
-        var3.smartobjects[var3.smartobjects.size] = var7;
+    foreach(var_9, var_3 in var_0) {
+      if(ispointinvolume(var_7.origin, var_3.trigger)) {
+        var_7.room = var_9;
+        var_3.smartobjects[var_3.smartobjects.size] = var_7;
         break;
       }
     }
   }
 
-  foreach(var3 in var0) {
-    if(!var3.smartobjects.size) {
-      var0 = scripts\engine\utility::array_remove_key(var0, var9);
+  foreach(var_3 in var_0) {
+    if(!var_3.smartobjects.size) {
+      var_0 = scripts\engine\utility::array_remove_key(var_0, var_9);
     }
   }
 
   for(;;) {
-    level waittill("knock_off", var7);
-    thread scripts\engine\utility::play_sound_in_space("scn_hometown_brute_knock_smartobj", var7.origin);
+    level waittill("knock_off", var_7);
+    thread scripts\engine\utility::play_sound_in_space("scn_hometown_brute_knock_smartobj", var_7.origin);
 
-    if(isDefined(var7.script_noteworthy)) {
-      level.current_knock_off = var7.script_noteworthy;
+    if(isDefined(var_7.script_noteworthy)) {
+      level.current_knock_off = var_7.script_noteworthy;
     }
 
-    var3 = var0[var7.room];
+    var_3 = var_0[var_7.room];
 
-    foreach(var7 in var3.smartobjects) {
-      var7.donotuse = 1;
-      var5 = scripts\engine\utility::array_remove(var5, var7);
+    foreach(var_7 in var_3.smartobjects) {
+      var_7.donotuse = 1;
+      var_5 = scripts\engine\utility::array_remove(var_5, var_7);
     }
 
-    var0 = scripts\engine\utility::array_remove_key(var0, var7.room);
+    var_0 = scripts\engine\utility::array_remove_key(var_0, var_7.room);
 
-    if(!var0.size) {
+    if(!var_0.size) {
       return;
     }
   }
 }
 
-function prioritize_knock_off_on_context_melee(var0) {
+function prioritize_knock_off_on_context_melee(var_0) {
   level endon("knock_off");
   level.goliath_ai waittill("start_context_melee");
 
-  foreach(var2 in var0) {
-    var2.prioritymultiplier = 100;
+  foreach(var_2 in var_0) {
+    var_2.prioritymultiplier = 100;
   }
 }
 
@@ -890,26 +890,26 @@ function goliath_knife_monitor() {
   for(;;) {
     level.goliath_ai waittill("start_context_melee");
     thread launch_player_from_boss();
-    var0 = level.player getcurrentweapon();
+    var_0 = level.player getcurrentweapon();
     thread goliath_knife_fov_scale_factor();
-    var1 = undefined;
+    var_1 = undefined;
 
-    if(var0.basename == "iw8_knife_kid") {
+    if(var_0.basename == "iw8_knife_kid") {
       level.player.context_melee_knife = "weapon_vm_me_kitchen_knife";
-    } else if(var0.basename == "iw8_knife_kid_rebar") {
+    } else if(var_0.basename == "iw8_knife_kid_rebar") {
       level.player.context_melee_knife = "weapon_vm_me_screwdriver";
-    } else if(var0.basename == "iw8_knife_kid_scissors") {
+    } else if(var_0.basename == "iw8_knife_kid_scissors") {
       level.player.context_melee_knife = "weapon_vm_me_scissors";
-    } else if(var0.basename == "iw8_knife_kid_screwdriver") {
+    } else if(var_0.basename == "iw8_knife_kid_screwdriver") {
       level.player.context_melee_knife = "weapon_vm_me_screwdriver";
     } else {
       level.player.context_melee_knife = "tag_origin";
-      var1 = "true";
+      var_1 = "true";
     }
 
     level notify("boss_stab_vo_start");
     thread audio_music_stab();
-    var2 = level.player.origin;
+    var_2 = level.player.origin;
     level.player setstance("stand", 1);
     level waittill("player_knife_part_done");
 
@@ -917,10 +917,10 @@ function goliath_knife_monitor() {
       thread scripts\engine\sp\utility::autosave_now();
     }
 
-    var3 = spawn("script_model", level.player.origin);
-    var3 setModel(level.player.context_melee_knife);
-    var3 notsolid();
-    var3 linkTo(level.goliath_ai, "tag_accessory_left", (0, 0, 0), (0, 0, 0));
+    var_3 = spawn("script_model", level.player.origin);
+    var_3 setModel(level.player.context_melee_knife);
+    var_3 notsolid();
+    var_3 linkTo(level.goliath_ai, "tag_accessory_left", (0, 0, 0), (0, 0, 0));
     waitframe();
     level.goliath_ai scripts\sp\utility::context_melee_override_anim("boss_counter_back", "back", "tag_view", "player_eye");
     level.goliath_ai scripts\sp\utility::context_melee_override_anim("boss_counter_front", "front", "tag_view", "player_eye");
@@ -928,7 +928,7 @@ function goliath_knife_monitor() {
     level.goliath_ai scripts\sp\utility::context_melee_override_anim("boss_counter_right", "right", "tag_view", "player_eye");
     level.goliath_ai aieventlistenerevent("combat", level.player, level.player.origin);
     level scripts\sp\utility::context_melee_waittill_player_finished();
-    level.player takeweapon(var0);
+    level.player takeweapon(var_0);
     level.player notify("knife_change");
     level.player enableweapons();
     level.player giveweapon("iw8_gunless_farrah");
@@ -936,33 +936,33 @@ function goliath_knife_monitor() {
     waitframe();
     level.player_stabbed_boss = 1;
     level waittill("enemy_knife_part_done");
-    var3 delete();
-    var4 = scripts\engine\utility::getStruct("known_loc_" + level.current_room, "script_noteworthy");
-    level.goliath_ai aieventlistenerevent("combat", level.player, var4.origin);
-    var5 = level.goliath_ai gettagangles("tag_accessory_left");
-    var6 = level.goliath_ai gettagorigin("tag_accessory_left");
-    var7 = spawn("script_model", var6);
+    var_3 delete();
+    var_4 = scripts\engine\utility::getStruct("known_loc_" + level.current_room, "script_noteworthy");
+    level.goliath_ai aieventlistenerevent("combat", level.player, var_4.origin);
+    var_5 = level.goliath_ai gettagangles("tag_accessory_left");
+    var_6 = level.goliath_ai gettagorigin("tag_accessory_left");
+    var_7 = spawn("script_model", var_6);
 
-    if(var0.basename == "iw8_knife_kid") {
-      var7 setModel("weapon_wm_me_kitchen_knife");
-    } else if(var0.basename == "iw8_knife_kid_rebar") {
-      var7 setModel("weapon_wm_me_screwdriver");
-    } else if(var0.basename == "iw8_knife_kid_scissors") {
-      var7 setModel("weapon_wm_me_scissors");
-    } else if(var0.basename == "iw8_knife_kid_screwdriver") {
-      var7 setModel("weapon_wm_me_screwdriver");
+    if(var_0.basename == "iw8_knife_kid") {
+      var_7 setModel("weapon_wm_me_kitchen_knife");
+    } else if(var_0.basename == "iw8_knife_kid_rebar") {
+      var_7 setModel("weapon_wm_me_screwdriver");
+    } else if(var_0.basename == "iw8_knife_kid_scissors") {
+      var_7 setModel("weapon_wm_me_scissors");
+    } else if(var_0.basename == "iw8_knife_kid_screwdriver") {
+      var_7 setModel("weapon_wm_me_screwdriver");
     } else {
-      var7 setModel("weapon_vm_me_screwdriver");
+      var_7 setModel("weapon_vm_me_screwdriver");
     }
 
-    var8 = anglesToForward(var5);
-    var8 *= randomfloatrange(100, 150);
-    var9 = var8[0];
-    var10 = var8[1];
-    var11 = randomfloatrange(100, 200);
-    var7 physicslaunchserver(var7.origin, (var9, var10, var11));
+    var_8 = anglesToForward(var_5);
+    var_8 *= randomfloatrange(100, 150);
+    var_9 = var_8[0];
+    var_10 = var_8[1];
+    var_11 = randomfloatrange(100, 200);
+    var_7 physicslaunchserver(var_7.origin, (var_9, var_10, var_11));
     wait 1.8;
-    var7 thread scripts\sp\maps\hometown\hometown_util::goliath_melee_weapon_interact(var0.basename);
+    var_7 thread scripts\sp\maps\hometown\hometown_util::goliath_melee_weapon_interact(var_0.basename);
   }
 }
 
@@ -979,10 +979,10 @@ function launch_player_from_boss() {
 function sfx_impact_shellshock() {
   level.player shellshock("default_nosound", 2);
   level.player scripts\engine\utility::delaycall(2.5, &fadeoutshellshock);
-  var0 = spawn("script_origin", level.player.origin);
-  var0 linkTo(level.player);
-  var0 playLoopSound("flashbang_tinnitus_loop");
-  var0 scripts\engine\sp\utility::sound_fade_and_delete(3, 1);
+  var_0 = spawn("script_origin", level.player.origin);
+  var_0 linkTo(level.player);
+  var_0 playLoopSound("flashbang_tinnitus_loop");
+  var_0 scripts\engine\sp\utility::sound_fade_and_delete(3, 1);
 }
 
 function goliath_knife_fov_scale_factor() {
@@ -992,49 +992,49 @@ function goliath_knife_fov_scale_factor() {
 }
 
 function launch_player_physics() {
-  var0 = anglesToForward(level.player.angles) * -1;
-  var0 *= 60;
+  var_0 = anglesToForward(level.player.angles) * -1;
+  var_0 *= 60;
 
-  for(var1 = 1; var1 < 10; var1++) {
-    level.player setvelocity(var0);
-    var0 -= 10;
+  for(var_1 = 1; var_1 < 10; var_1++) {
+    level.player setvelocity(var_0);
+    var_0 -= 10;
     waitframe();
   }
 }
 
 function goliath_player_location_monitor() {
   level endon("boss_dying");
-  var0 = getEnt("foyer", "script_noteworthy");
-  var1 = getEnt("hall", "script_noteworthy");
-  var2 = getEnt("kids_room", "script_noteworthy");
-  var3 = getEnt("kitchen", "script_noteworthy");
-  var4 = getEnt("bathroom", "script_noteworthy");
-  var5 = getEnt("master_bedroom", "script_noteworthy");
-  var6 = getEnt("living_room", "script_noteworthy");
+  var_0 = getEnt("foyer", "script_noteworthy");
+  var_1 = getEnt("hall", "script_noteworthy");
+  var_2 = getEnt("kids_room", "script_noteworthy");
+  var_3 = getEnt("kitchen", "script_noteworthy");
+  var_4 = getEnt("bathroom", "script_noteworthy");
+  var_5 = getEnt("master_bedroom", "script_noteworthy");
+  var_6 = getEnt("living_room", "script_noteworthy");
   level.current_room = "living_room";
 
   for(;;) {
-    var7 = level.current_room;
+    var_7 = level.current_room;
 
-    if(level.player istouching(var0)) {
+    if(level.player istouching(var_0)) {
       level.current_room = "foyer";
-    } else if(level.player istouching(var1)) {
+    } else if(level.player istouching(var_1)) {
       level.current_room = "hall";
-    } else if(level.player istouching(var2)) {
+    } else if(level.player istouching(var_2)) {
       level.current_room = "kids_room";
-    } else if(level.player istouching(var3)) {
+    } else if(level.player istouching(var_3)) {
       level.current_room = "kitchen";
-    } else if(level.player istouching(var4)) {
+    } else if(level.player istouching(var_4)) {
       level.current_room = "bathroom";
-    } else if(level.player istouching(var5)) {
+    } else if(level.player istouching(var_5)) {
       level.current_room = "master_bedroom";
-    } else if(level.player istouching(var6)) {
+    } else if(level.player istouching(var_6)) {
       level.current_room = "living_room";
     } else {
       level.current_room = "living_room";
     }
 
-    if(level.current_room != var7) {
+    if(level.current_room != var_7) {
       level notify("room_changed");
     }
 
@@ -1044,38 +1044,38 @@ function goliath_player_location_monitor() {
 
 function goliath_boss_location_monitor() {
   level endon("boss_dying");
-  var0 = getEnt("foyer", "script_noteworthy");
-  var1 = getEnt("hall", "script_noteworthy");
-  var2 = getEnt("kids_room", "script_noteworthy");
-  var3 = getEnt("kitchen", "script_noteworthy");
-  var4 = getEnt("bathroom", "script_noteworthy");
-  var5 = getEnt("master_bedroom", "script_noteworthy");
-  var6 = getEnt("living_room", "script_noteworthy");
+  var_0 = getEnt("foyer", "script_noteworthy");
+  var_1 = getEnt("hall", "script_noteworthy");
+  var_2 = getEnt("kids_room", "script_noteworthy");
+  var_3 = getEnt("kitchen", "script_noteworthy");
+  var_4 = getEnt("bathroom", "script_noteworthy");
+  var_5 = getEnt("master_bedroom", "script_noteworthy");
+  var_6 = getEnt("living_room", "script_noteworthy");
   thread goliath_room_time_monitor();
   level.boss_current_room = "living_room";
 
   for(;;) {
-    var7 = level.boss_current_room;
+    var_7 = level.boss_current_room;
 
-    if(level.goliath_ai istouching(var0)) {
+    if(level.goliath_ai istouching(var_0)) {
       level.boss_current_room = "foyer";
-    } else if(level.goliath_ai istouching(var1)) {
+    } else if(level.goliath_ai istouching(var_1)) {
       level.boss_current_room = "hall";
-    } else if(level.goliath_ai istouching(var2)) {
+    } else if(level.goliath_ai istouching(var_2)) {
       level.boss_current_room = "kids_room";
-    } else if(level.goliath_ai istouching(var3)) {
+    } else if(level.goliath_ai istouching(var_3)) {
       level.boss_current_room = "kitchen";
-    } else if(level.goliath_ai istouching(var4)) {
+    } else if(level.goliath_ai istouching(var_4)) {
       level.boss_current_room = "bathroom";
-    } else if(level.goliath_ai istouching(var5)) {
+    } else if(level.goliath_ai istouching(var_5)) {
       level.boss_current_room = "master_bedroom";
-    } else if(level.goliath_ai istouching(var6)) {
+    } else if(level.goliath_ai istouching(var_6)) {
       level.boss_current_room = "living_room";
     } else {
       level.boss_current_room = "living_room";
     }
 
-    if(level.boss_current_room != var7) {
+    if(level.boss_current_room != var_7) {
       level notify("boss_room_changed");
     }
 
@@ -1090,11 +1090,11 @@ function goliath_room_time_monitor() {
   for(;;) {
     level waittill("boss_room_changed");
     level.min_time_in_room = 0;
-    var0 = gettime();
-    var1 = var0;
+    var_0 = gettime();
+    var_1 = var_0;
 
-    while(var0 <= var1 + 10000) {
-      var0 = gettime();
+    while(var_0 <= var_1 + 10000) {
+      var_0 = gettime();
       waitframe();
     }
 
@@ -1114,10 +1114,10 @@ function goliath_hunt_known_location_monitor() {
       waitframe();
     }
 
-    var0 = scripts\engine\utility::getStruct("known_loc_" + level.current_room, "script_noteworthy");
+    var_0 = scripts\engine\utility::getStruct("known_loc_" + level.current_room, "script_noteworthy");
 
     if(level.goliath_ai scripts\aitypes\stealth::ishunting()) {
-      scripts\stealth\group::group_updatepodhuntorigin(level.goliath_ai, var0.origin);
+      scripts\stealth\group::group_updatepodhuntorigin(level.goliath_ai, var_0.origin);
     }
   }
 }
@@ -1159,8 +1159,8 @@ function goliath_struggle_lights() {
   level.boss_struggle_lights_node = getEnt("boss_light_org", "script_noteworthy");
   level.boss_struggle_light_key linkTo(level.boss_struggle_lights_node);
   level.boss_struggle_light_fill linkTo(level.boss_struggle_lights_node);
-  var0 = level.boss_struggle_lights_node.origin;
-  var1 = level.boss_struggle_lights_node.angles;
+  var_0 = level.boss_struggle_lights_node.origin;
+  var_1 = level.boss_struggle_lights_node.angles;
   level.boss_struggle_lights_node.origin = level.boss_struggle_anim_node.origin;
   level.boss_struggle_lights_node.angles = level.boss_struggle_anim_node.angles;
   level.boss_struggle_lights_node linkTo(level.boss_struggle_anim_node);
@@ -1168,26 +1168,26 @@ function goliath_struggle_lights() {
   thread goliath_struggle_key_intensity(0.35, 0.01);
   thread goliath_struggle_fill_intensity(0.12, 0.01);
   level waittill("set_boss_lights_og");
-  level.boss_struggle_lights_node.origin = var0;
-  level.boss_struggle_lights_node.angles = var1;
+  level.boss_struggle_lights_node.origin = var_0;
+  level.boss_struggle_lights_node.angles = var_1;
   waitframe();
   level.boss_struggle_lights_node delete();
 }
 
-function goliath_struggle_key_intensity(var0, var1) {
-  var2 = 0;
+function goliath_struggle_key_intensity(var_0, var_1) {
+  var_2 = 0;
 
-  while(var2 < var0) {
-    level.boss_struggle_light_key setlightintensity(var2);
-    var2 += var1;
+  while(var_2 < var_0) {
+    level.boss_struggle_light_key setlightintensity(var_2);
+    var_2 += var_1;
     waitframe();
   }
 
   level waittill("fade_boss_lights_off");
 
-  while(var2 >= 0.1) {
-    level.boss_struggle_light_key setlightintensity(var2);
-    var2 -= var1;
+  while(var_2 >= 0.1) {
+    level.boss_struggle_light_key setlightintensity(var_2);
+    var_2 -= var_1;
     waitframe();
   }
 
@@ -1196,20 +1196,20 @@ function goliath_struggle_key_intensity(var0, var1) {
   level notify("set_boss_lights_og");
 }
 
-function goliath_struggle_fill_intensity(var0, var1) {
-  var2 = 0;
+function goliath_struggle_fill_intensity(var_0, var_1) {
+  var_2 = 0;
 
-  while(var2 < var0) {
-    level.boss_struggle_light_fill setlightintensity(var2);
-    var2 += var1;
+  while(var_2 < var_0) {
+    level.boss_struggle_light_fill setlightintensity(var_2);
+    var_2 += var_1;
     waitframe();
   }
 
   level waittill("fade_boss_lights_off");
 
-  while(var2 >= 0.1) {
-    level.boss_struggle_light_fill setlightintensity(var2);
-    var2 -= var1;
+  while(var_2 >= 0.1) {
+    level.boss_struggle_light_fill setlightintensity(var_2);
+    var_2 -= var_1;
     waitframe();
   }
 
@@ -1222,58 +1222,58 @@ function goliath_struggle() {
   self endon("stab_delay_time_exceeded");
   level.player waittill("skipped_melee_anim");
   scripts\engine\utility::flag_set("lantern_smoke");
-  var0 = level.player.context_melee_direction;
+  var_0 = level.player.context_melee_direction;
   level.player setstance("stand", 1);
   setmusicstate("mx_hometown_11_last_stab_miss");
   level.goliath_ai.ignoreall = 1;
   level.boss_struggle_anim_node = level.goliath_ai scripts\engine\utility::spawn_tag_origin();
   thread goliath_struggle_lights();
-  var1 = scripts\engine\utility::getStructArray("boss_struggle_loc_" + get_current_house_room(level.player), "script_noteworthy");
-  var2 = scripts\engine\utility::getclosest(level.player.origin, var1);
-  level.boss_struggle_anim_node_safe = var2;
-  level.boss_struggle_anim_node moveTo(var2.origin, 3);
-  level.boss_struggle_anim_node rotateTo(var2.angles, 3);
+  var_1 = scripts\engine\utility::getStructArray("boss_struggle_loc_" + get_current_house_room(level.player), "script_noteworthy");
+  var_2 = scripts\engine\utility::getclosest(level.player.origin, var_1);
+  level.boss_struggle_anim_node_safe = var_2;
+  level.boss_struggle_anim_node moveTo(var_2.origin, 3);
+  level.boss_struggle_anim_node rotateTo(var_2.angles, 3);
   level.player disableweapons();
   level.boss_struggle_player_model = scripts\engine\sp\utility::spawn_anim_model("hometown_player_rig", level.boss_struggle_anim_node.origin, level.boss_struggle_anim_node.angles);
   level.boss_kill_sling_model = scripts\engine\sp\utility::spawn_anim_model("boss_kill_sling", level.goliath_ai.origin, level.goliath_ai.angles);
   level.boss_kill_sling_model hide();
   level.player_rig = level.boss_struggle_player_model;
 
-  if(var0 == "back") {
-    var3 = "boss_grab";
-  } else if(var1 == "right") {
-    var3 = "boss_grab_right";
-  } else if(var2 == "left") {
-    var3 = "boss_grab_left";
-  } else if(var3 == "front") {
-    var3 = "boss_grab_front";
+  if(var_0 == "back") {
+    var_3 = "boss_grab";
+  } else if(var_1 == "right") {
+    var_3 = "boss_grab_right";
+  } else if(var_2 == "left") {
+    var_3 = "boss_grab_left";
+  } else if(var_3 == "front") {
+    var_3 = "boss_grab_front";
   } else {
-    var3 = "boss_grab";
+    var_3 = "boss_grab";
   }
 
   level.boss_struggle_player_model setModel(scripts\sp\maps\hometown\hometown_util::getfarrahbloodymodel());
-  level.boss_struggle_anim_node thread scripts\sp\player_rig::link_player_to_rig(var3, "stand", 1, 0.3, 0, 0, 0, 0, 0, 1);
+  level.boss_struggle_anim_node thread scripts\sp\player_rig::link_player_to_rig(var_3, "stand", 1, 0.3, 0, 0, 0, 0, 0, 1);
   level.boss_struggle_player_model linkTo(level.boss_struggle_anim_node);
   level.goliath_ai linkTo(level.boss_struggle_anim_node);
   level.current_knife_weapon = level.player getcurrentweapon();
   level.current_knife_weapon_string = level.current_knife_weapon.basename;
 
   if(level.current_knife_weapon_string == "iw8_knife_kid") {
-    var4 = "weapon_vm_me_kitchen_knife";
+    var_4 = "weapon_vm_me_kitchen_knife";
   } else if(level.current_knife_weapon_string == "iw8_knife_kid_rebar") {
-    var4 = "weapon_vm_me_screwdriver";
+    var_4 = "weapon_vm_me_screwdriver";
   } else if(level.current_knife_weapon_string == "iw8_knife_kid_scissors") {
-    var4 = "weapon_vm_me_scissors";
+    var_4 = "weapon_vm_me_scissors";
   } else if(level.current_knife_weapon_string == "iw8_knife_kid_screwdriver") {
-    var4 = "weapon_vm_me_screwdriver";
+    var_4 = "weapon_vm_me_screwdriver";
   } else {
-    var4 = "weapon_vm_me_screwdriver";
+    var_4 = "weapon_vm_me_screwdriver";
   }
 
-  var5 = spawn("script_model", level.boss_struggle_player_model gettagorigin("tag_accessory_right"));
-  var5 setModel(var4);
-  var5.angles = level.boss_struggle_player_model gettagangles("tag_accessory_right");
-  var5 linkTo(level.boss_struggle_player_model, "tag_accessory_right");
+  var_5 = spawn("script_model", level.boss_struggle_player_model gettagorigin("tag_accessory_right"));
+  var_5 setModel(var_4);
+  var_5.angles = level.boss_struggle_player_model gettagangles("tag_accessory_right");
+  var_5 linkTo(level.boss_struggle_player_model, "tag_accessory_right");
   level notify("boss_struggle_vo_start");
 
   if(!scripts\engine\utility::flag("disable_autosaves")) {
@@ -1285,18 +1285,18 @@ function goliath_struggle() {
   level.player lerpfovscalefactor(0, 0.3);
   level.vfx_stab_tear_screenfx_01 = spawnfx(level._effect["vfx_stab_tear_screenfx_01"], (0, 0, 0));
   triggerfx(level.vfx_stab_tear_screenfx_01);
-  level.boss_struggle_anim_node scripts\common\anim::anim_single([level.boss_struggle_player_model, level.goliath_ai, level.boss_kill_sling_model], var4);
+  level.boss_struggle_anim_node scripts\common\anim::anim_single([level.boss_struggle_player_model, level.goliath_ai, level.boss_kill_sling_model], var_4);
   scripts\sp\maps\hometown\hometown_util::spawn_hadir();
   thread audio_music_stab_kill_brute();
-  var6 = 0;
+  var_6 = 0;
   thread goliath_strangle_effects();
   level.goliath_ai scripts\sp\nvg\nvg_ai::flashlight_off();
   level.boss_struggle_anim_node scripts\common\anim::anim_single([level.boss_struggle_player_model, level.goliath_ai, level.boss_kill_sling_model], "boss_strangle");
   level.hadir_body_model delete();
-  var7 = spawn("script_model", level.hadir_ai gettagorigin("tag_accessory_right"));
-  var7 setModel("weapon_wm_me_kitchen_knife");
-  var7.angles = level.hadir_ai gettagangles("tag_accessory_right");
-  var7 linkTo(level.hadir_ai, "tag_accessory_right");
+  var_7 = spawn("script_model", level.hadir_ai gettagorigin("tag_accessory_right"));
+  var_7 setModel("weapon_wm_me_kitchen_knife");
+  var_7.angles = level.hadir_ai gettagangles("tag_accessory_right");
+  var_7 linkTo(level.hadir_ai, "tag_accessory_right");
   level.hadir_ai attach("hat_waist_child_hadir_gas_mask", "J_Proc_SpineLower_Swivel");
   level.goliath_ai scripts\sp\nvg\nvg_ai::flashlight_off();
   level.hadir_ai setModel("body_hero_hadir_child_bloody");
@@ -1310,7 +1310,7 @@ function goliath_struggle() {
   level.vfx_htown_hadirj_blink = spawnfx(level._effect["vfx_htown_hadirj_blink"], (0, 0, 0));
   triggerfx(level.vfx_htown_hadirj_blink);
   level.boss_struggle_anim_node scripts\common\anim::anim_single([level.boss_struggle_player_model, level.goliath_ai, level.hadir_ai, level.boss_kill_sling_model], "boss_pull_off");
-  var5 delete();
+  var_5 delete();
   level.boss_struggle_player_model unlink();
   level.goliath_ai unlink();
   level.player scripts\sp\player_rig::unlink_player_from_rig(0, "stand");
@@ -1325,8 +1325,8 @@ function goliath_struggle() {
   level.goliath_ai scripts\sp\nvg\nvg_ai::flashlight_off();
   level.boss_struggle_anim_node thread scripts\common\anim::anim_loop([level.hadir_ai, level.goliath_ai, level.boss_kill_sling_model], "boss_struggle_a");
   level waittill("boss_turns_on_hadir");
-  var7 unlink();
-  var7 delete();
+  var_7 unlink();
+  var_7 delete();
   goliath_struggle_use_gun_scene();
   level notify("boss_dying");
 
@@ -1356,11 +1356,11 @@ function goliath_struggle() {
 function audio_music_stab_kill_brute() {}
 
 function get_current_house_room() {
-  var0 = getEntArray("house_room_trigger", "targetname");
+  var_0 = getEntArray("house_room_trigger", "targetname");
 
-  foreach(var2 in var0) {
-    if(self istouching(var2)) {
-      return var2.script_noteworthy;
+  foreach(var_2 in var_0) {
+    if(self istouching(var_2)) {
+      return var_2.script_noteworthy;
     }
   }
 
@@ -1387,11 +1387,11 @@ function goliath_struggle_use_gun_scene() {
   level.boss_struggle_anim_node notify("stop_loop");
   level.boss_struggle_anim_node thread scripts\common\anim::anim_loop([level.hadir_ai, level.goliath_ai, level.boss_shoot_player_model, level.boss_kill_sling_model], "kill_flip_gun_grab_idle");
   level.ak_shoot_timer = 90;
-  var0 = 0;
+  var_0 = 0;
 
-  while(var0 == 0) {
+  while(var_0 == 0) {
     if(level.player attackButtonPressed() || level.player fragButtonPressed() || level.player secondaryoffhandbuttonPressed() || level.player meleeButtonPressed() || level.player useButtonPressed()) {
-      var0 = 1;
+      var_0 = 1;
     }
 
     waitframe();
@@ -1529,18 +1529,18 @@ function goliath_struggle_stab_monitor() {
   level.player.goliath_melee_allowed = 1;
 
   for(;;) {
-    var0 = goliath_struggle_stab_check_for_close_victim();
+    var_0 = goliath_struggle_stab_check_for_close_victim();
 
-    if(var0 == "true") {
+    if(var_0 == "true") {
       if(istrue(level.player.goliath_melee_allowed)) {
         level.player scripts\common\utility::allow_melee(0);
         level.player.goliath_melee_allowed = 0;
       }
 
       if(level.player attackButtonPressed() || level.player meleeButtonPressed()) {
-        var1 = goliath_struggle_stab_direction();
+        var_1 = goliath_struggle_stab_direction();
 
-        if(var1 != "back") {
+        if(var_1 != "back") {
           level notify("player_stabbed_struggling_goliath");
         }
       }
@@ -1556,90 +1556,90 @@ function goliath_struggle_stab_monitor() {
 function goliath_struggle_stab() {
   level endon("player_unlinked_from_kill_flip");
   level endon("stab_failed");
-  var0 = ["boss_stab_context02", "boss_stab_context05", "boss_stab_context07"];
+  var_0 = ["boss_stab_context02", "boss_stab_context05", "boss_stab_context07"];
   level.boss_stabbed_amount = 0;
 
-  foreach(var2 in var0) {
+  foreach(var_2 in var_0) {
     level waittill("player_stabbed_struggling_goliath");
     level notify("start_stab");
     level.boss_struggle_anim_node notify("stop_loop");
 
-    if(var2 == "boss_stab_context01") {
+    if(var_2 == "boss_stab_context01") {
       level.stab_tag = "TAG_blood_1";
-    } else if(var2 == "boss_stab_context02") {
+    } else if(var_2 == "boss_stab_context02") {
       level.stab_tag = "TAG_blood_7";
-    } else if(var2 == "boss_stab_context04") {
+    } else if(var_2 == "boss_stab_context04") {
       level.stab_tag = "TAG_blood_4";
-    } else if(var2 == "boss_stab_context05") {
+    } else if(var_2 == "boss_stab_context05") {
       level.stab_tag = "TAG_blood_3";
-    } else if(var2 == "boss_stab_context07") {
+    } else if(var_2 == "boss_stab_context07") {
       level.stab_tag = "TAG_blood_6";
     } else {
       level.stab_tag = "TAG_blood_1";
     }
 
     level.time_since_last_stab = 0;
-    var3 = level.player.origin;
+    var_3 = level.player.origin;
     level.boss_stab_player_model = scripts\engine\sp\utility::spawn_anim_model("hometown_player_rig", level.boss_struggle_anim_node.origin, level.boss_struggle_anim_node.angles);
     level.player_rig = level.boss_stab_player_model;
     level.boss_stab_player_model setModel(scripts\sp\maps\hometown\hometown_util::getfarrahbloodymodel());
-    level.boss_struggle_anim_node thread scripts\sp\player_rig::link_player_to_rig(var2, "stand", 1, 0.2, 0, 0, 0, 0, 0, 1);
+    level.boss_struggle_anim_node thread scripts\sp\player_rig::link_player_to_rig(var_2, "stand", 1, 0.2, 0, 0, 0, 0, 0, 1);
     level.player hideviewmodel();
 
     if(level.current_knife_weapon_string == "iw8_knife_kid") {
-      var4 = "weapon_vm_me_kitchen_knife";
+      var_4 = "weapon_vm_me_kitchen_knife";
       level.player takeallweapons();
       level.player giveweapon("iw8_knife_kid_bloody");
       level.player switchtoweaponimmediate("iw8_knife_kid_bloody");
 
       if(!level.boss_stabbed_amount == 0) {
-        var4 = "weapon_vm_me_kitchen_knife_bloody";
+        var_4 = "weapon_vm_me_kitchen_knife_bloody";
       }
     } else if(level.current_knife_weapon_string == "iw8_knife_kid_rebar") {
-      var4 = "weapon_vm_me_screwdriver";
+      var_4 = "weapon_vm_me_screwdriver";
       level.player takeallweapons();
       level.player giveweapon("iw8_knife_kid_screwdriver_bloody");
       level.player switchtoweaponimmediate("iw8_knife_kid_screwdriver_bloody");
 
       if(!level.boss_stabbed_amount == 0) {
-        var4 = "weapon_vm_me_screwdriver_bloody";
+        var_4 = "weapon_vm_me_screwdriver_bloody";
       }
     } else if(level.current_knife_weapon_string == "iw8_knife_kid_scissors") {
-      var4 = "weapon_vm_me_scissors";
+      var_4 = "weapon_vm_me_scissors";
       level.player takeallweapons();
       level.player giveweapon("iw8_knife_kid_scissors_bloody");
       level.player switchtoweaponimmediate("iw8_knife_kid_scissors_bloody");
 
       if(!level.boss_stabbed_amount == 0) {
-        var4 = "weapon_vm_me_scissors_bloody";
+        var_4 = "weapon_vm_me_scissors_bloody";
       }
     } else if(level.current_knife_weapon_string == "iw8_knife_kid_screwdriver") {
-      var4 = "weapon_vm_me_screwdriver";
+      var_4 = "weapon_vm_me_screwdriver";
       level.player takeallweapons();
       level.player giveweapon("iw8_knife_kid_screwdriver_bloody");
       level.player switchtoweaponimmediate("iw8_knife_kid_screwdriver_bloody");
 
       if(!level.boss_stabbed_amount == 0) {
-        var4 = "weapon_vm_me_screwdriver_bloody";
+        var_4 = "weapon_vm_me_screwdriver_bloody";
       }
     } else {
-      var4 = "weapon_vm_me_screwdriver";
+      var_4 = "weapon_vm_me_screwdriver";
       level.player takeallweapons();
       level.player giveweapon("iw8_knife_kid_screwdriver_bloody");
       level.player switchtoweaponimmediate("iw8_knife_kid_screwdriver_bloody");
 
       if(!level.boss_stabbed_amount == 0) {
-        var4 = "weapon_vm_me_screwdriver_bloody";
+        var_4 = "weapon_vm_me_screwdriver_bloody";
       }
     }
 
-    var5 = spawn("script_model", level.boss_stab_player_model gettagorigin("tag_accessory_right"));
-    var5.angles = level.boss_stab_player_model gettagangles("tag_accessory_right");
-    var5 setModel(var4);
-    var5 linkTo(level.boss_stab_player_model, "tag_accessory_right");
-    level.boss_struggle_anim_node scripts\common\anim::anim_single([level.boss_stab_player_model, level.goliath_ai, level.hadir_ai, level.boss_kill_sling_model], var2);
+    var_5 = spawn("script_model", level.boss_stab_player_model gettagorigin("tag_accessory_right"));
+    var_5.angles = level.boss_stab_player_model gettagangles("tag_accessory_right");
+    var_5 setModel(var_4);
+    var_5 linkTo(level.boss_stab_player_model, "tag_accessory_right");
+    level.boss_struggle_anim_node scripts\common\anim::anim_single([level.boss_stab_player_model, level.goliath_ai, level.hadir_ai, level.boss_kill_sling_model], var_2);
 
-    if(var2 == "boss_stab_context07") {
+    if(var_2 == "boss_stab_context07") {
       level.boss_struggle_anim_node notify("stop_loop");
       level.time_since_last_stab = 0;
       level notify("kill_flip_start");
@@ -1655,14 +1655,14 @@ function goliath_struggle_stab() {
       level.time_since_last_stab = 0;
     }
 
-    var5 delete();
+    var_5 delete();
     level.player scripts\sp\player_rig::unlink_player_from_rig(0, "stand");
     level.player disableweapons();
     level.player showviewmodel();
     level.time_since_last_stab = 0;
     level.boss_stabbed_amount += 1;
 
-    if(var2 == "boss_stab_context07") {
+    if(var_2 == "boss_stab_context07") {
       level notify("player_unlinked_from_kill_flip");
       continue;
     }
@@ -1701,13 +1701,13 @@ function painvision_replacement() {
 }
 
 function audio_music_stab() {
-  var0 = level.goliath_boss_round;
+  var_0 = level.goliath_boss_round;
 
   if(getdvarint("greenlight")) {
-    var0 = 1;
+    var_0 = 1;
   }
 
-  switch (var0) {
+  switch (var_0) {
     case 0:
       wait 0.4;
       setmusicstate("mx_hometown_07_house_evade_02_lp");
@@ -1734,26 +1734,26 @@ function stab_blink_black_fade() {
 function goliath_blood_stab_vfx() {
   level endon("boss_dying");
   thread goliath_blood_stab_hands();
-  var0 = 0;
+  var_0 = 0;
 
   for(;;) {
     level waittill("player_stabbed_boss");
 
-    if(var0 == 2) {
+    if(var_0 == 2) {
       thread stab_blink_black_fade();
       level.vfx_htown_stab_blink_1 = spawnfx(level._effect["vfx_htown_stab_blink_1"], (0, 0, 0));
       triggerfx(level.vfx_htown_stab_blink_1);
       level.player shellshock("hometown_boss_intro", 3, undefined, 0);
       setblur(2, 0.01);
       scripts\engine\utility::noself_delaycall(0.1, &setblur, 0, 3);
-    } else if(var0 == 3) {
+    } else if(var_0 == 3) {
       thread stab_blink_black_fade();
       level.vfx_htown_stab_blink_2 = spawnfx(level._effect["vfx_htown_stab_blink_2"], (0, 0, 0));
       triggerfx(level.vfx_htown_stab_blink_2);
       level.player shellshock("hometown_boss_intro", 3, undefined, 0);
       setblur(2, 0.01);
       scripts\engine\utility::noself_delaycall(0.1, &setblur, 0, 3);
-    } else if(var0 == 4) {
+    } else if(var_0 == 4) {
       thread stab_blink_black_fade();
       level.vfx_htown_stab_blink_3 = spawnfx(level._effect["vfx_htown_stab_blink_3"], (0, 0, 0));
       triggerfx(level.vfx_htown_stab_blink_3);
@@ -1764,7 +1764,7 @@ function goliath_blood_stab_vfx() {
 
     playFXOnTag(level._effect["vfx_htown_blood_stab"], level.goliath_ai, level.stab_tag);
     level.player playRumbleOnEntity("light_1s");
-    var0 += 1;
+    var_0 += 1;
   }
 }
 
@@ -1774,51 +1774,51 @@ function goliath_blood_stab_hands() {
   scripts\sp\player\youngfarrah::setplayerviewmodel(scripts\sp\maps\hometown\hometown_util::getfarrahbloodymodel(), undefined, "viewmodel_farah_child_shadowcaster");
 }
 
-function goliath_struggle_player_check_final_pos(var0) {
+function goliath_struggle_player_check_final_pos(var_0) {
   wait 0.05;
-  var1 = self.origin + (0, 0, 1);
-  var2 = scripts\engine\trace::player_trace(var0 + (0, 0, 1), var1, self.angles, [self]);
-  var3 = var2["position"];
+  var_1 = self.origin + (0, 0, 1);
+  var_2 = scripts\engine\trace::player_trace(var_0 + (0, 0, 1), var_1, self.angles, [self]);
+  var_3 = var_2["position"];
 
-  if(distancesquared(var1, var3) > 0.0001) {
-    var4 = vectorNormalize(var0 - var1);
-    self setOrigin(var3 + var4);
+  if(distancesquared(var_1, var_3) > 0.0001) {
+    var_4 = vectorNormalize(var_0 - var_1);
+    self setOrigin(var_3 + var_4);
     return;
   }
 }
 
 function goliath_struggle_stab_direction() {
-  var0 = level.goliath_ai gettagangles("j_spinelower");
-  var1 = level.goliath_ai gettagorigin("j_spinelower");
-  var2 = anglestoright(var0);
-  var3 = anglesToForward(var0);
-  var4 = level.player.origin - var1;
-  var4 = (var4[0], var4[1], 0);
-  var4 = vectorNormalize(var4);
-  var5 = abs(vectordot(var3, (0, 0, 1)));
+  var_0 = level.goliath_ai gettagangles("j_spinelower");
+  var_1 = level.goliath_ai gettagorigin("j_spinelower");
+  var_2 = anglestoright(var_0);
+  var_3 = anglesToForward(var_0);
+  var_4 = level.player.origin - var_1;
+  var_4 = (var_4[0], var_4[1], 0);
+  var_4 = vectorNormalize(var_4);
+  var_5 = abs(vectordot(var_3, (0, 0, 1)));
 
-  if(var5 > 0.7) {
-    var3 = vectorNormalize((var2[0], var2[1], 0));
+  if(var_5 > 0.7) {
+    var_3 = vectorNormalize((var_2[0], var_2[1], 0));
   } else {
-    var3 = vectorNormalize((var3[0], var3[1], 0));
+    var_3 = vectorNormalize((var_3[0], var_3[1], 0));
   }
 
-  var6 = anglesToForward(level.goliath_ai.angles);
+  var_6 = anglesToForward(level.goliath_ai.angles);
 
-  if(vectordot(var4, var6) > vectordot(var3, var6)) {
-    var3 = var6;
+  if(vectordot(var_4, var_6) > vectordot(var_3, var_6)) {
+    var_3 = var_6;
   }
 
-  var2 = vectorcross(var3, (0, 0, 1));
-  var7 = vectordot(var3, var4);
-  var8 = vectordot(var2, var4);
-  var9 = -0.6;
+  var_2 = vectorcross(var_3, (0, 0, 1));
+  var_7 = vectordot(var_3, var_4);
+  var_8 = vectordot(var_2, var_4);
+  var_9 = -0.6;
 
-  if(var7 < var9) {
+  if(var_7 < var_9) {
     return "back";
-  } else if(var7 > 0.6) {
+  } else if(var_7 > 0.6) {
     return "front";
-  } else if(var8 > 0) {
+  } else if(var_8 > 0) {
     return "right";
   } else {
     return "left";
@@ -1828,18 +1828,18 @@ function goliath_struggle_stab_direction() {
 }
 
 function goliath_struggle_stab_check_for_close_victim() {
-  var0 = 100;
-  var1 = var0 * var0;
-  var2 = anglesToForward((0, level.player getplayerangles()[1], 0));
-  var3 = level.player getEye();
-  var4 = level.goliath_ai gettagorigin("j_spinelower");
-  var5 = distancesquared(var4, var3);
+  var_0 = 100;
+  var_1 = var_0 * var_0;
+  var_2 = anglesToForward((0, level.player getplayerangles()[1], 0));
+  var_3 = level.player getEye();
+  var_4 = level.goliath_ai gettagorigin("j_spinelower");
+  var_5 = distancesquared(var_4, var_3);
 
-  if(var5 < var1) {
-    var6 = vectorNormalize(var4 - var3);
+  if(var_5 < var_1) {
+    var_6 = vectorNormalize(var_4 - var_3);
 
-    if(vectordot(var6, var2) > 0.5) {
-      if(scripts\engine\trace::_bullet_trace_passed(level.player.origin + (0, 0, 48), var4, 0, undefined)) {
+    if(vectordot(var_6, var_2) > 0.5) {
+      if(scripts\engine\trace::_bullet_trace_passed(level.player.origin + (0, 0, 48), var_4, 0, undefined)) {
         return "true";
       }
     }
@@ -1861,8 +1861,8 @@ function house_exit_main() {
   level.door_clip_boss_enter notsolid();
   level.father_body_model detach("head_hero_farahs_father");
   level.father_body_model attach("head_sc_m_ward_blendshape");
-  var0 = scripts\engine\utility::getStruct("boost_anim_node", "script_noteworthy");
-  var0 thread scripts\common\anim::anim_loop_solo(level.father_body_model, "boost_father_enter_idle");
+  var_0 = scripts\engine\utility::getStruct("boost_anim_node", "script_noteworthy");
+  var_0 thread scripts\common\anim::anim_loop_solo(level.father_body_model, "boost_father_enter_idle");
   level.player_view_blur = 0;
   thread melee_weapon_safe_gesture();
   scripts\engine\utility::stop_exploder("ceilingsmoke");
@@ -1934,9 +1934,9 @@ function house_exit_main() {
   }
 }
 
-function audio_music_stop_music_delay(var0) {
-  if(isDefined(var0)) {
-    wait var0;
+function audio_music_stop_music_delay(var_0) {
+  if(isDefined(var_0)) {
+    wait var_0;
     return;
   }
 }
@@ -1945,9 +1945,9 @@ function audio_music_house_post_stab() {
   level endon("hadir_mourn_father");
 
   for(;;) {
-    var0 = distance(level.hadir_ai.origin, (-1494, -2485, 58));
+    var_0 = distance(level.hadir_ai.origin, (-1494, -2485, 58));
 
-    if(var0 < 150) {
+    if(var_0 < 150) {
       break;
     }
 
@@ -1999,21 +1999,21 @@ function interact_on_boss_body_timer() {
 
 function hadir_talk_monitor() {
   level endon("house_exit_complete");
-  var0 = 0;
-  var1 = 0;
+  var_0 = 0;
+  var_1 = 0;
 
-  while(var0 <= 20 && var1 <= 100) {
-    var2 = level.hadir_ai gettagorigin("tag_eye");
-    var3 = level.hadir_ai gettagorigin("J_SpineUpper");
-    var4 = level.hadir_ai gettagorigin("J_SpineLower");
+  while(var_0 <= 20 && var_1 <= 100) {
+    var_2 = level.hadir_ai gettagorigin("tag_eye");
+    var_3 = level.hadir_ai gettagorigin("J_SpineUpper");
+    var_4 = level.hadir_ai gettagorigin("J_SpineLower");
 
-    if(scripts\engine\utility::distance_2d_squared(level.player.origin, var2) <= 2500 || scripts\engine\utility::distance_2d_squared(level.player.origin, var3) <= 2500) {
-      if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var2, cos(15)) || scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var4, cos(15)) || scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var3, cos(15))) {
-        var0 += 1;
+    if(scripts\engine\utility::distance_2d_squared(level.player.origin, var_2) <= 2500 || scripts\engine\utility::distance_2d_squared(level.player.origin, var_3) <= 2500) {
+      if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_2, cos(15)) || scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_4, cos(15)) || scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_3, cos(15))) {
+        var_0 += 1;
       }
     }
 
-    var1 += 1;
+    var_1 += 1;
     waitframe();
   }
 
@@ -2027,9 +2027,9 @@ function mourn_dad_monitor() {
   GscBinSkip4(0x6e, level, 50, "tag_eye");
 }
 
-function notify_on_lookat_dad(var0, var1) {
+function notify_on_lookat_dad(var_0, var_1) {
   self endon("player_mourn_father");
-  level.player scripts\sp\maps\hometown\hometown_util::wait_lookat(level.father_body_model, var0, var1, 0.25, 100);
+  level.player scripts\sp\maps\hometown\hometown_util::wait_lookat(level.father_body_model, var_0, var_1, 0.25, 100);
   self notify("player_mourn_father");
 }
 
@@ -2048,9 +2048,9 @@ function gun_try_pickup() {
   level.player stopgestureviewmodel("ges_kitchen_knife_safe", 1);
   level.try_get_gun_anim_node notify("hadir_loop_stop");
   level.try_get_gun_interact delete();
-  var0 = scripts\engine\sp\utility::spawn_anim_model("hometown_player_rig", level.try_get_gun_anim_node.origin, level.try_get_gun_anim_node.angles);
-  level.player_rig = var0;
-  var0 setModel(scripts\sp\maps\hometown\hometown_util::getfarrahbloodymodel());
+  var_0 = scripts\engine\sp\utility::spawn_anim_model("hometown_player_rig", level.try_get_gun_anim_node.origin, level.try_get_gun_anim_node.angles);
+  level.player_rig = var_0;
+  var_0 setModel(scripts\sp\maps\hometown\hometown_util::getfarrahbloodymodel());
   level.player setstance("stand");
   level.try_get_gun_anim_node thread scripts\sp\player_rig::link_player_to_rig("try_get_gun_scene", "stand", 1, 1, 0, 0, 0, 0, 0, 1);
   level.player disableweapons();
@@ -2059,7 +2059,7 @@ function gun_try_pickup() {
   level.try_get_gun_anim_node thread scripts\common\anim::anim_single_solo(level.boss_kill_sling_model, "try_get_gun_scene");
   level.try_get_gun_anim_node thread scripts\common\anim::anim_single_solo(level.goliath_body_model, "try_get_gun_scene");
   level.try_get_gun_anim_node thread scripts\common\anim::anim_single_solo(level.gas_mask_from_boss_model_pre, "try_get_gun_scene");
-  level.try_get_gun_anim_node scripts\common\anim::anim_single_solo(var0, "try_get_gun_scene");
+  level.try_get_gun_anim_node scripts\common\anim::anim_single_solo(var_0, "try_get_gun_scene");
   level.player enableweapons();
   level.player scripts\sp\player_rig::unlink_player_from_rig(0, "stand");
   thread melee_weapon_safe_gesture();
@@ -2084,12 +2084,12 @@ function gun_try_pickup_hadir() {
   }
 }
 
-function front_door_boost_open_mask_spawn(var0) {
+function front_door_boost_open_mask_spawn(var_0) {
   wait 35.5;
   level.hadir_ai detach("hat_waist_child_hadir_gas_mask", "J_Proc_SpineLower_Swivel");
-  var0 show();
+  var_0 show();
   wait 4;
-  var0 delete();
+  var_0 delete();
   level.hadir_ai attach("hat_child_hadir_gas_mask");
 }
 
@@ -2123,31 +2123,31 @@ function remove_hadir_blocker_house() {
 }
 
 function front_door_boost_open_anim() {
-  var0 = scripts\engine\utility::getStruct("boost_anim_node", "script_noteworthy");
-  var0 thread scripts\common\anim::anim_first_frame_solo(level.house_intro_deadbolt_model, "boost_exitA_unlock");
+  var_0 = scripts\engine\utility::getStruct("boost_anim_node", "script_noteworthy");
+  var_0 thread scripts\common\anim::anim_first_frame_solo(level.house_intro_deadbolt_model, "boost_exitA_unlock");
   level.hadir_ai scripts\asm\asm_bb::bb_setcivilianstate("panic");
   level.hadir_ai scripts\engine\utility::set_movement_speed(45);
   level.hadir_ai.arrivalspeed = 0.82;
   thread audio_music_house_post_stab();
-  var0 scripts\sp\anim::anim_reach_and_approach_solo(level.hadir_ai, "boost_hadir_enter");
+  var_0 scripts\sp\anim::anim_reach_and_approach_solo(level.hadir_ai, "boost_hadir_enter");
   level.hadir_ai.arrivalspeed = undefined;
-  var1 = scripts\engine\sp\utility::spawn_anim_model("gas_mask_from_dad", var0.origin, var0.angles);
-  var1 hide();
-  thread front_door_boost_open_mask_spawn(var1);
+  var_1 = scripts\engine\sp\utility::spawn_anim_model("gas_mask_from_dad", var_0.origin, var_0.angles);
+  var_1 hide();
+  thread front_door_boost_open_mask_spawn(var_1);
   level notify("hadir_mourn_father");
-  var0 thread scripts\common\anim::anim_first_frame_solo(level.gas_attack_house_door_model, "boost_exitB");
+  var_0 thread scripts\common\anim::anim_first_frame_solo(level.gas_attack_house_door_model, "boost_exitB");
   level.hadir_ai detach("head_sc_m_coto");
   level.hadir_ai attach("head_sc_m_coto_blendshape");
   thread remove_hadir_blocker_house();
-  var0 thread scripts\common\anim::anim_single_solo(var1, "boost_hadir_enter");
-  var0 thread scripts\common\anim::anim_single_solo(level.father_body_model, "boost_hadir_enter");
-  var0 scripts\common\anim::anim_single_solo(level.hadir_ai, "boost_hadir_enter");
+  var_0 thread scripts\common\anim::anim_single_solo(var_1, "boost_hadir_enter");
+  var_0 thread scripts\common\anim::anim_single_solo(level.father_body_model, "boost_hadir_enter");
+  var_0 scripts\common\anim::anim_single_solo(level.hadir_ai, "boost_hadir_enter");
   level.hadir_ai detach("head_sc_m_coto_blendshape");
   level.father_body_model detach("head_sc_m_ward_blendshape");
   level.hadir_ai attach("head_sc_m_coto");
   level.father_body_model attach("head_hero_farahs_father");
   level notify("hadir_reached_door");
-  var0 thread scripts\common\anim::anim_loop_solo(level.hadir_ai, "boost_hadir_idle", "hadir_loop_stop");
+  var_0 thread scripts\common\anim::anim_loop_solo(level.hadir_ai, "boost_hadir_idle", "hadir_loop_stop");
   level.hadir_ai scripts\sp\player\cursor_hint::create_cursor_hint("j_wrist_le", (3, 0, 0), &"HOMETOWN/CLIMB");
   level.hadir_ai waittill("trigger");
   thread player_putgasmaskon();
@@ -2155,45 +2155,45 @@ function front_door_boost_open_anim() {
   setaudiotriggerstate("gas_outsidehouse", "gasthrown", 1);
 
   if(level.current_knife_weapon_string == "iw8_knife_kid_bloody" || level.current_knife_weapon_string == "iw8_knife_kid") {
-    var2 = "weapon_vm_me_kitchen_knife_bloody";
-    var3 = "_knife";
+    var_2 = "weapon_vm_me_kitchen_knife_bloody";
+    var_3 = "_knife";
   } else if(level.current_knife_weapon_string == "iw8_knife_kid_rebar_bloody" || level.current_knife_weapon_string == "iw8_knife_kid_rebar") {
-    var2 = "weapon_vm_me_screwdriver_bloody";
-    var3 = "";
+    var_2 = "weapon_vm_me_screwdriver_bloody";
+    var_3 = "";
   } else if(level.current_knife_weapon_string == "iw8_knife_kid_scissors_bloody" || level.current_knife_weapon_string == "iw8_knife_kid_scissors") {
-    var2 = "weapon_vm_me_scissors_bloody";
-    var3 = "_scissors";
+    var_2 = "weapon_vm_me_scissors_bloody";
+    var_3 = "_scissors";
   } else if(level.current_knife_weapon_string == "iw8_knife_kid_screwdriver_bloody" || level.current_knife_weapon_string == "iw8_knife_kid_screwdriver") {
-    var2 = "weapon_vm_me_screwdriver_bloody";
-    var3 = "";
+    var_2 = "weapon_vm_me_screwdriver_bloody";
+    var_3 = "";
   } else {
-    var2 = "weapon_vm_me_screwdriver";
-    var3 = "";
+    var_2 = "weapon_vm_me_screwdriver";
+    var_3 = "";
   }
 
-  var4 = scripts\engine\sp\utility::spawn_anim_model("boost_screwdriver", level.player.origin, level.player.angles);
-  var4 setModel(var2);
-  var2 notify("hadir_loop_stop");
+  var_4 = scripts\engine\sp\utility::spawn_anim_model("boost_screwdriver", level.player.origin, level.player.angles);
+  var_4 setModel(var_2);
+  var_2 notify("hadir_loop_stop");
   level.player lerpfovscalefactor(0, 0.3);
   level.player disableweapons();
   level.player takeallweapons();
-  var5 = scripts\engine\sp\utility::spawn_anim_model("hometown_player_rig", var2.origin, var2.angles);
-  level.player_rig = var5;
-  var5 setModel(scripts\sp\maps\hometown\hometown_util::getfarrahbloodymodel());
-  var2 thread scripts\sp\player_rig::link_player_to_rig("boost_exitA" + var3, "stand", 1, 0.75, 0, 0, 0, 0, 0, 1);
-  var4.origin = var5 gettagorigin("tag_accessory_right");
-  var4.angles = var5 gettagangles("tag_accessory_right");
-  var4 linkTo(var5, "tag_accessory_right");
-  var6 = spawn("script_origin", level.player.origin);
-  var6 scalevolume(0, 0);
-  var7 = spawn("script_origin", level.player.origin);
-  var7 scalevolume(0, 0);
-  var8 = "scn_hometown_lock_loop" + var3;
-  var9 = "scn_hometown_unlock_loop" + var3;
+  var_5 = scripts\engine\sp\utility::spawn_anim_model("hometown_player_rig", var_2.origin, var_2.angles);
+  level.player_rig = var_5;
+  var_5 setModel(scripts\sp\maps\hometown\hometown_util::getfarrahbloodymodel());
+  var_2 thread scripts\sp\player_rig::link_player_to_rig("boost_exitA" + var_3, "stand", 1, 0.75, 0, 0, 0, 0, 0, 1);
+  var_4.origin = var_5 gettagorigin("tag_accessory_right");
+  var_4.angles = var_5 gettagangles("tag_accessory_right");
+  var_4 linkTo(var_5, "tag_accessory_right");
+  var_6 = spawn("script_origin", level.player.origin);
+  var_6 scalevolume(0, 0);
+  var_7 = spawn("script_origin", level.player.origin);
+  var_7 scalevolume(0, 0);
+  var_8 = "scn_hometown_lock_loop" + var_3;
+  var_9 = "scn_hometown_unlock_loop" + var_3;
   level.gas_mask_from_boss_model scripts\engine\utility::delaycall(0.75, &show);
-  var2 thread scripts\common\anim::anim_single_solo(level.hadir_ai, "boost_exitA");
-  var2 thread scripts\common\anim::anim_single_solo(level.gas_mask_from_boss_model, "boost_exitA");
-  var2 scripts\common\anim::anim_single_solo(var5, "boost_exitA" + var3);
+  var_2 thread scripts\common\anim::anim_single_solo(level.hadir_ai, "boost_exitA");
+  var_2 thread scripts\common\anim::anim_single_solo(level.gas_mask_from_boss_model, "boost_exitA");
+  var_2 scripts\common\anim::anim_single_solo(var_5, "boost_exitA" + var_3);
   level.gas_mask_from_boss_model delete();
   level.player lerpviewangleclamp(0.5, 0.5, 0.5, 40, 40, 40, 40);
 
@@ -2201,64 +2201,64 @@ function front_door_boost_open_anim() {
     level.player springcamdisabled(0.5);
   }
 
-  var2 thread scripts\common\anim::anim_loop_solo(level.hadir_ai, "boost_exitA_idle", "stop_exitA_idle");
-  var2 thread scripts\common\anim::anim_loop_solo(var5, "boost_exitA_idle" + var3, "stop_exitA_idle");
+  var_2 thread scripts\common\anim::anim_loop_solo(level.hadir_ai, "boost_exitA_idle", "stop_exitA_idle");
+  var_2 thread scripts\common\anim::anim_loop_solo(var_5, "boost_exitA_idle" + var_3, "stop_exitA_idle");
   level notify("start_lock_pry");
-  var10 = scripts\engine\utility::spawn_tag_origin(var4.origin);
-  var10 scripts\sp\player\cursor_hint::create_cursor_hint("tag_origin", (0, 0, 0), &"HOMETOWN/PRY", undefined, undefined, undefined, 1, undefined, undefined, undefined, "duration_none");
+  var_10 = scripts\engine\utility::spawn_tag_origin(var_4.origin);
+  var_10 scripts\sp\player\cursor_hint::create_cursor_hint("tag_origin", (0, 0, 0), &"HOMETOWN/PRY", undefined, undefined, undefined, 1, undefined, undefined, undefined, "duration_none");
   setsaveddvar("OMNONNMOTP", "0.1 400 0.75 1000");
-  var10 waittill("trigger");
-  var10 delete();
-  var2 notify("stop_exitA_idle");
-  var6 playLoopSound(var9);
-  var7 playLoopSound(var8);
-  var11 = var5 scripts\engine\utility::getanim("boost_exitA_unlock" + var3);
-  var12 = level.hadir_ai scripts\engine\utility::getanim("boost_exitA_unlock");
-  var13 = level.house_intro_deadbolt_model scripts\engine\utility::getanim("boost_exitA_unlock");
-  var5 setanim(var11);
-  level.hadir_ai setanim(var12);
-  level.house_intro_deadbolt_model setanim(var13);
+  var_10 waittill("trigger");
+  var_10 delete();
+  var_2 notify("stop_exitA_idle");
+  var_6 playLoopSound(var_9);
+  var_7 playLoopSound(var_8);
+  var_11 = var_5 scripts\engine\utility::getanim("boost_exitA_unlock" + var_3);
+  var_12 = level.hadir_ai scripts\engine\utility::getanim("boost_exitA_unlock");
+  var_13 = level.house_intro_deadbolt_model scripts\engine\utility::getanim("boost_exitA_unlock");
+  var_5 setanim(var_11);
+  level.hadir_ai setanim(var_12);
+  level.house_intro_deadbolt_model setanim(var_13);
   wait 0.3;
-  var5 setanimrate(var11, 0);
-  level.hadir_ai setanimrate(var12, 0);
-  level.house_intro_deadbolt_model setanimrate(var13, 0);
-  var14 = 1;
-  var15 = var5 getanimtime(var11);
-  var16 = 1;
-  var17 = var16 * -1;
-  var18 = 0;
+  var_5 setanimrate(var_11, 0);
+  level.hadir_ai setanimrate(var_12, 0);
+  level.house_intro_deadbolt_model setanimrate(var_13, 0);
+  var_14 = 1;
+  var_15 = var_5 getanimtime(var_11);
+  var_16 = 1;
+  var_17 = var_16 * -1;
+  var_18 = 0;
 
-  while(var15 < var14) {
+  while(var_15 < var_14) {
     if(level.player useButtonPressed()) {
-      var19 = 1;
+      var_19 = 1;
       level.player playrumblelooponentity("tank_rumble");
 
-      if(var18 != 1) {
+      if(var_18 != 1) {
         level.player playSound("scn_hometown_unlock_loop_start");
-        var6 scalevolume(1, 0.2);
-        var7 scalevolume(0, 0.2);
-        var18 = 1;
+        var_6 scalevolume(1, 0.2);
+        var_7 scalevolume(0, 0.2);
+        var_18 = 1;
       }
     } else {
-      var19 = -2;
+      var_19 = -2;
       level.player stoprumble("tank_rumble");
 
-      if(var18 == 1) {
+      if(var_18 == 1) {
         level.player playSound("scn_hometown_lock_loop_start");
-        var7 scalevolume(1, 0.2);
-        var6 scalevolume(0, 0.2);
-        var18 = 2;
+        var_7 scalevolume(1, 0.2);
+        var_6 scalevolume(0, 0.2);
+        var_18 = 2;
       }
     }
 
-    var5 setanimrate(var11, var19);
-    level.hadir_ai setanimrate(var12, var19);
-    level.house_intro_deadbolt_model setanimrate(var13, var19);
-    var15 = var5 getanimtime(var11);
+    var_5 setanimrate(var_11, var_19);
+    level.hadir_ai setanimrate(var_12, var_19);
+    level.house_intro_deadbolt_model setanimrate(var_13, var_19);
+    var_15 = var_5 getanimtime(var_11);
 
-    if(var15 == 0 && var18 == 2) {
-      var7 scalevolume(0, 0.2);
-      var18 = 0;
+    if(var_15 == 0 && var_18 == 2) {
+      var_7 scalevolume(0, 0.2);
+      var_18 = 0;
     }
 
     waitframe();
@@ -2268,10 +2268,10 @@ function front_door_boost_open_anim() {
   level.player playRumbleOnEntity("heavy_1s");
   level notify("lock_broken");
   level.player playSound("scn_hometown_lock_door_open");
-  var7 scalevolume(0, 0.5);
-  var6 scalevolume(0, 0.5);
-  var7 scripts\engine\utility::delaycall(0.5, &delete);
-  var6 scripts\engine\utility::delaycall(0.5, &delete);
+  var_7 scalevolume(0, 0.5);
+  var_6 scalevolume(0, 0.5);
+  var_7 scripts\engine\utility::delaycall(0.5, &delete);
+  var_6 scripts\engine\utility::delaycall(0.5, &delete);
   level.player scripts\engine\utility::delaycall(0.5, &lerpfovscalefactor, 1, 0.3);
 
   if(!getdvarint("scr_no_springcam")) {
@@ -2288,25 +2288,25 @@ function front_door_boost_open_anim() {
     setsaveddvar("OMNONNMOTP", "0.1 400 3.25 1000");
   }
 
-  var2 thread scripts\common\anim::anim_single_solo(level.hadir_ai, "boost_exitB");
-  var2 thread scripts\common\anim::anim_single_solo(level.gas_attack_house_door_model, "boost_exitB");
-  var2 thread scripts\common\anim::anim_single_solo(level.house_intro_deadbolt_model, "boost_exitB");
-  var2 scripts\common\anim::anim_single_solo(var5, "boost_exitB" + var3);
+  var_2 thread scripts\common\anim::anim_single_solo(level.hadir_ai, "boost_exitB");
+  var_2 thread scripts\common\anim::anim_single_solo(level.gas_attack_house_door_model, "boost_exitB");
+  var_2 thread scripts\common\anim::anim_single_solo(level.house_intro_deadbolt_model, "boost_exitB");
+  var_2 scripts\common\anim::anim_single_solo(var_5, "boost_exitB" + var_3);
   level.player scripts\sp\player_rig::unlink_player_from_rig(0, "stand");
   level.player enableweapons();
   level.player giveweapon("iw8_gunless_farrah");
   level.player switchtoweapon("iw8_gunless_farrah");
-  var4 delete();
+  var_4 delete();
   level.house_intro_deadbolt_model delete();
   level notify("house_exit_complete");
 }
 
-function break_lock(var0) {
-  var1 = scripts\engine\utility::spawn_tag_origin(var0.origin);
-  var1 scripts\sp\player\cursor_hint::create_cursor_hint("tag_origin", (0, 0, 0), &"HOMETOWN/PRY", undefined, undefined, undefined, 1, undefined, undefined, undefined, "duration_medium");
-  var1 waittill("trigger");
+function break_lock(var_0) {
+  var_1 = scripts\engine\utility::spawn_tag_origin(var_0.origin);
+  var_1 scripts\sp\player\cursor_hint::create_cursor_hint("tag_origin", (0, 0, 0), &"HOMETOWN/PRY", undefined, undefined, undefined, 1, undefined, undefined, undefined, "duration_medium");
+  var_1 waittill("trigger");
   level notify("lock_broken");
-  var1 delete();
+  var_1 delete();
 }
 
 function gas_mask_pickup_playerlogic() {
@@ -2320,9 +2320,9 @@ function gas_mask_pickup_playerlogic() {
   level.player notify("boss_stuff_pickup", "gas_mask");
   level.player stopgestureviewmodel("ges_kitchen_knife_safe", 1);
   level.get_mask_anim_node = level.boss_struggle_anim_node;
-  var0 = scripts\engine\sp\utility::spawn_anim_model("hometown_player_rig", level.get_mask_anim_node.origin, level.get_mask_anim_node.angles);
-  level.player_rig = var0;
-  var0 setModel(scripts\sp\maps\hometown\hometown_util::getfarrahbloodymodel());
+  var_0 = scripts\engine\sp\utility::spawn_anim_model("hometown_player_rig", level.get_mask_anim_node.origin, level.get_mask_anim_node.angles);
+  level.player_rig = var_0;
+  var_0 setModel(scripts\sp\maps\hometown\hometown_util::getfarrahbloodymodel());
   level.player setstance("stand");
   level.try_get_gun_anim_node thread scripts\sp\player_rig::link_player_to_rig("get_gas_mask", "stand", 1, 1, 0, 0, 0, 0, 0, 1);
   level.gas_mask_from_boss_model = scripts\engine\sp\utility::spawn_anim_model("gas_mask_from_boss", level.get_mask_anim_node.origin, level.get_mask_anim_node.angles);
@@ -2332,7 +2332,7 @@ function gas_mask_pickup_playerlogic() {
   level.get_mask_anim_node thread scripts\common\anim::anim_single_solo(level.boss_kill_sling_model, "get_gas_mask");
   level.get_mask_anim_node thread scripts\common\anim::anim_single_solo(level.gas_mask_from_boss_model_pre, "get_gas_mask");
   level.get_mask_anim_node thread scripts\common\anim::anim_single_solo(level.goliath_body_model, "get_gas_mask");
-  level.get_mask_anim_node scripts\common\anim::anim_single_solo(var0, "get_gas_mask");
+  level.get_mask_anim_node scripts\common\anim::anim_single_solo(var_0, "get_gas_mask");
   level.player enableweapons();
   level.player scripts\sp\player_rig::unlink_player_from_rig(0, "stand");
   level.gas_mask_from_boss_model_pre hide();
@@ -2395,15 +2395,15 @@ function goliath_round_monitor() {
   level endon("boss_dying");
   thread goliath_counter_monitor();
   level.goliath_boss_round = 0;
-  var0 = [];
+  var_0 = [];
 
-  foreach(var2 in anim.smartobjectpoints) {
-    if(!issubstr(var2.script_smartobject, "_rage_") && var2.script_smartobject != "stealth_exposed_fire_up") {
+  foreach(var_2 in anim.smartobjectpoints) {
+    if(!issubstr(var_2.script_smartobject, "_rage_") && var_2.script_smartobject != "stealth_exposed_fire_up") {
       continue;
     }
 
-    var2.donotuse = 1;
-    var0 = var2;
+    var_2.donotuse = 1;
+    var_0 = var_2;
   }
 
   goliath_grab_init();
@@ -2423,7 +2423,7 @@ function goliath_round_monitor() {
       level.boss_vo.phase = 4;
     }
 
-    thread boss_round_updates(var0);
+    thread boss_round_updates(var_0);
     level.goliath_ai waittill("context_melee_anim_ended");
     level.goliath_ai scripts\engine\sp\utility::set_battlechatter(0);
     level.goliath_ai scripts\stealth\enemy::bt_event_combat();
@@ -2431,21 +2431,21 @@ function goliath_round_monitor() {
   }
 }
 
-function boss_round_updates(var0) {
+function boss_round_updates(var_0) {
   switch (level.goliath_boss_round) {
     case 1:
       stop_goliath_grab();
       break;
     case 2:
-      foreach(var2 in var0) {
-        var2.donotuse = undefined;
+      foreach(var_2 in var_0) {
+        var_2.donotuse = undefined;
 
-        if(scripts\engine\utility::is_equal(var2.script_noteworthy, "chair")) {
-          var2.prioritymultiplier = 10;
+        if(scripts\engine\utility::is_equal(var_2.script_noteworthy, "chair")) {
+          var_2.prioritymultiplier = 10;
           continue;
         }
 
-        var2.prioritymultiplier = 5;
+        var_2.prioritymultiplier = 5;
       }
 
       level.player waittill("knife_change");
@@ -2493,60 +2493,60 @@ function goliath_grab_monitor() {
       continue;
     }
 
-    var0 = 6;
-    var1 = 40;
-    var2 = (0, 0, 5);
+    var_0 = 6;
+    var_1 = 40;
+    var_2 = (0, 0, 5);
 
-    if(!scripts\engine\trace::capsule_trace_passed(level.player.origin + var2, level.goliath_ai.origin + var2, var0, var1, level.player.angles, [level.player, level.goliath_ai])) {
+    if(!scripts\engine\trace::capsule_trace_passed(level.player.origin + var_2, level.goliath_ai.origin + var_2, var_0, var_1, level.player.angles, [level.player, level.goliath_ai])) {
       continue;
     }
 
-    var3 = "boss_capture_";
-    var4 = scripts\engine\math::get_dot(level.player.origin, level.player.angles, level.goliath_ai.origin);
+    var_3 = "boss_capture_";
+    var_4 = scripts\engine\math::get_dot(level.player.origin, level.player.angles, level.goliath_ai.origin);
 
-    if(var4 >= 0.5) {
-      var3 += "front";
-    } else if(var4 <= -0.5) {
-      var3 += "back";
+    if(var_4 >= 0.5) {
+      var_3 += "front";
+    } else if(var_4 <= -0.5) {
+      var_3 += "back";
     } else {
-      var4 = vectordot(vectorNormalize(level.goliath_ai.origin - level.player.origin), anglestoright(level.player.angles));
+      var_4 = vectordot(vectorNormalize(level.goliath_ai.origin - level.player.origin), anglestoright(level.player.angles));
 
-      if(var4 > 0) {
-        var3 += "right";
+      if(var_4 > 0) {
+        var_3 += "right";
       } else {
-        var3 += "left";
+        var_3 += "left";
       }
     }
 
-    var5 = scripts\engine\utility::spawn_script_origin(level.goliath_ai.origin, vectortoangles(level.player.origin - level.goliath_ai.origin));
+    var_5 = scripts\engine\utility::spawn_script_origin(level.goliath_ai.origin, vectortoangles(level.player.origin - level.goliath_ai.origin));
     level.player_rig = scripts\engine\sp\utility::spawn_anim_model("hometown_player_rig", level.player.origin, level.player.angles);
     level.player_rig hide();
-    var5 scripts\common\anim::anim_first_frame_solo(level.player_rig, var3);
-    var6 = level.player_rig.origin;
-    var7 = level.player_rig.angles;
-    var5 scripts\common\anim::anim_last_frame_solo(level.player_rig, var3);
-    var8 = level.player_rig.origin;
+    var_5 scripts\common\anim::anim_first_frame_solo(level.player_rig, var_3);
+    var_6 = level.player_rig.origin;
+    var_7 = level.player_rig.angles;
+    var_5 scripts\common\anim::anim_last_frame_solo(level.player_rig, var_3);
+    var_8 = level.player_rig.origin;
 
-    if(!scripts\engine\trace::capsule_trace_passed(var6, var8, var0, var1, var7, [level.player, level.goliath_ai])) {
-      var5 delete();
+    if(!scripts\engine\trace::capsule_trace_passed(var_6, var_8, var_0, var_1, var_7, [level.player, level.goliath_ai])) {
+      var_5 delete();
       level.player_rig delete();
       continue;
     }
 
-    var0 = 25;
-    var1 = 60;
-    var6 = level.goliath_ai.origin;
-    var7 = level.goliath_ai.angles;
-    var9 = scripts\engine\sp\utility::spawn_anim_model("goliath_body", level.goliath_ai.origin, level.goliath_ai.angles);
-    var9.animname = "generic";
-    var9 hide();
-    var5 scripts\common\anim::anim_last_frame_solo(var9, var3);
-    var8 = var9.origin;
+    var_0 = 25;
+    var_1 = 60;
+    var_6 = level.goliath_ai.origin;
+    var_7 = level.goliath_ai.angles;
+    var_9 = scripts\engine\sp\utility::spawn_anim_model("goliath_body", level.goliath_ai.origin, level.goliath_ai.angles);
+    var_9.animname = "generic";
+    var_9 hide();
+    var_5 scripts\common\anim::anim_last_frame_solo(var_9, var_3);
+    var_8 = var_9.origin;
 
-    if(!scripts\engine\trace::capsule_trace_passed(var6, var8, var0, var1, var7, [level.player, level.goliath_ai])) {
-      var5 delete();
+    if(!scripts\engine\trace::capsule_trace_passed(var_6, var_8, var_0, var_1, var_7, [level.player, level.goliath_ai])) {
+      var_5 delete();
       level.player_rig delete();
-      var9 delete();
+      var_9 delete();
       continue;
     }
 
@@ -2555,8 +2555,8 @@ function goliath_grab_monitor() {
     level.player scripts\common\utility::allow_melee(0);
     level.player lerpfovscalefactor(0, 0.5);
     thread goliath_strangle_effects_capture();
-    var5 thread scripts\sp\player_rig::link_player_to_rig(var3, "stand", 1, 0.2, 0, 5, 5, 5, 5, 1);
-    var5 thread scripts\common\anim::anim_single([level.goliath_ai, level.player_rig], var3);
+    var_5 thread scripts\sp\player_rig::link_player_to_rig(var_3, "stand", 1, 0.2, 0, 5, 5, 5, 5, 1);
+    var_5 thread scripts\common\anim::anim_single([level.goliath_ai, level.player_rig], var_3);
 
     if(!isDefined(level.player_found_a_weapon)) {
       level scripts\sp\player_death::set_custom_death_quote(61);
@@ -2579,29 +2579,29 @@ function goliath_grab_give_up_and_shoot() {
 
   for(;;) {
     level.goliath_ai waittill("stealth_combat");
-    var0 = 0;
-    var1 = 0;
+    var_0 = 0;
+    var_1 = 0;
 
-    for(var2 = 0;; var2 = 1) {
-      if(var2) {
-        var0++;
+    for(var_2 = 0;; var_2 = 1) {
+      if(var_2) {
+        var_0++;
       } else {
-        var0 = 0;
+        var_0 = 0;
       }
 
-      if(var0 >= 40 || var1 >= 400) {
+      if(var_0 >= 40 || var_1 >= 400) {
         stop_goliath_grab();
         return;
       }
 
-      var2 = 0;
+      var_2 = 0;
       waitframe();
 
       if(!level.goliath_ai[[level.goliath_ai.fnisinstealthcombat]]()) {
         break;
       }
 
-      var1++;
+      var_1++;
 
       if(distancesquared(level.goliath_ai.origin, level.player.origin) > 8100) {
         continue;
@@ -2625,13 +2625,13 @@ function does_goliath_know_where_player_is() {
     return true;
   }
 
-  var0 = level.goliath_ai lastknownpos(level.player);
+  var_0 = level.goliath_ai lastknownpos(level.player);
 
-  if(distancesquared(var0, level.player.origin) < 100) {
+  if(distancesquared(var_0, level.player.origin) < 100) {
     return true;
   }
 
-  if(isDefined(level.player.lowcovervolume) && ispointinvolume(var0, level.player.lowcovervolume)) {
+  if(isDefined(level.player.lowcovervolume) && ispointinvolume(var_0, level.player.lowcovervolume)) {
     return true;
   }
 
@@ -2798,15 +2798,15 @@ function ambient_house_enter_explosions() {
 function audio_truck_passby_ext() {
   level.player setsoundsubmix("sp_ht_truck_by_door", 1, 1);
   wait 9.5;
-  var0 = spawn("script_origin", (-816, -1712, 58));
-  var0 playSound("scn_hometown_house_truck_by_ext", "trucksounddone");
-  var0 moveTo((-713, -2944, 58), 18, 1, 1);
-  var0 waittill("trucksounddone");
+  var_0 = spawn("script_origin", (-816, -1712, 58));
+  var_0 playSound("scn_hometown_house_truck_by_ext", "trucksounddone");
+  var_0 moveTo((-713, -2944, 58), 18, 1, 1);
+  var_0 waittill("trucksounddone");
   level notify("truck_passby_done");
   waitframe();
-  var0 stopsounds();
+  var_0 stopsounds();
   waitframe();
-  var0 delete();
+  var_0 delete();
 }
 
 #using_animtree("");
@@ -2862,11 +2862,11 @@ function dad_procedural_bones() {
 
 function goliath_swipe_awareness() {
   level.goliath_ai endon("death");
-  var0 = 10000;
+  var_0 = 10000;
 
   for(;;) {
     if(level.player attackButtonPressed() || level.player meleeButtonPressed()) {
-      if(distancesquared(level.goliath_ai.origin, level.player.origin) < var0) {
+      if(distancesquared(level.goliath_ai.origin, level.player.origin) < var_0) {
         if(level.goliath_ai[[level.goliath_ai.fnisinstealthcombat]]()) {
           level.goliath_ai getenemyinfo(level.player);
         } else {

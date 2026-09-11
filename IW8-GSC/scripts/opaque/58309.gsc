@@ -19,11 +19,11 @@ function ref_1343a() {
   }
 
   scripts\engine\utility::flag_init("endwave_audiocountdown_running");
-  var0 = getEntArray("target_brushmodel", "script_noteworthy");
+  var_0 = getEntArray("target_brushmodel", "script_noteworthy");
 
-  foreach(var2 in var0) {
-    var2.targetname = "null";
-    var2.target = "null";
+  foreach(var_2 in var_0) {
+    var_2.targetname = "null";
+    var_2.target = "null";
   }
 
   while(!isDefined(level.struct_class_names)) {
@@ -40,8 +40,8 @@ function progression() {
   level.movers = scripts\engine\utility::getStructArray("mover_start", "script_noteworthy");
   _tablethide::waittill_player_isDefined();
 
-  foreach(var1 in level.course_targets) {
-    var1.activated = 0;
+  foreach(var_1 in level.course_targets) {
+    var_1.activated = 0;
     thread target_think();
   }
 
@@ -75,8 +75,8 @@ function progression() {
     score_calculate(1);
     _tablethide::ref_13d89(1);
 
-    foreach(var7 in level.player.primaryinventory) {
-      level.player setweaponammoclip(var7, weaponclipsize(var7));
+    foreach(var_7 in level.player.primaryinventory) {
+      level.player setweaponammoclip(var_7, weaponclipsize(var_7));
     }
 
     _tablethide::trial_ui_waittill_retry();
@@ -89,13 +89,13 @@ function course_start_wait() {
     return;
   }
 
-  var0 = getEnt("outline", "script_noteworthy");
+  var_0 = getEnt("outline", "script_noteworthy");
 
-  while(!isDefined(var0.spawned_weapon)) {
+  while(!isDefined(var_0.spawned_weapon)) {
     waitframe();
   }
 
-  while(isDefined(var0.spawned_weapon)) {
+  while(isDefined(var_0.spawned_weapon)) {
     waitframe();
   }
 
@@ -105,40 +105,40 @@ function course_start_wait() {
   wait 1;
 }
 
-function wave_single_progression(var0, var1) {
-  hud_inter_round_flow(var1);
+function wave_single_progression(var_0, var_1) {
+  hud_inter_round_flow(var_1);
   level notify("new_wave");
-  level.target_wave = var1;
+  level.target_wave = var_1;
   _tablethide::trial_ui_set_wave(level.target_wave, 4);
-  var2 = gettime();
-  _tablethide::trial_ui_set_secondary_timer(var2 + 25000);
-  var3 = 1;
+  var_2 = gettime();
+  _tablethide::trial_ui_set_secondary_timer(var_2 + 25000);
+  var_3 = 1;
 
-  foreach(var5 in var0) {
-    thread target_flip(var5);
+  foreach(var_5 in var_0) {
+    thread target_flip(var_5);
   }
 
-  var7 = 0;
+  var_7 = 0;
 
   for(;;) {
-    var8 = 1;
+    var_8 = 1;
 
-    foreach(var5 in var0) {
-      if(!var5.activated && !isDefined(var5.is_civilian)) {
-        var8 = 0;
+    foreach(var_5 in var_0) {
+      if(!var_5.activated && !isDefined(var_5.is_civilian)) {
+        var_8 = 0;
       }
     }
 
-    if(gettime() > var2 + 25000 - level.showdebugresult && istrue(level.ref_13d8f) && !var7) {
-      var7 = 1;
-      thread spawn_fulton_rope_mdl(var0, 1);
+    if(gettime() > var_2 + 25000 - level.showdebugresult && istrue(level.ref_13d8f) && !var_7) {
+      var_7 = 1;
+      thread spawn_fulton_rope_mdl(var_0, 1);
     }
 
-    if(gettime() > var2 + 25000) {
+    if(gettime() > var_2 + 25000) {
       break;
     }
 
-    if(!scripts\engine\utility::flag("endwave_audiocountdown_running") && gettime() > var2 + 25000 - 5000) {
+    if(!scripts\engine\utility::flag("endwave_audiocountdown_running") && gettime() > var_2 + 25000 - 5000) {
       scripts\engine\utility::flag_set("endwave_audiocountdown_running");
       thread trial_failure_countdown();
     }
@@ -148,59 +148,59 @@ function wave_single_progression(var0, var1) {
 
   LOC_0000012b:
     if(istrue(level.ref_13d8f)) {
-      thread spawn_fulton_rope_mdl(var0, 0);
+      thread spawn_fulton_rope_mdl(var_0, 0);
     }
 
-  level notify("wave_ended", var1);
+  level notify("wave_ended", var_1);
   scripts\engine\utility::flag_clear("endwave_audiocountdown_running");
-  var11 = clamp(var2 + 25000 - gettime(), 0, 25000);
+  var_11 = clamp(var_2 + 25000 - gettime(), 0, 25000);
 
-  foreach(var5 in var0) {
-    thread target_flip(var5);
+  foreach(var_5 in var_0) {
+    thread target_flip(var_5);
   }
 
-  switch (var1) {
+  switch (var_1) {
     case 1:
-      score_event_time_remaining(var11, undefined, undefined, undefined);
+      score_event_time_remaining(var_11, undefined, undefined, undefined);
       break;
     case 2:
-      score_event_time_remaining(undefined, var11, undefined, undefined);
+      score_event_time_remaining(undefined, var_11, undefined, undefined);
       break;
     case 3:
-      score_event_time_remaining(undefined, undefined, var11, undefined);
+      score_event_time_remaining(undefined, undefined, var_11, undefined);
       break;
     case 4:
-      score_event_time_remaining(undefined, undefined, undefined, var11);
+      score_event_time_remaining(undefined, undefined, undefined, var_11);
       break;
     default:
       break;
   }
 }
 
-function spawn_fulton_rope_mdl(var0, var1) {
-  foreach(var3 in var0) {
-    if(var1) {
-      if(!var3.activated && !isDefined(var3.is_civilian)) {
-        var3.headicon = deleteheadicon(var3);
-        setheadiconfriendlyimage(var3.headicon, "icon_navbar_enemy");
-        setheadiconsnaptoedges(var3.headicon, 30000);
-        addclienttoheadiconmask(var3.headicon, 75);
+function spawn_fulton_rope_mdl(var_0, var_1) {
+  foreach(var_3 in var_0) {
+    if(var_1) {
+      if(!var_3.activated && !isDefined(var_3.is_civilian)) {
+        var_3.headicon = deleteheadicon(var_3);
+        setheadiconfriendlyimage(var_3.headicon, "icon_navbar_enemy");
+        setheadiconsnaptoedges(var_3.headicon, 30000);
+        addclienttoheadiconmask(var_3.headicon, 75);
       }
 
       continue;
     }
 
-    if(!var3.activated) {
-      if(isDefined(var3.headicon)) {
-        setheadiconimage(var3.headicon);
-        var3.headicon = undefined;
+    if(!var_3.activated) {
+      if(isDefined(var_3.headicon)) {
+        setheadiconimage(var_3.headicon);
+        var_3.headicon = undefined;
       }
     }
   }
 }
 
 function trial_failure_countdown() {
-  for(var0 = 5; var0 > 0; var0--) {
+  for(var_0 = 5; var_0 > 0; var_0--) {
     level endon("wave_ended");
     level.player playSound("trial_sfx_failure_countdown");
     wait 1;
@@ -214,10 +214,10 @@ function target_think() {
   self.parts = getEntArray(self.script_linkname, "script_linkto");
   self.parts = scripts\engine\utility::array_remove(self.parts, self);
 
-  foreach(var1 in self.parts) {
-    switch (var1.script_noteworthy) {
+  foreach(var_1 in self.parts) {
+    switch (var_1.script_noteworthy) {
       case "target_plate":
-        self.plate = var1;
+        self.plate = var_1;
 
         if(isDefined(self.plate.target)) {
           self.plate.should_break_stealth_immediately = 1;
@@ -225,26 +225,26 @@ function target_think() {
 
         break;
       case "target_arm":
-        self.arm = var1;
+        self.arm = var_1;
         break;
       case "target_base":
-        self.base = var1;
+        self.base = var_1;
         break;
       case "target_wheels":
-        self.wheels = var1;
+        self.wheels = var_1;
         break;
       case "target_glint":
-        self.see_recently_override = var1;
+        self.see_recently_override = var_1;
         break;
       case "target_smoke":
-        self.smoke = var1;
+        self.smoke = var_1;
         break;
       default:
         break;
     }
 
-    var1.target = "null";
-    var1.targetname = "null";
+    var_1.target = "null";
+    var_1.targetname = "null";
   }
 
   self.plate linkTo(self);
@@ -282,44 +282,44 @@ function target_think() {
 }
 
 function gettargetarray() {
-  var0 = ["standard_target", "moving_target", "civilian_target"];
-  var1 = [];
+  var_0 = ["standard_target", "moving_target", "civilian_target"];
+  var_1 = [];
 
-  for(var2 = 0; var2 < var0.size; var2++) {
-    var3 = scripts\engine\utility::getStructArray(var0[var2], "script_noteworthy");
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    var_3 = scripts\engine\utility::getStructArray(var_0[var_2], "script_noteworthy");
 
-    if(var0[var2] == "civilian_target") {
+    if(var_0[var_2] == "civilian_target") {
       if(level.trial["variant"] == "pistol") {
         continue;
       }
 
-      if(var3[var2].size > 0) {
+      if(var_3[var_2].size > 0) {
         level.show_marker_to_tv_station = 1;
       }
     }
 
-    foreach(var5 in var3[var2]) {
-      var6 = spawn("script_origin", var5.origin);
-      var6.angles = var5.angles;
-      var6.script_gameobjectname = var5.script_gameobjectname;
-      var6.script_linkname = var5.script_linkname;
-      var6.script_noteworthy = var5.script_noteworthy;
-      var6.target = var5.target;
-      var6.targetname = var5.targetname;
+    foreach(var_5 in var_3[var_2]) {
+      var_6 = spawn("script_origin", var_5.origin);
+      var_6.angles = var_5.angles;
+      var_6.script_gameobjectname = var_5.script_gameobjectname;
+      var_6.script_linkname = var_5.script_linkname;
+      var_6.script_noteworthy = var_5.script_noteworthy;
+      var_6.target = var_5.target;
+      var_6.targetname = var_5.targetname;
     }
   }
 
-  for(var2 = 0; var2 < var0.size; var2++) {
-    var1 = getEntArray(var0[var2], "script_noteworthy");
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    var_1 = getEntArray(var_0[var_2], "script_noteworthy");
   }
 
-  return scripts\engine\utility::array_combine_multiple(var1);
+  return scripts\engine\utility::array_combine_multiple(var_1);
 }
 
 function target_damage() {
   for(;;) {
     self.activated = 0;
-    self.plate waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+    self.plate waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
     self.plate playSound("trial_sfx_target_report_metal");
 
     if(isDefined(self.smoke)) {
@@ -367,8 +367,8 @@ function target_damage() {
   }
 }
 
-function target_flip(var0) {
-  if(var0 == "up") {
+function target_flip(var_0) {
+  if(var_0 == "up") {
     if(isDefined(self.script_delay)) {
       wait self.script_delay;
     }
@@ -384,7 +384,7 @@ function target_flip(var0) {
     }
 
     self.state_up = 1;
-    var1 = 1;
+    var_1 = 1;
     self.activated = 0;
   } else {
     self.plate setCanDamage(0);
@@ -398,18 +398,18 @@ function target_flip(var0) {
     }
 
     self.state_up = 0;
-    var1 = -1;
+    var_1 = -1;
   }
 
-  var2 = undefined;
-  var3 = undefined;
+  var_2 = undefined;
+  var_3 = undefined;
 
   switch (self.script_noteworthy) {
     case "civilian_target":
     case "moving_target":
     case "standard_target":
-      var3 = 90;
-      var2 = 0.1;
+      var_3 = 90;
+      var_2 = 0.1;
       break;
     default:
       break;
@@ -421,17 +421,17 @@ function target_flip(var0) {
     waitframe();
   }
 
-  if(var1 == "up") {
+  if(var_1 == "up") {
     self playsoundonmovingent("trial_sfx_target_flipup");
   }
 
   if(self.initial_up[1] != 0) {
-    self rotateYaw(-1 * self.initial_up[1] * var3 * var1, var2);
+    self rotateYaw(-1 * self.initial_up[1] * var_3 * var_1, var_2);
   } else {
-    self rotatepitch(self.initial_up[2] * var3 * var1, var2);
+    self rotatepitch(self.initial_up[2] * var_3 * var_1, var_2);
   }
 
-  wait var2;
+  wait var_2;
   self.flipping = 0;
 }
 
@@ -531,60 +531,60 @@ function trial_score_init() {
   score_calculate();
 }
 
-function score_event_target_hit(var0) {
-  level.score["target_hit"] = level.score["target_hit"] + var0;
-  level.player thread scripts\mp\rank::scorepointspopup(var0);
+function score_event_target_hit(var_0) {
+  level.score["target_hit"] = level.score["target_hit"] + var_0;
+  level.player thread scripts\mp\rank::scorepointspopup(var_0);
   waitframe();
   score_calculate();
 }
 
-function score_event_collateral(var0) {
-  var1 = 50 * (var0 - 1);
-  level.score["collateral"] = level.score["collateral"] + var1;
+function score_event_collateral(var_0) {
+  var_1 = 50 * (var_0 - 1);
+  level.score["collateral"] = level.score["collateral"] + var_1;
 
-  switch (var0) {
+  switch (var_0) {
     case 3:
-      var2 = "trial_collateral_triple";
+      var_2 = "trial_collateral_triple";
       break;
     case 4:
-      var2 = "trial_collateral_quad";
+      var_2 = "trial_collateral_quad";
       break;
     default:
-      var2 = "trial_collateral";
+      var_2 = "trial_collateral";
       break;
   }
 
-  level.player thread scripts\mp\rank::scoreeventpopup(var2);
-  level.player thread scripts\mp\rank::scorepointspopup(var2);
+  level.player thread scripts\mp\rank::scoreeventpopup(var_2);
+  level.player thread scripts\mp\rank::scorepointspopup(var_2);
   level notify("trial_sniper_collateral");
 }
 
-function score_event_time_remaining(var0, var1, var2, var3) {
-  if(isDefined(var0)) {
-    level.score["time_remaining_w1"] = scripts\mp\utility\script::limitdecimalplaces(var0 / 1000, 1) * 10;
-    _tablethide::trial_ui_set_stat_and_bonus_score(1, "wave_1_time_remaining", var0, level.score["time_remaining_w1"]);
+function score_event_time_remaining(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_0)) {
+    level.score["time_remaining_w1"] = scripts\mp\utility\script::limitdecimalplaces(var_0 / 1000, 1) * 10;
+    _tablethide::trial_ui_set_stat_and_bonus_score(1, "wave_1_time_remaining", var_0, level.score["time_remaining_w1"]);
   }
 
-  if(isDefined(var1)) {
-    level.score["time_remaining_w2"] = scripts\mp\utility\script::limitdecimalplaces(var1 / 1000, 1) * 10;
-    _tablethide::trial_ui_set_stat_and_bonus_score(2, "wave_2_time_remaining", var1, level.score["time_remaining_w2"]);
+  if(isDefined(var_1)) {
+    level.score["time_remaining_w2"] = scripts\mp\utility\script::limitdecimalplaces(var_1 / 1000, 1) * 10;
+    _tablethide::trial_ui_set_stat_and_bonus_score(2, "wave_2_time_remaining", var_1, level.score["time_remaining_w2"]);
   }
 
-  if(isDefined(var2)) {
-    level.score["time_remaining_w3"] = scripts\mp\utility\script::limitdecimalplaces(var2 / 1000, 1) * 10;
-    _tablethide::trial_ui_set_stat_and_bonus_score(3, "wave_3_time_remaining", var2, level.score["time_remaining_w3"]);
+  if(isDefined(var_2)) {
+    level.score["time_remaining_w3"] = scripts\mp\utility\script::limitdecimalplaces(var_2 / 1000, 1) * 10;
+    _tablethide::trial_ui_set_stat_and_bonus_score(3, "wave_3_time_remaining", var_2, level.score["time_remaining_w3"]);
   }
 
-  if(isDefined(var3)) {
-    level.score["time_remaining_w4"] = scripts\mp\utility\script::limitdecimalplaces(var3 / 1000, 1) * 10;
-    _tablethide::trial_ui_set_stat_and_bonus_score(4, "wave_4_time_remaining", var3, level.score["time_remaining_w4"]);
+  if(isDefined(var_3)) {
+    level.score["time_remaining_w4"] = scripts\mp\utility\script::limitdecimalplaces(var_3 / 1000, 1) * 10;
+    _tablethide::trial_ui_set_stat_and_bonus_score(4, "wave_4_time_remaining", var_3, level.score["time_remaining_w4"]);
     return;
   }
 }
 
-function score_calculate(var0) {
-  if(!isDefined(var0)) {
-    var0 = 0;
+function score_calculate(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
   level.score["subtotal"] = level.score["target_hit"] + level.score["collateral"];
@@ -592,7 +592,7 @@ function score_calculate(var0) {
   _tablethide::trial_ui_set_subscore(level.score["subtotal"]);
   hud_set_reward_tier();
 
-  if(var0) {
+  if(var_0) {
     _tablethide::trial_ui_set_secondary_timer(-1);
     wait 1;
 
@@ -633,72 +633,72 @@ function hud_init() {
   _tablethide::trial_ui_set_objective_icon_index(1);
 }
 
-function hud_set_reward_tier(var0) {
-  if(!isDefined(var0)) {
-    var0 = 0;
+function hud_set_reward_tier(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  if(var0) {
-    var1 = level.score["best"];
+  if(var_0) {
+    var_1 = level.score["best"];
   } else {
-    var1 = level.score["subtotal"];
+    var_1 = level.score["subtotal"];
   }
 
-  if(var1 >= level.trial["tier3"]) {
-    var2 = 3;
-  } else if(var2 >= level.trial["tier2"]) {
-    var3 = level.trial["tier3"] - level.trial["tier2"];
-    var4 = var2 - level.trial["tier2"];
-    var2 = 2 + var4 / var3;
-  } else if(var2 >= level.trial["tier1"]) {
-    var3 = level.trial["tier2"] - level.trial["tier1"];
-    var4 = var2 - level.trial["tier1"];
-    var2 = 1 + var4 / var3;
+  if(var_1 >= level.trial["tier3"]) {
+    var_2 = 3;
+  } else if(var_2 >= level.trial["tier2"]) {
+    var_3 = level.trial["tier3"] - level.trial["tier2"];
+    var_4 = var_2 - level.trial["tier2"];
+    var_2 = 2 + var_4 / var_3;
+  } else if(var_2 >= level.trial["tier1"]) {
+    var_3 = level.trial["tier2"] - level.trial["tier1"];
+    var_4 = var_2 - level.trial["tier1"];
+    var_2 = 1 + var_4 / var_3;
   } else {
-    var2 /= level.trial["tier1"];
+    var_2 /= level.trial["tier1"];
   }
 
-  if(var2) {
-    _tablethide::trial_ui_set_reward_tier(var2);
+  if(var_2) {
+    _tablethide::trial_ui_set_reward_tier(var_2);
 
-    if(var2 >= level.trial["tier3"]) {
-      var5 = game["music"]["trials_win_high"].size;
-      var6 = randomint(var5);
-      level.player setplayermusicstate(game["music"]["trials_win_high"][var6]);
+    if(var_2 >= level.trial["tier3"]) {
+      var_5 = game["music"]["trials_win_high"].size;
+      var_6 = randomint(var_5);
+      level.player setplayermusicstate(game["music"]["trials_win_high"][var_6]);
       return;
     }
 
-    if(var5 >= level.trial["tier2"]) {
-      var5 = game["music"]["trials_win_mid"].size;
-      var6 = randomint(var5);
-      level.player setplayermusicstate(game["music"]["trials_win_mid"][var6]);
+    if(var_5 >= level.trial["tier2"]) {
+      var_5 = game["music"]["trials_win_mid"].size;
+      var_6 = randomint(var_5);
+      level.player setplayermusicstate(game["music"]["trials_win_mid"][var_6]);
       return;
     }
 
-    if(var5 >= level.trial["tier1"]) {
-      var5 = game["music"]["trials_win_low"].size;
-      var6 = randomint(var5);
-      level.player setplayermusicstate(game["music"]["trials_win_low"][var6]);
+    if(var_5 >= level.trial["tier1"]) {
+      var_5 = game["music"]["trials_win_low"].size;
+      var_6 = randomint(var_5);
+      level.player setplayermusicstate(game["music"]["trials_win_low"][var_6]);
       return;
     }
 
-    var5 = game["music"]["trials_loss"].size;
-    var6 = randomint(var5);
-    level.player setplayermusicstate(game["music"]["trials_loss"][var6]);
+    var_5 = game["music"]["trials_loss"].size;
+    var_6 = randomint(var_5);
+    level.player setplayermusicstate(game["music"]["trials_loss"][var_6]);
     return;
   }
 
-  _tablethide::trial_ui_set_reward_tier_preview(var6);
+  _tablethide::trial_ui_set_reward_tier_preview(var_6);
 }
 
-function hud_inter_round_flow(var0) {
+function hud_inter_round_flow(var_0) {
   _tablethide::trial_ui_freeze_secondary_timer(1);
-  setomnvar("ui_match_start_text", "wave_" + var0 + "_start");
+  setomnvar("ui_match_start_text", "wave_" + var_0 + "_start");
   level.player playSound("trial_sfx_success");
 
-  if(istrue(level.ref_13d94) && isDefined(level.ref_13d95) && level.ref_13d95 == var0) {
-    var1 = scripts\engine\utility::getStruct("trial_wp", "targetname");
-    thread ref_13d6b(var1);
+  if(istrue(level.ref_13d94) && isDefined(level.ref_13d95) && level.ref_13d95 == var_0) {
+    var_1 = scripts\engine\utility::getStruct("trial_wp", "targetname");
+    thread ref_13d6b(var_1);
     scripts\mp\gamelogic::teamstarttimer(level.player.team, 10);
   } else {
     scripts\mp\gamelogic::teamstarttimer(level.player.team, 5);
@@ -707,7 +707,7 @@ function hud_inter_round_flow(var0) {
   level.player setclientomnvar("ui_match_start_countdown", -1);
   setomnvar("ui_match_start_text", "none");
   level.player playSound("trial_sfx_start");
-  level.target_wave = var0;
+  level.target_wave = var_0;
   _tablethide::trial_ui_set_wave(level.target_wave, 4);
   _tablethide::trial_ui_freeze_secondary_timer(0);
   level.player scripts\mp\utility\dialog::leaderdialogonplayer("kh_sniper_search");
@@ -742,47 +742,47 @@ function dialog_collateral_watcher() {
 }
 
 function dialog_missed_shots_watcher() {
-  var0 = 1;
-  var1 = 1;
+  var_0 = 1;
+  var_1 = 1;
 
   for(;;) {
     level waittill("new_wave");
     level.shotsmissedcount = 0;
 
     for(;;) {
-      level.player waittill("weapon_fired", var2, var3, var4);
-      var5 = anglesToForward(var4);
+      level.player waittill("weapon_fired", var_2, var_3, var_4);
+      var_5 = anglesToForward(var_4);
       level.shotsmissedcount++;
       waitframe();
 
       if(level.shotsmissedcount > 2) {
-        if(var0) {
-          var6 = undefined;
-          var7 = undefined;
-          var8 = undefined;
-          var9 = 360;
+        if(var_0) {
+          var_6 = undefined;
+          var_7 = undefined;
+          var_8 = undefined;
+          var_9 = 360;
 
-          foreach(var11 in level.ref_13d7c[level.target_wave]) {
-            var12 = var11.origin + (0, 0, 42);
-            var13 = distance(var3, var12);
-            var14 = var5 * var13;
-            var15 = vectortoangles(var12 - var3);
-            var16 = anglesdelta(var4, var15);
+          foreach(var_11 in level.ref_13d7c[level.target_wave]) {
+            var_12 = var_11.origin + (0, 0, 42);
+            var_13 = distance(var_3, var_12);
+            var_14 = var_5 * var_13;
+            var_15 = vectortoangles(var_12 - var_3);
+            var_16 = anglesdelta(var_4, var_15);
 
-            if(var16 < var9) {
-              var9 = var16;
-              var6 = var11;
-              var7 = var12;
-              var8 = var13;
+            if(var_16 < var_9) {
+              var_9 = var_16;
+              var_6 = var_11;
+              var_7 = var_12;
+              var_8 = var_13;
             }
           }
 
-          if(distance(var3, var6.origin) >= 4000) {
-            var18 = distance(var3 + var5 * var8, var7);
+          if(distance(var_3, var_6.origin) >= 4000) {
+            var_18 = distance(var_3 + var_5 * var_8, var_7);
 
-            if(var18 <= 64) {
+            if(var_18 <= 64) {
               level.player scripts\mp\utility\dialog::leaderdialogonplayer("sniper_nag_bulletdrop");
-              var0 = 0;
+              var_0 = 0;
               break;
             }
           }
@@ -815,8 +815,8 @@ function lgwperifvfx_plumes() {
 function infinite_reserve_ammo_not_revolver() {
   level endon("game_ended");
   self endon("disconnect");
-  var0 = getEnt("trial_starting_weapon", "script_noteworthy");
-  var1 = strtok(var0.script_parameters, "+")[0];
+  var_0 = getEnt("trial_starting_weapon", "script_noteworthy");
+  var_1 = strtok(var_0.script_parameters, "+")[0];
 
   for(;;) {
     jumpiftrue(isDefined(self.currentprimaryweapon)) LOC_0000003e;
@@ -824,21 +824,21 @@ function infinite_reserve_ammo_not_revolver() {
   }
 
   for(;;) {
-    var2 = self.currentprimaryweapon;
+    var_2 = self.currentprimaryweapon;
 
-    if(issubstr(var2.basename, var1)) {
-      self setweaponammostock(var2, 0);
+    if(issubstr(var_2.basename, var_1)) {
+      self setweaponammostock(var_2, 0);
     } else {
-      self givemaxammo(var2);
+      self givemaxammo(var_2);
     }
 
     waitframe();
   }
 }
 
-function ref_13d6b(var0) {
+function ref_13d6b(var_0) {
   level.player thread scripts\mp\utility\dialog::leaderdialogonplayer(level.player.team + "_enemy_white_phosphorus_inbound");
-  var1 = [];
+  var_1 = [];
   GscBinSkip0(0x2e, 0, spawnStruct());
 }
 
@@ -855,13 +855,13 @@ function ref_13d7e() {
     self playSound("gos_firework_scream_sfx");
 
     if(isDefined(self.script_noteworthy)) {
-      var0 = 3 - float(self.script_noteworthy);
+      var_0 = 3 - float(self.script_noteworthy);
     } else {
-      var0 = 3;
+      var_0 = 3;
     }
 
-    if(var0 > 0) {
-      wait var0;
+    if(var_0 > 0) {
+      wait var_0;
     }
 
     stopFXOnTag(scripts\engine\utility::getfx("trial_flare"), self, "j_top");
@@ -887,12 +887,12 @@ function build_vehicle_drop_off_list() {
 }
 
 function ref_13d39() {
-  var0 = level.trial["missionID"];
-  var1 = getomnvar("ui_trial_reward_tier");
-  var2 = getomnvar("ui_trial_best_score");
-  var3 = int(game["trial"]["analytics"]["wave1time"]);
-  var4 = int(game["trial"]["analytics"]["wave2time"]);
-  var5 = int(game["trial"]["analytics"]["wave3time"]);
-  var6 = int(game["trial"]["analytics"]["wave4time"]);
-  level.player dlog_recordplayerevent("dlog_event_trial_complete_sniper", ["id", var0, "tier", var1, "score", var2, "wave1time", var3, "wave2time", var4, "wave3time", var5, "wave4time", var6]);
+  var_0 = level.trial["missionID"];
+  var_1 = getomnvar("ui_trial_reward_tier");
+  var_2 = getomnvar("ui_trial_best_score");
+  var_3 = int(game["trial"]["analytics"]["wave1time"]);
+  var_4 = int(game["trial"]["analytics"]["wave2time"]);
+  var_5 = int(game["trial"]["analytics"]["wave3time"]);
+  var_6 = int(game["trial"]["analytics"]["wave4time"]);
+  level.player dlog_recordplayerevent("dlog_event_trial_complete_sniper", ["id", var_0, "tier", var_1, "score", var_2, "wave1time", var_3, "wave2time", var_4, "wave3time", var_5, "wave4time", var_6]);
 }

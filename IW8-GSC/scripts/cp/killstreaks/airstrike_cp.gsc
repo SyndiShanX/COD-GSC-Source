@@ -31,8 +31,8 @@ function init_airstrike_params() {
   level.eairstrikeheight = getEnt("airstrikeheight", "targetname");
 
   if(!isDefined(level.eairstrikeheight)) {
-    var0 = (-16, 0, 2576);
-    level.eairstrikeheight = spawn("script_origin", var0);
+    var_0 = (-16, 0, 2576);
+    level.eairstrikeheight = spawn("script_origin", var_0);
     level.eairstrikeheight.targetname = "airstrikeheight";
   }
 
@@ -52,22 +52,22 @@ function init_airstrike_params() {
   }
 }
 
-function airstrike_getmapselectpoint(var0, var1, var2) {
-  return scripts\cp\cp_mapselect::getselectmappoint(var0, var1, var2);
+function airstrike_getmapselectpoint(var_0, var_1, var_2) {
+  return scripts\cp\cp_mapselect::getselectmappoint(var_0, var_1, var_2);
 }
 
-function airstrike_showerrormessage(var0) {}
+function airstrike_showerrormessage(var_0) {}
 
-function airstrike_startmapselectsequence(var0, var1, var2) {
-  scripts\cp\cp_mapselect::startmapselectsequence(var0, var1, var2);
+function airstrike_startmapselectsequence(var_0, var_1, var_2) {
+  scripts\cp\cp_mapselect::startmapselectsequence(var_0, var_1, var_2);
 }
 
-function airstrike_addspawndangerzone(var0, var1, var2, var3, var4, var5, var6, var7, var8) {}
+function airstrike_addspawndangerzone(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {}
 
-function airstrike_munitionused(var0, var1) {
+function airstrike_munitionused(var_0, var_1) {
   self notify("munitions_used", "precision_airstrike");
 
-  foreach(var3 in level.players) {
-    var3 thread scripts\cp\cp_hud_message::showsplash("cp_used_precision_airstrike", undefined, self);
+  foreach(var_3 in level.players) {
+    var_3 thread scripts\cp\cp_hud_message::showsplash("cp_used_precision_airstrike", undefined, self);
   }
 }

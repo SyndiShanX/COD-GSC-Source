@@ -3,15 +3,15 @@
  * Script: scripts\opaque\58341.gsc
 ***********************************************/
 
-function get_ai_spawner(var0, var1, var2) {
-  if(!isDefined(var2)) {
-    var2 = 6;
+function get_ai_spawner(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
+    var_2 = 6;
   }
 
-  var3 = (0, 0, 1) * var2;
-  var4 = var0 + var3;
-  var5 = var1 + var3;
-  return capsuletracepassed(var4, self.radius, self.height - var2, self, 1, 0, 0, var5);
+  var_3 = (0, 0, 1) * var_2;
+  var_4 = var_0 + var_3;
+  var_5 = var_1 + var_3;
+  return capsuletracepassed(var_4, self.radius, self.height - var_2, self, 1, 0, 0, var_5);
 }
 
 function resetbreakertostate() {
@@ -22,73 +22,73 @@ function request_warning_level() {
   return 360 / resetbreakertostate();
 }
 
-function ref_11bca(var0, var1, var2) {
-  var3 = var1 * request_warning_level() - 180;
-  var4 = var0 + anglesToForward((0, var3, 0)) * var2;
-  return var4;
+function ref_11bca(var_0, var_1, var_2) {
+  var_3 = var_1 * request_warning_level() - 180;
+  var_4 = var_0 + anglesToForward((0, var_3, 0)) * var_2;
+  return var_4;
 }
 
-function requiredcardtype(var0) {
-  return self.ref_11bc9[var0];
+function requiredcardtype(var_0) {
+  return self.ref_11bc9[var_0];
 }
 
-function ref_140d0(var0) {
+function ref_140d0(var_0) {
   if(!isDefined(self.ref_11bc9)) {
     self.ref_11bc9 = [];
   }
 
-  if(!isDefined(self.ref_11bc9[var0])) {
-    self.ref_11bc9[var0] = [];
+  if(!isDefined(self.ref_11bc9[var_0])) {
+    self.ref_11bc9[var_0] = [];
 
-    for(var1 = 0; var1 < resetbreakertostate(); var1++) {
-      self.ref_11bc9[var0][var1] = spawnStruct();
-      self.ref_11bc9[var0][var1].timestamp = 0;
-      self.ref_11bc9[var0][var1].claimer = undefined;
-      self.ref_11bc9[var0][var1].origin = undefined;
-      self.ref_11bc9[var0][var1].num = var1;
+    for(var_1 = 0; var_1 < resetbreakertostate(); var_1++) {
+      self.ref_11bc9[var_0][var_1] = spawnStruct();
+      self.ref_11bc9[var_0][var_1].timestamp = 0;
+      self.ref_11bc9[var_0][var_1].claimer = undefined;
+      self.ref_11bc9[var_0][var_1].origin = undefined;
+      self.ref_11bc9[var_0][var_1].num = var_1;
     }
 
     return;
   }
 }
 
-function respawn_after_death(var0) {
-  var1 = var0.origin;
+function respawn_after_death(var_0) {
+  var_1 = var_0.origin;
 
-  if(isDefined(var0.groundpos)) {
-    var1 = var0.groundpos;
+  if(isDefined(var_0.groundpos)) {
+    var_1 = var_0.groundpos;
 
-    if(isDefined(self.lootcachesopened) && var0 == self.lootcachesopened && should_enter_combat_after_checking_gas_grenade()) {
-      var2 = reset_global_stealth_settings();
+    if(isDefined(self.lootcachesopened) && var_0 == self.lootcachesopened && should_enter_combat_after_checking_gas_grenade()) {
+      var_2 = reset_global_stealth_settings();
 
-      if(isDefined(var2)) {
-        var1 = var2.origin;
+      if(isDefined(var_2)) {
+        var_1 = var_2.origin;
       }
     }
-  } else if(isPlayer(var0) && (var0 isjumping() || var0 ishighjumping())) {
-    if(!isDefined(var0.ref_125bb)) {
-      var0.ref_125bb = 0;
+  } else if(isPlayer(var_0) && (var_0 isjumping() || var_0 ishighjumping())) {
+    if(!isDefined(var_0.ref_125bb)) {
+      var_0.ref_125bb = 0;
     }
 
-    if(gettime() > var0.ref_125bb) {
-      var0.ref_125ba = getgroundposition(var0.origin, 15);
-      var0.ref_125bb = gettime();
+    if(gettime() > var_0.ref_125bb) {
+      var_0.ref_125ba = getgroundposition(var_0.origin, 15);
+      var_0.ref_125bb = gettime();
     }
 
-    if(isDefined(var0.ref_125ba)) {
-      var1 = var0.ref_125ba;
+    if(isDefined(var_0.ref_125ba)) {
+      var_1 = var_0.ref_125ba;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function show_deposit_hint(var0, var1) {
-  for(var2 = 0; var2 < resetbreakertostate(); var2++) {
-    var3 = requiredcardtype(var0, var1);
-    var4 = var3[var2];
+function show_deposit_hint(var_0, var_1) {
+  for(var_2 = 0; var_2 < resetbreakertostate(); var_2++) {
+    var_3 = requiredcardtype(var_0, var_1);
+    var_4 = var_3[var_2];
 
-    if(isDefined(var4.origin)) {
+    if(isDefined(var_4.origin)) {
       return true;
     }
   }
@@ -97,16 +97,16 @@ function show_deposit_hint(var0, var1) {
 }
 
 function freefall_start() {
-  var0 = self getnearestnode();
+  var_0 = self getnearestnode();
 }
 
 function should_enter_combat_after_checking_gas_grenade() {
-  var0 = self getnearestnode();
+  var_0 = self getnearestnode();
 
-  if(isDefined(var0) && isDefined(self.lootcachesopened.ref_11e35)) {
-    var1 = self.lootcachesopened.ref_11e35["0"];
+  if(isDefined(var_0) && isDefined(self.lootcachesopened.ref_11e35)) {
+    var_1 = self.lootcachesopened.ref_11e35["0"];
 
-    if(isDefined(var1)) {
+    if(isDefined(var_1)) {
       return true;
     }
   }
@@ -115,11 +115,11 @@ function should_enter_combat_after_checking_gas_grenade() {
 }
 
 function reset_global_stealth_settings() {
-  var0 = self getnearestnode();
-  var1 = self.lootcachesopened.ref_11e35["0"];
+  var_0 = self getnearestnode();
+  var_1 = self.lootcachesopened.ref_11e35["0"];
 
-  if(!isnumber(var1)) {
-    return var1;
+  if(!isnumber(var_1)) {
+    return var_1;
   }
 
   return undefined;
@@ -127,9 +127,9 @@ function reset_global_stealth_settings() {
 
 function ref_1332a() {
   if(should_enter_combat_after_checking_gas_grenade()) {
-    var0 = reset_global_stealth_settings();
+    var_0 = reset_global_stealth_settings();
 
-    if(!isDefined(var0)) {
+    if(!isDefined(var_0)) {
       return false;
     }
   }
@@ -137,8 +137,8 @@ function ref_1332a() {
   return true;
 }
 
-function unset_force_aitype_shotgun(var0) {
-  if(isDefined(self.lootcachesopened) && var0 == self.lootcachesopened) {
+function unset_force_aitype_shotgun(var_0) {
+  if(isDefined(self.lootcachesopened) && var_0 == self.lootcachesopened) {
     if(self.lootcachespawncontents > 5) {
       return true;
     }
@@ -147,68 +147,68 @@ function unset_force_aitype_shotgun(var0) {
   return false;
 }
 
-function requiredplayercountoveride(var0, var1) {
-  var2 = 0;
+function requiredplayercountoveride(var_0, var_1) {
+  var_2 = 0;
 
-  if(var2) {
-    return var0.origin;
+  if(var_2) {
+    return var_0.origin;
   }
 
   if(getdvarint("scr_zombieDisableMeleeSectors", 0)) {
-    return var0.origin;
+    return var_0.origin;
   }
 
-  ref_140d0(var0, self.ref_11bcb);
-  var3 = requiredcardtype(var0, self.ref_11bcb);
-  var4 = var1;
-  var5 = self.origin - var4;
-  var6 = lengthsquared(var5);
-  jumpiffalse(var6 < 256) LOC_000000b4;
-  var7 = -1;
+  ref_140d0(var_0, self.ref_11bcb);
+  var_3 = requiredcardtype(var_0, self.ref_11bcb);
+  var_4 = var_1;
+  var_5 = self.origin - var_4;
+  var_6 = lengthsquared(var_5);
+  jumpiffalse(var_6 < 256) LOC_000000b4;
+  var_7 = -1;
 
-  for(var8 = 0; var8 < resetbreakertostate(); var8++) {
-    var9 = var3[var8];
+  for(var_8 = 0; var_8 < resetbreakertostate(); var_8++) {
+    var_9 = var_3[var_8];
 
-    if(isDefined(var9.claimer) && var9.claimer == self) {
-      var7 = var9.num;
+    if(isDefined(var_9.claimer) && var_9.claimer == self) {
+      var_7 = var_9.num;
     }
   }
 
-  if(var7 < 0) {
-    var7 = self getentitynumber() % resetbreakertostate();
+  if(var_7 < 0) {
+    var_7 = self getentitynumber() % resetbreakertostate();
   }
 
-  var10 = var7;
+  var_10 = var_7;
   goto LOC_000000dd;
 }
 
-function ref_13e09(var0, var1, var2, var3) {
-  if(gettime() - var0.timestamp >= 50) {
-    var0.origin = ref_11bca(var1, var0.num, var2);
-    var0.origin = modifybrgasdamage(var0.origin, var3, 55);
-    var0.timestamp = gettime();
+function ref_13e09(var_0, var_1, var_2, var_3) {
+  if(gettime() - var_0.timestamp >= 50) {
+    var_0.origin = ref_11bca(var_1, var_0.num, var_2);
+    var_0.origin = modifybrgasdamage(var_0.origin, var_3, 55);
+    var_0.timestamp = gettime();
     return;
   }
 }
 
-function modifybrgasdamage(var0, var1, var2, var3) {
-  if(!isDefined(var3)) {
-    var3 = 18;
+function modifybrgasdamage(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_3)) {
+    var_3 = 18;
   }
 
-  var4 = var0 + (0, 0, var3);
-  var5 = var0 + (0, 0, var3 * -1);
-  var6 = self aiphysicstrace(var4, var5, var1, var2, 1);
+  var_4 = var_0 + (0, 0, var_3);
+  var_5 = var_0 + (0, 0, var_3 * -1);
+  var_6 = self aiphysicstrace(var_4, var_5, var_1, var_2, 1);
 
-  if(abs(var6[2] - var4[2]) < 0.1) {
+  if(abs(var_6[2] - var_4[2]) < 0.1) {
     return undefined;
   }
 
-  if(abs(var6[2] - var5[2]) < 0.1) {
+  if(abs(var_6[2] - var_5[2]) < 0.1) {
     return undefined;
   }
 
-  return var6;
+  return var_6;
 }
 
 function uavdirectionalid() {
@@ -231,14 +231,14 @@ function required_tank_capacity() {
   return self.ref_11bc6;
 }
 
-function ref_11a68(var0, var1, var2, var3, var4, var5) {
-  self.ref_11a61 = var0 * 1000;
-  self.ref_11a62 = var3;
-  self.ref_11a60 = isDefined(var4) && var4;
-  self.ref_11a64 = var5;
-  self.ref_11a69 = var2;
+function ref_11a68(var_0, var_1, var_2, var_3, var_4, var_5) {
+  self.ref_11a61 = var_0 * 1000;
+  self.ref_11a62 = var_3;
+  self.ref_11a60 = isDefined(var_4) && var_4;
+  self.ref_11a64 = var_5;
+  self.ref_11a69 = var_2;
   self.ref_11a6a = squared(self.ref_11a69);
-  ref_13171(var1);
+  ref_13171(var_1);
 }
 
 function ref_11a66() {
@@ -262,15 +262,15 @@ function ref_11a65() {
   self.ref_11a67 = 0;
 }
 
-function make_all_oscilloscopes_usable(var0, var1, var2, var3) {
-  self.magic_shield_fake = var0 * 1000;
-  self.magic_rpg_ending = var1;
-  self.maderecentkill = var2;
+function make_all_oscilloscopes_usable(var_0, var_1, var_2, var_3) {
+  self.magic_shield_fake = var_0 * 1000;
+  self.magic_rpg_ending = var_1;
+  self.maderecentkill = var_2;
   self.lowpopstart = ["back", "right", "left"];
   self.lumberyard_suicide_truck_speed_manager = [];
 
-  foreach(var5 in self.lowpopstart) {
-    self.lumberyard_suicide_truck_speed_manager[var6] = level._effect[var3 + var5];
+  foreach(var_5 in self.lowpopstart) {
+    self.lumberyard_suicide_truck_speed_manager[var_6] = level._effect[var_3 + var_5];
   }
 }
 
@@ -295,16 +295,16 @@ function mainhouse_intel_sequence() {
   self.make_all_doors_solid = 0;
 }
 
-function wave_spawn_selector(var0, var1, var2, var3, var4, var5, var6) {
-  self.wave_ai_spawned = var0 * 1000;
-  self.wave_ai_killed = var1 * 1000;
-  self.wave_ai_debug = var2;
-  self.wave_goto_on_spawn = var3;
+function wave_spawn_selector(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  self.wave_ai_spawned = var_0 * 1000;
+  self.wave_ai_killed = var_1 * 1000;
+  self.wave_ai_debug = var_2;
+  self.wave_goto_on_spawn = var_3;
   self.wave_paused = squared(self.wave_goto_on_spawn);
-  self.wave_progression = var4;
+  self.wave_progression = var_4;
   self.wave_revive = squared(self.wave_progression);
-  self.wave_default_internal = var6;
-  self.wave_aggro_monitor = var5;
+  self.wave_default_internal = var_6;
+  self.wave_aggro_monitor = var_5;
   self.wave_enemies_remaining = 0;
   self.wave_failsafe_end = 0;
 }
@@ -330,7 +330,7 @@ function wave_airstrikes_allowed() {
   self.wave_default = 0;
 }
 
-function getbestspectatecandidate(var0, var1) {
+function getbestspectatecandidate(var_0, var_1) {
   self endon("death");
   self scragentsetscripted(1);
   scripts\mp\agents\scriptedagents::setstatelocked(1, "ChangeAnimClass");
@@ -338,119 +338,119 @@ function getbestspectatecandidate(var0, var1) {
   self scragentsetorientmode("face angle abs", (0, self.angles[1], 0));
   self scragentsetanimmode("anim deltas");
   self scragentsetanimscale(1, 1);
-  scripts\mp\agents\scriptedagents::playanimnuntilnotetrack_safe(var1, randomint(self getanimentrycount(var1)), "change_anim_class");
-  self setanimclass(var0);
+  scripts\mp\agents\scriptedagents::playanimnuntilnotetrack_safe(var_1, randomint(self getanimentrycount(var_1)), "change_anim_class");
+  self setanimclass(var_0);
   scripts\mp\agents\scriptedagents::setstatelocked(0, "ChangeAnimClass");
   self.trackcratemantlingexploit = 0;
   self scragentsetscripted(0);
 }
 
-function rungwperif_flak(var0) {
-  var1 = 50;
-  var2 = 32;
-  var3 = 72;
-  var4 = getmovedelta(var0);
-  var4 = rotatevector(var4, self.angles);
-  var5 = self.origin + var4;
-  var6 = (0, 0, var1);
-  var7 = self aiphysicstrace(var5 + var6, var5 - var6, var2, var3);
-  var8 = var7 - var5;
-  return var8[2];
+function rungwperif_flak(var_0) {
+  var_1 = 50;
+  var_2 = 32;
+  var_3 = 72;
+  var_4 = getmovedelta(var_0);
+  var_4 = rotatevector(var_4, self.angles);
+  var_5 = self.origin + var_4;
+  var_6 = (0, 0, var_1);
+  var_7 = self aiphysicstrace(var_5 + var_6, var_5 - var_6, var_2, var_3);
+  var_8 = var_7 - var_5;
+  return var_8[2];
 }
 
-function return_num_if_under_vehicle_cap(var0, var1, var2, var3) {
-  var4 = getanimlength(var0);
-  var5 = getmovedelta(var0, 0, var3 / var4);
-  var6 = rotatevector(var5, var2);
-  return var1 + var6;
+function return_num_if_under_vehicle_cap(var_0, var_1, var_2, var_3) {
+  var_4 = getanimlength(var_0);
+  var_5 = getmovedelta(var_0, 0, var_3 / var_4);
+  var_6 = rotatevector(var_5, var_2);
+  return var_1 + var_6;
 }
 
-function removeleadobjective(var0) {
-  var1 = 0.2;
-  var2 = getanimlength(var0);
-  return min(var1, var2);
+function removeleadobjective(var_0) {
+  var_1 = 0.2;
+  var_2 = getanimlength(var_0);
+  return min(var_1, var_2);
 }
 
-function ref_122f9(var0, var1) {
+function ref_122f9(var_0, var_1) {
   self endon("death");
   level endon("game_ended");
-  self scragentdoanimlerp(self.origin, var0, var1);
-  wait var1;
+  self scragentdoanimlerp(self.origin, var_0, var_1);
+  wait var_1;
   self scragentsetanimmode("anim deltas");
 }
 
-function respawn_waits(var0, var1) {
-  var2 = 0;
+function respawn_waits(var_0, var_1) {
+  var_2 = 0;
 
-  if(var1 > 1) {
-    var3 = int(var1 * 0.5);
-    var4 = var3 + var1 % 2;
+  if(var_1 > 1) {
+    var_3 = int(var_1 * 0.5);
+    var_4 = var_3 + var_1 % 2;
 
-    if(var0 < 0) {
-      var2 = randomint(var4);
+    if(var_0 < 0) {
+      var_2 = randomint(var_4);
     } else {
-      var2 = var3 + randomint(var4);
+      var_2 = var_3 + randomint(var_4);
     }
   }
 
-  return var2;
+  return var_2;
 }
 
-function unset_force_aitype_rpg(var0) {
-  var1 = self.origin[2] + self.height;
+function unset_force_aitype_rpg(var_0) {
+  var_1 = self.origin[2] + self.height;
 
-  if(var0.origin[2] < var1) {
+  if(var_0.origin[2] < var_1) {
     return false;
   }
 
-  var2 = self.origin[2] + self.height + 2 * self.radius;
+  var_2 = self.origin[2] + self.height + 2 * self.radius;
 
-  if(var0.origin[2] > var2) {
+  if(var_0.origin[2] > var_2) {
     return false;
   }
 
-  if(isPlayer(var0)) {
-    var3 = var0 getvelocity()[2];
+  if(isPlayer(var_0)) {
+    var_3 = var_0 getvelocity()[2];
 
-    if(abs(var3) > 12) {
+    if(abs(var_3) > 12) {
       return false;
     }
   }
 
-  var4 = 15;
+  var_4 = 15;
 
-  if(isDefined(var0.radius)) {
-    var4 = var0.radius;
+  if(isDefined(var_0.radius)) {
+    var_4 = var_0.radius;
   }
 
-  var5 = self.radius + var4;
-  var5 *= var5;
+  var_5 = self.radius + var_4;
+  var_5 *= var_5;
 
-  if(distance2dsquared(self.origin, var0.origin) > var5) {
+  if(distance2dsquared(self.origin, var_0.origin) > var_5) {
     return false;
   }
 
   return true;
 }
 
-function ref_1314e(var0) {
-  self.favoriteenemy = var0;
+function ref_1314e(var_0) {
+  self.favoriteenemy = var_0;
 }
 
-function is_vandalize_attack_available(var0, var1) {
-  var2 = 0;
+function is_vandalize_attack_available(var_0, var_1) {
+  var_2 = 0;
 
-  if(isDefined(var0)) {
-    var3 = var0 - self gettagorigin("J_SpineLower");
-    var3 = (var3[0], var3[1], 0);
-    var4 = vectortoangles(vectorNormalize(var3));
-    var2 = var4[1];
-  } else if(isDefined(var1)) {
-    var4 = vectortoangles(var1);
-    var2 = var4[1] - 180;
+  if(isDefined(var_0)) {
+    var_3 = var_0 - self gettagorigin("J_SpineLower");
+    var_3 = (var_3[0], var_3[1], 0);
+    var_4 = vectortoangles(vectorNormalize(var_3));
+    var_2 = var_4[1];
+  } else if(isDefined(var_1)) {
+    var_4 = vectortoangles(var_1);
+    var_2 = var_4[1] - 180;
   }
 
-  return var2;
+  return var_2;
 }
 
 function little_bird_initomnvars() {
@@ -491,12 +491,12 @@ function mortars_fire_projectile() {}
 function little_bird_mg_cp_create() {}
 
 function ref_131f2() {
-  var0 = clamp(level.ref_1452a / 20, 0, 1);
-  var1 = lerp(var0, 0.35, 0.55);
-  var2 = lerp(var0, 0.06, 0.12);
+  var_0 = clamp(level.ref_1452a / 20, 0, 1);
+  var_1 = lerp(var_0, 0.35, 0.55);
+  var_2 = lerp(var_0, 0.06, 0.12);
   ref_11a68(5, self.ref_11bc5 * 2, self.ref_11bc5 * 1.5, "attack_lunge_boost", level._effect["boost_lunge"]);
-  make_all_oscilloscopes_usable(5, var1, "dodge_boost", "boost_dodge_");
-  wave_spawn_selector(10, 2, var2, 550, 350, "leap_boost", level._effect["boost_jump"]);
+  make_all_oscilloscopes_usable(5, var_1, "dodge_boost", "boost_dodge_");
+  wave_spawn_selector(10, 2, var_2, 550, 350, "leap_boost", level._effect["boost_jump"]);
 }
 
 function mortars_fire_logic() {
@@ -505,11 +505,11 @@ function mortars_fire_logic() {
   wave_cooldown_sounds();
 }
 
-function lerp(var0, var1, var2) {
-  var3 = var2 - var1;
-  var4 = var0 * var3;
-  var5 = var1 + var4;
-  return var5;
+function lerp(var_0, var_1, var_2) {
+  var_3 = var_2 - var_1;
+  var_4 = var_0 * var_3;
+  var_5 = var_1 + var_4;
+  return var_5;
 }
 
 function little_bird_mg_collision_damage_watcher() {
@@ -518,59 +518,59 @@ function little_bird_mg_collision_damage_watcher() {
   wave_airstrikes_allowed();
 }
 
-function ref_123cd(var0) {
+function ref_123cd(var_0) {
   if(!isDefined(self.currentdebugweaponindex)) {
     return;
   }
 
   if(self.currentdebugweaponindex != "no_boost_fx") {
-    playFXOnTag(var0, self, self.currentdebugweaponindex);
+    playFXOnTag(var_0, self, self.currentdebugweaponindex);
     return;
   }
 }
 
-function player_in_laststand(var0) {
-  return var0.inlaststand;
+function player_in_laststand(var_0) {
+  return var_0.inlaststand;
 }
 
-function play_pullout_sequence(var0) {
-  var1 = [];
+function play_pullout_sequence(var_0) {
+  var_1 = [];
 
-  foreach(var3 in level.players) {
-    if(player_in_laststand(var3)) {
-      var1 = var3;
+  foreach(var_3 in level.players) {
+    if(player_in_laststand(var_3)) {
+      var_1 = var_3;
     }
   }
 
-  var5 = [];
+  var_5 = [];
 
-  foreach(var7 in var0) {
-    if(ref_11ea6(var7)) {
+  foreach(var_7 in var_0) {
+    if(ref_11ea6(var_7)) {
       continue;
     }
 
-    var8 = 0;
+    var_8 = 0;
 
-    foreach(var3 in var1) {
-      if(distancesquared(var7.origin, var3.origin) < 65536) {
-        var8 = 1;
+    foreach(var_3 in var_1) {
+      if(distancesquared(var_7.origin, var_3.origin) < 65536) {
+        var_8 = 1;
         break;
       }
     }
 
-    if(var8) {
+    if(var_8) {
       continue;
     }
 
-    var5 = var7;
+    var_5 = var_7;
   }
 
-  return var5;
+  return var_5;
 }
 
-function updateteamplunderhud(var0, var1) {
-  var2 = self.ref_11bc8 * self.ref_11bc8;
-  return distancesquared(var0, var1) <= var2;
+function updateteamplunderhud(var_0, var_1) {
+  var_2 = self.ref_11bc8 * self.ref_11bc8;
+  return distancesquared(var_0, var_1) <= var_2;
 }
 
 function ref_145d8() {
@@ -582,38 +582,38 @@ function ref_145d6() {
     return ref_145d7();
   }
 
-  var0 = distancesquared(self.origin, self.initial_forward.origin) <= required_tank_capacity();
-  return var0;
+  var_0 = distancesquared(self.origin, self.initial_forward.origin) <= required_tank_capacity();
+  return var_0;
 }
 
 function ref_145d7() {
-  var0 = distancesquared(self.origin, self.initial_forward.origin) <= self.ref_11bc6;
+  var_0 = distancesquared(self.origin, self.initial_forward.origin) <= self.ref_11bc6;
 
-  if(!var0 && (isPlayer(self.initial_forward) || isagent(self.initial_forward))) {
-    var1 = undefined;
-    var1 = self.initial_forward getgroundentity();
+  if(!var_0 && (isPlayer(self.initial_forward) || isagent(self.initial_forward))) {
+    var_1 = undefined;
+    var_1 = self.initial_forward getgroundentity();
 
-    if(isDefined(var1) && isDefined(var1.targetname) && var1.targetname == "care_package") {
-      var0 = distancesquared(self.origin, self.initial_forward.origin) <= self.ref_11bc6 * 4;
+    if(isDefined(var_1) && isDefined(var_1.targetname) && var_1.targetname == "care_package") {
+      var_0 = distancesquared(self.origin, self.initial_forward.origin) <= self.ref_11bc6 * 4;
     }
   }
 
-  if(!var0 && isPlayer(self.initial_forward) && istrue(self.initial_forward.unset_relic_squadlink)) {
+  if(!var_0 && isPlayer(self.initial_forward) && istrue(self.initial_forward.unset_relic_squadlink)) {
     if(length(self getvelocity()) < 5) {
-      var0 = distancesquared(self.origin, self.initial_forward.origin) <= self.ref_11bc6 * 4;
+      var_0 = distancesquared(self.origin, self.initial_forward.origin) <= self.ref_11bc6 * 4;
     }
   }
 
-  return var0;
+  return var_0;
 }
 
-function ref_13171(var0) {
-  self.ref_11bc4 = var0;
-  self.ref_11bc7 = var0 * var0;
+function ref_13171(var_0) {
+  self.ref_11bc4 = var_0;
+  self.ref_11bc7 = var_0 * var_0;
 }
 
-function ref_11ea6(var0) {
-  return !isDefined(var0.ref_14700);
+function ref_11ea6(var_0) {
+  return !isDefined(var_0.ref_14700);
 }
 
 function safehouse_vo_start() {
@@ -658,30 +658,30 @@ function lightscriptable() {
   return false;
 }
 
-function updatesuperuiprogress(var0, var1) {
-  var2 = 0;
-  var3 = var1[2] - var0[2];
-  var2 = var3 <= self.change_stealth_state_to_combat_warpper && var3 >= self.change_yaw_angle;
+function updatesuperuiprogress(var_0, var_1) {
+  var_2 = 0;
+  var_3 = var_1[2] - var_0[2];
+  var_2 = var_3 <= self.change_stealth_state_to_combat_warpper && var_3 >= self.change_yaw_angle;
 
-  if(!var2 && isPlayer(self.initial_forward) && istrue(self.initial_forward.unset_relic_squadlink)) {
+  if(!var_2 && isPlayer(self.initial_forward) && istrue(self.initial_forward.unset_relic_squadlink)) {
     if(length(self getvelocity()) < 5) {
-      var2 = var3 <= self.change_stealth_state_to_combat_warpper * 2 && var3 >= self.change_yaw_angle;
+      var_2 = var_3 <= self.change_stealth_state_to_combat_warpper * 2 && var_3 >= self.change_yaw_angle;
     }
   }
 
-  return var2;
+  return var_2;
 }
 
-function vehicle_collision_dvarinit(var0) {
-  return updatesuperuiprogress(self.origin, var0);
+function vehicle_collision_dvarinit(var_0) {
+  return updatesuperuiprogress(self.origin, var_0);
 }
 
-function updateteambettermissionrewardsui(var0, var1) {
-  return distance2dsquared(var0, var1) < required_tank_capacity() * 0.75 * 0.75;
+function updateteambettermissionrewardsui(var_0, var_1) {
+  return distance2dsquared(var_0, var_1) < required_tank_capacity() * 0.75 * 0.75;
 }
 
-function vehicle_collision_dvarupdate(var0) {
-  return updateteambettermissionrewardsui(self.origin, var0);
+function vehicle_collision_dvarupdate(var_0) {
+  return updateteambettermissionrewardsui(self.origin, var_0);
 }
 
 function ref_1441e() {
@@ -693,33 +693,33 @@ function ref_1441e() {
 }
 
 function update_hack_objective_marker() {
-  var0 = self.origin + (0, 0, self.ref_11bbb);
-  var1 = self.initial_forward.origin + (0, 0, self.ref_11bbb);
+  var_0 = self.origin + (0, 0, self.ref_11bbb);
+  var_1 = self.initial_forward.origin + (0, 0, self.ref_11bbb);
 
   if(!isPlayer(self.initial_forward) && !isai(self.initial_forward)) {
     return false;
   }
 
-  var2 = scripts\engine\trace::create_default_contents(1);
+  var_2 = scripts\engine\trace::create_default_contents(1);
 
-  if(scripts\engine\trace::ray_trace_passed(var0, var1, self.initial_forward, var2)) {
+  if(scripts\engine\trace::ray_trace_passed(var_0, var_1, self.initial_forward, var_2)) {
     return false;
   }
 
   return true;
 }
 
-function isreallyalive(var0) {
-  if(isalive(var0) && !isDefined(var0.fauxdead)) {
+function isreallyalive(var_0) {
+  if(isalive(var_0) && !isDefined(var_0.fauxdead)) {
     return true;
   }
 
   return false;
 }
 
-function ref_12a48(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = 1;
+function ref_12a48(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
   if(!isDefined(self.initial_forward)) {
@@ -739,20 +739,20 @@ function ref_12a48(var0, var1) {
       return false;
     }
 
-    if(var0 == "offmesh" && !ref_145d8()) {
+    if(var_0 == "offmesh" && !ref_145d8()) {
       return false;
     }
 
-    if(var0 == "normal" && !ref_145d6()) {
+    if(var_0 == "normal" && !ref_145d6()) {
       return false;
-    } else if(var0 == "base" && !ref_145d7()) {
+    } else if(var_0 == "base" && !ref_145d7()) {
       return false;
     }
   }
 
   self.wam_failure_threshold = undefined;
 
-  if(var1 && update_hack_objective_marker()) {
+  if(var_1 && update_hack_objective_marker()) {
     self.wam_failure_threshold = 1;
     return false;
   }
@@ -760,44 +760,44 @@ function ref_12a48(var0, var1) {
   return true;
 }
 
-function requested_veh_spawners(var0) {
+function requested_veh_spawners(var_0) {
   if(!isDefined(self.ref_11bba)) {
     self.ref_11bba = spawnStruct();
   }
 
-  if(unset_force_aitype_shotgun(var0) && !should_enter_combat_after_checking_gas_grenade()) {
+  if(unset_force_aitype_shotgun(var_0) && !should_enter_combat_after_checking_gas_grenade()) {
     freefall_start();
   }
 
-  var1 = respawn_after_death(var0);
-  self.ref_11bba.nuke_addteamrankxpmultiplier = var1;
-  var2 = requiredplayercountoveride(var0, var1);
+  var_1 = respawn_after_death(var_0);
+  self.ref_11bba.nuke_addteamrankxpmultiplier = var_1;
+  var_2 = requiredplayercountoveride(var_0, var_1);
 
-  if(isDefined(var2)) {
+  if(isDefined(var_2)) {
     self.ref_11bba.ref_140c0 = 1;
-    self.ref_11bba.origin = var2;
+    self.ref_11bba.origin = var_2;
   } else {
     self.ref_11bba.ref_140c0 = 0;
-    self.ref_11bba.origin = var1;
+    self.ref_11bba.origin = var_1;
 
     if(isDefined(self.lootcachesopened)) {
       if(!isDefined(modifybrgasdamage(self.ref_11bba.origin, 15, 55))) {
         if(!isDefined(self.ref_129fa)) {
           self.ref_129fa = [];
 
-          for(var3 = 0; var3 < resetbreakertostate(); var3++) {
-            self.ref_129fa[self.ref_129fa.size] = var3;
+          for(var_3 = 0; var_3 < resetbreakertostate(); var_3++) {
+            self.ref_129fa[self.ref_129fa.size] = var_3;
           }
 
           self.ref_129fa = scripts\engine\utility::array_randomize(self.ref_129fa);
         }
 
-        foreach(var5 in self.ref_129fa) {
-          var6 = requiredcardtype(var0, self.ref_11bcb);
-          var7 = var6[var5];
+        foreach(var_5 in self.ref_129fa) {
+          var_6 = requiredcardtype(var_0, self.ref_11bcb);
+          var_7 = var_6[var_5];
 
-          if(isDefined(var7.origin)) {
-            self.ref_11bba.origin = var7.origin;
+          if(isDefined(var_7.origin)) {
+            self.ref_11bba.origin = var_7.origin;
             break;
           }
         }
@@ -808,43 +808,43 @@ function requested_veh_spawners(var0) {
   return self.ref_11bba;
 }
 
-function ref_13303(var0, var1) {
-  if(istrue(player_in_laststand(var0))) {
+function ref_13303(var_0, var_1) {
+  if(istrue(player_in_laststand(var_0))) {
     return true;
   }
 
-  if(isDefined(var0.team) && isDefined(self.team) && self.team == var0.team) {
+  if(isDefined(var_0.team) && isDefined(self.team) && self.team == var_0.team) {
     return true;
   }
 
-  if(updateondamagepredamagemodrelics(var0)) {
+  if(updateondamagepredamagemodrelics(var_0)) {
     return true;
   }
 
-  if(isDefined(var0.killing_time)) {
+  if(isDefined(var_0.killing_time)) {
     return true;
   }
 
-  if(istrue(var0.notarget)) {
+  if(istrue(var_0.notarget)) {
     return true;
   }
 
-  if(istrue(var0.ignoreme)) {
+  if(istrue(var_0.ignoreme)) {
     return true;
   }
 
-  if(!isalive(var0)) {
+  if(!isalive(var_0)) {
     return true;
   }
 
-  if(!istrue(var1) && !istrue(self.ref_13305)) {
-    if(isDefined(var0.trial_targs) && !var0.trial_targs) {
+  if(!istrue(var_1) && !istrue(self.ref_13305)) {
+    if(isDefined(var_0.trial_targs) && !var_0.trial_targs) {
       return true;
     }
   }
 
   if(isDefined(level.ref_13304)) {
-    if([[level.ref_13304]](var0)) {
+    if([[level.ref_13304]](var_0)) {
       return true;
     }
   }
@@ -852,60 +852,60 @@ function ref_13303(var0, var1) {
   return false;
 }
 
-function updateondamagepredamagemodrelics(var0) {
-  return isDefined(var0.trial_flare_watcher) && var0.trial_flare_watcher;
+function updateondamagepredamagemodrelics(var_0) {
+  return isDefined(var_0.trial_flare_watcher) && var_0.trial_flare_watcher;
 }
 
-function get_all_doors_ai_should_open(var0, var1, var2) {
-  if(!isDefined(var2)) {
-    var2 = 6;
+function get_all_doors_ai_should_open(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
+    var_2 = 6;
   }
 
-  var3 = (0, 0, 1) * var2;
-  var4 = var0 + var3;
-  var5 = var1 + var3;
-  return capsuletracepassed(var4, self.radius, self.height - var2, self, 1, 0, 0, var5);
+  var_3 = (0, 0, 1) * var_2;
+  var_4 = var_0 + var_3;
+  var_5 = var_1 + var_3;
+  return capsuletracepassed(var_4, self.radius, self.height - var_2, self, 1, 0, 0, var_5);
 }
 
-function ishost(var0) {
-  return level.brclampstepdamage.iskillstreakdeployweapon["hitLoc"][var0];
+function ishost(var_0) {
+  return level.brclampstepdamage.iskillstreakdeployweapon["hitLoc"][var_0];
 }
 
-function ishotjoiningplayer(var0) {
-  var1 = scripts\mp\agents\scriptedagents::getangleindexfromselfyaw(var0);
-  return level.brclampstepdamage.iskillstreakdeployweapon["hitDirection"][var1];
+function ishotjoiningplayer(var_0) {
+  var_1 = scripts\mp\agents\scriptedagents::getangleindexfromselfyaw(var_0);
+  return level.brclampstepdamage.iskillstreakdeployweapon["hitDirection"][var_1];
 }
 
-function respawncircleinterppct(var0, var1, var2, var3) {
-  if(isDefined(var2)) {
-    var4 = var3[var0][var1][var2];
+function respawncircleinterppct(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_2)) {
+    var_4 = var_3[var_0][var_1][var_2];
   } else {
-    var4 = var4[var1][var2];
+    var_4 = var_4[var_1][var_2];
   }
 
-  return var4[randomint(var4.size)];
+  return var_4[randomint(var_4.size)];
 }
 
-function ref_13173(var0) {
-  self.legacy.movemode = var0;
+function ref_13173(var_0) {
+  self.legacy.movemode = var_0;
   scripts\asm\asm_bb::bb_requestmovetype(self.legacy.movemode);
 
-  if(var0 == "walk") {
+  if(var_0 == "walk") {
     self.ref_11eb2 = 0.8;
     return;
   }
 
-  if(var0 == "run") {
+  if(var_0 == "run") {
     self.ref_11eb2 = 1;
     return;
   }
 
-  if(var0 == "sprint") {
+  if(var_0 == "sprint") {
     self.ref_11eb2 = 1.2;
     return;
   }
 }
 
-function ref_131bb(var0) {
+function ref_131bb(var_0) {
   GscBinSkip1(0x45, "walk", [0.65, 1.2]);
 }

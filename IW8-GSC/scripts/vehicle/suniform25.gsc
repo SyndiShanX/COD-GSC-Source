@@ -3,8 +3,8 @@
  * Script: scripts\vehicle\suniform25.gsc
 ***********************************************/
 
-function main(var0, var1, var2) {
-  scripts\common\vehicle_build::build_template("jet", var0, var1, var2);
+function main(var_0, var_1, var_2) {
+  scripts\common\vehicle_build::build_template("jet", var_0, var_1, var_2);
   scripts\common\vehicle_build::build_localinit(&init_local);
   scripts\common\vehicle_build::build_deathmodel("veh8_mil_air_suniform25");
   scripts\common\vehicle_build::build_radiusdamage((0, 0, 0), 500, 120, 20);
@@ -16,16 +16,16 @@ function main(var0, var1, var2) {
 
 function init_local() {}
 
-function set_vehicle_anims(var0) {
-  return var0;
+function set_vehicle_anims(var_0) {
+  return var_0;
 }
 
 function setanims() {
-  var0 = [];
+  var_0 = [];
 
-  for(var1 = 0; var1 < 1; var1++) {
-    var0 = spawnStruct();
+  for(var_1 = 0; var_1 < 1; var_1++) {
+    var_0 = spawnStruct();
   }
 
-  return var0;
+  return var_0;
 }

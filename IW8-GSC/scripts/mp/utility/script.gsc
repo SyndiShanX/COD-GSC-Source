@@ -3,9 +3,9 @@
  * Script: scripts\mp\utility\script.gsc
 ***********************************************/
 
-function waittillslowprocessallowed(var0) {
+function waittillslowprocessallowed(var_0) {
   if(level.lastslowprocessframe == gettime()) {
-    if(isDefined(var0) && var0) {
+    if(isDefined(var_0) && var_0) {
       while(level.lastslowprocessframe == gettime()) {
         wait 0.05;
       }
@@ -29,188 +29,188 @@ function waittillslowprocessallowed(var0) {
   level.lastslowprocessframe = gettime();
 }
 
-function queuecreate(var0) {
+function queuecreate(var_0) {
   if(!isDefined(level.queues)) {
     level.queues = [];
   }
 
-  level.queues[var0] = [];
+  level.queues[var_0] = [];
 }
 
-function queueadd(var0, var1) {
-  level.queues[var0][level.queues[var0].size] = var1;
+function queueadd(var_0, var_1) {
+  level.queues[var_0][level.queues[var_0].size] = var_1;
 }
 
-function queueremovefirst(var0) {
-  var1 = undefined;
-  var2 = [];
+function queueremovefirst(var_0) {
+  var_1 = undefined;
+  var_2 = [];
 
-  foreach(var4 in level.queues[var0]) {
-    if(!isDefined(var4)) {
+  foreach(var_4 in level.queues[var_0]) {
+    if(!isDefined(var_4)) {
       continue;
     }
 
-    if(!isDefined(var1)) {
-      var1 = var4;
+    if(!isDefined(var_1)) {
+      var_1 = var_4;
       continue;
     }
 
-    var2 = var4;
+    var_2 = var_4;
   }
 
-  level.queues[var0] = var2;
-  return var1;
+  level.queues[var_0] = var_2;
+  return var_1;
 }
 
-function quicksort(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = &juggernaut_dmg_modifier;
+function quicksort(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = &juggernaut_dmg_modifier;
   }
 
-  var2 = 0;
-  var3 = var0.size - 1;
-  var4 = [var2, var3];
-  var5 = 1;
+  var_2 = 0;
+  var_3 = var_0.size - 1;
+  var_4 = [var_2, var_3];
+  var_5 = 1;
 
-  while(var5 >= 0) {
-    var3 = var4[var5];
-    var5--;
-    var2 = var4[var5];
-    var5--;
+  while(var_5 >= 0) {
+    var_3 = var_4[var_5];
+    var_5--;
+    var_2 = var_4[var_5];
+    var_5--;
 
-    if(var3 - var2 <= 9) {
-      var3++;
+    if(var_3 - var_2 <= 9) {
+      var_3++;
 
-      while(var2 < var3) {
-        var6 = var0[var2];
-        var7 = var2 - 1;
+      while(var_2 < var_3) {
+        var_6 = var_0[var_2];
+        var_7 = var_2 - 1;
 
-        while(var7 >= 0 && [[var1]](var6, var0[var7])) {
-          var0 = var0[var7];
-          var7 -= 1;
+        while(var_7 >= 0 && [[var_1]](var_6, var_0[var_7])) {
+          var_0 = var_0[var_7];
+          var_7 -= 1;
         }
 
-        var0 = var6;
-        var2 += 1;
+        var_0 = var_6;
+        var_2 += 1;
       }
 
       continue;
     }
 
-    var6 = var0[var3];
-    var8 = var2 - 1;
+    var_6 = var_0[var_3];
+    var_8 = var_2 - 1;
 
-    for(var7 = var2; var7 <= var3 - 1; var7++) {
-      if([[var1]](var0[var7], var6)) {
-        var8++;
-        var9 = var0[var8];
-        var0 = var0[var7];
-        var0 = var9;
+    for(var_7 = var_2; var_7 <= var_3 - 1; var_7++) {
+      if([[var_1]](var_0[var_7], var_6)) {
+        var_8++;
+        var_9 = var_0[var_8];
+        var_0 = var_0[var_7];
+        var_0 = var_9;
       }
     }
 
-    var8++;
-    var9 = var0[var8];
-    var0 = var0[var3];
-    var0 = var9;
+    var_8++;
+    var_9 = var_0[var_8];
+    var_0 = var_0[var_3];
+    var_0 = var_9;
 
-    if(var8 - 1 > var2) {
-      var5++;
-      var4 = var2;
-      var5++;
-      var4 = var8 - 1;
+    if(var_8 - 1 > var_2) {
+      var_5++;
+      var_4 = var_2;
+      var_5++;
+      var_4 = var_8 - 1;
     }
 
-    if(var8 + 1 < var3) {
-      var5++;
-      var4 = var8 + 1;
-      var5++;
-      var4 = var3;
+    if(var_8 + 1 < var_3) {
+      var_5++;
+      var_4 = var_8 + 1;
+      var_5++;
+      var_4 = var_3;
     }
   }
 
-  return var0;
+  return var_0;
 }
 
-function juggernaut_dmg_modifier(var0, var1) {
-  return var0 <= var1;
+function juggernaut_dmg_modifier(var_0, var_1) {
+  return var_0 <= var_1;
 }
 
-function limitdecimalplaces(var0, var1) {
-  var2 = 1;
+function limitdecimalplaces(var_0, var_1) {
+  var_2 = 1;
 
-  for(var3 = 0; var3 < var1; var3++) {
-    var2 *= 10;
+  for(var_3 = 0; var_3 < var_1; var_3++) {
+    var_2 *= 10;
   }
 
-  var4 = var0 * var2;
-  var4 = int(var4);
-  var4 /= var2;
-  return var4;
+  var_4 = var_0 * var_2;
+  var_4 = int(var_4);
+  var_4 /= var_2;
+  return var_4;
 }
 
-function rounddecimalplaces(var0, var1, var2) {
-  if(!isDefined(var2)) {
-    var2 = "nearest";
+function rounddecimalplaces(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
+    var_2 = "nearest";
   }
 
-  var3 = 1;
+  var_3 = 1;
 
-  for(var4 = 0; var4 < var1; var4++) {
-    var3 *= 10;
+  for(var_4 = 0; var_4 < var_1; var_4++) {
+    var_3 *= 10;
   }
 
-  var5 = var0 * var3;
+  var_5 = var_0 * var_3;
 
-  if(var2 == "up") {
-    var6 = ceil(var5);
-  } else if(var3 == "down") {
-    var6 = floor(var6);
+  if(var_2 == "up") {
+    var_6 = ceil(var_5);
+  } else if(var_3 == "down") {
+    var_6 = floor(var_6);
   } else {
-    var6 += 0.5;
+    var_6 += 0.5;
   }
 
-  var6 = int(var6);
-  var6 /= var5;
-  return var6;
+  var_6 = int(var_6);
+  var_6 /= var_5;
+  return var_6;
 }
 
-function stringtofloat(var0) {
-  var1 = strtok(var0, ".");
-  var2 = int(var1[0]);
+function stringtofloat(var_0) {
+  var_1 = strtok(var_0, ".");
+  var_2 = int(var_1[0]);
 
-  if(isDefined(var1[1])) {
-    var3 = 1;
+  if(isDefined(var_1[1])) {
+    var_3 = 1;
 
-    for(var4 = 0; var4 < var1[1].size; var4++) {
-      var3 *= 0.1;
+    for(var_4 = 0; var_4 < var_1[1].size; var_4++) {
+      var_3 *= 0.1;
     }
 
-    var2 += int(var1[1]) * var3;
+    var_2 += int(var_1[1]) * var_3;
   }
 
-  return var2;
+  return var_2;
 }
 
-function isstrstart(var0, var1) {
-  return getsubstr(var0, 0, var1.size) == var1;
+function isstrstart(var_0, var_1) {
+  return getsubstr(var_0, 0, var_1.size) == var_1;
 }
 
-function array_remove_keep_index(var0, var1) {
-  var2 = [];
+function array_remove_keep_index(var_0, var_1) {
+  var_2 = [];
 
-  foreach(var4 in var0) {
-    if(var4 != var1) {
-      var2 = var4;
+  foreach(var_4 in var_0) {
+    if(var_4 != var_1) {
+      var_2 = var_4;
     }
   }
 
-  return var2;
+  return var_2;
 }
 
-function delayentdelete(var0) {
+function delayentdelete(var_0) {
   self endon("death");
-  wait var0;
+  wait var_0;
 
   if(isDefined(self)) {
     self delete();
@@ -218,104 +218,104 @@ function delayentdelete(var0) {
   }
 }
 
-function roundup(var0) {
-  if(var0 - int(var0) >= 0.5) {
-    return int(var0 + 1);
+function roundup(var_0) {
+  if(var_0 - int(var_0) >= 0.5) {
+    return int(var_0 + 1);
   }
 
-  return int(var0);
+  return int(var_0);
 }
 
-function bufferednotify(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
-  thread bufferednotify_internal(var0, var1, var2, var3, var4, var5, var6, var7, var8);
+function bufferednotify(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  thread bufferednotify_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 }
 
-function bufferednotify_internal(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
+function bufferednotify_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self endon("disconnect");
   level endon("game_ended");
-  var9 = "bufferedNotify_" + var0;
-  self notify(var9);
-  self endon(var9);
+  var_9 = "bufferedNotify_" + var_0;
+  self notify(var_9);
+  self endon(var_9);
 
   if(!isDefined(self.bufferednotifications)) {
     self.bufferednotifications = [];
   }
 
-  if(!isDefined(self.bufferednotifications[var0])) {
-    self.bufferednotifications[var0] = [];
+  if(!isDefined(self.bufferednotifications[var_0])) {
+    self.bufferednotifications[var_0] = [];
   }
 
-  var10 = spawnStruct();
-  var10.param1 = var1;
-  var10.param2 = var2;
-  var10.param3 = var3;
-  var10.param4 = var4;
-  var10.param5 = var5;
-  var10.param6 = var6;
-  var10.param7 = var7;
-  var10.param8 = var8;
-  self.bufferednotifications[var0][self.bufferednotifications[var0].size] = var10;
+  var_10 = spawnStruct();
+  var_10.param1 = var_1;
+  var_10.param2 = var_2;
+  var_10.param3 = var_3;
+  var_10.param4 = var_4;
+  var_10.param5 = var_5;
+  var_10.param6 = var_6;
+  var_10.param7 = var_7;
+  var_10.param8 = var_8;
+  self.bufferednotifications[var_0][self.bufferednotifications[var_0].size] = var_10;
   waittillframeend();
 
-  while(self.bufferednotifications[var0].size > 0) {
-    var10 = self.bufferednotifications[var0][0];
-    self notify(var0, var10.param1, var10.param2, var10.param3, var10.param4, var10.param5, var10.param6, var10.param7, var10.param8);
-    self.bufferednotifications[var0] = scripts\engine\utility::array_remove_index(self.bufferednotifications[var0], 0);
+  while(self.bufferednotifications[var_0].size > 0) {
+    var_10 = self.bufferednotifications[var_0][0];
+    self notify(var_0, var_10.param1, var_10.param2, var_10.param3, var_10.param4, var_10.param5, var_10.param6, var_10.param7, var_10.param8);
+    self.bufferednotifications[var_0] = scripts\engine\utility::array_remove_index(self.bufferednotifications[var_0], 0);
     waitframe();
   }
 }
 
-function notifyafterframeend(var0, var1) {
-  self waittill(var0);
+function notifyafterframeend(var_0, var_1) {
+  self waittill(var_0);
   waittillframeend();
-  self notify(var1);
+  self notify(var_1);
 }
 
-function delaysetclientomnvar(var0, var1, var2) {
+function delaysetclientomnvar(var_0, var_1, var_2) {
   self endon("disconnect");
-  wait var0;
-  self setclientomnvar(var1, var2);
+  wait var_0;
+  self setclientomnvar(var_1, var_2);
 }
 
-function strip_suffix(var0, var1) {
-  if(var0.size <= var1.size) {
-    return var0;
+function strip_suffix(var_0, var_1) {
+  if(var_0.size <= var_1.size) {
+    return var_0;
   }
 
-  if(getsubstr(var0, var0.size - var1.size, var0.size) == var1) {
-    return getsubstr(var0, 0, var0.size - var1.size);
+  if(getsubstr(var_0, var_0.size - var_1.size, var_0.size) == var_1) {
+    return getsubstr(var_0, 0, var_0.size - var_1.size);
   }
 
-  return var0;
+  return var_0;
 }
 
-function isleft2d(var0, var1, var2) {
-  var3 = (var0[0], var0[1], 0);
-  var4 = (var2[0], var2[1], 0);
-  var5 = var4 - var3;
-  var6 = (var1[0], var1[1], 0);
-  return var5[0] * var6[1] - var5[1] * var6[0] < 0;
+function isleft2d(var_0, var_1, var_2) {
+  var_3 = (var_0[0], var_0[1], 0);
+  var_4 = (var_2[0], var_2[1], 0);
+  var_5 = var_4 - var_3;
+  var_6 = (var_1[0], var_1[1], 0);
+  return var_5[0] * var_6[1] - var_5[1] * var_6[0] < 0;
 }
 
-function vectortoanglessafe(var0, var1) {
-  var2 = vectorcross(var0, var1);
-  var1 = vectorcross(var2, var0);
-  var3 = axistoangles(var0, var2, var1);
-  return var3;
+function vectortoanglessafe(var_0, var_1) {
+  var_2 = vectorcross(var_0, var_1);
+  var_1 = vectorcross(var_2, var_0);
+  var_3 = axistoangles(var_0, var_2, var_1);
+  return var_3;
 }
 
-function heap(var0) {
-  var1 = spawnStruct();
-  var1.nvals = 0;
-  var1.vals = [];
+function heap(var_0) {
+  var_1 = spawnStruct();
+  var_1.nvals = 0;
+  var_1.vals = [];
 
-  if(var0 == "max") {
-    var1.swap = &_heaplessthan;
-  } else if(var0 == "min") {
-    var1.swap = &_heapgreaterthan;
+  if(var_0 == "max") {
+    var_1.swap = &_heaplessthan;
+  } else if(var_0 == "min") {
+    var_1.swap = &_heapgreaterthan;
   }
 
-  return var1;
+  return var_1;
 }
 
 function heapsize() {
@@ -332,32 +332,32 @@ function heappop() {
   }
 
   if(self.nvals == 1) {
-    var0 = self.vals[1];
+    var_0 = self.vals[1];
     self.vals[1] = undefined;
     self.nvals = 0;
-    return var0;
+    return var_0;
   }
 
-  var0 = self.vals[1];
+  var_0 = self.vals[1];
   self.vals[1] = self.vals[self.nvals];
   self.vals[self.nvals] = undefined;
   _heapify(1);
   self.nvals -= 1;
-  return var0;
+  return var_0;
 }
 
-function heapinsert(var0) {
-  self.vals[self.nvals + 1] = var0;
-  var1 = self.nvals + 1;
-  var2 = _heapparent(var1);
+function heapinsert(var_0) {
+  self.vals[self.nvals + 1] = var_0;
+  var_1 = self.nvals + 1;
+  var_2 = _heapparent(var_1);
 
-  while(isDefined(var2)) {
-    if([[self.swap]](var2, var1)) {
-      var3 = self.vals[var2];
-      self.vals[var2] = self.vals[var1];
-      self.vals[var1] = var3;
-      var1 = var2;
-      var2 = _heapparent(var1);
+  while(isDefined(var_2)) {
+    if([[self.swap]](var_2, var_1)) {
+      var_3 = self.vals[var_2];
+      self.vals[var_2] = self.vals[var_1];
+      self.vals[var_1] = var_3;
+      var_1 = var_2;
+      var_2 = _heapparent(var_1);
       continue;
     }
 
@@ -368,90 +368,90 @@ function heapinsert(var0) {
 }
 
 function printheap() {
-  var0 = [];
-  var1 = self.nvals;
+  var_0 = [];
+  var_1 = self.nvals;
 
-  for(var2 = 0; var2 < var1; var2++) {
-    var0 = heappop();
+  for(var_2 = 0; var_2 < var_1; var_2++) {
+    var_0 = heappop();
   }
 
-  for(var2 = 0; var2 < var0.size; var2++) {
-    heapinsert(var0[var2]);
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    heapinsert(var_0[var_2]);
   }
 
-  for(var2 = 0; var2 < var0.size; var2++) {}
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {}
 }
 
-function _heapgreaterthan(var0, var1) {
-  return self.vals[var0] > self.vals[var1];
+function _heapgreaterthan(var_0, var_1) {
+  return self.vals[var_0] > self.vals[var_1];
 }
 
-function _heaplessthan(var0, var1) {
-  return self.vals[var0] < self.vals[var1];
+function _heaplessthan(var_0, var_1) {
+  return self.vals[var_0] < self.vals[var_1];
 }
 
-function _heapify(var0) {
-  var1 = _heapleftchild(var0);
-  var2 = _heaprightchild(var0);
-  var3 = undefined;
-  var4 = 0;
+function _heapify(var_0) {
+  var_1 = _heapleftchild(var_0);
+  var_2 = _heaprightchild(var_0);
+  var_3 = undefined;
+  var_4 = 0;
 
-  if(isDefined(var1)) {
-    var4 = self[[self.swap]](var0, var1);
+  if(isDefined(var_1)) {
+    var_4 = self[[self.swap]](var_0, var_1);
   }
 
-  var5 = 0;
+  var_5 = 0;
 
-  if(isDefined(var2)) {
-    var5 = self[[self.swap]](var0, var2);
+  if(isDefined(var_2)) {
+    var_5 = self[[self.swap]](var_0, var_2);
   }
 
-  if(!var4 && !var5) {
+  if(!var_4 && !var_5) {
     return;
-  } else if(var4 && !var5) {
-    var3 = var1;
-  } else if(!var4 && var5) {
-    var3 = var2;
-  } else if(self[[self.swap]](var1, var2)) {
-    var3 = var2;
+  } else if(var_4 && !var_5) {
+    var_3 = var_1;
+  } else if(!var_4 && var_5) {
+    var_3 = var_2;
+  } else if(self[[self.swap]](var_1, var_2)) {
+    var_3 = var_2;
   } else {
-    var3 = var1;
+    var_3 = var_1;
   }
 
-  var6 = self.vals[var0];
-  self.vals[var0] = self.vals[var3];
-  self.vals[var3] = var6;
-  _heapify(var3);
+  var_6 = self.vals[var_0];
+  self.vals[var_0] = self.vals[var_3];
+  self.vals[var_3] = var_6;
+  _heapify(var_3);
 }
 
-function _heapleftchild(var0) {
-  if(!isDefined(self.vals[2 * var0])) {
+function _heapleftchild(var_0) {
+  if(!isDefined(self.vals[2 * var_0])) {
     return undefined;
   }
 
-  return 2 * var0;
+  return 2 * var_0;
 }
 
-function _heaprightchild(var0) {
-  if(!isDefined(self.vals[2 * var0 + 1])) {
+function _heaprightchild(var_0) {
+  if(!isDefined(self.vals[2 * var_0 + 1])) {
     return undefined;
   }
 
-  return 2 * var0 + 1;
+  return 2 * var_0 + 1;
 }
 
-function _heapparent(var0) {
-  if(var0 == 1) {
+function _heapparent(var_0) {
+  if(var_0 == 1) {
     return undefined;
   }
 
-  return int(floor(var0 / 2));
+  return int(floor(var_0 / 2));
 }
 
-function isnumbermultipleof(var0, var1) {
-  return var0 > 0 && var0 % var1 == 0;
+function isnumbermultipleof(var_0, var_1) {
+  return var_0 > 0 && var_0 % var_1 == 0;
 }
 
-function laststand_dogtags(var0) {
-  var1 = var0 == undefined;
+function laststand_dogtags(var_0) {
+  var_1 = var_0 == undefined;
 }

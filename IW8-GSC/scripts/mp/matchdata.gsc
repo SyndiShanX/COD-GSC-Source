@@ -9,8 +9,8 @@ function init() {
     setmatchdata("commonMatchData", "map", level.script);
 
     if(level.hardcoremode) {
-      var0 = scripts\mp\utility\game::getgametype() + " hc";
-      setmatchdata("commonMatchData", "gametype", var0);
+      var_0 = scripts\mp\utility\game::getgametype() + " hc";
+      setmatchdata("commonMatchData", "gametype", var_0);
     } else {
       setmatchdata("commonMatchData", "gametype", scripts\mp\utility\game::getgametype());
     }
@@ -70,23 +70,23 @@ function init() {
 function onmatchstart() {
   setmatchdata("commonMatchData", "utc_start_time_s", getsystemtime());
   setmatchdata("commonMatchData", "player_count_start", level.players.size);
-  var0 = scripts\mp\utility\game::getgametype();
-  var1 = "";
+  var_0 = scripts\mp\utility\game::getgametype();
+  var_1 = "";
 
-  if(var0 == "br") {
-    var1 = level.disable_super_in_turret.name;
+  if(var_0 == "br") {
+    var_1 = level.disable_super_in_turret.name;
   }
 
   if(level.hardcoremode) {
-    var0 += " hc";
+    var_0 += " hc";
   }
 
-  var2 = getdvarint("dlog_is_playtest");
-  var3 = getDvar("MQQPLSSSLQ");
-  var4 = function_042d();
-  getentitylessscriptablearray("dlog_event_server_match_start", ["map", level.script, "game_type", var0, "is_playtest", var2, "experiment_name", var3, "dedi_server_guid", isdismembermentenabled(), "sub_game_type", var1, "playlist_name", var4]);
+  var_2 = getdvarint("dlog_is_playtest");
+  var_3 = getDvar("MQQPLSSSLQ");
+  var_4 = function_042d();
+  getentitylessscriptablearray("dlog_event_server_match_start", ["map", level.script, "game_type", var_0, "is_playtest", var_2, "experiment_name", var_3, "dedi_server_guid", isdismembermentenabled(), "sub_game_type", var_1, "playlist_name", var_4]);
 
-  if(var0 == "br") {
+  if(var_0 == "br") {
     scripts\common\utility::ref_13e0a(level.ref_11b22);
   }
 
@@ -117,76 +117,76 @@ function getmatchendtimeutc() {
   return getmatchdata("commonMatchData", "utc_end_time_s");
 }
 
-function gettimefrommatchstart(var0) {
-  var1 = var0;
+function gettimefrommatchstart(var_0) {
+  var_1 = var_0;
 
   if(isDefined(level.starttimefrommatchstart)) {
-    var1 -= level.starttimefrommatchstart;
+    var_1 -= level.starttimefrommatchstart;
 
-    if(var1 < 0) {
-      var1 = 0;
+    if(var_1 < 0) {
+      var_1 = 0;
     }
   } else {
-    var1 = 0;
+    var_1 = 0;
   }
 
-  return var1;
+  return var_1;
 }
 
-function logkillstreakevent(var0, var1) {}
+function logkillstreakevent(var_0, var_1) {}
 
-function loggameevent(var0, var1) {
-  var2 = undefined;
-  var3 = -1;
+function loggameevent(var_0, var_1) {
+  var_2 = undefined;
+  var_3 = -1;
 
   if(isvalidclient(self) && scripts\mp\utility\entity::isgameparticipant(self)) {
-    var2 = self;
+    var_2 = self;
 
     if(isDefined(self.matchdatalifeindex)) {
-      var3 = self.matchdatalifeindex;
+      var_3 = self.matchdatalifeindex;
     }
   }
 
-  var4 = getmatchdata("gameEventCount");
-  var5 = var4 + 1;
-  setmatchdata("gameEventCount", var5);
-  var6 = gettimefrommatchstart(gettime());
-  getentitylessscriptablearray("dlog_event_game_event", ["event_player", var2, "event_name", var0, "time_from_match_start_ms", var6, "player_life_index", var3, "pos_x", var1[0], "pos_y", var1[1], "pos_z", var1[2]]);
+  var_4 = getmatchdata("gameEventCount");
+  var_5 = var_4 + 1;
+  setmatchdata("gameEventCount", var_5);
+  var_6 = gettimefrommatchstart(gettime());
+  getentitylessscriptablearray("dlog_event_game_event", ["event_player", var_2, "event_name", var_0, "time_from_match_start_ms", var_6, "player_life_index", var_3, "pos_x", var_1[0], "pos_y", var_1[1], "pos_z", var_1[2]]);
 }
 
-function logattackerkillevent(var0, var1) {}
+function logattackerkillevent(var_0, var_1) {}
 
-function logvictimkillevent(var0, var1) {}
+function logvictimkillevent(var_0, var_1) {}
 
-function logmultikill(var0, var1) {}
+function logmultikill(var_0, var_1) {}
 
 function logplayerlife() {
   if(!isvalidclient(self)) {
     return -1;
   }
 
-  var0 = 0;
-  var1 = (0, 0, 0);
-  var2 = 0;
+  var_0 = 0;
+  var_1 = (0, 0, 0);
+  var_2 = 0;
 
   if(isDefined(self.spawntime)) {
-    var0 = self.spawntime;
+    var_0 = self.spawntime;
   }
 
   if(isDefined(self.spawnpos)) {
-    var1 = self.spawnpos;
+    var_1 = self.spawnpos;
   }
 
   if(isDefined(self.wasti)) {
-    var2 = self.wasti;
+    var_2 = self.wasti;
   }
 
-  var3 = gettimefrommatchstart(var0);
-  var4 = game["life_count"];
+  var_3 = gettimefrommatchstart(var_0);
+  var_4 = game["life_count"];
   game["life_count"]++;
-  self dlog_recordplayerevent("dlog_event_life_spawn", ["spawn_time_from_match_start_ms", var3, "life_index", var4, "spawn_pos_x", var1[0], "spawn_pos_y", var1[1], "spawn_pos_z", var1[2], "team", self.team, "is_host", self ishost(), "was_tactical_insertion", var2]);
+  self dlog_recordplayerevent("dlog_event_life_spawn", ["spawn_time_from_match_start_ms", var_3, "life_index", var_4, "spawn_pos_x", var_1[0], "spawn_pos_y", var_1[1], "spawn_pos_z", var_1[2], "team", self.team, "is_host", self ishost(), "was_tactical_insertion", var_2]);
   thread monitorweaponfire();
-  return var4;
+  return var_4;
 }
 
 function monitorweaponfire() {
@@ -195,10 +195,10 @@ function monitorweaponfire() {
   for(;;) {
     self waittill("begin_firing");
     thread ref_11d21();
-    var0 = self.lastdroppableweaponobj;
-    var0 = scripts\mp\utility\weapon::mapweapon(var0);
-    var1 = createheadicon(var0);
-    thread scripts\mp\gamelogic::threadedsetweaponstatbyname(var1, 1, "trigger_pulls");
+    var_0 = self.lastdroppableweaponobj;
+    var_0 = scripts\mp\utility\weapon::mapweapon(var_0);
+    var_1 = createheadicon(var_0);
+    thread scripts\mp\gamelogic::threadedsetweaponstatbyname(var_1, 1, "trigger_pulls");
   }
 }
 
@@ -212,10 +212,10 @@ function ref_11d21() {
 }
 
 function ref_11d78() {
-  var0 = self playermounttype();
+  var_0 = self playermounttype();
 
-  if(isDefined(var0)) {
-    switch (var0) {
+  if(isDefined(var_0)) {
+    switch (var_0) {
       case "mount_left":
         return "MOUNT_LEFT";
       case "mount_right":
@@ -228,292 +228,292 @@ function ref_11d78() {
   return "MOUNT_NONE";
 }
 
-function logplayerdeath(var0, var1, var2, var3, var4, var5, var6, var7) {
+function logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(!isvalidclient(self)) {
     return;
   }
 
-  if(var4 == "agent_mp") {
-    var8 = [];
+  if(var_4 == "agent_mp") {
+    var_8 = [];
   } else {
-    var8 = scripts\mp\utility\weapon::getweaponattachmentsbasenames(var5);
-    var8 = scripts\mp\utility\weapon::attachmentsfilterforstats(var8, var5);
+    var_8 = scripts\mp\utility\weapon::getweaponattachmentsbasenames(var_5);
+    var_8 = scripts\mp\utility\weapon::attachmentsfilterforstats(var_8, var_5);
   }
 
-  var9 = gettimefrommatchstart(gettime());
-  var10 = 0;
+  var_9 = gettimefrommatchstart(gettime());
+  var_10 = 0;
 
   if(isDefined(self.spawntime)) {
-    var10 = self.spawntime;
+    var_10 = self.spawntime;
   }
 
-  var11 = gettimefrommatchstart(var10);
-  var12 = -1;
-  var13 = -1;
-  var14 = [];
-  jumpiffalse(isvalidclient(var2)) LOC_000003b1;
-  var15 = getweaponbasename(var5);
-  var16 = scripts\mp\utility\weapon::safe_to_authenticate(var8);
-  var17 = var2;
-  var18 = var2 scripts\mp\utility\weapon::ispickedupweapon(var5);
-  var19 = var2 isalternatemode(var5);
+  var_11 = gettimefrommatchstart(var_10);
+  var_12 = -1;
+  var_13 = -1;
+  var_14 = [];
+  jumpiffalse(isvalidclient(var_2)) LOC_000003b1;
+  var_15 = getweaponbasename(var_5);
+  var_16 = scripts\mp\utility\weapon::safe_to_authenticate(var_8);
+  var_17 = var_2;
+  var_18 = var_2 scripts\mp\utility\weapon::ispickedupweapon(var_5);
+  var_19 = var_2 isalternatemode(var_5);
 
-  if(scripts\mp\utility\weapon::iscacprimaryorsecondary(var5)) {
-    var20 = var2 playerads();
+  if(scripts\mp\utility\weapon::iscacprimaryorsecondary(var_5)) {
+    var_20 = var_2 playerads();
     goto LOC_000000b4;
   }
 
-  var20 = 0;
-  var21 = 0.4226;
-  var22 = scripts\engine\utility::within_fov(self.origin, self.angles, var3.origin, var21);
-  var23 = scripts\engine\utility::within_fov(var3.origin, var3.angles, self.origin, var21);
-  var24 = ref_11d78(var3);
-  var25 = var3.origin;
-  var26 = var3.angles;
+  var_20 = 0;
+  var_21 = 0.4226;
+  var_22 = scripts\engine\utility::within_fov(self.origin, self.angles, var_3.origin, var_21);
+  var_23 = scripts\engine\utility::within_fov(var_3.origin, var_3.angles, self.origin, var_21);
+  var_24 = ref_11d78(var_3);
+  var_25 = var_3.origin;
+  var_26 = var_3.angles;
 
-  if(isDefined(var3.matchdatalifeindex)) {
-    var13 = var3.matchdatalifeindex;
+  if(isDefined(var_3.matchdatalifeindex)) {
+    var_13 = var_3.matchdatalifeindex;
   }
 
-  if(isDefined(var3.loadoutindex)) {
-    var14 = var3.loadoutindex;
+  if(isDefined(var_3.loadoutindex)) {
+    var_14 = var_3.loadoutindex;
   }
 
-  var27 = getplayerbuffs(var3);
+  var_27 = getplayerbuffs(var_3);
 
-  if(istrue(var27[0])) {
-    var15 = "UAV_ACTIVE";
+  if(istrue(var_27[0])) {
+    var_15 = "UAV_ACTIVE";
   }
 
-  if(istrue(var27[1])) {
-    var15 = "DEADSILENCE_ACTIVE";
+  if(istrue(var_27[1])) {
+    var_15 = "DEADSILENCE_ACTIVE";
   }
 
-  if(istrue(var27[2])) {
-    var15 = "HAS_STOPPING_POWER";
+  if(istrue(var_27[2])) {
+    var_15 = "HAS_STOPPING_POWER";
   }
 
-  var28 = getplayerdebuffs(var3);
+  var_28 = getplayerdebuffs(var_3);
 
-  if(istrue(var28[0])) {
-    var15 = "CUAV_ACTIVE";
+  if(istrue(var_28[0])) {
+    var_15 = "CUAV_ACTIVE";
   }
 
-  if(istrue(var28[1])) {
-    var15 = "IS_MARKED";
+  if(istrue(var_28[1])) {
+    var_15 = "IS_MARKED";
   }
 
-  if(istrue(var28[2])) {
-    var15 = "IS_FLASHED";
+  if(istrue(var_28[2])) {
+    var_15 = "IS_FLASHED";
   }
 
-  if(istrue(var28[3])) {
-    var15 = "IS_STUNNED";
+  if(istrue(var_28[3])) {
+    var_15 = "IS_STUNNED";
   }
 
-  if(istrue(var28[4])) {
-    var15 = "IN_GAS";
+  if(istrue(var_28[4])) {
+    var_15 = "IN_GAS";
   }
 
-  if(istrue(var28[5])) {
-    var15 = "IN_BURNING";
+  if(istrue(var_28[5])) {
+    var_15 = "IN_BURNING";
   }
 
-  if(istrue(var28[6])) {
-    var15 = "IS_SNAPSHOTTED";
+  if(istrue(var_28[6])) {
+    var_15 = "IS_SNAPSHOTTED";
   }
 
-  if(istrue(var28[7])) {
-    var15 = "IN_SMOKE";
+  if(istrue(var_28[7])) {
+    var_15 = "IN_SMOKE";
   }
 
-  if(istrue(var28[8])) {
-    var15 = "IS_EMPED";
+  if(istrue(var_28[8])) {
+    var_15 = "IS_EMPED";
   }
 
-  if(istrue(var28[9])) {
-    var15 = "IN_WHITE_PHOSPHOROUS";
+  if(istrue(var_28[9])) {
+    var_15 = "IN_WHITE_PHOSPHOROUS";
   }
 
-  if(var3 isnightvisionon()) {
-    var15 = "NVG_ENABLED";
+  if(var_3 isnightvisionon()) {
+    var_15 = "NVG_ENABLED";
   }
 
-  if(isDefined(var3.modifiers)) {
-    if(istrue(var3.modifiers["headshot"])) {
-      var15 = "HEADSHOT";
+  if(isDefined(var_3.modifiers)) {
+    if(istrue(var_3.modifiers["headshot"])) {
+      var_15 = "HEADSHOT";
     }
 
-    if(istrue(var3.modifiers["avenger"])) {
-      var15 = "AVENGER";
+    if(istrue(var_3.modifiers["avenger"])) {
+      var_15 = "AVENGER";
     }
 
-    if(istrue(var3.modifiers["defender"])) {
-      var15 = "DEFENDER";
+    if(istrue(var_3.modifiers["defender"])) {
+      var_15 = "DEFENDER";
     }
 
-    if(istrue(var3.modifiers["posthumous"])) {
-      var15 = "POSTHUMOUS";
+    if(istrue(var_3.modifiers["posthumous"])) {
+      var_15 = "POSTHUMOUS";
     }
 
-    if(istrue(var3.modifiers["revenge"])) {
-      var15 = "REVENGE";
+    if(istrue(var_3.modifiers["revenge"])) {
+      var_15 = "REVENGE";
     }
 
-    if(istrue(var3.modifiers["buzzkill"])) {
-      var15 = "BUZZKILL";
+    if(istrue(var_3.modifiers["buzzkill"])) {
+      var_15 = "BUZZKILL";
     }
 
-    if(istrue(var3.modifiers["firstblood"])) {
-      var15 = "FIRSTBLOOD";
+    if(istrue(var_3.modifiers["firstblood"])) {
+      var_15 = "FIRSTBLOOD";
     }
 
-    if(istrue(var3.modifiers["comeback"])) {
-      var15 = "COMEBACK";
+    if(istrue(var_3.modifiers["comeback"])) {
+      var_15 = "COMEBACK";
     }
 
-    if(istrue(var3.modifiers["longshot"])) {
-      var15 = "LONGSHOT";
+    if(istrue(var_3.modifiers["longshot"])) {
+      var_15 = "LONGSHOT";
     }
 
-    if(istrue(var3.modifiers["pointblank"])) {
-      var15 = "POINTBLANK";
+    if(istrue(var_3.modifiers["pointblank"])) {
+      var_15 = "POINTBLANK";
     }
 
-    if(istrue(var3.modifiers["assistedsuicide"])) {
-      var15 = "ASSISTED_SUICIDE";
+    if(istrue(var_3.modifiers["assistedsuicide"])) {
+      var_15 = "ASSISTED_SUICIDE";
     }
   }
 
-  if(scripts\mp\utility\weapon::iskillstreakweapon(var16)) {
-    var15 = "KILLSTREAK";
+  if(scripts\mp\utility\weapon::iskillstreakweapon(var_16)) {
+    var_15 = "KILLSTREAK";
   }
 
   goto LOC_00000416;
 }
 
 function getplayerbuffs() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, scripts\cp_mp\utility\killstreak_utility::teamhasuav(self.team));
 }
 
 function getplayerdebuffs() {
-  var0 = gettime();
-  var1 = [];
+  var_0 = gettime();
+  var_1 = [];
   GscBinSkip0(0x2e, 0, scripts\cp_mp\utility\killstreak_utility::enemyhascuav(self.team));
 }
 
-function ref_119cc(var0) {
-  if(isDefined(var0)) {
-    var1 = var0;
+function ref_119cc(var_0) {
+  if(isDefined(var_0)) {
+    var_1 = var_0;
   } else {
-    var1 = "";
+    var_1 = "";
   }
 
   if(level.teambased) {
-    var2 = int(scripts\mp\rank::getteamrankxpmultiplier(self.team));
+    var_2 = int(scripts\mp\rank::getteamrankxpmultiplier(self.team));
   } else {
-    var2 = 0;
+    var_2 = 0;
   }
 
-  var3 = 0;
-  var4 = 0;
-  var5 = 0;
-  var6 = 0;
-  var7 = 0;
-  var8 = 0;
-  var9 = 0;
+  var_3 = 0;
+  var_4 = 0;
+  var_5 = 0;
+  var_6 = 0;
+  var_7 = 0;
+  var_8 = 0;
+  var_9 = 0;
 
   if(scripts\mp\utility\game::onlinestatsenabled()) {
     if(isDefined(self.pers["summary"]["xp"])) {
-      var3 = self.pers["summary"]["xp"];
+      var_3 = self.pers["summary"]["xp"];
     }
 
     if(isDefined(self.pers["summary"]["score"])) {
-      var4 = self.pers["summary"]["score"];
+      var_4 = self.pers["summary"]["score"];
     }
 
     if(isDefined(self.pers["summary"]["challenge"])) {
-      var5 = self.pers["summary"]["challenge"];
+      var_5 = self.pers["summary"]["challenge"];
     }
 
     if(isDefined(self.pers["summary"]["match"])) {
-      var6 = self.pers["summary"]["match"];
+      var_6 = self.pers["summary"]["match"];
     }
 
     if(isDefined(self.pers["summary"]["medal"])) {
-      var7 = self.pers["summary"]["medal"];
+      var_7 = self.pers["summary"]["medal"];
     }
 
     if(isDefined(self.pers["summary"]["bonusXp"])) {
-      var8 = self.pers["summary"]["bonusXp"];
+      var_8 = self.pers["summary"]["bonusXp"];
     }
 
     if(isDefined(self.pers["summary"]["misc"])) {
-      var9 = self.pers["summary"]["misc"];
+      var_9 = self.pers["summary"]["misc"];
     }
   }
 
-  var10 = scripts\mp\rank::getrankxp();
-  var11 = scripts\mp\rank::getrankforxp(var10);
+  var_10 = scripts\mp\rank::getrankxp();
+  var_11 = scripts\mp\rank::getrankforxp(var_10);
 
   if(scripts\mp\utility\game::rankingenabled() && self hasplayerdata()) {
-    var12 = self getplayerdata("common", "mpProgression", "playerLevel", "xp");
-    var13 = self getplayerdata("mp", "playerStats", "combatStats", "kills");
-    var14 = self getplayerdata("mp", "playerStats", "combatStats", "deaths");
-    var15 = self getplayerdata("mp", "playerStats", "matchStats", "wins");
-    var16 = self getplayerdata("mp", "playerStats", "matchStats", "losses");
-    var17 = self getplayerdata("mp", "playerStats", "combatStats", "hits");
-    var18 = self getplayerdata("mp", "playerStats", "combatStats", "misses");
-    var19 = self getplayerdata("mp", "playerStats", "combatStats", "wallbangs");
-    var20 = self getplayerdata("mp", "playerStats", "combatStats", "nearMisses");
-    var21 = self getplayerdata("mp", "playerStats", "matchStats", "gamesPlayed");
-    var22 = self getplayerdata("mp", "playerStats", "matchStats", "timePlayedTotal");
-    var23 = self getplayerdata("mp", "playerStats", "matchStats", "score");
-    var24 = self getplayerdata(level.loadoutsgroup, "squadMembers", "season_rank");
-    var25 = self getplayerdata(level.loadoutsgroup, "squadMembers", "season_rank");
+    var_12 = self getplayerdata("common", "mpProgression", "playerLevel", "xp");
+    var_13 = self getplayerdata("mp", "playerStats", "combatStats", "kills");
+    var_14 = self getplayerdata("mp", "playerStats", "combatStats", "deaths");
+    var_15 = self getplayerdata("mp", "playerStats", "matchStats", "wins");
+    var_16 = self getplayerdata("mp", "playerStats", "matchStats", "losses");
+    var_17 = self getplayerdata("mp", "playerStats", "combatStats", "hits");
+    var_18 = self getplayerdata("mp", "playerStats", "combatStats", "misses");
+    var_19 = self getplayerdata("mp", "playerStats", "combatStats", "wallbangs");
+    var_20 = self getplayerdata("mp", "playerStats", "combatStats", "nearMisses");
+    var_21 = self getplayerdata("mp", "playerStats", "matchStats", "gamesPlayed");
+    var_22 = self getplayerdata("mp", "playerStats", "matchStats", "timePlayedTotal");
+    var_23 = self getplayerdata("mp", "playerStats", "matchStats", "score");
+    var_24 = self getplayerdata(level.loadoutsgroup, "squadMembers", "season_rank");
+    var_25 = self getplayerdata(level.loadoutsgroup, "squadMembers", "season_rank");
   } else {
-    var12 = 0;
-    var13 = 0;
-    var14 = 0;
-    var15 = 0;
-    var16 = 0;
-    var17 = 0;
-    var18 = 0;
-    var19 = 0;
-    var20 = 0;
-    var21 = 0;
-    var22 = 0;
-    var23 = 0;
-    var24 = 0;
-    var25 = 0;
+    var_12 = 0;
+    var_13 = 0;
+    var_14 = 0;
+    var_15 = 0;
+    var_16 = 0;
+    var_17 = 0;
+    var_18 = 0;
+    var_19 = 0;
+    var_20 = 0;
+    var_21 = 0;
+    var_22 = 0;
+    var_23 = 0;
+    var_24 = 0;
+    var_25 = 0;
   }
 
-  var26 = -1;
-  var27 = 0;
-  var28 = 0;
+  var_26 = -1;
+  var_27 = 0;
+  var_28 = 0;
 
-  if(isDefined(var14)) {
+  if(isDefined(var_14)) {
     if(scripts\mp\utility\game::isroundbased()) {
-      var26 = game["roundsPlayed"];
+      var_26 = game["roundsPlayed"];
     }
 
     if(level.teambased) {
       if(isDefined(self.team)) {
         if(self.team == "allies") {
-          var27 = getteamscore("allies");
-          var28 = getteamscore("axis");
+          var_27 = getteamscore("allies");
+          var_28 = getteamscore("axis");
         } else if(self.team == "axis") {
-          var27 = getteamscore("axis");
-          var28 = getteamscore("allies");
+          var_27 = getteamscore("axis");
+          var_28 = getteamscore("allies");
         }
       }
     }
   }
 
   jumpiffalse(isDefined(self.segments) && self.segments["movementUpdateCount"] >= 30) LOC_000003e6;
-  var29 = self.segments["movingTotal"] / self.segments["movementUpdateCount"] / 5 * 100;
-  var30 = self.segments["distanceTotal"] / self.segments["movementUpdateCount"];
+  var_29 = self.segments["movingTotal"] / self.segments["movementUpdateCount"] / 5 * 100;
+  var_30 = self.segments["distanceTotal"] / self.segments["movementUpdateCount"];
   goto LOC_000003f6;
 }
 
@@ -530,111 +530,111 @@ function initdialog() {
     return;
   }
 
-  var0 = scripts\mp\utility\game::getgametype();
-  var1 = scripts\mp\utility\stats::getpersstat("kills");
-  var2 = scripts\mp\utility\stats::getpersstat("deaths");
-  var3 = scripts\mp\utility\stats::getpersstat("headshots");
-  var4 = scripts\mp\utility\stats::getpersstat("assists");
-  var5 = scripts\mp\utility\stats::getpersstat("suicides");
-  var6 = scripts\mp\utility\stats::getpersstat("score");
-  var7 = scripts\mp\rank::getrankxp();
-  var8 = scripts\mp\rank::getrankforxp(var7);
-  var9 = scripts\mp\utility\stats::getpersstat("utc_connect_time_s");
-  var10 = getsystemtime() - var9;
-  self getcurrentusereloadconfig(var0, var1, var2, var3, var4, var5, var6, var8, var10);
+  var_0 = scripts\mp\utility\game::getgametype();
+  var_1 = scripts\mp\utility\stats::getpersstat("kills");
+  var_2 = scripts\mp\utility\stats::getpersstat("deaths");
+  var_3 = scripts\mp\utility\stats::getpersstat("headshots");
+  var_4 = scripts\mp\utility\stats::getpersstat("assists");
+  var_5 = scripts\mp\utility\stats::getpersstat("suicides");
+  var_6 = scripts\mp\utility\stats::getpersstat("score");
+  var_7 = scripts\mp\rank::getrankxp();
+  var_8 = scripts\mp\rank::getrankforxp(var_7);
+  var_9 = scripts\mp\utility\stats::getpersstat("utc_connect_time_s");
+  var_10 = getsystemtime() - var_9;
+  self getcurrentusereloadconfig(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_8, var_10);
 }
 
-function logplayerdata(var0) {
+function logplayerdata(var_0) {
   if(!isvalidclient(self)) {
     return;
   }
 
-  var1 = self getplayerdata(level.loadoutsgroup, "squadMembers", "player_xp");
-  ref_119cc(var0);
+  var_1 = self getplayerdata(level.loadoutsgroup, "squadMembers", "player_xp");
+  ref_119cc(var_0);
   initdialog();
 
   if(!isai(self) && !scripts\mp\utility\game::rankingenabled()) {
-    var2 = scripts\mp\rank::initcpammoarmorcrate(self);
-    scripts\mp\rank::initcprooftopcrate(self.initdismembermentlist, var2);
+    var_2 = scripts\mp\rank::initcpammoarmorcrate(self);
+    scripts\mp\rank::initcprooftopcrate(self.initdismembermentlist, var_2);
   }
 
   self sendclientnetworktelemetry();
   self radiusdamagestepped();
-  var3 = 0;
-  var4 = 0;
+  var_3 = 0;
+  var_4 = 0;
 
-  foreach(var6 in self.pers["matchdataWeaponStats"]) {
-    var7 = 0;
-    var8 = 0;
-    var9 = 0;
-    var10 = 0;
-    var11 = 0;
-    var12 = 0;
-    var13 = 0;
-    var14 = 0;
-    var15 = 0;
+  foreach(var_6 in self.pers["matchdataWeaponStats"]) {
+    var_7 = 0;
+    var_8 = 0;
+    var_9 = 0;
+    var_10 = 0;
+    var_11 = 0;
+    var_12 = 0;
+    var_13 = 0;
+    var_14 = 0;
+    var_15 = 0;
 
     if(scripts\mp\utility\game::getgametype() != "br") {
-      if(isenumvaluevalid("common", "LoadoutWeapon", var6.weapon)) {
-        var7 = self getplayerdata(level.loadoutsgroup, "squadMembers", "weapon_xp", var6.weapon);
+      if(isenumvaluevalid("common", "LoadoutWeapon", var_6.weapon)) {
+        var_7 = self getplayerdata(level.loadoutsgroup, "squadMembers", "weapon_xp", var_6.weapon);
       }
     }
 
-    foreach(var18, var17 in var6.stats) {
-      if(var18 == "deaths") {
-        var9 += var17;
+    foreach(var_18, var_17 in var_6.stats) {
+      if(var_18 == "deaths") {
+        var_9 += var_17;
       }
 
-      if(var18 == "headshots") {
-        var10 += var17;
+      if(var_18 == "headshots") {
+        var_10 += var_17;
       }
 
-      if(var18 == "hits") {
-        var11 += var17;
-        var4 += var17;
+      if(var_18 == "hits") {
+        var_11 += var_17;
+        var_4 += var_17;
       }
 
-      if(var18 == "kills") {
-        var12 += var17;
+      if(var_18 == "kills") {
+        var_12 += var_17;
       }
 
-      if(var18 == "shots") {
-        var13 += var17;
-        var3 += var17;
+      if(var_18 == "shots") {
+        var_13 += var_17;
+        var_3 += var_17;
       }
 
-      if(var18 == "xp_earned") {
-        var8 += var17;
+      if(var_18 == "xp_earned") {
+        var_8 += var_17;
       }
 
-      if(var18 == "damage") {
-        var14 += var17;
+      if(var_18 == "damage") {
+        var_14 += var_17;
       }
 
-      if(var18 == "friendly_fire_damage") {
-        var15 += var17;
+      if(var_18 == "friendly_fire_damage") {
+        var_15 += var_17;
       }
     }
 
     if(scripts\mp\utility\game::getgametype() != "br") {
-      self dlog_recordplayerevent("dlog_event_player_weapon_stats", ["weapon", var6.weapon, "variant_id", var6.variantid, "loadout_index", var6.loadoutindex, "starting_weapon_xp", var7, "xp_earned", var8, "deaths", var9, "headshots", var10, "hits", var11, "kills", var12, "shots", var13, "damage", var14, "friendly_fire_damage", var15]);
+      self dlog_recordplayerevent("dlog_event_player_weapon_stats", ["weapon", var_6.weapon, "variant_id", var_6.variantid, "loadout_index", var_6.loadoutindex, "starting_weapon_xp", var_7, "xp_earned", var_8, "deaths", var_9, "headshots", var_10, "hits", var_11, "kills", var_12, "shots", var_13, "damage", var_14, "friendly_fire_damage", var_15]);
       continue;
     }
 
-    var19 = isDefined(var6.iscustomweapon);
-    var20 = 0;
-    var21 = 0;
-    var22 = 0;
+    var_19 = isDefined(var_6.iscustomweapon);
+    var_20 = 0;
+    var_21 = 0;
+    var_22 = 0;
 
-    if(isDefined(var6.stats["time_used_s"])) {
-      var22 = var6.stats["time_used_s"];
+    if(isDefined(var_6.stats["time_used_s"])) {
+      var_22 = var_6.stats["time_used_s"];
     }
 
-    self dlog_recordplayerevent("dlog_event_player_weapon_stats_br", ["weapon", var6.weapon, "variant_id", var6.variantid, "from_loadout", var19, "died", var20, "time_used_s", var22, "longest_hit_distance", var21, "deaths", var9, "headshots", var10, "hits", var11, "kills", var12, "shots", var13, "damage", var14, "attachment_0", var6.attachments[0], "attachment_1", var6.attachments[1], "attachment_2", var6.attachments[2], "attachment_3", var6.attachments[3], "attachment_4", var6.attachments[4], "sticker_0", var6.ref_138a8[0], "sticker_1", var6.ref_138a8[1], "sticker_2", var6.ref_138a8[2], "sticker_3", var6.ref_138a8[3], "reticle", var6.reticle, "cosmetic_attachment", var6.impactfunc_carbon, "camo", var6.camo, "match_time_created_s", var6.pickuptime]);
+    self dlog_recordplayerevent("dlog_event_player_weapon_stats_br", ["weapon", var_6.weapon, "variant_id", var_6.variantid, "from_loadout", var_19, "died", var_20, "time_used_s", var_22, "longest_hit_distance", var_21, "deaths", var_9, "headshots", var_10, "hits", var_11, "kills", var_12, "shots", var_13, "damage", var_14, "attachment_0", var_6.attachments[0], "attachment_1", var_6.attachments[1], "attachment_2", var_6.attachments[2], "attachment_3", var_6.attachments[3], "attachment_4", var_6.attachments[4], "sticker_0", var_6.ref_138a8[0], "sticker_1", var_6.ref_138a8[1], "sticker_2", var_6.ref_138a8[2], "sticker_3", var_6.ref_138a8[3], "reticle", var_6.reticle, "cosmetic_attachment", var_6.impactfunc_carbon, "camo", var_6.camo, "match_time_created_s", var_6.pickuptime]);
   }
 }
 
-function logscoreevent(var0) {
+function logscoreevent(var_0) {
   if(scripts\mp\utility\entity::isgameparticipant(self) == 0) {
     return;
   }
@@ -647,101 +647,101 @@ function logscoreevent(var0) {
     return;
   }
 
-  var1 = gettimefrommatchstart(gettime());
-  self dlog_recordplayerevent("dlog_event_player_score_event", ["time_ms_from_match_start", var1, "score_event", var0]);
+  var_1 = gettimefrommatchstart(gettime());
+  self dlog_recordplayerevent("dlog_event_player_score_event", ["time_ms_from_match_start", var_1, "score_event", var_0]);
 }
 
-function ref_13154(var0) {
+function ref_13154(var_0) {
   if(getdvarint("OMKTLMMNPT") == 1) {
-    var0 setplayerdata("common", "round", "gameModeModifier", "tactical");
+    var_0 setplayerdata("common", "round", "gameModeModifier", "tactical");
     return;
   }
 
   if(getdvarint("MSQTTNSTNO") == 1) {
-    var0 setplayerdata("common", "round", "gameModeModifier", "hardcore");
+    var_0 setplayerdata("common", "round", "gameModeModifier", "hardcore");
     return;
   }
 
-  var0 setplayerdata("common", "round", "gameModeModifier", "normal");
+  var_0 setplayerdata("common", "round", "gameModeModifier", "normal");
 }
 
 function endofgamesummarylogger() {
-  level waittill("game_ended", var0);
+  level waittill("game_ended", var_0);
 
-  foreach(var2 in level.players) {
+  foreach(var_2 in level.players) {
     wait 0.05;
 
-    if(!isDefined(var2)) {
+    if(!isDefined(var_2)) {
       continue;
     }
 
-    if(isDefined(var2.weaponsused)) {
-      doublebubblesort(var2);
-      var3 = 0;
+    if(isDefined(var_2.weaponsused)) {
+      doublebubblesort(var_2);
+      var_3 = 0;
 
-      if(var2.weaponsused.size > 3) {
-        for(var4 = var2.weaponsused.size - 1; var4 > var2.weaponsused.size - 3; var4--) {
-          var2 setplayerdata("common", "round", "weaponsUsed", var3, var2.weaponsused[var4]);
-          var2 setplayerdata("common", "round", "weaponXpEarned", var3, var2.weaponxpearned[var4]);
-          var3++;
+      if(var_2.weaponsused.size > 3) {
+        for(var_4 = var_2.weaponsused.size - 1; var_4 > var_2.weaponsused.size - 3; var_4--) {
+          var_2 setplayerdata("common", "round", "weaponsUsed", var_3, var_2.weaponsused[var_4]);
+          var_2 setplayerdata("common", "round", "weaponXpEarned", var_3, var_2.weaponxpearned[var_4]);
+          var_3++;
         }
       } else {
-        for(var4 = var2.weaponsused.size - 1; var4 >= 0; var4--) {
-          var2 setplayerdata("common", "round", "weaponsUsed", var3, var2.weaponsused[var4]);
-          var2 setplayerdata("common", "round", "weaponXpEarned", var3, var2.weaponxpearned[var4]);
-          var3++;
+        for(var_4 = var_2.weaponsused.size - 1; var_4 >= 0; var_4--) {
+          var_2 setplayerdata("common", "round", "weaponsUsed", var_3, var_2.weaponsused[var_4]);
+          var_2 setplayerdata("common", "round", "weaponXpEarned", var_3, var_2.weaponxpearned[var_4]);
+          var_3++;
         }
       }
     } else {
-      var2 setplayerdata("common", "round", "weaponsUsed", 0, "none");
-      var2 setplayerdata("common", "round", "weaponsUsed", 1, "none");
-      var2 setplayerdata("common", "round", "weaponsUsed", 2, "none");
-      var2 setplayerdata("common", "round", "weaponXpEarned", 0, 0);
-      var2 setplayerdata("common", "round", "weaponXpEarned", 1, 0);
-      var2 setplayerdata("common", "round", "weaponXpEarned", 2, 0);
+      var_2 setplayerdata("common", "round", "weaponsUsed", 0, "none");
+      var_2 setplayerdata("common", "round", "weaponsUsed", 1, "none");
+      var_2 setplayerdata("common", "round", "weaponsUsed", 2, "none");
+      var_2 setplayerdata("common", "round", "weaponXpEarned", 0, 0);
+      var_2 setplayerdata("common", "round", "weaponXpEarned", 1, 0);
+      var_2 setplayerdata("common", "round", "weaponXpEarned", 2, 0);
     }
 
-    if(isDefined(var2.challengescompleted)) {
-      var2 setplayerdata("common", "round", "challengeNumCompleted", var2.challengescompleted.size);
+    if(isDefined(var_2.challengescompleted)) {
+      var_2 setplayerdata("common", "round", "challengeNumCompleted", var_2.challengescompleted.size);
     } else {
-      var2 setplayerdata("common", "round", "challengeNumCompleted", 0);
+      var_2 setplayerdata("common", "round", "challengeNumCompleted", 0);
     }
 
-    for(var4 = 0; var4 < 20; var4++) {
-      if(isDefined(var2.challengescompleted) && isDefined(var2.challengescompleted[var4]) && var2.challengescompleted[var4] != "ch_prestige" && !issubstr(var2.challengescompleted[var4], "_daily") && !issubstr(var2.challengescompleted[var4], "_weekly")) {
-        var2 setplayerdata("common", "round", "challengesCompleted", var4, var2.challengescompleted[var4]);
+    for(var_4 = 0; var_4 < 20; var_4++) {
+      if(isDefined(var_2.challengescompleted) && isDefined(var_2.challengescompleted[var_4]) && var_2.challengescompleted[var_4] != "ch_prestige" && !issubstr(var_2.challengescompleted[var_4], "_daily") && !issubstr(var_2.challengescompleted[var_4], "_weekly")) {
+        var_2 setplayerdata("common", "round", "challengesCompleted", var_4, var_2.challengescompleted[var_4]);
         continue;
       }
 
-      var2 setplayerdata("common", "round", "challengesCompleted", var4, "ch_none");
+      var_2 setplayerdata("common", "round", "challengesCompleted", var_4, "ch_none");
     }
 
-    var5 = tolower(getDvar("mapname"));
-    var2 setplayerdata("common", "round", "gameMode", scripts\mp\utility\game::getgametype());
-    var2 setplayerdata("common", "round", "map", var5);
-    ref_13154(var2);
+    var_5 = tolower(getDvar("mapname"));
+    var_2 setplayerdata("common", "round", "gameMode", scripts\mp\utility\game::getgametype());
+    var_2 setplayerdata("common", "round", "map", var_5);
+    ref_13154(var_2);
   }
 }
 
 function ref_12aa9() {
   if(scripts\mp\utility\game::matchmakinggame()) {
-    var0 = tolower(getDvar("mapname"));
-    var1 = getdvarint("NLTOPSKPQM");
+    var_0 = tolower(getDvar("mapname"));
+    var_1 = getdvarint("NLTOPSKPQM");
 
-    foreach(var3 in level.players) {
-      for(var4 = 31; var4 > 0; var4--) {
-        var5 = var3 getplayerdata("mp", "mapsPlayed", var4 - 1);
-        var3 setplayerdata("mp", "mapsPlayed", var4, var5);
+    foreach(var_3 in level.players) {
+      for(var_4 = 31; var_4 > 0; var_4--) {
+        var_5 = var_3 getplayerdata("mp", "mapsPlayed", var_4 - 1);
+        var_3 setplayerdata("mp", "mapsPlayed", var_4, var_5);
       }
 
-      var3 setplayerdata("mp", "mapsPlayed", 0, var0);
+      var_3 setplayerdata("mp", "mapsPlayed", 0, var_0);
 
-      for(var4 = 4; var4 > 0; var4--) {
-        var6 = var3 getplayerdata("mp", "playlistIdsPlayed", var4 - 1);
-        var3 setplayerdata("mp", "playlistIdsPlayed", var4, var6);
+      for(var_4 = 4; var_4 > 0; var_4--) {
+        var_6 = var_3 getplayerdata("mp", "playlistIdsPlayed", var_4 - 1);
+        var_3 setplayerdata("mp", "playlistIdsPlayed", var_4, var_6);
       }
 
-      var3 setplayerdata("mp", "playlistIdsPlayed", 0, var1);
+      var_3 setplayerdata("mp", "playlistIdsPlayed", 0, var_1);
     }
 
     return;
@@ -749,54 +749,54 @@ function ref_12aa9() {
 }
 
 function doublebubblesort() {
-  var0 = self.weaponxpearned;
-  var1 = self.weaponxpearned.size;
+  var_0 = self.weaponxpearned;
+  var_1 = self.weaponxpearned.size;
 
-  for(var2 = var1 - 1; var2 > 0; var2--) {
-    for(var3 = 1; var3 <= var2; var3++) {
-      if(var0[var3 - 1] < var0[var3]) {
-        var4 = self.weaponsused[var3];
-        self.weaponsused[var3] = self.weaponsused[var3 - 1];
-        self.weaponsused[var3 - 1] = var4;
-        var5 = self.weaponxpearned[var3];
-        self.weaponxpearned[var3] = self.weaponxpearned[var3 - 1];
-        self.weaponxpearned[var3 - 1] = var5;
-        var0 = self.weaponxpearned;
+  for(var_2 = var_1 - 1; var_2 > 0; var_2--) {
+    for(var_3 = 1; var_3 <= var_2; var_3++) {
+      if(var_0[var_3 - 1] < var_0[var_3]) {
+        var_4 = self.weaponsused[var_3];
+        self.weaponsused[var_3] = self.weaponsused[var_3 - 1];
+        self.weaponsused[var_3 - 1] = var_4;
+        var_5 = self.weaponxpearned[var_3];
+        self.weaponxpearned[var_3] = self.weaponxpearned[var_3 - 1];
+        self.weaponxpearned[var_3 - 1] = var_5;
+        var_0 = self.weaponxpearned;
       }
     }
   }
 }
 
-function isvalidclient(var0) {
+function isvalidclient(var_0) {
   if(istrue(game["isLaunchChunk"])) {
     return false;
   }
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return false;
-  } else if(isagent(var0)) {
+  } else if(isagent(var_0)) {
     return false;
-  } else if(!isPlayer(var0)) {
+  } else if(!isPlayer(var_0)) {
     return false;
   }
 
   return true;
 }
 
-function canlogclient(var0) {
-  if(isvalidclient(var0)) {
-    return (var0.clientid < level.maxlogclients);
+function canlogclient(var_0) {
+  if(isvalidclient(var_0)) {
+    return (var_0.clientid < level.maxlogclients);
   }
 
   return 0;
 }
 
-function canloglife(var0) {
-  return var0 < level.maxlives;
+function canloglife(var_0) {
+  return var_0 < level.maxlives;
 }
 
-function logweaponstat(var0, var1, var2, var3, var4) {
-  if(scripts\mp\utility\weapon::iskillstreakweapon(var0) || scripts\mp\utility\weapon::isvehicleweapon(var0)) {
+function logweaponstat(var_0, var_1, var_2, var_3, var_4) {
+  if(scripts\mp\utility\weapon::iskillstreakweapon(var_0) || scripts\mp\utility\weapon::isvehicleweapon(var_0)) {
     return;
   }
 
@@ -804,147 +804,147 @@ function logweaponstat(var0, var1, var2, var3, var4) {
     return;
   }
 
-  var5 = var0;
+  var_5 = var_0;
 
   if(scripts\mp\utility\game::getgametype() != "br") {
     if(isDefined(self.loadoutindex)) {
-      var5 = var5 + "+loadoutIndex" + self.loadoutindex;
+      var_5 = var_5 + "+loadoutIndex" + self.loadoutindex;
     } else {
       return;
     }
-  } else if(isDefined(self.pers["matchdataWeaponStats"][var5]) && isDefined(var4)) {
-    if(!getjuggmazebutton(var4, var5)) {
-      var6 = 1;
+  } else if(isDefined(self.pers["matchdataWeaponStats"][var_5]) && isDefined(var_4)) {
+    if(!getjuggmazebutton(var_4, var_5)) {
+      var_6 = 1;
 
-      for(var7 = var5 + "_" + var6;; var7 = var5 + "_" + var6) {
-        if(!isDefined(self.pers["matchdataWeaponStats"][var7]) || getjuggmazebutton(var4, var7)) {
+      for(var_7 = var_5 + "_" + var_6;; var_7 = var_5 + "_" + var_6) {
+        if(!isDefined(self.pers["matchdataWeaponStats"][var_7]) || getjuggmazebutton(var_4, var_7)) {
           break;
         }
 
-        var6++;
+        var_6++;
       }
 
-      var5 = var7;
+      var_5 = var_7;
     }
   }
 
-  if(!isDefined(self.pers["matchdataWeaponStats"][var5])) {
-    self.pers["matchdataWeaponStats"][var5] = spawnStruct();
-    self.pers["matchdataWeaponStats"][var5].stats = [];
-    self.pers["matchdataWeaponStats"][var5].weapon = var0;
-    self.pers["matchdataWeaponStats"][var5].loadoutindex = self.loadoutindex;
+  if(!isDefined(self.pers["matchdataWeaponStats"][var_5])) {
+    self.pers["matchdataWeaponStats"][var_5] = spawnStruct();
+    self.pers["matchdataWeaponStats"][var_5].stats = [];
+    self.pers["matchdataWeaponStats"][var_5].weapon = var_0;
+    self.pers["matchdataWeaponStats"][var_5].loadoutindex = self.loadoutindex;
 
-    if(isDefined(var3)) {
-      self.pers["matchdataWeaponStats"][var5].variantid = var3;
+    if(isDefined(var_3)) {
+      self.pers["matchdataWeaponStats"][var_5].variantid = var_3;
     } else {
-      self.pers["matchdataWeaponStats"][var5].variantid = -1;
+      self.pers["matchdataWeaponStats"][var_5].variantid = -1;
     }
 
-    if(scripts\mp\utility\game::getgametype() == "br" && isDefined(var4)) {
-      var8 = scripts\engine\utility::ter_op(isDefined(var4.camo), var4.camo, "none");
-      var9 = scripts\engine\utility::ter_op(isDefined(var4.visual), var4.visual, "none");
-      var10 = scripts\engine\utility::ter_op(isDefined(var4.reticle), var4.reticle, "none");
-      self.pers["matchdataWeaponStats"][var5].iscustomweapon = isDefined(var4.customweaponname);
-      self.pers["matchdataWeaponStats"][var5].camo = var8;
-      self.pers["matchdataWeaponStats"][var5].impactfunc_carbon = var9;
-      self.pers["matchdataWeaponStats"][var5].reticle = var10;
-      self.pers["matchdataWeaponStats"][var5].pickuptime = scripts\cp_mp\utility\game_utility::gettimesincegamestart();
-      var11 = scripts\mp\utility\weapon::getweaponattachmentsbasenames(var4);
-      var12 = [];
+    if(scripts\mp\utility\game::getgametype() == "br" && isDefined(var_4)) {
+      var_8 = scripts\engine\utility::ter_op(isDefined(var_4.camo), var_4.camo, "none");
+      var_9 = scripts\engine\utility::ter_op(isDefined(var_4.visual), var_4.visual, "none");
+      var_10 = scripts\engine\utility::ter_op(isDefined(var_4.reticle), var_4.reticle, "none");
+      self.pers["matchdataWeaponStats"][var_5].iscustomweapon = isDefined(var_4.customweaponname);
+      self.pers["matchdataWeaponStats"][var_5].camo = var_8;
+      self.pers["matchdataWeaponStats"][var_5].impactfunc_carbon = var_9;
+      self.pers["matchdataWeaponStats"][var_5].reticle = var_10;
+      self.pers["matchdataWeaponStats"][var_5].pickuptime = scripts\cp_mp\utility\game_utility::gettimesincegamestart();
+      var_11 = scripts\mp\utility\weapon::getweaponattachmentsbasenames(var_4);
+      var_12 = [];
 
-      for(var13 = 0; var13 < 5; var13++) {
-        var12 = "none";
+      for(var_13 = 0; var_13 < 5; var_13++) {
+        var_12 = "none";
       }
 
-      var14 = 0;
+      var_14 = 0;
 
-      foreach(var16 in var11) {
-        if(scripts\mp\utility\weapon::attachmentlogsstats(var16, var4)) {
-          var12 = var16;
-          var14++;
+      foreach(var_16 in var_11) {
+        if(scripts\mp\utility\weapon::attachmentlogsstats(var_16, var_4)) {
+          var_12 = var_16;
+          var_14++;
         }
       }
 
-      self.pers["matchdataWeaponStats"][var5].attachments = var12;
-      var18 = [];
-      GscBinSkip0(0x2e, var18.size, var4.stickerslot0);
+      self.pers["matchdataWeaponStats"][var_5].attachments = var_12;
+      var_18 = [];
+      GscBinSkip0(0x2e, var_18.size, var_4.stickerslot0);
     }
   }
 
-  if(!isDefined(self.pers["matchdataWeaponStats"][var18].stats[var14])) {
-    self.pers["matchdataWeaponStats"][var18].stats[var14] = var15;
+  if(!isDefined(self.pers["matchdataWeaponStats"][var_18].stats[var_14])) {
+    self.pers["matchdataWeaponStats"][var_18].stats[var_14] = var_15;
     return;
   }
 
-  self.pers["matchdataWeaponStats"][var18].stats[var14] = self.pers["matchdataWeaponStats"][var18].stats[var14] + var15;
+  self.pers["matchdataWeaponStats"][var_18].stats[var_14] = self.pers["matchdataWeaponStats"][var_18].stats[var_14] + var_15;
 }
 
-function getjuggmazebutton(var0, var1) {
-  var2 = scripts\engine\utility::ter_op(isDefined(var0.camo), var0.camo, "none");
+function getjuggmazebutton(var_0, var_1) {
+  var_2 = scripts\engine\utility::ter_op(isDefined(var_0.camo), var_0.camo, "none");
 
-  if(var2 != self.pers["matchdataWeaponStats"][var1].camo) {
+  if(var_2 != self.pers["matchdataWeaponStats"][var_1].camo) {
     return false;
   }
 
-  var3 = scripts\engine\utility::ter_op(isDefined(var0.visual), var0.visual, "none");
+  var_3 = scripts\engine\utility::ter_op(isDefined(var_0.visual), var_0.visual, "none");
 
-  if(var3 != self.pers["matchdataWeaponStats"][var1].impactfunc_carbon) {
+  if(var_3 != self.pers["matchdataWeaponStats"][var_1].impactfunc_carbon) {
     return false;
   }
 
-  var4 = scripts\engine\utility::ter_op(isDefined(var0.reticle), var0.reticle, "none");
+  var_4 = scripts\engine\utility::ter_op(isDefined(var_0.reticle), var_0.reticle, "none");
 
-  if(var4 != self.pers["matchdataWeaponStats"][var1].reticle) {
+  if(var_4 != self.pers["matchdataWeaponStats"][var_1].reticle) {
     return false;
   }
 
-  var5 = scripts\mp\utility\weapon::getweaponattachmentsbasenames(var0);
+  var_5 = scripts\mp\utility\weapon::getweaponattachmentsbasenames(var_0);
 
-  if(var5.size != self.pers["matchdataWeaponStats"][var1].attachments.size) {
+  if(var_5.size != self.pers["matchdataWeaponStats"][var_1].attachments.size) {
     return false;
   }
 
-  for(var6 = 0; var6 < var5.size; var6++) {
-    if(var5[var6] != self.pers["matchdataWeaponStats"][var1].attachments[var6]) {
+  for(var_6 = 0; var_6 < var_5.size; var_6++) {
+    if(var_5[var_6] != self.pers["matchdataWeaponStats"][var_1].attachments[var_6]) {
       return false;
     }
   }
 
-  var7 = [];
-  GscBinSkip0(0x2e, var7.size, var0.stickerslot0);
+  var_7 = [];
+  GscBinSkip0(0x2e, var_7.size, var_0.stickerslot0);
 }
 
-function logattachmentstat(var0, var1, var2, var3) {
+function logattachmentstat(var_0, var_1, var_2, var_3) {
   if(!level.matchdataattachmentstatsenabled) {
     return;
   }
 }
 
 function buildweaponrootlist() {
-  var0 = [];
-  var1 = 149;
+  var_0 = [];
+  var_1 = 149;
 
-  for(var2 = 0; var2 <= var1; var2++) {
-    var3 = tablelookup("mp/statstable.csv", 0, var2, 4);
-    var4 = tablelookup("mp/statstable.csv", 0, var2, 2);
+  for(var_2 = 0; var_2 <= var_1; var_2++) {
+    var_3 = tablelookup("mp/statstable.csv", 0, var_2, 4);
+    var_4 = tablelookup("mp/statstable.csv", 0, var_2, 2);
 
-    if(!issubstr(var4, "weapon_")) {
+    if(!issubstr(var_4, "weapon_")) {
       continue;
     }
 
-    if(var4 == "weapon_other") {
+    if(var_4 == "weapon_other") {
       continue;
     }
 
-    var0 = var3;
+    var_0 = var_3;
   }
 
-  return var0;
+  return var_0;
 }
 
-function logchallenge(var0, var1) {}
+function logchallenge(var_0, var_1) {}
 
-function logaward(var0) {
+function logaward(var_0) {
   if(!isvalidclient(self)) {
     return;
   }
@@ -953,6 +953,6 @@ function logaward(var0) {
     return;
   }
 
-  var1 = gettimefrommatchstart(gettime());
-  self dlog_recordplayerevent("dlog_event_player_award", ["time_ms_from_match_start", var1, "award", var0]);
+  var_1 = gettimefrommatchstart(gettime());
+  self dlog_recordplayerevent("dlog_event_player_award", ["time_ms_from_match_start", var_1, "award", var_0]);
 }

@@ -33,8 +33,8 @@ function main() {
   scripts\sp\audio::set_audio_level_fade_time(0.05);
   scripts\sp\load::main();
   embassy_inits();
-  var0 = ["frag", "flash", "molotov", "semtex"];
-  scripts\engine\sp\utility::offhandprecache(var0);
+  var_0 = ["frag", "flash", "molotov", "semtex"];
+  scripts\engine\sp\utility::offhandprecache(var_0);
   thread scripts\sp\maps\embassy\embassy_lighting::vision_set_init();
   scripts\engine\sp\utility::intro_screen_create(&"EMBASSY/INTRO_TITLE", &"EMBASSY/INTRO_DATE", &"EMBASSY/INTRO_WHO", &"EMBASSY/INTRO_SQUAD", &"EMBASSY/INTRO_LOCATION");
   scripts\engine\sp\utility::intro_screen_custom_func(&scripts\engine\sp\utility::empty_func);
@@ -110,10 +110,10 @@ function embassy_starts() {
 function mortar_anim() {
   scripts\sp\maps\embassy\embassy_defend::defend_inits();
   scripts\engine\sp\utility::set_start_location("defend_start", [level.player]);
-  var0 = scripts\engine\sp\utility::spawn_targetname("ally_01_mortar", 1);
-  var0.animname = "ally_01_mortar";
-  var1 = scripts\engine\utility::getStruct("mortar_rooftop_struct", "targetname");
-  var1 scripts\common\anim::anim_single_solo(var0, "rooftops_begin");
+  var_0 = scripts\engine\sp\utility::spawn_targetname("ally_01_mortar", 1);
+  var_0.animname = "ally_01_mortar";
+  var_1 = scripts\engine\utility::getStruct("mortar_rooftop_struct", "targetname");
+  var_1 scripts\common\anim::anim_single_solo(var_0, "rooftops_begin");
 }
 
 function embassy_precache() {
@@ -127,10 +127,10 @@ function embassy_precache() {
   precachemodel("head_sc_m_alameer_civ_bg_nohair");
   precachemodel("body_al_qatala_urban_civ_3_1");
   precachemodel("al_qatala_urban_civ_bomb_vest");
-  var0 = ["scaffolding_a", "scaffolding_b", "scaffolding_c"];
+  var_0 = ["scaffolding_a", "scaffolding_b", "scaffolding_c"];
 
-  foreach(var2 in var0) {
-    hide_scaffolding_mayhem(var2);
+  foreach(var_2 in var_0) {
+    hide_scaffolding_mayhem(var_2);
   }
 
   scripts\engine\utility::flag_init("forever");
@@ -145,28 +145,28 @@ function embassy_fx() {
   scripts\sp\maps\embassy\embassy_cctv::embassy_cctv_fx();
 }
 
-function hide_scaffolding_mayhem(var0) {
-  hidemayhem(var0);
-  hidemayhem(var0 + "_tarps");
+function hide_scaffolding_mayhem(var_0) {
+  hidemayhem(var_0);
+  hidemayhem(var_0 + "_tarps");
 }
 
 function init_perimeter_lights() {
   wait 0.15;
-  var0 = getscriptablearray("perimeter_lights", "targetname");
-  var1 = getEntArray("light_spot", "classname");
+  var_0 = getscriptablearray("perimeter_lights", "targetname");
+  var_1 = getEntArray("light_spot", "classname");
 
-  foreach(var3 in var0) {
-    var1 = sortbydistance(var1, var3.origin);
-    level thread scripts\sp\maps\embassy\embassy_defend::perimeter_light_ondeath(var3, var1[0]);
+  foreach(var_3 in var_0) {
+    var_1 = sortbydistance(var_1, var_3.origin);
+    level thread scripts\sp\maps\embassy\embassy_defend::perimeter_light_ondeath(var_3, var_1[0]);
   }
 }
 
 function loadout() {
-  var0 = level.player.meleeweapons;
+  var_0 = level.player.meleeweapons;
   level.player takeallweapons();
 
-  foreach(var2 in var0) {
-    level.player scripts\engine\sp\utility::give_melee_weapon(var2);
+  foreach(var_2 in var_0) {
+    level.player scripts\engine\sp\utility::give_melee_weapon(var_2);
   }
 
   level.player scripts\engine\sp\utility::give_offhand("frag");
@@ -185,24 +185,24 @@ function loadout() {
 function firemode_feedback() {
   level.player endon("death");
 
-  for(var0 = "_off";; var0 = scripts\engine\utility::ter_op(var0 == "_off", "_on", "_off")) {
+  for(var_0 = "_off";; var_0 = scripts\engine\utility::ter_op(var_0 == "_off", "_on", "_off")) {
     while(nullweapon(level.player getcurrentweapon())) {
       waitframe();
     }
 
-    var1 = level.player getcurrentweapon();
-    var2 = 0;
+    var_1 = level.player getcurrentweapon();
+    var_2 = 0;
 
-    if(issubstr(var1.basename, "sel")) {
-      var2 = 1;
+    if(issubstr(var_1.basename, "sel")) {
+      var_2 = 1;
     }
 
-    level.player waittill("weapon_change", var3);
-    var4 = createheadicon(var3);
+    level.player waittill("weapon_change", var_3);
+    var_4 = createheadicon(var_3);
 
-    if(var2 && issubstr(var4, "sel")) {
+    if(var_2 && issubstr(var_4, "sel")) {
       level.player playRumbleOnEntity("damage_heavy");
-      level.player playSound("wpfoly_acog_ads_toggle" + var0);
+      level.player playSound("wpfoly_acog_ads_toggle" + var_0);
       level.player forceplaygestureviewmodel("ges_fall_back", undefined, 0.05, 0.97);
     }
   }
@@ -211,13 +211,13 @@ function firemode_feedback() {
 function adjust_allowed_civilian_deaths() {
   if(!scripts\sp\starts::is_after_start("infil_saferoom")) {
     scripts\engine\utility::flag_wait("friendly_penalties_lowered");
-    var0 = level.friendlyfire["max_participation"];
-    var1 = level.player.participation;
+    var_0 = level.friendlyfire["max_participation"];
+    var_1 = level.player.participation;
     level.friendlyfire["max_participation"] = level.friendlyfire["friend_kill_points"] * -2;
     level.player.participation = level.friendlyfire["friend_kill_points"] * -2;
     scripts\engine\utility::flag_waitopen("friendly_penalties_lowered");
-    level.friendlyfire["max_participation"] = var0;
-    level.player.participation = var1;
+    level.friendlyfire["max_participation"] = var_0;
+    level.player.participation = var_1;
     return;
   }
 }
@@ -229,56 +229,56 @@ function art_main() {}
 function art_catchup() {}
 
 function spawn_funcs() {
-  var0 = scripts\engine\utility::array_combine(getspawnerarray("patrol_03"), getspawnerarray("patrol_01"), getspawnerarray("table_beating_enemy"));
-  var1 = scripts\engine\utility::array_combine(getspawnerarray("wave_0_enemies"), getspawnerarray("wave_0_1_enemies"), getspawnerarray("wave_0_2_enemies"));
-  var2 = scripts\engine\utility::array_combine(getspawnerarray("wave_1"), getspawnerarray("wave_1_extra_1"), getspawnerarray("wave_1_extra_2"), getspawnerarray("wave_1_extra_3"));
-  var3 = scripts\engine\utility::array_combine(getspawnerarray("wave_2_enemies"), getspawnerarray("wave_2_extra_1"), getspawnerarray("wave_2_extra_2"), getspawnerarray("wave_2_extra_3"), getspawnerarray("push_inside__refill"));
-  var4 = scripts\engine\utility::array_combine(getspawnerarray("scaffolding_a_guys"), getspawnerarray("scaffolding_b_guys"), getspawnerarray("scaffolding_c_guys"), getspawnerarray("guard_rails_guys"));
-  var5 = scripts\engine\sp\utility::get_spawner_array("wave_4_street_guys", "script_noteworthy");
-  var5 = scripts\engine\utility::array_combine(var5, getspawnerarray("horde_02"));
-  var6 = getspawnerarray("wave_4_corner_guys");
-  var7 = scripts\engine\utility::array_combine(getspawnerarray("wave_4_field_1"), getspawnerarray("wave_4_field_2"));
-  var8 = getspawnerarray("mortar_house_guys");
-  var9 = getspawnerarray("wave_5_mortar_house_exterior");
-  var10 = getspawner("doorbust_guy", "script_noteworthy");
-  var11 = getspawner("stairs_guy", "script_noteworthy");
-  var12 = getspawner("suicide_bomber", "targetname");
-  var13 = getspawnerarray("technical_dudes_01");
-  var14 = getspawner("technical_dude_gunner_01", "targetname");
-  var15 = getspawnerarray("technical_dudes_02");
-  var16 = getspawnerarray("technical_dudes_03");
-  var17 = getspawnerarray("technical_dudes_04");
-  var18 = getspawnerarray("technical_dudes_05");
-  var19 = getspawnerarray("technical_dudes_06");
-  var20 = getspawnerarray("technical_dudes_07");
-  var21 = getspawnerarray("technical_dudes_08");
-  var22 = getspawnerarray("technical_dudes_09");
-  var23 = getspawnerarray("technical_dudes_10");
+  var_0 = scripts\engine\utility::array_combine(getspawnerarray("patrol_03"), getspawnerarray("patrol_01"), getspawnerarray("table_beating_enemy"));
+  var_1 = scripts\engine\utility::array_combine(getspawnerarray("wave_0_enemies"), getspawnerarray("wave_0_1_enemies"), getspawnerarray("wave_0_2_enemies"));
+  var_2 = scripts\engine\utility::array_combine(getspawnerarray("wave_1"), getspawnerarray("wave_1_extra_1"), getspawnerarray("wave_1_extra_2"), getspawnerarray("wave_1_extra_3"));
+  var_3 = scripts\engine\utility::array_combine(getspawnerarray("wave_2_enemies"), getspawnerarray("wave_2_extra_1"), getspawnerarray("wave_2_extra_2"), getspawnerarray("wave_2_extra_3"), getspawnerarray("push_inside__refill"));
+  var_4 = scripts\engine\utility::array_combine(getspawnerarray("scaffolding_a_guys"), getspawnerarray("scaffolding_b_guys"), getspawnerarray("scaffolding_c_guys"), getspawnerarray("guard_rails_guys"));
+  var_5 = scripts\engine\sp\utility::get_spawner_array("wave_4_street_guys", "script_noteworthy");
+  var_5 = scripts\engine\utility::array_combine(var_5, getspawnerarray("horde_02"));
+  var_6 = getspawnerarray("wave_4_corner_guys");
+  var_7 = scripts\engine\utility::array_combine(getspawnerarray("wave_4_field_1"), getspawnerarray("wave_4_field_2"));
+  var_8 = getspawnerarray("mortar_house_guys");
+  var_9 = getspawnerarray("wave_5_mortar_house_exterior");
+  var_10 = getspawner("doorbust_guy", "script_noteworthy");
+  var_11 = getspawner("stairs_guy", "script_noteworthy");
+  var_12 = getspawner("suicide_bomber", "targetname");
+  var_13 = getspawnerarray("technical_dudes_01");
+  var_14 = getspawner("technical_dude_gunner_01", "targetname");
+  var_15 = getspawnerarray("technical_dudes_02");
+  var_16 = getspawnerarray("technical_dudes_03");
+  var_17 = getspawnerarray("technical_dudes_04");
+  var_18 = getspawnerarray("technical_dudes_05");
+  var_19 = getspawnerarray("technical_dudes_06");
+  var_20 = getspawnerarray("technical_dudes_07");
+  var_21 = getspawnerarray("technical_dudes_08");
+  var_22 = getspawnerarray("technical_dudes_09");
+  var_23 = getspawnerarray("technical_dudes_10");
   level.heli_guys = [];
-  var10 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\embassy\embassy_defend::doorbust_guy_spawn_func);
-  var11 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\embassy\embassy_defend::stairs_guy_spawn_func);
-  var12 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\embassy\embassy_defend::suicide_bomber_spawn_func);
-  var14 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\embassy\embassy_defend::wave_1_technical_gunner_spawn_func);
-  scripts\engine\sp\utility::array_spawn_function(var0, &scripts\sp\maps\embassy\embassy_cctv::camera_enemy_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var1, &scripts\sp\maps\embassy\embassy_defend::distant_enemies_spawn_func);
-  scripts\engine\sp\utility::array_spawn_function(var2, &scripts\sp\maps\embassy\embassy_defend::wave_1_enemy_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var3, &scripts\sp\maps\embassy\embassy_defend::wave_2_enemy_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var4, &scripts\sp\maps\embassy\embassy_defend::wave_3_building_enemy_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var5, &scripts\sp\maps\embassy\embassy_defend::wave_4_street_enemy_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var6, &scripts\sp\maps\embassy\embassy_defend::wave_4_corner_enemy_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var7, &scripts\sp\maps\embassy\embassy_defend::wave_5_street_enemy_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var9, &scripts\sp\maps\embassy\embassy_defend::wave_5_mortar_run_enemy_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var8, &scripts\sp\maps\embassy\embassy_defend::mortar_house_guys_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var13, &scripts\sp\maps\embassy\embassy_defend::wave_1_technical_enemy_behavior_01);
-  scripts\engine\sp\utility::array_spawn_function(var15, &scripts\sp\maps\embassy\embassy_defend::wave_4_technical_03_enemy_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var16, &scripts\sp\maps\embassy\embassy_defend::wave_4_technical_03_enemy_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var17, &scripts\sp\maps\embassy\embassy_defend::wave_6_technical_04_enemy_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var18, &scripts\sp\maps\embassy\embassy_defend::wave_6_technical_05_enemy_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var19, &scripts\sp\maps\embassy\embassy_defend::wave_6_technical_06_enemy_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var20, &scripts\sp\maps\embassy\embassy_defend::wave_6_technical_07_enemy_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var21, &scripts\sp\maps\embassy\embassy_defend::wave_6_technical_08_enemy_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var22, &scripts\sp\maps\embassy\embassy_defend::wave_4_technical_03_enemy_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var23, &scripts\sp\maps\embassy\embassy_defend::wave_4_technical_03_enemy_behavior);
+  var_10 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\embassy\embassy_defend::doorbust_guy_spawn_func);
+  var_11 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\embassy\embassy_defend::stairs_guy_spawn_func);
+  var_12 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\embassy\embassy_defend::suicide_bomber_spawn_func);
+  var_14 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\embassy\embassy_defend::wave_1_technical_gunner_spawn_func);
+  scripts\engine\sp\utility::array_spawn_function(var_0, &scripts\sp\maps\embassy\embassy_cctv::camera_enemy_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_1, &scripts\sp\maps\embassy\embassy_defend::distant_enemies_spawn_func);
+  scripts\engine\sp\utility::array_spawn_function(var_2, &scripts\sp\maps\embassy\embassy_defend::wave_1_enemy_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_3, &scripts\sp\maps\embassy\embassy_defend::wave_2_enemy_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_4, &scripts\sp\maps\embassy\embassy_defend::wave_3_building_enemy_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_5, &scripts\sp\maps\embassy\embassy_defend::wave_4_street_enemy_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_6, &scripts\sp\maps\embassy\embassy_defend::wave_4_corner_enemy_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_7, &scripts\sp\maps\embassy\embassy_defend::wave_5_street_enemy_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_9, &scripts\sp\maps\embassy\embassy_defend::wave_5_mortar_run_enemy_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_8, &scripts\sp\maps\embassy\embassy_defend::mortar_house_guys_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_13, &scripts\sp\maps\embassy\embassy_defend::wave_1_technical_enemy_behavior_01);
+  scripts\engine\sp\utility::array_spawn_function(var_15, &scripts\sp\maps\embassy\embassy_defend::wave_4_technical_03_enemy_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_16, &scripts\sp\maps\embassy\embassy_defend::wave_4_technical_03_enemy_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_17, &scripts\sp\maps\embassy\embassy_defend::wave_6_technical_04_enemy_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_18, &scripts\sp\maps\embassy\embassy_defend::wave_6_technical_05_enemy_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_19, &scripts\sp\maps\embassy\embassy_defend::wave_6_technical_06_enemy_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_20, &scripts\sp\maps\embassy\embassy_defend::wave_6_technical_07_enemy_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_21, &scripts\sp\maps\embassy\embassy_defend::wave_6_technical_08_enemy_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_22, &scripts\sp\maps\embassy\embassy_defend::wave_4_technical_03_enemy_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_23, &scripts\sp\maps\embassy\embassy_defend::wave_4_technical_03_enemy_behavior);
 }
 
 function embassy_flags() {

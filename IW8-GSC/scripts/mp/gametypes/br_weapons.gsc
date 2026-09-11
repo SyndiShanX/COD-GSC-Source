@@ -3,77 +3,77 @@
  * Script: scripts\mp\gametypes\br_weapons.gsc
 ***********************************************/
 
-function createspawnweaponatpos(var0, var1, var2) {
-  var3 = scripts\engine\trace::ray_trace(var0, (var0[0], var0[1], var0[2] - 60));
-  var4 = var0;
+function createspawnweaponatpos(var_0, var_1, var_2) {
+  var_3 = scripts\engine\trace::ray_trace(var_0, (var_0[0], var_0[1], var_0[2] - 60));
+  var_4 = var_0;
 
-  if(var3["fraction"] < 1) {
-    var4 = var3["position"] + (0, 0, 2);
+  if(var_3["fraction"] < 1) {
+    var_4 = var_3["position"] + (0, 0, 2);
   }
 
-  if(!isDefined(var1)) {
-    var1 = (0, 0, 90);
+  if(!isDefined(var_1)) {
+    var_1 = (0, 0, 90);
   }
 
-  var0 = var4;
+  var_0 = var_4;
 
-  if(isDefined(var1)) {
-    var1 = var1;
+  if(isDefined(var_1)) {
+    var_1 = var_1;
   } else {
-    var1 = (0, 0, 90);
+    var_1 = (0, 0, 90);
   }
 
-  var5 = scripts\mp\gametypes\br_pickups::remove_roof_nodes(var0, var1);
-  return weaponspawn(var2, undefined, var5, 1);
+  var_5 = scripts\mp\gametypes\br_pickups::remove_roof_nodes(var_0, var_1);
+  return weaponspawn(var_2, undefined, var_5, 1);
 }
 
-function createspawnweaponatposfromname(var0, var1) {
-  var2 = var0;
-  var3 = scripts\engine\trace::ray_trace(var0, (var0[0], var0[1], var0[2] - 60));
+function createspawnweaponatposfromname(var_0, var_1) {
+  var_2 = var_0;
+  var_3 = scripts\engine\trace::ray_trace(var_0, (var_0[0], var_0[1], var_0[2] - 60));
 
-  if(var3["fraction"] < 1) {
-    var2 = var3["position"] + (0, 0, 2);
+  if(var_3["fraction"] < 1) {
+    var_2 = var_3["position"] + (0, 0, 2);
   }
 
-  var4 = scripts\mp\gametypes\br_pickups::remove_roof_nodes(var0, (0, 0, 90));
-  return weaponspawn(var1, undefined, var4, 1);
+  var_4 = scripts\mp\gametypes\br_pickups::remove_roof_nodes(var_0, (0, 0, 90));
+  return weaponspawn(var_1, undefined, var_4, 1);
 }
 
 function stripweaponsfromplayer() {
-  var0 = undefined;
-  var1 = undefined;
+  var_0 = undefined;
+  var_1 = undefined;
 
-  foreach(var3 in self.equippedweapons) {
-    var4 = scripts\mp\utility\weapon::getweaponrootname(var3.basename);
+  foreach(var_3 in self.equippedweapons) {
+    var_4 = scripts\mp\utility\weapon::getweaponrootname(var_3.basename);
 
-    if(var4 != "iw8_fists" && var4 != "iw8_knifestab" && var4 != "iw8_gunless") {
-      if(issameweapon(var3) && var3.inventorytype == "primary") {
-        var5 = scripts\mp\utility\weapon::getweaponrootname(self.currentprimaryweapon);
+    if(var_4 != "iw8_fists" && var_4 != "iw8_knifestab" && var_4 != "iw8_gunless") {
+      if(issameweapon(var_3) && var_3.inventorytype == "primary") {
+        var_5 = scripts\mp\utility\weapon::getweaponrootname(self.currentprimaryweapon);
 
-        if(var4 == var5) {
-          var0 = var3;
+        if(var_4 == var_5) {
+          var_0 = var_3;
         } else {
-          var1 = var3;
+          var_1 = var_3;
         }
       }
     }
   }
 
-  if(isDefined(var0)) {
-    var7 = scripts\mp\utility\weapon::getweaponrootname(var0.basename);
+  if(isDefined(var_0)) {
+    var_7 = scripts\mp\utility\weapon::getweaponrootname(var_0.basename);
   }
 
-  if(isDefined(var1)) {
-    var8 = scripts\mp\utility\weapon::getweaponrootname(var1.basename);
+  if(isDefined(var_1)) {
+    var_8 = scripts\mp\utility\weapon::getweaponrootname(var_1.basename);
   }
 
-  if(isDefined(var0) || isDefined(var1)) {
-    if(isDefined(var0)) {
-      scripts\cp_mp\utility\inventory_utility::_takeweapon(var0, 1);
+  if(isDefined(var_0) || isDefined(var_1)) {
+    if(isDefined(var_0)) {
+      scripts\cp_mp\utility\inventory_utility::_takeweapon(var_0, 1);
     }
 
-    if(isDefined(var1)) {
-      scripts\cp_mp\utility\inventory_utility::_takeweapon(var1, 1);
+    if(isDefined(var_1)) {
+      scripts\cp_mp\utility\inventory_utility::_takeweapon(var_1, 1);
     }
 
     scripts\cp_mp\utility\inventory_utility::_giveweapon("iw8_fists_mp");
@@ -82,60 +82,60 @@ function stripweaponsfromplayer() {
   }
 }
 
-function playerdropweaponfrominventory(var0) {
-  var1 = undefined;
-  var2 = undefined;
+function playerdropweaponfrominventory(var_0) {
+  var_1 = undefined;
+  var_2 = undefined;
 
-  foreach(var4 in self.equippedweapons) {
-    var5 = scripts\mp\utility\weapon::getweaponrootname(var4.basename);
+  foreach(var_4 in self.equippedweapons) {
+    var_5 = scripts\mp\utility\weapon::getweaponrootname(var_4.basename);
 
-    if(var5 != "iw8_fists" && var5 != "iw8_knifestab") {
-      if(issameweapon(var4) && var4.inventorytype == "primary") {
-        var6 = scripts\mp\utility\weapon::getweaponrootname(self.currentprimaryweapon);
+    if(var_5 != "iw8_fists" && var_5 != "iw8_knifestab") {
+      if(issameweapon(var_4) && var_4.inventorytype == "primary") {
+        var_6 = scripts\mp\utility\weapon::getweaponrootname(self.currentprimaryweapon);
 
-        if(var5 == var6) {
-          iprintln("PRIMARY IS " + var5);
-          var1 = var4;
+        if(var_5 == var_6) {
+          iprintln("PRIMARY IS " + var_5);
+          var_1 = var_4;
         } else {
-          var2 = var4;
+          var_2 = var_4;
         }
       }
     }
   }
 
-  var8 = undefined;
-  var9 = undefined;
-  var10 = "";
-  var11 = "";
+  var_8 = undefined;
+  var_9 = undefined;
+  var_10 = "";
+  var_11 = "";
 
-  if(isDefined(var1)) {
-    var10 = scripts\mp\utility\weapon::getweaponrootname(var1.basename);
+  if(isDefined(var_1)) {
+    var_10 = scripts\mp\utility\weapon::getweaponrootname(var_1.basename);
   }
 
-  if(isDefined(var2)) {
-    var11 = scripts\mp\utility\weapon::getweaponrootname(var2.basename);
+  if(isDefined(var_2)) {
+    var_11 = scripts\mp\utility\weapon::getweaponrootname(var_2.basename);
   }
 
-  if(var0 == var10) {
-    var8 = var1;
-    var9 = var2;
-  } else if(var0 == var11) {
-    var8 = var2;
-    var9 = var1;
+  if(var_0 == var_10) {
+    var_8 = var_1;
+    var_9 = var_2;
+  } else if(var_0 == var_11) {
+    var_8 = var_2;
+    var_9 = var_1;
   }
 
-  var12 = 0;
+  var_12 = 0;
 
-  if(isDefined(var8)) {
-    var13 = self getweaponammoclip(var8);
-    var14 = scripts\mp\gametypes\br_pickups::test_ai_anim();
-    var15 = scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(var14, self.origin, self.angles, self);
-    var16 = weaponspawn(var8, self, var15, 0);
-    var16.count = var13;
-    scripts\cp_mp\utility\inventory_utility::_takeweapon(var8);
+  if(isDefined(var_8)) {
+    var_13 = self getweaponammoclip(var_8);
+    var_14 = scripts\mp\gametypes\br_pickups::test_ai_anim();
+    var_15 = scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(var_14, self.origin, self.angles, self);
+    var_16 = weaponspawn(var_8, self, var_15, 0);
+    var_16.count = var_13;
+    scripts\cp_mp\utility\inventory_utility::_takeweapon(var_8);
 
-    if(isDefined(var9)) {
-      scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate(var9);
+    if(isDefined(var_9)) {
+      scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate(var_9);
     } else {
       scripts\cp_mp\utility\inventory_utility::_giveweapon("iw8_fists_mp");
       scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate("iw8_fists_mp");
@@ -146,217 +146,217 @@ function playerdropweaponfrominventory(var0) {
   }
 }
 
-function weaponspawn(var0, var1, var2, var3, var4) {
-  var5 = createheadicon(var0);
-  var6 = scripts\mp\gametypes\br_pickups::spawnpickup(var5, var2, 0, var4, var0);
-  level.ref_120ad _calloutmarkerping_handleluinotify_acknowledgedcancel::from(var6, var1, var0);
-  return var6;
+function weaponspawn(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = createheadicon(var_0);
+  var_6 = scripts\mp\gametypes\br_pickups::spawnpickup(var_5, var_2, 0, var_4, var_0);
+  level.ref_120ad _calloutmarkerping_handleluinotify_acknowledgedcancel::from(var_6, var_1, var_0);
+  return var_6;
 }
 
-function takeweaponpickup(var0) {
-  var1 = self.primaryweapons.size;
+function takeweaponpickup(var_0) {
+  var_1 = self.primaryweapons.size;
 
-  if(!isDefined(var0.weapon)) {
-    var2 = [];
-    var3 = undefined;
+  if(!isDefined(var_0.weapon)) {
+    var_2 = [];
+    var_3 = undefined;
 
-    if(isDefined(var0.customweaponname)) {
-      var4 = var0.customweaponname;
-      var3 = asmdevgetallstates(var4);
-      var3.customweaponname = var0.customweaponname;
-    } else if(!isDefined(var1.completeweapon)) {
-      var5 = scripts\mp\gametypes\br_pickups::relic_vampire_globalfunc(var1);
-      var4 = createheadicon(var5);
+    if(isDefined(var_0.customweaponname)) {
+      var_4 = var_0.customweaponname;
+      var_3 = asmdevgetallstates(var_4);
+      var_3.customweaponname = var_0.customweaponname;
+    } else if(!isDefined(var_1.completeweapon)) {
+      var_5 = scripts\mp\gametypes\br_pickups::relic_vampire_globalfunc(var_1);
+      var_4 = createheadicon(var_5);
     } else {
-      var6 = scripts\mp\class::buildweapon(var3.loadoutprimaryfullname, var4, "none", "none", -1);
-      var4 = var3.loadoutprimaryfullname;
+      var_6 = scripts\mp\class::buildweapon(var_3.loadoutprimaryfullname, var_4, "none", "none", -1);
+      var_4 = var_3.loadoutprimaryfullname;
     }
 
-    if(!isDefined(var4)) {
-      scripts\mp\utility\script::laststand_dogtags("takeWeaponPickup error - scriptable not setup for pickup: " + var3.scriptablename);
+    if(!isDefined(var_4)) {
+      scripts\mp\utility\script::laststand_dogtags("takeWeaponPickup error - scriptable not setup for pickup: " + var_3.scriptablename);
       return;
     }
 
-    var2 = scripts\mp\utility\weapon::getweaponrootname(var4);
-    var4 = var4;
+    var_2 = scripts\mp\utility\weapon::getweaponrootname(var_4);
+    var_4 = var_4;
   } else {
-    var3 = var2.weapon;
-    jumpiffalse(isDefined(var2.loadoutprimaryfullname)) LOC_000000e1;
-    var6 = var2.loadoutprimaryfullname;
+    var_3 = var_2.weapon;
+    jumpiffalse(isDefined(var_2.loadoutprimaryfullname)) LOC_000000e1;
+    var_6 = var_2.loadoutprimaryfullname;
     goto LOC_000000f9;
   }
 
-  var7 = 0;
-  var8 = undefined;
-  var9 = 0;
+  var_7 = 0;
+  var_8 = undefined;
+  var_9 = 0;
 
-  foreach(var11 in self.primaryweapons) {
-    if(nullweapon(var11)) {
-      var5--;
+  foreach(var_11 in self.primaryweapons) {
+    if(nullweapon(var_11)) {
+      var_5--;
       continue;
     }
 
-    if(isnullweapon(var11, var6)) {
-      var9 = 1;
-      var7 = 1;
-      var8 = var11;
+    if(isnullweapon(var_11, var_6)) {
+      var_9 = 1;
+      var_7 = 1;
+      var_8 = var_11;
     }
   }
 
-  if(var5 > 1) {
+  if(var_5 > 1) {
     if(!self hasweapon("iw8_fists_mp")) {
-      var7 = 1;
-    } else if(!var9) {
+      var_7 = 1;
+    } else if(!var_9) {
       self takeweapon("iw8_fists_mp");
     }
   }
 
-  if(var7) {
-    if(!isDefined(var8)) {
-      var8 = router_use_obj();
+  if(var_7) {
+    if(!isDefined(var_8)) {
+      var_8 = router_use_obj();
     }
 
-    if(var8.basename != "none") {
-      var13 = self getweaponammoclip(var8);
-      var14 = self getweaponammoclip(var8, "left");
-      var15 = 0;
+    if(var_8.basename != "none") {
+      var_13 = self getweaponammoclip(var_8);
+      var_14 = self getweaponammoclip(var_8, "left");
+      var_15 = 0;
 
-      if(var8.hasalternate) {
-        var16 = var8 getaltweapon();
+      if(var_8.hasalternate) {
+        var_16 = var_8 getaltweapon();
 
-        if(!debug_spawn_crate_on_train(var8, var16)) {
-          var15 = self getweaponammoclip(var16);
+        if(!debug_spawn_crate_on_train(var_8, var_16)) {
+          var_15 = self getweaponammoclip(var_16);
         }
       }
 
-      if(!scripts\mp\riotshield::isriotshield(var8)) {
-        var17 = self getweaponammostock(var8);
-        var18 = br_ammo_type_for_weapon(var8);
+      if(!scripts\mp\riotshield::isriotshield(var_8)) {
+        var_17 = self getweaponammostock(var_8);
+        var_18 = br_ammo_type_for_weapon(var_8);
 
-        if(isDefined(var18)) {
-          self.br_ammo[var18] = var17;
+        if(isDefined(var_18)) {
+          self.br_ammo[var_18] = var_17;
         }
       }
 
-      var19 = var3.origin - self.origin;
-      var20 = vectortoyaw(var19);
-      var21 = !scripts\mp\gametypes\br_extract_quest::operatorsfxalias(var8);
+      var_19 = var_3.origin - self.origin;
+      var_20 = vectortoyaw(var_19);
+      var_21 = !scripts\mp\gametypes\br_extract_quest::operatorsfxalias(var_8);
 
-      if(var21) {
-        if(isDefined(var3.tracknonoobplayerlocation) && isDefined(var3.tracknonoobplayerlocation.ƒj× ëuW ésò / ) k² oø E\¯‘€ 2[)) {
-          var22 = var3.tracknonoobplayerlocation.ƒj× ëuW ésò / ) k² oø E\¯‘€ 2[; var23 = strtok(var8.basename, "_");
+      if(var_21) {
+        if(isDefined(var_3.tracknonoobplayerlocation) && isDefined(var_3.tracknonoobplayerlocation.ƒj× ëuW ésò / ) k² oø E\¯‘€ 2[)) {
+          var_22 = var_3.tracknonoobplayerlocation.ƒj× ëuW ésò / ) k² oø E\¯‘€ 2[; var_23 = strtok(var_8.basename, "_");
 
-          if(scripts\mp\class::update_health_bar_to_players(var8) || var23[1] == "me") {
-            var22 += (0, 90, 0);
+          if(scripts\mp\class::update_health_bar_to_players(var_8) || var_23[1] == "me") {
+            var_22 += (0, 90, 0);
           }
         }
         else {
-          var22 = (0, var21, 0);
+          var_22 = (0, var_21, 0);
         }
 
-        var24 = scripts\mp\gametypes\br_pickups::remove_roof_nodes(var5.origin, var22);
-        var25 = tablesort(var24.origin, 500, 500);
-        GscBinSkip0(0x2e, var25.size, self);
+        var_24 = scripts\mp\gametypes\br_pickups::remove_roof_nodes(var_5.origin, var_22);
+        var_25 = tablesort(var_24.origin, 500, 500);
+        GscBinSkip0(0x2e, var_25.size, self);
       }
 
-      scripts\cp_mp\utility\inventory_utility::_takeweapon(var12);
+      scripts\cp_mp\utility\inventory_utility::_takeweapon(var_12);
     }
   }
 
-  self giveweapon(var8);
-  self notify("pickedupweapon", var10, var8);
+  self giveweapon(var_8);
+  self notify("pickedupweapon", var_10, var_8);
 
-  if(istrue(var8.isweaponfromcrate) || istrue(var6.isweaponfromcrate)) {
-    var33 = br_ammo_type_for_weapon(var9);
+  if(istrue(var_8.isweaponfromcrate) || istrue(var_6.isweaponfromcrate)) {
+    var_33 = br_ammo_type_for_weapon(var_9);
 
-    if(isDefined(var33)) {
-      var34 = weaponclipsize(var8);
-      br_ammo_give_type(self, var33, var34);
+    if(isDefined(var_33)) {
+      var_34 = weaponclipsize(var_8);
+      br_ammo_give_type(self, var_33, var_34);
     }
   } else {
-    var35 = var6.count;
-    var36 = var6.impulsefx;
-    var34 = weaponclipsize(var8);
-    var37 = 0;
+    var_35 = var_6.count;
+    var_36 = var_6.impulsefx;
+    var_34 = weaponclipsize(var_8);
+    var_37 = 0;
 
-    if(var35 > var34) {
-      var37 += var35 - var34;
-      var35 = var34;
+    if(var_35 > var_34) {
+      var_37 += var_35 - var_34;
+      var_35 = var_34;
     }
 
-    if(var36 > var34) {
-      var37 += var36 - var34;
-      var36 = var34;
+    if(var_36 > var_34) {
+      var_37 += var_36 - var_34;
+      var_36 = var_34;
     }
 
-    self setweaponammoclip(var8, var35);
-    self setweaponammoclip(var8, var36, "left");
+    self setweaponammoclip(var_8, var_35);
+    self setweaponammoclip(var_8, var_36, "left");
 
-    if(var37 > 0) {
-      var33 = br_ammo_type_for_weapon(var8);
+    if(var_37 > 0) {
+      var_33 = br_ammo_type_for_weapon(var_8);
 
-      if(isDefined(var33)) {
-        br_ammo_give_type(self, var33, var37);
+      if(isDefined(var_33)) {
+        br_ammo_give_type(self, var_33, var_37);
       }
     }
 
-    if(var8.hasalternate) {
-      var38 = var6.impactfunc_fire;
-      var39 = var8 getaltweapon();
+    if(var_8.hasalternate) {
+      var_38 = var_6.impactfunc_fire;
+      var_39 = var_8 getaltweapon();
 
-      if(!debug_spawn_crate_on_train(var8, var39)) {
-        var40 = weaponclipsize(var39);
+      if(!debug_spawn_crate_on_train(var_8, var_39)) {
+        var_40 = weaponclipsize(var_39);
 
-        if(var38 > var40) {
-          var38 = var40;
+        if(var_38 > var_40) {
+          var_38 = var_40;
         }
 
-        self setweaponammoclip(var39, var38);
+        self setweaponammoclip(var_39, var_38);
       }
     }
   }
 
-  var8.ref_12cc1 = undefined;
+  var_8.ref_12cc1 = undefined;
   br_ammo_update_weapons(self);
-  self assignweaponprimaryslot(var8);
-  scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate(var8);
-  scripts\mp\weapons::fixupplayerweapons(self, var8);
-  scripts\mp\weapons::updatelastweaponobj(var8);
+  self assignweaponprimaryslot(var_8);
+  scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate(var_8);
+  scripts\mp\weapons::fixupplayerweapons(self, var_8);
+  scripts\mp\weapons::updatelastweaponobj(var_8);
 
-  if(isDefined(var6.weapon) && isent(var6.weapon)) {
-    var6.weapon delete();
+  if(isDefined(var_6.weapon) && isent(var_6.weapon)) {
+    var_6.weapon delete();
   }
 
-  var41 = undefined;
+  var_41 = undefined;
 
-  foreach(var43 in self.equippedweapons) {
-    if(issameweapon(var43) && var43.inventorytype == "primary") {
-      var4 = createheadicon(var43);
+  foreach(var_43 in self.equippedweapons) {
+    if(issameweapon(var_43) && var_43.inventorytype == "primary") {
+      var_4 = createheadicon(var_43);
 
-      if(var4 == var10) {
-        var41 = var43;
+      if(var_4 == var_10) {
+        var_41 = var_43;
         break;
       }
     }
   }
 
-  var41 = undefined;
-  var43 = undefined;
-  thread scripts\mp\gametypes\br_respawn::giveweaponpickup(var9);
+  var_41 = undefined;
+  var_43 = undefined;
+  thread scripts\mp\gametypes\br_respawn::giveweaponpickup(var_9);
 
-  if(isDefined(var5.tracknonoobplayerlocation)) {
-    level.ref_120ae _calloutmarkerping_handleluinotify_acknowledgedcancel::from(var5.tracknonoobplayerlocation, self, var7);
+  if(isDefined(var_5.tracknonoobplayerlocation)) {
+    level.ref_120ae _calloutmarkerping_handleluinotify_acknowledgedcancel::from(var_5.tracknonoobplayerlocation, self, var_7);
     return;
   }
 }
 
 function router_use_obj() {
-  var0 = self method_87d5();
+  var_0 = self method_87d5();
 
-  if(isDefined(var0) && scripts\mp\weapons::isdroppableweapon(var0)) {
-    foreach(var2 in self.primaryweapons) {
-      if(isnullweapon(var2, var0)) {
-        return var0;
+  if(isDefined(var_0) && scripts\mp\weapons::isdroppableweapon(var_0)) {
+    foreach(var_2 in self.primaryweapons) {
+      if(isnullweapon(var_2, var_0)) {
+        return var_0;
       }
     }
   }
@@ -364,130 +364,130 @@ function router_use_obj() {
   return self.lastdroppableweaponobj;
 }
 
-function takeammopickup(var0) {
-  var1 = 0;
+function takeammopickup(var_0) {
+  var_1 = 0;
 
-  if(var0.scriptablename == "Ammo_Crate") {
-    var2 = self getcurrentweapon().basename;
-    var3 = scripts\mp\utility\weapon::getweaponrootname(var2);
-    var4 = weaponclipsize(var2);
-    var5 = br_ammo_type_for_weapon(var2);
+  if(var_0.scriptablename == "Ammo_Crate") {
+    var_2 = self getcurrentweapon().basename;
+    var_3 = scripts\mp\utility\weapon::getweaponrootname(var_2);
+    var_4 = weaponclipsize(var_2);
+    var_5 = br_ammo_type_for_weapon(var_2);
 
-    if(isDefined(var5)) {
-      var1 = br_ammo_give_type(self, var5, var4);
+    if(isDefined(var_5)) {
+      var_1 = br_ammo_give_type(self, var_5, var_4);
     }
   } else {
-    var1 = br_ammo_give_type(self, var0.scriptablename, var0.count, 1);
+    var_1 = br_ammo_give_type(self, var_0.scriptablename, var_0.count, 1);
   }
 
-  if(var1) {
-    var0.count = var1;
-    var6 = 1;
+  if(var_1) {
+    var_0.count = var_1;
+    var_6 = 1;
   } else {
-    var6 = 0;
+    var_6 = 0;
   }
 
-  return var6;
+  return var_6;
 }
 
-function br_forcegiveweapon(var0, var1, var2) {
-  if(!scripts\engine\utility::array_contains(level.br_pickups.br_lootguns, var0)) {
-    var0 = degrees_to_radians();
+function br_forcegiveweapon(var_0, var_1, var_2) {
+  if(!scripts\engine\utility::array_contains(level.br_pickups.br_lootguns, var_0)) {
+    var_0 = degrees_to_radians();
   }
 
-  var3 = spawnStruct();
-  var3.loadoutprimaryfullname = var0;
-  var3.scriptablename = scripts\mp\utility\weapon::getweaponrootname(var0);
-  var3.completeweapon = var2;
-  var3.count = 0;
-  var3.impulsefx = 0;
-  var3.impactfunc_fire = 0;
-  takeweaponpickup(var1, var3);
+  var_3 = spawnStruct();
+  var_3.loadoutprimaryfullname = var_0;
+  var_3.scriptablename = scripts\mp\utility\weapon::getweaponrootname(var_0);
+  var_3.completeweapon = var_2;
+  var_3.count = 0;
+  var_3.impulsefx = 0;
+  var_3.impactfunc_fire = 0;
+  takeweaponpickup(var_1, var_3);
 }
 
-function degrees_to_radians(var0, var1) {
-  if(!isDefined(var0)) {
-    var0 = "ar";
+function degrees_to_radians(var_0, var_1) {
+  if(!isDefined(var_0)) {
+    var_0 = "ar";
   }
 
-  if(!isDefined(var1)) {
-    var1 = "comm";
+  if(!isDefined(var_1)) {
+    var_1 = "comm";
   }
 
-  var2 = [];
+  var_2 = [];
 
-  foreach(var4 in level.br_pickups.br_lootguns) {
-    if(issubstr(var4, "_" + var0 + "_")) {
-      if(issubstr(var4, "_" + var1)) {
-        var2 = var4;
+  foreach(var_4 in level.br_pickups.br_lootguns) {
+    if(issubstr(var_4, "_" + var_0 + "_")) {
+      if(issubstr(var_4, "_" + var_1)) {
+        var_2 = var_4;
       }
     }
   }
 
-  return var2[randomint(var2.size)];
+  return var_2[randomint(var_2.size)];
 }
 
-function br_getweaponstartingclipammo(var0) {
-  var1 = weaponclipsize(var0);
-  return int(var1);
+function br_getweaponstartingclipammo(var_0) {
+  var_1 = weaponclipsize(var_0);
+  return int(var_1);
 }
 
-function br_forcegivecustomweapon(var0, var1, var2, var3, var4, var5) {
-  if(var0 hasweapon(var1)) {
-    var0 scripts\mp\hud_message::showerrormessage("MP/BR_ALREADY_HOLDING_WEAPON");
+function br_forcegivecustomweapon(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(var_0 hasweapon(var_1)) {
+    var_0 scripts\mp\hud_message::showerrormessage("MP/BR_ALREADY_HOLDING_WEAPON");
     return false;
   }
 
-  var6 = var1 hasattachment("maxammo", 1);
-  var7 = spawnStruct();
-  var7.weapon = var1;
-  var7.loadoutprimaryfullname = var2;
-  var7.scriptablename = var3;
-  var7.origin = var0.origin + (0, 0, 24);
-  var7.count = br_getweaponstartingclipammo(var1);
-  var7.impulsefx = 0;
-  var7.impactfunc_fire = 0;
+  var_6 = var_1 hasattachment("maxammo", 1);
+  var_7 = spawnStruct();
+  var_7.weapon = var_1;
+  var_7.loadoutprimaryfullname = var_2;
+  var_7.scriptablename = var_3;
+  var_7.origin = var_0.origin + (0, 0, 24);
+  var_7.count = br_getweaponstartingclipammo(var_1);
+  var_7.impulsefx = 0;
+  var_7.impactfunc_fire = 0;
 
-  if(var6) {
-    var7.count = 999;
+  if(var_6) {
+    var_7.count = 999;
   }
 
-  if(isDefined(var4) && isDefined(var5)) {
-    var8 = weaponclipsize(var1);
-    var9 = int(ceil(var8 * var4));
-    var7.count = int(min(var9, var5));
+  if(isDefined(var_4) && isDefined(var_5)) {
+    var_8 = weaponclipsize(var_1);
+    var_9 = int(ceil(var_8 * var_4));
+    var_7.count = int(min(var_9, var_5));
   }
 
-  if(scripts\mp\utility\weapon::turnexfiltoside(var1)) {
-    var7.impulsefx = var7.count;
+  if(scripts\mp\utility\weapon::turnexfiltoside(var_1)) {
+    var_7.impulsefx = var_7.count;
   }
 
-  if(var1.hasalternate) {
-    var10 = var1 getaltweapon();
+  if(var_1.hasalternate) {
+    var_10 = var_1 getaltweapon();
 
-    if(!debug_spawn_crate_on_train(var1, var10)) {
-      var11 = weaponclipsize(var10);
-      var7.impactfunc_fire = var11;
+    if(!debug_spawn_crate_on_train(var_1, var_10)) {
+      var_11 = weaponclipsize(var_10);
+      var_7.impactfunc_fire = var_11;
 
-      if(var6) {
-        var7.impactfunc_fire = 999;
+      if(var_6) {
+        var_7.impactfunc_fire = 999;
       }
     }
   }
 
   if(getdvarint("scr_br_request_streaming_weapons", 0) > 0) {
-    var0 loadweaponsforplayer([var7.loadoutprimaryfullname]);
+    var_0 loadweaponsforplayer([var_7.loadoutprimaryfullname]);
   }
 
-  takeweaponpickup(var0, var7);
+  takeweaponpickup(var_0, var_7);
 
-  if(var1.hasalternate) {
-    var12 = var1 getaltweapon();
+  if(var_1.hasalternate) {
+    var_12 = var_1 getaltweapon();
 
-    if(var12.isalternate && scripts\mp\utility\weapon::attachmentmap_tobase(var12.underbarrel) == "ubshtgn") {
-      var13 = weaponclipsize(var12);
-      var14 = int(var13);
-      var0 setweaponammoclip(var12, var14);
+    if(var_12.isalternate && scripts\mp\utility\weapon::attachmentmap_tobase(var_12.underbarrel) == "ubshtgn") {
+      var_13 = weaponclipsize(var_12);
+      var_14 = int(var_13);
+      var_0 setweaponammoclip(var_12, var_14);
     }
   }
 
@@ -524,30 +524,30 @@ function br_ammo_player_init() {
     self waittill("br_spawned");
 
     if(!scripts\mp\flags::gameflag("prematch_done")) {
-      var0 = self getweaponslistprimaries();
+      var_0 = self getweaponslistprimaries();
 
-      foreach(var2 in var0) {
-        var3 = weaponclipsize(var2);
+      foreach(var_2 in var_0) {
+        var_3 = weaponclipsize(var_2);
 
-        if(isDefined(var3)) {
-          if(scripts\mp\utility\weapon::turnexfiltoside(var2)) {
-            self setweaponammoclip(var2, var3, "left");
-            self setweaponammoclip(var2, var3, "right");
+        if(isDefined(var_3)) {
+          if(scripts\mp\utility\weapon::turnexfiltoside(var_2)) {
+            self setweaponammoclip(var_2, var_3, "left");
+            self setweaponammoclip(var_2, var_3, "right");
             continue;
           }
 
-          self setweaponammoclip(var2, var3);
+          self setweaponammoclip(var_2, var_3);
         }
       }
     }
 
-    foreach(var6 in level.br_ammo_types) {
+    foreach(var_6 in level.br_ammo_types) {
       if(!scripts\mp\flags::gameflag("prematch_done")) {
-        self.br_ammo[var6] = level.br_ammo_max[var6];
+        self.br_ammo[var_6] = level.br_ammo_max[var_6];
         continue;
       }
 
-      self.br_ammo[var6] = 0;
+      self.br_ammo[var_6] = 0;
     }
 
     br_ammo_update_weapons(self);
@@ -572,37 +572,37 @@ function br_ammo_player_clear() {
     return;
   }
 
-  foreach(var1 in level.br_ammo_types) {
-    self.br_ammo[var1] = 0;
+  foreach(var_1 in level.br_ammo_types) {
+    self.br_ammo[var_1] = 0;
   }
 
   self notify("ammo_update");
 }
 
 function debug_spawnallaccesscards() {
-  var0 = self;
-  var1 = var0 getweaponslistprimaries();
+  var_0 = self;
+  var_1 = var_0 getweaponslistprimaries();
 
-  foreach(var3 in var1) {
-    var4 = br_ammo_type_for_weapon(var3);
+  foreach(var_3 in var_1) {
+    var_4 = br_ammo_type_for_weapon(var_3);
 
-    if(isDefined(var4)) {
-      var5 = var0 getweaponammoclip(var3, "right");
-      var6 = weaponclipsize(var3);
+    if(isDefined(var_4)) {
+      var_5 = var_0 getweaponammoclip(var_3, "right");
+      var_6 = weaponclipsize(var_3);
 
-      if(var5 < var6) {
+      if(var_5 < var_6) {
         return false;
       }
 
-      if(var3 hasattachment("akimbo", 1)) {
-        var7 = var0 getweaponammoclip(var3, "left");
+      if(var_3 hasattachment("akimbo", 1)) {
+        var_7 = var_0 getweaponammoclip(var_3, "left");
 
-        if(var7 < var6) {
+        if(var_7 < var_6) {
           return false;
         }
       }
 
-      if(!br_ammo_type_player_full(var0, var4)) {
+      if(!br_ammo_type_player_full(var_0, var_4)) {
         return false;
       }
     }
@@ -612,106 +612,106 @@ function debug_spawnallaccesscards() {
 }
 
 function debug_spawncover_badnodetest() {
-  var0 = self;
-  var1 = [];
-  var2 = var0 getweaponslistprimaries();
+  var_0 = self;
+  var_1 = [];
+  var_2 = var_0 getweaponslistprimaries();
 
-  foreach(var4 in var2) {
-    var5 = br_ammo_type_for_weapon(var4);
+  foreach(var_4 in var_2) {
+    var_5 = br_ammo_type_for_weapon(var_4);
 
-    if(isDefined(var5)) {
-      var1 = "dummy_value";
-      var6 = weaponclipsize(var4);
-      var0 setweaponammoclip(var4, var6);
+    if(isDefined(var_5)) {
+      var_1 = "dummy_value";
+      var_6 = weaponclipsize(var_4);
+      var_0 setweaponammoclip(var_4, var_6);
     }
   }
 
-  foreach(var5, var9 in var1) {
-    var0.br_ammo[var5] = level.br_ammo_max[var5];
-    br_ammo_player_hud_update_ammotype(var0, var5);
+  foreach(var_5, var_9 in var_1) {
+    var_0.br_ammo[var_5] = level.br_ammo_max[var_5];
+    br_ammo_player_hud_update_ammotype(var_0, var_5);
   }
 
-  br_ammo_update_weapons(var0);
+  br_ammo_update_weapons(var_0);
 }
 
-function br_ammo_type_player_full(var0, var1) {
-  if(!isDefined(var0.br_ammo) || !isDefined(var0.br_ammo[var1])) {
+function br_ammo_type_player_full(var_0, var_1) {
+  if(!isDefined(var_0.br_ammo) || !isDefined(var_0.br_ammo[var_1])) {
     return false;
   }
 
-  if(!isDefined(level.br_ammo_max[var1])) {
+  if(!isDefined(level.br_ammo_max[var_1])) {
     return false;
   }
 
-  return scripts\mp\gametypes\br::get_int_or_0(var0.br_ammo[var1]) >= level.br_ammo_max[var1];
+  return scripts\mp\gametypes\br::get_int_or_0(var_0.br_ammo[var_1]) >= level.br_ammo_max[var_1];
 }
 
-function br_ammo_give_type(var0, var1, var2, var3) {
-  debug_spawnrewardstest(var0, var1);
+function br_ammo_give_type(var_0, var_1, var_2, var_3) {
+  debug_spawnrewardstest(var_0, var_1);
 
-  if(br_ammo_type_player_full(var0, var1)) {
-    return var2;
+  if(br_ammo_type_player_full(var_0, var_1)) {
+    return var_2;
   }
 
-  if(!isDefined(var0.br_ammo)) {
-    var0.br_ammo = [];
+  if(!isDefined(var_0.br_ammo)) {
+    var_0.br_ammo = [];
   }
 
-  if(!isDefined(var0.br_ammo[var1])) {
-    var0.br_ammo[var1] = 0;
+  if(!isDefined(var_0.br_ammo[var_1])) {
+    var_0.br_ammo[var_1] = 0;
   }
 
-  if(!isDefined(var3)) {
-    var3 = 0;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  var4 = 0;
-  var0.br_ammo[var1] += var2;
+  var_4 = 0;
+  var_0.br_ammo[var_1] += var_2;
 
-  if(var0.br_ammo[var1] > level.br_ammo_max[var1]) {
-    if(var3) {
-      var4 = var0.br_ammo[var1] - level.br_ammo_max[var1];
+  if(var_0.br_ammo[var_1] > level.br_ammo_max[var_1]) {
+    if(var_3) {
+      var_4 = var_0.br_ammo[var_1] - level.br_ammo_max[var_1];
 
-      if(var4 < level.br_ammo_clipsize[var1]) {
-        var4 = 0;
+      if(var_4 < level.br_ammo_clipsize[var_1]) {
+        var_4 = 0;
       }
     }
 
-    var0.br_ammo[var1] = level.br_ammo_max[var1];
+    var_0.br_ammo[var_1] = level.br_ammo_max[var_1];
   }
 
-  br_ammo_player_hud_update_ammotype(var0, var1);
-  debug_start_numbers_threaded(var0, var1);
-  return var4;
+  br_ammo_player_hud_update_ammotype(var_0, var_1);
+  debug_start_numbers_threaded(var_0, var_1);
+  return var_4;
 }
 
-function debug_spawnrewardstest(var0, var1) {
-  if(!var0 isreloading()) {
+function debug_spawnrewardstest(var_0, var_1) {
+  if(!var_0 isreloading()) {
     return;
   }
 
-  var2 = var0 getcurrentprimaryweapon();
-  var3 = br_ammo_type_for_weapon(var2);
+  var_2 = var_0 getcurrentprimaryweapon();
+  var_3 = br_ammo_type_for_weapon(var_2);
 
-  if(isDefined(var3) && var1 == var3) {
-    var0.br_ammo[var1] = var0 getweaponammostock(var2);
+  if(isDefined(var_3) && var_1 == var_3) {
+    var_0.br_ammo[var_1] = var_0 getweaponammostock(var_2);
     return;
   }
 }
 
-function br_ammo_take_type(var0, var1, var2) {
-  if(var0.br_ammo[var1] <= 0) {
+function br_ammo_take_type(var_0, var_1, var_2) {
+  if(var_0.br_ammo[var_1] <= 0) {
     return false;
   }
 
-  var0.br_ammo[var1] -= var2;
+  var_0.br_ammo[var_1] -= var_2;
 
-  if(var0.br_ammo[var1] < 0) {
-    var0.br_ammo[var1] = 0;
+  if(var_0.br_ammo[var_1] < 0) {
+    var_0.br_ammo[var_1] = 0;
   }
 
-  br_ammo_player_hud_update_ammotype(var0, var1);
-  br_ammo_update_weapons(var0);
+  br_ammo_player_hud_update_ammotype(var_0, var_1);
+  br_ammo_update_weapons(var_0);
   return true;
 }
 
@@ -729,86 +729,86 @@ function br_ammo_player_hud_monitor() {
   }
 }
 
-function br_ammo_player_hud_update_ammotype(var0, var1) {
-  if(isDefined(level.br_ammo_omnvars[var0])) {
+function br_ammo_player_hud_update_ammotype(var_0, var_1) {
+  if(isDefined(level.br_ammo_omnvars[var_0])) {
     if(!isDefined(self.br_ammo)) {
       self.br_ammo = [];
     }
 
-    if(!isDefined(self.br_ammo[var0])) {
-      self.br_ammo[var0] = 0;
+    if(!isDefined(self.br_ammo[var_0])) {
+      self.br_ammo[var_0] = 0;
     }
 
-    self setclientomnvar(level.br_ammo_omnvars[var0], self.br_ammo[var0]);
+    self setclientomnvar(level.br_ammo_omnvars[var_0], self.br_ammo[var_0]);
     return;
   }
 }
 
-function br_ammo_update_weapons(var0) {
+function br_ammo_update_weapons(var_0) {
   if(scripts\mp\gametypes\br_gametypes::unset_relic_aggressive_melee("weapons")) {
     return;
   }
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var1 = var0 getweaponslistprimaries();
+  var_1 = var_0 getweaponslistprimaries();
 
-  foreach(var3 in var1) {
-    var4 = br_ammo_type_for_weapon(var3);
+  foreach(var_3 in var_1) {
+    var_4 = br_ammo_type_for_weapon(var_3);
 
-    if(isDefined(var4)) {
-      var5 = scripts\mp\gametypes\br::get_int_or_0(var0.br_ammo[var4]);
-      var0 setweaponammostock(var3, var5);
+    if(isDefined(var_4)) {
+      var_5 = scripts\mp\gametypes\br::get_int_or_0(var_0.br_ammo[var_4]);
+      var_0 setweaponammostock(var_3, var_5);
     }
   }
 
-  var0 notify("ammo_update");
+  var_0 notify("ammo_update");
 }
 
-function debug_start_numbers_threaded(var0, var1) {
-  if(!isDefined(var0) || !isDefined(var1)) {
+function debug_start_numbers_threaded(var_0, var_1) {
+  if(!isDefined(var_0) || !isDefined(var_1)) {
     return;
   }
 
-  var2 = self getweaponslistprimaries();
+  var_2 = self getweaponslistprimaries();
 
-  foreach(var4 in var2) {
-    var5 = br_ammo_type_for_weapon(var4);
+  foreach(var_4 in var_2) {
+    var_5 = br_ammo_type_for_weapon(var_4);
 
-    if(isDefined(var5) && var1 == var5) {
-      var6 = scripts\mp\gametypes\br::get_int_or_0(var0.br_ammo[var1]);
-      var0 setweaponammostock(var4, var6);
+    if(isDefined(var_5) && var_1 == var_5) {
+      var_6 = scripts\mp\gametypes\br::get_int_or_0(var_0.br_ammo[var_1]);
+      var_0 setweaponammostock(var_4, var_6);
     }
   }
 
-  var0 notify("ammo_update");
+  var_0 notify("ammo_update");
 }
 
-function br_ammo_type_for_weapon(var0) {
-  var1 = undefined;
-  var2 = ["selectsemi", "selectsemi_falpha", "selectsemi_anov94", "ub_buckslug_semi", "ub_buckslug", "s4_selectsemi", "selectsemi_bromeopg", "s4_selectauto", "selectsemi_mike1911"];
-  var3 = ["ubshtgn", "ubshtgn02", "ubshtgn_mike4"];
+function br_ammo_type_for_weapon(var_0) {
+  var_1 = undefined;
+  var_2 = ["selectsemi", "selectsemi_falpha", "selectsemi_anov94", "ub_buckslug_semi", "ub_buckslug", "s4_selectsemi", "selectsemi_bromeopg", "s4_selectauto", "selectsemi_mike1911"];
+  var_3 = ["ubshtgn", "ubshtgn02", "ubshtgn_mike4"];
 
-  if(var0.isalternate && isDefined(var0.underbarrel) && !scripts\engine\utility::array_contains(var2, var0.underbarrel)) {
-    if(scripts\engine\utility::array_contains(var3, var0.underbarrel)) {
+  if(var_0.isalternate && isDefined(var_0.underbarrel) && !scripts\engine\utility::array_contains(var_2, var_0.underbarrel)) {
+    if(scripts\engine\utility::array_contains(var_3, var_0.underbarrel)) {
       return undefined;
     } else {
-      var1 = "weapon_projectile";
+      var_1 = "weapon_projectile";
     }
   } else {
-    var1 = scripts\mp\utility\weapon::getweapongroup(var0);
+    var_1 = scripts\mp\utility\weapon::getweapongroup(var_0);
   }
 
-  return debug_spawning(var1, var0.basename);
+  return debug_spawning(var_1, var_0.basename);
 }
 
-function debug_spawning(var0, var1) {
-  switch (var0) {
+function debug_spawning(var_0, var_1) {
+  switch (var_0) {
     case "weapon_machine_pistol":
     case "weapon_pistol":
-      if(isDefined(var1) && var1 == "iw8_pi_t9pistolshot_mp") {
+      if(isDefined(var_1) && var_1 == "iw8_pi_t9pistolshot_mp") {
         return "brloot_ammo_12g";
       }
     case "weapon_smg":
@@ -830,8 +830,8 @@ function debug_spawning(var0, var1) {
   return undefined;
 }
 
-function trial_vehicle(var0) {
-  switch (var0) {
+function trial_vehicle(var_0) {
+  switch (var_0) {
     case "brloot_ammo_50cal":
     case "brloot_ammo_rocket":
     case "brloot_ammo_919":
@@ -843,10 +843,10 @@ function trial_vehicle(var0) {
   return false;
 }
 
-function debug_spawn_crate_on_train(var0, var1) {
-  var2 = br_ammo_type_for_weapon(var0);
-  var3 = br_ammo_type_for_weapon(var1);
-  return isDefined(var2) && isDefined(var3) && var2 == var3;
+function debug_spawn_crate_on_train(var_0, var_1) {
+  var_2 = br_ammo_type_for_weapon(var_0);
+  var_3 = br_ammo_type_for_weapon(var_1);
+  return isDefined(var_2) && isDefined(var_3) && var_2 == var_3;
 }
 
 function br_ammo_player_reload_watch() {
@@ -864,32 +864,32 @@ function br_ammo_player_reload_watch() {
       continue;
     }
 
-    var0 = self getcurrentweapon();
-    var1 = br_ammo_type_for_weapon(var0);
+    var_0 = self getcurrentweapon();
+    var_1 = br_ammo_type_for_weapon(var_0);
 
-    if(!isDefined(var1)) {
+    if(!isDefined(var_1)) {
       continue;
     }
 
-    denyascendmessagejugg(var0);
+    denyascendmessagejugg(var_0);
 
     if(!isDefined(self)) {
       return;
     }
 
-    if(var0 != self getcurrentweapon()) {
+    if(var_0 != self getcurrentweapon()) {
       continue;
     }
 
     if(!getdvarint("scr_prematch_infinite_ammo", istrue(level.ref_12857)) || scripts\mp\flags::gameflag("prematch_done")) {
-      self.br_ammo[var1] = self getweaponammostock(var0);
+      self.br_ammo[var_1] = self getweaponammostock(var_0);
     }
 
-    debug_start_numbers_threaded(self, var1);
+    debug_start_numbers_threaded(self, var_1);
   }
 }
 
-function denyascendmessagejugg(var0) {
+function denyascendmessagejugg(var_0) {
   level endon("game_ended");
   self endon("death_or_disconnect");
   self endon("weapon_fired");
@@ -899,48 +899,48 @@ function denyascendmessagejugg(var0) {
   }
 }
 
-function delay_delete_alerted_icon(var0, var1) {
-  var2 = self;
+function delay_delete_alerted_icon(var_0, var_1) {
+  var_2 = self;
 
-  if(!isDefined(var1)) {
-    var1 = 1;
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
-  var3 = br_ammo_type_for_weapon(var0);
+  var_3 = br_ammo_type_for_weapon(var_0);
 
-  if(isDefined(var3)) {
-    var4 = int(level.br_ammo_clipsize[var3] * var1);
-    var2.br_ammo[var3] = int(clamp(var2.br_ammo[var3] + var4, 0, level.br_ammo_max[var3]));
+  if(isDefined(var_3)) {
+    var_4 = int(level.br_ammo_clipsize[var_3] * var_1);
+    var_2.br_ammo[var_3] = int(clamp(var_2.br_ammo[var_3] + var_4, 0, level.br_ammo_max[var_3]));
   }
 
-  debug_start_numbers_threaded(var2, var3);
+  debug_start_numbers_threaded(var_2, var_3);
 }
 
-function delay_camera_normal(var0, var1) {
-  var2 = self;
-  var3 = br_ammo_type_for_weapon(var0);
+function delay_camera_normal(var_0, var_1) {
+  var_2 = self;
+  var_3 = br_ammo_type_for_weapon(var_0);
 
-  if(isDefined(var3)) {
-    var2.br_ammo[var3] = int(clamp(var2.br_ammo[var3] + var1, 0, level.br_ammo_max[var3]));
+  if(isDefined(var_3)) {
+    var_2.br_ammo[var_3] = int(clamp(var_2.br_ammo[var_3] + var_1, 0, level.br_ammo_max[var_3]));
   }
 
-  debug_start_numbers_threaded(var2, var3);
+  debug_start_numbers_threaded(var_2, var_3);
 }
 
-function vandalize_attack_max_cooldown(var0) {
-  if(!isDefined(var0)) {
+function vandalize_attack_max_cooldown(var_0) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
-  if(!issameweapon(var0)) {
+  if(!issameweapon(var_0)) {
     return false;
   }
 
-  if(nullweapon(var0)) {
+  if(nullweapon(var_0)) {
     return false;
   }
 
-  if(scripts\mp\weapons::isfistweapon(var0) || scripts\mp\utility\weapon::unset_relic_mythic(var0) || scripts\mp\utility\weapon::update_health_bar_to_player(var0)) {
+  if(scripts\mp\weapons::isfistweapon(var_0) || scripts\mp\utility\weapon::unset_relic_mythic(var_0) || scripts\mp\utility\weapon::update_health_bar_to_player(var_0)) {
     return false;
   }
 
@@ -953,27 +953,27 @@ function deregistergasmaskscriptableatframeend() {
   }
 }
 
-function droptogroundmultitrace(var0) {
-  foreach(var2 in var0) {
-    zone_bounds(var2, istrue(var2.should_spawn_boss_one));
+function droptogroundmultitrace(var_0) {
+  foreach(var_2 in var_0) {
+    zone_bounds(var_2, istrue(var_2.should_spawn_boss_one));
   }
 }
 
-function zone_bounds(var0, var1) {
-  var2 = br_ammo_type_for_weapon(var0);
-  var3 = weaponstartammo(var0);
-  var4 = weaponclipsize(var0);
-  var5 = weaponmaxammo(var0);
-  var6 = undefined;
+function zone_bounds(var_0, var_1) {
+  var_2 = br_ammo_type_for_weapon(var_0);
+  var_3 = weaponstartammo(var_0);
+  var_4 = weaponclipsize(var_0);
+  var_5 = weaponmaxammo(var_0);
+  var_6 = undefined;
 
-  if(var1) {
-    var6 = var5;
+  if(var_1) {
+    var_6 = var_5;
   } else {
-    var6 = var3 - var4;
+    var_6 = var_3 - var_4;
   }
 
-  if(isDefined(var2)) {
-    br_ammo_give_type(self, var2, var6);
+  if(isDefined(var_2)) {
+    br_ammo_give_type(self, var_2, var_6);
     return;
   }
 }

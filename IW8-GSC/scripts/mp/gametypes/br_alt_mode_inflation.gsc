@@ -47,68 +47,68 @@ function ref_12516() {
   return istrue(level.br_prematchstarted) && !istrue(self.delay_enter_combat_after_investigating_grenade) && !level.debug_silo_jump.disabled && self.plundercount >= level.debug_silo_jump.cost;
 }
 
-function playerdropplunderondeath(var0, var1) {
-  var2 = self.plundercount;
+function playerdropplunderondeath(var_0, var_1) {
+  var_2 = self.plundercount;
 
   if(istrue(self.respawningfromtoken)) {
-    var2 -= level.debug_silo_jump.cost;
+    var_2 -= level.debug_silo_jump.cost;
 
-    if(var2 < 0) {
-      var2 = 0;
+    if(var_2 < 0) {
+      var_2 = 0;
     }
   }
 
-  var3 = int(var2 * level.debug_silo_jump.minigamewinnersettings);
-  var2 -= var3;
-  scripts\mp\gametypes\br_plunder::playersetplundercount(var2, roof_combat_spawn_func());
+  var_3 = int(var_2 * level.debug_silo_jump.minigamewinnersettings);
+  var_2 -= var_3;
+  scripts\mp\gametypes\br_plunder::playersetplundercount(var_2, roof_combat_spawn_func());
 
   if(level.debug_silo_jump.minigameapplyplayernamesettings >= 0) {
-    var3 = int(min(level.debug_silo_jump.minigameapplyplayernamesettings, var3));
+    var_3 = int(min(level.debug_silo_jump.minigameapplyplayernamesettings, var_3));
   }
 
-  scripts\mp\gametypes\br_plunder::ml_p3_func(var3, var0);
+  scripts\mp\gametypes\br_plunder::ml_p3_func(var_3, var_0);
   return true;
 }
 
-function circletimer(var0) {
-  if(!var0) {
+function circletimer(var_0) {
+  if(!var_0) {
     scripts\mp\gametypes\br_gulag::ref_13249();
   }
 
-  var1 = scripts\mp\gametypes\br_gulag::remove_engineer_class();
+  var_1 = scripts\mp\gametypes\br_gulag::remove_engineer_class();
 
-  if(!level.debug_silo_jump.disabled && var0 >= var1) {
+  if(!level.debug_silo_jump.disabled && var_0 >= var_1) {
     level.debug_silo_jump.disabled = 1;
 
-    foreach(var3 in level.players) {
-      if(!isDefined(var3) || !isalive(var3)) {
+    foreach(var_3 in level.players) {
+      if(!isDefined(var_3) || !isalive(var_3)) {
         continue;
       }
 
-      ref_14012(var3);
-      scripts\mp\gametypes\br_killstreaks::isbrsquadleader(var3, "cash_deploy_closed", undefined, 2);
+      ref_14012(var_3);
+      scripts\mp\gametypes\br_killstreaks::isbrsquadleader(var_3, "cash_deploy_closed", undefined, 2);
     }
   }
 
   return false;
 }
 
-function ref_12804(var0) {
-  var1 = 0;
+function ref_12804(var_0) {
+  var_1 = 0;
 
-  if(isDefined(var0)) {
-    var1 = var0.ref_133e4;
+  if(isDefined(var_0)) {
+    var_1 = var_0.ref_133e4;
   }
 
-  ref_14012(var1);
+  ref_14012(var_1);
 }
 
-function ref_14012(var0) {
+function ref_14012(var_0) {
   if(ref_12516()) {
     if(!scripts\mp\gametypes\br_public::hasrespawntoken()) {
       scripts\mp\gametypes\br_pickups::addrespawntoken(1);
 
-      if(!istrue(var0)) {
+      if(!istrue(var_0)) {
         thread scripts\mp\hud_message::showsplash("br_inflation_respawn_token_pickup");
         return;
       }
@@ -122,7 +122,7 @@ function ref_14012(var0) {
   if(scripts\mp\gametypes\br_public::hasrespawntoken()) {
     scripts\mp\gametypes\br_pickups::removerespawntoken();
 
-    if(!istrue(var0)) {
+    if(!istrue(var_0)) {
       thread scripts\mp\hud_message::showsplash("br_inflation_respawn_token_lost");
       return;
     }
@@ -131,18 +131,18 @@ function ref_14012(var0) {
   }
 }
 
-function ref_1336e(var0) {
+function ref_1336e(var_0) {
   waittillframeend();
-  scripts\mp\utility\lower_message::setlowermessageomnvar(9, int(gettime() + var0 * 1000));
+  scripts\mp\utility\lower_message::setlowermessageomnvar(9, int(gettime() + var_0 * 1000));
   scripts\mp\gametypes\br_gulag::ref_131a2(1);
-  thread spawn_drones(var0);
+  thread spawn_drones(var_0);
 }
 
-function spawn_drones(var0) {
+function spawn_drones(var_0) {
   self endon("disconnect");
 
-  if(isDefined(var0)) {
-    wait var0;
+  if(isDefined(var_0)) {
+    wait var_0;
   }
 
   scripts\mp\gametypes\br_gulag::ref_131a2(0);
@@ -150,21 +150,21 @@ function spawn_drones(var0) {
 }
 
 function roof_combat_spawn_func() {
-  var0 = spawnStruct();
-  var0.ref_133e4 = 1;
-  return var0;
+  var_0 = spawnStruct();
+  var_0.ref_133e4 = 1;
+  return var_0;
 }
 
 function ref_11b16() {
   return false;
 }
 
-function ref_125bd(var0, var1) {
-  if(!isDefined(var0)) {
+function ref_125bd(var_0, var_1) {
+  if(!isDefined(var_0)) {
     if(level.debug_silo_jump.ref_12c89) {
-      var2 = level.debug_silo_jump.ref_12c89;
-      thread ref_1336e(var2);
-      wait var2;
+      var_2 = level.debug_silo_jump.ref_12c89;
+      thread ref_1336e(var_2);
+      wait var_2;
       return true;
     }
   }
@@ -172,40 +172,40 @@ function ref_125bd(var0, var1) {
   return false;
 }
 
-function ref_13dcb(var0) {
+function ref_13dcb(var_0) {
   return true;
 }
 
-function assignspectatortospectateplayer(var0, var1) {
-  var0 notify("assignSpectatorToSpectatePlayerWaitForTeam");
+function assignspectatortospectateplayer(var_0, var_1) {
+  var_0 notify("assignSpectatorToSpectatePlayerWaitForTeam");
 
   if(istrue(level.endmatchcameratransitions)) {
     return false;
   }
 
-  if(!isDefined(var1) || !isPlayer(var1) || !isalive(var1) && !isDefined(var1.ref_1391a)) {
+  if(!isDefined(var_1) || !isPlayer(var_1) || !isalive(var_1) && !isDefined(var_1.ref_1391a)) {
     return false;
   }
 
-  if(var0.team == var1.team) {
+  if(var_0.team == var_1.team) {
     return false;
   }
 
-  if(!scripts\mp\utility\teams::getteamdata(var0.team, "aliveCount")) {
+  if(!scripts\mp\utility\teams::getteamdata(var_0.team, "aliveCount")) {
     return false;
   }
 
-  thread cargo_truck_mg_mp_init(var0);
+  thread cargo_truck_mg_mp_init(var_0);
   return true;
 }
 
-function cargo_truck_mg_mp_init(var0) {
+function cargo_truck_mg_mp_init(var_0) {
   level endon("brSpawnPlayersEnding");
-  var0 endon("assignSpectatorToSpectatePlayerWaitForTeam");
-  var0 endon("death_or_disconnect");
-  var0 scripts\mp\gametypes\br_spectate::ref_126ab();
-  var0 setclientomnvar("ui_show_spectateHud", var0 getentitynumber());
+  var_0 endon("assignSpectatorToSpectatePlayerWaitForTeam");
+  var_0 endon("death_or_disconnect");
+  var_0 scripts\mp\gametypes\br_spectate::ref_126ab();
+  var_0 setclientomnvar("ui_show_spectateHud", var_0 getentitynumber());
   wait 1;
-  var1 = scripts\mp\gametypes\br_spectate::regive_killstreak_after_use(var0);
-  thread scripts\mp\gametypes\br_spectate::assignspectatortospectateplayer(var0, var1);
+  var_1 = scripts\mp\gametypes\br_spectate::regive_killstreak_after_use(var_0);
+  thread scripts\mp\gametypes\br_spectate::assignspectatortospectateplayer(var_0, var_1);
 }

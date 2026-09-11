@@ -24,8 +24,8 @@ function main() {
   setsaveddvar("NQTLPTNSSO", 3);
   scripts\sp\audio::set_audio_level_fade_time(0.05);
   scripts\sp\load::main();
-  var0 = ["frag_farah", "noisemaker"];
-  scripts\engine\sp\utility::offhandprecache(var0);
+  var_0 = ["frag_farah", "noisemaker"];
+  scripts\engine\sp\utility::offhandprecache(var_0);
   level.player.grenadetimers["frag_farah"] = randomintrange(1000, 20000);
   anim.grenadetimers["AI_frag_farah"] = randomintrange(0, 20000);
   spawn_funcs();
@@ -54,30 +54,30 @@ function main() {
   thread player_breath_context();
   thread scripts\sp\maps\captive\captive_util::track_player_combat_time();
   level.player setclothtype("cloth");
-  var1 = getEntArray("lerp_fov_trigger", "targetname");
+  var_1 = getEntArray("lerp_fov_trigger", "targetname");
 
-  foreach(var3 in var1) {
-    var3 thread scripts\sp\maps\captive\captive_util::lerp_fov_over_distance_trigger();
+  foreach(var_3 in var_1) {
+    var_3 thread scripts\sp\maps\captive\captive_util::lerp_fov_over_distance_trigger();
   }
 
   level thread scripts\engine\utility::exploder("corridor_light");
   thread setup_vfx_int_vs_ext();
-  var5 = getEnt("warehouse_truck_1", "targetname");
-  var5 vehicle_turnengineoff();
-  var6 = getEnt("warehouse_truck_2", "targetname");
-  var6 vehicle_turnengineoff();
+  var_5 = getEnt("warehouse_truck_1", "targetname");
+  var_5 vehicle_turnengineoff();
+  var_6 = getEnt("warehouse_truck_2", "targetname");
+  var_6 vehicle_turnengineoff();
   level.sniperroof = getEnt("sniper_roof", "targetname");
   level.sniperroofdestroyed = getEnt("sniper_roof_destroyed", "targetname");
   level.sniperroofdestroyed hide();
   level.dodgedbullet = 1;
   getEnt("barkov_bed_clip", "targetname") notsolid();
-  var7 = nvidiahighlightsrequestpermissions(538);
+  var_7 = nvidiahighlightsrequestpermissions(538);
 
-  if(isDefined(var7) && isDefined(var7.apex_delta)) {
-    var8 = var7.apex_delta;
-    var8 = (var8[0], var8[1], 0);
-    var8 = vectorNormalize(var8);
-    var7.apex_delta += var8 * 7.5;
+  if(isDefined(var_7) && isDefined(var_7.apex_delta)) {
+    var_8 = var_7.apex_delta;
+    var_8 = (var_8[0], var_8[1], 0);
+    var_8 = vectorNormalize(var_8);
+    var_7.apex_delta += var_8 * 7.5;
     return;
   }
 }

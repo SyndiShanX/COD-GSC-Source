@@ -8,13 +8,13 @@ function deathlmgcleanup() {
     return;
   }
 
-  var0 = self._blackboard.leftweaponent;
-  var0 delete();
+  var_0 = self._blackboard.leftweaponent;
+  var_0 delete();
   self._blackboard.leftweaponent = undefined;
   scripts\anim\shared::forceuseweapon(self.primaryweapon, "primary");
 }
 
-function playdeathanim(var0, var1, var2) {
+function playdeathanim(var_0, var_1, var_2) {
   stop_sounds();
   self stoplookat();
 
@@ -55,13 +55,13 @@ function playdeathanim(var0, var1, var2) {
     }
   }
 
-  var3 = scripts\common\utility::wasdamagedbyexplosive();
+  var_3 = scripts\common\utility::wasdamagedbyexplosive();
 
-  if(shouldhelmetpopondeath(var3)) {
+  if(shouldhelmetpopondeath(var_3)) {
     helmetpop();
   }
 
-  if(shouldheadpop(var3)) {
+  if(shouldheadpop(var_3)) {
     headpop();
   }
 
@@ -69,7 +69,7 @@ function playdeathanim(var0, var1, var2) {
     self aiclearanim(scripts\asm\asm::asm_getroot(), 0.3);
   }
 
-  playdeathsound(var3);
+  playdeathsound(var_3);
 
   if(isDefined(self.asm.deathfunc)) {
     self[[self.asm.deathfunc]]();
@@ -81,13 +81,13 @@ function playdeathanim(var0, var1, var2) {
   }
 
   if(isDefined(self.deathfunction)) {
-    var4 = self[[self.deathfunction]]();
+    var_4 = self[[self.deathfunction]]();
 
-    if(!isDefined(var4)) {
-      var4 = 1;
+    if(!isDefined(var_4)) {
+      var_4 = 1;
     }
 
-    if(var4) {
+    if(var_4) {
       deathcleanup();
       return;
     }
@@ -124,27 +124,27 @@ function playdeathanim(var0, var1, var2) {
     self.deathanim = getsuffocationdeathanim();
   }
 
-  var5 = undefined;
-  var6 = undefined;
-  var7 = isDefined(self.deathalias) && isDefined(self.deathstate);
+  var_5 = undefined;
+  var_6 = undefined;
+  var_7 = isDefined(self.deathalias) && isDefined(self.deathstate);
 
   if(!isDefined(self.skipdeathanim)) {
     if(isDefined(self.deathanim)) {
-      var5 = self.deathanim;
-      var6 = scripts\asm\asm::asm_getxanim(var1, var5);
-    } else if(var7) {
-      var5 = scripts\asm\asm::asm_lookupanimfromalias(self.deathstate, self.deathalias);
-      var6 = scripts\asm\asm::asm_getxanim(self.deathstate, var5);
+      var_5 = self.deathanim;
+      var_6 = scripts\asm\asm::asm_getxanim(var_1, var_5);
+    } else if(var_7) {
+      var_5 = scripts\asm\asm::asm_lookupanimfromalias(self.deathstate, self.deathalias);
+      var_6 = scripts\asm\asm::asm_getxanim(self.deathstate, var_5);
     } else {
-      var5 = scripts\asm\asm::asm_getanim(var0, var1, var2);
-      var6 = scripts\asm\asm::asm_getxanim(var1, var5);
+      var_5 = scripts\asm\asm::asm_getanim(var_0, var_1, var_2);
+      var_6 = scripts\asm\asm::asm_getxanim(var_1, var_5);
     }
 
-    if(!animhasnotetrack(var6, "dropgun") && !animhasnotetrack(var6, "fire_spray")) {
+    if(!animhasnotetrack(var_6, "dropgun") && !animhasnotetrack(var_6, "fire_spray")) {
       scripts\anim\shared::dropallaiweapons();
     }
 
-    if(animhasnotetrack(var6, "dropgun")) {
+    if(animhasnotetrack(var_6, "dropgun")) {
       self._blackboard.awaitingdropgunnotetrack = 1;
     }
 
@@ -152,32 +152,32 @@ function playdeathanim(var0, var1, var2) {
       scripts\asm\soldier\patrol::detachflashlight();
     }
 
-    handleburningtodeath(var6);
-    self.deathanimduration = int(getanimlength(var6) * 1000);
-    var8 = isDefined(var2) && var2 == "directional_orient";
+    handleburningtodeath(var_6);
+    self.deathanimduration = int(getanimlength(var_6) * 1000);
+    var_8 = isDefined(var_2) && var_2 == "directional_orient";
 
     if(istrue(self.disabledeathdirectionalorient)) {
-      var8 = 0;
+      var_8 = 0;
     }
 
-    orientmeleevictim(var8);
+    orientmeleevictim(var_8);
 
-    if(isnumber(var5)) {
-      if(var7) {
-        self aisetanim(self.deathstate, var5);
+    if(isnumber(var_5)) {
+      if(var_7) {
+        self aisetanim(self.deathstate, var_5);
       } else {
-        self aisetanim(var1, var5);
+        self aisetanim(var_1, var_5);
       }
     } else {
-      var9 = scripts\asm\asm::asm_getinnerrootknob();
-      self clearanim(var9, 0.05);
-      self setflaggedanimknoballrestart(var1, var5, var9, 1, 0.05);
+      var_9 = scripts\asm\asm::asm_getinnerrootknob();
+      self clearanim(var_9, 0.05);
+      self setflaggedanimknoballrestart(var_1, var_5, var_9, 1, 0.05);
     }
 
-    if(var7) {
-      scripts\asm\asm::asm_playfacialanim(var0, self.deathstate, var6);
+    if(var_7) {
+      scripts\asm\asm::asm_playfacialanim(var_0, self.deathstate, var_6);
     } else {
-      scripts\asm\asm::asm_playfacialanim(var0, var1, var6);
+      scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_6);
     }
   }
 
@@ -208,17 +208,17 @@ function playdeathanim(var0, var1, var2) {
   } else if(getdvarint("scr_forceRagdollOnDeath") == 1) {
     thread startragdollwithoutwait();
   } else {
-    var10 = getnotetracktimes(var6, "start_ragdoll");
-    var11 = !var7 && !isDefined(self.deathanim) && (var10.size == 0 || var10[0] > 0.5);
+    var_10 = getnotetracktimes(var_6, "start_ragdoll");
+    var_11 = !var_7 && !isDefined(self.deathanim) && (var_10.size == 0 || var_10[0] > 0.5);
 
-    if(var11) {
+    if(var_11) {
       if(self.damagemod == "MOD_MELEE") {
-        var12 = 0.7;
+        var_12 = 0.7;
       } else {
-        var12 = 0.35;
+        var_12 = 0.35;
       }
 
-      thread waitforragdoll(getanimlength(var7) * var12);
+      thread waitforragdoll(getanimlength(var_7) * var_12);
     }
   }
 
@@ -232,13 +232,13 @@ function playdeathanim(var0, var1, var2) {
     if(isDefined(self.skipdeathanim)) {
       wait 0.05;
     } else {
-      var13 = var2;
+      var_13 = var_2;
 
-      if(var10) {
-        var13 = self.deathstate;
+      if(var_10) {
+        var_13 = self.deathstate;
       }
 
-      scripts\asm\asm::asm_donotetracks(var1, var13, &deathnotetrackhandler);
+      scripts\asm\asm::asm_donotetracks(var_1, var_13, &deathnotetrackhandler);
     }
   }
 
@@ -264,9 +264,9 @@ function playdeathanim(var0, var1, var2) {
   deathcleanup();
 }
 
-function deathnotetrackhandler(var0) {
+function deathnotetrackhandler(var_0) {
   if(isDefined(self.burningtodeath) && self.burningtodeath) {
-    switch (var0) {
+    switch (var_0) {
       case "model_swap":
         handleburndeathmodelswap();
         return;
@@ -276,11 +276,11 @@ function deathnotetrackhandler(var0) {
     }
   }
 
-  scripts\anim\notetracks::notetrack_prefix_handler(var0);
+  scripts\anim\notetracks::notetrack_prefix_handler(var_0);
 }
 
-function handleburningtodeath(var0) {
-  if(isDefined(self.burningtodeath) && self.burningtodeath && self.unittype != "dog" && (!isDefined(var0) || !animhasnotetrack(var0, "model_swap"))) {
+function handleburningtodeath(var_0) {
+  if(isDefined(self.burningtodeath) && self.burningtodeath && self.unittype != "dog" && (!isDefined(var_0) || !animhasnotetrack(var_0, "model_swap"))) {
     if(isDefined(self.headmodel)) {
       self detach(self.headmodel);
       self.headmodel = undefined;
@@ -293,7 +293,7 @@ function handleburningtodeath(var0) {
 
     self setModel("burntbody_male");
 
-    if(!isDefined(var0) || !animhasnotetrack(var0, "burn_vfx_death_start")) {
+    if(!isDefined(var_0) || !animhasnotetrack(var_0, "burn_vfx_death_start")) {
       thread handleburndeathvfx();
       return;
     }
@@ -319,26 +319,26 @@ function handleburndeathmodelswap() {
 function handleburndeathvfx() {
   self endon("stop_burn_VFX");
   self endon("entitydeleted");
-  var0 = 1;
+  var_0 = 1;
 
   if(self isscriptable()) {
-    var1 = self getscriptablepartstate("burn_to_death_by_molotov", 1);
+    var_1 = self getscriptablepartstate("burn_to_death_by_molotov", 1);
 
-    if(isDefined(var1)) {
+    if(isDefined(var_1)) {
       self setscriptablepartstate("burn_to_death_by_molotov", "active");
-      var0 = 0;
+      var_0 = 0;
     }
   }
 
-  if(var0) {
-    var2 = getburnvfxtagpackets();
+  if(var_0) {
+    var_2 = getburnvfxtagpackets();
 
-    foreach(var4 in var2) {
+    foreach(var_4 in var_2) {
       if(!isDefined(self)) {
         return;
       }
 
-      playFXOnTag(level.g_effect[var4.burnvfx], self, var4.tag);
+      playFXOnTag(level.g_effect[var_4.burnvfx], self, var_4.tag);
       wait 0.05;
     }
 
@@ -347,82 +347,82 @@ function handleburndeathvfx() {
 }
 
 function getburnvfxtagpackets() {
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, createburnvfxpacket("j_knee_ri", "vfx_burn_sml_high"));
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, createburnvfxpacket("j_knee_ri", "vfx_burn_sml_high"));
 }
 
-function createburnvfxpacket(var0, var1, var2) {
-  var3 = spawnStruct();
-  var3.tag = var0;
-  var3.burnvfx = var1;
-  return var3;
+function createburnvfxpacket(var_0, var_1, var_2) {
+  var_3 = spawnStruct();
+  var_3.tag = var_0;
+  var_3.burnvfx = var_1;
+  return var_3;
 }
 
-function c8deathsound(var0, var1) {
-  var2 = getsubstr(var1, 0, 3);
+function c8deathsound(var_0, var_1) {
+  var_2 = getsubstr(var_1, 0, 3);
 
-  if(var2 == "vo_") {
-    var3 = getsubstr(var1, 3);
-    var0 playsoundatviewheight(var3);
+  if(var_2 == "vo_") {
+    var_3 = getsubstr(var_1, 3);
+    var_0 playsoundatviewheight(var_3);
     return;
   }
 
-  if(var3 != "ps_") {
+  if(var_3 != "ps_") {
     return;
   }
 
-  var3 = getsubstr(var2, 3);
+  var_3 = getsubstr(var_2, 3);
 
-  if(!isDefined(var1.deathsoundent)) {
-    var1.deathsoundent = spawn("script_origin", var1.origin);
-    var1.deathsoundent linkTo(var1, "");
+  if(!isDefined(var_1.deathsoundent)) {
+    var_1.deathsoundent = spawn("script_origin", var_1.origin);
+    var_1.deathsoundent linkTo(var_1, "");
   }
 
-  var4 = var1.deathsoundent;
-  var4 notify("stop_C8DeathSound");
-  var4 endon("stop_C8DeathSound");
-  var4 playSound(var3);
-  var5 = lookupsoundlength(var3);
-  wait var5 * 0.001 + 0.1;
-  var4 delete();
+  var_4 = var_1.deathsoundent;
+  var_4 notify("stop_C8DeathSound");
+  var_4 endon("stop_C8DeathSound");
+  var_4 playSound(var_3);
+  var_5 = lookupsoundlength(var_3);
+  wait var_5 * 0.001 + 0.1;
+  var_4 delete();
 }
 
-function playexplosivedeathanim(var0, var1, var2) {
+function playexplosivedeathanim(var_0, var_1, var_2) {
   if((scripts\common\utility::isdamageweapon(getcompleteweaponname("iw7_knife_upgrade1")) || scripts\common\utility::wasdamagedbyoffhandshield() || scripts\common\utility::isdamageweapon(getcompleteweaponname("iw7_sonic"))) && isDefined(self.attacker)) {
-    var3 = vectortoyaw(self.attacker.origin - self.origin);
+    var_3 = vectortoyaw(self.attacker.origin - self.origin);
 
     if(self.damageyaw > 135 || self.damageyaw <= -135) {
-      self orientmode("face angle", var3);
+      self orientmode("face angle", var_3);
     } else if(self.damageyaw > 45 && self.damageyaw <= 135) {
-      self orientmode("face angle", var3 + 90);
+      self orientmode("face angle", var_3 + 90);
     } else if(self.damageyaw > -45 && self.damageyaw <= 45) {
-      self orientmode("face angle", var3 - 180);
+      self orientmode("face angle", var_3 - 180);
     } else {
-      self orientmode("face angle", var3 - 90);
+      self orientmode("face angle", var_3 - 90);
     }
   }
 
-  playdeathanim(var0, var1, var2);
+  playdeathanim(var_0, var_1, var_2);
 }
 
-function playbalconydeathanim(var0, var1, var2) {
+function playbalconydeathanim(var_0, var_1, var_2) {
   anim.nextbalconydeathtime = gettime() + randomintrange(25000, 35000);
   self orientmode("face angle", self._blackboard.balconydeathnode.angles[1]);
-  playdeathanim(var0, var1, var2);
+  playdeathanim(var_0, var_1, var_2);
 }
 
-function playdeathanim_melee_ragdolldelayed(var0, var1, var2) {
-  var3 = isagent(self);
+function playdeathanim_melee_ragdolldelayed(var_0, var_1, var_2) {
+  var_3 = isagent(self);
 
-  if(!var3) {
+  if(!var_3) {
     if(isDefined(self.meleestatename)) {
-      var4 = var2;
+      var_4 = var_2;
 
-      if(!isDefined(var4)) {
-        var4 = 10;
+      if(!isDefined(var_4)) {
+        var_4 = 10;
       }
 
-      scripts\asm\asm::asm_donotetrackswithtimeout(var0, self.meleestatename, var4);
+      scripts\asm\asm::asm_donotetrackswithtimeout(var_0, self.meleestatename, var_4);
     }
   }
 
@@ -436,7 +436,7 @@ function playdeathanim_melee_ragdolldelayed(var0, var1, var2) {
     return;
   }
 
-  if(!var3) {
+  if(!var_3) {
     self startragdoll();
     wait 0.1;
   }
@@ -462,25 +462,25 @@ function deathcleanup() {
     return;
   }
 
-  var0 = 3;
+  var_0 = 3;
 
-  while(isDefined(self) && self.script != "death" && var0 > 0) {
-    var0--;
+  while(isDefined(self) && self.script != "death" && var_0 > 0) {
+    var_0--;
     wait 0.05;
   }
 
   self notify("killanimscript");
 }
 
-function chooseshockdeathanim(var0, var1, var2, var3) {
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, "standing");
+function chooseshockdeathanim(var_0, var_1, var_2, var_3) {
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, "standing");
 }
 
-function shouldplayshockdeath(var0, var1, var2, var3) {
+function shouldplayshockdeath(var_0, var_1, var_2, var_3) {
   return scripts\asm\shared\utility::isshocked() || isDefined(self.shockdeath);
 }
 
-function shouldplayexplosivedeath(var0, var1, var2, var3) {
+function shouldplayexplosivedeath(var_0, var_1, var_2, var_3) {
   if(self.unittype == "juggernaut") {
     return false;
   }
@@ -492,7 +492,7 @@ function shouldplayexplosivedeath(var0, var1, var2, var3) {
   return false;
 }
 
-function shouldplayplayermeleedeath(var0, var1, var2, var3) {
+function shouldplayplayermeleedeath(var_0, var_1, var_2, var_3) {
   if(isDefined(self.damagemod) && isalive(self.attacker)) {
     if(!isPlayer(self.attacker)) {
       return false;
@@ -508,7 +508,7 @@ function shouldplayplayermeleedeath(var0, var1, var2, var3) {
   return false;
 }
 
-function shouldplaybalconydeath(var0, var1, var2, var3) {
+function shouldplaybalconydeath(var_0, var_1, var_2, var_3) {
   if(self.currentpose == "prone") {
     return false;
   }
@@ -521,19 +521,19 @@ function shouldplaybalconydeath(var0, var1, var2, var3) {
     return false;
   }
 
-  var4 = undefined;
+  var_4 = undefined;
 
   if(isDefined(self._blackboard.covernode)) {
-    var4 = self._blackboard.covernode;
+    var_4 = self._blackboard.covernode;
   } else if(isDefined(self._blackboard.lastusednode)) {
-    var4 = self._blackboard.lastusednode;
+    var_4 = self._blackboard.lastusednode;
   }
 
-  if(!isDefined(var4) || !isDefined(var4.script_balcony)) {
+  if(!isDefined(var_4) || !isDefined(var_4.script_balcony)) {
     return false;
   }
 
-  if(abs(angleclamp180(var4.angles[1] - self.angles[1])) > 30) {
+  if(abs(angleclamp180(var_4.angles[1] - self.angles[1])) > 30) {
     return false;
   }
 
@@ -543,26 +543,26 @@ function shouldplaybalconydeath(var0, var1, var2, var3) {
     }
   }
 
-  if(self nearnode(var4)) {
-    self._blackboard.balconydeathnode = var4;
+  if(self nearnode(var_4)) {
+    self._blackboard.balconydeathnode = var_4;
     return true;
   }
 
   return false;
 }
 
-function shouldplaybalconyraildeath(var0, var1, var2, var3) {
+function shouldplaybalconyraildeath(var_0, var_1, var_2, var_3) {
   return self._blackboard.balconydeathnode.script_balcony == 1;
 }
 
-function choosebalconydeathanim(var0, var1, var2, var3) {
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, self.currentpose);
+function choosebalconydeathanim(var_0, var_1, var_2, var_3) {
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, self.currentpose);
 }
 
-function shouldplaystrongdamagedeath(var0, var1, var2, var3) {
-  var4 = self.damageweapon;
+function shouldplaystrongdamagedeath(var_0, var_1, var_2, var_3) {
+  var_4 = self.damageweapon;
 
-  if(!isDefined(var4) || nullweapon(var4)) {
+  if(!isDefined(var_4) || nullweapon(var_4)) {
     return false;
   }
 
@@ -592,15 +592,15 @@ function shouldplaystrongdamagedeath(var0, var1, var2, var3) {
     }
   }
 
-  if(scripts\anim\utility_common::issniperrifle(var4) && self.maxhealth < self.damagetaken) {
+  if(scripts\anim\utility_common::issniperrifle(var_4) && self.maxhealth < self.damagetaken) {
     return true;
   }
 
-  if(scripts\anim\utility_common::isshotgun(var4) && isattackerwithindist(self.attacker, 512)) {
+  if(scripts\anim\utility_common::isshotgun(var_4) && isattackerwithindist(self.attacker, 512)) {
     return true;
   }
 
-  if(var4.basename == "iw7_devastator" && scripts\common\utility::isweaponepic(var4)) {
+  if(var_4.basename == "iw7_devastator" && scripts\common\utility::isweaponepic(var_4)) {
     return true;
   }
 
@@ -632,18 +632,18 @@ function c6_scriptablecleanup() {
     return;
   }
 
-  foreach(var1 in self._blackboard.scriptableparts) {
-    var2 = var1.state;
+  foreach(var_1 in self._blackboard.scriptableparts) {
+    var_2 = var_1.state;
 
-    if(var2 == "normal") {
+    if(var_2 == "normal") {
       continue;
     }
 
-    if(issubstr(var2, "_both")) {
-      var2 = "dmg_both";
+    if(issubstr(var_2, "_both")) {
+      var_2 = "dmg_both";
     }
 
-    self setscriptablepartstate(var3, var2 + "_stopfx");
+    self setscriptablepartstate(var_3, var_2 + "_stopfx");
   }
 
   self setscriptablepartstate("torso_overload_fx", "normal");
@@ -663,223 +663,223 @@ function c8_scriptablecleanup() {
     return;
   }
 
-  foreach(var1 in self._blackboard.scriptableparts) {
-    if(issubstr(var2, "dmg_fx")) {
-      self setscriptablepartstate(var2, "stopfx");
+  foreach(var_1 in self._blackboard.scriptableparts) {
+    if(issubstr(var_2, "dmg_fx")) {
+      self setscriptablepartstate(var_2, "stopfx");
     }
   }
 
   self setscriptablepartstate("torso_overload_fx", "normal");
 }
 
-function choosemovingdeathanim(var0, var1, var2) {
-  var3 = length(self.velocity);
-  var4 = scripts\asm\shared\utility::getbasearchetype();
-  var5 = getnextlowestspeedthresholdstring(var4, var3);
-  var6 = [];
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, var5);
+function choosemovingdeathanim(var_0, var_1, var_2) {
+  var_3 = length(self.velocity);
+  var_4 = scripts\asm\shared\utility::getbasearchetype();
+  var_5 = getnextlowestspeedthresholdstring(var_4, var_3);
+  var_6 = [];
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_5);
 }
 
-function choosecrouchingdeathanim(var0, var1, var2) {
+function choosecrouchingdeathanim(var_0, var_1, var_2) {
   if(scripts\engine\utility::damagelocationisany("head", "neck")) {
-    return scripts\asm\asm::asm_lookupanimfromalias(var1, "head");
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, "head");
   }
 
   if(scripts\engine\utility::damagelocationisany("torso_upper", "torso_lower", "left_arm_upper", "right_arm_upper", "neck")) {
-    return scripts\asm\asm::asm_lookupanimfromalias(var1, "torso");
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso");
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, "default");
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, "default");
 }
 
-function choosecoverdeathanim(var0, var1, var2) {
-  switch (var2) {
+function choosecoverdeathanim(var_0, var_1, var_2) {
+  switch (var_2) {
     case "cover_stand":
-      return scripts\asm\asm::asm_lookupanimfromalias(var1, "stand");
+      return scripts\asm\asm::asm_lookupanimfromalias(var_1, "stand");
     case "cover_exposed":
-      return scripts\asm\asm::asm_lookupanimfromalias(var1, "exposed");
+      return scripts\asm\asm::asm_lookupanimfromalias(var_1, "exposed");
     case "cover_crouch":
       if(scripts\engine\utility::damagelocationisany("head", "neck") && (self.damageyaw > 135 || self.damageyaw <= -45)) {
-        return scripts\asm\asm::asm_lookupanimfromalias(var1, "crouch_head");
+        return scripts\asm\asm::asm_lookupanimfromalias(var_1, "crouch_head");
       }
 
       if(self.damageyaw > -45 && self.damageyaw <= 45) {
-        return scripts\asm\asm::asm_lookupanimfromalias(var1, "crouch_back");
+        return scripts\asm\asm::asm_lookupanimfromalias(var_1, "crouch_back");
       }
 
-      return scripts\asm\asm::asm_lookupanimfromalias(var1, "crouch_default");
+      return scripts\asm\asm::asm_lookupanimfromalias(var_1, "crouch_default");
     case "cover_right":
       if(self.currentpose == "stand") {
-        return scripts\asm\asm::asm_lookupanimfromalias(var1, "right_stand");
+        return scripts\asm\asm::asm_lookupanimfromalias(var_1, "right_stand");
       } else {
         if(scripts\engine\utility::damagelocationisany("head", "neck")) {
-          return scripts\asm\asm::asm_lookupanimfromalias(var1, "right_crouch_head");
+          return scripts\asm\asm::asm_lookupanimfromalias(var_1, "right_crouch_head");
         }
 
-        return scripts\asm\asm::asm_lookupanimfromalias(var1, "right_crouch_default");
+        return scripts\asm\asm::asm_lookupanimfromalias(var_1, "right_crouch_default");
       }
     case "cover_left":
       if(self.currentpose == "stand") {
-        return scripts\asm\asm::asm_lookupanimfromalias(var1, "left_stand");
+        return scripts\asm\asm::asm_lookupanimfromalias(var_1, "left_stand");
       } else {
-        return scripts\asm\asm::asm_lookupanimfromalias(var1, "left_crouch");
+        return scripts\asm\asm::asm_lookupanimfromalias(var_1, "left_crouch");
       }
     case "cover_3d":
-      return scripts\asm\asm::asm_lookupanimfromalias(var1, "3d");
+      return scripts\asm\asm::asm_lookupanimfromalias(var_1, "3d");
   }
 }
 
-function choosestandingdeathanim(var0, var1, var2) {
+function choosestandingdeathanim(var_0, var_1, var_2) {
   if(scripts\anim\utility_common::isusingsidearm()) {
-    return choosestandingpistoldeathanim(var0, var1, var2);
+    return choosestandingpistoldeathanim(var_0, var_1, var_2);
   }
 
   if(isDefined(self.attacker) && self shouldplaymeleedeathanim(self.attacker)) {
-    return choosestandingmeleedeathanim(var0, var1, var2);
+    return choosestandingmeleedeathanim(var_0, var_1, var_2);
   }
 
-  var3 = [];
+  var_3 = [];
 
   if(scripts\engine\utility::damagelocationisany("torso_lower", "left_leg_upper", "left_leg_lower", "right_leg_lower", "right_leg_lower")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "lower_body"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "lower_body"));
   }
 
   if(scripts\engine\utility::damagelocationisany("head", "helmet")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "head"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "head"));
   }
 
   if(scripts\engine\utility::damagelocationisany("neck")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "neck"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "neck"));
   }
 
   if(scripts\engine\utility::damagelocationisany("torso_upper", "left_arm_upper")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "left_shoulder"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "left_shoulder"));
   }
 
   if(scripts\engine\utility::damagelocationisany("torso_upper")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "torso_upper"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_upper"));
   }
 
   if(self.damageyaw > 135 || self.damageyaw <= -135) {
     if(scripts\engine\utility::damagelocationisany("neck", "head", "helmet")) {
-      GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "torso_2"));
+      GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_2"));
     }
 
     if(scripts\engine\utility::damagelocationisany("torso_upper")) {
-      GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "torso_2"));
+      GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_2"));
     }
   } else if(self.damageyaw > -45 && self.damageyaw <= 45) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "back"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "back"));
   }
 
-  var4 = var3.size > 0;
+  var_4 = var_3.size > 0;
 
-  if(!var4 || randomint(100) < 15) {
-    var3 = scripts\asm\asm::asm_lookupanimfromalias(var1, "default");
+  if(!var_4 || randomint(100) < 15) {
+    var_3 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "default");
   }
 
   if(randomint(100) < 10 && firingdeathallowed()) {
-    var3 = scripts\asm\asm::asm_lookupanimfromalias(var1, "default_firing");
+    var_3 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "default_firing");
   }
 
-  return var3[randomint(var3.size)];
+  return var_3[randomint(var_3.size)];
 }
 
-function chooseexplosivedeathanim(var0, var1, var2) {
-  var3 = 0;
-  var4 = self.damageweapon;
+function chooseexplosivedeathanim(var_0, var_1, var_2) {
+  var_3 = 0;
+  var_4 = self.damageweapon;
 
-  if(!nullweapon(var4) && var4.basename == "molotov") {
-    if(scripts\asm\asm::asm_hasalias(var1, "molotov_f")) {
-      var3 = 1;
+  if(!nullweapon(var_4) && var_4.basename == "molotov") {
+    if(scripts\asm\asm::asm_hasalias(var_1, "molotov_f")) {
+      var_3 = 1;
     }
   }
 
-  var5 = undefined;
+  var_5 = undefined;
 
-  if(var3 && self.currentpose == "prone") {
-    var5 = "molotov_prone";
+  if(var_3 && self.currentpose == "prone") {
+    var_5 = "molotov_prone";
   } else {
-    var5 = "explosive";
+    var_5 = "explosive";
 
-    if(var3) {
-      var5 = "molotov";
+    if(var_3) {
+      var_5 = "molotov";
     }
 
     if(self.currentpose == "crouch") {
-      var5 += "_crouch";
+      var_5 += "_crouch";
     }
 
-    var5 += scripts\asm\soldier\pain::getpaindirectiontoactor();
+    var_5 += scripts\asm\soldier\pain::getpaindirectiontoactor();
   }
 
-  var6 = scripts\asm\asm::asm_lookupanimfromalias(var1, var5);
+  var_6 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_5);
 
-  if(var3) {
-    var6 = scripts\asm\shared\utility::preventrecentanimindex(var1, var5, var6);
+  if(var_3) {
+    var_6 = scripts\asm\shared\utility::preventrecentanimindex(var_1, var_5, var_6);
   }
 
-  var7 = scripts\asm\asm::asm_getxanim(var1, var6);
+  var_7 = scripts\asm\asm::asm_getxanim(var_1, var_6);
 
   if(getDvar("scr_expDeathMayMoveCheck", "on") == "on") {
-    var8 = 1;
-    var9 = getnotetracktimes(var7, "start_ragdoll");
+    var_8 = 1;
+    var_9 = getnotetracktimes(var_7, "start_ragdoll");
 
-    if(var9.size > 0) {
-      var8 = var9[0];
+    if(var_9.size > 0) {
+      var_8 = var_9[0];
     }
 
-    var10 = getmovedelta(var7, 0, var8);
-    var11 = self localtoworldcoords(var10);
-    var12 = 0;
+    var_10 = getmovedelta(var_7, 0, var_8);
+    var_11 = self localtoworldcoords(var_10);
+    var_12 = 0;
 
     if(scripts\engine\utility::actor_is3d()) {
-      var12 = navtrace3d(self.origin, var11, 0);
+      var_12 = navtrace3d(self.origin, var_11, 0);
     } else {
-      var12 = self maymovefrompointtopoint(self.origin, var11, 0, 1);
+      var_12 = self maymovefrompointtopoint(self.origin, var_11, 0, 1);
     }
 
-    if(!var12) {
-      if(var3) {
-        var6 = scripts\asm\asm::asm_lookupanimfromalias(var1, "default_molotov");
+    if(!var_12) {
+      if(var_3) {
+        var_6 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "default_molotov");
       } else {
-        var6 = scripts\asm\asm::asm_lookupanimfromalias(var1, "default");
+        var_6 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "default");
       }
     }
   }
 
   self.deathanimmode = "nogravity";
-  return var6;
+  return var_6;
 }
 
-function choosestandingpistoldeathanim(var0, var1, var2) {
+function choosestandingpistoldeathanim(var_0, var_1, var_2) {
   if(abs(self.damageyaw) < 50) {
-    return scripts\asm\asm::asm_lookupanimfromalias(var1, "pistol_2");
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_2");
   }
 
-  var3 = [];
+  var_3 = [];
 
   if(abs(self.damageyaw) < 110) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "pistol_2"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_2"));
   }
 
   if(scripts\engine\utility::damagelocationisany("torso_upper", "torso_lower", "left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "pistol_torso_upper"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_torso_upper"));
   }
 
   if(!scripts\engine\utility::damagelocationisany("head", "neck", "helmet", "left_foot", "right_foot", "left_hand", "right_hand", "gun") && randomint(2) == 0) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "pistol_upper_body"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_upper_body"));
   }
 
-  if(var3.size == 0 || scripts\engine\utility::damagelocationisany("torso_lower", "torso_upper", "neck", "head", "helmet", "right_arm_upper", "left_arm_upper")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "pistol_default"));
+  if(var_3.size == 0 || scripts\engine\utility::damagelocationisany("torso_lower", "torso_upper", "neck", "head", "helmet", "right_arm_upper", "left_arm_upper")) {
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_default"));
   }
 
-  return var3[randomint(var3.size)];
+  return var_3[randomint(var_3.size)];
 }
 
-function choosestandingmeleedeathanim(var0, var1, var2) {
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, "default");
+function choosestandingmeleedeathanim(var_0, var_1, var_2) {
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, "default");
 }
 
 function firingdeathallowed() {
@@ -901,7 +901,7 @@ function playdeathfx() {
   }
 }
 
-function play_blood_pool(var0, var1) {
+function play_blood_pool(var_0, var_1) {
   if(!isDefined(self)) {
     return;
   }
@@ -910,22 +910,22 @@ function play_blood_pool(var0, var1) {
     return;
   }
 
-  var2 = self gettagorigin("j_SpineUpper");
-  var3 = self gettagangles("j_SpineUpper");
-  var4 = anglesToForward(var3);
-  var5 = anglestoup(var3);
-  var6 = anglestoright(var3);
-  var2 = var2 + var4 * -8.5 + var5 * 5 + var6 * 0;
-  var7 = scripts\engine\trace::_bullet_trace(var2 + (0, 0, 30), var2 - (0, 0, 100), 0, undefined);
+  var_2 = self gettagorigin("j_SpineUpper");
+  var_3 = self gettagangles("j_SpineUpper");
+  var_4 = anglesToForward(var_3);
+  var_5 = anglestoup(var_3);
+  var_6 = anglestoright(var_3);
+  var_2 = var_2 + var_4 * -8.5 + var_5 * 5 + var_6 * 0;
+  var_7 = scripts\engine\trace::_bullet_trace(var_2 + (0, 0, 30), var_2 - (0, 0, 100), 0, undefined);
 
-  if(var7["normal"][2] > 0.9) {
-    playFX(level._effect["deathfx_bloodpool_generic"], var2);
+  if(var_7["normal"][2] > 0.9) {
+    playFX(level._effect["deathfx_bloodpool_generic"], var_2);
     return;
   }
 }
 
-function waitforragdoll(var0) {
-  wait var0;
+function waitforragdoll(var_0) {
+  wait var_0;
 
   if(!isDefined(self)) {
     return;
@@ -980,53 +980,53 @@ function doimmediateragdolldeath() {
     return;
   }
 
-  var0 = 10;
-  var1 = scripts\common\utility::getdamagetype(self.damagemod);
+  var_0 = 10;
+  var_1 = scripts\common\utility::getdamagetype(self.damagemod);
 
-  if(isDefined(self.attacker) && self.attacker == level.player && var1 == "melee") {
-    var0 = 5;
+  if(isDefined(self.attacker) && self.attacker == level.player && var_1 == "melee") {
+    var_0 = 5;
   }
 
-  var2 = self.damagetaken;
+  var_2 = self.damagetaken;
 
-  if(var1 == "bullet" || isDefined(self.damagemod) && self.damagemod == "MOD_FIRE") {
-    var2 = min(var2, 300);
+  if(var_1 == "bullet" || isDefined(self.damagemod) && self.damagemod == "MOD_FIRE") {
+    var_2 = min(var_2, 300);
   }
 
-  var3 = var0 * var2;
-  var4 = max(0.3, self.damagedir[2]);
-  var5 = (self.damagedir[0], self.damagedir[1], var4);
+  var_3 = var_0 * var_2;
+  var_4 = max(0.3, self.damagedir[2]);
+  var_5 = (self.damagedir[0], self.damagedir[1], var_4);
 
   if(isDefined(self.ragdoll_directionscale)) {
-    var5 *= self.ragdoll_directionscale;
+    var_5 *= self.ragdoll_directionscale;
   } else {
-    var5 *= var3;
+    var_5 *= var_3;
   }
 
   if(self.forceragdollimmediate) {
-    var5 += self.prevanimdelta * 20 * 10;
+    var_5 += self.prevanimdelta * 20 * 10;
   }
 
   if(isDefined(self.ragdoll_start_vel)) {
-    var5 += self.ragdoll_start_vel * 10;
+    var_5 += self.ragdoll_start_vel * 10;
   }
 
-  var6 = self.damagelocation;
+  var_6 = self.damagelocation;
 
-  if(isDefined(self.ragdoll_damagelocation_none) && var6 == "none") {
-    var6 = self.ragdoll_damagelocation_none;
+  if(isDefined(self.ragdoll_damagelocation_none) && var_6 == "none") {
+    var_6 = self.ragdoll_damagelocation_none;
   }
 
   if(isDefined(self.doantigravgrenaderagdoll) && self.doantigravgrenaderagdoll == 1) {
-    var5 = vectorNormalize((self.damagedir[0], self.damagedir[1], self.damagedir[2]));
-    var5 *= 1500;
+    var_5 = vectorNormalize((self.damagedir[0], self.damagedir[1], self.damagedir[2]));
+    var_5 *= 1500;
   }
 
-  self startragdollfromimpact(var6, var5);
+  self startragdollfromimpact(var_6, var_5);
   wait 0.05;
 }
 
-function shouldhelmetpoponpain(var0) {
+function shouldhelmetpoponpain(var_0) {
   if(!istrue(self.shouldhelmetpop)) {
     return false;
   }
@@ -1035,7 +1035,7 @@ function shouldhelmetpoponpain(var0) {
     return false;
   }
 
-  if(isDefined(self.helmetsubpart) && !var0) {
+  if(isDefined(self.helmetsubpart) && !var_0) {
     return false;
   }
 
@@ -1051,14 +1051,14 @@ function shouldhelmetpoponpain(var0) {
     return true;
   }
 
-  if(var0 && randomint(2) == 0) {
+  if(var_0 && randomint(2) == 0) {
     return true;
   }
 
   return false;
 }
 
-function shouldhelmetpopondeath(var0) {
+function shouldhelmetpopondeath(var_0) {
   if(!istrue(self.shouldhelmetpop)) {
     return false;
   }
@@ -1075,7 +1075,7 @@ function shouldhelmetpopondeath(var0) {
     return true;
   }
 
-  if(var0 && randomint(3) == 0) {
+  if(var_0 && randomint(3) == 0) {
     return true;
   }
 
@@ -1095,35 +1095,35 @@ function helmetpop() {
     return;
   }
 
-  var0 = self gettagorigin("j_head");
+  var_0 = self gettagorigin("j_head");
 
   if(isDefined(self.helmetshatterfx)) {
-    var1 = anglesToForward(self gettagangles("j_head"));
-    playFX(self.helmetshatterfx, var0, var1);
+    var_1 = anglesToForward(self gettagangles("j_head"));
+    playFX(self.helmetshatterfx, var_0, var_1);
   }
 
-  playworldsound("bullet_small_flesh_helmet_npc", var0);
+  playworldsound("bullet_small_flesh_helmet_npc", var_0);
 
   if(isDefined(self.helmetsubpart)) {
     self.helmetsubpart = undefined;
-    var2 = self getdamageparthealth("helmet", "helmet");
+    var_2 = self getdamageparthealth("helmet", "helmet");
 
-    if(var2 > 0) {
-      self damagedamagepart(var2, "helmet", "helmet");
+    if(var_2 > 0) {
+      self damagedamagepart(var_2, "helmet", "helmet");
     }
   }
 
-  var3 = getpartname(self.hatmodel, 0);
-  var4 = spawn("script_model", self.origin + (0, 0, 64));
-  var4 setModel(self.hatmodel);
-  var4.origin = self gettagorigin(var3);
-  var4.angles = self gettagangles(var3);
+  var_3 = getpartname(self.hatmodel, 0);
+  var_4 = spawn("script_model", self.origin + (0, 0, 64));
+  var_4 setModel(self.hatmodel);
+  var_4.origin = self gettagorigin(var_3);
+  var_4.angles = self gettagangles(var_3);
   waitframe();
 
   if(isDefined(self.damagedir) && self.damagedir != (0, 0, 0)) {
-    thread helmetlaunch(var4);
+    thread helmetlaunch(var_4);
   } else {
-    thread helmetlaunch(var4);
+    thread helmetlaunch(var_4);
   }
 
   self detach(self.hatmodel, "");
@@ -1142,14 +1142,14 @@ function helmetpop() {
   }
 }
 
-function helmetlaunch(var0) {
-  var1 = var0;
-  var1 *= randomfloatrange(2000, 4000);
-  var2 = var1[0];
-  var3 = var1[1];
-  var4 = randomfloatrange(1500, 3000);
-  var5 = self.origin + (randomfloatrange(-1, 1), randomfloatrange(-1, 1), randomfloatrange(-1, 1)) * 5;
-  self physicslaunchclient(var5, (var2, var3, var4));
+function helmetlaunch(var_0) {
+  var_1 = var_0;
+  var_1 *= randomfloatrange(2000, 4000);
+  var_2 = var_1[0];
+  var_3 = var_1[1];
+  var_4 = randomfloatrange(1500, 3000);
+  var_5 = self.origin + (randomfloatrange(-1, 1), randomfloatrange(-1, 1), randomfloatrange(-1, 1)) * 5;
+  self physicslaunchclient(var_5, (var_2, var_3, var_4));
   wait 60;
 
   for(;;) {
@@ -1168,20 +1168,20 @@ function helmetlaunch(var0) {
 }
 
 function getsuffocationdeathanim() {
-  var0 = undefined;
+  var_0 = undefined;
 
   if(randomint(11) >= 1) {
-    return var0;
+    return var_0;
   }
 
-  return var0;
+  return var_0;
 }
 
 function shouldplaysuffocatedeath() {
   return false;
 }
 
-function shouldheadpop(var0) {
+function shouldheadpop(var_0) {
   if(self.unittype != "soldier" && self.unittype != "juggernaut") {
     return false;
   }
@@ -1198,13 +1198,13 @@ function shouldheadpop(var0) {
     return false;
   }
 
-  var1 = self.damageweapon;
+  var_1 = self.damageweapon;
 
-  if(nullweapon(var1)) {
+  if(nullweapon(var_1)) {
     return false;
   }
 
-  if(self.damagemod == "MOD_PROJECTILE" && var1.classname == "turret" && istrue(level.disableheadpopbyturret)) {
+  if(self.damagemod == "MOD_PROJECTILE" && var_1.classname == "turret" && istrue(level.disableheadpopbyturret)) {
     return false;
   }
 
@@ -1216,68 +1216,68 @@ function headpop() {
     return;
   }
 
-  var0 = self gettagorigin("j_head");
-  var1 = anglesToForward(self gettagangles("j_head"));
+  var_0 = self gettagorigin("j_head");
+  var_1 = anglesToForward(self gettagangles("j_head"));
   playFXOnTag(level.g_effect["human_gib_head"], self, "j_head");
   self detach(self.headmodel, "");
   self.headmodel = undefined;
 }
 
-function cross2d(var0, var1) {
-  return var0[0] * var1[1] - var1[0] * var0[1];
+function cross2d(var_0, var_1) {
+  return var_0[0] * var_1[1] - var_1[0] * var_0[1];
 }
 
-function meleegetattackercardinaldirection(var0, var1) {
-  var2 = vectordot(var1, var0);
-  var3 = cos(60);
+function meleegetattackercardinaldirection(var_0, var_1) {
+  var_2 = vectordot(var_1, var_0);
+  var_3 = cos(60);
 
-  if(squared(var2) < squared(var3)) {
-    if(cross2d(var0, var1) > 0) {
+  if(squared(var_2) < squared(var_3)) {
+    if(cross2d(var_0, var_1) > 0) {
       return 1;
     }
 
     return 3;
   }
 
-  if(var2 < 0) {
+  if(var_2 < 0) {
     return 0;
   }
 
   return 2;
 }
 
-function orientmeleevictim(var0) {
-  var1 = getcompleteweaponname("iw7_knife_upgrade1");
-  var2 = getcompleteweaponname("iw7_sonic");
+function orientmeleevictim(var_0) {
+  var_1 = getcompleteweaponname("iw7_knife_upgrade1");
+  var_2 = getcompleteweaponname("iw7_sonic");
 
-  if(scripts\common\utility::isdamageweapon(var1) || scripts\common\utility::isdamageweapon(var2)) {
+  if(scripts\common\utility::isdamageweapon(var_1) || scripts\common\utility::isdamageweapon(var_2)) {
     return;
   }
 
-  if(var0 || self.damagemod == "MOD_MELEE" && isDefined(self.attacker) && !scripts\common\utility::wasdamagedbyoffhandshield() && !scripts\common\utility::isdamageweapon(var2)) {
+  if(var_0 || self.damagemod == "MOD_MELEE" && isDefined(self.attacker) && !scripts\common\utility::wasdamagedbyoffhandshield() && !scripts\common\utility::isdamageweapon(var_2)) {
     if(scripts\engine\utility::actor_is3d()) {
-      var3 = self.attacker.origin - self.origin;
-      var4 = generateaxisanglesfromforwardvector(var3, self.angles);
-      self orientmode("face angle 3d", var4);
+      var_3 = self.attacker.origin - self.origin;
+      var_4 = generateaxisanglesfromforwardvector(var_3, self.angles);
+      self orientmode("face angle 3d", var_4);
       return;
     }
 
-    var5 = self.damagedir;
-    var6 = anglesToForward(self.angles);
-    var7 = vectorNormalize((var5[0], var5[1], 0));
-    var8 = vectorNormalize((var6[0], var6[1], 0));
-    var9 = meleegetattackercardinaldirection(var8, var7);
-    var10 = var9 * 90;
-    var11 = (-1 * var7[0], -1 * var7[1], 0);
-    var12 = rotatevector(var11, (0, var10, 0));
-    var13 = vectortoyaw(var12);
-    var14 = anglesToForward((0, var13, 0));
-    self orientmode("face angle", var13);
+    var_5 = self.damagedir;
+    var_6 = anglesToForward(self.angles);
+    var_7 = vectorNormalize((var_5[0], var_5[1], 0));
+    var_8 = vectorNormalize((var_6[0], var_6[1], 0));
+    var_9 = meleegetattackercardinaldirection(var_8, var_7);
+    var_10 = var_9 * 90;
+    var_11 = (-1 * var_7[0], -1 * var_7[1], 0);
+    var_12 = rotatevector(var_11, (0, var_10, 0));
+    var_13 = vectortoyaw(var_12);
+    var_14 = anglesToForward((0, var_13, 0));
+    self orientmode("face angle", var_13);
     return;
   }
 }
 
-function playdeathsound(var0) {
+function playdeathsound(var_0) {
   if(isDefined(self.diequietly) && self.diequietly) {
     return;
   }
@@ -1286,34 +1286,34 @@ function playdeathsound(var0) {
     return;
   }
 
-  var1 = "death";
-  var2 = undefined;
+  var_1 = "death";
+  var_2 = undefined;
 
   if(isDefined(self.damagemod) && self.damagemod == "MOD_MELEE") {
-    var1 = "death";
+    var_1 = "death";
   } else {
     if(isDefined(self.damageweapon) && !nullweapon(self.damageweapon)) {
-      var2 = getweaponammopoolname(self.damageweapon);
+      var_2 = getweaponammopoolname(self.damageweapon);
     }
 
-    if(var0) {
-      if(isDefined(var2) && var2 == "molotov") {
-        var1 = "flamedeath";
+    if(var_0) {
+      if(isDefined(var_2) && var_2 == "molotov") {
+        var_1 = "flamedeath";
       } else {
-        var1 = "explodeath";
+        var_1 = "explodeath";
       }
     } else {
       if(isDefined(self._blackboard.balconydeathnode)) {
-        var1 = "falldeath";
+        var_1 = "falldeath";
       }
 
-      if(isDefined(var2) && var2 == "incendiary") {
-        var1 = "incendeath";
+      if(isDefined(var_2) && var_2 == "incendiary") {
+        var_1 = "incendeath";
       }
     }
   }
 
-  scripts\anim\face::saygenericdialogue(var1);
+  scripts\anim\face::saygenericdialogue(var_1);
 }
 
 function shouldskipdeathsound() {
@@ -1334,37 +1334,37 @@ function shouldskipdeathsound() {
   return false;
 }
 
-function removeselffrom_squadlastseenenemypos(var0) {
-  for(var1 = 0; var1 < anim.squadindex.size; var1++) {
-    clearsightposnear(anim.squadindex[var1], var0);
+function removeselffrom_squadlastseenenemypos(var_0) {
+  for(var_1 = 0; var_1 < anim.squadindex.size; var_1++) {
+    clearsightposnear(anim.squadindex[var_1], var_0);
   }
 }
 
-function clearsightposnear(var0) {
+function clearsightposnear(var_0) {
   if(!isDefined(self.sightpos)) {
     return;
   }
 
-  if(distance(var0, self.sightpos) < 80) {
+  if(distance(var_0, self.sightpos) < 80) {
     self.sightpos = undefined;
     self.sighttime = gettime();
     return;
   }
 }
 
-function isattackerwithindist(var0, var1) {
-  if(!isDefined(var0)) {
+function isattackerwithindist(var_0, var_1) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
-  if(distance(self.origin, var0.origin) > var1) {
+  if(distance(self.origin, var_0.origin) > var_1) {
     return false;
   }
 
   return true;
 }
 
-function isspecialdeath(var0, var1, var2, var3) {
+function isspecialdeath(var_0, var_1, var_2, var_3) {
   if(scripts\asm\shared\utility::isshocked()) {
     return true;
   }
@@ -1372,9 +1372,9 @@ function isspecialdeath(var0, var1, var2, var3) {
   return false;
 }
 
-function choosespecialdeath(var0, var1, var2) {
+function choosespecialdeath(var_0, var_1, var_2) {
   if(scripts\asm\shared\utility::isshocked()) {
-    return scripts\asm\asm::asm_lookupanimfromalias(var1, "shock_death");
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, "shock_death");
   }
 
   return scripts\asm\asm::asm_lookupanimfromalias("death_generic", "default");
@@ -1410,25 +1410,25 @@ function shouldgib() {
   return false;
 }
 
-function dogibdefault(var0) {
-  var1 = var0 gettagorigin("j_spine4");
+function dogibdefault(var_0) {
+  var_1 = var_0 gettagorigin("j_spine4");
 
-  if(isDefined(var0.damagedir) && var0.damagedir != (0, 0, 0)) {
-    playFX(level.g_effect["human_gib_fullbody"], var1, var0.damagedir);
+  if(isDefined(var_0.damagedir) && var_0.damagedir != (0, 0, 0)) {
+    playFX(level.g_effect["human_gib_fullbody"], var_1, var_0.damagedir);
   } else {
-    playFX(level.g_effect["human_gib_fullbody"], var1, (1, 0, 0));
+    playFX(level.g_effect["human_gib_fullbody"], var_1, (1, 0, 0));
   }
 
-  if(isagent(var0)) {
-    var0 playSound("gib_fullbody");
+  if(isagent(var_0)) {
+    var_0 playSound("gib_fullbody");
     return;
   }
 
-  var2 = spawn("script_origin", var1);
-  var2 playSound("gib_fullbody", "sounddone");
-  var2 waittill("sounddone");
+  var_2 = spawn("script_origin", var_1);
+  var_2 playSound("gib_fullbody", "sounddone");
+  var_2 waittill("sounddone");
   wait 0.1;
-  var2 delete();
+  var_2 delete();
 }
 
 function dogib() {
@@ -1440,17 +1440,17 @@ function dogib() {
   thread dogibdefault(level);
 }
 
-function shouldplayshieldbashdeath(var0, var1, var2, var3) {
-  var4 = self.damageweapon;
+function shouldplayshieldbashdeath(var_0, var_1, var_2, var_3) {
+  var_4 = self.damageweapon;
 
-  if(isDefined(var4)) {
-    if(var4.type == "shield") {
+  if(isDefined(var_4)) {
+    if(var_4.type == "shield") {
       return true;
     }
 
-    var5 = var4.basename;
+    var_5 = var_4.basename;
 
-    if(var5 == "iw7_mauler_c8hack" || var5 == "iw7_c6hack_melee" || var5 == "iw7_c6worker_fists") {
+    if(var_5 == "iw7_mauler_c8hack" || var_5 == "iw7_c6hack_melee" || var_5 == "iw7_c6worker_fists") {
       return true;
     }
   }
@@ -1462,15 +1462,15 @@ function shouldplayshieldbashdeath(var0, var1, var2, var3) {
   return false;
 }
 
-function doshieldbashdeath(var0, var1, var2, var3) {
+function doshieldbashdeath(var_0, var_1, var_2, var_3) {
   stop_sounds();
   scripts\anim\shared::dropallaiweapons();
-  var4 = vectorNormalize(self.origin - level.player.origin + (0, 0, 30));
-  var5 = self.damageweapon;
-  var6 = var5.basename;
+  var_4 = vectorNormalize(self.origin - level.player.origin + (0, 0, 30));
+  var_5 = self.damageweapon;
+  var_6 = var_5.basename;
 
-  if(var6 == "iw7_c6hack_melee" || var6 == "iw7_c6worker_fists") {
-    var4 = vectorNormalize(self.origin - level.player.origin + (0, 0, 30) + anglestoright(level.player.angles) * 50);
+  if(var_6 == "iw7_c6hack_melee" || var_6 == "iw7_c6worker_fists") {
+    var_4 = vectorNormalize(self.origin - level.player.origin + (0, 0, 30) + anglestoright(level.player.angles) * 50);
   }
 
   self setanimrate(scripts\asm\asm::asm_getroot(), 0);
@@ -1483,7 +1483,7 @@ function doshieldbashdeath(var0, var1, var2, var3) {
     return;
   }
 
-  self startragdollfromimpact("torso_upper", var4 * 2400);
+  self startragdollfromimpact("torso_upper", var_4 * 2400);
 
   if(isDefined(self.unittype) && self.unittype == "c6") {
     self playSound("shield_death_c6_1");
@@ -1498,113 +1498,113 @@ function doshieldbashdeath(var0, var1, var2, var3) {
 
 function getpainbodypartdeath() {
   if(scripts\engine\utility::damagelocationisany("head", "helmet", "neck")) {
-    var0 = "head";
-    return var0;
+    var_0 = "head";
+    return var_0;
   }
 
   if(scripts\engine\utility::damagelocationisany("right_arm_upper", "right_arm_lower", "right_hand")) {
-    var0 = "midbody";
-    return var0;
+    var_0 = "midbody";
+    return var_0;
   }
 
   if(scripts\engine\utility::damagelocationisany("left_arm_upper", "left_arm_lower", "left_hand")) {
-    var0 = "midbody";
-    return var0;
+    var_0 = "midbody";
+    return var_0;
   }
 
   if(scripts\engine\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "left_foot")) {
-    var0 = "lowerbody_l";
-    return var0;
+    var_0 = "lowerbody_l";
+    return var_0;
   }
 
   if(scripts\engine\utility::damagelocationisany("right_leg_upper", "right_leg_lower", "right_foot")) {
-    var0 = "lowerbody_r";
-    return var0;
+    var_0 = "lowerbody_r";
+    return var_0;
   }
 
-  var0 = "midbody";
-  return var0;
+  var_0 = "midbody";
+  return var_0;
 }
 
 function getpainbodypartcrouchdeath() {
   if(scripts\engine\utility::damagelocationisany("head", "helmet", "neck")) {
-    var0 = "head";
-    return var0;
+    var_0 = "head";
+    return var_0;
   }
 
-  var0 = "midbody";
-  return var0;
+  var_0 = "midbody";
+  return var_0;
 }
 
-function choosedirectionaldeathanim(var0, var1, var2) {
-  var3 = scripts\asm\soldier\pain::getpainweaponsize();
+function choosedirectionaldeathanim(var_0, var_1, var_2) {
+  var_3 = scripts\asm\soldier\pain::getpainweaponsize();
 
   if(isDefined(self.asm.painloc) && isDefined(self.asm.painsize) && isDefined(self.currentpose) && self.asm.painloc == "lowerbody" && self.asm.painsize == "_lg" && self.currentpose == "prone") {
-    var4 = "lowerbody";
-    var3 = "_lg";
+    var_4 = "lowerbody";
+    var_3 = "_lg";
   } else {
-    var4 = getpainbodypartdeath();
-    var4 = scripts\asm\soldier\pain::getpainweaponsize();
+    var_4 = getpainbodypartdeath();
+    var_4 = scripts\asm\soldier\pain::getpainweaponsize();
   }
 
-  var5 = anglesToForward(self.angles);
-  var6 = vectorNormalize((self.damagedir[0], self.damagedir[1], 0));
-  var7 = vectorNormalize((var5[0], var5[1], 0));
-  var8 = meleegetattackercardinaldirection(var7, var6);
-  var9 = undefined;
+  var_5 = anglesToForward(self.angles);
+  var_6 = vectorNormalize((self.damagedir[0], self.damagedir[1], 0));
+  var_7 = vectorNormalize((var_5[0], var_5[1], 0));
+  var_8 = meleegetattackercardinaldirection(var_7, var_6);
+  var_9 = undefined;
 
-  if(var8 == 2) {
-    var9 = "_8";
-  } else if(var8 == 3) {
-    var9 = "_6";
-  } else if(var8 == 1) {
-    var9 = "_4";
+  if(var_8 == 2) {
+    var_9 = "_8";
+  } else if(var_8 == 3) {
+    var_9 = "_6";
+  } else if(var_8 == 1) {
+    var_9 = "_4";
   } else {
-    var9 = "_2";
+    var_9 = "_2";
   }
 
-  if(shouldfireintoairdeath(var2, var4)) {
-    var10 = "fire_into_air";
+  if(shouldfireintoairdeath(var_2, var_4)) {
+    var_10 = "fire_into_air";
   } else {
-    var10 = var5 + var4 + var10;
+    var_10 = var_5 + var_4 + var_10;
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(var3, var10);
+  return scripts\asm\asm::asm_lookupanimfromalias(var_3, var_10);
 }
 
-function choosedirectionalcrouchdeathanim(var0, var1, var2) {
-  var3 = getpainbodypartcrouchdeath();
-  var4 = scripts\asm\soldier\pain::getpainweaponsize();
-  var5 = anglesToForward(self.angles);
-  var6 = vectorNormalize((self.damagedir[0], self.damagedir[1], 0));
-  var7 = vectorNormalize((var5[0], var5[1], 0));
-  var8 = meleegetattackercardinaldirection(var7, var6);
-  var9 = undefined;
+function choosedirectionalcrouchdeathanim(var_0, var_1, var_2) {
+  var_3 = getpainbodypartcrouchdeath();
+  var_4 = scripts\asm\soldier\pain::getpainweaponsize();
+  var_5 = anglesToForward(self.angles);
+  var_6 = vectorNormalize((self.damagedir[0], self.damagedir[1], 0));
+  var_7 = vectorNormalize((var_5[0], var_5[1], 0));
+  var_8 = meleegetattackercardinaldirection(var_7, var_6);
+  var_9 = undefined;
 
-  if(var8 == 2) {
-    var9 = "_8";
-  } else if(var8 == 3) {
-    var9 = "_6";
-  } else if(var8 == 1) {
-    var9 = "_4";
+  if(var_8 == 2) {
+    var_9 = "_8";
+  } else if(var_8 == 3) {
+    var_9 = "_6";
+  } else if(var_8 == 1) {
+    var_9 = "_4";
   } else {
-    var9 = "_2";
+    var_9 = "_2";
   }
 
-  if(shouldfireintoairdeath(var1, var3)) {
-    var10 = "fire_into_air";
+  if(shouldfireintoairdeath(var_1, var_3)) {
+    var_10 = "fire_into_air";
   } else {
-    var10 = var4 + var5 + var10;
+    var_10 = var_4 + var_5 + var_10;
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(var2, var10);
+  return scripts\asm\asm::asm_lookupanimfromalias(var_2, var_10);
 }
 
-function shouldfireintoairdeath(var0, var1) {
-  var2 = weaponclass(self.weapon);
-  var3 = istrue(self.diequietly) || var2 == "rocketlauncher" || var2 == "spread" || var2 == "pistol";
+function shouldfireintoairdeath(var_0, var_1) {
+  var_2 = weaponclass(self.weapon);
+  var_3 = istrue(self.diequietly) || var_2 == "rocketlauncher" || var_2 == "spread" || var_2 == "pistol";
 
-  if(!scripts\asm\asm::asm_hasalias(var0, "fire_into_air")) {
+  if(!scripts\asm\asm::asm_hasalias(var_0, "fire_into_air")) {
     return false;
   }
 
@@ -1612,42 +1612,42 @@ function shouldfireintoairdeath(var0, var1) {
     return false;
   }
 
-  if(var3) {
+  if(var_3) {
     return false;
   }
 
-  if(var1 == "lowerbody") {
+  if(var_1 == "lowerbody") {
     return false;
   }
 
-  if(var1 == "head") {
-    var4 = 0.3;
+  if(var_1 == "head") {
+    var_4 = 0.3;
   } else {
-    var4 = 0.15;
+    var_4 = 0.15;
   }
 
-  return randomfloat(1) < var4;
+  return randomfloat(1) < var_4;
 }
 
-function choosedirectionallargepaindeathanim(var0, var1, var2) {
-  var3 = "lowerbody";
-  var4 = "_lg";
-  var5 = anglesToForward(self.angles);
-  var6 = vectorNormalize((self.damagedir[0], self.damagedir[1], 0));
-  var7 = vectorNormalize((var5[0], var5[1], 0));
-  var8 = meleegetattackercardinaldirection(var7, var6);
-  var9 = undefined;
+function choosedirectionallargepaindeathanim(var_0, var_1, var_2) {
+  var_3 = "lowerbody";
+  var_4 = "_lg";
+  var_5 = anglesToForward(self.angles);
+  var_6 = vectorNormalize((self.damagedir[0], self.damagedir[1], 0));
+  var_7 = vectorNormalize((var_5[0], var_5[1], 0));
+  var_8 = meleegetattackercardinaldirection(var_7, var_6);
+  var_9 = undefined;
 
-  if(var8 == 2) {
-    var9 = "_8";
-  } else if(var8 == 3) {
-    var9 = "_6";
-  } else if(var8 == 1) {
-    var9 = "_4";
+  if(var_8 == 2) {
+    var_9 = "_8";
+  } else if(var_8 == 3) {
+    var_9 = "_6";
+  } else if(var_8 == 1) {
+    var_9 = "_4";
   } else {
-    var9 = "_2";
+    var_9 = "_2";
   }
 
-  var10 = var3 + var4 + var9;
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, var10);
+  var_10 = var_3 + var_4 + var_9;
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_10);
 }

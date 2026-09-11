@@ -3,13 +3,13 @@
  * Script: scripts\common\basic_wind.gsc
 ***********************************************/
 
-function load_wind(var0, var1) {
-  var2 = ["n", "ne", "e", "se", "s", "sw", "w", "nw"];
-  var3 = ["weak", "medium", "strong"];
-  var4 = "vfx/iw8/wind/basic_directions/vfx_basic_wind_";
-  var5 = var2[get_wind_index(var0)] + "_" + var3[var1][0];
-  var6 = var4 + var0 + "_" + var3[var1] + ".vfx";
-  level.g_effect[var5] = loadfx(var6);
+function load_wind(var_0, var_1) {
+  var_2 = ["n", "ne", "e", "se", "s", "sw", "w", "nw"];
+  var_3 = ["weak", "medium", "strong"];
+  var_4 = "vfx/iw8/wind/basic_directions/vfx_basic_wind_";
+  var_5 = var_2[get_wind_index(var_0)] + "_" + var_3[var_1][0];
+  var_6 = var_4 + var_0 + "_" + var_3[var_1] + ".vfx";
+  level.g_effect[var_5] = loadfx(var_6);
 }
 
 function load_debug_particles() {
@@ -44,74 +44,74 @@ function load_all_wind() {
   level.g_effect["nw_s"] = loadfx("vfx/iw8/wind/basic_directions/vfx_basic_wind_northwest_strong.vfx");
 }
 
-function init_wind(var0, var1, var2) {
-  var3 = get_wind_index(var0);
-  var4 = wind_index(var3, var1);
-  var5 = level.g_effect[var4];
+function init_wind(var_0, var_1, var_2) {
+  var_3 = get_wind_index(var_0);
+  var_4 = wind_index(var_3, var_1);
+  var_5 = level.g_effect[var_4];
 
-  if(var2 == 1) {
-    var6 = spawnfx(var5, (0, 0, 0));
-    triggerfx(var6);
+  if(var_2 == 1) {
+    var_6 = spawnfx(var_5, (0, 0, 0));
+    triggerfx(var_6);
     return undefined;
   }
 
-  var7 = scripts\engine\utility::spawn_tag_origin();
-  playFXOnTag(var6, var7, "tag_origin");
-  var8 = spawnStruct();
-  var8.id = var6;
-  var8.fxtag = var7;
-  var8.tagorigin = "tag_origin";
-  return var8;
+  var_7 = scripts\engine\utility::spawn_tag_origin();
+  playFXOnTag(var_6, var_7, "tag_origin");
+  var_8 = spawnStruct();
+  var_8.id = var_6;
+  var_8.fxtag = var_7;
+  var_8.tagorigin = "tag_origin";
+  return var_8;
 }
 
-function init_wind_at_point(var0, var1, var2, var3) {
-  var4 = get_wind_index(var0);
-  var5 = wind_index(var4, var1);
-  var6 = level.g_effect[var5];
+function init_wind_at_point(var_0, var_1, var_2, var_3) {
+  var_4 = get_wind_index(var_0);
+  var_5 = wind_index(var_4, var_1);
+  var_6 = level.g_effect[var_5];
 
-  if(var3 == 1) {
-    var7 = spawnfx(var6, var2);
-    triggerfx(var7);
+  if(var_3 == 1) {
+    var_7 = spawnfx(var_6, var_2);
+    triggerfx(var_7);
     return undefined;
   }
 
-  var8 = scripts\engine\utility::spawn_tag_origin();
-  var8.point = var3;
-  playFXOnTag(var7, var8, "tag_origin");
-  var9 = spawnStruct();
-  var9.id = var7;
-  var9.fxtag = var8;
-  var9.tagorigin = "tag_origin";
-  return var9;
+  var_8 = scripts\engine\utility::spawn_tag_origin();
+  var_8.point = var_3;
+  playFXOnTag(var_7, var_8, "tag_origin");
+  var_9 = spawnStruct();
+  var_9.id = var_7;
+  var_9.fxtag = var_8;
+  var_9.tagorigin = "tag_origin";
+  return var_9;
 }
 
-function stop_wind(var0) {
-  if(isDefined(var0)) {
-    stopFXOnTag(var0.id, var0.fxtag, var0.tagorigin);
+function stop_wind(var_0) {
+  if(isDefined(var_0)) {
+    stopFXOnTag(var_0.id, var_0.fxtag, var_0.tagorigin);
     return;
   }
 }
 
-function set_wind_amplitude(var0) {
-  setsaveddvar("MQPQKNPQOK", var0);
+function set_wind_amplitude(var_0) {
+  setsaveddvar("MQPQKNPQOK", var_0);
 }
 
-function set_wind_frequency(var0) {
-  setsaveddvar("MRNRKKOPLN", var0);
+function set_wind_frequency(var_0) {
+  setsaveddvar("MRNRKKOPLN", var_0);
 }
 
-function set_wind_area_scale(var0) {
-  setsaveddvar("LQLSPQOPKM", var0);
+function set_wind_area_scale(var_0) {
+  setsaveddvar("LQLSPQOPKM", var_0);
 }
 
-function spawn_debug_particles(var0) {
-  var1 = level.g_effect["wind_debug"];
-  var2 = scripts\engine\utility::spawn_tag_origin();
-  playFXOnTag(var1, var2, "tag_origin");
+function spawn_debug_particles(var_0) {
+  var_1 = level.g_effect["wind_debug"];
+  var_2 = scripts\engine\utility::spawn_tag_origin();
+  playFXOnTag(var_1, var_2, "tag_origin");
 }
 
-function get_wind_index(var0) {
-  switch (var0) {
+function get_wind_index(var_0) {
+  switch (var_0) {
     case "north":
       return 0;
     case "northeast":
@@ -129,17 +129,17 @@ function get_wind_index(var0) {
     case "northwest":
       return 7;
     default:
-      iprintlnbold("ERROR: Improper wind string!No index for " + var0);
+      iprintlnbold("ERROR: Improper wind string!No index for " + var_0);
       return -1;
   }
 }
 
-function get_wind_string(var0) {
-  var1 = ["north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"];
-  return var1[var0];
+function get_wind_string(var_0) {
+  var_1 = ["north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"];
+  return var_1[var_0];
 }
 
-function wind_index(var0, var1) {
-  var2 = [];
+function wind_index(var_0, var_1) {
+  var_2 = [];
   GscBinSkip0(0x2e, 0, ["n_w", "n_m", "n_s"]);
 }

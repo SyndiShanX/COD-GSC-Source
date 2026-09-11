@@ -38,10 +38,10 @@ function main() {
 }
 
 function ref_145f0() {
-  var0 = getdvarint("OKSRMNKKOS", 0);
+  var_0 = getdvarint("OKSRMNKKOS", 0);
   wait 3;
 
-  switch (var0) {
+  switch (var_0) {
     case 0:
       break;
     case 1:
@@ -60,21 +60,21 @@ function ref_145f0() {
 }
 
 function ref_12f8e() {
-  var0 = [];
+  var_0 = [];
 
   switch (scripts\mp\utility\game::getgametype()) {
     case "siege":
       if(!isDefined(game["roundsPlayed"]) || game["roundsPlayed"] == 0) {
         break;
       } else {
-        GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_gw_spawn_axis_start_mod", (-29384, -17824, -232), (0, 90, 0)));
+        GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_gw_spawn_axis_start_mod", (-29384, -17824, -232), (0, 90, 0)));
       }
 
       break;
   }
 
-  if(var0.size > 0) {
-    scripts\mp\spawnlogic::bdiedonce(var0);
+  if(var_0.size > 0) {
+    scripts\mp\spawnlogic::bdiedonce(var_0);
     return;
   }
 }

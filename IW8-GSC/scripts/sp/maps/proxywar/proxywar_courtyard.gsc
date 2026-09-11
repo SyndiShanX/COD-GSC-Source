@@ -37,8 +37,8 @@ function courtyard_retreat_start() {
   scripts\engine\sp\utility::set_start_location("start_courtyard_retreat", scripts\engine\utility::array_combine([level.player], level.alpha_and_bravo_team));
   scripts\sp\maps\proxywar\proxywar_util::enable_allies_firing();
 
-  foreach(var1 in level.alpha_and_bravo_team) {
-    var1.disableplayeradsloscheck = 0;
+  foreach(var_1 in level.alpha_and_bravo_team) {
+    var_1.disableplayeradsloscheck = 0;
   }
 }
 
@@ -53,35 +53,35 @@ function courtyard_retreat_main() {
   scripts\engine\utility::flag_wait_any("at_courtyard_door", "reached_courtyard_overlook");
   level.courtyarddefendgroup = scripts\engine\sp\utility::array_spawn_targetname("courtyard_defend_group", 1);
 
-  foreach(var1 in level.courtyarddefendgroup) {
-    var1 scripts\engine\sp\utility::set_baseaccuracy(0.1);
-    var1.health *= 2;
-    var1.ignoreme = 1;
-    var1.ignoreall = 1;
+  foreach(var_1 in level.courtyarddefendgroup) {
+    var_1 scripts\engine\sp\utility::set_baseaccuracy(0.1);
+    var_1.health *= 2;
+    var_1.ignoreme = 1;
+    var_1.ignoreall = 1;
   }
 
   scripts\engine\utility::flag_wait_any("reached_courtyard_start", "reached_courtyard_overlook");
 
   if(scripts\engine\utility::flag("reached_courtyard_overlook")) {
-    var3 = gettime();
+    var_3 = gettime();
 
-    while(!scripts\engine\utility::time_has_passed(var3, 2) && !level.player isfiring()) {
+    while(!scripts\engine\utility::time_has_passed(var_3, 2) && !level.player isfiring()) {
       waitframe();
     }
 
-    foreach(var1 in level.courtyarddefendgroup) {
-      var1.ignoreme = 0;
-      var1.ignoreall = 0;
+    foreach(var_1 in level.courtyarddefendgroup) {
+      var_1.ignoreme = 0;
+      var_1.ignoreall = 0;
     }
 
-    var3 = gettime();
-    var6 = 0;
-    var7 = scripts\engine\utility::array_combine([level.player], level.courtyarddefendgroup);
+    var_3 = gettime();
+    var_6 = 0;
+    var_7 = scripts\engine\utility::array_combine([level.player], level.courtyarddefendgroup);
 
-    while(!scripts\engine\utility::time_has_passed(var3, 1) && !var6 && !level.player isfiring()) {
-      foreach(var9 in level.courtyarddefendgroup) {
-        if(scripts\sp\maps\proxywar\proxywar_util::within_player_fov(var9 getEye()) && scripts\engine\trace::ray_trace_passed(level.player getEye(), var9 getEye(), var7, scripts\engine\trace::create_world_contents())) {
-          var6 = 1;
+    while(!scripts\engine\utility::time_has_passed(var_3, 1) && !var_6 && !level.player isfiring()) {
+      foreach(var_9 in level.courtyarddefendgroup) {
+        if(scripts\sp\maps\proxywar\proxywar_util::within_player_fov(var_9 getEye()) && scripts\engine\trace::ray_trace_passed(level.player getEye(), var_9 getEye(), var_7, scripts\engine\trace::create_world_contents())) {
+          var_6 = 1;
           break;
         }
       }
@@ -91,9 +91,9 @@ function courtyard_retreat_main() {
   } else {
     scripts\engine\utility::flag_wait("started_courtyard_breach");
 
-    foreach(var1 in level.courtyarddefendgroup) {
-      var1.ignoreme = 0;
-      var1.ignoreall = 0;
+    foreach(var_1 in level.courtyarddefendgroup) {
+      var_1.ignoreme = 0;
+      var_1.ignoreall = 0;
     }
 
     wait 3;
@@ -103,19 +103,19 @@ function courtyard_retreat_main() {
   level thread scripts\sp\maps\proxywar\proxywar_vo::vo_cr_enemies_fall_back();
   level thread scripts\sp\maps\proxywar\proxywar_vo::vo_cr_kill_retreating();
   level.courtyarddefendgroup = scripts\engine\utility::array_removedead_or_dying(level.courtyarddefendgroup);
-  var13 = getEnt("courtyard_fallback", "targetname");
+  var_13 = getEnt("courtyard_fallback", "targetname");
 
-  foreach(var1 in level.courtyarddefendgroup) {
-    var1 setgoalvolumeauto(var13);
-    thread courytard_retreat_enemy_kill_at_fallback(var1);
+  foreach(var_1 in level.courtyarddefendgroup) {
+    var_1 setgoalvolumeauto(var_13);
+    thread courytard_retreat_enemy_kill_at_fallback(var_1);
 
-    if(!isDefined(var1.script_noteworthy)) {
-      var1.maxfaceenemydist = 0;
-      var1.ignoreall = 1;
+    if(!isDefined(var_1.script_noteworthy)) {
+      var_1.maxfaceenemydist = 0;
+      var_1.ignoreall = 1;
       continue;
     }
 
-    var1.maxfaceenemydist = 300;
+    var_1.maxfaceenemydist = 300;
   }
 
   level.courtyarddefendgroup = scripts\engine\utility::array_removedead_or_dying(level.courtyarddefendgroup);
@@ -126,11 +126,11 @@ function courtyard_retreat_main() {
 
   level.courtyarddefendgroup = scripts\engine\utility::array_removedead_or_dying(level.courtyarddefendgroup);
 
-  foreach(var17 in level.alpha_and_bravo_team) {
-    var17 scripts\sp\maps\proxywar\proxywar_util::set_ally_movement_courtyard();
-    var17 scripts\common\ai::set_gunpose("disable", 1);
-    var17 scripts\asm\shared\utility::toggle_poiauto(1);
-    var17.disableplayeradsloscheck = 1;
+  foreach(var_17 in level.alpha_and_bravo_team) {
+    var_17 scripts\sp\maps\proxywar\proxywar_util::set_ally_movement_courtyard();
+    var_17 scripts\common\ai::set_gunpose("disable", 1);
+    var_17 scripts\asm\shared\utility::toggle_poiauto(1);
+    var_17.disableplayeradsloscheck = 1;
   }
 
   level thread scripts\sp\player::player_movement_state("cqb");
@@ -139,22 +139,22 @@ function courtyard_retreat_main() {
   level thread scripts\engine\sp\utility::autosave_by_name("warehouse_enter");
 }
 
-function courytard_retreat_enemy_kill_at_fallback(var0) {
+function courytard_retreat_enemy_kill_at_fallback(var_0) {
   self endon("death");
 
-  while(!self istouching(var0)) {
+  while(!self istouching(var_0)) {
     waitframe();
   }
 
-  var1 = undefined;
+  var_1 = undefined;
 
-  while(!isDefined(var1)) {
-    var2 = sortbydistance(level.alpha_and_bravo_team, self.origin);
+  while(!isDefined(var_1)) {
+    var_2 = sortbydistance(level.alpha_and_bravo_team, self.origin);
 
-    foreach(var4 in var2) {
-      if(!var4 scripts\sp\maps\proxywar\proxywar_util::ally_tracking_enemy()) {
-        var4 thread scripts\sp\maps\proxywar\proxywar_util::ally_track_and_kill(self, "kill_now_" + var4.script_noteworthy);
-        var1 = var4;
+    foreach(var_4 in var_2) {
+      if(!var_4 scripts\sp\maps\proxywar\proxywar_util::ally_tracking_enemy()) {
+        var_4 thread scripts\sp\maps\proxywar\proxywar_util::ally_track_and_kill(self, "kill_now_" + var_4.script_noteworthy);
+        var_1 = var_4;
         break;
       }
     }
@@ -163,7 +163,7 @@ function courytard_retreat_enemy_kill_at_fallback(var0) {
   }
 
   wait randomfloatrange(0, 3);
-  level notify("kill_now_" + var1.script_noteworthy);
+  level notify("kill_now_" + var_1.script_noteworthy);
 }
 
 function courtyard_defender_spawnfunc() {
@@ -174,22 +174,22 @@ function upper_team_move_courtyard() {
   scripts\engine\utility::flag_wait("reached_courtyard_start");
   scripts\engine\sp\utility::activate_trigger_with_targetname("allies_upper_move_courtyard_2");
 
-  foreach(var1 in level.alpha_and_bravo_team) {
-    var1 scripts\sp\maps\proxywar\proxywar_util::set_ally_movement_courtyard();
+  foreach(var_1 in level.alpha_and_bravo_team) {
+    var_1 scripts\sp\maps\proxywar\proxywar_util::set_ally_movement_courtyard();
   }
 
   scripts\engine\utility::flag_wait("reached_courtyard_mid_1");
   scripts\engine\sp\utility::activate_trigger_with_targetname("allies_upper_move_courtyard_6");
 
-  foreach(var1 in level.alpha_and_bravo_team) {
-    var1 scripts\sp\maps\proxywar\proxywar_util::set_ally_movement_courtyard();
+  foreach(var_1 in level.alpha_and_bravo_team) {
+    var_1 scripts\sp\maps\proxywar\proxywar_util::set_ally_movement_courtyard();
   }
 
   scripts\engine\utility::flag_wait("reached_courtyard_mid_4");
   scripts\engine\sp\utility::activate_trigger_with_targetname("allies_upper_move_courtyard_end");
 
-  foreach(var1 in level.alpha_and_bravo_team) {
-    var1 scripts\sp\maps\proxywar\proxywar_util::set_ally_movement_courtyard();
+  foreach(var_1 in level.alpha_and_bravo_team) {
+    var_1 scripts\sp\maps\proxywar\proxywar_util::set_ally_movement_courtyard();
   }
 }
 
@@ -198,22 +198,22 @@ function lower_team_move_courtyard() {
   scripts\engine\utility::flag_wait_or_timeout("reached_courtyard_mid_1", 6);
   scripts\engine\sp\utility::activate_trigger_with_targetname("allies_lower_move_courtyard_3");
 
-  foreach(var1 in level.alpha_and_bravo_team) {
-    var1 scripts\sp\maps\proxywar\proxywar_util::set_ally_movement_courtyard();
+  foreach(var_1 in level.alpha_and_bravo_team) {
+    var_1 scripts\sp\maps\proxywar\proxywar_util::set_ally_movement_courtyard();
   }
 
   scripts\engine\utility::flag_wait("reached_courtyard_mid_1");
   scripts\engine\sp\utility::activate_trigger_with_targetname("allies_lower_move_courtyard_6");
 
-  foreach(var1 in level.alpha_and_bravo_team) {
-    var1 scripts\sp\maps\proxywar\proxywar_util::set_ally_movement_courtyard();
+  foreach(var_1 in level.alpha_and_bravo_team) {
+    var_1 scripts\sp\maps\proxywar\proxywar_util::set_ally_movement_courtyard();
   }
 
   scripts\engine\utility::flag_wait("reached_courtyard_mid_4");
   scripts\engine\sp\utility::activate_trigger_with_targetname("allies_lower_move_courtyard_end");
 
-  foreach(var1 in level.alpha_and_bravo_team) {
-    var1 scripts\sp\maps\proxywar\proxywar_util::set_ally_movement_courtyard();
+  foreach(var_1 in level.alpha_and_bravo_team) {
+    var_1 scripts\sp\maps\proxywar\proxywar_util::set_ally_movement_courtyard();
   }
 }
 
@@ -283,10 +283,10 @@ function breach_doors() {
 
 function sfx_courtyard_door_breach() {
   wait 1.1;
-  var0 = spawn("script_origin", (202, 6, 316));
-  var0 playexplosionsound("scn_proxywar_breach_charge_expl", "exp");
+  var_0 = spawn("script_origin", (202, 6, 316));
+  var_0 playexplosionsound("scn_proxywar_breach_charge_expl", "exp");
   wait 5;
-  var0 delete();
+  var_0 delete();
 }
 
 function courtyard_retreat_catchup() {

@@ -28,7 +28,7 @@ function main() {
   startsavedprogression(level.script);
 }
 
-function proggressionmismatchpopup(var0) {
+function proggressionmismatchpopup(var_0) {
   setomnvar("progression_invalid", 1);
 }
 
@@ -52,14 +52,14 @@ function getdescription() {
   return &"AUTOSAVE_AUTOSAVE";
 }
 
-function getnames(var0) {
-  if(var0 == 0) {
-    var1 = &"AUTOSAVE_GAME";
+function getnames(var_0) {
+  if(var_0 == 0) {
+    var_1 = &"AUTOSAVE_GAME";
   } else {
-    var1 = &"AUTOSAVE_NOGAME";
+    var_1 = &"AUTOSAVE_NOGAME";
   }
 
-  return var1;
+  return var_1;
 }
 
 function beginningoflevelsave() {
@@ -72,35 +72,35 @@ function beginningoflevelsave() {
 }
 
 function immediatelevelstartsave() {
-  var0 = scripts\sp\endmission::level_settle_time_get(level.script);
+  var_0 = scripts\sp\endmission::level_settle_time_get(level.script);
 
-  if(!isDefined(var0)) {
-    var0 = 0;
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  var0 *= 0.05;
-  var1 = scripts\sp\endmission::client_settle_time_get(level.script);
+  var_0 *= 0.05;
+  var_1 = scripts\sp\endmission::client_settle_time_get(level.script);
 
-  if(!isDefined(var1)) {
-    var1 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  var1 *= 0.001;
-  wait var1 + var0 + 0.15;
-  var2 = 0;
+  var_1 *= 0.001;
+  wait var_1 + var_0 + 0.15;
+  var_2 = 0;
 
   if(isDefined(level.credits_active)) {
     autosaveprint("immediateLevelStartSave() Credits are active", 0);
-    var2 = 1;
+    var_2 = 1;
   } else if(level.missionfailed) {
     autosaveprint("immediateLevelStartSave() Mission Failed", 0);
-    var2 = 1;
+    var_2 = 1;
   } else if(scripts\engine\utility::flag("game_saving")) {
     autosaveprint("immediateLevelStartSave() In the middle of another save, aborting", 0);
-    var2 = 1;
+    var_2 = 1;
   }
 
-  if(var2) {
+  if(var_2) {
     scripts\engine\utility::flag_set("ImmediateLevelStartSave");
     return;
   }
@@ -111,8 +111,8 @@ function immediatelevelstartsave() {
     return;
   }
 
-  var3 = "levelshots / autosave / autosave_" + level.script + "immediate_start";
-  savegame("immediatelevelstart", &"AUTOSAVE_LEVELSTART", var3, 1);
+  var_3 = "levelshots / autosave / autosave_" + level.script + "immediate_start";
+  savegame("immediatelevelstart", &"AUTOSAVE_LEVELSTART", var_3, 1);
   setDvar("ui_grenade_death", "0");
   level.player setplayeryolostate(0);
   scripts\engine\utility::flag_clear("game_saving");
@@ -147,10 +147,10 @@ function beginningoflevelsave_thread() {
   }
 
   scripts\engine\utility::flag_set("game_saving");
-  var0 = "levelshots / autosave / autosave_" + level.script + "start";
-  var1 = waitfortransientloading("beginningOfLevelSave_thread()");
+  var_0 = "levelshots / autosave / autosave_" + level.script + "start";
+  var_1 = waitfortransientloading("beginningOfLevelSave_thread()");
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     autosaveprint("beginningOfLevelSave_thread() a newer save was called...", 0);
     scripts\engine\utility::flag_clear("game_saving");
     return;
@@ -160,96 +160,96 @@ function beginningoflevelsave_thread() {
     return;
   }
 
-  savegame("levelstart", &"AUTOSAVE_LEVELSTART", var0, 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", var_0, 1);
   setDvar("ui_grenade_death", "0");
   level.player setplayeryolostate(0);
   scripts\engine\utility::flag_clear("game_saving");
 }
 
-function trigger_autosave_stealth(var0) {
-  var0 waittill("trigger");
+function trigger_autosave_stealth(var_0) {
+  var_0 waittill("trigger");
   scripts\engine\sp\utility::autosave_stealth();
 }
 
-function trigger_autosave_tactical(var0) {
-  var0 waittill("trigger");
+function trigger_autosave_tactical(var_0) {
+  var_0 waittill("trigger");
   scripts\engine\sp\utility::autosave_tactical();
 }
 
-function trigger_autosave(var0) {
-  thread autosave_think(var0);
+function trigger_autosave(var_0) {
+  thread autosave_think(var_0);
 }
 
-function autosave_think(var0) {
-  var0 endon("death");
+function autosave_think(var_0) {
+  var_0 endon("death");
 
-  if(!isDefined(var0.script_autosave)) {
-    var0.script_autosave = 1;
+  if(!isDefined(var_0.script_autosave)) {
+    var_0.script_autosave = 1;
   }
 
-  var1 = getnames(var0.script_autosave);
+  var_1 = getnames(var_0.script_autosave);
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
   wait 1;
-  var0 waittill("trigger");
-  var2 = undefined;
+  var_0 waittill("trigger");
+  var_2 = undefined;
 
-  if(isDefined(var0.script_autosavename)) {
-    var2 = var0.script_autosavename;
+  if(isDefined(var_0.script_autosavename)) {
+    var_2 = var_0.script_autosavename;
   }
 
-  scripts\engine\sp\utility::autosave_by_name(var2);
+  scripts\engine\sp\utility::autosave_by_name(var_2);
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
     return;
   }
 }
 
-function autosaveprint(var0, var1, var2) {
+function autosaveprint(var_0, var_1, var_2) {
   if(!getdvarint("scr_autosave_debug") && !getdvarint("scr_autosave_showPrints")) {
     return;
   }
 
-  if(!isDefined(var1)) {
-    var1 = -1;
+  if(!isDefined(var_1)) {
+    var_1 = -1;
   }
 
-  var3 = "^5AUTOSAVE";
+  var_3 = "^5AUTOSAVE";
 
-  if(isDefined(var2)) {
-    var3 = var3 + "[" + var2 + "]";
+  if(isDefined(var_2)) {
+    var_3 = var_3 + "[" + var_2 + "]";
   }
 
-  var3 += ":^7 ";
+  var_3 += ":^7 ";
 
-  if(var1 == 0) {
-    var0 = var3 + "^1[ FAILED] " + "^7" + var0;
-  } else if(var1 == 1) {
-    var0 = var3 + "^2[ SUCCEEDED ] " + "^7" + var0;
-  } else if(var1 == 2) {
-    var0 = var3 + "^7" + var0;
+  if(var_1 == 0) {
+    var_0 = var_3 + "^1[ FAILED] " + "^7" + var_0;
+  } else if(var_1 == 1) {
+    var_0 = var_3 + "^2[ SUCCEEDED ] " + "^7" + var_0;
+  } else if(var_1 == 2) {
+    var_0 = var_3 + "^7" + var_0;
   } else {
-    var0 = var3 + var0;
+    var_0 = var_3 + var_0;
   }
 
-  if(var1 == 0 || var1 == 1 || var1 == 2) {
-    thread autosave_hudprint(var0);
+  if(var_1 == 0 || var_1 == 1 || var_1 == 2) {
+    thread autosave_hudprint(var_0);
   }
 
   if(getdvarint("scr_autosave_debug")) {
-    iprintln(var0);
+    iprintln(var_0);
     return;
   }
 }
 
-function autosave_hudprint(var0) {
-  var1 = getbuildversion();
+function autosave_hudprint(var_0) {
+  var_1 = getbuildversion();
 
-  if(var1 == "IW8") {
+  if(var_1 == "IW8") {
     return;
   }
 
@@ -266,39 +266,39 @@ function autosave_hudprint(var0) {
   }
 
   if(level.autosave.fail_huds.size == 3) {
-    var2 = level.autosave.fail_huds[0];
+    var_2 = level.autosave.fail_huds[0];
     level.autosave.fail_huds = scripts\engine\utility::array_remove_index(level.autosave.fail_huds, 0);
     autosave_hudfail_update();
     thread autosave_hudfail_destroy();
   }
 
-  var3 = newhudelem();
-  var3.elemtype = "font";
-  var3.font = "default";
-  var3.fontscale = 0.7;
-  var3.width = 0;
-  var3.height = int(8.4);
-  var3.horzalign = "fullscreen";
-  var3.vertalign = "fullscreen";
-  var4 = level.autosave.fail_huds.size;
-  level.autosave.fail_huds[var4] = var3;
-  var3.foreground = 1;
-  var3.sort = 20;
-  var3.x = 130;
-  var3.y = 5 + var4 * 8.4;
-  var3.label = var0;
-  var3.alpha = 0;
-  var3 fadeovertime(0.2);
-  var3.alpha = 1;
-  var3 endon("death");
+  var_3 = newhudelem();
+  var_3.elemtype = "font";
+  var_3.font = "default";
+  var_3.fontscale = 0.7;
+  var_3.width = 0;
+  var_3.height = int(8.4);
+  var_3.horzalign = "fullscreen";
+  var_3.vertalign = "fullscreen";
+  var_4 = level.autosave.fail_huds.size;
+  level.autosave.fail_huds[var_4] = var_3;
+  var_3.foreground = 1;
+  var_3.sort = 20;
+  var_3.x = 130;
+  var_3.y = 5 + var_4 * 8.4;
+  var_3.label = var_0;
+  var_3.alpha = 0;
+  var_3 fadeovertime(0.2);
+  var_3.alpha = 1;
+  var_3 endon("death");
   wait 5;
-  level.autosave.fail_huds = scripts\engine\utility::array_remove(level.autosave.fail_huds, var3);
+  level.autosave.fail_huds = scripts\engine\utility::array_remove(level.autosave.fail_huds, var_3);
   autosave_hudfail_update();
   thread autosave_hudfail_destroy();
 }
 
 function autosave_hudfail_destroy() {
-  var0 = 1;
+  var_0 = 1;
   self endon("death");
   self fadeovertime(0.1);
   self moveovertime(0.1);
@@ -311,13 +311,13 @@ function autosave_hudfail_destroy() {
 function autosave_hudfail_update() {
   level.autosave.fail_huds = scripts\engine\utility::array_removeundefined(level.autosave.fail_huds);
 
-  foreach(var1 in level.autosave.fail_huds) {
-    var1 moveovertime(0.1);
-    var1.y = 5 + var2 * 12 * 0.7;
+  foreach(var_1 in level.autosave.fail_huds) {
+    var_1 moveovertime(0.1);
+    var_1.y = 5 + var_2 * 12 * 0.7;
   }
 }
 
-function _autosave_game_now(var0, var1) {
+function _autosave_game_now(var_0, var_1) {
   if(scripts\sp\utility::is_trials_level()) {
     return 0;
   }
@@ -333,7 +333,7 @@ function _autosave_game_now(var0, var1) {
     return 0;
   }
 
-  if(!isDefined(var1) || !var1) {
+  if(!isDefined(var_1) || !var_1) {
     level notify("trying_new_autosave");
   }
 
@@ -343,24 +343,24 @@ function _autosave_game_now(var0, var1) {
   }
 
   scripts\engine\utility::flag_set("game_saving");
-  var2 = waitfortransientloading("_autosave_game_now()");
+  var_2 = waitfortransientloading("_autosave_game_now()");
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     autosaveprint("_autosave_game_now() a newer save was called...", 0);
     scripts\engine\utility::flag_clear("game_saving");
     return 0;
   }
 
-  for(var3 = 0; var3 < level.players.size; var3++) {
-    var4 = level.players[var3];
+  for(var_3 = 0; var_3 < level.players.size; var_3++) {
+    var_4 = level.players[var_3];
 
-    if(!isalive(var4)) {
+    if(!isalive(var_4)) {
       return 0;
     }
   }
 
-  var5 = "save_now";
-  var6 = getdescription();
+  var_5 = "save_now";
+  var_6 = getdescription();
 
   if(getdvarint("reloading") != 0) {
     autosaveprint("_autosave_game_now() Game is restarting", 0);
@@ -372,13 +372,13 @@ function _autosave_game_now(var0, var1) {
     return 0;
   }
 
-  if(isDefined(var0)) {
-    var7 = savegamenocommit(var5, var6, "$default", 1);
+  if(isDefined(var_0)) {
+    var_7 = savegamenocommit(var_5, var_6, "$default", 1);
   } else {
-    var7 = savegamenocommit(var6, var7);
+    var_7 = savegamenocommit(var_6, var_7);
   }
 
-  autosaveprint("_autosave_game_now() Saving", undefined, var7);
+  autosaveprint("_autosave_game_now() Saving", undefined, var_7);
   wait 0.05;
 
   if(issaverecentlyloaded()) {
@@ -394,13 +394,13 @@ function _autosave_game_now(var0, var1) {
     return 0;
   }
 
-  if(var7 < 0) {
-    autosaveprint("_autosave_game_now() save error", 0, var7);
+  if(var_7 < 0) {
+    autosaveprint("_autosave_game_now() save error", 0, var_7);
     scripts\engine\utility::flag_clear("game_saving");
     return 0;
   }
 
-  if(!try_to_autosave_now(var7)) {
+  if(!try_to_autosave_now(var_7)) {
     scripts\engine\utility::flag_clear("game_saving");
     return 0;
   }
@@ -413,14 +413,14 @@ function _autosave_game_now(var0, var1) {
     return 0;
   }
 
-  if(!commitwouldbevalid(var7)) {
-    autosaveprint("_autosave_game_now() SaveGame is no longer valid, another save was run from elsewhere", 0, var7);
+  if(!commitwouldbevalid(var_7)) {
+    autosaveprint("_autosave_game_now() SaveGame is no longer valid, another save was run from elsewhere", 0, var_7);
     return 0;
   }
 
-  if(try_to_autosave_now(var7)) {
-    autosaveprint("_autosave_game_now() committed", 1, var7);
-    commitsave(var7);
+  if(try_to_autosave_now(var_7)) {
+    autosaveprint("_autosave_game_now() committed", 1, var_7);
+    commitsave(var_7);
     level.player setplayeryolostate(0);
     setDvar("ui_grenade_death", "0");
     scripts\sp\gameskill::auto_adjust_save_committed();
@@ -429,34 +429,34 @@ function _autosave_game_now(var0, var1) {
   return 1;
 }
 
-function autosave_now_trigger(var0) {
-  var0 waittill("trigger");
+function autosave_now_trigger(var_0) {
+  var_0 waittill("trigger");
   scripts\engine\sp\utility::autosave_now();
 }
 
-function try_to_autosave_now(var0) {
+function try_to_autosave_now(var_0) {
   if(!issavesuccessful()) {
     return false;
   }
 
-  if(!autosavehealthcheck(level.player, var0)) {
+  if(!autosavehealthcheck(level.player, var_0)) {
     return false;
   }
 
   if(!scripts\engine\utility::flag("can_save")) {
-    autosaveprint("Can_save flag was clear", 0, var0);
+    autosaveprint("Can_save flag was clear", 0, var_0);
     return false;
   }
 
   return true;
 }
 
-function tryautosave(var0, var1, var2, var3, var4, var5, var6) {
+function tryautosave(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(scripts\sp\utility::is_trials_level()) {
     return 0;
   }
 
-  autosaveprint("tryAutoSave() called filename=" + var0, 2);
+  autosaveprint("tryAutoSave() called filename=" + var_0, 2);
 
   if(gettime() < 3300) {
     autosaveprint("tryAutoSave() cannot save during before immediatelevelsave and beginningoflevelsave", 0);
@@ -482,35 +482,35 @@ function tryautosave(var0, var1, var2, var3, var4, var5, var6) {
     return 0;
   }
 
-  var7 = 0.05;
-  var8 = 1.25;
-  var9 = 1.25;
+  var_7 = 0.05;
+  var_8 = 1.25;
+  var_9 = 1.25;
 
-  if(isDefined(var3) && var3 < var7 + var8 + var9) {}
+  if(isDefined(var_3) && var_3 < var_7 + var_8 + var_9) {}
 
-  if(!isDefined(var5)) {
-    var5 = 0;
+  if(!isDefined(var_5)) {
+    var_5 = 0;
   }
 
-  if(!isDefined(var2)) {
-    var2 = "$default";
+  if(!isDefined(var_2)) {
+    var_2 = "$default";
   }
 
-  if(!isDefined(var4)) {
-    var4 = 0;
+  if(!isDefined(var_4)) {
+    var_4 = 0;
   }
 
   scripts\engine\utility::flag_set("game_saving");
-  var10 = getdescription();
-  var11 = gettime();
-  var12 = undefined;
+  var_10 = getdescription();
+  var_11 = gettime();
+  var_12 = undefined;
 
-  if(isDefined(var3)) {
-    var12 = gettime() + var3 * 1000;
+  if(isDefined(var_3)) {
+    var_12 = gettime() + var_3 * 1000;
   }
 
-  var13 = 0;
-  var14 = 0;
+  var_13 = 0;
+  var_14 = 0;
 
   for(;;) {
     if(scripts\engine\utility::flag("disable_autosaves")) {
@@ -518,19 +518,19 @@ function tryautosave(var0, var1, var2, var3, var4, var5, var6) {
       break;
     }
 
-    if(istrue(var6) && var13 > 0) {
+    if(istrue(var_6) && var_13 > 0) {
       autosaveprint("tryAutoSave() Tried once and failed", 0);
       break;
     }
 
-    if(isDefined(var12) && gettime() > var12) {
-      autosaveprint("tryAutoSave() Autosave timed out after " + gettime() - var11 + " milliseconds", 0);
+    if(isDefined(var_12) && gettime() > var_12) {
+      autosaveprint("tryAutoSave() Autosave timed out after " + gettime() - var_11 + " milliseconds", 0);
       break;
     }
 
-    var13++;
+    var_13++;
 
-    if(autosavecheck(undefined, var4)) {
+    if(autosavecheck(undefined, var_4)) {
       waitfortransientloading("tryAutoSave()");
 
       if(getdvarint("reloading") != 0) {
@@ -543,18 +543,18 @@ function tryautosave(var0, var1, var2, var3, var4, var5, var6) {
         break;
       }
 
-      var15 = savegamenocommit(var0, var10, var2, var5);
-      autosaveprint("tryAutoSave() Saving no commit", 2, var15);
+      var_15 = savegamenocommit(var_0, var_10, var_2, var_5);
+      autosaveprint("tryAutoSave() Saving no commit", 2, var_15);
 
-      if(var15 < 0) {
-        autosaveprint("tryAutoSave() save error", 0, var15);
+      if(var_15 < 0) {
+        autosaveprint("tryAutoSave() save error", 0, var_15);
         break;
       }
 
-      wait var7;
+      wait var_7;
 
-      if(isDefined(var12) && gettime() > var12) {
-        autosaveprint("tryAutoSave() Autosave timed out after " + gettime() - var11 + " milliseconds", 0);
+      if(isDefined(var_12) && gettime() > var_12) {
+        autosaveprint("tryAutoSave() Autosave timed out after " + gettime() - var_11 + " milliseconds", 0);
         break;
       }
 
@@ -569,10 +569,10 @@ function tryautosave(var0, var1, var2, var3, var4, var5, var6) {
         continue;
       }
 
-      wait var8;
+      wait var_8;
 
-      if(isDefined(var12) && gettime() > var12) {
-        autosaveprint("tryAutoSave() Autosave timed out after " + gettime() - var11 + " milliseconds", 0);
+      if(isDefined(var_12) && gettime() > var_12) {
+        autosaveprint("tryAutoSave() Autosave timed out after " + gettime() - var_11 + " milliseconds", 0);
         break;
       }
 
@@ -581,19 +581,19 @@ function tryautosave(var0, var1, var2, var3, var4, var5, var6) {
         continue;
       }
 
-      if(extra_autosave_checks_failed(var15)) {
+      if(extra_autosave_checks_failed(var_15)) {
         continue;
       }
 
-      if(!autosavecheck(undefined, var4, var15)) {
-        autosaveprint("tryAutoSave() SaveGame invalid: 1.25 second check failed", 0, var15);
+      if(!autosavecheck(undefined, var_4, var_15)) {
+        autosaveprint("tryAutoSave() SaveGame invalid: 1.25 second check failed", 0, var_15);
         continue;
       }
 
-      wait var9;
+      wait var_9;
 
-      if(isDefined(var12) && gettime() > var12) {
-        autosaveprint("tryAutoSave() Autosave timed out after " + gettime() - var11 + " milliseconds", 0);
+      if(isDefined(var_12) && gettime() > var_12) {
+        autosaveprint("tryAutoSave() Autosave timed out after " + gettime() - var_11 + " milliseconds", 0);
         break;
       }
 
@@ -602,18 +602,18 @@ function tryautosave(var0, var1, var2, var3, var4, var5, var6) {
         continue;
       }
 
-      if(!autosavecheck_not_picky(var15)) {
-        autosaveprint("tryAutoSave() SaveGame invalid: 2.5 second check failed", 0, var15);
+      if(!autosavecheck_not_picky(var_15)) {
+        autosaveprint("tryAutoSave() SaveGame invalid: 2.5 second check failed", 0, var_15);
         continue;
       }
 
       if(!scripts\engine\utility::flag("can_save")) {
-        autosaveprint("tryAutoSave() Can_save flag was clear", 0, var15);
+        autosaveprint("tryAutoSave() Can_save flag was clear", 0, var_15);
         break;
       }
 
-      if(!commitwouldbevalid(var15)) {
-        autosaveprint("tryAutoSave() SaveGame is no longer valid, another save was run from elsewhere", 0, var15);
+      if(!commitwouldbevalid(var_15)) {
+        autosaveprint("tryAutoSave() SaveGame is no longer valid, another save was run from elsewhere", 0, var_15);
         scripts\engine\utility::flag_clear("game_saving");
         return 0;
       }
@@ -623,9 +623,9 @@ function tryautosave(var0, var1, var2, var3, var4, var5, var6) {
         break;
       }
 
-      var14 = 1;
-      autosaveprint("tryAutoSave() committed", 1, var15);
-      commitsave(var15);
+      var_14 = 1;
+      autosaveprint("tryAutoSave() committed", 1, var_15);
+      commitsave(var_15);
       level.player setplayeryolostate(0);
       level.lastsavetime = gettime();
       setDvar("ui_grenade_death", "0");
@@ -637,22 +637,22 @@ function tryautosave(var0, var1, var2, var3, var4, var5, var6) {
   }
 
   scripts\engine\utility::flag_clear("game_saving");
-  return var14;
+  return var_14;
 }
 
-function startsavedprogression(var0) {
-  if(isprogressionlevel(var0)) {
-    if(isprogressionmismatch(var0)) {
+function startsavedprogression(var_0) {
+  if(isprogressionlevel(var_0)) {
+    if(isprogressionmismatch(var_0)) {
       proggressionmismatchpopup();
       return;
     }
 
     if(getdvarint("MSSSNONPLS") == 0) {
-      level.player setplayerprogression("currentMission", var0);
-      var1 = level.player getplayerprogression("missionStateData", var0);
+      level.player setplayerprogression("currentMission", var_0);
+      var_1 = level.player getplayerprogression("missionStateData", var_0);
 
-      if(var1 == "locked") {
-        level.player setplayerprogression("missionStateData", var0, "incomplete");
+      if(var_1 == "locked") {
+        level.player setplayerprogression("missionStateData", var_0, "incomplete");
         return;
       }
 
@@ -663,10 +663,10 @@ function startsavedprogression(var0) {
   }
 }
 
-function isprogressionmismatch(var0) {
-  var1 = scripts\sp\endmission::getlevelindex(var0);
+function isprogressionmismatch(var_0) {
+  var_1 = scripts\sp\endmission::getlevelindex(var_0);
 
-  if(previouslevelcompleted(var1) || isdevbuild()) {
+  if(previouslevelcompleted(var_1) || isdevbuild()) {
     return false;
   } else {
     return true;
@@ -675,41 +675,41 @@ function isprogressionmismatch(var0) {
   return false;
 }
 
-function isprogressionlevel(var0) {
-  var1 = scripts\sp\endmission::getlevelindex(var0);
-  return isDefined(var1);
+function isprogressionlevel(var_0) {
+  var_1 = scripts\sp\endmission::getlevelindex(var_0);
+  return isDefined(var_1);
 }
 
 function isdevbuild() {
-  var0 = 0;
+  var_0 = 0;
   setdvarifuninitialized("scr_treat_progression_as_ship_build", 0);
-  return var0;
+  return var_0;
 }
 
-function previouslevelcompleted(var0) {
-  if(var0 == 0) {
+function previouslevelcompleted(var_0) {
+  if(var_0 == 0) {
     return 1;
   }
 
-  var0--;
-  var1 = level.missionsettings.levels[var0].name;
-  var2 = level.player getplayerprogression("missionStateData", var1);
+  var_0--;
+  var_1 = level.missionsettings.levels[var_0].name;
+  var_2 = level.player getplayerprogression("missionStateData", var_1);
 
-  if(var2 != "complete") {
+  if(var_2 != "complete") {
     return 0;
   }
 
   return 1;
 }
 
-function waitfortransientloading(var0) {
+function waitfortransientloading(var_0) {
   level endon("trying_new_autosave");
-  var1 = 0;
+  var_1 = 0;
 
   if(waspreloadzonesstarted()) {
     while(!ispreloadzonescomplete()) {
-      if(gettime() > var1) {
-        var1 = gettime() + 2000;
+      if(gettime() > var_1) {
+        var_1 = gettime() + 2000;
       }
 
       wait 0.05;
@@ -717,8 +717,8 @@ function waitfortransientloading(var0) {
   }
 
   while(isloadinganytransients()) {
-    if(gettime() > var1) {
-      var1 = gettime() + 2000;
+    if(gettime() > var_1) {
+      var_1 = gettime() + 2000;
     }
 
     wait 0.05;
@@ -727,10 +727,10 @@ function waitfortransientloading(var0) {
   return true;
 }
 
-function extra_autosave_checks_failed(var0) {
-  foreach(var2 in level.autosave.extra_autosave_checks) {
-    if(![[var2["func"]]]()) {
-      autosaveprint("Extra Autosave Check: " + var2["msg"] + "", 0, var0);
+function extra_autosave_checks_failed(var_0) {
+  foreach(var_2 in level.autosave.extra_autosave_checks) {
+    if(![[var_2["func"]]]()) {
+      autosaveprint("Extra Autosave Check: " + var_2["msg"] + "", 0, var_0);
       return true;
     }
   }
@@ -738,11 +738,11 @@ function extra_autosave_checks_failed(var0) {
   return false;
 }
 
-function autosavecheck_not_picky(var0) {
-  return autosavecheck(0, 0, var0);
+function autosavecheck_not_picky(var_0) {
+  return autosavecheck(0, 0, var_0);
 }
 
-function autosavecheck(var0, var1, var2) {
+function autosavecheck(var_0, var_1, var_2) {
   if(isDefined(level.autosave_check_override)) {
     return [[level.autosave_check_override]]();
   }
@@ -756,39 +756,39 @@ function autosavecheck(var0, var1, var2) {
     return 0;
   }
 
-  if(!isDefined(var0)) {
-    var0 = level.dopickyautosavechecks;
+  if(!isDefined(var_0)) {
+    var_0 = level.dopickyautosavechecks;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  if(var1) {
+  if(var_1) {
     if(![[level.global_callbacks["_autosave_stealthcheck"]]]()) {
       return 0;
     }
   }
 
-  if(!autosavehealthcheck(level.player, var2)) {
+  if(!autosavehealthcheck(level.player, var_2)) {
     return 0;
   }
 
-  if(var0 && !autosaveammocheck(level.player, var2)) {
+  if(var_0 && !autosaveammocheck(level.player, var_2)) {
     return 0;
   }
 
   if(level.autosave_threat_check_enabled) {
-    if(!autosavethreatcheck(var0, var2)) {
+    if(!autosavethreatcheck(var_0, var_2)) {
       return 0;
     }
   }
 
-  if(!autosaveplayercheck(level.player, var0, var2)) {
+  if(!autosaveplayercheck(level.player, var_0, var_2)) {
     return 0;
   }
 
-  if(!autosavefriendlyfirecheck(level.player, var2)) {
+  if(!autosavefriendlyfirecheck(level.player, var_2)) {
     return 0;
   }
 
@@ -797,48 +797,48 @@ function autosavecheck(var0, var1, var2) {
   }
 
   if(!issavesuccessful()) {
-    autosaveprint("autoSaveCheck() save call was unsuccessful", 0, var2);
+    autosaveprint("autoSaveCheck() save call was unsuccessful", 0, var_2);
     return 0;
   }
 
   return 1;
 }
 
-function autosaveplayercheck(var0, var1) {
-  if(self ismeleeing() && var0) {
-    autosaveprint("player is meleeing", 0, var1);
+function autosaveplayercheck(var_0, var_1) {
+  if(self ismeleeing() && var_0) {
+    autosaveprint("player is meleeing", 0, var_1);
     return false;
   }
 
   if(istrue(self.in_melee_death)) {
-    autosaveprint("player is in context melee", 0, var1);
+    autosaveprint("player is in context melee", 0, var_1);
     return false;
   }
 
   if(self isthrowinggrenade()) {
-    autosaveprint("player is throwing a grenade", 0, var1);
+    autosaveprint("player is throwing a grenade", 0, var_1);
     return false;
   }
 
   if(isDefined(self.shellshocked) && self.shellshocked) {
-    autosaveprint("player is in shellshock", 0, var1);
+    autosaveprint("player is in shellshock", 0, var_1);
     return false;
   }
 
   if(!self islinked() && !scripts\sp\utility::in_zero_gravity() && !self isonground()) {
     if(scripts\engine\trace::_bullet_trace_passed(level.player.origin + (0, 0, 5), level.player.origin + (0, 0, -200), 0, self)) {
-      autosaveprint("player is too high off the ground", 0, var1);
+      autosaveprint("player is too high off the ground", 0, var_1);
       return false;
     }
   }
 
   if(scripts\engine\utility::isflashed()) {
-    autosaveprint("player is flashbanged", 0, var1);
+    autosaveprint("player is flashbanged", 0, var_1);
     return false;
   }
 
   if(isDefined(self.hackingblockautosave) && self.hackingblockautosave == 1) {
-    autosaveprint("player is controlling a hacked robot", 0, var1);
+    autosaveprint("player is controlling a hacked robot", 0, var_1);
     return false;
   }
 
@@ -846,44 +846,44 @@ function autosaveplayercheck(var0, var1) {
 }
 
 function recentunresolvedcollision() {
-  var0 = gettime();
+  var_0 = gettime();
 
-  if(isDefined(self.last_unresolved_collision_time) && var0 - self.last_unresolved_collision_time < 500) {
+  if(isDefined(self.last_unresolved_collision_time) && var_0 - self.last_unresolved_collision_time < 500) {
     return true;
   }
 
   return false;
 }
 
-function autosavefriendlyfirecheck(var0) {
-  var1 = getEntArray("grenade", "classname");
+function autosavefriendlyfirecheck(var_0) {
+  var_1 = getEntArray("grenade", "classname");
 
-  if(var1.size == 0) {
+  if(var_1.size == 0) {
     return true;
   }
 
-  var2 = [];
+  var_2 = [];
 
-  foreach(var4 in var1) {
-    if(isvalidmissile(var4) && isPlayer(getmissileowner(var4))) {
-      var2 = var4;
+  foreach(var_4 in var_1) {
+    if(isvalidmissile(var_4) && isPlayer(getmissileowner(var_4))) {
+      var_2 = var_4;
     }
   }
 
-  if(var2.size == 0) {
+  if(var_2.size == 0) {
     return true;
   }
 
-  if(playernadessafe(var2)) {
+  if(playernadessafe(var_2)) {
     return true;
   }
 
-  var6 = getaiarray("allies");
+  var_6 = getaiarray("allies");
 
-  foreach(var8 in var6) {
-    foreach(var10 in var2) {
-      if(distancesquared(var8.origin, var10.origin) < 6400) {
-        autosaveprint("autoSaveFriendlyFireCheck() player nade is too close to friendlies", 0, var0);
+  foreach(var_8 in var_6) {
+    foreach(var_10 in var_2) {
+      if(distancesquared(var_8.origin, var_10.origin) < 6400) {
+        autosaveprint("autoSaveFriendlyFireCheck() player nade is too close to friendlies", 0, var_0);
         return false;
       }
     }
@@ -892,9 +892,9 @@ function autosavefriendlyfirecheck(var0) {
   return true;
 }
 
-function playernadessafe(var0) {
-  foreach(var2 in var0) {
-    if(scripts\sp\utility::offhand_is_dangerous(var2)) {
+function playernadessafe(var_0) {
+  foreach(var_2 in var_0) {
+    if(scripts\sp\utility::offhand_is_dangerous(var_2)) {
       return false;
     }
   }
@@ -902,142 +902,142 @@ function playernadessafe(var0) {
   return true;
 }
 
-function autosaveammocheck(var0) {
-  var1 = self getweaponslistprimaries();
+function autosaveammocheck(var_0) {
+  var_1 = self getweaponslistprimaries();
 
-  if(var1.size == 0) {
+  if(var_1.size == 0) {
     return true;
   }
 
-  var2 = 1;
-  var3 = 0;
-  var4 = "";
+  var_2 = 1;
+  var_3 = 0;
+  var_4 = "";
 
-  foreach(var6 in var1) {
-    if(nullweapon(var6)) {
+  foreach(var_6 in var_1) {
+    if(nullweapon(var_6)) {
       continue;
     }
 
-    if(weaponmaxammo(var6) > 0) {
-      var2 = 0;
+    if(weaponmaxammo(var_6) > 0) {
+      var_2 = 0;
     }
 
-    var7 = self getweaponammoclip(var6);
-    var8 = weaponclipsize(var6);
-    var9 = self getweaponammostock(var6);
-    var10 = weaponmaxammo(var6);
-    var11 = var7 + var9;
-    var12 = var8 + var10;
+    var_7 = self getweaponammoclip(var_6);
+    var_8 = weaponclipsize(var_6);
+    var_9 = self getweaponammostock(var_6);
+    var_10 = weaponmaxammo(var_6);
+    var_11 = var_7 + var_9;
+    var_12 = var_8 + var_10;
 
-    if(var12 <= 0) {
+    if(var_12 <= 0) {
       continue;
     }
 
-    var13 = var11 / var12;
-    var14 = 0.0714286;
+    var_13 = var_11 / var_12;
+    var_14 = 0.0714286;
 
-    if(var13 > var3) {
-      var3 = var13;
-      var4 = var6.classname;
+    if(var_13 > var_3) {
+      var_3 = var_13;
+      var_4 = var_6.classname;
 
-      if(var6.classname == "grenade" || var6.classname == "rocketlauncher") {
-        var14 = 0.5;
-        var4 = "explosive";
+      if(var_6.classname == "grenade" || var_6.classname == "rocketlauncher") {
+        var_14 = 0.5;
+        var_4 = "explosive";
       }
     }
 
-    if(var13 >= var14) {
+    if(var_13 >= var_14) {
       return true;
     }
   }
 
-  if(var2) {
+  if(var_2) {
     return true;
   }
 
-  autosaveprint("Highest stock+clip ammo fraction: " + var3 + " for " + var4 + " weapon. Too low to save.", 0, var0);
+  autosaveprint("Highest stock+clip ammo fraction: " + var_3 + " for " + var_4 + " weapon. Too low to save.", 0, var_0);
   return false;
 }
 
-function autosavehealthcheck(var0) {
+function autosavehealthcheck(var_0) {
   if(scripts\sp\player::belowcriticalhealththreshold()) {
-    autosaveprint("player is below critical health threshold", 0, var0);
+    autosaveprint("player is below critical health threshold", 0, var_0);
     return false;
   }
 
   if(istrue(self.damage.firedamage)) {
-    autosaveprint("player is on fire!", 0, var0);
+    autosaveprint("player is on fire!", 0, var_0);
     return false;
   }
 
   if(self isonladder()) {
-    autosaveprint("player is on ladder! TU1 HACK!", 0, var0);
+    autosaveprint("player is on ladder! TU1 HACK!", 0, var_0);
     return false;
   }
 
   return true;
 }
 
-function autosavethreatcheck(var0, var1) {
-  var2 = getaiunittypearray("bad_guys", "all");
+function autosavethreatcheck(var_0, var_1) {
+  var_2 = getaiunittypearray("bad_guys", "all");
 
-  foreach(var4 in var2) {
-    if(isDefined(level.player.stealth) && isDefined(var4.stealth) && var4.threatsight && var4 getthreatsight(level.player) > 0) {
-      autosaveprint("AI cansee player, stealth meter is up", 0, var1);
+  foreach(var_4 in var_2) {
+    if(isDefined(level.player.stealth) && isDefined(var_4.stealth) && var_4.threatsight && var_4 getthreatsight(level.player) > 0) {
+      autosaveprint("AI cansee player, stealth meter is up", 0, var_1);
       return false;
     }
 
-    if(!isDefined(var4.enemy)) {
+    if(!isDefined(var_4.enemy)) {
       continue;
     }
 
-    if(!isPlayer(var4.enemy)) {
-      if(level.autosave.enemydistcheck && playermaybecomemyenemy(var4)) {
-        autosaveprint("Player close to AI's enemy", 0, var1);
+    if(!isPlayer(var_4.enemy)) {
+      if(level.autosave.enemydistcheck && playermaybecomemyenemy(var_4)) {
+        autosaveprint("Player close to AI's enemy", 0, var_1);
         return false;
       }
 
       continue;
     }
 
-    if(isDefined(var4.melee) && isDefined(var4.melee.target) && isPlayer(var4.melee.target)) {
-      autosaveprint("AI meleeing player", 0, var1);
+    if(isDefined(var_4.melee) && isDefined(var_4.melee.target) && isPlayer(var_4.melee.target)) {
+      autosaveprint("AI meleeing player", 0, var_1);
       return false;
     }
 
-    var5 = [[level.autosave.proximity_threat_func]](var4);
+    var_5 = [[level.autosave.proximity_threat_func]](var_4);
 
-    if(var5 == "return_even_if_low_accuracy") {
-      autosaveprint("AI too close to player, so close we're ignoring his accuracy", 0, var1);
+    if(var_5 == "return_even_if_low_accuracy") {
+      autosaveprint("AI too close to player, so close we're ignoring his accuracy", 0, var_1);
       return false;
     }
 
-    if(var4.finalaccuracy < 0.021 && var4.finalaccuracy > -1) {
+    if(var_4.finalaccuracy < 0.021 && var_4.finalaccuracy > -1) {
       continue;
     }
 
-    if(var5 == "none") {
+    if(var_5 == "none") {
       continue;
     }
 
-    var6 = undefined;
-    var7 = var4.a.lastshoottime > gettime() - 1500;
+    var_6 = undefined;
+    var_7 = var_4.a.lastshoottime > gettime() - 1500;
 
-    if(var7) {
-      var6 = getcanshootandsee(var4);
+    if(var_7) {
+      var_6 = getcanshootandsee(var_4);
 
-      if(var6) {
-        autosaveprint("AI firing on player", 0, var1);
+      if(var_6) {
+        autosaveprint("AI firing on player", 0, var_1);
         return false;
       }
     }
 
-    if(!isDefined(var6)) {
-      var6 = getcanshootandsee(var4);
+    if(!isDefined(var_6)) {
+      var_6 = getcanshootandsee(var_4);
     }
 
-    if(isDefined(var4.asm.trackasm) && var4 scripts\asm\asm::asm_currentstatehasflag(var4.asm.trackasm, "aim") && var6) {
-      autosaveprint("AI aiming at player", 0, var1);
+    if(isDefined(var_4.asm.trackasm) && var_4 scripts\asm\asm::asm_currentstatehasflag(var_4.asm.trackasm, "aim") && var_6) {
+      autosaveprint("AI aiming at player", 0, var_1);
       return false;
     }
   }
@@ -1052,35 +1052,35 @@ function autosavethreatcheck(var0, var1) {
   }
 
   if(isDefined(level.phys_barrels)) {
-    foreach(var10 in level.phys_barrels) {
-      if(!isDefined(var10.onfire)) {
+    foreach(var_10 in level.phys_barrels) {
+      if(!isDefined(var_10.onfire)) {
         continue;
       }
 
-      if(var10.subtype == "antigrav") {
+      if(var_10.subtype == "antigrav") {
         continue;
       }
 
-      if(distancesquared(var10.origin, level.player.origin) < 122500) {
-        autosaveprint(var10.subtype + " barrel is onfire and too close to player", 0, var1);
+      if(distancesquared(var_10.origin, level.player.origin) < 122500) {
+        autosaveprint(var_10.subtype + " barrel is onfire and too close to player", 0, var_1);
         return false;
       }
     }
   }
 
-  var12 = getEntArray("scriptable", "code_classname");
+  var_12 = getEntArray("scriptable", "code_classname");
 
-  foreach(var14 in var12) {
-    if(!isDefined(var14.destructible_type) || var14.destructible_type != "vehicle") {
+  foreach(var_14 in var_12) {
+    if(!isDefined(var_14.destructible_type) || var_14.destructible_type != "vehicle") {
       continue;
     }
 
-    if(!isDefined(var14.onfire)) {
+    if(!isDefined(var_14.onfire)) {
       continue;
     }
 
-    if(distancesquared(var14.origin, level.player.origin) < 160000) {
-      autosaveprint("burning car too close to player", 0, var1);
+    if(distancesquared(var_14.origin, level.player.origin) < 160000) {
+      autosaveprint("burning car too close to player", 0, var_1);
       return false;
     }
   }
@@ -1094,10 +1094,10 @@ function playermaybecomemyenemy() {
   }
 
   if(isalive(self.enemy) && self cansee(level.player)) {
-    var0 = distancesquared(self.enemy.origin, self.origin);
-    var1 = distancesquared(level.player.origin, self.origin);
+    var_0 = distancesquared(self.enemy.origin, self.origin);
+    var_1 = distancesquared(level.player.origin, self.origin);
 
-    if(var1 <= var0 + 200) {
+    if(var_1 <= var_0 + 200) {
       return true;
     }
   }
@@ -1114,8 +1114,8 @@ function enemy_is_a_threat() {
     return true;
   }
 
-  foreach(var1 in level.players) {
-    if(distance(self.origin, var1.origin) < 500) {
+  foreach(var_1 in level.players) {
+    if(distance(self.origin, var_1.origin) < 500) {
       return true;
     }
   }
@@ -1123,19 +1123,19 @@ function enemy_is_a_threat() {
   return false;
 }
 
-function autosave_proximity_threat_func(var0) {
-  foreach(var2 in level.players) {
-    var3 = distancesquared(var0.origin, var2.origin);
+function autosave_proximity_threat_func(var_0) {
+  foreach(var_2 in level.players) {
+    var_3 = distancesquared(var_0.origin, var_2.origin);
 
-    if(var3 < 10000) {
+    if(var_3 < 10000) {
       return "return_even_if_low_accuracy";
     }
 
-    if(var3 < 129600) {
+    if(var_3 < 129600) {
       return "return";
     }
 
-    if(var3 < 1000000) {
+    if(var_3 < 1000000) {
       return "threat_exists";
     }
   }

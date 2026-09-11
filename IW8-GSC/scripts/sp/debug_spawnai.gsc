@@ -6,74 +6,74 @@
 function spawn_ai_mode() {}
 
 function init_spawners() {
-  var0 = level.debug.spawnaimode;
-  var0.realspawners = [];
-  var0.listaitypes = [];
-  var1 = [];
-  var2 = getspawnerarray();
+  var_0 = level.debug.spawnaimode;
+  var_0.realspawners = [];
+  var_0.listaitypes = [];
+  var_1 = [];
+  var_2 = getspawnerarray();
 
-  foreach(var4 in var2) {
-    if(!isDefined(var0.realspawners[var4.classname])) {
-      var0.realspawners[var4.classname] = var4;
-      var0.listaitypes[var0.listaitypes.size] = var4.classname;
+  foreach(var_4 in var_2) {
+    if(!isDefined(var_0.realspawners[var_4.classname])) {
+      var_0.realspawners[var_4.classname] = var_4;
+      var_0.listaitypes[var_0.listaitypes.size] = var_4.classname;
     }
   }
 
-  var0.listaitypes = scripts\engine\utility::alphabetize(var0.listaitypes);
+  var_0.listaitypes = scripts\engine\utility::alphabetize(var_0.listaitypes);
 }
 
 function input() {
-  var0 = undefined;
-  var1 = level.debug.spawnaimode;
+  var_0 = undefined;
+  var_1 = level.debug.spawnaimode;
   updategameon();
 
-  if(var1.gameon) {
+  if(var_1.gameon) {
     return;
   }
 
-  if(var1.selectedaitype == "undefined" && isDefined(level.debug.spawnaimode.heldspawner)) {
+  if(var_1.selectedaitype == "undefined" && isDefined(level.debug.spawnaimode.heldspawner)) {
     clear_heldspawner();
   }
 
-  foreach(var3 in var1.placedspawners) {
-    if(distancesquared(var3.origin, level.debug.cursor_pos) < 2304) {
-      var0 = var3;
+  foreach(var_3 in var_1.placedspawners) {
+    if(distancesquared(var_3.origin, level.debug.cursor_pos) < 2304) {
+      var_0 = var_3;
       break;
     }
   }
 
-  if(isDefined(var0)) {
+  if(isDefined(var_0)) {
     clear_heldspawner();
-    highlightent(var0);
+    highlightent(var_0);
   }
 
   if(!canpressuse()) {
     return;
   }
 
-  if(!isDefined(var0)) {
-    if(isDefined(var1.selectedents)) {} else {
+  if(!isDefined(var_0)) {
+    if(isDefined(var_1.selectedents)) {} else {
       unhighlightent();
     }
   }
 
-  if(isDefined(var1.highlightent)) {
+  if(isDefined(var_1.highlightent)) {
     if(level.player useButtonPressed()) {
-      var5 = undefined;
+      var_5 = undefined;
 
-      if(isDefined(var1.selectedents)) {
-        foreach(var7 in var1.selectedents) {
-          if(var7 == var1.highlightent) {
-            var5 = var7;
+      if(isDefined(var_1.selectedents)) {
+        foreach(var_7 in var_1.selectedents) {
+          if(var_7 == var_1.highlightent) {
+            var_5 = var_7;
             break;
           }
         }
       }
 
-      if(isDefined(var5)) {
-        removeselected(var5);
+      if(isDefined(var_5)) {
+        removeselected(var_5);
       } else {
-        addselected(var1.highlightent);
+        addselected(var_1.highlightent);
       }
 
       delayusetime();
@@ -81,8 +81,8 @@ function input() {
     }
 
     if(level.player buttonPressed("del")) {
-      var2.placedspawners = scripts\engine\utility::array_remove(var2.placedspawners, var2.highlightent);
-      var2.highlightent delete();
+      var_2.placedspawners = scripts\engine\utility::array_remove(var_2.placedspawners, var_2.highlightent);
+      var_2.highlightent delete();
       return;
     }
 
@@ -95,12 +95,12 @@ function gameon_toggle() {
   return level.debug.spawnaimode.gameon;
 }
 
-function updategameon(var0) {
+function updategameon(var_0) {
   if(!canpressuse()) {
     return;
   }
 
-  if(level.player meleeButtonPressed() || isDefined(var0)) {
+  if(level.player meleeButtonPressed() || isDefined(var_0)) {
     level.debug.spawnaimode.gameon = !level.debug.spawnaimode.gameon;
 
     if(level.debug.spawnaimode.gameon) {
@@ -122,9 +122,9 @@ function delayusetime() {
   level.debug.spawnaimode.nextusepress = gettime() + 400;
 }
 
-function assigngoalpos(var0, var1) {
-  self.spawnai_goalpos = var0;
-  self.spawnai_goalradius = var1;
+function assigngoalpos(var_0, var_1) {
+  self.spawnai_goalpos = var_0;
+  self.spawnai_goalradius = var_1;
   thread drawassignedgoalpos();
 }
 
@@ -139,14 +139,14 @@ function drawassignedgoalpos() {
   }
 }
 
-function highlightent(var0) {
-  if(isDefined(level.debug.spawnaimode.highlightent) && level.debug.spawnaimode.highlightent == var0) {
+function highlightent(var_0) {
+  if(isDefined(level.debug.spawnaimode.highlightent) && level.debug.spawnaimode.highlightent == var_0) {
     return;
   }
 
   unhighlightent();
-  var0 hudoutlineenable("outline_nodepth_orange");
-  level.debug.spawnaimode.highlightent = var0;
+  var_0 hudoutlineenable("outline_nodepth_orange");
+  level.debug.spawnaimode.highlightent = var_0;
 }
 
 function unhighlightent() {
@@ -158,20 +158,20 @@ function unhighlightent() {
   level.debug.spawnaimode.highlightent = undefined;
 }
 
-function addselected(var0) {
+function addselected(var_0) {
   if(!isDefined(level.debug.spawnaimode.selectedents)) {
     level.debug.spawnaimode.selectedents = [];
   }
 
-  level.debug.spawnaimode.selectedents[level.debug.spawnaimode.selectedents.size] = var0;
-  var0 hudoutlineenable("outline_nodepth_cyan");
-  var0 notify("selected");
+  level.debug.spawnaimode.selectedents[level.debug.spawnaimode.selectedents.size] = var_0;
+  var_0 hudoutlineenable("outline_nodepth_cyan");
+  var_0 notify("selected");
   level.debug.spawnaimode.highlightent = undefined;
 }
 
-function removeselected(var0) {
-  level.debug.spawnaimode.selectedents = scripts\engine\utility::array_remove(level.debug.spawnaimode.selectedents, var0);
-  var0 hudoutlinedisable();
+function removeselected(var_0) {
+  level.debug.spawnaimode.selectedents = scripts\engine\utility::array_remove(level.debug.spawnaimode.selectedents, var_0);
+  var_0 hudoutlinedisable();
 
   if(level.debug.spawnaimode.selectedents.size == 0) {
     level.debug.spawnaimode.selectedents = undefined;
@@ -179,79 +179,79 @@ function removeselected(var0) {
   }
 }
 
-function drawgoalpos(var0, var1) {
-  var2 = (1, 1, 1);
+function drawgoalpos(var_0, var_1) {
+  var_2 = (1, 1, 1);
 }
 
 function createspawner() {
-  var0 = level.debug.spawnaimode;
-  var1 = get_spawner(var0.selectedaitype);
-  var2 = scripts\engine\sp\utility::dronespawn_bodyonly(var1);
-  var2.aitype = var1.classname;
-  var2.pathpoints = [];
-  return var2;
+  var_0 = level.debug.spawnaimode;
+  var_1 = get_spawner(var_0.selectedaitype);
+  var_2 = scripts\engine\sp\utility::dronespawn_bodyonly(var_1);
+  var_2.aitype = var_1.classname;
+  var_2.pathpoints = [];
+  return var_2;
 }
 
-function get_spawner(var0) {
-  return level.debug.spawnaimode.realspawners[var0];
+function get_spawner(var_0) {
+  return level.debug.spawnaimode.realspawners[var_0];
 }
 
 function spawnguy() {
-  var0 = level.debug.spawnaimode;
-  var1 = var0.realspawners[randomint(var0.realspawners.size)];
+  var_0 = level.debug.spawnaimode;
+  var_1 = var_0.realspawners[randomint(var_0.realspawners.size)];
 
   for(;;) {
-    var1.count += 1;
-    var2 = var1.origin;
-    var1.origin = level.debug.cursor_pos;
-    stripspawner(var1);
-    var3 = var1 scripts\engine\sp\utility::spawn_ai(1);
-    restorespawner(var1);
-    var1.origin = var2;
+    var_1.count += 1;
+    var_2 = var_1.origin;
+    var_1.origin = level.debug.cursor_pos;
+    stripspawner(var_1);
+    var_3 = var_1 scripts\engine\sp\utility::spawn_ai(1);
+    restorespawner(var_1);
+    var_1.origin = var_2;
 
-    if(!scripts\common\ai::spawn_failed(var3)) {
-      var3.ignoreme = 1;
-      var3.ignoreall = 1;
-      var3 clearenemy();
-      var3.spawnai_realspawner = var1;
+    if(!scripts\common\ai::spawn_failed(var_3)) {
+      var_3.ignoreme = 1;
+      var_3.ignoreall = 1;
+      var_3 clearenemy();
+      var_3.spawnai_realspawner = var_1;
       break;
     }
   }
 
-  var3.spawnai_linkent = scripts\engine\utility::spawn_tag_origin(var3.origin);
-  var3 linkTo(var3.spawnai_linkent);
-  return var3;
+  var_3.spawnai_linkent = scripts\engine\utility::spawn_tag_origin(var_3.origin);
+  var_3 linkTo(var_3.spawnai_linkent);
+  return var_3;
 }
 
 function tryplacespawner() {
-  var0 = (0, 0, 0);
-  var1 = level.debug.spawnaimode;
+  var_0 = (0, 0, 0);
+  var_1 = level.debug.spawnaimode;
 
-  if(var1.mode != "default") {
+  if(var_1.mode != "default") {
     return;
   }
 
   clear_heldspawner();
-  var1.heldspawner = createspawner();
+  var_1.heldspawner = createspawner();
   thread heldspawner_think();
 }
 
 function heldspawner_think() {
   self endon("death");
-  var0 = level.debug.spawnaimode;
+  var_0 = level.debug.spawnaimode;
 
   for(;;) {
     self.origin = level.debug.cursor_pos;
 
     if(canpressuse() && level.player useButtonPressed()) {
       if(getaicount() > 32) {
-        var0.placedspawners[0].guy delete();
-        var0.placedspawners = scripts\engine\utility::array_remove_index(var0.placedspawners, 0);
+        var_0.placedspawners[0].guy delete();
+        var_0.placedspawners = scripts\engine\utility::array_remove_index(var_0.placedspawners, 0);
       }
 
-      var0.placedspawners[var0.placedspawners.size] = self;
-      var0.highlightent = self;
-      var0.heldspawner = undefined;
+      var_0.placedspawners[var_0.placedspawners.size] = self;
+      var_0.highlightent = self;
+      var_0.heldspawner = undefined;
       thread edit_spawner();
       delayusetime();
       break;
@@ -274,73 +274,73 @@ function clear_heldspawner() {
   }
 }
 
-function set_mode(var0) {
-  level.debug.spawnaimode.mode = var0;
+function set_mode(var_0) {
+  level.debug.spawnaimode.mode = var_0;
 }
 
 function gameon_thread() {
-  var0 = level.debug.spawnaimode;
-  var1 = 3;
-  var2 = gettime() + var1 * 1000;
+  var_0 = level.debug.spawnaimode;
+  var_1 = 3;
+  var_2 = gettime() + var_1 * 1000;
   setDvar("scr_debug_spawnAIModeGameON", 1);
-  var3 = newhudelem();
-  var3.x = 320;
-  var3.y = 100;
-  var3.alignx = "center";
-  var3.vertalign = "fullscreen";
-  var3.horzalign = "fullscreen";
-  var3 setvalue(var1);
-  var3.fontscale = 1.5;
+  var_3 = newhudelem();
+  var_3.x = 320;
+  var_3.y = 100;
+  var_3.alignx = "center";
+  var_3.vertalign = "fullscreen";
+  var_3.horzalign = "fullscreen";
+  var_3 setvalue(var_1);
+  var_3.fontscale = 1.5;
 
   while(getdvarint("scr_debug_spawnAIModeGameON") == 1) {
-    if(!var0.gamestarted) {
-      var4 = (var2 - gettime()) * 0.001;
-      var4 = int(var4 / 0.1) * 0.1;
+    if(!var_0.gamestarted) {
+      var_4 = (var_2 - gettime()) * 0.001;
+      var_4 = int(var_4 / 0.1) * 0.1;
 
-      if(var4 <= 0) {
-        var3 settext("GAME ON!");
-        var0.gamestarted = 1;
+      if(var_4 <= 0) {
+        var_3 settext("GAME ON!");
+        var_0.gamestarted = 1;
 
-        if(isDefined(var3)) {
-          var3 scripts\engine\utility::delaycall(1, &destroy);
+        if(isDefined(var_3)) {
+          var_3 scripts\engine\utility::delaycall(1, &destroy);
         }
 
         gameon();
       } else {
-        var3 setvalue(var4);
+        var_3 setvalue(var_4);
       }
     }
 
     waitframe();
   }
 
-  if(isDefined(var3)) {
-    var3 scripts\engine\utility::delaycall(0.5, &destroy);
+  if(isDefined(var_3)) {
+    var_3 scripts\engine\utility::delaycall(0.5, &destroy);
   }
 
-  var0.gamestarted = 0;
+  var_0.gamestarted = 0;
 }
 
 function gameoff() {
   setDvar("scr_debug_spawnAIModeGameON", 0);
 
-  foreach(var1 in level.debug.spawnaimode.placedspawners) {
-    if(isalive(var1.guy)) {
-      var1.guy delete();
+  foreach(var_1 in level.debug.spawnaimode.placedspawners) {
+    if(isalive(var_1.guy)) {
+      var_1.guy delete();
     }
 
-    var1 show();
+    var_1 show();
   }
 }
 
 function gameon() {
-  foreach(var1 in level.debug.spawnaimode.placedspawners) {
-    var1 hide();
-    var2 = havemapentseffects(var1.aitype, var1.origin, var1.angles, 1);
+  foreach(var_1 in level.debug.spawnaimode.placedspawners) {
+    var_1 hide();
+    var_2 = havemapentseffects(var_1.aitype, var_1.origin, var_1.angles, 1);
 
-    if(isDefined(var2)) {
-      var2.pathpoints = var1.pathpoints;
-      var1.guy = var2;
+    if(isDefined(var_2)) {
+      var_2.pathpoints = var_1.pathpoints;
+      var_1.guy = var_2;
       thread guy_think();
     }
   }
@@ -349,44 +349,44 @@ function gameon() {
 function guy_think() {
   self endon("death");
 
-  foreach(var1 in self.pathpoints) {
-    scripts\sp\spawner::go_to_node(var1);
+  foreach(var_1 in self.pathpoints) {
+    scripts\sp\spawner::go_to_node(var_1);
   }
 }
 
 function menu_default() {
-  var0 = level.debug.spawnaimode;
-  var1 = "spawnai_main";
-  scripts\sp\debug_menu::add_menu(var1, "Main");
-  scripts\sp\debug_menu::add_menuoptions(var1, "Game On", &gameon_toggle, undefined, getdvarint("scr_debug_spawnAIModeGameON"));
-  scripts\sp\debug_menu::add_menuoptions(var1, "Place Spawner", &pick_aitype, &clear_aitype, var0.selectedaitype);
-  scripts\sp\debug_menu::add_menuoptions(var1, "Edit Spawner", &edit_spawner);
-  scripts\sp\debug_menu::enable_menu(var1);
+  var_0 = level.debug.spawnaimode;
+  var_1 = "spawnai_main";
+  scripts\sp\debug_menu::add_menu(var_1, "Main");
+  scripts\sp\debug_menu::add_menuoptions(var_1, "Game On", &gameon_toggle, undefined, getdvarint("scr_debug_spawnAIModeGameON"));
+  scripts\sp\debug_menu::add_menuoptions(var_1, "Place Spawner", &pick_aitype, &clear_aitype, var_0.selectedaitype);
+  scripts\sp\debug_menu::add_menuoptions(var_1, "Edit Spawner", &edit_spawner);
+  scripts\sp\debug_menu::enable_menu(var_1);
 }
 
 function pick_aitype() {
-  var0 = scripts\sp\debug_menu::menu_get_selected_optionsvalue();
-  var1 = level.debug.spawnaimode;
+  var_0 = scripts\sp\debug_menu::menu_get_selected_optionsvalue();
+  var_1 = level.debug.spawnaimode;
 
-  if(var1.selectedaitype == "undefined") {
-    var2 = 12 * (var1.selectedaitype.size + 1);
+  if(var_1.selectedaitype == "undefined") {
+    var_2 = 12 * (var_1.selectedaitype.size + 1);
   } else {
-    var2 = 12 * (var2.selectedaitype.size - 7);
+    var_2 = 12 * (var_2.selectedaitype.size - 7);
   }
 
-  var3 = scripts\sp\debug_menu::list_menu(var2.listaitypes, var1.x + var2, var1.y);
+  var_3 = scripts\sp\debug_menu::list_menu(var_2.listaitypes, var_1.x + var_2, var_1.y);
 
-  if(!isDefined(var3)) {
+  if(!isDefined(var_3)) {
     return undefined;
   }
 
-  var2.selectedaitype = var2.listaitypes[var3];
+  var_2.selectedaitype = var_2.listaitypes[var_3];
   tryplacespawner();
-  return getsubstr(var2.selectedaitype, 6);
+  return getsubstr(var_2.selectedaitype, 6);
 }
 
 function edit_spawner() {
-  var0 = scripts\sp\debug_menu::get_current_menu_name();
+  var_0 = scripts\sp\debug_menu::get_current_menu_name();
   clear_aitype();
 
   if(!isDefined(level.debug.spawnaimode.highlightent) || !isDefined(level.debug.spawnaimode.highlightent.aitype)) {
@@ -395,27 +395,27 @@ function edit_spawner() {
 
   set_mode("edit_spawner");
   scripts\sp\debug_menu::disable_menu("current_menu");
-  var1 = "spawnai_editspawner";
+  var_1 = "spawnai_editspawner";
 
-  if(scripts\sp\debug_menu::menu_exists(var1)) {
-    scripts\sp\debug_menu::destroy_menu(var1);
+  if(scripts\sp\debug_menu::menu_exists(var_1)) {
+    scripts\sp\debug_menu::destroy_menu(var_1);
   }
 
-  scripts\sp\debug_menu::add_menu(var1, "Edit Spawner");
-  scripts\sp\debug_menu::add_menuoptions(var1, "Add Path Points", &add_pathpoints);
-  scripts\sp\debug_menu::add_menuoptions(var1, "Goal Radius", &menu_goalradius_inc, &menu_goalradius_dec, level.debug.spawnaimode.goalradius);
-  scripts\sp\debug_menu::add_menuoptions(var1, "Clear Path Points", &clear_pathpoints);
-  scripts\sp\debug_menu::add_menuoptions(var1, "Exit", &scripts\sp\debug_menu::exit_menu);
-  scripts\sp\debug_menu::add_menuent(var1, level.debug.spawnaimode.highlightent);
-  scripts\sp\debug_menu::enable_menu(var1);
+  scripts\sp\debug_menu::add_menu(var_1, "Edit Spawner");
+  scripts\sp\debug_menu::add_menuoptions(var_1, "Add Path Points", &add_pathpoints);
+  scripts\sp\debug_menu::add_menuoptions(var_1, "Goal Radius", &menu_goalradius_inc, &menu_goalradius_dec, level.debug.spawnaimode.goalradius);
+  scripts\sp\debug_menu::add_menuoptions(var_1, "Clear Path Points", &clear_pathpoints);
+  scripts\sp\debug_menu::add_menuoptions(var_1, "Exit", &scripts\sp\debug_menu::exit_menu);
+  scripts\sp\debug_menu::add_menuent(var_1, level.debug.spawnaimode.highlightent);
+  scripts\sp\debug_menu::enable_menu(var_1);
   thread edit_spawner_exit(level);
 }
 
-function edit_spawner_exit(var0) {
-  var1 = level.debug.spawnaimode.highlightent;
+function edit_spawner_exit(var_0) {
+  var_1 = level.debug.spawnaimode.highlightent;
 
   for(;;) {
-    draw_spawner_edit_path(var1);
+    draw_spawner_edit_path(var_1);
 
     if(scripts\sp\debug_menu::can_exit()) {
       break;
@@ -427,8 +427,8 @@ function edit_spawner_exit(var0) {
   scripts\sp\debug_menu::disable_menu("current_menu");
   set_mode("default");
 
-  if(isDefined(var0)) {
-    scripts\sp\debug_menu::enable_menu(var0);
+  if(isDefined(var_0)) {
+    scripts\sp\debug_menu::enable_menu(var_0);
     return;
   }
 }
@@ -446,10 +446,10 @@ function menu_goalradius_dec() {
 }
 
 function draw_spawner_edit_path() {
-  var0 = self;
+  var_0 = self;
 
-  foreach(var2 in self.pathpoints) {
-    var0 = var2;
+  foreach(var_2 in self.pathpoints) {
+    var_0 = var_2;
   }
 }
 
@@ -458,18 +458,18 @@ function add_pathpoints() {
     self.pathpoints = [];
   }
 
-  var0 = spawnStruct();
-  var0.origin = level.debug.cursor_pos;
-  var0.angles = (0, 0, 0);
-  var0.radius = level.debug.spawnaimode.goalradius;
+  var_0 = spawnStruct();
+  var_0.origin = level.debug.cursor_pos;
+  var_0.angles = (0, 0, 0);
+  var_0.radius = level.debug.spawnaimode.goalradius;
 
-  foreach(var2 in self.pathpoints) {
-    if(distancesquared(var2.origin, var0.origin) < 16) {
+  foreach(var_2 in self.pathpoints) {
+    if(distancesquared(var_2.origin, var_0.origin) < 16) {
       return;
     }
   }
 
-  self.pathpoints[self.pathpoints.size] = var0;
+  self.pathpoints[self.pathpoints.size] = var_0;
 }
 
 function clear_pathpoints() {

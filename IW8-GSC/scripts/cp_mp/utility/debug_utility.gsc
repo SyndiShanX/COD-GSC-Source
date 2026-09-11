@@ -3,64 +3,64 @@
  * Script: scripts\cp_mp\utility\debug_utility.gsc
 ***************************************************/
 
-function drawent(var0, var1, var2, var3, var4) {
-  var5 = int(var3 / level.framedurationseconds);
+function drawent(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = int(var_3 / level.framedurationseconds);
 
-  for(var6 = 0; var6 < var5; var6++) {
+  for(var_6 = 0; var_6 < var_5; var_6++) {
     waitframe();
   }
 }
 
-function drawline(var0, var1, var2, var3) {
-  var4 = int(var2 / level.framedurationseconds);
+function drawline(var_0, var_1, var_2, var_3) {
+  var_4 = int(var_2 / level.framedurationseconds);
 
-  for(var5 = 0; var5 < var4; var5++) {
+  for(var_5 = 0; var_5 < var_4; var_5++) {
     waitframe();
   }
 }
 
-function drawsphere(var0, var1, var2, var3) {
-  var4 = int(var2 / level.framedurationseconds);
+function drawsphere(var_0, var_1, var_2, var_3) {
+  var_4 = int(var_2 / level.framedurationseconds);
 
-  for(var5 = 0; var5 < var4; var5++) {
+  for(var_5 = 0; var_5 < var_4; var_5++) {
     waitframe();
   }
 }
 
-function drawcylinder(var0, var1, var2, var3, var4) {
-  var5 = int(var3 / level.framedurationseconds);
+function drawcylinder(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = int(var_3 / level.framedurationseconds);
 
-  for(var6 = 0; var6 < var5; var6++) {
+  for(var_6 = 0; var_6 < var_5; var_6++) {
     waitframe();
   }
 }
 
-function drawboxfrompoints(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
-  thread drawline(var0, var1, var8, var9);
-  thread drawline(var0, var4, var8, var9);
-  thread drawline(var0, var2, var8, var9);
-  thread drawline(var1, var3, var8, var9);
-  thread drawline(var1, var5, var8, var9);
-  thread drawline(var2, var6, var8, var9);
-  thread drawline(var2, var3, var8, var9);
-  thread drawline(var3, var7, var8, var9);
-  thread drawline(var4, var5, var8, var9);
-  thread drawline(var4, var6, var8, var9);
-  thread drawline(var5, var7, var8, var9);
-  thread drawline(var7, var6, var8, var9);
+function drawboxfrompoints(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  thread drawline(var_0, var_1, var_8, var_9);
+  thread drawline(var_0, var_4, var_8, var_9);
+  thread drawline(var_0, var_2, var_8, var_9);
+  thread drawline(var_1, var_3, var_8, var_9);
+  thread drawline(var_1, var_5, var_8, var_9);
+  thread drawline(var_2, var_6, var_8, var_9);
+  thread drawline(var_2, var_3, var_8, var_9);
+  thread drawline(var_3, var_7, var_8, var_9);
+  thread drawline(var_4, var_5, var_8, var_9);
+  thread drawline(var_4, var_6, var_8, var_9);
+  thread drawline(var_5, var_7, var_8, var_9);
+  thread drawline(var_7, var_6, var_8, var_9);
 }
 
-function drawangles(var0, var1, var2, var3) {
-  if(!isDefined(var3)) {
-    var3 = 1;
+function drawangles(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_3)) {
+    var_3 = 1;
   }
 
-  var4 = int(var2 / level.framedurationseconds);
+  var_4 = int(var_2 / level.framedurationseconds);
 
-  for(var5 = 0; var5 < var4; var5++) {
-    var6 = anglesToForward(var1);
-    var7 = anglestoright(var1);
-    var8 = anglestoup(var1);
+  for(var_5 = 0; var_5 < var_4; var_5++) {
+    var_6 = anglesToForward(var_1);
+    var_7 = anglestoright(var_1);
+    var_8 = anglestoup(var_1);
     waitframe();
   }
 }

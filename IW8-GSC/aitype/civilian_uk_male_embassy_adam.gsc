@@ -35,7 +35,7 @@ function spawner() {
   self setspawnerteam("neutral");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\civ_london_male_embassy_adam::precache();
   scripts\aitypes\bt_util::init();
   scripts\aitypes\assets::civilian();

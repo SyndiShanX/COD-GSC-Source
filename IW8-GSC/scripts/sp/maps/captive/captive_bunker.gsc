@@ -53,12 +53,12 @@ function bunker_main() {
   thread background_window_scene();
   thread front_window_scene();
   thread hadir_window_scene();
-  var0 = scripts\engine\utility::getStruct("lab_fire", "targetname");
-  playFX(level._effect["vfx_lab_fire"], var0.origin);
+  var_0 = scripts\engine\utility::getStruct("lab_fire", "targetname");
+  playFX(level._effect["vfx_lab_fire"], var_0.origin);
   scripts\engine\utility::exploder("vfx_glass_cracking");
   thread allies_move_through_bunker();
-  var1 = [];
-  GscBinSkip0(0x2e, var1.size, [level.ayah, "dx_vom_ayah_meet_sas_reveal_181"], level, level, level, level);
+  var_1 = [];
+  GscBinSkip0(0x2e, var_1.size, [level.ayah, "dx_vom_ayah_meet_sas_reveal_181"], level, level, level, level);
 }
 
 function bunker_catchup() {}
@@ -91,39 +91,39 @@ function allies_move_through_bunker() {
   scripts\engine\utility::flag_wait("reached_gas_lab_view");
   scripts\engine\sp\utility::activate_trigger_with_targetname("gas_corridor_move_5");
   scripts\engine\utility::flag_wait("bomb_detonated");
-  var0 = [level.ayah, level.darine];
+  var_0 = [level.ayah, level.darine];
 
   if(level.allprisoners.size > 2) {
-    var1 = [];
+    var_1 = [];
     level.allprisoners = scripts\engine\utility::array_removedead_or_dying(level.allprisoners);
 
-    foreach(var3 in level.allprisoners) {
-      if(var3 != level.ayah && var3 != level.darine) {
-        var1 = var3;
+    foreach(var_3 in level.allprisoners) {
+      if(var_3 != level.ayah && var_3 != level.darine) {
+        var_1 = var_3;
       }
     }
 
-    if(var1.size > 0) {
-      var0 = scripts\engine\utility::getclosest(scripts\engine\utility::getStruct("stack_target_2", "targetname").origin, var1);
+    if(var_1.size > 0) {
+      var_0 = scripts\engine\utility::getclosest(scripts\engine\utility::getStruct("stack_target_2", "targetname").origin, var_1);
     }
   }
 
-  foreach(var3 in var0) {
-    thread move_to_window(var3);
+  foreach(var_3 in var_0) {
+    thread move_to_window(var_3);
   }
 }
 
-function move_to_window(var0) {
-  if(var0 == 1) {
+function move_to_window(var_0) {
+  if(var_0 == 1) {
     level waittill("woman_ended_0");
-  } else if(var0 == 2) {
+  } else if(var_0 == 2) {
     level waittill("woman_ended_1");
     scripts\engine\sp\utility::activate_trigger_with_targetname("gas_corridor_move_6");
   }
 
   level.windowsceneref scripts\sp\anim::anim_reach_solo(self, "lab_arrive");
   scripts\engine\utility::flag_set("women_reached_windows");
-  level notify("woman_ended_" + var0);
+  level notify("woman_ended_" + var_0);
   level.windowsceneref thread scripts\common\anim::anim_single_solo(self, "lab_arrive");
 }
 
@@ -158,8 +158,8 @@ function background_window_scene() {
   level.labvictim7 scripts\sp\utility::enable_procedural_bones();
   level.labprisonersbackground = [level.labvictim4, level.labvictim5, level.labvictim6, level.labvictim7];
 
-  foreach(var1 in level.labprisonersbackground) {
-    var1.anim_getrootfunc = &get_anim_model_root;
+  foreach(var_1 in level.labprisonersbackground) {
+    var_1.anim_getrootfunc = &get_anim_model_root;
   }
 
   level.windowsceneref thread scripts\common\anim::anim_loop(level.labprisonersbackground, "lab_window_idle", "end_window_scene");
@@ -177,15 +177,15 @@ function front_window_scene() {
   level.labvictim3 scripts\sp\utility::enable_procedural_bones();
   level.labprisoners = [level.labvictim1, level.labvictim2, level.labvictim3];
 
-  foreach(var1 in level.labprisoners) {
-    var1.anim_getrootfunc = &get_anim_model_root;
+  foreach(var_1 in level.labprisoners) {
+    var_1.anim_getrootfunc = &get_anim_model_root;
   }
 
   level.windowsceneref thread scripts\common\anim::anim_first_frame(level.labprisoners, "lab_window_enter");
   scripts\engine\utility::flag_wait("looking_at_bunker_window");
   wait 0.5;
 
-  foreach(var4 in level.labprisoners) {
+  foreach(var_4 in level.labprisoners) {
     thread prisoner_loop_window_scene_till_dead();
   }
 }
@@ -260,10 +260,10 @@ function bomb_play_and_remove() {
 }
 
 function sfx_bunker_breach() {
-  var0 = spawn("script_origin", level.bomb.origin);
-  var0 playexplosionsound("scn_captive_breach_charge_expl", "exp");
+  var_0 = spawn("script_origin", level.bomb.origin);
+  var_0 playexplosionsound("scn_captive_breach_charge_expl", "exp");
   wait 6;
-  var0 delete();
+  var_0 delete();
 }
 
 function check_nag_open_door() {
@@ -309,7 +309,7 @@ function lab_victims_move_to_door() {
   level endon("gas_lab_open");
   level endon("rescue_failed");
 
-  for(var0 = 0;; var0++) {
+  for(var_0 = 0;; var_0++) {
     level.gaslabanimref scripts\common\anim::anim_single(level.labprisoners, "lab_door_idle");
   }
 }
@@ -323,7 +323,7 @@ function smoke_death_timer() {
   smoke_death_fail();
 }
 
-function smoke_death_fail(var0) {
+function smoke_death_fail(var_0) {
   scripts\engine\utility::flag_set("rescue_failed");
 
   if(isDefined(level.gaslabdoorinteract)) {
@@ -351,8 +351,8 @@ function rescue_hadir_sequence() {
   visionsetnaked("captive_hero", 2);
   level.windowsceneref notify("end_window_scene");
 
-  foreach(var1 in level.labprisonersbackground) {
-    var1 delete();
+  foreach(var_1 in level.labprisonersbackground) {
+    var_1 delete();
   }
 
   level.gaslabanimref scripts\sp\player_rig::link_player_to_rig("rescue_start", "stand", 1, 0.2, undefined, undefined, undefined, undefined, undefined, 1);
@@ -361,16 +361,16 @@ function rescue_hadir_sequence() {
   level.pullinteract linkTo(level.price, "tag_accessory_right", (0, 0, 0), (0, 0, 0));
   level.player springcamenabled(1, 5, 5);
   level.controlroomenterref notify("end_price_valve_idle");
-  var3 = [level.player_rig, level.price];
-  level.gaslabanimref scripts\common\anim::anim_single(var3, "rescue_start");
-  level.gaslabanimref thread scripts\common\anim::anim_loop(var3, "rescue_start_idle", "end_rescue_start_main_idle");
+  var_3 = [level.player_rig, level.price];
+  level.gaslabanimref scripts\common\anim::anim_single(var_3, "rescue_start");
+  level.gaslabanimref thread scripts\common\anim::anim_loop(var_3, "rescue_start_idle", "end_rescue_start_main_idle");
   scripts\sp\maps\captive\captive_vo::vo_bu_try_open_gas_lab(1);
   level.pullinteract thread scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"CAPTIVE/CURSOR_PULL", 128, 96, 64, 1, undefined, undefined, undefined, "duration_none");
   level.pullinteract waittill("trigger");
   level notify("started_pry_attempt");
   level.gaslabanimref notify("end_rescue_start_main_idle");
-  level.gaslabanimref scripts\common\anim::anim_single(var3, "rescue_pull");
-  level.gaslabanimref thread scripts\common\anim::anim_loop(var3, "rescue_pull_idle", "end_rescue_pull_main_idle");
+  level.gaslabanimref scripts\common\anim::anim_single(var_3, "rescue_pull");
+  level.gaslabanimref thread scripts\common\anim::anim_loop(var_3, "rescue_pull_idle", "end_rescue_pull_main_idle");
   scripts\sp\maps\captive\captive_vo::vo_bu_try_open_gas_lab(2);
   thread check_nag_open_door();
   level.pullinteract thread scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"CAPTIVE/CURSOR_PULL", 128, 96, 64, 1, undefined, undefined, undefined, "duration_none");
@@ -386,13 +386,13 @@ function rescue_hadir_sequence() {
   scripts\engine\utility::stop_exploder("gas_start_hadir");
   level.pullinteract delete();
   setup_gas_lab_door();
-  var4 = [level.hadir, level.labvictim1, level.labvictim2, level.labvictim3];
+  var_4 = [level.hadir, level.labvictim1, level.labvictim2, level.labvictim3];
   thread wait_end_transition();
   thread wait_lock_view_to_hadir();
   level.gaslabanimref notify("end_rescue_start_idle");
   level.gaslabanimref thread scripts\common\anim::anim_single_solo(level.gaslabdoor, "rescue_pull_final");
-  level.gaslabanimref thread scripts\common\anim::anim_single(var4, "rescue_pull_final");
-  level.gaslabanimref scripts\common\anim::anim_single(var3, "rescue_pull_final");
+  level.gaslabanimref thread scripts\common\anim::anim_single(var_4, "rescue_pull_final");
+  level.gaslabanimref scripts\common\anim::anim_single(var_3, "rescue_pull_final");
   thread scripts\sp\analytics::analytics_kleenex_update("Meet sas to bunker end");
   wait 3;
   scripts\engine\sp\utility::nextmission();

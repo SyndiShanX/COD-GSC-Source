@@ -4,7 +4,7 @@
 ***********************************************/
 
 function getanimselectorfilenames() {
-  var0 = [];
+  var_0 = [];
 
   if(scripts\common\utility::iscp()) {
     GscBinSkip0(0x2e, "traverse_warp_up", [[0, "animselectortables/soldier_traverse_warp_up.csv"], [1, "animselectortables/civilian_traverse_warp_up.csv"], [2, "animselectortables/bomber_traverse_warp_up.csv"]]);
@@ -26,104 +26,104 @@ function init() {
   anim.animselectorfeaturetable["min_speed"] = ["speed", 0];
   anim.animselectorfeaturetable["max_speed"] = ["speed", 1];
   anim.animselector = [];
-  var0 = getanimselectorfilenames();
+  var_0 = getanimselectorfilenames();
 
-  foreach(var13, var2 in var0) {
-    foreach(var12, var4 in var2) {
-      anim.animselector[var13][var12] = spawnStruct();
-      anim.animselector[var13][var12].aliases = [];
-      anim.animselector[var13][var12].features = [];
-      anim.animselector[var13][var12].values = [];
-      var5 = tablelookuprownum(var4[1], 0, "__END__");
-      var5 -= 1;
+  foreach(var_13, var_2 in var_0) {
+    foreach(var_12, var_4 in var_2) {
+      anim.animselector[var_13][var_12] = spawnStruct();
+      anim.animselector[var_13][var_12].aliases = [];
+      anim.animselector[var_13][var_12].features = [];
+      anim.animselector[var_13][var_12].values = [];
+      var_5 = tablelookuprownum(var_4[1], 0, "__END__");
+      var_5 -= 1;
 
-      for(var6 = 0; var6 < var5; var6++) {
-        var7 = tablelookupbyrow(var4[1], var6 + 1, 0);
-        anim.animselector[var13][var12].aliases[var6] = var7;
+      for(var_6 = 0; var_6 < var_5; var_6++) {
+        var_7 = tablelookupbyrow(var_4[1], var_6 + 1, 0);
+        anim.animselector[var_13][var_12].aliases[var_6] = var_7;
       }
 
-      var8 = undefined;
+      var_8 = undefined;
 
-      for(var6 = 0; var6 < 50; var6++) {
-        var9 = tablelookupbyrow(var4[1], 0, var6 + 1);
+      for(var_6 = 0; var_6 < 50; var_6++) {
+        var_9 = tablelookupbyrow(var_4[1], 0, var_6 + 1);
 
-        if(var9 == "__END__" || var9 == "") {
-          var8 = var6;
+        if(var_9 == "__END__" || var_9 == "") {
+          var_8 = var_6;
           break;
         }
 
-        anim.animselector[var13][var12].features[var6] = var9;
+        anim.animselector[var_13][var_12].features[var_6] = var_9;
       }
 
-      for(var6 = 0; var6 < var5; var6++) {
-        for(var10 = 0; var10 < var8; var10++) {
-          var7 = anim.animselector[var13][var12].aliases[var6];
-          var9 = anim.animselector[var13][var12].features[var10];
-          var11 = tablelookupbyrow(var4[1], var6 + 1, var10 + 1);
+      for(var_6 = 0; var_6 < var_5; var_6++) {
+        for(var_10 = 0; var_10 < var_8; var_10++) {
+          var_7 = anim.animselector[var_13][var_12].aliases[var_6];
+          var_9 = anim.animselector[var_13][var_12].features[var_10];
+          var_11 = tablelookupbyrow(var_4[1], var_6 + 1, var_10 + 1);
 
-          if(var11 == "") {
-            var11 = undefined;
+          if(var_11 == "") {
+            var_11 = undefined;
           } else {
-            var11 = float(var11);
+            var_11 = float(var_11);
           }
 
-          anim.animselector[var13][var12].values[var7][var9] = var11;
+          anim.animselector[var_13][var_12].values[var_7][var_9] = var_11;
         }
       }
     }
   }
 }
 
-function checkfeaturevalue(var0, var1, var2) {
-  var3 = anim.animselectorfeaturetable[var1][0];
-  var4 = anim.animselectorfeaturetable[var1][1];
-  var5 = var2[var3];
+function checkfeaturevalue(var_0, var_1, var_2) {
+  var_3 = anim.animselectorfeaturetable[var_1][0];
+  var_4 = anim.animselectorfeaturetable[var_1][1];
+  var_5 = var_2[var_3];
 
-  if(!isDefined(var5)) {
+  if(!isDefined(var_5)) {
     return 1;
   }
 
-  if(var4 == 0) {
-    return (var5 >= var0);
+  if(var_4 == 0) {
+    return (var_5 >= var_0);
   }
 
-  if(var4 == 1) {
-    return (var5 <= var0);
+  if(var_4 == 1) {
+    return (var_5 <= var_0);
   }
 }
 
-function selectanim(var0, var1, var2) {
-  var3 = anim.animselector[var0][var2];
+function selectanim(var_0, var_1, var_2) {
+  var_3 = anim.animselector[var_0][var_2];
 
-  foreach(var5 in var3.aliases) {
-    if(isai(self) && !scripts\asm\asm::asm_hasalias(var0, var5)) {
+  foreach(var_5 in var_3.aliases) {
+    if(isai(self) && !scripts\asm\asm::asm_hasalias(var_0, var_5)) {
       continue;
     }
 
-    var6 = 1;
+    var_6 = 1;
 
-    foreach(var8 in var3.features) {
-      var9 = var3.values[var5][var8];
+    foreach(var_8 in var_3.features) {
+      var_9 = var_3.values[var_5][var_8];
 
-      if(isDefined(var9)) {
-        if(!checkfeaturevalue(var9, var8, var1)) {
-          var6 = 0;
+      if(isDefined(var_9)) {
+        if(!checkfeaturevalue(var_9, var_8, var_1)) {
+          var_6 = 0;
           break;
         }
       }
     }
 
-    if(var6) {
-      return var5;
+    if(var_6) {
+      return var_5;
     }
   }
 }
 
 function gettraverserindex() {
-  var0 = scripts\asm\shared\utility::getbasearchetype();
+  var_0 = scripts\asm\shared\utility::getbasearchetype();
 
-  if(isDefined(var0)) {
-    switch (var0) {
+  if(isDefined(var_0)) {
+    switch (var_0) {
       case "juggernaut_cp":
       case "soldier_pistol":
       case "soldier_female":

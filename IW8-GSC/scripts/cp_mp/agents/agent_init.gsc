@@ -42,20 +42,20 @@ function initanimcallbacks() {
   anim.callbacks["PlaySoundAtViewHeight"] = &play_sound_at_viewheightmp;
 }
 
-function play_sound_at_viewheightmp(var0, var1, var2) {
-  if(!isDefined(var0)) {
+function play_sound_at_viewheightmp(var_0, var_1, var_2) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!soundexists(var0)) {
+  if(!soundexists(var_0)) {
     return;
   }
 
-  self playsoundonmovingent(var0);
+  self playsoundonmovingent(var_0);
 
-  if(isDefined(var1)) {
-    wait lookupsoundlength(var0) / 1000;
-    self notify(var1);
+  if(isDefined(var_1)) {
+    wait lookupsoundlength(var_0) / 1000;
+    self notify(var_1);
     return;
   }
 }

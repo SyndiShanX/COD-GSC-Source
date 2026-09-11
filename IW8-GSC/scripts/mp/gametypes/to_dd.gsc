@@ -115,7 +115,7 @@ function onprecachegametype() {
   game["bomb_recovered_sound"] = "mp_war_objective_taken";
 }
 
-function onstartgametype(var0) {
+function onstartgametype(var_0) {
   scripts\cp_mp\utility\game_utility::getmapname();
   seticonnames();
 
@@ -154,36 +154,36 @@ function onstartgametype(var0) {
 
   thread waitformatchbegin();
 
-  if(!istrue(var0)) {
+  if(!istrue(var_0)) {
     scripts\mp\gametypes\tac_ops::commoninit();
     activatespawns();
   }
 
-  var1 = scripts\mp\utility\dvars::getwatcheddvar("winlimit");
+  var_1 = scripts\mp\utility\dvars::getwatcheddvar("winlimit");
   GscBinSkip1(0x45, 0, "dd");
 }
 
 function createbridgecapturesite() {
-  var0 = getEnt("to_dd_bridge_flag", "targetname");
+  var_0 = getEnt("to_dd_bridge_flag", "targetname");
 
   if(!isDefined(level.objectives)) {
     level.objectives = [];
   }
 
   level.bridgeobjectiveindex = level.objectives.size;
-  level.objectives[level.bridgeobjectiveindex] = var0;
-  var1 = scripts\mp\gametypes\obj_dom::setupobjective(level.objectives[level.bridgeobjectiveindex]);
+  level.objectives[level.bridgeobjectiveindex] = var_0;
+  var_1 = scripts\mp\gametypes\obj_dom::setupobjective(level.objectives[level.bridgeobjectiveindex]);
   scripts\engine\utility::delaythread(3, &delayset);
-  var1.onuse = &bridgedompoint_onuse;
-  level.objectives[level.bridgeobjectiveindex] = var1;
+  var_1.onuse = &bridgedompoint_onuse;
+  level.objectives[level.bridgeobjectiveindex] = var_1;
   level.flagcapturetime = 10;
   level.flagneutralization = 0;
   waitframe();
-  var1 scripts\mp\gameobjects::setownerteam("neutral");
-  var1 scripts\mp\gameobjects::setvisibleteam("any");
-  var1 scripts\mp\gameobjects::allowuse("enemy");
-  var1 scripts\mp\gameobjects::cancontestclaim(1);
-  var1 scripts\mp\gameobjects::setobjectivestatusicons(level.icondefend, level.iconfriendlyextract3d);
+  var_1 scripts\mp\gameobjects::setownerteam("neutral");
+  var_1 scripts\mp\gameobjects::setvisibleteam("any");
+  var_1 scripts\mp\gameobjects::allowuse("enemy");
+  var_1 scripts\mp\gameobjects::cancontestclaim(1);
+  var_1 scripts\mp\gameobjects::setobjectivestatusicons(level.icondefend, level.iconfriendlyextract3d);
 }
 
 function delayset() {
@@ -193,10 +193,10 @@ function delayset() {
   level.objectives[level.bridgeobjectiveindex] scripts\mp\gameobjects::setobjectivestatusicons(level.icondefend, level.iconfriendlyextract3d);
 }
 
-function bridgedompoint_onuse(var0) {
-  scripts\mp\gametypes\obj_dom::dompoint_onuse(var0);
+function bridgedompoint_onuse(var_0) {
+  scripts\mp\gametypes\obj_dom::dompoint_onuse(var_0);
 
-  if(var0.team == "allies") {
+  if(var_0.team == "allies") {
     level.objectives[level.bridgeobjectiveindex].onuse = &scripts\mp\gametypes\obj_dom::dompoint_onuse;
     level.objectives[level.bridgeobjectiveindex] scripts\mp\gameobjects::setkeyobject(undefined);
     level.objectives[level.bridgeobjectiveindex] scripts\mp\gameobjects::setvisibleteam("any");
@@ -227,46 +227,46 @@ function votimer() {
 }
 
 function initspawns() {
-  var0 = level.tacopsspawns;
-  var0.to_dd_spawns = [];
-  var0.to_dd_spawns["allies_start"] = scripts\mp\spawnlogic::getspawnpointarray("mp_todd_spawn_allies_start");
-  var0.to_dd_spawns["axis_start"] = scripts\mp\spawnlogic::getspawnpointarray("mp_todd_spawn_axis_start");
+  var_0 = level.tacopsspawns;
+  var_0.to_dd_spawns = [];
+  var_0.to_dd_spawns["allies_start"] = scripts\mp\spawnlogic::getspawnpointarray("mp_todd_spawn_allies_start");
+  var_0.to_dd_spawns["axis_start"] = scripts\mp\spawnlogic::getspawnpointarray("mp_todd_spawn_axis_start");
   scripts\mp\spawnlogic::addspawnpoints("allies", "mp_todd_spawn_allies");
-  var0.to_dd_spawns["allies"] = scripts\mp\spawnlogic::getspawnpointarray("mp_todd_spawn_allies");
+  var_0.to_dd_spawns["allies"] = scripts\mp\spawnlogic::getspawnpointarray("mp_todd_spawn_allies");
   scripts\mp\spawnlogic::addspawnpoints("axis", "mp_todd_spawn_axis");
-  var0.to_dd_spawns["axis"] = scripts\mp\spawnlogic::getspawnpointarray("mp_todd_spawn_axis");
+  var_0.to_dd_spawns["axis"] = scripts\mp\spawnlogic::getspawnpointarray("mp_todd_spawn_axis");
   scripts\mp\spawnlogic::addspawnpoints("allies_bridge", "mp_toddbridge_spawn_allies");
-  var0.to_dd_spawns["allies_bridge"] = scripts\mp\spawnlogic::getspawnpointarray("mp_toddbridge_spawn_allies");
+  var_0.to_dd_spawns["allies_bridge"] = scripts\mp\spawnlogic::getspawnpointarray("mp_toddbridge_spawn_allies");
   scripts\mp\spawnlogic::addspawnpoints("axis_bridge", "mp_toddbridge_spawn_axis");
-  var0.to_dd_spawns["axis_bridge"] = scripts\mp\spawnlogic::getspawnpointarray("mp_toddbridge_spawn_axis");
+  var_0.to_dd_spawns["axis_bridge"] = scripts\mp\spawnlogic::getspawnpointarray("mp_toddbridge_spawn_axis");
 }
 
-function getspawnpointdist(var0, var1) {
-  var2 = getpathdist(var0.origin, var1, 16000);
+function getspawnpointdist(var_0, var_1) {
+  var_2 = getpathdist(var_0.origin, var_1, 16000);
 
-  if(var2 < 0) {
-    var2 = distance(var0.origin, var1);
+  if(var_2 < 0) {
+    var_2 = distance(var_0.origin, var_1);
   }
 
-  return var2;
+  return var_2;
 }
 
 function getspawnpoint() {
-  var0 = level.tacopsspawns;
-  var1 = self.pers["team"];
+  var_0 = level.tacopsspawns;
+  var_1 = self.pers["team"];
 
   if(level.usestartspawns && !isDefined(self.tacopsmapselectedarea)) {
-    var2 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var0.to_dd_spawns[var1 + "_start"]);
+    var_2 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_0.to_dd_spawns[var_1 + "_start"]);
   } else {
     jumpiffalse(istrue(level.to_dd_phase_1)) LOC_00000075;
-    var3 = var2 + "_bridge";
-    var4 = var1.to_dd_spawns[var3];
-    var4 = scripts\mp\tac_ops_map::filterspawnpoints(var4);
-    var2 = undefined;
+    var_3 = var_2 + "_bridge";
+    var_4 = var_1.to_dd_spawns[var_3];
+    var_4 = scripts\mp\tac_ops_map::filterspawnpoints(var_4);
+    var_2 = undefined;
     goto LOC_0000008c;
   }
 
-  return var2;
+  return var_2;
 }
 
 function activatespawns() {
@@ -308,15 +308,15 @@ function waitforhvtrelease() {
 
   if(scripts\mp\utility\teams::getteamdata("axis", "teamCount")) {
     level.topplayers = scripts\engine\utility::array_sort_with_func(scripts\mp\utility\teams::getteamdata("axis", "players"), &compare_player_score);
-    var0 = level.topplayers[0] scripts\mp\gametypes\to_hstg::spawnextractchopper(level.ddlz, 30);
+    var_0 = level.topplayers[0] scripts\mp\gametypes\to_hstg::spawnextractchopper(level.ddlz, 30);
     level.ddlz thread scripts\mp\gametypes\to_hstg::extractvehicledeathwatcher();
     thread waitdoextraction();
     return;
   }
 }
 
-function compare_player_score(var0, var1) {
-  return var0.score >= var1.score;
+function compare_player_score(var_0, var_1) {
+  return var_0.score >= var_1.score;
 }
 
 function waitdoextraction() {
@@ -324,13 +324,13 @@ function waitdoextraction() {
   scripts\mp\gametypes\tac_ops::tacopslongwaitsec(15);
   scripts\mp\gametypes\tac_ops::teamprint(&"MISC_MESSAGES_MP/TO_ALLY_DD_ESCAPE_2", &"MISC_MESSAGES_MP/TO_AXIS_DD_ESCAPE_2");
 
-  foreach(var1 in level.objectives) {
-    removedoorcollision(var1.objectivekey);
+  foreach(var_1 in level.objectives) {
+    removedoorcollision(var_1.objectivekey);
   }
 
-  foreach(var1 in level.objectives) {
-    if(isDefined(var1.ondisableobjective)) {
-      var1[[var1.ondisableobjective]]();
+  foreach(var_1 in level.objectives) {
+    if(isDefined(var_1.ondisableobjective)) {
+      var_1[[var_1.ondisableobjective]]();
     }
   }
 
@@ -351,7 +351,7 @@ function hvtmovetoextractpt() {
   level endon("game_end");
   self endon("death");
   self botsetscriptgoal(level.extractionpos, 20, "critical");
-  var0 = scripts\mp\bots\bots_util::bot_waittill_goal_or_fail();
+  var_0 = scripts\mp\bots\bots_util::bot_waittill_goal_or_fail();
 }
 
 function waitformatchbegin() {
@@ -385,15 +385,15 @@ function onspawnplayer() {
   }
 
   level notify("spawned_player");
-  var0 = 0;
+  var_0 = 0;
 
   if(self.team == "allies") {
-    var0 = 1;
+    var_0 = 1;
   } else if(self.team == "axis") {
-    var0 = 2;
+    var_0 = 2;
   }
 
-  self setclientomnvar("ui_tacops_team", var0);
+  self setclientomnvar("ui_tacops_team", var_0);
 
   if(!isagent(self)) {
     scripts\mp\playerlogic::incrementalivecount(self.team);
@@ -402,16 +402,16 @@ function onspawnplayer() {
   scripts\mp\tac_ops\roles_utility::kitspawn();
 }
 
-function dd_endgame(var0, var1) {
-  thread scripts\mp\gamelogic::endgame(var0, var1);
+function dd_endgame(var_0, var_1) {
+  thread scripts\mp\gamelogic::endgame(var_0, var_1);
 }
 
-function ondeadevent(var0) {
+function ondeadevent(var_0) {
   if(level.bombexploded > 0 || level.bombdefused) {
     return;
   }
 
-  if(var0 == "all") {
+  if(var_0 == "all") {
     if(level.bombplanted) {
       dd_endgame(game["attackers"], game["end_reason"][game["defenders"] + "_eliminated"]);
       return;
@@ -421,7 +421,7 @@ function ondeadevent(var0) {
     return;
   }
 
-  if(var0 == game["attackers"]) {
+  if(var_0 == game["attackers"]) {
     if(level.bombplanted) {
       return;
     }
@@ -430,31 +430,31 @@ function ondeadevent(var0) {
     return;
   }
 
-  if(var0 == game["defenders"]) {
+  if(var_0 == game["defenders"]) {
     thread dd_endgame(level, game["attackers"]);
     return;
   }
 }
 
-function onnormaldeath(var0, var1, var2, var3, var4) {
-  scripts\mp\gametypes\common::oncommonnormaldeath(var0, var1, var2, var3, var4);
-  var5 = var0.team;
+function onnormaldeath(var_0, var_1, var_2, var_3, var_4) {
+  scripts\mp\gametypes\common::oncommonnormaldeath(var_0, var_1, var_2, var_3, var_4);
+  var_5 = var_0.team;
 
-  if(var0.isplanting) {
-    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var2, "planting");
-    var1 scripts\mp\utility\stats::incpersstat("defends", 1);
-    var1 scripts\mp\persistence::statsetchild("round", "defends", var1.pers["defends"]);
-  } else if(var0.isdefusing) {
-    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var2, "defusing");
-    var1 scripts\mp\utility\stats::incpersstat("defends", 1);
-    var1 scripts\mp\persistence::statsetchild("round", "defends", var1.pers["defends"]);
+  if(var_0.isplanting) {
+    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_2, "planting");
+    var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
+    var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
+  } else if(var_0.isdefusing) {
+    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_2, "defusing");
+    var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
+    var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
   }
 
-  scripts\mp\gametypes\obj_bombzone::bombzone_awardgenericbombzonemedals(var1, var0);
+  scripts\mp\gametypes\obj_bombzone::bombzone_awardgenericbombzonemedals(var_1, var_0);
 
-  if(!isagent(var0)) {
-    if(!isDefined(var0.switching_teams)) {
-      var0 scripts\mp\playerlogic::decrementalivecount(var0.team);
+  if(!isagent(var_0)) {
+    if(!isDefined(var_0.switching_teams)) {
+      var_0 scripts\mp\playerlogic::decrementalivecount(var_0.team);
       return;
     }
 
@@ -463,9 +463,9 @@ function onnormaldeath(var0, var1, var2, var3, var4) {
 }
 
 function ontimelimit() {
-  foreach(var1 in level.objectives) {
-    if(isDefined(var1.ondisableobjective)) {
-      var1[[var1.ondisableobjective]]();
+  foreach(var_1 in level.objectives) {
+    if(isDefined(var_1.ondisableobjective)) {
+      var_1[[var_1.ondisableobjective]]();
     }
   }
 
@@ -488,44 +488,44 @@ function updategametypedvars() {
   level.silentplant = scripts\mp\utility\dvars::dvarintvalue("silentPlant", 0, 0, 1);
 }
 
-function verifybombzones(var0) {
-  var1 = "";
+function verifybombzones(var_0) {
+  var_1 = "";
 
-  if(var0.size != 3) {
-    var2 = 0;
-    var3 = 0;
-    var4 = 0;
+  if(var_0.size != 3) {
+    var_2 = 0;
+    var_3 = 0;
+    var_4 = 0;
 
-    foreach(var6 in var0) {
-      if(issubstr(tolower(var6.script_label), "a")) {
-        var2 = 1;
+    foreach(var_6 in var_0) {
+      if(issubstr(tolower(var_6.script_label), "a")) {
+        var_2 = 1;
         continue;
       }
 
-      if(issubstr(tolower(var6.script_label), "b")) {
-        var3 = 1;
+      if(issubstr(tolower(var_6.script_label), "b")) {
+        var_3 = 1;
         continue;
       }
 
-      if(issubstr(tolower(var6.script_label), "c")) {
-        var4 = 1;
+      if(issubstr(tolower(var_6.script_label), "c")) {
+        var_4 = 1;
       }
     }
 
-    if(!var2) {
-      var1 += " A ";
+    if(!var_2) {
+      var_1 += " A ";
     }
 
-    if(!var3) {
-      var1 += " B ";
+    if(!var_3) {
+      var_1 += " B ";
     }
 
-    if(!var4) {
-      var1 += " C ";
+    if(!var_4) {
+      var_1 += " C ";
     }
   }
 
-  if(var1 != "") {
+  if(var_1 != "") {
     return;
   }
 }
@@ -539,60 +539,60 @@ function initbombs() {
 }
 
 function bombs() {
-  var0 = getEntArray("dd_bombzone", "targetname");
+  var_0 = getEntArray("dd_bombzone", "targetname");
 
-  if(var0.size == 0) {
+  if(var_0.size == 0) {
     return;
   }
 
   wait 0.5;
-  var1 = [];
+  var_1 = [];
 
-  foreach(var3 in var0) {
-    var4 = scripts\mp\gametypes\obj_bombzone::setupobjective(var3);
-    var4.onbeginuse = &onbeginuse;
-    var4.onenduse = &onenduse;
-    var4.onuse = &onuseplantobject;
-    var4.ondisableobjective = &bombzone_ondisableobjective;
-    level.objectives[var4.objectivekey] = var4;
+  foreach(var_3 in var_0) {
+    var_4 = scripts\mp\gametypes\obj_bombzone::setupobjective(var_3);
+    var_4.onbeginuse = &onbeginuse;
+    var_4.onenduse = &onenduse;
+    var_4.onuse = &onuseplantobject;
+    var_4.ondisableobjective = &bombzone_ondisableobjective;
+    level.objectives[var_4.objectivekey] = var_4;
   }
 }
 
-function onbeginuse(var0) {
-  scripts\mp\gametypes\obj_bombzone::bombzone_onbeginuse(var0);
+function onbeginuse(var_0) {
+  scripts\mp\gametypes\obj_bombzone::bombzone_onbeginuse(var_0);
 }
 
-function onenduse(var0, var1, var2) {
-  scripts\mp\gametypes\obj_bombzone::bombzone_onenduse(var0, var1, var2);
+function onenduse(var_0, var_1, var_2) {
+  scripts\mp\gametypes\obj_bombzone::bombzone_onenduse(var_0, var_1, var_2);
 }
 
-function onuseplantobject(var0) {
-  scripts\mp\gametypes\obj_bombzone::bombzone_onuseplantobject(var0);
+function onuseplantobject(var_0) {
+  scripts\mp\gametypes\obj_bombzone::bombzone_onuseplantobject(var_0);
 }
 
 function resetbombzone() {
   if(scripts\mp\utility\game::inovertime()) {
     scripts\mp\gameobjects::setownerteam("neutral");
     scripts\mp\gameobjects::allowuse("any");
-    var0 = "waypoint_target_b";
-    var1 = "waypoint_target_b";
+    var_0 = "waypoint_target_b";
+    var_1 = "waypoint_target_b";
   } else {
     scripts\mp\gameobjects::allowuse("enemy");
-    var0 = "waypoint_defend" + self.label;
-    var1 = "waypoint_target" + self.label;
+    var_0 = "waypoint_defend" + self.label;
+    var_1 = "waypoint_target" + self.label;
   }
 
   self.id = "bomb_zone";
   scripts\mp\gameobjects::setusetime(level.planttime);
   scripts\mp\gameobjects::setusetext(&"MP/PLANTING_EXPLOSIVE");
   scripts\mp\gameobjects::setusehinttext(&"MP/HOLD_TO_PLANT_EXPLOSIVES");
-  scripts\mp\gameobjects::setobjectivestatusicons(var0, var1);
+  scripts\mp\gameobjects::setobjectivestatusicons(var_0, var_1);
   scripts\mp\gameobjects::setvisibleteam("any");
   self.useweapon = getcompleteweaponname("briefcase_bomb_mp");
   self.bombexploded = undefined;
 }
 
-function bombhandler(var0, var1, var2) {
+function bombhandler(var_0, var_1, var_2) {
   level.bombsplanted -= 1;
 
   if(self.label == "_a") {
@@ -607,16 +607,16 @@ function bombhandler(var0, var1, var2) {
     return;
   }
 
-  if(var1 == "explode") {
+  if(var_1 == "explode") {
     self.bombexploded = 1;
     scripts\mp\utility\dialog::statusdialog("enemy_ident", game["defenders"], 1);
     scripts\mp\utility\dialog::statusdialog("target_ident", game["attackers"], 1);
 
-    foreach(var4 in level.objectives) {
-      removedoorcollision(var4.objectivekey);
+    foreach(var_4 in level.objectives) {
+      removedoorcollision(var_4.objectivekey);
 
-      if(isDefined(var4.ondisableobjective)) {
-        var4[[var4.ondisableobjective]]();
+      if(isDefined(var_4.ondisableobjective)) {
+        var_4[[var_4.ondisableobjective]]();
       }
     }
 
@@ -624,7 +624,7 @@ function bombhandler(var0, var1, var2) {
     restarttimer();
 
     if(level.ddtimetoadd > 0) {
-      level thread scripts\mp\hud_util::teamplayercardsplash("callout_time_added", var0);
+      level thread scripts\mp\hud_util::teamplayercardsplash("callout_time_added", var_0);
     }
 
     waitframe();
@@ -649,14 +649,14 @@ function bombhandler(var0, var1, var2) {
   }
 
   restarttimer();
-  var0 notify("bomb_defused" + self.label);
+  var_0 notify("bomb_defused" + self.label);
   self notify("defused");
   resetbombzone();
 }
 
-function removedoorcollision(var0) {
-  var1 = getEnt("dd_bombzone_clip" + var0, "targetname");
-  var1 delete();
+function removedoorcollision(var_0) {
+  var_1 = getEnt("dd_bombzone_clip" + var_0, "targetname");
+  var_1 delete();
 }
 
 function restarttimer() {
@@ -687,14 +687,14 @@ function seticonnames() {
 }
 
 function setupkillcament() {
-  var0 = spawn("script_origin", self.origin);
-  var0.angles = self.angles;
-  var0 rotateYaw(-45, 0.05);
+  var_0 = spawn("script_origin", self.origin);
+  var_0.angles = self.angles;
+  var_0 rotateYaw(-45, 0.05);
   waitframe();
-  var1 = self.origin + (0, 0, 5);
-  var2 = self.origin + anglesToForward(var0.angles) * 100 + (0, 0, 128);
-  var3 = scripts\engine\trace::ray_trace(var1, var2, self, scripts\engine\trace::create_default_contents(1));
-  self.killcament = spawn("script_model", var3["position"]);
+  var_1 = self.origin + (0, 0, 5);
+  var_2 = self.origin + anglesToForward(var_0.angles) * 100 + (0, 0, 128);
+  var_3 = scripts\engine\trace::ray_trace(var_1, var_2, self, scripts\engine\trace::create_default_contents(1));
+  self.killcament = spawn("script_model", var_3["position"]);
   self.killcament setscriptmoverkillcam("explosive");
-  var0 delete();
+  var_0 delete();
 }

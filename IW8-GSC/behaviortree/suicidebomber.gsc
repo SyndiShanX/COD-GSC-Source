@@ -8,16 +8,16 @@ function bindactionscripts() {
     return;
   }
 
-  var0 = spawnStruct();
-  var0.actionfn = [];
-  var0.actionfn[0] = &scripts\aitypes\suicidebomber\combat::bomber_init;
-  var0.actionfn[1] = &scripts\aitypes\suicidebomber\combat::bomber_updateeveryframe;
-  var0.actionfn[2] = &scripts\aitypes\suicidebomber\combat::bomber_shouldmove;
-  var0.actionfn[3] = &scripts\aitypes\suicidebomber\combat::bomber_move;
-  var0.actionfn[4] = &scripts\aitypes\suicidebomber\combat::bomber_moveinit;
-  var0.actionfn[5] = &scripts\aitypes\suicidebomber\combat::bomber_moveterminate;
-  var0.actionfn[6] = &scripts\aitypes\suicidebomber\combat::bomber_terminate;
-  level._btactions["suicidebomber"] = var0;
+  var_0 = spawnStruct();
+  var_0.actionfn = [];
+  var_0.actionfn[0] = &scripts\aitypes\suicidebomber\combat::bomber_init;
+  var_0.actionfn[1] = &scripts\aitypes\suicidebomber\combat::bomber_updateeveryframe;
+  var_0.actionfn[2] = &scripts\aitypes\suicidebomber\combat::bomber_shouldmove;
+  var_0.actionfn[3] = &scripts\aitypes\suicidebomber\combat::bomber_move;
+  var_0.actionfn[4] = &scripts\aitypes\suicidebomber\combat::bomber_moveinit;
+  var_0.actionfn[5] = &scripts\aitypes\suicidebomber\combat::bomber_moveterminate;
+  var_0.actionfn[6] = &scripts\aitypes\suicidebomber\combat::bomber_terminate;
+  level._btactions["suicidebomber"] = var_0;
 }
 
 function registerbehaviortree() {

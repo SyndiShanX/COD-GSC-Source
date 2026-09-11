@@ -7,16 +7,16 @@ function main() {
   scripts\stealth\manager::main();
 }
 
-function set_stealth_mode(var0, var1, var2) {
-  if(var0) {
-    if(isDefined(var1) && isDefined(var2)) {
-      level thread scripts\stealth\utility::stealth_music(var1, var2);
+function set_stealth_mode(var_0, var_1, var_2) {
+  if(var_0) {
+    if(isDefined(var_1) && isDefined(var_2)) {
+      level thread scripts\stealth\utility::stealth_music(var_1, var_2);
     }
 
     level thread scripts\stealth\threat_sight::threat_sight_set_enabled(1);
 
-    foreach(var4 in level.players) {
-      var4 thread scripts\stealth\player::main();
+    foreach(var_4 in level.players) {
+      var_4 thread scripts\stealth\player::main();
     }
   } else {
     level thread scripts\stealth\utility::stealth_music_stop();
@@ -24,7 +24,7 @@ function set_stealth_mode(var0, var1, var2) {
   }
 
   if(isDefined(level.stealth.fnsetstealthmode)) {
-    level thread[[level.stealth.fnsetstealthmode]](var0, var1, var2);
+    level thread[[level.stealth.fnsetstealthmode]](var_0, var_1, var_2);
     return;
   }
 }

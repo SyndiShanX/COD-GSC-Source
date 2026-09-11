@@ -28,10 +28,10 @@ function main() {
   self.usescriptedweapon = 1;
   self.scriptedweaponclassprimary = "ar";
   self.weapon = scripts\code\ai::create_weapon_in_script(["iw8_ar_akilo47", "iw8_ar_falpha", "iw8_ar_falima"]);
-  var0 = undefined;
-  var1 = ["character_al_qatala_desert_ar", "character_al_qatala_desert_ar_2", "character_al_qatala_desert_ar_3"];
+  var_0 = undefined;
+  var_1 = ["character_al_qatala_desert_ar", "character_al_qatala_desert_ar_2", "character_al_qatala_desert_ar_3"];
 
-  switch (scripts\code\character::get_random_character(3, var0, var1)) {
+  switch (scripts\code\character::get_random_character(3, var_0, var_1)) {
     case 0:
       character\character_al_qatala_desert_ar::main();
       break;
@@ -48,7 +48,7 @@ function spawner() {
   self setspawnerteam("axis");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\character_al_qatala_desert_ar::precache();
   character\character_al_qatala_desert_ar_2::precache();
   character\character_al_qatala_desert_ar_3::precache();

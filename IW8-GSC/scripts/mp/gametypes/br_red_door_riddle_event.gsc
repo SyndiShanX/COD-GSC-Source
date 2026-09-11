@@ -37,98 +37,98 @@ function supersbyextraweapon() {
 
 function amped_victim_starttime() {
   level waittill("prematch_fade_done");
-  var0 = easepower("br_dirt_mound_event", level.ref_12aaf.ref_12d37);
-  var0.keepinmap = 1;
+  var_0 = easepower("br_dirt_mound_event", level.ref_12aaf.ref_12d37);
+  var_0.keepinmap = 1;
   scripts\engine\scriptable::scriptable_addusedcallback(&adrenaline_crate_spawn);
 }
 
-function adrenaline_crate_spawn(var0, var1, var2, var3, var4) {
-  if(!isDefined(var0.type) || var0.type != "br_dirt_mound_event") {
+function adrenaline_crate_spawn(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_0.type) || var_0.type != "br_dirt_mound_event") {
     return;
   }
 
-  var5 = var3 getcurrentweapon();
-  var6 = 1;
-  var6 &= isDefined(var5.basename) && var5.basename == "iw8_me_t9cane_mp";
-  var7 = istrue(var3.ref_12ab0);
-  var8 = var6 && !var7 && istrue(var3.show_charge);
+  var_5 = var_3 getcurrentweapon();
+  var_6 = 1;
+  var_6 &= isDefined(var_5.basename) && var_5.basename == "iw8_me_t9cane_mp";
+  var_7 = istrue(var_3.ref_12ab0);
+  var_8 = var_6 && !var_7 && istrue(var_3.show_charge);
 
-  if(var8) {
-    var3 scripts\cp\vehicles\vehicle_compass_cp::ref_120a4("control_room_puzzle_completed");
-    var9 = getdvarint("scr_br_warpDoor_riddleReward", 5000);
-    var10 = int(var9 / 100);
-    var3 scripts\mp\gametypes\br_plunder::ref_12627(var10);
-    var3 playsoundtoplayer("br_splash_mission_complete", var3);
-    var3 thread scripts\mp\hud_message::showsplash("br_red_door_control_room_splash", 99);
-    var3.ref_12ab0 = 1;
-    var3.show_charge = undefined;
+  if(var_8) {
+    var_3 scripts\cp\vehicles\vehicle_compass_cp::ref_120a4("control_room_puzzle_completed");
+    var_9 = getdvarint("scr_br_warpDoor_riddleReward", 5000);
+    var_10 = int(var_9 / 100);
+    var_3 scripts\mp\gametypes\br_plunder::ref_12627(var_10);
+    var_3 playsoundtoplayer("br_splash_mission_complete", var_3);
+    var_3 thread scripts\mp\hud_message::showsplash("br_red_door_control_room_splash", 99);
+    var_3.ref_12ab0 = 1;
+    var_3.show_charge = undefined;
   } else {
-    var3 playsoundtoplayer("br_splash_mission_failure", var3);
+    var_3 playsoundtoplayer("br_splash_mission_failure", var_3);
   }
 
-  if(var1 == "mound" && var2 == "usable") {
-    var0 setscriptablepartstate("mound", "used");
+  if(var_1 == "mound" && var_2 == "usable") {
+    var_0 setscriptablepartstate("mound", "used");
     return;
   }
 }
 
-function ref_13871(var0, var1) {
+function ref_13871(var_0, var_1) {
   if(!isDefined(level.ref_12aaf)) {
     return;
   }
 
-  if(istrue(level.ref_12aaf.ref_12d38[var0])) {
+  if(istrue(level.ref_12aaf.ref_12d38[var_0])) {
     return;
   }
 
-  level.ref_12aaf.ref_12d38[var0] = 1;
+  level.ref_12aaf.ref_12d38[var_0] = 1;
 
   if(getdvarint("scr_br_warpDoorHweenEnabled", 0)) {
-    thread ref_1273a(var0, var1);
+    thread ref_1273a(var_0, var_1);
     return;
   }
 
-  thread ref_12761(var0, var1);
+  thread ref_12761(var_0, var_1);
 }
 
-function ref_1273a(var0, var1) {
+function ref_1273a(var_0, var_1) {
   level endon("game_ended");
-  var2 = randomint(level.ref_12aaf.safesetalpha.size);
-  var3 = isDefined(var2);
+  var_2 = randomint(level.ref_12aaf.safesetalpha.size);
+  var_3 = isDefined(var_2);
 
-  if(!var3) {
+  if(!var_3) {
     return;
   }
 
   wait 4;
-  var4 = "dx_brm_cont_speaker_message_0";
-  playsoundatpos(var1, var4);
+  var_4 = "dx_brm_cont_speaker_message_0";
+  playsoundatpos(var_1, var_4);
   wait 2.5;
-  var5 = level.ref_12aaf.safesetalpha[var2];
-  playsoundatpos(var1, var5);
-  level.ref_12aaf.ref_12d38[var0] = 0;
+  var_5 = level.ref_12aaf.safesetalpha[var_2];
+  playsoundatpos(var_1, var_5);
+  level.ref_12aaf.ref_12d38[var_0] = 0;
 }
 
-function ref_12761(var0, var1) {
+function ref_12761(var_0, var_1) {
   level endon("game_ended");
-  var2 = level.ref_12aaf.ref_138af[var0];
-  var3 = isDefined(var2);
+  var_2 = level.ref_12aaf.ref_138af[var_0];
+  var_3 = isDefined(var_2);
 
-  if(!var3) {
+  if(!var_3) {
     return;
   }
 
-  for(var4 = 0; var4 < 4; var4++) {
+  for(var_4 = 0; var_4 < 4; var_4++) {
     wait 4;
-    var5 = "dx_brm_cont_speaker_message_0";
-    playsoundatpos(var1, var5);
+    var_5 = "dx_brm_cont_speaker_message_0";
+    playsoundatpos(var_1, var_5);
 
-    foreach(var7 in var2) {
+    foreach(var_7 in var_2) {
       wait 2.5;
-      var8 = level.ref_12aaf.ref_138b0[var7];
-      playsoundatpos(var1, var8);
+      var_8 = level.ref_12aaf.ref_138b0[var_7];
+      playsoundatpos(var_1, var_8);
     }
   }
 
-  level.ref_12aaf.ref_12d38[var0] = 0;
+  level.ref_12aaf.ref_12d38[var_0] = 0;
 }

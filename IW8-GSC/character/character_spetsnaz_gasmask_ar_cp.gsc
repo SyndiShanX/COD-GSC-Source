@@ -40,6 +40,6 @@ function main_mp() {
   self attach(self.jetpackmodel);
 }
 
-function precache_mp(var0) {
-  level.agent_definition[var0]["animclass"] = "suicidebomber_cp";
+function precache_mp(var_0) {
+  level.agent_definition[var_0]["animclass"] = "suicidebomber_cp";
 }

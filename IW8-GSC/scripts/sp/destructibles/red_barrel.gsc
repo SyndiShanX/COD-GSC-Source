@@ -8,10 +8,10 @@ function red_barrel_init() {
   level.g_effect["barrel_flame_small"] = loadfx("vfx/iw8/prop/scriptables/vfx_dest_barrel_fire_sm.vfx");
   level.g_effect["barrel_explosion"] = loadfx("vfx/iw8/prop/scriptables/vfx_red_barrel_exp.vfx");
   level.g_effect["barrel_fire"] = loadfx("vfx/iw8/prop/scriptables/vfx_dest_barrel_fire.vfx");
-  var0 = getallredbarrels();
+  var_0 = getallredbarrels();
 
-  foreach(var2 in var0) {
-    if(is_molotov_barrel(var2)) {
+  foreach(var_2 in var_0) {
+    if(is_molotov_barrel(var_2)) {
       thread moltovrefillthink();
       continue;
     }
@@ -25,29 +25,29 @@ function red_barrel() {
   self endon("barrel_delete");
   scripts\sp\destructibles\barrel_common::barrel_setup("red", 450, 250, 9100, 15000, 80, 28);
   thread red_barrel_death();
-  var0 = 999999999;
-  var1 = 4;
-  var2 = 0;
+  var_0 = 999999999;
+  var_1 = 4;
+  var_2 = 0;
   self.health = 9450;
-  var3 = undefined;
+  var_3 = undefined;
 
   for(;;) {
-    self waittill("damage", var4, var5, var6, var7, var8, var9, var10, var11, var12, var13);
+    self waittill("damage", var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
 
-    if(!scripts\sp\destructibles\barrel_common::isvalidbarreldamage(var5, var8)) {
-      self.health += var4;
+    if(!scripts\sp\destructibles\barrel_common::isvalidbarreldamage(var_5, var_8)) {
+      self.health += var_4;
       continue;
     }
 
-    var3 = var5;
+    var_3 = var_5;
     self.barrel_health = self.health - 9000;
 
-    if(barrelshouldexplode(var5, var7, var8, var13)) {
+    if(barrelshouldexplode(var_5, var_7, var_8, var_13)) {
       break;
     }
 
     if(self.barrel_health <= 449) {
-      if(!var2) {
+      if(!var_2) {
         if(soundexists("o2_barrel_fire")) {
           thread scripts\engine\utility::play_loop_sound_on_entity("o2_barrel_fire");
         }
@@ -61,82 +61,82 @@ function red_barrel() {
         }
 
         badplace_cylinder("barrel_badplace_" + self getentitynumber(), 0, self.origin, 128, 128, "bad_guys");
-        var2 = 1;
+        var_2 = 1;
         self.onfire = 1;
       }
 
-      var14 = self.barrel_health / 449;
-      var15 = (gettime() - var0) / 1000;
+      var_14 = self.barrel_health / 449;
+      var_15 = (gettime() - var_0) / 1000;
 
-      if(4 * var14 < var1 - var15) {
-        var1 = 4 * var14;
-        thread scripts\sp\destructibles\barrel_common::barrel_fusetimer(var1);
-        var0 = gettime();
+      if(4 * var_14 < var_1 - var_15) {
+        var_1 = 4 * var_14;
+        thread scripts\sp\destructibles\barrel_common::barrel_fusetimer(var_1);
+        var_0 = gettime();
       }
     }
 
-    if(isDefined(var6)) {
-      var16 = length(var6);
+    if(isDefined(var_6)) {
+      var_16 = length(var_6);
 
-      if(var16 > 20) {
-        var17 = vectorNormalize(var6);
-        var18 = 20;
+      if(var_16 > 20) {
+        var_17 = vectorNormalize(var_6);
+        var_18 = 20;
 
-        if(isDefined(var8) && var8 == "MOD_IMPACT") {
-          var18 = 3;
+        if(isDefined(var_8) && var_8 == "MOD_IMPACT") {
+          var_18 = 3;
         }
 
-        var6 = var17 * var18;
+        var_6 = var_17 * var_18;
       }
 
-      self physicslaunchserver(var7, var6 * 1000);
+      self physicslaunchserver(var_7, var_6 * 1000);
     }
 
-    if(!isDefined(var8)) {
+    if(!isDefined(var_8)) {
       continue;
     }
 
-    var19 = strtok(var8, "_");
+    var_19 = strtok(var_8, "_");
 
-    if(!scripts\engine\utility::array_contains(var19, "BULLET")) {
+    if(!scripts\engine\utility::array_contains(var_19, "BULLET")) {
       continue;
     }
 
-    var20 = scripts\engine\utility::spawn_tag_origin(var7);
-    var21 = vectorNormalize(self.origin - var7);
-    var22 = vectortoangles(var21 * -1);
-    var20.angles = scripts\engine\utility::flat_angle(var22);
-    var20 linkTo(self);
+    var_20 = scripts\engine\utility::spawn_tag_origin(var_7);
+    var_21 = vectorNormalize(self.origin - var_7);
+    var_22 = vectortoangles(var_21 * -1);
+    var_20.angles = scripts\engine\utility::flat_angle(var_22);
+    var_20 linkTo(self);
 
     if(soundexists("o2_barrel_hiss_loop")) {
-      var20 thread scripts\engine\utility::play_loop_sound_on_entity("o2_barrel_hiss_loop");
+      var_20 thread scripts\engine\utility::play_loop_sound_on_entity("o2_barrel_hiss_loop");
     }
 
-    playFXOnTag(level.g_effect["barrel_flame_small"], var20, "tag_origin");
-    self.spewtags = scripts\engine\utility::array_add(self.spewtags, var20);
+    playFXOnTag(level.g_effect["barrel_flame_small"], var_20, "tag_origin");
+    self.spewtags = scripts\engine\utility::array_add(self.spewtags, var_20);
   }
 
   while(isDefined(self.dont_explode)) {
     waitframe();
   }
 
-  self notify("barrel_death", var3);
+  self notify("barrel_death", var_3);
 }
 
-function barrelshouldexplode(var0, var1, var2, var3) {
+function barrelshouldexplode(var_0, var_1, var_2, var_3) {
   if(self.barrel_health <= 0) {
     return true;
   }
 
-  if(scripts\sp\destructibles\barrel_common::isgrenadeinrange(var1, var2, 80)) {
+  if(scripts\sp\destructibles\barrel_common::isgrenadeinrange(var_1, var_2, 80)) {
     return true;
   }
 
-  if(scripts\sp\destructibles\barrel_common::isdirectunderbarrelhit(var2)) {
+  if(scripts\sp\destructibles\barrel_common::isdirectunderbarrelhit(var_2)) {
     return true;
   }
 
-  if(scripts\sp\destructibles\barrel_common::isplayersniperhit(var0, var3)) {
+  if(scripts\sp\destructibles\barrel_common::isplayersniperhit(var_0, var_3)) {
     return true;
   }
 
@@ -145,7 +145,7 @@ function barrelshouldexplode(var0, var1, var2, var3) {
 
 function red_barrel_death() {
   self endon("barrel_delete");
-  self waittill("barrel_death", var0);
+  self waittill("barrel_death", var_0);
 
   if(soundexists("o2_barrel_fire") && isDefined(self.onfire) && self.onfire) {
     self notify("stop soundo2_barrel_fire");
@@ -154,107 +154,107 @@ function red_barrel_death() {
   physicsexplosionsphere(self.origin, self.phys_barrel_radius, 0, 2);
   earthquake(0.5, 0.8, self.origin, 400);
   thread scripts\sp\destructibles\barrel_common::barrel_block_gesture(200, self.origin);
-  var1 = 0.3;
-  var2 = sortbydistance(level.phys_barrels, self.origin);
+  var_1 = 0.3;
+  var_2 = sortbydistance(level.phys_barrels, self.origin);
 
-  foreach(var4 in var2) {
-    if(var4 == self) {
+  foreach(var_4 in var_2) {
+    if(var_4 == self) {
       continue;
     }
 
-    var5 = distance(self.origin, var4.origin);
+    var_5 = distance(self.origin, var_4.origin);
 
-    if(var5 > self.phys_barrel_radius) {
+    if(var_5 > self.phys_barrel_radius) {
       continue;
     }
 
-    var6 = self.phys_barrel_radius - var5;
-    var7 = var6 / self.phys_barrel_radius;
-    var8 = var1 * var7;
+    var_6 = self.phys_barrel_radius - var_5;
+    var_7 = var_6 / self.phys_barrel_radius;
+    var_8 = var_1 * var_7;
 
-    if(var5 <= self.phys_barrel_radius) {
-      var4 thread scripts\sp\destructibles\barrel_common::barrel_launch(self.origin, var5, var8);
+    if(var_5 <= self.phys_barrel_radius) {
+      var_4 thread scripts\sp\destructibles\barrel_common::barrel_launch(self.origin, var_5, var_8);
     }
 
-    if(var5 <= 200) {
-      thread red_barrel_hit(var4, self.origin, var5);
+    if(var_5 <= 200) {
+      thread red_barrel_hit(var_4, self.origin, var_5);
     }
   }
 
-  var10 = scripts\engine\sp\utility::getvehiclearray();
+  var_10 = scripts\engine\sp\utility::getvehiclearray();
 
-  foreach(var12 in var10) {
-    var13 = 400;
-    var14 = 370;
-    var15 = distance(self.origin, var12.origin);
-    var15 = 0;
+  foreach(var_12 in var_10) {
+    var_13 = 400;
+    var_14 = 370;
+    var_15 = distance(self.origin, var_12.origin);
+    var_15 = 0;
 
-    if(var15 <= 19000) {
-      var7 = var15 / 190 * 100;
-      var13 -= var7 * var14;
+    if(var_15 <= 19000) {
+      var_7 = var_15 / 190 * 100;
+      var_13 -= var_7 * var_14;
 
       if(getdvarint("barrel_debug")) {
-        iprintln("BARREL DID " + var13 + " TO VEH");
+        iprintln("BARREL DID " + var_13 + " TO VEH");
       }
 
-      var12 scripts\sp\utility::do_damage(var13, self.origin, self, self, "MOD_EXPLOSIVE");
+      var_12 scripts\sp\utility::do_damage(var_13, self.origin, self, self, "MOD_EXPLOSIVE");
       LOC_000001c8:
     }
     LOC_000001c8:
   }
 
-  var17 = getaiarray();
+  var_17 = getaiarray();
 
-  foreach(var19 in var17) {
-    if(!istrue(var19.magic_bullet_shield)) {
-      var17 = scripts\engine\utility::array_remove(var17, var19);
+  foreach(var_19 in var_17) {
+    if(!istrue(var_19.magic_bullet_shield)) {
+      var_17 = scripts\engine\utility::array_remove(var_17, var_19);
     }
   }
 
-  var21 = scripts\engine\trace::sphere_trace_get_all_results(self.origin, self.origin, 190, var17, scripts\engine\trace::create_character_contents(), 0);
-  var22 = 0;
+  var_21 = scripts\engine\trace::sphere_trace_get_all_results(self.origin, self.origin, 190, var_17, scripts\engine\trace::create_character_contents(), 0);
+  var_22 = 0;
 
-  foreach(var24 in var21) {
-    var25 = var24["fraction"];
+  foreach(var_24 in var_21) {
+    var_25 = var_24["fraction"];
 
-    if(isDefined(var25) && var25 != 1) {
-      var26 = var24["entity"];
+    if(isDefined(var_25) && var_25 != 1) {
+      var_26 = var_24["entity"];
 
-      if(isai(var26)) {
-        var22++;
-        var27 = scripts\engine\utility::is_equal(var26.subclass, "juggernaut");
-        var28 = scripts\engine\utility::ter_op(var27 == 1, 1000, var26.health + 999999);
+      if(isai(var_26)) {
+        var_22++;
+        var_27 = scripts\engine\utility::is_equal(var_26.subclass, "juggernaut");
+        var_28 = scripts\engine\utility::ter_op(var_27 == 1, 1000, var_26.health + 999999);
 
-        if(!var27 && randomint(100) < 0) {
-          thread scripts\sp\equipment\molotov::molotovburnenemy(var26, 1, self.origin);
-        } else if(!var27 && isDefined(level.aigibfunction)) {
-          if(isDefined(var0)) {
-            var0 scripts\engine\utility::delaythread(0.15, level.aigibfunction, var26, self.origin, "MOD_EXPLOSIVE");
+        if(!var_27 && randomint(100) < 0) {
+          thread scripts\sp\equipment\molotov::molotovburnenemy(var_26, 1, self.origin);
+        } else if(!var_27 && isDefined(level.aigibfunction)) {
+          if(isDefined(var_0)) {
+            var_0 scripts\engine\utility::delaythread(0.15, level.aigibfunction, var_26, self.origin, "MOD_EXPLOSIVE");
           } else {
-            scripts\engine\utility::delaythread(0.15, level.aigibfunction, var26, self.origin, "MOD_EXPLOSIVE");
+            scripts\engine\utility::delaythread(0.15, level.aigibfunction, var_26, self.origin, "MOD_EXPLOSIVE");
           }
         } else {
-          var26 scripts\sp\utility::do_damage(var28, self.origin, self, self, "MOD_EXPLOSIVE");
+          var_26 scripts\sp\utility::do_damage(var_28, self.origin, self, self, "MOD_EXPLOSIVE");
         }
       }
     }
   }
 
-  var30 = distance(self.origin, level.player.origin);
+  var_30 = distance(self.origin, level.player.origin);
 
-  if(var30 <= 200) {
-    var7 = var30 / 200;
-    var14 = 420;
-    var13 = 420 - var7 * var14;
+  if(var_30 <= 200) {
+    var_7 = var_30 / 200;
+    var_14 = 420;
+    var_13 = 420 - var_7 * var_14;
 
     if(getdvarint("barrel_debug")) {
-      iprintln("BARREL DID " + var13 + " TO PLAYER");
+      iprintln("BARREL DID " + var_13 + " TO PLAYER");
     }
 
-    level.player scripts\sp\utility::do_damage(var13, self.origin, self, self, "MOD_EXPLOSIVE");
+    level.player scripts\sp\utility::do_damage(var_13, self.origin, self, self, "MOD_EXPLOSIVE");
   }
 
-  level notify("red_barrel_explosion", self, var22);
+  level notify("red_barrel_explosion", self, var_22);
   radiusdamage(self.origin, 2, 1, 0, self);
   badplace_delete("barrel_badplace_" + self getentitynumber());
 
@@ -270,12 +270,12 @@ function red_barrel_death() {
 
   playFX(level.g_effect["barrel_explosion"], self.origin);
 
-  foreach(var32 in self.spewtags) {
-    killfxontag(level.g_effect["barrel_flame_small"], var32, "tag_origin");
+  foreach(var_32 in self.spewtags) {
+    killfxontag(level.g_effect["barrel_flame_small"], var_32, "tag_origin");
     waitframe();
 
-    if(isDefined(var32)) {
-      var32 delete();
+    if(isDefined(var_32)) {
+      var_32 delete();
     }
   }
 
@@ -295,8 +295,8 @@ function red_barrel_death() {
   }
 }
 
-function delay_delete(var0) {
-  wait var0;
+function delay_delete(var_0) {
+  wait var_0;
 
   if(isDefined(self)) {
     self delete();
@@ -304,10 +304,10 @@ function delay_delete(var0) {
   }
 }
 
-function red_barrel_hit(var0, var1, var2) {
+function red_barrel_hit(var_0, var_1, var_2) {
   self endon("barrel_death");
   self endon("barrel_delete");
-  wait var2;
+  wait var_2;
 
   if(!isDefined(self)) {
     return;
@@ -317,19 +317,19 @@ function red_barrel_hit(var0, var1, var2) {
     return;
   }
 
-  var3 = 95;
-  var4 = 200;
+  var_3 = 95;
+  var_4 = 200;
 
-  if(var1 <= 90) {
-    var5 = 20;
-    var6 = (90 - var1) / var4;
-    var7 = 1 + var6 * var5;
+  if(var_1 <= 90) {
+    var_5 = 20;
+    var_6 = (90 - var_1) / var_4;
+    var_7 = 1 + var_6 * var_5;
   } else {
-    var6 = (var7 - var3) / var7;
-    var7 = var6 * var6;
+    var_6 = (var_7 - var_3) / var_7;
+    var_7 = var_6 * var_6;
   }
 
-  self notify("damage", var7, undefined, undefined, undefined, "MOD_EXPLOSIVE", undefined, undefined, undefined, undefined, undefined);
+  self notify("damage", var_7, undefined, undefined, undefined, "MOD_EXPLOSIVE", undefined, undefined, undefined, undefined, undefined);
 }
 
 function moltovrefillthink() {
@@ -337,9 +337,9 @@ function moltovrefillthink() {
   thread createmoltovinteractwhenavailable();
 
   for(;;) {
-    var0 = scripts\engine\utility::waittill_any_return_no_endon_death("trigger", "barrel_death", "death");
+    var_0 = scripts\engine\utility::waittill_any_return_no_endon_death("trigger", "barrel_death", "death");
 
-    if(var0 == "trigger") {
+    if(var_0 == "trigger") {
       self.interactable = 0;
       molotovrefilltriggerthink();
 
@@ -349,9 +349,9 @@ function moltovrefillthink() {
     } else {
       removemoltovinteract();
 
-      foreach(var2 in self.molotovs) {
-        if(isDefined(var2)) {
-          var2 delete();
+      foreach(var_2 in self.molotovs) {
+        if(isDefined(var_2)) {
+          var_2 delete();
         }
       }
 
@@ -365,11 +365,11 @@ function moltovrefillthink() {
 }
 
 function removeallmolotovinteractsuntilavailable() {
-  var0 = getEntArray("phys_barrel_destructible", "targetname");
+  var_0 = getEntArray("phys_barrel_destructible", "targetname");
 
-  foreach(var2 in var0) {
-    if(is_molotov_barrel(var2)) {
-      removemoltovinteract(var2);
+  foreach(var_2 in var_0) {
+    if(is_molotov_barrel(var_2)) {
+      removemoltovinteract(var_2);
       thread createmoltovinteractwhenavailable();
     }
   }
@@ -404,10 +404,10 @@ function createmoltovinteractwhenavailable() {
   self endon("wait_for_interact_available");
   self endon("death");
   wait 0.05;
-  var0 = weaponmaxammo("molotov");
+  var_0 = weaponmaxammo("molotov");
 
   for(;;) {
-    if(level.player getammocount("molotov") < var0 && !ishidden()) {
+    if(level.player getammocount("molotov") < var_0 && !ishidden()) {
       break;
     }
 
@@ -434,11 +434,11 @@ function molotov_refill_hide() {
     return;
   }
 
-  var0 = scripts\engine\utility::array_add(self.molotovs, self);
+  var_0 = scripts\engine\utility::array_add(self.molotovs, self);
 
-  foreach(var2 in var0) {
-    var2 hide();
-    var2 notsolid();
+  foreach(var_2 in var_0) {
+    var_2 hide();
+    var_2 notsolid();
   }
 
   removemoltovinteract();
@@ -454,11 +454,11 @@ function molotov_refill_show() {
     return;
   }
 
-  var0 = scripts\engine\utility::array_add(self.molotovs, self);
+  var_0 = scripts\engine\utility::array_add(self.molotovs, self);
 
-  foreach(var2 in var0) {
-    var2 show();
-    var2 solid();
+  foreach(var_2 in var_0) {
+    var_2 show();
+    var_2 solid();
   }
 
   createmoltovinteractwhenavailable();
@@ -474,18 +474,18 @@ function is_molotov_barrel() {
 }
 
 function molotovrefilltriggerthink() {
-  var0 = level.player getweaponslistoffhands();
+  var_0 = level.player getweaponslistoffhands();
 
-  if(!playerhasmolotovs(var0)) {
+  if(!playerhasmolotovs(var_0)) {
     level.player scripts\engine\sp\utility::give_offhand("molotov");
     level.player setweaponammoclip("molotov", 0);
   }
 
-  var1 = weaponmaxammo("molotov");
-  var2 = var1 - level.player getammocount("molotov");
-  var3 = min(self.molotovs.size, var2);
+  var_1 = weaponmaxammo("molotov");
+  var_2 = var_1 - level.player getammocount("molotov");
+  var_3 = min(self.molotovs.size, var_2);
 
-  for(var4 = 0; var4 < var3; var4++) {
+  for(var_4 = 0; var_4 < var_3; var_4++) {
     lootoffhandhack();
     self.molotovs[self.molotovs.size - 1] delete();
     self.molotovs = scripts\engine\utility::array_remove(self.molotovs, self.molotovs[self.molotovs.size - 1]);
@@ -493,9 +493,9 @@ function molotovrefilltriggerthink() {
   }
 }
 
-function playerhasmolotovs(var0) {
-  foreach(var2 in var0) {
-    if(var2.basename == "molotov") {
+function playerhasmolotovs(var_0) {
+  foreach(var_2 in var_0) {
+    if(var_2.basename == "molotov") {
       return true;
     }
   }
@@ -508,12 +508,12 @@ function getallredbarrels() {
 }
 
 function lootoffhandhack() {
-  var0 = "Molotov";
-  level.player thread[[level.loot.types[var0].lootfunc]](var0);
-  scripts\sp\loot::playlootsound(var0);
+  var_0 = "Molotov";
+  level.player thread[[level.loot.types[var_0].lootfunc]](var_0);
+  scripts\sp\loot::playlootsound(var_0);
 
-  if(level.loot.types[var0].createnotification) {
-    thread scripts\sp\loot::createnotification(level.loot.types[var0].shader, level.loot.types[var0].loc);
+  if(level.loot.types[var_0].createnotification) {
+    thread scripts\sp\loot::createnotification(level.loot.types[var_0].shader, level.loot.types[var_0].loc);
     return;
   }
 }

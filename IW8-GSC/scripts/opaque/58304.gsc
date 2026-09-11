@@ -15,7 +15,7 @@ function supply_crate_vo_when_used() {
     waitframe();
   }
 
-  var0 = scripts\engine\utility::getStructArray("trial_enemy_sentry_turret", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("trial_enemy_sentry_turret", "targetname");
 
   while(!isDefined(level.sentrysettings)) {
     waitframe();
@@ -25,89 +25,89 @@ function supply_crate_vo_when_used() {
   level.sentrysettings["trial_sentry_turret"].spinuptime = level.sentrysettings["trial_sentry_turret"].spinuptime * 2;
   level.sentrysettings["trial_sentry_turret"].health = 150;
 
-  foreach(var2 in var0) {
+  foreach(var_2 in var_0) {
     waitframe();
-    level.ref_13d65[level.ref_13d65.size] = ref_131ea(var2);
+    level.ref_13d65[level.ref_13d65.size] = ref_131ea(var_2);
   }
 
   level.ref_13022 = 1;
 }
 
-function ref_131ea(var0, var1) {
-  var2 = "trial_sentry_turret";
-  var3 = level.sentrysettings[var2];
-  var4 = spawnturret("misc_turret", var0.origin, level.sentrysettings[var2].weaponinfo);
-  var4.team = scripts\mp\utility\game::getotherteam(level.trial["team"])[0];
+function ref_131ea(var_0, var_1) {
+  var_2 = "trial_sentry_turret";
+  var_3 = level.sentrysettings[var_2];
+  var_4 = spawnturret("misc_turret", var_0.origin, level.sentrysettings[var_2].weaponinfo);
+  var_4.team = scripts\mp\utility\game::getotherteam(level.trial["team"])[0];
 
-  if(!isDefined(var0.angles)) {
-    var0.angles = (0, 0, 0);
+  if(!isDefined(var_0.angles)) {
+    var_0.angles = (0, 0, 0);
   }
 
-  var4.angles = var0.angles;
-  var4.health = var3.maxhealth;
-  var4.maxhealth = var3.maxhealth;
-  var4.sentrytype = var2;
-  var4.momentum = 0;
-  var4.heatlevel = 0;
-  var4.overheated = 0;
-  var4.cooldownwaittime = 2;
-  var4.turrettype = "sentry_turret";
+  var_4.angles = var_0.angles;
+  var_4.health = var_3.maxhealth;
+  var_4.maxhealth = var_3.maxhealth;
+  var_4.sentrytype = var_2;
+  var_4.momentum = 0;
+  var_4.heatlevel = 0;
+  var_4.overheated = 0;
+  var_4.cooldownwaittime = 2;
+  var_4.turrettype = "sentry_turret";
 
-  if(!isDefined(var1)) {
-    var1 = "weapon_wm_mg_sentry_turret";
+  if(!isDefined(var_1)) {
+    var_1 = "weapon_wm_mg_sentry_turret";
   }
 
-  var4 setModel(var1);
-  var4 setturretteam(var4.team);
-  var4 makeunusable();
-  var4 setnodeploy(1);
-  var4 setdefaultdroppitch(0);
-  var4 setautorotationdelay(0.2);
-  var4 maketurretinoperable();
-  var4 setleftarc(80);
-  var4 setrightarc(80);
-  var4 setbottomarc(50);
-  var4 settoparc(60);
-  var4 setconvergencetime(0.6, "pitch");
-  var4 setconvergencetime(0.6, "yaw");
-  var4 setconvergenceheightpercent(0.65);
-  var4 setdefaultdroppitch(-89);
-  var4 setturretmodechangewait(1);
-  var4 solid();
-  var0.turret = var4;
+  var_4 setModel(var_1);
+  var_4 setturretteam(var_4.team);
+  var_4 makeunusable();
+  var_4 setnodeploy(1);
+  var_4 setdefaultdroppitch(0);
+  var_4 setautorotationdelay(0.2);
+  var_4 maketurretinoperable();
+  var_4 setleftarc(80);
+  var_4 setrightarc(80);
+  var_4 setbottomarc(50);
+  var_4 settoparc(60);
+  var_4 setconvergencetime(0.6, "pitch");
+  var_4 setconvergencetime(0.6, "yaw");
+  var_4 setconvergenceheightpercent(0.65);
+  var_4 setdefaultdroppitch(-89);
+  var_4 setturretmodechangewait(1);
+  var_4 solid();
+  var_0.turret = var_4;
   wait 1;
-  var4 setmode("auto_nonai");
+  var_4 setmode("auto_nonai");
   thread is_attack_available();
   thread sentry_attacktargets();
   thread sentry_handledeath();
   thread sentry_handledamage();
-  var4 thread scripts\cp_mp\killstreaks\sentry_gun::sentry_beepsounds();
-  var4.helperdrone_isbeingpingedbydrone = spawn("script_model", var4.origin);
-  var4.helperdrone_isbeingpingedbydrone setModel("weapon_vm_mg_sentry_turret_invis_base");
-  var4.helperdrone_isbeingpingedbydrone dontinterpolate();
-  var4.helperdrone_isbeingpingedbydrone.angles = var4.angles;
-  var4.helperdrone_isbeingpingedbydrone.origin = var4.origin;
-  var4.helperdrone_isbeingpingedbydrone linkTo(var4, "tag_aim_pivot");
-  var5 = "icon_minimap_sentry";
-  var4.minimapid = var4.helperdrone_isbeingpingedbydrone scripts\mp\objidpoolmanager::createobjective(var5, var4.team, undefined, 1, 1);
+  var_4 thread scripts\cp_mp\killstreaks\sentry_gun::sentry_beepsounds();
+  var_4.helperdrone_isbeingpingedbydrone = spawn("script_model", var_4.origin);
+  var_4.helperdrone_isbeingpingedbydrone setModel("weapon_vm_mg_sentry_turret_invis_base");
+  var_4.helperdrone_isbeingpingedbydrone dontinterpolate();
+  var_4.helperdrone_isbeingpingedbydrone.angles = var_4.angles;
+  var_4.helperdrone_isbeingpingedbydrone.origin = var_4.origin;
+  var_4.helperdrone_isbeingpingedbydrone linkTo(var_4, "tag_aim_pivot");
+  var_5 = "icon_minimap_sentry";
+  var_4.minimapid = var_4.helperdrone_isbeingpingedbydrone scripts\mp\objidpoolmanager::createobjective(var_5, var_4.team, undefined, 1, 1);
 
   if(isDefined(level.ref_13d85)) {
-    var4 thread[[level.ref_13d85]]();
+    var_4 thread[[level.ref_13d85]]();
   }
 
-  return var4;
+  return var_4;
 }
 
 function node_fields_after_goal_skit() {
   self endon("death");
   self endon("kill_turret");
   level endon("game_ended");
-  var0 = self.origin;
-  var1 = 0.05;
-  var2 = int(var1 * 20);
+  var_0 = self.origin;
+  var_1 = 0.05;
+  var_2 = int(var_1 * 20);
 
   for(;;) {
-    wait var1;
+    wait var_1;
   }
 }
 
@@ -118,20 +118,20 @@ function is_attack_available() {
   self setCanDamage(1);
 
   for(;;) {
-    self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14);
 
-    if(!isDefined(var1) || !isPlayer(var1) && (!isDefined(var1.owner) || !isPlayer(var1.owner))) {
+    if(!isDefined(var_1) || !isPlayer(var_1) && (!isDefined(var_1.owner) || !isPlayer(var_1.owner))) {
       continue;
     }
 
-    if(isDefined(var9.basename)) {
-      if(issubstr(var9.basename, "emp_drone")) {}
+    if(isDefined(var_9.basename)) {
+      if(issubstr(var_9.basename, "emp_drone")) {}
     }
 
-    var15 = isDefined(var1) && isPlayer(var1);
-    var16 = isDefined(var1.owner) && isPlayer(var1.owner);
-    var17 = isDefined(var1.classname) && var1.classname == "script_vehicle" && isDefined(var1.owner) && isPlayer(var1.owner);
-    var18 = var17 && var4 == "MOD_CRUSH";
+    var_15 = isDefined(var_1) && isPlayer(var_1);
+    var_16 = isDefined(var_1.owner) && isPlayer(var_1.owner);
+    var_17 = isDefined(var_1.classname) && var_1.classname == "script_vehicle" && isDefined(var_1.owner) && isPlayer(var_1.owner);
+    var_18 = var_17 && var_4 == "MOD_CRUSH";
   }
 }
 
@@ -185,23 +185,23 @@ function sentry_burstfirestart() {
   self endon("stop_shooting");
   level endon("game_ended");
   sentry_spinup();
-  var0 = 4 * weaponfiretime(level.sentrysettings[self.sentrytype].weaponinfo);
-  var1 = level.sentrysettings[self.sentrytype].burstmin;
-  var2 = level.sentrysettings[self.sentrytype].burstmax;
-  var3 = level.sentrysettings[self.sentrytype].pausemin;
-  var4 = level.sentrysettings[self.sentrytype].pausemax;
+  var_0 = 4 * weaponfiretime(level.sentrysettings[self.sentrytype].weaponinfo);
+  var_1 = level.sentrysettings[self.sentrytype].burstmin;
+  var_2 = level.sentrysettings[self.sentrytype].burstmax;
+  var_3 = level.sentrysettings[self.sentrytype].pausemin;
+  var_4 = level.sentrysettings[self.sentrytype].pausemax;
 
   for(;;) {
-    var5 = randomintrange(var1, var2 + 1);
+    var_5 = randomintrange(var_1, var_2 + 1);
 
-    for(var6 = 0; var6 < var5 && !self.overheated; var6++) {
+    for(var_6 = 0; var_6 < var_5 && !self.overheated; var_6++) {
       self shootturret();
       self notify("bullet_fired");
-      self.heatlevel += var0;
-      wait var0;
+      self.heatlevel += var_0;
+      wait var_0;
     }
 
-    wait randomfloatrange(var3, var4);
+    wait randomfloatrange(var_3, var_4);
   }
 }
 
@@ -215,25 +215,25 @@ function sentry_heatmonitor() {
   }
 
   self endon("death");
-  var0 = weaponfiretime(level.sentrysettings[self.sentrytype].weaponinfo);
-  var1 = 0;
-  var2 = 0;
-  var3 = level.sentrysettings[self.sentrytype].overheattime;
-  var4 = level.sentrysettings[self.sentrytype].cooldowntime;
+  var_0 = weaponfiretime(level.sentrysettings[self.sentrytype].weaponinfo);
+  var_1 = 0;
+  var_2 = 0;
+  var_3 = level.sentrysettings[self.sentrytype].overheattime;
+  var_4 = level.sentrysettings[self.sentrytype].cooldowntime;
 
   for(;;) {
-    if(self.heatlevel != var1) {
-      wait var0;
+    if(self.heatlevel != var_1) {
+      wait var_0;
     } else {
       self.heatlevel = max(0, self.heatlevel - 0.05);
     }
 
-    if(self.heatlevel > var3) {
+    if(self.heatlevel > var_3) {
       self.overheated = 1;
       thread playheatfx();
 
       while(self.heatlevel) {
-        self.heatlevel = max(0, self.heatlevel - var4);
+        self.heatlevel = max(0, self.heatlevel - var_4);
         wait 0.1;
       }
 
@@ -241,7 +241,7 @@ function sentry_heatmonitor() {
       self notify("not_overheated");
     }
 
-    var1 = self.heatlevel;
+    var_1 = self.heatlevel;
     wait 0.05;
   }
 }
@@ -296,10 +296,10 @@ function sentry_handledeath() {
 
 function sentry_handledamage() {
   for(;;) {
-    self waittill("damage", var0, var1);
+    self waittill("damage", var_0, var_1);
 
-    if(var1 == level.player) {
-      var1 scripts\mp\damagefeedback::updatedamagefeedback("hitequip");
+    if(var_1 == level.player) {
+      var_1 scripts\mp\damagefeedback::updatedamagefeedback("hitequip");
       self.cave_combat = gettime();
     }
   }

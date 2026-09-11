@@ -71,35 +71,35 @@ function updategametypedvars() {
   level.controltoprogress = 1;
 }
 
-function onstartgametype(var0) {
+function onstartgametype(var_0) {
   GscBinSkip1(0x45, 0, "dd");
 }
 
 function initspawns() {
-  var0 = level.tacopsspawns;
+  var_0 = level.tacopsspawns;
   scripts\mp\spawnlogic::addspawnpoints("allies", "mp_toair_spawn_allies");
   scripts\mp\spawnlogic::addspawnpoints("axis", "mp_toair_spawn_axis");
-  var0.to_air_spawns = [];
-  var0.to_air_spawns["allies"] = scripts\mp\spawnlogic::getspawnpointarray("mp_toair_spawn_allies");
-  var0.to_air_spawns["axis"] = scripts\mp\spawnlogic::getspawnpointarray("mp_toair_spawn_axis");
+  var_0.to_air_spawns = [];
+  var_0.to_air_spawns["allies"] = scripts\mp\spawnlogic::getspawnpointarray("mp_toair_spawn_allies");
+  var_0.to_air_spawns["axis"] = scripts\mp\spawnlogic::getspawnpointarray("mp_toair_spawn_axis");
 }
 
 function getspawnpoint() {
-  var0 = level.tacopsspawns;
-  var1 = self.pers["team"];
-  var2 = undefined;
-  var2 = var0.to_air_spawns[var1];
-  var2 = scripts\mp\tac_ops_map::filterspawnpoints(var2);
-  var3 = undefined;
+  var_0 = level.tacopsspawns;
+  var_1 = self.pers["team"];
+  var_2 = undefined;
+  var_2 = var_0.to_air_spawns[var_1];
+  var_2 = scripts\mp\tac_ops_map::filterspawnpoints(var_2);
+  var_3 = undefined;
 
   if(isDefined(self.tacopsmapselectedarea.dynamicent)) {
-    var4 = isDefined(level.escortheli[0]) && self.tacopsmapselectedarea.dynamicent == level.escortheli[0];
-    var5 = isDefined(level.escortheli[1]) && self.tacopsmapselectedarea.dynamicent == level.escortheli[1];
-    var6 = isDefined(level.escortheli[2]) && self.tacopsmapselectedarea.dynamicent == level.escortheli[2];
+    var_4 = isDefined(level.escortheli[0]) && self.tacopsmapselectedarea.dynamicent == level.escortheli[0];
+    var_5 = isDefined(level.escortheli[1]) && self.tacopsmapselectedarea.dynamicent == level.escortheli[1];
+    var_6 = isDefined(level.escortheli[2]) && self.tacopsmapselectedarea.dynamicent == level.escortheli[2];
 
-    if(var4 || var5 && level.escortheli[1].spawnoccupied || var6 && level.escortheli[2].spawnoccupied) {
-      var7 = scripts\engine\utility::player_drop_to_ground(self.tacopsmapselectedarea.dynamicent.origin, 32, 0, -1500, (0, 0, 1));
-      self.tacopsmapselectedarea.dynamicent.spawnorigin = var7;
+    if(var_4 || var_5 && level.escortheli[1].spawnoccupied || var_6 && level.escortheli[2].spawnoccupied) {
+      var_7 = scripts\engine\utility::player_drop_to_ground(self.tacopsmapselectedarea.dynamicent.origin, 32, 0, -1500, (0, 0, 1));
+      self.tacopsmapselectedarea.dynamicent.spawnorigin = var_7;
     } else if(isDefined(level.escortheli[1]) && self.tacopsmapselectedarea.dynamicent == level.escortheli[1]) {
       self.tacopsmapselectedarea.dynamicent.spawnorigin = self.tacopsmapselectedarea.dynamicent.origin;
       thread enterattackheli(level.escortheli[1].owner);
@@ -108,15 +108,15 @@ function getspawnpoint() {
       thread enterattackheli(level.escortheli[2].owner);
     }
 
-    var8 = anglesToForward(self.tacopsmapselectedarea.dynamicent.angles);
-    var8 *= (1, 1, 0);
-    var9 = (0, 0, 1);
-    var10 = vectorcross(var8, var9);
-    var11 = axistoangles(var8, var10, var9);
-    self.tacopsmapselectedarea.dynamicent.spawnangles = var11;
+    var_8 = anglesToForward(self.tacopsmapselectedarea.dynamicent.angles);
+    var_8 *= (1, 1, 0);
+    var_9 = (0, 0, 1);
+    var_10 = vectorcross(var_8, var_9);
+    var_11 = axistoangles(var_8, var_10, var_9);
+    self.tacopsmapselectedarea.dynamicent.spawnangles = var_11;
   }
 
-  return var3;
+  return var_3;
 }
 
 function activatespawns() {
@@ -126,25 +126,25 @@ function activatespawns() {
   level.getspawnpoint = &getspawnpoint;
 }
 
-function onnormaldeath(var0, var1, var2, var3, var4) {
-  scripts\mp\gametypes\common::oncommonnormaldeath(var0, var1, var2, var3, var4);
+function onnormaldeath(var_0, var_1, var_2, var_3, var_4) {
+  scripts\mp\gametypes\common::oncommonnormaldeath(var_0, var_1, var_2, var_3, var_4);
 }
 
 function onspawnplayer() {
-  var0 = 0;
+  var_0 = 0;
 
   if(self.team == "allies") {
-    var0 = 1;
+    var_0 = 1;
 
     if(!istrue(level.spawnedescortchopper)) {
       level.spawnedescortchopper = 1;
       thread setupheliobjective();
     }
   } else if(self.team == "axis") {
-    var0 = 2;
+    var_0 = 2;
   }
 
-  self setclientomnvar("ui_tacops_team", var0);
+  self setclientomnvar("ui_tacops_team", var_0);
   scripts\mp\tac_ops\roles_utility::kitspawn();
 }
 
@@ -167,23 +167,23 @@ function setupairpath() {
   constructhelipath(2, "air_path_2");
 }
 
-function constructhelipath(var0, var1) {
-  var2 = getEnt(var1, "targetname");
+function constructhelipath(var_0, var_1) {
+  var_2 = getEnt(var_1, "targetname");
 
-  if(isDefined(var2) && isDefined(var2.target)) {
-    var3 = getEntArray(var2.target, "targetname");
+  if(isDefined(var_2) && isDefined(var_2.target)) {
+    var_3 = getEntArray(var_2.target, "targetname");
 
-    if(isDefined(var3) && var3.size > 0) {
-      level.airpathnodes[var0] = [];
+    if(isDefined(var_3) && var_3.size > 0) {
+      level.airpathnodes[var_0] = [];
 
-      foreach(var5 in var3) {
-        var6 = int(var5.script_noteworthy);
-        level.airpathnodes[var0][var6] = [];
+      foreach(var_5 in var_3) {
+        var_6 = int(var_5.script_noteworthy);
+        level.airpathnodes[var_0][var_6] = [];
 
-        for(var7 = var5;; var7 = getEnt(var7.target, "targetname")) {
-          level.airpathnodes[var0][var6][level.airpathnodes[var0][var6].size] = var7;
+        for(var_7 = var_5;; var_7 = getEnt(var_7.target, "targetname")) {
+          level.airpathnodes[var_0][var_6][level.airpathnodes[var_0][var_6].size] = var_7;
 
-          if(!isDefined(var7.target)) {
+          if(!isDefined(var_7.target)) {
             break;
           }
         }
@@ -220,36 +220,36 @@ function setupheliobjective() {
   followairpath();
 }
 
-function spawnescortchopper(var0) {
-  var1 = var0;
-  var2 = (0, 0, 0);
-  var3 = 24000;
-  var4 = undefined;
-  var5 = var0[2];
-  var6 = scripts\cp_mp\killstreaks\airstrike::getexplodedistance(var5);
-  var7 = 8000;
-  var8 = "jackal";
-  var9 = scripts\cp_mp\killstreaks\airstrike::getflightpath(var1, var2, var3, var4, var5, var7, var6, var8);
-  var10 = fakestreakinfo();
-  var11 = scripts\mp\killstreaks\jackal::beginjackalescort(0, var9["startPoint"], var1, var10, undefined);
-  return var11;
+function spawnescortchopper(var_0) {
+  var_1 = var_0;
+  var_2 = (0, 0, 0);
+  var_3 = 24000;
+  var_4 = undefined;
+  var_5 = var_0[2];
+  var_6 = scripts\cp_mp\killstreaks\airstrike::getexplodedistance(var_5);
+  var_7 = 8000;
+  var_8 = "jackal";
+  var_9 = scripts\cp_mp\killstreaks\airstrike::getflightpath(var_1, var_2, var_3, var_4, var_5, var_7, var_6, var_8);
+  var_10 = fakestreakinfo();
+  var_11 = scripts\mp\killstreaks\jackal::beginjackalescort(0, var_9["startPoint"], var_1, var_10, undefined);
+  return var_11;
 }
 
 function fakestreakinfo() {
-  var0 = spawnStruct();
-  var0.available = 1;
-  var0.firednotify = "offhand_fired";
-  var0.isgimme = 1;
-  var0.kid = 5;
-  var0.lifeid = 0;
-  var0.madeavailabletime = gettime();
-  var0.scriptuseagetype = "gesture_script_weapon";
-  var0.streakname = "jackal";
-  var0.streaksetupinfo = undefined;
-  var0.variantid = -1;
-  var0.weaponname = "ks_gesture_generic_mp";
-  var0.objweapon = getcompleteweaponname(var0.weaponname);
-  return var0;
+  var_0 = spawnStruct();
+  var_0.available = 1;
+  var_0.firednotify = "offhand_fired";
+  var_0.isgimme = 1;
+  var_0.kid = 5;
+  var_0.lifeid = 0;
+  var_0.madeavailabletime = gettime();
+  var_0.scriptuseagetype = "gesture_script_weapon";
+  var_0.streakname = "jackal";
+  var_0.streaksetupinfo = undefined;
+  var_0.variantid = -1;
+  var_0.weaponname = "ks_gesture_generic_mp";
+  var_0.objweapon = getcompleteweaponname(var_0.weaponname);
+  return var_0;
 }
 
 function setupobjectives() {
@@ -261,24 +261,24 @@ function setupobjectives() {
 }
 
 function setupflags() {
-  var0 = getEntArray("flag_primary", "targetname");
-  var1 = getEntArray("flag_secondary", "targetname");
+  var_0 = getEntArray("flag_primary", "targetname");
+  var_1 = getEntArray("flag_secondary", "targetname");
 
-  if(var0.size + var1.size == 0) {
+  if(var_0.size + var_1.size == 0) {
     return;
   }
 
-  var2 = [];
+  var_2 = [];
 
-  for(var3 = 0; var3 < var0.size; var3++) {
-    var2 = var0[var3];
+  for(var_3 = 0; var_3 < var_0.size; var_3++) {
+    var_2 = var_0[var_3];
   }
 
-  for(var3 = 0; var3 < var1.size; var3++) {
-    var2 = var1[var3];
+  for(var_3 = 0; var_3 < var_1.size; var_3++) {
+    var_2 = var_1[var_3];
   }
 
-  var4 = [];
+  var_4 = [];
   GscBinSkip0(0x2e, 0, 10);
 }
 
@@ -298,39 +298,39 @@ function followairpath() {
   thread helifollowpath(2);
 }
 
-function helifollowpath(var0) {
-  var1 = level.escortheli[var0];
-  var2 = level.airpathnodes[var0][level.airpathidx];
+function helifollowpath(var_0) {
+  var_1 = level.escortheli[var_0];
+  var_2 = level.airpathnodes[var_0][level.airpathidx];
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return;
   }
 
-  for(var3 = 1; var3 < var2.size; var3++) {
-    if(!isDefined(var1)) {
+  for(var_3 = 1; var_3 < var_2.size; var_3++) {
+    if(!isDefined(var_1)) {
       return;
     }
 
-    var4 = var2[var3];
-    var5 = var4.origin;
-    var1.combatmode = "guard_location";
-    var1 notify(var1.combatmode);
-    var1 thread scripts\mp\killstreaks\jackal::guardpositionescort(var5);
+    var_4 = var_2[var_3];
+    var_5 = var_4.origin;
+    var_1.combatmode = "guard_location";
+    var_1 notify(var_1.combatmode);
+    var_1 thread scripts\mp\killstreaks\jackal::guardpositionescort(var_5);
 
-    if(isDefined(var1)) {
-      var1 waittill("goal");
+    if(isDefined(var_1)) {
+      var_1 waittill("goal");
     }
   }
 
   if(isDefined(level.currentobjective) && isDefined(level.currentobjective.trigger)) {
-    var1 thread scripts\mp\killstreaks\jackal::guardpositionescort(undefined, level.currentobjective.trigger);
+    var_1 thread scripts\mp\killstreaks\jackal::guardpositionescort(undefined, level.currentobjective.trigger);
   }
 
-  if(var0 == 0) {
+  if(var_0 == 0) {
     if(isDefined(level.currentobjective)) {
       level.currentobjective[[level.currentobjective.onactivateobjective]]();
     } else {
@@ -343,51 +343,51 @@ function helifollowpath(var0) {
   }
 }
 
-function setheligoal(var0) {
-  var1 = distance(level.attackheli.origin, var0);
-  var2 = var1 / 150;
-  var3 = 0.25;
-  var4 = 0.25;
-  level.attackheli moveTo(var0, var2, var3, var4);
-  var5 = anglesToForward(level.attackheli.angles);
-  var6 = vectorNormalize(var0 - level.attackheli.origin);
-  thread changeheading(var5, var6, 2);
-  return var2;
+function setheligoal(var_0) {
+  var_1 = distance(level.attackheli.origin, var_0);
+  var_2 = var_1 / 150;
+  var_3 = 0.25;
+  var_4 = 0.25;
+  level.attackheli moveTo(var_0, var_2, var_3, var_4);
+  var_5 = anglesToForward(level.attackheli.angles);
+  var_6 = vectorNormalize(var_0 - level.attackheli.origin);
+  thread changeheading(var_5, var_6, 2);
+  return var_2;
 }
 
-function changeheading(var0, var1, var2) {
-  var3 = gettime();
-  var4 = var3;
-  var2 = int(var2 * 1000);
-  var5 = var4 + var2;
+function changeheading(var_0, var_1, var_2) {
+  var_3 = gettime();
+  var_4 = var_3;
+  var_2 = int(var_2 * 1000);
+  var_5 = var_4 + var_2;
 
-  while(var3 < var5) {
-    var6 = clamp((var3 - var4) / var2, 0, 1);
-    var7 = vectorlerp(var0, var1, var6);
-    level.attackheli.angles = scripts\mp\utility\script::vectortoanglessafe(var7, (0, 0, 1));
+  while(var_3 < var_5) {
+    var_6 = clamp((var_3 - var_4) / var_2, 0, 1);
+    var_7 = vectorlerp(var_0, var_1, var_6);
+    level.attackheli.angles = scripts\mp\utility\script::vectortoanglessafe(var_7, (0, 0, 1));
     waitframe();
-    var3 = gettime();
+    var_3 = gettime();
   }
 }
 
-function dompoint_onbeginuse(var0) {
-  scripts\mp\gametypes\obj_dom::dompoint_onusebegin(var0);
+function dompoint_onbeginuse(var_0) {
+  scripts\mp\gametypes\obj_dom::dompoint_onusebegin(var_0);
 }
 
-function dompoint_onuse(var0) {
-  scripts\mp\gametypes\obj_dom::dompoint_onuse(var0);
-  var1 = scripts\mp\gameobjects::getownerteam();
-  var2 = scripts\mp\utility\game::getotherteam(var1)[0];
-  thread scripts\mp\utility\print::printandsoundoneveryone(var1, var2, undefined, undefined, "mp_dom_flag_captured", "mp_dom_flag_lost", var0);
-  thread dompoint_holdtimer(var1);
+function dompoint_onuse(var_0) {
+  scripts\mp\gametypes\obj_dom::dompoint_onuse(var_0);
+  var_1 = scripts\mp\gameobjects::getownerteam();
+  var_2 = scripts\mp\utility\game::getotherteam(var_1)[0];
+  thread scripts\mp\utility\print::printandsoundoneveryone(var_1, var_2, undefined, undefined, "mp_dom_flag_captured", "mp_dom_flag_lost", var_0);
+  thread dompoint_holdtimer(var_1);
 }
 
-function dompoint_onenduse(var0, var1, var2) {
+function dompoint_onenduse(var_0, var_1, var_2) {
   if(self != level.currentobjective) {
     return;
   }
 
-  scripts\mp\gametypes\obj_dom::dompoint_onuseend(var0, var1, var2);
+  scripts\mp\gametypes\obj_dom::dompoint_onuseend(var_0, var_1, var_2);
 }
 
 function dompoint_oncontested() {
@@ -398,12 +398,12 @@ function dompoint_oncontested() {
   scripts\mp\gametypes\obj_dom::dompoint_oncontested();
 }
 
-function dompoint_onuncontested(var0) {
+function dompoint_onuncontested(var_0) {
   if(self != level.currentobjective) {
     return;
   }
 
-  scripts\mp\gametypes\obj_dom::dompoint_onuncontested(var0);
+  scripts\mp\gametypes\obj_dom::dompoint_onuncontested(var_0);
 }
 
 function dompoint_ondisableobjective() {
@@ -431,20 +431,20 @@ function dompoint_onactivateobjective() {
   scripts\mp\gameobjects::allowuse("enemy");
 }
 
-function dompoint_holdtimer(var0) {
+function dompoint_holdtimer(var_0) {
   level endon("gameEnded");
   self notify("domPoint_HoldTimer");
   self endon("domPoint_HoldTimer");
-  var1 = level.currentobjective.holdtime;
+  var_1 = level.currentobjective.holdtime;
 
-  if(var1 > 0) {
-    wait var1;
+  if(var_1 > 0) {
+    wait var_1;
 
     if(istrue(level.controltoprogress)) {
-      var2 = scripts\mp\utility\game::getotherteam(var0)[0];
+      var_2 = scripts\mp\utility\game::getotherteam(var_0)[0];
 
       for(;;) {
-        if(level.currentobjective.touchlist[var2].size == 0) {
+        if(level.currentobjective.touchlist[var_2].size == 0) {
           break;
         }
 
@@ -453,7 +453,7 @@ function dompoint_holdtimer(var0) {
     }
   }
 
-  if(var0 == "allies") {
+  if(var_0 == "allies") {
     level.currentobjective[[level.currentobjective.ondisableobjective]]();
     level.currentobjectiveindex++;
     updateallowedspawnareas();
@@ -495,59 +495,59 @@ function updateallowedspawnareas() {
       break;
   }
 
-  foreach(var9, var1 in level.allowedspawnareas) {
-    foreach(var3 in level.tacopsmap.activeconfigs[var9].spawnareas[var9]) {
-      var4 = 0;
+  foreach(var_9, var_1 in level.allowedspawnareas) {
+    foreach(var_3 in level.tacopsmap.activeconfigs[var_9].spawnareas[var_9]) {
+      var_4 = 0;
 
-      foreach(var6 in level.allowedspawnareas[var9]) {
-        if(var6 == var3.script_noteworthy) {
-          var4 = 1;
+      foreach(var_6 in level.allowedspawnareas[var_9]) {
+        if(var_6 == var_3.script_noteworthy) {
+          var_4 = 1;
           break;
         }
       }
 
-      var3.enabled = var4;
+      var_3.enabled = var_4;
     }
   }
 
   level notify("tac_ops_map_changed");
 }
 
-function enterattackheli(var0) {
+function enterattackheli(var_0) {
   self waittill("spawned_player");
-  self playerlinkTo(var0, "tag_origin");
-  self remotecontrolturret(var0.turret);
-  var0.spawnoccupied = 1;
+  self playerlinkTo(var_0, "tag_origin");
+  self remotecontrolturret(var_0.turret);
+  var_0.spawnoccupied = 1;
   updateallowedspawnareas();
-  thread watchearlyexit(var0);
-  thread watchhelideath(var0);
+  thread watchearlyexit(var_0);
+  thread watchhelideath(var_0);
 }
 
-function watchearlyexit(var0) {
+function watchearlyexit(var_0) {
   level endon("game_ended");
-  var0 endon("death");
+  var_0 endon("death");
   self endon("leaving");
-  var0 thread scripts\mp\killstreaks\killstreaks::allowridekillstreakplayerexit();
-  var0 waittill("killstreakExit");
-  self remotecontrolturretoff(var0.turret);
-  var1 = scripts\engine\utility::player_drop_to_ground(var0.origin, 32, 0, -1500, (0, 0, 1));
+  var_0 thread scripts\mp\killstreaks\killstreaks::allowridekillstreakplayerexit();
+  var_0 waittill("killstreakExit");
+  self remotecontrolturretoff(var_0.turret);
+  var_1 = scripts\engine\utility::player_drop_to_ground(var_0.origin, 32, 0, -1500, (0, 0, 1));
   self unlink();
   self dontinterpolate();
-  self setOrigin(var1);
-  var2 = anglesToForward(var0.angles);
-  var2 *= (1, 1, 0);
-  var3 = (0, 0, 1);
-  var4 = vectorcross(var2, var3);
-  var5 = axistoangles(var2, var4, var3);
-  self setplayerangles(var5);
-  var0.spawnoccupied = 0;
+  self setOrigin(var_1);
+  var_2 = anglesToForward(var_0.angles);
+  var_2 *= (1, 1, 0);
+  var_3 = (0, 0, 1);
+  var_4 = vectorcross(var_2, var_3);
+  var_5 = axistoangles(var_2, var_4, var_3);
+  self setplayerangles(var_5);
+  var_0.spawnoccupied = 0;
   updateallowedspawnareas();
   self notify("exited_heli");
 }
 
-function watchhelideath(var0) {
+function watchhelideath(var_0) {
   self endon("exited_heli");
-  var0 waittill("death");
+  var_0 waittill("death");
   self suicide();
   updateallowedspawnareas();
 }

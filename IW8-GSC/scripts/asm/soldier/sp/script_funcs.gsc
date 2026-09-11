@@ -3,18 +3,18 @@
  * Script: scripts\asm\soldier\sp\script_funcs.gsc
 ***************************************************/
 
-function forwardpushevent(var0, var1, var2, var3) {
-  var4 = scripts\asm\asm::asm_geteventdata(var0, "player_pushed");
-  scripts\asm\asm::asm_fireephemeralevent("player_pushed", "player_pushed", var4);
+function forwardpushevent(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\asm\asm::asm_geteventdata(var_0, "player_pushed");
+  scripts\asm\asm::asm_fireephemeralevent("player_pushed", "player_pushed", var_4);
 }
 
-function shouldplaypushedanim(var0, var1, var2, var3) {
-  if(scripts\asm\asm::asm_eventfired(var0, "player_pushed")) {
-    var4 = scripts\asm\asm::asm_geteventdata(var0, "player_pushed");
-    var5 = vectorNormalize(var4);
-    var6 = navtrace(self.origin, self.origin + 4 * var4, self, 1);
+function shouldplaypushedanim(var_0, var_1, var_2, var_3) {
+  if(scripts\asm\asm::asm_eventfired(var_0, "player_pushed")) {
+    var_4 = scripts\asm\asm::asm_geteventdata(var_0, "player_pushed");
+    var_5 = vectorNormalize(var_4);
+    var_6 = navtrace(self.origin, self.origin + 4 * var_4, self, 1);
 
-    if(var6["fraction"] >= 0.99 || vectordot(var5, var6["normal"]) >= -0.866) {
+    if(var_6["fraction"] >= 0.99 || vectordot(var_5, var_6["normal"]) >= -0.866) {
       return true;
     }
   }
@@ -22,48 +22,48 @@ function shouldplaypushedanim(var0, var1, var2, var3) {
   return false;
 }
 
-function playanim_pushed(var0, var1, var2) {
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  var4 = scripts\asm\asm::asm_getephemeraleventdata("player_pushed", "player_pushed");
+function playanim_pushed(var_0, var_1, var_2) {
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_4 = scripts\asm\asm::asm_getephemeraleventdata("player_pushed", "player_pushed");
 
-  if(isDefined(var4)) {
-    var5 = vectortoyaw(-1 * var4);
-    self orientmode("face angle", var5);
+  if(isDefined(var_4)) {
+    var_5 = vectortoyaw(-1 * var_4);
+    self orientmode("face angle", var_5);
   }
 
-  scripts\asm\shared\utility::playanim(var0, var1, var2);
+  scripts\asm\shared\utility::playanim(var_0, var_1, var_2);
 }
 
-function playanim_opendoor(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  var3 = 1;
-  var4 = 24;
-  var5 = scripts\asm\asm::asm_getanim(var0, var1);
-  var6 = scripts\asm\asm::asm_getxanim(var1, var5);
-  self aisetanim(var1, var5);
-  var7 = self._blackboard.doortoopen;
-  var8 = getnotetracktimes(var6, "arrival");
-  var9 = getmovedelta(var6, 0, var8[0]);
-  var10 = (var3 + var4, 0, 0) + var9;
-  var11 = anglestoleft(var7.true_start_angles);
+function playanim_opendoor(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  var_3 = 1;
+  var_4 = 24;
+  var_5 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_6 = scripts\asm\asm::asm_getxanim(var_1, var_5);
+  self aisetanim(var_1, var_5);
+  var_7 = self._blackboard.doortoopen;
+  var_8 = getnotetracktimes(var_6, "arrival");
+  var_9 = getmovedelta(var_6, 0, var_8[0]);
+  var_10 = (var_3 + var_4, 0, 0) + var_9;
+  var_11 = anglestoleft(var_7.true_start_angles);
 
-  if(var7 scripts\sp\door::should_open_left()) {
-    var11 *= -1;
+  if(var_7 scripts\sp\door::should_open_left()) {
+    var_11 *= -1;
   }
 
-  var12 = getdoorcenter(var7);
-  var13 = vectortoangles(var11);
-  var14 = var12 + rotatevector(var10, var13);
-  var15 = (0, angleclamp180(var13[1] - 180), 0);
-  var16 = 300;
+  var_12 = getdoorcenter(var_7);
+  var_13 = vectortoangles(var_11);
+  var_14 = var_12 + rotatevector(var_10, var_13);
+  var_15 = (0, angleclamp180(var_13[1] - 180), 0);
+  var_16 = 300;
   self startcoverarrival();
-  self motionwarp(var14, var15, var16);
+  self motionwarp(var_14, var_15, var_16);
   self notify("opening_door");
-  scripts\asm\asm::asm_donotetracks(var0, var1, &opendoor_notehandler);
+  scripts\asm\asm::asm_donotetracks(var_0, var_1, &opendoor_notehandler);
 }
 
-function opendoor_notehandler(var0) {
-  if(var0 == "open") {
+function opendoor_notehandler(var_0) {
+  if(var_0 == "open") {
     if(isDefined(self._blackboard.dooropenfunc) && isDefined(self._blackboard.doortoopen)) {
       self._blackboard.doortoopen thread[[self._blackboard.dooropenfunc]](self, scripts\asm\shared\utility::calcdooropenspeed());
       return;
@@ -73,85 +73,85 @@ function opendoor_notehandler(var0) {
   }
 }
 
-function getdoorcenter(var0) {
-  return var0.origin + rotatevector((var0.length * 0.5, 0, 0), var0.true_start_angles);
+function getdoorcenter(var_0) {
+  return var_0.origin + rotatevector((var_0.length * 0.5, 0, 0), var_0.true_start_angles);
 }
 
-function shouldopendoor(var0, var1, var2, var3) {
+function shouldopendoor(var_0, var_1, var_2, var_3) {
   return false;
 }
 
-function getstrafeanimweights(var0) {
-  var1 = [];
+function getstrafeanimweights(var_0) {
+  var_1 = [];
 
-  for(var2 = 0; var2 < 9; var2++) {
-    var1 = 0;
+  for(var_2 = 0; var_2 < 9; var_2++) {
+    var_1 = 0;
   }
 
-  var3 = [-180, -135, -90, -45, 0, 45, 90, 135, 180];
+  var_3 = [-180, -135, -90, -45, 0, 45, 90, 135, 180];
 
-  for(var2 = 0; var0 >= var3[var2]; var2++) {}
+  for(var_2 = 0; var_0 >= var_3[var_2]; var_2++) {}
 
-  var4 = var2 - 1;
-  var5 = var2;
-  var6 = (var0 - var3[var4]) / (var3[var5] - var3[var4]);
-  var7 = 1 - var6;
-  var1 = var7;
-  var1 = var6;
+  var_4 = var_2 - 1;
+  var_5 = var_2;
+  var_6 = (var_0 - var_3[var_4]) / (var_3[var_5] - var_3[var_4]);
+  var_7 = 1 - var_6;
+  var_1 = var_7;
+  var_1 = var_6;
 
-  if(var1[0] > var1[8]) {
-    var1 = var1[0];
+  if(var_1[0] > var_1[8]) {
+    var_1 = var_1[0];
   } else {
-    var1 = var1[8];
+    var_1 = var_1[8];
   }
 
-  return var1;
+  return var_1;
 }
 
-function initmovestrafeloopnew(var0, var1, var2) {
-  var3 = 1;
+function initmovestrafeloopnew(var_0, var_1, var_2) {
+  var_3 = 1;
 
-  if(isDefined(var2)) {
-    var3 = var2;
+  if(isDefined(var_2)) {
+    var_3 = var_2;
     return;
   }
 }
 
-function movestrafeloopnew(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  var3 = 0.2;
-  var4 = 1;
+function movestrafeloopnew(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  var_3 = 0.2;
+  var_4 = 1;
 
-  if(isDefined(var2)) {
-    var4 = var2;
+  if(isDefined(var_2)) {
+    var_4 = var_2;
   }
 
-  var5 = scripts\asm\asm::asm_getanim(var0, var1);
+  var_5 = scripts\asm\asm::asm_getanim(var_0, var_1);
   self.strafeangle = 0;
-  var6 = self getmotionangle();
-  var7 = 0;
+  var_6 = self getmotionangle();
+  var_7 = 0;
 
   for(;;) {
     if(length(self.velocity) > 1) {
-      var6 = self getmotionangle();
+      var_6 = self getmotionangle();
     }
 
     wait 0.05;
-    self.strafeangle = var6;
+    self.strafeangle = var_6;
     wait 0.02;
-    var8 = getstrafeanimweights(self.strafeangle);
+    var_8 = getstrafeanimweights(self.strafeangle);
 
-    if(!var7) {
-      var9 = scripts\asm\asm::asm_lookupanimfromalias(var1, "blank");
-      self aisetanim(var1, var9);
-      var10 = scripts\asm\asm::asm_lookupanimfromalias(var1, "f_knob");
-      self setanim(scripts\asm\asm::asm_getxanim(var1, var10), 1, var3, 1);
-      var7 = 1;
+    if(!var_7) {
+      var_9 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "blank");
+      self aisetanim(var_1, var_9);
+      var_10 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "f_knob");
+      self setanim(scripts\asm\asm::asm_getxanim(var_1, var_10), 1, var_3, 1);
+      var_7 = 1;
     }
 
-    for(var11 = 0; var11 < var8.size; var11++) {
-      if(isDefined(var5[var11])) {
-        self setanimlimited(scripts\asm\asm::asm_getxanim(var1, var5[var11]), var8[var11], 0.1, var4, 1);
+    for(var_11 = 0; var_11 < var_8.size; var_11++) {
+      if(isDefined(var_5[var_11])) {
+        self setanimlimited(scripts\asm\asm::asm_getxanim(var_1, var_5[var_11]), var_8[var_11], 0.1, var_4, 1);
       }
     }
 
@@ -159,53 +159,53 @@ function movestrafeloopnew(var0, var1, var2) {
   }
 }
 
-function playmovestrafeloopnew(var0, var1, var2) {
-  initmovestrafeloopnew(var0, var1, var2);
-  thread movestrafeloopnew(var0, var1, var2);
+function playmovestrafeloopnew(var_0, var_1, var_2) {
+  initmovestrafeloopnew(var_0, var_1, var_2);
+  thread movestrafeloopnew(var_0, var_1, var_2);
 }
 
-function playmovestrafeloop(var0, var1, var2) {
-  initmovestrafeloop(var0, var1, var2);
-  thread movestrafeloop(var0, var1, var2);
+function playmovestrafeloop(var_0, var_1, var_2) {
+  initmovestrafeloop(var_0, var_1, var_2);
+  thread movestrafeloop(var_0, var_1, var_2);
 }
 
-function initmovestrafeloop(var0, var1, var2) {
-  var3 = 1;
+function initmovestrafeloop(var_0, var_1, var_2) {
+  var_3 = 1;
 
-  if(isDefined(var2) && scripts\asm\asm::asm_getdemeanor() != "frantic") {
-    var3 = var2;
+  if(isDefined(var_2) && scripts\asm\asm::asm_getdemeanor() != "frantic") {
+    var_3 = var_2;
   }
 
-  var4 = scripts\asm\asm::asm_getxanim(var1, scripts\asm\asm::asm_lookupanimfromalias(var1, "f"));
-  var5 = scripts\asm\asm::asm_getxanim(var1, scripts\asm\asm::asm_lookupanimfromalias(var1, "l"));
-  var6 = scripts\asm\asm::asm_getxanim(var1, scripts\asm\asm::asm_lookupanimfromalias(var1, "r"));
-  var7 = scripts\asm\asm::asm_getxanim(var1, scripts\asm\asm::asm_lookupanimfromalias(var1, "b"));
-  self aisetanimknoblimited(var4, 1, 0.1, var3, 1);
-  self aisetanimknoblimited(var7, 1, 0.1, var3, 1);
-  self aisetanimknoblimited(var6, 1, 0.1, var3, 1);
-  self aisetanimknoblimited(var5, 1, 0.1, var3, 1);
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, scripts\asm\asm::asm_lookupanimfromalias(var_1, "f"));
+  var_5 = scripts\asm\asm::asm_getxanim(var_1, scripts\asm\asm::asm_lookupanimfromalias(var_1, "l"));
+  var_6 = scripts\asm\asm::asm_getxanim(var_1, scripts\asm\asm::asm_lookupanimfromalias(var_1, "r"));
+  var_7 = scripts\asm\asm::asm_getxanim(var_1, scripts\asm\asm::asm_lookupanimfromalias(var_1, "b"));
+  self aisetanimknoblimited(var_4, 1, 0.1, var_3, 1);
+  self aisetanimknoblimited(var_7, 1, 0.1, var_3, 1);
+  self aisetanimknoblimited(var_6, 1, 0.1, var_3, 1);
+  self aisetanimknoblimited(var_5, 1, 0.1, var_3, 1);
 }
 
-function movestrafeloop(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  var3 = 1;
+function movestrafeloop(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  var_3 = 1;
 
-  if(isDefined(var2)) {
-    var3 = var2;
+  if(isDefined(var_2)) {
+    var_3 = var_2;
   }
 
-  self codemoveanimrate(var3);
-  var4 = scripts\asm\asm::asm_getxanim(var1, scripts\asm\asm::asm_lookupanimfromalias(var1, "f_knob"));
-  var5 = scripts\asm\asm::asm_getxanim(var1, scripts\asm\asm::asm_lookupanimfromalias(var1, "l_knob"));
-  var6 = scripts\asm\asm::asm_getxanim(var1, scripts\asm\asm::asm_lookupanimfromalias(var1, "r_knob"));
-  var7 = scripts\asm\asm::asm_getxanim(var1, scripts\asm\asm::asm_lookupanimfromalias(var1, "b_knob"));
+  self codemoveanimrate(var_3);
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, scripts\asm\asm::asm_lookupanimfromalias(var_1, "f_knob"));
+  var_5 = scripts\asm\asm::asm_getxanim(var_1, scripts\asm\asm::asm_lookupanimfromalias(var_1, "l_knob"));
+  var_6 = scripts\asm\asm::asm_getxanim(var_1, scripts\asm\asm::asm_lookupanimfromalias(var_1, "r_knob"));
+  var_7 = scripts\asm\asm::asm_getxanim(var_1, scripts\asm\asm::asm_lookupanimfromalias(var_1, "b_knob"));
 
   for(;;) {
-    var8 = scripts\anim\utility_common::quadrantanimweights(self getmotionangle());
-    self setanim(var4, var8["front"], 0.2, 1, 1);
-    self setanim(var7, var8["back"], 0.2, 1, 1);
-    self setanim(var5, var8["left"], 0.2, 1, 1);
-    self setanim(var6, var8["right"], 0.2, 1, 1);
+    var_8 = scripts\anim\utility_common::quadrantanimweights(self getmotionangle());
+    self setanim(var_4, var_8["front"], 0.2, 1, 1);
+    self setanim(var_7, var_8["back"], 0.2, 1, 1);
+    self setanim(var_5, var_8["left"], 0.2, 1, 1);
+    self setanim(var_6, var_8["right"], 0.2, 1, 1);
     wait 0.05;
     waittillframeend();
   }

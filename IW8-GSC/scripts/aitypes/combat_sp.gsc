@@ -3,7 +3,7 @@
  * Script: scripts\aitypes\combat_sp.gsc
 ***********************************************/
 
-function initcombatfunctions(var0) {
+function initcombatfunctions(var_0) {
   self.fnresetmisstime = &resetmisstime;
   self.fngetturretaimangles = &getturretaimanglessp;
   self.fngetusedturret = &getusedturret;
@@ -25,7 +25,7 @@ function initstealthfunctionssp() {
   self.fnstealthgotonode = &scripts\sp\spawner::go_to_node;
 }
 
-function soldier_init(var0) {
+function soldier_init(var_0) {
   scripts\aitypes\combat::soldier_init_common();
   self enableteamwalking(1);
   self enablemissedbulletclientonly(0);
@@ -44,16 +44,16 @@ function turnofflaser() {
   self laserforceoff();
 }
 
-function callsetlaserflag(var0) {
-  self setlaserflag(var0);
+function callsetlaserflag(var_0) {
+  self setlaserflag(var_0);
 }
 
-function saygenericdialogue(var0) {
-  scripts\anim\face::saygenericdialogue(var0);
+function saygenericdialogue(var_0) {
+  scripts\anim\face::saygenericdialogue(var_0);
 }
 
-function getturretaimanglessp(var0) {
-  return var0 turretgetaim();
+function getturretaimanglessp(var_0) {
+  return var_0 turretgetaim();
 }
 
 function getusedturret() {
@@ -65,38 +65,38 @@ function updatefrantic() {
     return anim.success;
   }
 
-  var0 = gettime();
+  var_0 = gettime();
 
-  if(!isDefined(self._blackboard.franticcooldowntime) || self._blackboard.franticcooldowntime > var0) {
-    var1 = getaiarray(scripts\engine\utility::get_enemy_team(self.team));
-    var2 = 0;
-    var3 = 10000;
-    var4 = 4194304;
-    var5 = 5;
-    self._blackboard.franticcooldowntime = var0 + 10000;
+  if(!isDefined(self._blackboard.franticcooldowntime) || self._blackboard.franticcooldowntime > var_0) {
+    var_1 = getaiarray(scripts\engine\utility::get_enemy_team(self.team));
+    var_2 = 0;
+    var_3 = 10000;
+    var_4 = 4194304;
+    var_5 = 5;
+    self._blackboard.franticcooldowntime = var_0 + 10000;
     self._blackboard.franticstate = "combat";
 
-    foreach(var7 in var1) {
-      var8 = distancesquared(self lastknownpos(var7), self.origin);
+    foreach(var_7 in var_1) {
+      var_8 = distancesquared(self lastknownpos(var_7), self.origin);
 
-      if(var8 > var4) {
+      if(var_8 > var_4) {
         continue;
       }
 
-      var9 = gettime() - self lastknowntime(var7);
+      var_9 = gettime() - self lastknowntime(var_7);
 
-      if(var9 > var3) {
+      if(var_9 > var_3) {
         continue;
       }
 
-      var2++;
+      var_2++;
 
-      if(var7.unittype == "c8" || var7.unittype == "c12") {
+      if(var_7.unittype == "c8" || var_7.unittype == "c12") {
         self._blackboard.franticstate = "frantic";
         break;
       }
 
-      if(var2 >= 3) {
+      if(var_2 >= 3) {
         self._blackboard.franticstate = "frantic";
         break;
       }
@@ -106,8 +106,8 @@ function updatefrantic() {
   return anim.success;
 }
 
-function soldier_damagesubparthandler(var0) {
-  switch (var0.partname) {
+function soldier_damagesubparthandler(var_0) {
+  switch (var_0.partname) {
     case "helmet":
       if(isDefined(self.nohelmetpop) && self.nohelmetpop) {}
 

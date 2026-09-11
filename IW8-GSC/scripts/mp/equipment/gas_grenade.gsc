@@ -3,107 +3,107 @@
  * Script: scripts\mp\equipment\gas_grenade.gsc
 ************************************************/
 
-function gas_used(var0) {
+function gas_used(var_0) {
   self endon("disconnect");
-  var0 endon("death");
-  scripts\mp\utility\print::printgameaction("gasGrenade spawn", var0.owner);
-  thread scripts\mp\weapons::monitordisownedgrenade(self, var0);
-  var0 waittill("missile_stuck", var1);
-  thread gas_watchexplode(var0);
-  var0 detonate();
+  var_0 endon("death");
+  scripts\mp\utility\print::printgameaction("gasGrenade spawn", var_0.owner);
+  thread scripts\mp\weapons::monitordisownedgrenade(self, var_0);
+  var_0 waittill("missile_stuck", var_1);
+  thread gas_watchexplode(var_0);
+  var_0 detonate();
 }
 
-function gas_watchexplode(var0) {
-  var0 thread scripts\mp\utility\script::notifyafterframeend("death", "end_explode");
-  var0 endon("end_explode");
-  var1 = var0.owner;
-  var0 waittill("explode", var2);
-  thread gas_createtrigger(var2, var1);
+function gas_watchexplode(var_0) {
+  var_0 thread scripts\mp\utility\script::notifyafterframeend("death", "end_explode");
+  var_0 endon("end_explode");
+  var_1 = var_0.owner;
+  var_0 waittill("explode", var_2);
+  thread gas_createtrigger(var_2, var_1);
 }
 
-function gas_onplayerdamaged(var0) {
-  if(var0.meansofdeath == "MOD_IMPACT") {
+function gas_onplayerdamaged(var_0) {
+  if(var_0.meansofdeath == "MOD_IMPACT") {
     return true;
   }
 
-  if(var0.attacker == var0.victim) {
-    if(distancesquared(var0.point, var0.victim.origin) > 30625) {
+  if(var_0.attacker == var_0.victim) {
+    if(distancesquared(var_0.point, var_0.victim.origin) > 30625) {
       return false;
     }
   } else {
-    var0.attacker scripts\mp\damage::combatrecordtacticalstat("equip_gas_grenade");
-    var0.attacker scripts\mp\utility\stats::incpersstat("gasHits", 1);
+    var_0.attacker scripts\mp\damage::combatrecordtacticalstat("equip_gas_grenade");
+    var_0.attacker scripts\mp\utility\stats::incpersstat("gasHits", 1);
 
-    if(var0.victim scripts\mp\utility\perk::_hasperk("specialty_gas_grenade_resist")) {
-      var0.attacker scripts\mp\damagefeedback::updatedamagefeedback("hittacresist", undefined, undefined, undefined, 1);
+    if(var_0.victim scripts\mp\utility\perk::_hasperk("specialty_gas_grenade_resist")) {
+      var_0.attacker scripts\mp\damagefeedback::updatedamagefeedback("hittacresist", undefined, undefined, undefined, 1);
     }
   }
 
-  thread gas_applycough(var0.victim, var0.attacker);
+  thread gas_applycough(var_0.victim, var_0.attacker);
   return true;
 }
 
-function gas_clear(var0) {
-  gas_clearspeedredux(var0);
-  gas_clearblur(var0);
-  gas_clearcough(var0);
+function gas_clear(var_0) {
+  gas_clearspeedredux(var_0);
+  gas_clearblur(var_0);
+  gas_clearcough(var_0);
 
   if(isDefined(self.gastriggerstouching)) {
-    foreach(var2 in self.gastriggerstouching) {
-      if(!isDefined(var2)) {
+    foreach(var_2 in self.gastriggerstouching) {
+      if(!isDefined(var_2)) {
         continue;
       }
 
-      var2.playersintrigger[self getentitynumber()] = undefined;
+      var_2.playersintrigger[self getentitynumber()] = undefined;
     }
   }
 
   self.gastriggerstouching = undefined;
 }
 
-function gas_createtrigger(var0, var1, var2, var3) {
-  if(!isDefined(var2)) {
-    var2 = 7;
+function gas_createtrigger(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_2)) {
+    var_2 = 7;
   }
 
-  if(!isDefined(var3)) {
-    var3 = 1;
+  if(!isDefined(var_3)) {
+    var_3 = 1;
   }
 
-  var4 = spawn("trigger_radius", var0 + (0, 0, int(-57.75 * var3)), 0, int(256 * var3), int(175 * var3));
-  var4 scripts\cp_mp\ent_manager::registerspawn(1, &sweepgas);
-  var5 = plunder_fiftypercent_music(var0, var3);
+  var_4 = spawn("trigger_radius", var_0 + (0, 0, int(-57.75 * var_3)), 0, int(256 * var_3), int(175 * var_3));
+  var_4 scripts\cp_mp\ent_manager::registerspawn(1, &sweepgas);
+  var_5 = plunder_fiftypercent_music(var_0, var_3);
 
-  if(isDefined(var5)) {
-    thread plunder_allowrepositoryuse(var4, var5);
+  if(isDefined(var_5)) {
+    thread plunder_allowrepositoryuse(var_4, var_5);
   }
 
-  var4 endon("death");
-  var4.owner = var1;
+  var_4 endon("death");
+  var_4.owner = var_1;
 
-  if(isDefined(var1)) {
-    var4.team = var1.team;
+  if(isDefined(var_1)) {
+    var_4.team = var_1.team;
   }
 
-  var4.playersintrigger = [];
+  var_4.playersintrigger = [];
   thread gas_watchtriggerenter();
   thread gas_watchtriggerexit();
-  wait var2;
+  wait var_2;
   thread gas_destroytrigger();
 }
 
-function plunder_fiftypercent_music(var0, var1) {
+function plunder_fiftypercent_music(var_0, var_1) {
   if(!scripts\mp\bots\bots_util::bot_bots_enabled_or_added() && !scripts\mp\utility\game::deposit_from_compromised_convoy_delayed_failsafe()) {
     return;
   }
 
-  var2 = createnavbadplacebybounds(var0, (256 * var1, 256 * var1, 175 * var1), (0, 0, 0));
-  return var2;
+  var_2 = createnavbadplacebybounds(var_0, (256 * var_1, 256 * var_1, 175 * var_1), (0, 0, 0));
+  return var_2;
 }
 
-function plunder_allowrepositoryuse(var0, var1) {
-  scripts\engine\utility::waittill_notify_or_timeout("entitydeleted", var1);
-  destroynavobstacle(var0);
+function plunder_allowrepositoryuse(var_0, var_1) {
+  scripts\engine\utility::waittill_notify_or_timeout("entitydeleted", var_1);
+  destroynavobstacle(var_0);
 }
 
 function sweepgas() {
@@ -111,30 +111,30 @@ function sweepgas() {
 }
 
 function gas_destroytrigger() {
-  foreach(var1 in self.playersintrigger) {
-    if(!isDefined(var1)) {
+  foreach(var_1 in self.playersintrigger) {
+    if(!isDefined(var_1)) {
       continue;
     }
 
-    self.playersintrigger[var1 getentitynumber()] = undefined;
-    thread gas_onexittrigger(var1);
+    self.playersintrigger[var_1 getentitynumber()] = undefined;
+    thread gas_onexittrigger(var_1);
   }
 
   scripts\cp_mp\ent_manager::deregisterspawn();
   self delete();
 }
 
-function gas_onentertrigger(var0) {
+function gas_onentertrigger(var_0) {
   if(!isDefined(self.gastriggerstouching)) {
     self.gastriggerstouching = [];
   }
 
-  var1 = var0 getentitynumber();
-  self.gastriggerstouching[var1] = var0;
+  var_1 = var_0 getentitynumber();
+  self.gastriggerstouching[var_1] = var_0;
   self.lastgastouchtime = gettime();
 
   if(istrue(self.start_death_from_above_sequence)) {
-    return var1;
+    return var_1;
   }
 
   if(self.gastriggerstouching.size >= 1) {
@@ -143,19 +143,19 @@ function gas_onentertrigger(var0) {
   }
 
   if(self.gastriggerstouching.size == 1) {
-    thread gas_applycough(var0.owner, 0);
+    thread gas_applycough(var_0.owner, 0);
     scripts\cp_mp\killstreaks\white_phosphorus::enableloopingcoughaudio();
   }
 
-  return var1;
+  return var_1;
 }
 
-function gas_onexittrigger(var0) {
+function gas_onexittrigger(var_0) {
   if(!isDefined(self.gastriggerstouching)) {
     return;
   }
 
-  self.gastriggerstouching[var0] = undefined;
+  self.gastriggerstouching[var_0] = undefined;
   self.lastgastouchtime = gettime();
 
   if(self.gastriggerstouching.size == 0) {
@@ -171,40 +171,40 @@ function gas_watchtriggerenter() {
   self endon("death");
 
   for(;;) {
-    self waittill("trigger", var0);
+    self waittill("trigger", var_0);
 
-    if(!isPlayer(var0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
 
-    if(istrue(var0.plunderlimit)) {
+    if(istrue(var_0.plunderlimit)) {
       continue;
     }
 
-    if(var0 scripts\mp\utility\killstreak::isjuggernaut()) {
+    if(var_0 scripts\mp\utility\killstreak::isjuggernaut()) {
       continue;
     }
 
-    if(!var0 scripts\cp_mp\utility\player_utility::_isalive()) {
+    if(!var_0 scripts\cp_mp\utility\player_utility::_isalive()) {
       continue;
     }
 
-    if(isDefined(self.playersintrigger[var0 getentitynumber()])) {
+    if(isDefined(self.playersintrigger[var_0 getentitynumber()])) {
       continue;
     }
 
     if(level.teambased) {
-      if(isDefined(self.owner) && isDefined(self.owner.team) && isDefined(var0.team)) {
-        if(var0 != self.owner && !scripts\cp_mp\utility\player_utility::playersareenemies(var0, self.owner)) {
+      if(isDefined(self.owner) && isDefined(self.owner.team) && isDefined(var_0.team)) {
+        if(var_0 != self.owner && !scripts\cp_mp\utility\player_utility::playersareenemies(var_0, self.owner)) {
           continue;
         }
-      } else if(isDefined(self.team) && scripts\mp\utility\player::isfriendly(self.team, var0)) {
+      } else if(isDefined(self.team) && scripts\mp\utility\player::isfriendly(self.team, var_0)) {
         continue;
       }
     }
 
-    self.playersintrigger[var0 getentitynumber()] = var0;
-    thread gas_onentertrigger(var0);
+    self.playersintrigger[var_0 getentitynumber()] = var_0;
+    thread gas_onentertrigger(var_0);
   }
 }
 
@@ -212,33 +212,33 @@ function gas_watchtriggerexit() {
   self endon("death");
 
   for(;;) {
-    foreach(var1 in self.playersintrigger) {
-      if(!isDefined(var1)) {
-        self.playersintrigger[var2] = undefined;
+    foreach(var_1 in self.playersintrigger) {
+      if(!isDefined(var_1)) {
+        self.playersintrigger[var_2] = undefined;
         continue;
       }
 
-      if(!var1 scripts\cp_mp\utility\player_utility::_isalive()) {
+      if(!var_1 scripts\cp_mp\utility\player_utility::_isalive()) {
         continue;
       }
 
-      if(var1 istouching(self)) {
+      if(var_1 istouching(self)) {
         continue;
       }
 
-      self.playersintrigger[var1 getentitynumber()] = undefined;
-      thread gas_onexittrigger(var1);
+      self.playersintrigger[var_1 getentitynumber()] = undefined;
+      thread gas_onexittrigger(var_1);
     }
 
     waitframe();
   }
 }
 
-function gas_applycough(var0, var1) {
-  var2 = scripts\mp\utility\perk::_hasperk("specialty_gas_grenade_resist");
-  var3 = isDefined(var0) && self == var0;
+function gas_applycough(var_0, var_1) {
+  var_2 = scripts\mp\utility\perk::_hasperk("specialty_gas_grenade_resist");
+  var_3 = isDefined(var_0) && self == var_0;
 
-  if(!var3 && var2) {
+  if(!var_3 && var_2) {
     return;
   }
 
@@ -246,49 +246,49 @@ function gas_applycough(var0, var1) {
     return;
   }
 
-  var4 = 0;
+  var_4 = 0;
 
-  if(istrue(var1)) {
-    var4 = 1;
+  if(istrue(var_1)) {
+    var_4 = 1;
 
-    if(var3) {
-      var4 = 0;
+    if(var_3) {
+      var_4 = 0;
     }
   }
 
-  if(!istrue(self.gascoughinprogress) || istrue(var1)) {
-    thread gas_queuecough(var4);
+  if(!istrue(self.gascoughinprogress) || istrue(var_1)) {
+    thread gas_queuecough(var_4);
     return;
   }
 }
 
-function gas_queuecough(var0) {
+function gas_queuecough(var_0) {
   self endon("death_or_disconnect");
   self endon("gas_clear_cough");
   self endon("gas_exited");
   self notify("gas_queue_cough");
   self endon("gas_queue_cough");
-  var1 = gettime() + 1000;
+  var_1 = gettime() + 1000;
 
   while(gas_coughisblocked()) {
     waitframe();
   }
 
-  if(var0 && gettime() > var1) {
-    var0 = 0;
+  if(var_0 && gettime() > var_1) {
+    var_0 = 0;
   }
 
-  var2 = getdvarint("scr_equipCoughInterruptsADS", 1) == 1;
+  var_2 = getdvarint("scr_equipCoughInterruptsADS", 1) == 1;
 
-  if(var2) {
-    thread gas_begincoughing(var0);
+  if(var_2) {
+    thread gas_begincoughing(var_0);
     return;
   }
 
   self endon("gas_begin_coughing");
   self.gascoughinprogress = 1;
 
-  if(var0) {
+  if(var_0) {
     self playgestureviewmodel("iw8_ges_teargas_cough");
     wait 3.33;
   } else {
@@ -299,7 +299,7 @@ function gas_queuecough(var0) {
   self.gascoughinprogress = undefined;
 }
 
-function gas_begincoughing(var0) {
+function gas_begincoughing(var_0) {
   self endon("death_or_disconnect");
   self endon("gas_clear_cough");
   self notify("gas_begin_coughing");
@@ -319,18 +319,18 @@ function gas_begincoughing(var0) {
     scripts\cp_mp\utility\inventory_utility::_takeweapon("gas_cough_heavy_mp");
   }
 
-  var1 = scripts\engine\utility::ter_op(istrue(var0), getcompleteweaponname("gas_cough_heavy_mp"), getcompleteweaponname("gas_cough_light_mp"));
-  var2 = scripts\engine\utility::ter_op(istrue(var0), 3.33, 1.833);
-  self giveandfireoffhand(var1);
-  GscBinSkip4(0x35, var1);
+  var_1 = scripts\engine\utility::ter_op(istrue(var_0), getcompleteweaponname("gas_cough_heavy_mp"), getcompleteweaponname("gas_cough_light_mp"));
+  var_2 = scripts\engine\utility::ter_op(istrue(var_0), 3.33, 1.833);
+  self giveandfireoffhand(var_1);
+  GscBinSkip4(0x35, var_1);
 }
 
-function gas_removecough(var0) {
+function gas_removecough(var_0) {
   self notify("gas_queue_cough");
   self notify("gas_begin_coughing");
   self.gascoughinprogress = undefined;
 
-  if(!istrue(var0)) {
+  if(!istrue(var_0)) {
     if(isDefined(self.gastakenweaponobj)) {
       gas_restoreheldoffhand();
       return;
@@ -340,15 +340,15 @@ function gas_removecough(var0) {
   }
 }
 
-function gas_clearcough(var0) {
+function gas_clearcough(var_0) {
   self notify("gas_queue_cough");
   self notify("gas_begin_coughing");
   self.gascoughinprogress = undefined;
 
-  if(!istrue(var0)) {
-    var1 = getdvarint("scr_equipCoughInterruptsADS", 1) == 1;
+  if(!istrue(var_0)) {
+    var_1 = getdvarint("scr_equipCoughInterruptsADS", 1) == 1;
 
-    if(var1) {
+    if(var_1) {
       if(self hasweapon(getcompleteweaponname("gas_cough_light_mp"))) {
         scripts\cp_mp\utility\inventory_utility::_takeweapon("gas_cough_light_mp");
       }
@@ -371,14 +371,14 @@ function gas_clearcough(var0) {
   }
 }
 
-function gas_monitorcoughweaponfired(var0) {
+function gas_monitorcoughweaponfired(var_0) {
   self endon("gas_coughWeaponTaken");
   self endon("gas_coughDuration");
 
   for(;;) {
-    self waittill("offhand_fired", var1);
+    self waittill("offhand_fired", var_1);
 
-    if(isnullweapon(var1, var0)) {
+    if(isnullweapon(var_1, var_0)) {
       break;
     }
   }
@@ -386,21 +386,21 @@ function gas_monitorcoughweaponfired(var0) {
   self notify("gas_coughWeaponFired");
 }
 
-function gas_monitorcoughweapontaken(var0) {
+function gas_monitorcoughweapontaken(var_0) {
   self endon("gas_coughWeaponFired");
   self endon("gas_coughDuration");
 
-  while(self hasweapon(var0)) {
+  while(self hasweapon(var_0)) {
     waitframe();
   }
 
   self notify("gas_coughWeaponTaken");
 }
 
-function gas_monitorcoughduration(var0) {
+function gas_monitorcoughduration(var_0) {
   self endon("gas_coughWeaponTaken");
   self endon("gas_coughWeaponFired");
-  wait var0;
+  wait var_0;
   self notify("gas_coughDuration");
 }
 
@@ -411,21 +411,21 @@ function gas_takeheldoffhand() {
 
   self endon("gas_restoreHeldOffhand");
   self.gastakenweaponobj = self getheldoffhand();
-  var0 = scripts\mp\equipment::getequipmentreffromweapon(self.gastakenweaponobj);
+  var_0 = scripts\mp\equipment::getequipmentreffromweapon(self.gastakenweaponobj);
 
-  if(isDefined(var0) && scripts\mp\equipment::hasequipment(var0)) {
-    self.gastakenweaponammo = scripts\mp\equipment::getequipmentammo(var0);
+  if(isDefined(var_0) && scripts\mp\equipment::hasequipment(var_0)) {
+    self.gastakenweaponammo = scripts\mp\equipment::getequipmentammo(var_0);
     scripts\cp_mp\utility\inventory_utility::_takeweapon(self.gastakenweaponobj);
     waitframe();
     thread gas_restoreheldoffhand();
   }
 
-  var1 = scripts\mp\supers::getsuperrefforsuperoffhand(self.gastakenweaponobj);
+  var_1 = scripts\mp\supers::getsuperrefforsuperoffhand(self.gastakenweaponobj);
 
-  if(isDefined(var1)) {
-    var2 = scripts\mp\supers::getcurrentsuperref();
+  if(isDefined(var_1)) {
+    var_2 = scripts\mp\supers::getcurrentsuperref();
 
-    if(isDefined(var2) && var2 == var1) {
+    if(isDefined(var_2) && var_2 == var_1) {
       self.gastakenweaponammo = self getammocount(self.gastakenweaponobj);
       scripts\cp_mp\utility\inventory_utility::_takeweapon(self.gastakenweaponobj);
       waitframe();
@@ -433,9 +433,9 @@ function gas_takeheldoffhand() {
     }
   }
 
-  var3 = scripts\mp\utility\weapon::isgesture(self.gastakenweaponobj);
+  var_3 = scripts\mp\utility\weapon::isgesture(self.gastakenweaponobj);
 
-  if(var3) {
+  if(var_3) {
     scripts\cp_mp\utility\inventory_utility::_takeweapon(self.gastakenweaponobj);
     waitframe();
     thread gas_restoreheldoffhand();
@@ -449,20 +449,20 @@ function gas_takeheldoffhand() {
 
 function gas_restoreheldoffhand() {
   self notify("gas_restoreHeldOffhand");
-  var0 = scripts\mp\equipment::getequipmentreffromweapon(self.gastakenweaponobj);
+  var_0 = scripts\mp\equipment::getequipmentreffromweapon(self.gastakenweaponobj);
 
-  if(isDefined(var0) && scripts\mp\equipment::hasequipment(var0)) {
-    if(scripts\mp\equipment::hasequipment(var0)) {
+  if(isDefined(var_0) && scripts\mp\equipment::hasequipment(var_0)) {
+    if(scripts\mp\equipment::hasequipment(var_0)) {
       scripts\cp_mp\utility\inventory_utility::_giveweapon(self.gastakenweaponobj);
-      var1 = scripts\mp\equipment::findequipmentslot(var0);
+      var_1 = scripts\mp\equipment::findequipmentslot(var_0);
 
-      if(var1 == "primary") {
+      if(var_1 == "primary") {
         self assignweaponoffhandprimary(self.gastakenweaponobj);
-      } else if(var1 == "secondary") {
+      } else if(var_1 == "secondary") {
         self assignweaponoffhandsecondary(self.gastakenweaponobj);
       }
 
-      scripts\mp\equipment::setequipmentammo(var0, self.gastakenweaponammo);
+      scripts\mp\equipment::setequipmentammo(var_0, self.gastakenweaponammo);
       self.gastakenweaponobj = undefined;
       self.gastakenweaponammo = undefined;
     }
@@ -470,12 +470,12 @@ function gas_restoreheldoffhand() {
     return;
   }
 
-  var2 = scripts\mp\supers::getsuperrefforsuperoffhand(self.gastakenweaponobj);
+  var_2 = scripts\mp\supers::getsuperrefforsuperoffhand(self.gastakenweaponobj);
 
-  if(isDefined(var2)) {
-    var3 = scripts\mp\supers::getcurrentsuperref();
+  if(isDefined(var_2)) {
+    var_3 = scripts\mp\supers::getcurrentsuperref();
 
-    if(isDefined(var3) && var3 == var2) {
+    if(isDefined(var_3) && var_3 == var_2) {
       scripts\cp_mp\utility\inventory_utility::_giveweapon(self.gastakenweaponobj);
       self assignweaponoffhandspecial(self.gastakenweaponobj);
       self setweaponammoclip(self.gastakenweaponobj, self.gastakenweaponammo);
@@ -486,9 +486,9 @@ function gas_restoreheldoffhand() {
     return;
   }
 
-  var4 = scripts\mp\utility\weapon::isgesture(self.gastakenweaponobj);
+  var_4 = scripts\mp\utility\weapon::isgesture(self.gastakenweaponobj);
 
-  if(var4) {
+  if(var_4) {
     if(isDefined(self.gestureweapon) && self.gestureweapon == self.gastakenweaponobj.basename) {
       scripts\cp_mp\utility\inventory_utility::_giveweapon(self.gastakenweaponobj);
       self.gastakenweaponobj = undefined;
@@ -517,8 +517,8 @@ function gas_applyspeedredux() {
       }
 
       if(isDefined(self.gastriggerstouching)) {
-        foreach(var1 in self.gastriggerstouching) {
-          if(isDefined(var1) && isDefined(var1.owner) && var1.owner == self) {
+        foreach(var_1 in self.gastriggerstouching) {
+          if(isDefined(var_1) && isDefined(var_1.owner) && var_1.owner == self) {
             self.gasspeedmod = -0.15;
             scripts\mp\weapons::updatemovespeedscale();
             return;
@@ -530,20 +530,20 @@ function gas_applyspeedredux() {
     self.gasspeedmod = 0;
   }
 
-  var3 = -0.35;
+  var_3 = -0.35;
 
   if(scripts\mp\utility\perk::_hasperk("specialty_gas_grenade_resist")) {
-    var3 = -0.15;
+    var_3 = -0.15;
   } else if(isDefined(self.gastriggerstouching)) {
-    foreach(var1 in self.gastriggerstouching) {
-      if(isDefined(var1) && isDefined(var1.owner) && var1.owner == self) {
-        var3 = -0.15;
+    foreach(var_1 in self.gastriggerstouching) {
+      if(isDefined(var_1) && isDefined(var_1.owner) && var_1.owner == self) {
+        var_3 = -0.15;
       }
     }
   }
 
-  gas_modifyspeed(var3);
-  self.gasspeedmod = var3;
+  gas_modifyspeed(var_3);
+  self.gasspeedmod = var_3;
   scripts\mp\weapons::updatemovespeedscale();
 }
 
@@ -561,22 +561,22 @@ function gas_removespeedredux() {
   scripts\mp\weapons::updatemovespeedscale();
 }
 
-function gas_modifyspeed(var0) {
-  var1 = 0;
+function gas_modifyspeed(var_0) {
+  var_1 = 0;
 
-  while(var1 <= 0.65) {
-    var1 += 0.05;
-    self.gasspeedmod = scripts\engine\math::lerp(self.gasspeedmod, var0, min(1, var1 / 0.65));
+  while(var_1 <= 0.65) {
+    var_1 += 0.05;
+    self.gasspeedmod = scripts\engine\math::lerp(self.gasspeedmod, var_0, min(1, var_1 / 0.65));
     scripts\mp\weapons::updatemovespeedscale();
     wait 0.05;
   }
 }
 
-function gas_clearspeedredux(var0) {
+function gas_clearspeedredux(var_0) {
   self notify("gas_modify_speed");
   self.gasspeedmod = undefined;
 
-  if(!istrue(var0)) {
+  if(!istrue(var_0)) {
     scripts\mp\weapons::updatemovespeedscale();
     return;
   }
@@ -586,20 +586,20 @@ function gas_applyblur() {
   self endon("death_or_disconnect");
   self notify("gas_modify_blur");
   self endon("gas_modify_blur");
-  var0 = "gas_grenade_heavy_mp";
+  var_0 = "gas_grenade_heavy_mp";
 
   if(scripts\mp\utility\perk::_hasperk("specialty_gas_grenade_resist")) {
-    var0 = "gas_grenade_light_mp";
+    var_0 = "gas_grenade_light_mp";
   } else if(isDefined(self.gastriggerstouching)) {
-    foreach(var2 in self.gastriggerstouching) {
-      if(isDefined(var2) && isDefined(var2.owner) && var2.owner == self) {
-        var0 = "gas_grenade_light_mp";
+    foreach(var_2 in self.gastriggerstouching) {
+      if(isDefined(var_2) && isDefined(var_2.owner) && var_2.owner == self) {
+        var_0 = "gas_grenade_light_mp";
       }
     }
   }
 
   for(;;) {
-    scripts\cp_mp\utility\shellshock_utility::_shellshock(var0, "gas", 0.5, 0);
+    scripts\cp_mp\utility\shellshock_utility::_shellshock(var_0, "gas", 0.5, 0);
     wait 0.2;
   }
 }
@@ -608,10 +608,10 @@ function gas_removeblur() {
   self notify("gas_modify_blur");
 }
 
-function gas_clearblur(var0) {
+function gas_clearblur(var_0) {
   self notify("gas_modify_blur");
 
-  if(!istrue(var0)) {
+  if(!istrue(var_0)) {
     scripts\cp_mp\utility\shellshock_utility::_stopshellshock();
     return;
   }
@@ -669,14 +669,14 @@ function gas_updateplayereffects() {
   }
 }
 
-function gas_getblurinterruptdelayms(var0) {
+function gas_getblurinterruptdelayms(var_0) {
   return 200;
 }
 
-function plunder_playerspawnedcallback(var0, var1) {
-  if(isDefined(var1.gastriggerstouching) && var1.gastriggerstouching.size > 0) {
-    foreach(var3 in var1.gastriggerstouching) {
-      if(isDefined(var3.owner) && var3.owner == var0) {
+function plunder_playerspawnedcallback(var_0, var_1) {
+  if(isDefined(var_1.gastriggerstouching) && var_1.gastriggerstouching.size > 0) {
+    foreach(var_3 in var_1.gastriggerstouching) {
+      if(isDefined(var_3.owner) && var_3.owner == var_0) {
         return true;
       }
     }

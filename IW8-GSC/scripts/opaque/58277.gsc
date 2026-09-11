@@ -7,13 +7,13 @@ function init() {
   level._effect["vfx_speed_boost_trail_fx"] = loadfx("vfx/iw8_br/gameplay/rumble/vfx_rum_speed_boost_trail");
   level._effect["vfx_speed_boost_screen_fx"] = loadfx("vfx/iw8_br/gameplay/rumble/vfx_rum_speed_boost_scrnfx");
   game["dialog"]["powerup_speed_boost"] = "power_up_speed_boost";
-  var0 = spawnStruct();
-  var0.ref_138fd = "speed_boost";
-  var0.parachute_get_path = getdvarfloat("scr_brPowerups_speed_boost_buff_duration", 45);
-  var0.asm_playfacialanim_mp = &asm_playfacialanim_mp;
-  var0.ref_12a35 = &ref_12a35;
-  var0.isdeathshieldskippingenabled = &isdeathshieldskippingenabled;
-  _keypadscriptableused_bunkeralt::ref_12af4(var0);
+  var_0 = spawnStruct();
+  var_0.ref_138fd = "speed_boost";
+  var_0.parachute_get_path = getdvarfloat("scr_brPowerups_speed_boost_buff_duration", 45);
+  var_0.asm_playfacialanim_mp = &asm_playfacialanim_mp;
+  var_0.ref_12a35 = &ref_12a35;
+  var_0.isdeathshieldskippingenabled = &isdeathshieldskippingenabled;
+  _keypadscriptableused_bunkeralt::ref_12af4(var_0);
   scripts\cp_mp\utility\script_utility::registersharedfunc("br_powerup_speed_boost", "extend_time_by", &open_starting_safehouse_door);
 }
 
@@ -46,8 +46,8 @@ function ref_12a35() {
   self.player playlocalsound("mp_powerup_reactivate_speed_plr");
 }
 
-function open_starting_safehouse_door(var0) {
-  self.mp_layover_patch = gettime() + var0 * 1000;
+function open_starting_safehouse_door(var_0) {
+  self.mp_layover_patch = gettime() + var_0 * 1000;
   self.player thread _keypadscriptableused_bunkeralt::ref_13f7e(undefined, 4, 2);
 }
 
@@ -59,7 +59,7 @@ function lb_impulse_dmg_threshold_low() {
   stopFXOnTag(scripts\engine\utility::getfx("vfx_speed_boost_trail_fx"), self.player, "j_spine4");
 }
 
-function cac_getaccessorylogic(var0) {
+function cac_getaccessorylogic(var_0) {
   thread ref_124ef();
 
   if(!istrue(self.isjuggernaut) && !isDefined(self.vehicle)) {
@@ -177,21 +177,21 @@ function isplayerbrsquadleader() {
   }
 }
 
-function isplacementplayerobstructed(var0, var1) {
-  var2 = "";
+function isplacementplayerobstructed(var_0, var_1) {
+  var_2 = "";
 
-  switch (var0) {
+  switch (var_0) {
     case "rmbl_give_speed_boost_powerup":
       level.player _keypadscriptableused_bunkeralt::ref_1393a("speed_boost");
       break;
     case "rmbl_spawn_speed_boost_powerup":
-      var3 = level.player.origin + anglesToForward(level.player.angles) * 300 + (0, 0, 25);
-      easepower("brloot_rumble_powerup_speed_boost", var3);
+      var_3 = level.player.origin + anglesToForward(level.player.angles) * 300 + (0, 0, 25);
+      easepower("brloot_rumble_powerup_speed_boost", var_3);
       break;
     case "rmbl_give_teammate_speed_boost_powerup":
-      var4 = scripts\mp\utility\teams::getteamdata(level.player.team, "players");
-      var4 = scripts\engine\utility::array_remove(var4, level.player);
-      var4[randomintrange(0, var4.size)] _keypadscriptableused_bunkeralt::ref_1393a("speed_boost");
+      var_4 = scripts\mp\utility\teams::getteamdata(level.player.team, "players");
+      var_4 = scripts\engine\utility::array_remove(var_4, level.player);
+      var_4[randomintrange(0, var_4.size)] _keypadscriptableused_bunkeralt::ref_1393a("speed_boost");
       break;
   }
 }

@@ -28,92 +28,92 @@ function juggernaut_kills_tracker() {
     scripts\engine\utility::array_call(level.player_standing_in_doorway.helidrivableenablesiteondeath, &linkto, level.player_standing_in_doorway);
   }
 
-  var0 = scripts\engine\utility::array_combine(level.player_setsunshadowsforzoom.lights, level.player_standing_in_doorway.lights);
+  var_0 = scripts\engine\utility::array_combine(level.player_setsunshadowsforzoom.lights, level.player_standing_in_doorway.lights);
 
-  foreach(var2 in var0) {
-    var2.originalpos = var2.origin;
+  foreach(var_2 in var_0) {
+    var_2.originalpos = var_2.origin;
   }
 
-  var4 = level.player_setsunshadowsforzoom.origin;
-  var5 = level.player_standing_in_doorway.origin;
-  var6 = distance(var4, var5);
-  var7 = 36.96;
-  var8 = var6 / var7;
-  var9 = var4 + vectorNormalize(var4 - var5) * var6;
-  var10 = vectorNormalize(var4 - var5) * var6;
-  var11 = 1;
+  var_4 = level.player_setsunshadowsforzoom.origin;
+  var_5 = level.player_standing_in_doorway.origin;
+  var_6 = distance(var_4, var_5);
+  var_7 = 36.96;
+  var_8 = var_6 / var_7;
+  var_9 = var_4 + vectorNormalize(var_4 - var_5) * var_6;
+  var_10 = vectorNormalize(var_4 - var_5) * var_6;
+  var_11 = 1;
 
   for(;;) {
-    if(var11) {
-      var12 = level.player_standing_in_doorway;
-      var13 = level.player_setsunshadowsforzoom;
+    if(var_11) {
+      var_12 = level.player_standing_in_doorway;
+      var_13 = level.player_setsunshadowsforzoom;
     } else {
-      var12 = level.player_setsunshadowsforzoom;
-      var13 = level.player_standing_in_doorway;
+      var_12 = level.player_setsunshadowsforzoom;
+      var_13 = level.player_standing_in_doorway;
     }
 
-    var14 = (0, 0, -1000);
-    var12 hide();
-    var12.origin += var14;
+    var_14 = (0, 0, -1000);
+    var_12 hide();
+    var_12.origin += var_14;
     waitframe();
 
-    if(var11) {
-      foreach(var2 in var12.lights) {
-        var2.origin = var2.originalpos;
+    if(var_11) {
+      foreach(var_2 in var_12.lights) {
+        var_2.origin = var_2.originalpos;
       }
     } else {
-      foreach(var2 in var12.lights) {
-        var2.origin += var10 * -2;
+      foreach(var_2 in var_12.lights) {
+        var_2.origin += var_10 * -2;
       }
     }
 
-    var12.origin = var5 + var14;
+    var_12.origin = var_5 + var_14;
     waitframe();
-    var12.origin = var5;
-    var12 show();
-    var12 moveTo(var4, var8);
+    var_12.origin = var_5;
+    var_12 show();
+    var_12 moveTo(var_4, var_8);
 
-    foreach(var2 in var12.lights) {
-      var2 moveTo(var2.origin + var10, var8);
+    foreach(var_2 in var_12.lights) {
+      var_2 moveTo(var_2.origin + var_10, var_8);
     }
 
-    var13 moveTo(var9, var8);
+    var_13 moveTo(var_9, var_8);
 
-    foreach(var2 in var13.lights) {
-      var2 moveTo(var2.origin + var10, var8);
+    foreach(var_2 in var_13.lights) {
+      var_2 moveTo(var_2.origin + var_10, var_8);
     }
 
-    var11 = !var11;
-    wait var8;
+    var_11 = !var_11;
+    wait var_8;
   }
 }
 
 function juggernaut_shouldexecute() {
   if(level.ref_13370) {
-    var0 = getscriptablearray("frontend_vfx_scriptable", "script_noteworthy");
+    var_0 = getscriptablearray("frontend_vfx_scriptable", "script_noteworthy");
 
-    if(!var0.size) {
-      var0 = getentitylessscriptablearrayinradius("frontend_vfx_scriptable", "script_noteworthy");
+    if(!var_0.size) {
+      var_0 = getentitylessscriptablearrayinradius("frontend_vfx_scriptable", "script_noteworthy");
     }
 
-    var1 = "mplobby";
-    var2 = "seasonal";
+    var_1 = "mplobby";
+    var_2 = "seasonal";
 
-    if(var0.size) {
-      foreach(var4 in var0) {
-        if(var4 getscriptablehaspart(var1)) {
-          if(var4 getscriptableparthasstate(var1, var2)) {
-            var4 setscriptablepartstate(var1, var2);
+    if(var_0.size) {
+      foreach(var_4 in var_0) {
+        if(var_4 getscriptablehaspart(var_1)) {
+          if(var_4 getscriptableparthasstate(var_1, var_2)) {
+            var_4 setscriptablepartstate(var_1, var_2);
           }
         }
       }
     }
 
-    var6 = getEntArray("nonseasonal", "script_noteworthy");
+    var_6 = getEntArray("nonseasonal", "script_noteworthy");
 
-    if(var6.size) {
-      foreach(var8 in var6) {
-        var8 hide();
+    if(var_6.size) {
+      foreach(var_8 in var_6) {
+        var_8 hide();
       }
 
       return;
@@ -122,11 +122,11 @@ function juggernaut_shouldexecute() {
     return;
   }
 
-  var10 = getEntArray("seasonal", "script_noteworthy");
+  var_10 = getEntArray("seasonal", "script_noteworthy");
 
-  if(var10.size) {
-    foreach(var12 in var10) {
-      var12 hide();
+  if(var_10.size) {
+    foreach(var_12 in var_10) {
+      var_12 hide();
     }
 
     return;
@@ -134,12 +134,12 @@ function juggernaut_shouldexecute() {
 }
 
 function juggernaut_logic() {
-  var0 = "tag_origin";
-  var1 = " ";
-  var2 = "seasonal";
-  var3 = "nonseasonal";
-  var4 = [];
-  GscBinSkip0(0x2e, var4.size, getEnt("mp_lobby_floor_01", "targetname"));
+  var_0 = "tag_origin";
+  var_1 = " ";
+  var_2 = "seasonal";
+  var_3 = "nonseasonal";
+  var_4 = [];
+  GscBinSkip0(0x2e, var_4.size, getEnt("mp_lobby_floor_01", "targetname"));
 }
 
 function playersetisbecomingzombie() {
@@ -154,24 +154,24 @@ function playersetispropgameextrainfo() {
   level thread[[level.playerwaittillcinematiccomplete]]();
 }
 
-function frontend_camera_setup(var0, var1) {
-  level.camera_anchor = spawn("script_model", var0);
+function frontend_camera_setup(var_0, var_1) {
+  level.camera_anchor = spawn("script_model", var_0);
   level.camera_anchor setModel("tag_origin");
-  level.camera_anchor.angles = var1;
+  level.camera_anchor.angles = var_1;
 }
 
-function frontend_camera_watcher(var0) {
+function frontend_camera_watcher(var_0) {
   level endon("game_ended");
   self endon("disconnect");
   self cameralinkTo(level.camera_anchor, "tag_origin");
   level.active_section = frontendscenegetactivesection();
-  [[var0]](level.active_section);
+  [[var_0]](level.active_section);
   waitframe();
 
   for(;;) {
-    var1 = frontendscenegetactivesection();
+    var_1 = frontendscenegetactivesection();
 
-    if(var1.name == level.active_section.name && var1.index == level.active_section.index) {
+    if(var_1.name == level.active_section.name && var_1.index == level.active_section.index) {
       if(level.active_section.name == getDvar("NRLKQRRMKK")) {
         stopclientexploder();
       }
@@ -180,161 +180,161 @@ function frontend_camera_watcher(var0) {
       continue;
     }
 
-    level.active_section = var1;
-    [[var0]](var1);
+    level.active_section = var_1;
+    [[var_0]](var_1);
   }
 }
 
-function camera_section_change(var0) {
-  if(var0.name == "") {
+function camera_section_change(var_0) {
+  if(var_0.name == "") {
     return;
   }
 
-  var1 = get_section_state(var0);
+  var_1 = get_section_state(var_0);
 
-  if(!isDefined(var1["scene"]) || !isDefined(var1["camera"])) {
+  if(!isDefined(var_1["scene"]) || !isDefined(var_1["camera"])) {
     return;
   }
 
-  set_active_camera(var1["scene"], var1["camera"]);
-  execute_transition(var0, level.currentsectionname);
-  level.currentsectionname = var0.name;
+  set_active_camera(var_1["scene"], var_1["camera"]);
+  execute_transition(var_0, level.currentsectionname);
+  level.currentsectionname = var_0.name;
 }
 
-function set_active_camera(var0, var1) {
-  level.active_scene_data = var0;
-  level.active_camera = var1;
+function set_active_camera(var_0, var_1) {
+  level.active_scene_data = var_0;
+  level.active_camera = var_1;
 }
 
-function execute_transition(var0, var1) {
-  var2 = !isDefined(level.active_scene_data) || level.transition_interrupted;
+function execute_transition(var_0, var_1) {
+  var_2 = !isDefined(level.active_scene_data) || level.transition_interrupted;
 
-  if(var2) {
+  if(var_2) {
     thread frontend_camera_teleport(level.active_camera, level.active_scene_data.myfov, level.active_scene_data.cinematic, 0, 0.2, &update_entities_and_camera);
   }
 
-  var3 = level.transitionarray;
-  var4 = undefined;
-  var5 = undefined;
-  var6 = undefined;
-  var7 = undefined;
-  var8 = undefined;
-  var9 = undefined;
-  var10 = undefined;
-  var11 = undefined;
-  var12 = undefined;
-  var13 = undefined;
-  var14 = undefined;
+  var_3 = level.transitionarray;
+  var_4 = undefined;
+  var_5 = undefined;
+  var_6 = undefined;
+  var_7 = undefined;
+  var_8 = undefined;
+  var_9 = undefined;
+  var_10 = undefined;
+  var_11 = undefined;
+  var_12 = undefined;
+  var_13 = undefined;
+  var_14 = undefined;
 
-  if(isDefined(var3[var0.name])) {
-    var15 = var3[var0.name];
-    var16 = var15["default"];
+  if(isDefined(var_3[var_0.name])) {
+    var_15 = var_3[var_0.name];
+    var_16 = var_15["default"];
 
-    if(isDefined(var1) && isDefined(var15[var1])) {
-      var6 = var15[var1]["callback"];
-      var5 = var15[var1]["fov"];
-      var4 = var15[var1]["speed"];
-      var8 = var15[var1]["fadeOutTime"];
-      var9 = var15[var1]["fadeInTime"];
-      var10 = var15[var1]["cinematicName"];
-      var11 = var15[var1]["accelScalar"];
-      var12 = var15[var1]["decelScalar"];
-      var13 = var15[var1]["moveTime"];
-      var14 = var15[var1]["use_bounce"];
+    if(isDefined(var_1) && isDefined(var_15[var_1])) {
+      var_6 = var_15[var_1]["callback"];
+      var_5 = var_15[var_1]["fov"];
+      var_4 = var_15[var_1]["speed"];
+      var_8 = var_15[var_1]["fadeOutTime"];
+      var_9 = var_15[var_1]["fadeInTime"];
+      var_10 = var_15[var_1]["cinematicName"];
+      var_11 = var_15[var_1]["accelScalar"];
+      var_12 = var_15[var_1]["decelScalar"];
+      var_13 = var_15[var_1]["moveTime"];
+      var_14 = var_15[var_1]["use_bounce"];
 
-      if(isDefined(var15[var1]["transition"])) {
-        var7 = var15[var1]["transition"];
+      if(isDefined(var_15[var_1]["transition"])) {
+        var_7 = var_15[var_1]["transition"];
       }
     }
 
-    var6 = scripts\engine\utility::ter_op(isDefined(var6), var6, var16["callback"]);
+    var_6 = scripts\engine\utility::ter_op(isDefined(var_6), var_6, var_16["callback"]);
 
-    if(!isDefined(var7)) {
-      var7 = scripts\engine\utility::ter_op(isDefined(var5), var5, var16["transition"]);
-      var5 = scripts\engine\utility::ter_op(isDefined(var5), var5, var16["fov"]);
-      var4 = scripts\engine\utility::ter_op(isDefined(var4), var4, var16["speed"]);
-      var8 = scripts\engine\utility::ter_op(isDefined(var8), var6, var16["fadeOutTime"]);
-      var9 = scripts\engine\utility::ter_op(isDefined(var9), var5, var16["fadeInTime"]);
-      var10 = scripts\engine\utility::ter_op(isDefined(var10), var10, var16["cinematicName"]);
-      var11 = scripts\engine\utility::ter_op(isDefined(var11), var11, var16["accelScalar"]);
-      var12 = scripts\engine\utility::ter_op(isDefined(var12), var12, var16["decelScalar"]);
-      var13 = scripts\engine\utility::ter_op(isDefined(var13), var13, var16["moveTime"]);
-      var14 = scripts\engine\utility::ter_op(isDefined(var14), var14, var16["use_bounce"]);
+    if(!isDefined(var_7)) {
+      var_7 = scripts\engine\utility::ter_op(isDefined(var_5), var_5, var_16["transition"]);
+      var_5 = scripts\engine\utility::ter_op(isDefined(var_5), var_5, var_16["fov"]);
+      var_4 = scripts\engine\utility::ter_op(isDefined(var_4), var_4, var_16["speed"]);
+      var_8 = scripts\engine\utility::ter_op(isDefined(var_8), var_6, var_16["fadeOutTime"]);
+      var_9 = scripts\engine\utility::ter_op(isDefined(var_9), var_5, var_16["fadeInTime"]);
+      var_10 = scripts\engine\utility::ter_op(isDefined(var_10), var_10, var_16["cinematicName"]);
+      var_11 = scripts\engine\utility::ter_op(isDefined(var_11), var_11, var_16["accelScalar"]);
+      var_12 = scripts\engine\utility::ter_op(isDefined(var_12), var_12, var_16["decelScalar"]);
+      var_13 = scripts\engine\utility::ter_op(isDefined(var_13), var_13, var_16["moveTime"]);
+      var_14 = scripts\engine\utility::ter_op(isDefined(var_14), var_14, var_16["use_bounce"]);
     }
   } else {
-    var7 = &frontend_camera_teleport;
-    var6 = &update_camera_depth_of_field;
+    var_7 = &frontend_camera_teleport;
+    var_6 = &update_camera_depth_of_field;
   }
 
-  if(var7 == &frontend_camera_teleport) {
-    var5 = scripts\engine\utility::ter_op(isDefined(var5), var5, level.active_scene_data.myfov);
-    var8 = scripts\engine\utility::ter_op(isDefined(var8), var8, 0.2);
-    var9 = scripts\engine\utility::ter_op(isDefined(var9), var9, 0.2);
-    var10 = scripts\engine\utility::ter_op(isDefined(var10), var10, level.active_scene_data.cinematic);
-    [[var7]](level.active_camera, var5, var10, var8, var9, var6);
+  if(var_7 == &frontend_camera_teleport) {
+    var_5 = scripts\engine\utility::ter_op(isDefined(var_5), var_5, level.active_scene_data.myfov);
+    var_8 = scripts\engine\utility::ter_op(isDefined(var_8), var_8, 0.2);
+    var_9 = scripts\engine\utility::ter_op(isDefined(var_9), var_9, 0.2);
+    var_10 = scripts\engine\utility::ter_op(isDefined(var_10), var_10, level.active_scene_data.cinematic);
+    [[var_7]](level.active_camera, var_5, var_10, var_8, var_9, var_6);
     return;
   }
 
-  if(var7 == &frontend_camera_move) {
-    var11 = scripts\engine\utility::ter_op(isDefined(var11), var11, 0.1);
-    var12 = scripts\engine\utility::ter_op(isDefined(var12), var12, 0.1);
-    var4 = scripts\engine\utility::ter_op(isDefined(var4), var4, 5000);
-    var14 = scripts\engine\utility::ter_op(isDefined(var14), var14, 0);
-    var13 = scripts\engine\utility::ter_op(isDefined(var13), var13, 0);
+  if(var_7 == &frontend_camera_move) {
+    var_11 = scripts\engine\utility::ter_op(isDefined(var_11), var_11, 0.1);
+    var_12 = scripts\engine\utility::ter_op(isDefined(var_12), var_12, 0.1);
+    var_4 = scripts\engine\utility::ter_op(isDefined(var_4), var_4, 5000);
+    var_14 = scripts\engine\utility::ter_op(isDefined(var_14), var_14, 0);
+    var_13 = scripts\engine\utility::ter_op(isDefined(var_13), var_13, 0);
     update_camera_depth_of_field();
 
-    if(var6 == &update_camera_depth_of_field && !level.playerviewowner usinggamepad()) {
-      var6 = &update_camera_depth_of_field_slowly;
+    if(var_6 == &update_camera_depth_of_field && !level.playerviewowner usinggamepad()) {
+      var_6 = &update_camera_depth_of_field_slowly;
     }
 
-    [[var7]](level.active_camera, var4, 0, 1, var6, var11, var12, var14, var13);
+    [[var_7]](level.active_camera, var_4, 0, 1, var_6, var_11, var_12, var_14, var_13);
     return;
   }
 }
 
-function camera_move_helper(var0, var1, var2, var3, var4, var5) {
-  level.playerviewowner predictstreampos(var0.origin);
+function camera_move_helper(var_0, var_1, var_2, var_3, var_4, var_5) {
+  level.playerviewowner predictstreampos(var_0.origin);
 
-  if(var1 < 0.05) {
-    var1 = 0.05;
+  if(var_1 < 0.05) {
+    var_1 = 0.05;
   }
 
-  var6 = 0;
-  var7 = 0;
+  var_6 = 0;
+  var_7 = 0;
 
-  if(var2) {
-    var6 = var1 * var3;
-    var7 = var1 * var4;
+  if(var_2) {
+    var_6 = var_1 * var_3;
+    var_7 = var_1 * var_4;
   }
 
-  if(var5) {
-    var8 = 1.3;
-    var9 = vectorNormalize(var0.origin - level.camera_anchor.origin);
-    var10 = var0.origin + var9 * var8;
-    var11 = var1 / 2;
-    var12 = var11 * 0;
-    var13 = var11 * 0.5;
-    var14 = var11 * 0.5;
-    var15 = var11 * 0;
-    level.camera_anchor moveTo(var10, var11, var12, var13);
-    level.camera_anchor rotateTo(var0.angles, var11, var12, var13);
-    wait var11;
-    level.camera_anchor moveTo(var0.origin, var11, var14, var15);
-    wait var11;
+  if(var_5) {
+    var_8 = 1.3;
+    var_9 = vectorNormalize(var_0.origin - level.camera_anchor.origin);
+    var_10 = var_0.origin + var_9 * var_8;
+    var_11 = var_1 / 2;
+    var_12 = var_11 * 0;
+    var_13 = var_11 * 0.5;
+    var_14 = var_11 * 0.5;
+    var_15 = var_11 * 0;
+    level.camera_anchor moveTo(var_10, var_11, var_12, var_13);
+    level.camera_anchor rotateTo(var_0.angles, var_11, var_12, var_13);
+    wait var_11;
+    level.camera_anchor moveTo(var_0.origin, var_11, var_14, var_15);
+    wait var_11;
     return;
   }
 
-  level.camera_anchor.move_target = var0;
-  level.camera_anchor moveTo(var0.origin, var1, var6, var7);
-  level.camera_anchor rotateTo(var0.angles, var1, var6, var7);
+  level.camera_anchor.move_target = var_0;
+  level.camera_anchor moveTo(var_0.origin, var_1, var_6, var_7);
+  level.camera_anchor rotateTo(var_0.angles, var_1, var_6, var_7);
 
   if(level.playerviewowner usinggamepad()) {
-    wait var1;
+    wait var_1;
     return;
   }
 }
 
-function frontend_camera_move(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
+function frontend_camera_move(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   level endon("game_ended");
   self endon("disconnect");
 
@@ -346,75 +346,75 @@ function frontend_camera_move(var0, var1, var2, var3, var4, var5, var6, var7, va
   level notify("camera_move");
   level endon("camera_move");
 
-  if(!isDefined(var1)) {
-    var1 = 900;
+  if(!isDefined(var_1)) {
+    var_1 = 900;
   }
 
-  var9 = var0;
+  var_9 = var_0;
 
-  if(var8 == 0 || level.playerviewowner usinggamepad()) {
-    var10 = distance(level.camera_anchor.origin, var9.origin);
-    var8 = var10 / var1;
+  if(var_8 == 0 || level.playerviewowner usinggamepad()) {
+    var_10 = distance(level.camera_anchor.origin, var_9.origin);
+    var_8 = var_10 / var_1;
   }
 
-  if(var2) {
-    level.camera_anchor.origin = var9.origin;
-    level.camera_anchor.angles = var9.angles;
+  if(var_2) {
+    level.camera_anchor.origin = var_9.origin;
+    level.camera_anchor.angles = var_9.angles;
   } else {
-    camera_move_helper(var9, var8, var3, var5, var6, var7);
+    camera_move_helper(var_9, var_8, var_3, var_5, var_6, var_7);
   }
 
-  var11 = var5 + var6;
+  var_11 = var_5 + var_6;
 
-  if(var11 > 1) {
-    var5 /= var11;
-    var6 /= var11;
+  if(var_11 > 1) {
+    var_5 /= var_11;
+    var_6 /= var_11;
   }
 
-  while(isDefined(var9.target)) {
-    if(!isDefined(var9.target)) {
+  while(isDefined(var_9.target)) {
+    if(!isDefined(var_9.target)) {
       return;
     }
 
-    var9 = getEnt(var9.target, "targetname");
-    camera_move_helper(var9, var8, var3, var5, var6, var7);
+    var_9 = getEnt(var_9.target, "targetname");
+    camera_move_helper(var_9, var_8, var_3, var_5, var_6, var_7);
   }
 
   level.camera_anchor.move_target = undefined;
 
-  if(isDefined(var4)) {
-    self thread[[var4]]();
+  if(isDefined(var_4)) {
+    self thread[[var_4]]();
   }
 
   stopclientexploder();
 }
 
-function frontend_camera_teleport(var0, var1, var2, var3, var4, var5) {
+function frontend_camera_teleport(var_0, var_1, var_2, var_3, var_4, var_5) {
   level endon("game_ended");
   self endon("disconnect");
   level notify("camera_teleport");
   level endon("camera_teleport");
-  level.playerviewowner predictstreampos(var0.origin);
+  level.playerviewowner predictstreampos(var_0.origin);
   level.transition_interrupted = 1;
-  frontendscenecamerafade(0, var3);
-  wait var3 + 0.05;
-  frontendscenecamerafov(var1, 0);
+  frontendscenecamerafade(0, var_3);
+  wait var_3 + 0.05;
+  frontendscenecamerafov(var_1, 0);
   level.camera_anchor dontinterpolate();
-  level.camera_anchor.origin = var0.origin;
-  level.camera_anchor.angles = var0.angles;
+  level.camera_anchor.origin = var_0.origin;
+  level.camera_anchor.angles = var_0.angles;
   level.camera_anchor.move_target = undefined;
 
-  if(isDefined(var2)) {
-    frontendscenecameracinematic(var2);
+  if(isDefined(var_2)) {
+    frontendscenecameracinematic(var_2);
   }
 
   wait 0.1;
 
-  if(isDefined(var5)) {
-    [[var5]]();
+  if(isDefined(var_5)) {
+    [[var_5]]();
   }
 
-  frontendscenecamerafade(1, var4);
+  frontendscenecamerafade(1, var_4);
   level.transition_interrupted = 0;
   stopclientexploder();
 }
@@ -426,14 +426,14 @@ function update_character_pos() {
   }
 
   if(isDefined(level.active_scene_data.char_loc)) {
-    var0 = 0;
+    var_0 = 0;
 
     if(isDefined(level.active_scene_data.char_index)) {
-      var0 = level.active_scene_data.char_index;
+      var_0 = level.active_scene_data.char_index;
     }
 
-    level.characters[var0].origin = level.active_scene_data.char_loc.origin;
-    level.characters[var0].angles = level.active_scene_data.char_loc.angles;
+    level.characters[var_0].origin = level.active_scene_data.char_loc.origin;
+    level.characters[var_0].angles = level.active_scene_data.char_loc.angles;
     return;
   }
 }
@@ -446,13 +446,13 @@ function update_player_character_showcase() {
 }
 
 function update_camera_depth_of_field() {
-  var0 = level.active_camera.depthoffieldvalues;
-  self setphysicaldepthoffield(var0[0], var0[1], 20, 20);
+  var_0 = level.active_camera.depthoffieldvalues;
+  self setphysicaldepthoffield(var_0[0], var_0[1], 20, 20);
 }
 
 function update_camera_depth_of_field_slowly() {
-  var0 = level.active_camera.depthoffieldvalues;
-  self setphysicaldepthoffield(var0[0], var0[1], 3, 3);
+  var_0 = level.active_camera.depthoffieldvalues;
+  self setphysicaldepthoffield(var_0[0], var_0[1], 3, 3);
 }
 
 function update_entities_and_camera() {
@@ -481,17 +481,17 @@ function ref_13fb3() {
   setDvar("LLNMKLQQP", 6);
 }
 
-function move_weapon_to_loc(var0) {
-  level.weapons[var0].origin = level.active_scene_data.weapon_locs[var0].origin;
-  level.weapons[var0].angles = level.active_scene_data.weapon_locs[var0].angles;
+function move_weapon_to_loc(var_0) {
+  level.weapons[var_0].origin = level.active_scene_data.weapon_locs[var_0].origin;
+  level.weapons[var_0].angles = level.active_scene_data.weapon_locs[var_0].angles;
 }
 
 function update_weapon_loc() {
   if(isDefined(level.active_scene_data.weapon_locs)) {
     if(isarray(level.active_scene_data.weapon_locs)) {
-      for(var0 = 0; var0 <= 3; var0++) {
-        if(isDefined(level.active_scene_data.weapon_locs[var0])) {
-          move_weapon_to_loc(var0);
+      for(var_0 = 0; var_0 <= 3; var_0++) {
+        if(isDefined(level.active_scene_data.weapon_locs[var_0])) {
+          move_weapon_to_loc(var_0);
         }
       }
 
@@ -503,125 +503,125 @@ function update_weapon_loc() {
 }
 
 function update_arena_char_loc() {
-  for(var0 = 0; var0 < 8; var0++) {
-    if(var0 < 4) {
-      var1 = getEnt("tourroom_charslot_left_0" + var0 + 1, "targetname");
+  for(var_0 = 0; var_0 < 8; var_0++) {
+    if(var_0 < 4) {
+      var_1 = getEnt("tourroom_charslot_left_0" + var_0 + 1, "targetname");
     } else {
-      var2 = var0 - 4;
-      var1 = getEnt("tourroom_charslot_right_0" + var2 + 1, "targetname");
+      var_2 = var_0 - 4;
+      var_1 = getEnt("tourroom_charslot_right_0" + var_2 + 1, "targetname");
     }
 
-    level.characters[var0].origin = var1.origin;
-    level.characters[var0].angles = var1.angles;
+    level.characters[var_0].origin = var_1.origin;
+    level.characters[var_0].angles = var_1.angles;
   }
 
-  for(var3 = 0; var3 < 4; var3++) {
-    var4 = var3 + 1;
-    var0 = 8 + var3;
+  for(var_3 = 0; var_3 < 4; var_3++) {
+    var_4 = var_3 + 1;
+    var_0 = 8 + var_3;
 
-    if(var4 <= 2) {
-      var1 = getEnt("tourroom_charslot_left_0" + var4 + "_dog", "targetname");
+    if(var_4 <= 2) {
+      var_1 = getEnt("tourroom_charslot_left_0" + var_4 + "_dog", "targetname");
     } else {
-      var5 = var4 - 2;
-      var1 = getEnt("tourroom_charslot_right_0" + var5 + "_dog", "targetname");
+      var_5 = var_4 - 2;
+      var_1 = getEnt("tourroom_charslot_right_0" + var_5 + "_dog", "targetname");
     }
 
-    level.characters[var0].origin = var1.origin;
-    level.characters[var0].angles = var1.angles;
+    level.characters[var_0].origin = var_1.origin;
+    level.characters[var_0].angles = var_1.angles;
   }
 }
 
 function ref_13f87() {
-  for(var0 = 0; var0 < 12; var0++) {
-    if(var0 < 6) {
-      var1 = getEnt("tourroom_charslot_left_0" + var0 + 1, "targetname");
+  for(var_0 = 0; var_0 < 12; var_0++) {
+    if(var_0 < 6) {
+      var_1 = getEnt("tourroom_charslot_left_0" + var_0 + 1, "targetname");
     } else {
-      var2 = var0 - 6;
-      var1 = getEnt("tourroom_charslot_right_0" + var2 + 1, "targetname");
+      var_2 = var_0 - 6;
+      var_1 = getEnt("tourroom_charslot_right_0" + var_2 + 1, "targetname");
     }
 
-    level.characters[var0].origin = var1.origin;
-    level.characters[var0].angles = var1.angles;
+    level.characters[var_0].origin = var_1.origin;
+    level.characters[var_0].angles = var_1.angles;
   }
 }
 
 function update_lobby_char_loc() {
-  var0 = getEnt("lobby_charslot_01", "targetname");
-  level.characters[0].origin = var0.origin;
-  level.characters[0].angles = var0.angles;
+  var_0 = getEnt("lobby_charslot_01", "targetname");
+  level.characters[0].origin = var_0.origin;
+  level.characters[0].angles = var_0.angles;
 
-  for(var1 = 1; var1 < 8; var1++) {
-    var2 = var1 + 1;
+  for(var_1 = 1; var_1 < 8; var_1++) {
+    var_2 = var_1 + 1;
 
-    if(var2 < 10) {
-      var0 = getEnt("lobby_charslot_0" + var2, "targetname");
+    if(var_2 < 10) {
+      var_0 = getEnt("lobby_charslot_0" + var_2, "targetname");
     } else {
-      var0 = getEnt("lobby_charslot_" + var2, "targetname");
+      var_0 = getEnt("lobby_charslot_" + var_2, "targetname");
     }
 
-    if(isDefined(var0)) {
-      level.characters[var1].origin = var0.origin;
-      level.characters[var1].angles = var0.angles;
+    if(isDefined(var_0)) {
+      level.characters[var_1].origin = var_0.origin;
+      level.characters[var_1].angles = var_0.angles;
     }
   }
 
-  for(var3 = 0; var3 < 4; var3++) {
-    var2 = var3 + 1;
-    var1 = 8 + var3;
-    var0 = getEnt("lobby_charslot_0" + var2 + "_dog", "targetname");
-    level.characters[var1].origin = var0.origin;
-    level.characters[var1].angles = var0.angles;
+  for(var_3 = 0; var_3 < 4; var_3++) {
+    var_2 = var_3 + 1;
+    var_1 = 8 + var_3;
+    var_0 = getEnt("lobby_charslot_0" + var_2 + "_dog", "targetname");
+    level.characters[var_1].origin = var_0.origin;
+    level.characters[var_1].angles = var_0.angles;
   }
 }
 
 function update_main_menu_char_loc() {
-  var0 = getEnt("charroom_char_tango_east", "targetname");
-  level.characters[12].origin = var0.origin;
-  level.characters[12].angles = var0.angles;
-  var0 = getEnt("charroom_char_tango_west", "targetname");
-  level.characters[13].origin = var0.origin;
-  level.characters[13].angles = var0.angles;
+  var_0 = getEnt("charroom_char_tango_east", "targetname");
+  level.characters[12].origin = var_0.origin;
+  level.characters[12].angles = var_0.angles;
+  var_0 = getEnt("charroom_char_tango_west", "targetname");
+  level.characters[13].origin = var_0.origin;
+  level.characters[13].angles = var_0.angles;
 }
 
 function ref_13fa5() {
-  var0 = getEnt("charroom_char_west_b", "targetname");
-  level.characters[0].origin = var0.origin;
-  level.characters[0].angles = var0.angles;
-  level.characters[8].origin = var0.origin;
-  level.characters[8].angles = var0.angles;
+  var_0 = getEnt("charroom_char_west_b", "targetname");
+  level.characters[0].origin = var_0.origin;
+  level.characters[0].angles = var_0.angles;
+  level.characters[8].origin = var_0.origin;
+  level.characters[8].angles = var_0.angles;
 }
 
 function ref_13fa4() {
-  var0 = getEnt("charroom_char_east_a", "targetname");
-  level.characters[1].origin = var0.origin;
-  level.characters[1].angles = var0.angles;
-  level.characters[9].origin = var0.origin;
-  level.characters[9].angles = var0.angles;
+  var_0 = getEnt("charroom_char_east_a", "targetname");
+  level.characters[1].origin = var_0.origin;
+  level.characters[1].angles = var_0.angles;
+  level.characters[9].origin = var_0.origin;
+  level.characters[9].angles = var_0.angles;
 }
 
-function ref_12a0d(var0) {
-  switch (var0) {
+function ref_12a0d(var_0) {
+  switch (var_0) {
     case "small":
-      foreach(var2 in level.ui_bg_images_2d) {
-        var2.origin = level.ref_12a10.origin;
+      foreach(var_2 in level.ui_bg_images_2d) {
+        var_2.origin = level.ref_12a10.origin;
       }
 
       break;
     case "medium":
-      foreach(var2 in level.ui_bg_images_2d) {
-        var2.origin = level.ref_12a0f.origin;
+      foreach(var_2 in level.ui_bg_images_2d) {
+        var_2.origin = level.ref_12a0f.origin;
       }
 
       break;
     case "large":
-      foreach(var2 in level.ui_bg_images_2d) {
-        var2.origin = level.ref_12a0e.origin;
+      foreach(var_2 in level.ui_bg_images_2d) {
+        var_2.origin = level.ref_12a0e.origin;
       }
 
       break;
     case "watch":
-      foreach(var2 in level.ui_bg_images_2d) {
-        var2.origin = level.ref_12a11.origin;
+      foreach(var_2 in level.ui_bg_images_2d) {
+        var_2.origin = level.ref_12a11.origin;
       }
 
       break;
@@ -629,22 +629,22 @@ function ref_12a0d(var0) {
 }
 
 function initialize_transition_array() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, "loadout_showcase", []);
 }
 
-function get_section_state(var0) {
-  var1 = [];
-  var2 = !isDefined(level.active_scene_data) || level.transition_interrupted;
+function get_section_state(var_0) {
+  var_1 = [];
+  var_2 = !isDefined(level.active_scene_data) || level.transition_interrupted;
   level.playerviewowner visionsetnakedforplayer("", 0);
   level.ref_13b60 = 0;
 
-  switch (var0.name) {
+  switch (var_0.name) {
     case "mlg.tv":
       break;
     case "squad_lobby":
-      var1 = level.camera_lobby;
-      var1 = level.camera_lobby.basecam;
+      var_1 = level.camera_lobby;
+      var_1 = level.camera_lobby.basecam;
 
       if(level.ref_13370 && isDefined(level.playersetomnvarattraction)) {
         level.playerviewowner visionsetnakedforplayer("mp_frontend_lobby_s4_mid", 0);
@@ -672,8 +672,8 @@ function get_section_state(var0) {
 
       break;
     case "squad_lobby_detail":
-      var1 = level.camera_lobby_detail;
-      var1 = level.camera_lobby_detail.basecam;
+      var_1 = level.camera_lobby_detail;
+      var_1 = level.camera_lobby_detail.basecam;
 
       if(level.ref_13370 && isDefined(level.playersetomnvarattraction)) {
         level.playerviewowner visionsetnakedforplayer("mp_frontend_lobby_s4_mid", 0);
@@ -701,44 +701,44 @@ function get_section_state(var0) {
 
       break;
     case "character_tango":
-      var1 = level.camera_character_tango;
-      var1 = level.camera_character_tango.basecam;
+      var_1 = level.camera_character_tango;
+      var_1 = level.camera_character_tango.basecam;
       break;
     case "quartermaster":
-      var1 = level.camera_quartermaster;
-      var1 = level.camera_quartermaster.basecam;
+      var_1 = level.camera_quartermaster;
+      var_1 = level.camera_quartermaster.basecam;
       break;
     case "quartermaster_detail":
-      var1 = level.camera_quartermaster_detail;
-      var1 = level.camera_quartermaster_detail.basecam;
+      var_1 = level.camera_quartermaster_detail;
+      var_1 = level.camera_quartermaster_detail.basecam;
       break;
     case "character_faction_select_l":
-      var1 = level.camera_character_faction_select_l;
-      var1 = level.camera_character_faction_select_l.basecam;
+      var_1 = level.camera_character_faction_select_l;
+      var_1 = level.camera_character_faction_select_l.basecam;
       break;
     case "character_faction_select_l_detail":
-      var1 = level.camera_character_faction_select_l_detail;
-      var1 = level.camera_character_faction_select_l_detail.basecam;
+      var_1 = level.camera_character_faction_select_l_detail;
+      var_1 = level.camera_character_faction_select_l_detail.basecam;
       break;
     case "character_preview_select":
-      var1 = level.gamemodemolotovfunc;
-      var1 = level.gamemodemolotovfunc.basecam;
+      var_1 = level.gamemodemolotovfunc;
+      var_1 = level.gamemodemolotovfunc.basecam;
       break;
     case "character_preview_select_detail":
-      var1 = level.gamemodeoverridemeleeviewkickscale;
-      var1 = level.gamemodeoverridemeleeviewkickscale.basecam;
+      var_1 = level.gamemodeoverridemeleeviewkickscale;
+      var_1 = level.gamemodeoverridemeleeviewkickscale.basecam;
       break;
     case "character_faction_select_r":
-      var1 = level.camera_character_faction_select_r;
-      var1 = level.camera_character_faction_select_r.basecam;
+      var_1 = level.camera_character_faction_select_r;
+      var_1 = level.camera_character_faction_select_r.basecam;
       break;
     case "character_faction_select_r_detail":
-      var1 = level.camera_character_faction_select_r_detail;
-      var1 = level.camera_character_faction_select_r_detail.basecam;
+      var_1 = level.camera_character_faction_select_r_detail;
+      var_1 = level.camera_character_faction_select_r_detail.basecam;
       break;
     case "character_tournaments":
-      var1 = level.camera_character_tournaments;
-      var1 = level.camera_character_tournaments.basecam;
+      var_1 = level.camera_character_tournaments;
+      var_1 = level.camera_character_tournaments.basecam;
 
       if(level.ref_13370 && isDefined(level.playersetomnvarattraction)) {
         level.playerviewowner visionsetnakedforplayer("mp_frontend_lobby_s4_mid", 0);
@@ -750,8 +750,8 @@ function get_section_state(var0) {
 
       break;
     case "character_gamebattles":
-      var1 = level.gameisending;
-      var1 = level.gameisending.basecam;
+      var_1 = level.gameisending;
+      var_1 = level.gameisending.basecam;
 
       if(level.ref_13370 && isDefined(level.playersetomnvarattraction)) {
         level.playerviewowner visionsetnakedforplayer("mp_frontend_lobby_s4_mid", 0);
@@ -763,411 +763,411 @@ function get_section_state(var0) {
 
       break;
     case "loadout_showcase_overview":
-      var1 = level.camera_loadout_showcase_overview;
-      var1 = level.camera_loadout_showcase_overview.basecam;
+      var_1 = level.camera_loadout_showcase_overview;
+      var_1 = level.camera_loadout_showcase_overview.basecam;
       break;
     case "loadout_showcase_preview":
-      var1 = level.camera_loadout_showcase_preview;
-      var1 = level.camera_loadout_showcase_preview.basecam;
+      var_1 = level.camera_loadout_showcase_preview;
+      var_1 = level.camera_loadout_showcase_preview.basecam;
       ref_12a0d("medium");
       break;
     case "loadout_showcase_preview_large":
-      var1 = level.camera_loadout_showcase_preview_large;
-      var1 = level.camera_loadout_showcase_preview_large.basecam;
+      var_1 = level.camera_loadout_showcase_preview_large;
+      var_1 = level.camera_loadout_showcase_preview_large.basecam;
       ref_12a0d("large");
       break;
     case "loadout_showcase_preview_small":
-      var1 = level.camera_loadout_showcase_preview_small;
-      var1 = level.camera_loadout_showcase_preview_small.basecam;
+      var_1 = level.camera_loadout_showcase_preview_small;
+      var_1 = level.camera_loadout_showcase_preview_small.basecam;
       ref_12a0d("small");
       break;
     case "loadout_showcase_preview_riot":
-      var1 = level.camera_loadout_showcase_preview_riot;
-      var1 = level.camera_loadout_showcase_preview_riot.basecam;
+      var_1 = level.camera_loadout_showcase_preview_riot;
+      var_1 = level.camera_loadout_showcase_preview_riot.basecam;
       break;
     case "loadout_showcase_preview_watch":
-      var1 = level.camera_loadout_showcase_preview_watch;
-      var1 = level.camera_loadout_showcase_preview_watch.basecam;
+      var_1 = level.camera_loadout_showcase_preview_watch;
+      var_1 = level.camera_loadout_showcase_preview_watch.basecam;
       ref_12a0d("watch");
       break;
     case "loadout_showcase_preview_barrel":
-      var1 = level.camera_loadout_showcase_preview_barrel;
-      var1 = level.camera_loadout_showcase_preview_barrel.basecam;
+      var_1 = level.camera_loadout_showcase_preview_barrel;
+      var_1 = level.camera_loadout_showcase_preview_barrel.basecam;
       break;
     case "loadout_showcase_preview_barrel_alt1":
-      var1 = level.camera_loadout_showcase_preview_barrel_alt1;
-      var1 = level.camera_loadout_showcase_preview_barrel_alt1.basecam;
+      var_1 = level.camera_loadout_showcase_preview_barrel_alt1;
+      var_1 = level.camera_loadout_showcase_preview_barrel_alt1.basecam;
       break;
     case "loadout_showcase_preview_barrel_alt2":
-      var1 = level.gameplay_main;
-      var1 = level.gameplay_main.basecam;
+      var_1 = level.gameplay_main;
+      var_1 = level.gameplay_main.basecam;
       break;
     case "loadout_showcase_preview_charm":
-      var1 = level.camera_loadout_showcase_preview_charm;
-      var1 = level.camera_loadout_showcase_preview_charm.basecam;
+      var_1 = level.camera_loadout_showcase_preview_charm;
+      var_1 = level.camera_loadout_showcase_preview_charm.basecam;
       break;
     case "loadout_showcase_preview_charm_alt1":
-      var1 = level.camera_loadout_showcase_preview_charm_alt1;
-      var1 = level.camera_loadout_showcase_preview_charm_alt1.basecam;
+      var_1 = level.camera_loadout_showcase_preview_charm_alt1;
+      var_1 = level.camera_loadout_showcase_preview_charm_alt1.basecam;
       break;
     case "loadout_showcase_preview_charm_alt2":
-      var1 = level.camera_loadout_showcase_preview_charm_alt2;
-      var1 = level.camera_loadout_showcase_preview_charm_alt2.basecam;
+      var_1 = level.camera_loadout_showcase_preview_charm_alt2;
+      var_1 = level.camera_loadout_showcase_preview_charm_alt2.basecam;
       break;
     case "loadout_showcase_preview_charm_alt3":
-      var1 = level.camera_loadout_showcase_preview_charm_alt3;
-      var1 = level.camera_loadout_showcase_preview_charm_alt3.basecam;
+      var_1 = level.camera_loadout_showcase_preview_charm_alt3;
+      var_1 = level.camera_loadout_showcase_preview_charm_alt3.basecam;
       break;
     case "loadout_showcase_preview_charm_alt4":
-      var1 = level.gameskill_init;
-      var1 = level.gameskill_init.basecam;
+      var_1 = level.gameskill_init;
+      var_1 = level.gameskill_init.basecam;
       break;
     case "loadout_showcase_preview_charm_alt5":
-      var1 = level.gameskill_set_player;
-      var1 = level.gameskill_set_player.basecam;
+      var_1 = level.gameskill_set_player;
+      var_1 = level.gameskill_set_player.basecam;
       break;
     case "loadout_showcase_preview_charm_alt6":
-      var1 = level.gamestatedisplaymonitor;
-      var1 = level.gamestatedisplaymonitor.basecam;
+      var_1 = level.gamestatedisplaymonitor;
+      var_1 = level.gamestatedisplaymonitor.basecam;
       break;
     case "loadout_showcase_preview_small_charm_alt1":
-      var1 = level.gas_badplace;
-      var1 = level.gas_badplace.basecam;
+      var_1 = level.gas_badplace;
+      var_1 = level.gas_badplace.basecam;
       break;
     case "loadout_showcase_preview_laser":
-      var1 = level.camera_loadout_showcase_preview_laser;
-      var1 = level.camera_loadout_showcase_preview_laser.basecam;
+      var_1 = level.camera_loadout_showcase_preview_laser;
+      var_1 = level.camera_loadout_showcase_preview_laser.basecam;
       break;
     case "loadout_showcase_preview_laser_alt1":
-      var1 = level.camera_loadout_showcase_preview_laser_alt1;
-      var1 = level.camera_loadout_showcase_preview_laser_alt1.basecam;
+      var_1 = level.camera_loadout_showcase_preview_laser_alt1;
+      var_1 = level.camera_loadout_showcase_preview_laser_alt1.basecam;
       break;
     case "loadout_showcase_preview_laser_alt2":
-      var1 = level.camera_loadout_showcase_preview_laser_alt2;
-      var1 = level.camera_loadout_showcase_preview_laser_alt2.basecam;
+      var_1 = level.camera_loadout_showcase_preview_laser_alt2;
+      var_1 = level.camera_loadout_showcase_preview_laser_alt2.basecam;
       break;
     case "loadout_showcase_preview_magazine":
-      var1 = level.camera_loadout_showcase_preview_magazine;
-      var1 = level.camera_loadout_showcase_preview_magazine.basecam;
+      var_1 = level.camera_loadout_showcase_preview_magazine;
+      var_1 = level.camera_loadout_showcase_preview_magazine.basecam;
       break;
     case "loadout_showcase_preview_magazine_alt1":
-      var1 = level.camera_loadout_showcase_preview_magazine_alt1;
-      var1 = level.camera_loadout_showcase_preview_magazine_alt1.basecam;
+      var_1 = level.camera_loadout_showcase_preview_magazine_alt1;
+      var_1 = level.camera_loadout_showcase_preview_magazine_alt1.basecam;
       break;
     case "loadout_showcase_preview_magazine_alt2":
-      var1 = level.camera_loadout_showcase_preview_magazine_alt2;
-      var1 = level.camera_loadout_showcase_preview_magazine_alt2.basecam;
+      var_1 = level.camera_loadout_showcase_preview_magazine_alt2;
+      var_1 = level.camera_loadout_showcase_preview_magazine_alt2.basecam;
       break;
     case "loadout_showcase_preview_muzzle":
-      var1 = level.camera_loadout_showcase_preview_muzzle;
-      var1 = level.camera_loadout_showcase_preview_muzzle.basecam;
+      var_1 = level.camera_loadout_showcase_preview_muzzle;
+      var_1 = level.camera_loadout_showcase_preview_muzzle.basecam;
       break;
     case "loadout_showcase_preview_muzzle_alt1":
-      var1 = level.camera_loadout_showcase_preview_muzzle_alt1;
-      var1 = level.camera_loadout_showcase_preview_muzzle_alt1.basecam;
+      var_1 = level.camera_loadout_showcase_preview_muzzle_alt1;
+      var_1 = level.camera_loadout_showcase_preview_muzzle_alt1.basecam;
       break;
     case "loadout_showcase_preview_optic":
-      var1 = level.camera_loadout_showcase_preview_optic;
-      var1 = level.camera_loadout_showcase_preview_optic.basecam;
+      var_1 = level.camera_loadout_showcase_preview_optic;
+      var_1 = level.camera_loadout_showcase_preview_optic.basecam;
       break;
     case "loadout_showcase_preview_optic_alt1":
-      var1 = level.camera_loadout_showcase_preview_optic_alt1;
-      var1 = level.camera_loadout_showcase_preview_optic_alt1.basecam;
+      var_1 = level.camera_loadout_showcase_preview_optic_alt1;
+      var_1 = level.camera_loadout_showcase_preview_optic_alt1.basecam;
       break;
     case "loadout_showcase_preview_reargrip":
-      var1 = level.camera_loadout_showcase_preview_reargrip;
-      var1 = level.camera_loadout_showcase_preview_reargrip.basecam;
+      var_1 = level.camera_loadout_showcase_preview_reargrip;
+      var_1 = level.camera_loadout_showcase_preview_reargrip.basecam;
       break;
     case "loadout_showcase_preview_reargrip_alt1":
-      var1 = level.camera_loadout_showcase_preview_reargrip_alt1;
-      var1 = level.camera_loadout_showcase_preview_reargrip_alt1.basecam;
+      var_1 = level.camera_loadout_showcase_preview_reargrip_alt1;
+      var_1 = level.camera_loadout_showcase_preview_reargrip_alt1.basecam;
       break;
     case "loadout_showcase_preview_reargrip_alt2":
-      var1 = level.camera_loadout_showcase_preview_reargrip_alt2;
-      var1 = level.camera_loadout_showcase_preview_reargrip_alt2.basecam;
+      var_1 = level.camera_loadout_showcase_preview_reargrip_alt2;
+      var_1 = level.camera_loadout_showcase_preview_reargrip_alt2.basecam;
       break;
     case "loadout_showcase_preview_sticker":
-      var1 = level.gas_fx;
-      var1 = level.gas_fx.basecam;
+      var_1 = level.gas_fx;
+      var_1 = level.gas_fx.basecam;
       break;
     case "loadout_showcase_preview_sticker_alt1":
-      var1 = level.gas_linger_large_vfx;
-      var1 = level.gas_linger_large_vfx.basecam;
+      var_1 = level.gas_linger_large_vfx;
+      var_1 = level.gas_linger_large_vfx.basecam;
       break;
     case "loadout_showcase_preview_sticker_alt2":
-      var1 = level.gas_linger_vfx;
-      var1 = level.gas_linger_vfx.basecam;
+      var_1 = level.gas_linger_vfx;
+      var_1 = level.gas_linger_vfx.basecam;
       break;
     case "loadout_showcase_preview_sticker_alt3":
-      var1 = level.gas_payloads;
-      var1 = level.gas_payloads.basecam;
+      var_1 = level.gas_payloads;
+      var_1 = level.gas_payloads.basecam;
       break;
     case "loadout_showcase_preview_sticker_alt4":
-      var1 = level.gas_sequence_activated;
-      var1 = level.gas_sequence_activated.basecam;
+      var_1 = level.gas_sequence_activated;
+      var_1 = level.gas_sequence_activated.basecam;
       break;
     case "loadout_showcase_preview_stock":
-      var1 = level.camera_loadout_showcase_preview_stock;
-      var1 = level.camera_loadout_showcase_preview_stock.basecam;
+      var_1 = level.camera_loadout_showcase_preview_stock;
+      var_1 = level.camera_loadout_showcase_preview_stock.basecam;
       break;
     case "loadout_showcase_preview_stock_alt1":
-      var1 = level.camera_loadout_showcase_preview_stock_alt1;
-      var1 = level.camera_loadout_showcase_preview_stock_alt1.basecam;
+      var_1 = level.camera_loadout_showcase_preview_stock_alt1;
+      var_1 = level.camera_loadout_showcase_preview_stock_alt1.basecam;
       break;
     case "loadout_showcase_preview_stock_alt2":
-      var1 = level.camera_loadout_showcase_preview_stock_alt2;
-      var1 = level.camera_loadout_showcase_preview_stock_alt2.basecam;
+      var_1 = level.camera_loadout_showcase_preview_stock_alt2;
+      var_1 = level.camera_loadout_showcase_preview_stock_alt2.basecam;
       break;
     case "loadout_showcase_preview_underbarrel":
-      var1 = level.camera_loadout_showcase_preview_underbarrel;
-      var1 = level.camera_loadout_showcase_preview_underbarrel.basecam;
+      var_1 = level.camera_loadout_showcase_preview_underbarrel;
+      var_1 = level.camera_loadout_showcase_preview_underbarrel.basecam;
       break;
     case "loadout_showcase_preview_large_barrel":
-      var1 = level.camera_loadout_showcase_preview_large_barrel;
-      var1 = level.camera_loadout_showcase_preview_large_barrel.basecam;
+      var_1 = level.camera_loadout_showcase_preview_large_barrel;
+      var_1 = level.camera_loadout_showcase_preview_large_barrel.basecam;
       break;
     case "loadout_showcase_preview_large_barrel_alt1":
-      var1 = level.camera_loadout_showcase_preview_large_barrel_alt1;
-      var1 = level.camera_loadout_showcase_preview_large_barrel_alt1.basecam;
+      var_1 = level.camera_loadout_showcase_preview_large_barrel_alt1;
+      var_1 = level.camera_loadout_showcase_preview_large_barrel_alt1.basecam;
       break;
     case "loadout_showcase_preview_large_charm":
-      var1 = level.camera_loadout_showcase_preview_large_charm;
-      var1 = level.camera_loadout_showcase_preview_large_charm.basecam;
+      var_1 = level.camera_loadout_showcase_preview_large_charm;
+      var_1 = level.camera_loadout_showcase_preview_large_charm.basecam;
       break;
     case "loadout_showcase_preview_large_charm_alt1":
-      var1 = level.camera_loadout_showcase_preview_large_charm_alt1;
-      var1 = level.camera_loadout_showcase_preview_large_charm_alt1.basecam;
+      var_1 = level.camera_loadout_showcase_preview_large_charm_alt1;
+      var_1 = level.camera_loadout_showcase_preview_large_charm_alt1.basecam;
       break;
     case "loadout_showcase_preview_large_charm_alt2":
-      var1 = level.camera_loadout_showcase_preview_large_charm_alt2;
-      var1 = level.camera_loadout_showcase_preview_large_charm_alt2.basecam;
+      var_1 = level.camera_loadout_showcase_preview_large_charm_alt2;
+      var_1 = level.camera_loadout_showcase_preview_large_charm_alt2.basecam;
       break;
     case "loadout_showcase_preview_large_charm_alt3":
-      var1 = level.gametypefilter;
-      var1 = level.gametypefilter.basecam;
+      var_1 = level.gametypefilter;
+      var_1 = level.gametypefilter.basecam;
       break;
     case "loadout_showcase_preview_large_charm_alt4":
-      var1 = level.gametypekillsperhouravg;
-      var1 = level.gametypekillsperhouravg.basecam;
+      var_1 = level.gametypekillsperhouravg;
+      var_1 = level.gametypekillsperhouravg.basecam;
       break;
     case "loadout_showcase_preview_large_charm_alt5":
-      var1 = level.gametypekillspermatchmax;
-      var1 = level.gametypekillspermatchmax.basecam;
+      var_1 = level.gametypekillspermatchmax;
+      var_1 = level.gametypekillspermatchmax.basecam;
       break;
     case "loadout_showcase_preview_large_charm_alt6":
-      var1 = level.gametypeoverrideassassinsearchparams;
-      var1 = level.gametypeoverrideassassinsearchparams.basecam;
+      var_1 = level.gametypeoverrideassassinsearchparams;
+      var_1 = level.gametypeoverrideassassinsearchparams.basecam;
       break;
     case "loadout_showcase_preview_large_laser":
-      var1 = level.camera_loadout_showcase_preview_large_laser;
-      var1 = level.camera_loadout_showcase_preview_large_laser.basecam;
+      var_1 = level.camera_loadout_showcase_preview_large_laser;
+      var_1 = level.camera_loadout_showcase_preview_large_laser.basecam;
       break;
     case "loadout_showcase_preview_large_laser_alt1":
-      var1 = level.gametypeoverridedomsearchparams;
-      var1 = level.gametypeoverridedomsearchparams.basecam;
+      var_1 = level.gametypeoverridedomsearchparams;
+      var_1 = level.gametypeoverridedomsearchparams.basecam;
       break;
     case "loadout_showcase_preview_large_magazine":
-      var1 = level.camera_loadout_showcase_preview_large_magazine;
-      var1 = level.camera_loadout_showcase_preview_large_magazine.basecam;
+      var_1 = level.camera_loadout_showcase_preview_large_magazine;
+      var_1 = level.camera_loadout_showcase_preview_large_magazine.basecam;
       break;
     case "loadout_showcase_preview_large_magazine_alt1":
-      var1 = level.camera_loadout_showcase_preview_large_magazine_alt1;
-      var1 = level.camera_loadout_showcase_preview_large_magazine_alt1.basecam;
+      var_1 = level.camera_loadout_showcase_preview_large_magazine_alt1;
+      var_1 = level.camera_loadout_showcase_preview_large_magazine_alt1.basecam;
       break;
     case "loadout_showcase_preview_large_magazine_alt2":
-      var1 = level.camera_loadout_showcase_preview_large_magazine_alt2;
-      var1 = level.camera_loadout_showcase_preview_large_magazine_alt2.basecam;
+      var_1 = level.camera_loadout_showcase_preview_large_magazine_alt2;
+      var_1 = level.camera_loadout_showcase_preview_large_magazine_alt2.basecam;
       break;
     case "loadout_showcase_preview_large_muzzle":
-      var1 = level.camera_loadout_showcase_preview_large_muzzle;
-      var1 = level.camera_loadout_showcase_preview_large_muzzle.basecam;
+      var_1 = level.camera_loadout_showcase_preview_large_muzzle;
+      var_1 = level.camera_loadout_showcase_preview_large_muzzle.basecam;
       break;
     case "loadout_showcase_preview_large_muzzle_alt1":
-      var1 = level.camera_loadout_showcase_preview_large_muzzle_alt1;
-      var1 = level.camera_loadout_showcase_preview_large_muzzle_alt1.basecam;
+      var_1 = level.camera_loadout_showcase_preview_large_muzzle_alt1;
+      var_1 = level.camera_loadout_showcase_preview_large_muzzle_alt1.basecam;
       break;
     case "loadout_showcase_preview_large_optic":
-      var1 = level.camera_loadout_showcase_preview_large_optic;
-      var1 = level.camera_loadout_showcase_preview_large_optic.basecam;
+      var_1 = level.camera_loadout_showcase_preview_large_optic;
+      var_1 = level.camera_loadout_showcase_preview_large_optic.basecam;
       break;
     case "loadout_showcase_preview_large_optic_alt1":
-      var1 = level.gametypeoverridescavsearchparams;
-      var1 = level.gametypeoverridescavsearchparams.basecam;
+      var_1 = level.gametypeoverridescavsearchparams;
+      var_1 = level.gametypeoverridescavsearchparams.basecam;
       break;
     case "loadout_showcase_preview_large_optic_alt2":
-      var1 = level.gametyperoundendscoresetomnvar;
-      var1 = level.gametyperoundendscoresetomnvar.basecam;
+      var_1 = level.gametyperoundendscoresetomnvar;
+      var_1 = level.gametyperoundendscoresetomnvar.basecam;
       break;
     case "loadout_showcase_preview_large_reargrip":
-      var1 = level.camera_loadout_showcase_preview_large_reargrip;
-      var1 = level.camera_loadout_showcase_preview_large_reargrip.basecam;
+      var_1 = level.camera_loadout_showcase_preview_large_reargrip;
+      var_1 = level.camera_loadout_showcase_preview_large_reargrip.basecam;
       break;
     case "loadout_showcase_preview_large_reargrip_alt1":
-      var1 = level.camera_loadout_showcase_preview_large_reargrip_alt1;
-      var1 = level.camera_loadout_showcase_preview_large_reargrip_alt1.basecam;
+      var_1 = level.camera_loadout_showcase_preview_large_reargrip_alt1;
+      var_1 = level.camera_loadout_showcase_preview_large_reargrip_alt1.basecam;
       break;
     case "loadout_showcase_preview_large_sticker":
-      var1 = level.gametypeweaponxpmodifier;
-      var1 = level.gametypeweaponxpmodifier.basecam;
+      var_1 = level.gametypeweaponxpmodifier;
+      var_1 = level.gametypeweaponxpmodifier.basecam;
       break;
     case "loadout_showcase_preview_large_sticker_alt1":
-      var1 = level.garbage_bin_clip;
-      var1 = level.garbage_bin_clip.basecam;
+      var_1 = level.garbage_bin_clip;
+      var_1 = level.garbage_bin_clip.basecam;
       break;
     case "loadout_showcase_preview_large_sticker_alt2":
-      var1 = level.gas_at_computer;
-      var1 = level.gas_at_computer.basecam;
+      var_1 = level.gas_at_computer;
+      var_1 = level.gas_at_computer.basecam;
       break;
     case "loadout_showcase_preview_large_sticker_alt3":
-      var1 = level.gas_attack;
-      var1 = level.gas_attack.basecam;
+      var_1 = level.gas_attack;
+      var_1 = level.gas_attack.basecam;
       break;
     case "loadout_showcase_preview_large_stock":
-      var1 = level.camera_loadout_showcase_preview_large_stock;
-      var1 = level.camera_loadout_showcase_preview_large_stock.basecam;
+      var_1 = level.camera_loadout_showcase_preview_large_stock;
+      var_1 = level.camera_loadout_showcase_preview_large_stock.basecam;
       break;
     case "loadout_showcase_preview_large_stock_alt1":
-      var1 = level.gas_attack_deploy;
-      var1 = level.gas_attack_deploy.basecam;
+      var_1 = level.gas_attack_deploy;
+      var_1 = level.gas_attack_deploy.basecam;
       break;
     case "loadout_showcase_preview_large_underbarrel":
-      var1 = level.camera_loadout_showcase_preview_large_underbarrel;
-      var1 = level.camera_loadout_showcase_preview_large_underbarrel.basecam;
+      var_1 = level.camera_loadout_showcase_preview_large_underbarrel;
+      var_1 = level.camera_loadout_showcase_preview_large_underbarrel.basecam;
       break;
     case "loadout_showcase_preview_large_underbarrel_alt1":
-      var1 = level.camera_loadout_showcase_preview_large_underbarrel_alt1;
-      var1 = level.camera_loadout_showcase_preview_large_underbarrel_alt1.basecam;
+      var_1 = level.camera_loadout_showcase_preview_large_underbarrel_alt1;
+      var_1 = level.camera_loadout_showcase_preview_large_underbarrel_alt1.basecam;
       break;
     case "loadout_showcase_preview_small_barrel":
-      var1 = level.camera_loadout_showcase_preview_small_barrel;
-      var1 = level.camera_loadout_showcase_preview_small_barrel.basecam;
+      var_1 = level.camera_loadout_showcase_preview_small_barrel;
+      var_1 = level.camera_loadout_showcase_preview_small_barrel.basecam;
       break;
     case "loadout_showcase_preview_small_charm":
-      var1 = level.camera_loadout_showcase_preview_small_charm;
-      var1 = level.camera_loadout_showcase_preview_small_charm.basecam;
+      var_1 = level.camera_loadout_showcase_preview_small_charm;
+      var_1 = level.camera_loadout_showcase_preview_small_charm.basecam;
       break;
     case "loadout_showcase_preview_small_laser":
-      var1 = level.camera_loadout_showcase_preview_small_laser;
-      var1 = level.camera_loadout_showcase_preview_small_laser.basecam;
+      var_1 = level.camera_loadout_showcase_preview_small_laser;
+      var_1 = level.camera_loadout_showcase_preview_small_laser.basecam;
       break;
     case "loadout_showcase_preview_small_laser_alt1":
-      var1 = level.gas_cloud_vfx;
-      var1 = level.gas_cloud_vfx.basecam;
+      var_1 = level.gas_cloud_vfx;
+      var_1 = level.gas_cloud_vfx.basecam;
       break;
     case "loadout_showcase_preview_small_magazine":
-      var1 = level.camera_loadout_showcase_preview_small_magazine;
-      var1 = level.camera_loadout_showcase_preview_small_magazine.basecam;
+      var_1 = level.camera_loadout_showcase_preview_small_magazine;
+      var_1 = level.camera_loadout_showcase_preview_small_magazine.basecam;
       break;
     case "loadout_showcase_preview_small_magazine_alt1":
-      var1 = level.camera_loadout_showcase_preview_small_magazine_alt1;
-      var1 = level.camera_loadout_showcase_preview_small_magazine_alt1.basecam;
+      var_1 = level.camera_loadout_showcase_preview_small_magazine_alt1;
+      var_1 = level.camera_loadout_showcase_preview_small_magazine_alt1.basecam;
       break;
     case "loadout_showcase_preview_small_muzzle":
-      var1 = level.camera_loadout_showcase_preview_small_muzzle;
-      var1 = level.camera_loadout_showcase_preview_small_muzzle.basecam;
+      var_1 = level.camera_loadout_showcase_preview_small_muzzle;
+      var_1 = level.camera_loadout_showcase_preview_small_muzzle.basecam;
       break;
     case "loadout_showcase_preview_small_optic":
-      var1 = level.camera_loadout_showcase_preview_small_optic;
-      var1 = level.camera_loadout_showcase_preview_small_optic.basecam;
+      var_1 = level.camera_loadout_showcase_preview_small_optic;
+      var_1 = level.camera_loadout_showcase_preview_small_optic.basecam;
       break;
     case "loadout_showcase_preview_small_reargrip":
-      var1 = level.camera_loadout_showcase_preview_small_reargrip;
-      var1 = level.camera_loadout_showcase_preview_small_reargrip.basecam;
+      var_1 = level.camera_loadout_showcase_preview_small_reargrip;
+      var_1 = level.camera_loadout_showcase_preview_small_reargrip.basecam;
       break;
     case "loadout_showcase_preview_small_reargrip_alt1":
-      var1 = level.gas_emit_vfx;
-      var1 = level.gas_emit_vfx.basecam;
+      var_1 = level.gas_emit_vfx;
+      var_1 = level.gas_emit_vfx.basecam;
       break;
     case "loadout_showcase_preview_small_sticker":
-      var1 = level.gas_flyby_plane;
-      var1 = level.gas_flyby_plane.basecam;
+      var_1 = level.gas_flyby_plane;
+      var_1 = level.gas_flyby_plane.basecam;
       break;
     case "loadout_showcase_preview_small_stock":
-      var1 = level.camera_loadout_showcase_preview_small_stock;
-      var1 = level.camera_loadout_showcase_preview_small_stock.basecam;
+      var_1 = level.camera_loadout_showcase_preview_small_stock;
+      var_1 = level.camera_loadout_showcase_preview_small_stock.basecam;
       break;
     case "loadout_showcase_preview_small_trigger":
-      var1 = level.camera_loadout_showcase_preview_small_trigger;
-      var1 = level.camera_loadout_showcase_preview_small_trigger.basecam;
+      var_1 = level.camera_loadout_showcase_preview_small_trigger;
+      var_1 = level.camera_loadout_showcase_preview_small_trigger.basecam;
       break;
     case "loadout_showcase":
-      var1 = level.camera_loadout_showcase;
-      var1 = level.camera_loadout_showcase.basecam;
+      var_1 = level.camera_loadout_showcase;
+      var_1 = level.camera_loadout_showcase.basecam;
       break;
     case "loadout_showcase_armory":
-      var1 = level.gamemodespawnprotectedcallback;
-      var1 = level.gamemodespawnprotectedcallback.basecam;
+      var_1 = level.gamemodespawnprotectedcallback;
+      var_1 = level.gamemodespawnprotectedcallback.basecam;
       break;
     case "loadout_showcase_p":
-      var1 = level.camera_loadout_showcase_p;
-      var1 = level.camera_loadout_showcase_p.basecam;
+      var_1 = level.camera_loadout_showcase_p;
+      var_1 = level.camera_loadout_showcase_p.basecam;
       break;
     case "loadout_showcase_p_large":
-      var1 = level.camera_loadout_showcase_p_large;
-      var1 = level.camera_loadout_showcase_p_large.basecam;
+      var_1 = level.camera_loadout_showcase_p_large;
+      var_1 = level.camera_loadout_showcase_p_large.basecam;
       break;
     case "loadout_showcase_s":
-      var1 = level.camera_loadout_showcase_s;
-      var1 = level.camera_loadout_showcase_s.basecam;
+      var_1 = level.camera_loadout_showcase_s;
+      var_1 = level.camera_loadout_showcase_s.basecam;
       break;
     case "loadout_showcase_o":
-      var1 = level.camera_loadout_showcase_o;
-      var1 = level.camera_loadout_showcase_o.basecam;
+      var_1 = level.camera_loadout_showcase_o;
+      var_1 = level.camera_loadout_showcase_o.basecam;
       break;
     case "loadout_showcase_o_large":
-      var1 = level.camera_loadout_showcase_o_large;
-      var1 = level.camera_loadout_showcase_o_large.basecam;
+      var_1 = level.camera_loadout_showcase_o_large;
+      var_1 = level.camera_loadout_showcase_o_large.basecam;
       break;
     case "loadout_showcase_l":
-      var1 = level.camera_loadout_showcase_l;
-      var1 = level.camera_loadout_showcase_l.basecam;
+      var_1 = level.camera_loadout_showcase_l;
+      var_1 = level.camera_loadout_showcase_l.basecam;
       break;
     case "loadout_showcase_t":
-      var1 = level.camera_loadout_showcase_t;
-      var1 = level.camera_loadout_showcase_t.basecam;
+      var_1 = level.camera_loadout_showcase_t;
+      var_1 = level.camera_loadout_showcase_t.basecam;
       break;
     case "loadout_showcase_perks":
-      var1 = level.camera_loadout_showcase_perks;
-      var1 = level.camera_loadout_showcase_perks.basecam;
+      var_1 = level.camera_loadout_showcase_perks;
+      var_1 = level.camera_loadout_showcase_perks.basecam;
       break;
     case "loadout_showcase_x":
-      var1 = level.camera_loadout_showcase_x;
-      var1 = level.camera_loadout_showcase_x.basecam;
+      var_1 = level.camera_loadout_showcase_x;
+      var_1 = level.camera_loadout_showcase_x.basecam;
       break;
     case "loadout_showcase_y":
-      var1 = level.camera_loadout_showcase_y;
-      var1 = level.camera_loadout_showcase_y.basecam;
+      var_1 = level.camera_loadout_showcase_y;
+      var_1 = level.camera_loadout_showcase_y.basecam;
       break;
     case "loadout_showcase_z":
-      var1 = level.camera_loadout_showcase_z;
-      var1 = level.camera_loadout_showcase_z.basecam;
+      var_1 = level.camera_loadout_showcase_z;
+      var_1 = level.camera_loadout_showcase_z.basecam;
       break;
     case "loadout_showcase_specialist":
-      var1 = level.camera_loadout_showcase_specialist;
-      var1 = level.camera_loadout_showcase_specialist.basecam;
+      var_1 = level.camera_loadout_showcase_specialist;
+      var_1 = level.camera_loadout_showcase_specialist.basecam;
       break;
     case "loadout_showcase_watch":
-      var1 = level.camera_loadout_showcase_watch;
-      var1 = level.camera_loadout_showcase_watch.basecam;
+      var_1 = level.camera_loadout_showcase_watch;
+      var_1 = level.camera_loadout_showcase_watch.basecam;
       break;
     case "weapon_showcase":
-      var1 = level.camera_ui_bg_01;
-      var1 = level.camera_ui_bg_01.basecam;
+      var_1 = level.camera_ui_bg_01;
+      var_1 = level.camera_ui_bg_01.basecam;
       break;
     case "barracks":
-      var3 = scripts\engine\utility::ter_op(var2, level.camera_ui_bg_01, level.active_scene_data);
-      var1 = level.camera_ui_bg_01;
-      var1 = level.camera_ui_bg_01.basecam;
+      var_3 = scripts\engine\utility::ter_op(var_2, level.camera_ui_bg_01, level.active_scene_data);
+      var_1 = level.camera_ui_bg_01;
+      var_1 = level.camera_ui_bg_01.basecam;
       break;
     case "player_character_showcase":
-      var1 = level.camera_ui_bg_01;
-      var1 = level.camera_ui_bg_01.basecam;
+      var_1 = level.camera_ui_bg_01;
+      var_1 = level.camera_ui_bg_01.basecam;
       break;
     default:
       break;
   }
 
-  return var1;
+  return var_1;
 }
 
 function create_camera_position_list() {
@@ -1931,47 +1931,47 @@ function create_camera_position_list() {
 function setup_initial_entities() {
   level.characters = [];
 
-  for(var0 = 0; var0 < 8; var0++) {
-    var1 = undefined;
-    var2 = var0 + 1;
+  for(var_0 = 0; var_0 < 8; var_0++) {
+    var_1 = undefined;
+    var_2 = var_0 + 1;
 
-    if(var2 < 10) {
-      var1 = getEnt("lobby_charslot_0" + var2, "targetname");
+    if(var_2 < 10) {
+      var_1 = getEnt("lobby_charslot_0" + var_2, "targetname");
     } else {
-      var1 = getEnt("lobby_charslot_" + var2, "targetname");
+      var_1 = getEnt("lobby_charslot_" + var_2, "targetname");
     }
 
-    level.characters[var0] = spawn("script_character", var1.origin, 0, 0, var0, "MPClientCharacter");
+    level.characters[var_0] = spawn("script_character", var_1.origin, 0, 0, var_0, "MPClientCharacter");
   }
 
   level.characters[14] = spawn("script_character", level.characters[0].origin, 0, 0, 14, "MPClientCharacter");
   level.characters[14].angles = (0, 270, 0);
 
-  for(var3 = 0; var3 < 4; var3++) {
-    var2 = var3 + 1;
-    var0 = 8 + var3;
-    var1 = getEnt("lobby_charslot_0" + var2 + "_dog", "targetname");
-    level.characters[var0] = spawn("script_character", var1.origin, 0, 0, var0, "MPClientCharacter");
-    level.characters[var0].update_focus_fire_heahicon = 1;
+  for(var_3 = 0; var_3 < 4; var_3++) {
+    var_2 = var_3 + 1;
+    var_0 = 8 + var_3;
+    var_1 = getEnt("lobby_charslot_0" + var_2 + "_dog", "targetname");
+    level.characters[var_0] = spawn("script_character", var_1.origin, 0, 0, var_0, "MPClientCharacter");
+    level.characters[var_0].update_focus_fire_heahicon = 1;
   }
 
-  var1 = getEnt("charroom_char_tango_east", "targetname");
-  level.characters[12] = spawn("script_character", var1.origin, 0, 0, 12, "MPClientCharacter");
-  var1 = getEnt("charroom_char_tango_west", "targetname");
-  level.characters[13] = spawn("script_character", var1.origin, 0, 0, 13, "MPClientCharacter");
-  var4 = getEnt("weapon_loc_hq1", "targetname");
+  var_1 = getEnt("charroom_char_tango_east", "targetname");
+  level.characters[12] = spawn("script_character", var_1.origin, 0, 0, 12, "MPClientCharacter");
+  var_1 = getEnt("charroom_char_tango_west", "targetname");
+  level.characters[13] = spawn("script_character", var_1.origin, 0, 0, 13, "MPClientCharacter");
+  var_4 = getEnt("weapon_loc_hq1", "targetname");
   level.weapons = [];
-  level.weapons[0] = spawn("script_weapon", var4.origin, 0, 0, 0);
-  level.weapons[0].angles = var4.angles;
-  var5 = getEnt("weapon_loc_hq2", "targetname");
-  level.weapons[1] = spawn("script_weapon", var5.origin, 0, 0, 1);
-  level.weapons[1].angles = var5.angles;
-  var6 = getEnt("weapon_loc_preview", "targetname");
-  level.weapons[2] = spawn("script_weapon", var6.origin, 0, 0, 2);
-  level.weapons[2].angles = var6.angles;
-  var7 = getEnt("weapon_loc_watch", "targetname");
-  level.weapons[3] = spawn("script_weapon", var7.origin, 0, 0, 3);
-  level.weapons[3].angles = var7.angles;
+  level.weapons[0] = spawn("script_weapon", var_4.origin, 0, 0, 0);
+  level.weapons[0].angles = var_4.angles;
+  var_5 = getEnt("weapon_loc_hq2", "targetname");
+  level.weapons[1] = spawn("script_weapon", var_5.origin, 0, 0, 1);
+  level.weapons[1].angles = var_5.angles;
+  var_6 = getEnt("weapon_loc_preview", "targetname");
+  level.weapons[2] = spawn("script_weapon", var_6.origin, 0, 0, 2);
+  level.weapons[2].angles = var_6.angles;
+  var_7 = getEnt("weapon_loc_watch", "targetname");
+  level.weapons[3] = spawn("script_weapon", var_7.origin, 0, 0, 3);
+  level.weapons[3].angles = var_7.angles;
   frontend_camera_setup(level.camera_lobby_detail.basecam.origin, level.camera_lobby_detail.basecam.angles);
 }
 
@@ -1983,28 +1983,28 @@ function epictauntlistener() {
   self endon("disconnect");
 
   for(;;) {
-    self waittill("luinotifyserver", var0, var1);
+    self waittill("luinotifyserver", var_0, var_1);
 
-    if(var0 == "taunt_started") {
+    if(var_0 == "taunt_started") {
       scripts\mp\broshot_utilities::respawnclientcharacter();
-      var2 = tablelookup("mp/cac/taunts.csv", 0, var1, 9);
-      scripts\mp\broshot_utilities::processepictaunt(var2, -1, 0);
+      var_2 = tablelookup("mp/cac/taunts.csv", 0, var_1, 9);
+      scripts\mp\broshot_utilities::processepictaunt(var_2, -1, 0);
       continue;
     }
 
-    if(var0 == "taunt_reset") {
+    if(var_0 == "taunt_reset") {
       scripts\mp\broshot_utilities::respawnclientcharacter();
     }
   }
 }
 
-function devui_bg_swap(var0) {
-  foreach(var2 in level.ui_bg_images_2d) {
-    var2 hide();
+function devui_bg_swap(var_0) {
+  foreach(var_2 in level.ui_bg_images_2d) {
+    var_2 hide();
   }
 
-  if(var0 > 0 && var0 <= level.ui_bg_images_2d.size) {
-    level.ui_bg_images_2d[var0] show();
+  if(var_0 > 0 && var_0 <= level.ui_bg_images_2d.size) {
+    level.ui_bg_images_2d[var_0] show();
     return;
   }
 }
@@ -2015,16 +2015,16 @@ function luinotifylistener() {
   level.currentdropcount = 0;
 
   for(;;) {
-    self waittill("luinotifyserver", var0, var1);
+    self waittill("luinotifyserver", var_0, var_1);
 
-    if(var0 == "loadout_showcase_entered") {
+    if(var_0 == "loadout_showcase_entered") {
       level.bulletsinitialstate = 1;
       level.currentdropcount = 0;
       continue;
     }
 
-    if(var0 == "primary_weapon_changed") {
-      var2 = int(var1);
+    if(var_0 == "primary_weapon_changed") {
+      var_2 = int(var_1);
 
       if(istrue(level.bulletsinitialstate)) {
         level.bulletsinitialstate = 0;
@@ -2042,9 +2042,9 @@ function luinotifylistener() {
       continue;
     }
 
-    if(var0 == "set_ui_rarity_image") {
-      var3 = int(var1);
-      devui_bg_swap(var3);
+    if(var_0 == "set_ui_rarity_image") {
+      var_3 = int(var_1);
+      devui_bg_swap(var_3);
     }
   }
 }
@@ -2065,84 +2065,84 @@ function zombiepowerscooldown() {
 function ref_14014() {
   for(;;) {
     if(getdvarint("scr_accessory_test_vfx_rot", -1) != -1) {
-      var0 = getdvarint("scr_accessory_test_vfx_rot");
-      ref_11d9f(var0);
+      var_0 = getdvarint("scr_accessory_test_vfx_rot");
+      ref_11d9f(var_0);
     }
 
     waitframe();
   }
 }
 
-function ref_11d9f(var0) {
-  var1 = 0;
-  var2 = 0;
-  var3 = 0;
+function ref_11d9f(var_0) {
+  var_1 = 0;
+  var_2 = 0;
+  var_3 = 0;
 
-  if(var0 == 1) {
-    var1 = 0.1;
+  if(var_0 == 1) {
+    var_1 = 0.1;
   }
 
-  if(var0 == 2) {
-    var1 = -0.1;
+  if(var_0 == 2) {
+    var_1 = -0.1;
   }
 
-  if(var0 == 3) {
-    var2 = 0.1;
+  if(var_0 == 3) {
+    var_2 = 0.1;
   }
 
-  if(var0 == 4) {
-    var2 = -0.1;
+  if(var_0 == 4) {
+    var_2 = -0.1;
   }
 
-  if(var0 == 5) {
-    var3 = 0.1;
+  if(var_0 == 5) {
+    var_3 = 0.1;
   }
 
-  if(var0 == 6) {
-    var3 = -0.1;
+  if(var_0 == 6) {
+    var_3 = -0.1;
   }
 
-  var4 = level.ref_144db.angles;
-  var5 = level.ref_144db.origin + (var1, var2, var3);
+  var_4 = level.ref_144db.angles;
+  var_5 = level.ref_144db.origin + (var_1, var_2, var_3);
   level.ref_144db delete();
-  level.ref_144db = spawnfx(level.spawn_maint_wave_1, var5);
-  level.ref_144db.angles = var4;
+  level.ref_144db = spawnfx(level.spawn_maint_wave_1, var_5);
+  level.ref_144db.angles = var_4;
   triggerfx(level.ref_144db);
 }
 
-function ref_12d9a(var0) {
-  var1 = 0;
-  var2 = 0;
-  var3 = 0;
+function ref_12d9a(var_0) {
+  var_1 = 0;
+  var_2 = 0;
+  var_3 = 0;
 
-  if(var0 == 1) {
-    var1 = 10;
+  if(var_0 == 1) {
+    var_1 = 10;
   }
 
-  if(var0 == 2) {
-    var1 = -10;
+  if(var_0 == 2) {
+    var_1 = -10;
   }
 
-  if(var0 == 3) {
-    var2 = 10;
+  if(var_0 == 3) {
+    var_2 = 10;
   }
 
-  if(var0 == 4) {
-    var2 = -10;
+  if(var_0 == 4) {
+    var_2 = -10;
   }
 
-  if(var0 == 5) {
-    var3 = 10;
+  if(var_0 == 5) {
+    var_3 = 10;
   }
 
-  if(var0 == 6) {
-    var3 = -10;
+  if(var_0 == 6) {
+    var_3 = -10;
   }
 
-  var4 = level.ref_144db.angles + (var1, var2, var3);
+  var_4 = level.ref_144db.angles + (var_1, var_2, var_3);
   level.ref_144db delete();
   level.ref_144db = spawnfx(level.spawn_maint_wave_1, level.weapons[3].origin + (1, -0.66, 1.1));
-  level.ref_144db.angles = var4;
+  level.ref_144db.angles = var_4;
   triggerfx(level.ref_144db);
 }
 

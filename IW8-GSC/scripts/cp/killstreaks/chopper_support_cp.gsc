@@ -7,152 +7,152 @@ function init_chopper_support() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("chopper_support", "set_vehicle_hit_damage_data", &chopper_support_set_vehicle_hit_damage_data);
 }
 
-function chopper_support_set_vehicle_hit_damage_data(var0, var1) {
-  scripts\cp\vehicles\damage_cp::set_vehicle_hit_damage_data(var0, var1);
+function chopper_support_set_vehicle_hit_damage_data(var_0, var_1) {
+  scripts\cp\vehicles\damage_cp::set_vehicle_hit_damage_data(var_0, var_1);
 }
 
-function chopper_support_create_enemy_chopper(var0) {
-  var1 = spawnStruct();
-  var1.streakname = "chopper_support";
-  var1.owner = var0;
-  var2 = spawnenemychopper(var0, var0, var1);
+function chopper_support_create_enemy_chopper(var_0) {
+  var_1 = spawnStruct();
+  var_1.streakname = "chopper_support";
+  var_1.owner = var_0;
+  var_2 = spawnenemychopper(var_0, var_0, var_1);
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     iprintln(" COULD NOT SPAWN ENEMY CHOPPER. RECHECK SCRIPT ^1 chopper_support_create_enemy_chopper(...)");
     return 0;
   }
 
-  thread startenemychopper(var2, var0);
+  thread startenemychopper(var_2, var_0);
 }
 
-function spawnenemychopper(var0, var1) {
-  var2 = (0, 0, 1750);
-  var4 = var0.origin - anglesToForward(var0.angles) * 15000 + var2;
-  var5 = var0.origin + anglesToForward(var0.angles) * 2000 + var2;
-  var6 = var0.angles;
-  var7 = getdvarint("scr_chopper_support_lifetime", 45);
-  var9 = undefined;
+function spawnenemychopper(var_0, var_1) {
+  var_2 = (0, 0, 1750);
+  var_4 = var_0.origin - anglesToForward(var_0.angles) * 15000 + var_2;
+  var_5 = var_0.origin + anglesToForward(var_0.angles) * 2000 + var_2;
+  var_6 = var_0.angles;
+  var_7 = getdvarint("scr_chopper_support_lifetime", 45);
+  var_9 = undefined;
 
   if(isDefined(level.heli_structs_entrances) && level.heli_structs_entrances.size > 0) {
-    var10 = randomint(level.heli_structs_entrances.size);
-    var11 = level.heli_structs_entrances[var10];
-    var9 = scripts\cp_mp\killstreaks\chopper_support::choppersupport_findtargetStruct(var11.script_linkto, level.heli_structs_goals);
-    var12 = var11.origin * (1, 1, 0) + var2;
-    var13 = var9.origin * (1, 1, 0) + var2;
-    var14 = vectorNormalize(var13 - var12);
-    var4 = var13 - var14 * 15000;
-    var5 = var13;
-    var6 = vectortoangles(var14);
+    var_10 = randomint(level.heli_structs_entrances.size);
+    var_11 = level.heli_structs_entrances[var_10];
+    var_9 = scripts\cp_mp\killstreaks\chopper_support::choppersupport_findtargetStruct(var_11.script_linkto, level.heli_structs_goals);
+    var_12 = var_11.origin * (1, 1, 0) + var_2;
+    var_13 = var_9.origin * (1, 1, 0) + var_2;
+    var_14 = vectorNormalize(var_13 - var_12);
+    var_4 = var_13 - var_14 * 15000;
+    var_5 = var_13;
+    var_6 = vectortoangles(var_14);
   } else {
     iprintlnbold("Level is missing heli structs, please set them up!");
   }
 
-  var21 = "veh8_mil_air_palfa_east";
-  var22 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnhelicopter(var0, var4, var6, "veh_chopper_support_mp", var21);
+  var_21 = "veh8_mil_air_palfa_east";
+  var_22 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnhelicopter(var_0, var_4, var_6, "veh_chopper_support_mp", var_21);
 
-  if(!isDefined(var22)) {
+  if(!isDefined(var_22)) {
     iprintln(" COULD NOT SPAWN ENEMY CHOPPER. RECHECK SCRIPT - ^1 spawnEnemyChopper(...) ");
     return undefined;
   }
 
-  var22.speed = 100;
-  var22.accel = 50;
-  var22.lifetime = var7;
-  var22.team = "axis";
-  var22.owner = var0;
-  var22.angles = var6;
-  var22.streakinfo = var1;
-  var22.streakname = var1.streakname;
-  var22.flaresreservecount = 1;
-  var22.currentdamagestate = 0;
-  var22.pathstart = var4;
-  var22.pathgoal = var5;
-  var22.currentaction = "patrol";
-  var22.currenttarget = undefined;
-  var22.currentpatrolstruct = var9;
-  var22.heightoffset = var2;
-  var22.health = 2000;
-  var22.maxhealth = 2000;
-  var22 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Air", var0);
+  var_22.speed = 100;
+  var_22.accel = 50;
+  var_22.lifetime = var_7;
+  var_22.team = "axis";
+  var_22.owner = var_0;
+  var_22.angles = var_6;
+  var_22.streakinfo = var_1;
+  var_22.streakname = var_1.streakname;
+  var_22.flaresreservecount = 1;
+  var_22.currentdamagestate = 0;
+  var_22.pathstart = var_4;
+  var_22.pathgoal = var_5;
+  var_22.currentaction = "patrol";
+  var_22.currenttarget = undefined;
+  var_22.currentpatrolstruct = var_9;
+  var_22.heightoffset = var_2;
+  var_22.health = 2000;
+  var_22.maxhealth = 2000;
+  var_22 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Air", var_0);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "killstreakMakeVehicle")) {
-    var22[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakMakeVehicle")]](var1.streakname, "destroyed_chopper_support", undefined, "timeout_chopper_support", "callout_destroyed_chopper_support");
+    var_22[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakMakeVehicle")]](var_1.streakname, "destroyed_chopper_support", undefined, "timeout_chopper_support", "callout_destroyed_chopper_support");
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "killstreakSetPreModDamageCallback")) {
-    var22[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetPreModDamageCallback")]](var1.streakname);
+    var_22[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetPreModDamageCallback")]](var_1.streakname);
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "killstreakSetPostModDamageCallback")) {
-    var22[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetPostModDamageCallback")]](var1.streakname, &scripts\cp_mp\killstreaks\chopper_support::choppersupport_modifydamage);
+    var_22[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetPostModDamageCallback")]](var_1.streakname, &scripts\cp_mp\killstreaks\chopper_support::choppersupport_modifydamage);
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "killstreakSetDeathCallback")) {
-    var22[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetDeathCallback")]](var1.streakname, &scripts\cp_mp\killstreaks\chopper_support::choppersupport_handledeathdamage);
+    var_22[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetDeathCallback")]](var_1.streakname, &scripts\cp_mp\killstreaks\chopper_support::choppersupport_handledeathdamage);
   }
 
-  level.choppersupports[level.choppersupports.size] = var22;
+  level.choppersupports[level.choppersupports.size] = var_22;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "addToActiveKillstreakList")) {
-    var22[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "addToActiveKillstreakList")]](var1.streakname, "Killstreak_Air", var0, 0, 1, 100);
+    var_22[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "addToActiveKillstreakList")]](var_1.streakname, "Killstreak_Air", var_0, 0, 1, 100);
   }
 
-  var22 setmaxpitchroll(15, 15);
-  var22 vehicle_setspeed(var22.speed, var22.accel);
-  var22 sethoverparams(50, 5, 2.5);
-  var22 setturningability(0.5);
-  var22 setyawspeed(100, 25, 25, 0.1);
-  var22 setCanDamage(1);
-  var22 setneargoalnotifydist(768);
-  var22 setscriptablepartstate("blinking_lights", "on", 0);
-  var22 setscriptablepartstate("engine", "on", 0);
-  var23 = "veh8_mil_air_ahotel64_turret_wm_east";
-  var22.frontturret = spawnturret("misc_turret", var22 gettagorigin("tag_turret_front"), "chopper_support_turret_mp");
-  var22.frontturret setModel(var23);
-  var22.frontturret.owner = var0;
-  var22.frontturret.team = "axis";
-  var22.frontturret.angles = var22.angles;
-  var22.frontturret.streakinfo = var1;
-  var22.frontturret.turreton = 1;
-  var22.frontturret.name = "front_turret";
-  var22.frontturret.attackingtarget = undefined;
-  var22.frontturret linkTo(var22);
-  var22.frontturret setturretteam("axis");
-  var22.frontturret setturretmodechangewait(0);
-  var22.frontturret setmode("manual");
-  var22.frontturret setdefaultdroppitch(45);
-  var22.frontturret.groundtargetent = spawn("script_model", self.origin);
-  var22.frontturret.groundtargetent setModel("tag_origin");
-  var22.frontturret.groundtargetent dontinterpolate();
-  var22.rearturret = spawnturret("misc_turret", var22 gettagorigin("tag_turret_rear"), "chopper_support_turret_mp");
-  var22.rearturret setModel(var23);
-  var22.rearturret.owner = var0;
-  var22.rearturret.team = "axis";
-  var22.rearturret.angles = var22.angles;
-  var22.rearturret.streakinfo = var1;
-  var22.rearturret.turreton = 1;
-  var22.rearturret.name = "rear_turret";
-  var22.rearturret.attackingtarget = undefined;
-  var22.rearturret linkTo(var22);
-  var22.rearturret setturretteam("axis");
-  var22.rearturret setturretmodechangewait(0);
-  var22.rearturret setmode("manual");
-  var22.rearturret setdefaultdroppitch(45);
-  var22.rearturret.groundtargetent = spawn("script_model", self.origin);
-  var22.rearturret.groundtargetent setModel("tag_origin");
-  var22.rearturret.groundtargetent dontinterpolate();
-  var22.killcament = spawn("script_model", var22 gettagorigin("tag_ground"));
-  var22.killcament linkTo(var22, "tag_ground", (-600, 0, 1000), (0, 0, 0));
-  var22.frontturret.killcament = var22.killcament;
-  var22.rearturret.killcament = var22.killcament;
-  level notify("matchrecording_chopper", var22);
-  return var22;
+  var_22 setmaxpitchroll(15, 15);
+  var_22 vehicle_setspeed(var_22.speed, var_22.accel);
+  var_22 sethoverparams(50, 5, 2.5);
+  var_22 setturningability(0.5);
+  var_22 setyawspeed(100, 25, 25, 0.1);
+  var_22 setCanDamage(1);
+  var_22 setneargoalnotifydist(768);
+  var_22 setscriptablepartstate("blinking_lights", "on", 0);
+  var_22 setscriptablepartstate("engine", "on", 0);
+  var_23 = "veh8_mil_air_ahotel64_turret_wm_east";
+  var_22.frontturret = spawnturret("misc_turret", var_22 gettagorigin("tag_turret_front"), "chopper_support_turret_mp");
+  var_22.frontturret setModel(var_23);
+  var_22.frontturret.owner = var_0;
+  var_22.frontturret.team = "axis";
+  var_22.frontturret.angles = var_22.angles;
+  var_22.frontturret.streakinfo = var_1;
+  var_22.frontturret.turreton = 1;
+  var_22.frontturret.name = "front_turret";
+  var_22.frontturret.attackingtarget = undefined;
+  var_22.frontturret linkTo(var_22);
+  var_22.frontturret setturretteam("axis");
+  var_22.frontturret setturretmodechangewait(0);
+  var_22.frontturret setmode("manual");
+  var_22.frontturret setdefaultdroppitch(45);
+  var_22.frontturret.groundtargetent = spawn("script_model", self.origin);
+  var_22.frontturret.groundtargetent setModel("tag_origin");
+  var_22.frontturret.groundtargetent dontinterpolate();
+  var_22.rearturret = spawnturret("misc_turret", var_22 gettagorigin("tag_turret_rear"), "chopper_support_turret_mp");
+  var_22.rearturret setModel(var_23);
+  var_22.rearturret.owner = var_0;
+  var_22.rearturret.team = "axis";
+  var_22.rearturret.angles = var_22.angles;
+  var_22.rearturret.streakinfo = var_1;
+  var_22.rearturret.turreton = 1;
+  var_22.rearturret.name = "rear_turret";
+  var_22.rearturret.attackingtarget = undefined;
+  var_22.rearturret linkTo(var_22);
+  var_22.rearturret setturretteam("axis");
+  var_22.rearturret setturretmodechangewait(0);
+  var_22.rearturret setmode("manual");
+  var_22.rearturret setdefaultdroppitch(45);
+  var_22.rearturret.groundtargetent = spawn("script_model", self.origin);
+  var_22.rearturret.groundtargetent setModel("tag_origin");
+  var_22.rearturret.groundtargetent dontinterpolate();
+  var_22.killcament = spawn("script_model", var_22 gettagorigin("tag_ground"));
+  var_22.killcament linkTo(var_22, "tag_ground", (-600, 0, 1000), (0, 0, 0));
+  var_22.frontturret.killcament = var_22.killcament;
+  var_22.rearturret.killcament = var_22.killcament;
+  level notify("matchrecording_chopper", var_22);
+  return var_22;
 }
 
-function startenemychopper(var0, var1) {
+function startenemychopper(var_0, var_1) {
   self endon("death");
   self setvehgoalpos(self.pathgoal, 1);
-  var0 scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("use_" + var1.streakname, 1);
+  var_0 scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("use_" + var_1.streakname, 1);
   thread choppersupport_neargoalsettings_enemy();
   self playsoundonmovingent("ks_chopper_support_approach");
 
@@ -182,7 +182,7 @@ function choppersupport_leaveoncommand_enemy() {
   scripts\cp_mp\killstreaks\chopper_support::choppersupport_cleanup();
 }
 
-function choppersupport_patrolfield_enemy(var0) {
+function choppersupport_patrolfield_enemy(var_0) {
   self endon("death");
   self endon("leaving");
   self endon("crashing");
@@ -190,49 +190,49 @@ function choppersupport_patrolfield_enemy(var0) {
 
   if(self.currentaction != "patrol") {
     self.currentaction = "patrol";
-  } else if(self.currentaction == "patrol" && !istrue(var0)) {
+  } else if(self.currentaction == "patrol" && !istrue(var_0)) {
     return;
   }
 
   self setneargoalnotifydist(100);
-  var1 = 0;
+  var_1 = 0;
 
   for(;;) {
     if(self.currentaction == "attacking") {
-      if(!istrue(var1)) {
-        var1 = 1;
+      if(!istrue(var_1)) {
+        var_1 = 1;
       }
 
       waitframe();
       continue;
     }
 
-    if(!istrue(var0) && istrue(var1)) {
+    if(!istrue(var_0) && istrue(var_1)) {
       scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("chopper_support_patrol");
-      var1 = 0;
+      var_1 = 0;
     }
 
-    var2 = scripts\cp_mp\killstreaks\chopper_support::choppersupport_findclosestpatrolstruct();
+    var_2 = scripts\cp_mp\killstreaks\chopper_support::choppersupport_findclosestpatrolstruct();
 
-    if(isDefined(var2)) {
-      scripts\cp_mp\killstreaks\chopper_support::choppersupport_movetolocation(var2, 1);
+    if(isDefined(var_2)) {
+      scripts\cp_mp\killstreaks\chopper_support::choppersupport_movetolocation(var_2, 1);
     } else {
-      var4 = [];
-      var5 = (0, 0, 0);
-      var6 = self.pathgoal;
+      var_4 = [];
+      var_5 = (0, 0, 0);
+      var_6 = self.pathgoal;
 
-      foreach(var8 in level.players) {
-        if(!var8 scripts\cp_mp\utility\player_utility::_isalive()) {
+      foreach(var_8 in level.players) {
+        if(!var_8 scripts\cp_mp\utility\player_utility::_isalive()) {
           continue;
         }
 
-        var5 += var8.origin;
-        var4 = var8;
+        var_5 += var_8.origin;
+        var_4 = var_8;
       }
 
-      if(isDefined(var5) && var4.size > 0) {
-        var10 = var5 / var4.size;
-        scripts\cp_mp\killstreaks\chopper_support::choppersupport_movetolocation(var10);
+      if(isDefined(var_5) && var_4.size > 0) {
+        var_10 = var_5 / var_4.size;
+        scripts\cp_mp\killstreaks\chopper_support::choppersupport_movetolocation(var_10);
       }
     }
 
@@ -240,22 +240,22 @@ function choppersupport_patrolfield_enemy(var0) {
   }
 }
 
-function choppersupport_engageturrettarget_enemy(var0) {
+function choppersupport_engageturrettarget_enemy(var_0) {
   self endon("leaving");
   self endon("death");
 
   for(;;) {
-    if(!istrue(var0.turreton)) {
+    if(!istrue(var_0.turreton)) {
       waitframe();
       continue;
     }
 
-    var1 = choppersupport_gettargets_enemy();
+    var_1 = choppersupport_gettargets_enemy();
 
-    if(isDefined(var1) && var1.size > 0) {
-      var2 = choppersupport_acquireturrettarget_enemy(var0, var1);
+    if(isDefined(var_1) && var_1.size > 0) {
+      var_2 = choppersupport_acquireturrettarget_enemy(var_0, var_1);
 
-      if(isDefined(var2) && var2 == "stopped_firing") {
+      if(isDefined(var_2) && var_2 == "stopped_firing") {
         scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(2);
       }
 
@@ -271,15 +271,15 @@ function choppersupport_engageturrettarget_enemy(var0) {
 function choppersupport_gettargets_enemy() {
   self endon("death");
   self endon("leaving");
-  var0 = [];
-  var1 = level.players;
+  var_0 = [];
+  var_1 = level.players;
 
-  for(var2 = 0; var2 < var1.size; var2++) {
-    var3 = var1[var2];
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    var_3 = var_1[var_2];
 
-    if(choppersupport_istarget_enemy(var3)) {
-      if(isDefined(var1[var2])) {
-        var0 = var1[var2];
+    if(choppersupport_istarget_enemy(var_3)) {
+      if(isDefined(var_1[var_2])) {
+        var_0 = var_1[var_2];
       }
     } else {
       continue;
@@ -288,97 +288,97 @@ function choppersupport_gettargets_enemy() {
     wait 0.05;
   }
 
-  return var0;
+  return var_0;
 }
 
-function choppersupport_istarget_enemy(var0) {
+function choppersupport_istarget_enemy(var_0) {
   self endon("death");
   self endon("leaving");
 
-  if(!isalive(var0) || var0.sessionstate != "playing") {
+  if(!isalive(var_0) || var_0.sessionstate != "playing") {
     return false;
   }
 
-  if(!isDefined(var0.pers["team"])) {
+  if(!isDefined(var_0.pers["team"])) {
     return false;
   }
 
-  if(var0.pers["team"] == "spectator") {
+  if(var_0.pers["team"] == "spectator") {
     return false;
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("perk", "hasPerk")) {
-    if(var0[[scripts\cp_mp\utility\script_utility::getsharedfunc("perk", "hasPerk")]]("specialty_blindeye")) {
+    if(var_0[[scripts\cp_mp\utility\script_utility::getsharedfunc("perk", "hasPerk")]]("specialty_blindeye")) {
       return false;
     }
   }
 
-  if(var0 scripts\cp_mp\utility\player_utility::isinvehicle()) {
+  if(var_0 scripts\cp_mp\utility\player_utility::isinvehicle()) {
     return false;
   }
 
-  if(scripts\cp_mp\killstreaks\chopper_support::choppersupport_isactivetarget(var0)) {
+  if(scripts\cp_mp\killstreaks\chopper_support::choppersupport_isactivetarget(var_0)) {
     return false;
   }
 
-  if(distance2dsquared(self.origin, var0.origin) > 16000000) {
+  if(distance2dsquared(self.origin, var_0.origin) > 16000000) {
     return false;
   }
 
-  if(var0 sightconetrace(self.origin, self) < 1) {
+  if(var_0 sightconetrace(self.origin, self) < 1) {
     return false;
   }
 
   return true;
 }
 
-function choppersupport_acquireturrettarget_enemy(var0, var1) {
+function choppersupport_acquireturrettarget_enemy(var_0, var_1) {
   self notify("engaging_target");
-  var2 = undefined;
-  var3 = choppersupport_getbesttarget_enemy(var0, var1);
+  var_2 = undefined;
+  var_3 = choppersupport_getbesttarget_enemy(var_0, var_1);
 
-  if(isDefined(var3)) {
-    scripts\cp_mp\killstreaks\chopper_support::choppersupport_setcurrenttarget(var0, var3);
-    scripts\cp_mp\killstreaks\chopper_support::choppersupport_fireonturrettarget(var0, var3, 1);
-    var2 = "stopped_firing";
+  if(isDefined(var_3)) {
+    scripts\cp_mp\killstreaks\chopper_support::choppersupport_setcurrenttarget(var_0, var_3);
+    scripts\cp_mp\killstreaks\chopper_support::choppersupport_fireonturrettarget(var_0, var_3, 1);
+    var_2 = "stopped_firing";
   } else {
-    var2 = "continue_searching";
+    var_2 = "continue_searching";
   }
 
-  return var2;
+  return var_2;
 }
 
-function choppersupport_getbesttarget_enemy(var0, var1) {
-  var2 = undefined;
-  var3 = undefined;
+function choppersupport_getbesttarget_enemy(var_0, var_1) {
+  var_2 = undefined;
+  var_3 = undefined;
 
-  foreach(var5 in var1) {
-    if(!choppersupport_istarget_enemy(var5)) {
+  foreach(var_5 in var_1) {
+    if(!choppersupport_istarget_enemy(var_5)) {
       continue;
     }
 
-    var6 = abs(vectortoangles(var5.origin - self.origin)[1]);
-    var7 = abs(self gettagangles("tag_flash")[1]);
-    var6 = abs(var6 - var7);
-    var8 = var5 getweaponslistitems();
+    var_6 = abs(vectortoangles(var_5.origin - self.origin)[1]);
+    var_7 = abs(self gettagangles("tag_flash")[1]);
+    var_6 = abs(var_6 - var_7);
+    var_8 = var_5 getweaponslistitems();
 
-    foreach(var10 in var8) {
-      var11 = weaponclass(var10);
+    foreach(var_10 in var_8) {
+      var_11 = weaponclass(var_10);
 
-      if(var11 == "rocketlauncher") {
-        var6 -= 40;
+      if(var_11 == "rocketlauncher") {
+        var_6 -= 40;
       }
     }
 
-    if(distancesquared(self.origin, var5.origin) > 16000000) {
-      var6 += 40;
+    if(distancesquared(self.origin, var_5.origin) > 16000000) {
+      var_6 += 40;
     }
 
-    if(!isDefined(var2) || var2 > var6) {
-      var2 = var6;
-      var3 = var5;
+    if(!isDefined(var_2) || var_2 > var_6) {
+      var_2 = var_6;
+      var_3 = var_5;
     }
   }
 
-  return var3;
+  return var_3;
 }

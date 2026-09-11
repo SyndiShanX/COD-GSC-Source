@@ -5,10 +5,10 @@
 
 function init_anim_sets() {}
 
-function registerarchetype(var0, var1, var2) {}
+function registerarchetype(var_0, var_1, var_2) {}
 
-function archetypeexists(var0) {
-  return archetypeassetloaded(var0) || isDefined(anim.archetypes[var0]);
+function archetypeexists(var_0) {
+  return archetypeassetloaded(var_0) || isDefined(anim.archetypes[var_0]);
 }
 
 function init_animset_run_move() {}
@@ -41,13 +41,13 @@ function init_animset_shotgun_crouch() {}
 
 function init_animset_default_prone() {}
 
-function init_animset_complete_custom_stand(var0) {}
+function init_animset_complete_custom_stand(var_0) {}
 
-function init_animset_custom_stand(var0, var1, var2, var3) {}
+function init_animset_custom_stand(var_0, var_1, var_2, var_3) {}
 
-function init_animset_complete_custom_crouch(var0) {}
+function init_animset_complete_custom_crouch(var_0) {}
 
-function init_animset_custom_crouch(var0, var1, var2) {}
+function init_animset_custom_crouch(var_0, var_1, var_2) {}
 
 function clear_custom_animset() {
   self.custommoveanimset = undefined;
@@ -56,7 +56,7 @@ function clear_custom_animset() {
   self.combatcrouchanims = undefined;
 }
 
-function set_animarray_standing_turns_pistol(var0) {}
+function set_animarray_standing_turns_pistol(var_0) {}
 
 function set_animarray_standing_turns() {}
 
@@ -66,11 +66,11 @@ function set_animarray_stance_change() {}
 
 function set_animarray_burst_and_semi_fire_stand() {}
 
-function set_animarray_custom_burst_and_semi_fire_stand(var0) {}
+function set_animarray_custom_burst_and_semi_fire_stand(var_0) {}
 
 function set_animarray_burst_and_semi_fire_crouch() {}
 
-function set_animarray_custom_burst_and_semi_fire_crouch(var0) {}
+function set_animarray_custom_burst_and_semi_fire_crouch(var_0) {}
 
 function set_animarray_add_turn_aims_stand() {}
 
@@ -164,16 +164,16 @@ function heat_reload_anim() {
 
   if(isDefined(self.node)) {
     if(self nearclaimnodeandangle()) {
-      var0 = undefined;
+      var_0 = undefined;
 
       if(self.node.type == "Cover Left") {
-        var0 = scripts\anim\utility::lookupanim("heat_reload", "reload_cover_left");
+        var_0 = scripts\anim\utility::lookupanim("heat_reload", "reload_cover_left");
       } else if(self.node.type == "Cover Right") {
-        var0 = scripts\anim\utility::lookupanim("heat_reload", "reload_cover_right");
+        var_0 = scripts\anim\utility::lookupanim("heat_reload", "reload_cover_right");
       }
 
-      if(isDefined(var0)) {
-        return var0;
+      if(isDefined(var_0)) {
+        return var_0;
       }
     }
   }

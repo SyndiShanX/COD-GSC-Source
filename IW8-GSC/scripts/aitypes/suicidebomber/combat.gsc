@@ -3,7 +3,7 @@
  * Script: scripts\aitypes\suicidebomber\combat.gsc
 ****************************************************/
 
-function bomber_init(var0) {
+function bomber_init(var_0) {
   self.pathenemyfightdist = 0;
   self.pathenemylookahead = 0;
   self.allowstrafe = 0;
@@ -44,15 +44,15 @@ function bomber_init(var0) {
   self.script_group = 1;
   self.nodrop = 1;
   self.a.nodeath = 0;
-  var1 = undefined;
+  var_1 = undefined;
 
   if(self tagexists("j_sling_pivot")) {
-    var1 = "j_sling_pivot";
+    var_1 = "j_sling_pivot";
   } else {
-    var1 = "j_cosmetic_4";
+    var_1 = "j_cosmetic_4";
   }
 
-  playFXOnTag(scripts\engine\utility::getfx("suicide_bomber_clicker_flash"), self, var1);
+  playFXOnTag(scripts\engine\utility::getfx("suicide_bomber_clicker_flash"), self, var_1);
   self attach("offhand_wm_clacker", "tag_accessory_right");
 
   if(!isDefined(self.repulsorname)) {
@@ -75,17 +75,17 @@ function bomber_init(var0) {
 
 function expl_dmg_monitor() {
   self endon("death");
-  var0 = 0;
+  var_0 = 0;
 
   for(;;) {
-    self waittill("damage", var1, var2, var3, var3, var4, var3, var3, var3, var3, var5, var3, var3, var3, var6);
+    self waittill("damage", var_1, var_2, var_3, var_3, var_4, var_3, var_3, var_3, var_3, var_5, var_3, var_3, var_3, var_6);
 
-    if(scripts\engine\utility::is_equal(var2, self)) {
+    if(scripts\engine\utility::is_equal(var_2, self)) {
       continue;
     }
 
-    if(isDefined(var4) && var1 >= 100 && isexplosivedamagemod(var4) && !var0) {
-      var0 = 1;
+    if(isDefined(var_4) && var_1 >= 100 && isexplosivedamagemod(var_4) && !var_0) {
+      var_0 = 1;
       self.instantexplode = 1;
       self.explode = 1;
 
@@ -93,26 +93,26 @@ function expl_dmg_monitor() {
         scripts\common\ai::stop_magic_bullet_shield();
       }
 
-      self kill(self.origin, self.lastattacker, self.lastattacker, var4);
+      self kill(self.origin, self.lastattacker, self.lastattacker, var_4);
     }
   }
 }
 
 function dochants() {
   self endon("death");
-  var0 = "dx_vom_aq1_bomber_mantra_";
-  var1 = 10;
+  var_0 = "dx_vom_aq1_bomber_mantra_";
+  var_1 = 10;
   jumpiftrue(isDefined(self.suicidebomberchants)) LOC_00000023;
   self.suicidebomberchants = 1;
 
   while(self.suicidebomberchants) {
-    var2 = var0 + var1;
-    self thread[[anim.callbacks["PlaySoundAtViewHeight"]]](var2, "sound_done");
+    var_2 = var_0 + var_1;
+    self thread[[anim.callbacks["PlaySoundAtViewHeight"]]](var_2, "sound_done");
     self waittill("sound_done");
-    var1 += 10;
+    var_1 += 10;
 
-    if(var1 > 30) {
-      var1 = 10;
+    if(var_1 > 30) {
+      var_1 = 10;
     }
 
     wait 0.7 + randomfloat(0.7);
@@ -127,7 +127,7 @@ function bomber_gettarget() {
   return self.enemy;
 }
 
-function bomber_terminate(var0) {
+function bomber_terminate(var_0) {
   if(isDefined(self.repulsorname)) {
     destroynavrepulsor(self.repulsorname);
     self.repulsorname = undefined;
@@ -136,28 +136,28 @@ function bomber_terminate(var0) {
   return anim.success;
 }
 
-function bomber_updateeveryframe(var0) {
+function bomber_updateeveryframe(var_0) {
   if(istrue(self.domagicdoorchecks)) {
     scripts\aitypes\common::updateeveryframe_magicdoorchecks();
   }
 
-  var1 = bomber_gettarget();
+  var_1 = bomber_gettarget();
 
-  if(isDefined(var1)) {
-    var2 = distance2dsquared(self.origin, var1.origin);
+  if(isDefined(var_1)) {
+    var_2 = distance2dsquared(self.origin, var_1.origin);
 
-    if(isPlayer(var1) && !istrue(self.bomberplayerseesme)) {
-      if(var2 < squared(300)) {
-        if(vectordot(anglesToForward(var1.angles), self.origin - var1.origin) > 0) {
+    if(isPlayer(var_1) && !istrue(self.bomberplayerseesme)) {
+      if(var_2 < squared(300)) {
+        if(vectordot(anglesToForward(var_1.angles), self.origin - var_1.origin) > 0) {
           self.bomberplayerseesme = 1;
         }
 
         self.framesclosetotarget++;
-      } else if(var2 < squared(900)) {
+      } else if(var_2 < squared(900)) {
         self.framesclosetotarget++;
 
-        if(scripts\engine\utility::within_fov(var1.origin, var1.angles, self.origin, cos(45))) {
-          if(scripts\engine\trace::ray_trace_passed(var1 getEye(), self getapproxeyepos(), [self, var1])) {
+        if(scripts\engine\utility::within_fov(var_1.origin, var_1.angles, self.origin, cos(45))) {
+          if(scripts\engine\trace::ray_trace_passed(var_1 getEye(), self getapproxeyepos(), [self, var_1])) {
             self.bomberplayerseesme = 1;
           }
         }
@@ -171,7 +171,7 @@ function bomber_updateeveryframe(var0) {
     }
 
     if(gettime() > self.bomberraisearmtime) {
-      if(distancesquared(self.origin, var1.origin) < self.bomberraisearmdistsquared) {
+      if(distancesquared(self.origin, var_1.origin) < self.bomberraisearmdistsquared) {
         if(!istrue(self.bomberraisearm)) {
           self.bomberraisearmtime = gettime() + 4000;
         }
@@ -187,13 +187,13 @@ function bomber_updateeveryframe(var0) {
     }
 
     if(gettime() > self.bomberlookattargettime) {
-      if(distancesquared(self.origin, var1.origin) < self.bomberlookatdistance * self.bomberlookatdistance) {
+      if(distancesquared(self.origin, var_1.origin) < self.bomberlookatdistance * self.bomberlookatdistance) {
         if(!istrue(self.bomberlookattarget)) {
           self.bomberlookattargettime = gettime() + 3000;
         }
 
         self.bomberlookattarget = 1;
-        scripts\common\utility::lookatentity(var1);
+        scripts\common\utility::lookatentity(var_1);
       } else {
         if(!istrue(self.bomberlookattarget)) {
           self.bomberlookattargettime = gettime() + 1500;
@@ -208,10 +208,10 @@ function bomber_updateeveryframe(var0) {
   return anim.success;
 }
 
-function bomber_shouldmove(var0) {
-  var1 = bomber_gettarget();
+function bomber_shouldmove(var_0) {
+  var_1 = bomber_gettarget();
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return anim.failure;
   }
 
@@ -222,24 +222,24 @@ function bomber_shouldmove(var0) {
   return anim.success;
 }
 
-function bomber_moveinit(var0) {
-  var1 = spawnStruct();
-  var1.nextupdatetime = 0;
-  self.bt.instancedata[var0] = var1;
+function bomber_moveinit(var_0) {
+  var_1 = spawnStruct();
+  var_1.nextupdatetime = 0;
+  self.bt.instancedata[var_0] = var_1;
 }
 
-function bomber_checktarget(var0) {
-  var1 = var0.origin - self.origin;
+function bomber_checktarget(var_0) {
+  var_1 = var_0.origin - self.origin;
 
-  if(lengthsquared(var1) < self.bomberexplodedistance * self.bomberexplodedistance) {
+  if(lengthsquared(var_1) < self.bomberexplodedistance * self.bomberexplodedistance) {
     if(istrue(self.bombercanexplodebehindtarget)) {
       return true;
     } else {
-      var2 = anglesToForward(self.angles);
-      var3 = acos(clamp(vectordot(var2, vectorNormalize(var1)), -1, 1));
+      var_2 = anglesToForward(self.angles);
+      var_3 = acos(clamp(vectordot(var_2, vectorNormalize(var_1)), -1, 1));
 
-      if(var3 < self.bomberexplodeangle) {
-        if(istrue(self.bomberplayerseesme) || !isPlayer(var0)) {
+      if(var_3 < self.bomberexplodeangle) {
+        if(istrue(self.bomberplayerseesme) || !isPlayer(var_0)) {
           return true;
         }
       }
@@ -249,45 +249,45 @@ function bomber_checktarget(var0) {
   return false;
 }
 
-function bomber_move(var0) {
-  var1 = bomber_gettarget();
+function bomber_move(var_0) {
+  var_1 = bomber_gettarget();
 
   if(!istrue(self.explode)) {
-    var2 = self.bt.instancedata[var0];
-    var3 = gettime();
+    var_2 = self.bt.instancedata[var_0];
+    var_3 = gettime();
 
-    if(var3 >= var2.nextupdatetime) {
-      var2.nextupdatetime = var3 + 500;
-      var2.targetpos = getclosestpointonnavmesh(var1.origin);
-      self setbtgoalpos(0, var2.targetpos);
+    if(var_3 >= var_2.nextupdatetime) {
+      var_2.nextupdatetime = var_3 + 500;
+      var_2.targetpos = getclosestpointonnavmesh(var_1.origin);
+      self setbtgoalpos(0, var_2.targetpos);
     }
 
-    var4 = self getposonpath(self.bomberexplodedistance);
+    var_4 = self getposonpath(self.bomberexplodedistance);
 
-    if(bomber_checktarget(var1)) {
+    if(bomber_checktarget(var_1)) {
       self.explode = 1;
     } else if(!istrue(self.bomberignoresecondarytargets)) {
-      if(isDefined(self.enemy) && var1 != self.enemy && bomber_checktarget(self.enemy) && distancesquared(self.enemy.origin, var4) < self.bombersecondaryexplodedistance * self.bombersecondaryexplodedistance) {
+      if(isDefined(self.enemy) && var_1 != self.enemy && bomber_checktarget(self.enemy) && distancesquared(self.enemy.origin, var_4) < self.bombersecondaryexplodedistance * self.bombersecondaryexplodedistance) {
         self.explode = 1;
       } else {
-        var5 = undefined;
-        var6 = -1;
-        var7 = self getsecondarytargets();
+        var_5 = undefined;
+        var_6 = -1;
+        var_7 = self getsecondarytargets();
 
-        if(isDefined(var7)) {
-          foreach(var9 in var7) {
-            if(bomber_checktarget(var9) && distancesquared(var9.origin, var4) < self.bombersecondaryexplodedistance * self.bombersecondaryexplodedistance) {
-              var10 = distancesquared(var9.origin, self.origin);
+        if(isDefined(var_7)) {
+          foreach(var_9 in var_7) {
+            if(bomber_checktarget(var_9) && distancesquared(var_9.origin, var_4) < self.bombersecondaryexplodedistance * self.bombersecondaryexplodedistance) {
+              var_10 = distancesquared(var_9.origin, self.origin);
 
-              if(!isDefined(var5) || var10 < var6) {
-                var5 = var9;
-                var6 = var10;
+              if(!isDefined(var_5) || var_10 < var_6) {
+                var_5 = var_9;
+                var_6 = var_10;
               }
             }
           }
         }
 
-        if(isDefined(var5)) {
+        if(isDefined(var_5)) {
           self.explode = 1;
         }
       }
@@ -298,7 +298,7 @@ function bomber_move(var0) {
   return anim.running;
 }
 
-function bomber_moveterminate(var0) {
-  self.bt.instancedata[var0] = undefined;
+function bomber_moveterminate(var_0) {
+  self.bt.instancedata[var_0] = undefined;
   self clearbtgoal(0);
 }

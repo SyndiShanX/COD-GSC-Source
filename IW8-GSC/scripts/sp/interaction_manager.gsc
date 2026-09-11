@@ -19,9 +19,9 @@ function interaction_manager_init() {
 function stop_interactions() {
   reconstruct_actor_array();
 
-  foreach(var1 in level.interaction_manager.data["actors"]) {
-    var1.allow_interactions = 0;
-    var1.allow_gesture_reactions = 0;
+  foreach(var_1 in level.interaction_manager.data["actors"]) {
+    var_1.allow_interactions = 0;
+    var_1.allow_gesture_reactions = 0;
   }
 }
 
@@ -36,9 +36,9 @@ function stop_interaction() {
 function continue_interactions() {
   reconstruct_actor_array();
 
-  foreach(var1 in level.interaction_manager.data["actors"]) {
-    var1.allow_interactions = 1;
-    var1.allow_gesture_reactions = 1;
+  foreach(var_1 in level.interaction_manager.data["actors"]) {
+    var_1.allow_interactions = 1;
+    var_1.allow_gesture_reactions = 1;
   }
 }
 
@@ -59,34 +59,34 @@ function trigger_interaction() {
   }
 }
 
-function trigger_interaction_multiple(var0) {
+function trigger_interaction_multiple(var_0) {
   self endon("death");
 
-  foreach(var2 in var0) {
-    if(isDefined(var2.lookat_anims)) {
-      var2.lookat_anims["interaction_trigger_override"] = 1;
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2.lookat_anims)) {
+      var_2.lookat_anims["interaction_trigger_override"] = 1;
     }
   }
 }
 
 function trigger_interaction_common() {
   self endon("death");
-  var0 = self.lookat_anims["common_name"];
-  var1 = level.interaction_manager.data["actors"];
+  var_0 = self.lookat_anims["common_name"];
+  var_1 = level.interaction_manager.data["actors"];
 
-  foreach(var3 in var1) {
-    if(isDefined(var3.lookat_anims["common_name"])) {
-      if(var3.lookat_anims["common_name"] == var0) {
-        var3.lookat_anims["interaction_trigger_override"] = 1;
+  foreach(var_3 in var_1) {
+    if(isDefined(var_3.lookat_anims["common_name"])) {
+      if(var_3.lookat_anims["common_name"] == var_0) {
+        var_3.lookat_anims["interaction_trigger_override"] = 1;
       }
     }
   }
 }
 
 function reconstruct_actor_array() {
-  foreach(var1 in level.interaction_manager.data["actors"]) {
-    if(!isDefined(var1)) {
-      level.interaction_manager.data["actors"] = scripts\engine\utility::array_remove(level.interaction_manager.data["actors"], var1);
+  foreach(var_1 in level.interaction_manager.data["actors"]) {
+    if(!isDefined(var_1)) {
+      level.interaction_manager.data["actors"] = scripts\engine\utility::array_remove(level.interaction_manager.data["actors"], var_1);
     }
   }
 }
@@ -109,13 +109,13 @@ function remove_actor_from_manager() {
   }
 }
 
-function can_play_nearby_interaction(var0) {
-  var1 = level.player.origin;
+function can_play_nearby_interaction(var_0) {
+  var_1 = level.player.origin;
 
-  if(isDefined(var0)) {
-    var2 = var0;
+  if(isDefined(var_0)) {
+    var_2 = var_0;
   } else {
-    var2 = 140;
+    var_2 = 140;
   }
 
   if(!isDefined(level.interaction_manager)) {
@@ -128,11 +128,11 @@ function can_play_nearby_interaction(var0) {
 
   reconstruct_actor_array();
 
-  foreach(var4 in level.interaction_manager.data["actors"]) {
-    if(isDefined(var4) && isDefined(self)) {
-      if(distance(self.origin, var4.origin) < var2) {
-        if(scripts\engine\utility::hastag(var4.model, "j_spine4") && level.player scripts\engine\math::point_in_fov(var4 gettagorigin("j_spine4"))) {
-          if(isDefined(var4.is_playing_reaction) && var4.is_playing_reaction) {
+  foreach(var_4 in level.interaction_manager.data["actors"]) {
+    if(isDefined(var_4) && isDefined(self)) {
+      if(distance(self.origin, var_4.origin) < var_2) {
+        if(scripts\engine\utility::hastag(var_4.model, "j_spine4") && level.player scripts\engine\math::point_in_fov(var_4 gettagorigin("j_spine4"))) {
+          if(isDefined(var_4.is_playing_reaction) && var_4.is_playing_reaction) {
             return false;
           }
         }
@@ -143,13 +143,13 @@ function can_play_nearby_interaction(var0) {
   return true;
 }
 
-function can_play_nearby_gesture(var0) {
-  var1 = level.player.origin;
+function can_play_nearby_gesture(var_0) {
+  var_1 = level.player.origin;
 
-  if(isDefined(var0)) {
-    var2 = var0;
+  if(isDefined(var_0)) {
+    var_2 = var_0;
   } else {
-    var2 = 140;
+    var_2 = 140;
   }
 
   if(!isDefined(level.interaction_manager)) {
@@ -158,16 +158,16 @@ function can_play_nearby_gesture(var0) {
 
   reconstruct_actor_array();
 
-  foreach(var4 in level.interaction_manager.data["actors"]) {
-    if(isDefined(var4) && isDefined(self)) {
-      if(self != var4) {
-        if(distance(self.origin, var4.origin) < var2) {
-          if(scripts\engine\utility::within_fov(level.player getEye(), level.player.angles, var4 gettagorigin("j_spine4"), cos(45))) {
-            if(isDefined(var4.playing_gesture) && var4.playing_gesture || isDefined(var4.is_talking) && var4.is_talking) {
+  foreach(var_4 in level.interaction_manager.data["actors"]) {
+    if(isDefined(var_4) && isDefined(self)) {
+      if(self != var_4) {
+        if(distance(self.origin, var_4.origin) < var_2) {
+          if(scripts\engine\utility::within_fov(level.player getEye(), level.player.angles, var_4 gettagorigin("j_spine4"), cos(45))) {
+            if(isDefined(var_4.playing_gesture) && var_4.playing_gesture || isDefined(var_4.is_talking) && var_4.is_talking) {
               return false;
             }
 
-            if(isDefined(var4.allow_gesture_reactions) && !var4.allow_gesture_reactions) {
+            if(isDefined(var_4.allow_gesture_reactions) && !var_4.allow_gesture_reactions) {
               return false;
             }
           }
@@ -179,25 +179,25 @@ function can_play_nearby_gesture(var0) {
   return true;
 }
 
-function interaction_cooldown_timer(var0) {
+function interaction_cooldown_timer(var_0) {
   if(isDefined(level.interaction_manager)) {
-    if(isDefined(var0.allow_interactions) && !var0.allow_interactions) {
+    if(isDefined(var_0.allow_interactions) && !var_0.allow_interactions) {
       return;
     }
 
     reconstruct_actor_array();
 
-    foreach(var2 in level.interaction_manager.data["actors"]) {
-      if(isDefined(var2)) {
-        var2.allow_interactions = 0;
+    foreach(var_2 in level.interaction_manager.data["actors"]) {
+      if(isDefined(var_2)) {
+        var_2.allow_interactions = 0;
       }
     }
 
     for(;;) {
-      var4 = length(level.player.origin - level.player getEye());
-      var5 = var0.origin + anglestoup(var0.angles) * var4;
+      var_4 = length(level.player.origin - level.player getEye());
+      var_5 = var_0.origin + anglestoup(var_0.angles) * var_4;
 
-      if(!level.player scripts\engine\sp\utility::player_looking_at(var5, 0.7, 1)) {
+      if(!level.player scripts\engine\sp\utility::player_looking_at(var_5, 0.7, 1)) {
         break;
       }
 
@@ -205,11 +205,11 @@ function interaction_cooldown_timer(var0) {
     }
 
     reconstruct_actor_array();
-    var0.allow_interactions = 1;
+    var_0.allow_interactions = 1;
 
-    foreach(var2 in level.interaction_manager.data["actors"]) {
-      if(isDefined(var2)) {
-        var2.allow_interactions = 1;
+    foreach(var_2 in level.interaction_manager.data["actors"]) {
+      if(isDefined(var_2)) {
+        var_2.allow_interactions = 1;
       }
     }
 
@@ -237,10 +237,10 @@ function interaction_reboot_timer() {
     }
 
     for(;;) {
-      var0 = length(level.player.origin - level.player getEye());
-      var1 = self.origin + anglestoup(self.angles) * var0;
+      var_0 = length(level.player.origin - level.player getEye());
+      var_1 = self.origin + anglestoup(self.angles) * var_0;
 
-      if(!level.player scripts\engine\sp\utility::player_looking_at(var1, 0.7, 1)) {
+      if(!level.player scripts\engine\sp\utility::player_looking_at(var_1, 0.7, 1)) {
         break;
       }
 
@@ -252,152 +252,152 @@ function interaction_reboot_timer() {
   }
 }
 
-function reminder_cooldown_timer(var0) {
+function reminder_cooldown_timer(var_0) {
   level endon("stop_reminders");
   level endon("reboot_timer");
   level.interaction_manager.can_remind = 0;
-  wait var0;
+  wait var_0;
   level.interaction_manager.can_remind = 1;
 }
 
-function queue_reminder(var0, var1, var2) {
-  if(!isDefined(var0) && isDefined(var1)) {
-    var0 = "none";
+function queue_reminder(var_0, var_1, var_2) {
+  if(!isDefined(var_0) && isDefined(var_1)) {
+    var_0 = "none";
   }
 
-  if(isDefined(var1)) {
-    var0 = var0 + "+" + var1;
+  if(isDefined(var_1)) {
+    var_0 = var_0 + "+" + var_1;
   }
 
-  level.interaction_manager.data["reminder_queue"][var0] = self;
+  level.interaction_manager.data["reminder_queue"][var_0] = self;
 
-  if(isDefined(var2)) {
-    self.reminder_animnode = var2;
+  if(isDefined(var_2)) {
+    self.reminder_animnode = var_2;
     return;
   }
 }
 
-function queue_reminder_distance_anim(var0, var1, var2, var3) {
-  if(isDefined(var0)) {
-    var0 = var0 + "+" + var1;
+function queue_reminder_distance_anim(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_0)) {
+    var_0 = var_0 + "+" + var_1;
   } else {
-    var0 = var1;
+    var_0 = var_1;
   }
 
-  level.interaction_manager.data["reminder_queue"][var0] = self;
+  level.interaction_manager.data["reminder_queue"][var_0] = self;
 
-  if(isDefined(var2)) {
-    self.reminder_animnode = var2;
+  if(isDefined(var_2)) {
+    self.reminder_animnode = var_2;
   }
 
   self.use_reminder_anim = 1;
 
-  if(isDefined(var3)) {
-    self.return_anime = var3;
+  if(isDefined(var_3)) {
+    self.return_anime = var_3;
     return;
   }
 }
 
-function queue_reminder_with_reaction(var0, var1, var2, var3) {
-  queue_reminder(var0);
+function queue_reminder_with_reaction(var_0, var_1, var_2, var_3) {
+  queue_reminder(var_0);
   self.use_reminder_reaction = 1;
-  self.registered_interaction = var2;
-  self.post_reaction_vo_array = var3;
-  self.reminder_reaction_pointat = var1;
+  self.registered_interaction = var_2;
+  self.post_reaction_vo_array = var_3;
+  self.reminder_reaction_pointat = var_1;
 }
 
-function run_reminders(var0) {
+function run_reminders(var_0) {
   level endon("stop_reminders");
   thread reminder_queue_cleanup();
-  var1 = getarraykeys(level.interaction_manager.data["reminder_queue"]);
+  var_1 = getarraykeys(level.interaction_manager.data["reminder_queue"]);
 
-  for(var2 = 0; var2 < var1.size; var2++) {
-    var3 = var1[var2];
-    var4 = level.interaction_manager.data["reminder_queue"][var3];
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    var_3 = var_1[var_2];
+    var_4 = level.interaction_manager.data["reminder_queue"][var_3];
 
-    if(isDefined(var4)) {
-      var5 = strtok(var3, "+");
-      var6 = var5[0];
+    if(isDefined(var_4)) {
+      var_5 = strtok(var_3, "+");
+      var_6 = var_5[0];
 
-      if(isDefined(var4.use_reminder_reaction) && var4.use_reminder_reaction) {
-        if(isDefined(var4.registered_interaction) && isDefined(var4.post_reaction_vo_array)) {
-          var4 thread scripts\sp\interaction::play_smart_interaction(var4.registered_interaction, var6, var4.post_reaction_vo_array);
+      if(isDefined(var_4.use_reminder_reaction) && var_4.use_reminder_reaction) {
+        if(isDefined(var_4.registered_interaction) && isDefined(var_4.post_reaction_vo_array)) {
+          var_4 thread scripts\sp\interaction::play_smart_interaction(var_4.registered_interaction, var_6, var_4.post_reaction_vo_array);
         } else if(isDefined(self.post_reaction_func) && isDefined(self.post_reaction_vo)) {
           self thread[[self.post_reaction_func]](undefined, undefined, self.post_reaction_vo);
         } else {
-          thread play_gesture_reaction(var4, 85, 50, var6, 1);
+          thread play_gesture_reaction(var_4, 85, 50, var_6, 1);
         }
-      } else if(isDefined(var4.use_reminder_anim) && var4.use_reminder_anim) {
-        var7 = undefined;
-        var8 = undefined;
+      } else if(isDefined(var_4.use_reminder_anim) && var_4.use_reminder_anim) {
+        var_7 = undefined;
+        var_8 = undefined;
 
-        if(var5.size > 1) {
-          var7 = var5[1];
-          var8 = var6;
+        if(var_5.size > 1) {
+          var_7 = var_5[1];
+          var_8 = var_6;
         } else {
-          var7 = var5[0];
+          var_7 = var_5[0];
         }
 
-        if(isDefined(var4.reminder_animnode)) {
-          thread play_reminder_anim_distance(var4.reminder_animnode, var4, 85, 50, var7, undefined);
+        if(isDefined(var_4.reminder_animnode)) {
+          thread play_reminder_anim_distance(var_4.reminder_animnode, var_4, 85, 50, var_7, undefined);
         } else {
-          thread play_reminder_anim_distance(var4, var4, 85, 50, var7, undefined);
+          thread play_reminder_anim_distance(var_4, var_4, 85, 50, var_7, undefined);
         }
       }
     }
   }
 
-  wait var0;
+  wait var_0;
 
   while(level.interaction_manager.pause_remind) {
     waitframe();
   }
 
-  var2 = 0;
+  var_2 = 0;
 
-  while(var2 < var1.size) {
-    var3 = var1[var2];
-    var4 = level.interaction_manager.data["reminder_queue"][var3];
+  while(var_2 < var_1.size) {
+    var_3 = var_1[var_2];
+    var_4 = level.interaction_manager.data["reminder_queue"][var_3];
 
-    if(isDefined(var4)) {
-      var5 = strtok(var3, "+");
-      var6 = var5[0];
+    if(isDefined(var_4)) {
+      var_5 = strtok(var_3, "+");
+      var_6 = var_5[0];
 
-      if(var5.size > 1) {
-        if(isDefined(var4.reminder_animnode)) {
-          var4.reminder_animnode notify("stop_loop");
-          var4.reminder_animnode thread scripts\common\anim::anim_single_solo(var4, var5[1]);
-          var9 = getanimlength(var4 scripts\engine\utility::getanim(var5[1]));
-          var4 thread scripts\engine\sp\utility::notify_delay("reminder_anim_done", var9);
+      if(var_5.size > 1) {
+        if(isDefined(var_4.reminder_animnode)) {
+          var_4.reminder_animnode notify("stop_loop");
+          var_4.reminder_animnode thread scripts\common\anim::anim_single_solo(var_4, var_5[1]);
+          var_9 = getanimlength(var_4 scripts\engine\utility::getanim(var_5[1]));
+          var_4 thread scripts\engine\sp\utility::notify_delay("reminder_anim_done", var_9);
 
-          if(isDefined(var4.return_anime)) {
-            var4.reminder_animnode scripts\engine\utility::delaythread(var9, &scripts\common\anim::anim_loop_solo, var4, var4.return_anime, "stop_loop");
+          if(isDefined(var_4.return_anime)) {
+            var_4.reminder_animnode scripts\engine\utility::delaythread(var_9, &scripts\common\anim::anim_loop_solo, var_4, var_4.return_anime, "stop_loop");
           }
         } else {
-          var5 notify("stop_loop");
-          var5 thread scripts\common\anim::anim_single_solo(var5, var6[1]);
-          var9 = getanimlength(var5 scripts\engine\utility::getanim(var6[1]));
-          var5 thread scripts\engine\sp\utility::notify_delay("reminder_anim_done", var9);
+          var_5 notify("stop_loop");
+          var_5 thread scripts\common\anim::anim_single_solo(var_5, var_6[1]);
+          var_9 = getanimlength(var_5 scripts\engine\utility::getanim(var_6[1]));
+          var_5 thread scripts\engine\sp\utility::notify_delay("reminder_anim_done", var_9);
 
-          if(isDefined(var5.return_anime)) {
-            var5 scripts\engine\utility::delaythread(var9, &scripts\common\anim::anim_loop_solo, var5, var5.return_anime, "stop_loop");
+          if(isDefined(var_5.return_anime)) {
+            var_5 scripts\engine\utility::delaythread(var_9, &scripts\common\anim::anim_loop_solo, var_5, var_5.return_anime, "stop_loop");
           }
         }
 
-        if(var9 != "none") {
-          if(soundexists(var9)) {
-            var5 scripts\engine\sp\utility::smart_dialogue(var9);
+        if(var_9 != "none") {
+          if(soundexists(var_9)) {
+            var_5 scripts\engine\sp\utility::smart_dialogue(var_9);
           }
         }
-      } else if(!soundexists(var4)) {
-        var5 scripts\engine\sp\utility::smart_dialogue(var4);
+      } else if(!soundexists(var_4)) {
+        var_5 scripts\engine\sp\utility::smart_dialogue(var_4);
       }
 
-      var5 notify("reminder_done");
-      var5.reminder_animnode = undefined;
-      level.interaction_manager.data["reminder_queue"][var4] = undefined;
+      var_5 notify("reminder_done");
+      var_5.reminder_animnode = undefined;
+      level.interaction_manager.data["reminder_queue"][var_4] = undefined;
       level.interaction_manager.can_remind = 0;
-      wait var1;
+      wait var_1;
       level.interaction_manager.can_remind = 1;
     }
 
@@ -405,7 +405,7 @@ function run_reminders(var0) {
       waitframe();
     }
 
-    var3++;
+    var_3++;
   }
 
   level notify("reminders_done");
@@ -422,14 +422,14 @@ function stop_reminders() {
   level.interaction_manager.data["reminder_queue"] = [];
   reconstruct_actor_array();
 
-  foreach(var1 in level.interaction_manager.data["actors"]) {
-    if(isDefined(var1)) {
-      var1.use_reminder_reaction = undefined;
-      var1.registered_interaction = undefined;
-      var1.post_reaction_vo_array = undefined;
-      var1.reminder_reaction_pointat = undefined;
-      var1.reminder_animnode = undefined;
-      var1.use_reminder_anim = undefined;
+  foreach(var_1 in level.interaction_manager.data["actors"]) {
+    if(isDefined(var_1)) {
+      var_1.use_reminder_reaction = undefined;
+      var_1.registered_interaction = undefined;
+      var_1.post_reaction_vo_array = undefined;
+      var_1.reminder_reaction_pointat = undefined;
+      var_1.reminder_animnode = undefined;
+      var_1.use_reminder_anim = undefined;
     }
   }
 }
@@ -442,43 +442,43 @@ function continue_reminders() {
   level.interaction_manager.pause_remind = 0;
 }
 
-function play_state_based_interaction(var0, var1, var2, var3) {
-  if(!isDefined(var2)) {
-    var2 = "casual";
+function play_state_based_interaction(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_2)) {
+    var_2 = "casual";
   }
 
   if(isDefined(self.gender) && issubstr(self.gender, "female")) {
-    var2 = "busy";
+    var_2 = "busy";
   }
 
-  var4 = var0 + "_" + "casual";
+  var_4 = var_0 + "_" + "casual";
 
-  if(var2 == "casual" || var2 == "nag") {
-    var4 = var0 + "_" + var2;
+  if(var_2 == "casual" || var_2 == "nag") {
+    var_4 = var_0 + "_" + var_2;
   }
 
-  self.reaction_state_basename = var0;
-  self.reaction_state = var2;
+  self.reaction_state_basename = var_0;
+  self.reaction_state = var_2;
 
-  if(var2 == "nag") {
-    thread scripts\sp\interaction::play_interaction_with_states(var4, var1);
+  if(var_2 == "nag") {
+    thread scripts\sp\interaction::play_interaction_with_states(var_4, var_1);
     self.allow_interactions = 0;
-    self.reaction_state = var2;
+    self.reaction_state = var_2;
     thread scripts\engine\sp\utility::gesture_stop(0.7);
     thread reaction_look_distance_based();
-    thread reaction_state_busy_loop(var3, 1);
+    thread reaction_state_busy_loop(var_3, 1);
     return;
-  } else if(var2 == "busy") {
-    thread scripts\sp\interaction::play_interaction_with_states(var4, var1);
+  } else if(var_2 == "busy") {
+    thread scripts\sp\interaction::play_interaction_with_states(var_4, var_1);
     self.allow_interactions = 0;
-    self.reaction_state = var2;
+    self.reaction_state = var_2;
     thread scripts\engine\sp\utility::gesture_stop(0.7);
     thread reaction_look_distance_based();
-    thread reaction_state_busy_loop(var3);
+    thread reaction_state_busy_loop(var_3);
     return;
   }
 
-  thread scripts\sp\interaction::play_interaction_with_states(var4, var1);
+  thread scripts\sp\interaction::play_interaction_with_states(var_4, var_1);
 }
 
 function stop_state_based_interaction() {
@@ -495,12 +495,12 @@ function stop_state_based_interaction() {
   thread scripts\engine\sp\utility::gesture_stop(0.7);
 }
 
-function set_reaction_state(var0, var1) {
+function set_reaction_state(var_0, var_1) {
   if(!isDefined(self.reaction_state)) {
     return;
   }
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
@@ -511,35 +511,35 @@ function set_reaction_state(var0, var1) {
   self notify("change_reaction_state");
   self notify("stop_reaction_look");
 
-  if(var0 != "nag" && var0 != "busy") {
+  if(var_0 != "nag" && var_0 != "busy") {
     self.allow_interactions = 1;
     thread scripts\engine\sp\utility::gesture_stop(0.7);
-    self.interaction_name = self.reaction_state_basename + "_" + var0;
-    self.reaction_state = var0;
+    self.interaction_name = self.reaction_state_basename + "_" + var_0;
+    self.reaction_state = var_0;
     return;
   }
 
-  if(var0 == "nag") {
+  if(var_0 == "nag") {
     self.allow_interactions = 0;
-    self.reaction_state = var0;
+    self.reaction_state = var_0;
     thread scripts\engine\sp\utility::gesture_stop(0.7);
     thread reaction_look_distance_based();
-    thread reaction_state_busy_loop(var1, 1);
+    thread reaction_state_busy_loop(var_1, 1);
     return;
   }
 
   self.allow_interactions = 0;
-  self.reaction_state = var0;
+  self.reaction_state = var_0;
   thread scripts\engine\sp\utility::gesture_stop(0.7);
   thread reaction_look_distance_based();
-  thread reaction_state_busy_loop(var1);
+  thread reaction_state_busy_loop(var_1);
 }
 
-function reaction_state_busy_loop(var0, var1) {
+function reaction_state_busy_loop(var_0, var_1) {
   self endon("change_reaction_state");
 
   for(;;) {
-    thread gesture_reaction_distance_based(var0, var1);
+    thread gesture_reaction_distance_based(var_0, var_1);
     self waittill("end_gesture_reaction_distance_based");
 
     for(;;) {
@@ -552,76 +552,76 @@ function reaction_state_busy_loop(var0, var1) {
   }
 }
 
-function set_all_reaction_states(var0, var1) {
-  switch (var0) {
+function set_all_reaction_states(var_0, var_1) {
+  switch (var_0) {
     case "busy":
     case "nag":
     case "alert":
     case "casual":
-      foreach(var3 in level.interaction_manager.data["actors"]) {
-        thread set_reaction_state(var3, var0);
+      foreach(var_3 in level.interaction_manager.data["actors"]) {
+        thread set_reaction_state(var_3, var_0);
       }
 
       break;
   }
 }
 
-function reaction_look_distance_based(var0, var1, var2, var3) {
+function reaction_look_distance_based(var_0, var_1, var_2, var_3) {
   self endon("death");
   self notify("stop_reaction_look");
   self endon("stop_reaction_look");
   self endon("stop_smart_reaction");
-  var4 = 85;
+  var_4 = 85;
 
-  if(isDefined(var0)) {
-    var4 = var0;
+  if(isDefined(var_0)) {
+    var_4 = var_0;
   }
 
-  if(!isDefined(var1)) {
-    var1 = level.player;
+  if(!isDefined(var_1)) {
+    var_1 = level.player;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 0.7;
+  if(!isDefined(var_2)) {
+    var_2 = 0.7;
   }
 
-  wait var2;
+  wait var_2;
 
   if(isDefined(self.reaction_state_basename)) {
     if(isDefined(level.state_interactions[self.interaction_name].scene["trigger_radius"])) {
-      var4 = level.state_interactions[self.interaction_name].scene["trigger_radius"] * 1.2;
+      var_4 = level.state_interactions[self.interaction_name].scene["trigger_radius"] * 1.2;
     }
   }
 
   waitframe();
 
-  if(isDefined(var3) && var3) {
-    thread scripts\engine\sp\utility::gesture_follow_lookat(var1, 0.5, 0.5);
+  if(isDefined(var_3) && var_3) {
+    thread scripts\engine\sp\utility::gesture_follow_lookat(var_1, 0.5, 0.5);
   } else {
-    thread scripts\engine\sp\utility::gesture_follow_lookat_natural(var1, 0.5, 0.5, var4);
+    thread scripts\engine\sp\utility::gesture_follow_lookat_natural(var_1, 0.5, 0.5, var_4);
   }
 
   while(!isDefined(self.is_head_tracking)) {
     wait 0.05;
   }
 
-  thread scripts\engine\sp\utility::gesture_follow_eyes(var1);
+  thread scripts\engine\sp\utility::gesture_follow_eyes(var_1);
   wait randomfloatrange(4, 6);
-  var5 = 1;
-  var6 = 1;
+  var_5 = 1;
+  var_6 = 1;
 
   for(;;) {
-    if(distance2d(self.origin, var1.origin) <= var4) {
-      if(!var6) {
+    if(distance2d(self.origin, var_1.origin) <= var_4) {
+      if(!var_6) {
         thread scripts\asm\gesture\script_funcs::ai_gesture_lookat_weight_up(0.5);
-        thread scripts\engine\sp\utility::gesture_follow_eyes(var1);
-        var6 = 1;
+        thread scripts\engine\sp\utility::gesture_follow_eyes(var_1);
+        var_6 = 1;
       }
-    } else if(distance2d(self.origin, var1.origin) >= var4) {
-      if(var6) {
+    } else if(distance2d(self.origin, var_1.origin) >= var_4) {
+      if(var_6) {
         thread scripts\asm\gesture\script_funcs::ai_gesture_lookat_weight_down(1);
         thread scripts\engine\sp\utility::gesture_eyes_stop(0.7);
-        var6 = 0;
+        var_6 = 0;
       }
     }
 
@@ -629,25 +629,25 @@ function reaction_look_distance_based(var0, var1, var2, var3) {
   }
 }
 
-function gesture_reaction_distance_based(var0, var1) {
+function gesture_reaction_distance_based(var_0, var_1) {
   self endon("death");
   self endon("stop_reaction");
   self endon("reaction_end");
   self endon("stop_reaction_look");
-  var2 = 50;
+  var_2 = 50;
 
   if(isDefined(self.reaction_state_basename)) {
     if(isDefined(level.state_interactions[self.interaction_name].scene["trigger_radius"])) {
-      var2 = level.state_interactions[self.interaction_name].scene["trigger_radius"];
+      var_2 = level.state_interactions[self.interaction_name].scene["trigger_radius"];
     }
   }
 
-  waittill_gestureconditionsmet(var2);
+  waittill_gestureconditionsmet(var_2);
   thread scripts\engine\sp\utility::gesture_simple("salute");
-  var3 = undefined;
+  var_3 = undefined;
 
-  if(isDefined(var1) && var1) {
-    switch (var0) {
+  if(isDefined(var_1) && var_1) {
+    switch (var_0) {
       case "bridge_elev":
       case "bridge_elev_doors":
       case "cic":
@@ -658,50 +658,50 @@ function gesture_reaction_distance_based(var0, var1) {
       case "dropship":
       case "jackal":
       case "bridge":
-        var4 = level.interaction_manager.data["reminder_vo"][var0][self.gender];
-        var5 = level.interaction_manager.data["reminder_vo"][var0]["spent_" + self.gender];
+        var_4 = level.interaction_manager.data["reminder_vo"][var_0][self.gender];
+        var_5 = level.interaction_manager.data["reminder_vo"][var_0]["spent_" + self.gender];
 
-        if(var4.size < 1 && var5.size > 0) {
-          level.interaction_manager.data["reminder_vo"][var0][self.gender] = var5;
-          level.interaction_manager.data["reminder_vo"][var0]["spent_" + self.gender] = [];
-          var4 = level.interaction_manager.data["reminder_vo"][var0][self.gender];
-          var5 = level.interaction_manager.data["reminder_vo"][var0]["spent_" + self.gender];
+        if(var_4.size < 1 && var_5.size > 0) {
+          level.interaction_manager.data["reminder_vo"][var_0][self.gender] = var_5;
+          level.interaction_manager.data["reminder_vo"][var_0]["spent_" + self.gender] = [];
+          var_4 = level.interaction_manager.data["reminder_vo"][var_0][self.gender];
+          var_5 = level.interaction_manager.data["reminder_vo"][var_0]["spent_" + self.gender];
         }
 
-        if(var4.size < 1 && var5.size < 1) {
-          var3 = undefined;
+        if(var_4.size < 1 && var_5.size < 1) {
+          var_3 = undefined;
         } else {
-          var3 = var4[randomint(var4.size)];
-          level.interaction_manager.data["reminder_vo"][var0]["spent_" + self.gender] = scripts\engine\utility::array_add(level.interaction_manager.data["reminder_vo"][var0]["spent_" + self.gender], var3);
-          level.interaction_manager.data["reminder_vo"][var0][self.gender] = scripts\engine\utility::array_remove(level.interaction_manager.data["reminder_vo"][var0][self.gender], var3);
+          var_3 = var_4[randomint(var_4.size)];
+          level.interaction_manager.data["reminder_vo"][var_0]["spent_" + self.gender] = scripts\engine\utility::array_add(level.interaction_manager.data["reminder_vo"][var_0]["spent_" + self.gender], var_3);
+          level.interaction_manager.data["reminder_vo"][var_0][self.gender] = scripts\engine\utility::array_remove(level.interaction_manager.data["reminder_vo"][var_0][self.gender], var_3);
         }
 
         break;
     }
   } else {
-    var4 = level.interaction_manager.data["busy_vo"][self.gender];
-    var5 = level.interaction_manager.data["busy_vo"]["spent_" + self.gender];
+    var_4 = level.interaction_manager.data["busy_vo"][self.gender];
+    var_5 = level.interaction_manager.data["busy_vo"]["spent_" + self.gender];
 
-    if(var4.size < 1 && var5.size > 0) {
-      level.interaction_manager.data["busy_vo"][self.gender] = var5;
+    if(var_4.size < 1 && var_5.size > 0) {
+      level.interaction_manager.data["busy_vo"][self.gender] = var_5;
       level.interaction_manager.data["busy_vo"]["spent_" + self.gender] = [];
-      var4 = level.interaction_manager.data["busy_vo"][self.gender];
-      var5 = level.interaction_manager.data["busy_vo"]["spent_" + self.gender];
+      var_4 = level.interaction_manager.data["busy_vo"][self.gender];
+      var_5 = level.interaction_manager.data["busy_vo"]["spent_" + self.gender];
     }
 
-    if(var4.size < 1 && var5.size < 1) {
-      var3 = undefined;
+    if(var_4.size < 1 && var_5.size < 1) {
+      var_3 = undefined;
     } else {
-      var3 = var4[randomint(var4.size)];
-      level.interaction_manager.data["busy_vo"]["spent_" + self.gender] = scripts\engine\utility::array_add(level.interaction_manager.data["busy_vo"]["spent_" + self.gender], var3);
-      level.interaction_manager.data["busy_vo"][self.gender] = scripts\engine\utility::array_remove(level.interaction_manager.data["busy_vo"][self.gender], var3);
+      var_3 = var_4[randomint(var_4.size)];
+      level.interaction_manager.data["busy_vo"]["spent_" + self.gender] = scripts\engine\utility::array_add(level.interaction_manager.data["busy_vo"]["spent_" + self.gender], var_3);
+      level.interaction_manager.data["busy_vo"][self.gender] = scripts\engine\utility::array_remove(level.interaction_manager.data["busy_vo"][self.gender], var_3);
     }
   }
 
-  if(isDefined(var3)) {
-    scripts\engine\sp\utility::smart_dialogue(var3);
+  if(isDefined(var_3)) {
+    scripts\engine\sp\utility::smart_dialogue(var_3);
 
-    if(isDefined(var1) && var1) {
+    if(isDefined(var_1) && var_1) {
       thread reminder_cooldown_timer(level);
     }
   }
@@ -728,7 +728,7 @@ function print_reaction_state() {
   }
 }
 
-function play_gesture_reaction(var0, var1, var2, var3, var4) {
+function play_gesture_reaction(var_0, var_1, var_2, var_3, var_4) {
   self endon("death");
   self endon("stop_reaction");
   self endon("reaction_end");
@@ -740,42 +740,42 @@ function play_gesture_reaction(var0, var1, var2, var3, var4) {
     self.allow_gesture_reactions = 1;
   }
 
-  if(!isDefined(var3)) {
-    var3 = 0;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  if(!isDefined(var0)) {
-    var0 = 150;
+  if(!isDefined(var_0)) {
+    var_0 = 150;
   }
 
-  if(!isDefined(var1)) {
-    var1 = var0 * 0.5;
+  if(!isDefined(var_1)) {
+    var_1 = var_0 * 0.5;
   }
 
   if(!isDefined(self.is_head_tracking) || isDefined(self.is_head_tracking) && !self.is_head_tracking) {
-    thread reaction_look_distance_based(var0);
+    thread reaction_look_distance_based(var_0);
   }
 
-  waittill_gestureconditionsmet(var1);
-  play_gesture_reaction_anim(var4);
-  play_interaction_vo(var2, var3);
+  waittill_gestureconditionsmet(var_1);
+  play_gesture_reaction_anim(var_4);
+  play_interaction_vo(var_2, var_3);
 }
 
-function waittill_gestureconditionsmet(var0) {
+function waittill_gestureconditionsmet(var_0) {
   self endon("death");
   self endon("stop_reaction");
   self endon("reaction_end");
   self endon("stop_gesture_reaction");
   self endon("stop_smart_reaction");
-  var1 = 1;
+  var_1 = 1;
 
   for(;;) {
-    if(isplayerfocus(var0) && canplaygesture(var0)) {
-      var2 = scripts\engine\utility::flatten_vector(anglestoright(self gettagangles("j_head")));
-      var3 = scripts\engine\utility::flatten_vector(vectorNormalize(level.player getEye() - self gettagorigin("j_head")));
-      var4 = vectordot(var2, var3);
+    if(isplayerfocus(var_0) && canplaygesture(var_0)) {
+      var_2 = scripts\engine\utility::flatten_vector(anglestoright(self gettagangles("j_head")));
+      var_3 = scripts\engine\utility::flatten_vector(vectorNormalize(level.player getEye() - self gettagorigin("j_head")));
+      var_4 = vectordot(var_2, var_3);
 
-      if(var4 >= 0.8) {
+      if(var_4 >= 0.8) {
         break;
       }
     }
@@ -784,24 +784,24 @@ function waittill_gestureconditionsmet(var0) {
   }
 }
 
-function isplayerfocus(var0) {
+function isplayerfocus(var_0) {
   self endon("death");
 
   if(isDefined(self.is_cheap)) {
-    var1 = self gettagorigin("j_head");
+    var_1 = self gettagorigin("j_head");
   } else if(isai(self)) {
-    var1 = self getEye();
+    var_1 = self getEye();
   } else if(isDefined(self.origin)) {
-    var1 = self.origin;
+    var_1 = self.origin;
   } else {
     return false;
   }
 
-  var2 = level.player getEye();
-  var3 = level.player getplayerangles();
+  var_2 = level.player getEye();
+  var_3 = level.player getplayerangles();
 
-  if(distance2d(self.origin, level.player.origin) <= var1) {
-    if(scripts\engine\utility::within_fov(var2, var3, var1, cos(25))) {
+  if(distance2d(self.origin, level.player.origin) <= var_1) {
+    if(scripts\engine\utility::within_fov(var_2, var_3, var_1, cos(25))) {
       return true;
     }
   }
@@ -809,10 +809,10 @@ function isplayerfocus(var0) {
   return false;
 }
 
-function canplaygesture(var0) {
+function canplaygesture(var_0) {
   if(!isDefined(self.allow_gesture_reactions) || isDefined(self.allow_gesture_reactions) && self.allow_gesture_reactions) {
     if(!isDefined(self.gesture_reaction_queue)) {
-      if(can_play_nearby_gesture(var0)) {
+      if(can_play_nearby_gesture(var_0)) {
         return true;
       }
     }
@@ -823,12 +823,12 @@ function canplaygesture(var0) {
 
 #using_animtree("generic_human");
 
-function play_gesture_reaction_anim(var0) {
+function play_gesture_reaction_anim(var_0) {
   self.playing_gesture = 1;
 
   if(!isDefined(self.is_cheap)) {
-    if(isDefined(var0)) {
-      thread scripts\engine\sp\utility::gesture_point(var0);
+    if(isDefined(var_0)) {
+      thread scripts\engine\sp\utility::gesture_point(var_0);
     } else {
       thread scripts\engine\sp\utility::gesture_simple("salute");
     }
@@ -839,22 +839,22 @@ function play_gesture_reaction_anim(var0) {
   self.playing_gesture = undefined;
 }
 
-function play_interaction_vo(var0, var1) {
-  if(isDefined(var0)) {
-    if(isDefined(var1) && var1) {
+function play_interaction_vo(var_0, var_1) {
+  if(isDefined(var_0)) {
+    if(isDefined(var_1) && var_1) {
       force_reminder_delay(30);
-      clear_reminder(var0);
+      clear_reminder(var_0);
     }
 
-    define_face_anim_if_exists(var0);
+    define_face_anim_if_exists(var_0);
     self.is_talking = 1;
-    play_smart_dialog_if_exists(var0);
+    play_smart_dialog_if_exists(var_0);
     self.is_talking = undefined;
     return;
   }
 }
 
-function define_face_anim_if_exists(var0) {
+function define_face_anim_if_exists(var_0) {
   if(!isDefined(self.animname)) {
     self.animname = "generic";
   }
@@ -863,12 +863,12 @@ function define_face_anim_if_exists(var0) {
     level.scr_face[self.animname] = [];
   }
 
-  if(isarray(var0)) {
-    foreach(var2 in var0) {
-      if(!isDefined(level.scr_face[self.animname][var2])) {
+  if(isarray(var_0)) {
+    foreach(var_2 in var_0) {
+      if(!isDefined(level.scr_face[self.animname][var_2])) {
         if(isDefined(level.shipcrib_linebook_anims) && isDefined(self.gender)) {
-          if(isDefined(level.shipcrib_linebook_anims[self.gender]) && isDefined(level.shipcrib_linebook_anims[self.gender][var2])) {
-            level.scr_face[self.animname][var2] = level.shipcrib_linebook_anims[self.gender][var2];
+          if(isDefined(level.shipcrib_linebook_anims[self.gender]) && isDefined(level.shipcrib_linebook_anims[self.gender][var_2])) {
+            level.scr_face[self.animname][var_2] = level.shipcrib_linebook_anims[self.gender][var_2];
           }
         }
       }
@@ -877,10 +877,10 @@ function define_face_anim_if_exists(var0) {
     return;
   }
 
-  if(!isDefined(level.scr_face[self.animname][var0])) {
+  if(!isDefined(level.scr_face[self.animname][var_0])) {
     if(isDefined(level.shipcrib_linebook_anims) && isDefined(self.gender)) {
-      if(isDefined(level.shipcrib_linebook_anims[self.gender]) && isDefined(level.shipcrib_linebook_anims[self.gender][var0])) {
-        level.scr_face[self.animname][var0] = level.shipcrib_linebook_anims[self.gender][var0];
+      if(isDefined(level.shipcrib_linebook_anims[self.gender]) && isDefined(level.shipcrib_linebook_anims[self.gender][var_0])) {
+        level.scr_face[self.animname][var_0] = level.shipcrib_linebook_anims[self.gender][var_0];
         return;
       }
 
@@ -891,26 +891,26 @@ function define_face_anim_if_exists(var0) {
   }
 }
 
-function play_smart_dialog_if_exists(var0) {
-  var1 = undefined;
+function play_smart_dialog_if_exists(var_0) {
+  var_1 = undefined;
 
-  if(isarray(var0)) {
-    for(var2 = 0; var2 < var0.size; var2++) {
-      var3 = var0[var2];
+  if(isarray(var_0)) {
+    for(var_2 = 0; var_2 < var_0.size; var_2++) {
+      var_3 = var_0[var_2];
 
-      if(isstring(var3)) {
-        define_face_anim_if_exists(var3);
+      if(isstring(var_3)) {
+        define_face_anim_if_exists(var_3);
 
-        if(soundexists(var3)) {
-          if(issubstr(var3, "plr")) {
-            level.player scripts\engine\sp\utility::smart_player_dialogue(var3);
+        if(soundexists(var_3)) {
+          if(issubstr(var_3, "plr")) {
+            level.player scripts\engine\sp\utility::smart_player_dialogue(var_3);
           } else {
-            var1 = main_cast_dialog_actor_check(var3);
+            var_1 = main_cast_dialog_actor_check(var_3);
 
-            if(isDefined(var1)) {
-              var1 scripts\engine\sp\utility::smart_dialogue(var3);
+            if(isDefined(var_1)) {
+              var_1 scripts\engine\sp\utility::smart_dialogue(var_3);
             } else {
-              scripts\engine\sp\utility::smart_dialogue(var3);
+              scripts\engine\sp\utility::smart_dialogue(var_3);
             }
           }
         }
@@ -918,33 +918,33 @@ function play_smart_dialog_if_exists(var0) {
         continue;
       }
 
-      if(isnumber(var3)) {
-        wait var3;
+      if(isnumber(var_3)) {
+        wait var_3;
       }
     }
 
     return;
   }
 
-  var3 = var1;
+  var_3 = var_1;
 
-  if(isstring(var3)) {
-    define_face_anim_if_exists(var3);
+  if(isstring(var_3)) {
+    define_face_anim_if_exists(var_3);
 
-    if(soundexists(var3)) {
-      if(issubstr(var3, "plr")) {
-        level.player scripts\engine\sp\utility::smart_player_dialogue(var3);
+    if(soundexists(var_3)) {
+      if(issubstr(var_3, "plr")) {
+        level.player scripts\engine\sp\utility::smart_player_dialogue(var_3);
         return;
       }
 
-      var3 = main_cast_dialog_actor_check(var3);
+      var_3 = main_cast_dialog_actor_check(var_3);
 
-      if(isDefined(var3)) {
-        var3 scripts\engine\sp\utility::smart_dialogue(var3);
+      if(isDefined(var_3)) {
+        var_3 scripts\engine\sp\utility::smart_dialogue(var_3);
         return;
       }
 
-      scripts\engine\sp\utility::smart_dialogue(var3);
+      scripts\engine\sp\utility::smart_dialogue(var_3);
       return;
     }
 
@@ -952,17 +952,17 @@ function play_smart_dialog_if_exists(var0) {
   }
 }
 
-function force_reminder_delay(var0) {
+function force_reminder_delay(var_0) {
   level notify("reboot_timer");
   waitframe();
   thread reminder_cooldown_timer(level);
 }
 
-function clear_reminder(var0) {
+function clear_reminder(var_0) {
   if(isDefined(level.interaction_manager)) {
     if(isDefined(level.interaction_manager.data["reminder_queue"])) {
       if(scripts\engine\utility::array_contains(level.interaction_manager.data["reminder_queue"], self)) {
-        level.interaction_manager.data["reminder_queue"][var0] = undefined;
+        level.interaction_manager.data["reminder_queue"][var_0] = undefined;
         return;
       }
 
@@ -973,39 +973,39 @@ function clear_reminder(var0) {
   }
 }
 
-function play_group_gesture_reaction(var0, var1, var2, var3) {
-  foreach(var5 in var0) {
-    var5 endon("death");
-    var5 endon("stop_reaction");
-    var5 endon("reaction_end");
-    var5 endon("stop_gesture_reaction");
-    var5 endon("stop_smart_reaction");
+function play_group_gesture_reaction(var_0, var_1, var_2, var_3) {
+  foreach(var_5 in var_0) {
+    var_5 endon("death");
+    var_5 endon("stop_reaction");
+    var_5 endon("reaction_end");
+    var_5 endon("stop_gesture_reaction");
+    var_5 endon("stop_smart_reaction");
   }
 
-  foreach(var5 in var0) {
+  foreach(var_5 in var_0) {
     thread add_actor_to_manager();
   }
 
-  thread reaction_group_look_distance_based(var0, var1);
-  waittill_group_gestureconditionsmet(var0, var2);
-  play_group_gesture_performance(var0, var3, var2);
+  thread reaction_group_look_distance_based(var_0, var_1);
+  waittill_group_gestureconditionsmet(var_0, var_2);
+  play_group_gesture_performance(var_0, var_3, var_2);
 
-  foreach(var5 in var0) {
-    var10 = randomfloatrange(0, 1);
-    var11 = randomfloatrange(0.5, 1.5);
-    var5 scripts\engine\utility::delaythread(var10, &scripts\engine\sp\utility::gesture_stop, var11);
+  foreach(var_5 in var_0) {
+    var_10 = randomfloatrange(0, 1);
+    var_11 = randomfloatrange(0.5, 1.5);
+    var_5 scripts\engine\utility::delaythread(var_10, &scripts\engine\sp\utility::gesture_stop, var_11);
   }
 }
 
-function waittill_group_gestureconditionsmet(var0, var1) {
-  var2 = 1;
-  var3 = create_middle_ent(var0);
-  var0 = scripts\engine\utility::array_add(var0, var3);
+function waittill_group_gestureconditionsmet(var_0, var_1) {
+  var_2 = 1;
+  var_3 = create_middle_ent(var_0);
+  var_0 = scripts\engine\utility::array_add(var_0, var_3);
 
-  while(var2) {
-    foreach(var5 in var0) {
-      if(isplayerfocus(var5, var1)) {
-        var2 = 0;
+  while(var_2) {
+    foreach(var_5 in var_0) {
+      if(isplayerfocus(var_5, var_1)) {
+        var_2 = 0;
         break;
       }
     }
@@ -1014,36 +1014,36 @@ function waittill_group_gestureconditionsmet(var0, var1) {
   }
 }
 
-function create_middle_ent(var0) {
-  var1 = 0;
-  var2 = (0, 0, 0);
+function create_middle_ent(var_0) {
+  var_1 = 0;
+  var_2 = (0, 0, 0);
 
-  foreach(var4 in var0) {
-    var2 += var4.origin;
-    var1++;
+  foreach(var_4 in var_0) {
+    var_2 += var_4.origin;
+    var_1++;
   }
 
-  var6 = var2 / var1;
-  var7 = scripts\engine\utility::spawn_tag_origin(var6, (0, 0, 0));
-  return var7;
+  var_6 = var_2 / var_1;
+  var_7 = scripts\engine\utility::spawn_tag_origin(var_6, (0, 0, 0));
+  return var_7;
 }
 
-function play_group_gesture_performance(var0, var1, var2) {
-  for(var3 = 0; var3 < var0.size; var3++) {
-    if(isDefined(var0[var3]) && isDefined(var1[var3])) {
-      play_gesture_reaction_anim(var0[var3]);
-      play_interaction_vo(var0[var3], var1[var3]);
+function play_group_gesture_performance(var_0, var_1, var_2) {
+  for(var_3 = 0; var_3 < var_0.size; var_3++) {
+    if(isDefined(var_0[var_3]) && isDefined(var_1[var_3])) {
+      play_gesture_reaction_anim(var_0[var_3]);
+      play_interaction_vo(var_0[var_3], var_1[var_3]);
     }
 
-    if(!group_isplayerfocus(var2, var0)) {
+    if(!group_isplayerfocus(var_2, var_0)) {
       break;
     }
   }
 }
 
-function group_isplayerfocus(var0, var1) {
-  foreach(var3 in var1) {
-    if(isplayerfocus(var3, var0)) {
+function group_isplayerfocus(var_0, var_1) {
+  foreach(var_3 in var_1) {
+    if(isplayerfocus(var_3, var_0)) {
       return true;
     }
   }
@@ -1051,96 +1051,96 @@ function group_isplayerfocus(var0, var1) {
   return false;
 }
 
-function reaction_group_look_distance_based(var0, var1, var2) {
-  foreach(var4 in var0) {
-    var4 endon("death");
-    var4 endon("stop_reaction");
-    var4 endon("reaction_end");
-    var4 endon("stop_reaction_look");
-    var4 endon("stop_smart_reaction");
+function reaction_group_look_distance_based(var_0, var_1, var_2) {
+  foreach(var_4 in var_0) {
+    var_4 endon("death");
+    var_4 endon("stop_reaction");
+    var_4 endon("reaction_end");
+    var_4 endon("stop_reaction_look");
+    var_4 endon("stop_smart_reaction");
   }
 
-  var6 = 85;
+  var_6 = 85;
 
-  if(isDefined(var1)) {
-    var6 = var1;
+  if(isDefined(var_1)) {
+    var_6 = var_1;
   }
 
-  if(!isDefined(var2)) {
-    var2 = level.player;
+  if(!isDefined(var_2)) {
+    var_2 = level.player;
   }
 
-  initialize_group_lookat(var0, var2);
-  var7 = create_middle_ent(var0);
+  initialize_group_lookat(var_0, var_2);
+  var_7 = create_middle_ent(var_0);
 
   for(;;) {
-    update_lookat_status(var0, var7, var2, var1);
-    update_lookat_weights(var0);
-    update_lookat_delays(var0);
+    update_lookat_status(var_0, var_7, var_2, var_1);
+    update_lookat_weights(var_0);
+    update_lookat_delays(var_0);
     waitframe();
   }
 }
 
-function initialize_group_lookat(var0, var1) {
-  foreach(var3 in var0) {
-    var3 scripts\engine\sp\utility::gesture_follow_lookat(var1, 0.15, 0.7);
-    var3.lookat_enabled = 0;
-    var3.lookat_delay = 0;
+function initialize_group_lookat(var_0, var_1) {
+  foreach(var_3 in var_0) {
+    var_3 scripts\engine\sp\utility::gesture_follow_lookat(var_1, 0.15, 0.7);
+    var_3.lookat_enabled = 0;
+    var_3.lookat_delay = 0;
   }
 
   waitframe();
 
-  foreach(var3 in var0) {
-    var3 thread scripts\engine\sp\utility::gesture_eye_dart_loop(var1);
+  foreach(var_3 in var_0) {
+    var_3 thread scripts\engine\sp\utility::gesture_eye_dart_loop(var_1);
   }
 }
 
-function update_lookat_status(var0, var1, var2, var3) {
-  if(distance2d(var1.origin, var2.origin) <= var3) {
-    enable_lookat(var0);
+function update_lookat_status(var_0, var_1, var_2, var_3) {
+  if(distance2d(var_1.origin, var_2.origin) <= var_3) {
+    enable_lookat(var_0);
     return;
   }
 
-  disable_lookat(var0);
+  disable_lookat(var_0);
 }
 
-function enable_lookat(var0) {
-  foreach(var2 in var0) {
-    if(!var2.lookat_enabled) {
-      create_lookat_delay(var2);
+function enable_lookat(var_0) {
+  foreach(var_2 in var_0) {
+    if(!var_2.lookat_enabled) {
+      create_lookat_delay(var_2);
     }
 
-    var2.lookat_enabled = 1;
+    var_2.lookat_enabled = 1;
   }
 }
 
-function disable_lookat(var0) {
-  foreach(var2 in var0) {
-    if(var2.lookat_enabled) {
-      create_lookat_delay(var2);
+function disable_lookat(var_0) {
+  foreach(var_2 in var_0) {
+    if(var_2.lookat_enabled) {
+      create_lookat_delay(var_2);
     }
 
-    var2.lookat_enabled = 0;
+    var_2.lookat_enabled = 0;
   }
 }
 
-function update_lookat_weights(var0) {
-  foreach(var2 in var0) {
-    if(var2.lookat_delay <= 0) {
-      if(var2.lookat_enabled) {
-        increase_lookat_weight(var2);
+function update_lookat_weights(var_0) {
+  foreach(var_2 in var_0) {
+    if(var_2.lookat_delay <= 0) {
+      if(var_2.lookat_enabled) {
+        increase_lookat_weight(var_2);
         continue;
       }
 
-      decrease_lookat_weight(var2);
+      decrease_lookat_weight(var_2);
     }
   }
 }
 
-function update_lookat_delays(var0) {
-  foreach(var2 in var0) {
-    if(var2.lookat_delay > 0) {
-      var2.lookat_delay -= 0.05;
+function update_lookat_delays(var_0) {
+  foreach(var_2 in var_0) {
+    if(var_2.lookat_delay > 0) {
+      var_2.lookat_delay -= 0.05;
     }
   }
 }
@@ -1161,31 +1161,31 @@ function decrease_lookat_weight() {
   thread scripts\asm\gesture\script_funcs::ai_gesture_lookat_weight_down(0.7);
 }
 
-function convertvar_toarray(var0) {
-  if(!isarray(var0)) {
-    return [var0];
+function convertvar_toarray(var_0) {
+  if(!isarray(var_0)) {
+    return [var_0];
   }
 
-  return var0;
+  return var_0;
 }
 
-function play_gesture_reaction_loop(var0, var1, var2, var3, var4) {
+function play_gesture_reaction_loop(var_0, var_1, var_2, var_3, var_4) {
   self endon("death");
   self endon("stop_reaction");
   self endon("reaction_end");
-  var5 = [];
+  var_5 = [];
 
-  for(var6 = var2;; var6 = scripts\engine\utility::array_remove(var6, var7)) {
-    if(var6.size <= 0) {
-      var5 = [];
-      var6 = var2;
+  for(var_6 = var_2;; var_6 = scripts\engine\utility::array_remove(var_6, var_7)) {
+    if(var_6.size <= 0) {
+      var_5 = [];
+      var_6 = var_2;
     }
 
-    var7 = var6[randomint(var6.size)];
-    play_gesture_reaction(var0, var1, var7, var3, var4);
+    var_7 = var_6[randomint(var_6.size)];
+    play_gesture_reaction(var_0, var_1, var_7, var_3, var_4);
 
     for(;;) {
-      if(distance2d(self.origin, level.player.origin) >= var0) {
+      if(distance2d(self.origin, level.player.origin) >= var_0) {
         break;
       }
 
@@ -1193,7 +1193,7 @@ function play_gesture_reaction_loop(var0, var1, var2, var3, var4) {
     }
 
     waitframe();
-    var5 = scripts\engine\utility::array_add(var5, var7);
+    var_5 = scripts\engine\utility::array_add(var_5, var_7);
   }
 }
 
@@ -1210,21 +1210,21 @@ function stop_queued_reaction() {
   thread scripts\sp\interaction::interaction_end();
 }
 
-function queue_gesture_reaction(var0) {
+function queue_gesture_reaction(var_0) {
   if(!isDefined(self.gesture_reaction_queue)) {
     self.gesture_reaction_queue = [];
   }
 
-  var1 = var0;
+  var_1 = var_0;
 
-  if(isarray(var0)) {
-    var1 = var0[0];
+  if(isarray(var_0)) {
+    var_1 = var_0[0];
   }
 
-  self.gesture_reaction_queue[var1] = var0;
+  self.gesture_reaction_queue[var_1] = var_0;
 }
 
-function play_gesture_reaction_set(var0, var1) {
+function play_gesture_reaction_set(var_0, var_1) {
   self endon("death");
   self endon("stop_reaction");
   self endon("reaction_end");
@@ -1234,31 +1234,31 @@ function play_gesture_reaction_set(var0, var1) {
   thread add_actor_to_manager();
   self.allow_gesture_reactions = 1;
 
-  if(!isDefined(var0)) {
-    var0 = 150;
+  if(!isDefined(var_0)) {
+    var_0 = 150;
   }
 
-  if(!isDefined(var1)) {
-    var1 = var0 * 0.5;
+  if(!isDefined(var_1)) {
+    var_1 = var_0 * 0.5;
   }
 
-  thread reaction_look_distance_based(var0);
-  var2 = getarraykeys(self.gesture_reaction_queue);
+  thread reaction_look_distance_based(var_0);
+  var_2 = getarraykeys(self.gesture_reaction_queue);
 
-  for(var3 = 0; var3 < var2.size; var3++) {
-    var4 = var2[var3];
-    var5 = self.gesture_reaction_queue[var4];
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
+    var_4 = var_2[var_3];
+    var_5 = self.gesture_reaction_queue[var_4];
 
     for(;;) {
       if(!isDefined(self)) {
         return;
       }
 
-      var6 = length(level.player.origin - level.player getEye());
-      var7 = self.origin + anglestoup(self.angles) * var6;
+      var_6 = length(level.player.origin - level.player getEye());
+      var_7 = self.origin + anglestoup(self.angles) * var_6;
 
-      if(level.player scripts\engine\sp\utility::player_looking_at(var7, 0.75, 1)) {
-        if(distance2d(self.origin, level.player.origin) <= var1 && can_play_nearby_gesture(var1)) {
+      if(level.player scripts\engine\sp\utility::player_looking_at(var_7, 0.75, 1)) {
+        if(distance2d(self.origin, level.player.origin) <= var_1 && can_play_nearby_gesture(var_1)) {
           break;
         }
       }
@@ -1269,23 +1269,23 @@ function play_gesture_reaction_set(var0, var1) {
     thread scripts\engine\sp\utility::gesture_simple("salute");
     self.allow_gesture_reactions = 0;
 
-    if(isarray(var5)) {
-      for(var8 = 0; var8 < var5.size; var8++) {
-        var9 = var5[var8];
+    if(isarray(var_5)) {
+      for(var_8 = 0; var_8 < var_5.size; var_8++) {
+        var_9 = var_5[var_8];
 
-        if(isstring(var9)) {
-          define_face_anim_if_exists(var9);
+        if(isstring(var_9)) {
+          define_face_anim_if_exists(var_9);
 
-          if(soundexists(var9)) {
-            if(issubstr(var9, "plr")) {
-              level.player scripts\engine\sp\utility::smart_player_dialogue(var9);
+          if(soundexists(var_9)) {
+            if(issubstr(var_9, "plr")) {
+              level.player scripts\engine\sp\utility::smart_player_dialogue(var_9);
             } else {
-              var10 = main_cast_dialog_actor_check(var9);
+              var_10 = main_cast_dialog_actor_check(var_9);
 
-              if(isDefined(var10)) {
-                var10 scripts\engine\sp\utility::smart_dialogue(var9);
+              if(isDefined(var_10)) {
+                var_10 scripts\engine\sp\utility::smart_dialogue(var_9);
               } else {
-                scripts\engine\sp\utility::smart_dialogue(var9);
+                scripts\engine\sp\utility::smart_dialogue(var_9);
               }
             }
           }
@@ -1293,22 +1293,22 @@ function play_gesture_reaction_set(var0, var1) {
           continue;
         }
 
-        if(isnumber(var9)) {
-          wait var9;
+        if(isnumber(var_9)) {
+          wait var_9;
         }
       }
-    } else if(soundexists(var5)) {
-      define_face_anim_if_exists(var5);
-      var10 = main_cast_dialog_actor_check(var5);
+    } else if(soundexists(var_5)) {
+      define_face_anim_if_exists(var_5);
+      var_10 = main_cast_dialog_actor_check(var_5);
 
-      if(isDefined(var10)) {
-        var10 scripts\engine\sp\utility::smart_dialogue(var5);
+      if(isDefined(var_10)) {
+        var_10 scripts\engine\sp\utility::smart_dialogue(var_5);
       } else {
-        scripts\engine\sp\utility::smart_dialogue(var5);
+        scripts\engine\sp\utility::smart_dialogue(var_5);
       }
     }
 
-    self.gesture_reaction_queue[var4] = undefined;
+    self.gesture_reaction_queue[var_4] = undefined;
     wait 5;
     self.allow_gesture_reactions = 1;
   }
@@ -1321,39 +1321,39 @@ function play_gesture_reaction_set(var0, var1) {
   }
 }
 
-function main_cast_dialog_actor_check(var0) {
-  var1 = strtok(var0, "_");
+function main_cast_dialog_actor_check(var_0) {
+  var_1 = strtok(var_0, "_");
 
-  if(scripts\engine\utility::array_contains(var1, "nav") || scripts\engine\utility::array_contains(var1, "gtr")) {
+  if(scripts\engine\utility::array_contains(var_1, "nav") || scripts\engine\utility::array_contains(var_1, "gtr")) {
     return level.gator;
-  } else if(scripts\engine\utility::array_contains(var1, "slt") || scripts\engine\utility::array_contains(var1, "xo")) {
+  } else if(scripts\engine\utility::array_contains(var_1, "slt") || scripts\engine\utility::array_contains(var_1, "xo")) {
     return level.salter;
-  } else if(scripts\engine\utility::array_contains(var1, "bsw")) {
+  } else if(scripts\engine\utility::array_contains(var_1, "bsw")) {
     if(level.script == "shipcrib_rogue" || level.script == "shipcrib_prisoner") {
       return level.sipes;
     } else {
       return level.sotomura;
     }
-  } else if(scripts\engine\utility::array_contains(var1, "cmo")) {
+  } else if(scripts\engine\utility::array_contains(var_1, "cmo")) {
     return level.comms;
-  } else if(scripts\engine\utility::array_contains(var1, "dpo")) {
+  } else if(scripts\engine\utility::array_contains(var_1, "dpo")) {
     return level.drop_officer;
   }
 
   return undefined;
 }
 
-function play_reminder_anim_distance(var0, var1, var2, var3, var4, var5) {
-  var0 endon("death");
+function play_reminder_anim_distance(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_0 endon("death");
 
-  if(isDefined(var0.pre_reaction_func)) {
-    if(isDefined(var0.pre_reaction_params)) {
-      if(var0.pre_reaction_params.size == 1) {
-        var0[[var0.pre_reaction_func]](var0.pre_reaction_params[0]);
-      } else if(var0.pre_reaction_params.size == 2) {
-        var0[[var0.pre_reaction_func]](var0.pre_reaction_params[0], var0.pre_reaction_params[1]);
-      } else if(var0.pre_reaction_params.size == 3) {
-        var0[[var0.pre_reaction_func]](var0.pre_reaction_params[0], var0.pre_reaction_params[1], var0.pre_reaction_params[2]);
+  if(isDefined(var_0.pre_reaction_func)) {
+    if(isDefined(var_0.pre_reaction_params)) {
+      if(var_0.pre_reaction_params.size == 1) {
+        var_0[[var_0.pre_reaction_func]](var_0.pre_reaction_params[0]);
+      } else if(var_0.pre_reaction_params.size == 2) {
+        var_0[[var_0.pre_reaction_func]](var_0.pre_reaction_params[0], var_0.pre_reaction_params[1]);
+      } else if(var_0.pre_reaction_params.size == 3) {
+        var_0[[var_0.pre_reaction_func]](var_0.pre_reaction_params[0], var_0.pre_reaction_params[1], var_0.pre_reaction_params[2]);
       }
     }
   }
@@ -1362,80 +1362,80 @@ function play_reminder_anim_distance(var0, var1, var2, var3, var4, var5) {
   level endon("reminders_done");
   thread add_actor_to_manager();
 
-  if(!isDefined(var5)) {
-    var5 = 0;
+  if(!isDefined(var_5)) {
+    var_5 = 0;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 150;
+  if(!isDefined(var_1)) {
+    var_1 = 150;
   }
 
-  if(!isDefined(var2)) {
-    var2 = var1 * 0.5;
+  if(!isDefined(var_2)) {
+    var_2 = var_1 * 0.5;
   }
 
-  if(!isDefined(var0.is_head_tracking) || isDefined(var0.is_head_tracking) && !var0.is_head_tracking) {
-    thread reaction_look_distance_based(var0);
+  if(!isDefined(var_0.is_head_tracking) || isDefined(var_0.is_head_tracking) && !var_0.is_head_tracking) {
+    thread reaction_look_distance_based(var_0);
   }
 
   for(;;) {
-    jumpiffalse(distance2d(var0.origin, level.player.origin) <= var1 + 25) LOC_00000138;
+    jumpiffalse(distance2d(var_0.origin, level.player.origin) <= var_1 + 25) LOC_00000138;
     waitframe();
   }
 
   for(;;) {
-    if(!isDefined(var0)) {
+    if(!isDefined(var_0)) {
       return;
     }
 
-    var6 = length(level.player.origin - level.player getEye());
-    var7 = var0.origin + anglestoup(var0.angles) * var6;
-    jumpiffalse(level.player scripts\engine\sp\utility::player_looking_at(var7, 0.75, 1)) LOC_000001a5;
+    var_6 = length(level.player.origin - level.player getEye());
+    var_7 = var_0.origin + anglestoup(var_0.angles) * var_6;
+    jumpiffalse(level.player scripts\engine\sp\utility::player_looking_at(var_7, 0.75, 1)) LOC_000001a5;
     waitframe();
   }
 
   LOC_000001a9:
     self notify("stop_loop");
-  thread scripts\common\anim::anim_single_solo(var0, var3);
-  var8 = getanimlength(var0 scripts\engine\utility::getanim(var3));
-  thread scripts\engine\sp\utility::notify_delay("reminder_anim_done", var8);
+  thread scripts\common\anim::anim_single_solo(var_0, var_3);
+  var_8 = getanimlength(var_0 scripts\engine\utility::getanim(var_3));
+  thread scripts\engine\sp\utility::notify_delay("reminder_anim_done", var_8);
 
-  if(isDefined(var0.return_anime)) {
-    scripts\engine\utility::delaythread(var8, &scripts\common\anim::anim_loop_solo, var0, var0.return_anime, "stop_loop");
+  if(isDefined(var_0.return_anime)) {
+    scripts\engine\utility::delaythread(var_8, &scripts\common\anim::anim_loop_solo, var_0, var_0.return_anime, "stop_loop");
   }
 
-  if(isDefined(var4)) {
-    if(var5) {
+  if(isDefined(var_4)) {
+    if(var_5) {
       level notify("reboot_timer");
       waitframe();
       thread reminder_cooldown_timer(level);
 
       if(isDefined(level.interaction_manager)) {
         if(isDefined(level.interaction_manager.data["reminder_queue"])) {
-          if(scripts\engine\utility::array_contains(level.interaction_manager.data["reminder_queue"], var0)) {
-            level.interaction_manager.data["reminder_queue"][var4] = undefined;
+          if(scripts\engine\utility::array_contains(level.interaction_manager.data["reminder_queue"], var_0)) {
+            level.interaction_manager.data["reminder_queue"][var_4] = undefined;
           }
         }
       }
     }
 
-    play_smart_dialog_if_exists(var0, var4);
+    play_smart_dialog_if_exists(var_0, var_4);
   }
 
-  if(isDefined(var0.post_reaction_func) && !isDefined(var0.post_reaction_vo)) {
-    if(isDefined(var0.post_reaction_params)) {
-      if(var0.pre_reaction_params.size == 1) {
-        var0[[var0.post_reaction_func]](var0.post_reaction_params[0]);
+  if(isDefined(var_0.post_reaction_func) && !isDefined(var_0.post_reaction_vo)) {
+    if(isDefined(var_0.post_reaction_params)) {
+      if(var_0.pre_reaction_params.size == 1) {
+        var_0[[var_0.post_reaction_func]](var_0.post_reaction_params[0]);
         return;
       }
 
-      if(var0.pre_reaction_params.size == 2) {
-        var0[[var0.post_reaction_func]](var0.post_reaction_params[0], var0.post_reaction_params[1]);
+      if(var_0.pre_reaction_params.size == 2) {
+        var_0[[var_0.post_reaction_func]](var_0.post_reaction_params[0], var_0.post_reaction_params[1]);
         return;
       }
 
-      if(var0.pre_reaction_params.size == 3) {
-        var0[[var0.post_reaction_func]](var0.post_reaction_params[0], var0.post_reaction_params[1], var0.post_reaction_params[2]);
+      if(var_0.pre_reaction_params.size == 3) {
+        var_0[[var_0.post_reaction_func]](var_0.post_reaction_params[0], var_0.post_reaction_params[1], var_0.post_reaction_params[2]);
         return;
       }
 
@@ -1445,8 +1445,8 @@ function play_reminder_anim_distance(var0, var1, var2, var3, var4, var5) {
     return;
   }
 
-  if(isDefined(var0.post_reaction_func) && isDefined(var0.post_reaction_vo)) {
-    var0 thread[[var0.post_reaction_func]](undefined, undefined, var0.post_reaction_vo);
+  if(isDefined(var_0.post_reaction_func) && isDefined(var_0.post_reaction_vo)) {
+    var_0 thread[[var_0.post_reaction_func]](undefined, undefined, var_0.post_reaction_vo);
     return;
   }
 }

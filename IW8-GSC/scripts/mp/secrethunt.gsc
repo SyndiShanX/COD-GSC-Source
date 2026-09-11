@@ -3,45 +3,45 @@
  * Script: scripts\mp\secrethunt.gsc
 ***********************************************/
 
-function secrethunt(var0) {
+function secrethunt(var_0) {
   while(!istrue(game["gamestarted"])) {
     waitframe();
   }
 
-  var1 = getEntArray(var0, "targetname");
+  var_1 = getEntArray(var_0, "targetname");
 
-  foreach(var3 in var1) {
-    thread trackhiddenobj(var3);
+  foreach(var_3 in var_1) {
+    thread trackhiddenobj(var_3);
   }
 }
 
-function trackhiddenobj(var0) {
+function trackhiddenobj(var_0) {
   level endon("game_ended");
   self setCanDamage(1);
   self.found = [];
 
   for(;;) {
-    self waittill("damage", var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14);
+    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14);
 
-    if(isDefined(var10)) {
-      if(var5 == "MOD_EXPLOSIVE" || var5 == "MOD_GRENADE_SPLASH") {
+    if(isDefined(var_10)) {
+      if(var_5 == "MOD_EXPLOSIVE" || var_5 == "MOD_GRENADE_SPLASH") {
         continue;
       }
-    } else if(isDefined(var14.streakinfo) && scripts\mp\utility\killstreak::iskillstreak(var14.streakinfo.streakname)) {
+    } else if(isDefined(var_14.streakinfo) && scripts\mp\utility\killstreak::iskillstreak(var_14.streakinfo.streakname)) {
       self.health = 5;
       continue;
     }
 
-    if(!isDefined(self.found[var2.guid])) {
-      self.found[var2.guid] = 1;
+    if(!isDefined(self.found[var_2.guid])) {
+      self.found[var_2.guid] = 1;
 
-      if(!isDefined(var2.hiddenobjcount)) {
-        var2.hiddenobjcount = 1;
+      if(!isDefined(var_2.hiddenobjcount)) {
+        var_2.hiddenobjcount = 1;
       } else {
-        var2.hiddenobjcount++;
+        var_2.hiddenobjcount++;
       }
 
-      iprintln("Secret objects found: " + var2.hiddenobjcount + " of " + var0);
+      iprintln("Secret objects found: " + var_2.hiddenobjcount + " of " + var_0);
     }
 
     if(self.health <= 0) {

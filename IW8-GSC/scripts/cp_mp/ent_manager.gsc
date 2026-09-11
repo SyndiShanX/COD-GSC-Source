@@ -9,9 +9,9 @@ function init() {
   level.budgetedents = [];
 }
 
-function registerspawncount(var0) {
-  self.entcount = var0;
-  level.entbudgetused += var0;
+function registerspawncount(var_0) {
+  self.entcount = var_0;
+  level.entbudgetused += var_0;
   updatebudget();
 }
 
@@ -33,10 +33,10 @@ function deregisterspawn() {
   }
 }
 
-function registerspawn(var0, var1) {
-  self.entcount = var0;
-  self.entdeletefunc = var1;
-  level.entbudgetused += var0;
+function registerspawn(var_0, var_1) {
+  self.entcount = var_0;
+  self.entdeletefunc = var_1;
+  level.entbudgetused += var_0;
   level.budgetedents[level.budgetedents.size] = self;
   updatebudget();
 }

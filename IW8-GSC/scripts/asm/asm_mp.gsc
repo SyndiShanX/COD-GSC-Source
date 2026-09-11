@@ -3,13 +3,13 @@
  * Script: scripts\asm\asm_mp.gsc
 ***********************************************/
 
-function asm_init(var0, var1) {
+function asm_init(var_0, var_1) {
   self.asm = spawnStruct();
   self.asm.animoverrides = [];
   self.asm.frantic = 0;
-  self.asmname = var0;
-  self.asm.archetype = var1;
-  self setanimset(var1);
+  self.asmname = var_0;
+  self.asm.archetype = var_1;
+  self setanimset(var_1);
   self.fnasm_init = &asm_init;
 
   if(self islegacyagent()) {
@@ -30,14 +30,14 @@ function asm_init(var0, var1) {
   level.playercanseedangercircleworld = &bunker_spawning;
   level.playercanbuyrespawn = &bunker_spawning;
   hack_setup_a_struct();
-  var2 = var0;
+  var_2 = var_0;
 
   if(isDefined(self.asmasset)) {
-    var2 = self.asmasset;
+    var_2 = self.asmasset;
   }
 
-  asmregistergenerichandler(var2, &scripts\asm\asm::asm_generichandler);
-  self asminstantiate(var2);
+  asmregistergenerichandler(var_2, &scripts\asm\asm::asm_generichandler);
+  self asminstantiate(var_2);
 }
 
 function hack_setup_a_struct() {
@@ -67,16 +67,16 @@ function hack_setup_a_struct() {
   self.a.laseron = 0;
 }
 
-function bunker_waitforuse(var0, var1, var2, var3) {
-  var4 = spawn("script_model", var2);
-  var4.angles = var3;
-  var4 setModel(level.scr_model[var0]);
-  self.animated_prop = var4;
+function bunker_waitforuse(var_0, var_1, var_2, var_3) {
+  var_4 = spawn("script_model", var_2);
+  var_4.angles = var_3;
+  var_4 setModel(level.scr_model[var_0]);
+  self.animated_prop = var_4;
 }
 
-function bunker_spawning(var0, var1) {
-  var2 = level.scr_anim[var0][var1];
-  self.animated_prop scriptmodelplayanimdeltamotion(var2);
+function bunker_spawning(var_0, var_1) {
+  var_2 = level.scr_anim[var_0][var_1];
+  self.animated_prop scriptmodelplayanimdeltamotion(var_2);
 }
 
 function ref_12e1d() {
@@ -89,9 +89,9 @@ function ref_12e1d() {
   }
 
   if(isDefined(self.damageweapon)) {
-    var0 = getweaponbasename(self.damageweapon);
+    var_0 = getweaponbasename(self.damageweapon);
 
-    if(var0 == "molotov_mp") {
+    if(var_0 == "molotov_mp") {
       self._blackboard.isburning = 1;
 
       if(self.damageyaw > 0) {
@@ -113,18 +113,18 @@ function traversehandler() {
   self endon("terminate_ai_threads");
 
   for(;;) {
-    self waittill("traverse_begin", var0, var1);
+    self waittill("traverse_begin", var_0, var_1);
 
-    if(!self asmhasstate(self.asmname, var0)) {
-      var0 = "traverse_external";
+    if(!self asmhasstate(self.asmname, var_0)) {
+      var_0 = "traverse_external";
     }
 
-    self asmsetstate(self.asmname, var0);
+    self asmsetstate(self.asmname, var_0);
   }
 }
 
 function shouldplaypainanim() {
-  var0 = 64;
+  var_0 = 64;
 
   if(self.a.disablepain) {
     return false;
@@ -134,15 +134,15 @@ function shouldplaypainanim() {
     return false;
   }
 
-  if(isDefined(self.pathgoalpos) && self pathdisttogoal(1) < var0) {
+  if(isDefined(self.pathgoalpos) && self pathdisttogoal(1) < var_0) {
     return false;
   }
 
   if(isDefined(self.damageweapon)) {
-    var1 = getweaponbasename(self.damageweapon);
-    var2 = issubstr(var1, "thermite") || isDefined(self.damageweapon.magazine) && issubstr(self.damageweapon.magazine, "boltfire");
+    var_1 = getweaponbasename(self.damageweapon);
+    var_2 = issubstr(var_1, "thermite") || isDefined(self.damageweapon.magazine) && issubstr(self.damageweapon.magazine, "boltfire");
 
-    if(var2 && isDefined(self.a.lastpaintime) && gettime() - self.a.lastpaintime < 2000) {
+    if(var_2 && isDefined(self.a.lastpaintime) && gettime() - self.a.lastpaintime < 2000) {
       return false;
     }
   }
@@ -150,75 +150,75 @@ function shouldplaypainanim() {
   return true;
 }
 
-function asm_handlenotetracks(var0, var1, var2, var3) {
-  scripts\asm\asm::asm_fireevent(self.asmname, var0);
+function asm_handlenotetracks(var_0, var_1, var_2, var_3) {
+  scripts\asm\asm::asm_fireevent(self.asmname, var_0);
 }
 
-function asm_playanimstateindex(var0, var1, var2, var3) {
-  care_pkg(var0, var1, var2, var3, "end");
+function asm_playanimstateindex(var_0, var_1, var_2, var_3) {
+  care_pkg(var_0, var_1, var_2, var_3, "end");
 }
 
-function care_pkg(var0, var1, var2, var3, var4) {
-  self endon(var1 + "_finished");
-  var5 = scripts\asm\asm::asm_getnotehandler(var0, var1);
+function care_pkg(var_0, var_1, var_2, var_3, var_4) {
+  self endon(var_1 + "_finished");
+  var_5 = scripts\asm\asm::asm_getnotehandler(var_0, var_1);
 
-  if(isDefined(var3)) {
-    scripts\mp\agents\scriptedagents::playanimnatrateuntilnotetrack(var1, var2, var3, var1, var4, var5);
+  if(isDefined(var_3)) {
+    scripts\mp\agents\scriptedagents::playanimnatrateuntilnotetrack(var_1, var_2, var_3, var_1, var_4, var_5);
     return;
   }
 
-  scripts\mp\agents\scriptedagents::playanimnuntilnotetrack(var1, var2, var1, var4, var5);
+  scripts\mp\agents\scriptedagents::playanimnuntilnotetrack(var_1, var_2, var_1, var_4, var_5);
 }
 
-function asm_playanimstateuntilnotetrack(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  var3 = asm_getanimindex(var0, var1);
-  var4 = scripts\asm\asm::asm_getnotehandler(var0, var1);
-  scripts\mp\agents\scriptedagents::playanimnuntilnotetrack(var1, var3, var1, var2, var4);
+function asm_playanimstateuntilnotetrack(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  var_3 = asm_getanimindex(var_0, var_1);
+  var_4 = scripts\asm\asm::asm_getnotehandler(var_0, var_1);
+  scripts\mp\agents\scriptedagents::playanimnuntilnotetrack(var_1, var_3, var_1, var_2, var_4);
 }
 
-function asm_shoulddeathtransition(var0, var1) {}
+function asm_shoulddeathtransition(var_0, var_1) {}
 
-function asm_settransitionorientmode_transition(var0) {
-  switch (var0) {
+function asm_settransitionorientmode_transition(var_0) {
+  switch (var_0) {
     case "face node":
-      var1 = 1024;
+      var_1 = 1024;
 
       if(scripts\engine\utility::actor_is3d()) {
-        var2 = self.angles;
+        var_2 = self.angles;
 
-        if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < var1) {
-          var2 = scripts\asm\shared\utility::getnodeforwardangles(self.node);
+        if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < var_1) {
+          var_2 = scripts\asm\shared\utility::getnodeforwardangles(self.node);
         }
 
-        self orientmode("face angle 3d", var2);
+        self orientmode("face angle 3d", var_2);
       } else {
-        var3 = self.angles[1];
+        var_3 = self.angles[1];
 
-        if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < var1) {
-          var3 = scripts\asm\shared\utility::getnodeforwardyaw(self.node);
+        if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < var_1) {
+          var_3 = scripts\asm\shared\utility::getnodeforwardyaw(self.node);
         }
 
-        self orientmode("face angle", var3);
+        self orientmode("face angle", var_3);
       }
 
       break;
     default:
-      self orientmode(var0);
+      self orientmode(var_0);
       break;
   }
 }
 
 function asm_settransitionorientmode_legacy() {
-  switch (var0) {
+  switch (var_0) {
     case "face goal":
-      var1 = self.pathgoalpos;
+      var_1 = self.pathgoalpos;
 
-      if(isDefined(var1)) {
-        var2 = var1 - self.origin;
-        var3 = vectorNormalize(var2);
-        var4 = vectortoangles(var3);
-        self orientmode("face angle", var4[1]);
+      if(isDefined(var_1)) {
+        var_2 = var_1 - self.origin;
+        var_3 = vectorNormalize(var_2);
+        var_4 = vectortoangles(var_3);
+        self orientmode("face angle", var_4[1]);
         break;
       }
     case "face current":
@@ -229,37 +229,37 @@ function asm_settransitionorientmode_legacy() {
       self orientmode( < error > );
       break;
     case "face node":
-      var5 = self.angles[1];
-      var6 = 1024;
+      var_5 = self.angles[1];
+      var_6 = 1024;
 
-      if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < var6) {
-        var5 = scripts\asm\shared\utility::getnodeforwardyaw(self.node);
+      if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < var_6) {
+        var_5 = scripts\asm\shared\utility::getnodeforwardyaw(self.node);
       }
 
-      self orientmode("face angle", var5);
+      self orientmode("face angle", var_5);
       break;
     default:
       break;
   }
 }
 
-function asm_getanimindex(var0, var1, var2) {
-  return self asmgetanim(var0, var1, var2);
+function asm_getanimindex(var_0, var_1, var_2) {
+  return self asmgetanim(var_0, var_1, var_2);
 }
 
-function asm_playadditiveanimloopstate_mp(var0, var1, var2) {}
+function asm_playadditiveanimloopstate_mp(var_0, var_1, var_2) {}
 
-function dooropen(var0, var1) {
-  if(distance2dsquared(self.origin, var0.origin) < 16) {}
+function dooropen(var_0, var_1) {
+  if(distance2dsquared(self.origin, var_0.origin) < 16) {}
 
-  var0 constraintoscriptgoalRadius("away", self.origin);
+  var_0 constraintoscriptgoalRadius("away", self.origin);
 
-  if(var0 scriptabledoorisdouble()) {
-    var2 = getentitylessscriptablearrayinradius(undefined, undefined, var0.origin, 64);
+  if(var_0 scriptabledoorisdouble()) {
+    var_2 = getentitylessscriptablearrayinradius(undefined, undefined, var_0.origin, 64);
 
-    foreach(var4 in var2) {
-      if(var4 scriptabledoorisdouble()) {
-        var4 constraintoscriptgoalRadius("away", self.origin);
+    foreach(var_4 in var_2) {
+      if(var_4 scriptabledoorisdouble()) {
+        var_4 constraintoscriptgoalRadius("away", self.origin);
       }
     }
 
@@ -267,56 +267,56 @@ function dooropen(var0, var1) {
   }
 }
 
-function doorclose(var0) {
-  var0 vehicle_getinputvalue();
+function doorclose(var_0) {
+  var_0 vehicle_getinputvalue();
 }
 
-function doorneedstoclose(var0) {
-  var1 = var0 getscriptablepartstate("door", 1);
+function doorneedstoclose(var_0) {
+  var_1 = var_0 getscriptablepartstate("door", 1);
 
-  if(var1 == "closed" || var1 == "setup") {
+  if(var_1 == "closed" || var_1 == "setup") {
     return false;
   }
 
-  var2 = self.origin - var0.origin;
-  var3 = vectortoyaw(var2);
-  var4 = angleclamp180(var3 - var0.heli_intro[1]);
-  var5 = angleclamp180(var0.angles[1] - var0.heli_intro[1]);
-  return var4 * var5 > 0;
+  var_2 = self.origin - var_0.origin;
+  var_3 = vectortoyaw(var_2);
+  var_4 = angleclamp180(var_3 - var_0.heli_intro[1]);
+  var_5 = angleclamp180(var_0.angles[1] - var_0.heli_intro[1]);
+  return var_4 * var_5 > 0;
 }
 
-function getdoorcenter(var0) {
+function getdoorcenter(var_0) {
   return self._blackboard.doorpos;
 }
 
-function dooralreadyopen(var0) {
-  return abs(var0 scriptabledoorangle()) > 60;
+function dooralreadyopen(var_0) {
+  return abs(var_0 scriptabledoorangle()) > 60;
 }
 
-function care_packages_unusable_think(var0) {
-  if(!animisleaf(var0)) {
+function care_packages_unusable_think(var_0) {
+  if(!animisleaf(var_0)) {
     return 0;
   }
 
-  return animhasnotetrack(var0, "facial_override");
+  return animhasnotetrack(var_0, "facial_override");
 }
 
-function carepackage_drop_from_heli(var0, var1, var2) {
-  self playencryptedcinematicforplayer(var0, var1, var2);
+function carepackage_drop_from_heli(var_0, var_1, var_2) {
+  self playencryptedcinematicforplayer(var_0, var_1, var_2);
 }
 
-function carepackage_drops(var0, var1) {
+function carepackage_drops(var_0, var_1) {
   if(!scripts\asm\shared\utility::isfacialstateallowed("asm")) {
     return;
   }
 
-  if(isDefined(var0) && care_packages_unusable_think(var0)) {
+  if(isDefined(var_0) && care_packages_unusable_think(var_0)) {
     return;
   }
 
-  var2 = scripts\asm\asm::asm_lookupanimfromaliasifexists("knobs", "head");
+  var_2 = scripts\asm\asm::asm_lookupanimfromaliasifexists("knobs", "head");
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return;
   }
 
@@ -327,7 +327,7 @@ function carepackage_drops(var0, var1) {
   scripts\asm\shared\utility::setfacialstate("asm");
 
   if(isai(self)) {
-    self setfacialindex(var1);
+    self setfacialindex(var_1);
     return;
   }
 }

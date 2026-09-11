@@ -11,8 +11,8 @@ function init() {
   thread onplayerconnect();
 }
 
-function setpickupcallback(var0) {
-  level.plunderpickupcallback = var0;
+function setpickupcallback(var_0) {
+  level.plunderpickupcallback = var_0;
 }
 
 function createtags() {
@@ -60,186 +60,186 @@ function createtags() {
   level.droploot[5].tags = createtagsofcolor(level.droploot[5]);
 }
 
-function createtagsofcolor(var0) {
-  var0.dogtags = [];
+function createtagsofcolor(var_0) {
+  var_0.dogtags = [];
 
-  for(var1 = 0; var1 < var0.maxtags; var1++) {
-    var2 = spawn("script_model", (0, 0, 0));
-    var2 setModel(var0.tagmodel);
-    var2 scriptmodelplayanim("mp_dogtag_spin");
-    var2 hide();
-    var2 setasgametypeobjective();
-    var3 = spawn("trigger_radius", (0, 0, 0), 0, 32, 32);
-    var3.targetname = "trigger_dogtag";
-    var3 hide();
-    var4 = spawnStruct();
-    var4.type = "useObject";
-    var4.curorigin = var3.origin;
-    var4.entnum = var3 getentitynumber();
-    var4.lastusedtime = 0;
-    var4.visuals = var2;
-    var4.offset3d = (0, 0, 16);
-    var4.trigger = var3;
-    var4.triggertype = "proximity";
-    var4 scripts\mp\gameobjects::allowuse("none");
-    var0.dogtags[var0.dogtags.size] = var4;
+  for(var_1 = 0; var_1 < var_0.maxtags; var_1++) {
+    var_2 = spawn("script_model", (0, 0, 0));
+    var_2 setModel(var_0.tagmodel);
+    var_2 scriptmodelplayanim("mp_dogtag_spin");
+    var_2 hide();
+    var_2 setasgametypeobjective();
+    var_3 = spawn("trigger_radius", (0, 0, 0), 0, 32, 32);
+    var_3.targetname = "trigger_dogtag";
+    var_3 hide();
+    var_4 = spawnStruct();
+    var_4.type = "useObject";
+    var_4.curorigin = var_3.origin;
+    var_4.entnum = var_3 getentitynumber();
+    var_4.lastusedtime = 0;
+    var_4.visuals = var_2;
+    var_4.offset3d = (0, 0, 16);
+    var_4.trigger = var_3;
+    var_4.triggertype = "proximity";
+    var_4 scripts\mp\gameobjects::allowuse("none");
+    var_0.dogtags[var_0.dogtags.size] = var_4;
   }
 }
 
-function gettag(var0) {
-  var1 = level.droploot[var0].dogtags[0];
-  var2 = gettime();
+function gettag(var_0) {
+  var_1 = level.droploot[var_0].dogtags[0];
+  var_2 = gettime();
 
-  foreach(var4 in level.droploot[var0].dogtags) {
-    if(!isDefined(var4.lastusedtime)) {
+  foreach(var_4 in level.droploot[var_0].dogtags) {
+    if(!isDefined(var_4.lastusedtime)) {
       continue;
     }
 
-    if(var4.interactteam == "none") {
-      var1 = var4;
+    if(var_4.interactteam == "none") {
+      var_1 = var_4;
       break;
     }
 
-    if(var4.lastusedtime < var2) {
-      var2 = var4.lastusedtime;
-      var1 = var4;
+    if(var_4.lastusedtime < var_2) {
+      var_2 = var_4.lastusedtime;
+      var_1 = var_4;
     }
   }
 
-  var1 notify("reset");
-  var1 scripts\mp\gameobjects::initializetagpathvariables();
-  var1.lastusedtime = gettime();
-  return var1;
+  var_1 notify("reset");
+  var_1 scripts\mp\gameobjects::initializetagpathvariables();
+  var_1.lastusedtime = gettime();
+  return var_1;
 }
 
-function spawntag(var0, var1, var2, var3) {
-  var4 = var1 + (0, 0, 0);
-  var5 = (0, randomfloat(360), 0);
-  var6 = anglesToForward(var5);
+function spawntag(var_0, var_1, var_2, var_3) {
+  var_4 = var_1 + (0, 0, 0);
+  var_5 = (0, randomfloat(360), 0);
+  var_6 = anglesToForward(var_5);
 
-  if(istrue(var3)) {
-    var7 = randomfloatrange(16, 64);
+  if(istrue(var_3)) {
+    var_7 = randomfloatrange(16, 64);
   } else {
-    var7 = 0;
+    var_7 = 0;
   }
 
-  var5 += var7 * var7;
-  var8 = gettag(var1);
-  var8.curorigin = var5;
-  var8.trigger.origin = var5;
-  var8.visuals.origin = var5;
-  var8.tagtype = var1;
-  var8.trigger show();
-  var8 scripts\mp\gameobjects::allowuse("any");
-  showtoall(var8.visuals, var8);
-  var8.visuals setasgametypeobjective();
-  return var8;
+  var_5 += var_7 * var_7;
+  var_8 = gettag(var_1);
+  var_8.curorigin = var_5;
+  var_8.trigger.origin = var_5;
+  var_8.visuals.origin = var_5;
+  var_8.tagtype = var_1;
+  var_8.trigger show();
+  var_8 scripts\mp\gameobjects::allowuse("any");
+  showtoall(var_8.visuals, var_8);
+  var_8.visuals setasgametypeobjective();
+  return var_8;
 }
 
-function dropplayerstags(var0, var1) {
-  if(isagent(var0)) {
+function dropplayerstags(var_0, var_1) {
+  if(isagent(var_0)) {
     return;
   }
 
   if(scripts\mp\utility\game::getgametype() == "pill") {
-    droptags(var0, var0.tagscarried, var1);
+    droptags(var_0, var_0.tagscarried, var_1);
   } else {
-    var2 = scripts\engine\utility::array_contains(level.firstkillplayers, var0);
-    var3 = 1;
+    var_2 = scripts\engine\utility::array_contains(level.firstkillplayers, var_0);
+    var_3 = 1;
 
-    if(!var2) {
-      var3 = 5;
-      level.firstkillplayers = scripts\engine\utility::array_add(level.firstkillplayers, var0);
+    if(!var_2) {
+      var_3 = 5;
+      level.firstkillplayers = scripts\engine\utility::array_add(level.firstkillplayers, var_0);
     }
 
-    var4 = var0.tagscarried + var3;
-    droptags(var0, var4, var1);
+    var_4 = var_0.tagscarried + var_3;
+    droptags(var_0, var_4, var_1);
   }
 
-  playersettagcount(var0, 0);
+  playersettagcount(var_0, 0);
 }
 
-function droptags(var0, var1) {
-  var2 = int(var0 / 80);
-  var3 = int(var0 % 80);
-  droptagsoftype(5, int(max(0, var2)), self, var1);
-  var4 = int(var3 / 40);
-  var3 = int(var3 % 40);
-  droptagsoftype(4, int(max(0, var4)), self, var1);
-  var5 = int(var3 / 20);
-  var3 = int(var3 % 20);
-  droptagsoftype(3, int(max(0, var5)), self, var1);
-  var6 = int(var3 / 10);
-  var3 = int(var3 % 10);
-  droptagsoftype(2, int(max(0, var6)), self, var1);
-  var7 = int(var3 / 5);
-  var3 = int(var3 % 5);
-  droptagsoftype(1, int(max(0, var7)), self, var1);
-  var8 = int(var3 / 1);
-  var3 = int(var3 % 1);
-  droptagsoftype(0, int(max(0, var8)), self, var1);
+function droptags(var_0, var_1) {
+  var_2 = int(var_0 / 80);
+  var_3 = int(var_0 % 80);
+  droptagsoftype(5, int(max(0, var_2)), self, var_1);
+  var_4 = int(var_3 / 40);
+  var_3 = int(var_3 % 40);
+  droptagsoftype(4, int(max(0, var_4)), self, var_1);
+  var_5 = int(var_3 / 20);
+  var_3 = int(var_3 % 20);
+  droptagsoftype(3, int(max(0, var_5)), self, var_1);
+  var_6 = int(var_3 / 10);
+  var_3 = int(var_3 % 10);
+  droptagsoftype(2, int(max(0, var_6)), self, var_1);
+  var_7 = int(var_3 / 5);
+  var_3 = int(var_3 % 5);
+  droptagsoftype(1, int(max(0, var_7)), self, var_1);
+  var_8 = int(var_3 / 1);
+  var_3 = int(var_3 % 1);
+  droptagsoftype(0, int(max(0, var_8)), self, var_1);
 }
 
-function droptagsesc(var0, var1) {
-  var2 = int(var0 / 80);
-  var3 = int(var0 % 80);
-  droptagsoftype(5, int(max(0, var2)), self, var1);
-  var4 = int(var3 / 40);
-  var3 = int(var3 % 40);
-  droptagsoftype(4, int(max(0, var4)), self, var1);
-  var5 = int(var3 / 20);
-  var3 = int(var3 % 20);
-  droptagsoftype(3, int(max(0, var5)), self, var1);
-  var6 = int(var3 / 10);
-  var3 = int(var3 % 10);
-  droptagsoftype(2, int(max(0, var6)), self, var1);
-  var7 = int(var3 / 5);
-  var3 = int(var3 % 5);
-  droptagsoftype(1, int(max(0, var7)), self, var1);
-  var8 = int(var3 / 1);
-  var3 = int(var3 % 1);
-  droptagsoftype(0, int(max(0, var8)), self, var1);
+function droptagsesc(var_0, var_1) {
+  var_2 = int(var_0 / 80);
+  var_3 = int(var_0 % 80);
+  droptagsoftype(5, int(max(0, var_2)), self, var_1);
+  var_4 = int(var_3 / 40);
+  var_3 = int(var_3 % 40);
+  droptagsoftype(4, int(max(0, var_4)), self, var_1);
+  var_5 = int(var_3 / 20);
+  var_3 = int(var_3 % 20);
+  droptagsoftype(3, int(max(0, var_5)), self, var_1);
+  var_6 = int(var_3 / 10);
+  var_3 = int(var_3 % 10);
+  droptagsoftype(2, int(max(0, var_6)), self, var_1);
+  var_7 = int(var_3 / 5);
+  var_3 = int(var_3 % 5);
+  droptagsoftype(1, int(max(0, var_7)), self, var_1);
+  var_8 = int(var_3 / 1);
+  var_3 = int(var_3 % 1);
+  droptagsoftype(0, int(max(0, var_8)), self, var_1);
 }
 
-function droptagsoftype(var0, var1, var2, var3) {
-  for(var4 = 0; var4 < var1; var4++) {
-    var5 = spawntag(var0, var2.origin, var2.team, 1);
-    var5.team = var2.team;
-    level notify("new_tag_spawned", var5);
-    var5.victim = var2;
-    var5.attacker = var3;
+function droptagsoftype(var_0, var_1, var_2, var_3) {
+  for(var_4 = 0; var_4 < var_1; var_4++) {
+    var_5 = spawntag(var_0, var_2.origin, var_2.team, 1);
+    var_5.team = var_2.team;
+    level notify("new_tag_spawned", var_5);
+    var_5.victim = var_2;
+    var_5.attacker = var_3;
     thread monitortaguse(level);
   }
 }
 
-function playersettagcount(var0) {
+function playersettagcount(var_0) {
   if(!isDefined(self.tagscarried)) {
     self.tagscarried = 0;
   }
 
   if(isDefined(level.plunderpickupcallback)) {
-    var1 = var0 - self.tagscarried;
-    [[level.plunderpickupcallback]](var1);
+    var_1 = var_0 - self.tagscarried;
+    [[level.plunderpickupcallback]](var_1);
   }
 
-  self.tagscarried = var0;
-  self.game_extrainfo = var0;
+  self.tagscarried = var_0;
+  self.game_extrainfo = var_0;
 
   if(scripts\mp\utility\game::getgametype() != "hvt") {
     if(scripts\mp\utility\game::getgametype() == "pill") {
-      self setclientomnvar("ui_pillage_currency", var0);
+      self setclientomnvar("ui_pillage_currency", var_0);
     } else {
-      self setclientomnvar("ui_grind_tags", var0);
+      self setclientomnvar("ui_grind_tags", var_0);
     }
   }
 
-  var2 = gettagcode(var0);
+  var_2 = gettagcode(var_0);
 
   if(scripts\mp\utility\game::getgametype() != "br" && scripts\mp\utility\game::getgametype() != "pill") {
-    var3 = self getentitynumber();
+    var_3 = self getentitynumber();
 
-    if(var3 < 20) {
-      setomnvar("ui_droploot_inv_" + self getentitynumber(), var2);
+    if(var_3 < 20) {
+      setomnvar("ui_droploot_inv_" + self getentitynumber(), var_2);
       return;
     }
 
@@ -247,25 +247,25 @@ function playersettagcount(var0) {
   }
 }
 
-function gettagcode(var0) {
-  if(var0 == 0) {
+function gettagcode(var_0) {
+  if(var_0 == 0) {
     return 0;
   }
 
-  var1 = int(var0 / 80);
-  var2 = int(var0 % 80);
-  var3 = int(var2 / 40);
-  var2 = int(var2 % 40);
-  var4 = int(var2 / 20);
-  var2 = int(var2 % 20);
-  var5 = int(var2 / 10);
-  var2 = int(var2 % 10);
-  var6 = int(var2 / 5);
-  var2 = int(var2 % 5);
-  var7 = int(var2 / 1);
-  var2 = int(var2 % 1);
-  var8 = var7 + var6 * 10 + var5 * 100 + var4 * 1000 + var3 * 10000 + var1 * 100000;
-  return var8;
+  var_1 = int(var_0 / 80);
+  var_2 = int(var_0 % 80);
+  var_3 = int(var_2 / 40);
+  var_2 = int(var_2 % 40);
+  var_4 = int(var_2 / 20);
+  var_2 = int(var_2 % 20);
+  var_5 = int(var_2 / 10);
+  var_2 = int(var_2 % 10);
+  var_6 = int(var_2 / 5);
+  var_2 = int(var_2 % 5);
+  var_7 = int(var_2 / 1);
+  var_2 = int(var_2 % 1);
+  var_8 = var_7 + var_6 * 10 + var_5 * 100 + var_4 * 1000 + var_3 * 10000 + var_1 * 100000;
+  return var_8;
 }
 
 function monitorjointeam() {
@@ -279,127 +279,127 @@ function monitorjointeam() {
 
 function onplayerconnect() {
   for(;;) {
-    level waittill("connected", var0);
-    var0.isscoring = 0;
+    level waittill("connected", var_0);
+    var_0.isscoring = 0;
     thread monitorjointeam();
   }
 }
 
-function monitortaguse(var0) {
+function monitortaguse(var_0) {
   level endon("game_ended");
-  var0 endon("deleted");
-  var0 endon("reset");
+  var_0 endon("deleted");
+  var_0 endon("reset");
   wait 2;
 
   for(;;) {
-    var0.trigger waittill("trigger", var1);
+    var_0.trigger waittill("trigger", var_1);
 
-    if(!scripts\mp\utility\player::isreallyalive(var1)) {
+    if(!scripts\mp\utility\player::isreallyalive(var_1)) {
       continue;
     }
 
-    if(isDefined(var1.classname) && var1.classname == "script_vehicle") {
+    if(isDefined(var_1.classname) && var_1.classname == "script_vehicle") {
       continue;
     }
 
-    if(isagent(var1) && isDefined(var1.owner)) {
-      var1 = var1.owner;
+    if(isagent(var_1) && isDefined(var_1.owner)) {
+      var_1 = var_1.owner;
     }
 
-    playsoundatpos(var0.curorigin, "mp_killconfirm_tags_pickup");
-    var0.visuals hide();
-    var0.trigger hide();
-    var0.curorigin = (0, 0, -1000);
-    var0.trigger.origin = (0, 0, -1000);
-    var0.visuals.origin = (0, 0, -1000);
-    var0 scripts\mp\gameobjects::allowuse("none");
-    var2 = level.droploot[var0.tagtype].points;
-    playersettagcount(var1, var1.tagscarried + var2);
+    playsoundatpos(var_0.curorigin, "mp_killconfirm_tags_pickup");
+    var_0.visuals hide();
+    var_0.trigger hide();
+    var_0.curorigin = (0, 0, -1000);
+    var_0.trigger.origin = (0, 0, -1000);
+    var_0.visuals.origin = (0, 0, -1000);
+    var_0 scripts\mp\gameobjects::allowuse("none");
+    var_2 = level.droploot[var_0.tagtype].points;
+    playersettagcount(var_1, var_1.tagscarried + var_2);
 
     if(isDefined(level.supportcranked) && level.supportcranked) {
-      if(isDefined(var1.cranked) && var1.cranked) {
-        var1 scripts\mp\cranked::setcrankedplayerbombtimer("kill");
+      if(isDefined(var_1.cranked) && var_1.cranked) {
+        var_1 scripts\mp\cranked::setcrankedplayerbombtimer("kill");
       } else {
-        var1 scripts\mp\cranked::oncranked(undefined, var1);
+        var_1 scripts\mp\cranked::oncranked(undefined, var_1);
       }
     }
 
     if(scripts\mp\utility\game::getgametype() == "hvt") {
-      var1 scripts\mp\gametypes\hvt::ref_13a27();
+      var_1 scripts\mp\gametypes\hvt::ref_13a27();
     }
 
     break;
   }
 }
 
-function playercanusetags(var0) {
+function playercanusetags(var_0) {
   return true;
 }
 
-function showtoall(var0) {
+function showtoall(var_0) {
   self hide();
 
-  foreach(var2 in level.players) {
-    self showtoplayer(var2);
+  foreach(var_2 in level.players) {
+    self showtoplayer(var_2);
   }
 }
 
 function removetagsongameended() {
   level waittill("game_ended");
 
-  foreach(var1 in level.players) {
-    if(!isDefined(var1)) {
+  foreach(var_1 in level.players) {
+    if(!isDefined(var_1)) {
       continue;
     }
 
-    if(!isDefined(var1.tagscarried)) {
+    if(!isDefined(var_1.tagscarried)) {
       continue;
     }
 
-    var1.tagscarried = 0;
+    var_1.tagscarried = 0;
   }
 }
 
 function initlootcaches() {
-  var0 = scripts\engine\utility::getStructArray("loot_cache", "targetname");
-  var0 = scripts\engine\utility::array_randomize(var0);
-  var1 = var0.size * 0.5;
+  var_0 = scripts\engine\utility::getStructArray("loot_cache", "targetname");
+  var_0 = scripts\engine\utility::array_randomize(var_0);
+  var_1 = var_0.size * 0.5;
   level.lootcaches = [];
   jumpiffalse(1) LOC_00000064;
 
-  for(var2 = 0; var2 < var1; var2++) {
-    level.lootcaches[level.lootcaches.size] = createlootcache(var0[var2].origin, var0[var2].angles, -1);
+  for(var_2 = 0; var_2 < var_1; var_2++) {
+    level.lootcaches[level.lootcaches.size] = createlootcache(var_0[var_2].origin, var_0[var_2].angles, -1);
   }
 
   return;
 }
 
-function createlootcache(var0, var1, var2) {
-  var3 = scripts\cp_mp\killstreaks\airdrop::placeplcrate(var2, var0, var1);
-  return var3;
+function createlootcache(var_0, var_1, var_2) {
+  var_3 = scripts\cp_mp\killstreaks\airdrop::placeplcrate(var_2, var_0, var_1);
+  return var_3;
 }
 
-function capturelootcachecallback(var0) {
-  var0 notify("opened_cache", self);
-  var1 = self.data.contents;
+function capturelootcachecallback(var_0) {
+  var_0 notify("opened_cache", self);
+  var_1 = self.data.contents;
 
-  if(var1 == -1) {
-    var2 = randomint(90);
+  if(var_1 == -1) {
+    var_2 = randomint(90);
 
-    if(var2 <= 20) {
-      var1 = 0;
-    } else if(var2 <= 60) {
-      var1 = 1;
-    } else if(var2 <= 70) {
-      var1 = 3;
-    } else if(var2 <= 80) {
-      var1 = 5;
+    if(var_2 <= 20) {
+      var_1 = 0;
+    } else if(var_2 <= 60) {
+      var_1 = 1;
+    } else if(var_2 <= 70) {
+      var_1 = 3;
+    } else if(var_2 <= 80) {
+      var_1 = 5;
     } else {
-      var1 = 4;
+      var_1 = 4;
     }
   }
 
-  switch (var1) {
+  switch (var_1) {
     case 5:
       break;
     case 0:
@@ -415,21 +415,21 @@ function capturelootcachecallback(var0) {
       break;
   }
 
-  var0 playlocalsound("ammo_crate_use");
+  var_0 playlocalsound("ammo_crate_use");
 }
 
-function gettagcountfromcache(var0) {
-  return var0 * randomfloatrange(0.8, 1.2);
+function gettagcountfromcache(var_0) {
+  return var_0 * randomfloatrange(0.8, 1.2);
 }
 
 function getgunfromcache() {
-  var0 = randomint(level.br_pickups.br_supportedguns.size);
-  return level.br_pickups.br_supportedguns[var0];
+  var_0 = randomint(level.br_pickups.br_supportedguns.size);
+  return level.br_pickups.br_supportedguns[var_0];
 }
 
 function getitemfromcache() {
-  var0 = randomint(level.br_pickups.br_supporteditems.size);
-  return level.br_pickups.br_supporteditems[var0];
+  var_0 = randomint(level.br_pickups.br_supporteditems.size);
+  return level.br_pickups.br_supporteditems[var_0];
 }
 
 function getgrenadeammofromcache() {
@@ -438,42 +438,42 @@ function getgrenadeammofromcache() {
 
 function getammofromcache() {
   if(!1) {
-    var0 = randomint(level.esc_lootinfo.ammo.size);
-    return level.esc_lootinfo.ammo[var0];
+    var_0 = randomint(level.esc_lootinfo.ammo.size);
+    return level.esc_lootinfo.ammo[var_0];
   }
 
   return 105;
 }
 
-function processnotifyweapondrop(var0, var1) {
-  switch (var0) {
+function processnotifyweapondrop(var_0, var_1) {
+  switch (var_0) {
     case 0:
-      var1 notify("cache_common_weapon_found");
+      var_1 notify("cache_common_weapon_found");
       break;
     case 1:
-      var1 notify("cache_uncommon_weapon_found");
+      var_1 notify("cache_uncommon_weapon_found");
       break;
     case 2:
-      var1 notify("cache_rare_weapon_found");
+      var_1 notify("cache_rare_weapon_found");
       break;
     case 3:
-      var1 notify("cache_epic_weapon_found");
+      var_1 notify("cache_epic_weapon_found");
       break;
     case 4:
-      var1 notify("cache_legendary_weapon_found");
+      var_1 notify("cache_legendary_weapon_found");
       break;
   }
 }
 
-function banktags(var0) {
-  var1 = self getplayerdata("common", "bankedEscapeCurrency");
-  self setplayerdata("common", "bankedEscapeCurrency", var1 + var0);
+function banktags(var_0) {
+  var_1 = self getplayerdata("common", "bankedEscapeCurrency");
+  self setplayerdata("common", "bankedEscapeCurrency", var_1 + var_0);
 }
 
 function resetcacheuseability() {
-  foreach(var1 in level.lootcaches) {
-    if(isDefined(var1.useobj)) {
-      var1.useobj enableplayeruse(self);
+  foreach(var_1 in level.lootcaches) {
+    if(isDefined(var_1.useobj)) {
+      var_1.useobj enableplayeruse(self);
     }
   }
 }

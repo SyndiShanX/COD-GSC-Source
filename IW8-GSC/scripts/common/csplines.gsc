@@ -3,615 +3,615 @@
  * Script: scripts\common\csplines.gsc
 ***********************************************/
 
-function cspline_calctangent(var0, var1, var2, var3, var4) {
-  var5 = [];
-  var6 = [];
+function cspline_calctangent(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = [];
+  var_6 = [];
 
-  for(var7 = 0; var7 < 3; var7++) {
-    var5 = (1 - var4) * (var1[var7] - var0[var7]);
-    var6 = var5[var7];
-    var5 = var5[var7] * 2 * var2 / (var2 + var3);
-    var6 = var6[var7] * 2 * var3 / (var2 + var3);
+  for(var_7 = 0; var_7 < 3; var_7++) {
+    var_5 = (1 - var_4) * (var_1[var_7] - var_0[var_7]);
+    var_6 = var_5[var_7];
+    var_5 = var_5[var_7] * 2 * var_2 / (var_2 + var_3);
+    var_6 = var_6[var_7] * 2 * var_3 / (var_2 + var_3);
   }
 
-  var8 = [];
-  GscBinSkip0(0x2e, "incoming", (var5[0], var5[1], var5[2]));
+  var_8 = [];
+  GscBinSkip0(0x2e, "incoming", (var_5[0], var_5[1], var_5[2]));
 }
 
-function cspline_calctangenttcb(var0, var1, var2, var3, var4, var5, var6, var7) {
-  var8 = [];
-  var9 = [];
+function cspline_calctangenttcb(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  var_8 = [];
+  var_9 = [];
 
-  for(var10 = 0; var10 < 3; var10++) {
-    var8 = (1 - var5) * (1 - var6) * (1 + var7) * 0.5 * (var1[var10] - var0[var10]);
-    var8 = var8[var10] + (1 - var5) * (1 + var6) * (1 - var7) * 0.5 * (var2[var10] - var1[var10]);
-    var8 = var8[var10] * 2 * var3 / (var3 + var4);
-    var9 = (1 - var5) * (1 + var6) * (1 + var7) * 0.5 * (var1[var10] - var0[var10]);
-    var9 = var9[var10] + (1 - var5) * (1 - var6) * (1 - var7) * 0.5 * (var2[var10] - var1[var10]);
-    var9 = var9[var10] * 2 * var4 / (var3 + var4);
+  for(var_10 = 0; var_10 < 3; var_10++) {
+    var_8 = (1 - var_5) * (1 - var_6) * (1 + var_7) * 0.5 * (var_1[var_10] - var_0[var_10]);
+    var_8 = var_8[var_10] + (1 - var_5) * (1 + var_6) * (1 - var_7) * 0.5 * (var_2[var_10] - var_1[var_10]);
+    var_8 = var_8[var_10] * 2 * var_3 / (var_3 + var_4);
+    var_9 = (1 - var_5) * (1 + var_6) * (1 + var_7) * 0.5 * (var_1[var_10] - var_0[var_10]);
+    var_9 = var_9[var_10] + (1 - var_5) * (1 - var_6) * (1 - var_7) * 0.5 * (var_2[var_10] - var_1[var_10]);
+    var_9 = var_9[var_10] * 2 * var_4 / (var_3 + var_4);
   }
 
-  var11 = [];
-  GscBinSkip0(0x2e, "incoming", (var8[0], var8[1], var8[2]));
+  var_11 = [];
+  GscBinSkip0(0x2e, "incoming", (var_8[0], var_8[1], var_8[2]));
 }
 
-function cspline_calctangentnatural(var0, var1, var2) {
-  var3 = 3;
-  var4 = [];
-  var5 = [];
+function cspline_calctangentnatural(var_0, var_1, var_2) {
+  var_3 = 3;
+  var_4 = [];
+  var_5 = [];
 
-  if(isDefined(var2)) {
-    for(var6 = 0; var6 < var3; var6++) {
-      var4 = (-3 * var0[var6] + 3 * var1[var6] - var2[var6]) / 2;
-      var5 = var4[var6];
+  if(isDefined(var_2)) {
+    for(var_6 = 0; var_6 < var_3; var_6++) {
+      var_4 = (-3 * var_0[var_6] + 3 * var_1[var_6] - var_2[var_6]) / 2;
+      var_5 = var_4[var_6];
     }
   } else {
-    for(var6 = 0; var6 < var4; var6++) {
-      var5 = var2[var6] - var1[var6];
-      var6 = var2[var6] - var1[var6];
+    for(var_6 = 0; var_6 < var_4; var_6++) {
+      var_5 = var_2[var_6] - var_1[var_6];
+      var_6 = var_2[var_6] - var_1[var_6];
     }
   }
 
-  var7 = [];
-  GscBinSkip0(0x2e, "incoming", (var5[0], var5[1], var5[2]));
+  var_7 = [];
+  GscBinSkip0(0x2e, "incoming", (var_5[0], var_5[1], var_5[2]));
 }
 
-function csplineseg_calccoeffs(var0, var1, var2, var3) {
-  var4 = 3;
-  var5 = spawnStruct();
-  var5.n3 = [];
-  var5.n2 = [];
-  var5.n = [];
-  var5.c = [];
+function csplineseg_calccoeffs(var_0, var_1, var_2, var_3) {
+  var_4 = 3;
+  var_5 = spawnStruct();
+  var_5.n3 = [];
+  var_5.n2 = [];
+  var_5.n = [];
+  var_5.c = [];
 
-  for(var6 = 0; var6 < var4; var6++) {
-    var5.n3[var6] = 2 * var0[var6] - 2 * var1[var6] + var2[var6] + var3[var6];
-    var5.n2[var6] = -3 * var0[var6] + 3 * var1[var6] - 2 * var2[var6] - var3[var6];
-    var5.n[var6] = var2[var6];
-    var5.c[var6] = var0[var6];
+  for(var_6 = 0; var_6 < var_4; var_6++) {
+    var_5.n3[var_6] = 2 * var_0[var_6] - 2 * var_1[var_6] + var_2[var_6] + var_3[var_6];
+    var_5.n2[var_6] = -3 * var_0[var_6] + 3 * var_1[var_6] - 2 * var_2[var_6] - var_3[var_6];
+    var_5.n[var_6] = var_2[var_6];
+    var_5.c[var_6] = var_0[var_6];
   }
 
-  return var5;
+  return var_5;
 }
 
-function csplineseg_calccoeffscapspeed(var0, var1, var2, var3, var4) {
-  var5 = csplineseg_calccoeffs(var0, var1, var2, var3);
-  var6 = csplineseg_calctopspeed(var5, var4);
+function csplineseg_calccoeffscapspeed(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = csplineseg_calccoeffs(var_0, var_1, var_2, var_3);
+  var_6 = csplineseg_calctopspeed(var_5, var_4);
 
-  if(var6 > 1) {
-    var4 *= var6;
-    var2 /= var6;
-    var3 /= var6;
-    var5 = csplineseg_calccoeffs(var0, var1, var2, var3);
+  if(var_6 > 1) {
+    var_4 *= var_6;
+    var_2 /= var_6;
+    var_3 /= var_6;
+    var_5 = csplineseg_calccoeffs(var_0, var_1, var_2, var_3);
   }
 
-  var5.endat = var4;
-  return var5;
+  var_5.endat = var_4;
+  return var_5;
 }
 
-function cspline_getnodes(var0) {
-  var1 = [];
-  var2 = var0.segments[0].endat;
-  var1 = csplineseg_getpoint(var0.segments[0], 0, var2, var0.segments[0].speedstart);
-  var1["time"] = 0;
-  var3 = 0;
+function cspline_getnodes(var_0) {
+  var_1 = [];
+  var_2 = var_0.segments[0].endat;
+  var_1 = csplineseg_getpoint(var_0.segments[0], 0, var_2, var_0.segments[0].speedstart);
+  var_1["time"] = 0;
+  var_3 = 0;
 
-  for(var4 = 0; var4 < var0.segments.size; var4++) {
-    var2 = var0.segments[var4].endat - var3;
-    var1 = csplineseg_getpoint(var0.segments[var4], 1, var2, var0.segments[var4].speedend);
-    var5 = csplineseg_getpoint(var0.segments[var4], 0, var2, var0.segments[var4].speedstart);
-    var1["acc_out"] = var5["acc"];
-    var1["time"] = var0.segments[var4].endtime;
-    var3 = var0.segments[var4].endat;
+  for(var_4 = 0; var_4 < var_0.segments.size; var_4++) {
+    var_2 = var_0.segments[var_4].endat - var_3;
+    var_1 = csplineseg_getpoint(var_0.segments[var_4], 1, var_2, var_0.segments[var_4].speedend);
+    var_5 = csplineseg_getpoint(var_0.segments[var_4], 0, var_2, var_0.segments[var_4].speedstart);
+    var_1["acc_out"] = var_5["acc"];
+    var_1["time"] = var_0.segments[var_4].endtime;
+    var_3 = var_0.segments[var_4].endat;
   }
 
-  var1["acc_out"] = var1[var0.segments.size]["acc"];
-  return var1;
+  var_1["acc_out"] = var_1[var_0.segments.size]["acc"];
+  return var_1;
 }
 
-function csplineseg_getpoint(var0, var1, var2, var3) {
-  var4 = 3;
-  var5 = [];
-  var6 = [];
-  var7 = [];
-  var8 = [];
+function csplineseg_getpoint(var_0, var_1, var_2, var_3) {
+  var_4 = 3;
+  var_5 = [];
+  var_6 = [];
+  var_7 = [];
+  var_8 = [];
 
-  for(var9 = 0; var9 < var4; var9++) {
-    var5 = var0.n3[var9] * var1 * var1 * var1 + var0.n2[var9] * var1 * var1 + var0.n[var9] * var1 + var0.c[var9];
-    var6 = 3 * var0.n3[var9] * var1 * var1 + 2 * var0.n2[var9] * var1 + var0.n[var9];
-    var7 = 6 * var0.n3[var9] * var1 + 2 * var0.n2[var9];
+  for(var_9 = 0; var_9 < var_4; var_9++) {
+    var_5 = var_0.n3[var_9] * var_1 * var_1 * var_1 + var_0.n2[var_9] * var_1 * var_1 + var_0.n[var_9] * var_1 + var_0.c[var_9];
+    var_6 = 3 * var_0.n3[var_9] * var_1 * var_1 + 2 * var_0.n2[var_9] * var_1 + var_0.n[var_9];
+    var_7 = 6 * var_0.n3[var_9] * var_1 + 2 * var_0.n2[var_9];
   }
 
-  var8 = (var5[0], var5[1], var5[2]);
-  var8 = (var6[0], var6[1], var6[2]);
-  var8 = (var7[0], var7[1], var7[2]);
+  var_8 = (var_5[0], var_5[1], var_5[2]);
+  var_8 = (var_6[0], var_6[1], var_6[2]);
+  var_8 = (var_7[0], var_7[1], var_7[2]);
 
-  if(isDefined(var2)) {
-    var8 = var8["vel"] / var2;
-    var8 = var8["acc"] / var2 * var2;
+  if(isDefined(var_2)) {
+    var_8 = var_8["vel"] / var_2;
+    var_8 = var_8["acc"] / var_2 * var_2;
   }
 
-  if(isDefined(var3)) {
-    var8 = var8["vel"] * var3;
-    var8 = var8["acc"] * var3 * var3;
+  if(isDefined(var_3)) {
+    var_8 = var_8["vel"] * var_3;
+    var_8 = var_8["acc"] * var_3 * var_3;
   }
 
-  var8 = var3;
-  return var8;
+  var_8 = var_3;
+  return var_8;
 }
 
-function csplineseg_calctopspeed(var0, var1) {
-  var2 = csplineseg_calctopspeedbyderiving(var0, var1);
-  return var2;
+function csplineseg_calctopspeed(var_0, var_1) {
+  var_2 = csplineseg_calctopspeedbyderiving(var_0, var_1);
+  return var_2;
 }
 
-function csplineseg_calctopspeedbyderiving(var0, var1) {
-  var2 = 0;
-  var3 = 0;
-  var4 = 0;
-  var5 = 0;
-  var6 = 0;
-  var7 = 0;
+function csplineseg_calctopspeedbyderiving(var_0, var_1) {
+  var_2 = 0;
+  var_3 = 0;
+  var_4 = 0;
+  var_5 = 0;
+  var_6 = 0;
+  var_7 = 0;
 
-  for(var8 = 0; var8 < 3; var8++) {
-    var2 += var0.n3[var8] * var0.n3[var8];
-    var3 += var0.n3[var8] * var0.n2[var8];
-    var4 += var0.n3[var8] * var0.n[var8];
-    var5 += var0.n2[var8] * var0.n2[var8];
-    var6 += var0.n2[var8] * var0.n[var8];
-    var7 += var0.n[var8] * var0.n[var8];
+  for(var_8 = 0; var_8 < 3; var_8++) {
+    var_2 += var_0.n3[var_8] * var_0.n3[var_8];
+    var_3 += var_0.n3[var_8] * var_0.n2[var_8];
+    var_4 += var_0.n3[var_8] * var_0.n[var_8];
+    var_5 += var_0.n2[var_8] * var_0.n2[var_8];
+    var_6 += var_0.n2[var_8] * var_0.n[var_8];
+    var_7 += var_0.n[var_8] * var_0.n[var_8];
   }
 
-  var9 = 36 * var2;
-  var10 = 36 * var3;
-  var11 = 12 * var4 + 8 * var5;
-  var12 = 4 * var6;
-  var13 = [];
+  var_9 = 36 * var_2;
+  var_10 = 36 * var_3;
+  var_11 = 12 * var_4 + 8 * var_5;
+  var_12 = 4 * var_6;
+  var_13 = [];
   GscBinSkip0(0x2e, 0, 0);
 }
 
-function csplineseg_calclengthbystepping(var0, var1) {
-  var2 = csplineseg_getpoint(var0, 0);
-  var3 = 0;
+function csplineseg_calclengthbystepping(var_0, var_1) {
+  var_2 = csplineseg_getpoint(var_0, 0);
+  var_3 = 0;
 
-  for(var4 = 1; var4 <= var1; var4++) {
-    var5 = var4 / var1;
-    var6 = csplineseg_getpoint(var0, var5);
-    var3 += length(var2["pos"] - var6["pos"]);
-    var2 = var6;
+  for(var_4 = 1; var_4 <= var_1; var_4++) {
+    var_5 = var_4 / var_1;
+    var_6 = csplineseg_getpoint(var_0, var_5);
+    var_3 += length(var_2["pos"] - var_6["pos"]);
+    var_2 = var_6;
   }
 
-  return var3;
+  return var_3;
 }
 
-function csplineseg_calctopspeedbystepping(var0, var1, var2) {
-  var3 = csplineseg_getpoint(var0, 0);
-  var4 = 0;
+function csplineseg_calctopspeedbystepping(var_0, var_1, var_2) {
+  var_3 = csplineseg_getpoint(var_0, 0);
+  var_4 = 0;
 
-  for(var5 = 1; var5 <= var1; var5++) {
-    var6 = var5 / var1;
-    var7 = csplineseg_getpoint(var0, var6);
-    var8 = length(var3["pos"] - var7["pos"]);
+  for(var_5 = 1; var_5 <= var_1; var_5++) {
+    var_6 = var_5 / var_1;
+    var_7 = csplineseg_getpoint(var_0, var_6);
+    var_8 = length(var_3["pos"] - var_7["pos"]);
 
-    if(var8 > var4) {
-      var4 = var8;
+    if(var_8 > var_4) {
+      var_4 = var_8;
     }
 
-    var3 = var7;
+    var_3 = var_7;
   }
 
-  var4 *= var1 / var2;
-  return var4;
+  var_4 *= var_1 / var_2;
+  return var_4;
 }
 
-function cspline_findpathnodes(var0) {
-  var1 = var0;
-  var2 = [];
+function cspline_findpathnodes(var_0) {
+  var_1 = var_0;
+  var_2 = [];
 
-  for(var3 = 0; isDefined(var1.target); var3++) {
-    var2 = var1;
-    var4 = var1.target;
-    var1 = getnode(var4, "targetname");
+  for(var_3 = 0; isDefined(var_1.target); var_3++) {
+    var_2 = var_1;
+    var_4 = var_1.target;
+    var_1 = getnode(var_4, "targetname");
 
-    if(!isDefined(var1)) {
-      var1 = getvehiclenode(var4, "targetname");
+    if(!isDefined(var_1)) {
+      var_1 = getvehiclenode(var_4, "targetname");
 
-      if(!isDefined(var1)) {
-        var1 = getEnt(var4, "targetname");
+      if(!isDefined(var_1)) {
+        var_1 = getEnt(var_4, "targetname");
 
-        if(!isDefined(var1)) {
-          var1 = scripts\engine\utility::getStruct(var4, "targetname");
+        if(!isDefined(var_1)) {
+          var_1 = scripts\engine\utility::getStruct(var_4, "targetname");
         }
       }
     }
   }
 
-  var2 = var1;
-  return var2;
+  var_2 = var_1;
+  return var_2;
 }
 
-function cspline_makepath1seg(var0, var1, var2, var3) {
-  var4 = [];
+function cspline_makepath1seg(var_0, var_1, var_2, var_3) {
+  var_4 = [];
   GscBinSkip0(0x2e, 0, spawnStruct());
 }
 
-function cspline_makepathtopoint(var0, var1, var2, var3, var4) {
-  var5 = [];
+function cspline_makepathtopoint(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = [];
 
-  if(!isDefined(var4)) {
-    var4 = 0;
+  if(!isDefined(var_4)) {
+    var_4 = 0;
   }
 
-  if(isDefined(var2)) {
-    var6 = length(var2);
-    var5 = var2 / var6;
-    var6 *= 20;
+  if(isDefined(var_2)) {
+    var_6 = length(var_2);
+    var_5 = var_2 / var_6;
+    var_6 *= 20;
   } else {
-    var6 = 20;
+    var_6 = 20;
   }
 
-  if(isDefined(var4)) {
-    var7 = length(var4);
-    var6 = var4 / var7;
-    var7 *= 20;
+  if(isDefined(var_4)) {
+    var_7 = length(var_4);
+    var_6 = var_4 / var_7;
+    var_7 *= 20;
   } else {
-    var7 = 20;
+    var_7 = 20;
   }
 
-  if(var7 / var7 > 1.2 || var7 / var7 > 1.2 || var6) {
-    if(!isDefined(var6[0])) {
-      var6 = (0, 0, 0);
+  if(var_7 / var_7 > 1.2 || var_7 / var_7 > 1.2 || var_6) {
+    if(!isDefined(var_6[0])) {
+      var_6 = (0, 0, 0);
     }
 
-    if(!isDefined(var6[1])) {
-      var6 = (0, 0, 0);
+    if(!isDefined(var_6[1])) {
+      var_6 = (0, 0, 0);
     }
   }
 
-  var8 = var3 - var2;
-  var9 = length(var8);
-  var10 = var8 / var9;
-  var11 = [];
+  var_8 = var_3 - var_2;
+  var_9 = length(var_8);
+  var_10 = var_8 / var_9;
+  var_11 = [];
   GscBinSkip0(0x2e, 0, spawnStruct());
 }
 
-function cspline_makepath(var0, var1, var2, var3, var4) {
-  var5 = spawnStruct();
-  var5.segments = [];
+function cspline_makepath(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = spawnStruct();
+  var_5.segments = [];
 
-  if(!isDefined(var1)) {
-    var1 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  if(!isDefined(var4)) {
-    var4 = 1;
+  if(!isDefined(var_4)) {
+    var_4 = 1;
   }
 
-  var6 = 0;
-  var7 = [];
-  var8 = distance(var0[0].origin, var0[1].origin);
+  var_6 = 0;
+  var_7 = [];
+  var_8 = distance(var_0[0].origin, var_0[1].origin);
 
-  while(isDefined(var0[var5.segments.size + 2])) {
-    var9 = var5.segments.size;
-    var10 = var0[var9].origin;
-    var11 = var0[var9 + 1].origin;
-    var12 = var0[var9 + 2].origin;
-    var13 = var8;
-    var8 = distance(var0[var9 + 1].origin, var0[var9 + 2].origin);
-    var14 = var7;
-    var7 = cspline_calctangent(var10, var12, var13, var8, 0.5);
+  while(isDefined(var_0[var_5.segments.size + 2])) {
+    var_9 = var_5.segments.size;
+    var_10 = var_0[var_9].origin;
+    var_11 = var_0[var_9 + 1].origin;
+    var_12 = var_0[var_9 + 2].origin;
+    var_13 = var_8;
+    var_8 = distance(var_0[var_9 + 1].origin, var_0[var_9 + 2].origin);
+    var_14 = var_7;
+    var_7 = cspline_calctangent(var_10, var_12, var_13, var_8, 0.5);
 
-    if(var9 == 0) {
-      if(isDefined(var2)) {
-        GscBinSkip0(0x2e, "outgoing", var2 * var13);
+    if(var_9 == 0) {
+      if(isDefined(var_2)) {
+        GscBinSkip0(0x2e, "outgoing", var_2 * var_13);
       }
 
-      var14 = cspline_calctangentnatural(var10, var11, var7["incoming"]);
+      var_14 = cspline_calctangentnatural(var_10, var_11, var_7["incoming"]);
     }
 
-    if(var4) {
-      var5.segments[var9] = csplineseg_calccoeffscapspeed(var10, var11, var14["outgoing"], var7["incoming"], var13);
-      var6 += var5.segments[var9].endat;
+    if(var_4) {
+      var_5.segments[var_9] = csplineseg_calccoeffscapspeed(var_10, var_11, var_14["outgoing"], var_7["incoming"], var_13);
+      var_6 += var_5.segments[var_9].endat;
     } else {
-      var5.segments[var9] = csplineseg_calccoeffs(var10, var11, var14["outgoing"], var7["incoming"]);
-      var6 += var13;
+      var_5.segments[var_9] = csplineseg_calccoeffs(var_10, var_11, var_14["outgoing"], var_7["incoming"]);
+      var_6 += var_13;
     }
 
-    var5.segments[var9].endat = var6;
+    var_5.segments[var_9].endat = var_6;
   }
 
-  var9 = var5.segments.size;
-  var10 = var0[var9].origin;
-  var11 = var0[var9 + 1].origin;
-  var13 = var8;
-  var14 = var7;
+  var_9 = var_5.segments.size;
+  var_10 = var_0[var_9].origin;
+  var_11 = var_0[var_9 + 1].origin;
+  var_13 = var_8;
+  var_14 = var_7;
 
-  if(var9 == 0 && isDefined(var2)) {
-    GscBinSkip0(0x2e, "outgoing", var2 * var13);
+  if(var_9 == 0 && isDefined(var_2)) {
+    GscBinSkip0(0x2e, "outgoing", var_2 * var_13);
   }
 
-  if(isDefined(var3)) {
-    var7 = var3 * var13;
+  if(isDefined(var_3)) {
+    var_7 = var_3 * var_13;
   } else {
-    var7 = cspline_calctangentnatural(var10, var11, var14["outgoing"]);
+    var_7 = cspline_calctangentnatural(var_10, var_11, var_14["outgoing"]);
   }
 
-  if(var9 == 0 && !isDefined(var2)) {
-    var14 = cspline_calctangentnatural(var10, var11, var7["incoming"]);
+  if(var_9 == 0 && !isDefined(var_2)) {
+    var_14 = cspline_calctangentnatural(var_10, var_11, var_7["incoming"]);
   }
 
-  if(var4) {
-    var5.segments[var9] = csplineseg_calccoeffscapspeed(var10, var11, var14["outgoing"], var7["incoming"], var13);
-    var6 += var5.segments[var9].endat;
+  if(var_4) {
+    var_5.segments[var_9] = csplineseg_calccoeffscapspeed(var_10, var_11, var_14["outgoing"], var_7["incoming"], var_13);
+    var_6 += var_5.segments[var_9].endat;
   } else {
-    var5.segments[var9] = csplineseg_calccoeffs(var10, var11, var14["outgoing"], var7["incoming"]);
-    var6 += var13;
+    var_5.segments[var_9] = csplineseg_calccoeffs(var_10, var_11, var_14["outgoing"], var_7["incoming"]);
+    var_6 += var_13;
   }
 
-  var5.segments[var9].endat = var6;
+  var_5.segments[var_9].endat = var_6;
 
-  if(var1) {
-    var15 = 0;
-    var16 = 0;
+  if(var_1) {
+    var_15 = 0;
+    var_16 = 0;
 
-    for(var9 = 0; var9 < var5.segments.size; var9++) {
-      if(!isDefined(var0[var9 + 1].speed)) {
-        var0[var9 + 1].speed = var0[var9].speed;
+    for(var_9 = 0; var_9 < var_5.segments.size; var_9++) {
+      if(!isDefined(var_0[var_9 + 1].speed)) {
+        var_0[var_9 + 1].speed = var_0[var_9].speed;
       }
 
-      var13 = var5.segments[var9].endat - var16;
-      var17 = 2 * var13 / (var0[var9].speed + var0[var9 + 1].speed) / 20;
-      var15 += var17;
-      var5.segments[var9].endtime = var15;
-      var16 = var5.segments[var9].endat;
-      var5.segments[var9].speedstart = var0[var9].speed / 20;
-      var5.segments[var9].speedend = var0[var9 + 1].speed / 20;
+      var_13 = var_5.segments[var_9].endat - var_16;
+      var_17 = 2 * var_13 / (var_0[var_9].speed + var_0[var_9 + 1].speed) / 20;
+      var_15 += var_17;
+      var_5.segments[var_9].endtime = var_15;
+      var_16 = var_5.segments[var_9].endat;
+      var_5.segments[var_9].speedstart = var_0[var_9].speed / 20;
+      var_5.segments[var_9].speedend = var_0[var_9 + 1].speed / 20;
     }
   } else {
-    for(var9 = 0; var9 < var5.segments.size; var9++) {
-      var5.segments[var9].endtime = var5.segments[var9].endat;
-      var5.segments[var9].speedstart = 1;
-      var5.segments[var9].speedend = 1;
+    for(var_9 = 0; var_9 < var_5.segments.size; var_9++) {
+      var_5.segments[var_9].endtime = var_5.segments[var_9].endat;
+      var_5.segments[var_9].speedstart = 1;
+      var_5.segments[var_9].speedend = 1;
     }
   }
 
-  return var5;
+  return var_5;
 }
 
-function cspline_movefirstpoint(var0, var1, var2) {
-  var3 = spawnStruct();
-  var3.segments = [];
-  var4 = csplineseg_getpoint(var0.segments[0], 1);
-  var5 = var4["pos"] - var1;
-  var6 = length(var5);
-  var3.segments[0] = csplineseg_calccoeffs(var1, var4["pos"], var2 * var6, var4["vel"]);
-  var3.segments[0].endtime = var0.segments[0].endtime * var6 / var0.segments[0].endat;
-  var3.segments[0].endat = var6;
-  var7 = var6 - var0.segments[0].endat;
-  var8 = var3.segments[0].endtime - var0.segments[0].endtime;
+function cspline_movefirstpoint(var_0, var_1, var_2) {
+  var_3 = spawnStruct();
+  var_3.segments = [];
+  var_4 = csplineseg_getpoint(var_0.segments[0], 1);
+  var_5 = var_4["pos"] - var_1;
+  var_6 = length(var_5);
+  var_3.segments[0] = csplineseg_calccoeffs(var_1, var_4["pos"], var_2 * var_6, var_4["vel"]);
+  var_3.segments[0].endtime = var_0.segments[0].endtime * var_6 / var_0.segments[0].endat;
+  var_3.segments[0].endat = var_6;
+  var_7 = var_6 - var_0.segments[0].endat;
+  var_8 = var_3.segments[0].endtime - var_0.segments[0].endtime;
 
-  for(var9 = 1; var9 < var0.segments.size; var9++) {
-    var3.segments[var9] = csplineseg_copy(var0.segments[var9]);
-    var3.segments[var9].endat += var7;
-    var3.segments[var9].endtime += var8;
+  for(var_9 = 1; var_9 < var_0.segments.size; var_9++) {
+    var_3.segments[var_9] = csplineseg_copy(var_0.segments[var_9]);
+    var_3.segments[var_9].endat += var_7;
+    var_3.segments[var_9].endtime += var_8;
   }
 
-  return var3;
+  return var_3;
 }
 
-function cspline_getpointatdistance(var0, var1, var2) {
-  if(var1 <= 0) {
-    var3 = var0.segments[0].endat;
-    var4 = csplineseg_getpoint(var0.segments[0], 0, var3, var0.segments[0].speedstart);
-    return var4;
+function cspline_getpointatdistance(var_0, var_1, var_2) {
+  if(var_1 <= 0) {
+    var_3 = var_0.segments[0].endat;
+    var_4 = csplineseg_getpoint(var_0.segments[0], 0, var_3, var_0.segments[0].speedstart);
+    return var_4;
   }
 
-  if(var3 >= var2.segments[var2.segments.size - 1].endat) {
-    if(var2.segments.size > 1) {
-      var3 = var2.segments[var2.segments.size - 1].endat - var2.segments[var2.segments.size - 2].endat;
+  if(var_3 >= var_2.segments[var_2.segments.size - 1].endat) {
+    if(var_2.segments.size > 1) {
+      var_3 = var_2.segments[var_2.segments.size - 1].endat - var_2.segments[var_2.segments.size - 2].endat;
     } else {
-      var3 = var3.segments[var3.segments.size - 1].endat;
+      var_3 = var_3.segments[var_3.segments.size - 1].endat;
     }
 
-    var4 = csplineseg_getpoint(var3.segments[var3.segments.size - 1], 1, var3, var3.segments[var3.segments.size - 1].speedend);
-    return var4;
+    var_4 = csplineseg_getpoint(var_3.segments[var_3.segments.size - 1], 1, var_3, var_3.segments[var_3.segments.size - 1].speedend);
+    return var_4;
   }
 
-  for(var5 = 0; var3.segments[var5].endat < var3; var5++) {}
+  for(var_5 = 0; var_3.segments[var_5].endat < var_3; var_5++) {}
 
-  if(var5 > 0) {
-    var6 = var3.segments[var5 - 1].endat;
+  if(var_5 > 0) {
+    var_6 = var_3.segments[var_5 - 1].endat;
   } else {
-    var6 = 0;
+    var_6 = 0;
   }
 
-  var3 = var3.segments[var6].endat - var6;
-  var7 = (var4 - var6) / var3;
-  var8 = undefined;
+  var_3 = var_3.segments[var_6].endat - var_6;
+  var_7 = (var_4 - var_6) / var_3;
+  var_8 = undefined;
 
-  if(isDefined(var5) && var5) {
-    var8 = cspline_speedfromdistance(var3.segments[var6].speedstart, var3.segments[var6].speedend, var7);
+  if(isDefined(var_5) && var_5) {
+    var_8 = cspline_speedfromdistance(var_3.segments[var_6].speedstart, var_3.segments[var_6].speedend, var_7);
   }
 
-  var4 = csplineseg_getpoint(var3.segments[var6], var7, var3, var8);
-  return var4;
+  var_4 = csplineseg_getpoint(var_3.segments[var_6], var_7, var_3, var_8);
+  return var_4;
 }
 
-function cspline_getpointattime(var0, var1) {
-  if(var1 <= 0) {
-    var2 = var0.segments[0].endat;
-    var3 = csplineseg_getpoint(var0.segments[0], 0, var2, var0.segments[0].speedstart);
-    return var3;
+function cspline_getpointattime(var_0, var_1) {
+  if(var_1 <= 0) {
+    var_2 = var_0.segments[0].endat;
+    var_3 = csplineseg_getpoint(var_0.segments[0], 0, var_2, var_0.segments[0].speedstart);
+    return var_3;
   }
 
-  if(var3 >= var2.segments[var2.segments.size - 1].endtime) {
-    if(var2.segments.size > 1) {
-      var2 = var2.segments[var2.segments.size - 1].endat - var2.segments[var2.segments.size - 2].endat;
+  if(var_3 >= var_2.segments[var_2.segments.size - 1].endtime) {
+    if(var_2.segments.size > 1) {
+      var_2 = var_2.segments[var_2.segments.size - 1].endat - var_2.segments[var_2.segments.size - 2].endat;
     } else {
-      var2 = var3.segments[var3.segments.size - 1].endat;
+      var_2 = var_3.segments[var_3.segments.size - 1].endat;
     }
 
-    var3 = csplineseg_getpoint(var3.segments[var3.segments.size - 1], 1, var2, var3.segments[var3.segments.size - 1].speedend);
-    return var3;
+    var_3 = csplineseg_getpoint(var_3.segments[var_3.segments.size - 1], 1, var_2, var_3.segments[var_3.segments.size - 1].speedend);
+    return var_3;
   }
 
-  for(var4 = 0; var2.segments[var4].endtime < var3; var4++) {}
+  for(var_4 = 0; var_2.segments[var_4].endtime < var_3; var_4++) {}
 
-  if(var4 > 0) {
-    var5 = var2.segments[var4 - 1].endtime;
-    var2 = var2.segments[var4].endat - var2.segments[var4 - 1].endat;
+  if(var_4 > 0) {
+    var_5 = var_2.segments[var_4 - 1].endtime;
+    var_2 = var_2.segments[var_4].endat - var_2.segments[var_4 - 1].endat;
   } else {
-    var5 = 0;
-    var2 = var4.segments[0].endat;
+    var_5 = 0;
+    var_2 = var_4.segments[0].endat;
   }
 
-  var6 = var4.segments[var2].endtime - var5;
-  var7 = (var5 - var5) / var6;
-  var8 = var4.segments[var2].speedstart + var7 * (var4.segments[var2].speedend - var4.segments[var2].speedstart);
-  var9 = (var5 - var5) * (var4.segments[var2].speedstart + var8) / 2;
-  var10 = var9 / var2;
-  var3 = csplineseg_getpoint(var4.segments[var2], var10, var2, var8);
-  return var3;
+  var_6 = var_4.segments[var_2].endtime - var_5;
+  var_7 = (var_5 - var_5) / var_6;
+  var_8 = var_4.segments[var_2].speedstart + var_7 * (var_4.segments[var_2].speedend - var_4.segments[var_2].speedstart);
+  var_9 = (var_5 - var_5) * (var_4.segments[var_2].speedstart + var_8) / 2;
+  var_10 = var_9 / var_2;
+  var_3 = csplineseg_getpoint(var_4.segments[var_2], var_10, var_2, var_8);
+  return var_3;
 }
 
-function cspline_speedfromdistance(var0, var1, var2) {
-  var3 = var2;
-  var4 = (var1 - var0) * (var1 + var0) / 2;
-  return sqrt(2 * var4 * var3 + var0 * var0);
+function cspline_speedfromdistance(var_0, var_1, var_2) {
+  var_3 = var_2;
+  var_4 = (var_1 - var_0) * (var_1 + var_0) / 2;
+  return sqrt(2 * var_4 * var_3 + var_0 * var_0);
 }
 
-function cspline_adjusttime(var0, var1) {
-  var2 = cspline_time(var0);
-  var3 = var0.segments[0].endtime;
-  var4 = var0.segments[var0.segments.size - 2].endtime - var3;
-  var5 = var0.segments[var0.segments.size - 1].endtime - var0.segments[var0.segments.size - 2].endtime;
-  var6 = 2 * var3 + var4 + 2 * var5 - var1;
-  var7 = (sqrt(var6 * var6 + 4 * var4 * var1) + var6) / 2 * var1;
-  var9 = undefined;
-  var10 = undefined;
-  var0.segments[0].speedend *= var7;
-  var11 = var0.segments[0].endtime * (1 / var7 - 2 / (1 + var7));
-  var0.segments[0].endtime /= (1 + var7) / 2;
+function cspline_adjusttime(var_0, var_1) {
+  var_2 = cspline_time(var_0);
+  var_3 = var_0.segments[0].endtime;
+  var_4 = var_0.segments[var_0.segments.size - 2].endtime - var_3;
+  var_5 = var_0.segments[var_0.segments.size - 1].endtime - var_0.segments[var_0.segments.size - 2].endtime;
+  var_6 = 2 * var_3 + var_4 + 2 * var_5 - var_1;
+  var_7 = (sqrt(var_6 * var_6 + 4 * var_4 * var_1) + var_6) / 2 * var_1;
+  var_9 = undefined;
+  var_10 = undefined;
+  var_0.segments[0].speedend *= var_7;
+  var_11 = var_0.segments[0].endtime * (1 / var_7 - 2 / (1 + var_7));
+  var_0.segments[0].endtime /= (1 + var_7) / 2;
 
-  for(var12 = 1; var12 < var0.segments.size - 1; var12++) {
-    var13 = undefined;
-    var0.segments[var12].speedstart *= var7;
-    var0.segments[var12].speedend *= var7;
-    var0.segments[var12].endtime /= var7;
-    var0.segments[var12].endtime -= var11;
+  for(var_12 = 1; var_12 < var_0.segments.size - 1; var_12++) {
+    var_13 = undefined;
+    var_0.segments[var_12].speedstart *= var_7;
+    var_0.segments[var_12].speedend *= var_7;
+    var_0.segments[var_12].endtime /= var_7;
+    var_0.segments[var_12].endtime -= var_11;
   }
 
-  var12 = var0.segments.size - 1;
-  var0.segments[var12].speedstart *= var7;
-  var0.segments[var12].endtime = var1;
+  var_12 = var_0.segments.size - 1;
+  var_0.segments[var_12].speedstart *= var_7;
+  var_0.segments[var_12].endtime = var_1;
 }
 
-function cspline_makenoisepath(var0, var1, var2, var3) {
-  var4 = cspline_makenoisepathnodes(var0, var1, var2);
+function cspline_makenoisepath(var_0, var_1, var_2, var_3) {
+  var_4 = cspline_makenoisepathnodes(var_0, var_1, var_2);
 
-  if(isDefined(var3)) {
-    var4[1].origin = var3;
+  if(isDefined(var_3)) {
+    var_4[1].origin = var_3;
   }
 
-  var5 = spawnStruct();
-  var5.origin = var4[0].origin;
-  var4 = var5;
-  var5 = spawnStruct();
-  var5.origin = var4[1].origin;
-  var4 = var5;
-  var5 = spawnStruct();
-  var5.origin = var4[2].origin;
-  var4 = var5;
-  var6 = cspline_makepath(var4);
-  var7 = spawnStruct();
-  var7.segments = [];
+  var_5 = spawnStruct();
+  var_5.origin = var_4[0].origin;
+  var_4 = var_5;
+  var_5 = spawnStruct();
+  var_5.origin = var_4[1].origin;
+  var_4 = var_5;
+  var_5 = spawnStruct();
+  var_5.origin = var_4[2].origin;
+  var_4 = var_5;
+  var_6 = cspline_makepath(var_4);
+  var_7 = spawnStruct();
+  var_7.segments = [];
 
-  for(var8 = 0; var8 < var6.segments.size - 2; var8++) {
-    var7.segments[var8] = csplineseg_copy(var6.segments[var8 + 1]);
-    var7.segments[var8].endat = var8 + 1;
+  for(var_8 = 0; var_8 < var_6.segments.size - 2; var_8++) {
+    var_7.segments[var_8] = csplineseg_copy(var_6.segments[var_8 + 1]);
+    var_7.segments[var_8].endat = var_8 + 1;
   }
 
-  return var7;
+  return var_7;
 }
 
-function cspline_makenoisepathnodes(var0, var1, var2) {
-  var3 = [];
+function cspline_makenoisepathnodes(var_0, var_1, var_2) {
+  var_3 = [];
 
-  for(var4 = 0; var4 < var0; var4++) {
-    var3 = spawnStruct();
-    var5 = randomfloatrange(var1[0], var2[0]);
-    var6 = randomfloatrange(var1[1], var2[1]);
-    var7 = randomfloatrange(var1[2], var2[2]);
-    var3[var4].origin = (var5, var6, var7);
+  for(var_4 = 0; var_4 < var_0; var_4++) {
+    var_3 = spawnStruct();
+    var_5 = randomfloatrange(var_1[0], var_2[0]);
+    var_6 = randomfloatrange(var_1[1], var_2[1]);
+    var_7 = randomfloatrange(var_1[2], var_2[2]);
+    var_3[var_4].origin = (var_5, var_6, var_7);
   }
 
-  return var3;
+  return var_3;
 }
 
-function cspline_test(var0, var1) {}
+function cspline_test(var_0, var_1) {}
 
-function cspline_testnodes(var0, var1) {
-  var2 = 20;
-  var3 = undefined;
+function cspline_testnodes(var_0, var_1) {
+  var_2 = 20;
+  var_3 = undefined;
 
-  foreach(var5 in var0) {
-    if(isDefined(var3)) {
-      thread scripts\engine\utility::draw_arrow_time(var3.origin, var5.origin, (0, 1, 0), var1);
+  foreach(var_5 in var_0) {
+    if(isDefined(var_3)) {
+      thread scripts\engine\utility::draw_arrow_time(var_3.origin, var_5.origin, (0, 1, 0), var_1);
     }
 
-    var3 = var5;
+    var_3 = var_5;
   }
 
-  foreach(var5 in var0) {
-    thread scripts\engine\utility::draw_line_for_time(var5.origin - (var2, 0, 0), var5.origin + (var2, 0, 0), 1, 1, 0, var1);
-    thread scripts\engine\utility::draw_line_for_time(var5.origin - (0, var2, 0), var5.origin + (0, var2, 0), 1, 1, 0, var1);
-    thread scripts\engine\utility::draw_line_for_time(var5.origin - (0, 0, var2), var5.origin + (0, 0, var2), 1, 1, 0, var1);
+  foreach(var_5 in var_0) {
+    thread scripts\engine\utility::draw_line_for_time(var_5.origin - (var_2, 0, 0), var_5.origin + (var_2, 0, 0), 1, 1, 0, var_1);
+    thread scripts\engine\utility::draw_line_for_time(var_5.origin - (0, var_2, 0), var_5.origin + (0, var_2, 0), 1, 1, 0, var_1);
+    thread scripts\engine\utility::draw_line_for_time(var_5.origin - (0, 0, var_2), var_5.origin + (0, 0, var_2), 1, 1, 0, var_1);
   }
 }
 
-function csplineseg_copy(var0) {
-  var1 = spawnStruct();
-  var2 = 3;
+function csplineseg_copy(var_0) {
+  var_1 = spawnStruct();
+  var_2 = 3;
 
-  for(var3 = 0; var3 < var2; var3++) {
-    var1.n3[var3] = var0.n3[var3];
-    var1.n2[var3] = var0.n2[var3];
-    var1.n[var3] = var0.n[var3];
-    var1.c[var3] = var0.c[var3];
+  for(var_3 = 0; var_3 < var_2; var_3++) {
+    var_1.n3[var_3] = var_0.n3[var_3];
+    var_1.n2[var_3] = var_0.n2[var_3];
+    var_1.n[var_3] = var_0.n[var_3];
+    var_1.c[var_3] = var_0.c[var_3];
   }
 
-  var1.endat = var0.endat;
-  var1.endtime = var0.endtime;
-  return var1;
+  var_1.endat = var_0.endat;
+  var_1.endtime = var_0.endtime;
+  return var_1;
 }
 
-function cspline_length(var0) {
-  return var0.segments[var0.segments.size - 1].endat;
+function cspline_length(var_0) {
+  return var_0.segments[var_0.segments.size - 1].endat;
 }
 
-function cspline_time(var0) {
-  return var0.segments[var0.segments.size - 1].endtime;
+function cspline_time(var_0) {
+  return var_0.segments[var_0.segments.size - 1].endtime;
 }
 
-function cspline_initnoise(var0, var1, var2, var3) {
-  var4 = spawnStruct();
-  var5 = var1;
-  var4.largestep = var2;
-  var6 = (var0[0] - var5, var0[1] - var5, var0[2] - var5);
-  var7 = (var0[0] + var5, var0[1] + var5, var0[2] + var5);
+function cspline_initnoise(var_0, var_1, var_2, var_3) {
+  var_4 = spawnStruct();
+  var_5 = var_1;
+  var_4.largestep = var_2;
+  var_6 = (var_0[0] - var_5, var_0[1] - var_5, var_0[2] - var_5);
+  var_7 = (var_0[0] + var_5, var_0[1] + var_5, var_0[2] + var_5);
 
-  if(!isDefined(var3)) {
-    var3 = (var0[0], var0[1], var0[2] - var5);
+  if(!isDefined(var_3)) {
+    var_3 = (var_0[0], var_0[1], var_0[2] - var_5);
   }
 
-  var4.largescale = cspline_makenoisepath(10, var6, var7, var3);
-  var4.largescale.length = var4.largescale.segments[var4.largescale.segments.size - 1].endat;
-  thread cspline_test(var4.largescale, 20);
-  return var4;
+  var_4.largescale = cspline_makenoisepath(10, var_6, var_7, var_3);
+  var_4.largescale.length = var_4.largescale.segments[var_4.largescale.segments.size - 1].endat;
+  thread cspline_test(var_4.largescale, 20);
+  return var_4;
 }
 
-function cspline_noise(var0, var1) {
-  var2 = scripts\engine\utility::mod(var1 / var0.largestep, var0.largescale.length);
-  var3 = cspline_getpointatdistance(var0.largescale, var2);
-  return var3["pos"];
+function cspline_noise(var_0, var_1) {
+  var_2 = scripts\engine\utility::mod(var_1 / var_0.largestep, var_0.largescale.length);
+  var_3 = cspline_getpointatdistance(var_0.largescale, var_2);
+  return var_3["pos"];
 }

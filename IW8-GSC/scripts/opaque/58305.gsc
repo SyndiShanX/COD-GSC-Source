@@ -30,32 +30,32 @@ function init() {
   level.enemy_targets = [];
   level.start_area_fx = loadfx("vfx/iw8_mp/trials/speedball/vfx_trials_imp_clay.vfx");
 
-  foreach(var1 in level.course_triggers) {
-    var1 thread _stop_spawn_modules::ref_13d82();
+  foreach(var_1 in level.course_triggers) {
+    var_1 thread _stop_spawn_modules::ref_13d82();
   }
 
-  foreach(var1 in level.course_targets) {
-    var1 thread _stop_spawn_modules::ref_13d79();
+  foreach(var_1 in level.course_targets) {
+    var_1 thread _stop_spawn_modules::ref_13d79();
   }
 
   thread game_start();
   thread game_end();
-  var8 = getEntArray("trial_ammocrate", "targetname");
-  scripts\engine\utility::array_thread(var8, &brplayerkilledspawn);
+  var_8 = getEntArray("trial_ammocrate", "targetname");
+  scripts\engine\utility::array_thread(var_8, &brplayerkilledspawn);
   level.ref_13d85 = &ref_13e6d;
 
   while(!istrue(level.ref_13022)) {
     waitframe();
   }
 
-  foreach(var10 in level.ref_13d65) {
-    var10 setCanDamage(0);
+  foreach(var_10 in level.ref_13d65) {
+    var_10 setCanDamage(0);
   }
 }
 
 function game_start() {
   thread ref_1382b();
-  var0 = getEntArray("start", "script_noteworthy");
+  var_0 = getEntArray("start", "script_noteworthy");
 
   for(;;) {
     level.ref_13d6a = 0;
@@ -80,16 +80,16 @@ function game_start() {
     _tablethide::trial_ui_set_reward_tier_preview(3);
 
     for(;;) {
-      var1 = 0;
+      var_1 = 0;
 
-      foreach(var3 in var0) {
-        if(var3.activated) {
-          var1 = 1;
+      foreach(var_3 in var_0) {
+        if(var_3.activated) {
+          var_1 = 1;
           break;
         }
       }
 
-      if(var1) {
+      if(var_1) {
         break;
       }
 
@@ -98,8 +98,8 @@ function game_start() {
 
     level notify("course_started");
 
-    foreach(var6 in level.ref_13d65) {
-      var6 setCanDamage(1);
+    foreach(var_6 in level.ref_13d65) {
+      var_6 setCanDamage(1);
     }
 
     level.player playSound("trial_sfx_start");
@@ -120,14 +120,14 @@ function game_end() {
     level.player_best_time = game["trial"]["best_time"];
   }
 
-  var0 = getEnt("end", "script_noteworthy");
+  var_0 = getEnt("end", "script_noteworthy");
 
   for(;;) {
     level waittill("course_started");
 
     switch (level.trial["missionScript"]) {
       case "gun":
-        waittill_trigger_activated_or_player_death(var0);
+        waittill_trigger_activated_or_player_death(var_0);
         break;
       case "gun_nonlinear":
         ref_143a3();
@@ -155,42 +155,42 @@ function game_end() {
 
     if(level.player_best_time == 0 || level.player_best_time > level.trial["tier1"]) {
       _tablethide::trial_ui_set_reward_tier(0);
-      var1 = game["music"]["trials_loss"].size;
-      var2 = randomint(var1);
-      level.player setplayermusicstate(game["music"]["trials_loss"][var2]);
+      var_1 = game["music"]["trials_loss"].size;
+      var_2 = randomint(var_1);
+      level.player setplayermusicstate(game["music"]["trials_loss"][var_2]);
     } else if(level.player_best_time <= level.trial["tier3"]) {
       _tablethide::trial_ui_set_reward_tier(3);
-      var1 = game["music"]["trials_win_high"].size;
-      var2 = randomint(var1);
-      level.player setplayermusicstate(game["music"]["trials_win_high"][var2]);
+      var_1 = game["music"]["trials_win_high"].size;
+      var_2 = randomint(var_1);
+      level.player setplayermusicstate(game["music"]["trials_win_high"][var_2]);
     } else if(level.player_best_time <= level.trial["tier2"]) {
       _tablethide::trial_ui_set_reward_tier(2);
-      var1 = game["music"]["trials_win_mid"].size;
-      var2 = randomint(var1);
-      level.player setplayermusicstate(game["music"]["trials_win_mid"][var2]);
+      var_1 = game["music"]["trials_win_mid"].size;
+      var_2 = randomint(var_1);
+      level.player setplayermusicstate(game["music"]["trials_win_mid"][var_2]);
     } else {
       _tablethide::trial_ui_set_reward_tier(1);
-      var1 = game["music"]["trials_win_low"].size;
-      var2 = randomint(var1);
-      level.player setplayermusicstate(game["music"]["trials_win_low"][var2]);
+      var_1 = game["music"]["trials_win_low"].size;
+      var_2 = randomint(var_1);
+      level.player setplayermusicstate(game["music"]["trials_win_low"][var_2]);
     }
 
-    foreach(var4 in level.course_triggers) {
-      var4.activated = 0;
+    foreach(var_4 in level.course_triggers) {
+      var_4.activated = 0;
     }
 
-    foreach(var7 in level.course_targets) {
-      var7.activated = 0;
-      var7 thread _stop_spawn_modules::ref_13d74("down");
+    foreach(var_7 in level.course_targets) {
+      var_7.activated = 0;
+      var_7 thread _stop_spawn_modules::ref_13d74("down");
     }
 
     setomnvar("ui_trial_failed", 0);
 
     if(level.player_died_during_course) {
       setomnvar("ui_trial_failed", 1);
-      var1 = game["music"]["trials_loss"].size;
-      var2 = randomint(var1);
-      level.player setplayermusicstate(game["music"]["trials_loss"][var2]);
+      var_1 = game["music"]["trials_loss"].size;
+      var_2 = randomint(var_1);
+      level.player setplayermusicstate(game["music"]["trials_loss"][var_2]);
       level.player stoplocalsound("deaths_door_in");
       level.player clearsoundsubmix("deaths_door_mp");
       thread ref_12cbc();
@@ -220,15 +220,15 @@ function ref_143a3() {
   level.player endon("death");
 
   for(;;) {
-    var0 = 1;
+    var_0 = 1;
 
-    foreach(var2 in level.enemy_targets) {
-      if(!var2.activated) {
-        var0 = 0;
+    foreach(var_2 in level.enemy_targets) {
+      if(!var_2.activated) {
+        var_0 = 0;
       }
     }
 
-    if(var0) {
+    if(var_0) {
       level.player_died_during_course = 0;
       waitframe();
       return;
@@ -245,25 +245,25 @@ function ref_12cbc() {
 }
 
 function ref_1382b() {
-  var0 = scripts\engine\utility::getStruct("gun_course_start_icon", "targetname");
+  var_0 = scripts\engine\utility::getStruct("gun_course_start_icon", "targetname");
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var1 = spawn("script_model", var0.origin);
-  var1 setModel("tag_origin");
-  var2 = deleteheadicon(var1);
-  setheadiconfriendlyimage(var2, "icon_waypoint_marker");
-  setheadiconzoffset(var2, 1);
-  setheadiconsnaptoedges(var2, 0);
-  setheadicondrawthroughgeo(var2, 1);
+  var_1 = spawn("script_model", var_0.origin);
+  var_1 setModel("tag_origin");
+  var_2 = deleteheadicon(var_1);
+  setheadiconfriendlyimage(var_2, "icon_waypoint_marker");
+  setheadiconzoffset(var_2, 1);
+  setheadiconsnaptoedges(var_2, 0);
+  setheadicondrawthroughgeo(var_2, 1);
   _tablethide::waittill_player_isDefined();
 
   for(;;) {
-    addteamtoheadiconmask(var2, level.player);
+    addteamtoheadiconmask(var_2, level.player);
     level waittill("course_started");
-    removeteamfromheadiconmask(var2, level.player);
+    removeteamfromheadiconmask(var_2, level.player);
     _tablethide::trial_ui_waittill_retry();
   }
 }
@@ -293,12 +293,12 @@ function ref_13daf() {
     return;
   }
 
-  var0 = scripts\engine\utility::getStructArray("trigger_smoke_origin", "script_noteworthy");
-  var1 = scripts\engine\utility::getStructArray(self.target, "targetname");
-  var2 = scripts\engine\utility::array_intersection(var0, var1);
+  var_0 = scripts\engine\utility::getStructArray("trigger_smoke_origin", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray(self.target, "targetname");
+  var_2 = scripts\engine\utility::array_intersection(var_0, var_1);
 
-  foreach(var4 in var2) {
-    magicgrenademanual("smoke_grenade_mp", var4.origin, (0, 0, -1), 0.05);
+  foreach(var_4 in var_2) {
+    magicgrenademanual("smoke_grenade_mp", var_4.origin, (0, 0, -1), 0.05);
   }
 }
 
@@ -321,15 +321,15 @@ function time_think() {
   }
 }
 
-function civvies_killed_calculate(var0) {
+function civvies_killed_calculate(var_0) {
   if(!level.civilian_targets.size) {
     return;
   }
 
   level.civs_killed = 0;
 
-  foreach(var2 in level.civilian_targets) {
-    if(var2.activated) {
+  foreach(var_2 in level.civilian_targets) {
+    if(var_2.activated) {
       level.civs_killed++;
     }
   }
@@ -337,7 +337,7 @@ function civvies_killed_calculate(var0) {
   level.civ_time_penalty = level.civs_killed * 5000;
   _tablethide::trial_ui_set_stat_and_bonus_time(level.hacking_vo, "civilian_targets_hit", level.civs_killed, level.civ_time_penalty);
 
-  if(!istrue(var0)) {
+  if(!istrue(var_0)) {
     level.player thread scripts\mp\rank::scoreeventpopup("trial_civilian_killed");
     self playSound("trial_sfx_buzzer_bad_1");
     return;
@@ -347,8 +347,8 @@ function civvies_killed_calculate(var0) {
 function targets_missed_calculate() {
   level.enemies_missed = 0;
 
-  foreach(var1 in level.enemy_targets) {
-    if(!var1.activated) {
+  foreach(var_1 in level.enemy_targets) {
+    if(!var_1.activated) {
       level.enemies_missed++;
     }
   }
@@ -373,7 +373,7 @@ function time_calculate() {
     level.reward_tier = 3;
   }
 
-  var0 = level.reward_tier;
+  var_0 = level.reward_tier;
 
   if(level.trial_subtime <= level.trial["tier3"]) {
     _tablethide::trial_ui_set_reward_tier_preview(3);
@@ -389,16 +389,16 @@ function time_calculate() {
     level.reward_tier = 0;
   }
 
-  if(level.reward_tier < var0) {
+  if(level.reward_tier < var_0) {
     level.player playSound("trial_sfx_failure");
     return;
   }
 }
 
-function tierfailure_countdown_think(var0, var1) {
+function tierfailure_countdown_think(var_0, var_1) {
   self endon("course_ended");
-  var2 = [];
-  var2[0] = undefined;
+  var_2 = [];
+  var_2[0] = undefined;
   GscBinSkip0(0x2e, 1, level.trial["tier1"] / 1000);
 }
 
@@ -411,19 +411,19 @@ function accuracy_think() {
   for(;;) {
     level.player scripts\engine\utility::ref_143a5("weapon_fired", "fake_weapon_fired");
     level.shots_fired++;
-    var0 = level.player getcurrentweapon();
-    var1 = weaponfiretime(var0);
+    var_0 = level.player getcurrentweapon();
+    var_1 = weaponfiretime(var_0);
 
-    if(isDefined(var1)) {
-      if(var1 > 0.05) {
-        wait var1;
+    if(isDefined(var_1)) {
+      if(var_1 > 0.05) {
+        wait var_1;
       }
     }
 
     waitframe();
     level.course_accuracy = (level.enemy_targets.size - level.enemies_missed) / clamp(level.shots_fired, 1, 99999);
-    var2 = -1 * level.course_accuracy * 5000;
-    level.trial_accuracy_bonus = var2 - var2 % 100;
+    var_2 = -1 * level.course_accuracy * 5000;
+    level.trial_accuracy_bonus = var_2 - var_2 % 100;
     _tablethide::trial_ui_set_stat_and_bonus_time(1, "accuracy", 100 * level.course_accuracy, level.trial_accuracy_bonus);
   }
 }
@@ -475,23 +475,23 @@ function dialog_hurry_up_thread() {
 
 function dialog_kill_watcher() {
   level waittill("course_started");
-  var0 = 0;
-  var1 = 0;
-  var2 = gettime();
-  var3 = gettime();
-  var4 = 5000;
+  var_0 = 0;
+  var_1 = 0;
+  var_2 = gettime();
+  var_3 = gettime();
+  var_4 = 5000;
 
   for(;;) {
-    if(level.civs_killed > var1 && gettime() > var3 + var4) {
+    if(level.civs_killed > var_1 && gettime() > var_3 + var_4) {
       level.player scripts\engine\utility::delaythread(0.5, &scripts\mp\utility\dialog::leaderdialogonplayer, "course_civilian_shot");
-      var3 = gettime();
-    } else if(level.enemies_killed > var0 + 1 && gettime() > var2 + var4) {
+      var_3 = gettime();
+    } else if(level.enemies_killed > var_0 + 1 && gettime() > var_2 + var_4) {
       level.player scripts\engine\utility::delaythread(0.25, &scripts\mp\utility\dialog::leaderdialogonplayer, "course_nice_shot");
-      var2 = gettime();
+      var_2 = gettime();
     }
 
-    var1 = level.civs_killed;
-    var0 = level.enemies_killed;
+    var_1 = level.civs_killed;
+    var_0 = level.enemies_killed;
     waitframe();
   }
 }
@@ -501,37 +501,37 @@ function brplayerkilledspawn() {
   setheadiconfriendlyimage(self.headicon, "cp_crate_icon_ammo");
   setheadiconmaxdistance(self.headicon, 800);
   addclienttoheadiconmask(self.headicon, 50);
-  var0 = spawn("script_model", self.origin);
-  var0 linkTo(self, "tag_origin", (0, 0, 50), (0, 0, 0));
-  var0 setModel("tag_origin");
-  var0 setHintString(&"MP_INGAME_ONLY/REFILL_AMMO");
-  var0 setCursorHint("hint_button");
-  var0 sethintdisplayrange(200);
-  var0 sethintdisplayfov(65);
-  var0 setuserange(80);
-  var0 setusefov(120);
-  var0 sethintonobstruction("show");
-  var0 setuseholdduration("duration_short");
+  var_0 = spawn("script_model", self.origin);
+  var_0 linkTo(self, "tag_origin", (0, 0, 50), (0, 0, 0));
+  var_0 setModel("tag_origin");
+  var_0 setHintString(&"MP_INGAME_ONLY/REFILL_AMMO");
+  var_0 setCursorHint("hint_button");
+  var_0 sethintdisplayrange(200);
+  var_0 sethintdisplayfov(65);
+  var_0 setuserange(80);
+  var_0 setusefov(120);
+  var_0 sethintonobstruction("show");
+  var_0 setuseholdduration("duration_short");
 
   for(;;) {
-    var0 makeusable();
-    var0 waittill("trigger");
-    var1 = level.player getcurrentweapon();
-    var2 = level.player getcurrentweaponclipammo();
-    level.player setweaponammoclip(var1, var2);
+    var_0 makeusable();
+    var_0 waittill("trigger");
+    var_1 = level.player getcurrentweapon();
+    var_2 = level.player getcurrentweaponclipammo();
+    level.player setweaponammoclip(var_1, var_2);
 
     if(level.trial["variant"] == "pickup") {
-      var3 = level.player getweaponammostock(var1) + 1;
-      var4 = 1;
+      var_3 = level.player getweaponammostock(var_1) + 1;
+      var_4 = 1;
     } else {
-      var3 = weaponclipsize(var1) - var2;
-      var4 = 5;
+      var_3 = weaponclipsize(var_1) - var_2;
+      var_4 = 5;
     }
 
-    level.player setweaponammostock(var1, var3);
-    var0 makeunusable();
+    level.player setweaponammostock(var_1, var_3);
+    var_0 makeunusable();
     setheadiconteam(self.headicon);
-    wait var4;
+    wait var_4;
     hideheadiconfromplayersinmask(self.headicon);
   }
 }
@@ -539,14 +539,14 @@ function brplayerkilledspawn() {
 function ref_13e6d() {
   self endon("death");
   level waittill("course_started");
-  var0 = scripts\mp\utility\outline::outlineenableforplayer(self, level.player, "spotter_target_killstreak", "level_script");
+  var_0 = scripts\mp\utility\outline::outlineenableforplayer(self, level.player, "spotter_target_killstreak", "level_script");
   thread ref_13e6c();
 
   while(isalive(self)) {
     waitframe();
   }
 
-  scripts\mp\utility\outline::outlinedisable(var0, self);
+  scripts\mp\utility\outline::outlinedisable(var_0, self);
 }
 
 function ref_13e6c() {
@@ -574,13 +574,13 @@ function build_vehicle_drop_off_list() {
 }
 
 function ref_13d33() {
-  var0 = level.trial["missionID"];
-  var1 = getomnvar("ui_trial_reward_tier");
-  var2 = getomnvar("ui_trial_best_time");
-  var3 = "" + game["trial"]["analytics"]["weapon1"];
-  var4 = "" + game["trial"]["analytics"]["weapon2"];
-  var5 = float(game["trial"]["analytics"]["accuracy"]);
-  var6 = int(game["trial"]["analytics"]["missed"]);
-  var7 = int(game["trial"]["analytics"]["civilians"]);
-  level.player dlog_recordplayerevent("dlog_event_trial_complete_gun", ["id", var0, "tier", var1, "time", var2, "weapon1", var3, "weapon2", var4, "accuracy", var5, "missed", var6, "civilians", var7]);
+  var_0 = level.trial["missionID"];
+  var_1 = getomnvar("ui_trial_reward_tier");
+  var_2 = getomnvar("ui_trial_best_time");
+  var_3 = "" + game["trial"]["analytics"]["weapon1"];
+  var_4 = "" + game["trial"]["analytics"]["weapon2"];
+  var_5 = float(game["trial"]["analytics"]["accuracy"]);
+  var_6 = int(game["trial"]["analytics"]["missed"]);
+  var_7 = int(game["trial"]["analytics"]["civilians"]);
+  level.player dlog_recordplayerevent("dlog_event_trial_complete_gun", ["id", var_0, "tier", var_1, "time", var_2, "weapon1", var_3, "weapon2", var_4, "accuracy", var_5, "missed", var_6, "civilians", var_7]);
 }

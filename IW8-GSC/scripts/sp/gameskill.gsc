@@ -14,8 +14,8 @@ function init_gameskill() {
   setskill();
 }
 
-function setskill(var0) {
-  if(!istrue(var0)) {
+function setskill(var_0) {
+  if(!istrue(var_0)) {
     if(isDefined(level.gameskill)) {
       return;
     }
@@ -192,8 +192,8 @@ function setskill(var0) {
 function updatealldifficulty() {
   setglobaldifficulty();
 
-  foreach(var1 in level.players) {
-    setdifficulty(var1);
+  foreach(var_1 in level.players) {
+    setdifficulty(var_1);
   }
 }
 
@@ -227,8 +227,8 @@ function setglobaldifficulty() {
 }
 
 function updategameskill() {
-  foreach(var1 in level.players) {
-    var1.gameskill = var1 scripts\engine\sp\utility::get_player_gameskill();
+  foreach(var_1 in level.players) {
+    var_1.gameskill = var_1 scripts\engine\sp\utility::get_player_gameskill();
   }
 
   level.gameskill = level.player.gameskill;
@@ -241,12 +241,12 @@ function updategameskill() {
 }
 
 function gameskill_change_monitor() {
-  var0 = level.gameskill;
+  var_0 = level.gameskill;
 
   for(;;) {
-    if(!isDefined(var0)) {
+    if(!isDefined(var_0)) {
       wait 1;
-      var0 = level.gameskill;
+      var_0 = level.gameskill;
       continue;
     }
 
@@ -254,9 +254,9 @@ function gameskill_change_monitor() {
       level.lowestgameskill = level.gameskill;
     }
 
-    if(var0 != updategameskill()) {
-      var0 = level.gameskill;
-      level.lowestgameskill = scripts\engine\utility::ter_op(var0 < level.lowestgameskill, var0, level.lowestgameskill);
+    if(var_0 != updategameskill()) {
+      var_0 = level.gameskill;
+      level.lowestgameskill = scripts\engine\utility::ter_op(var_0 < level.lowestgameskill, var_0, level.lowestgameskill);
       updatealldifficulty();
     }
 
@@ -264,35 +264,35 @@ function gameskill_change_monitor() {
   }
 }
 
-function apply_difficulty_settings(var0) {
-  self.gs.diedrecentlycooldown = scripts\common\gameskill::get_difficultysetting_frac("player_diedRecentlyCooldown", var0);
-  self.gs.maxflashbangtime = scripts\common\gameskill::get_difficultysetting_frac("player_maxFlashBangTime", var0);
-  self.gs.invultime_ondamage = scripts\common\gameskill::get_difficultysetting_frac("invulTime_onDamage", var0);
-  self.gs.invultime_deathshieldduration = scripts\common\gameskill::get_difficultysetting_frac("invulTime_deathShieldDuration", var0);
-  self.gs.deathsdoorduration = scripts\common\gameskill::get_difficultysetting_frac("player_deathsDoorDuration", var0);
-  self.gs.healthregendelay = scripts\common\gameskill::get_difficultysetting_frac("player_healthRegenDelay", var0);
-  self.gs.healthregenrate = scripts\common\gameskill::get_difficultysetting_frac("player_healthRegenRate", var0);
-  self.gs.healthfireinvulseconds = scripts\common\gameskill::get_difficultysetting_frac("player_fireInvulSeconds", var0);
-  self.gs.healthfireengulfrate = scripts\common\gameskill::get_difficultysetting_frac("player_fireEngulfRate", var0);
-  self.gs.player_attacker_accuracy = scripts\common\gameskill::get_difficultysetting_frac("base_enemy_accuracy", var0);
+function apply_difficulty_settings(var_0) {
+  self.gs.diedrecentlycooldown = scripts\common\gameskill::get_difficultysetting_frac("player_diedRecentlyCooldown", var_0);
+  self.gs.maxflashbangtime = scripts\common\gameskill::get_difficultysetting_frac("player_maxFlashBangTime", var_0);
+  self.gs.invultime_ondamage = scripts\common\gameskill::get_difficultysetting_frac("invulTime_onDamage", var_0);
+  self.gs.invultime_deathshieldduration = scripts\common\gameskill::get_difficultysetting_frac("invulTime_deathShieldDuration", var_0);
+  self.gs.deathsdoorduration = scripts\common\gameskill::get_difficultysetting_frac("player_deathsDoorDuration", var_0);
+  self.gs.healthregendelay = scripts\common\gameskill::get_difficultysetting_frac("player_healthRegenDelay", var_0);
+  self.gs.healthregenrate = scripts\common\gameskill::get_difficultysetting_frac("player_healthRegenRate", var_0);
+  self.gs.healthfireinvulseconds = scripts\common\gameskill::get_difficultysetting_frac("player_fireInvulSeconds", var_0);
+  self.gs.healthfireengulfrate = scripts\common\gameskill::get_difficultysetting_frac("player_fireEngulfRate", var_0);
+  self.gs.player_attacker_accuracy = scripts\common\gameskill::get_difficultysetting_frac("base_enemy_accuracy", var_0);
   update_player_attacker_accuracy();
-  self.gs.playergrenadebasetime = int(scripts\common\gameskill::get_difficultysetting_frac("playerGrenadeBaseTime", var0));
-  self.gs.playergrenaderangetime = int(scripts\common\gameskill::get_difficultysetting_frac("playerGrenadeRangeTime", var0));
-  self.gs.playerdoublegrenadetime = int(scripts\common\gameskill::get_difficultysetting_frac("playerDoubleGrenadeTime", var0));
-  self.gs.min_sniper_burst_delay_time = scripts\common\gameskill::get_difficultysetting_frac("min_sniper_burst_delay_time", var0);
-  self.gs.max_sniper_burst_delay_time = scripts\common\gameskill::get_difficultysetting_frac("max_sniper_burst_delay_time", var0);
-  self.gs.damagemultiplierhealth = self.maxhealth / scripts\common\gameskill::get_difficultysetting_frac("player_health", var0);
-  self.gs.damagemultiplierexplosive = scripts\common\gameskill::get_difficultysetting_frac("explosiveDamageMultiplier", var0);
+  self.gs.playergrenadebasetime = int(scripts\common\gameskill::get_difficultysetting_frac("playerGrenadeBaseTime", var_0));
+  self.gs.playergrenaderangetime = int(scripts\common\gameskill::get_difficultysetting_frac("playerGrenadeRangeTime", var_0));
+  self.gs.playerdoublegrenadetime = int(scripts\common\gameskill::get_difficultysetting_frac("playerDoubleGrenadeTime", var_0));
+  self.gs.min_sniper_burst_delay_time = scripts\common\gameskill::get_difficultysetting_frac("min_sniper_burst_delay_time", var_0);
+  self.gs.max_sniper_burst_delay_time = scripts\common\gameskill::get_difficultysetting_frac("max_sniper_burst_delay_time", var_0);
+  self.gs.damagemultiplierhealth = self.maxhealth / scripts\common\gameskill::get_difficultysetting_frac("player_health", var_0);
+  self.gs.damagemultiplierexplosive = scripts\common\gameskill::get_difficultysetting_frac("explosiveDamageMultiplier", var_0);
 
   if(scripts\common\utility::playerarmorenabled()) {
-    self.gs.armorratiohealthregenthreshold = scripts\common\gameskill::get_difficultysetting_frac("player_armorRatioHealthRegenThreshold", var0);
-    self.gs.armordamagetohealthratiomin = scripts\common\gameskill::get_difficultysetting_frac("player_armorDamageToHealthRatioMin", var0);
-    self.gs.armordamagetohealthratiomax = scripts\common\gameskill::get_difficultysetting_frac("player_armorDamageToHealthRatioMax", var0);
-    self.gs.damagemultiplierarmor = self.armor.maxamount / scripts\common\gameskill::get_difficultysetting_frac("player_armor", var0);
+    self.gs.armorratiohealthregenthreshold = scripts\common\gameskill::get_difficultysetting_frac("player_armorRatioHealthRegenThreshold", var_0);
+    self.gs.armordamagetohealthratiomin = scripts\common\gameskill::get_difficultysetting_frac("player_armorDamageToHealthRatioMin", var_0);
+    self.gs.armordamagetohealthratiomax = scripts\common\gameskill::get_difficultysetting_frac("player_armorDamageToHealthRatioMax", var_0);
+    self.gs.damagemultiplierarmor = self.armor.maxamount / scripts\common\gameskill::get_difficultysetting_frac("player_armor", var_0);
   }
 
   scripts\sp\player::updatedamagemultiplier();
-  self.threatbias = int(scripts\common\gameskill::get_difficultysetting_frac("threatbias", var0));
+  self.threatbias = int(scripts\common\gameskill::get_difficultysetting_frac("threatbias", var_0));
 }
 
 function set_difficulty_from_locked_settings() {
@@ -367,44 +367,44 @@ function auto_adjust_set_table() {
 
 function auto_adjust_thread() {
   waitframe();
-  var0 = getbuildversion();
+  var_0 = getbuildversion();
 
   for(;;) {
     if(!level.auto_adjust.playerdead) {
-      var1 = auto_adjust_data_get("playerdeath_count");
-      var2 = var1;
+      var_1 = auto_adjust_data_get("playerdeath_count");
+      var_2 = var_1;
 
-      foreach(var4 in level.auto_adjust.table) {
-        if(var1 >= var5) {
-          var2 = var5;
+      foreach(var_4 in level.auto_adjust.table) {
+        if(var_1 >= var_5) {
+          var_2 = var_5;
         }
       }
 
-      auto_adjust_difficulty(level.player, var2);
+      auto_adjust_difficulty(level.player, var_2);
     }
 
     waitframe();
   }
 }
 
-function can_auto_adjust(var0) {
-  if(!isDefined(level.auto_adjust.table[var0])) {
+function can_auto_adjust(var_0) {
+  if(!isDefined(level.auto_adjust.table[var_0])) {
     return false;
   }
 
-  if(level.auto_adjust.table[var0] == level.auto_adjust.currentfrac) {
+  if(level.auto_adjust.table[var_0] == level.auto_adjust.currentfrac) {
     return false;
   }
 
   return true;
 }
 
-function auto_adjust_difficulty(var0) {
-  if(!can_auto_adjust(var0)) {
+function auto_adjust_difficulty(var_0) {
+  if(!can_auto_adjust(var_0)) {
     return;
   }
 
-  level.auto_adjust.currentfrac = level.auto_adjust.table[var0];
+  level.auto_adjust.currentfrac = level.auto_adjust.table[var_0];
   self.gs.invultime_ondamage = auto_adjust_lerp_setting("invulTime_onDamage");
   self.gs.invultime_deathshieldduration = auto_adjust_lerp_setting("invulTime_deathShieldDuration");
   self.gs.deathsdoorduration = auto_adjust_lerp_setting("player_deathsDoorDuration");
@@ -419,24 +419,24 @@ function auto_adjust_difficulty(var0) {
   self.gs.misstimedistancefactor = auto_adjust_lerp_setting("missTimeDistanceFactor");
 }
 
-function auto_adjust_lerp_setting(var0) {
-  var1 = self.gameskill - 1;
-  var2 = scripts\common\gameskill::get_difficultysetting(var0, var1);
-  var3 = scripts\common\gameskill::get_difficultysetting(var0);
-  return scripts\engine\math::lerp(var3, var2, level.auto_adjust.currentfrac);
+function auto_adjust_lerp_setting(var_0) {
+  var_1 = self.gameskill - 1;
+  var_2 = scripts\common\gameskill::get_difficultysetting(var_0, var_1);
+  var_3 = scripts\common\gameskill::get_difficultysetting(var_0);
+  return scripts\engine\math::lerp(var_3, var_2, level.auto_adjust.currentfrac);
 }
 
-function auto_adjust_data_add(var0, var1) {
-  var2 = getdvarint("scr_aa_" + var0) + var1;
-  auto_adjust_data_set(var0, var2);
+function auto_adjust_data_add(var_0, var_1) {
+  var_2 = getdvarint("scr_aa_" + var_0) + var_1;
+  auto_adjust_data_set(var_0, var_2);
 }
 
-function auto_adjust_data_set(var0, var1) {
-  setDvar("scr_aa_" + var0, var1);
+function auto_adjust_data_set(var_0, var_1) {
+  setDvar("scr_aa_" + var_0, var_1);
 }
 
-function auto_adjust_data_get(var0) {
-  return getdvarint("scr_aa_" + var0);
+function auto_adjust_data_get(var_0) {
+  return getdvarint("scr_aa_" + var_0);
 }
 
 function auto_adjust_playerdied() {
@@ -445,9 +445,9 @@ function auto_adjust_playerdied() {
   }
 
   level.auto_adjust.playerdead = 1;
-  var0 = auto_adjust_data_get("playerdeath_count");
+  var_0 = auto_adjust_data_get("playerdeath_count");
 
-  if(var0 == 7) {
+  if(var_0 == 7) {
     return;
   }
 
@@ -459,15 +459,15 @@ function auto_adjust_save_committed() {
     return;
   }
 
-  var0 = auto_adjust_data_get("playerdeath_count");
+  var_0 = auto_adjust_data_get("playerdeath_count");
 
-  if(var0 == 0) {
+  if(var_0 == 0) {
     return;
   }
 
-  var1 = auto_adjust_data_get("nextsave_time");
+  var_1 = auto_adjust_data_get("nextsave_time");
 
-  if(gettime() > var1) {
+  if(gettime() > var_1) {
     auto_adjust_data_set("nextsave_time", gettime() + level.auto_adjust.nextsave_buffer);
   } else {
     return;
@@ -482,50 +482,50 @@ function auto_adjust_difficult_get() {
 
 function auto_adjust_debug() {}
 
-function auto_adjust_debug_update(var0, var1, var2) {
+function auto_adjust_debug_update(var_0, var_1, var_2) {
   if(!isDefined(level.auto_adjust.debughud)) {
     level.auto_adjust.debughud = [];
   }
 
-  if(!isDefined(level.auto_adjust.debughud[var0])) {
-    var3 = newhudelem();
-    var3.x = 10;
-    var3.y = 50 + 10 * level.auto_adjust.debugprintline;
-    var3.fontscale = 0.6;
-    var3.label = var0;
-    var3.font = "smallfixed";
-    var3.horzalign = "fullscreen";
-    var3.vertalign = "fullscreen";
-    var3.value = -999;
-    var3.sort = 20;
+  if(!isDefined(level.auto_adjust.debughud[var_0])) {
+    var_3 = newhudelem();
+    var_3.x = 10;
+    var_3.y = 50 + 10 * level.auto_adjust.debugprintline;
+    var_3.fontscale = 0.6;
+    var_3.label = var_0;
+    var_3.font = "smallfixed";
+    var_3.horzalign = "fullscreen";
+    var_3.vertalign = "fullscreen";
+    var_3.value = -999;
+    var_3.sort = 20;
 
-    if(isDefined(var2)) {
-      var3.val2 = newhudelem();
-      var3.val2.x = var3.x + 120;
-      var3.val2.y = var3.y;
-      var3.val2.fontscale = 0.6;
-      var3.val2.font = "smallfixed";
-      var3.val2.label = "|";
-      var3.val2.horzalign = "fullscreen";
-      var3.val2.vertalign = "fullscreen";
-      var3.val2.value = -999;
-      var3.val2.sort = 20;
+    if(isDefined(var_2)) {
+      var_3.val2 = newhudelem();
+      var_3.val2.x = var_3.x + 120;
+      var_3.val2.y = var_3.y;
+      var_3.val2.fontscale = 0.6;
+      var_3.val2.font = "smallfixed";
+      var_3.val2.label = "|";
+      var_3.val2.horzalign = "fullscreen";
+      var_3.val2.vertalign = "fullscreen";
+      var_3.val2.value = -999;
+      var_3.val2.sort = 20;
     }
 
-    level.auto_adjust.debughud[var0] = var3;
+    level.auto_adjust.debughud[var_0] = var_3;
   } else {
-    var3 = level.auto_adjust.debughud[var1];
+    var_3 = level.auto_adjust.debughud[var_1];
   }
 
-  if(var3.value != var2) {
-    var3 setvalue(var2);
-    var3.value = var2;
+  if(var_3.value != var_2) {
+    var_3 setvalue(var_2);
+    var_3.value = var_2;
   }
 
-  if(isDefined(var3)) {
-    if(var3.val2.value != var3) {
-      var3.val2 setvalue(var3);
-      var3.val2.value = var3;
+  if(isDefined(var_3)) {
+    if(var_3.val2.value != var_3) {
+      var_3.val2 setvalue(var_3);
+      var_3.val2.value = var_3;
     }
   }
 
@@ -534,30 +534,30 @@ function auto_adjust_debug_update(var0, var1, var2) {
 
 function auto_adjust_debuglite() {
   if(isDefined(level.auto_adjust.debughud)) {
-    foreach(var1 in level.auto_adjust.debughud) {
-      if(isDefined(var1.val2)) {
-        var1.val2 destroy();
+    foreach(var_1 in level.auto_adjust.debughud) {
+      if(isDefined(var_1.val2)) {
+        var_1.val2 destroy();
       }
 
-      var1 destroy();
+      var_1 destroy();
     }
 
     level.auto_adjust.debughud = undefined;
   }
 
   if(!isDefined(level.auto_adjust.debuglitehud)) {
-    var1 = newhudelem();
-    var1.alignx = "right";
-    var1.x = 128;
-    var1.y = 5;
-    var1.fontscale = 0.7;
-    var1.font = "default";
-    var1.horzalign = "fullscreen";
-    var1.vertalign = "fullscreen";
-    var1.sort = 20;
-    level.auto_adjust.debuglitehud = var1;
+    var_1 = newhudelem();
+    var_1.alignx = "right";
+    var_1.x = 128;
+    var_1.y = 5;
+    var_1.fontscale = 0.7;
+    var_1.font = "default";
+    var_1.horzalign = "fullscreen";
+    var_1.vertalign = "fullscreen";
+    var_1.sort = 20;
+    level.auto_adjust.debuglitehud = var_1;
   }
 
-  var3 = "^5" + auto_adjust_data_get("playerdeath_count") + "/" + level.gameskill - level.auto_adjust.currentfrac;
-  level.auto_adjust.debuglitehud settext(var3);
+  var_3 = "^5" + auto_adjust_data_get("playerdeath_count") + "/" + level.gameskill - level.auto_adjust.currentfrac;
+  level.auto_adjust.debuglitehud settext(var_3);
 }

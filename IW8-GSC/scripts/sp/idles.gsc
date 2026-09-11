@@ -3,83 +3,83 @@
  * Script: scripts\sp\idles.gsc
 ***********************************************/
 
-function register_idle_scene(var0, var1) {
-  level.ambient_idle_scenes[var0] = var1;
+function register_idle_scene(var_0, var_1) {
+  level.ambient_idle_scenes[var_0] = var_1;
 }
 
-function get_idle_scene(var0) {
-  if(!isDefined(level.ambient_idle_scenes) || !isDefined(level.ambient_idle_scenes[var0])) {
+function get_idle_scene(var_0) {
+  if(!isDefined(level.ambient_idle_scenes) || !isDefined(level.ambient_idle_scenes[var_0])) {
     return undefined;
   }
 
-  return level.ambient_idle_scenes[var0];
+  return level.ambient_idle_scenes[var_0];
 }
 
 #using_animtree("generic_human");
 
-function play_ambient_idle_scene(var0, var1) {
+function play_ambient_idle_scene(var_0, var_1) {
   self.random_ambient_idle_playing = 0;
 
-  if(isai(var0) && !isDefined(var0.is_cheap)) {
-    var0 animmode("noclip");
+  if(isai(var_0) && !isDefined(var_0.is_cheap)) {
+    var_0 animmode("noclip");
   }
 
   wait 0.1;
-  var0 clearanim(%root, 0);
+  var_0 clearanim(%root, 0);
 
-  if(isDefined(var0.is_cheap)) {
-    if(isDefined(var1) && var1) {
-      thread random_idle_scene_controller_simple(var0);
-      thread random_idle_scene_end_cheap(var0);
+  if(isDefined(var_0.is_cheap)) {
+    if(isDefined(var_1) && var_1) {
+      thread random_idle_scene_controller_simple(var_0);
+      thread random_idle_scene_end_cheap(var_0);
     } else {
-      thread random_idle_scene_controller(var0);
-      thread random_idle_scene_end_cheap(var0);
+      thread random_idle_scene_controller(var_0);
+      thread random_idle_scene_end_cheap(var_0);
     }
-  } else if(isDefined(var1) && var1) {
-    thread random_idle_scene_controller_simple(var0);
+  } else if(isDefined(var_1) && var_1) {
+    thread random_idle_scene_controller_simple(var_0);
     thread random_idle_scene_end();
   } else {
-    thread random_idle_scene_controller(var0);
+    thread random_idle_scene_controller(var_0);
     thread random_idle_scene_end();
   }
 
   self waittill("ambient_idle_scene_end");
 }
 
-function play_ambient_idle_scene_single(var0, var1, var2) {
-  if(!isDefined(var1)) {
-    var1 = 1;
+function play_ambient_idle_scene_single(var_0, var_1, var_2) {
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 1;
+  if(!isDefined(var_2)) {
+    var_2 = 1;
   }
 
   if(isDefined(self.ambient_idle_anim_node)) {
     self.ambient_idle_anim_node = scripts\engine\utility::spawn_script_origin();
   }
 
-  var3 = [];
+  var_3 = [];
 
-  foreach(var5 in var0) {
-    var5.random_ambient_idle_playing = 0;
+  foreach(var_5 in var_0) {
+    var_5.random_ambient_idle_playing = 0;
 
-    if(!var1 && isai(var5)) {
-      var5 animmode("noclip");
-      var5 forceteleport(self.origin, self.angles, 100000);
+    if(!var_1 && isai(var_5)) {
+      var_5 animmode("noclip");
+      var_5 forceteleport(self.origin, self.angles, 100000);
       continue;
     }
 
-    var5.origin = self.origin;
-    var5.angles = self.angles;
+    var_5.origin = self.origin;
+    var_5.angles = self.angles;
   }
 
-  if(var2) {
-    thread random_idle_scene_controller_simple_single(var0);
-    thread random_idle_scene_end_cheap_single(var0);
+  if(var_2) {
+    thread random_idle_scene_controller_simple_single(var_0);
+    thread random_idle_scene_end_cheap_single(var_0);
   } else {
-    thread random_idle_scene_controller_single(var0);
-    thread random_idle_scene_end_cheap_single(var0);
+    thread random_idle_scene_controller_single(var_0);
+    thread random_idle_scene_end_cheap_single(var_0);
   }
 
   self waittill("ambient_idle_scene_end");
@@ -91,235 +91,235 @@ function clear_root() {
   self clearanim(%root, 0.1);
 }
 
-function random_idle_scene_controller(var0) {
+function random_idle_scene_controller(var_0) {
   self endon("death");
   self endon("ambient_idle_scene_end");
-  var1 = 0;
-  var2 = level.scr_anim[var0.animname]["idle_anims"].size;
-  var3 = level.scr_anim[var0.animname]["idle_base"];
-  var4 = [];
-  var5 = 0;
+  var_1 = 0;
+  var_2 = level.scr_anim[var_0.animname]["idle_anims"].size;
+  var_3 = level.scr_anim[var_0.animname]["idle_base"];
+  var_4 = [];
+  var_5 = 0;
   self notify("ambient_idle_scene_start");
-  thread scripts\common\notetrack::start_notetrack_wait(var0, "single anim");
-  thread scripts\sp\anim::animscriptdonotetracksthread(var0, "single anim");
+  thread scripts\common\notetrack::start_notetrack_wait(var_0, "single anim");
+  thread scripts\sp\anim::animscriptdonotetracksthread(var_0, "single anim");
 
   for(;;) {
-    if(var4.size >= var2) {
-      var5 = randomint(var2);
-      var4 = [];
-      var4 = scripts\engine\utility::array_add(var4, var5);
+    if(var_4.size >= var_2) {
+      var_5 = randomint(var_2);
+      var_4 = [];
+      var_4 = scripts\engine\utility::array_add(var_4, var_5);
     } else {
-      var5 = randomint(var2);
+      var_5 = randomint(var_2);
 
       for(;;) {
-        if(scripts\engine\utility::array_contains(var4, var5)) {
-          var5 = randomint(var2);
+        if(scripts\engine\utility::array_contains(var_4, var_5)) {
+          var_5 = randomint(var_2);
           continue;
         }
 
-        var4 = scripts\engine\utility::array_add(var4, var5);
+        var_4 = scripts\engine\utility::array_add(var_4, var_5);
         break;
       }
     }
 
-    if(!isDefined(var0)) {
+    if(!isDefined(var_0)) {
       return;
     }
 
-    var6 = level.scr_anim[var0.animname]["idle_anims"][var5];
-    var7 = getstartorigin(self.origin, self.angles, var3);
-    var8 = getstartangles(self.origin, self.angles, var3);
+    var_6 = level.scr_anim[var_0.animname]["idle_anims"][var_5];
+    var_7 = getstartorigin(self.origin, self.angles, var_3);
+    var_8 = getstartangles(self.origin, self.angles, var_3);
 
-    if(isDefined(var0.is_cheap) || !isai(var0)) {
-      var0.origin = var7;
-      var0.angles = var8;
+    if(isDefined(var_0.is_cheap) || !isai(var_0)) {
+      var_0.origin = var_7;
+      var_0.angles = var_8;
     } else {
-      var0 forceteleport(var7, var8, 100000);
+      var_0 forceteleport(var_7, var_8, 100000);
     }
 
-    var9 = undefined;
+    var_9 = undefined;
 
-    if(isDefined(var0.anim_getrootfunc)) {
-      var9 = [[var0.anim_getrootfunc]]();
+    if(isDefined(var_0.anim_getrootfunc)) {
+      var_9 = [[var_0.anim_getrootfunc]]();
     }
 
-    var10 = getanimlength(var3);
-    var11 = randomintrange(1, 4);
-    var12 = var10 * float(var11);
+    var_10 = getanimlength(var_3);
+    var_11 = randomintrange(1, 4);
+    var_12 = var_10 * float(var_11);
 
-    if(!isDefined(var0)) {
+    if(!isDefined(var_0)) {
       return;
     }
 
-    var0 animScripted("single anim", self.origin, self.angles, var3, undefined, undefined, 0.2);
-    wait var12;
+    var_0 animScripted("single anim", self.origin, self.angles, var_3, undefined, undefined, 0.2);
+    wait var_12;
 
-    if(!isDefined(var0)) {
+    if(!isDefined(var_0)) {
       return;
     }
 
-    wait_check_player_anim_interference(var3, var6[0], var0);
+    wait_check_player_anim_interference(var_3, var_6[0], var_0);
 
-    if(!isDefined(var0)) {
+    if(!isDefined(var_0)) {
       return;
     }
 
-    var0 clearanim(var3, 0.1);
-    var0 animScripted("single anim", self.origin, self.angles, var6[0], undefined, undefined, 0.2);
-    var13 = getanimlength(var6[0]);
-    wait var13;
+    var_0 clearanim(var_3, 0.1);
+    var_0 animScripted("single anim", self.origin, self.angles, var_6[0], undefined, undefined, 0.2);
+    var_13 = getanimlength(var_6[0]);
+    wait var_13;
 
-    if(!isDefined(var0)) {
+    if(!isDefined(var_0)) {
       return;
     }
 
-    var0 clearanim(var6[0], 0.1);
-    var0 animScripted("single anim", self.origin, self.angles, var6[1], undefined, undefined, 0.2);
-    var10 = getanimlength(var6[1]);
-    var11 = randomintrange(1, 4);
-    var12 = var10 * float(var11);
-    wait var12;
+    var_0 clearanim(var_6[0], 0.1);
+    var_0 animScripted("single anim", self.origin, self.angles, var_6[1], undefined, undefined, 0.2);
+    var_10 = getanimlength(var_6[1]);
+    var_11 = randomintrange(1, 4);
+    var_12 = var_10 * float(var_11);
+    wait var_12;
 
-    if(!isDefined(var0)) {
+    if(!isDefined(var_0)) {
       return;
     }
 
-    wait_check_player_anim_interference(var6[1], var6[2], var0);
+    wait_check_player_anim_interference(var_6[1], var_6[2], var_0);
 
-    if(!isDefined(var0)) {
+    if(!isDefined(var_0)) {
       return;
     }
 
-    var0 clearanim(var6[1], 0.1);
-    var0 animScripted("single anim", self.origin, self.angles, var6[2], undefined, undefined, 0.2);
-    var14 = getanimlength(var6[2]);
-    wait var14;
+    var_0 clearanim(var_6[1], 0.1);
+    var_0 animScripted("single anim", self.origin, self.angles, var_6[2], undefined, undefined, 0.2);
+    var_14 = getanimlength(var_6[2]);
+    wait var_14;
 
-    if(!isDefined(var0)) {
+    if(!isDefined(var_0)) {
       return;
     }
 
-    var0 clearanim(var6[2], 0.1);
+    var_0 clearanim(var_6[2], 0.1);
     waitframe();
   }
 }
 
-function random_idle_scene_controller_single(var0) {
+function random_idle_scene_controller_single(var_0) {
   self endon("death");
   self endon("ambient_idle_scene_end");
-  var1 = 0;
-  var2 = level.scr_anim[var0[0].animname]["idle_anims"].size;
-  var3 = level.scr_anim[var0[0].animname]["idle_base"];
-  var4 = [];
-  var5 = 0;
+  var_1 = 0;
+  var_2 = level.scr_anim[var_0[0].animname]["idle_anims"].size;
+  var_3 = level.scr_anim[var_0[0].animname]["idle_base"];
+  var_4 = [];
+  var_5 = 0;
   self notify("ambient_idle_scene_start");
 
-  foreach(var7 in var0) {
-    if(!isDefined(var7.animtree)) {
-      var7 scripts\common\anim::setanimtree();
+  foreach(var_7 in var_0) {
+    if(!isDefined(var_7.animtree)) {
+      var_7 scripts\common\anim::setanimtree();
     }
 
-    thread scripts\common\notetrack::start_notetrack_wait(var7, "single anim");
-    thread scripts\sp\anim::animscriptdonotetracksthread(var7, "single anim");
+    thread scripts\common\notetrack::start_notetrack_wait(var_7, "single anim");
+    thread scripts\sp\anim::animscriptdonotetracksthread(var_7, "single anim");
   }
 
   for(;;) {
-    if(var4.size >= var2) {
-      var5 = randomint(var2);
-      var4 = [];
-      var4 = scripts\engine\utility::array_add(var4, var5);
+    if(var_4.size >= var_2) {
+      var_5 = randomint(var_2);
+      var_4 = [];
+      var_4 = scripts\engine\utility::array_add(var_4, var_5);
     } else {
-      var5 = randomint(var2);
+      var_5 = randomint(var_2);
 
       for(;;) {
-        if(scripts\engine\utility::array_contains(var4, var5)) {
-          var5 = randomint(var2);
+        if(scripts\engine\utility::array_contains(var_4, var_5)) {
+          var_5 = randomint(var_2);
           continue;
         }
 
-        var4 = scripts\engine\utility::array_add(var4, var5);
+        var_4 = scripts\engine\utility::array_add(var_4, var_5);
         break;
       }
     }
 
-    var9 = 0;
-    var10 = undefined;
+    var_9 = 0;
+    var_10 = undefined;
 
-    foreach(var7 in var0) {
-      var10 = level.scr_anim[var7.animname]["idle_anims"][var5];
-      var12 = getstartorigin(self.origin, self.angles, var3);
-      var13 = getstartangles(self.origin, self.angles, var3);
-      var3 = level.scr_anim[var7.animname]["idle_base"];
+    foreach(var_7 in var_0) {
+      var_10 = level.scr_anim[var_7.animname]["idle_anims"][var_5];
+      var_12 = getstartorigin(self.origin, self.angles, var_3);
+      var_13 = getstartangles(self.origin, self.angles, var_3);
+      var_3 = level.scr_anim[var_7.animname]["idle_base"];
 
-      if(isDefined(var7.is_cheap) || !isai(var7)) {
-        var7.origin = var12;
-        var7.angles = var13;
+      if(isDefined(var_7.is_cheap) || !isai(var_7)) {
+        var_7.origin = var_12;
+        var_7.angles = var_13;
       } else {
-        var7 forceteleport(var12, var13, 100000);
+        var_7 forceteleport(var_12, var_13, 100000);
       }
 
-      var14 = undefined;
+      var_14 = undefined;
 
-      if(isDefined(var7.anim_getrootfunc)) {
-        var14 = [[var7.anim_getrootfunc]]();
+      if(isDefined(var_7.anim_getrootfunc)) {
+        var_14 = [[var_7.anim_getrootfunc]]();
       }
 
-      var15 = getanimlength(var3);
-      var16 = randomintrange(1, 4);
-      var9 = var15 * float(var16);
-      var7 animScripted("single anim", self.origin, self.angles, var3, undefined, undefined, 0.2);
+      var_15 = getanimlength(var_3);
+      var_16 = randomintrange(1, 4);
+      var_9 = var_15 * float(var_16);
+      var_7 animScripted("single anim", self.origin, self.angles, var_3, undefined, undefined, 0.2);
     }
 
-    wait var9;
-    var18 = [];
+    wait var_9;
+    var_18 = [];
 
-    foreach(var7 in var0) {
-      var18 = scripts\engine\utility::array_add(var18, level.scr_anim[var7.animname]["idle_anims"][var5][0]);
+    foreach(var_7 in var_0) {
+      var_18 = scripts\engine\utility::array_add(var_18, level.scr_anim[var_7.animname]["idle_anims"][var_5][0]);
     }
 
-    wait_check_player_anim_interference_group(var3, var18, var0);
+    wait_check_player_anim_interference_group(var_3, var_18, var_0);
 
-    foreach(var7 in var0) {
-      var3 = level.scr_anim[var7.animname]["idle_base"];
-      var10 = level.scr_anim[var7.animname]["idle_anims"][var5];
-      var7 clearanim(var3, 0.1);
-      var7 animScripted("single anim", self.origin, self.angles, var10[0], undefined, undefined, 0.2);
+    foreach(var_7 in var_0) {
+      var_3 = level.scr_anim[var_7.animname]["idle_base"];
+      var_10 = level.scr_anim[var_7.animname]["idle_anims"][var_5];
+      var_7 clearanim(var_3, 0.1);
+      var_7 animScripted("single anim", self.origin, self.angles, var_10[0], undefined, undefined, 0.2);
     }
 
-    var23 = getanimlength(var10[0]);
-    wait var23;
+    var_23 = getanimlength(var_10[0]);
+    wait var_23;
 
-    foreach(var7 in var0) {
-      var10 = level.scr_anim[var7.animname]["idle_anims"][var5];
-      var7 clearanim(var10[0], 0.1);
-      var7 animScripted("single anim", self.origin, self.angles, var10[1], undefined, undefined, 0.2);
+    foreach(var_7 in var_0) {
+      var_10 = level.scr_anim[var_7.animname]["idle_anims"][var_5];
+      var_7 clearanim(var_10[0], 0.1);
+      var_7 animScripted("single anim", self.origin, self.angles, var_10[1], undefined, undefined, 0.2);
     }
 
-    var15 = getanimlength(var10[1]);
-    var16 = randomintrange(1, 4);
-    var9 = var15 * float(var16);
-    wait var9;
-    var18 = [];
+    var_15 = getanimlength(var_10[1]);
+    var_16 = randomintrange(1, 4);
+    var_9 = var_15 * float(var_16);
+    wait var_9;
+    var_18 = [];
 
-    foreach(var7 in var0) {
-      var18 = scripts\engine\utility::array_add(var18, level.scr_anim[var7.animname]["idle_anims"][var5][2]);
+    foreach(var_7 in var_0) {
+      var_18 = scripts\engine\utility::array_add(var_18, level.scr_anim[var_7.animname]["idle_anims"][var_5][2]);
     }
 
-    wait_check_player_anim_interference_group(var10[1], var18, var0);
+    wait_check_player_anim_interference_group(var_10[1], var_18, var_0);
 
-    foreach(var7 in var0) {
-      var3 = level.scr_anim[var7.animname]["idle_base"];
-      var10 = level.scr_anim[var7.animname]["idle_anims"][var5];
-      var7 clearanim(var10[1], 0.1);
-      var7 animScripted("single anim", self.origin, self.angles, var10[2], undefined, undefined, 0.2);
+    foreach(var_7 in var_0) {
+      var_3 = level.scr_anim[var_7.animname]["idle_base"];
+      var_10 = level.scr_anim[var_7.animname]["idle_anims"][var_5];
+      var_7 clearanim(var_10[1], 0.1);
+      var_7 animScripted("single anim", self.origin, self.angles, var_10[2], undefined, undefined, 0.2);
     }
 
-    var30 = getanimlength(var10[2]);
-    wait var30;
+    var_30 = getanimlength(var_10[2]);
+    wait var_30;
 
-    foreach(var7 in var0) {
-      var10 = level.scr_anim[var7.animname]["idle_anims"][var5];
-      var7 clearanim(var10[2], 0.1);
+    foreach(var_7 in var_0) {
+      var_10 = level.scr_anim[var_7.animname]["idle_anims"][var_5];
+      var_7 clearanim(var_10[2], 0.1);
     }
 
     waitframe();
@@ -331,282 +331,282 @@ function random_idle_scene_end() {
   self notify("ambient_idle_scene_end");
 }
 
-function random_idle_scene_end_single(var0) {
-  foreach(var2 in var0) {
-    if(isent(var2)) {
-      var2 scripts\asm\asm_sp::asm_stopanimScripted();
-      var2 notify("ambient_idle_scene_end");
+function random_idle_scene_end_single(var_0) {
+  foreach(var_2 in var_0) {
+    if(isent(var_2)) {
+      var_2 scripts\asm\asm_sp::asm_stopanimScripted();
+      var_2 notify("ambient_idle_scene_end");
     }
   }
 }
 
-function random_idle_scene_end_cheap(var0) {
+function random_idle_scene_end_cheap(var_0) {
   self endon("death");
   self waittill("ambient_scene_end");
 
-  if(isent(var0)) {
-    clear_root(var0);
+  if(isent(var_0)) {
+    clear_root(var_0);
   }
 
   self notify("ambient_idle_scene_end");
 }
 
-function random_idle_scene_end_cheap_single(var0) {
+function random_idle_scene_end_cheap_single(var_0) {
   self endon("death");
   self waittill("ambient_scene_end");
 
-  foreach(var2 in var0) {
-    if(isent(var2)) {
-      var2 stopanimScripted();
+  foreach(var_2 in var_0) {
+    if(isent(var_2)) {
+      var_2 stopanimScripted();
     }
   }
 
   self notify("ambient_idle_scene_end");
 }
 
-function random_idle_scene_controller_simple(var0) {
+function random_idle_scene_controller_simple(var_0) {
   self endon("death");
   self endon("ambient_idle_scene_end");
-  var1 = level.scr_anim[var0.animname]["idle_anims"].size;
-  var2 = level.scr_anim[var0.animname]["idle_base"];
-  var3 = [];
-  var4 = 0;
+  var_1 = level.scr_anim[var_0.animname]["idle_anims"].size;
+  var_2 = level.scr_anim[var_0.animname]["idle_base"];
+  var_3 = [];
+  var_4 = 0;
   self notify("ambient_idle_scene_start");
-  thread scripts\common\notetrack::start_notetrack_wait(var0, "single anim");
-  thread scripts\sp\anim::animscriptdonotetracksthread(var0, "single anim");
+  thread scripts\common\notetrack::start_notetrack_wait(var_0, "single anim");
+  thread scripts\sp\anim::animscriptdonotetracksthread(var_0, "single anim");
 
   for(;;) {
-    if(var3.size >= var1) {
-      var4 = randomint(var1);
-      var3 = [];
-      var3 = scripts\engine\utility::array_add(var3, var4);
+    if(var_3.size >= var_1) {
+      var_4 = randomint(var_1);
+      var_3 = [];
+      var_3 = scripts\engine\utility::array_add(var_3, var_4);
     } else {
-      var4 = randomint(var1);
+      var_4 = randomint(var_1);
 
       for(;;) {
-        if(scripts\engine\utility::array_contains(var3, var4)) {
-          var4 = randomint(var1);
+        if(scripts\engine\utility::array_contains(var_3, var_4)) {
+          var_4 = randomint(var_1);
           continue;
         }
 
-        var3 = scripts\engine\utility::array_add(var3, var4);
+        var_3 = scripts\engine\utility::array_add(var_3, var_4);
         break;
       }
     }
 
-    var5 = level.scr_anim[var0.animname]["idle_anims"][var4];
-    var6 = getstartorigin(self.origin, self.angles, var2);
-    var7 = getstartangles(self.origin, self.angles, var2);
+    var_5 = level.scr_anim[var_0.animname]["idle_anims"][var_4];
+    var_6 = getstartorigin(self.origin, self.angles, var_2);
+    var_7 = getstartangles(self.origin, self.angles, var_2);
 
-    if(isDefined(var0.is_cheap) || !isai(var0)) {
-      var0.origin = var6;
-      var0.angles = var7;
+    if(isDefined(var_0.is_cheap) || !isai(var_0)) {
+      var_0.origin = var_6;
+      var_0.angles = var_7;
     } else {
-      var0 forceteleport(var6, var7, 100000);
+      var_0 forceteleport(var_6, var_7, 100000);
     }
 
-    var8 = undefined;
+    var_8 = undefined;
 
-    if(isDefined(var0.anim_getrootfunc)) {
-      var8 = [[var0.anim_getrootfunc]]();
+    if(isDefined(var_0.anim_getrootfunc)) {
+      var_8 = [[var_0.anim_getrootfunc]]();
     }
 
-    var9 = getanimlength(var2);
-    var10 = randomintrange(1, 4);
-    var11 = var9 * float(var10);
-    var0 animScripted("single anim", self.origin, self.angles, var2, undefined, undefined, 0.2);
-    wait var11;
-    var0 clearanim(var2, 0.1);
-    var0 animScripted("single anim", self.origin, self.angles, var5, undefined, undefined, 0.2);
-    var12 = getanimlength(var5);
-    wait var12;
-    var0 clearanim(var5, 0.1);
+    var_9 = getanimlength(var_2);
+    var_10 = randomintrange(1, 4);
+    var_11 = var_9 * float(var_10);
+    var_0 animScripted("single anim", self.origin, self.angles, var_2, undefined, undefined, 0.2);
+    wait var_11;
+    var_0 clearanim(var_2, 0.1);
+    var_0 animScripted("single anim", self.origin, self.angles, var_5, undefined, undefined, 0.2);
+    var_12 = getanimlength(var_5);
+    wait var_12;
+    var_0 clearanim(var_5, 0.1);
     waitframe();
   }
 }
 
-function random_idle_scene_controller_simple_single(var0) {
+function random_idle_scene_controller_simple_single(var_0) {
   self endon("death");
   self endon("ambient_idle_scene_end");
-  var1 = level.scr_anim[var0[0].animname]["idle_anims"].size;
-  var2 = [];
-  var3 = 0;
-  var4 = self;
+  var_1 = level.scr_anim[var_0[0].animname]["idle_anims"].size;
+  var_2 = [];
+  var_3 = 0;
+  var_4 = self;
   self notify("ambient_idle_scene_start");
 
-  foreach(var6 in var0) {
-    var7 = level.scr_anim[var6.animname]["idle_base"];
-    var8 = getstartorigin(self.origin, self.angles, var7);
-    var9 = getstartangles(self.origin, self.angles, var7);
-    var6.origin = var8;
-    var6.angles = var9;
-    thread scripts\common\notetrack::start_notetrack_wait(var6, "single anim");
-    thread scripts\sp\anim::animscriptdonotetracksthread(var6, "single anim");
-    var10 = undefined;
+  foreach(var_6 in var_0) {
+    var_7 = level.scr_anim[var_6.animname]["idle_base"];
+    var_8 = getstartorigin(self.origin, self.angles, var_7);
+    var_9 = getstartangles(self.origin, self.angles, var_7);
+    var_6.origin = var_8;
+    var_6.angles = var_9;
+    thread scripts\common\notetrack::start_notetrack_wait(var_6, "single anim");
+    thread scripts\sp\anim::animscriptdonotetracksthread(var_6, "single anim");
+    var_10 = undefined;
 
-    if(isDefined(var6.anim_getrootfunc)) {
-      var10 = [[var6.anim_getrootfunc]]();
+    if(isDefined(var_6.anim_getrootfunc)) {
+      var_10 = [[var_6.anim_getrootfunc]]();
     }
 
-    var6 animScripted("single anim", self.origin, self.angles, var7, undefined, var10, 0);
+    var_6 animScripted("single anim", self.origin, self.angles, var_7, undefined, var_10, 0);
   }
 
   for(;;) {
-    if(var2.size >= var1) {
-      var3 = randomint(var1);
-      var2 = [];
-      var2 = scripts\engine\utility::array_add(var2, var3);
+    if(var_2.size >= var_1) {
+      var_3 = randomint(var_1);
+      var_2 = [];
+      var_2 = scripts\engine\utility::array_add(var_2, var_3);
     } else {
-      var3 = randomint(var1);
+      var_3 = randomint(var_1);
 
       for(;;) {
-        if(scripts\engine\utility::array_contains(var2, var3)) {
-          var3 = randomint(var1);
+        if(scripts\engine\utility::array_contains(var_2, var_3)) {
+          var_3 = randomint(var_1);
           continue;
         }
 
-        var2 = scripts\engine\utility::array_add(var2, var3);
+        var_2 = scripts\engine\utility::array_add(var_2, var_3);
         break;
       }
     }
 
-    var12 = [];
-    var13 = 0;
-    var14 = randomintrange(1, 4);
+    var_12 = [];
+    var_13 = 0;
+    var_14 = randomintrange(1, 4);
 
-    foreach(var6 in var0) {
-      var7 = level.scr_anim[var6.animname]["idle_base"];
-      var8 = getstartorigin(self.origin, self.angles, var7);
-      var9 = getstartangles(self.origin, self.angles, var7);
-      var6.origin = var8;
-      var6.angles = var9;
-      var10 = undefined;
+    foreach(var_6 in var_0) {
+      var_7 = level.scr_anim[var_6.animname]["idle_base"];
+      var_8 = getstartorigin(self.origin, self.angles, var_7);
+      var_9 = getstartangles(self.origin, self.angles, var_7);
+      var_6.origin = var_8;
+      var_6.angles = var_9;
+      var_10 = undefined;
 
-      if(isDefined(var6.anim_getrootfunc)) {
-        var10 = [[var6.anim_getrootfunc]]();
+      if(isDefined(var_6.anim_getrootfunc)) {
+        var_10 = [[var_6.anim_getrootfunc]]();
       }
 
-      var16 = getanimlength(var7);
-      var13 = var16;
-      var6 animScripted("single anim", self.origin, self.angles, var7, undefined, var10, 0.2);
+      var_16 = getanimlength(var_7);
+      var_13 = var_16;
+      var_6 animScripted("single anim", self.origin, self.angles, var_7, undefined, var_10, 0.2);
     }
 
-    wait var13;
-    var18 = 0;
+    wait var_13;
+    var_18 = 0;
 
-    foreach(var6 in var0) {
-      var7 = level.scr_anim[var6.animname]["idle_base"];
-      var20 = level.scr_anim[var6.animname]["idle_anims"][var3];
-      var8 = getstartorigin(self.origin, self.angles, var20);
-      var9 = getstartangles(self.origin, self.angles, var20);
-      var6.origin = var8;
-      var6.angles = var9;
-      var10 = undefined;
+    foreach(var_6 in var_0) {
+      var_7 = level.scr_anim[var_6.animname]["idle_base"];
+      var_20 = level.scr_anim[var_6.animname]["idle_anims"][var_3];
+      var_8 = getstartorigin(self.origin, self.angles, var_20);
+      var_9 = getstartangles(self.origin, self.angles, var_20);
+      var_6.origin = var_8;
+      var_6.angles = var_9;
+      var_10 = undefined;
 
-      if(isDefined(var6.anim_getrootfunc)) {
-        var10 = [[var6.anim_getrootfunc]]();
+      if(isDefined(var_6.anim_getrootfunc)) {
+        var_10 = [[var_6.anim_getrootfunc]]();
       }
 
-      var6 animScripted("single anim", self.origin, self.angles, var20, undefined, var10, 0.2);
-      var18 = getanimlength(var20);
+      var_6 animScripted("single anim", self.origin, self.angles, var_20, undefined, var_10, 0.2);
+      var_18 = getanimlength(var_20);
     }
 
-    wait var18;
+    wait var_18;
   }
 }
 
-function is_ambient_scene(var0) {
-  return isDefined(level.ambient_idle_scenes) && isDefined(level.ambient_idle_scenes[var0]);
+function is_ambient_scene(var_0) {
+  return isDefined(level.ambient_idle_scenes) && isDefined(level.ambient_idle_scenes[var_0]);
 }
 
-function is_ambient_idle_struct(var0) {
-  if(isDefined(var0.script_noteworthy) && is_ambient_scene(var0.script_noteworthy)) {
+function is_ambient_idle_struct(var_0) {
+  if(isDefined(var_0.script_noteworthy) && is_ambient_scene(var_0.script_noteworthy)) {
     return true;
   }
 
   return false;
 }
 
-function wait_check_player_anim_interference(var0, var1, var2) {
+function wait_check_player_anim_interference(var_0, var_1, var_2) {
   self endon("death");
   self endon("ambient_idle_scene_end");
-  var2 endon("death");
+  var_2 endon("death");
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return;
   }
 
-  var3 = length2d(level.player.origin - var2.origin);
-  var4 = length2d(level.player.origin - var2 scripts\anim\utility::getanimendpos(var1));
-  var5 = float(getDvar("NSRPQNLSNK")) * 0.25;
+  var_3 = length2d(level.player.origin - var_2.origin);
+  var_4 = length2d(level.player.origin - var_2 scripts\anim\utility::getanimendpos(var_1));
+  var_5 = float(getDvar("NSRPQNLSNK")) * 0.25;
 
   for(;;) {
-    if(var3 / var5 > getanimlength(var1) && var4 / var5 > getanimlength(var1)) {
+    if(var_3 / var_5 > getanimlength(var_1) && var_4 / var_5 > getanimlength(var_1)) {
       break;
     }
 
-    if(!isDefined(var2)) {
+    if(!isDefined(var_2)) {
       return;
     }
 
-    var3 = length2d(level.player.origin - var2.origin);
-    var4 = length2d(level.player.origin - var2 scripts\anim\utility::getanimendpos(var1));
-    var5 = float(getDvar("NSRPQNLSNK")) * 0.25;
-    var6 = getanimlength(var0);
-    wait var6;
+    var_3 = length2d(level.player.origin - var_2.origin);
+    var_4 = length2d(level.player.origin - var_2 scripts\anim\utility::getanimendpos(var_1));
+    var_5 = float(getDvar("NSRPQNLSNK")) * 0.25;
+    var_6 = getanimlength(var_0);
+    wait var_6;
   }
 }
 
-function wait_check_player_anim_interference_group(var0, var1, var2) {
+function wait_check_player_anim_interference_group(var_0, var_1, var_2) {
   self endon("death");
   self endon("ambient_idle_scene_end");
-  var3 = undefined;
-  var4 = undefined;
-  var5 = float(getDvar("NSRPQNLSNK")) * 0.25;
+  var_3 = undefined;
+  var_4 = undefined;
+  var_5 = float(getDvar("NSRPQNLSNK")) * 0.25;
 
   for(;;) {
-    var6 = 0;
+    var_6 = 0;
 
-    for(var7 = 0; var7 < var2.size; var7++) {
-      var8 = var2[var7];
-      var3 = length2d(level.player.origin - var8.origin);
-      var4 = length2d(level.player.origin - var8 scripts\anim\utility::getanimendpos(var1[var7]));
-      var5 = float(getDvar("NSRPQNLSNK")) * 0.25;
+    for(var_7 = 0; var_7 < var_2.size; var_7++) {
+      var_8 = var_2[var_7];
+      var_3 = length2d(level.player.origin - var_8.origin);
+      var_4 = length2d(level.player.origin - var_8 scripts\anim\utility::getanimendpos(var_1[var_7]));
+      var_5 = float(getDvar("NSRPQNLSNK")) * 0.25;
 
-      if(var3 / var5 > getanimlength(var1[var7]) && var4 / var5 > getanimlength(var1[var7])) {
-        var6++;
+      if(var_3 / var_5 > getanimlength(var_1[var_7]) && var_4 / var_5 > getanimlength(var_1[var_7])) {
+        var_6++;
       }
     }
 
-    if(var6 >= var2.size) {
+    if(var_6 >= var_2.size) {
       break;
     }
 
-    var9 = getanimlength(var0);
-    wait var9;
+    var_9 = getanimlength(var_0);
+    wait var_9;
   }
 }
 
-function play_random_idles(var0, var1, var2) {
+function play_random_idles(var_0, var_1, var_2) {
   self endon("stop_idles");
   self endon("death");
-  var0 endon("death");
-  var3 = [];
-  var4 = var2;
-  var5 = undefined;
-  var0.random_idles = 1;
+  var_0 endon("death");
+  var_3 = [];
+  var_4 = var_2;
+  var_5 = undefined;
+  var_0.random_idles = 1;
 
   for(;;) {
-    scripts\common\anim::anim_single_solo(var0, var1);
+    scripts\common\anim::anim_single_solo(var_0, var_1);
 
-    if(var4.size < 1) {
-      var4 = var3;
+    if(var_4.size < 1) {
+      var_4 = var_3;
     }
 
-    var5 = randomint(var4.size);
-    scripts\common\anim::anim_single_solo(var0, var4[var5]);
-    var3 = scripts\engine\utility::array_add(var3, var4[var5]);
-    var4 = scripts\engine\utility::array_remove(var4, var4[var5]);
+    var_5 = randomint(var_4.size);
+    scripts\common\anim::anim_single_solo(var_0, var_4[var_5]);
+    var_3 = scripts\engine\utility::array_add(var_3, var_4[var_5]);
+    var_4 = scripts\engine\utility::array_remove(var_4, var_4[var_5]);
     waitframe();
   }
 }

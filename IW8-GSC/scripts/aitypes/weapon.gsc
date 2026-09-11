@@ -3,7 +3,7 @@
  * Script: scripts\aitypes\weapon.gsc
 ***********************************************/
 
-function updateweapon(var0) {
+function updateweapon(var_0) {
   if(isDefined(anim.weaponstowfunction) && isDefined(self.forcedweapon)) {
     scripts\asm\asm_bb::bb_clearweaponrequest();
     self[[anim.weaponstowfunction]]();
@@ -43,50 +43,50 @@ function choosebestweapon() {
     return "pistol";
   }
 
-  var0 = 0;
-  var1 = undefined;
+  var_0 = 0;
+  var_1 = undefined;
 
-  foreach(var3 in self.weapons) {
-    var4 = weaponclass(var3);
-    var5 = evalweaponscore(var4, var3);
+  foreach(var_3 in self.weapons) {
+    var_4 = weaponclass(var_3);
+    var_5 = evalweaponscore(var_4, var_3);
 
-    if(var5 > var0) {
-      var0 = var5;
-      var1 = var4;
+    if(var_5 > var_0) {
+      var_0 = var_5;
+      var_1 = var_4;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
 function getsidearmdist() {
-  var0 = scripts\anim\utility_common::isusingsidearm();
-  var1 = 409;
-  var2 = scripts\anim\utility_common::isasniper(0);
+  var_0 = scripts\anim\utility_common::isusingsidearm();
+  var_1 = 409;
+  var_2 = scripts\anim\utility_common::isasniper(0);
 
-  if(var2) {
-    var1 = 512;
+  if(var_2) {
+    var_1 = 512;
   }
 
-  if(var0) {
-    var1 += 36;
+  if(var_0) {
+    var_1 += 36;
   }
 
-  return var1;
+  return var_1;
 }
 
 function withinswitchtopistoldist() {
   if(isDefined(self.enemy) && isDefined(self.sidearm) && !nullweapon(self.sidearm) && !istrue(self.disablepistol)) {
-    var0 = getsidearmdist();
-    var1 = distancesquared(self.origin, self.enemy.origin);
-    return (var1 < var0 * var0);
+    var_0 = getsidearmdist();
+    var_1 = distancesquared(self.origin, self.enemy.origin);
+    return (var_1 < var_0 * var_0);
   }
 
   return false;
 }
 
-function evalweaponscore(var0, var1) {
-  if(var0 == "pistol") {
+function evalweaponscore(var_0, var_1) {
+  if(var_0 == "pistol") {
     if(weaponclass(self.weapon) == "rocketlauncher" && self.rocketammo <= 0) {
       return 1000;
     }
@@ -95,9 +95,9 @@ function evalweaponscore(var0, var1) {
       return 0;
     }
 
-    var2 = scripts\asm\asm_bb::bb_getcovernode();
+    var_2 = scripts\asm\asm_bb::bb_getcovernode();
 
-    if(scripts\anim\utility_common::usingmg() && isDefined(var2) && !self iscovervalidagainstenemy(var2)) {
+    if(scripts\anim\utility_common::usingmg() && isDefined(var_2) && !self iscovervalidagainstenemy(var_2)) {
       return 1000;
     }
 
@@ -105,17 +105,17 @@ function evalweaponscore(var0, var1) {
       return 0;
     }
 
-    var3 = withinswitchtopistoldist();
-    var4 = scripts\anim\utility_common::isasniper(0);
+    var_3 = withinswitchtopistoldist();
+    var_4 = scripts\anim\utility_common::isasniper(0);
 
-    if(var3) {
-      var5 = distancesquared(self.origin, self.enemy.origin);
+    if(var_3) {
+      var_5 = distancesquared(self.origin, self.enemy.origin);
 
-      if(var4) {
+      if(var_4) {
         return 1000;
       }
 
-      if(scripts\anim\utility_common::usingmg() && var5 < 16384) {
+      if(scripts\anim\utility_common::usingmg() && var_5 < 16384) {
         return 1000;
       }
 
@@ -127,7 +127,7 @@ function evalweaponscore(var0, var1) {
     }
 
     return 0;
-  } else if(var4 == "rocketlauncher") {
+  } else if(var_4 == "rocketlauncher") {
     if(self.rocketammo <= 0) {
       return 0;
     }
@@ -140,7 +140,7 @@ function evalweaponscore(var0, var1) {
   return 100;
 }
 
-function issniper(var0) {
+function issniper(var_0) {
   if(scripts\anim\utility_common::isasniper()) {
     return anim.success;
   }
@@ -148,7 +148,7 @@ function issniper(var0) {
   return anim.failure;
 }
 
-function usingsidearm(var0) {
+function usingsidearm(var_0) {
   if(self.weapon == self.sidearm && !nullweapon(self.weapon)) {
     return anim.success;
   }
@@ -156,8 +156,8 @@ function usingsidearm(var0) {
   return anim.failure;
 }
 
-function shouldswitchtosidearm(var0) {
-  if(usingsidearm(var0) == anim.success) {
+function shouldswitchtosidearm(var_0) {
+  if(usingsidearm(var_0) == anim.success) {
     return anim.failure;
   }
 
@@ -165,18 +165,18 @@ function shouldswitchtosidearm(var0) {
     return anim.success;
   }
 
-  if(canswitchtosidearm(var0) != anim.success) {
+  if(canswitchtosidearm(var_0) != anim.success) {
     return anim.failure;
   }
 
-  if(checkcoverforsidearm(var0) != anim.success) {
+  if(checkcoverforsidearm(var_0) != anim.success) {
     return anim.failure;
   }
 
   return anim.success;
 }
 
-function canswitchtosidearm(var0) {
+function canswitchtosidearm(var_0) {
   if(istrue(self.disablepistol)) {
     return anim.failure;
   }
@@ -192,10 +192,10 @@ function canswitchtosidearm(var0) {
   return anim.success;
 }
 
-function checkcoverforsidearm(var0) {
-  var1 = scripts\asm\asm_bb::bb_getcovernode();
+function checkcoverforsidearm(var_0) {
+  var_1 = scripts\asm\asm_bb::bb_getcovernode();
 
-  if(isDefined(var1) && distance(self.origin, var1.origin) < 16) {
+  if(isDefined(var_1) && distance(self.origin, var_1.origin) < 16) {
     return anim.failure;
   }
 

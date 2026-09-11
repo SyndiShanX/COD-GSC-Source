@@ -5,60 +5,60 @@
 
 function codecallback_agentadded() {
   self[[level.initagentscriptvariables]]();
-  var0 = "axis";
+  var_0 = "axis";
 
   if(level.numagents % 2 == 0) {
-    var0 = "allies";
+    var_0 = "allies";
   }
 
   level.numagents++;
   self sethitlocdamagetable("ai_lochit_dmgtable");
-  self[[level.setagentteam]](var0);
+  self[[level.setagentteam]](var_0);
   level.agentarray[level.agentarray.size] = self;
 }
 
-function codecallback_agentdamaged(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11) {
-  var12 = var5;
+function codecallback_agentdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  var_12 = var_5;
 
   if(isDefined(level.weaponmapfunc)) {
-    var5 = [[level.weaponmapfunc]](var5, var0);
-    var12 = var5;
+    var_5 = [[level.weaponmapfunc]](var_5, var_0);
+    var_12 = var_5;
   }
 
-  var1 = [[level.agentvalidateattacker]](var1);
-  var13 = self[[level.agentfunc]]("on_damaged");
+  var_1 = [[level.agentvalidateattacker]](var_1);
+  var_13 = self[[level.agentfunc]]("on_damaged");
 
-  if(isDefined(var13)) {
-    self[[var13]](var0, var1, var2, var3, var4, var12, var6, var7, var8, var9, var10, var11, var5);
+  if(isDefined(var_13)) {
+    self[[var_13]](var_0, var_1, var_2, var_3, var_4, var_12, var_6, var_7, var_8, var_9, var_10, var_11, var_5);
     return;
   }
 }
 
-function codecallback_agentimpaled(var0, var1, var2, var3, var4, var5, var6, var7) {
+function codecallback_agentimpaled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(isDefined(level.callbackplayerimpaled)) {
-    [[level.callbackplayerimpaled]](var0, var1, var2, var3, var4, var5, var6, var7);
+    [[level.callbackplayerimpaled]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7);
     return;
   }
 }
 
-function codecallback_agentkilled(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
-  var10 = var5;
-  var1 = [[level.agentvalidateattacker]](var1);
+function codecallback_agentkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  var_10 = var_5;
+  var_1 = [[level.agentvalidateattacker]](var_1);
 
   if(isDefined(level.binoculars_setcurrentstate)) {
-    self thread[[level.binoculars_setcurrentstate]](var0, var1, var2, var4, var10, var6, var7, var8, var9);
+    self thread[[level.binoculars_setcurrentstate]](var_0, var_1, var_2, var_4, var_10, var_6, var_7, var_8, var_9);
     return;
   }
 
-  var11 = self[[level.agentfunc]]("on_killed");
+  var_11 = self[[level.agentfunc]]("on_killed");
 
-  if(isDefined(var11)) {
-    self thread[[var11]](var0, var1, var2, var4, var10, var6, var7, var8, var9);
+  if(isDefined(var_11)) {
+    self thread[[var_11]](var_0, var_1, var_2, var_4, var_10, var_6, var_7, var_8, var_9);
     return;
   }
 }
 
-function codecallback_agentfinishweaponchange(var0, var1) {}
+function codecallback_agentfinishweaponchange(var_0, var_1) {}
 
 function init() {
   initagentlevelvariables();
@@ -67,30 +67,30 @@ function init() {
   thread add_agents_to_game();
 }
 
-function connectnewagent(var0, var1, var2) {
-  var3 = [[level.getfreeagent]](var0);
+function connectnewagent(var_0, var_1, var_2) {
+  var_3 = [[level.getfreeagent]](var_0);
 
-  if(isDefined(var3)) {
-    var3.connecttime = gettime();
+  if(isDefined(var_3)) {
+    var_3.connecttime = gettime();
 
-    if(isDefined(var1)) {
-      var3[[level.setagentteam]](var1);
+    if(isDefined(var_1)) {
+      var_3[[level.setagentteam]](var_1);
     } else {
-      var3[[level.setagentteam]](var3.team);
+      var_3[[level.setagentteam]](var_3.team);
     }
 
-    if(isDefined(var2)) {
-      var3.class_override = var2;
+    if(isDefined(var_2)) {
+      var_3.class_override = var_2;
     }
 
-    if(isDefined(level.agent_funcs[var0]["onAIConnect"])) {
-      var3[[var3[[level.agentfunc]]("onAIConnect")]]();
+    if(isDefined(level.agent_funcs[var_0]["onAIConnect"])) {
+      var_3[[var_3[[level.agentfunc]]("onAIConnect")]]();
     }
 
-    var3[[level.addtocharactersarray]]();
+    var_3[[level.addtocharactersarray]]();
   }
 
-  return var3;
+  return var_3;
 }
 
 function initagentlevelvariables() {
@@ -100,13 +100,13 @@ function initagentlevelvariables() {
 
 function add_agents_to_game() {
   level endon("game_ended");
-  level waittill("connected", var0);
-  var1 = getmaxagents();
+  level waittill("connected", var_0);
+  var_1 = getmaxagents();
 
-  while(level.agentarray.size < var1) {
-    var2 = addagent();
+  while(level.agentarray.size < var_1) {
+    var_2 = addagent();
 
-    if(!isDefined(var2)) {
+    if(!isDefined(var_2)) {
       waitframe();
     }
   }
@@ -114,8 +114,8 @@ function add_agents_to_game() {
   level notify("add_agents_to_game");
 }
 
-function set_agent_health(var0) {
-  self.agenthealth = var0;
-  self.health = var0;
-  self.maxhealth = var0;
+function set_agent_health(var_0) {
+  self.agenthealth = var_0;
+  self.health = var_0;
+  self.maxhealth = var_0;
 }

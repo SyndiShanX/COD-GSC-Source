@@ -7,8 +7,8 @@ function main() {
   scripts\smartobjects\utility::add_smartobject_type("stealth_look_under_10", &getinfo, &canusecondition);
 }
 
-function canusecondition(var0) {
-  if(!scripts\smartobjects\utility::canusesmartobject_stealth(var0)) {
+function canusecondition(var_0) {
+  if(!scripts\smartobjects\utility::canusesmartobject_stealth(var_0)) {
     return false;
   }
 
@@ -16,18 +16,18 @@ function canusecondition(var0) {
 }
 
 function getinfo() {
-  var0 = scripts\smartobjects\utility::createsmartobjectinfo();
-  var0.animstatename = "smartobject_look_under_10";
-  var0 scripts\smartobjects\utility::addsmartobjectintroanim("enter_loop");
-  var0 scripts\smartobjects\utility::addsmartobjectanim("loop");
-  var0 scripts\smartobjects\utility::addsmartobjectoutroanim("exit_loop");
-  var0 scripts\smartobjects\utility::addsmartobjectdeathanim("death");
-  var0 scripts\smartobjects\utility::addsmartobjectreactanim();
-  var0 scripts\smartobjects\utility::addsmartobjectpainanim();
-  var0.radiussqrd = squared(400);
-  var0.fninterrupt = &onenemy;
-  var0.nextusetime = 60;
-  return var0;
+  var_0 = scripts\smartobjects\utility::createsmartobjectinfo();
+  var_0.animstatename = "smartobject_look_under_10";
+  var_0 scripts\smartobjects\utility::addsmartobjectintroanim("enter_loop");
+  var_0 scripts\smartobjects\utility::addsmartobjectanim("loop");
+  var_0 scripts\smartobjects\utility::addsmartobjectoutroanim("exit_loop");
+  var_0 scripts\smartobjects\utility::addsmartobjectdeathanim("death");
+  var_0 scripts\smartobjects\utility::addsmartobjectreactanim();
+  var_0 scripts\smartobjects\utility::addsmartobjectpainanim();
+  var_0.radiussqrd = squared(400);
+  var_0.fninterrupt = &onenemy;
+  var_0.nextusetime = 60;
+  return var_0;
 }
 
 function onenemy() {

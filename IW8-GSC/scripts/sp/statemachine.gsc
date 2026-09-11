@@ -3,15 +3,15 @@
  * Script: scripts\sp\statemachine.gsc
 ***********************************************/
 
-function begin_fsm(var0, var1) {
+function begin_fsm(var_0, var_1) {
   self.previousstate = undefined;
   self.currentstate = undefined;
   self.permanentnotifyhandlers = undefined;
   self.currentnotifyhandlers = undefined;
-  self.states = var0;
+  self.states = var_0;
 
-  if(isDefined(var1)) {
-    self.initialstate = var1;
+  if(isDefined(var_1)) {
+    self.initialstate = var_1;
   } else if(isDefined(self.states[0][0])) {
     self.initialstate = self.states[0][0];
   }
@@ -19,14 +19,14 @@ function begin_fsm(var0, var1) {
   goto_state(self.initialstate);
 }
 
-function goto_state(var0) {
-  thread perform_state_change(var0);
+function goto_state(var_0) {
+  thread perform_state_change(var_0);
 }
 
-function perform_state_change(var0) {
-  var1 = get_state(var0);
+function perform_state_change(var_0) {
+  var_1 = get_state(var_0);
 
-  if(isDefined(var1)) {
+  if(isDefined(var_1)) {
     if(isDefined(self.currentstate)) {
       self.previousstate = self.currentstate;
     }
@@ -36,21 +36,21 @@ function perform_state_change(var0) {
 
     if(isDefined(self.previousstate)) {
       if(isDefined(self.previousstate[3])) {
-        var2 = self.previousstate[3];
-        [[var2]]();
+        var_2 = self.previousstate[3];
+        [[var_2]]();
       }
     }
 
-    self.currentstate = var1;
+    self.currentstate = var_1;
 
     if(isDefined(self.currentstate[1])) {
-      var3 = self.currentstate[1];
-      set_enter_function(var3);
+      var_3 = self.currentstate[1];
+      set_enter_function(var_3);
     }
 
     if(isDefined(self.currentstate[2])) {
-      var4 = self.currentstate[2];
-      thread set_update_function(var4);
+      var_4 = self.currentstate[2];
+      thread set_update_function(var_4);
       return;
     }
 
@@ -65,87 +65,87 @@ function goto_state_previous() {
   }
 }
 
-function get_state(var0) {
-  foreach(var2 in self.states) {
-    if(var2[0] == var0) {
-      return var2;
+function get_state(var_0) {
+  foreach(var_2 in self.states) {
+    if(var_2[0] == var_0) {
+      return var_2;
     }
   }
 
   return undefined;
 }
 
-function set_enter_function(var0) {
+function set_enter_function(var_0) {
   self endon("death");
   self endon("changed_state");
-  self thread[[var0]]();
+  self thread[[var_0]]();
 }
 
-function set_update_function(var0) {
+function set_update_function(var_0) {
   self endon("death");
   self endon("changed_state");
 
   for(;;) {
-    [[var0]]();
+    [[var_0]]();
     waitframe();
   }
 }
 
-function set_notify_handlers(var0) {
-  self.currentnotifyhandlers = var0;
+function set_notify_handlers(var_0) {
+  self.currentnotifyhandlers = var_0;
 
-  foreach(var2 in var0) {
-    var3 = -1;
+  foreach(var_2 in var_0) {
+    var_3 = -1;
 
-    if(isDefined(var2[2])) {
-      var3 = var2[2];
+    if(isDefined(var_2[2])) {
+      var_3 = var_2[2];
     }
 
-    thread state_nofity_handler(var2[0], var2[1], var3);
+    thread state_nofity_handler(var_2[0], var_2[1], var_3);
   }
 }
 
-function set_permanent_notify_handlers(var0) {
-  self.permanentnotifyhandlers = var0;
+function set_permanent_notify_handlers(var_0) {
+  self.permanentnotifyhandlers = var_0;
 
-  foreach(var2 in var0) {
-    var3 = -1;
+  foreach(var_2 in var_0) {
+    var_3 = -1;
 
-    if(isDefined(var2[2])) {
-      var3 = var2[2];
+    if(isDefined(var_2[2])) {
+      var_3 = var_2[2];
     }
 
-    thread permanent_notify_handler(var2[0], var2[1], var3);
+    thread permanent_notify_handler(var_2[0], var_2[1], var_3);
   }
 }
 
-function state_nofity_handler(var0, var1, var2) {
+function state_nofity_handler(var_0, var_1, var_2) {
   self endon("death");
   self endon("changed_state");
-  start_handler(var0, var1, var2);
+  start_handler(var_0, var_1, var_2);
 }
 
-function permanent_notify_handler(var0, var1, var2) {
+function permanent_notify_handler(var_0, var_1, var_2) {
   self endon("death");
-  start_handler(var0, var1, var2);
+  start_handler(var_0, var_1, var_2);
 }
 
-function start_handler(var0, var1, var2) {
+function start_handler(var_0, var_1, var_2) {
   self notify("new_handler");
 
-  for(var3 = 1; var3; var3 = 0) {
-    self waittill(var0, var4);
+  for(var_3 = 1; var_3; var_3 = 0) {
+    self waittill(var_0, var_4);
 
-    if(isDefined(var4)) {
-      [[var1]](var4);
+    if(isDefined(var_4)) {
+      [[var_1]](var_4);
     } else {
-      [[var1]]();
+      [[var_1]]();
     }
 
-    if(var2 >= 0) {
-      var2--;
+    if(var_2 >= 0) {
+      var_2--;
 
-      if(var2 == 0) {}
+      if(var_2 == 0) {}
     }
   }
 }

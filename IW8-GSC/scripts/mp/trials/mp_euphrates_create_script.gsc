@@ -3,7 +3,7 @@
  * Script: scripts\mp\trials\mp_euphrates_create_script.gsc
 ************************************************************/
 
-function ref_12d4b(var0) {
+function ref_12d4b(var_0) {
   if(istrue(self.disabledstate)) {
     return anim.success;
   }
@@ -14,7 +14,7 @@ function ref_12d4b(var0) {
   return anim.success;
 }
 
-function ref_12d4c(var0) {
+function ref_12d4c(var_0) {
   if(istrue(self.disabledstate)) {
     return anim.success;
   }
@@ -112,7 +112,7 @@ function ref_12c1c() {
   }
 }
 
-function ref_12d49(var0) {
+function ref_12d49(var_0) {
   if(istrue(self.clear_kill_off_flags_after_unload_wait)) {
     self._blackboard.weaponrequest = "mg";
     self setbtgoalpos(2, self.origin);
@@ -132,16 +132,16 @@ function ref_12d49(var0) {
 function modifybrvehicledamage() {
   self endon("death");
   self.clear_kill_off_flags_after_unload_wait = 1;
-  var0 = 10000;
-  var1 = gettime();
+  var_0 = 10000;
+  var_1 = gettime();
 
-  while(!self asmeventfired(self.asmname, "drop_shield") && var1 + var0 > gettime()) {
+  while(!self asmeventfired(self.asmname, "drop_shield") && var_1 + var_0 > gettime()) {
     waitframe();
   }
 
-  var2 = var1 + var0 <= gettime();
+  var_2 = var_1 + var_0 <= gettime();
 
-  if(var2) {
+  if(var_2) {
     ref_12c80();
     self._blackboard.weaponrequest = "none";
     self.clear_kill_off_flags_after_unload_wait = undefined;
@@ -152,18 +152,18 @@ function modifybrvehicledamage() {
   scripts\asm\shared\utility::setbasearchetype("soldier_cp");
   scripts\asm\shared\utility::setoverridearchetype("default", "soldier_cp");
   scripts\asm\soldier\script_funcs::initanimspeedthresholds_soldier("soldier_cp");
-  var3 = self gettagorigin(self.ref_12d50);
-  var4 = self gettagangles(self.ref_12d50);
-  var5 = spawn("script_model", var3);
-  var5.angles = var4;
-  var5 setModel(self.riotshieldmodel);
-  var5 physicslaunchserver(var3, anglesToForward(self.angles) * 5);
-  thread deleteaftertime(var5);
+  var_3 = self gettagorigin(self.ref_12d50);
+  var_4 = self gettagangles(self.ref_12d50);
+  var_5 = spawn("script_model", var_3);
+  var_5.angles = var_4;
+  var_5 setModel(self.riotshieldmodel);
+  var_5 physicslaunchserver(var_3, anglesToForward(self.angles) * 5);
+  thread deleteaftertime(var_5);
 
   if(isDefined(self.ref_13b2c)) {
-    foreach(var7 in self.ref_13b2c) {
-      if(isDefined(var7)) {
-        var7 delete();
+    foreach(var_7 in self.ref_13b2c) {
+      if(isDefined(var_7)) {
+        var_7 delete();
       }
     }
   }
@@ -176,12 +176,12 @@ function modifybrvehicledamage() {
   ref_13af8();
   self._blackboard.weaponrequest = "none";
   scripts\aitypes\bt_util::bt_terminateandreplace("soldier_agent");
-  var9 = weaponclass(self.weapon);
-  scripts\anim\shared::updateweaponarchetype(var9);
+  var_9 = weaponclass(self.weapon);
+  scripts\anim\shared::updateweaponarchetype(var_9);
 }
 
-function deleteaftertime(var0) {
+function deleteaftertime(var_0) {
   self endon("death");
-  wait var0;
+  wait var_0;
   self delete();
 }

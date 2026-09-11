@@ -3,64 +3,64 @@
  * Script: scripts\asm\soldier\traverse.gsc
 ***********************************************/
 
-function playtraverseanim_deprecated(var0, var1, var2) {
+function playtraverseanim_deprecated(var_0, var_1, var_2) {
   self endon("death");
   self endon("terminate_ai_threads");
-  scripts\asm\traverse::checktraverse(var1);
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  var4 = scripts\asm\asm::asm_getxanim(var1, var3);
+  scripts\asm\traverse::checktraverse(var_1);
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, var_3);
   self.desired_anim_pose = "crouch";
   scripts\anim\utility::updateanimpose();
   self endon("killanimscript");
   self animmode("noclip");
-  var5 = self getnegotiationstartnode();
-  self orientmode("face angle", var5.angles[1]);
-  var5.traverse_height = var5.origin[2] + var5.traverse_height_delta;
-  var6 = var5.traverse_height - var5.origin[2];
-  thread teleportthread(var6 - var2);
-  var7 = 0.15;
-  self aisetanim(var1, var3);
-  var8 = 0.2;
-  var9 = 0.2;
-  thread traverse_donotetracks(var0, var1);
+  var_5 = self getnegotiationstartnode();
+  self orientmode("face angle", var_5.angles[1]);
+  var_5.traverse_height = var_5.origin[2] + var_5.traverse_height_delta;
+  var_6 = var_5.traverse_height - var_5.origin[2];
+  thread teleportthread(var_6 - var_2);
+  var_7 = 0.15;
+  self aisetanim(var_1, var_3);
+  var_8 = 0.2;
+  var_9 = 0.2;
+  thread traverse_donotetracks(var_0, var_1);
 
-  if(!animhasnotetrack(var4, "gravity on")) {
-    var10 = 1.23;
-    wait var10 - var8;
+  if(!animhasnotetrack(var_4, "gravity on")) {
+    var_10 = 1.23;
+    wait var_10 - var_8;
     self animmode("gravity");
-    wait var8;
+    wait var_8;
   } else {
     self waittillmatch("traverse", "gravity on");
     self animmode("gravity");
 
-    if(!animhasnotetrack(var4, "blend")) {
-      wait var8;
+    if(!animhasnotetrack(var_4, "blend")) {
+      wait var_8;
     } else {
       self waittillmatch("traverse", "blend");
     }
   }
 
-  terminatetraverse(var0, var1);
+  terminatetraverse(var_0, var_1);
 }
 
-function handletraverselegacynotetracks(var0) {
-  if(var0 == "traverse_death") {
+function handletraverselegacynotetracks(var_0) {
+  if(var_0 == "traverse_death") {
     return handletraversedeathnotetrack();
   }
 
-  if(var0 == "traverse_align") {
+  if(var_0 == "traverse_align") {
     return handletraversealignment();
   }
 
-  if(var0 == "traverse_drop") {
+  if(var_0 == "traverse_drop") {
     return handletraversedrop();
   }
 }
 
 function handletraversedeathnotetrack() {
   if(isDefined(self.traversedeathanim)) {
-    var0 = self.traversedeathanim[self.traversedeathindex];
-    self.deathanim = var0[randomint(var0.size)];
+    var_0 = self.traversedeathanim[self.traversedeathindex];
+    self.deathanim = var_0[randomint(var_0.size)];
     self.traversedeathindex++;
     return;
   }
@@ -70,44 +70,44 @@ function handletraversealignment() {
   self animmode("noclip");
 
   if(isDefined(self.traverseheight) && isDefined(self.traversestartnode.traverse_height)) {
-    var0 = self.traversestartnode.traverse_height - self.traversestartz;
-    thread teleportthread(var0 - self.traverseheight);
+    var_0 = self.traversestartnode.traverse_height - self.traversestartz;
+    thread teleportthread(var_0 - self.traverseheight);
     return;
   }
 }
 
 function handletraversedrop() {
-  var0 = self.origin + (0, 0, 32);
-  var1 = physicstrace(var0, self.origin + (0, 0, -512));
-  var2 = distance(var0, var1);
-  var3 = var2 - 32 - 0.5;
-  var4 = self aigetanimtime(self.traversexanim);
-  var5 = getmovedelta(self.traversexanim, var4, 1);
-  var6 = getanimlength(self.traversexanim);
-  var7 = var4 * var6;
-  var8 = 0 - var5[2];
-  var9 = var8 - var3;
+  var_0 = self.origin + (0, 0, 32);
+  var_1 = physicstrace(var_0, self.origin + (0, 0, -512));
+  var_2 = distance(var_0, var_1);
+  var_3 = var_2 - 32 - 0.5;
+  var_4 = self aigetanimtime(self.traversexanim);
+  var_5 = getmovedelta(self.traversexanim, var_4, 1);
+  var_6 = getanimlength(self.traversexanim);
+  var_7 = var_4 * var_6;
+  var_8 = 0 - var_5[2];
+  var_9 = var_8 - var_3;
 
-  if(var8 < var3) {
-    var10 = var8 / var3;
+  if(var_8 < var_3) {
+    var_10 = var_8 / var_3;
   } else {
-    var10 = 1;
+    var_10 = 1;
   }
 
-  var11 = (var7 - var5) / 3;
-  var12 = (var7 - var8) / 3;
-  var13 = ceil(var12 * 20);
-  thread teleportthreadex(var10, 0, var13, var10);
-  thread finishtraversedrop(var2[2]);
+  var_11 = (var_7 - var_5) / 3;
+  var_12 = (var_7 - var_8) / 3;
+  var_13 = ceil(var_12 * 20);
+  thread teleportthreadex(var_10, 0, var_13, var_10);
+  thread finishtraversedrop(var_2[2]);
 }
 
-function finishtraversedrop(var0) {
+function finishtraversedrop(var_0) {
   self endon("killanimscript");
   self endon("death");
-  var0 += 4;
+  var_0 += 4;
 
   for(;;) {
-    if(self.origin[2] < var0) {
+    if(self.origin[2] < var_0) {
       self animmode("gravity");
       break;
     }
@@ -116,186 +116,186 @@ function finishtraversedrop(var0) {
   }
 }
 
-function playtraverseanim(var0, var1, var2) {
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  scripts\asm\traverse::checktraverse(var1);
+function playtraverseanim(var_0, var_1, var_2) {
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  scripts\asm\traverse::checktraverse(var_1);
   self animmode("noclip");
-  var4 = self getnegotiationstartnode();
-  self orientmode("face angle", var4.angles[1]);
-  self aisetanim(var1, var3);
-  scripts\asm\asm::asm_donotetracks(var0, var1);
-  terminatetraverse(var0, var1);
+  var_4 = self getnegotiationstartnode();
+  self orientmode("face angle", var_4.angles[1]);
+  self aisetanim(var_1, var_3);
+  scripts\asm\asm::asm_donotetracks(var_0, var_1);
+  terminatetraverse(var_0, var_1);
 }
 
-function teleportthread(var0) {
+function teleportthread(var_0) {
   self endon("killanimscript");
   self notify("endTeleportThread");
   self endon("endTeleportThread");
-  var1 = 5;
-  var2 = (0, 0, var0 / var1);
+  var_1 = 5;
+  var_2 = (0, 0, var_0 / var_1);
 
-  for(var3 = 0; var3 < var1; var3++) {
-    self forceteleport(self.origin + var2);
+  for(var_3 = 0; var_3 < var_1; var_3++) {
+    self forceteleport(self.origin + var_2);
     waitframe();
   }
 }
 
-function teleportthreadex(var0, var1, var2, var3) {
+function teleportthreadex(var_0, var_1, var_2, var_3) {
   self endon("killanimscript");
   self endon("death");
   self notify("endTeleportThread");
   self endon("endTeleportThread");
 
-  if(var0 == 0 || var2 <= 0) {
+  if(var_0 == 0 || var_2 <= 0) {
     return;
   }
 
-  if(var1 > 0) {
-    wait var1;
+  if(var_1 > 0) {
+    wait var_1;
   }
 
-  var4 = (0, 0, var0 / var2);
+  var_4 = (0, 0, var_0 / var_2);
 
-  if(isDefined(var3) && var3 < 1) {
-    self aisetanimrate(self.traversexanim, var3);
+  if(isDefined(var_3) && var_3 < 1) {
+    self aisetanimrate(self.traversexanim, var_3);
   }
 
-  for(var5 = 0; var5 < var2; var5++) {
-    self forceteleport(self.origin + var4);
+  for(var_5 = 0; var_5 < var_2; var_5++) {
+    self forceteleport(self.origin + var_4);
     waitframe();
   }
 
-  if(isDefined(var3) && var3 < 1) {
+  if(isDefined(var_3) && var_3 < 1) {
     self aisetanimrate(self.traversexanim, 1);
     return;
   }
 }
 
-function playtraverseanim_doublejump(var0, var1, var2) {
+function playtraverseanim_doublejump(var_0, var_1, var_2) {
   self endon("death");
   self endon("terminate_ai_threads");
-  self endon(var1 + "_finished");
-  var3 = getdvarint("ai_debug_doublejump", 0);
+  self endon(var_1 + "_finished");
+  var_3 = getdvarint("ai_debug_doublejump", 0);
 
-  if(var3 != 3 && var3 != 4) {
-    scripts\asm\traverse::checktraverse(var1);
+  if(var_3 != 3 && var_3 != 4) {
+    scripts\asm\traverse::checktraverse(var_1);
   }
 
   self.ragdoll_immediate = 1;
-  var4 = self getnegotiationstartnode();
-  var5 = self getnegotiationendpos();
-  var4.traverse_height = var4.origin[2] + var4.traverse_height_delta - 44;
-  var6 = [];
+  var_4 = self getnegotiationstartnode();
+  var_5 = self getnegotiationendpos();
+  var_4.traverse_height = var_4.origin[2] + var_4.traverse_height_delta - 44;
+  var_6 = [];
 
-  if(var4.traverse_height > var5[2]) {
-    var7 = (var4.origin[0] + var5[0]) * 0.5;
-    var8 = (var4.origin[1] + var5[1]) * 0.5;
-    var6 = (var7, var8, var4.traverse_height);
+  if(var_4.traverse_height > var_5[2]) {
+    var_7 = (var_4.origin[0] + var_5[0]) * 0.5;
+    var_8 = (var_4.origin[1] + var_5[1]) * 0.5;
+    var_6 = (var_7, var_8, var_4.traverse_height);
   }
 
-  GscBinSkip0(0x2e, var6.size, var5);
+  GscBinSkip0(0x2e, var_6.size, var_5);
 }
 
-function traverse_doublejump_cleanup(var0, var1, var2) {
+function traverse_doublejump_cleanup(var_0, var_1, var_2) {
   self unlink();
   self.ragdoll_immediate = undefined;
 }
 
-function traverse_donotetracks(var0, var1) {
+function traverse_donotetracks(var_0, var_1) {
   self endon("death");
   self endon("terminate_ai_threads");
-  self endon(var1 + "_finished");
+  self endon(var_1 + "_finished");
   self endon("double_jumped");
-  scripts\asm\asm::asm_donotetracks(var0, var1);
+  scripts\asm\asm::asm_donotetracks(var_0, var_1);
 }
 
-function getexternaltraverseinfo(var0) {
-  return level.scr_traverse[var0];
+function getexternaltraverseinfo(var_0) {
+  return level.scr_traverse[var_0];
 }
 
-function playtraverseanim_external(var0, var1, var2) {
-  scripts\asm\traverse::playtraverseanim_scaled(var0, var1);
+function playtraverseanim_external(var_0, var_1, var_2) {
+  scripts\asm\traverse::playtraverseanim_scaled(var_0, var_1);
 }
 
-function choosetraverseanim_external(var0, var1, var2) {
-  var3 = self getnegotiationstartnode();
-  var4 = var3.animscript;
-  var5 = getexternaltraverseinfo(var4);
-  return var5;
+function choosetraverseanim_external(var_0, var_1, var_2) {
+  var_3 = self getnegotiationstartnode();
+  var_4 = var_3.animscript;
+  var_5 = getexternaltraverseinfo(var_4);
+  return var_5;
 }
 
-function playdoublejumpfinishanim(var0, var1, var2) {
-  self endon(var1 + "_finished");
+function playdoublejumpfinishanim(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
   self animmode("noclip");
   self orientmode("face angle", self.angles[1]);
   self.useanimgoalweight = 1;
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  self aisetanim(var1, var3);
-  var4 = scripts\asm\asm::asm_getxanim(var1, var3);
-  scripts\asm\asm::asm_playfacialanim(var0, var1, var4);
-  scripts\asm\asm::asm_donotetracks(var0, var1);
-  thread terminatetraverse(var0, var1);
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  self aisetanim(var_1, var_3);
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, var_3);
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_4);
+  scripts\asm\asm::asm_donotetracks(var_0, var_1);
+  thread terminatetraverse(var_0, var_1);
 }
 
-function getdoublejumpoffsetposition(var0, var1, var2, var3, var4) {
-  var5 = scripts\asm\asm::asm_chooseanim(var0, var1);
-  var6 = scripts\asm\asm::asm_getxanim(var1, var5);
-  var7 = getnotetracktimes(var6, var4);
-  var8 = var7[0];
-  var9 = getmovedelta(var6, 0, var8);
-  var10 = getangledelta(var6, 0, var8);
-  return scripts\asm\soldier\cover::calcanimstartpos(var2, var3[1], var9, var10);
+function getdoublejumpoffsetposition(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = scripts\asm\asm::asm_chooseanim(var_0, var_1);
+  var_6 = scripts\asm\asm::asm_getxanim(var_1, var_5);
+  var_7 = getnotetracktimes(var_6, var_4);
+  var_8 = var_7[0];
+  var_9 = getmovedelta(var_6, 0, var_8);
+  var_10 = getangledelta(var_6, 0, var_8);
+  return scripts\asm\soldier\cover::calcanimstartpos(var_2, var_3[1], var_9, var_10);
 }
 
-function doublejumpneedsfinishanim(var0, var1, var2, var3) {
-  var4 = var3[2] - var2.origin[2];
+function doublejumpneedsfinishanim(var_0, var_1, var_2, var_3) {
+  var_4 = var_3[2] - var_2.origin[2];
 
-  if(var4 < 0) {
+  if(var_4 < 0) {
     return false;
   }
 
-  if(isDefined(var2.jump_over_offset) && getdvarint("ai_debug_doublejump", 0) != 2) {
-    var5 = var2.jump_over_offset;
-    var6 = var2.angles - var2.startnodeoriginalangles;
+  if(isDefined(var_2.jump_over_offset) && getdvarint("ai_debug_doublejump", 0) != 2) {
+    var_5 = var_2.jump_over_offset;
+    var_6 = var_2.angles - var_2.startnodeoriginalangles;
 
-    if(var6 != (0, 0, 0)) {
-      var5 = rotatevector(var5, var6);
+    if(var_6 != (0, 0, 0)) {
+      var_5 = rotatevector(var_5, var_6);
     }
 
-    var7 = var2.origin + var5;
-    var8 = var7[2];
-    var8 -= 44;
+    var_7 = var_2.origin + var_5;
+    var_8 = var_7[2];
+    var_8 -= 44;
 
-    if(var3[2] < var8) {
+    if(var_3[2] < var_8) {
       return false;
     }
   }
 
-  var9 = var3 - var2.origin;
-  var9 = (var9[0], var9[1], 0);
-  var10 = vectortoangles(var9);
-  var11 = getdoublejumpoffsetposition(var0, var1, var3, var10, "footstep_left_small");
-  var12 = var11 - var2.origin;
+  var_9 = var_3 - var_2.origin;
+  var_9 = (var_9[0], var_9[1], 0);
+  var_10 = vectortoangles(var_9);
+  var_11 = getdoublejumpoffsetposition(var_0, var_1, var_3, var_10, "footstep_left_small");
+  var_12 = var_11 - var_2.origin;
 
-  if(vectordot(var12, var9) < 0) {
+  if(vectordot(var_12, var_9) < 0) {
     return false;
   }
 
   return true;
 }
 
-function checkdoublejumpfinish(var0, var1, var2, var3) {
-  var4 = gettraversalstartnode();
+function checkdoublejumpfinish(var_0, var_1, var_2, var_3) {
+  var_4 = gettraversalstartnode();
 
-  if(!isDefined(var4)) {
-    thread terminatetraverse(var0, "double_jump");
+  if(!isDefined(var_4)) {
+    thread terminatetraverse(var_0, "double_jump");
     return false;
   }
 
-  var5 = gettraversalendpos();
+  var_5 = gettraversalendpos();
 
-  if(!doublejumpneedsfinishanim(var0, var2, var4, var5)) {
-    thread terminatetraverse(var0, "double_jump");
+  if(!doublejumpneedsfinishanim(var_0, var_2, var_4, var_5)) {
+    thread terminatetraverse(var_0, "double_jump");
     return false;
   }
 
@@ -318,317 +318,317 @@ function gettraversalendpos() {
   return self getnegotiationendpos();
 }
 
-function playdoublejumpmantleorvault(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  var3 = gettraversalstartnode();
-  var4 = var3.doublejumpmantlepos;
-  var5 = var4 - var3.origin;
-  var5 = (var5[0], var5[1], 0);
-  var6 = vectortoangles(var5);
-  var7 = scripts\asm\asm::asm_getanim(var0, var1);
-  var8 = var1 + "_finish";
-  var9 = getdoublejumpoffsetposition(var0, var8, var4, var6, "mantle_align");
-  var9 = (var9[0], var9[1], var9[2] + var2);
-  playscaledjump(var0, var1, var7, var9, var6, 1, 0, 1);
+function playdoublejumpmantleorvault(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  var_3 = gettraversalstartnode();
+  var_4 = var_3.doublejumpmantlepos;
+  var_5 = var_4 - var_3.origin;
+  var_5 = (var_5[0], var_5[1], 0);
+  var_6 = vectortoangles(var_5);
+  var_7 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_8 = var_1 + "_finish";
+  var_9 = getdoublejumpoffsetposition(var_0, var_8, var_4, var_6, "mantle_align");
+  var_9 = (var_9[0], var_9[1], var_9[2] + var_2);
+  playscaledjump(var_0, var_1, var_7, var_9, var_6, 1, 0, 1);
 }
 
-function playdoublejumpmantle(var0, var1, var2) {
-  playdoublejumpmantleorvault(var0, var1, -8);
+function playdoublejumpmantle(var_0, var_1, var_2) {
+  playdoublejumpmantleorvault(var_0, var_1, -8);
 }
 
-function playdoublejumpvault(var0, var1, var2) {
-  playdoublejumpmantleorvault(var0, var1, -42);
+function playdoublejumpvault(var_0, var_1, var_2) {
+  playdoublejumpmantleorvault(var_0, var_1, -42);
 }
 
-function doublejumpterminate(var0, var1, var2) {
+function doublejumpterminate(var_0, var_1, var_2) {
   self.useanimgoalweight = 0;
   self.jump_over_position = undefined;
   self.traversal_start_node = undefined;
   self.traversal_end_pos = undefined;
 }
 
-function doublejumpearlyterminate(var0, var1, var2) {
-  if(!scripts\asm\asm::asm_eventfired(var0, "end")) {
-    doublejumpterminate(var0, var1, var2);
+function doublejumpearlyterminate(var_0, var_1, var_2) {
+  if(!scripts\asm\asm::asm_eventfired(var_0, "end")) {
+    doublejumpterminate(var_0, var_1, var_2);
     return;
   }
 }
 
-function isdoublejumpanimdone(var0, var1, var2, var3) {
-  return scripts\asm\asm::asm_eventfired(var0, "end");
+function isdoublejumpanimdone(var_0, var_1, var_2, var_3) {
+  return scripts\asm\asm::asm_eventfired(var_0, "end");
 }
 
-function playdoublejumptraversal(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  var3 = gettraversalstartnode();
-  var4 = gettraversalendpos();
+function playdoublejumptraversal(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  var_3 = gettraversalstartnode();
+  var_4 = gettraversalendpos();
 
-  if(!isDefined(var3.startnodeoriginalangles)) {
-    var3.startnodeoriginalangles = var3.angles;
+  if(!isDefined(var_3.startnodeoriginalangles)) {
+    var_3.startnodeoriginalangles = var_3.angles;
   }
 
-  var5 = var3.angles - var3.startnodeoriginalangles;
+  var_5 = var_3.angles - var_3.startnodeoriginalangles;
 
-  if(var5 != (0, 0, 0)) {
-    var4 = rotatevector(var4, var5);
+  if(var_5 != (0, 0, 0)) {
+    var_4 = rotatevector(var_4, var_5);
   }
 
-  var6 = undefined;
-  var7 = getdvarint("ai_debug_doublejump", 0);
+  var_6 = undefined;
+  var_7 = getdvarint("ai_debug_doublejump", 0);
 
-  if(var7 != 2) {
-    if(isDefined(var3.jump_over_offset)) {
-      var8 = var3.jump_over_offset;
+  if(var_7 != 2) {
+    if(isDefined(var_3.jump_over_offset)) {
+      var_8 = var_3.jump_over_offset;
 
-      if(var5 != (0, 0, 0)) {
-        var8 = rotatevector(var8, var5);
+      if(var_5 != (0, 0, 0)) {
+        var_8 = rotatevector(var_8, var_5);
       }
 
-      var6 = var3.origin + var8;
-      var9 = var6[2];
-      var9 -= 44;
+      var_6 = var_3.origin + var_8;
+      var_9 = var_6[2];
+      var_9 -= 44;
 
-      if(var9 > var4[2]) {
-        var10 = (var3.origin[0] + var4[0]) * 0.5;
-        var11 = (var3.origin[1] + var4[1]) * 0.5;
-        var6 = (var10, var11, var6[2]);
+      if(var_9 > var_4[2]) {
+        var_10 = (var_3.origin[0] + var_4[0]) * 0.5;
+        var_11 = (var_3.origin[1] + var_4[1]) * 0.5;
+        var_6 = (var_10, var_11, var_6[2]);
       } else {
-        var6 = undefined;
+        var_6 = undefined;
       }
     }
   }
 
-  var12 = scripts\asm\asm::asm_getanim(var0, var1);
-  self.jump_over_position = var6;
-  var13 = var1 + "_finish";
+  var_12 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  self.jump_over_position = var_6;
+  var_13 = var_1 + "_finish";
 
-  if(doublejumpneedsfinishanim(var0, var13, var3, var4)) {
-    var14 = var4 - var3.origin;
-    var14 = (var14[0], var14[1], 0);
-    var15 = vectortoangles(var14);
-    var13 = var1 + "_finish";
-    var16 = getdoublejumpoffsetposition(var0, var13, var4, var15, "footstep_left_small");
-    var4 = var16;
+  if(doublejumpneedsfinishanim(var_0, var_13, var_3, var_4)) {
+    var_14 = var_4 - var_3.origin;
+    var_14 = (var_14[0], var_14[1], 0);
+    var_15 = vectortoangles(var_14);
+    var_13 = var_1 + "_finish";
+    var_16 = getdoublejumpoffsetposition(var_0, var_13, var_4, var_15, "footstep_left_small");
+    var_4 = var_16;
   }
 
-  var14 = var4 - var3.origin;
-  var17 = 0;
-  var18 = 1;
+  var_14 = var_4 - var_3.origin;
+  var_17 = 0;
+  var_18 = 1;
 
-  if(var14[2] < 0) {
-    var17 = 1;
-    var19 = getnotetracktimes(scripts\asm\asm::asm_getxanim(var1, var12), "gravity on");
+  if(var_14[2] < 0) {
+    var_17 = 1;
+    var_19 = getnotetracktimes(scripts\asm\asm::asm_getxanim(var_1, var_12), "gravity on");
 
-    if(isDefined(var19) && var19.size > 0) {
-      var18 = var19[0];
+    if(isDefined(var_19) && var_19.size > 0) {
+      var_18 = var_19[0];
     }
   }
 
-  var14 = (var14[0], var14[1], 0);
-  var15 = vectortoangles(var14);
-  playscaledjump(var0, var1, var12, var4, var15, var18, var17, 1);
+  var_14 = (var_14[0], var_14[1], 0);
+  var_15 = vectortoangles(var_14);
+  playscaledjump(var_0, var_1, var_12, var_4, var_15, var_18, var_17, 1);
 }
 
-function choosedoublejumpanim(var0, var1, var2) {
-  var3 = gettraversalendpos();
-  var4 = "double_jump_up";
+function choosedoublejumpanim(var_0, var_1, var_2) {
+  var_3 = gettraversalendpos();
+  var_4 = "double_jump_up";
 
-  if(isDefined(var2)) {
-    var4 = "double_jump_" + var2;
-  } else if(var3[2] < self.origin[2]) {
-    var4 = "double_jump_down";
+  if(isDefined(var_2)) {
+    var_4 = "double_jump_" + var_2;
+  } else if(var_3[2] < self.origin[2]) {
+    var_4 = "double_jump_down";
   }
 
   if(self.asm.footsteps.foot == "right") {
-    var5 = "right_";
+    var_5 = "right_";
   } else {
-    var5 = "left_";
+    var_5 = "left_";
   }
 
-  var5 += var5;
-  var6 = scripts\asm\asm::asm_lookupanimfromalias(var2, var5);
-  return var6;
+  var_5 += var_5;
+  var_6 = scripts\asm\asm::asm_lookupanimfromalias(var_2, var_5);
+  return var_6;
 }
 
-function getwallnodeposition(var0, var1) {
-  var2 = var0.angles - var0.wall_info.startnodeoriginalangles;
+function getwallnodeposition(var_0, var_1) {
+  var_2 = var_0.angles - var_0.wall_info.startnodeoriginalangles;
 
-  if(var2 != (0, 0, 0)) {
-    var3 = rotatevector(var0.wall_info.nodeoffsets[var1], var2);
-    var4 = var0.origin + var3;
+  if(var_2 != (0, 0, 0)) {
+    var_3 = rotatevector(var_0.wall_info.nodeoffsets[var_1], var_2);
+    var_4 = var_0.origin + var_3;
   } else {
-    var4 = var1.origin + var1.wall_info.nodeoffsets[var2];
+    var_4 = var_1.origin + var_1.wall_info.nodeoffsets[var_2];
   }
 
-  return var4;
+  return var_4;
 }
 
-function shouldwallrunshoot(var0, var1, var2, var3) {
+function shouldwallrunshoot(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.enemy)) {
     return false;
   }
 
-  var4 = self.enemy.origin;
-  var5 = self.traversal_start_node;
-  var6 = getwallnodeposition(var5, self.wall_run_current_node_index);
-  var7 = getwallnodeposition(var5, self.wall_run_current_node_index + 1);
-  var7 = (var7[0], var7[1], var6[2]);
-  var4 = (var4[0], var4[1], var6[2]);
-  var8 = vectorNormalize(var7 - var6);
-  var9 = vectorNormalize(var4 - var6);
-  var10 = vectordot(var8, var9);
+  var_4 = self.enemy.origin;
+  var_5 = self.traversal_start_node;
+  var_6 = getwallnodeposition(var_5, self.wall_run_current_node_index);
+  var_7 = getwallnodeposition(var_5, self.wall_run_current_node_index + 1);
+  var_7 = (var_7[0], var_7[1], var_6[2]);
+  var_4 = (var_4[0], var_4[1], var_6[2]);
+  var_8 = vectorNormalize(var_7 - var_6);
+  var_9 = vectorNormalize(var_4 - var_6);
+  var_10 = vectordot(var_8, var_9);
 
-  if(var10 < 0.2588) {
+  if(var_10 < 0.2588) {
     return false;
   }
 
   return true;
 }
 
-function choosewallrunanim(var0, var1, var2) {
-  var3 = scripts\asm\asm::asm_lookupanimfromalias(var1, self.wall_run_direction);
-  return var3;
+function choosewallrunanim(var_0, var_1, var_2) {
+  var_3 = scripts\asm\asm::asm_lookupanimfromalias(var_1, self.wall_run_direction);
+  return var_3;
 }
 
-function getsmoothstep(var0) {
-  return var0 * var0 * (3 - 2 * var0);
+function getsmoothstep(var_0) {
+  return var_0 * var_0 * (3 - 2 * var_0);
 }
 
-function teleportdeltaovernumframes(var0, var1, var2, var3, var4, var5) {
-  self endon(var0 + "_finished");
+function teleportdeltaovernumframes(var_0, var_1, var_2, var_3, var_4, var_5) {
+  self endon(var_0 + "_finished");
 
-  if(var1 > 0) {
-    wait var1;
+  if(var_1 > 0) {
+    wait var_1;
   }
 
-  var6 = var2 / var3;
-  var7 = self.origin[2];
-  var8 = var7 + var2[2];
-  var9 = self.origin[2];
-  self setanimrate(var4, var5);
+  var_6 = var_2 / var_3;
+  var_7 = self.origin[2];
+  var_8 = var_7 + var_2[2];
+  var_9 = self.origin[2];
+  self setanimrate(var_4, var_5);
 
-  for(var10 = 0; var10 < var3; var10++) {
-    var11 = 1;
+  for(var_10 = 0; var_10 < var_3; var_10++) {
+    var_11 = 1;
 
-    if(var11) {
-      var12 = var10 / (var3 - 1);
-      var13 = getsmoothstep(var12);
-      var14 = var8 * var13 + var7 * (1 - var13);
-      var15 = var14 - var9;
-      var6 = (var6[0], var6[1], var15);
-      var9 = var14;
+    if(var_11) {
+      var_12 = var_10 / (var_3 - 1);
+      var_13 = getsmoothstep(var_12);
+      var_14 = var_8 * var_13 + var_7 * (1 - var_13);
+      var_15 = var_14 - var_9;
+      var_6 = (var_6[0], var_6[1], var_15);
+      var_9 = var_14;
     }
 
-    var16 = self.origin + var6;
-    self forceteleport(var16);
+    var_16 = self.origin + var_6;
+    self forceteleport(var_16);
 
-    if(var10 + 1 < var3) {
+    if(var_10 + 1 < var_3) {
       waitframe();
     }
   }
 
-  self setanimrate(var4, 1);
+  self setanimrate(var_4, 1);
 }
 
-function wallrunnotehandler(var0, var1) {
-  if(var0 == "start_jump") {
-    thread handlejumpteleports(var1);
+function wallrunnotehandler(var_0, var_1) {
+  if(var_0 == "start_jump") {
+    thread handlejumpteleports(var_1);
     return;
   }
 
-  if(var0 == "end_mantle") {
+  if(var_0 == "end_mantle") {
     self animmode("gravity");
     return;
   }
 }
 
-function handlejumpteleports(var0, var1, var2) {
-  var3 = var0[0];
-  var4 = var0[1];
-  var5 = var0[2];
-  var6 = var0[3];
-  var7 = var0[4];
-  var8 = var0[5];
-  var9 = var0[6];
-  self endon(var3 + "_finished");
-  var10 = getanimlength(var4);
+function handlejumpteleports(var_0, var_1, var_2) {
+  var_3 = var_0[0];
+  var_4 = var_0[1];
+  var_5 = var_0[2];
+  var_6 = var_0[3];
+  var_7 = var_0[4];
+  var_8 = var_0[5];
+  var_9 = var_0[6];
+  self endon(var_3 + "_finished");
+  var_10 = getanimlength(var_4);
 
-  if(!isDefined(var1)) {
-    var1 = (gettime() - var6) * 0.001;
+  if(!isDefined(var_1)) {
+    var_1 = (gettime() - var_6) * 0.001;
   }
 
-  var11 = var1 / var10;
-  var12 = getnotetracktimes(var4, "end_jump");
-  var13 = getnotetracktimes(var4, "end_double_jump");
+  var_11 = var_1 / var_10;
+  var_12 = getnotetracktimes(var_4, "end_jump");
+  var_13 = getnotetracktimes(var_4, "end_double_jump");
 
-  if(var13.size > 0) {
+  if(var_13.size > 0) {
     self.wall_run_double_jumping = 1;
-    var12 = var13;
+    var_12 = var_13;
   } else {
     self.wall_run_double_jumping = 0;
   }
 
   if(isDefined(self.jump_over_position)) {
-    var7 = (var12[0] - var11) / 2 + var11;
-    var12 = var7;
-    var5 = self.jump_over_position;
+    var_7 = (var_12[0] - var_11) / 2 + var_11;
+    var_12 = var_7;
+    var_5 = self.jump_over_position;
   }
 
-  var14 = getmovedelta(var4, var11, var7);
-  var15 = self localtoworldcoords(var14);
+  var_14 = getmovedelta(var_4, var_11, var_7);
+  var_15 = self localtoworldcoords(var_14);
 
-  if(!isDefined(var2)) {
-    var2 = 1;
+  if(!isDefined(var_2)) {
+    var_2 = 1;
   }
 
-  if(var9) {
-    var16 = distance(self.origin, var15);
-    var17 = distance(self.origin, var5);
-    var2 = var16 / var17;
+  if(var_9) {
+    var_16 = distance(self.origin, var_15);
+    var_17 = distance(self.origin, var_5);
+    var_2 = var_16 / var_17;
 
-    if(var2 < 0.7) {
-      var2 = 0.7;
-    } else if(var2 > 1.3) {
-      var2 = 1.3;
+    if(var_2 < 0.7) {
+      var_2 = 0.7;
+    } else if(var_2 > 1.3) {
+      var_2 = 1.3;
     }
   }
 
-  var19 = var5 - var15;
-  var20 = var12[0] * var10;
-  var21 = var20 - var11 * var10;
-  var21 *= 1 / var2;
-  var22 = var21 * 20;
-  var22 = ceil(var22);
-  var23 = gettime();
-  teleportdeltaovernumframes(var3, 0, var19, var22, var4, var2);
+  var_19 = var_5 - var_15;
+  var_20 = var_12[0] * var_10;
+  var_21 = var_20 - var_11 * var_10;
+  var_21 *= 1 / var_2;
+  var_22 = var_21 * 20;
+  var_22 = ceil(var_22);
+  var_23 = gettime();
+  teleportdeltaovernumframes(var_3, 0, var_19, var_22, var_4, var_2);
 
   if(isDefined(self.jump_over_position)) {
-    var24 = (gettime() - var23) * var2;
-    var25 = var1 + var24 * 0.001;
+    var_24 = (gettime() - var_23) * var_2;
+    var_25 = var_1 + var_24 * 0.001;
     self.jump_over_position = undefined;
-    var0 = 0;
-    handlejumpteleports(var0, var25, var2);
+    var_0 = 0;
+    handlejumpteleports(var_0, var_25, var_2);
     return;
   }
 }
 
-function getwallrunyawfromstartnode(var0) {
-  var1 = getwallnodeposition(var0, 1) - getwallnodeposition(var0, 0);
-  var2 = vectortoangles(var1);
-  return var2[1];
+function getwallrunyawfromstartnode(var_0) {
+  var_1 = getwallnodeposition(var_0, 1) - getwallnodeposition(var_0, 0);
+  var_2 = vectortoangles(var_1);
+  return var_2[1];
 }
 
-function getwallrundirectionfromstartnode(var0) {
+function getwallrundirectionfromstartnode(var_0) {
   self.wall_run_current_node_index = 0;
-  var1 = getwallnodeposition(var0, 1) - getwallnodeposition(var0, 0);
-  var2 = vectortoangles(var1);
-  self.wall_run_yaw = var2[1];
-  var3 = getwallnodeposition(var0, self.wall_run_current_node_index);
-  var4 = anglestoright(var2);
-  var5 = var3 - var0.origin;
-  var6 = vectordot(var4, var5);
+  var_1 = getwallnodeposition(var_0, 1) - getwallnodeposition(var_0, 0);
+  var_2 = vectortoangles(var_1);
+  self.wall_run_yaw = var_2[1];
+  var_3 = getwallnodeposition(var_0, self.wall_run_current_node_index);
+  var_4 = anglestoright(var_2);
+  var_5 = var_3 - var_0.origin;
+  var_6 = vectordot(var_4, var_5);
 
-  if(var6 > 0) {
+  if(var_6 > 0) {
     return "right";
   }
 
@@ -645,8 +645,8 @@ function setupwallrunifneeded() {
     self.traversal_end_pos = self getnegotiationendpos();
   }
 
-  var0 = self.traversal_start_node;
-  self.wall_run_direction = getwallrundirectionfromstartnode(var0);
+  var_0 = self.traversal_start_node;
+  self.wall_run_direction = getwallrundirectionfromstartnode(var_0);
 }
 
 function getwallrundirection() {
@@ -654,7 +654,7 @@ function getwallrundirection() {
   return self.wall_run_direction;
 }
 
-function wallrunterminate(var0, var1, var2) {
+function wallrunterminate(var_0, var_1, var_2) {
   self.wall_run_current_node_index = undefined;
   self.wall_run_direction = undefined;
   self.wall_run_double_jumping = undefined;
@@ -667,195 +667,195 @@ function wallrunterminate(var0, var1, var2) {
   self.traversal_end_pos = undefined;
 }
 
-function traversalorientearlyterminate(var0, var1, var2) {
-  if(!scripts\asm\asm::asm_eventfired(var0, "end") && !scripts\asm\asm::asm_eventfired(var0, "code_move")) {
-    cleanupwallruntransitioncheck(var0, var1, var2);
+function traversalorientearlyterminate(var_0, var_1, var_2) {
+  if(!scripts\asm\asm::asm_eventfired(var_0, "end") && !scripts\asm\asm::asm_eventfired(var_0, "code_move")) {
+    cleanupwallruntransitioncheck(var_0, var_1, var_2);
     return;
   }
 }
 
-function playwallrunattach(var0, var1, var2) {
+function playwallrunattach(var_0, var_1, var_2) {
   self animmode("noclip");
   self orientmode("face angle", self.angles[1]);
   self.useanimgoalweight = 1;
 
-  if(isDefined(var2) && var2 == "shoot") {
+  if(isDefined(var_2) && var_2 == "shoot") {
     setupwallrunaimlimits();
   }
 
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  var4 = scripts\asm\asm::asm_getxanim(var1, var3);
-  var5 = getnotetracktimes(var4, "wall_contact");
-  var6 = var5[0];
-  var7 = getangledelta(var4, 0, var6);
-  var8 = self.wall_run_yaw - var7;
-  var9 = (0, var8, 0);
-  self forceteleport(self.origin, var9);
-  self aisetanim(var1, var3);
-  scripts\asm\asm::asm_playfacialanim(var0, var1, var4);
-  var10 = scripts\asm\asm::asm_donotetracks(var0, var1, scripts\asm\asm::asm_getnotehandler(var0, var1));
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, var_3);
+  var_5 = getnotetracktimes(var_4, "wall_contact");
+  var_6 = var_5[0];
+  var_7 = getangledelta(var_4, 0, var_6);
+  var_8 = self.wall_run_yaw - var_7;
+  var_9 = (0, var_8, 0);
+  self forceteleport(self.origin, var_9);
+  self aisetanim(var_1, var_3);
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_4);
+  var_10 = scripts\asm\asm::asm_donotetracks(var_0, var_1, scripts\asm\asm::asm_getnotehandler(var_0, var_1));
 }
 
-function getwallattachoffsetposition(var0) {
-  var1 = choosewallattachanim(var0, "wall_run_attach");
-  var2 = getnotetracktimes(var1, "wall_contact");
-  var3 = var2[0];
-  var4 = getmovedelta(var1, 0, var3);
-  var5 = getangledelta(var1, 0, var3);
-  return scripts\asm\soldier\cover::calcanimstartpos(getwallnodeposition(self.traversal_start_node, 0), self.wall_run_yaw, var4, var5);
+function getwallattachoffsetposition(var_0) {
+  var_1 = choosewallattachanim(var_0, "wall_run_attach");
+  var_2 = getnotetracktimes(var_1, "wall_contact");
+  var_3 = var_2[0];
+  var_4 = getmovedelta(var_1, 0, var_3);
+  var_5 = getangledelta(var_1, 0, var_3);
+  return scripts\asm\soldier\cover::calcanimstartpos(getwallnodeposition(self.traversal_start_node, 0), self.wall_run_yaw, var_4, var_5);
 }
 
-function playwallrunenter(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  var4 = scripts\asm\asm::asm_getxanim(var1, var3);
-  var5 = self.traversal_start_node;
+function playwallrunenter(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, var_3);
+  var_5 = self.traversal_start_node;
   self.wall_run_current_node_index = 0;
-  var6 = getwallnodeposition(var5, 0);
-  var7 = var6 - self.origin;
-  var7 = (var7[0], var7[1], 0);
-  var8 = vectortoangles(var7);
-  var9 = getwallattachoffsetposition();
-  self orientmode("face angle", var8[1]);
-  var10 = 1;
-  var11 = getnotetracktimes(var4, "code_move");
+  var_6 = getwallnodeposition(var_5, 0);
+  var_7 = var_6 - self.origin;
+  var_7 = (var_7[0], var_7[1], 0);
+  var_8 = vectortoangles(var_7);
+  var_9 = getwallattachoffsetposition();
+  self orientmode("face angle", var_8[1]);
+  var_10 = 1;
+  var_11 = getnotetracktimes(var_4, "code_move");
 
-  if(isDefined(var11) && var11.size > 0) {
-    var10 = var11[0];
+  if(isDefined(var_11) && var_11.size > 0) {
+    var_10 = var_11[0];
   }
 
-  playscaledjump(var0, var1, var3, var9, var8, var10, 0, 1);
-  self forceteleport(var9, var8);
+  playscaledjump(var_0, var_1, var_3, var_9, var_8, var_10, 0, 1);
+  self forceteleport(var_9, var_8);
 }
 
-function playscaledjump(var0, var1, var2, var3, var4, var5, var6, var7) {
-  self endon(var1 + "_finished");
+function playscaledjump(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  self endon(var_1 + "_finished");
 
-  if(!isDefined(var5)) {
-    var5 = 1;
+  if(!isDefined(var_5)) {
+    var_5 = 1;
   }
 
-  if(!isDefined(var6)) {
-    var6 = 0;
+  if(!isDefined(var_6)) {
+    var_6 = 0;
   }
 
-  if(!isDefined(var7)) {
-    var7 = 0;
+  if(!isDefined(var_7)) {
+    var_7 = 0;
   }
 
-  self forceteleport(self.origin, var4);
+  self forceteleport(self.origin, var_4);
   self animmode("noclip");
-  self orientmode("face angle", var4[1]);
-  var8 = scripts\asm\asm::asm_getxanim(var1, var2);
-  var9 = getanimlength(var8);
-  var10 = int(var9 * 1000);
-  self iw7shiphack_setmaymovetime(gettime() + var10 - 1000);
+  self orientmode("face angle", var_4[1]);
+  var_8 = scripts\asm\asm::asm_getxanim(var_1, var_2);
+  var_9 = getanimlength(var_8);
+  var_10 = int(var_9 * 1000);
+  self iw7shiphack_setmaymovetime(gettime() + var_10 - 1000);
   self.useanimgoalweight = 1;
-  self aisetanim(var1, var2);
-  scripts\asm\asm::asm_playfacialanim(var0, var1, var8);
-  var11 = [var1, var8, var3, gettime(), var5, var6, var7];
-  scripts\asm\asm::asm_donotetracks(var0, var1, &wallrunnotehandler, var11);
+  self aisetanim(var_1, var_2);
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_8);
+  var_11 = [var_1, var_8, var_3, gettime(), var_5, var_6, var_7];
+  scripts\asm\asm::asm_donotetracks(var_0, var_1, &wallrunnotehandler, var_11);
 }
 
-function choosewallattachanim(var0, var1, var2) {
+function choosewallattachanim(var_0, var_1, var_2) {
   if(isDefined(self.wall_run_attach_anim)) {
     return self.wall_run_attach_anim;
   }
 
-  var3 = self.wall_run_direction;
-  var4 = angleclamp180(self.wall_run_yaw - self.angles[1]);
-  var4 = abs(var4);
+  var_3 = self.wall_run_direction;
+  var_4 = angleclamp180(self.wall_run_yaw - self.angles[1]);
+  var_4 = abs(var_4);
 
-  if(var4 >= 22.5) {
-    if(var4 > 67.5) {
-      var3 += "_90";
+  if(var_4 >= 22.5) {
+    if(var_4 > 67.5) {
+      var_3 += "_90";
     } else {
-      var3 += "_45";
+      var_3 += "_45";
     }
   }
 
-  self.wall_run_attach_anim = scripts\asm\asm::asm_lookupanimfromalias(var1, var3);
+  self.wall_run_attach_anim = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
   return self.wall_run_attach_anim;
 }
 
-function choosewallrunenteranim(var0, var1, var2) {
+function choosewallrunenteranim(var_0, var_1, var_2) {
   setupwallrunifneeded();
-  var3 = self.wall_run_direction;
-  var4 = self.traversal_start_node;
-  var5 = getwallnodeposition(var4, 0);
-  var6 = var5[2] - self.origin[2];
-  var7 = 0;
+  var_3 = self.wall_run_direction;
+  var_4 = self.traversal_start_node;
+  var_5 = getwallnodeposition(var_4, 0);
+  var_6 = var_5[2] - self.origin[2];
+  var_7 = 0;
 
-  if(var6 >= 0) {
-    if(var6 > 120) {
-      var7 = 1;
+  if(var_6 >= 0) {
+    if(var_6 > 120) {
+      var_7 = 1;
     }
-  } else if(0 - var6 > 240) {
-    var7 = 1;
+  } else if(0 - var_6 > 240) {
+    var_7 = 1;
   }
 
-  if(var7 == 0) {
-    var8 = distancesquared(self.origin, var5);
+  if(var_7 == 0) {
+    var_8 = distancesquared(self.origin, var_5);
 
-    if(var8 > 40000) {
-      var7 = 1;
+    if(var_8 > 40000) {
+      var_7 = 1;
     }
   }
 
-  var9 = "left_";
+  var_9 = "left_";
 
   if(self.asm.footsteps.foot == "right") {
-    var9 = "right_";
+    var_9 = "right_";
   }
 
-  if(var7) {
-    var3 = var9 + "double_jump";
+  if(var_7) {
+    var_3 = var_9 + "double_jump";
   } else {
-    var3 = var9 + "single_jump";
+    var_3 = var_9 + "single_jump";
   }
 
-  var10 = scripts\asm\asm::asm_lookupanimfromalias(var1, var3);
-  return var10;
+  var_10 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
+  return var_10;
 }
 
-function senddelayedevent(var0, var1, var2, var3, var4) {
-  self endon(var1 + "_finished");
-  wait var2;
-  scripts\asm\asm::asm_fireevent(var0, var3);
+function senddelayedevent(var_0, var_1, var_2, var_3, var_4) {
+  self endon(var_1 + "_finished");
+  wait var_2;
+  scripts\asm\asm::asm_fireevent(var_0, var_3);
 
-  if(var4) {
-    self notify(var3);
+  if(var_4) {
+    self notify(var_3);
     return;
   }
 }
 
-function hasanotherwallrun(var0, var1, var2, var3) {
+function hasanotherwallrun(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.wall_run_current_node_index)) {
     return false;
   }
 
-  var4 = self.traversal_start_node;
+  var_4 = self.traversal_start_node;
 
-  if(!isDefined(var4)) {
+  if(!isDefined(var_4)) {
     return false;
   }
 
-  var5 = self.wall_run_current_node_index + 2;
+  var_5 = self.wall_run_current_node_index + 2;
 
-  if(var4.wall_info.nodeoffsets.size <= var5) {
+  if(var_4.wall_info.nodeoffsets.size <= var_5) {
     return false;
   }
 
   return true;
 }
 
-function playwallruncontinue(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  var3 = self.traversal_start_node;
+function playwallruncontinue(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  var_3 = self.traversal_start_node;
   scripts\asm\shared\utility::set_aim_and_turn_limits();
   self.wall_run_current_node_index += 2;
-  var4 = getwallnodeposition(var3, self.wall_run_current_node_index);
-  var5 = self.angles;
+  var_4 = getwallnodeposition(var_3, self.wall_run_current_node_index);
+  var_5 = self.angles;
 
   if(self.wall_run_direction == "left") {
     self.wall_run_direction = "right";
@@ -863,103 +863,103 @@ function playwallruncontinue(var0, var1, var2) {
     self.wall_run_direction = "left";
   }
 
-  var6 = scripts\asm\asm::asm_getanim(var0, var1);
-  playscaledjump(var0, var1, var6, var4, var5);
+  var_6 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  playscaledjump(var_0, var_1, var_6, var_4, var_5);
 }
 
-function getwallrunmantleposition(var0) {
-  var1 = var0.angles - var0.wall_info.startnodeoriginalangles;
+function getwallrunmantleposition(var_0) {
+  var_1 = var_0.angles - var_0.wall_info.startnodeoriginalangles;
 
-  if(var1 == (0, 0, 0)) {
-    return (var0.origin + var0.wall_info.mantleoffset);
+  if(var_1 == (0, 0, 0)) {
+    return (var_0.origin + var_0.wall_info.mantleoffset);
   }
 
-  var2 = rotatevector(var0.wall_info.mantleoffset, var1);
-  return var0.origin + var2;
+  var_2 = rotatevector(var_0.wall_info.mantleoffset, var_1);
+  return var_0.origin + var_2;
 }
 
-function getwallrunmantleangles(var0) {
-  if(!isDefined(var0.wall_info.mantleangles)) {
+function getwallrunmantleangles(var_0) {
+  if(!isDefined(var_0.wall_info.mantleangles)) {
     return undefined;
   }
 
-  var1 = var0.angles[1] - var0.wall_info.startnodeoriginalangles[1];
+  var_1 = var_0.angles[1] - var_0.wall_info.startnodeoriginalangles[1];
 
-  if(var1 == 0) {
-    return var0.wall_info.mantleangles;
+  if(var_1 == 0) {
+    return var_0.wall_info.mantleangles;
   }
 
-  return (0, angleclamp180(var0.wall_info.mantleangles[1] + var1), 0);
+  return (0, angleclamp180(var_0.wall_info.mantleangles[1] + var_1), 0);
 }
 
 function getwallruntomantletype() {
-  var0 = self.traversal_start_node;
+  var_0 = self.traversal_start_node;
 
-  if(!isDefined(var0.wall_info.mantleoffset)) {
+  if(!isDefined(var_0.wall_info.mantleoffset)) {
     return "none";
   }
 
-  var1 = getwallrunmantleposition(var0);
+  var_1 = getwallrunmantleposition(var_0);
 
-  if(var1[2] >= self.origin[2]) {
+  if(var_1[2] >= self.origin[2]) {
     return "high";
   }
 
   return "low";
 }
 
-function shouldwallruntovault(var0, var1, var2, var3) {
-  var4 = self.traversal_start_node;
+function shouldwallruntovault(var_0, var_1, var_2, var_3) {
+  var_4 = self.traversal_start_node;
 
-  if(!isDefined(var4.wall_info.bvaultover)) {
+  if(!isDefined(var_4.wall_info.bvaultover)) {
     return 0;
   }
 
-  return var4.wall_info.bvaultover;
+  return var_4.wall_info.bvaultover;
 }
 
-function playwallrunloop(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  var3 = self.traversal_start_node;
+function playwallrunloop(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  var_3 = self.traversal_start_node;
   setupwallrunaimlimits();
-  var4 = scripts\asm\asm::asm_getanim(var0, var1);
-  var5 = scripts\asm\asm::asm_getxanim(var1, var4);
-  var6 = getmovedelta(var5);
-  var7 = length2d(var6);
+  var_4 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_5 = scripts\asm\asm::asm_getxanim(var_1, var_4);
+  var_6 = getmovedelta(var_5);
+  var_7 = length2d(var_6);
 
-  if(!isDefined(var3.wall_info.mantleoffset) && self.wall_run_current_node_index == var3.wall_info.nodeoffsets.size - 2) {
-    var8 = scripts\asm\asm::asm_getanim(var0, "wall_run_exit");
-    var9 = scripts\asm\asm::asm_getxanim("wall_run_exit", var8);
-    var10 = getnotetracktimes(var9, "start_jump");
-    var11 = getanimlength(var9);
-    var12 = getmovedelta(var9, 0, var10[0]);
-    var13 = length2d(var12);
+  if(!isDefined(var_3.wall_info.mantleoffset) && self.wall_run_current_node_index == var_3.wall_info.nodeoffsets.size - 2) {
+    var_8 = scripts\asm\asm::asm_getanim(var_0, "wall_run_exit");
+    var_9 = scripts\asm\asm::asm_getxanim("wall_run_exit", var_8);
+    var_10 = getnotetracktimes(var_9, "start_jump");
+    var_11 = getanimlength(var_9);
+    var_12 = getmovedelta(var_9, 0, var_10[0]);
+    var_13 = length2d(var_12);
   } else {
-    var13 = 0;
+    var_13 = 0;
   }
 
-  var14 = getwallnodeposition(var4, self.wall_run_current_node_index + 1) - self.origin;
-  var15 = length(var14);
-  var15 -= var13;
+  var_14 = getwallnodeposition(var_4, self.wall_run_current_node_index + 1) - self.origin;
+  var_15 = length(var_14);
+  var_15 -= var_13;
 
-  if(var15 < 0) {
-    var15 = 0;
+  if(var_15 < 0) {
+    var_15 = 0;
   }
 
-  var16 = var15 / var13;
-  var17 = getanimlength(var6);
-  var18 = var17 * var16;
-  thread senddelayedevent(var1, var2, var18, "wall_run_loop_done", 1);
-  var19 = vectorNormalize(var14);
-  self orientmode("face direction", var19);
-  thread playwallrunendsound(var2);
+  var_16 = var_15 / var_13;
+  var_17 = getanimlength(var_6);
+  var_18 = var_17 * var_16;
+  thread senddelayedevent(var_1, var_2, var_18, "wall_run_loop_done", 1);
+  var_19 = vectorNormalize(var_14);
+  self orientmode("face direction", var_19);
+  thread playwallrunendsound(var_2);
   self animmode("noclip");
-  self aisetanim(var2, var5);
-  scripts\asm\asm::asm_playfacialanim(var1, var2, var6);
-  scripts\asm\asm::asm_donotetracks(var1, var2);
+  self aisetanim(var_2, var_5);
+  scripts\asm\asm::asm_playfacialanim(var_1, var_2, var_6);
+  scripts\asm\asm::asm_donotetracks(var_1, var_2);
 }
 
-function playwallrunendsound(var0) {
+function playwallrunendsound(var_0) {
   self endon("death");
 
   if(soundexists("wallrun_end_npc")) {
@@ -969,75 +969,75 @@ function playwallrunendsound(var0) {
   }
 }
 
-function choosewallrunexitanim(var0, var1, var2) {
-  var3 = self.wall_run_direction;
-  var4 = self.traversal_end_pos;
-  var5 = var4[2] - self.origin[2];
-  var6 = 0;
+function choosewallrunexitanim(var_0, var_1, var_2) {
+  var_3 = self.wall_run_direction;
+  var_4 = self.traversal_end_pos;
+  var_5 = var_4[2] - self.origin[2];
+  var_6 = 0;
 
-  if(var5 >= 0) {
-    if(var5 > 120) {
-      var6 = 1;
+  if(var_5 >= 0) {
+    if(var_5 > 120) {
+      var_6 = 1;
     }
-  } else if(0 - var5 > 240) {
-    var6 = 1;
+  } else if(0 - var_5 > 240) {
+    var_6 = 1;
   }
 
-  if(var6 == 0) {
-    var7 = distancesquared(self.origin, var4);
+  if(var_6 == 0) {
+    var_7 = distancesquared(self.origin, var_4);
 
-    if(var7 > 46225) {
-      var6 = 1;
+    if(var_7 > 46225) {
+      var_6 = 1;
     }
   }
 
-  if(var6) {
-    var3 += "_double";
+  if(var_6) {
+    var_3 += "_double";
   }
 
-  var4 = self.traversal_end_pos;
-  var8 = self.traversal_start_node;
-  var9 = self.traversal_end_pos - getwallnodeposition(var8, var8.wall_info.nodeoffsets.size - 1);
-  var9 = (var9[0], var9[1], 0);
-  var9 = vectorNormalize(var9);
-  var10 = vectortoangles(var9);
-  var11 = angleclamp180(var10[1] - self.angles[1]);
-  var11 = abs(var11);
+  var_4 = self.traversal_end_pos;
+  var_8 = self.traversal_start_node;
+  var_9 = self.traversal_end_pos - getwallnodeposition(var_8, var_8.wall_info.nodeoffsets.size - 1);
+  var_9 = (var_9[0], var_9[1], 0);
+  var_9 = vectorNormalize(var_9);
+  var_10 = vectortoangles(var_9);
+  var_11 = angleclamp180(var_10[1] - self.angles[1]);
+  var_11 = abs(var_11);
 
-  if(var11 >= 22.5) {
-    if(var11 > 67.5) {
-      var3 += "_90";
+  if(var_11 >= 22.5) {
+    if(var_11 > 67.5) {
+      var_3 += "_90";
     } else {
-      var3 += "_45";
+      var_3 += "_45";
     }
   }
 
-  var12 = scripts\asm\asm::asm_lookupanimfromalias(var1, var3);
-  return var12;
+  var_12 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
+  return var_12;
 }
 
-function playwallrunexit(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  var3 = self.traversal_start_node;
-  var4 = self.traversal_end_pos;
-  var5 = self.angles;
-  var6 = 1;
-  var7 = scripts\asm\asm::asm_getanim(var0, var1);
-  var8 = getnotetracktimes(var7, "ground");
+function playwallrunexit(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  var_3 = self.traversal_start_node;
+  var_4 = self.traversal_end_pos;
+  var_5 = self.angles;
+  var_6 = 1;
+  var_7 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_8 = getnotetracktimes(var_7, "ground");
   scripts\asm\shared\utility::set_aim_and_turn_limits();
 
-  if(isDefined(var8) && var8.size > 0) {
-    var6 = var8[0];
+  if(isDefined(var_8) && var_8.size > 0) {
+    var_6 = var_8[0];
   } else {
-    var9 = getnotetracktimes(var7, "end_double_jump");
+    var_9 = getnotetracktimes(var_7, "end_double_jump");
 
-    if(isDefined(var9) && var9.size > 0) {
-      var6 = var9[0];
+    if(isDefined(var_9) && var_9.size > 0) {
+      var_6 = var_9[0];
     } else {
-      var10 = getnotetracktimes(var7, "end_jump");
+      var_10 = getnotetracktimes(var_7, "end_jump");
 
-      if(isDefined(var10) && var10.size > 0) {
-        var6 = var10[0];
+      if(isDefined(var_10) && var_10.size > 0) {
+        var_6 = var_10[0];
       }
     }
   }
@@ -1046,11 +1046,11 @@ function playwallrunexit(var0, var1, var2) {
     self playSound("wallrun_end_npc");
   }
 
-  playscaledjump(var0, var1, var7, var4, var5, var6, 1, 1);
-  thread terminatewallruntraverse(var0, var1);
+  playscaledjump(var_0, var_1, var_7, var_4, var_5, var_6, 1, 1);
+  thread terminatewallruntraverse(var_0, var_1);
 }
 
-function isnotdoingwallruntransition(var0, var1, var2, var3) {
+function isnotdoingwallruntransition(var_0, var_1, var_2, var_3) {
   if(isDefined(self.traversal_start_node)) {
     return false;
   }
@@ -1058,102 +1058,102 @@ function isnotdoingwallruntransition(var0, var1, var2, var3) {
   return true;
 }
 
-function terminatewallruntraverse(var0, var1) {
+function terminatewallruntraverse(var_0, var_1) {
   self.wall_run_current_node_index = undefined;
   self.wall_run_direction = undefined;
   self.wall_run_double_jumping = undefined;
   self.wall_run_yaw = undefined;
   self.wall_run_attach_anim = undefined;
   self setdefaultaimlimits();
-  terminatetraverse(var0, var1);
+  terminatetraverse(var_0, var_1);
 }
 
-function playwallruntomantle(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  var3 = self.traversal_start_node;
-  var4 = self.traversal_end_pos;
-  var5 = getwallrunmantleposition(var3);
-  jumpiffalse(isDefined(var3.wall_info.bvaultover) || getwallruntomantletype() == "high") LOC_0000006b;
-  var6 = getwallrunmantleangles(var3);
+function playwallruntomantle(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  var_3 = self.traversal_start_node;
+  var_4 = self.traversal_end_pos;
+  var_5 = getwallrunmantleposition(var_3);
+  jumpiffalse(isDefined(var_3.wall_info.bvaultover) || getwallruntomantletype() == "high") LOC_0000006b;
+  var_6 = getwallrunmantleangles(var_3);
 
-  if(!isDefined(var6)) {
-    var7 = var4 - var5;
-    var7 = (var7[0], var7[1], 0);
-    var6 = vectortoangles(var7);
+  if(!isDefined(var_6)) {
+    var_7 = var_4 - var_5;
+    var_7 = (var_7[0], var_7[1], 0);
+    var_6 = vectortoangles(var_7);
   }
 
   goto LOC_00000088;
 }
 
-function playtraversaltransition(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
+function playtraversaltransition(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
 
-  if(!isDefined(var3)) {
-    scripts\asm\asm::asm_fireevent(var0, "code_move");
+  if(!isDefined(var_3)) {
+    scripts\asm\asm::asm_fireevent(var_0, "code_move");
     return;
   }
 
-  var4 = scripts\asm\asm::asm_getxanim(var1, var3);
-  var5 = 1;
-  var6 = undefined;
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, var_3);
+  var_5 = 1;
+  var_6 = undefined;
 
   if(getdvarint("ai_wall_run_use_align_notetrack", 1) == 1) {
-    var6 = getnotetracktimes(var4, "align");
+    var_6 = getnotetracktimes(var_4, "align");
   }
 
-  if(!isDefined(var6) || var6.size == 0) {
-    var6 = getnotetracktimes(var4, "code_move");
+  if(!isDefined(var_6) || var_6.size == 0) {
+    var_6 = getnotetracktimes(var_4, "code_move");
   }
 
-  if(isDefined(var6) && var6.size > 0) {
-    var5 = var6[0];
+  if(isDefined(var_6) && var_6.size > 0) {
+    var_5 = var_6[0];
   }
 
-  var7 = getmovedelta(var4, 0, var5);
-  var8 = getangledelta(var4, 0, var5);
-  var9 = self.traversal_start_node;
-  var10 = getanimlength(var4) * var5;
-  var11 = int(ceil(var10 * 20));
+  var_7 = getmovedelta(var_4, 0, var_5);
+  var_8 = getangledelta(var_4, 0, var_5);
+  var_9 = self.traversal_start_node;
+  var_10 = getanimlength(var_4) * var_5;
+  var_11 = int(ceil(var_10 * 20));
   jumpiffalse(self.traversal_start_node.animscript == "wall_run") LOC_000000e5;
-  var12 = getwallnodeposition(self.traversal_start_node, 0) - self.origin;
-  var13 = vectortoangles(var12);
-  var14 = var13[1];
+  var_12 = getwallnodeposition(self.traversal_start_node, 0) - self.origin;
+  var_13 = vectortoangles(var_12);
+  var_14 = var_13[1];
   goto LOC_00000112;
 }
 
-function choosewallrunturn(var0, var1, var2) {
-  return scripts\asm\soldier\move::choosesharpturnanim(var0, var1, var2);
+function choosewallrunturn(var_0, var_1, var_2) {
+  return scripts\asm\soldier\move::choosesharpturnanim(var_0, var_1, var_2);
 }
 
-function choosetraversaltransition(var0, var1, var2) {
-  var3 = anglesToForward(self.angles);
-  var4 = vectortoangles(var3);
+function choosetraversaltransition(var_0, var_1, var_2) {
+  var_3 = anglesToForward(self.angles);
+  var_4 = vectortoangles(var_3);
   jumpiffalse(self.traversal_start_node.animscript == "wall_run") LOC_00000044;
-  var5 = vectortoangles(getwallnodeposition(self.traversal_start_node, 0) - self.origin);
+  var_5 = vectortoangles(getwallnodeposition(self.traversal_start_node, 0) - self.origin);
   goto LOC_0000006b;
 }
 
-function cleanupwallruntransitioncheck(var0, var1, var2, var3) {
+function cleanupwallruntransitioncheck(var_0, var_1, var_2, var_3) {
   self.traversal_start_node = undefined;
   self.traversal_end_pos = undefined;
   self.wall_run_direction = undefined;
   return false;
 }
 
-function shouldabortwallrunattach(var0, var1, var2, var3) {
-  var4 = distance2dsquared(self.origin, getwallnodeposition(self.traversal_start_node, 1));
+function shouldabortwallrunattach(var_0, var_1, var_2, var_3) {
+  var_4 = distance2dsquared(self.origin, getwallnodeposition(self.traversal_start_node, 1));
 
-  if(var4 < 144) {
+  if(var_4 < 144) {
     return true;
   }
 
   return false;
 }
 
-function shoulddowallrunsharpturn(var0, var1, var2, var3) {
-  if(isnotdoingwallruntransition(var0, var1, var2, var3)) {
-    scripts\asm\traverse::setuptraversaltransitioncheck(var0, var1, var2, var3);
+function shoulddowallrunsharpturn(var_0, var_1, var_2, var_3) {
+  if(isnotdoingwallruntransition(var_0, var_1, var_2, var_3)) {
+    scripts\asm\traverse::setuptraversaltransitioncheck(var_0, var_1, var_2, var_3);
 
     if(!isDefined(self.traversal_start_node)) {
       return false;
@@ -1163,15 +1163,15 @@ function shoulddowallrunsharpturn(var0, var1, var2, var3) {
       return false;
     }
 
-    var4 = self.traversal_start_node;
-    var5 = vectorNormalize(getwallnodeposition(var4, 0) - self.origin);
-    var6 = scripts\asm\soldier\move::calculatesharpturnanim(var0, var1, var2, var5, 0, 1);
+    var_4 = self.traversal_start_node;
+    var_5 = vectorNormalize(getwallnodeposition(var_4, 0) - self.origin);
+    var_6 = scripts\asm\soldier\move::calculatesharpturnanim(var_0, var_1, var_2, var_5, 0, 1);
 
-    if(!isDefined(var6)) {
+    if(!isDefined(var_6)) {
       return false;
     }
 
-    self.a.sharpturnindex = var6;
+    self.a.sharpturnindex = var_6;
     self.wall_run_direction = getwallrundirectionfromstartnode(self.traversal_start_node);
     return true;
   }
@@ -1179,16 +1179,16 @@ function shoulddowallrunsharpturn(var0, var1, var2, var3) {
   return false;
 }
 
-function shouldtraversetransitionto(var0, var1, var2, var3) {
-  if(var2 == self.traversal_start_node.animscript) {
+function shouldtraversetransitionto(var_0, var_1, var_2, var_3) {
+  if(var_2 == self.traversal_start_node.animscript) {
     return true;
   }
 
   return false;
 }
 
-function istraversaltransitionsupported(var0) {
-  switch (var0) {
+function istraversaltransitionsupported(var_0) {
+  switch (var_0) {
     case "rail_hop_double_jump_down":
     case "double_jump":
     case "double_jump_mantle":
@@ -1200,7 +1200,7 @@ function istraversaltransitionsupported(var0) {
   return false;
 }
 
-function shoulddotraversaltransition(var0, var1, var2, var3) {
+function shoulddotraversaltransition(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.traversal_start_node)) {
     return false;
   }
@@ -1213,76 +1213,76 @@ function shoulddotraversaltransition(var0, var1, var2, var3) {
     return false;
   }
 
-  var4 = undefined;
+  var_4 = undefined;
 
   if(self.traversal_start_node.animscript == "wall_run") {
-    var4 = getwallrundirectionfromstartnode(self.traversal_start_node);
-    var5 = getwallnodeposition(self.traversal_start_node, 0) - self.origin;
-    var6 = vectortoangles(var5);
+    var_4 = getwallrundirectionfromstartnode(self.traversal_start_node);
+    var_5 = getwallnodeposition(self.traversal_start_node, 0) - self.origin;
+    var_6 = vectortoangles(var_5);
   } else {
-    var5 = self.traversal_end_pos - self.traversal_start_node.origin;
-    var5 = (var5[0], var5[1], 0);
-    var6 = vectorNormalize(var5);
-    var6 = vectortoangles(var6);
+    var_5 = self.traversal_end_pos - self.traversal_start_node.origin;
+    var_5 = (var_5[0], var_5[1], 0);
+    var_6 = vectorNormalize(var_5);
+    var_6 = vectortoangles(var_6);
   }
 
-  var7 = var6[1];
-  var8 = anglesToForward(self.angles);
-  var9 = vectortoangles(var8);
-  var10 = angleclamp180(var7 - var9[1]);
-  var11 = getangleindex(var10, 22.5);
-  var12 = scripts\asm\soldier\arrival::getstopanims(var2, var4, undefined, 1);
-  var13 = var12[var11];
+  var_7 = var_6[1];
+  var_8 = anglesToForward(self.angles);
+  var_9 = vectortoangles(var_8);
+  var_10 = angleclamp180(var_7 - var_9[1]);
+  var_11 = getangleindex(var_10, 22.5);
+  var_12 = scripts\asm\soldier\arrival::getstopanims(var_2, var_4, undefined, 1);
+  var_13 = var_12[var_11];
 
-  if(!isDefined(var13)) {
+  if(!isDefined(var_13)) {
     return false;
   }
 
-  var14 = 1;
-  var15 = undefined;
+  var_14 = 1;
+  var_15 = undefined;
 
   if(getdvarint("ai_wall_run_use_align_notetrack", 1) == 1) {
-    var15 = getnotetracktimes(var13, "align");
+    var_15 = getnotetracktimes(var_13, "align");
   }
 
-  if(!isDefined(var15) || var15.size == 0) {
-    var15 = getnotetracktimes(var13, "code_move");
+  if(!isDefined(var_15) || var_15.size == 0) {
+    var_15 = getnotetracktimes(var_13, "code_move");
   }
 
-  if(isDefined(var15) && var15.size > 0) {
-    var14 = var15[0];
+  if(isDefined(var_15) && var_15.size > 0) {
+    var_14 = var_15[0];
   }
 
-  var16 = getmovedelta(var13, 0, var14);
-  var17 = getangledelta(var13, 0, var14);
-  var18 = distance2d(self.origin, self.traversal_start_node.origin);
-  var19 = length(var16);
-  var20 = var18 - var19;
+  var_16 = getmovedelta(var_13, 0, var_14);
+  var_17 = getangledelta(var_13, 0, var_14);
+  var_18 = distance2d(self.origin, self.traversal_start_node.origin);
+  var_19 = length(var_16);
+  var_20 = var_18 - var_19;
 
-  if(var20 < 0) {
-    var21 = anglesToForward(var6);
-    var22 = vectordot(var8, var21);
+  if(var_20 < 0) {
+    var_21 = anglesToForward(var_6);
+    var_22 = vectordot(var_8, var_21);
 
-    if(var22 > 0.707) {
-      if(abs(var20) > 10) {
+    if(var_22 > 0.707) {
+      if(abs(var_20) > 10) {
         return false;
       }
-    } else if(abs(var20) > 64) {
+    } else if(abs(var_20) > 64) {
       return false;
     }
-  } else if(var20 > 10) {
+  } else if(var_20 > 10) {
     return false;
   }
 
   if(self.traversal_start_node.animscript == "wall_run") {
-    self.wall_run_direction = var6;
+    self.wall_run_direction = var_6;
   }
 
   return true;
 }
 
-function handlewallrunattachnotetrack(var0) {
-  if(var0 == "wall_contact") {
+function handlewallrunattachnotetrack(var_0) {
+  if(var_0 == "wall_contact") {
     if(soundexists("wallrun_start_npc")) {
       self playSound("wallrun_start_npc");
       return;
@@ -1299,98 +1299,98 @@ function setupwallrunaimlimits() {
   self.leftaimlimit = 90;
 }
 
-function playtraverseanim_ladder(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  var3 = self getnegotiationstartnode();
-  var4 = self getnegotiationendpos();
+function playtraverseanim_ladder(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  var_3 = self getnegotiationstartnode();
+  var_4 = self getnegotiationendpos();
   self animmode("noclip", 0);
-  self orientmode("face angle", var3.angles[1]);
-  var5 = var4 - var3.origin;
-  var6 = scripts\asm\asm::asm_getdemeanor();
-  var7 = undefined;
-  var8 = undefined;
-  var9 = undefined;
+  self orientmode("face angle", var_3.angles[1]);
+  var_5 = var_4 - var_3.origin;
+  var_6 = scripts\asm\asm::asm_getdemeanor();
+  var_7 = undefined;
+  var_8 = undefined;
+  var_9 = undefined;
 
-  if(var5[2] > 0) {
-    var10 = "off_" + var6;
-    var9 = scripts\asm\asm::asm_lookupanimfromaliasifexists(var1, var10);
+  if(var_5[2] > 0) {
+    var_10 = "off_" + var_6;
+    var_9 = scripts\asm\asm::asm_lookupanimfromaliasifexists(var_1, var_10);
 
-    if(!isDefined(var9)) {
-      var9 = scripts\asm\asm::asm_lookupanimfromalias(var1, "off");
+    if(!isDefined(var_9)) {
+      var_9 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "off");
     }
 
-    var7 = scripts\asm\asm::asm_lookupanimfromalias(var1, "up");
+    var_7 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "up");
   } else {
-    var11 = "on_" + var6;
-    var9 = scripts\asm\asm::asm_lookupanimfromaliasifexists(var1, var11);
+    var_11 = "on_" + var_6;
+    var_9 = scripts\asm\asm::asm_lookupanimfromaliasifexists(var_1, var_11);
 
-    if(!isDefined(var9)) {
-      var8 = scripts\asm\asm::asm_lookupanimfromalias(var1, "on");
+    if(!isDefined(var_9)) {
+      var_8 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "on");
     }
 
-    var7 = scripts\asm\asm::asm_lookupanimfromalias(var1, "down");
+    var_7 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "down");
   }
 
-  var12 = 1;
+  var_12 = 1;
 
   if(isDefined(self.moveplaybackrate)) {
-    var12 = self.moveplaybackrate;
+    var_12 = self.moveplaybackrate;
   }
 
-  if(isDefined(var8)) {
-    self aisetanim(var1, var8, var12);
-    scripts\asm\asm::asm_donotetracks(var0, var1);
+  if(isDefined(var_8)) {
+    self aisetanim(var_1, var_8, var_12);
+    scripts\asm\asm::asm_donotetracks(var_0, var_1);
   }
 
-  var13 = var4;
+  var_13 = var_4;
 
-  if(isDefined(var9)) {
-    var14 = scripts\asm\asm::asm_getxanim(var1, var9);
-    var15 = getmovedelta(var14);
-    var13 = var4 - var15 + (0, 0, 1);
+  if(isDefined(var_9)) {
+    var_14 = scripts\asm\asm::asm_getxanim(var_1, var_9);
+    var_15 = getmovedelta(var_14);
+    var_13 = var_4 - var_15 + (0, 0, 1);
   }
 
-  var16 = var13 - self.origin;
+  var_16 = var_13 - self.origin;
 
-  if(var16[2] * var5[2] > 0) {
-    var17 = scripts\asm\asm::asm_getxanim(var1, var7);
-    var18 = getmovedelta(var17);
-    var19 = var18[2] * var12 / getanimlength(var17);
-    var20 = var16[2] / var19;
-    self aisetanim(var1, var7, var12);
-    scripts\asm\asm::asm_donotetracksfortime(var0, var1, var20);
+  if(var_16[2] * var_5[2] > 0) {
+    var_17 = scripts\asm\asm::asm_getxanim(var_1, var_7);
+    var_18 = getmovedelta(var_17);
+    var_19 = var_18[2] * var_12 / getanimlength(var_17);
+    var_20 = var_16[2] / var_19;
+    self aisetanim(var_1, var_7, var_12);
+    scripts\asm\asm::asm_donotetracksfortime(var_0, var_1, var_20);
   }
 
-  if(isDefined(var9)) {
-    self aisetanim(var1, var9, var12);
-    scripts\asm\asm::asm_donotetracks(var0, var1);
+  if(isDefined(var_9)) {
+    self aisetanim(var_1, var_9, var_12);
+    scripts\asm\asm::asm_donotetracks(var_0, var_1);
   }
 
-  terminatetraverse(var0, var1);
+  terminatetraverse(var_0, var_1);
 }
 
-function terminate_ladder(var0, var1, var2) {
+function terminate_ladder(var_0, var_1, var_2) {
   self.nogravityragdoll = !isalive(self);
 }
 
-function traverse_basic(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
+function traverse_basic(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
   self animmode("noclip", 0);
-  var4 = self getnegotiationstartnode();
-  self orientmode("face angle", var4.angles[1]);
-  self aisetanim(var1, var3);
-  scripts\asm\asm::asm_donotetracks(var0, var1, scripts\asm\asm::asm_getnotehandler(var0, var1));
-  terminatetraverse(var0, var1);
+  var_4 = self getnegotiationstartnode();
+  self orientmode("face angle", var_4.angles[1]);
+  self aisetanim(var_1, var_3);
+  scripts\asm\asm::asm_donotetracks(var_0, var_1, scripts\asm\asm::asm_getnotehandler(var_0, var_1));
+  terminatetraverse(var_0, var_1);
 }
 
-function terminatetraverse(var0, var1) {
+function terminatetraverse(var_0, var_1) {
   self.useanimgoalweight = 0;
   self.istraversing = 0;
   self.jump_over_position = undefined;
   self.traversal_start_node = undefined;
   self.traversal_end_pos = undefined;
-  scripts\asm\asm::asm_fireevent(var0, "traverse_end");
+  scripts\asm\asm::asm_fireevent(var_0, "traverse_end");
   self finishtraverse();
   self motionwarpcancel();
 }

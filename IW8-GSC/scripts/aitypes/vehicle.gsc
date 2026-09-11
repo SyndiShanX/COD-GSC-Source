@@ -3,17 +3,17 @@
  * Script: scripts\aitypes\vehicle.gsc
 ***********************************************/
 
-function getseatoriginangles(var0, var1, var2) {
-  var3 = spawnStruct();
-  var4 = var0 gettagorigin(var2);
-  var5 = var0 gettagangles(var2);
-  var6 = getstartorigin(var4, var5, var1);
-  var7 = getstartangles(var4, var5, var1);
-  var8 = getmovedelta(var1, 0, 1);
-  var9 = getangledelta3d(var1, 0, 1)[1];
-  var3.targetorigin = rotatevector(var8, var7) + var6;
-  var3.targetangles = (var7[0], angleclamp(var7[1] + var9), var7[2]);
-  return var3;
+function getseatoriginangles(var_0, var_1, var_2) {
+  var_3 = spawnStruct();
+  var_4 = var_0 gettagorigin(var_2);
+  var_5 = var_0 gettagangles(var_2);
+  var_6 = getstartorigin(var_4, var_5, var_1);
+  var_7 = getstartangles(var_4, var_5, var_1);
+  var_8 = getmovedelta(var_1, 0, 1);
+  var_9 = getangledelta3d(var_1, 0, 1)[1];
+  var_3.targetorigin = rotatevector(var_8, var_7) + var_6;
+  var_3.targetangles = (var_7[0], angleclamp(var_7[1] + var_9), var_7[2]);
+  return var_3;
 }
 
 function handlevehiclerequest() {
@@ -34,18 +34,18 @@ function handlevehiclerequest() {
   if(istrue(self.vehiclerequest.spawninvehicle)) {
     setinvehicle();
   } else {
-    var0 = archetypegetrandomalias(self._blackboard.currentvehicleanimalias, "get_in_vehicle", scripts\engine\utility::string(self._blackboard.chosenvehicleposition.vehicle_position), scripts\asm\asm::asm_isfrantic());
-    var1 = animsetgetallanimindicesforalias(self._blackboard.currentvehicleanimalias, "get_in_vehicle", var0);
-    var2 = self._blackboard.currentvehicle gettagorigin(self._blackboard.chosenvehicleanimpos.sittag);
-    var3 = self._blackboard.currentvehicle gettagangles(self._blackboard.chosenvehicleanimpos.sittag);
-    var4 = archetypegetrandomalias(self._blackboard.currentvehicleanimalias, "vehicle_idle", scripts\engine\utility::string(self._blackboard.chosenvehicleposition.vehicle_position), scripts\asm\asm::asm_isfrantic());
-    var5 = animsetgetallanimindicesforalias(self._blackboard.currentvehicleanimalias, "vehicle_idle", var4);
-    var6 = getseatoriginangles(self._blackboard.currentvehicle, var5, self._blackboard.chosenvehicleanimpos.sittag);
-    var7 = getstartorigin(var6.targetorigin, var6.targetangles, var1);
-    var8 = getstartangles(var6.targetorigin, var6.targetangles, var1);
-    var9 = getclosestpointonnavmesh(var7);
-    self._blackboard.chosenvehicleposition.origin = var9;
-    self._blackboard.chosenvehicleposition.angles = var8;
+    var_0 = archetypegetrandomalias(self._blackboard.currentvehicleanimalias, "get_in_vehicle", scripts\engine\utility::string(self._blackboard.chosenvehicleposition.vehicle_position), scripts\asm\asm::asm_isfrantic());
+    var_1 = animsetgetallanimindicesforalias(self._blackboard.currentvehicleanimalias, "get_in_vehicle", var_0);
+    var_2 = self._blackboard.currentvehicle gettagorigin(self._blackboard.chosenvehicleanimpos.sittag);
+    var_3 = self._blackboard.currentvehicle gettagangles(self._blackboard.chosenvehicleanimpos.sittag);
+    var_4 = archetypegetrandomalias(self._blackboard.currentvehicleanimalias, "vehicle_idle", scripts\engine\utility::string(self._blackboard.chosenvehicleposition.vehicle_position), scripts\asm\asm::asm_isfrantic());
+    var_5 = animsetgetallanimindicesforalias(self._blackboard.currentvehicleanimalias, "vehicle_idle", var_4);
+    var_6 = getseatoriginangles(self._blackboard.currentvehicle, var_5, self._blackboard.chosenvehicleanimpos.sittag);
+    var_7 = getstartorigin(var_6.targetorigin, var_6.targetangles, var_1);
+    var_8 = getstartangles(var_6.targetorigin, var_6.targetangles, var_1);
+    var_9 = getclosestpointonnavmesh(var_7);
+    self._blackboard.chosenvehicleposition.origin = var_9;
+    self._blackboard.chosenvehicleposition.angles = var_8;
     self.asm.customdata.arrivalangles = self._blackboard.chosenvehicleposition.angles;
     self._blackboard.isrunningtovehicle = 1;
     self._blackboard.vehiclestate = 1;
@@ -55,11 +55,11 @@ function handlevehiclerequest() {
   self.vehiclerequest = undefined;
 }
 
-function movetovehicle_init(var0) {
+function movetovehicle_init(var_0) {
   self notify("stop_going_to_node");
 }
 
-function movetovehicle(var0) {
+function movetovehicle(var_0) {
   if(!isalive(self._blackboard.currentvehicle)) {
     self notify("failedentervehicle");
     self._blackboard.vehiclestate = 0;
@@ -81,7 +81,7 @@ function movetovehicle(var0) {
   return anim.running;
 }
 
-function movetovehicle_terminate(var0) {
+function movetovehicle_terminate(var_0) {
   self._blackboard.isrunningtovehicle = undefined;
 }
 
@@ -92,7 +92,7 @@ function setinvehicle() {
   self notify("entervehicle");
 }
 
-function entervehicle(var0) {
+function entervehicle(var_0) {
   if(istrue(self._blackboard.enteredvehicle)) {
     self clearbtgoal(1);
     setinvehicle();
@@ -103,7 +103,7 @@ function entervehicle(var0) {
   return anim.running;
 }
 
-function vehicleidle(var0) {
+function vehicleidle(var_0) {
   if(isvehicleexitrequested()) {
     startexitvehicle();
   }
@@ -112,11 +112,11 @@ function vehicleidle(var0) {
     scripts\aitypes\combat::reload_cheatammo();
   }
 
-  scripts\aitypes\combat::updatewhizby(var0);
+  scripts\aitypes\combat::updatewhizby(var_0);
   return anim.running;
 }
 
-function vehiclecanshoot(var0) {
+function vehiclecanshoot(var_0) {
   if(istrue(self._blackboard.chosenvehicleposition.canshootinvehicle) && isDefined(self.enemy)) {
     return anim.success;
   }
@@ -138,7 +138,7 @@ function startexitvehicle() {
   self.exitvehiclerequested = undefined;
 }
 
-function exitvehicle(var0) {
+function exitvehicle(var_0) {
   if(!isDefined(self._blackboard.exitingvehicle)) {
     self._blackboard.vehiclestate = 0;
     self._blackboard.linkedtovehicle = undefined;
@@ -154,7 +154,7 @@ function exitvehicle(var0) {
   return anim.running;
 }
 
-function getbsmstate(var0) {
+function getbsmstate(var_0) {
   if(!isDefined(self._blackboard.vehiclestate)) {
     self._blackboard.vehiclestate = 0;
   }

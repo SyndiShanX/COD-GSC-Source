@@ -39,15 +39,15 @@ function cellblock_escape_start() {
 
 function cellblock_escape_main() {
   thread chair_place_hint_timer();
-  var0 = getEnt("chair_flag_volume", "targetname");
-  var0 enablelinkTo();
-  var0 linkTo(level.cellchair);
+  var_0 = getEnt("chair_flag_volume", "targetname");
+  var_0 enablelinkTo();
+  var_0 linkTo(level.cellchair);
   level.chairplacedpos = scripts\engine\utility::getStruct("chair_in_position", "targetname");
   level.facingventpos = scripts\engine\utility::getStruct("player_facing_vent", "targetname");
   setup_chair_carry_fsm(level.cellchair);
-  var1 = getEntArray("chair_door_block_check", "targetname");
+  var_1 = getEntArray("chair_door_block_check", "targetname");
 
-  foreach(var3 in var1) {
+  foreach(var_3 in var_1) {
     thread check_chair_door_blocked();
   }
 
@@ -60,10 +60,10 @@ function cellblock_escape_main() {
   level thread scripts\sp\maps\captive\captive_vo::vo_cb_check_see_chair();
   thread check_interact_door();
   thread check_player_use_vent();
-  var5 = getEntArray("window_check_trigger", "targetname");
+  var_5 = getEntArray("window_check_trigger", "targetname");
 
-  foreach(var7 in var5) {
-    var7 thread scripts\sp\maps\captive\captive_vo::vo_cb_trying_to_climb_window();
+  foreach(var_7 in var_5) {
+    var_7 thread scripts\sp\maps\captive\captive_vo::vo_cb_trying_to_climb_window();
   }
 
   scripts\engine\sp\objectives::objective_update("objective", "current", undefined, &"CAPTIVE/OBJ_WAY_OUT_DESC", &"CAPTIVE/OBJ_WAY_OUT");
@@ -94,33 +94,33 @@ function cellblock_escape_catchup() {
 }
 
 function check_exit_vent_look() {
-  var0 = cos(20);
-  var1 = cos(30);
-  var2 = scripts\engine\utility::getStruct("exit_vent_obj", "targetname");
-  var3 = scripts\engine\utility::getStruct("exit_vent_swing_look", "targetname");
-  var4 = 1;
+  var_0 = cos(20);
+  var_1 = cos(30);
+  var_2 = scripts\engine\utility::getStruct("exit_vent_obj", "targetname");
+  var_3 = scripts\engine\utility::getStruct("exit_vent_swing_look", "targetname");
+  var_4 = 1;
 
-  while(var4) {
+  while(var_4) {
     scripts\engine\utility::flag_wait_either("exit_vent_look", "force_exit_vent_look");
 
     if(scripts\engine\utility::flag("found_chair")) {
-      if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var2.origin, var1) || scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var3.origin, var1)) {
+      if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_2.origin, var_1) || scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_3.origin, var_1)) {
         wait 0.25;
 
-        if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var2.origin, var1) || scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var3.origin, var1)) {
-          var4 = 0;
+        if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_2.origin, var_1) || scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_3.origin, var_1)) {
+          var_4 = 0;
         }
       }
-    } else if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var2.origin, var0) || scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var3.origin, var0)) {
+    } else if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_2.origin, var_0) || scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_3.origin, var_0)) {
       wait 0.25;
 
-      if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var2.origin, var0) || scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var3.origin, var0)) {
-        var4 = 0;
+      if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_2.origin, var_0) || scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_3.origin, var_0)) {
+        var_4 = 0;
       }
     }
 
     if(scripts\engine\utility::flag("force_exit_vent_look")) {
-      var4 = 0;
+      var_4 = 0;
     }
 
     waitframe();
@@ -162,12 +162,12 @@ function check_interact_door() {
   level.drainroomdoorinteract = scripts\engine\utility::getStruct("drain_room_door", "targetname");
   level.drainroomdoorinteract thread scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"CAPTIVE/CURSOR_USE", 180, 120, 32);
   level.drainroomdoorinteract waittill("trigger");
-  var0 = scripts\engine\utility::getStruct("drain_room_door_ref", "targetname");
-  var1 = scripts\engine\sp\utility::spawn_anim_model("key", level.player.origin, level.player.angles);
+  var_0 = scripts\engine\utility::getStruct("drain_room_door_ref", "targetname");
+  var_1 = scripts\engine\sp\utility::spawn_anim_model("key", level.player.origin, level.player.angles);
   level thread scripts\sp\maps\captive\captive_vo::vo_cb_door_locked();
-  var0 scripts\sp\player_rig::link_player_to_rig("try_key_fail", "stand");
-  var0 scripts\common\anim::anim_single([var1, level.player_rig], "try_key_fail");
-  var1 delete();
+  var_0 scripts\sp\player_rig::link_player_to_rig("try_key_fail", "stand");
+  var_0 scripts\common\anim::anim_single([var_1, level.player_rig], "try_key_fail");
+  var_1 delete();
   scripts\sp\player_rig::unlink_player_from_rig();
   scripts\engine\utility::flag_set("checked_wb_gate");
 }
@@ -176,53 +176,53 @@ function check_view_window_scene() {
   level endon("end_window_view");
   scripts\engine\utility::flag_wait("looked_at_window");
   level.windowguys = scripts\engine\sp\utility::array_spawn_targetname("window_view_guards", 1);
-  var0 = getEnt("window_view_guard1", "script_noteworthy");
-  var0.animname = "enemy1";
-  var1 = getEnt("window_view_guard2", "script_noteworthy");
-  var2 = getEnt("window_view_guard3", "script_noteworthy");
-  var1 thread scripts\sp\spawner::go_to_node(scripts\engine\utility::getStruct("window_2_1", "targetname"));
-  var2 thread scripts\sp\spawner::go_to_node(scripts\engine\utility::getStruct("window_3_1", "targetname"));
-  var0 scripts\sp\spawner::go_to_node(scripts\engine\utility::getStruct("window_1_1", "targetname"));
-  scripts\sp\maps\captive\captive_vo::vo_cb_window_view(var0);
-  thread move_to_and_delete(var0);
-  thread move_to_and_delete(var1);
-  thread move_to_and_delete(var2);
+  var_0 = getEnt("window_view_guard1", "script_noteworthy");
+  var_0.animname = "enemy1";
+  var_1 = getEnt("window_view_guard2", "script_noteworthy");
+  var_2 = getEnt("window_view_guard3", "script_noteworthy");
+  var_1 thread scripts\sp\spawner::go_to_node(scripts\engine\utility::getStruct("window_2_1", "targetname"));
+  var_2 thread scripts\sp\spawner::go_to_node(scripts\engine\utility::getStruct("window_3_1", "targetname"));
+  var_0 scripts\sp\spawner::go_to_node(scripts\engine\utility::getStruct("window_1_1", "targetname"));
+  scripts\sp\maps\captive\captive_vo::vo_cb_window_view(var_0);
+  thread move_to_and_delete(var_0);
+  thread move_to_and_delete(var_1);
+  thread move_to_and_delete(var_2);
 }
 
-function move_to_and_delete(var0) {
+function move_to_and_delete(var_0) {
   level endon("end_window_view");
   self endon("death");
-  scripts\sp\spawner::go_to_node(scripts\engine\utility::getStruct(var0, "targetname"));
+  scripts\sp\spawner::go_to_node(scripts\engine\utility::getStruct(var_0, "targetname"));
   self delete();
 }
 
 function check_player_use_vent() {
   create_vent_mantle_hint();
   level.jumpheight = -100000;
-  var0 = 1;
+  var_0 = 1;
 
-  while(var0) {
+  while(var_0) {
     scripts\engine\utility::flag_wait("chair_in_position");
     scripts\engine\utility::flag_set("force_exit_vent_look");
     thread check_jump_at_chair();
 
     while(scripts\engine\utility::flag("chair_in_position")) {
-      var1 = level.cellchair.origin[2] + 20;
+      var_1 = level.cellchair.origin[2] + 20;
       scripts\engine\utility::flag_wait("on_chair");
 
       while(scripts\engine\utility::flag("on_chair")) {
-        if(level.player.origin[2] >= var1) {
+        if(level.player.origin[2] >= var_1) {
           if(!scripts\engine\utility::flag("disabled_jump")) {
             level.player scripts\common\utility::allow_jump(0, "chair_climb");
             scripts\engine\utility::flag_set("disabled_jump");
           }
 
-          if(level.player scripts\engine\math::is_point_in_front(level.facingventpos.origin) && level.player.origin[2] >= var1) {
+          if(level.player scripts\engine\math::is_point_in_front(level.facingventpos.origin) && level.player.origin[2] >= var_1) {
             level.enter_vent_hint.alpha = 1;
 
-            if(level.jumpheight >= var1) {
+            if(level.jumpheight >= var_1) {
               level.enter_vent_hint.alpha = 0;
-              var0 = 0;
+              var_0 = 0;
               level.cellchair notify("done");
               level.chairplacedpos scripts\sp\player_rig::link_player_to_rig("cellblock_vent_climb", "stand", 1, 0.2, undefined, undefined, undefined, undefined, undefined, 1);
               level.chairplacedpos thread scripts\common\anim::anim_single_solo(level.exitvent, "cellblock_vent_climb");
@@ -283,15 +283,15 @@ function create_vent_mantle_hint() {
 
 function check_chair_door_blocked() {
   level endon("used_vent");
-  var0 = anglesToForward(scripts\engine\utility::getStruct(self.target, "targetname").angles);
+  var_0 = anglesToForward(scripts\engine\utility::getStruct(self.target, "targetname").angles);
 
   for(;;) {
     self waittill("trigger");
 
     while(level.player istouching(self)) {
-      var1 = vectordot(anglesToForward(level.player.angles), var0);
+      var_1 = vectordot(anglesToForward(level.player.angles), var_0);
 
-      if(var1 < 0.3 && var1 > -0.3) {
+      if(var_1 < 0.3 && var_1 > -0.3) {
         scripts\engine\utility::flag_set("chair_door_blocked");
       } else {
         scripts\engine\utility::flag_clear("chair_door_blocked");
@@ -305,7 +305,7 @@ function check_chair_door_blocked() {
 }
 
 function setup_chair_carry_fsm() {
-  var0 = [["idle", &chair_idle_enter, &chair_idle_update], ["carry", &chair_carry_enter], ["done", &chair_done_enter]];
+  var_0 = [["idle", &chair_idle_enter, &chair_idle_update], ["carry", &chair_carry_enter], ["done", &chair_done_enter]];
   level.player.iscarrying = 0;
   level.player notifyonplayercommand("interact", "+usereload");
   level.player notifyonplayercommand("interact", "+gostand");
@@ -319,18 +319,18 @@ function setup_chair_carry_fsm() {
   self.chairneardoorvol = getEnt("chair_near_door", "targetname");
   self.placedclosevol = getEnt("chair_placed_close", "targetname");
   scripts\engine\utility::flag_set("placed_chair");
-  scripts\sp\statemachine::begin_fsm(var0, "idle");
+  scripts\sp\statemachine::begin_fsm(var_0, "idle");
 }
 
 function chair_idle_enter() {
   scripts\sp\statemachine::set_notify_handlers([["done", &chair_done_handler]]);
-  var0 = level.player getcurrentoffhand("secondaryoffhand");
+  var_0 = level.player getcurrentoffhand("secondaryoffhand");
 
   if(self.carrycount > 0) {
     level.player scripts\common\utility::allow_cinematic_motion(1);
   }
 
-  if(var0.basename != "noisemaker") {
+  if(var_0.basename != "noisemaker") {
     scripts\sp\equipment\noisemaker::noisemakersenablecursors();
   }
 
@@ -394,9 +394,9 @@ function chair_carry_enter() {
   scripts\engine\utility::flag_set("found_chair");
   self.collision notsolid();
   self hide();
-  var0 = 1;
+  var_0 = 1;
 
-  while(var0) {
+  while(var_0) {
     level.player scripts\engine\utility::waittill_any("interact", "use_pressed", "stance_pressed", "stance_down_pressed", "switch_weapon_pressed");
 
     if(scripts\engine\utility::flag("chair_door_blocked")) {
@@ -404,95 +404,95 @@ function chair_carry_enter() {
       continue;
     }
 
-    var1 = physics_createcontents(["physicscontents_solid", "physicscontents_aiclip", "physicscontents_actor", "physicscontents_player", "physicscontents_playerclip", "physicscontents_item"]);
-    var2 = level.player.origin + (0, 0, 6) + anglesToForward(level.player.angles) * 42;
-    var3 = scripts\engine\trace::ray_trace(level.player.origin + (0, 0, 6), var2, level.player, var1);
-    var4 = vectorNormalize(level.player.origin - var3["position"]);
-    var4 = scripts\engine\utility::flat_origin(var4);
-    var5 = var3["position"] + var4 * 16;
-    var6 = var3["position"] + var4 * 44;
-    var6 = (var6[0], var6[1], level.player.origin[2]);
+    var_1 = physics_createcontents(["physicscontents_solid", "physicscontents_aiclip", "physicscontents_actor", "physicscontents_player", "physicscontents_playerclip", "physicscontents_item"]);
+    var_2 = level.player.origin + (0, 0, 6) + anglesToForward(level.player.angles) * 42;
+    var_3 = scripts\engine\trace::ray_trace(level.player.origin + (0, 0, 6), var_2, level.player, var_1);
+    var_4 = vectorNormalize(level.player.origin - var_3["position"]);
+    var_4 = scripts\engine\utility::flat_origin(var_4);
+    var_5 = var_3["position"] + var_4 * 16;
+    var_6 = var_3["position"] + var_4 * 44;
+    var_6 = (var_6[0], var_6[1], level.player.origin[2]);
 
     if(scripts\engine\utility::flag("in_far_chair_placement") && !scripts\engine\utility::flag("in_close_chair_placement")) {
-      var7 = scripts\engine\utility::getStruct("chair_in_position", "targetname").origin;
+      var_7 = scripts\engine\utility::getStruct("chair_in_position", "targetname").origin;
 
-      if(vectordot(vectorNormalize(var7 - level.player.origin), anglesToForward(level.player.angles)) > 0.5) {
-        var5 = var7;
-        var6 = var7 + var4 * 40;
-        var6 = (var6[0], var6[1], level.player.origin[2]);
+      if(vectordot(vectorNormalize(var_7 - level.player.origin), anglesToForward(level.player.angles)) > 0.5) {
+        var_5 = var_7;
+        var_6 = var_7 + var_4 * 40;
+        var_6 = (var_6[0], var_6[1], level.player.origin[2]);
       }
     }
 
-    if(var3["normal"] == (0, 0, 0)) {
-      var8 = anglestoleft(level.player.angles) * 12;
-      var9 = scripts\engine\trace::ray_trace(level.player.origin + (0, 0, 6), var2 + var8, level.player, var1);
+    if(var_3["normal"] == (0, 0, 0)) {
+      var_8 = anglestoleft(level.player.angles) * 12;
+      var_9 = scripts\engine\trace::ray_trace(level.player.origin + (0, 0, 6), var_2 + var_8, level.player, var_1);
 
-      if(var9["hittype"] != "hittype_none") {
-        var5 -= anglestoleft(level.player.angles) * 6;
+      if(var_9["hittype"] != "hittype_none") {
+        var_5 -= anglestoleft(level.player.angles) * 6;
       } else {
-        var10 = anglestoright(level.player.angles) * 12;
-        var11 = scripts\engine\trace::ray_trace(level.player.origin + (0, 0, 6), var2 + var10, level.player, var1);
+        var_10 = anglestoright(level.player.angles) * 12;
+        var_11 = scripts\engine\trace::ray_trace(level.player.origin + (0, 0, 6), var_2 + var_10, level.player, var_1);
 
-        if(var11["hittype"] != "hittype_none") {
-          var5 -= anglestoright(level.player.angles) * 6;
+        if(var_11["hittype"] != "hittype_none") {
+          var_5 -= anglestoright(level.player.angles) * 6;
         }
       }
 
-      foreach(var13 in self.cornerarray) {
-        if(ispointinvolume(var5, var13)) {
-          var14 = 1;
-          var5 = scripts\engine\utility::getStruct(var13.target, "targetname").origin;
+      foreach(var_13 in self.cornerarray) {
+        if(ispointinvolume(var_5, var_13)) {
+          var_14 = 1;
+          var_5 = scripts\engine\utility::getStruct(var_13.target, "targetname").origin;
           break;
         }
       }
     } else {
-      jumpiffalse(scripts\engine\math::anglebetweenvectors(var4["normal"], var5) > 30) LOC_00000430;
-      var6 = var4["position"] + var4["normal"] * 12;
+      jumpiffalse(scripts\engine\math::anglebetweenvectors(var_4["normal"], var_5) > 30) LOC_00000430;
+      var_6 = var_4["position"] + var_4["normal"] * 12;
 
-      if(distance(var6, level.player.origin) < 19) {
-        if(level.player scripts\engine\math::is_point_on_right(var6)) {
-          var13 = var6 + anglestoright(vectortoangles(var4["normal"])) * 32;
+      if(distance(var_6, level.player.origin) < 19) {
+        if(level.player scripts\engine\math::is_point_on_right(var_6)) {
+          var_13 = var_6 + anglestoright(vectortoangles(var_4["normal"])) * 32;
         } else {
-          var13 = var6 + anglestoleft(vectortoangles(var4["normal"])) * 32;
+          var_13 = var_6 + anglestoleft(vectortoangles(var_4["normal"])) * 32;
         }
 
-        var13 = (var13[0], var13[1], level.player.origin[2]);
+        var_13 = (var_13[0], var_13[1], level.player.origin[2]);
       } else {
-        var13 = level.player.origin;
+        var_13 = level.player.origin;
       }
 
-      var16 = vectorNormalize(var6 - var13);
+      var_16 = vectorNormalize(var_6 - var_13);
 
-      foreach(var13 in self.cornerarray) {
-        if(ispointinvolume(var6, var13)) {
-          var14 = 1;
-          var6 = scripts\engine\utility::getStruct(var13.target, "targetname").origin;
+      foreach(var_13 in self.cornerarray) {
+        if(ispointinvolume(var_6, var_13)) {
+          var_14 = 1;
+          var_6 = scripts\engine\utility::getStruct(var_13.target, "targetname").origin;
           break;
         }
       }
     }
 
-    foreach(var13 in self.cornerarray) {
-      if(ispointinvolume(var13, var13)) {
-        var13 = level.player.origin;
+    foreach(var_13 in self.cornerarray) {
+      if(ispointinvolume(var_13, var_13)) {
+        var_13 = level.player.origin;
       }
     }
 
-    var21 = vectortoangles(scripts\engine\utility::flat_origin(var6 - var13));
-    var22 = level.player.origin + (0, 0, 6);
-    var16 = var13 - level.player.origin;
-    var23 = length(var16);
-    var16 = vectorNormalize(var16);
-    var24 = scripts\engine\trace::ray_trace(var22, var22 + var16 * (var23 + 10) + (0, 0, 6), level.player, var2);
+    var_21 = vectortoangles(scripts\engine\utility::flat_origin(var_6 - var_13));
+    var_22 = level.player.origin + (0, 0, 6);
+    var_16 = var_13 - level.player.origin;
+    var_23 = length(var_16);
+    var_16 = vectorNormalize(var_16);
+    var_24 = scripts\engine\trace::ray_trace(var_22, var_22 + var_16 * (var_23 + 10) + (0, 0, 6), level.player, var_2);
 
-    if(var24["hittype"] == "hittype_none" && distance2d(var6, var13) >= 14) {
-      self.origin = (var6[0], var6[1], self.placeheight);
-      self.angles = vectortoangles(scripts\engine\utility::flat_origin(var13 - self.origin));
+    if(var_24["hittype"] == "hittype_none" && distance2d(var_6, var_13) >= 14) {
+      self.origin = (var_6[0], var_6[1], self.placeheight);
+      self.angles = vectortoangles(scripts\engine\utility::flat_origin(var_13 - self.origin));
       level.playermover.origin = level.player.origin;
       level.playermover.angles = level.player.angles;
       level.player playerlinktodelta(level.playermover, undefined, 1, 90, 90, 90, 90);
       level.player lerpviewangleclamp(0.4, 0.2, 0.1, 5, 5, 5, 5);
-      level.playermover thread scripts\sp\maps\captive\captive_util::move_to_point_with_angles(0.5, var13, var21, 1, undefined, 0.2, 0.2);
+      level.playermover thread scripts\sp\maps\captive\captive_util::move_to_point_with_angles(0.5, var_13, var_21, 1, undefined, 0.2, 0.2);
       wait 0.25;
       level.player disableweapons();
       level.player playRumbleOnEntity("slide_start");
@@ -512,7 +512,7 @@ function chair_carry_enter() {
         level notify("end_linger_vo");
       }
 
-      var1 = 0;
+      var_1 = 0;
       scripts\sp\statemachine::goto_state("idle");
     } else {
       scripts\engine\sp\utility::display_hint("cannot_place", 3);

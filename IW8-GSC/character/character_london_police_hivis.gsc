@@ -33,6 +33,6 @@ function main_mp() {
   scripts\code\character::attachhead("heads_london_police", xmodelalias\heads_london_police::main());
 }
 
-function precache_mp(var0) {
-  level.agent_definition[var0]["animclass"] = "soldier_pistol";
+function precache_mp(var_0) {
+  level.agent_definition[var_0]["animclass"] = "soldier_pistol";
 }

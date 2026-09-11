@@ -36,10 +36,10 @@ function onstartgametype() {
   }
 
   if(game["switchedsides"]) {
-    var0 = game["attackers"];
-    var1 = game["defenders"];
-    game["attackers"] = var1;
-    game["defenders"] = var0;
+    var_0 = game["attackers"];
+    var_1 = game["defenders"];
+    game["attackers"] = var_1;
+    game["defenders"] = var_0;
   }
 
   setclientnamemode("manual_change");
@@ -82,20 +82,20 @@ function initspawns() {
 }
 
 function getspawnpoint() {
-  var0 = "defender";
+  var_0 = "defender";
 
   if(self.pers["team"] == game["attackers"]) {
-    var0 = "attacker";
+    var_0 = "attacker";
   }
 
   if(scripts\mp\spawnlogic::shoulduseteamstartspawn()) {
-    var1 = scripts\mp\spawnlogic::getspawnpointarray("mp_sd_spawn_" + var0);
-    var2 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var1);
+    var_1 = scripts\mp\spawnlogic::getspawnpointarray("mp_sd_spawn_" + var_0);
+    var_2 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_1);
   } else {
-    var2 = scripts\mp\spawnlogic::getspawnpoint(self, self.pers["team"], "normal", "fallback");
+    var_2 = scripts\mp\spawnlogic::getspawnpoint(self, self.pers["team"], "normal", "fallback");
   }
 
-  return var2;
+  return var_2;
 }
 
 function onspawnplayer() {
@@ -108,8 +108,8 @@ function onspawnplayer() {
   } else {
     self setclientomnvar("ui_carrying_bomb", 0);
 
-    foreach(var1 in level.objectives) {
-      var1.trigger disableplayeruse(self);
+    foreach(var_1 in level.objectives) {
+      var_1.trigger disableplayeruse(self);
     }
   }
 
@@ -144,75 +144,75 @@ function laststandmonitor() {
 }
 
 function laststandkillteamifdown() {
-  var0 = [];
+  var_0 = [];
 
-  foreach(var2 in level.teamnamelist) {
-    var0 = [];
-    var3 = 0;
+  foreach(var_2 in level.teamnamelist) {
+    var_0 = [];
+    var_3 = 0;
   }
 
-  foreach(var2 in level.teamnamelist) {
-    var6 = scripts\mp\utility\teams::getteamdata(var2, "players");
-    var3 = 0;
-    var0 = [];
+  foreach(var_2 in level.teamnamelist) {
+    var_6 = scripts\mp\utility\teams::getteamdata(var_2, "players");
+    var_3 = 0;
+    var_0 = [];
 
-    foreach(var8 in var6) {
-      if(scripts\mp\utility\player::isreallyalive(var8)) {
-        var3++;
+    foreach(var_8 in var_6) {
+      if(scripts\mp\utility\player::isreallyalive(var_8)) {
+        var_3++;
 
-        if(istrue(var8.inlaststand)) {
-          var0 = var8;
+        if(istrue(var_8.inlaststand)) {
+          var_0 = var_8;
         }
       }
     }
 
-    if(var0.size > 0 && var3 <= var0.size) {
+    if(var_0.size > 0 && var_3 <= var_0.size) {
       level.laststandrequiresmelee = 0;
 
-      foreach(var8 in var0) {
-        var8 suicide();
+      foreach(var_8 in var_0) {
+        var_8 suicide();
       }
     }
   }
 }
 
-function onplayerkilled(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
+function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   self setclientomnvar("ui_carrying_bomb", 0);
   thread checkallowspectating();
 }
 
 function checkallowspectating() {
   waitframe();
-  var0 = 0;
+  var_0 = 0;
 
   if(!scripts\mp\utility\teams::getteamdata(game["attackers"], "aliveCount")) {
     level.spectateoverride[game["attackers"]].allowenemyspectate = 1;
-    var0 = 1;
+    var_0 = 1;
   }
 
   if(!scripts\mp\utility\teams::getteamdata(game["defenders"], "aliveCount")) {
     level.spectateoverride[game["defenders"]].allowenemyspectate = 1;
-    var0 = 1;
+    var_0 = 1;
   }
 
-  if(var0) {
+  if(var_0) {
     scripts\mp\spectating::updatespectatesettings();
     return;
   }
 }
 
-function sd_endgame(var0, var1) {
+function sd_endgame(var_0, var_1) {
   setomnvarforallclients("ui_objective_state", 0);
   setomnvar("ui_bomb_interacting", 0);
-  thread scripts\mp\gamelogic::endgame(var0, var1);
+  thread scripts\mp\gamelogic::endgame(var_0, var_1);
 }
 
-function ondeadevent(var0) {
+function ondeadevent(var_0) {
   if(level.bombexploded > 0 || level.bombdefused) {
     return;
   }
 
-  if(var0 == "all") {
+  if(var_0 == "all") {
     if(level.bombplanted) {
       sd_endgame(game["attackers"], game["end_reason"][tolower(game[game["defenders"]]) + "_eliminated"]);
       return;
@@ -222,7 +222,7 @@ function ondeadevent(var0) {
     return;
   }
 
-  if(var0 == game["attackers"]) {
+  if(var_0 == game["attackers"]) {
     if(level.bombplanted) {
       return;
     }
@@ -231,39 +231,39 @@ function ondeadevent(var0) {
     return;
   }
 
-  if(var0 == game["defenders"]) {
+  if(var_0 == game["defenders"]) {
     thread sd_endgame(level, game["attackers"]);
     return;
   }
 }
 
-function ononeleftevent(var0) {
+function ononeleftevent(var_0) {
   if(level.bombexploded > 0 || level.bombdefused) {
     return;
   }
 
-  var1 = scripts\mp\utility\game::getlastlivingplayer(var0);
+  var_1 = scripts\mp\utility\game::getlastlivingplayer(var_0);
   thread givelastonteamwarning();
 }
 
-function onnormaldeath(var0, var1, var2, var3, var4, var5) {
-  scripts\mp\gametypes\common::oncommonnormaldeath(var0, var1, var2, var3, var4, var5);
-  var6 = scripts\mp\rank::getscoreinfovalue("kill");
-  var7 = var0.team;
+function onnormaldeath(var_0, var_1, var_2, var_3, var_4, var_5) {
+  scripts\mp\gametypes\common::oncommonnormaldeath(var_0, var_1, var_2, var_3, var_4, var_5);
+  var_6 = scripts\mp\rank::getscoreinfovalue("kill");
+  var_7 = var_0.team;
 
-  if(var0.isplanting) {
-    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var2, "planting");
-    var1 scripts\mp\utility\stats::incpersstat("defends", 1);
-    var1 scripts\mp\persistence::statsetchild("round", "defends", var1.pers["defends"]);
-  } else if(var0.isbombcarrier) {
-    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var2, "carrying");
-  } else if(var0.isdefusing) {
-    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var2, "defusing");
-    var1 scripts\mp\utility\stats::incpersstat("defends", 1);
-    var1 scripts\mp\persistence::statsetchild("round", "defends", var1.pers["defends"]);
+  if(var_0.isplanting) {
+    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_2, "planting");
+    var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
+    var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
+  } else if(var_0.isbombcarrier) {
+    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_2, "carrying");
+  } else if(var_0.isdefusing) {
+    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_2, "defusing");
+    var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
+    var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
   }
 
-  scripts\mp\gametypes\obj_bombzone::bombzone_awardgenericbombzonemedals(var1, var0);
+  scripts\mp\gametypes\obj_bombzone::bombzone_awardgenericbombzonemedals(var_1, var_0);
 }
 
 function givelastonteamwarning() {
@@ -271,13 +271,13 @@ function givelastonteamwarning() {
   level endon("game_ended");
   scripts\mp\utility\player::waittillrecoveredhealth(3);
   level thread scripts\mp\battlechatter_mp::trysaylocalsound(self, "inform_last_one");
-  var0 = scripts\mp\utility\game::getotherteam(self.pers["team"])[0];
+  var_0 = scripts\mp\utility\game::getotherteam(self.pers["team"])[0];
   level thread scripts\mp\hud_util::teamplayercardsplash("callout_lastteammemberalive", self, self.pers["team"]);
-  level thread scripts\mp\hud_util::teamplayercardsplash("callout_lastenemyalive", self, var0);
+  level thread scripts\mp\hud_util::teamplayercardsplash("callout_lastenemyalive", self, var_0);
 
-  foreach(var2 in level.players) {
-    if(var2.pers["team"] == self.pers["team"]) {
-      if(isDefined(var2.tagavailable) && var2.tagavailable) {
+  foreach(var_2 in level.players) {
+    if(var_2.pers["team"] == self.pers["team"]) {
+      if(isDefined(var_2.tagavailable) && var_2.tagavailable) {
         level.nofriendlytags = 0;
       }
     }
@@ -289,9 +289,9 @@ function givelastonteamwarning() {
 function ontimelimit() {
   sd_endgame(game["defenders"], game["end_reason"]["time_limit_reached"]);
 
-  foreach(var1 in level.players) {
-    if(isDefined(var1.bombplantweapon)) {
-      var1 scripts\cp_mp\utility\inventory_utility::_takeweapon(var1.bombplantweapon);
+  foreach(var_1 in level.players) {
+    if(isDefined(var_1.bombplantweapon)) {
+      var_1 scripts\cp_mp\utility\inventory_utility::_takeweapon(var_1.bombplantweapon);
       break;
     }
   }
@@ -306,55 +306,55 @@ function updategametypedvars() {
   level.silentplant = scripts\mp\utility\dvars::dvarintvalue("silentPlant", 0, 0, 1);
 }
 
-function removebombzonec(var0) {
-  var1 = [];
-  var2 = getEntArray("script_brushmodel", "classname");
+function removebombzonec(var_0) {
+  var_1 = [];
+  var_2 = getEntArray("script_brushmodel", "classname");
 
-  foreach(var4 in var2) {
-    if(isDefined(var4.script_gameobjectname) && var4.script_gameobjectname == "bombzone") {
-      foreach(var6 in var0) {
-        if(distance(var4.origin, var6.origin) < 100 && issubstr(tolower(var6.script_label), "c")) {
-          var6.relatedbrushmodel = var4;
-          var1 = var6;
+  foreach(var_4 in var_2) {
+    if(isDefined(var_4.script_gameobjectname) && var_4.script_gameobjectname == "bombzone") {
+      foreach(var_6 in var_0) {
+        if(distance(var_4.origin, var_6.origin) < 100 && issubstr(tolower(var_6.script_label), "c")) {
+          var_6.relatedbrushmodel = var_4;
+          var_1 = var_6;
           break;
         }
       }
     }
   }
 
-  foreach(var10 in var1) {
-    var10.relatedbrushmodel delete();
-    var11 = getEntArray(var10.target, "targetname");
+  foreach(var_10 in var_1) {
+    var_10.relatedbrushmodel delete();
+    var_11 = getEntArray(var_10.target, "targetname");
 
-    foreach(var13 in var11) {
-      var13 delete();
+    foreach(var_13 in var_11) {
+      var_13 delete();
     }
 
-    var10 delete();
+    var_10 delete();
   }
 
-  return scripts\engine\utility::array_removeundefined(var0);
+  return scripts\engine\utility::array_removeundefined(var_0);
 }
 
 function bombs() {
   scripts\mp\gametypes\obj_bombzone::bombzone_setupbombcase("sd_bomb");
-  var0 = getEntArray("bombzone", "targetname");
-  var0 = removebombzonec(var0);
+  var_0 = getEntArray("bombzone", "targetname");
+  var_0 = removebombzonec(var_0);
   level.objectives = [];
 
-  foreach(var2 in var0) {
-    var3 = scripts\mp\gametypes\obj_bombzone::setupobjective(var2, 1);
-    var3.onbeginuse = &onbeginuse;
-    var3.onenduse = &onenduse;
-    var3.onuse = &onuseplantobject;
-    level.objectives[var3.objectivekey] = var3;
+  foreach(var_2 in var_0) {
+    var_3 = scripts\mp\gametypes\obj_bombzone::setupobjective(var_2, 1);
+    var_3.onbeginuse = &onbeginuse;
+    var_3.onenduse = &onenduse;
+    var_3.onuse = &onuseplantobject;
+    level.objectives[var_3.objectivekey] = var_3;
   }
 }
 
-function onbeginuse(var0) {
-  scripts\mp\gametypes\obj_bombzone::bombzone_onbeginuse(var0);
+function onbeginuse(var_0) {
+  scripts\mp\gametypes\obj_bombzone::bombzone_onbeginuse(var_0);
 
-  if(!scripts\mp\gameobjects::isfriendlyteam(var0.pers["team"])) {
+  if(!scripts\mp\gameobjects::isfriendlyteam(var_0.pers["team"])) {
     if(level.multibomb) {
       if(self.objectivekey == "_a") {
         level.objectives["_b"] scripts\mp\gameobjects::allowuse("none");
@@ -371,11 +371,11 @@ function onbeginuse(var0) {
   }
 }
 
-function onenduse(var0, var1, var2) {
-  scripts\mp\gametypes\obj_bombzone::bombzone_onenduse(var0, var1, var2);
+function onenduse(var_0, var_1, var_2) {
+  scripts\mp\gametypes\obj_bombzone::bombzone_onenduse(var_0, var_1, var_2);
 
-  if(!scripts\mp\gameobjects::isfriendlyteam(var1.pers["team"])) {
-    if(level.multibomb && !var2) {
+  if(!scripts\mp\gameobjects::isfriendlyteam(var_1.pers["team"])) {
+    if(level.multibomb && !var_2) {
       if(self.objectivekey == "_a") {
         level.objectives["_b"] scripts\mp\gameobjects::allowuse("enemy");
         level.objectives["_b"] scripts\mp\gameobjects::setvisibleteam("any");
@@ -391,22 +391,22 @@ function onenduse(var0, var1, var2) {
   }
 }
 
-function onuseplantobject(var0) {
-  if(!scripts\mp\gameobjects::isfriendlyteam(var0.pers["team"])) {
-    foreach(var2 in level.objectives) {
-      if(var2 == self) {
+function onuseplantobject(var_0) {
+  if(!scripts\mp\gameobjects::isfriendlyteam(var_0.pers["team"])) {
+    foreach(var_2 in level.objectives) {
+      if(var_2 == self) {
         continue;
       }
 
-      var2 scripts\mp\gameobjects::disableobject();
+      var_2 scripts\mp\gameobjects::disableobject();
     }
   }
 
-  scripts\mp\gametypes\obj_bombzone::bombzone_onuseplantobject(var0);
+  scripts\mp\gametypes\obj_bombzone::bombzone_onuseplantobject(var_0);
 }
 
-function onbombexploded(var0, var1, var2, var3, var4) {
-  if(var3 == game["attackers"]) {
+function onbombexploded(var_0, var_1, var_2, var_3, var_4) {
+  if(var_3 == game["attackers"]) {
     setgameendtime(0);
     wait 3;
     sd_endgame(game["attackers"], game["end_reason"]["target_destroyed"]);
@@ -425,6 +425,6 @@ function setspecialloadout() {
   }
 }
 
-function dogtagallyonusecb(var0) {
-  var0 scripts\mp\utility\stats::setextrascore1(var0.pers["rescues"]);
+function dogtagallyonusecb(var_0) {
+  var_0 scripts\mp\utility\stats::setextrascore1(var_0.pers["rescues"]);
 }

@@ -35,21 +35,21 @@ function main() {
 }
 
 function ref_12f8e() {
-  var0 = [];
+  var_0 = [];
 
   switch (scripts\mp\utility\game::getgametype()) {
     case "siege":
       if(!isDefined(game["roundsPlayed"]) || game["roundsPlayed"] == 0) {
         break;
       } else {
-        GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_gw_spawn_allies_start_mod", (-10592, -19208, -360), (0, 216, 0)));
+        GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_gw_spawn_allies_start_mod", (-10592, -19208, -360), (0, 216, 0)));
       }
 
       break;
   }
 
-  if(var0.size > 0) {
-    scripts\mp\spawnlogic::bdiedonce(var0);
+  if(var_0.size > 0) {
+    scripts\mp\spawnlogic::bdiedonce(var_0);
     return;
   }
 }

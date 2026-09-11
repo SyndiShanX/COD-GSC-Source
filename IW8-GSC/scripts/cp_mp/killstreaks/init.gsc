@@ -29,6 +29,6 @@ function init() {
 }
 
 function total_killed() {
-  var0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_14279("killstreak", 1);
-  var0.ref_14422["missileLocking"] = 2;
+  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_14279("killstreak", 1);
+  var_0.ref_14422["missileLocking"] = 2;
 }

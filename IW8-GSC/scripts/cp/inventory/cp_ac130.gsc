@@ -38,18 +38,18 @@ function init() {
   level.ac130_speed["rotate"] = 70;
   scripts\engine\utility::flag_init("allow_context_sensative_dialog");
   scripts\engine\utility::flag_set("allow_context_sensative_dialog");
-  var0 = getEntArray("minimap_corner", "targetname");
-  var1 = level.mapcenter;
+  var_0 = getEntArray("minimap_corner", "targetname");
+  var_1 = level.mapcenter;
 
-  if(var0.size) {
-    var1 = scripts\cp\cp_globallogic::findboxcenter(var0[0].origin, var0[1].origin);
+  if(var_0.size) {
+    var_1 = scripts\cp\cp_globallogic::findboxcenter(var_0[0].origin, var_0[1].origin);
   }
 
   if(isDefined(level.ac130_location)) {
-    var1 = level.ac130_location;
+    var_1 = level.ac130_location;
   }
 
-  level.ac130 = spawn("script_model", var1);
+  level.ac130 = spawn("script_model", var_1);
   level.ac130 setModel("tag_origin");
   level.ac130.angles = (0, 115, 0);
   level.ac130.owner = undefined;
@@ -64,43 +64,43 @@ function init() {
   init_ac130_vo();
 }
 
-function ac130activatefunc(var0) {
-  var1 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("ac130", var0);
-  thread tryuseac130(var1);
+function ac130activatefunc(var_0) {
+  var_1 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("ac130", var_0);
+  thread tryuseac130(var_1);
 }
 
-function forceac130onplayernow(var0) {
-  var1 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("ac130", var0);
-  var2 = "ks_remote_device_mp";
-  var0 scripts\cp\utility::_giveweapon(var2, 0, 0, 1);
-  var3 = int(tablelookup("mp/killstreaktable.csv", 1, var1.streakname, 0));
-  var0 setclientomnvar("ui_remote_control_sequence", var3);
-  var4 = var0 scripts\cp\cp_weapons::switchtoweaponreliable(var2);
-  var0 scripts\cp\utility::setusingremote(var1.streakname);
-  var0 notify("ks_freeze_end");
-  var0 setclientomnvar("ui_remote_control_sequence", 0);
-  var0 scripts\cp\utility::clearusingremote();
-  var0 scripts\cp_mp\utility\killstreak_utility::stoptabletscreen();
+function forceac130onplayernow(var_0) {
+  var_1 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("ac130", var_0);
+  var_2 = "ks_remote_device_mp";
+  var_0 scripts\cp\utility::_giveweapon(var_2, 0, 0, 1);
+  var_3 = int(tablelookup("mp/killstreaktable.csv", 1, var_1.streakname, 0));
+  var_0 setclientomnvar("ui_remote_control_sequence", var_3);
+  var_4 = var_0 scripts\cp\cp_weapons::switchtoweaponreliable(var_2);
+  var_0 scripts\cp\utility::setusingremote(var_1.streakname);
+  var_0 notify("ks_freeze_end");
+  var_0 setclientomnvar("ui_remote_control_sequence", 0);
+  var_0 scripts\cp\utility::clearusingremote();
+  var_0 scripts\cp_mp\utility\killstreak_utility::stoptabletscreen();
 
-  if(isDefined(var2)) {
-    var0 takeweapon(var2);
+  if(isDefined(var_2)) {
+    var_0 takeweapon(var_2);
   }
 
-  var0 setclientomnvar("ui_remote_control_sequence", 0);
-  var5 = ac130_startuse(var0, var1);
+  var_0 setclientomnvar("ui_remote_control_sequence", 0);
+  var_5 = ac130_startuse(var_0, var_1);
 
-  if(!istrue(var5)) {
+  if(!istrue(var_5)) {
     return 0;
   }
 }
 
-function spawn_ambient_ac130(var0) {
-  var1 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("ac130", var0);
-  var2 = ac130_spawn(var0, var1);
-  return var2;
+function spawn_ambient_ac130(var_0) {
+  var_1 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("ac130", var_0);
+  var_2 = ac130_spawn(var_0, var_1);
+  return var_2;
 }
 
-function weapongivenac130(var0) {}
+function weapongivenac130(var_0) {}
 
 function init_ac130_vo() {
   game["dialog"]["ac130_intro"] = "ac130_intro";
@@ -120,22 +120,22 @@ function init_ac130_vo() {
   game["dialog"]["ac130_refuel"] = "ac130_refuel";
 }
 
-function tryuseac130(var0) {
+function tryuseac130(var_0) {
   if(isDefined(level.ac130player) || level.ac130inuse) {
     self iprintlnbold(&"KILLSTREAKS/AIR_SPACE_TOO_CROWDED");
     return 0;
   }
 
-  var1 = scripts\cp\cp_drone_strike::playremotesequence(var0);
+  var_1 = scripts\cp\cp_drone_strike::playremotesequence(var_0);
 
-  if(!var1) {
-    self notify("killstreak_finished_with_weapon_" + var0.weaponname);
+  if(!var_1) {
+    self notify("killstreak_finished_with_weapon_" + var_0.weaponname);
     return 0;
   }
 
-  var1 = ac130_startuse(self, var0);
+  var_1 = ac130_startuse(self, var_0);
 
-  if(!istrue(var1)) {
+  if(!istrue(var_1)) {
     return 0;
   }
 
@@ -144,15 +144,15 @@ function tryuseac130(var0) {
     return 0;
   }
 
-  foreach(var3 in level.players) {
-    if(var3 != self) {
-      var3 thread scripts\cp\cp_hud_message::showsplash("cp_used_ac130", undefined, self);
+  foreach(var_3 in level.players) {
+    if(var_3 != self) {
+      var_3 thread scripts\cp\cp_hud_message::showsplash("cp_used_ac130", undefined, self);
     }
   }
 
   level.ac130inuse = 1;
   level notify("ac130InUse", self);
-  return var1;
+  return var_1;
 }
 
 function init_sounds() {
@@ -246,122 +246,122 @@ function init_sounds() {
   add_context_sensitive_timeout("misc", "action", 3, 100);
 }
 
-function add_context_sensitive_dialog(var0, var1, var2, var3) {
-  if(!isDefined(level.scr_sound[var0]) || !isDefined(level.scr_sound[var0][var1]) || !isDefined(level.scr_sound[var0][var1][var2])) {
-    level.scr_sound[var0][var1][var2] = spawnStruct();
-    level.scr_sound[var0][var1][var2].played = 0;
-    level.scr_sound[var0][var1][var2].sounds = [];
+function add_context_sensitive_dialog(var_0, var_1, var_2, var_3) {
+  if(!isDefined(level.scr_sound[var_0]) || !isDefined(level.scr_sound[var_0][var_1]) || !isDefined(level.scr_sound[var_0][var_1][var_2])) {
+    level.scr_sound[var_0][var_1][var_2] = spawnStruct();
+    level.scr_sound[var_0][var_1][var_2].played = 0;
+    level.scr_sound[var_0][var_1][var_2].sounds = [];
   }
 
-  var4 = level.scr_sound[var0][var1][var2].sounds.size;
-  level.scr_sound[var0][var1][var2].sounds[var4] = var3;
+  var_4 = level.scr_sound[var_0][var_1][var_2].sounds.size;
+  level.scr_sound[var_0][var_1][var_2].sounds[var_4] = var_3;
 }
 
-function add_context_sensitive_timeout(var0, var1, var2, var3) {
+function add_context_sensitive_timeout(var_0, var_1, var_2, var_3) {
   if(!isDefined(level.context_sensative_dialog_timeouts)) {
     level.context_sensative_dialog_timeouts = [];
   }
 
-  var4 = 0;
+  var_4 = 0;
 
-  if(!isDefined(level.context_sensative_dialog_timeouts[var0])) {
-    var4 = 1;
-  } else if(!isDefined(level.context_sensative_dialog_timeouts[var0][var1])) {
-    var4 = 1;
+  if(!isDefined(level.context_sensative_dialog_timeouts[var_0])) {
+    var_4 = 1;
+  } else if(!isDefined(level.context_sensative_dialog_timeouts[var_0][var_1])) {
+    var_4 = 1;
   }
 
-  if(var4) {
-    level.context_sensative_dialog_timeouts[var0][var1] = spawnStruct();
+  if(var_4) {
+    level.context_sensative_dialog_timeouts[var_0][var_1] = spawnStruct();
   }
 
-  if(isDefined(var2)) {
-    level.context_sensative_dialog_timeouts[var0][var1].groups = [];
-    level.context_sensative_dialog_timeouts[var0][var1].groups[scripts\engine\utility::string(var2)] = spawnStruct();
-    level.context_sensative_dialog_timeouts[var0][var1].groups[scripts\engine\utility::string(var2)].v["timeoutDuration"] = var3 * 1000;
-    level.context_sensative_dialog_timeouts[var0][var1].groups[scripts\engine\utility::string(var2)].v["lastPlayed"] = var3 * -1000;
+  if(isDefined(var_2)) {
+    level.context_sensative_dialog_timeouts[var_0][var_1].groups = [];
+    level.context_sensative_dialog_timeouts[var_0][var_1].groups[scripts\engine\utility::string(var_2)] = spawnStruct();
+    level.context_sensative_dialog_timeouts[var_0][var_1].groups[scripts\engine\utility::string(var_2)].v["timeoutDuration"] = var_3 * 1000;
+    level.context_sensative_dialog_timeouts[var_0][var_1].groups[scripts\engine\utility::string(var_2)].v["lastPlayed"] = var_3 * -1000;
     return;
   }
 
-  level.context_sensative_dialog_timeouts[var0][var1].v["timeoutDuration"] = var3 * 1000;
-  level.context_sensative_dialog_timeouts[var0][var1].v["lastPlayed"] = var3 * -1000;
+  level.context_sensative_dialog_timeouts[var_0][var_1].v["timeoutDuration"] = var_3 * 1000;
+  level.context_sensative_dialog_timeouts[var_0][var_1].v["lastPlayed"] = var_3 * -1000;
 }
 
-function ac130_monitormanualplayerexit(var0) {
+function ac130_monitormanualplayerexit(var_0) {
   level endon("game_ended");
   self endon("death");
   self endon("leaving");
-  var0 endon("disconnect");
+  var_0 endon("disconnect");
   thread scripts\cp\utility::allowridekillstreakplayerexit();
   self waittill("killstreakExit");
-  thread ac130_leave(var0);
+  thread ac130_leave(var_0);
 }
 
-function ac130_startuse(var0, var1) {
+function ac130_startuse(var_0, var_1) {
   self endon("ac130player_removed");
 
   if(isDefined(level.ac130player)) {
     return false;
   }
 
-  var2 = ac130_spawn(var0, var1);
+  var_2 = ac130_spawn(var_0, var_1);
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return false;
   }
 
   if(getdvarint("NOSLRNTRKL")) {
-    var0 scripts\cp\utility::setthirdpersondof(0);
+    var_0 scripts\cp\utility::setthirdpersondof(0);
   }
 
-  var0.gunship = var2;
-  thread ac130_attachgunner(var2);
-  thread ac130_watchchangeweapons(var2);
-  thread ac130_watchweaponfired(var2);
-  thread ac130_watchdamage(var2);
+  var_0.gunship = var_2;
+  thread ac130_attachgunner(var_2);
+  thread ac130_watchchangeweapons(var_2);
+  thread ac130_watchweaponfired(var_2);
+  thread ac130_watchdamage(var_2);
 
-  if(!istrue(var0.no_ac130_timeout)) {
-    thread ac130_watchtimeout(var2);
+  if(!istrue(var_0.no_ac130_timeout)) {
+    thread ac130_watchtimeout(var_2);
   }
 
-  thread ac130_watchowner(var2);
-  thread ac130_playpilotfx(var2);
-  thread ac130_monitormanualplayerexit(var2);
-  var0 scripts\cp\utility::setusingremote(var1.streakname);
+  thread ac130_watchowner(var_2);
+  thread ac130_playpilotfx(var_2);
+  thread ac130_monitormanualplayerexit(var_2);
+  var_0 scripts\cp\utility::setusingremote(var_1.streakname);
   return true;
 }
 
-function ac130_returnplayer(var0, var1) {
-  var0 notify("ac130player_removed");
+function ac130_returnplayer(var_0, var_1) {
+  var_0 notify("ac130player_removed");
   level notify("ac130player_removed");
 
-  if(isDefined(var0) && !istrue(var1)) {
-    var0 setclientomnvar("ui_ac130_hud", 0);
-    var0 stoploopsound();
-    var0 visionsetkillstreakforplayer("");
-    var0 unlink();
+  if(isDefined(var_0) && !istrue(var_1)) {
+    var_0 setclientomnvar("ui_ac130_hud", 0);
+    var_0 stoploopsound();
+    var_0 visionsetkillstreakforplayer("");
+    var_0 unlink();
 
     if(getdvarint("NOSLRNTRKL")) {
-      var0 scripts\cp\utility::setthirdpersondof(1);
+      var_0 scripts\cp\utility::setthirdpersondof(1);
     }
 
-    if(var0 scripts\cp_mp\utility\player_utility::_isalive()) {
-      var0 scripts\cp\cp_weapons::_switchtoweapon(var0.lastdroppableweaponobj);
+    if(var_0 scripts\cp_mp\utility\player_utility::_isalive()) {
+      var_0 scripts\cp\cp_weapons::_switchtoweapon(var_0.lastdroppableweaponobj);
     }
 
-    var2 = undefined;
+    var_2 = undefined;
 
-    if(!isDefined(var2) || !var2) {
-      var0 scripts\cp\cp_weapons::_takeweapon("ac130_105mm_mp");
-      var0 scripts\cp\cp_weapons::_takeweapon("ac130_40mm_mp");
-      var0 scripts\cp\cp_weapons::_takeweapon("ac130_25mm_mp");
-      var0 scripts\common\utility::allow_weapon_switch(1);
+    if(!isDefined(var_2) || !var_2) {
+      var_0 scripts\cp\cp_weapons::_takeweapon("ac130_105mm_mp");
+      var_0 scripts\cp\cp_weapons::_takeweapon("ac130_40mm_mp");
+      var_0 scripts\cp\cp_weapons::_takeweapon("ac130_25mm_mp");
+      var_0 scripts\common\utility::allow_weapon_switch(1);
     }
 
-    if(isDefined(var0.ac130_cloudsfx)) {
-      var0.ac130_cloudsfx delete();
+    if(isDefined(var_0.ac130_cloudsfx)) {
+      var_0.ac130_cloudsfx delete();
     }
 
-    var0 thread scripts\cp\cp_drone_strike::stopremotesequence();
+    var_0 thread scripts\cp\cp_drone_strike::stopremotesequence();
   }
 
   if(isDefined(self.enemytargetmarkergroup)) {
@@ -373,10 +373,10 @@ function ac130_returnplayer(var0, var1) {
   }
 
   level.ac130inuse = 0;
-  var0 scripts\cp\utility::clearusingremote();
+  var_0 scripts\cp\utility::clearusingremote();
 }
 
-function ac130_watchdamage(var0) {
+function ac130_watchdamage(var_0) {
   self endon("death");
   self endon("crashing");
   level endon("game_ended");
@@ -385,107 +385,107 @@ function ac130_watchdamage(var0) {
   self.attractor = missile_createattractorent(self, 1000, 4096);
 
   for(;;) {
-    self waittill("damage", var1, var2, var3, var4, var5, var6, var7, var8, var9, var10);
-    var11 = undefined;
+    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+    var_11 = undefined;
 
-    if(isDefined(level.teambased) && isPlayer(var2) && var2.team == self.team && (!isDefined(var11) || !var11)) {
+    if(isDefined(level.teambased) && isPlayer(var_2) && var_2.team == self.team && (!isDefined(var_11) || !var_11)) {
       continue;
     }
 
-    if(var5 == "MOD_RIFLE_BULLET" || var5 == "MOD_PISTOL_BULLET" || var5 == "MOD_EXPLOSIVE_BULLET") {
+    if(var_5 == "MOD_RIFLE_BULLET" || var_5 == "MOD_PISTOL_BULLET" || var_5 == "MOD_EXPLOSIVE_BULLET") {
       continue;
     }
 
     self.wasdamaged = 1;
 
-    if(isPlayer(var2)) {}
+    if(isPlayer(var_2)) {}
 
-    if(isDefined(var2.owner) && isPlayer(var2.owner)) {}
+    if(isDefined(var_2.owner) && isPlayer(var_2.owner)) {}
 
-    var12 = 0;
-    self.damagetaken += var12;
-    var13 = self.maxhealth - self.damagetaken;
-    var0 setclientomnvar("ui_killstreak_health", var13 / self.maxhealth);
+    var_12 = 0;
+    self.damagetaken += var_12;
+    var_13 = self.maxhealth - self.damagetaken;
+    var_0 setclientomnvar("ui_killstreak_health", var_13 / self.maxhealth);
 
     if(self.damagetaken >= self.maxhealth) {
-      if(isPlayer(var2)) {}
+      if(isPlayer(var_2)) {}
 
-      thread ac130_crash(5, var0);
+      thread ac130_crash(5, var_0);
     }
   }
 }
 
-function ac130_watchtimeout(var0) {
+function ac130_watchtimeout(var_0) {
   self endon("death");
   self endon("crashing");
   level endon("game_ended");
   level endon("ac130player_removed");
   scripts\cp\cp_hostmigration::waitlongdurationwithhostmigrationpause(self.timeout);
-  thread ac130_leave(var0);
+  thread ac130_leave(var_0);
 }
 
-function ac130_leave(var0) {
+function ac130_leave(var_0) {
   self endon("death");
   self endon("crashing");
   level endon("game_ended");
   self unlink();
-  var1 = self.angles;
-  var2 = anglesToForward(var1);
-  ac130_returnplayer(var0, 0);
-  self moveTo(self.origin + var2 * 50000, 10, 5);
-  ac130_waittilldestination(self.origin + var2 * 50000);
+  var_1 = self.angles;
+  var_2 = anglesToForward(var_1);
+  ac130_returnplayer(var_0, 0);
+  self moveTo(self.origin + var_2 * 50000, 10, 5);
+  ac130_waittilldestination(self.origin + var_2 * 50000);
   ac130_removeplane();
 }
 
-function ac130_waittilldestination(var0) {
-  while(isDefined(self) && self.origin != var0) {
+function ac130_waittilldestination(var_0) {
+  while(isDefined(self) && self.origin != var_0) {
     waitframe();
   }
 }
 
-function ac130_watchowner(var0) {
+function ac130_watchowner(var_0) {
   self endon("death");
   self endon("crashing");
   level endon("game_ended");
   level endon("ac130player_removed");
-  var1 = var0 scripts\engine\utility::ref_143a6("disconnect", "joined_team", "joined_spectators");
-  var2 = 0;
+  var_1 = var_0 scripts\engine\utility::ref_143a6("disconnect", "joined_team", "joined_spectators");
+  var_2 = 0;
 
-  if(istrue(var1) && var1 == "disconnect") {
-    var2 = 1;
+  if(istrue(var_1) && var_1 == "disconnect") {
+    var_2 = 1;
   }
 
-  thread ac130_crash(5, var0);
+  thread ac130_crash(5, var_0);
 }
 
-function ac130_spawn(var0, var1) {
+function ac130_spawn(var_0, var_1) {
   if(isDefined(level.ac130_gunship)) {
     return level.ac130_gunship;
   }
 
-  var2 = spawn("script_model", level.ac130.origin);
-  var2 setModel("veh8_mil_air_acharlie130");
-  var2 setCanDamage(1);
-  var2.maxhealth = 1000;
-  var2.health = 99999;
-  var2.owner = var0;
-  var2.team = var0.team;
-  var2.timeout = 40;
-  var2.flaresreservecount = 2;
-  var2.streakinfo = var1;
-  var2 scriptmoveroutline();
-  var2 scriptmoverthermal();
-  var4 = randomint(360);
-  var5 = 5000;
-  var6 = cos(var4) * var5;
-  var7 = sin(var4) * var5;
-  var8 = 10000;
-  var9 = vectorNormalize((var6, var7, var8));
-  var9 *= var8;
-  var2 linkTo(level.ac130, "tag_origin", var9, (0, var4 + 90, 0));
-  level notify("matchrecording_plane", var2);
-  level.ac130_gunship = var2;
-  return var2;
+  var_2 = spawn("script_model", level.ac130.origin);
+  var_2 setModel("veh8_mil_air_acharlie130");
+  var_2 setCanDamage(1);
+  var_2.maxhealth = 1000;
+  var_2.health = 99999;
+  var_2.owner = var_0;
+  var_2.team = var_0.team;
+  var_2.timeout = 40;
+  var_2.flaresreservecount = 2;
+  var_2.streakinfo = var_1;
+  var_2 scriptmoveroutline();
+  var_2 scriptmoverthermal();
+  var_4 = randomint(360);
+  var_5 = 5000;
+  var_6 = cos(var_4) * var_5;
+  var_7 = sin(var_4) * var_5;
+  var_8 = 10000;
+  var_9 = vectorNormalize((var_6, var_7, var_8));
+  var_9 *= var_8;
+  var_2 linkTo(level.ac130, "tag_origin", var_9, (0, var_4 + 90, 0));
+  level notify("matchrecording_plane", var_2);
+  level.ac130_gunship = var_2;
+  return var_2;
 }
 
 function debugview() {
@@ -496,23 +496,23 @@ function debugview() {
   }
 }
 
-function ac130_updateoverlaycoords(var0) {
+function ac130_updateoverlaycoords(var_0) {
   level endon("ac130player_removed");
   self endon("ac130player_removed");
   wait 0.05;
-  thread ac130_updateplanemodelcoords(var0);
+  thread ac130_updateplanemodelcoords(var_0);
   thread ac130_updateplayerpositioncoords();
   thread ac130_updateaimingcoords();
 }
 
-function ac130_updateplanemodelcoords(var0) {
+function ac130_updateplanemodelcoords(var_0) {
   level endon("ac130player_removed");
   self endon("ac130player_removed");
 
   for(;;) {
-    self setclientomnvar("ui_ac130_coord1_posx", int(var0.origin[0]));
-    self setclientomnvar("ui_ac130_coord1_posy", int(var0.origin[1]));
-    self setclientomnvar("ui_ac130_coord1_posz", int(var0.origin[2]));
+    self setclientomnvar("ui_ac130_coord1_posx", int(var_0.origin[0]));
+    self setclientomnvar("ui_ac130_coord1_posy", int(var_0.origin[1]));
+    self setclientomnvar("ui_ac130_coord1_posz", int(var_0.origin[2]));
     wait 0.5;
   }
 }
@@ -530,12 +530,12 @@ function ac130_updateaimingcoords() {
   self endon("ac130player_removed");
 
   for(;;) {
-    var0 = self getvieworigin();
-    var1 = var0 + anglesToForward(self getplayerangles()) * 15000;
-    var2 = physicstrace(var0, var1);
-    self setclientomnvar("ui_ac130_coord3_posx", int(var2[0]));
-    self setclientomnvar("ui_ac130_coord3_posy", int(var2[1]));
-    self setclientomnvar("ui_ac130_coord3_posz", int(var2[2]));
+    var_0 = self getvieworigin();
+    var_1 = var_0 + anglesToForward(self getplayerangles()) * 15000;
+    var_2 = physicstrace(var_0, var_1);
+    self setclientomnvar("ui_ac130_coord3_posx", int(var_2[0]));
+    self setclientomnvar("ui_ac130_coord3_posy", int(var_2[1]));
+    self setclientomnvar("ui_ac130_coord3_posz", int(var_2[2]));
     wait 0.1;
   }
 }
@@ -543,130 +543,130 @@ function ac130_updateaimingcoords() {
 function ac130shellshock() {
   self endon("ac130player_removed");
   level endon("post_effects_disabled");
-  var0 = 5;
+  var_0 = 5;
 
   for(;;) {
-    self shellshock("ac130", var0);
-    wait var0;
+    self shellshock("ac130", var_0);
+    wait var_0;
   }
 }
 
-function rotateplane(var0, var1) {
+function rotateplane(var_0, var_1) {
   level notify("stop_rotatePlane_thread");
   level endon("stop_rotatePlane_thread");
 
-  if(var1 == "on") {
-    var2 = 10;
-    var3 = level.ac130_speed["rotate"] / 360 * var2;
-    var0 rotateYaw(level.ac130.angles[2] + var2, var3, var3, 0);
+  if(var_1 == "on") {
+    var_2 = 10;
+    var_3 = level.ac130_speed["rotate"] / 360 * var_2;
+    var_0 rotateYaw(level.ac130.angles[2] + var_2, var_3, var_3, 0);
 
     for(;;) {
-      var0 rotateYaw(360, level.ac130_speed["rotate"]);
+      var_0 rotateYaw(360, level.ac130_speed["rotate"]);
       wait level.ac130_speed["rotate"];
     }
 
     return;
   }
 
-  if(var1 == "off") {
-    var4 = 10;
-    var3 = level.ac130_speed["rotate"] / 360 * var4;
-    var0 rotateYaw(level.ac130.angles[2] + var4, var3, 0, var3);
+  if(var_1 == "off") {
+    var_4 = 10;
+    var_3 = level.ac130_speed["rotate"] / 360 * var_4;
+    var_0 rotateYaw(level.ac130.angles[2] + var_4, var_3, 0, var_3);
     return;
   }
 }
 
-function ac130_attachgunner(var0) {
+function ac130_attachgunner(var_0) {
   self endon("death");
-  var0 scripts\cp\utility::_giveweapon("ac130_105mm_mp");
-  var0 scripts\cp\utility::_giveweapon("ac130_40mm_mp");
-  var0 scripts\cp\utility::_giveweapon("ac130_25mm_mp");
-  var0 scripts\cp\cp_weapons::_switchtoweaponimmediate("ac130_105mm_mp");
+  var_0 scripts\cp\utility::_giveweapon("ac130_105mm_mp");
+  var_0 scripts\cp\utility::_giveweapon("ac130_40mm_mp");
+  var_0 scripts\cp\utility::_giveweapon("ac130_25mm_mp");
+  var_0 scripts\cp\cp_weapons::_switchtoweaponimmediate("ac130_105mm_mp");
   waitframe();
   self.camera = spawn("script_model", self.origin);
   self.camera setModel("tag_player");
   self.camera.angles = vectortoangles(level.ac130.origin - self.camera.origin);
   self.camera linkTo(self);
 
-  if(isbot(var0)) {
-    var0 cameralinkTo(self.camera, "tag_player");
+  if(isbot(var_0)) {
+    var_0 cameralinkTo(self.camera, "tag_player");
     return;
   }
 
-  var0 playerlinkweaponviewtodelta(self.camera, "tag_player", 1, 100, 100, 25, 90, 0);
-  var0 playerlinkedsetviewznear(0);
-  var0 visionsetkillstreakforplayer("ac130_color");
-  var0 setplayerangles(self.camera.angles);
-  var0 setclientomnvar("ui_ac130_hud", 1);
-  var0 setclientomnvar("ui_ac130_105mm_ammo", var0 getweaponammoclip("ac130_105mm_mp"));
-  var0 setclientomnvar("ui_ac130_40mm_ammo", var0 getweaponammoclip("ac130_40mm_mp"));
-  var0 setclientomnvar("ui_ac130_25mm_ammo", var0 getweaponammoclip("ac130_25mm_mp"));
-  var0 setclientomnvar("ui_killstreak_countdown", gettime() + int(self.timeout * 1000));
-  var0 setclientomnvar("ui_killstreak_health", self.maxhealth);
-  var2 = [];
+  var_0 playerlinkweaponviewtodelta(self.camera, "tag_player", 1, 100, 100, 25, 90, 0);
+  var_0 playerlinkedsetviewznear(0);
+  var_0 visionsetkillstreakforplayer("ac130_color");
+  var_0 setplayerangles(self.camera.angles);
+  var_0 setclientomnvar("ui_ac130_hud", 1);
+  var_0 setclientomnvar("ui_ac130_105mm_ammo", var_0 getweaponammoclip("ac130_105mm_mp"));
+  var_0 setclientomnvar("ui_ac130_40mm_ammo", var_0 getweaponammoclip("ac130_40mm_mp"));
+  var_0 setclientomnvar("ui_ac130_25mm_ammo", var_0 getweaponammoclip("ac130_25mm_mp"));
+  var_0 setclientomnvar("ui_killstreak_countdown", gettime() + int(self.timeout * 1000));
+  var_0 setclientomnvar("ui_killstreak_health", self.maxhealth);
+  var_2 = [];
 
-  foreach(var4 in level.characters) {
-    if(level.teambased && var4.team == self.team) {
+  foreach(var_4 in level.characters) {
+    if(level.teambased && var_4.team == self.team) {
       continue;
     }
 
-    if(var4 == self.owner) {
+    if(var_4 == self.owner) {
       continue;
     }
 
-    if(var2.size >= 20) {
+    if(var_2.size >= 20) {
       continue;
     }
 
-    var2 = var4;
+    var_2 = var_4;
   }
 
-  self.enemytargetmarkergroup = scripts\cp_mp\targetmarkergroups::targetmarkergroup_on("thermalvisionenemydefault", self.owner, var2, self.owner, 1);
+  self.enemytargetmarkergroup = scripts\cp_mp\targetmarkergroups::targetmarkergroup_on("thermalvisionenemydefault", self.owner, var_2, self.owner, 1);
   self.friendlytargetmarkergroup = scripts\cp_mp\targetmarkergroups::targetmarkergroup_on("thermalvisionfriendlydefault", self.owner, self.owner, self.owner);
-  thread ac130_updateoverlaycoords(var0);
+  thread ac130_updateoverlaycoords(var_0);
 }
 
-function ac130_watchchangeweapons(var0) {
+function ac130_watchchangeweapons(var_0) {
   self endon("death");
-  var0 endon("ac130player_removed");
+  var_0 endon("ac130player_removed");
   level endon("ac130player_removed");
-  var2 = ["ac130_105mm_mp", "ac130_40mm_mp", "ac130_25mm_mp"];
-  var0 scripts\common\utility::allow_weapon_switch(0);
+  var_2 = ["ac130_105mm_mp", "ac130_40mm_mp", "ac130_25mm_mp"];
+  var_0 scripts\common\utility::allow_weapon_switch(0);
 
-  if(!isai(var0)) {
-    var0 notifyonplayercommand("ac130_switch_weapon", "+weapnext");
-    var0 setclientomnvar("ui_ac130_weapon", 3);
+  if(!isai(var_0)) {
+    var_0 notifyonplayercommand("ac130_switch_weapon", "+weapnext");
+    var_0 setclientomnvar("ui_ac130_weapon", 3);
   }
 
-  var3 = 3;
+  var_3 = 3;
 
   for(;;) {
-    var0 waittill("ac130_switch_weapon");
-    var4 = var0 getcurrentweapon();
-    var5 = var4;
+    var_0 waittill("ac130_switch_weapon");
+    var_4 = var_0 getcurrentweapon();
+    var_5 = var_4;
 
-    foreach(var7 in var2) {
-      if(var4.basename == var7) {
-        var8 = var9 + 1;
+    foreach(var_7 in var_2) {
+      if(var_4.basename == var_7) {
+        var_8 = var_9 + 1;
 
-        if(var8 > var2.size - 1) {
-          var8 = 0;
+        if(var_8 > var_2.size - 1) {
+          var_8 = 0;
         }
 
-        var5 = var2[var8];
+        var_5 = var_2[var_8];
         break;
       }
     }
 
-    var0 scripts\cp\cp_weapons::_switchtoweaponimmediate(var5);
-    var3--;
+    var_0 scripts\cp\cp_weapons::_switchtoweaponimmediate(var_5);
+    var_3--;
 
-    if(var3 == 0) {
-      var3 = 3;
+    if(var_3 == 0) {
+      var_3 = 3;
     }
 
-    var0 setclientomnvar("ui_ac130_weapon", var3);
-    playfxontagforclients(scripts\engine\utility::getfx("camera_shutter"), var0, "tag_eye", var0);
+    var_0 setclientomnvar("ui_ac130_weapon", var_3);
+    playfxontagforclients(scripts\engine\utility::getfx("camera_shutter"), var_0, "tag_eye", var_0);
     thread ac130_playfocalfx();
   }
 }
@@ -680,65 +680,65 @@ function ac130_playfocalfx() {
   setdof_ac130();
 }
 
-function ac130_watchweaponimpact(var0, var1) {
+function ac130_watchweaponimpact(var_0, var_1) {
   self endon("disconnect");
   level endon("game_ended");
-  var0 waittill("missile_stuck", var2, var3, var4, var5, var6, var7);
-  var8 = spawn("script_model", var0.origin);
-  var8 setModel("ks_ac130_target_mp");
-  var8.angles = vectortoangles(var7);
-  var8 linkTo(var0, "tag_origin", (0, 0, 0), (0, 0, 0));
-  var8 setotherent(self);
-  var9 = "on";
-  var8 setscriptablepartstate(var0.weapon_name, var9, 0);
+  var_0 waittill("missile_stuck", var_2, var_3, var_4, var_5, var_6, var_7);
+  var_8 = spawn("script_model", var_0.origin);
+  var_8 setModel("ks_ac130_target_mp");
+  var_8.angles = vectortoangles(var_7);
+  var_8 linkTo(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_8 setotherent(self);
+  var_9 = "on";
+  var_8 setscriptablepartstate(var_0.weapon_name, var_9, 0);
 
   if(isDefined(self)) {
-    var0 detonate();
+    var_0 detonate();
   } else {
-    var0 delete();
+    var_0 delete();
   }
 
-  var10 = var8.origin;
-  var11 = getmissileexplscale(var0.weapon_name);
-  var12 = 0.75;
-  var13 = getmissileexplradius(var0.weapon_name);
-  thread deleteaftertime(var8);
+  var_10 = var_8.origin;
+  var_11 = getmissileexplscale(var_0.weapon_name);
+  var_12 = 0.75;
+  var_13 = getmissileexplradius(var_0.weapon_name);
+  thread deleteaftertime(var_8);
 }
 
-function getmissileexplscale(var0) {
-  var1 = 1;
+function getmissileexplscale(var_0) {
+  var_1 = 1;
 
-  switch (var0) {
+  switch (var_0) {
     case "ac130_105mm_mp":
-      var1 = 0.75;
+      var_1 = 0.75;
       break;
     case "ac130_40mm_mp":
-      var1 = 0.5;
+      var_1 = 0.5;
       break;
     case "ac130_25mm_mp":
-      var1 = 0.15;
+      var_1 = 0.15;
       break;
   }
 
-  return var1;
+  return var_1;
 }
 
-function getmissileexplradius(var0) {
-  var1 = 1;
+function getmissileexplradius(var_0) {
+  var_1 = 1;
 
-  switch (var0) {
+  switch (var_0) {
     case "ac130_105mm_mp":
-      var1 = 2000;
+      var_1 = 2000;
       break;
     case "ac130_40mm_mp":
-      var1 = 1300;
+      var_1 = 1300;
       break;
     case "ac130_25mm_mp":
-      var1 = 700;
+      var_1 = 700;
       break;
   }
 
-  return var1;
+  return var_1;
 }
 
 function setdof_ac130() {
@@ -751,95 +751,95 @@ function setdof_ac130_zoom() {
   scripts\cp\utility::_setdof_internal(10, 80, 1000, 6500, 10, 5);
 }
 
-function ac130_watchweaponfired(var0) {
+function ac130_watchweaponfired(var_0) {
   self endon("death");
   level endon("ac130player_removed");
-  var0 endon("ac130player_removed");
-  thread ac130_track105mmmissile(var0);
+  var_0 endon("ac130player_removed");
+  thread ac130_track105mmmissile(var_0);
 
   for(;;) {
-    var0 waittill("missile_fire", var2);
-    var3 = var0 getcurrentweapon();
-    var4 = var0 getweaponammoclip(var3);
+    var_0 waittill("missile_fire", var_2);
+    var_3 = var_0 getcurrentweapon();
+    var_4 = var_0 getweaponammoclip(var_3);
 
-    switch (var3.basename) {
+    switch (var_3.basename) {
       case "ac130_105mm_mp":
         earthquake(0.2, 1, self.origin, 1000);
-        var0 setclientomnvar("ui_ac130_105mm_ammo", var4);
+        var_0 setclientomnvar("ui_ac130_105mm_ammo", var_4);
         break;
       case "ac130_40mm_mp":
         earthquake(0.1, 0.5, self.origin, 1000);
-        var0 setclientomnvar("ui_ac130_40mm_ammo", var4);
+        var_0 setclientomnvar("ui_ac130_40mm_ammo", var_4);
         break;
       case "ac130_25mm_mp":
-        var0 setclientomnvar("ui_ac130_25mm_ammo", var4);
+        var_0 setclientomnvar("ui_ac130_25mm_ammo", var_4);
         break;
     }
 
-    if(var4 == 0) {
-      thread ac130_weaponreload(var0);
+    if(var_4 == 0) {
+      thread ac130_weaponreload(var_0);
     }
 
-    thread ac130_watchweaponimpact(var0, var2);
+    thread ac130_watchweaponimpact(var_0, var_2);
   }
 }
 
-function ac130_track105mmmissile(var0) {
+function ac130_track105mmmissile(var_0) {
   self endon("death");
   level endon("ac130player_removed");
-  var0 endon("ac130player_removed");
+  var_0 endon("ac130player_removed");
 
   for(;;) {
-    var0 waittill("missile_fire", var1, var2);
+    var_0 waittill("missile_fire", var_1, var_2);
 
-    if(var2.basename == "ac130_105mm_mp") {
-      thread ac130_watch105mmexplosion(var1, self);
+    if(var_2.basename == "ac130_105mm_mp") {
+      thread ac130_watch105mmexplosion(var_1, self);
     }
   }
 }
 
-function ac130_watch105mmexplosion(var0, var1) {
+function ac130_watch105mmexplosion(var_0, var_1) {
   level endon("ac130player_removed");
-  var1 endon("ac130player_removed");
-  var1 endon("disconnect");
+  var_1 endon("ac130player_removed");
+  var_1 endon("disconnect");
   self waittill("death");
-  earthquake(0.125, 0.5, var0.origin, 1000);
-  var1 visionsetkillstreakforplayer("ac130_color_glitch");
+  earthquake(0.125, 0.5, var_0.origin, 1000);
+  var_1 visionsetkillstreakforplayer("ac130_color_glitch");
   scripts\cp\cp_hostmigration::waitlongdurationwithhostmigrationpause(0.1);
-  var1 visionsetkillstreakforplayer("ac130_color");
+  var_1 visionsetkillstreakforplayer("ac130_color");
 }
 
-function ac130_weaponreload(var0) {
+function ac130_weaponreload(var_0) {
   self endon("ac130player_removed");
   level endon("ac130player_removed");
-  var1 = getac130weaponrootname(var0);
-  self playlocalsound(var1 + "_mp_reload");
-  ac130_waitforweaponreloadtime(var0, var1);
-  scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog(var1 + "_reloaded");
-  var2 = weaponmaxammo(var0);
-  self setweaponammoclip(var0, var2);
-  self setclientomnvar("ui_" + var1 + "_ammo", var2);
+  var_1 = getac130weaponrootname(var_0);
+  self playlocalsound(var_1 + "_mp_reload");
+  ac130_waitforweaponreloadtime(var_0, var_1);
+  scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog(var_1 + "_reloaded");
+  var_2 = weaponmaxammo(var_0);
+  self setweaponammoclip(var_0, var_2);
+  self setclientomnvar("ui_" + var_1 + "_ammo", var_2);
 }
 
-function ac130_waitforweaponreloadtime(var0, var1) {
-  var2 = level.weaponreloadtime[var0.basename];
-  self setclientomnvar("ui_" + var1 + "_reloadtime", gettime() + int(var2 * 1000));
+function ac130_waitforweaponreloadtime(var_0, var_1) {
+  var_2 = level.weaponreloadtime[var_0.basename];
+  self setclientomnvar("ui_" + var_1 + "_reloadtime", gettime() + int(var_2 * 1000));
 
   for(;;) {
     wait 0.05;
-    var2 -= 0.05;
+    var_2 -= 0.05;
 
-    if(var2 <= 0) {
+    if(var_2 <= 0) {
       break;
     }
   }
 }
 
-function getac130weaponrootname(var0) {
-  var1 = 0;
-  var2 = var0.basename;
-  var3 = strtok(var2, "_");
-  return var3[var1] + "_" + var3[var1 + 1];
+function getac130weaponrootname(var_0) {
+  var_1 = 0;
+  var_2 = var_0.basename;
+  var_3 = strtok(var_2, "_");
+  return var_3[var_1] + "_" + var_3[var_1 + 1];
 }
 
 function playsound25mm() {
@@ -848,14 +848,14 @@ function playsound25mm() {
   level endon("game_ended");
   self endon("ac130player_removed");
   self endon("reset_25mm");
-  var0 = self getcurrentweapon();
+  var_0 = self getcurrentweapon();
 
   for(;;) {
     self waittill("weapon_fired");
     self stoplocalsound("ac130iw6_25mm_fire_loop_cooldown");
     self playLoopSound("ac130iw6_25mm_fire_loop");
 
-    while(self attackButtonPressed() && self getweaponammoclip(var0)) {
+    while(self attackButtonPressed() && self getweaponammoclip(var_0)) {
       waitframe();
     }
 
@@ -874,14 +874,14 @@ function thermalvision() {
   self setclientdvar("ui_ac130_thermal", 1);
 }
 
-function ac130_playpilotfx(var0) {
+function ac130_playpilotfx(var_0) {
   self endon("death");
   self endon("leaving");
-  var0.ac130_cloudsfx = spawn("script_model", var0 getEye());
-  var0.ac130_cloudsfx setModel("tag_origin");
-  var0.ac130_cloudsfx linkTo(var0, "tag_eye");
+  var_0.ac130_cloudsfx = spawn("script_model", var_0 getEye());
+  var_0.ac130_cloudsfx setModel("tag_origin");
+  var_0.ac130_cloudsfx linkTo(var_0, "tag_eye");
   waitframe();
-  playfxontagforclients(scripts\engine\utility::getfx("clouds"), var0.ac130_cloudsfx, "tag_origin", var0);
+  playfxontagforclients(scripts\engine\utility::getfx("clouds"), var_0.ac130_cloudsfx, "tag_origin", var_0);
 }
 
 function gun_fired_and_ready_105mm() {
@@ -902,31 +902,31 @@ function shotfired() {
   self endon("ac130player_removed");
 
   for(;;) {
-    self waittill("projectile_impact", var0, var1, var2);
+    self waittill("projectile_impact", var_0, var_1, var_2);
 
-    if(issubstr(tolower(var0.basename), "105")) {
-      earthquake(0.4, 1, var1, 3500);
+    if(issubstr(tolower(var_0.basename), "105")) {
+      earthquake(0.4, 1, var_1, 3500);
       self setclientomnvar("ui_ac130_darken", 1);
-    } else if(issubstr(tolower(var0.basename), "40")) {
-      earthquake(0.2, 0.5, var1, 2000);
+    } else if(issubstr(tolower(var_0.basename), "40")) {
+      earthquake(0.2, 0.5, var_1, 2000);
     }
 
     if(scripts\cp\utility::getintproperty("ac130_ragdoll_deaths", 0)) {
-      thread shotfiredphysicssphere(var1, var0.basename);
+      thread shotfiredphysicssphere(var_1, var_0.basename);
     }
 
     waitframe();
   }
 }
 
-function shotfiredphysicssphere(var0, var1) {
+function shotfiredphysicssphere(var_0, var_1) {
   wait 0.1;
-  physicsexplosionsphere(var0, level.physicssphereradius[var1], level.physicssphereradius[var1] / 2, level.physicssphereforce[var1]);
+  physicsexplosionsphere(var_0, level.physicssphereradius[var_1], level.physicssphereradius[var_1] / 2, level.physicssphereforce[var_1]);
 }
 
 function add_beacon_effect() {
   self endon("death");
-  var0 = 0.75;
+  var_0 = 0.75;
   wait randomfloat(3);
 
   for(;;) {
@@ -934,7 +934,7 @@ function add_beacon_effect() {
       playfxontagforclients(level._effect["beacon"], self, "j_spine4", level.ac130player);
     }
 
-    wait var0;
+    wait var_0;
   }
 }
 
@@ -962,34 +962,34 @@ function context_sensative_dialog_guy_in_sight() {
 }
 
 function context_sensative_dialog_guy_in_sight_check() {
-  var0 = [];
+  var_0 = [];
 
-  foreach(var2 in level.players) {
-    if(!var2 scripts\cp_mp\utility\player_utility::_isalive()) {
+  foreach(var_2 in level.players) {
+    if(!var_2 scripts\cp_mp\utility\player_utility::_isalive()) {
       continue;
     }
 
-    if(var2.team == level.ac130player.team) {
+    if(var_2.team == level.ac130player.team) {
       continue;
     }
 
-    if(var2.team == "spectator") {
+    if(var_2.team == "spectator") {
       continue;
     }
 
-    var0 = var2;
+    var_0 = var_2;
   }
 
-  for(var4 = 0; var4 < var0.size; var4++) {
-    if(!isDefined(var0[var4])) {
+  for(var_4 = 0; var_4 < var_0.size; var_4++) {
+    if(!isDefined(var_0[var_4])) {
       continue;
     }
 
-    if(!isalive(var0[var4])) {
+    if(!isalive(var_0[var_4])) {
       continue;
     }
 
-    if(scripts\engine\utility::within_fov(level.ac130player getEye(), level.ac130player getplayerangles(), var0[var4].origin, level.cosine["5"])) {
+    if(scripts\engine\utility::within_fov(level.ac130player getEye(), level.ac130player getplayerangles(), var_0[var_4].origin, level.cosine["5"])) {
       return true;
     }
 
@@ -1003,7 +1003,7 @@ function context_sensative_dialog_guy_crawling() {
   self endon("ac130player_removed");
 
   for(;;) {
-    level waittill("ai_crawling", var0);
+    level waittill("ai_crawling", var_0);
     thread context_sensative_dialog_play_random_group_sound("ai", "wounded_crawl");
   }
 }
@@ -1012,7 +1012,7 @@ function context_sensative_dialog_guy_pain() {
   self endon("ac130player_removed");
 
   for(;;) {
-    level waittill("ai_pain", var0);
+    level waittill("ai_pain", var_0);
     thread context_sensative_dialog_play_random_group_sound("ai", "wounded_pain");
   }
 }
@@ -1021,7 +1021,7 @@ function context_sensative_dialog_secondary_explosion_vehicle() {
   self endon("ac130player_removed");
 
   for(;;) {
-    level waittill("player_destroyed_car", var0, var1);
+    level waittill("player_destroyed_car", var_0, var_1);
     wait 1;
     thread context_sensative_dialog_play_random_group_sound("explosion", "secondary");
   }
@@ -1031,17 +1031,17 @@ function enemy_killed_thread() {
   self endon("ac130player_removed");
 
   for(;;) {
-    level waittill("ai_killed", var0);
-    thread context_sensative_dialog_kill(var0, level.ac130player);
+    level waittill("ai_killed", var_0);
+    thread context_sensative_dialog_kill(var_0, level.ac130player);
   }
 }
 
-function context_sensative_dialog_kill(var0, var1) {
-  if(!isDefined(var1)) {
+function context_sensative_dialog_kill(var_0, var_1) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  if(!isPlayer(var1)) {
+  if(!isPlayer(var_1)) {
     return;
   }
 
@@ -1051,18 +1051,18 @@ function context_sensative_dialog_kill(var0, var1) {
 
 function context_sensative_dialog_kill_thread() {
   self endon("ac130player_removed");
-  var0 = 1;
+  var_0 = 1;
 
   for(;;) {
     level waittill("enemy_killed");
-    wait var0;
-    var1 = "kill";
-    var2 = undefined;
+    wait var_0;
+    var_1 = "kill";
+    var_2 = undefined;
 
     if(level.enemieskilledintimewindow >= 2) {
-      var2 = "small_group";
+      var_2 = "small_group";
     } else {
-      var2 = "single";
+      var_2 = "single";
 
       if(randomint(3) != 1) {
         level.enemieskilledintimewindow = 0;
@@ -1071,7 +1071,7 @@ function context_sensative_dialog_kill_thread() {
     }
 
     level.enemieskilledintimewindow = 0;
-    thread context_sensative_dialog_play_random_group_sound(var1, var2, 1);
+    thread context_sensative_dialog_play_random_group_sound(var_1, var_2, 1);
   }
 }
 
@@ -1091,9 +1091,9 @@ function context_sensative_dialog_locations_thread() {
   self endon("ac130player_removed");
 
   for(;;) {
-    level waittill("context_location", var0);
+    level waittill("context_location", var_0);
 
-    if(!isDefined(var0)) {
+    if(!isDefined(var_0)) {
       continue;
     }
 
@@ -1101,47 +1101,47 @@ function context_sensative_dialog_locations_thread() {
       continue;
     }
 
-    thread context_sensative_dialog_play_random_group_sound("location", var0);
+    thread context_sensative_dialog_play_random_group_sound("location", var_0);
     wait 5 + randomfloat(10);
   }
 }
 
-function context_sensative_dialog_locations_add_notify_event(var0) {
+function context_sensative_dialog_locations_add_notify_event(var_0) {
   self endon("ac130player_removed");
 
   for(;;) {
-    self waittill("trigger", var1);
+    self waittill("trigger", var_1);
 
-    if(!isDefined(var1)) {
+    if(!isDefined(var_1)) {
       continue;
     }
 
-    if(!isDefined(var1.team) || var1.team != "axis") {
+    if(!isDefined(var_1.team) || var_1.team != "axis") {
       continue;
     }
 
-    level notify("context_location", var0);
+    level notify("context_location", var_0);
     wait 5;
   }
 }
 
-function context_sensative_dialog_vehiclespawn(var0) {
-  if(var0.script_team != "axis") {
+function context_sensative_dialog_vehiclespawn(var_0) {
+  if(var_0.script_team != "axis") {
     return;
   }
 
-  thread context_sensative_dialog_vehicledeath(var0);
-  var0 endon("death");
+  thread context_sensative_dialog_vehicledeath(var_0);
+  var_0 endon("death");
 
-  while(!scripts\engine\utility::within_fov(level.ac130player getEye(), level.ac130player getplayerangles(), var0.origin, level.cosine["45"])) {
+  while(!scripts\engine\utility::within_fov(level.ac130player getEye(), level.ac130player getplayerangles(), var_0.origin, level.cosine["45"])) {
     wait 0.5;
   }
 
   context_sensative_dialog_play_random_group_sound("vehicle", "incoming");
 }
 
-function context_sensative_dialog_vehicledeath(var0) {
-  var0 waittill("death");
+function context_sensative_dialog_vehicledeath(var_0) {
+  var_0 waittill("death");
   thread context_sensative_dialog_play_random_group_sound("vehicle", "death");
 }
 
@@ -1153,10 +1153,10 @@ function context_sensative_dialog_filler() {
       level waittill("radio_not_in_use");
     }
 
-    var0 = gettime();
+    var_0 = gettime();
 
-    if(var0 - level.lastradiotransmission >= 3000) {
-      level.lastradiotransmission = var0;
+    if(var_0 - level.lastradiotransmission >= 3000) {
+      level.lastradiotransmission = var_0;
       thread context_sensative_dialog_play_random_group_sound("misc", "action");
     }
 
@@ -1164,128 +1164,128 @@ function context_sensative_dialog_filler() {
   }
 }
 
-function context_sensative_dialog_play_random_group_sound(var0, var1, var2) {
+function context_sensative_dialog_play_random_group_sound(var_0, var_1, var_2) {
   level endon("ac130player_removed");
 
-  if(!isDefined(var2)) {
-    var2 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
   if(!scripts\engine\utility::flag("allow_context_sensative_dialog")) {
-    if(var2) {
+    if(var_2) {
       scripts\engine\utility::flag_wait("allow_context_sensative_dialog");
     } else {
       return;
     }
   }
 
-  var3 = undefined;
-  var4 = randomint(level.scr_sound[var0][var1].size);
+  var_3 = undefined;
+  var_4 = randomint(level.scr_sound[var_0][var_1].size);
 
-  if(level.scr_sound[var0][var1][var4].played == 1) {
-    for(var5 = 0; var5 < level.scr_sound[var0][var1].size; var5++) {
-      var4++;
+  if(level.scr_sound[var_0][var_1][var_4].played == 1) {
+    for(var_5 = 0; var_5 < level.scr_sound[var_0][var_1].size; var_5++) {
+      var_4++;
 
-      if(var4 >= level.scr_sound[var0][var1].size) {
-        var4 = 0;
+      if(var_4 >= level.scr_sound[var_0][var_1].size) {
+        var_4 = 0;
       }
 
-      if(level.scr_sound[var0][var1][var4].played == 1) {
+      if(level.scr_sound[var_0][var_1][var_4].played == 1) {
         continue;
       }
 
-      var3 = var4;
+      var_3 = var_4;
       break;
     }
 
-    if(!isDefined(var3)) {
-      for(var5 = 0; var5 < level.scr_sound[var0][var1].size; var5++) {
-        level.scr_sound[var0][var1][var5].played = 0;
+    if(!isDefined(var_3)) {
+      for(var_5 = 0; var_5 < level.scr_sound[var_0][var_1].size; var_5++) {
+        level.scr_sound[var_0][var_1][var_5].played = 0;
       }
 
-      var3 = randomint(level.scr_sound[var0][var1].size);
+      var_3 = randomint(level.scr_sound[var_0][var_1].size);
     }
   } else {
-    var3 = var4;
+    var_3 = var_4;
   }
 
-  if(context_sensative_dialog_timedout(var0, var1, var3)) {
+  if(context_sensative_dialog_timedout(var_0, var_1, var_3)) {
     return;
   }
 
-  level.scr_sound[var0][var1][var3].played = 1;
-  var6 = randomint(level.scr_sound[var0][var1][var3].size);
-  playsoundoverradio(level.scr_sound[var0][var1][var3].sounds[var6], var2);
+  level.scr_sound[var_0][var_1][var_3].played = 1;
+  var_6 = randomint(level.scr_sound[var_0][var_1][var_3].size);
+  playsoundoverradio(level.scr_sound[var_0][var_1][var_3].sounds[var_6], var_2);
 }
 
-function context_sensative_dialog_timedout(var0, var1, var2) {
+function context_sensative_dialog_timedout(var_0, var_1, var_2) {
   if(!isDefined(level.context_sensative_dialog_timeouts)) {
     return false;
   }
 
-  if(!isDefined(level.context_sensative_dialog_timeouts[var0])) {
+  if(!isDefined(level.context_sensative_dialog_timeouts[var_0])) {
     return false;
   }
 
-  if(!isDefined(level.context_sensative_dialog_timeouts[var0][var1])) {
+  if(!isDefined(level.context_sensative_dialog_timeouts[var_0][var_1])) {
     return false;
   }
 
-  if(isDefined(level.context_sensative_dialog_timeouts[var0][var1].groups) && isDefined(level.context_sensative_dialog_timeouts[var0][var1].groups[scripts\engine\utility::string(var2)])) {
-    var3 = gettime();
+  if(isDefined(level.context_sensative_dialog_timeouts[var_0][var_1].groups) && isDefined(level.context_sensative_dialog_timeouts[var_0][var_1].groups[scripts\engine\utility::string(var_2)])) {
+    var_3 = gettime();
 
-    if(var3 - level.context_sensative_dialog_timeouts[var0][var1].groups[scripts\engine\utility::string(var2)].v["lastPlayed"] < level.context_sensative_dialog_timeouts[var0][var1].groups[scripts\engine\utility::string(var2)].v["timeoutDuration"]) {
+    if(var_3 - level.context_sensative_dialog_timeouts[var_0][var_1].groups[scripts\engine\utility::string(var_2)].v["lastPlayed"] < level.context_sensative_dialog_timeouts[var_0][var_1].groups[scripts\engine\utility::string(var_2)].v["timeoutDuration"]) {
       return true;
     }
 
-    level.context_sensative_dialog_timeouts[var0][var1].groups[scripts\engine\utility::string(var2)].v["lastPlayed"] = var3;
-  } else if(isDefined(level.context_sensative_dialog_timeouts[var0][var1].v)) {
-    var3 = gettime();
+    level.context_sensative_dialog_timeouts[var_0][var_1].groups[scripts\engine\utility::string(var_2)].v["lastPlayed"] = var_3;
+  } else if(isDefined(level.context_sensative_dialog_timeouts[var_0][var_1].v)) {
+    var_3 = gettime();
 
-    if(var3 - level.context_sensative_dialog_timeouts[var0][var1].v["lastPlayed"] < level.context_sensative_dialog_timeouts[var0][var1].v["timeoutDuration"]) {
+    if(var_3 - level.context_sensative_dialog_timeouts[var_0][var_1].v["lastPlayed"] < level.context_sensative_dialog_timeouts[var_0][var_1].v["timeoutDuration"]) {
       return true;
     }
 
-    level.context_sensative_dialog_timeouts[var0][var1].v["lastPlayed"] = var3;
+    level.context_sensative_dialog_timeouts[var_0][var_1].v["lastPlayed"] = var_3;
   }
 
   return false;
 }
 
-function playsoundoverradio(var0, var1, var2) {
+function playsoundoverradio(var_0, var_1, var_2) {
   if(!isDefined(level.radio_in_use)) {
     level.radio_in_use = 0;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  var2 *= 1000;
-  var3 = gettime();
-  var4 = 0;
-  var4 = playaliasoverradio(var0);
+  var_2 *= 1000;
+  var_3 = gettime();
+  var_4 = 0;
+  var_4 = playaliasoverradio(var_0);
 
-  if(var4) {
+  if(var_4) {
     return;
   }
 
-  if(!var1) {
+  if(!var_1) {
     return;
   }
 
-  level.radioforcedtransmissionqueue[level.radioforcedtransmissionqueue.size] = var0;
+  level.radioforcedtransmissionqueue[level.radioforcedtransmissionqueue.size] = var_0;
 
-  while(!var4) {
+  while(!var_4) {
     if(level.radio_in_use) {
       level waittill("radio_not_in_use");
     }
 
-    if(var2 > 0 && gettime() - var3 > var2) {
+    if(var_2 > 0 && gettime() - var_3 > var_2) {
       break;
     }
 
@@ -1293,15 +1293,15 @@ function playsoundoverradio(var0, var1, var2) {
       break;
     }
 
-    var4 = playaliasoverradio(level.radioforcedtransmissionqueue[0]);
+    var_4 = playaliasoverradio(level.radioforcedtransmissionqueue[0]);
 
-    if(!level.radio_in_use && isDefined(level.ac130player) && !var4) {}
+    if(!level.radio_in_use && isDefined(level.ac130player) && !var_4) {}
   }
 
   level.radioforcedtransmissionqueue = scripts\engine\utility::array_remove_index(level.radioforcedtransmissionqueue, 0);
 }
 
-function playaliasoverradio(var0) {
+function playaliasoverradio(var_0) {
   if(level.radio_in_use) {
     return false;
   }
@@ -1311,7 +1311,7 @@ function playaliasoverradio(var0) {
   }
 
   level.radio_in_use = 1;
-  level.ac130player playlocalsound(var0);
+  level.ac130player playlocalsound(var_0);
   wait 4;
   level.radio_in_use = 0;
   level.lastradiotransmission = gettime();
@@ -1324,64 +1324,64 @@ function handleincomingmissiles() {
   thread flares_monitor(level.ac130.planemodel);
 }
 
-function flares_monitor(var0) {
-  self.flaresreservecount = var0;
+function flares_monitor(var_0) {
+  self.flaresreservecount = var_0;
   self.flareslive = [];
   thread ks_laserguidedmissile_handleincoming();
   thread ks_airsuperiority_handleincoming();
 }
 
-function playflarefx(var0) {
-  for(var1 = 0; var1 < var0; var1++) {
+function playflarefx(var_0) {
+  for(var_1 = 0; var_1 < var_0; var_1++) {
     thread ac130_playflares();
     wait randomfloatrange(0.1, 0.25);
   }
 }
 
-function deployflares(var0) {
+function deployflares(var_0) {
   self playSound("ac130iw6_flare_burst");
 
-  if(!isDefined(var0)) {
-    var1 = spawn("script_origin", level.ac130.planemodel.origin);
-    var1.angles = level.ac130.planemodel.angles;
-    var1 movegravity((0, 0, 0), 5);
+  if(!isDefined(var_0)) {
+    var_1 = spawn("script_origin", level.ac130.planemodel.origin);
+    var_1.angles = level.ac130.planemodel.angles;
+    var_1 movegravity((0, 0, 0), 5);
     thread playflarefx(10);
-    self.flareslive[self.flareslive.size] = var1;
-    thread deleteaftertime(var1);
-    return var1;
+    self.flareslive[self.flareslive.size] = var_1;
+    thread deleteaftertime(var_1);
+    return var_1;
   }
 
   thread playflarefx(5);
 }
 
-function flares_getnumleft(var0) {
-  return var0.flaresreservecount;
+function flares_getnumleft(var_0) {
+  return var_0.flaresreservecount;
 }
 
-function flares_areavailable(var0) {
-  flares_cleanflareslivearray(var0);
-  return var0.flaresreservecount > 0 || var0.flareslive.size > 0;
+function flares_areavailable(var_0) {
+  flares_cleanflareslivearray(var_0);
+  return var_0.flaresreservecount > 0 || var_0.flareslive.size > 0;
 }
 
-function flares_getflarereserve(var0) {
-  var0.flaresreservecount--;
-  var1 = deployflares(var0);
-  return var1;
+function flares_getflarereserve(var_0) {
+  var_0.flaresreservecount--;
+  var_1 = deployflares(var_0);
+  return var_1;
 }
 
-function flares_cleanflareslivearray(var0) {
-  var0.flareslive = scripts\engine\utility::array_removeundefined(var0.flareslive);
+function flares_cleanflareslivearray(var_0) {
+  var_0.flareslive = scripts\engine\utility::array_removeundefined(var_0.flareslive);
 }
 
-function flares_getflarelive(var0) {
-  flares_cleanflareslivearray(var0);
-  var1 = undefined;
+function flares_getflarelive(var_0) {
+  flares_cleanflareslivearray(var_0);
+  var_1 = undefined;
 
-  if(var0.flareslive.size > 0) {
-    var1 = var0.flareslive[var0.flareslive.size - 1];
+  if(var_0.flareslive.size > 0) {
+    var_1 = var_0.flareslive[var_0.flareslive.size - 1];
   }
 
-  return var1;
+  return var_1;
 }
 
 function ks_laserguidedmissile_handleincoming() {
@@ -1392,43 +1392,43 @@ function ks_laserguidedmissile_handleincoming() {
   self endon("helicopter_done");
 
   while(flares_areavailable(self)) {
-    level waittill("laserGuidedMissiles_incoming", var0, var1, var2);
+    level waittill("laserGuidedMissiles_incoming", var_0, var_1, var_2);
 
-    if(!isDefined(var2) || var2 != self) {
+    if(!isDefined(var_2) || var_2 != self) {
       continue;
     }
 
     thread ks_watch_death_stop_sound(level.ac130player, self);
 
-    foreach(var4 in var1) {
-      if(isvalidmissile(var4)) {
-        thread ks_laserguidedmissile_monitorproximity(level, var4, var0, var0.team);
+    foreach(var_4 in var_1) {
+      if(isvalidmissile(var_4)) {
+        thread ks_laserguidedmissile_monitorproximity(level, var_4, var_0, var_0.team);
       }
     }
   }
 }
 
-function ks_laserguidedmissile_monitorproximity(var0, var1, var2, var3) {
-  var3 endon("death");
-  var0 endon("death");
-  var0 endon("missile_targetChanged");
+function ks_laserguidedmissile_monitorproximity(var_0, var_1, var_2, var_3) {
+  var_3 endon("death");
+  var_0 endon("death");
+  var_0 endon("missile_targetChanged");
 
-  while(flares_areavailable(var3)) {
-    if(!isDefined(var3) || !isvalidmissile(var0)) {
+  while(flares_areavailable(var_3)) {
+    if(!isDefined(var_3) || !isvalidmissile(var_0)) {
       break;
     }
 
-    var4 = var3 getpointinbounds(0, 0, 0);
+    var_4 = var_3 getpointinbounds(0, 0, 0);
 
-    if(distancesquared(var0.origin, var4) < 4000000) {
-      var5 = flares_getflarelive(var3);
+    if(distancesquared(var_0.origin, var_4) < 4000000) {
+      var_5 = flares_getflarelive(var_3);
 
-      if(!isDefined(var5)) {
-        var5 = flares_getflarereserve(var3);
+      if(!isDefined(var_5)) {
+        var_5 = flares_getflarereserve(var_3);
       }
 
-      var0 missile_settargetEnt(var5);
-      var0 notify("missile_pairedWithFlare");
+      var_0 missile_settargetEnt(var_5);
+      var_0 notify("missile_pairedWithFlare");
       level.ac130player stoplocalsound("missile_incoming");
       break;
     }
@@ -1445,43 +1445,43 @@ function ks_airsuperiority_handleincoming() {
   self endon("helicopter_done");
 
   while(flares_areavailable(self)) {
-    self waittill("targeted_by_incoming_missile", var0);
+    self waittill("targeted_by_incoming_missile", var_0);
 
-    if(!isDefined(var0)) {
+    if(!isDefined(var_0)) {
       continue;
     }
 
     thread ks_watch_death_stop_sound(level.ac130player, self);
 
-    foreach(var2 in var0) {
-      if(isvalidmissile(var2)) {
-        thread ks_airsuperiority_monitorproximity(var2);
+    foreach(var_2 in var_0) {
+      if(isvalidmissile(var_2)) {
+        thread ks_airsuperiority_monitorproximity(var_2);
       }
     }
   }
 }
 
-function ks_airsuperiority_monitorproximity(var0) {
+function ks_airsuperiority_monitorproximity(var_0) {
   self endon("death");
-  var0 endon("death");
+  var_0 endon("death");
 
   for(;;) {
-    if(!isDefined(self) || !isvalidmissile(var0)) {
+    if(!isDefined(self) || !isvalidmissile(var_0)) {
       break;
     }
 
-    var1 = self getpointinbounds(0, 0, 0);
+    var_1 = self getpointinbounds(0, 0, 0);
 
-    if(distancesquared(var0.origin, var1) < 4000000) {
-      var2 = flares_getflarelive(self);
+    if(distancesquared(var_0.origin, var_1) < 4000000) {
+      var_2 = flares_getflarelive(self);
 
-      if(!isDefined(var2) && self.flaresreservecount > 0) {
-        var2 = flares_getflarereserve(self);
+      if(!isDefined(var_2) && self.flaresreservecount > 0) {
+        var_2 = flares_getflarereserve(self);
       }
 
-      if(isDefined(var2)) {
-        var0 missile_settargetEnt(var2);
-        var0 notify("missile_pairedWithFlare");
+      if(isDefined(var_2)) {
+        var_0 missile_settargetEnt(var_2);
+        var_0 notify("missile_pairedWithFlare");
         level.ac130player stoplocalsound("missile_incoming");
         break;
       }
@@ -1491,22 +1491,22 @@ function ks_airsuperiority_monitorproximity(var0) {
   }
 }
 
-function ks_watch_death_stop_sound(var0, var1) {
+function ks_watch_death_stop_sound(var_0, var_1) {
   self endon("disconnect");
-  var0 waittill("death");
-  self stoplocalsound(var1);
+  var_0 waittill("death");
+  self stoplocalsound(var_1);
 }
 
-function deleteaftertime(var0) {
-  wait var0;
+function deleteaftertime(var_0) {
+  wait var_0;
   self delete();
 }
 
-function ac130_crash(var0, var1) {
+function ac130_crash(var_0, var_1) {
   self notify("crashing");
   self.crashed = 1;
-  ac130_returnplayer(var1, 0);
-  scripts\cp\cp_hostmigration::waitlongdurationwithhostmigrationpause(var0);
+  ac130_returnplayer(var_1, 0);
+  scripts\cp\cp_hostmigration::waitlongdurationwithhostmigrationpause(var_0);
   ac130_removeplane();
 }
 
@@ -1520,50 +1520,50 @@ function ac130_removeplane() {
 }
 
 function ac130_playflares() {
-  var0 = spawn("script_model", self.origin);
-  var0 setModel("angel_flare_rig");
-  var0.origin = self gettagorigin("tag_flash_flares");
-  var0.angles = self gettagangles("tag_flash_flares");
-  var0.angles = (var0.angles[0], var0.angles[1] + 180, var0.angles[2] + -90);
-  var1 = level._effect["angel_flare_geotrail"];
-  var0 scriptmodelplayanim("ac130_angel_flares0" + randomint(3) + 1);
+  var_0 = spawn("script_model", self.origin);
+  var_0 setModel("angel_flare_rig");
+  var_0.origin = self gettagorigin("tag_flash_flares");
+  var_0.angles = self gettagangles("tag_flash_flares");
+  var_0.angles = (var_0.angles[0], var_0.angles[1] + 180, var_0.angles[2] + -90);
+  var_1 = level._effect["angel_flare_geotrail"];
+  var_0 scriptmodelplayanim("ac130_angel_flares0" + randomint(3) + 1);
   wait 0.1;
-  playFXOnTag(var1, var0, "flare_left_top");
-  playFXOnTag(var1, var0, "flare_right_top");
+  playFXOnTag(var_1, var_0, "flare_left_top");
+  playFXOnTag(var_1, var_0, "flare_right_top");
   wait 0.05;
-  playFXOnTag(var1, var0, "flare_left_bot");
-  playFXOnTag(var1, var0, "flare_right_bot");
+  playFXOnTag(var_1, var_0, "flare_left_bot");
+  playFXOnTag(var_1, var_0, "flare_right_bot");
   wait 3;
-  stopFXOnTag(var1, var0, "flare_left_top");
-  stopFXOnTag(var1, var0, "flare_right_top");
-  stopFXOnTag(var1, var0, "flare_left_bot");
-  stopFXOnTag(var1, var0, "flare_right_bot");
-  var0 delete();
+  stopFXOnTag(var_1, var_0, "flare_left_top");
+  stopFXOnTag(var_1, var_0, "flare_right_top");
+  stopFXOnTag(var_1, var_0, "flare_left_bot");
+  stopFXOnTag(var_1, var_0, "flare_right_bot");
+  var_0 delete();
 }
 
-function objectivewmdthink(var0) {
-  var1 = 0;
+function objectivewmdthink(var_0) {
+  var_1 = 0;
 
-  while(!var1) {
-    var1 = istargetinreticle(level.objective_nuke, 70, 50);
+  while(!var_1) {
+    var_1 = istargetinreticle(level.objective_nuke, 70, 50);
     wait 0.5;
   }
 }
 
-function istargetinreticle(var0, var1, var2) {
-  var3 = 0;
-  var4 = [var0.origin];
+function istargetinreticle(var_0, var_1, var_2) {
+  var_3 = 0;
+  var_4 = [var_0.origin];
 
-  if(isPlayer(var0)) {
-    var4 = [var0.origin, var0 gettagorigin("j_mainroot"), var0 gettagorigin("tag_eye")];
+  if(isPlayer(var_0)) {
+    var_4 = [var_0.origin, var_0 gettagorigin("j_mainroot"), var_0 gettagorigin("tag_eye")];
   }
 
-  foreach(var6 in var4) {
-    if(self worldpointinreticle_circle(var6, var1, var2)) {
-      var3 = 1;
+  foreach(var_6 in var_4) {
+    if(self worldpointinreticle_circle(var_6, var_1, var_2)) {
+      var_3 = 1;
       break;
     }
   }
 
-  return var3;
+  return var_3;
 }

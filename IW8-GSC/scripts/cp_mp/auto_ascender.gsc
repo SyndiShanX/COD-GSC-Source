@@ -22,12 +22,12 @@ function init() {
     level.ref_13beb = 0;
   }
 
-  foreach(var1 in level.ascendstarts) {
-    markupascenderstruct(var1, 1);
+  foreach(var_1 in level.ascendstarts) {
+    markupascenderstruct(var_1, 1);
   }
 
-  foreach(var1 in level.descendstarts) {
-    markupascenderstruct(var1, 0);
+  foreach(var_1 in level.descendstarts) {
+    markupascenderstruct(var_1, 0);
   }
 
   initanimtree();
@@ -124,40 +124,40 @@ function initanimtree() {
   level.scr_eventanim["device"]["ascender_down_out_wm"] = "ascender_down_out";
 }
 
-function markupascenderstruct(var0, var1) {
-  var2 = scripts\engine\utility::getStruct(var0.target, "targetname");
+function markupascenderstruct(var_0, var_1) {
+  var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
 
-  if(!isDefined(var2)) {
-    var0 = undefined;
+  if(!isDefined(var_2)) {
+    var_0 = undefined;
     return;
   }
 
-  var3 = scripts\engine\utility::getStruct(var2.target, "targetname");
+  var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
 
-  if(!isDefined(var3)) {
-    var0 = undefined;
+  if(!isDefined(var_3)) {
+    var_0 = undefined;
     return;
   }
 
-  level.ascendstructs[var0.targetname] = var0;
+  level.ascendstructs[var_0.targetname] = var_0;
   level.ref_13beb++;
-  var0.ascendstructend = var2;
-  var0.ascendstructout = var3;
-  var0.inuse = 0;
-  var0.exitangle = var0.angles + (0, 180, 0);
-  var0.startangle = var0.angles;
-  var0.dir = var1;
-  var0.ascender = [];
-  var0.waittill_player_opens_tac_map = 0;
+  var_0.ascendstructend = var_2;
+  var_0.ascendstructout = var_3;
+  var_0.inuse = 0;
+  var_0.exitangle = var_0.angles + (0, 180, 0);
+  var_0.startangle = var_0.angles;
+  var_0.dir = var_1;
+  var_0.ascender = [];
+  var_0.waittill_player_opens_tac_map = 0;
 }
 
-function ascenderscriptableused(var0, var1, var2, var3, var4) {
-  if(var2 != "off") {
-    if(istrue(var3.usingascender)) {
+function ascenderscriptableused(var_0, var_1, var_2, var_3, var_4) {
+  if(var_2 != "off") {
+    if(istrue(var_3.usingascender)) {
       return;
     }
 
-    thread ascenderuse(var0, var3);
+    thread ascenderuse(var_0, var_3);
     return;
   }
 }
@@ -213,199 +213,199 @@ function denyascendmessage() {
   scripts\mp\utility\lower_message::setlowermessageomnvar(0);
 }
 
-function ascenddeathlistener(var0) {
+function ascenddeathlistener(var_0) {
   level endon("game_ended");
   self endon("ascend_complete");
   self endon("ascend_solo_complete");
   self endon("ascender_cancel");
-  var1 = spawnStruct();
-  var1.ref_125bc = self.guid;
-  var1.cansnapcamera = self.cansnapcamera;
-  var1.cansolospawn = self.cansolospawn;
+  var_1 = spawnStruct();
+  var_1.ref_125bc = self.guid;
+  var_1.cansnapcamera = self.cansnapcamera;
+  var_1.cansolospawn = self.cansolospawn;
   self waittill("death_or_disconnect");
 
   if(isDefined(self)) {
     self stopanimscriptsceneevent();
   }
 
-  var0.locationsnames = var1;
-  cleanupascenduse(var0, self);
+  var_0.locationsnames = var_1;
+  cleanupascenduse(var_0, self);
 }
 
-function endascenderanim(var0, var1, var2, var3) {
-  var0 endon("death_or_disconnect");
-  var0 endon("ascender_cancel");
+function endascenderanim(var_0, var_1, var_2, var_3) {
+  var_0 endon("death_or_disconnect");
+  var_0 endon("ascender_cancel");
 
-  if(var1) {
-    var4 = "ascender_up_out";
+  if(var_1) {
+    var_4 = "ascender_up_out";
   } else {
-    var4 = "ascender_down_out";
+    var_4 = "ascender_down_out";
   }
 
-  thread scripts\mp\anim::anim_player_solo(var1, var1.player_rig, var4);
-  scripts\common\anim::anim_single_solo(var4, var4 + "_wm");
+  thread scripts\mp\anim::anim_player_solo(var_1, var_1.player_rig, var_4);
+  scripts\common\anim::anim_single_solo(var_4, var_4 + "_wm");
 }
 
-function startascenderanim(var0, var1, var2, var3) {
-  var0 endon("death_or_disconnect");
-  var0 endon("ascender_cancel");
-  var0 thread scripts\mp\utility\infilexfil::infil_player_rig_updated("player", var0.origin, var0.angles);
-  var2.animname = "device";
-  var2 scripts\common\anim::setanimtree();
-  var3.animname = "device";
-  var3 scripts\common\anim::setanimtree();
-  var3 hide();
-  var4 = (1, 0, 0);
+function startascenderanim(var_0, var_1, var_2, var_3) {
+  var_0 endon("death_or_disconnect");
+  var_0 endon("ascender_cancel");
+  var_0 thread scripts\mp\utility\infilexfil::infil_player_rig_updated("player", var_0.origin, var_0.angles);
+  var_2.animname = "device";
+  var_2 scripts\common\anim::setanimtree();
+  var_3.animname = "device";
+  var_3 scripts\common\anim::setanimtree();
+  var_3 hide();
+  var_4 = (1, 0, 0);
 
-  if(var1) {
-    var5 = "TAG_ACCESSORY_RIGHT";
-    var6 = "ascender_up_in";
-    var4 = rotatevector((-40.9464, 22.9807, 0), self.angles);
+  if(var_1) {
+    var_5 = "TAG_ACCESSORY_RIGHT";
+    var_6 = "ascender_up_in";
+    var_4 = rotatevector((-40.9464, 22.9807, 0), self.angles);
   } else {
-    var5 = "TAG_ACCESSORY_LEFT";
-    var6 = "ascender_down_in";
-    var6 = rotatevector((-42.2388, -23.4915, 0), self.angles);
+    var_5 = "TAG_ACCESSORY_LEFT";
+    var_6 = "ascender_down_in";
+    var_6 = rotatevector((-42.2388, -23.4915, 0), self.angles);
   }
 
-  var2.player_rig moveTo(self.origin + var6, 0.4, 0.1, 0.1);
-  var7 = vectorNormalize(var6 * -1);
-  var8 = vectortoanglessafe(var7, (0, 0, 1));
-  var2.player_rig rotateTo(var8, 0.4, 0.1, 0.1);
-  var9 = gettime();
-  var10 = var2 scripts\mp\utility\infilexfil::givegunless();
+  var_2.player_rig moveTo(self.origin + var_6, 0.4, 0.1, 0.1);
+  var_7 = vectorNormalize(var_6 * -1);
+  var_8 = vectortoanglessafe(var_7, (0, 0, 1));
+  var_2.player_rig rotateTo(var_8, 0.4, 0.1, 0.1);
+  var_9 = gettime();
+  var_10 = var_2 scripts\mp\utility\infilexfil::givegunless();
 
-  if(!var10) {
+  if(!var_10) {
     return false;
   }
 
-  var2 method_87e4();
-  var11 = gettime();
-  var12 = 0.4 - (var11 - var9) / 1000;
-  var13 = max(0, var12);
-  wait var13;
-  var5 show();
-  var5 hidefromplayer(var2);
-  var2.player_rig linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
-  var4 linkTo(var2.player_rig, var5, (0, 0, 0), (0, 0, 0));
-  var5 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
-  var2.player_rig showonlytoplayer(var2);
-  scripts\common\anim::anim_first_frame_solo(var2.player_rig, var6);
-  thread scripts\mp\anim::anim_player_solo(var2, var2.player_rig, var6);
-  thread scripts\common\anim::anim_single_solo(var5, var6 + "_wm");
-  var14 = getanimlength(level.scr_anim["player"][var6]);
-  wait var14;
+  var_2 method_87e4();
+  var_11 = gettime();
+  var_12 = 0.4 - (var_11 - var_9) / 1000;
+  var_13 = max(0, var_12);
+  wait var_13;
+  var_5 show();
+  var_5 hidefromplayer(var_2);
+  var_2.player_rig linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_4 linkTo(var_2.player_rig, var_5, (0, 0, 0), (0, 0, 0));
+  var_5 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_2.player_rig showonlytoplayer(var_2);
+  scripts\common\anim::anim_first_frame_solo(var_2.player_rig, var_6);
+  thread scripts\mp\anim::anim_player_solo(var_2, var_2.player_rig, var_6);
+  thread scripts\common\anim::anim_single_solo(var_5, var_6 + "_wm");
+  var_14 = getanimlength(level.scr_anim["player"][var_6]);
+  wait var_14;
   return true;
 }
 
-function loopwaitanim(var0, var1, var2, var3) {
+function loopwaitanim(var_0, var_1, var_2, var_3) {
   self endon("death_or_disconnect");
   self endon("ascender_loop_done");
   self endon("ascender_cancel");
 
-  if(var3) {
-    var4 = "ascender_up_loop";
+  if(var_3) {
+    var_4 = "ascender_up_loop";
   } else {
-    var4 = "ascender_down_loop";
+    var_4 = "ascender_down_loop";
   }
 
-  var5 = getanimlength(level.scr_anim["player"][var4]);
+  var_5 = getanimlength(level.scr_anim["player"][var_4]);
 
   for(;;) {
     if(!isDefined(self)) {
       break;
     }
 
-    var1 thread scripts\mp\anim::anim_player_solo(self, self.player_rig, var4);
-    var1 scripts\common\anim::anim_single_solo(var3, var4 + "_wm");
+    var_1 thread scripts\mp\anim::anim_player_solo(self, self.player_rig, var_4);
+    var_1 scripts\common\anim::anim_single_solo(var_3, var_4 + "_wm");
 
-    if(!isDefined(var5) || var5 == 0) {
+    if(!isDefined(var_5) || var_5 == 0) {
       break;
     }
 
-    wait var5;
+    wait var_5;
   }
 }
 
-function get_any_player_has_respawn(var0, var1) {
-  if(var1 isswitchingweapon()) {
+function get_any_player_has_respawn(var_0, var_1) {
+  if(var_1 isswitchingweapon()) {
     thread laststand_player_in_focus();
     return false;
   }
 
-  if(var1 scripts\cp_mp\utility\player_utility::isinvehicle()) {
+  if(var_1 scripts\cp_mp\utility\player_utility::isinvehicle()) {
     thread laststand_player_in_focus();
     return false;
   }
 
-  if(istrue(var1.tracking_max_health)) {
+  if(istrue(var_1.tracking_max_health)) {
     thread laststand_player_in_focus();
     return false;
   }
 
-  if(istrue(var1.inlaststand)) {
+  if(istrue(var_1.inlaststand)) {
     thread laststandattacker();
     return false;
   }
 
-  if(istrue(var1.isreviving)) {
+  if(istrue(var_1.isreviving)) {
     return false;
   }
 
   if(isDefined(level.disable_super_in_turret) && isDefined(level.disable_super_in_turret.name) && getdvarint("scr_br_alt_mode_zxp", 0)) {
-    var2 = istrue(var1.iszombie) && isDefined(var1.vehicle_occupancy_monitormovementcontrols);
-    var3 = var1 isgestureplaying("ges_zombie_superjumpcharge") || var1 isgestureplaying("ges_zombie_superjump");
+    var_2 = istrue(var_1.iszombie) && isDefined(var_1.vehicle_occupancy_monitormovementcontrols);
+    var_3 = var_1 isgestureplaying("ges_zombie_superjumpcharge") || var_1 isgestureplaying("ges_zombie_superjump");
 
-    if(var2 || var3) {
+    if(var_2 || var_3) {
       thread laststand_player_in_focus();
       return false;
     }
   }
 
-  if(!var1 scripts\common\utility::trial_ui_retry_disabled()) {
+  if(!var_1 scripts\common\utility::trial_ui_retry_disabled()) {
     thread laststand_player_in_focus();
     return false;
   }
 
-  if(var1 isskydiving()) {
+  if(var_1 isskydiving()) {
     return false;
   }
 
-  var4 = level.ascendstructs[var0.target];
+  var_4 = level.ascendstructs[var_0.target];
 
-  if(!isDefined(var4)) {
+  if(!isDefined(var_4)) {
     return false;
   }
 
-  if(var4.inuse && getdvarint("scr_ascender_disable_concurrent_use", 0)) {
+  if(var_4.inuse && getdvarint("scr_ascender_disable_concurrent_use", 0)) {
     thread denyascendmessage();
     return false;
   }
 
-  if(gettime() - var4.waittill_player_opens_tac_map < getdvarint("scr_ascender_min_time_between")) {
+  if(gettime() - var_4.waittill_player_opens_tac_map < getdvarint("scr_ascender_min_time_between")) {
     thread laststand_player_in_focus();
     return false;
   }
 
-  var5 = max(level.ref_13beb, 30);
-  var6 = getdvarint("scr_ascender_override_max_active", var5);
+  var_5 = max(level.ref_13beb, 30);
+  var_6 = getdvarint("scr_ascender_override_max_active", var_5);
 
-  if(var6 != -1) {
-    var5 = var6;
+  if(var_6 != -1) {
+    var_5 = var_6;
   }
 
-  if(level.initpostmain >= var5) {
+  if(level.initpostmain >= var_5) {
     thread laststand_player_in_focus();
     return false;
   }
 
-  if(isDefined(var4.ref_134cb) && istrue(var4.ref_134cb.inuse)) {
+  if(isDefined(var_4.ref_134cb) && istrue(var_4.ref_134cb.inuse)) {
     thread denyascendmessage();
     return false;
   }
 
-  if(isDefined(var1.get_search_turret_target_player)) {
+  if(isDefined(var_1.get_search_turret_target_player)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("player", "carriable_useAscender")) {
-      if(var1[[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "carriable_useAscender")]](var0)) {
+      if(var_1[[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "carriable_useAscender")]](var_0)) {
         return false;
       }
     }
@@ -414,155 +414,155 @@ function get_any_player_has_respawn(var0, var1) {
   return true;
 }
 
-function ascenderuse(var0, var1) {
+function ascenderuse(var_0, var_1) {
   level endon("game_ended");
-  var1 endon("death_or_disconnect");
-  var1 endon("ascender_cancel");
+  var_1 endon("death_or_disconnect");
+  var_1 endon("ascender_cancel");
 
-  if(!get_any_player_has_respawn(var0, var1)) {
+  if(!get_any_player_has_respawn(var_0, var_1)) {
     return;
   }
 
-  var2 = level.ascendstructs[var0.target];
-  var1.shouldskiplaststand = 1;
-  var2.waittill_player_opens_tac_map = gettime();
-  var2.ascender[var1.guid] = spawn("script_model", var2.origin);
-  var2.ascender[var1.guid] setModel("tag_origin");
+  var_2 = level.ascendstructs[var_0.target];
+  var_1.shouldskiplaststand = 1;
+  var_2.waittill_player_opens_tac_map = gettime();
+  var_2.ascender[var_1.guid] = spawn("script_model", var_2.origin);
+  var_2.ascender[var_1.guid] setModel("tag_origin");
   level.initpostmain++;
-  var2.scriptable = var0;
+  var_2.scriptable = var_0;
 
-  if(var1 getstance() != "stand") {
-    var1 setstance("stand");
+  if(var_1 getstance() != "stand") {
+    var_1 setstance("stand");
   }
 
-  var1 scripts\common\utility::allow_execution_victim(0);
-  var1 scripts\common\utility::allow_melee(0);
-  var1 scripts\common\utility::allow_ads(0);
-  var1 scripts\common\utility::allow_fire(0);
+  var_1 scripts\common\utility::allow_execution_victim(0);
+  var_1 scripts\common\utility::allow_melee(0);
+  var_1 scripts\common\utility::allow_ads(0);
+  var_1 scripts\common\utility::allow_fire(0);
 
-  if(istrue(var1.isjuggernaut)) {
+  if(istrue(var_1.isjuggernaut)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("juggernaut", "canUseWeaponPickups")) {
-      var3 = var1[[scripts\cp_mp\utility\script_utility::getsharedfunc("juggernaut", "canUseWeaponPickups")]]();
+      var_3 = var_1[[scripts\cp_mp\utility\script_utility::getsharedfunc("juggernaut", "canUseWeaponPickups")]]();
 
-      if(istrue(var3)) {
-        var1 disableweaponswitch();
+      if(istrue(var_3)) {
+        var_1 disableweaponswitch();
       }
     }
   } else {
-    var1 disableoffhandweapons();
-    var1 scripts\common\utility::allow_killstreaks(0);
-    var1 disableweaponswitch();
+    var_1 disableoffhandweapons();
+    var_1 scripts\common\utility::allow_killstreaks(0);
+    var_1 disableweaponswitch();
   }
 
-  var2.ascender[var1.guid] scripts\cp_mp\ent_manager::registerspawncount(2);
-  var2.inuse = 1;
-  var1.usingascender = 1;
-  var1 scripts\common\utility::allow_usability(0);
-  var4 = var2.ascendstructend;
-  var5 = var2.ascendstructout;
-  var2.ascender[var1.guid] dontinterpolate();
-  var2.ascender[var1.guid].origin = var2.origin;
-  var2.ascender[var1.guid].angles = var2.angles;
-  var6 = spawn("script_model", var2.origin);
+  var_2.ascender[var_1.guid] scripts\cp_mp\ent_manager::registerspawncount(2);
+  var_2.inuse = 1;
+  var_1.usingascender = 1;
+  var_1 scripts\common\utility::allow_usability(0);
+  var_4 = var_2.ascendstructend;
+  var_5 = var_2.ascendstructout;
+  var_2.ascender[var_1.guid] dontinterpolate();
+  var_2.ascender[var_1.guid].origin = var_2.origin;
+  var_2.ascender[var_1.guid].angles = var_2.angles;
+  var_6 = spawn("script_model", var_2.origin);
 
   if(!scripts\cp_mp\utility\game_utility::ref_140aa()) {
-    var6 setModel("misc_wm_ascender");
+    var_6 setModel("misc_wm_ascender");
   } else {
-    var6 setModel("misc_vm_ascender_ch3");
+    var_6 setModel("misc_vm_ascender_ch3");
   }
 
-  var6 showonlytoplayer(var1);
-  var7 = spawn("script_model", var2.origin);
+  var_6 showonlytoplayer(var_1);
+  var_7 = spawn("script_model", var_2.origin);
 
   if(!scripts\cp_mp\utility\game_utility::ref_140aa()) {
-    var7 setModel("misc_wm_ascender");
+    var_7 setModel("misc_wm_ascender");
   } else {
-    var7 setModel("misc_wm_ascender_ch3");
+    var_7 setModel("misc_wm_ascender_ch3");
   }
 
-  var7 hidefromplayer(var1);
-  var1.cansticktoent = var2;
-  var1.cansnapcamera = var6;
-  var1.cansolospawn = var7;
-  thread ascenddeathlistener(var1);
-  var8 = startascenderanim(var2.ascender[var1.guid], var1, var2.dir, var6, var7);
+  var_7 hidefromplayer(var_1);
+  var_1.cansticktoent = var_2;
+  var_1.cansnapcamera = var_6;
+  var_1.cansolospawn = var_7;
+  thread ascenddeathlistener(var_1);
+  var_8 = startascenderanim(var_2.ascender[var_1.guid], var_1, var_2.dir, var_6, var_7);
 
-  if(!var8) {
+  if(!var_8) {
     thread laststand_player_in_focus();
-    cleanupascenduse(var2, var1);
+    cleanupascenduse(var_2, var_1);
     return;
   }
 
-  var2.ascender[var1.guid] playLoopSound("br_auto_ascender_device_lp_npc");
-  thread loopwaitanim(var1, var2.ascender[var1.guid], var6, var7);
-  var9 = distance(var4.origin, var2.origin);
+  var_2.ascender[var_1.guid] playLoopSound("br_auto_ascender_device_lp_npc");
+  thread loopwaitanim(var_1, var_2.ascender[var_1.guid], var_6, var_7);
+  var_9 = distance(var_4.origin, var_2.origin);
 
-  if(!var2.dir) {
+  if(!var_2.dir) {
     if(scripts\common\utility::iscp()) {
-      var10 = getdvarfloat("scr_descender_speed_cp", registerhandlecommand());
+      var_10 = getdvarfloat("scr_descender_speed_cp", registerhandlecommand());
     } else {
-      var10 = getdvarfloat("scr_descender_speed", registerfalldamagedvars());
+      var_10 = getdvarfloat("scr_descender_speed", registerfalldamagedvars());
     }
   } else {
-    var10 = getdvarfloat("scr_ascender_speed", registered_checkpoints());
+    var_10 = getdvarfloat("scr_ascender_speed", registered_checkpoints());
   }
 
-  var11 = var10 / var10;
-  var12 = registered_checkpoint_funcs() * var11;
-  var13 = registereventcallback() * var11;
-  var5.ascender[var4.guid] moveTo(var6.origin, var11, var12, var13);
+  var_11 = var_10 / var_10;
+  var_12 = registered_checkpoint_funcs() * var_11;
+  var_13 = registereventcallback() * var_11;
+  var_5.ascender[var_4.guid] moveTo(var_6.origin, var_11, var_12, var_13);
 
-  if(var4.currentweapon.basename != "iw8_gunless_infil") {
-    var4 scripts\mp\utility\infilexfil::givegunless();
+  if(var_4.currentweapon.basename != "iw8_gunless_infil") {
+    var_4 scripts\mp\utility\infilexfil::givegunless();
   }
 
-  wait var11;
-  var5.ascender[var4.guid] stoploopsound("br_auto_ascender_device_lp_npc");
-  var4 notify("ascender_loop_done");
-  endascenderanim(var5.ascender[var4.guid], var4, var5.dir, var8, var9);
-  cleanupascenduse(var5, var4);
-  var4 notify("ascend_complete");
+  wait var_11;
+  var_5.ascender[var_4.guid] stoploopsound("br_auto_ascender_device_lp_npc");
+  var_4 notify("ascender_loop_done");
+  endascenderanim(var_5.ascender[var_4.guid], var_4, var_5.dir, var_8, var_9);
+  cleanupascenduse(var_5, var_4);
+  var_4 notify("ascend_complete");
 }
 
-function cleanupascenduse(var0) {
+function cleanupascenduse(var_0) {
   if(self.ascender.size == 1) {
     self.inuse = 0;
   }
 
-  if(isDefined(var0)) {
-    var0.usingascender = 0;
-    var0.waittill_player_opens_scavenger_cache = gettime();
-    var0 scripts\common\utility::allow_usability(1);
-    var0.shouldskiplaststand = undefined;
-    var0 scripts\common\utility::allow_execution_victim(1);
-    var0 scripts\common\utility::allow_melee(1);
-    var0 scripts\common\utility::allow_ads(1);
-    var0 scripts\common\utility::allow_fire(1);
+  if(isDefined(var_0)) {
+    var_0.usingascender = 0;
+    var_0.waittill_player_opens_scavenger_cache = gettime();
+    var_0 scripts\common\utility::allow_usability(1);
+    var_0.shouldskiplaststand = undefined;
+    var_0 scripts\common\utility::allow_execution_victim(1);
+    var_0 scripts\common\utility::allow_melee(1);
+    var_0 scripts\common\utility::allow_ads(1);
+    var_0 scripts\common\utility::allow_fire(1);
 
-    if(istrue(var0.isjuggernaut)) {
+    if(istrue(var_0.isjuggernaut)) {
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("juggernaut", "canUseWeaponPickups")) {
-        var1 = var0[[scripts\cp_mp\utility\script_utility::getsharedfunc("juggernaut", "canUseWeaponPickups")]]();
+        var_1 = var_0[[scripts\cp_mp\utility\script_utility::getsharedfunc("juggernaut", "canUseWeaponPickups")]]();
 
-        if(istrue(var1)) {
-          var0 enableweaponswitch();
+        if(istrue(var_1)) {
+          var_0 enableweaponswitch();
         }
       }
-    } else if(!istrue(var0.inlaststand)) {
-      var0 enableoffhandweapons();
-      var0 enableweaponswitch();
-      var0 scripts\common\utility::allow_killstreaks(1);
+    } else if(!istrue(var_0.inlaststand)) {
+      var_0 enableoffhandweapons();
+      var_0 enableweaponswitch();
+      var_0 scripts\common\utility::allow_killstreaks(1);
     } else {
       thread watch_for_ashes_achievement();
     }
 
-    if(isDefined(var0.cansnapcamera)) {
-      var0.cansnapcamera unlink();
-      var0.cansnapcamera delete();
+    if(isDefined(var_0.cansnapcamera)) {
+      var_0.cansnapcamera unlink();
+      var_0.cansnapcamera delete();
     }
 
-    if(isDefined(var0.cansolospawn)) {
-      var0.cansolospawn unlink();
-      var0.cansolospawn delete();
+    if(isDefined(var_0.cansolospawn)) {
+      var_0.cansolospawn unlink();
+      var_0.cansolospawn delete();
     }
   } else if(isDefined(self.locationsnames)) {
     if(isDefined(self.locationsnames.cansnapcamera)) {
@@ -576,97 +576,97 @@ function cleanupascenduse(var0) {
     }
   }
 
-  var2 = undefined;
+  var_2 = undefined;
 
-  if(isDefined(var0)) {
-    var2 = var0.guid;
+  if(isDefined(var_0)) {
+    var_2 = var_0.guid;
   }
 
   if(isDefined(self.locationsnames)) {
-    var2 = self.locationsnames.ref_125bc;
+    var_2 = self.locationsnames.ref_125bc;
     self.locationsnames = undefined;
   }
 
-  if(isDefined(var0)) {
-    var0.cansticktoent = undefined;
-    var0.cansnapcamera = undefined;
-    var0.cansolospawn = undefined;
-    var0.player_rig unlink();
+  if(isDefined(var_0)) {
+    var_0.cansticktoent = undefined;
+    var_0.cansnapcamera = undefined;
+    var_0.cansolospawn = undefined;
+    var_0.player_rig unlink();
   }
 
-  if(isDefined(var2) && isDefined(self.ascender[var2])) {
-    self.ascender[var2].angles = self.startangle;
-    self.ascender[var2] scripts\cp_mp\ent_manager::deregisterspawn();
-    self.ascender[var2] delete();
-    self.ascender[var2] = undefined;
+  if(isDefined(var_2) && isDefined(self.ascender[var_2])) {
+    self.ascender[var_2].angles = self.startangle;
+    self.ascender[var_2] scripts\cp_mp\ent_manager::deregisterspawn();
+    self.ascender[var_2] delete();
+    self.ascender[var_2] = undefined;
     level.initpostmain--;
   }
 
   if(isDefined(self.scriptable)) {
-    var3 = "on";
+    var_3 = "on";
 
     if(isDefined(self.scriptable.script_noteworthy)) {
-      var3 = self.scriptable.script_noteworthy;
+      var_3 = self.scriptable.script_noteworthy;
     }
 
     if(isDefined(self.ref_134cb)) {
-      self.scriptable setscriptablepartstate("ascender_solo", var3);
+      self.scriptable setscriptablepartstate("ascender_solo", var_3);
     } else {
-      self.scriptable setscriptablepartstate("ascender", var3);
+      self.scriptable setscriptablepartstate("ascender", var_3);
     }
   }
 
   waitframe();
 
-  if(isDefined(var0)) {
-    var0 method_87e5();
-    var0 thread scripts\mp\utility\infilexfil::takegunless();
-    var0 notify("remove_rig");
+  if(isDefined(var_0)) {
+    var_0 method_87e5();
+    var_0 thread scripts\mp\utility\infilexfil::takegunless();
+    var_0 notify("remove_rig");
     return;
   }
 }
 
 function watch_for_ashes_achievement() {
   level endon("game_ended");
-  var0 = self;
-  var0 endon("disconnect");
-  var0 scripts\engine\utility::ref_143a5("death", "last_stand_finished");
-  var0 enableoffhandweapons();
-  var0 enableweaponswitch();
-  var0 method_87e5();
-  var0 scripts\common\utility::allow_killstreaks(1);
-  var0 thread scripts\mp\utility\infilexfil::takegunless();
+  var_0 = self;
+  var_0 endon("disconnect");
+  var_0 scripts\engine\utility::ref_143a5("death", "last_stand_finished");
+  var_0 enableoffhandweapons();
+  var_0 enableweaponswitch();
+  var_0 method_87e5();
+  var_0 scripts\common\utility::allow_killstreaks(1);
+  var_0 thread scripts\mp\utility\infilexfil::takegunless();
 }
 
 function canseesafecircleui() {
-  var0 = self;
+  var_0 = self;
 
-  if(!istrue(var0.usingascender)) {
+  if(!istrue(var_0.usingascender)) {
     return;
   }
 
-  var1 = var0.cansticktoent.ascendstructout.origin;
-  var2 = var0.cansticktoent.ascendstructout.angles;
-  var0 notify("ascender_cancel");
-  var0 notify("ascender_solo_cancel");
-  cleanupascenduse(var0.cansticktoent, var0);
-  var0 setOrigin(var1);
-  var0 setplayerangles(var2);
-  var0 forceusehintoff();
-  var0 stopanimscriptsceneevent();
+  var_1 = var_0.cansticktoent.ascendstructout.origin;
+  var_2 = var_0.cansticktoent.ascendstructout.angles;
+  var_0 notify("ascender_cancel");
+  var_0 notify("ascender_solo_cancel");
+  cleanupascenduse(var_0.cansticktoent, var_0);
+  var_0 setOrigin(var_1);
+  var_0 setplayerangles(var_2);
+  var_0 forceusehintoff();
+  var_0 stopanimscriptsceneevent();
 }
 
-function vectortoanglessafe(var0, var1) {
-  var2 = vectorcross(var0, var1);
-  var1 = vectorcross(var2, var0);
-  var3 = axistoangles(var0, var2, var1);
-  return var3;
+function vectortoanglessafe(var_0, var_1) {
+  var_2 = vectorcross(var_0, var_1);
+  var_1 = vectorcross(var_2, var_0);
+  var_3 = axistoangles(var_0, var_2, var_1);
+  return var_3;
 }
 
-function updatesixthsensevo(var0) {
-  foreach(var2 in level.ascendstructs) {
-    if(distance2dsquared(var2.origin, var0) < registerhint()) {
-      if(abs(var0[2] - var2.origin[2]) < registerheadlessinfil()) {
+function updatesixthsensevo(var_0) {
+  foreach(var_2 in level.ascendstructs) {
+    if(distance2dsquared(var_2.origin, var_0) < registerhint()) {
+      if(abs(var_0[2] - var_2.origin[2]) < registerheadlessinfil()) {
         return true;
       }
     }

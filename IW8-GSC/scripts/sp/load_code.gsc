@@ -122,10 +122,10 @@ function init_global_variables() {
 }
 
 function init_objective_colors() {
-  var0 = "1.0 1.0 1.0";
-  var1 = "0.9 0.9 0.9";
-  var2 = "0.85 0.85 0.85";
-  setsaveddvar("NRQKSNRORT", var0);
+  var_0 = "1.0 1.0 1.0";
+  var_1 = "0.9 0.9 0.9";
+  var_2 = "0.85 0.85 0.85";
+  setsaveddvar("NRQKSNRORT", var_0);
 }
 
 function do_level_first_frame() {
@@ -138,8 +138,8 @@ function post_load_functions() {
   scripts\engine\utility::flag_set("load_finished");
 
   if(isDefined(level.post_load_funcs)) {
-    foreach(var1 in level.post_load_funcs) {
-      [[var1]]();
+    foreach(var_1 in level.post_load_funcs) {
+      [[var_1]]();
     }
 
     return;
@@ -148,11 +148,11 @@ function post_load_functions() {
 
 function load_binks() {
   if(scripts\engine\sp\utility::is_default_start()) {
-    var0 = scripts\sp\endmission::getlevelindex(level.script);
+    var_0 = scripts\sp\endmission::getlevelindex(level.script);
 
-    if(isDefined(var0)) {
-      if(var0 != 0) {
-        setomnvar("ui_transition_movie", scripts\sp\endmission::getlevelbink(var0));
+    if(isDefined(var_0)) {
+      if(var_0 != 0) {
+        setomnvar("ui_transition_movie", scripts\sp\endmission::getlevelbink(var_0));
         return;
       }
 

@@ -28,10 +28,10 @@ function main() {
   self.usescriptedweapon = 0;
   self.scriptedweaponclassprimary = "none";
   self.weapon = isundefinedweapon();
-  var0 = undefined;
-  var1 = ["civ_syrkistan_female_scarf_green", "civ_syrkistan_female_scarf_long_blue", "civ_syrkistan_female_scarf_dress_pink", "civ_syrkistan_female_scarf_dress_blue", "civ_syrkistan_female_scarf_dress_orange", "civ_syrkistan_female_scarf_long_brown"];
+  var_0 = undefined;
+  var_1 = ["civ_syrkistan_female_scarf_green", "civ_syrkistan_female_scarf_long_blue", "civ_syrkistan_female_scarf_dress_pink", "civ_syrkistan_female_scarf_dress_blue", "civ_syrkistan_female_scarf_dress_orange", "civ_syrkistan_female_scarf_long_brown"];
 
-  switch (scripts\code\character::get_random_character(6, var0, var1)) {
+  switch (scripts\code\character::get_random_character(6, var_0, var_1)) {
     case 0:
       character\civ_syrkistan_female_scarf_green::main();
       break;
@@ -57,7 +57,7 @@ function spawner() {
   self setspawnerteam("neutral");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\civ_syrkistan_female_scarf_green::precache();
   character\civ_syrkistan_female_scarf_long_blue::precache();
   character\civ_syrkistan_female_scarf_dress_pink::precache();

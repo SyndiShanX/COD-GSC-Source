@@ -35,6 +35,6 @@ function main_mp() {
   self.headmodel = "head_sc_m_ahmed_no_subd_civ_clean";
 }
 
-function precache_mp(var0) {
-  level.agent_definition[var0]["animclass"] = "civilian_female";
+function precache_mp(var_0) {
+  level.agent_definition[var_0]["animclass"] = "civilian_female";
 }

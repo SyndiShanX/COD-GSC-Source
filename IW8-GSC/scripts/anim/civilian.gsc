@@ -11,29 +11,29 @@ function cover() {
   scripts\anim\utility::updateisincombattimer();
 
   if(scripts\anim\utility::isincombat()) {
-    var0 = "idle_combat";
+    var_0 = "idle_combat";
   } else {
-    var0 = "idle_noncombat";
+    var_0 = "idle_noncombat";
   }
 
-  var1 = undefined;
+  var_1 = undefined;
 
   if(isDefined(self.animname) && isDefined(level.scr_anim[self.animname])) {
-    var1 = level.scr_anim[self.animname][var0];
+    var_1 = level.scr_anim[self.animname][var_0];
   }
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     if(!isDefined(level.scr_anim["default_civilian"])) {
       return;
     }
 
-    var1 = level.scr_anim["default_civilian"][var0];
+    var_1 = level.scr_anim["default_civilian"][var_0];
   }
 
   thread move_check();
 
   for(;;) {
-    self setflaggedanimknoball("idle", scripts\engine\utility::random(var1), $root, 1, 0.2, 1);
+    self setflaggedanimknoball("idle", scripts\engine\utility::random(var_1), $root, 1, 0.2, 1);
     self waittillmatch("idle", "end");
   }
 }

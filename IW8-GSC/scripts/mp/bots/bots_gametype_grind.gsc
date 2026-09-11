@@ -32,44 +32,44 @@ function bot_grind_think() {
 function bot_grind_extra_think() {
   if(!isDefined(self.tag_getting)) {
     if(self.tagscarried > 0) {
-      var0 = squared(500 + self.tagscarried * 250);
+      var_0 = squared(500 + self.tagscarried * 250);
 
       if(game["teamScores"][self.team] + self.tagscarried >= level.roundscorelimit) {
-        var0 = squared(5000);
+        var_0 = squared(5000);
       } else if(!isDefined(self.enemy) && !scripts\mp\bots\bots_util::bot_in_combat()) {
-        var0 = squared(1500 + self.tagscarried * 250);
+        var_0 = squared(1500 + self.tagscarried * 250);
       }
 
-      var1 = undefined;
+      var_1 = undefined;
 
-      foreach(var3 in level.objectives) {
-        var4 = distancesquared(self.origin, var3.trigger.origin);
+      foreach(var_3 in level.objectives) {
+        var_4 = distancesquared(self.origin, var_3.trigger.origin);
 
-        if(var4 < var0) {
-          var0 = var4;
-          var1 = var3;
+        if(var_4 < var_0) {
+          var_0 = var_4;
+          var_1 = var_3;
         }
       }
 
-      if(isDefined(var1)) {
-        var6 = 1;
+      if(isDefined(var_1)) {
+        var_6 = 1;
 
         if(self.grind_waiting_to_bank) {
-          if(isDefined(self.goal_zone) && self.goal_zone == var1) {
-            var6 = 0;
+          if(isDefined(self.goal_zone) && self.goal_zone == var_1) {
+            var_6 = 0;
           }
         }
 
-        if(var6) {
+        if(var_6) {
           self.grind_waiting_to_bank = 1;
-          self.goal_zone = var1;
+          self.goal_zone = var_1;
           self botclearscriptgoal();
           self notify("stop_going_to_zone");
           self notify("stop_camping_zone");
           self.conf_camping_zone = 0;
           scripts\mp\bots\bots_personality::clear_camper_data();
           scripts\mp\bots\bots_strategy::bot_abort_tactical_goal("kill_tag");
-          GscBinSkip4(0x35, var1, "tactical");
+          GscBinSkip4(0x35, var_1, "tactical");
         }
       }
 
@@ -86,26 +86,26 @@ function bot_grind_extra_think() {
     }
 
     if(self.personality == "camper" && !self.conf_camping_tag && !self.grind_waiting_to_bank) {
-      var0 = undefined;
-      var1 = undefined;
+      var_0 = undefined;
+      var_1 = undefined;
 
-      foreach(var3 in level.objectives) {
-        var4 = distancesquared(self.origin, var3.trigger.origin);
+      foreach(var_3 in level.objectives) {
+        var_4 = distancesquared(self.origin, var_3.trigger.origin);
 
-        if(!isDefined(var0) || var4 < var0) {
-          var0 = var4;
-          var1 = var3;
+        if(!isDefined(var_0) || var_4 < var_0) {
+          var_0 = var_4;
+          var_1 = var_3;
         }
       }
 
-      if(isDefined(var1)) {
+      if(isDefined(var_1)) {
         if(scripts\mp\bots\bots_personality::should_select_new_ambush_point()) {
-          if(scripts\mp\bots\bots_personality::find_ambush_node(var1.trigger.origin)) {
+          if(scripts\mp\bots\bots_personality::find_ambush_node(var_1.trigger.origin)) {
             self.conf_camping_zone = 1;
             self notify("stop_going_to_zone");
             self.grind_waiting_to_bank = 0;
             self botclearscriptgoal();
-            GscBinSkip4(0x35, var1, "camp");
+            GscBinSkip4(0x35, var_1, "camp");
           }
 
           self notify("stop_camping_zone");
@@ -127,36 +127,36 @@ function bot_grind_extra_think() {
   return self.grind_waiting_to_bank || self.conf_camping_zone;
 }
 
-function bot_goto_zone(var0, var1) {
+function bot_goto_zone(var_0, var_1) {
   self endon("stop_going_to_zone");
 
-  if(!isDefined(var0.calculated_nearest_node)) {
-    var0.nearest_node = getclosestnodeinsight(var0.trigger.origin);
-    var0.calculated_nearest_node = 1;
+  if(!isDefined(var_0.calculated_nearest_node)) {
+    var_0.nearest_node = getclosestnodeinsight(var_0.trigger.origin);
+    var_0.calculated_nearest_node = 1;
   }
 
-  var2 = var0.nearest_node;
-  self botsetscriptgoal(var2.origin, 32, var1);
-  var3 = scripts\mp\bots\bots_util::bot_waittill_goal_or_fail();
+  var_2 = var_0.nearest_node;
+  self botsetscriptgoal(var_2.origin, 32, var_1);
+  var_3 = scripts\mp\bots\bots_util::bot_waittill_goal_or_fail();
 }
 
-function bot_camp_zone(var0, var1) {
+function bot_camp_zone(var_0, var_1) {
   self endon("stop_camping_zone");
-  self botsetscriptgoalnode(self.node_ambushing_from, var1, self.ambush_yaw);
-  var2 = scripts\mp\bots\bots_util::bot_waittill_goal_or_fail();
+  self botsetscriptgoalnode(self.node_ambushing_from, var_1, self.ambush_yaw);
+  var_2 = scripts\mp\bots\bots_util::bot_waittill_goal_or_fail();
 
-  if(var2 == "goal") {
-    if(!isDefined(var0.calculated_nearest_node)) {
-      var0.nearest_node = getclosestnodeinsight(var0.trigger.origin);
-      var0.calculated_nearest_node = 1;
+  if(var_2 == "goal") {
+    if(!isDefined(var_0.calculated_nearest_node)) {
+      var_0.nearest_node = getclosestnodeinsight(var_0.trigger.origin);
+      var_0.calculated_nearest_node = 1;
     }
 
-    var3 = var0.nearest_node;
+    var_3 = var_0.nearest_node;
 
-    if(isDefined(var3)) {
-      var4 = findentrances(self.origin);
-      var4 = scripts\engine\utility::array_add(var4, var3);
-      childthread scripts\mp\bots\bots_util::bot_watch_nodes(var4);
+    if(isDefined(var_3)) {
+      var_4 = findentrances(self.origin);
+      var_4 = scripts\engine\utility::array_add(var_4, var_3);
+      childthread scripts\mp\bots\bots_util::bot_watch_nodes(var_4);
       return;
     }
 

@@ -16,8 +16,8 @@ function get_gameskill() {
   return level.gameskill;
 }
 
-function setskill(var0) {
-  if(!istrue(var0)) {
+function setskill(var_0) {
+  if(!istrue(var_0)) {
     if(isDefined(level.gameskill)) {
       return;
     }
@@ -158,8 +158,8 @@ function setskill(var0) {
 function updatealldifficulty() {
   setglobaldifficulty();
 
-  foreach(var1 in level.players) {
-    setdifficulty(var1);
+  foreach(var_1 in level.players) {
+    setdifficulty(var_1);
   }
 }
 
@@ -196,7 +196,7 @@ function setdifficulty() {
 }
 
 function setglobaldifficulty() {
-  var0 = scripts\common\gameskill::get_skill_from_index(level.gameskill);
+  var_0 = scripts\common\gameskill::get_skill_from_index(level.gameskill);
   anim.pain_test = scripts\common\gameskill::get_difficultysetting_global("pain_test");
   anim.min_sniper_burst_delay_time = scripts\common\gameskill::get_difficultysetting_global("min_sniper_burst_delay_time");
   anim.max_sniper_burst_delay_time = scripts\common\gameskill::get_difficultysetting_global("max_sniper_burst_delay_time");
@@ -214,44 +214,44 @@ function updategameskill() {
   return level.gameskill;
 }
 
-function apply_difficulty_settings(var0) {
+function apply_difficulty_settings(var_0) {
   self.gs = spawnStruct();
-  self.gs.diedrecentlycooldown = scripts\common\gameskill::get_difficultysetting_frac("player_diedRecentlyCooldown", var0);
-  self.gs.maxflashbangtime = scripts\common\gameskill::get_difficultysetting_frac("player_maxFlashBangTime", var0);
-  self.gs.invultime_ondamagemin = scripts\common\gameskill::get_difficultysetting_frac("invulTime_onDamageMin", var0);
-  self.gs.invultime_ondamagemax = scripts\common\gameskill::get_difficultysetting_frac("invulTime_onDamageMax", var0);
-  self.gs.invultime_deathshieldduration = scripts\common\gameskill::get_difficultysetting_frac("invulTime_deathShieldDuration", var0);
-  self.gs.invultime_ondamage = scripts\common\gameskill::get_difficultysetting_frac("invulTime_onDamage", var0);
-  self.gs.deathsdoorduration = scripts\common\gameskill::get_difficultysetting_frac("player_deathsDoorDuration", var0);
+  self.gs.diedrecentlycooldown = scripts\common\gameskill::get_difficultysetting_frac("player_diedRecentlyCooldown", var_0);
+  self.gs.maxflashbangtime = scripts\common\gameskill::get_difficultysetting_frac("player_maxFlashBangTime", var_0);
+  self.gs.invultime_ondamagemin = scripts\common\gameskill::get_difficultysetting_frac("invulTime_onDamageMin", var_0);
+  self.gs.invultime_ondamagemax = scripts\common\gameskill::get_difficultysetting_frac("invulTime_onDamageMax", var_0);
+  self.gs.invultime_deathshieldduration = scripts\common\gameskill::get_difficultysetting_frac("invulTime_deathShieldDuration", var_0);
+  self.gs.invultime_ondamage = scripts\common\gameskill::get_difficultysetting_frac("invulTime_onDamage", var_0);
+  self.gs.deathsdoorduration = scripts\common\gameskill::get_difficultysetting_frac("player_deathsDoorDuration", var_0);
   self.gs.scripteddamagemultiplier = 1;
   self.gs.scripteddeathshielddurationscale = 2;
-  self.gs.healthregendelaymin = scripts\common\gameskill::get_difficultysetting_frac("player_healthRegenDelayMin", var0);
-  self.gs.healthregendelaymax = scripts\common\gameskill::get_difficultysetting_frac("player_healthRegenDelayMax", var0);
-  self.gs.healthregendelay = scripts\common\gameskill::get_difficultysetting_frac("player_healthRegenDelay", var0);
-  self.gs.healthregenratemin = scripts\common\gameskill::get_difficultysetting_frac("player_healthRegenRateMin", var0);
-  self.gs.healthregenratemax = scripts\common\gameskill::get_difficultysetting_frac("player_healthRegenRateMax", var0);
-  self.gs.healthregendelay = scripts\common\gameskill::get_difficultysetting_frac("player_healthRegenDelay", var0);
-  self.gs.healthregenrate = scripts\common\gameskill::get_difficultysetting_frac("player_healthRegenRate", var0);
-  self.gs.player_attacker_accuracy = scripts\common\gameskill::get_difficultysetting_frac("base_enemy_accuracy", var0);
+  self.gs.healthregendelaymin = scripts\common\gameskill::get_difficultysetting_frac("player_healthRegenDelayMin", var_0);
+  self.gs.healthregendelaymax = scripts\common\gameskill::get_difficultysetting_frac("player_healthRegenDelayMax", var_0);
+  self.gs.healthregendelay = scripts\common\gameskill::get_difficultysetting_frac("player_healthRegenDelay", var_0);
+  self.gs.healthregenratemin = scripts\common\gameskill::get_difficultysetting_frac("player_healthRegenRateMin", var_0);
+  self.gs.healthregenratemax = scripts\common\gameskill::get_difficultysetting_frac("player_healthRegenRateMax", var_0);
+  self.gs.healthregendelay = scripts\common\gameskill::get_difficultysetting_frac("player_healthRegenDelay", var_0);
+  self.gs.healthregenrate = scripts\common\gameskill::get_difficultysetting_frac("player_healthRegenRate", var_0);
+  self.gs.player_attacker_accuracy = scripts\common\gameskill::get_difficultysetting_frac("base_enemy_accuracy", var_0);
   update_player_attacker_accuracy();
-  self.gs.playergrenadebasetime = int(scripts\common\gameskill::get_difficultysetting_frac("playerGrenadeBaseTime", var0));
-  self.gs.playergrenaderangetime = int(scripts\common\gameskill::get_difficultysetting_frac("playerGrenadeRangeTime", var0));
-  self.gs.playerdoublegrenadetime = int(scripts\common\gameskill::get_difficultysetting_frac("playerDoubleGrenadeTime", var0));
-  self.gs.min_sniper_burst_delay_time = scripts\common\gameskill::get_difficultysetting_frac("min_sniper_burst_delay_time", var0);
-  self.gs.max_sniper_burst_delay_time = scripts\common\gameskill::get_difficultysetting_frac("max_sniper_burst_delay_time", var0);
-  self.gs.damagemultiplierhealth = self.maxhealth / scripts\common\gameskill::get_difficultysetting_frac("player_health", var0);
+  self.gs.playergrenadebasetime = int(scripts\common\gameskill::get_difficultysetting_frac("playerGrenadeBaseTime", var_0));
+  self.gs.playergrenaderangetime = int(scripts\common\gameskill::get_difficultysetting_frac("playerGrenadeRangeTime", var_0));
+  self.gs.playerdoublegrenadetime = int(scripts\common\gameskill::get_difficultysetting_frac("playerDoubleGrenadeTime", var_0));
+  self.gs.min_sniper_burst_delay_time = scripts\common\gameskill::get_difficultysetting_frac("min_sniper_burst_delay_time", var_0);
+  self.gs.max_sniper_burst_delay_time = scripts\common\gameskill::get_difficultysetting_frac("max_sniper_burst_delay_time", var_0);
+  self.gs.damagemultiplierhealth = self.maxhealth / scripts\common\gameskill::get_difficultysetting_frac("player_health", var_0);
 
   if(scripts\common\utility::playerarmorenabled()) {
-    self.gs.armorratiohealthregenthreshold = scripts\common\gameskill::get_difficultysetting_frac("player_armorRatioHealthRegenThreshold", var0);
-    self.gs.armordamagetohealthratiomin = scripts\common\gameskill::get_difficultysetting_frac("player_armorDamageToHealthRatioMin", var0);
-    self.gs.armordamagetohealthratiomax = scripts\common\gameskill::get_difficultysetting_frac("player_armorDamageToHealthRatioMax", var0);
-    self.gs.damagemultiplierarmor = self.armor.maxamount / scripts\common\gameskill::get_difficultysetting_frac("player_armor", var0);
+    self.gs.armorratiohealthregenthreshold = scripts\common\gameskill::get_difficultysetting_frac("player_armorRatioHealthRegenThreshold", var_0);
+    self.gs.armordamagetohealthratiomin = scripts\common\gameskill::get_difficultysetting_frac("player_armorDamageToHealthRatioMin", var_0);
+    self.gs.armordamagetohealthratiomax = scripts\common\gameskill::get_difficultysetting_frac("player_armorDamageToHealthRatioMax", var_0);
+    self.gs.damagemultiplierarmor = self.armor.maxamount / scripts\common\gameskill::get_difficultysetting_frac("player_armor", var_0);
     self.damagemultiplier = self.gs.damagemultiplierarmor;
   } else {
     self.damagemultiplier = self.gs.damagemultiplierhealth;
   }
 
-  self.threatbias = int(scripts\common\gameskill::get_difficultysetting_frac("threatbias", var0));
+  self.threatbias = int(scripts\common\gameskill::get_difficultysetting_frac("threatbias", var_0));
 }
 
 function set_difficulty_from_locked_settings() {
@@ -264,30 +264,30 @@ function resetskill() {
   setskill(1);
 }
 
-function wave_difficulty_update(var0) {
+function wave_difficulty_update(var_0) {
   if(getdvarint("scr_wave_difficulty_override", -1) != -1) {
-    var0 = getdvarint("scr_wave_difficulty_override", -1);
+    var_0 = getdvarint("scr_wave_difficulty_override", -1);
   }
 
-  var1 = level.difficultytype[var0];
+  var_1 = level.difficultytype[var_0];
 
-  foreach(var3 in level.players) {
-    var3.gs.player_attacker_accuracy = level.difficultysettings["base_enemy_accuracy"][var1];
-    var3.attackeraccuracy = var3.gs.player_attacker_accuracy;
-    var3.gs.playergrenadebasetime = int(level.difficultysettings["playerGrenadeBaseTime"][var1]);
-    var3.gs.playergrenaderangetime = int(level.difficultysettings["playerGrenadeRangeTime"][var1]);
-    var3.gs.playerdoublegrenadetime = int(level.difficultysettings["playerDoubleGrenadeTime"][var1]);
-    var3.gs.min_sniper_burst_delay_time = level.difficultysettings["min_sniper_burst_delay_time"][var1];
-    var3.gs.max_sniper_burst_delay_time = level.difficultysettings["max_sniper_burst_delay_time"][var1];
-    var3.gs.misstimeconstant = level.difficultysettings["missTimeConstant"][var1];
-    var3.gs.misstimedistancefactor = level.difficultysettings["missTimeDistanceFactor"][var1];
-    var3.gs.double_grenades_allowed = level.difficultysettings["double_grenades_allowed"][var1];
+  foreach(var_3 in level.players) {
+    var_3.gs.player_attacker_accuracy = level.difficultysettings["base_enemy_accuracy"][var_1];
+    var_3.attackeraccuracy = var_3.gs.player_attacker_accuracy;
+    var_3.gs.playergrenadebasetime = int(level.difficultysettings["playerGrenadeBaseTime"][var_1]);
+    var_3.gs.playergrenaderangetime = int(level.difficultysettings["playerGrenadeRangeTime"][var_1]);
+    var_3.gs.playerdoublegrenadetime = int(level.difficultysettings["playerDoubleGrenadeTime"][var_1]);
+    var_3.gs.min_sniper_burst_delay_time = level.difficultysettings["min_sniper_burst_delay_time"][var_1];
+    var_3.gs.max_sniper_burst_delay_time = level.difficultysettings["max_sniper_burst_delay_time"][var_1];
+    var_3.gs.misstimeconstant = level.difficultysettings["missTimeConstant"][var_1];
+    var_3.gs.misstimedistancefactor = level.difficultysettings["missTimeDistanceFactor"][var_1];
+    var_3.gs.double_grenades_allowed = level.difficultysettings["double_grenades_allowed"][var_1];
   }
 
-  anim.pain_test = level.difficultysettings["pain_test"][var1];
-  anim.min_sniper_burst_delay_time = level.difficultysettings["min_sniper_burst_delay_time"][var1];
-  anim.max_sniper_burst_delay_time = level.difficultysettings["max_sniper_burst_delay_time"][var1];
-  setsaveddvar("MPMOMLLQSP", level.difficultysettings["accuracyDistScale"][var1]);
+  anim.pain_test = level.difficultysettings["pain_test"][var_1];
+  anim.min_sniper_burst_delay_time = level.difficultysettings["min_sniper_burst_delay_time"][var_1];
+  anim.max_sniper_burst_delay_time = level.difficultysettings["max_sniper_burst_delay_time"][var_1];
+  setsaveddvar("MPMOMLLQSP", level.difficultysettings["accuracyDistScale"][var_1]);
 }
 
 function update_player_attacker_accuracy() {

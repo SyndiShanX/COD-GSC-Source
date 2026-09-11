@@ -12,100 +12,100 @@ function scriptagentstealth_init() {
   level.nearbyposarray = [];
 }
 
-function isgroundspawner(var0) {
-  if(isDefined(var0.spawner) && isDefined(var0.spawner.script_parameters) && (var0.spawner.script_parameters == "ground_spawn_no_boards" || var0.spawner.script_parameters == "ground_spawn")) {
+function isgroundspawner(var_0) {
+  if(isDefined(var_0.spawner) && isDefined(var_0.spawner.script_parameters) && (var_0.spawner.script_parameters == "ground_spawn_no_boards" || var_0.spawner.script_parameters == "ground_spawn")) {
     return 1;
   }
 
   return 0;
 }
 
-function zombiescriptedstealth(var0, var1) {
-  var0 notify("zombieScriptedStealth");
-  var0 endon("zombieScriptedStealth");
-  var0 endon("death");
-  var0 endon("exit_stealth");
+function zombiescriptedstealth(var_0, var_1) {
+  var_0 notify("zombieScriptedStealth");
+  var_0 endon("zombieScriptedStealth");
+  var_0 endon("death");
+  var_0 endon("exit_stealth");
   level endon("game_ended");
 
   for(;;) {
-    var0.ignoreall = 1;
-    var0.scripted_mode = 1;
-    var0.scriptedstealth = 1;
-    fake_stealth_funcs(var0, var1);
-    var2 = var0 scripts\engine\utility::ref_143af("alerted", "damage", "reset_stealth", "alerted_by_ai");
+    var_0.ignoreall = 1;
+    var_0.scripted_mode = 1;
+    var_0.scriptedstealth = 1;
+    fake_stealth_funcs(var_0, var_1);
+    var_2 = var_0 scripts\engine\utility::ref_143af("alerted", "damage", "reset_stealth", "alerted_by_ai");
 
-    if(!isDefined(var2) || var2 == "reset_stealth") {
+    if(!isDefined(var_2) || var_2 == "reset_stealth") {
       continue;
     }
 
-    var0.forcedpatrol = undefined;
-    var0.scriptedstealth = undefined;
+    var_0.forcedpatrol = undefined;
+    var_0.scriptedstealth = undefined;
 
-    if(var2 == "alerted" || var2 == "damage") {
-      foreach(var4 in scripts\engine\utility::get_array_of_closest(var0.origin, level.spawned_enemies, [var0], undefined, getzombiestealthvalues(var0).propdistance, 0)) {
-        if(var4.agent_type != var0.agent_type) {
+    if(var_2 == "alerted" || var_2 == "damage") {
+      foreach(var_4 in scripts\engine\utility::get_array_of_closest(var_0.origin, level.spawned_enemies, [var_0], undefined, getzombiestealthvalues(var_0).propdistance, 0)) {
+        if(var_4.agent_type != var_0.agent_type) {
           continue;
         }
 
-        if(var4.team != var0.team) {
+        if(var_4.team != var_0.team) {
           continue;
         }
 
-        if(var4 != var0) {
-          var4 notify("alerted");
+        if(var_4 != var_0) {
+          var_4 notify("alerted");
         }
       }
     }
 
-    if(var2 == "alerted") {
+    if(var_2 == "alerted") {
       setstealthstate("spotted");
-    } else if(var2 == "damage") {
+    } else if(var_2 == "damage") {
       setstealthstate("took damage");
     }
 
-    chaseplayerthenreverttostealth(var0);
+    chaseplayerthenreverttostealth(var_0);
   }
 }
 
-function chaseplayerthenreverttostealth(var0) {
-  var0 endon("death");
+function chaseplayerthenreverttostealth(var_0) {
+  var_0 endon("death");
 
-  if(isDefined(var0.og_goalradius)) {
-    var0.goalradius = var0.og_goalradius;
+  if(isDefined(var_0.og_goalradius)) {
+    var_0.goalradius = var_0.og_goalradius;
   }
 
-  var0 setgoalpos(var0.origin);
-  var0.ignoreall = 0;
-  var0.scripted_mode = 0;
-  var0.dont_cleanup = undefined;
-  var0.fake_stealth = 0;
-  var0.legacy.movemode = "sprint";
-  var1 = getzombiestealthvalues(var0).timehiddennolosbeforedeescalate;
-  var2 = 0;
-  var3 = getzombiestealthvalues(var0).distancebeforedeescalate;
-  var4 = 0.5;
+  var_0 setgoalpos(var_0.origin);
+  var_0.ignoreall = 0;
+  var_0.scripted_mode = 0;
+  var_0.dont_cleanup = undefined;
+  var_0.fake_stealth = 0;
+  var_0.legacy.movemode = "sprint";
+  var_1 = getzombiestealthvalues(var_0).timehiddennolosbeforedeescalate;
+  var_2 = 0;
+  var_3 = getzombiestealthvalues(var_0).distancebeforedeescalate;
+  var_4 = 0.5;
 
-  while(var2 < var1) {
-    var5 = 0;
-    var6 = scripts\engine\utility::array_combine(level.players, scripts\cp\cp_agent_utils::getactiveenemyagents(var0.team));
+  while(var_2 < var_1) {
+    var_5 = 0;
+    var_6 = scripts\engine\utility::array_combine(level.players, scripts\cp\cp_agent_utils::getactiveenemyagents(var_0.team));
 
-    foreach(var8 in var6) {
-      if(istrue(var8.ignoreme)) {
+    foreach(var_8 in var_6) {
+      if(istrue(var_8.ignoreme)) {
         continue;
       }
 
-      if(isenemynearby(var0, var8, 0, 0)) {
-        var2 = 0;
-        var5 = 1;
+      if(isenemynearby(var_0, var_8, 0, 0)) {
+        var_2 = 0;
+        var_5 = 1;
         break;
       }
     }
 
-    if(!var5) {
-      var2 += var4;
+    if(!var_5) {
+      var_2 += var_4;
     }
 
-    wait var4;
+    wait var_4;
   }
 }
 
@@ -117,14 +117,14 @@ function getstealthstate() {
   return undefined;
 }
 
-function setstealthstate(var0) {
-  self.patrol_state = var0;
+function setstealthstate(var_0) {
+  self.patrol_state = var_0;
   self notify("stealth_state_changed");
 }
 
-function fake_stealth_funcs(var0) {
+function fake_stealth_funcs(var_0) {
   set_stealth_values(self, int(level.current_escalation_level));
-  thread setambientmovespeed(self, var0);
+  thread setambientmovespeed(self, var_0);
   thread whizby_listener(self);
   thread grenade_listener(self);
   thread environment_listener(self);
@@ -136,136 +136,136 @@ function fake_stealth_funcs(var0) {
   self notify("fake_stealth_set");
 }
 
-function setambientmovespeed(var0, var1) {
-  var0 endon("death");
-  var0 endon("alerted");
-  var0 endon("exit_stealth");
+function setambientmovespeed(var_0, var_1) {
+  var_0 endon("death");
+  var_0 endon("alerted");
+  var_0 endon("exit_stealth");
 
-  if(istrue(var1)) {
+  if(istrue(var_1)) {
     wait 0.15;
   }
 
-  var2 = strtok(var0.stealthvals.zombiemovespeed, ",");
-  var3 = scripts\engine\utility::random(var2);
-  var0.legacy.movemode = var3;
-  setstealthmovespeed(var0, var0, var3);
+  var_2 = strtok(var_0.stealthvals.zombiemovespeed, ",");
+  var_3 = scripts\engine\utility::random(var_2);
+  var_0.legacy.movemode = var_3;
+  setstealthmovespeed(var_0, var_0, var_3);
 }
 
-function setstealthmovespeed(var0, var1) {
-  var0 scripts\asm\asm_bb::bb_requestmovetype(var1);
+function setstealthmovespeed(var_0, var_1) {
+  var_0 scripts\asm\asm_bb::bb_requestmovetype(var_1);
 }
 
-function move_speed_monitor(var0) {
-  var0 notify("move_speed_monitor");
-  var0 endon("move_speed_monitor");
-  var0 endon("alerted");
-  var0 endon("alerted_by_ai");
-  var0 endon("exit_stealth");
-  var0 endon("death");
-  var0 endon("new_goal");
+function move_speed_monitor(var_0) {
+  var_0 notify("move_speed_monitor");
+  var_0 endon("move_speed_monitor");
+  var_0 endon("alerted");
+  var_0 endon("alerted_by_ai");
+  var_0 endon("exit_stealth");
+  var_0 endon("death");
+  var_0 endon("new_goal");
 
   for(;;) {
-    if(istrue(var0.scriptedstealth)) {
-      var1 = strtok(getzombiestealthvalues(var0).zombiemovespeed, ",");
-      var2 = scripts\engine\utility::random(var1);
-      setstealthmovespeed(var0, var0, var2);
+    if(istrue(var_0.scriptedstealth)) {
+      var_1 = strtok(getzombiestealthvalues(var_0).zombiemovespeed, ",");
+      var_2 = scripts\engine\utility::random(var_1);
+      setstealthmovespeed(var_0, var_0, var_2);
     }
 
-    scripts\engine\utility::waittill_any_ents(var0, "stealth_values_set", level, "runSpawnModule");
+    scripts\engine\utility::waittill_any_ents(var_0, "stealth_values_set", level, "runSpawnModule");
   }
 }
 
-function whizby_listener(var0) {
-  var0 notify("whizby_listener");
-  var0 endon("whizby_listener");
-  var0 endon("death");
-  var0 endon("alerted");
-  var0 endon("exit_stealth");
+function whizby_listener(var_0) {
+  var_0 notify("whizby_listener");
+  var_0 endon("whizby_listener");
+  var_0 endon("death");
+  var_0 endon("alerted");
+  var_0 endon("exit_stealth");
 
   for(;;) {
-    var0 waittill("bulletwhizby", var1);
+    var_0 waittill("bulletwhizby", var_1);
 
-    if(istrue(var1.ignoreme)) {
+    if(istrue(var_1.ignoreme)) {
       continue;
     }
 
-    if(isagent(var1)) {
-      setstealthstate(var0, "spotted");
-      var0 playSound("zmb_vo_cop_pain");
-      var0 notify("alerted_by_ai");
+    if(isagent(var_1)) {
+      setstealthstate(var_0, "spotted");
+      var_0 playSound("zmb_vo_cop_pain");
+      var_0 notify("alerted_by_ai");
       continue;
     }
 
-    if(istrue(var0.scriptedstealth)) {
-      thread go_to_spot(var0, var0, var1.origin, undefined);
+    if(istrue(var_0.scriptedstealth)) {
+      thread go_to_spot(var_0, var_0, var_1.origin, undefined);
     }
   }
 }
 
-function environment_listener(var0) {
-  var0 notify("environment_listener");
-  var0 endon("environment_listener");
-  var0 endon("death");
-  var0 endon("alerted");
-  var0 endon("exit_stealth");
-  var0 endon("new_goal");
+function environment_listener(var_0) {
+  var_0 notify("environment_listener");
+  var_0 endon("environment_listener");
+  var_0 endon("death");
+  var_0 endon("alerted");
+  var_0 endon("exit_stealth");
+  var_0 endon("new_goal");
 
   for(;;) {
-    level waittill("environment_alert", var1);
+    level waittill("environment_alert", var_1);
 
-    if(!istrue(var0.scriptedstealth)) {
+    if(!istrue(var_0.scriptedstealth)) {
       continue;
     }
 
-    if(distance(var0.origin, var1) > 650) {
+    if(distance(var_0.origin, var_1) > 650) {
       continue;
     }
 
-    thread go_to_spot(var0, var0, var1, undefined);
+    thread go_to_spot(var_0, var_0, var_1, undefined);
   }
 }
 
-function grenade_listener(var0) {
-  var0 notify("grenade_listener");
-  var0 endon("grenade_listener");
-  var0 endon("death");
-  var0 endon("alerted");
-  var0 endon("exit_stealth");
-  var0 endon("new_goal");
+function grenade_listener(var_0) {
+  var_0 notify("grenade_listener");
+  var_0 endon("grenade_listener");
+  var_0 endon("death");
+  var_0 endon("alerted");
+  var_0 endon("exit_stealth");
+  var_0 endon("new_goal");
 
   for(;;) {
-    var0 waittill("explode", var1);
+    var_0 waittill("explode", var_1);
 
-    if(!istrue(var0.scriptedstealth)) {
+    if(!istrue(var_0.scriptedstealth)) {
       continue;
     }
 
-    if(distance(var0.origin, var1) > 1500) {
+    if(distance(var_0.origin, var_1) > 1500) {
       continue;
     }
 
-    thread go_to_spot(var0, var0, var1, undefined);
+    thread go_to_spot(var_0, var_0, var_1, undefined);
   }
 }
 
-function enemynearbylistener(var0) {
+function enemynearbylistener(var_0) {
   level endon("game_ended");
-  var0 notify("enemyNearbyListener");
-  var0 endon("enemyNearbyListener");
-  var0 endon("alerted");
-  var0 endon("death");
-  var0 endon("exit_stealth");
+  var_0 notify("enemyNearbyListener");
+  var_0 endon("enemyNearbyListener");
+  var_0 endon("alerted");
+  var_0 endon("death");
+  var_0 endon("exit_stealth");
 
   for(;;) {
-    if(istrue(var0.scriptedstealth)) {
-      var1 = scripts\engine\utility::array_combine(level.players, scripts\cp\cp_agent_utils::getactiveenemyagents(var0.team));
+    if(istrue(var_0.scriptedstealth)) {
+      var_1 = scripts\engine\utility::array_combine(level.players, scripts\cp\cp_agent_utils::getactiveenemyagents(var_0.team));
 
-      foreach(var3 in var1) {
-        if(istrue(var3.ignoreme)) {
+      foreach(var_3 in var_1) {
+        if(istrue(var_3.ignoreme)) {
           continue;
         }
 
-        isenemynearby(var0, var3, 0, 1);
+        isenemynearby(var_0, var_3, 0, 1);
       }
     }
 
@@ -273,24 +273,24 @@ function enemynearbylistener(var0) {
   }
 }
 
-function player_nearby_listener(var0) {
+function player_nearby_listener(var_0) {
   level endon("game_ended");
-  var0 notify("player_nearby_listener");
-  var0 endon("player_nearby_listener");
-  var0 endon("alerted");
-  var0 endon("death");
-  var0 endon("exit_stealth");
+  var_0 notify("player_nearby_listener");
+  var_0 endon("player_nearby_listener");
+  var_0 endon("alerted");
+  var_0 endon("death");
+  var_0 endon("exit_stealth");
 
   for(;;) {
-    if(istrue(var0.scriptedstealth)) {
-      var1 = scripts\engine\utility::array_combine(level.players, scripts\cp\cp_agent_utils::getactiveenemyagents(var0.team));
+    if(istrue(var_0.scriptedstealth)) {
+      var_1 = scripts\engine\utility::array_combine(level.players, scripts\cp\cp_agent_utils::getactiveenemyagents(var_0.team));
 
-      foreach(var3 in var1) {
-        if(istrue(var3.ignoreme)) {
+      foreach(var_3 in var_1) {
+        if(istrue(var_3.ignoreme)) {
           continue;
         }
 
-        isenemynearby(var0, var3, 1, 1);
+        isenemynearby(var_0, var_3, 1, 1);
       }
     }
 
@@ -298,200 +298,200 @@ function player_nearby_listener(var0) {
   }
 }
 
-function setandunsetzombieignoreme(var0, var1) {
-  var0 notify("setAndUnsetZombieIgnoreMe");
-  var0 endon("setAndUnsetZombieIgnoreMe");
-  var0 endon("disconnect");
+function setandunsetzombieignoreme(var_0, var_1) {
+  var_0 notify("setAndUnsetZombieIgnoreMe");
+  var_0 endon("setAndUnsetZombieIgnoreMe");
+  var_0 endon("disconnect");
   level endon("game_ended");
-  var2 = scripts\engine\utility::waittill_any_ents_return(var1, "fake_stealth_set", var1, "death");
+  var_2 = scripts\engine\utility::waittill_any_ents_return(var_1, "fake_stealth_set", var_1, "death");
 }
 
-function alertzombie(var0, var1, var2) {
-  if(isPlayer(var1)) {
-    if(var2) {
-      var0.spottedplayer = var1;
-      setstealthstate(var0, "spotted");
-      show_spotted_text(var1);
-      var0 playsoundtoplayer("zmb_vo_cop_pain", var1);
-      thread setandunsetzombieignoreme(var1, var1);
+function alertzombie(var_0, var_1, var_2) {
+  if(isPlayer(var_1)) {
+    if(var_2) {
+      var_0.spottedplayer = var_1;
+      setstealthstate(var_0, "spotted");
+      show_spotted_text(var_1);
+      var_0 playsoundtoplayer("zmb_vo_cop_pain", var_1);
+      thread setandunsetzombieignoreme(var_1, var_1);
     }
 
-    var0 notify("alerted");
+    var_0 notify("alerted");
     return;
   }
 
-  setstealthstate(var0, "spotted");
-  var0 playSound("zmb_vo_cop_pain");
-  var0 notify("alerted_by_ai");
+  setstealthstate(var_0, "spotted");
+  var_0 playSound("zmb_vo_cop_pain");
+  var_0 notify("alerted_by_ai");
 }
 
-function isenemynearby(var0, var1, var2, var3) {
-  if(!isDefined(var1)) {
+function isenemynearby(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_1)) {
     return false;
   }
 
-  var4 = isPlayer(var1);
-  var5 = getzombiestealthvalues(var0);
-  var6 = var5.losfov;
-  var7 = distance(var1.origin, var0.origin);
-  var0.spottedplayer = undefined;
-  var2 = istrue(var2);
-  var8 = var0 getplayerangles(1);
-  var9 = istrue(var5.canseethroughfoliage);
+  var_4 = isPlayer(var_1);
+  var_5 = getzombiestealthvalues(var_0);
+  var_6 = var_5.losfov;
+  var_7 = distance(var_1.origin, var_0.origin);
+  var_0.spottedplayer = undefined;
+  var_2 = istrue(var_2);
+  var_8 = var_0 getplayerangles(1);
+  var_9 = istrue(var_5.canseethroughfoliage);
 
-  if(var4) {
-    if(!var1 scripts\cp\utility::is_valid_player()) {
+  if(var_4) {
+    if(!var_1 scripts\cp\utility::is_valid_player()) {
       return false;
     }
 
-    if(isDefined(var1.skill_data)) {
-      var7 *= var1.skill_data["stealth"].stealth_dist_scalar;
+    if(isDefined(var_1.skill_data)) {
+      var_7 *= var_1.skill_data["stealth"].stealth_dist_scalar;
     }
   }
 
-  if(var7 < 96) {
-    if(vectordot(var8, vectorNormalize(var1.origin - var0.origin)) > 0) {
-      alertzombie(var0, var1, var2);
+  if(var_7 < 96) {
+    if(vectordot(var_8, vectorNormalize(var_1.origin - var_0.origin)) > 0) {
+      alertzombie(var_0, var_1, var_2);
       return true;
     }
   }
 
-  var10 = var0 cansee(var1) && sighttracepassed(var0 getEye(), var1.origin, 0, var0, var9);
+  var_10 = var_0 cansee(var_1) && sighttracepassed(var_0 getEye(), var_1.origin, 0, var_0, var_9);
 
-  if(var10 || istrue(level.skipstealthcanseecheck)) {
-    var11 = scripts\engine\math::get_dot(var0.origin, var8, var1.origin);
+  if(var_10 || istrue(level.skipstealthcanseecheck)) {
+    var_11 = scripts\engine\math::get_dot(var_0.origin, var_8, var_1.origin);
 
-    if(var11 < 0.573576 && !istrue(level.skipstealthcanseecheck)) {
-      var0.spottedplayer = undefined;
+    if(var_11 < 0.573576 && !istrue(level.skipstealthcanseecheck)) {
+      var_0.spottedplayer = undefined;
       return false;
     }
 
-    var3 = istrue(var3);
-    var12 = var1 getstance();
-    var13 = 1;
-    var14 = 1;
-    var15 = var1 getvelocity();
-    var16 = length(var15);
+    var_3 = istrue(var_3);
+    var_12 = var_1 getstance();
+    var_13 = 1;
+    var_14 = 1;
+    var_15 = var_1 getvelocity();
+    var_16 = length(var_15);
 
-    if(var16 < 128) {
-      var13 = 0.75;
-    } else if(var16 < 200 || var4 && var1.skill_data["stealth"].stealth_velocity_override) {
-      var13 = 1;
+    if(var_16 < 128) {
+      var_13 = 0.75;
+    } else if(var_16 < 200 || var_4 && var_1.skill_data["stealth"].stealth_velocity_override) {
+      var_13 = 1;
     } else {
-      var13 = 1.25;
+      var_13 = 1.25;
     }
 
-    if(var12 == "stand" && var7 <= int(var5.standdetectdist * var11 * var13 * var14) && (!var3 || canpathtotarget(var0, var1.origin))) {
-      alertzombie(var0, var1, var2);
+    if(var_12 == "stand" && var_7 <= int(var_5.standdetectdist * var_11 * var_13 * var_14) && (!var_3 || canpathtotarget(var_0, var_1.origin))) {
+      alertzombie(var_0, var_1, var_2);
       return true;
-    } else if(var12 == "crouch" && var7 <= int(var5.crouchdetectdist * var11 * var13 * var14) && (!var3 || canpathtotarget(var0, var1.origin))) {
-      alertzombie(var0, var1, var2);
+    } else if(var_12 == "crouch" && var_7 <= int(var_5.crouchdetectdist * var_11 * var_13 * var_14) && (!var_3 || canpathtotarget(var_0, var_1.origin))) {
+      alertzombie(var_0, var_1, var_2);
       return true;
-    } else if(var12 != "prone" && var7 <= int(var5.pronedetectdist * var11 * var13 * var14) && (!var3 || canpathtotarget(var0, var1.origin))) {
-      alertzombie(var0, var1, var2);
+    } else if(var_12 != "prone" && var_7 <= int(var_5.pronedetectdist * var_11 * var_13 * var_14) && (!var_3 || canpathtotarget(var_0, var_1.origin))) {
+      alertzombie(var_0, var_1, var_2);
       return true;
     } else {
-      var0.spottedplayer = undefined;
+      var_0.spottedplayer = undefined;
       return false;
     }
   } else {
-    var0.spottedplayer = undefined;
+    var_0.spottedplayer = undefined;
     return false;
   }
 
-  var0.spottedplayer = undefined;
+  var_0.spottedplayer = undefined;
   return false;
 }
 
-function canpathtotarget(var0, var1) {
+function canpathtotarget(var_0, var_1) {
   if(!isDefined(level.findpathcount)) {
     level.findpathcount = 1;
   }
 
   level.findpathcount += 1;
-  var2 = istrue(var0.skiptraversals);
-  var3 = var0 findpath(var0.origin, var1, 0, var2);
+  var_2 = istrue(var_0.skiptraversals);
+  var_3 = var_0 findpath(var_0.origin, var_1, 0, var_2);
 
-  if(var3.size >= 1 && distance(var3[var3.size - 1], var1) <= 64) {
+  if(var_3.size >= 1 && distance(var_3[var_3.size - 1], var_1) <= 64) {
     return 1;
   }
 
   return 0;
 }
 
-function stealth_patrol(var0) {
-  var1 = self;
-  var1 notify("stealth_patrol");
-  var1 endon("stealth_patrol");
-  var1 endon("death");
-  var1 endon("alerted");
-  var1 endon("alerted_by_ai");
-  var1 endon("new_goal");
-  var1.og_goalradius = var1.goalradius;
+function stealth_patrol(var_0) {
+  var_1 = self;
+  var_1 notify("stealth_patrol");
+  var_1 endon("stealth_patrol");
+  var_1 endon("death");
+  var_1 endon("alerted");
+  var_1 endon("alerted_by_ai");
+  var_1 endon("new_goal");
+  var_1.og_goalradius = var_1.goalradius;
 
-  if(!istrue(var1.fake_stealth)) {
-    var1 waittill("fake_stealth_set");
+  if(!istrue(var_1.fake_stealth)) {
+    var_1 waittill("fake_stealth_set");
   }
 
-  if(!isDefined(var0)) {
-    var0 = var1.origin;
+  if(!isDefined(var_0)) {
+    var_0 = var_1.origin;
   }
 
-  setstealthstate(var1, "patrol");
-  var2 = undefined;
-  var3 = undefined;
+  setstealthstate(var_1, "patrol");
+  var_2 = undefined;
+  var_3 = undefined;
 
   for(;;) {
-    var4 = undefined;
+    var_4 = undefined;
 
-    if(isDefined(var1.patrol_state) && var1.patrol_state != "patrol") {
-      var1.waitingforstealthstatechange = 1;
-      var1 waittill("stealth_state_changed");
-      var1.waitingforstealthstatechange = undefined;
+    if(isDefined(var_1.patrol_state) && var_1.patrol_state != "patrol") {
+      var_1.waitingforstealthstatechange = 1;
+      var_1 waittill("stealth_state_changed");
+      var_1.waitingforstealthstatechange = undefined;
       continue;
     }
 
-    if(istrue(var1.scriptedstealth)) {
-      if(isDefined(var1.forcedpatrol)) {
-        var5 = getclosestpointonnavmesh(var1.forcedpatrol.origin);
+    if(istrue(var_1.scriptedstealth)) {
+      if(isDefined(var_1.forcedpatrol)) {
+        var_5 = getclosestpointonnavmesh(var_1.forcedpatrol.origin);
 
-        if(isDefined(var2)) {
-          var3 = var2;
+        if(isDefined(var_2)) {
+          var_3 = var_2;
         }
 
-        var2 = var1.forcedpatrol;
-        thread scripts\cp\cp_agent_patrol::setcooldown(var1.forcedpatrol, 20);
-        thread removeifalerted(var1, var1.forcedpatrol);
-        _setgoalpos(var1, var5, 32);
-        scripts\cp\cp_agent_patrol::unsetcooldown(var1.forcedpatrol);
-        var1.forcedpatrol = undefined;
+        var_2 = var_1.forcedpatrol;
+        thread scripts\cp\cp_agent_patrol::setcooldown(var_1.forcedpatrol, 20);
+        thread removeifalerted(var_1, var_1.forcedpatrol);
+        _setgoalpos(var_1, var_5, 32);
+        scripts\cp\cp_agent_patrol::unsetcooldown(var_1.forcedpatrol);
+        var_1.forcedpatrol = undefined;
       } else {
-        var6 = scripts\engine\utility::get_array_of_closest(var1.origin, level.allzpatrolpoints, undefined, 10);
-        var6 = getscoredpatrolpoints(var1, var1, var6, [var2, var3], "generic_zombie");
+        var_6 = scripts\engine\utility::get_array_of_closest(var_1.origin, level.allzpatrolpoints, undefined, 10);
+        var_6 = getscoredpatrolpoints(var_1, var_1, var_6, [var_2, var_3], "generic_zombie");
 
-        if(isDefined(var6)) {
-          foreach(var8 in var6) {
-            var5 = getclosestpointonnavmesh(var8.origin);
+        if(isDefined(var_6)) {
+          foreach(var_8 in var_6) {
+            var_5 = getclosestpointonnavmesh(var_8.origin);
 
-            if(distance(var8.origin, var5) <= 40 && canpathtotarget(var1, var5)) {
-              if(isDefined(var2)) {
-                var3 = var2;
+            if(distance(var_8.origin, var_5) <= 40 && canpathtotarget(var_1, var_5)) {
+              if(isDefined(var_2)) {
+                var_3 = var_2;
               }
 
-              var2 = var8;
-              thread scripts\cp\cp_agent_patrol::setcooldown(var8, 20);
-              thread removeifalerted(var1, var8);
-              _setgoalpos(var1, var5, 32);
-              scripts\cp\cp_agent_patrol::unsetcooldown(var8);
+              var_2 = var_8;
+              thread scripts\cp\cp_agent_patrol::setcooldown(var_8, 20);
+              thread removeifalerted(var_1, var_8);
+              _setgoalpos(var_1, var_5, 32);
+              scripts\cp\cp_agent_patrol::unsetcooldown(var_8);
               break;
             }
 
-            var2 = undefined;
-            var3 = undefined;
+            var_2 = undefined;
+            var_3 = undefined;
           }
         } else {
-          var2 = undefined;
-          var3 = undefined;
+          var_2 = undefined;
+          var_3 = undefined;
         }
       }
     }
@@ -502,81 +502,81 @@ function stealth_patrol(var0) {
   }
 }
 
-function removeifalerted(var0, var1) {
+function removeifalerted(var_0, var_1) {
   level endon("game_ended");
-  var0 endon("goal_reached");
-  var0 endon("goal");
-  var0 endon("stalled");
-  var0 scripts\engine\utility::ref_143a6("death", "alerted", "alerted_by_ai");
-  scripts\cp\cp_agent_patrol::unsetcooldown(var1);
+  var_0 endon("goal_reached");
+  var_0 endon("goal");
+  var_0 endon("stalled");
+  var_0 scripts\engine\utility::ref_143a6("death", "alerted", "alerted_by_ai");
+  scripts\cp\cp_agent_patrol::unsetcooldown(var_1);
 }
 
-function cooldownpatrolpoint(var0) {
+function cooldownpatrolpoint(var_0) {
   level endon("game_ended");
-  var0.cooldown = 1;
+  var_0.cooldown = 1;
   wait 20;
-  var0.cooldown = undefined;
+  var_0.cooldown = undefined;
 }
 
-function getscoredpatrolpoints(var0, var1, var2, var3) {
-  if(!isDefined(var1)) {
-    var1 = level.allspatrolpoints;
+function getscoredpatrolpoints(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_1)) {
+    var_1 = level.allspatrolpoints;
   }
 
-  if(!isDefined(var2)) {
-    var2 = [];
+  if(!isDefined(var_2)) {
+    var_2 = [];
   } else {
-    var2 = scripts\engine\utility::array_removeundefined(var2);
+    var_2 = scripts\engine\utility::array_removeundefined(var_2);
   }
 
-  if(!isDefined(var3)) {
-    var3 = "soldier_agent";
+  if(!isDefined(var_3)) {
+    var_3 = "soldier_agent";
   }
 
-  var4 = 25;
-  var5 = scripts\cp\cp_agent_utils::getactiveagentsoftype(var3);
-  var6 = sortbydistance(scripts\engine\utility::array_remove_array(var1, var2), var0.origin);
-  var7 = [];
-  var8 = scripts\engine\utility::get_array_of_closest(var0.origin, var5, undefined, 4, 256).size >= 3;
-  var9 = 5 / var4;
-  var10 = 20 / var4;
+  var_4 = 25;
+  var_5 = scripts\cp\cp_agent_utils::getactiveagentsoftype(var_3);
+  var_6 = sortbydistance(scripts\engine\utility::array_remove_array(var_1, var_2), var_0.origin);
+  var_7 = [];
+  var_8 = scripts\engine\utility::get_array_of_closest(var_0.origin, var_5, undefined, 4, 256).size >= 3;
+  var_9 = 5 / var_4;
+  var_10 = 20 / var_4;
 
-  foreach(var12 in var6) {
-    var13 = var12.patrolscore;
-    var12.personalscore = 0;
-    var14 = 250;
-    var15 = distance(var0.origin, var12.origin);
+  foreach(var_12 in var_6) {
+    var_13 = var_12.patrolscore;
+    var_12.personalscore = 0;
+    var_14 = 250;
+    var_15 = distance(var_0.origin, var_12.origin);
 
-    if(var8 && var15 <= 500) {
-      var14 = 500;
-    } else if(var15 >= 1500) {
-      var14 = 500;
+    if(var_8 && var_15 <= 500) {
+      var_14 = 500;
+    } else if(var_15 >= 1500) {
+      var_14 = 500;
     } else {
-      var16 = scripts\engine\math::get_dot(var0.origin, anglesToForward(var0.angles), var12.origin);
+      var_16 = scripts\engine\math::get_dot(var_0.origin, anglesToForward(var_0.angles), var_12.origin);
 
-      if(isDefined(var12.target)) {
-        var17 = scripts\engine\utility::getStructArray(var12.target, "targetname");
+      if(isDefined(var_12.target)) {
+        var_17 = scripts\engine\utility::getStructArray(var_12.target, "targetname");
 
-        if(var17.size > 1) {
-          var18 = var10 * 500;
-          var14 -= var18;
+        if(var_17.size > 1) {
+          var_18 = var_10 * 500;
+          var_14 -= var_18;
         }
 
-        var19 = var9 * 500;
-        var14 = var19 * var16;
+        var_19 = var_9 * 500;
+        var_14 = var_19 * var_16;
       } else {
-        var14 = 500 * var16;
+        var_14 = 500 * var_16;
       }
     }
 
-    var14 = clamp(var14, 0, 500);
-    var14 = clamp(var14 + var13, 0, 999);
-    var12.personalscore = int(var14);
-    var7 = var12;
+    var_14 = clamp(var_14, 0, 500);
+    var_14 = clamp(var_14 + var_13, 0, 999);
+    var_12.personalscore = int(var_14);
+    var_7 = var_12;
   }
 
-  var21 = scripts\cp\utility::array_sort_by_handler(var7, &getpersonalpatrolscore);
-  return var21;
+  var_21 = scripts\cp\utility::array_sort_by_handler(var_7, &getpersonalpatrolscore);
+  return var_21;
 }
 
 function getpersonalpatrolscore() {
@@ -595,34 +595,34 @@ function getpatrolscore() {
   return 0;
 }
 
-function go_to_spot(var0, var1, var2, var3) {
-  var0 endon("death");
-  var0 endon("alerted");
-  var0 endon("alerted_by_ai");
-  var0 endon("exit_stealth");
-  var4 = getclosestpointonnavmesh(var1);
+function go_to_spot(var_0, var_1, var_2, var_3) {
+  var_0 endon("death");
+  var_0 endon("alerted");
+  var_0 endon("alerted_by_ai");
+  var_0 endon("exit_stealth");
+  var_4 = getclosestpointonnavmesh(var_1);
 
-  if(distance(var4, var1) <= 32 && canpathtotarget(var0, var4)) {
-    var0 notify("new_goal");
-    var0 endon("new_goal");
-    setstealthstate(var0, var3);
-    resetgoalpos(var0);
+  if(distance(var_4, var_1) <= 32 && canpathtotarget(var_0, var_4)) {
+    var_0 notify("new_goal");
+    var_0 endon("new_goal");
+    setstealthstate(var_0, var_3);
+    resetgoalpos(var_0);
 
-    if(!isDefined(var0.legacy)) {
-      iprintln("** - LEGACY IS UNDEFINED FOR : " + var0 getentitynumber() + ", health: " + var0.health + ", agent: " + var0.agent_type);
-      var0.legacy = spawnStruct();
+    if(!isDefined(var_0.legacy)) {
+      iprintln("** - LEGACY IS UNDEFINED FOR : " + var_0 getentitynumber() + ", health: " + var_0.health + ", agent: " + var_0.agent_type);
+      var_0.legacy = spawnStruct();
     }
 
-    if(isDefined(var2)) {
-      var0.legacy.movemode = var2;
+    if(isDefined(var_2)) {
+      var_0.legacy.movemode = var_2;
     } else {
-      var0.legacy.movemode = "sprint";
+      var_0.legacy.movemode = "sprint";
     }
 
-    _setgoalpos(var0, var4, 32);
-    var0.legacy.movemode = "slow_walk";
-    wait getzombiestealthvalues(var0).timehiddennolosbeforedeescalate;
-    var0 notify("reset_stealth");
+    _setgoalpos(var_0, var_4, 32);
+    var_0.legacy.movemode = "slow_walk";
+    wait getzombiestealthvalues(var_0).timehiddennolosbeforedeescalate;
+    var_0 notify("reset_stealth");
     return;
   }
 }
@@ -639,40 +639,40 @@ function weapon_fire_monitor() {
   }
 }
 
-function player_weapon_listener(var0) {
-  var0 notify("player_weapon_listener");
-  var0 endon("player_weapon_listener");
-  var0 endon("death");
-  var0 endon("alerted");
-  var0 endon("exit_stealth");
+function player_weapon_listener(var_0) {
+  var_0 notify("player_weapon_listener");
+  var_0 endon("player_weapon_listener");
+  var_0 endon("death");
+  var_0 endon("alerted");
+  var_0 endon("exit_stealth");
 
   for(;;) {
-    level waittill("weapon_fired", var1, var2, var3, var4);
+    level waittill("weapon_fired", var_1, var_2, var_3, var_4);
 
-    if(!istrue(var0.scriptedstealth)) {
+    if(!istrue(var_0.scriptedstealth)) {
       continue;
     }
 
-    if(isPlayer(var3)) {
-      var5 = 2000 * var3.skill_data["stealth"].stealth_weapon_noise_scalar;
+    if(isPlayer(var_3)) {
+      var_5 = 2000 * var_3.skill_data["stealth"].stealth_weapon_noise_scalar;
     } else {
-      var5 = 2000;
+      var_5 = 2000;
     }
 
-    foreach(var7 in var2.attachments) {
-      if(issubstr(var7, "silencer")) {
-        var5 *= 0.75;
+    foreach(var_7 in var_2.attachments) {
+      if(issubstr(var_7, "silencer")) {
+        var_5 *= 0.75;
         break;
       }
     }
 
-    var5 = int(var5);
+    var_5 = int(var_5);
 
-    if(distance(var1, var0.origin) > var5) {
+    if(distance(var_1, var_0.origin) > var_5) {
       continue;
     }
 
-    thread go_to_spot(var0, var0, var1, undefined);
+    thread go_to_spot(var_0, var_0, var_1, undefined);
     wait 0.5;
   }
 }
@@ -681,7 +681,7 @@ function zombie_3dtext_handler() {
   self endon("death");
   self notify("texthandler");
   self endon("texthandler");
-  var0 = self getentitynumber();
+  var_0 = self getentitynumber();
 
   for(;;) {
     if(getDvar("stealth_show_states") == "") {
@@ -705,10 +705,10 @@ function draw_fov() {
       continue;
     }
 
-    var0 = self gettagorigin("tag_eye");
-    var1 = self gettagangles("tag_eye");
-    var2 = anglesToForward(var1);
-    var3 = var0 + var2 * self.stealthvals.standdetectdist;
+    var_0 = self gettagorigin("tag_eye");
+    var_1 = self gettagangles("tag_eye");
+    var_2 = anglesToForward(var_1);
+    var_3 = var_0 + var_2 * self.stealthvals.standdetectdist;
     waitframe();
   }
 }
@@ -717,183 +717,183 @@ function load_stealth_values_from_table() {
   level.zombie_stealth_values = [];
 
   if(isDefined(level.zombie_stealth_table)) {
-    var0 = level.zombie_stealth_table;
+    var_0 = level.zombie_stealth_table;
   } else {
-    var0 = "scripts/cp/zombie_stealth.csv";
+    var_0 = "scripts/cp/zombie_stealth.csv";
   }
 
-  var1 = 1;
-  var2 = 1;
+  var_1 = 1;
+  var_2 = 1;
 
   for(;;) {
-    var3 = tablelookupbyrow(var0, var2, var1);
+    var_3 = tablelookupbyrow(var_0, var_2, var_1);
 
-    if(var3 == "") {
+    if(var_3 == "") {
       break;
     }
 
-    var4 = spawnStruct();
-    var4.standdetectdist = int(tablelookupbyrow(var0, 2, var1));
-    var4.crouchdetectdist = int(tablelookupbyrow(var0, 3, var1));
-    var4.pronedetectdist = int(tablelookupbyrow(var0, 4, var1));
-    var4.hiddenstanddetectdist = int(tablelookupbyrow(var0, 5, var1));
-    var4.hiddencrouchdetectdist = int(tablelookupbyrow(var0, 6, var1));
-    var4.hiddenpronedetectdist = int(tablelookupbyrow(var0, 7, var1));
-    var4.propdistance = int(tablelookupbyrow(var0, 8, var1));
-    var4.timebeforeescalate = int(tablelookupbyrow(var0, 9, var1));
-    var4.timebeforedeescalate = int(tablelookupbyrow(var0, 10, var1));
-    var4.distancebeforedeescalate = int(tablelookupbyrow(var0, 11, var1));
-    var4.timehiddennolosbeforedeescalate = int(tablelookupbyrow(var0, 12, var1));
-    var4.zombiemovespeed = tablelookupbyrow(var0, 13, var1);
-    var4.playerstandmovedist = int(tablelookupbyrow(var0, 14, var1));
-    var4.playercrouchmovedist = int(tablelookupbyrow(var0, 15, var1));
-    var4.playerpronemovedist = int(tablelookupbyrow(var0, 16, var1));
-    var4.hiddenplayerstandmovedist = int(tablelookupbyrow(var0, 17, var1));
-    var4.hiddenplayercrouchmovedist = int(tablelookupbyrow(var0, 18, var1));
-    var4.hiddenplayerpronemovedist = int(tablelookupbyrow(var0, 19, var1));
-    var4.playermovedistlerptime = int(tablelookupbyrow(var0, 20, var1));
-    var4.losfov = cos(int(tablelookupbyrow(var0, 21, var1)));
-    var4.canseethroughfoliage = cos(int(tablelookupbyrow(var0, 22, var1)));
-    level.zombie_stealth_values[int(var3)] = var4;
-    var1++;
+    var_4 = spawnStruct();
+    var_4.standdetectdist = int(tablelookupbyrow(var_0, 2, var_1));
+    var_4.crouchdetectdist = int(tablelookupbyrow(var_0, 3, var_1));
+    var_4.pronedetectdist = int(tablelookupbyrow(var_0, 4, var_1));
+    var_4.hiddenstanddetectdist = int(tablelookupbyrow(var_0, 5, var_1));
+    var_4.hiddencrouchdetectdist = int(tablelookupbyrow(var_0, 6, var_1));
+    var_4.hiddenpronedetectdist = int(tablelookupbyrow(var_0, 7, var_1));
+    var_4.propdistance = int(tablelookupbyrow(var_0, 8, var_1));
+    var_4.timebeforeescalate = int(tablelookupbyrow(var_0, 9, var_1));
+    var_4.timebeforedeescalate = int(tablelookupbyrow(var_0, 10, var_1));
+    var_4.distancebeforedeescalate = int(tablelookupbyrow(var_0, 11, var_1));
+    var_4.timehiddennolosbeforedeescalate = int(tablelookupbyrow(var_0, 12, var_1));
+    var_4.zombiemovespeed = tablelookupbyrow(var_0, 13, var_1);
+    var_4.playerstandmovedist = int(tablelookupbyrow(var_0, 14, var_1));
+    var_4.playercrouchmovedist = int(tablelookupbyrow(var_0, 15, var_1));
+    var_4.playerpronemovedist = int(tablelookupbyrow(var_0, 16, var_1));
+    var_4.hiddenplayerstandmovedist = int(tablelookupbyrow(var_0, 17, var_1));
+    var_4.hiddenplayercrouchmovedist = int(tablelookupbyrow(var_0, 18, var_1));
+    var_4.hiddenplayerpronemovedist = int(tablelookupbyrow(var_0, 19, var_1));
+    var_4.playermovedistlerptime = int(tablelookupbyrow(var_0, 20, var_1));
+    var_4.losfov = cos(int(tablelookupbyrow(var_0, 21, var_1)));
+    var_4.canseethroughfoliage = cos(int(tablelookupbyrow(var_0, 22, var_1)));
+    level.zombie_stealth_values[int(var_3)] = var_4;
+    var_1++;
   }
 }
 
-function set_stealth_values(var0, var1) {
-  if(isDefined(var1)) {
-    var1 = int(clamp(var1, 0, level.maxescalationvalue - 1));
+function set_stealth_values(var_0, var_1) {
+  if(isDefined(var_1)) {
+    var_1 = int(clamp(var_1, 0, level.maxescalationvalue - 1));
   }
 
-  var1 = int(max(var1, 0));
-  var2 = spawnStruct();
-  var2.currentstealthlevel = int(var1);
-  var2.standdetectdist = level.zombie_stealth_values[var1].standdetectdist;
-  var2.crouchdetectdist = level.zombie_stealth_values[var1].crouchdetectdist;
-  var2.pronedetectdist = level.zombie_stealth_values[var1].pronedetectdist;
-  var2.hiddenstanddetectdist = level.zombie_stealth_values[var1].hiddenstanddetectdist;
-  var2.hiddencrouchdetectdist = level.zombie_stealth_values[var1].hiddencrouchdetectdist;
-  var2.hiddenpronedetectdist = level.zombie_stealth_values[var1].hiddenpronedetectdist;
-  var2.propdistance = level.zombie_stealth_values[var1].propdistance;
-  var2.timebeforeescalate = level.zombie_stealth_values[var1].timebeforeescalate;
-  var2.timebeforedeescalate = level.zombie_stealth_values[var1].timebeforedeescalate;
-  var2.distancebeforedeescalate = level.zombie_stealth_values[var1].distancebeforedeescalate;
-  var2.timehiddennolosbeforedeescalate = level.zombie_stealth_values[var1].timehiddennolosbeforedeescalate;
-  var2.zombiemovespeed = level.zombie_stealth_values[var1].zombiemovespeed;
-  var2.playerstandmovedist = level.zombie_stealth_values[var1].playerstandmovedist;
-  var2.playercrouchmovedist = level.zombie_stealth_values[var1].playercrouchmovedist;
-  var2.playerpronemovedist = level.zombie_stealth_values[var1].playerpronemovedist;
-  var2.hiddenplayerstandmovedist = level.zombie_stealth_values[var1].hiddenplayerstandmovedist;
-  var2.hiddenplayercrouchmovedist = level.zombie_stealth_values[var1].hiddenplayercrouchmovedist;
-  var2.hiddenplayerpronemovedist = level.zombie_stealth_values[var1].hiddenplayerpronemovedist;
-  var2.playermovedistlerptime = level.zombie_stealth_values[var1].playermovedistlerptime;
-  var2.losfov = level.zombie_stealth_values[var1].losfov;
-  var2.canseethroughfoliage = level.zombie_stealth_values[var1].canseethroughfoliage;
-  var0.stealthvals = var2;
-  setzombiestate(var0, var1);
-  var0 notify("stealth_values_set");
+  var_1 = int(max(var_1, 0));
+  var_2 = spawnStruct();
+  var_2.currentstealthlevel = int(var_1);
+  var_2.standdetectdist = level.zombie_stealth_values[var_1].standdetectdist;
+  var_2.crouchdetectdist = level.zombie_stealth_values[var_1].crouchdetectdist;
+  var_2.pronedetectdist = level.zombie_stealth_values[var_1].pronedetectdist;
+  var_2.hiddenstanddetectdist = level.zombie_stealth_values[var_1].hiddenstanddetectdist;
+  var_2.hiddencrouchdetectdist = level.zombie_stealth_values[var_1].hiddencrouchdetectdist;
+  var_2.hiddenpronedetectdist = level.zombie_stealth_values[var_1].hiddenpronedetectdist;
+  var_2.propdistance = level.zombie_stealth_values[var_1].propdistance;
+  var_2.timebeforeescalate = level.zombie_stealth_values[var_1].timebeforeescalate;
+  var_2.timebeforedeescalate = level.zombie_stealth_values[var_1].timebeforedeescalate;
+  var_2.distancebeforedeescalate = level.zombie_stealth_values[var_1].distancebeforedeescalate;
+  var_2.timehiddennolosbeforedeescalate = level.zombie_stealth_values[var_1].timehiddennolosbeforedeescalate;
+  var_2.zombiemovespeed = level.zombie_stealth_values[var_1].zombiemovespeed;
+  var_2.playerstandmovedist = level.zombie_stealth_values[var_1].playerstandmovedist;
+  var_2.playercrouchmovedist = level.zombie_stealth_values[var_1].playercrouchmovedist;
+  var_2.playerpronemovedist = level.zombie_stealth_values[var_1].playerpronemovedist;
+  var_2.hiddenplayerstandmovedist = level.zombie_stealth_values[var_1].hiddenplayerstandmovedist;
+  var_2.hiddenplayercrouchmovedist = level.zombie_stealth_values[var_1].hiddenplayercrouchmovedist;
+  var_2.hiddenplayerpronemovedist = level.zombie_stealth_values[var_1].hiddenplayerpronemovedist;
+  var_2.playermovedistlerptime = level.zombie_stealth_values[var_1].playermovedistlerptime;
+  var_2.losfov = level.zombie_stealth_values[var_1].losfov;
+  var_2.canseethroughfoliage = level.zombie_stealth_values[var_1].canseethroughfoliage;
+  var_0.stealthvals = var_2;
+  setzombiestate(var_0, var_1);
+  var_0 notify("stealth_values_set");
 }
 
-function setzombiestate(var0, var1) {
-  var2 = level.maxescalationvalue;
+function setzombiestate(var_0, var_1) {
+  var_2 = level.maxescalationvalue;
 
-  switch (var1) {
+  switch (var_1) {
     case 10:
-      var0 setscriptablepartstate("burning", "active");
-      var0 setscriptablepartstate("arcane_white", "active");
-      var0 setscriptablepartstate("chemburn", "inactive");
-      var0 setscriptablepartstate("corrosive", "inactive");
-      var0 setscriptablepartstate("shocked", "inactive");
-      var0 setscriptablepartstate("pet", "inactive");
+      var_0 setscriptablepartstate("burning", "active");
+      var_0 setscriptablepartstate("arcane_white", "active");
+      var_0 setscriptablepartstate("chemburn", "inactive");
+      var_0 setscriptablepartstate("corrosive", "inactive");
+      var_0 setscriptablepartstate("shocked", "inactive");
+      var_0 setscriptablepartstate("pet", "inactive");
       break;
     case 9:
-      var0 setscriptablepartstate("burning", "active");
-      var0 setscriptablepartstate("arcane_white", "active");
-      var0 setscriptablepartstate("chemburn", "inactive");
-      var0 setscriptablepartstate("corrosive", "inactive");
-      var0 setscriptablepartstate("shocked", "inactive");
-      var0 setscriptablepartstate("pet", "inactive");
+      var_0 setscriptablepartstate("burning", "active");
+      var_0 setscriptablepartstate("arcane_white", "active");
+      var_0 setscriptablepartstate("chemburn", "inactive");
+      var_0 setscriptablepartstate("corrosive", "inactive");
+      var_0 setscriptablepartstate("shocked", "inactive");
+      var_0 setscriptablepartstate("pet", "inactive");
       break;
     case 8:
-      var0 setscriptablepartstate("burning", "active");
-      var0 setscriptablepartstate("arcane_white", "active");
-      var0 setscriptablepartstate("chemburn", "inactive");
-      var0 setscriptablepartstate("corrosive", "inactive");
-      var0 setscriptablepartstate("shocked", "inactive");
-      var0 setscriptablepartstate("pet", "inactive");
+      var_0 setscriptablepartstate("burning", "active");
+      var_0 setscriptablepartstate("arcane_white", "active");
+      var_0 setscriptablepartstate("chemburn", "inactive");
+      var_0 setscriptablepartstate("corrosive", "inactive");
+      var_0 setscriptablepartstate("shocked", "inactive");
+      var_0 setscriptablepartstate("pet", "inactive");
       break;
     case 7:
-      var0 setscriptablepartstate("burning", "active");
-      var0 setscriptablepartstate("arcane_white", "active");
-      var0 setscriptablepartstate("chemburn", "inactive");
-      var0 setscriptablepartstate("corrosive", "inactive");
-      var0 setscriptablepartstate("shocked", "inactive");
-      var0 setscriptablepartstate("pet", "inactive");
+      var_0 setscriptablepartstate("burning", "active");
+      var_0 setscriptablepartstate("arcane_white", "active");
+      var_0 setscriptablepartstate("chemburn", "inactive");
+      var_0 setscriptablepartstate("corrosive", "inactive");
+      var_0 setscriptablepartstate("shocked", "inactive");
+      var_0 setscriptablepartstate("pet", "inactive");
       break;
     case 6:
-      var0 setscriptablepartstate("burning", "active");
-      var0 setscriptablepartstate("arcane_white", "active");
-      var0 setscriptablepartstate("chemburn", "inactive");
-      var0 setscriptablepartstate("corrosive", "inactive");
-      var0 setscriptablepartstate("shocked", "inactive");
-      var0 setscriptablepartstate("pet", "inactive");
+      var_0 setscriptablepartstate("burning", "active");
+      var_0 setscriptablepartstate("arcane_white", "active");
+      var_0 setscriptablepartstate("chemburn", "inactive");
+      var_0 setscriptablepartstate("corrosive", "inactive");
+      var_0 setscriptablepartstate("shocked", "inactive");
+      var_0 setscriptablepartstate("pet", "inactive");
       break;
     case 5:
-      var0 setscriptablepartstate("burning", "inactive");
-      var0 setscriptablepartstate("arcane_white", "inactive");
-      var0 setscriptablepartstate("chemburn", "inactive");
-      var0 setscriptablepartstate("corrosive", "inactive");
-      var0 setscriptablepartstate("shocked", "inactive");
-      var0 setscriptablepartstate("pet", "active");
+      var_0 setscriptablepartstate("burning", "inactive");
+      var_0 setscriptablepartstate("arcane_white", "inactive");
+      var_0 setscriptablepartstate("chemburn", "inactive");
+      var_0 setscriptablepartstate("corrosive", "inactive");
+      var_0 setscriptablepartstate("shocked", "inactive");
+      var_0 setscriptablepartstate("pet", "active");
       break;
     case 4:
-      var0 setscriptablepartstate("burning", "inactive");
-      var0 setscriptablepartstate("arcane_white", "active");
-      var0 setscriptablepartstate("chemburn", "inactive");
-      var0 setscriptablepartstate("corrosive", "inactive");
-      var0 setscriptablepartstate("shocked", "inactive");
-      var0 setscriptablepartstate("pet", "inactive");
+      var_0 setscriptablepartstate("burning", "inactive");
+      var_0 setscriptablepartstate("arcane_white", "active");
+      var_0 setscriptablepartstate("chemburn", "inactive");
+      var_0 setscriptablepartstate("corrosive", "inactive");
+      var_0 setscriptablepartstate("shocked", "inactive");
+      var_0 setscriptablepartstate("pet", "inactive");
       break;
     case 3:
-      var0 setscriptablepartstate("burning", "inactive");
-      var0 setscriptablepartstate("arcane_white", "inactive");
-      var0 setscriptablepartstate("chemburn", "active");
-      var0 setscriptablepartstate("corrosive", "inactive");
-      var0 setscriptablepartstate("shocked", "inactive");
-      var0 setscriptablepartstate("pet", "inactive");
+      var_0 setscriptablepartstate("burning", "inactive");
+      var_0 setscriptablepartstate("arcane_white", "inactive");
+      var_0 setscriptablepartstate("chemburn", "active");
+      var_0 setscriptablepartstate("corrosive", "inactive");
+      var_0 setscriptablepartstate("shocked", "inactive");
+      var_0 setscriptablepartstate("pet", "inactive");
       break;
     case 2:
-      var0 setscriptablepartstate("burning", "active");
-      var0 setscriptablepartstate("arcane_white", "inactive");
-      var0 setscriptablepartstate("chemburn", "inactive");
-      var0 setscriptablepartstate("corrosive", "inactive");
-      var0 setscriptablepartstate("shocked", "inactive");
-      var0 setscriptablepartstate("pet", "inactive");
+      var_0 setscriptablepartstate("burning", "active");
+      var_0 setscriptablepartstate("arcane_white", "inactive");
+      var_0 setscriptablepartstate("chemburn", "inactive");
+      var_0 setscriptablepartstate("corrosive", "inactive");
+      var_0 setscriptablepartstate("shocked", "inactive");
+      var_0 setscriptablepartstate("pet", "inactive");
       break;
     case 1:
-      var0 setscriptablepartstate("burning", "inactive");
-      var0 setscriptablepartstate("arcane_white", "inactive");
-      var0 setscriptablepartstate("chemburn", "inactive");
-      var0 setscriptablepartstate("corrosive", "inactive");
-      var0 setscriptablepartstate("shocked", "active");
-      var0 setscriptablepartstate("pet", "inactive");
+      var_0 setscriptablepartstate("burning", "inactive");
+      var_0 setscriptablepartstate("arcane_white", "inactive");
+      var_0 setscriptablepartstate("chemburn", "inactive");
+      var_0 setscriptablepartstate("corrosive", "inactive");
+      var_0 setscriptablepartstate("shocked", "active");
+      var_0 setscriptablepartstate("pet", "inactive");
       break;
     default:
-      var0 setscriptablepartstate("burning", "inactive");
-      var0 setscriptablepartstate("arcane_white", "inactive");
-      var0 setscriptablepartstate("chemburn", "inactive");
-      var0 setscriptablepartstate("corrosive", "inactive");
-      var0 setscriptablepartstate("shocked", "inactive");
-      var0 setscriptablepartstate("pet", "inactive");
+      var_0 setscriptablepartstate("burning", "inactive");
+      var_0 setscriptablepartstate("arcane_white", "inactive");
+      var_0 setscriptablepartstate("chemburn", "inactive");
+      var_0 setscriptablepartstate("corrosive", "inactive");
+      var_0 setscriptablepartstate("shocked", "inactive");
+      var_0 setscriptablepartstate("pet", "inactive");
       break;
   }
 }
 
-function show_spotted_text(var0) {
-  if(!isDefined(var0.last_spotted_vo) || gettime() >= var0.last_spotted_vo + 5000) {
-    var0.last_spotted_vo = gettime();
+function show_spotted_text(var_0) {
+  if(!isDefined(var_0.last_spotted_vo) || gettime() >= var_0.last_spotted_vo + 5000) {
+    var_0.last_spotted_vo = gettime();
 
     if(!istrue(level.disable_you_spotted_message)) {
-      var0 iprintlnbold("You've been spotted!");
+      var_0 iprintlnbold("You've been spotted!");
       return;
     }
 
@@ -901,61 +901,61 @@ function show_spotted_text(var0) {
   }
 }
 
-function increasecurrentstealthvalue(var0) {
-  if(isDefined(var0.stealthvals) && isDefined(var0.stealthvals.currentstealthlevel)) {
-    var1 = clamp(var0.stealthvals.currentstealthlevel + 1, 0, level.maxescalationvalue - 1);
-    set_stealth_values(var0, int(var1));
+function increasecurrentstealthvalue(var_0) {
+  if(isDefined(var_0.stealthvals) && isDefined(var_0.stealthvals.currentstealthlevel)) {
+    var_1 = clamp(var_0.stealthvals.currentstealthlevel + 1, 0, level.maxescalationvalue - 1);
+    set_stealth_values(var_0, int(var_1));
     return;
   }
 }
 
-function decreasecurrentstealthvalue(var0) {
-  if(isDefined(var0.stealthvals) && isDefined(var0.stealthvals.currentstealthlevel)) {
-    var1 = clamp(var0.stealthvals.currentstealthlevel - 1, 0, level.maxescalationvalue - 1);
-    set_stealth_values(var0, int(var1));
+function decreasecurrentstealthvalue(var_0) {
+  if(isDefined(var_0.stealthvals) && isDefined(var_0.stealthvals.currentstealthlevel)) {
+    var_1 = clamp(var_0.stealthvals.currentstealthlevel - 1, 0, level.maxescalationvalue - 1);
+    set_stealth_values(var_0, int(var_1));
     return;
   }
 }
 
-function getzombiestealthvalues(var0) {
-  if(isDefined(var0.stealthvals)) {
-    return var0.stealthvals;
+function getzombiestealthvalues(var_0) {
+  if(isDefined(var_0.stealthvals)) {
+    return var_0.stealthvals;
   }
 
   return undefined;
 }
 
-function monitorzawarenesslevel(var0) {
-  var0 notify("monitorZAwarenessLevel");
-  var0 endon("monitorZAwarenessLevel");
+function monitorzawarenesslevel(var_0) {
+  var_0 notify("monitorZAwarenessLevel");
+  var_0 endon("monitorZAwarenessLevel");
   level endon("game_ended");
   level endon("disable_zombie_scripted_stealth");
-  var0 endon("disconnect");
-  var0.zombieawarenesslevel = 0;
-  var1 = 100;
-  var2 = 0;
+  var_0 endon("disconnect");
+  var_0.zombieawarenesslevel = 0;
+  var_1 = 100;
+  var_2 = 0;
 
   for(;;) {
     if(scripts\engine\utility::flag("track_player_movement")) {
-      if(var0 scripts\cp\utility::is_valid_player()) {
-        var3 = var0 getvelocity();
-        var4 = length(var3);
+      if(var_0 scripts\cp\utility::is_valid_player()) {
+        var_3 = var_0 getvelocity();
+        var_4 = length(var_3);
 
-        if(var4 < 64) {
-          var2 += 2;
-        } else if(var4 > 64 && var4 < 128) {
-          var2 += 1;
-        } else if(var4 > 350) {
-          var2 -= 10;
-        } else if(var4 > 200) {
-          var2 -= 5;
+        if(var_4 < 64) {
+          var_2 += 2;
+        } else if(var_4 > 64 && var_4 < 128) {
+          var_2 += 1;
+        } else if(var_4 > 350) {
+          var_2 -= 10;
+        } else if(var_4 > 200) {
+          var_2 -= 5;
         }
 
-        var2 = clamp(var2, 0, var1);
+        var_2 = clamp(var_2, 0, var_1);
 
-        if(var2 >= var1) {
-          thread sendzombiehorde(var0);
-          var2 = 0;
+        if(var_2 >= var_1) {
+          thread sendzombiehorde(var_0);
+          var_2 = 0;
           wait 10;
         }
       }
@@ -965,162 +965,162 @@ function monitorzawarenesslevel(var0) {
   }
 }
 
-function sendzombiehorde(var0) {
-  if(istrue(var0.ignoreme)) {
+function sendzombiehorde(var_0) {
+  if(istrue(var_0.ignoreme)) {
     return;
   }
 
-  var1 = scripts\cp\cp_agent_utils::getactiveagentsoftype("generic_zombie");
-  var2 = sortbydistance(var1, var0.origin);
-  var3 = 10;
-  var4 = 0;
+  var_1 = scripts\cp\cp_agent_utils::getactiveagentsoftype("generic_zombie");
+  var_2 = sortbydistance(var_1, var_0.origin);
+  var_3 = 10;
+  var_4 = 0;
 
-  foreach(var6 in var2) {
-    if(istrue(var6.fake_stealth)) {
-      var7 = getstealthstate(var6);
+  foreach(var_6 in var_2) {
+    if(istrue(var_6.fake_stealth)) {
+      var_7 = getstealthstate(var_6);
 
-      if(isDefined(var7) && var7 == "patrol") {
-        thread go_to_spot(var6, var6, var0.origin, "run");
-        var4++;
+      if(isDefined(var_7) && var_7 == "patrol") {
+        thread go_to_spot(var_6, var_6, var_0.origin, "run");
+        var_4++;
 
-        if(var4 >= var3) {
+        if(var_4 >= var_3) {
           break;
         }
       }
     }
   }
 
-  var4 = undefined;
-  var6 = undefined;
+  var_4 = undefined;
+  var_6 = undefined;
 }
 
-function spawn_ambient_zombie(var0) {
-  var1 = undefined;
+function spawn_ambient_zombie(var_0) {
+  var_1 = undefined;
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return false;
   }
 
-  if(!isDefined(var1.script_parameters)) {
-    var1.script_parameters = "ground_spawn_no_boards";
+  if(!isDefined(var_1.script_parameters)) {
+    var_1.script_parameters = "ground_spawn_no_boards";
   }
 
-  if(var1.script_parameters != "ground_spawn_no_boards") {
+  if(var_1.script_parameters != "ground_spawn_no_boards") {
     iprintlnbold("bad spawn");
   }
 
-  var2 = var1[[level.spawn_wave_enemy_func]]("generic_zombie", 1, var1);
+  var_2 = var_1[[level.spawn_wave_enemy_func]]("generic_zombie", 1, var_1);
 
-  if(isDefined(var2)) {
-    if(istrue(var0.skiptraversals)) {
-      var2.skiptraversals = 1;
+  if(isDefined(var_2)) {
+    if(istrue(var_0.skiptraversals)) {
+      var_2.skiptraversals = 1;
     }
 
-    if(istrue(var0.dontkilloff)) {
-      var2.dontkilloff = 1;
+    if(istrue(var_0.dontkilloff)) {
+      var_2.dontkilloff = 1;
     }
 
-    if(isDefined(var1.target)) {
-      var2.forcedpatrol = scripts\engine\utility::random(scripts\engine\utility::getStructArray(var1.target, "targetname"));
+    if(isDefined(var_1.target)) {
+      var_2.forcedpatrol = scripts\engine\utility::random(scripts\engine\utility::getStructArray(var_1.target, "targetname"));
     }
 
-    if(isDefined(var0.threatbiasoverride)) {
-      var2.threatbiasoverride = var0.threatbiasoverride;
+    if(isDefined(var_0.threatbiasoverride)) {
+      var_2.threatbiasoverride = var_0.threatbiasoverride;
     }
 
-    var1.lastspawntime = gettime();
-    var2.killofftime = gettime() + 10000;
-    var2 emissiveblend(1, 0.1);
-    thread default_ambient_vals(var2, var2, var0);
+    var_1.lastspawntime = gettime();
+    var_2.killofftime = gettime() + 10000;
+    var_2 emissiveblend(1, 0.1);
+    thread default_ambient_vals(var_2, var_2, var_0);
     return true;
   }
 
   return false;
 }
 
-function default_ambient_vals(var0, var1, var2) {
-  var0 endon("death");
-  var0.iszombie = 1;
-  var0.dont_scriptkill = 1;
-  var0.dont_cleanup = 1;
-  var0.enemy_group = var1.group_name;
-  var0.moduleid = var1.moduleid;
-  var0.group = var1;
-  var0.group.activecount++;
-  var3 = getdvarint("scr_infected_health", 160);
-  var0.maxhealth = var3;
-  var0.health = var3;
-  activatezombiestealth(var0, var2);
+function default_ambient_vals(var_0, var_1, var_2) {
+  var_0 endon("death");
+  var_0.iszombie = 1;
+  var_0.dont_scriptkill = 1;
+  var_0.dont_cleanup = 1;
+  var_0.enemy_group = var_1.group_name;
+  var_0.moduleid = var_1.moduleid;
+  var_0.group = var_1;
+  var_0.group.activecount++;
+  var_3 = getdvarint("scr_infected_health", 160);
+  var_0.maxhealth = var_3;
+  var_0.health = var_3;
+  activatezombiestealth(var_0, var_2);
 }
 
-function updatezombiegroupname(var0, var1) {
-  var0.enemy_group = var1.group_name;
+function updatezombiegroupname(var_0, var_1) {
+  var_0.enemy_group = var_1.group_name;
 }
 
-function activatezombiestealth(var0, var1) {
-  thread zombiescriptedstealth(var0, var0);
+function activatezombiestealth(var_0, var_1) {
+  thread zombiescriptedstealth(var_0, var_0);
 }
 
-function _setgoalpos(var0, var1, var2) {
-  var0 notify("set_goal_pos_requested");
-  var0 endon("set_goal_pos_requested");
-  var0 endon("death");
-  var0 endon("stalled");
+function _setgoalpos(var_0, var_1, var_2) {
+  var_0 notify("set_goal_pos_requested");
+  var_0 endon("set_goal_pos_requested");
+  var_0 endon("death");
+  var_0 endon("stalled");
 
-  if(isDefined(var2)) {
-    var0.goalradius = var2;
+  if(isDefined(var_2)) {
+    var_0.goalradius = var_2;
   } else {
-    var0.goalradius = 32;
+    var_0.goalradius = 32;
   }
 
-  var3 = 0;
+  var_3 = 0;
 
-  foreach(var5 in level.nearbyposarray) {
-    if(distance(var5, var1) <= 32) {
-      var3 = 1;
+  foreach(var_5 in level.nearbyposarray) {
+    if(distance(var_5, var_1) <= 32) {
+      var_3 = 1;
       break;
     }
   }
 
-  var7 = 1;
+  var_7 = 1;
 
-  if(var3) {
-    var8 = getrandomnavpoints(var1, 128, 10, undefined, getrandomnavpoint(var1, 64), 128);
-    var9 = 0;
+  if(var_3) {
+    var_8 = getrandomnavpoints(var_1, 128, 10, undefined, getrandomnavpoint(var_1, 64), 128);
+    var_9 = 0;
 
-    foreach(var11 in var8) {
-      var7 = 0;
+    foreach(var_11 in var_8) {
+      var_7 = 0;
 
-      foreach(var5 in level.nearbyposarray) {
-        if(distance(var5, var11) <= 32) {
-          var7 = 1;
+      foreach(var_5 in level.nearbyposarray) {
+        if(distance(var_5, var_11) <= 32) {
+          var_7 = 1;
           break;
         }
       }
 
-      if(!var7) {
-        var1 = var11;
+      if(!var_7) {
+        var_1 = var_11;
         break;
       }
     }
   }
 
-  thread manageposarray(var0, var1);
-  var0 setgoalpos(var1);
-  var15 = var0 scripts\engine\utility::ref_143ad("goal", "goal_reached");
+  thread manageposarray(var_0, var_1);
+  var_0 setgoalpos(var_1);
+  var_15 = var_0 scripts\engine\utility::ref_143ad("goal", "goal_reached");
 }
 
-function manageposarray(var0, var1) {
-  level.nearbyposarray[level.nearbyposarray.size] = var1;
-  var2 = var0 scripts\engine\utility::waittill_any_in_array_return(["death", "set_goal_pos_requested", "alerted", "exit_stealth", "new_goal", "alerted_by_ai"]);
+function manageposarray(var_0, var_1) {
+  level.nearbyposarray[level.nearbyposarray.size] = var_1;
+  var_2 = var_0 scripts\engine\utility::waittill_any_in_array_return(["death", "set_goal_pos_requested", "alerted", "exit_stealth", "new_goal", "alerted_by_ai"]);
 
-  if(scripts\engine\utility::array_contains(level.nearbyposarray, var1)) {
-    level.nearbyposarray = scripts\engine\utility::array_remove(level.nearbyposarray, var1);
+  if(scripts\engine\utility::array_contains(level.nearbyposarray, var_1)) {
+    level.nearbyposarray = scripts\engine\utility::array_remove(level.nearbyposarray, var_1);
     return;
   }
 }
 
-function resetgoalpos(var0) {
-  var0 setgoalpos(self.origin);
-  var0 scripts\engine\utility::ref_143a5("goal", "goal_reached");
+function resetgoalpos(var_0) {
+  var_0 setgoalpos(self.origin);
+  var_0 scripts\engine\utility::ref_143a5("goal", "goal_reached");
 }

@@ -104,23 +104,23 @@ function visibility_thread() {
 }
 
 function get_detect_range() {
-  var0 = self.currentpose;
+  var_0 = self.currentpose;
 
-  if(var0 == "back") {
-    var0 = "prone";
+  if(var_0 == "back") {
+    var_0 = "prone";
   }
 
   if(scripts\stealth\utility::group_spotted_flag()) {
-    var1 = "spotted";
+    var_1 = "spotted";
   } else {
-    var1 = "hidden";
+    var_1 = "hidden";
   }
 
-  var2 = level.stealth.detect.range[var1][var1];
+  var_2 = level.stealth.detect.range[var_1][var_1];
 
   if(scripts\engine\utility::ent_flag("stealth_in_shadow")) {
-    var2 = max(level.stealth.detect.range["hidden"]["prone"], var2 * 0.5);
+    var_2 = max(level.stealth.detect.range["hidden"]["prone"], var_2 * 0.5);
   }
 
-  return var2;
+  return var_2;
 }

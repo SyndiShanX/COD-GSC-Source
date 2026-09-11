@@ -10,11 +10,11 @@ function alleys_vig_init() {
 }
 
 function spawn_traffic() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, ["veh_periph_apt_spawner1", "vehicle_skilo_civ_idle_RF", "veh8_civ_lnd_skilo", "veh8_civ_lnd_skilo_black", "veh8_civ_lnd_skilo_green", "veh8_civ_lnd_skilo_grey", "veh8_civ_lnd_skilo_blue", "veh8_civ_lnd_skilo_red"]);
 }
 
-function deletedriver(var0) {
+function deletedriver(var_0) {
   wait 7;
-  var0 delete();
+  var_0 delete();
 }

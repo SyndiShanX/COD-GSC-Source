@@ -10,32 +10,32 @@ function init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("chopper_gunner", "assignTargetMarkers", &givephteamscore);
 }
 
-function chopper_gunner_set_vehicle_hit_damage_data(var0, var1) {
-  scripts\mp\vehicles\damage::set_vehicle_hit_damage_data(var0, var1);
+function chopper_gunner_set_vehicle_hit_damage_data(var_0, var_1) {
+  scripts\mp\vehicles\damage::set_vehicle_hit_damage_data(var_0, var_1);
 }
 
-function chopper_gunner_findtargetStruct(var0, var1) {
-  return scripts\cp_mp\killstreaks\chopper_support::choppersupport_findtargetStruct(var0, var1);
+function chopper_gunner_findtargetStruct(var_0, var_1) {
+  return scripts\cp_mp\killstreaks\chopper_support::choppersupport_findtargetStruct(var_0, var_1);
 }
 
 function givephteamscore() {
-  var0 = [];
-  var1 = [];
-  var2 = level.players;
+  var_0 = [];
+  var_1 = [];
+  var_2 = level.players;
 
-  foreach(var4 in var2) {
-    if(level.teambased && var4.team == self.team || var4 == self.owner) {
-      var1 = var4;
+  foreach(var_4 in var_2) {
+    if(level.teambased && var_4.team == self.team || var_4 == self.owner) {
+      var_1 = var_4;
       continue;
     }
 
-    if(var4 scripts\mp\utility\perk::_hasperk("specialty_noscopeoutline")) {
+    if(var_4 scripts\mp\utility\perk::_hasperk("specialty_noscopeoutline")) {
       continue;
     }
 
-    var0 = var4;
+    var_0 = var_4;
   }
 
-  self.enemytargetmarkergroup = scripts\cp_mp\targetmarkergroups::targetmarkergroup_on("thermalvisionenemydefault", self.owner, var0, self.owner, 0, 1, 1);
-  self.friendlytargetmarkergroup = scripts\cp_mp\targetmarkergroups::targetmarkergroup_on("thermalvisionfriendlydefault", self.owner, var1, self.owner, 1, 1);
+  self.enemytargetmarkergroup = scripts\cp_mp\targetmarkergroups::targetmarkergroup_on("thermalvisionenemydefault", self.owner, var_0, self.owner, 0, 1, 1);
+  self.friendlytargetmarkergroup = scripts\cp_mp\targetmarkergroups::targetmarkergroup_on("thermalvisionfriendlydefault", self.owner, var_1, self.owner, 1, 1);
 }

@@ -7,12 +7,12 @@ function thermitestucktoshield() {
   struct_set_fields();
 }
 
-function struct_set_fields(var0) {
+function struct_set_fields(var_0) {
   if(isDefined(level.scripted_spawner_func)) {
     return;
   }
 
-  level.threadedscriptspawners = istrue(var0);
+  level.threadedscriptspawners = istrue(var_0);
   level.create_script_file_ids = [];
   level.cs_scripted_spawners = [];
   level.scripted_spawners = [];
@@ -31,8 +31,8 @@ function thirtypercent_music() {
     level.cs_creation_counter = 0;
 
     if(isarray(level.scripted_spawner_func)) {
-      for(var0 = 0; var0 < level.scripted_spawner_func.size; var0++) {
-        [[level.scripted_spawner_func[var0]]](1, "cs" + var0);
+      for(var_0 = 0; var_0 < level.scripted_spawner_func.size; var_0++) {
+        [[level.scripted_spawner_func[var_0]]](1, "cs" + var_0);
       }
 
       return;
@@ -48,32 +48,32 @@ function thirtypercent_music() {
   }
 }
 
-function register_create_script_arrays(var0, var1, var2, var3) {
-  if(isDefined(var3)) {
-    level.scripted_spawner_func[level.scripted_spawner_func.size] = var3;
+function register_create_script_arrays(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_3)) {
+    level.scripted_spawner_func[level.scripted_spawner_func.size] = var_3;
   }
 
-  if(isDefined(var0)) {
-    level.scripted_spawner_func_strings[level.scripted_spawner_func_strings.size] = var0;
+  if(isDefined(var_0)) {
+    level.scripted_spawner_func_strings[level.scripted_spawner_func_strings.size] = var_0;
   }
 
-  if(isDefined(var1)) {
-    level.scripted_spawner_map_strings[level.scripted_spawner_func_strings.size] = var1;
+  if(isDefined(var_1)) {
+    level.scripted_spawner_map_strings[level.scripted_spawner_func_strings.size] = var_1;
   }
 
-  if(isDefined(var2)) {
-    level.create_script_file_ids[var0] = "cs" + var2;
+  if(isDefined(var_2)) {
+    level.create_script_file_ids[var_0] = "cs" + var_2;
     return;
   }
 }
 
-function thermometerwatch(var0) {
-  if(scripts\engine\utility::flag_exist(var0)) {
-    scripts\engine\utility::flag_set(var0);
+function thermometerwatch(var_0) {
+  if(scripts\engine\utility::flag_exist(var_0)) {
+    scripts\engine\utility::flag_set(var_0);
 
-    if(scripts\engine\utility::flag_exist(var0 + "_completed")) {
+    if(scripts\engine\utility::flag_exist(var_0 + "_completed")) {
       level endon("game_ended");
-      scripts\engine\utility::flag_wait(var0 + "_completed");
+      scripts\engine\utility::flag_wait(var_0 + "_completed");
       return;
     }
 
@@ -81,23 +81,23 @@ function thermometerwatch(var0) {
   }
 }
 
-function ref_12b00(var0) {
+function ref_12b00(var_0) {
   if(!isDefined(level.brjuggernautcrateactivatecallback)) {
     level.brjuggernautcrateactivatecallback = [];
   }
 
-  level.brjuggernautcrateactivatecallback = scripts\engine\utility::array_add(level.brjuggernautcrateactivatecallback, var0);
+  level.brjuggernautcrateactivatecallback = scripts\engine\utility::array_add(level.brjuggernautcrateactivatecallback, var_0);
 }
 
-function ref_12b01(var0) {
+function ref_12b01(var_0) {
   if(!isDefined(level.brjuggernautcratecapturecallback)) {
     level.brjuggernautcratecapturecallback = [];
   }
 
-  level.brjuggernautcratecapturecallback = scripts\engine\utility::array_add(level.brjuggernautcratecapturecallback, var0);
+  level.brjuggernautcratecapturecallback = scripts\engine\utility::array_add(level.brjuggernautcratecapturecallback, var_0);
 }
 
-function strike_setup_arrays(var0, var1) {
+function strike_setup_arrays(var_0, var_1) {
   if(!isDefined(level.scripted_spawners)) {
     level.scripted_spawners = [];
   }
@@ -130,41 +130,41 @@ function strike_setup_arrays(var0, var1) {
     level.cs_scripted_spawners_models = [];
   }
 
-  if(isDefined(var0) && !isDefined(level.scripted_spawners[var0])) {
-    level.scripted_spawners[var0] = [];
+  if(isDefined(var_0) && !isDefined(level.scripted_spawners[var_0])) {
+    level.scripted_spawners[var_0] = [];
   }
 
-  if(isDefined(var0) && !isDefined(level.scripted_spawners_triggers[var0])) {
-    level.scripted_spawners_triggers[var0] = [];
+  if(isDefined(var_0) && !isDefined(level.scripted_spawners_triggers[var_0])) {
+    level.scripted_spawners_triggers[var_0] = [];
   }
 
-  if(isDefined(var0) && !isDefined(level.scripted_spawners_models[var0])) {
-    level.scripted_spawners_models[var0] = [];
+  if(isDefined(var_0) && !isDefined(level.scripted_spawners_models[var_0])) {
+    level.scripted_spawners_models[var_0] = [];
   }
 
-  if(isDefined(var0) && !isDefined(level.cs_scripted_spawners[var0])) {
-    level.cs_scripted_spawners[var0] = [];
+  if(isDefined(var_0) && !isDefined(level.cs_scripted_spawners[var_0])) {
+    level.cs_scripted_spawners[var_0] = [];
   }
 
-  if(isDefined(var0) && !isDefined(level.cs_scripted_spawners_triggers[var0])) {
-    level.cs_scripted_spawners_triggers[var0] = [];
+  if(isDefined(var_0) && !isDefined(level.cs_scripted_spawners_triggers[var_0])) {
+    level.cs_scripted_spawners_triggers[var_0] = [];
   }
 
-  if(isDefined(var0) && !isDefined(level.cs_scripted_spawners_models[var0])) {
-    level.cs_scripted_spawners_models[var0] = [];
+  if(isDefined(var_0) && !isDefined(level.cs_scripted_spawners_models[var_0])) {
+    level.cs_scripted_spawners_models[var_0] = [];
   }
 
   if(!isDefined(level.cs_object_container)) {
     level.cs_object_container = [];
   }
 
-  if(isDefined(var1) && !isDefined(level.cs_object_container[var1])) {
-    level.cs_object_container[var1] = self;
+  if(isDefined(var_1) && !isDefined(level.cs_object_container[var_1])) {
+    level.cs_object_container[var_1] = self;
     return;
   }
 }
 
-function initbunkerdoor(var0, var1) {
+function initbunkerdoor(var_0, var_1) {
   if(!isDefined(level.scripted_spawners)) {
     level.scripted_spawners = [];
   }
@@ -197,44 +197,44 @@ function initbunkerdoor(var0, var1) {
     level.cs_scripted_spawners_models = [];
   }
 
-  if(isDefined(var0) && !isDefined(level.scripted_spawners[var0])) {
-    level.scripted_spawners[var0] = [];
+  if(isDefined(var_0) && !isDefined(level.scripted_spawners[var_0])) {
+    level.scripted_spawners[var_0] = [];
   }
 
-  if(isDefined(var0) && !isDefined(level.scripted_spawners_triggers[var0])) {
-    level.scripted_spawners_triggers[var0] = [];
+  if(isDefined(var_0) && !isDefined(level.scripted_spawners_triggers[var_0])) {
+    level.scripted_spawners_triggers[var_0] = [];
   }
 
-  if(isDefined(var0) && !isDefined(level.scripted_spawners_models[var0])) {
-    level.scripted_spawners_models[var0] = [];
+  if(isDefined(var_0) && !isDefined(level.scripted_spawners_models[var_0])) {
+    level.scripted_spawners_models[var_0] = [];
   }
 
-  if(isDefined(var0) && !isDefined(level.cs_scripted_spawners[var0])) {
-    level.cs_scripted_spawners[var0] = [];
+  if(isDefined(var_0) && !isDefined(level.cs_scripted_spawners[var_0])) {
+    level.cs_scripted_spawners[var_0] = [];
   }
 
-  if(isDefined(var0) && !isDefined(level.cs_scripted_spawners_triggers[var0])) {
-    level.cs_scripted_spawners_triggers[var0] = [];
+  if(isDefined(var_0) && !isDefined(level.cs_scripted_spawners_triggers[var_0])) {
+    level.cs_scripted_spawners_triggers[var_0] = [];
   }
 
-  if(isDefined(var0) && !isDefined(level.cs_scripted_spawners_models[var0])) {
-    level.cs_scripted_spawners_models[var0] = [];
+  if(isDefined(var_0) && !isDefined(level.cs_scripted_spawners_models[var_0])) {
+    level.cs_scripted_spawners_models[var_0] = [];
   }
 
   if(!isDefined(level.cs_object_container)) {
     level.cs_object_container = [];
   }
 
-  if(isDefined(var1) && !isDefined(level.cs_object_container[var1])) {
-    level.cs_object_container[var1] = self;
+  if(isDefined(var_1) && !isDefined(level.cs_object_container[var_1])) {
+    level.cs_object_container[var_1] = self;
     return;
   }
 }
 
-function strike_additem(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14, var15) {
+function strike_additem(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15) {
   level endon("game_ended");
 
-  if(!ref_11f7c(var0)) {
+  if(!ref_11f7c(var_0)) {
     return;
   }
 
@@ -246,491 +246,491 @@ function strike_additem(var0, var1, var2, var3, var4, var5, var6, var7, var8, va
     }
   }
 
-  if(isDefined(var3)) {
-    var0.origin = var3;
+  if(isDefined(var_3)) {
+    var_0.origin = var_3;
   }
 
-  if(isDefined(var4)) {
-    var0.angles = var4;
-  } else if(!isDefined(var0.angles)) {
-    var0.angles = (0, 0, 0);
+  if(isDefined(var_4)) {
+    var_0.angles = var_4;
+  } else if(!isDefined(var_0.angles)) {
+    var_0.angles = (0, 0, 0);
   }
 
-  if(isDefined(var5)) {
-    var0.targetname = var5;
+  if(isDefined(var_5)) {
+    var_0.targetname = var_5;
   }
 
-  if(isDefined(var6)) {
-    var0.target = var6;
+  if(isDefined(var_6)) {
+    var_0.target = var_6;
   }
 
-  if(isDefined(var7)) {
-    var0.script_noteworthy = var7;
+  if(isDefined(var_7)) {
+    var_0.script_noteworthy = var_7;
   }
 
-  if(isDefined(var8)) {
-    var0.script_linkto = var8;
+  if(isDefined(var_8)) {
+    var_0.script_linkto = var_8;
   }
 
-  if(isDefined(var9)) {
-    var0.script_linkname = var9;
+  if(isDefined(var_9)) {
+    var_0.script_linkname = var_9;
   }
 
-  if(isDefined(var13)) {
-    var0.speed = var13;
+  if(isDefined(var_13)) {
+    var_0.speed = var_13;
   }
 
-  if(isDefined(var12)) {
-    var0.radius = var12;
+  if(isDefined(var_12)) {
+    var_0.radius = var_12;
   }
 
-  if(isDefined(var14)) {
-    var0.spawnflags = int(var14);
+  if(isDefined(var_14)) {
+    var_0.spawnflags = int(var_14);
   }
 
-  if(isDefined(var15)) {
-    var0.script_unload = var15;
+  if(isDefined(var_15)) {
+    var_0.script_unload = var_15;
   }
 
-  translate_position_with_offset_data(var2, var0, var10, var11);
+  translate_position_with_offset_data(var_2, var_0, var_10, var_11);
 
-  if(!isDefined(var1)) {
-    var1 = "_";
+  if(!isDefined(var_1)) {
+    var_1 = "_";
   }
 
-  strike_fixautokvps(var0, var1);
-  typecast_kvps(var0);
+  strike_fixautokvps(var_0, var_1);
+  typecast_kvps(var_0);
 
   if(isDefined(self.objects)) {
-    self.objects[self.objects.size] = var0;
+    self.objects[self.objects.size] = var_0;
   }
 
-  if(isDefined(var0.model)) {
-    if(istrue(var0.is_cs_model)) {
-      var0.is_cs_model = undefined;
+  if(isDefined(var_0.model)) {
+    if(istrue(var_0.is_cs_model)) {
+      var_0.is_cs_model = undefined;
     }
 
-    strike_modelcreate(var0, var1);
+    strike_modelcreate(var_0, var_1);
     return;
   }
 
-  if(isDefined(var0.targetname)) {
-    if(istrue(var0.is_cs_trigger)) {
-      var0.is_cs_trigger = undefined;
-      strike_triggercreate(var0, var1, 1);
+  if(isDefined(var_0.targetname)) {
+    if(istrue(var_0.is_cs_trigger)) {
+      var_0.is_cs_trigger = undefined;
+      strike_triggercreate(var_0, var_1, 1);
       return;
     }
 
-    if(istrue(var0.is_cs_model)) {
-      strike_modelcreate(var0, var1);
-      var0.is_cs_model = undefined;
+    if(istrue(var_0.is_cs_model)) {
+      strike_modelcreate(var_0, var_1);
+      var_0.is_cs_model = undefined;
       return;
     }
 
-    if(istrue(var0.trigger_aggro_damage_amount)) {
-      var0.trigger_aggro_damage_amount = undefined;
-      ref_13921(var0, var1);
+    if(istrue(var_0.trigger_aggro_damage_amount)) {
+      var_0.trigger_aggro_damage_amount = undefined;
+      ref_13921(var_0, var_1);
       return;
     }
 
-    switch (var0.targetname) {
+    switch (var_0.targetname) {
       case "trigger_spawn":
-        strike_triggercreate(var0, var1);
+        strike_triggercreate(var_0, var_1);
         break;
       case "trigger_fallback":
-        strike_triggercreate(var0, var1);
+        strike_triggercreate(var_0, var_1);
         break;
       case "module_update":
-        strike_triggercreate(var0, var1, 1);
+        strike_triggercreate(var_0, var_1, 1);
         break;
       case "cs_trigger":
-        strike_triggercreate(var0, var1, 1);
+        strike_triggercreate(var_0, var_1, 1);
         break;
       case "interaction":
-        strike_interactioncreate(var0, var1);
+        strike_interactioncreate(var_0, var_1);
         break;
       case "trigger_kill_floodspawner":
-        strike_triggercreate(var0, var1, 1);
+        strike_triggercreate(var_0, var_1, 1);
         break;
       default:
-        strike_addstructtolevel(var0, 0, var1);
+        strike_addstructtolevel(var_0, 0, var_1);
         break;
     }
 
     return;
   }
 
-  strike_addstructtolevel(var0, 0, var1);
+  strike_addstructtolevel(var_0, 0, var_1);
 }
 
 function ref_11f7c() {
-  var0 = 0;
-  var1 = 0;
+  var_0 = 0;
+  var_1 = 0;
 
   if(isDefined(level.brjuggernautcrateactivatecallback)) {
     if(isDefined(self.script_gameobjectname)) {
-      for(var2 = 0; var2 < level.brjuggernautcrateactivatecallback.size; var2++) {
-        if(getsubstr(level.brjuggernautcrateactivatecallback[var2], 0, 1) == "!") {
-          var3 = 1;
+      for(var_2 = 0; var_2 < level.brjuggernautcrateactivatecallback.size; var_2++) {
+        if(getsubstr(level.brjuggernautcrateactivatecallback[var_2], 0, 1) == "!") {
+          var_3 = 1;
         } else {
-          var3 = 0;
+          var_3 = 0;
         }
 
-        if(trophy_watchtimeoutorgameendedinternal(self.script_gameobjectname, level.brjuggernautcrateactivatecallback[var2]) != var3) {
-          var0 = 1;
+        if(trophy_watchtimeoutorgameendedinternal(self.script_gameobjectname, level.brjuggernautcrateactivatecallback[var_2]) != var_3) {
+          var_0 = 1;
           break;
         }
       }
     } else {
-      var0 = 1;
+      var_0 = 1;
     }
   } else {
-    var0 = 1;
+    var_0 = 1;
   }
 
   if(isDefined(level.brjuggernautcratecapturecallback)) {
     if(isDefined(self.script_gameobjectname)) {
-      for(var2 = 0; var2 < level.brjuggernautcratecapturecallback.size; var2++) {
-        if(getsubstr(level.brjuggernautcratecapturecallback[var2], 0, 1) == "!") {
-          var3 = 1;
+      for(var_2 = 0; var_2 < level.brjuggernautcratecapturecallback.size; var_2++) {
+        if(getsubstr(level.brjuggernautcratecapturecallback[var_2], 0, 1) == "!") {
+          var_3 = 1;
         } else {
-          var3 = 0;
+          var_3 = 0;
         }
 
-        if(trophy_watchtimeoutorgameendedinternal(self.script_gameobjectname, level.brjuggernautcratecapturecallback[var2]) != var3) {
-          var1 = 1;
+        if(trophy_watchtimeoutorgameendedinternal(self.script_gameobjectname, level.brjuggernautcratecapturecallback[var_2]) != var_3) {
+          var_1 = 1;
           break;
         }
       }
     } else {
-      var1 = 1;
+      var_1 = 1;
     }
   } else {
-    var1 = 1;
+    var_1 = 1;
   }
 
-  return istrue(var0 && var1);
+  return istrue(var_0 && var_1);
 }
 
-function trophy_watchtimeoutorgameendedinternal(var0, var1) {
-  if(!isDefined(var0) || var0 == "" || !isDefined(var1) || var1 == "") {
+function trophy_watchtimeoutorgameendedinternal(var_0, var_1) {
+  if(!isDefined(var_0) || var_0 == "" || !isDefined(var_1) || var_1 == "") {
     return 0;
   }
 
-  return issubstr(var0, var1);
+  return issubstr(var_0, var_1);
 }
 
-function translate_position_with_offset_data(var0, var1, var2, var3) {
-  ref_13cf2(var0, var1);
+function translate_position_with_offset_data(var_0, var_1, var_2, var_3) {
+  ref_13cf2(var_0, var_1);
 
-  if(isDefined(var2)) {
-    if(!isDefined(var3)) {
-      var3 = (0, 0, 0);
+  if(isDefined(var_2)) {
+    if(!isDefined(var_3)) {
+      var_3 = (0, 0, 0);
     }
 
-    var4 = (0, 0, 0);
+    var_4 = (0, 0, 0);
 
-    if(isDefined(var1.angles)) {
-      var4 = var1.angles;
+    if(isDefined(var_1.angles)) {
+      var_4 = var_1.angles;
     }
 
-    var5 = var1.origin;
-    var1.origin = var2 + rotatevector(var5, var3);
+    var_5 = var_1.origin;
+    var_1.origin = var_2 + rotatevector(var_5, var_3);
 
-    if(isDefined(var1.script_origin_other)) {
-      var1.script_origin_other = var2 + rotatevector(var1.script_origin_other, var3);
+    if(isDefined(var_1.script_origin_other)) {
+      var_1.script_origin_other = var_2 + rotatevector(var_1.script_origin_other, var_3);
     }
 
-    var6 = combineangles(var3, var4);
-    var1.angles = var6;
+    var_6 = combineangles(var_3, var_4);
+    var_1.angles = var_6;
     return;
   }
 }
 
-function ref_13cf2(var0, var1) {
-  if(isDefined(var0) && isDefined(level.cs_origin_offset) && isDefined(level.cs_angle_offset[var0])) {
-    var2 = level.cs_angle_offset[var0];
-    var3 = level.cs_origin_offset[var0];
-    var4 = (0, 0, 0);
+function ref_13cf2(var_0, var_1) {
+  if(isDefined(var_0) && isDefined(level.cs_origin_offset) && isDefined(level.cs_angle_offset[var_0])) {
+    var_2 = level.cs_angle_offset[var_0];
+    var_3 = level.cs_origin_offset[var_0];
+    var_4 = (0, 0, 0);
 
-    if(isDefined(var1.angles)) {
-      var4 = var1.angles;
+    if(isDefined(var_1.angles)) {
+      var_4 = var_1.angles;
     }
 
-    var5 = var1.origin;
-    var1.origin = var3 + rotatevector(var5, var2);
+    var_5 = var_1.origin;
+    var_1.origin = var_3 + rotatevector(var_5, var_2);
 
-    if(isDefined(var1.script_origin_other)) {
-      var1.script_origin_other = var3 + rotatevector(var1.script_origin_other, var2);
+    if(isDefined(var_1.script_origin_other)) {
+      var_1.script_origin_other = var_3 + rotatevector(var_1.script_origin_other, var_2);
     }
 
-    var6 = combineangles(var2, var4);
-    var1.angles = var6;
+    var_6 = combineangles(var_2, var_4);
+    var_1.angles = var_6;
     return;
   }
 }
 
-function strike_add_to_cs_arrays(var0, var1, var2) {
+function strike_add_to_cs_arrays(var_0, var_1, var_2) {
   if(!getdvarint("scr_enable_create_script", 0)) {
     return;
   }
 
-  if(var0 == "struct") {
-    level.scripted_spawners[var2][level.scripted_spawners[var2].size] = var1;
+  if(var_0 == "struct") {
+    level.scripted_spawners[var_2][level.scripted_spawners[var_2].size] = var_1;
     return;
   }
 
-  if(var0 == "trigger") {
-    level.scripted_spawners_triggers[var2][level.scripted_spawners_triggers[var2].size] = var1;
+  if(var_0 == "trigger") {
+    level.scripted_spawners_triggers[var_2][level.scripted_spawners_triggers[var_2].size] = var_1;
     return;
   }
 
-  if(var0 == "model") {
-    level.scripted_spawners_models[var2][level.scripted_spawners_models[var2].size] = var1;
+  if(var_0 == "model") {
+    level.scripted_spawners_models[var_2][level.scripted_spawners_models[var_2].size] = var_1;
     return;
   }
 }
 
-function strike_interactioncreate(var0, var1) {
-  strike_addstructtolevel(var0, 1, var1);
+function strike_interactioncreate(var_0, var_1) {
+  strike_addstructtolevel(var_0, 1, var_1);
 }
 
-function ref_13921(var0, var1) {
-  var2 = spawn("script_origin", var0.origin);
+function ref_13921(var_0, var_1) {
+  var_2 = spawn("script_origin", var_0.origin);
 
-  if(!isDefined(var0.angles)) {
-    var2.angles = (0, 0, 0);
+  if(!isDefined(var_0.angles)) {
+    var_2.angles = (0, 0, 0);
   } else {
-    var2.angles = var0.angles;
+    var_2.angles = var_0.angles;
   }
 
-  if(isDefined(var0.model)) {
-    var2 setModel(var0.model);
+  if(isDefined(var_0.model)) {
+    var_2 setModel(var_0.model);
   }
 
-  if(isDefined(var0.targetname)) {
-    var2.targetname = var0.targetname;
+  if(isDefined(var_0.targetname)) {
+    var_2.targetname = var_0.targetname;
   }
 
-  if(isDefined(var0.script_noteworthy)) {
-    var2.script_noteworthy = var0.script_noteworthy;
+  if(isDefined(var_0.script_noteworthy)) {
+    var_2.script_noteworthy = var_0.script_noteworthy;
   }
 
-  if(isDefined(var0.script_linkto)) {
-    var2.script_linkto = var0.script_linkto;
+  if(isDefined(var_0.script_linkto)) {
+    var_2.script_linkto = var_0.script_linkto;
   }
 
-  if(isDefined(var0.script_linkname)) {
-    var2.script_linkname = var0.script_linkname;
+  if(isDefined(var_0.script_linkname)) {
+    var_2.script_linkname = var_0.script_linkname;
   }
 
-  if(isDefined(var0.target)) {
-    var2.target = var0.target;
+  if(isDefined(var_0.target)) {
+    var_2.target = var_0.target;
   }
 
-  var2.struct = var0;
+  var_2.struct = var_0;
 
   if(isDefined(self.objects)) {
-    self.objects[self.objects.size] = var2;
+    self.objects[self.objects.size] = var_2;
     return;
   }
 }
 
-function strike_modelcreate(var0, var1) {
-  strike_add_to_cs_arrays("model", var0, var1);
+function strike_modelcreate(var_0, var_1) {
+  strike_add_to_cs_arrays("model", var_0, var_1);
 
-  if(!isDefined(var0.angles)) {
-    var0.angles = (0, 0, 0);
+  if(!isDefined(var_0.angles)) {
+    var_0.angles = (0, 0, 0);
   }
 
-  var2 = spawn("script_model", var0.origin);
-  var2 setModel(var0.model);
-  var2.angles = var0.angles;
+  var_2 = spawn("script_model", var_0.origin);
+  var_2 setModel(var_0.model);
+  var_2.angles = var_0.angles;
 
-  if(isDefined(var0.targetname)) {
-    var2.targetname = var0.targetname;
+  if(isDefined(var_0.targetname)) {
+    var_2.targetname = var_0.targetname;
   }
 
-  if(isDefined(var0.script_noteworthy)) {
-    var2.script_noteworthy = var0.script_noteworthy;
+  if(isDefined(var_0.script_noteworthy)) {
+    var_2.script_noteworthy = var_0.script_noteworthy;
   }
 
-  if(isDefined(var0.script_linkto)) {
-    var2.script_linkto = var0.script_linkto;
+  if(isDefined(var_0.script_linkto)) {
+    var_2.script_linkto = var_0.script_linkto;
   }
 
-  if(isDefined(var0.script_linkname)) {
-    var2.script_linkname = var0.script_linkname;
+  if(isDefined(var_0.script_linkname)) {
+    var_2.script_linkname = var_0.script_linkname;
   }
 
-  if(isDefined(var0.target)) {
-    var2.target = var0.target;
+  if(isDefined(var_0.target)) {
+    var_2.target = var_0.target;
   }
 
-  if(isDefined(var0.name)) {
-    var2.name = var0.name;
+  if(isDefined(var_0.name)) {
+    var_2.name = var_0.name;
   }
 
-  var2.struct = var0;
-  var0.is_cs_model = undefined;
-  var0.trigger_elevator_spawners = undefined;
+  var_2.struct = var_0;
+  var_0.is_cs_model = undefined;
+  var_0.trigger_elevator_spawners = undefined;
 
   if(isDefined(self.objects)) {
-    self.objects[self.objects.size] = var2;
+    self.objects[self.objects.size] = var_2;
     return;
   }
 }
 
-function strike_triggercreate(var0, var1, var2) {
-  strike_add_to_cs_arrays("trigger", var0, var1);
-  var3 = spawn("trigger_rotatable_radius", var0.origin, 0, int(var0.radius), int(var0.height));
+function strike_triggercreate(var_0, var_1, var_2) {
+  strike_add_to_cs_arrays("trigger", var_0, var_1);
+  var_3 = spawn("trigger_rotatable_radius", var_0.origin, 0, int(var_0.radius), int(var_0.height));
 
-  if(isDefined(var0.angles) && var0.angles != (0, 0, 0)) {
-    if(istrue(var2)) {
-      var3.angles = var0.angles;
+  if(isDefined(var_0.angles) && var_0.angles != (0, 0, 0)) {
+    if(istrue(var_2)) {
+      var_3.angles = var_0.angles;
     } else {
-      var3.angles = (-90, 0, 0) + var0.angles;
+      var_3.angles = (-90, 0, 0) + var_0.angles;
     }
   }
 
-  var3.struct = var0;
+  var_3.struct = var_0;
 
   if(isDefined(self.objects)) {
-    self.objects[self.objects.size] = var3;
+    self.objects[self.objects.size] = var_3;
   }
 
-  strike_triggerassignvalues(var3, var0);
+  strike_triggerassignvalues(var_3, var_0);
 }
 
-function strike_triggerassignvalues(var0) {
-  if(!isDefined(var0.angles)) {
-    var0.angles = (0, 0, 0);
+function strike_triggerassignvalues(var_0) {
+  if(!isDefined(var_0.angles)) {
+    var_0.angles = (0, 0, 0);
   }
 
-  if(isDefined(var0.script_label)) {
-    self.script_label = var0.script_label;
+  if(isDefined(var_0.script_label)) {
+    self.script_label = var_0.script_label;
   }
 
-  if(isDefined(var0.script_function)) {
-    self.script_function = var0.script_function;
+  if(isDefined(var_0.script_function)) {
+    self.script_function = var_0.script_function;
   }
 
-  if(isDefined(var0.script_noteworthy)) {
-    self.script_noteworthy = var0.script_noteworthy;
+  if(isDefined(var_0.script_noteworthy)) {
+    self.script_noteworthy = var_0.script_noteworthy;
   }
 
-  if(isDefined(var0.script_gesture)) {
-    self.script_gesture = var0.script_gesture;
+  if(isDefined(var_0.script_gesture)) {
+    self.script_gesture = var_0.script_gesture;
   }
 
-  if(isDefined(var0.target)) {
-    self.target = var0.target;
+  if(isDefined(var_0.target)) {
+    self.target = var_0.target;
   }
 
-  if(isDefined(var0.script_wtf)) {
-    self.script_wtf = var0.script_wtf;
+  if(isDefined(var_0.script_wtf)) {
+    self.script_wtf = var_0.script_wtf;
   }
 
-  if(isDefined(var0.script_flag)) {
-    self.script_flag = var0.script_flag;
+  if(isDefined(var_0.script_flag)) {
+    self.script_flag = var_0.script_flag;
   }
 
-  if(isDefined(var0.script_linkto)) {
-    self.script_linkto = var0.script_linkto;
+  if(isDefined(var_0.script_linkto)) {
+    self.script_linkto = var_0.script_linkto;
   }
 
-  if(isDefined(var0.script_linkname)) {
-    self.script_linkname = var0.script_linkname;
+  if(isDefined(var_0.script_linkname)) {
+    self.script_linkname = var_0.script_linkname;
   }
 
-  if(isDefined(var0.groupname)) {
-    self.groupname = var0.groupname;
+  if(isDefined(var_0.groupname)) {
+    self.groupname = var_0.groupname;
   }
 
-  if(isDefined(var0.script_count)) {
-    self.script_count = var0.script_count;
+  if(isDefined(var_0.script_count)) {
+    self.script_count = var_0.script_count;
   }
 
-  if(isDefined(var0.script_count_min)) {
-    self.script_count_min = var0.script_count_min;
+  if(isDefined(var_0.script_count_min)) {
+    self.script_count_min = var_0.script_count_min;
   }
 
-  if(isDefined(var0.script_count_max)) {
-    self.script_count_max = var0.script_count_max;
+  if(isDefined(var_0.script_count_max)) {
+    self.script_count_max = var_0.script_count_max;
   }
 
-  if(isDefined(var0.script_maxdist)) {
-    self.script_maxdist = var0.script_maxdist;
+  if(isDefined(var_0.script_maxdist)) {
+    self.script_maxdist = var_0.script_maxdist;
   }
 
-  self.targetname = var0.targetname;
+  self.targetname = var_0.targetname;
 }
 
-function strike_addstructtolevel(var0, var1, var2) {
-  if(isDefined(var0.target)) {
-    initbunkeranims("target", var0.target, var0);
+function strike_addstructtolevel(var_0, var_1, var_2) {
+  if(isDefined(var_0.target)) {
+    initbunkeranims("target", var_0.target, var_0);
   }
 
-  if(isDefined(var0.script_linkname)) {
-    initbunkeranims("script_linkname", var0.script_linkname, var0);
+  if(isDefined(var_0.script_linkname)) {
+    initbunkeranims("script_linkname", var_0.script_linkname, var_0);
   }
 
-  if(isDefined(var0.targetname)) {
-    initbunkeranims("targetname", var0.targetname, var0);
+  if(isDefined(var_0.targetname)) {
+    initbunkeranims("targetname", var_0.targetname, var_0);
   }
 
-  if(isDefined(var0.script_noteworthy)) {
-    initbunkeranims("script_noteworthy", var0.script_noteworthy, var0);
+  if(isDefined(var_0.script_noteworthy)) {
+    initbunkeranims("script_noteworthy", var_0.script_noteworthy, var_0);
     return;
   }
 }
 
-function initbunkeranims(var0, var1, var2) {
-  if(!isDefined(level.struct_class_names[var0][var1])) {
-    level.struct_class_names[var0][var1] = [];
+function initbunkeranims(var_0, var_1, var_2) {
+  if(!isDefined(level.struct_class_names[var_0][var_1])) {
+    level.struct_class_names[var_0][var_1] = [];
   }
 
-  level.struct_class_names[var0][var1][level.struct_class_names[var0][var1].size] = var2;
+  level.struct_class_names[var_0][var_1][level.struct_class_names[var_0][var_1].size] = var_2;
 }
 
-function strike_fixautokvps(var0, var1) {
-  if(isDefined(var0.target) && issubstr(var0.target, "auto")) {
-    var0.target = "CS|" + var1 + var0.target;
+function strike_fixautokvps(var_0, var_1) {
+  if(isDefined(var_0.target) && issubstr(var_0.target, "auto")) {
+    var_0.target = "CS|" + var_1 + var_0.target;
   }
 
-  if(isDefined(var0.targetname) && issubstr(var0.targetname, "auto")) {
-    var0.targetname = "CS|" + var1 + var0.targetname;
+  if(isDefined(var_0.targetname) && issubstr(var_0.targetname, "auto")) {
+    var_0.targetname = "CS|" + var_1 + var_0.targetname;
   }
 
-  if(isDefined(var0.script_linkto)) {
-    var2 = "";
-    var3 = strtok(var0.script_linkto, " ");
+  if(isDefined(var_0.script_linkto)) {
+    var_2 = "";
+    var_3 = strtok(var_0.script_linkto, " ");
 
-    foreach(var5 in var3) {
-      if(var6 != 0) {
-        if(int(var0.script_linkto) == 0) {
-          var2 = var2 + " " + var5;
+    foreach(var_5 in var_3) {
+      if(var_6 != 0) {
+        if(int(var_0.script_linkto) == 0) {
+          var_2 = var_2 + " " + var_5;
         } else {
-          var2 = var2 + " " + "CS|" + var1 + var5;
+          var_2 = var_2 + " " + "CS|" + var_1 + var_5;
         }
 
         continue;
       }
 
-      if(int(var0.script_linkto) == 0) {
-        var2 += var5;
+      if(int(var_0.script_linkto) == 0) {
+        var_2 += var_5;
         continue;
       }
 
-      var2 = var2 + "CS|" + var1 + var5;
+      var_2 = var_2 + "CS|" + var_1 + var_5;
     }
 
-    var0.script_linkto = var2;
+    var_0.script_linkto = var_2;
   }
 
-  if(isDefined(var0.script_linkname)) {
-    if(int(var0.script_linkname) != 0) {
-      var0.script_linkname = "CS|" + var1 + var0.script_linkname;
+  if(isDefined(var_0.script_linkname)) {
+    if(int(var_0.script_linkname) != 0) {
+      var_0.script_linkname = "CS|" + var_1 + var_0.script_linkname;
       return;
     }
 
@@ -738,151 +738,151 @@ function strike_fixautokvps(var0, var1) {
   }
 }
 
-function typecast_kvps(var0) {
-  if(istrue(var0.ishelistruct)) {
-    if(isDefined(var0.script_unload)) {
-      var0.script_unload = int(var0.script_unload);
+function typecast_kvps(var_0) {
+  if(istrue(var_0.ishelistruct)) {
+    if(isDefined(var_0.script_unload)) {
+      var_0.script_unload = int(var_0.script_unload);
     }
   }
 
-  if(isDefined(var0.script_wait_min)) {
-    var0.script_wait_min = float(var0.script_wait_min);
+  if(isDefined(var_0.script_wait_min)) {
+    var_0.script_wait_min = float(var_0.script_wait_min);
   }
 
-  if(isDefined(var0.script_wait_max)) {
-    var0.script_wait_max = float(var0.script_wait_max);
+  if(isDefined(var_0.script_wait_max)) {
+    var_0.script_wait_max = float(var_0.script_wait_max);
   }
 
-  if(isDefined(var0.script_wait_add)) {
-    var0.script_wait_add = float(var0.script_wait_add);
+  if(isDefined(var_0.script_wait_add)) {
+    var_0.script_wait_add = float(var_0.script_wait_add);
   }
 
-  if(isDefined(var0.script_brake)) {
-    var0.script_brake = float(var0.script_brake);
+  if(isDefined(var_0.script_brake)) {
+    var_0.script_brake = float(var_0.script_brake);
   }
 
-  if(isDefined(var0.lookahead)) {
-    var0.lookahead = int(var0.lookahead);
+  if(isDefined(var_0.lookahead)) {
+    var_0.lookahead = int(var_0.lookahead);
   }
 
-  if(isDefined(var0.speed)) {
-    var0.speed = int(var0.speed);
+  if(isDefined(var_0.speed)) {
+    var_0.speed = int(var_0.speed);
   }
 
-  if(isDefined(var0.script_accel)) {
-    var0.script_accel = int(var0.script_accel);
+  if(isDefined(var_0.script_accel)) {
+    var_0.script_accel = int(var_0.script_accel);
   }
 
-  if(isDefined(var0.script_decel)) {
-    var0.script_decel = int(var0.script_decel);
+  if(isDefined(var_0.script_decel)) {
+    var_0.script_decel = int(var_0.script_decel);
   }
 
-  if(isDefined(var0.script_speed)) {
-    var0.script_speed = int(var0.script_speed);
+  if(isDefined(var_0.script_speed)) {
+    var_0.script_speed = int(var_0.script_speed);
   }
 
-  if(isDefined(var0.script_goalyaw)) {
-    if(var0.script_goalyaw == "true" || var0.script_goalyaw == "1") {
-      var0.script_goalyaw = 1;
+  if(isDefined(var_0.script_goalyaw)) {
+    if(var_0.script_goalyaw == "true" || var_0.script_goalyaw == "1") {
+      var_0.script_goalyaw = 1;
     } else {
-      var0.script_goalyaw = undefined;
+      var_0.script_goalyaw = undefined;
     }
   }
 
-  if(isDefined(var0.script_anglevehicle)) {
-    if(var0.script_anglevehicle == "true" || var0.script_anglevehicle == "1") {
-      var0.script_goalyaw = 1;
+  if(isDefined(var_0.script_anglevehicle)) {
+    if(var_0.script_anglevehicle == "true" || var_0.script_anglevehicle == "1") {
+      var_0.script_goalyaw = 1;
     } else {
-      var0.script_goalyaw = undefined;
+      var_0.script_goalyaw = undefined;
     }
   }
 
-  if(isDefined(var0.script_delay)) {
-    var0.script_delay = float(var0.script_delay);
+  if(isDefined(var_0.script_delay)) {
+    var_0.script_delay = float(var_0.script_delay);
   }
 
-  if(isDefined(var0.script_ignoreme)) {
-    var0.script_ignoreme = int(var0.script_ignoreme);
+  if(isDefined(var_0.script_ignoreme)) {
+    var_0.script_ignoreme = int(var_0.script_ignoreme);
   }
 
-  if(isDefined(var0.script_ignoreall)) {
-    var0.script_ignoreall = int(var0.script_ignoreall);
+  if(isDefined(var_0.script_ignoreall)) {
+    var_0.script_ignoreall = int(var_0.script_ignoreall);
   }
 
-  if(isDefined(var0.script_death)) {
-    var0.script_death = int(var0.script_death);
+  if(isDefined(var_0.script_death)) {
+    var_0.script_death = int(var_0.script_death);
   }
 
-  if(isDefined(var0.script_wait)) {
-    var0.script_wait = float(var0.script_wait);
+  if(isDefined(var_0.script_wait)) {
+    var_0.script_wait = float(var_0.script_wait);
   }
 
-  if(isDefined(var0.script_forcespawn)) {
-    var0.script_forcespawn = int(var0.script_forcespawn);
+  if(isDefined(var_0.script_forcespawn)) {
+    var_0.script_forcespawn = int(var_0.script_forcespawn);
   }
 
-  if(isDefined(var0.script_timer)) {
-    var0.script_timer = int(var0.script_timer);
+  if(isDefined(var_0.script_timer)) {
+    var_0.script_timer = int(var_0.script_timer);
   }
 
-  if(isDefined(var0.script_dist_only)) {
-    var0.script_dist_only = int(var0.script_dist_only) * int(var0.script_dist_only);
+  if(isDefined(var_0.script_dist_only)) {
+    var_0.script_dist_only = int(var_0.script_dist_only) * int(var_0.script_dist_only);
   }
 
-  if(isDefined(var0.script_speed)) {
-    var0.script_speed = int(var0.script_speed);
+  if(isDefined(var_0.script_speed)) {
+    var_0.script_speed = int(var_0.script_speed);
   }
 
-  if(isDefined(var0.script_count)) {
-    var0.script_count = int(var0.script_count);
+  if(isDefined(var_0.script_count)) {
+    var_0.script_count = int(var_0.script_count);
   }
 
-  if(isDefined(var0.script_radius)) {
-    var0.script_radius = int(var0.script_radius);
+  if(isDefined(var_0.script_radius)) {
+    var_0.script_radius = int(var_0.script_radius);
   }
 
-  if(isDefined(var0.script_delay_min)) {
-    var0.script_delay_min = float(var0.script_delay_min);
+  if(isDefined(var_0.script_delay_min)) {
+    var_0.script_delay_min = float(var_0.script_delay_min);
   }
 
-  if(isDefined(var0.script_delay_max)) {
-    var0.script_delay_max = float(var0.script_delay_max);
+  if(isDefined(var_0.script_delay_max)) {
+    var_0.script_delay_max = float(var_0.script_delay_max);
   }
 
-  if(isDefined(var0.script_escalation_level)) {
-    var0.script_escalation_level = int(var0.script_escalation_level);
+  if(isDefined(var_0.script_escalation_level)) {
+    var_0.script_escalation_level = int(var_0.script_escalation_level);
   }
 
-  if(isDefined(var0.script_goalheight)) {
-    var0.script_goalheight = int(var0.script_goalheight);
+  if(isDefined(var_0.script_goalheight)) {
+    var_0.script_goalheight = int(var_0.script_goalheight);
   }
 
-  if(isDefined(var0.script_timeout)) {
-    var0.script_timeout = float(var0.script_timeout);
+  if(isDefined(var_0.script_timeout)) {
+    var_0.script_timeout = float(var_0.script_timeout);
   }
 
-  if(isDefined(var0.script_pacifist)) {
-    var0.script_pacifist = int(var0.script_pacifist);
+  if(isDefined(var_0.script_pacifist)) {
+    var_0.script_pacifist = int(var_0.script_pacifist);
   }
 
-  if(isDefined(var0.script_forcespawn)) {
-    var0.script_forcespawn = int(var0.script_forcespawn);
+  if(isDefined(var_0.script_forcespawn)) {
+    var_0.script_forcespawn = int(var_0.script_forcespawn);
   }
 
-  if(isDefined(var0.dontkilloff)) {
-    var0.dontkilloff = int(var0.dontkilloff);
+  if(isDefined(var_0.dontkilloff)) {
+    var_0.dontkilloff = int(var_0.dontkilloff);
   }
 
-  if(isDefined(var0.script_origin_other)) {
-    var0.script_origin_other = var0.script_origin_other;
+  if(isDefined(var_0.script_origin_other)) {
+    var_0.script_origin_other = var_0.script_origin_other;
   }
 
-  if(isDefined(var0.script_dot)) {
-    var0.script_dot = int(var0.script_dot);
+  if(isDefined(var_0.script_dot)) {
+    var_0.script_dot = int(var_0.script_dot);
   }
 
-  if(isDefined(var0.script_ignoreall)) {
-    var0.script_ignoreall = int(var0.script_ignoreall);
+  if(isDefined(var_0.script_ignoreall)) {
+    var_0.script_ignoreall = int(var_0.script_ignoreall);
     return;
   }
 }
@@ -895,7 +895,7 @@ function cs_is_starttime() {
   return gettime() <= level.starttimeutcseconds + 250;
 }
 
-function cs_init_flags(var0) {
+function cs_init_flags(var_0) {
   if(!scripts\engine\utility::flag_exist("strike_init_done")) {
     scripts\engine\utility::flag_init("strike_init_done");
   }
@@ -904,13 +904,13 @@ function cs_init_flags(var0) {
     scripts\engine\utility::flag_init("create_script_initialized");
   }
 
-  var0.objects = [];
-  var0 scripts\engine\utility::ent_flag_init("cs_structs_complete");
-  var0 scripts\engine\utility::ent_flag_init("cs_models_complete");
-  var0 scripts\engine\utility::ent_flag_init("cs_triggers_complete");
+  var_0.objects = [];
+  var_0 scripts\engine\utility::ent_flag_init("cs_structs_complete");
+  var_0 scripts\engine\utility::ent_flag_init("cs_models_complete");
+  var_0 scripts\engine\utility::ent_flag_init("cs_triggers_complete");
 }
 
-function initbunkerbackwallkeypads(var0) {
+function initbunkerbackwallkeypads(var_0) {
   if(!scripts\engine\utility::flag_exist("strike_init_done")) {
     scripts\engine\utility::flag_init("strike_init_done");
   }
@@ -919,32 +919,32 @@ function initbunkerbackwallkeypads(var0) {
     scripts\engine\utility::flag_init("create_script_initialized");
   }
 
-  var0.objects = [];
-  var0 scripts\engine\utility::ent_flag_init("cs_objects_created");
+  var_0.objects = [];
+  var_0 scripts\engine\utility::ent_flag_init("cs_objects_created");
 }
 
-function wait_for_flags(var0, var1) {
-  if(var0 scripts\engine\utility::ent_flag_exist("cs_structs_complete")) {
-    var0 scripts\engine\utility::ent_flag_wait("cs_structs_complete");
+function wait_for_flags(var_0, var_1) {
+  if(var_0 scripts\engine\utility::ent_flag_exist("cs_structs_complete")) {
+    var_0 scripts\engine\utility::ent_flag_wait("cs_structs_complete");
   }
 
-  if(var0 scripts\engine\utility::ent_flag_exist("cs_triggers_complete")) {
-    var0 scripts\engine\utility::ent_flag_wait("cs_triggers_complete");
+  if(var_0 scripts\engine\utility::ent_flag_exist("cs_triggers_complete")) {
+    var_0 scripts\engine\utility::ent_flag_wait("cs_triggers_complete");
   }
 
-  if(var0 scripts\engine\utility::ent_flag_exist("cs_objects_created")) {
-    var0 scripts\engine\utility::ent_flag_wait("cs_objects_created");
+  if(var_0 scripts\engine\utility::ent_flag_exist("cs_objects_created")) {
+    var_0 scripts\engine\utility::ent_flag_wait("cs_objects_created");
   }
 
-  scripts\engine\utility::flag_set(var1 + "_completed");
+  scripts\engine\utility::flag_set(var_1 + "_completed");
 
   if(cs_is_starttime()) {
-    endcreatescript(var0);
+    endcreatescript(var_0);
     return;
   }
 }
 
-function endcreatescript(var0) {
+function endcreatescript(var_0) {
   if(isDefined(level.createscriptfilesinitialized)) {
     level.createscriptfilesinitialized++;
 
@@ -961,33 +961,33 @@ function endcreatescript(var0) {
   scripts\engine\utility::flag_set("create_script_initialized");
 }
 
-function wait_for_cs_flag(var0) {
+function wait_for_cs_flag(var_0) {
   level endon("game_ended");
-  scripts\engine\utility::flag_init(var0 + "_completed");
+  scripts\engine\utility::flag_init(var_0 + "_completed");
 
-  if(!should_wait_for_cs_flag(var0)) {
+  if(!should_wait_for_cs_flag(var_0)) {
     endcreatescript();
-    scripts\engine\utility::flag_wait(var0);
+    scripts\engine\utility::flag_wait(var_0);
     return;
   }
 }
 
-function should_wait_for_cs_flag(var0) {
-  var1 = strtok(getDvar("scr_init_cs_files", ""), " ");
-  var1 = scripts\engine\utility::array_combine(var1, level.aud_interior_plane_audio_zones);
+function should_wait_for_cs_flag(var_0) {
+  var_1 = strtok(getDvar("scr_init_cs_files", ""), " ");
+  var_1 = scripts\engine\utility::array_combine(var_1, level.aud_interior_plane_audio_zones);
 
-  if(var1.size < 1) {
+  if(var_1.size < 1) {
     return true;
   }
 
-  for(var2 = 0; var2 < var1.size; var2++) {
-    var3 = var1[var2];
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    var_3 = var_1[var_2];
 
-    if(var3 == "all") {
+    if(var_3 == "all") {
       return true;
     }
 
-    if(var0 == var3) {
+    if(var_0 == var_3) {
       return true;
     }
   }
@@ -995,38 +995,38 @@ function should_wait_for_cs_flag(var0) {
   return false;
 }
 
-function register_cs_offsets(var0, var1, var2) {
-  if(isDefined(var1)) {
-    level.cs_origin_offset[var0] = var1;
+function register_cs_offsets(var_0, var_1, var_2) {
+  if(isDefined(var_1)) {
+    level.cs_origin_offset[var_0] = var_1;
   }
 
-  if(isDefined(var2)) {
-    level.cs_angle_offset[var0] = var2;
+  if(isDefined(var_2)) {
+    level.cs_angle_offset[var_0] = var_2;
     return;
   }
 }
 
-function set_cs_file_dvar(var0) {
-  level.aud_interior_plane_audio_zones[level.aud_interior_plane_audio_zones.size] = var0;
+function set_cs_file_dvar(var_0) {
+  level.aud_interior_plane_audio_zones[level.aud_interior_plane_audio_zones.size] = var_0;
 }
 
-function cleanup_cs_file_objects(var0) {
-  scripts\engine\utility::flag_clear(var0 + "_completed");
-  scripts\engine\utility::flag_clear(var0);
+function cleanup_cs_file_objects(var_0) {
+  scripts\engine\utility::flag_clear(var_0 + "_completed");
+  scripts\engine\utility::flag_clear(var_0);
 
-  if(isDefined(level.cs_object_container[var0]) && isDefined(level.cs_object_container[var0].objects)) {
-    var1 = level.cs_object_container[var0].objects;
+  if(isDefined(level.cs_object_container[var_0]) && isDefined(level.cs_object_container[var_0].objects)) {
+    var_1 = level.cs_object_container[var_0].objects;
 
-    for(var2 = 0; var2 < var1.size; var2++) {
-      var3 = var1[var2];
-      level.cs_object_container[var0].objects[var2] = undefined;
+    for(var_2 = 0; var_2 < var_1.size; var_2++) {
+      var_3 = var_1[var_2];
+      level.cs_object_container[var_0].objects[var_2] = undefined;
 
-      if(isstruct(var3)) {
-        scripts\engine\utility::deletestruct_ref(var3);
+      if(isstruct(var_3)) {
+        scripts\engine\utility::deletestruct_ref(var_3);
       }
 
-      if(isent(var3)) {
-        var3 delete();
+      if(isent(var_3)) {
+        var_3 delete();
       }
     }
 
@@ -1038,79 +1038,79 @@ function s() {
   return spawnStruct();
 }
 
-function ref_13529(var0) {
-  var1 = scripts\engine\utility::getStructArray(var0, "targetname");
+function ref_13529(var_0) {
+  var_1 = scripts\engine\utility::getStructArray(var_0, "targetname");
 
-  foreach(var3 in var1) {
-    if(!isDefined(var3.angles)) {
-      var3.angles = (0, 0, 0);
+  foreach(var_3 in var_1) {
+    if(!isDefined(var_3.angles)) {
+      var_3.angles = (0, 0, 0);
     }
 
-    var4 = "Cover Stand";
+    var_4 = "Cover Stand";
 
-    switch (var3.ref_11eaa) {
+    switch (var_3.ref_11eaa) {
       case "cover_left":
-        var4 = "Cover Left";
+        var_4 = "Cover Left";
         break;
       case "cover_right":
-        var4 = "Cover Right";
+        var_4 = "Cover Right";
         break;
       case "cover_crouch":
-        var4 = "Cover Crouch";
+        var_4 = "Cover Crouch";
         break;
       case "cover_stand":
-        var4 = "Cover Stand";
+        var_4 = "Cover Stand";
         break;
       case "cover_crouch_window":
-        var4 = "Cover Crouch Window";
+        var_4 = "Cover Crouch Window";
         break;
       case "conceal_crouch":
-        var4 = "Conceal Crouch";
+        var_4 = "Conceal Crouch";
         break;
       case "cover_exposed":
-        var4 = "Exposed";
+        var_4 = "Exposed";
       case "turret":
-        var4 = "Turret";
+        var_4 = "Turret";
         break;
     }
 
-    var5 = undefined;
+    var_5 = undefined;
 
-    if(isDefined(var3.ref_11ea3)) {
-      var5 = var3.ref_11ea3;
+    if(isDefined(var_3.ref_11ea3)) {
+      var_5 = var_3.ref_11ea3;
     }
 
-    var6 = 0;
+    var_6 = 0;
 
-    if(isDefined(var3.ref_11ebf) && int(var3.ref_11ebf) != 0 && var3.ref_11ebf != "false") {
-      var6 = 4;
+    if(isDefined(var_3.ref_11ebf) && int(var_3.ref_11ebf) != 0 && var_3.ref_11ebf != "false") {
+      var_6 = 4;
     }
 
-    if(isDefined(var3.ref_11e99) && int(var3.ref_11e99) != 0 && var3.ref_11e99 != "false") {
-      var6 += 8;
+    if(isDefined(var_3.ref_11e99) && int(var_3.ref_11e99) != 0 && var_3.ref_11e99 != "false") {
+      var_6 += 8;
     }
 
-    if(isDefined(var3.ref_11eb6) && int(var3.ref_11eb6) != 0 && var3.ref_11eb6 != "false") {
-      var6 += 16;
+    if(isDefined(var_3.ref_11eb6) && int(var_3.ref_11eb6) != 0 && var_3.ref_11eb6 != "false") {
+      var_6 += 16;
     }
 
-    var3.covernode = spawncovernode(var3.origin, var3.angles, var4, var6, var5);
+    var_3.covernode = spawncovernode(var_3.origin, var_3.angles, var_4, var_6, var_5);
 
-    if(isDefined(var3.radius)) {
-      var3.covernode.radius = var3.radius;
+    if(isDefined(var_3.radius)) {
+      var_3.covernode.radius = var_3.radius;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function land_usability_disabled(var0) {
-  var1 = scripts\engine\utility::getStructArray(var0, "targetname");
+function land_usability_disabled(var_0) {
+  var_1 = scripts\engine\utility::getStructArray(var_0, "targetname");
 
-  foreach(var3 in var1) {
-    if(isDefined(var3.covernode)) {
-      despawncovernode(var3.covernode);
-      var3.covernode = undefined;
+  foreach(var_3 in var_1) {
+    if(isDefined(var_3.covernode)) {
+      despawncovernode(var_3.covernode);
+      var_3.covernode = undefined;
     }
   }
 }

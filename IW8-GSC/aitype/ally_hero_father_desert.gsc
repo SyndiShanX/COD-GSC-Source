@@ -35,7 +35,7 @@ function spawner() {
   self setspawnerteam("allies");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\test_character_farah_father::precache();
   scripts\aitypes\bt_util::init();
   scripts\aitypes\assets::civilian();

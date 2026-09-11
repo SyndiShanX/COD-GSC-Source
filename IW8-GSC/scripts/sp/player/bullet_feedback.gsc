@@ -23,118 +23,118 @@ function init_player_suppression() {
   thread bulletwhizby_monitor();
 }
 
-function bullet_whizby_hud(var0, var1, var2) {
-  var3 = scripts\engine\math::factor_value(0, 0.3, var2);
-  var4 = 0.3;
-  var5 = 1.75;
-  var6 = 500;
-  var0 = int(var0 * var6);
-  var1 = int(var1 * var6);
-  var7 = scripts\sp\hud_util::create_client_overlay_custom_size("fullscreen_whizby", 0, var0, var1, var4);
-  var8 = 0.15;
-  var7 scaleovertime(var8, int(2048 * var5), int(2048 * var5));
-  var7 fadeovertime(var8 * 0.5);
-  var7.alpha = var3;
-  wait var8 * 0.5;
-  var7 fadeovertime(var8 * 0.5);
-  var7.alpha = 0;
-  wait var8 * 0.5;
-  var7 destroy();
+function bullet_whizby_hud(var_0, var_1, var_2) {
+  var_3 = scripts\engine\math::factor_value(0, 0.3, var_2);
+  var_4 = 0.3;
+  var_5 = 1.75;
+  var_6 = 500;
+  var_0 = int(var_0 * var_6);
+  var_1 = int(var_1 * var_6);
+  var_7 = scripts\sp\hud_util::create_client_overlay_custom_size("fullscreen_whizby", 0, var_0, var_1, var_4);
+  var_8 = 0.15;
+  var_7 scaleovertime(var_8, int(2048 * var_5), int(2048 * var_5));
+  var_7 fadeovertime(var_8 * 0.5);
+  var_7.alpha = var_3;
+  wait var_8 * 0.5;
+  var_7 fadeovertime(var_8 * 0.5);
+  var_7.alpha = 0;
+  wait var_8 * 0.5;
+  var_7 destroy();
 }
 
 function bulletwhizby_monitor() {
   self endon("death");
-  var0 = spawnStruct();
-  var0.amount = 0;
-  var0.flinching = 0;
-  var0.ticket = 0;
+  var_0 = spawnStruct();
+  var_0.amount = 0;
+  var_0.flinching = 0;
+  var_0.ticket = 0;
 
   for(;;) {
-    self waittill("bulletwhizby", var1, var2, var3, var4);
+    self waittill("bulletwhizby", var_1, var_2, var_3, var_4);
 
-    if(!shoulddobulletwhizby(var2, var1)) {
+    if(!shoulddobulletwhizby(var_2, var_1)) {
       continue;
     }
 
-    if(!isDefined(var3) || !isDefined(var4)) {
+    if(!isDefined(var_3) || !isDefined(var_4)) {
       continue;
     }
 
-    if(var2 <= 64) {
-      var5 = level.player getEye();
-      var6 = var3 + var4 * -100;
-      var7 = vectorNormalize(var5 - var6);
-      var8 = level.player getplayerangles();
-      var9 = vectordot(anglesToForward(var8), var7);
-      var7 = rotatevectorinverted(var7, var8);
-      var7 = (var7[1], var7[2], var7[0]);
-      var10 = 1 - scripts\engine\math::normalize_value(14, 64, var2);
-      var11 = scripts\engine\math::factor_value(0.001, 0.1, var10);
-      thread bullet_whizby_hud(var7[0], var7[1], var10 * (1 - abs(var9)));
-      scripts\engine\utility::noself_delaycall(0.1, &earthquake, var11, 0.4, level.player.origin, 5000);
-      var12 = get_whizby_fx_from_weapon(var1.weapon);
-      playFX(level._effect[var12], var3, var4);
+    if(var_2 <= 64) {
+      var_5 = level.player getEye();
+      var_6 = var_3 + var_4 * -100;
+      var_7 = vectorNormalize(var_5 - var_6);
+      var_8 = level.player getplayerangles();
+      var_9 = vectordot(anglesToForward(var_8), var_7);
+      var_7 = rotatevectorinverted(var_7, var_8);
+      var_7 = (var_7[1], var_7[2], var_7[0]);
+      var_10 = 1 - scripts\engine\math::normalize_value(14, 64, var_2);
+      var_11 = scripts\engine\math::factor_value(0.001, 0.1, var_10);
+      thread bullet_whizby_hud(var_7[0], var_7[1], var_10 * (1 - abs(var_9)));
+      scripts\engine\utility::noself_delaycall(0.1, &earthquake, var_11, 0.4, level.player.origin, 5000);
+      var_12 = get_whizby_fx_from_weapon(var_1.weapon);
+      playFX(level._effect[var_12], var_3, var_4);
     }
   }
 }
 
-function shoulddobulletwhizby(var0, var1) {
+function shoulddobulletwhizby(var_0, var_1) {
   if(isDefined(self.nowhizby) && self.nowhizby) {
     return false;
   }
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return false;
   }
 
-  if(!isai(var1)) {
+  if(!isai(var_1)) {
     return false;
   }
 
-  if(!isalive(var1)) {
+  if(!isalive(var_1)) {
     return false;
   }
 
   return true;
 }
 
-function get_whizby_fx_from_weapon(var0) {
-  var1 = undefined;
+function get_whizby_fx_from_weapon(var_0) {
+  var_1 = undefined;
 
-  switch (weaponclass(var0)) {
+  switch (weaponclass(var_0)) {
     case "mg":
-      var1 = "whizby_lmg";
+      var_1 = "whizby_lmg";
       break;
     case "pistol":
-      var1 = "whizby_pist";
+      var_1 = "whizby_pist";
       break;
     case "rifle":
-      var1 = "whizby_ar";
+      var_1 = "whizby_ar";
       break;
     case "smg":
-      var1 = "whizby_smg";
+      var_1 = "whizby_smg";
       break;
     case "sniper":
-      var1 = "whizby_lmg";
+      var_1 = "whizby_lmg";
       break;
     case "spread":
-      var1 = "whizby_shot";
+      var_1 = "whizby_shot";
       break;
     default:
-      var1 = "whizby_ar";
+      var_1 = "whizby_ar";
       break;
   }
 
-  return var1;
+  return var_1;
 }
 
-function do_whizby_flinch(var0, var1) {
-  var0 *= 0.3;
-  var2 = self.ticket;
+function do_whizby_flinch(var_0, var_1) {
+  var_0 *= 0.3;
+  var_2 = self.ticket;
 
   if(self.ticket >= 100) {
     self.ticket = 0;
@@ -142,72 +142,72 @@ function do_whizby_flinch(var0, var1) {
     self.ticket++;
   }
 
-  var3 = vectorNormalize(level.player getEye() - var1);
-  var4 = level.player getEye();
-  var5 = level.player getplayerangles();
-  var3 = rotatevectorinverted(var3, var5);
-  var3 = (var3[0] * -1, var3[1], var3[2] * -1);
+  var_3 = vectorNormalize(level.player getEye() - var_1);
+  var_4 = level.player getEye();
+  var_5 = level.player getplayerangles();
+  var_3 = rotatevectorinverted(var_3, var_5);
+  var_3 = (var_3[0] * -1, var_3[1], var_3[2] * -1);
 
   if(getdvarint("scr_suppression_debug")) {
-    var6 = anglesToForward(var5) * var3[0] * 5;
-    var7 = anglestoright(var5) * var3[1] * 5;
-    var8 = anglestoup(var5) * var3[2] * 5;
+    var_6 = anglesToForward(var_5) * var_3[0] * 5;
+    var_7 = anglestoright(var_5) * var_3[1] * 5;
+    var_8 = anglestoup(var_5) * var_3[2] * 5;
   }
 
   self.flinching = 1;
-  var9 = 0.96;
-  var10 = 0.4;
-  var11 = 0.7;
-  var12 = 0.2;
-  var13 = 0;
-  var14 = 0;
+  var_9 = 0.96;
+  var_10 = 0.4;
+  var_11 = 0.7;
+  var_12 = 0.2;
+  var_13 = 0;
+  var_14 = 0;
 
-  while(var14 < var0 * 0.95) {
-    var13 = scripts\engine\math::lerp(var13, var0, var9);
-    var14 = scripts\engine\math::lerp(var14, var13, var11);
-    set_flinch_values(var14, var3, var2);
+  while(var_14 < var_0 * 0.95) {
+    var_13 = scripts\engine\math::lerp(var_13, var_0, var_9);
+    var_14 = scripts\engine\math::lerp(var_14, var_13, var_11);
+    set_flinch_values(var_14, var_3, var_2);
     wait 0.05;
   }
 
-  while(var14 > 0.005) {
-    var13 = scripts\engine\math::lerp(var13, 0, var10);
-    var14 = scripts\engine\math::lerp(var14, var13, var12);
-    set_flinch_values(var14, var3, var2);
+  while(var_14 > 0.005) {
+    var_13 = scripts\engine\math::lerp(var_13, 0, var_10);
+    var_14 = scripts\engine\math::lerp(var_14, var_13, var_12);
+    set_flinch_values(var_14, var_3, var_2);
     wait 0.05;
   }
 
-  set_flinch_values(0, var3, var2);
+  set_flinch_values(0, var_3, var_2);
   self.flinching = 0;
 }
 
-function set_flinch_values(var0, var1, var2) {
-  var3 = "whizyby" + var2;
+function set_flinch_values(var_0, var_1, var_2) {
+  var_3 = "whizyby" + var_2;
 
-  if(var0 == 0) {
+  if(var_0 == 0) {
     if(isDefined(level.player.viewblender["viewPos"].channels)) {
-      level.player.viewblender["viewPos"].channels = scripts\engine\sp\utility::array_remove_key_array(level.player.viewblender["viewPos"].channels, [var3]);
-      level.player.viewblender["weapPos"].channels = scripts\engine\sp\utility::array_remove_key_array(level.player.viewblender["weapPos"].channels, [var3]);
-      level.player.viewblender["weapAng"].channels = scripts\engine\sp\utility::array_remove_key_array(level.player.viewblender["weapAng"].channels, [var3]);
+      level.player.viewblender["viewPos"].channels = scripts\engine\sp\utility::array_remove_key_array(level.player.viewblender["viewPos"].channels, [var_3]);
+      level.player.viewblender["weapPos"].channels = scripts\engine\sp\utility::array_remove_key_array(level.player.viewblender["weapPos"].channels, [var_3]);
+      level.player.viewblender["weapAng"].channels = scripts\engine\sp\utility::array_remove_key_array(level.player.viewblender["weapAng"].channels, [var_3]);
     }
 
     return;
   }
 
-  self.amount = var0;
-  var4 = var1 * var0;
-  var4 = (var0 * -1, var4[1], var0 * -1);
-  level.player.viewblender["viewPos"].channels[var3] = var0 * (0, -1.3, -2.4);
-  level.player.viewblender["weapPos"].channels[var3] = var0 * (0, 0.15, 0.3);
-  level.player.viewblender["weapAng"].channels[var3] = var0 * (0, 1.15, 1.3);
+  self.amount = var_0;
+  var_4 = var_1 * var_0;
+  var_4 = (var_0 * -1, var_4[1], var_0 * -1);
+  level.player.viewblender["viewPos"].channels[var_3] = var_0 * (0, -1.3, -2.4);
+  level.player.viewblender["weapPos"].channels[var_3] = var_0 * (0, 0.15, 0.3);
+  level.player.viewblender["weapAng"].channels[var_3] = var_0 * (0, 1.15, 1.3);
 }
 
-function update_suppression_value(var0) {
-  var1 = 0.25;
-  var2 = 0.05;
-  var3 = scripts\engine\math::normalize_value(0, 64, var0);
-  var4 = scripts\engine\math::factor_value(var1, var2, var3);
-  var5 = self.suppression.amount + var4;
-  self.suppression.amount = scripts\engine\utility::ter_op(var5 <= 1, var5, 1);
+function update_suppression_value(var_0) {
+  var_1 = 0.25;
+  var_2 = 0.05;
+  var_3 = scripts\engine\math::normalize_value(0, 64, var_0);
+  var_4 = scripts\engine\math::factor_value(var_1, var_2, var_3);
+  var_5 = self.suppression.amount + var_4;
+  self.suppression.amount = scripts\engine\utility::ter_op(var_5 <= 1, var_5, 1);
   self.suppression.lastwhizbytime = gettime();
 }
 
@@ -220,8 +220,8 @@ function suppression_monitor() {
     scripts\engine\utility::ent_flag_waitopen("pause_suppression");
 
     if(gettime() - self.suppression.lastwhizbytime > 1500) {
-      var0 = self.suppression.amount - 0.025;
-      self.suppression.amount = scripts\engine\utility::ter_op(var0 >= 0, var0, 0);
+      var_0 = self.suppression.amount - 0.025;
+      self.suppression.amount = scripts\engine\utility::ter_op(var_0 >= 0, var_0, 0);
     }
 
     if(should_grunt()) {

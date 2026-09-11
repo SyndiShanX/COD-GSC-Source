@@ -11,14 +11,14 @@ function wolf_start() {
 
 function wolf_start_setup_farah() {
   wait 0.25;
-  var0 = getnode("wolf_tunnel_node_1", "targetname");
-  level.farah forceteleport(var0.origin, var0.angles);
+  var_0 = getnode("wolf_tunnel_node_1", "targetname");
+  level.farah forceteleport(var_0.origin, var_0.angles);
   wait 0.05;
   level.farah.ignoreall = 0;
   level.farah.ignoreme = 0;
   level.farah scripts\common\utility::demeanor_override("combat");
   level.farah scripts\engine\sp\utility::enable_ai_color();
-  level.farah thread scripts\sp\spawner::go_to_node(var0);
+  level.farah thread scripts\sp\spawner::go_to_node(var_0);
 }
 
 function wolf_catchup() {
@@ -27,7 +27,7 @@ function wolf_catchup() {
 
 function wolf() {
   scripts\sp\utility::notetrack_mission_failed_vo_disable();
-  var0 = getEnt("wolf_obj_trig", "targetname");
+  var_0 = getEnt("wolf_obj_trig", "targetname");
   thread wolf_objective();
   level.wolf = scripts\engine\sp\utility::spawn_targetname("wolfSpawner", 1);
   level.wolf.animname = "wolf";
@@ -63,14 +63,14 @@ function wolf() {
 function wolf_objective() {
   wait 0.25;
   scripts\engine\sp\objectives::objective_remove("tunnels_search");
-  var0 = level.wolf getEye() + (0, 0, 10);
-  scripts\engine\sp\objectives::objective_add("Wolf", "current", var0, &"ZD30/OBJ_TUNNELS_WOLF");
+  var_0 = level.wolf getEye() + (0, 0, 10);
+  scripts\engine\sp\objectives::objective_add("Wolf", "current", var_0, &"ZD30/OBJ_TUNNELS_WOLF");
   self waittill("trigger");
   thread mus_get_to_wolf();
   scripts\engine\utility::flag_wait("wolf_killed");
   scripts\engine\sp\objectives::objective_remove("Wolf");
-  var0 = level.wolf_vest.control.origin + (0, 0, 6);
-  scripts\engine\sp\objectives::objective_add("Bomb", "current", var0, &"ZD30/OBJ_TUNNELS_BOMB");
+  var_0 = level.wolf_vest.control.origin + (0, 0, 6);
+  scripts\engine\sp\objectives::objective_add("Bomb", "current", var_0, &"ZD30/OBJ_TUNNELS_BOMB");
   level waittill("wolf_vest_defused");
   scripts\engine\sp\objectives::objective_remove("Bomb");
 }
@@ -98,8 +98,8 @@ function update_wolf_face_position() {
 }
 
 function wolf_tunnel_first_frame() {
-  var0 = scripts\engine\utility::getStruct("wolfdeath", "targetname");
-  var0 thread scripts\common\anim::anim_first_frame_solo(level.wolf, "death_intro");
+  var_0 = scripts\engine\utility::getStruct("wolfdeath", "targetname");
+  var_0 thread scripts\common\anim::anim_first_frame_solo(level.wolf, "death_intro");
 }
 
 function wolf_tunnel_farah_movement_and_vo() {
@@ -133,72 +133,72 @@ function stop_wolf_pa_on_death() {
   }
 }
 
-function say_wolf_line(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = var0;
+function say_wolf_line(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = var_0;
   }
 
   level.wolf_speaker = scripts\sp\maps\tunnels\zd30tunnels_mineshaft::get_closest_speaker();
-  thread scripts\sp\maps\tunnels\zd30tunnels_utility::say(var0);
+  thread scripts\sp\maps\tunnels\zd30tunnels_utility::say(var_0);
   wait 0.25;
-  level.wolf_speaker scripts\sp\maps\tunnels\zd30tunnels_utility::say(var1);
+  level.wolf_speaker scripts\sp\maps\tunnels\zd30tunnels_utility::say(var_1);
 }
 
-function wolf_outside_room_farah_nag(var0, var1) {
-  level endon(var1);
-  var2 = 0;
-  var3 = [];
+function wolf_outside_room_farah_nag(var_0, var_1) {
+  level endon(var_1);
+  var_2 = 0;
+  var_3 = [];
   GscBinSkip0(0x2e, 0, "dx_vom_far_wolf_death_13");
 }
 
 function wolf_scene_door() {
-  var0 = getEnt("wolfdoor_unlock", "targetname");
-  var0 waittill("trigger");
+  var_0 = getEnt("wolfdoor_unlock", "targetname");
+  var_0 waittill("trigger");
   thread scripts\sp\analytics::analytics_kleenex_update("Shaft to Wolf");
-  var1 = undefined;
-  var2 = undefined;
-  var3 = undefined;
-  var4 = getEntArray("wolfdoor", "targetname");
+  var_1 = undefined;
+  var_2 = undefined;
+  var_3 = undefined;
+  var_4 = getEntArray("wolfdoor", "targetname");
 
-  foreach(var6 in var4) {
-    if(!isDefined(var6) || !isDefined(var6.classname)) {
+  foreach(var_6 in var_4) {
+    if(!isDefined(var_6) || !isDefined(var_6.classname)) {
       continue;
     }
 
-    if(var6.classname == "script_model") {
-      var1 = var6;
+    if(var_6.classname == "script_model") {
+      var_1 = var_6;
     }
 
-    if(var6.classname == "script_brushmodel") {
-      var2 = var6;
+    if(var_6.classname == "script_brushmodel") {
+      var_2 = var_6;
     }
 
-    if(isDefined(var6.script_noteworthy) && var6.script_noteworthy == "handle") {
-      var3 = var6;
+    if(isDefined(var_6.script_noteworthy) && var_6.script_noteworthy == "handle") {
+      var_3 = var_6;
     }
   }
 
-  var8 = scripts\engine\utility::getStruct(var2.target, "targetname");
-  var9 = scripts\engine\utility::getStruct(var8.target, "targetname");
-  var10 = scripts\engine\utility::getStruct(var9.target, "targetname");
-  var3 linkTo(var2);
-  var1 linkTo(var2);
-  var11 = anglesdelta(var8.angles, var9.angles);
-  var2 rotateYaw(var11, 1, 0.1, 0.55);
+  var_8 = scripts\engine\utility::getStruct(var_2.target, "targetname");
+  var_9 = scripts\engine\utility::getStruct(var_8.target, "targetname");
+  var_10 = scripts\engine\utility::getStruct(var_9.target, "targetname");
+  var_3 linkTo(var_2);
+  var_1 linkTo(var_2);
+  var_11 = anglesdelta(var_8.angles, var_9.angles);
+  var_2 rotateYaw(var_11, 1, 0.1, 0.55);
   scripts\engine\utility::flag_set("wolf_door_unlocked");
-  var12 = &"SCRIPT/DOOR_HINT_USE_NO_BASH";
-  var3 scripts\sp\player\cursor_hint::create_cursor_hint("tag_origin", (0, 0, 0), var12, 45, 200 * level.interactive_doors.hint_dist_scale, 55 * level.interactive_doors.hint_dist_scale, 0);
+  var_12 = &"SCRIPT/DOOR_HINT_USE_NO_BASH";
+  var_3 scripts\sp\player\cursor_hint::create_cursor_hint("tag_origin", (0, 0, 0), var_12, 45, 200 * level.interactive_doors.hint_dist_scale, 55 * level.interactive_doors.hint_dist_scale, 0);
   thread set_wolfdoor_open_flag_on_trigger();
   scripts\engine\utility::flag_wait("wolfdoor_open");
-  var3 playSound("scrpt_door_metal_heavy_open_soft");
-  var3 thread scripts\sp\player\cursor_hint::remove_cursor_hint();
+  var_3 playSound("scrpt_door_metal_heavy_open_soft");
+  var_3 thread scripts\sp\player\cursor_hint::remove_cursor_hint();
   thread wolf_death_player_cleared_door();
-  var1 thread scripts\engine\utility::play_loop_sound_on_entity("scrpt_door_metal_heavy_creak_lp");
-  var11 = anglesdelta(var9.angles, var10.angles);
-  var2 rotateYaw(var11, 1.5, 0.1, 0.5);
-  var2 connectpaths();
+  var_1 thread scripts\engine\utility::play_loop_sound_on_entity("scrpt_door_metal_heavy_creak_lp");
+  var_11 = anglesdelta(var_9.angles, var_10.angles);
+  var_2 rotateYaw(var_11, 1.5, 0.1, 0.5);
+  var_2 connectpaths();
   wait 1.5;
-  var1 notify("stop soundscrpt_door_metal_heavy_creak_lp");
+  var_1 notify("stop soundscrpt_door_metal_heavy_creak_lp");
 }
 
 function set_wolfdoor_open_flag_on_trigger() {
@@ -216,9 +216,9 @@ function set_wolfdoor_open_flag_on_trigger() {
 }
 
 function wolf_death_player_cleared_door() {
-  var0 = getEnt("wolf_room_door_clear_trig", "targetname");
+  var_0 = getEnt("wolf_room_door_clear_trig", "targetname");
 
-  while(level.player istouching(var0)) {
+  while(level.player istouching(var_0)) {
     wait 0.05;
   }
 
@@ -232,8 +232,8 @@ function wolf_death_farah_points_out_vest_vo() {
 
 function wolf_death_detect_player_escapes_wolf() {
   level.player endon("ready_to_defuse");
-  var0 = getEnt("safe_room_exit_trig", "targetname");
-  var0 waittill("trigger");
+  var_0 = getEnt("safe_room_exit_trig", "targetname");
+  var_0 waittill("trigger");
   scripts\engine\utility::flag_set("wolfdeath_player_escaped");
   wolf_vest_defuse_failed(level.wolf_vest);
 }
@@ -242,13 +242,13 @@ function wolf_death_detect_player_shoots_next_to_wolf() {
   level endon("wolf_killed");
   level endon("wolfdeath_player_escaped");
   level endon("wolfdeath_player_too_close");
-  var0 = 0.6;
+  var_0 = 0.6;
 
   for(;;) {
     level.player scripts\engine\utility::waittill_any("weapon_fired", "grenade_fire", "offhand_fired");
     wait 0.15;
 
-    if(!scripts\engine\utility::flag("wolf_killed") && scripts\engine\sp\utility::player_looking_at(level.wolf getEye(), var0, 1, level.wolf)) {
+    if(!scripts\engine\utility::flag("wolf_killed") && scripts\engine\sp\utility::player_looking_at(level.wolf getEye(), var_0, 1, level.wolf)) {
       scripts\engine\utility::flag_set("wolfdeath_player_shoots_around");
       return;
     }
@@ -259,14 +259,14 @@ function wolf_death_detect_player_too_close_to_wolf() {
   level endon("wolf_killed");
   level endon("wolfdeath_player_escaped");
   level endon("wolfdeath_player_shoots_around");
-  var0 = 64;
-  var1 = spawn("trigger_radius", level.wolf.origin, 0, var0, 256);
+  var_0 = 64;
+  var_1 = spawn("trigger_radius", level.wolf.origin, 0, var_0, 256);
 
   for(;;) {
-    var1 waittill("trigger", var2);
+    var_1 waittill("trigger", var_2);
 
-    if(isPlayer(var2)) {
-      var1 delete();
+    if(isPlayer(var_2)) {
+      var_1 delete();
       break;
     }
   }
@@ -278,17 +278,17 @@ function wolf_death_detect_player_shoot_vest() {
   level endon("wolfdeath_player_defuse_interacted");
 
   for(;;) {
-    level.wolf waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7);
+    level.wolf waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7);
 
-    if(!isDefined(var1) || !isPlayer(var1) || !isDefined(var4) || !isDefined(var7)) {
+    if(!isDefined(var_1) || !isPlayer(var_1) || !isDefined(var_4) || !isDefined(var_7)) {
       continue;
     }
 
-    if(var4 != "MOD_PISTOL_BULLET" && var4 != "MOD_RIFLE_BULLET" && var4 != "MOD_MELEE" && var4 != "MOD_IMPACT") {
+    if(var_4 != "MOD_PISTOL_BULLET" && var_4 != "MOD_RIFLE_BULLET" && var_4 != "MOD_MELEE" && var_4 != "MOD_IMPACT") {
       continue;
     }
 
-    if(scripts\engine\utility::hastag(level.wolf.model, var7) && var7 == "j_spinelower" || var4 == "MOD_IMPACT") {
+    if(scripts\engine\utility::hastag(level.wolf.model, var_7) && var_7 == "j_spinelower" || var_4 == "MOD_IMPACT") {
       wolf_death_fail_due_to_damage();
       return;
     }
@@ -299,10 +299,10 @@ function wolf_death_detect_player_wolf_kill() {
   level endon("wolfdeath_player_escaped");
 
   for(;;) {
-    level.wolf waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7);
+    level.wolf waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7);
 
-    if(isDefined(var1) && (isPlayer(var1) || var1 == level.farah)) {
-      if(isPlayer(var1)) {
+    if(isDefined(var_1) && (isPlayer(var_1) || var_1 == level.farah)) {
+      if(isPlayer(var_1)) {
         scripts\engine\utility::flag_set("wolfdeath_player_shoots_wolf");
       } else {
         scripts\engine\utility::flag_set("wolfdeath_farah_shoots_wolf");
@@ -310,7 +310,7 @@ function wolf_death_detect_player_wolf_kill() {
 
       level.wolf stopsounds();
 
-      if(isDefined(var4) && var4 == "MOD_MELEE") {
+      if(isDefined(var_4) && var_4 == "MOD_MELEE") {
         level.wolf playSound("generic_pain_enemy_1");
       }
 
@@ -321,9 +321,9 @@ function wolf_death_detect_player_wolf_kill() {
   level.wolf.team = "neutral";
   level.wolf.no_friendly_fire_fail = 1;
   scripts\engine\utility::flag_set("wolf_killed");
-  var8 = scripts\engine\utility::getStruct("wolfdeath", "targetname");
-  var8 scripts\common\anim::anim_single_solo(level.wolf, "death_kill");
-  var8 scripts\common\anim::anim_last_frame_solo(level.wolf, "death_kill");
+  var_8 = scripts\engine\utility::getStruct("wolfdeath", "targetname");
+  var_8 scripts\common\anim::anim_single_solo(level.wolf, "death_kill");
+  var_8 scripts\common\anim::anim_last_frame_solo(level.wolf, "death_kill");
 }
 
 function wolf_death_fail_due_to_damage() {
@@ -331,37 +331,37 @@ function wolf_death_fail_due_to_damage() {
     return;
   }
 
-  var0 = scripts\engine\utility::getStruct("wolfdeath", "targetname");
-  var0 notify("stop_loop");
+  var_0 = scripts\engine\utility::getStruct("wolfdeath", "targetname");
+  var_0 notify("stop_loop");
   level.farah scripts\engine\sp\utility::anim_stopanimScripted();
   wolf_vest_defuse_failed(level.wolf_vest, undefined, 1);
 }
 
 function wolf_death_detect_molotov_wolf_kill() {
   for(;;) {
-    level waittill("molotov_fire_trigger", var0);
+    level waittill("molotov_fire_trigger", var_0);
 
-    if(level.wolf istouching(var0)) {
+    if(level.wolf istouching(var_0)) {
       scripts\engine\utility::flag_set("wolfdeath_player_shoots_wolf");
       level.wolf stopsounds();
       level.wolf playSound("generic_pain_enemy_1");
       break;
     }
 
-    var1 = spawn("script_origin", var0.origin);
-    var2 = getEnt("wolf_room_trig", "targetname");
+    var_1 = spawn("script_origin", var_0.origin);
+    var_2 = getEnt("wolf_room_trig", "targetname");
 
-    if(var1 istouching(var2)) {
+    if(var_1 istouching(var_2)) {
       wait 0.05;
-      var1 delete();
+      var_1 delete();
       break;
     }
 
     wait 0.05;
   }
 
-  var3 = scripts\engine\utility::getStruct("wolfdeath", "targetname");
-  var3 notify("stop_loop");
+  var_3 = scripts\engine\utility::getStruct("wolfdeath", "targetname");
+  var_3 notify("stop_loop");
   level.farah scripts\engine\sp\utility::anim_stopanimScripted();
   wait 1;
   wolf_vest_defuse_failed(level.wolf_vest);
@@ -369,11 +369,11 @@ function wolf_death_detect_molotov_wolf_kill() {
 
 function wolf_death_intro() {
   level endon("wolfdeath_player_shoots_wolf");
-  var0 = scripts\engine\utility::getStruct("wolfdeath", "targetname");
-  var0 notify("death_intro_enter_idle_stop");
+  var_0 = scripts\engine\utility::getStruct("wolfdeath", "targetname");
+  var_0 notify("death_intro_enter_idle_stop");
   level.farah scripts\engine\sp\utility::anim_stopanimScripted();
-  thread wolf_death_intro_wolf_monologue(var0);
-  thread wolf_death_intro_farah_anim(var0);
+  thread wolf_death_intro_wolf_monologue(var_0);
+  thread wolf_death_intro_farah_anim(var_0);
   scripts\engine\utility::flag_wait("wolfdeath_farah_shoot");
   level.wolf scripts\engine\sp\utility::add_wait(&scripts\engine\utility::waittillmatch_any_return, "single anim", "start_farah_kill");
   scripts\engine\sp\utility::add_wait(&scripts\engine\utility::flag_wait_any, "wolfdeath_player_too_close", "wolfdeath_player_shoots_around");
@@ -384,21 +384,21 @@ function wolf_death_intro() {
   wait 0.5;
 }
 
-function wolf_death_intro_wolf_monologue(var0) {
+function wolf_death_intro_wolf_monologue(var_0) {
   level endon("wolf_killed");
   level thread scripts\engine\utility::flag_set_delayed("wolfdeath_timer_low", 8);
-  var0 scripts\common\anim::anim_single_solo(level.wolf, "death_intro");
-  var0 scripts\common\anim::anim_last_frame_solo(level.wolf, "death_intro");
+  var_0 scripts\common\anim::anim_single_solo(level.wolf, "death_intro");
+  var_0 scripts\common\anim::anim_last_frame_solo(level.wolf, "death_intro");
 }
 
-function wolf_death_intro_farah_anim(var0) {
+function wolf_death_intro_farah_anim(var_0) {
   level endon("wolfdeath_player_defuse_interacted");
   scripts\engine\utility::flag_wait_any("wolfdeath_timer_low", "wolfdeath_player_cleared_door", "wolfdeath_player_shoots_wolf", "wolfdeath_player_too_close", "wolfdeath_player_shoots_around");
-  var0 scripts\sp\anim::anim_reach_solo(level.farah, "death_intro");
+  var_0 scripts\sp\anim::anim_reach_solo(level.farah, "death_intro");
   level.farah scripts\engine\sp\utility::disable_dynamic_run_speed();
   scripts\engine\utility::delaythread(1.9, &scripts\engine\utility::flag_set, "wolfdeath_farah_shoot");
-  var0 scripts\common\anim::anim_single_solo(level.farah, "death_intro");
-  var0 thread scripts\common\anim::anim_loop_solo(level.farah, "death_intro_idle", "death_intro_idle_stop");
+  var_0 scripts\common\anim::anim_single_solo(level.farah, "death_intro");
+  var_0 thread scripts\common\anim::anim_loop_solo(level.farah, "death_intro_idle", "death_intro_idle_stop");
   waitframe();
   scripts\engine\utility::flag_set("wolfdeath_farah_in_position");
 }
@@ -407,24 +407,24 @@ function wolf_bomb_vest() {
   level.looking_at_wire = undefined;
   level.vest_required_wire = undefined;
   level.defuse_count = 0;
-  var0 = "j_chest";
-  var1 = level.wolf gettagorigin("j_chest");
-  var2 = level.wolf gettagangles("j_chest");
-  var3 = getEnt("wolf_vest_new2", "targetname");
-  var3.control = getEnt("wolf_vest_control", "targetname");
-  var3.control linkTo(var3);
+  var_0 = "j_chest";
+  var_1 = level.wolf gettagorigin("j_chest");
+  var_2 = level.wolf gettagangles("j_chest");
+  var_3 = getEnt("wolf_vest_new2", "targetname");
+  var_3.control = getEnt("wolf_vest_control", "targetname");
+  var_3.control linkTo(var_3);
   thread vest_timer_countdown();
   waitframe();
-  var3.red_wire_upper = setup_wire(var3, "red_wire_upper", 1, "red");
-  var3.red_wire_lower = setup_wire(var3, "red_wire_lower", 1, "red");
-  var3.yellow_wire = setup_wire(var3, "yellow_wire", 4, "yellow");
-  var3.green_wire = setup_wire(var3, "green_wire", 2, "green");
-  var3.blue_wire = setup_wire(var3, "blue_wire", 0, "blue");
-  var3.wires = [var3.red_wire_upper, var3.red_wire_lower, var3.yellow_wire, var3.green_wire, var3.blue_wire];
-  var4 = (-19.1, -1.65, -0.05);
-  var5 = (90, 0, -2);
-  var3 linkTo(level.wolf, var0, var4, var5);
-  level.wolf_vest = var3;
+  var_3.red_wire_upper = setup_wire(var_3, "red_wire_upper", 1, "red");
+  var_3.red_wire_lower = setup_wire(var_3, "red_wire_lower", 1, "red");
+  var_3.yellow_wire = setup_wire(var_3, "yellow_wire", 4, "yellow");
+  var_3.green_wire = setup_wire(var_3, "green_wire", 2, "green");
+  var_3.blue_wire = setup_wire(var_3, "blue_wire", 0, "blue");
+  var_3.wires = [var_3.red_wire_upper, var_3.red_wire_lower, var_3.yellow_wire, var_3.green_wire, var_3.blue_wire];
+  var_4 = (-19.1, -1.65, -0.05);
+  var_5 = (90, 0, -2);
+  var_3 linkTo(level.wolf, var_0, var_4, var_5);
+  level.wolf_vest = var_3;
   level.wolf_vest hide();
   thread wolf_bomb_clacker_setup();
   wolf_bomb_tablet_setup();
@@ -435,9 +435,9 @@ function debug_vest_pos_ang() {
   for(;;) {
     wait 0.25;
     self unlink();
-    var0 = (getdvarfloat("zd_x"), getdvarfloat("zd_y"), getdvarfloat("zd_z"));
-    var1 = (getdvarfloat("zd_pitch"), getdvarfloat("zd_yaw"), getdvarfloat("zd_roll"));
-    self linkTo(level.wolf, "j_chest", var0, var1);
+    var_0 = (getdvarfloat("zd_x"), getdvarfloat("zd_y"), getdvarfloat("zd_z"));
+    var_1 = (getdvarfloat("zd_pitch"), getdvarfloat("zd_yaw"), getdvarfloat("zd_roll"));
+    self linkTo(level.wolf, "j_chest", var_0, var_1);
   }
 }
 
@@ -453,8 +453,8 @@ function wolf_bomb_vest_think() {
   thread detect_player_leaving_after_wolf_death();
   thread wolf_bomb_vest_farah_defuse_enter_anim();
   thread timeout_explode();
-  var0 = &"ZD30/DEFUSE";
-  level.wolf_vest.control scripts\sp\player\cursor_hint::create_cursor_hint("tag_origin", (0, 0, 0), var0, 90, 128, 52, 0, undefined, undefined, undefined, "duration_none", undefined, undefined, 25);
+  var_0 = &"ZD30/DEFUSE";
+  level.wolf_vest.control scripts\sp\player\cursor_hint::create_cursor_hint("tag_origin", (0, 0, 0), var_0, 90, 128, 52, 0, undefined, undefined, undefined, "duration_none", undefined, undefined, 25);
   level.wolf_vest.control waittill("trigger");
   scripts\engine\utility::flag_set("wolfdeath_player_defuse_interacted");
   thread cleanup_enemies_for_wolf_defuse();
@@ -466,12 +466,12 @@ function wolf_bomb_vest_think() {
   level.player waittill("ready_to_defuse");
   level.player notifyonplayercommand("wire_cut_button_press", "+usereload");
   level.player notifyonplayercommand("wire_cut_button_press", "+activate");
-  var1 = 3;
+  var_1 = 3;
 
-  while(level.defuse_count < var1) {
-    level.player waittill("wire_cut", var2, var3);
+  while(level.defuse_count < var_1) {
+    level.player waittill("wire_cut", var_2, var_3);
 
-    if(!isDefined(level.looking_at_wire) || !isDefined(level.vest_required_wire) || level.vest_required_wire != var3 || var2 < level.vest_required_start_time || var2 > level.vest_required_end_time) {
+    if(!isDefined(level.looking_at_wire) || !isDefined(level.vest_required_wire) || level.vest_required_wire != var_3 || var_2 < level.vest_required_start_time || var_2 > level.vest_required_end_time) {
       wolf_vest_defuse_failed(level.wolf_vest, 1);
       return;
     } else {
@@ -503,31 +503,31 @@ function wolf_bomb_vest_defuse_dof() {
 }
 
 function cleanup_enemies_for_wolf_defuse() {
-  var0 = getaiarray("axis");
+  var_0 = getaiarray("axis");
 
   for(;;) {
-    foreach(var2 in var0) {
-      if(!isDefined(var2)) {
+    foreach(var_2 in var_0) {
+      if(!isDefined(var_2)) {
         continue;
       }
 
-      if(var2 == level.wolf) {
+      if(var_2 == level.wolf) {
         continue;
       }
 
-      var3 = distance(level.player.origin, var2.origin);
-      var2.ignoreme = 1;
-      var2.ignoreall = 1;
+      var_3 = distance(level.player.origin, var_2.origin);
+      var_2.ignoreme = 1;
+      var_2.ignoreall = 1;
 
-      if(var3 < 500 || var2 cansee(level.player)) {
-        if(isalive(var2)) {
-          var2 kill();
+      if(var_3 < 500 || var_2 cansee(level.player)) {
+        if(isalive(var_2)) {
+          var_2 kill();
         }
 
         wait 0.25;
 
-        if(isDefined(var2)) {
-          var2 delete();
+        if(isDefined(var_2)) {
+          var_2 delete();
         }
       }
     }
@@ -548,20 +548,20 @@ function wolf_bomb_vest_farah_defuse_enter_anim() {
   level endon("wolfdeath_player_escaped");
   level endon("wolfdeath_farah_teleport");
   level.wolf_vest.control endon("player_left");
-  var0 = scripts\engine\utility::getStruct("wolfdeath", "targetname");
+  var_0 = scripts\engine\utility::getStruct("wolfdeath", "targetname");
   scripts\engine\utility::flag_wait("wolfdeath_farah_in_position");
   level.farah scripts\engine\sp\utility::anim_stopanimScripted();
-  var0 notify("death_intro_idle_stop");
+  var_0 notify("death_intro_idle_stop");
   level.farah scripts\engine\utility::delaythread(1.5, &scripts\engine\sp\utility::smart_dialogue, "dx_vom_far_wolf_death_62");
   level.farah scripts\engine\utility::delaythread(2.85, &scripts\engine\sp\utility::smart_dialogue, "dx_vom_far_wolf_death_63");
   scripts\engine\utility::delaythread(2.3, &scripts\engine\utility::flag_set, "wolfdeath_farah_defuse_ready_tele");
-  var0 thread scripts\common\anim::anim_single_solo(level.farah, "death_diffuse_enter");
+  var_0 thread scripts\common\anim::anim_single_solo(level.farah, "death_diffuse_enter");
   level.farah waittillmatch("single anim", "tablet_pickup");
   wolf_bomb_tablet_pickup();
   level.farah waittillmatch("single anim", "end");
-  var0 thread scripts\common\anim::anim_last_frame_solo(level.farah, "death_diffuse_enter");
+  var_0 thread scripts\common\anim::anim_last_frame_solo(level.farah, "death_diffuse_enter");
   scripts\engine\utility::flag_set("wolfdeath_farah_defuse_ready");
-  thread wolf_bomb_vest_farah_defuse_enter_anim_loop(var0);
+  thread wolf_bomb_vest_farah_defuse_enter_anim_loop(var_0);
 }
 
 function wolf_bomb_tablet_setup() {
@@ -576,7 +576,7 @@ function wolf_bomb_tablet_pickup() {
   level.wolf_bomb_tablet linkTo(level.farah, "tag_accessory_left");
 }
 
-function wolf_bomb_vest_farah_defuse_enter_anim_loop(var0) {
+function wolf_bomb_vest_farah_defuse_enter_anim_loop(var_0) {
   level.wolf_vest.control endon("player_left");
   level endon("wolf_bomb_vest_defuse_enter_anim_loop");
   level endon("wolf_vest_defuse_failed");
@@ -585,42 +585,42 @@ function wolf_bomb_vest_farah_defuse_enter_anim_loop(var0) {
     return;
   }
 
-  var1 = 0;
-  var2 = [];
+  var_1 = 0;
+  var_2 = [];
   GscBinSkip0(0x2e, 0, "dx_vom_far_wolf_death_64");
 }
 
 function wolf_bomb_vest_defuse_anim() {
-  var0 = spawn("script_model", level.player.origin + (0, 0, -300));
-  var0 setModel("body_hero_farah_nobraids");
+  var_0 = spawn("script_model", level.player.origin + (0, 0, -300));
+  var_0 setModel("body_hero_farah_nobraids");
   level.player modifybasefov(level.fov_wolf_bomb_defuse, 0.5);
   level.player lerpfovscalefactor(0, 0.5);
-  var1 = scripts\engine\utility::getStruct("wolfdeath", "targetname");
-  var2 = 5;
-  var1 scripts\sp\player_rig::link_player_to_rig("death_diffuse_enter", undefined, 1, 0.5, undefined, var2, var2, var2, var2, 1);
+  var_1 = scripts\engine\utility::getStruct("wolfdeath", "targetname");
+  var_2 = 5;
+  var_1 scripts\sp\player_rig::link_player_to_rig("death_diffuse_enter", undefined, 1, 0.5, undefined, var_2, var_2, var_2, var_2, 1);
   level.player_rig hide();
-  var1 scripts\common\anim::anim_single_solo(level.player_rig, "death_diffuse_enter");
+  var_1 scripts\common\anim::anim_single_solo(level.player_rig, "death_diffuse_enter");
   level.player_rig show();
   thread fade_farah_glowstick();
 
   if(!scripts\engine\utility::flag("wolfdeath_farah_defuse_ready_tele")) {
-    var1 thread scripts\common\anim::anim_loop_solo(level.player_rig, "death_diffuse_enter_idle", "death_diffuse_enter_idle_stop");
+    var_1 thread scripts\common\anim::anim_loop_solo(level.player_rig, "death_diffuse_enter_idle", "death_diffuse_enter_idle_stop");
     level.farah scripts\engine\sp\utility::anim_stopanimScripted();
-    var1 notify("death_diffuse_enter_loop_stop");
+    var_1 notify("death_diffuse_enter_loop_stop");
     level notify("wolf_bomb_vest_defuse_enter_anim_loop");
     level notify("wolfdeath_farah_teleport");
-    var1 thread scripts\common\anim::anim_single_solo(level.farah, "death_diffuse_enter");
+    var_1 thread scripts\common\anim::anim_single_solo(level.farah, "death_diffuse_enter");
     waitframe();
     level.farah setanimtime(level.farah scripts\engine\utility::getanim("death_diffuse_enter"), 0.39);
     level.farah waittillmatch("single anim", "tablet_pickup");
     wolf_bomb_tablet_pickup();
     level.farah waittillmatch("single anim", "end");
-    var1 notify("death_diffuse_enter_idle_stop");
+    var_1 notify("death_diffuse_enter_idle_stop");
     scripts\engine\utility::flag_set("wolfdeath_farah_defuse_ready");
   } else {
     scripts\engine\utility::flag_wait("wolfdeath_farah_defuse_ready");
     level.farah scripts\engine\sp\utility::anim_stopanimScripted();
-    var1 notify("death_diffuse_enter_loop_stop");
+    var_1 notify("death_diffuse_enter_loop_stop");
     level notify("wolf_bomb_vest_defuse_enter_anim_loop");
   }
 
@@ -628,17 +628,17 @@ function wolf_bomb_vest_defuse_anim() {
   thread scripts\engine\sp\utility::autosave_now();
   crosshair_overlay_dot(1);
   level.wolf scripts\engine\sp\utility::anim_stopanimScripted();
-  thread player_defuse_anim(var1);
-  thread wolf_defuse_anim(var1);
+  thread player_defuse_anim(var_1);
+  thread wolf_defuse_anim(var_1);
   farah_nobraids_body_swap();
-  var1 scripts\common\anim::anim_single_solo(level.farah, "death_diffuse");
-  thread farah_defuse_anim(var1);
-  var0 delete();
+  var_1 scripts\common\anim::anim_single_solo(level.farah, "death_diffuse");
+  thread farah_defuse_anim(var_1);
+  var_0 delete();
   level.player notify("ready_to_defuse");
-  var3 = level scripts\engine\utility::waittill_any_return("wolf_vest_defused", "wolf_vest_defuse_failed");
+  var_3 = level scripts\engine\utility::waittill_any_return("wolf_vest_defused", "wolf_vest_defuse_failed");
   crosshair_overlay_dot(0);
 
-  if(!isDefined(var3) || var3 == "wolf_vest_defuse_failed") {
+  if(!isDefined(var_3) || var_3 == "wolf_vest_defuse_failed") {
     return;
   }
 
@@ -648,8 +648,8 @@ function wolf_bomb_vest_defuse_anim() {
   thread cine_dof();
   thread wolf_post_defuse_alex_farah_vo();
   thread cine_bars_clamp();
-  var1 thread scripts\common\anim::anim_single([level.player_rig, level.farah], "death_end");
-  thread wolf_dies_in_last_frame(var1);
+  var_1 thread scripts\common\anim::anim_single([level.player_rig, level.farah], "death_end");
+  thread wolf_dies_in_last_frame(var_1);
   level.player_rig waittillmatch("single anim", "end");
   scripts\sp\player_rig::unlink_player_from_rig();
   level.player modifybasefov(level.fov_mine, 0.25);
@@ -665,53 +665,53 @@ function fade_farah_glowstick() {
   stopFXOnTag(level._effect[level.farah.glowstick_vfx], level.farah.glowstick, "tag_fx");
 }
 
-function vest_intro_vo(var0) {}
+function vest_intro_vo(var_0) {}
 
-function player_defuse_anim(var0) {
+function player_defuse_anim(var_0) {
   setmusicstate("mx_zd30_wolf_diffuse");
   scripts\engine\utility::delaythread(2, &player_view_lerp_clamp, 25);
-  var0 scripts\common\anim::anim_single_solo(level.player_rig, "death_diffuse");
-  var0 scripts\common\anim::anim_last_frame_solo(level.player_rig, "death_diffuse");
+  var_0 scripts\common\anim::anim_single_solo(level.player_rig, "death_diffuse");
+  var_0 scripts\common\anim::anim_last_frame_solo(level.player_rig, "death_diffuse");
 }
 
-function player_view_lerp_clamp(var0) {
-  level.player lerpviewangleclamp(1.25, 0.5, 0, var0, var0, var0, var0);
+function player_view_lerp_clamp(var_0) {
+  level.player lerpviewangleclamp(1.25, 0.5, 0, var_0, var_0, var_0, var_0);
 }
 
-function wolf_defuse_anim(var0) {
-  var0 scripts\common\anim::anim_single_solo(level.wolf, "death_diffuse");
-  var0 scripts\common\anim::anim_last_frame_solo(level.wolf, "death_diffuse");
+function wolf_defuse_anim(var_0) {
+  var_0 scripts\common\anim::anim_single_solo(level.wolf, "death_diffuse");
+  var_0 scripts\common\anim::anim_last_frame_solo(level.wolf, "death_diffuse");
 }
 
-function farah_defuse_anim(var0) {
+function farah_defuse_anim(var_0) {
   level endon("wolf_vest_defuse_failed");
-  do_defuse_anim(var0, "death_diffuse_green", self.green_wire, "wolfdeath_defuse_green", 1);
-  do_defuse_anim(var0, "death_diffuse_yellow", self.yellow_wire, "wolfdeath_defuse_yellow", 2);
-  do_defuse_anim(var0, "death_diffuse_red", self.red_wire_upper, "wolfdeath_defuse_red", 3);
+  do_defuse_anim(var_0, "death_diffuse_green", self.green_wire, "wolfdeath_defuse_green", 1);
+  do_defuse_anim(var_0, "death_diffuse_yellow", self.yellow_wire, "wolfdeath_defuse_yellow", 2);
+  do_defuse_anim(var_0, "death_diffuse_red", self.red_wire_upper, "wolfdeath_defuse_red", 3);
   scripts\engine\utility::flag_set("wolfdeath_defuse_done");
 }
 
-function do_defuse_anim(var0, var1, var2, var3) {
-  var4 = scripts\engine\utility::get_notetrack_time(level.farah scripts\engine\utility::getanim(var0), "farah_says_cut_wire") * 1000;
-  var5 = 1000;
-  level.vest_required_wire = var1;
-  level.vest_required_start_time = gettime() + var4;
-  level.vest_required_end_time = level.vest_required_start_time + var5;
-  scripts\engine\utility::flag_set(var2);
-  thread fail_cut(var4 + var5);
-  thread confirm_cut(var4);
-  scripts\common\anim::anim_single_solo(level.farah, var0);
+function do_defuse_anim(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\engine\utility::get_notetrack_time(level.farah scripts\engine\utility::getanim(var_0), "farah_says_cut_wire") * 1000;
+  var_5 = 1000;
+  level.vest_required_wire = var_1;
+  level.vest_required_start_time = gettime() + var_4;
+  level.vest_required_end_time = level.vest_required_start_time + var_5;
+  scripts\engine\utility::flag_set(var_2);
+  thread fail_cut(var_4 + var_5);
+  thread confirm_cut(var_4);
+  scripts\common\anim::anim_single_solo(level.farah, var_0);
 }
 
-function fail_cut(var0) {
+function fail_cut(var_0) {
   level.player endon("wire_cut");
-  wait var0 / 1000;
+  wait var_0 / 1000;
   wolf_vest_defuse_failed(level.wolf_vest, 1);
 }
 
-function confirm_cut(var0) {
+function confirm_cut(var_0) {
   level endon("wolf_vest_defuse_failed");
-  wait var0 / 1000;
+  wait var_0 / 1000;
   level.player waittill("wire_cut");
 
   switch (level.defuse_count) {
@@ -760,16 +760,16 @@ function cine_dof() {
   scripts\engine\sp\utility::dof_disable();
 }
 
-function wolf_dies_in_last_frame(var0) {
+function wolf_dies_in_last_frame(var_0) {
   level.wolf waittillmatch("single anim", "end");
-  var0 scripts\common\anim::anim_last_frame_solo(level.wolf, "death_end");
+  var_0 scripts\common\anim::anim_last_frame_solo(level.wolf, "death_end");
 }
 
 function detect_player_leaving_after_wolf_death() {
-  var0 = 500;
+  var_0 = 500;
 
   for(;;) {
-    if(scripts\engine\utility::distance_2d_squared(level.wolf_vest.origin, level.player.origin) > var0 * var0) {
+    if(scripts\engine\utility::distance_2d_squared(level.wolf_vest.origin, level.player.origin) > var_0 * var_0) {
       while(isDefined(level.wolf) && isDefined(level.wolf_vest) && isDefined(level.wolf_vest.control)) {
         level.wolf_vest.control notify("player_left");
         wait 0.2;
@@ -780,7 +780,7 @@ function detect_player_leaving_after_wolf_death() {
   }
 }
 
-function wolf_vest_defuse_failed(var0, var1) {
+function wolf_vest_defuse_failed(var_0, var_1) {
   level notify("wolf_vest_defuse_failed");
   scripts\sp\utility::notetrack_vo_disable();
 
@@ -788,7 +788,7 @@ function wolf_vest_defuse_failed(var0, var1) {
     level.player_rig stopsounds();
   }
 
-  if(!istrue(var1)) {
+  if(!istrue(var_1)) {
     if(istrue(self.defuse_failed)) {
       return;
     }
@@ -796,7 +796,7 @@ function wolf_vest_defuse_failed(var0, var1) {
     self.defuse_failed = 1;
     wait 0.25;
 
-    if(istrue(var0)) {
+    if(istrue(var_0)) {
       level.player thread scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter("dx_vom_alx_basement_tunnel_leftpath_30", 1, 0.25);
     }
 
@@ -810,14 +810,14 @@ function wolf_vest_defuse_failed(var0, var1) {
 }
 
 function wolf_tunnel_explode() {
-  var0 = scripts\engine\utility::getStruct("wolf_tunnel_exp_struct", "targetname");
-  var1 = var0.origin;
-  var2 = var0.angles;
+  var_0 = scripts\engine\utility::getStruct("wolf_tunnel_exp_struct", "targetname");
+  var_1 = var_0.origin;
+  var_2 = var_0.angles;
   thread wolf_room_barrels_explode(0.05);
   scripts\engine\utility::exploder("wolf_fail");
-  thread scripts\engine\utility::play_sound_in_space("scn_zd30_gas_expl_trans", var1);
+  thread scripts\engine\utility::play_sound_in_space("scn_zd30_gas_expl_trans", var_1);
   wait 0.25;
-  thread scripts\engine\utility::play_sound_in_space("scn_zd30_gas_expl_fireball_front", var1);
+  thread scripts\engine\utility::play_sound_in_space("scn_zd30_gas_expl_fireball_front", var_1);
   level.wolf_tunnel_fire_trig.script_multiplier = 10;
   level.wolf_tunnel_fire_trig thread scripts\sp\maps\tunnels\zd30tunnels_utility::supplementary_fire_damage();
   level.wolf_tunnel_fire_trig scripts\engine\utility::delaythread(0.25, &scripts\engine\utility::trigger_on);
@@ -828,56 +828,56 @@ function wolf_tunnel_explode() {
   level.player kill();
 }
 
-function wolf_room_barrels_explode(var0) {
-  var1 = getEnt("wolf_room_trig", "targetname");
-  var2 = [];
+function wolf_room_barrels_explode(var_0) {
+  var_1 = getEnt("wolf_room_trig", "targetname");
+  var_2 = [];
 
-  foreach(var4 in level.spewing_barrels) {
-    if(isDefined(var4) && var4 istouching(var1)) {
-      var2 = var4;
+  foreach(var_4 in level.spewing_barrels) {
+    if(isDefined(var_4) && var_4 istouching(var_1)) {
+      var_2 = var_4;
     }
   }
 
-  if(isDefined(var0)) {
-    wait var0;
+  if(isDefined(var_0)) {
+    wait var_0;
   }
 
-  var2 = sortbydistance(var2, level.player.origin);
-  var6 = 3;
-  var7 = int(min(var6, var2.size));
+  var_2 = sortbydistance(var_2, level.player.origin);
+  var_6 = 3;
+  var_7 = int(min(var_6, var_2.size));
 
-  for(var8 = 0; var8 < var7; var8++) {
-    var2[var8] thread scripts\sp\maps\tunnels\zd30tunnels_utility::detonate_spewing_barrel();
+  for(var_8 = 0; var_8 < var_7; var_8++) {
+    var_2[var_8] thread scripts\sp\maps\tunnels\zd30tunnels_utility::detonate_spewing_barrel();
     wait randomfloatrange(0.15, 0.3);
   }
 }
 
-function debug_tag_accessory(var0) {
+function debug_tag_accessory(var_0) {
   level endon("wolf_vest_defused_and_player_unlinked");
 
   while(scripts\sp\maps\tunnels\zd30tunnels_utility::zd30_debug()) {
-    var1 = level.farah gettagangles(var0);
-    var2 = level.farah gettagorigin(var0);
-    scripts\engine\utility::draw_angles(var1, var2, (1, 1, 1), 1, 1);
-    level.farah_tag_acc_org = var2;
-    level.farah_tag_acc_ang = var1;
+    var_1 = level.farah gettagangles(var_0);
+    var_2 = level.farah gettagorigin(var_0);
+    scripts\engine\utility::draw_angles(var_1, var_2, (1, 1, 1), 1, 1);
+    level.farah_tag_acc_org = var_2;
+    level.farah_tag_acc_ang = var_1;
     wait 0.05;
   }
 }
 
-function crosshair_overlay_dot(var0) {
-  if(var0) {
-    var1 = newhudelem();
-    var1.alignx = "center";
-    var1.aligny = "middle";
-    var1.foreground = 1;
-    var1.hidewheninmenu = 1;
-    var1.sort = 1;
-    var1.alpha = 1;
-    var1.x = 322;
-    var1.y = 237;
-    var1 setshader("reticle_center_dot", 32, 32);
-    level.player.crosshair_overlay = var1;
+function crosshair_overlay_dot(var_0) {
+  if(var_0) {
+    var_1 = newhudelem();
+    var_1.alignx = "center";
+    var_1.aligny = "middle";
+    var_1.foreground = 1;
+    var_1.hidewheninmenu = 1;
+    var_1.sort = 1;
+    var_1.alpha = 1;
+    var_1.x = 322;
+    var_1.y = 237;
+    var_1 setshader("reticle_center_dot", 32, 32);
+    level.player.crosshair_overlay = var_1;
     return;
   }
 
@@ -895,28 +895,28 @@ function vest_timer_countdown() {
   thread beeper_loop();
   self waittill("timer_start");
   thread start_phone_countdown();
-  var0 = 0.1;
-  var1 = 26.2;
-  var2 = int(var0 * 20);
+  var_0 = 0.1;
+  var_1 = 26.2;
+  var_2 = int(var_0 * 20);
 
   for(;;) {
-    var1 -= var0;
+    var_1 -= var_0;
 
-    if(var1 < 0) {
-      var1 = 0;
+    if(var_1 < 0) {
+      var_1 = 0;
     }
 
-    var3 = (1, 1, 0);
+    var_3 = (1, 1, 0);
 
-    if(var1 < 23.2) {
-      var3 = (1, 0.5, 0);
+    if(var_1 < 23.2) {
+      var_3 = (1, 0.5, 0);
     }
 
-    if(var1 < 20.2) {
-      var3 = (1, 0, 0);
+    if(var_1 < 20.2) {
+      var_3 = (1, 0, 0);
     }
 
-    wait var0;
+    wait var_0;
 
     if(istrue(level.wolf_vest.defused)) {
       return;
@@ -934,11 +934,11 @@ function beeper_loop() {
   self endon("entitydeleted");
   self endon("death");
   scripts\engine\utility::flag_wait("wolfdoor_open");
-  var0 = 1.19048;
+  var_0 = 1.19048;
 
   for(;;) {
     self playSound("bomb_beep");
-    wait var0;
+    wait var_0;
 
     if(istrue(self.defused) || istrue(self.defuse_failed)) {
       return;
@@ -946,28 +946,28 @@ function beeper_loop() {
   }
 }
 
-function setup_wire(var0, var1, var2) {
-  var3 = getEnt(var0, "targetname");
-  var3.wire_type = var2;
-  var3.color_index = var1;
-  var3.interacts = getEntArray(var3.target, "targetname");
-  var3.cut = getEnt(var0 + "_cut", "targetname");
-  var3.cut linkTo(self);
-  var3.cut hide();
-  var3.cut_alt = getEnt(var0 + "_cut_alt", "targetname");
+function setup_wire(var_0, var_1, var_2) {
+  var_3 = getEnt(var_0, "targetname");
+  var_3.wire_type = var_2;
+  var_3.color_index = var_1;
+  var_3.interacts = getEntArray(var_3.target, "targetname");
+  var_3.cut = getEnt(var_0 + "_cut", "targetname");
+  var_3.cut linkTo(self);
+  var_3.cut hide();
+  var_3.cut_alt = getEnt(var_0 + "_cut_alt", "targetname");
 
-  if(isDefined(var3.cut_alt)) {
-    var3.cut_alt linkTo(self);
-    var3.cut_alt hide();
+  if(isDefined(var_3.cut_alt)) {
+    var_3.cut_alt linkTo(self);
+    var_3.cut_alt hide();
   }
 
-  foreach(var5 in var3.interacts) {
-    var5 linkTo(var3);
+  foreach(var_5 in var_3.interacts) {
+    var_5 linkTo(var_3);
   }
 
-  var3 linkTo(self);
+  var_3 linkTo(self);
   thread wire_cut_button_press_watch();
-  return var3;
+  return var_3;
 }
 
 function wire_cut_button_press_watch() {
@@ -977,7 +977,7 @@ function wire_cut_button_press_watch() {
 
   for(;;) {
     level.player waittill("wire_cut_button_press");
-    var0 = get_closest_look_at_interact();
+    var_0 = get_closest_look_at_interact();
 
     if(!isDefined(level.looking_at_wire) || level.looking_at_wire != self) {
       waitframe();
@@ -986,7 +986,7 @@ function wire_cut_button_press_watch() {
 
     level.player notify("wire_cut", gettime(), self);
 
-    if(var0.script_noteworthy == "cursor_alt") {
+    if(var_0.script_noteworthy == "cursor_alt") {
       self.cut_alt show();
     } else {
       self.cut show();
@@ -1008,9 +1008,9 @@ function wire_look_at_think() {
   thread wire_look_at_hint();
 
   while(!istrue(level.wolf_vest.defused)) {
-    var0 = get_closest_look_at_interact();
-    var1 = get_wire_from_interact(var0);
-    wire_outline_active_and_waittill_not(var1, var0);
+    var_0 = get_closest_look_at_interact();
+    var_1 = get_wire_from_interact(var_0);
+    wire_outline_active_and_waittill_not(var_1, var_0);
     wait 0.05;
   }
 }
@@ -1033,134 +1033,134 @@ function wolf_bomb_vest_defuse_looked_at_any_wire() {
   return scripts\engine\utility::flag("wolfdeath_defuse_looked_at_green_wire");
 }
 
-function wire_outline_active_and_waittill_not(var0, var1) {
-  var2 = "outline_depth_red";
+function wire_outline_active_and_waittill_not(var_0, var_1) {
+  var_2 = "outline_depth_red";
 
-  switch (var0.color_index) {
+  switch (var_0.color_index) {
     case 2:
       scripts\engine\utility::flag_set("wolfdeath_defuse_looked_at_green_wire");
-      var2 = "outline_depth_green";
+      var_2 = "outline_depth_green";
       break;
     case 1:
-      var2 = "outline_depth_red";
+      var_2 = "outline_depth_red";
       break;
     case 4:
-      var2 = "outline_depth_yellow";
+      var_2 = "outline_depth_yellow";
       break;
     case 0:
-      var2 = "outline_depth_cyan";
+      var_2 = "outline_depth_cyan";
       break;
   }
 
-  var0 thread scripts\engine\sp\utility::hudoutline_enable_new(var2);
-  level.looking_at_wire = var0;
-  var3 = get_wire_cut_hint(var0.wire_type);
-  var1 scripts\sp\player\cursor_hint::create_cursor_hint_forced("tag_origin", (0, 0, 0), var3, 60, 60, 60, 0, undefined, undefined, undefined, "duration_none", undefined, undefined, 10);
+  var_0 thread scripts\engine\sp\utility::hudoutline_enable_new(var_2);
+  level.looking_at_wire = var_0;
+  var_3 = get_wire_cut_hint(var_0.wire_type);
+  var_1 scripts\sp\player\cursor_hint::create_cursor_hint_forced("tag_origin", (0, 0, 0), var_3, 60, 60, 60, 0, undefined, undefined, undefined, "duration_none", undefined, undefined, 10);
 
-  while(is_player_looking_at_interact(var1) && !istrue(var0.is_cut) && !istrue(level.wolf_vest.defused)) {
+  while(is_player_looking_at_interact(var_1) && !istrue(var_0.is_cut) && !istrue(level.wolf_vest.defused)) {
     wait 0.05;
   }
 
-  var1 scripts\sp\player\cursor_hint::remove_cursor_hint();
-  var0 thread scripts\engine\sp\utility::hudoutline_disable();
+  var_1 scripts\sp\player\cursor_hint::remove_cursor_hint();
+  var_0 thread scripts\engine\sp\utility::hudoutline_disable();
   level.looking_at_wire = undefined;
 }
 
-function is_player_looking_at_interact(var0) {
-  var1 = get_closest_look_at_interact();
+function is_player_looking_at_interact(var_0) {
+  var_1 = get_closest_look_at_interact();
 
-  if(!isDefined(var1) || var0 != var1) {
+  if(!isDefined(var_1) || var_0 != var_1) {
     return false;
   }
 
   return true;
 }
 
-function get_wire_from_interact(var0) {
-  var1 = undefined;
+function get_wire_from_interact(var_0) {
+  var_1 = undefined;
 
-  foreach(var3 in level.wolf_vest.wires) {
-    if(scripts\engine\utility::array_contains(var3.interacts, var0)) {
-      var1 = var3;
+  foreach(var_3 in level.wolf_vest.wires) {
+    if(scripts\engine\utility::array_contains(var_3.interacts, var_0)) {
+      var_1 = var_3;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
 function get_closest_look_at_interact() {
-  var0 = getEntArray("cursor", "script_noteworthy");
-  var1 = getEntArray("cursor_alt", "script_noteworthy");
-  var2 = scripts\engine\utility::array_combine(var0, var1);
-  var3 = vectorNormalize(anglesToForward(level.player getplayerangles()));
-  var4 = var2[0];
+  var_0 = getEntArray("cursor", "script_noteworthy");
+  var_1 = getEntArray("cursor_alt", "script_noteworthy");
+  var_2 = scripts\engine\utility::array_combine(var_0, var_1);
+  var_3 = vectorNormalize(anglesToForward(level.player getplayerangles()));
+  var_4 = var_2[0];
 
-  foreach(var6 in var2) {
-    if(var4 == var6) {
+  foreach(var_6 in var_2) {
+    if(var_4 == var_6) {
       continue;
     }
 
-    var7 = vectorNormalize(var6.origin - level.player getEye());
-    var8 = vectorNormalize(var4.origin - level.player getEye());
-    var9 = vectordot(var3, var7);
-    var10 = vectordot(var3, var8);
+    var_7 = vectorNormalize(var_6.origin - level.player getEye());
+    var_8 = vectorNormalize(var_4.origin - level.player getEye());
+    var_9 = vectordot(var_3, var_7);
+    var_10 = vectordot(var_3, var_8);
 
-    if(var9 > var10) {
-      var4 = var6;
+    if(var_9 > var_10) {
+      var_4 = var_6;
     }
   }
 
-  return var4;
+  return var_4;
 }
 
-function get_wire_cut_hint(var0) {
-  if(var0 == "red") {
+function get_wire_cut_hint(var_0) {
+  if(var_0 == "red") {
     return &"ZD30/DEFUSE_RED";
   }
 
-  if(var0 == "green") {
+  if(var_0 == "green") {
     return &"ZD30/DEFUSE_GREEN";
   }
 
-  if(var0 == "yellow") {
+  if(var_0 == "yellow") {
     return &"ZD30/DEFUSE_YELLOW";
   }
 
-  if(var0 == "blue") {
+  if(var_0 == "blue") {
     return &"ZD30/DEFUSE_BLUE";
   }
 
   return "";
 }
 
-function wolf_vest_led_flash_think(var0) {
+function wolf_vest_led_flash_think(var_0) {
   self endon("entitydeleted");
   self endon("death");
-  var1 = 1.5;
-  var2 = "on";
+  var_1 = 1.5;
+  var_2 = "on";
 
-  while(!istrue(var0.defuse_failed)) {
-    self setscriptablepartstate("onoff", var2);
+  while(!istrue(var_0.defuse_failed)) {
+    self setscriptablepartstate("onoff", var_2);
 
-    if(var2 == "on") {
-      var2 = "off";
+    if(var_2 == "on") {
+      var_2 = "off";
     } else {
-      var2 = "on";
+      var_2 = "on";
     }
 
-    if(istrue(var0.defused)) {
+    if(istrue(var_0.defused)) {
       self setscriptablepartstate("onoff", "on");
       return;
     }
 
-    var3 = var1 / (level.defuse_count + 1);
+    var_3 = var_1 / (level.defuse_count + 1);
 
-    while(var3 > 0) {
-      if(istrue(var0.defuse_failed)) {
+    while(var_3 > 0) {
+      if(istrue(var_0.defuse_failed)) {
         break;
       }
 
-      var3 -= 0.05;
+      var_3 -= 0.05;
       wait 0.05;
     }
   }

@@ -32,27 +32,27 @@ function main() {
   scripts\cp\maps\cp_landlord\cp_landlord_checkpoints::ref_131ed();
   scripts\mp\brclientmatchdata::getquestrewardgroupindex();
   scripts\mp\brclientmatchdata::getpresettruckspawns("tmtyl_p1", &scripts\cp\maps\cp_landlord\cp_landlord_checkpoints::getplatformrankxpmultiplier);
-  var0 = getDvar("restart_checkpoint", "");
+  var_0 = getDvar("restart_checkpoint", "");
 
-  if(isDefined(var0) && var0 != "") {
-    scripts\mp\brclientmatchdata::getnextprop(var0);
-    scripts\mp\brclientmatchdata::getnextrpgspawnmodule(var0);
-    level thread[[level.ref_12b19[var0]]]();
+  if(isDefined(var_0) && var_0 != "") {
+    scripts\mp\brclientmatchdata::getnextprop(var_0);
+    scripts\mp\brclientmatchdata::getnextrpgspawnmodule(var_0);
+    level thread[[level.ref_12b19[var_0]]]();
   } else {
     if(ref_132d6()) {
       scripts\cp\gametypes\cp_survival::mortars_get_enemies();
-      var1 = getDvar("cp_landlord_start_obj", "player_infil_landlord");
+      var_1 = getDvar("cp_landlord_start_obj", "player_infil_landlord");
     } else {
-      var1 = getDvar("cp_landlord_start_obj", "safehouse_landlord");
+      var_1 = getDvar("cp_landlord_start_obj", "safehouse_landlord");
     }
 
-    if(var1 == "") {
-      var1 = "safehouse_landlord";
+    if(var_1 == "") {
+      var_1 = "safehouse_landlord";
     }
 
-    setDvar("cp_landlord_start_obj", var1);
+    setDvar("cp_landlord_start_obj", var_1);
 
-    if(isDefined(var1)) {
+    if(isDefined(var_1)) {
       thread rundebugstartobjective(level);
     }
   }
@@ -75,8 +75,8 @@ function ref_132d6() {
 
 function increment_factor() {
   wait 5;
-  var0 = spawn("sound_transient_soundbanks", (0, 0, 0));
-  var0 settransientsoundbank("cp_op_landlord.all", 1);
+  var_0 = spawn("sound_transient_soundbanks", (0, 0, 0));
+  var_0 settransientsoundbank("cp_op_landlord.all", 1);
 }
 
 function create_level_funcs_tables_and_vars() {
@@ -136,16 +136,16 @@ function init_level_systems() {
 
 function spawn_technicals_for_players() {
   wait 10;
-  var0 = spawnStruct();
-  var0.origin = (29647.5, -9049.5, -424);
-  var0.angles = (0, 120, 0);
-  var0.team = "allies";
-  scripts\cp_mp\vehicles\technical::technical_create(var0);
-  var0 = spawnStruct();
-  var0.origin = (17811.5, -22229.5, -210.101);
-  var0.angles = (0, 135, 0);
-  var0.team = "allies";
-  scripts\cp_mp\vehicles\technical::technical_create(var0);
+  var_0 = spawnStruct();
+  var_0.origin = (29647.5, -9049.5, -424);
+  var_0.angles = (0, 120, 0);
+  var_0.team = "allies";
+  scripts\cp_mp\vehicles\technical::technical_create(var_0);
+  var_0 = spawnStruct();
+  var_0.origin = (17811.5, -22229.5, -210.101);
+  var_0.angles = (0, 135, 0);
+  var_0.team = "allies";
+  scripts\cp_mp\vehicles\technical::technical_create(var_0);
 }
 
 function heli_crash_path_loc_setup() {
@@ -153,35 +153,35 @@ function heli_crash_path_loc_setup() {
   level.vehicle.helicopter_crash_locations = scripts\engine\utility::array_combine(level.vehicle.helicopter_crash_locations, scripts\engine\utility::getstructarray_delete("helicopter_crash_location", "targetname"));
 }
 
-function rundebugstartobjective(var0) {
+function rundebugstartobjective(var_0) {
   wait 2;
   scripts\engine\utility::flag_wait("infil_complete");
   scripts\engine\utility::flag_wait("objective_table_parsed");
   scripts\engine\utility::flag_wait("objectives_registered");
   scripts\engine\utility::flag_wait("strike_init_done");
 
-  if(isDefined(level.objectivestabledata[var0])) {
-    var1 = level.objectivestabledata[var0];
+  if(isDefined(level.objectivestabledata[var_0])) {
+    var_1 = level.objectivestabledata[var_0];
 
-    if(isDefined(var1.csdependency)) {
-      if(!scripts\engine\utility::flag_exist(var1.csdependency)) {
-        scripts\engine\utility::flag_init(var1.csdependency);
+    if(isDefined(var_1.csdependency)) {
+      if(!scripts\engine\utility::flag_exist(var_1.csdependency)) {
+        scripts\engine\utility::flag_init(var_1.csdependency);
       }
 
-      scripts\engine\utility::flag_set(var1.csdependency);
+      scripts\engine\utility::flag_set(var_1.csdependency);
 
-      if(!scripts\engine\utility::flag_exist(var1.csdependency + "_completed")) {
-        scripts\engine\utility::flag_init(var1.csdependency + "_completed");
+      if(!scripts\engine\utility::flag_exist(var_1.csdependency + "_completed")) {
+        scripts\engine\utility::flag_init(var_1.csdependency + "_completed");
       }
 
-      scripts\engine\utility::flag_wait(var1.csdependency + "_completed");
+      scripts\engine\utility::flag_wait(var_1.csdependency + "_completed");
     }
 
-    if(isDefined(var1.ondebugstartfunc)) {
-      [[var1.ondebugstartfunc]](var1);
+    if(isDefined(var_1.ondebugstartfunc)) {
+      [[var_1.ondebugstartfunc]](var_1);
     }
 
-    thread scripts\cp\cp_objectives::run_objective(var1.objname, var1.questtype);
+    thread scripts\cp\cp_objectives::run_objective(var_1.objname, var_1.questtype);
     return;
   }
 }
@@ -208,14 +208,14 @@ function levelregisterobjectives() {
   }
 }
 
-function ref_124ba(var0) {
+function ref_124ba(var_0) {
   if(scripts\cp\gametypes\cp_survival::ref_124b9()) {
-    scripts\cp\cp_objectives::overridenextstep(var0, "safehouse_landlord");
+    scripts\cp\cp_objectives::overridenextstep(var_0, "safehouse_landlord");
     return;
   }
 
   thread ref_123f8();
-  scripts\cp\cp_objectives::overridenextstep(var0, "obj_tmtyl_0");
+  scripts\cp\cp_objectives::overridenextstep(var_0, "obj_tmtyl_0");
   level waittill("players_unloaded_from_infil");
 }
 
@@ -263,21 +263,21 @@ function setup_create_script() {
   }
 }
 
-function register_create_script_arrays(var0, var1, var2, var3) {
-  if(isDefined(var0)) {
-    level.scripted_spawner_func_strings[level.scripted_spawner_func_strings.size] = var0;
+function register_create_script_arrays(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_0)) {
+    level.scripted_spawner_func_strings[level.scripted_spawner_func_strings.size] = var_0;
   }
 
-  if(isDefined(var1)) {
-    level.scripted_spawner_map_strings[level.scripted_spawner_func_strings.size] = var1;
+  if(isDefined(var_1)) {
+    level.scripted_spawner_map_strings[level.scripted_spawner_func_strings.size] = var_1;
   }
 
-  if(isDefined(var2)) {
-    level.create_script_file_ids[var0] = "cs" + var2;
+  if(isDefined(var_2)) {
+    level.create_script_file_ids[var_0] = "cs" + var_2;
   }
 
-  if(isDefined(var3)) {
-    level.scripted_spawner_func[level.scripted_spawner_func.size] = var3;
+  if(isDefined(var_3)) {
+    level.scripted_spawner_func[level.scripted_spawner_func.size] = var_3;
     return;
   }
 }
@@ -292,24 +292,24 @@ function register_cs_inits() {
   scripts\cp\cp_create_script_utility::set_cs_file_dvar("map_downtown_patrol_path");
 }
 
-function onplayerspawneddevguisetup(var0) {
-  var1 = var0.name;
-  var2 = undefined;
+function onplayerspawneddevguisetup(var_0) {
+  var_1 = var_0.name;
+  var_2 = undefined;
 
-  foreach(var4 in level.players) {
-    if(var4 == var0) {
-      var2 = int(var5);
+  foreach(var_4 in level.players) {
+    if(var_4 == var_0) {
+      var_2 = int(var_5);
       break;
     }
   }
 
-  if(isDefined(var2)) {
-    thread setupdevguientries(var0, var0, var1);
+  if(isDefined(var_2)) {
+    thread setupdevguientries(var_0, var_0, var_1);
     return;
   }
 }
 
-function setupdevguientries(var0, var1, var2) {}
+function setupdevguientries(var_0, var_1, var_2) {}
 
 function wait_for_pre_game_period() {
   if(!isDefined(level.agent_funcs)) {
@@ -325,15 +325,15 @@ function registerscriptedagents() {
   scripts\mp\agents\juggernaut\juggernaut_agent::registerscriptedagent();
 }
 
-function onplayerconnect(var0) {
-  var0.gameskill = scripts\cp\cp_gameskill::get_gameskill();
-  var0 scripts\cp\cp_gameskill::set_difficulty_from_locked_settings();
+function onplayerconnect(var_0) {
+  var_0.gameskill = scripts\cp\cp_gameskill::get_gameskill();
+  var_0 scripts\cp\cp_gameskill::set_difficulty_from_locked_settings();
 
   if(getdvarint("force_spawn_veh", 0) != 0) {
-    var1 = [(20120, -24623, 1000), (19554, -24184, 1000), (18935, -23685, 1000), (18319, -22907, 1000), (13692, 15239, 1000), (14316, 16296, 1000)];
+    var_1 = [(20120, -24623, 1000), (19554, -24184, 1000), (18935, -23685, 1000), (18319, -22907, 1000), (13692, 15239, 1000), (14316, 16296, 1000)];
 
-    foreach(var3 in var1) {
-      scripts\cp\vehicles\little_bird_cp::spawn_little_bird_at_location(var3, (0, 0, 0), "allies");
+    foreach(var_3 in var_1) {
+      scripts\cp\vehicles\little_bird_cp::spawn_little_bird_at_location(var_3, (0, 0, 0), "allies");
     }
 
     return;
@@ -357,10 +357,10 @@ function register_spawn_modules() {
   scripts\cp\cp_modular_spawning::register_module_as_passive("cp_donetsk_heli_spawns");
 }
 
-function set_vehicle_settings_on_spawners(var0) {
-  var1 = scripts\cp\cp_modular_spawning::process_module_var(var0, var0.spawn_points);
+function set_vehicle_settings_on_spawners(var_0) {
+  var_1 = scripts\cp\cp_modular_spawning::process_module_var(var_0, var_0.spawn_points);
 
-  for(var2 = 0; var2 < var1.size; var2++) {
-    var1[var2] scripts\cp\cp_modular_spawning::initialize_as_veh_spawner();
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    var_1[var_2] scripts\cp\cp_modular_spawning::initialize_as_veh_spawner();
   }
 }

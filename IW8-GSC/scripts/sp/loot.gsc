@@ -40,9 +40,9 @@ function corpselootthink() {
 
   jumpiftrue(worldmaxspawnedloot()) LOC_00000015;
   onspawnloot();
-  self waittill("death", var0);
+  self waittill("death", var_0);
 
-  if(!shoulddroploot(var0)) {
+  if(!shoulddroploot(var_0)) {
     return;
   }
 
@@ -77,7 +77,7 @@ function cancarryloot() {
   return true;
 }
 
-function shoulddroploot(var0) {
+function shoulddroploot(var_0) {
   if(!isDefined(self)) {
     return false;
   }
@@ -102,7 +102,7 @@ function shoulddroploot(var0) {
     return false;
   }
 
-  if(!scripts\engine\utility::is_equal(var0, level.player)) {
+  if(!scripts\engine\utility::is_equal(var_0, level.player)) {
     return false;
   }
 
@@ -116,82 +116,82 @@ function shoulddroploot(var0) {
 function onspawnloot() {
   self.loot = [];
 
-  foreach(var2, var1 in level.loot.types) {
-    if(isDefined(level.loot.types[var2].onspawnfunc)) {
-      if([[level.loot.types[var2].probabilityfunc]](var2, self.origin)) {
-        self thread[[level.loot.types[var2].onspawnfunc]]();
-        self.loot[var2] = 1;
+  foreach(var_2, var_1 in level.loot.types) {
+    if(isDefined(level.loot.types[var_2].onspawnfunc)) {
+      if([[level.loot.types[var_2].probabilityfunc]](var_2, self.origin)) {
+        self thread[[level.loot.types[var_2].onspawnfunc]]();
+        self.loot[var_2] = 1;
       }
     }
   }
 }
 
-function registerloot(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10) {
-  precacheshader(var1);
-  precachemodel(var3);
-  level.loot.types[var0] = spawnStruct();
-  level.loot.types[var0].shader = var1;
-  level.loot.types[var0].loc = var2;
-  level.loot.types[var0].model = var3;
-  level.loot.types[var0].sound = var4;
-  level.loot.types[var0].createnotification = var5;
-  level.loot.types[var0].lootfunc = var6;
-  level.loot.types[var0].inactivefunc = var7;
-  level.loot.types[var0].probabilityfunc = var8;
-  level.loot.types[var0].onspawnfunc = var9;
-  level.loot.types[var0].weapon = var10;
+function registerloot(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+  precacheshader(var_1);
+  precachemodel(var_3);
+  level.loot.types[var_0] = spawnStruct();
+  level.loot.types[var_0].shader = var_1;
+  level.loot.types[var_0].loc = var_2;
+  level.loot.types[var_0].model = var_3;
+  level.loot.types[var_0].sound = var_4;
+  level.loot.types[var_0].createnotification = var_5;
+  level.loot.types[var_0].lootfunc = var_6;
+  level.loot.types[var_0].inactivefunc = var_7;
+  level.loot.types[var_0].probabilityfunc = var_8;
+  level.loot.types[var_0].onspawnfunc = var_9;
+  level.loot.types[var_0].weapon = var_10;
 }
 
-function deregisterloot(var0) {
-  level.loot.types[var0] = undefined;
-  level.loot.types = scripts\engine\utility::array_remove_key(level.loot.types, var0);
+function deregisterloot(var_0) {
+  level.loot.types[var_0] = undefined;
+  level.loot.types = scripts\engine\utility::array_remove_key(level.loot.types, var_0);
 }
 
-function registerammoloot(var0, var1, var2, var3, var4, var5) {
-  if(var5 == "rocket") {
-    var6 = &probabilityzero;
-  } else if(var6 == "40mmGrenade") {
-    var6 = &probabilityzero;
+function registerammoloot(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(var_5 == "rocket") {
+    var_6 = &probabilityzero;
+  } else if(var_6 == "40mmGrenade") {
+    var_6 = &probabilityzero;
   } else {
-    var6 = &probabilityzero;
+    var_6 = &probabilityzero;
   }
 
-  registerloot(var2, var3, var4, var5, var6, 1, &lootammo, &playermaxammo, var6);
+  registerloot(var_2, var_3, var_4, var_5, var_6, 1, &lootammo, &playermaxammo, var_6);
 }
 
-function registeroffhandloot(var0, var1, var2, var3, var4) {
-  registerloot(var0, var1, var2, var3, "loot_pickup_offhand", 1, &lootoffhand, &inactiveoffhand, &probabilityoffhand, undefined, var4);
+function registeroffhandloot(var_0, var_1, var_2, var_3, var_4) {
+  registerloot(var_0, var_1, var_2, var_3, "loot_pickup_offhand", 1, &lootoffhand, &inactiveoffhand, &probabilityoffhand, undefined, var_4);
 }
 
-function removeoffhandloot(var0) {
-  if(isstring(var0)) {
-    var1 = var0;
+function removeoffhandloot(var_0) {
+  if(isstring(var_0)) {
+    var_1 = var_0;
   } else {
-    var1 = var1.basename;
+    var_1 = var_1.basename;
   }
 
-  var2 = scripts\sp\equipment\offhands::getweaponoffhandtype(var1);
+  var_2 = scripts\sp\equipment\offhands::getweaponoffhandtype(var_1);
 
-  if(isDefined(level.loot.offhands[var2])) {
-    level.loot.offhands = scripts\engine\utility::array_remove_key(level.loot.offhands, var2);
+  if(isDefined(level.loot.offhands[var_2])) {
+    level.loot.offhands = scripts\engine\utility::array_remove_key(level.loot.offhands, var_2);
     return;
   }
 }
 
-function setoffhandloot(var0) {
-  if(isstring(var0)) {
-    var1 = var0;
+function setoffhandloot(var_0) {
+  if(isstring(var_0)) {
+    var_1 = var_0;
   } else {
-    var1 = var1.basename;
+    var_1 = var_1.basename;
   }
 
-  var2 = scripts\sp\equipment\offhands::getweaponoffhandtype(var1);
+  var_2 = scripts\sp\equipment\offhands::getweaponoffhandtype(var_1);
 
-  if(isDefined(level.loot.offhands[var2])) {
-    level.loot.offhands = scripts\engine\utility::array_remove_key(level.loot.offhands, var2);
+  if(isDefined(level.loot.offhands[var_2])) {
+    level.loot.offhands = scripts\engine\utility::array_remove_key(level.loot.offhands, var_2);
   }
 
-  level.loot.offhands[var2] = var1;
+  level.loot.offhands[var_2] = var_1;
 }
 
 function updatearmordroptimer() {
@@ -209,8 +209,8 @@ function updatearmordroptimer() {
 }
 
 function enemynearplayer() {
-  foreach(var1 in getaiarray("axis")) {
-    if(distancesquared(self.origin, var1.origin) <= 1048576) {
+  foreach(var_1 in getaiarray("axis")) {
+    if(distancesquared(self.origin, var_1.origin) <= 1048576) {
       return true;
     }
   }
@@ -231,62 +231,62 @@ function worldmaxspawnedloot() {
 }
 
 function trylootdropdespawn() {
-  var0 = level.loot.items;
-  var1 = sortbydistance(var0, level.player.origin)[var0.size - 1];
+  var_0 = level.loot.items;
+  var_1 = sortbydistance(var_0, level.player.origin)[var_0.size - 1];
 
   for(;;) {
-    if(!var0.size) {
+    if(!var_0.size) {
       return false;
     }
 
-    var1 = sortbydistance(var0, level.player.origin)[var0.size - 1];
+    var_1 = sortbydistance(var_0, level.player.origin)[var_0.size - 1];
 
-    if(!isDefined(var1)) {
+    if(!isDefined(var_1)) {
       return false;
     }
 
-    if(!itemworldplaced(var1)) {
+    if(!itemworldplaced(var_1)) {
       break;
     }
 
-    var0 = scripts\engine\utility::array_remove(var0, var1);
+    var_0 = scripts\engine\utility::array_remove(var_0, var_1);
   }
 
-  if(!itemworldplaced(var1) && distancesquared(var1.origin, level.player.origin) > distancesquared(self.origin, level.player.origin)) {
-    cleanuplootitem(var1);
+  if(!itemworldplaced(var_1) && distancesquared(var_1.origin, level.player.origin) > distancesquared(self.origin, level.player.origin)) {
+    cleanuplootitem(var_1);
     return true;
   }
 
   return false;
 }
 
-function trylootdespawn(var0) {
-  var1 = undefined;
-  var2 = -1;
+function trylootdespawn(var_0) {
+  var_1 = undefined;
+  var_2 = -1;
 
-  foreach(var4 in level.loot.items) {
-    if(!scripts\engine\utility::is_equal(var4.name, var0)) {
+  foreach(var_4 in level.loot.items) {
+    if(!scripts\engine\utility::is_equal(var_4.name, var_0)) {
       continue;
     }
 
-    if(itemworldplaced(var4)) {
+    if(itemworldplaced(var_4)) {
       continue;
     }
 
-    var5 = distancesquared(var4.origin, level.player.origin);
+    var_5 = distancesquared(var_4.origin, level.player.origin);
 
-    if(level.player scripts\engine\math::point_in_fov(var4.origin) && var5 < 2250000) {
+    if(level.player scripts\engine\math::point_in_fov(var_4.origin) && var_5 < 2250000) {
       continue;
     }
 
-    if(!isDefined(var1) || var5 > var2) {
-      var1 = var4;
-      var2 = var5;
+    if(!isDefined(var_1) || var_5 > var_2) {
+      var_1 = var_4;
+      var_2 = var_5;
     }
   }
 
-  if(isDefined(var1) && distancesquared(self.origin, level.player.origin) < var2) {
-    cleanuplootitem(var1);
+  if(isDefined(var_1) && distancesquared(self.origin, level.player.origin) < var_2) {
+    cleanuplootitem(var_1);
     return true;
   }
 
@@ -302,60 +302,60 @@ function spawncorpseloot() {
     self.loot = [];
   }
 
-  var0 = self.loot.size;
+  var_0 = self.loot.size;
 
-  foreach(var7, var2 in level.loot.types) {
-    if(var0 >= 2) {
+  foreach(var_7, var_2 in level.loot.types) {
+    if(var_0 >= 2) {
       break;
     }
 
-    var3 = isDefined(level.loot.types[var7].onspawnfunc);
-    var4 = istrue(self.loot[var7]);
-    var5 = [[level.loot.types[var7].probabilityfunc]](var7, self.origin);
+    var_3 = isDefined(level.loot.types[var_7].onspawnfunc);
+    var_4 = istrue(self.loot[var_7]);
+    var_5 = [[level.loot.types[var_7].probabilityfunc]](var_7, self.origin);
 
-    if(!var3 && !var4 && var5) {
-      var6 = level.loot.spawntags[randomint(level.loot.spawntags.size)];
-      spawnlootitem(var7, self gettagorigin(var6), undefined, 685, 0);
-      var0++;
+    if(!var_3 && !var_4 && var_5) {
+      var_6 = level.loot.spawntags[randomint(level.loot.spawntags.size)];
+      spawnlootitem(var_7, self gettagorigin(var_6), undefined, 685, 0);
+      var_0++;
     }
   }
 }
 
-function spawnlootitem(var0, var1, var2, var3, var4) {
-  if(tolower(var0) == "ballistic vest" && !scripts\common\utility::playerarmorenabled()) {
+function spawnlootitem(var_0, var_1, var_2, var_3, var_4) {
+  if(tolower(var_0) == "ballistic vest" && !scripts\common\utility::playerarmorenabled()) {
     return;
   }
 
-  if(!isDefined(var2)) {
-    var2 = scripts\engine\utility::randomvectorrange(0, 360);
+  if(!isDefined(var_2)) {
+    var_2 = scripts\engine\utility::randomvectorrange(0, 360);
   }
 
-  var5 = scripts\sp\script_items::scriptitem_buildspawnflags(0, 1, 1, 0, 1);
-  var6 = level.loot.types[var0].model;
-  var7 = (randomfloat(0.5), randomfloat(0.5), 1) * var3;
-  var8 = spawnscriptitem("script_item_" + var0, var1, var2, var5, var6, "", var7, var1);
+  var_5 = scripts\sp\script_items::scriptitem_buildspawnflags(0, 1, 1, 0, 1);
+  var_6 = level.loot.types[var_0].model;
+  var_7 = (randomfloat(0.5), randomfloat(0.5), 1) * var_3;
+  var_8 = spawnscriptitem("script_item_" + var_0, var_1, var_2, var_5, var_6, "", var_7, var_1);
 
-  if(isDefined(var8)) {
-    setitemasloot(var8, var0, var4);
-    return var8;
+  if(isDefined(var_8)) {
+    setitemasloot(var_8, var_0, var_4);
+    return var_8;
   }
 }
 
-function setitemasloot(var0, var1, var2) {
-  var0.name = var1;
-  var0.worldplaced = var2;
+function setitemasloot(var_0, var_1, var_2) {
+  var_0.name = var_1;
+  var_0.worldplaced = var_2;
   thread cleanuplootitemondelete();
-  thread checkforlootitemtrigger(var0);
-  level.loot.items = scripts\engine\utility::array_add(level.loot.items, var0);
+  thread checkforlootitemtrigger(var_0);
+  level.loot.items = scripts\engine\utility::array_add(level.loot.items, var_0);
 
-  if(!isDefined(var2) || !var2) {
-    level.loot.spawned = scripts\engine\utility::array_add(level.loot.spawned, var0);
+  if(!isDefined(var_2) || !var_2) {
+    level.loot.spawned = scripts\engine\utility::array_add(level.loot.spawned, var_0);
     return;
   }
 }
 
-function itemworldplaced(var0) {
-  return var0.worldplaced;
+function itemworldplaced(var_0) {
+  return var_0.worldplaced;
 }
 
 function cleanuplootitemondelete() {
@@ -376,144 +376,144 @@ function safedelete() {
   }
 }
 
-function checkforlootitemtrigger(var0) {
+function checkforlootitemtrigger(var_0) {
   self endon("death");
 
   for(;;) {
-    self waittill("trigger", var1);
+    self waittill("trigger", var_1);
 
-    if(var1 != level.player) {
+    if(var_1 != level.player) {
       continue;
     }
 
     waittillplayercanloot();
     waittillnextloottime();
 
-    if([[level.loot.types[var0].inactivefunc]](var0)) {
+    if([[level.loot.types[var_0].inactivefunc]](var_0)) {
       continue;
     }
 
-    lootfuncandnotification(var0);
+    lootfuncandnotification(var_0);
     self delete();
   }
 }
 
-function lootfuncandnotification(var0) {
-  level.player thread[[level.loot.types[var0].lootfunc]](var0);
+function lootfuncandnotification(var_0) {
+  level.player thread[[level.loot.types[var_0].lootfunc]](var_0);
   level.player notify("item_loot");
-  playlootsound(var0);
+  playlootsound(var_0);
 
-  if(level.loot.types[var0].createnotification && !scripts\engine\sp\utility::in_realism_mode()) {
-    thread createnotification(level.loot.types[var0].shader, level.loot.types[var0].loc);
+  if(level.loot.types[var_0].createnotification && !scripts\engine\sp\utility::in_realism_mode()) {
+    thread createnotification(level.loot.types[var_0].shader, level.loot.types[var_0].loc);
     return;
   }
 }
 
-function lootnearbyitems(var0, var1, var2) {
-  foreach(var4 in level.loot.items) {
-    if(scripts\engine\utility::is_equal(var1, var4)) {
+function lootnearbyitems(var_0, var_1, var_2) {
+  foreach(var_4 in level.loot.items) {
+    if(scripts\engine\utility::is_equal(var_1, var_4)) {
       continue;
     }
 
-    if(!scripts\engine\utility::is_equal(var2, var4.name)) {
+    if(!scripts\engine\utility::is_equal(var_2, var_4.name)) {
       continue;
     }
 
-    if(distancesquared(var0, var4.origin) <= 16384) {
-      level.player thread[[level.loot.types[var4.name].lootfunc]](var4.name);
-      var4 delete();
+    if(distancesquared(var_0, var_4.origin) <= 16384) {
+      level.player thread[[level.loot.types[var_4.name].lootfunc]](var_4.name);
+      var_4 delete();
     }
   }
 }
 
-function playermaxarmor(var0) {
+function playermaxarmor(var_0) {
   return level.player scripts\sp\player::hasmaxarmorvests();
 }
 
-function playermaxammo(var0) {
-  return level.player scripts\sp\player::getammonameamount(var0) >= level.player scripts\sp\player::getammonamemaxamount(var0);
+function playermaxammo(var_0) {
+  return level.player scripts\sp\player::getammonameamount(var_0) >= level.player scripts\sp\player::getammonamemaxamount(var_0);
 }
 
-function inactiveoffhand(var0) {
-  var1 = getoffhandweaponname(var0);
+function inactiveoffhand(var_0) {
+  var_1 = getoffhandweaponname(var_0);
 
-  if(isDefined(var1)) {}
+  if(isDefined(var_1)) {}
 
-  if(!scripts\engine\sp\utility::player_has_equipment(var1)) {
-    var2 = scripts\sp\equipment\offhands::getweaponoffhandtype(var1);
+  if(!scripts\engine\sp\utility::player_has_equipment(var_1)) {
+    var_2 = scripts\sp\equipment\offhands::getweaponoffhandtype(var_1);
 
-    if(!player_offhand_empty(var2)) {
+    if(!player_offhand_empty(var_2)) {
       return true;
     }
   }
 
-  return level.player getweaponammostock(var1) == weaponmaxammo(var1);
+  return level.player getweaponammostock(var_1) == weaponmaxammo(var_1);
 }
 
-function inactive(var0) {
+function inactive(var_0) {
   return false;
 }
 
-function player_offhand_empty(var0) {
-  var1 = level.player getcurrentoffhand(var0);
+function player_offhand_empty(var_0) {
+  var_1 = level.player getcurrentoffhand(var_0);
 
-  if(!isDefined(var1) || var1.basename == "none") {
+  if(!isDefined(var_1) || var_1.basename == "none") {
     return 1;
   }
 
   return 0;
 }
 
-function getoffhandprobabilityfromname(var0) {
+function getoffhandprobabilityfromname(var_0) {
   return 40;
 }
 
-function getoffhandweaponname(var0) {
-  return level.loot.types[var0].weapon;
+function getoffhandweaponname(var_0) {
+  return level.loot.types[var_0].weapon;
 }
 
-function lootammo(var0) {
-  var1 = scripts\sp\player::getammonameamount(var0);
-  var2 = scripts\sp\player::getammonamemaxamount(var0);
-  var3 = getammolootamount(var1, var2);
-  var4 = int(min(var2, var1 + var3));
+function lootammo(var_0) {
+  var_1 = scripts\sp\player::getammonameamount(var_0);
+  var_2 = scripts\sp\player::getammonamemaxamount(var_0);
+  var_3 = getammolootamount(var_1, var_2);
+  var_4 = int(min(var_2, var_1 + var_3));
 
-  if(var4 != var1) {
-    level.player scripts\sp\player::setammonameamount(var0, var4);
+  if(var_4 != var_1) {
+    level.player scripts\sp\player::setammonameamount(var_0, var_4);
     return;
   }
 }
 
-function getammolootamount(var0, var1) {
-  var2 = scripts\engine\math::normalize_value(0, var1, var0);
-  var3 = scripts\engine\math::factor_value(0.5, 0.1, var2);
-  return max(1, int(var3 * var1));
+function getammolootamount(var_0, var_1) {
+  var_2 = scripts\engine\math::normalize_value(0, var_1, var_0);
+  var_3 = scripts\engine\math::factor_value(0.5, 0.1, var_2);
+  return max(1, int(var_3 * var_1));
 }
 
-function lootarmor(var0) {
-  var1 = level.player scripts\sp\player::getarmorvestamount();
-  level.player scripts\sp\player::set_armor_vest_amount(var1 + 1);
+function lootarmor(var_0) {
+  var_1 = level.player scripts\sp\player::getarmorvestamount();
+  level.player scripts\sp\player::set_armor_vest_amount(var_1 + 1);
 }
 
-function lootoffhand(var0) {
-  var1 = getoffhandweaponname(var0);
+function lootoffhand(var_0) {
+  var_1 = getoffhandweaponname(var_0);
 
-  if(isDefined(var1)) {}
+  if(isDefined(var_1)) {}
 
-  if(scripts\engine\sp\utility::player_has_equipment(var1, 1)) {
-    var2 = level.player getweaponammostock(var1);
-    var3 = weaponmaxammo(var1);
-    var4 = int(min(var2 + 1, var3));
-    level.player setweaponammoclip(var1, var4);
+  if(scripts\engine\sp\utility::player_has_equipment(var_1, 1)) {
+    var_2 = level.player getweaponammostock(var_1);
+    var_3 = weaponmaxammo(var_1);
+    var_4 = int(min(var_2 + 1, var_3));
+    level.player setweaponammoclip(var_1, var_4);
     return;
   }
 
-  level.player scripts\engine\sp\utility::give_offhand(var1, 1);
+  level.player scripts\engine\sp\utility::give_offhand(var_1, 1);
 }
 
-function donothing(var0) {}
+function donothing(var_0) {}
 
-function probabilityarmor(var0, var1) {
+function probabilityarmor(var_0, var_1) {
   if(istrue(self.noarmor)) {
     return false;
   }
@@ -526,93 +526,93 @@ function probabilityarmor(var0, var1) {
 }
 
 function armorinventoryratio() {
-  var0 = 1 - level.player scripts\sp\player::getarmorvestamount() / level.player scripts\sp\player::getarmorvestmaxamount();
-  return 0.15 * var0;
+  var_0 = 1 - level.player scripts\sp\player::getarmorvestamount() / level.player scripts\sp\player::getarmorvestmaxamount();
+  return 0.15 * var_0;
 }
 
 function armorhealthratio() {
-  var0 = 1 - level.player scripts\sp\player::getarmoramount() / level.player scripts\sp\player::getarmormaxamount();
-  return 0.1 * var0;
+  var_0 = 1 - level.player scripts\sp\player::getarmoramount() / level.player scripts\sp\player::getarmormaxamount();
+  return 0.1 * var_0;
 }
 
-function armordistanceratio(var0) {
-  var1 = 4.44444e-07;
-  var2 = var1 * var0;
-  return 0.75 * var2;
+function armordistanceratio(var_0) {
+  var_1 = 4.44444e-07;
+  var_2 = var_1 * var_0;
+  return 0.75 * var_2;
 }
 
 function armormaxprobability() {
-  var0 = min(level.loot.armordroptimer / 120, 1);
-  var1 = 82 * var0;
-  return 3 + var1;
+  var_0 = min(level.loot.armordroptimer / 120, 1);
+  var_1 = 82 * var_0;
+  return 3 + var_1;
 }
 
-function probabilityzero(var0, var1) {
+function probabilityzero(var_0, var_1) {
   return false;
 }
 
 function get_stowed_primary_weapon() {
-  foreach(var1 in self.primaryinventory) {
-    if(!isnullweapon(var1, self.currentprimaryweapon, 1)) {
-      return var1;
+  foreach(var_1 in self.primaryinventory) {
+    if(!isnullweapon(var_1, self.currentprimaryweapon, 1)) {
+      return var_1;
     }
   }
 
   return isundefinedweapon();
 }
 
-function probabilityoffhand(var0, var1) {
-  var2 = getoffhandweaponname(var0);
+function probabilityoffhand(var_0, var_1) {
+  var_2 = getoffhandweaponname(var_0);
 
-  if(isDefined(var2)) {}
+  if(isDefined(var_2)) {}
 
-  if(!scripts\engine\utility::array_contains(level.loot.offhands, var2)) {
+  if(!scripts\engine\utility::array_contains(level.loot.offhands, var_2)) {
     return 0;
   }
 
-  var3 = distancesquared(var1, level.player.origin);
+  var_3 = distancesquared(var_1, level.player.origin);
 
-  if(var3 > 2250000) {
+  if(var_3 > 2250000) {
     return 0;
   }
 
-  var4 = getoffhandprobabilityfromname(var0);
+  var_4 = getoffhandprobabilityfromname(var_0);
 
-  if(isDefined(var4)) {}
+  if(isDefined(var_4)) {}
 
-  var5 = 0;
+  var_5 = 0;
 
-  if(scripts\engine\sp\utility::player_has_equipment(var2)) {
-    var5 = level.player getweaponammostock(var2);
+  if(scripts\engine\sp\utility::player_has_equipment(var_2)) {
+    var_5 = level.player getweaponammostock(var_2);
   }
 
-  var6 = weaponmaxammo(var2);
+  var_6 = weaponmaxammo(var_2);
 
-  if(var5 >= var6) {
-    var7 = 0;
+  if(var_5 >= var_6) {
+    var_7 = 0;
   } else {
-    var7 = var5 * (1 - var6 / var7);
+    var_7 = var_5 * (1 - var_6 / var_7);
   }
 
-  if(randomint(100) > var7) {
+  if(randomint(100) > var_7) {
     return 0;
   }
 
-  var8 = 0;
+  var_8 = 0;
 
-  foreach(var10 in level.loot.items) {
-    if(scripts\engine\utility::is_equal(var10.name, var1) && !itemworldplaced(var10)) {
-      var8++;
+  foreach(var_10 in level.loot.items) {
+    if(scripts\engine\utility::is_equal(var_10.name, var_1) && !itemworldplaced(var_10)) {
+      var_8++;
     }
   }
 
-  var12 = var8 + var6 >= var7;
+  var_12 = var_8 + var_6 >= var_7;
 
-  if(!var12) {
+  if(!var_12) {
     return 1;
   }
 
-  if(trylootdespawn(var1)) {
+  if(trylootdespawn(var_1)) {
     return 1;
   }
 
@@ -625,137 +625,137 @@ function waittillplayercanloot() {
   }
 }
 
-function playlootsound(var0) {
-  level.loot.sfx scripts\engine\utility::delaycall(0.2, &playsound, level.loot.types[var0].sound);
+function playlootsound(var_0) {
+  level.loot.sfx scripts\engine\utility::delaycall(0.2, &playsound, level.loot.types[var_0].sound);
 }
 
-function createnotification(var0, var1) {
-  var2 = undefined;
-  var3 = 600;
-  var4 = 300;
+function createnotification(var_0, var_1) {
+  var_2 = undefined;
+  var_3 = 600;
+  var_4 = 300;
 
-  for(var5 = 0; var5 < level.loot.notifications.size; var5++) {
-    if(level.loot.notifications[var5].locname == var1) {
-      var2 = level.loot.notifications[var5];
-      var2 notify("stop_fading");
-      var4 = var2.icon.y;
+  for(var_5 = 0; var_5 < level.loot.notifications.size; var_5++) {
+    if(level.loot.notifications[var_5].locname == var_1) {
+      var_2 = level.loot.notifications[var_5];
+      var_2 notify("stop_fading");
+      var_4 = var_2.icon.y;
     }
   }
 
-  var6 = 224;
-  var7 = 432;
-  var8 = newhudelem();
-  var8.x = var6;
-  var8.y = var7;
-  var8.alignx = "right";
-  var8.aligny = "top";
-  var8.sort = 2;
-  var8.alpha = 0;
-  var8 setshader(var0, 22, 22);
-  var8.shader = var0;
-  var9 = newhudelem();
-  var9.x = var6;
-  var9.y = var7 + 5;
-  var9.alignx = "left";
-  var9.aligny = "top";
-  var9.font = "hudsmall";
-  var9.fontscale = 0.75;
-  var9.alpha = 0;
-  var9 settext(var1);
-  var8 fadeovertime(0.15);
-  var8 moveovertime(0.215);
-  var8.alpha = 0.8;
-  var8.x = var3;
-  var8.y = var4;
-  var9 fadeovertime(0.15);
-  var9 moveovertime(0.215);
-  var9.alpha = 1;
-  var9.x = var3;
-  var9.y = var4 + 5;
-  var10 = spawnStruct();
-  var10.icon = var8;
-  var10.text = var9;
-  var10.locname = var1;
+  var_6 = 224;
+  var_7 = 432;
+  var_8 = newhudelem();
+  var_8.x = var_6;
+  var_8.y = var_7;
+  var_8.alignx = "right";
+  var_8.aligny = "top";
+  var_8.sort = 2;
+  var_8.alpha = 0;
+  var_8 setshader(var_0, 22, 22);
+  var_8.shader = var_0;
+  var_9 = newhudelem();
+  var_9.x = var_6;
+  var_9.y = var_7 + 5;
+  var_9.alignx = "left";
+  var_9.aligny = "top";
+  var_9.font = "hudsmall";
+  var_9.fontscale = 0.75;
+  var_9.alpha = 0;
+  var_9 settext(var_1);
+  var_8 fadeovertime(0.15);
+  var_8 moveovertime(0.215);
+  var_8.alpha = 0.8;
+  var_8.x = var_3;
+  var_8.y = var_4;
+  var_9 fadeovertime(0.15);
+  var_9 moveovertime(0.215);
+  var_9.alpha = 1;
+  var_9.x = var_3;
+  var_9.y = var_4 + 5;
+  var_10 = spawnStruct();
+  var_10.icon = var_8;
+  var_10.text = var_9;
+  var_10.locname = var_1;
 
-  if(!isDefined(var2)) {
-    level.loot.notifications[level.loot.notifications.size] = var10;
+  if(!isDefined(var_2)) {
+    level.loot.notifications[level.loot.notifications.size] = var_10;
   }
 
   level.player scripts\engine\utility::waittill_notify_or_timeout("death", 0.215);
 
-  if(isDefined(var2)) {
-    thread notificationdisplayandfade(var2, var0);
+  if(isDefined(var_2)) {
+    thread notificationdisplayandfade(var_2, var_0);
     wait 0.05;
-    destroylootnotification(var10);
+    destroylootnotification(var_10);
     return;
   }
 
-  foreach(var12 in level.loot.notifications) {
-    var12.icon.y -= 22;
-    var12.text.y -= 22;
+  foreach(var_12 in level.loot.notifications) {
+    var_12.icon.y -= 22;
+    var_12.text.y -= 22;
   }
 
-  thread notificationdisplayandfade(var10, var0);
+  thread notificationdisplayandfade(var_10, var_0);
 }
 
-function notificationdisplayandfade(var0, var1) {
-  var0 notify("reset");
-  var0 endon("death");
-  var0 endon("stop_fading");
-  var0 endon("reset");
+function notificationdisplayandfade(var_0, var_1) {
+  var_0 notify("reset");
+  var_0 endon("death");
+  var_0 endon("stop_fading");
+  var_0 endon("reset");
   thread notificationpulse();
-  var0.icon.alpha = 0.8;
-  var0.text.alpha = 1;
+  var_0.icon.alpha = 0.8;
+  var_0.text.alpha = 1;
 
   if(isalive(level.player)) {
     level.player scripts\engine\utility::waittill_notify_or_timeout("death", 3);
   } else {
-    destroylootnotification(var0);
+    destroylootnotification(var_0);
     return;
   }
 
-  var0.icon.alpha = 0.8;
-  var0.text.alpha = 1;
-  var2 = gettime() + 500;
+  var_0.icon.alpha = 0.8;
+  var_0.text.alpha = 1;
+  var_2 = gettime() + 500;
 
-  while(isalive(level.player) && gettime() < var2) {
+  while(isalive(level.player) && gettime() < var_2) {
     wait 0.05;
-    var0.icon.alpha -= 0.1;
-    var0.text.alpha -= 0.1;
+    var_0.icon.alpha -= 0.1;
+    var_0.text.alpha -= 0.1;
   }
 
-  destroylootnotification(var0);
+  destroylootnotification(var_0);
 }
 
 function notificationpulse() {
-  var0 = 2;
+  var_0 = 2;
   self.icon scaleovertime(0.05, 30, 30);
   self.icon moveovertime(0.05);
-  self.icon.y -= var0;
-  self.icon.x += var0;
+  self.icon.y -= var_0;
+  self.icon.x += var_0;
   wait 0.05;
 
   if(isDefined(self) && isDefined(self.icon)) {
     self.icon scaleovertime(0.15, 22, 22);
     self.icon moveovertime(0.15);
-    self.icon.y += var0;
-    self.icon.x -= var0;
+    self.icon.y += var_0;
+    self.icon.x -= var_0;
     return;
   }
 }
 
 function waittillnextloottime() {
-  var0 = gettime();
-  var1 = level.loot.lastloottime + 250;
+  var_0 = gettime();
+  var_1 = level.loot.lastloottime + 250;
 
-  if(var0 > var1) {
-    level.loot.lastloottime = var0;
+  if(var_0 > var_1) {
+    level.loot.lastloottime = var_0;
     return;
   }
 
-  level.loot.lastloottime = var1;
+  level.loot.lastloottime = var_1;
 
-  while(gettime() < var1) {
+  while(gettime() < var_1) {
     waitframe();
   }
 }
@@ -774,9 +774,9 @@ function destroylootnotification() {
 function setworldloot() {
   waittillframeend();
 
-  foreach(var1 in scripts\engine\utility::getStructArray("lootSpawn", "targetname")) {
+  foreach(var_1 in scripts\engine\utility::getStructArray("lootSpawn", "targetname")) {
     if(!isrefloot()) {
-      spawnlootitem(var1.script_noteworthy, var1.origin, var1.angles, 0, 1);
+      spawnlootitem(var_1.script_noteworthy, var_1.origin, var_1.angles, 0, 1);
     }
   }
 }
@@ -789,7 +789,7 @@ function isrefloot() {
   return 0;
 }
 
-function createpickupicon(var0) {
+function createpickupicon(var_0) {
   self endon("death");
   self endon("entitydeleted");
 
@@ -803,7 +803,7 @@ function createpickupicon(var0) {
   target_setcolor(self, (1, 1, 1), 0);
   target_setscaledrendermode(self, 0);
   target_showtoplayer(self, level.player);
-  target_setshader(self, var0);
+  target_setshader(self, var_0);
   target_flush(self);
   GscBinSkip4(0x35);
 }
@@ -811,45 +811,45 @@ function createpickupicon(var0) {
 function updatepickupicon() {
   self.alpha = 0;
   self.iconsize = 0;
-  var0 = gettime();
+  var_0 = gettime();
 
   for(;;) {
-    var1 = distance(level.player.origin, self.origin);
-    var2 = gettime() < var0 + 2150;
-    var3 = isalive(level.player) && level.player scripts\engine\trace::can_see_origin(self.origin + (0, 0, 10), 0);
+    var_1 = distance(level.player.origin, self.origin);
+    var_2 = gettime() < var_0 + 2150;
+    var_3 = isalive(level.player) && level.player scripts\engine\trace::can_see_origin(self.origin + (0, 0, 10), 0);
 
-    if(var2 || var3) {
-      var4 = 1 - scripts\engine\math::normalize_value(0, 1000, var1);
-      var5 = var4 * 1.25;
+    if(var_2 || var_3) {
+      var_4 = 1 - scripts\engine\math::normalize_value(0, 1000, var_1);
+      var_5 = var_4 * 1.25;
     } else {
-      var5 = 0;
+      var_5 = 0;
     }
 
-    if(var5 != self.alpha) {
-      var6 = clamp((var5 - self.alpha) * 0.45, -0.125, 0.125);
-      var7 = self.alpha + var6;
-      target_setcolor(self, (1, 1, 1), var7);
-      self.alpha = var7;
+    if(var_5 != self.alpha) {
+      var_6 = clamp((var_5 - self.alpha) * 0.45, -0.125, 0.125);
+      var_7 = self.alpha + var_6;
+      target_setcolor(self, (1, 1, 1), var_7);
+      self.alpha = var_7;
     }
 
-    var8 = scripts\engine\math::normalize_value(100, 1000, var1);
-    var9 = int(scripts\engine\math::factor_value(32, 8, var8) * 1);
+    var_8 = scripts\engine\math::normalize_value(100, 1000, var_1);
+    var_9 = int(scripts\engine\math::factor_value(32, 8, var_8) * 1);
 
-    if(var9 != self.iconsize) {
-      target_setminsize(self, var9, 0);
-      target_setmaxsize(self, var9, 0);
-      self.iconsize = var9;
+    if(var_9 != self.iconsize) {
+      target_setminsize(self, var_9, 0);
+      target_setmaxsize(self, var_9, 0);
+      self.iconsize = var_9;
     }
 
     waitframe();
   }
 }
 
-function indonotspawnlootvolume(var0) {
-  var1 = getEntArray("doNotSpawnLoot", "targetname");
+function indonotspawnlootvolume(var_0) {
+  var_1 = getEntArray("doNotSpawnLoot", "targetname");
 
-  foreach(var3 in var1) {
-    if(var0 istouching(var3)) {
+  foreach(var_3 in var_1) {
+    if(var_0 istouching(var_3)) {
       return true;
     }
   }
@@ -857,8 +857,8 @@ function indonotspawnlootvolume(var0) {
   return false;
 }
 
-function set_force_armor_drop(var0) {
-  self.lootforcearmordrop = var0;
+function set_force_armor_drop(var_0) {
+  self.lootforcearmordrop = var_0;
 }
 
 function force_armor_drop() {

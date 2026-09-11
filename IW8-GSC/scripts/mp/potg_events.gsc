@@ -9,13 +9,13 @@ function init() {
   }
 
   level.potgglobals.eventdata = spawnStruct();
-  var0 = level.potgglobals.eventdata;
-  var0.lastkillearner = undefined;
-  var0.lastkilltime = undefined;
+  var_0 = level.potgglobals.eventdata;
+  var_0.lastkillearner = undefined;
+  var_0.lastkilltime = undefined;
 
   if(level.teambased) {
-    var0.lastteamkillearners = [];
-    var0.lastteamkilltimes = [];
+    var_0.lastteamkillearners = [];
+    var_0.lastteamkilltimes = [];
   }
 }
 
@@ -24,188 +24,188 @@ function onpotgrecordingstopped() {
 }
 
 function getentityeventdata() {
-  var0 = scripts\mp\potg::getentitypotgdata(self);
+  var_0 = scripts\mp\potg::getentitypotgdata(self);
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!isDefined(var0.trackingdata)) {
-    var0.trackingdata = createentityeventdata();
+  if(!isDefined(var_0.trackingdata)) {
+    var_0.trackingdata = createentityeventdata();
   }
 
-  return var0.trackingdata;
+  return var_0.trackingdata;
 }
 
 function createentityeventdata() {
-  var0 = spawnStruct();
-  var0.shotgroupactive = 0;
-  var0.shotgroupcount = 0;
-  var0.shotgroupaccuracy = 0;
-  var0.shotgrouplastcount = 0;
-  var0.shotgrouplastaccuracy = 0;
-  return var0;
+  var_0 = spawnStruct();
+  var_0.shotgroupactive = 0;
+  var_0.shotgroupcount = 0;
+  var_0.shotgroupaccuracy = 0;
+  var_0.shotgrouplastcount = 0;
+  var_0.shotgrouplastaccuracy = 0;
+  return var_0;
 }
 
-function onroundended(var0) {
-  var1 = level.potgglobals.eventdata;
-  handlefinalkill(var0);
+function onroundended(var_0) {
+  var_1 = level.potgglobals.eventdata;
+  handlefinalkill(var_0);
 }
 
-function handlefinalkill(var0) {
-  if(!isDefined(var0)) {
+function handlefinalkill(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var1 = level.potgglobals.eventdata;
-  var2 = undefined;
-  var3 = undefined;
+  var_1 = level.potgglobals.eventdata;
+  var_2 = undefined;
+  var_3 = undefined;
 
   if(level.teambased) {
-    if(isDefined(var1.lastteamkillearners[var0])) {
-      var2 = var1.lastteamkillearners[var0];
-      var3 = var1.lastteamkilltimes[var0];
+    if(isDefined(var_1.lastteamkillearners[var_0])) {
+      var_2 = var_1.lastteamkillearners[var_0];
+      var_3 = var_1.lastteamkilltimes[var_0];
     } else {
-      var2 = var1.lastkillearner;
-      var3 = var1.lastkilltime;
+      var_2 = var_1.lastkillearner;
+      var_3 = var_1.lastkilltime;
     }
   } else {
-    var2 = var1.lastkillearner;
-    var3 = var1.lastkilltime;
+    var_2 = var_1.lastkillearner;
+    var_3 = var_1.lastkilltime;
   }
 
-  if(isDefined(var2) && isDefined(var3)) {
-    var2 scripts\mp\potg::processevent("final_kill", var3);
+  if(isDefined(var_2) && isDefined(var_3)) {
+    var_2 scripts\mp\potg::processevent("final_kill", var_3);
     return;
   }
 }
 
-function onplayerdamaged(var0, var1, var2) {
+function onplayerdamaged(var_0, var_1, var_2) {
   if(!level.potgenabled) {
     return;
   }
 
-  if(scripts\common\utility::getdamagetype(var2) == "splash" && !var1 scripts\mp\utility\game::isspawnprotected()) {
-    var1 scripts\mp\potg::processevent("hit_by_explosive");
+  if(scripts\common\utility::getdamagetype(var_2) == "splash" && !var_1 scripts\mp\utility\game::isspawnprotected()) {
+    var_1 scripts\mp\potg::processevent("hit_by_explosive");
     return;
   }
 }
 
-function onplayerkilled(var0, var1, var2, var3, var4, var5) {
+function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!level.potgenabled) {
     return;
   }
 
-  var6 = level.potgglobals.eventdata;
-  var7 = gettime();
+  var_6 = level.potgglobals.eventdata;
+  var_7 = gettime();
 
-  if(!isPlayer(var0)) {
+  if(!isPlayer(var_0)) {
     return;
   }
 
-  var8 = getentityeventdata(var0);
-  var9 = getentityeventdata(var2);
-  var10 = calckillmultiplier(var0, var0);
-  var11 = var3 == "MOD_EXPLOSIVE" || var3 == "MOD_GRENADE" || var3 == "MOD_GRENADE_SPLASH" || var3 == "MOD_PROJECTILE";
-  var12 = scripts\engine\trace::create_contents(0, 1, 1, 1, 1, 1, 1, 1);
-  var13 = physics_raycast(var0 getEye(), var2 getEye(), var12, undefined, 0, "physicsquery_closest", 1);
-  var14 = isDefined(var13) && var13.size > 0;
-  var15 = scripts\engine\utility::within_fov(var0 getEye(), var0 getplayerangles(), var2.origin, cos(80));
-  var16 = var4.basename == "iw8_la_juliet_mp";
-  var17 = (var16 || var11) && (!var15 || var14);
+  var_8 = getentityeventdata(var_0);
+  var_9 = getentityeventdata(var_2);
+  var_10 = calckillmultiplier(var_0, var_0);
+  var_11 = var_3 == "MOD_EXPLOSIVE" || var_3 == "MOD_GRENADE" || var_3 == "MOD_GRENADE_SPLASH" || var_3 == "MOD_PROJECTILE";
+  var_12 = scripts\engine\trace::create_contents(0, 1, 1, 1, 1, 1, 1, 1);
+  var_13 = physics_raycast(var_0 getEye(), var_2 getEye(), var_12, undefined, 0, "physicsquery_closest", 1);
+  var_14 = isDefined(var_13) && var_13.size > 0;
+  var_15 = scripts\engine\utility::within_fov(var_0 getEye(), var_0 getplayerangles(), var_2.origin, cos(80));
+  var_16 = var_4.basename == "iw8_la_juliet_mp";
+  var_17 = (var_16 || var_11) && (!var_15 || var_14);
 
-  if(!var17) {
-    var0 scripts\mp\potg::processevent("kill", var7, var7, var5, undefined, var10);
+  if(!var_17) {
+    var_0 scripts\mp\potg::processevent("kill", var_7, var_7, var_5, undefined, var_10);
   }
 
-  if(isDefined(self.prevlastkilltime) && isDefined(var0.lastspawntime)) {
-    if(var0.lastspawntime < self.prevlastkilltime) {
-      var18 = var7 - self.prevlastkilltime;
+  if(isDefined(self.prevlastkilltime) && isDefined(var_0.lastspawntime)) {
+    if(var_0.lastspawntime < self.prevlastkilltime) {
+      var_18 = var_7 - self.prevlastkilltime;
 
-      if(var18 < 1800) {
-        var19 = 1 - var18 / 1800;
-        var0 scripts\mp\potg::processevent("kill_rate_bonus", self.prevlastkilltime, var7, var5, undefined, var19);
+      if(var_18 < 1800) {
+        var_19 = 1 - var_18 / 1800;
+        var_0 scripts\mp\potg::processevent("kill_rate_bonus", self.prevlastkilltime, var_7, var_5, undefined, var_19);
       }
     }
   }
 
-  handlekillmodifiers(var0, var0, var3, var4, var2, var10, var5);
+  handlekillmodifiers(var_0, var_0, var_3, var_4, var_2, var_10, var_5);
 
-  if(var3 == "MOD_PROJECTILE_SPLASH" && !var16) {
-    var0 scripts\mp\potg::processevent("missile_splash_kill", var7, var7, var5, undefined, var10);
+  if(var_3 == "MOD_PROJECTILE_SPLASH" && !var_16) {
+    var_0 scripts\mp\potg::processevent("missile_splash_kill", var_7, var_7, var_5, undefined, var_10);
   }
 
-  if(scripts\common\utility::getdamagetype(var3) == "splash") {
+  if(scripts\common\utility::getdamagetype(var_3) == "splash") {
     if(scripts\mp\utility\game::gettimepassed() <= 12000 && randomintrange(0, 2) == 0) {
-      var0 scripts\mp\potg::processevent("round_start_grenade");
+      var_0 scripts\mp\potg::processevent("round_start_grenade");
     }
   }
 
-  if(istrue(var0.modifiers["bullet_damage"]) && var2 scripts\mp\equipment\molotov::molotov_is_burning()) {
-    var0 scripts\mp\potg::processevent("victim_on_fire", var7, var7, var5, undefined, var10);
+  if(istrue(var_0.modifiers["bullet_damage"]) && var_2 scripts\mp\equipment\molotov::molotov_is_burning()) {
+    var_0 scripts\mp\potg::processevent("victim_on_fire", var_7, var_7, var_5, undefined, var_10);
   }
 
-  if(var0 scripts\mp\equipment\molotov::molotov_is_burning()) {
-    var0 scripts\mp\potg::processevent("kill_while_on_fire", var7, var7, var5, undefined, var10);
+  if(var_0 scripts\mp\equipment\molotov::molotov_is_burning()) {
+    var_0 scripts\mp\potg::processevent("kill_while_on_fire", var_7, var_7, var_5, undefined, var_10);
   }
 
-  if(istrue(var0.modifiers["airborne"])) {
-    var8.lastinairkilltime = var7;
-    var8.inairsincelastkill = 1;
+  if(istrue(var_0.modifiers["airborne"])) {
+    var_8.lastinairkilltime = var_7;
+    var_8.inairsincelastkill = 1;
     thread watchforpostkilllanding();
   }
 
-  if(isDefined(var0.lastdooropentime) && var7 - var0.lastdooropentime < 3500) {
-    var0 scripts\mp\potg::processevent("open_door_before_kill", var0.lastdooropentime, var7, var5, undefined, var10);
+  if(isDefined(var_0.lastdooropentime) && var_7 - var_0.lastdooropentime < 3500) {
+    var_0 scripts\mp\potg::processevent("open_door_before_kill", var_0.lastdooropentime, var_7, var_5, undefined, var_10);
   }
 
-  if(isDefined(var0.attackerdata) && var0.attackerdata.size > 3) {
-    var0 scripts\mp\potg::processevent("outnumbered", var7, var7, var5, undefined, var10);
+  if(isDefined(var_0.attackerdata) && var_0.attackerdata.size > 3) {
+    var_0 scripts\mp\potg::processevent("outnumbered", var_7, var_7, var_5, undefined, var_10);
   }
 
-  if(isDefined(var9.lastteabagtime) && var7 - var9.lastteabagtime < 1000 && randomintrange(0, 2) == 0) {
-    var0 scripts\mp\potg::processevent("kill_teabagger", var9.lastteabagtime, var7, var5, undefined, var10);
+  if(isDefined(var_9.lastteabagtime) && var_7 - var_9.lastteabagtime < 1000 && randomintrange(0, 2) == 0) {
+    var_0 scripts\mp\potg::processevent("kill_teabagger", var_9.lastteabagtime, var_7, var_5, undefined, var_10);
   }
 
-  handleequipmentkills(var0, var0, var1, var2, var3, var4, var10);
-  handlemeleekills(var0, var0, var1, var2, var3, var4, var10, var5);
+  handleequipmentkills(var_0, var_0, var_1, var_2, var_3, var_4, var_10);
+  handlemeleekills(var_0, var_0, var_1, var_2, var_3, var_4, var_10, var_5);
 
-  if(var8.shotgroupactive) {
-    if(var8.shotgroupaccuracy >= 0.9) {
-      var0 scripts\mp\potg::processevent("accuracy_good", var7, var7, var5, undefined, var10);
-    } else if(var8.shotgroupaccuracy <= 0.075) {
-      var0 scripts\mp\potg::processevent("accuracy_very_bad", var7, var7, var5, undefined, var10);
-    } else if(var8.shotgroupaccuracy <= 0.15) {
-      var0 scripts\mp\potg::processevent("accuracy_bad", var7, var7, var5, undefined, var10);
+  if(var_8.shotgroupactive) {
+    if(var_8.shotgroupaccuracy >= 0.9) {
+      var_0 scripts\mp\potg::processevent("accuracy_good", var_7, var_7, var_5, undefined, var_10);
+    } else if(var_8.shotgroupaccuracy <= 0.075) {
+      var_0 scripts\mp\potg::processevent("accuracy_very_bad", var_7, var_7, var_5, undefined, var_10);
+    } else if(var_8.shotgroupaccuracy <= 0.15) {
+      var_0 scripts\mp\potg::processevent("accuracy_bad", var_7, var_7, var_5, undefined, var_10);
     }
   }
 
   if(level.teambased) {
-    var6.lastteamkillearners[var0.team] = var0;
-    var6.lastteamkilltimes[var0.team] = var7;
+    var_6.lastteamkillearners[var_0.team] = var_0;
+    var_6.lastteamkilltimes[var_0.team] = var_7;
   }
 
-  var6.lastkillearner = var0;
-  var6.lastkilltime = var7;
+  var_6.lastkillearner = var_0;
+  var_6.lastkilltime = var_7;
 }
 
-function calckillmultiplier(var0) {
-  var1 = 1;
+function calckillmultiplier(var_0) {
+  var_1 = 1;
 
-  if(!istrue(var0.modifiers["victim_in_standard_view"])) {
-    var1 *= 0.15;
+  if(!istrue(var_0.modifiers["victim_in_standard_view"])) {
+    var_1 *= 0.15;
   }
 
-  return var1;
+  return var_1;
 }
 
-function handlemeleekills(var0, var1, var2, var3, var4, var5, var6) {
-  if(var3 == "MOD_MELEE") {
-    if(isDefined(var0.lastspawntime)) {
-      var7 = isDefined(var0.lastshotfiredtime) && var0.lastshotfiredtime >= var0.lastspawntime;
+function handlemeleekills(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if(var_3 == "MOD_MELEE") {
+    if(isDefined(var_0.lastspawntime)) {
+      var_7 = isDefined(var_0.lastshotfiredtime) && var_0.lastshotfiredtime >= var_0.lastspawntime;
 
-      if(!var7) {
-        var0 scripts\mp\potg::processevent("no_shots_fired_kill", undefined, undefined, var6, undefined, var5);
+      if(!var_7) {
+        var_0 scripts\mp\potg::processevent("no_shots_fired_kill", undefined, undefined, var_6, undefined, var_5);
         return;
       }
 
@@ -216,27 +216,27 @@ function handlemeleekills(var0, var1, var2, var3, var4, var5, var6) {
   }
 }
 
-function handleequipmentkills(var0, var1, var2, var3, var4, var5) {
-  if(isDefined(var1) && istrue(var1.isequipment) || scripts\mp\utility\weapon::validatefuelstability(var4, var1)) {
-    var6 = scripts\mp\utility\weapon::isthrowingknife(var4) || scripts\mp\utility\weapon::validatefuelstability(var4, var1);
+function handleequipmentkills(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(isDefined(var_1) && istrue(var_1.isequipment) || scripts\mp\utility\weapon::validatefuelstability(var_4, var_1)) {
+    var_6 = scripts\mp\utility\weapon::isthrowingknife(var_4) || scripts\mp\utility\weapon::validatefuelstability(var_4, var_1);
 
-    if(isDefined(var1.spawnpos)) {
-      var7 = distancesquared(var1.spawnpos, var1.origin);
+    if(isDefined(var_1.spawnpos)) {
+      var_7 = distancesquared(var_1.spawnpos, var_1.origin);
 
-      if(var6) {
-        if(var7 >= 640000) {
-          var0 scripts\mp\potg::processevent("long_throwing_knife");
+      if(var_6) {
+        if(var_7 >= 640000) {
+          var_0 scripts\mp\potg::processevent("long_throwing_knife");
         } else {
-          var0 scripts\mp\potg::processevent("throwing_knife");
+          var_0 scripts\mp\potg::processevent("throwing_knife");
         }
-      } else if(var7 >= 1440000) {
-        var0 scripts\mp\potg::processevent("long_grenade_throw");
+      } else if(var_7 >= 1440000) {
+        var_0 scripts\mp\potg::processevent("long_grenade_throw");
       }
     }
 
     if(scripts\mp\utility\game::gettimepassed() <= 12000) {
-      if(var6 && level.mapname != "mp_shipment") {
-        var0 scripts\mp\potg::processevent("round_start_throwing_knife");
+      if(var_6 && level.mapname != "mp_shipment") {
+        var_0 scripts\mp\potg::processevent("round_start_throwing_knife");
         return;
       }
 
@@ -247,65 +247,65 @@ function handleequipmentkills(var0, var1, var2, var3, var4, var5) {
   }
 }
 
-function handlekillmodifiers(var0, var1, var2, var3, var4, var5) {
-  var6 = gettime();
-  var7 = scripts\mp\utility\weapon::getweapongroup(var2);
+function handlekillmodifiers(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = gettime();
+  var_7 = scripts\mp\utility\weapon::getweapongroup(var_2);
 
-  foreach(var10, var9 in var0.modifiers) {
-    switch (var10) {
+  foreach(var_10, var_9 in var_0.modifiers) {
+    switch (var_10) {
       case "backstab":
-        if(var1 == "MOD_MELEE") {
-          var0 scripts\mp\potg::processevent("backstab", var6, var6, var5, undefined, var4);
+        if(var_1 == "MOD_MELEE") {
+          var_0 scripts\mp\potg::processevent("backstab", var_6, var_6, var_5, undefined, var_4);
         }
 
         break;
       case "pointblank":
-        if(var7 == "weapon_sniper") {
-          var0 scripts\mp\potg::processevent("pointblank_sniper", var6, var6, var5, undefined, var4);
+        if(var_7 == "weapon_sniper") {
+          var_0 scripts\mp\potg::processevent("pointblank_sniper", var_6, var_6, var_5, undefined, var_4);
         } else {
-          var0 scripts\mp\potg::processevent("pointblank", var6, var6, var5, undefined, var4);
+          var_0 scripts\mp\potg::processevent("pointblank", var_6, var_6, var_5, undefined, var_4);
         }
 
         break;
       case "airborne":
-        if(isDefined(var0.modifiers["ads"])) {
-          if(var7 == "weapon_sniper") {
-            var0 scripts\mp\potg::processevent("airborne_ads_sniper_kill", var6, var6, var5, undefined, var4);
+        if(isDefined(var_0.modifiers["ads"])) {
+          if(var_7 == "weapon_sniper") {
+            var_0 scripts\mp\potg::processevent("airborne_ads_sniper_kill", var_6, var_6, var_5, undefined, var_4);
           } else {
-            var0 scripts\mp\potg::processevent("airborne_ads_kill", var6, var6, var5, undefined, var4);
+            var_0 scripts\mp\potg::processevent("airborne_ads_kill", var_6, var_6, var_5, undefined, var_4);
           }
         }
 
         break;
       case "victim_airborne":
-        if(var7 == "weapon_sniper") {
-          var0 scripts\mp\potg::processevent("victim_airborne_sniper", var6, var6, var5, undefined, var4);
+        if(var_7 == "weapon_sniper") {
+          var_0 scripts\mp\potg::processevent("victim_airborne_sniper", var_6, var_6, var_5, undefined, var_4);
         } else {
-          var0 scripts\mp\potg::processevent("victim_airborne", var6, var6, var5, undefined, var4);
+          var_0 scripts\mp\potg::processevent("victim_airborne", var_6, var_6, var_5, undefined, var_4);
         }
 
         break;
       case "longshot":
-        if(!isDefined(var0.modifiers["very_longshot"])) {
-          var0 scripts\mp\potg::processevent("longshot", var6, var6, var5, undefined, var4);
+        if(!isDefined(var_0.modifiers["very_longshot"])) {
+          var_0 scripts\mp\potg::processevent("longshot", var_6, var_6, var_5, undefined, var_4);
         }
 
         break;
       case "last_bullet_kill":
-        if(var7 != "weapon_sniper" && var7 != "weapon_projectile") {
-          var0 scripts\mp\potg::processevent("last_bullet_kill", var6, var6, var5, undefined, var4);
+        if(var_7 != "weapon_sniper" && var_7 != "weapon_projectile") {
+          var_0 scripts\mp\potg::processevent("last_bullet_kill", var_6, var_6, var_5, undefined, var_4);
         }
 
         break;
       case "victim_sprinting":
-        if(var7 == "weapon_sniper") {
-          var0 scripts\mp\potg::processevent("victim_sprinting_sniper", var6, var6, var5, undefined, var4);
+        if(var_7 == "weapon_sniper") {
+          var_0 scripts\mp\potg::processevent("victim_sprinting_sniper", var_6, var_6, var_5, undefined, var_4);
         }
 
         break;
       default:
-        if(scripts\mp\potg::eventtable_isevent(var10)) {
-          var0 scripts\mp\potg::processevent(var10, var6, var6, var5, undefined, var4);
+        if(scripts\mp\potg::eventtable_isevent(var_10)) {
+          var_0 scripts\mp\potg::processevent(var_10, var_6, var_6, var_5, undefined, var_4);
         }
 
         break;
@@ -313,72 +313,72 @@ function handlekillmodifiers(var0, var1, var2, var3, var4, var5) {
   }
 }
 
-function collateral(var0, var1) {
+function collateral(var_0, var_1) {
   if(!level.potgenabled) {
     return;
   }
 
-  if(var1 == 2) {
-    var0 scripts\mp\potg::processevent("collateral");
+  if(var_1 == 2) {
+    var_0 scripts\mp\potg::processevent("collateral");
     return;
   }
 
-  if(var1 == 3) {
-    var0 scripts\mp\potg::processevent("triple_collateral");
+  if(var_1 == 3) {
+    var_0 scripts\mp\potg::processevent("triple_collateral");
     return;
   }
 
-  var0 scripts\mp\potg::processevent("multi_collateral");
+  var_0 scripts\mp\potg::processevent("multi_collateral");
 }
 
-function shotguncollateral(var0, var1) {
+function shotguncollateral(var_0, var_1) {
   if(!level.potgenabled) {
     return;
   }
 
-  if(var1 == 2) {
-    var0 scripts\mp\potg::processevent("shotgun_collateral");
+  if(var_1 == 2) {
+    var_0 scripts\mp\potg::processevent("shotgun_collateral");
     return;
   }
 
-  var0 scripts\mp\potg::processevent("shotgun_multi_collateral");
+  var_0 scripts\mp\potg::processevent("shotgun_multi_collateral");
 }
 
-function quadfeed(var0, var1, var2) {
+function quadfeed(var_0, var_1, var_2) {
   if(!level.potgenabled) {
     return;
   }
 
-  var0 scripts\mp\potg::processevent("quad_feed", var1, var2);
+  var_0 scripts\mp\potg::processevent("quad_feed", var_1, var_2);
 }
 
-function processeventforwitnesses(var0, var1, var2, var3, var4) {
-  var5 = scripts\common\utility::playersnear(var0, 1000);
+function processeventforwitnesses(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = scripts\common\utility::playersnear(var_0, 1000);
 
-  foreach(var7 in var5) {
-    if(!scripts\mp\utility\player::isreallyalive(var7)) {
+  foreach(var_7 in var_5) {
+    if(!scripts\mp\utility\player::isreallyalive(var_7)) {
       continue;
     }
 
-    var8 = var0 - var7 getEye();
-    var9 = anglesToForward(var7 getplayerangles());
+    var_8 = var_0 - var_7 getEye();
+    var_9 = anglesToForward(var_7 getplayerangles());
 
-    if(vectordot(var8, var9) < 0) {
+    if(vectordot(var_8, var_9) < 0) {
       continue;
     }
 
-    var7 scripts\mp\potg::processevent(var2, var3, var4);
+    var_7 scripts\mp\potg::processevent(var_2, var_3, var_4);
   }
 }
 
 function watchforpostkilllanding() {
   level endon("game_ended");
   self endon("death_or_disconnect");
-  var0 = getentityeventdata();
+  var_0 = getentityeventdata();
 
   for(;;) {
     if(self isonground()) {
-      var0.inairsincelastkill = 0;
+      var_0.inairsincelastkill = 0;
       break;
     }
 
@@ -386,115 +386,115 @@ function watchforpostkilllanding() {
   }
 }
 
-function predatormissileimpact(var0) {
+function predatormissileimpact(var_0) {
   if(!level.potgenabled) {
     return;
   }
 
-  processeventforwitnesses(var0, 1000000, "witness_predator_impact");
+  processeventforwitnesses(var_0, 1000000, "witness_predator_impact");
 }
 
-function largevehicleexplosion(var0) {
+function largevehicleexplosion(var_0) {
   if(!level.potgenabled) {
     return;
   }
 
-  processeventforwitnesses(var0, 640000, "witness_vehicle_explode");
+  processeventforwitnesses(var_0, 640000, "witness_vehicle_explode");
 }
 
-function vehiclekilled(var0) {
+function vehiclekilled(var_0) {
   if(!level.potgenabled) {
     return;
   }
 
-  if(!isDefined(var0.attacker) || !isPlayer(var0.attacker)) {
+  if(!isDefined(var_0.attacker) || !isPlayer(var_0.attacker)) {
     return;
   }
 
-  var0.attacker scripts\mp\potg::processevent("vehicle_destroyed");
+  var_0.attacker scripts\mp\potg::processevent("vehicle_destroyed");
 }
 
-function missilewhizby(var0) {
+function missilewhizby(var_0) {
   if(!level.potgenabled) {
     return;
   }
 
-  var0 scripts\mp\potg::processevent("witness_missile_whizby");
+  var_0 scripts\mp\potg::processevent("witness_missile_whizby");
 }
 
-function bombdefused(var0, var1, var2) {
+function bombdefused(var_0, var_1, var_2) {
   if(!level.potgenabled) {
     return;
   }
 
-  if(var2) {
-    var0 scripts\mp\potg::processevent("ninja_defuse");
+  if(var_2) {
+    var_0 scripts\mp\potg::processevent("ninja_defuse");
     return;
   }
 
-  if(var1) {
-    var0 scripts\mp\potg::processevent("last_alive_defuse");
+  if(var_1) {
+    var_0 scripts\mp\potg::processevent("last_alive_defuse");
     return;
   }
 
-  var0 scripts\mp\potg::processevent("defuse");
+  var_0 scripts\mp\potg::processevent("defuse");
 }
 
-function revivedplayer(var0, var1) {
+function revivedplayer(var_0, var_1) {
   if(!level.potgenabled) {
     return;
   }
 
-  var0 scripts\mp\potg::processevent("revived_ally");
+  var_0 scripts\mp\potg::processevent("revived_ally");
 }
 
-function playerworlddeath(var0, var1) {
+function playerworlddeath(var_0, var_1) {
   if(!level.potgenabled) {
     return;
   }
 
-  var2 = getentityeventdata();
+  var_2 = getentityeventdata();
 
-  if(istrue(var2.inairsincelastkill)) {
-    var0 scripts\mp\potg::processevent("fall_to_death_kill", var2.lastinairkilltime, gettime());
+  if(istrue(var_2.inairsincelastkill)) {
+    var_0 scripts\mp\potg::processevent("fall_to_death_kill", var_2.lastinairkilltime, gettime());
     return;
   }
 }
 
-function doorused(var0, var1) {
+function doorused(var_0, var_1) {
   if(!level.potgenabled) {
     return;
   }
 
-  if(!var1 && isDefined(var0.lastkilltime) && gettime() - var0.lastkilltime < 2000) {
-    var0 scripts\mp\potg::processevent("closed_door_after_kill");
+  if(!var_1 && isDefined(var_0.lastkilltime) && gettime() - var_0.lastkilltime < 2000) {
+    var_0 scripts\mp\potg::processevent("closed_door_after_kill");
     return;
   }
 }
 
-function playerstancechanged(var0) {
+function playerstancechanged(var_0) {
   if(!level.potgenabled || !(isDefined(self.petwatch) && self.petwatch.ref_12314 == "pet_turbo")) {
     return;
   }
 
-  var1 = getentityeventdata();
-  var2 = gettime();
+  var_1 = getentityeventdata();
+  var_2 = gettime();
 
-  if(var0 == "crouch") {
+  if(var_0 == "crouch") {
     scripts\mp\potg::processevent("recent_crouch");
 
     if(isDefined(self.lastkillvictimpos)) {
       if(distancesquared(self.lastkillvictimpos, self.origin) < 40000) {
-        var3 = var2 - self.laststancetimes["crouch"];
+        var_3 = var_2 - self.laststancetimes["crouch"];
 
-        if(var3 < 750) {
-          var4 = isDefined(self.lastspawntime) && isDefined(var1.lastteabagtime) && self.lastspawntime < var1.lastteabagtime;
+        if(var_3 < 750) {
+          var_4 = isDefined(self.lastspawntime) && isDefined(var_1.lastteabagtime) && self.lastspawntime < var_1.lastteabagtime;
 
-          if(!var4) {
+          if(!var_4) {
             scripts\mp\potg::processevent("teabag");
           }
 
-          if(!isDefined(var1.lastteabagtime) || var2 - var1.lastteabagtime > 5000) {
+          if(!isDefined(var_1.lastteabagtime) || var_2 - var_1.lastteabagtime > 5000) {
             if(!isDefined(self.pers["teaBags"])) {
               self.pers["teaBags"] = 0;
             }
@@ -503,7 +503,7 @@ function playerstancechanged(var0) {
             scripts\cp_mp\pet_watch::bearwatch();
           }
 
-          var1.lastteabagtime = var2;
+          var_1.lastteabagtime = var_2;
           return;
         }
 
@@ -516,7 +516,7 @@ function playerstancechanged(var0) {
     return;
   }
 
-  if(var2 == "prone") {
+  if(var_2 == "prone") {
     scripts\mp\potg::processevent("recent_prone");
     return;
   }
@@ -527,7 +527,7 @@ function shothit() {
     return;
   }
 
-  var0 = getentityeventdata();
+  var_0 = getentityeventdata();
   updateshotgroup(1);
 }
 
@@ -536,19 +536,19 @@ function shotmissed() {
     return;
   }
 
-  var0 = getentityeventdata();
+  var_0 = getentityeventdata();
   updateshotgroup(0);
 }
 
-function updateshotgroup(var0) {
+function updateshotgroup(var_0) {
   if(!level.potgenabled) {
     return;
   }
 
-  var1 = getentityeventdata();
-  var2 = scripts\engine\utility::ter_op(var0, 1, 0);
-  var1.shotgroupaccuracy = (var1.shotgroupaccuracy * var1.shotgroupcount + var2) / (var1.shotgroupcount + 1);
-  var1.shotgroupcount++;
+  var_1 = getentityeventdata();
+  var_2 = scripts\engine\utility::ter_op(var_0, 1, 0);
+  var_1.shotgroupaccuracy = (var_1.shotgroupaccuracy * var_1.shotgroupcount + var_2) / (var_1.shotgroupcount + 1);
+  var_1.shotgroupcount++;
   thread shotgroupendwatcher();
 }
 
@@ -563,8 +563,8 @@ function shotgroupendwatcher() {
     return;
   }
 
-  var0 = getentityeventdata();
-  var0.shotgroupactive = 1;
+  var_0 = getentityeventdata();
+  var_0.shotgroupactive = 1;
   wait 2;
   clearshotgroup();
 }
@@ -574,21 +574,21 @@ function clearshotgroup() {
     return;
   }
 
-  var0 = getentityeventdata();
-  var0.shotgroupactive = 0;
-  var0.shotgrouplastcount = var0.shotgroupcount;
-  var0.shotgrouplastaccuracy = var0.shotgroupaccuracy;
-  var0.shotgroupcount = 0;
-  var0.shotgroupaccuracy = 0;
+  var_0 = getentityeventdata();
+  var_0.shotgroupactive = 0;
+  var_0.shotgrouplastcount = var_0.shotgroupcount;
+  var_0.shotgrouplastaccuracy = var_0.shotgroupaccuracy;
+  var_0.shotgroupcount = 0;
+  var_0.shotgroupaccuracy = 0;
   self notify("clearShotGroup");
 }
 
-function grenadethrownevent(var0) {
+function grenadethrownevent(var_0) {
   if(!level.potgenabled) {
     return;
   }
 
-  if(var0) {
+  if(var_0) {
     scripts\mp\potg::processevent("recent_lethal");
     return;
   }

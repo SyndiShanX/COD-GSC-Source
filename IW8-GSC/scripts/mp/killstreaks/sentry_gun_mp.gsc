@@ -13,49 +13,49 @@ function init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("sentry_gun", "handleMovingPlatform", &scripts\mp\killstreaks\manual_turret_mp::ref_11ac1);
 }
 
-function sentryturret_gettargetmarker(var0, var1) {
-  return scripts\mp\killstreaks\target_marker::gettargetmarker(var0, var1);
+function sentryturret_gettargetmarker(var_0, var_1) {
+  return scripts\mp\killstreaks\target_marker::gettargetmarker(var_0, var_1);
 }
 
-function sentryturret_createhintobject(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10) {
-  return scripts\mp\gameobjects::createhintobject(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10);
+function sentryturret_createhintobject(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+  return scripts\mp\gameobjects::createhintobject(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 }
 
-function sentryturret_monitordamage(var0) {
-  var0 thread scripts\mp\damage::monitordamage(var0.maxhealth, "hitequip", &sentryturret_handledeathdamage, &sentryturret_modifydamage, 1);
+function sentryturret_monitordamage(var_0) {
+  var_0 thread scripts\mp\damage::monitordamage(var_0.maxhealth, "hitequip", &sentryturret_handledeathdamage, &sentryturret_modifydamage, 1);
 }
 
-function sentryturret_handledeathdamage(var0) {
-  var1 = var0.attacker;
-  var2 = var0.objweapon;
-  var3 = var0.meansofdeath;
-  var4 = var0.damage;
-  var5 = var0.idflags;
-  var6 = level.sentrysettings[self.turrettype];
-  var7 = scripts\mp\damage::onkillstreakkilled(var6.streakname, var1, var2, var3, var4, var6.scorepopup, var6.vodestroyed, var6.destroyedsplash);
+function sentryturret_handledeathdamage(var_0) {
+  var_1 = var_0.attacker;
+  var_2 = var_0.objweapon;
+  var_3 = var_0.meansofdeath;
+  var_4 = var_0.damage;
+  var_5 = var_0.idflags;
+  var_6 = level.sentrysettings[self.turrettype];
+  var_7 = scripts\mp\damage::onkillstreakkilled(var_6.streakname, var_1, var_2, var_3, var_4, var_6.scorepopup, var_6.vodestroyed, var_6.destroyedsplash);
 
-  if(var7) {
-    var1 notify("destroyed_equipment");
+  if(var_7) {
+    var_1 notify("destroyed_equipment");
   }
 
-  var8 = 0;
+  var_8 = 0;
 
-  if(var3 == "MOD_EXPLOSIVE" || var3 == "MOD_PROJECTILE" || var3 == "MOD_PROJECTILE_SPLASH" || var3 == "MOD_GRENADE_SPLASH") {
-    var8 = 1;
+  if(var_3 == "MOD_EXPLOSIVE" || var_3 == "MOD_PROJECTILE" || var_3 == "MOD_PROJECTILE_SPLASH" || var_3 == "MOD_GRENADE_SPLASH") {
+    var_8 = 1;
   }
 
-  self notify("kill_turret", var8, 1);
+  self notify("kill_turret", var_8, 1);
 }
 
-function sentryturret_modifydamage(var0) {
-  var1 = var0.attacker;
-  var2 = var0.objweapon;
-  var3 = var0.meansofdeath;
-  var4 = var0.damage;
-  var5 = var0.idflags;
-  var6 = var4;
-  var6 = scripts\mp\utility\killstreak::getmodifiedantikillstreakdamage(var1, var2, var3, var6, self.maxhealth, 2, 3, 4, 12, 400);
-  return var6;
+function sentryturret_modifydamage(var_0) {
+  var_1 = var_0.attacker;
+  var_2 = var_0.objweapon;
+  var_3 = var_0.meansofdeath;
+  var_4 = var_0.damage;
+  var_5 = var_0.idflags;
+  var_6 = var_4;
+  var_6 = scripts\mp\utility\killstreak::getmodifiedantikillstreakdamage(var_1, var_2, var_3, var_6, self.maxhealth, 2, 3, 4, 12, 400);
+  return var_6;
 }
 
 function sentryturret_initsentrysettings() {

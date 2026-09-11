@@ -18,11 +18,11 @@ function main() {
   game["allies_outfit"] = "urban";
   game["axis_outfit"] = "woodland";
   level.music_style = "middle_east";
-  var0 = getEnt("infil_van_col", "targetname");
+  var_0 = getEnt("infil_van_col", "targetname");
 
-  if(isDefined(var0)) {
-    var0 hide();
-    var0 connectpaths();
+  if(isDefined(var_0)) {
+    var_0 hide();
+    var_0 connectpaths();
   }
 
   thread scripts\mp\animation_suite::animationsuite();
@@ -41,12 +41,12 @@ function spawnstaticvan() {
   }
 
   if(!scripts\mp\flags::gameflag("infil_will_run")) {
-    foreach(var1 in [[scripts\cp_mp\utility\script_utility::getsharedfunc("infil", "get_all_infils")]]()) {
-      if(var1.script_noteworthy != "infil_van_hackney") {
+    foreach(var_1 in [[scripts\cp_mp\utility\script_utility::getsharedfunc("infil", "get_all_infils")]]()) {
+      if(var_1.script_noteworthy != "infil_van_hackney") {
         continue;
       }
 
-      if(var1.name != "alpha") {
+      if(var_1.name != "alpha") {
         continue;
       }
 

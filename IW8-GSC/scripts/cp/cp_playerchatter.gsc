@@ -103,28 +103,28 @@ function player_battlechatter_off_thread() {
 function playerthreadthreader() {
   self endon("death");
   self endon("player_battlechatter_off");
-  var0 = 0.5;
-  wait var0;
+  var_0 = 0.5;
+  wait var_0;
   thread scripts\cp\cp_battlechatter_ai::aigrenadedangerwaiter();
-  wait var0;
+  wait var_0;
   thread playerdogfightwaiter();
-  wait var0;
+  wait var_0;
   thread playerdamagewaiter();
-  wait var0;
+  wait var_0;
   thread scripts\cp\cp_battlechatter_ai::aibattlechatterloop();
 }
 
 function playerdamagewaiter() {
   while(isalive(anim.player) && scripts\cp\cp_battlechatter::bcsenabled() && isDefined(anim.player.battlechatterallowed) && anim.player.battlechatterallowed) {
-    anim.player waittill("damage", var0, var1);
+    anim.player waittill("damage", var_0, var_1);
 
-    if(var1 scripts\cp\cp_battlechatter::bcissniper()) {
-      var2 = anim.squads["allies"].members;
-      var2 = scripts\engine\utility::array_randomize(var2);
+    if(var_1 scripts\cp\cp_battlechatter::bcissniper()) {
+      var_2 = anim.squads["allies"].members;
+      var_2 = scripts\engine\utility::array_randomize(var_2);
 
-      foreach(var4 in var2) {
-        if(isalive(var4) && isai(var4) && distancesquared(anim.player.origin, var4.origin) > 10000) {
-          var4 scripts\cp\cp_battlechatter_ai::addthreatevent("infantry", var1, 0.9);
+      foreach(var_4 in var_2) {
+        if(isalive(var_4) && isai(var_4) && distancesquared(anim.player.origin, var_4.origin) > 10000) {
+          var_4 scripts\cp\cp_battlechatter_ai::addthreatevent("infantry", var_1, 0.9);
           break;
         }
       }
@@ -169,31 +169,31 @@ function playerdogfightwaiter() {
 }
 
 function playervehiclewaiter() {
-  var0 = undefined;
+  var_0 = undefined;
 
   while(isalive(anim.player) && scripts\cp\cp_battlechatter::bcsenabled() && isDefined(anim.player.battlechatterallowed) && anim.player.battlechatterallowed) {
     if(!scripts\engine\utility::player_is_in_jackal()) {
-      var1 = scripts\cp\utility::getvehiclearray();
+      var_1 = scripts\cp\utility::getvehiclearray();
 
-      foreach(var3 in var1) {
-        if(!isDefined(var3)) {
+      foreach(var_3 in var_1) {
+        if(!isDefined(var_3)) {
           continue;
         }
 
-        if(isDefined(var0) && var0 == var3) {
+        if(isDefined(var_0) && var_0 == var_3) {
           continue;
         }
 
-        if(issubstr(var3.classname, "dropship")) {
-          if(isDefined(var3.script_team) && var3.script_team != anim.player.team) {
-            if(anim.player scripts\cp\cp_battlechatter::pointinfov(var3.origin) && distancesquared(anim.player.origin, var3.origin) < 4000000) {
-              var4 = anim.squads["allies"].members;
-              var4 = scripts\engine\utility::array_randomize(var4);
+        if(issubstr(var_3.classname, "dropship")) {
+          if(isDefined(var_3.script_team) && var_3.script_team != anim.player.team) {
+            if(anim.player scripts\cp\cp_battlechatter::pointinfov(var_3.origin) && distancesquared(anim.player.origin, var_3.origin) < 4000000) {
+              var_4 = anim.squads["allies"].members;
+              var_4 = scripts\engine\utility::array_randomize(var_4);
 
-              foreach(var6 in var4) {
-                if(isalive(var6) && isai(var6) && distancesquared(anim.player.origin, var6.origin) < 250000) {
-                  var6 scripts\cp\cp_battlechatter_ai::addinformevent("incoming", "dropship", 0.9, "vehicle");
-                  var0 = var3;
+              foreach(var_6 in var_4) {
+                if(isalive(var_6) && isai(var_6) && distancesquared(anim.player.origin, var_6.origin) < 250000) {
+                  var_6 scripts\cp\cp_battlechatter_ai::addinformevent("incoming", "dropship", 0.9, "vehicle");
+                  var_0 = var_3;
                 }
               }
 
@@ -217,15 +217,15 @@ function player_battlechatter_cooldown_control() {
 
   while(isalive(anim.player) && scripts\cp\cp_battlechatter::bcsenabled() && isDefined(anim.player.battlechatterallowed) && anim.player.battlechatterallowed) {
     if(anim.player.bcscooldown == 0) {
-      var0 = 10;
+      var_0 = 10;
     } else {
-      var0 = anim.player.bcscooldown;
+      var_0 = anim.player.bcscooldown;
     }
 
     anim.player.battlechatter.isspeaking = 1;
 
-    for(var1 = var0; var1 >= 0; var1--) {
-      anim.player.bcscooldown = var1;
+    for(var_1 = var_0; var_1 >= 0; var_1--) {
+      anim.player.bcscooldown = var_1;
       wait 1;
     }
 
@@ -241,18 +241,18 @@ function player_battlechatter_cooldown_control() {
 function player_battlechatter_generic_event_check() {
   anim.player endon("death");
   level endon("player_battlechatter_off");
-  var0 = "none";
-  var1 = ["pc_ammocrate_pickup", "pc_equipcrate_pickup", "pc_weapon_scanned", "pc_armory_door", "pc_clear_last_event"];
+  var_0 = "none";
+  var_1 = ["pc_ammocrate_pickup", "pc_equipcrate_pickup", "pc_weapon_scanned", "pc_armory_door", "pc_clear_last_event"];
 
   for(;;) {
-    var2 = scripts\engine\utility::waittill_any_in_array_return(var1);
+    var_2 = scripts\engine\utility::waittill_any_in_array_return(var_1);
 
-    if(var2 != var0 && var2 != "pc_clear_last_event") {
-      anim.player scripts\cp\cp_battlechatter::playbattlechatter(var2);
-      var0 = var2;
+    if(var_2 != var_0 && var_2 != "pc_clear_last_event") {
+      anim.player scripts\cp\cp_battlechatter::playbattlechatter(var_2);
+      var_0 = var_2;
       thread player_battlechatter_event_clear();
-    } else if(var2 == "pc_clear_last_event") {
-      var0 = "none";
+    } else if(var_2 == "pc_clear_last_event") {
+      var_0 = "none";
     }
 
     wait 1;
@@ -269,9 +269,9 @@ function player_battlechatter_check_for_crate_pickups() {
   level endon("player_battlechatter_off");
 
   for(;;) {
-    var0 = distance(anim.player.origin, self.origin);
+    var_0 = distance(anim.player.origin, self.origin);
 
-    if(var0 < 500) {
+    if(var_0 < 500) {
       if(scripts\cp\utility::player_looking_at(self.origin + (0, 0, 40))) {
         if(self.targetname == "ammo_pickup") {
           level notify("pc_ammocrate_pickup");
@@ -293,12 +293,12 @@ function player_battlechatter_check_for_crate_pickups() {
   }
 }
 
-function isvalidplayerevent(var0) {
-  if(!isDefined(self.squad.ismembersaying[var0]) || !isDefined(anim.isteamsaying[self.team][var0])) {
+function isvalidplayerevent(var_0) {
+  if(!isDefined(self.squad.ismembersaying[var_0]) || !isDefined(anim.isteamsaying[self.team][var_0])) {
     return true;
   }
 
-  if(!self.squad.ismembersaying[var0] && !anim.isteamsaying[self.team][var0]) {
+  if(!self.squad.ismembersaying[var_0] && !anim.isteamsaying[self.team][var_0]) {
     return true;
   }
 

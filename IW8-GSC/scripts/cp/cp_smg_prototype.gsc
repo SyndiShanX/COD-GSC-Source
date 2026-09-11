@@ -3,12 +3,12 @@
  * Script: scripts\cp\cp_smg_prototype.gsc
 ***********************************************/
 
-function smg_flank_player(var0, var1) {
+function smg_flank_player(var_0, var_1) {
   self endon("death");
   level endon("game_ended");
 
-  if(isDefined(var0)) {
-    wait var0;
+  if(isDefined(var_0)) {
+    wait var_0;
   }
 
   self.hunting_player = 1;
@@ -27,22 +27,22 @@ function smg_flank_player(var0, var1) {
 
     self.hunting_player = 1;
     self.script_forcegrenade = 1;
-    var2 = scripts\engine\utility::ter_op(randomint(2) > 0, "left", "right");
-    var3 = getflankingpointforenemyonmedian(self.enemy, var2);
+    var_2 = scripts\engine\utility::ter_op(randomint(2) > 0, "left", "right");
+    var_3 = getflankingpointforenemyonmedian(self.enemy, var_2);
 
-    if(isnode(var3)) {
-      var4 = var3.origin;
+    if(isnode(var_3)) {
+      var_4 = var_3.origin;
     } else {
-      var4 = var4;
+      var_4 = var_4;
     }
 
-    self setgoalpos(var4);
-    var5 = scripts\engine\utility::ref_143ad("goal_reached", "goal");
+    self setgoalpos(var_4);
+    var_5 = scripts\engine\utility::ref_143ad("goal_reached", "goal");
     watchforenemydistance();
   }
 }
 
-function drawdebugdestination(var0) {
+function drawdebugdestination(var_0) {
   level endon("game_ended");
   self endon("change_flanking_pos");
 
@@ -51,110 +51,110 @@ function drawdebugdestination(var0) {
   }
 }
 
-function getflankpositiononplayer(var0, var1, var2) {
-  var3 = undefined;
+function getflankpositiononplayer(var_0, var_1, var_2) {
+  var_3 = undefined;
 
-  if(isDefined(var2) && var2 == "left") {
-    var3 = getclosestpointonnavmesh(scripts\cp\utility::get_point_in_local_ent_space(var0, (0, var1, 0)));
+  if(isDefined(var_2) && var_2 == "left") {
+    var_3 = getclosestpointonnavmesh(scripts\cp\utility::get_point_in_local_ent_space(var_0, (0, var_1, 0)));
   } else {
-    var3 = getclosestpointonnavmesh(scripts\cp\utility::get_point_in_local_ent_space(var0, (0, var1 * -1, 0)));
+    var_3 = getclosestpointonnavmesh(scripts\cp\utility::get_point_in_local_ent_space(var_0, (0, var_1 * -1, 0)));
   }
 
-  var4 = getnodearray("flanking_node", "targetname");
+  var_4 = getnodearray("flanking_node", "targetname");
 
-  if(var4.size > 0) {
-    var4 = sortbydistance(var4, var3);
-    var5 = var4[0];
+  if(var_4.size > 0) {
+    var_4 = sortbydistance(var_4, var_3);
+    var_5 = var_4[0];
 
-    if(distance(var5.origin, var3) <= 1024) {
-      return var5;
+    if(distance(var_5.origin, var_3) <= 1024) {
+      return var_5;
     }
   }
 
-  return var3;
+  return var_3;
 }
 
-function getmedianpointforplayersinteam(var0) {
-  var1 = (0, 0, 0);
-  var2 = scripts\cp\utility::getplayersinteam(var0);
+function getmedianpointforplayersinteam(var_0) {
+  var_1 = (0, 0, 0);
+  var_2 = scripts\cp\utility::getplayersinteam(var_0);
 
-  foreach(var4 in var2) {
-    var1 += var4.origin;
+  foreach(var_4 in var_2) {
+    var_1 += var_4.origin;
   }
 
-  var1 /= var2.size;
-  var1 = scripts\engine\utility::drop_to_ground(var1);
-  return var1;
+  var_1 /= var_2.size;
+  var_1 = scripts\engine\utility::drop_to_ground(var_1);
+  return var_1;
 }
 
-function getaverageforwardvectorforplayersinteam(var0) {
-  var1 = (0, 0, 0);
-  var2 = scripts\cp\utility::getplayersinteam(var0);
+function getaverageforwardvectorforplayersinteam(var_0) {
+  var_1 = (0, 0, 0);
+  var_2 = scripts\cp\utility::getplayersinteam(var_0);
 
-  foreach(var4 in var2) {
-    var5 = anglesToForward(var4.angles);
-    var1 += var5;
+  foreach(var_4 in var_2) {
+    var_5 = anglesToForward(var_4.angles);
+    var_1 += var_5;
   }
 
-  var1 -= (0, 0, var1[2]);
-  return var1;
+  var_1 -= (0, 0, var_1[2]);
+  return var_1;
 }
 
-function getminradiusofteamblob(var0, var1) {
-  var2 = scripts\cp\utility::getplayersinteam(var0);
-  var3 = 0;
+function getminradiusofteamblob(var_0, var_1) {
+  var_2 = scripts\cp\utility::getplayersinteam(var_0);
+  var_3 = 0;
 
-  foreach(var5 in var2) {
-    var6 = distance(var1, var5.origin);
+  foreach(var_5 in var_2) {
+    var_6 = distance(var_1, var_5.origin);
 
-    if(var6 > var3 && var6 <= 1024) {
-      var3 = var6;
+    if(var_6 > var_3 && var_6 <= 1024) {
+      var_3 = var_6;
     }
   }
 
-  return var3;
+  return var_3;
 }
 
-function getflankingpointforenemyonmedian(var0, var1) {
-  var2 = undefined;
-  var3 = getmedianpointforplayersinteam(var0.team);
-  var4 = getminradiusofteamblob(var0.team, var3);
+function getflankingpointforenemyonmedian(var_0, var_1) {
+  var_2 = undefined;
+  var_3 = getmedianpointforplayersinteam(var_0.team);
+  var_4 = getminradiusofteamblob(var_0.team, var_3);
 
-  if(isDefined(var1) && var1 == "left") {
-    var2 = getclosestpointonnavmesh(scripts\cp\utility::get_point_in_local_ent_space(var0, (0, var4, 0)));
+  if(isDefined(var_1) && var_1 == "left") {
+    var_2 = getclosestpointonnavmesh(scripts\cp\utility::get_point_in_local_ent_space(var_0, (0, var_4, 0)));
   } else {
-    var2 = getclosestpointonnavmesh(scripts\cp\utility::get_point_in_local_ent_space(var0, (0, var4 * -1, 0)));
+    var_2 = getclosestpointonnavmesh(scripts\cp\utility::get_point_in_local_ent_space(var_0, (0, var_4 * -1, 0)));
   }
 
-  var5 = getnodearray("flanking_node", "targetname");
+  var_5 = getnodearray("flanking_node", "targetname");
 
-  if(var5.size > 0) {
-    var5 = sortbydistance(var5, var2);
-    var6 = var5[0];
+  if(var_5.size > 0) {
+    var_5 = sortbydistance(var_5, var_2);
+    var_6 = var_5[0];
 
-    if(distance(var6.origin, var2) <= 1024) {
-      return var6;
+    if(distance(var_6.origin, var_2) <= 1024) {
+      return var_6;
     }
   }
 
-  var7 = getnodesinradius(var3, 1024, 512);
+  var_7 = getnodesinradius(var_3, 1024, 512);
 
-  if(var7.size > 0) {
-    foreach(var9 in var7) {
-      if(istrue(var9.isoccupiedbylmg)) {
-        var7 = scripts\engine\utility::array_remove(var7, var9);
+  if(var_7.size > 0) {
+    foreach(var_9 in var_7) {
+      if(istrue(var_9.isoccupiedbylmg)) {
+        var_7 = scripts\engine\utility::array_remove(var_7, var_9);
       }
     }
 
-    var7 = sortbydistance(var7, var3);
-    var6 = var7[0];
+    var_7 = sortbydistance(var_7, var_3);
+    var_6 = var_7[0];
 
-    if(distance(var6.origin, var2) <= 1024) {
-      return var6;
+    if(distance(var_6.origin, var_2) <= 1024) {
+      return var_6;
     }
   }
 
-  return var2;
+  return var_2;
 }
 
 function watchforenemydistance() {

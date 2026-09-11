@@ -3,50 +3,50 @@
  * Script: scripts\sp\script_items.gsc
 ***********************************************/
 
-function scriptitem_buildspawnflags(var0, var1, var2, var3, var4) {
-  var5 = 0;
+function scriptitem_buildspawnflags(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = 0;
 
-  if(istrue(var0)) {
-    var5 |= 1;
+  if(istrue(var_0)) {
+    var_5 |= 1;
   }
 
-  if(istrue(var1)) {
-    var5 |= 2;
+  if(istrue(var_1)) {
+    var_5 |= 2;
   }
 
-  if(istrue(var2)) {
-    var5 |= 4;
+  if(istrue(var_2)) {
+    var_5 |= 4;
   }
 
-  if(istrue(var3)) {
-    var5 |= 8;
+  if(istrue(var_3)) {
+    var_5 |= 8;
   }
 
-  if(istrue(var4)) {
-    var5 |= 16;
+  if(istrue(var_4)) {
+    var_5 |= 16;
   }
 
-  return var5;
+  return var_5;
 }
 
-function scriptitem_testspawn(var0, var1, var2) {
-  var3 = 0;
-  var4 = 1;
-  var5 = 0;
-  var6 = 0;
-  var7 = 0;
-  var8 = "script_item_example";
-  var9 = scriptitem_buildspawnflags(var3, var4, var5, var6, var7);
-  var10 = "equipment_oxygen_tank_01";
-  var11 = (randomintrange(-200, 200), randomintrange(-200, 200), 1000);
-  var12 = var0 + (2, 2, -1);
+function scriptitem_testspawn(var_0, var_1, var_2) {
+  var_3 = 0;
+  var_4 = 1;
+  var_5 = 0;
+  var_6 = 0;
+  var_7 = 0;
+  var_8 = "script_item_example";
+  var_9 = scriptitem_buildspawnflags(var_3, var_4, var_5, var_6, var_7);
+  var_10 = "equipment_oxygen_tank_01";
+  var_11 = (randomintrange(-200, 200), randomintrange(-200, 200), 1000);
+  var_12 = var_0 + (2, 2, -1);
 
-  if(!isDefined(var2)) {
-    var2 = "hint string";
+  if(!isDefined(var_2)) {
+    var_2 = "hint string";
   }
 
-  var13 = spawnscriptitem(var8, var0, var1, var9, var10, var2, var11, var12);
-  return var13;
+  var_13 = spawnscriptitem(var_8, var_0, var_1, var_9, var_10, var_2, var_11, var_12);
+  return var_13;
 }
 
 function scriptitem_playerwatchforanypickup() {
@@ -57,8 +57,8 @@ function scriptitem_playerwatchforanypickup() {
   }
 }
 
-function scriptitem_itemwatchfortrigger(var0) {
+function scriptitem_itemwatchfortrigger(var_0) {
   self endon("death");
-  self waittill("trigger", var1);
+  self waittill("trigger", var_1);
   earthquake(0.6, 0.5, level.player.origin, 300);
 }

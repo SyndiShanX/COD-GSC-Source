@@ -27,34 +27,34 @@ function registernotetracks() {
   anim.notetracks["dropgun"] = &notetrackgundrop;
 }
 
-function notetrackfootstep(var0, var1) {
-  var2 = issubstr(var0, "left");
-  var3 = issubstr(var0, "large");
-  var4 = "right";
+function notetrackfootstep(var_0, var_1) {
+  var_2 = issubstr(var_0, "left");
+  var_3 = issubstr(var_0, "large");
+  var_4 = "right";
 
-  if(var2) {
-    var4 = "left";
+  if(var_2) {
+    var_4 = "left";
   }
 
-  if(var3) {
+  if(var_3) {
     self notify("large_footstep");
   }
 
-  self.asm.footsteps.foot = var4;
+  self.asm.footsteps.foot = var_4;
   self.asm.footsteps.time = gettime();
 }
 
-function handlenotetrack(var0, var1, var2, var3) {
-  if(scripts\anim\notetracks::hascustomnotetrackhandler(var0)) {
-    return scripts\anim\notetracks::handlecustomnotetrackhandler(var0, var1, var2, var3);
+function handlenotetrack(var_0, var_1, var_2, var_3) {
+  if(scripts\anim\notetracks::hascustomnotetrackhandler(var_0)) {
+    return scripts\anim\notetracks::handlecustomnotetrackhandler(var_0, var_1, var_2, var_3);
   }
 
-  var4 = scripts\anim\notetracks::handlecommonnotetrack(var0, var1, var2, var3);
+  var_4 = scripts\anim\notetracks::handlecommonnotetrack(var_0, var_1, var_2, var_3);
 
-  if(isDefined(var4) && var4 == "__unhandled") {
-    var4 = undefined;
+  if(isDefined(var_4) && var_4 == "__unhandled") {
+    var_4 = undefined;
 
-    switch (var0) {
+    switch (var_0) {
       case "attach_clip_left":
         if(weaponclass(self.weapon) == "rocketlauncher") {
           notetrackrocketlauncherammoattach();
@@ -62,11 +62,11 @@ function handlenotetrack(var0, var1, var2, var3) {
 
         break;
       default:
-        if(isDefined(var2)) {
-          if(isDefined(var3)) {
-            return [[var2]](var0, var3);
+        if(isDefined(var_2)) {
+          if(isDefined(var_3)) {
+            return [[var_2]](var_0, var_3);
           } else {
-            return [[var2]](var0);
+            return [[var_2]](var_0);
           }
         }
 
@@ -74,11 +74,11 @@ function handlenotetrack(var0, var1, var2, var3) {
     }
   }
 
-  return var4;
+  return var_4;
 }
 
-function notetrack_prefix_handler_mp(var0) {
-  return scripts\anim\notetracks::notetrack_prefix_handler_common(var0);
+function notetrack_prefix_handler_mp(var_0) {
+  return scripts\anim\notetracks::notetrack_prefix_handler_common(var_0);
 }
 
 function notetrackrocketlauncherammoattach() {
@@ -96,27 +96,27 @@ function notetrackrocketlauncherammoattach() {
   }
 }
 
-function notetrackgundrop(var0, var1) {
+function notetrackgundrop(var_0, var_1) {
   if(isDefined(self.playercleanupentondisconnect)) {
     self[[self.playercleanupentondisconnect]]();
     return;
   }
 }
 
-function setpose(var0) {
-  self.currentpose = var0;
-  scripts\asm\asm_bb::bb_requeststance(var0);
-  self notify("entered_pose" + var0);
+function setpose(var_0) {
+  self.currentpose = var_0;
+  scripts\asm\asm_bb::bb_requeststance(var_0);
+  self notify("entered_pose" + var_0);
 }
 
-function notetrackposestand(var0, var1) {
+function notetrackposestand(var_0, var_1) {
   setpose("stand");
 }
 
-function notetrackposecrouch(var0, var1) {
+function notetrackposecrouch(var_0, var_1) {
   setpose("crouch");
 }
 
-function notetrackposeprone(var0, var1) {
+function notetrackposeprone(var_0, var_1) {
   setpose("prone");
 }

@@ -48,8 +48,8 @@ function ref_11c80() {
   }
 }
 
-function ref_11c8a(var0) {
-  if(isDefined(var0.script_team)) {
+function ref_11c8a(var_0) {
+  if(isDefined(var_0.script_team)) {
     if(scripts\mp\utility\game::getgametype() == "arm") {
       return true;
     } else {
@@ -60,53 +60,53 @@ function ref_11c8a(var0) {
   return true;
 }
 
-function track_get_reward_time(var0, var1) {
+function track_get_reward_time(var_0, var_1) {
   if(!isDefined(level.br_level)) {
     return true;
   }
 
-  var2 = removeselfrevivetoken(var1);
-  var3 = min(var2[0][0], var2[1][0]);
-  var4 = min(var2[0][1], var2[1][1]);
-  var5 = max(var2[0][0], var2[1][0]);
-  var6 = max(var2[0][1], var2[1][1]);
+  var_2 = removeselfrevivetoken(var_1);
+  var_3 = min(var_2[0][0], var_2[1][0]);
+  var_4 = min(var_2[0][1], var_2[1][1]);
+  var_5 = max(var_2[0][0], var_2[1][0]);
+  var_6 = max(var_2[0][1], var_2[1][1]);
 
-  if(var0[0] <= var3) {
+  if(var_0[0] <= var_3) {
     return false;
-  } else if(var0[0] >= var5) {
+  } else if(var_0[0] >= var_5) {
     return false;
   }
 
-  if(var0[1] <= var4) {
+  if(var_0[1] <= var_4) {
     return false;
-  } else if(var0[1] >= var6) {
+  } else if(var_0[1] >= var_6) {
     return false;
   }
 
   return true;
 }
 
-function removeselfrevivetoken(var0) {
-  var1 = level.br_level.br_mapbounds;
-  var2 = isDefined(level.br_level.delay_set_bomber_traversals);
-  var3 = istrue(var0);
+function removeselfrevivetoken(var_0) {
+  var_1 = level.br_level.br_mapbounds;
+  var_2 = isDefined(level.br_level.delay_set_bomber_traversals);
+  var_3 = istrue(var_0);
 
-  if(var2 && var3) {
-    var1 = level.br_level.delay_set_bomber_traversals;
+  if(var_2 && var_3) {
+    var_1 = level.br_level.delay_set_bomber_traversals;
   }
 
-  return var1;
+  return var_1;
 }
 
-function removespawns(var0) {
-  var1 = removeselfrevivetoken(var0);
-  var2 = var1[1][0];
-  var3 = var1[0][0];
-  return abs(var2 - var3);
+function removespawns(var_0) {
+  var_1 = removeselfrevivetoken(var_0);
+  var_2 = var_1[1][0];
+  var_3 = var_1[0][0];
+  return abs(var_2 - var_3);
 }
 
-function removespawnprotectiononads(var0) {
-  var1 = removeselfrevivetoken(var0);
-  var2 = (var1[0] + var1[1]) * 0.5;
-  return var2;
+function removespawnprotectiononads(var_0) {
+  var_1 = removeselfrevivetoken(var_0);
+  var_2 = (var_1[0] + var_1[1]) * 0.5;
+  return var_2;
 }

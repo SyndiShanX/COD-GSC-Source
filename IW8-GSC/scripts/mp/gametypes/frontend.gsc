@@ -22,15 +22,15 @@ function friendlyicon() {}
 
 function callback_frontendplayerconnect() {}
 
-function callback_frontendplayerdisconnect(var0) {}
+function callback_frontendplayerdisconnect(var_0) {}
 
-function callback_frontendplayerdamage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11) {}
+function callback_frontendplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {}
 
-function callback_frontendplayerimpaled(var0, var1, var2, var3, var4, var5, var6, var7) {}
+function callback_frontendplayerimpaled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {}
 
-function callback_frontendplayerkilled(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {}
+function callback_frontendplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {}
 
-function callback_frontendplayerlaststand(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {}
+function callback_frontendplayerlaststand(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {}
 
 function callback_frontendplayermigrated() {}
 

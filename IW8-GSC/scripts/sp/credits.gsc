@@ -66,24 +66,24 @@ function playcredits() {
 
   if(!scripts\engine\utility::flag("credits_skipped")) {
     wait getmovetime();
-    var0 = 2;
-    level.hud_finale_black fadeovertime(var0);
+    var_0 = 2;
+    level.hud_finale_black fadeovertime(var_0);
     level.hud_finale_black.alpha = 1;
   } else {
     setmusicstate("");
-    var0 = 5;
-    level.hud_finale_black fadeovertime(var0);
+    var_0 = 5;
+    level.hud_finale_black fadeovertime(var_0);
     level.hud_finale_black.alpha = 1;
   }
 
   level.credits.huds = scripts\engine\utility::array_removeundefined(level.credits.huds);
 
-  foreach(var2 in level.credits.huds) {
-    var2 fadeovertime(0.25);
-    var2.alpha = 0;
+  foreach(var_2 in level.credits.huds) {
+    var_2 fadeovertime(0.25);
+    var_2.alpha = 0;
   }
 
-  wait var0 + 0.1;
+  wait var_0 + 0.1;
   stopcinematicingame();
   setmusicstate("");
   wait 2.5;
@@ -104,16 +104,16 @@ function audio_credits_done_rolling() {
 }
 
 function thankyou_photo() {
-  var0 = createcenterimage("credits_ending", 480, 280);
-  var0.alpha = 0;
-  var0.foreground = 1;
-  var1 = 3;
-  var0 fadeovertime(var1);
-  var0.alpha = 1;
-  wait var1 + 2;
-  var2 = gettime() + 10000;
+  var_0 = createcenterimage("credits_ending", 480, 280);
+  var_0.alpha = 0;
+  var_0.foreground = 1;
+  var_1 = 3;
+  var_0 fadeovertime(var_1);
+  var_0.alpha = 1;
+  wait var_1 + 2;
+  var_2 = gettime() + 10000;
 
-  while(gettime() < var2) {
+  while(gettime() < var_2) {
     if(level.player attackButtonPressed()) {
       break;
     }
@@ -137,175 +137,175 @@ function thankyou_photo() {
     waitframe();
   }
 
-  var0 fadeovertime(var1);
-  var0.alpha = 0;
-  wait var1;
-  var0 destroy();
+  var_0 fadeovertime(var_1);
+  var_0.alpha = 0;
+  wait var_1;
+  var_0 destroy();
 }
 
 function playcreditlines() {
   level endon("credits_skipped");
-  var0 = 0;
-  var1 = 0;
-  var2 = 0;
-  var3 = 0;
-  var4 = undefined;
-  var5 = undefined;
-  var6 = 0;
+  var_0 = 0;
+  var_1 = 0;
+  var_2 = 0;
+  var_3 = 0;
+  var_4 = undefined;
+  var_5 = undefined;
+  var_6 = 0;
   level.movetime = 7;
-  var7 = 4;
+  var_7 = 4;
   level.superwide = 0;
   level.credits.skiptofound = 0;
-  var8 = [];
+  var_8 = [];
 
   for(;;) {
-    var2++;
-    var9 = tablelookupbyrow("sp/credits.csv", var2, 0);
-    var10 = tablelookupbyrow("sp/credits.csv", var2, 1);
-    var11 = tablelookupbyrow("sp/credits.csv", var2, 2);
-    var12 = int(tablelookupbyrow("sp/credits.csv", var2, 3));
-    var13 = int(tablelookupbyrow("sp/credits.csv", var2, 4));
+    var_2++;
+    var_9 = tablelookupbyrow("sp/credits.csv", var_2, 0);
+    var_10 = tablelookupbyrow("sp/credits.csv", var_2, 1);
+    var_11 = tablelookupbyrow("sp/credits.csv", var_2, 2);
+    var_12 = int(tablelookupbyrow("sp/credits.csv", var_2, 3));
+    var_13 = int(tablelookupbyrow("sp/credits.csv", var_2, 4));
 
-    if(var9 == "") {
-      var1 = var2 - 1;
+    if(var_9 == "") {
+      var_1 = var_2 - 1;
       break;
     }
 
-    var10 = tolower(var10);
+    var_10 = tolower(var_10);
 
-    if(var10 == "") {
-      var10 = undefined;
+    if(var_10 == "") {
+      var_10 = undefined;
     }
 
-    if(var9 == "superwide") {
+    if(var_9 == "superwide") {
       level.superwide = 1;
       continue;
     }
 
-    if(var9 == "superwide_stop") {
+    if(var_9 == "superwide_stop") {
       level.superwide = 0;
       continue;
     }
 
-    if(var9 == "BLANK") {
-      if(var8.size > 0) {
-        playnamelist(var8);
+    if(var_9 == "BLANK") {
+      if(var_8.size > 0) {
+        playnamelist(var_8);
       }
 
-      var8 = [];
-      var6 = 0;
-      var3 = 0;
-      var5 = undefined;
+      var_8 = [];
+      var_6 = 0;
+      var_3 = 0;
+      var_5 = undefined;
       blankline();
       continue;
     }
 
-    if(var9 == "BLANKLONG") {
-      if(var8.size > 0) {
-        playnamelist(var8);
+    if(var_9 == "BLANKLONG") {
+      if(var_8.size > 0) {
+        playnamelist(var_8);
       }
 
-      var8 = [];
-      var6 = 0;
-      var3 = 0;
-      var5 = undefined;
+      var_8 = [];
+      var_6 = 0;
+      var_3 = 0;
+      var_5 = undefined;
       blankline(3);
       continue;
     }
 
-    if(isDefined(var10) && !var6) {
+    if(isDefined(var_10) && !var_6) {
       if(level.player isconsoleplayer()) {
-        if(var9 == "NVIDIA" || var9 == "AMD" || var9 == "INTEL") {
-          var6 = 1;
+        if(var_9 == "NVIDIA" || var_9 == "AMD" || var_9 == "INTEL") {
+          var_6 = 1;
           continue;
         }
       }
 
-      if(var10 == "string") {
-        var8 = [var9, var10];
+      if(var_10 == "string") {
+        var_8 = [var_9, var_10];
         continue;
       }
 
-      if(var8.size > 0) {
-        playnamelist(var8);
-        var8 = [];
+      if(var_8.size > 0) {
+        playnamelist(var_8);
+        var_8 = [];
       }
 
-      if(getdvarint("scr_logo_offset") == 0 && var10 == "logo") {
-        var10 = "image";
-        var12 = var12;
-        var13 = var13;
+      if(getdvarint("scr_logo_offset") == 0 && var_10 == "logo") {
+        var_10 = "image";
+        var_12 = var_12;
+        var_13 = var_13;
       }
 
-      if(var10 == "logo" || var10 == "logotext") {
-        var4 = creditlogo(var9, var10, var12, var13);
+      if(var_10 == "logo" || var_10 == "logotext") {
+        var_4 = creditlogo(var_9, var_10, var_12, var_13);
         continue;
       }
 
-      var14 = creditline(var9, var10, var11, var12, var13);
+      var_14 = creditline(var_9, var_10, var_11, var_12, var_13);
 
-      if(var10 == "dept") {
-        var3 = 0;
-        var5 = var14;
-      } else if(isDefined(var5)) {
-        var3++;
+      if(var_10 == "dept") {
+        var_3 = 0;
+        var_5 = var_14;
+      } else if(isDefined(var_5)) {
+        var_3++;
       }
     }
   }
 }
 
 function skip_credits() {
-  var0 = scripts\sp\utility::userskip_wait();
+  var_0 = scripts\sp\utility::userskip_wait();
 
-  if(!var0) {
+  if(!var_0) {
     return;
   }
 
   scripts\engine\utility::flag_set("credits_skipped");
 }
 
-function playnamelist(var0, var1) {
-  var2 = 1;
-  var3 = var0.size;
+function playnamelist(var_0, var_1) {
+  var_2 = 1;
+  var_3 = var_0.size;
 
-  if(var3 > 40) {
-    var2 = 3;
-  } else if(var3 > 4) {
-    var2 = 2;
+  if(var_3 > 40) {
+    var_2 = 3;
+  } else if(var_3 > 4) {
+    var_2 = 2;
   }
 
-  for(var4 = 0; var4 < var3; var4++) {
-    if(var2 == 3) {
-      if(var4 % 3 == 2) {
-        creditline(var0[var4][0], "rightname_wide", undefined, undefined, undefined);
-      } else if(var4 % 3 == 1) {
-        if(var4 == var3 - 1) {
-          creditline(var0[var4][0], "center", undefined, undefined, undefined);
+  for(var_4 = 0; var_4 < var_3; var_4++) {
+    if(var_2 == 3) {
+      if(var_4 % 3 == 2) {
+        creditline(var_0[var_4][0], "rightname_wide", undefined, undefined, undefined);
+      } else if(var_4 % 3 == 1) {
+        if(var_4 == var_3 - 1) {
+          creditline(var_0[var_4][0], "center", undefined, undefined, undefined);
         } else {
-          thread creditline(var0[var4][0], "center", undefined, undefined, undefined);
+          thread creditline(var_0[var_4][0], "center", undefined, undefined, undefined);
         }
-      } else if(var4 == var3 - 1) {
-        creditline(var0[var4][0], "center", undefined, undefined, undefined);
+      } else if(var_4 == var_3 - 1) {
+        creditline(var_0[var_4][0], "center", undefined, undefined, undefined);
       } else {
-        thread creditline(var0[var4][0], "leftname_wide", undefined, undefined, undefined);
+        thread creditline(var_0[var_4][0], "leftname_wide", undefined, undefined, undefined);
       }
 
       continue;
     }
 
-    if(var2 == 2) {
-      if(var4 % 2 == 1) {
-        creditline(var0[var4][0], "rightname", undefined, undefined, undefined);
-      } else if(var4 == var3 - 1) {
-        creditline(var0[var4][0], "leftname", undefined, undefined, undefined);
+    if(var_2 == 2) {
+      if(var_4 % 2 == 1) {
+        creditline(var_0[var_4][0], "rightname", undefined, undefined, undefined);
+      } else if(var_4 == var_3 - 1) {
+        creditline(var_0[var_4][0], "leftname", undefined, undefined, undefined);
       } else {
-        thread creditline(var0[var4][0], "leftname", undefined, undefined, undefined);
+        thread creditline(var_0[var_4][0], "leftname", undefined, undefined, undefined);
       }
 
       continue;
     }
 
-    creditline(var0[var4][0], var0[var4][1], undefined, undefined, undefined);
+    creditline(var_0[var_4][0], var_0[var_4][1], undefined, undefined, undefined);
   }
 }
 
@@ -317,61 +317,61 @@ function inputthread() {
   level.player allowfire(1);
   level.player allowads(1);
   level waittill("allow_fastforward");
-  var0 = 0;
-  var1 = 1;
+  var_0 = 0;
+  var_1 = 1;
 
   while(!level.creditscomplete) {
     waitframe();
 
-    if(gettime() > var0) {
+    if(gettime() > var_0) {
       if(level.player attackButtonPressed()) {
-        var2 = 7;
+        var_2 = 7;
       } else if(level.player playerads() > 0.1 || level.player adsButtonPressed(1)) {
-        var2 = 0.5;
+        var_2 = 0.5;
       } else {
-        var2 = 1;
+        var_2 = 1;
       }
 
-      if(var2 != var2) {
-        setslowmotion(var2, var2, 0.5);
-        var2 = var2;
-        var2 = gettime() + 600;
+      if(var_2 != var_2) {
+        setslowmotion(var_2, var_2, 0.5);
+        var_2 = var_2;
+        var_2 = gettime() + 600;
       }
     }
   }
 
-  setslowmotion(var2, 1, 0.5);
+  setslowmotion(var_2, 1, 0.5);
 }
 
-function credits_showmessage(var0, var1, var2, var3) {
-  if(!isDefined(var2)) {
-    var2 = 0;
+function credits_showmessage(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  var4 = newhudelem();
-  var4.x = 0;
-  var4.y = 0 + var2;
-  var4.horzalign = "center";
-  var4.vertalign = "middle";
-  var4.alignx = "center";
-  var4.aligny = "middle";
-  var4.sort = 5;
-  var4.font = "objective";
-  var4.fontscale = 1.25;
-  var4 settext(level.credits.strings[var0]);
-  var4.alpha = 0;
+  var_4 = newhudelem();
+  var_4.x = 0;
+  var_4.y = 0 + var_2;
+  var_4.horzalign = "center";
+  var_4.vertalign = "middle";
+  var_4.alignx = "center";
+  var_4.aligny = "middle";
+  var_4.sort = 5;
+  var_4.font = "objective";
+  var_4.fontscale = 1.25;
+  var_4 settext(level.credits.strings[var_0]);
+  var_4.alpha = 0;
 
-  if(var0 == "CREDITS/THANKS") {
-    var4.alignx = "center";
-    var4.horzalign = "fullscreen";
-    var4.x = 320;
+  if(var_0 == "CREDITS/THANKS") {
+    var_4.alignx = "center";
+    var_4.horzalign = "fullscreen";
+    var_4.x = 320;
   }
 
-  hud_fadeovertime(var4, 2 * getmovetimescale(), 1);
-  wait var1;
-  hud_fadeovertime(var4, 2 * getmovetimescale(), 0);
+  hud_fadeovertime(var_4, 2 * getmovetimescale(), 1);
+  wait var_1;
+  hud_fadeovertime(var_4, 2 * getmovetimescale(), 0);
   wait 2;
-  hud_destroy(var4);
+  hud_destroy(var_4);
 }
 
 function getmovetime() {
@@ -390,40 +390,40 @@ function getlinespacetime() {
   return 0.85 * getmovetime() / 25;
 }
 
-function creditlogo(var0, var1, var2, var3) {
+function creditlogo(var_0, var_1, var_2, var_3) {
   level endon("credits_skipped");
-  var4 = createcreditelem(var0, var1, var2, var3);
-  level.credits.huds[level.credits.huds.size] = var4;
-  var5 = 0;
-  var6 = -135;
+  var_4 = createcreditelem(var_0, var_1, var_2, var_3);
+  level.credits.huds[level.credits.huds.size] = var_4;
+  var_5 = 0;
+  var_6 = -135;
 
-  if(var1 == "logotext") {
-    var4.textlogo = 1;
+  if(var_1 == "logotext") {
+    var_4.textlogo = 1;
   }
 
-  thread creditlogo_move(var4);
+  thread creditlogo_move(var_4);
   wait 0.5;
-  return var4;
+  return var_4;
 }
 
-function creditlogo_move(var0, var1) {
+function creditlogo_move(var_0, var_1) {
   self endon("death");
   self endon("stop_move");
-  var2 = 1 * getmovetimescale();
+  var_2 = 1 * getmovetimescale();
 
   if(self.type == "logotext") {
-    hud_fadeovertime(var2, 0.8);
+    hud_fadeovertime(var_2, 0.8);
   } else if(self.type == "dept") {
-    hud_fadeovertime(var2, 0.8);
+    hud_fadeovertime(var_2, 0.8);
   } else {
-    hud_fadeovertime(var2, 1);
+    hud_fadeovertime(var_2, 1);
   }
 
-  var3 = (self.y - var0) / 61.4286;
-  hud_moveovertime(var3, undefined, var0);
-  wait var3 - var2;
-  hud_fadeovertime(var2, 0);
-  wait var2;
+  var_3 = (self.y - var_0) / 61.4286;
+  hud_moveovertime(var_3, undefined, var_0);
+  wait var_3 - var_2;
+  hud_fadeovertime(var_2, 0);
+  wait var_2;
   hud_destroy();
 }
 
@@ -440,11 +440,11 @@ function creditdept_moveside_flag_thread() {
   self.go_away = 1;
 }
 
-function creditdept_fadeoutin(var0, var1) {
-  self fadeovertime(var0 * 0.5);
-  self.alpha = var1;
-  wait var0 * 0.5;
-  self fadeovertime(var0 * 0.5);
+function creditdept_fadeoutin(var_0, var_1) {
+  self fadeovertime(var_0 * 0.5);
+  self.alpha = var_1;
+  wait var_0 * 0.5;
+  self fadeovertime(var_0 * 0.5);
   self.alpha = 0.8;
 }
 
@@ -454,275 +454,275 @@ function creditlogo_fadein() {
   self.alpha = 1;
 }
 
-function creditline(var0, var1, var2, var3, var4) {
+function creditline(var_0, var_1, var_2, var_3, var_4) {
   level endon("credits_skipped");
-  var5 = [];
-  var6 = 0;
+  var_5 = [];
+  var_6 = 0;
 
-  if(isDefined(var1)) {
-    if(var1 == "title") {
-      var5 = createcreditelem(var0, var1);
-      var6 = 0.25 * getmovetimescale();
-    } else if(var1 == "dept") {
+  if(isDefined(var_1)) {
+    if(var_1 == "title") {
+      var_5 = createcreditelem(var_0, var_1);
+      var_6 = 0.25 * getmovetimescale();
+    } else if(var_1 == "dept") {
       wait 0.5 * getmovetimescale();
-      var5 = createcreditelem(var0, var1);
-      var6 = 0.2 * getmovetimescale();
-    } else if(var1 == "subtitle") {
-      var5 = createcreditelem(var0, var1);
-      var6 = 0.5 * getmovetimescale();
-    } else if(var0 == "logo_dolby_2019" || var0 == "logo_havok_2019") {
+      var_5 = createcreditelem(var_0, var_1);
+      var_6 = 0.2 * getmovetimescale();
+    } else if(var_1 == "subtitle") {
+      var_5 = createcreditelem(var_0, var_1);
+      var_6 = 0.5 * getmovetimescale();
+    } else if(var_0 == "logo_dolby_2019" || var_0 == "logo_havok_2019") {
       level.superwide = 1;
-      var5 = createcreditelem(var0, var1, var3, var4);
-    } else if(var1 == "image") {
-      var5 = createcreditelem(var0, var1, var3, var4);
-      var6 = 1 * getmovetimescale();
-    } else if(var1 == "small_image") {
-      var5 = createcreditelem(var0, var1);
-      var6 = 0.5 * getmovetimescale();
-    } else if(var1 == "music") {
-      var5 = createcreditelem(var0, var1);
-    } else if(var1 == "cast") {
-      var5 = createcreditelem(var2, "castleft", undefined, undefined);
-      var5 = createcreditelem(var0, "castright", undefined, undefined);
+      var_5 = createcreditelem(var_0, var_1, var_3, var_4);
+    } else if(var_1 == "image") {
+      var_5 = createcreditelem(var_0, var_1, var_3, var_4);
+      var_6 = 1 * getmovetimescale();
+    } else if(var_1 == "small_image") {
+      var_5 = createcreditelem(var_0, var_1);
+      var_6 = 0.5 * getmovetimescale();
+    } else if(var_1 == "music") {
+      var_5 = createcreditelem(var_0, var_1);
+    } else if(var_1 == "cast") {
+      var_5 = createcreditelem(var_2, "castleft", undefined, undefined);
+      var_5 = createcreditelem(var_0, "castright", undefined, undefined);
     } else {
-      var5 = createcreditelem(var0, var1, undefined, undefined);
+      var_5 = createcreditelem(var_0, var_1, undefined, undefined);
     }
   }
 
-  var7 = 0;
+  var_7 = 0;
 
-  if(var1 == "leftname_thread" || var1 == "rightname_thread" || var0 == "logo_havok_2019") {
-    var7 = 1;
+  if(var_1 == "leftname_thread" || var_1 == "rightname_thread" || var_0 == "logo_havok_2019") {
+    var_7 = 1;
   }
 
-  scripts\engine\utility::array_thread(var5, &credit_move);
+  scripts\engine\utility::array_thread(var_5, &credit_move);
 
-  if(!var7) {
-    var8 = getlinespacetime() + var6;
-    var8 = max(var8, 0);
-    wait var8;
+  if(!var_7) {
+    var_8 = getlinespacetime() + var_6;
+    var_8 = max(var_8, 0);
+    wait var_8;
   }
 
-  return var5[var5.size - 1];
+  return var_5[var_5.size - 1];
 }
 
-function credit_move(var0) {
+function credit_move(var_0) {
   level endon("credits_skipped");
   self endon("stop_move");
-  var1 = 1 * getmovetimescale();
+  var_1 = 1 * getmovetimescale();
 
   if(self.type == "logotext") {
-    hud_fadeovertime(var1, 0.8);
+    hud_fadeovertime(var_1, 0.8);
   } else if(self.type == "dept") {
-    hud_fadeovertime(var1, 0.8);
+    hud_fadeovertime(var_1, 0.8);
   } else {
-    hud_fadeovertime(var1, 1);
+    hud_fadeovertime(var_1, 1);
   }
 
-  var2 = getmovetime();
-  hud_moveovertime(var2, undefined, -215);
-  var3 = 0;
+  var_2 = getmovetime();
+  hud_moveovertime(var_2, undefined, -215);
+  var_3 = 0;
 
-  if(istrue(var0)) {
-    var3 = 1.2;
+  if(istrue(var_0)) {
+    var_3 = 1.2;
   }
 
-  wait var2 - var1 - var3;
-  hud_fadeovertime(var1, 0);
-  wait var1;
+  wait var_2 - var_1 - var_3;
+  hud_fadeovertime(var_1, 0);
+  wait var_1;
   hud_destroy();
 }
 
-function hud_fadeovertime(var0, var1) {
-  self fadeovertime(var0);
-  self.alpha = var1;
+function hud_fadeovertime(var_0, var_1) {
+  self fadeovertime(var_0);
+  self.alpha = var_1;
 }
 
-function hud_moveovertime(var0, var1, var2) {
+function hud_moveovertime(var_0, var_1, var_2) {
   level endon("credits_skipped");
   self.startmovetime = gettime();
   self.startmovey = self.y;
-  self moveovertime(var0);
+  self moveovertime(var_0);
 
-  if(isDefined(var1)) {
-    self.x = var1;
+  if(isDefined(var_1)) {
+    self.x = var_1;
   }
 
-  if(isDefined(var2)) {
-    self.y = var2;
+  if(isDefined(var_2)) {
+    self.y = var_2;
     return;
   }
 }
 
-function hud_destroy(var0, var1) {
+function hud_destroy(var_0, var_1) {
   self destroy();
 }
 
-function blankline(var0) {
-  if(!isDefined(var0)) {
-    var0 = 0;
+function blankline(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  wait getlinespacetime() + var0;
+  wait getlinespacetime() + var_0;
 }
 
-function createcreditelem(var0, var1, var2, var3, var4) {
-  var5 = newhudelem();
-  level.credits.huds[level.credits.huds.size] = var5;
-  var6 = 0;
-  var7 = 1.35;
-  var8 = 0;
-  var9 = (1, 1, 1);
-  var10 = "small";
-  var11 = 1.1;
-  var12 = "center";
-  var13 = "middle";
-  var14 = "center";
-  var15 = "middle";
-  var16 = 20;
-  var17 = 215;
-  var18 = undefined;
+function createcreditelem(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = newhudelem();
+  level.credits.huds[level.credits.huds.size] = var_5;
+  var_6 = 0;
+  var_7 = 1.35;
+  var_8 = 0;
+  var_9 = (1, 1, 1);
+  var_10 = "small";
+  var_11 = 1.1;
+  var_12 = "center";
+  var_13 = "middle";
+  var_14 = "center";
+  var_15 = "middle";
+  var_16 = 20;
+  var_17 = 215;
+  var_18 = undefined;
 
-  if(var1 == "rightname" || var1 == "rightname_thread" || var0 == "logo_dolby_2019") {
-    var6 = 100;
-
-    if(level.superwide) {
-      var6 += 50;
-    }
-
-    if(var0 == "logo_dolby_2019") {
-      var18 = var0;
-      var13 = "bottom";
-    }
-  } else if(var1 == "leftname" || var1 == "leftname_thread" || var0 == "logo_havok_2019") {
-    var6 = -100;
+  if(var_1 == "rightname" || var_1 == "rightname_thread" || var_0 == "logo_dolby_2019") {
+    var_6 = 100;
 
     if(level.superwide) {
-      var6 -= 50;
+      var_6 += 50;
     }
 
-    if(var0 == "logo_havok_2019") {
-      var18 = var0;
-      var13 = "bottom";
+    if(var_0 == "logo_dolby_2019") {
+      var_18 = var_0;
+      var_13 = "bottom";
     }
-  } else if(var1 == "rightname_wide") {
-    var6 = 200;
-  } else if(var1 == "leftname_wide") {
-    var6 = -200;
-  } else if(var1 == "castleft") {
-    var6 = -5;
-    var12 = "right";
-  } else if(var1 == "castright") {
-    var6 = 5;
-    var12 = "left";
+  } else if(var_1 == "leftname" || var_1 == "leftname_thread" || var_0 == "logo_havok_2019") {
+    var_6 = -100;
+
+    if(level.superwide) {
+      var_6 -= 50;
+    }
+
+    if(var_0 == "logo_havok_2019") {
+      var_18 = var_0;
+      var_13 = "bottom";
+    }
+  } else if(var_1 == "rightname_wide") {
+    var_6 = 200;
+  } else if(var_1 == "leftname_wide") {
+    var_6 = -200;
+  } else if(var_1 == "castleft") {
+    var_6 = -5;
+    var_12 = "right";
+  } else if(var_1 == "castright") {
+    var_6 = 5;
+    var_12 = "left";
   }
 
-  if(var1 == "dept") {
-    var6 = 0;
-    var7 = 1.75;
-    var10 = "BIGFIXED";
-    var12 = "center";
-    var11 = 0.8;
-  } else if(var1 == "image") {
-    var18 = var0;
-  } else if(var1 == "logo") {
-    var18 = var0;
-    var6 = 0;
-    var12 = "center";
-    var13 = "middle";
-    var16 = 21;
-  } else if(var1 == "logotext") {
-    var6 = 0;
-    var12 = "center";
-    var13 = "bottom";
-    var10 = "BIGFIXED";
-    var11 = 1.3;
-  } else if(var1 == "small_image") {
-    var18 = var0;
-    var2 *= 0.5;
-    var3 *= 0.5;
-  } else if(var1 == "center") {
-    var6 = 0;
+  if(var_1 == "dept") {
+    var_6 = 0;
+    var_7 = 1.75;
+    var_10 = "BIGFIXED";
+    var_12 = "center";
+    var_11 = 0.8;
+  } else if(var_1 == "image") {
+    var_18 = var_0;
+  } else if(var_1 == "logo") {
+    var_18 = var_0;
+    var_6 = 0;
+    var_12 = "center";
+    var_13 = "middle";
+    var_16 = 21;
+  } else if(var_1 == "logotext") {
+    var_6 = 0;
+    var_12 = "center";
+    var_13 = "bottom";
+    var_10 = "BIGFIXED";
+    var_11 = 1.3;
+  } else if(var_1 == "small_image") {
+    var_18 = var_0;
+    var_2 *= 0.5;
+    var_3 *= 0.5;
+  } else if(var_1 == "center") {
+    var_6 = 0;
   }
 
-  var5.x = var6;
-  var5.y = var17;
-  var5.start_y = var5.y;
-  var5.alignx = var12;
-  var5.aligny = var13;
-  var5.horzalign = var14;
-  var5.vertalign = var15;
-  var5.alpha = 0;
-  var5.fontscale = var11;
-  var5.color = var9;
-  var5.font = var10;
-  var5.glowcolor = (0.3, 0.6, 0.3);
-  var5.glowalpha = var8;
-  var5.foreground = 1;
-  var5.sort = var16;
-  var5.starttime = gettime();
-  var5.type = var1;
+  var_5.x = var_6;
+  var_5.y = var_17;
+  var_5.start_y = var_5.y;
+  var_5.alignx = var_12;
+  var_5.aligny = var_13;
+  var_5.horzalign = var_14;
+  var_5.vertalign = var_15;
+  var_5.alpha = 0;
+  var_5.fontscale = var_11;
+  var_5.color = var_9;
+  var_5.font = var_10;
+  var_5.glowcolor = (0.3, 0.6, 0.3);
+  var_5.glowalpha = var_8;
+  var_5.foreground = 1;
+  var_5.sort = var_16;
+  var_5.starttime = gettime();
+  var_5.type = var_1;
 
-  if(!isDefined(var18)) {
-    var5 settext(try_getlocalizedtext(var0));
+  if(!isDefined(var_18)) {
+    var_5 settext(try_getlocalizedtext(var_0));
   } else {
-    var5 setshader(var18, int(var2), int(var3));
+    var_5 setshader(var_18, int(var_2), int(var_3));
   }
 
-  return var5;
+  return var_5;
 }
 
-function newhudimage(var0, var1, var2) {
-  var3 = newhudelem();
-  var3.x = 0;
-  var3.y = 0;
-  var3.sort = 1;
-  var3.alpha = 1;
-  var3.foreground = 0;
-  var3 setshader(var0, var1, var2);
-  return var3;
+function newhudimage(var_0, var_1, var_2) {
+  var_3 = newhudelem();
+  var_3.x = 0;
+  var_3.y = 0;
+  var_3.sort = 1;
+  var_3.alpha = 1;
+  var_3.foreground = 0;
+  var_3 setshader(var_0, var_1, var_2);
+  return var_3;
 }
 
-function createfullscreenimage(var0, var1, var2) {
-  if(!isDefined(var1)) {
-    var1 = 640;
+function createfullscreenimage(var_0, var_1, var_2) {
+  if(!isDefined(var_1)) {
+    var_1 = 640;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 480;
+  if(!isDefined(var_2)) {
+    var_2 = 480;
   }
 
-  var3 = newhudimage(var0, var1, var2);
-  var3.alignx = "left";
-  var3.aligny = "top";
-  var3.horzalign = "fullscreen";
-  var3.vertalign = "fullscreen";
-  return var3;
+  var_3 = newhudimage(var_0, var_1, var_2);
+  var_3.alignx = "left";
+  var_3.aligny = "top";
+  var_3.horzalign = "fullscreen";
+  var_3.vertalign = "fullscreen";
+  return var_3;
 }
 
-function createcenterimage(var0, var1, var2) {
-  if(!isDefined(var1)) {
-    var1 = 640;
+function createcenterimage(var_0, var_1, var_2) {
+  if(!isDefined(var_1)) {
+    var_1 = 640;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 480;
+  if(!isDefined(var_2)) {
+    var_2 = 480;
   }
 
-  var3 = newhudimage(var0, var1, var2);
-  var3.alignx = "center";
-  var3.aligny = "middle";
-  var3.horzalign = "center";
-  var3.vertalign = "middle";
-  var3.sort = 2;
-  return var3;
+  var_3 = newhudimage(var_0, var_1, var_2);
+  var_3.alignx = "center";
+  var_3.aligny = "middle";
+  var_3.horzalign = "center";
+  var_3.vertalign = "middle";
+  var_3.sort = 2;
+  return var_3;
 }
 
-function creditlinearray(var0) {
-  var0 = scripts\engine\utility::alphabetize(var0);
+function creditlinearray(var_0) {
+  var_0 = scripts\engine\utility::alphabetize(var_0);
 
-  for(var1 = 0; var1 < var0.size; var1++) {
-    creditline(var0[var1], undefined, "center");
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    creditline(var_0[var_1], undefined, "center");
   }
 
   wait 3 * getmovetimescale();
@@ -844,16 +844,16 @@ function initlocalizedcredits() {
   level.credits.strings["CREDITS/DEPT_VOCALPERFORMED"] = &"CREDITS/DEPT_VOCALPERFORMED";
 }
 
-function try_getlocalizedtext(var0) {
-  var1 = getsubstr(var0, 0, 8);
+function try_getlocalizedtext(var_0) {
+  var_1 = getsubstr(var_0, 0, 8);
 
-  if(var1 != "CREDITS/") {
-    return var0;
+  if(var_1 != "CREDITS/") {
+    return var_0;
   }
 
-  if(!isDefined(level.credits.strings[var0])) {
-    return ("(not str ref) " + var0);
+  if(!isDefined(level.credits.strings[var_0])) {
+    return ("(not str ref) " + var_0);
   }
 
-  return level.credits.strings[var0];
+  return level.credits.strings[var_0];
 }

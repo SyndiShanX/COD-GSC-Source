@@ -22,11 +22,11 @@ function main() {
   self.grenadeammo = 2;
 }
 
-function setup_model(var0) {
-  var1 = undefined;
-  var2 = ["character_spetsnaz_gasmask_cqc_cp", "character_spetsnaz_gasmask_nohelmet_cqc_cp"];
+function setup_model(var_0) {
+  var_1 = undefined;
+  var_2 = ["character_spetsnaz_gasmask_cqc_cp", "character_spetsnaz_gasmask_nohelmet_cqc_cp"];
 
-  switch (scripts\code\character::get_random_character(2, var1, var2, "actor_enemy_cp_rus_desert_shotgun_gasmask")) {
+  switch (scripts\code\character::get_random_character(2, var_1, var_2, "actor_enemy_cp_rus_desert_shotgun_gasmask")) {
     case 0:
       scripts\cp\cp_aitype_structs_ally_usmc::main_mp();
       break;
@@ -37,28 +37,28 @@ function setup_model(var0) {
 }
 
 function precache() {
-  var0 = "actor_enemy_cp_rus_desert_shotgun_gasmask";
+  var_0 = "actor_enemy_cp_rus_desert_shotgun_gasmask";
 
   if(!isDefined(level.agent_definition)) {
     level.agent_definition = [];
   }
 
-  if(!isDefined(level.agent_definition[var0])) {
-    level.agent_definition[var0] = [];
-    level.agent_definition[var0]["species"] = "human";
-    level.agent_definition[var0]["traversal_unit_type"] = "soldier";
-    level.agent_definition[var0]["health"] = 270;
-    level.agent_definition[var0]["xp"] = 50;
-    level.agent_definition[var0]["reward"] = 120;
-    level.agent_definition[var0]["asm"] = "soldier_cp";
-    level.agent_definition[var0]["radius"] = 15;
-    level.agent_definition[var0]["height"] = 70;
-    level.agent_definition[var0]["behaviorTree"] = "soldier_agent";
-    level.agent_definition[var0]["team"] = "axis";
-    level.agent_definition[var0]["setup_func"] = &main;
-    level.agent_definition[var0]["setup_model_func"] = &setup_model;
-    scripts\cp\cp_aitype_structs_ally_usmc::precache_mp(var0);
-    scripts\cp\cp_enemy_drone_turret::precache_mp(var0);
+  if(!isDefined(level.agent_definition[var_0])) {
+    level.agent_definition[var_0] = [];
+    level.agent_definition[var_0]["species"] = "human";
+    level.agent_definition[var_0]["traversal_unit_type"] = "soldier";
+    level.agent_definition[var_0]["health"] = 270;
+    level.agent_definition[var_0]["xp"] = 50;
+    level.agent_definition[var_0]["reward"] = 120;
+    level.agent_definition[var_0]["asm"] = "soldier_cp";
+    level.agent_definition[var_0]["radius"] = 15;
+    level.agent_definition[var_0]["height"] = 70;
+    level.agent_definition[var_0]["behaviorTree"] = "soldier_agent";
+    level.agent_definition[var_0]["team"] = "axis";
+    level.agent_definition[var_0]["setup_func"] = &main;
+    level.agent_definition[var_0]["setup_model_func"] = &setup_model;
+    scripts\cp\cp_aitype_structs_ally_usmc::precache_mp(var_0);
+    scripts\cp\cp_enemy_drone_turret::precache_mp(var_0);
   }
 
   scripts\aitypes\bt_util::init();

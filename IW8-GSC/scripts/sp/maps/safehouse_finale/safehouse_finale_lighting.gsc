@@ -34,42 +34,42 @@ function lighting_setup_dvars() {
 function fly_in_lights() {
   wait 0.5;
   scripts\engine\utility::flag_wait("fly_attack_done");
-  var0 = getEntArray("fly_in_lights", "targetname");
+  var_0 = getEntArray("fly_in_lights", "targetname");
 
-  foreach(var2 in var0) {
-    var2 setlightintensity(0);
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(0);
   }
 }
 
 function hadir_boost_lights() {
   wait 0.1;
-  var0 = getEntArray("hadir_boost", "targetname");
+  var_0 = getEntArray("hadir_boost", "targetname");
 
-  foreach(var2 in var0) {
-    var2.og = var2 getlightintensity();
-    var2 setlightintensity(0);
+  foreach(var_2 in var_0) {
+    var_2.og = var_2 getlightintensity();
+    var_2 setlightintensity(0);
   }
 
   scripts\engine\utility::flag_wait("hadir_go_to_hatch");
 
-  foreach(var2 in var0) {
-    var2 setlightintensity(var2.og);
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(var_2.og);
   }
 
   scripts\engine\utility::flag_wait("player_in_armory_02");
 
-  foreach(var2 in var0) {
-    var2 setlightintensity(0);
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(0);
   }
 }
 
 function town_truck_lights() {
   wait 0.1;
-  var0 = getEntArray("truck_lights", "targetname");
+  var_0 = getEntArray("truck_lights", "targetname");
 
-  foreach(var2 in var0) {
-    var2.og = var2 getlightintensity();
-    var2 setlightintensity(0);
+  foreach(var_2 in var_0) {
+    var_2.og = var_2 getlightintensity();
+    var_2 setlightintensity(0);
   }
 
   while(!scripts\engine\utility::flag_exist("fly_attack_done")) {
@@ -78,8 +78,8 @@ function town_truck_lights() {
 
   scripts\engine\utility::flag_wait("fly_attack_done");
 
-  foreach(var2 in var0) {
-    var2 setlightintensity(var2.og);
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(var_2.og);
   }
 }
 
@@ -114,10 +114,10 @@ function hadir_hero_lights() {
 
   level waittill("enable_guns_intro");
   wait 1;
-  var0 = getEntArray("intro_rim_light", "targetname");
+  var_0 = getEntArray("intro_rim_light", "targetname");
 
-  foreach(var2 in var0) {
-    thread lerp_value_charge_explosion(var2, var2 getlightintensity(), 0);
+  foreach(var_2 in var_0) {
+    thread lerp_value_charge_explosion(var_2, var_2 getlightintensity(), 0);
   }
 }
 
@@ -126,51 +126,51 @@ function hangar_fire_lights() {
     waitframe();
   }
 
-  var0 = getEntArray("hangar_end_fire", "targetname");
+  var_0 = getEntArray("hangar_end_fire", "targetname");
 
-  foreach(var2 in var0) {
-    var2.og = var2 getlightintensity();
-    var2 setlightintensity(0);
+  foreach(var_2 in var_0) {
+    var_2.og = var_2 getlightintensity();
+    var_2 setlightintensity(0);
   }
 
   scripts\engine\utility::flag_wait("power_kill");
 
-  foreach(var2 in var0) {
-    var2 setlightintensity(var2.og);
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(var_2.og);
   }
 }
 
 function hellcannon_lights() {
-  var0 = 150;
-  var1 = 0.15;
-  var2 = 1;
+  var_0 = 150;
+  var_1 = 0.15;
+  var_2 = 1;
   level.lt_charge_explosion_02 = getEnt("charge_explosion_02", "targetname");
   level.lt_charge_explosion_02 setlightintensity(0);
   level waittill("level_hellCannonImpact");
   waitframe();
-  thread lerp_value_charge_explosion(level.lt_charge_explosion_02, 0, var0);
+  thread lerp_value_charge_explosion(level.lt_charge_explosion_02, 0, var_0);
   wait 0.15;
-  thread lerp_value_charge_explosion(level.lt_charge_explosion_02, var0, 0);
+  thread lerp_value_charge_explosion(level.lt_charge_explosion_02, var_0, 0);
   level waittill("level_hellCannonImpact");
   waitframe();
-  thread lerp_value_charge_explosion(level.lt_charge_explosion_02, 0, var0);
+  thread lerp_value_charge_explosion(level.lt_charge_explosion_02, 0, var_0);
   wait 0.2;
-  thread lerp_value_charge_explosion(level.lt_charge_explosion_02, var0, 0);
+  thread lerp_value_charge_explosion(level.lt_charge_explosion_02, var_0, 0);
 }
 
-function lerp_value_charge_explosion(var0, var1, var2) {
-  var3 = var1 - var0;
-  var4 = 0.05;
-  var5 = int(var2 / var4);
+function lerp_value_charge_explosion(var_0, var_1, var_2) {
+  var_3 = var_1 - var_0;
+  var_4 = 0.05;
+  var_5 = int(var_2 / var_4);
 
-  if(var5 > 0) {
-    var6 = var3 / var5;
+  if(var_5 > 0) {
+    var_6 = var_3 / var_5;
 
-    while(var5) {
-      var0 += var6;
-      self setlightintensity(var0);
-      wait var4;
-      var5--;
+    while(var_5) {
+      var_0 += var_6;
+      self setlightintensity(var_0);
+      wait var_4;
+      var_5--;
     }
 
     return;
@@ -186,77 +186,77 @@ function armory_lights() {
     return;
   }
 
-  var0 = getEntArray("emergency_hangar", "targetname");
+  var_0 = getEntArray("emergency_hangar", "targetname");
 
-  foreach(var2 in var0) {
-    var2.og = var2 getlightintensity();
-    var2 setlightintensity(0);
+  foreach(var_2 in var_0) {
+    var_2.og = var_2 getlightintensity();
+    var_2 setlightintensity(0);
   }
 
   level waittill("power_kill");
-  var4 = getEntArray("hangar_armory_lights", "targetname");
+  var_4 = getEntArray("hangar_armory_lights", "targetname");
 
-  foreach(var2 in var4) {
-    var2 setlightintensity(0);
+  foreach(var_2 in var_4) {
+    var_2 setlightintensity(0);
   }
 
-  var7 = getEntArray("armory_lights_caged_on", "targetname");
+  var_7 = getEntArray("armory_lights_caged_on", "targetname");
 
-  foreach(var2 in var7) {
-    var2 setModel("me_light_ceiling_fluorescent_tube_small_cage");
+  foreach(var_2 in var_7) {
+    var_2 setModel("me_light_ceiling_fluorescent_tube_small_cage");
   }
 
-  var10 = getEntArray("armory_red_light_fixtures", "targetname");
+  var_10 = getEntArray("armory_red_light_fixtures", "targetname");
 
-  foreach(var2 in var10) {
-    var2 setModel("lighting_red_emergency_01_on");
+  foreach(var_2 in var_10) {
+    var_2 setModel("lighting_red_emergency_01_on");
   }
 
-  var13 = getEntArray("hangar_armory_door_light", "targetname");
+  var_13 = getEntArray("hangar_armory_door_light", "targetname");
 
-  foreach(var2 in var13) {
-    var2 setModel("ee_light_mounted_exterior_industrial_caged_02");
+  foreach(var_2 in var_13) {
+    var_2 setModel("ee_light_mounted_exterior_industrial_caged_02");
   }
 
-  var0 = getEntArray("emergency_hangar", "targetname");
+  var_0 = getEntArray("emergency_hangar", "targetname");
 
-  foreach(var2 in var0) {
-    var2 setlightintensity(var2.og);
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(var_2.og);
   }
 
-  var18 = getEntArray("hangar_lights", "targetname");
+  var_18 = getEntArray("hangar_lights", "targetname");
 
-  foreach(var2 in var18) {
-    var2 setModel("uk_industrial_light_01");
+  foreach(var_2 in var_18) {
+    var_2 setModel("uk_industrial_light_01");
   }
 
-  var21 = getEntArray("hangar_lights_back_fixture", "targetname");
+  var_21 = getEntArray("hangar_lights_back_fixture", "targetname");
 
-  foreach(var2 in var21) {
-    var2 setModel("un_painters_light_01");
+  foreach(var_2 in var_21) {
+    var_2 setModel("un_painters_light_01");
   }
 
-  var24 = getEntArray("hangar_lights_front", "targetname");
+  var_24 = getEntArray("hangar_lights_front", "targetname");
 
-  foreach(var2 in var24) {
-    var2 setlightintensity(0);
+  foreach(var_2 in var_24) {
+    var_2 setlightintensity(0);
   }
 
-  var27 = getEntArray("hangar_lights_mid", "targetname");
+  var_27 = getEntArray("hangar_lights_mid", "targetname");
 
-  foreach(var2 in var27) {
-    var2 setlightintensity(0);
+  foreach(var_2 in var_27) {
+    var_2 setlightintensity(0);
   }
 
-  var30 = getEntArray("hangar_lights_back", "targetname");
+  var_30 = getEntArray("hangar_lights_back", "targetname");
 
-  foreach(var2 in var30) {
-    var2 setlightintensity(0);
+  foreach(var_2 in var_30) {
+    var_2 setlightintensity(0);
   }
 }
 
 function tarmac_hangar_lights() {
-  var0 = [];
+  var_0 = [];
 
   while(!scripts\engine\utility::flag_exist("tarmac_mid")) {
     waitframe();
@@ -266,44 +266,44 @@ function tarmac_hangar_lights() {
     return;
   }
 
-  var1 = getEntArray("hangar_lights_front", "targetname");
-  var1 = scripts\engine\utility::array_combine(var1, getEntArray("hangar_lights_mid", "targetname"));
-  var1 = scripts\engine\utility::array_combine(var1, getEntArray("hangar_lights_back", "targetname"));
+  var_1 = getEntArray("hangar_lights_front", "targetname");
+  var_1 = scripts\engine\utility::array_combine(var_1, getEntArray("hangar_lights_mid", "targetname"));
+  var_1 = scripts\engine\utility::array_combine(var_1, getEntArray("hangar_lights_back", "targetname"));
 
-  foreach(var3 in var1) {
-    var3.og_intensity = var3 getlightintensity();
-    var0 = var3;
-    var3 setlightintensity(0);
+  foreach(var_3 in var_1) {
+    var_3.og_intensity = var_3 getlightintensity();
+    var_0 = var_3;
+    var_3 setlightintensity(0);
   }
 
   scripts\engine\utility::flag_wait("chu_entrance");
 
-  foreach(var3 in var1) {
-    var3 setlightintensity(var3.og_intensity);
+  foreach(var_3 in var_1) {
+    var_3 setlightintensity(var_3.og_intensity);
   }
 
-  var7 = getEntArray("hangar_lights_front", "targetname");
+  var_7 = getEntArray("hangar_lights_front", "targetname");
 
-  foreach(var3 in var7) {
-    var3.og_intensity = var3 getlightintensity();
-    var0 = var3;
-    var3 setlightintensity(10);
+  foreach(var_3 in var_7) {
+    var_3.og_intensity = var_3 getlightintensity();
+    var_0 = var_3;
+    var_3 setlightintensity(10);
   }
 
-  var10 = getEntArray("hangar_lights_mid", "targetname");
+  var_10 = getEntArray("hangar_lights_mid", "targetname");
 
-  foreach(var3 in var10) {
-    var3.og_intensity = var3 getlightintensity();
-    var0 = var3;
-    var3 setlightintensity(3);
+  foreach(var_3 in var_10) {
+    var_3.og_intensity = var_3 getlightintensity();
+    var_0 = var_3;
+    var_3 setlightintensity(3);
   }
 
-  var13 = getEntArray("hangar_lights_back", "targetname");
+  var_13 = getEntArray("hangar_lights_back", "targetname");
 
-  foreach(var3 in var13) {
-    var3.og_intensity = var3 getlightintensity();
-    var0 = var3;
-    var3 setlightintensity(3);
+  foreach(var_3 in var_13) {
+    var_3.og_intensity = var_3 getlightintensity();
+    var_0 = var_3;
+    var_3 setlightintensity(3);
   }
 
   while(!scripts\engine\utility::flag_exist("tarmac_mid")) {
@@ -311,7 +311,7 @@ function tarmac_hangar_lights() {
   }
 
   scripts\engine\utility::flag_wait("tarmac_mid");
-  scripts\engine\utility::array_thread(var0, &dim_hangar_lights);
+  scripts\engine\utility::array_thread(var_0, &dim_hangar_lights);
 }
 
 function ending_scene_lights() {
@@ -320,59 +320,59 @@ function ending_scene_lights() {
   }
 
   scripts\engine\utility::flag_wait("killstreak_complete");
-  var0 = getEntArray("emergency_hangar", "targetname");
+  var_0 = getEntArray("emergency_hangar", "targetname");
 
-  foreach(var2 in var0) {
-    var2.og = var2 getlightintensity();
-    var2 setlightintensity(0);
+  foreach(var_2 in var_0) {
+    var_2.og = var_2 getlightintensity();
+    var_2 setlightintensity(0);
   }
 
-  var4 = getEntArray("hangar_end_fire", "targetname");
+  var_4 = getEntArray("hangar_end_fire", "targetname");
 
-  foreach(var2 in var4) {
-    var2 setlightintensity(0);
+  foreach(var_2 in var_4) {
+    var_2 setlightintensity(0);
   }
 
-  var7 = getEntArray("hangar_armory_lights", "targetname");
+  var_7 = getEntArray("hangar_armory_lights", "targetname");
 
-  foreach(var2 in var7) {
-    var2 setlightintensity(0);
+  foreach(var_2 in var_7) {
+    var_2 setlightintensity(0);
   }
 
-  var10 = getEntArray("armory_lights_caged_on", "targetname");
+  var_10 = getEntArray("armory_lights_caged_on", "targetname");
 
-  foreach(var2 in var10) {
-    var2 setModel("me_light_ceiling_fluorescent_tube_small_cage");
+  foreach(var_2 in var_10) {
+    var_2 setModel("me_light_ceiling_fluorescent_tube_small_cage");
   }
 
-  var0 = getEntArray("emergency_hangar", "targetname");
+  var_0 = getEntArray("emergency_hangar", "targetname");
 
-  foreach(var2 in var0) {
-    var2 setlightintensity(0);
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(0);
   }
 
-  var15 = getEntArray("hangar_lights", "targetname");
+  var_15 = getEntArray("hangar_lights", "targetname");
 
-  foreach(var2 in var15) {
-    var2 setModel("uk_industrial_light_01");
+  foreach(var_2 in var_15) {
+    var_2 setModel("uk_industrial_light_01");
   }
 
-  var18 = getEntArray("hangar_lights_front", "targetname");
+  var_18 = getEntArray("hangar_lights_front", "targetname");
 
-  foreach(var2 in var18) {
-    var2 setlightintensity(0);
+  foreach(var_2 in var_18) {
+    var_2 setlightintensity(0);
   }
 
-  var21 = getEntArray("hangar_lights_mid", "targetname");
+  var_21 = getEntArray("hangar_lights_mid", "targetname");
 
-  foreach(var2 in var21) {
-    var2 setlightintensity(0);
+  foreach(var_2 in var_21) {
+    var_2 setlightintensity(0);
   }
 
-  var24 = getEntArray("hangar_lights_back", "targetname");
+  var_24 = getEntArray("hangar_lights_back", "targetname");
 
-  foreach(var2 in var24) {
-    var2 setlightintensity(0);
+  foreach(var_2 in var_24) {
+    var_2 setlightintensity(0);
   }
 }
 
@@ -381,46 +381,46 @@ function dim_hangar_lights() {
 }
 
 function truck_lights() {
-  var0 = getEntArray("truck_lights", "targetname");
+  var_0 = getEntArray("truck_lights", "targetname");
 
-  foreach(var2 in var0) {
-    var2 setlightintensity(0.8);
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(0.8);
   }
 
-  var0 = getEntArray("gate_truck_lights", "targetname");
+  var_0 = getEntArray("gate_truck_lights", "targetname");
 
-  foreach(var2 in var0) {
-    var2 setlightintensity(0.8);
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(0.8);
   }
 
-  var0 = getEntArray("vindia_spotlight", "targetname");
+  var_0 = getEntArray("vindia_spotlight", "targetname");
 
-  foreach(var2 in var0) {
-    var2 setlightintensity(15);
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(15);
   }
 }
 
 function charge_explosion_01() {
-  var0 = 150;
-  var1 = 0.15;
-  var2 = 1;
-  var3 = getEntArray("charge_explosion_01", "targetname");
+  var_0 = 150;
+  var_1 = 0.15;
+  var_2 = 1;
+  var_3 = getEntArray("charge_explosion_01", "targetname");
 
-  foreach(var5 in var3) {
-    var5.og_intensity = var5 getlightintensity();
-    var5 setlightintensity(0);
+  foreach(var_5 in var_3) {
+    var_5.og_intensity = var_5 getlightintensity();
+    var_5 setlightintensity(0);
   }
 
   level waittill("level_hellCannonImpact");
   waitframe();
 
-  foreach(var5 in var3) {
-    thread lerp_value_charge_explosion(var5, 0, var5.og_intensity);
+  foreach(var_5 in var_3) {
+    thread lerp_value_charge_explosion(var_5, 0, var_5.og_intensity);
   }
 
-  wait var1;
+  wait var_1;
 
-  foreach(var5 in var3) {
-    thread lerp_value_charge_explosion(var5, var5.og_intensity, 0);
+  foreach(var_5 in var_3) {
+    thread lerp_value_charge_explosion(var_5, var_5.og_intensity, 0);
   }
 }

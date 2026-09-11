@@ -28,10 +28,10 @@ function main() {
   self.usescriptedweapon = 1;
   self.scriptedweaponclassprimary = "lmg";
   self.weapon = scripts\code\ai::create_weapon_in_script(["iw8_lm_pkilo"]);
-  var0 = undefined;
-  var1 = ["character_spetsnaz_gasmask_lmg", "character_spetsnaz_gasmask_lmg", "character_spetsnaz_gasmask_nohelmet_lmg"];
+  var_0 = undefined;
+  var_1 = ["character_spetsnaz_gasmask_lmg", "character_spetsnaz_gasmask_lmg", "character_spetsnaz_gasmask_nohelmet_lmg"];
 
-  switch (scripts\code\character::get_random_character(3, var0, var1)) {
+  switch (scripts\code\character::get_random_character(3, var_0, var_1)) {
     case 0:
       character\character_spetsnaz_gasmask_lmg::main();
       break;
@@ -48,7 +48,7 @@ function spawner() {
   self setspawnerteam("axis");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\character_spetsnaz_gasmask_lmg::precache();
   character\character_spetsnaz_gasmask_lmg::precache();
   character\character_spetsnaz_gasmask_nohelmet_lmg::precache();

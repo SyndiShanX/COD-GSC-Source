@@ -46,9 +46,9 @@ function adrenaline_removeonplayernotifies() {
 
 function adrenaline_removeondamage() {
   for(;;) {
-    self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-    if(level.gametype == "br" && (var4 == "MOD_TRIGGER_HURT" || var4 == "MOD_UNKNOWN")) {
+    if(level.gametype == "br" && (var_4 == "MOD_TRIGGER_HURT" || var_4 == "MOD_UNKNOWN")) {
       continue;
     }
 

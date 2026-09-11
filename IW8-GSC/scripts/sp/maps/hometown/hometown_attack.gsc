@@ -10,16 +10,16 @@ function buried_main() {
   scripts\engine\utility::exploder("burried_sun");
   scripts\engine\utility::exploder("buried_eyes");
   level.player thread scripts\sp\maps\hometown\hometown_util::weapon_monitor();
-  var0 = getEnt("buried_org", "script_noteworthy");
-  var1 = getEnt("carried_org", "script_noteworthy");
+  var_0 = getEnt("buried_org", "script_noteworthy");
+  var_1 = getEnt("carried_org", "script_noteworthy");
   thread scripts\sp\maps\hometown\hometown_vo::buried_start_vo();
   thread sfx_buried_debris_lp();
   thread sfx_buried_walla_lp();
-  level.rail_player_model = scripts\engine\sp\utility::spawn_anim_model("hometown_player_rig", var0.origin, var0.angles);
+  level.rail_player_model = scripts\engine\sp\utility::spawn_anim_model("hometown_player_rig", var_0.origin, var_0.angles);
   level.player_rig = level.rail_player_model;
 
   if(!getdvarint("scr_no_buried_link")) {
-    var1 scripts\sp\player_rig::link_player_to_rig("buried_intro", "stand", 0, undefined, 0, 0, 0, 0, 0, 1);
+    var_1 scripts\sp\player_rig::link_player_to_rig("buried_intro", "stand", 0, undefined, 0, 0, 0, 0, 0, 1);
   }
 
   if(!getdvarint("scr_no_buried_link")) {
@@ -29,28 +29,28 @@ function buried_main() {
   level.player setworldupreferenceangles((6.4, -71.1, 90));
   level.player setclienttriggeraudiozone("ht_rubble_start", 0.05);
   thread buried_rubble_setup();
-  level.buried_wires_model = scripts\engine\sp\utility::spawn_anim_model("buried_wires", var0.origin, var0.angles);
-  level.farah_mother_model = scripts\engine\sp\utility::spawn_anim_model("farah_mother", var0.origin, var0.angles);
+  level.buried_wires_model = scripts\engine\sp\utility::spawn_anim_model("buried_wires", var_0.origin, var_0.angles);
+  level.farah_mother_model = scripts\engine\sp\utility::spawn_anim_model("farah_mother", var_0.origin, var_0.angles);
   level.farah_mother_model setModel("body_civ_syrkistan_female_1_1");
   level.farah_mother_model attach("head_sc_f_eghbali_civ_bloody");
   level.farah_mother_model.fakeactor_face_anim = 1;
   level.farah_mother_model.animationarchetype = "soldier";
-  level.farah_sister_model = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_child("farah_sister", var0, 1);
+  level.farah_sister_model = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_child("farah_sister", var_0, 1);
   level.player setclienttriggeraudiozone("ht_rubble_underneath", 11.5);
-  var1 thread scripts\common\anim::anim_first_frame_solo(level.buried_wires_model, "buried_struggle");
-  var1 thread scripts\common\anim::anim_first_frame_solo(level.buried_struggle_rubble_model, "buried_struggle");
-  var1 thread scripts\common\anim::anim_first_frame_solo(level.buried_struggle_rubble_hero_01_model, "buried_struggle");
-  var1 thread scripts\common\anim::anim_first_frame_solo(level.buried_struggle_rubble_hero_02_model, "buried_struggle");
-  var1 thread scripts\common\anim::anim_first_frame_solo(level.buried_struggle_rubble_hero_03_model, "buried_struggle");
-  var1 thread scripts\common\anim::anim_first_frame_solo(level.buried_struggle_rubble_hero_04_model, "buried_struggle");
-  var1 thread scripts\common\anim::anim_first_frame_solo(level.buried_struggle_rubble_hero_05_model, "buried_struggle");
-  var1 thread scripts\common\anim::anim_first_frame_solo(level.buried_struggle_rubble_hero_06_model, "buried_struggle");
-  var1 thread scripts\common\anim::anim_first_frame_solo(level.buried_struggle_rubble_hero_07_model, "buried_struggle");
-  var1 thread scripts\common\anim::anim_first_frame_solo(level.buried_rubble_pile_rocks_model, "buried_struggle");
-  var1 thread scripts\common\anim::anim_loop_solo(level.farah_mother_model, "buried_intro_idle", "mother_loop_stop");
-  var1 thread scripts\common\anim::anim_loop_solo(level.farah_sister_model, "buried_intro_idle", "sister_loop_stop");
-  level.buried_rebar_model = scripts\engine\sp\utility::spawn_anim_model("buried_rebar", var0.origin, var0.angles);
-  var1 thread scripts\common\anim::anim_first_frame_solo(level.buried_rebar_model, "buried_rebar_reach");
+  var_1 thread scripts\common\anim::anim_first_frame_solo(level.buried_wires_model, "buried_struggle");
+  var_1 thread scripts\common\anim::anim_first_frame_solo(level.buried_struggle_rubble_model, "buried_struggle");
+  var_1 thread scripts\common\anim::anim_first_frame_solo(level.buried_struggle_rubble_hero_01_model, "buried_struggle");
+  var_1 thread scripts\common\anim::anim_first_frame_solo(level.buried_struggle_rubble_hero_02_model, "buried_struggle");
+  var_1 thread scripts\common\anim::anim_first_frame_solo(level.buried_struggle_rubble_hero_03_model, "buried_struggle");
+  var_1 thread scripts\common\anim::anim_first_frame_solo(level.buried_struggle_rubble_hero_04_model, "buried_struggle");
+  var_1 thread scripts\common\anim::anim_first_frame_solo(level.buried_struggle_rubble_hero_05_model, "buried_struggle");
+  var_1 thread scripts\common\anim::anim_first_frame_solo(level.buried_struggle_rubble_hero_06_model, "buried_struggle");
+  var_1 thread scripts\common\anim::anim_first_frame_solo(level.buried_struggle_rubble_hero_07_model, "buried_struggle");
+  var_1 thread scripts\common\anim::anim_first_frame_solo(level.buried_rubble_pile_rocks_model, "buried_struggle");
+  var_1 thread scripts\common\anim::anim_loop_solo(level.farah_mother_model, "buried_intro_idle", "mother_loop_stop");
+  var_1 thread scripts\common\anim::anim_loop_solo(level.farah_sister_model, "buried_intro_idle", "sister_loop_stop");
+  level.buried_rebar_model = scripts\engine\sp\utility::spawn_anim_model("buried_rebar", var_0.origin, var_0.angles);
+  var_1 thread scripts\common\anim::anim_first_frame_solo(level.buried_rebar_model, "buried_rebar_reach");
   thread scripts\sp\analytics::analytics_kleenex_update("Buried Start to Alley Start");
   scripts\engine\utility::flag_set("objective_attract_help");
   thread scripts\sp\maps\hometown\hometown_util::transient_load_town();
@@ -62,8 +62,8 @@ function buried_main() {
   level.player enableoffhandweapons();
   level.player enableweapons();
   level notify("buried_complete");
-  var1 notify("mother_loop_stop");
-  var1 notify("sister_loop_stop");
+  var_1 notify("mother_loop_stop");
+  var_1 notify("sister_loop_stop");
   level.player showviewmodel();
   level notify("carried_started");
   level.player playersetgroundreferenceent(undefined);
@@ -76,21 +76,21 @@ function buried_transient_check_first_frame() {
     waitframe();
   }
 
-  var0 = getEnt("carried_org", "script_noteworthy");
-  level.kargorgis_wh01_model = var0 scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("white_helmet_1", "buried", "white_helmet", undefined, undefined, undefined, "body_white_helmets_male_2", "head_sc_m_kargorgis_civ_helmet_bg_dust", "white_helemets_go");
-  level.ahmadzai_wh02_model = var0 scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("white_helmet_2", "buried", "white_helmet", undefined, undefined, undefined, "body_white_helmets_male_1", "head_sc_m_ahmadzai_civ_helmet_bg_dust", "white_helemets_go");
-  level.yurteri_wh03_model = var0 scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("white_helmet_3", "buried", "white_helmet", undefined, undefined, undefined, "body_white_helmets_male_3", "head_sc_m_yurteri_civ_helmet_bg_dust", "white_helemets_go");
+  var_0 = getEnt("carried_org", "script_noteworthy");
+  level.kargorgis_wh01_model = var_0 scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("white_helmet_1", "buried", "white_helmet", undefined, undefined, undefined, "body_white_helmets_male_2", "head_sc_m_kargorgis_civ_helmet_bg_dust", "white_helemets_go");
+  level.ahmadzai_wh02_model = var_0 scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("white_helmet_2", "buried", "white_helmet", undefined, undefined, undefined, "body_white_helmets_male_1", "head_sc_m_ahmadzai_civ_helmet_bg_dust", "white_helemets_go");
+  level.yurteri_wh03_model = var_0 scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("white_helmet_3", "buried", "white_helmet", undefined, undefined, undefined, "body_white_helmets_male_3", "head_sc_m_yurteri_civ_helmet_bg_dust", "white_helemets_go");
   scripts\sp\maps\hometown\hometown_util::spawn_father();
-  var1 = getnode("alley_start_node", "targetname");
-  level.farah_father_ai setgoalnode(var1);
+  var_1 = getnode("alley_start_node", "targetname");
+  level.farah_father_ai setgoalnode(var_1);
   waitframe();
   level.farah_father_ai.keepnodeduringscriptedanim = 1;
-  var0 thread scripts\common\anim::anim_first_frame_solo(level.farah_father_ai, "carried");
+  var_0 thread scripts\common\anim::anim_first_frame_solo(level.farah_father_ai, "carried");
 }
 
 function buried_intro_scene() {
-  var0 = getEnt("carried_org", "script_noteworthy");
-  var0 thread scripts\common\anim::anim_first_frame_solo(level.rail_player_model, "buried_intro");
+  var_0 = getEnt("carried_org", "script_noteworthy");
+  var_0 thread scripts\common\anim::anim_first_frame_solo(level.rail_player_model, "buried_intro");
 
   if(!getdvarint("scr_no_springcam") && !getdvarint("scr_no_buried_link")) {
     level.player springcamenabled(0, 5, 5);
@@ -98,40 +98,40 @@ function buried_intro_scene() {
 
   wait 3;
   level.player modifybasefov(50, 2);
-  var0 thread scripts\common\anim::anim_single_solo(level.rail_player_model, "buried_intro");
+  var_0 thread scripts\common\anim::anim_single_solo(level.rail_player_model, "buried_intro");
   thread rubble_hint();
   scripts\sp\maps\hometown\hometown_util::wait_any_input(1);
   level.player notify("pressed_any_button");
   level notify("farah_pulled_arm");
   level.player playrumblelooponentity("tank_rumble");
-  var0 notify("mother_loop_stop");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_wires_model, "buried_struggle");
-  var0 thread scripts\common\anim::anim_single_solo(level.farah_mother_model, "buried_struggle");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_model, "buried_struggle");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_01_model, "buried_struggle");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_02_model, "buried_struggle");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_03_model, "buried_struggle");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_04_model, "buried_struggle");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_05_model, "buried_struggle");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_06_model, "buried_struggle");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_07_model, "buried_struggle");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_rubble_pile_rocks_model, "buried_struggle");
-  var0 scripts\common\anim::anim_single_solo(level.rail_player_model, "buried_struggle");
+  var_0 notify("mother_loop_stop");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_wires_model, "buried_struggle");
+  var_0 thread scripts\common\anim::anim_single_solo(level.farah_mother_model, "buried_struggle");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_model, "buried_struggle");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_01_model, "buried_struggle");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_02_model, "buried_struggle");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_03_model, "buried_struggle");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_04_model, "buried_struggle");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_05_model, "buried_struggle");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_06_model, "buried_struggle");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_07_model, "buried_struggle");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_rubble_pile_rocks_model, "buried_struggle");
+  var_0 scripts\common\anim::anim_single_solo(level.rail_player_model, "buried_struggle");
   level.player stoprumble("tank_rumble");
   level.player playRumbleOnEntity("damage_heavy");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_wires_model, "buried_struggle_success");
-  var0 thread scripts\common\anim::anim_single_solo(level.farah_mother_model, "buried_struggle_success");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_model, "buried_struggle_success");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_01_model, "buried_struggle_success");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_02_model, "buried_struggle_success");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_03_model, "buried_struggle_success");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_04_model, "buried_struggle_success");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_05_model, "buried_struggle_success");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_06_model, "buried_struggle_success");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_wires_model, "buried_struggle_success");
+  var_0 thread scripts\common\anim::anim_single_solo(level.farah_mother_model, "buried_struggle_success");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_model, "buried_struggle_success");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_01_model, "buried_struggle_success");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_02_model, "buried_struggle_success");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_03_model, "buried_struggle_success");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_04_model, "buried_struggle_success");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_05_model, "buried_struggle_success");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_06_model, "buried_struggle_success");
   scripts\engine\utility::flag_set("lighting_buried_mom");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_07_model, "buried_struggle_success");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_rubble_pile_rocks_model, "buried_struggle_success");
-  var0 scripts\common\anim::anim_single_solo(level.rail_player_model, "buried_struggle_success");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_07_model, "buried_struggle_success");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_rubble_pile_rocks_model, "buried_struggle_success");
+  var_0 scripts\common\anim::anim_single_solo(level.rail_player_model, "buried_struggle_success");
 
   if(!getdvarint("scr_no_springcam") && !getdvarint("scr_no_buried_link")) {
     level.player springcamdisabled(0.5);
@@ -141,19 +141,19 @@ function buried_intro_scene() {
     level.player scripts\engine\utility::delaycall(0.5, &lerpviewangleclamp, 1, 0.5, 0.5, 10, 180, 15, 40);
   }
 
-  var0 thread scripts\common\anim::anim_loop_solo(level.farah_mother_model, "buried_struggle_success_idle", "mother_loop_stop");
+  var_0 thread scripts\common\anim::anim_loop_solo(level.farah_mother_model, "buried_struggle_success_idle", "mother_loop_stop");
   thread brick_hint();
   thread rubble_crumble();
   rebar_weapon_interact(level.buried_rebar_model);
   level.buried_rebar_model linkTo(level.rail_player_model, "tag_accessory_right");
-  var0 thread scripts\common\anim::anim_loop_solo(level.rail_player_model, "rebar_idle_scripted_player");
+  var_0 thread scripts\common\anim::anim_loop_solo(level.rail_player_model, "rebar_idle_scripted_player");
   level.rebar_hits = 0;
   level.buried_vo_finished = 0;
-  buried_hit_sequence(var0);
+  buried_hit_sequence(var_0);
   level.rebar_hits = undefined;
   level.buried_vo_finished = undefined;
-  var0 notify("stop_loop");
-  var0 thread scripts\common\anim::anim_loop_solo(level.buried_rebar_model, "rebar_idle_scripted_player");
+  var_0 notify("stop_loop");
+  var_0 thread scripts\common\anim::anim_loop_solo(level.buried_rebar_model, "rebar_idle_scripted_player");
   waitframe();
 }
 
@@ -176,8 +176,8 @@ function brick_hint() {
   }
 }
 
-function buried_hit_sequence(var0) {
-  var1 = 1;
+function buried_hit_sequence(var_0) {
+  var_1 = 1;
 
   while(!level.buried_vo_finished || !istransientloaded("hometown_main_town_tr")) {
     if(!isDefined(wait_for_hit())) {
@@ -186,18 +186,18 @@ function buried_hit_sequence(var0) {
 
     level notify("farah_buried_vo_press_begin");
 
-    if(var1 > 3) {
-      var1 = 1;
+    if(var_1 > 3) {
+      var_1 = 1;
     }
 
     thread sfx_buried_footsteps();
     level.player scripts\engine\utility::delaycall(0.5, &playrumbleonentity, "light_1s");
-    var0 notify("stop_loop");
-    var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_model, "rebar_hit_scripted_player_0" + var1);
-    var0 scripts\common\anim::anim_single_solo(level.rail_player_model, "rebar_hit_scripted_player_0" + var1);
-    var0 thread scripts\common\anim::anim_loop_solo(level.rail_player_model, "rebar_idle_scripted_player");
+    var_0 notify("stop_loop");
+    var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_model, "rebar_hit_scripted_player_0" + var_1);
+    var_0 scripts\common\anim::anim_single_solo(level.rail_player_model, "rebar_hit_scripted_player_0" + var_1);
+    var_0 thread scripts\common\anim::anim_loop_solo(level.rail_player_model, "rebar_idle_scripted_player");
     level.rebar_hits++;
-    var1++;
+    var_1++;
     level notify("farah_buried_vo_press");
   }
 }
@@ -227,18 +227,18 @@ function sfx_buried_footsteps() {
 }
 
 function sfx_buried_debris_lp() {
-  var0 = spawn("script_origin", level.player.origin);
-  var0 playLoopSound("scn_hometown_buried_debris_lr_lp_01");
-  var1 = spawn("script_origin", level.player.origin);
-  var1 playLoopSound("scn_hometown_buried_debris_lsrs_lp_01");
+  var_0 = spawn("script_origin", level.player.origin);
+  var_0 playLoopSound("scn_hometown_buried_debris_lr_lp_01");
+  var_1 = spawn("script_origin", level.player.origin);
+  var_1 playLoopSound("scn_hometown_buried_debris_lsrs_lp_01");
   level waittill("sfx_grabbed_tile");
-  var0 scripts\engine\sp\utility::sound_fade_and_delete(2, 1);
-  var1 scripts\engine\sp\utility::sound_fade_and_delete(2, 1);
+  var_0 scripts\engine\sp\utility::sound_fade_and_delete(2, 1);
+  var_1 scripts\engine\sp\utility::sound_fade_and_delete(2, 1);
   wait 10;
-  var2 = spawn("script_origin", level.player.origin);
-  var2 playLoopSound("scn_hometown_buried_debris_lr_lp_02");
-  var3 = spawn("script_origin", level.player.origin);
-  var3 playLoopSound("scn_hometown_buried_debris_lsrs_lp_02");
+  var_2 = spawn("script_origin", level.player.origin);
+  var_2 playLoopSound("scn_hometown_buried_debris_lr_lp_02");
+  var_3 = spawn("script_origin", level.player.origin);
+  var_3 playLoopSound("scn_hometown_buried_debris_lsrs_lp_02");
   level waittill("buried_complete");
   wait 0.1;
 
@@ -246,36 +246,36 @@ function sfx_buried_debris_lp() {
     level.fs_soundorg scripts\engine\sp\utility::sound_fade_and_delete(0.5, 0);
   }
 
-  var2 scripts\engine\sp\utility::sound_fade_and_delete(2, 1);
-  var3 scripts\engine\sp\utility::sound_fade_and_delete(2, 1);
+  var_2 scripts\engine\sp\utility::sound_fade_and_delete(2, 1);
+  var_3 scripts\engine\sp\utility::sound_fade_and_delete(2, 1);
 }
 
 function sfx_buried_walla_lp() {
-  var0 = spawn("script_origin", level.player.origin);
-  var0 playLoopSound("scn_hometown_buried_walla_lp");
+  var_0 = spawn("script_origin", level.player.origin);
+  var_0 playLoopSound("scn_hometown_buried_walla_lp");
   level waittill("buried_complete");
   wait 0.1;
-  var0 scripts\engine\sp\utility::sound_fade_and_delete(3, 0);
+  var_0 scripts\engine\sp\utility::sound_fade_and_delete(3, 0);
 }
 
 function rubble_crumble() {
-  var0 = getEnt("carried_org", "script_noteworthy");
-  var1 = scripts\engine\utility::getStruct("rebar_look_loc", "script_noteworthy");
-  var2 = 0;
+  var_0 = getEnt("carried_org", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStruct("rebar_look_loc", "script_noteworthy");
+  var_2 = 0;
 
-  while(var2 == 0) {
-    if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var1.origin, cos(30))) {
+  while(var_2 == 0) {
+    if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_1.origin, cos(30))) {
       level.player scripts\engine\utility::delaycall(0.1, &playrumbleonentity, "light_1s");
       earthquake(0.3, 3.3, level.player.origin, 500);
-      var0 thread scripts\common\anim::anim_single_solo(level.buried_wires_model, "buried_crumble");
-      var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_model, "buried_crumble");
-      var0 thread scripts\common\anim::anim_single_solo(level.buried_rubble_pile_rocks_model, "buried_crumble");
-      var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_02_model, "buried_crumble");
-      var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_04_model, "buried_crumble");
-      var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_05_model, "buried_crumble");
-      var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_06_model, "buried_crumble");
-      var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_07_model, "buried_crumble");
-      var2 = 1;
+      var_0 thread scripts\common\anim::anim_single_solo(level.buried_wires_model, "buried_crumble");
+      var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_model, "buried_crumble");
+      var_0 thread scripts\common\anim::anim_single_solo(level.buried_rubble_pile_rocks_model, "buried_crumble");
+      var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_02_model, "buried_crumble");
+      var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_04_model, "buried_crumble");
+      var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_05_model, "buried_crumble");
+      var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_06_model, "buried_crumble");
+      var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_07_model, "buried_crumble");
+      var_2 = 1;
     }
 
     waitframe();
@@ -283,18 +283,18 @@ function rubble_crumble() {
 }
 
 function rebar_weapon_interact() {
-  var0 = getEnt("carried_org", "script_noteworthy");
-  var1 = &"HOMETOWN/BRICK";
-  var2 = scripts\engine\utility::spawn_tag_origin(self.origin);
-  var2 scripts\sp\player\cursor_hint::create_cursor_hint("tag_origin", (0, 0, 0), var1, 75, 175, 50, 1);
-  var2 waittill("trigger");
+  var_0 = getEnt("carried_org", "script_noteworthy");
+  var_1 = &"HOMETOWN/BRICK";
+  var_2 = scripts\engine\utility::spawn_tag_origin(self.origin);
+  var_2 scripts\sp\player\cursor_hint::create_cursor_hint("tag_origin", (0, 0, 0), var_1, 75, 175, 50, 1);
+  var_2 waittill("trigger");
   scripts\engine\utility::flag_set("lighting_pickup_tile");
   level notify("tile_grab_vo");
   level notify("player_got_brick");
   scripts\engine\sp\objectives::objective_remove_all_locations("hometown_objective");
-  var3 = scripts\engine\utility::spawn_tag_origin(level.rail_player_model.origin, level.rail_player_model.angles);
-  var3.origin = level.rail_player_model gettagorigin("tag_player");
-  var3.angles = level.rail_player_model gettagangles("tag_player");
+  var_3 = scripts\engine\utility::spawn_tag_origin(level.rail_player_model.origin, level.rail_player_model.angles);
+  var_3.origin = level.rail_player_model gettagorigin("tag_player");
+  var_3.angles = level.rail_player_model gettagangles("tag_player");
   level.player freezecontrols(1);
   level.player enablequickweaponswitch(0);
   level notify("sfx_grabbed_tile");
@@ -304,21 +304,21 @@ function rebar_weapon_interact() {
   level.player scripts\common\utility::allow_cinematic_motion(0);
   level.player scripts\engine\utility::delaycall(4, &playrumbleonentity, "light_1s");
   level.player scripts\engine\utility::delaycall(5, &playrumbleonentity, "heavy_3s");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_wires_model, "buried_rebar_reach");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_rebar_model, "buried_rebar_reach");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_model, "buried_rebar_reach");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_05_model, "buried_rebar_reach");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_06_model, "buried_rebar_reach");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_rubble_pile_rocks_model, "buried_rebar_reach");
-  var0 scripts\common\anim::anim_single_solo(level.rail_player_model, "buried_rebar_reach");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_wires_model, "buried_rebar_reach");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_rebar_model, "buried_rebar_reach");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_model, "buried_rebar_reach");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_05_model, "buried_rebar_reach");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_06_model, "buried_rebar_reach");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_rubble_pile_rocks_model, "buried_rebar_reach");
+  var_0 scripts\common\anim::anim_single_solo(level.rail_player_model, "buried_rebar_reach");
   level.buried_wires_model delete();
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_rebar_model, "buried_rebar_success");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_model, "buried_rebar_success");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_05_model, "buried_rebar_success");
-  var0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_06_model, "buried_rebar_success");
-  var0 scripts\common\anim::anim_single_solo(level.rail_player_model, "buried_rebar_success");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_rebar_model, "buried_rebar_success");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_model, "buried_rebar_success");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_05_model, "buried_rebar_success");
+  var_0 thread scripts\common\anim::anim_single_solo(level.buried_struggle_rubble_hero_06_model, "buried_rebar_success");
+  var_0 scripts\common\anim::anim_single_solo(level.rail_player_model, "buried_rebar_success");
   level.got_rebar = 1;
-  var2 delete();
+  var_2 delete();
 
   if(scripts\sp\autosave::autosavethreatcheck(1)) {
     thread scripts\engine\sp\utility::autosave_by_name("got_melee_weapon");
@@ -349,12 +349,12 @@ function carried_mix_wait() {
 
 function carried_main() {
   level notify("buried_complete");
-  var0 = getEnt("stream_blocker_rubble_01", "script_noteworthy");
-  var1 = getEnt("stream_blocker_rubble_02", "script_noteworthy");
-  var0 delete();
-  var1 delete();
-  var2 = getEnt("buried_org", "script_noteworthy");
-  var3 = getEnt("carried_org", "script_noteworthy");
+  var_0 = getEnt("stream_blocker_rubble_01", "script_noteworthy");
+  var_1 = getEnt("stream_blocker_rubble_02", "script_noteworthy");
+  var_0 delete();
+  var_1 delete();
+  var_2 = getEnt("buried_org", "script_noteworthy");
+  var_3 = getEnt("carried_org", "script_noteworthy");
   level.player takeallweapons();
   level.player giveweapon("iw8_gunless_farrah");
   level.player switchtoweapon("iw8_gunless_farrah");
@@ -375,12 +375,12 @@ function carried_main() {
 
   if(level.start_point == "carried_start") {
     scripts\sp\maps\hometown\hometown_util::spawn_father();
-    var4 = getnode("alley_start_node", "targetname");
-    level.farah_father_ai setgoalnode(var4);
+    var_4 = getnode("alley_start_node", "targetname");
+    level.farah_father_ai setgoalnode(var_4);
     waitframe();
     level.farah_father_ai.keepnodeduringscriptedanim = 1;
     level.player_rig = level.rail_player_model;
-    var3 scripts\sp\player_rig::link_player_to_rig("carried", "stand", 0, undefined, 0, 0, 0, 0, 0, 1);
+    var_3 scripts\sp\player_rig::link_player_to_rig("carried", "stand", 0, undefined, 0, 0, 0, 0, 0, 1);
   }
 
   if(!getdvarint("scr_no_buried_link")) {
@@ -403,8 +403,8 @@ function carried_main() {
     level.player springcamenabled(0, 5, 5);
   }
 
-  level.rail_player_model_shadow = scripts\engine\sp\utility::spawn_anim_model("hometown_player_rig_shadow", var2.origin, var2.angles);
-  var3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.rail_player_model_shadow, "carried");
+  level.rail_player_model_shadow = scripts\engine\sp\utility::spawn_anim_model("hometown_player_rig_shadow", var_2.origin, var_2.angles);
+  var_3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.rail_player_model_shadow, "carried");
   thread scripts\sp\maps\hometown\hometown_vo::carried_start_vo();
   level.player scripts\engine\utility::delaycall(13.5, &playrumblelooponentity, "tank_rumble");
   level.player scripts\engine\utility::delaycall(16.75, &stoprumble, "tank_rumble");
@@ -418,17 +418,17 @@ function carried_main() {
   level.player scripts\engine\utility::delaycall(0.7, &setclienttriggeraudiozone, "ht_rubble_partial_opened", 0.45);
   level.player scripts\engine\utility::delaycall(15, &setclienttriggeraudiozone, "ht_rubble_opened", 15);
   level.player modifybasefov(75, 2);
-  var3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.farah_mother_model, "buried");
-  var3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.farah_sister_model, "buried");
-  var3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.buried_struggle_rubble_model, "buried_rescue");
-  var3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.buried_rubble_pile_rocks_model, "buried_rescue");
-  var3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.buried_struggle_rubble_hero_01_model, "buried_rescue");
-  var3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.buried_struggle_rubble_hero_02_model, "buried_rescue");
-  var3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.buried_struggle_rubble_hero_03_model, "buried_rescue");
-  var3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.buried_struggle_rubble_hero_04_model, "buried_rescue");
-  var3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.buried_struggle_rubble_hero_05_model, "buried_rescue");
-  var3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.buried_struggle_rubble_hero_06_model, "buried_rescue");
-  var3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.buried_struggle_rubble_hero_07_model, "buried_rescue");
+  var_3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.farah_mother_model, "buried");
+  var_3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.farah_sister_model, "buried");
+  var_3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.buried_struggle_rubble_model, "buried_rescue");
+  var_3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.buried_rubble_pile_rocks_model, "buried_rescue");
+  var_3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.buried_struggle_rubble_hero_01_model, "buried_rescue");
+  var_3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.buried_struggle_rubble_hero_02_model, "buried_rescue");
+  var_3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.buried_struggle_rubble_hero_03_model, "buried_rescue");
+  var_3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.buried_struggle_rubble_hero_04_model, "buried_rescue");
+  var_3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.buried_struggle_rubble_hero_05_model, "buried_rescue");
+  var_3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.buried_struggle_rubble_hero_06_model, "buried_rescue");
+  var_3 thread scripts\sp\maps\hometown\hometown_util::play_anim_and_delete(level.buried_struggle_rubble_hero_07_model, "buried_rescue");
   thread new_sequence_carried_anim();
   thread dudes_carried_anim();
   thread things_carried_anim();
@@ -438,13 +438,13 @@ function carried_main() {
   thread scripts\engine\utility::flag_set("lighting_move_rubble");
   thread scripts\engine\utility::flag_set_delayed("lighting_unburied", 28);
   thread scripts\engine\utility::flag_set_delayed("lighting_liftout", 32);
-  var3 notify("stop_loop");
-  var3 thread scripts\common\anim::anim_single([level.rail_player_model, level.farah_father_ai], "carried");
+  var_3 notify("stop_loop");
+  var_3 thread scripts\common\anim::anim_single([level.rail_player_model, level.farah_father_ai], "carried");
   level.player scripts\engine\utility::delaycall(getanimlength(level.scr_anim["hometown_player_rig"]["carried"]) - 10, &setclienttriggeraudiozone, "ht_carried_02", 1.5);
   thread audio_carried_music_russians();
-  var5 = getanimlength(level.scr_anim["hometown_player_rig"]["carried"]) - 7;
-  thread scripts\engine\utility::delaythread(var5, &audio_dist_shootings);
-  thread scripts\engine\utility::delaythread(var5, &audio_music_transition_to_alley);
+  var_5 = getanimlength(level.scr_anim["hometown_player_rig"]["carried"]) - 7;
+  thread scripts\engine\utility::delaythread(var_5, &audio_dist_shootings);
+  thread scripts\engine\utility::delaythread(var_5, &audio_music_transition_to_alley);
   wait getanimlength(level.scr_anim["hometown_player_rig"]["carried"]);
   level.player scripts\sp\player_rig::unlink_player_from_rig(0, "stand");
   level.player.ignoreme = 0;
@@ -586,25 +586,25 @@ function hide_square_civs() {
   waitframe();
   wait 65;
 
-  foreach(var1 in level.square_dudes_hide_array) {
-    var1 show();
+  foreach(var_1 in level.square_dudes_hide_array) {
+    var_1 show();
   }
 }
 
 function dudes_carried_anim() {
-  var0 = getEnt("buried_org", "script_noteworthy");
-  var0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim01", "buried", "white_helmet");
-  var0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim02", "buried", "white_helmet");
-  var0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim03", "buried", "white_helmet");
-  var0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim04", "buried", "male");
-  var0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim05", "buried", "white_helmet");
-  var0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim06", "buried", "white_helmet");
-  var0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim07", "buried", "white_helmet");
-  var0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim08", "buried", "male");
-  var0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim09", "buried", "white_helmet");
-  var0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim10", "buried", "white_helmet");
-  var0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim11", "buried", "white_helmet");
-  var0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim12", "buried", "female");
+  var_0 = getEnt("buried_org", "script_noteworthy");
+  var_0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim01", "buried", "white_helmet");
+  var_0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim02", "buried", "white_helmet");
+  var_0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim03", "buried", "white_helmet");
+  var_0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim04", "buried", "male");
+  var_0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim05", "buried", "white_helmet");
+  var_0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim06", "buried", "white_helmet");
+  var_0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim07", "buried", "white_helmet");
+  var_0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim08", "buried", "male");
+  var_0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim09", "buried", "white_helmet");
+  var_0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim10", "buried", "white_helmet");
+  var_0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim11", "buried", "white_helmet");
+  var_0 thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("AirstrikeVictim12", "buried", "female");
   thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("stretcher_dude01", "carried", "female", 1, level.square_dudes_hide_array, undefined, "body_civ_syrkistan_female_5_2", "head_sc_f_eghbali_civ_dust");
   thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("stretcher_dude02", "carried", "male", 1, level.square_dudes_hide_array, undefined, "body_civ_syrkistan_male_2_1", "head_sc_m_haghighi_civ_bg_dust", undefined, "hat_sc_m_nassernia_helmet");
   thread scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("stretcher_dude03", "carried", "male", 1, level.square_dudes_hide_array, undefined, "body_civ_syrkistan_male_2_1", "head_sc_m_haghighi_civ_bg_dust");
@@ -700,7 +700,7 @@ function dudes_carried_anim() {
 }
 
 function things_carried_anim() {
-  var0 = getEnt("buried_org", "script_noteworthy");
+  var_0 = getEnt("buried_org", "script_noteworthy");
   thread scripts\sp\maps\hometown\hometown_util::spawn_thing_play_anim_and_last_frame("emergencyvehicle_vehicle", "carried", 1, level.square_dudes_hide_array);
   thread scripts\sp\maps\hometown\hometown_util::spawn_thing_play_anim_and_delete("blocktruck_truck", "carried", 1, level.square_dudes_hide_array);
   thread scripts\sp\maps\hometown\hometown_util::spawn_thing_play_anim_and_delete("airstrike_mig01", "carried");
@@ -711,15 +711,15 @@ function things_carried_anim() {
   thread scripts\sp\maps\hometown\hometown_util::spawn_thing_play_anim_and_delete("RussianAttack_Victim06_Luggage01", "carried", 1, level.square_dudes_hide_array);
   thread scripts\sp\maps\hometown\hometown_util::spawn_thing_play_anim_and_delete("RussianAttack_Victim06_Luggage02", "carried", 1, level.square_dudes_hide_array);
   thread scripts\sp\maps\hometown\hometown_util::spawn_thing_play_anim_and_delete("RussianAttack_RussianAttack_mkilo23", "carried", 1, level.square_dudes_hide_array);
-  var0 thread scripts\sp\maps\hometown\hometown_util::spawn_thing_play_anim_and_delete("buried_rubble_05", "buried");
+  var_0 thread scripts\sp\maps\hometown\hometown_util::spawn_thing_play_anim_and_delete("buried_rubble_05", "buried");
   thread scripts\sp\maps\hometown\hometown_util::spawn_thing_play_anim_and_delete("BarricadeEscape_board01", "carried", 0);
   thread scripts\sp\maps\hometown\hometown_util::spawn_thing_play_anim_and_delete("BarricadeEscape_board02", "carried", 0);
   thread scripts\sp\maps\hometown\hometown_util::spawn_thing_play_anim_and_delete("SceneA_rainboot", "carried");
 }
 
 function player_carried_anim() {
-  var0 = gettime();
-  iprintlnbold("player start time:" + var0);
+  var_0 = gettime();
+  iprintlnbold("player start time:" + var_0);
   scripts\common\anim::anim_single_solo(level.rail_player_model, "carried");
   level.player unlink();
   level.rail_player_model delete();
@@ -739,24 +739,24 @@ function alley_looped_anims() {
 }
 
 function buried_black_fade() {
-  var0 = scripts\sp\hud_util::create_client_overlay("black", 1);
-  var0.lowresbackground = 1;
-  var1 = scripts\sp\hud_util::create_client_overlay("overlay_hometown_vignette", 1);
-  var1.lowresbackground = 1;
-  var1.alpha = 0.8;
+  var_0 = scripts\sp\hud_util::create_client_overlay("black", 1);
+  var_0.lowresbackground = 1;
+  var_1 = scripts\sp\hud_util::create_client_overlay("overlay_hometown_vignette", 1);
+  var_1.lowresbackground = 1;
+  var_1.alpha = 0.8;
   wait 1;
   level.player lerpfovscalefactor(0, 0);
   level.player modifybasefov(60, 0.05);
   wait 1;
-  var0 fadeovertime(1);
-  var0.alpha = 0;
+  var_0 fadeovertime(1);
+  var_0.alpha = 0;
   wait 4;
-  var0 destroy();
+  var_0 destroy();
   level waittill("carried_started");
-  var1 fadeovertime(5);
-  var1.alpha = 0;
+  var_1 fadeovertime(5);
+  var_1.alpha = 0;
   wait 5;
-  var1 destroy();
+  var_1 destroy();
 }
 
 function white_helmet_vo() {
@@ -772,27 +772,27 @@ function white_helmet_vo() {
 
 function wait_for_any_button_press() {
   level endon("buried_complete");
-  var0 = scripts\engine\utility::getStruct("rebar_look_loc", "script_noteworthy");
-  var1 = 0;
+  var_0 = scripts\engine\utility::getStruct("rebar_look_loc", "script_noteworthy");
+  var_1 = 0;
 
-  while(var1 <= 2) {
-    if(level.player attackButtonPressed() && scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var0.origin, cos(180)) && level.got_rebar || level.player meleeButtonPressed() && scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var0.origin, cos(180)) && level.got_rebar) {
+  while(var_1 <= 2) {
+    if(level.player attackButtonPressed() && scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_0.origin, cos(180)) && level.got_rebar || level.player meleeButtonPressed() && scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_0.origin, cos(180)) && level.got_rebar) {
       level notify("farah_buried_vo_press");
 
-      if(var1 == 2) {
+      if(var_1 == 2) {
         wait 1.5;
         wait 2;
-        var1++;
+        var_1++;
       }
 
-      if(var1 == 1) {
+      if(var_1 == 1) {
         wait 1.5;
-        var1++;
+        var_1++;
       }
 
-      if(var1 == 0) {
+      if(var_1 == 0) {
         wait 1.5;
-        var1++;
+        var_1++;
       }
     } else if(scripts\engine\sp\utility::player_has_weapon("iw8_knife_kid_rebar") || scripts\engine\sp\utility::player_has_weapon("iw8_knife_kid_screwdriver")) {
       if(level.player fragButtonPressed() || level.player secondaryoffhandbuttonPressed() || level.player adsButtonPressed() || level.player useButtonPressed() || level.player crouchbuttonPressed() || level.player buttonPressed("DPAD_UP") || level.player buttonPressed("DPAD_LEFT") || level.player buttonPressed("DPAD_RIGHT") || level.player buttonPressed("DPAD_DOWN") || level.player jumpbuttonPressed()) {
@@ -812,9 +812,9 @@ function buried_explosion_vfx() {
   level waittill("buried_explosion1");
   scripts\engine\utility::flag_set("objective_escape_rubble_complete");
   level.player scripts\engine\utility::delaycall(1.7, &setclienttriggeraudiozone, "ht_carried_01", 0.5);
-  var0 = scripts\engine\utility::getStruct("buried_explosion_3", "script_noteworthy");
-  scripts\engine\utility::delaythread(1.7, &scripts\engine\utility::play_sound_in_space, "scn_hometown_mig_bomb_expl", var0.origin);
-  scripts\engine\utility::delaythread(0.7, &scripts\engine\utility::play_sound_in_space, "scn_hometown_mig_bomb_rumble_in", var0.origin);
+  var_0 = scripts\engine\utility::getStruct("buried_explosion_3", "script_noteworthy");
+  scripts\engine\utility::delaythread(1.7, &scripts\engine\utility::play_sound_in_space, "scn_hometown_mig_bomb_expl", var_0.origin);
+  scripts\engine\utility::delaythread(0.7, &scripts\engine\utility::play_sound_in_space, "scn_hometown_mig_bomb_rumble_in", var_0.origin);
   scripts\engine\utility::exploder("jdam_exp_01");
   scripts\engine\utility::exploder("bigsmoke");
   scripts\engine\utility::stop_exploder("burried_sun");
@@ -831,12 +831,12 @@ function audio_main_siren_handler() {
 function audio_start_air_raid_siren() {
   wait 3;
   level endon("death");
-  var0 = spawn("script_origin", (486, -14, 1100));
+  var_0 = spawn("script_origin", (486, -14, 1100));
   level.siren_snd_handle = undefined;
 
   for(;;) {
     if(!isDefined(level.siren_snd_handle)) {
-      level.siren_snd_handle = scripts\engine\utility::play_sound_in_space("emt_dist_air_raid_siren", (486, -14, 1100), 0, var0);
+      level.siren_snd_handle = scripts\engine\utility::play_sound_in_space("emt_dist_air_raid_siren", (486, -14, 1100), 0, var_0);
     }
 
     if(scripts\engine\utility::flag("audio_stop_air_raid_siren")) {
@@ -847,13 +847,13 @@ function audio_start_air_raid_siren() {
       break;
     }
 
-    var1 = randomfloatrange(30, 33);
-    wait var1;
+    var_1 = randomfloatrange(30, 33);
+    wait var_1;
     level.siren_snd_handle = undefined;
   }
 
-  var0 delete();
-  var0 = undefined;
+  var_0 delete();
+  var_0 = undefined;
 
   if(isDefined(level.siren_snd_handle)) {
     level.siren_snd_handle = undefined;
@@ -869,32 +869,32 @@ function audio_start_car_siren_handler() {
 
 function audio_start_car_siren_01() {
   level endon("death");
-  var0 = spawn("script_origin", (2029, 2425, 101));
-  var1 = scripts\engine\utility::play_loopsound_in_space("emt_car_siren_lp", (2029, 2425, 101));
+  var_0 = spawn("script_origin", (2029, 2425, 101));
+  var_1 = scripts\engine\utility::play_loopsound_in_space("emt_car_siren_lp", (2029, 2425, 101));
   level.player waittill("farah_entered_house_notify");
-  var1 thread scripts\engine\sp\utility::sound_fade_and_delete(20);
-  var0 delete();
-  var0 = undefined;
+  var_1 thread scripts\engine\sp\utility::sound_fade_and_delete(20);
+  var_0 delete();
+  var_0 = undefined;
 }
 
 function audio_start_car_siren_02() {
   level endon("death");
-  var0 = spawn("script_origin", (-2737, -1987, 75));
-  var1 = scripts\engine\utility::play_loopsound_in_space("emt_car_siren_lp", (-2737, -1987, 75));
+  var_0 = spawn("script_origin", (-2737, -1987, 75));
+  var_1 = scripts\engine\utility::play_loopsound_in_space("emt_car_siren_lp", (-2737, -1987, 75));
   level.player waittill("farah_entered_house_notify");
-  var1 thread scripts\engine\sp\utility::sound_fade_and_delete(20);
-  var0 delete();
-  var0 = undefined;
+  var_1 thread scripts\engine\sp\utility::sound_fade_and_delete(20);
+  var_0 delete();
+  var_0 = undefined;
 }
 
 function audio_start_car_siren_03() {
   level endon("death");
-  var0 = spawn("script_origin", (1030, -1680, 151));
-  var1 = scripts\engine\utility::play_loopsound_in_space("emt_car_siren_lp", (1030, -1680, 151));
+  var_0 = spawn("script_origin", (1030, -1680, 151));
+  var_1 = scripts\engine\utility::play_loopsound_in_space("emt_car_siren_lp", (1030, -1680, 151));
   level.player waittill("farah_entered_house_notify");
-  var1 thread scripts\engine\sp\utility::sound_fade_and_delete(20);
-  var0 delete();
-  var0 = undefined;
+  var_1 thread scripts\engine\sp\utility::sound_fade_and_delete(20);
+  var_0 delete();
+  var_0 = undefined;
 }
 
 function jdam_earthquake() {
@@ -905,48 +905,48 @@ function jdam_earthquake() {
 
 function sfx_intro_chaos() {
   wait 0.3;
-  var0 = spawn("script_origin", level.player.origin);
-  var0 playSound("sp_lvl_hometown_intro_chaos_01");
+  var_0 = spawn("script_origin", level.player.origin);
+  var_0 playSound("sp_lvl_hometown_intro_chaos_01");
 }
 
 function post_alley_scene() {
   level.animname_incrementer = 1;
-  var0 = getspawner("russian_shooter_1", "script_noteworthy");
-  var0 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\hometown\hometown_util::post_alley_spawn_func);
-  level.russian_shooter_1_ai = var0 scripts\engine\sp\utility::spawn_ai(1);
-  var1 = getspawner("russian_shooter_2", "script_noteworthy");
-  var1 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\hometown\hometown_util::post_alley_spawn_func);
-  level.russian_shooter_2_ai = var1 scripts\engine\sp\utility::spawn_ai(1);
-  var2 = getspawner("russian_shooter_3", "script_noteworthy");
-  var2 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\hometown\hometown_util::post_alley_spawn_func);
-  level.russian_shooter_3_ai = var2 scripts\engine\sp\utility::spawn_ai(1);
-  var3 = getspawner("russian_shooter_4", "script_noteworthy");
-  var3 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\hometown\hometown_util::post_alley_spawn_func);
-  level.russian_shooter_4_ai = var3 scripts\engine\sp\utility::spawn_ai(1);
-  var4 = scripts\engine\utility::getStruct("post_alley_truck_scene_node", "script_noteworthy");
-  var5 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_female("post_alley_civ01", var4, 1);
-  var6 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_female("post_alley_civ02", var4, 1);
-  var7 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_female("post_alley_civ07", var4, 1);
-  var8 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_female("post_alley_civ09", var4, 1);
-  var9 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ("post_alley_civ03", var4, 1);
-  var10 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ("post_alley_civ06", var4, 1);
-  var11 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ("post_alley_civ04", var4, 1);
-  var12 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ("post_alley_civ05", var4, 1);
-  var13 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ("post_alley_civ08", var4, 1);
-  var14 = scripts\engine\sp\utility::spawn_anim_model("post_alley_truck", var4.origin, var4.angles);
-  var4 thread scripts\common\anim::anim_single_solo(var14, "post_alley_truck_scene");
-  var4 thread scripts\common\anim::anim_single_solo(level.russian_shooter_1_ai, "post_alley_truck_scene");
-  var4 thread scripts\common\anim::anim_single_solo(level.russian_shooter_2_ai, "post_alley_truck_scene");
-  var4 thread scripts\common\anim::anim_single_solo(level.russian_shooter_3_ai, "post_alley_truck_scene");
-  var4 thread scripts\common\anim::anim_single_solo(var5, "post_alley_truck_scene");
-  var4 thread scripts\common\anim::anim_single_solo(var6, "post_alley_truck_scene");
-  var4 thread scripts\common\anim::anim_single_solo(var7, "post_alley_truck_scene");
-  var4 thread scripts\common\anim::anim_single_solo(var8, "post_alley_truck_scene");
-  var4 thread scripts\common\anim::anim_single_solo(var9, "post_alley_truck_scene");
-  var4 thread scripts\common\anim::anim_single_solo(var10, "post_alley_truck_scene");
-  var4 thread scripts\common\anim::anim_single_solo(var11, "post_alley_truck_scene");
-  var4 thread scripts\common\anim::anim_single_solo(var12, "post_alley_truck_scene");
-  var4 scripts\common\anim::anim_single_solo(var13, "post_alley_truck_scene");
+  var_0 = getspawner("russian_shooter_1", "script_noteworthy");
+  var_0 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\hometown\hometown_util::post_alley_spawn_func);
+  level.russian_shooter_1_ai = var_0 scripts\engine\sp\utility::spawn_ai(1);
+  var_1 = getspawner("russian_shooter_2", "script_noteworthy");
+  var_1 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\hometown\hometown_util::post_alley_spawn_func);
+  level.russian_shooter_2_ai = var_1 scripts\engine\sp\utility::spawn_ai(1);
+  var_2 = getspawner("russian_shooter_3", "script_noteworthy");
+  var_2 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\hometown\hometown_util::post_alley_spawn_func);
+  level.russian_shooter_3_ai = var_2 scripts\engine\sp\utility::spawn_ai(1);
+  var_3 = getspawner("russian_shooter_4", "script_noteworthy");
+  var_3 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\hometown\hometown_util::post_alley_spawn_func);
+  level.russian_shooter_4_ai = var_3 scripts\engine\sp\utility::spawn_ai(1);
+  var_4 = scripts\engine\utility::getStruct("post_alley_truck_scene_node", "script_noteworthy");
+  var_5 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_female("post_alley_civ01", var_4, 1);
+  var_6 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_female("post_alley_civ02", var_4, 1);
+  var_7 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_female("post_alley_civ07", var_4, 1);
+  var_8 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_female("post_alley_civ09", var_4, 1);
+  var_9 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ("post_alley_civ03", var_4, 1);
+  var_10 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ("post_alley_civ06", var_4, 1);
+  var_11 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ("post_alley_civ04", var_4, 1);
+  var_12 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ("post_alley_civ05", var_4, 1);
+  var_13 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ("post_alley_civ08", var_4, 1);
+  var_14 = scripts\engine\sp\utility::spawn_anim_model("post_alley_truck", var_4.origin, var_4.angles);
+  var_4 thread scripts\common\anim::anim_single_solo(var_14, "post_alley_truck_scene");
+  var_4 thread scripts\common\anim::anim_single_solo(level.russian_shooter_1_ai, "post_alley_truck_scene");
+  var_4 thread scripts\common\anim::anim_single_solo(level.russian_shooter_2_ai, "post_alley_truck_scene");
+  var_4 thread scripts\common\anim::anim_single_solo(level.russian_shooter_3_ai, "post_alley_truck_scene");
+  var_4 thread scripts\common\anim::anim_single_solo(var_5, "post_alley_truck_scene");
+  var_4 thread scripts\common\anim::anim_single_solo(var_6, "post_alley_truck_scene");
+  var_4 thread scripts\common\anim::anim_single_solo(var_7, "post_alley_truck_scene");
+  var_4 thread scripts\common\anim::anim_single_solo(var_8, "post_alley_truck_scene");
+  var_4 thread scripts\common\anim::anim_single_solo(var_9, "post_alley_truck_scene");
+  var_4 thread scripts\common\anim::anim_single_solo(var_10, "post_alley_truck_scene");
+  var_4 thread scripts\common\anim::anim_single_solo(var_11, "post_alley_truck_scene");
+  var_4 thread scripts\common\anim::anim_single_solo(var_12, "post_alley_truck_scene");
+  var_4 scripts\common\anim::anim_single_solo(var_13, "post_alley_truck_scene");
   level.russian_shooter_1_ai.ignoreall = 0;
   level.russian_shooter_2_ai.ignoreall = 0;
   level.russian_shooter_3_ai.ignoreall = 0;
@@ -965,20 +965,20 @@ function dad_move_speed() {
   level.farah_father_ai scripts\sp\utility::set_stayahead_values(3, 70, -120, 0);
   level.farah_father_ai scripts\sp\utility::set_stayahead_values(4, 30, -180, 0.2);
   level.farah_father_ai scripts\sp\utility::set_stayahead_wait_values(-230, 2.5);
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, getnode("alley_mid_node", "targetname"));
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, getnode("alley_mid_node", "targetname"));
 }
 
 function fix_collision() {
-  var0 = getEnt("post_boss_house_gate_clip", "script_noteworthy");
-  var1 = spawn("script_model", (-575, -980, 5));
-  var1.angles = (0, 0, 90);
-  var1 clonebrushmodeltoscriptmodel(var0);
-  var2 = getEnt("post_boss_house_gate_clip", "script_noteworthy");
-  var3 = spawn("script_model", (-618, -980, 5));
-  var3.angles = (0, 0, 90);
-  var3 clonebrushmodeltoscriptmodel(var2);
-  var4 = createnavobstaclebybounds((-537, -979, 12), (18, 20, 50), (0, 45, 0));
+  var_0 = getEnt("post_boss_house_gate_clip", "script_noteworthy");
+  var_1 = spawn("script_model", (-575, -980, 5));
+  var_1.angles = (0, 0, 90);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = getEnt("post_boss_house_gate_clip", "script_noteworthy");
+  var_3 = spawn("script_model", (-618, -980, 5));
+  var_3.angles = (0, 0, 90);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
+  var_4 = createnavobstaclebybounds((-537, -979, 12), (18, 20, 50), (0, 45, 0));
 }
 
 function alley_setup() {
@@ -992,7 +992,7 @@ function alley_setup() {
   level.post_boss_house_gate_clip scripts\engine\sp\utility::hide_entity();
   level.gas_attack_anim_node = getEnt("gas_attack_street_node", "script_noteworthy");
   level.gas_attack_left_anim_node = scripts\engine\utility::getStruct("gas_attack_from_left_node", "script_noteworthy");
-  var0 = scripts\engine\utility::getStruct("gas_attack_enemy_truck_node", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("gas_attack_enemy_truck_node", "script_noteworthy");
   thread scripts\sp\maps\hometown\hometown_vo::alley_start_vo();
   spawn_door_model();
   level.gasattack_ambulance_truck_model = scripts\engine\sp\utility::spawn_anim_model("gasattack_ambulance_truck", level.gas_attack_left_anim_node.origin, level.gas_attack_left_anim_node.angles);
@@ -1052,14 +1052,14 @@ function alley_main() {
   level.farah_father_ai aisettargetspeed(56);
   level.farah_father_ai scripts\asm\civilian\script_funcs::enableciviliantargetfocus(level.player);
   thread scripts\engine\sp\utility::autosave_by_name("alley_start_done");
-  var0 = getnode("alley_start_node", "targetname");
-  level.farah_father_ai setgoalnode(var0);
+  var_0 = getnode("alley_start_node", "targetname");
+  level.farah_father_ai setgoalnode(var_0);
   thread scripts\sp\analytics::analytics_kleenex_update("Alley Start to House Enter");
   level.player clearclienttriggeraudiozone(2);
   scripts\engine\utility::flag_wait("alley_pre_start_passed");
   level.farah_father_ai scripts\common\utility::lookatentity(level.player);
-  var1 = getnode("gas_attack_steet_mid_node", "targetname");
-  level.farah_father_ai setgoalnode(var1);
+  var_1 = getnode("gas_attack_steet_mid_node", "targetname");
+  level.farah_father_ai setgoalnode(var_1);
   level.gas_attack_left_anim_node notify("stop_loop");
   level.gas_attack_left_anim_node thread scripts\common\anim::anim_single_solo(level.gasattack_ambulance_truck_model, "gasattack_intro");
   level.gas_attack_left_anim_node thread scripts\sp\maps\hometown\hometown_util::play_anim_and_then_loop(level.gasattack_wh01_model, "gasattack_intro", "gasattack_idle");
@@ -1102,12 +1102,12 @@ function gas_attack_corpse_shader() {
 }
 
 function sfx_alley_gas_walla() {
-  var0 = spawn("script_origin", (-797, -1974, 66));
-  var0 playLoopSound("scn_hometown_alley_pre_gas_attack_walla_lp");
+  var_0 = spawn("script_origin", (-797, -1974, 66));
+  var_0 playLoopSound("scn_hometown_alley_pre_gas_attack_walla_lp");
   scripts\engine\utility::flag_wait("alley_attack_start_passed");
   wait 4;
   thread scripts\engine\utility::play_sound_in_space("scn_hometown_alley_gas_attack_walla", (-747, -1998, 42));
-  var0 scripts\engine\sp\utility::sound_fade_and_delete(1, 1);
+  var_0 scripts\engine\sp\utility::sound_fade_and_delete(1, 1);
 }
 
 function dad_beckon_loop() {
@@ -1122,16 +1122,16 @@ function dad_beckon_loop() {
 
 function gas_attack_main() {
   scripts\engine\utility::flag_wait("alley_attack_start_passed");
-  var0 = 0;
+  var_0 = 0;
 
-  foreach(var2 in getaiarray("axis")) {
-    if(isDefined(var2.enemy) || isDefined(var2.stealth.breacting) || isDefined(var2.stealth.binitialinvestigate) || isDefined(var2.stealth.bcoverhasbeenblown)) {
-      var0 = 1;
+  foreach(var_2 in getaiarray("axis")) {
+    if(isDefined(var_2.enemy) || isDefined(var_2.stealth.breacting) || isDefined(var_2.stealth.binitialinvestigate) || isDefined(var_2.stealth.bcoverhasbeenblown)) {
+      var_0 = 1;
       break;
     }
   }
 
-  if(var0) {
+  if(var_0) {
     level.player dodamage(1000, (0, 0, 0));
   } else {
     thread scripts\engine\sp\utility::autosave_now("alley_attack_start");
@@ -1164,10 +1164,10 @@ function gas_attack_main() {
   thread gas_fail_timer();
   thread gas_fail_trigger();
   thread audio_gas_canister_smoke_atmos();
-  var4 = getnode("gas_attack_steet_wall_node", "targetname");
-  var5 = getnode("gas_attack_steet_wait_for_truck_node", "targetname");
+  var_4 = getnode("gas_attack_steet_wall_node", "targetname");
+  var_5 = getnode("gas_attack_steet_wait_for_truck_node", "targetname");
   thread wait_for_truck_or_player();
-  level.farah_father_ai setgoalnode(var5);
+  level.farah_father_ai setgoalnode(var_5);
   level waittill("dad_go_to_house");
   thread dad_go_to_house();
   level.gas_attack_anim_node scripts\sp\anim::anim_reach_solo(level.farah_father_ai, "gas_attack_street");
@@ -1257,12 +1257,12 @@ function audio_music_transition_to_alley() {
 
 function audio_gas_canister_smoke_atmos() {
   wait 8;
-  var0 = spawn("script_origin", (-941, -2199, 43));
-  var1 = scripts\engine\utility::play_loopsound_in_space("emt_gas_canister_atmos_lp", (-941, -2199, 43));
+  var_0 = spawn("script_origin", (-941, -2199, 43));
+  var_1 = scripts\engine\utility::play_loopsound_in_space("emt_gas_canister_atmos_lp", (-941, -2199, 43));
   level.player waittill("farah_entered_house_notify");
-  var1 thread scripts\engine\sp\utility::sound_fade_and_delete(12);
-  var0 delete();
-  var0 = undefined;
+  var_1 thread scripts\engine\sp\utility::sound_fade_and_delete(12);
+  var_0 delete();
+  var_0 = undefined;
 }
 
 function wait_for_truck_or_player() {
@@ -1304,67 +1304,67 @@ function gas_attack_triggers_monitor() {
 
 function alley_runners() {
   scripts\engine\sp\utility::trigger_wait("alley_pre_start_trigger", "script_noteworthy");
-  var0 = scripts\engine\sp\utility::get_spawner_array("runners_01", "script_noteworthy");
+  var_0 = scripts\engine\sp\utility::get_spawner_array("runners_01", "script_noteworthy");
 
-  foreach(var2 in var0) {
-    var3 = ["head_sc_m_mrehin_civ_dust", "head_sc_m_arakelyan_civ_dust", "head_sc_m_bansal_civ_dust", "head_sc_m_alameer_civ_dust", "head_sc_m_haghighi_civ_dust", "head_sc_m_nassernia_civ_dust", "head_sc_m_ahmadzai_civ"];
-    var4 = ["body_civ_syrkistan_male_1_1", "body_civ_syrkistan_male_2_1", "body_civ_syrkistan_male_3_1", "body_civ_syrkistan_male_4_1", "body_civ_syrkistan_male_5_1", "body_civ_syrkistan_male_6_1", "body_civ_syrkistan_male_7_1", "body_civ_syrkistan_male_8_1", "body_civ_syrkistan_male_9_1", "body_civ_syrkistan_male_10_1"];
-    var5 = scripts\engine\sp\utility::fakeactorspawn(var2);
-    var5 setModel(scripts\engine\utility::random(var4));
-    var5 detach(var5.headmodel);
-    var5 attach(scripts\engine\utility::random(var3));
+  foreach(var_2 in var_0) {
+    var_3 = ["head_sc_m_mrehin_civ_dust", "head_sc_m_arakelyan_civ_dust", "head_sc_m_bansal_civ_dust", "head_sc_m_alameer_civ_dust", "head_sc_m_haghighi_civ_dust", "head_sc_m_nassernia_civ_dust", "head_sc_m_ahmadzai_civ"];
+    var_4 = ["body_civ_syrkistan_male_1_1", "body_civ_syrkistan_male_2_1", "body_civ_syrkistan_male_3_1", "body_civ_syrkistan_male_4_1", "body_civ_syrkistan_male_5_1", "body_civ_syrkistan_male_6_1", "body_civ_syrkistan_male_7_1", "body_civ_syrkistan_male_8_1", "body_civ_syrkistan_male_9_1", "body_civ_syrkistan_male_10_1"];
+    var_5 = scripts\engine\sp\utility::fakeactorspawn(var_2);
+    var_5 setModel(scripts\engine\utility::random(var_4));
+    var_5 detach(var_5.headmodel);
+    var_5 attach(scripts\engine\utility::random(var_3));
     wait randomfloatrange(0.1, 0.35);
   }
 
   scripts\engine\sp\utility::trigger_wait("alley_end_trigger", "script_noteworthy");
-  var7 = scripts\engine\sp\utility::get_spawner_array("runners_02", "script_noteworthy");
+  var_7 = scripts\engine\sp\utility::get_spawner_array("runners_02", "script_noteworthy");
 
-  foreach(var2 in var7) {
-    var3 = ["head_sc_m_mrehin_civ_dust", "head_sc_m_arakelyan_civ_dust", "head_sc_m_bansal_civ_dust", "head_sc_m_alameer_civ_dust", "head_sc_m_haghighi_civ_dust", "head_sc_m_nassernia_civ_dust", "head_sc_m_ahmadzai_civ"];
-    var4 = ["body_civ_syrkistan_male_1_1", "body_civ_syrkistan_male_2_1", "body_civ_syrkistan_male_3_1", "body_civ_syrkistan_male_4_1", "body_civ_syrkistan_male_5_1", "body_civ_syrkistan_male_6_1", "body_civ_syrkistan_male_7_1", "body_civ_syrkistan_male_8_1", "body_civ_syrkistan_male_9_1", "body_civ_syrkistan_male_10_1"];
-    var5 = scripts\engine\sp\utility::fakeactorspawn(var2);
-    var5 setModel(scripts\engine\utility::random(var4));
-    var5 detach(var5.headmodel);
-    var5 attach(scripts\engine\utility::random(var3));
+  foreach(var_2 in var_7) {
+    var_3 = ["head_sc_m_mrehin_civ_dust", "head_sc_m_arakelyan_civ_dust", "head_sc_m_bansal_civ_dust", "head_sc_m_alameer_civ_dust", "head_sc_m_haghighi_civ_dust", "head_sc_m_nassernia_civ_dust", "head_sc_m_ahmadzai_civ"];
+    var_4 = ["body_civ_syrkistan_male_1_1", "body_civ_syrkistan_male_2_1", "body_civ_syrkistan_male_3_1", "body_civ_syrkistan_male_4_1", "body_civ_syrkistan_male_5_1", "body_civ_syrkistan_male_6_1", "body_civ_syrkistan_male_7_1", "body_civ_syrkistan_male_8_1", "body_civ_syrkistan_male_9_1", "body_civ_syrkistan_male_10_1"];
+    var_5 = scripts\engine\sp\utility::fakeactorspawn(var_2);
+    var_5 setModel(scripts\engine\utility::random(var_4));
+    var_5 detach(var_5.headmodel);
+    var_5 attach(scripts\engine\utility::random(var_3));
     wait randomfloatrange(0.1, 0.35);
   }
 
   scripts\engine\sp\utility::trigger_wait("house_start_trigger", "script_noteworthy");
 
-  foreach(var2 in var0) {
-    var2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
   }
 
-  foreach(var2 in var7) {
-    var2 delete();
+  foreach(var_2 in var_7) {
+    var_2 delete();
   }
 }
 
-function gas_cannister_launch(var0) {
+function gas_cannister_launch(var_0) {
   wait 4.5;
-  var1 = self.gun_model gettagorigin("tag_flash");
-  var2 = self.gun_model gettagorigin("tag_flash");
-  var3 = spawn("script_model", var2);
-  var3 setModel("anti_grav_grenade_wm");
-  var4 = anglesToForward(var1);
-  var4 *= randomfloatrange(50, 100);
-  var5 = var4[0] + -800;
-  var6 = var4[1] + 1000;
-  var7 = 400;
-  var3 physicslaunchserver(var3.origin, (var5, var6, var7));
-  playFXOnTag(level._effect["vfx_htown_gas_trail"], var3, "tag_origin");
+  var_1 = self.gun_model gettagorigin("tag_flash");
+  var_2 = self.gun_model gettagorigin("tag_flash");
+  var_3 = spawn("script_model", var_2);
+  var_3 setModel("anti_grav_grenade_wm");
+  var_4 = anglesToForward(var_1);
+  var_4 *= randomfloatrange(50, 100);
+  var_5 = var_4[0] + -800;
+  var_6 = var_4[1] + 1000;
+  var_7 = 400;
+  var_3 physicslaunchserver(var_3.origin, (var_5, var_6, var_7));
+  playFXOnTag(level._effect["vfx_htown_gas_trail"], var_3, "tag_origin");
   wait 1.5;
-  var8 = var3 gettagorigin("tag_origin");
-  var9 = undefined;
-  var10 = undefined;
+  var_8 = var_3 gettagorigin("tag_origin");
+  var_9 = undefined;
+  var_10 = undefined;
 
-  if(var0 == "true") {
-    var9 = spawnfx(level._effect["vfx_htown_gas_emit"], var8, anglesToForward(self.angles));
-    triggerfx(var9);
+  if(var_0 == "true") {
+    var_9 = spawnfx(level._effect["vfx_htown_gas_emit"], var_8, anglesToForward(self.angles));
+    triggerfx(var_9);
   }
 
   level.player waittill("farah_entered_house_notify");
-  stopFXOnTag(level._effect["vfx_mortar_trail"], var3, "tag_origin");
+  stopFXOnTag(level._effect["vfx_mortar_trail"], var_3, "tag_origin");
 }
 
 function gas_playerexposedeffects() {
@@ -1404,17 +1404,17 @@ function kill_chickens() {
   scripts\engine\utility::flag_wait("scriptables_ready");
   level.chicken_array = getscriptablearray();
 
-  foreach(var1 in level.chicken_array) {
-    if(issubstr(var1.model, "chicken")) {
-      var1 scripts\sp\utility::do_damage(100, level.player.origin);
+  foreach(var_1 in level.chicken_array) {
+    if(issubstr(var_1.model, "chicken")) {
+      var_1 scripts\sp\utility::do_damage(100, level.player.origin);
     }
   }
 
   level.chicken_array = getEntArray("chicken_move", "script_noteworthy");
 
-  foreach(var1 in level.chicken_array) {
-    if(issubstr(var1.model, "chicken")) {
-      var1 scripts\sp\utility::do_damage(100, level.player.origin);
+  foreach(var_1 in level.chicken_array) {
+    if(issubstr(var_1.model, "chicken")) {
+      var_1 scripts\sp\utility::do_damage(100, level.player.origin);
     }
   }
 }
@@ -1459,8 +1459,8 @@ function carried_time_dad_monitor() {
   waitframe();
 
   for(;;) {
-    var0 = level.farah_father_ai getanimtime(%htf_cari_010_scenea_father);
-    iprintlnbold("dad anim time:" + var0);
+    var_0 = level.farah_father_ai getanimtime(%htf_cari_010_scenea_father);
+    iprintlnbold("dad anim time:" + var_0);
     wait 2;
   }
 }
@@ -1471,8 +1471,8 @@ function carried_time_player_monitor() {
   waitframe();
 
   for(;;) {
-    var0 = level.rail_player_model getanimtime(%htf_cari_010_scenea_player);
-    iprintlnbold("player anim time:" + var0);
+    var_0 = level.rail_player_model getanimtime(%htf_cari_010_scenea_player);
+    iprintlnbold("player anim time:" + var_0);
     wait 2;
   }
 }
@@ -1573,23 +1573,23 @@ function neighbordad_mayhem() {
 
 function lerp_playerspeed_fov_in_alley() {
   level.player modifybasefov(50, 0.2);
-  var0 = scripts\engine\utility::getStruct("alley_fov_lerp", "script_noteworthy");
-  var1 = scripts\engine\utility::getStruct(var0.target, "targetname");
-  var2 = distance(var0.origin, var1.origin);
-  var3 = 0;
+  var_0 = scripts\engine\utility::getStruct("alley_fov_lerp", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
+  var_2 = distance(var_0.origin, var_1.origin);
+  var_3 = 0;
 
   for(;;) {
-    var4 = pointonsegmentnearesttopoint(var0.origin, var1.origin, level.player.origin);
-    var5 = distance(var4, var0.origin);
-    var6 = var5 / var2;
+    var_4 = pointonsegmentnearesttopoint(var_0.origin, var_1.origin, level.player.origin);
+    var_5 = distance(var_4, var_0.origin);
+    var_6 = var_5 / var_2;
 
-    if(var6 > var3) {
-      var3 = var6;
-      var7 = scripts\engine\math::factor_value(50, 75, var6);
-      level.player modifybasefov(var7, 0.2);
+    if(var_6 > var_3) {
+      var_3 = var_6;
+      var_7 = scripts\engine\math::factor_value(50, 75, var_6);
+      level.player modifybasefov(var_7, 0.2);
     }
 
-    if(var6 == 1) {
+    if(var_6 == 1) {
       break;
     }
 

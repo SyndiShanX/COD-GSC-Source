@@ -129,38 +129,38 @@ function green_beam_fade_off_lighting() {
   thread lerp_value_rim(level.green_beam_rim_light, level.rim_max_intensity, 0);
 }
 
-function lerp_value_fill(var0, var1, var2) {
-  var3 = var1 - var0;
-  var4 = 0.02;
-  var5 = int(var2 / var4);
+function lerp_value_fill(var_0, var_1, var_2) {
+  var_3 = var_1 - var_0;
+  var_4 = 0.02;
+  var_5 = int(var_2 / var_4);
 
-  if(var5 > 0) {
-    var6 = var3 / var5;
+  if(var_5 > 0) {
+    var_6 = var_3 / var_5;
 
-    while(var5) {
-      var0 += var6;
-      level.green_beam_fill_light setlightintensity(var0);
-      wait var4;
-      var5--;
+    while(var_5) {
+      var_0 += var_6;
+      level.green_beam_fill_light setlightintensity(var_0);
+      wait var_4;
+      var_5--;
     }
 
     return;
   }
 }
 
-function lerp_value_rim(var0, var1, var2) {
-  var3 = var1 - var0;
-  var4 = 0.02;
-  var5 = int(var2 / var4);
+function lerp_value_rim(var_0, var_1, var_2) {
+  var_3 = var_1 - var_0;
+  var_4 = 0.02;
+  var_5 = int(var_2 / var_4);
 
-  if(var5 > 0) {
-    var6 = var3 / var5;
+  if(var_5 > 0) {
+    var_6 = var_3 / var_5;
 
-    while(var5) {
-      var0 += var6;
-      level.green_beam_rim_light setlightintensity(var0);
-      wait var4;
-      var5--;
+    while(var_5) {
+      var_0 += var_6;
+      level.green_beam_rim_light setlightintensity(var_0);
+      wait var_4;
+      var_5--;
     }
 
     return;
@@ -168,25 +168,25 @@ function lerp_value_rim(var0, var1, var2) {
 }
 
 function bpg_combat_window_exterior_light_on_and_off() {
-  var0 = getEnt("bpg_combat_window_exterior_light_01", "targetname");
-  var1 = getEnt("bpg_combat_window_exterior_light_02", "targetname");
-  var0 setlightintensity(0);
-  var1 setlightintensity(0);
+  var_0 = getEnt("bpg_combat_window_exterior_light_01", "targetname");
+  var_1 = getEnt("bpg_combat_window_exterior_light_02", "targetname");
+  var_0 setlightintensity(0);
+  var_1 setlightintensity(0);
 
   if(getDvar("LLQQOPKTKM") == "1") {
-    var0 setlightintensity(1.5);
-    var1 setlightintensity(1.5);
+    var_0 setlightintensity(1.5);
+    var_1 setlightintensity(1.5);
     return;
   }
 
-  var2 = getEnt("trigger_bpg_combat_window_light_on", "targetname");
-  var2 waittill("trigger");
-  var0 setlightintensity(1.5);
-  var1 setlightintensity(1.5);
-  var2 = getEnt("trigger_bpg_combat_window_light_off", "targetname");
-  var2 waittill("trigger");
-  var0 setlightintensity(0);
-  var1 setlightintensity(0);
+  var_2 = getEnt("trigger_bpg_combat_window_light_on", "targetname");
+  var_2 waittill("trigger");
+  var_0 setlightintensity(1.5);
+  var_1 setlightintensity(1.5);
+  var_2 = getEnt("trigger_bpg_combat_window_light_off", "targetname");
+  var_2 waittill("trigger");
+  var_0 setlightintensity(0);
+  var_1 setlightintensity(0);
 }
 
 function all_lights_off() {
@@ -214,10 +214,10 @@ function all_lights_off() {
   level.truck_crash_wall_hole_light setlightintensity(0);
   level.roof_heli_crash_explosion_light_01 = getEnt("roof_heli_crash_explosion_light_01", "targetname");
   level.roof_heli_crash_explosion_light_01 setlightintensity(0);
-  var0 = getEnt("roof_heli_crash_fire_light_01", "targetname");
-  var0 setlightintensity(0);
-  var1 = getEnt("stair_b_car_fire_light_01", "targetname");
-  var1 setlightintensity(0);
+  var_0 = getEnt("roof_heli_crash_fire_light_01", "targetname");
+  var_0 setlightintensity(0);
+  var_1 = getEnt("stair_b_car_fire_light_01", "targetname");
+  var_1 setlightintensity(0);
   level.bpg_car_fire_light = getEnt("bpg_scene_car_fire_light_01", "targetname");
   level.bpg_car_fire_light setlightintensity(0);
 
@@ -230,15 +230,15 @@ function all_lights_off() {
 function heli_crash_fire_lights() {
   level.heli_crash_lights = getEntArray("heli_crash_fire_lgt", "targetname");
 
-  foreach(var1 in level.heli_crash_lights) {
-    var1.og_intensity = var1 getlightintensity();
-    var1 setlightintensity(0);
+  foreach(var_1 in level.heli_crash_lights) {
+    var_1.og_intensity = var_1 getlightintensity();
+    var_1 setlightintensity(0);
   }
 
   scripts\engine\utility::flag_wait("heli_crash_light_flicker");
 
-  foreach(var1 in level.heli_crash_lights) {
-    var1 setlightintensity(var1.og_intensity);
+  foreach(var_1 in level.heli_crash_lights) {
+    var_1 setlightintensity(var_1.og_intensity);
   }
 }
 
@@ -310,13 +310,13 @@ function roof_heli_explosion_vision() {
 
 function roof_heli_explosion_light() {
   setsaveddvar("LKOLRONRNQ", 750);
-  var0 = 40;
-  var1 = 0.15;
-  var2 = 1;
+  var_0 = 40;
+  var_1 = 0.15;
+  var_2 = 1;
   level.roof_heli_crash_explosion_light_01 = getEnt("roof_heli_crash_explosion_light_01", "targetname");
-  thread lerp_value_heli_crash(level.roof_heli_crash_explosion_light_01, 0, var0);
+  thread lerp_value_heli_crash(level.roof_heli_crash_explosion_light_01, 0, var_0);
   wait 0.15;
-  lerp_value_heli_crash(level.roof_heli_crash_explosion_light_01, var0, 0, var2);
+  lerp_value_heli_crash(level.roof_heli_crash_explosion_light_01, var_0, 0, var_2);
   wait 1;
 }
 
@@ -384,20 +384,20 @@ function kill_lights() {
 }
 
 function start_roof_heli_crash_fire_flicker() {
-  var0 = getEnt("roof_heli_crash_fire_light_01", "targetname");
-  var0 setlightcolor((1, 0.45, 0.05));
-  var0 setlightintensity(0.025);
-  var0 setlightfovrange(120, 4);
-  var0 setlightradius(210);
+  var_0 = getEnt("roof_heli_crash_fire_light_01", "targetname");
+  var_0 setlightcolor((1, 0.45, 0.05));
+  var_0 setlightintensity(0.025);
+  var_0 setlightfovrange(120, 4);
+  var_0 setlightradius(210);
   thread fire_flicker_roof_heli_crash();
 }
 
 function stop_roof_heli_crash_fire_flicker() {
-  var0 = getEnt("roof_heli_crash_fire_light_01", "targetname");
-  var1 = getEnt("roof_heli_crash_fire_light_01_off", "targetname");
-  var1 waittill("trigger");
-  var0 notify("stop_fire_flicker_roof_heli_crash");
-  var0 setlightintensity(0);
+  var_0 = getEnt("roof_heli_crash_fire_light_01", "targetname");
+  var_1 = getEnt("roof_heli_crash_fire_light_01_off", "targetname");
+  var_1 waittill("trigger");
+  var_0 notify("stop_fire_flicker_roof_heli_crash");
+  var_0 setlightintensity(0);
 }
 
 function setup_stair_b() {
@@ -416,111 +416,111 @@ function setup_stair_b() {
 }
 
 function start_stair_b_car_fire_flicker() {
-  var0 = getEnt("stair_b_car_fire_light_01", "targetname");
-  var0 setlightcolor((1, 0.517, 0.176));
-  var0 setlightintensity(10);
-  var0 setlightfovrange(110, 20);
-  var0 setlightradius(550);
+  var_0 = getEnt("stair_b_car_fire_light_01", "targetname");
+  var_0 setlightcolor((1, 0.517, 0.176));
+  var_0 setlightintensity(10);
+  var_0 setlightfovrange(110, 20);
+  var_0 setlightradius(550);
   thread fire_flicker_stair_b_car();
 }
 
 function stop_stair_b_car_fire_flicker() {
-  var0 = getEnt("stair_b_car_fire_light_01", "targetname");
-  var1 = getEnt("stair_b_car_fire_light_01_off", "targetname");
-  var1 waittill("trigger");
-  var0 notify("stop_fire_flicker_stair_b_car");
-  var0 setlightintensity(0);
+  var_0 = getEnt("stair_b_car_fire_light_01", "targetname");
+  var_1 = getEnt("stair_b_car_fire_light_01_off", "targetname");
+  var_1 waittill("trigger");
+  var_0 notify("stop_fire_flicker_stair_b_car");
+  var_0 setlightintensity(0);
 }
 
 function start_bpg_metal_detector_fire_flicker() {
-  var0 = getEnt("bpg_metal_detector_fire_light_01", "targetname");
-  var0 setlightintensity(0);
-  var1 = getEnt("bpg_metal_detector_fire_light_01_on", "targetname");
-  var1 waittill("trigger");
+  var_0 = getEnt("bpg_metal_detector_fire_light_01", "targetname");
+  var_0 setlightintensity(0);
+  var_1 = getEnt("bpg_metal_detector_fire_light_01_on", "targetname");
+  var_1 waittill("trigger");
   thread fire_flicker_bpg_metal_detector();
-  var1 = getEnt("bpg_metal_detector_fire_light_01_off", "targetname");
-  var1 waittill("trigger");
-  var0 notify("stop_fire_flicker_bpg_metal_detector");
-  var0 setlightintensity(0);
+  var_1 = getEnt("bpg_metal_detector_fire_light_01_off", "targetname");
+  var_1 waittill("trigger");
+  var_0 notify("stop_fire_flicker_bpg_metal_detector");
+  var_0 setlightintensity(0);
 }
 
 function setup_bpg_metal_detector_fire_flicker() {
-  var0 = getEnt("bpg_metal_detector_fire_light_01", "targetname");
-  var0 setlightcolor((1, 0.2, 0));
-  var0 setlightintensity(35);
+  var_0 = getEnt("bpg_metal_detector_fire_light_01", "targetname");
+  var_0 setlightcolor((1, 0.2, 0));
+  var_0 setlightintensity(35);
 }
 
 function flare_light() {
   waitframe();
-  var0 = 200;
-  var1 = 2;
-  var2 = 5;
-  var3 = level.flare_light getlightradius();
+  var_0 = 200;
+  var_1 = 2;
+  var_2 = 5;
+  var_3 = level.flare_light getlightradius();
 
   if(scripts\engine\utility::flag("sniper_roof_start")) {
-    var0 = 120;
+    var_0 = 120;
   }
 
   if(scripts\engine\utility::flag("wave_4_end")) {
-    var0 = 60;
+    var_0 = 60;
   }
 
   if(scripts\engine\utility::flag("wave_5_house_end")) {
-    var0 = 30;
+    var_0 = 30;
   }
 
   if(isDefined(level.flare_light.intensity)) {
-    var0 = level.flare_light.intensity;
+    var_0 = level.flare_light.intensity;
   }
 
   level.flare_light setlightcolor((1, 0.95, 1.25));
   level.flare_light setlightradius(level.flare_light getlightradius() * 0.9);
   level.flare_light setlightfovrange(120, 40);
-  thread lerp_value(level.flare_light, 0, var0);
-  thread flicker_flare(level.flare_light, var1, var0);
-  wait level.flare_lifetime - var2;
-  lerp_value(level.flare_light, var0, 0, var2);
-  level.flare_light setlightradius(var3);
+  thread lerp_value(level.flare_light, 0, var_0);
+  thread flicker_flare(level.flare_light, var_1, var_0);
+  wait level.flare_lifetime - var_2;
+  lerp_value(level.flare_light, var_0, 0, var_2);
+  level.flare_light setlightradius(var_3);
 }
 
 function setup_bpg_combat() {}
 
 function flare_light_up() {
   waitframe();
-  var0 = 70;
-  var1 = 1.5;
-  var2 = 3;
+  var_0 = 70;
+  var_1 = 1.5;
+  var_2 = 3;
   level.flare_light_up setlightcolor((0.7, 0.925, 1.25));
   level.flare_light_up setlightradius(450);
-  thread lerp_value_up(level.flare_light_up, 0, var0);
-  thread flicker_flare_up(level.flare_light_up, var1, var0);
-  wait level.flare_lifetime - var2;
-  lerp_value_up(level.flare_light_up, var0, 0, var2);
+  thread lerp_value_up(level.flare_light_up, 0, var_0);
+  thread flicker_flare_up(level.flare_light_up, var_1, var_0);
+  wait level.flare_lifetime - var_2;
+  lerp_value_up(level.flare_light_up, var_0, 0, var_2);
 }
 
 function field_lights() {
-  var0 = getEnt("field_street_lamps_1", "targetname");
-  var1 = getEnt("field_street_lamps_2", "targetname");
-  var2 = getEnt("field_street_lamps_3", "targetname");
-  var3 = getEnt("field_street_lamps_4", "targetname");
-  var4 = [var0, var1, var2, var3];
+  var_0 = getEnt("field_street_lamps_1", "targetname");
+  var_1 = getEnt("field_street_lamps_2", "targetname");
+  var_2 = getEnt("field_street_lamps_3", "targetname");
+  var_3 = getEnt("field_street_lamps_4", "targetname");
+  var_4 = [var_0, var_1, var_2, var_3];
 
-  foreach(var6 in var4) {
-    var6 setlightintensity(20);
+  foreach(var_6 in var_4) {
+    var_6 setlightintensity(20);
   }
 }
 
 function init_tree_fire_light() {
-  var0 = getEnt("tree_fire_light", "targetname");
-  var0.angles += (-30, 45, 0);
-  var0 setlightcolor((1, 0.682, 0.352));
-  var0 setlightintensity(0);
+  var_0 = getEnt("tree_fire_light", "targetname");
+  var_0.angles += (-30, 45, 0);
+  var_0 setlightcolor((1, 0.682, 0.352));
+  var_0 setlightintensity(0);
 }
 
 function start_tree_fire_flicker() {
-  var0 = getEnt("tree_fire_light", "targetname");
-  var0 setlightintensity(10);
-  var0 setlightradius(var0 getlightradius() / 1.5);
+  var_0 = getEnt("tree_fire_light", "targetname");
+  var_0 setlightintensity(10);
+  var_0 setlightradius(var_0 getlightradius() / 1.5);
   thread fire_flicker();
 }
 
@@ -529,11 +529,11 @@ function fire_flicker_bpg_car() {
   self endon("death");
   self endon("stop_fire_flicker_bpg_car");
   self.og_origin = self.origin;
-  var0 = 10;
-  var1 = 0.05;
-  var2 = 0.2;
-  var3 = 0;
-  var4 = [];
+  var_0 = 10;
+  var_1 = 0.05;
+  var_2 = 0.2;
+  var_3 = 0;
+  var_4 = [];
   GscBinSkip0(0x2e, "intensity", create_light_setting("intensity", self getlightintensity(), 0.125, 1, 0.05, 0.25, &setlightintensity));
 }
 
@@ -546,52 +546,52 @@ function fire_flicker_bpg_metal_detector() {
   self endon("death");
   self endon("stop_fire_flicker_bpg_metal_detector");
   self.og_origin = self.origin;
-  var0 = 2;
-  var1 = 0.1;
-  var2 = 0.2;
-  var3 = 0;
-  var4 = [];
+  var_0 = 2;
+  var_1 = 0.1;
+  var_2 = 0.2;
+  var_3 = 0;
+  var_4 = [];
   GscBinSkip0(0x2e, "intensity", create_light_setting_bpg("intensity", self getlightintensity(), 0.1, 1.5, 0.02, 0.25, &setlightintensity));
 }
 
-function create_light_setting_bpg(var0, var1, var2, var3, var4, var5, var6) {
-  var7 = spawnStruct();
-  var7.ogval = var1;
-  var7.nextval = var7.ogval;
-  var7.prevval = var7.ogval;
-  var7.value = var1;
-  var7.minscale = var2;
-  var7.maxscale = var3;
-  var7.mintime = var4;
-  var7.maxtime = var5;
-  var7.func = var6;
-  var7.count = 0;
-  var7.count_total = 0;
-  return var7;
+function create_light_setting_bpg(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_7 = spawnStruct();
+  var_7.ogval = var_1;
+  var_7.nextval = var_7.ogval;
+  var_7.prevval = var_7.ogval;
+  var_7.value = var_1;
+  var_7.minscale = var_2;
+  var_7.maxscale = var_3;
+  var_7.mintime = var_4;
+  var_7.maxtime = var_5;
+  var_7.func = var_6;
+  var_7.count = 0;
+  var_7.count_total = 0;
+  return var_7;
 }
 
-function lerp_light_setting_bpg(var0) {
-  if(var0.count == var0.count_total) {
-    var0.count_total = int(randomfloatrange(var0.mintime, var0.maxtime) * 20);
-    var0.count = 0;
-    var0.nextval = var0.ogval * randomfloatrange(var0.minscale, var0.maxscale);
-    var0.prevval = var0.value;
+function lerp_light_setting_bpg(var_0) {
+  if(var_0.count == var_0.count_total) {
+    var_0.count_total = int(randomfloatrange(var_0.mintime, var_0.maxtime) * 20);
+    var_0.count = 0;
+    var_0.nextval = var_0.ogval * randomfloatrange(var_0.minscale, var_0.maxscale);
+    var_0.prevval = var_0.value;
   }
 
-  var0.value = scripts\engine\math::lerp(var0.prevval, var0.nextval, var0.count / var0.count_total);
-  self builtin[[var0.func]](var0.value);
-  var0.count++;
+  var_0.value = scripts\engine\math::lerp(var_0.prevval, var_0.nextval, var_0.count / var_0.count_total);
+  self builtin[[var_0.func]](var_0.value);
+  var_0.count++;
 }
 
 function fire_flicker_roof_heli_crash() {
   self endon("death");
   self endon("stop_fire_flicker_roof_heli_crash");
   self.og_origin = self.origin;
-  var0 = 10;
-  var1 = 0.05;
-  var2 = 0.2;
-  var3 = 0;
-  var4 = [];
+  var_0 = 10;
+  var_1 = 0.05;
+  var_2 = 0.2;
+  var_3 = 0;
+  var_4 = [];
   GscBinSkip0(0x2e, "intensity", create_light_setting("intensity", self getlightintensity(), 0.125, 1, 0.05, 0.25, &setlightintensity));
 }
 
@@ -599,11 +599,11 @@ function fire_flicker_stair_b_car() {
   self endon("death");
   self endon("stop_fire_flicker_stair_b_car");
   self.og_origin = self.origin;
-  var0 = 10;
-  var1 = 0.05;
-  var2 = 0.2;
-  var3 = 0;
-  var4 = [];
+  var_0 = 10;
+  var_1 = 0.05;
+  var_2 = 0.2;
+  var_3 = 0;
+  var_4 = [];
   GscBinSkip0(0x2e, "intensity", create_light_setting("intensity", self getlightintensity(), 0.125, 1, 0.05, 0.25, &setlightintensity));
 }
 
@@ -611,178 +611,178 @@ function fire_flicker() {
   self endon("death");
   self endon("stop_fire_flicker");
   self.og_origin = self.origin;
-  var0 = 10;
-  var1 = 0.05;
-  var2 = 0.2;
-  var3 = 0;
-  var4 = [];
+  var_0 = 10;
+  var_1 = 0.05;
+  var_2 = 0.2;
+  var_3 = 0;
+  var_4 = [];
   GscBinSkip0(0x2e, "intensity", create_light_setting("intensity", self getlightintensity(), 0.1, 1, 0.1, 0.25, &setlightintensity));
 }
 
-function create_light_setting(var0, var1, var2, var3, var4, var5, var6) {
-  var7 = spawnStruct();
-  var7.ogval = var1;
-  var7.nextval = var7.ogval;
-  var7.prevval = var7.ogval;
-  var7.value = var1;
-  var7.minscale = var2;
-  var7.maxscale = var3;
-  var7.mintime = var4;
-  var7.maxtime = var5;
-  var7.func = var6;
-  var7.count = 0;
-  var7.count_total = 0;
-  return var7;
+function create_light_setting(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_7 = spawnStruct();
+  var_7.ogval = var_1;
+  var_7.nextval = var_7.ogval;
+  var_7.prevval = var_7.ogval;
+  var_7.value = var_1;
+  var_7.minscale = var_2;
+  var_7.maxscale = var_3;
+  var_7.mintime = var_4;
+  var_7.maxtime = var_5;
+  var_7.func = var_6;
+  var_7.count = 0;
+  var_7.count_total = 0;
+  return var_7;
 }
 
-function lerp_light_setting(var0) {
-  if(var0.count == var0.count_total) {
-    var0.count_total = int(randomfloatrange(var0.mintime, var0.maxtime) * 20);
+function lerp_light_setting(var_0) {
+  if(var_0.count == var_0.count_total) {
+    var_0.count_total = int(randomfloatrange(var_0.mintime, var_0.maxtime) * 20);
 
-    if(var0.count_total == 0) {
-      var0.count_total = 1;
+    if(var_0.count_total == 0) {
+      var_0.count_total = 1;
     }
 
-    var0.count = 0;
-    var0.nextval = var0.ogval * randomfloatrange(var0.minscale, var0.maxscale);
-    var0.prevval = var0.value;
+    var_0.count = 0;
+    var_0.nextval = var_0.ogval * randomfloatrange(var_0.minscale, var_0.maxscale);
+    var_0.prevval = var_0.value;
   }
 
-  var0.value = scripts\engine\math::lerp(var0.prevval, var0.nextval, var0.count / var0.count_total);
-  self builtin[[var0.func]](var0.value);
-  var0.count++;
+  var_0.value = scripts\engine\math::lerp(var_0.prevval, var_0.nextval, var_0.count / var_0.count_total);
+  self builtin[[var_0.func]](var_0.value);
+  var_0.count++;
 }
 
-function fade_tree_fire_out(var0) {
-  var1 = getEnt("tree_fire_light", "targetname");
-  var1 notify("stop_fire_flicker");
-  var0 = 4;
-  var2 = var0 * 20;
-  var3 = var1 getlightintensity() / var2;
+function fade_tree_fire_out(var_0) {
+  var_1 = getEnt("tree_fire_light", "targetname");
+  var_1 notify("stop_fire_flicker");
+  var_0 = 4;
+  var_2 = var_0 * 20;
+  var_3 = var_1 getlightintensity() / var_2;
 
-  for(var4 = 0; var4 < var2; var4++) {
+  for(var_4 = 0; var_4 < var_2; var_4++) {
     waitframe();
-    var1 setlightintensity(var1 getlightintensity() - var3);
+    var_1 setlightintensity(var_1 getlightintensity() - var_3);
   }
 
-  var1 setlightintensity(0);
+  var_1 setlightintensity(0);
 }
 
-function lerp_value(var0, var1, var2) {
-  var3 = var1 - var0;
-  var4 = 0.05;
-  var5 = int(var2 / var4);
+function lerp_value(var_0, var_1, var_2) {
+  var_3 = var_1 - var_0;
+  var_4 = 0.05;
+  var_5 = int(var_2 / var_4);
 
-  if(var5 > 0) {
-    var6 = var3 / var5;
+  if(var_5 > 0) {
+    var_6 = var_3 / var_5;
 
-    while(var5) {
-      var0 += var6;
-      level.flare_light setlightintensity(var0);
-      wait var4;
-      var5--;
+    while(var_5) {
+      var_0 += var_6;
+      level.flare_light setlightintensity(var_0);
+      wait var_4;
+      var_5--;
     }
 
     return;
   }
 }
 
-function lerp_value_up(var0, var1, var2) {
-  var3 = var1 - var0;
-  var4 = 0.05;
-  var5 = int(var2 / var4);
+function lerp_value_up(var_0, var_1, var_2) {
+  var_3 = var_1 - var_0;
+  var_4 = 0.05;
+  var_5 = int(var_2 / var_4);
 
-  if(var5 > 0) {
-    var6 = var3 / var5;
+  if(var_5 > 0) {
+    var_6 = var_3 / var_5;
 
-    while(var5) {
-      var0 += var6;
-      level.flare_light_up setlightintensity(var0);
-      wait var4;
-      var5--;
+    while(var_5) {
+      var_0 += var_6;
+      level.flare_light_up setlightintensity(var_0);
+      wait var_4;
+      var_5--;
     }
 
     return;
   }
 }
 
-function lerp_value_heli_crash(var0, var1, var2) {
-  var3 = var1 - var0;
-  var4 = 0.05;
-  var5 = int(var2 / var4);
+function lerp_value_heli_crash(var_0, var_1, var_2) {
+  var_3 = var_1 - var_0;
+  var_4 = 0.05;
+  var_5 = int(var_2 / var_4);
 
-  if(var5 > 0) {
-    var6 = var3 / var5;
+  if(var_5 > 0) {
+    var_6 = var_3 / var_5;
 
-    while(var5) {
-      var0 += var6;
-      level.roof_heli_crash_explosion_light_01 setlightintensity(var0);
-      wait var4;
-      var5--;
+    while(var_5) {
+      var_0 += var_6;
+      level.roof_heli_crash_explosion_light_01 setlightintensity(var_0);
+      wait var_4;
+      var_5--;
     }
 
     return;
   }
 }
 
-function flicker_flare(var0, var1, var2) {
-  wait var0;
+function flicker_flare(var_0, var_1, var_2) {
+  wait var_0;
 
-  while(level.flare_countdown > var2) {
-    level.flare_light setlightintensity(randomfloatrange(var1 / 4, var1));
+  while(level.flare_countdown > var_2) {
+    level.flare_light setlightintensity(randomfloatrange(var_1 / 4, var_1));
     waitframe();
   }
 }
 
-function flicker_flare_up(var0, var1, var2) {
-  wait var0;
+function flicker_flare_up(var_0, var_1, var_2) {
+  wait var_0;
 
-  while(level.flare_countdown > var2) {
-    level.flare_light_up setlightintensity(randomfloatrange(var1 / 8, var1));
+  while(level.flare_countdown > var_2) {
+    level.flare_light_up setlightintensity(randomfloatrange(var_1 / 8, var_1));
     waitframe();
   }
 }
 
 function garage_door_lights_off() {
-  var0 = getEnt("cafe_light_01", "targetname");
-  var1 = getEnt("cafe_light_01_off", "targetname");
-  var1 hide();
-  var2 = getEnt("garage_door_closed_lights_01", "targetname");
-  var3 = getEnt("garage_door_closed_lights_02", "targetname");
-  var4 = getEnt("garage_door_closed_lights_03", "targetname");
-  var5 = getEnt("garage_door_closed_lights_04", "targetname");
-  var6 = getEnt("garage_door_closed_lights_05", "targetname");
-  var7 = getEnt("garage_door_closed_lights_06", "targetname");
-  var8 = getEnt("garage_door_closed_lights_07", "targetname");
-  var9 = getEntArray("garage_door_closed_lights", "targetname");
+  var_0 = getEnt("cafe_light_01", "targetname");
+  var_1 = getEnt("cafe_light_01_off", "targetname");
+  var_1 hide();
+  var_2 = getEnt("garage_door_closed_lights_01", "targetname");
+  var_3 = getEnt("garage_door_closed_lights_02", "targetname");
+  var_4 = getEnt("garage_door_closed_lights_03", "targetname");
+  var_5 = getEnt("garage_door_closed_lights_04", "targetname");
+  var_6 = getEnt("garage_door_closed_lights_05", "targetname");
+  var_7 = getEnt("garage_door_closed_lights_06", "targetname");
+  var_8 = getEnt("garage_door_closed_lights_07", "targetname");
+  var_9 = getEntArray("garage_door_closed_lights", "targetname");
   level waittill("garage_door_closed");
   wait 2;
-  var2 setlightintensity(0);
+  var_2 setlightintensity(0);
   wait 1;
-  var3 setlightintensity(0);
-  var0 hide();
-  var1 show();
+  var_3 setlightintensity(0);
+  var_0 hide();
+  var_1 show();
   wait 2;
-  var4 setlightintensity(0);
+  var_4 setlightintensity(0);
   wait 0.5;
-  var5 setlightintensity(0);
+  var_5 setlightintensity(0);
   wait 0.5;
-  var6 setlightintensity(0);
+  var_6 setlightintensity(0);
   wait 0.25;
-  var7 setlightintensity(0);
+  var_7 setlightintensity(0);
   wait 0.1;
-  var8 setlightintensity(0);
+  var_8 setlightintensity(0);
 
-  foreach(var11 in var9) {
-    var11 setlightintensity(0);
+  foreach(var_11 in var_9) {
+    var_11 setlightintensity(0);
   }
 
   garage_model_swap("cafe_sign_light", "me_lighting_fixtures_commercial_fluorescent_sign_01_off");
 }
 
-function garage_model_swap(var0, var1) {
-  var2 = getEnt(var0, "targetname");
-  var2 setModel(var1);
+function garage_model_swap(var_0, var_1) {
+  var_2 = getEnt(var_0, "targetname");
+  var_2 setModel(var_1);
 }
 
 function vision_set_init() {
@@ -1142,22 +1142,22 @@ function mortar_wave_settings() {
   setsaveddvar("MPOKKOPMTN", "128 384 640 1024");
 }
 
-function mortar_building_attack_lighting(var0) {
-  if(!isDefined(var0)) {
-    var0 = 1;
+function mortar_building_attack_lighting(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 1;
   }
 
   setsaveddvar("LKOLRONRNQ", 1250);
-  visionsetnaked("embassy_mortar_building_attack", var0);
+  visionsetnaked("embassy_mortar_building_attack", var_0);
 }
 
-function compound_return_lighting(var0) {
-  if(!isDefined(var0)) {
-    var0 = 1;
+function compound_return_lighting(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 1;
   }
 
   setsaveddvar("LKOLRONRNQ", 1250);
-  visionsetnaked("embassy_compound_return", var0);
+  visionsetnaked("embassy_compound_return", var_0);
 }
 
 function lt_escape_start() {
@@ -1191,42 +1191,42 @@ function escape_start_fade_off_lighting() {
   thread escape_lerp_value_rim(level.saferoom_kyle_rim_light, level.rim_max_intensity, 0);
 }
 
-function escape_lerp_value_fill(var0, var1, var2) {
-  var3 = var1 - var0;
-  var4 = 0.02;
-  var5 = int(var2 / var4);
+function escape_lerp_value_fill(var_0, var_1, var_2) {
+  var_3 = var_1 - var_0;
+  var_4 = 0.02;
+  var_5 = int(var_2 / var_4);
 
-  if(var5 > 0) {
-    var6 = var3 / var5;
+  if(var_5 > 0) {
+    var_6 = var_3 / var_5;
 
-    while(var5) {
-      var0 += var6;
-      level.saferoom_kyle_fill_light setlightintensity(var0);
-      wait var4;
-      var5--;
+    while(var_5) {
+      var_0 += var_6;
+      level.saferoom_kyle_fill_light setlightintensity(var_0);
+      wait var_4;
+      var_5--;
     }
   }
 
-  level.saferoom_kyle_fill_light setlightintensity(var1);
+  level.saferoom_kyle_fill_light setlightintensity(var_1);
 }
 
-function escape_lerp_value_rim(var0, var1, var2) {
-  var3 = var1 - var0;
-  var4 = 0.02;
-  var5 = int(var2 / var4);
+function escape_lerp_value_rim(var_0, var_1, var_2) {
+  var_3 = var_1 - var_0;
+  var_4 = 0.02;
+  var_5 = int(var_2 / var_4);
 
-  if(var5 > 0) {
-    var6 = var3 / var5;
+  if(var_5 > 0) {
+    var_6 = var_3 / var_5;
 
-    while(var5) {
-      var0 += var6;
-      level.saferoom_kyle_rim_light setlightintensity(var0);
-      wait var4;
-      var5--;
+    while(var_5) {
+      var_0 += var_6;
+      level.saferoom_kyle_rim_light setlightintensity(var_0);
+      wait var_4;
+      var_5--;
     }
   }
 
-  level.saferoom_kyle_rim_light setlightintensity(var1);
+  level.saferoom_kyle_rim_light setlightintensity(var_1);
 }
 
 function boost_moment_dof() {
@@ -1275,11 +1275,11 @@ function fire_flicker_alley_heli_crash() {
   self endon("death");
   self endon("stop_fire_flicker_alley_heli_crash");
   self.og_origin = self.origin;
-  var0 = 10;
-  var1 = 0.05;
-  var2 = 0.2;
-  var3 = 0;
-  var4 = [];
+  var_0 = 10;
+  var_1 = 0.05;
+  var_2 = 0.2;
+  var_3 = 0;
+  var_4 = [];
   GscBinSkip0(0x2e, "intensity", create_light_setting("intensity", self getlightintensity(), 0.125, 1, 0.05, 0.25, &setlightintensity));
 }
 
@@ -1291,8 +1291,8 @@ function mortar_moment() {
   level.mortar_moment_painters_light setlightintensity(0.5);
   scripts\engine\utility::flag_wait("roof_compromised");
   level.mortar_moment_painters_light setlightintensity(0);
-  var0 = getEnt("mortar_moment_painters_light_fixture", "targetname");
-  var0 hide();
+  var_0 = getEnt("mortar_moment_painters_light_fixture", "targetname");
+  var_0 hide();
 }
 
 function wolf_door_light() {
@@ -1312,21 +1312,21 @@ function lt_saferoom_wolf_off() {
   thread generic_lerp_value(level.saferoom_rim_light, 0.03, 0, 1);
 }
 
-function generic_lerp_value(var0, var1, var2, var3) {
-  var4 = var1 - var0;
-  var5 = 0.02;
-  var6 = int(var2 / var5);
+function generic_lerp_value(var_0, var_1, var_2, var_3) {
+  var_4 = var_1 - var_0;
+  var_5 = 0.02;
+  var_6 = int(var_2 / var_5);
 
-  if(var6 > 0) {
-    var7 = var4 / var6;
+  if(var_6 > 0) {
+    var_7 = var_4 / var_6;
 
-    while(var6) {
-      var0 = max(var0 + var7, 0);
-      var3 setlightintensity(var0);
-      wait var5;
-      var6--;
+    while(var_6) {
+      var_0 = max(var_0 + var_7, 0);
+      var_3 setlightintensity(var_0);
+      wait var_5;
+      var_6--;
     }
   }
 
-  var3 setlightintensity(var1);
+  var_3 setlightintensity(var_1);
 }

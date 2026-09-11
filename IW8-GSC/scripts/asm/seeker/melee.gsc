@@ -4,73 +4,73 @@
 ***********************************************/
 
 function seeker_getplayerriganims() {
-  var0 = [];
-  return var0;
+  var_0 = [];
+  return var_0;
 }
 
-function seeker_evaluatesyncedmelee(var0, var1, var2, var3) {
-  var4 = self.melee.target;
+function seeker_evaluatesyncedmelee(var_0, var_1, var_2, var_3) {
+  var_4 = self.melee.target;
 
-  if(isPlayer(var4)) {
+  if(isPlayer(var_4)) {
     return false;
   }
 
   self.melee.winner = 1;
-  var4.melee.winner = 0;
-  var5 = seeker_pickattachdirection(self, self.melee.target);
-  self.melee.direction = var5[0];
-  self.melee.offset = var5[1];
-  var5 = undefined;
-  var4.melee.direction = self.melee.direction;
-  var6 = chooseanimmelee_seekerjump(var0, var2, self.melee.direction);
-  var7 = vectortoyaw(self.origin - self.melee.target.origin);
-  var8 = (0, self.melee.offset + var7, 0);
+  var_4.melee.winner = 0;
+  var_5 = seeker_pickattachdirection(self, self.melee.target);
+  self.melee.direction = var_5[0];
+  self.melee.offset = var_5[1];
+  var_5 = undefined;
+  var_4.melee.direction = self.melee.direction;
+  var_6 = chooseanimmelee_seekerjump(var_0, var_2, self.melee.direction);
+  var_7 = vectortoyaw(self.origin - self.melee.target.origin);
+  var_8 = (0, self.melee.offset + var_7, 0);
   self.melee.startangles = self.angles;
-  var4.melee.startangles = var8;
-  var4.ignoreme = 1;
+  var_4.melee.startangles = var_8;
+  var_4.ignoreme = 1;
   self.ignoreme = 1;
   self notify("meleegrab_start");
   self.bt.target_locked = 1;
   return true;
 }
 
-function seeker_pickattachdirection(var0, var1) {
-  var2 = var1.angles;
-  var3 = var1.origin;
-  var4 = var0.origin;
-  var5 = vectortoangles(var4 - var3);
-  var6 = angleclamp(var2[1] - var5[1]);
+function seeker_pickattachdirection(var_0, var_1) {
+  var_2 = var_1.angles;
+  var_3 = var_1.origin;
+  var_4 = var_0.origin;
+  var_5 = vectortoangles(var_4 - var_3);
+  var_6 = angleclamp(var_2[1] - var_5[1]);
 
-  if(var6 > 315 || var6 < 45) {
+  if(var_6 > 315 || var_6 < 45) {
     return ["front", 0];
   }
 
-  if(var6 < 135) {
+  if(var_6 < 135) {
     return ["right", 90];
   }
 
-  if(var6 > 225) {
+  if(var_6 > 225) {
     return ["left", -90];
   }
 
   return ["back", 180];
 }
 
-function chooseanimmelee_seekerjump(var0, var1, var2) {
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, "jump_" + var2);
+function chooseanimmelee_seekerjump(var_0, var_1, var_2) {
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, "jump_" + var_2);
 }
 
-function chooseanimmelee_seekerloop(var0, var1, var2) {
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, "loop_" + var2);
+function chooseanimmelee_seekerloop(var_0, var_1, var_2) {
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, "loop_" + var_2);
 }
 
 function seekermeleedetonate() {
-  var0 = 0.7071;
+  var_0 = 0.7071;
 
   for(;;) {
     wait 0.05;
 
-    if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), self.origin, var0)) {
+    if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), self.origin, var_0)) {
       self notify("on_screen");
       return;
     }
@@ -81,8 +81,8 @@ function setseekerattached() {
   self.attached = 1;
 }
 
-function valid_reaction_sound(var0) {
-  switch (var0) {
+function valid_reaction_sound(var_0) {
+  switch (var_0) {
     case "w2":
     case "w1":
     case "w0":
@@ -100,39 +100,39 @@ function valid_reaction_sound(var0) {
   return false;
 }
 
-function playmeleeanim_seekerattack(var0, var1, var2) {
-  self endon(var1 + "_finished");
+function playmeleeanim_seekerattack(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
   self.melee.bstarted = 1;
-  var3 = self.melee.target;
-  var4 = chooseanimmelee_seekerjump(var0, var1, self.melee.direction);
+  var_3 = self.melee.target;
+  var_4 = chooseanimmelee_seekerjump(var_0, var_1, self.melee.direction);
   scripts\asm\asm::asm_fireephemeralevent("melee_attack", "begin");
-  scripts\asm\soldier\melee::melee_synced_setup(var1, 1);
+  scripts\asm\soldier\melee::melee_synced_setup(var_1, 1);
 
-  if(!isDefined(var3.seenatseeker)) {
-    var3.seenatseeker = 1;
+  if(!isDefined(var_3.seenatseeker)) {
+    var_3.seenatseeker = 1;
 
-    if(isDefined(var3.battlechatter.countryid) && isDefined(var3.battlechatter.npcid) && (var3.battlechatter.countryid == "UN" || var3.battlechatter.countryid == "SD")) {
-      if(valid_reaction_sound(var3.battlechatter.npcid) && !isDefined(level.in_vr)) {
-        var5 = var3.battlechatter.countryid + "_" + var3.battlechatter.npcid + "_reaction_seeker_attack";
-        var3 playSound(var5);
+    if(isDefined(var_3.battlechatter.countryid) && isDefined(var_3.battlechatter.npcid) && (var_3.battlechatter.countryid == "UN" || var_3.battlechatter.countryid == "SD")) {
+      if(valid_reaction_sound(var_3.battlechatter.npcid) && !isDefined(level.in_vr)) {
+        var_5 = var_3.battlechatter.countryid + "_" + var_3.battlechatter.npcid + "_reaction_seeker_attack";
+        var_3 playSound(var_5);
       }
     }
   }
 
-  var3 scripts\asm\asm::asm_setstate(var1 + "_victim");
+  var_3 scripts\asm\asm::asm_setstate(var_1 + "_victim");
   createnavrepulsor("ent_" + self getentitynumber() + "_seeker_repulsor", -1, self, 250, 1, self.bt.enemy_team);
   self animmode("zonly_physics");
   self linktoblendtotag(self.melee.target, "tag_sync", 0, 0);
   self clearanim(scripts\asm\asm::asm_getbodyknob(), 0);
-  self setflaggedanimrestart(var1, var4, 1, 0, 1);
+  self setflaggedanimrestart(var_1, var_4, 1, 0, 1);
   scripts\engine\utility::delaythread(0.25, &setseekerattached);
-  var6 = scripts\asm\asm::asm_donotetracks(var0, var1, &scripts\asm\soldier\melee::melee_handlenotetracks);
-  var7 = chooseanimmelee_seekerloop(var0, var1, self.melee.direction);
-  self aisetanim(var1, var7);
+  var_6 = scripts\asm\asm::asm_donotetracks(var_0, var_1, &scripts\asm\soldier\melee::melee_handlenotetracks);
+  var_7 = chooseanimmelee_seekerloop(var_0, var_1, self.melee.direction);
+  self aisetanim(var_1, var_7);
   GscBinSkip4(0x35);
 }
 
-function playmeleeanim_seekerattack_cleanup(var0, var1, var2) {
+function playmeleeanim_seekerattack_cleanup(var_0, var_1, var_2) {
   destroynavrepulsor("ent_" + self getentitynumber() + "_seeker_repulsor");
 
   if(isDefined(self.melee.target)) {
@@ -145,7 +145,7 @@ function playmeleeanim_seekerattack_cleanup(var0, var1, var2) {
   }
 }
 
-function seeker_meleegrabplayer(var0, var1, var2) {
+function seeker_meleegrabplayer(var_0, var_1, var_2) {
   level.player.damageshield = 1;
   self.disableattack = 1;
   self.ignoreme = 1;
@@ -153,77 +153,77 @@ function seeker_meleegrabplayer(var0, var1, var2) {
   scripts\asm\shared\sp\utility::meleegrab_common();
   scripts\asm\asm::asm_fireephemeralevent("melee_attack", "begin");
   thread seeker_playerrig_meleegrabplayer();
-  scripts\asm\asm::asm_playanimstate(var0, var1);
+  scripts\asm\asm::asm_playanimstate(var_0, var_1);
 }
 
 function seeker_playerrig_meleegrabplayer() {
   if(isDefined(self.forcemeleeyaw)) {
-    var0 = (0, self.forcemeleeyaw, 0);
+    var_0 = (0, self.forcemeleeyaw, 0);
   } else {
-    var0 = vectortoangles(self.origin - level.player.origin);
-    var0 = (0, var0[1], 0);
+    var_0 = vectortoangles(self.origin - level.player.origin);
+    var_0 = (0, var_0[1], 0);
   }
 
-  var1 = scripts\asm\shared\sp\utility::spawnplayerrig();
-  var1.angles = var0;
+  var_1 = scripts\asm\shared\sp\utility::spawnplayerrig();
+  var_1.angles = var_0;
   self notify("jumped_on_player");
   playworldsound("seeker_expl_beep", self.origin);
   level.player.melee.partner = self;
-  level.player.melee.rig = var1;
-  var2 = seeker_getplayerriganims();
-  var3 = "meleeAnim";
-  var1 setflaggedanimknoballrestart(var3, var2["seekerMeleeGrab"], var1.root, 1, 0, 1);
-  thread seeker_playerrig_link(var1);
-  var4 = getanimlength(var2["seekerMeleeGrab"]);
+  level.player.melee.rig = var_1;
+  var_2 = seeker_getplayerriganims();
+  var_3 = "meleeAnim";
+  var_1 setflaggedanimknoballrestart(var_3, var_2["seekerMeleeGrab"], var_1.root, 1, 0, 1);
+  thread seeker_playerrig_link(var_1);
+  var_4 = getanimlength(var_2["seekerMeleeGrab"]);
   thread seeker_meleegrab_counterinput(1.25, 0.75);
-  var1 thread scripts\common\notetrack::start_notetrack_wait(var1, var3);
-  var1 scripts\anim\notetracks::donotetracks(var3);
+  var_1 thread scripts\common\notetrack::start_notetrack_wait(var_1, var_3);
+  var_1 scripts\anim\notetracks::donotetracks(var_3);
 }
 
-function seeker_meleegrab_counterinput(var0, var1) {
+function seeker_meleegrab_counterinput(var_0, var_1) {
   level.player notifyonplayercommand("bash_pressed", "+usereload");
   level.player notifyonplayercommand("bash_pressed", "+activate");
-  scripts\engine\utility::waittill_notify_or_timeout_return("death", var0);
+  scripts\engine\utility::waittill_notify_or_timeout_return("death", var_0);
 
   if(!isDefined(level.player.melee)) {
     return;
   }
 
   scripts\sp\player\cursor_hint::create_cursor_hint("j_body", undefined, undefined, undefined, 1000, 1000, 1, 1);
-  var2 = seeker_meleegrab_bash(var1);
+  var_2 = seeker_meleegrab_bash(var_1);
 
   if(!isDefined(level.player) || !isDefined(level.player.melee)) {
     return;
   }
 
-  level.player.melee.countersuccess = var2;
+  level.player.melee.countersuccess = var_2;
   scripts\sp\player\cursor_hint::remove_cursor_hint();
 }
 
-function seeker_meleegrab_bash(var0) {
+function seeker_meleegrab_bash(var_0) {
   self endon("meleegrab_interupt");
-  var0 *= 1000;
-  var1 = 1;
-  var2 = 0.4;
-  var3 = var1;
-  var4 = undefined;
+  var_0 *= 1000;
+  var_1 = 1;
+  var_2 = 0.4;
+  var_3 = var_1;
+  var_4 = undefined;
 
   for(;;) {
-    var5 = level.player scripts\engine\utility::waittill_notify_or_timeout_return("bash_pressed", var3);
+    var_5 = level.player scripts\engine\utility::waittill_notify_or_timeout_return("bash_pressed", var_3);
 
-    if(isDefined(var5) && var5 == "timeout") {
+    if(isDefined(var_5) && var_5 == "timeout") {
       break;
     }
 
-    if(!isDefined(var4)) {
-      var4 = gettime();
+    if(!isDefined(var_4)) {
+      var_4 = gettime();
     }
 
-    if(gettime() - var4 > var0) {
+    if(gettime() - var_4 > var_0) {
       return true;
     }
 
-    var3 = var2;
+    var_3 = var_2;
   }
 
   return false;
@@ -240,18 +240,18 @@ function seeker_meleegrab_rumble() {
 }
 
 function seeker_meleegrab_hint() {
-  var0 = spawn("script_model", self.origin);
-  var0 linkTo(self, "j_hip_le", (0, 0, 0), (0, 0, 0));
-  var0 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, undefined, "", undefined, undefined, undefined, 1, 1);
+  var_0 = spawn("script_model", self.origin);
+  var_0 linkTo(self, "j_hip_le", (0, 0, 0), (0, 0, 0));
+  var_0 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, undefined, "", undefined, undefined, undefined, 1, 1);
   self waittill("meleegrab_interupt");
-  var0 scripts\sp\player\cursor_hint::remove_cursor_hint();
+  var_0 scripts\sp\player\cursor_hint::remove_cursor_hint();
 }
 
-function seeker_meleegrab_counterhint(var0) {
+function seeker_meleegrab_counterhint(var_0) {
   level.player endon("meleegrab_interupt");
-  var1 = 0.2;
-  var2 = 0.3;
-  wait var0 - var1 - 0.05;
+  var_1 = 0.2;
+  var_2 = 0.3;
+  wait var_0 - var_1 - 0.05;
 
   if(isDefined(self.melee.meleecounterhint)) {
     self.melee.meleecounterhint destroy();
@@ -272,29 +272,29 @@ function seeker_meleegrab_counterhint(var0) {
   self.melee.meleecounterhint.hidewhendead = 1;
   self.melee.meleecounterhint.sort = -1;
   self.melee.meleecounterhint endon("death");
-  self.melee.meleecounterhint fadeovertime(var1);
-  self.melee.meleecounterhint changefontscaleovertime(var1);
+  self.melee.meleecounterhint fadeovertime(var_1);
+  self.melee.meleecounterhint changefontscaleovertime(var_1);
   self.melee.meleecounterhint.fontscale = 1.3;
   self.melee.meleecounterhint.alpha = 1;
-  wait var1;
+  wait var_1;
 
   if(!isDefined(self.melee.meleecounterhint)) {
     return;
   }
 
-  self.melee.meleecounterhint fadeovertime(var2);
-  self.melee.meleecounterhint changefontscaleovertime(var2);
+  self.melee.meleecounterhint fadeovertime(var_2);
+  self.melee.meleecounterhint changefontscaleovertime(var_2);
   self.melee.meleecounterhint.fontscale = 1.2;
 }
 
-function seeker_playerrig_link(var0) {
-  var1 = 0.3;
-  thread seeker_meleegrab_interrupt(var0);
-  level.player playerlinktoblend(var0, "tag_player", var1, 0, var1);
+function seeker_playerrig_link(var_0) {
+  var_1 = 0.3;
+  thread seeker_meleegrab_interrupt(var_0);
+  level.player playerlinktoblend(var_0, "tag_player", var_1, 0, var_1);
   level.player viewkick(5, self.origin);
   scripts\asm\shared\sp\utility::playergrabbed("seeker");
-  self linktoblendtotag(var0, "tag_sync", 0, 0);
-  wait var1;
+  self linktoblendtotag(var_0, "tag_sync", 0, 0);
+  wait var_1;
 
   if(!isalive(self)) {
     return;
@@ -304,24 +304,24 @@ function seeker_playerrig_link(var0) {
   thread scripts\asm\shared\sp\utility::delayenabledof(0.5, 2, 20, 10, 5, 60, 10, 0.1);
   thread scripts\asm\shared\sp\utility::delayenabledof(1, 2, 20, 4, 50, 90, 10, 0.1);
   thread scripts\asm\shared\sp\utility::delaymodifybasefov(1, 50, 0.4);
-  var0 show();
+  var_0 show();
   level.player thread scripts\asm\shared\sp\utility::playerhealth();
-  level.player playerlinktodelta(var0, "tag_player", 1, 0, 0, 0, 0, 1);
+  level.player playerlinktodelta(var_0, "tag_player", 1, 0, 0, 0, 0, 1);
   level.player lerpviewangleclamp(0.4, 0, 0, 15, 20, 30, 0);
   thread seeker_playergrabbed_screenshake();
 }
 
 function seeker_playergrabbed_screenshake() {
   wait 0.1;
-  var0 = level.player.origin + anglesToForward(level.player.angles) * -100;
-  screenshake(var0, 10, 2, 1, 0.4, 0.2, 0.2, 700, 0.2, 1, 1);
+  var_0 = level.player.origin + anglesToForward(level.player.angles) * -100;
+  screenshake(var_0, 10, 2, 1, 0.4, 0.2, 0.2, 700, 0.2, 1, 1);
   wait 0.5;
-  var0 = level.player.origin + anglesToForward(level.player.angles) * 100;
-  screenshake(var0, 10, 2, 1, 0.6, 0.3, 0.3, 700, 0.2, 1, 1);
+  var_0 = level.player.origin + anglesToForward(level.player.angles) * 100;
+  screenshake(var_0, 10, 2, 1, 0.6, 0.3, 0.3, 700, 0.2, 1, 1);
 }
 
-function seeker_meleegrab_notetracks(var0) {
-  switch (var0) {
+function seeker_meleegrab_notetracks(var_0) {
+  switch (var_0) {
     case "unlink":
       self unlink();
       break;
@@ -332,11 +332,11 @@ function seeker_meleegrab_notetracks(var0) {
   }
 }
 
-function seeker_meleegrab_interrupt(var0) {
+function seeker_meleegrab_interrupt(var_0) {
   self endon("death");
   level.player endon("bt_stop_meleegrab");
 
-  while(!seeker_meleegrab_checkinterrupt(var0)) {
+  while(!seeker_meleegrab_checkinterrupt(var_0)) {
     wait 0.05;
   }
 
@@ -356,37 +356,37 @@ function seeker_meleegrab_interrupt(var0) {
   self delete();
 }
 
-function seeker_meleegrab_checkinterrupt(var0) {
-  if(!isalive(var0)) {
+function seeker_meleegrab_checkinterrupt(var_0) {
+  if(!isalive(var_0)) {
     return true;
   }
 
-  if(isDefined(var0.antigravtag)) {
+  if(isDefined(var_0.antigravtag)) {
     return true;
   }
 
   return false;
 }
 
-function seeker_meleegrabplayercounter(var0, var1, var2) {
-  var3 = seeker_getplayerriganims();
-  var4 = var3["seekerMeleeGrab_win"];
-  var5 = level.player.melee.rig;
+function seeker_meleegrabplayercounter(var_0, var_1, var_2) {
+  var_3 = seeker_getplayerriganims();
+  var_4 = var_3["seekerMeleeGrab_win"];
+  var_5 = level.player.melee.rig;
   thread scripts\asm\shared\sp\utility::delaydisabledof(0.2);
   thread scripts\asm\shared\sp\utility::delaymodifybasefov(0.2, 65, 0.4);
-  var5 setflaggedanimknoballrestart("meleeCounter", var4, var5.root, 1, 0.2, 1);
-  var5 thread scripts\common\notetrack::start_notetrack_wait(var5, "meleeCounter");
-  var5 thread scripts\anim\notetracks::donotetracks("meleeCounter", &seeker_meleegrab_notetracks);
-  var6 = scripts\asm\asm::asm_getanim(var0, var1);
+  var_5 setflaggedanimknoballrestart("meleeCounter", var_4, var_5.root, 1, 0.2, 1);
+  var_5 thread scripts\common\notetrack::start_notetrack_wait(var_5, "meleeCounter");
+  var_5 thread scripts\anim\notetracks::donotetracks("meleeCounter", &seeker_meleegrab_notetracks);
+  var_6 = scripts\asm\asm::asm_getanim(var_0, var_1);
   playworldsound("seeker_expl_beep", self.origin);
   thread seeker_collide();
-  self aisetanim(var1, var6);
-  thread scripts\common\notetrack::start_notetrack_wait(self, var1);
-  scripts\asm\asm::asm_donotetracks(var0, var1, scripts\asm\asm::asm_getnotehandler(var0, var1));
+  self aisetanim(var_1, var_6);
+  thread scripts\common\notetrack::start_notetrack_wait(self, var_1);
+  scripts\asm\asm::asm_donotetracks(var_0, var_1, scripts\asm\asm::asm_getnotehandler(var_0, var_1));
   seeker_meleeexplode();
 }
 
-function seeker_meleeexplode(var0) {
+function seeker_meleeexplode(var_0) {
   if(isDefined(self.is_detonated) && self.is_detonated) {
     return;
   }
@@ -406,23 +406,23 @@ function seeker_collide() {
   self endon("death");
 
   for(;;) {
-    var0 = self gettagorigin("j_body");
+    var_0 = self gettagorigin("j_body");
     wait 0.05;
-    var1 = scripts\engine\trace::create_solid_ai_contents(1);
-    var2 = scripts\engine\trace::ray_trace(var0, self gettagorigin("j_body"), self, var1);
+    var_1 = scripts\engine\trace::create_solid_ai_contents(1);
+    var_2 = scripts\engine\trace::ray_trace(var_0, self gettagorigin("j_body"), self, var_1);
 
-    if(var2["hittype"] != "hittype_none") {
-      seeker_meleeexplode(var2["position"]);
+    if(var_2["hittype"] != "hittype_none") {
+      seeker_meleeexplode(var_2["position"]);
       return;
     }
   }
 }
 
-function seeker_meleegrabkillplayer(var0, var1, var2) {
+function seeker_meleegrabkillplayer(var_0, var_1, var_2) {
   level.player thread scripts\asm\shared\sp\utility::counterhintdestroy();
-  var3 = seeker_getplayerriganims();
-  var4 = var3["seekerMeleeGrab_lose"];
-  var5 = level.player.melee.rig;
+  var_3 = seeker_getplayerriganims();
+  var_4 = var_3["seekerMeleeGrab_lose"];
+  var_5 = level.player.melee.rig;
   wait 0.8;
 
   if(isDefined(self)) {
@@ -431,25 +431,25 @@ function seeker_meleegrabkillplayer(var0, var1, var2) {
   }
 }
 
-function playmeleeanim_seekerattack_victim(var0, var1, var2) {
-  self endon(var1 + "_finished");
+function playmeleeanim_seekerattack_victim(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
   self.melee.bstarted = 1;
   self animmode("zonly_physics");
   self orientmode("face angle", self.melee.startangles[1]);
-  scripts\asm\soldier\melee::melee_synced_setup(var1, 0);
-  thread scripts\asm\soldier\melee::melee_waitfordroppedweapon(var1);
-  var3 = chooseanimmelee_seekerjump(var0, var1, self.melee.direction);
-  self aisetanim(var1, var3);
-  scripts\asm\asm::asm_playfacialanim(var0, var1, var3);
+  scripts\asm\soldier\melee::melee_synced_setup(var_1, 0);
+  thread scripts\asm\soldier\melee::melee_waitfordroppedweapon(var_1);
+  var_3 = chooseanimmelee_seekerjump(var_0, var_1, self.melee.direction);
+  self aisetanim(var_1, var_3);
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_3);
   scripts\anim\face::saygenericdialogue("pain");
-  var4 = scripts\asm\asm::asm_donotetracks(var0, var1, &scripts\asm\soldier\melee::melee_handlenotetracks);
-  var5 = chooseanimmelee_seekerloop(var0, var1, self.melee.direction);
-  self aisetanim(var1, var5);
+  var_4 = scripts\asm\asm::asm_donotetracks(var_0, var_1, &scripts\asm\soldier\melee::melee_handlenotetracks);
+  var_5 = chooseanimmelee_seekerloop(var_0, var_1, self.melee.direction);
+  self aisetanim(var_1, var_5);
   GscBinSkip4(0x35);
 }
 
 function seekerattack_victim_checkattacker() {
-  var0 = self.melee.partner;
+  var_0 = self.melee.partner;
 
   for(;;) {
     if(!isDefined(self.melee)) {

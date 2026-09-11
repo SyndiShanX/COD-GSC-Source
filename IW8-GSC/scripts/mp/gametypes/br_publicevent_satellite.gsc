@@ -4,20 +4,20 @@
 *************************************************************/
 
 function init() {
-  var0 = spawnStruct();
-  var0.weight = getdvarfloat("scr_br_pe_satellite_weight", 0);
-  var0.ref_140cf = &ref_140cf;
-  var0.ref_14382 = &ref_14382;
-  var0.attackerswaittime = &attackerswaittime;
-  var0.isfeaturedisabled = &isfeaturedisabled;
-  var0.‹Á¿ ø {
+  var_0 = spawnStruct();
+  var_0.weight = getdvarfloat("scr_br_pe_satellite_weight", 0);
+  var_0.ref_140cf = &ref_140cf;
+  var_0.ref_14382 = &ref_14382;
+  var_0.attackerswaittime = &attackerswaittime;
+  var_0.isfeaturedisabled = &isfeaturedisabled;
+  var_0.‹Á¿ ø {
     ÏXX;
     â # / = &postinitfunc;
-    var0.ref_11b78 = getdvarint("scr_br_pe_satellite_max_times", 1);
-    var0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("satellite", "20 2020205 0 0 0");
-    var0.£¼#w]
+    var_0.ref_11b78 = getdvarint("scr_br_pe_satellite_max_times", 1);
+    var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("satellite", "20 2020205 0 0 0");
+    var_0.£¼#w]
   j‹ ƒ½ Ï‚ UÀíÌI¸ Û« = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("satellite");
-  scripts\mp\gametypes\br_publicevents::ref_12b35(7, var0);
+  scripts\mp\gametypes\br_publicevents::ref_12b35(7, var_0);
 }
 
 function postinitfunc() {
@@ -116,25 +116,25 @@ function terminateriotshield() {
 }
 
 function modifybrfalldamage() {
-  var0 = scripts\engine\utility::array_randomize(level.player_gassed_effects);
-  var1 = [];
+  var_0 = scripts\engine\utility::array_randomize(level.player_gassed_effects);
+  var_1 = [];
 
-  foreach(var3 in var0) {
-    if(!isDefined(level.br_circle.dangercircleent) || scripts\mp\gametypes\br_circle::ispointincurrentsafecircle(var3.crashorigin)) {
-      var1 = var3;
+  foreach(var_3 in var_0) {
+    if(!isDefined(level.br_circle.dangercircleent) || scripts\mp\gametypes\br_circle::ispointincurrentsafecircle(var_3.crashorigin)) {
+      var_1 = var_3;
     }
   }
 
-  var5 = getdvarint("scr_br_pe_satellite_num_falling", 12);
+  var_5 = getdvarint("scr_br_pe_satellite_num_falling", 12);
 
-  if(var1.size < var5) {
-    var5 = var1.size;
+  if(var_1.size < var_5) {
+    var_5 = var_1.size;
   }
 
-  for(var6 = 0; var6 < var5; var6++) {
-    var3 = var1[var6];
-    var3.used = 1;
-    level scripts\mp\gametypes\br_satellite_hunt::minigun_manager("none", var3.crashorigin, var3.infectsetradaronnumsurvivors, var3.spawnorigin);
+  for(var_6 = 0; var_6 < var_5; var_6++) {
+    var_3 = var_1[var_6];
+    var_3.used = 1;
+    level scripts\mp\gametypes\br_satellite_hunt::minigun_manager("none", var_3.crashorigin, var_3.infectsetradaronnumsurvivors, var_3.spawnorigin);
   }
 }
 

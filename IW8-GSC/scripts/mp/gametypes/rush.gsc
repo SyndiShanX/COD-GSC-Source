@@ -33,16 +33,16 @@ function seticonnames() {
 function onstartgametype() {
   seticonnames();
 
-  foreach(var1 in level.teamnamelist) {
-    scripts\mp\utility\game::setobjectivetext(var1, &"OBJECTIVES/RUSH");
+  foreach(var_1 in level.teamnamelist) {
+    scripts\mp\utility\game::setobjectivetext(var_1, &"OBJECTIVES/RUSH");
 
     if(level.splitscreen) {
-      scripts\mp\utility\game::setobjectivescoretext(var1, &"OBJECTIVES/RUSH");
+      scripts\mp\utility\game::setobjectivescoretext(var_1, &"OBJECTIVES/RUSH");
     } else {
-      scripts\mp\utility\game::setobjectivescoretext(var1, &"OBJECTIVES/RUSH_SCORE");
+      scripts\mp\utility\game::setobjectivescoretext(var_1, &"OBJECTIVES/RUSH_SCORE");
     }
 
-    scripts\mp\utility\game::setobjectivehinttext(var1, &"OBJECTIVES/RUSH_HINT");
+    scripts\mp\utility\game::setobjectivehinttext(var_1, &"OBJECTIVES/RUSH_HINT");
   }
 
   setclientnamemode("auto_change");
@@ -84,59 +84,59 @@ function updategametypedvars() {
 }
 
 function setupobjectives() {
-  var0 = getEntArray("rush_flag", "targetname");
-  var1 = getEntArray("rush_flag_override", "targetname");
+  var_0 = getEntArray("rush_flag", "targetname");
+  var_1 = getEntArray("rush_flag_override", "targetname");
 
-  if(var0.size == 0) {
+  if(var_0.size == 0) {
     return;
   }
 
-  var2 = [];
+  var_2 = [];
 
-  for(var3 = 0; var3 < var0.size; var3++) {
-    var2 = var0[var3];
+  for(var_3 = 0; var_3 < var_0.size; var_3++) {
+    var_2 = var_0[var_3];
   }
 
-  var4 = [];
+  var_4 = [];
 
-  if(var1.size > 0) {
-    foreach(var6 in var1) {
-      var7 = var6.script_noteworthy;
-      var4 = var6;
+  if(var_1.size > 0) {
+    foreach(var_6 in var_1) {
+      var_7 = var_6.script_noteworthy;
+      var_4 = var_6;
     }
   }
 
-  foreach(var6 in var2) {
-    var7 = var6.script_noteworthy;
+  foreach(var_6 in var_2) {
+    var_7 = var_6.script_noteworthy;
 
-    if(var7 == "0" || var7 == "4") {
+    if(var_7 == "0" || var_7 == "4") {
       continue;
     }
 
-    if(isDefined(var4[var7])) {
-      var6 = var4[var7];
+    if(isDefined(var_4[var_7])) {
+      var_6 = var_4[var_7];
     }
 
-    var6.objectivekey = var7;
-    mapobjectiveicon(var6, var7);
-    var10 = scripts\mp\gametypes\obj_dom::setupobjective(var6);
-    dompoint_ondisableobjective(var10);
-    level.objectives[var10.objectivekey] = var10;
-    var10.onbeginuse = &dompoint_onbeginuse;
-    var10.onuseupdate = &dompoint_onuseupdate;
-    var10.onuse = &dompoint_onuse;
-    var10.onenduse = &dompoint_onenduse;
-    var10.oncontested = &dompoint_oncontested;
-    var10.onuncontested = &dompoint_onuncontested;
-    var10.ondisableobjective = &dompoint_ondisableobjective;
-    var10.onenableobjective = &dompoint_onenableobjective;
-    var10.onactivateobjective = &dompoint_onactivateobjective;
-    var10 thread scripts\mp\gametypes\obj_dom::updateflagstate("off", 0);
-    var10.defaultownerteam = game["defenders"];
-    var10.overrideprogressteam = game["attackers"];
-    var10.ignorestomp = 1;
-    var10.decaygraceperiod = 5;
-    var10.permcapturethresholds = [0.33, 0.66];
+    var_6.objectivekey = var_7;
+    mapobjectiveicon(var_6, var_7);
+    var_10 = scripts\mp\gametypes\obj_dom::setupobjective(var_6);
+    dompoint_ondisableobjective(var_10);
+    level.objectives[var_10.objectivekey] = var_10;
+    var_10.onbeginuse = &dompoint_onbeginuse;
+    var_10.onuseupdate = &dompoint_onuseupdate;
+    var_10.onuse = &dompoint_onuse;
+    var_10.onenduse = &dompoint_onenduse;
+    var_10.oncontested = &dompoint_oncontested;
+    var_10.onuncontested = &dompoint_onuncontested;
+    var_10.ondisableobjective = &dompoint_ondisableobjective;
+    var_10.onenableobjective = &dompoint_onenableobjective;
+    var_10.onactivateobjective = &dompoint_onactivateobjective;
+    var_10 thread scripts\mp\gametypes\obj_dom::updateflagstate("off", 0);
+    var_10.defaultownerteam = game["defenders"];
+    var_10.overrideprogressteam = game["attackers"];
+    var_10.ignorestomp = 1;
+    var_10.decaygraceperiod = 5;
+    var_10.permcapturethresholds = [0.33, 0.66];
   }
 }
 
@@ -165,8 +165,8 @@ function manageovertimestate() {
   }
 }
 
-function updatecurrentobjective(var0) {
-  if(!isDefined(level.objectives[scripts\engine\utility::string(var0)])) {
+function updatecurrentobjective(var_0) {
+  if(!isDefined(level.objectives[scripts\engine\utility::string(var_0)])) {
     return;
   }
 
@@ -174,8 +174,8 @@ function updatecurrentobjective(var0) {
     level.currentobjective[[level.currentobjective.ondisableobjective]]();
   }
 
-  level.currentobjectiveindex = var0;
-  level.currentobjective = level.objectives[scripts\engine\utility::string(var0)];
+  level.currentobjectiveindex = var_0;
+  level.currentobjective = level.objectives[scripts\engine\utility::string(var_0)];
   updatespectatorcamera("rush_" + level.currentobjectiveindex);
 
   if(isDefined(level.currentobjective.onenableobjective)) {
@@ -184,8 +184,8 @@ function updatecurrentobjective(var0) {
 
   if(level.activationdelay > 0) {
     level scripts\mp\gamelogic::pausetimer();
-    var1 = int(gettime() + level.activationdelay * 1000);
-    setomnvar("ui_hardpoint_timer", var1);
+    var_1 = int(gettime() + level.activationdelay * 1000);
+    setomnvar("ui_hardpoint_timer", var_1);
     wait level.activationdelay;
     level scripts\mp\gamelogic::resumetimer();
   }
@@ -194,21 +194,21 @@ function updatecurrentobjective(var0) {
     level.currentobjective[[level.currentobjective.onactivateobjective]]();
   }
 
-  var2 = 0;
+  var_2 = 0;
 
-  switch (var0) {
+  switch (var_0) {
     case 1:
-      var2 = 10;
+      var_2 = 10;
       break;
     case 2:
-      var2 = 10;
+      var_2 = 10;
       break;
     case 3:
-      var2 = 10;
+      var_2 = 10;
       break;
   }
 
-  scripts\mp\gamelogic::updatewavespawndelay(var2);
+  scripts\mp\gamelogic::updatewavespawndelay(var_2);
 }
 
 function initspawns() {
@@ -222,77 +222,77 @@ function initspawns() {
   level.mapcenter = scripts\mp\spawnlogic::findboxcenter(level.spawnmins, level.spawnmaxs);
   setmapcenter(level.mapcenter);
 
-  foreach(var1 in level.objectives) {
-    var1.spawnpoints = [];
-    var1.spawnpoints["allies"] = [];
-    var1.spawnpoints["axis"] = [];
+  foreach(var_1 in level.objectives) {
+    var_1.spawnpoints = [];
+    var_1.spawnpoints["allies"] = [];
+    var_1.spawnpoints["axis"] = [];
   }
 
-  foreach(var4 in level.spawnpoints) {
-    if(isDefined(var4.script_noteworthy)) {
-      var5 = var4.script_noteworthy;
+  foreach(var_4 in level.spawnpoints) {
+    if(isDefined(var_4.script_noteworthy)) {
+      var_5 = var_4.script_noteworthy;
 
-      if(var5 == "0" || var5 == "4") {
+      if(var_5 == "0" || var_5 == "4") {
         continue;
       }
 
-      if(var4.classname == "mp_rush_spawn_allies") {
-        level.objectives[var5].spawnpoints["allies"][level.objectives[var5].spawnpoints["allies"].size] = var4;
+      if(var_4.classname == "mp_rush_spawn_allies") {
+        level.objectives[var_5].spawnpoints["allies"][level.objectives[var_5].spawnpoints["allies"].size] = var_4;
         continue;
       }
 
-      if(var4.classname == "mp_rush_spawn_axis") {
-        level.objectives[var5].spawnpoints["axis"][level.objectives[var5].spawnpoints["axis"].size] = var4;
+      if(var_4.classname == "mp_rush_spawn_axis") {
+        level.objectives[var_5].spawnpoints["axis"][level.objectives[var_5].spawnpoints["axis"].size] = var_4;
       }
     }
   }
 
-  foreach(var1 in level.objectives) {
-    var1.spawnpointsets = [];
-    var1.spawnpointsets["allies"] = "rush_allies_" + var8;
-    var1.spawnpointsets["axis"] = "rush_axis_" + var8;
-    scripts\mp\spawnlogic::registerspawnset(var1.spawnpointsets["allies"], var1.spawnpoints["allies"]);
-    scripts\mp\spawnlogic::registerspawnset(var1.spawnpointsets["axis"], var1.spawnpoints["axis"]);
+  foreach(var_1 in level.objectives) {
+    var_1.spawnpointsets = [];
+    var_1.spawnpointsets["allies"] = "rush_allies_" + var_8;
+    var_1.spawnpointsets["axis"] = "rush_axis_" + var_8;
+    scripts\mp\spawnlogic::registerspawnset(var_1.spawnpointsets["allies"], var_1.spawnpoints["allies"]);
+    scripts\mp\spawnlogic::registerspawnset(var_1.spawnpointsets["axis"], var_1.spawnpoints["axis"]);
   }
 }
 
 function getspawnpoint() {
-  var0 = self.pers["team"];
+  var_0 = self.pers["team"];
 
   if(game["switchedsides"]) {
-    var0 = scripts\mp\utility\game::getotherteam(var0)[0];
+    var_0 = scripts\mp\utility\game::getotherteam(var_0)[0];
   }
 
   if(scripts\mp\spawnlogic::shoulduseteamstartspawn()) {
-    var1 = scripts\mp\spawnlogic::getspawnpointarray("mp_rush_spawn_" + var0 + "_start");
-    var2 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var1);
-    self.startspawnpoint = var2;
+    var_1 = scripts\mp\spawnlogic::getspawnpointarray("mp_rush_spawn_" + var_0 + "_start");
+    var_2 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_1);
+    self.startspawnpoint = var_2;
   } else {
-    var2 = scripts\mp\spawnlogic::getspawnpoint(self, var2, level.currentobjective.spawnpointsets[var2]);
+    var_2 = scripts\mp\spawnlogic::getspawnpoint(self, var_2, level.currentobjective.spawnpointsets[var_2]);
   }
 
-  return var2;
+  return var_2;
 }
 
-function onplayerkilled(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
-  if(!isPlayer(var1) || var1.team == self.team) {
+function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  if(!isPlayer(var_1) || var_1.team == self.team) {
     return;
   }
 
-  if(isDefined(var4) && scripts\mp\utility\weapon::iskillstreakweapon(var4.basename)) {
+  if(isDefined(var_4) && scripts\mp\utility\weapon::iskillstreakweapon(var_4.basename)) {
     return;
   }
 
-  scripts\mp\gametypes\obj_dom::awardgenericmedals(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+  scripts\mp\gametypes\obj_dom::awardgenericmedals(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 }
 
-function onplayerconnect(var0) {
-  var0.ui_dom_securing = undefined;
-  var0.ui_dom_stalemate = undefined;
+function onplayerconnect(var_0) {
+  var_0.ui_dom_securing = undefined;
+  var_0.ui_dom_stalemate = undefined;
   thread onplayerspawned();
 }
 
-function onplayerspawned(var0) {
+function onplayerspawned(var_0) {
   self endon("disconnect");
 
   for(;;) {
@@ -311,7 +311,7 @@ function onplayerspawned(var0) {
   }
 }
 
-function mapobjectiveicon(var0) {
+function mapobjectiveicon(var_0) {
   self.iconname = "";
 }
 
@@ -323,51 +323,51 @@ function awardcapturepoints() {
   level endon("game_ended");
   level notify("awardCapturePointsRunning");
   level endon("awardCapturePointsRunning");
-  var0 = 1;
-  var1 = 1;
+  var_0 = 1;
+  var_1 = 1;
 
   while(!level.gameended) {
-    for(var2 = 0; var2 < var0; var2 = 0) {
+    for(var_2 = 0; var_2 < var_0; var_2 = 0) {
       waitframe();
       scripts\mp\hostmigration::waittillhostmigrationdone();
-      var2 += level.framedurationseconds;
+      var_2 += level.framedurationseconds;
 
       if(self.stalemate) {}
     }
 
-    var3 = self.claimteam;
+    var_3 = self.claimteam;
 
-    if(var3 == "none") {
+    if(var_3 == "none") {
       continue;
     }
 
     if(!self.stalemate) {
-      foreach(var5 in self.touchlist[var3]) {
-        var5.player thread scripts\mp\utility\points::giveunifiedpoints("cop_in_obj");
+      foreach(var_5 in self.touchlist[var_3]) {
+        var_5.player thread scripts\mp\utility\points::giveunifiedpoints("cop_in_obj");
       }
     }
   }
 }
 
-function dompoint_onbeginuse(var0) {
-  scripts\mp\gametypes\obj_dom::dompoint_onusebegin(var0);
+function dompoint_onbeginuse(var_0) {
+  scripts\mp\gametypes\obj_dom::dompoint_onusebegin(var_0);
   self.didstatusnotify = 1;
 }
 
-function dompoint_onuseupdate(var0, var1, var2, var3) {
-  scripts\mp\gametypes\obj_dom::dompoint_onuseupdate(var0, var1, var2, var3);
+function dompoint_onuseupdate(var_0, var_1, var_2, var_3) {
+  scripts\mp\gametypes\obj_dom::dompoint_onuseupdate(var_0, var_1, var_2, var_3);
 
   if(scripts\mp\utility\game::inovertime()) {
-    var4 = self.teamprogress[game["attackers"]] / self.usetime;
+    var_4 = self.teamprogress[game["attackers"]] / self.usetime;
 
-    if(var4 > game["overtimeProgressFrac"]) {
-      game["overtimeProgressFrac"] = var4;
+    if(var_4 > game["overtimeProgressFrac"]) {
+      game["overtimeProgressFrac"] = var_4;
     }
 
-    var5 = game["overtimeProgress"] + game["overtimeProgressFrac"];
+    var_5 = game["overtimeProgress"] + game["overtimeProgressFrac"];
 
-    if(game["overtimeRoundsPlayed"] == 1 && scripts\mp\utility\game::setscoretobeat(var0, var5 * 60) == var0) {
-      thread scripts\mp\gamelogic::endgame(var0, game["end_reason"]["objective_completed"]);
+    if(game["overtimeRoundsPlayed"] == 1 && scripts\mp\utility\game::setscoretobeat(var_0, var_5 * 60) == var_0) {
+      thread scripts\mp\gamelogic::endgame(var_0, game["end_reason"]["objective_completed"]);
       return;
     }
 
@@ -375,35 +375,35 @@ function dompoint_onuseupdate(var0, var1, var2, var3) {
   }
 }
 
-function dompoint_onuse(var0) {
-  scripts\mp\gametypes\obj_dom::dompoint_onuse(var0);
-  var1 = scripts\mp\gameobjects::getownerteam();
+function dompoint_onuse(var_0) {
+  scripts\mp\gametypes\obj_dom::dompoint_onuse(var_0);
+  var_1 = scripts\mp\gameobjects::getownerteam();
   level.usestartspawns = 0;
-  var2 = scripts\mp\utility\game::getotherteam(var1)[0];
-  thread scripts\mp\utility\print::printandsoundoneveryone(var1, var2, undefined, undefined, "mp_dom_flag_captured", "mp_dom_flag_lost", var0);
-  scripts\mp\gamescore::giveteamscoreforobjective(var1, 1, 0);
-  var3 = level.currentobjectiveindex;
-  var3++;
+  var_2 = scripts\mp\utility\game::getotherteam(var_1)[0];
+  thread scripts\mp\utility\print::printandsoundoneveryone(var_1, var_2, undefined, undefined, "mp_dom_flag_captured", "mp_dom_flag_lost", var_0);
+  scripts\mp\gamescore::giveteamscoreforobjective(var_1, 1, 0);
+  var_3 = level.currentobjectiveindex;
+  var_3++;
 
-  if(var3 == 4) {
-    var4 = scripts\mp\gamelogic::gettimeremaining();
-    var4 /= 60000;
-    game["overtimeLimit"][var1] = max(1, var4);
+  if(var_3 == 4) {
+    var_4 = scripts\mp\gamelogic::gettimeremaining();
+    var_4 /= 60000;
+    game["overtimeLimit"][var_1] = max(1, var_4);
 
     if(scripts\mp\utility\game::inovertime()) {
-      var5 = scripts\mp\utility\game::setscoretobeat(var1, 180);
-      thread scripts\mp\gamelogic::endgame(var5, game["end_reason"]["objective_completed"]);
+      var_5 = scripts\mp\utility\game::setscoretobeat(var_1, 180);
+      thread scripts\mp\gamelogic::endgame(var_5, game["end_reason"]["objective_completed"]);
       return;
     }
 
-    thread scripts\mp\gamelogic::endgame(var1, game["end_reason"]["objective_completed"]);
+    thread scripts\mp\gamelogic::endgame(var_1, game["end_reason"]["objective_completed"]);
     return;
   }
 
   if(level.extratimebonus > 0) {
     level.extratime = level.currentobjectiveindex * level.extratimebonus;
-    var4 = scripts\mp\gamelogic::gettimeremaining();
-    setgameendtime(gettime() + int(var4));
+    var_4 = scripts\mp\gamelogic::gettimeremaining();
+    setgameendtime(gettime() + int(var_4));
   }
 
   if(scripts\mp\utility\game::inovertime()) {
@@ -411,15 +411,15 @@ function dompoint_onuse(var0) {
     game["overtimeProgressFrac"] = 0;
   }
 
-  updatecurrentobjective(var3);
+  updatecurrentobjective(var_3);
 }
 
-function dompoint_onenduse(var0, var1, var2) {
+function dompoint_onenduse(var_0, var_1, var_2) {
   if(self != level.currentobjective) {
     return;
   }
 
-  scripts\mp\gametypes\obj_dom::dompoint_onuseend(var0, var1, var2);
+  scripts\mp\gametypes\obj_dom::dompoint_onuseend(var_0, var_1, var_2);
 }
 
 function dompoint_oncontested() {
@@ -430,16 +430,16 @@ function dompoint_oncontested() {
   scripts\mp\gametypes\obj_dom::dompoint_oncontested();
 }
 
-function dompoint_onuncontested(var0) {
+function dompoint_onuncontested(var_0) {
   if(self != level.currentobjective) {
     return;
   }
 
-  scripts\mp\gametypes\obj_dom::dompoint_onuncontested(var0);
+  scripts\mp\gametypes\obj_dom::dompoint_onuncontested(var_0);
   self.didstatusnotify = 1;
-  var1 = scripts\mp\gameobjects::getownerteam();
-  var2 = scripts\engine\utility::ter_op(var1 == "neutral", "idle", var1);
-  var1 = scripts\mp\gameobjects::getownerteam();
+  var_1 = scripts\mp\gameobjects::getownerteam();
+  var_2 = scripts\engine\utility::ter_op(var_1 == "neutral", "idle", var_1);
+  var_1 = scripts\mp\gameobjects::getownerteam();
 }
 
 function dompoint_ondisableobjective() {
@@ -480,31 +480,31 @@ function dompoint_onactivateobjective() {
 function initspecatatorcameras() {
   level.spectatorcameras = [];
   level.currentspectatorcamref = "rush_1";
-  var0 = scripts\engine\utility::getStructArray("tac_ops_map_config", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("tac_ops_map_config", "targetname");
 
-  foreach(var2 in var0) {
-    var3 = var2.script_noteworthy;
-    var4 = scripts\engine\utility::getStructArray(var2.target, "targetname");
+  foreach(var_2 in var_0) {
+    var_3 = var_2.script_noteworthy;
+    var_4 = scripts\engine\utility::getStructArray(var_2.target, "targetname");
 
-    foreach(var6 in var4) {
-      switch (var6.script_label) {
+    foreach(var_6 in var_4) {
+      switch (var_6.script_label) {
         case "to_allies_camera":
-          setteammapposition(var3, "allies", var6);
+          setteammapposition(var_3, "allies", var_6);
           break;
         case "to_axis_camera":
-          setteammapposition(var3, "axis", var6);
+          setteammapposition(var_3, "axis", var_6);
           break;
       }
     }
   }
 }
 
-function setteammapposition(var0, var1, var2) {
-  if(!isDefined(level.spectatorcameras[var0])) {
-    level.spectatorcameras[var0] = [];
+function setteammapposition(var_0, var_1, var_2) {
+  if(!isDefined(level.spectatorcameras[var_0])) {
+    level.spectatorcameras[var_0] = [];
   }
 
-  level.spectatorcameras[var0][var1] = var2;
+  level.spectatorcameras[var_0][var_1] = var_2;
 }
 
 function startspectatorview() {
@@ -518,19 +518,19 @@ function startspectatorview() {
 
   wait 0.1;
   scripts\mp\utility\player::setdof_default();
-  var0 = level.spectatorcameras[level.currentspectatorcamref][self.team];
-  var1 = var0.origin;
-  var2 = var0.angles;
-  self.deathspectatepos = var1;
-  self.deathspectateangles = var2;
-  var3 = spawn("script_model", self getvieworigin());
-  var3 setModel("tag_origin");
-  var3.angles = var2;
-  self.spectatorcament = var3;
+  var_0 = level.spectatorcameras[level.currentspectatorcamref][self.team];
+  var_1 = var_0.origin;
+  var_2 = var_0.angles;
+  self.deathspectatepos = var_1;
+  self.deathspectateangles = var_2;
+  var_3 = spawn("script_model", self getvieworigin());
+  var_3 setModel("tag_origin");
+  var_3.angles = var_2;
+  self.spectatorcament = var_3;
   self.isusingtacopsmapcamera = 1;
-  self cameralinkTo(var3, "tag_origin", 1);
+  self cameralinkTo(var_3, "tag_origin", 1);
   thread dohalfwayflash();
-  movecameratomappos(var3, self, var1, var2);
+  movecameratomappos(var_3, self, var_1, var_2);
 }
 
 function dohalfwayflash() {
@@ -548,55 +548,55 @@ function endspectatorview() {
   thread runslamzoomonspawn();
 }
 
-function updatespectatorcamera(var0) {
-  level.currentspectatorcamref = var0;
+function updatespectatorcamera(var_0) {
+  level.currentspectatorcamref = var_0;
 
-  foreach(var2 in level.players) {
-    if(isDefined(var2.spectatorcament)) {
-      var3 = var2.team;
-      var4 = getdvarint("scr_cmd_camera_team", -1);
+  foreach(var_2 in level.players) {
+    if(isDefined(var_2.spectatorcament)) {
+      var_3 = var_2.team;
+      var_4 = getdvarint("scr_cmd_camera_team", -1);
 
-      if(var4 != -1) {
-        var3 = scripts\engine\utility::ter_op(var4 == 0, "allies", "axis");
+      if(var_4 != -1) {
+        var_3 = scripts\engine\utility::ter_op(var_4 == 0, "allies", "axis");
       }
 
-      var5 = level.spectatorcameras[level.currentspectatorcamref][var3];
-      movecameratomappos(var2.spectatorcament, var2, var5.origin, var5.angles);
+      var_5 = level.spectatorcameras[level.currentspectatorcamref][var_3];
+      movecameratomappos(var_2.spectatorcament, var_2, var_5.origin, var_5.angles);
     }
   }
 }
 
-function movecameratomappos(var0, var1, var2) {
-  var0 endon("spawned_player");
-  var3 = 1;
-  var4 = 1;
-  self moveTo(var1, 1, 0.5, 0.5);
-  var0 playlocalsound("mp_cmd_camera_zoom_out");
-  var0 setclienttriggeraudiozonepartialwithfade("spawn_cam", 0.5, "mix");
-  self rotateTo(var2, 1, 0.5, 0.5);
+function movecameratomappos(var_0, var_1, var_2) {
+  var_0 endon("spawned_player");
+  var_3 = 1;
+  var_4 = 1;
+  self moveTo(var_1, 1, 0.5, 0.5);
+  var_0 playlocalsound("mp_cmd_camera_zoom_out");
+  var_0 setclienttriggeraudiozonepartialwithfade("spawn_cam", 0.5, "mix");
+  self rotateTo(var_2, 1, 0.5, 0.5);
   thread startoperatorsound();
   wait 1.1;
-  var5 = anglesToForward(var2) * 300;
-  var5 *= (1, 1, 0);
+  var_5 = anglesToForward(var_2) * 300;
+  var_5 *= (1, 1, 0);
 
-  if(isDefined(var0) && isDefined(var0.spectatorcament)) {
-    self moveTo(var1 + var5, 15, 1, 1);
-    var0 earthquakeforplayer(0.03, 15, var1 + var5, 1000);
+  if(isDefined(var_0) && isDefined(var_0.spectatorcament)) {
+    self moveTo(var_1 + var_5, 15, 1, 1);
+    var_0 earthquakeforplayer(0.03, 15, var_1 + var_5, 1000);
     return;
   }
 }
 
 function runslamzoomonspawn() {
   self waittill("spawned_player");
-  var0 = self getEye();
-  var1 = self.angles;
+  var_0 = self getEye();
+  var_1 = self.angles;
   scripts\mp\utility\player::updatesessionstate("spectator");
   self cameralinkTo(self.spectatorcament, "tag_origin", 1);
   self visionsetnakedforplayer("tac_ops_slamzoom", 0.2);
-  self.spectatorcament moveTo(var0, 0.5);
+  self.spectatorcament moveTo(var_0, 0.5);
   self playlocalsound("mp_cmd_camera_zoom_in");
   self clearclienttriggeraudiozone(0.5);
-  self.spectatorcament rotateTo(var1, 0.5, 0.5);
+  self.spectatorcament rotateTo(var_1, 0.5, 0.5);
   wait 0.5;
   self visionsetnakedforplayer("", 0);
   thread playslamzoomflash();
@@ -606,21 +606,21 @@ function runslamzoomonspawn() {
 }
 
 function playslamzoomflash() {
-  var0 = newclienthudelem(self);
-  var0.x = 0;
-  var0.y = 0;
-  var0.alignx = "left";
-  var0.aligny = "top";
-  var0.sort = 1;
-  var0.horzalign = "fullscreen";
-  var0.vertalign = "fullscreen";
-  var0.alpha = 1;
-  var0.foreground = 1;
-  var0 setshader("white", 640, 480);
-  var0 fadeovertime(0.4);
-  var0.alpha = 0;
+  var_0 = newclienthudelem(self);
+  var_0.x = 0;
+  var_0.y = 0;
+  var_0.alignx = "left";
+  var_0.aligny = "top";
+  var_0.sort = 1;
+  var_0.horzalign = "fullscreen";
+  var_0.vertalign = "fullscreen";
+  var_0.alpha = 1;
+  var_0.foreground = 1;
+  var_0 setshader("white", 640, 480);
+  var_0 fadeovertime(0.4);
+  var_0.alpha = 0;
   wait 0.4;
-  var0 destroy();
+  var_0 destroy();
 }
 
 function startoperatorsound() {
@@ -639,7 +639,7 @@ function removethermal() {
 }
 
 function loopspectatorlocations() {
-  var0 = 1;
+  var_0 = 1;
 
   for(;;) {
     if(getdvarint("scr_cmd_camera_debug", 0) == 1) {
@@ -647,19 +647,19 @@ function loopspectatorlocations() {
         level.players[0] suicide();
       }
 
-      var1 = getdvarint("scr_cmd_camera_index", -1);
+      var_1 = getdvarint("scr_cmd_camera_index", -1);
 
-      if(var1 != -1) {
-        var0 = var1;
+      if(var_1 != -1) {
+        var_0 = var_1;
       }
 
-      updatespectatorcamera("rush_" + var0);
-      var2 = getdvarfloat("scr_cmd_camera_delay", 1);
-      wait var2;
-      var0++;
+      updatespectatorcamera("rush_" + var_0);
+      var_2 = getdvarfloat("scr_cmd_camera_delay", 1);
+      wait var_2;
+      var_0++;
 
-      if(var0 > 3) {
-        var0 = 1;
+      if(var_0 > 3) {
+        var_0 = 1;
       }
 
       if(getdvarint("scr_cmd_camera_debug", 0) == 0) {

@@ -3,7 +3,7 @@
  * Script: scripts\sp\stayahead.gsc
 ***********************************************/
 
-function stayahead_thread(var0) {
+function stayahead_thread(var_0) {
   self endon("death");
   self endon("stop_stayahead");
 
@@ -19,7 +19,7 @@ function stayahead_thread(var0) {
   GscBinSkip4(0x35);
 }
 
-function stayahead_lookat(var0) {
+function stayahead_lookat(var_0) {
   if(!istrue(self.stayahead.lookat_allowed)) {
     return;
   }
@@ -37,126 +37,126 @@ function stayahead_lookat(var0) {
   self notify("stop_stayahead_lookat");
   self endon("death");
   self endon("stop_stayahead_lookat");
-  var1 = 0.5;
+  var_1 = 0.5;
   self.stayahead.lookat_last = gettime();
-  GscBinSkip4(0x35, var1);
+  GscBinSkip4(0x35, var_1);
 }
 
-function stayahead_lookat_far(var0) {
+function stayahead_lookat_far(var_0) {
   self endon("death");
-  var1 = randomfloatrange(6000, 11000);
+  var_1 = randomfloatrange(6000, 11000);
 
-  if(gettime() > self.stayahead.lookat_last + var1) {
-    stayahead_lookat(var0);
+  if(gettime() > self.stayahead.lookat_last + var_1) {
+    stayahead_lookat(var_0);
     return;
   }
 }
 
-function stayahead_lookat_debug(var0) {}
+function stayahead_lookat_debug(var_0) {}
 
-function stayahead_set_speed(var0, var1, var2, var3, var4, var5, var6, var7) {
-  print2d3d_debug(self.origin, "Plane: " + var0, (0.9, 0.9, 0.9), 0.9, 0.3, 1, 0, "right", 1);
-  var8 = self.origin + var4 * var2;
-  var9 = self.origin + var4 * var3;
+function stayahead_set_speed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  print2d3d_debug(self.origin, "Plane: " + var_0, (0.9, 0.9, 0.9), 0.9, 0.3, 1, 0, "right", 1);
+  var_8 = self.origin + var_4 * var_2;
+  var_9 = self.origin + var_4 * var_3;
 
-  if(distance(var8, var9) < 1) {
+  if(distance(var_8, var_9) < 1) {
     print_debug("segments are colliding, not setting speed! " + gettime());
     return;
   }
 
-  var10 = pointonsegmentnearesttopoint(var8, var9, var1.origin);
-  var11 = distance(var8, var10);
-  var12 = var2 - var3;
-  var13 = 1 - scripts\engine\math::lerp_fraction(0, abs(var12), var11);
-  var14 = 250;
+  var_10 = pointonsegmentnearesttopoint(var_8, var_9, var_1.origin);
+  var_11 = distance(var_8, var_10);
+  var_12 = var_2 - var_3;
+  var_13 = 1 - scripts\engine\math::lerp_fraction(0, abs(var_12), var_11);
+  var_14 = 250;
 
-  if(isDefined(self.stayahead.turbo) || istrue(var7)) {
-    var14 = 300;
+  if(isDefined(self.stayahead.turbo) || istrue(var_7)) {
+    var_14 = 300;
   }
 
   if(!isDefined(self.stayahead.exit_last_finish_time) || gettime() > self.stayahead.exit_last_finish_time + 1000) {
-    var15 = scripts\engine\math::lerp(var5, var6, var13);
-    var15 = clamp(var15, 23, var14);
-    var16 = self aigetdesiredspeed();
-    var17 = var15 - var16;
+    var_15 = scripts\engine\math::lerp(var_5, var_6, var_13);
+    var_15 = clamp(var_15, 23, var_14);
+    var_16 = self aigetdesiredspeed();
+    var_17 = var_15 - var_16;
 
-    if(istrue(var7) || var17 > 50) {
-      if(!istrue(var7) && !isDefined(self.stayahead.last_speed_set_time)) {
-        var15 = var16 + clamp(var17, -2, 2);
+    if(istrue(var_7) || var_17 > 50) {
+      if(!istrue(var_7) && !isDefined(self.stayahead.last_speed_set_time)) {
+        var_15 = var_16 + clamp(var_17, -2, 2);
         self.stayahead.last_speed_set_time = undefined;
-        print3d_debug(self.origin + (0, 0, 32), "StayAhead STARTUP! plane: " + var0 + " diff: " + var17 + " curSpeed: " + var16 + " speed: " + var15, (1, 1, 1), 1, 0.1, 100, 1);
-        print_console_debug("StayAhead STARTUP! plane: " + var0 + " diff: " + var17 + " curSpeed: " + var16 + " speed: " + var15);
+        print3d_debug(self.origin + (0, 0, 32), "StayAhead STARTUP! plane: " + var_0 + " diff: " + var_17 + " curSpeed: " + var_16 + " speed: " + var_15, (1, 1, 1), 1, 0.1, 100, 1);
+        print_console_debug("StayAhead STARTUP! plane: " + var_0 + " diff: " + var_17 + " curSpeed: " + var_16 + " speed: " + var_15);
       } else {
-        var15 = var16 + clamp(var17, -10, 10);
+        var_15 = var_16 + clamp(var_17, -10, 10);
         self.stayahead.last_speed_set_time = gettime();
-        print3d_debug(self.origin + (0, 0, 32), "StayAhead CATCHUP! plane: " + var0 + " diff: " + var17 + " curSpeed: " + var16 + " speed: " + var15, (1, 1, 1), 1, 0.1, 100, 1);
-        print_console_debug("StayAhead CATCHUP! plane: " + var0 + " diff: " + var17 + " curSpeed: " + var16 + " speed: " + var15);
+        print3d_debug(self.origin + (0, 0, 32), "StayAhead CATCHUP! plane: " + var_0 + " diff: " + var_17 + " curSpeed: " + var_16 + " speed: " + var_15, (1, 1, 1), 1, 0.1, 100, 1);
+        print_console_debug("StayAhead CATCHUP! plane: " + var_0 + " diff: " + var_17 + " curSpeed: " + var_16 + " speed: " + var_15);
       }
     } else if(isDefined(self.stayahead_accel)) {
-      var15 = var16 + clamp(var17, -1 * self.stayahead_accel, self.stayahead_accel);
+      var_15 = var_16 + clamp(var_17, -1 * self.stayahead_accel, self.stayahead_accel);
       self.stayahead.last_speed_set_time = gettime();
     } else {
-      var15 = var16 + clamp(var17, -3.5, 3.5);
+      var_15 = var_16 + clamp(var_17, -3.5, 3.5);
       self.stayahead.last_speed_set_time = gettime();
     }
 
-    scripts\engine\utility::set_movement_speed(var15);
+    scripts\engine\utility::set_movement_speed(var_15);
 
     if(isDefined(self.stayahead.exit_speed) && self.stayahead.exit_speed == -1) {
-      self.stayahead.exit_speed = var15;
+      self.stayahead.exit_speed = var_15;
     }
 
-    line_debug(var1.origin, var10);
-    print2d3d_debug(self.origin + (0, 0, 8), "speed: " + var15, (0.9, 0.9, 0.9), 0.9, 0.3, 1, 0, "right", 2);
-    print3d_debug(var10 + (0, 0, 8), var15, (0.9, 0.9, 0.9), 0.9, 0.3);
+    line_debug(var_1.origin, var_10);
+    print2d3d_debug(self.origin + (0, 0, 8), "speed: " + var_15, (0.9, 0.9, 0.9), 0.9, 0.3, 1, 0, "right", 2);
+    print3d_debug(var_10 + (0, 0, 8), var_15, (0.9, 0.9, 0.9), 0.9, 0.3);
     return;
   }
 
   print3d_debug(self.origin + (0, 0, 8), "IsExiting, not setting speed: " + gettime(), (0.9, 0, 0), 0.9, 0.3, 1);
 }
 
-function get_best_goto_node(var0, var1) {
-  var2 = [];
-  var3 = 0;
-  var4 = undefined;
+function get_best_goto_node(var_0, var_1) {
+  var_2 = [];
+  var_3 = 0;
+  var_4 = undefined;
 
-  for(var5 = 0; var5 < var1; var5++) {
-    if(!isDefined(var0[var5])) {
+  for(var_5 = 0; var_5 < var_1; var_5++) {
+    if(!isDefined(var_0[var_5])) {
       break;
     }
 
-    var2 = vectordot(vectorNormalize(var0[var5].origin - self.origin), self.stayahead.dir);
+    var_2 = vectordot(vectorNormalize(var_0[var_5].origin - self.origin), self.stayahead.dir);
 
-    if(var2[var5] < 0) {
-      var1 += 1;
+    if(var_2[var_5] < 0) {
+      var_1 += 1;
       continue;
     }
 
-    if(var2[var5] > 0.5) {
-      print3d_debug(var0[var5].origin, "GOTO GOOD ENOUGH re-start: " + var2[var5], (0, 1, 0), 1, 0.3, 200, 1);
-      var4 = 1;
-      var3 = var5;
+    if(var_2[var_5] > 0.5) {
+      print3d_debug(var_0[var_5].origin, "GOTO GOOD ENOUGH re-start: " + var_2[var_5], (0, 1, 0), 1, 0.3, 200, 1);
+      var_4 = 1;
+      var_3 = var_5;
       break;
     }
 
-    if(var2[var5] > var2[var3]) {
-      var3 = var5;
+    if(var_2[var_5] > var_2[var_3]) {
+      var_3 = var_5;
     }
   }
 
-  return var0[var3];
+  return var_0[var_3];
 }
 
-function get_goto_nodes(var0) {
+function get_goto_nodes(var_0) {
   if(isDefined(self.patharray)) {
-    var0 = scripts\engine\utility::array_combine(var0, self.patharray);
+    var_0 = scripts\engine\utility::array_combine(var_0, self.patharray);
   }
 
-  return var0;
+  return var_0;
 }
 
 function get_goalpos() {
-  var0 = [];
+  var_0 = [];
 
   if(isDefined(self.goalnode)) {
     GscBinSkip0(0x2e, 0, self.goalnode.origin);
@@ -166,103 +166,103 @@ function get_goalpos() {
 }
 
 function get_node_or_struct() {
-  var0 = getnode(self.target, "targetname");
+  var_0 = getnode(self.target, "targetname");
 
-  if(isDefined(var0)) {
-    return var0;
+  if(isDefined(var_0)) {
+    return var_0;
   } else {
-    var0 = scripts\engine\utility::getStruct(self.target, "targetname");
+    var_0 = scripts\engine\utility::getStruct(self.target, "targetname");
   }
 
-  return var0;
+  return var_0;
 }
 
-function get_wait_node(var0) {
-  var1 = [];
+function get_wait_node(var_0) {
+  var_1 = [];
 
   if(isDefined(self.stayahead.wait_nodes)) {
-    var1 = self.stayahead.wait_nodes;
-    var1 = sortbydistance(var1, self.origin);
+    var_1 = self.stayahead.wait_nodes;
+    var_1 = sortbydistance(var_1, self.origin);
   } else if(!isDefined(self.stayahead.use_goto_wait)) {
-    var1 = getnodesinradiussorted(self.origin, self.stayahead.wait_node_radius, 0, 64, "cover");
+    var_1 = getnodesinradiussorted(self.origin, self.stayahead.wait_node_radius, 0, 64, "cover");
   }
 
   if(isDefined(self.using_goto_node) && istrue(self.stayahead.use_goto_wait)) {
-    var1 = scripts\engine\utility::array_combine(var1, get_goto_nodes(var1));
-    var1 = sortbydistance(var1, self.origin);
+    var_1 = scripts\engine\utility::array_combine(var_1, get_goto_nodes(var_1));
+    var_1 = sortbydistance(var_1, self.origin);
   }
 
-  var2 = 0.75;
+  var_2 = 0.75;
 
-  foreach(var8, var4 in var1) {
-    var5 = vectordot(vectorNormalize(var4.origin - self.origin), self.stayahead.dir);
-    var6 = scripts\engine\utility::ter_op(isDefined(self.goalnode) && var4 == self.goalnode, 0, 1);
-    var7 = scripts\engine\utility::ter_op(isDefined(self.goalpos) && var4.origin == self.goalpos, 0, 1);
+  foreach(var_8, var_4 in var_1) {
+    var_5 = vectordot(vectorNormalize(var_4.origin - self.origin), self.stayahead.dir);
+    var_6 = scripts\engine\utility::ter_op(isDefined(self.goalnode) && var_4 == self.goalnode, 0, 1);
+    var_7 = scripts\engine\utility::ter_op(isDefined(self.goalpos) && var_4.origin == self.goalpos, 0, 1);
 
-    if(!isDefined(var4.stayahead_wait_used) && !isDefined(var4.script_dontremove) && var5 >= var2 && var6 && var7) {
-      if(isDefined(self.script_forcecolor) && isDefined(var4.script_color_allies) && issubstr(var4.script_color_allies, self.script_forcecolor)) {
-        line_debug(self.origin, var4.origin, (0, 1, 0), 1, 0, 1);
-        thread node_display_debug(var4, var4.origin, var4.script_color_allies, (0, 1, 0), 1, 0.2, 1000);
+    if(!isDefined(var_4.stayahead_wait_used) && !isDefined(var_4.script_dontremove) && var_5 >= var_2 && var_6 && var_7) {
+      if(isDefined(self.script_forcecolor) && isDefined(var_4.script_color_allies) && issubstr(var_4.script_color_allies, self.script_forcecolor)) {
+        line_debug(self.origin, var_4.origin, (0, 1, 0), 1, 0, 1);
+        thread node_display_debug(var_4, var_4.origin, var_4.script_color_allies, (0, 1, 0), 1, 0.2, 1000);
       } else if(isDefined(self.script_forcecolor) && !isDefined(self.stayahead.use_goto_wait)) {
-        if(!isDefined(var4.script_color_allies)) {
-          if(isDefined(self.stayahead.wait_nodes) && !isDefined(scripts\engine\utility::array_find(self.stayahead.wait_nodes, var4))) {
-            thread node_display_debug(var4, var4.origin, "invalid: no color, removing", (1, 0, 1), 1, 0.2, 1000);
-            var1 = scripts\engine\utility::array_remove(var1, var4);
+        if(!isDefined(var_4.script_color_allies)) {
+          if(isDefined(self.stayahead.wait_nodes) && !isDefined(scripts\engine\utility::array_find(self.stayahead.wait_nodes, var_4))) {
+            thread node_display_debug(var_4, var_4.origin, "invalid: no color, removing", (1, 0, 1), 1, 0.2, 1000);
+            var_1 = scripts\engine\utility::array_remove(var_1, var_4);
           }
-        } else if(!issubstr(var4.script_color_allies, self.script_forcecolor)) {
-          thread node_display_debug(var4, var4.origin, "invalid: wrong color, removing", (1, 0, 1), 1, 0.2, 1000);
-          var1 = scripts\engine\utility::array_remove(var1, var4);
+        } else if(!issubstr(var_4.script_color_allies, self.script_forcecolor)) {
+          thread node_display_debug(var_4, var_4.origin, "invalid: wrong color, removing", (1, 0, 1), 1, 0.2, 1000);
+          var_1 = scripts\engine\utility::array_remove(var_1, var_4);
         }
       }
 
       continue;
     }
 
-    if(!isDefined(var4.script_dontremove)) {
-      if(isDefined(var4.stayahead_wait_used)) {
-        thread node_display_debug(var4, var4.origin, "invalid: used", (1, 0, 1), 1, 0.2, 1000);
-      } else if(var5 < 0) {
-        thread node_display_debug(var4, var4.origin, "removed: behind", (0, 0, 1), 1, 0.2, 1000);
-      } else if(var5 < var2) {
-        thread node_display_debug(var4, var4.origin, "removed: bad angle: " + var5, (1, 0, 0), 1, 0.2, 1000);
-      } else if(!var6) {
-        thread node_display_debug(var4, var4.origin, "removed: IS goalNode", (1, 0, 0), 1, 0.2, 1000);
-      } else if(!var7) {
-        thread node_display_debug(var4, var4.origin, "removed: IS goalPos", (1, 0, 0), 1, 0.2, 1000);
+    if(!isDefined(var_4.script_dontremove)) {
+      if(isDefined(var_4.stayahead_wait_used)) {
+        thread node_display_debug(var_4, var_4.origin, "invalid: used", (1, 0, 1), 1, 0.2, 1000);
+      } else if(var_5 < 0) {
+        thread node_display_debug(var_4, var_4.origin, "removed: behind", (0, 0, 1), 1, 0.2, 1000);
+      } else if(var_5 < var_2) {
+        thread node_display_debug(var_4, var_4.origin, "removed: bad angle: " + var_5, (1, 0, 0), 1, 0.2, 1000);
+      } else if(!var_6) {
+        thread node_display_debug(var_4, var_4.origin, "removed: IS goalNode", (1, 0, 0), 1, 0.2, 1000);
+      } else if(!var_7) {
+        thread node_display_debug(var_4, var_4.origin, "removed: IS goalPos", (1, 0, 0), 1, 0.2, 1000);
       } else {
-        thread node_display_debug(var4, var4.origin, "invalid???", (1, 0, 1), 1, 0.2, 1000);
+        thread node_display_debug(var_4, var_4.origin, "invalid???", (1, 0, 1), 1, 0.2, 1000);
       }
 
-      var1 = scripts\engine\utility::array_remove(var1, var4);
+      var_1 = scripts\engine\utility::array_remove(var_1, var_4);
     }
   }
 
   if(getdvarint("scr_debug_stayahead")) {
-    foreach(var4 in var1) {
-      thread node_display_debug(var4, var4.origin, "wait node: " + var8, (0, 1, 0), 1, 0.2, 1000);
+    foreach(var_4 in var_1) {
+      thread node_display_debug(var_4, var_4.origin, "wait node: " + var_8, (0, 1, 0), 1, 0.2, 1000);
     }
   }
 
-  var10 = undefined;
+  var_10 = undefined;
 
-  if(var1.size > 0) {
-    var11 = undefined;
+  if(var_1.size > 0) {
+    var_11 = undefined;
 
-    foreach(var4 in var1) {
-      if(isnode(var4)) {
-        var11 = var4;
+    foreach(var_4 in var_1) {
+      if(isnode(var_4)) {
+        var_11 = var_4;
         break;
       }
     }
 
-    var10 = var1[0];
+    var_10 = var_1[0];
 
-    if(isstruct(var1[0]) && isDefined(var11)) {
-      if(distance(var1[0].origin, var11.origin) < 128) {
-        if(node_within_fov(var11)) {
-          print3d_debug(var11.origin, "NEAREST NODE", (1, 1, 1), 1, 0.3, 1, 1);
+    if(isstruct(var_1[0]) && isDefined(var_11)) {
+      if(distance(var_1[0].origin, var_11.origin) < 128) {
+        if(node_within_fov(var_11)) {
+          print3d_debug(var_11.origin, "NEAREST NODE", (1, 1, 1), 1, 0.3, 1, 1);
           print3d_debug(self.origin, "STAYAHEAD: using closest 'node' bc it's not a struct!", (1, 1, 1), 1, 0.3, 100, 1);
-          var10 = var11;
+          var_10 = var_11;
         }
       }
     }
@@ -270,7 +270,7 @@ function get_wait_node(var0) {
     print3d_debug(self.origin, "STAYAHEAD: NO BEST WAIT NODE, RETURNING UNDEFINED!", (1, 0, 0), 1, 0.3, 100, 1);
   }
 
-  return var10;
+  return var_10;
 }
 
 function pause_flag_monitor() {
@@ -284,11 +284,11 @@ function pause_flag_monitor() {
   }
 }
 
-function waitnode_trigger_think(var0, var1) {
+function waitnode_trigger_think(var_0, var_1) {
   thread delay_endon(0.05, "goal_changed");
   self waittill("goal");
   thread scripts\sp\utility::stayahead_pause(1);
-  GscBinSkip4(0x35, var0, var1);
+  GscBinSkip4(0x35, var_0, var_1);
 }
 
 function waitnode_trigger_delay_speed_clear() {
@@ -296,9 +296,9 @@ function waitnode_trigger_delay_speed_clear() {
   self.stayahead.last_speed_set_time = undefined;
 }
 
-function waitnode_trigger_debug(var0, var1) {
-  var1 endon("death");
-  var1 endon("trigger");
+function waitnode_trigger_debug(var_0, var_1) {
+  var_1 endon("death");
+  var_1 endon("trigger");
 }
 
 function stayahead_watch_end() {
@@ -325,13 +325,13 @@ function stayahead_watch_end() {
   }
 }
 
-function stayahead_wait_func(var0) {
+function stayahead_wait_func(var_0) {
   self endon("death");
   self endon("stop_stayahead");
   self notify("stop_stayahead_wait_func");
   self endon("stop_stayahead_wait_func");
   thread delay_endon(0.05, "goal_changed");
-  stayahead_at_waitnode(var0);
+  stayahead_at_waitnode(var_0);
   self[[self.stayahead.wait_func]]();
 }
 
@@ -340,9 +340,9 @@ function stayahead_wait_set_goal_or_path() {
     self.stayahead.goto_patharray = self.patharray;
     self.stayahead.using_goto_node = 1;
 
-    for(var0 = 0; var0 <= self.patharrayindex; var0++) {
+    for(var_0 = 0; var_0 <= self.patharrayindex; var_0++) {
       if(self.stayahead.goto_patharray.size > 1) {
-        print_console_debug("Removing go_to_node num: " + var0);
+        print_console_debug("Removing go_to_node num: " + var_0);
         self.stayahead.goto_patharray = scripts\engine\utility::array_remove_index(self.stayahead.goto_patharray, 0);
       }
     }
@@ -356,19 +356,19 @@ function stayahead_wait_set_goal_or_path() {
   }
 }
 
-function stayahead_at_waitnode(var0) {
+function stayahead_at_waitnode(var_0) {
   thread delay_endon(0.05, "goal_changed");
 
-  while(distance2dsquared(self.origin, var0.origin) > 64) {
-    print3d_debug(self.origin, "distanceSQ to waitnode: " + distance2dsquared(self.origin, var0.origin), (1, 1, 1), 1, 0.3, 1, 1);
+  while(distance2dsquared(self.origin, var_0.origin) > 64) {
+    print3d_debug(self.origin, "distanceSQ to waitnode: " + distance2dsquared(self.origin, var_0.origin), (1, 1, 1), 1, 0.3, 1, 1);
     waitframe();
   }
 }
 
-function stayahead_goal_is_far_enough(var0) {
+function stayahead_goal_is_far_enough(var_0) {
   if(node_within_fov(self.stayahead.goalnode)) {
-    if(distance(self.origin, self.stayahead.goalnode.origin) - distance(self.origin, var0.origin) < 128) {
-      print2d3d_debug(self.origin + (0, 0, 16), "pW fail goalnode too close: " + distance(self.origin, self.stayahead.goalnode.origin) + " Waitnode: " + distance(self.origin, var0.origin), (1, 0, 0), 1, 0.3, 1, 0, "right", 5);
+    if(distance(self.origin, self.stayahead.goalnode.origin) - distance(self.origin, var_0.origin) < 128) {
+      print2d3d_debug(self.origin + (0, 0, 16), "pW fail goalnode too close: " + distance(self.origin, self.stayahead.goalnode.origin) + " Waitnode: " + distance(self.origin, var_0.origin), (1, 0, 0), 1, 0.3, 1, 0, "right", 5);
       return false;
     }
   } else {
@@ -378,30 +378,30 @@ function stayahead_goal_is_far_enough(var0) {
   return true;
 }
 
-function node_within_fov(var0) {
+function node_within_fov(var_0) {
   if(isDefined(self.stayahead) && isDefined(self.stayahead.dir)) {
-    var1 = self.stayahead.dir;
+    var_1 = self.stayahead.dir;
   } else {
-    var1 = anglesToForward(self.angles);
+    var_1 = anglesToForward(self.angles);
   }
 
-  var2 = vectordot(var1, vectorNormalize(var1.origin - self.origin));
+  var_2 = vectordot(var_1, vectorNormalize(var_1.origin - self.origin));
 
-  if(var2 >= 0.9) {
+  if(var_2 >= 0.9) {
     return true;
   }
 
   return false;
 }
 
-function delay_endon(var0, var1) {
-  wait var0;
-  self endon(var1);
+function delay_endon(var_0, var_1) {
+  wait var_0;
+  self endon(var_1);
 }
 
-function stayahead_goto_can_use_wait(var0) {
+function stayahead_goto_can_use_wait(var_0) {
   if(isDefined(self.using_goto_node)) {
-    if(isDefined(self.stayahead.goto_nextnode) && distance(self.origin, self.stayahead.goto_nextnode.origin) > distance(self.origin, var0[0].origin)) {
+    if(isDefined(self.stayahead.goto_nextnode) && distance(self.origin, self.stayahead.goto_nextnode.origin) > distance(self.origin, var_0[0].origin)) {
       return 1;
     }
 
@@ -411,47 +411,47 @@ function stayahead_goto_can_use_wait(var0) {
   return 1;
 }
 
-function stayahead_set_goalnode(var0, var1) {
+function stayahead_set_goalnode(var_0, var_1) {
   if(isDefined(self.stayahead.spawned_wait_node)) {
     despawncovernode(self.stayahead.spawned_wait_node);
   }
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(istrue(var1)) {
-    if(isstruct(var0)) {
-      var2 = vectortoangles(self.stayahead.dir);
-      var0 = spawncovernode(var0.origin, var2, "Exposed");
+  if(istrue(var_1)) {
+    if(isstruct(var_0)) {
+      var_2 = vectortoangles(self.stayahead.dir);
+      var_0 = spawncovernode(var_0.origin, var_2, "Exposed");
 
-      if(!isDefined(var0)) {
+      if(!isDefined(var_0)) {
         print3d_debug(self.origin + (0, 0, 8), "UNABLE TO SPAWN COVER NODE!", (1, 0, 0), 1, 0.3, 500, 1);
         return;
       }
 
-      self.stayahead.spawned_wait_node = var0;
+      self.stayahead.spawned_wait_node = var_0;
     }
 
-    var0.stayahead_wait_used = 1;
+    var_0.stayahead_wait_used = 1;
     self notify("stayahead_going_to_wait_node");
     self notify("stop_going_to_node");
-    scripts\engine\sp\utility::set_goal_node(var0);
+    scripts\engine\sp\utility::set_goal_node(var_0);
 
-    if(isDefined(self.stayahead.goto_patharray) && var0 == self.stayahead.goto_patharray[self.stayahead.goto_patharray.size - 1]) {
+    if(isDefined(self.stayahead.goto_patharray) && var_0 == self.stayahead.goto_patharray[self.stayahead.goto_patharray.size - 1]) {
       self.stayahead.goto_finished = 1;
     }
 
     if(isDefined(self.stayahead.wait_func)) {
-      GscBinSkip4(0x35, var0);
+      GscBinSkip4(0x35, var_0);
     }
 
-    var3 = var0 scripts\engine\utility::get_linked_ents();
+    var_3 = var_0 scripts\engine\utility::get_linked_ents();
 
-    if(var3.size > 0) {
-      foreach(var5 in var3) {
-        if(issubstr(var5.code_classname, "trigger")) {
-          GscBinSkip4(0x35, var0, var5);
+    if(var_3.size > 0) {
+      foreach(var_5 in var_3) {
+        if(issubstr(var_5.code_classname, "trigger")) {
+          GscBinSkip4(0x35, var_0, var_5);
         }
       }
 
@@ -481,22 +481,22 @@ function stayahead_set_goalnode(var0, var1) {
   self notify("stop_stayahead_wait_func");
   self notify("stayahead_leaving_wait_node");
   self notify("stop_going_to_node");
-  scripts\engine\sp\utility::set_goal_node(var4);
+  scripts\engine\sp\utility::set_goal_node(var_4);
 }
 
 function stayahead_team_think() {
   self.stayahead.team_thinking = 1;
   self endon("death");
   self endon("stop_stayahead");
-  var0 = 0.8;
-  var1 = self.stayahead.p1["speed"];
-  var2 = self.stayahead.p2["speed"];
-  var3 = self.stayahead.p3["speed"];
-  var4 = self.stayahead.p4["speed"];
-  var5 = self.stayahead.p1["distance"];
-  var6 = self.stayahead.p2["distance"];
-  var7 = self.stayahead.p3["distance"];
-  var8 = self.stayahead.p4["distance"];
+  var_0 = 0.8;
+  var_1 = self.stayahead.p1["speed"];
+  var_2 = self.stayahead.p2["speed"];
+  var_3 = self.stayahead.p3["speed"];
+  var_4 = self.stayahead.p4["speed"];
+  var_5 = self.stayahead.p1["distance"];
+  var_6 = self.stayahead.p2["distance"];
+  var_7 = self.stayahead.p3["distance"];
+  var_8 = self.stayahead.p4["distance"];
   GscBinSkip4(0x35);
 }
 
@@ -504,78 +504,78 @@ function stayahead_team_debug() {
   self endon("stop_stayahead");
 
   for(;;) {
-    foreach(var1 in self.stayahead.team) {
-      thread display_goto_path(var1);
-      line_debug(self.origin, var1.origin, (1, 0, 1), 1, 0, 1);
+    foreach(var_1 in self.stayahead.team) {
+      thread display_goto_path(var_1);
+      line_debug(self.origin, var_1.origin, (1, 0, 1), 1, 0, 1);
     }
 
     waitframe();
   }
 }
 
-function lerp_plane_vector(var0, var1) {
-  var2 = 0.03;
-  var3 = (var1 - var0) * var2;
-  var4 = var0 + var3;
-  self.stayahead.dir = var4;
-  return var4;
+function lerp_plane_vector(var_0, var_1) {
+  var_2 = 0.03;
+  var_3 = (var_1 - var_0) * var_2;
+  var_4 = var_0 + var_3;
+  self.stayahead.dir = var_4;
+  return var_4;
 }
 
-function print_debug(var0) {}
+function print_debug(var_0) {}
 
-function print_console_debug(var0) {}
+function print_console_debug(var_0) {}
 
-function print3d_debug(var0, var1, var2, var3, var4, var5, var6) {}
+function print3d_debug(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {}
 
-function print2d3d_debug(var0, var1, var2, var3, var4, var5, var6, var7, var8) {}
+function print2d3d_debug(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {}
 
 function create_2d_background() {}
 
-function create_2d_text(var0, var1, var2, var3, var4) {}
+function create_2d_text(var_0, var_1, var_2, var_3, var_4) {}
 
-function line_debug(var0, var1, var2, var3, var4, var5) {}
+function line_debug(var_0, var_1, var_2, var_3, var_4, var_5) {}
 
-function sphere_debug(var0, var1, var2, var3, var4) {
+function sphere_debug(var_0, var_1, var_2, var_3, var_4) {
   if(getdvarint("scr_debug_stayahead")) {
     return;
   }
 }
 
-function node_display_debug(var0, var1, var2, var3, var4, var5, var6, var7) {
-  if(isstruct(self) || isnode(self) && isDefined(self.targetname) && !isDefined(var7)) {
+function node_display_debug(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  if(isstruct(self) || isnode(self) && isDefined(self.targetname) && !isDefined(var_7)) {
     level notify(self.targetname);
     level endon(self.targetname);
   }
 
-  for(var8 = 0; var8 < var5; var8++) {
-    print3d_debug(var0 + (0, 0, 6), var1, var2, var3, var4, 1, var6);
-    sphere_debug(var0, 6, var2, 0, 1);
+  for(var_8 = 0; var_8 < var_5; var_8++) {
+    print3d_debug(var_0 + (0, 0, 6), var_1, var_2, var_3, var_4, 1, var_6);
+    sphere_debug(var_0, 6, var_2, 0, 1);
     waitframe();
   }
 }
 
-function display_goto_path(var0) {
-  var1 = var0;
+function display_goto_path(var_0) {
+  var_1 = var_0;
 
   if(getdvarint("scr_debug_stayahead")) {
     if(isDefined(self.using_goto_node) && isDefined(self.patharray)) {
-      foreach(var3 in self.patharray) {
-        if(isDefined(self.patharrayindex) && var4 < self.patharrayindex) {
-          var0 = (1, 0, 0);
+      foreach(var_3 in self.patharray) {
+        if(isDefined(self.patharrayindex) && var_4 < self.patharrayindex) {
+          var_0 = (1, 0, 0);
         } else {
-          var0 = var1;
+          var_0 = var_1;
         }
 
-        thread node_display_debug(var3, var3.origin, "goto: " + var4, var0, 1, 0.2, 100);
+        thread node_display_debug(var_3, var_3.origin, "goto: " + var_4, var_0, 1, 0.2, 100);
 
-        if(isDefined(var3.target)) {
-          if(isDefined(scripts\engine\utility::getStruct(var3.target, "targetname"))) {
-            line_debug(var3.origin, scripts\engine\utility::getStruct(var3.target, "targetname").origin, var0, 1, 0, 1);
+        if(isDefined(var_3.target)) {
+          if(isDefined(scripts\engine\utility::getStruct(var_3.target, "targetname"))) {
+            line_debug(var_3.origin, scripts\engine\utility::getStruct(var_3.target, "targetname").origin, var_0, 1, 0, 1);
             continue;
           }
 
-          if(isDefined(getnode(var3.target, "targetname"))) {
-            line_debug(var3.origin, getnode(var3.target, "targetname").origin, var0, 1, 0, 1);
+          if(isDefined(getnode(var_3.target, "targetname"))) {
+            line_debug(var_3.origin, getnode(var_3.target, "targetname").origin, var_0, 1, 0, 1);
           }
         }
       }

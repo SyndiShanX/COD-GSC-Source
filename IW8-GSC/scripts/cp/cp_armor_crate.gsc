@@ -4,66 +4,66 @@
 ***********************************************/
 
 function armor_crate_init() {
-  var0 = spawnStruct();
-  var0.id = "armor";
-  var0.weaponinfo = "iw8_armor_marker_cp";
-  var0.modelbase = "offhand_wm_supportbox_armor";
-  var0.hintstring = &"COOP_CRAFTING/ARMOR_TAKE";
-  var0.streakname = "armor";
-  var0.splashname = "used_support_box";
-  var0.shadername = "compass_objpoint_deploy_friendly";
-  var0.headicon = "cp_crate_icon_armor";
-  var0.headiconoffset = 20;
-  var0.lifespan = 90;
-  var0.usexp = 50;
-  var0.onusesfx = "ammo_crate_use";
-  var0.deployedsfx = "ammo_crate_use";
-  var0.deathvfx = loadfx("vfx/iw8/prop/scriptables/vfx_offhand_wm_supportbox_armor_timeout.vfx");
-  var0.onusecallback = &armorbox_onusedeployable;
-  var0.canusecallback = &armorbox_canusedeployable;
-  var0.deployfunc = &armorbox_onusedeployable;
-  var0.ref_120aa = "ping_response_thanks";
-  var0.usetime = 1000;
-  var0.maxhealth = 100;
-  var0.maxuses = 4;
-  var0.canreusebox = 0;
-  var0.allowmeleedamage = 1;
-  var0.damagefeedback = "";
-  var0.grenadeusefunc = &supportbox_grenadelaunchfunc;
-  var0.ondeploycallback = &scripts\cp\cp_deployablebox::supportbox_ondeploy;
-  var0.deployanimduration = scripts\cp\cp_deployablebox::supportbox_getdeployanimduration();
-  level.boxsettings["armor"] = var0;
+  var_0 = spawnStruct();
+  var_0.id = "armor";
+  var_0.weaponinfo = "iw8_armor_marker_cp";
+  var_0.modelbase = "offhand_wm_supportbox_armor";
+  var_0.hintstring = &"COOP_CRAFTING/ARMOR_TAKE";
+  var_0.streakname = "armor";
+  var_0.splashname = "used_support_box";
+  var_0.shadername = "compass_objpoint_deploy_friendly";
+  var_0.headicon = "cp_crate_icon_armor";
+  var_0.headiconoffset = 20;
+  var_0.lifespan = 90;
+  var_0.usexp = 50;
+  var_0.onusesfx = "ammo_crate_use";
+  var_0.deployedsfx = "ammo_crate_use";
+  var_0.deathvfx = loadfx("vfx/iw8/prop/scriptables/vfx_offhand_wm_supportbox_armor_timeout.vfx");
+  var_0.onusecallback = &armorbox_onusedeployable;
+  var_0.canusecallback = &armorbox_canusedeployable;
+  var_0.deployfunc = &armorbox_onusedeployable;
+  var_0.ref_120aa = "ping_response_thanks";
+  var_0.usetime = 1000;
+  var_0.maxhealth = 100;
+  var_0.maxuses = 4;
+  var_0.canreusebox = 0;
+  var_0.allowmeleedamage = 1;
+  var_0.damagefeedback = "";
+  var_0.grenadeusefunc = &supportbox_grenadelaunchfunc;
+  var_0.ondeploycallback = &scripts\cp\cp_deployablebox::supportbox_ondeploy;
+  var_0.deployanimduration = scripts\cp\cp_deployablebox::supportbox_getdeployanimduration();
+  level.boxsettings["armor"] = var_0;
   level.deployable_box["armor"] = [];
 }
 
-function weaponswitchendedsupportbox(var0, var1) {
-  if(istrue(var1)) {
-    thread supportbox_watchplayerweapon(var0);
+function weaponswitchendedsupportbox(var_0, var_1) {
+  if(istrue(var_1)) {
+    thread supportbox_watchplayerweapon(var_0);
     return;
   }
 }
 
-function tryusesupportbox(var0, var1) {
+function tryusesupportbox(var_0, var_1) {
   return true;
 }
 
-function armorbox_canusedeployable(var0) {
+function armorbox_canusedeployable(var_0) {
   return true;
 }
 
-function supportbox_grenadelaunchfunc(var0) {
-  var1 = self gettagorigin("tag_accessory_left");
-  var2 = 400;
-  var3 = anglesToForward(self.angles);
-  var4 = anglestoup(self.angles);
-  var4 *= 0.6;
-  var5 = vectorNormalize(var3 + var4);
-  var6 = var5 * var2;
-  var7 = magicbullet("iw8_ammocrate_marker_zm", var1, var1 + var6, self);
-  self notify("grenade_fire", var7);
+function supportbox_grenadelaunchfunc(var_0) {
+  var_1 = self gettagorigin("tag_accessory_left");
+  var_2 = 400;
+  var_3 = anglesToForward(self.angles);
+  var_4 = anglestoup(self.angles);
+  var_4 *= 0.6;
+  var_5 = vectorNormalize(var_3 + var_4);
+  var_6 = var_5 * var_2;
+  var_7 = magicbullet("iw8_ammocrate_marker_zm", var_1, var_1 + var_6, self);
+  self notify("grenade_fire", var_7);
 }
 
-function armorbox_onusedeployable(var0) {
+function armorbox_onusedeployable(var_0) {
   self endon("disconnect");
 
   if(scripts\cp\cp_armor::player_have_full_armor(self)) {
@@ -76,27 +76,27 @@ function armorbox_onusedeployable(var0) {
   return true;
 }
 
-function supportbox_watchplayerweapon(var0) {
+function supportbox_watchplayerweapon(var_0) {
   self endon("disconnect");
   self endon("deployable_deployed");
   self notifyonplayercommand("cancel_deploy", "+actionslot 3");
   self notifyonplayercommand("cancel_deploy", "+actionslot 4");
   self notifyonplayercommand("cancel_deploy", "+actionslot 5");
   self notifyonplayercommand("cancel_deploy", "+actionslot 6");
-  var1 = scripts\engine\utility::ref_143ae("grenade_fire", "cancel_deploy", "weapon_switch_started");
+  var_1 = scripts\engine\utility::ref_143ae("grenade_fire", "cancel_deploy", "weapon_switch_started");
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  jumpiffalse(var1 == "cancel_deploy") LOC_0000007d;
+  jumpiffalse(var_1 == "cancel_deploy") LOC_0000007d;
   self switchtoweapon(self.lastdroppableweaponobj);
 
   for(;;) {
-    var2 = self getcurrentweapon();
+    var_2 = self getcurrentweapon();
 
-    if(var2 != var0.objweapon) {
-      self notify("killstreak_finished_with_weapon_" + var0.weaponname);
+    if(var_2 != var_0.objweapon) {
+      self notify("killstreak_finished_with_weapon_" + var_0.weaponname);
       break;
     }
 
@@ -105,60 +105,60 @@ function supportbox_watchplayerweapon(var0) {
 }
 
 function supportbox_handledamage() {
-  var0 = level.boxsettings[self.boxtype];
+  var_0 = level.boxsettings[self.boxtype];
 }
 
-function supportbox_handledeathdamage(var0) {
-  var1 = var0.attacker;
-  var2 = var0.objweapon;
-  var3 = var0.meansofdeath;
-  var4 = var0.damage;
-  var5 = level.boxsettings[self.boxtype];
-  var1 notify("destroyed_equipment");
+function supportbox_handledeathdamage(var_0) {
+  var_1 = var_0.attacker;
+  var_2 = var_0.objweapon;
+  var_3 = var_0.meansofdeath;
+  var_4 = var_0.damage;
+  var_5 = level.boxsettings[self.boxtype];
+  var_1 notify("destroyed_equipment");
 }
 
-function supportbox_modifydamage(var0) {
-  var1 = var0.attacker;
-  var2 = var0.objweapon;
-  var3 = var0.meansofdeath;
-  var4 = var0.damage;
-  var5 = var0.idflags;
-  var6 = var4;
-  var7 = level.boxsettings[self.boxtype];
-  return var6;
+function supportbox_modifydamage(var_0) {
+  var_1 = var_0.attacker;
+  var_2 = var_0.objweapon;
+  var_3 = var_0.meansofdeath;
+  var_4 = var_0.damage;
+  var_5 = var_0.idflags;
+  var_6 = var_4;
+  var_7 = level.boxsettings[self.boxtype];
+  return var_6;
 }
 
-function supportbox_waittill_removeorweaponchange(var0, var1) {
+function supportbox_waittill_removeorweaponchange(var_0, var_1) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  var2 = spawnStruct();
-  thread supportbox_waittill_notify(var0, var2);
-  thread supportbox_waittill_notify(var1, var2);
-  var2 waittill("returned", var3, var4);
-  var2 notify("die");
-  var5 = spawnStruct();
-  var5.msg = var3;
-  var5.param = var4;
-  return var5;
+  var_2 = spawnStruct();
+  thread supportbox_waittill_notify(var_0, var_2);
+  thread supportbox_waittill_notify(var_1, var_2);
+  var_2 waittill("returned", var_3, var_4);
+  var_2 notify("die");
+  var_5 = spawnStruct();
+  var_5.msg = var_3;
+  var_5.param = var_4;
+  return var_5;
 }
 
-function supportbox_waittill_notify(var0, var1) {
+function supportbox_waittill_notify(var_0, var_1) {
   self endon("death");
   self endon("disconnect");
-  var1 endon("die");
-  self waittill(var0, var2);
-  var1 notify("returned", var0, var2);
+  var_1 endon("die");
+  self waittill(var_0, var_2);
+  var_1 notify("returned", var_0, var_2);
 }
 
 function cangive_ammo() {
-  var0 = scripts\cp\utility::getvalidtakeweapon();
-  var1 = self getweaponammoclip(var0);
-  var2 = weaponclipsize(var0);
-  var3 = weaponmaxammo(var0);
-  var4 = self getweaponammostock(var0);
+  var_0 = scripts\cp\utility::getvalidtakeweapon();
+  var_1 = self getweaponammoclip(var_0);
+  var_2 = weaponclipsize(var_0);
+  var_3 = weaponmaxammo(var_0);
+  var_4 = self getweaponammostock(var_0);
 
-  if(var4 < var3 || var1 < var2) {
+  if(var_4 < var_3 || var_1 < var_2) {
     return 1;
   }
 
@@ -166,53 +166,53 @@ function cangive_ammo() {
 }
 
 function give_ammo_to_player_through_crate() {
-  var0 = self getweaponslistprimaries();
+  var_0 = self getweaponslistprimaries();
 
-  foreach(var2 in var0) {
+  foreach(var_2 in var_0) {
     if(!scripts\cp\utility::is_valid_player()) {
       continue;
     }
 
-    if(weapontype(var2) == "riotshield") {
+    if(weapontype(var_2) == "riotshield") {
       continue;
     }
 
-    if(scripts\cp\cp_weapon::is_incompatible_weapon(var2)) {
+    if(scripts\cp\cp_weapon::is_incompatible_weapon(var_2)) {
       continue;
     }
 
-    var3 = weaponclipsize(var2);
-    self givemaxammo(var2);
+    var_3 = weaponclipsize(var_2);
+    self givemaxammo(var_2);
   }
 
   self playlocalsound("weap_ammo_pickup");
 }
 
-function adjust_clip_ammo_from_stock(var0, var1, var2, var3, var4) {
-  if(!istrue(var4)) {
-    var5 = weaponmaxammo(var1);
-    var6 = var0 getweaponammostock(var1);
-    var7 = var5 - var6;
-    var8 = scripts\engine\utility::ter_op(var7 >= var3, var6 + var3, var5);
-    var0 setweaponammostock(var1, var8);
+function adjust_clip_ammo_from_stock(var_0, var_1, var_2, var_3, var_4) {
+  if(!istrue(var_4)) {
+    var_5 = weaponmaxammo(var_1);
+    var_6 = var_0 getweaponammostock(var_1);
+    var_7 = var_5 - var_6;
+    var_8 = scripts\engine\utility::ter_op(var_7 >= var_3, var_6 + var_3, var_5);
+    var_0 setweaponammostock(var_1, var_8);
   }
 
-  var9 = var0 getweaponammoclip(var1, var2);
-  var10 = var3 - var9;
-  var11 = min(var9 + var10, var3);
-  var0 setweaponammoclip(var1, int(var11), var2);
+  var_9 = var_0 getweaponammoclip(var_1, var_2);
+  var_10 = var_3 - var_9;
+  var_11 = min(var_9 + var_10, var_3);
+  var_0 setweaponammoclip(var_1, int(var_11), var_2);
 }
 
-function test_ammo_crate(var0) {
+function test_ammo_crate(var_0) {
   thread watch_dpad();
-  var0 notify("new_power", "crafted_autosentry");
-  scripts\cp\utility::set_crafted_inventory_item("crafted_autosentry", &give_crafted_ammo_crate, var0);
+  var_0 notify("new_power", "crafted_autosentry");
+  scripts\cp\utility::set_crafted_inventory_item("crafted_autosentry", &give_crafted_ammo_crate, var_0);
 }
 
-function give_crafted_ammo_crate(var0, var1) {
+function give_crafted_ammo_crate(var_0, var_1) {
   thread watch_dpad();
-  var1 notify("new_power", "crafted_autosentry");
-  scripts\cp\utility::set_crafted_inventory_item("crafted_autosentry", &give_crafted_ammo_crate, var1);
+  var_1 notify("new_power", "crafted_autosentry");
+  scripts\cp\utility::set_crafted_inventory_item("crafted_autosentry", &give_crafted_ammo_crate, var_1);
 }
 
 function watch_dpad() {

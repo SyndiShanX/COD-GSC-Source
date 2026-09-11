@@ -95,17 +95,17 @@ function proxywar_forest_spawn_funcs() {
 }
 
 function proxywar_forest_init() {
-  var0 = getEnt("forest_patrol_fov_lerp", "targetname");
-  var0 thread scripts\sp\maps\proxywar\proxywar_util::lerp_fov_over_distance_trigger();
+  var_0 = getEnt("forest_patrol_fov_lerp", "targetname");
+  var_0 thread scripts\sp\maps\proxywar\proxywar_util::lerp_fov_over_distance_trigger();
   jumpiftrue(scripts\sp\starts::is_after_start("forest_overlook")) LOC_00000074;
-  var1 = getEntArray("burning_truck", "targetname");
+  var_1 = getEntArray("burning_truck", "targetname");
 
-  foreach(var3 in var1) {
-    var3 hide();
+  foreach(var_3 in var_1) {
+    var_3 hide();
   }
 
-  var5 = getEnt("burning_truck_col", "targetname");
-  var5 notsolid();
+  var_5 = getEnt("burning_truck_col", "targetname");
+  var_5 notsolid();
   goto LOC_000000ab;
 }
 
@@ -139,8 +139,8 @@ function forest_trees_main() {
 
   thread setup_overlook_scene();
   level thread scripts\sp\maps\proxywar\proxywar_vo::vo_fo_spot_patrol();
-  var0 = scripts\engine\utility::getStruct("overlook_patrol_ref", "targetname");
-  var1 = scripts\engine\sp\utility::array_spawn_targetname("rus_overlook_patrol", 1);
+  var_0 = scripts\engine\utility::getStruct("overlook_patrol_ref", "targetname");
+  var_1 = scripts\engine\sp\utility::array_spawn_targetname("rus_overlook_patrol", 1);
   level.overlookpatrol1 = getEnt("rus_overlook_patrol_1", "script_noteworthy");
   level.overlookpatrol1.animname = "enemy1";
   thread overlook_patrol_animate(level.overlookpatrol1);
@@ -163,40 +163,40 @@ function forest_trees_main() {
   }
 }
 
-function overlook_patrol_animate(var0) {
+function overlook_patrol_animate(var_0) {
   level endon("alerted_patrol");
   self.allowdeath = 1;
-  var1 = getstartorigin(var0.origin, (0, 0, 0), scripts\engine\utility::getanim("overlook_patrol"));
-  var2 = getstartangles(var0.origin, (0, 0, 0), scripts\engine\utility::getanim("overlook_patrol"));
-  var3 = scripts\engine\utility::spawn_script_origin(self.origin, self.angles);
-  self linkTo(var3);
-  var3 moveTo(var1, 2, 0, 1);
-  var3 rotateTo(var2, 2);
+  var_1 = getstartorigin(var_0.origin, (0, 0, 0), scripts\engine\utility::getanim("overlook_patrol"));
+  var_2 = getstartangles(var_0.origin, (0, 0, 0), scripts\engine\utility::getanim("overlook_patrol"));
+  var_3 = scripts\engine\utility::spawn_script_origin(self.origin, self.angles);
+  self linkTo(var_3);
+  var_3 moveTo(var_1, 2, 0, 1);
+  var_3 rotateTo(var_2, 2);
   wait 2;
   self unlink();
-  var3 delete();
+  var_3 delete();
 
   if(!scripts\engine\utility::flag("alerted_patrol")) {
-    var0 thread scripts\common\anim::anim_single_solo(self, "overlook_patrol");
-    var4 = getanimlength(scripts\engine\utility::getanim("overlook_patrol"));
-    var5 = lookupsoundlength("dx_vom_h72_forest_trees_patrol_150") / 1000;
-    scripts\engine\utility::flag_set_delayed("overlook_patrol_reached_end", var4 - var5 - 4);
+    var_0 thread scripts\common\anim::anim_single_solo(self, "overlook_patrol");
+    var_4 = getanimlength(scripts\engine\utility::getanim("overlook_patrol"));
+    var_5 = lookupsoundlength("dx_vom_h72_forest_trees_patrol_150") / 1000;
+    scripts\engine\utility::flag_set_delayed("overlook_patrol_reached_end", var_4 - var_5 - 4);
     return;
   }
 
   scripts\common\utility::demeanor_override("combat");
 }
 
-function check_player_visibility_to_patrol(var0) {
+function check_player_visibility_to_patrol(var_0) {
   level endon("overlook_patrol_reached_end");
   level endon("stop_check_player_visibility_to_patrol");
-  var1 = 1;
+  var_1 = 1;
 
-  while(var1) {
+  while(var_1) {
     if(scripts\engine\utility::flag("visible_to_patrol")) {
-      foreach(var3 in var0) {
-        if(distance(var3.origin, level.player.origin) < 600 && var3 cansee(level.player)) {
-          var1 = 0;
+      foreach(var_3 in var_0) {
+        if(distance(var_3.origin, level.player.origin) < 600 && var_3 cansee(level.player)) {
+          var_1 = 0;
           scripts\engine\utility::flag_set("alerted_patrol");
           scripts\engine\utility::flag_set("overlook_patrol_reached_end");
           break;
@@ -225,8 +225,8 @@ function check_player_flashlight_visible_to_patrol() {
 
 function check_throw_grenade_during_patrol() {
   level endon("near_ridge_edge");
-  level.player waittill("grenade_fire", var0);
-  var0 waittill("explode");
+  level.player waittill("grenade_fire", var_0);
+  var_0 waittill("explode");
   scripts\engine\utility::flag_set("overlook_patrol_noise_made");
   scripts\engine\utility::flag_set("alerted_patrol");
 
@@ -236,42 +236,42 @@ function check_throw_grenade_during_patrol() {
   }
 }
 
-function check_overlook_patrol(var0) {
-  wait_flag_or_ai_death("overlook_patrol_reached_end", var0);
-  var0 = scripts\engine\utility::array_removedead_or_dying(var0);
+function check_overlook_patrol(var_0) {
+  wait_flag_or_ai_death("overlook_patrol_reached_end", var_0);
+  var_0 = scripts\engine\utility::array_removedead_or_dying(var_0);
   thread check_kill_overlook(level);
-  scripts\engine\sp\utility::waittill_dead_or_dying(var0);
+  scripts\engine\sp\utility::waittill_dead_or_dying(var_0);
   level notify("stop_check_player_visibility_to_patrol");
   level thread scripts\sp\maps\proxywar\proxywar_vo::vo_fo_overlook_killed_patrol();
   scripts\engine\utility::flag_set("killed_overlook_patrol");
 }
 
-function wait_flag_or_ai_death(var0, var1) {
-  foreach(var3 in var1) {
-    var3 endon("death");
+function wait_flag_or_ai_death(var_0, var_1) {
+  foreach(var_3 in var_1) {
+    var_3 endon("death");
   }
 
-  scripts\engine\utility::flag_wait(var0);
+  scripts\engine\utility::flag_wait(var_0);
 }
 
-function check_kill_overlook(var0) {
+function check_kill_overlook(var_0) {
   level notify("start_check_kill_overlook");
 
   if(!scripts\engine\utility::flag("overlook_patrol_noise_made")) {
-    if(var0.size > 1) {
-      level thread scripts\sp\maps\proxywar\proxywar_vo::vo_fo_overlook_kill_patrol(var0);
+    if(var_0.size > 1) {
+      level thread scripts\sp\maps\proxywar\proxywar_vo::vo_fo_overlook_kill_patrol(var_0);
     } else {
       level thread scripts\sp\maps\proxywar\proxywar_vo::vo_fo_overlook_player_kill_patrol();
     }
 
-    var1 = gettime();
-    var2 = 2;
+    var_1 = gettime();
+    var_2 = 2;
 
     if(scripts\engine\utility::flag("alerted_patrol")) {
-      var2 = 3.5;
+      var_2 = 3.5;
     }
 
-    while(!scripts\engine\utility::time_has_passed(var1, var2) && isalive(level.overlookpatrol1) && isalive(level.overlookpatrol2)) {
+    while(!scripts\engine\utility::time_has_passed(var_1, var_2) && isalive(level.overlookpatrol1) && isalive(level.overlookpatrol2)) {
       waitframe();
     }
   }
@@ -285,26 +285,26 @@ function check_kill_overlook(var0) {
   shoot_patrol_guy(level.overlookpatrol2);
 }
 
-function shoot_patrol_guy(var0) {
-  var1 = 0;
+function shoot_patrol_guy(var_0) {
+  var_1 = 0;
 
-  if(isalive(var0)) {
-    foreach(var3 in level.alpha_and_bravo_team) {
-      var4 = scripts\engine\trace::ray_trace(var3 getEye(), var0 getEye(), [var3, var0]);
+  if(isalive(var_0)) {
+    foreach(var_3 in level.alpha_and_bravo_team) {
+      var_4 = scripts\engine\trace::ray_trace(var_3 getEye(), var_0 getEye(), [var_3, var_0]);
 
-      if(var4["hittype"] == "hittype_none") {
-        var3 scripts\sp\maps\proxywar\proxywar_util::shoot_and_kill(var0);
-        var1 = 1;
+      if(var_4["hittype"] == "hittype_none") {
+        var_3 scripts\sp\maps\proxywar\proxywar_util::shoot_and_kill(var_0);
+        var_1 = 1;
         break;
       }
     }
 
-    if(!var1) {
-      foreach(var3 in level.alpha_and_bravo_team) {
-        var4 = scripts\engine\trace::ray_trace(var3 getEye(), var0 getEye(), [var3, var0]);
+    if(!var_1) {
+      foreach(var_3 in level.alpha_and_bravo_team) {
+        var_4 = scripts\engine\trace::ray_trace(var_3 getEye(), var_0 getEye(), [var_3, var_0]);
 
-        if(!(isDefined(var4["entity"]) && isPlayer(var4["entity"]))) {
-          var3 scripts\sp\maps\proxywar\proxywar_util::shoot_and_kill(var0);
+        if(!(isDefined(var_4["entity"]) && isPlayer(var_4["entity"]))) {
+          var_3 scripts\sp\maps\proxywar\proxywar_util::shoot_and_kill(var_0);
           break;
         }
       }
@@ -327,7 +327,7 @@ function forest_trees_ally_alpha() {
   waitframe();
   level.forestmoveref notify("end_forest_idle_a");
 
-  foreach(var1 in level.alpha_team) {
+  foreach(var_1 in level.alpha_team) {
     thread forest_trees_alpha_to_ridge();
   }
 }
@@ -373,7 +373,7 @@ function rus_overlook_patrol_spawnfunc() {
 }
 
 function check_forest_walk_anim_speed() {
-  var0 = scripts\engine\utility::getStruct("overlook_ridge_target", "targetname");
+  var_0 = scripts\engine\utility::getStruct("overlook_ridge_target", "targetname");
   thread scale_anim_on_player_speed(level.alpha_team, "forest_move_enter");
   level waittill("start_forest_move_a");
   level notify("end_anim_scale");
@@ -382,36 +382,36 @@ function check_forest_walk_anim_speed() {
   thread scale_anim_on_player_speed(level.alpha_team, "forest_move_b");
 }
 
-function scale_anim_on_player_speed(var0, var1) {
+function scale_anim_on_player_speed(var_0, var_1) {
   level endon("end_anim_scale");
   waitframe();
-  var2 = 1;
+  var_2 = 1;
 
   for(;;) {
-    var3 = distance(level.player.origin, var1.origin) - distance(level.alpha1.origin, var1.origin);
+    var_3 = distance(level.player.origin, var_1.origin) - distance(level.alpha1.origin, var_1.origin);
 
-    if(var3 > 300) {
-      var2 -= 0.01;
+    if(var_3 > 300) {
+      var_2 -= 0.01;
 
-      if(var2 < 0.5) {
-        var2 = 0.5;
+      if(var_2 < 0.5) {
+        var_2 = 0.5;
       }
-    } else if(var3 < 50) {
-      var2 += 0.01;
+    } else if(var_3 < 50) {
+      var_2 += 0.01;
 
-      if(var2 > 1.2) {
-        var2 = 1.2;
+      if(var_2 > 1.2) {
+        var_2 = 1.2;
       }
-    } else if(var2 != 1) {
-      if(var2 > 1) {
-        var2 -= 0.01;
+    } else if(var_2 != 1) {
+      if(var_2 > 1) {
+        var_2 -= 0.01;
       } else {
-        var2 += 0.01;
+        var_2 += 0.01;
       }
     }
 
-    foreach(var5 in self) {
-      var5 setanimrate(var5 scripts\engine\utility::getanim(var0), var2);
+    foreach(var_5 in self) {
+      var_5 setanimrate(var_5 scripts\engine\utility::getanim(var_0), var_2);
     }
 
     waitframe();
@@ -446,13 +446,13 @@ function forest_overlook_main() {
   }
 
   thread test_go_hot();
-  var0 = 1;
+  var_0 = 1;
 
-  while(var0) {
+  while(var_0) {
     if(scripts\engine\utility::flag("overlook_went_hot")) {
-      var0 = 0;
+      var_0 = 0;
     } else if(scripts\engine\utility::flag("done_overlook_radio_callin")) {
-      var0 = 0;
+      var_0 = 0;
     }
 
     waitframe();
@@ -522,17 +522,17 @@ function overlook_group_spawn_func() {
     }
   }
 
-  var0 = 1;
+  var_0 = 1;
 
-  while(var0) {
-    var1 = scripts\engine\utility::waittill_any_return("damage", "bulletwhizby");
+  while(var_0) {
+    var_1 = scripts\engine\utility::waittill_any_return("damage", "bulletwhizby");
 
-    if(isDefined(var1) && var1 == "bulletwhizby") {
+    if(isDefined(var_1) && var_1 == "bulletwhizby") {
       if(level.player getcurrentweapon().basename != "iw8_spotter_scope") {
-        var0 = 0;
+        var_0 = 0;
       }
     } else {
-      var0 = 0;
+      var_0 = 0;
     }
 
     waitframe();
@@ -553,14 +553,14 @@ function overlook_group_spawn_func() {
 
 function setup_overlook_scene() {
   setsaveddvar("LKOLRONRNQ", 3000);
-  var0 = getEnt("watchtower_searchlight_source", "targetname");
-  var1 = scripts\engine\utility::spawn_tag_origin(var0.origin, (0, 0, 0));
-  var0 linkTo(var1);
-  var2 = scripts\engine\utility::spawn_tag_origin();
-  var2 linkTo(var1, "tag_origin", (5, 0, 3), (0, 0, 0));
-  var1.searchlightmodel = var0;
-  var1.tagoffset = var2;
-  playFXOnTag(scripts\engine\utility::getfx("vfx_proxywar_searchlight"), var2, "tag_origin");
+  var_0 = getEnt("watchtower_searchlight_source", "targetname");
+  var_1 = scripts\engine\utility::spawn_tag_origin(var_0.origin, (0, 0, 0));
+  var_0 linkTo(var_1);
+  var_2 = scripts\engine\utility::spawn_tag_origin();
+  var_2 linkTo(var_1, "tag_origin", (5, 0, 3), (0, 0, 0));
+  var_1.searchlightmodel = var_0;
+  var_1.tagoffset = var_2;
+  playFXOnTag(scripts\engine\utility::getfx("vfx_proxywar_searchlight"), var_2, "tag_origin");
   thread searchlight_sweep();
   thread wait_searchlight_destroyed();
   level.overlookenemies = scripts\engine\sp\utility::array_spawn_targetname("overlook_group", 1);
@@ -576,14 +576,14 @@ function overlook_truck_behavior() {
   level.overlooktruck.script_noteworthy = "overlook_truck";
   level.overlooktruck.headlights = getEntArray("truck_b_head_lights", "targetname");
 
-  foreach(var1 in level.overlooktruck.headlights) {
-    var1 linkTo(level.overlooktruck);
+  foreach(var_1 in level.overlooktruck.headlights) {
+    var_1 linkTo(level.overlooktruck);
   }
 
   level.overlooktruck.taillights = getEntArray("truck_b_tail_lights", "targetname");
 
-  foreach(var1 in level.overlooktruck.taillights) {
-    var1 linkTo(level.overlooktruck);
+  foreach(var_1 in level.overlooktruck.taillights) {
+    var_1 linkTo(level.overlooktruck);
   }
 
   thread scripts\sp\maps\proxywar\proxywar_lighting::lights_on("truck_b_head_lights");
@@ -620,31 +620,31 @@ function clear_all_vehicle_lights() {
 }
 
 function overlook_suv_behavior() {
-  var0 = getEnt("front_gate_guard_left", "script_noteworthy");
-  var0.animname = "enemy1";
-  var1 = getEnt("front_gate_guard_right", "script_noteworthy");
-  var1.animname = "enemy2";
-  var2 = [var0, var1];
-  level.enemyactionsref thread scripts\common\anim::anim_loop(var2, "idle_a", "end_idle_a");
+  var_0 = getEnt("front_gate_guard_left", "script_noteworthy");
+  var_0.animname = "enemy1";
+  var_1 = getEnt("front_gate_guard_right", "script_noteworthy");
+  var_1.animname = "enemy2";
+  var_2 = [var_0, var_1];
+  level.enemyactionsref thread scripts\common\anim::anim_loop(var_2, "idle_a", "end_idle_a");
   thread check_front_guards_go_hot(level);
   scripts\engine\utility::flag_wait("start_suv");
   scripts\engine\utility::flag_wait("truck_moved_on");
-  var3 = scripts\sp\door::get_interactive_door("breach_door");
-  var3 hide();
+  var_3 = scripts\sp\door::get_interactive_door("breach_door");
+  var_3 hide();
   level.overlooksuv = scripts\engine\sp\utility::spawn_anim_model("suv");
   level.overlooksuv.script_noteworthy = "overlook_suv";
   level.overlooksuv.enttargetjoint = "tag_body";
   level.enemyactionsref thread scripts\common\anim::anim_first_frame_solo(level.overlooksuv, "suv_enter_compound");
   level.overlooksuv.headlights = getEntArray("suv_c_head_lights", "targetname");
 
-  foreach(var5 in level.overlooksuv.headlights) {
-    var5 linkTo(level.overlooksuv);
+  foreach(var_5 in level.overlooksuv.headlights) {
+    var_5 linkTo(level.overlooksuv);
   }
 
   level.overlooksuv.taillights = getEntArray("suv_c_tail_lights", "targetname");
 
-  foreach(var5 in level.overlooksuv.taillights) {
-    var5 linkTo(level.overlooksuv);
+  foreach(var_5 in level.overlooksuv.taillights) {
+    var_5 linkTo(level.overlooksuv);
   }
 
   thread scripts\sp\maps\proxywar\proxywar_lighting::lights_on("suv_c_head_lights");
@@ -653,14 +653,14 @@ function overlook_suv_behavior() {
   level.suvdriver.animname = "enemy3";
   level.suvpassenger = scripts\engine\sp\utility::spawn_script_noteworthy("suv_passenger", 1);
   level.suvpassenger.animname = "enemy4";
-  var9 = scripts\engine\sp\utility::spawn_anim_model("fake_door");
+  var_9 = scripts\engine\sp\utility::spawn_anim_model("fake_door");
   level.enemyactionsref thread scripts\common\anim::anim_first_frame_solo(level.overlooksuv.fakebreachdoor, "suv_enter_compound");
   level.enemyactionsref notify("end_idle_a");
-  thread suv_enter_compound(level, var2, var9);
+  thread suv_enter_compound(level, var_2, var_9);
   level.overlooksuv playSound("scn_proxy_overwatch_suv_drivein");
-  var10 = 1;
+  var_10 = 1;
 
-  while(!scripts\engine\utility::flag("suv_patrol_complete") && var10) {
+  while(!scripts\engine\utility::flag("suv_patrol_complete") && var_10) {
     if(scripts\engine\utility::flag("overlook_went_hot")) {
       scripts\engine\utility::flag_wait("suv_patrol_started");
       level.suvdriver stopanimScripted();
@@ -672,38 +672,38 @@ function overlook_suv_behavior() {
       level.suvpassenger scripts\common\utility::clear_demeanor_override();
       level.suvpassenger scripts\common\utility::clear_movement_speed();
 
-      if(isDefined(var9)) {
-        var9 delete();
-        var3 show();
+      if(isDefined(var_9)) {
+        var_9 delete();
+        var_3 show();
       }
 
-      var10 = 0;
+      var_10 = 0;
     }
 
     waitframe();
   }
 }
 
-function check_front_guards_go_hot(var0) {
+function check_front_guards_go_hot(var_0) {
   level endon("phosphorus_done");
   scripts\engine\utility::flag_wait("overlook_went_hot");
   level.enemyactionsref notify("end_idle_a");
 
-  foreach(var2 in var0) {
-    var2 stopanimScripted();
-    var2.ignoreall = 0;
-    var2 scripts\common\utility::clear_demeanor_override();
-    var2 scripts\common\utility::clear_movement_speed();
+  foreach(var_2 in var_0) {
+    var_2 stopanimScripted();
+    var_2.ignoreall = 0;
+    var_2 scripts\common\utility::clear_demeanor_override();
+    var_2 scripts\common\utility::clear_movement_speed();
   }
 }
 
-function suv_enter_compound(var0, var1, var2) {
+function suv_enter_compound(var_0, var_1, var_2) {
   level endon("overlook_went_hot");
-  var3 = [level.suvdriver, level.suvpassenger];
+  var_3 = [level.suvdriver, level.suvpassenger];
   level.enemyactionsref thread scripts\common\anim::anim_single_solo(level.overlooksuv, "suv_enter_compound");
-  level.enemyactionsref thread scripts\common\anim::anim_single(var3, "suv_enter_compound");
-  var0 thread scripts\sp\maps\proxywar\proxywar_util::play_group_single_anim_into_idle_anim(level.enemyactionsref, "suv_enter_compound", "idle_b", "end_idle_b");
-  level.enemyactionsref scripts\common\anim::anim_single_solo(var1, "suv_enter_compound");
+  level.enemyactionsref thread scripts\common\anim::anim_single(var_3, "suv_enter_compound");
+  var_0 thread scripts\sp\maps\proxywar\proxywar_util::play_group_single_anim_into_idle_anim(level.enemyactionsref, "suv_enter_compound", "idle_b", "end_idle_b");
+  level.enemyactionsref scripts\common\anim::anim_single_solo(var_1, "suv_enter_compound");
 
   if(!scripts\engine\utility::flag("done_suv_patrol_spot")) {
     scripts\engine\utility::flag_set("done_suv_patrol_spot");
@@ -722,17 +722,17 @@ function suv_enter_compound(var0, var1, var2) {
     level.suvpassenger delete();
   }
 
-  var1 delete();
-  var2 show();
+  var_1 delete();
+  var_2 show();
   scripts\engine\utility::flag_set("suv_patrol_complete");
 }
 
 function check_tower_guard() {
   level endon("phosphorus_done");
   level endon("searchlight_destroyed");
-  var0 = getEnt("overlook_tower_guard", "script_noteworthy");
+  var_0 = getEnt("overlook_tower_guard", "script_noteworthy");
 
-  while(isalive(var0)) {
+  while(isalive(var_0)) {
     wait 0.2;
   }
 
@@ -750,15 +750,15 @@ function spotter_scope_check() {
 
     if(scripts\engine\utility::flag("equipped_spotter_scope")) {
       if(!scripts\engine\utility::flag("done_aim_look")) {
-        var0 = "spotterscope_aim";
+        var_0 = "spotterscope_aim";
 
         if(level.player usinggamepad() && level.player getlocalplayerprofiledata("toggleADSEnabledGamepad")) {
-          var0 = "spotterscope_aim_toggle";
+          var_0 = "spotterscope_aim_toggle";
         } else if(!level.player usinggamepad() && level.player getlocalplayerprofiledata("toggleADSEnabledKeyboard")) {
-          var0 = "spotterscope_aim_toggle";
+          var_0 = "spotterscope_aim_toggle";
         }
 
-        scripts\engine\sp\utility::display_hint_forced(var0);
+        scripts\engine\sp\utility::display_hint_forced(var_0);
 
         while(!scripts\engine\utility::flag("done_aim_look") && scripts\engine\utility::flag("equipped_spotter_scope")) {
           waitframe();
@@ -802,13 +802,13 @@ function check_callin_strike() {
     level.player scripts\common\utility::allow_fire(1, "spotter");
   }
 
-  var0 = level.player getcurrentweapon();
+  var_0 = level.player getcurrentweapon();
 
-  if(!nullweapon(var0) && var0.basename == "iw8_spotter_scope") {
-    var1 = level.player.lastusedweapon getaltweapon();
+  if(!nullweapon(var_0) && var_0.basename == "iw8_spotter_scope") {
+    var_1 = level.player.lastusedweapon getaltweapon();
 
-    if(level.player.lastusedweaponisalt && !nullweapon(var1)) {
-      level.player switchtoweapon(var1);
+    if(level.player.lastusedweaponisalt && !nullweapon(var_1)) {
+      level.player switchtoweapon(var_1);
     } else {
       level.player switchtoweapon(level.player.lastusedweapon);
     }
@@ -820,9 +820,9 @@ function check_callin_strike() {
 
 function spotterscope_check_lookat() {
   level endon("overlook_went_hot");
-  var0 = undefined;
-  var1 = ["spotterscope_look_2", "spotterscope_look_3", "spotterscope_look_4"];
-  var2 = cos(2);
+  var_0 = undefined;
+  var_1 = ["spotterscope_look_2", "spotterscope_look_3", "spotterscope_look_4"];
+  var_2 = cos(2);
   level.spotterlookatents = [level.overlooktruck];
   level.spotterlookatents = scripts\engine\utility::array_combine(level.spotterlookatents, level.overlookenemies);
   level.timeinads = 0;
@@ -832,14 +832,14 @@ function spotterscope_check_lookat() {
 
 function check_time_in_ads() {
   level endon("done_facilty_scan");
-  var0 = gettime();
+  var_0 = gettime();
 
   for(;;) {
     if(level.player scripts\engine\sp\utility::isads() && scripts\engine\utility::flag("equipped_spotter_scope")) {
-      level.timeinads = (gettime() - var0) / 1000;
+      level.timeinads = (gettime() - var_0) / 1000;
     } else {
       level.timeinads = 0;
-      var0 = gettime();
+      var_0 = gettime();
     }
 
     waitframe();
@@ -848,22 +848,22 @@ function check_time_in_ads() {
 
 function check_spotter_idle_time() {
   level endon("done_facility_scan");
-  var0 = gettime();
+  var_0 = gettime();
   scripts\engine\utility::flag_wait("done_aim_look");
 
   for(;;) {
     if(scripts\engine\utility::flag("spotter_actively_tracking")) {
       level.idlespottertime = 0;
-      var0 = gettime();
+      var_0 = gettime();
     } else {
-      level.idlespottertime = (gettime() - var0) / 1000;
+      level.idlespottertime = (gettime() - var_0) / 1000;
     }
 
     waitframe();
   }
 }
 
-function railyard_guards_comment(var0) {
+function railyard_guards_comment(var_0) {
   level.spotterlookatents = scripts\engine\utility::array_remove(level.spotterlookatents, getEnt("overlook_railyard_enemy1", "script_noteworthy"));
   level.spotterlookatents = scripts\engine\utility::array_remove(level.spotterlookatents, getEnt("overlook_railyard_enemy2", "script_noteworthy"));
   level.spotterlookatents = scripts\engine\utility::array_remove(level.spotterlookatents, getEnt("overlook_railyard_enemy3", "script_noteworthy"));
@@ -871,33 +871,33 @@ function railyard_guards_comment(var0) {
   clean_up_post_spotter_comment();
 }
 
-function checkpoint_comment(var0) {
-  if(var0.script_noteworthy == "overlook_tower_guard") {
+function checkpoint_comment(var_0) {
+  if(var_0.script_noteworthy == "overlook_tower_guard") {
     level.spotterlookatents = scripts\engine\utility::array_remove(level.spotterlookatents, getEnt("overlook_tower_guard", "script_noteworthy"));
   }
 
   level.spotterlookatents = scripts\engine\utility::array_remove(level.spotterlookatents, getEnt("front_gate_guard_left", "script_noteworthy"));
   level.spotterlookatents = scripts\engine\utility::array_remove(level.spotterlookatents, getEnt("front_gate_guard_right", "script_noteworthy"));
   level.spotterlookatents = scripts\engine\utility::array_remove(level.spotterlookatents, getEnt("overlook_truck", "script_noteworthy"));
-  scripts\sp\maps\proxywar\proxywar_vo::vo_fo_checkpoint(var0.script_noteworthy);
+  scripts\sp\maps\proxywar\proxywar_vo::vo_fo_checkpoint(var_0.script_noteworthy);
   clean_up_post_spotter_comment();
 }
 
-function tower_comment(var0) {
+function tower_comment(var_0) {
   level.spotterlookatents = scripts\engine\utility::array_remove(level.spotterlookatents, getEnt("overlook_tower_guard", "script_noteworthy"));
   scripts\sp\maps\proxywar\proxywar_vo::vo_fo_tower_only();
   clean_up_post_spotter_comment();
 }
 
-function overlook_suv_comment(var0) {
+function overlook_suv_comment(var_0) {
   level.spotterlookatents = scripts\engine\utility::array_remove(level.spotterlookatents, getEnt("suv_driver", "script_noteworthy"));
   level.spotterlookatents = scripts\engine\utility::array_remove(level.spotterlookatents, getEnt("suv_passenger", "script_noteworthy"));
   scripts\sp\maps\proxywar\proxywar_vo::vo_fo_suv_moving();
   clean_up_post_spotter_comment();
 }
 
-function suv_patrol_comment(var0) {
-  level.spotterlookatents = scripts\engine\utility::array_remove(level.spotterlookatents, var0);
+function suv_patrol_comment(var_0) {
+  level.spotterlookatents = scripts\engine\utility::array_remove(level.spotterlookatents, var_0);
   scripts\sp\maps\proxywar\proxywar_vo::vo_fo_suv_patrol();
   clean_up_post_spotter_comment();
 }
@@ -942,8 +942,8 @@ function test_go_hot() {
 
 function check_overlook_grenades() {
   level endon("overlook_went_hot");
-  level.player waittill("grenade_fire", var0);
-  var0 waittill("explode");
+  level.player waittill("grenade_fire", var_0);
+  var_0 waittill("explode");
   level notify("kill_all_anim_instructions");
   scripts\engine\utility::flag_set("overlook_went_hot");
 
@@ -957,9 +957,9 @@ function check_loud_weapon_fire() {
   level endon("overlook_went_hot");
 
   for(;;) {
-    level.player waittill("weapon_fired", var0);
+    level.player waittill("weapon_fired", var_0);
 
-    if(!(var0.basename == "iw8_ar_mike4" || var0.basename == "iw8_pi_golf21" || scripts\engine\utility::flag("equipped_spotter_scope"))) {
+    if(!(var_0.basename == "iw8_ar_mike4" || var_0.basename == "iw8_pi_golf21" || scripts\engine\utility::flag("equipped_spotter_scope"))) {
       level notify("kill_all_anim_instructions");
       scripts\engine\utility::flag_set("overlook_went_hot");
 
@@ -973,8 +973,8 @@ function check_loud_weapon_fire() {
 function searchlight_sweep() {
   self endon("end_sweep");
   self.aimtarget = scripts\engine\utility::spawn_script_origin();
-  var0 = [scripts\engine\utility::getStruct("searchlight_sweep_1", "targetname"), scripts\engine\utility::getStruct("searchlight_sweep_2", "targetname"), scripts\engine\utility::getStruct("searchlight_sweep_3", "targetname")];
-  self.aimtarget.origin = var0[0].origin;
+  var_0 = [scripts\engine\utility::getStruct("searchlight_sweep_1", "targetname"), scripts\engine\utility::getStruct("searchlight_sweep_2", "targetname"), scripts\engine\utility::getStruct("searchlight_sweep_3", "targetname")];
+  self.aimtarget.origin = var_0[0].origin;
   GscBinSkip4(0x35);
 }
 
@@ -1035,8 +1035,8 @@ function forest_phosphorus_freeze_offscreen() {
   wait 10;
 
   if(!scripts\sp\maps\proxywar\proxywar_util::within_player_fov(level.alpha1.origin) && !scripts\sp\maps\proxywar\proxywar_util::within_player_fov(level.alpha2.origin)) {
-    foreach(var1 in level.alpha_team) {
-      var1 setanimrate(var1 scripts\engine\utility::getanim("overlook_door_bust"), 0);
+    foreach(var_1 in level.alpha_team) {
+      var_1 setanimrate(var_1 scripts\engine\utility::getanim("overlook_door_bust"), 0);
     }
 
     level.overlookdoor setanimrate(level.overlookdoor scripts\engine\utility::getanim("overlook_door_bust"), 0);
@@ -1045,8 +1045,8 @@ function forest_phosphorus_freeze_offscreen() {
       waitframe();
     }
 
-    foreach(var1 in level.alpha_team) {
-      var1 setanimrate(var1 scripts\engine\utility::getanim("overlook_door_bust"), 1);
+    foreach(var_1 in level.alpha_team) {
+      var_1 setanimrate(var_1 scripts\engine\utility::getanim("overlook_door_bust"), 1);
     }
 
     level.overlookdoor setanimrate(level.overlookdoor scripts\engine\utility::getanim("overlook_door_bust"), 1);
@@ -1070,9 +1070,9 @@ function forest_phosphorus_alpha() {
 
   if(!scripts\engine\utility::flag("trigger_drop_down")) {
     if(self.script_noteworthy == "alpha1") {
-      var0 = ["dx_vom_h71_forest_phosphorus_house_50", "dx_vom_h71_forest_phosphorus_house_60", "dx_vom_h71_forest_phosphorus_house_70"];
+      var_0 = ["dx_vom_h71_forest_phosphorus_house_50", "dx_vom_h71_forest_phosphorus_house_60", "dx_vom_h71_forest_phosphorus_house_70"];
       thread show_objective_tutorial();
-      level.alpha1 thread scripts\sp\maps\proxywar\proxywar_vo::nagtill_delayed(12, "trigger_drop_down", var0, 15);
+      level.alpha1 thread scripts\sp\maps\proxywar\proxywar_vo::nagtill_delayed(12, "trigger_drop_down", var_0, 15);
     }
 
     level.ap_overlook_reveal thread scripts\common\anim::anim_loop_solo(self, "overlook_door_bust_idle", "stop_loop_" + self.script_noteworthy);
@@ -1090,8 +1090,8 @@ function forest_phosphorus_alpha() {
 
   if(!scripts\engine\utility::flag("move_to_patrol")) {
     if(self.script_noteworthy == "alpha1") {
-      var0 = ["dx_vom_h71_forest_phosphorus_contact_20", "dx_vom_h71_forest_phosphorus_contact_30", "dx_vom_h71_forest_phosphorus_contact_40"];
-      level.alpha1 thread scripts\sp\maps\proxywar\proxywar_vo::nagtill_delayed(12, "move_to_patrol", var0, 15);
+      var_0 = ["dx_vom_h71_forest_phosphorus_contact_20", "dx_vom_h71_forest_phosphorus_contact_30", "dx_vom_h71_forest_phosphorus_contact_40"];
+      level.alpha1 thread scripts\sp\maps\proxywar\proxywar_vo::nagtill_delayed(12, "move_to_patrol", var_0, 15);
     }
 
     level.ap_overlook_reveal thread scripts\common\anim::anim_loop_solo(self, "overlook_drop_down_idle", "stop_loop_" + self.script_noteworthy);
@@ -1121,31 +1121,31 @@ function forest_phosphorus_bravo() {
   scripts\sp\maps\proxywar\proxywar_util::go_to_targetname("abandoned_house_" + self.script_noteworthy);
 }
 
-function jet_fly(var0) {
-  var0 scripts\common\anim::anim_single_solo(self, "fly");
+function jet_fly(var_0) {
+  var_0 scripts\common\anim::anim_single_solo(self, "fly");
   self delete();
 }
 
 function jets_drop_phosphorus() {
-  var0 = scripts\engine\utility::getStruct("jet_fly_ref", "targetname");
-  var1 = getEnt("wp_jet_1", "targetname");
-  var1.animname = "jet1";
-  var1 scripts\common\anim::setanimtree();
-  var2 = getEnt("wp_jet_2", "targetname");
-  var2.animname = "jet2";
-  var2 scripts\common\anim::setanimtree();
+  var_0 = scripts\engine\utility::getStruct("jet_fly_ref", "targetname");
+  var_1 = getEnt("wp_jet_1", "targetname");
+  var_1.animname = "jet1";
+  var_1 scripts\common\anim::setanimtree();
+  var_2 = getEnt("wp_jet_2", "targetname");
+  var_2.animname = "jet2";
+  var_2 scripts\common\anim::setanimtree();
   level.activewpzones = [];
   level.activewpflares = [];
   level.activewpfires = [];
   thread guys_react_to_jets();
-  var1 playSound("jet_flyover_a");
-  var2 scripts\engine\utility::delaycall(2.5, &playsound, "jet_flyover_b");
+  var_1 playSound("jet_flyover_a");
+  var_2 scripts\engine\utility::delaycall(2.5, &playsound, "jet_flyover_b");
   wait 2;
   wait 0.2;
   wait 1;
   thread enemies_look_at_jets();
-  thread jet_fly(var1);
-  thread jet_fly(var2);
+  thread jet_fly(var_1);
+  thread jet_fly(var_2);
   scripts\engine\utility::exploder("wp_launch_02");
   thread burn_enemies();
   thread wp_explosions();
@@ -1163,24 +1163,24 @@ function jets_drop_phosphorus() {
     level.overlooksuv delete();
   }
 
-  var3 = getEntArray("burning_truck", "targetname");
+  var_3 = getEntArray("burning_truck", "targetname");
 
-  foreach(var5 in var3) {
-    var5 show();
+  foreach(var_5 in var_3) {
+    var_5 show();
   }
 
   if(isDefined(level.overlookvehicle)) {
     level.overlookvehicle delete();
   }
 
-  var7 = getEntArray("burning_truck_pre", "targetname");
+  var_7 = getEntArray("burning_truck_pre", "targetname");
 
-  foreach(var5 in var7) {
-    var5 hide();
+  foreach(var_5 in var_7) {
+    var_5 hide();
   }
 
-  var10 = getEnt("burning_truck_col", "targetname");
-  var10 solid();
+  var_10 = getEnt("burning_truck_col", "targetname");
+  var_10 solid();
   level notify("searchlight_destroyed");
   thread scripts\sp\maps\proxywar\proxywar_lighting::lights_off("proxywar_lights_overlook");
   thread switch_light_fixtures();
@@ -1259,9 +1259,9 @@ function play_jet_look() {
 function enemies_look_at_jets() {
   level.overlookenemies = scripts\engine\utility::array_removedead_or_dying(level.overlookenemies);
 
-  foreach(var1 in level.overlookenemies) {
-    if(isalive(var1)) {
-      switch (var1.script_noteworthy) {
+  foreach(var_1 in level.overlookenemies) {
+    if(isalive(var_1)) {
+      switch (var_1.script_noteworthy) {
         case "front_gate_guard_right":
         case "front_gate_guard_left":
         case "overlook_tower_guard":
@@ -1275,34 +1275,34 @@ function enemies_look_at_jets() {
 function burn_enemies() {
   level.overlookenemies = scripts\engine\utility::array_removedead_or_dying(level.overlookenemies);
 
-  foreach(var1 in level.overlookenemies) {
-    if(isalive(var1)) {
-      switch (var1.script_noteworthy) {
+  foreach(var_1 in level.overlookenemies) {
+    if(isalive(var_1)) {
+      switch (var_1.script_noteworthy) {
         case "overlook_railyard_enemy1":
-          var1.burndelaytime = 7.5;
+          var_1.burndelaytime = 7.5;
           thread wp_death_quick();
           break;
         case "overlook_railyard_enemy2":
-          var1.burndelaytime = 7.1;
+          var_1.burndelaytime = 7.1;
           thread wp_death_quick();
           break;
         case "overlook_railyard_enemy3":
-          var1.burndelaytime = 7;
+          var_1.burndelaytime = 7;
           thread wp_death_quick();
           break;
         case "overlook_tower_guard":
           thread phosphorus_aim();
-          var1 scripts\engine\utility::delaycall(6, &stopanimscripted);
-          var1 scripts\engine\utility::delaythread(6, &scripts\sp\utility::do_damage, var1.health + 9999, var1.origin, level.player, level.player, "MOD_RIFLE_BULLET", "iw8_ar_akilo47");
+          var_1 scripts\engine\utility::delaycall(6, &stopanimscripted);
+          var_1 scripts\engine\utility::delaythread(6, &scripts\sp\utility::do_damage, var_1.health + 9999, var_1.origin, level.player, level.player, "MOD_RIFLE_BULLET", "iw8_ar_akilo47");
           break;
         case "front_gate_guard_left":
-          thread phosphorus_run_react(var1, "left_guard_run");
-          var1.burndelaytime = 6.2;
+          thread phosphorus_run_react(var_1, "left_guard_run");
+          var_1.burndelaytime = 6.2;
           thread wp_death();
           break;
         case "front_gate_guard_right":
-          thread phosphorus_run_react(var1, "right_guard_run");
-          var1.burndelaytime = 6.6;
+          thread phosphorus_run_react(var_1, "right_guard_run");
+          var_1.burndelaytime = 6.6;
           thread wp_death();
           break;
       }
@@ -1328,12 +1328,12 @@ function burn_enemies() {
 }
 
 function look_at_jets() {
-  var0 = scripts\engine\utility::spawn_script_origin(self.origin + (0, 0, 300), (0, 0, 0));
-  self setlookatentity(var0, 0);
+  var_0 = scripts\engine\utility::spawn_script_origin(self.origin + (0, 0, 300), (0, 0, 0));
+  self setlookatentity(var_0, 0);
   wait 3;
-  var0.origin += (60, 0, 0);
+  var_0.origin += (60, 0, 0);
   scripts\engine\utility::flag_wait("phosphorus_done");
-  var0 delete();
+  var_0 delete();
 }
 
 function phosphorus_aim() {
@@ -1343,11 +1343,11 @@ function phosphorus_aim() {
   scripts\sp\utility::aim_at(self.origin + (60, 0, 300));
 }
 
-function phosphorus_run_react(var0, var1) {
+function phosphorus_run_react(var_0, var_1) {
   self endon("death");
   self.dontevershoot = 1;
-  wait var1;
-  thread scripts\sp\maps\proxywar\proxywar_util::go_to_targetname(var0);
+  wait var_1;
+  thread scripts\sp\maps\proxywar\proxywar_util::go_to_targetname(var_0);
   scripts\common\utility::demeanor_override("combat");
   self stopanimScripted();
 }
@@ -1356,10 +1356,10 @@ function forest_phosphorus_catchup() {
   thread scripts\sp\maps\proxywar\proxywar_lighting::lights_off("proxywar_lights_overlook");
   thread scripts\sp\maps\proxywar\proxywar_lighting::lights_on("proxywar_lights_overlook_fire");
   thread switch_light_fixtures();
-  var0 = getEnt("wp_jet_1", "targetname");
-  var1 = getEnt("wp_jet_2", "targetname");
-  var0 delete();
-  var1 delete();
+  var_0 = getEnt("wp_jet_1", "targetname");
+  var_1 = getEnt("wp_jet_2", "targetname");
+  var_0 delete();
+  var_1 delete();
 
   if(!scripts\sp\starts::is_after_start("railyard_entrance")) {
     scripts\engine\utility::exploder("towerfire_start");
@@ -1406,11 +1406,11 @@ function wp_death_quick() {
   self kill();
 }
 
-function molotov_burn_sfx(var0) {
-  if(isDefined(var0)) {
-    var1 = 1;
+function molotov_burn_sfx(var_0) {
+  if(isDefined(var_0)) {
+    var_1 = 1;
   } else {
-    var1 = 0.5;
+    var_1 = 0.5;
   }
 
   if(!isDefined(self.burnsfxenabled)) {
@@ -1425,7 +1425,7 @@ function molotov_burn_sfx(var0) {
 
   if(self.burnsfxenabled == 0) {
     self.burnsfxenabled = 1;
-    wait var1;
+    wait var_1;
     wait 0.15;
 
     if(isDefined(self.burnsfx)) {
@@ -1438,14 +1438,14 @@ function molotov_burn_sfx(var0) {
   }
 }
 
-function remove_blackboard_isburning(var0) {
+function remove_blackboard_isburning(var_0) {
   waitframe();
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var0._blackboard.isburning = undefined;
+  var_0._blackboard.isburning = undefined;
 }
 
 function forest_overlook_door() {
@@ -1462,10 +1462,10 @@ function forest_overlook_door() {
 }
 
 function switch_light_fixtures() {
-  var0 = getEntArray("railyard_light_fixture", "targetname");
+  var_0 = getEntArray("railyard_light_fixture", "targetname");
 
-  foreach(var2 in var0) {
-    var2 setModel("lighting_fixtures_security_lamp_01");
+  foreach(var_2 in var_0) {
+    var_2 setModel("lighting_fixtures_security_lamp_01");
   }
 }
 
@@ -1478,8 +1478,8 @@ function forest_patrol_start() {
 
 function forest_patrol_main() {
   level scripts\engine\utility::delaythread(0.1, &scripts\engine\sp\utility::transient_load_array, ["pw_storage_room_interior_tr", "pw_trainyard_front_detail_tr", "pw_shack_interior_tr", "pw_trainyard_main_detail_tr"]);
-  var0 = getEnt("opaque_glass_panel", "targetname");
-  var0 delete();
+  var_0 = getEnt("opaque_glass_panel", "targetname");
+  var_0 delete();
   level thread scripts\sp\maps\proxywar\proxywar_vo::vo_fp_flashlight_nag();
   setsaveddvar("MNSOQLKMT", "2.8 0.0006 1 1");
   scripts\engine\utility::stop_exploder("begin_amb_fx");
@@ -1489,29 +1489,29 @@ function forest_patrol_main() {
   clearallcorpses();
   scripts\engine\utility::array_thread(level.alpha_and_bravo_team, &forest_patrol_ally);
   level.ap_patrol = scripts\engine\utility::getStruct("ap_patrol", "targetname");
-  var1 = scripts\common\vehicle::spawn_vehicle_from_targetname("rus_veh_forest_patrol");
-  var1 scripts\common\vehicle_build::build_light("script_vehicle_iw8_decho_black", "custom_headlight_truck_left", "tag_light_front_left", "vfx/iw8/level/proxywar/vfx_pw_veh_sys_headlight_decho_left", "custom_headlights");
-  var1 scripts\common\vehicle_build::build_light("script_vehicle_iw8_decho_black", "custom_headlight_truck_right", "tag_light_front_right", "vfx/iw8/level/proxywar/vfx_pw_veh_sys_headlight_decho_right", "custom_headlights");
-  var1 scripts\common\vehicle_build::build_light("script_vehicle_iw8_decho_black", "custom_taillight_truck_left", "tag_light_back_left", "vfx/iw8/level/proxywar/vfx_pw_veh_sys_taillight_decho_left", "custom_brakelights");
-  var1 scripts\common\vehicle_build::build_light("script_vehicle_iw8_decho_black", "custom_taillight_truck_right", "tag_light_back_right", "vfx/iw8/level/proxywar/vfx_pw_veh_sys_taillight_decho_right", "custom_brakelights");
-  var1 scripts\common\vehicle::vehicle_lights_on("custom_headlights");
-  var1 scripts\common\vehicle::vehicle_lights_on("custom_brakelights");
-  var1 scripts\engine\sp\utility::assign_animtree("rus_forest_patrol_truck");
-  var1 connectpaths();
-  var2 = scripts\engine\sp\utility::array_spawn_targetname("rus_forest_patrol", 1);
-  scripts\engine\utility::array_thread(var2, &forest_patrol_enemy_approach, var1);
-  level thread scripts\sp\maps\proxywar\proxywar_vo::vo_fp_patrol_incoming(var2);
+  var_1 = scripts\common\vehicle::spawn_vehicle_from_targetname("rus_veh_forest_patrol");
+  var_1 scripts\common\vehicle_build::build_light("script_vehicle_iw8_decho_black", "custom_headlight_truck_left", "tag_light_front_left", "vfx/iw8/level/proxywar/vfx_pw_veh_sys_headlight_decho_left", "custom_headlights");
+  var_1 scripts\common\vehicle_build::build_light("script_vehicle_iw8_decho_black", "custom_headlight_truck_right", "tag_light_front_right", "vfx/iw8/level/proxywar/vfx_pw_veh_sys_headlight_decho_right", "custom_headlights");
+  var_1 scripts\common\vehicle_build::build_light("script_vehicle_iw8_decho_black", "custom_taillight_truck_left", "tag_light_back_left", "vfx/iw8/level/proxywar/vfx_pw_veh_sys_taillight_decho_left", "custom_brakelights");
+  var_1 scripts\common\vehicle_build::build_light("script_vehicle_iw8_decho_black", "custom_taillight_truck_right", "tag_light_back_right", "vfx/iw8/level/proxywar/vfx_pw_veh_sys_taillight_decho_right", "custom_brakelights");
+  var_1 scripts\common\vehicle::vehicle_lights_on("custom_headlights");
+  var_1 scripts\common\vehicle::vehicle_lights_on("custom_brakelights");
+  var_1 scripts\engine\sp\utility::assign_animtree("rus_forest_patrol_truck");
+  var_1 connectpaths();
+  var_2 = scripts\engine\sp\utility::array_spawn_targetname("rus_forest_patrol", 1);
+  scripts\engine\utility::array_thread(var_2, &forest_patrol_enemy_approach, var_1);
+  level thread scripts\sp\maps\proxywar\proxywar_vo::vo_fp_patrol_incoming(var_2);
   level.player setsoundsubmix("sp_npc_body_ragdoll_down", 2);
-  var3 = scripts\engine\sp\utility::array_spawn_targetname("rus_return_pmcs");
+  var_3 = scripts\engine\sp\utility::array_spawn_targetname("rus_return_pmcs");
   thread forest_patrol_player_fire_checker();
-  thread forest_patrol_player_visible_checker(var2);
-  thread forest_patrol_eliminate_speed_runner(scripts\engine\utility::array_combine(var2, var3));
+  thread forest_patrol_player_visible_checker(var_2);
+  thread forest_patrol_eliminate_speed_runner(scripts\engine\utility::array_combine(var_2, var_3));
   level.alpha1 thread scripts\sp\maps\proxywar\proxywar_util::ally_track_and_kill_noteworthy("rus_forest_patrol_2", "eliminate_patrol_1");
   level.alpha2 thread scripts\sp\maps\proxywar\proxywar_util::ally_track_and_kill_noteworthy("rus_forest_patrol_4", "eliminate_patrol_2");
   level.bravo1 thread scripts\sp\maps\proxywar\proxywar_util::ally_track_and_kill_noteworthy("rus_forest_patrol_3", "eliminate_patrol_3");
   level.bravo2 thread scripts\sp\maps\proxywar\proxywar_util::ally_track_and_kill_noteworthy("rus_forest_patrol_1", "eliminate_patrol_4");
-  var1 scripts\engine\utility::delaycall(1, &disconnectpaths);
-  level.ap_patrol thread scripts\common\anim::anim_single_solo(var1, "patrol_arrive");
+  var_1 scripts\engine\utility::delaycall(1, &disconnectpaths);
+  level.ap_patrol thread scripts\common\anim::anim_single_solo(var_1, "patrol_arrive");
   scripts\engine\utility::flag_wait("start_patrol_anim");
   scripts\engine\utility::flag_clear("done_objective_hint");
   scripts\engine\utility::flag_clear("displayed_early_objective_hint");
@@ -1520,18 +1520,18 @@ function forest_patrol_main() {
     scripts\engine\utility::flag_wait_any("player_prompted_for_patrol", "player_fired_at_patrol", "player_too_close_to_patroller", "player_skipping_patrol");
   }
 
-  var4 = scripts\engine\utility::flag("player_fired_at_patrol") || scripts\engine\utility::flag("player_too_close_to_patroller") || scripts\engine\utility::flag("player_skipping_patrol");
-  var5 = "";
+  var_4 = scripts\engine\utility::flag("player_fired_at_patrol") || scripts\engine\utility::flag("player_too_close_to_patroller") || scripts\engine\utility::flag("player_skipping_patrol");
+  var_5 = "";
 
-  if(var4) {
+  if(var_4) {
     level notify("end_flashlight_nag");
 
     if(scripts\engine\utility::flag("player_fired_at_patrol")) {
-      var5 = "fired";
+      var_5 = "fired";
     } else if(scripts\engine\utility::flag("player_too_close_to_patroller")) {
-      var5 = "spotted";
+      var_5 = "spotted";
     } else {
-      var5 = "skipped";
+      var_5 = "skipped";
     }
   }
 
@@ -1541,7 +1541,7 @@ function forest_patrol_main() {
 
   scripts\engine\utility::flag_set("eliminate_patrol_1");
 
-  if(var4) {
+  if(var_4) {
     wait 1;
   } else {
     wait 0.1;
@@ -1549,7 +1549,7 @@ function forest_patrol_main() {
 
   scripts\engine\utility::flag_set("eliminate_patrol_2");
 
-  if(var4) {
+  if(var_4) {
     wait 1.5;
   } else {
     wait 0.3;
@@ -1557,23 +1557,23 @@ function forest_patrol_main() {
 
   scripts\engine\utility::flag_set("eliminate_patrol_3");
 
-  if(var4) {
+  if(var_4) {
     wait 1;
   } else {
     wait 0.1;
   }
 
   scripts\engine\utility::flag_set("eliminate_patrol_4");
-  scripts\engine\sp\utility::waittill_dead_or_dying(var2);
+  scripts\engine\sp\utility::waittill_dead_or_dying(var_2);
 
-  foreach(var7 in var3) {
-    if(isalive(var7)) {
+  foreach(var_7 in var_3) {
+    if(isalive(var_7)) {
       wait randomfloatrange(0.5, 1);
     }
 
-    if(isalive(var7)) {
-      var8 = scripts\engine\utility::random(level.alpha_and_bravo_team);
-      var8 scripts\sp\maps\proxywar\proxywar_util::shoot_and_kill(var7);
+    if(isalive(var_7)) {
+      var_8 = scripts\engine\utility::random(level.alpha_and_bravo_team);
+      var_8 scripts\sp\maps\proxywar\proxywar_util::shoot_and_kill(var_7);
     }
   }
 
@@ -1581,23 +1581,23 @@ function forest_patrol_main() {
   thread scripts\sp\maps\proxywar\proxywar_vo::vo_fp_patrol_eliminated();
   level.player clearsoundsubmix("sp_npc_body_ragdoll_down", 6);
 
-  if(var4 && var5 == "fired") {
+  if(var_4 && var_5 == "fired") {
     thread scripts\sp\maps\proxywar\proxywar_vo::vo_fp_going_hot();
     return;
   }
 }
 
-function forest_patrol_eliminate_speed_runner(var0) {
+function forest_patrol_eliminate_speed_runner(var_0) {
   level endon("stop_checking_skip");
   scripts\engine\utility::flag_wait("player_skipping_patrol");
-  var1 = 0;
+  var_1 = 0;
 
-  while(var1 < 3) {
-    var2 = scripts\engine\sp\utility::get_closest_living(level.player.origin, var0, 100000);
-    var3 = level.player getEye();
-    var4 = vectorNormalize(var2 gettagorigin("tag_flash") - var3) * 100;
-    magicbullet(var2.weapon.basename, var3 + var4, var3, var2);
-    var1++;
+  while(var_1 < 3) {
+    var_2 = scripts\engine\sp\utility::get_closest_living(level.player.origin, var_0, 100000);
+    var_3 = level.player getEye();
+    var_4 = vectorNormalize(var_2 gettagorigin("tag_flash") - var_3) * 100;
+    magicbullet(var_2.weapon.basename, var_3 + var_4, var_3, var_2);
+    var_1++;
     wait randomfloatrange(0.1, 0.3);
   }
 
@@ -1609,10 +1609,10 @@ function forest_patrol_ally() {
   self endon("stop_previous_logic");
   scripts\engine\utility::flag_wait("move_to_patrol");
   scripts\engine\sp\utility::disable_dynamic_run_speed(randomintrange(80, 110));
-  var0 = scripts\engine\utility::getStruct("ap_approach", "targetname");
+  var_0 = scripts\engine\utility::getStruct("ap_approach", "targetname");
 
   if(scripts\engine\utility::array_contains(level.bravo_team, self)) {
-    var0 scripts\sp\anim::anim_reach_solo(self, "patrol_approach");
+    var_0 scripts\sp\anim::anim_reach_solo(self, "patrol_approach");
   } else {
     if(isDefined(level.ap_overlook_reveal)) {
       level.ap_overlook_reveal notify("stop_loop_" + self.script_noteworthy);
@@ -1621,9 +1621,9 @@ function forest_patrol_ally() {
     scripts\engine\utility::flag_wait(self.script_noteworthy + "_ready_for_move_to_patrol");
   }
 
-  var0 scripts\common\anim::anim_single_solo(self, "patrol_approach");
+  var_0 scripts\common\anim::anim_single_solo(self, "patrol_approach");
   scripts\engine\utility::flag_set("start_patrol_anim");
-  var0 thread scripts\common\anim::anim_loop_solo(self, "patrol_approach_idle", "stop_loop_" + self.script_noteworthy);
+  var_0 thread scripts\common\anim::anim_loop_solo(self, "patrol_approach_idle", "stop_loop_" + self.script_noteworthy);
 }
 
 function forest_patrol_enemy_return() {
@@ -1656,7 +1656,7 @@ function forest_patrol_enemy_return() {
   self.health = int(self.health / 2);
 }
 
-function forest_patrol_enemy_approach(var0) {
+function forest_patrol_enemy_approach(var_0) {
   self endon("death");
   self.animname = self.script_noteworthy;
   self.ignoreall = 1;
@@ -1672,22 +1672,22 @@ function forest_patrol_enemy_approach(var0) {
     thread forest_patrol_enemy_approach_flashlight();
     scripts\common\ai::set_gunpose("disable");
     level.ap_patrol thread scripts\sp\maps\proxywar\proxywar_util::anim_single_solo_end_notify("arrived", self, "patrol_arrive");
-    var1 = scripts\engine\utility::waittill_any_ents_return(self, "arrived", level, "player_fired_at_patrol", level, "player_too_close_to_patroller", level, "player_skipping_patrol");
+    var_1 = scripts\engine\utility::waittill_any_ents_return(self, "arrived", level, "player_fired_at_patrol", level, "player_too_close_to_patroller", level, "player_skipping_patrol");
   } else {
     scripts\sp\utility::enable_flashlight();
     level.ap_patrol thread scripts\common\anim::anim_single_solo(self, "patrol_arrive");
     waitframe();
-    var1 = "player_fired_at_patrol";
+    var_1 = "player_fired_at_patrol";
   }
 
-  if(var1 == "arrived") {
+  if(var_1 == "arrived") {
     thread forest_patrol_enemy_light_sweep();
     thread scripts\sp\maps\proxywar\proxywar_util::go_to_targetname("search_" + self.script_noteworthy);
   }
 
   scripts\engine\utility::flag_wait_any("player_fired_at_patrol", "player_too_close_to_patroller", "player_skipping_patrol");
 
-  if(var1 == "arrived" && scripts\engine\utility::flag("player_prompted_for_patrol")) {
+  if(var_1 == "arrived" && scripts\engine\utility::flag("player_prompted_for_patrol")) {
     wait 1;
   }
 
@@ -1713,12 +1713,12 @@ function forest_patrol_enemy_light_sweep() {
   self endon("damage");
   self endon("stop_aiming");
   wait randomfloatrange(0.5, 1.5);
-  var0 = scripts\engine\utility::getStruct("light_" + self.script_noteworthy, "targetname");
+  var_0 = scripts\engine\utility::getStruct("light_" + self.script_noteworthy, "targetname");
   self.ignoreall = 0;
 
   if(isalive(self)) {
-    scripts\sp\utility::aim_at(var0.origin);
-    scripts\sp\utility::move_aim_along_spline(var0, randomfloatrange(3, 6));
+    scripts\sp\utility::aim_at(var_0.origin);
+    scripts\sp\utility::move_aim_along_spline(var_0, randomfloatrange(3, 6));
     return;
   }
 }
@@ -1729,14 +1729,14 @@ function forest_patrol_player_fire_checker() {
   scripts\engine\utility::flag_set("player_fired_at_patrol");
 }
 
-function forest_patrol_player_visible_checker(var0) {
+function forest_patrol_player_visible_checker(var_0) {
   level endon("eliminate_patrol_1");
-  var1 = 0;
+  var_1 = 0;
 
-  while(!var1) {
-    foreach(var3 in var0) {
-      if(var3 scripts\sp\maps\proxywar\proxywar_util::can_flashlight_ai_see_player(1) || scripts\sp\maps\proxywar\proxywar_util::player_shining_light_at(var3)) {
-        var1 = 1;
+  while(!var_1) {
+    foreach(var_3 in var_0) {
+      if(var_3 scripts\sp\maps\proxywar\proxywar_util::can_flashlight_ai_see_player(1) || scripts\sp\maps\proxywar\proxywar_util::player_shining_light_at(var_3)) {
+        var_1 = 1;
         break;
       }
     }
@@ -1750,17 +1750,17 @@ function forest_patrol_player_visible_checker(var0) {
 function forest_patrol_catchup() {
   scripts\engine\sp\objectives::objective_set_position("objective", scripts\engine\utility::getStruct("obj_infil_2", "targetname").origin);
   level.ap_patrol = scripts\engine\utility::getStruct("ap_patrol", "targetname");
-  var0 = scripts\common\vehicle::spawn_vehicle_from_targetname("rus_veh_forest_patrol");
-  var0 scripts\common\vehicle_build::build_light("script_vehicle_iw8_decho_black", "custom_headlight_truck_left", "tag_light_front_left", "vfx/iw8/level/proxywar/vfx_pw_veh_sys_headlight_decho_left", "custom_headlights");
-  var0 scripts\common\vehicle_build::build_light("script_vehicle_iw8_decho_black", "custom_headlight_truck_right", "tag_light_front_right", "vfx/iw8/level/proxywar/vfx_pw_veh_sys_headlight_decho_right", "custom_headlights");
-  var0 scripts\common\vehicle_build::build_light("script_vehicle_iw8_decho_black", "custom_taillight_truck_left", "tag_light_back_left", "vfx/iw8/level/proxywar/vfx_pw_veh_sys_taillight_decho_left", "custom_brakelights");
-  var0 scripts\common\vehicle_build::build_light("script_vehicle_iw8_decho_black", "custom_taillight_truck_right", "tag_light_back_right", "vfx/iw8/level/proxywar/vfx_pw_veh_sys_taillight_decho_right", "custom_brakelights");
-  var0 scripts\common\vehicle::vehicle_lights_on("custom_headlights");
-  var0 scripts\common\vehicle::vehicle_lights_on("custom_brakelights");
-  var0 scripts\engine\sp\utility::assign_animtree("rus_forest_patrol_truck");
-  var0 connectpaths();
-  var0 scripts\engine\utility::delaycall(1, &disconnectpaths);
-  level.ap_patrol scripts\common\anim::anim_last_frame_solo(var0, "patrol_arrive");
+  var_0 = scripts\common\vehicle::spawn_vehicle_from_targetname("rus_veh_forest_patrol");
+  var_0 scripts\common\vehicle_build::build_light("script_vehicle_iw8_decho_black", "custom_headlight_truck_left", "tag_light_front_left", "vfx/iw8/level/proxywar/vfx_pw_veh_sys_headlight_decho_left", "custom_headlights");
+  var_0 scripts\common\vehicle_build::build_light("script_vehicle_iw8_decho_black", "custom_headlight_truck_right", "tag_light_front_right", "vfx/iw8/level/proxywar/vfx_pw_veh_sys_headlight_decho_right", "custom_headlights");
+  var_0 scripts\common\vehicle_build::build_light("script_vehicle_iw8_decho_black", "custom_taillight_truck_left", "tag_light_back_left", "vfx/iw8/level/proxywar/vfx_pw_veh_sys_taillight_decho_left", "custom_brakelights");
+  var_0 scripts\common\vehicle_build::build_light("script_vehicle_iw8_decho_black", "custom_taillight_truck_right", "tag_light_back_right", "vfx/iw8/level/proxywar/vfx_pw_veh_sys_taillight_decho_right", "custom_brakelights");
+  var_0 scripts\common\vehicle::vehicle_lights_on("custom_headlights");
+  var_0 scripts\common\vehicle::vehicle_lights_on("custom_brakelights");
+  var_0 scripts\engine\sp\utility::assign_animtree("rus_forest_patrol_truck");
+  var_0 connectpaths();
+  var_0 scripts\engine\utility::delaycall(1, &disconnectpaths);
+  level.ap_patrol scripts\common\anim::anim_last_frame_solo(var_0, "patrol_arrive");
 }
 
 function forest_exit_start() {
@@ -1780,11 +1780,11 @@ function forest_exit_main() {
 function forest_exit_ally() {
   self notify("stop_previous_logic");
   self endon("stop_previous_logic");
-  var0 = scripts\engine\utility::getStruct("ap_approach", "targetname");
-  var0 notify("stop_loop_" + self.script_noteworthy);
+  var_0 = scripts\engine\utility::getStruct("ap_approach", "targetname");
+  var_0 notify("stop_loop_" + self.script_noteworthy);
 
   if(scripts\sp\maps\proxywar\proxywar_util::within_distance2d(level.player.origin, self.origin, 300) || !scripts\engine\math::is_point_in_front(level.player.origin)) {
-    var0 scripts\common\anim::anim_single_solo(self, "patrol_approach_exit");
+    var_0 scripts\common\anim::anim_single_solo(self, "patrol_approach_exit");
   } else {
     self stopanimScripted();
   }
@@ -1797,12 +1797,12 @@ function forest_exit_ally() {
 
 function forest_exit_catchup() {
   scripts\engine\sp\objectives::objective_set_position("objective", scripts\engine\utility::getStruct("obj_infil_3", "targetname").origin);
-  var0 = getEnt("opaque_glass_panel", "targetname");
-  var0 delete();
+  var_0 = getEnt("opaque_glass_panel", "targetname");
+  var_0 delete();
 }
 
 function setup_laser_pointer_fsm() {
-  var0 = [["off", &laser_off_enter, &laser_off_update], ["idle", &laser_idle_enter, &laser_idle_update], ["track", &laser_track_enter, &laser_track_update], ["move_to", &laser_move_to_enter, &laser_move_to_update], ["complete", &laser_complete_enter]];
+  var_0 = [["off", &laser_off_enter, &laser_off_update], ["idle", &laser_idle_enter, &laser_idle_update], ["track", &laser_track_enter, &laser_track_update], ["move_to", &laser_move_to_enter, &laser_move_to_update], ["complete", &laser_complete_enter]];
   self setmoverlaserweapon("iw8_green_beam_bright");
   self.aimtarget = scripts\engine\utility::spawn_script_origin();
   self.aimtarget.origin = getEnt("front_gate_guard_left", "script_noteworthy").origin;
@@ -1821,7 +1821,7 @@ function setup_laser_pointer_fsm() {
   self.endactionflag = undefined;
   self.minidletime = 3;
   self.startmonitoring = 0;
-  scripts\sp\statemachine::begin_fsm(var0, "off");
+  scripts\sp\statemachine::begin_fsm(var_0, "off");
 }
 
 function laser_off_enter() {
@@ -1845,33 +1845,33 @@ function laser_off_enter() {
 function laser_off_update() {
   if(self.startmonitoring && level.player scripts\engine\math::is_point_in_front(scripts\engine\utility::getStruct("overlook_ridge_target", "targetname").origin)) {
     if(level.idlespottertime > 6 && !scripts\engine\utility::flag("spotter_actively_tracking") && !scripts\engine\utility::flag("done_facility_scan")) {
-      var0 = [];
+      var_0 = [];
 
       if(!scripts\engine\utility::flag("truck_moving") && !scripts\engine\utility::flag("done_checkpoint_spot")) {
-        GscBinSkip0(0x2e, var0.size, "overlook_truck");
+        GscBinSkip0(0x2e, var_0.size, "overlook_truck");
       }
 
       if(scripts\engine\utility::flag("truck_moving") && !scripts\engine\utility::flag("done_checkpoint_spot")) {
-        GscBinSkip0(0x2e, var0.size, "front_gate_guard_left");
+        GscBinSkip0(0x2e, var_0.size, "front_gate_guard_left");
       }
 
       if(!scripts\engine\utility::flag("done_railyard_spot")) {
-        GscBinSkip0(0x2e, var0.size, "overlook_railyard_enemy1");
+        GscBinSkip0(0x2e, var_0.size, "overlook_railyard_enemy1");
       }
 
-      if(var0.size > 0) {
+      if(var_0.size > 0) {
         scripts\engine\utility::flag_set("spotter_actively_tracking");
-        var1 = [];
+        var_1 = [];
 
-        foreach(var3 in var0) {
-          var1 = getEnt(var3, "script_noteworthy");
+        foreach(var_3 in var_0) {
+          var_1 = getEnt(var_3, "script_noteworthy");
         }
 
-        var5 = level.player getEye() + anglesToForward(level.player getplayerangles()) * 4000;
-        var6 = scripts\engine\trace::ray_trace(level.player getEye(), var5, level.player);
-        var7 = scripts\engine\utility::getclosest(var6["position"], var1);
+        var_5 = level.player getEye() + anglesToForward(level.player getplayerangles()) * 4000;
+        var_6 = scripts\engine\trace::ray_trace(level.player getEye(), var_5, level.player);
+        var_7 = scripts\engine\utility::getclosest(var_6["position"], var_1);
 
-        switch (var7.script_noteworthy) {
+        switch (var_7.script_noteworthy) {
           case "overlook_railyard_enemy3":
           case "overlook_railyard_enemy2":
           case "overlook_railyard_enemy1":
@@ -1925,13 +1925,13 @@ function laser_idle_update() {
   self.angles = vectortoangles(self.aimtarget.origin + self.wobbleoffset - self.origin);
 }
 
-function laser_track_handler(var0) {
-  self.newtarget = var0[0];
+function laser_track_handler(var_0) {
+  self.newtarget = var_0[0];
   scripts\sp\statemachine::goto_state("track");
 }
 
-function laser_move_to_handler(var0) {
-  self.newtarget = var0[0];
+function laser_move_to_handler(var_0) {
+  self.newtarget = var_0[0];
   scripts\sp\statemachine::goto_state("move_to");
 }
 
@@ -1941,26 +1941,26 @@ function laser_complete_handler() {
 
 function laser_track_enter() {
   self endon("changed_state");
-  var0 = gettime();
-  var1 = level.player getEye() + anglesToForward(level.player getplayerangles()) * 4000;
-  var2 = scripts\engine\trace::ray_trace(level.player getEye(), var1, level.player);
-  var3 = distance(self.aimtarget.origin, var2["position"]);
-  var4 = scripts\engine\math::normalize_value(0, 500, var3);
-  var5 = scripts\engine\math::factor_value(0.5, 1, var4);
-  self.aimtarget moveTo(var2["position"], var5, var5 / 3, var5 / 3);
-  wait var5;
+  var_0 = gettime();
+  var_1 = level.player getEye() + anglesToForward(level.player getplayerangles()) * 4000;
+  var_2 = scripts\engine\trace::ray_trace(level.player getEye(), var_1, level.player);
+  var_3 = distance(self.aimtarget.origin, var_2["position"]);
+  var_4 = scripts\engine\math::normalize_value(0, 500, var_3);
+  var_5 = scripts\engine\math::factor_value(0.5, 1, var_4);
+  self.aimtarget moveTo(var_2["position"], var_5, var_5 / 3, var_5 / 3);
+  wait var_5;
 
-  while(isDefined(self.newtarget) && (gettime() - var0) / 1000 < self.trackduration) {
-    var6 = 37.5;
-    var7 = self.newtarget.origin + self.targetoffset - self.aimtarget.origin;
+  while(isDefined(self.newtarget) && (gettime() - var_0) / 1000 < self.trackduration) {
+    var_6 = 37.5;
+    var_7 = self.newtarget.origin + self.targetoffset - self.aimtarget.origin;
 
-    if(length(var7) <= var6) {
-      var8 = var7 / 2;
+    if(length(var_7) <= var_6) {
+      var_8 = var_7 / 2;
     } else {
-      var8 = vectorNormalize(var7) * var6;
+      var_8 = vectorNormalize(var_7) * var_6;
     }
 
-    self.aimtarget moveTo(self.aimtarget.origin + var8, 0.05, 0, 0);
+    self.aimtarget moveTo(self.aimtarget.origin + var_8, 0.05, 0, 0);
     wait 0.05;
   }
 
@@ -1978,13 +1978,13 @@ function laser_track_update() {
 function laser_move_to_enter() {
   self endon("changed_state");
   scripts\sp\statemachine::set_notify_handlers([["move_to", &laser_move_to_handler], ["complete", &laser_complete_handler]]);
-  var0 = level.player getEye() + anglesToForward(level.player getplayerangles()) * 4000;
-  var1 = scripts\engine\trace::ray_trace(level.player getEye(), var0, level.player);
-  var2 = distance(self.aimtarget.origin, var1["position"]);
-  var3 = scripts\engine\math::normalize_value(0, 2000, var2);
-  var4 = scripts\engine\math::factor_value(0.75, 1, var3);
-  self.aimtarget moveTo(var1["position"], var4, var4 / 3, var4 / 3);
-  wait var4;
+  var_0 = level.player getEye() + anglesToForward(level.player getplayerangles()) * 4000;
+  var_1 = scripts\engine\trace::ray_trace(level.player getEye(), var_0, level.player);
+  var_2 = distance(self.aimtarget.origin, var_1["position"]);
+  var_3 = scripts\engine\math::normalize_value(0, 2000, var_2);
+  var_4 = scripts\engine\math::factor_value(0.75, 1, var_3);
+  self.aimtarget moveTo(var_1["position"], var_4, var_4 / 3, var_4 / 3);
+  wait var_4;
   self.aimtarget moveTo(self.newtarget.origin, self.tracktotime, self.tracktoaccel, self.tracktodecel);
   wait self.tracktotime;
   scripts\sp\statemachine::goto_state("idle");

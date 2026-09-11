@@ -361,9 +361,9 @@ function interrogation() {
   level.scr_anim["escort_intrg_mother"]["react_hallway"] = % stp_wh_010_escort_mech_react_01_wife;
   level.scr_anim["escort_intrg_mother"]["handoff_disengage"] = % stp_wh_010_escort_mech_transition_handoff_wife;
 
-  foreach(var2, var1 in level.scr_anim["escort_intrg_mother"]) {
-    if(scripts\engine\utility::array_contains(strtok(var2, "_"), "loop")) {
-      level.scr_goaltime["escort_intrg_mother"][var2] = 0;
+  foreach(var_2, var_1 in level.scr_anim["escort_intrg_mother"]) {
+    if(scripts\engine\utility::array_contains(strtok(var_2, "_"), "loop")) {
+      level.scr_goaltime["escort_intrg_mother"][var_2] = 0;
     }
   }
 
@@ -408,9 +408,9 @@ function interrogation() {
   level.scr_anim["escort_intrg_son"]["react_hallway"] = % stp_wh_010_escort_mech_react_01_child;
   level.scr_anim["escort_intrg_son"]["handoff_disengage"] = % stp_wh_010_escort_mech_transition_handoff_child;
 
-  foreach(var2, var1 in level.scr_anim["escort_intrg_son"]) {
-    if(scripts\engine\utility::array_contains(strtok(var2, "_"), "loop")) {
-      level.scr_goaltime["escort_intrg_son"][var2] = 0;
+  foreach(var_2, var_1 in level.scr_anim["escort_intrg_son"]) {
+    if(scripts\engine\utility::array_contains(strtok(var_2, "_"), "loop")) {
+      level.scr_goaltime["escort_intrg_son"][var_2] = 0;
     }
   }
 
@@ -862,61 +862,61 @@ function vehicles() {
   level.scr_anim["ambulance"]["canal_civs_flee_ambulance"] = % stp_can_020_street_civs_flee_ambulance;
 }
 
-function price_pistol_pickup(var0) {
-  var1 = getEnt("price_gun_pickup", "targetname");
-  var1 hide();
+function price_pistol_pickup(var_0) {
+  var_1 = getEnt("price_gun_pickup", "targetname");
+  var_1 hide();
   level.price scripts\common\ai::gun_recall();
 }
 
-function price_ammo_pickup(var0) {
-  var1 = getEnt("intro_stakeout_loot_ammo", "targetname");
-  var1 hide();
+function price_ammo_pickup(var_0) {
+  var_1 = getEnt("intro_stakeout_loot_ammo", "targetname");
+  var_1 hide();
 }
 
-function price_bottom_stairs(var0) {
+function price_bottom_stairs(var_0) {
   scripts\engine\utility::flag_set("flag_alley_stealth_price_bottom_stairs");
 }
 
-function blind_fire(var0) {
-  var1 = var0 gettagorigin(getweaponflashtagname(var0));
-  var2 = var0 gettagangles(getweaponflashtagname(var0));
-  var3 = var1 + anglesToForward(var2) * 1000;
-  var4 = 0;
-  var5 = 10;
-  var6 = scripts\engine\utility::getStruct("bar_enforcer_blindfire_target", "targetname");
-  playFXOnTag(scripts\engine\utility::getfx("vfx_muz_ar_w"), var0, getweaponflashtagname(var0));
+function blind_fire(var_0) {
+  var_1 = var_0 gettagorigin(getweaponflashtagname(var_0));
+  var_2 = var_0 gettagangles(getweaponflashtagname(var_0));
+  var_3 = var_1 + anglesToForward(var_2) * 1000;
+  var_4 = 0;
+  var_5 = 10;
+  var_6 = scripts\engine\utility::getStruct("bar_enforcer_blindfire_target", "targetname");
+  playFXOnTag(scripts\engine\utility::getfx("vfx_muz_ar_w"), var_0, getweaponflashtagname(var_0));
 
   if(scripts\engine\utility::cointoss()) {
-    var3 = var6.origin;
-    var5 = 1;
+    var_3 = var_6.origin;
+    var_5 = 1;
   }
 
-  magicbullet("iw8_ar_akilo47", var1, var3 + scripts\engine\utility::randomvectorrange(var4, var5), level.enforcer);
+  magicbullet("iw8_ar_akilo47", var_1, var_3 + scripts\engine\utility::randomvectorrange(var_4, var_5), level.enforcer);
 }
 
-function camera_fov_change(var0) {}
+function camera_fov_change(var_0) {}
 
-function car_brakelights_on(var0) {
-  var1 = getEnt("stakeout_enforcer_truck", "targetname");
-  playFXOnTag(scripts\engine\utility::getfx("vfx_stpburg_brake_lights_truck"), var1, "tag_hood");
+function car_brakelights_on(var_0) {
+  var_1 = getEnt("stakeout_enforcer_truck", "targetname");
+  playFXOnTag(scripts\engine\utility::getfx("vfx_stpburg_brake_lights_truck"), var_1, "tag_hood");
 }
 
-function car_brakelights_off(var0) {
-  var1 = getEnt("stakeout_enforcer_truck", "targetname");
-  stopFXOnTag(scripts\engine\utility::getfx("vfx_stpburg_brake_lights_truck"), var1, "tag_hood");
+function car_brakelights_off(var_0) {
+  var_1 = getEnt("stakeout_enforcer_truck", "targetname");
+  stopFXOnTag(scripts\engine\utility::getfx("vfx_stpburg_brake_lights_truck"), var_1, "tag_hood");
 }
 
-function van_brakelights_on(var0) {
+function van_brakelights_on(var_0) {
   playFXOnTag(scripts\engine\utility::getfx("vfx_stpburg_tail_lights_utility_van"), level.nikolaivan, "tag_hood");
 }
 
-function van_brakelights_off(var0) {
+function van_brakelights_off(var_0) {
   stopFXOnTag(scripts\engine\utility::getfx("vfx_stpburg_backup_lights_utility_van"), level.nikolaivan, "tag_hood");
   wait 0.25;
   stopFXOnTag(scripts\engine\utility::getfx("vfx_stpburg_tail_lights_utility_van"), level.nikolaivan, "tag_hood");
 }
 
-function police_car_unlock(var0) {
+function police_car_unlock(var_0) {
   level thread scripts\engine\sp\utility::notify_delay("car_unlock", 1);
   playFXOnTag(scripts\engine\utility::getfx("car_unlock_fx"), level.policecar, "tag_origin");
   wait 0.2;
@@ -927,92 +927,92 @@ function police_car_unlock(var0) {
   killfxontag(scripts\engine\utility::getfx("car_unlock_fx"), level.policecar, "tag_origin");
 }
 
-function price_gun_remove(var0) {
+function price_gun_remove(var_0) {
   level.price scripts\common\ai::gun_remove();
 }
 
-function price_gun_recall(var0) {
+function price_gun_recall(var_0) {
   level.price scripts\common\ai::gun_recall();
 }
 
-function price_gun_fire(var0) {
-  var1 = getcompleteweaponname("iw8_pi_golf21", ["silencerpstl_west01"]);
-  var2 = level.price gettagorigin(getweaponflashtagname(var1));
-  var3 = level.price gettagangles(getweaponflashtagname(var1));
-  var4 = var2 + anglesToForward(var3) * 100;
-  magicbullet(var1, var2, var4, level.price);
-  playFXOnTag(scripts\engine\utility::getfx("vfx_muz_pis_w"), level.price, getweaponflashtagname(var1));
+function price_gun_fire(var_0) {
+  var_1 = getcompleteweaponname("iw8_pi_golf21", ["silencerpstl_west01"]);
+  var_2 = level.price gettagorigin(getweaponflashtagname(var_1));
+  var_3 = level.price gettagangles(getweaponflashtagname(var_1));
+  var_4 = var_2 + anglesToForward(var_3) * 100;
+  magicbullet(var_1, var_2, var_4, level.price);
+  playFXOnTag(scripts\engine\utility::getfx("vfx_muz_pis_w"), level.price, getweaponflashtagname(var_1));
 }
 
-function price_place_revolver(var0) {
+function price_place_revolver(var_0) {
   level.price scripts\common\ai::gun_recall();
 }
 
-function bullet_show(var0) {
-  var0 show();
+function bullet_show(var_0) {
+  var_0 show();
 }
 
-function nikolai_acquire_intro_vo(var0) {
+function nikolai_acquire_intro_vo(var_0) {
   scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_nikolai("Sergeant Garrick. Package is in back.", "dx_vom_nik_interrogation_intro_family_10");
 }
 
-function price_exit_vo(var0) {
-  var1 = "dx_vom_pri_interrogation_revolver_ads_butcher_50";
+function price_exit_vo(var_0) {
+  var_1 = "dx_vom_pri_interrogation_revolver_ads_butcher_50";
 
   if(scripts\engine\utility::flag("enforcer_dead")) {
-    var1 = "dx_vom_pri_interrogation_revolver_ads_butcher_51";
+    var_1 = "dx_vom_pri_interrogation_revolver_ads_butcher_51";
   }
 
-  scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_price("We are leaving", var1);
+  scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_price("We are leaving", var_1);
 }
 
-function price_car_enter(var0) {
+function price_car_enter(var_0) {
   scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_exit_nags();
 }
 
-function sfx_bar_escape_door(var0) {
+function sfx_bar_escape_door(var_0) {
   thread scripts\engine\utility::play_sound_in_space("stp_bar_escape_exit_enforcer_door", (740, -2998, 16));
 }
 
-function interrogation_remove_fov_user_scale(var0) {
+function interrogation_remove_fov_user_scale(var_0) {
   level.player modifybasefov(55, 1);
   wait 1;
   level.player lerpfovscalefactor(1, 2);
 }
 
-function intro_camera_letterbox_end(var0) {
+function intro_camera_letterbox_end(var_0) {
   level notify("cine_letterboxing");
 }
 
-function camera_intro_dof_on(var0) {
+function camera_intro_dof_on(var_0) {
   scripts\engine\utility::flag_set("camera_intro_dof_on");
 }
 
-function camera_intro_dof_rack(var0) {
+function camera_intro_dof_rack(var_0) {
   scripts\engine\utility::flag_set("camera_intro_dof_rack");
 }
 
-function camera_intro_dof_off(var0) {
+function camera_intro_dof_off(var_0) {
   scripts\engine\utility::flag_set("camera_intro_dof_off");
 }
 
-function camera_intro_fov_start(var0) {
+function camera_intro_fov_start(var_0) {
   level.player lerpfov(65, 2.8);
 }
 
-function van_restore_user_fov(var0) {
+function van_restore_user_fov(var_0) {
   level.player lerpfovscalefactor(1, 0.5);
 }
 
-function van_stop_vo(var0) {
+function van_stop_vo(var_0) {
   level.enforcerwife stopsounds();
 }
 
-function enforcer_chair_swap(var0) {
+function enforcer_chair_swap(var_0) {
   level.enforcerchair setModel("ee_furniture_chair_wooden_interrogation");
 }
 
-function pc_force_fov(var0) {
+function pc_force_fov(var_0) {
   if(level.player ispcplayer()) {
     level.player modifybasefov(65, 0.1);
     level waittill("acquire_pc_fov_clear");
@@ -1021,4 +1021,4 @@ function pc_force_fov(var0) {
   }
 }
 
-function cine_skip_mayhem_end(var0) {}
+function cine_skip_mayhem_end(var_0) {}

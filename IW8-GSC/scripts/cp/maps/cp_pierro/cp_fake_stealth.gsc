@@ -15,22 +15,22 @@ function cp_fake_stealth() {
       continue;
     }
 
-    var0 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
+    var_0 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
 
-    if(var0.size == 0) {
+    if(var_0.size == 0) {
       waitframe();
       continue;
     }
 
-    foreach(var2 in var0) {
-      if(isDefined(var2.fake_stealth)) {
+    foreach(var_2 in var_0) {
+      if(isDefined(var_2.fake_stealth)) {
         continue;
       }
 
-      var2.dont_cleanup = 1;
-      var2.fake_stealth = 1;
+      var_2.dont_cleanup = 1;
+      var_2.fake_stealth = 1;
       thread zombie_fake_stealth();
-      thread stealth_patrol(var2);
+      thread stealth_patrol(var_2);
       waitframe();
       LOC_000000b3:
     }
@@ -39,7 +39,7 @@ function cp_fake_stealth() {
   }
 }
 
-function set_zombie_awareness(var0) {}
+function set_zombie_awareness(var_0) {}
 
 function zombie_fake_stealth() {
   self endon("death");
@@ -53,9 +53,9 @@ function zombie_fake_stealth() {
   self.ignoreall = 1;
   self.scripted_mode = 1;
   fake_stealth_funcs();
-  var0 = scripts\engine\utility::waittill_any_return("alerted", "damage");
+  var_0 = scripts\engine\utility::waittill_any_return("alerted", "damage");
 
-  if(var0 == "damage") {
+  if(var_0 == "damage") {
     self.fake_stealth_state = "took damage";
   }
 
@@ -91,32 +91,32 @@ function revert_to_stealth() {
       continue;
     }
 
-    var0 = self.enemy;
-    var1 = distance(var0.origin, self.origin);
-    var2 = self cansee(var0) && sighttracepassed(self getEye(), var0.origin + (0, 0, 40), 0, self);
-    var3 = scripts\engine\utility::within_fov(self getEye(), self gettagangles("tag_eye"), var0.origin + (0, 0, 40), level.const_cos60);
-    var4 = var0 getstance();
+    var_0 = self.enemy;
+    var_1 = distance(var_0.origin, self.origin);
+    var_2 = self cansee(var_0) && sighttracepassed(self getEye(), var_0.origin + (0, 0, 40), 0, self);
+    var_3 = scripts\engine\utility::within_fov(self getEye(), self gettagangles("tag_eye"), var_0.origin + (0, 0, 40), level.const_cos60);
+    var_4 = var_0 getstance();
 
-    if(var2 && var3) {
-      if(var1 < 650) {
-        if(var4 == "stand") {
+    if(var_2 && var_3) {
+      if(var_1 < 650) {
+        if(var_4 == "stand") {
           wait 0.25;
           continue;
         } else {
-          go_to_last_player_position(var0);
+          go_to_last_player_position(var_0);
           return;
         }
-      } else if(var1 < 128) {
-        if(var4 == "prone") {
+      } else if(var_1 < 128) {
+        if(var_4 == "prone") {
           wait 0.25;
           continue;
         } else {
-          go_to_last_player_position(var0);
+          go_to_last_player_position(var_0);
           return;
         }
       }
-    } else if(var1 > 196) {
-      go_to_last_player_position(var0);
+    } else if(var_1 > 196) {
+      go_to_last_player_position(var_0);
       return;
     }
 
@@ -124,12 +124,12 @@ function revert_to_stealth() {
   }
 }
 
-function go_to_last_player_position(var0) {
+function go_to_last_player_position(var_0) {
   self.fake_stealth_state = "going_to_last_position";
   self.scripted_mode = 1;
   self.ignoreall = 1;
   thread zombie_fake_stealth();
-  thread go_to_spot(var0.origin);
+  thread go_to_spot(var_0.origin);
 }
 
 function fake_stealth_funcs() {
@@ -148,9 +148,9 @@ function whizby_listener() {
   self endon("exit_stealth");
 
   for(;;) {
-    self waittill("bulletwhizby", var0);
+    self waittill("bulletwhizby", var_0);
     self.fake_stealth_state = "investigating_bullet_whizby";
-    thread go_to_spot(var0.origin);
+    thread go_to_spot(var_0.origin);
   }
 }
 
@@ -160,14 +160,14 @@ function environment_listener() {
   self endon("exit_stealth");
 
   for(;;) {
-    level waittill("environment_alert", var0);
+    level waittill("environment_alert", var_0);
 
-    if(distance(self.origin, var0) > 650) {
+    if(distance(self.origin, var_0) > 650) {
       continue;
     }
 
     self.fake_stealth_state = "investigating environment";
-    thread go_to_spot(var0);
+    thread go_to_spot(var_0);
   }
 }
 
@@ -177,14 +177,14 @@ function grenade_listener() {
   self endon("exit_stealth");
 
   for(;;) {
-    self waittill("explode", var0);
+    self waittill("explode", var_0);
 
-    if(distance(self.origin, var0) > 1000) {
+    if(distance(self.origin, var_0) > 1000) {
       continue;
     }
 
     self.fake_stealth_state = "investigating_grenade explosion";
-    thread go_to_spot(var0);
+    thread go_to_spot(var_0);
   }
 }
 
@@ -194,40 +194,40 @@ function player_nearby_listener() {
   self endon("exit_stealth");
 
   for(;;) {
-    foreach(var1 in level.players) {
-      var2 = distance(var1.origin, self.origin);
+    foreach(var_1 in level.players) {
+      var_2 = distance(var_1.origin, self.origin);
 
-      if(var2 > 600) {
+      if(var_2 > 600) {
         continue;
       }
 
-      if(var2 < 96) {
+      if(var_2 < 96) {
         self.fake_stealth_state = "spotted";
         self notify("alerted");
         break;
       }
 
-      var3 = self cansee(var1) && sighttracepassed(self getEye(), var1.origin + (0, 0, 40), 0, self);
-      var4 = var1 getstance();
+      var_3 = self cansee(var_1) && sighttracepassed(self getEye(), var_1.origin + (0, 0, 40), 0, self);
+      var_4 = var_1 getstance();
 
-      if(var3) {
-        var5 = scripts\engine\utility::within_fov(self getEye(), self gettagangles("tag_eye"), var1.origin + (0, 0, 40), level.const_cos60);
+      if(var_3) {
+        var_5 = scripts\engine\utility::within_fov(self getEye(), self gettagangles("tag_eye"), var_1.origin + (0, 0, 40), level.const_cos60);
 
-        if(!var5) {
+        if(!var_5) {
           continue;
         }
 
-        if(var2 <= 600 && var4 == "stand") {
+        if(var_2 <= 600 && var_4 == "stand") {
           self playSound("emt_wood_barrier_destr");
           self.fake_stealth_state = "spotted";
           self notify("alerted");
           return;
-        } else if(var2 <= 400 && var4 == "stand") {
+        } else if(var_2 <= 400 && var_4 == "stand") {
           self playSound("emt_wood_barrier_destr");
           self.fake_stealth_state = "spotted";
           self notify("alerted");
           return;
-        } else if(var2 <= 200 && var4 != "prone") {
+        } else if(var_2 <= 200 && var_4 != "prone") {
           self playSound("emt_wood_barrier_destr");
           self.fake_stealth_state = "spotted";
           self notify("alerted");
@@ -242,34 +242,34 @@ function player_nearby_listener() {
   }
 }
 
-function stealth_patrol(var0) {
+function stealth_patrol(var_0) {
   self endon("death");
   self endon("alerted");
   self endon("new_goal");
   self endon("exit_stealth");
   self.og_goalradius = self.goalradius;
 
-  if(!isDefined(var0)) {
-    var0 = self.origin;
+  if(!isDefined(var_0)) {
+    var_0 = self.origin;
   }
 
-  var1 = getrandomnavpoints(var0, 350, 6);
+  var_1 = getrandomnavpoints(var_0, 350, 6);
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
   self.fake_stealth_state = "patrol";
 
   for(;;) {
-    var2 = scripts\engine\utility::random(var1);
+    var_2 = scripts\engine\utility::random(var_1);
 
     if(self islegacyagent()) {
       self scragentsetgoalRadius(8);
-      self scragentsetgoalpos(var2);
+      self scragentsetgoalpos(var_2);
     } else {
       self.goalradius = 8;
-      self setgoalpos(var2);
+      self setgoalpos(var_2);
     }
 
     scripts\engine\utility::waittill_any("goal", "goal_reached");
@@ -277,7 +277,7 @@ function stealth_patrol(var0) {
   }
 }
 
-function go_to_spot(var0) {
+function go_to_spot(var_0) {
   self endon("death");
   self endon("alerted");
   self endon("exit_stealth");
@@ -300,17 +300,17 @@ function go_to_spot(var0) {
   self.legacy.movemode = "sprint";
 
   if(self islegacyagent()) {
-    self scragentsetgoalpos(getclosestpointonnavmesh(var0));
-    var1 = scripts\engine\utility::waittill_any_return("goal", "goal_reached");
+    self scragentsetgoalpos(getclosestpointonnavmesh(var_0));
+    var_1 = scripts\engine\utility::waittill_any_return("goal", "goal_reached");
   } else {
-    self setgoalpos(getclosestpointonnavmesh(var0));
+    self setgoalpos(getclosestpointonnavmesh(var_0));
     self waittill("goal");
   }
 
   self.legacy.movemode = "slow_walk";
   wait 3;
   self.fake_stealth_state = "patrol";
-  thread stealth_patrol(var0);
+  thread stealth_patrol(var_0);
 }
 
 function weapon_fire_monitor() {
@@ -331,14 +331,14 @@ function player_weapon_listener() {
   self endon("exit_stealth");
 
   for(;;) {
-    level waittill("weapon_fired", var0, var1);
+    level waittill("weapon_fired", var_0, var_1);
 
-    if(distance(var0, self.origin) > 1500) {
+    if(distance(var_0, self.origin) > 1500) {
       continue;
     }
 
     self.fake_stealth_state = "investigating_weapon_fire";
-    thread go_to_spot(var0);
+    thread go_to_spot(var_0);
   }
 }
 
@@ -368,75 +368,75 @@ function draw_fov() {
       continue;
     }
 
-    var0 = self gettagorigin("tag_eye");
-    var1 = self gettagangles("tag_eye");
-    var2 = anglesToForward(var1);
-    var3 = var0 + var2 * self.stealthvals.standdetectdist;
+    var_0 = self gettagorigin("tag_eye");
+    var_1 = self gettagangles("tag_eye");
+    var_2 = anglesToForward(var_1);
+    var_3 = var_0 + var_2 * self.stealthvals.standdetectdist;
     waitframe();
   }
 }
 
 function load_stealth_values_from_table() {
   level.zombie_stealth_values = [];
-  var0 = "scripts/cp/zombie_stealth.csv";
-  var1 = 1;
-  var2 = 1;
+  var_0 = "scripts/cp/zombie_stealth.csv";
+  var_1 = 1;
+  var_2 = 1;
 
   for(;;) {
-    var3 = tablelookupbyrow(var0, var2, var1);
+    var_3 = tablelookupbyrow(var_0, var_2, var_1);
 
-    if(var3 == "") {
+    if(var_3 == "") {
       break;
     }
 
-    var4 = spawnStruct();
-    var4.standdetectdist = int(tablelookupbyrow(var0, 2, var1));
-    var4.crouchdetectdist = int(tablelookupbyrow(var0, 3, var1));
-    var4.pronedetectdist = int(tablelookupbyrow(var0, 4, var1));
-    var4.hiddenstanddetectdist = int(tablelookupbyrow(var0, 5, var1));
-    var4.hiddencrouchdetectdist = int(tablelookupbyrow(var0, 6, var1));
-    var4.hiddenpronedetectdist = int(tablelookupbyrow(var0, 7, var1));
-    var4.propdistance = int(tablelookupbyrow(var0, 8, var1));
-    var4.timebeforeescalate = int(tablelookupbyrow(var0, 9, var1));
-    var4.timebeforedeescalate = int(tablelookupbyrow(var0, 10, var1));
-    var4.distancebeforedeescalate = int(tablelookupbyrow(var0, 11, var1));
-    var4.timehiddennolosbeforedeescalate = int(tablelookupbyrow(var0, 12, var1));
-    var4.zombiemovespeed = tablelookupbyrow(var0, 13, var1);
-    var4.playerstandmovedist = int(tablelookupbyrow(var0, 14, var1));
-    var4.playercrouchmovedist = int(tablelookupbyrow(var0, 15, var1));
-    var4.playerpronemovedist = int(tablelookupbyrow(var0, 16, var1));
-    var4.hiddenplayerstandmovedist = int(tablelookupbyrow(var0, 17, var1));
-    var4.hiddenplayercrouchmovedist = int(tablelookupbyrow(var0, 18, var1));
-    var4.hiddenplayerpronemovedist = int(tablelookupbyrow(var0, 19, var1));
-    var4.playermovedistlerptime = int(tablelookupbyrow(var0, 20, var1));
-    var4.losfov = int(tablelookupbyrow(var0, 21, var1));
-    level.zombie_stealth_values[int(var3)] = var4;
-    var1++;
+    var_4 = spawnStruct();
+    var_4.standdetectdist = int(tablelookupbyrow(var_0, 2, var_1));
+    var_4.crouchdetectdist = int(tablelookupbyrow(var_0, 3, var_1));
+    var_4.pronedetectdist = int(tablelookupbyrow(var_0, 4, var_1));
+    var_4.hiddenstanddetectdist = int(tablelookupbyrow(var_0, 5, var_1));
+    var_4.hiddencrouchdetectdist = int(tablelookupbyrow(var_0, 6, var_1));
+    var_4.hiddenpronedetectdist = int(tablelookupbyrow(var_0, 7, var_1));
+    var_4.propdistance = int(tablelookupbyrow(var_0, 8, var_1));
+    var_4.timebeforeescalate = int(tablelookupbyrow(var_0, 9, var_1));
+    var_4.timebeforedeescalate = int(tablelookupbyrow(var_0, 10, var_1));
+    var_4.distancebeforedeescalate = int(tablelookupbyrow(var_0, 11, var_1));
+    var_4.timehiddennolosbeforedeescalate = int(tablelookupbyrow(var_0, 12, var_1));
+    var_4.zombiemovespeed = tablelookupbyrow(var_0, 13, var_1);
+    var_4.playerstandmovedist = int(tablelookupbyrow(var_0, 14, var_1));
+    var_4.playercrouchmovedist = int(tablelookupbyrow(var_0, 15, var_1));
+    var_4.playerpronemovedist = int(tablelookupbyrow(var_0, 16, var_1));
+    var_4.hiddenplayerstandmovedist = int(tablelookupbyrow(var_0, 17, var_1));
+    var_4.hiddenplayercrouchmovedist = int(tablelookupbyrow(var_0, 18, var_1));
+    var_4.hiddenplayerpronemovedist = int(tablelookupbyrow(var_0, 19, var_1));
+    var_4.playermovedistlerptime = int(tablelookupbyrow(var_0, 20, var_1));
+    var_4.losfov = int(tablelookupbyrow(var_0, 21, var_1));
+    level.zombie_stealth_values[int(var_3)] = var_4;
+    var_1++;
   }
 }
 
-function set_stealth_values(var0, var1) {
-  var1 = "" + var1;
-  var2 = spawnStruct();
-  var2.standdetectdist = level.zombie_stealth_values[var1].standdetectdist;
-  var2.crouchdetectdist = level.zombie_stealth_values[var1].crouchdetectdist;
-  var2.pronedetectdist = level.zombie_stealth_values[var1].pronedetectdist;
-  var2.hiddenstanddetectdist = level.zombie_stealth_values[var1].hiddenstanddetectdist;
-  var2.hiddencrouchdetectdist = level.zombie_stealth_values[var1].hiddencrouchdetectdist;
-  var2.hiddenpronedetectdist = level.zombie_stealth_values[var1].hiddenpronedetectdist;
-  var2.propdistance = level.zombie_stealth_values[var1].propdistance;
-  var2.timebeforeescalate = level.zombie_stealth_values[var1].timebeforeescalate;
-  var2.timebeforedeescalate = level.zombie_stealth_values[var1].timebeforedeescalate;
-  var2.distancebeforedeescalate = level.zombie_stealth_values[var1].distancebeforedeescalate;
-  var2.timehiddennolosbeforedeescalate = level.zombie_stealth_values[var1].timehiddennolosbeforedeescalate;
-  var2.zombiemovespeed = level.zombie_stealth_values[var1].zombiemovespeed;
-  var2.playerstandmovedist = level.zombie_stealth_values[var1].playerstandmovedist;
-  var2.playercrouchmovedist = level.zombie_stealth_values[var1].playercrouchmovedist;
-  var2.playerpronemovedist = level.zombie_stealth_values[var1].playerpronemovedist;
-  var2.hiddenplayerstandmovedist = level.zombie_stealth_values[var1].hiddenplayerstandmovedist;
-  var2.hiddenplayercrouchmovedist = level.zombie_stealth_values[var1].hiddenplayercrouchmovedist;
-  var2.hiddenplayerpronemovedist = level.zombie_stealth_values[var1].hiddenplayerpronemovedist;
-  var2.playermovedistlerptime = level.zombie_stealth_values[var1].playermovedistlerptime;
-  var2.losfov = level.zombie_stealth_values[var1].losfov;
-  var0.stealthvals = var2;
+function set_stealth_values(var_0, var_1) {
+  var_1 = "" + var_1;
+  var_2 = spawnStruct();
+  var_2.standdetectdist = level.zombie_stealth_values[var_1].standdetectdist;
+  var_2.crouchdetectdist = level.zombie_stealth_values[var_1].crouchdetectdist;
+  var_2.pronedetectdist = level.zombie_stealth_values[var_1].pronedetectdist;
+  var_2.hiddenstanddetectdist = level.zombie_stealth_values[var_1].hiddenstanddetectdist;
+  var_2.hiddencrouchdetectdist = level.zombie_stealth_values[var_1].hiddencrouchdetectdist;
+  var_2.hiddenpronedetectdist = level.zombie_stealth_values[var_1].hiddenpronedetectdist;
+  var_2.propdistance = level.zombie_stealth_values[var_1].propdistance;
+  var_2.timebeforeescalate = level.zombie_stealth_values[var_1].timebeforeescalate;
+  var_2.timebeforedeescalate = level.zombie_stealth_values[var_1].timebeforedeescalate;
+  var_2.distancebeforedeescalate = level.zombie_stealth_values[var_1].distancebeforedeescalate;
+  var_2.timehiddennolosbeforedeescalate = level.zombie_stealth_values[var_1].timehiddennolosbeforedeescalate;
+  var_2.zombiemovespeed = level.zombie_stealth_values[var_1].zombiemovespeed;
+  var_2.playerstandmovedist = level.zombie_stealth_values[var_1].playerstandmovedist;
+  var_2.playercrouchmovedist = level.zombie_stealth_values[var_1].playercrouchmovedist;
+  var_2.playerpronemovedist = level.zombie_stealth_values[var_1].playerpronemovedist;
+  var_2.hiddenplayerstandmovedist = level.zombie_stealth_values[var_1].hiddenplayerstandmovedist;
+  var_2.hiddenplayercrouchmovedist = level.zombie_stealth_values[var_1].hiddenplayercrouchmovedist;
+  var_2.hiddenplayerpronemovedist = level.zombie_stealth_values[var_1].hiddenplayerpronemovedist;
+  var_2.playermovedistlerptime = level.zombie_stealth_values[var_1].playermovedistlerptime;
+  var_2.losfov = level.zombie_stealth_values[var_1].losfov;
+  var_0.stealthvals = var_2;
 }

@@ -4,9 +4,9 @@
 ***********************************************/
 
 function nvg_ai_init() {
-  var0 = getaiarray();
+  var_0 = getaiarray();
 
-  foreach(var2 in var0) {
+  foreach(var_2 in var_0) {
     thread nvg_ai();
   }
 
@@ -24,7 +24,7 @@ function nvg_ai() {
   thread nvg_death_cleanup();
 }
 
-function do_flir_footsteps(var0) {}
+function do_flir_footsteps(var_0) {}
 
 function dont_do_flir_footsteps() {}
 
@@ -43,10 +43,10 @@ function ai_nvg_player_update() {
     return;
   }
 
-  var0 = level.player isnightvisionon();
+  var_0 = level.player isnightvisionon();
 
   if(isDefined(self.custom_nvg_update_func)) {
-    self thread[[self.custom_nvg_update_func]](var0);
+    self thread[[self.custom_nvg_update_func]](var_0);
     return;
   }
 }
@@ -63,24 +63,24 @@ function dynolight_area_trigger_logic() {
   self endon("death");
 
   for(;;) {
-    self waittill("trigger", var0);
+    self waittill("trigger", var_0);
 
-    if(!isai(var0)) {
+    if(!isai(var_0)) {
       continue;
     }
 
-    if(!isDefined(var0.in_dynolight_trigger) && !isDefined(var0.nvg_goggles)) {
-      GscBinSkip4(0x6e, var0, self);
+    if(!isDefined(var_0.in_dynolight_trigger) && !isDefined(var_0.nvg_goggles)) {
+      GscBinSkip4(0x6e, var_0, self);
     }
   }
 }
 
-function dynolight_area_ai(var0) {
+function dynolight_area_ai(var_0) {
   self endon("death");
-  self.in_dynolight_trigger = var0;
+  self.in_dynolight_trigger = var_0;
   thread enable_ai_dynolight_behavior();
 
-  while(self istouching(var0)) {
+  while(self istouching(var_0)) {
     wait 0.05;
   }
 
@@ -106,154 +106,154 @@ function updatelightmeter() {
     return;
   }
 
-  var0 = gettime();
+  var_0 = gettime();
 
-  if(!isDefined(level.lastdynolightcleantime) || var0 == level.lastdynolightcleantime) {
+  if(!isDefined(level.lastdynolightcleantime) || var_0 == level.lastdynolightcleantime) {
     level.castingdynolights = scripts\engine\utility::array_removeundefined(level.castingdynolights);
-    level.lastdynolightcleantime = var0;
+    level.lastdynolightcleantime = var_0;
   }
 
-  var1 = sortbydistance(level.castingdynolights, self.origin);
-  var2 = self getapproxeyepos();
-  var3 = 9999999;
+  var_1 = sortbydistance(level.castingdynolights, self.origin);
+  var_2 = self getapproxeyepos();
+  var_3 = 9999999;
 
   if(isDefined(self.lightmeter_lastcheckpos)) {
-    var3 = distancesquared(self.lightmeter_lastcheckpos, self.origin);
+    var_3 = distancesquared(self.lightmeter_lastcheckpos, self.origin);
   }
 
   if(!isDefined(self.lightmeter_lastchecktime)) {
     self.lightmeter_lastchecktime = -1000;
   }
 
-  var4 = [];
-  var5 = [];
-  var6 = [];
-  var7 = var3 > 900;
-  var8 = 998001;
-  var9 = var1.size;
+  var_4 = [];
+  var_5 = [];
+  var_6 = [];
+  var_7 = var_3 > 900;
+  var_8 = 998001;
+  var_9 = var_1.size;
 
-  for(var10 = 0; var10 < var9; var10++) {
-    var11 = var1[var10];
-    var12 = distancesquared(var2, var11.origin);
+  for(var_10 = 0; var_10 < var_9; var_10++) {
+    var_11 = var_1[var_10];
+    var_12 = distancesquared(var_2, var_11.origin);
 
-    if(var12 > var8) {
+    if(var_12 > var_8) {
       break;
     }
 
-    if(!var7 && var11.timeoflaststatechange >= self.lightmeter_lastchecktime) {
-      var7 = 1;
+    if(!var_7 && var_11.timeoflaststatechange >= self.lightmeter_lastchecktime) {
+      var_7 = 1;
     }
 
-    if(!var11.alive) {
+    if(!var_11.alive) {
       continue;
     }
 
-    if(var11 getscriptablepartstate("onoff") == "off") {
+    if(var_11 getscriptablepartstate("onoff") == "off") {
       continue;
     }
 
-    var13 = 650;
+    var_13 = 650;
 
-    if(isDefined(var11.data)) {
-      if(istrue(var11.data.script_ignoreme)) {
+    if(isDefined(var_11.data)) {
+      if(istrue(var_11.data.script_ignoreme)) {
         continue;
       }
 
-      if(istrue(var11.data.script_radius)) {
-        var13 = var11.data.script_radius;
+      if(istrue(var_11.data.script_radius)) {
+        var_13 = var_11.data.script_radius;
 
-        if(var12 > var13 * var13) {
+        if(var_12 > var_13 * var_13) {
           continue;
         }
       }
 
-      if(scripts\engine\utility::is_equal(var11.data.script_type, "light_spot")) {
-        var14 = var11.data.script_fov_inner;
-        var15 = var11.data.angles;
-        var16 = var11.lightpos;
+      if(scripts\engine\utility::is_equal(var_11.data.script_type, "light_spot")) {
+        var_14 = var_11.data.script_fov_inner;
+        var_15 = var_11.data.angles;
+        var_16 = var_11.lightpos;
 
-        if(!scripts\engine\utility::within_fov(var16, var15, var2, cos(var14))) {
+        if(!scripts\engine\utility::within_fov(var_16, var_15, var_2, cos(var_14))) {
           continue;
         }
       }
     }
 
-    if(!var11 istouching(self.in_dynolight_trigger)) {
+    if(!var_11 istouching(self.in_dynolight_trigger)) {
       continue;
     }
 
-    var17 = var4.size;
-    var4 = var11;
-    var6 = var13;
-    var5 = var12;
+    var_17 = var_4.size;
+    var_4 = var_11;
+    var_6 = var_13;
+    var_5 = var_12;
   }
 
-  if(var7) {
-    var18 = 0;
-    var19 = spawnStruct();
-    var20 = self pathdisttogoal();
-    var21 = 32;
-    var19.bmoving = lengthsquared(self.velocity) > 1 || var20 > var21;
-    var22 = self getapproxeyepos() - self.origin;
+  if(var_7) {
+    var_18 = 0;
+    var_19 = spawnStruct();
+    var_20 = self pathdisttogoal();
+    var_21 = 32;
+    var_19.bmoving = lengthsquared(self.velocity) > 1 || var_20 > var_21;
+    var_22 = self getapproxeyepos() - self.origin;
 
-    if(var19.bmoving) {
-      var19.pointsonpath = [];
-      var19.pointsonpath[0] = self.origin + var22;
-      var19.pointsonpath[1] = self getposonpath(var21) + var22;
+    if(var_19.bmoving) {
+      var_19.pointsonpath = [];
+      var_19.pointsonpath[0] = self.origin + var_22;
+      var_19.pointsonpath[1] = self getposonpath(var_21) + var_22;
 
-      if(var20 > var21 * 2) {
-        var19.pointsonpath[2] = self getposonpath(var21 * 2) + var22;
+      if(var_20 > var_21 * 2) {
+        var_19.pointsonpath[2] = self getposonpath(var_21 * 2) + var_22;
       }
     }
 
-    var9 = var4.size;
+    var_9 = var_4.size;
 
-    for(var10 = 0; var10 < var9; var10++) {
-      var11 = var4[var10];
-      var23 = sqrt(var5[var10]);
-      var13 = var6[var10];
-      var24 = 0;
+    for(var_10 = 0; var_10 < var_9; var_10++) {
+      var_11 = var_4[var_10];
+      var_23 = sqrt(var_5[var_10]);
+      var_13 = var_6[var_10];
+      var_24 = 0;
 
-      if(isDefined(var11.data) && isDefined(var11.data.script_percent)) {
-        var24 = var11.data.script_percent;
+      if(isDefined(var_11.data) && isDefined(var_11.data.script_percent)) {
+        var_24 = var_11.data.script_percent;
       } else if(isDefined(level.dynolight_falloff_dist)) {
-        var24 = level.dynolight_falloff_dist;
+        var_24 = level.dynolight_falloff_dist;
       }
 
-      var25 = (1 - scripts\engine\math::normalize_value(var13 * var24, var13, var23)) * var11.intensity;
+      var_25 = (1 - scripts\engine\math::normalize_value(var_13 * var_24, var_13, var_23)) * var_11.intensity;
 
-      if(!dynolight_trace_passed(var11, var19)) {
+      if(!dynolight_trace_passed(var_11, var_19)) {
         continue;
       }
 
-      var18 += var25;
+      var_18 += var_25;
 
-      if(var18 > 0.5) {
+      if(var_18 > 0.5) {
         break;
       }
     }
 
-    self.lightmeter = var18;
+    self.lightmeter = var_18;
     self.lightmeter_lastchecktime = gettime();
     self.lightmeter_lastcheckpos = self.origin;
   }
 }
 
-function dynolight_trace_passed(var0, var1) {
-  var2 = [level.player];
+function dynolight_trace_passed(var_0, var_1) {
+  var_2 = [level.player];
 
-  if(isDefined(var0.linked_ents)) {
-    var2 = scripts\engine\utility::array_combine(var2, var0.linked_ents);
+  if(isDefined(var_0.linked_ents)) {
+    var_2 = scripts\engine\utility::array_combine(var_2, var_0.linked_ents);
   }
 
-  if(istrue(var1.bmoving)) {
-    var2 = scripts\engine\utility::array_combine(var2, [var0, self]);
-    var3 = var1.pointsonpath.size;
+  if(istrue(var_1.bmoving)) {
+    var_2 = scripts\engine\utility::array_combine(var_2, [var_0, self]);
+    var_3 = var_1.pointsonpath.size;
 
-    for(var4 = 0; var4 < var3; var4++) {
-      var5 = var1.pointsonpath[var4];
+    for(var_4 = 0; var_4 < var_3; var_4++) {
+      var_5 = var_1.pointsonpath[var_4];
 
-      if(scripts\engine\trace::ray_trace_passed(var0.lightpos, var5, var2, level.dynolight_trace_contents)) {
+      if(scripts\engine\trace::ray_trace_passed(var_0.lightpos, var_5, var_2, level.dynolight_trace_contents)) {
         return 1;
       }
     }
@@ -261,7 +261,7 @@ function dynolight_trace_passed(var0, var1) {
     return 0;
   }
 
-  return var3 scripts\engine\utility::can_trace_to_ai(var3.lightpos, self, var5, level.dynolight_trace_contents);
+  return var_3 scripts\engine\utility::can_trace_to_ai(var_3.lightpos, self, var_5, level.dynolight_trace_contents);
 }
 
 function is_gun_raised() {
@@ -273,23 +273,23 @@ function is_gun_raised() {
 }
 
 function draw_spotlight_fov() {
-  var0 = acos(cos(self.data.script_fov_inner));
-  var1 = self.data.angles[1];
-  var2 = self.data.angles[0];
-  var3 = (1, 0, 0);
-  var4 = self.data.script_radius;
-  var5 = self.lightpos;
-  var6 = 10;
+  var_0 = acos(cos(self.data.script_fov_inner));
+  var_1 = self.data.angles[1];
+  var_2 = self.data.angles[0];
+  var_3 = (1, 0, 0);
+  var_4 = self.data.script_radius;
+  var_5 = self.lightpos;
+  var_6 = 10;
 }
 
 function draw_flashlight_fov() {
-  var0 = cos(30);
-  var1 = (1, 0, 0);
-  var2 = acos(var0);
-  var3 = self gettagangles("tag_flash")[1];
-  var4 = 500;
-  var5 = self gettagorigin("tag_flash");
-  var6 = 10;
+  var_0 = cos(30);
+  var_1 = (1, 0, 0);
+  var_2 = acos(var_0);
+  var_3 = self gettagangles("tag_flash")[1];
+  var_4 = 500;
+  var_5 = self gettagorigin("tag_flash");
+  var_6 = 10;
 }
 
 function disable_ai_dynolight_behavior() {
@@ -321,7 +321,7 @@ function nvg_death_cleanup() {
   }
 }
 
-function flashlight_on(var0) {
+function flashlight_on(var_0) {
   if(!can_use_flashlight()) {
     return;
   }
@@ -331,7 +331,7 @@ function flashlight_on(var0) {
   }
 
   self.flashlight = 1;
-  play_flashlight_fx(var0);
+  play_flashlight_fx(var_0);
 
   if(isDefined(self.flashlightlaserweapon)) {
     flashlight_laser_on();
@@ -339,13 +339,13 @@ function flashlight_on(var0) {
   }
 }
 
-function flashlight_off(var0) {
+function flashlight_off(var_0) {
   if(!is_using_flashlight()) {
     return;
   }
 
   self.flashlight = 0;
-  kill_flashlight_fx(var0);
+  kill_flashlight_fx(var_0);
 
   if(isDefined(self.flashlightlaserweapon)) {
     flashlight_laser_off();
@@ -358,12 +358,12 @@ function flashlight_laser_on() {
     return;
   }
 
-  var0 = spawn("script_model", (0, 0, 0));
-  var0 linkTo(self, self.flashlightfxtag, (0, 0, 0), (0, 0, 0));
-  var0 setModel("tag_laser");
-  var0 setmoverlaserweapon(self.flashlightlaserweapon);
-  var0 laserforceon();
-  self.flashlightlaser = var0;
+  var_0 = spawn("script_model", (0, 0, 0));
+  var_0 linkTo(self, self.flashlightfxtag, (0, 0, 0), (0, 0, 0));
+  var_0 setModel("tag_laser");
+  var_0 setmoverlaserweapon(self.flashlightlaserweapon);
+  var_0 laserforceon();
+  self.flashlightlaser = var_0;
   thread flashlight_laser_cleanup();
 }
 
@@ -385,27 +385,27 @@ function flashlight_laser_off() {
   self.flashlightlaser = undefined;
 }
 
-function play_flashlight_fx(var0) {
-  var1 = "tag_flash";
+function play_flashlight_fx(var_0) {
+  var_1 = "tag_flash";
 
   if(isDefined(self.flashlightfxoverridetag)) {
-    var1 = self.flashlightfxoverridetag;
+    var_1 = self.flashlightfxoverridetag;
   }
 
-  var2 = "npc_flashlight";
+  var_2 = "npc_flashlight";
 
   if(isDefined(self.flashlightfxoverride)) {
-    var2 = self.flashlightfxoverride;
+    var_2 = self.flashlightfxoverride;
   }
 
-  self.flashlightfx = var2;
-  self.flashlightfxtag = var1;
+  self.flashlightfx = var_2;
+  self.flashlightfxtag = var_1;
 
-  if(!isDefined(var0)) {
-    var0 = 1;
+  if(!isDefined(var_0)) {
+    var_0 = 1;
   }
 
-  if(var0) {
+  if(var_0) {
     scripts\engine\sp\utility::fx_playontag_safe(self.flashlightfx, self.flashlightfxtag, undefined, undefined, 1);
     return;
   }
@@ -413,7 +413,7 @@ function play_flashlight_fx(var0) {
   playFXOnTag(scripts\engine\utility::getfx(self.flashlightfx), self, self.flashlightfxtag);
 }
 
-function kill_flashlight_fx(var0) {
+function kill_flashlight_fx(var_0) {
   if(scripts\engine\utility::is_equal(self.flashlightfxtag, "tag_flash") || !isDefined(self.flashlightfxtag)) {
     if(nullweapon(self.weapon)) {
       return;
@@ -421,20 +421,20 @@ function kill_flashlight_fx(var0) {
   }
 
   if(isDefined(self.flashlightfx)) {
-    var1 = "tag_flash";
+    var_1 = "tag_flash";
 
     if(isDefined(self.flashlightfxtag)) {
-      var1 = self.flashlightfxtag;
+      var_1 = self.flashlightfxtag;
     }
 
-    if(!isDefined(var0)) {
-      var0 = 1;
+    if(!isDefined(var_0)) {
+      var_0 = 1;
     }
 
-    if(var0) {
-      scripts\engine\sp\utility::fx_killontag_safe(self.flashlightfx, var1, undefined, undefined, 1);
+    if(var_0) {
+      scripts\engine\sp\utility::fx_killontag_safe(self.flashlightfx, var_1, undefined, undefined, 1);
     } else {
-      killfxontag(scripts\engine\utility::getfx(self.flashlightfx), self, var1);
+      killfxontag(scripts\engine\utility::getfx(self.flashlightfx), self, var_1);
     }
   }
 

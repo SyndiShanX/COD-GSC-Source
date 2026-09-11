@@ -7,8 +7,8 @@ function initfinalkillcam() {
   level.finalkillcamenabled = level.finalkillcamtype == 0;
   level.finalkillcams = [];
 
-  foreach(var1 in level.teamnamelist) {
-    level.finalkillcams[var1] = undefined;
+  foreach(var_1 in level.teamnamelist) {
+    level.finalkillcams[var_1] = undefined;
   }
 
   level.finalkillcams["none"] = undefined;
@@ -22,8 +22,8 @@ function initfinalkillcam() {
 }
 
 function erasefinalkillcam() {
-  for(var0 = 0; var0 < level.teamnamelist.size; var0++) {
-    level.finalkillcams[level.teamnamelist[var0]] = undefined;
+  for(var_0 = 0; var_0 < level.teamnamelist.size; var_0++) {
+    level.finalkillcams[level.teamnamelist[var_0]] = undefined;
   }
 
   level.finalkillcams["none"] = undefined;
@@ -31,7 +31,7 @@ function erasefinalkillcam() {
 }
 
 function preloadfinalkillcam() {
-  var0 = undefined;
+  var_0 = undefined;
 
   if(istrue(level.nukedetonated)) {
     return;
@@ -58,55 +58,55 @@ function preloadfinalkillcam() {
   }
 
   if(level.finalkillcamenabled) {
-    var1 = level.finalkillcams[level.finalkillcam_winner];
+    var_1 = level.finalkillcams[level.finalkillcam_winner];
 
-    if(!isDefined(var1)) {
+    if(!isDefined(var_1)) {
       scripts\mp\flags::levelflagset("final_killcam_preloaded");
       return;
     }
 
-    var0 = var1.attacker;
+    var_0 = var_1.attacker;
   } else {
-    var2 = gettime();
+    var_2 = gettime();
 
     while(!scripts\mp\potg::issystemfinalized()) {
       waitframe();
     }
 
     if(scripts\mp\potg::shouldskippotg() == 0) {
-      var3 = scripts\mp\potg::getfinalpotginfo();
+      var_3 = scripts\mp\potg::getfinalpotginfo();
 
-      if(!isDefined(var3)) {
+      if(!isDefined(var_3)) {
         scripts\mp\flags::levelflagset("final_killcam_preloaded");
         return;
       }
 
-      var0 = var3.spectateentity;
+      var_0 = var_3.spectateentity;
     } else {
       level.potgenabled = 0;
       level.finalkillcamtype = 0;
       level.finalkillcamenabled = 1;
-      var1 = level.finalkillcams[level.finalkillcam_winner];
+      var_1 = level.finalkillcams[level.finalkillcam_winner];
 
-      if(!isDefined(var1)) {
+      if(!isDefined(var_1)) {
         scripts\mp\flags::levelflagset("final_killcam_preloaded");
         return;
       }
 
-      var0 = var1.attacker;
+      var_0 = var_1.attacker;
     }
   }
 
-  if(!isDefined(var0) || !isPlayer(var0)) {
+  if(!isDefined(var_0) || !isPlayer(var_0)) {
     scripts\mp\flags::levelflagset("final_killcam_preloaded");
     return;
   }
 
-  var4 = var0 getEye();
+  var_4 = var_0 getEye();
 
-  foreach(var6 in level.players) {
-    var6 loadcustomizationplayerview(var0);
-    var6 predictstreampos(var4, 1);
+  foreach(var_6 in level.players) {
+    var_6 loadcustomizationplayerview(var_0);
+    var_6 predictstreampos(var_4, 1);
   }
 
   if(level.potgenabled) {
@@ -124,16 +124,16 @@ function dopotgkillcam() {
   level.showingfinalkillcam = 1;
   level.maxkillcamdelay = 0;
 
-  foreach(var1 in level.players) {
+  foreach(var_1 in level.players) {
     thread dopotgkillcamforplayer();
   }
 
   for(;;) {
-    var3 = 0;
+    var_3 = 0;
 
-    foreach(var1 in level.players) {
-      if(istrue(var1.inpotgkillcam)) {
-        var3 = 1;
+    foreach(var_1 in level.players) {
+      if(istrue(var_1.inpotgkillcam)) {
+        var_3 = 1;
         break;
       }
     }
@@ -150,17 +150,17 @@ function dopotgkillcamforplayer() {
   self.inpotgkillcam = 1;
   scripts\mp\utility\player::restorebasevisionset(0);
   self setclientomnvar("post_game_state", 4);
-  var0 = scripts\mp\potg::getfinalpotginfo();
+  var_0 = scripts\mp\potg::getfinalpotginfo();
 
-  if(!isDefined(var0) || !isDefined(var0.spectateentity)) {
+  if(!isDefined(var_0) || !isDefined(var_0.spectateentity)) {
     potgkillcamover();
     return;
   }
 
-  thread scripts\mp\killcam::potg_killcam(var0.spectateentity, var0.psoffsettime, var0.starttime, var0.endtime);
-  var1 = scripts\engine\utility::ref_143b4("begin_killcam", "killcam_ended");
+  thread scripts\mp\killcam::potg_killcam(var_0.spectateentity, var_0.psoffsettime, var_0.starttime, var_0.endtime);
+  var_1 = scripts\engine\utility::ref_143b4("begin_killcam", "killcam_ended");
 
-  if(var1 == "killcam_ended") {
+  if(var_1 == "killcam_ended") {
     potgkillcamover();
     return;
   }
@@ -185,54 +185,54 @@ function dofinalkillcam() {
   }
 
   level.showingfinalkillcam = 1;
-  var0 = "none";
+  var_0 = "none";
 
   if(isDefined(level.finalkillcam_winner)) {
-    var0 = level.finalkillcam_winner;
+    var_0 = level.finalkillcam_winner;
   }
 
-  var1 = level.finalkillcams[var0];
+  var_1 = level.finalkillcams[var_0];
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     level.showingfinalkillcam = 0;
     return 0;
   }
 
-  var2 = var1.attacker;
-  var3 = var1.victim;
+  var_2 = var_1.attacker;
+  var_3 = var_1.victim;
 
-  if(!isDefined(var3) || !isDefined(var2)) {
+  if(!isDefined(var_3) || !isDefined(var_2)) {
     level.showingfinalkillcam = 0;
     return 0;
   }
 
-  var4 = 20;
-  var5 = scripts\mp\utility\game::getsecondspassed() - var1.timerecorded;
+  var_4 = 20;
+  var_5 = scripts\mp\utility\game::getsecondspassed() - var_1.timerecorded;
 
-  if(var5 > var4) {
+  if(var_5 > var_4) {
     level.showingfinalkillcam = 0;
     return 0;
   }
 
-  level thread scripts\cp\vehicles\vehicle_compass_cp::processfinalkillchallenges(var2, var3);
-  var6 = (gettime() - var3.deathtime) / 1000;
+  level thread scripts\cp\vehicles\vehicle_compass_cp::processfinalkillchallenges(var_2, var_3);
+  var_6 = (gettime() - var_3.deathtime) / 1000;
   setglobalsoundcontext("atmosphere", "killcam", 0.1);
   level.maxkillcamdelay = 0;
 
-  foreach(var8 in level.players) {
-    var8 scripts\mp\utility\player::restorebasevisionset(0);
-    var8.killcamentitylookat = var3 getentitynumber();
-    var8 scripts\mp\damage::updatedeathdetails(var1.attackers, var1.attackerdata, var2);
+  foreach(var_8 in level.players) {
+    var_8 scripts\mp\utility\player::restorebasevisionset(0);
+    var_8.killcamentitylookat = var_3 getentitynumber();
+    var_8 scripts\mp\damage::updatedeathdetails(var_1.attackers, var_1.attackerdata, var_2);
 
-    if(!scripts\mp\utility\weapon::iskillstreakweapon(var1.objweapon.basename)) {
-      var8 scripts\mp\killcam::setkillcamnormalweaponomnvars(var1.objweapon, var1.smeansofdeath, var1.einflictor, var1.executionref);
+    if(!scripts\mp\utility\weapon::iskillstreakweapon(var_1.objweapon.basename)) {
+      var_8 scripts\mp\killcam::setkillcamnormalweaponomnvars(var_1.objweapon, var_1.smeansofdeath, var_1.einflictor, var_1.executionref);
     }
 
-    var8 setclientomnvar("post_game_state", 3);
-    var8 setclientomnvar("ui_killcam_victim_or_attacker", 1);
-    var8 playlocalsound("final_killcam_in");
-    var8 setclienttriggeraudiozonepartial("killcam", "mix");
-    var8 thread scripts\mp\killcam::dokillcamfromstruct(var1, var6, 0, 1);
+    var_8 setclientomnvar("post_game_state", 3);
+    var_8 setclientomnvar("ui_killcam_victim_or_attacker", 1);
+    var_8 playlocalsound("final_killcam_in");
+    var_8 setclienttriggeraudiozonepartial("killcam", "mix");
+    var_8 thread scripts\mp\killcam::dokillcamfromstruct(var_1, var_6, 0, 1);
   }
 
   wait 0.15 + level.maxkillcamdelay;
@@ -246,15 +246,15 @@ function dofinalkillcam() {
 
 function play_patrol_sequence_based_on_first_vehicle() {
   self notify("showing_final_killcam");
-  var0 = 1;
-  var1 = self.killcamlength - 0.5;
+  var_0 = 1;
+  var_1 = self.killcamlength - 0.5;
 
   if(getDvar("scr_br_gametype", "") == "kingslayer") {
-    var0 = 0;
-    var1 = 0;
+    var_0 = 0;
+    var_1 = 0;
   }
 
-  thread scripts\mp\utility\game::setuipostgamefade(var0, var1);
+  thread scripts\mp\utility\game::setuipostgamefade(var_0, var_1);
   self setclientomnvar("post_game_state", 3);
   thread watchplaybackend();
 }
@@ -272,36 +272,36 @@ function watchplaybackend() {
   thread scripts\mp\playerlogic::spawnendofgame();
 }
 
-function recordfinalkillcam(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10) {
+function recordfinalkillcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   if(!scripts\mp\potg::shouldskippotg()) {
     return;
   }
 
-  var11 = spawnStruct();
+  var_11 = spawnStruct();
 
-  if(isDefined(var4) && isagent(var4)) {
-    var11.agent_type = var4.agent_type;
-    var11.lastspawntime = var4.lastspawntime;
+  if(isDefined(var_4) && isagent(var_4)) {
+    var_11.agent_type = var_4.agent_type;
+    var_11.lastspawntime = var_4.lastspawntime;
   }
 
-  var12 = scripts\mp\killcam::makekillcamdata(var4, var11, var3, var5, var6, var1 getentitynumber(), var7, var8, var9, 12, var2, var1, var10, var2.pers["loadoutPerks"], 0, 1);
-  var12.timerecorded = scripts\mp\utility\game::getsecondspassed();
+  var_12 = scripts\mp\killcam::makekillcamdata(var_4, var_11, var_3, var_5, var_6, var_1 getentitynumber(), var_7, var_8, var_9, 12, var_2, var_1, var_10, var_2.pers["loadoutPerks"], 0, 1);
+  var_12.timerecorded = scripts\mp\utility\game::getsecondspassed();
 
-  if(var10 == "MOD_EXECUTION") {
-    var12.timerecorded -= 3;
-    var12.timerecorded = max(0, var12.timerecorded);
+  if(var_10 == "MOD_EXECUTION") {
+    var_12.timerecorded -= 3;
+    var_12.timerecorded = max(0, var_12.timerecorded);
   }
 
-  var12.attackers = var1.attackers;
-  var12.attackerdata = var1.attackerdata;
+  var_12.attackers = var_1.attackers;
+  var_12.attackerdata = var_1.attackerdata;
 
-  if(level.teambased && isDefined(var2.team)) {
-    level.finalkillcams[var2.team] = var12;
+  if(level.teambased && isDefined(var_2.team)) {
+    level.finalkillcams[var_2.team] = var_12;
   } else if(!level.teambased) {
-    level.finalkillcams[var2.guid] = var12;
+    level.finalkillcams[var_2.guid] = var_12;
   }
 
-  level.finalkillcams["none"] = var12;
+  level.finalkillcams["none"] = var_12;
 }
 
 function waitskipkillcambuttonduringdeathtimer() {
@@ -313,14 +313,14 @@ function waitskipkillcambuttonduringdeathtimer() {
   self notify("killcam_death_button_cancel");
 }
 
-function waitskipkillcamduringdeathtimer(var0) {
+function waitskipkillcamduringdeathtimer(var_0) {
   self endon("disconnect");
   self endon("killcam_death_button_cancel");
-  wait var0;
+  wait var_0;
   self notify("killcam_death_done_waiting");
 }
 
-function skipkillcamduringdeathtimer(var0) {
+function skipkillcamduringdeathtimer(var_0) {
   self endon("disconnect");
 
   if(level.showingfinalkillcam) {
@@ -329,10 +329,10 @@ function skipkillcamduringdeathtimer(var0) {
 
   if(!isai(self)) {
     thread waitskipkillcambuttonduringdeathtimer();
-    thread waitskipkillcamduringdeathtimer(var0);
-    var1 = scripts\engine\utility::ref_143ad("killcam_death_done_waiting", "killcam_death_button_cancel");
+    thread waitskipkillcamduringdeathtimer(var_0);
+    var_1 = scripts\engine\utility::ref_143ad("killcam_death_done_waiting", "killcam_death_button_cancel");
 
-    if(isDefined(var1) && var1 == "killcam_death_done_waiting") {
+    if(isDefined(var_1) && var_1 == "killcam_death_done_waiting") {
       self.skippedkillcam = 0;
       return false;
     } else {
@@ -346,8 +346,8 @@ function skipkillcamduringdeathtimer(var0) {
 }
 
 function anyplayersinkillcam() {
-  foreach(var1 in level.players) {
-    if(isDefined(var1.killcam)) {
+  foreach(var_1 in level.players) {
+    if(isDefined(var_1.killcam)) {
       return true;
     }
   }

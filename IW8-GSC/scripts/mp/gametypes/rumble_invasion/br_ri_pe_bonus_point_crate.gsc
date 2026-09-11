@@ -13,14 +13,14 @@ function init() {
   level.current_safehouse_spawn_structs.spawnzombiedogtags = getdvarfloat("scr_ri_pe_bonus_point_crate_capture_time", 5);
   level.current_safehouse_spawn_structs.spectateprop = getdvarint("scr_ri_pe_bonus_points_per_crate", 10);
   level.current_safehouse_spawn_structs.specialistperk = getDvar("scr_ri_pe_bonus_point_crate_objective", "bonus_points_ri_10");
-  var0 = spawnStruct();
-  var0.weight = getdvarfloat("scr_ri_pe_bonus_point_crate_weight", 1);
-  var0.attackerswaittime = &attackerswaittime;
-  var0.ref_140cf = &ref_140cf;
-  var0.ref_14382 = &ref_14382;
-  var0.ref_11b78 = getdvarint("scr_ri_pe_bonus_point_crate_max_times", 1);
-  var0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("hardpoint", "10 5 0 00 0 0 0");
-  scripts\mp\gametypes\br_publicevents::ref_12b35(102, var0);
+  var_0 = spawnStruct();
+  var_0.weight = getdvarfloat("scr_ri_pe_bonus_point_crate_weight", 1);
+  var_0.attackerswaittime = &attackerswaittime;
+  var_0.ref_140cf = &ref_140cf;
+  var_0.ref_14382 = &ref_14382;
+  var_0.ref_11b78 = getdvarint("scr_ri_pe_bonus_point_crate_max_times", 1);
+  var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("hardpoint", "10 5 0 00 0 0 0");
+  scripts\mp\gametypes\br_publicevents::ref_12b35(102, var_0);
   _killstreakneedslocationselection::subtract_from_spawn_count_from_group();
   thread zombienumhitscar();
 }
@@ -32,19 +32,19 @@ function ref_140cf() {
 function ref_14382() {
   level endon("game_ended");
   level endon("cancel_public_event");
-  var0 = forest_combat();
-  wait var0;
+  var_0 = forest_combat();
+  wait var_0;
 }
 
 function forest_combat() {
-  var0 = getdvarfloat("scr_ri_pe_bonus_point_crate_starttime_min", 795);
-  var1 = getdvarfloat("scr_ri_pe_bonus_point_crate_starttime_max", 1110);
+  var_0 = getdvarfloat("scr_ri_pe_bonus_point_crate_starttime_min", 795);
+  var_1 = getdvarfloat("scr_ri_pe_bonus_point_crate_starttime_max", 1110);
 
-  if(var1 > var0) {
-    return randomfloatrange(var0, var1);
+  if(var_1 > var_0) {
+    return randomfloatrange(var_0, var_1);
   }
 
-  return var0;
+  return var_0;
 }
 
 function attackerswaittime() {
@@ -61,22 +61,22 @@ function zombienumhitscar() {
   }
 
   level.current_safehouse_spawn_structs.ref_12e2c.arena_bot_pickup_weapon = undefined;
-  var0 = level.currentability;
+  var_0 = level.currentability;
 
-  if(var0.size > 0) {
-    var1 = [];
+  if(var_0.size > 0) {
+    var_1 = [];
 
-    foreach(var3 in var0) {
-      var1 = var3.origin;
+    foreach(var_3 in var_0) {
+      var_1 = var_3.origin;
     }
 
-    level.current_safehouse_spawn_structs.ref_12e2c.arena_bot_pickup_weapon = var1;
+    level.current_safehouse_spawn_structs.ref_12e2c.arena_bot_pickup_weapon = var_1;
 
-    if(var1.size <= level.current_safehouse_spawn_structs.specialistbr) {
-      level.current_safehouse_spawn_structs.specialistbr = var1.size;
+    if(var_1.size <= level.current_safehouse_spawn_structs.specialistbr) {
+      level.current_safehouse_spawn_structs.specialistbr = var_1.size;
 
-      if(level.current_safehouse_spawn_structs.specialdayloadouts > var1.size) {
-        level.current_safehouse_spawn_structs.specialdayloadouts = var1.size;
+      if(level.current_safehouse_spawn_structs.specialdayloadouts > var_1.size) {
+        level.current_safehouse_spawn_structs.specialdayloadouts = var_1.size;
         return;
       }
 

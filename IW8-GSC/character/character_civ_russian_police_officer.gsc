@@ -36,6 +36,6 @@ function main_mp() {
   scripts\code\character::attachhat("hats_civ_russian_police_officer", xmodelalias\hats_civ_russian_police_officer::main());
 }
 
-function precache_mp(var0) {
-  level.agent_definition[var0]["animclass"] = "rebel";
+function precache_mp(var_0) {
+  level.agent_definition[var_0]["animclass"] = "rebel";
 }

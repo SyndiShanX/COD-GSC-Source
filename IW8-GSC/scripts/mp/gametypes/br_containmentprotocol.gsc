@@ -4,9 +4,9 @@
 ***********************************************************/
 
 function init() {
-  var0 = any_player_within_distance2d();
+  var_0 = any_player_within_distance2d();
 
-  if(!var0) {
+  if(!var_0) {
     return;
   }
 
@@ -32,9 +32,9 @@ function any_player_within_distance2d() {
 
   level.hostskipburndownhigh = spawnStruct();
   level.hostskipburndownhigh.intensity = getdvarint("scr_br_containmentprotocol_intensity", 1);
-  var0 = getdvarfloat("scr_br_containmentprotocol_intensity_likelihood", 0.05);
-  var1 = randomfloat(1) < var0;
-  return var1 || istrue(level.hostskipburndownlow);
+  var_0 = getdvarfloat("scr_br_containmentprotocol_intensity_likelihood", 0.05);
+  var_1 = randomfloat(1) < var_0;
+  return var_1 || istrue(level.hostskipburndownlow);
 }
 
 function actorid() {
@@ -44,159 +44,159 @@ function actorid() {
   level waittill("br_c130_left_bounds");
 
   for(;;) {
-    var0 = scripts\mp\flags::gameflag("prematch_done") || istrue(level.hostskipburndownlow);
+    var_0 = scripts\mp\flags::gameflag("prematch_done") || istrue(level.hostskipburndownlow);
 
-    if(var0) {
+    if(var_0) {
       thread actorloopanim();
     }
 
-    var1 = 0;
-    var2 = scripts\mp\utility\game::round_vehicle_logic() == "reveal";
+    var_1 = 0;
+    var_2 = scripts\mp\utility\game::round_vehicle_logic() == "reveal";
 
-    if(!var2 && isDefined(level.br_circle) && isDefined(level.br_circle.circleindex)) {
-      var3 = getdvarint("scr_br_containmentprotocol_ambientfx_circlenum_delay", 5);
-      var1 = 5 * max(0, level.br_circle.circleindex);
+    if(!var_2 && isDefined(level.br_circle) && isDefined(level.br_circle.circleindex)) {
+      var_3 = getdvarint("scr_br_containmentprotocol_ambientfx_circlenum_delay", 5);
+      var_1 = 5 * max(0, level.br_circle.circleindex);
     }
 
-    var4 = var1 + getdvarint("scr_br_containmentprotocol_ambientfx_delay_min", 25);
-    var5 = var1 + getdvarint("scr_br_containmentprotocol_ambientfx_delay_max", 70);
-    var6 = randomfloatrange(var4, var5);
-    wait var6;
+    var_4 = var_1 + getdvarint("scr_br_containmentprotocol_ambientfx_delay_min", 25);
+    var_5 = var_1 + getdvarint("scr_br_containmentprotocol_ambientfx_delay_max", 70);
+    var_6 = randomfloatrange(var_4, var_5);
+    wait var_6;
   }
 }
 
 function actorloopanim() {
   level endon("end_containment_fx");
 
-  for(var0 = getdvarint("scr_br_containmentprotocol_ambientfx_rocketcount", 3); var0 > 0; var0--) {
+  for(var_0 = getdvarint("scr_br_containmentprotocol_ambientfx_rocketcount", 3); var_0 > 0; var_0--) {
     wait randomfloat(15);
     thread actorthinkpath_default();
   }
 
-  var1 = getdvarint("scr_br_containmentprotocol_ambientfx_delay_before_plane_strafe", 3);
-  wait var1;
+  var_1 = getdvarint("scr_br_containmentprotocol_ambientfx_delay_before_plane_strafe", 3);
+  wait var_1;
   actorrope();
 }
 
 function actorthinkpath_default() {
   level endon("game_ended");
   level endon("end_containment_fx");
-  var0 = (randomintrange(-10000, 10000), randomintrange(-10000, 10000), 0);
-  var1 = level.br_level.br_mapcenter + var0;
-  var2 = getdvarint("scr_br_containmentprotocol_ambientfx_rocketheight", -700);
-  var1 = (var1[0], var1[1], var2);
-  var3 = vectorNormalize((randomfloatrange(-1, 1), randomfloatrange(-1, 1), 0));
-  var4 = scripts\mp\utility\game_utility_mp::removespawns(0);
-  var5 = getdvarfloat("scr_br_containmentprotocol_ambientfx_rocket_pathlengthmultiplier", 1.7);
-  var6 = var4 * var5;
-  var7 = var1 - var3 * var6 / 2;
-  var8 = var1 + var3 * var6 / 2;
-  var9 = getdvarint("scr_br_containmentprotocol_ambientfx_rocketduration", 14);
-  var10 = spawn("script_model", var7);
+  var_0 = (randomintrange(-10000, 10000), randomintrange(-10000, 10000), 0);
+  var_1 = level.br_level.br_mapcenter + var_0;
+  var_2 = getdvarint("scr_br_containmentprotocol_ambientfx_rocketheight", -700);
+  var_1 = (var_1[0], var_1[1], var_2);
+  var_3 = vectorNormalize((randomfloatrange(-1, 1), randomfloatrange(-1, 1), 0));
+  var_4 = scripts\mp\utility\game_utility_mp::removespawns(0);
+  var_5 = getdvarfloat("scr_br_containmentprotocol_ambientfx_rocket_pathlengthmultiplier", 1.7);
+  var_6 = var_4 * var_5;
+  var_7 = var_1 - var_3 * var_6 / 2;
+  var_8 = var_1 + var_3 * var_6 / 2;
+  var_9 = getdvarint("scr_br_containmentprotocol_ambientfx_rocketduration", 14);
+  var_10 = spawn("script_model", var_7);
 
-  if(!isDefined(var10)) {
+  if(!isDefined(var_10)) {
     return;
   }
 
-  var10 setModel("tag_origin");
-  var10 unmarkkeyframedmover(1);
+  var_10 setModel("tag_origin");
+  var_10 unmarkkeyframedmover(1);
   waitframe();
   waitframe();
-  var10 playLoopSound("zmb_cont_ks_missile_lp");
-  playFXOnTag(level._effect["vista_rocket"], var10, "tag_origin");
-  var11 = -1 * getdvarint("NPOQPMP", 800);
-  var12 = trajectorycalculateinitialvelocity(var7, var8, (0, 0, var11), var9);
-  var10 movegravity(var12, var9);
+  var_10 playLoopSound("zmb_cont_ks_missile_lp");
+  playFXOnTag(level._effect["vista_rocket"], var_10, "tag_origin");
+  var_11 = -1 * getdvarint("NPOQPMP", 800);
+  var_12 = trajectorycalculateinitialvelocity(var_7, var_8, (0, 0, var_11), var_9);
+  var_10 movegravity(var_12, var_9);
 
   if(getdvarint("scr_br_containmentprotocol_debug_logs", 0) == 1) {
-    var13 = "Vista Rocket start:" + var7 + "destination:" + var8;
-    iprintlnbold(var13);
-    logstring(var13);
+    var_13 = "Vista Rocket start:" + var_7 + "destination:" + var_8;
+    iprintlnbold(var_13);
+    logstring(var_13);
   }
 
-  var14 = gettime();
-  var15 = gettime() + var9 * 1000;
+  var_14 = gettime();
+  var_15 = gettime() + var_9 * 1000;
 
-  while(gettime() < var15) {
-    var16 = var10.origin;
+  while(gettime() < var_15) {
+    var_16 = var_10.origin;
     waitframe();
-    var17 = var10.origin;
-    var18 = var17 - var16;
-    var10.angles = vectortoangles(var18);
-    var10 addpitch(90);
+    var_17 = var_10.origin;
+    var_18 = var_17 - var_16;
+    var_10.angles = vectortoangles(var_18);
+    var_10 addpitch(90);
   }
 
   waitframe();
-  var10 delete();
+  var_10 delete();
 }
 
 function actorrope() {
   level endon("game_ended");
   level endon("end_containment_fx");
-  var0 = scripts\mp\gametypes\br_circle::getrandompointincurrentcircle();
+  var_0 = scripts\mp\gametypes\br_circle::getrandompointincurrentcircle();
 
   if(getdvarint("scr_br_containmentprotocol_debug_planestafe_origin", 0) == 1) {
-    var0 = (0, 0, 0);
+    var_0 = (0, 0, 0);
   }
 
-  var1 = getdvarint("scr_br_containmentprotocol_ambientfx_rumbleradius", 10000);
-  var2 = var1 * var1;
-  var3 = undefined;
-  var4 = [];
+  var_1 = getdvarint("scr_br_containmentprotocol_ambientfx_rumbleradius", 10000);
+  var_2 = var_1 * var_1;
+  var_3 = undefined;
+  var_4 = [];
 
-  foreach(var6 in level.players) {
-    if(var6 scripts\mp\gametypes\br_public::updateinstantclassswapallowedinternal()) {
+  foreach(var_6 in level.players) {
+    if(var_6 scripts\mp\gametypes\br_public::updateinstantclassswapallowedinternal()) {
       continue;
     }
 
-    var3 = var6;
-    var7 = distancesquared(var6.origin, var0);
+    var_3 = var_6;
+    var_7 = distancesquared(var_6.origin, var_0);
 
-    if(var7 < var2) {
-      var4 = var6;
+    if(var_7 < var_2) {
+      var_4 = var_6;
     }
   }
 
-  foreach(var6 in var4) {}
+  foreach(var_6 in var_4) {}
 
   while(istrue(level.hostskipburndownhigh.monitorexitbutton) || istrue(level.hostskipburndownhigh.ref_123ad)) {
     waitframe();
   }
 
   level.hostskipburndownhigh.ref_123ad = 1;
-  add_practice_bots(1, var4);
+  add_practice_bots(1, var_4);
   add_rider_to_decho();
-  var11 = undefined;
+  var_11 = undefined;
 
-  if(var4.size > 0) {
-    var11 = var4[0];
+  if(var_4.size > 0) {
+    var_11 = var_4[0];
   } else {
-    var11 = var3;
+    var_11 = var_3;
   }
 
-  if(isDefined(var11)) {
+  if(isDefined(var_11)) {
     wait 3;
-    add_to_ents_to_clean_up(var4);
-    var11 scripts\cp_mp\killstreaks\airstrike::game_end_watcher(var0, 1, 1);
+    add_to_ents_to_clean_up(var_4);
+    var_11 scripts\cp_mp\killstreaks\airstrike::game_end_watcher(var_0, 1, 1);
 
     if(getdvarint("scr_br_containmentprotocol_debug_logs", 0) == 1) {
-      iprintlnbold("Plane Strafe above:" + var0);
+      iprintlnbold("Plane Strafe above:" + var_0);
     }
 
     wait 12;
-    add_to_emp_drone_target_list(var4);
+    add_to_emp_drone_target_list(var_4);
 
     if(istrue(level.hostskipburndownhigh.ref_12abe)) {
       add_rider_to_decho(1, level.hostskipburndownhigh.instant_revive_buffer);
       wait 3;
-      var11 scripts\cp_mp\killstreaks\airstrike::game_end_watcher(var0, 1, 1);
+      var_11 scripts\cp_mp\killstreaks\airstrike::game_end_watcher(var_0, 1, 1);
 
       if(getdvarint("scr_br_containmentprotocol_debug_logs", 0) == 1) {
-        iprintlnbold("Plane Strafe came back over:" + var0);
+        iprintlnbold("Plane Strafe came back over:" + var_0);
       }
 
       wait 12;
-      add_to_emp_drone_target_list(var4);
+      add_to_emp_drone_target_list(var_4);
       wait 3;
     }
   }
@@ -214,9 +214,9 @@ function add_player_to_focus_fire_attacker_list() {
     level waittill("br_c130_left_bounds");
   }
 
-  var0 = add_scriptable_setup();
+  var_0 = add_scriptable_setup();
 
-  if(!var0) {
+  if(!var_0) {
     return;
   }
 
@@ -254,28 +254,28 @@ function add_scriptable_setup() {
     game["dialog"]["containment_vo_2"] = "alert_phase4_20";
     game["dialog"]["containment_vo_3"] = "alert_dam_10";
     game["dialog"]["containment_vo_4"] = "alert_phase4_30";
-    var0 = "";
-    var1 = randomintrange(0, 4);
+    var_0 = "";
+    var_1 = randomintrange(0, 4);
 
-    switch (var1) {
+    switch (var_1) {
       case 0:
-        var0 = "alert_phase4_40";
+        var_0 = "alert_phase4_40";
         break;
       case 1:
-        var0 = "alert_phase4_50";
+        var_0 = "alert_phase4_50";
         break;
       case 2:
-        var0 = "alert_phase4_70";
+        var_0 = "alert_phase4_70";
         break;
       case 3:
-        var0 = "alert_phase4_80";
+        var_0 = "alert_phase4_80";
         break;
       default:
-        var0 = "alert_phase4_40";
+        var_0 = "alert_phase4_40";
         break;
     }
 
-    game["dialog"]["containment_vo_5"] = var0;
+    game["dialog"]["containment_vo_5"] = var_0;
   } else {
     return false;
   }
@@ -298,15 +298,15 @@ function add_scriptable_setup() {
 function add_to_fulton_actors() {
   level endon("game_ended");
   level endon("end_containment_fx");
-  var0 = getdvarint("scr_br_containmentprotocol_vo_delay_min", 90);
-  var1 = getdvarint("scr_br_containmentprotocol_vo_delay_max", 360);
-  var2 = getdvarint("scr_br_containmentprotocol_vo_delay_override", -1);
-  var3 = var1;
+  var_0 = getdvarint("scr_br_containmentprotocol_vo_delay_min", 90);
+  var_1 = getdvarint("scr_br_containmentprotocol_vo_delay_max", 360);
+  var_2 = getdvarint("scr_br_containmentprotocol_vo_delay_override", -1);
+  var_3 = var_1;
 
-  if(var2 != -1) {
-    var3 = var2;
+  if(var_2 != -1) {
+    var_3 = var_2;
   } else {
-    var3 = randomintrange(var0, var1);
+    var_3 = randomintrange(var_0, var_1);
   }
 
   if(getdvarint("scr_br_containmentProtocol_vo_final", 0) == 1 && level.mapname != "mp_br_mechanics") {
@@ -314,7 +314,7 @@ function add_to_fulton_actors() {
     return;
   }
 
-  wait var3;
+  wait var_3;
 }
 
 function add_stealth_logic_to_group() {
@@ -330,84 +330,84 @@ function add_stealth_logic_to_group() {
   add_struct();
   add_to_fulton_actor_players();
   wait 4;
-  var0 = 0;
+  var_0 = 0;
 
   if(getdvarint("scr_br_containmentProtocol_vo_final", 0) == 1) {
-    var0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_1");
-    var0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_2");
-    var0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_3");
-    var0 += add_to_bomb_detonator_waiting_for_pick_up_array("op1_", "containment_vo_4", undefined, 1);
-    var0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_5");
-    var0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_6");
-    var0 += 1;
-    thread elevatordoors(var0);
+    var_0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_1");
+    var_0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_2");
+    var_0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_3");
+    var_0 += add_to_bomb_detonator_waiting_for_pick_up_array("op1_", "containment_vo_4", undefined, 1);
+    var_0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_5");
+    var_0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_6");
+    var_0 += 1;
+    thread elevatordoors(var_0);
   } else {
-    var0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_1");
-    var0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_2");
-    var0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_3");
-    var0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_4");
-    var0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_5");
-    var0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_6");
-    var0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_7");
-    var0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_8");
-    var0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_9");
+    var_0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_1");
+    var_0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_2");
+    var_0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_3");
+    var_0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_4");
+    var_0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_5");
+    var_0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_6");
+    var_0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_7");
+    var_0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_8");
+    var_0 += add_to_bomb_detonator_waiting_for_pick_up_array("ebr_", "containment_vo_9");
   }
 
-  wait var0;
+  wait var_0;
   add_to_fulton_actor_players();
   wait 4;
   setomnvarforallclients("ui_br_events", 0);
   level.hostskipburndownhigh.monitorexitbutton = undefined;
 }
 
-function add_to_bomb_detonator_waiting_for_pick_up_array(var0, var1, var2, var3) {
+function add_to_bomb_detonator_waiting_for_pick_up_array(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
   level endon("end_containment_fx");
 
-  if(!isDefined(game["dialog"][var1]) || game["dialog"][var1] == "") {
+  if(!isDefined(game["dialog"][var_1]) || game["dialog"][var_1] == "") {
     return 0;
   }
 
-  var4 = "dx_brm_" + var0 + game["dialog"][var1];
-  var4 = tolower(var4);
-  var5 = lookupsoundlength(var4, 1) / 1000;
-  var5 += 1;
-  var6 = undefined;
+  var_4 = "dx_brm_" + var_0 + game["dialog"][var_1];
+  var_4 = tolower(var_4);
+  var_5 = lookupsoundlength(var_4, 1) / 1000;
+  var_5 += 1;
+  var_6 = undefined;
 
-  if(isDefined(var2)) {
-    var6 = var2;
+  if(isDefined(var_2)) {
+    var_6 = var_2;
   } else {
-    var6 = level.players;
+    var_6 = level.players;
   }
 
-  foreach(var8 in var6) {
-    if(!isDefined(var8)) {
+  foreach(var_8 in var_6) {
+    if(!isDefined(var_8)) {
       continue;
     }
 
-    if(!istrue(var8 scripts\mp\gametypes\br_public::ref_125f3()) || istrue(var3)) {
-      var8 queuedialogforplayer(var4, var1, var5);
+    if(!istrue(var_8 scripts\mp\gametypes\br_public::ref_125f3()) || istrue(var_3)) {
+      var_8 queuedialogforplayer(var_4, var_1, var_5);
     }
   }
 
-  return var5;
+  return var_5;
 }
 
 function add_to_fulton_actor_players() {
-  foreach(var1 in level.players) {
-    if(add_spawn_disable_struct(var1)) {
-      var1 playsoundtoplayer("ui_broadcast_warning", var1);
+  foreach(var_1 in level.players) {
+    if(add_spawn_disable_struct(var_1)) {
+      var_1 playsoundtoplayer("ui_broadcast_warning", var_1);
     }
   }
 }
 
 function add_struct() {
-  var0 = max(0, level.hostskipburndownhigh.intensity - 1);
-  setomnvarforallclients("ui_br_events", int(var0));
+  var_0 = max(0, level.hostskipburndownhigh.intensity - 1);
+  setomnvarforallclients("ui_br_events", int(var_0));
 
-  foreach(var2 in level.players) {
-    if(!add_spawn_disable_struct(var2)) {
-      var2 setclientomnvar("ui_br_events", 0);
+  foreach(var_2 in level.players) {
+    if(!add_spawn_disable_struct(var_2)) {
+      var_2 setclientomnvar("ui_br_events", 0);
     }
   }
 }
@@ -419,7 +419,7 @@ function elim_hud() {
   }
 }
 
-function elevatordoors(var0) {
+function elevatordoors(var_0) {
   if(getdvarint("scr_br_containmentprotocol", 0) == 0 && !istrue(level.hostskipburndownlow)) {
     return;
   }
@@ -434,19 +434,19 @@ function elevatordoors(var0) {
     level.hostskipburndownhigh.ref_146f9 hide();
   }
 
-  foreach(var2 in level.players) {
-    if(!add_spawn_disable_struct(var2)) {
+  foreach(var_2 in level.players) {
+    if(!add_spawn_disable_struct(var_2)) {
       continue;
     }
 
-    level.hostskipburndownhigh.ref_146f9 showtoplayer(var2);
-    thread add_to_mine_list(var2);
+    level.hostskipburndownhigh.ref_146f9 showtoplayer(var_2);
+    thread add_to_mine_list(var_2);
   }
 }
 
-function add_to_mine_list(var0) {
+function add_to_mine_list(var_0) {
   self endon("disconnect");
-  scripts\engine\utility::waittill_notify_or_timeout_return("spawnZombie", var0);
+  scripts\engine\utility::waittill_notify_or_timeout_return("spawnZombie", var_0);
 
   if(!isDefined(level.hostskipburndownhigh.ref_146f9)) {
     return;
@@ -469,48 +469,48 @@ function elevator_trigger_wait_for_spawn() {
   level.hostskipburndownhigh.ref_146f9 = undefined;
 }
 
-function add_spawn_disable_struct(var0) {
-  var1 = istrue(var0.delay_enter_combat_after_investigating_grenade);
-  var2 = var0 scripts\mp\gametypes\br_public::ref_125f3();
-  var3 = var0 scripts\mp\gametypes\br_public::updateinstantclassswapallowedinternal();
-  return !var1 && !var2 && !var3;
+function add_spawn_disable_struct(var_0) {
+  var_1 = istrue(var_0.delay_enter_combat_after_investigating_grenade);
+  var_2 = var_0 scripts\mp\gametypes\br_public::ref_125f3();
+  var_3 = var_0 scripts\mp\gametypes\br_public::updateinstantclassswapallowedinternal();
+  return !var_1 && !var_2 && !var_3;
 }
 
-function add_rider_to_decho(var0, var1) {
-  var2 = -1;
-  var3 = "";
-  var2 = randomintrange(0, 3);
+function add_rider_to_decho(var_0, var_1) {
+  var_2 = -1;
+  var_3 = "";
+  var_2 = randomintrange(0, 3);
 
-  switch (var2) {
+  switch (var_2) {
     case 0:
-      var3 = "clv_";
+      var_3 = "clv_";
       break;
     case 1:
-      var3 = "g51_";
+      var_3 = "g51_";
       break;
     case 2:
-      var3 = "g68_";
+      var_3 = "g68_";
       break;
     default:
-      var3 = "clv_";
+      var_3 = "clv_";
       break;
   }
 
-  if(isDefined(var1)) {
-    var3 = var1;
+  if(isDefined(var_1)) {
+    var_3 = var_1;
   }
 
-  level.hostskipburndownhigh.instant_revive_buffer = var3;
+  level.hostskipburndownhigh.instant_revive_buffer = var_3;
   game["dialog"]["strafing_pre"] = "";
   game["dialog"]["strafing_before"] = "";
   game["dialog"]["strafing_after"] = "";
   game["dialog"]["strafing_post"] = "";
 
-  switch (var3) {
+  switch (var_3) {
     case "clv_":
-      var2 = randomintrange(0, 5);
+      var_2 = randomintrange(0, 5);
 
-      switch (var2) {
+      switch (var_2) {
         case 0:
           game["dialog"]["strafing_pre"] = "missile_away_10";
           break;
@@ -524,9 +524,9 @@ function add_rider_to_decho(var0, var1) {
 
       break;
     case "g51_":
-      var2 = randomintrange(0, 4);
+      var_2 = randomintrange(0, 4);
 
-      switch (var2) {
+      switch (var_2) {
         case 0:
           game["dialog"]["strafing_pre"] = "strafing_strangers_10";
         default:
@@ -536,9 +536,9 @@ function add_rider_to_decho(var0, var1) {
 
       break;
     case "g68_":
-      var2 = randomintrange(0, 4);
+      var_2 = randomintrange(0, 4);
 
-      switch (var2) {
+      switch (var_2) {
         case 0:
           game["dialog"]["strafing_pre"] = "strafing_strangers_10";
           break;
@@ -555,11 +555,11 @@ function add_rider_to_decho(var0, var1) {
       break;
   }
 
-  switch (var3) {
+  switch (var_3) {
     case "clv_":
-      var2 = randomintrange(0, 6);
+      var_2 = randomintrange(0, 6);
 
-      switch (var2) {
+      switch (var_2) {
         case 0:
           game["dialog"]["strafing_before"] = "missile_inbound_10";
           break;
@@ -585,9 +585,9 @@ function add_rider_to_decho(var0, var1) {
 
       break;
     case "g51_":
-      var2 = randomintrange(0, 3);
+      var_2 = randomintrange(0, 3);
 
-      switch (var2) {
+      switch (var_2) {
         case 0:
           game["dialog"]["strafing_before"] = "strafing_commence_10";
           break;
@@ -604,9 +604,9 @@ function add_rider_to_decho(var0, var1) {
 
       break;
     case "g68_":
-      var2 = randomintrange(0, 2);
+      var_2 = randomintrange(0, 2);
 
-      switch (var2) {
+      switch (var_2) {
         case 0:
           game["dialog"]["strafing_before"] = "strafing_ground_attack_10";
           break;
@@ -623,11 +623,11 @@ function add_rider_to_decho(var0, var1) {
       break;
   }
 
-  switch (var3) {
+  switch (var_3) {
     case "clv_":
-      var2 = randomintrange(0, 3);
+      var_2 = randomintrange(0, 3);
 
-      switch (var2) {
+      switch (var_2) {
         case 0:
           game["dialog"]["strafing_after"] = "missile_miss_10";
           break;
@@ -644,9 +644,9 @@ function add_rider_to_decho(var0, var1) {
 
       break;
     case "g51_":
-      var2 = randomintrange(0, 9);
+      var_2 = randomintrange(0, 9);
 
-      switch (var2) {
+      switch (var_2) {
         case 0:
           game["dialog"]["strafing_after"] = "strafing_1_kill_10";
           break;
@@ -681,9 +681,9 @@ function add_rider_to_decho(var0, var1) {
 
       break;
     case "g68_":
-      var2 = randomintrange(0, 6);
+      var_2 = randomintrange(0, 6);
 
-      switch (var2) {
+      switch (var_2) {
         case 0:
           game["dialog"]["strafing_after"] = "strafing_1_kill_10";
           break;
@@ -721,14 +721,14 @@ function add_rider_to_decho(var0, var1) {
       break;
   }
 
-  switch (var3) {
+  switch (var_3) {
     case "clv_":
       game["dialog"]["strafing_post"] = "";
       break;
     case "g51_":
-      var2 = randomintrange(0, 4);
+      var_2 = randomintrange(0, 4);
 
-      switch (var2) {
+      switch (var_2) {
         case 0:
           game["dialog"]["strafing_post"] = "strafing_down_there_10";
           break;
@@ -743,9 +743,9 @@ function add_rider_to_decho(var0, var1) {
 
       break;
     case "g68_":
-      var2 = randomintrange(0, 4);
+      var_2 = randomintrange(0, 4);
 
-      switch (var2) {
+      switch (var_2) {
         case 0:
           game["dialog"]["strafing_post"] = "strafing_down_there_10";
           break;
@@ -763,7 +763,7 @@ function add_rider_to_decho(var0, var1) {
       break;
   }
 
-  if(istrue(var0)) {
+  if(istrue(var_0)) {
     game["dialog"]["strafing_pre"] = "";
     game["dialog"]["strafing_before"] = "";
     game["dialog"]["strafing_post"] = "";
@@ -771,64 +771,64 @@ function add_rider_to_decho(var0, var1) {
   }
 }
 
-function add_to_ents_to_clean_up(var0) {
+function add_to_ents_to_clean_up(var_0) {
   level endon("end_containment_fx");
-  var1 = add_to_bomb_detonator_waiting_for_pick_up_array(level.hostskipburndownhigh.instant_revive_buffer, "strafing_pre", var0);
+  var_1 = add_to_bomb_detonator_waiting_for_pick_up_array(level.hostskipburndownhigh.instant_revive_buffer, "strafing_pre", var_0);
 
-  if(var1 != 0) {
-    wait var1 + 3;
+  if(var_1 != 0) {
+    wait var_1 + 3;
   }
 
-  add_to_bomb_detonator_waiting_for_pick_up_array(level.hostskipburndownhigh.instant_revive_buffer, "strafing_before", var0);
+  add_to_bomb_detonator_waiting_for_pick_up_array(level.hostskipburndownhigh.instant_revive_buffer, "strafing_before", var_0);
 }
 
-function add_to_emp_drone_target_list(var0) {
+function add_to_emp_drone_target_list(var_0) {
   level endon("end_containment_fx");
-  var1 = add_to_bomb_detonator_waiting_for_pick_up_array(level.hostskipburndownhigh.instant_revive_buffer, "strafing_after", var0);
+  var_1 = add_to_bomb_detonator_waiting_for_pick_up_array(level.hostskipburndownhigh.instant_revive_buffer, "strafing_after", var_0);
 
-  if(var1 != 0) {
-    wait var1 + 3;
+  if(var_1 != 0) {
+    wait var_1 + 3;
   }
 
-  var1 = add_to_bomb_detonator_waiting_for_pick_up_array(level.hostskipburndownhigh.instant_revive_buffer, "strafing_post", var0);
+  var_1 = add_to_bomb_detonator_waiting_for_pick_up_array(level.hostskipburndownhigh.instant_revive_buffer, "strafing_post", var_0);
 
-  if(var1 != 0) {
-    wait var1;
+  if(var_1 != 0) {
+    wait var_1;
     return;
   }
 }
 
-function add_practice_bots(var0, var1) {
+function add_practice_bots(var_0, var_1) {
   level endon("game_ended");
   level endon("end_containment_fx");
-  var2 = undefined;
+  var_2 = undefined;
 
-  if(isDefined(var1)) {
-    var2 = var1;
+  if(isDefined(var_1)) {
+    var_2 = var_1;
   } else {
-    var2 = level.players;
+    var_2 = level.players;
   }
 
-  var3 = gettime();
-  var4 = var3 + 10000;
+  var_3 = gettime();
+  var_4 = var_3 + 10000;
 
-  while(var3 < var4) {
+  while(var_3 < var_4) {
     waitframe();
-    var5 = 0;
+    var_5 = 0;
 
-    foreach(var7 in var2) {
-      if(!isDefined(var7)) {
+    foreach(var_7 in var_2) {
+      if(!isDefined(var_7)) {
         continue;
       }
 
-      if(!var7 method_87c3()) {
-        var5 = 1;
+      if(!var_7 method_87c3()) {
+        var_5 = 1;
         break;
       }
     }
 
-    if(var5) {
-      var3 = gettime();
+    if(var_5) {
+      var_3 = gettime();
       continue;
     }
 

@@ -28,10 +28,10 @@ function main() {
   self.usescriptedweapon = 1;
   self.scriptedweaponclassprimary = "ar";
   self.weapon = scripts\code\ai::create_weapon_in_script(["iw8_ar_mike4"]);
-  var0 = undefined;
-  var1 = ["character_ally_so15_1", "character_ally_so15_2", "character_ally_so15_3"];
+  var_0 = undefined;
+  var_1 = ["character_ally_so15_1", "character_ally_so15_2", "character_ally_so15_3"];
 
-  switch (scripts\code\character::get_random_character(3, var0, var1)) {
+  switch (scripts\code\character::get_random_character(3, var_0, var_1)) {
     case 0:
       character\character_ally_so15_1::main();
       break;
@@ -48,7 +48,7 @@ function spawner() {
   self setspawnerteam("allies");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\character_ally_so15_1::precache();
   character\character_ally_so15_2::precache();
   character\character_ally_so15_3::precache();

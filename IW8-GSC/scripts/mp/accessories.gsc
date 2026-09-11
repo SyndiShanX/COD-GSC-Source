@@ -16,180 +16,180 @@ function init() {
   level.arms_race_p1 = [];
   level.arms4think = [];
 
-  for(var0 = 0;; var0++) {
-    var1 = tablelookupbyrow("mp/accessorytable.csv", var0, 0);
+  for(var_0 = 0;; var_0++) {
+    var_1 = tablelookupbyrow("mp/accessorytable.csv", var_0, 0);
 
-    if(!isDefined(var1) || var1 == "") {
+    if(!isDefined(var_1) || var_1 == "") {
       break;
     }
 
-    var2 = tablelookupbyrow("mp/accessorytable.csv", var0, 1);
+    var_2 = tablelookupbyrow("mp/accessorytable.csv", var_0, 1);
 
-    if(!isDefined(var2) || var2 == "") {
-      var0++;
+    if(!isDefined(var_2) || var_2 == "") {
+      var_0++;
       continue;
     }
 
-    var3 = tablelookupbyrow("mp/accessorytable.csv", var0, 2);
+    var_3 = tablelookupbyrow("mp/accessorytable.csv", var_0, 2);
 
-    if(!isDefined(var3) || var3 == "") {
-      var0++;
+    if(!isDefined(var_3) || var_3 == "") {
+      var_0++;
       continue;
     }
 
-    var4 = tablelookupbyrow("mp/accessorytable.csv", var0, 3);
+    var_4 = tablelookupbyrow("mp/accessorytable.csv", var_0, 3);
 
-    if(isDefined(var4) && var4 == "") {
-      var4 = undefined;
+    if(isDefined(var_4) && var_4 == "") {
+      var_4 = undefined;
     }
 
-    var5 = int(tablelookupbyrow("mp/accessorytable.csv", var0, 10));
+    var_5 = int(tablelookupbyrow("mp/accessorytable.csv", var_0, 10));
 
-    if(isDefined(var5)) {
-      level.accessoryinfobyindex[var5] = var2;
+    if(isDefined(var_5)) {
+      level.accessoryinfobyindex[var_5] = var_2;
     }
 
-    var6 = tablelookupbyrow("mp/accessorytable.csv", var0, 15);
+    var_6 = tablelookupbyrow("mp/accessorytable.csv", var_0, 15);
 
-    if(var6 != "") {
-      level.accessorylogic[var1] = var6;
-      level.armsrace_c4_charge_detonate_think[var5] = var6;
+    if(var_6 != "") {
+      level.accessorylogic[var_1] = var_6;
+      level.armsrace_c4_charge_detonate_think[var_5] = var_6;
     }
 
-    var7 = tablelookupbyrow("mp/accessorytable.csv", var0, 16);
+    var_7 = tablelookupbyrow("mp/accessorytable.csv", var_0, 16);
 
-    if(var7 != "") {
-      level.arms4think[var3] = var7;
+    if(var_7 != "") {
+      level.arms4think[var_3] = var_7;
     }
 
-    var8 = tablelookupbyrow("mp/accessorytable.csv", var0, 17);
+    var_8 = tablelookupbyrow("mp/accessorytable.csv", var_0, 17);
 
-    if(var8 != "" && var7 != "") {
-      if(isDefined(var4) && var4 != "") {
-        var9 = tablelookupbyrow("mp/accessorytable.csv", var0, 19);
+    if(var_8 != "" && var_7 != "") {
+      if(isDefined(var_4) && var_4 != "") {
+        var_9 = tablelookupbyrow("mp/accessorytable.csv", var_0, 19);
 
-        if(var9 != "") {
-          level.arms2think[var3 + "+" + var7 + "+" + var4] = var3 + "+" + var8 + "+" + var9;
+        if(var_9 != "") {
+          level.arms2think[var_3 + "+" + var_7 + "+" + var_4] = var_3 + "+" + var_8 + "+" + var_9;
         } else {
-          level.arms2think[var3 + "+" + var7 + "+" + var4] = var3 + "+" + var8;
+          level.arms2think[var_3 + "+" + var_7 + "+" + var_4] = var_3 + "+" + var_8;
         }
       } else {
-        level.arms2think[var3 + "+" + var7] = var3 + "+" + var8;
+        level.arms2think[var_3 + "+" + var_7] = var_3 + "+" + var_8;
       }
     }
 
-    var10 = tablelookupbyrow("mp/accessorytable.csv", var0, 18);
+    var_10 = tablelookupbyrow("mp/accessorytable.csv", var_0, 18);
 
-    if(var10 != "" && var7 != "") {
-      if(isDefined(var4) && var4 != "") {
-        var11 = tablelookupbyrow("mp/accessorytable.csv", var0, 21);
+    if(var_10 != "" && var_7 != "") {
+      if(isDefined(var_4) && var_4 != "") {
+        var_11 = tablelookupbyrow("mp/accessorytable.csv", var_0, 21);
 
-        if(var11 != "") {
-          level.arms_race_p1[var3 + "+" + var7 + "+" + var4] = var3 + "+" + var10 + "+" + var11;
+        if(var_11 != "") {
+          level.arms_race_p1[var_3 + "+" + var_7 + "+" + var_4] = var_3 + "+" + var_10 + "+" + var_11;
         } else {
-          level.arms_race_p1[var3 + "+" + var7 + "+" + var4] = var3 + "+" + var10;
+          level.arms_race_p1[var_3 + "+" + var_7 + "+" + var_4] = var_3 + "+" + var_10;
         }
       } else {
-        level.arms_race_p1[var3 + "+" + var7] = var3 + "+" + var10;
+        level.arms_race_p1[var_3 + "+" + var_7] = var_3 + "+" + var_10;
       }
     }
 
-    var12 = scripts\engine\utility::multitablelookup(["mp/itemsourcetable.csv", "mp/itemsourcetable_ch2.csv"], 2, var1, 3);
+    var_12 = scripts\engine\utility::multitablelookup(["mp/itemsourcetable.csv", "mp/itemsourcetable_ch2.csv"], 2, var_1, 3);
 
-    if(var12 != "") {
-      level.armsrace_c4_charge_think[var2] = var12;
+    if(var_12 != "") {
+      level.armsrace_c4_charge_think[var_2] = var_12;
     }
 
-    level.accessoryinfo[var1] = var2;
-    level.accessoryattachment[var1] = var4;
+    level.accessoryinfo[var_1] = var_2;
+    level.accessoryattachment[var_1] = var_4;
 
-    if(var7 != "") {
-      if(isDefined(var4) && var4 != "") {
-        level.accessoryfullweapon[var1] = var3 + "+" + var7 + "+" + var4;
-        level.accessoryweaponbyindex[var5] = var3 + "+" + var7 + "+" + var4;
+    if(var_7 != "") {
+      if(isDefined(var_4) && var_4 != "") {
+        level.accessoryfullweapon[var_1] = var_3 + "+" + var_7 + "+" + var_4;
+        level.accessoryweaponbyindex[var_5] = var_3 + "+" + var_7 + "+" + var_4;
       } else {
-        level.accessoryfullweapon[var1] = var3 + "+" + var7;
-        level.accessoryweaponbyindex[var5] = var3 + "+" + var7;
+        level.accessoryfullweapon[var_1] = var_3 + "+" + var_7;
+        level.accessoryweaponbyindex[var_5] = var_3 + "+" + var_7;
       }
 
       continue;
     }
 
-    if(isDefined(var4) && var4 != "") {
-      level.accessoryfullweapon[var1] = var3 + "+" + var4;
-      level.accessoryweaponbyindex[var5] = var3 + "+" + var4;
+    if(isDefined(var_4) && var_4 != "") {
+      level.accessoryfullweapon[var_1] = var_3 + "+" + var_4;
+      level.accessoryweaponbyindex[var_5] = var_3 + "+" + var_4;
       continue;
     }
 
-    level.accessoryfullweapon[var1] = var3;
-    level.accessoryweaponbyindex[var5] = var3;
+    level.accessoryfullweapon[var_1] = var_3;
+    level.accessoryweaponbyindex[var_5] = var_3;
   }
 
   thread scripts\cp_mp\pet_watch::init();
   thread scripts\cp_mp\utility\callback_group::init();
 }
 
-function getaccessorylogic(var0) {
+function getaccessorylogic(var_0) {
   if(!isDefined(level.accessorylogic)) {
     return undefined;
   }
 
-  return level.accessorylogic[var0];
+  return level.accessorylogic[var_0];
 }
 
-function getaccessorydata(var0) {
+function getaccessorydata(var_0) {
   if(!isDefined(level.accessoryinfo)) {
     return undefined;
   }
 
-  return level.accessoryinfo[var0];
+  return level.accessoryinfo[var_0];
 }
 
-function getaccessoryweapon(var0) {
+function getaccessoryweapon(var_0) {
   if(!isDefined(level.accessoryfullweapon)) {
     return undefined;
   }
 
-  return level.accessoryfullweapon[var0];
+  return level.accessoryfullweapon[var_0];
 }
 
-function getaccessoryweaponbyindex(var0) {
+function getaccessoryweaponbyindex(var_0) {
   if(isDefined(level.accessoryweaponbyindex)) {
-    return level.accessoryweaponbyindex[var0];
+    return level.accessoryweaponbyindex[var_0];
   }
 
   return "none";
 }
 
-function getaccessorydatabyindex(var0) {
+function getaccessorydatabyindex(var_0) {
   if(isDefined(level.accessoryinfobyindex)) {
-    return level.accessoryinfobyindex[var0];
+    return level.accessoryinfobyindex[var_0];
   }
 
   return "none";
 }
 
-function register_respawn_functions(var0) {
+function register_respawn_functions(var_0) {
   if(isDefined(level.armsrace_c4_charge_detonate_think)) {
-    return level.armsrace_c4_charge_detonate_think[var0];
+    return level.armsrace_c4_charge_detonate_think[var_0];
   }
 
   return "none";
 }
 
-function register_script_model_animation(var0) {
+function register_script_model_animation(var_0) {
   if(isDefined(level.armsrace_c4_charge_think)) {
-    return level.armsrace_c4_charge_think[var0];
+    return level.armsrace_c4_charge_think[var_0];
   }
 
   return undefined;
 }
 
-function giveplayeraccessory(var0, var1, var2) {
+function giveplayeraccessory(var_0, var_1, var_2) {
   clearplayeraccessory();
-  var3 = resettimeronkill(var1);
+  var_3 = resettimeronkill(var_1);
 
-  if(!isDefined(var3)) {
+  if(!isDefined(var_3)) {
     return;
   }
 
@@ -197,19 +197,19 @@ function giveplayeraccessory(var0, var1, var2) {
     return;
   }
 
-  self.accessorydata = var0;
-  self.accessorylogic = var2;
-  self.accessoryfullweapon = var3;
-  var4 = ref_1330d();
+  self.accessorydata = var_0;
+  self.accessorylogic = var_2;
+  self.accessoryfullweapon = var_3;
+  var_4 = ref_1330d();
   scripts\cp_mp\utility\inventory_utility::_giveweapon(self.accessoryfullweapon);
-  self giveaccessory(self.accessorydata, self.accessoryfullweapon, var4);
+  self giveaccessory(self.accessorydata, self.accessoryfullweapon, var_4);
 
-  if(isDefined(var2)) {
-    switch (var2) {
+  if(isDefined(var_2)) {
+    switch (var_2) {
       case "pet":
       case "pet_turbo":
       case "pet_black":
-        scripts\cp_mp\pet_watch::initpet(0, var2);
+        scripts\cp_mp\pet_watch::initpet(0, var_2);
         break;
       case "pet_go":
         scripts\cp_mp\utility\callback_group::initpet(0);
@@ -237,59 +237,59 @@ function giveplayeraccessory(var0, var1, var2) {
 }
 
 function ref_1330d() {
-  var0 = scripts\mp\teams::getcustomization();
-  var1 = var0["body"];
-  var2 = tablelookup("mp/cac/bodies.csv", 1, var1, 22);
-  return isDefined(var2) && var2 == "1";
+  var_0 = scripts\mp\teams::getcustomization();
+  var_1 = var_0["body"];
+  var_2 = tablelookup("mp/cac/bodies.csv", 1, var_1, 22);
+  return isDefined(var_2) && var_2 == "1";
 }
 
-function resettimeronkill(var0) {
-  var1 = scripts\mp\teams::getcustomization();
-  var2 = var1["body"];
-  var3 = tablelookup("mp/cac/bodies.csv", 1, var2, 23);
+function resettimeronkill(var_0) {
+  var_1 = scripts\mp\teams::getcustomization();
+  var_2 = var_1["body"];
+  var_3 = tablelookup("mp/cac/bodies.csv", 1, var_2, 23);
 
-  if(isDefined(var3)) {
-    switch (var3) {
+  if(isDefined(var_3)) {
+    switch (var_3) {
       case "fem":
-        var4 = level.arms_race_p1[var0];
+        var_4 = level.arms_race_p1[var_0];
 
-        if(isDefined(var4)) {
-          var0 = var4;
+        if(isDefined(var_4)) {
+          var_0 = var_4;
         }
 
         break;
       case "big":
-        var5 = level.arms2think[var0];
+        var_5 = level.arms2think[var_0];
 
-        if(isDefined(var5)) {
-          var0 = var5;
+        if(isDefined(var_5)) {
+          var_0 = var_5;
         }
 
         break;
       case "hide":
-        var0 = undefined;
+        var_0 = undefined;
         break;
     }
   }
 
-  if(isDefined(var0)) {
-    var6 = level.accessoryattachment[var0];
+  if(isDefined(var_0)) {
+    var_6 = level.accessoryattachment[var_0];
 
-    if(isDefined(var6)) {
-      var0 += var6;
+    if(isDefined(var_6)) {
+      var_0 += var_6;
     }
   }
 
-  return var0;
+  return var_0;
 }
 
-function ref_13b0a(var0) {
-  if(var0 == 1) {
+function ref_13b0a(var_0) {
+  if(var_0 == 1) {
     scripts\cp_mp\gestures::ref_13838();
     return;
   }
 
-  if(var0 == 2) {
+  if(var_0 == 2) {
     self setscriptablepartstate("watchVFXPlayer", "goWatchOn");
     return;
   }
@@ -315,8 +315,8 @@ function clearplayeraccessory() {
 function tower_ground_mortar_2() {
   if(!isDefined(self.ref_13b2d)) {
     self.ref_13b2d = 1;
-    var0 = removeriotshield();
-    self setclientomnvar("ui_pet_watch_state", var0);
+    var_0 = removeriotshield();
+    self setclientomnvar("ui_pet_watch_state", var_0);
     return;
   }
 }

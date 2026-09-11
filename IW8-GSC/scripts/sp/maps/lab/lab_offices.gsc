@@ -13,15 +13,15 @@ function offices_start() {
   level.rebel_2 scripts\sp\maps\lab\lab_util::magic_bullet_safe();
   level.heroes = scripts\engine\utility::array_remove(level.heroes, level.rebel_3);
   level.rebel_3 delete();
-  var0 = getEnt("jugg_dead_door", "script_noteworthy");
-  var0.struct = var0 scripts\engine\sp\utility::get_linked_struct();
-  scripts\sp\maps\lab\lab_util::assign_door_ents(var0);
-  var0 rotateTo(var0.struct.angles, 0.05);
-  var0.collision scripts\engine\utility::delaycall(0.1, &connectpaths);
+  var_0 = getEnt("jugg_dead_door", "script_noteworthy");
+  var_0.struct = var_0 scripts\engine\sp\utility::get_linked_struct();
+  scripts\sp\maps\lab\lab_util::assign_door_ents(var_0);
+  var_0 rotateTo(var_0.struct.angles, 0.05);
+  var_0.collision scripts\engine\utility::delaycall(0.1, &connectpaths);
   scripts\engine\sp\utility::set_start_location("offices_start", [level.player, level.farah]);
   scripts\engine\utility::delaythread(1, &scripts\sp\maps\lab\lab_util::player_gas_mask, 1);
-  var1 = getEntArray("turbine_sprocket", "targetname");
-  scripts\engine\utility::array_thread(var1, &turbine_spin);
+  var_1 = getEntArray("turbine_sprocket", "targetname");
+  scripts\engine\utility::array_thread(var_1, &turbine_spin);
   scripts\engine\utility::flag_set("door_guy_dead");
 }
 
@@ -51,9 +51,9 @@ function offices_main() {
     waitframe();
   }
 
-  foreach(var1 in level.heroes) {
-    if(isDefined(var1) && isalive(var1)) {
-      var1 scripts\engine\sp\utility::clear_force_color();
+  foreach(var_1 in level.heroes) {
+    if(isDefined(var_1) && isalive(var_1)) {
+      var_1 scripts\engine\sp\utility::clear_force_color();
     }
   }
 
@@ -91,37 +91,37 @@ function offices_movement_farah() {
     return;
   }
 
-  var0 = scripts\engine\utility::getStruct("office_route_farah", "targetname");
-  scripts\engine\utility::delaythread(0.1, &farah_drs_setup, var0);
-  scripted_movement(var0);
+  var_0 = scripts\engine\utility::getStruct("office_route_farah", "targetname");
+  scripts\engine\utility::delaythread(0.1, &farah_drs_setup, var_0);
+  scripted_movement(var_0);
   self.disablearrivals = undefined;
-  var0 = getnode("office_route2_farah_node", "targetname");
-  check_drs(var0, "office_check_1");
-  var0 = scripts\engine\utility::getStruct("office_route2_farah", "targetname");
-  scripted_movement(var0);
+  var_0 = getnode("office_route2_farah_node", "targetname");
+  check_drs(var_0, "office_check_1");
+  var_0 = scripts\engine\utility::getStruct("office_route2_farah", "targetname");
+  scripted_movement(var_0);
   self.disablearrivals = undefined;
   self notify("stop_office_check");
-  var0 = getnode("office_route3_farah_node", "targetname");
-  check_drs(var0, "office_check_2");
-  var0 = scripts\engine\utility::getStruct("office_route3_farah", "targetname");
-  scripted_movement(var0);
+  var_0 = getnode("office_route3_farah_node", "targetname");
+  check_drs(var_0, "office_check_2");
+  var_0 = scripts\engine\utility::getStruct("office_route3_farah", "targetname");
+  scripted_movement(var_0);
   self.disablearrivals = undefined;
   self notify("stop_office_check");
 }
 
-function farah_drs_setup(var0) {
-  waittill_near_struct(level.farah, var0);
+function farah_drs_setup(var_0) {
+  waittill_near_struct(level.farah, var_0);
   level.farah scripts\engine\sp\utility::enable_dynamic_run_speed(level.player, 60, 140, 240, 100, -200, -400);
 }
 
-function waittill_near_struct(var0) {
+function waittill_near_struct(var_0) {
   level endon("stop_offices_movement");
-  var1 = squared(40);
+  var_1 = squared(40);
 
   for(;;) {
-    var2 = distancesquared(self.origin, var0.origin);
+    var_2 = distancesquared(self.origin, var_0.origin);
 
-    if(var2 <= var1) {
+    if(var_2 <= var_1) {
       break;
     }
 
@@ -129,15 +129,15 @@ function waittill_near_struct(var0) {
   }
 }
 
-function check_drs(var0, var1) {
+function check_drs(var_0, var_1) {
   self endon("stop_office_check");
 
-  if(!scripts\engine\utility::flag(var1)) {
+  if(!scripts\engine\utility::flag(var_1)) {
     self.og_goalradius = self.goalradius;
     self.goalradius = 4;
-    self setgoalnode(var0);
+    self setgoalnode(var_0);
     scripts\engine\sp\utility::disable_dynamic_run_speed(90);
-    scripts\engine\utility::flag_wait(var1);
+    scripts\engine\utility::flag_wait(var_1);
     self.goalradius = self.og_goalradius;
     scripts\engine\sp\utility::enable_dynamic_run_speed(level.player, 60, 140, 240, 100, -200, -400);
     return;
@@ -151,31 +151,31 @@ function offices_movement_rebel_1() {
     return;
   }
 
-  var0 = scripts\engine\utility::getStruct("office_route_rebel1", "targetname");
-  scripts\engine\utility::delaythread(0.1, &rebel_1_drs_setup, var0);
-  scripted_movement(var0);
+  var_0 = scripts\engine\utility::getStruct("office_route_rebel1", "targetname");
+  scripts\engine\utility::delaythread(0.1, &rebel_1_drs_setup, var_0);
+  scripted_movement(var_0);
   self.disablearrivals = undefined;
-  var0 = getnode("office_route2_rebel1_node", "targetname");
-  check_drs(var0, "office_check_1");
-  var0 = scripts\engine\utility::getStruct("office_route2_rebel1", "targetname");
-  scripted_movement(var0);
+  var_0 = getnode("office_route2_rebel1_node", "targetname");
+  check_drs(var_0, "office_check_1");
+  var_0 = scripts\engine\utility::getStruct("office_route2_rebel1", "targetname");
+  scripted_movement(var_0);
   self.disablearrivals = undefined;
   self notify("stop_office_check");
-  var0 = getnode("office_route3_rebel1_node", "targetname");
-  check_drs(var0, "office_check_2");
-  var0 = scripts\engine\utility::getStruct("office_route3_rebel1", "targetname");
-  scripted_movement(var0);
+  var_0 = getnode("office_route3_rebel1_node", "targetname");
+  check_drs(var_0, "office_check_2");
+  var_0 = scripts\engine\utility::getStruct("office_route3_rebel1", "targetname");
+  scripted_movement(var_0);
   self.disablearrivals = undefined;
   self notify("stop_office_check");
   scripted_plant_bomb("rebel_1_plant1", "office_check_3");
   scripted_plant_bomb("rebel_1_plant2");
-  var0 = scripts\engine\utility::getStruct("office_route4_rebel1", "targetname");
-  scripted_movement(var0);
+  var_0 = scripts\engine\utility::getStruct("office_route4_rebel1", "targetname");
+  scripted_movement(var_0);
   self.disablearrivals = undefined;
 }
 
-function rebel_1_drs_setup(var0) {
-  waittill_near_struct(level.rebel_1, var0);
+function rebel_1_drs_setup(var_0) {
+  waittill_near_struct(level.rebel_1, var_0);
   level.rebel_1 scripts\engine\sp\utility::enable_dynamic_run_speed(level.farah, 60, 150, 250, 165, 110, 50);
 }
 
@@ -186,46 +186,46 @@ function offices_movement_rebel_2() {
     return;
   }
 
-  var0 = scripts\engine\utility::getStruct("office_route_rebel2", "targetname");
-  scripts\engine\utility::delaythread(0.1, &rebel_2_drs_setup, var0);
-  scripted_movement(var0);
+  var_0 = scripts\engine\utility::getStruct("office_route_rebel2", "targetname");
+  scripts\engine\utility::delaythread(0.1, &rebel_2_drs_setup, var_0);
+  scripted_movement(var_0);
   self.disablearrivals = undefined;
   scripts\engine\sp\utility::disable_dynamic_run_speed();
   scripted_plant_bomb("rebel_2_plant1", "office_check_1");
-  var0 = scripts\engine\utility::getStruct("office_route2_rebel2", "targetname");
-  check_drs(var0, "office_check_1");
-  scripted_movement(var0);
+  var_0 = scripts\engine\utility::getStruct("office_route2_rebel2", "targetname");
+  check_drs(var_0, "office_check_1");
+  scripted_movement(var_0);
   self.disablearrivals = undefined;
   self notify("stop_office_check");
   scripted_plant_bomb("rebel_2_plant2");
-  var0 = scripts\engine\utility::getStruct("office_route3_rebel2", "targetname");
-  scripted_movement(var0);
+  var_0 = scripts\engine\utility::getStruct("office_route3_rebel2", "targetname");
+  scripted_movement(var_0);
   self.disablearrivals = undefined;
   scripted_plant_bomb("rebel_2_plant3", "office_check_3");
-  var0 = scripts\engine\utility::getStruct("office_route4_rebel2", "targetname");
-  scripted_movement(var0);
+  var_0 = scripts\engine\utility::getStruct("office_route4_rebel2", "targetname");
+  scripted_movement(var_0);
   self.disablearrivals = undefined;
 }
 
-function rebel_2_drs_setup(var0) {
-  waittill_near_struct(level.rebel_2, var0);
+function rebel_2_drs_setup(var_0) {
+  waittill_near_struct(level.rebel_2, var_0);
   level.rebel_2 scripts\engine\sp\utility::enable_dynamic_run_speed(level.farah, 60, 150, 250, 265, 210, 150);
 }
 
-function scripted_plant_bomb(var0, var1) {
-  var2 = scripts\engine\utility::getStruct(var0, "targetname");
-  var2 scripts\sp\anim::anim_reach_and_approach_solo(self, "cp_4_plant", undefined, "Exposed");
-  var2 thread scripts\common\anim::anim_single_solo(self, "cp_4_plant");
-  self.bombnode = var2;
+function scripted_plant_bomb(var_0, var_1) {
+  var_2 = scripts\engine\utility::getStruct(var_0, "targetname");
+  var_2 scripts\sp\anim::anim_reach_and_approach_solo(self, "cp_4_plant", undefined, "Exposed");
+  var_2 thread scripts\common\anim::anim_single_solo(self, "cp_4_plant");
+  self.bombnode = var_2;
   self attach("offhand_wm_c4_bomb", "tag_accessory_right");
 
-  if(isDefined(var1) && !scripts\engine\utility::flag(var1)) {
-    var3 = scripts\engine\utility::getanim("cp_4_plant");
-    var4 = getanimlength(var3);
-    wait var4 / 2;
-    self setanimrate(var3, 0);
-    scripts\engine\utility::flag_wait(var1);
-    self setanimrate(var3, 1);
+  if(isDefined(var_1) && !scripts\engine\utility::flag(var_1)) {
+    var_3 = scripts\engine\utility::getanim("cp_4_plant");
+    var_4 = getanimlength(var_3);
+    wait var_4 / 2;
+    self setanimrate(var_3, 0);
+    scripts\engine\utility::flag_wait(var_1);
+    self setanimrate(var_3, 1);
     return;
   }
 
@@ -235,43 +235,43 @@ function scripted_plant_bomb(var0, var1) {
 function setup_detonator_for_ges() {
   level.player allowsprint(0);
   setsaveddvar("RMLOTKMMM", 0);
-  var0 = spawn("script_model", level.player.origin);
-  var0 hide();
-  var0 setModel("offhand_vm_clacker_tatical_sp_cinematic_destroyed");
-  var0 notsolid();
-  var0 linktoplayerview(level.player, "tag_accessory_left", (0, 0, 0), (0, 0, 0), 1, "view_jostle");
-  var1 = spawn("script_model", level.player.origin);
-  var1 hide();
-  var1 setModel("offhand_vm_clacker_tatical_sp_cinematic_destroyed_off");
-  var1 notsolid();
-  var1 linktoplayerview(level.player, "tag_accessory_left", (0, 0, 0), (0, 0, 0), 1, "view_jostle");
-  var0 thread scripts\sp\maps\lab\lab_lighting::detonator_hero_lighting_on();
-  var0 scripts\engine\utility::delaythread(0.3, &scripts\sp\maps\lab\lab_turbines::det_sparks_vfx);
-  var0 scripts\engine\utility::delaycall(0.3, &show);
+  var_0 = spawn("script_model", level.player.origin);
+  var_0 hide();
+  var_0 setModel("offhand_vm_clacker_tatical_sp_cinematic_destroyed");
+  var_0 notsolid();
+  var_0 linktoplayerview(level.player, "tag_accessory_left", (0, 0, 0), (0, 0, 0), 1, "view_jostle");
+  var_1 = spawn("script_model", level.player.origin);
+  var_1 hide();
+  var_1 setModel("offhand_vm_clacker_tatical_sp_cinematic_destroyed_off");
+  var_1 notsolid();
+  var_1 linktoplayerview(level.player, "tag_accessory_left", (0, 0, 0), (0, 0, 0), 1, "view_jostle");
+  var_0 thread scripts\sp\maps\lab\lab_lighting::detonator_hero_lighting_on();
+  var_0 scripts\engine\utility::delaythread(0.3, &scripts\sp\maps\lab\lab_turbines::det_sparks_vfx);
+  var_0 scripts\engine\utility::delaycall(0.3, &show);
   level.player scripts\engine\utility::delaycall(0.05, &playsound, "scn_lab_juggernaut_detonator_malfunction_gesture");
   level.player scripts\engine\sp\utility::player_gesture_force("lab_vm_detonator_ges");
-  thread fake_detonator_lights_off(var0, var0);
+  thread fake_detonator_lights_off(var_0, var_0);
   wait level.player getgestureanimlength("lab_vm_detonator_ges");
   level notify("delete_detonator_light");
   level.player allowsprint(1);
-  var0 unlinkfromplayerview(level.player);
-  var0 delete();
-  var1 delete();
+  var_0 unlinkfromplayerview(level.player);
+  var_0 delete();
+  var_1 delete();
   setsaveddvar("RMLOTKMMM", 1);
 }
 
-function fake_detonator_lights_off(var0, var1) {
+function fake_detonator_lights_off(var_0, var_1) {
   level endon("delete_detonator_light");
-  var2 = [0.3, 0.2, 0.2, 0.4, 0.2, 0.5, 0.3, 0.2, 0.4, 0.2, 0.3, 0.3, 0.3, 0.2, 0.2, 0.4];
+  var_2 = [0.3, 0.2, 0.2, 0.4, 0.2, 0.5, 0.3, 0.2, 0.4, 0.2, 0.3, 0.3, 0.3, 0.2, 0.2, 0.4];
 
-  for(var3 = 0; var3 < var2.size; var3++) {
-    wait var2[var3];
-    var1 show();
-    var0 hide();
-    var3++;
-    wait var2[var3];
-    var0 show();
-    var1 hide();
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
+    wait var_2[var_3];
+    var_1 show();
+    var_0 hide();
+    var_3++;
+    wait var_2[var_3];
+    var_0 show();
+    var_1 hide();
   }
 }
 
@@ -296,28 +296,28 @@ function offices_dialog() {
   wait 5;
   level.farah waittill("goal");
   wait 8;
-  var0 = ["dx_vom_far_juggernaut_outro_41", "dx_vom_far_juggernaut_outro_42", "dx_vom_far_juggernaut_outro_43"];
-  var1 = scripts\engine\sp\utility::create_deck(var0);
-  level.farah scripts\sp\maps\lab\lab_vo_util::nagtill("office_check_1", var1, 12);
+  var_0 = ["dx_vom_far_juggernaut_outro_41", "dx_vom_far_juggernaut_outro_42", "dx_vom_far_juggernaut_outro_43"];
+  var_1 = scripts\engine\sp\utility::create_deck(var_0);
+  level.farah scripts\sp\maps\lab\lab_vo_util::nagtill("office_check_1", var_1, 12);
   wait 5;
   level.farah waittill("goal");
   wait 8;
-  level.farah scripts\sp\maps\lab\lab_vo_util::nagtill("office_check_2", var1, 12);
+  level.farah scripts\sp\maps\lab\lab_vo_util::nagtill("office_check_2", var_1, 12);
   wait 5;
   level.farah waittill("goal");
   wait 8;
-  var0 = ["dx_vom_far_offices_outro_20", "dx_vom_far_offices_outro_30", "dx_vom_far_offices_outro_40"];
-  level.farah scripts\sp\maps\lab\lab_vo_util::nagtill("reached_final_room", var0, 12);
+  var_0 = ["dx_vom_far_offices_outro_20", "dx_vom_far_offices_outro_30", "dx_vom_far_offices_outro_40"];
+  level.farah scripts\sp\maps\lab\lab_vo_util::nagtill("reached_final_room", var_0, 12);
 }
 
 function offices_goal_dialog() {
   level endon("switch_to_kyle");
   wait 2;
   level.farah thread scripts\sp\maps\lab\lab_vo_util::say_as_chatter("dx_vom_far_offices_outro_10");
-  var0 = scripts\engine\utility::getStruct("lab_entrance_interact", "targetname");
-  var1 = squared(400);
+  var_0 = scripts\engine\utility::getStruct("lab_entrance_interact", "targetname");
+  var_1 = squared(400);
 
-  while(distance2dsquared(var0.origin, level.farah.origin) > var1) {
+  while(distance2dsquared(var_0.origin, level.farah.origin) > var_1) {
     waitframe();
   }
 
@@ -325,25 +325,25 @@ function offices_goal_dialog() {
   level.player scripts\sp\maps\lab\lab_vo_util::say_as_chatter("dx_vom_alx_offices_outro_60");
 }
 
-function offices_door_dialog(var0) {
+function offices_door_dialog(var_0) {
   level endon("switch_to_kyle");
 
-  while(!level.farah nearnode(var0)) {
+  while(!level.farah nearnode(var_0)) {
     wait 0.2;
   }
 
   wait 8;
-  var1 = ["dx_vom_far_offices_outro_70", "dx_vom_far_offices_outro_80", "dx_vom_far_offices_outro_90"];
-  level.farah thread scripts\sp\maps\lab\lab_vo_util::nagtill("stop_offices_movement", var1);
+  var_1 = ["dx_vom_far_offices_outro_70", "dx_vom_far_offices_outro_80", "dx_vom_far_offices_outro_90"];
+  level.farah thread scripts\sp\maps\lab\lab_vo_util::nagtill("stop_offices_movement", var_1);
 }
 
 function turbine_spin() {
   level endon("switch_to_kyle");
-  var0 = 0.1 + randomfloatrange(0.5, 1.5);
+  var_0 = 0.1 + randomfloatrange(0.5, 1.5);
 
   for(;;) {
-    self rotatepitch(360, var0);
-    wait var0;
+    self rotatepitch(360, var_0);
+    wait var_0;
   }
 }
 
@@ -360,8 +360,8 @@ function gas_chambers_start() {
   scripts\sp\maps\lab\lab_util::spawn_team_farah();
   scripts\engine\sp\utility::set_start_location("gas_chambers_start", [level.player, level.farah, level.rebel_1, level.rebel_2, level.rebel_3]);
   scripts\engine\utility::delaythread(1, &scripts\sp\maps\lab\lab_util::player_gas_mask, 1);
-  var0 = getEntArray("turbine_sprocket", "targetname");
-  scripts\engine\utility::array_thread(var0, &turbine_spin);
+  var_0 = getEntArray("turbine_sprocket", "targetname");
+  scripts\engine\utility::array_thread(var_0, &turbine_spin);
   scripts\engine\utility::delaythread(0.1, &scripts\engine\sp\utility::transient_load, "lab_turbine2_tr");
 }
 
@@ -372,16 +372,16 @@ function gas_chambers_main() {
 }
 
 function lab_entrance_door() {
-  var0 = scripts\engine\utility::getStruct("lab_entrance_interact", "targetname");
-  var0 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (5, 0, -3), &"LAB/CURSOR_PUSH", undefined, undefined, undefined, 1);
-  var1 = getEnt("gas_button", "targetname");
-  var1 scripts\engine\sp\utility::assign_animtree("gas_button");
-  var0 waittill("trigger");
+  var_0 = scripts\engine\utility::getStruct("lab_entrance_interact", "targetname");
+  var_0 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (5, 0, -3), &"LAB/CURSOR_PUSH", undefined, undefined, undefined, 1);
+  var_1 = getEnt("gas_button", "targetname");
+  var_1 scripts\engine\sp\utility::assign_animtree("gas_button");
+  var_0 waittill("trigger");
   level.gas_mask_overlay fadeovertime(1.5);
   level.gas_mask_overlay.alpha = 0;
   level.gas_mask_overlay.sort = -2;
   thread scripts\sp\maps\lab\lab_util::cine_letterboxing_up(1.5);
-  var0 scripts\engine\utility::delaythread(0, &scripts\sp\maps\lab\lab_turbines::play_button_sound, "lab_vm_button_push_plr");
+  var_0 scripts\engine\utility::delaythread(0, &scripts\sp\maps\lab\lab_turbines::play_button_sound, "lab_vm_button_push_plr");
   thread scripts\engine\utility::play_sound_in_space("scn_lab_furnace_door_open", (-119, 572, 36));
   level.player scripts\engine\utility::delaycall(3, &setclienttriggeraudiozone, "fade_to_black", 2);
   scripts\sp\utility::delete_live_grenades();
@@ -390,16 +390,16 @@ function lab_entrance_door() {
   level.player setmovespeedscale(0);
   thread remove_mask();
   thread reset_gasmask();
-  var2 = spawn("script_model", level.farah getEye());
-  var2 setModel("prop_gasmask");
-  var2 dontinterpolate();
-  var2 scripts\engine\sp\utility::assign_animtree("gas_button_mask");
-  var0 scripts\sp\player_rig::link_player_to_rig("chem_room_pad", undefined, 1, 0.3, 1, 0, 0, 0, 0);
-  var0 thread scripts\common\anim::anim_single_solo(var1, "chem_room_pad");
-  var0 thread scripts\common\anim::anim_single_solo(level.farah, "chem_room_pad");
-  var0 thread scripts\common\anim::anim_single_solo(var2, "chem_room_pad");
-  var0 scripts\common\anim::anim_single_solo(level.player_rig, "chem_room_pad");
-  var2 delete();
+  var_2 = spawn("script_model", level.farah getEye());
+  var_2 setModel("prop_gasmask");
+  var_2 dontinterpolate();
+  var_2 scripts\engine\sp\utility::assign_animtree("gas_button_mask");
+  var_0 scripts\sp\player_rig::link_player_to_rig("chem_room_pad", undefined, 1, 0.3, 1, 0, 0, 0, 0);
+  var_0 thread scripts\common\anim::anim_single_solo(var_1, "chem_room_pad");
+  var_0 thread scripts\common\anim::anim_single_solo(level.farah, "chem_room_pad");
+  var_0 thread scripts\common\anim::anim_single_solo(var_2, "chem_room_pad");
+  var_0 scripts\common\anim::anim_single_solo(level.player_rig, "chem_room_pad");
+  var_2 delete();
   level.player_rig show();
   scripts\sp\player_rig::unlink_player_from_rig();
   thread scripts\engine\sp\utility::transient_unload_array(["lab_turbine1_tr", "lab_turbine2_tr", "lab_office_tr"]);
@@ -434,10 +434,10 @@ function reset_gasmask() {
 function turbine_cleanup() {
   delete_allies();
   scripts\engine\utility::flag_set("switch_to_kyle");
-  var0 = getEntArray("turbine_sprocket", "targetname");
-  scripts\engine\utility::array_delete(var0);
-  var1 = getEntArray("turbines_triggers", "script_noteworthy");
-  scripts\engine\utility::delaythread(0.5, &scripts\engine\utility::array_delete, var1);
+  var_0 = getEntArray("turbine_sprocket", "targetname");
+  scripts\engine\utility::array_delete(var_0);
+  var_1 = getEntArray("turbines_triggers", "script_noteworthy");
+  scripts\engine\utility::delaythread(0.5, &scripts\engine\utility::array_delete, var_1);
 }
 
 function delete_allies() {
@@ -477,19 +477,19 @@ function pov_switch_bink() {
 function gas_chambers_catchup() {
   scripts\engine\utility::flag_set("lab_finished");
   scripts\engine\utility::flag_set("transition_bink_done");
-  var0 = getEntArray("turbines_triggers", "script_noteworthy");
-  scripts\engine\utility::array_delete(var0);
+  var_0 = getEntArray("turbines_triggers", "script_noteworthy");
+  scripts\engine\utility::array_delete(var_0);
 }
 
-function scripted_movement(var0, var1) {
+function scripted_movement(var_0, var_1) {
   self endon("stop_scripted_movement");
 
-  if(isDefined(var1) && var1) {
-    self forceteleport(var0.origin, var0.angles);
+  if(isDefined(var_1) && var_1) {
+    self forceteleport(var_0.origin, var_0.angles);
   }
 
   self.post_wait_func = &scripted_movement_post_wait;
-  scripts\sp\spawner::go_to_node(var0, &scripted_movement_arrival);
+  scripts\sp\spawner::go_to_node(var_0, &scripted_movement_arrival);
 }
 
 function scripted_movement_post_wait() {
@@ -499,100 +499,100 @@ function scripted_movement_post_wait() {
   }
 }
 
-function scripted_movement_arrival(var0) {
+function scripted_movement_arrival(var_0) {
   if(isDefined(self.scripted_movement_idle)) {
     self.scripted_animnode notify("stop_" + self.scripted_anime + "_idle_" + self.animname);
   }
 
-  if(isDefined(var0.script_ent_flag_set)) {
-    scripts\engine\utility::ent_flag_set(var0.script_ent_flag_set);
+  if(isDefined(var_0.script_ent_flag_set)) {
+    scripts\engine\utility::ent_flag_set(var_0.script_ent_flag_set);
   }
 
-  if(isDefined(var0.script_flag_set)) {
-    scripts\engine\utility::flag_set(var0.script_flag_set);
+  if(isDefined(var_0.script_flag_set)) {
+    scripts\engine\utility::flag_set(var_0.script_flag_set);
   }
 
-  if(isDefined(var0.animation)) {
-    script_movement_anim(var0);
+  if(isDefined(var_0.animation)) {
+    script_movement_anim(var_0);
   }
 
-  if(!isDefined(var0.script_function)) {
+  if(!isDefined(var_0.script_function)) {
     return;
   }
 
-  var1 = get_scripted_movement_arrivefuncs();
+  var_1 = get_scripted_movement_arrivefuncs();
 
-  if(!isDefined(var1[var0.script_function])) {
+  if(!isDefined(var_1[var_0.script_function])) {
     return;
   }
 
-  self[[var1[var0.script_function]]](var0);
+  self[[var_1[var_0.script_function]]](var_0);
 }
 
-function script_movement_anim(var0) {
-  var1 = var0.animation;
-  var0.origin = scripts\engine\utility::drop_to_ground(var0.origin, 10, -100);
-  var2 = var0;
-  var3 = 0;
+function script_movement_anim(var_0) {
+  var_1 = var_0.animation;
+  var_0.origin = scripts\engine\utility::drop_to_ground(var_0.origin, 10, -100);
+  var_2 = var_0;
+  var_3 = 0;
 
-  if(isDefined(var0.script_parameters)) {
-    if(var0.script_parameters == "no_anim_reach") {
-      var3 = 1;
+  if(isDefined(var_0.script_parameters)) {
+    if(var_0.script_parameters == "no_anim_reach") {
+      var_3 = 1;
     }
   }
 
-  if(isDefined(var0.script_animnode)) {
-    var2 = scripts\engine\utility::getStruct(var0.script_animnode, "targetname");
+  if(isDefined(var_0.script_animnode)) {
+    var_2 = scripts\engine\utility::getStruct(var_0.script_animnode, "targetname");
   }
 
-  var4 = 0;
+  var_4 = 0;
 
-  if(isDefined(level.scr_anim["generic"][var1])) {
-    var4 = 1;
+  if(isDefined(level.scr_anim["generic"][var_1])) {
+    var_4 = 1;
   }
 
-  if(!var3) {
-    if(var4) {
-      var2 scripts\sp\anim::anim_generic_reach(self, var1);
+  if(!var_3) {
+    if(var_4) {
+      var_2 scripts\sp\anim::anim_generic_reach(self, var_1);
     } else {
-      var2 scripts\sp\anim::anim_reach_solo(self, var1);
+      var_2 scripts\sp\anim::anim_reach_solo(self, var_1);
     }
   }
 
-  var5 = undefined;
+  var_5 = undefined;
 
-  if(var4) {
-    if(isDefined(level.scr_anim["generic"][var1 + "_idle"])) {
-      var5 = 1;
+  if(var_4) {
+    if(isDefined(level.scr_anim["generic"][var_1 + "_idle"])) {
+      var_5 = 1;
     }
-  } else if(isDefined(level.scr_anim[self.animname][var1 + "_idle"])) {
-    var5 = 1;
+  } else if(isDefined(level.scr_anim[self.animname][var_1 + "_idle"])) {
+    var_5 = 1;
   }
 
   self.scripted_movement_idle = undefined;
   self.scripted_anime = undefined;
   self.scripted_animnode = undefined;
 
-  if(isDefined(var5)) {
+  if(isDefined(var_5)) {
     self.scripted_movement_idle = 1;
-    self.scripted_anime = var1;
-    self.scripted_animnode = var2;
+    self.scripted_anime = var_1;
+    self.scripted_animnode = var_2;
   }
 
-  if(var4) {
-    if(isDefined(var5)) {
-      thread anim_then_loop_solo(var2, self, var1, var1 + "_idle", "stop_" + var1 + "_idle_" + self.animname);
+  if(var_4) {
+    if(isDefined(var_5)) {
+      thread anim_then_loop_solo(var_2, self, var_1, var_1 + "_idle", "stop_" + var_1 + "_idle_" + self.animname);
     } else {
-      var2 thread scripts\common\anim::anim_generic(self, var1);
+      var_2 thread scripts\common\anim::anim_generic(self, var_1);
     }
-  } else if(isDefined(var5)) {
-    thread anim_then_loop_solo(var2, self, var1, var1 + "_idle");
+  } else if(isDefined(var_5)) {
+    thread anim_then_loop_solo(var_2, self, var_1, var_1 + "_idle");
   } else {
-    var2 thread scripts\common\anim::anim_single_solo(self, var1);
+    var_2 thread scripts\common\anim::anim_single_solo(self, var_1);
   }
 
-  if(isDefined(var0.script_type)) {
-    if(var0.script_type == "anim_wait") {
+  if(isDefined(var_0.script_type)) {
+    if(var_0.script_type == "anim_wait") {
       self waittillmatch("single anim", "end");
       return;
     }
@@ -601,176 +601,176 @@ function script_movement_anim(var0) {
   }
 }
 
-function anim_then_loop_solo(var0, var1, var2, var3, var4) {
-  var0 endon("stop_anim_then_loop");
+function anim_then_loop_solo(var_0, var_1, var_2, var_3, var_4) {
+  var_0 endon("stop_anim_then_loop");
 
-  if(!isDefined(var2)) {
-    var2 = var1 + "_idle";
+  if(!isDefined(var_2)) {
+    var_2 = var_1 + "_idle";
 
-    if(!isDefined(level.scr_anim[var0.animname][var2])) {
-      var2 = var1 + "_loop";
+    if(!isDefined(level.scr_anim[var_0.animname][var_2])) {
+      var_2 = var_1 + "_loop";
     }
   }
 
-  var5 = spawnStruct();
-  var5.loopendernotified = 0;
+  var_5 = spawnStruct();
+  var_5.loopendernotified = 0;
 
-  if(isDefined(var3)) {
-    thread anim_then_loopender_thread(var5, self);
+  if(isDefined(var_3)) {
+    thread anim_then_loopender_thread(var_5, self);
   }
 
-  if(istrue(var4)) {
-    scripts\common\anim::anim_generic(var0, var1);
+  if(istrue(var_4)) {
+    scripts\common\anim::anim_generic(var_0, var_1);
   } else {
-    scripts\common\anim::anim_single_solo(var0, var1);
+    scripts\common\anim::anim_single_solo(var_0, var_1);
   }
 
   waittillframeend();
 
-  if(var5.loopendernotified) {
+  if(var_5.loopendernotified) {
     return;
   }
 
-  var5 notify("stop_thread");
+  var_5 notify("stop_thread");
 
-  if(isai(var0) && !isalive(var0)) {
+  if(isai(var_0) && !isalive(var_0)) {
     return;
   }
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(istrue(var4)) {
-    thread scripts\common\anim::anim_generic_loop(var0, var2, var3);
+  if(istrue(var_4)) {
+    thread scripts\common\anim::anim_generic_loop(var_0, var_2, var_3);
     return;
   }
 
-  thread scripts\common\anim::anim_loop_solo(var0, var2, var3);
+  thread scripts\common\anim::anim_loop_solo(var_0, var_2, var_3);
 }
 
-function anim_then_loopender_thread(var0, var1) {
+function anim_then_loopender_thread(var_0, var_1) {
   self endon("stop_thread");
-  var0 waittill(var1);
+  var_0 waittill(var_1);
   self.loopendernotified = 1;
 }
 
-function add_scripted_movement_arrivefuncs(var0, var1) {
+function add_scripted_movement_arrivefuncs(var_0, var_1) {
   if(!isDefined(level.scripted_movement_arrivefuncs)) {
     level.scripted_movement_arrivefuncs = [];
   }
 
-  level.scripted_movement_arrivefuncs[var0] = var1;
+  level.scripted_movement_arrivefuncs[var_0] = var_1;
 }
 
 function get_scripted_movement_arrivefuncs() {
-  var0 = [];
+  var_0 = [];
 
   if(isDefined(level.scripted_movement_arrivefuncs)) {
-    foreach(var2 in level.scripted_movement_arrivefuncs) {
-      foreach(var4 in var2) {
-        var0 = var4;
+    foreach(var_2 in level.scripted_movement_arrivefuncs) {
+      foreach(var_4 in var_2) {
+        var_0 = var_4;
       }
     }
   }
 
-  return var0;
+  return var_0;
 }
 
-function farah_gesture1(var0) {
-  thread farah_gesture_timing(var0, "offices_farah_gesture1");
+function farah_gesture1(var_0) {
+  thread farah_gesture_timing(var_0, "offices_farah_gesture1");
 }
 
-function farah_gesture2(var0) {
-  thread farah_gesture_timing(var0, "offices_farah_gesture2");
+function farah_gesture2(var_0) {
+  thread farah_gesture_timing(var_0, "offices_farah_gesture2");
 }
 
-function farah_gesture_timing(var0, var1) {
+function farah_gesture_timing(var_0, var_1) {
   scripts\engine\utility::set_movement_speed(125);
   wait 0.1;
-  var2 = scripts\engine\utility::getStruct(var1, "targetname");
-  scripts\asm\gesture::ai_request_gesture("casual_point", var2, 3000);
+  var_2 = scripts\engine\utility::getStruct(var_1, "targetname");
+  scripts\asm\gesture::ai_request_gesture("casual_point", var_2, 3000);
   wait 3;
   scripts\common\utility::clear_movement_speed();
 }
 
-function ahead_of_player(var0) {
+function ahead_of_player(var_0) {
   scripts\engine\sp\utility::enable_dynamic_run_speed(level.player, 125, 205, 250);
 }
 
-function scripted_poi_start(var0) {
-  var1 = scripts\engine\utility::getStruct(var0.targetname + "_poi", "targetname");
-  scripts\common\ai::poi_enable(1, var1);
-  var2 = get_poi_total_time(var1);
-  wait var2;
+function scripted_poi_start(var_0) {
+  var_1 = scripts\engine\utility::getStruct(var_0.targetname + "_poi", "targetname");
+  scripts\common\ai::poi_enable(1, var_1);
+  var_2 = get_poi_total_time(var_1);
+  wait var_2;
   scripts\common\ai::poi_enable(0);
 }
 
-function get_poi_total_time(var0) {
-  var1 = 0;
-  var1 = has_script_time_min(var0, var1);
+function get_poi_total_time(var_0) {
+  var_1 = 0;
+  var_1 = has_script_time_min(var_0, var_1);
 
-  if(isDefined(var0.target)) {
-    var0 = scripts\engine\utility::getStruct(var0.target, "targetname");
-    var1 = has_script_time_min(var0, var1);
+  if(isDefined(var_0.target)) {
+    var_0 = scripts\engine\utility::getStruct(var_0.target, "targetname");
+    var_1 = has_script_time_min(var_0, var_1);
   }
 
-  return var1;
+  return var_1;
 }
 
-function has_script_time_min(var0) {
+function has_script_time_min(var_0) {
   if(isDefined(self.script_time_min)) {
-    var0 += self.script_time_min;
+    var_0 += self.script_time_min;
   } else {
-    var0 += 1.2;
+    var_0 += 1.2;
   }
 
-  return var0;
+  return var_0;
 }
 
-function ai_gunpose_ads(var0) {
+function ai_gunpose_ads(var_0) {
   scripts\common\ai::set_gunpose("ads");
 }
 
-function ai_gunpose_reset(var0) {
+function ai_gunpose_reset(var_0) {
   scripts\common\ai::reset_gunpose();
 }
 
-function rebel_2_catchup(var0) {
+function rebel_2_catchup(var_0) {
   scripts\engine\sp\utility::enable_dynamic_run_speed(level.farah, 60, 150, 250, 165, 110, 50);
 }
 
-function rebel_plant_bomb(var0) {
-  var1 = getEnt(var0.targetname + "_bomb", "targetname");
-  var1 show();
+function rebel_plant_bomb(var_0) {
+  var_1 = getEnt(var_0.targetname + "_bomb", "targetname");
+  var_1 show();
   wait 0.5;
-  playFXOnTag(scripts\engine\utility::getfx("vfx_c4_light"), var1, "tag_fx");
+  playFXOnTag(scripts\engine\utility::getfx("vfx_c4_light"), var_1, "tag_fx");
 }
 
-function rebel_plant_bomb_wait(var0, var1) {
-  var2 = getEnt(var0.targetname + "_bomb", "targetname");
-  var2 show();
-  scripts\engine\utility::flag_wait(var1);
+function rebel_plant_bomb_wait(var_0, var_1) {
+  var_2 = getEnt(var_0.targetname + "_bomb", "targetname");
+  var_2 show();
+  scripts\engine\utility::flag_wait(var_1);
   wait 0.5;
-  playFXOnTag(scripts\engine\utility::getfx("vfx_c4_light"), var2, "tag_fx");
+  playFXOnTag(scripts\engine\utility::getfx("vfx_c4_light"), var_2, "tag_fx");
 }
 
-function check_player_pos(var0) {
-  thread check_player_pos_flag(var0);
+function check_player_pos(var_0) {
+  thread check_player_pos_flag(var_0);
 }
 
-function check_player_pos_flag(var0) {
+function check_player_pos_flag(var_0) {
   self endon("death");
   scripts\common\ai::reset_gunpose();
   level.farah notify("stop_going_to_node");
-  var0 = getnode("office_end_farah_idle", "targetname");
-  self setgoalnode(var0);
+  var_0 = getnode("office_end_farah_idle", "targetname");
+  self setgoalnode(var_0);
   scripts\engine\utility::flag_wait("reached_final_room");
-  var0 = getnode("offices_endnode_farah", "targetname");
-  self setgoalnode(var0);
+  var_0 = getnode("offices_endnode_farah", "targetname");
+  self setgoalnode(var_0);
   wait 0.5;
   scripts\common\ai::enable_arrivals();
   scripts\common\ai::enable_exits();
   scripts\engine\sp\utility::disable_dynamic_run_speed();
-  thread offices_door_dialog(var0);
+  thread offices_door_dialog(var_0);
 }

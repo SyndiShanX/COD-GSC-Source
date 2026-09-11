@@ -16,32 +16,32 @@ function main() {
   self endon("killanimscript");
   scripts\anim\utility::initialize("grenade_return_throw");
   self animmode("zonly_physics");
-  var0 = undefined;
-  var1 = 1000;
+  var_0 = undefined;
+  var_1 = 1000;
 
   if(isDefined(self.enemy)) {
-    var1 = distance(self.origin, self.enemy.origin);
+    var_1 = distance(self.origin, self.enemy.origin);
   }
 
-  var2 = [];
+  var_2 = [];
 
-  if(var1 < 600 && islowthrowsafe()) {
-    if(var1 < 300) {
-      var2 = scripts\anim\utility::lookupanim("grenade", "return_throw_short");
+  if(var_1 < 600 && islowthrowsafe()) {
+    if(var_1 < 300) {
+      var_2 = scripts\anim\utility::lookupanim("grenade", "return_throw_short");
     } else {
-      var2 = scripts\anim\utility::lookupanim("grenade", "return_throw_long");
+      var_2 = scripts\anim\utility::lookupanim("grenade", "return_throw_long");
     }
   }
 
-  if(var2.size == 0) {
-    var2 = scripts\anim\utility::lookupanim("grenade", "return_throw_default");
+  if(var_2.size == 0) {
+    var_2 = scripts\anim\utility::lookupanim("grenade", "return_throw_default");
   }
 
-  var0 = var2[randomint(var2.size)];
-  self setflaggedanimknoballrestart("throwanim", var0, %body, 1, 0.3);
-  var4 = animhasnotetrack(var0, "grenade_left") || animhasnotetrack(var0, "grenade_right");
+  var_0 = var_2[randomint(var_2.size)];
+  self setflaggedanimknoballrestart("throwanim", var_0, %body, 1, 0.3);
+  var_4 = animhasnotetrack(var_0, "grenade_left") || animhasnotetrack(var_0, "grenade_right");
 
-  if(var4) {
+  if(var_4) {
     scripts\anim\shared::placeweaponon(self.weapon, "left");
     thread putweaponbackinrighthand();
     thread notifygrenadepickup("throwanim", "grenade_left");
@@ -62,7 +62,7 @@ function main() {
 
   wait 1;
 
-  if(var4) {
+  if(var_4) {
     self notify("put_weapon_back_in_right_hand");
     scripts\anim\shared::placeweaponon(self.weapon, "right");
     return;
@@ -70,9 +70,9 @@ function main() {
 }
 
 function islowthrowsafe() {
-  var0 = (self.origin[0], self.origin[1], self.origin[2] + 20);
-  var1 = var0 + anglesToForward(self.angles) * 50;
-  return sighttracepassed(var0, var1, 0, undefined);
+  var_0 = (self.origin[0], self.origin[1], self.origin[2] + 20);
+  var_1 = var_0 + anglesToForward(self.angles) * 50;
+  return sighttracepassed(var_0, var_1, 0, undefined);
 }
 
 function putweaponbackinrighthand() {
@@ -82,9 +82,9 @@ function putweaponbackinrighthand() {
   scripts\anim\shared::placeweaponon(self.weapon, "right");
 }
 
-function notifygrenadepickup(var0, var1) {
+function notifygrenadepickup(var_0, var_1) {
   self endon("killanimscript");
   self endon("grenade_pickup");
-  self waittillmatch(var0, var1);
+  self waittillmatch(var_0, var_1);
   self notify("grenade_pickup");
 }

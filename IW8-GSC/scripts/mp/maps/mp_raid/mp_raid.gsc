@@ -45,67 +45,67 @@ function managegate() {
   }
 
   scripts\mp\flags::gameflagwait("infil_started");
-  var0 = getEntArray("infil_barrier", "targetname");
+  var_0 = getEntArray("infil_barrier", "targetname");
 
-  foreach(var2 in var0) {
-    var2 hide();
+  foreach(var_2 in var_0) {
+    var_2 hide();
   }
 
   level waittill("prematch_countdown");
   wait 4;
 
-  foreach(var2 in var0) {
-    var2 show();
+  foreach(var_2 in var_0) {
+    var_2 show();
   }
 }
 
 function player_exfil_struct() {
-  var0 = getEnt("clip32x32x32", "targetname");
-  var1 = spawn("script_model", (-2958, 224, 292));
-  var1.angles = (0, 0, 0);
-  var1 clonebrushmodeltoscriptmodel(var0);
-  var2 = getEnt("clip32x32x32", "targetname");
-  var3 = spawn("script_model", (-2958, 256, 292));
-  var3.angles = (0, 0, 0);
-  var3 clonebrushmodeltoscriptmodel(var2);
-  var4 = getEnt("clip128x128x256", "targetname");
-  var5 = spawn("script_model", (-732.75, 1859.25, 268.25));
-  var5.angles = (0, 0, 0);
-  var5 clonebrushmodeltoscriptmodel(var4);
-  var6 = getEnt("clip32x32x32", "targetname");
-  var7 = spawn("script_model", (-2133, 1986, 400.5));
-  var7.angles = (0, 0, 0);
-  var7 clonebrushmodeltoscriptmodel(var6);
-  var8 = getEnt("nosight128x128x8", "targetname");
-  var9 = spawn("script_model", (-2974, 2202, 304));
-  var9.angles = (270, 358, -66);
-  var9 clonebrushmodeltoscriptmodel(var8);
-  var10 = getEnt("clip64x64x8", "targetname");
-  var11 = spawn("script_model", (-448, 940, 480));
-  var11.angles = (90, 0, 0);
-  var11 clonebrushmodeltoscriptmodel(var10);
-  var12 = getEnt("clip64x64x8", "targetname");
-  var13 = spawn("script_model", (-448, 1048, 480));
-  var13.angles = (90, 0, 0);
-  var13 clonebrushmodeltoscriptmodel(var12);
-  var14 = getEnt("clip64x64x64", "targetname");
-  var15 = spawn("script_model", (-1320, 4035, 400));
-  var15.angles = (0, 0, 0);
-  var15 clonebrushmodeltoscriptmodel(var14);
-  var16 = getEnt("clip64x64x64", "targetname");
-  var17 = spawn("script_model", (-1320, 3971, 400));
-  var17.angles = (0, 0, 0);
-  var17 clonebrushmodeltoscriptmodel(var16);
+  var_0 = getEnt("clip32x32x32", "targetname");
+  var_1 = spawn("script_model", (-2958, 224, 292));
+  var_1.angles = (0, 0, 0);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = getEnt("clip32x32x32", "targetname");
+  var_3 = spawn("script_model", (-2958, 256, 292));
+  var_3.angles = (0, 0, 0);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
+  var_4 = getEnt("clip128x128x256", "targetname");
+  var_5 = spawn("script_model", (-732.75, 1859.25, 268.25));
+  var_5.angles = (0, 0, 0);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_6 = getEnt("clip32x32x32", "targetname");
+  var_7 = spawn("script_model", (-2133, 1986, 400.5));
+  var_7.angles = (0, 0, 0);
+  var_7 clonebrushmodeltoscriptmodel(var_6);
+  var_8 = getEnt("nosight128x128x8", "targetname");
+  var_9 = spawn("script_model", (-2974, 2202, 304));
+  var_9.angles = (270, 358, -66);
+  var_9 clonebrushmodeltoscriptmodel(var_8);
+  var_10 = getEnt("clip64x64x8", "targetname");
+  var_11 = spawn("script_model", (-448, 940, 480));
+  var_11.angles = (90, 0, 0);
+  var_11 clonebrushmodeltoscriptmodel(var_10);
+  var_12 = getEnt("clip64x64x8", "targetname");
+  var_13 = spawn("script_model", (-448, 1048, 480));
+  var_13.angles = (90, 0, 0);
+  var_13 clonebrushmodeltoscriptmodel(var_12);
+  var_14 = getEnt("clip64x64x64", "targetname");
+  var_15 = spawn("script_model", (-1320, 4035, 400));
+  var_15.angles = (0, 0, 0);
+  var_15 clonebrushmodeltoscriptmodel(var_14);
+  var_16 = getEnt("clip64x64x64", "targetname");
+  var_17 = spawn("script_model", (-1320, 3971, 400));
+  var_17.angles = (0, 0, 0);
+  var_17 clonebrushmodeltoscriptmodel(var_16);
 }
 
 function ref_12f8e() {
   level.chopper_gunner_assignedtargetmarkers_onnewai = getnodesinradius((-2075, 512, 272), 100, 0, 100);
-  var0 = getnodesinradius((-2226, 1811, 272), 32, 0, 100);
+  var_0 = getnodesinradius((-2226, 1811, 272), 32, 0, 100);
 
-  foreach(var2 in var0) {
-    var2 disconnectnode();
+  foreach(var_2 in var_0) {
+    var_2 disconnectnode();
   }
 
-  var4 = [];
-  GscBinSkip0(0x2e, var4.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_tdm_spawn_secondary", (-3392.8, -126.1, 300), (0, 360, 0)));
+  var_4 = [];
+  GscBinSkip0(0x2e, var_4.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_tdm_spawn_secondary", (-3392.8, -126.1, 300), (0, 360, 0)));
 }

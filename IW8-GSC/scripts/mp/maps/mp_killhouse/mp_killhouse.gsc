@@ -24,16 +24,16 @@ function main() {
 }
 
 function ref_12d9b() {
-  var0 = getEnt("fanAnimatedPivot", "targetname");
-  var1 = getEnt("drillPivot", "script_noteworthy");
+  var_0 = getEnt("fanAnimatedPivot", "targetname");
+  var_1 = getEnt("drillPivot", "script_noteworthy");
 
-  if(isDefined(var0)) {
-    var0 linkTo(var1);
+  if(isDefined(var_0)) {
+    var_0 linkTo(var_1);
   }
 
-  var2 = getEntArray(var0.target, "targetname");
+  var_2 = getEntArray(var_0.target, "targetname");
 
-  foreach(var4 in var2) {
-    var4 linkTo(var0);
+  foreach(var_4 in var_2) {
+    var_4 linkTo(var_0);
   }
 }

@@ -18,269 +18,269 @@ function init_cursor_hint() {
   level.cursor_hints_max = 1;
 }
 
-function create_cursor_hint(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14) {
-  var15 = self;
+function create_cursor_hint(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14) {
+  var_15 = self;
 
-  if(isstruct(var15) || var15.classname == "script_origin" || isDefined(var1)) {
-    var15 = spawn("script_origin", self.origin);
-    self.cursor_hint_ent = var15;
+  if(isstruct(var_15) || var_15.classname == "script_origin" || isDefined(var_1)) {
+    var_15 = spawn("script_origin", self.origin);
+    self.cursor_hint_ent = var_15;
     thread hint_ent_notify_trigger();
   }
 
-  if(isDefined(var1)) {
-    var16 = "tag_origin";
+  if(isDefined(var_1)) {
+    var_16 = "tag_origin";
 
-    if(isDefined(var0)) {
-      var16 = var0;
-      var15.origin = self gettagorigin(var16);
+    if(isDefined(var_0)) {
+      var_16 = var_0;
+      var_15.origin = self gettagorigin(var_16);
     }
 
-    if(isDefined(self.model) && self.classname == "script_model" && scripts\engine\utility::hastag(self.model, var16)) {
-      var15 linkTo(self, var16, var1, (0, 0, 0));
-    } else if(isDefined(var0)) {
-      var15 linkTo(self, var16, var1, (0, 0, 0));
+    if(isDefined(self.model) && self.classname == "script_model" && scripts\engine\utility::hastag(self.model, var_16)) {
+      var_15 linkTo(self, var_16, var_1, (0, 0, 0));
+    } else if(isDefined(var_0)) {
+      var_15 linkTo(self, var_16, var_1, (0, 0, 0));
     } else if(isDefined(self.angles)) {
-      var15.origin += rotatevector(var1, self.angles);
+      var_15.origin += rotatevector(var_1, self.angles);
 
       if(isent(self)) {
-        var15 linkTo(self);
+        var_15 linkTo(self);
       }
     } else {
-      var15.origin += var1;
+      var_15.origin += var_1;
 
       if(isent(self)) {
-        var15 linkTo(self);
+        var_15 linkTo(self);
       }
     }
-  } else if(isDefined(var0)) {
-    var15 sethinttag(var0);
+  } else if(isDefined(var_0)) {
+    var_15 sethinttag(var_0);
   }
 
-  if(isDefined(var8) && var8) {
-    var15 setCursorHint("HINT_NOICON");
+  if(isDefined(var_8) && var_8) {
+    var_15 setCursorHint("HINT_NOICON");
   } else {
-    var15 setCursorHint("HINT_BUTTON");
+    var_15 setCursorHint("HINT_BUTTON");
   }
 
-  if(isDefined(var2) && !scripts\engine\sp\utility::in_realism_mode()) {
-    var15 setHintString(var2);
+  if(isDefined(var_2) && !scripts\engine\sp\utility::in_realism_mode()) {
+    var_15 setHintString(var_2);
   }
 
-  var17 = 360;
+  var_17 = 360;
 
-  if(isDefined(var3)) {
-    var17 = var3;
+  if(isDefined(var_3)) {
+    var_17 = var_3;
   }
 
-  var15 sethintdisplayfov(var17);
-  var18 = 65;
+  var_15 sethintdisplayfov(var_17);
+  var_18 = 65;
 
-  if(isDefined(var13)) {
-    var18 = var13;
+  if(isDefined(var_13)) {
+    var_18 = var_13;
   }
 
-  var15 setusefov(var18);
-  var19 = 500;
+  var_15 setusefov(var_18);
+  var_19 = 500;
 
-  if(isDefined(var4)) {
-    var19 = var4;
+  if(isDefined(var_4)) {
+    var_19 = var_4;
   }
 
-  var15 sethintdisplayrange(var19);
-  var20 = 80;
+  var_15 sethintdisplayrange(var_19);
+  var_20 = 80;
 
-  if(isDefined(var5)) {
-    var20 = var5;
+  if(isDefined(var_5)) {
+    var_20 = var_5;
   }
 
-  var15 setuserange(var20);
+  var_15 setuserange(var_20);
 
-  if(isDefined(var6) && var6) {
-    var15 sethintonobstruction("show");
+  if(isDefined(var_6) && var_6) {
+    var_15 sethintonobstruction("show");
   } else {
-    var15 sethintonobstruction("hide");
+    var_15 sethintonobstruction("hide");
   }
 
-  if(isDefined(var7) && var7) {
-    var15 sethintrequiresmashing(var7);
+  if(isDefined(var_7) && var_7) {
+    var_15 sethintrequiresmashing(var_7);
   }
 
-  if(!isDefined(var10)) {
-    var10 = "duration_short";
+  if(!isDefined(var_10)) {
+    var_10 = "duration_short";
   }
 
-  var15 setuseholdduration(var10);
+  var_15 setuseholdduration(var_10);
 
-  if(var10 != "duration_none" && var10 != "duration_short") {
-    var15 sethintrequiresholding(1);
+  if(var_10 != "duration_none" && var_10 != "duration_short") {
+    var_15 sethintrequiresholding(1);
   }
 
   thread hint_delete_on_trigger();
 
-  if(isDefined(var9)) {
-    var15 sethinticon(var9);
+  if(isDefined(var_9)) {
+    var_15 sethinticon(var_9);
   }
 
-  if(isDefined(var11)) {
-    var15 setusecommand(var11);
+  if(isDefined(var_11)) {
+    var_15 setusecommand(var_11);
   }
 
-  if(isDefined(var12)) {
-    var15 sethintlockplayermovement(1);
+  if(isDefined(var_12)) {
+    var_15 sethintlockplayermovement(1);
   } else {
-    var15 sethintlockplayermovement(0);
+    var_15 sethintlockplayermovement(0);
   }
 
-  if(isDefined(var14)) {
-    thread internal_hint_toggle_use_by_angles(var15, var14, var20);
+  if(isDefined(var_14)) {
+    thread internal_hint_toggle_use_by_angles(var_15, var_14, var_20);
   }
 
-  var15 makeusable();
+  var_15 makeusable();
 }
 
-function create_cursor_hint_forced(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14) {
-  var15 = self;
+function create_cursor_hint_forced(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14) {
+  var_15 = self;
 
-  if(isstruct(var15) || var15.classname == "script_origin" || isDefined(var1)) {
-    var15 = spawn("script_origin", self.origin);
-    self.cursor_hint_ent = var15;
+  if(isstruct(var_15) || var_15.classname == "script_origin" || isDefined(var_1)) {
+    var_15 = spawn("script_origin", self.origin);
+    self.cursor_hint_ent = var_15;
     thread hint_ent_notify_trigger();
   }
 
-  if(isDefined(var1)) {
-    var16 = "tag_origin";
+  if(isDefined(var_1)) {
+    var_16 = "tag_origin";
 
-    if(isDefined(var0)) {
-      var16 = var0;
-      var15.origin = self gettagorigin(var16);
+    if(isDefined(var_0)) {
+      var_16 = var_0;
+      var_15.origin = self gettagorigin(var_16);
     }
 
-    if(isDefined(self.model) && self.classname == "script_model" && scripts\engine\utility::hastag(self.model, var16)) {
-      var15 linkTo(self, var16, var1, (0, 0, 0));
-    } else if(isDefined(var0)) {
-      var15 linkTo(self, var16, var1, (0, 0, 0));
+    if(isDefined(self.model) && self.classname == "script_model" && scripts\engine\utility::hastag(self.model, var_16)) {
+      var_15 linkTo(self, var_16, var_1, (0, 0, 0));
+    } else if(isDefined(var_0)) {
+      var_15 linkTo(self, var_16, var_1, (0, 0, 0));
     } else if(isDefined(self.angles)) {
-      var15.origin += rotatevector(var1, self.angles);
+      var_15.origin += rotatevector(var_1, self.angles);
 
       if(isent(self)) {
-        var15 linkTo(self);
+        var_15 linkTo(self);
       }
     } else {
-      var15.origin += var1;
+      var_15.origin += var_1;
 
       if(isent(self)) {
-        var15 linkTo(self);
+        var_15 linkTo(self);
       }
     }
-  } else if(isDefined(var0)) {
-    var15 sethinttag(var0);
+  } else if(isDefined(var_0)) {
+    var_15 sethinttag(var_0);
   }
 
-  if(isDefined(var8) && var8) {
-    var15 setCursorHint("HINT_NOICON");
+  if(isDefined(var_8) && var_8) {
+    var_15 setCursorHint("HINT_NOICON");
   } else {
-    var15 setCursorHint("HINT_BUTTON");
+    var_15 setCursorHint("HINT_BUTTON");
   }
 
-  if(isDefined(var2)) {
-    var15 setHintString(var2);
+  if(isDefined(var_2)) {
+    var_15 setHintString(var_2);
   }
 
-  var17 = 360;
+  var_17 = 360;
 
-  if(isDefined(var3)) {
-    var17 = var3;
+  if(isDefined(var_3)) {
+    var_17 = var_3;
   }
 
-  var15 sethintdisplayfov(var17);
-  var18 = 65;
+  var_15 sethintdisplayfov(var_17);
+  var_18 = 65;
 
-  if(isDefined(var13)) {
-    var18 = var13;
+  if(isDefined(var_13)) {
+    var_18 = var_13;
   }
 
-  var15 setusefov(var18);
-  var19 = 500;
+  var_15 setusefov(var_18);
+  var_19 = 500;
 
-  if(isDefined(var4)) {
-    var19 = var4;
+  if(isDefined(var_4)) {
+    var_19 = var_4;
   }
 
-  var15 sethintdisplayrange(var19);
-  var20 = 80;
+  var_15 sethintdisplayrange(var_19);
+  var_20 = 80;
 
-  if(isDefined(var5)) {
-    var20 = var5;
+  if(isDefined(var_5)) {
+    var_20 = var_5;
   }
 
-  var15 setuserange(var20);
+  var_15 setuserange(var_20);
 
-  if(isDefined(var6) && var6) {
-    var15 sethintonobstruction("show");
+  if(isDefined(var_6) && var_6) {
+    var_15 sethintonobstruction("show");
   } else {
-    var15 sethintonobstruction("hide");
+    var_15 sethintonobstruction("hide");
   }
 
-  if(isDefined(var7) && var7) {
-    var15 sethintrequiresmashing(var7);
+  if(isDefined(var_7) && var_7) {
+    var_15 sethintrequiresmashing(var_7);
   }
 
-  if(!isDefined(var10)) {
-    var10 = "duration_short";
+  if(!isDefined(var_10)) {
+    var_10 = "duration_short";
   }
 
-  var15 setuseholdduration(var10);
+  var_15 setuseholdduration(var_10);
 
-  if(var10 != "duration_none" && var10 != "duration_short") {
-    var15 sethintrequiresholding(1);
+  if(var_10 != "duration_none" && var_10 != "duration_short") {
+    var_15 sethintrequiresholding(1);
   }
 
   thread hint_delete_on_trigger();
 
-  if(isDefined(var9)) {
-    var15 sethinticon(var9);
+  if(isDefined(var_9)) {
+    var_15 sethinticon(var_9);
   }
 
-  if(isDefined(var11)) {
-    var15 setusecommand(var11);
+  if(isDefined(var_11)) {
+    var_15 setusecommand(var_11);
   }
 
-  if(isDefined(var12)) {
-    var15 sethintlockplayermovement(1);
+  if(isDefined(var_12)) {
+    var_15 sethintlockplayermovement(1);
   } else {
-    var15 sethintlockplayermovement(0);
+    var_15 sethintlockplayermovement(0);
   }
 
-  if(isDefined(var14)) {
-    thread internal_hint_toggle_use_by_angles(var15, var14, var20);
+  if(isDefined(var_14)) {
+    thread internal_hint_toggle_use_by_angles(var_15, var_14, var_20);
   }
 
-  var15 makeusable();
+  var_15 makeusable();
 }
 
-function internal_hint_toggle_use_by_angles(var0, var1, var2) {
+function internal_hint_toggle_use_by_angles(var_0, var_1, var_2) {
   self endon("death");
   self endon("hint_destroyed");
   level.player endon("death");
-  var3 = 1;
-  var4 = cos(var1);
+  var_3 = 1;
+  var_4 = cos(var_1);
 
   for(;;) {
-    var5 = self.origin;
-    var6 = self.angles;
-    var7 = anglesToForward(var6);
-    var8 = vectorNormalize(level.player getEye() - var5);
-    var9 = vectordot(var7, var8);
-    var10 = var9 >= var4;
+    var_5 = self.origin;
+    var_6 = self.angles;
+    var_7 = anglesToForward(var_6);
+    var_8 = vectorNormalize(level.player getEye() - var_5);
+    var_9 = vectordot(var_7, var_8);
+    var_10 = var_9 >= var_4;
 
-    if(var10 != var3) {
-      if(var10) {
-        var0 setuserange(var2);
+    if(var_10 != var_3) {
+      if(var_10) {
+        var_0 setuserange(var_2);
       } else {
-        var0 setuserange(1);
+        var_0 setuserange(1);
       }
 
-      var3 = var10;
+      var_3 = var_10;
     }
 
     waitframe();
@@ -290,37 +290,37 @@ function internal_hint_toggle_use_by_angles(var0, var1, var2) {
 function hint_ent_notify_trigger() {
   self endon("death");
   self endon("hint_destroyed");
-  self.cursor_hint_ent waittill("trigger", var0);
-  self notify("trigger", var0);
+  self.cursor_hint_ent waittill("trigger", var_0);
+  self notify("trigger", var_0);
 }
 
 function hint_delete_on_trigger() {
   self endon("hint_destroyed");
-  var0 = self;
+  var_0 = self;
 
   if(isDefined(self.cursor_hint_ent)) {
-    var0 = self.cursor_hint_ent;
+    var_0 = self.cursor_hint_ent;
   }
 
-  hint_delete_on_trigger_waittill(var0);
+  hint_delete_on_trigger_waittill(var_0);
   thread remove_cursor_hint();
 }
 
-function hint_delete_on_trigger_waittill(var0) {
+function hint_delete_on_trigger_waittill(var_0) {
   self endon("entitydeleted");
-  var0 waittill("trigger");
+  var_0 waittill("trigger");
 }
 
 function remove_cursor_hint() {
-  var0 = self;
+  var_0 = self;
 
   if(isDefined(self.cursor_hint_ent)) {
-    var0 = self.cursor_hint_ent;
-    var0 scripts\engine\utility::delaycall(0.5, &delete);
+    var_0 = self.cursor_hint_ent;
+    var_0 scripts\engine\utility::delaycall(0.5, &delete);
   }
 
-  if(isDefined(var0) && !isstruct(var0)) {
-    var0 makeunusable();
+  if(isDefined(var_0) && !isstruct(var_0)) {
+    var_0 makeunusable();
   }
 
   if(isDefined(self)) {
@@ -330,6 +330,6 @@ function remove_cursor_hint() {
 }
 
 function hint_waittill_trigger() {
-  var0 = scripts\engine\sp\utility::monitor_interact_delay(self, "stand");
-  return var0;
+  var_0 = scripts\engine\sp\utility::monitor_interact_delay(self, "stand");
+  return var_0;
 }

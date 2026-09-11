@@ -28,10 +28,10 @@ function main() {
   self.usescriptedweapon = 1;
   self.scriptedweaponclassprimary = "ar";
   self.weapon = scripts\code\ai::create_weapon_in_script(["iw8_ar_akilo47", "iw8_ar_falpha"]);
-  var0 = undefined;
-  var1 = ["character_sla_rebels_male_ar", "character_sla_rebels_male_ar_2_1", "character_sla_rebels_male_cqb", "character_sla_rebels_male_cqb_2_1", "character_sla_rebels_male_lmg", "character_sla_rebels_male_lmg_2_1", "character_iw8_sla_rebel_female_1_1", "character_iw8_sla_rebel_female_2_1", "character_iw8_sla_rebel_female_3_1", "character_iw8_sla_rebel_female_4_1", "character_iw8_sla_rebel_female_5_1", "character_iw8_sla_rebel_female_6_1"];
+  var_0 = undefined;
+  var_1 = ["character_sla_rebels_male_ar", "character_sla_rebels_male_ar_2_1", "character_sla_rebels_male_cqb", "character_sla_rebels_male_cqb_2_1", "character_sla_rebels_male_lmg", "character_sla_rebels_male_lmg_2_1", "character_iw8_sla_rebel_female_1_1", "character_iw8_sla_rebel_female_2_1", "character_iw8_sla_rebel_female_3_1", "character_iw8_sla_rebel_female_4_1", "character_iw8_sla_rebel_female_5_1", "character_iw8_sla_rebel_female_6_1"];
 
-  switch (scripts\code\character::get_random_character(12, var0, var1)) {
+  switch (scripts\code\character::get_random_character(12, var_0, var_1)) {
     case 0:
       character\character_sla_rebels_male_ar::main();
       break;
@@ -75,7 +75,7 @@ function spawner() {
   self setspawnerteam("allies");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\character_sla_rebels_male_ar::precache();
   character\character_sla_rebels_male_ar_2_1::precache();
   character\character_sla_rebels_male_cqb::precache();

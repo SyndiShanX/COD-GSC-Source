@@ -40,6 +40,6 @@ function main_mp() {
   self attach(self.hatmodel);
 }
 
-function precache_mp(var0) {
-  level.agent_definition[var0]["animclass"] = "rebel_female";
+function precache_mp(var_0) {
+  level.agent_definition[var_0]["animclass"] = "rebel_female";
 }

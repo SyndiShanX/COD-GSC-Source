@@ -37,118 +37,118 @@ function codecallback_playerconnect() {
   [[level.callbackplayerconnect]]();
 }
 
-function codecallback_playerdisconnect(var0) {
+function codecallback_playerdisconnect(var_0) {
   self notify("disconnect");
   self notify("death_or_disconnect");
   self.unicornpoints = 1;
-  [[level.callbackplayerdisconnect]](var0);
+  [[level.callbackplayerdisconnect]](var_0);
 }
 
-function codecallback_playerdamage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13) {
+function codecallback_playerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
   self endon("disconnect");
 
   if(isDefined(level.weaponmapfunc)) {
-    var5 = [[level.weaponmapfunc]](var5, var0);
+    var_5 = [[level.weaponmapfunc]](var_5, var_0);
   }
 
-  [[level.callbackplayerdamage]](var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13);
+  [[level.callbackplayerdamage]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
 }
 
-function codecallback_playerfinishweaponchange(var0, var1) {
+function codecallback_playerfinishweaponchange(var_0, var_1) {
   self endon("disconnect");
 
   if(isDefined(level.weaponmapfunc)) {
-    [[level.weaponmapfunc]](var0);
-    [[level.weaponmapfunc]](var1);
+    [[level.weaponmapfunc]](var_0);
+    [[level.weaponmapfunc]](var_1);
   }
 
   if(isDefined(level.callbackfinishweaponchange)) {
-    [[level.callbackfinishweaponchange]](var1, var0, var1.isalternate, var0.isalternate);
+    [[level.callbackfinishweaponchange]](var_1, var_0, var_1.isalternate, var_0.isalternate);
     return;
   }
 }
 
-function codecallback_playerimpaled(var0, var1, var2, var3, var4, var5, var6, var7) {
+function codecallback_playerimpaled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self endon("disconnect");
 
   if(isDefined(level.weaponmapfunc)) {
-    [[level.weaponmapfunc]](var1);
+    [[level.weaponmapfunc]](var_1);
   }
 
-  [[level.callbackplayerimpaled]](var0, var1, var2, var3, var4, var5, var6, var7);
+  [[level.callbackplayerimpaled]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7);
 }
 
-function codecallback_playerkilled(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
+function codecallback_playerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   self endon("disconnect");
 
   if(isDefined(level.weaponmapfunc)) {
-    [[level.weaponmapfunc]](var5, var0);
+    [[level.weaponmapfunc]](var_5, var_0);
   }
 
-  [[level.callbackplayerkilled]](var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+  [[level.callbackplayerkilled]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 }
 
-function codecallback_vehicledamage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12) {
+function codecallback_vehicledamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
   if(isDefined(self.nullownerdamagefunc)) {
-    var13 = [[self.nullownerdamagefunc]](var1);
+    var_13 = [[self.nullownerdamagefunc]](var_1);
 
-    if(isDefined(var13) && var13) {
+    if(isDefined(var_13) && var_13) {
       return;
     }
   }
 
   if(isDefined(level.weaponmapfunc)) {
-    var5 = [[level.weaponmapfunc]](var5, var0);
+    var_5 = [[level.weaponmapfunc]](var_5, var_0);
   }
 
   if(isDefined(self.damagecallback)) {
-    self[[self.damagecallback]](var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12);
+    self[[self.damagecallback]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
     return;
   }
 
   if(isDefined(level.vehicles) && isDefined(level.vehicles.damagecallback) && isDefined(self.vehiclename)) {
-    self[[level.vehicles.damagecallback]](var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12);
+    self[[level.vehicles.damagecallback]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
     return;
   }
 
-  self vehicle_finishdamage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11);
+  self vehicle_finishdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 }
 
-function codecallback_playerlaststand(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
+function codecallback_playerlaststand(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self endon("disconnect");
 
   if(isDefined(level.weaponmapfunc)) {
-    [[level.weaponmapfunc]](var4, var0);
+    [[level.weaponmapfunc]](var_4, var_0);
   }
 
-  return [[level.callbackplayerlaststand]](var0, var1, var2, var3, var4, var5, var6, var7, var8);
+  return [[level.callbackplayerlaststand]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 }
 
-function codecallback_spawnpointsprecalc(var0) {
+function codecallback_spawnpointsprecalc(var_0) {
   if(isDefined(level.callbackspawnpointprecalc)) {
-    [[level.callbackspawnpointprecalc]](var0);
+    [[level.callbackspawnpointprecalc]](var_0);
     return;
   }
 }
 
-function codecallback_spawnpointscore(var0, var1, var2) {
+function codecallback_spawnpointscore(var_0, var_1, var_2) {
   if(isDefined(level.callbackspawnpointscore)) {
-    return var0[[level.callbackspawnpointscore]](var1, var2);
+    return var_0[[level.callbackspawnpointscore]](var_1, var_2);
   }
 
   return 0;
 }
 
-function codecallback_spawnpointcritscore(var0, var1, var2) {
-  var3 = "primary";
+function codecallback_spawnpointcritscore(var_0, var_1, var_2) {
+  var_3 = "primary";
 
   if(isDefined(level.callbackspawnpointcritscore)) {
-    var3 = var0[[level.callbackspawnpointcritscore]](var1, var2);
+    var_3 = var_0[[level.callbackspawnpointcritscore]](var_1, var_2);
   }
 
-  if(var3 == "primary") {
+  if(var_3 == "primary") {
     return 100;
-  } else if(var3 == "secondary") {
+  } else if(var_3 == "secondary") {
     return 50;
   }
 

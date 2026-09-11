@@ -8,15 +8,15 @@ function init_pvpve() {
   setup_play_test_name_to_team_id_mapping();
 }
 
-function getassignedspawnpointbasedonteam(var0) {
-  var1 = get_spawn_point_targetname(var0);
-  var2 = scripts\engine\utility::getStructArray(var1, "targetname");
-  var3 = var2[var0.slot_number];
-  return var3;
+function getassignedspawnpointbasedonteam(var_0) {
+  var_1 = get_spawn_point_targetname(var_0);
+  var_2 = scripts\engine\utility::getStructArray(var_1, "targetname");
+  var_3 = var_2[var_0.slot_number];
+  return var_3;
 }
 
-function get_spawn_point_targetname(var0) {
-  switch (var0.team_number) {
+function get_spawn_point_targetname(var_0) {
+  switch (var_0.team_number) {
     case 0:
       return "pvpve_team_A";
     case 1:
@@ -34,29 +34,29 @@ function initialize_player_team_slot_assignment() {
   level.team_id_slot_index_list = [];
   level.team_id_num_slot_filled = [];
 
-  for(var0 = 0; var0 < 4; var0++) {
+  for(var_0 = 0; var_0 < 4; var_0++) {
     level.team_id_slot_index_list[level.team_id_slot_index_list.size] = make_randomized_slot_index_list();
   }
 
-  for(var1 = 0; var1 < 4; var1++) {
-    level.team_id_num_slot_filled[var1] = 0;
+  for(var_1 = 0; var_1 < 4; var_1++) {
+    level.team_id_num_slot_filled[var_1] = 0;
   }
 }
 
-function get_available_slot_index_for_team_id(var0) {}
+function get_available_slot_index_for_team_id(var_0) {}
 
 function make_randomized_slot_index_list() {
-  var0 = [];
+  var_0 = [];
 
-  for(var1 = 0; var1 < 4; var1++) {
-    var0 = var1;
+  for(var_1 = 0; var_1 < 4; var_1++) {
+    var_0 = var_1;
   }
 
-  for(var2 = 0; var2 < 5; var2++) {
-    var0 = scripts\engine\utility::array_randomize(var0);
+  for(var_2 = 0; var_2 < 5; var_2++) {
+    var_0 = scripts\engine\utility::array_randomize(var_0);
   }
 
-  return var0;
+  return var_0;
 }
 
 function pvpve_enabled() {

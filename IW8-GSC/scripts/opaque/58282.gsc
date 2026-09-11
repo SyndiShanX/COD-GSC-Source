@@ -40,27 +40,27 @@ function test_bag_pickup() {
     level.ref_1203f = &spawn_juggernauts_hangar;
   }
 
-  function spawn_juggernauts_hangar(var0, var1, var2, var3) {
-    if(istrue(var0.should_take_damage) || istrue(var0.waittill_trigger_player) || istrue(var3)) {
-      if(isDefined(var1)) {
-        if(isDefined(var2)) {
-          var4 = easepower("vfx_chem_rounds_enemy_hit", var1);
-          thread ref_12aab(var4);
+  function spawn_juggernauts_hangar(var_0, var_1, var_2, var_3) {
+    if(istrue(var_0.should_take_damage) || istrue(var_0.waittill_trigger_player) || istrue(var_3)) {
+      if(isDefined(var_1)) {
+        if(isDefined(var_2)) {
+          var_4 = easepower("vfx_chem_rounds_enemy_hit", var_1);
+          thread ref_12aab(var_4);
 
-          if(!istrue(var2.updateteamplunderscore)) {
-            if(isPlayer(var2)) {
-              stopfxontagforclients(level._effects["vfx_nova_round_scrnfx"], var2, "j_head", var2);
-              playfxontagforclients(level._effects["vfx_nova_round_scrnfx"], var2, "j_head", var2);
+          if(!istrue(var_2.updateteamplunderscore)) {
+            if(isPlayer(var_2)) {
+              stopfxontagforclients(level._effects["vfx_nova_round_scrnfx"], var_2, "j_head", var_2);
+              playfxontagforclients(level._effects["vfx_nova_round_scrnfx"], var_2, "j_head", var_2);
             }
 
-            var2.updateteamplunderscore = 1;
+            var_2.updateteamplunderscore = 1;
 
             if(isDefined(self)) {
               self playlocalsound("bullet_chem_round_dmg_plr_trans");
             }
           }
 
-          thread ref_1447f(var2);
+          thread ref_1447f(var_2);
           return;
         }
 
@@ -71,13 +71,13 @@ function test_bag_pickup() {
     }
   }
 
-  function ref_12aab(var0) {
+  function ref_12aab(var_0) {
     level endon("game_ended");
-    wait var0;
+    wait var_0;
     self freescriptable();
   }
 
-  function ref_1447f(var0, var1) {
+  function ref_1447f(var_0, var_1) {
     if(isPlayer(self) || isbot(self)) {
       self endon("disconnect");
     }
@@ -85,16 +85,16 @@ function test_bag_pickup() {
     level endon("game_ended");
     self notify("poisoned_watching_for_death");
     self endon("poisoned_watching_for_death");
-    var2 = level.getserverroomspawnpoint.ref_127e0;
+    var_2 = level.getserverroomspawnpoint.ref_127e0;
 
-    if(isDefined(var1)) {
-      var2 = var1;
+    if(isDefined(var_1)) {
+      var_2 = var_1;
     }
 
-    if(var2 > 0) {
-      var3 = scripts\engine\utility::ref_143b9(level.getserverroomspawnpoint.ref_127e0, "death");
+    if(var_2 > 0) {
+      var_3 = scripts\engine\utility::ref_143b9(level.getserverroomspawnpoint.ref_127e0, "death");
 
-      if(var3 == "timeout") {
+      if(var_3 == "timeout") {
         if(isPlayer(self)) {
           stopfxontagforclients(level._effects["vfx_nova_round_scrnfx"], self, "j_head", self);
           self.updateteamplunderscore = 0;
@@ -111,83 +111,83 @@ function test_bag_pickup() {
       self.updateteamplunderscore = 0;
     }
 
-    var4 = self.origin;
-    var5 = easepower("super_nova_rounds_audio", var4);
-    var6 = spawn("trigger_radius", var4, 0, level.getserverroomspawnpoint.plunder_clearrepositorywidgetforplayer, level.getserverroomspawnpoint.§R AöÃI z #§ b]° o«);
-  var6.attacker = var0;
+    var_4 = self.origin;
+    var_5 = easepower("super_nova_rounds_audio", var_4);
+    var_6 = spawn("trigger_radius", var_4, 0, level.getserverroomspawnpoint.plunder_clearrepositorywidgetforplayer, level.getserverroomspawnpoint.§R AöÃI z #§ b]° o«);
+  var_6.attacker = var_0;
   waitframe();
-  var7 = easepower("vfx_chem_rounds_enemy_death", var4);
-  var5 setscriptablepartstate("sfx_gas_npc", "npc_gas_expl");
-  scripts\mp\utility\trigger::makeenterexittrigger(var6, &ref_13dab, &ref_13dac, undefined, undefined, &ref_13da5);
-  level.getserverroomspawnpoint.plunder_economy_shapshot_loop = scripts\engine\utility::array_add(level.getserverroomspawnpoint.plunder_economy_shapshot_loop, var6);
+  var_7 = easepower("vfx_chem_rounds_enemy_death", var_4);
+  var_5 setscriptablepartstate("sfx_gas_npc", "npc_gas_expl");
+  scripts\mp\utility\trigger::makeenterexittrigger(var_6, &ref_13dab, &ref_13dac, undefined, undefined, &ref_13da5);
+  level.getserverroomspawnpoint.plunder_economy_shapshot_loop = scripts\engine\utility::array_add(level.getserverroomspawnpoint.plunder_economy_shapshot_loop, var_6);
   wait level.getserverroomspawnpoint.plunder_awarded_by_missions_total;
-  level.getserverroomspawnpoint.plunder_economy_shapshot_loop = scripts\engine\utility::array_remove(level.getserverroomspawnpoint.plunder_economy_shapshot_loop, var6);
+  level.getserverroomspawnpoint.plunder_economy_shapshot_loop = scripts\engine\utility::array_remove(level.getserverroomspawnpoint.plunder_economy_shapshot_loop, var_6);
 
-  foreach(var9 in var6.triggerenterents) {
-    if(getstreamedinplayercount(var9)) {
-      var9 scripts\mp\gametypes\br_pickups::plunderrankupdate("chem_rounds_gas");
+  foreach(var_9 in var_6.triggerenterents) {
+    if(getstreamedinplayercount(var_9)) {
+      var_9 scripts\mp\gametypes\br_pickups::plunderrankupdate("chem_rounds_gas");
     }
   }
 
-  var5 freescriptable();
-  var6 notify("gas_cloud_disipate");
-  var7 freescriptable();
-  var6 delete();
+  var_5 freescriptable();
+  var_6 notify("gas_cloud_disipate");
+  var_7 freescriptable();
+  var_6 delete();
 }
 
-function playericonfilter(var0, var1, var2, var3) {
-  var4 = easepower("super_nova_rounds_audio", var1);
-  var4 setscriptablepartstate("sfx_weapon_chem", "sfx_weapon_chem_sweetner");
-  var5 = scripts\engine\utility::ter_op(isDefined(var3), var3, level.getserverroomspawnpoint.§R AöÃI z #§ b]° o«);
-var6 = spawn("trigger_radius", var1, 0, var5, var5);
-var6.attacker = var0;
-scripts\mp\utility\trigger::makeenterexittrigger(var6, &ref_13dab, &ref_13dac, undefined, undefined, &ref_13da5);
-var7 = scripts\engine\utility::ter_op(isDefined(var2), var2, "vfx_chem_rounds_enemy_death");
+function playericonfilter(var_0, var_1, var_2, var_3) {
+  var_4 = easepower("super_nova_rounds_audio", var_1);
+  var_4 setscriptablepartstate("sfx_weapon_chem", "sfx_weapon_chem_sweetner");
+  var_5 = scripts\engine\utility::ter_op(isDefined(var_3), var_3, level.getserverroomspawnpoint.§R AöÃI z #§ b]° o«);
+var_6 = spawn("trigger_radius", var_1, 0, var_5, var_5);
+var_6.attacker = var_0;
+scripts\mp\utility\trigger::makeenterexittrigger(var_6, &ref_13dab, &ref_13dac, undefined, undefined, &ref_13da5);
+var_7 = scripts\engine\utility::ter_op(isDefined(var_2), var_2, "vfx_chem_rounds_enemy_death");
 
-if(isDefined(var2) && var2 == "nospawn") {
-  var7 = "nospawn";
+if(isDefined(var_2) && var_2 == "nospawn") {
+  var_7 = "nospawn";
 }
 
-if(var7 != "nospawn") {
-  var8 = easepower(var7, var1);
-  thread ref_12aab(var8);
+if(var_7 != "nospawn") {
+  var_8 = easepower(var_7, var_1);
+  thread ref_12aab(var_8);
 }
 
-level.getserverroomspawnpoint.plunder_economy_shapshot_loop = scripts\engine\utility::array_add(level.getserverroomspawnpoint.plunder_economy_shapshot_loop, var6);
+level.getserverroomspawnpoint.plunder_economy_shapshot_loop = scripts\engine\utility::array_add(level.getserverroomspawnpoint.plunder_economy_shapshot_loop, var_6);
 wait level.getserverroomspawnpoint.plunder_awarded_by_missions_total;
-level.getserverroomspawnpoint.plunder_economy_shapshot_loop = scripts\engine\utility::array_remove(level.getserverroomspawnpoint.plunder_economy_shapshot_loop, var6);
+level.getserverroomspawnpoint.plunder_economy_shapshot_loop = scripts\engine\utility::array_remove(level.getserverroomspawnpoint.plunder_economy_shapshot_loop, var_6);
 
-foreach(var10 in var6.triggerenterents) {
-  if(getstreamedinplayercount(var10)) {
-    var10 scripts\mp\gametypes\br_pickups::plunderrankupdate("chem_rounds_gas");
+foreach(var_10 in var_6.triggerenterents) {
+  if(getstreamedinplayercount(var_10)) {
+    var_10 scripts\mp\gametypes\br_pickups::plunderrankupdate("chem_rounds_gas");
   }
 }
 
-var6 notify("gas_cloud_disipate");
-var6 delete();
-var4 freescriptable();
+var_6 notify("gas_cloud_disipate");
+var_6 delete();
+var_4 freescriptable();
 }
 
-function ref_13dab(var0, var1) {
-  thread ref_11c1d(var0);
+function ref_13dab(var_0, var_1) {
+  thread ref_11c1d(var_0);
 }
 
-function ref_13dac(var0, var1) {
-  var0.start_coop_escape_safehouse = 0;
-  var0 notify("out_of_poison_cloud");
+function ref_13dac(var_0, var_1) {
+  var_0.start_coop_escape_safehouse = 0;
+  var_0 notify("out_of_poison_cloud");
 
-  if(isPlayer(var0) && getstreamedinplayercount(var0)) {
+  if(isPlayer(var_0) && getstreamedinplayercount(var_0)) {
     scripts\mp\gametypes\br_pickups::plunderrankupdate("chem_rounds_gas");
     return;
   }
 }
 
-function ref_13da5(var0, var1) {
-  if(!isDefined(var0)) {
+function ref_13da5(var_0, var_1) {
+  if(!isDefined(var_0)) {
     return true;
   }
 
-  if(isPlayer(var0) || isbot(var0) || isagent(var0)) {
+  if(isPlayer(var_0) || isbot(var_0) || isagent(var_0)) {
     return false;
   }
 
@@ -195,8 +195,8 @@ function ref_13da5(var0, var1) {
 }
 
 function getstreamedinplayercount() {
-  foreach(var1 in level.getserverroomspawnpoint.plunder_economy_shapshot_loop) {
-    if(scripts\engine\utility::array_contains(var1.triggerenterents, self)) {
+  foreach(var_1 in level.getserverroomspawnpoint.plunder_economy_shapshot_loop) {
+    if(scripts\engine\utility::array_contains(var_1.triggerenterents, self)) {
       return false;
     }
   }
@@ -204,26 +204,26 @@ function getstreamedinplayercount() {
   return true;
 }
 
-function ref_11c1d(var0) {
+function ref_11c1d(var_0) {
   level endon("game_ended");
   self endon("death_or_disconnect");
   self notify("gas_damage_watcher_triggered");
   self endon("gas_damage_watcher_triggered");
-  var1 = 0;
+  var_1 = 0;
 
   for(;;) {
     wait 0.5;
 
-    if(!isDefined(var0)) {
+    if(!isDefined(var_0)) {
       break;
     }
 
-    if(!scripts\engine\utility::array_contains(var0.triggerenterents, self)) {
+    if(!scripts\engine\utility::array_contains(var_0.triggerenterents, self)) {
       break;
     }
 
-    if(isDefined(var0.attacker) && isDefined(var0.attacker.team)) {
-      if(self.team == var0.attacker.team && self != var0.attacker) {
+    if(isDefined(var_0.attacker) && isDefined(var_0.attacker.team)) {
+      if(self.team == var_0.attacker.team && self != var_0.attacker) {
         break;
       }
     }
@@ -247,32 +247,32 @@ function ref_11c1d(var0) {
 
       scripts\cp_mp\gasmask::processdamage(level.getserverroomspawnpoint.plunder_getleveldataforrepository);
     } else {
-      if(!is_player_visible_to_trigger(var0, self)) {
+      if(!is_player_visible_to_trigger(var_0, self)) {
         continue;
       }
 
       if(istrue(level.brjugg_watchtimerstart) && self.health - level.getserverroomspawnpoint.plunder_getleveldataforrepository <= 0) {
         self.updateteamplunderscore = 1;
-        thread ref_1447f(var0.attacker);
+        thread ref_1447f(var_0.attacker);
       }
 
-      var2 = scripts\engine\utility::ter_op(isagent(self), level.getserverroomspawnpoint.¯Ê % AÖ op[é÷ SY² / þ > £bi¢ Wfh£ îì»³ % [º° + , 1); var3 = level.getserverroomspawnpoint.plunder_getleveldataforrepository * var2;
+      var_2 = scripts\engine\utility::ter_op(isagent(self), level.getserverroomspawnpoint.¯Ê % AÖ op[é÷ SY² / þ > £bi¢ Wfh£ îì»³ % [º° + , 1); var_3 = level.getserverroomspawnpoint.plunder_getleveldataforrepository * var_2;
 
           if(scripts\mp\gametypes\br_public::hasarmor()) {
-            scripts\mp\gametypes\br_public::damagearmor(var3);
+            scripts\mp\gametypes\br_public::damagearmor(var_3);
           } else {
-            var4 = var0.attacker;
+            var_4 = var_0.attacker;
 
-            if(!isDefined(var0.attacker) || isDefined(var0.attacker.unittype) && var0.attacker.unittype == "zombie" && !isalive(var0.attacker)) {
-              var4 = self;
+            if(!isDefined(var_0.attacker) || isDefined(var_0.attacker.unittype) && var_0.attacker.unittype == "zombie" && !isalive(var_0.attacker)) {
+              var_4 = self;
             }
 
-            self dodamage(var3, var0.origin, var4, undefined, "MOD_TRIGGER_HURT", "danger_circle_br");
+            self dodamage(var_3, var_0.origin, var_4, undefined, "MOD_TRIGGER_HURT", "danger_circle_br");
           }
 
           if(isagent(self)) {
-            var5 = easepower("vfx_chem_rounds_enemy_hit", self.origin + (0, 0, 50));
-            thread ref_12aab(var5);
+            var_5 = easepower("vfx_chem_rounds_enemy_hit", self.origin + (0, 0, 50));
+            thread ref_12aab(var_5);
           }
 
           if(!scripts\mp\gametypes\br_pickups::ks_circlecount(self)) {
@@ -293,13 +293,13 @@ function ref_11c1d(var0) {
       level endon("game_ended");
 
       for(;;) {
-        self waittill("missile_fire", var0, var1);
+        self waittill("missile_fire", var_0, var_1);
 
         if(!istrue(self.ref_11ed4)) {
           return;
         }
 
-        thread getserachparams(var0);
+        thread getserachparams(var_0);
       }
     }
 
@@ -310,10 +310,10 @@ function ref_11c1d(var0) {
       level endon("game_ended");
 
       for(;;) {
-        self waittill("grenade_fire", var0, var1);
-        var2 = weaponinventorytype(var1.basename);
+        self waittill("grenade_fire", var_0, var_1);
+        var_2 = weaponinventorytype(var_1.basename);
 
-        if(var2 != "primary") {
+        if(var_2 != "primary") {
           continue;
         }
 
@@ -321,14 +321,14 @@ function ref_11c1d(var0) {
           return;
         }
 
-        thread getserachparams(var0);
+        thread getserachparams(var_0);
       }
     }
 
-    function getserachparams(var0) {
-      self waittill("explode", var1);
-      thread playericonfilter(var0, var1);
-      thread ref_13580(var0);
+    function getserachparams(var_0) {
+      self waittill("explode", var_1);
+      thread playericonfilter(var_0, var_1);
+      thread ref_13580(var_0);
     }
 
     function ref_12be2() {
@@ -341,23 +341,23 @@ function ref_11c1d(var0) {
       }
     }
 
-    function ref_13580(var0) {
+    function ref_13580(var_0) {
       level endon("game_ended");
-      var1 = spawn("script_model", var0);
-      var1 setModel("tag_origin");
+      var_1 = spawn("script_model", var_0);
+      var_1 setModel("tag_origin");
       waitframe();
-      var1.ref_14293 = playFXOnTag(scripts\engine\utility::getfx("vfx_br3_canister_exp_large_chem"), var1, "tag_origin");
-      var2 = 2;
-      wait level.getserverroomspawnpoint.plunder_awarded_by_missions_total - var2;
-      stopFXOnTag(scripts\engine\utility::getfx("vfx_br3_canister_exp_large_chem"), var1, "tag_origin");
-      var1 delete();
+      var_1.ref_14293 = playFXOnTag(scripts\engine\utility::getfx("vfx_br3_canister_exp_large_chem"), var_1, "tag_origin");
+      var_2 = 2;
+      wait level.getserverroomspawnpoint.plunder_awarded_by_missions_total - var_2;
+      stopFXOnTag(scripts\engine\utility::getfx("vfx_br3_canister_exp_large_chem"), var_1, "tag_origin");
+      var_1 delete();
     }
 
     function ref_11ed6() {
-      var0 = self.lastweaponobj;
-      var1 = isundefinedweapon();
+      var_0 = self.lastweaponobj;
+      var_1 = isundefinedweapon();
 
-      if(!scripts\mp\weapons::isnormallastweapon(var0) || scripts\mp\utility\weapon::ismeleeonly(var0) || scripts\mp\utility\weapon::isgamemodeweapon(var0) || scripts\mp\utility\weapon::isaxeweapon(var0) || !getsubgametype(var0) || getstancetop(var0)) {
+      if(!scripts\mp\weapons::isnormallastweapon(var_0) || scripts\mp\utility\weapon::ismeleeonly(var_0) || scripts\mp\utility\weapon::isgamemodeweapon(var_0) || scripts\mp\utility\weapon::isaxeweapon(var_0) || !getsubgametype(var_0) || getstancetop(var_0)) {
         if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
           self[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("MP/SUPPORT_BOX_INCOMPAT");
         }
@@ -369,70 +369,70 @@ function ref_11c1d(var0) {
       self.ref_11ed4 = 1;
       thread getsearchparams();
       thread getscrapassistplayers();
-      var2 = getsixthsensedirection();
+      var_2 = getsixthsensedirection();
 
-      if(!istrue(var2)) {
+      if(!istrue(var_2)) {
         return false;
       }
 
-      if(self isalternatemode(var0)) {
-        var1 = var0;
-        var0 = var0 getnoaltweapon();
+      if(self isalternatemode(var_0)) {
+        var_1 = var_0;
+        var_0 = var_0 getnoaltweapon();
       } else {
-        var1 = var0 getaltweapon();
+        var_1 = var_0 getaltweapon();
       }
 
-      var3 = [];
-      var4 = 0;
-      var5 = 0;
+      var_3 = [];
+      var_4 = 0;
+      var_5 = 0;
 
-      if(!nullweapon(var1)) {
-        var3 = var1;
+      if(!nullweapon(var_1)) {
+        var_3 = var_1;
       }
 
-      var3 = var0;
+      var_3 = var_0;
 
-      foreach(var7 in var3) {
-        var8 = scripts\mp\utility\weapon::turnexfiltoside(var7);
+      foreach(var_7 in var_3) {
+        var_8 = scripts\mp\utility\weapon::turnexfiltoside(var_7);
 
-        if(isnullweapon(var7, var0, 0)) {
-          var9 = scripts\mp\weapons::getammooverride(var7);
-          var10 = var9 * 1;
+        if(isnullweapon(var_7, var_0, 0)) {
+          var_9 = scripts\mp\weapons::getammooverride(var_7);
+          var_10 = var_9 * 1;
 
-          if(var8) {
-            var10 *= 2;
+          if(var_8) {
+            var_10 *= 2;
           }
 
-          thread getsquadspawnlocations(self, var7, var10);
+          thread getsquadspawnlocations(self, var_7, var_10);
 
           if(true) {
-            if(var8) {
-              var9 = self getweaponammoclip(var7, "left") + self getweaponammoclip(var7, "right");
-              var4 = self getweaponammostock(var7);
-              var11 = var9 + var4;
-              var12 = int(min(getspecialdaystickers(var7, var11), var11 + var10));
-              self setweaponammostock(var7, var12);
-              self setweaponammoclip(var7, 0, "left");
-              self setweaponammoclip(var7, 0, "right");
+            if(var_8) {
+              var_9 = self getweaponammoclip(var_7, "left") + self getweaponammoclip(var_7, "right");
+              var_4 = self getweaponammostock(var_7);
+              var_11 = var_9 + var_4;
+              var_12 = int(min(getspecialdaystickers(var_7, var_11), var_11 + var_10));
+              self setweaponammostock(var_7, var_12);
+              self setweaponammoclip(var_7, 0, "left");
+              self setweaponammoclip(var_7, 0, "right");
             } else {
-              var10 = self getweaponammoclip(var8);
-              var5 = self getweaponammostock(var8);
-              var11 = var10 + var5;
-              var13 = getspecialdaystickers(var8, var11);
-              var14 = var11 + var11;
-              var6 = int(var14 - var13);
-              var15 = int(min(var13, var14));
+              var_10 = self getweaponammoclip(var_8);
+              var_5 = self getweaponammostock(var_8);
+              var_11 = var_10 + var_5;
+              var_13 = getspecialdaystickers(var_8, var_11);
+              var_14 = var_11 + var_11;
+              var_6 = int(var_14 - var_13);
+              var_15 = int(min(var_13, var_14));
 
-              if(var8.basename == "iw8_lm_dblmg_mp") {
-                self setweaponammoclip(var8, var10 + var11);
+              if(var_8.basename == "iw8_lm_dblmg_mp") {
+                self setweaponammoclip(var_8, var_10 + var_11);
               } else {
-                self setweaponammoclip(var8, 0);
+                self setweaponammoclip(var_8, 0);
 
                 if(scripts\mp\utility\game::getgametype() == "br") {
-                  var16 = var15 - var5;
-                  scripts\mp\gametypes\br_weapons::delay_camera_normal(var8, var16);
+                  var_16 = var_15 - var_5;
+                  scripts\mp\gametypes\br_weapons::delay_camera_normal(var_8, var_16);
                 } else {
-                  self setweaponammostock(var8, var15);
+                  self setweaponammostock(var_8, var_15);
                 }
               }
             }
@@ -440,33 +440,33 @@ function ref_11c1d(var0) {
         }
       }
 
-      var7 = undefined;
-      var9 = undefined;
-      thread getteamplunder(var1, var5, var6);
+      var_7 = undefined;
+      var_9 = undefined;
+      thread getteamplunder(var_1, var_5, var_6);
       return true;
     }
 
-    function getspecialdaystickers(var0, var1) {
-      var2 = var0.maxammo;
+    function getspecialdaystickers(var_0, var_1) {
+      var_2 = var_0.maxammo;
 
-      if(var1 > var2) {
-        var2 = var1;
+      if(var_1 > var_2) {
+        var_2 = var_1;
       }
 
-      return var2;
+      return var_2;
     }
 
-    function getsubgametype(var0) {
-      if(!self isalternatemode(var0)) {
+    function getsubgametype(var_0) {
+      if(!self isalternatemode(var_0)) {
         return 1;
       }
 
-      var1 = var0.underbarrel;
-      return scripts\mp\weapons::turretoverridefunc(var1);
+      var_1 = var_0.underbarrel;
+      return scripts\mp\weapons::turretoverridefunc(var_1);
     }
 
-    function getstancetop(var0) {
-      switch (var0.basename) {
+    function getstancetop(var_0) {
+      switch (var_0.basename) {
         case "s4_me_axe_mp":
         case "s4_me_icepick_mp":
         case "iw8_lm_dblmg_mp":
@@ -479,23 +479,23 @@ function ref_11c1d(var0) {
       return false;
     }
 
-    function getteamplunder(var0, var1, var2) {
+    function getteamplunder(var_0, var_1, var_2) {
       level endon("game_ended");
       self endon("death_or_disconnect");
 
       for(;;) {
-        if(self getcurrentprimaryweapon() != var0) {
+        if(self getcurrentprimaryweapon() != var_0) {
           break;
         }
 
-        var3 = self getweaponammoclip(var0);
+        var_3 = self getweaponammoclip(var_0);
 
-        if(var3 > 0) {
+        if(var_3 > 0) {
           scripts\mp\gametypes\br_quest_util::displayplayersplash(self, "nova_rounds_loaded");
           self setclientomnvar("ui_chemRounds", 1);
 
-          if(var2 > 0) {
-            self setweaponammostock(var0, var1 + var2);
+          if(var_2 > 0) {
+            self setweaponammostock(var_0, var_1 + var_2);
           }
 
           break;
@@ -514,34 +514,34 @@ function ref_11c1d(var0) {
       }
     }
 
-    function getsquadspawnlocations(var0, var1, var2) {
-      var3 = init_relic_steelballs(var0, var1, var2);
-      getsquadspawnStruct(var0, var3);
+    function getsquadspawnlocations(var_0, var_1, var_2) {
+      var_3 = init_relic_steelballs(var_0, var_1, var_2);
+      getsquadspawnStruct(var_0, var_3);
     }
 
-    function init_relic_steelballs(var0, var1, var2) {
-      var3 = spawnStruct();
-      var3.player = var0;
-      var3.objweapon = var1;
-      var3.rounds = var2;
-      var3.gavehcr = 0;
-      var3.kills = 0;
-      return var3;
+    function init_relic_steelballs(var_0, var_1, var_2) {
+      var_3 = spawnStruct();
+      var_3.player = var_0;
+      var_3.objweapon = var_1;
+      var_3.rounds = var_2;
+      var_3.gavehcr = 0;
+      var_3.kills = 0;
+      return var_3;
     }
 
-    function getsquadspawnStruct(var0, var1) {
-      if(!isDefined(var0.showassassinationtargethud)) {
-        var0.showassassinationtargethud = [];
+    function getsquadspawnStruct(var_0, var_1) {
+      if(!isDefined(var_0.showassassinationtargethud)) {
+        var_0.showassassinationtargethud = [];
       }
 
-      var2 = scripts\mp\utility\weapon::getcompleteweaponnamenoalt(var1.objweapon);
-      var3 = var0.showassassinationtargethud[var2];
+      var_2 = scripts\mp\utility\weapon::getcompleteweaponnamenoalt(var_1.objweapon);
+      var_3 = var_0.showassassinationtargethud[var_2];
 
-      if(isDefined(var3)) {
+      if(isDefined(var_3)) {
         thread getteamcontenders();
       }
 
-      var0.showassassinationtargethud[var2] = var1;
+      var_0.showassassinationtargethud[var_2] = var_1;
       thread getspawncamerablendtime();
       thread getspecialdaycamos();
       thread getspecialdaycosmetics();
@@ -552,38 +552,38 @@ function ref_11c1d(var0) {
       thread getscrapassistplayers();
     }
 
-    function gettacroverspawns(var0, var1, var2) {
-      if(!isDefined(var0) || !isDefined(var1)) {
+    function gettacroverspawns(var_0, var_1, var_2) {
+      if(!isDefined(var_0) || !isDefined(var_1)) {
         return;
       }
 
-      var3 = getspectatorsofplayer(var1, var2);
+      var_3 = getspectatorsofplayer(var_1, var_2);
 
-      if(isDefined(var3)) {
-        var4 = init_relic_steelballs(var3.player, var3.objweapon, var3.rounds);
-        var0.showassassinationtargethud = var4;
+      if(isDefined(var_3)) {
+        var_4 = init_relic_steelballs(var_3.player, var_3.objweapon, var_3.rounds);
+        var_0.showassassinationtargethud = var_4;
         thread getteamcontenders();
         return;
       }
     }
 
-    function getteamcarriedplunder(var0, var1, var2) {
-      var3 = var0.showassassinationtargethud;
+    function getteamcarriedplunder(var_0, var_1, var_2) {
+      var_3 = var_0.showassassinationtargethud;
 
-      if(!isDefined(var3)) {
+      if(!isDefined(var_3)) {
         return;
       }
 
-      if(!isDefined(var3.player) || !var3.player hasweapon(var3.objweapon)) {
+      if(!isDefined(var_3.player) || !var_3.player hasweapon(var_3.objweapon)) {
         return;
       }
 
-      var3.player = var1;
-      getsquadspawnStruct(var1, var3);
+      var_3.player = var_1;
+      getsquadspawnStruct(var_1, var_3);
     }
 
-    function getspectatorsofplayer(var0) {
-      if(!isDefined(var0)) {
+    function getspectatorsofplayer(var_0) {
+      if(!isDefined(var_0)) {
         return undefined;
       }
 
@@ -591,8 +591,8 @@ function ref_11c1d(var0) {
         return undefined;
       }
 
-      var1 = scripts\mp\utility\weapon::getcompleteweaponnamenoalt(var0);
-      return self.showassassinationtargethud[var1];
+      var_1 = scripts\mp\utility\weapon::getcompleteweaponnamenoalt(var_0);
+      return self.showassassinationtargethud[var_1];
     }
 
     function getsixthsensedirection() {
@@ -637,9 +637,9 @@ function ref_11c1d(var0) {
       self.player endon("disconnect");
 
       while(self.player hasweapon(self.objweapon)) {
-        self.player waittill("weapon_fired", var0);
+        self.player waittill("weapon_fired", var_0);
 
-        if(getstartparachutespawnpoint(var0)) {
+        if(getstartparachutespawnpoint(var_0)) {
           self.rounds--;
 
           if(self.rounds <= 0) {
@@ -655,16 +655,16 @@ function ref_11c1d(var0) {
       }
     }
 
-    function getteamfactionsfrommap(var0) {
+    function getteamfactionsfrommap(var_0) {
       self endon("disconnect");
 
       if(!isDefined(self)) {
         return;
       }
 
-      var1 = scripts\mp\utility\weapon::getweaponrootname(var0);
+      var_1 = scripts\mp\utility\weapon::getweaponrootname(var_0);
 
-      if(var1 != "iw8_sn_crossbow" && var1 != "iw8_sn_t9crossbow") {
+      if(var_1 != "iw8_sn_crossbow" && var_1 != "iw8_sn_t9crossbow") {
         return;
       }
 
@@ -707,11 +707,11 @@ function ref_11c1d(var0) {
 
     function getsolospawnStruct() {
       if(isDefined(self.player.showassassinationtargethud)) {
-        var0 = scripts\mp\utility\weapon::getcompleteweaponnamenoalt(self.objweapon);
-        var1 = self.player.showassassinationtargethud[var0];
+        var_0 = scripts\mp\utility\weapon::getcompleteweaponnamenoalt(self.objweapon);
+        var_1 = self.player.showassassinationtargethud[var_0];
 
-        if(isDefined(var1) && var1 == self) {
-          self.player.showassassinationtargethud[var0] = undefined;
+        if(isDefined(var_1) && var_1 == self) {
+          self.player.showassassinationtargethud[var_0] = undefined;
         }
 
         self.player scripts\cp\vehicles\vehicle_compass_cp::ref_12032("super_nova_box", self.kills);
@@ -722,11 +722,11 @@ function ref_11c1d(var0) {
       }
     }
 
-    function getstartparachutespawnpoint(var0) {
-      var1 = self.player getammotype(self.objweapon);
-      var2 = self.player getammotype(var0);
-      var3 = var1 == var2;
-      return isnullweapon(var0, self.objweapon, 1) && var3;
+    function getstartparachutespawnpoint(var_0) {
+      var_1 = self.player getammotype(self.objweapon);
+      var_2 = self.player getammotype(var_0);
+      var_3 = var_1 == var_2;
+      return isnullweapon(var_0, self.objweapon, 1) && var_3;
     }
 
     function getspawncamerablendtime() {
@@ -764,11 +764,11 @@ function ref_11c1d(var0) {
       scripts\common\utility::allow_sprint(1);
     }
 
-    function is_player_visible_to_trigger(var0, var1) {
-      var2 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_sky", "physicscontents_item", "physicscontents_vehicle"]);
-      var3 = vectorcross(vectorNormalize(var0.origin - var1.origin), anglestoup(var1.angles));
-      var4 = var1 getEye();
-      var5 = var0.origin + (0, 0, level.getserverroomspawnpoint.§R AöÃI z #§ b]° o« / 2);
-    var6 = [];
-    GscBinSkip0(0x2e, 0, var4 + var3 * 20);
+    function is_player_visible_to_trigger(var_0, var_1) {
+      var_2 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_sky", "physicscontents_item", "physicscontents_vehicle"]);
+      var_3 = vectorcross(vectorNormalize(var_0.origin - var_1.origin), anglestoup(var_1.angles));
+      var_4 = var_1 getEye();
+      var_5 = var_0.origin + (0, 0, level.getserverroomspawnpoint.§R AöÃI z #§ b]° o« / 2);
+    var_6 = [];
+    GscBinSkip0(0x2e, 0, var_4 + var_3 * 20);
   }

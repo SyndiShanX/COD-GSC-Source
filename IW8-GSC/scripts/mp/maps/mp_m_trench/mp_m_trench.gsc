@@ -31,57 +31,57 @@ function main() {
 
 function onplayerconnect() {
   for(;;) {
-    level waittill("connected", var0);
+    level waittill("connected", var_0);
     thread flagender();
   }
 }
 
-function ref_1313f(var0, var1) {
-  switch (var1) {
+function ref_1313f(var_0, var_1) {
+  switch (var_1) {
     case 1:
-      var2 = getEnt("Num1", "targetname");
-      var2.origin = var0.origin;
-      var2.angles = var0.angles;
+      var_2 = getEnt("Num1", "targetname");
+      var_2.origin = var_0.origin;
+      var_2.angles = var_0.angles;
       break;
     case 2:
-      var2 = getEnt("Num2", "targetname");
-      var2.origin = var0.origin;
-      var2.angles = var0.angles;
+      var_2 = getEnt("Num2", "targetname");
+      var_2.origin = var_0.origin;
+      var_2.angles = var_0.angles;
       break;
     case 3:
-      var2 = getEnt("Num3", "targetname");
-      var2.origin = var0.origin;
-      var2.angles = var0.angles;
+      var_2 = getEnt("Num3", "targetname");
+      var_2.origin = var_0.origin;
+      var_2.angles = var_0.angles;
       break;
     case 4:
-      var2 = getEnt("Num4", "targetname");
-      var2.origin = var0.origin;
-      var2.angles = var0.angles;
+      var_2 = getEnt("Num4", "targetname");
+      var_2.origin = var_0.origin;
+      var_2.angles = var_0.angles;
       break;
     case 5:
-      var2 = getEnt("Num5", "targetname");
-      var2.origin = var0.origin;
-      var2.angles = var0.angles;
+      var_2 = getEnt("Num5", "targetname");
+      var_2.origin = var_0.origin;
+      var_2.angles = var_0.angles;
       break;
     case 6:
-      var2 = getEnt("Num6", "targetname");
-      var2.origin = var0.origin;
-      var2.angles = var0.angles;
+      var_2 = getEnt("Num6", "targetname");
+      var_2.origin = var_0.origin;
+      var_2.angles = var_0.angles;
       break;
     case 7:
-      var2 = getEnt("Num7", "targetname");
-      var2.origin = var0.origin;
-      var2.angles = var0.angles;
+      var_2 = getEnt("Num7", "targetname");
+      var_2.origin = var_0.origin;
+      var_2.angles = var_0.angles;
       break;
     case 8:
-      var2 = getEnt("Num8", "targetname");
-      var2.origin = var0.origin;
-      var2.angles = var0.angles;
+      var_2 = getEnt("Num8", "targetname");
+      var_2.origin = var_0.origin;
+      var_2.angles = var_0.angles;
       break;
     case 9:
-      var2 = getEnt("Num9", "targetname");
-      var2.origin = var0.origin;
-      var2.angles = var0.angles;
+      var_2 = getEnt("Num9", "targetname");
+      var_2.origin = var_0.origin;
+      var_2.angles = var_0.angles;
       break;
     default:
       break;
@@ -90,24 +90,24 @@ function ref_1313f(var0, var1) {
 
 function ref_13d1d() {
   wait 5;
-  var0 = getEnt("BunkerPathBlocker", "targetname");
-  var0 hide();
-  var0 connectpaths();
+  var_0 = getEnt("BunkerPathBlocker", "targetname");
+  var_0 hide();
+  var_0 connectpaths();
   ref_12121(level.door);
   level.monitor_player_pinging = getEntArray("elevatorDoor", "targetname");
 
-  foreach(var2 in level.monitor_player_pinging) {
-    thread ref_1323d(var2);
+  foreach(var_2 in level.monitor_player_pinging) {
+    thread ref_1323d(var_2);
   }
 
-  var4 = scripts\engine\utility::getStruct("phoneHint", "targetname");
-  level.ref_12324 = easepower("maphint_phone_mp_m_trench", var4.origin);
+  var_4 = scripts\engine\utility::getStruct("phoneHint", "targetname");
+  level.ref_12324 = easepower("maphint_phone_mp_m_trench", var_4.origin);
   waitframe();
   scripts\engine\scriptable::ref_12f5b("maphint_phone", &ref_11ae3);
 
   for(;;) {
     level.ref_12329 = 1;
-    thread ref_1232b(var4);
+    thread ref_1232b(var_4);
     level waittill("PhoneAnswered");
     level.ref_1232c stoploopsound("trench_phone_ring");
     level.ref_1232c delete();
@@ -126,12 +126,12 @@ function ref_13d1d() {
 function flagender() {
   self endon("disconnect");
   level endon("game_ended");
-  var0 = getEnt("bunkerCounterUAV", "targetname");
+  var_0 = getEnt("bunkerCounterUAV", "targetname");
   self.tracking_obit = 0;
 
-  if(isDefined(var0)) {
+  if(isDefined(var_0)) {
     for(;;) {
-      if(self istouching(var0)) {
+      if(self istouching(var_0)) {
         if(!istrue(self.tracking_obit)) {
           self.tracking_obit = 1;
           self.radarstrength = level.ref_13ede;
@@ -152,13 +152,13 @@ function flagender() {
   }
 }
 
-function ref_11ae3(var0, var1, var2, var3, var4) {
-  thread allowassassinationdamage(level, var0, var1, var2, var3);
+function ref_11ae3(var_0, var_1, var_2, var_3, var_4) {
+  thread allowassassinationdamage(level, var_0, var_1, var_2, var_3);
 }
 
-function allowassassinationdamage(var0, var1, var2, var3, var4) {
-  if(var2 == "on") {
-    var0 setscriptablepartstate("maphint_phone", "off");
+function allowassassinationdamage(var_0, var_1, var_2, var_3, var_4) {
+  if(var_2 == "on") {
+    var_0 setscriptablepartstate("maphint_phone", "off");
     level notify("PhoneAnswered");
     level.ref_12329 = 0;
     return;
@@ -169,8 +169,8 @@ function vehicles_spawned() {
   wait 2;
   level.vehicleoccupants = getEntArray("KeyPad", "targetname");
 
-  foreach(var1 in level.vehicleoccupants) {
-    thread vehiclespawn_armoredtruck(var1);
+  foreach(var_1 in level.vehicleoccupants) {
+    thread vehiclespawn_armoredtruck(var_1);
   }
 
   level.helihint_gotopad[0] = randomintrange(1, 10);
@@ -209,10 +209,10 @@ function vehicles_spawned() {
   level.helihint_deposit[4] = scripts\engine\utility::getStruct("Code5", "targetname");
   ref_1313f(level.helihint_deposit[4], level.helihint_gotopad[4]);
   level.insertingarmorplate = 0;
-  var3 = getEnt("CodePad", "targetname");
-  thread player_near_obit(var3);
-  var4 = getEnt("BunkerPathBlocker", "targetname");
-  var4 disconnectPaths();
+  var_3 = getEnt("CodePad", "targetname");
+  thread player_near_obit(var_3);
+  var_4 = getEnt("BunkerPathBlocker", "targetname");
+  var_4 disconnectPaths();
 
   while(level.max_respawn) {
     if(level.insertingarmorplate < 5) {
@@ -221,27 +221,27 @@ function vehicles_spawned() {
       continue;
     }
 
-    killfxontag(scripts\engine\utility::getfx("TrenchEnterCode"), var3, "tag_origin");
+    killfxontag(scripts\engine\utility::getfx("TrenchEnterCode"), var_3, "tag_origin");
     level.max_respawn = 0;
-    var4 hide();
+    var_4 hide();
     waitframe();
-    var4 connectpaths();
-    playsoundatpos(var3.origin, "br_keypad_confirm");
-    killfxontag(scripts\engine\utility::getfx("TrenchEnterCode"), var3, "tag_origin");
+    var_4 connectpaths();
+    playsoundatpos(var_3.origin, "br_keypad_confirm");
+    killfxontag(scripts\engine\utility::getfx("TrenchEnterCode"), var_3, "tag_origin");
     wait 0.25;
-    playFXOnTag(scripts\engine\utility::getfx("TrenchCorrectCode"), var3, "tag_origin");
+    playFXOnTag(scripts\engine\utility::getfx("TrenchCorrectCode"), var_3, "tag_origin");
     wait 0.25;
-    killfxontag(scripts\engine\utility::getfx("TrenchCorrectCode"), var3, "tag_origin");
+    killfxontag(scripts\engine\utility::getfx("TrenchCorrectCode"), var_3, "tag_origin");
     wait 0.25;
-    playFXOnTag(scripts\engine\utility::getfx("TrenchCorrectCode"), var3, "tag_origin");
+    playFXOnTag(scripts\engine\utility::getfx("TrenchCorrectCode"), var_3, "tag_origin");
     wait 0.25;
-    killfxontag(scripts\engine\utility::getfx("TrenchCorrectCode"), var3, "tag_origin");
+    killfxontag(scripts\engine\utility::getfx("TrenchCorrectCode"), var_3, "tag_origin");
     wait 0.25;
-    playFXOnTag(scripts\engine\utility::getfx("TrenchCorrectCode"), var3, "tag_origin");
+    playFXOnTag(scripts\engine\utility::getfx("TrenchCorrectCode"), var_3, "tag_origin");
     wait 0.25;
-    killfxontag(scripts\engine\utility::getfx("TrenchCorrectCode"), var3, "tag_origin");
+    killfxontag(scripts\engine\utility::getfx("TrenchCorrectCode"), var_3, "tag_origin");
     wait 0.25;
-    playFXOnTag(scripts\engine\utility::getfx("TrenchCorrectCode"), var3, "tag_origin");
+    playFXOnTag(scripts\engine\utility::getfx("TrenchCorrectCode"), var_3, "tag_origin");
     wait 2;
     thread ref_12121(level.door);
   }
@@ -255,8 +255,8 @@ function vehicles_spawned() {
   level.insertingarmorplate = 0;
   level.monitor_player_pinging = getEntArray("elevatorDoor", "targetname");
 
-  foreach(var6 in level.monitor_player_pinging) {
-    thread ref_1323d(var6);
+  foreach(var_6 in level.monitor_player_pinging) {
+    thread ref_1323d(var_6);
   }
 
   while(level.ref_12328) {
@@ -268,22 +268,22 @@ function vehicles_spawned() {
 
     level.ref_12328 = 0;
     level.ref_12329 = 1;
-    playsoundatpos(var3.origin, "br_keypad_confirm");
-    killfxontag(scripts\engine\utility::getfx("TrenchCorrectCode"), var3, "tag_origin");
+    playsoundatpos(var_3.origin, "br_keypad_confirm");
+    killfxontag(scripts\engine\utility::getfx("TrenchCorrectCode"), var_3, "tag_origin");
     wait 0.25;
-    playFXOnTag(scripts\engine\utility::getfx("TrenchCorrectCode"), var3, "tag_origin");
+    playFXOnTag(scripts\engine\utility::getfx("TrenchCorrectCode"), var_3, "tag_origin");
     wait 0.25;
-    killfxontag(scripts\engine\utility::getfx("TrenchCorrectCode"), var3, "tag_origin");
+    killfxontag(scripts\engine\utility::getfx("TrenchCorrectCode"), var_3, "tag_origin");
     wait 0.25;
-    playFXOnTag(scripts\engine\utility::getfx("TrenchCorrectCode"), var3, "tag_origin");
+    playFXOnTag(scripts\engine\utility::getfx("TrenchCorrectCode"), var_3, "tag_origin");
     wait 0.25;
-    killfxontag(scripts\engine\utility::getfx("TrenchCorrectCode"), var3, "tag_origin");
+    killfxontag(scripts\engine\utility::getfx("TrenchCorrectCode"), var_3, "tag_origin");
     wait 0.25;
-    playFXOnTag(scripts\engine\utility::getfx("TrenchCorrectCode"), var3, "tag_origin");
+    playFXOnTag(scripts\engine\utility::getfx("TrenchCorrectCode"), var_3, "tag_origin");
     wait 0.25;
-    killfxontag(scripts\engine\utility::getfx("TrenchCorrectCode"), var3, "tag_origin");
+    killfxontag(scripts\engine\utility::getfx("TrenchCorrectCode"), var_3, "tag_origin");
     wait 0.25;
-    playFXOnTag(scripts\engine\utility::getfx("TrenchCorrectCode"), var3, "tag_origin");
+    playFXOnTag(scripts\engine\utility::getfx("TrenchCorrectCode"), var_3, "tag_origin");
     level.ref_12327 = scripts\engine\utility::getStruct("phoneHint", "targetname");
     level.ref_12324 = easepower("maphint_phone_mp_m_trench", level.ref_12327.origin);
     waitframe();
@@ -302,8 +302,8 @@ function vehicles_spawned() {
   }
 }
 
-function ref_1232b(var0) {
-  level.ref_1232c = spawn("script_origin", var0.origin);
+function ref_1232b(var_0) {
+  level.ref_1232c = spawn("script_origin", var_0.origin);
   wait 0.05;
   level.ref_1232c playLoopSound("trench_phone_ring");
 }
@@ -314,38 +314,38 @@ function vehicle_isneutraltoteam() {
   wait 3;
   level.monitor_player_pinging[1] playSound("trench_door_start");
 
-  foreach(var1 in level.monitor_player_pinging) {
-    thread ref_12124(var1);
+  foreach(var_1 in level.monitor_player_pinging) {
+    thread ref_12124(var_1);
   }
 
   level.monitor_player_pinging[1] playLoopSound("trench_door_lp");
   wait 2;
   level.monitor_player_pinging[1] playSound("trench_door_stop");
   level.monitor_player_pinging[1] stoploopsound("trench_door_lp");
-  var3 = scripts\engine\utility::getStructArray("bearGun", "targetname");
-  var4 = spawn("script_origin", var3[0].origin);
-  var4 playSound("weap_dblmg_spinup_npc");
+  var_3 = scripts\engine\utility::getStructArray("bearGun", "targetname");
+  var_4 = spawn("script_origin", var_3[0].origin);
+  var_4 playSound("weap_dblmg_spinup_npc");
   wait 1;
   scripts\engine\utility::exploder("minigun");
-  var4 playLoopSound("weap_dblmg_spinloop_npc");
+  var_4 playLoopSound("weap_dblmg_spinloop_npc");
   level.clear_my_munition_slot = 0;
   thread spawner_recently_used();
   wait 10;
   level.monitor_player_pinging[0] stoploopsound("trench_alarm_lp");
   level.clear_my_munition_slot = 1;
   scripts\engine\utility::stop_exploder("minigun");
-  var4 playSound("weap_dblmg_spindown_npc");
-  var4 stoploopsound("weap_dblmg_spinloop_npc");
+  var_4 playSound("weap_dblmg_spindown_npc");
+  var_4 stoploopsound("weap_dblmg_spinloop_npc");
   wait 1;
   scripts\engine\utility::stop_exploder("teddynaught");
   scripts\engine\utility::exploder("teddy_dead");
   playsoundatpos((2604.05, -0.801273, -153), "bunker_exp_trans");
-  var4 stopsounds();
-  var4 delete();
+  var_4 stopsounds();
+  var_4 delete();
   wait 0.5;
 
-  foreach(var1 in level.monitor_player_pinging) {
-    thread heli_killed(var1);
+  foreach(var_1 in level.monitor_player_pinging) {
+    thread heli_killed(var_1);
   }
 
   level.monitor_player_pinging[0] playSound("trench_door_start");
@@ -353,51 +353,51 @@ function vehicle_isneutraltoteam() {
 }
 
 function spawner_recently_used() {
-  var0 = scripts\engine\utility::getStructArray("bearGun", "targetname");
-  var1 = getEnt("bunkerHurtTrigger", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("bearGun", "targetname");
+  var_1 = getEnt("bunkerHurtTrigger", "targetname");
 
   while(!level.clear_my_munition_slot) {
-    magicbullet("iw8_lm_dblmg_mp", var0[0].origin, (0, randomintrange(-1000, 1000), randomintrange(-300, 100)));
+    magicbullet("iw8_lm_dblmg_mp", var_0[0].origin, (0, randomintrange(-1000, 1000), randomintrange(-300, 100)));
     wait 0.1;
-    magicbullet("iw8_lm_dblmg_mp", var0[1].origin, (0, randomintrange(-1000, 1000), randomintrange(-300, 100)));
+    magicbullet("iw8_lm_dblmg_mp", var_0[1].origin, (0, randomintrange(-1000, 1000), randomintrange(-300, 100)));
     wait 0.1;
 
     if(randomint(2)) {
-      foreach(var3 in level.players) {
-        if(var3 istouching(var1)) {
-          var3 dodamage(4, var0[0].origin, var3, var3, "MOD_RIFLE_BULLET", undefined, "torso_upper");
+      foreach(var_3 in level.players) {
+        if(var_3 istouching(var_1)) {
+          var_3 dodamage(4, var_0[0].origin, var_3, var_3, "MOD_RIFLE_BULLET", undefined, "torso_upper");
         }
       }
     }
   }
 }
 
-function player_near_obit(var0) {
+function player_near_obit(var_0) {
   wait 10;
 
   while(level.max_respawn) {
-    playFXOnTag(scripts\engine\utility::getfx("TrenchEnterCode"), var0, "tag_origin");
+    playFXOnTag(scripts\engine\utility::getfx("TrenchEnterCode"), var_0, "tag_origin");
     wait 0.5;
-    killfxontag(scripts\engine\utility::getfx("TrenchEnterCode"), var0, "tag_origin");
+    killfxontag(scripts\engine\utility::getfx("TrenchEnterCode"), var_0, "tag_origin");
     waitframe();
-    killfxontag(scripts\engine\utility::getfx("TrenchEnterCode"), var0, "tag_origin");
+    killfxontag(scripts\engine\utility::getfx("TrenchEnterCode"), var_0, "tag_origin");
     wait 0.5;
   }
 }
 
-function vehiclespawn_armoredtruck(var0) {
-  var0 setCanDamage(1);
+function vehiclespawn_armoredtruck(var_0) {
+  var_0 setCanDamage(1);
 
   while(level.max_respawn || level.ref_12328) {
-    var0 waittill("damage", var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14);
+    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14);
 
-    if(level.audio_player_delete_mud_loop == int(var0.script_noteworthy)) {
+    if(level.audio_player_delete_mud_loop == int(var_0.script_noteworthy)) {
       level.insertingarmorplate++;
       level notify("CodeKeyPressed");
       continue;
     }
 
-    if(level.helihint_gotopad[0] == int(var0.script_noteworthy)) {
+    if(level.helihint_gotopad[0] == int(var_0.script_noteworthy)) {
       level.insertingarmorplate = 1;
       level notify("CodeKeyPressed");
       continue;
@@ -408,18 +408,18 @@ function vehiclespawn_armoredtruck(var0) {
   }
 }
 
-function ref_1323d(var0) {
-  var0.originalpos = var0.origin;
-  var1 = scripts\engine\utility::getStruct(var0.target, "targetname");
-  var0.ref_1212b = var1.origin;
+function ref_1323d(var_0) {
+  var_0.originalpos = var_0.origin;
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
+  var_0.ref_1212b = var_1.origin;
 }
 
-function ref_12124(var0) {
-  var0 moveTo(var0.ref_1212b, 2, 1.5, 0);
+function ref_12124(var_0) {
+  var_0 moveTo(var_0.ref_1212b, 2, 1.5, 0);
 }
 
-function heli_killed(var0) {
-  var0 moveTo(var0.originalpos, 0.5, 0.25, 0);
+function heli_killed(var_0) {
+  var_0 moveTo(var_0.originalpos, 0.5, 0.25, 0);
 }
 
 function teamrefundplunder() {
@@ -439,16 +439,16 @@ function teamrevivefiresalediscount() {
 
 function teamsassigned() {
   level.door = getEnt("bunker_door", "targetname");
-  var0 = getEntArray(level.door.target, "targetname");
+  var_0 = getEntArray(level.door.target, "targetname");
 
-  foreach(var2 in var0) {
-    if(var2.script_noteworthy == "right_door_clip") {
-      level.door.heli_anim = var2;
+  foreach(var_2 in var_0) {
+    if(var_2.script_noteworthy == "right_door_clip") {
+      level.door.heli_anim = var_2;
       continue;
     }
 
-    if(var2.script_noteworthy == "left_door_clip") {
-      level.door.heli_approach_instruct = var2;
+    if(var_2.script_noteworthy == "left_door_clip") {
+      level.door.heli_approach_instruct = var_2;
     }
   }
 
@@ -456,54 +456,54 @@ function teamsassigned() {
   level.door scripts\common\anim::setanimtree();
 }
 
-function ref_12121(var0) {
-  var1 = "door_open";
-  var0 thread scripts\common\anim::anim_single_solo(var0, var1);
-  var0 playSound("br_bunker_door_open_01");
-  var2 = getanimlength(level.scr_anim["bunker_door"][var1]);
+function ref_12121(var_0) {
+  var_1 = "door_open";
+  var_0 thread scripts\common\anim::anim_single_solo(var_0, var_1);
+  var_0 playSound("br_bunker_door_open_01");
+  var_2 = getanimlength(level.scr_anim["bunker_door"][var_1]);
   wait 8;
-  var0.heli_anim rotateTo(var0.heli_anim.angles - (0, 90, 0), 5, 0.2, 0.8);
-  var0.heli_approach_instruct rotateTo(var0.heli_approach_instruct.angles + (0, 90, 0), 5, 0.2, 0.8);
-  var0 playSound("br_bunker_door_open_02");
-  wait var2 - 8;
-  var0.heli_anim connectpaths();
-  var0.heli_approach_instruct connectpaths();
+  var_0.heli_anim rotateTo(var_0.heli_anim.angles - (0, 90, 0), 5, 0.2, 0.8);
+  var_0.heli_approach_instruct rotateTo(var_0.heli_approach_instruct.angles + (0, 90, 0), 5, 0.2, 0.8);
+  var_0 playSound("br_bunker_door_open_02");
+  wait var_2 - 8;
+  var_0.heli_anim connectpaths();
+  var_0.heli_approach_instruct connectpaths();
 }
 
 function ref_129f4() {
   wait 3;
   level.onupdatefunc = scripts\engine\utility::getStructArray("exploPoint", "targetname");
-  var0 = 0;
+  var_0 = 0;
 
-  foreach(var2 in level.onupdatefunc) {
-    level.open_doors[var0] = scripts\engine\utility::spawn_tag_origin();
-    level.open_doors[var0].origin = var2.origin;
-    level.open_doors[var0] show();
-    var0++;
+  foreach(var_2 in level.onupdatefunc) {
+    level.open_doors[var_0] = scripts\engine\utility::spawn_tag_origin();
+    level.open_doors[var_0].origin = var_2.origin;
+    level.open_doors[var_0] show();
+    var_0++;
   }
 
   for(;;) {
     wait randomintrange(5, 17);
 
-    if(var0 > 0) {
-      var4 = randomintrange(0, var0);
-      level.open_doors[var4] playSound("trench_mortar_expl_trans");
-      playFXOnTag(scripts\engine\utility::getfx("TrenchExplosionFX"), level.open_doors[var4], "tag_origin");
+    if(var_0 > 0) {
+      var_4 = randomintrange(0, var_0);
+      level.open_doors[var_4] playSound("trench_mortar_expl_trans");
+      playFXOnTag(scripts\engine\utility::getfx("TrenchExplosionFX"), level.open_doors[var_4], "tag_origin");
     }
   }
 }
 
 function ref_13241() {
-  var0 = getEntArray("fan", "targetname");
+  var_0 = getEntArray("fan", "targetname");
 
-  foreach(var2 in var0) {
-    thread pelletdmgpassed(var2, randomfloatrange(0.75, 1.25));
+  foreach(var_2 in var_0) {
+    thread pelletdmgpassed(var_2, randomfloatrange(0.75, 1.25));
   }
 }
 
-function pelletdmgpassed(var0, var1) {
+function pelletdmgpassed(var_0, var_1) {
   for(;;) {
-    var0 rotateroll(360, var1, 0, 0);
-    wait var1;
+    var_0 rotateroll(360, var_1, 0, 0);
+    wait var_1;
   }
 }

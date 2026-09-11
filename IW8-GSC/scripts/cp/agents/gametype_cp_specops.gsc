@@ -80,10 +80,10 @@ function loopmissilelauncherlockedfeedback() {
   }
 }
 
-function softsighttest(var0) {
-  var1 = 500;
+function softsighttest(var_0) {
+  var_1 = 500;
 
-  if(stingtargstruct_isinlos(var0)) {
+  if(stingtargstruct_isinlos(var_0)) {
     self.missilelauncherlostsightlinetime = 0;
     return true;
   }
@@ -92,9 +92,9 @@ function softsighttest(var0) {
     self.missilelauncherlostsightlinetime = gettime();
   }
 
-  var2 = gettime() - self.missilelauncherlostsightlinetime;
+  var_2 = gettime() - self.missilelauncherlostsightlinetime;
 
-  if(var2 >= var1) {
+  if(var_2 >= var_1) {
     resetmissilelauncherlocking();
     return false;
   }
@@ -103,7 +103,7 @@ function softsighttest(var0) {
 }
 
 function missilelauncherusage() {
-  var0 = 0;
+  var_0 = 0;
 
   if(self playerads() < 0.95) {
     resetmissilelauncherlocking();
@@ -117,43 +117,43 @@ function missilelauncherusage() {
   }
 
   if(self.missilelauncherstage == 0) {
-    var1 = scripts\cp\cp_weapon::lockonlaunchers_gettargetarray(0);
+    var_1 = scripts\cp\cp_weapon::lockonlaunchers_gettargetarray(0);
 
-    if(var1.size == 0) {
+    if(var_1.size == 0) {
       return;
     }
 
-    var1 = sortbydistance(var1, self.origin);
-    var2 = undefined;
-    var3 = 0;
+    var_1 = sortbydistance(var_1, self.origin);
+    var_2 = undefined;
+    var_3 = 0;
 
-    foreach(var5 in var1) {
-      if(!isDefined(var5)) {
+    foreach(var_5 in var_1) {
+      if(!isDefined(var_5)) {
         continue;
       }
 
-      var2 = stingtargstruct_create(self, var5);
-      stingtargstruct_getoffsets(var2);
-      stingtargstruct_getorigins(var2);
-      stingtargstruct_getinreticle(var2);
+      var_2 = stingtargstruct_create(self, var_5);
+      stingtargstruct_getoffsets(var_2);
+      stingtargstruct_getorigins(var_2);
+      stingtargstruct_getinreticle(var_2);
 
-      if(stingtargstruct_isinreticle(var2)) {
-        var3 = 1;
+      if(stingtargstruct_isinreticle(var_2)) {
+        var_3 = 1;
         break;
       }
     }
 
-    if(!var3) {
+    if(!var_3) {
       return;
     }
 
-    stingtargstruct_getinlos(var2);
+    stingtargstruct_getinlos(var_2);
 
-    if(!stingtargstruct_isinlos(var2)) {
+    if(!stingtargstruct_isinlos(var_2)) {
       return;
     }
 
-    self.missilelaunchertarget = var2.target;
+    self.missilelaunchertarget = var_2.target;
     self.missilelauncherlockstarttime = gettime();
     self.missilelauncherstage = 1;
     self.missilelauncherlostsightlinetime = 0;
@@ -171,41 +171,41 @@ function missilelauncherusage() {
       return;
     }
 
-    if(!var0 && self.missilelaunchertarget scripts\cp_mp\vehicles\vehicle::isvehicle() && scripts\cp_mp\vehicles\vehicle::ref_141b9(self.missilelaunchertarget, self)) {
+    if(!var_0 && self.missilelaunchertarget scripts\cp_mp\vehicles\vehicle::isvehicle() && scripts\cp_mp\vehicles\vehicle::ref_141b9(self.missilelaunchertarget, self)) {
       resetmissilelauncherlocking();
       return;
     }
 
-    var2 = stingtargstruct_create(self, self.missilelaunchertarget);
-    stingtargstruct_getoffsets(var2);
-    stingtargstruct_getorigins(var2);
-    stingtargstruct_getinreticle(var2);
+    var_2 = stingtargstruct_create(self, self.missilelaunchertarget);
+    stingtargstruct_getoffsets(var_2);
+    stingtargstruct_getorigins(var_2);
+    stingtargstruct_getinreticle(var_2);
 
-    if(!stingtargstruct_isinreticle(var2)) {
+    if(!stingtargstruct_isinreticle(var_2)) {
       resetmissilelauncherlocking();
       return;
     }
 
-    stingtargstruct_getinlos(var2);
+    stingtargstruct_getinlos(var_2);
 
-    if(!softsighttest(var2)) {
+    if(!softsighttest(var_2)) {
       return;
     }
 
-    var7 = gettime() - self.missilelauncherlockstarttime;
+    var_7 = gettime() - self.missilelauncherlockstarttime;
 
     if(scripts\cp\utility::_hasperk("specialty_fasterlockon")) {
-      if(var7 < 250) {
+      if(var_7 < 250) {
         return;
       }
-    } else if(var7 < 500) {
+    } else if(var_7 < 500) {
       return;
     }
 
     self notify("stop_javelin_locking_feedback");
     thread loopmissilelauncherlockedfeedback();
-    var8 = undefined;
-    missilelauncher_finalizelock(var2);
+    var_8 = undefined;
+    missilelauncher_finalizelock(var_2);
 
     if(isDefined(level.activekillstreaks)) {
       if(scripts\engine\utility::array_contains(level.activekillstreaks, self.missilelaunchertarget)) {
@@ -222,24 +222,24 @@ function missilelauncherusage() {
       return;
     }
 
-    if(!var0 && self.missilelaunchertarget scripts\cp_mp\vehicles\vehicle::isvehicle() && scripts\cp_mp\vehicles\vehicle::ref_141b9(self.missilelaunchertarget, self)) {
+    if(!var_0 && self.missilelaunchertarget scripts\cp_mp\vehicles\vehicle::isvehicle() && scripts\cp_mp\vehicles\vehicle::ref_141b9(self.missilelaunchertarget, self)) {
       resetmissilelauncherlocking();
       return;
     }
 
-    var2 = stingtargstruct_create(self, self.missilelaunchertarget);
-    stingtargstruct_getoffsets(var2);
-    stingtargstruct_getorigins(var2);
-    stingtargstruct_getinreticle(var2);
-    stingtargstruct_getinlos(var2);
+    var_2 = stingtargstruct_create(self, self.missilelaunchertarget);
+    stingtargstruct_getoffsets(var_2);
+    stingtargstruct_getorigins(var_2);
+    stingtargstruct_getinreticle(var_2);
+    stingtargstruct_getinlos(var_2);
 
-    if(!softsighttest(var2)) {
+    if(!softsighttest(var_2)) {
       return;
     } else {
-      missilelauncher_finalizelock(var2);
+      missilelauncher_finalizelock(var_2);
     }
 
-    if(!stingtargstruct_isinreticle(var2)) {
+    if(!stingtargstruct_isinreticle(var_2)) {
       resetmissilelauncherlocking();
       return;
     }
@@ -264,64 +264,64 @@ function missilelauncherusageloop() {
   }
 }
 
-function missilelauncher_finalizelock(var0) {
-  var1 = undefined;
+function missilelauncher_finalizelock(var_0) {
+  var_1 = undefined;
 
-  if(isDefined(var0.inlosid)) {
-    var1 = var0.offsets[var0.inlosid];
-    var1 = (var1[1], -1 * var1[0], var1[2]);
+  if(isDefined(var_0.inlosid)) {
+    var_1 = var_0.offsets[var_0.inlosid];
+    var_1 = (var_1[1], -1 * var_1[0], var_1[2]);
   } else {
-    var1 = (0, 0, 0);
+    var_1 = (0, 0, 0);
   }
 
-  self weaponlockfinalize(self.missilelaunchertarget, var1);
+  self weaponlockfinalize(self.missilelaunchertarget, var_1);
 }
 
-function addhudincoming_attacker(var0) {
-  if(!isDefined(var0)) {
+function addhudincoming_attacker(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var1 = var0;
+  var_1 = var_0;
 
-  if(isDefined(var0.owner)) {
-    var1 = var0.owner;
+  if(isDefined(var_0.owner)) {
+    var_1 = var_0.owner;
   }
 
-  if(!isDefined(var1) || !isPlayer(var1)) {
-    return;
-  }
-}
-
-function removehudincoming_attacker(var0) {
-  if(!isDefined(var0)) {
-    return;
-  }
-
-  var1 = var0;
-
-  if(!isDefined(var0.owner)) {
-    return;
-  }
-
-  var1 = var0.owner;
-
-  if(!isDefined(var1) || !isPlayer(var1)) {
+  if(!isDefined(var_1) || !isPlayer(var_1)) {
     return;
   }
 }
 
-function stingtargstruct_create(var0, var1) {
-  var2 = spawnStruct();
-  var2.player = var0;
-  var2.target = var1;
-  var2.offsets = [];
-  var2.origins = [];
-  var2.inreticledistssqr = [];
-  var2.inreticlesortedids = [];
-  var2.inlosid = undefined;
-  var2.useoldlosverification = 1;
-  return var2;
+function removehudincoming_attacker(var_0) {
+  if(!isDefined(var_0)) {
+    return;
+  }
+
+  var_1 = var_0;
+
+  if(!isDefined(var_0.owner)) {
+    return;
+  }
+
+  var_1 = var_0.owner;
+
+  if(!isDefined(var_1) || !isPlayer(var_1)) {
+    return;
+  }
+}
+
+function stingtargstruct_create(var_0, var_1) {
+  var_2 = spawnStruct();
+  var_2.player = var_0;
+  var_2.target = var_1;
+  var_2.offsets = [];
+  var_2.origins = [];
+  var_2.inreticledistssqr = [];
+  var_2.inreticlesortedids = [];
+  var_2.inlosid = undefined;
+  var_2.useoldlosverification = 1;
+  return var_2;
 }
 
 function stingtargstruct_getoffsets() {
@@ -392,46 +392,46 @@ function stingtargstruct_getoffsets() {
 }
 
 function stingtargstruct_getorigins() {
-  var0 = self.target.origin;
-  var1 = self.target.angles;
-  var2 = anglesToForward(var1);
-  var3 = anglestoright(var1);
-  var4 = anglestoup(var1);
+  var_0 = self.target.origin;
+  var_1 = self.target.angles;
+  var_2 = anglesToForward(var_1);
+  var_3 = anglestoright(var_1);
+  var_4 = anglestoup(var_1);
 
-  for(var5 = 0; var5 < self.offsets.size; var5++) {
-    var6 = self.offsets[var5];
-    self.origins[var5] = var0 + var3 * var6[0] + var2 * var6[1] + var4 * var6[2];
+  for(var_5 = 0; var_5 < self.offsets.size; var_5++) {
+    var_6 = self.offsets[var_5];
+    self.origins[var_5] = var_0 + var_3 * var_6[0] + var_2 * var_6[1] + var_4 * var_6[2];
   }
 }
 
 function stingtargstruct_getinreticle() {
-  foreach(var1 in self.origins) {
-    for(var2 = 0; var2 < self.origins.size; var2++) {
-      var3 = self.player worldpointtoscreenpos(self.origins[var2], 65);
+  foreach(var_1 in self.origins) {
+    for(var_2 = 0; var_2 < self.origins.size; var_2++) {
+      var_3 = self.player worldpointtoscreenpos(self.origins[var_2], 65);
 
-      if(isDefined(var3)) {
-        var4 = length2dsquared(var3);
+      if(isDefined(var_3)) {
+        var_4 = length2dsquared(var_3);
 
-        if(var4 <= 7225) {
-          self.inreticlesortedids[self.inreticlesortedids.size] = var2;
-          self.inreticledistssqr[var2] = var4;
+        if(var_4 <= 7225) {
+          self.inreticlesortedids[self.inreticlesortedids.size] = var_2;
+          self.inreticledistssqr[var_2] = var_4;
         }
       }
     }
   }
 
   if(self.inreticlesortedids.size > 1) {
-    for(var2 = 0; var2 < self.inreticlesortedids.size; var2++) {
-      for(var6 = var2 + 1; var6 < self.inreticlesortedids.size; var6++) {
-        var7 = self.inreticlesortedids[var2];
-        var8 = self.inreticlesortedids[var6];
-        var9 = self.inreticledistssqr[var7];
-        var10 = self.inreticledistssqr[var8];
+    for(var_2 = 0; var_2 < self.inreticlesortedids.size; var_2++) {
+      for(var_6 = var_2 + 1; var_6 < self.inreticlesortedids.size; var_6++) {
+        var_7 = self.inreticlesortedids[var_2];
+        var_8 = self.inreticlesortedids[var_6];
+        var_9 = self.inreticledistssqr[var_7];
+        var_10 = self.inreticledistssqr[var_8];
 
-        if(var10 < var9) {
-          var11 = var7;
-          self.inreticlesortedids[var2] = var8;
-          self.inreticlesortedids[var6] = var11;
+        if(var_10 < var_9) {
+          var_11 = var_7;
+          self.inreticlesortedids[var_2] = var_8;
+          self.inreticlesortedids[var_6] = var_11;
         }
       }
     }
@@ -441,23 +441,23 @@ function stingtargstruct_getinreticle() {
 }
 
 function stingtargstruct_getinlos() {
-  var0 = self.player getEye();
-  var1 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_sky", "physicscontents_water", "physicscontents_vehicle", "physicscontents_item"]);
-  var2 = [self.player, self.target];
-  var3 = self.target getlinkedchildren();
+  var_0 = self.player getEye();
+  var_1 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_sky", "physicscontents_water", "physicscontents_vehicle", "physicscontents_item"]);
+  var_2 = [self.player, self.target];
+  var_3 = self.target getlinkedchildren();
 
-  if(isDefined(var3) && var3.size > 0) {
-    var2 = scripts\engine\utility::array_combine(var2, var3);
+  if(isDefined(var_3) && var_3.size > 0) {
+    var_2 = scripts\engine\utility::array_combine(var_2, var_3);
   }
 
   if(!self.useoldlosverification) {
-    for(var4 = 0; var4 < self.inreticlesortedids.size; var4++) {
-      var5 = self.inreticlesortedids[var4];
-      var6 = self.origins[var5];
-      var7 = physics_raycast(var0, var6, var1, var2, 0, "physicsquery_closest", 1);
+    for(var_4 = 0; var_4 < self.inreticlesortedids.size; var_4++) {
+      var_5 = self.inreticlesortedids[var_4];
+      var_6 = self.origins[var_5];
+      var_7 = physics_raycast(var_0, var_6, var_1, var_2, 0, "physicsquery_closest", 1);
 
-      if(!isDefined(var7) || var7.size == 0) {
-        self.inlosid = var5;
+      if(!isDefined(var_7) || var_7.size == 0) {
+        self.inlosid = var_5;
         return;
       }
     }
@@ -465,26 +465,26 @@ function stingtargstruct_getinlos() {
     return;
   }
 
-  var8 = self.target getpointinbounds(0, 0, 1);
-  var9 = scripts\engine\trace::ray_trace(var0, var8, var2, var1, 0);
+  var_8 = self.target getpointinbounds(0, 0, 1);
+  var_9 = scripts\engine\trace::ray_trace(var_0, var_8, var_2, var_1, 0);
 
-  if(var9["fraction"] == 1) {
+  if(var_9["fraction"] == 1) {
     self.inlosid = 0;
     return;
   }
 
-  var10 = self.target getpointinbounds(1, 0, 0);
-  var9 = scripts\engine\trace::ray_trace(var0, var10, var2, var1, 0);
+  var_10 = self.target getpointinbounds(1, 0, 0);
+  var_9 = scripts\engine\trace::ray_trace(var_0, var_10, var_2, var_1, 0);
 
-  if(var9["fraction"] == 1) {
+  if(var_9["fraction"] == 1) {
     self.inlosid = 0;
     return;
   }
 
-  var11 = self.target getpointinbounds(-1, 0, 0);
-  var9 = scripts\engine\trace::ray_trace(var0, var11, var2, var1, 0);
+  var_11 = self.target getpointinbounds(-1, 0, 0);
+  var_9 = scripts\engine\trace::ray_trace(var_0, var_11, var_2, var_1, 0);
 
-  if(var9["fraction"] == 1) {
+  if(var_9["fraction"] == 1) {
     self.inlosid = 0;
     return;
   }

@@ -33,6 +33,6 @@ function main_mp() {
   scripts\code\character::attachhead("test_enemy_picc_heads", xmodelalias\test_enemy_picc_heads::main());
 }
 
-function precache_mp(var0) {
-  level.agent_definition[var0]["animclass"] = "suicidebomber";
+function precache_mp(var_0) {
+  level.agent_definition[var_0]["animclass"] = "suicidebomber";
 }

@@ -3,18 +3,18 @@
  * Script: scripts\mp\utility\lower_message.gsc
 ************************************************/
 
-function setlowermessageomnvar(var0, var1, var2) {
-  var3 = getDvar("MOLPOSLOMO");
+function setlowermessageomnvar(var_0, var_1, var_2) {
+  var_3 = getDvar("MOLPOSLOMO");
 
-  if(var3 != "cp_survival" && var3 != "cp_wave_sv" && var3 != "cp_specops") {
-    self setclientomnvar("ui_lower_message", var0);
+  if(var_3 != "cp_survival" && var_3 != "cp_wave_sv" && var_3 != "cp_specops") {
+    self setclientomnvar("ui_lower_message", var_0);
 
-    if(isDefined(var1)) {
-      self setclientomnvar("ui_lower_message_time", var1);
+    if(isDefined(var_1)) {
+      self setclientomnvar("ui_lower_message_time", var_1);
     }
 
-    if(isDefined(var2)) {
-      thread clearomnvarsaftertime(var2);
+    if(isDefined(var_2)) {
+      thread clearomnvarsaftertime(var_2);
       return;
     }
 
@@ -22,73 +22,73 @@ function setlowermessageomnvar(var0, var1, var2) {
   }
 }
 
-function clearomnvarsaftertime(var0) {
+function clearomnvarsaftertime(var_0) {
   self notify("message_cleared");
   self endon("message_cleared");
   self endon("death_or_disconnect");
-  wait var0;
-  var1 = getDvar("MOLPOSLOMO");
+  wait var_0;
+  var_1 = getDvar("MOLPOSLOMO");
 
-  if(var1 != "cp_survival" && var1 != "cp_wave_sv" && var1 != "cp_specops") {
+  if(var_1 != "cp_survival" && var_1 != "cp_wave_sv" && var_1 != "cp_specops") {
     self setclientomnvar("ui_lower_message", 0);
     return;
   }
 }
 
-function ref_1316e(var0, var1, var2) {
-  setlowermessageomnvar(removeplayerasexpiredlootleader(var0), var1, var2);
+function ref_1316e(var_0, var_1, var_2) {
+  setlowermessageomnvar(removeplayerasexpiredlootleader(var_0), var_1, var_2);
 }
 
-function removeplayerasexpiredlootleader(var0) {
-  var1 = tablelookup("mp/hints.csv", 1, var0, 0);
-  return int(var1);
+function removeplayerasexpiredlootleader(var_0) {
+  var_1 = tablelookup("mp/hints.csv", 1, var_0, 0);
+  return int(var_1);
 }
 
-function setlowermessage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
-  if(!isDefined(var3)) {
-    var3 = 1;
+function setlowermessage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  if(!isDefined(var_3)) {
+    var_3 = 1;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  if(!isDefined(var4)) {
-    var4 = 0;
+  if(!isDefined(var_4)) {
+    var_4 = 0;
   }
 
-  if(!isDefined(var5)) {
-    var5 = 0;
+  if(!isDefined(var_5)) {
+    var_5 = 0;
   }
 
-  if(!isDefined(var6)) {
-    var6 = 0.85;
+  if(!isDefined(var_6)) {
+    var_6 = 0.85;
   }
 
-  if(!isDefined(var7)) {
-    var7 = 3;
+  if(!isDefined(var_7)) {
+    var_7 = 3;
   }
 
-  if(!isDefined(var8)) {
-    var8 = 0;
+  if(!isDefined(var_8)) {
+    var_8 = 0;
   }
 
-  if(!isDefined(var9)) {
-    var9 = 1;
+  if(!isDefined(var_9)) {
+    var_9 = 1;
   }
 
-  addlowermessage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+  addlowermessage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
   updatelowermessage();
 }
 
-function clearlowermessage(var0) {
-  removelowermessage(var0);
+function clearlowermessage(var_0) {
+  removelowermessage(var_0);
   updatelowermessage();
 }
 
 function clearlowermessages() {
-  for(var0 = 0; var0 < self.lowermessages.size; var0++) {
-    self.lowermessages[var0] = undefined;
+  for(var_0 = 0; var_0 < self.lowermessages.size; var_0++) {
+    self.lowermessages[var_0] = undefined;
   }
 
   if(!isDefined(self.lowermessage)) {
@@ -99,63 +99,63 @@ function clearlowermessages() {
 }
 
 function sortlowermessages() {
-  for(var0 = 1; var0 < self.lowermessages.size; var0++) {
-    var1 = self.lowermessages[var0];
-    var2 = var1.priority;
+  for(var_0 = 1; var_0 < self.lowermessages.size; var_0++) {
+    var_1 = self.lowermessages[var_0];
+    var_2 = var_1.priority;
 
-    for(var3 = var0 - 1; var3 >= 0 && var2 > self.lowermessages[var3].priority; var3--) {
-      self.lowermessages[var3 + 1] = self.lowermessages[var3];
+    for(var_3 = var_0 - 1; var_3 >= 0 && var_2 > self.lowermessages[var_3].priority; var_3--) {
+      self.lowermessages[var_3 + 1] = self.lowermessages[var_3];
     }
 
-    self.lowermessages[var3 + 1] = var1;
+    self.lowermessages[var_3 + 1] = var_1;
   }
 }
 
-function addlowermessage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
-  var10 = undefined;
+function addlowermessage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  var_10 = undefined;
 
-  foreach(var12 in self.lowermessages) {
-    if(var12.name == var0) {
-      if(var12.text == var1 && var12.priority == var3) {
+  foreach(var_12 in self.lowermessages) {
+    if(var_12.name == var_0) {
+      if(var_12.text == var_1 && var_12.priority == var_3) {
         return;
       }
 
-      var10 = var12;
+      var_10 = var_12;
       break;
     }
   }
 
-  if(!isDefined(var10)) {
-    var10 = spawnStruct();
-    self.lowermessages[self.lowermessages.size] = var10;
+  if(!isDefined(var_10)) {
+    var_10 = spawnStruct();
+    self.lowermessages[self.lowermessages.size] = var_10;
   }
 
-  var10.name = var0;
-  var10.text = var1;
-  var10.time = var2;
-  var10.addtime = gettime();
-  var10.priority = var3;
-  var10.showtimer = var4;
-  var10.shouldfade = var5;
-  var10.fadetoalpha = var6;
-  var10.fadetoalphatime = var7;
-  var10.hidewhenindemo = var8;
-  var10.hidewheninmenu = var9;
+  var_10.name = var_0;
+  var_10.text = var_1;
+  var_10.time = var_2;
+  var_10.addtime = gettime();
+  var_10.priority = var_3;
+  var_10.showtimer = var_4;
+  var_10.shouldfade = var_5;
+  var_10.fadetoalpha = var_6;
+  var_10.fadetoalphatime = var_7;
+  var_10.hidewhenindemo = var_8;
+  var_10.hidewheninmenu = var_9;
   sortlowermessages();
 }
 
-function removelowermessage(var0) {
+function removelowermessage(var_0) {
   if(isDefined(self.lowermessages)) {
-    for(var1 = self.lowermessages.size; var1 > 0; var1--) {
-      if(self.lowermessages[var1 - 1].name != var0) {
+    for(var_1 = self.lowermessages.size; var_1 > 0; var_1--) {
+      if(self.lowermessages[var_1 - 1].name != var_0) {
         continue;
       }
 
-      var2 = self.lowermessages[var1 - 1];
+      var_2 = self.lowermessages[var_1 - 1];
 
-      for(var3 = var1; var3 < self.lowermessages.size; var3++) {
-        if(isDefined(self.lowermessages[var3])) {
-          self.lowermessages[var3 - 1] = self.lowermessages[var3];
+      for(var_3 = var_1; var_3 < self.lowermessages.size; var_3++) {
+        if(isDefined(self.lowermessages[var_3])) {
+          self.lowermessages[var_3 - 1] = self.lowermessages[var_3];
         }
       }
 
@@ -180,9 +180,9 @@ function updatelowermessage() {
     return;
   }
 
-  var0 = getlowermessage();
+  var_0 = getlowermessage();
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     if(isDefined(self.lowermessage) && isDefined(self.lowertimer)) {
       self.lowermessage.alpha = 0;
       self.lowertimer.alpha = 0;
@@ -191,45 +191,45 @@ function updatelowermessage() {
     return;
   }
 
-  self.lowermessage settext(var0.text);
+  self.lowermessage settext(var_0.text);
   self.lowermessage.alpha = 0.85;
   self.lowertimer.alpha = 1;
-  self.lowermessage.hidewhenindemo = var0.hidewhenindemo;
-  self.lowermessage.hidewheninmenu = var0.hidewheninmenu;
+  self.lowermessage.hidewhenindemo = var_0.hidewhenindemo;
+  self.lowermessage.hidewheninmenu = var_0.hidewheninmenu;
 
-  if(var0.shouldfade) {
-    self.lowermessage fadeovertime(min(var0.fadetoalphatime, 60));
-    self.lowermessage.alpha = var0.fadetoalpha;
+  if(var_0.shouldfade) {
+    self.lowermessage fadeovertime(min(var_0.fadetoalphatime, 60));
+    self.lowermessage.alpha = var_0.fadetoalpha;
   }
 
-  if(var0.time > 0 && var0.showtimer) {
-    self.lowertimer settimer(max(var0.time - (gettime() - var0.addtime) / 1000, 0.1));
+  if(var_0.time > 0 && var_0.showtimer) {
+    self.lowertimer settimer(max(var_0.time - (gettime() - var_0.addtime) / 1000, 0.1));
     return;
   }
 
-  if(var0.time > 0 && !var0.showtimer) {
+  if(var_0.time > 0 && !var_0.showtimer) {
     self.lowertimer settext("");
-    self.lowermessage fadeovertime(min(var0.time, 60));
+    self.lowermessage fadeovertime(min(var_0.time, 60));
     self.lowermessage.alpha = 0;
-    thread clearondeath(var0);
-    thread clearafterfade(var0);
+    thread clearondeath(var_0);
+    thread clearafterfade(var_0);
     return;
   }
 
   self.lowertimer settext("");
 }
 
-function clearondeath(var0) {
+function clearondeath(var_0) {
   self notify("message_cleared");
   self endon("message_cleared");
   self endon("disconnect");
   level endon("game_ended");
   self waittill("death");
-  clearlowermessage(var0.name);
+  clearlowermessage(var_0.name);
 }
 
-function clearafterfade(var0) {
-  wait var0.time;
-  clearlowermessage(var0.name);
+function clearafterfade(var_0) {
+  wait var_0.time;
+  clearlowermessage(var_0.name);
   self notify("message_cleared");
 }

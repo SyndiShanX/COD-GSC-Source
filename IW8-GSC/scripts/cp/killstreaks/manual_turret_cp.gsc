@@ -60,21 +60,21 @@ function init_manual_turret_vo() {
   game["dialog"]["manual_turret_no_ammo"] = "manual_turret_no_ammo";
 }
 
-function manual_turret_gettargetmarker(var0, var1) {
-  return scripts\cp\inventory\cp_target_marker::gettargetmarker(var0, var1);
+function manual_turret_gettargetmarker(var_0, var_1) {
+  return scripts\cp\inventory\cp_target_marker::gettargetmarker(var_0, var_1);
 }
 
-function manual_turret_createhintobject(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10) {
-  return scripts\cp\utility::createhintobject(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10);
+function manual_turret_createhintobject(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+  return scripts\cp\utility::createhintobject(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 }
 
-function manual_turret_monitordamage(var0, var1, var2, var3, var4, var5, var6) {}
+function manual_turret_monitordamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {}
 
-function manual_turret_getenemyplayers(var0) {
-  return scripts\cp\utility::getteamarray(var0, 1);
+function manual_turret_getenemyplayers(var_0) {
+  return scripts\cp\utility::getteamarray(var_0, 1);
 }
 
-function ref_11ac3(var0, var1) {
+function ref_11ac3(var_0, var_1) {
   self notify("munitions_used", "manual_turret");
 }
 

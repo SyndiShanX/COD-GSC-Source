@@ -14,7 +14,7 @@ function init() {
 
   level.calloutglobals.areatriggers = getEntArray("callout_area", "targetname");
 
-  foreach(var1 in level.calloutglobals.areatriggers) {
+  foreach(var_1 in level.calloutglobals.areatriggers) {
     thread calloutareathink();
   }
 
@@ -22,30 +22,30 @@ function init() {
 }
 
 function createcalloutareaidmap() {
-  var0 = level.calloutglobals;
-  var0.areaidmap = [];
-  var0.areaidmap["none"] = -1;
+  var_0 = level.calloutglobals;
+  var_0.areaidmap = [];
+  var_0.areaidmap["none"] = -1;
 
   if(!tableexists(level.calloutglobals.callouttable)) {
     return;
   }
 
-  for(var1 = 0;; var1++) {
-    var2 = tablelookupbyrow(level.calloutglobals.callouttable, var1, 0);
+  for(var_1 = 0;; var_1++) {
+    var_2 = tablelookupbyrow(level.calloutglobals.callouttable, var_1, 0);
 
-    if(!isDefined(var2) || var2 == "") {
+    if(!isDefined(var_2) || var_2 == "") {
       break;
     }
 
-    var2 = int(var2);
-    var3 = tablelookupbyrow(level.calloutglobals.callouttable, var1, 3);
+    var_2 = int(var_2);
+    var_3 = tablelookupbyrow(level.calloutglobals.callouttable, var_1, 3);
 
-    if(var3 != "area") {
+    if(var_3 != "area") {
       continue;
     }
 
-    var4 = tablelookupbyrow(level.calloutglobals.callouttable, var1, 1);
-    var0.areaidmap[var4] = var2;
+    var_4 = tablelookupbyrow(level.calloutglobals.callouttable, var_1, 1);
+    var_0.areaidmap[var_4] = var_2;
   }
 }
 
@@ -53,9 +53,9 @@ function monitorplayers() {
   level endon("game_ended");
 
   for(;;) {
-    level waittill("connected", var0);
+    level waittill("connected", var_0);
     thread clearcalloutareaondeath();
-    setplayercalloutarea(var0, "none");
+    setplayercalloutarea(var_0, "none");
   }
 }
 
@@ -63,44 +63,44 @@ function calloutareathink() {
   level endon("game_ended");
 
   for(;;) {
-    self waittill("trigger", var0);
+    self waittill("trigger", var_0);
 
-    if(!isPlayer(var0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
 
-    setplayercalloutarea(var0, self.script_noteworthy, self);
+    setplayercalloutarea(var_0, self.script_noteworthy, self);
   }
 }
 
-function setplayercalloutarea(var0, var1) {
-  if(isDefined(self.calloutarea) && self.calloutarea == var0) {
+function setplayercalloutarea(var_0, var_1) {
+  if(isDefined(self.calloutarea) && self.calloutarea == var_0) {
     return;
   }
 
   if(scripts\mp\utility\game::getgametype() != "br") {
-    if(isDefined(self.calloutarea) && var0 != "none" && self.calloutarea != "none") {
+    if(isDefined(self.calloutarea) && var_0 != "none" && self.calloutarea != "none") {
       return;
     }
   }
 
-  self.calloutarea = var0;
+  self.calloutarea = var_0;
 
-  if(isDefined(var1)) {
-    thread watchplayerleavingcalloutarea(var1, var1.script_noteworthy);
+  if(isDefined(var_1)) {
+    thread watchplayerleavingcalloutarea(var_1, var_1.script_noteworthy);
   }
 
-  var2 = level.calloutglobals.areaidmap[var0];
+  var_2 = level.calloutglobals.areaidmap[var_0];
 
-  if(isDefined(var2)) {
-    self setclientomnvar("ui_callout_area_id", var2);
+  if(isDefined(var_2)) {
+    self setclientomnvar("ui_callout_area_id", var_2);
 
     if(level.codcasterenabled) {
-      var3 = scripts\mp\utility\player::get_players_watching(1, 0);
+      var_3 = scripts\mp\utility\player::get_players_watching(1, 0);
 
-      foreach(var5 in var3) {
-        if(var5 ismlgspectator()) {
-          var5 setclientomnvar("ui_callout_area_id", var2);
+      foreach(var_5 in var_3) {
+        if(var_5 ismlgspectator()) {
+          var_5 setclientomnvar("ui_callout_area_id", var_2);
         }
       }
 
@@ -110,20 +110,20 @@ function setplayercalloutarea(var0, var1) {
     return;
   }
 
-  if(var4 != "none") {
+  if(var_4 != "none") {
     return;
   }
 }
 
-function watchplayerleavingcalloutarea(var0, var1) {
+function watchplayerleavingcalloutarea(var_0, var_1) {
   self endon("death_or_disconnect");
 
   for(;;) {
-    if(self.calloutarea != var1) {
+    if(self.calloutarea != var_1) {
       return;
     }
 
-    if(!self istouching(var0)) {
+    if(!self istouching(var_0)) {
       setplayercalloutarea("none");
       return;
     }

@@ -110,14 +110,14 @@ function murderhole_main() {
   level.griggs_can_smoke_nag = 1;
   scripts\engine\sp\utility::battlechatter_on("axis");
   scripts\engine\sp\utility::battlechatter_on("allies");
-  var0 = getaiarray("allies");
+  var_0 = getaiarray("allies");
 
-  foreach(var2 in var0) {
-    if(isalive(var2)) {
-      var2 scripts\engine\utility::set_movement_speed(190);
+  foreach(var_2 in var_0) {
+    if(isalive(var_2)) {
+      var_2 scripts\engine\utility::set_movement_speed(190);
 
-      if(isDefined(var2.asmname)) {
-        var2 scripts\common\utility::demeanor_override("sprint");
+      if(isDefined(var_2.asmname)) {
+        var_2 scripts\common\utility::demeanor_override("sprint");
       }
     }
   }
@@ -127,12 +127,12 @@ function murderhole_main() {
   thread spawn_murderhole_with_dialogue();
   thread death_hint_watcher_marines_mg_death();
   scripts\engine\utility::flag_wait("obj_update_to_gate");
-  var0 = getaiarray("allies");
+  var_0 = getaiarray("allies");
 
-  foreach(var2 in var0) {
-    if(isDefined(var2)) {
-      var2 allowedstances("stand", "crouch", "prone");
-      var2 scripts\engine\utility::set_movement_speed(180);
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2)) {
+      var_2 allowedstances("stand", "crouch", "prone");
+      var_2 scripts\engine\utility::set_movement_speed(180);
     }
   }
 
@@ -163,19 +163,19 @@ function alley_main() {
   thread mh_building_door_handler();
   level.autosave_proximity_check = 500;
   level.griggs_initial_smoke_reminder_called = 0;
-  var0 = getspawnerarray("murderhole_inital_wave");
-  var1 = getspawnerarray("alley_initial_wave");
-  var2 = getspawnerarray("AQ_technical_1_enemies");
-  var3 = getspawnerarray("AQ_technical_2_enemies");
-  var4 = getspawnerarray("murderhole_reinforcement_wave");
-  var5 = getEnt("fake_actor_spawner", "targetname");
-  var6 = getEnt("upstairs_guy_trigger", "targetname");
+  var_0 = getspawnerarray("murderhole_inital_wave");
+  var_1 = getspawnerarray("alley_initial_wave");
+  var_2 = getspawnerarray("AQ_technical_1_enemies");
+  var_3 = getspawnerarray("AQ_technical_2_enemies");
+  var_4 = getspawnerarray("murderhole_reinforcement_wave");
+  var_5 = getEnt("fake_actor_spawner", "targetname");
+  var_6 = getEnt("upstairs_guy_trigger", "targetname");
   level.enemy_death_count = 0;
-  scripts\engine\sp\utility::array_spawn_function(var0, &murderhole_enemy_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var1, &murderhole_enemy_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var2, &murderhole_enemy_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var3, &murderhole_enemy_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var4, &murderhole_enemy_behavior, "set_MH_trigger");
+  scripts\engine\sp\utility::array_spawn_function(var_0, &murderhole_enemy_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_1, &murderhole_enemy_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_2, &murderhole_enemy_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_3, &murderhole_enemy_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_4, &murderhole_enemy_behavior, "set_MH_trigger");
   thread alley_fallback_handler();
   thread cqb_marines_movement_monitor();
   thread cqb_player_movement_monitor();
@@ -196,36 +196,36 @@ function alley_main() {
   thread streets_smoke_grenade_nag();
   thread streets_smoke_grenade_guaranteed_nag();
   scripts\engine\utility::flag_wait("right_street_save");
-  var7 = getaiarray("allies");
+  var_7 = getaiarray("allies");
 
-  foreach(var9 in var7) {
-    if(isalive(var9)) {
-      var9 scripts\engine\sp\utility::set_attackeraccuracy(0.2);
+  foreach(var_9 in var_7) {
+    if(isalive(var_9)) {
+      var_9 scripts\engine\sp\utility::set_attackeraccuracy(0.2);
 
-      if(isDefined(var9.asmname)) {
-        var9 scripts\common\utility::demeanor_override("combat");
+      if(isDefined(var_9.asmname)) {
+        var_9 scripts\common\utility::demeanor_override("combat");
       }
     }
   }
 
-  foreach(var9 in var7) {
-    if(isDefined(var9) && isDefined(var9.script_forcecolor) && var9.script_forcecolor == "p") {
-      var9 delete();
+  foreach(var_9 in var_7) {
+    if(isDefined(var_9) && isDefined(var_9.script_forcecolor) && var_9.script_forcecolor == "p") {
+      var_9 delete();
     }
   }
 
-  var13 = getEntArray("ied_rider", "targetname");
-  var14 = getEntArray("player_rider", "targetname");
+  var_13 = getEntArray("ied_rider", "targetname");
+  var_14 = getEntArray("player_rider", "targetname");
 
-  foreach(var9 in var13) {
-    if(isDefined(var9)) {
-      var9 delete();
+  foreach(var_9 in var_13) {
+    if(isDefined(var_9)) {
+      var_9 delete();
     }
   }
 
-  foreach(var9 in var14) {
-    if(isDefined(var9)) {
-      var9 delete();
+  foreach(var_9 in var_14) {
+    if(isDefined(var_9)) {
+      var_9 delete();
     }
   }
 
@@ -238,12 +238,12 @@ function alley_main() {
   scripts\engine\utility::flag_wait("right_side_ready_to_cross");
   level notify("turn_off_upstairs_guy");
 
-  if(isDefined(var5)) {
-    var5 scripts\engine\utility::trigger_off();
+  if(isDefined(var_5)) {
+    var_5 scripts\engine\utility::trigger_off();
   }
 
-  if(isDefined(var6)) {
-    var6 scripts\engine\utility::trigger_off();
+  if(isDefined(var_6)) {
+    var_6 scripts\engine\utility::trigger_off();
   }
 
   scripts\engine\utility::flag_wait("murderhole_breach_save_point");
@@ -263,10 +263,10 @@ function mh_building_door_handler() {
 }
 
 function alley_bldg_door_handler() {
-  var0 = scripts\sp\door::get_interactive_door("alley_bldg_door");
-  var0.script_max_left_angle = 100;
-  var0.script_max_right_angle = 100;
-  var0 scripts\sp\door::init_max_yaws();
+  var_0 = scripts\sp\door::get_interactive_door("alley_bldg_door");
+  var_0.script_max_left_angle = 100;
+  var_0.script_max_right_angle = 100;
+  var_0 scripts\sp\door::init_max_yaws();
 }
 
 function murderhole_breach_main() {
@@ -322,11 +322,11 @@ function murderhole_breach_main() {
   level.manpile_monitor.safe_delete_distance = 2000;
   level.manpile_monitor.maximum_weapons = 7;
   thread scripts\sp\maps\marines\marines_gameplay_convoy::vehicle_cleanup_handler();
-  var0 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("g");
+  var_0 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("g");
 
-  foreach(var2 in var0) {
-    if(isDefined(var2)) {
-      var2 delete();
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2)) {
+      var_2 delete();
     }
   }
 
@@ -341,25 +341,25 @@ function murderhole_breach_main() {
   scripts\sp\spawner::killspawner(5);
   scripts\sp\spawner::killspawner(6);
   scripts\sp\spawner::killspawner(7);
-  var4 = [];
-  var4 = scripts\engine\sp\utility::get_living_ai_array("ally_marine", "script_noteworthy");
+  var_4 = [];
+  var_4 = scripts\engine\sp\utility::get_living_ai_array("ally_marine", "script_noteworthy");
 
-  foreach(var2 in var4) {
-    if(isDefined(var2.script_forcecolor) && var2.script_forcecolor == "g") {
-      var2 delete();
+  foreach(var_2 in var_4) {
+    if(isDefined(var_2.script_forcecolor) && var_2.script_forcecolor == "g") {
+      var_2 delete();
     }
 
-    if(isDefined(var2.script_forcecolor) && var2.script_forcecolor == "p") {
-      var2 delete();
+    if(isDefined(var_2.script_forcecolor) && var_2.script_forcecolor == "p") {
+      var_2 delete();
     }
   }
 
-  var4 = [];
-  var4 = scripts\engine\sp\utility::get_living_ai_array("IED_dead_marine", "targetname");
-  scripts\engine\utility::array_delete(var4);
-  var4 = [];
-  var4 = scripts\engine\sp\utility::get_living_ai_array("murderhole_sniped_marine", "targetname");
-  scripts\engine\utility::array_delete(var4);
+  var_4 = [];
+  var_4 = scripts\engine\sp\utility::get_living_ai_array("IED_dead_marine", "targetname");
+  scripts\engine\utility::array_delete(var_4);
+  var_4 = [];
+  var_4 = scripts\engine\sp\utility::get_living_ai_array("murderhole_sniped_marine", "targetname");
+  scripts\engine\utility::array_delete(var_4);
   scripts\engine\sp\utility::activate_trigger("marines_move_to_retreat", "targetname");
 }
 
@@ -387,15 +387,15 @@ function murderhole_catchup() {
 
 function alley_start() {
   scripts\engine\sp\utility::set_start_location("start_alley", [level.player]);
-  var0 = getspawnerarray("ally_marine_alley");
-  thread scripts\sp\maps\marines\marines_utility::marines_checkpoint_forcespawn_allies(var0);
+  var_0 = getspawnerarray("ally_marine_alley");
+  thread scripts\sp\maps\marines\marines_utility::marines_checkpoint_forcespawn_allies(var_0);
   level.mg_damage_owner = getspawner("ghost_actor", "targetname") scripts\engine\sp\utility::spawn_ai();
   level.org = getEnt("org_bullet", "targetname");
-  var1 = scripts\engine\utility::getStructArray("mg_target_1", "targetname");
-  level.org thread scripts\sp\maps\marines\marines_utility::mg_gunner("iw8_ar_akilo47_marines_streets", var1, &scripts\sp\maps\marines\marines_utility::mg_damage_smoke_nag_streets, undefined, "mg_intro_complete", getEnt("mg_house_mg1_suppression", "targetname"));
+  var_1 = scripts\engine\utility::getStructArray("mg_target_1", "targetname");
+  level.org thread scripts\sp\maps\marines\marines_utility::mg_gunner("iw8_ar_akilo47_marines_streets", var_1, &scripts\sp\maps\marines\marines_utility::mg_damage_smoke_nag_streets, undefined, "mg_intro_complete", getEnt("mg_house_mg1_suppression", "targetname"));
   level.griggs = scripts\sp\maps\marines\marines_utility::setup_named_ai("griggs", "Sgt. Griggs", "start_alley_griggs", undefined, undefined, undefined, "Demon 1-2");
-  var2 = getnode("griggs_start_node", "targetname");
-  level.griggs setgoalnode(var2);
+  var_2 = getnode("griggs_start_node", "targetname");
+  level.griggs setgoalnode(var_2);
   thread scripts\sp\maps\marines\marines_utility::ally_equipment_backpack(level.griggs, "smoke_tall");
   thread death_hint_watcher_marines_mg_death();
   thread scripts\sp\maps\marines\marines_gameplay_parkinglot::disable_retreat_exterior_triggers();
@@ -411,8 +411,8 @@ function alley_catchup() {
 
 function murderhole_breach_start() {
   scripts\engine\sp\utility::set_start_location("start_murderhole_breach", [level.player]);
-  var0 = getspawnerarray("ally_marine_MH_breach");
-  thread scripts\sp\maps\marines\marines_utility::marines_checkpoint_forcespawn_allies(var0);
+  var_0 = getspawnerarray("ally_marine_MH_breach");
+  thread scripts\sp\maps\marines\marines_utility::marines_checkpoint_forcespawn_allies(var_0);
   level.org = getEnt("org_bullet", "targetname");
   level.org.dummy_target = (-1191, -18, 104);
   thread mh_building_door_handler();
@@ -420,12 +420,12 @@ function murderhole_breach_start() {
   level.griggs = scripts\sp\maps\marines\marines_utility::setup_named_ai("griggs", "Sgt. Griggs", "start_murderhole_breach_griggs", undefined, undefined, undefined, "Demon 1-2");
   level.mg_damage_owner = getspawner("ghost_actor", "targetname") scripts\engine\sp\utility::spawn_ai();
   level.org = getEnt("org_bullet", "targetname");
-  var1 = scripts\engine\utility::getStructArray("mg_target_1", "targetname");
-  level.org thread scripts\sp\maps\marines\marines_utility::mg_gunner("iw8_ar_akilo47_marines_streets", var1, &scripts\sp\maps\marines\marines_utility::mg_damage_smoke_nag_streets, undefined, "mg_intro_complete", getEnt("mg_house_mg1_suppression", "targetname"));
+  var_1 = scripts\engine\utility::getStructArray("mg_target_1", "targetname");
+  level.org thread scripts\sp\maps\marines\marines_utility::mg_gunner("iw8_ar_akilo47_marines_streets", var_1, &scripts\sp\maps\marines\marines_utility::mg_damage_smoke_nag_streets, undefined, "mg_intro_complete", getEnt("mg_house_mg1_suppression", "targetname"));
   level.org2 = spawn("script_origin", (564.5, 3521.2, 490));
   level.org2.angles += (0, -90, 0);
-  var1 = scripts\engine\utility::getStructArray("mg_target_2", "targetname");
-  level.org2 thread scripts\sp\maps\marines\marines_utility::mg_gunner("iw8_ar_akilo47_marines_streets", var1, &scripts\sp\maps\marines\marines_utility::mg_damage_smoke_nag_streets, undefined, "mg_intro_complete", getEnt("mg_house_mg2_suppression", "targetname"), undefined, undefined, 120);
+  var_1 = scripts\engine\utility::getStructArray("mg_target_2", "targetname");
+  level.org2 thread scripts\sp\maps\marines\marines_utility::mg_gunner("iw8_ar_akilo47_marines_streets", var_1, &scripts\sp\maps\marines\marines_utility::mg_damage_smoke_nag_streets, undefined, "mg_intro_complete", getEnt("mg_house_mg2_suppression", "targetname"), undefined, undefined, 120);
   thread scripts\sp\maps\marines\marines_utility::ally_equipment_backpack(level.griggs, "smoke_tall");
   thread death_hint_watcher_marines_mg_death();
   thread scripts\sp\maps\marines\marines_gameplay_parkinglot::disable_retreat_exterior_triggers();
@@ -450,11 +450,11 @@ function murderhole_breach_catchup() {
 }
 
 function retreat_window_glass_shatter() {
-  var0 = getglassarray("retreat_exit_windows");
+  var_0 = getglassarray("retreat_exit_windows");
 
-  foreach(var2 in var0) {
-    if(isDefined(var2) && !isglassdestroyed(var2)) {
-      destroyglass(var2);
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2) && !isglassdestroyed(var_2)) {
+      destroyglass(var_2);
     }
   }
 }
@@ -474,23 +474,23 @@ function murderhole_1_manager() {
 function track_player_smoke_grenade() {
   self endon("death");
   self endon("smoke_grenade_success");
-  var0 = getEnt("smoke_grenade_volume", "targetname");
+  var_0 = getEnt("smoke_grenade_volume", "targetname");
 
   for(;;) {
-    level.player waittill("grenade_fire", var1, var2);
+    level.player waittill("grenade_fire", var_1, var_2);
 
-    if(!isDefined(var1)) {
+    if(!isDefined(var_1)) {
       return;
     }
 
-    if(!isDefined(var2.basename)) {
+    if(!isDefined(var_2.basename)) {
       return;
     }
 
-    if(var2.basename == "smoke_tall") {
-      var1 waittill("explode", var3);
+    if(var_2.basename == "smoke_tall") {
+      var_1 waittill("explode", var_3);
 
-      if(ispointinvolume(var3, var0)) {
+      if(ispointinvolume(var_3, var_0)) {
         scripts\engine\utility::flag_set("smoke_grenade_success");
         thread scripts\sp\maps\marines\marines_vo::vo_murderhole_alex_throws_smokes_dialogue();
         self notify("smoke_grenade_success");
@@ -512,23 +512,23 @@ function squad_to_alley() {
 }
 
 function alley_track_player_smoke_grenade() {
-  var0 = getEnt("alley_smoke_grenade_volume", "targetname");
+  var_0 = getEnt("alley_smoke_grenade_volume", "targetname");
 
   for(;;) {
-    level.player waittill("grenade_fire", var1, var2);
+    level.player waittill("grenade_fire", var_1, var_2);
 
-    if(!isDefined(var1)) {
+    if(!isDefined(var_1)) {
       return;
     }
 
-    if(!isDefined(var2.basename)) {
+    if(!isDefined(var_2.basename)) {
       return;
     }
 
-    if(var2.basename == "smoke_tall") {
-      var1 waittill("explode", var3);
+    if(var_2.basename == "smoke_tall") {
+      var_1 waittill("explode", var_3);
 
-      if(ispointinvolume(var3, var0)) {
+      if(ispointinvolume(var_3, var_0)) {
         self notify("alley_smoke_grenade_success");
       } else {
         self notify("alley_smoke_grenade_fail");
@@ -552,13 +552,13 @@ function alley_smoke_handler() {
 function check_if_throwing_smoke() {
   while(!scripts\engine\utility::flag("murderhole_breach_save_point")) {
     if(!scripts\engine\utility::flag("nag_temporarily_disabled")) {
-      level.player waittill("grenade_fire", var0, var1);
+      level.player waittill("grenade_fire", var_0, var_1);
 
-      if(!isDefined(var0)) {
+      if(!isDefined(var_0)) {
         return;
       }
 
-      if(!isDefined(var1.basename)) {
+      if(!isDefined(var_1.basename)) {
         return;
       }
 
@@ -576,9 +576,9 @@ function marines_catchup_to_building() {
   scripts\engine\utility::flag_set("enough_enemies_killed");
 
   if(isDefined(level.murderhole_enemies)) {
-    foreach(var1 in level.murderhole_enemies) {
-      if(isDefined(var1)) {
-        var1 kill();
+    foreach(var_1 in level.murderhole_enemies) {
+      if(isDefined(var_1)) {
+        var_1 kill();
       }
     }
   }
@@ -591,14 +591,14 @@ function mh_encounter_handler() {
   level.mg_guys_final_volume = getEnt("mg_guys_final_volume", "targetname");
   level.balcony_vol_1 = getEnt("balcony_vol_1", "targetname");
   level.mh_hallway_monitor = getEnt("MH_hallway_monitor", "targetname");
-  var0 = scripts\engine\utility::getStruct("civ_corpse_struct", "targetname");
+  var_0 = scripts\engine\utility::getStruct("civ_corpse_struct", "targetname");
   scripts\engine\utility::flag_wait("marine_dont_shoot");
   thread clean_streets_enemies();
-  var1 = getaiarray("allies");
+  var_1 = getaiarray("allies");
 
-  foreach(var3 in var1) {
-    if(isDefined(var3.script_forcecolor) && var3.script_forcecolor == "r") {
-      level.custom_marine = var3;
+  foreach(var_3 in var_1) {
+    if(isDefined(var_3.script_forcecolor) && var_3.script_forcecolor == "r") {
+      level.custom_marine = var_3;
     }
   }
 
@@ -633,8 +633,8 @@ function grenade_swap_clear() {
 function spawn_murderhole_with_dialogue() {
   level.mg_damage_owner = getspawner("ghost_actor", "targetname") scripts\engine\sp\utility::spawn_ai();
   level.org = getEnt("org_bullet", "targetname");
-  var0 = scripts\engine\utility::getStructArray("mg_target_1", "targetname");
-  level.org thread scripts\sp\maps\marines\marines_utility::mg_gunner("iw8_ar_akilo47_marines_streets", var0, &scripts\sp\maps\marines\marines_utility::mg_damage_smoke_nag_streets, &scripts\sp\maps\marines\marines_utility::mg_intro_sequence_streets, "mg_intro_complete", getEnt("mg_house_mg1_suppression", "targetname"));
+  var_0 = scripts\engine\utility::getStructArray("mg_target_1", "targetname");
+  level.org thread scripts\sp\maps\marines\marines_utility::mg_gunner("iw8_ar_akilo47_marines_streets", var_0, &scripts\sp\maps\marines\marines_utility::mg_damage_smoke_nag_streets, &scripts\sp\maps\marines\marines_utility::mg_intro_sequence_streets, "mg_intro_complete", getEnt("mg_house_mg1_suppression", "targetname"));
   thread clean_fake_actors();
   thread marine01_check_if_in_position();
   thread marine03_check_if_in_position();
@@ -668,72 +668,72 @@ function smoke_hint_handler() {
 }
 
 function mg_house_gunner_1_init() {
-  var0 = getspawner("mg_house_gunner_1_spawner", "targetname");
-  level.mg_house_gunner_1 = var0 scripts\engine\sp\utility::spawn_ai();
-  var1 = scripts\sp\utility::make_weapon("iw8_lm_pkilo");
-  level.mg_house_gunner_1 scripts\anim\shared::forceuseweapon(var1, "primary");
+  var_0 = getspawner("mg_house_gunner_1_spawner", "targetname");
+  level.mg_house_gunner_1 = var_0 scripts\engine\sp\utility::spawn_ai();
+  var_1 = scripts\sp\utility::make_weapon("iw8_lm_pkilo");
+  level.mg_house_gunner_1 scripts\anim\shared::forceuseweapon(var_1, "primary");
   level.mg_house_gunner_1.no_pistol_switch = 1;
   level.mg_house_gunner_1.sidearm = isundefinedweapon();
   level.mg_house_gunner_1.sidearm = "none";
   thread mg_team_alert_monitor();
-  var2 = getEnt("mg_house_gunner_1_target", "targetname");
-  mg_guy_shared_behavior(level.mg_house_gunner_1, var2);
+  var_2 = getEnt("mg_house_gunner_1_target", "targetname");
+  mg_guy_shared_behavior(level.mg_house_gunner_1, var_2);
 }
 
 function mg_house_gunner_2_init() {
-  var0 = getspawner("mg_house_gunner_2_spawner", "targetname");
-  level.mg_house_gunner_2 = var0 scripts\engine\sp\utility::spawn_ai();
-  var1 = scripts\sp\utility::make_weapon("iw8_lm_pkilo");
-  level.mg_house_gunner_2 scripts\anim\shared::forceuseweapon(var1, "primary");
+  var_0 = getspawner("mg_house_gunner_2_spawner", "targetname");
+  level.mg_house_gunner_2 = var_0 scripts\engine\sp\utility::spawn_ai();
+  var_1 = scripts\sp\utility::make_weapon("iw8_lm_pkilo");
+  level.mg_house_gunner_2 scripts\anim\shared::forceuseweapon(var_1, "primary");
   level.mg_house_gunner_2.no_pistol_switch = 1;
   level.mg_house_gunner_2.sidearm = isundefinedweapon();
   level.mg_house_gunner_2.sidearm = "none";
   thread mg_team_alert_monitor();
-  var2 = getEnt("mg_house_gunner_2_target", "targetname");
-  mg_guy_shared_behavior(level.mg_house_gunner_2, var2);
+  var_2 = getEnt("mg_house_gunner_2_target", "targetname");
+  mg_guy_shared_behavior(level.mg_house_gunner_2, var_2);
 }
 
 function mg_house_patroller_init() {
-  var0 = getspawner("mg_house_patroller_spawner", "targetname");
-  level.mg_house_patroller = var0 scripts\engine\sp\utility::spawn_ai();
-  var1 = scripts\sp\utility::make_weapon("iw8_lm_pkilo");
-  level.mg_house_patroller scripts\anim\shared::forceuseweapon(var1, "primary");
+  var_0 = getspawner("mg_house_patroller_spawner", "targetname");
+  level.mg_house_patroller = var_0 scripts\engine\sp\utility::spawn_ai();
+  var_1 = scripts\sp\utility::make_weapon("iw8_lm_pkilo");
+  level.mg_house_patroller scripts\anim\shared::forceuseweapon(var_1, "primary");
   level.mg_house_patroller.no_pistol_switch = 1;
   level.mg_house_patroller.sidearm = isundefinedweapon();
   level.mg_house_patroller.sidearm = "none";
   thread mg_team_alert_monitor();
-  var2 = getEnt("mg_house_patroller_target", "targetname");
-  mg_guy_shared_behavior(level.mg_house_patroller, var2);
+  var_2 = getEnt("mg_house_patroller_target", "targetname");
+  mg_guy_shared_behavior(level.mg_house_patroller, var_2);
 }
 
 function mg_house_windowguy_init() {
-  var0 = getspawner("mg_house_windowguy_spawner", "targetname");
-  level.mg_house_windowguy = var0 scripts\engine\sp\utility::spawn_ai();
-  var1 = scripts\sp\utility::make_weapon("iw8_lm_pkilo");
-  level.mg_house_windowguy scripts\anim\shared::forceuseweapon(var1, "primary");
+  var_0 = getspawner("mg_house_windowguy_spawner", "targetname");
+  level.mg_house_windowguy = var_0 scripts\engine\sp\utility::spawn_ai();
+  var_1 = scripts\sp\utility::make_weapon("iw8_lm_pkilo");
+  level.mg_house_windowguy scripts\anim\shared::forceuseweapon(var_1, "primary");
   level.mg_house_windowguy.no_pistol_switch = 1;
   level.mg_house_windowguy.sidearm = isundefinedweapon();
   level.mg_house_windowguy.sidearm = "none";
   thread mg_team_alert_monitor(level.mg_house_windowguy);
-  var2 = getEnt("mg_house_windowguy_target", "targetname");
-  mg_guy_shared_behavior(level.mg_house_windowguy, var2);
+  var_2 = getEnt("mg_house_windowguy_target", "targetname");
+  mg_guy_shared_behavior(level.mg_house_windowguy, var_2);
 }
 
-function mg_guy_shared_behavior(var0) {
+function mg_guy_shared_behavior(var_0) {
   self endon("death");
   level.window_final_vol = getEnt("window_final_vol", "targetname");
   level.gunner1_final_vol = getEnt("gunner1_final_vol", "targetname");
   level.gunner2_final_vol = getEnt("gunner2_final_vol", "targetname");
   level.patroller_final_vol = getEnt("patroller_final_vol", "targetname");
-  self setentitytarget(var0);
+  self setentitytarget(var_0);
   GscBinSkip4(0x35);
 }
 
 function mg_start_shooting_monitor() {
-  var0 = getEnt("MG_shooting_monitor", "targetname");
+  var_0 = getEnt("MG_shooting_monitor", "targetname");
 
   while(!scripts\engine\utility::flag("mg_team_alerted")) {
-    if(level.player istouching(var0)) {
+    if(level.player istouching(var_0)) {
       scripts\engine\sp\utility::disable_dontevershoot();
     } else {
       scripts\engine\sp\utility::enable_dontevershoot();
@@ -779,22 +779,22 @@ function mg_team_destination_handler() {
 }
 
 function alley_guy_cleanup() {
-  var0 = scripts\engine\sp\utility::get_living_ai("upstairs_guy", "targetname");
+  var_0 = scripts\engine\sp\utility::get_living_ai("upstairs_guy", "targetname");
   scripts\engine\utility::flag_wait("tripwire_warning");
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
     return;
   }
 }
 
-function mg_team_alert_monitor(var0) {
+function mg_team_alert_monitor(var_0) {
   scripts\engine\utility::flag_wait("player_ready_for_marine");
   scripts\engine\utility::waittill_any("damage", "pain", "death", "player_spotted", "enemy_visible");
   scripts\engine\utility::flag_set("mg_team_alerted");
 
-  if(isDefined(var0)) {
-    if(var0) {
+  if(isDefined(var_0)) {
+    if(var_0) {
       self.ignoreme = 1;
       return;
     }
@@ -810,18 +810,18 @@ function marine_set_pacifist() {
   scripts\engine\sp\utility::activate_trigger_with_targetname("marine_to_window");
   thread mg_cleanup();
   scripts\engine\utility::flag_wait("mg_guys_dead");
-  var0 = getEntArray("MH_upstairs_color", "script_noteworthy");
+  var_0 = getEntArray("MH_upstairs_color", "script_noteworthy");
 
-  foreach(var2 in var0) {
-    var2 scripts\engine\utility::trigger_off();
+  foreach(var_2 in var_0) {
+    var_2 scripts\engine\utility::trigger_off();
   }
 }
 
 function notify_whizby_from_player() {
   for(;;) {
-    self waittill("bulletwhizby", var0);
+    self waittill("bulletwhizby", var_0);
 
-    if(scripts\engine\utility::is_equal(var0, level.player)) {
+    if(scripts\engine\utility::is_equal(var_0, level.player)) {
       scripts\engine\utility::flag_set("mg_team_alerted");
     }
   }
@@ -841,21 +841,21 @@ function ied_pinned_marine_handler() {
   level.pinned_marine scripts\engine\sp\utility::set_allowdeath(1);
   level.pinned_marine thread scripts\sp\maps\marines\marines_utility::marine_callsign_picker();
   level.pinned_marine scripts\common\ai::gun_remove();
-  var0 = scripts\engine\utility::getStruct("ied_scene", "targetname");
+  var_0 = scripts\engine\utility::getStruct("ied_scene", "targetname");
 
   if(isDefined(level.pinned_marine) && isalive(level.pinned_marine)) {
-    var0 scripts\common\anim::anim_single_solo(level.pinned_marine, "ambush_ied");
+    var_0 scripts\common\anim::anim_single_solo(level.pinned_marine, "ambush_ied");
   }
 
   if(isDefined(level.pinned_marine) && isalive(level.pinned_marine)) {
-    var0 scripts\common\anim::anim_loop_solo(level.pinned_marine, "ambush_ied_idle");
+    var_0 scripts\common\anim::anim_loop_solo(level.pinned_marine, "ambush_ied_idle");
     return;
   }
 }
 
 function ied_vignette_handler() {
-  var0 = scripts\engine\utility::getStruct("griggs_blindfire_struct", "targetname");
-  var1 = getnode("griggs_start_node", "targetname");
+  var_0 = scripts\engine\utility::getStruct("griggs_blindfire_struct", "targetname");
+  var_1 = getnode("griggs_start_node", "targetname");
   level.griggs.ignoreme = 1;
   scripts\engine\utility::flag_wait("griggs_at_mg_cover_node");
   level.griggs.ignoreme = 0;
@@ -863,8 +863,8 @@ function ied_vignette_handler() {
   wait 1;
 
   if(!scripts\engine\utility::flag("mg_intro_complete")) {
-    if(scripts\engine\utility::is_equal(var1, level.griggs.node)) {
-      var0 thread scripts\common\anim::anim_single_solo(level.griggs, "blindfire");
+    if(scripts\engine\utility::is_equal(var_1, level.griggs.node)) {
+      var_0 thread scripts\common\anim::anim_single_solo(level.griggs, "blindfire");
       return;
     }
 
@@ -878,23 +878,23 @@ function autosave_after_shellshock() {
 }
 
 function clean_fake_actors() {
-  var0 = [];
-  var0 = scripts\engine\sp\utility::get_living_ai_array("fake_actor", "script_noteworthy");
-  scripts\engine\utility::array_delete(var0);
+  var_0 = [];
+  var_0 = scripts\engine\sp\utility::get_living_ai_array("fake_actor", "script_noteworthy");
+  scripts\engine\utility::array_delete(var_0);
 }
 
 function clean_streets_enemies() {
-  var0 = [];
-  var0 = scripts\engine\sp\utility::get_living_ai_array("MH_enemy", "script_noteworthy");
-  scripts\engine\utility::array_delete(var0);
+  var_0 = [];
+  var_0 = scripts\engine\sp\utility::get_living_ai_array("MH_enemy", "script_noteworthy");
+  scripts\engine\utility::array_delete(var_0);
 }
 
 function right_street_autosave() {
   scripts\engine\utility::flag_wait("right_street_save");
   level.org2 = spawn("script_origin", (564.5, 3521.2, 490));
   level.org2.angles += (0, -90, 0);
-  var0 = scripts\engine\utility::getStructArray("mg_target_2", "targetname");
-  level.org2 thread scripts\sp\maps\marines\marines_utility::mg_gunner("iw8_ar_akilo47_marines_streets", var0, &scripts\sp\maps\marines\marines_utility::mg_damage_smoke_nag_streets, undefined, "mg_intro_complete", getEnt("mg_house_mg2_suppression", "targetname"), undefined, undefined, 120);
+  var_0 = scripts\engine\utility::getStructArray("mg_target_2", "targetname");
+  level.org2 thread scripts\sp\maps\marines\marines_utility::mg_gunner("iw8_ar_akilo47_marines_streets", var_0, &scripts\sp\maps\marines\marines_utility::mg_damage_smoke_nag_streets, undefined, "mg_intro_complete", getEnt("mg_house_mg2_suppression", "targetname"), undefined, undefined, 120);
 
   while(!isDefined(level.org) || !isDefined(level.org2)) {
     waitframe();
@@ -938,18 +938,18 @@ function activate_mh_trigger() {
 
   scripts\engine\utility::flag_set("stop_smoke_nag_in_streets");
   scripts\engine\utility::flag_set("nag_temporarily_disabled");
-  var0 = getEnt("ally_smoke_origin1", "targetname");
-  var1 = getEnt("ally_smoke_origin2", "targetname");
-  var2 = getEnt("ally_smoke_origin3", "targetname");
-  var3 = getEnt("ally_smoke_destination1", "targetname");
-  var4 = getEnt("ally_smoke_destination2", "targetname");
-  var5 = getEnt("ally_smoke_destination3", "targetname");
+  var_0 = getEnt("ally_smoke_origin1", "targetname");
+  var_1 = getEnt("ally_smoke_origin2", "targetname");
+  var_2 = getEnt("ally_smoke_origin3", "targetname");
+  var_3 = getEnt("ally_smoke_destination1", "targetname");
+  var_4 = getEnt("ally_smoke_destination2", "targetname");
+  var_5 = getEnt("ally_smoke_destination3", "targetname");
   thread scripts\sp\maps\marines\marines_vo::vo_alley_griggs_final_smoke_dialogue();
-  magicgrenade("smoke_tall", var0.origin, var3.origin, 2);
+  magicgrenade("smoke_tall", var_0.origin, var_3.origin, 2);
   wait 0.5;
-  magicgrenade("smoke_tall", var1.origin, var4.origin, 2);
+  magicgrenade("smoke_tall", var_1.origin, var_4.origin, 2);
   wait 2.5;
-  magicgrenade("smoke_tall", var2.origin, var5.origin, 2);
+  magicgrenade("smoke_tall", var_2.origin, var_5.origin, 2);
   wait 0.5;
   scripts\engine\sp\utility::activate_trigger("MH_bldg_color", "targetname");
 
@@ -969,24 +969,24 @@ function activate_right_street_trigger() {
     thread scripts\sp\maps\marines\marines_vo::vo_murderhole_marine_throws_smokes_dialogue();
   }
 
-  var0 = getEnt("smoke_origin1", "targetname");
-  var1 = getEnt("smoke_origin2", "targetname");
-  var2 = getEnt("smoke_origin3", "targetname");
-  var3 = getEnt("smoke_destination1", "targetname");
-  var4 = getEnt("smoke_destination2", "targetname");
-  var5 = getEnt("smoke_destination3", "targetname");
+  var_0 = getEnt("smoke_origin1", "targetname");
+  var_1 = getEnt("smoke_origin2", "targetname");
+  var_2 = getEnt("smoke_origin3", "targetname");
+  var_3 = getEnt("smoke_destination1", "targetname");
+  var_4 = getEnt("smoke_destination2", "targetname");
+  var_5 = getEnt("smoke_destination3", "targetname");
 
   if(!scripts\engine\utility::flag("smoke_grenade_success")) {
-    magicgrenade("smoke_tall", var0.origin, var3.origin, 2);
+    magicgrenade("smoke_tall", var_0.origin, var_3.origin, 2);
     wait 1.5;
   }
 
   scripts\engine\sp\utility::activate_trigger("alley_start_trigger", "targetname");
-  magicgrenade("smoke_tall", var0.origin, var3.origin, 2);
+  magicgrenade("smoke_tall", var_0.origin, var_3.origin, 2);
   wait 0.5;
-  magicgrenade("smoke_tall", var1.origin, var4.origin, 2);
+  magicgrenade("smoke_tall", var_1.origin, var_4.origin, 2);
   wait 0.5;
-  magicgrenade("smoke_tall", var2.origin, var5.origin, 2);
+  magicgrenade("smoke_tall", var_2.origin, var_5.origin, 2);
   wait 1.5;
   level.b_smoke = 1;
   thread scripts\sp\maps\marines\marines_vo::vo_murderhole_griggs_smoke_advance_dialogue();
@@ -1005,9 +1005,9 @@ function player_shooting_murderhole_monitor() {
   level.i_player_shooting_murderhole_monitor_counter = 0;
 
   while(!scripts\engine\utility::flag("murderhole_detached")) {
-    self waittill("damage", var0, var1);
+    self waittill("damage", var_0, var_1);
 
-    if(var1 == level.player && !level.b_murderhole_suppression_tutorialized && !scripts\engine\utility::flag("murderhole_detached")) {
+    if(var_1 == level.player && !level.b_murderhole_suppression_tutorialized && !scripts\engine\utility::flag("murderhole_detached")) {
       wait 1;
       scripts\sp\maps\marines\marines_vo::vo_murderhole_mg_dontshoot_nag_dialogue();
       level.i_player_shooting_murderhole_monitor_counter++;
@@ -1023,7 +1023,7 @@ function player_shooting_murderhole_monitor() {
   }
 }
 
-function murderhole_enemy_behavior(var0) {
+function murderhole_enemy_behavior(var_0) {
   self endon("death");
   self endon("stop_closing");
 
@@ -1042,11 +1042,11 @@ function murderhole_enemy_behavior(var0) {
   self setgoalentity(level.player, randomintrange(2500, 10000));
   scripts\engine\sp\utility::set_goalRadius(1500);
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  scripts\engine\utility::flag_wait(var0);
+  scripts\engine\utility::flag_wait(var_0);
   scripts\engine\sp\utility::set_goalRadius(800);
 
   while(self.goalradius > 100) {
@@ -1062,9 +1062,9 @@ function murderhole_enemy_cleanup() {
 
 function death_hint_watcher_marines_mg_death() {
   level endon("mg_ceasefire");
-  level.player waittill("death", var0);
+  level.player waittill("death", var_0);
 
-  if(var0 == level.mg_damage_owner) {
+  if(var_0 == level.mg_damage_owner) {
     scripts\sp\player_death::set_custom_death_quote(401);
     return;
   }
@@ -1088,10 +1088,10 @@ function stairs_tripwire_approach_call() {
 }
 
 function stairs_tripwire_lookat_monitor() {
-  var0 = scripts\engine\utility::getStruct("stairwell_tripwire_lookat_ref", "targetname");
+  var_0 = scripts\engine\utility::getStruct("stairwell_tripwire_lookat_ref", "targetname");
 
   while(!scripts\engine\utility::flag("stairs_tripwire_cleared")) {
-    if(!sighttracepassed(level.player getEye(), var0.origin, 0, level.player) || !(distance2d(level.player.origin, var0.origin) < 300)) {
+    if(!sighttracepassed(level.player getEye(), var_0.origin, 0, level.player) || !(distance2d(level.player.origin, var_0.origin) < 300)) {
       scripts\engine\utility::flag_set("stairs_tripwire_lookedat");
     } else {
       scripts\engine\utility::flag_clear("stairs_tripwire_lookedat");
@@ -1118,27 +1118,27 @@ function marine_disarm_nag() {
 }
 
 function spawn_rpg_support() {
-  var0 = getspawner("initial_support_enemy_right", "targetname");
-  level.right_guy = var0 scripts\engine\sp\utility::spawn_ai();
-  var1 = getspawner("initial_support_enemy_left", "targetname");
-  level.left_guy = var1 scripts\engine\sp\utility::spawn_ai();
+  var_0 = getspawner("initial_support_enemy_right", "targetname");
+  level.right_guy = var_0 scripts\engine\sp\utility::spawn_ai();
+  var_1 = getspawner("initial_support_enemy_left", "targetname");
+  level.left_guy = var_1 scripts\engine\sp\utility::spawn_ai();
   level.left_guy.ignoreme = 1;
   level.left_guy.ignoreall = 1;
   level.right_guy.ignoreme = 1;
   level.right_guy.ignoreall = 1;
   level.left_guy.baseaccuracy = 1;
   level.right_guy.baseaccuracy = 1;
-  var2 = getnode("rpg_prone_node", "targetname");
-  var3 = getEnt("rpg_vol", "targetname");
-  var4 = getnode("rpg_prone_node_2", "targetname");
-  var5 = getEnt("rpg_vol_2", "targetname");
+  var_2 = getnode("rpg_prone_node", "targetname");
+  var_3 = getEnt("rpg_vol", "targetname");
+  var_4 = getnode("rpg_prone_node_2", "targetname");
+  var_5 = getEnt("rpg_vol_2", "targetname");
   scripts\engine\utility::flag_wait("rpg_spawned");
-  thread rpg_guys_attack_start(level.right_guy, var3);
-  thread rpg_guys_attack_start(level.left_guy, var5);
+  thread rpg_guys_attack_start(level.right_guy, var_3);
+  thread rpg_guys_attack_start(level.left_guy, var_5);
   thread rpg_kill_handler();
   thread scripts\sp\maps\marines\marines_vo::vo_alley_marine_pinned_down_dialogue();
-  var2 disconnectnode(var2);
-  var4 disconnectnode(var4);
+  var_2 disconnectnode(var_2);
+  var_4 disconnectnode(var_4);
   scripts\engine\utility::flag_wait("ready_to_cross_street");
 
   if(isDefined(level.right_guy) && isalive(level.right_guy)) {
@@ -1161,13 +1161,13 @@ function spawn_rpg_support() {
   }
 }
 
-function rpg_guys_attack_start(var0, var1) {
+function rpg_guys_attack_start(var_0, var_1) {
   self endon("death");
-  wait var1;
+  wait var_1;
 
   if(isDefined(self) && isalive(self)) {
     self cleargoalvolume();
-    self setgoalvolumeauto(var0);
+    self setgoalvolumeauto(var_0);
     self.ignoreall = 0;
     self getenemyinfo(level.player);
     return;
@@ -1176,17 +1176,17 @@ function rpg_guys_attack_start(var0, var1) {
 
 function replace_fake_actors_with_real() {
   scripts\engine\utility::waittill_any("goal", "death");
-  var0 = getspawnerarray("real_actor_swap_spawner");
-  scripts\engine\sp\utility::array_spawn(var0);
+  var_0 = getspawnerarray("real_actor_swap_spawner");
+  scripts\engine\sp\utility::array_spawn(var_0);
 }
 
-function waittill_struct_within_fov_2(var0, var1) {
-  var2 = scripts\engine\utility::getStruct(var0, "targetname");
-  var3 = getEnt(var1, "targetname");
-  var4 = cos(15);
+function waittill_struct_within_fov_2(var_0, var_1) {
+  var_2 = scripts\engine\utility::getStruct(var_0, "targetname");
+  var_3 = getEnt(var_1, "targetname");
+  var_4 = cos(15);
 
   for(;;) {
-    if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var2.origin, var4) && level.player istouching(var3)) {
+    if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_2.origin, var_4) && level.player istouching(var_3)) {
       break;
     }
 
@@ -1199,26 +1199,26 @@ function murderhole_house_dead_mom() {
 }
 
 function aq_technical_spawners() {
-  var0 = 0;
+  var_0 = 0;
   scripts\engine\utility::flag_wait("technical_spawn");
-  var1 = scripts\common\vehicle::spawn_vehicle_from_targetname("AQ_technical_2");
-  var1.targetname = "AQ_technical_2";
-  var1 scripts\engine\sp\utility::assign_animtree("alleyTruck");
-  var1.animname = "alleyTruck";
-  var2 = getEnt("patharound_truck_2_clip", "targetname");
-  var3 = scripts\engine\utility::getStruct("technical2Struct", "targetname");
+  var_1 = scripts\common\vehicle::spawn_vehicle_from_targetname("AQ_technical_2");
+  var_1.targetname = "AQ_technical_2";
+  var_1 scripts\engine\sp\utility::assign_animtree("alleyTruck");
+  var_1.animname = "alleyTruck";
+  var_2 = getEnt("patharound_truck_2_clip", "targetname");
+  var_3 = scripts\engine\utility::getStruct("technical2Struct", "targetname");
   waitframe();
-  var1 thread scripts\sp\maps\marines\marines_background::ground_vehicle_sound_handler();
-  thread alleytruckdropoff(var3, var1, "truckDropOff", 7.5, "truck_2_reached", "truck_2_destroyed");
+  var_1 thread scripts\sp\maps\marines\marines_background::ground_vehicle_sound_handler();
+  thread alleytruckdropoff(var_3, var_1, "truckDropOff", 7.5, "truck_2_reached", "truck_2_destroyed");
   thread rumble_on_death();
-  var4 = scripts\common\vehicle::spawn_vehicle_from_targetname("AQ_technical_1");
-  var4.targetname = "AQ_technical_1";
-  var4 scripts\engine\sp\utility::assign_animtree("alleyTruck2");
-  var4.animname = "alleyTruck2";
-  var5 = scripts\engine\utility::getStruct("technical1Struct", "targetname");
+  var_4 = scripts\common\vehicle::spawn_vehicle_from_targetname("AQ_technical_1");
+  var_4.targetname = "AQ_technical_1";
+  var_4 scripts\engine\sp\utility::assign_animtree("alleyTruck2");
+  var_4.animname = "alleyTruck2";
+  var_5 = scripts\engine\utility::getStruct("technical1Struct", "targetname");
   waitframe();
-  var4 thread scripts\sp\maps\marines\marines_background::ground_vehicle_sound_handler();
-  thread alleytruckdropoff(var3, var4, "truckDropOff", 6, "truck_1_reached");
+  var_4 thread scripts\sp\maps\marines\marines_background::ground_vehicle_sound_handler();
+  thread alleytruckdropoff(var_3, var_4, "truckDropOff", 6, "truck_1_reached");
   thread rumble_on_death();
   wait 1.5;
   thread scripts\sp\maps\marines\marines_vo::vo_alley_marine_technical_arrive_dialogue();
@@ -1251,82 +1251,82 @@ function aq_technical_spawners() {
   scripts\engine\utility::flag_set("ready_to_cross_street");
   scripts\engine\utility::flag_wait("flag_lobby_entered");
 
-  if(isDefined(var4)) {
-    var4 delete();
+  if(isDefined(var_4)) {
+    var_4 delete();
   }
 
-  if(isDefined(var1)) {
-    var1 delete();
+  if(isDefined(var_1)) {
+    var_1 delete();
     return;
   }
 }
 
-function alleytruckdropoff(var0, var1, var2, var3, var4, var5) {
-  var6 = scripts\engine\utility::getfx("vfx_vehicle_treadfx_dust");
+function alleytruckdropoff(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = scripts\engine\utility::getfx("vfx_vehicle_treadfx_dust");
 
-  if(isDefined(var0)) {
-    playFXOnTag(var6, var0, "tag_wheel_back_left");
-    playFXOnTag(var6, var0, "tag_wheel_back_right");
-    playFXOnTag(var6, var0, "tag_wheel_front_left");
-    playFXOnTag(var6, var0, "tag_wheel_front_right");
-    thread truck_treadfx_health_hack(var0);
+  if(isDefined(var_0)) {
+    playFXOnTag(var_6, var_0, "tag_wheel_back_left");
+    playFXOnTag(var_6, var_0, "tag_wheel_back_right");
+    playFXOnTag(var_6, var_0, "tag_wheel_front_left");
+    playFXOnTag(var_6, var_0, "tag_wheel_front_right");
+    thread truck_treadfx_health_hack(var_0);
   }
 
-  if(isDefined(var0)) {
+  if(isDefined(var_0)) {
     thread aq_technical_unload_watcher();
-    thread scripts\common\anim::anim_single_solo(var0, var1);
-    var0 setanimrate(var0 scripts\engine\utility::getanim(var1), 1.3);
-    thread truck_dead_or_alive_monitor(var0, var3);
+    thread scripts\common\anim::anim_single_solo(var_0, var_1);
+    var_0 setanimrate(var_0 scripts\engine\utility::getanim(var_1), 1.3);
+    thread truck_dead_or_alive_monitor(var_0, var_3);
   }
 
-  wait var2 / 1.3;
+  wait var_2 / 1.3;
 
-  if(isDefined(var5)) {
-    var5 movez(-9999, 0.5, 0.25, 0.25);
+  if(isDefined(var_5)) {
+    var_5 movez(-9999, 0.5, 0.25, 0.25);
     waitframe();
-    var5 connectpaths();
+    var_5 connectpaths();
   }
 
-  if(isalive(var0)) {
-    stoptreadfx(var0, var6);
+  if(isalive(var_0)) {
+    stoptreadfx(var_0, var_6);
   }
 
-  if(isDefined(var0)) {
-    var0 connectpaths();
+  if(isDefined(var_0)) {
+    var_0 connectpaths();
   }
 
   wait 0.5;
 
-  if(isDefined(var0)) {
-    var0 scripts\engine\sp\utility::anim_stopanimScripted();
-    var0 disconnectPaths();
-    var0 scripts\common\vehicle::vehicle_unload();
+  if(isDefined(var_0)) {
+    var_0 scripts\engine\sp\utility::anim_stopanimScripted();
+    var_0 disconnectPaths();
+    var_0 scripts\common\vehicle::vehicle_unload();
     return;
   }
 }
 
-function truck_treadfx_health_hack(var0) {
+function truck_treadfx_health_hack(var_0) {
   self endon("entitydeleted");
   self.health = 99999;
   self.hack_health = 2000;
 
   for(;;) {
-    self waittill("damage", var1, var2, var3, var4, var5);
+    self waittill("damage", var_1, var_2, var_3, var_4, var_5);
 
-    if(isDefined(var5)) {
-      if(var5 == "MOD_GRENADE_SPLASH" || var5 == "MOD_PROJECTILE_SPLASH") {
-        var1 *= 12;
+    if(isDefined(var_5)) {
+      if(var_5 == "MOD_GRENADE_SPLASH" || var_5 == "MOD_PROJECTILE_SPLASH") {
+        var_1 *= 12;
       }
 
-      if(var5 == "MOD_GRENADE" || var5 == "MOD_PROJECTILE") {
-        var1 *= 5;
+      if(var_5 == "MOD_GRENADE" || var_5 == "MOD_PROJECTILE") {
+        var_1 *= 5;
       }
     }
 
-    self.hack_health -= var1;
+    self.hack_health -= var_1;
 
     if(self.hack_health <= 0) {
-      stoptreadfx(var0);
+      stoptreadfx(var_0);
       waitframe();
       self kill();
       break;
@@ -1334,37 +1334,37 @@ function truck_treadfx_health_hack(var0) {
   }
 }
 
-function stoptreadfx(var0) {
-  stopFXOnTag(var0, self, "tag_wheel_back_left");
-  stopFXOnTag(var0, self, "tag_wheel_back_right");
-  stopFXOnTag(var0, self, "tag_wheel_front_left");
-  stopFXOnTag(var0, self, "tag_wheel_front_right");
+function stoptreadfx(var_0) {
+  stopFXOnTag(var_0, self, "tag_wheel_back_left");
+  stopFXOnTag(var_0, self, "tag_wheel_back_right");
+  stopFXOnTag(var_0, self, "tag_wheel_front_left");
+  stopFXOnTag(var_0, self, "tag_wheel_front_right");
 }
 
 function final_wave_enemies() {
-  var0 = getEnt("final_wave_yard_spawn_trigger", "targetname");
-  var1 = getEnt("final_wave_MH_spawn_trigger", "targetname");
-  var2 = getEnt("final_wave_shed_spawn_trigger", "targetname");
-  var3 = getspawnerarray("murderhole_final_wave_MH");
-  var4 = getspawnerarray("murderhole_final_wave_yard");
-  var5 = getspawnerarray("murderhole_final_wave_shed");
-  scripts\engine\sp\utility::array_spawn_function(var4, &murderhole_enemy_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var3, &murderhole_enemy_behavior);
-  scripts\engine\sp\utility::array_spawn_function(var5, &murderhole_enemy_behavior);
+  var_0 = getEnt("final_wave_yard_spawn_trigger", "targetname");
+  var_1 = getEnt("final_wave_MH_spawn_trigger", "targetname");
+  var_2 = getEnt("final_wave_shed_spawn_trigger", "targetname");
+  var_3 = getspawnerarray("murderhole_final_wave_MH");
+  var_4 = getspawnerarray("murderhole_final_wave_yard");
+  var_5 = getspawnerarray("murderhole_final_wave_shed");
+  scripts\engine\sp\utility::array_spawn_function(var_4, &murderhole_enemy_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_3, &murderhole_enemy_behavior);
+  scripts\engine\sp\utility::array_spawn_function(var_5, &murderhole_enemy_behavior);
   scripts\engine\utility::flag_wait_any("final_wave_from_yard", "final_wave_from_MH", "final_wave_from_shed");
-  var6 = getaiarray("axis");
+  var_6 = getaiarray("axis");
 
   if(scripts\engine\utility::flag("final_wave_from_yard")) {
-    if(isDefined(var1)) {
-      var1 scripts\engine\utility::trigger_off();
+    if(isDefined(var_1)) {
+      var_1 scripts\engine\utility::trigger_off();
     }
 
-    if(isDefined(var2)) {
-      var2 scripts\engine\utility::trigger_off();
+    if(isDefined(var_2)) {
+      var_2 scripts\engine\utility::trigger_off();
     }
 
-    if(var6.size < 16) {
-      scripts\engine\sp\utility::array_spawn(var4);
+    if(var_6.size < 16) {
+      scripts\engine\sp\utility::array_spawn(var_4);
       return;
     }
 
@@ -1372,32 +1372,32 @@ function final_wave_enemies() {
   }
 
   if(scripts\engine\utility::flag("final_wave_from_shed")) {
-    if(isDefined(var1)) {
-      var1 scripts\engine\utility::trigger_off();
+    if(isDefined(var_1)) {
+      var_1 scripts\engine\utility::trigger_off();
     }
 
-    if(isDefined(var0)) {
-      var0 scripts\engine\utility::trigger_off();
+    if(isDefined(var_0)) {
+      var_0 scripts\engine\utility::trigger_off();
     }
 
-    if(var6.size < 16) {
-      scripts\engine\sp\utility::array_spawn(var5);
+    if(var_6.size < 16) {
+      scripts\engine\sp\utility::array_spawn(var_5);
       return;
     }
 
     return;
   }
 
-  if(isDefined(var0)) {
-    var0 scripts\engine\utility::trigger_off();
+  if(isDefined(var_0)) {
+    var_0 scripts\engine\utility::trigger_off();
   }
 
-  if(isDefined(var2)) {
-    var2 scripts\engine\utility::trigger_off();
+  if(isDefined(var_2)) {
+    var_2 scripts\engine\utility::trigger_off();
   }
 
-  if(var6.size < 16) {
-    scripts\engine\sp\utility::array_spawn(var3);
+  if(var_6.size < 16) {
+    scripts\engine\sp\utility::array_spawn(var_3);
     return;
   }
 }
@@ -1405,44 +1405,44 @@ function final_wave_enemies() {
 function aq_technical_unload_watcher() {
   self endon("death");
   scripts\engine\utility::ent_flag_wait("loaded");
-  var0 = self.riders;
+  var_0 = self.riders;
   scripts\engine\utility::ent_flag_wait("unloaded");
-  var0 = scripts\engine\utility::array_removedead(var0);
+  var_0 = scripts\engine\utility::array_removedead(var_0);
 
-  foreach(var2 in var0) {
+  foreach(var_2 in var_0) {
     thread murderhole_enemy_behavior();
   }
 }
 
 function kitchen_ambush() {
   scripts\engine\utility::flag_wait("right_side_ready_to_cross");
-  var0 = getEnt("kitchen_volume", "targetname");
-  var1 = getEnt("target_physics_objects", "targetname");
-  var2 = scripts\engine\utility::getStruct("blindfire_anim_struct", "targetname");
-  var3 = getnode("force_ambush_node", "targetname");
-  var4 = getnode("ambusher_smoke_node", "targetname");
-  var5 = getEnt("kitchen_ambusher_goal_vol", "targetname");
-  var6 = getEnt("right_interior_color_trigger", "targetname");
+  var_0 = getEnt("kitchen_volume", "targetname");
+  var_1 = getEnt("target_physics_objects", "targetname");
+  var_2 = scripts\engine\utility::getStruct("blindfire_anim_struct", "targetname");
+  var_3 = getnode("force_ambush_node", "targetname");
+  var_4 = getnode("ambusher_smoke_node", "targetname");
+  var_5 = getEnt("kitchen_ambusher_goal_vol", "targetname");
+  var_6 = getEnt("right_interior_color_trigger", "targetname");
   level.kitchen_guy = scripts\engine\sp\utility::spawn_targetname("kitchen_ambush_guy", 1);
-  var7 = scripts\sp\utility::make_weapon("iw8_ar_akilo47");
-  level.kitchen_guy scripts\anim\shared::forceuseweapon(var7, "primary");
+  var_7 = scripts\sp\utility::make_weapon("iw8_ar_akilo47");
+  level.kitchen_guy scripts\anim\shared::forceuseweapon(var_7, "primary");
   level.kitchen_guy.sidearm = isundefinedweapon();
   level.kitchen_guy.sidearm = "none";
   level.kitchen_guy.ignoreall = 1;
   level.kitchen_guy scripts\engine\sp\utility::set_allowdeath(1);
   level.kitchen_guy.grenadeawareness = 0;
-  var2 thread scripts\common\anim::anim_first_frame_solo(level.kitchen_guy, "kitchen_ambush");
+  var_2 thread scripts\common\anim::anim_first_frame_solo(level.kitchen_guy, "kitchen_ambush");
   scripts\engine\utility::flag_wait("kitchen_trigger");
 
   if(!scripts\engine\utility::flag("smoke_in_kitchen")) {
     if(isDefined(level.kitchen_guy) && isalive(level.kitchen_guy)) {
-      var2 thread scripts\common\anim::anim_single_solo(level.kitchen_guy, "kitchen_ambush");
+      var_2 thread scripts\common\anim::anim_single_solo(level.kitchen_guy, "kitchen_ambush");
       wait 0.5;
 
       if(isDefined(level.kitchen_guy) && isalive(level.kitchen_guy)) {
         level.kitchen_guy.ignoreall = 0;
         level.kitchen_guy.grenadeawareness = 1;
-        level.kitchen_guy setgoalvolumeauto(var5);
+        level.kitchen_guy setgoalvolumeauto(var_5);
       }
     }
   } else if(isDefined(level.kitchen_guy) && isalive(level.kitchen_guy)) {
@@ -1450,12 +1450,12 @@ function kitchen_ambush() {
     level.kitchen_guy.ignoreall = 0;
     level.kitchen_guy.grenadeawareness = 1;
     level.kitchen_guy cleargoalvolume();
-    level.kitchen_guy setgoalnode(var4);
+    level.kitchen_guy setgoalnode(var_4);
   }
 
   scripts\engine\utility::flag_wait("kitchen_guy_killed");
 
-  if(isDefined(var6)) {
+  if(isDefined(var_6)) {
     scripts\engine\sp\utility::activate_trigger_with_targetname("right_interior_color_trigger");
   }
 
@@ -1464,19 +1464,19 @@ function kitchen_ambush() {
 }
 
 function move_stairwell_blocker() {
-  var0 = scripts\engine\utility::getStruct("kitchen_guy_blocker_struct", "targetname");
-  var1 = getEnt("kitchen_guy_blocker", "targetname");
-  var1 moveTo(var0.origin, 0.1);
+  var_0 = scripts\engine\utility::getStruct("kitchen_guy_blocker_struct", "targetname");
+  var_1 = getEnt("kitchen_guy_blocker", "targetname");
+  var_1 moveTo(var_0.origin, 0.1);
   waitframe();
-  var1 connectpaths();
+  var_1 connectpaths();
 }
 
-function drop_obstacle_on_death(var0) {
-  var0 endon("entitydeleted");
-  var0 waittill("death");
-  var1 = (0, 0, 32);
-  var2 = (129, 57, 33);
-  var3 = createnavobstaclebybounds(var1 + var0.origin, var2, var0.angles);
+function drop_obstacle_on_death(var_0) {
+  var_0 endon("entitydeleted");
+  var_0 waittill("death");
+  var_1 = (0, 0, 32);
+  var_2 = (129, 57, 33);
+  var_3 = createnavobstaclebybounds(var_1 + var_0.origin, var_2, var_0.angles);
 }
 
 function murderhole_enemy_counter() {
@@ -1496,57 +1496,57 @@ function ready_to_breach_dialogue() {
 
 function griggs_movement_to_alley() {
   scripts\engine\sp\utility::trigger_wait_targetname("alley_start_trigger");
-  var0 = scripts\engine\utility::getStruct("griggs_goto_alley_node", "targetname");
-  var1 = getnode("alley_final_griggs_node", "targetname");
+  var_0 = scripts\engine\utility::getStruct("griggs_goto_alley_node", "targetname");
+  var_1 = getnode("alley_final_griggs_node", "targetname");
   wait 0.5;
   thread breakout_to_color(level.griggs);
-  level.griggs thread scripts\sp\spawner::go_to_node(var0);
+  level.griggs thread scripts\sp\spawner::go_to_node(var_0);
 }
 
 function marines_group_a_movement_to_alley() {
-  var0 = scripts\engine\utility::getStruct("cyan_goto_alley_node", "targetname");
-  var1 = getnode("alley_final_red_node_0", "targetname");
+  var_0 = scripts\engine\utility::getStruct("cyan_goto_alley_node", "targetname");
+  var_1 = getnode("alley_final_red_node_0", "targetname");
   scripts\engine\sp\utility::trigger_wait_targetname("alley_start_trigger");
   level.all_marines = getaiarray("allies");
   wait 1;
-  var2 = 0;
+  var_2 = 0;
 
-  foreach(var4 in level.all_marines) {
-    if(isDefined(var4)) {
-      if(isDefined(var4.script_forcecolor) && var4.script_forcecolor == "c") {
-        var5 = getnode("alley_final_cyan_node", "targetname");
+  foreach(var_4 in level.all_marines) {
+    if(isDefined(var_4)) {
+      if(isDefined(var_4.script_forcecolor) && var_4.script_forcecolor == "c") {
+        var_5 = getnode("alley_final_cyan_node", "targetname");
 
-        if(isDefined(var4) && isalive(var4)) {
-          var4 thread scripts\sp\spawner::go_to_node(var0);
-          thread breakout_to_color(var4);
+        if(isDefined(var_4) && isalive(var_4)) {
+          var_4 thread scripts\sp\spawner::go_to_node(var_0);
+          thread breakout_to_color(var_4);
         }
       }
     }
   }
 
   wait 0.5;
-  var7 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("r");
-  var8 = sortbydistance(var7, var0.origin);
+  var_7 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("r");
+  var_8 = sortbydistance(var_7, var_0.origin);
 
-  foreach(var4 in var8) {
-    if(isDefined(var4) && isalive(var4)) {
-      if(isDefined(var4.script_forcecolor) && var4.script_forcecolor == "r") {
-        var10 = getnodesinradius((-6.988, 1388.53, 41.939), 50, 0);
-        var11 = getnodesinradius((-34.988, 1484.53, 41.939), 64, 0);
+  foreach(var_4 in var_8) {
+    if(isDefined(var_4) && isalive(var_4)) {
+      if(isDefined(var_4.script_forcecolor) && var_4.script_forcecolor == "r") {
+        var_10 = getnodesinradius((-6.988, 1388.53, 41.939), 50, 0);
+        var_11 = getnodesinradius((-34.988, 1484.53, 41.939), 64, 0);
 
-        if(var10.size > 0 && var11.size > 0) {
-          var12 = var10[0];
-          var13 = var11[0];
-          var12.script_colorlast = undefined;
+        if(var_10.size > 0 && var_11.size > 0) {
+          var_12 = var_10[0];
+          var_13 = var_11[0];
+          var_12.script_colorlast = undefined;
 
-          if(isDefined(var4) && isalive(var4)) {
-            if(var2 == 0) {
-              var4 setgoalnode(var12);
+          if(isDefined(var_4) && isalive(var_4)) {
+            if(var_2 == 0) {
+              var_4 setgoalnode(var_12);
               thread brief_color_disable();
             }
 
-            if(var2 == 1) {
-              var4 setgoalnode(var13);
+            if(var_2 == 1) {
+              var_4 setgoalnode(var_13);
               thread brief_color_disable();
             }
 
@@ -1554,8 +1554,8 @@ function marines_group_a_movement_to_alley() {
           }
         }
 
-        if(var2 < 1) {
-          var2++;
+        if(var_2 < 1) {
+          var_2++;
         }
       }
     }
@@ -1563,52 +1563,52 @@ function marines_group_a_movement_to_alley() {
 }
 
 function marines_group_b_movement_to_alley() {
-  var0 = scripts\engine\utility::getStruct("yellow_goto_alley_node", "targetname");
+  var_0 = scripts\engine\utility::getStruct("yellow_goto_alley_node", "targetname");
   scripts\engine\sp\utility::trigger_wait_targetname("alley_start_trigger");
   wait 1;
-  var1 = 0;
+  var_1 = 0;
 
-  foreach(var3 in level.all_marines) {
-    if(isDefined(var3)) {
+  foreach(var_3 in level.all_marines) {
+    if(isDefined(var_3)) {
       wait 0.25;
 
-      if(isDefined(var3.script_forcecolor) && var3.script_forcecolor == "g") {
-        var4 = getnode("alley_final_green_node_" + var1, "targetname");
+      if(isDefined(var_3.script_forcecolor) && var_3.script_forcecolor == "g") {
+        var_4 = getnode("alley_final_green_node_" + var_1, "targetname");
 
-        if(isDefined(var3) && isalive(var3)) {
-          var5 = scripts\engine\utility::getStruct("green_goto_alley_node_" + var1, "targetname");
-          var3 thread scripts\sp\spawner::go_to_node(var5);
-          thread breakout_to_color(var3);
+        if(isDefined(var_3) && isalive(var_3)) {
+          var_5 = scripts\engine\utility::getStruct("green_goto_alley_node_" + var_1, "targetname");
+          var_3 thread scripts\sp\spawner::go_to_node(var_5);
+          thread breakout_to_color(var_3);
 
-          if(var1 < 1) {
-            var1++;
+          if(var_1 < 1) {
+            var_1++;
           }
         }
       }
     }
 
-    if(isDefined(var3)) {
+    if(isDefined(var_3)) {
       wait 0.25;
 
-      if(isDefined(var3.script_forcecolor) && var3.script_forcecolor == "y") {
-        var6 = getnode("alley_final_yellow_node", "targetname");
+      if(isDefined(var_3.script_forcecolor) && var_3.script_forcecolor == "y") {
+        var_6 = getnode("alley_final_yellow_node", "targetname");
 
-        if(isDefined(var3) && isalive(var3)) {
-          var3 thread scripts\sp\spawner::go_to_node(var0);
-          thread breakout_to_color(var3);
+        if(isDefined(var_3) && isalive(var_3)) {
+          var_3 thread scripts\sp\spawner::go_to_node(var_0);
+          thread breakout_to_color(var_3);
         }
       }
     }
   }
 }
 
-function breakout_to_color(var0) {
+function breakout_to_color(var_0) {
   self endon("reached_path_end");
   scripts\engine\utility::waittill_any("pain", "damage");
 
   if(isDefined(self) && isalive(self)) {
     if(!scripts\engine\utility::flag("ambush_start")) {
-      self setgoalnode(var0);
+      self setgoalnode(var_0);
       return;
     }
 
@@ -1617,10 +1617,10 @@ function breakout_to_color(var0) {
 }
 
 function deletables_convoy_ambush() {
-  var0 = getEntArray("deletable_convoy_ambush", "targetname");
+  var_0 = getEntArray("deletable_convoy_ambush", "targetname");
 
-  foreach(var2 in var0) {
-    var2 hide();
+  foreach(var_2 in var_0) {
+    var_2 hide();
   }
 }
 
@@ -1631,48 +1631,48 @@ function deletables_wait_convoy_ambush() {
 
 function murderhole_clean_up_corpses() {
   scripts\engine\sp\utility::trigger_wait_targetname("murderhole_lighting_trigger");
-  var0 = getcorpsearray();
-  var1 = getEntArray("murderhole_lighting_watcher", "targetname");
-  var2 = 0;
-  var3 = 0;
-  var4 = 0;
-  var5 = 0;
-  var6 = 0;
-  var7 = 2;
-  var8 = 1250;
-  var9 = 2000;
+  var_0 = getcorpsearray();
+  var_1 = getEntArray("murderhole_lighting_watcher", "targetname");
+  var_2 = 0;
+  var_3 = 0;
+  var_4 = 0;
+  var_5 = 0;
+  var_6 = 0;
+  var_7 = 2;
+  var_8 = 1250;
+  var_9 = 2000;
 
-  foreach(var11 in var0) {
-    if(isDefined(var11)) {
-      var12 = 0;
+  foreach(var_11 in var_0) {
+    if(isDefined(var_11)) {
+      var_12 = 0;
 
-      foreach(var14 in var1) {
-        if(var11 istouching(var14)) {
-          var2++;
-          var11 delete();
-          var12 = 1;
+      foreach(var_14 in var_1) {
+        if(var_11 istouching(var_14)) {
+          var_2++;
+          var_11 delete();
+          var_12 = 1;
           break;
         }
       }
 
-      if(var12) {
+      if(var_12) {
         continue;
       }
 
-      var16 = distance(level.player.origin, var11.origin);
-      var4++;
-      var5 += var16;
+      var_16 = distance(level.player.origin, var_11.origin);
+      var_4++;
+      var_5 += var_16;
 
-      if(var16 > var9) {
-        var3++;
-        var11 delete();
-      } else if(var16 > var8) {
-        var6++;
+      if(var_16 > var_9) {
+        var_3++;
+        var_11 delete();
+      } else if(var_16 > var_8) {
+        var_6++;
 
-        if(var6 == var7) {
-          var3++;
-          var11 delete();
-          var6 = 0;
+        if(var_6 == var_7) {
+          var_3++;
+          var_11 delete();
+          var_6 = 0;
         }
       }
     }
@@ -1680,20 +1680,20 @@ function murderhole_clean_up_corpses() {
 }
 
 function kitchen_magicbullet() {
-  var0 = getEnt("kitchen_ambush_origin", "targetname");
-  var1 = 0;
+  var_0 = getEnt("kitchen_ambush_origin", "targetname");
+  var_1 = 0;
 
-  while(var1 <= 10) {
+  while(var_1 <= 10) {
     if(!isDefined(level.kitchen_guy) || !isalive(level.kitchen_guy)) {
       level.kitchen_guy scripts\engine\sp\utility::anim_stopanimScripted();
-      var1 = 10;
+      var_1 = 10;
     }
 
-    var2 = distance2d(level.kitchen_guy.origin, level.player.origin) / 10;
-    var3 = distance2d(level.kitchen_guy.origin, level.player.origin) / 10;
-    var4 = distance2d(level.kitchen_guy.origin, level.player.origin) / 10;
-    magicbullet("iw8_ar_akilo47", var0.origin, level.player.origin + (var2, var3, var4));
-    var1 += 1;
+    var_2 = distance2d(level.kitchen_guy.origin, level.player.origin) / 10;
+    var_3 = distance2d(level.kitchen_guy.origin, level.player.origin) / 10;
+    var_4 = distance2d(level.kitchen_guy.origin, level.player.origin) / 10;
+    magicbullet("iw8_ar_akilo47", var_0.origin, level.player.origin + (var_2, var_3, var_4));
+    var_1 += 1;
     wait 0.15;
   }
 }
@@ -1728,29 +1728,29 @@ function mg_cleanup() {
 }
 
 function yard_enemy_handler() {
-  var0 = getEnt("enemy_at_yard_vol", "targetname");
-  var1 = getEnt("mh_door_volume", "targetname");
-  var2 = getEnt("yard_color_monitor", "targetname");
-  var3 = getEnt("player_monitor_yard", "targetname");
-  var4 = getspawnerarray("yard_initial_enemy");
-  scripts\engine\sp\utility::array_spawn_function(var4, &murderhole_enemy_behavior);
+  var_0 = getEnt("enemy_at_yard_vol", "targetname");
+  var_1 = getEnt("mh_door_volume", "targetname");
+  var_2 = getEnt("yard_color_monitor", "targetname");
+  var_3 = getEnt("player_monitor_yard", "targetname");
+  var_4 = getspawnerarray("yard_initial_enemy");
+  scripts\engine\sp\utility::array_spawn_function(var_4, &murderhole_enemy_behavior);
   scripts\engine\sp\utility::wait_for_targetname_trigger("yard_color_monitor");
-  var5 = getaiarray("axis");
+  var_5 = getaiarray("axis");
 
-  if(!scripts\engine\utility::flag("final_wave_from_yard") && !scripts\engine\utility::flag("final_wave_from_shed") && var5.size < 18) {
-    var6 = scripts\engine\sp\utility::array_spawn(var4);
+  if(!scripts\engine\utility::flag("final_wave_from_yard") && !scripts\engine\utility::flag("final_wave_from_shed") && var_5.size < 18) {
+    var_6 = scripts\engine\sp\utility::array_spawn(var_4);
 
     while(!scripts\engine\utility::flag("murderhole_breach_right")) {
-      if(level.player istouching(var3)) {
-        foreach(var8 in var6) {
-          if(isDefined(var8) && isalive(var8)) {
-            var8 setgoalvolumeauto(var0);
+      if(level.player istouching(var_3)) {
+        foreach(var_8 in var_6) {
+          if(isDefined(var_8) && isalive(var_8)) {
+            var_8 setgoalvolumeauto(var_0);
           }
         }
       } else {
-        foreach(var8 in var6) {
-          if(isDefined(var8) && isalive(var8)) {
-            var8 setgoalvolumeauto(var1);
+        foreach(var_8 in var_6) {
+          if(isDefined(var_8) && isalive(var_8)) {
+            var_8 setgoalvolumeauto(var_1);
           }
         }
       }
@@ -1763,22 +1763,22 @@ function yard_enemy_handler() {
 }
 
 function cqb_player_movement_monitor() {
-  var0 = getEntArray("MH_player_cqb_monitor", "targetname");
+  var_0 = getEntArray("MH_player_cqb_monitor", "targetname");
 
   while(!scripts\engine\utility::flag("mg_team_alerted")) {
-    var1 = 0;
+    var_1 = 0;
 
-    foreach(var3 in var0) {
-      if(level.player istouching(var3)) {
-        var1 = 1;
+    foreach(var_3 in var_0) {
+      if(level.player istouching(var_3)) {
+        var_1 = 1;
       }
     }
 
-    if(var1 == 1) {
+    if(var_1 == 1) {
       scripts\sp\player::player_movement_state("cqb");
     }
 
-    if(var1 == 0) {
+    if(var_1 == 0) {
       scripts\sp\player::player_movement_state("default");
     }
 
@@ -1789,68 +1789,68 @@ function cqb_player_movement_monitor() {
 }
 
 function cqb_marines_movement_monitor() {
-  var0 = getaiarray("allies");
+  var_0 = getaiarray("allies");
 
-  foreach(var2 in var0) {
-    if(isDefined(var2.script_forcecolor) && var2.script_forcecolor == "r") {
-      player_stayahead_enemy_behavior(var2);
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2.script_forcecolor) && var_2.script_forcecolor == "r") {
+      player_stayahead_enemy_behavior(var_2);
     }
 
-    if(isDefined(var2.script_forcecolor) && var2.script_forcecolor == "c") {
-      player_stayahead_enemy_behavior(var2);
+    if(isDefined(var_2.script_forcecolor) && var_2.script_forcecolor == "c") {
+      player_stayahead_enemy_behavior(var_2);
     }
 
-    if(isDefined(var2.script_forcecolor) && var2.script_forcecolor == "y") {
-      player_stayahead_enemy_behavior(var2);
+    if(isDefined(var_2.script_forcecolor) && var_2.script_forcecolor == "y") {
+      player_stayahead_enemy_behavior(var_2);
     }
   }
 
-  var4 = getEntArray("MH_marines_cqb_monitor", "targetname");
+  var_4 = getEntArray("MH_marines_cqb_monitor", "targetname");
 
   while(!scripts\engine\utility::flag("mg_team_alerted")) {
-    var5 = 0;
+    var_5 = 0;
 
-    foreach(var7 in var4) {
-      if(level.player istouching(var7)) {
-        var5 = 1;
+    foreach(var_7 in var_4) {
+      if(level.player istouching(var_7)) {
+        var_5 = 1;
       }
     }
 
-    if(var5 == 1) {
-      var0 = getaiarray("allies");
+    if(var_5 == 1) {
+      var_0 = getaiarray("allies");
 
-      foreach(var2 in var0) {
-        if(isalive(var2)) {
-          if(isDefined(var2.script_forcecolor) && var2.script_forcecolor == "r" && isDefined(var2.asmname)) {
-            var2 scripts\common\utility::demeanor_override("cqb");
+      foreach(var_2 in var_0) {
+        if(isalive(var_2)) {
+          if(isDefined(var_2.script_forcecolor) && var_2.script_forcecolor == "r" && isDefined(var_2.asmname)) {
+            var_2 scripts\common\utility::demeanor_override("cqb");
           }
 
-          if(isDefined(var2.script_forcecolor) && var2.script_forcecolor == "c" && isDefined(var2.asmname)) {
-            var2 scripts\common\utility::demeanor_override("cqb");
+          if(isDefined(var_2.script_forcecolor) && var_2.script_forcecolor == "c" && isDefined(var_2.asmname)) {
+            var_2 scripts\common\utility::demeanor_override("cqb");
           }
 
-          if(isDefined(var2.script_forcecolor) && var2.script_forcecolor == "y" && isDefined(var2.asmname)) {
-            var2 scripts\common\utility::demeanor_override("cqb");
+          if(isDefined(var_2.script_forcecolor) && var_2.script_forcecolor == "y" && isDefined(var_2.asmname)) {
+            var_2 scripts\common\utility::demeanor_override("cqb");
           }
         }
       }
     }
 
-    if(var5 == 0) {
-      var0 = getaiarray("allies");
+    if(var_5 == 0) {
+      var_0 = getaiarray("allies");
 
-      foreach(var2 in var0) {
-        if(isalive(var2)) {
-          if(isDefined(var2.script_forcecolor) && var2.script_forcecolor == "r" && isDefined(var2.asmname)) {
-            var2 scripts\common\utility::demeanor_override("combat");
+      foreach(var_2 in var_0) {
+        if(isalive(var_2)) {
+          if(isDefined(var_2.script_forcecolor) && var_2.script_forcecolor == "r" && isDefined(var_2.asmname)) {
+            var_2 scripts\common\utility::demeanor_override("combat");
           }
 
-          if(isDefined(var2.script_forcecolor) && var2.script_forcecolor == "c" && isDefined(var2.asmname)) {
-            var2 scripts\common\utility::demeanor_override("combat");
+          if(isDefined(var_2.script_forcecolor) && var_2.script_forcecolor == "c" && isDefined(var_2.asmname)) {
+            var_2 scripts\common\utility::demeanor_override("combat");
           }
 
-          if(isDefined(var2.script_forcecolor) && var2.script_forcecolor == "y" && isDefined(var2.asmname)) {
-            var2 scripts\common\utility::demeanor_override("combat");
+          if(isDefined(var_2.script_forcecolor) && var_2.script_forcecolor == "y" && isDefined(var_2.asmname)) {
+            var_2 scripts\common\utility::demeanor_override("combat");
           }
         }
       }
@@ -1859,65 +1859,65 @@ function cqb_marines_movement_monitor() {
     wait 0.1;
   }
 
-  var0 = getaiarray("allies");
+  var_0 = getaiarray("allies");
 
-  foreach(var2 in var0) {
-    if(isalive(var2)) {
-      if(isDefined(var2.script_forcecolor) && var2.script_forcecolor == "r" && isDefined(var2.asmname)) {
-        var2 scripts\common\utility::demeanor_override("combat");
+  foreach(var_2 in var_0) {
+    if(isalive(var_2)) {
+      if(isDefined(var_2.script_forcecolor) && var_2.script_forcecolor == "r" && isDefined(var_2.asmname)) {
+        var_2 scripts\common\utility::demeanor_override("combat");
       }
 
-      if(isDefined(var2.script_forcecolor) && var2.script_forcecolor == "c" && isDefined(var2.asmname)) {
-        var2 scripts\common\utility::demeanor_override("combat");
+      if(isDefined(var_2.script_forcecolor) && var_2.script_forcecolor == "c" && isDefined(var_2.asmname)) {
+        var_2 scripts\common\utility::demeanor_override("combat");
       }
 
-      if(isDefined(var2.script_forcecolor) && var2.script_forcecolor == "y" && isDefined(var2.asmname)) {
-        var2 scripts\common\utility::demeanor_override("combat");
+      if(isDefined(var_2.script_forcecolor) && var_2.script_forcecolor == "y" && isDefined(var_2.asmname)) {
+        var_2 scripts\common\utility::demeanor_override("combat");
       }
     }
   }
 }
 
 function first_floor_lookup_handler() {
-  var0 = getnode("look_up_anim_goal_node", "targetname");
-  var1 = scripts\engine\utility::getStruct("mh_second_floor_poi", "targetname");
+  var_0 = getnode("look_up_anim_goal_node", "targetname");
+  var_1 = scripts\engine\utility::getStruct("mh_second_floor_poi", "targetname");
   scripts\engine\utility::flag_wait("look_up_anim_flag");
-  var2 = getaiarray("allies");
+  var_2 = getaiarray("allies");
 
-  foreach(var4 in var2) {
+  foreach(var_4 in var_2) {
     waitframe();
 
-    if(isDefined(var4.script_forcecolor) && var4.script_forcecolor == "r") {
-      if(scripts\engine\utility::is_equal(var0, var4.node)) {
-        var4 scripts\common\ai::poi_enable(1, var1);
-        thread waittill_color_change(var4);
+    if(isDefined(var_4.script_forcecolor) && var_4.script_forcecolor == "r") {
+      if(scripts\engine\utility::is_equal(var_0, var_4.node)) {
+        var_4 scripts\common\ai::poi_enable(1, var_1);
+        thread waittill_color_change(var_4);
       }
     }
   }
 }
 
 function second_floor_lookup_handler() {
-  var0 = getnode("mh_third_floor_node", "targetname");
-  var1 = scripts\engine\utility::getStruct("mh_third_floor_poi", "targetname");
+  var_0 = getnode("mh_third_floor_node", "targetname");
+  var_1 = scripts\engine\utility::getStruct("mh_third_floor_poi", "targetname");
   scripts\engine\utility::flag_wait("third_floor_look_up_anim_flag");
-  var2 = getaiarray("allies");
+  var_2 = getaiarray("allies");
 
-  foreach(var4 in var2) {
+  foreach(var_4 in var_2) {
     waitframe();
 
-    if(isDefined(var4.script_forcecolor) && var4.script_forcecolor == "y") {
-      if(scripts\engine\utility::is_equal(var0, var4.node)) {
-        var4 scripts\common\ai::poi_enable(1, var1);
-        thread waittill_color_change(var4);
+    if(isDefined(var_4.script_forcecolor) && var_4.script_forcecolor == "y") {
+      if(scripts\engine\utility::is_equal(var_0, var_4.node)) {
+        var_4 scripts\common\ai::poi_enable(1, var_1);
+        thread waittill_color_change(var_4);
       }
     }
   }
 }
 
-function waittill_color_change(var0) {
+function waittill_color_change(var_0) {
   self endon("death");
   self endon("entitydeleted");
-  scripts\engine\sp\utility::trigger_wait_targetname(var0);
+  scripts\engine\sp\utility::trigger_wait_targetname(var_0);
   scripts\common\ai::poi_enable(0);
 }
 
@@ -1927,13 +1927,13 @@ function save_at_mh_building() {
 }
 
 function kill_off_rpg_guy() {
-  var0 = getEnt("magicbullet_rpg_kill", "targetname");
-  var1 = cos(90);
+  var_0 = getEnt("magicbullet_rpg_kill", "targetname");
+  var_1 = cos(90);
 
   if(isDefined(self)) {
     while(isalive(self)) {
-      if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), self.origin, var1)) {
-        magicbullet("iw8_ar_akilo47", var0.origin, self gettagorigin("j_head"));
+      if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), self.origin, var_1)) {
+        magicbullet("iw8_ar_akilo47", var_0.origin, self gettagorigin("j_head"));
       }
 
       wait 0.25;
@@ -1945,10 +1945,10 @@ function kill_off_rpg_guy() {
 
 function save_game_after_battlefield() {
   scripts\engine\utility::flag_wait("set_MH_trigger");
-  var0 = getaiarray("axis");
+  var_0 = getaiarray("axis");
 
-  while(var0.size > 1) {
-    var0 = getaiarray("axis");
+  while(var_0.size > 1) {
+    var_0 = getaiarray("axis");
     wait 0.1;
   }
 
@@ -1956,33 +1956,33 @@ function save_game_after_battlefield() {
 }
 
 function mghouse_tripwire_monitor() {
-  var0 = scripts\engine\utility::getStruct("mghouse_tripwire_struct", "targetname");
-  var1 = getEnt("mghouse_tripwire_nav_clip", "targetname");
-  var2 = scripts\engine\utility::getStruct("mghouse_tripwire_nav_clear_struct", "targetname");
-  var3 = scripts\engine\utility::getStruct("mghouse_tripwire_nav_block_struct", "targetname");
-  var4 = 99999;
-  var5 = undefined;
+  var_0 = scripts\engine\utility::getStruct("mghouse_tripwire_struct", "targetname");
+  var_1 = getEnt("mghouse_tripwire_nav_clip", "targetname");
+  var_2 = scripts\engine\utility::getStruct("mghouse_tripwire_nav_clear_struct", "targetname");
+  var_3 = scripts\engine\utility::getStruct("mghouse_tripwire_nav_block_struct", "targetname");
+  var_4 = 99999;
+  var_5 = undefined;
   wait 1;
 
-  foreach(var7 in level.tripwires.traps) {
-    if(isDefined(var7.origin) && distance2dsquared(var7.origin, var0.origin) < var4) {
-      var4 = distance2dsquared(var7.origin, var0.origin);
-      var5 = var7;
+  foreach(var_7 in level.tripwires.traps) {
+    if(isDefined(var_7.origin) && distance2dsquared(var_7.origin, var_0.origin) < var_4) {
+      var_4 = distance2dsquared(var_7.origin, var_0.origin);
+      var_5 = var_7;
     }
 
     waitframe();
   }
 
-  var5.defusehintstruct.cursor_hint_ent sethintdisplayrange(200);
-  thread scripts\sp\maps\marines\marines_utility::marines_tripwire_monitor(var0, "stairs_tripwire_cleared", var1, var3, var2);
+  var_5.defusehintstruct.cursor_hint_ent sethintdisplayrange(200);
+  thread scripts\sp\maps\marines\marines_utility::marines_tripwire_monitor(var_0, "stairs_tripwire_cleared", var_1, var_3, var_2);
 }
 
 function disable_marines_backtrack_color() {
   scripts\engine\utility::flag_wait("player_ready_for_marine");
-  var0 = getEntArray("mh_color_triggers", "script_noteworthy");
+  var_0 = getEntArray("mh_color_triggers", "script_noteworthy");
 
-  foreach(var2 in var0) {
-    var2 scripts\engine\utility::trigger_off();
+  foreach(var_2 in var_0) {
+    var_2 scripts\engine\utility::trigger_off();
   }
 
   scripts\sp\spawner::killspawner(6);
@@ -1992,23 +1992,23 @@ function disable_marines_backtrack_color() {
 function kitchen_smoke_handler() {
   self endon("death");
   self endon("kitchen_smoke_grenade_success");
-  var0 = getEnt("kitchen_smoke_volume", "targetname");
+  var_0 = getEnt("kitchen_smoke_volume", "targetname");
 
   for(;;) {
-    level.player waittill("grenade_fire", var1, var2);
+    level.player waittill("grenade_fire", var_1, var_2);
 
-    if(!isDefined(var1)) {
+    if(!isDefined(var_1)) {
       return;
     }
 
-    if(!isDefined(var2.basename)) {
+    if(!isDefined(var_2.basename)) {
       return;
     }
 
-    if(var2.basename == "smoke_tall") {
-      var1 waittill("explode", var3);
+    if(var_2.basename == "smoke_tall") {
+      var_1 waittill("explode", var_3);
 
-      if(ispointinvolume(var3, var0)) {
+      if(ispointinvolume(var_3, var_0)) {
         self notify("kitchen_smoke_grenade_success");
       } else {
         self notify("kitchen_smoke_grenade_fail");
@@ -2025,17 +2025,17 @@ function kitchen_smoke_monitor() {
 }
 
 function mg_shoot_scriptables() {
-  var0 = getEntArray("MG_damage_trigger", "targetname");
+  var_0 = getEntArray("MG_damage_trigger", "targetname");
 
-  foreach(var2 in var0) {
+  foreach(var_2 in var_0) {
     thread scripted_shot_monitor();
   }
 
   scripts\engine\utility::flag_wait("mg_guys_dead");
 
-  foreach(var2 in var0) {
-    if(isDefined(var2)) {
-      var2 scripts\engine\utility::trigger_off();
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2)) {
+      var_2 scripts\engine\utility::trigger_off();
     }
   }
 }
@@ -2047,22 +2047,22 @@ function scripted_shot_monitor() {
 }
 
 function scripted_shot() {
-  var0 = getEntArray(self.target, "targetname");
-  var1 = 0;
+  var_0 = getEntArray(self.target, "targetname");
+  var_1 = 0;
 
-  while(var1 < 5) {
-    magicbullet("iw8_ar_akilo47_marines_streets", level.org.origin, var0[0].origin);
-    var1++;
+  while(var_1 < 5) {
+    magicbullet("iw8_ar_akilo47_marines_streets", level.org.origin, var_0[0].origin);
+    var_1++;
     wait 0.1;
   }
 }
 
 function mg_alley_intro_script_shot() {
-  var0 = getEnt("alley_script_shot_target", "targetname");
+  var_0 = getEnt("alley_script_shot_target", "targetname");
   scripts\engine\sp\utility::trigger_wait_targetname("alley_MG_damage_trigger");
 
-  for(var1 = 0; var1 < 15; var1++) {
-    magicbullet("iw8_ar_akilo47_marines_streets", level.org.origin, var0.origin + (-5 * var1, 0, 0));
+  for(var_1 = 0; var_1 < 15; var_1++) {
+    magicbullet("iw8_ar_akilo47_marines_streets", level.org.origin, var_0.origin + (-5 * var_1, 0, 0));
     wait 0.1;
   }
 }
@@ -2076,41 +2076,41 @@ function player_stayahead_enemy_behavior() {
 }
 
 function marine_teleport_handler() {
-  var0 = getEnt("marine_teleport_check_trigger", "targetname");
+  var_0 = getEnt("marine_teleport_check_trigger", "targetname");
   scripts\engine\utility::flag_wait("stairs_grenade_nag");
-  var1 = 0;
-  var2 = getaiarray("allies");
+  var_1 = 0;
+  var_2 = getaiarray("allies");
 
-  foreach(var4 in var2) {
-    if(isDefined(var4.script_forcecolor) && var4.script_forcecolor == "r") {
-      if(!var4 istouching(var0)) {
-        if(var1 <= 1) {
-          var5 = scripts\engine\utility::getStruct("marine_teleport_destination_r_" + var1, "targetname");
+  foreach(var_4 in var_2) {
+    if(isDefined(var_4.script_forcecolor) && var_4.script_forcecolor == "r") {
+      if(!var_4 istouching(var_0)) {
+        if(var_1 <= 1) {
+          var_5 = scripts\engine\utility::getStruct("marine_teleport_destination_r_" + var_1, "targetname");
 
-          if(isDefined(var4)) {
-            var4 teleport(var5.origin);
-            var1++;
+          if(isDefined(var_4)) {
+            var_4 teleport(var_5.origin);
+            var_1++;
           }
         }
       }
     }
 
-    if(isDefined(var4.script_forcecolor) && var4.script_forcecolor == "c") {
-      if(!var4 istouching(var0)) {
-        var6 = scripts\engine\utility::getStruct("marine_teleport_destination_c", "targetname");
+    if(isDefined(var_4.script_forcecolor) && var_4.script_forcecolor == "c") {
+      if(!var_4 istouching(var_0)) {
+        var_6 = scripts\engine\utility::getStruct("marine_teleport_destination_c", "targetname");
 
-        if(isDefined(var4)) {
-          var4 teleport(var6.origin);
+        if(isDefined(var_4)) {
+          var_4 teleport(var_6.origin);
         }
       }
     }
 
-    if(isDefined(var4.script_forcecolor) && var4.script_forcecolor == "y") {
-      if(!var4 istouching(var0)) {
-        var7 = scripts\engine\utility::getStruct("marine_teleport_destination_y", "targetname");
+    if(isDefined(var_4.script_forcecolor) && var_4.script_forcecolor == "y") {
+      if(!var_4 istouching(var_0)) {
+        var_7 = scripts\engine\utility::getStruct("marine_teleport_destination_y", "targetname");
 
-        if(isDefined(var4)) {
-          var4 teleport(var7.origin);
+        if(isDefined(var_4)) {
+          var_4 teleport(var_7.origin);
         }
       }
     }
@@ -2118,35 +2118,35 @@ function marine_teleport_handler() {
 }
 
 function marine01_check_if_in_position() {
-  var0 = scripts\engine\utility::getStruct("marine_01_anim_struct", "targetname");
-  var1 = getaiarray("allies");
-  var2 = getnode("mg_react_node_01", "targetname");
-  var3 = getnode("marine01_react_post_node", "targetname");
-  var4 = scripts\engine\utility::getStruct("IED_red_POI", "targetname");
+  var_0 = scripts\engine\utility::getStruct("marine_01_anim_struct", "targetname");
+  var_1 = getaiarray("allies");
+  var_2 = getnode("mg_react_node_01", "targetname");
+  var_3 = getnode("marine01_react_post_node", "targetname");
+  var_4 = scripts\engine\utility::getStruct("IED_red_POI", "targetname");
   scripts\engine\utility::flag_wait("check_if_marines_at_node");
   wait 0.25;
 
-  foreach(var6 in var1) {
-    if(isDefined(var6)) {
-      if(isDefined(var6.script_forcecolor) && var6.script_forcecolor == "c") {
+  foreach(var_6 in var_1) {
+    if(isDefined(var_6)) {
+      if(isDefined(var_6.script_forcecolor) && var_6.script_forcecolor == "c") {
         if(scripts\engine\utility::flag("marine_01_reached_IED")) {
-          var6.animname = "react_marine_01";
+          var_6.animname = "react_marine_01";
           waitframe();
 
-          if(isDefined(var6)) {
-            var6 thread scripts\common\ai::poi_enable(1, var4);
-            var6 scripts\engine\sp\utility::set_goal_radius(64);
-            var6 setgoalnode(var3);
-            var6 scripts\engine\sp\utility::set_allowdeath(1);
-            var6 allowedstances("crouch");
-            var0 scripts\common\anim::anim_single_solo(var6, "mg_react");
+          if(isDefined(var_6)) {
+            var_6 thread scripts\common\ai::poi_enable(1, var_4);
+            var_6 scripts\engine\sp\utility::set_goal_radius(64);
+            var_6 setgoalnode(var_3);
+            var_6 scripts\engine\sp\utility::set_allowdeath(1);
+            var_6 allowedstances("crouch");
+            var_0 scripts\common\anim::anim_single_solo(var_6, "mg_react");
           }
 
           continue;
         }
 
-        if(isDefined(var6)) {
-          var6 thread scripts\common\ai::poi_enable(1, var4);
+        if(isDefined(var_6)) {
+          var_6 thread scripts\common\ai::poi_enable(1, var_4);
         }
       }
     }
@@ -2154,28 +2154,28 @@ function marine01_check_if_in_position() {
 }
 
 function marine02_check_if_in_position() {
-  var0 = getaiarray("allies");
-  var1 = getnode("mg_react_node_02", "targetname");
-  var2 = scripts\engine\utility::getStruct("IED_yellow_POI", "targetname");
+  var_0 = getaiarray("allies");
+  var_1 = getnode("mg_react_node_02", "targetname");
+  var_2 = scripts\engine\utility::getStruct("IED_yellow_POI", "targetname");
   scripts\engine\utility::flag_wait("check_if_marines_at_node");
   wait 0.5;
 
-  foreach(var4 in var0) {
-    if(isDefined(var4)) {
-      if(isDefined(var4.script_forcecolor) && var4.script_forcecolor == "y") {
+  foreach(var_4 in var_0) {
+    if(isDefined(var_4)) {
+      if(isDefined(var_4.script_forcecolor) && var_4.script_forcecolor == "y") {
         if(scripts\engine\utility::flag("marine_02_reached_IED")) {
-          var4.animname = "react_marine_02";
+          var_4.animname = "react_marine_02";
           waitframe();
 
-          if(isDefined(var4)) {
-            var4 thread scripts\common\ai::poi_enable(1, var2);
+          if(isDefined(var_4)) {
+            var_4 thread scripts\common\ai::poi_enable(1, var_2);
           }
 
           continue;
         }
 
-        if(isDefined(var4)) {
-          var4 thread scripts\common\ai::poi_enable(1, var2);
+        if(isDefined(var_4)) {
+          var_4 thread scripts\common\ai::poi_enable(1, var_2);
         }
       }
     }
@@ -2183,60 +2183,60 @@ function marine02_check_if_in_position() {
 }
 
 function marine03_check_if_in_position() {
-  var0 = scripts\engine\utility::getStruct("marine_03_anim_struct", "targetname");
-  var1 = getaiarray("allies");
-  var2 = getnode("mg_react_node_03", "targetname");
-  var3 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("r");
-  var4 = scripts\engine\utility::getStruct("IED_red_POI", "targetname");
+  var_0 = scripts\engine\utility::getStruct("marine_03_anim_struct", "targetname");
+  var_1 = getaiarray("allies");
+  var_2 = getnode("mg_react_node_03", "targetname");
+  var_3 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("r");
+  var_4 = scripts\engine\utility::getStruct("IED_red_POI", "targetname");
   scripts\engine\utility::flag_wait("check_if_marines_at_node");
-  var5 = sortbydistance(var3, var2.origin);
-  var6 = 0;
+  var_5 = sortbydistance(var_3, var_2.origin);
+  var_6 = 0;
   wait 0.5;
 
-  foreach(var8 in var5) {
-    if(isDefined(var8)) {
-      var8.script_index = var6;
+  foreach(var_8 in var_5) {
+    if(isDefined(var_8)) {
+      var_8.script_index = var_6;
 
-      if(scripts\engine\utility::is_equal(var2, var8.node) && scripts\engine\utility::flag("marine_03_reached_IED")) {
-        var8.animname = "react_marine_03";
+      if(scripts\engine\utility::is_equal(var_2, var_8.node) && scripts\engine\utility::flag("marine_03_reached_IED")) {
+        var_8.animname = "react_marine_03";
         waitframe();
 
-        if(isDefined(var8)) {
-          var8 thread scripts\common\ai::poi_enable(1, var4);
-          var8 scripts\engine\sp\utility::set_allowdeath(1);
+        if(isDefined(var_8)) {
+          var_8 thread scripts\common\ai::poi_enable(1, var_4);
+          var_8 scripts\engine\sp\utility::set_allowdeath(1);
         }
       } else if(!scripts\engine\utility::flag("marine_03_reached_IED")) {
         waitframe();
 
-        if(isDefined(var8)) {
-          if(var8.script_index == 1) {
-            var8 thread scripts\common\ai::poi_enable(1, var4);
+        if(isDefined(var_8)) {
+          if(var_8.script_index == 1) {
+            var_8 thread scripts\common\ai::poi_enable(1, var_4);
           }
         }
       }
 
-      var6++;
+      var_6++;
     }
   }
 }
 
 function interior_dof_monitor() {
-  var0 = getEntArray("MH_interior_DOF_volume", "targetname");
+  var_0 = getEntArray("MH_interior_DOF_volume", "targetname");
 
   while(!scripts\engine\utility::flag("flag_lobby_entered")) {
-    var1 = 0;
+    var_1 = 0;
 
-    foreach(var3 in var0) {
-      if(level.player istouching(var3)) {
-        var1 = 1;
+    foreach(var_3 in var_0) {
+      if(level.player istouching(var_3)) {
+        var_1 = 1;
       }
     }
 
-    if(var1 == 1) {
+    if(var_1 == 1) {
       scripts\engine\utility::flag_set("murderhole_dof_On");
     }
 
-    if(var1 == 0) {
+    if(var_1 == 0) {
       scripts\engine\utility::flag_clear("murderhole_dof_On");
     }
 
@@ -2246,12 +2246,12 @@ function interior_dof_monitor() {
 
 function cleanup_all_poi() {
   scripts\engine\sp\utility::trigger_wait_targetname("alley_start_trigger");
-  var0 = getaiarray("allies");
+  var_0 = getaiarray("allies");
 
   if(!scripts\engine\utility::flag("checkpoint_jumped_to_MH")) {
-    foreach(var2 in var0) {
-      if(isDefined(var2) && isalive(var2)) {
-        var2 scripts\common\ai::poi_enable(0);
+    foreach(var_2 in var_0) {
+      if(isDefined(var_2) && isalive(var_2)) {
+        var_2 scripts\common\ai::poi_enable(0);
       }
     }
 
@@ -2262,65 +2262,65 @@ function cleanup_all_poi() {
 function mg_breach_no_pistol() {
   scripts\engine\utility::flag_wait("player_ready_for_marine");
 
-  foreach(var1 in getaiarray("allies")) {
-    var1.no_pistol_switch = 1;
+  foreach(var_1 in getaiarray("allies")) {
+    var_1.no_pistol_switch = 1;
   }
 
   scripts\engine\utility::flag_wait_any("mg_guys_dead", "flag_retreat_spawn_initial_aq");
 
-  foreach(var1 in getaiarray("allies")) {
-    var1.no_pistol_switch = 0;
+  foreach(var_1 in getaiarray("allies")) {
+    var_1.no_pistol_switch = 0;
   }
 }
 
 function stair_blocking_marine_handler() {
-  var0 = getEnt("second_floor_marine_teleport_check", "targetname");
-  var1 = getEnt("marines_blocker_clip", "targetname");
-  var2 = getspawner("stair_blocker_ai", "targetname");
-  var1 movez(9999, 0.5, 0.25, 0.25);
+  var_0 = getEnt("second_floor_marine_teleport_check", "targetname");
+  var_1 = getEnt("marines_blocker_clip", "targetname");
+  var_2 = getspawner("stair_blocker_ai", "targetname");
+  var_1 movez(9999, 0.5, 0.25, 0.25);
   scripts\engine\utility::flag_wait("player_ready_for_marine");
   scripts\engine\utility::flag_set("looked_into_bedroom");
   scripts\engine\utility::flag_clear("flag_retreat_exiting_mg_house");
-  var3 = var2 scripts\engine\sp\utility::spawn_ai();
+  var_3 = var_2 scripts\engine\sp\utility::spawn_ai();
   thread stair_blocker_ai_handler();
-  var3 thread scripts\sp\maps\marines\marines_utility::marine_callsign_picker();
-  var1 movez(-9999, 0.5, 0.25, 0.25);
+  var_3 thread scripts\sp\maps\marines\marines_utility::marine_callsign_picker();
+  var_1 movez(-9999, 0.5, 0.25, 0.25);
 
   if(!scripts\engine\utility::flag("checkpoint_jumped")) {
     level.b_smoke = 1;
-    var4 = 0;
-    var5 = getaiarray("allies");
+    var_4 = 0;
+    var_5 = getaiarray("allies");
 
-    foreach(var7 in var5) {
-      if(isDefined(var7) && isDefined(var7.script_forcecolor) && var7.script_forcecolor == "r") {
-        if(!var7 istouching(var0)) {
-          if(var4 <= 1) {
-            var8 = scripts\engine\utility::getStruct("second_flr_marine_teleport_destination_r_" + var4, "targetname");
+    foreach(var_7 in var_5) {
+      if(isDefined(var_7) && isDefined(var_7.script_forcecolor) && var_7.script_forcecolor == "r") {
+        if(!var_7 istouching(var_0)) {
+          if(var_4 <= 1) {
+            var_8 = scripts\engine\utility::getStruct("second_flr_marine_teleport_destination_r_" + var_4, "targetname");
 
-            if(isDefined(var7)) {
-              var7 teleport(var8.origin);
-              var4++;
+            if(isDefined(var_7)) {
+              var_7 teleport(var_8.origin);
+              var_4++;
             }
           }
         }
       }
 
-      if(isDefined(var7) && isDefined(var7.script_forcecolor) && var7.script_forcecolor == "c") {
-        if(!var7 istouching(var0)) {
-          var9 = scripts\engine\utility::getStruct("second_flr_marine_teleport_destination_c", "targetname");
+      if(isDefined(var_7) && isDefined(var_7.script_forcecolor) && var_7.script_forcecolor == "c") {
+        if(!var_7 istouching(var_0)) {
+          var_9 = scripts\engine\utility::getStruct("second_flr_marine_teleport_destination_c", "targetname");
 
-          if(isDefined(var7)) {
-            var7 teleport(var9.origin);
+          if(isDefined(var_7)) {
+            var_7 teleport(var_9.origin);
           }
         }
       }
 
-      if(isDefined(var7) && isDefined(var7.script_forcecolor) && var7.script_forcecolor == "y") {
-        if(!var7 istouching(var0)) {
-          var10 = scripts\engine\utility::getStruct("second_flr_marine_teleport_destination_y", "targetname");
+      if(isDefined(var_7) && isDefined(var_7.script_forcecolor) && var_7.script_forcecolor == "y") {
+        if(!var_7 istouching(var_0)) {
+          var_10 = scripts\engine\utility::getStruct("second_flr_marine_teleport_destination_y", "targetname");
 
-          if(isDefined(var7)) {
-            var7 teleport(var10.origin);
+          if(isDefined(var_7)) {
+            var_7 teleport(var_10.origin);
           }
         }
       }
@@ -2328,7 +2328,7 @@ function stair_blocking_marine_handler() {
   }
 
   scripts\engine\utility::flag_wait("flag_retreat_exiting_mg_house");
-  var1 delete();
+  var_1 delete();
 }
 
 function stair_blocker_ai_handler() {
@@ -2441,9 +2441,9 @@ function track_if_player_throw_smokes() {
   level.smoke_thrown_in_streets = 0;
 
   for(;;) {
-    level.player waittill("grenade_fire", var0, var1);
+    level.player waittill("grenade_fire", var_0, var_1);
 
-    if(var1.basename == "smoke_tall") {
+    if(var_1.basename == "smoke_tall") {
       level.smoke_thrown = 1;
     }
   }
@@ -2451,18 +2451,18 @@ function track_if_player_throw_smokes() {
 
 function alley_marine_ignore_handler() {
   scripts\engine\sp\utility::trigger_wait_targetname("alley_start_trigger");
-  var0 = getaiarray("allies");
+  var_0 = getaiarray("allies");
 
-  foreach(var2 in var0) {
-    if(isDefined(var2) && isalive(var2)) {
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2) && isalive(var_2)) {
       thread alley_ignore_player_enable();
     }
   }
 
   scripts\engine\utility::flag_wait("right_street_save");
 
-  foreach(var2 in var0) {
-    if(isDefined(var2) && isalive(var2)) {
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2) && isalive(var_2)) {
       thread alley_ignore_player_clear();
     }
   }
@@ -2491,21 +2491,21 @@ function alley_ignore_player_clear() {
 function upstairs_guy_handler() {
   level endon("turn_off_upstairs_guy");
   scripts\engine\sp\utility::trigger_wait_targetname("upstairs_guy_trigger");
-  var0 = getspawner("upstairs_guy", "targetname") scripts\engine\sp\utility::spawn_ai();
+  var_0 = getspawner("upstairs_guy", "targetname") scripts\engine\sp\utility::spawn_ai();
 
-  if(isDefined(var0)) {
-    var0.ignoreall = 1;
+  if(isDefined(var_0)) {
+    var_0.ignoreall = 1;
   }
 
   scripts\engine\sp\utility::trigger_wait_targetname("upstairs_guy_aware");
 
-  if(isDefined(var0)) {
-    var0.ignoreall = 0;
+  if(isDefined(var_0)) {
+    var_0.ignoreall = 0;
     return;
   }
 }
 
-function mg_doors_bashed_monitor(var0, var1) {
+function mg_doors_bashed_monitor(var_0, var_1) {
   level endon("mg_team_alerted");
   thread mg_door_bashed_monitor();
   thread mg_door_bashed_monitor();
@@ -2526,25 +2526,25 @@ function back_alley_autosave() {
 }
 
 function alley_fallback_handler() {
-  var0 = getEnt("alley_fallback", "targetname");
+  var_0 = getEnt("alley_fallback", "targetname");
   scripts\engine\utility::flag_wait_or_timeout("ambush_start", 30);
-  var1 = scripts\engine\sp\utility::get_living_ai_array("alley_initial_wave", "targetname");
+  var_1 = scripts\engine\sp\utility::get_living_ai_array("alley_initial_wave", "targetname");
 
-  foreach(var3 in var1) {
-    if(isDefined(var3) && isalive(var3)) {
-      var3 setgoalvolumeauto(var0);
+  foreach(var_3 in var_1) {
+    if(isDefined(var_3) && isalive(var_3)) {
+      var_3 setgoalvolumeauto(var_0);
     }
   }
 }
 
 function player_bedroom_clear_handler() {
-  var0 = scripts\engine\utility::getStruct("bedroom_fov_struct", "targetname");
-  var1 = cos(15);
-  var2 = getEnt("bedroom_look_monitor", "targetname");
+  var_0 = scripts\engine\utility::getStruct("bedroom_fov_struct", "targetname");
+  var_1 = cos(15);
+  var_2 = getEnt("bedroom_look_monitor", "targetname");
 
   while(!scripts\engine\utility::flag("looked_into_bedroom")) {
-    if(level.player istouching(var2)) {
-      if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var0.origin, var1)) {
+    if(level.player istouching(var_2)) {
+      if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_0.origin, var_1)) {
         if(!scripts\engine\utility::flag("marine_at_bedroom")) {
           thread scripts\sp\maps\marines\marines_vo::vo_mhbreach_alex_bedroom_clear_dialogue();
           scripts\engine\utility::flag_set("looked_into_bedroom");
@@ -2565,67 +2565,67 @@ function marine_bedroom_clear_handler() {
   }
 }
 
-function wait_and_kill_underbarrel_grenade_launcher_monitors(var0) {
-  wait var0;
+function wait_and_kill_underbarrel_grenade_launcher_monitors(var_0) {
+  wait var_0;
   level notify("underbarrel_grenade_launcher_equipped");
   level notify("end_underbarrel_grenade_launcher_monitor");
 }
 
 function ready_to_breach_poi() {
-  var0 = scripts\engine\utility::getStruct("breach_POI_struct", "targetname");
+  var_0 = scripts\engine\utility::getStruct("breach_POI_struct", "targetname");
   scripts\engine\utility::flag_wait("ready_to_breach_MH");
-  var1 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("r");
+  var_1 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("r");
 
-  foreach(var3 in var1) {
-    if(isDefined(var3) && isalive(var3)) {
-      var3 scripts\common\ai::poi_enable(1, var0);
+  foreach(var_3 in var_1) {
+    if(isDefined(var_3) && isalive(var_3)) {
+      var_3 scripts\common\ai::poi_enable(1, var_0);
     }
   }
 
-  var5 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("y");
+  var_5 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("y");
 
-  foreach(var3 in var5) {
-    if(isDefined(var3) && isalive(var3)) {
-      var3 scripts\common\ai::poi_enable(1, var0);
+  foreach(var_3 in var_5) {
+    if(isDefined(var_3) && isalive(var_3)) {
+      var_3 scripts\common\ai::poi_enable(1, var_0);
     }
   }
 
   scripts\engine\utility::flag_wait("murderhole_breach_save_point");
-  var1 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("r");
+  var_1 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("r");
 
-  foreach(var3 in var1) {
-    if(isDefined(var3) && isalive(var3)) {
-      var3 scripts\common\ai::poi_enable(0);
+  foreach(var_3 in var_1) {
+    if(isDefined(var_3) && isalive(var_3)) {
+      var_3 scripts\common\ai::poi_enable(0);
     }
   }
 
-  var5 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("y");
+  var_5 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("y");
 
-  foreach(var3 in var5) {
-    if(isDefined(var3) && isalive(var3)) {
-      var3 scripts\common\ai::poi_enable(0);
+  foreach(var_3 in var_5) {
+    if(isDefined(var_3) && isalive(var_3)) {
+      var_3 scripts\common\ai::poi_enable(0);
     }
   }
 }
 
-function truck_dead_or_alive_monitor(var0, var1) {
-  var2 = "truckDropOff";
-  var3 = getanimlength(scripts\engine\utility::getanim(var2)) - 1;
-  wait var3;
+function truck_dead_or_alive_monitor(var_0, var_1) {
+  var_2 = "truckDropOff";
+  var_3 = getanimlength(scripts\engine\utility::getanim(var_2)) - 1;
+  wait var_3;
 
   if(isDefined(self) && isalive(self)) {
-    scripts\engine\utility::flag_set(var0);
+    scripts\engine\utility::flag_set(var_0);
     return;
   }
 
-  scripts\engine\utility::flag_set(var1);
+  scripts\engine\utility::flag_set(var_1);
 }
 
 function disabling_truck_1_node_handler() {
-  var0 = getEnt("truck_1_clip", "targetname");
-  var0 movez(-9999, 0.5, 0.25, 0.25);
+  var_0 = getEnt("truck_1_clip", "targetname");
+  var_0 movez(-9999, 0.5, 0.25, 0.25);
   waitframe();
-  var0 connectpaths();
+  var_0 connectpaths();
   scripts\engine\utility::flag_wait("check_truck_status");
   scripts\engine\utility::flag_wait_any("truck_1_reached", "truck_1_destroyed");
 
@@ -2638,27 +2638,27 @@ function disabling_truck_1_node_handler() {
 }
 
 function disabling_truck_2_node_handler() {
-  var0 = getEnt("truck_2_clip", "targetname");
-  var1 = getnode("truck_2_node_0", "targetname");
-  var2 = getnode("truck_2_node_1", "targetname");
-  var3 = getnode("truck_2_node_2", "targetname");
-  var0 movez(-9999, 0.5, 0.25, 0.25);
+  var_0 = getEnt("truck_2_clip", "targetname");
+  var_1 = getnode("truck_2_node_0", "targetname");
+  var_2 = getnode("truck_2_node_1", "targetname");
+  var_3 = getnode("truck_2_node_2", "targetname");
+  var_0 movez(-9999, 0.5, 0.25, 0.25);
   waitframe();
-  var0 connectpaths();
-  var1 disconnectnode();
-  var2 disconnectnode();
-  var3 disconnectnode();
+  var_0 connectpaths();
+  var_1 disconnectnode();
+  var_2 disconnectnode();
+  var_3 disconnectnode();
   scripts\engine\utility::flag_wait("truck_2_reached");
-  var1 connectnode();
-  var2 connectnode();
-  var3 connectnode();
+  var_1 connectnode();
+  var_2 connectnode();
+  var_3 connectnode();
 }
 
 function weapon_clip_delete() {
-  var0 = getEntArray("MH_weapon_clip", "targetname");
+  var_0 = getEntArray("MH_weapon_clip", "targetname");
 
-  foreach(var2 in var0) {
-    var2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
   }
 }
 
@@ -2694,17 +2694,17 @@ function first_floor_stairs_climbing_dialogue_handler() {
 }
 
 function mg_entry_callout_handler() {
-  var0 = getEnt("mg_house_gunner_2_target", "targetname");
-  var1 = getEntArray("mg_initial_callout_volume", "targetname");
-  var2 = 0;
-  var3 = cos(20);
+  var_0 = getEnt("mg_house_gunner_2_target", "targetname");
+  var_1 = getEntArray("mg_initial_callout_volume", "targetname");
+  var_2 = 0;
+  var_3 = cos(20);
 
-  while(!scripts\engine\utility::flag("magicbullet_rpg_guys") && var2 == 0) {
-    foreach(var5 in var1) {
-      if(level.player istouching(var5)) {
-        if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var0.origin, var3) && var2 == 0) {
+  while(!scripts\engine\utility::flag("magicbullet_rpg_guys") && var_2 == 0) {
+    foreach(var_5 in var_1) {
+      if(level.player istouching(var_5)) {
+        if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_0.origin, var_3) && var_2 == 0) {
           thread scripts\sp\maps\marines\marines_vo::vo_alley_mg_initial_callout_dialogue();
-          var2 = 1;
+          var_2 = 1;
         }
       }
     }

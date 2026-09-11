@@ -4,9 +4,9 @@
 ****************************************************/
 
 function init() {
-  var0 = scripts\mp\gametypes\br_quest_util::registerquestcategory("x2_map", 0);
+  var_0 = scripts\mp\gametypes\br_quest_util::registerquestcategory("x2_map", 0);
 
-  if(!var0) {
+  if(!var_0) {
     return;
   }
 
@@ -18,7 +18,7 @@ function init() {
 }
 
 function init_range() {
-  var0 = [];
+  var_0 = [];
 
   if(level.mapname == "mp_br_mechanics") {
     GscBinSkip0(0x2e, 0, (-483, -2260, 30));
@@ -27,31 +27,31 @@ function init_range() {
   GscBinSkip0(0x2e, 0, (4695, 306, -215));
 }
 
-function search(var0, var1, var2, var3, var4) {
-  var5 = scripts\mp\gametypes\br_gametype_x2::extra_riders_getin_anim_func("x2_map", var0, var1, var4);
-  var5.initprematchc130 = level.ref_14632;
-  var5.ref_1296e = scripts\mp\gametypes\br_quest_util::getquestdata("x2_map").destination[var5.initprematchc130].origin;
+function search(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = scripts\mp\gametypes\br_gametype_x2::extra_riders_getin_anim_func("x2_map", var_0, var_1, var_4);
+  var_5.initprematchc130 = level.ref_14632;
+  var_5.ref_1296e = scripts\mp\gametypes\br_quest_util::getquestdata("x2_map").destination[var_5.initprematchc130].origin;
   scripts\mp\gametypes\br_quest_util::uiobjectiveshowtoteam("x2_map", self.team);
-  scripts\mp\gametypes\br_quest_util::addquestinstance("x2_map", var5);
+  scripts\mp\gametypes\br_quest_util::addquestinstance("x2_map", var_5);
   scripts\mp\gametypes\br_quest_util::ref_13879("x2_map", self, self.team);
-  var6 = spawnStruct();
-  var6.ref_127d5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("x2_map", scripts\mp\gametypes\br_quest_util::ringing(self.team));
-  scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_x2_attack_quest_start_team_notify", var6);
-  var7 = scripts\mp\gametypes\br_quest_util::getquestdata("x2_map").destination.size;
+  var_6 = spawnStruct();
+  var_6.ref_127d5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("x2_map", scripts\mp\gametypes\br_quest_util::ringing(self.team));
+  scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_x2_attack_quest_start_team_notify", var_6);
+  var_7 = scripts\mp\gametypes\br_quest_util::getquestdata("x2_map").destination.size;
 
-  if(!scripts\mp\flags::gameflag("x2_ambush" + var7 + "_starting") && istrue(level.ref_13396)) {
+  if(!scripts\mp\flags::gameflag("x2_ambush" + var_7 + "_starting") && istrue(level.ref_13396)) {
     thread ref_14660();
   }
 
-  return var5;
+  return var_5;
 }
 
 function ref_14659() {
-  var0 = spawnStruct();
-  var1 = scripts\mp\gametypes\br_quest_util::ringing(self.team);
-  var2 = scripts\mp\gametypes\br_quest_util::getquestindex("x2_map");
-  var3 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("x2_map"));
-  var0.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var2, var1, var3);
+  var_0 = spawnStruct();
+  var_1 = scripts\mp\gametypes\br_quest_util::ringing(self.team);
+  var_2 = scripts\mp\gametypes\br_quest_util::getquestindex("x2_map");
+  var_3 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("x2_map"));
+  var_0.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var_2, var_1, var_3);
   self.ref_12d2e = self.playerlist[0].origin;
   self.ref_12d2b = self.playerlist[0].angles;
   self.result = "success";
@@ -60,16 +60,16 @@ function ref_14659() {
 }
 
 function ref_1465d() {
-  foreach(var1 in self.playerlist) {
-    if(isDefined(var1)) {
-      var1 scripts\mp\gametypes\br_quest_util::uiobjectivehide();
+  foreach(var_1 in self.playerlist) {
+    if(isDefined(var_1)) {
+      var_1 scripts\mp\gametypes\br_quest_util::uiobjectivehide();
     }
   }
 }
 
-function ref_1465c(var0) {
-  if(var0.team == self.team) {
-    if(!scripts\mp\gametypes\br_quest_util::isteamvalid(var0.team)) {
+function ref_1465c(var_0) {
+  if(var_0.team == self.team) {
+    if(!scripts\mp\gametypes\br_quest_util::isteamvalid(var_0.team)) {
       self.result = "fail";
       scripts\mp\gametypes\br_quest_util::removequestinstance();
       return;
@@ -79,13 +79,13 @@ function ref_1465c(var0) {
   }
 }
 
-function ref_1465e(var0) {
-  if(!gethillspawnshutofforigin(var0)) {
+function ref_1465e(var_0) {
+  if(!gethillspawnshutofforigin(var_0)) {
     return;
   }
 
-  var0 scripts\mp\gametypes\br_quest_util::uiobjectiveshow("x2_map");
-  scripts\mp\gametypes\br_quest_util::ref_1336c(var0);
+  var_0 scripts\mp\gametypes\br_quest_util::uiobjectiveshow("x2_map");
+  scripts\mp\gametypes\br_quest_util::ref_1336c(var_0);
 }
 
 function calculatehelispawndata() {
@@ -94,22 +94,22 @@ function calculatehelispawndata() {
 
 function ref_14660() {
   level endon("game_ended");
-  var0 = level.ref_145f1.ref_13c8d[0];
-  var1 = scripts\mp\gametypes\br_quest_util::getquestdata("x2_map").destination.size;
-  var2 = 20000;
+  var_0 = level.ref_145f1.ref_13c8d[0];
+  var_1 = scripts\mp\gametypes\br_quest_util::getquestdata("x2_map").destination.size;
+  var_2 = 20000;
 
-  if(self.initprematchc130 == var1 - 1) {
-    var2 = 20000;
+  if(self.initprematchc130 == var_1 - 1) {
+    var_2 = 20000;
   }
 
-  ref_143fd(var0, self.ref_1296e, var2);
+  ref_143fd(var_0, self.ref_1296e, var_2);
   ref_14659();
 }
 
-function ref_143fd(var0, var1, var2) {
-  var3 = var2 * var2;
+function ref_143fd(var_0, var_1, var_2) {
+  var_3 = var_2 * var_2;
 
-  while(length2dsquared(var0.origin - var1) > var3) {
+  while(length2dsquared(var_0.origin - var_1) > var_3) {
     waitframe();
   }
 }
@@ -121,6 +121,6 @@ function ref_1465f() {
   }
 }
 
-function gethillspawnshutofforigin(var0) {
-  return scripts\mp\gametypes\br_gametype_x2::extra_riders_func(var0);
+function gethillspawnshutofforigin(var_0) {
+  return scripts\mp\gametypes\br_gametype_x2::extra_riders_func(var_0);
 }

@@ -73,18 +73,18 @@ function init_hover_jet_vo() {
   game["dialog"]["hover_jet_attack_air"] = "hover_jet_air_target";
 }
 
-function weapongivenhoverjet(var0) {
+function weapongivenhoverjet(var_0) {
   scripts\mp\killstreaks\mapselect::startmapselectsequence();
   return true;
 }
 
 function tryusehoverjet() {
-  var0 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("hover_jet", self);
-  return tryusehoverjetfromstruct(var0);
+  var_0 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("hover_jet", self);
+  return tryusehoverjetfromstruct(var_0);
 }
 
-function tryusehoverjetfromstruct(var0) {
-  var1 = self.team;
+function tryusehoverjetfromstruct(var_0) {
+  var_1 = self.team;
 
   if(!scripts\cp_mp\vehicles\vehicle_tracking::reservevehicle()) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
@@ -95,13 +95,13 @@ function tryusehoverjetfromstruct(var0) {
   }
 
   level.incomingallhoverjets++;
-  var2 = 1;
+  var_2 = 1;
 
   if(scripts\cp_mp\utility\game_utility::islargemap()) {
-    var2 = 2;
+    var_2 = 2;
   }
 
-  if(level.hoverjets.size >= var2 || level.hoverjets.size + level.incomingallhoverjets > var2) {
+  if(level.hoverjets.size >= var_2 || level.hoverjets.size + level.incomingallhoverjets > var_2) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
       [[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/AIR_SPACE_TOO_CROWDED");
     }
@@ -112,12 +112,12 @@ function tryusehoverjetfromstruct(var0) {
   }
 
   if(scripts\cp_mp\utility\game_utility::islargemap() && level.teambased) {
-    var3 = 1;
-    level.incominghoverjets[var1]++;
+    var_3 = 1;
+    level.incominghoverjets[var_1]++;
 
-    if(scripts\cp_mp\utility\killstreak_utility::getnumactivekillstreakperteam(var1, level.hoverjets) + level.incominghoverjets[var1] > var3) {
+    if(scripts\cp_mp\utility\killstreak_utility::getnumactivekillstreakperteam(var_1, level.hoverjets) + level.incominghoverjets[var_1] > var_3) {
       level.incomingallhoverjets--;
-      level.incominghoverjets[var1]--;
+      level.incominghoverjets[var_1]--;
 
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
         [[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/MAX_FRIENDLY_VTOL_JET");
@@ -128,70 +128,70 @@ function tryusehoverjetfromstruct(var0) {
     }
   }
 
-  var4 = any_player_within_distance3d(var0);
-  var4 = istrue(var4);
+  var_4 = any_player_within_distance3d(var_0);
+  var_4 = istrue(var_4);
   level.incomingallhoverjets--;
 
   if(scripts\cp_mp\utility\game_utility::islargemap() && level.teambased) {
-    level.incominghoverjets[var1]--;
+    level.incominghoverjets[var_1]--;
   }
 
-  if(!var4) {
+  if(!var_4) {
     scripts\cp_mp\vehicles\vehicle_tracking::clearvehiclereservation();
   }
 
-  return var4;
+  return var_4;
 }
 
-function any_player_within_distance3d(var0) {
+function any_player_within_distance3d(var_0) {
   level endon("game_ended");
   self endon("disconnect");
 
   if(isDefined(level.killstreaktriggeredfunc)) {
-    if(!level[[level.killstreaktriggeredfunc]](var0)) {
+    if(!level[[level.killstreaktriggeredfunc]](var_0)) {
       return false;
     }
   }
 
-  var1 = scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_doweaponswitchdeploy(var0, getcompleteweaponname("ks_remote_map_mp"), 1, &weapongivenhoverjet);
+  var_1 = scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_doweaponswitchdeploy(var_0, getcompleteweaponname("ks_remote_map_mp"), 1, &weapongivenhoverjet);
 
-  if(!istrue(var1)) {
+  if(!istrue(var_1)) {
     return false;
   }
 
   if(isDefined(level.killstreakbeginusefunc)) {
-    if(!level[[level.killstreakbeginusefunc]](var0)) {
+    if(!level[[level.killstreakbeginusefunc]](var_0)) {
       return false;
     }
   }
 
-  var2 = hoverjet_getmapselectioninfo(var0, 1);
+  var_2 = hoverjet_getmapselectioninfo(var_0, 1);
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return false;
   }
 
-  var0 notify("killstreak_finished_with_deploy_weapon");
-  thread starthoverjetairstrikepass(self, var0, var2);
-  var3 = undefined;
+  var_0 notify("killstreak_finished_with_deploy_weapon");
+  thread starthoverjetairstrikepass(self, var_0, var_2);
+  var_3 = undefined;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("sound", "playKillstreakDeployDialog")) {
-    [[scripts\cp_mp\utility\script_utility::getsharedfunc("sound", "playKillstreakDeployDialog")]](self, var0.streakname);
-    var3 = 2;
+    [[scripts\cp_mp\utility\script_utility::getsharedfunc("sound", "playKillstreakDeployDialog")]](self, var_0.streakname);
+    var_3 = 2;
   }
 
-  thread scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("use_" + var0.streakname, 1, var3);
+  thread scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("use_" + var_0.streakname, 1, var_3);
   scripts\common\utility::ref_13e0a(level.ref_11b2a, "hover_jet", self.origin);
   thread scripts\mp\hud_util::teamplayercardsplash("used_hover_jet", self);
   return true;
 }
 
-function hoverjet_getmapselectioninfo(var0, var1) {
+function hoverjet_getmapselectioninfo(var_0, var_1) {
   scripts\common\utility::allow_weapon_switch(0);
   self setsoundsubmix("mp_killstreak_overlay");
-  var2 = scripts\mp\killstreaks\mapselect::getselectmappoint(var0, var1);
+  var_2 = scripts\mp\killstreaks\mapselect::getselectmappoint(var_0, var_1);
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     scripts\common\utility::allow_weapon_switch(1);
     self clearsoundsubmix("mp_killstreak_overlay");
     return undefined;
@@ -199,151 +199,151 @@ function hoverjet_getmapselectioninfo(var0, var1) {
 
   scripts\common\utility::allow_weapon_switch(1);
   self clearsoundsubmix("mp_killstreak_overlay");
-  return var2;
+  return var_2;
 }
 
-function starthoverjetairstrikepass(var0, var1, var2) {
+function starthoverjetairstrikepass(var_0, var_1, var_2) {
   level endon("game_ended");
-  var3 = scripts\cp_mp\utility\killstreak_utility::removeextracthelipad();
-  var4 = 24000;
-  var5 = 6500;
-  var6 = 3250;
-  var7 = 1500;
-  var8 = (0, 0, 0);
-  var9 = 1500;
-  var10 = var0.angles;
-  var11 = 1;
+  var_3 = scripts\cp_mp\utility\killstreak_utility::removeextracthelipad();
+  var_4 = 24000;
+  var_5 = 6500;
+  var_6 = 3250;
+  var_7 = 1500;
+  var_8 = (0, 0, 0);
+  var_9 = 1500;
+  var_10 = var_0.angles;
+  var_11 = 1;
 
-  if(isDefined(var3)) {
-    var6 = var3.origin[2] + 750;
+  if(isDefined(var_3)) {
+    var_6 = var_3.origin[2] + 750;
   }
 
-  var12 = scripts\cp_mp\utility\game_utility::getlocaleid();
+  var_12 = scripts\cp_mp\utility\game_utility::getlocaleid();
 
-  if(isDefined(var12) && var12 == "locale_6") {
-    var6 += 500;
+  if(isDefined(var_12) && var_12 == "locale_6") {
+    var_6 += 500;
   }
 
-  var14 = var2[0].location;
-  var10 = scripts\cp_mp\killstreaks\airstrike::callstrike_findoptimaldirection(var0, var14, var6);
-  var15 = scripts\cp_mp\killstreaks\airstrike::getflightpath(var14, var10, var4, var3, var6, var5, var9, var1.streakname, var11);
-  var16 = var15["startPoint"];
-  var17 = var15["endPoint"];
-  var18 = "veh8_mil_air_halfa_mp";
+  var_14 = var_2[0].location;
+  var_10 = scripts\cp_mp\killstreaks\airstrike::callstrike_findoptimaldirection(var_0, var_14, var_6);
+  var_15 = scripts\cp_mp\killstreaks\airstrike::getflightpath(var_14, var_10, var_4, var_3, var_6, var_5, var_9, var_1.streakname, var_11);
+  var_16 = var_15["startPoint"];
+  var_17 = var_15["endPoint"];
+  var_18 = "veh8_mil_air_halfa_mp";
 
-  if(scripts\cp_mp\utility\player_utility::getplayersuperfaction(var0)) {
-    var18 = "veh8_mil_air_halfa_east_mp";
+  if(scripts\cp_mp\utility\player_utility::getplayersuperfaction(var_0)) {
+    var_18 = "veh8_mil_air_halfa_east_mp";
   }
 
   scripts\cp_mp\vehicles\vehicle_tracking::clearvehiclereservation();
-  var19 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnhelicopter(var0, var16, var10, "veh_hover_jet_mp", var18);
+  var_19 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnhelicopter(var_0, var_16, var_10, "veh_hover_jet_mp", var_18);
 
-  if(!isDefined(var19)) {
+  if(!isDefined(var_19)) {
     return;
   }
 
-  var20 = 45;
-  var19.speed = 250;
-  var19.accel = 175;
-  var19.health = 2500;
-  var19.maxhealth = 2500;
-  var19.angles = vectortoangles(var10);
-  var19.lifetime = var20;
-  var19.team = var0.team;
-  var19.owner = var0;
-  var19.streakinfo = var1;
-  var19.streakname = var1.streakname;
-  var19.flaresreservecount = 1;
-  var19.returngoal = var14;
-  var19.currentdamagestate = 0;
-  var19.flyheight = var6;
-  var19.hoverheight = var7;
-  var19.missiles = 6;
-  var19.pers["team"] = var19.team;
-  var19.bestgroundtarget = undefined;
-  var19.bestairtarget = undefined;
-  var19.flightdir = var15["directionAngles"];
-  var19 setmaxpitchroll(0, 90);
-  var19 vehicle_setspeed(var19.speed, var19.accel);
-  var19 sethoverparams(50, 100, 50);
-  var19 setturningability(0.05);
-  var19 setyawspeed(45, 25, 25, 0.5);
-  var19 setotherent(var19.owner);
-  var19 setCanDamage(1);
-  var19 setneargoalnotifydist(700);
-  var19 setvehicleteam(var19.team);
-  level.hoverjets[level.hoverjets.size] = var19;
-  var19 scripts\mp\utility\killstreak::addtoactivekillstreaklist(var1.streakname, "Killstreak_Air", var19.owner, 0, 1, 100);
-  var19 setscriptablepartstate("blinking_lights", "on", 0);
-  var19 setscriptablepartstate("thrusters", "active", 0);
-  var19 setscriptablepartstate("contrails", "on", 0);
-  var19.turret = spawnturret("misc_turret", var19 gettagorigin("tag_turret"), "hover_jet_turret_mp");
-  var19.turret setModel("veh8_mil_air_halfa_turret");
-  var19.turret.owner = var19.owner;
-  var19.turret.team = var19.team;
-  var19.turret.angles = var19.angles;
-  var19.turret.streakinfo = var1;
-  var19.turret linkTo(var19, "tag_turret", (0, 0, 5), (0, 0, 0));
-  var19.turret setturretteam(var19.team);
-  var19.turret setturretmodechangewait(0);
-  var19.turret setmode("manual_target");
-  var19.turret setsentryowner(var19.owner);
-  var19.turret setdefaultdroppitch(45);
-  var19.turret maketurretinoperable();
-  var19.turret setleftarc(360);
-  var19.turret setrightarc(360);
-  var19.turret setbottomarc(90);
-  var19.turret settoparc(90);
-  var19.turret setconvergencetime(0.5, "pitch");
-  var19.turret setconvergencetime(0.5, "yaw");
-  var19.turret setconvergenceheightpercent(0.65);
-  var19.killcament = spawn("script_model", var19.turret gettagorigin("bi_center"));
-  var19.killcament linkTo(var19, "tag_origin", (-500, 0, 500), (0, 0, 0));
-  var19.turret.groundtargetent = spawn("script_model", var19.origin);
-  var19.turret.groundtargetent setModel("tag_origin");
-  var19.turret.groundtargetent dontinterpolate();
+  var_20 = 45;
+  var_19.speed = 250;
+  var_19.accel = 175;
+  var_19.health = 2500;
+  var_19.maxhealth = 2500;
+  var_19.angles = vectortoangles(var_10);
+  var_19.lifetime = var_20;
+  var_19.team = var_0.team;
+  var_19.owner = var_0;
+  var_19.streakinfo = var_1;
+  var_19.streakname = var_1.streakname;
+  var_19.flaresreservecount = 1;
+  var_19.returngoal = var_14;
+  var_19.currentdamagestate = 0;
+  var_19.flyheight = var_6;
+  var_19.hoverheight = var_7;
+  var_19.missiles = 6;
+  var_19.pers["team"] = var_19.team;
+  var_19.bestgroundtarget = undefined;
+  var_19.bestairtarget = undefined;
+  var_19.flightdir = var_15["directionAngles"];
+  var_19 setmaxpitchroll(0, 90);
+  var_19 vehicle_setspeed(var_19.speed, var_19.accel);
+  var_19 sethoverparams(50, 100, 50);
+  var_19 setturningability(0.05);
+  var_19 setyawspeed(45, 25, 25, 0.5);
+  var_19 setotherent(var_19.owner);
+  var_19 setCanDamage(1);
+  var_19 setneargoalnotifydist(700);
+  var_19 setvehicleteam(var_19.team);
+  level.hoverjets[level.hoverjets.size] = var_19;
+  var_19 scripts\mp\utility\killstreak::addtoactivekillstreaklist(var_1.streakname, "Killstreak_Air", var_19.owner, 0, 1, 100);
+  var_19 setscriptablepartstate("blinking_lights", "on", 0);
+  var_19 setscriptablepartstate("thrusters", "active", 0);
+  var_19 setscriptablepartstate("contrails", "on", 0);
+  var_19.turret = spawnturret("misc_turret", var_19 gettagorigin("tag_turret"), "hover_jet_turret_mp");
+  var_19.turret setModel("veh8_mil_air_halfa_turret");
+  var_19.turret.owner = var_19.owner;
+  var_19.turret.team = var_19.team;
+  var_19.turret.angles = var_19.angles;
+  var_19.turret.streakinfo = var_1;
+  var_19.turret linkTo(var_19, "tag_turret", (0, 0, 5), (0, 0, 0));
+  var_19.turret setturretteam(var_19.team);
+  var_19.turret setturretmodechangewait(0);
+  var_19.turret setmode("manual_target");
+  var_19.turret setsentryowner(var_19.owner);
+  var_19.turret setdefaultdroppitch(45);
+  var_19.turret maketurretinoperable();
+  var_19.turret setleftarc(360);
+  var_19.turret setrightarc(360);
+  var_19.turret setbottomarc(90);
+  var_19.turret settoparc(90);
+  var_19.turret setconvergencetime(0.5, "pitch");
+  var_19.turret setconvergencetime(0.5, "yaw");
+  var_19.turret setconvergenceheightpercent(0.65);
+  var_19.killcament = spawn("script_model", var_19.turret gettagorigin("bi_center"));
+  var_19.killcament linkTo(var_19, "tag_origin", (-500, 0, 500), (0, 0, 0));
+  var_19.turret.groundtargetent = spawn("script_model", var_19.origin);
+  var_19.turret.groundtargetent setModel("tag_origin");
+  var_19.turret.groundtargetent dontinterpolate();
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "addToActiveKillstreakList")) {
-    var19[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "addToActiveKillstreakList")]](var1.streakname, "Killstreak_Air", var0, 0, 1, 100);
+    var_19[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "addToActiveKillstreakList")]](var_1.streakname, "Killstreak_Air", var_0, 0, 1, 100);
   }
 
-  var19.animname = var1.streakname;
-  var19.scenenode = spawn("script_model", var19.returngoal * (1, 1, 0) + (0, 0, var6));
-  var19.scenenode.angles = var19.angles;
-  var19.scenenode setModel("tag_origin");
-  thread hoverjet_firetrackermissiles(var19);
-  hoverjet_playflyfx(var19);
-  var24 = getanimlength(level.scr_anim[var19.animname]["airstrike_flyby"]);
-  var25 = scripts\engine\utility::get_notetrack_time(level.scr_anim[var19.animname]["airstrike_flyby"], "contrail_off");
-  var19.scenenode thread scripts\common\anim::anim_single_solo(var19, "airstrike_flyby");
-  thread hoverjet_delaysetscriptable(var19, var25, "contrails");
+  var_19.animname = var_1.streakname;
+  var_19.scenenode = spawn("script_model", var_19.returngoal * (1, 1, 0) + (0, 0, var_6));
+  var_19.scenenode.angles = var_19.angles;
+  var_19.scenenode setModel("tag_origin");
+  thread hoverjet_firetrackermissiles(var_19);
+  hoverjet_playflyfx(var_19);
+  var_24 = getanimlength(level.scr_anim[var_19.animname]["airstrike_flyby"]);
+  var_25 = scripts\engine\utility::get_notetrack_time(level.scr_anim[var_19.animname]["airstrike_flyby"], "contrail_off");
+  var_19.scenenode thread scripts\common\anim::anim_single_solo(var_19, "airstrike_flyby");
+  thread hoverjet_delaysetscriptable(var_19, var_25, "contrails");
   thread hoverjet_handledestroyed();
   thread spawn_script_model_driver_and_passengers();
-  var19 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Air", self);
-  var19 scripts\mp\utility\killstreak::killstreak_make_vehicle(var1.streakname, "destroyed_hover_jet", undefined, "timeout_hover_jet", "callout_destroyed_hover_jet");
-  var19 scripts\mp\utility\killstreak::killstreak_set_pre_mod_damage_callback(var1.streakname);
-  var19 scripts\mp\utility\killstreak::killstreak_set_post_mod_damage_callback(var1.streakname, &hoverjet_modifydamage);
-  var19 scripts\mp\utility\killstreak::killstreak_set_death_callback(var1.streakname, &hoverjet_handledeathdamage);
-  var19 thread scripts\mp\killstreaks\flares::flares_handleincomingstinger(&hoverjet_handlemissiledetection);
-  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var24);
+  var_19 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Air", self);
+  var_19 scripts\mp\utility\killstreak::killstreak_make_vehicle(var_1.streakname, "destroyed_hover_jet", undefined, "timeout_hover_jet", "callout_destroyed_hover_jet");
+  var_19 scripts\mp\utility\killstreak::killstreak_set_pre_mod_damage_callback(var_1.streakname);
+  var_19 scripts\mp\utility\killstreak::killstreak_set_post_mod_damage_callback(var_1.streakname, &hoverjet_modifydamage);
+  var_19 scripts\mp\utility\killstreak::killstreak_set_death_callback(var_1.streakname, &hoverjet_handledeathdamage);
+  var_19 thread scripts\mp\killstreaks\flares::flares_handleincomingstinger(&hoverjet_handlemissiledetection);
+  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_24);
 
-  if(!isDefined(var19)) {
+  if(!isDefined(var_19)) {
     return;
   }
 
-  if(isDefined(var19.scenenode)) {
-    var19.scenenode delete();
+  if(isDefined(var_19.scenenode)) {
+    var_19.scenenode delete();
   }
 
-  starthoverjetdefend(var19, var1);
+  starthoverjetdefend(var_19, var_1);
 }
 
-function hoverjet_delaysetscriptable(var0, var1, var2) {
+function hoverjet_delaysetscriptable(var_0, var_1, var_2) {
   self endon("death");
   self endon("crashing");
   level endon("game_ended");
-  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var0);
-  self setscriptablepartstate(var1, var2, 0);
+  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_0);
+  self setscriptablepartstate(var_1, var_2, 0);
 }
 
 function hoverjet_playflyfx() {
@@ -364,118 +364,118 @@ function hoverjet_playreturnfx() {
   self playsoundonmovingent("ks_hoverjet_return");
 }
 
-function hoverjet_firetrackermissiles(var0) {
+function hoverjet_firetrackermissiles(var_0) {
   self endon("death");
   level endon("game_ended");
-  var1 = scripts\engine\utility::get_notetrack_time(level.scr_anim["hover_jet"]["airstrike_flyby"], "attack");
-  var2 = var1 - 4;
-  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var2);
-  var3 = ["physicscontents_clipshot", "physicscontents_missileclip", "physicscontents_solid"];
-  var4 = physics_createcontents(var3);
-  var5 = self.angles * (0, 1, 0);
-  var6 = anglesToForward(var5);
-  var7 = anglestoright(var5);
-  var8 = [var0 - var6 * 2250 + var7 * 750, var0 - var6 * 1500 - var7 * 750, var0 - var6 * 750 + var7 * 250, var0 - var7 * 250, var0 + var6 * 750 + var7 * 750, var0 + var6 * 1500 - var7 * 750, var0 + var6 * 2250 + var7 * 250, var0 + var6 * 3000 - var7 * 250];
-  var9 = ["tag_right_aphid_missile", "tag_left_aphid_missile", "tag_right_archer_missile", "tag_left_archer_missile"];
-  var10 = 0;
-  var11 = [];
+  var_1 = scripts\engine\utility::get_notetrack_time(level.scr_anim["hover_jet"]["airstrike_flyby"], "attack");
+  var_2 = var_1 - 4;
+  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_2);
+  var_3 = ["physicscontents_clipshot", "physicscontents_missileclip", "physicscontents_solid"];
+  var_4 = physics_createcontents(var_3);
+  var_5 = self.angles * (0, 1, 0);
+  var_6 = anglesToForward(var_5);
+  var_7 = anglestoright(var_5);
+  var_8 = [var_0 - var_6 * 2250 + var_7 * 750, var_0 - var_6 * 1500 - var_7 * 750, var_0 - var_6 * 750 + var_7 * 250, var_0 - var_7 * 250, var_0 + var_6 * 750 + var_7 * 750, var_0 + var_6 * 1500 - var_7 * 750, var_0 + var_6 * 2250 + var_7 * 250, var_0 + var_6 * 3000 - var_7 * 250];
+  var_9 = ["tag_right_aphid_missile", "tag_left_aphid_missile", "tag_right_archer_missile", "tag_left_archer_missile"];
+  var_10 = 0;
+  var_11 = [];
 
-  foreach(var13 in var8) {
-    var14 = var13 + (0, 0, 10000);
-    var15 = var13 - (0, 0, 10000);
-    var16 = scripts\engine\trace::ray_trace(var14, var15, level.characters, var4);
-    var17 = scripts\common\utility::playersinsphere(var16["position"], 1000);
-    var18 = hoverjet_findmissiletarget(var17, var11);
-    var19 = self gettagorigin(var9[var10]) + anglesToForward(self gettagangles(var9[var10])) * 300;
-    var20 = scripts\cp_mp\utility\weapon_utility::_magicbullet(getcompleteweaponname("hover_jet_proj_mp"), var19, var16["position"], self.owner);
-    var20.killcament = spawn("script_model", var20.origin);
-    var20.killcament linkTo(var20, "tag_origin", (-100, 0, 500), (0, 0, 0));
-    thread hoverjet_missilekillcammove(var20.killcament, var16["position"]);
-    var20.streakinfo = self.streakinfo;
+  foreach(var_13 in var_8) {
+    var_14 = var_13 + (0, 0, 10000);
+    var_15 = var_13 - (0, 0, 10000);
+    var_16 = scripts\engine\trace::ray_trace(var_14, var_15, level.characters, var_4);
+    var_17 = scripts\common\utility::playersinsphere(var_16["position"], 1000);
+    var_18 = hoverjet_findmissiletarget(var_17, var_11);
+    var_19 = self gettagorigin(var_9[var_10]) + anglesToForward(self gettagangles(var_9[var_10])) * 300;
+    var_20 = scripts\cp_mp\utility\weapon_utility::_magicbullet(getcompleteweaponname("hover_jet_proj_mp"), var_19, var_16["position"], self.owner);
+    var_20.killcament = spawn("script_model", var_20.origin);
+    var_20.killcament linkTo(var_20, "tag_origin", (-100, 0, 500), (0, 0, 0));
+    thread hoverjet_missilekillcammove(var_20.killcament, var_16["position"]);
+    var_20.streakinfo = self.streakinfo;
     self.streakinfo.shots_fired++;
-    thread hoverjet_firemissilescriptable(var10 + 1);
+    thread hoverjet_firemissilescriptable(var_10 + 1);
 
-    if(isDefined(var18)) {
-      var13 = var18.origin;
-      var11 = var18;
-      thread hoverjet_delaymissiletracking(var20, 0.05, var18);
+    if(isDefined(var_18)) {
+      var_13 = var_18.origin;
+      var_11 = var_18;
+      thread hoverjet_delaymissiletracking(var_20, 0.05, var_18);
     }
 
     wait 0.5;
-    var10++;
+    var_10++;
 
-    if(var10 > var9.size - 1) {
-      var10 = 0;
+    if(var_10 > var_9.size - 1) {
+      var_10 = 0;
     }
   }
 
-  var11 = undefined;
+  var_11 = undefined;
 }
 
-function hoverjet_missilekillcammove(var0, var1) {
+function hoverjet_missilekillcammove(var_0, var_1) {
   self endon("death");
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(2);
   self unlink();
-  self moveTo(var0 - anglesToForward(var1) * 750, 6);
+  self moveTo(var_0 - anglesToForward(var_1) * 750, 6);
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(7);
   self delete();
 }
 
-function hoverjet_firemissilescriptable(var0) {
+function hoverjet_firemissilescriptable(var_0) {
   self endon("death");
   level endon("game_ended");
-  self setscriptablepartstate("fire_missile_" + var0, "on", 0);
+  self setscriptablepartstate("fire_missile_" + var_0, "on", 0);
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(0.5);
-  self setscriptablepartstate("fire_missile_" + var0, "off", 0);
+  self setscriptablepartstate("fire_missile_" + var_0, "off", 0);
 }
 
-function hoverjet_findmissiletarget(var0, var1) {
-  var2 = undefined;
+function hoverjet_findmissiletarget(var_0, var_1) {
+  var_2 = undefined;
 
-  foreach(var4 in var0) {
-    if(level.teambased && var4.team == self.team) {
+  foreach(var_4 in var_0) {
+    if(level.teambased && var_4.team == self.team) {
       continue;
     }
 
-    if(var4 == self.owner) {
+    if(var_4 == self.owner) {
       continue;
     }
 
-    if(scripts\engine\utility::array_contains(var1, var4)) {
+    if(scripts\engine\utility::array_contains(var_1, var_4)) {
       continue;
     }
 
-    if(var4 scripts\mp\utility\perk::_hasperk("specialty_blindeye")) {
+    if(var_4 scripts\mp\utility\perk::_hasperk("specialty_blindeye")) {
       continue;
     }
 
-    var2 = var4;
+    var_2 = var_4;
     break;
   }
 
-  return var2;
+  return var_2;
 }
 
-function hoverjet_delaymissiletracking(var0, var1, var2) {
+function hoverjet_delaymissiletracking(var_0, var_1, var_2) {
   self endon("death");
   level endon("game_ended");
-  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var1);
+  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_1);
 
-  if(isDefined(var0)) {
-    var0 missile_settargetEnt(var2, (0, 0, 10));
+  if(isDefined(var_0)) {
+    var_0 missile_settargetEnt(var_2, (0, 0, 10));
     return;
   }
 }
 
-function hoverjet_delayresetscriptable(var0) {
+function hoverjet_delayresetscriptable(var_0) {
   self endon("death");
   level endon("game_ended");
-  self setscriptablepartstate("explode" + var0, "active", 0);
+  self setscriptablepartstate("explode" + var_0, "active", 0);
   wait 1;
-  self setscriptablepartstate("explode" + var0, "neutral", 0);
+  self setscriptablepartstate("explode" + var_0, "neutral", 0);
 }
 
-function starthoverjetdefend(var0) {
+function starthoverjetdefend(var_0) {
   thread hoverjet_defendlocation();
 }
 
@@ -490,25 +490,25 @@ function hoverjet_defendlocation() {
   thread hoverjet_movetolocation(self.returngoal);
 }
 
-function hoverjet_handlemissiledetection(var0, var1, var2, var3) {
+function hoverjet_handlemissiledetection(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("crashing");
   level endon("game_ended");
 
   for(;;) {
-    if(!isDefined(var2)) {
+    if(!isDefined(var_2)) {
       break;
     }
 
-    var4 = var2 getpointinbounds(0, 0, 0);
-    var5 = distance(self.origin, var4);
+    var_4 = var_2 getpointinbounds(0, 0, 0);
+    var_5 = distance(self.origin, var_4);
 
-    if(var5 < 4000 && var2.flaresreservecount > 0) {
-      var2 scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("hover_jet_flares", 1);
-      scripts\mp\killstreaks\flares::flares_reducereserves(var2);
-      var2 thread scripts\mp\killstreaks\flares::flares_playFX("jet_flares", var3);
-      var6 = var2 scripts\mp\killstreaks\flares::flares_deploy();
-      self missile_settargetEnt(var6);
+    if(var_5 < 4000 && var_2.flaresreservecount > 0) {
+      var_2 scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("hover_jet_flares", 1);
+      scripts\mp\killstreaks\flares::flares_reducereserves(var_2);
+      var_2 thread scripts\mp\killstreaks\flares::flares_playFX("jet_flares", var_3);
+      var_6 = var_2 scripts\mp\killstreaks\flares::flares_deploy();
+      self missile_settargetEnt(var_6);
       self notify("missile_pairedWithFlare");
       return;
     }
@@ -517,12 +517,12 @@ function hoverjet_handlemissiledetection(var0, var1, var2, var3) {
   }
 }
 
-function hoverjet_watchlifetime(var0) {
+function hoverjet_watchlifetime(var_0) {
   self endon("death");
   self endon("leaving");
   self endon("crashing");
   level endon("game_ended");
-  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var0);
+  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_0);
   scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("timeout_" + self.streakinfo.streakname, 1);
   thread hoverjet_leave();
 }
@@ -543,12 +543,12 @@ function hoverjet_watchowner() {
   thread hoverjet_leaveonownernotify("joined_team");
 }
 
-function hoverjet_leaveonownernotify(var0) {
+function hoverjet_leaveonownernotify(var_0) {
   self endon("death");
   self endon("leaving");
   self endon("crashing");
   level endon("game_ended");
-  self.owner waittill(var0);
+  self.owner waittill(var_0);
   thread hoverjet_leave();
 }
 
@@ -565,37 +565,37 @@ function hoverjet_startcombatlogic() {
   self setscriptablepartstate("thrusters", "idle", 0);
 }
 
-function hoverjet_movetolocation(var0) {
+function hoverjet_movetolocation(var_0) {
   self endon("death");
   self endon("leaving");
   self endon("crashing");
   level endon("game_ended");
-  var1 = [self, self.turret];
+  var_1 = [self, self.turret];
 
   for(;;) {
-    var2 = self.origin;
-    var3 = var0 * (1, 1, 0) + (0, 0, self.origin[2]);
-    var4 = scripts\engine\trace::sphere_trace(var2, var3, 256, var1);
-    var5 = 0;
-    var6 = var0[0];
-    var7 = var0[1];
+    var_2 = self.origin;
+    var_3 = var_0 * (1, 1, 0) + (0, 0, self.origin[2]);
+    var_4 = scripts\engine\trace::sphere_trace(var_2, var_3, 256, var_1);
+    var_5 = 0;
+    var_6 = var_0[0];
+    var_7 = var_0[1];
 
-    if(isDefined(var4)) {
-      if(var4["hittype"] != "hittype_none") {
-        var6 = var4["position"][0];
-        var7 = var4["position"][1];
-        var5 = 1;
+    if(isDefined(var_4)) {
+      if(var_4["hittype"] != "hittype_none") {
+        var_6 = var_4["position"][0];
+        var_7 = var_4["position"][1];
+        var_5 = 1;
       }
     }
 
-    var8 = hoverjet_getcorrectheight(var6, var7, 20);
-    var9 = (var6, var7, var8);
-    self setvehgoalpos(var9, 1);
+    var_8 = hoverjet_getcorrectheight(var_6, var_7, 20);
+    var_9 = (var_6, var_7, var_8);
+    self setvehgoalpos(var_9, 1);
     self waittill("near_goal");
 
-    if(!istrue(var5)) {
-      self.currentguardlocation = var9;
-      self notify("hoverJet_moveToNewlocation", var9);
+    if(!istrue(var_5)) {
+      self.currentguardlocation = var_9;
+      self notify("hoverJet_moveToNewlocation", var_9);
       break;
     }
   }
@@ -603,31 +603,31 @@ function hoverjet_movetolocation(var0) {
   self clearlookatent();
 }
 
-function hoverjet_getcorrectheight(var0, var1, var2) {
-  var3 = self.hoverheight;
-  var5 = hoverjet_tracegroundpoint(var0, var1);
-  var6 = var5 + var3;
-  var6 += randomint(var2);
-  return var6;
+function hoverjet_getcorrectheight(var_0, var_1, var_2) {
+  var_3 = self.hoverheight;
+  var_5 = hoverjet_tracegroundpoint(var_0, var_1);
+  var_6 = var_5 + var_3;
+  var_6 += randomint(var_2);
+  return var_6;
 }
 
-function hoverjet_tracegroundpoint(var0, var1) {
+function hoverjet_tracegroundpoint(var_0, var_1) {
   self endon("death");
   self endon("acquiringTarget");
   self endon("leaving");
-  var2 = -99999;
-  var3 = self.origin[2];
-  var4 = level.averagealliesz;
-  var5 = scripts\engine\trace::create_contents(0, 1, 1, 1, 1, 0, 0, 0, 0);
-  var6 = scripts\engine\trace::sphere_trace((var0, var1, var3), (var0, var1, var2), 512, self, var5, 1);
+  var_2 = -99999;
+  var_3 = self.origin[2];
+  var_4 = level.averagealliesz;
+  var_5 = scripts\engine\trace::create_contents(0, 1, 1, 1, 1, 0, 0, 0, 0);
+  var_6 = scripts\engine\trace::sphere_trace((var_0, var_1, var_3), (var_0, var_1, var_2), 512, self, var_5, 1);
 
-  if(var6["position"][2] < var4) {
-    var7 = var4;
+  if(var_6["position"][2] < var_4) {
+    var_7 = var_4;
   } else {
-    var7 = var7["position"][2];
+    var_7 = var_7["position"][2];
   }
 
-  return var7;
+  return var_7;
 }
 
 function hoverjet_engagegroundtargets() {
@@ -639,13 +639,13 @@ function hoverjet_engagegroundtargets() {
   level endon("game_ended");
 
   for(;;) {
-    var0 = undefined;
+    var_0 = undefined;
 
     if(!isDefined(self.bestgroundtarget)) {
-      var1 = hoverjet_getbestgroundtarget();
-      self.bestgroundtarget = var1[0];
-      var0 = var1[1];
-      var1 = undefined;
+      var_1 = hoverjet_getbestgroundtarget();
+      self.bestgroundtarget = var_1[0];
+      var_0 = var_1[1];
+      var_1 = undefined;
       self notify("acquiringTarget", self.bestgroundtarget);
 
       if(!isDefined(self.bestgroundtarget)) {
@@ -654,10 +654,10 @@ function hoverjet_engagegroundtargets() {
       }
     }
 
-    var2 = undefined;
+    var_2 = undefined;
 
-    if(istrue(var0)) {
-      var2 = self.bestgroundtarget scripts\cp_mp\utility\player_utility::getvehicle();
+    if(istrue(var_0)) {
+      var_2 = self.bestgroundtarget scripts\cp_mp\utility\player_utility::getvehicle();
     }
 
     self.turret settargetentity(self.turret.groundtargetent);
@@ -667,9 +667,9 @@ function hoverjet_engagegroundtargets() {
     }
 
     thread hoverjet_watchtargetstatus(self.bestgroundtarget);
-    thread hoverjet_watchtargetlos(self.bestgroundtarget, undefined, var2);
+    thread hoverjet_watchtargetlos(self.bestgroundtarget, undefined, var_2);
     thread hoverjet_watchtargettimeout(self.bestgroundtarget);
-    hoverjet_fireongroundtarget(var0);
+    hoverjet_fireongroundtarget(var_0);
     scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(1);
   }
 }
@@ -677,86 +677,86 @@ function hoverjet_engagegroundtargets() {
 function hoverjet_getbestgroundtarget() {
   self endon("death");
   self endon("leaving");
-  var0 = scripts\cp_mp\killstreaks\chopper_support::choppersupport_gettargets(self.turret, 3000, 0, 1);
-  var1 = undefined;
-  var2 = undefined;
-  var3 = undefined;
+  var_0 = scripts\cp_mp\killstreaks\chopper_support::choppersupport_gettargets(self.turret, 3000, 0, 1);
+  var_1 = undefined;
+  var_2 = undefined;
+  var_3 = undefined;
 
-  foreach(var5 in var0) {
-    if(!scripts\cp_mp\killstreaks\chopper_support::goliath_init(var5.player)) {
+  foreach(var_5 in var_0) {
+    if(!scripts\cp_mp\killstreaks\chopper_support::goliath_init(var_5.player)) {
       continue;
     }
 
-    var6 = 0;
-    var7 = 0;
-    var8 = abs(vectortoangles(var5.player.origin - self.origin)[1]);
-    var9 = abs(self gettagangles("tag_flash")[1]);
-    var8 = abs(var8 - var9);
-    var10 = var5.player getweaponslistitems();
+    var_6 = 0;
+    var_7 = 0;
+    var_8 = abs(vectortoangles(var_5.player.origin - self.origin)[1]);
+    var_9 = abs(self gettagangles("tag_flash")[1]);
+    var_8 = abs(var_8 - var_9);
+    var_10 = var_5.player getweaponslistitems();
 
-    foreach(var12 in var10) {
-      var13 = weaponclass(var12);
+    foreach(var_12 in var_10) {
+      var_13 = weaponclass(var_12);
 
-      if(var13 == "rocketlauncher") {
-        var8 -= 40;
+      if(var_13 == "rocketlauncher") {
+        var_8 -= 40;
       }
     }
 
-    if(istrue(var5.ref_13a93)) {
-      var7 = 1;
-      var8 += 40;
+    if(istrue(var_5.ref_13a93)) {
+      var_7 = 1;
+      var_8 += 40;
     }
 
-    if(!isDefined(var1) || var1 > var8) {
-      var1 = var8;
-      var2 = var5.player;
-      var3 = var7;
+    if(!isDefined(var_1) || var_1 > var_8) {
+      var_1 = var_8;
+      var_2 = var_5.player;
+      var_3 = var_7;
     }
   }
 
-  return [var2, var3];
+  return [var_2, var_3];
 }
 
-function hoverjet_fireongroundtarget(var0) {
-  var1 = weaponfiretime("hover_jet_turret_mp");
-  var2 = 0;
-  var3 = 0;
-  var4 = 100;
+function hoverjet_fireongroundtarget(var_0) {
+  var_1 = weaponfiretime("hover_jet_turret_mp");
+  var_2 = 0;
+  var_3 = 0;
+  var_4 = 100;
 
   while(isDefined(self) && isDefined(self.bestgroundtarget) && !isDefined(self.iscrashing) && !isDefined(self.isleaving)) {
     if(hoverjet_turretlookingattarget(self.turret)) {
-      var6 = undefined;
+      var_6 = undefined;
 
-      if(istrue(var0)) {
-        var6 = self.bestgroundtarget.origin;
+      if(istrue(var_0)) {
+        var_6 = self.bestgroundtarget.origin;
       } else {
-        var6 = self.bestgroundtarget gettagorigin("j_mainroot");
+        var_6 = self.bestgroundtarget gettagorigin("j_mainroot");
       }
 
-      scripts\cp_mp\killstreaks\chopper_support::choppersupport_setattackpoint(self.turret, self.bestgroundtarget, var6, var4);
+      scripts\cp_mp\killstreaks\chopper_support::choppersupport_setattackpoint(self.turret, self.bestgroundtarget, var_6, var_4);
 
-      if(var3 == 15) {
-        var4 = 50;
-      } else if(var3 == 30) {
-        var4 = undefined;
+      if(var_3 == 15) {
+        var_4 = 50;
+      } else if(var_3 == 30) {
+        var_4 = undefined;
       }
 
       self.turret shootturret("tag_flash");
-      var3++;
+      var_3++;
       self.turret.streakinfo.shots_fired++;
     }
 
-    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var1);
+    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_1);
   }
 }
 
 function hoverjet_turretlookingattarget() {
-  var0 = 0.996;
-  var1 = anglesToForward(self gettagangles("tag_flash"));
-  var2 = vectorNormalize(self.groundtargetent.origin - self.origin);
-  var3 = vectordot(var1, var2);
+  var_0 = 0.996;
+  var_1 = anglesToForward(self gettagangles("tag_flash"));
+  var_2 = vectorNormalize(self.groundtargetent.origin - self.origin);
+  var_3 = vectordot(var_1, var_2);
 
-  if(isDefined(self gettargetentity(1)) && var3 >= var0) {
+  if(isDefined(self gettargetentity(1)) && var_3 >= var_0) {
     return true;
   }
 
@@ -772,9 +772,9 @@ function hoverjet_engageairtargets() {
 
   for(;;) {
     if(!isDefined(self.bestairtarget)) {
-      var0 = [];
-      var0 = scripts\engine\utility::array_combine(level.helis, level.littlebirds, level.supportdrones);
-      self.bestairtarget = hoverjet_getbestairtarget(var0);
+      var_0 = [];
+      var_0 = scripts\engine\utility::array_combine(level.helis, level.littlebirds, level.supportdrones);
+      self.bestairtarget = hoverjet_getbestairtarget(var_0);
       self notify("hoverJet_acquiringAirTarget", self.bestairtarget);
 
       if(!isDefined(self.bestairtarget)) {
@@ -790,21 +790,21 @@ function hoverjet_engageairtargets() {
 }
 
 function hoverjet_fireonairtarget() {
-  var0 = "right";
-  var1 = getcompleteweaponname("hover_jet_proj_mp");
-  var2 = undefined;
+  var_0 = "right";
+  var_1 = getcompleteweaponname("hover_jet_proj_mp");
+  var_2 = undefined;
   self setlookatent(self.bestairtarget);
 
   while(isDefined(self) && isDefined(self.bestairtarget)) {
-    var3 = 5;
+    var_3 = 5;
 
-    if(!istrue(var2)) {
+    if(!istrue(var_2)) {
       scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("hover_jet_attack_air");
-      var2 = 1;
+      var_2 = 1;
     }
 
-    while(var3 > 0 && isDefined(self.bestairtarget) && !hoverjet_airtargetiswithinview(self.bestairtarget)) {
-      var3 -= level.framedurationseconds;
+    while(var_3 > 0 && isDefined(self.bestairtarget) && !hoverjet_airtargetiswithinview(self.bestairtarget)) {
+      var_3 -= level.framedurationseconds;
       waitframe();
     }
 
@@ -815,17 +815,17 @@ function hoverjet_fireonairtarget() {
     }
 
     if(isDefined(self.bestairtarget)) {
-      var5 = self gettagorigin("tag_" + var0 + "_archer_missile") + anglesToForward(self.angles) * 100;
-      var6 = var5 + anglesToForward(self.angles) * 100;
-      var7 = scripts\cp_mp\utility\weapon_utility::_magicbullet(var1, var5, var6, self.owner);
-      var8 = hoverjet_setmissileoffset(self.bestairtarget);
-      var7 missile_settargetEnt(self.bestairtarget, var8);
-      var7.streakinfo = self.streakinfo;
+      var_5 = self gettagorigin("tag_" + var_0 + "_archer_missile") + anglesToForward(self.angles) * 100;
+      var_6 = var_5 + anglesToForward(self.angles) * 100;
+      var_7 = scripts\cp_mp\utility\weapon_utility::_magicbullet(var_1, var_5, var_6, self.owner);
+      var_8 = hoverjet_setmissileoffset(self.bestairtarget);
+      var_7 missile_settargetEnt(self.bestairtarget, var_8);
+      var_7.streakinfo = self.streakinfo;
 
-      if(var0 == "right") {
-        var0 = "left";
+      if(var_0 == "right") {
+        var_0 = "left";
       } else {
-        var0 = "right";
+        var_0 = "right";
       }
     } else {
       break;
@@ -841,62 +841,62 @@ function hoverjet_fireonairtarget() {
   }
 }
 
-function hoverjet_setmissileoffset(var0) {
-  var1 = (0, 0, 0);
+function hoverjet_setmissileoffset(var_0) {
+  var_1 = (0, 0, 0);
 
-  if(isDefined(var0.streakinfo)) {
-    switch (var0.streakinfo.streakname) {
+  if(isDefined(var_0.streakinfo)) {
+    switch (var_0.streakinfo.streakname) {
       case "chopper_support":
       case "chopper_gunner":
-        var1 = (0, 0, -50);
+        var_1 = (0, 0, -50);
         break;
       case "radar_drone_overwatch":
-        var1 = (0, 0, -30);
+        var_1 = (0, 0, -30);
         break;
       case "hover_jet":
-        var1 = (0, 0, 20);
+        var_1 = (0, 0, 20);
         break;
       case "scrambler_drone_guard":
-        var1 = (0, 0, 10);
+        var_1 = (0, 0, 10);
         break;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function hoverjet_airtargetiswithinview(var0) {
-  var1 = 0.866;
-  var2 = anglesToForward(self.angles);
-  var3 = vectorNormalize(var0.origin - self.origin);
-  var4 = vectordot(var2, var3);
-  return scripts\engine\utility::ter_op(var4 >= var1, 1, 0);
+function hoverjet_airtargetiswithinview(var_0) {
+  var_1 = 0.866;
+  var_2 = anglesToForward(self.angles);
+  var_3 = vectorNormalize(var_0.origin - self.origin);
+  var_4 = vectordot(var_2, var_3);
+  return scripts\engine\utility::ter_op(var_4 >= var_1, 1, 0);
 }
 
-function hoverjet_airtargetistooclose(var0) {
-  return scripts\engine\utility::ter_op(distance2dsquared(var0.origin, self.origin) < 1000000, 1, 0);
+function hoverjet_airtargetistooclose(var_0) {
+  return scripts\engine\utility::ter_op(distance2dsquared(var_0.origin, self.origin) < 1000000, 1, 0);
 }
 
-function hoverjet_moveawayfromtarget(var0) {
-  while(isDefined(var0) && hoverjet_airtargetistooclose(var0)) {
-    var1 = undefined;
-    var2 = anglesToForward(self.angles);
-    var3 = anglestoright(self.angles);
-    var4 = self.origin - var2 * 1000;
-    var5 = self.origin + 707 * (var3 - var2);
-    var6 = self.origin + 707 * (-1 * var2 - var3);
-    var7 = [var4, var5, var6];
-    var8 = [self, var0];
+function hoverjet_moveawayfromtarget(var_0) {
+  while(isDefined(var_0) && hoverjet_airtargetistooclose(var_0)) {
+    var_1 = undefined;
+    var_2 = anglesToForward(self.angles);
+    var_3 = anglestoright(self.angles);
+    var_4 = self.origin - var_2 * 1000;
+    var_5 = self.origin + 707 * (var_3 - var_2);
+    var_6 = self.origin + 707 * (-1 * var_2 - var_3);
+    var_7 = [var_4, var_5, var_6];
+    var_8 = [self, var_0];
 
-    foreach(var10 in var7) {
-      if(scripts\engine\trace::sphere_trace_passed(self.origin, var10, 256, var8)) {
-        var1 = var10 * (1, 1, 0) + (0, 0, var0.origin[2]);
+    foreach(var_10 in var_7) {
+      if(scripts\engine\trace::sphere_trace_passed(self.origin, var_10, 256, var_8)) {
+        var_1 = var_10 * (1, 1, 0) + (0, 0, var_0.origin[2]);
       }
     }
 
-    if(isDefined(var1)) {
+    if(isDefined(var_1)) {
       self.movedoffguardlocation = 1;
-      self setvehgoalpos(var1, 1);
+      self setvehgoalpos(var_1, 1);
     }
 
     waitframe();
@@ -915,12 +915,12 @@ function hoverjet_watchforreposition() {
   self.useobj linkTo(self);
 
   while(isDefined(self.useobj)) {
-    self.useobj waittill("trigger", var0);
+    self.useobj waittill("trigger", var_0);
     scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("hover_jet_move");
     self setscriptablepartstate("thrusters", "active", 0);
 
-    if(isDefined(var0)) {
-      thread hoverjet_movetolocation(var0.origin);
+    if(isDefined(var_0)) {
+      thread hoverjet_movetolocation(var_0.origin);
       thread hoverjet_watchfornearmovementgoal();
     }
   }
@@ -943,13 +943,13 @@ function hoverjet_randomizemovement() {
   self endon("leaving");
 }
 
-function hoverjet_modifydamage(var0) {
-  var1 = var0.attacker;
-  var2 = var0.objweapon;
-  var3 = var0.meansofdeath;
-  var4 = var0.damage;
-  var5 = var0.idflags;
-  self.currenthealth = self.health - var4;
+function hoverjet_modifydamage(var_0) {
+  var_1 = var_0.attacker;
+  var_2 = var_0.objweapon;
+  var_3 = var_0.meansofdeath;
+  var_4 = var_0.damage;
+  var_5 = var_0.idflags;
+  self.currenthealth = self.health - var_4;
 
   if(self.currenthealth > 0) {
     if(self.currenthealth <= 2000 && self.currentdamagestate == 0) {
@@ -970,8 +970,8 @@ function hoverjet_modifydamage(var0) {
   return true;
 }
 
-function hoverjet_handledeathdamage(var0) {
-  self.killedbyweapon = var0.objweapon;
+function hoverjet_handledeathdamage(var_0) {
+  self.killedbyweapon = var_0.objweapon;
   return true;
 }
 
@@ -991,7 +991,7 @@ function hoverjet_handledestroyed() {
   thread hoverjet_explode();
 }
 
-function hoverjet_crash(var0) {
+function hoverjet_crash(var_0) {
   self endon("explode");
   self.iscrashing = 1;
   self.killcament unlink();
@@ -1005,95 +1005,95 @@ function hoverjet_crash(var0) {
   self notify("crashing");
   self playsoundonmovingent("ks_hoverjet_crash");
   self setmaxpitchroll(10, 50);
-  self vehicle_setspeed(var0, 20, 20);
+  self vehicle_setspeed(var_0, 20, 20);
   self setneargoalnotifydist(100);
-  var1 = hoverjet_findcrashposition(2500);
+  var_1 = hoverjet_findcrashposition(2500);
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
   scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("hover_jet_crash", 1);
-  self setvehgoalpos(var1, 0);
-  thread hoverjet_spinout(var0);
+  self setvehgoalpos(var_1, 0);
+  thread hoverjet_spinout(var_0);
   self waittill("near_goal");
   scripts\cp_mp\utility\dialog_utility::playoperatorstaticinterrupt();
 }
 
-function hoverjet_spinout(var0) {
+function hoverjet_spinout(var_0) {
   self endon("death");
-  self setyawspeed(var0, 50, 50, 0.5);
+  self setyawspeed(var_0, 50, 50, 0.5);
 
   while(isDefined(self)) {
-    self settargetyaw(self.angles[1] + var0 * 0.5);
+    self settargetyaw(self.angles[1] + var_0 * 0.5);
     wait 0.5;
   }
 }
 
-function hoverjet_findcrashposition(var0) {
-  var1 = self.origin;
-  var2 = 1000;
-  var3 = undefined;
-  var4 = anglesToForward(self.angles);
-  var5 = anglestoright(self.angles);
-  var6 = var1 + var4 * var0 - (0, 0, var2);
+function hoverjet_findcrashposition(var_0) {
+  var_1 = self.origin;
+  var_2 = 1000;
+  var_3 = undefined;
+  var_4 = anglesToForward(self.angles);
+  var_5 = anglestoright(self.angles);
+  var_6 = var_1 + var_4 * var_0 - (0, 0, var_2);
 
-  if(scripts\engine\trace::ray_trace_passed(var1, var6, self)) {
-    var3 = var6;
-    return var3;
+  if(scripts\engine\trace::ray_trace_passed(var_1, var_6, self)) {
+    var_3 = var_6;
+    return var_3;
   }
 
-  var6 = var1 - var4 * var0 - (0, 0, var2);
+  var_6 = var_1 - var_4 * var_0 - (0, 0, var_2);
 
-  if(scripts\engine\trace::ray_trace_passed(var1, var6, self)) {
-    var3 = var6;
-    return var3;
+  if(scripts\engine\trace::ray_trace_passed(var_1, var_6, self)) {
+    var_3 = var_6;
+    return var_3;
   }
 
-  var6 = var1 + var5 * var0 - (0, 0, var2);
+  var_6 = var_1 + var_5 * var_0 - (0, 0, var_2);
 
-  if(scripts\engine\trace::ray_trace_passed(var1, var6, self)) {
-    var3 = var6;
-    return var3;
+  if(scripts\engine\trace::ray_trace_passed(var_1, var_6, self)) {
+    var_3 = var_6;
+    return var_3;
   }
 
-  var6 = var1 - var5 * var0 - (0, 0, var2);
+  var_6 = var_1 - var_5 * var_0 - (0, 0, var_2);
 
-  if(scripts\engine\trace::ray_trace_passed(var1, var6, self)) {
-    var3 = var6;
-    return var3;
+  if(scripts\engine\trace::ray_trace_passed(var_1, var_6, self)) {
+    var_3 = var_6;
+    return var_3;
   }
 
-  var6 = var1 + 0.707 * var0 * (var4 + var5) - (0, 0, var2);
+  var_6 = var_1 + 0.707 * var_0 * (var_4 + var_5) - (0, 0, var_2);
 
-  if(scripts\engine\trace::ray_trace_passed(var1, var6, self)) {
-    var3 = var6;
-    return var3;
+  if(scripts\engine\trace::ray_trace_passed(var_1, var_6, self)) {
+    var_3 = var_6;
+    return var_3;
   }
 
-  var6 = var1 + 0.707 * var0 * (var4 - var5) - (0, 0, var2);
+  var_6 = var_1 + 0.707 * var_0 * (var_4 - var_5) - (0, 0, var_2);
 
-  if(scripts\engine\trace::ray_trace_passed(var1, var6, self)) {
-    var3 = var6;
-    return var3;
+  if(scripts\engine\trace::ray_trace_passed(var_1, var_6, self)) {
+    var_3 = var_6;
+    return var_3;
   }
 
-  var6 = var1 + 0.707 * var0 * (var5 - var4) - (0, 0, var2);
-  var7 = scripts\engine\trace::ray_trace(var1, var6, self);
+  var_6 = var_1 + 0.707 * var_0 * (var_5 - var_4) - (0, 0, var_2);
+  var_7 = scripts\engine\trace::ray_trace(var_1, var_6, self);
 
-  if(scripts\engine\trace::ray_trace_passed(var1, var6, self)) {
-    var3 = var6;
-    return var3;
+  if(scripts\engine\trace::ray_trace_passed(var_1, var_6, self)) {
+    var_3 = var_6;
+    return var_3;
   }
 
-  var6 = var1 + 0.707 * var0 * (-1 * var4 - var5) - (0, 0, var2);
+  var_6 = var_1 + 0.707 * var_0 * (-1 * var_4 - var_5) - (0, 0, var_2);
 
-  if(scripts\engine\trace::ray_trace_passed(var1, var6, self)) {
-    var3 = var6;
-    return var3;
+  if(scripts\engine\trace::ray_trace_passed(var_1, var_6, self)) {
+    var_3 = var_6;
+    return var_3;
   }
 
-  return var3;
+  return var_3;
 }
 
 function hoverjet_explode() {
@@ -1116,23 +1116,23 @@ function hoverjet_leave() {
   hoverjet_breakofftarget(undefined, 1);
   self setmaxpitchroll(0, 0);
   self vehicle_setspeed(35, 25);
-  var0 = self.origin + anglesToForward((0, randomint(360), 0)) * 500;
-  var0 += (0, 0, 900);
-  self setvehgoalpos(var0, 1);
+  var_0 = self.origin + anglesToForward((0, randomint(360), 0)) * 500;
+  var_0 += (0, 0, 900);
+  self setvehgoalpos(var_0, 1);
   self vehicleplayanim(level.scr_anim["hover_jet"]["exit"]);
   self playsoundonmovingent("ks_hoverjet_leave");
   self waittill("goal");
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(1);
   self setscriptablepartstate("contrails", "on", 0);
-  var1 = self.origin + anglesToForward(self.angles) * 24000;
+  var_1 = self.origin + anglesToForward(self.angles) * 24000;
   self vehicle_setspeed(250, 75);
-  self setvehgoalpos(var1, 1);
+  self setvehgoalpos(var_1, 1);
   self waittill("goal");
   self notify("hover_jet_gone");
   hoverjet_cleanup();
 }
 
-function hoverjet_cleanup(var0) {
+function hoverjet_cleanup(var_0) {
   if(isDefined(self.turret)) {
     self.turret setentityowner(undefined);
     self.turret delete();
@@ -1156,7 +1156,7 @@ function hoverjet_cleanup(var0) {
 
   self setscriptablepartstate("blinking_lights", "off", 0);
   self setscriptablepartstate("thrusters", "off", 0);
-  self.streakinfo.onspray = istrue(var0);
+  self.streakinfo.onspray = istrue(var_0);
 
   if(!istrue(self.ref_12aa4)) {
     self.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(self.streakinfo);
@@ -1166,127 +1166,127 @@ function hoverjet_cleanup(var0) {
   scripts\cp_mp\vehicles\vehicle_tracking::_deletevehicle(self);
 }
 
-function hoverjet_watchtargetstatus(var0) {
-  var1 = var0 getentitynumber();
-  self endon("hoverJet_breakOffTarget " + var1);
+function hoverjet_watchtargetstatus(var_0) {
+  var_1 = var_0 getentitynumber();
+  self endon("hoverJet_breakOffTarget " + var_1);
   self endon("hoverJet_breakOffAllTargets");
   self endon("death");
   self endon("leaving");
 
-  if(isPlayer(var0)) {
-    thread hoverjet_watchgroundtargetdeathdisconnect(var0);
+  if(isPlayer(var_0)) {
+    thread hoverjet_watchgroundtargetdeathdisconnect(var_0);
   } else {
-    thread hoverjet_watchairtargetdeath(var0);
+    thread hoverjet_watchairtargetdeath(var_0);
   }
 
-  thread hoverjet_watchforbreakaction(var0, "hoverJet_targetLost " + var1);
-  thread hoverjet_watchforbreakaction(var0, "hoverJet_targetNotInView " + var1);
-  thread hoverjet_watchforbreakaction(var0, "hoverJet_moveToNewlocation");
-  thread hoverjet_watchforbreakaction(var0, "hoverJet_targetTimeout");
+  thread hoverjet_watchforbreakaction(var_0, "hoverJet_targetLost " + var_1);
+  thread hoverjet_watchforbreakaction(var_0, "hoverJet_targetNotInView " + var_1);
+  thread hoverjet_watchforbreakaction(var_0, "hoverJet_moveToNewlocation");
+  thread hoverjet_watchforbreakaction(var_0, "hoverJet_targetTimeout");
 }
 
-function hoverjet_watchgroundtargetdeathdisconnect(var0) {
-  var1 = var0 getentitynumber();
-  self endon("hoverJet_breakOffTarget " + var1);
+function hoverjet_watchgroundtargetdeathdisconnect(var_0) {
+  var_1 = var_0 getentitynumber();
+  self endon("hoverJet_breakOffTarget " + var_1);
   self endon("hoverJet_breakOffAllTargets");
   self endon("death");
   self endon("leaving");
-  var0 waittill("death_or_disconnect");
-  self notify("hoverJet_targetLost " + var1);
+  var_0 waittill("death_or_disconnect");
+  self notify("hoverJet_targetLost " + var_1);
 }
 
-function hoverjet_watchairtargetdeath(var0) {
-  var1 = var0 getentitynumber();
-  self endon("hoverJet_breakOffTarget " + var1);
+function hoverjet_watchairtargetdeath(var_0) {
+  var_1 = var_0 getentitynumber();
+  self endon("hoverJet_breakOffTarget " + var_1);
   self endon("hoverJet_breakOffAllTargets");
   self endon("death");
   self endon("leaving");
-  var0 waittill("death");
-  self notify("hoverJet_targetLost " + var1);
+  var_0 waittill("death");
+  self notify("hoverJet_targetLost " + var_1);
 }
 
-function hoverjet_watchforbreakaction(var0, var1) {
-  var2 = var0 getentitynumber();
-  self endon("hoverJet_breakOffTarget " + var2);
+function hoverjet_watchforbreakaction(var_0, var_1) {
+  var_2 = var_0 getentitynumber();
+  self endon("hoverJet_breakOffTarget " + var_2);
   self endon("hoverJet_breakOffAllTargets");
   self endon("death");
   self endon("leaving");
-  self waittill(var1);
-  hoverjet_breakofftarget(var2);
+  self waittill(var_1);
+  hoverjet_breakofftarget(var_2);
 }
 
-function hoverjet_watchtargetlos(var0, var1, var2) {
-  var3 = var0 getentitynumber();
+function hoverjet_watchtargetlos(var_0, var_1, var_2) {
+  var_3 = var_0 getentitynumber();
   self endon("death");
   self endon("leaving");
-  self endon("hoverJet_breakOffTarget " + var3);
+  self endon("hoverJet_breakOffTarget " + var_3);
   self endon("hoverJet_breakOffAllTargets");
   self.bestgroundtarget endon("death_or_disconnect");
-  var4 = undefined;
+  var_4 = undefined;
 
-  if(!isDefined(var1)) {
-    var1 = 500;
+  if(!isDefined(var_1)) {
+    var_1 = 500;
   }
 
-  var5 = scripts\engine\trace::create_contents(0, 1, 0, 1, 0, 1, 0, 1, 1);
-  var6 = [self.turret];
-  jumpiffalse(isDefined(var2)) LOC_00000086;
-  GscBinSkip0(0x2e, var6.size, var2);
+  var_5 = scripts\engine\trace::create_contents(0, 1, 0, 1, 0, 1, 0, 1, 1);
+  var_6 = [self.turret];
+  jumpiffalse(isDefined(var_2)) LOC_00000086;
+  GscBinSkip0(0x2e, var_6.size, var_2);
 
   for(;;) {
-    var8 = scripts\engine\trace::ray_trace_passed(self.turret gettagorigin("tag_barrel"), var0 gettagorigin("j_head"), var6, var5);
+    var_8 = scripts\engine\trace::ray_trace_passed(self.turret gettagorigin("tag_barrel"), var_0 gettagorigin("j_head"), var_6, var_5);
 
-    if(!istrue(var8)) {
-      if(!isDefined(var4)) {
-        var4 = gettime();
+    if(!istrue(var_8)) {
+      if(!isDefined(var_4)) {
+        var_4 = gettime();
       }
 
-      if(gettime() - var4 > var1) {
-        self notify("hoverJet_targetNotInView " + var3);
+      if(gettime() - var_4 > var_1) {
+        self notify("hoverJet_targetNotInView " + var_3);
         return;
       }
     } else {
-      var4 = undefined;
+      var_4 = undefined;
     }
 
     wait 0.25;
   }
 }
 
-function hoverjet_watchtargettimeout(var0) {
-  var1 = var0 getentitynumber();
+function hoverjet_watchtargettimeout(var_0) {
+  var_1 = var_0 getentitynumber();
   self endon("death");
   self endon("leaving");
-  self endon("hoverJet_breakOffTarget " + var1);
+  self endon("hoverJet_breakOffTarget " + var_1);
   self endon("hoverJet_breakOffAllTargets");
   self.bestgroundtarget endon("death_or_disconnect");
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(5);
   self notify("hoverJet_targetTimeout");
 }
 
-function hoverjet_breakofftarget(var0, var1) {
-  var2 = undefined;
+function hoverjet_breakofftarget(var_0, var_1) {
+  var_2 = undefined;
 
-  if(!isDefined(var0) || istrue(var1)) {
+  if(!isDefined(var_0) || istrue(var_1)) {
     self.bestgroundtarget = undefined;
     self.bestairtarget = undefined;
     self clearlookatent();
     self.turret cleartargetentity();
     self.turret.groundtargetent unlink();
-    var2 = "Breaking off all targets";
+    var_2 = "Breaking off all targets";
     self notify("hoverJet_breakOffAllTargets");
     return;
   } else {
-    if(isDefined(self.bestgroundtarget) && var0 == self.bestgroundtarget getentitynumber()) {
-      var2 = "Breaking off ground target: " + self.bestgroundtarget.name;
+    if(isDefined(self.bestgroundtarget) && var_0 == self.bestgroundtarget getentitynumber()) {
+      var_2 = "Breaking off ground target: " + self.bestgroundtarget.name;
       self.bestgroundtarget = undefined;
       self.turret cleartargetentity();
       self.turret.groundtargetent unlink();
-    } else if(isDefined(self.bestairtarget) && var0 == self.bestairtarget getentitynumber()) {
-      var2 = "Breaking off air target: " + self.bestairtarget.model;
+    } else if(isDefined(self.bestairtarget) && var_0 == self.bestairtarget getentitynumber()) {
+      var_2 = "Breaking off air target: " + self.bestairtarget.model;
       self.bestairtarget = undefined;
     } else {
-      var2 = "Breaking off removed target: " + var0;
+      var_2 = "Breaking off removed target: " + var_0;
     }
 
     if(!isDefined(self.bestgroundtarget) && !isDefined(self.bestairtarget)) {
@@ -1294,42 +1294,42 @@ function hoverjet_breakofftarget(var0, var1) {
     }
   }
 
-  self notify("hoverJet_breakOffTarget " + var0);
+  self notify("hoverJet_breakOffTarget " + var_0);
 }
 
-function hoverjet_getbestairtarget(var0) {
+function hoverjet_getbestairtarget(var_0) {
   self endon("death");
   self endon("leaving");
-  var1 = undefined;
-  var2 = undefined;
-  var3 = 0;
+  var_1 = undefined;
+  var_2 = undefined;
+  var_3 = 0;
 
-  foreach(var5 in var0) {
-    if(!isDefined(var5)) {
+  foreach(var_5 in var_0) {
+    if(!isDefined(var_5)) {
       continue;
     }
 
-    if(!istrue(var3)) {
-      if(level.teambased && var5.team == self.team) {
+    if(!istrue(var_3)) {
+      if(level.teambased && var_5.team == self.team) {
         continue;
       }
 
-      if(var5.owner == self.owner) {
+      if(var_5.owner == self.owner) {
         continue;
       }
     }
 
-    var7 = distance2dsquared(var5.origin, self.origin);
+    var_7 = distance2dsquared(var_5.origin, self.origin);
 
-    if(var7 >= 6250000) {
+    if(var_7 >= 6250000) {
       continue;
     }
 
-    if(!isDefined(var2) || var7 < var2) {
-      var1 = var5;
-      var2 = var7;
+    if(!isDefined(var_2) || var_7 < var_2) {
+      var_1 = var_5;
+      var_2 = var_7;
     }
   }
 
-  return var1;
+  return var_1;
 }

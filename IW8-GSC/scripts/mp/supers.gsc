@@ -4,15 +4,15 @@
 ***********************************************/
 
 function init() {
-  var0 = spawnStruct();
-  level.superglobals = var0;
-  var0.staticsuperdata = [];
-  var0.superweapons = [];
-  var0.superearnratemultiplier = 1;
-  var0.supersbyid = [];
-  var0.supersbyoffhand = [];
-  var0.ref_13987 = [];
-  var0.pointeventdata = [];
+  var_0 = spawnStruct();
+  level.superglobals = var_0;
+  var_0.staticsuperdata = [];
+  var_0.superweapons = [];
+  var_0.superearnratemultiplier = 1;
+  var_0.supersbyid = [];
+  var_0.supersbyoffhand = [];
+  var_0.ref_13987 = [];
+  var_0.pointeventdata = [];
   loadsupertable();
   loadpointstable();
   registersupers();
@@ -40,197 +40,197 @@ function init() {
 }
 
 function loadsupertable() {
-  var0 = scripts\mp\utility\game::getgametype() == "br";
+  var_0 = scripts\mp\utility\game::getgametype() == "br";
 
-  for(var1 = 1;; var1++) {
-    var2 = tablelookupbyrow("mp/supertable.csv", var1, 0);
+  for(var_1 = 1;; var_1++) {
+    var_2 = tablelookupbyrow("mp/supertable.csv", var_1, 0);
 
-    if(!isDefined(var2) || var2 == "") {
+    if(!isDefined(var_2) || var_2 == "") {
       break;
     }
 
-    var3 = readsupertablecell(var1, 3, 1);
+    var_3 = readsupertablecell(var_1, 3, 1);
 
-    if(istrue(var3) && !var0) {
-      var1++;
+    if(istrue(var_3) && !var_0) {
+      var_1++;
       continue;
     }
 
-    var4 = spawnStruct();
-    level.superglobals.staticsuperdata[var2] = var4;
-    var4.id = var1;
-    var4.ref = var2;
-    var4.weapon = readsupertablecell(var1, 1);
-    var5 = undefined;
+    var_4 = spawnStruct();
+    level.superglobals.staticsuperdata[var_2] = var_4;
+    var_4.id = var_1;
+    var_4.ref = var_2;
+    var_4.weapon = readsupertablecell(var_1, 1);
+    var_5 = undefined;
 
     if(scripts\mp\utility\game::isanymlgmatch()) {
-      var5 = readsupertablecell(var1, 28, 1);
+      var_5 = readsupertablecell(var_1, 28, 1);
     }
 
-    if(!isDefined(var5)) {
-      var5 = readsupertablecell(var1, 2, 1);
+    if(!isDefined(var_5)) {
+      var_5 = readsupertablecell(var_1, 2, 1);
     }
 
-    var4.pointsneeded = var5;
-    var6 = undefined;
+    var_4.pointsneeded = var_5;
+    var_6 = undefined;
 
     if(scripts\mp\utility\game::isanymlgmatch()) {
-      var6 = readsupertablecell(var1, 26, 1);
+      var_6 = readsupertablecell(var_1, 26, 1);
     }
 
-    if(!isDefined(var6)) {
-      var6 = readsupertablecell(var1, 4, 1);
+    if(!isDefined(var_6)) {
+      var_6 = readsupertablecell(var_1, 4, 1);
     }
 
-    var4.usetime = var6;
-    var4.maxactivations = readsupertablecell(var1, 5, 1);
-    var4.ref_12acd = readsupertablecell(var1, 6, 1);
-    var4.useweapon = readsupertablecell(var1, 11);
-    var4.useweaponclipammo = readsupertablecell(var1, 12, 1);
-    var4.useweaponstockammo = readsupertablecell(var1, 13, 1);
-    var4.useweapontrackstats = readsupertablecell(var1, 31, 1) > 0;
-    var4.movespeed = readsupertablecell(var1, 14, 1);
-    var7 = undefined;
+    var_4.usetime = var_6;
+    var_4.maxactivations = readsupertablecell(var_1, 5, 1);
+    var_4.ref_12acd = readsupertablecell(var_1, 6, 1);
+    var_4.useweapon = readsupertablecell(var_1, 11);
+    var_4.useweaponclipammo = readsupertablecell(var_1, 12, 1);
+    var_4.useweaponstockammo = readsupertablecell(var_1, 13, 1);
+    var_4.useweapontrackstats = readsupertablecell(var_1, 31, 1) > 0;
+    var_4.movespeed = readsupertablecell(var_1, 14, 1);
+    var_7 = undefined;
 
     if(scripts\mp\utility\game::isanymlgmatch()) {
-      var7 = readsupertablecell(var1, 27, 1);
+      var_7 = readsupertablecell(var_1, 27, 1);
     }
 
-    if(!isDefined(var7)) {
-      var7 = readsupertablecell(var1, 15, 1);
+    if(!isDefined(var_7)) {
+      var_7 = readsupertablecell(var_1, 15, 1);
     }
 
-    var4.graceperiod = var7;
-    var4.maxactivationsalt = readsupertablecell(var1, 16, 1);
-    var4.usedelay = readsupertablecell(var1, 18, 1);
-    var4.ending_mortars = readsupertablecell(var1, 19, 1);
-    var4.archetype = readsupertablecell(var1, 17);
-    var4.isweapon = readsupertablecell(var1, 20, 1);
-    var4.canuseinlaststand = readsupertablecell(var1, 32, 1) > 0;
-    var4.packextrascore0 = [];
+    var_4.graceperiod = var_7;
+    var_4.maxactivationsalt = readsupertablecell(var_1, 16, 1);
+    var_4.usedelay = readsupertablecell(var_1, 18, 1);
+    var_4.ending_mortars = readsupertablecell(var_1, 19, 1);
+    var_4.archetype = readsupertablecell(var_1, 17);
+    var_4.isweapon = readsupertablecell(var_1, 20, 1);
+    var_4.canuseinlaststand = readsupertablecell(var_1, 32, 1) > 0;
+    var_4.packextrascore0 = [];
 
-    if(isDefined(var4.useweapon)) {
-      var4.useweapon = asmdevgetallstates(var4.useweapon);
+    if(isDefined(var_4.useweapon)) {
+      var_4.useweapon = asmdevgetallstates(var_4.useweapon);
     }
 
-    level.superglobals.supersbyid[var1] = var2;
+    level.superglobals.supersbyid[var_1] = var_2;
 
-    if(!isDefined(var4.weapon)) {
-      level.superglobals.staticsuperdata[var2] = undefined;
+    if(!isDefined(var_4.weapon)) {
+      level.superglobals.staticsuperdata[var_2] = undefined;
     } else {
-      level.superglobals.supersbyoffhand[var4.weapon] = var4;
+      level.superglobals.supersbyoffhand[var_4.weapon] = var_4;
     }
 
-    if(!isDefined(var4.pointsneeded)) {
-      level.superglobals.staticsuperdata[var2] = undefined;
+    if(!isDefined(var_4.pointsneeded)) {
+      level.superglobals.staticsuperdata[var_2] = undefined;
     }
 
-    if(isDefined(var4.maxactivations)) {
-      if(var4.maxactivations > 0) {
-        var4.activatepenalty = 1 / var4.maxactivations;
+    if(isDefined(var_4.maxactivations)) {
+      if(var_4.maxactivations > 0) {
+        var_4.activatepenalty = 1 / var_4.maxactivations;
       } else {
-        var4.activatepenalty = 1;
+        var_4.activatepenalty = 1;
       }
     }
 
-    if(isDefined(var4.maxactivationsalt)) {
-      if(var4.maxactivationsalt > 0) {
-        var4.activatepenaltyalt = 1 / var4.maxactivationsalt;
+    if(isDefined(var_4.maxactivationsalt)) {
+      if(var_4.maxactivationsalt > 0) {
+        var_4.activatepenaltyalt = 1 / var_4.maxactivationsalt;
       }
     }
 
-    if(isDefined(var4.useweapon)) {
-      level.superglobals.superweapons[var4.useweapon.basename] = var4;
+    if(isDefined(var_4.useweapon)) {
+      level.superglobals.superweapons[var_4.useweapon.basename] = var_4;
     }
 
-    if(var4.weapon == "<default>") {
-      var4.weapon = "super_default_mp";
+    if(var_4.weapon == "<default>") {
+      var_4.weapon = "super_default_mp";
     }
 
-    if(isDefined(var4.graceperiod)) {
-      var4.graceperiod *= 1000;
+    if(isDefined(var_4.graceperiod)) {
+      var_4.graceperiod *= 1000;
       continue;
     }
 
-    var4.graceperiod = 0;
+    var_4.graceperiod = 0;
   }
 
-  var8 = tablelookup("mp/superratetable.csv", 0, scripts\mp\utility\game::getgametype(), 1);
+  var_8 = tablelookup("mp/superratetable.csv", 0, scripts\mp\utility\game::getgametype(), 1);
 
-  if(isDefined(var8) && var8 != "") {
-    level.superglobals.superearnratemultiplier = float(var8);
+  if(isDefined(var_8) && var_8 != "") {
+    level.superglobals.superearnratemultiplier = float(var_8);
     return;
   }
 }
 
-function readsupertablecell(var0, var1, var2) {
-  var3 = tablelookupbyrow("mp/supertable.csv", var0, var1);
+function readsupertablecell(var_0, var_1, var_2) {
+  var_3 = tablelookupbyrow("mp/supertable.csv", var_0, var_1);
 
-  if(var3 == "") {
+  if(var_3 == "") {
     return undefined;
   }
 
-  if(istrue(var2)) {
-    if(issubstr(var3, ".")) {
-      var3 = float(var3);
+  if(istrue(var_2)) {
+    if(issubstr(var_3, ".")) {
+      var_3 = float(var_3);
     } else {
-      var3 = int(var3);
+      var_3 = int(var_3);
     }
   }
 
-  return var3;
+  return var_3;
 }
 
 function loadpointstable() {
-  var0 = 2;
-  var1 = scripts\mp\utility\game::getgametype();
+  var_0 = 2;
+  var_1 = scripts\mp\utility\game::getgametype();
 
   for(;;) {
-    var2 = tablelookupbyrow("mp/superpointstable.csv", 0, var0);
+    var_2 = tablelookupbyrow("mp/superpointstable.csv", 0, var_0);
 
-    if(!isDefined(var2) || var2 == "") {
-      var0 = undefined;
+    if(!isDefined(var_2) || var_2 == "") {
+      var_0 = undefined;
       break;
     }
 
-    if(var2 == var1) {
+    if(var_2 == var_1) {
       break;
     }
 
-    var0++;
+    var_0++;
   }
 
-  var3 = 0;
+  var_3 = 0;
 
   for(;;) {
-    var3++;
-    var4 = tablelookupbyrow("mp/superpointstable.csv", var3, 0);
+    var_3++;
+    var_4 = tablelookupbyrow("mp/superpointstable.csv", var_3, 0);
 
-    if(!isDefined(var4) || var4 == "") {
+    if(!isDefined(var_4) || var_4 == "") {
       break;
     }
 
-    var5 = undefined;
+    var_5 = undefined;
 
-    if(isDefined(var0)) {
-      var5 = tablelookupbyrow("mp/superpointstable.csv", var3, var0);
+    if(isDefined(var_0)) {
+      var_5 = tablelookupbyrow("mp/superpointstable.csv", var_3, var_0);
 
-      if(isDefined(var5) && var5 == "") {
-        var5 = undefined;
+      if(isDefined(var_5) && var_5 == "") {
+        var_5 = undefined;
       }
     }
 
-    if(!isDefined(var5)) {
-      var5 = tablelookupbyrow("mp/superpointstable.csv", var3, 1);
+    if(!isDefined(var_5)) {
+      var_5 = tablelookupbyrow("mp/superpointstable.csv", var_3, 1);
     }
 
-    var5 = float(var5);
+    var_5 = float(var_5);
 
-    if(var5 <= 0) {
+    if(var_5 <= 0) {
       continue;
     }
 
-    level.superglobals.pointeventdata[var4] = var5;
+    level.superglobals.pointeventdata[var_4] = var_5;
   }
 }
 
@@ -278,28 +278,28 @@ function registersupers() {
   ref_12b3c("super_weapon_drop", "deploy_weapondrop_mp");
 }
 
-function registersuper(var0, var1, var2, var3, var4) {
-  var5 = level.superglobals.staticsuperdata[var0];
+function registersuper(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = level.superglobals.staticsuperdata[var_0];
 
-  if(!isDefined(var5)) {
+  if(!isDefined(var_5)) {
     return;
   }
 
-  var5.setfunc = var1;
-  var5.unsetfunc = var2;
-  var5.beginusefunc = var3;
-  var5.endusefunc = var4;
-  var5.isregistered = 1;
+  var_5.setfunc = var_1;
+  var_5.unsetfunc = var_2;
+  var_5.beginusefunc = var_3;
+  var_5.endusefunc = var_4;
+  var_5.isregistered = 1;
 }
 
-function ref_12b3c(var0, var1) {
-  if(!isstring(var1)) {
-    var1 = var1.basename;
+function ref_12b3c(var_0, var_1) {
+  if(!isstring(var_1)) {
+    var_1 = var_1.basename;
   }
 
-  var2 = level.superglobals.staticsuperdata[var0];
-  var2.packextrascore0[var2.packextrascore0.size] = var1;
-  level.superglobals.ref_13987[var1] = var2;
+  var_2 = level.superglobals.staticsuperdata[var_0];
+  var_2.packextrascore0[var_2.packextrascore0.size] = var_1;
+  level.superglobals.ref_13987[var_1] = var_2;
 }
 
 function ref_13978() {
@@ -307,70 +307,70 @@ function ref_13978() {
   updatesuperuistate();
 }
 
-function givesuper(var0, var1, var2) {
+function givesuper(var_0, var_1, var_2) {
   if(getdvarint("scr_supers_killswitch") != 0) {
     return;
   }
 
-  clearsuper(var1);
+  clearsuper(var_1);
 
-  if(var0 == "") {
+  if(var_0 == "") {
     return;
   }
 
-  var3 = level.superglobals.staticsuperdata[var0];
+  var_3 = level.superglobals.staticsuperdata[var_0];
 
-  if(!isDefined(var3)) {
+  if(!isDefined(var_3)) {
     return;
   }
 
-  var4 = spawnStruct();
-  self.super = var4;
-  var4.staticdata = var3;
-  var4.allowrefund = 1;
-  var4.numkills = 0;
-  var4.wasrefunded = 0;
-  var4.canstow = 0;
-  var4.basepoints = 0;
-  var4.extrapoints = 0;
-  var4.usestarttime = undefined;
-  var4.usepercent = 0;
-  var4.ref_12187 = undefined;
+  var_4 = spawnStruct();
+  self.super = var_4;
+  var_4.staticdata = var_3;
+  var_4.allowrefund = 1;
+  var_4.numkills = 0;
+  var_4.wasrefunded = 0;
+  var_4.canstow = 0;
+  var_4.basepoints = 0;
+  var_4.extrapoints = 0;
+  var_4.usestarttime = undefined;
+  var_4.usepercent = 0;
+  var_4.ref_12187 = undefined;
   ref_131c7(0);
-  ref_13985(var0);
-  self setclientomnvar("ui_super_ref", var0);
-  var5 = self.pers["superBasePoints"];
+  ref_13985(var_0);
+  self setclientomnvar("ui_super_ref", var_0);
+  var_5 = self.pers["superBasePoints"];
 
-  if(!isDefined(var5)) {
-    var5 = 0;
+  if(!isDefined(var_5)) {
+    var_5 = 0;
   }
 
   self.pers["superBasePoints"] = undefined;
-  setsuperbasepoints(var5);
-  var6 = self.pers["superExtraPoints"];
+  setsuperbasepoints(var_5);
+  var_6 = self.pers["superExtraPoints"];
 
-  if(!isDefined(var6)) {
-    var6 = 0;
+  if(!isDefined(var_6)) {
+    var_6 = 0;
   }
 
   self.pers["superExtraPoints"] = undefined;
-  setsuperextrapoints(var6);
+  setsuperextrapoints(var_6);
 
   if(!isDefined(self.pers["superExpended"])) {
     ref_131c6(0);
   }
 
-  if(istrue(var2)) {
+  if(istrue(var_2)) {
     givesuperpoints(getsuperpointsneeded());
-    var4.madeavailabletime = gettime();
-    scripts\mp\analyticslog::logevent_superearned(var4.madeavailabletime);
+    var_4.madeavailabletime = gettime();
+    scripts\mp\analyticslog::logevent_superearned(var_4.madeavailabletime);
   }
 
   if(!issuperweapondisabled()) {
-    scripts\cp_mp\utility\inventory_utility::_giveweapon(var3.weapon);
-    var7 = scripts\engine\utility::ter_op(issuperready(), 1, 0);
-    self setweaponammoclip(var3.weapon, var7);
-    self assignweaponoffhandspecial(var3.weapon);
+    scripts\cp_mp\utility\inventory_utility::_giveweapon(var_3.weapon);
+    var_7 = scripts\engine\utility::ter_op(issuperready(), 1, 0);
+    self setweaponammoclip(var_3.weapon, var_7);
+    self assignweaponoffhandspecial(var_3.weapon);
   }
 
   thread watchforsuperusebegin();
@@ -391,66 +391,66 @@ function handlesuperearnovertime() {
     scripts\mp\flags::gameflagwait("prematch_done");
   }
 
-  var0 = gettime();
+  var_0 = gettime();
   waitframe();
 
   for(;;) {
-    var1 = level.players.size;
-    var2 = (gettime() - var0) / 50;
+    var_1 = level.players.size;
+    var_2 = (gettime() - var_0) / 50;
 
-    if(var2 < 11) {
-      wait(11 - var2) * 0.05;
-      var2 = 11;
+    if(var_2 < 11) {
+      wait(11 - var_2) * 0.05;
+      var_2 = 11;
     }
 
-    var0 = gettime();
-    var3 = 0;
+    var_0 = gettime();
+    var_3 = 0;
 
-    while(var3 < var1) {
-      for(var4 = 0; var4 < 15; var4++) {
-        var5 = var3 + var4;
-        var6 = level.players[var5];
+    while(var_3 < var_1) {
+      for(var_4 = 0; var_4 < 15; var_4++) {
+        var_5 = var_3 + var_4;
+        var_6 = level.players[var_5];
 
-        if(!isDefined(var6)) {
+        if(!isDefined(var_6)) {
           continue;
         }
 
-        if(istrue(var6.pausesuperpointsovertime)) {
+        if(istrue(var_6.pausesuperpointsovertime)) {
           continue;
         }
 
-        if(!scripts\mp\utility\player::isreallyalive(var6)) {
+        if(!scripts\mp\utility\player::isreallyalive(var_6)) {
           continue;
         }
 
-        if(isDefined(getcurrentsuper(var6)) && !getcurrentsuper(var6).isinuse) {
-          givesuperpoints(var6, 0, "time", 0, var2);
+        if(isDefined(getcurrentsuper(var_6)) && !getcurrentsuper(var_6).isinuse) {
+          givesuperpoints(var_6, 0, "time", 0, var_2);
         }
       }
 
       waitframe();
-      var3 += 15;
+      var_3 += 15;
     }
 
     waitframe();
   }
 }
 
-function clearsuper(var0) {
-  var1 = getcurrentsuper();
+function clearsuper(var_0) {
+  var_1 = getcurrentsuper();
 
-  if(isDefined(var1) && isDefined(var1.staticdata)) {
-    ref_13986(var1.staticdata.ref);
+  if(isDefined(var_1) && isDefined(var_1.staticdata)) {
+    ref_13986(var_1.staticdata.ref);
   }
 
-  if(istrue(var0) && isDefined(var1)) {
+  if(istrue(var_0) && isDefined(var_1)) {
     storesuperpoints();
   }
 
   self clearoffhandspecial();
 
-  if(isDefined(var1)) {
-    scripts\cp_mp\utility\inventory_utility::_takeweapon(var1.staticdata.weapon);
+  if(isDefined(var_1)) {
+    scripts\cp_mp\utility\inventory_utility::_takeweapon(var_1.staticdata.weapon);
   }
 
   if(level.codcasterenabled && !isagent(self)) {
@@ -463,70 +463,70 @@ function clearsuper(var0) {
   self setclientomnvar("ui_super_ref", "none");
 }
 
-function ref_13985(var0) {
-  if(!isDefined(var0)) {
+function ref_13985(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(var0 == "none" || var0 == "") {
+  if(var_0 == "none" || var_0 == "") {
     return;
   }
 
-  var1 = level.superglobals.staticsuperdata[var0];
+  var_1 = level.superglobals.staticsuperdata[var_0];
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  var2 = var1.setfunc;
+  var_2 = var_1.setfunc;
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return;
   }
 
-  self thread[[var2]]();
+  self thread[[var_2]]();
 }
 
-function ref_13986(var0) {
-  if(!isDefined(var0)) {
+function ref_13986(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(var0 == "none" || var0 == "") {
+  if(var_0 == "none" || var_0 == "") {
     return;
   }
 
-  var1 = level.superglobals.staticsuperdata[var0];
+  var_1 = level.superglobals.staticsuperdata[var_0];
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  var2 = var1.unsetfunc;
+  var_2 = var_1.unsetfunc;
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return;
   }
 
-  self thread[[var2]]();
+  self thread[[var_2]]();
 }
 
-function setsuperbasepoints(var0, var1) {
-  var2 = getcurrentsuper();
-  var2.basepoints = clamp(var0, 0, getsuperpointsneeded());
+function setsuperbasepoints(var_0, var_1) {
+  var_2 = getcurrentsuper();
+  var_2.basepoints = clamp(var_0, 0, getsuperpointsneeded());
 
-  if(istrue(var1)) {
+  if(istrue(var_1)) {
     return;
   }
 
   superpointschanged();
 }
 
-function setsuperextrapoints(var0, var1) {
-  var2 = getcurrentsuper();
-  var2.extrapoints = clamp(var0, 0, getsuperpointsneeded());
+function setsuperextrapoints(var_0, var_1) {
+  var_2 = getcurrentsuper();
+  var_2.extrapoints = clamp(var_0, 0, getsuperpointsneeded());
 
-  if(istrue(var1)) {
+  if(istrue(var_1)) {
     return;
   }
 
@@ -534,129 +534,129 @@ function setsuperextrapoints(var0, var1) {
 }
 
 function superpointschanged() {
-  var0 = getcurrentsuper();
+  var_0 = getcurrentsuper();
 
   if(getcurrentsuperpoints() >= getsuperpointsneeded()) {
     superearned();
   } else {
-    self setweaponammoclip(var0.staticdata.weapon, 0);
+    self setweaponammoclip(var_0.staticdata.weapon, 0);
   }
 
   ref_14021();
   updatesuperuistate();
 }
 
-function givesuperpoints(var0, var1, var2, var3) {
+function givesuperpoints(var_0, var_1, var_2, var_3) {
   if(istrue(game["isLaunchChunk"]) || !level.allowsupers) {
     return;
   }
 
-  if(isDefined(var1)) {
-    var0 = getsuperpointsforevent(var1);
+  if(isDefined(var_1)) {
+    var_0 = getsuperpointsforevent(var_1);
   }
 
-  if(isDefined(var3)) {
-    var0 *= var3;
+  if(isDefined(var_3)) {
+    var_0 *= var_3;
   }
 
   if(scripts\mp\utility\perk::_hasperk("specialty_faster_field_upgrade")) {
-    var0 *= getdvarfloat("perk_faster_field_upgrade_rate");
+    var_0 *= getdvarfloat("perk_faster_field_upgrade_rate");
   }
 
-  if(getdvarint("scr_disableSuperPoints", 0) && !istrue(var2)) {
+  if(getdvarint("scr_disableSuperPoints", 0) && !istrue(var_2)) {
     return;
   }
 
-  if(isDefined(var1) && var1 == "time") {
-    var4 = var0 * level.superfastchargerate;
+  if(isDefined(var_1) && var_1 == "time") {
+    var_4 = var_0 * level.superfastchargerate;
   } else {
-    var4 = var1 * level.superpointsmod;
+    var_4 = var_1 * level.superpointsmod;
   }
 
-  if(var4 <= 0) {
+  if(var_4 <= 0) {
     return;
   }
 
-  var5 = getcurrentsuper();
+  var_5 = getcurrentsuper();
 
-  if(!isDefined(var5) || issuperready() || var5.isinuse || issuperexpended()) {
-    updatesppm(var1, 0, var2);
+  if(!isDefined(var_5) || issuperready() || var_5.isinuse || issuperexpended()) {
+    updatesppm(var_1, 0, var_2);
     return;
   }
 
-  var6 = min(var4 + var5.basepoints, getsuperpointsneeded());
-  setsuperbasepoints(var6);
-  scripts\mp\analyticslog::logevent_reportsuperscore(var4, gettime());
-  updatesppm(var1, 1, var2);
+  var_6 = min(var_4 + var_5.basepoints, getsuperpointsneeded());
+  setsuperbasepoints(var_6);
+  scripts\mp\analyticslog::logevent_reportsuperscore(var_4, gettime());
+  updatesppm(var_1, 1, var_2);
 }
 
 function ref_14021() {
-  var0 = getcurrentsuper();
+  var_0 = getcurrentsuper();
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
   if(scripts\mp\utility\player::isinkillcam() || !isalive(self)) {
-    var0.ref_11fcd = undefined;
+    var_0.ref_11fcd = undefined;
     return;
   }
 
-  var1 = 0;
+  var_1 = 0;
 
-  if(var0.isinuse) {
-    var1 = getsuperuseuiprogress();
+  if(var_0.isinuse) {
+    var_1 = getsuperuseuiprogress();
   } else if(!issuperexpended()) {
-    var2 = getsuperpointsneeded();
-    var1 = clamp(getcurrentsuperbasepoints() / var2, 0, 1);
+    var_2 = getsuperpointsneeded();
+    var_1 = clamp(getcurrentsuperbasepoints() / var_2, 0, 1);
   }
 
-  if(!isDefined(var0.ref_11fcd) || var1 != var0.ref_11fcd) {
-    self setclientomnvar("ui_super_progress", var1);
+  if(!isDefined(var_0.ref_11fcd) || var_1 != var_0.ref_11fcd) {
+    self setclientomnvar("ui_super_progress", var_1);
   }
 
-  self setplayersupermeterprogress(var1);
-  var0.ref_11fcd = var1;
+  self setplayersupermeterprogress(var_1);
+  var_0.ref_11fcd = var_1;
 }
 
 function updatesuperuistate() {
-  var0 = getcurrentsuper();
+  var_0 = getcurrentsuper();
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
   if(scripts\mp\utility\player::isinkillcam() || !isalive(self)) {
-    var0.state = undefined;
+    var_0.state = undefined;
     return;
   }
 
-  var1 = var0.state;
-  var2 = 1;
+  var_1 = var_0.state;
+  var_2 = 1;
 
   if(issuperexpended()) {
-    var2 = 4;
+    var_2 = 4;
   } else if(issuperready()) {
-    var2 = 2;
+    var_2 = 2;
   } else if(issuperinuse()) {
-    var2 = 3;
+    var_2 = 3;
   }
 
-  if(!isDefined(var1) || var2 != var1) {
-    thread _calloutmarkerping_handleluinotify_added::ref_1313d("ui_super_state", var2);
+  if(!isDefined(var_1) || var_2 != var_1) {
+    thread _calloutmarkerping_handleluinotify_added::ref_1313d("ui_super_state", var_2);
   }
 
-  var0.state = var2;
+  var_0.state = var_2;
 }
 
 function watchforrespawn() {
-  var0 = getcurrentsuper();
+  var_0 = getcurrentsuper();
   self endon("disconnect");
   self endon("remove_super");
 
   for(;;) {
     self waittill("spawned_player");
-    givesuperweapon(var0);
+    givesuperweapon(var_0);
   }
 }
 
@@ -682,10 +682,10 @@ function handlespectating() {
 function handleteamchange() {
   self endon("disconnect");
   self endon("remove_super");
-  var0 = self.team;
+  var_0 = self.team;
   self waittill("joined_team");
 
-  if(self.team != var0) {
+  if(self.team != var_0) {
     self.currentfirstupgrade = undefined;
     thread clearsuper(0);
     return;
@@ -696,8 +696,8 @@ function handlepointdecay() {
   self endon("disconnect");
   self endon("remove_super");
   level endon("game_ended");
-  var0 = getcurrentsuper();
-  var1 = getdvarfloat("scr_super_decay_rate", 6) * level.framedurationseconds;
+  var_0 = getcurrentsuper();
+  var_1 = getdvarfloat("scr_super_decay_rate", 6) * level.framedurationseconds;
 
   for(;;) {
     if(!issupercharging()) {
@@ -705,32 +705,32 @@ function handlepointdecay() {
       continue;
     }
 
-    var2 = max(var0.extrapoints - var1, 0);
-    setsuperextrapoints(var2);
+    var_2 = max(var_0.extrapoints - var_1, 0);
+    setsuperextrapoints(var_2);
     waitframe();
   }
 }
 
 function superearned() {
-  var0 = getcurrentsuper();
-  self setweaponammoclip(var0.staticdata.weapon, 1);
-  var1 = !var0.wasrefunded;
-  self notify("super_ready", var1);
+  var_0 = getcurrentsuper();
+  self setweaponammoclip(var_0.staticdata.weapon, 1);
+  var_1 = !var_0.wasrefunded;
+  self notify("super_ready", var_1);
 
-  if(var1) {
+  if(var_1) {
     self.pers["supersEarned"]++;
     self notify("super_earned");
-    recordsuperearnedanalytics(var0);
+    recordsuperearnedanalytics(var_0);
   }
 
-  var0.madeavailabletime = gettime();
-  var0.numkills = 0;
-  scripts\mp\analyticslog::logevent_superearned(var0.madeavailabletime);
+  var_0.madeavailabletime = gettime();
+  var_0.numkills = 0;
+  scripts\mp\analyticslog::logevent_superearned(var_0.madeavailabletime);
   setsuperextrapoints(0, 1);
   setsuperbasepoints(getsuperpointsneeded(), 1);
 
   if(isDefined(self.matchdatalifeindex)) {
-    scripts\mp\analyticslog::logevent_fieldupgradeearned(self, var0.staticdata.id);
+    scripts\mp\analyticslog::logevent_fieldupgradeearned(self, var_0.staticdata.id);
     return;
   }
 }
@@ -740,10 +740,10 @@ function watchforsuperusebegin() {
   self endon("remove_super");
 
   for(;;) {
-    self waittill("special_weapon_fired", var0);
-    var1 = trysuperusebegin(var0);
+    self waittill("special_weapon_fired", var_0);
+    var_1 = trysuperusebegin(var_0);
 
-    if(!istrue(var1)) {
+    if(!istrue(var_1)) {
       continue;
     }
 
@@ -751,12 +751,12 @@ function watchforsuperusebegin() {
   }
 }
 
-function trysuperusebegin(var0) {
+function trysuperusebegin(var_0) {
   if(!scripts\mp\utility\player::isreallyalive(self)) {
     return 0;
   }
 
-  if(var0.basename != getcurrentsuper().staticdata.weapon) {
+  if(var_0.basename != getcurrentsuper().staticdata.weapon) {
     return 0;
   }
 
@@ -769,59 +769,59 @@ function trysuperusebegin(var0) {
 
 function beginsuperuse() {
   self endon("death_or_disconnect");
-  var0 = getcurrentsuper();
+  var_0 = getcurrentsuper();
   self notify("super_started");
   scripts\mp\gamelogic::sethasdonecombat(self, 1);
 
-  if(var0.staticdata.weapon == "support_box_mp") {
+  if(var_0.staticdata.weapon == "support_box_mp") {
     self playlocalsound("iw8_support_box_deploy");
   }
 
-  if(isDefined(var0) && !var0.isinuse) {
-    var1 = !istrue(self.inlaststand) || var0.staticdata.canuseinlaststand;
-    var2 = 1;
+  if(isDefined(var_0) && !var_0.isinuse) {
+    var_1 = !istrue(self.inlaststand) || var_0.staticdata.canuseinlaststand;
+    var_2 = 1;
 
-    if(isDefined(var0.staticdata.useweapon)) {
-      if(scripts\mp\arbitrary_up::isinarbitraryup() && superdisabledinarbitraryup(var0.staticdata.ref)) {
+    if(isDefined(var_0.staticdata.useweapon)) {
+      if(scripts\mp\arbitrary_up::isinarbitraryup() && superdisabledinarbitraryup(var_0.staticdata.ref)) {
         superdisabledinarbitraryupmessage();
-        var2 = 0;
-      } else if(!var1) {
-        var2 = 0;
+        var_2 = 0;
+      } else if(!var_1) {
+        var_2 = 0;
       } else {
-        var2 = trygiveuseweapon(var0.staticdata.useweapon, var0.staticdata.useweaponclipammo, var0.staticdata.useweaponstockammo);
+        var_2 = trygiveuseweapon(var_0.staticdata.useweapon, var_0.staticdata.useweaponclipammo, var_0.staticdata.useweaponstockammo);
       }
     }
 
-    if(var2 && var1 && (!isDefined(var0.staticdata.beginusefunc) || istrue(self[[var0.staticdata.beginusefunc]]()))) {
-      var3 = [];
+    if(var_2 && var_1 && (!isDefined(var_0.staticdata.beginusefunc) || istrue(self[[var_0.staticdata.beginusefunc]]()))) {
+      var_3 = [];
       GscBinSkip0(0x2e, 0, "super_use_finished_lb");
     }
 
-    if(isDefined(var1.staticdata.useweapon) && var3) {
+    if(isDefined(var_1.staticdata.useweapon) && var_3) {
       thread switchandtakesuperuseweapon();
     }
 
     if(istrue(self.inlaststand)) {
-      thread ref_144fa(var1.staticdata.weapon);
+      thread ref_144fa(var_1.staticdata.weapon);
     } else {
-      self setweaponammoclip(var1.staticdata.weapon, 1);
+      self setweaponammoclip(var_1.staticdata.weapon, 1);
     }
   }
 
   return false;
 }
 
-function activatesuper(var0, var1) {
-  var2 = getcurrentsuper();
+function activatesuper(var_0, var_1) {
+  var_2 = getcurrentsuper();
 
-  if(!isDefined(var0)) {
-    var0 = 0;
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  if(var0 && isDefined(var2.staticdata.activatepenaltyalt)) {
-    reducesuperusepercent(var2.staticdata.activatepenaltyalt, var1);
-  } else if(isDefined(var2.staticdata.activatepenalty)) {
-    reducesuperusepercent(var2.staticdata.activatepenalty, var1);
+  if(var_0 && isDefined(var_2.staticdata.activatepenaltyalt)) {
+    reducesuperusepercent(var_2.staticdata.activatepenaltyalt, var_1);
+  } else if(isDefined(var_2.staticdata.activatepenalty)) {
+    reducesuperusepercent(var_2.staticdata.activatepenalty, var_1);
   }
 
   return true;
@@ -831,9 +831,9 @@ function updateusetimedecay() {
   self endon("death_or_disconnect");
   self endon("game_ended");
   self endon("super_use_finished");
-  var0 = getcurrentsuper();
+  var_0 = getcurrentsuper();
 
-  if(!isDefined(var0.staticdata.usetime)) {
+  if(!isDefined(var_0.staticdata.usetime)) {
     waitframe();
 
     if(issuperinuse()) {
@@ -843,103 +843,103 @@ function updateusetimedecay() {
     return;
   }
 
-  jumpiffalse(var0.staticdata.usetime < 0) LOC_0000004e;
+  jumpiffalse(var_0.staticdata.usetime < 0) LOC_0000004e;
   return;
 }
 
-function reducesuperusepercent(var0, var1, var2) {
-  var3 = getcurrentsuper();
-  var3.usepercent = max(var3.usepercent - var0, 0);
+function reducesuperusepercent(var_0, var_1, var_2) {
+  var_3 = getcurrentsuper();
+  var_3.usepercent = max(var_3.usepercent - var_0, 0);
 
-  if(istrue(var1)) {
-    var3.allowrefund = 0;
+  if(istrue(var_1)) {
+    var_3.allowrefund = 0;
   }
 
-  if(!isDefined(var2) || var2 == 0) {
+  if(!isDefined(var_2) || var_2 == 0) {
     superusedurationupdated();
     return;
   }
 }
 
 function resetsuperusepercent() {
-  var0 = getcurrentsuper();
-  var0.usepercent = 1;
+  var_0 = getcurrentsuper();
+  var_0.usepercent = 1;
   superusedurationupdated();
 }
 
 function superusedurationupdated() {
-  var0 = getcurrentsuper();
+  var_0 = getcurrentsuper();
 
   if(isbot(self)) {
-    if(isDefined(var0.staticdata.useweapon) && var0.staticdata.isweapon == 1) {
-      var1 = self getammocount(var0.staticdata.useweapon);
+    if(isDefined(var_0.staticdata.useweapon) && var_0.staticdata.isweapon == 1) {
+      var_1 = self getammocount(var_0.staticdata.useweapon);
 
-      if(isDefined(var1) && var1 > 0) {
+      if(isDefined(var_1) && var_1 > 0) {
         superusefinished();
         return;
       }
     }
   }
 
-  if(var0.usepercent <= 0) {
+  if(var_0.usepercent <= 0) {
     superusefinished();
     return;
   }
 }
 
-function superusefinished(var0, var1, var2, var3) {
-  var4 = getcurrentsuper();
+function superusefinished(var_0, var_1, var_2, var_3) {
+  var_4 = getcurrentsuper();
   self notify("super_use_finished_lb");
-  var5 = 0;
+  var_5 = 0;
 
-  if(!isDefined(var3) || var3 == 0) {
-    var5 = shouldrefundsuper();
+  if(!isDefined(var_3) || var_3 == 0) {
+    var_5 = shouldrefundsuper();
   }
 
   ref_131c7(0);
-  var4.canstow = 0;
-  var6 = undefined;
+  var_4.canstow = 0;
+  var_6 = undefined;
 
-  if(isDefined(var4.staticdata.endusefunc)) {
-    if(!isDefined(var1)) {
-      var1 = 0;
+  if(isDefined(var_4.staticdata.endusefunc)) {
+    if(!isDefined(var_1)) {
+      var_1 = 0;
     }
 
-    var6 = self[[var4.staticdata.endusefunc]](var1);
+    var_6 = self[[var_4.staticdata.endusefunc]](var_1);
   }
 
-  if(var5 || istrue(var0) || istrue(var6)) {
+  if(var_5 || istrue(var_0) || istrue(var_6)) {
     ref_131c6(0);
-    var4.wasrefunded = 1;
+    var_4.wasrefunded = 1;
     setsuperbasepoints(getsuperpointsneeded());
-  } else if(istrue(var2)) {
+  } else if(istrue(var_2)) {
     ref_131c6(0);
-    var7 = getsuperpointsneeded() * var4.usepercent;
-    var4.wasrefunded = 1;
-    setsuperbasepoints(var7);
+    var_7 = getsuperpointsneeded() * var_4.usepercent;
+    var_4.wasrefunded = 1;
+    setsuperbasepoints(var_7);
   } else {
     ref_131c6(1);
-    var4.lastfinishtime = gettime();
-    var4.wasrefunded = 0;
+    var_4.lastfinishtime = gettime();
+    var_4.wasrefunded = 0;
   }
 
   thread switchandtakesuperuseweapon();
-  var8 = var4.usestarttime - var4.madeavailabletime;
-  scripts\mp\analyticslog::logevent_superended(var4.staticdata.ref, var8, 0, var4.numkills);
+  var_8 = var_4.usestarttime - var_4.madeavailabletime;
+  scripts\mp\analyticslog::logevent_superended(var_4.staticdata.ref, var_8, 0, var_4.numkills);
 
   if(level.codcasterenabled) {
     self setspecialactive(0);
   }
 
-  scripts\mp\utility\print::printgameaction("super use ended - " + var4.staticdata.ref, self);
+  scripts\mp\utility\print::printgameaction("super use ended - " + var_4.staticdata.ref, self);
 
   if(scripts\mp\utility\game::getgametype() == "br") {
     if(!level.allowsupers) {
-      if(!istrue(var0)) {
+      if(!istrue(var_0)) {
         self setclientomnvar("ui_perk_package_state", 0);
         self setclientomnvar("ui_super_progress", 0);
       }
-    } else if(var4.staticdata.ending_mortars) {
+    } else if(var_4.staticdata.ending_mortars) {
       clearsuper();
       self setclientomnvar("ui_perk_package_state", 0);
       self setclientomnvar("ui_super_progress", 0);
@@ -948,14 +948,14 @@ function superusefinished(var0, var1, var2, var3) {
   }
 
   self notify("super_use_finished");
-  scripts\cp\vehicles\vehicle_compass_cp::ref_12097(var4, var5);
+  scripts\cp\vehicles\vehicle_compass_cp::ref_12097(var_4, var_5);
 }
 
 function refundsuper() {
-  var0 = getcurrentsuper();
+  var_0 = getcurrentsuper();
 
-  if(isDefined(var0)) {
-    if(var0.isinuse) {
+  if(isDefined(var_0)) {
+    if(var_0.isinuse) {
       superusefinished(1);
       return;
     }
@@ -972,55 +972,55 @@ function handledeath() {
     return;
   }
 
-  var0 = getcurrentsuper();
-  var1 = var0.staticdata.ref_12acd;
-  superusefinished(var1, 1);
+  var_0 = getcurrentsuper();
+  var_1 = var_0.staticdata.ref_12acd;
+  superusefinished(var_1, 1);
 }
 
-function monitoruseweaponfiring(var0) {
+function monitoruseweaponfiring(var_0) {
   self endon("death_or_disconnect");
   self endon("super_use_finished");
   self endon("remove_super");
 
   for(;;) {
-    self waittill("weapon_fired", var1);
+    self waittill("weapon_fired", var_1);
 
-    if(isnullweapon(var1, var0, 1)) {
-      activatesuper(var1.isalternate, 1);
+    if(isnullweapon(var_1, var_0, 1)) {
+      activatesuper(var_1.isalternate, 1);
     }
   }
 }
 
-function trygiveuseweapon(var0, var1, var2) {
+function trygiveuseweapon(var_0, var_1, var_2) {
   self endon("death_or_disconnect");
-  scripts\cp_mp\utility\inventory_utility::_giveweapon(var0);
-  self setweaponammoclip(var0, var1);
-  self setweaponammostock(var0, var2);
-  var3 = scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var0, isbot(self));
+  scripts\cp_mp\utility\inventory_utility::_giveweapon(var_0);
+  self setweaponammoclip(var_0, var_1);
+  self setweaponammostock(var_0, var_2);
+  var_3 = scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var_0, isbot(self));
 
-  if(var3) {
-    thread manageuseweapon(var0);
-    thread monitoruseweaponfiring(var0);
+  if(var_3) {
+    thread manageuseweapon(var_0);
+    thread monitoruseweaponfiring(var_0);
     return true;
   }
 
-  scripts\cp_mp\utility\inventory_utility::abortmonitoredweaponswitch(var0);
+  scripts\cp_mp\utility\inventory_utility::abortmonitoredweaponswitch(var_0);
   return false;
 }
 
-function manageuseweapon(var0) {
+function manageuseweapon(var_0) {
   self endon("death_or_disconnect");
   self endon("super_use_finished");
-  var1 = getcurrentsuper();
-  var1.useweaponswapped = undefined;
-  var2 = 0;
+  var_1 = getcurrentsuper();
+  var_1.useweaponswapped = undefined;
+  var_2 = 0;
 
   for(;;) {
-    var3 = self getcurrentweapon();
+    var_3 = self getcurrentweapon();
 
-    if(!var1.canstow && !isnullweapon(var0, var3, 1)) {
-      if(var3.basename == "iw7_uplinkball_mp" || var3.basename == "iw7_tdefball_mp") {
-        var2 = 1;
+    if(!var_1.canstow && !isnullweapon(var_0, var_3, 1)) {
+      if(var_3.basename == "iw7_uplinkball_mp" || var_3.basename == "iw7_tdefball_mp") {
+        var_2 = 1;
       }
 
       break;
@@ -1030,46 +1030,46 @@ function manageuseweapon(var0) {
   }
 
   if(issuperinuse()) {
-    var1.useweaponswapped = 1;
-    superusefinished(undefined, undefined, var2);
+    var_1.useweaponswapped = 1;
+    superusefinished(undefined, undefined, var_2);
     return;
   }
 }
 
 function switchandtakesuperuseweapon() {
   self endon("death");
-  var0 = getcurrentsuper();
-  var1 = var0.staticdata.useweapon;
+  var_0 = getcurrentsuper();
+  var_1 = var_0.staticdata.useweapon;
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  if(scripts\cp_mp\utility\inventory_utility::isswitchingtoweaponwithmonitoring(var1)) {
-    scripts\cp_mp\utility\inventory_utility::abortmonitoredweaponswitch(var1);
+  if(scripts\cp_mp\utility\inventory_utility::isswitchingtoweaponwithmonitoring(var_1)) {
+    scripts\cp_mp\utility\inventory_utility::abortmonitoredweaponswitch(var_1);
     return;
   }
 
   self notify("super_switched");
-  scripts\cp_mp\utility\inventory_utility::getridofweapon(var1);
+  scripts\cp_mp\utility\inventory_utility::getridofweapon(var_1);
 }
 
 function storesuperpoints() {
-  var0 = getcurrentsuper();
+  var_0 = getcurrentsuper();
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
   if(issupercharging() || issuperready()) {
-    self.pers["superBasePoints"] = var0.basepoints;
-    self.pers["superExtraPoints"] = var0.extrapoints;
+    self.pers["superBasePoints"] = var_0.basepoints;
+    self.pers["superExtraPoints"] = var_0.extrapoints;
     return;
   }
 
   if(issuperinuse() && shouldrefundsuper()) {
-    var1 = getsuperpointsneeded();
-    self.pers["superPoints"] = var0.usepercent * var1;
+    var_1 = getsuperpointsneeded();
+    self.pers["superPoints"] = var_0.usepercent * var_1;
     self.pers["superExtraPoints"] = 0;
     return;
   }
@@ -1079,8 +1079,8 @@ function storesuperpoints() {
 }
 
 function getsuperuseuiprogress() {
-  var0 = getcurrentsuper();
-  return var0.usepercent;
+  var_0 = getcurrentsuper();
+  return var_0.usepercent;
 }
 
 function getcurrentsuperbasepoints() {
@@ -1092,25 +1092,25 @@ function getcurrentsuperextrapoints() {
 }
 
 function getcurrentsuperpoints() {
-  var0 = getcurrentsuper();
-  return var0.basepoints + var0.extrapoints;
+  var_0 = getcurrentsuper();
+  return var_0.basepoints + var_0.extrapoints;
 }
 
 function getsuperpointsneeded() {
-  var0 = getcurrentsuper();
-  var1 = var0.staticdata.pointsneeded;
+  var_0 = getcurrentsuper();
+  var_1 = var_0.staticdata.pointsneeded;
 
-  if(isDefined(var0.ref_12187)) {
-    var1 = var0.ref_12187;
+  if(isDefined(var_0.ref_12187)) {
+    var_1 = var_0.ref_12187;
   }
 
-  return var1;
+  return var_1;
 }
 
 function issuperready() {
-  var0 = getcurrentsuper();
+  var_0 = getcurrentsuper();
 
-  if(!isDefined(var0) || var0.isinuse) {
+  if(!isDefined(var_0) || var_0.isinuse) {
     return false;
   }
 
@@ -1121,9 +1121,9 @@ function issuperinuse() {
   return isDefined(getcurrentsuper()) && getcurrentsuper().isinuse;
 }
 
-function ref_131c7(var0) {
-  var1 = getcurrentsuper();
-  var1.isinuse = var0;
+function ref_131c7(var_0) {
+  var_1 = getcurrentsuper();
+  var_1.isinuse = var_0;
   updatesuperuistate();
 }
 
@@ -1139,8 +1139,8 @@ function issuperexpended() {
   return istrue(self.pers["superExpended"]);
 }
 
-function ref_131c6(var0) {
-  self.pers["superExpended"] = var0;
+function ref_131c6(var_0) {
+  self.pers["superExpended"] = var_0;
   updatesuperuistate();
 }
 
@@ -1149,176 +1149,176 @@ function getcurrentsuper() {
 }
 
 function getcurrentsuperref() {
-  var0 = getcurrentsuper();
+  var_0 = getcurrentsuper();
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return undefined;
   }
 
-  return var0.staticdata.ref;
+  return var_0.staticdata.ref;
 }
 
 function shouldrefundsuper() {
-  var0 = getcurrentsuper();
-  var1 = var0.staticdata.graceperiod;
-  var2 = undefined;
+  var_0 = getcurrentsuper();
+  var_1 = var_0.staticdata.graceperiod;
+  var_2 = undefined;
 
-  if(isDefined(var0) && isDefined(var0.usestarttime)) {
-    var2 = gettime() - var0.usestarttime;
+  if(isDefined(var_0) && isDefined(var_0.usestarttime)) {
+    var_2 = gettime() - var_0.usestarttime;
   }
 
-  if(!isDefined(var2) || var2 >= var1) {
+  if(!isDefined(var_2) || var_2 >= var_1) {
     return 0;
   }
 
-  if(var0.numkills > 0) {
+  if(var_0.numkills > 0) {
     return 0;
   }
 
-  return var0.allowrefund;
+  return var_0.allowrefund;
 }
 
-function getsuperrefforsuperuseweapon(var0) {
-  if(!isstring(var0)) {
-    var0 = var0.basename;
+function getsuperrefforsuperuseweapon(var_0) {
+  if(!isstring(var_0)) {
+    var_0 = var_0.basename;
   }
 
-  if(!isDefined(level.superglobals) || !isDefined(level.superglobals.superweapons) || !isDefined(level.superglobals.superweapons[var0])) {
+  if(!isDefined(level.superglobals) || !isDefined(level.superglobals.superweapons) || !isDefined(level.superglobals.superweapons[var_0])) {
     return undefined;
   }
 
-  return level.superglobals.superweapons[var0].ref;
+  return level.superglobals.superweapons[var_0].ref;
 }
 
-function getsuperrefforsuperoffhand(var0) {
-  if(!isstring(var0)) {
-    var0 = var0.basename;
+function getsuperrefforsuperoffhand(var_0) {
+  if(!isstring(var_0)) {
+    var_0 = var_0.basename;
   }
 
-  if(!isDefined(level.superglobals.supersbyoffhand[var0])) {
+  if(!isDefined(level.superglobals.supersbyoffhand[var_0])) {
     return undefined;
   }
 
-  return level.superglobals.supersbyoffhand[var0].ref;
+  return level.superglobals.supersbyoffhand[var_0].ref;
 }
 
-function roundkillexecute(var0) {
-  if(!isstring(var0)) {
-    var0 = var0.basename;
+function roundkillexecute(var_0) {
+  if(!isstring(var_0)) {
+    var_0 = var_0.basename;
   }
 
-  if(!isDefined(level.superglobals.ref_13987[var0])) {
+  if(!isDefined(level.superglobals.ref_13987[var_0])) {
     return undefined;
   }
 
-  return level.superglobals.ref_13987[var0].ref;
+  return level.superglobals.ref_13987[var_0].ref;
 }
 
-function getsuperrefforsuperweapon(var0) {
+function getsuperrefforsuperweapon(var_0) {
   if(!isDefined(level.superglobals)) {
     return undefined;
   }
 
-  if(!isstring(var0)) {
-    var0 = var0.basename;
+  if(!isstring(var_0)) {
+    var_0 = var_0.basename;
   }
 
-  var1 = getsuperrefforsuperuseweapon(var0);
+  var_1 = getsuperrefforsuperuseweapon(var_0);
 
-  if(isDefined(var1)) {
-    return var1;
+  if(isDefined(var_1)) {
+    return var_1;
   }
 
-  var2 = getsuperrefforsuperoffhand(var0);
+  var_2 = getsuperrefforsuperoffhand(var_0);
 
-  if(isDefined(var2)) {
-    return var2;
+  if(isDefined(var_2)) {
+    return var_2;
   }
 
-  var2 = roundkillexecute(var0);
+  var_2 = roundkillexecute(var_0);
 
-  if(isDefined(var2)) {
-    return var2;
-  }
-
-  return undefined;
-}
-
-function shouldtracksuperweaponstats(var0) {
-  var1 = getsuperrefforsuperweapon(var0);
-
-  if(isDefined(var1)) {
-    var2 = level.superglobals.staticsuperdata[var1];
-    return var2.useweapontrackstats;
+  if(isDefined(var_2)) {
+    return var_2;
   }
 
   return undefined;
 }
 
-function getsuperid(var0) {
-  if(!isDefined(var0) || !isDefined(level.superglobals) || !isDefined(level.superglobals.staticsuperdata) || !isDefined(level.superglobals.staticsuperdata[var0]) || var0 == "none") {
+function shouldtracksuperweaponstats(var_0) {
+  var_1 = getsuperrefforsuperweapon(var_0);
+
+  if(isDefined(var_1)) {
+    var_2 = level.superglobals.staticsuperdata[var_1];
+    return var_2.useweapontrackstats;
+  }
+
+  return undefined;
+}
+
+function getsuperid(var_0) {
+  if(!isDefined(var_0) || !isDefined(level.superglobals) || !isDefined(level.superglobals.staticsuperdata) || !isDefined(level.superglobals.staticsuperdata[var_0]) || var_0 == "none") {
     return 0;
   }
 
-  return level.superglobals.staticsuperdata[var0].id;
+  return level.superglobals.staticsuperdata[var_0].id;
 }
 
-function getmovespeedforsuperweapon(var0) {
-  var1 = getsuperrefforsuperweapon(var0);
+function getmovespeedforsuperweapon(var_0) {
+  var_1 = getsuperrefforsuperweapon(var_0);
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return undefined;
   }
 
-  return level.superglobals.staticsuperdata[var1].movespeed;
+  return level.superglobals.staticsuperdata[var_1].movespeed;
 }
 
-function getrootsuperref(var0) {
-  return getsubstr(var0, 6);
+function getrootsuperref(var_0) {
+  return getsubstr(var_0, 6);
 }
 
 function allowsuperweaponstow() {
-  var0 = getcurrentsuper();
+  var_0 = getcurrentsuper();
 
-  if(!isDefined(var0) || !var0.isinuse) {
+  if(!isDefined(var_0) || !var_0.isinuse) {
     return;
   }
 
-  var0.canstow = 1;
+  var_0.canstow = 1;
 }
 
 function unstowsuperweapon() {
-  var0 = getcurrentsuper();
+  var_0 = getcurrentsuper();
 
-  if(!isDefined(var0) || !var0.canstow) {
+  if(!isDefined(var_0) || !var_0.canstow) {
     return;
   }
 
-  if(!var0.isinuse || !isDefined(var0.staticdata.useweapon)) {
-    var0.canstow = 0;
+  if(!var_0.isinuse || !isDefined(var_0.staticdata.useweapon)) {
+    var_0.canstow = 0;
     return;
   }
 
-  scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var0.staticdata.useweapon);
-  var0.canstow = 0;
+  scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var_0.staticdata.useweapon);
+  var_0.canstow = 0;
 }
 
-function getsuperpointsforevent(var0) {
-  var1 = level.superglobals.pointeventdata[var0];
+function getsuperpointsforevent(var_0) {
+  var_1 = level.superglobals.pointeventdata[var_0];
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return 0;
   }
 
-  return var1;
+  return var_1;
 }
 
 function watchforgameend() {
   level waittill("game_ended");
 
   if(scripts\mp\utility\game::waslastround()) {
-    foreach(var1 in level.players) {
-      writesppmstats(var1);
+    foreach(var_1 in level.players) {
+      writesppmstats(var_1);
     }
 
     return;
@@ -1349,7 +1349,7 @@ function getsppmdata() {
   return self.sppmdata;
 }
 
-function updatesppm(var0, var1, var2) {
+function updatesppm(var_0, var_1, var_2) {
   if(getdvarint("scr_sppm_data", 0) == 0) {
     return;
   }
@@ -1358,23 +1358,23 @@ function updatesppm(var0, var1, var2) {
     return;
   }
 
-  var3 = getsppmdata();
-  var3.totalpoints += var0;
+  var_3 = getsppmdata();
+  var_3.totalpoints += var_0;
 
-  if(istrue(var1)) {
-    var3.totalappliedpoints += var0;
+  if(istrue(var_1)) {
+    var_3.totalappliedpoints += var_0;
   }
 
-  if(!isDefined(var2)) {
-    var2 = "undefined";
+  if(!isDefined(var_2)) {
+    var_2 = "undefined";
   }
 
-  if(!isDefined(var3.eventtotals[var2])) {
-    var3.eventtotals[var2] = var0;
+  if(!isDefined(var_3.eventtotals[var_2])) {
+    var_3.eventtotals[var_2] = var_0;
     return;
   }
 
-  var3.eventtotals[var2] += var0;
+  var_3.eventtotals[var_2] += var_0;
 }
 
 function writesppmstats() {
@@ -1386,56 +1386,56 @@ function writesppmstats() {
     return;
   }
 
-  var0 = getsppmdata();
-  var1 = scripts\mp\persistence::statgetchildbuffered("round", "timePlayed", 1) / 60;
-  var2 = 0;
-  var3 = 0;
+  var_0 = getsppmdata();
+  var_1 = scripts\mp\persistence::statgetchildbuffered("round", "timePlayed", 1) / 60;
+  var_2 = 0;
+  var_3 = 0;
 
-  if(var1 > 0) {
-    var2 = var0.totalpoints / var1;
-    var3 = var0.totalappliedpoints / var1;
+  if(var_1 > 0) {
+    var_2 = var_0.totalpoints / var_1;
+    var_3 = var_0.totalappliedpoints / var_1;
   }
 
-  var4 = "";
-  var5 = -1;
+  var_4 = "";
+  var_5 = -1;
 
-  foreach(var7 in var0.eventtotals) {
-    if(var7 > var5) {
-      var5 = var7;
-      var4 = var8;
+  foreach(var_7 in var_0.eventtotals) {
+    if(var_7 > var_5) {
+      var_5 = var_7;
+      var_4 = var_8;
     }
   }
 
-  getentitylessscriptablearray("mpscript_sppm", ["sppm", var2, "sppm_applied", var3, "gamemode", scripts\mp\utility\game::getgametype(), "kills", self.kills, "time_played", var1, "best_event", var4, "script_version", getscriptdataversion()]);
+  getentitylessscriptablearray("mpscript_sppm", ["sppm", var_2, "sppm_applied", var_3, "gamemode", scripts\mp\utility\game::getgametype(), "kills", self.kills, "time_played", var_1, "best_event", var_4, "script_version", getscriptdataversion()]);
 }
 
-function modifysuperequipmentdamage(var0, var1, var2, var3, var4) {
-  var5 = var3;
+function modifysuperequipmentdamage(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = var_3;
 
-  if(isDefined(self.owner) && isDefined(var0) && var0 == self.owner) {
-    var5 = int(ceil(var3 * 0.5));
+  if(isDefined(self.owner) && isDefined(var_0) && var_0 == self.owner) {
+    var_5 = int(ceil(var_3 * 0.5));
   }
 
-  return var5;
+  return var_5;
 }
 
-function updateactivesupers(var0, var1, var2, var3, var4, var5, var6, var7) {
-  var8 = isDefined(var0) && isPlayer(var0);
-  var9 = var5.basename == "throwingknife_mp" || var5.basename == "throwingknife_fire_mp" || var5.basename == "throwingknife_electric_mp" || var5.basename == "throwingknife_drill_mp";
-  var10 = var9 && isDefined(var0) && isDefined(var0.classname) && var0.classname == "grenade";
-  var11 = isDefined(var1) && isPlayer(var1) && var1 != var2;
+function updateactivesupers(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  var_8 = isDefined(var_0) && isPlayer(var_0);
+  var_9 = var_5.basename == "throwingknife_mp" || var_5.basename == "throwingknife_fire_mp" || var_5.basename == "throwingknife_electric_mp" || var_5.basename == "throwingknife_drill_mp";
+  var_10 = var_9 && isDefined(var_0) && isDefined(var_0.classname) && var_0.classname == "grenade";
+  var_11 = isDefined(var_1) && isPlayer(var_1) && var_1 != var_2;
 
-  if(var11) {
-    var12 = getcurrentsuper(var1);
+  if(var_11) {
+    var_12 = getcurrentsuper(var_1);
 
-    if(var8 || var10) {
-      if(isDefined(var12) && var12.staticdata.ref == "super_deadsilence" && issuperinuse(var1)) {
-        var1 thread scripts\mp\supers\super_deadsilence::superdeadsilence_onkill();
+    if(var_8 || var_10) {
+      if(isDefined(var_12) && var_12.staticdata.ref == "super_deadsilence" && issuperinuse(var_1)) {
+        var_1 thread scripts\mp\supers\super_deadsilence::superdeadsilence_onkill();
       }
     }
 
-    if(var8 && var0 scripts\mp\utility\perk::_hasperk("specialty_bulletdamage")) {
-      var1 thread scripts\mp\supers\super_stoppingpower::ref_138ec(var5);
+    if(var_8 && var_0 scripts\mp\utility\perk::_hasperk("specialty_bulletdamage")) {
+      var_1 thread scripts\mp\supers\super_stoppingpower::ref_138ec(var_5);
       return;
     }
 
@@ -1502,10 +1502,10 @@ function cancelsuperdelay() {
   level notify("super_delay_end");
 }
 
-function setsuperweapondisabled(var0) {
-  self.issuperdisabled = var0;
+function setsuperweapondisabled(var_0) {
+  self.issuperdisabled = var_0;
 
-  if(!var0) {
+  if(!var_0) {
     endsuperdisableweapon();
     return;
   }
@@ -1525,11 +1525,11 @@ function watchsuperdisableplayer() {
   level endon("game_ended");
   self notify("super_disable_end");
   self endon("super_disable_end");
-  var0 = getcurrentsuper();
+  var_0 = getcurrentsuper();
 
-  if(isDefined(var0)) {
-    var1 = var0.staticdata.weapon;
-    scripts\cp_mp\utility\inventory_utility::_takeweapon(var1);
+  if(isDefined(var_0)) {
+    var_1 = var_0.staticdata.weapon;
+    scripts\cp_mp\utility\inventory_utility::_takeweapon(var_1);
     givesuperdisableweapon();
   }
 
@@ -1538,20 +1538,20 @@ function watchsuperdisableplayer() {
   level waittill("super_delay_start");
 
   for(;;) {
-    self waittill("special_weapon_fired", var2);
+    self waittill("special_weapon_fired", var_2);
 
-    if(var2.basename != "super_delay_mp") {
+    if(var_2.basename != "super_delay_mp") {
       continue;
     }
 
-    self setweaponammoclip(var2, 99);
+    self setweaponammoclip(var_2, 99);
 
     if(issuperready()) {
-      var3 = (level.superdelayendtime - gettime()) / 1000;
-      var3 = int(max(0, ceil(var3)));
+      var_3 = (level.superdelayendtime - gettime()) / 1000;
+      var_3 = int(max(0, ceil(var_3)));
 
-      if(var3 > 0) {
-        scripts\mp\hud_message::showerrormessage("MP/SUPERS_UNAVAILABLE_FOR_N", var3);
+      if(var_3 > 0) {
+        scripts\mp\hud_message::showerrormessage("MP/SUPERS_UNAVAILABLE_FOR_N", var_3);
       } else {
         scripts\mp\hud_message::showerrormessage("MP/SUPERS_UNAVAILABLE");
       }
@@ -1574,14 +1574,14 @@ function cleanupsuperdisableweapon() {
 }
 
 function endsuperdisableweapon() {
-  var0 = getcurrentsuper();
+  var_0 = getcurrentsuper();
 
-  if(isDefined(var0)) {
-    var1 = var0.staticdata.weapon;
-    var2 = scripts\engine\utility::ter_op(issuperready(), 1, 0);
-    scripts\cp_mp\utility\inventory_utility::_giveweapon(var1);
-    self setweaponammoclip(var1, var2);
-    self assignweaponoffhandspecial(var1);
+  if(isDefined(var_0)) {
+    var_1 = var_0.staticdata.weapon;
+    var_2 = scripts\engine\utility::ter_op(issuperready(), 1, 0);
+    scripts\cp_mp\utility\inventory_utility::_giveweapon(var_1);
+    self setweaponammoclip(var_1, var_2);
+    self assignweaponoffhandspecial(var_1);
     scripts\cp_mp\utility\inventory_utility::_takeweapon("super_delay_mp");
   }
 
@@ -1594,13 +1594,13 @@ function givesuperdisableweapon() {
   self assignweaponoffhandspecial("super_delay_mp");
 }
 
-function givesuperweapon(var0) {
+function givesuperweapon(var_0) {
   if(superdelaypassed()) {
-    if(!self hasweapon(var0.staticdata.weapon)) {
-      var1 = scripts\engine\utility::ter_op(issuperready(), 1, 0);
-      scripts\cp_mp\utility\inventory_utility::_giveweapon(var0.staticdata.weapon);
-      self setweaponammoclip(var0.staticdata.weapon, var1);
-      self assignweaponoffhandspecial(var0.staticdata.weapon);
+    if(!self hasweapon(var_0.staticdata.weapon)) {
+      var_1 = scripts\engine\utility::ter_op(issuperready(), 1, 0);
+      scripts\cp_mp\utility\inventory_utility::_giveweapon(var_0.staticdata.weapon);
+      self setweaponammoclip(var_0.staticdata.weapon, var_1);
+      self assignweaponoffhandspecial(var_0.staticdata.weapon);
       return;
     }
 
@@ -1610,13 +1610,13 @@ function givesuperweapon(var0) {
   givesuperdisableweapon();
 }
 
-function watchobjuse(var0, var1) {
+function watchobjuse(var_0, var_1) {
   self endon("death_or_disconnect");
   self endon("obj_drain_end");
   self endon("ball_dropped");
 
   if(scripts\mp\utility\game::getgametype() == "sd" || scripts\mp\utility\game::getgametype() == "sr" || scripts\mp\utility\game::getgametype() == "dd") {
-    if(istrue(var1)) {
+    if(istrue(var_1)) {
       self waittill("super_obj_drain");
     }
   } else if(!isDefined(self.carryobject)) {
@@ -1626,52 +1626,52 @@ function watchobjuse(var0, var1) {
   }
 
   while(issuperinuse()) {
-    reducesuperusepercent(var0);
+    reducesuperusepercent(var_0);
     wait 0.05;
   }
 }
 
-function combatrecordsuperuse(var0) {
+function combatrecordsuperuse(var_0) {
   if(!scripts\mp\utility\stats::canrecordcombatrecordstats()) {
     return;
   }
 
-  if(var0 == "super_kiosk_drop") {
+  if(var_0 == "super_kiosk_drop") {
     return;
   }
 
-  var1 = self getplayerdata("mp", "playerStats", "superStats", var0, "uses");
-  self setplayerdata("mp", "playerStats", "superStats", var0, "uses", var1 + 1);
+  var_1 = self getplayerdata("mp", "playerStats", "superStats", var_0, "uses");
+  self setplayerdata("mp", "playerStats", "superStats", var_0, "uses", var_1 + 1);
 }
 
-function combatrecordsuperkill(var0) {
+function combatrecordsuperkill(var_0) {
   if(!scripts\mp\utility\stats::canrecordcombatrecordstats()) {
     return;
   }
 
-  var1 = self getplayerdata("mp", "playerStats", "superStats", var0, "kills");
-  self setplayerdata("mp", "playerStats", "superStats", var0, "kills", var1 + 1);
+  var_1 = self getplayerdata("mp", "playerStats", "superStats", var_0, "kills");
+  self setplayerdata("mp", "playerStats", "superStats", var_0, "kills", var_1 + 1);
 }
 
-function hide_plunderboxes(var0, var1) {
+function hide_plunderboxes(var_0, var_1) {
   if(!scripts\mp\utility\stats::canrecordcombatrecordstats()) {
     return;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 1;
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
-  var2 = relic_fastbleedout_returnfunc(var0);
-  self setplayerdata("mp", "playerStats", "superStats", var0, "misc1", var2 + var1);
+  var_2 = relic_fastbleedout_returnfunc(var_0);
+  self setplayerdata("mp", "playerStats", "superStats", var_0, "misc1", var_2 + var_1);
 }
 
-function relic_fastbleedout_returnfunc(var0) {
-  return self getplayerdata("mp", "playerStats", "superStats", var0, "misc1");
+function relic_fastbleedout_returnfunc(var_0) {
+  return self getplayerdata("mp", "playerStats", "superStats", var_0, "misc1");
 }
 
-function superdisabledinarbitraryup(var0) {
-  if(var0 == "super_microturret" || var0 == "super_supertrophy") {
+function superdisabledinarbitraryup(var_0) {
+  if(var_0 == "super_microturret" || var_0 == "super_supertrophy") {
     return true;
   }
 
@@ -1695,8 +1695,8 @@ function cruisepredatorbeginuse() {
 }
 
 function scramblebeginuse() {
-  var0 = spawn("script_model", self.origin + (0, 0, 400));
-  self.scrambleent = var0;
+  var_0 = spawn("script_model", self.origin + (0, 0, 400));
+  self.scrambleent = var_0;
   self.scrambleent setModel("super_scramble_mp");
   self.scrambleent linkTo(self);
   self.scrambleent.owner = self;
@@ -1707,7 +1707,7 @@ function scramblebeginuse() {
   return true;
 }
 
-function scrambleusefinished(var0) {
+function scrambleusefinished(var_0) {
   self.scrambleent unlink();
   self.scrambleent delete();
   scripts\cp_mp\killstreaks\helper_drone::helperdrone_endscramblereffect();
@@ -1767,8 +1767,8 @@ function recondronebeginuse() {
   return scripts\cp_mp\killstreaks\helper_drone::recondrone_beginsuper();
 }
 
-function recondroneenduse(var0) {
-  return scripts\cp_mp\killstreaks\helper_drone::recondrone_endsuper(var0);
+function recondroneenduse(var_0) {
+  return scripts\cp_mp\killstreaks\helper_drone::recondrone_endsuper(var_0);
 }
 
 function recondroneunset() {
@@ -1783,8 +1783,8 @@ function deadsilencebeginuse() {
   return scripts\mp\supers\super_deadsilence::superdeadsilence_beginsuper();
 }
 
-function deadsilenceenduse(var0) {
-  return scripts\mp\supers\super_deadsilence::superdeadsilence_endsuper(var0);
+function deadsilenceenduse(var_0) {
+  return scripts\mp\supers\super_deadsilence::superdeadsilence_endsuper(var_0);
 }
 
 function supportboxunset() {
@@ -1816,35 +1816,35 @@ function superweapondropbeginuse() {
 }
 
 function ref_13988() {
-  var0 = scripts\mp\perks\perkpackage::perkpackage_getfirstfieldupgrade();
-  ref_13985(var0);
-  self.super.firstupgrade = var0;
-  var1 = scripts\mp\perks\perkpackage::perkpackage_getsecondfieldupgrade();
-  ref_13985(var1);
-  self.super.secondupgrade = var1;
-  var2 = level.superglobals.staticsuperdata[var0];
-  var3 = 0;
+  var_0 = scripts\mp\perks\perkpackage::perkpackage_getfirstfieldupgrade();
+  ref_13985(var_0);
+  self.super.firstupgrade = var_0;
+  var_1 = scripts\mp\perks\perkpackage::perkpackage_getsecondfieldupgrade();
+  ref_13985(var_1);
+  self.super.secondupgrade = var_1;
+  var_2 = level.superglobals.staticsuperdata[var_0];
+  var_3 = 0;
 
-  if(isDefined(var2)) {
-    var3 = var2.pointsneeded;
+  if(isDefined(var_2)) {
+    var_3 = var_2.pointsneeded;
   }
 
-  var2 = level.superglobals.staticsuperdata[var1];
-  var4 = 0;
+  var_2 = level.superglobals.staticsuperdata[var_1];
+  var_4 = 0;
 
-  if(isDefined(var2)) {
-    var4 = var2.pointsneeded;
+  if(isDefined(var_2)) {
+    var_4 = var_2.pointsneeded;
   }
 
-  var5 = max(var3, var4);
-  self.super.ref_12187 = var5;
+  var_5 = max(var_3, var_4);
+  self.super.ref_12187 = var_5;
 }
 
 function ref_13989() {
-  var0 = self.super.firstupgrade;
-  ref_13986(var0);
-  var1 = self.super.secondupgrade;
-  ref_13986(var1);
+  var_0 = self.super.firstupgrade;
+  ref_13986(var_0);
+  var_1 = self.super.secondupgrade;
+  ref_13986(var_1);
 }
 
 function superselectbeginuse() {
@@ -1880,7 +1880,7 @@ function ref_13980() {
   return true;
 }
 
-function vehicle_createspawnselectionlittlebirdmarker(var0) {
+function vehicle_createspawnselectionlittlebirdmarker(var_0) {
   _donewithcorpse::vehicle_compass_playerspawnedcallback();
 }
 
@@ -1893,13 +1893,13 @@ function ref_13983() {
 }
 
 function serumgadgetbeginuse() {
-  var0 = getcurrentsuper();
-  var1 = var0.staticdata.usetime;
-  thread _findnewlocaleplacement::start_serum_gadget(var1);
+  var_0 = getcurrentsuper();
+  var_1 = var_0.staticdata.usetime;
+  thread _findnewlocaleplacement::start_serum_gadget(var_1);
   return true;
 }
 
-function serumgadgetenduse(var0) {
+function serumgadgetenduse(var_0) {
   _findnewlocaleplacement::stop_serum_gadget();
 }
 
@@ -1942,18 +1942,18 @@ function clearsuperremindersplash() {
   self setclientomnvar("ui_super_reminder", 0);
 }
 
-function clearsuperreminderondeath(var0) {
-  if(!isPlayer(var0)) {
+function clearsuperreminderondeath(var_0) {
+  if(!isPlayer(var_0)) {
     return;
   }
 
-  thread clearsuperreminderondeathinternal(var0);
+  thread clearsuperreminderondeathinternal(var_0);
 }
 
-function clearsuperreminderondeathinternal(var0) {
-  var0 endon("disconnect");
-  var0 waittill("death");
-  clearsuperremindersplash(var0);
+function clearsuperreminderondeathinternal(var_0) {
+  var_0 endon("disconnect");
+  var_0 waittill("death");
+  clearsuperremindersplash(var_0);
 }
 
 function initsuperdvars() {
@@ -1962,84 +1962,84 @@ function initsuperdvars() {
 
 function watchsuperlottery() {
   level endon("game_ended");
-  var0 = getdvarint("scr_superLotteryDelay", 60);
-  var1 = getdvarint("scr_superLotteryIntervalMin", 45);
-  var2 = getdvarint("scr_superLotteryIntervalMax", 90);
-  var3 = var2 - var1;
+  var_0 = getdvarint("scr_superLotteryDelay", 60);
+  var_1 = getdvarint("scr_superLotteryIntervalMin", 45);
+  var_2 = getdvarint("scr_superLotteryIntervalMax", 90);
+  var_3 = var_2 - var_1;
   waitframe();
 
   if(!istrue(scripts\mp\flags::gameflag("prematch_done"))) {
     level waittill("prematch_over");
   }
 
-  wait var0;
-  var4 = undefined;
-  var5 = undefined;
-  var6 = [];
-  var7 = [];
+  wait var_0;
+  var_4 = undefined;
+  var_5 = undefined;
+  var_6 = [];
+  var_7 = [];
 
-  foreach(var9 in level.teamnamelist) {
-    var6[var9] = undefined;
-    var7 = [];
+  foreach(var_9 in level.teamnamelist) {
+    var_6[var_9] = undefined;
+    var_7 = [];
   }
 
   for(;;) {
-    var4 = var5;
-    var5 = getdvarint("scr_superLotteryEnabled", 0) > 0;
+    var_4 = var_5;
+    var_5 = getdvarint("scr_superLotteryEnabled", 0) > 0;
 
-    if(!isDefined(var4) || var4 != var5) {
-      if(var5) {
+    if(!isDefined(var_4) || var_4 != var_5) {
+      if(var_5) {
         level notify("superLotteryEnabled");
       } else {
         level notify("superLotteryDisabled");
       }
     }
 
-    foreach(var9 in level.teamnamelist) {
-      if(!isDefined(var6[var9])) {
-        var6 = gettime() + (var1 + randomint(var3)) * 1000;
+    foreach(var_9 in level.teamnamelist) {
+      if(!isDefined(var_6[var_9])) {
+        var_6 = gettime() + (var_1 + randomint(var_3)) * 1000;
         continue;
       }
 
-      if(var6[var9] <= gettime()) {
-        var12 = scripts\mp\utility\teams::getteamdata(var9, "players");
+      if(var_6[var_9] <= gettime()) {
+        var_12 = scripts\mp\utility\teams::getteamdata(var_9, "players");
 
-        if(var12.size > 0) {
-          var12 = scripts\engine\utility::array_randomize(var12);
-          var13 = [];
-          var14 = undefined;
+        if(var_12.size > 0) {
+          var_12 = scripts\engine\utility::array_randomize(var_12);
+          var_13 = [];
+          var_14 = undefined;
 
-          foreach(var16 in var12) {
-            if(!scripts\engine\utility::array_contains(var7[var9], var16)) {
-              if(isDefined(getcurrentsuper(var16))) {
-                var14 = var16;
+          foreach(var_16 in var_12) {
+            if(!scripts\engine\utility::array_contains(var_7[var_9], var_16)) {
+              if(isDefined(getcurrentsuper(var_16))) {
+                var_14 = var_16;
                 break;
               }
 
               continue;
             }
 
-            if(isDefined(getcurrentsuper(var16))) {
-              var13 = var16;
+            if(isDefined(getcurrentsuper(var_16))) {
+              var_13 = var_16;
             }
           }
 
-          if(!isDefined(var14)) {
-            if(isDefined(var13[0])) {
-              var14 = var13[0];
+          if(!isDefined(var_14)) {
+            if(isDefined(var_13[0])) {
+              var_14 = var_13[0];
             } else {
-              var14 = var12[0];
+              var_14 = var_12[0];
             }
           }
 
-          if(var5) {
-            GscBinSkip4(0x35, var14);
+          if(var_5) {
+            GscBinSkip4(0x35, var_14);
           }
 
-          var7 = var14;
+          var_7 = var_14;
         }
 
-        var6[var9] = undefined;
+        var_6[var_9] = undefined;
       }
     }
 
@@ -2047,35 +2047,35 @@ function watchsuperlottery() {
   }
 }
 
-function ref_144fa(var0) {
+function ref_144fa(var_0) {
   level endon("game_ended");
   self endon("death_or_disconnect");
   self waittill("last_stand_finished");
-  self setweaponammoclip(var0, 1);
+  self setweaponammoclip(var_0, 1);
 }
 
-function awardsuperlottery(var0) {
-  var0 endon("disconnect");
-  var0 endon("joined_team");
+function awardsuperlottery(var_0) {
+  var_0 endon("disconnect");
+  var_0 endon("joined_team");
   level endon("superLotteryDisabled");
-  var0 notify("awardSuperLottery");
-  var0 endon("awardSuperLottery");
+  var_0 notify("awardSuperLottery");
+  var_0 endon("awardSuperLottery");
 
   for(;;) {
-    var1 = getcurrentsuper(var0);
+    var_1 = getcurrentsuper(var_0);
 
-    if(!isDefined(var1)) {
+    if(!isDefined(var_1)) {
       return;
     }
 
-    if(!issuperinuse(var0)) {
+    if(!issuperinuse(var_0)) {
       break;
     }
 
     waitframe();
   }
 
-  givesuperpoints(var0, getsuperpointsneeded(), undefined, 1);
+  givesuperpoints(var_0, getsuperpointsneeded(), undefined, 1);
 }
 
 function getscriptdataversion() {
@@ -2090,11 +2090,11 @@ function getscriptdataversion() {
   return 254;
 }
 
-function recordsuperearnedanalytics(var0) {
+function recordsuperearnedanalytics(var_0) {
   if(getdvarint("scr_super_earn_data", 0) == 0) {
     return;
   }
 
-  var1 = scripts\mp\persistence::statgetchildbuffered("round", "timePlayed", 1) / 60;
-  getentitylessscriptablearray("mpscript_super_earning", ["super_ref", var0.staticdata.ref, "earn_time", var1, "gamemode", scripts\mp\utility\game::getgametype(), "script_version", getscriptdataversion(), "earned_count", self.pers["supersEarned"]]);
+  var_1 = scripts\mp\persistence::statgetchildbuffered("round", "timePlayed", 1) / 60;
+  getentitylessscriptablearray("mpscript_super_earning", ["super_ref", var_0.staticdata.ref, "earn_time", var_1, "gamemode", scripts\mp\utility\game::getgametype(), "script_version", getscriptdataversion(), "earned_count", self.pers["supersEarned"]]);
 }

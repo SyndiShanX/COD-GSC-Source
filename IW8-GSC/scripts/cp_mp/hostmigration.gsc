@@ -3,20 +3,20 @@
  * Script: scripts\cp_mp\hostmigration.gsc
 ***********************************************/
 
-function hostmigration_waitlongdurationwithpause(var0) {
+function hostmigration_waitlongdurationwithpause(var_0) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hostmigration", "waitLongDurationWithPause")) {
-    [[scripts\cp_mp\utility\script_utility::getsharedfunc("hostmigration", "waitLongDurationWithPause")]](var0);
+    [[scripts\cp_mp\utility\script_utility::getsharedfunc("hostmigration", "waitLongDurationWithPause")]](var_0);
     return;
   }
 
-  wait var0;
+  wait var_0;
 }
 
-function hostmigration_waittillnotifyortimeoutpause(var0, var1) {
+function hostmigration_waittillnotifyortimeoutpause(var_0, var_1) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hostmigration", "waittillNotifyOrTimeoutPause")) {
-    [[scripts\cp_mp\utility\script_utility::getsharedfunc("hostmigration", "waittillNotifyOrTimeoutPause")]](var0, var1);
+    [[scripts\cp_mp\utility\script_utility::getsharedfunc("hostmigration", "waittillNotifyOrTimeoutPause")]](var_0, var_1);
     return;
   }
 
-  scripts\engine\utility::ref_143b9(var1, var0);
+  scripts\engine\utility::ref_143b9(var_1, var_0);
 }

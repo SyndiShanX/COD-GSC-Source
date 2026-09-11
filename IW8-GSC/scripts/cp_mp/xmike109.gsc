@@ -13,9 +13,9 @@ function init() {
 
 function onplayerconnect() {
   for(;;) {
-    level waittill("connected", var0);
+    level waittill("connected", var_0);
     thread initaarawardlist();
-    var0.awardqueue = [];
+    var_0.awardqueue = [];
   }
 }
 
@@ -32,19 +32,19 @@ function initawards() {
 
 function toggle_apc_objective() {
   level.ref_12132 = [];
-  var0 = 0;
+  var_0 = 0;
 
   for(;;) {
-    var1 = tablelookupbyrow("cp_reward_ids.csv", var0, 2);
+    var_1 = tablelookupbyrow("cp_reward_ids.csv", var_0, 2);
 
-    if(isDefined(var1) && var1 != "") {
-      var2 = spawnStruct();
-      var3 = tablelookup("cp_reward_ids.csv", 2, var1, 1);
-      var4 = tablelookup("cp_reward_ids.csv", 2, var1, 0);
-      var2.ref_12131 = int(var3);
-      var2.id = int(var4);
-      level.ref_12132[var1] = var2;
-      var0++;
+    if(isDefined(var_1) && var_1 != "") {
+      var_2 = spawnStruct();
+      var_3 = tablelookup("cp_reward_ids.csv", 2, var_1, 1);
+      var_4 = tablelookup("cp_reward_ids.csv", 2, var_1, 0);
+      var_2.ref_12131 = int(var_3);
+      var_2.id = int(var_4);
+      level.ref_12132[var_1] = var_2;
+      var_0++;
     } else {
       break;
     }
@@ -55,131 +55,131 @@ function toggle_apc_objective() {
   level.vehicle_occupancy_cleanfriendlystatus = 0;
 }
 
-function initbaseaward(var0, var1) {
-  level.awards[var0] = spawnStruct();
-  level.awards[var0].type = var1;
-  var2 = tablelookup("mp/awardtable.csv", 1, var0, 10);
+function initbaseaward(var_0, var_1) {
+  level.awards[var_0] = spawnStruct();
+  level.awards[var_0].type = var_1;
+  var_2 = tablelookup("mp/awardtable.csv", 1, var_0, 10);
 
-  if(isDefined(var2) && var2 != "") {
-    level.awards[var0].xpscoreevent = var2;
+  if(isDefined(var_2) && var_2 != "") {
+    level.awards[var_0].xpscoreevent = var_2;
   }
 
-  var3 = tablelookup("mp/awardtable.csv", 1, var0, 11);
+  var_3 = tablelookup("mp/awardtable.csv", 1, var_0, 11);
 
-  if(isDefined(var3) && var3 != "") {
-    level.awards[var0].gamescoreevent = var3;
+  if(isDefined(var_3) && var_3 != "") {
+    level.awards[var_0].gamescoreevent = var_3;
   }
 
-  var4 = tablelookup("mp/awardtable.csv", 1, var0, 3);
+  var_4 = tablelookup("mp/awardtable.csv", 1, var_0, 3);
 
-  if(isDefined(var4) && var4 != "") {
-    level.awards[var0].category = var4;
+  if(isDefined(var_4) && var_4 != "") {
+    level.awards[var_0].category = var_4;
   }
 
-  var5 = tablelookup("mp/awardtable.csv", 1, var0, 7);
+  var_5 = tablelookup("mp/awardtable.csv", 1, var_0, 7);
 
-  if(isDefined(var5) && var5 != "") {
-    var6 = randomfloat(1);
-    level.awards[var0].aarpriority = float(var5) + var6;
+  if(isDefined(var_5) && var_5 != "") {
+    var_6 = randomfloat(1);
+    level.awards[var_0].aarpriority = float(var_5) + var_6;
     return;
   }
 }
 
-function initbasemidmatchaward(var0, var1) {
-  initbaseaward(var0, var1);
+function initbasemidmatchaward(var_0, var_1) {
+  initbaseaward(var_0, var_1);
 }
 
-function initmidmatchaward(var0) {
-  initbasemidmatchaward(var0, "midmatch");
+function initmidmatchaward(var_0) {
+  initbasemidmatchaward(var_0, "midmatch");
 }
 
 function initmidmatchawards() {
-  for(var0 = 0;; var0++) {
-    var1 = tablelookupbyrow("mp/awardtable.csv", var0, 1);
+  for(var_0 = 0;; var_0++) {
+    var_1 = tablelookupbyrow("mp/awardtable.csv", var_0, 1);
 
-    if(!isDefined(var1) || var1 == "") {
+    if(!isDefined(var_1) || var_1 == "") {
       break;
     }
 
-    var2 = tablelookupbyrow("mp/awardtable.csv", var0, 9);
+    var_2 = tablelookupbyrow("mp/awardtable.csv", var_0, 9);
 
-    if(isDefined(var2) && var2 != "") {
-      initmidmatchaward(var1);
+    if(isDefined(var_2) && var_2 != "") {
+      initmidmatchaward(var_1);
     }
 
-    level.awards[var1].id = var0;
+    level.awards[var_1].id = var_0;
   }
 }
 
-function incplayerrecord(var0) {
-  var1 = self getplayerdata("common", "awards", var0);
-  self setplayerdata("common", "awards", var0, var1 + 1);
+function incplayerrecord(var_0) {
+  var_1 = self getplayerdata("common", "awards", var_0);
+  self setplayerdata("common", "awards", var_0, var_1 + 1);
 }
 
-function giveaward(var0, var1, var2, var3, var4, var5, var6, var7) {
+function giveaward(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(isagent(self) || isscriptedagent(self)) {
     return;
   }
 
-  var8 = undefined;
+  var_8 = undefined;
 
-  if(isDefined(var6) && isDefined(var6.streakinfo)) {
-    var8 = var6.streakinfo;
+  if(isDefined(var_6) && isDefined(var_6.streakinfo)) {
+    var_8 = var_6.streakinfo;
   }
 
-  if(!istrue(var3)) {
+  if(!istrue(var_3)) {
     self endon("disconnect");
     waitframe();
   }
 
-  if(!isDefined(level.awards[var0])) {
+  if(!isDefined(level.awards[var_0])) {
     return;
   }
 
-  if(!isenumvaluevalid("mp", "Awards", var0)) {
+  if(!isenumvaluevalid("mp", "Awards", var_0)) {
     return;
   }
 
-  addawardtoaarlist(var0);
-  var9 = level.awards[var0].xpscoreevent;
+  addawardtoaarlist(var_0);
+  var_9 = level.awards[var_0].xpscoreevent;
 
-  if(isDefined(var9)) {
-    if(isDefined(var2)) {
-      var10 = var2;
+  if(isDefined(var_9)) {
+    if(isDefined(var_2)) {
+      var_10 = var_2;
     } else {
-      var10 = scripts\cp\drone\emp_drone::getscoreinfovalue(var10);
+      var_10 = scripts\cp\drone\emp_drone::getscoreinfovalue(var_10);
     }
 
-    scripts\cp\drone\emp_drone::giverankxp(var10, var10, var8);
+    scripts\cp\drone\emp_drone::giverankxp(var_10, var_10, var_8);
   }
 
-  var11 = level.awards[var1].gamescoreevent;
+  var_11 = level.awards[var_1].gamescoreevent;
 
-  if(isDefined(var11)) {
-    scripts\cp\agents\gametype_cp_wave_sv::giveunifiedpoints(var11, undefined, var2, 1, var5, var6);
+  if(isDefined(var_11)) {
+    scripts\cp\agents\gametype_cp_wave_sv::giveunifiedpoints(var_11, undefined, var_2, 1, var_5, var_6);
   }
 
-  self notify("earned_award_buffered", var1);
+  self notify("earned_award_buffered", var_1);
 
   if(isDefined(self.awardsthislife)) {
-    if(isDefined(self.awardsthislife[var1])) {
-      self.awardsthislife[var1]++;
+    if(isDefined(self.awardsthislife[var_1])) {
+      self.awardsthislife[var_1]++;
     } else {
-      self.awardsthislife[var1] = 1;
+      self.awardsthislife[var_1] = 1;
     }
 
-    scripts\cp\agents\agents::logaward(var1);
+    scripts\cp\agents\agents::logaward(var_1);
   }
 }
 
-function queuemidmatchaward(var0) {
-  self.awardqueue[self.awardqueue.size] = var0;
+function queuemidmatchaward(var_0) {
+  self.awardqueue[self.awardqueue.size] = var_0;
   thread flushmidmatchawardqueuewhenable();
 }
 
 function flushmidmatchawardqueue() {
-  foreach(var1 in self.awardqueue) {
-    givemidmatchaward(var1);
+  foreach(var_1 in self.awardqueue) {
+    givemidmatchaward(var_1);
   }
 
   self.awardqueue = [];
@@ -201,13 +201,13 @@ function flushmidmatchawardqueuewhenable() {
   thread flushmidmatchawardqueue();
 }
 
-function shouldqueuemidmatchaward(var0) {
+function shouldqueuemidmatchaward(var_0) {
   if(level.gameended) {
     return false;
   }
 
   if(!scripts\cp\utility\player::isreallyalive(self)) {
-    if(!istrue(var0) || scripts\cp\utility\player::isinkillcam()) {
+    if(!istrue(var_0) || scripts\cp\utility\player::isinkillcam()) {
       if(!scripts\cp\utility\player::isusingremote()) {
         return true;
       }
@@ -217,7 +217,7 @@ function shouldqueuemidmatchaward(var0) {
   return false;
 }
 
-function givemidmatchaward(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
+function givemidmatchaward(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   if(!isPlayer(self)) {
     return;
   }
@@ -227,19 +227,19 @@ function givemidmatchaward(var0, var1, var2, var3, var4, var5, var6, var7, var8)
   }
 
   if(self ispcplayer()) {
-    createnvidiavideo(var0);
+    createnvidiavideo(var_0);
   }
 
-  if(shouldqueuemidmatchaward(var3)) {
-    queuemidmatchaward(var0);
+  if(shouldqueuemidmatchaward(var_3)) {
+    queuemidmatchaward(var_0);
     return;
   }
 
-  thread giveaward(var0, var1, var2, var4, var5, var6, var7, var8);
+  thread giveaward(var_0, var_1, var_2, var_4, var_5, var_6, var_7, var_8);
 }
 
-function createnvidiavideo(var0) {
-  switch (var0) {
+function createnvidiavideo(var_0) {
+  switch (var_0) {
     case "five":
       self setclientomnvar("nVidiaHighlights_events", 1);
       break;
@@ -267,64 +267,64 @@ function createnvidiavideo(var0) {
   }
 }
 
-function addawardtoaarlist(var0) {
+function addawardtoaarlist(var_0) {
   if(!isDefined(self.aarawards)) {
     self.aarawards = [];
     self.aarawardcount = 0;
 
-    for(var1 = 0; var1 < 10; var1++) {
-      var2 = spawnStruct();
-      self.aarawards[var1] = var2;
-      var2.ref = "none";
-      var2.count = 0;
+    for(var_1 = 0; var_1 < 10; var_1++) {
+      var_2 = spawnStruct();
+      self.aarawards[var_1] = var_2;
+      var_2.ref = "none";
+      var_2.count = 0;
     }
   }
 
-  foreach(var1, var4 in self.aarawards) {
-    if(var4.ref == var0) {
-      var4.count++;
-      self setplayerdata("common", "round", "awards", var1, "value", var4.count);
+  foreach(var_1, var_4 in self.aarawards) {
+    if(var_4.ref == var_0) {
+      var_4.count++;
+      self setplayerdata("common", "round", "awards", var_1, "value", var_4.count);
       return;
     }
   }
 
-  var5 = level.awards[var0].aarpriority;
+  var_5 = level.awards[var_0].aarpriority;
 
-  for(var6 = 0; var6 < self.aarawards.size; var6++) {
-    var4 = self.aarawards[var6];
+  for(var_6 = 0; var_6 < self.aarawards.size; var_6++) {
+    var_4 = self.aarawards[var_6];
 
-    if(var4.ref == "none") {
+    if(var_4.ref == "none") {
       break;
     }
 
-    var7 = level.awards[var4.ref].aarpriority;
+    var_7 = level.awards[var_4.ref].aarpriority;
 
-    if(var5 > var7) {
+    if(var_5 > var_7) {
       break;
     }
   }
 
-  if(var6 >= self.aarawards.size) {
+  if(var_6 >= self.aarawards.size) {
     return;
   }
 
-  for(var8 = self.aarawards.size - 2; var8 >= var6; var8--) {
-    var9 = var8 + 1;
-    self.aarawards[var9] = self.aarawards[var8];
-    var4 = self.aarawards[var9];
+  for(var_8 = self.aarawards.size - 2; var_8 >= var_6; var_8--) {
+    var_9 = var_8 + 1;
+    self.aarawards[var_9] = self.aarawards[var_8];
+    var_4 = self.aarawards[var_9];
 
-    if(var4.ref != "none") {
-      self setplayerdata("common", "round", "awards", var9, "award", var4.ref);
-      self setplayerdata("common", "round", "awards", var9, "value", var4.count);
+    if(var_4.ref != "none") {
+      self setplayerdata("common", "round", "awards", var_9, "award", var_4.ref);
+      self setplayerdata("common", "round", "awards", var_9, "value", var_4.count);
     }
   }
 
-  var4 = spawnStruct();
-  self.aarawards[var6] = var4;
-  var4.ref = var0;
-  var4.count = 1;
-  self setplayerdata("common", "round", "awards", var6, "award", var4.ref);
-  self setplayerdata("common", "round", "awards", var6, "value", var4.count);
+  var_4 = spawnStruct();
+  self.aarawards[var_6] = var_4;
+  var_4.ref = var_0;
+  var_4.count = 1;
+  self setplayerdata("common", "round", "awards", var_6, "award", var_4.ref);
+  self setplayerdata("common", "round", "awards", var_6, "value", var_4.count);
 
   if(self.aarawardcount < 10) {
     self.aarawardcount++;
@@ -347,18 +347,18 @@ function initaarawardlist() {
 
   self setplayerdata("common", "round", "awardCount", 0);
 
-  for(var0 = 0; var0 < 10; var0++) {
-    self setplayerdata("common", "round", "awards", var0, "award", "none");
-    self setplayerdata("common", "round", "awards", var0, "value", 0);
+  for(var_0 = 0; var_0 < 10; var_0++) {
+    self setplayerdata("common", "round", "awards", var_0, "award", "none");
+    self setplayerdata("common", "round", "awards", var_0, "value", 0);
   }
 }
 
 function saveaarawardsonroundswitch() {
   level waittill("game_ended");
 
-  foreach(var1 in level.players) {
-    if(isDefined(var1) && !isbot(var1)) {
-      saveaarawards(var1);
+  foreach(var_1 in level.players) {
+    if(isDefined(var_1) && !isbot(var_1)) {
+      saveaarawards(var_1);
     }
   }
 }
@@ -369,39 +369,39 @@ function saveaarawards() {
   self.savedaarawards = 1;
 }
 
-function screenent_d(var0) {
+function screenent_d(var_0) {
   scripts\engine\utility::flag_wait("cp_operator_unlock_ids_initted");
 
-  if(!isDefined(var0) || !isstring(var0)) {
+  if(!isDefined(var_0) || !isstring(var_0)) {
     return;
   }
 
-  var1 = int(proxtrigger(var0));
+  var_1 = int(proxtrigger(var_0));
 
-  switch (var0) {
+  switch (var_0) {
     case "juggernauts":
     case "paladin":
     case "headhunter":
     case "kuvalda":
     case "crosswind":
     case "all_operations":
-      self reportchallengeuserevent("cp_complete", var1);
+      self reportchallengeuserevent("cp_complete", var_1);
       break;
     default:
       break;
   }
 }
 
-function scriptable_callback(var0) {
+function scriptable_callback(var_0) {
   scripts\engine\utility::flag_wait("cp_operator_unlock_ids_initted");
 
-  if(!isDefined(var0) || !isstring(var0)) {
+  if(!isDefined(var_0) || !isstring(var_0)) {
     return;
   }
 
-  var1 = int(proxtrigger(var0));
+  var_1 = int(proxtrigger(var_0));
 
-  switch (var0) {
+  switch (var_0) {
     case "headhunter_mod_vet":
     case "headhunter_mod":
     case "harbinger_mod_vet":
@@ -424,16 +424,16 @@ function scriptable_callback(var0) {
     case "downtown_3":
     case "downtown_2":
     case "downtown_1":
-      self reportchallengeuserevent("cp_complete", var1);
+      self reportchallengeuserevent("cp_complete", var_1);
       break;
     default:
       break;
   }
 }
 
-function proxtrigger(var0) {
-  var1 = level.ref_12132[var0].id;
-  return var1;
+function proxtrigger(var_0) {
+  var_1 = level.ref_12132[var_0].id;
+  return var_1;
 }
 
 function getaverageangularvelocity() {
@@ -441,15 +441,15 @@ function getaverageangularvelocity() {
     return;
   }
 
-  foreach(var1 in level.players) {
-    var1 thread scripts\cp\agents\gametype_cp_wave_sv::giveunifiedpoints("kill_juggernaut");
+  foreach(var_1 in level.players) {
+    var_1 thread scripts\cp\agents\gametype_cp_wave_sv::giveunifiedpoints("kill_juggernaut");
   }
 
   level.vehicle_occupancy_cleanfriendlystatus++;
 
   if(level.vehicle_occupancy_cleanfriendlystatus >= 5) {
-    foreach(var1 in level.players) {
-      thread screenent_d(var1);
+    foreach(var_1 in level.players) {
+      thread screenent_d(var_1);
     }
 
     level.vehicle_occupancy_cp_updateriotshield = 1;

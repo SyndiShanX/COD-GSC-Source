@@ -63,9 +63,9 @@ function main() {
     scripts\engine\utility::flag_init("infil_complete");
   }
 
-  var0 = getDvar("cp_sv_petrograd_start_obj", "");
+  var_0 = getDvar("cp_sv_petrograd_start_obj", "");
 
-  if(isDefined(var0) && var0 != "") {
+  if(isDefined(var_0) && var_0 != "") {
     thread rundebugstartobjective(level);
   }
 
@@ -75,41 +75,41 @@ function main() {
   thread player_fired_gun_monitor();
 }
 
-function rundebugstartobjective(var0) {
+function rundebugstartobjective(var_0) {
   wait 2;
   scripts\engine\utility::flag_wait("infil_complete");
   scripts\engine\utility::flag_wait("objective_table_parsed");
 
-  if(isDefined(level.objectivestabledata[var0])) {
-    var1 = level.objectivestabledata[var0];
+  if(isDefined(level.objectivestabledata[var_0])) {
+    var_1 = level.objectivestabledata[var_0];
 
-    if(isDefined(var1.ondebugstartfunc)) {
-      [[var1.ondebugstartfunc]](var1);
+    if(isDefined(var_1.ondebugstartfunc)) {
+      [[var_1.ondebugstartfunc]](var_1);
     }
 
-    thread scripts\cp\cp_objectives::run_objective(var1.objname, var1.questtype);
+    thread scripts\cp\cp_objectives::run_objective(var_1.objname, var_1.questtype);
     return;
   }
 }
 
-function onplayerspawneddevguisetup(var0) {
-  var1 = var0.name;
-  var2 = undefined;
+function onplayerspawneddevguisetup(var_0) {
+  var_1 = var_0.name;
+  var_2 = undefined;
 
-  foreach(var4 in level.players) {
-    if(var4 == var0) {
-      var2 = int(var5);
+  foreach(var_4 in level.players) {
+    if(var_4 == var_0) {
+      var_2 = int(var_5);
       break;
     }
   }
 
-  if(isDefined(var2)) {
-    thread setupdevguientries(var0, var0, var1);
+  if(isDefined(var_2)) {
+    thread setupdevguientries(var_0, var_0, var_1);
     return;
   }
 }
 
-function setupdevguientries(var0, var1, var2) {}
+function setupdevguientries(var_0, var_1, var_2) {}
 
 function wait_for_pre_game_period() {
   if(!isDefined(level.agent_funcs)) {
@@ -125,10 +125,10 @@ function wait_for_strike_init_complete() {
 
   if(scripts\engine\utility::flag_exist("strike_init_done")) {
     scripts\engine\utility::flag_wait("strike_init_done");
-    var0 = getDvar("scr_strike_name");
-    var1 = undefined;
+    var_0 = getDvar("scr_strike_name");
+    var_1 = undefined;
 
-    switch (var0) {
+    switch (var_0) {
       case "putnewstrikehere":
         break;
       default:
@@ -145,7 +145,7 @@ function registerscriptedagents() {
   scripts\mp\agents\juggernaut\juggernaut_agent::registerscriptedagent();
 }
 
-function onplayerconnect(var0) {
+function onplayerconnect(var_0) {
   thread bug_test_move_startpoint();
 }
 
@@ -153,31 +153,31 @@ function onplayerspawned() {}
 
 function bug_test_move_startpoint() {
   if(getdvarint("scr_linkto_test", 0)) {
-    var0 = scripts\engine\utility::getStructArray("default_player_start", "targetname");
+    var_0 = scripts\engine\utility::getStructArray("default_player_start", "targetname");
 
-    foreach(var2 in var0) {
-      var2.origin = (3743, -1008, 384);
-      var2.angles = (6, 265, 0);
+    foreach(var_2 in var_0) {
+      var_2.origin = (3743, -1008, 384);
+      var_2.angles = (6, 265, 0);
     }
 
     return;
   }
 }
 
-function should_run_event(var0) {
+function should_run_event(var_0) {
   return false;
 }
 
 function setup_map_specific_devgui() {}
 
-function interaction_trigger_properties(var0, var1, var2) {
-  switch (var1.script_noteworthy) {
+function interaction_trigger_properties(var_0, var_1, var_2) {
+  switch (var_1.script_noteworthy) {
     default:
       self.interaction_trigger setusefov(360);
       self.interaction_trigger sethintrequiresholding(0);
 
-      if(isDefined(var1.useduration)) {
-        self.interaction_trigger setuseholdduration(var1.useduration);
+      if(isDefined(var_1.useduration)) {
+        self.interaction_trigger setuseholdduration(var_1.useduration);
       }
 
       break;
@@ -200,46 +200,46 @@ function setup_create_script() {
   register_create_script_arrays("cp_sv_petrograd_create_script", "cp_sv_petrograd_create_script", level.scripted_spawner_func.size, &scripts\cp\maps\cp_sv_petrograd\cp_sv_petrograd_create_script::main);
 }
 
-function register_create_script_arrays(var0, var1, var2, var3) {
-  if(isDefined(var0)) {
-    level.scripted_spawner_func_strings[level.scripted_spawner_func_strings.size] = var0;
+function register_create_script_arrays(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_0)) {
+    level.scripted_spawner_func_strings[level.scripted_spawner_func_strings.size] = var_0;
   }
 
-  if(isDefined(var1)) {
-    level.scripted_spawner_map_strings[level.scripted_spawner_func_strings.size] = var1;
+  if(isDefined(var_1)) {
+    level.scripted_spawner_map_strings[level.scripted_spawner_func_strings.size] = var_1;
   }
 
-  if(isDefined(var2)) {
-    level.create_script_file_ids[var0] = "cs" + var2;
+  if(isDefined(var_2)) {
+    level.create_script_file_ids[var_0] = "cs" + var_2;
   }
 
-  if(isDefined(var3)) {
-    level.scripted_spawner_func[level.scripted_spawner_func.size] = var3;
+  if(isDefined(var_3)) {
+    level.scripted_spawner_func[level.scripted_spawner_func.size] = var_3;
     return;
   }
 }
 
 function player_fired_gun_monitor() {
-  var0 = getEnt("clip128x128x8", "targetname");
-  var1 = spawn("script_model", (1315, -2034, 216));
-  var1.angles = (0, 0, 90);
-  var1 clonebrushmodeltoscriptmodel(var0);
-  var0 = getEnt("clip128x128x8", "targetname");
-  var1 = spawn("script_model", (1315, -1955, 216));
-  var1.angles = (0, 0, 90);
-  var1 clonebrushmodeltoscriptmodel(var0);
-  var0 = getEnt("clip64x64x256", "targetname");
-  var1 = spawn("script_model", (1347, -1999, 42));
-  var1.angles = (0, 0, 0);
-  var1 clonebrushmodeltoscriptmodel(var0);
-  var0 = getEnt("nosight128x128x8", "targetname");
-  var1 = spawn("script_model", (-525, -1488, 216));
-  var1.angles = (270, 270, 15);
-  var1 clonebrushmodeltoscriptmodel(var0);
-  var0 = getEnt("nosight128x128x8", "targetname");
-  var1 = spawn("script_model", (-426, -1461.5, 216));
-  var1.angles = (270, 270, 15);
-  var1 clonebrushmodeltoscriptmodel(var0);
-  var2 = createnavobstaclebyshapeforlayer((-528, -1472, 152), 6, 32, 48);
-  var3 = createnavbadplacebybounds((1646.61, -5024.5, 230.22), (800, 800, 100), (0, 0, 0));
+  var_0 = getEnt("clip128x128x8", "targetname");
+  var_1 = spawn("script_model", (1315, -2034, 216));
+  var_1.angles = (0, 0, 90);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_0 = getEnt("clip128x128x8", "targetname");
+  var_1 = spawn("script_model", (1315, -1955, 216));
+  var_1.angles = (0, 0, 90);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_0 = getEnt("clip64x64x256", "targetname");
+  var_1 = spawn("script_model", (1347, -1999, 42));
+  var_1.angles = (0, 0, 0);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_0 = getEnt("nosight128x128x8", "targetname");
+  var_1 = spawn("script_model", (-525, -1488, 216));
+  var_1.angles = (270, 270, 15);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_0 = getEnt("nosight128x128x8", "targetname");
+  var_1 = spawn("script_model", (-426, -1461.5, 216));
+  var_1.angles = (270, 270, 15);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = createnavobstaclebyshapeforlayer((-528, -1472, 152), 6, 32, 48);
+  var_3 = createnavbadplacebybounds((1646.61, -5024.5, 230.22), (800, 800, 100), (0, 0, 0));
 }

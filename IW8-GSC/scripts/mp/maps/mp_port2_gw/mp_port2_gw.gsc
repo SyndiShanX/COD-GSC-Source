@@ -49,7 +49,7 @@ function runmisteffects() {
     return;
   }
 
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, (33447, 18127, 340));
 }
 
@@ -71,21 +71,21 @@ function ref_12e11() {
   level.weapons_that_can_stun[6] = (21343, -11066, 1400);
 
   for(;;) {
-    var0 = randomintrange(0, level.weapons_that_can_stun.size);
-    var1 = level.weapons_that_can_stun[var0];
-    playFX(scripts\engine\utility::getfx("vfx_gw_lrg_explosion"), var1 + (randomfloatrange(-1500, 1500), randomfloatrange(-1500, 1500), 0));
+    var_0 = randomintrange(0, level.weapons_that_can_stun.size);
+    var_1 = level.weapons_that_can_stun[var_0];
+    playFX(scripts\engine\utility::getfx("vfx_gw_lrg_explosion"), var_1 + (randomfloatrange(-1500, 1500), randomfloatrange(-1500, 1500), 0));
     wait 0.5;
-    playFX(scripts\engine\utility::getfx("vfx_gw_lrg_explosion"), var1 + (randomfloatrange(-2500, 2500), randomfloatrange(-2500, 2500), 0));
+    playFX(scripts\engine\utility::getfx("vfx_gw_lrg_explosion"), var_1 + (randomfloatrange(-2500, 2500), randomfloatrange(-2500, 2500), 0));
     wait randomfloatrange(1, 2);
-    playFX(scripts\engine\utility::getfx("vfx_gw_lrg_explosion"), var1 + (randomfloatrange(-1500, 1500), randomfloatrange(-1500, 1500), 0));
+    playFX(scripts\engine\utility::getfx("vfx_gw_lrg_explosion"), var_1 + (randomfloatrange(-1500, 1500), randomfloatrange(-1500, 1500), 0));
     wait 0.25;
-    playFX(scripts\engine\utility::getfx("vfx_gw_lrg_explosion"), var1 + (randomfloatrange(-2500, 2500), randomfloatrange(-2500, 2500), 0));
+    playFX(scripts\engine\utility::getfx("vfx_gw_lrg_explosion"), var_1 + (randomfloatrange(-2500, 2500), randomfloatrange(-2500, 2500), 0));
     wait randomfloatrange(0.5, 2);
   }
 }
 
 function ref_12e14() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, (15522, -28390, 19));
 }
 
@@ -98,25 +98,25 @@ function ref_12e13() {
   level.setallclientomnvarot[0] = (53880, -13100, -300);
   level.setallclientomnvarot[1] = (23702, -1605, -300);
 
-  foreach(var1 in level.setallclientomnvarot) {
-    playFX(scripts\engine\utility::getfx("vfx_gw_smoke_plume_bg_01"), var1, (0, 100, 0));
+  foreach(var_1 in level.setallclientomnvarot) {
+    playFX(scripts\engine\utility::getfx("vfx_gw_smoke_plume_bg_01"), var_1, (0, 100, 0));
   }
 }
 
 function player_fired_gun_monitor() {
-  var0 = spawn("script_model", (33380, -27608, -460));
-  var0 setModel("hardware_plywood_bare_01");
-  var0.angles = (90, 40, -6);
-  var0 = spawn("script_model", (35470, -28140.5, -509));
-  var0 setModel("uk_wall_wood_stud_frame_01_2x120");
-  var0.angles = (270, 358, -132);
+  var_0 = spawn("script_model", (33380, -27608, -460));
+  var_0 setModel("hardware_plywood_bare_01");
+  var_0.angles = (90, 40, -6);
+  var_0 = spawn("script_model", (35470, -28140.5, -509));
+  var_0 setModel("uk_wall_wood_stud_frame_01_2x120");
+  var_0.angles = (270, 358, -132);
 }
 
 function ref_145f0() {
-  var0 = getdvarint("OKSRMNKKOS", 0);
+  var_0 = getdvarint("OKSRMNKKOS", 0);
   wait 3;
 
-  switch (var0) {
+  switch (var_0) {
     case 0:
       break;
     case 1:
@@ -134,34 +134,34 @@ function ref_145f0() {
   }
 }
 
-function setlowermessageomnvarref(var0, var1, var2) {
-  var3 = spawn("trigger_radius", var0, 0, var1, var2);
+function setlowermessageomnvarref(var_0, var_1, var_2) {
+  var_3 = spawn("trigger_radius", var_0, 0, var_1, var_2);
 
   for(;;) {
-    var3 waittill("trigger", var4);
+    var_3 waittill("trigger", var_4);
 
-    if(isPlayer(var4)) {
-      var4 dodamage(10000, var4.origin, var3, var3, "MOD_TRIGGER_HURT");
+    if(isPlayer(var_4)) {
+      var_4 dodamage(10000, var_4.origin, var_3, var_3, "MOD_TRIGGER_HURT");
     }
   }
 }
 
 function ref_12f8e() {
-  var0 = [];
+  var_0 = [];
 
   switch (scripts\mp\utility\game::getgametype()) {
     case "siege":
       if(!isDefined(game["roundsPlayed"]) || game["roundsPlayed"] == 0) {
         break;
       } else {
-        GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_gw_spawn_allies_start_mod", (30936, -35872, 566), (0, 90, 0)));
+        GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_gw_spawn_allies_start_mod", (30936, -35872, 566), (0, 90, 0)));
       }
 
       break;
   }
 
-  if(var0.size > 0) {
-    scripts\mp\spawnlogic::bdiedonce(var0);
+  if(var_0.size > 0) {
+    scripts\mp\spawnlogic::bdiedonce(var_0);
     return;
   }
 }

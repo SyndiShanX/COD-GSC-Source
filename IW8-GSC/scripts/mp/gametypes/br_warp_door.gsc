@@ -52,93 +52,93 @@ function get_bulletwhizby_alias() {
   return false;
 }
 
-function ref_136af(var0, var1, var2) {
+function ref_136af(var_0, var_1, var_2) {
   if(!get_bulletwhizby_alias()) {
     return;
   }
 
-  var3 = spawn("script_model", var0);
-  var3 setModel("t9_vnm_door_bunker_metal_01_rig");
-  var3.angles = var1;
-  var3.usable = 1;
-  cargobaywatch(var3);
+  var_3 = spawn("script_model", var_0);
+  var_3 setModel("t9_vnm_door_bunker_metal_01_rig");
+  var_3.angles = var_1;
+  var_3.usable = 1;
+  cargobaywatch(var_3);
 
   if(getdvarint("scr_br_warpDoorHallwayEnabled", 1)) {
-    ref_13288(var3, 2);
+    ref_13288(var_3, 2);
   } else {
-    ref_13288(var3, 1);
+    ref_13288(var_3, 1);
   }
 
-  if(isDefined(var2)) {
-    var3.doorid = var2;
+  if(isDefined(var_2)) {
+    var_3.doorid = var_2;
   }
 
-  level.audio_start_obj_room_fires[level.audio_start_obj_room_fires.size] = var3;
+  level.audio_start_obj_room_fires[level.audio_start_obj_room_fires.size] = var_3;
 
   if(!istrue(level.br_circle_disabled)) {
     thread ref_1449a();
   }
 
-  return var3;
+  return var_3;
 }
 
-function ref_13288(var0) {
-  var1 = relic_nuketimer_waitforobjectives();
-  var2 = "";
+function ref_13288(var_0) {
+  var_1 = relic_nuketimer_waitforobjectives();
+  var_2 = "";
 
-  if(isDefined(var1.launcherfired)) {
-    var2 = var1 getscriptablepartstate("warpdoor");
+  if(isDefined(var_1.launcherfired)) {
+    var_2 = var_1 getscriptablepartstate("warpdoor");
 
-    if(validateplundereventtype(var1.launcherfired)) {
-      var2 = getsubstr(var2, 8, var2.size);
+    if(validateplundereventtype(var_1.launcherfired)) {
+      var_2 = getsubstr(var_2, 8, var_2.size);
     }
   } else {
-    var2 = "closed";
+    var_2 = "closed";
   }
 
-  var3 = var2;
-  var1.launcherfired = var0;
+  var_3 = var_2;
+  var_1.launcherfired = var_0;
 
-  if(validateplundereventtype(var1.launcherfired)) {
-    var3 = "trapped_" + var2;
+  if(validateplundereventtype(var_1.launcherfired)) {
+    var_3 = "trapped_" + var_2;
   }
 
-  if(var1.launcherfired != 2 && !isDefined(var1.ref_13a98)) {
-    thread ref_136a0(var1);
+  if(var_1.launcherfired != 2 && !isDefined(var_1.ref_13a98)) {
+    thread ref_136a0(var_1);
   }
 
-  var1 setscriptablepartstate("warpdoor", var3);
+  var_1 setscriptablepartstate("warpdoor", var_3);
 }
 
 function ref_13289() {
   ref_13288(5);
 }
 
-function ref_136a0(var0) {
+function ref_136a0(var_0) {
   level endon("game_ended");
-  var0 endon("death");
+  var_0 endon("death");
   wait 0.2;
-  var1 = var0.origin + anglestoleft(var0.angles) * 25 + anglesToForward(var0.angles) * -5 + (0, 0, 16);
-  var0.ref_13a98 = spawn("trigger_radius", var1, 0, 16, 32);
-  var0.ref_13a98.ref_121d7 = var0;
-  scripts\mp\utility\trigger::makeenterexittrigger(var0.ref_13a98, &ref_13a99, undefined);
+  var_1 = var_0.origin + anglestoleft(var_0.angles) * 25 + anglesToForward(var_0.angles) * -5 + (0, 0, 16);
+  var_0.ref_13a98 = spawn("trigger_radius", var_1, 0, 16, 32);
+  var_0.ref_13a98.ref_121d7 = var_0;
+  scripts\mp\utility\trigger::makeenterexittrigger(var_0.ref_13a98, &ref_13a99, undefined);
 }
 
-function ref_13a99(var0, var1) {
-  if(isDefined(var1.should_wait_before_spawn_chopper_boss)) {
+function ref_13a99(var_0, var_1) {
+  if(isDefined(var_1.should_wait_before_spawn_chopper_boss)) {
     return;
   }
 
-  var2 = ["dx_brm_adl_door_open_10", "dx_brm_adl_door_secrets_10", "dx_brm_adl_job_got_10", "dx_brm_adl_ready_this_10"];
-  var3 = ["dx_brm_stc_correct_alive_10", "dx_brm_stc_correct_quit_10", "dx_brm_stc_danger_change_10", "dx_brm_stc_danger_choice_10", "dx_brm_stc_muffled_come_10", "dx_brm_stc_muffled_open_10", "dx_brm_stc_muffled_secrets_10"];
-  var1.should_wait_before_spawn_chopper_boss = 1;
+  var_2 = ["dx_brm_adl_door_open_10", "dx_brm_adl_door_secrets_10", "dx_brm_adl_job_got_10", "dx_brm_adl_ready_this_10"];
+  var_3 = ["dx_brm_stc_correct_alive_10", "dx_brm_stc_correct_quit_10", "dx_brm_stc_danger_change_10", "dx_brm_stc_danger_choice_10", "dx_brm_stc_muffled_come_10", "dx_brm_stc_muffled_open_10", "dx_brm_stc_muffled_secrets_10"];
+  var_1.should_wait_before_spawn_chopper_boss = 1;
 
-  if(unload_vehicles_on_weapons_free_thread(var1.ref_121d7)) {
-    playsoundatpos(var1.origin, scripts\engine\utility::random(var3));
+  if(unload_vehicles_on_weapons_free_thread(var_1.ref_121d7)) {
+    playsoundatpos(var_1.origin, scripts\engine\utility::random(var_3));
     return;
   }
 
-  playsoundatpos(var1.origin, scripts\engine\utility::random(var2));
+  playsoundatpos(var_1.origin, scripts\engine\utility::random(var_2));
 }
 
 function runjoininprogresstimeout() {
@@ -146,13 +146,13 @@ function runjoininprogresstimeout() {
 }
 
 function relic_nuketimer_waitforobjectives() {
-  var0 = self;
+  var_0 = self;
 
-  if(!isDefined(var0.entity)) {
-    var0 = var0 getlinkedscriptableinstance();
+  if(!isDefined(var_0.entity)) {
+    var_0 = var_0 getlinkedscriptableinstance();
   }
 
-  return var0;
+  return var_0;
 }
 
 function ref_13281() {
@@ -181,21 +181,21 @@ function ref_13281() {
 }
 
 function unset_vehicle_only_wave() {
-  var0 = self;
+  var_0 = self;
 
-  if(!isDefined(var0.ref_14728)) {
-    var0.ref_14728 = "none";
+  if(!isDefined(var_0.ref_14728)) {
+    var_0.ref_14728 = "none";
   }
 
-  var1 = getdvarint("scr_br_warpDoorWeekID", 0);
-  var2 = level.ref_145a7[var1];
-  var3 = var2[0];
+  var_1 = getdvarint("scr_br_warpDoorWeekID", 0);
+  var_2 = level.ref_145a7[var_1];
+  var_3 = var_2[0];
 
-  for(var4 = 1; var4 < var2.size; var4++) {
-    var5 = var2[var4];
+  for(var_4 = 1; var_4 < var_2.size; var_4++) {
+    var_5 = var_2[var_4];
 
-    if(var5 == var0.ref_14728) {
-      if(randomfloat(1) > var3) {
+    if(var_5 == var_0.ref_14728) {
+      if(randomfloat(1) > var_3) {
         return false;
       }
 
@@ -207,34 +207,34 @@ function unset_vehicle_only_wave() {
 }
 
 function latetoinfil() {
-  var0 = self;
+  var_0 = self;
   level endon("game_ended");
 
-  if(!isDefined(var0) || istrue(var0.dead)) {
+  if(!isDefined(var_0) || istrue(var_0.dead)) {
     return;
   }
 
-  var0.dead = 1;
+  var_0.dead = 1;
 
-  while(istrue(var0.tv_station_fastrope_one_infil_rider_start_targetname)) {
+  while(istrue(var_0.tv_station_fastrope_one_infil_rider_start_targetname)) {
     waitframe();
   }
 
-  if(isDefined(var0.ref_13a98)) {
-    var0.ref_13a98 delete();
+  if(isDefined(var_0.ref_13a98)) {
+    var_0.ref_13a98 delete();
   }
 
-  var0 notify("end_warp_queue");
-  var0.entity.usable = 0;
-  var0.entity notify("warpdoor_despawn");
-  level.audio_start_obj_room_fires = scripts\engine\utility::array_remove(level.audio_start_obj_room_fires, var0 getscriptablelinkedentity());
-  var0 setscriptablepartstate("warpdoor", "dying");
+  var_0 notify("end_warp_queue");
+  var_0.entity.usable = 0;
+  var_0.entity notify("warpdoor_despawn");
+  level.audio_start_obj_room_fires = scripts\engine\utility::array_remove(level.audio_start_obj_room_fires, var_0 getscriptablelinkedentity());
+  var_0 setscriptablepartstate("warpdoor", "dying");
 
-  while(var0 getscriptablepartstate("warpdoor") != "dead") {
+  while(var_0 getscriptablepartstate("warpdoor") != "dead") {
     waitframe();
   }
 
-  var0 getscriptablelinkedentity() delete();
+  var_0 getscriptablelinkedentity() delete();
 }
 
 function ref_136b0() {
@@ -244,12 +244,12 @@ function ref_136b0() {
   scripts\mp\gametypes\red_door_locations::traceresults();
   ref_13281();
 
-  foreach(var1 in level.disable_super_in_turret.ref_1442c) {
-    var2 = ref_136af(var1.origin, var1.angles, var1.id);
+  foreach(var_1 in level.disable_super_in_turret.ref_1442c) {
+    var_2 = ref_136af(var_1.origin, var_1.angles, var_1.id);
 
-    if(!unset_vehicle_only_wave(var2)) {
-      var2 = var2 getlinkedscriptableinstance();
-      latetoinfil(var2);
+    if(!unset_vehicle_only_wave(var_2)) {
+      var_2 = var_2 getlinkedscriptableinstance();
+      latetoinfil(var_2);
     }
   }
 
@@ -260,7 +260,7 @@ function ref_136b0() {
 }
 
 function cargobaywatch() {
-  var0 = self;
+  var_0 = self;
 
   if(!isDefined(level.calloutglobals.calloutzones)) {
     level.calloutglobals.calloutzones = getEntArray("location_volume", "targetname");
@@ -270,32 +270,32 @@ function cargobaywatch() {
     return;
   }
 
-  var1 = var0 getscriptablelinkedentity();
+  var_1 = var_0 getscriptablelinkedentity();
 
-  foreach(var3 in level.calloutglobals.calloutzones) {
-    if(var1 istouching(var3)) {
-      var0.ref_14728 = var3.script_noteworthy;
+  foreach(var_3 in level.calloutglobals.calloutzones) {
+    if(var_1 istouching(var_3)) {
+      var_0.ref_14728 = var_3.script_noteworthy;
       return;
     }
   }
 
-  var0.ref_14728 = "none";
+  var_0.ref_14728 = "none";
 }
 
 function initdropbagvo() {
-  var0 = "mp/warpdoor_controlroom_locations.csv";
-  var1 = tablelookupgetnumrows(var0);
+  var_0 = "mp/warpdoor_controlroom_locations.csv";
+  var_1 = tablelookupgetnumrows(var_0);
 
-  for(var2 = 0; var2 < var1; var2++) {
-    var3 = [];
-    var3 = (int(tablelookupbyrow(var0, var2, 1)), int(tablelookupbyrow(var0, var2, 2)), int(tablelookupbyrow(var0, var2, 3)));
-    var3 = (int(tablelookupbyrow(var0, var2, 4)), int(tablelookupbyrow(var0, var2, 5)), int(tablelookupbyrow(var0, var2, 6)));
-    var3 = (int(tablelookupbyrow(var0, var2, 7)), int(tablelookupbyrow(var0, var2, 8)), int(tablelookupbyrow(var0, var2, 9)));
-    var3 = (int(tablelookupbyrow(var0, var2, 10)), int(tablelookupbyrow(var0, var2, 11)), int(tablelookupbyrow(var0, var2, 12)));
+  for(var_2 = 0; var_2 < var_1; var_2++) {
+    var_3 = [];
+    var_3 = (int(tablelookupbyrow(var_0, var_2, 1)), int(tablelookupbyrow(var_0, var_2, 2)), int(tablelookupbyrow(var_0, var_2, 3)));
+    var_3 = (int(tablelookupbyrow(var_0, var_2, 4)), int(tablelookupbyrow(var_0, var_2, 5)), int(tablelookupbyrow(var_0, var_2, 6)));
+    var_3 = (int(tablelookupbyrow(var_0, var_2, 7)), int(tablelookupbyrow(var_0, var_2, 8)), int(tablelookupbyrow(var_0, var_2, 9)));
+    var_3 = (int(tablelookupbyrow(var_0, var_2, 10)), int(tablelookupbyrow(var_0, var_2, 11)), int(tablelookupbyrow(var_0, var_2, 12)));
 
-    foreach(var5 in var3) {
-      var6 = 500;
-      scripts\mp\gametypes\br_bunker_utility::little_bird_mg_playercontrolmg(var5, var6);
+    foreach(var_5 in var_3) {
+      var_6 = 500;
+      scripts\mp\gametypes\br_bunker_utility::little_bird_mg_playercontrolmg(var_5, var_6);
     }
   }
 }
@@ -311,37 +311,37 @@ function zombiepowersenabled() {
     waitframe();
   }
 
-  var0 = "mp/warpdoor_controlroom_locations.csv";
-  var1 = tablelookupgetnumrows(var0);
+  var_0 = "mp/warpdoor_controlroom_locations.csv";
+  var_1 = tablelookupgetnumrows(var_0);
   level.hud_set_progress = [];
   scripts\mp\gametypes\red_door_locations::teleport_reference_juggmaze();
-  var2 = 0;
+  var_2 = 0;
 
-  for(var3 = 0; var3 < var1; var3++) {
-    var4 = spawnStruct();
-    var4.id = int(tablelookupbyrow(var0, var3, 0));
-    var4.ignore_spawn_scoring_pois = [];
-    var4.ignore_spawn_scoring_pois[0] = (int(tablelookupbyrow(var0, var3, 1)), int(tablelookupbyrow(var0, var3, 2)), int(tablelookupbyrow(var0, var3, 3)));
-    var4.ignore_spawn_scoring_pois[1] = (int(tablelookupbyrow(var0, var3, 4)), int(tablelookupbyrow(var0, var3, 5)), int(tablelookupbyrow(var0, var3, 6)));
-    var4.ignore_spawn_scoring_pois[2] = (int(tablelookupbyrow(var0, var3, 7)), int(tablelookupbyrow(var0, var3, 8)), int(tablelookupbyrow(var0, var3, 9)));
-    var4.ignore_spawn_scoring_pois[3] = (int(tablelookupbyrow(var0, var3, 10)), int(tablelookupbyrow(var0, var3, 11)), int(tablelookupbyrow(var0, var3, 12)));
-    var4.doors = play_sound_countdown(var0, var3);
-    heli_group_nextspawntime(var4.doors);
-    var4.debug_reach_icbm_launch = int(tablelookupbyrow(var0, var3, 19));
-    var4.debug_reach_pipe_room = int(tablelookupbyrow(var0, var3, 20));
-    var4.crates = play_smuggler_arriving_vo(var4);
-    var4.index = var2;
-    var4.visited = 0;
-    var4.shouldburnfromdamage = 0;
-    var4.ref_12699 = [];
-    ref_12218(var4.crates);
-    var5 = getdvarint("scr_br_warpDoor_allowIgnores", 1) == 1;
-    var6 = int(tablelookupbyrow(var0, var3, 21)) != 0;
-    var7 = var5 && var6;
+  for(var_3 = 0; var_3 < var_1; var_3++) {
+    var_4 = spawnStruct();
+    var_4.id = int(tablelookupbyrow(var_0, var_3, 0));
+    var_4.ignore_spawn_scoring_pois = [];
+    var_4.ignore_spawn_scoring_pois[0] = (int(tablelookupbyrow(var_0, var_3, 1)), int(tablelookupbyrow(var_0, var_3, 2)), int(tablelookupbyrow(var_0, var_3, 3)));
+    var_4.ignore_spawn_scoring_pois[1] = (int(tablelookupbyrow(var_0, var_3, 4)), int(tablelookupbyrow(var_0, var_3, 5)), int(tablelookupbyrow(var_0, var_3, 6)));
+    var_4.ignore_spawn_scoring_pois[2] = (int(tablelookupbyrow(var_0, var_3, 7)), int(tablelookupbyrow(var_0, var_3, 8)), int(tablelookupbyrow(var_0, var_3, 9)));
+    var_4.ignore_spawn_scoring_pois[3] = (int(tablelookupbyrow(var_0, var_3, 10)), int(tablelookupbyrow(var_0, var_3, 11)), int(tablelookupbyrow(var_0, var_3, 12)));
+    var_4.doors = play_sound_countdown(var_0, var_3);
+    heli_group_nextspawntime(var_4.doors);
+    var_4.debug_reach_icbm_launch = int(tablelookupbyrow(var_0, var_3, 19));
+    var_4.debug_reach_pipe_room = int(tablelookupbyrow(var_0, var_3, 20));
+    var_4.crates = play_smuggler_arriving_vo(var_4);
+    var_4.index = var_2;
+    var_4.visited = 0;
+    var_4.shouldburnfromdamage = 0;
+    var_4.ref_12699 = [];
+    ref_12218(var_4.crates);
+    var_5 = getdvarint("scr_br_warpDoor_allowIgnores", 1) == 1;
+    var_6 = int(tablelookupbyrow(var_0, var_3, 21)) != 0;
+    var_7 = var_5 && var_6;
 
-    if(!var7) {
-      level.hud_set_progress[var2] = var4;
-      var2++;
+    if(!var_7) {
+      level.hud_set_progress[var_2] = var_4;
+      var_2++;
     }
   }
 
@@ -351,51 +351,51 @@ function zombiepowersenabled() {
   }
 }
 
-function ref_13d00(var0) {
-  var0.ref_13d02 = 1;
+function ref_13d00(var_0) {
+  var_0.ref_13d02 = 1;
 
-  if(isDefined(var0.crates) && var0.crates.size > 0) {
-    ref_13d01(var0);
+  if(isDefined(var_0.crates) && var_0.crates.size > 0) {
+    ref_13d01(var_0);
     return;
   }
 }
 
-function play_sound_countdown(var0, var1) {
-  var2 = [];
-  var3 = 13;
+function play_sound_countdown(var_0, var_1) {
+  var_2 = [];
+  var_3 = 13;
 
-  while(var3 <= 18) {
-    var4 = (int(tablelookupbyrow(var0, var1, var3)), int(tablelookupbyrow(var0, var1, var3 + 1)), int(tablelookupbyrow(var0, var1, var3 + 2)));
+  while(var_3 <= 18) {
+    var_4 = (int(tablelookupbyrow(var_0, var_1, var_3)), int(tablelookupbyrow(var_0, var_1, var_3 + 1)), int(tablelookupbyrow(var_0, var_1, var_3 + 2)));
 
-    if(var4 == (0, 0, 0)) {} else {
-      var5 = getentitylessscriptablearrayinradius(undefined, undefined, var4, 64, "door");
+    if(var_4 == (0, 0, 0)) {} else {
+      var_5 = getentitylessscriptablearrayinradius(undefined, undefined, var_4, 64, "door");
 
-      if(!isDefined(var5[0]) || !var5[0] scriptableisdoor()) {} else {
-        var2 = var5[0];
+      if(!isDefined(var_5[0]) || !var_5[0] scriptableisdoor()) {} else {
+        var_2 = var_5[0];
       }
     }
 
-    var3 += 3;
+    var_3 += 3;
   }
 
-  return var2;
+  return var_2;
 }
 
-function ref_13626(var0) {
-  var1 = undefined;
+function ref_13626(var_0) {
+  var_1 = undefined;
 
-  foreach(var3 in level.disable_super_in_turret.hoverjet_watchgameend) {
-    if(distance2d(var3.origin, var0) <= 35) {
-      var1 = easepower("br_control_room_lock_bar", var3.origin, var3.angles);
+  foreach(var_3 in level.disable_super_in_turret.hoverjet_watchgameend) {
+    if(distance2d(var_3.origin, var_0) <= 35) {
+      var_1 = easepower("br_control_room_lock_bar", var_3.origin, var_3.angles);
       break;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function ref_13625(var0) {
-  if(!isDefined(var0)) {
+function ref_13625(var_0) {
+  if(!isDefined(var_0)) {
     return undefined;
   }
 
@@ -403,21 +403,21 @@ function ref_13625(var0) {
     return undefined;
   }
 
-  var1 = var0.origin + anglestoleft(var0.angles) * -45 + (0, 0, -40);
-  var2 = spawn("trigger_radius", var1, 0, 30, 64);
+  var_1 = var_0.origin + anglestoleft(var_0.angles) * -45 + (0, 0, -40);
+  var_2 = spawn("trigger_radius", var_1, 0, 30, 64);
   thread ref_11d00();
-  return var2;
+  return var_2;
 }
 
-function ref_138d8(var0) {
+function ref_138d8(var_0) {
   if(getdvarint("scr_br_warpDoorKillTrespassers", 1) == 0) {
     return;
   }
 
-  if(isDefined(var0)) {
-    foreach(var2 in var0) {
-      if(isDefined(var2.vindia_assault3)) {
-        var2.vindia_assault3 delete();
+  if(isDefined(var_0)) {
+    foreach(var_2 in var_0) {
+      if(isDefined(var_2.vindia_assault3)) {
+        var_2.vindia_assault3 delete();
       }
     }
 
@@ -429,114 +429,114 @@ function ref_11d00() {
   level endon("game_ended");
 
   for(;;) {
-    self waittill("trigger", var0);
+    self waittill("trigger", var_0);
 
-    if(isPlayer(var0)) {
-      var0 dodamage(10000, var0.origin, self, self, "MOD_TRIGGER_HURT");
+    if(isPlayer(var_0)) {
+      var_0 dodamage(10000, var_0.origin, self, self, "MOD_TRIGGER_HURT");
     }
   }
 }
 
 function heli_group_nextspawntime() {
-  var0 = self;
+  var_0 = self;
 
-  for(var1 = 0; var1 < var0.size; var1++) {
-    if(var0[var1] getscriptablepartstate("lock") != "idle") {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    if(var_0[var_1] getscriptablepartstate("lock") != "idle") {
       continue;
     }
 
-    var0[var1] setscriptablepartstate("lock", "locked");
-    var0[var1] scriptabledoorfreeze(1);
-    var0[var1].ref_1199c = ref_13626(var0[var1].origin);
-    var0[var1].vindia_assault3 = ref_13625(var0[var1].ref_1199c);
+    var_0[var_1] setscriptablepartstate("lock", "locked");
+    var_0[var_1] scriptabledoorfreeze(1);
+    var_0[var_1].ref_1199c = ref_13626(var_0[var_1].origin);
+    var_0[var_1].vindia_assault3 = ref_13625(var_0[var_1].ref_1199c);
   }
 }
 
 function ref_12122() {
-  var0 = self;
+  var_0 = self;
 
-  for(var1 = 0; var1 < var0.size; var1++) {
-    if(var0[var1] getscriptablepartstate("lock") != "locked") {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    if(var_0[var_1] getscriptablepartstate("lock") != "locked") {
       continue;
     }
 
-    var0[var1] setscriptablepartstate("lock", "unlocking");
-    var0[var1] scriptabledoorfreeze(0);
+    var_0[var_1] setscriptablepartstate("lock", "unlocking");
+    var_0[var_1] scriptabledoorfreeze(0);
 
-    if(isDefined(var0[var1].ref_1199c)) {
-      var0[var1].ref_1199c freescriptable();
+    if(isDefined(var_0[var_1].ref_1199c)) {
+      var_0[var_1].ref_1199c freescriptable();
     }
   }
 }
 
-function play_smuggler_arriving_vo(var0) {
-  var1 = canceljoins(undefined, undefined, var0.ignore_spawn_scoring_pois[0], var0.debug_reach_pipe_room);
-  var1 = scripts\engine\utility::array_combine_unique(var1, canceljoins(undefined, undefined, var0.ignore_spawn_scoring_pois[1], var0.debug_reach_pipe_room));
-  var1 = scripts\engine\utility::array_combine_unique(var1, canceljoins(undefined, undefined, var0.ignore_spawn_scoring_pois[2], var0.debug_reach_pipe_room));
-  var1 = scripts\engine\utility::array_combine_unique(var1, canceljoins(undefined, undefined, var0.ignore_spawn_scoring_pois[3], var0.debug_reach_pipe_room));
+function play_smuggler_arriving_vo(var_0) {
+  var_1 = canceljoins(undefined, undefined, var_0.ignore_spawn_scoring_pois[0], var_0.debug_reach_pipe_room);
+  var_1 = scripts\engine\utility::array_combine_unique(var_1, canceljoins(undefined, undefined, var_0.ignore_spawn_scoring_pois[1], var_0.debug_reach_pipe_room));
+  var_1 = scripts\engine\utility::array_combine_unique(var_1, canceljoins(undefined, undefined, var_0.ignore_spawn_scoring_pois[2], var_0.debug_reach_pipe_room));
+  var_1 = scripts\engine\utility::array_combine_unique(var_1, canceljoins(undefined, undefined, var_0.ignore_spawn_scoring_pois[3], var_0.debug_reach_pipe_room));
 
-  for(var2 = 0; var2 < var1.size; var2++) {
-    if(!uav_dangernotifyplayersinbrrange(var1[var2].type)) {
-      var1 = scripts\engine\utility::array_remove(var1, var1[var2]);
-      var2--;
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    if(!uav_dangernotifyplayersinbrrange(var_1[var_2].type)) {
+      var_1 = scripts\engine\utility::array_remove(var_1, var_1[var_2]);
+      var_2--;
       continue;
     }
 
-    if(abs(var1[var2].origin[2] - var0.debug_reach_icbm_launch) > 3) {
-      var1 = scripts\engine\utility::array_remove(var1, var1[var2]);
-      var2--;
+    if(abs(var_1[var_2].origin[2] - var_0.debug_reach_icbm_launch) > 3) {
+      var_1 = scripts\engine\utility::array_remove(var_1, var_1[var_2]);
+      var_2--;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function ref_12218(var0) {
-  if(!isDefined(var0)) {
+function ref_12218(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  for(var1 = 0; var1 < var0.size; var1++) {
-    if(var0[var1] getscriptablepartstate("body") != "closed") {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    if(var_0[var_1] getscriptablepartstate("body") != "closed") {
       continue;
     }
 
-    var0[var1] setscriptablepartstate("body", "closed_noaudio");
+    var_0[var_1] setscriptablepartstate("body", "closed_noaudio");
   }
 }
 
-function ref_1245b(var0) {
-  if(!isDefined(var0)) {
+function ref_1245b(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  for(var1 = 0; var1 < var0.size; var1++) {
-    if(var0[var1] getscriptablepartstate("body") != "closed_noaudio") {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    if(var_0[var_1] getscriptablepartstate("body") != "closed_noaudio") {
       continue;
     }
 
-    var0[var1] setscriptablepartstate("body", "set_to_closed");
+    var_0[var_1] setscriptablepartstate("body", "set_to_closed");
   }
 }
 
-function ref_13d01(var0) {
-  var1 = scripts\engine\utility::array_randomize(var0.crates);
+function ref_13d01(var_0) {
+  var_1 = scripts\engine\utility::array_randomize(var_0.crates);
 
-  for(var2 = 0; var2 < var1.size; var2++) {
-    var3 = var1[var2];
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    var_3 = var_1[var_2];
 
-    if(var3.type != "br_loot_cache_reddoor") {
-      var0.ref_13d03 = scripts\mp\gametypes\br_loot_cache_trapped::ref_136a2(var3.origin, var3.angles);
-      var3 setscriptablepartstate("body", "hidden");
-      var0.crates = scripts\engine\utility::array_remove(var1, var3);
-      var0.ref_13d03.hud_racetrack_timer = var0.index;
+    if(var_3.type != "br_loot_cache_reddoor") {
+      var_0.ref_13d03 = scripts\mp\gametypes\br_loot_cache_trapped::ref_136a2(var_3.origin, var_3.angles);
+      var_3 setscriptablepartstate("body", "hidden");
+      var_0.crates = scripts\engine\utility::array_remove(var_1, var_3);
+      var_0.ref_13d03.hud_racetrack_timer = var_0.index;
       return;
     }
   }
 }
 
-function uav_dangernotifyplayersinbrrange(var0) {
-  if(var0 == "br_loot_cache" || var0 == "br_loot_cache_reddoor" || var0 == "br_loot_cache_lege") {
+function uav_dangernotifyplayersinbrrange(var_0) {
+  if(var_0 == "br_loot_cache" || var_0 == "br_loot_cache_reddoor" || var_0 == "br_loot_cache_lege") {
     return true;
   }
 
@@ -544,8 +544,8 @@ function uav_dangernotifyplayersinbrrange(var0) {
 }
 
 function show_regroup_text() {
-  foreach(var1 in level.hud_set_progress) {
-    if(!var1.visited) {
+  foreach(var_1 in level.hud_set_progress) {
+    if(!var_1.visited) {
       return false;
     }
   }
@@ -564,63 +564,63 @@ function ref_11d01() {
   return;
 }
 
-function ref_1442e(var0, var1, var2, var3, var4) {
-  if(var1 == "warpdoor" && (var2 == "closed" || var2 == "trapped_closed") && istrue(var0.entity.usable)) {
+function ref_1442e(var_0, var_1, var_2, var_3, var_4) {
+  if(var_1 == "warpdoor" && (var_2 == "closed" || var_2 == "trapped_closed") && istrue(var_0.entity.usable)) {
     thread ref_12130();
     return;
   }
 }
 
-function ref_1442b(var0, var1) {
-  var2 = var1.ref_121d7;
+function ref_1442b(var_0, var_1) {
+  var_2 = var_1.ref_121d7;
 
-  if(!istrue(var2.entity.usable)) {
+  if(!istrue(var_2.entity.usable)) {
     return;
   }
 
-  if(var0 scripts\cp_mp\vehicles\vehicle::isvehicle() || isDefined(var0.vehicle)) {
+  if(var_0 scripts\cp_mp\vehicles\vehicle::isvehicle() || isDefined(var_0.vehicle)) {
     if(getdvarint("scr_br_warpdoor_kill_vehicles", 0) == 0) {
       return;
     }
 
-    var3 = var0;
+    var_3 = var_0;
 
-    if(!var0 scripts\cp_mp\vehicles\vehicle::isvehicle()) {
-      var3 = var0.vehicle;
+    if(!var_0 scripts\cp_mp\vehicles\vehicle::isvehicle()) {
+      var_3 = var_0.vehicle;
     }
 
-    setupprop(var2, var3);
+    setupprop(var_2, var_3);
     return;
   }
 
-  if(var1 isinexecutionvictim() || var1 isinexecutionattack()) {
+  if(var_1 isinexecutionvictim() || var_1 isinexecutionattack()) {
     return;
   }
 
-  var4 = var1.origin - var3.origin;
+  var_4 = var_1.origin - var_3.origin;
 
-  if(vectordot(var4, anglestoleft(var3.angles)) < 0) {
+  if(vectordot(var_4, anglestoleft(var_3.angles)) < 0) {
     return;
   }
 
-  var5 = huddopulse(var1, var3.ref_14429[0]);
-  var6 = "mp_donetsk_red_door_tunnel";
+  var_5 = huddopulse(var_1, var_3.ref_14429[0]);
+  var_6 = "mp_donetsk_red_door_tunnel";
 
-  if(getdvarint("scr_br_warpDoorHweenEnabled", 0) && veh_updateomnvarsperframeforclient(var3) && validateplundereventtype(runjoininprogresstimeout(var3))) {
-    var6 = "mp_donetsk_red_door_ghostface_tunnel";
+  if(getdvarint("scr_br_warpDoorHweenEnabled", 0) && veh_updateomnvarsperframeforclient(var_3) && validateplundereventtype(runjoininprogresstimeout(var_3))) {
+    var_6 = "mp_donetsk_red_door_ghostface_tunnel";
   }
 
-  thread ref_1386b(var1, var5, (0, 90, 0), var3);
+  thread ref_1386b(var_1, var_5, (0, 90, 0), var_3);
 
-  if(runjoininprogresstimeout(var3) == 2) {
-    if(!isDefined(var3.ref_13b99)) {
-      var3.ref_13b99 = 0;
+  if(runjoininprogresstimeout(var_3) == 2) {
+    if(!isDefined(var_3.ref_13b99)) {
+      var_3.ref_13b99 = 0;
     }
 
-    var3.ref_13b99++;
+    var_3.ref_13b99++;
 
-    if(var3.ref_13b99 >= 4) {
-      var3.ref_13b99 = 0;
+    if(var_3.ref_13b99 >= 4) {
+      var_3.ref_13b99 = 0;
       thread helicleanup();
       return;
     }
@@ -629,62 +629,62 @@ function ref_1442b(var0, var1) {
   }
 }
 
-function ref_1386b(var0, var1, var2, var3) {
-  var4 = self;
+function ref_1386b(var_0, var_1, var_2, var_3) {
+  var_4 = self;
   level endon("game_ended");
-  var4 endon("death");
-  var4 endon("disconnect");
-  thread ref_126ef(var4);
-  ref_12853(var4, var3);
-  ref_1277f(var4);
+  var_4 endon("death");
+  var_4 endon("disconnect");
+  thread ref_126ef(var_4);
+  ref_12853(var_4, var_3);
+  ref_1277f(var_4);
   wait 0.15;
-  ref_1277c(var4, var3);
-  var4 setsoundsubmix("fade_to_black_all_except_music_and_scripted5", 0.5);
+  ref_1277c(var_4, var_3);
+  var_4 setsoundsubmix("fade_to_black_all_except_music_and_scripted5", 0.5);
   wait 0.1;
 
-  if(var4 scripts\cp_mp\vehicles\vehicle::isvehicle() || isDefined(var4.vehicle)) {
-    var4 clearsoundsubmix("fade_to_black_all_except_music_and_scripted5", 2);
-    var4 notify("player_done_warping");
-    ref_138f8(var4);
+  if(var_4 scripts\cp_mp\vehicles\vehicle::isvehicle() || isDefined(var_4.vehicle)) {
+    var_4 clearsoundsubmix("fade_to_black_all_except_music_and_scripted5", 2);
+    var_4 notify("player_done_warping");
+    ref_138f8(var_4);
     return;
   }
 
-  if(isDefined(var2)) {
-    ref_12869(var2, var4);
-    battle_tracks_updatetogglestate(var2, var4);
+  if(isDefined(var_2)) {
+    ref_12869(var_2, var_4);
+    battle_tracks_updatetogglestate(var_2, var_4);
   }
 
-  var4 setOrigin(var0);
-  var4 setplayerangles(var1);
+  var_4 setOrigin(var_0);
+  var_4 setplayerangles(var_1);
   wait 4;
-  var4.ref_12a4a = 1;
+  var_4.ref_12a4a = 1;
 }
 
-function ref_12869(var0) {
-  var1 = self;
+function ref_12869(var_0) {
+  var_1 = self;
 
-  if(veh_updateomnvarsperframeforclient(var1)) {
-    var0 notify("entered_door_in_hallway");
-    nuke_vault_key(var1);
+  if(veh_updateomnvarsperframeforclient(var_1)) {
+    var_0 notify("entered_door_in_hallway");
+    nuke_vault_key(var_1);
   }
 
-  switch (var1.launcherfired) {
+  switch (var_1.launcherfired) {
     case 3:
     case 1:
-      ref_138d8(var1.hoverpos);
-      thread ref_1449d(level.hud_set_progress[var1.hud_racetrack_timer]);
-      battle_tracks_updatebattletracksfromplayerdata(level.hud_set_progress[var1.hud_racetrack_timer], var0);
+      ref_138d8(var_1.hoverpos);
+      thread ref_1449d(level.hud_set_progress[var_1.hud_racetrack_timer]);
+      battle_tracks_updatebattletracksfromplayerdata(level.hud_set_progress[var_1.hud_racetrack_timer], var_0);
 
-      if(!level.hud_set_progress[var1.hud_racetrack_timer].shouldburnfromdamage) {
-        hud_lap_scoreboard(level.hud_set_progress[var1.hud_racetrack_timer]);
+      if(!level.hud_set_progress[var_1.hud_racetrack_timer].shouldburnfromdamage) {
+        hud_lap_scoreboard(level.hud_set_progress[var_1.hud_racetrack_timer]);
       }
 
       break;
     case 4:
       break;
     case 2:
-      if(isDefined(var1.setteamhealthhud)) {
-        ref_12549(var0, var1.setteamhealthhud);
+      if(isDefined(var_1.setteamhealthhud)) {
+        ref_12549(var_0, var_1.setteamhealthhud);
       }
 
       break;
@@ -693,69 +693,69 @@ function ref_12869(var0) {
   }
 }
 
-function ref_12548(var0) {
-  var1 = self;
-  var1.show_charge = 1;
+function ref_12548(var_0) {
+  var_1 = self;
+  var_1.show_charge = 1;
 
-  if(isDefined(var0.hud_racetrack_info)) {
-    var1 thread scripts\mp\hud_message::showsplash("br_red_door_control_room_splash", var0.hud_racetrack_info);
-    var2 = level.hud_set_progress[var0.hud_racetrack_timer];
-    var3 = var2.ignore_spawn_scoring_pois[0];
-    level thread scripts\mp\gametypes\br_red_door_riddle_event::ref_13871(var0.hud_racetrack_info, var3);
-    var4 = relic_grounded_reload_monitor(var0.hud_racetrack_info);
-    scripts\mp\gametypes\br_analytics::dialog_monitor_waitreload(var1, var0.entity.doorid, var4);
+  if(isDefined(var_0.hud_racetrack_info)) {
+    var_1 thread scripts\mp\hud_message::showsplash("br_red_door_control_room_splash", var_0.hud_racetrack_info);
+    var_2 = level.hud_set_progress[var_0.hud_racetrack_timer];
+    var_3 = var_2.ignore_spawn_scoring_pois[0];
+    level thread scripts\mp\gametypes\br_red_door_riddle_event::ref_13871(var_0.hud_racetrack_info, var_3);
+    var_4 = relic_grounded_reload_monitor(var_0.hud_racetrack_info);
+    scripts\mp\gametypes\br_analytics::dialog_monitor_waitreload(var_1, var_0.entity.doorid, var_4);
     return;
   }
 }
 
 function hud_lap_scoreboard() {
-  var0 = self;
-  var0.shouldburnfromdamage = 1;
+  var_0 = self;
+  var_0.shouldburnfromdamage = 1;
 
-  if(isDefined(var0.doors)) {
-    ref_12122(var0.doors);
+  if(isDefined(var_0.doors)) {
+    ref_12122(var_0.doors);
   }
 
-  ref_1245b(var0.crates);
-  var0.maxkills = [];
-  var1 = 32;
-  var2 = 64;
+  ref_1245b(var_0.crates);
+  var_0.maxkills = [];
+  var_1 = 32;
+  var_2 = 64;
 
-  foreach(var4 in var0.doors) {
-    var5 = var4.origin + anglesToForward(var4.angles) * 26 + (0, 0, 16);
-    var6 = spawn("trigger_radius", var5, 0, var1, var2);
-    var6.door = var4;
-    var6.hud_racetrack_timer = var0.index;
-    var6.matchstarttimer_black_screen = var6.door.angles;
-    scripts\mp\utility\trigger::makeenterexittrigger(var6, &maxelderrank, &maxextractions);
-    var0.maxkills[var0.maxkills.size] = var6;
+  foreach(var_4 in var_0.doors) {
+    var_5 = var_4.origin + anglesToForward(var_4.angles) * 26 + (0, 0, 16);
+    var_6 = spawn("trigger_radius", var_5, 0, var_1, var_2);
+    var_6.door = var_4;
+    var_6.hud_racetrack_timer = var_0.index;
+    var_6.matchstarttimer_black_screen = var_6.door.angles;
+    scripts\mp\utility\trigger::makeenterexittrigger(var_6, &maxelderrank, &maxextractions);
+    var_0.maxkills[var_0.maxkills.size] = var_6;
   }
 
   thread ref_13e21(level);
 }
 
-function ref_1449d(var0) {
-  var1 = self;
+function ref_1449d(var_0) {
+  var_1 = self;
   level endon("game_ended");
-  var1 endon("gas_end");
-  var2 = 1;
+  var_1 endon("gas_end");
+  var_2 = 1;
 
-  while(var2) {
-    var3 = var0 scripts\engine\utility::ref_143af("death", "disconnect", "control_room_exit", "control_room_enter");
+  while(var_2) {
+    var_3 = var_0 scripts\engine\utility::ref_143af("death", "disconnect", "control_room_exit", "control_room_enter");
 
-    switch (var3) {
+    switch (var_3) {
       case "control_room_enter":
-        battle_tracks_updatebattletracksfromplayerdata(var1, var0);
+        battle_tracks_updatebattletracksfromplayerdata(var_1, var_0);
         break;
       case "control_room_exit":
-        ref_12c19(var1, var0);
+        ref_12c19(var_1, var_0);
         break;
       case "death":
-        ref_12c19(var1, var0);
+        ref_12c19(var_1, var_0);
         break;
       case "disconnect":
-        var1.ref_12699 = scripts\engine\utility::array_removeundefined(var1.ref_12699);
-        var2 = 0;
+        var_1.ref_12699 = scripts\engine\utility::array_removeundefined(var_1.ref_12699);
+        var_2 = 0;
         break;
       default:
         break;
@@ -763,75 +763,75 @@ function ref_1449d(var0) {
   }
 }
 
-function battle_tracks_updatebattletracksfromplayerdata(var0) {
-  var1 = self;
+function battle_tracks_updatebattletracksfromplayerdata(var_0) {
+  var_1 = self;
 
-  if(!updatefobindanger(var0)) {
-    var1.ref_12699[var1.ref_12699.size] = var0;
+  if(!updatefobindanger(var_0)) {
+    var_1.ref_12699[var_1.ref_12699.size] = var_0;
     return;
   }
 }
 
-function ref_12c19(var0) {
-  var1 = self;
-  var1.ref_12699 = scripts\engine\utility::array_remove(var1.ref_12699, var0);
+function ref_12c19(var_0) {
+  var_1 = self;
+  var_1.ref_12699 = scripts\engine\utility::array_remove(var_1.ref_12699, var_0);
 }
 
-function ref_13e21(var0) {
+function ref_13e21(var_0) {
   level endon("game_ended");
-  var1 = getdvarfloat("scr_br_warpDoorControlRoomTimeBeforeClosing", 30) * 1000;
-  var2 = getdvarfloat("scr_br_warpDoorCloseRadius", 350);
-  var3 = 1;
+  var_1 = getdvarfloat("scr_br_warpDoorControlRoomTimeBeforeClosing", 30) * 1000;
+  var_2 = getdvarfloat("scr_br_warpDoorCloseRadius", 350);
+  var_3 = 1;
 
-  while(var3) {
-    if(var0.ref_12699.size <= 0 && gettime() - var0.ref_13b7a > var1) {
-      var4 = 1;
+  while(var_3) {
+    if(var_0.ref_12699.size <= 0 && gettime() - var_0.ref_13b7a > var_1) {
+      var_4 = 1;
 
-      foreach(var6 in var0.doors) {
-        var7 = var6.origin;
-        var8 = var2;
-        var9 = scripts\mp\utility\player::getplayersinradius(var7, var8);
+      foreach(var_6 in var_0.doors) {
+        var_7 = var_6.origin;
+        var_8 = var_2;
+        var_9 = scripts\mp\utility\player::getplayersinradius(var_7, var_8);
 
-        if(var9.size > 0) {
-          var4 = 0;
+        if(var_9.size > 0) {
+          var_4 = 0;
         }
       }
 
-      if(var4) {
-        foreach(var6 in var0.doors) {
-          scripts\mp\equipment\tactical_cover::ref_139f1(var6.origin);
-          latespawnsnatchtoc130(var6.origin, 75, 0);
+      if(var_4) {
+        foreach(var_6 in var_0.doors) {
+          scripts\mp\equipment\tactical_cover::ref_139f1(var_6.origin);
+          latespawnsnatchtoc130(var_6.origin, 75, 0);
         }
 
         waitframe();
 
-        foreach(var6 in var0.doors) {
-          var6 vehicle_getinputvalue();
+        foreach(var_6 in var_0.doors) {
+          var_6 vehicle_getinputvalue();
         }
 
         wait getdvarfloat("scr_br_warpDoorControlRoomDoorCloseTime", 1.2);
 
-        foreach(var6 in var0.doors) {
-          var6 setscriptablepartstate("door", 0);
+        foreach(var_6 in var_0.doors) {
+          var_6 setscriptablepartstate("door", 0);
         }
 
-        var17 = 1;
+        var_17 = 1;
 
-        foreach(var6 in var0.doors) {
-          if(!var6 scriptabledoorisclosed()) {
-            var17 = 0;
+        foreach(var_6 in var_0.doors) {
+          if(!var_6 scriptabledoorisclosed()) {
+            var_17 = 0;
             break;
           }
         }
 
-        if(var17) {
-          foreach(var6 in var0.doors) {
-            var6 setscriptablepartstate("lock", "locked");
-            var6 scriptabledoorfreeze(1);
-            var6.ref_1199c = ref_13626(var6.origin);
+        if(var_17) {
+          foreach(var_6 in var_0.doors) {
+            var_6 setscriptablepartstate("lock", "locked");
+            var_6 scriptabledoorfreeze(1);
+            var_6.ref_1199c = ref_13626(var_6.origin);
           }
 
-          var3 = 0;
+          var_3 = 0;
         }
       }
     }
@@ -840,54 +840,54 @@ function ref_13e21(var0) {
   }
 }
 
-function updatefobindanger(var0) {
-  var1 = self;
-  return scripts\engine\utility::array_contains(var1.ref_12699, var0);
+function updatefobindanger(var_0) {
+  var_1 = self;
+  return scripts\engine\utility::array_contains(var_1.ref_12699, var_0);
 }
 
-function playac130animinternal(var0, var1, var2) {
-  var3 = self;
+function playac130animinternal(var_0, var_1, var_2) {
+  var_3 = self;
   level endon("game_ended");
-  var3 endon("death");
-  var3 endon("disconnect");
+  var_3 endon("death");
+  var_3 endon("disconnect");
 
-  while(!istrue(var3.ref_12a4a)) {
+  while(!istrue(var_3.ref_12a4a)) {
     waitframe();
   }
 
-  var3.ref_12a4a = 0;
-  var4 = 7.5;
-  var5 = var2;
-  var3 scripts\mp\gametypes\br_public::ref_126b9(var5, var4);
-  var3 waittill("playerPrestreamComplete");
+  var_3.ref_12a4a = 0;
+  var_4 = 7.5;
+  var_5 = var_2;
+  var_3 scripts\mp\gametypes\br_public::ref_126b9(var_5, var_4);
+  var_3 waittill("playerPrestreamComplete");
 
-  if(isDefined(var0)) {
-    var5 = give_objective_xp_to_all_players(var3, var0.ref_14429);
+  if(isDefined(var_0)) {
+    var_5 = give_objective_xp_to_all_players(var_3, var_0.ref_14429);
   }
 
-  var3 setOrigin(var5);
+  var_3 setOrigin(var_5);
   waitframe();
-  ref_1277e(var3);
+  ref_1277e(var_3);
   wait 0.25;
-  var3 clearsoundsubmix("fade_to_black_all_except_music_and_scripted5", 2);
-  ref_138f8(var3);
+  var_3 clearsoundsubmix("fade_to_black_all_except_music_and_scripted5", 2);
+  ref_138f8(var_3);
 
-  if(isDefined(var0)) {
-    switch (var0.launcherfired) {
+  if(isDefined(var_0)) {
+    switch (var_0.launcherfired) {
       case 1:
-        var6 = ["dx_brm_adl_ready_this_10", "dx_brm_adl_mission_intel_10"];
-        var3 playsoundtoplayer(scripts\engine\utility::random(var6), var3);
-        ref_12548(var0);
+        var_6 = ["dx_brm_adl_ready_this_10", "dx_brm_adl_mission_intel_10"];
+        var_3 playsoundtoplayer(scripts\engine\utility::random(var_6), var_3);
+        ref_12548(var_0);
         break;
       case 3:
-        var7 = ["dx_brm_stc_wrong_travel_10", "dx_brm_stc_wrong_travel_20"];
-        var3 playsoundtoplayer(scripts\engine\utility::random(var7), var3);
-        ref_12548(var0);
+        var_7 = ["dx_brm_stc_wrong_travel_10", "dx_brm_stc_wrong_travel_20"];
+        var_3 playsoundtoplayer(scripts\engine\utility::random(var_7), var_3);
+        ref_12548(var_0);
         break;
       case 4:
         break;
       case 2:
-        if(isDefined(var0.setteamhealthhud)) {
+        if(isDefined(var_0.setteamhealthhud)) {
           thread ref_1384f();
         }
 
@@ -897,72 +897,72 @@ function playac130animinternal(var0, var1, var2) {
     }
   }
 
-  var3 notify("player_done_warping");
+  var_3 notify("player_done_warping");
 }
 
-function ref_126ef(var0) {
-  var1 = self;
+function ref_126ef(var_0) {
+  var_1 = self;
   level endon("game_ended");
-  var1 playerhide();
-  var1 freezecontrols(1);
-  var1 vehiclepinonminimap(1);
-  var1.validateboltent = 1;
+  var_1 playerhide();
+  var_1 freezecontrols(1);
+  var_1 vehiclepinonminimap(1);
+  var_1.validateboltent = 1;
 
-  if(isDefined(var0)) {
-    var0.ref_1269a[var1.guid] = var1;
+  if(isDefined(var_0)) {
+    var_0.ref_1269a[var_1.guid] = var_1;
   }
 
-  var2 = 7.5;
-  var3 = scripts\engine\utility::ref_143bd(var2, "player_done_warping", "prematch_end", "warpqueue_done_warping", "death", "disconnect");
+  var_2 = 7.5;
+  var_3 = scripts\engine\utility::ref_143bd(var_2, "player_done_warping", "prematch_end", "warpqueue_done_warping", "death", "disconnect");
 
-  if(isDefined(var0)) {
-    if(var3 == "disconnect") {
-      var0.ref_1269a = scripts\engine\utility::array_removeundefined(var0.ref_1269a);
+  if(isDefined(var_0)) {
+    if(var_3 == "disconnect") {
+      var_0.ref_1269a = scripts\engine\utility::array_removeundefined(var_0.ref_1269a);
       return;
     } else {
-      var0.ref_1269a = scripts\engine\utility::array_remove(var0.ref_1269a, var1);
+      var_0.ref_1269a = scripts\engine\utility::array_remove(var_0.ref_1269a, var_1);
     }
   }
 
-  var1 vehiclepinonminimap(0);
-  var1 freezecontrols(0);
-  var1 playershow();
-  var1.validateboltent = undefined;
+  var_1 vehiclepinonminimap(0);
+  var_1 freezecontrols(0);
+  var_1 playershow();
+  var_1.validateboltent = undefined;
 }
 
-function setupprop(var0, var1) {
-  var0.entity.usable = 0;
-  var2 = scripts\cp_mp\vehicles\vehicle::ref_1418f(var1.vehiclename);
+function setupprop(var_0, var_1) {
+  var_0.entity.usable = 0;
+  var_2 = scripts\cp_mp\vehicles\vehicle::ref_1418f(var_1.vehiclename);
 
-  if(isDefined(var2)) {
-    var1[[var2]]();
+  if(isDefined(var_2)) {
+    var_1[[var_2]]();
   }
 
   wait 2;
-  helicleanup(var0);
-  var0.entity.usable = 1;
+  helicleanup(var_0);
+  var_0.entity.usable = 1;
 }
 
 function ref_12342() {
-  var0 = undefined;
+  var_0 = undefined;
 
-  if(!isDefined(var0)) {
-    var0 = give_killstreak_airstrike();
+  if(!isDefined(var_0)) {
+    var_0 = give_killstreak_airstrike();
   }
 
   if(show_regroup_text()) {
     heli_go_to_exfil_point();
   }
 
-  return var0;
+  return var_0;
 }
 
 function heli_go_to_exfil_point() {
-  foreach(var1 in level.audio_start_obj_room_fires) {
-    if(runjoininprogresstimeout(var1) == 2) {
-      var2 = var1 getscriptablepartstate("warpdoor");
+  foreach(var_1 in level.audio_start_obj_room_fires) {
+    if(runjoininprogresstimeout(var_1) == 2) {
+      var_2 = var_1 getscriptablepartstate("warpdoor");
 
-      if(!(var2 == "open" || var2 == "opening")) {
+      if(!(var_2 == "open" || var_2 == "opening")) {
         thread heli_goto_pos();
       }
     }
@@ -970,271 +970,271 @@ function heli_go_to_exfil_point() {
 }
 
 function give_killstreak_airstrike() {
-  var0 = 0;
-  var1 = spawnStruct();
-  var2 = level.hud_set_progress;
-  var3 = getdvarint("scr_br_warpDoorVisitPreMatch", 0);
+  var_0 = 0;
+  var_1 = spawnStruct();
+  var_2 = level.hud_set_progress;
+  var_3 = getdvarint("scr_br_warpDoorVisitPreMatch", 0);
 
-  while(!var0) {
-    if(var2.size <= 0) {
+  while(!var_0) {
+    if(var_2.size <= 0) {
       return spawnStruct();
     }
 
-    var4 = randomint(var2.size);
-    var1 = var2[var4];
-    var2 = scripts\engine\utility::array_remove(var2, var1);
+    var_4 = randomint(var_2.size);
+    var_1 = var_2[var_4];
+    var_2 = scripts\engine\utility::array_remove(var_2, var_1);
 
-    if(!var1.visited) {
-      var0 = 1;
-      ref_11b05(level.hud_set_progress[var1.index]);
+    if(!var_1.visited) {
+      var_0 = 1;
+      ref_11b05(level.hud_set_progress[var_1.index]);
 
-      if(!istrue(level.br_circle_disabled) && var3 == 0) {
-        var0 = scripts\mp\gametypes\br_circle::ispointincurrentsafecircle(var1.ignore_spawn_scoring_pois[0]);
+      if(!istrue(level.br_circle_disabled) && var_3 == 0) {
+        var_0 = scripts\mp\gametypes\br_circle::ispointincurrentsafecircle(var_1.ignore_spawn_scoring_pois[0]);
       }
     }
   }
 
-  return level.hud_set_progress[var1.index];
+  return level.hud_set_progress[var_1.index];
 }
 
-function give_objective_xp_to_all_players(var0) {
-  foreach(var2 in var0) {
-    if(capsuletracepassed(var2, 16, 32)) {
-      return huddopulse(var2);
+function give_objective_xp_to_all_players(var_0) {
+  foreach(var_2 in var_0) {
+    if(capsuletracepassed(var_2, 16, 32)) {
+      return huddopulse(var_2);
     }
   }
 
-  return huddopulse(var0[0]);
+  return huddopulse(var_0[0]);
 }
 
-function huddopulse(var0) {
-  if(isDefined(var0)) {
-    return (var0 + (0, 0, -45));
+function huddopulse(var_0) {
+  if(isDefined(var_0)) {
+    return (var_0 + (0, 0, -45));
   }
 
   return self.origin;
 }
 
-function updaterotatedebug(var0) {
-  var1 = distance2dsquared(scripts\mp\gametypes\br_circle::getdangercircleorigin(), var0);
-  var2 = scripts\mp\gametypes\br_circle::getdangercircleradius() * scripts\mp\gametypes\br_circle::getdangercircleradius();
+function updaterotatedebug(var_0) {
+  var_1 = distance2dsquared(scripts\mp\gametypes\br_circle::getdangercircleorigin(), var_0);
+  var_2 = scripts\mp\gametypes\br_circle::getdangercircleradius() * scripts\mp\gametypes\br_circle::getdangercircleradius();
 
-  if(var2 == 0) {
+  if(var_2 == 0) {
     return false;
   }
 
-  return var1 > var2;
+  return var_1 > var_2;
 }
 
 function ref_14431() {
-  var0 = self;
+  var_0 = self;
   level endon("game_ended");
-  var0 endon("death");
-  var0 endon("end_warp_queue");
-  jumpiftrue(isDefined(var0.ref_14430)) LOC_0000002d;
-  var0.ref_14430 = [];
+  var_0 endon("death");
+  var_0 endon("end_warp_queue");
+  jumpiftrue(isDefined(var_0.ref_14430)) LOC_0000002d;
+  var_0.ref_14430 = [];
 
   for(;;) {
     waitframe();
 
-    if(!isDefined(var0.ref_14430) || var0.ref_14430.size <= 0) {
-      var0.tv_station_fastrope_one_infil_rider_start_targetname = 0;
+    if(!isDefined(var_0.ref_14430) || var_0.ref_14430.size <= 0) {
+      var_0.tv_station_fastrope_one_infil_rider_start_targetname = 0;
       continue;
     }
 
-    var0.tv_station_fastrope_one_infil_rider_start_targetname = 1;
-    var1 = var0.ref_14430[0];
+    var_0.tv_station_fastrope_one_infil_rider_start_targetname = 1;
+    var_1 = var_0.ref_14430[0];
 
-    if(!isDefined(var1) || !isalive(var1)) {
-      var0.ref_14430 = ref_12c1b(var0, var1);
-      var0.tv_station_fastrope_one_infil_rider_start_targetname = 0;
-      var1 notify("warpqueue_done_warping");
+    if(!isDefined(var_1) || !isalive(var_1)) {
+      var_0.ref_14430 = ref_12c1b(var_0, var_1);
+      var_0.tv_station_fastrope_one_infil_rider_start_targetname = 0;
+      var_1 notify("warpqueue_done_warping");
       continue;
     }
 
-    thread playac130animinternal(var1, var0, (0, 90, 0));
-    var1 scripts\engine\utility::ref_143a5("player_done_warping", "death");
-    var0.ref_14430 = ref_12c1b(var0, var1);
-    var0.tv_station_fastrope_one_infil_rider_start_targetname = 0;
-    var1 notify("warpqueue_done_warping");
+    thread playac130animinternal(var_1, var_0, (0, 90, 0));
+    var_1 scripts\engine\utility::ref_143a5("player_done_warping", "death");
+    var_0.ref_14430 = ref_12c1b(var_0, var_1);
+    var_0.tv_station_fastrope_one_infil_rider_start_targetname = 0;
+    var_1 notify("warpqueue_done_warping");
   }
 }
 
-function battle_tracks_updatetogglestate(var0) {
-  var1 = self;
+function battle_tracks_updatetogglestate(var_0) {
+  var_1 = self;
 
-  if(!isDefined(var0) || !isPlayer(var0)) {
+  if(!isDefined(var_0) || !isPlayer(var_0)) {
     return;
   }
 
-  if(!isDefined(var1.ref_14430)) {
-    var1.ref_14430 = [];
+  if(!isDefined(var_1.ref_14430)) {
+    var_1.ref_14430 = [];
   }
 
-  if(scripts\engine\utility::array_contains(var1.ref_14430, var0)) {
+  if(scripts\engine\utility::array_contains(var_1.ref_14430, var_0)) {
     return;
   }
 
-  var1.ref_13b7c = gettime();
-  var1.ref_14430[var1.ref_14430.size] = var0;
+  var_1.ref_13b7c = gettime();
+  var_1.ref_14430[var_1.ref_14430.size] = var_0;
 }
 
-function ref_12c1b(var0) {
-  var1 = self;
-  var2 = scripts\engine\utility::array_remove(var1.ref_14430, var0);
-  return var2;
+function ref_12c1b(var_0) {
+  var_1 = self;
+  var_2 = scripts\engine\utility::array_remove(var_1.ref_14430, var_0);
+  return var_2;
 }
 
 function ref_1338a() {
-  var0 = self;
+  var_0 = self;
 
-  if(!isDefined(var0.ref_14430)) {
+  if(!isDefined(var_0.ref_14430)) {
     return;
   }
 
   level endon("game_ended");
-  var0 endon("death");
+  var_0 endon("death");
   wait 0.1;
 
-  while(istrue(var0.tv_station_fastrope_one_infil_rider_start_targetname)) {
+  while(istrue(var_0.tv_station_fastrope_one_infil_rider_start_targetname)) {
     waitframe();
   }
 
-  var0 notify("end_warp_queue");
-  var0.ref_14430 = undefined;
-  var0.ref_1442f = undefined;
+  var_0 notify("end_warp_queue");
+  var_0.ref_14430 = undefined;
+  var_0.ref_1442f = undefined;
 }
 
-function wp_watchforsmokedisowned(var0, var1) {
-  var2 = level.hud_set_progress[var1];
-  var0.hud_racetrack_info = var2.id;
-  var0.ref_14429 = var2.ignore_spawn_scoring_pois;
-  var0.hoverpos = var2.doors;
-  var0.crates = var2.crates;
-  var0.hud_racetrack_timer = var2.index;
+function wp_watchforsmokedisowned(var_0, var_1) {
+  var_2 = level.hud_set_progress[var_1];
+  var_0.hud_racetrack_info = var_2.id;
+  var_0.ref_14429 = var_2.ignore_spawn_scoring_pois;
+  var_0.hoverpos = var_2.doors;
+  var_0.crates = var_2.crates;
+  var_0.hud_racetrack_timer = var_2.index;
 
-  if(!isDefined(var0.ref_14429)) {
-    var0.ref_14429 = [];
+  if(!isDefined(var_0.ref_14429)) {
+    var_0.ref_14429 = [];
 
     if(level.mapname == "mp_br_mechanics") {
-      var0.ref_14429[0] = (3307, -2480, 64);
+      var_0.ref_14429[0] = (3307, -2480, 64);
     } else {
-      var3 = risktokencountroll();
-      var0.ref_14429[0] = var3;
-      var0.ref_1442f = 1;
+      var_3 = risktokencountroll();
+      var_0.ref_14429[0] = var_3;
+      var_0.ref_1442f = 1;
     }
   }
 
-  var2.ref_13b7a = gettime();
-  return var2;
+  var_2.ref_13b7a = gettime();
+  return var_2;
 }
 
-function maxelderrank(var0, var1) {
-  if(!isDefined(var1.linkedto)) {
-    var2 = level.hud_set_progress[var1.hud_racetrack_timer];
-    var3 = var0.origin - var1.origin;
-    var4 = anglestoleft(var1.matchstarttimer_black_screen);
+function maxelderrank(var_0, var_1) {
+  if(!isDefined(var_1.linkedto)) {
+    var_2 = level.hud_set_progress[var_1.hud_racetrack_timer];
+    var_3 = var_0.origin - var_1.origin;
+    var_4 = anglestoleft(var_1.matchstarttimer_black_screen);
 
-    if(updatefobindanger(var2, var0)) {
-      if(vectordot(var3, var4) > 0) {
-        var1.linkedto = var4;
+    if(updatefobindanger(var_2, var_0)) {
+      if(vectordot(var_3, var_4) > 0) {
+        var_1.linkedto = var_4;
         return;
       }
 
-      var1.linkedto = -1 * var4;
+      var_1.linkedto = -1 * var_4;
       return;
     }
 
-    if(vectordot(var3, var4) > 0) {
-      var1.linkedto = -1 * var4;
+    if(vectordot(var_3, var_4) > 0) {
+      var_1.linkedto = -1 * var_4;
       return;
     }
 
-    var1.linkedto = var4;
+    var_1.linkedto = var_4;
     return;
   }
 }
 
-function maxextractions(var0, var1) {
-  var2 = var0.origin - var1.origin;
-  var3 = anglestoleft(var1.matchstarttimer_black_screen);
+function maxextractions(var_0, var_1) {
+  var_2 = var_0.origin - var_1.origin;
+  var_3 = anglestoleft(var_1.matchstarttimer_black_screen);
 
-  if(vectordot(var1.linkedto, var2) > 0) {
-    var0 notify("control_room_enter");
+  if(vectordot(var_1.linkedto, var_2) > 0) {
+    var_0 notify("control_room_enter");
     return;
   }
 
-  var0 notify("control_room_exit");
+  var_0 notify("control_room_exit");
 }
 
-function wp_watchgameend(var0) {
-  var1 = 0;
+function wp_watchgameend(var_0) {
+  var_1 = 0;
 
-  for(var2 = 0; var2 < level.ref_1442a.size; var2++) {
-    if(!istrue(level.ref_1442a[var2].inuse)) {
-      level.ref_1442a[var2].inuse = 1;
-      var1 = 1;
+  for(var_2 = 0; var_2 < level.ref_1442a.size; var_2++) {
+    if(!istrue(level.ref_1442a[var_2].inuse)) {
+      level.ref_1442a[var_2].inuse = 1;
+      var_1 = 1;
       break;
     }
   }
 
-  if(!var1) {
-    var2 = undefined;
+  if(!var_1) {
+    var_2 = undefined;
   }
 
-  var0.setteamhealthhud = var2;
+  var_0.setteamhealthhud = var_2;
 
-  if(isDefined(var0.setteamhealthhud)) {
-    var0.ref_14429 = [level.ref_1442a[var2].ignore_spawn_scoring_pois[0]];
-    level.ref_1442a[var2].maxagents = [];
-    var3 = [0, 1, 2, 3, 4, 5];
-    var3 = scripts\engine\utility::array_randomize(var3);
-    var4 = 0;
-    var5 = ref_12342();
+  if(isDefined(var_0.setteamhealthhud)) {
+    var_0.ref_14429 = [level.ref_1442a[var_2].ignore_spawn_scoring_pois[0]];
+    level.ref_1442a[var_2].maxagents = [];
+    var_3 = [0, 1, 2, 3, 4, 5];
+    var_3 = scripts\engine\utility::array_randomize(var_3);
+    var_4 = 0;
+    var_5 = ref_12342();
 
-    for(var6 = 0; var6 < 4; var6++) {
-      var7 = var3[var6];
-      var8 = level.ref_1442a[var2].maxcastsperframe[var7].origin;
-      var9 = level.ref_1442a[var2].maxcastsperframe[var7].angles;
-      var10 = ref_136af(var8, var9);
-      var11 = relic_nuketimer_waitforobjectives(var10);
+    for(var_6 = 0; var_6 < 4; var_6++) {
+      var_7 = var_3[var_6];
+      var_8 = level.ref_1442a[var_2].maxcastsperframe[var_7].origin;
+      var_9 = level.ref_1442a[var_2].maxcastsperframe[var_7].angles;
+      var_10 = ref_136af(var_8, var_9);
+      var_11 = relic_nuketimer_waitforobjectives(var_10);
 
-      switch (var6) {
+      switch (var_6) {
         case 0:
-          ref_13288(var11, 1);
-          var11.hud_racetrack_timer = var5.index;
-          var11.setteamhealthhud = var2;
+          ref_13288(var_11, 1);
+          var_11.hud_racetrack_timer = var_5.index;
+          var_11.setteamhealthhud = var_2;
           break;
         case 2:
         case 1:
-          ref_13288(var11, 3);
-          var11.hud_racetrack_timer = var5.index;
-          var11.setteamhealthhud = var2;
+          ref_13288(var_11, 3);
+          var_11.hud_racetrack_timer = var_5.index;
+          var_11.setteamhealthhud = var_2;
           break;
         case 3:
-          ref_13288(var11, 4);
-          var11.setteamhealthhud = var2;
+          ref_13288(var_11, 4);
+          var_11.setteamhealthhud = var_2;
           break;
         default:
-          ref_13288(var11, 4);
-          var11.setteamhealthhud = var2;
+          ref_13288(var_11, 4);
+          var_11.setteamhealthhud = var_2;
           break;
       }
 
-      level.ref_1442a[var2].maxagents[level.ref_1442a[var2].maxagents.size] = var10;
+      level.ref_1442a[var_2].maxagents[level.ref_1442a[var_2].maxagents.size] = var_10;
     }
 
-    thread ref_144dd(level, var2);
+    thread ref_144dd(level, var_2);
     return;
   }
 
-  var12 = risktokencountroll();
-  var0.ref_14429 = [var12];
-  var0.ref_1442f = 1;
+  var_12 = risktokencountroll();
+  var_0.ref_14429 = [var_12];
+  var_0.ref_1442f = 1;
 }
 
-function veh_updateomnvarsperframeforclient(var0) {
-  if(isDefined(var0.setteamhealthhud) && var0.launcherfired != 2) {
+function veh_updateomnvarsperframeforclient(var_0) {
+  if(isDefined(var_0.setteamhealthhud) && var_0.launcherfired != 2) {
     return true;
   }
 
@@ -1242,75 +1242,75 @@ function veh_updateomnvarsperframeforclient(var0) {
 }
 
 function risktokencountroll() {
-  var0 = undefined;
+  var_0 = undefined;
 
   if(level.br_circle_disabled) {
-    var0 = scripts\mp\gametypes\br_circle::getrandompointincircle((0, 0, 0), getdvarfloat("scr_br_warpDoorFallbackRandomCircleRadius", 20000));
+    var_0 = scripts\mp\gametypes\br_circle::getrandompointincircle((0, 0, 0), getdvarfloat("scr_br_warpDoorFallbackRandomCircleRadius", 20000));
   } else {
-    var0 = scripts\mp\gametypes\br_circle::risk_modifyflagstieronrespawn();
+    var_0 = scripts\mp\gametypes\br_circle::risk_modifyflagstieronrespawn();
   }
 
-  var1 = scripts\mp\gametypes\br_c130::relic_ammo_drain_take_ammo();
-  return (var0[0], var0[1], var1);
+  var_1 = scripts\mp\gametypes\br_c130::relic_ammo_drain_take_ammo();
+  return (var_0[0], var_0[1], var_1);
 }
 
-function wp_watchplanedisowned(var0) {
-  var1 = undefined;
+function wp_watchplanedisowned(var_0) {
+  var_1 = undefined;
 
   if(getdvarint("scr_br_warpDoorHotDropEnabled", 1) != 0) {
-    var1 = scripts\mp\gametypes\br_circle::relic_focusfire_modifyplayerdamage(getdvarint("scr_br_warpDoorHotdropClusters", 6));
+    var_1 = scripts\mp\gametypes\br_circle::relic_focusfire_modifyplayerdamage(getdvarint("scr_br_warpDoorHotdropClusters", 6));
   }
 
-  if(!isDefined(var1) || isDefined(var1) && updaterotatedebug(var1)) {
-    var1 = risktokencountroll();
+  if(!isDefined(var_1) || isDefined(var_1) && updaterotatedebug(var_1)) {
+    var_1 = risktokencountroll();
   }
 
-  var2 = scripts\mp\gametypes\br_c130::relic_ammo_drain_take_ammo();
-  var0.ref_14429 = [(var1[0], var1[1], var2)];
-  var0.ref_1442f = 1;
+  var_2 = scripts\mp\gametypes\br_c130::relic_ammo_drain_take_ammo();
+  var_0.ref_14429 = [(var_1[0], var_1[1], var_2)];
+  var_0.ref_1442f = 1;
 }
 
-function wrapindex(var0, var1) {
-  var2 = var1.origin;
-  var3 = scripts\mp\gametypes\br_c130::relic_ammo_drain_take_ammo();
-  var0.ref_14429 = [(var2[0], var2[1], var3)];
-  var0.ref_1442f = 1;
+function wrapindex(var_0, var_1) {
+  var_2 = var_1.origin;
+  var_3 = scripts\mp\gametypes\br_c130::relic_ammo_drain_take_ammo();
+  var_0.ref_14429 = [(var_2[0], var_2[1], var_3)];
+  var_0.ref_1442f = 1;
 }
 
 function ref_12130() {
-  var0 = self;
+  var_0 = self;
   level endon("game_ended");
-  var0 endon("death");
-  var0 endon("warpdoor_close");
-  var0.entity endon("warpdoor_despawn");
-  var0.ref_1269a = [];
+  var_0 endon("death");
+  var_0 endon("warpdoor_close");
+  var_0.entity endon("warpdoor_despawn");
+  var_0.ref_1269a = [];
 
-  if(unload_vehicles_on_weapons_free_thread(var0)) {
-    var0 setscriptablepartstate("warpdoor", "trapped_opening");
+  if(unload_vehicles_on_weapons_free_thread(var_0)) {
+    var_0 setscriptablepartstate("warpdoor", "trapped_opening");
   } else {
-    var0 setscriptablepartstate("warpdoor", "opening");
+    var_0 setscriptablepartstate("warpdoor", "opening");
   }
 
-  var0 notify("warpdoor_open");
+  var_0 notify("warpdoor_open");
 
-  if(getdvarint("scr_br_warpDoorHweenEnabled", 0) && veh_updateomnvarsperframeforclient(var0)) {
-    ref_1277d(var0);
+  if(getdvarint("scr_br_warpDoorHweenEnabled", 0) && veh_updateomnvarsperframeforclient(var_0)) {
+    ref_1277d(var_0);
   }
 
-  switch (var0.launcherfired) {
+  switch (var_0.launcherfired) {
     case 3:
     case 1:
-      if(!isDefined(var0.hud_racetrack_timer)) {
-        var1 = ref_12342();
+      if(!isDefined(var_0.hud_racetrack_timer)) {
+        var_1 = ref_12342();
 
-        if(!isDefined(var1.index)) {
-          var0.launcherfired = 4;
-          wp_watchplanedisowned(var0);
+        if(!isDefined(var_1.index)) {
+          var_0.launcherfired = 4;
+          wp_watchplanedisowned(var_0);
           break;
         }
 
         <
-        error > .hud_racetrack_timer = var0.index;
+        error > .hud_racetrack_timer = var_0.index;
       }
 
       wp_watchforsmokedisowned( < error > , < error > .hud_racetrack_timer);
@@ -1319,10 +1319,10 @@ function ref_12130() {
       wp_watchplanedisowned( < error > );
       break;
     case 5:
-      var4 = scripts\mp\gametypes\br_numbers_tower::propheight();
+      var_4 = scripts\mp\gametypes\br_numbers_tower::propheight();
 
-      if(isDefined(var4)) {
-        wrapindex( < error > , var4);
+      if(isDefined(var_4)) {
+        wrapindex( < error > , var_4);
         thread ref_13c64();
         break;
       }
@@ -1333,30 +1333,30 @@ function ref_12130() {
   }
 
   wait 1;
-  var5 = < error > .origin + anglestoleft( < error > .angles) * 15 + anglesToForward( < error > .angles) * 26 + (0, 0, 16); <
-  error > .ref_14432 = spawn("trigger_radius", var5, 0, 25, 32); <
+  var_5 = < error > .origin + anglestoleft( < error > .angles) * 15 + anglesToForward( < error > .angles) * 26 + (0, 0, 16); <
+  error > .ref_14432 = spawn("trigger_radius", var_5, 0, 25, 32); <
   error > .ref_14432.ref_121d7 = < error > ;
   scripts\mp\utility\trigger::makeenterexittrigger( < error > .ref_14432, &ref_1442b, undefined);
   thread ref_14431();
 }
 
 function ref_13c64() {
-  var0 = self;
+  var_0 = self;
   level endon("game_ended");
-  var0 endon("death");
-  var0 endon("warpdoor_close");
-  var0.entity endon("warpdoor_despawn");
-  var0.ref_13b81 = gettime();
-  var0.ref_13b7c = undefined;
+  var_0 endon("death");
+  var_0 endon("warpdoor_close");
+  var_0.entity endon("warpdoor_despawn");
+  var_0.ref_13b81 = gettime();
+  var_0.ref_13b7c = undefined;
 
   for(;;) {
-    if(isDefined(var0.ref_13b7c) && (gettime() - var0.ref_13b7c) / 1000 >= getdvarint("scr_br_warpDoorInactiveTime", 10)) {
-      thread helicleanup(var0);
+    if(isDefined(var_0.ref_13b7c) && (gettime() - var_0.ref_13b7c) / 1000 >= getdvarint("scr_br_warpDoorInactiveTime", 10)) {
+      thread helicleanup(var_0);
       return;
     }
 
-    if((gettime() - var0.ref_13b81) / 1000 >= getdvarint("scr_br_warpDoorMaxOpenTime", 30)) {
-      thread helicleanup(var0);
+    if((gettime() - var_0.ref_13b81) / 1000 >= getdvarint("scr_br_warpDoorMaxOpenTime", 30)) {
+      thread helicleanup(var_0);
       return;
     }
 
@@ -1364,88 +1364,88 @@ function ref_13c64() {
   }
 }
 
-function validateplundereventtype(var0) {
-  return var0 == 3 || var0 == 4;
+function validateplundereventtype(var_0) {
+  return var_0 == 3 || var_0 == 4;
 }
 
 function unload_vehicles_on_weapons_free_thread() {
-  var0 = relic_nuketimer_waitforobjectives();
+  var_0 = relic_nuketimer_waitforobjectives();
 
-  if(isDefined(var0.launcherfired)) {
-    return validateplundereventtype(var0.launcherfired);
+  if(isDefined(var_0.launcherfired)) {
+    return validateplundereventtype(var_0.launcherfired);
   }
 
   return false;
 }
 
-function helicleanup(var0) {
-  var1 = self;
+function helicleanup(var_0) {
+  var_1 = self;
   level endon("game_ended");
-  var1 endon("death");
-  var1 endon("warpdoor_open");
+  var_1 endon("death");
+  var_1 endon("warpdoor_open");
 
-  if(isDefined(var1.ref_14432)) {
-    var1.ref_14432 delete();
+  if(isDefined(var_1.ref_14432)) {
+    var_1.ref_14432 delete();
   }
 
-  var1.ref_13b99 = 0;
+  var_1.ref_13b99 = 0;
 
-  if(unload_vehicles_on_weapons_free_thread(var1)) {
-    var1 setscriptablepartstate("warpdoor", "trapped_closing");
+  if(unload_vehicles_on_weapons_free_thread(var_1)) {
+    var_1 setscriptablepartstate("warpdoor", "trapped_closing");
   } else {
-    var1 setscriptablepartstate("warpdoor", "closing");
+    var_1 setscriptablepartstate("warpdoor", "closing");
   }
 
-  var1.entity.usable = 0;
+  var_1.entity.usable = 0;
 
-  while(var1.ref_1269a.size != 0) {
+  while(var_1.ref_1269a.size != 0) {
     wait 0.1;
   }
 
-  var1.entity.usable = 1;
-  var1.setteamhealthhud = undefined;
-  var1 notify("warpdoor_close");
+  var_1.entity.usable = 1;
+  var_1.setteamhealthhud = undefined;
+  var_1 notify("warpdoor_close");
   thread ref_1338a();
 
-  if(isDefined(level.hud_set_progress) && show_regroup_text() && runjoininprogresstimeout(var1) == 2) {
+  if(isDefined(level.hud_set_progress) && show_regroup_text() && runjoininprogresstimeout(var_1) == 2) {
     thread heli_goto_pos();
     return;
   }
 }
 
 function ref_1449b() {
-  var0 = self;
+  var_0 = self;
   level endon("game_ended");
-  var0 endon("death");
-  var0 endon("warpdoor_open");
-  var0.entity endon("warpdoor_despawn");
-  var0 waittill("end_warp_queue");
+  var_0 endon("death");
+  var_0 endon("warpdoor_open");
+  var_0.entity endon("warpdoor_despawn");
+  var_0 waittill("end_warp_queue");
   wait 5;
   thread latetoinfil();
 }
 
 function unload_type() {
-  var0 = self getscriptablepartstate("warpdoor");
-  return var0 == "open" || var0 == "opening" || var0 == "trapped_open" || var0 == "trapped_opening";
+  var_0 = self getscriptablepartstate("warpdoor");
+  return var_0 == "open" || var_0 == "opening" || var_0 == "trapped_open" || var_0 == "trapped_opening";
 }
 
 function heli_goto_pos() {
-  var0 = self;
+  var_0 = self;
 
-  if(!isDefined(var0.entity)) {
-    var0 = var0 getlinkedscriptableinstance();
+  if(!isDefined(var_0.entity)) {
+    var_0 = var_0 getlinkedscriptableinstance();
   }
 
   level endon("game_ended");
-  var0 endon("death");
-  var0.entity endon("warpdoor_despawn");
-  var0.entity.usable = 0;
+  var_0 endon("death");
+  var_0.entity endon("warpdoor_despawn");
+  var_0.entity.usable = 0;
 
-  if(unload_type(var0)) {
-    helicleanup(var0);
+  if(unload_type(var_0)) {
+    helicleanup(var_0);
   }
 
-  while(!(var0 getscriptablepartstate("warpdoor") == "closed" || var0 getscriptablepartstate("warpdoor") == "trapped_closed")) {
+  while(!(var_0 getscriptablepartstate("warpdoor") == "closed" || var_0 getscriptablepartstate("warpdoor") == "trapped_closed")) {
     waitframe();
   }
 
@@ -1454,22 +1454,22 @@ function heli_goto_pos() {
 }
 
 function ref_1449a() {
-  var0 = self;
-  var1 = var0 getlinkedscriptableinstance();
+  var_0 = self;
+  var_1 = var_0 getlinkedscriptableinstance();
   level endon("game_ended");
-  var0 endon("death");
-  var1 endon("death");
+  var_0 endon("death");
+  var_1 endon("death");
   wait 5;
 
-  if(var1.launcherfired != 2) {
+  if(var_1.launcherfired != 2) {
     return;
   }
 
-  while(!updaterotatedebug(var0.origin)) {
+  while(!updaterotatedebug(var_0.origin)) {
     wait 1;
   }
 
-  heli_goto_pos(var0);
+  heli_goto_pos(var_0);
 }
 
 function zombieregendelayscaleoutgas() {
@@ -1483,34 +1483,34 @@ function zombieregendelayscaleoutgas() {
     waitframe();
   }
 
-  var0 = "mp/warpdoor_hallway_locations.csv";
-  var1 = tablelookupgetnumrows(var0);
+  var_0 = "mp/warpdoor_hallway_locations.csv";
+  var_1 = tablelookupgetnumrows(var_0);
   level.ref_1442a = [];
 
-  for(var2 = 0; var2 < var1; var2++) {
-    var3 = spawnStruct();
-    var4 = var2;
-    var3.id = int(tablelookupbyrow(var0, var4, 0));
-    var3.ignore_spawn_scoring_pois = [];
-    var3.ignore_spawn_scoring_pois[0] = (int(tablelookupbyrow(var0, var4, 1)), int(tablelookupbyrow(var0, var4, 2)), int(tablelookupbyrow(var0, var4, 3)));
-    var3.inuse = 0;
-    var3.ref_126be = [];
-    var3.maxcastsperframe = remove_flag_trigs(var3.ignore_spawn_scoring_pois[0]);
-    level.ref_1442a[level.ref_1442a.size] = var3;
+  for(var_2 = 0; var_2 < var_1; var_2++) {
+    var_3 = spawnStruct();
+    var_4 = var_2;
+    var_3.id = int(tablelookupbyrow(var_0, var_4, 0));
+    var_3.ignore_spawn_scoring_pois = [];
+    var_3.ignore_spawn_scoring_pois[0] = (int(tablelookupbyrow(var_0, var_4, 1)), int(tablelookupbyrow(var_0, var_4, 2)), int(tablelookupbyrow(var_0, var_4, 3)));
+    var_3.inuse = 0;
+    var_3.ref_126be = [];
+    var_3.maxcastsperframe = remove_flag_trigs(var_3.ignore_spawn_scoring_pois[0]);
+    level.ref_1442a[level.ref_1442a.size] = var_3;
   }
 }
 
-function remove_flag_trigs(var0) {
-  var1 = [];
-  var2 = scripts\engine\utility::getStructArray("hallway_door_spawn", "targetname");
+function remove_flag_trigs(var_0) {
+  var_1 = [];
+  var_2 = scripts\engine\utility::getStructArray("hallway_door_spawn", "targetname");
 
-  foreach(var4 in var2) {
-    if(abs(var0[0] - var4.origin[0]) <= 500) {
-      var1 = var4;
+  foreach(var_4 in var_2) {
+    if(abs(var_0[0] - var_4.origin[0]) <= 500) {
+      var_1 = var_4;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
 function unset_relic_no_ammo_mun() {
@@ -1518,8 +1518,8 @@ function unset_relic_no_ammo_mun() {
     return false;
   }
 
-  foreach(var1 in level.ref_1442a) {
-    if(var1.inuse) {
+  foreach(var_1 in level.ref_1442a) {
+    if(var_1.inuse) {
       return false;
     }
   }
@@ -1527,149 +1527,149 @@ function unset_relic_no_ammo_mun() {
   return true;
 }
 
-function ref_12549(var0) {
-  var1 = self;
-  var1.unset_relic_thirdperson = 1;
-  var2 = getdvarint("scr_br_warpDoorAllowKillstreaksInHallway", 0) != 0;
+function ref_12549(var_0) {
+  var_1 = self;
+  var_1.unset_relic_thirdperson = 1;
+  var_2 = getdvarint("scr_br_warpDoorAllowKillstreaksInHallway", 0) != 0;
 
-  if(!var2) {
-    var1 scripts\common\utility::allow_killstreaks(0);
-    var1 disableoffhandweapons();
+  if(!var_2) {
+    var_1 scripts\common\utility::allow_killstreaks(0);
+    var_1 disableoffhandweapons();
   }
 
-  level.ref_1442a[var0].ref_126be[level.ref_1442a[var0].ref_126be.size] = var1;
-  thread ref_11d19(var1);
+  level.ref_1442a[var_0].ref_126be[level.ref_1442a[var_0].ref_126be.size] = var_1;
+  thread ref_11d19(var_1);
 }
 
-function ref_144dd(var0, var1) {
+function ref_144dd(var_0, var_1) {
   level endon("game_ended");
-  var1 waittill("warpdoor_close");
+  var_1 waittill("warpdoor_close");
   wait 3;
 
-  while(level.ref_1442a[var0].ref_126be.size != 0) {
+  while(level.ref_1442a[var_0].ref_126be.size != 0) {
     wait 1;
   }
 
-  ref_13389(var0);
+  ref_13389(var_0);
 }
 
 function mark_coop_bomb_defusal_ended() {
-  var0 = self;
+  var_0 = self;
 
-  if(istrue(var0.validateboltent)) {
+  if(istrue(var_0.validateboltent)) {
     return;
   }
 
-  var0 notify("mental_break");
-  var1 = risktokencountroll();
-  var2 = var1;
-  thread ref_1386b(var0, var2, var0.angles, undefined);
-  thread playac130animinternal(var0, undefined, var0.angles);
+  var_0 notify("mental_break");
+  var_1 = risktokencountroll();
+  var_2 = var_1;
+  thread ref_1386b(var_0, var_2, var_0.angles, undefined);
+  thread playac130animinternal(var_0, undefined, var_0.angles);
 }
 
-function ref_11d19(var0) {
-  var1 = self;
+function ref_11d19(var_0) {
+  var_1 = self;
   level endon("game_ended");
-  var2 = scripts\engine\utility::ref_143af("entered_door_in_hallway", "death", "mental_break", "disconnect");
+  var_2 = scripts\engine\utility::ref_143af("entered_door_in_hallway", "death", "mental_break", "disconnect");
 
-  if(var2 == "disconnect") {
-    level.ref_1442a[var0].ref_126be = scripts\engine\utility::array_removeundefined(level.ref_1442a[var0].ref_126be);
+  if(var_2 == "disconnect") {
+    level.ref_1442a[var_0].ref_126be = scripts\engine\utility::array_removeundefined(level.ref_1442a[var_0].ref_126be);
     return;
   }
 
-  level.ref_1442a[var0].ref_126be = scripts\engine\utility::array_remove(level.ref_1442a[var0].ref_126be, var1);
-  var1.unset_relic_thirdperson = 0;
-  var3 = getdvarint("scr_br_warpDoorAllowKillstreaksInHallway", 0) != 0;
+  level.ref_1442a[var_0].ref_126be = scripts\engine\utility::array_remove(level.ref_1442a[var_0].ref_126be, var_1);
+  var_1.unset_relic_thirdperson = 0;
+  var_3 = getdvarint("scr_br_warpDoorAllowKillstreaksInHallway", 0) != 0;
 
-  if(!var3) {
-    var1 scripts\common\utility::allow_killstreaks(1);
-    var1 enableoffhandweapons();
+  if(!var_3) {
+    var_1 scripts\common\utility::allow_killstreaks(1);
+    var_1 enableoffhandweapons();
   }
 
-  var1 notify("leave_hallway");
+  var_1 notify("leave_hallway");
 }
 
 function ref_1384f() {
-  var0 = self;
+  var_0 = self;
   level endon("game_ended");
-  var0 endon("disconnect");
-  var0 endon("entered_door_in_hallway");
-  var0 endon("death");
-  var0 endon("leave_hallway");
-  var1 = getdvarint("scr_br_warpDoorHallwayTimeout", 20);
-  var2 = getdvarint("scr_br_warpDoorHallwayCountdownStart", 5);
-  wait var1 - var2;
+  var_0 endon("disconnect");
+  var_0 endon("entered_door_in_hallway");
+  var_0 endon("death");
+  var_0 endon("leave_hallway");
+  var_1 = getdvarint("scr_br_warpDoorHallwayTimeout", 20);
+  var_2 = getdvarint("scr_br_warpDoorHallwayCountdownStart", 5);
+  wait var_1 - var_2;
 
-  for(var3 = var2; var3 >= 0; var3--) {
-    var4 = "dx_brm_stc_numbers_";
-    var4 += var3;
-    var4 += "_10";
-    var0 playsoundtoplayer(var4, var0);
+  for(var_3 = var_2; var_3 >= 0; var_3--) {
+    var_4 = "dx_brm_stc_numbers_";
+    var_4 += var_3;
+    var_4 += "_10";
+    var_0 playsoundtoplayer(var_4, var_0);
     wait 1;
   }
 
-  mark_coop_bomb_defusal_ended(var0);
+  mark_coop_bomb_defusal_ended(var_0);
 }
 
-function ref_13389(var0) {
+function ref_13389(var_0) {
   wait 7.5;
 
-  foreach(var2 in level.ref_1442a[var0].maxagents) {
+  foreach(var_2 in level.ref_1442a[var_0].maxagents) {
     thread heli_goto_pos();
   }
 
   wait 3;
-  var4 = level.ref_1442a[var0].ignore_spawn_scoring_pois[0];
-  var5 = getdvarfloat("scr_br_warpDoorCleanupRadius", 500);
-  latespawnsnatchtoc130(var4, var5, getdvarint("scr_br_warpDoorKillPlayerOnEntityCleanup", 1));
-  level.ref_1442a[var0].ref_126be = [];
-  level.ref_1442a[var0].inuse = 0;
+  var_4 = level.ref_1442a[var_0].ignore_spawn_scoring_pois[0];
+  var_5 = getdvarfloat("scr_br_warpDoorCleanupRadius", 500);
+  latespawnsnatchtoc130(var_4, var_5, getdvarint("scr_br_warpDoorKillPlayerOnEntityCleanup", 1));
+  level.ref_1442a[var_0].ref_126be = [];
+  level.ref_1442a[var_0].inuse = 0;
 }
 
-function latespawnsnatchtoc130(var0, var1, var2) {
-  var3 = scripts\engine\trace::sphere_trace_get_all_results(var0, var0, var1, undefined, undefined, 0, 1);
+function latespawnsnatchtoc130(var_0, var_1, var_2) {
+  var_3 = scripts\engine\trace::sphere_trace_get_all_results(var_0, var_0, var_1, undefined, undefined, 0, 1);
 
-  for(var4 = 0; var4 < var3.size - 1; var4++) {
-    var5 = var3[var4]["entity"];
+  for(var_4 = 0; var_4 < var_3.size - 1; var_4++) {
+    var_5 = var_3[var_4]["entity"];
 
-    if(isDefined(var5)) {
-      if(isPlayer(var5) && (!var2 || istrue(var5.validateboltent))) {
+    if(isDefined(var_5)) {
+      if(isPlayer(var_5) && (!var_2 || istrue(var_5.validateboltent))) {
         continue;
       }
 
-      var5 dodamage(15000, var5.origin, var5, undefined, "MOD_EXPLOSIVE");
+      var_5 dodamage(15000, var_5.origin, var_5, undefined, "MOD_EXPLOSIVE");
     }
   }
 }
 
-function nuke_vault_key(var0) {
-  if(isDefined(var0.hud_racetrack_timer)) {
-    var1 = level.hud_set_progress[var0.hud_racetrack_timer];
+function nuke_vault_key(var_0) {
+  if(isDefined(var_0.hud_racetrack_timer)) {
+    var_1 = level.hud_set_progress[var_0.hud_racetrack_timer];
 
-    if(var1.shouldburnfromdamage) {
+    if(var_1.shouldburnfromdamage) {
       return;
     }
   }
 
-  var2 = level.ref_1442a[var0.setteamhealthhud];
+  var_2 = level.ref_1442a[var_0.setteamhealthhud];
 
-  switch (var0.launcherfired) {
+  switch (var_0.launcherfired) {
     case 1:
-      foreach(var4 in var2.maxagents) {
-        if(relic_nuketimer_waitforobjectives(var4) != var0) {
-          ref_13288(var4, 4);
-          wp_watchplanedisowned(relic_nuketimer_waitforobjectives(var4));
+      foreach(var_4 in var_2.maxagents) {
+        if(relic_nuketimer_waitforobjectives(var_4) != var_0) {
+          ref_13288(var_4, 4);
+          wp_watchplanedisowned(relic_nuketimer_waitforobjectives(var_4));
         }
       }
 
       break;
     case 3:
-      var1 = level.hud_set_progress[var0.hud_racetrack_timer];
-      ref_13d00(var1);
+      var_1 = level.hud_set_progress[var_0.hud_racetrack_timer];
+      ref_13d00(var_1);
 
-      foreach(var4 in var2.maxagents) {
-        if(runjoininprogresstimeout(var4) == 1) {
-          ref_13288(var4, 3);
+      foreach(var_4 in var_2.maxagents) {
+        if(runjoininprogresstimeout(var_4) == 1) {
+          ref_13288(var_4, 3);
         }
       }
 
@@ -1677,66 +1677,66 @@ function nuke_vault_key(var0) {
   }
 }
 
-function ref_12853(var0) {
-  var1 = self;
-  var1 skydive_cutparachuteon(var0);
-  var1 setclientomnvar("ui_br_bink_overlay_state", 10);
+function ref_12853(var_0) {
+  var_1 = self;
+  var_1 skydive_cutparachuteon(var_0);
+  var_1 setclientomnvar("ui_br_bink_overlay_state", 10);
 }
 
-function ref_1277c(var0) {
-  var1 = self;
-  var1 preloadcinematicforplayer(var0);
+function ref_1277c(var_0) {
+  var_1 = self;
+  var_1 preloadcinematicforplayer(var_0);
 }
 
 function ref_138f8() {
-  var0 = self;
-  var0 setclientomnvar("ui_br_bink_overlay_state", 0);
-  var0 skydive_cutparachuteoff();
+  var_0 = self;
+  var_0 setclientomnvar("ui_br_bink_overlay_state", 0);
+  var_0 skydive_cutparachuteoff();
 }
 
 function ref_1277f() {
-  var0 = self;
-  playFX(level._effect["warp_door_out"], var0.origin);
+  var_0 = self;
+  playFX(level._effect["warp_door_out"], var_0.origin);
 }
 
 function ref_1277e() {
-  var0 = self;
-  playFX(level._effect["warp_door_in"], var0.origin);
+  var_0 = self;
+  playFX(level._effect["warp_door_in"], var_0.origin);
 }
 
 function ref_1277d() {
-  var0 = self;
-  var1 = randomint(4);
-  var2 = "warp_door_hween_";
+  var_0 = self;
+  var_1 = randomint(4);
+  var_2 = "warp_door_hween_";
 
-  switch (var1) {
+  switch (var_1) {
     case 0:
-      var2 += "bats";
+      var_2 += "bats";
       break;
     case 1:
-      var2 += "footprints";
+      var_2 += "footprints";
       break;
     case 2:
-      var2 += "ghost";
+      var_2 += "ghost";
       break;
     case 3:
-      var2 += "skelhand";
+      var_2 += "skelhand";
       break;
     default:
-      var2 += "bats";
+      var_2 += "bats";
       break;
   }
 
-  playFX(level._effect[var2], var0.origin, anglesToForward(var0.angles));
+  playFX(level._effect[var_2], var_0.origin, anglesToForward(var_0.angles));
 }
 
-function relic_grounded_reload_monitor(var0) {
-  var1 = "";
+function relic_grounded_reload_monitor(var_0) {
+  var_1 = "";
 
-  if(var0 < 10) {
-    var1 = "0";
+  if(var_0 < 10) {
+    var_1 = "0";
   }
 
-  var2 = "MP_DONETSK/CALLOUT_RED_DOOR_CONTROL_ROOM_" + var1 + var0;
-  return var2;
+  var_2 = "MP_DONETSK/CALLOUT_RED_DOOR_CONTROL_ROOM_" + var_1 + var_0;
+  return var_2;
 }

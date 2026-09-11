@@ -64,7 +64,7 @@ function initializematchrules() {
   setdynamicdvar("scr_conf_promode", 0);
 }
 
-function onstartgametype(var0) {
+function onstartgametype(var_0) {
   level.extratime = 0;
   setgameendtime(0);
   scripts\mp\utility\dvars::setoverridewatchdvar("timelimit", 6);
@@ -72,31 +72,31 @@ function onstartgametype(var0) {
 }
 
 function initspawns() {
-  var0 = level.tacopsspawns;
+  var_0 = level.tacopsspawns;
   scripts\mp\spawnlogic::addspawnpoints("allies", "mp_towmd_spawn_allies", 1);
   scripts\mp\spawnlogic::addspawnpoints("axis", "mp_towmd_spawn_axis", 1);
-  var0.to_wmd_spawns = [];
-  var0.to_wmd_spawns["allies"] = scripts\mp\spawnlogic::getspawnpointarray("mp_towmd_spawn_allies");
-  var0.to_wmd_spawns["axis"] = scripts\mp\spawnlogic::getspawnpointarray("mp_towmd_spawn_axis");
+  var_0.to_wmd_spawns = [];
+  var_0.to_wmd_spawns["allies"] = scripts\mp\spawnlogic::getspawnpointarray("mp_towmd_spawn_allies");
+  var_0.to_wmd_spawns["axis"] = scripts\mp\spawnlogic::getspawnpointarray("mp_towmd_spawn_axis");
 
-  if(var0.to_wmd_spawns["allies"].size <= 0) {
+  if(var_0.to_wmd_spawns["allies"].size <= 0) {
     scripts\mp\spawnlogic::addspawnpoints("allies", "mp_front_spawn_allies");
-    var0.to_wmd_spawns["allies"] = scripts\mp\spawnlogic::getspawnpointarray("mp_front_spawn_allies");
+    var_0.to_wmd_spawns["allies"] = scripts\mp\spawnlogic::getspawnpointarray("mp_front_spawn_allies");
   }
 
-  if(var0.to_wmd_spawns["axis"].size <= 0) {
+  if(var_0.to_wmd_spawns["axis"].size <= 0) {
     scripts\mp\spawnlogic::addspawnpoints("axis", "mp_front_spawn_axis");
-    var0.to_wmd_spawns["axis"] = scripts\mp\spawnlogic::getspawnpointarray("mp_front_spawn_axis");
+    var_0.to_wmd_spawns["axis"] = scripts\mp\spawnlogic::getspawnpointarray("mp_front_spawn_axis");
     return;
   }
 }
 
 function getspawnpoint() {
-  var0 = level.tacopsspawns;
-  var1 = self.pers["team"];
-  var2 = scripts\mp\tac_ops_map::filterspawnpoints(var0.to_wmd_spawns[var1]);
-  var3 = undefined;
-  return var3;
+  var_0 = level.tacopsspawns;
+  var_1 = self.pers["team"];
+  var_2 = scripts\mp\tac_ops_map::filterspawnpoints(var_0.to_wmd_spawns[var_1]);
+  var_3 = undefined;
+  return var_3;
 }
 
 function activatespawns() {
@@ -110,18 +110,18 @@ function updategametypedvars() {
   scripts\mp\gametypes\common::updatecommongametypedvars();
 }
 
-function onnormaldeath(var0, var1, var2, var3, var4) {
-  scripts\mp\gametypes\common::oncommonnormaldeath(var0, var1, var2, var3, var4);
+function onnormaldeath(var_0, var_1, var_2, var_3, var_4) {
+  scripts\mp\gametypes\common::oncommonnormaldeath(var_0, var_1, var_2, var_3, var_4);
 }
 
 function onspawnplayer() {
-  var0 = 0;
+  var_0 = 0;
 
   if(self.team == "allies") {
-    var0 = 1;
+    var_0 = 1;
   } else if(self.team == "axis") {
-    var0 = 2;
+    var_0 = 2;
   }
 
-  self setclientomnvar("ui_tacops_team", var0);
+  self setclientomnvar("ui_tacops_team", var_0);
 }

@@ -7,7 +7,7 @@ function shouldcoverexpose() {
   return scripts\asm\asm_bb::bb_getrequestedcoverstate() == "exposed" && isDefined(self.enemy) && isDefined(self.node);
 }
 
-function shouldcoverexposedreload(var0, var1, var2, var3) {
+function shouldcoverexposedreload(var_0, var_1, var_2, var_3) {
   if(isDefined(self.bt.cover) && isDefined(self.balwayscoverexposed)) {
     return scripts\asm\asm_bb::bb_reloadrequested();
   }
@@ -15,137 +15,137 @@ function shouldcoverexposedreload(var0, var1, var2, var3) {
   return 0;
 }
 
-function playcoveraniminternal(var0, var1, var2, var3) {
-  if(var3 == "alignToNode") {
-    if(isDefined(var1)) {
+function playcoveraniminternal(var_0, var_1, var_2, var_3) {
+  if(var_3 == "alignToNode") {
+    if(isDefined(var_1)) {
       if(scripts\engine\utility::actor_is3d()) {
-        var4 = getangledelta3d(var2);
-        var5 = scripts\asm\shared\utility::getnodeforwardangles(var1, 0);
-        var6 = combineangles(var5, -1 * var4);
-        self orientmode("face angle 3d", var6);
+        var_4 = getangledelta3d(var_2);
+        var_5 = scripts\asm\shared\utility::getnodeforwardangles(var_1, 0);
+        var_6 = combineangles(var_5, -1 * var_4);
+        self orientmode("face angle 3d", var_6);
         return;
       }
 
-      var4 = getangledelta3d(var5);
-      var5 = (0, scripts\asm\shared\utility::getnodeforwardyaw(var4), 0);
-      var6 = var5 - var4;
-      self orientmode("face angle", var6[1]);
+      var_4 = getangledelta3d(var_5);
+      var_5 = (0, scripts\asm\shared\utility::getnodeforwardyaw(var_4), 0);
+      var_6 = var_5 - var_4;
+      self orientmode("face angle", var_6[1]);
       return;
     }
 
     return;
   }
 
-  if(var6 == "stickToNode") {
-    var7 = getmovedelta(var5);
+  if(var_6 == "stickToNode") {
+    var_7 = getmovedelta(var_5);
 
-    if(distancesquared(var4.origin, self.origin) < 16) {
-      self safeteleport(var4.origin);
+    if(distancesquared(var_4.origin, self.origin) < 16) {
+      self safeteleport(var_4.origin);
       return;
     }
 
-    thread lerpto(var4, 4, var6 + "_finished");
+    thread lerpto(var_4, 4, var_6 + "_finished");
     return;
   }
 }
 
-function choosetransitiontoexposedanim(var0, var1, var2) {
-  var3 = scripts\engine\utility::ter_op(scripts\asm\soldier\script_funcs::shouldreacttonewenemy(var0, var1, var2), "react_newenemy_", "");
-  var4 = scripts\asm\asm::asm_lookupanimfromalias(var1, var3 + "2");
-  var5 = scripts\asm\asm::asm_getxanim(var1, var4);
-  var6 = getangledelta(var5, 0, 1);
-  var7 = angleclamp180(180 - var6);
+function choosetransitiontoexposedanim(var_0, var_1, var_2) {
+  var_3 = scripts\engine\utility::ter_op(scripts\asm\soldier\script_funcs::shouldreacttonewenemy(var_0, var_1, var_2), "react_newenemy_", "");
+  var_4 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3 + "2");
+  var_5 = scripts\asm\asm::asm_getxanim(var_1, var_4);
+  var_6 = getangledelta(var_5, 0, 1);
+  var_7 = angleclamp180(180 - var_6);
 
   if(isDefined(self.pathgoalpos) && self.facemotion) {
-    var8 = vectortoangles(self.lookaheaddir);
-    var9 = var8[1] - self.angles[1];
-    var10 = angleclamp180(var9 + var7);
+    var_8 = vectortoangles(self.lookaheaddir);
+    var_9 = var_8[1] - self.angles[1];
+    var_10 = angleclamp180(var_9 + var_7);
   } else if(isDefined(self.pathgoalpos) && !self.facemotion && isDefined(self.enemy) && !scripts\anim\utility_common::canseeenemy()) {
-    var9 = 0;
-    var10 = var10;
+    var_9 = 0;
+    var_10 = var_10;
   } else {
     jumpiffalse(isDefined(self.smartfacingpos)) LOC_000000ed;
-    var9 = angleclamp180(vectortoyaw(self.smartfacingpos - self.origin) - self.angles[1]);
-    var10 = angleclamp180(var9 + var10);
+    var_9 = angleclamp180(vectortoyaw(self.smartfacingpos - self.origin) - self.angles[1]);
+    var_10 = angleclamp180(var_9 + var_10);
     goto LOC_00000110;
   }
 
   LOC_00000110:
-    var12 = isDefined(var9) && var9 == "Cover Left";
-  var13 = isDefined(var9) && var9 == "Cover Right";
-  var14 = spawnStruct();
+    var_12 = isDefined(var_9) && var_9 == "Cover Left";
+  var_13 = isDefined(var_9) && var_9 == "Cover Right";
+  var_14 = spawnStruct();
 
-  if(var12 && var10 < 0 && var10 > -90) {
-    var14.turnanim = scripts\asm\asm::asm_lookupanimfromalias(var7, var10 + "8");
-  } else if(var13 && var10 > 0 && var10 < 90) {
-    var14.turnanim = scripts\asm\asm::asm_lookupanimfromalias(var7, var10 + "8");
-  } else if(abs(var10) > 135) {
-    var14.turnanim = scripts\asm\asm::asm_lookupanimfromalias(var7, var10 + "2");
-  } else if(var10 < 0) {
-    var14.turnanim = scripts\asm\asm::asm_lookupanimfromalias(var7, var10 + "6");
+  if(var_12 && var_10 < 0 && var_10 > -90) {
+    var_14.turnanim = scripts\asm\asm::asm_lookupanimfromalias(var_7, var_10 + "8");
+  } else if(var_13 && var_10 > 0 && var_10 < 90) {
+    var_14.turnanim = scripts\asm\asm::asm_lookupanimfromalias(var_7, var_10 + "8");
+  } else if(abs(var_10) > 135) {
+    var_14.turnanim = scripts\asm\asm::asm_lookupanimfromalias(var_7, var_10 + "2");
+  } else if(var_10 < 0) {
+    var_14.turnanim = scripts\asm\asm::asm_lookupanimfromalias(var_7, var_10 + "6");
   } else {
-    var14.turnanim = scripts\asm\asm::asm_lookupanimfromalias(var7, var10 + "4");
+    var_14.turnanim = scripts\asm\asm::asm_lookupanimfromalias(var_7, var_10 + "4");
   }
 
-  var14.predictedaimyaw = var9;
-  return var14;
+  var_14.predictedaimyaw = var_9;
+  return var_14;
 }
 
-function playtransitiontoexposedanim(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  var4 = 1;
+function playtransitiontoexposedanim(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_4 = 1;
   self isguest();
 
   if((scripts\asm\asm_bb::bb_meleechargerequested() || scripts\asm\asm_bb::bb_meleerequested()) && isDefined(self.melee.target) && isPlayer(self.melee.target)) {
-    var4 = 2;
+    var_4 = 2;
   }
 
-  var5 = scripts\asm\asm::asm_getxanim(var1, var3.turnanim);
-  self aisetanim(var1, var3.turnanim, var4);
-  scripts\asm\asm::asm_playfacialanim(var0, var1, var5);
-  thread playtransitiontoexposedanimanglefixup(var5, var1);
-  var6 = scripts\asm\asm::asm_donotetracks(var0, var1, scripts\asm\asm::asm_getnotehandler(var0, var1));
+  var_5 = scripts\asm\asm::asm_getxanim(var_1, var_3.turnanim);
+  self aisetanim(var_1, var_3.turnanim, var_4);
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_5);
+  thread playtransitiontoexposedanimanglefixup(var_5, var_1);
+  var_6 = scripts\asm\asm::asm_donotetracks(var_0, var_1, scripts\asm\asm::asm_getnotehandler(var_0, var_1));
 }
 
-function playtransitiontoexposedanimanglefixup(var0, var1) {
+function playtransitiontoexposedanimanglefixup(var_0, var_1) {
   self endon("death");
-  self endon(var1 + "_finished");
+  self endon(var_1 + "_finished");
 
   if(!isDefined(self.enemy)) {
     return;
   }
 
-  var2 = self.enemy;
-  var2 endon("death");
-  var3 = getanimlength(var0);
+  var_2 = self.enemy;
+  var_2 endon("death");
+  var_3 = getanimlength(var_0);
 
-  if(animhasnotetrack(var0, "start_aim")) {
-    var4 = getnotetracktimes(var0, "start_aim");
-    var3 *= var4[0];
-  } else if(animhasnotetrack(var0, "finish")) {
-    var4 = getnotetracktimes(var0, "finish");
-    var3 *= var4[0];
+  if(animhasnotetrack(var_0, "start_aim")) {
+    var_4 = getnotetracktimes(var_0, "start_aim");
+    var_3 *= var_4[0];
+  } else if(animhasnotetrack(var_0, "finish")) {
+    var_4 = getnotetracktimes(var_0, "finish");
+    var_3 *= var_4[0];
   }
 
-  var5 = int(var3 * 20);
-  var6 = var5;
+  var_5 = int(var_3 * 20);
+  var_6 = var_5;
 
-  while(var6 > 0) {
-    var7 = 1 / var6;
-    var8 = scripts\engine\utility::getyawtospot(var2.origin);
-    self.stepoutyaw = angleclamp180(self.angles[1] + var8);
-    var9 = self aigetanimtime(var0);
-    var10 = getangledelta(var0, var9, 1);
-    var11 = angleclamp180(var8 - var10);
-    self orientmode("face angle", angleclamp(self.angles[1] + var11 * var7));
-    var6--;
+  while(var_6 > 0) {
+    var_7 = 1 / var_6;
+    var_8 = scripts\engine\utility::getyawtospot(var_2.origin);
+    self.stepoutyaw = angleclamp180(self.angles[1] + var_8);
+    var_9 = self aigetanimtime(var_0);
+    var_10 = getangledelta(var_0, var_9, 1);
+    var_11 = angleclamp180(var_8 - var_10);
+    self orientmode("face angle", angleclamp(self.angles[1] + var_11 * var_7));
+    var_6--;
     wait 0.05;
   }
 }
 
-function cleanuptransitiontocoverhide(var0) {
-  self waittill(var0 + "_finished");
+function cleanuptransitiontocoverhide(var_0) {
+  self waittill(var_0 + "_finished");
 
   if(isDefined(self)) {
     self finishcoverarrival();
@@ -153,225 +153,225 @@ function cleanuptransitiontocoverhide(var0) {
   }
 }
 
-function playtransitiontocoverhide(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  var3 = scripts\asm\asm::asm_getanim(var0, var1, var2);
-  jumpiffalse(isstruct(var3)) LOC_000000ee;
-  var4 = var3.stopanim;
-  var5 = var3.node;
-  var6 = scripts\asm\asm::asm_getxanim(var1, var4);
-  thread cleanuptransitiontocoverhide(var1);
-  var7 = var3.finalangles;
-  var8 = var3.startpos;
-  var9 = angleclamp180(var7 - var3.angledelta);
+function playtransitiontocoverhide(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1, var_2);
+  jumpiffalse(isstruct(var_3)) LOC_000000ee;
+  var_4 = var_3.stopanim;
+  var_5 = var_3.node;
+  var_6 = scripts\asm\asm::asm_getxanim(var_1, var_4);
+  thread cleanuptransitiontocoverhide(var_1);
+  var_7 = var_3.finalangles;
+  var_8 = var_3.startpos;
+  var_9 = angleclamp180(var_7 - var_3.angledelta);
   self.keepclaimednodeifvalid = 1;
   self animmode("zonly_physics", 0);
   self orientmode("face angle", self.angles[1]);
-  scripts\asm\asm::asm_playfacialanim(var0, var1, var6);
-  self aisetanim(var1, var3.stopanim, self.animplaybackrate);
-  var10 = int(1000 * getanimlength(var6) - 200);
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_6);
+  self aisetanim(var_1, var_3.stopanim, self.animplaybackrate);
+  var_10 = int(1000 * getanimlength(var_6) - 200);
   self startcoverarrival();
-  self motionwarpwithanim(var8, (0, var9, 0), var5.origin, (0, var7, 0), var10);
-  scripts\asm\asm::asm_donotetracks(var0, var1);
+  self motionwarpwithanim(var_8, (0, var_9, 0), var_5.origin, (0, var_7, 0), var_10);
+  scripts\asm\asm::asm_donotetracks(var_0, var_1);
   self.a.movement = "stop";
   return;
 }
 
-function chooseanim_tocoverhide(var0, var1, var2) {
-  var3 = getstopdatafortransition(var0, var1, &chooseanim_tocoverhide_helper);
-  return var3;
+function chooseanim_tocoverhide(var_0, var_1, var_2) {
+  var_3 = getstopdatafortransition(var_0, var_1, &chooseanim_tocoverhide_helper);
+  return var_3;
 }
 
-function cleanup_transitiontocoverhide(var0, var1, var2) {
+function cleanup_transitiontocoverhide(var_0, var_1, var_2) {
   self motionwarpcancel();
 }
 
-function calcanimstartpos(var0, var1, var2, var3) {
-  var4 = var1 - var3;
-  var5 = (0, var4, 0);
-  var6 = rotatevector(var2, var5);
-  return var0 - var6;
+function calcanimstartpos(var_0, var_1, var_2, var_3) {
+  var_4 = var_1 - var_3;
+  var_5 = (0, var_4, 0);
+  var_6 = rotatevector(var_2, var_5);
+  return var_0 - var_6;
 }
 
-function getclosesttocoverhideindex(var0) {
-  var1 = angleclamp180(self.angles[1] - var0);
+function getclosesttocoverhideindex(var_0) {
+  var_1 = angleclamp180(self.angles[1] - var_0);
 
-  if(var1 >= -45 && var1 < 45) {
+  if(var_1 >= -45 && var_1 < 45) {
     return 8;
   }
 
-  if(var1 >= 45 && var1 < 135) {
+  if(var_1 >= 45 && var_1 < 135) {
     return 4;
   }
 
-  if(var1 >= 135 || var1 < -135) {
+  if(var_1 >= 135 || var_1 < -135) {
     return 2;
   }
 
-  if(var1 >= -135 && var1 < -45) {
+  if(var_1 >= -135 && var_1 < -45) {
     return 6;
   }
 }
 
-function chooseanim_tocoverhide_helper(var0, var1, var2, var3) {
-  var4 = isDefined(self.currentpose) && self.currentpose == "crouch";
-  var5 = undefined;
+function chooseanim_tocoverhide_helper(var_0, var_1, var_2, var_3) {
+  var_4 = isDefined(self.currentpose) && self.currentpose == "crouch";
+  var_5 = undefined;
 
-  if(isDefined(var3)) {
-    var6 = getclosesttocoverhideindex(var3[1]);
+  if(isDefined(var_3)) {
+    var_6 = getclosesttocoverhideindex(var_3[1]);
 
-    if(var4) {
-      var7 = var6 + "_crouch";
-      var5 = scripts\asm\asm::asm_lookupanimfromaliasifexists(var1, var7);
+    if(var_4) {
+      var_7 = var_6 + "_crouch";
+      var_5 = scripts\asm\asm::asm_lookupanimfromaliasifexists(var_1, var_7);
     }
 
-    if(!isDefined(var5)) {
-      var7 = "" + var6;
-      var5 = scripts\asm\asm::asm_lookupanimfromaliasifexists(var1, var7);
+    if(!isDefined(var_5)) {
+      var_7 = "" + var_6;
+      var_5 = scripts\asm\asm::asm_lookupanimfromaliasifexists(var_1, var_7);
     }
   }
 
-  if(!isDefined(var5)) {
-    var7 = "trans_to_hide";
+  if(!isDefined(var_5)) {
+    var_7 = "trans_to_hide";
 
-    if(var4 && scripts\asm\asm::asm_hasalias(var1, "trans_to_hide_crouch")) {
-      var7 = "trans_to_hide_crouch";
+    if(var_4 && scripts\asm\asm::asm_hasalias(var_1, "trans_to_hide_crouch")) {
+      var_7 = "trans_to_hide_crouch";
     }
 
-    var5 = scripts\asm\asm::asm_lookupanimfromalias(var1, var7);
+    var_5 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_7);
   }
 
-  return var5;
+  return var_5;
 }
 
-function getstopdatafortransition(var0, var1, var2) {
-  var3 = scripts\asm\asm_bb::bb_getcovernode();
+function getstopdatafortransition(var_0, var_1, var_2) {
+  var_3 = scripts\asm\asm_bb::bb_getcovernode();
 
-  if(!isDefined(var3)) {
+  if(!isDefined(var_3)) {
     if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 4096) {
-      var3 = self.node;
+      var_3 = self.node;
     }
   }
 
-  var4 = undefined;
+  var_4 = undefined;
 
-  if(!isDefined(var3)) {
-    return self[[var2]](var0, var1);
+  if(!isDefined(var_3)) {
+    return self[[var_2]](var_0, var_1);
   }
 
-  var4 = var3.origin;
-  var5 = scripts\asm\shared\utility::nodeshouldfaceangles(var3);
-  var6 = undefined;
-  var7 = undefined;
+  var_4 = var_3.origin;
+  var_5 = scripts\asm\shared\utility::nodeshouldfaceangles(var_3);
+  var_6 = undefined;
+  var_7 = undefined;
 
-  if(var5) {
-    var8 = undefined;
+  if(var_5) {
+    var_8 = undefined;
 
-    if(scripts\engine\utility::isnodecoverleft(var3) && scripts\asm\shared\utility::isarrivaltype(var0, var1, undefined, "Cover Left Crouch") || scripts\engine\utility::isnodecoverright(var3) && scripts\asm\shared\utility::isarrivaltype(var0, var1, undefined, "Cover Right Crouch")) {
-      var8 = "crouch";
+    if(scripts\engine\utility::isnodecoverleft(var_3) && scripts\asm\shared\utility::isarrivaltype(var_0, var_1, undefined, "Cover Left Crouch") || scripts\engine\utility::isnodecoverright(var_3) && scripts\asm\shared\utility::isarrivaltype(var_0, var_1, undefined, "Cover Right Crouch")) {
+      var_8 = "crouch";
     }
 
-    var6 = scripts\asm\shared\utility::getnodeforwardyaw(var3, var8);
-    var7 = var3.angles;
+    var_6 = scripts\asm\shared\utility::getnodeforwardyaw(var_3, var_8);
+    var_7 = var_3.angles;
   }
 
-  var9 = self[[var2]](var0, var1, undefined, var7);
-  var10 = spawnStruct();
-  var11 = scripts\asm\asm::asm_getxanim(var1, var9);
-  var10.stopanim = var9;
-  var10.node = var3;
-  var10.movedelta = getmovedelta(var11, 0, 1);
-  var10.angledelta = getangledelta(var11, 0, 1);
-  var10.startpos = calcanimstartpos(var4, var6, var10.movedelta, var10.angledelta);
-  var10.angles = var7;
-  var10.finalangles = var6;
-  return var10;
+  var_9 = self[[var_2]](var_0, var_1, undefined, var_7);
+  var_10 = spawnStruct();
+  var_11 = scripts\asm\asm::asm_getxanim(var_1, var_9);
+  var_10.stopanim = var_9;
+  var_10.node = var_3;
+  var_10.movedelta = getmovedelta(var_11, 0, 1);
+  var_10.angledelta = getangledelta(var_11, 0, 1);
+  var_10.startpos = calcanimstartpos(var_4, var_6, var_10.movedelta, var_10.angledelta);
+  var_10.angles = var_7;
+  var_10.finalangles = var_6;
+  return var_10;
 }
 
-function ishighnode(var0) {
-  if(!isDefined(var0)) {
+function ishighnode(var_0) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
-  if(var0 scripts\engine\utility::isvalidpeekoutdir("over")) {
+  if(var_0 scripts\engine\utility::isvalidpeekoutdir("over")) {
     return false;
   }
 
   return true;
 }
 
-function choosecoverstandlookorpeekanim(var0, var1, var2) {
-  var3 = var2;
+function choosecoverstandlookorpeekanim(var_0, var_1, var_2) {
+  var_3 = var_2;
 
   if(ishighnode(self.node)) {
-    var3 += "_high";
+    var_3 += "_high";
   }
 
-  var4 = scripts\asm\asm::asm_lookupanimfromalias(var1, var3);
-  return var4;
+  var_4 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
+  return var_4;
 }
 
-function playcoveranim(var0, var1, var2) {
-  self endon(var1 + "_finished");
+function playcoveranim(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
   self.keepclaimednodeifvalid = 1;
-  childthread scripts\asm\shared\utility::setuseanimgoalweight(var1, 0.2);
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  var4 = scripts\asm\asm::asm_getxanim(var1, var3);
+  childthread scripts\asm\shared\utility::setuseanimgoalweight(var_1, 0.2);
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, var_3);
   self orientmode("face current");
-  var5 = scripts\asm\asm_bb::bb_getcovernode();
+  var_5 = scripts\asm\asm_bb::bb_getcovernode();
 
-  if(isDefined(var2)) {
-    if(isarray(var2)) {
-      foreach(var7 in var2) {
-        playcoveraniminternal(var1, var5, var4, var7);
+  if(isDefined(var_2)) {
+    if(isarray(var_2)) {
+      foreach(var_7 in var_2) {
+        playcoveraniminternal(var_1, var_5, var_4, var_7);
       }
     } else {
-      playcoveraniminternal(var1, var5, var4, var2);
+      playcoveraniminternal(var_1, var_5, var_4, var_2);
     }
   }
 
-  if(scripts\asm\asm::asm_currentstatehasflag(var0, "notetrackAim")) {
-    var9 = getangledelta(var4, 0, 1);
-    self.stepoutyaw = self.angles[1] + var9;
+  if(scripts\asm\asm::asm_currentstatehasflag(var_0, "notetrackAim")) {
+    var_9 = getangledelta(var_4, 0, 1);
+    self.stepoutyaw = self.angles[1] + var_9;
   }
 
-  self aisetanim(var1, var3);
-  scripts\asm\asm::asm_playfacialanim(var0, var1, var4);
+  self aisetanim(var_1, var_3);
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_4);
 
   if(!isagent(self)) {
-    var10 = scripts\asm\asm::asm_lookupanimfromaliasifexists(var1, "conceal_add");
-    var5 = scripts\asm\asm_bb::bb_getcovernode();
+    var_10 = scripts\asm\asm::asm_lookupanimfromaliasifexists(var_1, "conceal_add");
+    var_5 = scripts\asm\asm_bb::bb_getcovernode();
 
-    if(isDefined(var10) && isDefined(var5) && (var5.type == "Conceal Crouch" || var5.type == "Conceal Stand")) {
-      var11 = scripts\asm\asm::asm_getxanim(var1, var10);
-      var12 = getanimlength(var4);
-      thread start_conceal_add(var1, var11, var12 * 0.3);
+    if(isDefined(var_10) && isDefined(var_5) && (var_5.type == "Conceal Crouch" || var_5.type == "Conceal Stand")) {
+      var_11 = scripts\asm\asm::asm_getxanim(var_1, var_10);
+      var_12 = getanimlength(var_4);
+      thread start_conceal_add(var_1, var_11, var_12 * 0.3);
     }
   }
 
-  scripts\asm\asm::asm_donotetracks(var0, var1, scripts\asm\asm::asm_getnotehandler(var0, var1));
+  scripts\asm\asm::asm_donotetracks(var_0, var_1, scripts\asm\asm::asm_getnotehandler(var_0, var_1));
   self orientmode("face current");
 }
 
-function start_conceal_add(var0, var1, var2) {
-  self endon(var0 + "_finished");
-  var2 = max(var2, 0.05);
-  wait var2;
-  self setanim(var1, 1, 0.4, 1, 1);
-  thread conceal_add_cleanup(var0);
+function start_conceal_add(var_0, var_1, var_2) {
+  self endon(var_0 + "_finished");
+  var_2 = max(var_2, 0.05);
+  wait var_2;
+  self setanim(var_1, 1, 0.4, 1, 1);
+  thread conceal_add_cleanup(var_0);
 }
 
-function playexposedcoveranim(var0, var1, var2) {
-  playcoveranimloop(var0, var1, var2);
+function playexposedcoveranim(var_0, var_1, var_2) {
+  playcoveranimloop(var_0, var_1, var_2);
 }
 
-function transitionedfromrun(var0) {
-  var1 = self asmgetstatetransitioningfrom(var0);
+function transitionedfromrun(var_0) {
+  var_1 = self asmgetstatetransitioningfrom(var_0);
 
-  if(isDefined(var1)) {
-    if(var1 == "stand_run_loop") {
+  if(isDefined(var_1)) {
+    if(var_1 == "stand_run_loop") {
       return true;
-    } else if(scripts\engine\utility::actor_is3d() && var1 == "stand_run_strafe_loop") {
+    } else if(scripts\engine\utility::actor_is3d() && var_1 == "stand_run_strafe_loop") {
       return true;
     }
   }
@@ -379,257 +379,257 @@ function transitionedfromrun(var0) {
   return false;
 }
 
-function playcoveranimloop3d(var0, var1, var2) {
+function playcoveranimloop3d(var_0, var_1, var_2) {
   if(!isDefined(self.asm.lastcovernode)) {
-    var3 = [scripts\asm\asm_bb::bb_getcovernode(), self.node];
+    var_3 = [scripts\asm\asm_bb::bb_getcovernode(), self.node];
 
-    for(var4 = 0; !isDefined(self.asm.lastcovernode) && var4 < var3.size; var4++) {
-      if(isDefined(var3[var4]) && distancesquared(self.origin, var3[var4].origin) < 256) {
-        self.asm.lastcovernode = var3[var4];
+    for(var_4 = 0; !isDefined(self.asm.lastcovernode) && var_4 < var_3.size; var_4++) {
+      if(isDefined(var_3[var_4]) && distancesquared(self.origin, var_3[var_4].origin) < 256) {
+        self.asm.lastcovernode = var_3[var_4];
       }
     }
   }
 
-  playcoveranimloop(var0, var1, 0.2, var2);
+  playcoveranimloop(var_0, var_1, 0.2, var_2);
 }
 
-function playcoveranimloop(var0, var1, var2) {
+function playcoveranimloop(var_0, var_1, var_2) {
   self.keepclaimednodeifvalid = 1;
 
-  if(isDefined(var2)) {
-    if(var2 == "stickToNode") {
-      var3 = scripts\asm\asm_bb::bb_getcovernode();
+  if(isDefined(var_2)) {
+    if(var_2 == "stickToNode") {
+      var_3 = scripts\asm\asm_bb::bb_getcovernode();
 
-      if(isDefined(var3)) {
-        if(distancesquared(var3.origin, self.origin) < 16) {
-          self safeteleport(var3.origin);
+      if(isDefined(var_3)) {
+        if(distancesquared(var_3.origin, self.origin) < 16) {
+          self safeteleport(var_3.origin);
         } else {
-          thread lerpto(var3, 4, var1 + "_finished");
+          thread lerpto(var_3, 4, var_1 + "_finished");
         }
       }
 
       self.keepclaimednodeifvalid = 0;
 
-      if(transitionedfromrun(var0)) {
-        childthread scripts\asm\shared\utility::setuseanimgoalweight(var1, 0.2);
+      if(transitionedfromrun(var_0)) {
+        childthread scripts\asm\shared\utility::setuseanimgoalweight(var_1, 0.2);
       }
     }
   }
 
   if(!isagent(self)) {
-    var4 = archetypegetalias(self.asm.archetype, var1, "conceal_add", 0);
-    var3 = scripts\asm\asm_bb::bb_getcovernode();
+    var_4 = archetypegetalias(self.asm.archetype, var_1, "conceal_add", 0);
+    var_3 = scripts\asm\asm_bb::bb_getcovernode();
 
-    if(isDefined(var4) && isDefined(var3) && (var3.type == "Conceal Crouch" || var3.type == "Conceal Stand")) {
-      self setanim(var4.anims, 1, 0.2, 1, 1);
-      thread conceal_add_cleanup(var1);
+    if(isDefined(var_4) && isDefined(var_3) && (var_3.type == "Conceal Crouch" || var_3.type == "Conceal Stand")) {
+      self setanim(var_4.anims, 1, 0.2, 1, 1);
+      thread conceal_add_cleanup(var_1);
     }
   }
 
-  scripts\asm\asm::asm_loopanimstate(var0, var1, 1);
+  scripts\asm\asm::asm_loopanimstate(var_0, var_1, 1);
 }
 
-function conceal_add_cleanup(var0) {
+function conceal_add_cleanup(var_0) {
   self endon("death");
   self endon("entitydeleted");
   self notify("conceal_add_cleanup");
   self endon("conceal_add_cleanup");
-  self waittill(var0 + "_finished");
-  var1 = archetypegetalias(self.asm.archetype, "knobs", "conceal_add", 0);
-  self clearanim(var1.anims, 0.4);
+  self waittill(var_0 + "_finished");
+  var_1 = archetypegetalias(self.asm.archetype, "knobs", "conceal_add", 0);
+  self clearanim(var_1.anims, 0.4);
 }
 
-function lerpto(var0, var1, var2) {
-  self endon(var2);
+function lerpto(var_0, var_1, var_2) {
+  self endon(var_2);
 
   for(;;) {
-    var3 = var0.origin - self.origin;
-    var4 = length(var3);
+    var_3 = var_0.origin - self.origin;
+    var_4 = length(var_3);
 
-    if(var4 < var1) {
-      self safeteleport(var0.origin);
+    if(var_4 < var_1) {
+      self safeteleport(var_0.origin);
       break;
     }
 
-    var3 /= var4;
-    var5 = self.origin + var3 * var1;
-    self safeteleport(var5);
+    var_3 /= var_4;
+    var_5 = self.origin + var_3 * var_1;
+    self safeteleport(var_5);
     wait 0.05;
   }
 }
 
-function clearcoveranim(var0, var1, var2) {
+function clearcoveranim(var_0, var_1, var_2) {
   self.keepclaimednodeifvalid = 0;
   self.stepoutyaw = undefined;
 }
 
-function terminatecoverreload(var0, var1, var2) {
+function terminatecoverreload(var_0, var_1, var_2) {
   scripts\asm\asm::asm_fireephemeralevent("reload", "end");
-  clearcoveranim(var0, var1, var2);
-  scripts\asm\soldier\script_funcs::reload_cleanup(var0, var1, var2);
+  clearcoveranim(var_0, var_1, var_2);
+  scripts\asm\soldier\script_funcs::reload_cleanup(var_0, var_1, var_2);
 }
 
-function playcoveranim_droprpg(var0, var1, var2) {
+function playcoveranim_droprpg(var_0, var_1, var_2) {
   self.keepclaimednodeifvalid = 1;
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  var4 = scripts\asm\asm::asm_getxanim(var1, var3);
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, var_3);
   self orientmode("face current");
-  self aisetanim(var1, var3);
-  scripts\asm\asm::asm_playfacialanim(var0, var1, var4);
-  scripts\asm\asm::asm_donotetracks(var0, var1, scripts\asm\asm::asm_getnotehandler(var0, var1));
+  self aisetanim(var_1, var_3);
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_4);
+  scripts\asm\asm::asm_donotetracks(var_0, var_1, scripts\asm\asm::asm_getnotehandler(var_0, var_1));
 }
 
-function playshuffleloop(var0, var1, var2) {
-  var3 = [];
+function playshuffleloop(var_0, var_1, var_2) {
+  var_3 = [];
   GscBinSkip0(0x2e, "crouch_shuffle_right", -90);
 }
 
-function shouldplayshuffleenter(var0, var1, var2, var3) {
-  var4 = scripts\asm\asm::asm_getrandomanim(var0, var2);
-  var5 = scripts\asm\asm::asm_getxanim(var2, var4);
-  var6 = getmovedelta(var5);
-  var7 = lengthsquared(var6);
-  var8 = distancesquared(self.origin, self._blackboard.shufflenode.origin);
-  return var7 <= var8 + 1;
+function shouldplayshuffleenter(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\asm\asm::asm_getrandomanim(var_0, var_2);
+  var_5 = scripts\asm\asm::asm_getxanim(var_2, var_4);
+  var_6 = getmovedelta(var_5);
+  var_7 = lengthsquared(var_6);
+  var_8 = distancesquared(self.origin, self._blackboard.shufflenode.origin);
+  return var_7 <= var_8 + 1;
 }
 
-function abortshufflecleanup(var0, var1, var2) {
+function abortshufflecleanup(var_0, var_1, var_2) {
   self._blackboard.shufflenode = undefined;
 }
 
-function shouldbeginshuffleexit(var0, var1, var2, var3) {
-  var4 = self.prevcovernode;
+function shouldbeginshuffleexit(var_0, var_1, var_2, var_3) {
+  var_4 = self.prevcovernode;
 
-  if(!isDefined(var4)) {
-    var4 = self.covernode;
+  if(!isDefined(var_4)) {
+    var_4 = self.covernode;
   }
 
-  var5 = self._blackboard.shufflenode.type;
+  var_5 = self._blackboard.shufflenode.type;
 
-  if(isDefined(var5) && (var5 == "Cover Crouch" || var5 == "Cover Crouch Window" || var5 == "Conceal Crouch")) {
-    var6 = getDvar("scr_ai_cover_crouch_type");
+  if(isDefined(var_5) && (var_5 == "Cover Crouch" || var_5 == "Cover Crouch Window" || var_5 == "Conceal Crouch")) {
+    var_6 = getDvar("scr_ai_cover_crouch_type");
 
     if(isDefined(self.node.covercrouchtype)) {
-      var5 = self.node.covercrouchtype;
-    } else if(var6 != "") {
-      var5 = var6;
+      var_5 = self.node.covercrouchtype;
+    } else if(var_6 != "") {
+      var_5 = var_6;
     }
   }
 
-  if(isDefined(var3) && var5 != var3) {
+  if(isDefined(var_3) && var_5 != var_3) {
     return false;
   }
 
-  var7 = scripts\asm\asm::asm_getrandomanim(var0, var1);
-  var8 = scripts\asm\asm::asm_getxanim(var1, var7);
-  var9 = self._blackboard.shufflenode.origin - self.origin;
-  var10 = vectorNormalize(var9);
-  var11 = getmovedelta(var8, 0, 1);
-  var12 = length(var11);
-  var13 = self._blackboard.shufflenode.origin - var10 * var12;
-  var9 = var13 - self.origin;
-  var14 = self._blackboard.shufflenode.origin - var4.origin;
-  var14 = (var14[0], var14[1], 0);
+  var_7 = scripts\asm\asm::asm_getrandomanim(var_0, var_1);
+  var_8 = scripts\asm\asm::asm_getxanim(var_1, var_7);
+  var_9 = self._blackboard.shufflenode.origin - self.origin;
+  var_10 = vectorNormalize(var_9);
+  var_11 = getmovedelta(var_8, 0, 1);
+  var_12 = length(var_11);
+  var_13 = self._blackboard.shufflenode.origin - var_10 * var_12;
+  var_9 = var_13 - self.origin;
+  var_14 = self._blackboard.shufflenode.origin - var_4.origin;
+  var_14 = (var_14[0], var_14[1], 0);
 
-  if(vectordot(var14, var9) <= 0) {
+  if(vectordot(var_14, var_9) <= 0) {
     return true;
   }
 
-  if(vectordot(var10, self.velocity) <= 0) {
+  if(vectordot(var_10, self.velocity) <= 0) {
     return true;
   }
 
   return false;
 }
 
-function playshuffleanim_arrival(var0, var1, var2) {
-  self.a.arrivalasmstatename = var1;
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  var4 = scripts\asm\asm::asm_getxanim(var1, var3);
-  self aisetanim(var1, var3);
-  scripts\asm\asm::asm_playfacialanim(var0, var1, var4);
-  var5 = getmovedelta(var4);
-  var6 = getangledelta3d(var4);
+function playshuffleanim_arrival(var_0, var_1, var_2) {
+  self.a.arrivalasmstatename = var_1;
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, var_3);
+  self aisetanim(var_1, var_3);
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_4);
+  var_5 = getmovedelta(var_4);
+  var_6 = getangledelta3d(var_4);
 
   if(isDefined(self._blackboard.shufflenode)) {
-    var7 = self._blackboard.shufflenode;
+    var_7 = self._blackboard.shufflenode;
   } else {
-    var7 = self.node;
+    var_7 = self.node;
   }
 
-  if(isDefined(var7)) {
-    var8 = var7.origin;
-    var9 = (0, scripts\asm\shared\utility::getnodeforwardyaw(var7), 0);
-    var10 = combineangles(var9, invertangles(var7));
-    var11 = var7.origin - rotatevector(var6, var10);
+  if(isDefined(var_7)) {
+    var_8 = var_7.origin;
+    var_9 = (0, scripts\asm\shared\utility::getnodeforwardyaw(var_7), 0);
+    var_10 = combineangles(var_9, invertangles(var_7));
+    var_11 = var_7.origin - rotatevector(var_6, var_10);
   } else {
-    var8 = self.origin + var9;
-    var9 = combineangles(self.angles, var10);
-    var11 = self.origin;
-    var10 = self.angles;
+    var_8 = self.origin + var_9;
+    var_9 = combineangles(self.angles, var_10);
+    var_11 = self.origin;
+    var_10 = self.angles;
   }
 
-  var12 = int(1000 * getanimlength(var8) - 200);
+  var_12 = int(1000 * getanimlength(var_8) - 200);
   self startcoverarrival();
-  self motionwarpwithanim(var11, var10, var8, var9, var12);
-  scripts\asm\asm::asm_donotetracks(var5, var6);
+  self motionwarpwithanim(var_11, var_10, var_8, var_9, var_12);
+  scripts\asm\asm::asm_donotetracks(var_5, var_6);
 }
 
-function playshuffleanim_terminate(var0, var1, var2) {
+function playshuffleanim_terminate(var_0, var_1, var_2) {
   self._blackboard.shufflenode = undefined;
   self._blackboard.shufflefromnode = undefined;
   self finishcoverarrival();
 }
 
-function coverreloadnotetrackhandler(var0) {
-  scripts\anim\notetracks::notetrack_prefix_handler(var0);
+function coverreloadnotetrackhandler(var_0) {
+  scripts\anim\notetracks::notetrack_prefix_handler(var_0);
   return undefined;
 }
 
-function coverreload(var0, var1, var2) {
-  playcoveranim(var0, var1, var2);
+function coverreload(var_0, var_1, var_2) {
+  playcoveranim(var_0, var_1, var_2);
 }
 
-function cover3dpickexposedir(var0, var1, var2, var3) {
+function cover3dpickexposedir(var_0, var_1, var_2, var_3) {
   self.bt.cover.cover3dexposedirpicked = undefined;
-  var4 = (self.enemy.origin + scripts\anim\utility_common::getenemyeyepos()) / 2;
-  var5 = anim.asm[var0].states[var2];
-  var6 = scripts\engine\utility::array_randomize(var5.transitions);
-  var7 = undefined;
+  var_4 = (self.enemy.origin + scripts\anim\utility_common::getenemyeyepos()) / 2;
+  var_5 = anim.asm[var_0].states[var_2];
+  var_6 = scripts\engine\utility::array_randomize(var_5.transitions);
+  var_7 = undefined;
 
-  foreach(var9 in var6) {
-    var7 = var9.shouldtransitionparams;
+  foreach(var_9 in var_6) {
+    var_7 = var_9.shouldtransitionparams;
 
-    if(var7 == "up") {
+    if(var_7 == "up") {
       break;
     }
 
-    var10 = scripts\anim\utility_common::getcover3dnodeoffset(self.node, var7);
-    var11 = self.node.origin + var10;
+    var_10 = scripts\anim\utility_common::getcover3dnodeoffset(self.node, var_7);
+    var_11 = self.node.origin + var_10;
 
-    if(sighttracepassed(var11, var4, 0, undefined)) {
+    if(sighttracepassed(var_11, var_4, 0, undefined)) {
       break;
     }
   }
 
-  self.bt.cover.cover3dexposedirpicked = var0 + "_" + var2 + "_" + var7;
+  self.bt.cover.cover3dexposedirpicked = var_0 + "_" + var_2 + "_" + var_7;
   return true;
 }
 
-function cover3dcanexposedir(var0, var1, var2, var3) {
-  var4 = var0 + "_" + var1 + "_" + var3;
-  return var4 == self.bt.cover.cover3dexposedirpicked;
+function cover3dcanexposedir(var_0, var_1, var_2, var_3) {
+  var_4 = var_0 + "_" + var_1 + "_" + var_3;
+  return var_4 == self.bt.cover.cover3dexposedirpicked;
 }
 
-function iscovernodetype(var0, var1, var2, var3) {
-  if(!isDefined(var3) || !isDefined(self.node) || !isDefined(self.node.type)) {
+function iscovernodetype(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_3) || !isDefined(self.node) || !isDefined(self.node.type)) {
     return false;
   }
 
-  return self.node.type == var3;
+  return self.node.type == var_3;
 }
 
-function iscovermultiswitchrequested(var0, var1, var2, var3) {
+function iscovermultiswitchrequested(var_0, var_1, var_2, var_3) {
   if(scripts\asm\asm_bb::bb_iscovermultiswitchrequested()) {
     return true;
   }
@@ -637,31 +637,31 @@ function iscovermultiswitchrequested(var0, var1, var2, var3) {
   return false;
 }
 
-function checkcovermultichangerequest(var0, var1, var2, var3) {
+function checkcovermultichangerequest(var_0, var_1, var_2, var_3) {
   if(!scripts\asm\asm_bb::bb_iscovermultiswitchrequested()) {
     return false;
   }
 
-  var4 = scripts\asm\asm_bb::bb_getcovernode();
-  var5 = scripts\asm\asm_bb::bb_getrequestedcovermultiswitchnodetype();
-  var6 = var5[0];
-  var7 = var5[1];
-  var5 = undefined;
+  var_4 = scripts\asm\asm_bb::bb_getcovernode();
+  var_5 = scripts\asm\asm_bb::bb_getrequestedcovermultiswitchnodetype();
+  var_6 = var_5[0];
+  var_7 = var_5[1];
+  var_5 = undefined;
 
-  if(var7 != var3) {
+  if(var_7 != var_3) {
     return false;
   }
 
   self.asm.covermultiswitchdata = spawnStruct();
-  self.asm.covermultiswitchdata.requestednode = var6;
-  self.asm.covermultiswitchdata.requestednodetype = var7;
+  self.asm.covermultiswitchdata.requestednode = var_6;
+  self.asm.covermultiswitchdata.requestednodetype = var_7;
   return true;
 }
 
-function finishcovermultichangerequest(var0, var1, var2) {
-  var3 = self.asm.covermultiswitchdata.requestednode;
-  var4 = self.asm.covermultiswitchdata.requestednodetype;
-  self.asm.covermultiswitchdata.requestednode setcovermultinodetype(var4);
+function finishcovermultichangerequest(var_0, var_1, var_2) {
+  var_3 = self.asm.covermultiswitchdata.requestednode;
+  var_4 = self.asm.covermultiswitchdata.requestednodetype;
+  self.asm.covermultiswitchdata.requestednode setcovermultinodetype(var_4);
   self.asm.covermultiswitchdata = undefined;
-  clearcoveranim(var0, var1, var2);
+  clearcoveranim(var_0, var_1, var_2);
 }

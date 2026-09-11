@@ -34,11 +34,11 @@ function init() {
   level.lowertextfontsize = 1.6;
 }
 
-function fontpulseinit(var0) {
+function fontpulseinit(var_0) {
   self.basefontscale = self.fontscale;
 
-  if(isDefined(var0)) {
-    self.maxfontscale = min(var0, 6.3);
+  if(isDefined(var_0)) {
+    self.maxfontscale = min(var_0, 6.3);
   } else {
     self.maxfontscale = min(self.fontscale * 2, 6.3);
   }
@@ -47,13 +47,13 @@ function fontpulseinit(var0) {
   self.outframes = 4;
 }
 
-function fontpulse(var0) {
+function fontpulse(var_0) {
   self notify("fontPulse");
   self endon("fontPulse");
   self endon("death");
-  var0 endon("disconnect");
-  var0 endon("joined_team");
-  var0 endon("joined_spectators");
+  var_0 endon("disconnect");
+  var_0 endon("joined_team");
+  var_0 endon("joined_spectators");
   self changefontscaleovertime(self.inframes * 0.05);
   self.fontscale = self.maxfontscale;
   wait self.inframes * 0.05;

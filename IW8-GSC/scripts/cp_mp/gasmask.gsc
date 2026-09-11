@@ -3,80 +3,80 @@
  * Script: scripts\cp_mp\gasmask.gsc
 ***********************************************/
 
-function init(var0, var1) {
-  var2 = scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "getGameType") && [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getGameType")]]() == "br";
+function init(var_0, var_1) {
+  var_2 = scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "getGameType") && [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getGameType")]]() == "br";
 
-  if(var2) {
-    var3 = removestructfromlevelarray(var1);
+  if(var_2) {
+    var_3 = removestructfromlevelarray(var_1);
   } else {
-    var3 = 180;
+    var_3 = 180;
   }
 
   if(!isDefined(level.plundermusicfourth)) {
-    if(var3) {
+    if(var_3) {
       level.plundermusicfourth = getdvarfloat("scr_br_gasMask_resist", 0);
     } else {
       level.plundermusicfourth = 0.2;
     }
   }
 
-  self.gasmaskhealth = var3;
-  self.plunderpads = var3;
-  self.plundersilentcountdownendtime = var2;
-  var4 = 2;
+  self.gasmaskhealth = var_3;
+  self.plunderpads = var_3;
+  self.plundersilentcountdownendtime = var_2;
+  var_4 = 2;
 
-  if(unlocked_escape_door(var2)) {
-    var4 = 3;
+  if(unlocked_escape_door(var_2)) {
+    var_4 = 3;
   }
 
-  if(isDefined(var1)) {
-    self.gasmaskhealth = var1;
+  if(isDefined(var_1)) {
+    self.gasmaskhealth = var_1;
   }
 
-  if(var3) {
+  if(var_3) {
     level.plunderonfirstpickup = self.gasmaskhealth / 6;
   }
 
-  level.plunderpads = var3;
-  self setclientomnvar("ui_head_equip_class", var4);
-  self setclientomnvar("ui_gasmask_damage", self.gasmaskhealth / var3);
+  level.plunderpads = var_3;
+  self setclientomnvar("ui_head_equip_class", var_4);
+  self setclientomnvar("ui_gasmask_damage", self.gasmaskhealth / var_3);
 }
 
-function unlocked_escape_door(var0) {
-  return isDefined(var0) && var0 == "brloot_equip_gasmask_durable";
+function unlocked_escape_door(var_0) {
+  return isDefined(var_0) && var_0 == "brloot_equip_gasmask_durable";
 }
 
-function removestructfromlevelarray(var0) {
-  if(unlocked_escape_door(var0)) {
+function removestructfromlevelarray(var_0) {
+  if(unlocked_escape_door(var_0)) {
     return level.br_pickups.counts["brloot_equip_gasmask_durable"];
   }
 
   return level.br_pickups.counts["brloot_equip_gasmask"];
 }
 
-function respawnplayers(var0) {
-  return floor(var0 * 6 + 0.5);
+function respawnplayers(var_0) {
+  return floor(var_0 * 6 + 0.5);
 }
 
-function processdamage(var0) {
-  var1 = scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "getGameType") && [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getGameType")]]() == "br";
-  var2 = self.gasmaskhealth / self.plunderpads;
-  self.gasmaskhealth -= var0;
+function processdamage(var_0) {
+  var_1 = scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "getGameType") && [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getGameType")]]() == "br";
+  var_2 = self.gasmaskhealth / self.plunderpads;
+  self.gasmaskhealth -= var_0;
   self.gasmaskhealth = max(0, self.gasmaskhealth);
-  var3 = self.gasmaskhealth / self.plunderpads;
-  self setclientomnvar("ui_gasmask_damage", var3);
+  var_3 = self.gasmaskhealth / self.plunderpads;
+  self setclientomnvar("ui_gasmask_damage", var_3);
 
   if(self.gasmaskhealth <= 0) {
-    if(var1 && scripts\cp_mp\utility\script_utility::issharedfuncdefined("gasmask", "breakGasMaskBR")) {
+    if(var_1 && scripts\cp_mp\utility\script_utility::issharedfuncdefined("gasmask", "breakGasMaskBR")) {
       self[[scripts\cp_mp\utility\script_utility::getsharedfunc("gasmask", "breakGasMaskBR")]]();
     } else {
       breakgasmask();
     }
-  } else if(var1) {
-    var4 = respawnplayers(var2);
-    var5 = respawnplayers(var3);
+  } else if(var_1) {
+    var_4 = respawnplayers(var_2);
+    var_5 = respawnplayers(var_3);
 
-    if(var4 > var5) {
+    if(var_4 > var_5) {
       self playsoundtoplayer("br_gas_mask_crack_plr", self);
     }
   }
@@ -85,20 +85,20 @@ function processdamage(var0) {
     self.gasdamagebuffer = 0;
   }
 
-  self.gasdamagebuffer += var0 * level.plundermusicfourth;
-  var6 = floor(self.gasdamagebuffer);
+  self.gasdamagebuffer += var_0 * level.plundermusicfourth;
+  var_6 = floor(self.gasdamagebuffer);
 
-  if(var6 >= 1) {
-    self dodamage(var6, self.origin, self, undefined, "MOD_TRIGGER_HURT");
-    self.gasdamagebuffer -= var6;
+  if(var_6 >= 1) {
+    self dodamage(var_6, self.origin, self, undefined, "MOD_TRIGGER_HURT");
+    self.gasdamagebuffer -= var_6;
     return;
   }
 }
 
-function lights_setup_plane(var0, var1) {
-  var2 = scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "getGameType") && [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getGameType")]]() == "br";
+function lights_setup_plane(var_0, var_1) {
+  var_2 = scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "getGameType") && [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getGameType")]]() == "br";
 
-  if(!var2) {
+  if(!var_2) {
     return false;
   }
 
@@ -106,20 +106,20 @@ function lights_setup_plane(var0, var1) {
     self.plunderpads = removestructfromlevelarray(self.plundersilentcountdownendtime);
   }
 
-  var3 = var0 / self.plunderpads;
-  var4 = var1 / self.plunderpads;
-  var5 = respawnplayers(var3);
-  var6 = respawnplayers(var4);
-  return var5 != var6;
+  var_3 = var_0 / self.plunderpads;
+  var_4 = var_1 / self.plunderpads;
+  var_5 = respawnplayers(var_3);
+  var_6 = respawnplayers(var_4);
+  return var_5 != var_6;
 }
 
 function equipgasmask() {
   self endon("death_or_disconnect");
   self playsoundtoplayer("br_gas_mask_on_plr", self);
-  var0 = getcompleteweaponname("none");
-  var1 = self getcurrentweapon();
+  var_0 = getcompleteweaponname("none");
+  var_1 = self getcurrentweapon();
 
-  if(!isnullweapon(var1, var0)) {
+  if(!isnullweapon(var_1, var_0)) {
     self forceplaygestureviewmodel("ges_visor_down");
   }
 
@@ -128,14 +128,14 @@ function equipgasmask() {
   self.gasmaskswapinprogress = 0;
   self.gasmaskequipped = 1;
   scripts\cp_mp\killstreaks\white_phosphorus::enableloopingcoughaudiosupression();
-  var2 = "hat_gasmask";
+  var_2 = "hat_gasmask";
 
   if(scripts\cp_mp\utility\game_utility::ref_140aa()) {
-    var2 = "hat_gasmask_ch3";
+    var_2 = "hat_gasmask_ch3";
   }
 
   if(istrue(self.operatorcustomization.spawn_carriables_from_prefabs_percentage)) {
-    self attach(var2);
+    self attach(var_2);
   }
 
   createoverlay();
@@ -156,10 +156,10 @@ function removegasmask() {
   }
 
   self playsoundtoplayer("br_gas_mask_off_plr", self);
-  var0 = getcompleteweaponname("none");
-  var1 = self getcurrentweapon();
+  var_0 = getcompleteweaponname("none");
+  var_1 = self getcurrentweapon();
 
-  if(!isnullweapon(var1, var0)) {
+  if(!isnullweapon(var_1, var_0)) {
     self forceplaygestureviewmodel("ges_visor_up");
   }
 
@@ -168,14 +168,14 @@ function removegasmask() {
   self.gasmaskswapinprogress = 0;
   self.gasmaskequipped = 0;
   scripts\cp_mp\killstreaks\white_phosphorus::disableloopingcoughaudiosupression();
-  var2 = "hat_gasmask";
+  var_2 = "hat_gasmask";
 
   if(scripts\cp_mp\utility\game_utility::ref_140aa()) {
-    var2 = "hat_gasmask_ch3";
+    var_2 = "hat_gasmask_ch3";
   }
 
   if(istrue(self.operatorcustomization.spawn_carriables_from_prefabs_percentage)) {
-    self detach(var2);
+    self detach(var_2);
   }
 
   destroyoverlay();
@@ -195,14 +195,14 @@ function breakgasmask() {
 
   self.gasmaskequipped = 0;
   self playsoundtoplayer("br_gas_mask_crack_plr", self);
-  var0 = "hat_gasmask";
+  var_0 = "hat_gasmask";
 
   if(scripts\cp_mp\utility\game_utility::ref_140aa()) {
-    var0 = "hat_gasmask_ch3";
+    var_0 = "hat_gasmask_ch3";
   }
 
   if(istrue(self.operatorcustomization.spawn_carriables_from_prefabs_percentage)) {
-    self detach(var0);
+    self detach(var_0);
   }
 
   destroyoverlay();
@@ -218,7 +218,7 @@ function breakgasmask() {
   self setclientomnvar("ui_gasmask_damage", 0);
 }
 
-function createoverlay(var0, var1) {
+function createoverlay(var_0, var_1) {
   self.gasmaskoverlay = newclienthudelem(self);
   self.gasmaskoverlay.x = 0;
   self.gasmaskoverlay.y = 0;
@@ -234,13 +234,13 @@ function createoverlay(var0, var1) {
     if([[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getGameType")]]() == "br") {
       self.gasmaskoverlay.alpha = 0;
 
-      if(isDefined(var0)) {
-        if(isDefined(var1)) {
-          wait var1;
+      if(isDefined(var_0)) {
+        if(isDefined(var_1)) {
+          wait var_1;
         }
 
         if(isDefined(self.gasmaskoverlay)) {
-          self.gasmaskoverlay fadeovertime(var0);
+          self.gasmaskoverlay fadeovertime(var_0);
         }
       }
     }
@@ -260,13 +260,13 @@ function ref_1312f() {
   }
 }
 
-function patch_weapons_on_rack_cleararea(var0) {
+function patch_weapons_on_rack_cleararea(var_0) {
   self.gasmaskoverlay.alpha = 1;
-  self.gasmaskoverlay fadeovertime(var0);
+  self.gasmaskoverlay fadeovertime(var_0);
   self.gasmaskoverlay.alpha = 0;
 }
 
-function destroyoverlay(var0, var1) {
+function destroyoverlay(var_0, var_1) {
   level endon("game_ended");
   self endon("death_or_disconnect");
 
@@ -274,14 +274,14 @@ function destroyoverlay(var0, var1) {
     return;
   }
 
-  if(isDefined(var0)) {
-    if(isDefined(var1)) {
-      wait var1;
+  if(isDefined(var_0)) {
+    if(isDefined(var_1)) {
+      wait var_1;
     }
 
     if(isDefined(self.gasmaskoverlay)) {
-      patch_weapons_on_rack_cleararea(var0);
-      wait var0;
+      patch_weapons_on_rack_cleararea(var_0);
+      wait var_0;
     }
   }
 
@@ -292,6 +292,6 @@ function destroyoverlay(var0, var1) {
   }
 }
 
-function hasgasmask(var0) {
-  return isDefined(var0.gasmaskhealth);
+function hasgasmask(var_0) {
+  return isDefined(var_0.gasmaskhealth);
 }

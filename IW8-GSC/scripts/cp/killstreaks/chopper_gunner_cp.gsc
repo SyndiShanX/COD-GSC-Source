@@ -13,69 +13,69 @@ function init() {
   }
 }
 
-function chopper_gunner_set_vehicle_hit_damage_data(var0, var1) {
-  scripts\cp\vehicles\damage_cp::set_vehicle_hit_damage_data(var0, var1);
+function chopper_gunner_set_vehicle_hit_damage_data(var_0, var_1) {
+  scripts\cp\vehicles\damage_cp::set_vehicle_hit_damage_data(var_0, var_1);
 }
 
-function chopper_gunner_findtargetStruct(var0, var1) {
-  return scripts\cp_mp\killstreaks\chopper_support::choppersupport_findtargetStruct(var0, var1);
+function chopper_gunner_findtargetStruct(var_0, var_1) {
+  return scripts\cp_mp\killstreaks\chopper_support::choppersupport_findtargetStruct(var_0, var_1);
 }
 
 function givephteamscore() {
-  var0 = [];
-  var1 = [];
-  var2 = [];
-  var3 = scripts\cp\cp_agent_utils::getactiveenemyagents("allies");
-  var4 = level.players;
-  var5 = [];
+  var_0 = [];
+  var_1 = [];
+  var_2 = [];
+  var_3 = scripts\cp\cp_agent_utils::getactiveenemyagents("allies");
+  var_4 = level.players;
+  var_5 = [];
 
   if(isDefined(level.vo_paratroopers)) {
-    foreach(var7 in level.vo_paratroopers) {
-      var5 = scripts\engine\utility::array_add(var5, var7);
+    foreach(var_7 in level.vo_paratroopers) {
+      var_5 = scripts\engine\utility::array_add(var_5, var_7);
     }
   }
 
-  var2 = scripts\engine\utility::array_combine(var5, var3, var4);
+  var_2 = scripts\engine\utility::array_combine(var_5, var_3, var_4);
 
-  foreach(var10 in var2) {
-    if(!isDefined(var10.team)) {
+  foreach(var_10 in var_2) {
+    if(!isDefined(var_10.team)) {
       continue;
     }
 
-    if(level.teambased && var10.team == self.team) {
+    if(level.teambased && var_10.team == self.team) {
       continue;
     }
 
-    if(var10 == self.owner) {
+    if(var_10 == self.owner) {
       continue;
     }
 
-    if(var10 scripts\cp\utility::_hasperk("specialty_noscopeoutline")) {
+    if(var_10 scripts\cp\utility::_hasperk("specialty_noscopeoutline")) {
       continue;
     }
 
-    var0 = var10;
+    var_0 = var_10;
   }
 
-  foreach(var13 in var4) {
-    if(level.teambased && var13.team != self.team) {
+  foreach(var_13 in var_4) {
+    if(level.teambased && var_13.team != self.team) {
       continue;
     }
 
-    var1 = var13;
+    var_1 = var_13;
   }
 
-  self.enemytargetmarkergroup = scripts\cp_mp\targetmarkergroups::targetmarkergroup_on("thermalvisionenemydefault", self.owner, var0, self.owner, 0, 1, 1);
-  self.friendlytargetmarkergroup = scripts\cp_mp\targetmarkergroups::targetmarkergroup_on("thermalvisionfriendlydefault", self.owner, var1, self.owner, 1, 1);
+  self.enemytargetmarkergroup = scripts\cp_mp\targetmarkergroups::targetmarkergroup_on("thermalvisionenemydefault", self.owner, var_0, self.owner, 0, 1, 1);
+  self.friendlytargetmarkergroup = scripts\cp_mp\targetmarkergroups::targetmarkergroup_on("thermalvisionfriendlydefault", self.owner, var_1, self.owner, 1, 1);
   thread given_achievement(level, self.enemytargetmarkergroup);
 }
 
-function given_achievement(var0, var1) {
+function given_achievement(var_0, var_1) {
   level endon("game_ended ");
-  level endon("removed_targetMarkerGroup_" + var0);
+  level endon("removed_targetMarkerGroup_" + var_0);
 
   for(;;) {
-    level waittill("spawned_group_soldier", var2);
-    scripts\cp_mp\targetmarkergroups::targetmarkergroup_markentity(var2, var0, var1);
+    level waittill("spawned_group_soldier", var_2);
+    scripts\cp_mp\targetmarkergroups::targetmarkergroup_markentity(var_2, var_0, var_1);
   }
 }

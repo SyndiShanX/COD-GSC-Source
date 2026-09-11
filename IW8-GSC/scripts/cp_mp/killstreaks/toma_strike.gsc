@@ -17,45 +17,45 @@ function init_toma_strike_vo() {
   game["dialog"]["cluster_strike_miss"] = "cluster_strike_miss";
 }
 
-function trytomastriketriggered(var0) {
-  var1 = var0.streakname;
-  var2 = getdvarint("scr_toma_strike_type", 3);
+function trytomastriketriggered(var_0) {
+  var_1 = var_0.streakname;
+  var_2 = getdvarint("scr_toma_strike_type", 3);
   return true;
 }
 
-function weapondetonatedtomastrike(var0, var1, var2) {
+function weapondetonatedtomastrike(var_0, var_1, var_2) {
   level endon("game_ended");
-  var3 = getdvarint("scr_toma_strike_type", 3);
-  thread tomastrike_attacktarget(var2, var3, undefined, var1);
+  var_3 = getdvarint("scr_toma_strike_type", 3);
+  thread tomastrike_attacktarget(var_2, var_3, undefined, var_1);
 }
 
-function weapongiventomastrike(var0) {
+function weapongiventomastrike(var_0) {
   if(isDefined(level.toma_strikes) && level.toma_strikes.size >= 2) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
       [[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/AIR_SPACE_TOO_CROWDED");
     }
 
-    var0 notify("killstreak_finished_with_deploy_weapon");
+    var_0 notify("killstreak_finished_with_deploy_weapon");
     return false;
   }
 
   return true;
 }
 
-function weaponswitchendedtomastrike(var0, var1) {
-  var2 = getdvarint("scr_toma_strike_type", 3);
+function weaponswitchendedtomastrike(var_0, var_1) {
+  var_2 = getdvarint("scr_toma_strike_type", 3);
 
   if(scripts\cp_mp\utility\game_utility::ref_140a9()) {
-    thread scripts\cp_mp\killstreaks\airstrike::airstrike_watchforads(var0);
+    thread scripts\cp_mp\killstreaks\airstrike::airstrike_watchforads(var_0);
     return;
   }
 }
 
-function weaponfiredtomastrike(var0, var1, var2) {
-  if(!isDefined(var0.ref_13a81)) {
-    var3 = tomastrike_getownerlookat(self);
+function weaponfiredtomastrike(var_0, var_1, var_2) {
+  if(!isDefined(var_0.ref_13a81)) {
+    var_3 = tomastrike_getownerlookat(self);
 
-    if(!isDefined(var3)) {
+    if(!isDefined(var_3)) {
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
         [[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/INVALID_POINT");
       }
@@ -82,137 +82,137 @@ function weaponfiredtomastrike(var0, var1, var2) {
     return "continue";
   }
 
-  var4 = undefined;
+  var_4 = undefined;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("sound", "playKillstreakDeployDialog")) {
-    [[scripts\cp_mp\utility\script_utility::getsharedfunc("sound", "playKillstreakDeployDialog")]](self, var0.streakname);
-    var4 = 2;
+    [[scripts\cp_mp\utility\script_utility::getsharedfunc("sound", "playKillstreakDeployDialog")]](self, var_0.streakname);
+    var_4 = 2;
   }
 
-  thread scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("use_" + var0.streakname, 1, var4);
+  thread scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("use_" + var_0.streakname, 1, var_4);
   return "success";
 }
 
 function tryusetomastrike() {
-  var0 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("toma_strike", self);
-  return tryusetomastrikefromstruct(var0);
+  var_0 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("toma_strike", self);
+  return tryusetomastrikefromstruct(var_0);
 }
 
-function tryusetomastrikefromstruct(var0) {
+function tryusetomastrikefromstruct(var_0) {
   level endon("game_ended");
   self endon("disconnect");
 
   if(isDefined(level.killstreaktriggeredfunc)) {
-    if(!level[[level.killstreaktriggeredfunc]](var0)) {
+    if(!level[[level.killstreaktriggeredfunc]](var_0)) {
       return 0;
     }
   }
 
-  var1 = getdvarint("scr_toma_strike_type", 3);
+  var_1 = getdvarint("scr_toma_strike_type", 3);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "getGameType")) {
-    var2 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getGameType")]]();
+    var_2 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getGameType")]]();
 
-    if(var2 == "br") {
-      var1 = 5;
+    if(var_2 == "br") {
+      var_1 = 5;
     }
   }
 
-  if(var1 == 4) {
-    var3 = scripts\mp\killstreaks\throwback_marker::throwbackmarker_trythrowbackmarker(var0, &weapondetonatedtomastrike);
+  if(var_1 == 4) {
+    var_3 = scripts\mp\killstreaks\throwback_marker::throwbackmarker_trythrowbackmarker(var_0, &weapondetonatedtomastrike);
 
-    if(!istrue(var3)) {
+    if(!istrue(var_3)) {
       return 0;
     }
-  } else if(var1 == 5 && isDefined(self.waitandunloadinfils)) {
-    var0.ref_13a81 = self.waitandunloadinfils;
+  } else if(var_1 == 5 && isDefined(self.waitandunloadinfils)) {
+    var_0.ref_13a81 = self.waitandunloadinfils;
     self.waitandunloadinfils = undefined;
-    var4 = weaponfiredtomastrike(var0, undefined, undefined);
+    var_4 = weaponfiredtomastrike(var_0, undefined, undefined);
 
-    if(var4 != "success") {
+    if(var_4 != "success") {
       return 0;
     }
   } else {
     if(scripts\cp_mp\utility\game_utility::ref_140a9()) {
-      var5 = getcompleteweaponname("iw8_spotter_scope_mp_ch3", ["spotterscope"]);
+      var_5 = getcompleteweaponname("iw8_spotter_scope_mp_ch3", ["spotterscope"]);
     } else {
-      var5 = getcompleteweaponname("iw8_green_beam_mp");
+      var_5 = getcompleteweaponname("iw8_green_beam_mp");
     }
 
-    var3 = scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_doweaponfireddeploy(var1, var5, "weapon_fired", &weapongiventomastrike, &weaponswitchendedtomastrike, &weaponfiredtomastrike);
+    var_3 = scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_doweaponfireddeploy(var_1, var_5, "weapon_fired", &weapongiventomastrike, &weaponswitchendedtomastrike, &weaponfiredtomastrike);
 
-    if(!istrue(var3)) {
+    if(!istrue(var_3)) {
       return 0;
     }
   }
 
   if(isDefined(level.killstreakbeginusefunc)) {
-    if(!level[[level.killstreakbeginusefunc]](var1)) {
+    if(!level[[level.killstreakbeginusefunc]](var_1)) {
       return 0;
     }
   }
 
-  if(tomastrike_isremotevehicletype(var5)) {
-    var6 = 1;
+  if(tomastrike_isremotevehicletype(var_5)) {
+    var_6 = 1;
 
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "currentActiveVehicleCount") && scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "maxVehiclesAllowed")) {
-      if([[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "currentActiveVehicleCount")]]() >= [[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "maxVehiclesAllowed")]]() || level.fauxvehiclecount + var6 >= [[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "maxVehiclesAllowed")]]()) {
+      if([[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "currentActiveVehicleCount")]]() >= [[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "maxVehiclesAllowed")]]() || level.fauxvehiclecount + var_6 >= [[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "maxVehiclesAllowed")]]()) {
         self iprintlnbold(&"KILLSTREAKS/TOO_MANY_VEHICLES");
-        var1 notify("killstreak_finished_with_deploy_weapon");
+        var_1 notify("killstreak_finished_with_deploy_weapon");
         return 0;
       }
     }
 
-    var3 = scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_doweapontabletdeploy(var1, &weapongiventomastrike, &weaponswitchendedtomastrike);
+    var_3 = scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_doweapontabletdeploy(var_1, &weapongiventomastrike, &weaponswitchendedtomastrike);
 
-    if(!istrue(var3)) {
+    if(!istrue(var_3)) {
       return 0;
     }
   }
 
-  var7 = undefined;
+  var_7 = undefined;
 
-  if(var5 == 0) {
+  if(var_5 == 0) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("vehicle", "incrementFauxVehicleCount")) {
       [[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle", "incrementFauxVehicleCount")]]();
     }
 
-    var7 = createtomastrikedrone(self, var1);
+    var_7 = createtomastrikedrone(self, var_1);
 
-    if(!isDefined(var7)) {
+    if(!isDefined(var_7)) {
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("vehicle", "decrementFauxVehicleCount")) {
         [[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle", "decrementFauxVehicleCount")]]();
       }
 
       return 0;
     }
-  } else if(var5 == 1) {
+  } else if(var_5 == 1) {
     if(level.toma_cameras.size == 0) {
-      var8 = ["ks_strike_camera_1", "ks_strike_camera_2", "ks_strike_camera_3", "ks_strike_camera_4"];
+      var_8 = ["ks_strike_camera_1", "ks_strike_camera_2", "ks_strike_camera_3", "ks_strike_camera_4"];
 
-      foreach(var10 in var8) {
-        var11 = scripts\engine\utility::getStruct(var10, "targetname");
+      foreach(var_10 in var_8) {
+        var_11 = scripts\engine\utility::getStruct(var_10, "targetname");
 
-        if(!isDefined(var11)) {
-          var1 notify("killstreak_finished_with_deploy_weapon");
+        if(!isDefined(var_11)) {
+          var_1 notify("killstreak_finished_with_deploy_weapon");
           return;
         }
 
-        var12 = spawn("script_model", var11.origin);
-        var12.angles = var11.angles;
-        var12.targetname = var11.targetname;
-        var12 setModel("tag_player");
-        level.toma_cameras[level.toma_cameras.size] = var12;
+        var_12 = spawn("script_model", var_11.origin);
+        var_12.angles = var_11.angles;
+        var_12.targetname = var_11.targetname;
+        var_12 setModel("tag_player");
+        level.toma_cameras[level.toma_cameras.size] = var_12;
       }
     }
-  } else if(var5 == 2) {
+  } else if(var_5 == 2) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("vehicle", "incrementFauxVehicleCount")) {
       [[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle", "incrementFauxVehicleCount")]]();
     }
 
-    var7 = createtomastrikebomber(self, var1);
+    var_7 = createtomastrikebomber(self, var_1);
 
-    if(!isDefined(var7)) {
+    if(!isDefined(var_7)) {
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("vehicle", "decrementFauxVehicleCount")) {
         [[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle", "decrementFauxVehicleCount")]]();
       }
@@ -228,15 +228,15 @@ function tryusetomastrikefromstruct(var0) {
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "logKillstreakEvent")) {
-    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "logKillstreakEvent")]](var1.streakname, self.origin);
+    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "logKillstreakEvent")]](var_1.streakname, self.origin);
   }
 
-  if(var5 != 4) {
-    thread starttomastrike(var5, var7, level.toma_cameras, var1);
+  if(var_5 != 4) {
+    thread starttomastrike(var_5, var_7, level.toma_cameras, var_1);
   }
 
   if(isDefined(level.killstreakfinishusefunc)) {
-    level thread[[level.killstreakfinishusefunc]](var1);
+    level thread[[level.killstreakfinishusefunc]](var_1);
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("toma_strike", "munitionUsed")) {
@@ -246,129 +246,129 @@ function tryusetomastrikefromstruct(var0) {
   return 1;
 }
 
-function ref_13bda(var0, var1, var2) {
-  var3 = spawnStruct();
-  var3.origin = var0;
-  var3.angles = var1;
-  var3.pers = [];
-  var3.team = "neutral";
-  var3.defaultoperatorteam = "neutral";
-  var3.classname = "worldspawn";
+function ref_13bda(var_0, var_1, var_2) {
+  var_3 = spawnStruct();
+  var_3.origin = var_0;
+  var_3.angles = var_1;
+  var_3.pers = [];
+  var_3.team = "neutral";
+  var_3.defaultoperatorteam = "neutral";
+  var_3.classname = "worldspawn";
 
-  if(!isDefined(var2)) {
-    var2 = var3 scripts\cp_mp\utility\killstreak_utility::createstreakinfo("toma_strike", var3);
+  if(!isDefined(var_2)) {
+    var_2 = var_3 scripts\cp_mp\utility\killstreak_utility::createstreakinfo("toma_strike", var_3);
   }
 
-  var2.owner = var3;
-  var2.ref_13a81 = var0;
-  var2.ref_121af = anglesToForward(var1);
-  var2.ref_133dc = 1;
-  thread starttomastrike(var3, 5, undefined, undefined);
+  var_2.owner = var_3;
+  var_2.ref_13a81 = var_0;
+  var_2.ref_121af = anglesToForward(var_1);
+  var_2.ref_133dc = 1;
+  thread starttomastrike(var_3, 5, undefined, undefined);
 }
 
-function createtomastrikedrone(var0, var1) {
-  var2 = scripts\cp_mp\utility\killstreak_utility::removeextracthelipad();
-  var3 = (0, 0, 0);
+function createtomastrikedrone(var_0, var_1) {
+  var_2 = scripts\cp_mp\utility\killstreak_utility::removeextracthelipad();
+  var_3 = (0, 0, 0);
 
-  if(isDefined(var2)) {
-    var3 = (0, 0, var2.origin[2]);
+  if(isDefined(var_2)) {
+    var_3 = (0, 0, var_2.origin[2]);
   } else {
-    var3 = (0, 0, 600);
+    var_3 = (0, 0, 600);
   }
 
-  var3 -= (0, 0, 900);
-  var4 = spawnhelicopter(var0, var0.origin + (0, 0, 1000), var0.angles, "veh_toma_drone_mp", "veh8_mil_air_mquebec8");
+  var_3 -= (0, 0, 900);
+  var_4 = spawnhelicopter(var_0, var_0.origin + (0, 0, 1000), var_0.angles, "veh_toma_drone_mp", "veh8_mil_air_mquebec8");
 
-  if(!isDefined(var4)) {
+  if(!isDefined(var_4)) {
     return;
   }
 
-  var4.speed = 100;
-  var4.accel = 50;
-  var4.health = 9999;
-  var4.maxhealth = 2000;
-  var4.lifetime = 10;
-  var4.team = var0.team;
-  var4.owner = var0;
-  var4.angles = var0.angles;
-  var4.streakinfo = var1;
-  var4.streakname = var1.streakname;
-  var4.currentdamagestate = 0;
-  var4.scorepopup = "destroyed_toma_strike";
-  var4.vodestroyed = "destroyed_toma_strike";
-  var4.votimeout = "timeout_toma_strike";
-  var4.destroyedsplash = "callout_destroyed_toma_strike";
-  var4.currentvisionset = "proto_apache_flir_mp";
-  level.toma_strikes[level.toma_strikes.size] = var4;
+  var_4.speed = 100;
+  var_4.accel = 50;
+  var_4.health = 9999;
+  var_4.maxhealth = 2000;
+  var_4.lifetime = 10;
+  var_4.team = var_0.team;
+  var_4.owner = var_0;
+  var_4.angles = var_0.angles;
+  var_4.streakinfo = var_1;
+  var_4.streakname = var_1.streakname;
+  var_4.currentdamagestate = 0;
+  var_4.scorepopup = "destroyed_toma_strike";
+  var_4.vodestroyed = "destroyed_toma_strike";
+  var_4.votimeout = "timeout_toma_strike";
+  var_4.destroyedsplash = "callout_destroyed_toma_strike";
+  var_4.currentvisionset = "proto_apache_flir_mp";
+  level.toma_strikes[level.toma_strikes.size] = var_4;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "addToActiveKillstreakList")) {
-    var4[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "addToActiveKillstreakList")]](var1.streakname, "Killstreak_Air", var0, 0, 1, 25);
+    var_4[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "addToActiveKillstreakList")]](var_1.streakname, "Killstreak_Air", var_0, 0, 1, 25);
   }
 
-  var4 setmaxpitchroll(15, 15);
-  var4 vehicle_setspeed(var4.speed, var4.accel);
-  var4 sethoverparams(50, 5, 2.5);
-  var4 setturningability(1);
-  var4 setyawspeed(500, 100, 25, 0.5);
-  var4 setotherent(var0);
-  var4 setentityowner(var0);
-  var4 setCanDamage(1);
-  var4 setneargoalnotifydist(100);
-  return var4;
+  var_4 setmaxpitchroll(15, 15);
+  var_4 vehicle_setspeed(var_4.speed, var_4.accel);
+  var_4 sethoverparams(50, 5, 2.5);
+  var_4 setturningability(1);
+  var_4 setyawspeed(500, 100, 25, 0.5);
+  var_4 setotherent(var_0);
+  var_4 setentityowner(var_0);
+  var_4 setCanDamage(1);
+  var_4 setneargoalnotifydist(100);
+  return var_4;
 }
 
-function createtomastrikebomber(var0, var1) {
-  var2 = scripts\cp_mp\utility\killstreak_utility::removeextracthelipad();
-  var3 = (0, 0, 0);
+function createtomastrikebomber(var_0, var_1) {
+  var_2 = scripts\cp_mp\utility\killstreak_utility::removeextracthelipad();
+  var_3 = (0, 0, 0);
 
-  if(isDefined(var2)) {
-    var3 = (0, 0, var2.origin[2] + 8000);
+  if(isDefined(var_2)) {
+    var_3 = (0, 0, var_2.origin[2] + 8000);
   } else {
-    var3 = (0, 0, 5000);
+    var_3 = (0, 0, 5000);
   }
 
-  var3 -= (0, 0, 900);
-  var4 = level.mapcenter - anglesToForward(var0.angles) * 5000 + var3;
-  var5 = level.mapcenter + anglesToForward(var0.angles) * 20000 + var3;
-  var6 = spawn("script_model", var4);
-  var6 setModel("veh8_mil_air_acharlie130");
-  var6.health = 9999;
-  var6.maxhealth = 2000;
-  var6.angles = var0.angles;
-  var6.owner = var0;
-  var6.team = var0.team;
-  var6.streakinfo = var1;
-  var6.streakname = var1.streakname;
-  var6.pathstart = var4;
-  var6.pathgoal = var5;
-  var6.flaresreservecount = 1;
-  var6 setotherent(var0);
-  var6 setentityowner(var0);
-  var6 setCanDamage(1);
-  var6 scriptmoveroutline();
-  var6 scriptmoverthermal();
-  var6.camera = spawn("script_model", var6.origin - (0, 0, 10));
-  var6.camera setModel("tag_player");
-  var6.camera.angles = vectortoangles(level.mapcenter - var6.camera.origin);
-  var6.camera linkTo(var6);
-  var6.cloudsfx = spawn("script_model", var6.camera.origin - (0, 0, 10));
-  var6.cloudsfx setModel("ks_toma_strike_mp");
-  var6.cloudsfx.angles = var6.angles;
-  var6.cloudsfx linkTo(var6.camera);
-  level.toma_strikes[level.toma_strikes.size] = var6;
+  var_3 -= (0, 0, 900);
+  var_4 = level.mapcenter - anglesToForward(var_0.angles) * 5000 + var_3;
+  var_5 = level.mapcenter + anglesToForward(var_0.angles) * 20000 + var_3;
+  var_6 = spawn("script_model", var_4);
+  var_6 setModel("veh8_mil_air_acharlie130");
+  var_6.health = 9999;
+  var_6.maxhealth = 2000;
+  var_6.angles = var_0.angles;
+  var_6.owner = var_0;
+  var_6.team = var_0.team;
+  var_6.streakinfo = var_1;
+  var_6.streakname = var_1.streakname;
+  var_6.pathstart = var_4;
+  var_6.pathgoal = var_5;
+  var_6.flaresreservecount = 1;
+  var_6 setotherent(var_0);
+  var_6 setentityowner(var_0);
+  var_6 setCanDamage(1);
+  var_6 scriptmoveroutline();
+  var_6 scriptmoverthermal();
+  var_6.camera = spawn("script_model", var_6.origin - (0, 0, 10));
+  var_6.camera setModel("tag_player");
+  var_6.camera.angles = vectortoangles(level.mapcenter - var_6.camera.origin);
+  var_6.camera linkTo(var_6);
+  var_6.cloudsfx = spawn("script_model", var_6.camera.origin - (0, 0, 10));
+  var_6.cloudsfx setModel("ks_toma_strike_mp");
+  var_6.cloudsfx.angles = var_6.angles;
+  var_6.cloudsfx linkTo(var_6.camera);
+  level.toma_strikes[level.toma_strikes.size] = var_6;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "addToActiveKillstreakList")) {
-    var6[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "addToActiveKillstreakList")]](var1.streakname, "Killstreak_Air", var0, 0, 1, 25);
+    var_6[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "addToActiveKillstreakList")]](var_1.streakname, "Killstreak_Air", var_0, 0, 1, 25);
   }
 
-  return var6;
+  return var_6;
 }
 
-function starttomastrike(var0, var1, var2, var3) {
+function starttomastrike(var_0, var_1, var_2, var_3) {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(tomastrike_isremotevehicletype(var0)) {
+  if(tomastrike_isremotevehicletype(var_0)) {
     scripts\common\utility::allow_fire(0);
     scripts\common\utility::allow_weapon_switch(0);
     scripts\common\utility::allow_crouch(0);
@@ -376,129 +376,129 @@ function starttomastrike(var0, var1, var2, var3) {
     scripts\common\utility::allow_usability(0);
     scripts\common\utility::allow_killstreaks(0);
     self.restoreangles = self.angles;
-    var4 = 1;
-    var5 = spawn("script_model", self.origin);
-    var5 setModel("ks_toma_strike_marker_mp");
-    var5 setotherent(self);
-    var6 = [];
+    var_4 = 1;
+    var_5 = spawn("script_model", self.origin);
+    var_5 setModel("ks_toma_strike_marker_mp");
+    var_5 setotherent(self);
+    var_6 = [];
 
-    foreach(var8 in level.players) {
-      if(level.teambased && var8.team == self.team) {
+    foreach(var_8 in level.players) {
+      if(level.teambased && var_8.team == self.team) {
         continue;
       }
 
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("perk", "hasPerk")) {
-        if(var8[[scripts\cp_mp\utility\script_utility::getsharedfunc("perk", "hasPerk")]]("specialty_noscopeoutline")) {
+        if(var_8[[scripts\cp_mp\utility\script_utility::getsharedfunc("perk", "hasPerk")]]("specialty_noscopeoutline")) {
           continue;
         }
       }
 
-      var6 = var8;
+      var_6 = var_8;
     }
 
-    var10 = scripts\cp_mp\targetmarkergroups::targetmarkergroup_on("thermalvisionenemydefault", self, var6, self, 0, 1, 1);
-    var11 = scripts\cp_mp\targetmarkergroups::targetmarkergroup_on("thermalvisionfriendlydefault", self, self, self);
+    var_10 = scripts\cp_mp\targetmarkergroups::targetmarkergroup_on("thermalvisionenemydefault", self, var_6, self, 0, 1, 1);
+    var_11 = scripts\cp_mp\targetmarkergroups::targetmarkergroup_on("thermalvisionfriendlydefault", self, self, self);
 
-    if(var0 == 0) {
-      if(!isDefined(var1)) {
+    if(var_0 == 0) {
+      if(!isDefined(var_1)) {
         return;
       }
 
-      self setplayerangles(var1.angles);
-      self cameralinkTo(var1, "tag_origin");
-      self remotecontrolvehicle(var1);
+      self setplayerangles(var_1.angles);
+      self cameralinkTo(var_1, "tag_origin");
+      self remotecontrolvehicle(var_1);
       thread tomastrike_watchearlyexit();
       thread tomastrike_watchdamage();
       thread tomastrike_watchowner();
-      thread tomastrike_watchdestroyed(var1);
-      thread tomastrike_watchlifetime(var5, var1);
-      var1.playersfx = spawn("script_origin", var1.origin);
-      var1.playersfx linkTo(var1);
-      var1.playersfx playLoopSound("veh_apache_killstreak_amb_lr");
-      self setclientomnvar("ui_killstreak_health", (var1.maxhealth - var1.damagetaken) / var1.maxhealth);
-    } else if(var0 == 1) {
-      if(!isDefined(var2) || var2.size == 0) {
+      thread tomastrike_watchdestroyed(var_1);
+      thread tomastrike_watchlifetime(var_5, var_1);
+      var_1.playersfx = spawn("script_origin", var_1.origin);
+      var_1.playersfx linkTo(var_1);
+      var_1.playersfx playLoopSound("veh_apache_killstreak_amb_lr");
+      self setclientomnvar("ui_killstreak_health", (var_1.maxhealth - var_1.damagetaken) / var_1.maxhealth);
+    } else if(var_0 == 1) {
+      if(!isDefined(var_2) || var_2.size == 0) {
         return;
       }
 
-      var4 = 0;
+      var_4 = 0;
       scripts\cp_mp\utility\player_utility::_freezecontrols(1, undefined, "tomaStrike");
-      thread tomastrike_watchcameraswitch(var2, var5);
-      thread tomastrike_watchlifetime(var5, var1);
-    } else if(var0 == 2) {
-      if(!isDefined(var1)) {
+      thread tomastrike_watchcameraswitch(var_2, var_5);
+      thread tomastrike_watchlifetime(var_5, var_1);
+    } else if(var_0 == 2) {
+      if(!isDefined(var_1)) {
         return;
       }
 
-      self playerlinkweaponviewtodelta(var1.camera, "tag_player", 1, 180, 180, 10, 90, 0);
+      self playerlinkweaponviewtodelta(var_1.camera, "tag_player", 1, 180, 180, 10, 90, 0);
       self playerlinkedsetviewznear(0);
       thread tomastrike_watchearlyexit();
       thread tomastrike_watchdamage();
       thread tomastrike_watchowner();
-      thread tomastrike_watchdestroyed(var1);
-      thread tomastrike_watchleave(var1);
+      thread tomastrike_watchdestroyed(var_1);
+      thread tomastrike_watchleave(var_1);
       thread tomastrike_playearthquakeloop();
 
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("flares", "handleIncomingStinger")) {
-        var1 thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("flares", "handleIncomingStinger")]](&tomastrike_handlemissiledetection);
+        var_1 thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("flares", "handleIncomingStinger")]](&tomastrike_handlemissiledetection);
       }
 
-      if(isPlayer(var1.owner)) {
-        var1.owner setclienttriggeraudiozone("cluster_strike", 2);
+      if(isPlayer(var_1.owner)) {
+        var_1.owner setclienttriggeraudiozone("cluster_strike", 2);
       }
 
-      var1.cloudsfx setscriptablepartstate("clouds", "on");
-      var1 moveTo(var1.pathgoal, 70);
+      var_1.cloudsfx setscriptablepartstate("clouds", "on");
+      var_1 moveTo(var_1.pathgoal, 70);
     }
 
     self.clusterammoleft = 3;
     self setclientomnvar("ui_cluster_controls", 1);
     self setclientomnvar("ui_cluster_missiles_left", self.clusterammoleft);
     self visionsetkillstreakforplayer("proto_toma_strike_mp");
-    thread tomastrike_movetargetguide(var5, var1);
-    thread tomastrike_watchammousage(var5, var1, var4);
-    thread tomastrike_watchlasertarget(var0, var5, var1, var3);
-    thread tomastrike_watchreturnplayer(var3, var0, var10, var11);
+    thread tomastrike_movetargetguide(var_5, var_1);
+    thread tomastrike_watchammousage(var_5, var_1, var_4);
+    thread tomastrike_watchlasertarget(var_0, var_5, var_1, var_3);
+    thread tomastrike_watchreturnplayer(var_3, var_0, var_10, var_11);
     return;
   }
 
-  thread tomastrike_attacktarget(var0, undefined, undefined, var3);
-  var3 notify("killstreak_finished_with_deploy_weapon");
-  thread ref_13bd9(var3);
+  thread tomastrike_attacktarget(var_0, undefined, undefined, var_3);
+  var_3 notify("killstreak_finished_with_deploy_weapon");
+  thread ref_13bd9(var_3);
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(20);
   self notify("cluster_strike_finished");
-  scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var3);
+  scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_3);
 }
 
-function tomastrike_handlemissiledetection(var0, var1, var2, var3) {
+function tomastrike_handlemissiledetection(var_0, var_1, var_2, var_3) {
   self endon("death");
 
   for(;;) {
-    if(!isDefined(var2)) {
+    if(!isDefined(var_2)) {
       break;
     }
 
-    var4 = var2 getpointinbounds(0, 0, 0);
-    var5 = distance(self.origin, var4);
+    var_4 = var_2 getpointinbounds(0, 0, 0);
+    var_5 = distance(self.origin, var_4);
 
-    if(var5 < 4000 && var2.flaresreservecount > 0) {
-      var2.flaresreservecount--;
+    if(var_5 < 4000 && var_2.flaresreservecount > 0) {
+      var_2.flaresreservecount--;
 
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("flares", "playFx")) {
-        var2 thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("flares", "playFx")]](undefined, var3);
+        var_2 thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("flares", "playFx")]](undefined, var_3);
       }
 
-      var6 = undefined;
+      var_6 = undefined;
 
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("flares", "deploy")) {
-        var6 = var2[[scripts\cp_mp\utility\script_utility::getsharedfunc("flares", "deploy")]]();
+        var_6 = var_2[[scripts\cp_mp\utility\script_utility::getsharedfunc("flares", "deploy")]]();
       }
 
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "updateScrapAssistDataForceCredit")) {
-        var2[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "updateScrapAssistDataForceCredit")]](var0);
+        var_2[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "updateScrapAssistDataForceCredit")]](var_0);
       }
 
-      self missile_settargetEnt(var6);
+      self missile_settargetEnt(var_6);
       self notify("missile_pairedWithFlare");
       return;
     }
@@ -518,15 +518,15 @@ function tomastrike_watchearlyexit() {
   self notify("death");
 }
 
-function tomastrike_watchlifetime(var0, var1) {
+function tomastrike_watchlifetime(var_0, var_1) {
   self endon("disconnect");
   self endon("stop_marker_guide");
-  var2 = 1;
+  var_2 = 1;
 
-  if(isDefined(var1)) {
-    var1 endon("death");
-    var1 endon("leaving");
-    var2 = 0;
+  if(isDefined(var_1)) {
+    var_1 endon("death");
+    var_1 endon("leaving");
+    var_2 = 0;
   }
 
   level endon("game_ended");
@@ -534,14 +534,14 @@ function tomastrike_watchlifetime(var0, var1) {
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(10);
   scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("timeout_toma_strike");
 
-  if(isDefined(var1)) {
-    var1 notify("death");
+  if(isDefined(var_1)) {
+    var_1 notify("death");
   }
 
-  self notify("tomaStrike_returnPlayer", var2);
+  self notify("tomaStrike_returnPlayer", var_2);
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
   }
 
   self notify("stop_marker_guide");
@@ -554,16 +554,16 @@ function tomastrike_watchdamage() {
   }
 }
 
-function tomastrike_modifydamage(var0) {
-  var1 = var0.attacker;
-  var2 = var0.objweapon;
-  var3 = var0.meansofdeath;
-  var4 = var0.damage;
-  var5 = var0.idflags;
-  var6 = var4;
+function tomastrike_modifydamage(var_0) {
+  var_1 = var_0.attacker;
+  var_2 = var_0.objweapon;
+  var_3 = var_0.meansofdeath;
+  var_4 = var_0.damage;
+  var_5 = var_0.idflags;
+  var_6 = var_4;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "getModifiedAntiKillstreakDamage")) {
-    var6 = self[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "getModifiedAntiKillstreakDamage")]](var1, var2, var3, var6, self.maxhealth, 2, 3, 4);
+    var_6 = self[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "getModifiedAntiKillstreakDamage")]](var_1, var_2, var_3, var_6, self.maxhealth, 2, 3, 4);
   }
 
   if(isDefined(self.owner) && self.owner scripts\cp_mp\utility\player_utility::isusingremote()) {
@@ -576,26 +576,26 @@ function tomastrike_modifydamage(var0) {
     }
   }
 
-  self.currenthealth = self.maxhealth - self.damagetaken + var6;
+  self.currenthealth = self.maxhealth - self.damagetaken + var_6;
   self.owner setclientomnvar("ui_killstreak_health", self.currenthealth / self.maxhealth);
-  return var6;
+  return var_6;
 }
 
-function tomastrike_watchdeathdamage(var0) {
-  var1 = var0.attacker;
-  var2 = var0.objweapon;
-  var3 = var0.meansofdeath;
-  var4 = var0.damage;
-  var5 = var0.idflags;
+function tomastrike_watchdeathdamage(var_0) {
+  var_1 = var_0.attacker;
+  var_2 = var_0.objweapon;
+  var_3 = var_0.meansofdeath;
+  var_4 = var_0.damage;
+  var_5 = var_0.idflags;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("damage", "onKillstreakKilled")) {
-    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("damage", "onKillstreakKilled")]](self.streakname, var1, var2, var3, var4, self.scorepopup, self.vodestroyed, self.destroyedsplash);
+    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("damage", "onKillstreakKilled")]](self.streakname, var_1, var_2, var_3, var_4, self.scorepopup, self.vodestroyed, self.destroyedsplash);
   }
 
   self notify("death");
 }
 
-function tomastrike_watchdestroyed(var0) {
+function tomastrike_watchdestroyed(var_0) {
   self endon("gone");
   self waittill("death");
 
@@ -609,10 +609,10 @@ function tomastrike_watchdestroyed(var0) {
     self.owner notify("tomaStrike_returnPlayer", 0);
   }
 
-  thread tomastrike_explode(self.owner, self.origin, "toma_proj_mp", var0);
+  thread tomastrike_explode(self.owner, self.origin, "toma_proj_mp", var_0);
 }
 
-function tomastrike_watchleave(var0) {
+function tomastrike_watchleave(var_0) {
   self endon("death");
   level endon("game_ended");
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(35);
@@ -634,14 +634,14 @@ function tomastrike_watchleave(var0) {
     self.cloudsfx delete();
   }
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
   }
 
-  thread tomastrike_watchgoal(var0);
+  thread tomastrike_watchgoal(var_0);
 }
 
-function tomastrike_watchgoal(var0) {
+function tomastrike_watchgoal(var_0) {
   self endon("death");
   level endon("game_ended");
 
@@ -681,95 +681,95 @@ function tomastrike_watchowner() {
   self notify("death");
 }
 
-function tomastrike_watchcameraswitch(var0, var1) {
+function tomastrike_watchcameraswitch(var_0, var_1) {
   self endon("disconnect");
   self endon("stop_marker_guide");
-  var2 = var0[0];
-  self playerlinkweaponviewtodelta(var2, "tag_player", 1, 45, 45, 20, 70, 0);
-  self setplayerangles(var2.angles);
-  self.currentclustercamera = var2;
+  var_2 = var_0[0];
+  self playerlinkweaponviewtodelta(var_2, "tag_player", 1, 45, 45, 20, 70, 0);
+  self setplayerangles(var_2.angles);
+  self.currentclustercamera = var_2;
   self notifyonplayercommand("switch_camera_left", "+actionslot 3");
   self notifyonplayercommand("switch_camera_left", "+moveleft");
   self notifyonplayercommand("switch_camera_right", "+actionslot 4");
   self notifyonplayercommand("switch_camera_right", "+moveright");
-  var3 = 0;
-  var4 = var0.size - 1;
-  var5 = var3;
+  var_3 = 0;
+  var_4 = var_0.size - 1;
+  var_5 = var_3;
 
   for(;;) {
-    var6 = scripts\engine\utility::ref_143ad("switch_camera_left", "switch_camera_right");
-    var7 = var0[var5].origin;
-    var8 = self getplayerangles();
+    var_6 = scripts\engine\utility::ref_143ad("switch_camera_left", "switch_camera_right");
+    var_7 = var_0[var_5].origin;
+    var_8 = self getplayerangles();
 
-    if(!isDefined(var6)) {
+    if(!isDefined(var_6)) {
       continue;
     }
 
-    switch (var6) {
+    switch (var_6) {
       case "switch_camera_left":
-        var5++;
+        var_5++;
 
-        if(var5 > var4) {
-          var5 = var3;
+        if(var_5 > var_4) {
+          var_5 = var_3;
         }
 
         break;
       case "switch_camera_right":
-        var5--;
+        var_5--;
 
-        if(var5 < var3) {
-          var5 = var4;
+        if(var_5 < var_3) {
+          var_5 = var_4;
         }
 
         break;
     }
 
-    tomastrike_playercameratransition(var7, var8, var0[var5], var1);
+    tomastrike_playercameratransition(var_7, var_8, var_0[var_5], var_1);
     waitframe();
   }
 }
 
-function tomastrike_playercameratransition(var0, var1, var2, var3) {
+function tomastrike_playercameratransition(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
-  var4 = spawn("script_model", var0);
-  var4 setModel("tag_player");
-  var4.owner = self;
-  var4.angles = var1;
-  self playerlinkweaponviewtodelta(var4, "tag_player", 1, 0, 0, 0, 0, 0);
+  var_4 = spawn("script_model", var_0);
+  var_4 setModel("tag_player");
+  var_4.owner = self;
+  var_4.angles = var_1;
+  self playerlinkweaponviewtodelta(var_4, "tag_player", 1, 0, 0, 0, 0, 0);
   self playerlinkedsetviewznear(0);
   self visionsetfadetoblackforplayer("bw", 0.25);
   self visionsetkillstreakforplayer("");
   self visionsetnakedforplayer("tac_ops_slamzoom", 0.25);
   self setclientomnvar("ui_cluster_controls", 0);
-  var3 setscriptablepartstate("target", "off", 0);
-  var4 moveTo(var2.origin, 0.25);
-  var4 rotateTo(var2.angles, 0.25);
-  var4 waittill("rotatedone");
+  var_3 setscriptablepartstate("target", "off", 0);
+  var_4 moveTo(var_2.origin, 0.25);
+  var_4 rotateTo(var_2.angles, 0.25);
+  var_4 waittill("rotatedone");
   scripts\mp\utility\player::restorebasevisionset(0.2);
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(0.1);
   self setclientomnvar("ui_cluster_controls", 1);
   self visionsetfadetoblackforplayer("", 0);
   self visionsetkillstreakforplayer("proto_toma_strike_mp");
   scripts\mp\utility\player::restorebasevisionset(0);
-  var3 setscriptablepartstate("target", "guide", 0);
-  self playerlinkweaponviewtodelta(var2, "tag_player", 1, 45, 45, 20, 70, 0);
-  self.currentclustercamera = var2;
-  var4 delete();
+  var_3 setscriptablepartstate("target", "guide", 0);
+  self playerlinkweaponviewtodelta(var_2, "tag_player", 1, 45, 45, 20, 70, 0);
+  self.currentclustercamera = var_2;
+  var_4 delete();
 }
 
-function tomastrike_watchreturnplayer(var0, var1, var2, var3) {
+function tomastrike_watchreturnplayer(var_0, var_1, var_2, var_3) {
   self endon("disconnect");
-  self waittill("tomaStrike_returnPlayer", var4);
-  tomastrike_returnplayer(var0, var1, var4, var2, var3);
+  self waittill("tomaStrike_returnPlayer", var_4);
+  tomastrike_returnplayer(var_0, var_1, var_4, var_2, var_3);
 }
 
-function tomastrike_watchlasertarget(var0, var1, var2, var3) {
+function tomastrike_watchlasertarget(var_0, var_1, var_2, var_3) {
   self endon("disconnect");
   self endon("stop_marker_guide");
 
-  if(isDefined(var2)) {
-    var2 endon("death");
-    var2 endon("leaving");
+  if(isDefined(var_2)) {
+    var_2 endon("death");
+    var_2 endon("leaving");
   }
 
   level endon("game_ended");
@@ -782,27 +782,27 @@ function tomastrike_watchlasertarget(var0, var1, var2, var3) {
       continue;
     }
 
-    var4 = spawn("script_model", self.origin);
-    var4 setModel("ks_toma_strike_marker_mp");
-    var4 setotherent(self);
-    var4.owner = self;
-    thread tomastrike_startlasertarget(var0, var2, var1, var4, var3);
+    var_4 = spawn("script_model", self.origin);
+    var_4 setModel("ks_toma_strike_marker_mp");
+    var_4 setotherent(self);
+    var_4.owner = self;
+    thread tomastrike_startlasertarget(var_0, var_2, var_1, var_4, var_3);
 
-    if(var0 == 2) {
+    if(var_0 == 2) {
       scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(2);
     }
   }
 }
 
-function tomastrike_watchammousage(var0, var1, var2) {
+function tomastrike_watchammousage(var_0, var_1, var_2) {
   self endon("disconnect");
   self endon("stop_marker_guide");
-  var3 = 1;
+  var_3 = 1;
 
-  if(isDefined(var1)) {
-    var1 endon("death");
-    var1 endon("leaving");
-    var3 = 0;
+  if(isDefined(var_1)) {
+    var_1 endon("death");
+    var_1 endon("leaving");
+    var_3 = 0;
   }
 
   for(;;) {
@@ -810,11 +810,11 @@ function tomastrike_watchammousage(var0, var1, var2) {
     self.clusterammoleft--;
     self setclientomnvar("ui_cluster_missiles_left", self.clusterammoleft);
 
-    if(self.clusterammoleft == 0 && istrue(var2)) {
-      var0 setscriptablepartstate("target", "off", 0);
+    if(self.clusterammoleft == 0 && istrue(var_2)) {
+      var_0 setscriptablepartstate("target", "off", 0);
       self setclientomnvar("ui_cluster_controls", 2);
       wait 5;
-      var0 setscriptablepartstate("target", "guide", 0);
+      var_0 setscriptablepartstate("target", "guide", 0);
       self.clusterammoleft = 3;
       self setclientomnvar("ui_cluster_controls", 1);
       self setclientomnvar("ui_cluster_missiles_left", self.clusterammoleft);
@@ -824,10 +824,10 @@ function tomastrike_watchammousage(var0, var1, var2) {
     self setclientomnvar("ui_cluster_missiles_left", self.clusterammoleft);
 
     if(self.clusterammoleft == 0) {
-      self notify("tomaStrike_returnPlayer", var3);
+      self notify("tomaStrike_returnPlayer", var_3);
 
-      if(isDefined(var0)) {
-        var0 delete();
+      if(isDefined(var_0)) {
+        var_0 delete();
       }
 
       self notify("stop_marker_guide");
@@ -836,220 +836,220 @@ function tomastrike_watchammousage(var0, var1, var2) {
   }
 }
 
-function tomastrike_movetargetguide(var0, var1) {
+function tomastrike_movetargetguide(var_0, var_1) {
   self endon("disconnect");
   self endon("stop_marker_guide");
 
-  if(isDefined(var1)) {
-    var1 endon("death");
-    var1 endon("leaving");
+  if(isDefined(var_1)) {
+    var_1 endon("death");
+    var_1 endon("leaving");
   }
 
-  var0 setscriptablepartstate("target", "guide", 0);
+  var_0 setscriptablepartstate("target", "guide", 0);
 
   for(;;) {
-    var2 = tomastrike_getownerlookat(self);
-    var0.origin = var2;
+    var_2 = tomastrike_getownerlookat(self);
+    var_0.origin = var_2;
     waitframe();
   }
 }
 
-function tomastrike_getownerlookat(var0) {
+function tomastrike_getownerlookat(var_0) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "aim_override")) {
-    return var0[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "aim_override")]]();
+    return var_0[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "aim_override")]]();
   }
 
-  var1 = ["physicscontents_solid", "physicscontents_water", "physicscontents_sky", "physicscontents_glass", "physicscontents_clipshot", "physicscontents_missileclip", "physicscontents_ainosight", "physicscontents_vehicleclip"];
-  var2 = physics_createcontents(var1);
-  var3 = var0 getvieworigin();
-  var4 = var3 + anglesToForward(var0 getplayerangles()) * 50000;
-  var5 = var0 scripts\cp_mp\utility\killstreak_utility::ref_125f8();
-  var6 = scripts\engine\trace::ray_trace(var3, var4, var5, var2);
-  var7 = undefined;
+  var_1 = ["physicscontents_solid", "physicscontents_water", "physicscontents_sky", "physicscontents_glass", "physicscontents_clipshot", "physicscontents_missileclip", "physicscontents_ainosight", "physicscontents_vehicleclip"];
+  var_2 = physics_createcontents(var_1);
+  var_3 = var_0 getvieworigin();
+  var_4 = var_3 + anglesToForward(var_0 getplayerangles()) * 50000;
+  var_5 = var_0 scripts\cp_mp\utility\killstreak_utility::ref_125f8();
+  var_6 = scripts\engine\trace::ray_trace(var_3, var_4, var_5, var_2);
+  var_7 = undefined;
 
-  if(isDefined(var6["hittype"]) && var6["hittype"] != "hittype_none") {
-    var7 = var6["position"];
+  if(isDefined(var_6["hittype"]) && var_6["hittype"] != "hittype_none") {
+    var_7 = var_6["position"];
   }
 
-  return var7;
+  return var_7;
 }
 
-function tomastrike_watchlaserrelease(var0) {
-  var1 = self.owner;
-  var1 endon("disconnect");
-  var1 endon("drone_target_placed");
+function tomastrike_watchlaserrelease(var_0) {
+  var_1 = self.owner;
+  var_1 endon("disconnect");
+  var_1 endon("drone_target_placed");
   self endon("death");
   level endon("game_ended");
   thread tomastrike_watchdronedeath();
-  var1 waittill("drone_target_release");
-  var1 notify("drone_target_cancel");
-  var0 setscriptablepartstate("target", "off", 0);
+  var_1 waittill("drone_target_release");
+  var_1 notify("drone_target_cancel");
+  var_0 setscriptablepartstate("target", "off", 0);
 }
 
 function tomastrike_watchdronedeath() {
-  var0 = self.owner;
-  var0 endon("disconnect");
-  var0 endon("drone_target_release");
+  var_0 = self.owner;
+  var_0 endon("disconnect");
+  var_0 endon("drone_target_release");
   self waittill("death");
-  var0 notify("toma_strike_end");
-  var0 notify("drone_target_cancel");
+  var_0 notify("toma_strike_end");
+  var_0 notify("drone_target_cancel");
 }
 
-function tomastrike_startlasertarget(var0, var1, var2, var3, var4) {
+function tomastrike_startlasertarget(var_0, var_1, var_2, var_3, var_4) {
   level endon("game_ended");
-  var3.origin = var2.origin;
-  var3 setscriptablepartstate("target", "placed", 0);
+  var_3.origin = var_2.origin;
+  var_3 setscriptablepartstate("target", "placed", 0);
 
-  if(var0 == 1) {
-    thread delayscriptablechangethread(var3);
+  if(var_0 == 1) {
+    thread delayscriptablechangethread(var_3);
   } else {
-    thread delayscriptablechangethread(var3);
+    thread delayscriptablechangethread(var_3);
   }
 
   self playlocalsound("weap_cluster_target_beep");
   self notify("ammo_used");
 
   if(isDefined(self)) {
-    thread tomastrike_attacktarget(var0, var1, var3, var4);
+    thread tomastrike_attacktarget(var_0, var_1, var_3, var_4);
     return;
   }
 }
 
-function tomastrike_attacktarget(var0, var1, var2, var3) {
+function tomastrike_attacktarget(var_0, var_1, var_2, var_3) {
   self endon("disconnect");
   level endon("game_ended");
   self notify("drone_target_placed");
-  var3.shots_fired++;
-  var4 = undefined;
-  var5 = undefined;
+  var_3.shots_fired++;
+  var_4 = undefined;
+  var_5 = undefined;
 
-  if(var0 == 0 || var0 == 2) {
-    var4 = var1.origin - (0, 0, 10) + anglesToForward(var1.angles) * 20;
-    var5 = var1.angles;
-  } else if(var0 == 1) {
-    var4 = self.currentclustercamera.origin - (0, 0, 3000);
-    var5 = anglestoright(self.currentclustercamera.angles);
+  if(var_0 == 0 || var_0 == 2) {
+    var_4 = var_1.origin - (0, 0, 10) + anglesToForward(var_1.angles) * 20;
+    var_5 = var_1.angles;
+  } else if(var_0 == 1) {
+    var_4 = self.currentclustercamera.origin - (0, 0, 3000);
+    var_5 = anglestoright(self.currentclustercamera.angles);
   } else {
-    var4 = self.origin + (0, 0, 5000);
+    var_4 = self.origin + (0, 0, 5000);
 
-    if(!istrue(var3.vehicle_process_node_when_at_goal)) {
-      var4 -= anglesToForward(self.angles) * 5000;
+    if(!istrue(var_3.vehicle_process_node_when_at_goal)) {
+      var_4 -= anglesToForward(self.angles) * 5000;
     }
 
-    var5 = anglestoright(self.angles);
+    var_5 = anglestoright(self.angles);
   }
 
-  var6 = undefined;
+  var_6 = undefined;
 
-  if(isDefined(var2)) {
-    if(isvector(var2)) {
-      var6 = var2;
+  if(isDefined(var_2)) {
+    if(isvector(var_2)) {
+      var_6 = var_2;
     } else {
-      var6 = var2.origin;
+      var_6 = var_2.origin;
     }
   } else {
-    if(var0 == 5 && isDefined(var3.ref_13a81)) {
-      var6 = var3.ref_13a81;
+    if(var_0 == 5 && isDefined(var_3.ref_13a81)) {
+      var_6 = var_3.ref_13a81;
     } else {
-      var6 = tomastrike_getownerlookat(self);
+      var_6 = tomastrike_getownerlookat(self);
     }
 
-    if(!istrue(var3.ref_11eae)) {
-      var2 = spawn("script_model", var6);
-      var2 setModel("ks_toma_strike_marker_mp");
+    if(!istrue(var_3.ref_11eae)) {
+      var_2 = spawn("script_model", var_6);
+      var_2 setModel("ks_toma_strike_marker_mp");
 
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "requestObjectiveID")) {
-        var2.objidnum = [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "requestObjectiveID")]](99);
+        var_2.objidnum = [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "requestObjectiveID")]](99);
       }
 
-      var7 = scripts\cp_mp\utility\script_utility::ref_140de("game", "isGameTypeBR", 0);
+      var_7 = scripts\cp_mp\utility\script_utility::ref_140de("game", "isGameTypeBR", 0);
 
-      if(var7) {
-        var2.icon = "icon_waypoint_clusterstrike_ww2";
+      if(var_7) {
+        var_2.icon = "icon_waypoint_clusterstrike_ww2";
       } else {
-        var2.icon = "icon_waypoint_clusterstrike";
+        var_2.icon = "icon_waypoint_clusterstrike";
       }
 
       if(isPlayer(self)) {
-        var2 setotherent(self);
+        var_2 setotherent(self);
       }
 
-      if(!istrue(var3.ref_133dc)) {
-        toma_strike_setmarkerobjective(var2, var2.objidnum, var2.icon, self, 50);
+      if(!istrue(var_3.ref_133dc)) {
+        toma_strike_setmarkerobjective(var_2, var_2.objidnum, var_2.icon, self, 50);
       }
 
       thread toma_strike_handlemarkerscriptable();
     }
   }
 
-  var8 = 6;
-  var9 = 300;
+  var_8 = 6;
+  var_9 = 300;
 
-  if(var0 == 5) {
+  if(var_0 == 5) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("br", "challengeEvaluator")) {
-      var10 = spawnStruct();
-      var10.streakinfo = var3;
-      var10.ref_13a8a = var6;
-      self[[scripts\cp_mp\utility\script_utility::getsharedfunc("br", "challengeEvaluator")]]("br_mastery_pointBlank_tomahawk", var10);
+      var_10 = spawnStruct();
+      var_10.streakinfo = var_3;
+      var_10.ref_13a8a = var_6;
+      self[[scripts\cp_mp\utility\script_utility::getsharedfunc("br", "challengeEvaluator")]]("br_mastery_pointBlank_tomahawk", var_10);
     }
 
-    var8 = 6;
+    var_8 = 6;
 
-    if(isDefined(var3.ref_11f47)) {
-      var8 = var3.ref_11f47;
+    if(isDefined(var_3.ref_11f47)) {
+      var_8 = var_3.ref_11f47;
     }
 
-    var9 = 900;
+    var_9 = 900;
 
-    if(isDefined(var3.ref_129e3)) {
-      var9 = var3.ref_129e3;
+    if(isDefined(var_3.ref_129e3)) {
+      var_9 = var_3.ref_129e3;
     }
 
-    var11 = var9;
+    var_11 = var_9;
 
-    if(isDefined(var3.ref_11ece)) {
-      var11 = var3.ref_11ece;
+    if(isDefined(var_3.ref_11ece)) {
+      var_11 = var_3.ref_11ece;
     }
 
-    if(!istrue(var3.ref_133c9) && scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "dangerNotifyPlayersInRange")) {
-      self[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "dangerNotifyPlayersInRange")]](var6, var11 + 300, var3.streakname);
+    if(!istrue(var_3.ref_133c9) && scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "dangerNotifyPlayersInRange")) {
+      self[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "dangerNotifyPlayersInRange")]](var_6, var_11 + 300, var_3.streakname);
     }
   }
 
-  if(var0 == 0 || var0 == 2) {
+  if(var_0 == 0 || var_0 == 2) {
     scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(0.3);
-    var4 = var1.origin - (0, 0, 10) + anglesToForward(var1.angles) * 20;
-    var12 = var6;
-    var13 = spawnStruct();
-    var13.sourcepos = var4;
-    var13.goalpos = var12;
-    var13.initvelocity = var13.goalpos - var13.sourcepos;
-    thread tomastrike_firestrike(var13, var3, var1);
+    var_4 = var_1.origin - (0, 0, 10) + anglesToForward(var_1.angles) * 20;
+    var_12 = var_6;
+    var_13 = spawnStruct();
+    var_13.sourcepos = var_4;
+    var_13.goalpos = var_12;
+    var_13.initvelocity = var_13.goalpos - var_13.sourcepos;
+    thread tomastrike_firestrike(var_13, var_3, var_1);
     return;
   }
 
-  if(var0 == 1 || var0 == 3 || var0 == 4 || var0 == 5) {
-    var14 = 2;
+  if(var_0 == 1 || var_0 == 3 || var_0 == 4 || var_0 == 5) {
+    var_14 = 2;
 
-    if(isDefined(var3.ref_121af)) {
-      var15 = var3.ref_121af;
+    if(isDefined(var_3.ref_121af)) {
+      var_15 = var_3.ref_121af;
     } else {
-      var15 = anglesToForward(self getplayerangles());
+      var_15 = anglesToForward(self getplayerangles());
     }
 
-    var16 = anglesToForward(self.angles);
-    var17 = anglestoright(self.angles);
-    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var15);
+    var_16 = anglesToForward(self.angles);
+    var_17 = anglestoright(self.angles);
+    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_15);
 
-    for(var19 = 0; var19 < var9; var19++) {
-      var20 = undefined;
+    for(var_19 = 0; var_19 < var_9; var_19++) {
+      var_20 = undefined;
 
-      if(istrue(var4.vehicle_process_node_when_at_goal)) {
-        var20 = var5;
+      if(istrue(var_4.vehicle_process_node_when_at_goal)) {
+        var_20 = var_5;
       }
 
-      var13 = findunobstructedfiringinfo(var8, var14, var15, var16, var17, var20);
-      thread tomastrike_firestrike(var13, var4);
+      var_13 = findunobstructedfiringinfo(var_8, var_14, var_15, var_16, var_17, var_20);
+      thread tomastrike_firestrike(var_13, var_4);
       scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(randomfloatrange(1.35, 2.5));
     }
 
@@ -1058,47 +1058,47 @@ function tomastrike_attacktarget(var0, var1, var2, var3) {
   }
 }
 
-function findunobstructedfiringinfo(var0, var1, var2, var3, var4, var5) {
-  var6 = spawnStruct();
+function findunobstructedfiringinfo(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = spawnStruct();
 
-  if(isDefined(var5)) {
-    var7 = var5;
+  if(isDefined(var_5)) {
+    var_7 = var_5;
   } else {
-    var7 = ref_13bd5(var1, var3, var4, var5);
+    var_7 = ref_13bd5(var_1, var_3, var_4, var_5);
   }
 
-  var8 = vectorNormalize(var1 - (var7[0], var7[1], 0));
-  var9 = ref_13bd6(var1, var2, var8);
-  var10 = (0, 0, -1 * getdvarint("NPOQPMP", 800));
-  var11 = (var9.point - 0.5 * var10 * squared(4) - var7) / 4;
-  var13 = var7 + var11 * 3.925 + 0.5 * var10 * squared(3.925);
-  var7.sourcepos = var7;
-  var7.num_of_frame_frozen = var9.num_of_frame_frozen;
-  var7.num_of_subway_cars = var9.num_of_subway_cars;
-  var7.goalpos = var9.point;
-  var7.preexplpos = var13;
-  var7.initvelocity = var11;
-  return var7;
+  var_8 = vectorNormalize(var_1 - (var_7[0], var_7[1], 0));
+  var_9 = ref_13bd6(var_1, var_2, var_8);
+  var_10 = (0, 0, -1 * getdvarint("NPOQPMP", 800));
+  var_11 = (var_9.point - 0.5 * var_10 * squared(4) - var_7) / 4;
+  var_13 = var_7 + var_11 * 3.925 + 0.5 * var_10 * squared(3.925);
+  var_7.sourcepos = var_7;
+  var_7.num_of_frame_frozen = var_9.num_of_frame_frozen;
+  var_7.num_of_subway_cars = var_9.num_of_subway_cars;
+  var_7.goalpos = var_9.point;
+  var_7.preexplpos = var_13;
+  var_7.initvelocity = var_11;
+  return var_7;
 }
 
-function delayscriptablechangethread(var0) {
+function delayscriptablechangethread(var_0) {
   self.owner endon("disconnect");
   self endon("death");
-  self.owner scripts\engine\utility::ref_143b9(var0, "stop_marker_guide");
+  self.owner scripts\engine\utility::ref_143b9(var_0, "stop_marker_guide");
   self setscriptablepartstate("target", "off", 0);
   self delete();
 }
 
-function tomastrike_screeninterference(var0, var1) {
-  var2 = self.owner;
-  var2 endon("disconnect");
+function tomastrike_screeninterference(var_0, var_1) {
+  var_2 = self.owner;
+  var_2 endon("disconnect");
 
-  if(isDefined(var2)) {
-    var2 visionsetthermalforplayer(var1);
+  if(isDefined(var_2)) {
+    var_2 visionsetthermalforplayer(var_1);
 
-    if(isDefined(var0)) {
-      scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var0);
-      var2 visionsetthermalforplayer(self.currentvisionset);
+    if(isDefined(var_0)) {
+      scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_0);
+      var_2 visionsetthermalforplayer(self.currentvisionset);
       return;
     }
 
@@ -1106,136 +1106,136 @@ function tomastrike_screeninterference(var0, var1) {
   }
 }
 
-function ref_13bd6(var0, var1, var2) {
-  var3 = randomint(var1);
-  var4 = randomint(360);
-  var5 = var0[0] + var3 * cos(var4);
-  var6 = var0[1] + var3 * sin(var4);
-  var7 = var0[2];
-  var8 = (var5, var6, var7);
+function ref_13bd6(var_0, var_1, var_2) {
+  var_3 = randomint(var_1);
+  var_4 = randomint(360);
+  var_5 = var_0[0] + var_3 * cos(var_4);
+  var_6 = var_0[1] + var_3 * sin(var_4);
+  var_7 = var_0[2];
+  var_8 = (var_5, var_6, var_7);
 
-  if(isDefined(var2)) {
-    var8 -= var2 * 100;
+  if(isDefined(var_2)) {
+    var_8 -= var_2 * 100;
   }
 
-  var9 = 10000;
+  var_9 = 10000;
 
   if(isDefined(level.ref_13bd3)) {
-    var9 = level.ref_13bd3;
+    var_9 = level.ref_13bd3;
   }
 
-  var10 = spawnStruct();
-  var11 = scripts\engine\trace::create_default_contents(1);
-  var12 = scripts\engine\trace::ray_trace(var8 + (0, 0, var9), var8 - (0, 0, var9), undefined, var11);
+  var_10 = spawnStruct();
+  var_11 = scripts\engine\trace::create_default_contents(1);
+  var_12 = scripts\engine\trace::ray_trace(var_8 + (0, 0, var_9), var_8 - (0, 0, var_9), undefined, var_11);
 
-  if(isDefined(var12["entity"])) {
-    var13 = var12["entity"];
-    var10.num_of_frame_frozen = var13;
+  if(isDefined(var_12["entity"])) {
+    var_13 = var_12["entity"];
+    var_10.num_of_frame_frozen = var_13;
 
-    if(ref_13bd8(var13) || ref_13bd7(var13)) {
-      var10.num_of_subway_cars = "flying";
+    if(ref_13bd8(var_13) || ref_13bd7(var_13)) {
+      var_10.num_of_subway_cars = "flying";
     }
   }
 
-  if(isDefined(var12["position"])) {
-    var8 = var12["position"];
+  if(isDefined(var_12["position"])) {
+    var_8 = var_12["position"];
   }
 
-  var10.point = var8;
-  return var10;
+  var_10.point = var_8;
+  return var_10;
 }
 
-function ref_13bd8(var0) {
-  return var0 scripts\cp_mp\vehicles\vehicle::isvehicle() && istrue(var0 scripts\cp_mp\vehicles\vehicle::vehiclecanfly());
+function ref_13bd8(var_0) {
+  return var_0 scripts\cp_mp\vehicles\vehicle::isvehicle() && istrue(var_0 scripts\cp_mp\vehicles\vehicle::vehiclecanfly());
 }
 
-function ref_13bd7(var0) {
-  return isDefined(var0.streakinfo) && isDefined(var0.sentientpool) && var0.sentientpool == "Killstreak_Air";
+function ref_13bd7(var_0) {
+  return isDefined(var_0.streakinfo) && isDefined(var_0.sentientpool) && var_0.sentientpool == "Killstreak_Air";
 }
 
-function tomastrike_firestrike(var0, var1, var2) {
+function tomastrike_firestrike(var_0, var_1, var_2) {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(isDefined(var2)) {
-    self earthquakeforplayer(0.35, 1, var2.origin, 1000);
+  if(isDefined(var_2)) {
+    self earthquakeforplayer(0.35, 1, var_2.origin, 1000);
     self playlocalsound("weap_cluster_fire");
   }
 
-  var3 = isPlayer(self) || isagent(self);
+  var_3 = isPlayer(self) || isagent(self);
 
-  if(var3) {
-    var4 = magicgrenademanual("toma_proj_mp", var0.sourcepos, var0.initvelocity, 5, self);
-    var4 setmissileminimapvisible(1);
-    var4 setentityowner(self);
-    var4 setotherent(self);
+  if(var_3) {
+    var_4 = magicgrenademanual("toma_proj_mp", var_0.sourcepos, var_0.initvelocity, 5, self);
+    var_4 setmissileminimapvisible(1);
+    var_4 setentityowner(self);
+    var_4 setotherent(self);
   } else {
-    var4 = magicgrenademanual("toma_proj_mp", var1.sourcepos, var1.initvelocity, 5);
-    var4 setmissileminimapvisible(1);
+    var_4 = magicgrenademanual("toma_proj_mp", var_1.sourcepos, var_1.initvelocity, 5);
+    var_4 setmissileminimapvisible(1);
   }
 
-  var4 setscriptablepartstate("launch", "active", 0);
-  var4 setscriptablepartstate("trail", "active", 0);
+  var_4 setscriptablepartstate("launch", "active", 0);
+  var_4 setscriptablepartstate("trail", "active", 0);
 
-  if(isDefined(var2.ref_121a9)) {
-    var5 = var2.ref_121a9;
+  if(isDefined(var_2.ref_121a9)) {
+    var_5 = var_2.ref_121a9;
   } else {
-    var5 = "ks_toma_strike_missile_mp";
+    var_5 = "ks_toma_strike_missile_mp";
   }
 
-  var5.explodeent = spawn("script_model", var5.origin);
-  var5.explodeent setModel(var5);
-  var5.explodeent linkTo(var5);
-  var5.explodeent dontinterpolate();
+  var_5.explodeent = spawn("script_model", var_5.origin);
+  var_5.explodeent setModel(var_5);
+  var_5.explodeent linkTo(var_5);
+  var_5.explodeent dontinterpolate();
 
-  if(var4) {
-    var5.explodeent setentityowner(self);
+  if(var_4) {
+    var_5.explodeent setentityowner(self);
   }
 
-  var6 = spawn("script_model", var2.sourcepos);
-  var6 linkTo(var5, "tag_origin", (10, 0, 10), (0, 0, 0));
-  var5.killcament = var6;
-  var5.owner = self;
-  var5.streakinfo = var3;
+  var_6 = spawn("script_model", var_2.sourcepos);
+  var_6 linkTo(var_5, "tag_origin", (10, 0, 10), (0, 0, 0));
+  var_5.killcament = var_6;
+  var_5.owner = self;
+  var_5.streakinfo = var_3;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("spawn", "addSpawnDangerZone")) {
-    [[scripts\cp_mp\utility\script_utility::getsharedfunc("spawn", "addSpawnDangerZone")]](var2.goalpos, 512, 300, self.team, 6, self, 1);
+    [[scripts\cp_mp\utility\script_utility::getsharedfunc("spawn", "addSpawnDangerZone")]](var_2.goalpos, 512, 300, self.team, 6, self, 1);
   }
 
   thread ref_13bd4();
-  thread toma_strike_watch_airexplosion(var5, var2.preexplpos, var2.num_of_frame_frozen);
-  thread toma_strike_watch_stuck(var5, vectortoangles(var2.initvelocity), gettime());
+  thread toma_strike_watch_airexplosion(var_5, var_2.preexplpos, var_2.num_of_frame_frozen);
+  thread toma_strike_watch_stuck(var_5, vectortoangles(var_2.initvelocity), gettime());
 }
 
-function tomastrike_getmissileendpos(var0) {
-  var1 = var0;
+function tomastrike_getmissileendpos(var_0) {
+  var_1 = var_0;
 
-  foreach(var3 in level.players) {
-    if(level.teambased && var3.team == self.team) {
+  foreach(var_3 in level.players) {
+    if(level.teambased && var_3.team == self.team) {
       continue;
-    } else if(!level.teambased && var3 == self) {
-      continue;
-    }
-
-    if(!var3 scripts\cp_mp\utility\player_utility::_isalive()) {
+    } else if(!level.teambased && var_3 == self) {
       continue;
     }
 
-    if(istrue(var3.markedfortoma)) {
+    if(!var_3 scripts\cp_mp\utility\player_utility::_isalive()) {
       continue;
     }
 
-    if(distancesquared(var0, var3.origin) > 250000) {
+    if(istrue(var_3.markedfortoma)) {
       continue;
     }
 
-    var3.markedfortoma = 1;
-    var1 = var3.origin;
+    if(distancesquared(var_0, var_3.origin) > 250000) {
+      continue;
+    }
+
+    var_3.markedfortoma = 1;
+    var_1 = var_3.origin;
     thread clearmarkonrespawn();
     break;
   }
 
-  return var1;
+  return var_1;
 }
 
 function clearmarkonrespawn() {
@@ -1244,7 +1244,7 @@ function clearmarkonrespawn() {
   self.markedfortoma = undefined;
 }
 
-function tomastrike_returnplayer(var0, var1, var2, var3, var4) {
+function tomastrike_returnplayer(var_0, var_1, var_2, var_3, var_4) {
   scripts\common\utility::allow_fire(1);
   scripts\common\utility::allow_weapon_switch(1);
   scripts\common\utility::allow_crouch(1);
@@ -1253,17 +1253,17 @@ function tomastrike_returnplayer(var0, var1, var2, var3, var4) {
   scripts\common\utility::allow_killstreaks(1);
   self clearclienttriggeraudiozone(1);
 
-  if(var1 == 1) {
+  if(var_1 == 1) {
     scripts\cp_mp\utility\player_utility::_freezecontrols(0, undefined, "tomaStrike");
   }
 
-  if(!istrue(var2)) {
-    if(var1 == 0) {
+  if(!istrue(var_2)) {
+    if(var_1 == 0) {
       self remotecontrolvehicleoff();
       self cameraunlink();
       self setplayerangles(self.restoreangles);
       self.restoreangles = undefined;
-    } else if(var1 == 2) {
+    } else if(var_1 == 2) {
       self unlink();
     }
   } else {
@@ -1277,12 +1277,12 @@ function tomastrike_returnplayer(var0, var1, var2, var3, var4) {
   self visionsetkillstreakforplayer("", 0);
   self visionsetfadetoblackforplayer("", 0);
   scripts\mp\utility\player::restorebasevisionset(0);
-  scripts\cp_mp\targetmarkergroups::targetmarkergroup_off(var3);
-  scripts\cp_mp\targetmarkergroups::targetmarkergroup_off(var4);
-  var0 notify("killstreak_finished_with_deploy_weapon");
+  scripts\cp_mp\targetmarkergroups::targetmarkergroup_off(var_3);
+  scripts\cp_mp\targetmarkergroups::targetmarkergroup_off(var_4);
+  var_0 notify("killstreak_finished_with_deploy_weapon");
 }
 
-function tomastrike_explode(var0, var1, var2, var3) {
+function tomastrike_explode(var_0, var_1, var_2, var_3) {
   self playSound("weap_hellfire_impact");
 
   if(isDefined(self.playersfx)) {
@@ -1291,7 +1291,7 @@ function tomastrike_explode(var0, var1, var2, var3) {
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("shellshock", "grenade_earthQuakeAtPosition")) {
-    level thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("shellshock", "grenade_earthQuakeAtPosition")]](var1, 1.2);
+    level thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("shellshock", "grenade_earthQuakeAtPosition")]](var_1, 1.2);
   }
 
   level.toma_strikes = scripts\engine\utility::array_remove(level.toma_strikes, self);
@@ -1308,8 +1308,8 @@ function tomastrike_explode(var0, var1, var2, var3) {
     self.cloudsfx delete();
   }
 
-  if(isDefined(var3)) {
-    var3 delete();
+  if(isDefined(var_3)) {
+    var_3 delete();
   }
 
   self delete();
@@ -1320,11 +1320,11 @@ function tomastrike_explode(var0, var1, var2, var3) {
   }
 }
 
-function toma_strike_missile_explode(var0) {
+function toma_strike_missile_explode(var_0) {
   self endon("death");
   self.exploding = 1;
   self.explodeent unlink();
-  self.explodeent.origin = var0;
+  self.explodeent.origin = var_0;
   self.explodeent setscriptablepartstate("explode", "active", 0);
   thread toma_strike_delay_hide();
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(3);
@@ -1345,8 +1345,8 @@ function toma_strike_delay_hide() {
 
 function ref_13bd4() {
   self endon("death");
-  var0 = self.owner;
-  var0 waittill("disconnect");
+  var_0 = self.owner;
+  var_0 waittill("disconnect");
 
   if(isDefined(self.killcament)) {
     self.killcament delete();
@@ -1357,147 +1357,147 @@ function ref_13bd4() {
   self notify("missile_dest_failed");
 }
 
-function toma_strike_watch_airexplosion(var0, var1, var2) {
+function toma_strike_watch_airexplosion(var_0, var_1, var_2) {
   self endon("death");
   self endon("missile_dest_failed");
   thread toma_strike_move_killcam(self.killcament, 3.675);
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(3.925);
   self setmissileminimapvisible(0);
-  thread toma_strike_missile_explode(var0);
+  thread toma_strike_missile_explode(var_0);
 
-  if(isDefined(var1) && isDefined(var2) && var2 == "flying") {
-    var3 = self.owner;
+  if(isDefined(var_1) && isDefined(var_2) && var_2 == "flying") {
+    var_3 = self.owner;
 
-    if(!isPlayer(var3)) {
-      var3 = self;
+    if(!isPlayer(var_3)) {
+      var_3 = self;
     }
 
-    var1 dodamage(500, var0, var3, self, "MOD_EXPLOSIVE", getcompleteweaponname("toma_proj_mp"));
+    var_1 dodamage(500, var_0, var_3, self, "MOD_EXPLOSIVE", getcompleteweaponname("toma_proj_mp"));
     return;
   }
 }
 
-function toma_strike_move_killcam(var0, var1) {
+function toma_strike_move_killcam(var_0, var_1) {
   self endon("death");
-  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var0);
+  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_0);
   self unlink();
-  self moveTo(var1, 3);
+  self moveTo(var_1, 3);
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(7);
   self delete();
 }
 
-function toma_strike_watch_stuck(var0, var1, var2) {
+function toma_strike_watch_stuck(var_0, var_1, var_2) {
   self endon("death");
   self endon("missile_dest_failed");
-  self waittill("missile_stuck", var3);
+  self waittill("missile_stuck", var_3);
   self setmissileminimapvisible(0);
 
-  if(gettime() - var1 < 3925) {
+  if(gettime() - var_1 < 3925) {
     thread toma_strike_missile_explode(self.origin);
     self notify("missile_dest_failed");
     return;
   }
 
   wait 0.05;
-  var4 = -1 * getdvarint("NPOQPMP", 800);
-  var5 = (gettime() - var1) / 1000;
-  var6 = var2 + (0, 0, var4 * var5);
+  var_4 = -1 * getdvarint("NPOQPMP", 800);
+  var_5 = (gettime() - var_1) / 1000;
+  var_6 = var_2 + (0, 0, var_4 * var_5);
 
-  if(isDefined(var3) && isPlayer(var3)) {
-    toma_strike_stuck_player(self, var3, var0, var6);
+  if(isDefined(var_3) && isPlayer(var_3)) {
+    toma_strike_stuck_player(self, var_3, var_0, var_6);
     return;
   }
 
-  toma_strike_stuck(var3, var0, var6);
+  toma_strike_stuck(var_3, var_0, var_6);
 }
 
-function toma_strike_stuck(var0, var1, var2) {
-  var3 = undefined;
-  var4 = vectorNormalize(var2);
-  var5 = anglestoup(self.angles);
-  var6 = anglestoright(var1);
+function toma_strike_stuck(var_0, var_1, var_2) {
+  var_3 = undefined;
+  var_4 = vectorNormalize(var_2);
+  var_5 = anglestoup(self.angles);
+  var_6 = anglestoright(var_1);
 
-  if(abs(vectordot(var4, var5)) >= 0.9848) {
-    var3 = toma_strike_rebuild_angles_up_right(var5, var6);
+  if(abs(vectordot(var_4, var_5)) >= 0.9848) {
+    var_3 = toma_strike_rebuild_angles_up_right(var_5, var_6);
   } else {
-    var3 = toma_strike_rebuild_angles_up_forward(var5, var4);
+    var_3 = toma_strike_rebuild_angles_up_forward(var_5, var_4);
   }
 
-  self.angles = var3;
-  thread toma_strike_launch_cluster(self, self.origin, var3, var0, gettime());
+  self.angles = var_3;
+  thread toma_strike_launch_cluster(self, self.origin, var_3, var_0, gettime());
 }
 
-function toma_strike_stuck_player(var0, var1, var2, var3) {
-  var3 *= (0, 0, 1);
-  var4 = var0.origin;
-  var5 = (0, 0, -1);
-  var6 = var4 + var5 * 128;
-  var7 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_sky", "physicscontents_item", "physicscontents_vehicle"]);
-  var8 = physics_raycast(var4, var6, var7, var0, 0, "physicsquery_closest", 1);
+function toma_strike_stuck_player(var_0, var_1, var_2, var_3) {
+  var_3 *= (0, 0, 1);
+  var_4 = var_0.origin;
+  var_5 = (0, 0, -1);
+  var_6 = var_4 + var_5 * 128;
+  var_7 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_sky", "physicscontents_item", "physicscontents_vehicle"]);
+  var_8 = physics_raycast(var_4, var_6, var_7, var_0, 0, "physicsquery_closest", 1);
 
-  if(isDefined(var8) && var8.size > 0) {
-    var6 = var8[0]["position"];
-    var9 = var8[0]["normal"];
-    var10 = var8[0]["entity"];
-    var6 -= var9 * 1;
-    var11 = -1 * getdvarint("NPOQPMP", 800);
-    var12 = vectordot(var6 - var4, var5);
-    var13 = sqrt(2 * var12 / -1 * var11);
-    var14 = var9;
-    var15 = anglestoright(var2);
-    var16 = toma_strike_rebuild_angles_up_right(var14, var15);
-    thread toma_strike_launch_cluster(var0, var6, var16, var10, gettime() + var13 * 1000);
+  if(isDefined(var_8) && var_8.size > 0) {
+    var_6 = var_8[0]["position"];
+    var_9 = var_8[0]["normal"];
+    var_10 = var_8[0]["entity"];
+    var_6 -= var_9 * 1;
+    var_11 = -1 * getdvarint("NPOQPMP", 800);
+    var_12 = vectordot(var_6 - var_4, var_5);
+    var_13 = sqrt(2 * var_12 / -1 * var_11);
+    var_14 = var_9;
+    var_15 = anglestoright(var_2);
+    var_16 = toma_strike_rebuild_angles_up_right(var_14, var_15);
+    thread toma_strike_launch_cluster(var_0, var_6, var_16, var_10, gettime() + var_13 * 1000);
     return;
   }
 }
 
-function toma_strike_launch_cluster(var0, var1, var2, var3, var4) {
-  var5 = var0.owner;
-  var6 = var0.killcament;
-  var7 = anglestoup(var2);
-  var8 = var1 + var7 * 1;
-  var9 = var8 + var7 * 25;
-  var10 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_sky", "physicscontents_item", "physicscontents_vehicle"]);
-  var11 = physics_raycast(var8, var9, var10, var0, 0, "physicsquery_closest", 1);
+function toma_strike_launch_cluster(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = var_0.owner;
+  var_6 = var_0.killcament;
+  var_7 = anglestoup(var_2);
+  var_8 = var_1 + var_7 * 1;
+  var_9 = var_8 + var_7 * 25;
+  var_10 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_sky", "physicscontents_item", "physicscontents_vehicle"]);
+  var_11 = physics_raycast(var_8, var_9, var_10, var_0, 0, "physicsquery_closest", 1);
 
-  if(isDefined(var11) && var11.size > 0) {
-    var9 = var11[0]["position"] - var7 * 1;
+  if(isDefined(var_11) && var_11.size > 0) {
+    var_9 = var_11[0]["position"] - var_7 * 1;
   }
 
-  var12 = var9;
-  var13 = toma_strike_get_shared_data(var5, var0.streakinfo, var4, var6);
-  var14 = toma_strike_get_cast_data();
-  var15 = toma_strike_create_branch(var13, var14, undefined, var12, var2, var3, 0, undefined, undefined);
-  var13.branches[var13.branches.size] = var15;
-  var15.killcament = var6;
-  var16 = anglesToForward(var2);
-  var17 = anglestoright(var2);
-  var18 = anglestoup(var2);
-  var19 = rotatepointaroundvector(var18, var16, 30);
-  var20 = vectorNormalize(vectorcross(var19, var18));
-  var21 = vectorcross(var20, var16);
-  var22 = axistoangles(var19, var20, var21);
-  var14 = toma_strike_get_cast_data();
-  var15 = toma_strike_create_branch(var13, var14, undefined, var12, var22, var3, 0, undefined, undefined);
-  var15.killcament = var6;
-  var13.branches[var13.branches.size] = var15;
-  var19 = rotatepointaroundvector(var18, var16, -30);
-  var20 = vectorNormalize(vectorcross(var19, var18));
-  var21 = vectorcross(var20, var16);
-  var22 = axistoangles(var19, var20, var21);
-  var14 = toma_strike_get_cast_data();
-  var15 = toma_strike_create_branch(var13, var14, undefined, var12, var22, var3, 0, undefined, undefined);
-  var15.killcament = var6;
-  var13.branches[var13.branches.size] = var15;
-  toma_strike_shared_data_register_cast(var13);
+  var_12 = var_9;
+  var_13 = toma_strike_get_shared_data(var_5, var_0.streakinfo, var_4, var_6);
+  var_14 = toma_strike_get_cast_data();
+  var_15 = toma_strike_create_branch(var_13, var_14, undefined, var_12, var_2, var_3, 0, undefined, undefined);
+  var_13.branches[var_13.branches.size] = var_15;
+  var_15.killcament = var_6;
+  var_16 = anglesToForward(var_2);
+  var_17 = anglestoright(var_2);
+  var_18 = anglestoup(var_2);
+  var_19 = rotatepointaroundvector(var_18, var_16, 30);
+  var_20 = vectorNormalize(vectorcross(var_19, var_18));
+  var_21 = vectorcross(var_20, var_16);
+  var_22 = axistoangles(var_19, var_20, var_21);
+  var_14 = toma_strike_get_cast_data();
+  var_15 = toma_strike_create_branch(var_13, var_14, undefined, var_12, var_22, var_3, 0, undefined, undefined);
+  var_15.killcament = var_6;
+  var_13.branches[var_13.branches.size] = var_15;
+  var_19 = rotatepointaroundvector(var_18, var_16, -30);
+  var_20 = vectorNormalize(vectorcross(var_19, var_18));
+  var_21 = vectorcross(var_20, var_16);
+  var_22 = axistoangles(var_19, var_20, var_21);
+  var_14 = toma_strike_get_cast_data();
+  var_15 = toma_strike_create_branch(var_13, var_14, undefined, var_12, var_22, var_3, 0, undefined, undefined);
+  var_15.killcament = var_6;
+  var_13.branches[var_13.branches.size] = var_15;
+  toma_strike_shared_data_register_cast(var_13);
 
-  foreach(var15 in var13.branches) {
+  foreach(var_15 in var_13.branches) {
     thread toma_strike_start_branch();
   }
 }
 
 function toma_strike_start_branch() {
-  var0 = self.killcament;
+  var_0 = self.killcament;
 
   if(!isDefined(self.preventstarttime)) {
     self.preventstarttime = gettime();
@@ -1505,8 +1505,8 @@ function toma_strike_start_branch() {
 
   if(!isDefined(self.startingcasttype)) {
     if(!toma_strike_shared_data_is_complete(self.shareddata)) {
-      var1 = toma_strike_branch_create_explosion(self.startingorigin, self.startingangles, self.startingstuckto, self.shareddata.streakinfo);
-      var1.killcament = var0;
+      var_1 = toma_strike_branch_create_explosion(self.startingorigin, self.startingangles, self.startingstuckto, self.shareddata.streakinfo);
+      var_1.killcament = var_0;
       thread toma_strike_start_explosion();
       self.iscomplete = 1;
       toma_strike_shared_data_is_complete(self.shareddata, 1);
@@ -1540,66 +1540,66 @@ function toma_strike_start_branch() {
     }
 
     if(self.casttype == 0) {
-      var2 = self.castdata.firstforwardmodanglesfunc;
+      var_2 = self.castdata.firstforwardmodanglesfunc;
 
-      if(isDefined(var2)) {
-        self.castangles = [[var2]](self.castangles);
+      if(isDefined(var_2)) {
+        self.castangles = [[var_2]](self.castangles);
         self.castdata.firstforwardmodanglesfunc = undefined;
       }
     }
 
     self.castdir = toma_strike_get_cast_dir(self.castangles, self.casttype);
     self.castend = self.caststart + self.castdir * toma_strike_get_cast_dist(self.casttype, self.castdata);
-    var3 = undefined;
-    var4 = undefined;
-    var5 = undefined;
-    var6 = undefined;
-    var7 = undefined;
-    var8 = physics_raycast(self.caststart, self.castend, self.shareddata.castcontents, undefined, 0, "physicsquery_closest", 1);
+    var_3 = undefined;
+    var_4 = undefined;
+    var_5 = undefined;
+    var_6 = undefined;
+    var_7 = undefined;
+    var_8 = physics_raycast(self.caststart, self.castend, self.shareddata.castcontents, undefined, 0, "physicsquery_closest", 1);
 
-    if(isDefined(var8) && var8.size > 0) {
-      var3 = 1;
-      var4 = var8[0]["position"];
-      var5 = var8[0]["normal"];
-      var6 = var8[0]["entity"];
+    if(isDefined(var_8) && var_8.size > 0) {
+      var_3 = 1;
+      var_4 = var_8[0]["position"];
+      var_5 = var_8[0]["normal"];
+      var_6 = var_8[0]["entity"];
     }
 
     switch (self.casttype) {
       case 0:
-        if(istrue(var3)) {
-          toma_strike_branch_register_cast(self.casttype, 0, var4);
-          var9 = 1;
+        if(istrue(var_3)) {
+          toma_strike_branch_register_cast(self.casttype, 0, var_4);
+          var_9 = 1;
 
           if(isDefined(self.castdata.firstforwarddist)) {
-            var10 = var4 - self.caststart;
-            var11 = vectordot(var10, self.castdir);
-            self.castdata.firstforwarddist -= var11;
+            var_10 = var_4 - self.caststart;
+            var_11 = vectordot(var_10, self.castdir);
+            self.castdata.firstforwarddist -= var_11;
 
             if(self.castdata.firstforwarddist > self.castdata.firstforwardmindist) {
-              var9 = 0;
+              var_9 = 0;
             } else {
               self.castdata.firstforwarddist = undefined;
             }
           }
 
-          var7 = toma_strike_rebuild_angles_up_right(var5, anglestoright(self.castangles));
+          var_7 = toma_strike_rebuild_angles_up_right(var_5, anglestoright(self.castangles));
 
-          if(var9) {
-            var1 = toma_strike_branch_create_explosion(var4, var7, var6, self.shareddata.streakinfo);
-            var1.killcament = var1;
+          if(var_9) {
+            var_1 = toma_strike_branch_create_explosion(var_4, var_7, var_6, self.shareddata.streakinfo);
+            var_1.killcament = var_1;
             thread toma_strike_start_explosion();
           }
 
           self.casttype = 2;
-          self.caststart = var4 + var5 * 1;
-          self.castangles = var7;
+          self.caststart = var_4 + var_5 * 1;
+          self.castangles = var_7;
         } else {
           toma_strike_branch_register_cast(self.casttype, undefined, undefined);
 
           if(isDefined(self.castdata.firstforwarddist)) {
-            var10 = self.castend - self.caststart;
-            var11 = vectordot(var10, self.castdir);
-            self.castdata.firstforwarddist -= var11;
+            var_10 = self.castend - self.caststart;
+            var_11 = vectordot(var_10, self.castdir);
+            self.castdata.firstforwarddist -= var_11;
 
             if(self.castdata.firstforwarddist <= self.castdata.firstforwardmindist) {
               self.castdata.firstforwarddist = undefined;
@@ -1612,20 +1612,20 @@ function toma_strike_start_branch() {
 
         break;
       case 1:
-        if(istrue(var3)) {
-          var7 = toma_strike_rebuild_angles_up_right(var5, anglestoright(self.castangles));
-          var1 = toma_strike_branch_create_explosion(var4, var7, var6, self.shareddata.streakinfo);
-          var1.killcament = var1;
+        if(istrue(var_3)) {
+          var_7 = toma_strike_rebuild_angles_up_right(var_5, anglestoright(self.castangles));
+          var_1 = toma_strike_branch_create_explosion(var_4, var_7, var_6, self.shareddata.streakinfo);
+          var_1.killcament = var_1;
           thread toma_strike_start_explosion();
-          var12 = vectordot(anglestoup(self.castangles), var5);
+          var_12 = vectordot(anglestoup(self.castangles), var_5);
 
-          if(var12 < 0.9848) {
-            toma_strike_branch_register_cast(self.casttype, 2, var4);
+          if(var_12 < 0.9848) {
+            toma_strike_branch_register_cast(self.casttype, 2, var_4);
             self.casttype = 2;
-            self.caststart = var4 + var5 * 1;
-            self.castangles = var7;
+            self.caststart = var_4 + var_5 * 1;
+            self.castangles = var_7;
           } else {
-            toma_strike_branch_register_cast(self.casttype, 1, var4);
+            toma_strike_branch_register_cast(self.casttype, 1, var_4);
             self.casttype = 0;
           }
         } else {
@@ -1635,10 +1635,10 @@ function toma_strike_start_branch() {
 
         break;
       case 2:
-        if(istrue(var3)) {
-          toma_strike_branch_register_cast(self.casttype, 3, var4);
+        if(istrue(var_3)) {
+          toma_strike_branch_register_cast(self.casttype, 3, var_4);
           self.casttype = 0;
-          self.caststart = var4 + var5 * 1;
+          self.caststart = var_4 + var_5 * 1;
         } else {
           toma_strike_branch_register_cast(self.casttype, undefined, undefined);
           self.casttype = 0;
@@ -1655,47 +1655,47 @@ function toma_strike_start_branch() {
   self.shareddata.branches = [];
 }
 
-function toma_strike_branch_create_explosion(var0, var1, var2, var3) {
-  var4 = 50;
+function toma_strike_branch_create_explosion(var_0, var_1, var_2, var_3) {
+  var_4 = 50;
 
   if(true) {
-    var4 = randomintrange(50, 350);
+    var_4 = randomintrange(50, 350);
   }
 
-  var5 = self.preventstarttime + var4;
-  var6 = toma_strike_create_explosion(var0 + anglestoup(var1), var1, var2, self.shareddata.owner, var5, var3);
-  self.preventstarttime = var5;
-  self.ents[self.ents.size] = var6;
+  var_5 = self.preventstarttime + var_4;
+  var_6 = toma_strike_create_explosion(var_0 + anglestoup(var_1), var_1, var_2, self.shareddata.owner, var_5, var_3);
+  self.preventstarttime = var_5;
+  self.ents[self.ents.size] = var_6;
   toma_strike_shared_data_register_ent(self.shareddata);
-  return var6;
+  return var_6;
 }
 
-function toma_strike_create_explosion(var0, var1, var2, var3, var4, var5) {
-  var6 = spawn("script_model", var0);
-  var6.angles = var1;
-  var6.stuckto = var2;
-  var6.owner = var3;
-  var6.starttime = var4;
-  var6.streakinfo = var5;
+function toma_strike_create_explosion(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = spawn("script_model", var_0);
+  var_6.angles = var_1;
+  var_6.stuckto = var_2;
+  var_6.owner = var_3;
+  var_6.starttime = var_4;
+  var_6.streakinfo = var_5;
 
-  if(isDefined(var5.ref_121a8)) {
-    var7 = var5.ref_121a8;
+  if(isDefined(var_5.ref_121a8)) {
+    var_7 = var_5.ref_121a8;
   } else {
-    var7 = "ks_toma_strike_cluster_mp";
+    var_7 = "ks_toma_strike_cluster_mp";
   }
 
-  var7 setModel(var7);
+  var_7 setModel(var_7);
 
-  if(isPlayer(var4)) {
-    var7 setotherent(var4);
-    var7 setentityowner(var4);
+  if(isPlayer(var_4)) {
+    var_7 setotherent(var_4);
+    var_7 setentityowner(var_4);
   }
 
-  if(isDefined(var3)) {
-    var7 linkTo(var3);
+  if(isDefined(var_3)) {
+    var_7 linkTo(var_3);
   }
 
-  return var7;
+  return var_7;
 }
 
 function toma_strike_start_explosion() {
@@ -1739,41 +1739,41 @@ function toma_strike_shared_data_can_cast_this_frame() {
   return self.caststhisframe < 3;
 }
 
-function toma_strike_shared_data_is_complete(var0) {
-  var1 = 0;
+function toma_strike_shared_data_is_complete(var_0) {
+  var_1 = 0;
 
   if(self.caststotal >= 60) {
-    var1 = 1;
+    var_1 = 1;
   } else if(self.entstotal >= 20) {
-    var1 = 1;
-  } else if(istrue(var0)) {
-    var2 = 1;
+    var_1 = 1;
+  } else if(istrue(var_0)) {
+    var_2 = 1;
 
-    foreach(var4 in self.branches) {
-      if(!toma_strike_branch_is_complete(var4)) {
-        var2 = 0;
+    foreach(var_4 in self.branches) {
+      if(!toma_strike_branch_is_complete(var_4)) {
+        var_2 = 0;
         break;
       }
     }
 
-    if(var2) {
-      var1 = 1;
+    if(var_2) {
+      var_1 = 1;
     }
   }
 
-  if(var1) {
+  if(var_1) {
     self.iscomplete = 1;
   }
 
-  return var1;
+  return var_1;
 }
 
-function toma_strike_branch_register_cast(var0, var1, var2) {
+function toma_strike_branch_register_cast(var_0, var_1, var_2) {
   toma_strike_shared_data_register_cast(self.shareddata);
   self.casts++;
 
-  if(isDefined(var1)) {
-    if(var1 == 0 || var1 == 1 || var1 == 2) {
+  if(isDefined(var_1)) {
+    if(var_1 == 0 || var_1 == 1 || var_1 == 2) {
       self.castfails = 0;
       return;
     }
@@ -1781,204 +1781,204 @@ function toma_strike_branch_register_cast(var0, var1, var2) {
     return;
   }
 
-  if(var0 == 1) {
+  if(var_0 == 1) {
     self.castfails++;
     return;
   }
 }
 
-function toma_strike_branch_is_complete(var0) {
-  var1 = 0;
-  var2 = undefined;
+function toma_strike_branch_is_complete(var_0) {
+  var_1 = 0;
+  var_2 = undefined;
 
   if(toma_strike_shared_data_is_complete(self.shareddata)) {
-    var1 = 1;
+    var_1 = 1;
   } else if(isDefined(self.castdata) && self.castfails >= self.castdata.maxfails) {
-    var1 = 1;
+    var_1 = 1;
   } else if(isDefined(self.castdata) && self.casts >= self.castdata.maxcasts) {
-    var1 = 1;
+    var_1 = 1;
   } else if(isDefined(self.castdata) && self.ents.size >= self.castdata.maxents) {
-    var1 = 1;
-  } else if(istrue(var0)) {
-    var2 = 1;
+    var_1 = 1;
+  } else if(istrue(var_0)) {
+    var_2 = 1;
 
-    foreach(var4 in self.branches) {
-      if(!toma_strike_branch_is_complete(var4)) {
-        var2 = 0;
+    foreach(var_4 in self.branches) {
+      if(!toma_strike_branch_is_complete(var_4)) {
+        var_2 = 0;
         break;
       }
     }
 
-    if(var2) {
-      var1 = 1;
+    if(var_2) {
+      var_1 = 1;
     }
   }
 
-  if(var1 && !istrue(self.iscomplete)) {
-    var6 = self.oncompletedfunc;
+  if(var_1 && !istrue(self.iscomplete)) {
+    var_6 = self.oncompletedfunc;
 
-    if(isDefined(var6)) {
-      self[[var6]]();
+    if(isDefined(var_6)) {
+      self[[var_6]]();
     }
 
-    if(istrue(var2)) {
-      var1 = 0;
+    if(istrue(var_2)) {
+      var_1 = 0;
 
-      foreach(var4 in self.branches) {
-        if(!toma_strike_branch_is_complete(var4)) {
-          var2 = 0;
+      foreach(var_4 in self.branches) {
+        if(!toma_strike_branch_is_complete(var_4)) {
+          var_2 = 0;
           break;
         }
       }
 
-      if(var2) {
-        var1 = 1;
+      if(var_2) {
+        var_1 = 1;
       }
     }
   }
 
-  if(var1) {
+  if(var_1) {
     self.iscomplete = 1;
   }
 
-  return var1;
+  return var_1;
 }
 
-function toma_strike_create_branch(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
-  var9 = spawnStruct();
-  var9.shareddata = var0;
-  var9.castdata = var1;
-  var9.startingorigin = var3;
-  var9.startingangles = var4;
-  var9.startingstuckto = var5;
-  var9.startingcasttype = var6;
-  var9.oncompletedfunc = var8;
-  var9.ents = [];
-  var9.branches = [];
-  var9.hitpositions = [];
-  var9.hittypes = [];
-  var9.casts = 0;
-  var9.castfails = 0;
-  var9.preventstarttime = var7;
-  return var9;
+function toma_strike_create_branch(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  var_9 = spawnStruct();
+  var_9.shareddata = var_0;
+  var_9.castdata = var_1;
+  var_9.startingorigin = var_3;
+  var_9.startingangles = var_4;
+  var_9.startingstuckto = var_5;
+  var_9.startingcasttype = var_6;
+  var_9.oncompletedfunc = var_8;
+  var_9.ents = [];
+  var_9.branches = [];
+  var_9.hitpositions = [];
+  var_9.hittypes = [];
+  var_9.casts = 0;
+  var_9.castfails = 0;
+  var_9.preventstarttime = var_7;
+  return var_9;
 }
 
-function toma_strike_get_shared_data(var0, var1, var2, var3) {
-  var4 = spawnStruct();
-  var4.owner = var0;
-  var4.team = var0.team;
-  var4.streakinfo = var1;
-  var4.impacttime = var2;
-  var4.branches = [];
-  var4.entstotal = 0;
-  var4.caststotal = 0;
-  var4.caststhisframe = 0;
-  var4.frametimestamp = gettime();
-  var4.castcontents = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_sky", "physicscontents_item", "physicscontents_vehicle"]);
-  return var4;
+function toma_strike_get_shared_data(var_0, var_1, var_2, var_3) {
+  var_4 = spawnStruct();
+  var_4.owner = var_0;
+  var_4.team = var_0.team;
+  var_4.streakinfo = var_1;
+  var_4.impacttime = var_2;
+  var_4.branches = [];
+  var_4.entstotal = 0;
+  var_4.caststotal = 0;
+  var_4.caststhisframe = 0;
+  var_4.frametimestamp = gettime();
+  var_4.castcontents = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_sky", "physicscontents_item", "physicscontents_vehicle"]);
+  return var_4;
 }
 
 function toma_strike_get_cast_data() {
-  var0 = spawnStruct();
-  var0.distforward = 125;
-  var0.distdown = 50;
-  var0.distup = 25;
-  var0.maxcasts = 12;
-  var0.maxfails = 3;
-  var0.maxents = 4;
-  return var0;
+  var_0 = spawnStruct();
+  var_0.distforward = 125;
+  var_0.distdown = 50;
+  var_0.distup = 25;
+  var_0.maxcasts = 12;
+  var_0.maxfails = 3;
+  var_0.maxents = 4;
+  return var_0;
 }
 
-function toma_strike_get_cast_dir(var0, var1) {
-  switch (var1) {
+function toma_strike_get_cast_dir(var_0, var_1) {
+  switch (var_1) {
     case 0:
-      return anglesToForward(var0);
+      return anglesToForward(var_0);
     case 1:
-      return (-1 * anglestoup(var0));
+      return (-1 * anglestoup(var_0));
     case 2:
-      return anglestoup(var0);
+      return anglestoup(var_0);
   }
 
   return undefined;
 }
 
-function toma_strike_get_cast_dist(var0, var1) {
-  switch (var0) {
+function toma_strike_get_cast_dist(var_0, var_1) {
+  switch (var_0) {
     case 0:
-      if(isDefined(var1.firstforwarddist)) {
-        return var1.firstforwarddist;
+      if(isDefined(var_1.firstforwarddist)) {
+        return var_1.firstforwarddist;
       } else {
-        return var1.distforward;
+        return var_1.distforward;
       }
     case 1:
-      return var1.distdown;
+      return var_1.distdown;
     case 2:
-      return var1.distup;
+      return var_1.distup;
   }
 
   return undefined;
 }
 
-function toma_strike_rebuild_angles_up_right(var0, var1) {
-  var2 = vectorNormalize(vectorcross(var0, var1));
-  var1 = vectorcross(var2, var0);
-  return axistoangles(var2, var1, var0);
+function toma_strike_rebuild_angles_up_right(var_0, var_1) {
+  var_2 = vectorNormalize(vectorcross(var_0, var_1));
+  var_1 = vectorcross(var_2, var_0);
+  return axistoangles(var_2, var_1, var_0);
 }
 
-function toma_strike_rebuild_angles_up_forward(var0, var1) {
-  var2 = vectorNormalize(vectorcross(var1, var0));
-  var1 = vectorcross(var0, var2);
-  return axistoangles(var1, var2, var0);
+function toma_strike_rebuild_angles_up_forward(var_0, var_1) {
+  var_2 = vectorNormalize(vectorcross(var_1, var_0));
+  var_1 = vectorcross(var_0, var_2);
+  return axistoangles(var_1, var_2, var_0);
 }
 
-function tomastrike_isremotevehicletype(var0) {
-  var1 = 0;
+function tomastrike_isremotevehicletype(var_0) {
+  var_1 = 0;
 
-  switch (var0) {
+  switch (var_0) {
     case 2:
     case 1:
     case 0:
-      var1 = 1;
+      var_1 = 1;
       break;
   }
 
-  return var1;
+  return var_1;
 }
 
-function tomastrike_ismarkertype(var0) {
-  var1 = 0;
+function tomastrike_ismarkertype(var_0) {
+  var_1 = 0;
 
-  switch (var0) {
+  switch (var_0) {
     case 4:
     case 3:
-      var1 = 1;
+      var_1 = 1;
       break;
   }
 
-  return var1;
+  return var_1;
 }
 
-function toma_strike_setmarkerobjective(var0, var1, var2, var3) {
-  objective_icon(var0, var1);
-  objective_showtoplayersinmask(var0);
+function toma_strike_setmarkerobjective(var_0, var_1, var_2, var_3) {
+  objective_icon(var_0, var_1);
+  objective_showtoplayersinmask(var_0);
 
-  if(isPlayer(var2)) {
-    objective_addclienttomask(var0, var2);
+  if(isPlayer(var_2)) {
+    objective_addclienttomask(var_0, var_2);
   }
 
-  objective_onentity(var0, self);
-  objective_setzoffset(var0, var3);
-  objective_setplayintro(var0, 0);
-  objective_setplayoutro(var0, 0);
-  objective_setbackground(var0, 1);
+  objective_onentity(var_0, self);
+  objective_setzoffset(var_0, var_3);
+  objective_setplayintro(var_0, 0);
+  objective_setplayoutro(var_0, 0);
+  objective_setbackground(var_0, 1);
 
-  if(level.teambased || !isPlayer(var2)) {
-    objective_setownerteam(var0, var2.team);
+  if(level.teambased || !isPlayer(var_2)) {
+    objective_setownerteam(var_0, var_2.team);
   } else {
-    objective_setownerclient(var0, var2);
+    objective_setownerclient(var_0, var_2);
   }
 
-  objective_state(var0, "current");
+  objective_state(var_0, "current");
 }
 
 function toma_strike_handlemarkerscriptable() {
@@ -1996,37 +1996,37 @@ function toma_strike_handlemarkerscriptable() {
   }
 }
 
-function ref_13bd5(var0, var1, var2, var3) {
-  var4 = scripts\engine\trace::create_default_contents(1);
-  var5 = scripts\engine\trace::ray_trace(var0 - var1 * 30, var0 + var1 * 1000, undefined, var4);
-  var6 = var5["position"] + var5["normal"] * 20;
-  var7 = var6;
-  var8 = 5000;
-  var9 = 5000;
-  var10 = [var7 + var2 * 100, var7 - var2 * 100, var7 + var3 * 100, var7 - var3 * 100, var7 + (var2 + var3) * 100, var7 + (var2 - var3) * 100, var7 + (var3 - var2) * 100, var7 + (-1 * var2 - var3) * 100];
-  var11 = var7 + (0, 0, var8 * 1.5);
+function ref_13bd5(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\engine\trace::create_default_contents(1);
+  var_5 = scripts\engine\trace::ray_trace(var_0 - var_1 * 30, var_0 + var_1 * 1000, undefined, var_4);
+  var_6 = var_5["position"] + var_5["normal"] * 20;
+  var_7 = var_6;
+  var_8 = 5000;
+  var_9 = 5000;
+  var_10 = [var_7 + var_2 * 100, var_7 - var_2 * 100, var_7 + var_3 * 100, var_7 - var_3 * 100, var_7 + (var_2 + var_3) * 100, var_7 + (var_2 - var_3) * 100, var_7 + (var_3 - var_2) * 100, var_7 + (-1 * var_2 - var_3) * 100];
+  var_11 = var_7 + (0, 0, var_8 * 1.5);
 
-  foreach(var13 in var10) {
-    var14 = vectorNormalize(var13 - var7);
-    var15 = var7 + (0, 0, var8) - var14 * var9;
-    var16 = var7;
-    var17 = scripts\engine\trace::ray_trace_passed(var15, var16, undefined, var4);
+  foreach(var_13 in var_10) {
+    var_14 = vectorNormalize(var_13 - var_7);
+    var_15 = var_7 + (0, 0, var_8) - var_14 * var_9;
+    var_16 = var_7;
+    var_17 = scripts\engine\trace::ray_trace_passed(var_15, var_16, undefined, var_4);
 
-    if(!istrue(var17)) {
+    if(!istrue(var_17)) {
       wait 0.05;
       continue;
     }
 
-    var11 = var15;
+    var_11 = var_15;
     break;
   }
 
-  return var11;
+  return var_11;
 }
 
-function ref_13bd9(var0) {
+function ref_13bd9(var_0) {
   self endon("cluster_strike_finished");
   self endon("disconnect");
   level waittill("game_ended");
-  scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var0);
+  scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_0);
 }

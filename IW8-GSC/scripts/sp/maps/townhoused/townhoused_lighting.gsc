@@ -18,21 +18,21 @@ function main() {
 }
 
 function init_2ndfloor_muzzle_flash() {
-  var0 = getEntArray("2nd_floor_muzzle_light", "targetname");
+  var_0 = getEntArray("2nd_floor_muzzle_light", "targetname");
 
   if(getdvarint("LLQQOPKTKM") > 0) {
-    foreach(var2 in var0) {
-      var2 delete();
+    foreach(var_2 in var_0) {
+      var_2 delete();
     }
 
     return;
   }
 
-  foreach(var2 in var3) {
-    var2.og_intensity = var2 getlightintensity();
-    var2 setlightintensity(0);
-    var2 setlightradius(115);
-    var2.flash_color = (1, 0.85, 0.77);
+  foreach(var_2 in var_3) {
+    var_2.og_intensity = var_2 getlightintensity();
+    var_2 setlightintensity(0);
+    var_2 setlightradius(115);
+    var_2.flash_color = (1, 0.85, 0.77);
   }
 }
 
@@ -84,17 +84,17 @@ function init_price_attic_lights() {
   level.lt_price_attic_key = getEnt("lt_price_key", "targetname");
   level.lt_price_attic_rim = getEnt("lt_price_rim", "targetname");
   level.lt_price_attic_laptop = getEnt("lt_price_laptop", "targetname");
-  var0 = [level.lt_price_attic_key, level.lt_price_attic_rim, level.lt_price_attic_laptop];
+  var_0 = [level.lt_price_attic_key, level.lt_price_attic_rim, level.lt_price_attic_laptop];
 
-  foreach(var2 in var0) {
-    var2 setlightintensity(0);
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(0);
   }
 }
 
 function init_touching_triggers() {
-  var0 = getEntArray("light_on_touching", "targetname");
+  var_0 = getEntArray("light_on_touching", "targetname");
 
-  foreach(var2 in var0) {
+  foreach(var_2 in var_0) {
     thread light_on_touching();
   }
 }
@@ -103,26 +103,26 @@ function post_load() {
   thread lighting_setup_dvars();
 }
 
-function start_light_intensity(var0, var1, var2) {
-  var3 = getEnt(var0, var1);
+function start_light_intensity(var_0, var_1, var_2) {
+  var_3 = getEnt(var_0, var_1);
 
-  if(!isDefined(var3)) {
+  if(!isDefined(var_3)) {
     return;
   }
 
-  var3.og_intensity = var3 getlightintensity();
+  var_3.og_intensity = var_3 getlightintensity();
 
-  if(!isDefined(var2)) {
-    var2 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  var3 setlightintensity(var2);
+  var_3 setlightintensity(var_2);
 }
 
-function onflag_restore_intensity(var0, var1, var2) {
-  scripts\engine\utility::flag_wait(var2);
-  var3 = getEnt(var0, var1);
-  var3 setlightintensity(var3.og_intensity);
+function onflag_restore_intensity(var_0, var_1, var_2) {
+  scripts\engine\utility::flag_wait(var_2);
+  var_3 = getEnt(var_0, var_1);
+  var_3 setlightintensity(var_3.og_intensity);
 }
 
 function lighting_setup_dvars() {
@@ -203,28 +203,28 @@ function house_exterior_dof() {
 }
 
 function light_on_touching() {
-  var0 = getEntArray(self.target, "targetname");
+  var_0 = getEntArray(self.target, "targetname");
 
-  foreach(var2 in var0) {
-    var2.og_intensity = var2 getlightintensity();
-    var2 setlightintensity(0);
+  foreach(var_2 in var_0) {
+    var_2.og_intensity = var_2 getlightintensity();
+    var_2 setlightintensity(0);
   }
 
   self endon("death");
 
   for(;;) {
-    self waittill("trigger", var4);
+    self waittill("trigger", var_4);
 
-    foreach(var2 in var0) {
-      var2 setlightintensity(var2.og_intensity);
+    foreach(var_2 in var_0) {
+      var_2 setlightintensity(var_2.og_intensity);
     }
 
-    while(var4 istouching(self)) {
+    while(var_4 istouching(self)) {
       wait 0.1;
     }
 
-    foreach(var2 in var0) {
-      var2 setlightintensity(0);
+    foreach(var_2 in var_0) {
+      var_2 setlightintensity(0);
     }
   }
 }
@@ -255,17 +255,17 @@ function price_ending_cinematic() {
 }
 
 function price_lighting() {
-  var0 = 1;
-  var1 = 0.004;
-  var2 = 0.25;
-  var3 = 0.005;
-  thread lerp_value_up_key(level.lt_price_attic_key, 0, var1);
+  var_0 = 1;
+  var_1 = 0.004;
+  var_2 = 0.25;
+  var_3 = 0.005;
+  thread lerp_value_up_key(level.lt_price_attic_key, 0, var_1);
   level.lt_price_attic_key setlightradius(60);
   level.lt_price_attic_key setlightfovrange(50, 35);
-  thread lerp_value_up_rim(level.lt_price_attic_rim, 0, var2);
+  thread lerp_value_up_rim(level.lt_price_attic_rim, 0, var_2);
   level.lt_price_attic_rim setlightradius(80);
   level.lt_price_attic_rim setlightfovrange(90, 35);
-  thread lerp_value_up_laptop(level.lt_price_attic_laptop, 0, var3);
+  thread lerp_value_up_laptop(level.lt_price_attic_laptop, 0, var_3);
   level.lt_price_attic_laptop setlightradius(60);
   level.lt_price_attic_laptop setlightfovrange(120, 50);
 
@@ -277,57 +277,57 @@ function price_lighting() {
   scripts\engine\utility::exploder("lensflare_price");
 }
 
-function lerp_value_up_key(var0, var1, var2) {
-  var3 = var1 - var0;
-  var4 = 0.02;
-  var5 = int(var2 / var4);
+function lerp_value_up_key(var_0, var_1, var_2) {
+  var_3 = var_1 - var_0;
+  var_4 = 0.02;
+  var_5 = int(var_2 / var_4);
 
-  if(var5 > 0) {
-    var6 = var3 / var5;
+  if(var_5 > 0) {
+    var_6 = var_3 / var_5;
 
-    while(var5) {
-      var0 += var6;
-      level.lt_price_attic_key setlightintensity(var0);
-      wait var4;
-      var5--;
+    while(var_5) {
+      var_0 += var_6;
+      level.lt_price_attic_key setlightintensity(var_0);
+      wait var_4;
+      var_5--;
     }
 
     return;
   }
 }
 
-function lerp_value_up_rim(var0, var1, var2) {
-  var3 = var1 - var0;
-  var4 = 0.02;
-  var5 = int(var2 / var4);
+function lerp_value_up_rim(var_0, var_1, var_2) {
+  var_3 = var_1 - var_0;
+  var_4 = 0.02;
+  var_5 = int(var_2 / var_4);
 
-  if(var5 > 0) {
-    var6 = var3 / var5;
+  if(var_5 > 0) {
+    var_6 = var_3 / var_5;
 
-    while(var5) {
-      var0 += var6;
-      level.lt_price_attic_rim setlightintensity(var0);
-      wait var4;
-      var5--;
+    while(var_5) {
+      var_0 += var_6;
+      level.lt_price_attic_rim setlightintensity(var_0);
+      wait var_4;
+      var_5--;
     }
 
     return;
   }
 }
 
-function lerp_value_up_laptop(var0, var1, var2) {
-  var3 = var1 - var0;
-  var4 = 0.02;
-  var5 = int(var2 / var4);
+function lerp_value_up_laptop(var_0, var_1, var_2) {
+  var_3 = var_1 - var_0;
+  var_4 = 0.02;
+  var_5 = int(var_2 / var_4);
 
-  if(var5 > 0) {
-    var6 = var3 / var5;
+  if(var_5 > 0) {
+    var_6 = var_3 / var_5;
 
-    while(var5) {
-      var0 += var6;
-      level.lt_price_attic_laptop setlightintensity(var0);
-      wait var4;
-      var5--;
+    while(var_5) {
+      var_0 += var_6;
+      level.lt_price_attic_laptop setlightintensity(var_0);
+      wait var_4;
+      var_5--;
     }
 
     return;

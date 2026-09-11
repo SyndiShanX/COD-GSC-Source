@@ -9,15 +9,15 @@ function ref_14127() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_compass", "shouldBeVisibleToPlayer", &ref_14128);
 }
 
-function ref_14128(var0, var1) {
-  if(var1 entitymarkfilteredin(var0)) {
+function ref_14128(var_0, var_1) {
+  if(var_1 entitymarkfilteredin(var_0)) {
     return 1;
   } else if(scripts\mp\utility\game::getgametype() != "br") {
-    if(!scripts\cp_mp\vehicles\vehicle::ref_141b7(var0, var1)) {
+    if(!scripts\cp_mp\vehicles\vehicle::ref_141b7(var_0, var_1)) {
       return 1;
     }
-  } else if(var1 scripts\mp\utility\perk::_hasperk("specialty_tactical_recon")) {
-    if(!scripts\cp_mp\vehicles\vehicle::ref_141bb(var0, var1)) {
+  } else if(var_1 scripts\mp\utility\perk::_hasperk("specialty_tactical_recon")) {
+    if(!scripts\cp_mp\vehicles\vehicle::ref_141bb(var_0, var_1)) {
       return 1;
     }
   }

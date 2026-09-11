@@ -3,7 +3,7 @@
  * Script: scripts\aitypes\human\civilian_logic.gsc
 ****************************************************/
 
-function initcivilian(var0) {
+function initcivilian(var_0) {
   if(isDefined(self.bt.initiated)) {
     return anim.success;
   }
@@ -28,51 +28,51 @@ function initcivilian(var0) {
   return anim.success;
 }
 
-function setstealthstate_neutral(var0, var1) {
-  if(var0 != "combat") {
-    var0 = "idle";
+function setstealthstate_neutral(var_0, var_1) {
+  if(var_0 != "combat") {
+    var_0 = "idle";
   }
 
-  return scripts\aitypes\stealth::setstealthstate(var0, var1);
+  return scripts\aitypes\stealth::setstealthstate(var_0, var_1);
 }
 
-function updateeveryframe_civ_global(var0) {
+function updateeveryframe_civ_global(var_0) {
   scripts\aitypes\common::updateeveryframe_magicdoorchecks();
   return anim.success;
 }
 
-function updateeveryframe_civ_default(var0) {
+function updateeveryframe_civ_default(var_0) {
   if(scripts\asm\asm_bb::bb_getcivilianstate() == "noncombat") {
-    var1 = scripts\asm\asm::asm_getephemeraleventdata("ai_notify", "bulletwhizby");
+    var_1 = scripts\asm\asm::asm_getephemeraleventdata("ai_notify", "bulletwhizby");
 
-    if(isDefined(var1)) {
+    if(isDefined(var_1)) {
       if(!isDefined(self.disablebulletwhizbyreaction)) {
-        var2 = var1[0];
-        var3 = isDefined(var2) && distancesquared(self.origin, var2.origin) < 262144;
+        var_2 = var_1[0];
+        var_3 = isDefined(var_2) && distancesquared(self.origin, var_2.origin) < 262144;
 
-        if(var3 || scripts\engine\utility::cointoss()) {
+        if(var_3 || scripts\engine\utility::cointoss()) {
           scripts\asm\asm_bb::bb_setcivilianstate("combat");
-          var4 = spawnStruct();
-          var4.gametime = gettime() - 50;
-          var4.params = var1;
-          scripts\asm\asm_bb::bb_requestwhizby(var4);
+          var_4 = spawnStruct();
+          var_4.gametime = gettime() - 50;
+          var_4.params = var_1;
+          scripts\asm\asm_bb::bb_requestwhizby(var_4);
           return anim.success;
         }
       }
     } else {
-      var5 = 5000;
-      var2 = scripts\asm\asm_bb::bb_getrequestedwhizby();
+      var_5 = 5000;
+      var_2 = scripts\asm\asm_bb::bb_getrequestedwhizby();
 
-      if(!isDefined(var2) || gettime() > var2.gametime + var5) {
+      if(!isDefined(var_2) || gettime() > var_2.gametime + var_5) {
         scripts\asm\asm_bb::bb_requestwhizby(undefined);
       }
     }
 
     if(!istrue(self.ignoreall)) {
-      var6 = getaiarray("axis");
+      var_6 = getaiarray("axis");
 
-      foreach(var8 in var6) {
-        if(distancesquared(var8.origin, self.origin) < 262144) {
+      foreach(var_8 in var_6) {
+        if(distancesquared(var_8.origin, self.origin) < 262144) {
           scripts\asm\asm_bb::bb_setcivilianstate("combat");
           return anim.success;
         }
@@ -87,40 +87,40 @@ function updateeveryframe_civ_default(var0) {
   return anim.success;
 }
 
-function isincover(var0) {
+function isincover(var_0) {
   if(!isDefined(self.node) || self.node.type == "Path" || self.node.type == "Exposed" || scripts\engine\utility::isnodeexposed3d(self.node) || self.node nodeisdisconnected()) {
     return anim.failure;
   }
 
-  var1 = 16;
+  var_1 = 16;
 
   if(isDefined(self.pathgoalpos)) {
-    if(distancesquared(self.pathgoalpos, self.origin) > var1) {
+    if(distancesquared(self.pathgoalpos, self.origin) > var_1) {
       return anim.failure;
     }
   } else {
-    var1 = 225;
+    var_1 = 225;
   }
 
-  var2 = undefined;
+  var_2 = undefined;
 
   if(scripts\engine\utility::actor_is3d()) {
-    var2 = distancesquared(self.origin, self.node.origin);
+    var_2 = distancesquared(self.origin, self.node.origin);
   } else {
     if(abs(self.origin[2] - self.node.origin[2]) > 80) {
       return anim.failure;
     }
 
-    var2 = distance2dsquared(self.origin, self.node.origin);
+    var_2 = distance2dsquared(self.origin, self.node.origin);
   }
 
-  if(var2 > var1 && !istrue(self.pathpending)) {
+  if(var_2 > var_1 && !istrue(self.pathpending)) {
     return anim.failure;
   }
 
-  var3 = scripts\asm\asm_bb::bb_getcovernode();
+  var_3 = scripts\asm\asm_bb::bb_getcovernode();
 
-  if(isDefined(var3) && self.node != var3 && !istrue(self.pathpending)) {
+  if(isDefined(var_3) && self.node != var_3 && !istrue(self.pathpending)) {
     return anim.failure;
   }
 
@@ -129,7 +129,7 @@ function isincover(var0) {
   return anim.running;
 }
 
-function clearcover(var0) {
+function clearcover(var_0) {
   self.covernode = undefined;
   scripts\asm\asm_bb::bb_setcovernode(undefined);
 }

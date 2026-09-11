@@ -36,6 +36,6 @@ function main_mp() {
   scripts\code\character::attachhat("russian_army_ar_5_hats_gasmask", xmodelalias\russian_army_ar_5_hats_gasmask::main());
 }
 
-function precache_mp(var0) {
-  level.agent_definition[var0]["animclass"] = "soldier";
+function precache_mp(var_0) {
+  level.agent_definition[var_0]["animclass"] = "soldier";
 }

@@ -21,7 +21,7 @@ function init_audio() {
 
 function rex_emitter_test() {
   wait 2;
-  var0 = 0;
+  var_0 = 0;
 
   for(;;) {
     if(level.player buttonPressed("DPAD_UP")) {
@@ -48,14 +48,14 @@ function is_deathsdoor_audio_enabled() {
   return level.audio.deathsdoor_enabled;
 }
 
-function restore_after_deathsdoor(var0) {
+function restore_after_deathsdoor(var_0) {
   if(is_deathsdoor_audio_enabled() || isDefined(level.audio.in_deathsdoor)) {
     level.audio.in_deathsdoor = undefined;
     level.player clearpriorityclienttriggeraudiozone("deathsdoor");
     level.player clearsoundsubmix("deaths_door_sp");
 
     if(isDefined(level.deathsdoor_sfx)) {
-      wait var0;
+      wait var_0;
 
       if(isDefined(level.deathsdoor_sfx)) {
         level.deathsdoor_sfx playSound("deaths_door_out", "sounddone");
@@ -125,75 +125,75 @@ function level_fadein() {
   levelsoundfade(1, level.audio.level_fade_time);
 }
 
-function set_audio_level_fade_time(var0) {
+function set_audio_level_fade_time(var_0) {
   init_audio_struct();
-  level.audio.level_fade_time = var0;
+  level.audio.level_fade_time = var_0;
 }
 
-function audio_bink_transition_ambient(var0, var1, var2, var3, var4, var5, var6) {
-  if(!isDefined(var0)) {
+function audio_bink_transition_ambient(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 2;
+  if(!isDefined(var_2)) {
+    var_2 = 2;
   }
 
-  if(!isDefined(var4)) {
-    var4 = 2;
+  if(!isDefined(var_4)) {
+    var_4 = 2;
   }
 
-  if(!isDefined(var6)) {
-    var6 = 2;
+  if(!isDefined(var_6)) {
+    var_6 = 2;
   }
 
-  if(isDefined(var5)) {
-    thread bink_transition_music(var0, var5, var6);
+  if(isDefined(var_5)) {
+    thread bink_transition_music(var_0, var_5, var_6);
   }
 
-  var7 = var4 + 0.05;
-  var8 = 1;
+  var_7 = var_4 + 0.05;
+  var_8 = 1;
 
-  if(isDefined(var1)) {
-    level.player setclienttriggeraudiozone(var1);
+  if(isDefined(var_1)) {
+    level.player setclienttriggeraudiozone(var_1);
   }
 
   while(!iscinematicplaying()) {
     wait 0.05;
   }
 
-  level.player setclienttriggeraudiozone("fade_to_black_minus_music", var2);
+  level.player setclienttriggeraudiozone("fade_to_black_minus_music", var_2);
 
   while(1 && iscinematicplaying()) {
-    var9 = cinematicgettimeinmsec() / 1000;
-    var10 = var0 - var9;
+    var_9 = cinematicgettimeinmsec() / 1000;
+    var_10 = var_0 - var_9;
 
-    if(var10 <= var7) {
-      var8 = 0;
+    if(var_10 <= var_7) {
+      var_8 = 0;
       break;
     }
 
     wait 0.05;
   }
 
-  if(var8 == 0) {
-    if(isDefined(var3)) {
-      level.player setclienttriggeraudiozone(var3, var4);
+  if(var_8 == 0) {
+    if(isDefined(var_3)) {
+      level.player setclienttriggeraudiozone(var_3, var_4);
       wait 2;
       level.player clearclienttriggeraudiozone(2);
       return;
     }
 
-    level.player clearclienttriggeraudiozone(var4);
+    level.player clearclienttriggeraudiozone(var_4);
     return;
   }
 
   level.player clearclienttriggeraudiozone();
 }
 
-function bink_transition_music(var0, var1, var2) {
-  var3 = 1;
-  var4 = var2 + 0.05;
+function bink_transition_music(var_0, var_1, var_2) {
+  var_3 = 1;
+  var_4 = var_2 + 0.05;
 
   for(;;) {
     jumpiftrue(iscinematicplaying()) LOC_00000021;
@@ -201,59 +201,59 @@ function bink_transition_music(var0, var1, var2) {
   }
 
   while(1 && iscinematicplaying()) {
-    var5 = cinematicgettimeinmsec() / 1000;
-    var6 = var0 - var5;
+    var_5 = cinematicgettimeinmsec() / 1000;
+    var_6 = var_0 - var_5;
 
-    if(var6 <= var4) {
-      var3 = 0;
+    if(var_6 <= var_4) {
+      var_3 = 0;
       break;
     }
 
     wait 0.05;
   }
 
-  if(var3 == 0) {
-    setmusicstate(var1);
+  if(var_3 == 0) {
+    setmusicstate(var_1);
     return;
   }
 }
 
-function audio_bink_fadeout_ambient(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = 2;
+function audio_bink_fadeout_ambient(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 2;
   }
 
-  if(isDefined(var0)) {
-    level.player setclienttriggeraudiozone(var0);
+  if(isDefined(var_0)) {
+    level.player setclienttriggeraudiozone(var_0);
   }
 
   while(!iscinematicplaying()) {
     wait 0.05;
   }
 
-  level.player setclienttriggeraudiozone("fade_to_black_minus_music", var1);
+  level.player setclienttriggeraudiozone("fade_to_black_minus_music", var_1);
 }
 
-function audio_bink_fadein_ambient(var0, var1, var2, var3, var4) {
-  if(!isDefined(var0)) {
+function audio_bink_fadein_ambient(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 2;
+  if(!isDefined(var_2)) {
+    var_2 = 2;
   }
 
-  var5 = var2 + 0.05;
+  var_5 = var_2 + 0.05;
 
-  if(!isDefined(var4)) {
-    var4 = 2;
+  if(!isDefined(var_4)) {
+    var_4 = 2;
   }
 
-  if(isDefined(var3)) {
-    thread bink_transition_music(var0, var3, var4);
+  if(isDefined(var_3)) {
+    thread bink_transition_music(var_0, var_3, var_4);
   }
 
-  var6 = 1;
+  var_6 = 1;
 
   for(;;) {
     jumpiftrue(iscinematicplaying()) LOC_00000049;
@@ -261,26 +261,26 @@ function audio_bink_fadein_ambient(var0, var1, var2, var3, var4) {
   }
 
   while(1 && iscinematicplaying()) {
-    var7 = cinematicgettimeinmsec() / 1000;
-    var8 = var0 - var7;
+    var_7 = cinematicgettimeinmsec() / 1000;
+    var_8 = var_0 - var_7;
 
-    if(var8 <= var5) {
-      var6 = 0;
+    if(var_8 <= var_5) {
+      var_6 = 0;
       break;
     }
 
     wait 0.05;
   }
 
-  if(var6 == 0) {
-    if(isDefined(var1)) {
-      level.player setclienttriggeraudiozone(var1, var2);
+  if(var_6 == 0) {
+    if(isDefined(var_1)) {
+      level.player setclienttriggeraudiozone(var_1, var_2);
       wait 2;
       level.player clearclienttriggeraudiozone(2);
       return;
     }
 
-    level.player clearclienttriggeraudiozone(var2);
+    level.player clearclienttriggeraudiozone(var_2);
     return;
   }
 
@@ -378,72 +378,72 @@ function set_slowmo_sniper_breath_end() {
   soundsettimescalefactor("weap_plr_fire_lfe_2d", 1);
 }
 
-function audio_helmet_transition_helmet_on_visor_down_w_lma(var0, var1, var2) {
-  if(!isDefined(var0)) {
-    var0 = 2.5;
+function audio_helmet_transition_helmet_on_visor_down_w_lma(var_0, var_1, var_2) {
+  if(!isDefined(var_0)) {
+    var_0 = 2.5;
   }
 
-  if(!isDefined(var1)) {
-    var1 = "normal";
+  if(!isDefined(var_1)) {
+    var_1 = "normal";
   }
 
-  if(!isDefined(var2)) {
-    var2 = "clear_all";
+  if(!isDefined(var_2)) {
+    var_2 = "clear_all";
   }
 
   level.player playSound("plr_helmet_on_visor_down_lr");
 
-  if(var0 != 0) {
+  if(var_0 != 0) {
     level.player scripts\engine\utility::delaycall(0.5, &setclienttriggeraudiozonepartialwithfade, "helmet_on_visor_down", 0.2, "mix", "filter");
-    wait var0;
+    wait var_0;
 
-    if(var1 == "normal") {
+    if(var_1 == "normal") {
       level.player scripts\engine\utility::delaycall(0.1, &playsound, "plr_helmet_short_boot_up_lr");
     } else {
       level.player scripts\engine\utility::delaycall(0.1, &playsound, "plr_helmet_boot_up_fast_lr");
     }
 
-    if(var2 == "clear_all") {
+    if(var_2 == "clear_all") {
       level.player scripts\engine\utility::delaycall(0.45, &clearclienttriggeraudiozone, 0.2);
       return;
     }
 
-    level.player scripts\engine\utility::delaycall(0.45, &setclienttriggeraudiozone, var2, 0.2);
+    level.player scripts\engine\utility::delaycall(0.45, &setclienttriggeraudiozone, var_2, 0.2);
     return;
   }
 }
 
 function audio_helmet_transition_helmet_on_visor_up_no_lma() {}
 
-function audio_helmet_transition_visor_down_w_lma(var0, var1, var2) {
-  if(!isDefined(var0)) {
-    var0 = 2.5;
+function audio_helmet_transition_visor_down_w_lma(var_0, var_1, var_2) {
+  if(!isDefined(var_0)) {
+    var_0 = 2.5;
   }
 
-  if(!isDefined(var1)) {
-    var1 = "normal";
+  if(!isDefined(var_1)) {
+    var_1 = "normal";
   }
 
-  if(!isDefined(var2)) {
-    var2 = "clear_all";
+  if(!isDefined(var_2)) {
+    var_2 = "clear_all";
   }
 
   level.player playSound("plr_helmet_visor_pull_down_w_air_lr");
   level.player scripts\engine\utility::delaycall(0.5, &setclienttriggeraudiozonepartialwithfade, "helmet_on_visor_down", 0.2, "mix", "filter");
-  wait var0;
+  wait var_0;
 
-  if(var1 == "normal") {
+  if(var_1 == "normal") {
     level.player scripts\engine\utility::delaycall(0.1, &playsound, "plr_helmet_short_boot_up_lr");
   } else {
     level.player scripts\engine\utility::delaycall(0.1, &playsound, "plr_helmet_boot_up_fast_lr");
   }
 
-  if(var2 == "clear_all") {
+  if(var_2 == "clear_all") {
     level.player scripts\engine\utility::delaycall(0.45, &clearclienttriggeraudiozone, 0.2);
     return;
   }
 
-  level.player scripts\engine\utility::delaycall(0.45, &setclienttriggeraudiozone, var2, 0.2);
+  level.player scripts\engine\utility::delaycall(0.45, &setclienttriggeraudiozone, var_2, 0.2);
 }
 
 function audio_helmet_transition_visor_up() {
@@ -460,16 +460,16 @@ function audio_helmet_transition_helmet_off_no_filter_change() {
   level.player playSound("plr_helmet_off_lr");
 }
 
-function set_timescale(var0) {
-  if(level.audio.timescale.current == var0) {
+function set_timescale(var_0) {
+  if(level.audio.timescale.current == var_0) {
     return;
   }
 
-  level.audio.timescale.current = var0;
-  level.player settimescalefactorfromtable(var0);
+  level.audio.timescale.current = var_0;
+  level.player settimescalefactorfromtable(var_0);
 }
 
-function debug_println(var0, var1) {}
+function debug_println(var_0, var_1) {}
 
 function debug_enabled() {
   return false;

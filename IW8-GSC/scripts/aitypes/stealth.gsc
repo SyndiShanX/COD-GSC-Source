@@ -16,7 +16,7 @@ function initstealthfunctions() {
   self.fnstealthflashlightdetach = &scripts\asm\soldier\patrol::detachflashlight;
 }
 
-function ifinstealth(var0) {
+function ifinstealth(var_0) {
   if(!isDefined(self.stealth)) {
     return anim.failure;
   }
@@ -52,7 +52,7 @@ function iscombating() {
   return isDefined(self.stealth) && self.stealth.bsmstate == 3;
 }
 
-function stealth_shouldfriendly(var0) {
+function stealth_shouldfriendly(var_0) {
   if(self.team == "allies") {
     return anim.success;
   }
@@ -60,16 +60,16 @@ function stealth_shouldfriendly(var0) {
   return anim.failure;
 }
 
-function stealth_initfriendly(var0) {
+function stealth_initfriendly(var_0) {
   scripts\stealth\friendly::main();
   return anim.success;
 }
 
-function stealth_terminatefriendly(var0) {
+function stealth_terminatefriendly(var_0) {
   self.stealth = undefined;
 }
 
-function stealth_shouldneutral(var0) {
+function stealth_shouldneutral(var_0) {
   if(self.team == "neutral") {
     return anim.success;
   }
@@ -77,29 +77,29 @@ function stealth_shouldneutral(var0) {
   return anim.failure;
 }
 
-function stealth_initneutral(var0) {
+function stealth_initneutral(var_0) {
   scripts\stealth\neutral::main();
   return anim.success;
 }
 
-function isinlight(var0) {
-  if(!isDefined(var0)) {
+function isinlight(var_0) {
+  if(!isDefined(var_0)) {
     return !istrue(level.is_dark);
   }
 
-  return var0 >= 0.5;
+  return var_0 >= 0.5;
 }
 
 function updatevisionforlighting() {}
 
 function forceflashlightplayercanseeifnecessary() {
   if(isDefined(self.flashlight) && self.flashlight) {
-    var0 = 0.1;
+    var_0 = 0.1;
 
-    foreach(var2 in level.players) {
-      if(isDefined(var2.nvg) && isDefined(var2.nvg.lightmeter) && var2.nvg.lightmeter > var0 && isDefined(var2.nvg.prevlightmeter) && var2.nvg.lightmeter - var2.nvg.prevlightmeter > 0.01) {
-        if(self aipointinfov(var2.origin) && !self cansee(var2)) {
-          self cansee(var2, 0);
+    foreach(var_2 in level.players) {
+      if(isDefined(var_2.nvg) && isDefined(var_2.nvg.lightmeter) && var_2.nvg.lightmeter > var_0 && isDefined(var_2.nvg.prevlightmeter) && var_2.nvg.lightmeter - var_2.nvg.prevlightmeter > 0.01) {
+        if(self aipointinfov(var_2.origin) && !self cansee(var_2)) {
+          self cansee(var_2, 0);
         }
       }
     }
@@ -108,7 +108,7 @@ function forceflashlightplayercanseeifnecessary() {
   }
 }
 
-function stealth_enemy_getbsmstate(var0) {
+function stealth_enemy_getbsmstate(var_0) {
   switch (self.stealth.bsmstate) {
     case 0:
       return "Stealth_Idle";
@@ -126,43 +126,43 @@ function stealth_enemy_getbsmstate(var0) {
   }
 }
 
-function stealth_reacter_updateeveryframe(var0) {
+function stealth_reacter_updateeveryframe(var_0) {
   scripts\stealth\enemy::proximity_check();
   return anim.success;
 }
 
-function stealth_enemy_updateeveryframe(var0) {
-  var1 = scripts\engine\utility::ent_flag_exist("react_to_dynolights") && scripts\engine\utility::ent_flag("react_to_dynolights");
+function stealth_enemy_updateeveryframe(var_0) {
+  var_1 = scripts\engine\utility::ent_flag_exist("react_to_dynolights") && scripts\engine\utility::ent_flag("react_to_dynolights");
 
-  if(var1 && !isDefined(self.lightmeter)) {
+  if(var_1 && !isDefined(self.lightmeter)) {
     scripts\stealth\utility::update_light_meter();
-    var1 = 0;
+    var_1 = 0;
   }
 
   updatelightbasedflashlight(self.stealth.bsmstate, 0.5);
 
-  if(var1) {
-    var2 = self getentitynumber();
-    var3 = level.frameduration;
+  if(var_1) {
+    var_2 = self getentitynumber();
+    var_3 = level.frameduration;
 
-    if(gettime() / var3 % 5 == var2 % 5) {
+    if(gettime() / var_3 % 5 == var_2 % 5) {
       scripts\stealth\utility::update_light_meter();
     }
   }
 
   forceflashlightplayercanseeifnecessary();
-  return stealth_reacter_updateeveryframe(var0);
+  return stealth_reacter_updateeveryframe(var_0);
 }
 
-function stealth_neutral_updateeveryframe(var0) {
-  return stealth_reacter_updateeveryframe(var0);
+function stealth_neutral_updateeveryframe(var_0) {
+  return stealth_reacter_updateeveryframe(var_0);
 }
 
-function enterstealthstate(var0) {
+function enterstealthstate(var_0) {
   exitstealthstate(self.stealth.bsmstate);
-  self.stealth.bsmstate = var0;
+  self.stealth.bsmstate = var_0;
 
-  switch (var0) {
+  switch (var_0) {
     case 1:
       investigate_init();
       break;
@@ -175,8 +175,8 @@ function enterstealthstate(var0) {
   }
 }
 
-function exitstealthstate(var0) {
-  switch (var0) {
+function exitstealthstate(var_0) {
+  switch (var_0) {
     case 1:
       investigate_terminate();
       break;
@@ -189,22 +189,22 @@ function exitstealthstate(var0) {
   }
 }
 
-function isdonewithsearchmove(var0) {
-  var1 = gettime();
+function isdonewithsearchmove(var_0) {
+  var_1 = gettime();
 
-  if(var1 > var0.starttime + 500 && (!isDefined(self.pathgoalpos) || distance2dsquared(self.pathgoalpos, self.origin) < 4) && !self.arriving && !isDefined(self._blackboard.doortoopen)) {
-    if(!isDefined(var0.goalpos)) {
+  if(var_1 > var_0.starttime + 500 && (!isDefined(self.pathgoalpos) || distance2dsquared(self.pathgoalpos, self.origin) < 4) && !self.arriving && !isDefined(self._blackboard.doortoopen)) {
+    if(!isDefined(var_0.goalpos)) {
       return true;
     }
 
-    if(distance2dsquared(self.origin, var0.goalpos) < 3600 && squared(var0.goalpos[2] - self.origin[2]) < 5184) {
+    if(distance2dsquared(self.origin, var_0.goalpos) < 3600 && squared(var_0.goalpos[2] - self.origin[2]) < 5184) {
       return true;
     }
 
-    var0.numfails++;
-    var0.starttime = var1;
+    var_0.numfails++;
+    var_0.starttime = var_1;
 
-    if(var0.numfails >= 10) {
+    if(var_0.numfails >= 10) {
       return true;
     }
   }
@@ -212,7 +212,7 @@ function isdonewithsearchmove(var0) {
   return false;
 }
 
-function updatelightbasedflashlight(var0, var1) {
+function updatelightbasedflashlight(var_0, var_1) {
   if(self isinscriptedstate()) {
     return;
   }
@@ -221,27 +221,27 @@ function updatelightbasedflashlight(var0, var1) {
     return;
   }
 
-  var2 = self.lightmeter;
+  var_2 = self.lightmeter;
 
   if(isDefined(self._blackboard.bflashlight)) {
-    var3 = self._blackboard.bflashlight;
+    var_3 = self._blackboard.bflashlight;
   } else {
-    var3 = 0;
+    var_3 = 0;
   }
 
   if(isDefined(self.flashlightoverride)) {
     self._blackboard.bflashlight = self.flashlightoverride;
   } else if(istrue(self.noflashlight)) {
     self._blackboard.bflashlight = 0;
-  } else if(isDefined(var3)) {
-    var4 = 0.1;
+  } else if(isDefined(var_3)) {
+    var_4 = 0.1;
 
     if(istrue(self._blackboard.bflashlight)) {
-      if(var3 > var2 + var4) {
+      if(var_3 > var_2 + var_4) {
         self._blackboard.bflashlight = 0;
       }
     } else {
-      self._blackboard.bflashlight = var3 < var2;
+      self._blackboard.bflashlight = var_3 < var_2;
     }
   } else if(istrue(level.is_dark)) {
     self._blackboard.bflashlight = 1;
@@ -249,7 +249,7 @@ function updatelightbasedflashlight(var0, var1) {
     self._blackboard.bflashlight = 0;
   }
 
-  if(var3 != self._blackboard.bflashlight) {
+  if(var_3 != self._blackboard.bflashlight) {
     if(scripts\asm\asm::asm_getdemeanor() != "patrol" && (!isDefined(self.asm.flashlight) || !self.asm.flashlight)) {
       if(self._blackboard.bflashlight) {
         self[[self.fnstealthflashlighton]]();
@@ -264,9 +264,9 @@ function updatelightbasedflashlight(var0, var1) {
   }
 }
 
-function idle_updatestyle(var0) {
+function idle_updatestyle(var_0) {
   scripts\stealth\enemy::setpatrolstyle_base();
-  var0.nextstylechecktime = gettime() + randomintrange(500, 2000);
+  var_0.nextstylechecktime = gettime() + randomintrange(500, 2000);
 
   if(isDefined(self.stealth.patrol_moveplaybackrate)) {
     self.moveplaybackrate = self.stealth.patrol_moveplaybackrate;
@@ -280,36 +280,36 @@ function isidlecurious() {
   return isDefined(self.stealth.bidlecurious) && self.stealth.bidlecurious;
 }
 
-function idle_updatecurious(var0) {
-  var1 = undefined;
-  var2 = 0;
+function idle_updatecurious(var_0) {
+  var_1 = undefined;
+  var_2 = 0;
 
-  foreach(var4 in level.players) {
-    var5 = self getthreatsight(var4);
+  foreach(var_4 in level.players) {
+    var_5 = self getthreatsight(var_4);
 
-    if(!isDefined(var1) || var5 > var2) {
-      var1 = var4;
-      var2 = var5;
+    if(!isDefined(var_1) || var_5 > var_2) {
+      var_1 = var_4;
+      var_2 = var_5;
     }
   }
 
-  var5 = var2;
-  var7 = 0.25;
+  var_5 = var_2;
+  var_7 = 0.25;
 
   if(self.stealth.bidlecurious) {
-    var8 = 2000;
+    var_8 = 2000;
 
-    if(var5 >= var7) {
-      var0.curiousstarttime = gettime();
+    if(var_5 >= var_7) {
+      var_0.curiousstarttime = gettime();
     }
 
-    if(gettime() > var0.curiousstarttime + var8) {
-      if(var5 < var7 * 0.9) {
+    if(gettime() > var_0.curiousstarttime + var_8) {
+      if(var_5 < var_7 * 0.9) {
         self.stealth.bidlecurious = 0;
         self.stealth.idlecurioustarget = undefined;
 
-        if(!isDefined(self.pathgoalpos) && isDefined(var0.idlenode)) {
-          self._blackboard.idlenode = var0.idlenode;
+        if(!isDefined(self.pathgoalpos) && isDefined(var_0.idlenode)) {
+          self._blackboard.idlenode = var_0.idlenode;
           return;
         }
 
@@ -322,73 +322,73 @@ function idle_updatecurious(var0) {
     return;
   }
 
-  if(var5 >= var7) {
+  if(var_5 >= var_7) {
     self.stealth.bidlecurious = 1;
-    self.stealth.idlecurioustarget = var1;
-    var0.curiousstarttime = gettime();
-    var0.idlenode = self._blackboard.idlenode;
+    self.stealth.idlecurioustarget = var_1;
+    var_0.curiousstarttime = gettime();
+    var_0.idlenode = self._blackboard.idlenode;
     self._blackboard.idlenode = undefined;
-    scripts\stealth\utility::set_patrol_react(var1.origin, "small");
+    scripts\stealth\utility::set_patrol_react(var_1.origin, "small");
     return;
   }
 }
 
-function updatesightstate(var0) {
+function updatesightstate(var_0) {
   if(scripts\engine\utility::flag("stealth_spotted")) {
-    var0 = "hunt";
+    var_0 = "hunt";
   }
 
-  var1 = !isDefined(self.stealth.threat_sight_state);
+  var_1 = !isDefined(self.stealth.threat_sight_state);
 
-  if(!var1) {
+  if(!var_1) {
     switch (self.stealth.threat_sight_state) {
       case "combat_hunt":
-        var1 = var0 != "hunt" && var0 != "combat_hunt";
+        var_1 = var_0 != "hunt" && var_0 != "combat_hunt";
         break;
       case "spotted":
-        var1 = var0 != "combat" && var0 != "spotted";
+        var_1 = var_0 != "combat" && var_0 != "spotted";
         break;
       case "hidden":
-        var1 = var0 != "idle" && var0 != "unaware" && var0 != "hidden";
+        var_1 = var_0 != "idle" && var_0 != "unaware" && var_0 != "hidden";
         break;
       default:
-        var1 = self.stealth.threat_sight_state != var0;
+        var_1 = self.stealth.threat_sight_state != var_0;
         break;
     }
   }
 
-  if(var1) {
-    scripts\stealth\enemy::set_sight_state(var0);
+  if(var_1) {
+    scripts\stealth\enemy::set_sight_state(var_0);
     return;
   }
 }
 
-function idle_init(var0) {
-  self.bt.instancedata[var0] = spawnStruct();
+function idle_init(var_0) {
+  self.bt.instancedata[var_0] = spawnStruct();
   self.favoriteenemy = undefined;
   self.dontattackme = 1;
   self.shootposoverride = undefined;
   self.stealth.reachedinvestigate = 0;
   thread scripts\stealth\corpse::corpse_clear();
-  idle_updatestyle(self.bt.instancedata[var0]);
+  idle_updatestyle(self.bt.instancedata[var_0]);
   self.combatmode = "no_cover";
 
-  foreach(var2 in level.players) {
-    if(!isDefined(var2.stealth)) {
+  foreach(var_2 in level.players) {
+    if(!isDefined(var_2.stealth)) {
       continue;
     }
 
-    if(!isDefined(var2.stealth.spotted_list)) {
+    if(!isDefined(var_2.stealth.spotted_list)) {
       continue;
     }
 
-    var2.stealth.spotted_list[self.unique_id] = undefined;
+    var_2.stealth.spotted_list[self.unique_id] = undefined;
   }
 
   self.diequietly = 1;
   self clearenemy();
   self.stealth.bidlecurious = 0;
-  self.bt.instancedata[var0].curiousstarttime = -1;
+  self.bt.instancedata[var_0].curiousstarttime = -1;
   thread scripts\stealth\enemy::set_alert_level("reset");
   scripts\stealth\event::event_escalation_clear();
 
@@ -407,7 +407,7 @@ function idle_init(var0) {
   self.gunposeoverride_internal = "gun_down";
 }
 
-function idle_update(var0) {
+function idle_update(var_0) {
   scripts\stealth\corpse::corpse_sight();
 
   if(istrue(self.stealth.blind)) {
@@ -417,23 +417,23 @@ function idle_update(var0) {
   }
 
   if(isDefined(self.stealth.active_sense_funcs)) {
-    foreach(var2 in self.stealth.active_sense_funcs) {
-      self[[var2]]();
+    foreach(var_2 in self.stealth.active_sense_funcs) {
+      self[[var_2]]();
     }
   }
 
-  var4 = gettime();
+  var_4 = gettime();
 
-  if(var4 >= self.bt.instancedata[var0].nextstylechecktime) {
-    idle_updatestyle(self.bt.instancedata[var0]);
+  if(var_4 >= self.bt.instancedata[var_0].nextstylechecktime) {
+    idle_updatestyle(self.bt.instancedata[var_0]);
   }
 
-  idle_updatecurious(self.bt.instancedata[var0]);
+  idle_updatecurious(self.bt.instancedata[var_0]);
   idle_updateflashlighttarget();
   return anim.running;
 }
 
-function idle_terminate(var0) {
+function idle_terminate(var_0) {
   self.diequietly = 0;
   self.stealth.bidlecurious = undefined;
   self.stealth.idlecurioustarget = undefined;
@@ -447,7 +447,7 @@ function idle_terminate(var0) {
   self.last_set_goalnode = undefined;
   self.last_set_goalent = undefined;
   self.moveplaybackrate = 1;
-  self.bt.instancedata[var0] = undefined;
+  self.bt.instancedata[var_0] = undefined;
 }
 
 function idle_updateflashlighttarget() {
@@ -461,24 +461,24 @@ function idle_updateflashlighttarget() {
     return;
   }
 
-  var0 = 0;
+  var_0 = 0;
 
-  foreach(var2 in level.players) {
-    if(self getthreatsight(var2) > 0.1) {
-      self.cqb_target = self lastknownpos(var2);
-      var0 = 1;
+  foreach(var_2 in level.players) {
+    if(self getthreatsight(var_2) > 0.1) {
+      self.cqb_target = self lastknownpos(var_2);
+      var_0 = 1;
       break;
     }
   }
 
-  if(!var0) {
-    var4 = anglesToForward(self.angles);
-    self.cqb_target = self.origin + var4 * 128;
+  if(!var_0) {
+    var_4 = anglesToForward(self.angles);
+    self.cqb_target = self.origin + var_4 * 128;
     return;
   }
 }
 
-function stealth_shouldinvestigate(var0) {
+function stealth_shouldinvestigate(var_0) {
   if(self.stealth.bsmstate == 1) {
     return anim.success;
   }
@@ -486,37 +486,37 @@ function stealth_shouldinvestigate(var0) {
   return anim.failure;
 }
 
-function findclosestlospointwithin(var0, var1, var2, var3, var4, var5, var6) {
-  if(isDefined(var3)) {
-    var7 = findclosestpointbyapproxpathdist(var3, var1, var2, var0.usedpoints, 48);
+function findclosestlospointwithin(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if(isDefined(var_3)) {
+    var_7 = findclosestpointbyapproxpathdist(var_3, var_1, var_2, var_0.usedpoints, 48);
 
-    if(isDefined(var7) && isDefined(var6) && var6 && !investigate_sanitycheckinitialpos(var1, var7)) {
+    if(isDefined(var_7) && isDefined(var_6) && var_6 && !investigate_sanitycheckinitialpos(var_1, var_7)) {
       return undefined;
     }
 
-    return var7;
-  } else if(var6 > 64 && isDefined(var5)) {
-    var7 = findopenlookdir(var5, var6, var2, var3, var1.usedpoints, 48);
+    return var_7;
+  } else if(var_6 > 64 && isDefined(var_5)) {
+    var_7 = findopenlookdir(var_5, var_6, var_2, var_3, var_1.usedpoints, 48);
 
-    if(isDefined(var7) && isDefined(var7) && var7 && !investigate_sanitycheckinitialpos(var2, var7)) {
+    if(isDefined(var_7) && isDefined(var_7) && var_7 && !investigate_sanitycheckinitialpos(var_2, var_7)) {
       return undefined;
     }
 
-    return var7;
+    return var_7;
   }
 
-  return getrandomnavpoint(var3, 200, self);
+  return getrandomnavpoint(var_3, 200, self);
 }
 
-function investigate_sanitycheckinitialpos(var0, var1) {
-  var2 = vectorNormalize(var0 - self.origin);
-  var3 = var1 - self.origin;
-  var4 = length(var3);
+function investigate_sanitycheckinitialpos(var_0, var_1) {
+  var_2 = vectorNormalize(var_0 - self.origin);
+  var_3 = var_1 - self.origin;
+  var_4 = length(var_3);
 
-  if(var4 > 256) {
-    var3 /= var4;
+  if(var_4 > 256) {
+    var_3 /= var_4;
 
-    if(vectordot(var3, var2) < -0.5) {
+    if(vectordot(var_3, var_2) < -0.5) {
       return false;
     }
   }
@@ -524,164 +524,164 @@ function investigate_sanitycheckinitialpos(var0, var1) {
   return true;
 }
 
-function investigate_getcorpseoffsetpos(var0) {
-  var1 = var0 - self.origin;
-  var2 = var0 - vectorNormalize(var1) * 32;
-  var2 = getclosestpointonnavmesh(var2, self);
-  return var2;
+function investigate_getcorpseoffsetpos(var_0) {
+  var_1 = var_0 - self.origin;
+  var_2 = var_0 - vectorNormalize(var_1) * 32;
+  var_2 = getclosestpointonnavmesh(var_2, self);
+  return var_2;
 }
 
 function investigate_getinitialpos() {
-  var0 = 1;
-  var1 = self.stealth.investigateevent;
+  var_0 = 1;
+  var_1 = self.stealth.investigateevent;
 
   if(isDefined(self.stealth.investigate_point)) {
-    var2 = getclosestpointonnavmesh(var1.investigate_pos, self);
-    var3 = vectorNormalize(self.goalpos - self.origin);
-    var4 = anglesToForward(self.angles);
-    var5 = vectorNormalize(var2 - self.origin);
+    var_2 = getclosestpointonnavmesh(var_1.investigate_pos, self);
+    var_3 = vectorNormalize(self.goalpos - self.origin);
+    var_4 = anglesToForward(self.angles);
+    var_5 = vectorNormalize(var_2 - self.origin);
 
-    if(isPlayer(var1.entity) && !isPlayer(self.stealth.investigate_entity)) {
-      var0 = 1;
-    } else if(vectordot(var3, var5) < 0 && vectordot(var4, var5) < 0) {
-      var0 = 1;
-    } else if(var1.typeorig == "saw_corpse") {
-      var0 = 1;
-    } else if(var0 && distancesquared(self.goalpos, var2) < squared(300)) {
-      var0 = 0;
+    if(isPlayer(var_1.entity) && !isPlayer(self.stealth.investigate_entity)) {
+      var_0 = 1;
+    } else if(vectordot(var_3, var_5) < 0 && vectordot(var_4, var_5) < 0) {
+      var_0 = 1;
+    } else if(var_1.typeorig == "saw_corpse") {
+      var_0 = 1;
+    } else if(var_0 && distancesquared(self.goalpos, var_2) < squared(300)) {
+      var_0 = 0;
     }
   }
 
-  if(var0) {
-    var6 = level.stealth.investigate_volumes[self.script_stealthgroup];
-    var7 = scripts\stealth\group::getgroup(self.script_stealthgroup);
-    var8 = scripts\stealth\group::group_findpod(var7, self);
-    var9 = 0;
-    var10 = 0;
-    var11 = 0;
+  if(var_0) {
+    var_6 = level.stealth.investigate_volumes[self.script_stealthgroup];
+    var_7 = scripts\stealth\group::getgroup(self.script_stealthgroup);
+    var_8 = scripts\stealth\group::group_findpod(var_7, self);
+    var_9 = 0;
+    var_10 = 0;
+    var_11 = 0;
 
-    if(isDefined(var8.investigateoriginguy) && var8.investigateoriginguy == self || var8.members[0] == self) {
-      var9 = 1;
-    } else if(distancesquared(self.origin, var1.investigate_pos) < 16384) {
-      var11 = 1;
-    } else if(var8.members.size > 1 && var8.members[1] == self) {
-      var10 = 1;
+    if(isDefined(var_8.investigateoriginguy) && var_8.investigateoriginguy == self || var_8.members[0] == self) {
+      var_9 = 1;
+    } else if(distancesquared(self.origin, var_1.investigate_pos) < 16384) {
+      var_11 = 1;
+    } else if(var_8.members.size > 1 && var_8.members[1] == self) {
+      var_10 = 1;
     }
 
-    if(!isDefined(var8.usedpoints)) {
-      var8.usedpoints = [];
-      var8.usedpointsexpiry = [];
+    if(!isDefined(var_8.usedpoints)) {
+      var_8.usedpoints = [];
+      var_8.usedpointsexpiry = [];
     }
 
-    var12 = undefined;
+    var_12 = undefined;
 
-    if(var9) {
-      if(var1.typeorig == "saw_corpse" || distance2dsquared(self.origin, var1.investigate_pos) < 4096) {
-        var12 = var1.investigate_pos;
+    if(var_9) {
+      if(var_1.typeorig == "saw_corpse" || distance2dsquared(self.origin, var_1.investigate_pos) < 4096) {
+        var_12 = var_1.investigate_pos;
 
-        if(var1.typeorig == "saw_corpse") {
-          var12 = investigate_getcorpseoffsetpos(var12);
+        if(var_1.typeorig == "saw_corpse") {
+          var_12 = investigate_getcorpseoffsetpos(var_12);
         }
 
-        if(isDefined(var6)) {
-          var13 = self findlastpointonpathwithinvolume(var12, var6);
+        if(isDefined(var_6)) {
+          var_13 = self findlastpointonpathwithinvolume(var_12, var_6);
 
-          if(isDefined(var13)) {
-            var12 = var13;
-          }
-        }
-      }
-
-      if(!isDefined(var12)) {
-        var12 = findclosestlospointwithin(var8, var1.investigate_pos, var1.investigate_pos, var6, self.scriptgoalpos, self.goalradius, 1);
-
-        if(!isDefined(var12)) {
-          if(isDefined(var6)) {
-            var12 = self findlastpointonpathwithinvolume(var1.investigate_pos, var6);
-          }
-
-          if(!isDefined(var12)) {
-            var12 = findclosestlospointwithin(var8, var1.investigate_pos, self.origin, var6, self.scriptgoalpos, self.goalradius, 1);
-          }
-
-          if(!isDefined(var12)) {
-            var12 = self.origin;
+          if(isDefined(var_13)) {
+            var_12 = var_13;
           }
         }
       }
-    } else if(var10) {
-      var14 = randomfloatrange(0.7, 0.85);
-      var12 = vectorlerp(self.origin, var1.investigate_pos, var14);
-      var12 = findclosestlospointwithin(var8, var12, var12, var6, self.scriptgoalpos, self.goalradius);
-    } else if(!var11) {
-      var12 = findclosestlospointwithin(var8, var1.investigate_pos, self.origin, var6, self.scriptgoalpos, self.goalradius);
+
+      if(!isDefined(var_12)) {
+        var_12 = findclosestlospointwithin(var_8, var_1.investigate_pos, var_1.investigate_pos, var_6, self.scriptgoalpos, self.goalradius, 1);
+
+        if(!isDefined(var_12)) {
+          if(isDefined(var_6)) {
+            var_12 = self findlastpointonpathwithinvolume(var_1.investigate_pos, var_6);
+          }
+
+          if(!isDefined(var_12)) {
+            var_12 = findclosestlospointwithin(var_8, var_1.investigate_pos, self.origin, var_6, self.scriptgoalpos, self.goalradius, 1);
+          }
+
+          if(!isDefined(var_12)) {
+            var_12 = self.origin;
+          }
+        }
+      }
+    } else if(var_10) {
+      var_14 = randomfloatrange(0.7, 0.85);
+      var_12 = vectorlerp(self.origin, var_1.investigate_pos, var_14);
+      var_12 = findclosestlospointwithin(var_8, var_12, var_12, var_6, self.scriptgoalpos, self.goalradius);
+    } else if(!var_11) {
+      var_12 = findclosestlospointwithin(var_8, var_1.investigate_pos, self.origin, var_6, self.scriptgoalpos, self.goalradius);
     }
 
-    if(isDefined(var12) && !investigate_sanitycheckinitialpos(var1.investigate_pos, var12)) {
-      var12 = undefined;
+    if(isDefined(var_12) && !investigate_sanitycheckinitialpos(var_1.investigate_pos, var_12)) {
+      var_12 = undefined;
     }
 
-    if(!isDefined(var12)) {
-      var12 = investigate_getuninvestigatedpos();
+    if(!isDefined(var_12)) {
+      var_12 = investigate_getuninvestigatedpos();
     } else {
-      scripts\stealth\group::pod_addusedpoint(var8, var12);
+      scripts\stealth\group::pod_addusedpoint(var_8, var_12);
     }
 
-    return var12;
+    return var_12;
   }
 }
 
 function investigate_getuninvestigatedpos() {
-  var0 = scripts\stealth\group::getgroup(self.script_stealthgroup);
-  var1 = scripts\stealth\group::group_findpod(var0, self);
+  var_0 = scripts\stealth\group::getgroup(self.script_stealthgroup);
+  var_1 = scripts\stealth\group::group_findpod(var_0, self);
 
-  if(isDefined(var1.investigateoriginguy) && var1.investigateoriginguy == self) {
-    var2 = undefined;
+  if(isDefined(var_1.investigateoriginguy) && var_1.investigateoriginguy == self) {
+    var_2 = undefined;
 
-    if(isDefined(var1.volume)) {
-      var2 = self findlastpointonpathwithinvolume(var1.origin, var1.volume);
+    if(isDefined(var_1.volume)) {
+      var_2 = self findlastpointonpathwithinvolume(var_1.origin, var_1.volume);
     }
 
-    if(!isDefined(var2)) {
-      var2 = getclosestpointonnavmesh(var1.origin, self);
+    if(!isDefined(var_2)) {
+      var_2 = getclosestpointonnavmesh(var_1.origin, self);
     }
 
-    var1.investigateoriginguy = undefined;
+    var_1.investigateoriginguy = undefined;
   } else {
-    var2 = scripts\stealth\group::group_getinvestigatepoint(self);
+    var_2 = scripts\stealth\group::group_getinvestigatepoint(self);
   }
 
-  return var2;
+  return var_2;
 }
 
 function setinvestigateendtime() {
-  var0 = 15;
-  var1 = 20;
+  var_0 = 15;
+  var_1 = 20;
 
   if(isDefined(self.stealth.investigatemintime)) {
-    var0 = self.stealth.investigatemintime;
+    var_0 = self.stealth.investigatemintime;
   }
 
   if(isDefined(self.stealth.investigatemaxtime)) {
-    var1 = self.stealth.investigatemaxtime;
+    var_1 = self.stealth.investigatemaxtime;
   }
 
-  self.stealth.investigateendtime = gettime() + randomintrange(var0, var1) * 1000;
+  self.stealth.investigateendtime = gettime() + randomintrange(var_0, var_1) * 1000;
 }
 
-function findgoodinvestigatelookdir(var0) {
+function findgoodinvestigatelookdir(var_0) {
   if(scripts\asm\asm_bb::bb_smartobjectrequested() && isDefined(self.asm.customdata.arrivalangles)) {
     return self.asm.customdata.arrivalangles;
   }
 
   if(istrue(self.limitstealthturning)) {
-    return vectortoangles(var0 - self.origin);
+    return vectortoangles(var_0 - self.origin);
   }
 
-  var1 = makeweapon(var0, 256, 96);
+  var_1 = makeweapon(var_0, 256, 96);
 
-  if(isDefined(var1)) {
-    return vectortoangles(var1);
+  if(isDefined(var_1)) {
+    return vectortoangles(var_1);
   }
 }
 
@@ -690,9 +690,9 @@ function investigate_shouldfacedecentdirectionwhenidle() {
 }
 
 function investigate_init() {
-  var0 = self.stealth.investigateevent;
-  self.stealth.investigate_severity = var0.type;
-  self.stealth.investigate_entity = var0.entity;
+  var_0 = self.stealth.investigateevent;
+  self.stealth.investigate_severity = var_0.type;
+  self.stealth.investigate_entity = var_0.entity;
   self.script_forcegoal = 0;
   updatesightstate("investigate");
   self.diequietly = 1;
@@ -701,7 +701,7 @@ function investigate_init() {
     self._blackboard.bfacesomedecentdirectionwhenidle = 1;
   }
 
-  investigate_setreaction(var0);
+  investigate_setreaction(var_0);
   self.stealth.binitialinvestigate = 1;
 
   if(!self isinscriptedstate()) {
@@ -715,21 +715,21 @@ function investigate_init() {
   }
 }
 
-function investigate_setreaction(var0) {
-  var1 = "small";
+function investigate_setreaction(var_0) {
+  var_1 = "small";
 
-  if(var0.typeorig == "bulletwhizby" || var0.typeorig == "grenade danger") {
-    var1 = "med";
-  } else if(var0.typeorig == "footstep_sprint") {
-    if(isDefined(var0.entity) && isPlayer(var0.entity) && var0.entity scripts\stealth\threat_sight::player_is_sprinting_at_me(self)) {
-      var1 = "med";
+  if(var_0.typeorig == "bulletwhizby" || var_0.typeorig == "grenade danger") {
+    var_1 = "med";
+  } else if(var_0.typeorig == "footstep_sprint") {
+    if(isDefined(var_0.entity) && isPlayer(var_0.entity) && var_0.entity scripts\stealth\threat_sight::player_is_sprinting_at_me(self)) {
+      var_1 = "med";
     }
   }
 
-  scripts\stealth\utility::set_patrol_react(var0.investigate_pos, var1);
+  scripts\stealth\utility::set_patrol_react(var_0.investigate_pos, var_1);
 }
 
-function investigate_updateeveryframe(var0) {
+function investigate_updateeveryframe(var_0) {
   scripts\stealth\corpse::corpse_sight();
 
   if(isDefined(self.enemy)) {
@@ -739,90 +739,90 @@ function investigate_updateeveryframe(var0) {
   updatesightstate("investigate");
 
   if(isDefined(self.stealth.active_sense_funcs)) {
-    foreach(var2 in self.stealth.active_sense_funcs) {
-      self[[var2]]();
+    foreach(var_2 in self.stealth.active_sense_funcs) {
+      self[[var_2]]();
     }
   }
 
   return anim.success;
 }
 
-function investigate_setupruntocorpse(var0, var1, var2) {
-  scripts\stealth\utility::set_patrol_style("combat", var2, var1, "med");
-  var0.nextstylecheck = gettime() + 100;
-  var0.nextstylecheckdist = 256;
-  var0.nextstylecheckinterval = 100;
+function investigate_setupruntocorpse(var_0, var_1, var_2) {
+  scripts\stealth\utility::set_patrol_style("combat", var_2, var_1, "med");
+  var_0.nextstylecheck = gettime() + 100;
+  var_0.nextstylecheckdist = 256;
+  var_0.nextstylecheckinterval = 100;
   self.asm.customdata.arrivalangles = undefined;
 }
 
-function investigate_move_init(var0) {
+function investigate_move_init(var_0) {
   self.fovforward = self.alertlevelint <= 2;
-  var1 = gettime();
-  var2 = spawnStruct();
-  var2.starttime = var1;
-  var2.cqbtargetnexttwitchtime = var1 + randomintrange(2000, 4000);
-  self.bt.instancedata[var0] = var2;
-  var3 = self.stealth.investigateevent.typeorig;
+  var_1 = gettime();
+  var_2 = spawnStruct();
+  var_2.starttime = var_1;
+  var_2.cqbtargetnexttwitchtime = var_1 + randomintrange(2000, 4000);
+  self.bt.instancedata[var_0] = var_2;
+  var_3 = self.stealth.investigateevent.typeorig;
 
-  if(var3 == "saw_corpse") {
+  if(var_3 == "saw_corpse") {
     if(isDefined(self.stealth.corpse.ent)) {
-      var2.nextcorpsechecktime = var1 + 200;
+      var_2.nextcorpsechecktime = var_1 + 200;
     }
-  } else if(var3 == "grenade danger") {
+  } else if(var_3 == "grenade danger") {
     self.grenadeawareness = 1;
     self.grenadereturnthrowchance = 0;
     scripts\stealth\utility::set_patrol_style("alert");
     return;
   }
 
-  var4 = scripts\stealth\group::getgroup(self.script_stealthgroup);
-  var5 = scripts\stealth\group::group_findpod(var4, self);
+  var_4 = scripts\stealth\group::getgroup(self.script_stealthgroup);
+  var_5 = scripts\stealth\group::group_findpod(var_4, self);
 
   if(self.stealth.binitialinvestigate) {
-    var6 = investigate_getinitialpos();
+    var_6 = investigate_getinitialpos();
   } else {
-    var6 = investigate_getuninvestigatedpos();
+    var_6 = investigate_getuninvestigatedpos();
   }
 
-  if(isDefined(var6.needsupdate)) {
-    var6.needsupdate = scripts\engine\utility::array_remove(var6.needsupdate, self);
+  if(isDefined(var_6.needsupdate)) {
+    var_6.needsupdate = scripts\engine\utility::array_remove(var_6.needsupdate, self);
   }
 
-  if(isDefined(var6.investigateoriginguy) && var6.investigateoriginguy == self) {
-    var6.investigateoriginguy = undefined;
+  if(isDefined(var_6.investigateoriginguy) && var_6.investigateoriginguy == self) {
+    var_6.investigateoriginguy = undefined;
   }
 
-  if(isDefined(var6)) {
-    self.stealth.investigate_point = var6;
-    self setbtgoalpos(0, var6);
+  if(isDefined(var_6)) {
+    self.stealth.investigate_point = var_6;
+    self setbtgoalpos(0, var_6);
     self setbtgoalRadius(0, 24);
-    var3.goalpos = var6;
-    var3.numfails = 0;
+    var_3.goalpos = var_6;
+    var_3.numfails = 0;
 
     if(self.stealth.binitialinvestigate) {
-      if(var4 == "saw_corpse" || var4 == "found_corpse") {
-        investigate_setupruntocorpse(self.bt.instancedata[var1], var6, 1);
-      } else if(var4 == "bulletwhizby") {
+      if(var_4 == "saw_corpse" || var_4 == "found_corpse") {
+        investigate_setupruntocorpse(self.bt.instancedata[var_1], var_6, 1);
+      } else if(var_4 == "bulletwhizby") {
         scripts\stealth\utility::set_patrol_style("cqb");
-        self.asm.customdata.arrivalangles = findgoodinvestigatelookdir(var6);
+        self.asm.customdata.arrivalangles = findgoodinvestigatelookdir(var_6);
       } else {
         scripts\stealth\utility::set_patrol_style("alert");
-        var7 = self.stealth.investigateevent.look_pos;
+        var_7 = self.stealth.investigateevent.look_pos;
 
-        if(!isDefined(var7)) {
-          var7 = self.stealth.investigateevent.investigate_pos;
+        if(!isDefined(var_7)) {
+          var_7 = self.stealth.investigateevent.investigate_pos;
         }
 
-        investigate_move_setaimtarget(var3, var7, var4);
-        self.asm.customdata.arrivalangles = findgoodinvestigatelookdir(var6);
+        investigate_move_setaimtarget(var_3, var_7, var_4);
+        self.asm.customdata.arrivalangles = findgoodinvestigatelookdir(var_6);
       }
     } else {
       scripts\stealth\utility::set_patrol_style("alert");
       self.moveplaybackrate = 1;
-      self.asm.customdata.arrivalangles = findgoodinvestigatelookdir(var6);
+      self.asm.customdata.arrivalangles = findgoodinvestigatelookdir(var_6);
     }
 
-    if(distance2dsquared(self.origin, var6) < 1 && self.stealth.binitialinvestigate || !investigate_shouldfacedecentdirectionwhenidle()) {
+    if(distance2dsquared(self.origin, var_6) < 1 && self.stealth.binitialinvestigate || !investigate_shouldfacedecentdirectionwhenidle()) {
       self._blackboard.bfacesomedecentdirectionwhenidle = undefined;
     } else {
       self._blackboard.bfacesomedecentdirectionwhenidle = 1;
@@ -830,85 +830,85 @@ function investigate_move_init(var0) {
   }
 
   self.disablelookdownpath = 1;
-  var3.enablelookdownpathtime = var2 + 2000;
+  var_3.enablelookdownpathtime = var_2 + 2000;
 }
 
-function investigate_move_setaimtarget(var0, var1, var2) {
-  var3 = 5000;
+function investigate_move_setaimtarget(var_0, var_1, var_2) {
+  var_3 = 5000;
 
-  if(isDefined(var2)) {
-    switch (var2) {
+  if(isDefined(var_2)) {
+    switch (var_2) {
       case "sight":
-        var3 = 1000;
+        var_3 = 1000;
         break;
       case "light_killed":
       case "glass_destroyed":
-        var3 = 3000;
+        var_3 = 3000;
         break;
     }
   }
 
-  self.cqb_target = var1;
-  var0.cqbtargetendtime = gettime() + var3;
+  self.cqb_target = var_1;
+  var_0.cqbtargetendtime = gettime() + var_3;
 }
 
-function setuprandomlooktarget(var0) {
-  var1 = 400;
-  var0.cqbtwitching = 1;
-  var0.cqbtwitchend = gettime() + var1;
-  var0.cqbtwitchstate = 0;
+function setuprandomlooktarget(var_0) {
+  var_1 = 400;
+  var_0.cqbtwitching = 1;
+  var_0.cqbtwitchend = gettime() + var_1;
+  var_0.cqbtwitchstate = 0;
 
   if(scripts\engine\utility::cointoss()) {
-    var0.cqbtwitchdir = 1;
+    var_0.cqbtwitchdir = 1;
     return;
   }
 
-  var0.cqbtwitchdir = -1;
+  var_0.cqbtwitchdir = -1;
 }
 
-function resetcqbtwitch(var0) {
-  var0.cqbtargetnexttwitchtime = gettime() + randomintrange(2000, 4000);
-  var0.cqbtwitching = undefined;
-  var0.cqbtwitchend = undefined;
-  var0.cqbtwitchstate = undefined;
-  var0.cqbtwitchdir = undefined;
+function resetcqbtwitch(var_0) {
+  var_0.cqbtargetnexttwitchtime = gettime() + randomintrange(2000, 4000);
+  var_0.cqbtwitching = undefined;
+  var_0.cqbtwitchend = undefined;
+  var_0.cqbtwitchstate = undefined;
+  var_0.cqbtwitchdir = undefined;
 }
 
-function updaterandomlooktarget(var0, var1) {
-  var2 = 400;
-  var3 = 1000;
-  var4 = 20;
-  var5 = anglesToForward(self.angles);
-  var6 = gettime();
+function updaterandomlooktarget(var_0, var_1) {
+  var_2 = 400;
+  var_3 = 1000;
+  var_4 = 20;
+  var_5 = anglesToForward(self.angles);
+  var_6 = gettime();
 
-  switch (var0.cqbtwitchstate) {
+  switch (var_0.cqbtwitchstate) {
     case 0:
-      var7 = (var0.cqbtwitchend - var6) / var2;
+      var_7 = (var_0.cqbtwitchend - var_6) / var_2;
 
-      if(var7 > 0) {
-        var8 = var4 * (1 - sin(var7 * 90)) * var0.cqbtwitchdir;
-        self.cqb_target = self.origin + rotatevector(var5, (0, var8, 0)) * var1;
+      if(var_7 > 0) {
+        var_8 = var_4 * (1 - sin(var_7 * 90)) * var_0.cqbtwitchdir;
+        self.cqb_target = self.origin + rotatevector(var_5, (0, var_8, 0)) * var_1;
         break;
       } else {
         <
-        error > .cqbtwitchend = var5 + var2; <
+        error > .cqbtwitchend = var_5 + var_2; <
         error > .cqbtwitchstate++;
       }
     case 1:
-      if(var5 < < error > .cqbtwitchend) {
-        self.cqb_target = self.origin + rotatevector(var4, (0, var3 * < error > .cqbtwitchdir, 0)) * var0;
+      if(var_5 < < error > .cqbtwitchend) {
+        self.cqb_target = self.origin + rotatevector(var_4, (0, var_3 * < error > .cqbtwitchdir, 0)) * var_0;
         break;
       } else {
         <
-        error > .cqbtwitchend = var5 + var1; <
+        error > .cqbtwitchend = var_5 + var_1; <
         error > .cqbtwitchstate++;
       }
     case 2:
-      var7 = ( < error > .cqbtwitchend - var5) / var1;
+      var_7 = ( < error > .cqbtwitchend - var_5) / var_1;
 
-      if(var7 > 0) {
-        var8 = var3 * sin(var7 * 90) * < error > .cqbtwitchdir;
-        self.cqb_target = self.origin + rotatevector(var4, (0, var8, 0)) * var0;
+      if(var_7 > 0) {
+        var_8 = var_3 * sin(var_7 * 90) * < error > .cqbtwitchdir;
+        self.cqb_target = self.origin + rotatevector(var_4, (0, var_8, 0)) * var_0;
       } else {
         resetcqbtwitch( < error > );
       }
@@ -917,64 +917,64 @@ function updaterandomlooktarget(var0, var1) {
   }
 }
 
-function investigate_move_updateaimtarget(var0) {
-  var1 = gettime();
+function investigate_move_updateaimtarget(var_0) {
+  var_1 = gettime();
 
-  if(isDefined(var0.cqbtargetendtime)) {
+  if(isDefined(var_0.cqbtargetendtime)) {
     if(isDefined(self.cqb_target)) {
-      var2 = self.cqb_target - self.origin;
-      var3 = isDefined(self.stealth.patrol_react_magnitude) || isDefined(self.stealth.breacting);
+      var_2 = self.cqb_target - self.origin;
+      var_3 = isDefined(self.stealth.patrol_react_magnitude) || isDefined(self.stealth.breacting);
 
-      if(var1 > var0.cqbtargetendtime || !var3 && abs(self.angles[1], vectortoyaw(var2)) > 50) {
+      if(var_1 > var_0.cqbtargetendtime || !var_3 && abs(self.angles[1], vectortoyaw(var_2)) > 50) {
         self.cqb_target = undefined;
-        var0.cqbtargetendtime = undefined;
-        var0.cqbtargetnexttwitchtime = var1 + randomintrange(2000, 4000);
+        var_0.cqbtargetendtime = undefined;
+        var_0.cqbtargetnexttwitchtime = var_1 + randomintrange(2000, 4000);
       }
     } else {
-      var0.cqbtargetendtime = undefined;
-      var0.cqbtargetnexttwitchtime = var1 + randomintrange(2000, 4000);
+      var_0.cqbtargetendtime = undefined;
+      var_0.cqbtargetnexttwitchtime = var_1 + randomintrange(2000, 4000);
     }
   }
 
-  if(!isDefined(var0.cqbtargetendtime)) {
-    var4 = anglesToForward(self.angles);
-    var5 = 0;
+  if(!isDefined(var_0.cqbtargetendtime)) {
+    var_4 = anglesToForward(self.angles);
+    var_5 = 0;
 
-    foreach(var7 in level.players) {
-      if(self getthreatsight(var7) > 0) {
-        var5 = 1;
-        resetcqbtwitch(var0);
-        self.cqb_target = self lastknownpos(var7);
+    foreach(var_7 in level.players) {
+      if(self getthreatsight(var_7) > 0) {
+        var_5 = 1;
+        resetcqbtwitch(var_0);
+        self.cqb_target = self lastknownpos(var_7);
         break;
       }
     }
 
-    if(!var5) {
-      var9 = 400;
-      var10 = 1000;
-      var11 = 20;
+    if(!var_5) {
+      var_9 = 400;
+      var_10 = 1000;
+      var_11 = 20;
 
-      if(isDefined(var0.cqbtwitching)) {
-        updaterandomlooktarget(var0, 78);
+      if(isDefined(var_0.cqbtwitching)) {
+        updaterandomlooktarget(var_0, 78);
         return;
       }
 
-      if(isDefined(var0.cqbtargetnexttwitchtime) && var1 > var0.cqbtargetnexttwitchtime) {
-        var0.cqbtwitching = 1;
-        var0.cqbtwitchend = var1 + var9;
-        var0.cqbtwitchstate = 0;
+      if(isDefined(var_0.cqbtargetnexttwitchtime) && var_1 > var_0.cqbtargetnexttwitchtime) {
+        var_0.cqbtwitching = 1;
+        var_0.cqbtwitchend = var_1 + var_9;
+        var_0.cqbtwitchstate = 0;
 
         if(scripts\engine\utility::cointoss()) {
-          var0.cqbtwitchdir = 1;
+          var_0.cqbtwitchdir = 1;
         } else {
-          var0.cqbtwitchdir = -1;
+          var_0.cqbtwitchdir = -1;
         }
 
-        updaterandomlooktarget(var0, 78);
+        updaterandomlooktarget(var_0, 78);
         return;
       }
 
-      self.cqb_target = self.origin + var4 * 78;
+      self.cqb_target = self.origin + var_4 * 78;
       return;
     }
 
@@ -982,7 +982,7 @@ function investigate_move_updateaimtarget(var0) {
   }
 }
 
-function investigate_move(var0) {
+function investigate_move(var_0) {
   if(self islinked()) {
     return anim.success;
   }
@@ -991,123 +991,123 @@ function investigate_move(var0) {
     return anim.success;
   }
 
-  var1 = gettime();
-  var2 = self.bt.instancedata[var0];
-  var3 = scripts\stealth\group::getgroup(self.script_stealthgroup);
-  var4 = scripts\stealth\group::group_findpod(var3, self);
-  var5 = scripts\asm\asm_bb::bb_smartobjectrequested();
+  var_1 = gettime();
+  var_2 = self.bt.instancedata[var_0];
+  var_3 = scripts\stealth\group::getgroup(self.script_stealthgroup);
+  var_4 = scripts\stealth\group::group_findpod(var_3, self);
+  var_5 = scripts\asm\asm_bb::bb_smartobjectrequested();
 
-  if(self.arriving && var5 && distancesquared(self.goalpos, self.origin) < 225) {
+  if(self.arriving && var_5 && distancesquared(self.goalpos, self.origin) < 225) {
     scripts\asm\asm_bb::bb_requestplaysmartobject();
   }
 
-  if(isDefined(var4.needsupdate) && scripts\engine\utility::array_contains(var4.needsupdate, self)) {
-    var6 = investigate_getuninvestigatedpos();
-    var4.needsupdate = scripts\engine\utility::array_remove(var4.needsupdate, self);
-    self setbtgoalpos(0, var6);
-    var7 = self.stealth.investigateevent.typeorig;
+  if(isDefined(var_4.needsupdate) && scripts\engine\utility::array_contains(var_4.needsupdate, self)) {
+    var_6 = investigate_getuninvestigatedpos();
+    var_4.needsupdate = scripts\engine\utility::array_remove(var_4.needsupdate, self);
+    self setbtgoalpos(0, var_6);
+    var_7 = self.stealth.investigateevent.typeorig;
 
-    if(var7 == "saw_corpse" || var7 == "found_corpse") {
-      investigate_setupruntocorpse(var2, var6, 0);
+    if(var_7 == "saw_corpse" || var_7 == "found_corpse") {
+      investigate_setupruntocorpse(var_2, var_6, 0);
     } else {
-      var8 = gettime() > var2.starttime;
-      var9 = "alert";
-      var10 = "small";
+      var_8 = gettime() > var_2.starttime;
+      var_9 = "alert";
+      var_10 = "small";
 
-      if(var7 == "bulletwhizby" || scripts\asm\asm::asm_getdemeanor() == "combat") {
-        var9 = "cqb";
-        var10 = "med";
+      if(var_7 == "bulletwhizby" || scripts\asm\asm::asm_getdemeanor() == "combat") {
+        var_9 = "cqb";
+        var_10 = "med";
       }
 
-      if(istrue(self.stealth.binitialinvestigate) && isDefined(self.pathgoalpos) && distancesquared(self.pathgoalpos, var6) < 576) {
-        var8 = 0;
+      if(istrue(self.stealth.binitialinvestigate) && isDefined(self.pathgoalpos) && distancesquared(self.pathgoalpos, var_6) < 576) {
+        var_8 = 0;
       }
 
-      scripts\stealth\utility::set_patrol_style(var9, var8, var6, var10);
-      var11 = self.stealth.investigateevent.look_pos;
+      scripts\stealth\utility::set_patrol_style(var_9, var_8, var_6, var_10);
+      var_11 = self.stealth.investigateevent.look_pos;
 
-      if(!isDefined(var11)) {
-        var11 = self.stealth.investigateevent.investigate_pos;
+      if(!isDefined(var_11)) {
+        var_11 = self.stealth.investigateevent.investigate_pos;
       }
 
-      investigate_move_setaimtarget(var2, var11, var7);
-      self.asm.customdata.arrivalangles = findgoodinvestigatelookdir(var6);
-      var2.nextcorpsechecktime = undefined;
+      investigate_move_setaimtarget(var_2, var_11, var_7);
+      self.asm.customdata.arrivalangles = findgoodinvestigatelookdir(var_6);
+      var_2.nextcorpsechecktime = undefined;
     }
   }
 
-  if(isDefined(var2.nextcorpsechecktime) && var1 > var2.nextcorpsechecktime) {
+  if(isDefined(var_2.nextcorpsechecktime) && var_1 > var_2.nextcorpsechecktime) {
     if(isDefined(self.stealth.corpse.ent)) {
-      var12 = self.stealth.corpse.ent scripts\stealth\utility::getcorpseorigin();
-      var12 = investigate_getcorpseoffsetpos(var12);
-      self setbtgoalpos(0, var12);
-      var2.nextcorpsechecktime = var1 + 200;
+      var_12 = self.stealth.corpse.ent scripts\stealth\utility::getcorpseorigin();
+      var_12 = investigate_getcorpseoffsetpos(var_12);
+      self setbtgoalpos(0, var_12);
+      var_2.nextcorpsechecktime = var_1 + 200;
     } else {
-      var2.nextcorpsechecktime = undefined;
+      var_2.nextcorpsechecktime = undefined;
     }
   }
 
-  if(isDefined(var2.enablelookdownpathtime) && var1 > var2.enablelookdownpathtime) {
+  if(isDefined(var_2.enablelookdownpathtime) && var_1 > var_2.enablelookdownpathtime) {
     self.disablelookdownpath = undefined;
-    var2.enablelookdownpathtime = undefined;
+    var_2.enablelookdownpathtime = undefined;
   }
 
-  var13 = level.player;
+  var_13 = level.player;
 
-  if(self cansee(var13)) {
-    investigate_move_setaimtarget(var2, self lastknownpos(var13) + (0, 0, 32), "sight");
+  if(self cansee(var_13)) {
+    investigate_move_setaimtarget(var_2, self lastknownpos(var_13) + (0, 0, 32), "sight");
   }
 
-  investigate_move_updateaimtarget(var2);
+  investigate_move_updateaimtarget(var_2);
 
-  if(isdonewithsearchmove(var2)) {
+  if(isdonewithsearchmove(var_2)) {
     return anim.success;
   }
 
-  if(isDefined(var2.nextstylecheck) && var1 >= var2.nextstylecheck) {
-    var14 = 512;
+  if(isDefined(var_2.nextstylecheck) && var_1 >= var_2.nextstylecheck) {
+    var_14 = 512;
 
-    if(isDefined(var2.nextstylecheckdist)) {
-      var14 = var2.nextstylecheckdist;
+    if(isDefined(var_2.nextstylecheckdist)) {
+      var_14 = var_2.nextstylecheckdist;
     }
 
-    if(self pathdisttogoal() > var14) {
-      var15 = 1000;
+    if(self pathdisttogoal() > var_14) {
+      var_15 = 1000;
 
-      if(isDefined(var2.nextstylecheckinterval)) {
-        var15 = var2.nextstylecheckinterval;
+      if(isDefined(var_2.nextstylecheckinterval)) {
+        var_15 = var_2.nextstylecheckinterval;
       }
 
-      var2.nextstylecheck = var1 + var15;
+      var_2.nextstylecheck = var_1 + var_15;
     } else {
       scripts\stealth\utility::set_patrol_style("alert");
-      var2.nextstylecheck = undefined;
+      var_2.nextstylecheck = undefined;
     }
   }
 
   return anim.running;
 }
 
-function investigate_move_terminate(var0) {
+function investigate_move_terminate(var_0) {
   self.fovforward = 0;
   self.stealth.binitialinvestigate = 0;
-  self.bt.instancedata[var0] = undefined;
+  self.bt.instancedata[var_0] = undefined;
   self.cqb_target = undefined;
   self.disablelookdownpath = undefined;
   self.stealth.bexaminerequested = undefined;
   scripts\stealth\corpse::corpse_clear();
 }
 
-function investigate_lookaround_init(var0) {
-  var1 = spawnStruct();
-  var1.failsafetimeout = gettime() + 8000;
+function investigate_lookaround_init(var_0) {
+  var_1 = spawnStruct();
+  var_1.failsafetimeout = gettime() + 8000;
 
   if(isDefined(self.stealth.scriptedinitialinvestigatedelay)) {
-    var1.initialinvestigatetime = gettime() + self.stealth.scriptedinitialinvestigatedelay * 1000;
+    var_1.initialinvestigatetime = gettime() + self.stealth.scriptedinitialinvestigatedelay * 1000;
     self.stealth.scriptedinitialinvestigatedelay = undefined;
   }
 
-  self.bt.instancedata[var0] = var1;
+  self.bt.instancedata[var_0] = var_1;
   self setbtgoalpos(0, self getnavposition());
   scripts\stealth\utility::set_patrol_style("alert");
   self.stealth.binvestigatelookaround = 1;
@@ -1118,24 +1118,24 @@ function investigate_lookaround_init(var0) {
   }
 }
 
-function investigate_lookaround(var0) {
-  if(gettime() > self.bt.instancedata[var0].failsafetimeout) {
+function investigate_lookaround(var_0) {
+  if(gettime() > self.bt.instancedata[var_0].failsafetimeout) {
     return anim.success;
   }
 
   if(self.stealth.binitialinvestigate) {
-    if(isDefined(self.bt.instancedata[var0].initialinvestigatetime) && gettime() < self.bt.instancedata[var0].initialinvestigatetime) {
+    if(isDefined(self.bt.instancedata[var_0].initialinvestigatetime) && gettime() < self.bt.instancedata[var_0].initialinvestigatetime) {
       return anim.running;
     }
 
     return anim.success;
   }
 
-  var1 = scripts\stealth\group::getgroup(self.script_stealthgroup);
-  var2 = scripts\stealth\group::group_findpod(var1, self);
+  var_1 = scripts\stealth\group::getgroup(self.script_stealthgroup);
+  var_2 = scripts\stealth\group::group_findpod(var_1, self);
 
-  if(isDefined(var2.needsupdate) && scripts\engine\utility::array_contains(var2.needsupdate, self)) {
-    var2.needsupdate = scripts\engine\utility::array_remove(var2.needsupdate, self);
+  if(isDefined(var_2.needsupdate) && scripts\engine\utility::array_contains(var_2.needsupdate, self)) {
+    var_2.needsupdate = scripts\engine\utility::array_remove(var_2.needsupdate, self);
     return anim.success;
   }
 
@@ -1143,8 +1143,8 @@ function investigate_lookaround(var0) {
     return anim.success;
   }
 
-  foreach(var4 in level.players) {
-    if(self getthreatsight(var4) > 0.05) {
+  foreach(var_4 in level.players) {
+    if(self getthreatsight(var_4) > 0.05) {
       return anim.failure;
     }
   }
@@ -1152,29 +1152,29 @@ function investigate_lookaround(var0) {
   return anim.running;
 }
 
-function investigate_lookaround_terminate(var0) {
-  self.bt.instancedata[var0] = undefined;
+function investigate_lookaround_terminate(var_0) {
+  self.bt.instancedata[var_0] = undefined;
   self.stealth.binvestigatelookaround = 0;
 }
 
-function investigate_targetedlookaround(var0) {
-  var1 = 0;
+function investigate_targetedlookaround(var_0) {
+  var_1 = 0;
 
-  foreach(var3 in level.players) {
-    if(self getthreatsight(var3) > 0.05) {
-      self.cqb_target = self lastknownpos(var3);
-      var1 = 1;
+  foreach(var_3 in level.players) {
+    if(self getthreatsight(var_3) > 0.05) {
+      self.cqb_target = self lastknownpos(var_3);
+      var_1 = 1;
       break;
     }
   }
 
-  if(var1) {
+  if(var_1) {
     return anim.running;
   }
 
-  var5 = scripts\stealth\group::getgroup(self.script_stealthgroup);
-  var6 = scripts\stealth\group::group_findpod(var5, self);
-  var6 scripts\stealth\group::pod_updateinvestigateorigin(self, self.cqb_target);
+  var_5 = scripts\stealth\group::getgroup(self.script_stealthgroup);
+  var_6 = scripts\stealth\group::group_findpod(var_5, self);
+  var_6 scripts\stealth\group::pod_updateinvestigateorigin(self, self.cqb_target);
   return anim.success;
 }
 
@@ -1197,7 +1197,7 @@ function investigate_terminate() {
   scripts\stealth\corpse::corpse_clear();
 }
 
-function stealth_shouldhunt(var0) {
+function stealth_shouldhunt(var_0) {
   if(self.stealth.bsmstate == 2) {
     return anim.success;
   }
@@ -1205,21 +1205,21 @@ function stealth_shouldhunt(var0) {
   return anim.failure;
 }
 
-function hunt_shouldinvestigateorigin(var0, var1) {
-  foreach(var3 in level.stealth.groupdata.groups) {
-    foreach(var5 in var3.pods) {
-      if(var5 == var0) {
+function hunt_shouldinvestigateorigin(var_0, var_1) {
+  foreach(var_3 in level.stealth.groupdata.groups) {
+    foreach(var_5 in var_3.pods) {
+      if(var_5 == var_0) {
         continue;
       }
 
-      if(var5.state == 2 && isDefined(var5.borigininvestigated) && distance2dsquared(var0.origin, var5.origin) < 576) {
-        var0.borigininvestigated = 1;
+      if(var_5.state == 2 && isDefined(var_5.borigininvestigated) && distance2dsquared(var_0.origin, var_5.origin) < 576) {
+        var_0.borigininvestigated = 1;
         return false;
       }
     }
   }
 
-  return var0 scripts\stealth\group::pod_getclosestguy(var0.origin) == var1;
+  return var_0 scripts\stealth\group::pod_getclosestguy(var_0.origin) == var_1;
 }
 
 function hunt_updateregiontoclear() {
@@ -1228,9 +1228,9 @@ function hunt_updateregiontoclear() {
       return;
     }
 
-    var0 = scripts\stealth\clear_regions::getregionforpos(self.origin);
+    var_0 = scripts\stealth\clear_regions::getregionforpos(self.origin);
 
-    if(!isDefined(var0)) {
+    if(!isDefined(var_0)) {
       return;
     }
 
@@ -1238,14 +1238,14 @@ function hunt_updateregiontoclear() {
       self.stealth.cleardata = spawnStruct();
     }
 
-    var1 = self.stealth.cleardata;
-    var1.prevregion = [];
-    var1.prevregion[0] = var0;
-    var1.prevregion[1] = var0;
-    var1.isinregion = 0;
-    scripts\stealth\clear_regions::huntassigntoregion(var0);
-    var1.curroutepoint = scripts\stealth\clear_regions::findcurposonroute(self.origin, var0.route_points);
-    var1.brouteforward = 1;
+    var_1 = self.stealth.cleardata;
+    var_1.prevregion = [];
+    var_1.prevregion[0] = var_0;
+    var_1.prevregion[1] = var_0;
+    var_1.isinregion = 0;
+    scripts\stealth\clear_regions::huntassigntoregion(var_0);
+    var_1.curroutepoint = scripts\stealth\clear_regions::findcurposonroute(self.origin, var_0.route_points);
+    var_1.brouteforward = 1;
     return;
   }
 }
@@ -1261,14 +1261,14 @@ function hunt_clearroomdata() {
   }
 }
 
-function hunt_finddoorbetween(var0, var1) {
-  foreach(var3 in var0.region_links) {
-    if(var3.region == var1) {
-      var4 = var3.transition_to_point.origin;
+function hunt_finddoorbetween(var_0, var_1) {
+  foreach(var_3 in var_0.region_links) {
+    if(var_3.region == var_1) {
+      var_4 = var_3.transition_to_point.origin;
 
-      for(var5 = 0; var5 < var1.route_points.size; var5++) {
-        if(distancesquared(var1.route_points[var5].origin, var4) < 4) {
-          return var5;
+      for(var_5 = 0; var_5 < var_1.route_points.size; var_5++) {
+        if(distancesquared(var_1.route_points[var_5].origin, var_4) < 4) {
+          return var_5;
         }
       }
     }
@@ -1276,100 +1276,100 @@ function hunt_finddoorbetween(var0, var1) {
 }
 
 function hunt_getnextclearpos() {
-  var0 = self.stealth.cleardata;
-  var1 = undefined;
+  var_0 = self.stealth.cleardata;
+  var_1 = undefined;
 
-  for(var2 = 0; var2 < 2; var2++) {
-    var3 = scripts\stealth\clear_regions::findnextpointofinterest(self.origin, var0.curregion, var0.curroutepoint, var0.brouteforward);
+  for(var_2 = 0; var_2 < 2; var_2++) {
+    var_3 = scripts\stealth\clear_regions::findnextpointofinterest(self.origin, var_0.curregion, var_0.curroutepoint, var_0.brouteforward);
 
-    if(isDefined(var3)) {
-      var1 = var3[0];
-      var0.curroutepoint = var3[1];
+    if(isDefined(var_3)) {
+      var_1 = var_3[0];
+      var_0.curroutepoint = var_3[1];
       break;
     }
 
-    if(var2 == 1) {
+    if(var_2 == 1) {
       break;
     }
 
-    var4 = var0.curregion;
+    var_4 = var_0.curregion;
     scripts\stealth\clear_regions::huntgetnextregion();
-    var0.curroutepoint = 0;
-    var0.brouteforward = 1;
+    var_0.curroutepoint = 0;
+    var_0.brouteforward = 1;
 
-    if(var4 != var0.curregion) {
-      var5 = hunt_finddoorbetween(var4, var0.curregion);
+    if(var_4 != var_0.curregion) {
+      var_5 = hunt_finddoorbetween(var_4, var_0.curregion);
 
-      if(isDefined(var5)) {
-        var0.curroutepoint = var5;
+      if(isDefined(var_5)) {
+        var_0.curroutepoint = var_5;
       } else {
-        var0.curroutepoint = scripts\stealth\clear_regions::findcurposonroute(self.origin, var0.curregion.route_points);
+        var_0.curroutepoint = scripts\stealth\clear_regions::findcurposonroute(self.origin, var_0.curregion.route_points);
       }
 
-      if(var0.curroutepoint > var0.curregion.route_points.size * 0.5) {
-        var0.brouteforward = 0;
+      if(var_0.curroutepoint > var_0.curregion.route_points.size * 0.5) {
+        var_0.brouteforward = 0;
       }
     }
   }
 
-  if(isDefined(var1)) {
-    self.asm.customdata.arrivalangles = var1.angles;
-    scripts\smartobjects\utility::setsmartobject(var1);
-    return var1.origin;
+  if(isDefined(var_1)) {
+    self.asm.customdata.arrivalangles = var_1.angles;
+    scripts\smartobjects\utility::setsmartobject(var_1);
+    return var_1.origin;
   }
 
-  var6 = 0;
-  var7 = 1;
-  var8 = var0.curregion.route_points.size;
+  var_6 = 0;
+  var_7 = 1;
+  var_8 = var_0.curregion.route_points.size;
 
-  if(var0.curroutepoint > var8 * 0.5) {
-    var6 = var8 - 1;
-    var7 = var6 - 1;
+  if(var_0.curroutepoint > var_8 * 0.5) {
+    var_6 = var_8 - 1;
+    var_7 = var_6 - 1;
   }
 
-  if(var0.brouteforward) {
-    var0.curroutepoint = var0.curregion.route_points.size;
+  if(var_0.brouteforward) {
+    var_0.curroutepoint = var_0.curregion.route_points.size;
   } else {
-    var0.curroutepoint = -1;
+    var_0.curroutepoint = -1;
   }
 
-  if(var7 >= 0 && var7 < var8) {
-    self.asm.customdata.arrivalangles = vectortoangles(var0.curregion.route_points[var7].origin - var0.curregion.route_points[var6].origin);
+  if(var_7 >= 0 && var_7 < var_8) {
+    self.asm.customdata.arrivalangles = vectortoangles(var_0.curregion.route_points[var_7].origin - var_0.curregion.route_points[var_6].origin);
   }
 
-  return var0.curregion.route_points[var6].origin;
+  return var_0.curregion.route_points[var_6].origin;
 }
 
 function hunt_getpos() {
-  var0 = scripts\stealth\group::getgroup(self.script_stealthgroup);
-  var1 = scripts\stealth\group::group_findpod(var0, self);
-  var2 = undefined;
+  var_0 = scripts\stealth\group::getgroup(self.script_stealthgroup);
+  var_1 = scripts\stealth\group::group_findpod(var_0, self);
+  var_2 = undefined;
 
   if(isDefined(self.stealth.script_nexthuntpos)) {
-    var2 = self.stealth.script_nexthuntpos;
+    var_2 = self.stealth.script_nexthuntpos;
     self.stealth.script_nexthuntpos = undefined;
     hunt_clearroomdata();
   }
 
-  if(!isDefined(var2) && isDefined(var1.origin) && !isDefined(var1.borigininvestigated)) {
-    if(hunt_shouldinvestigateorigin(var1, self)) {
-      var2 = var1.origin;
-      var1.borigininvestigated = 1;
+  if(!isDefined(var_2) && isDefined(var_1.origin) && !isDefined(var_1.borigininvestigated)) {
+    if(hunt_shouldinvestigateorigin(var_1, self)) {
+      var_2 = var_1.origin;
+      var_1.borigininvestigated = 1;
       hunt_clearroomdata();
     }
   }
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     hunt_updateregiontoclear();
 
     if(isDefined(self.stealth.cleardata)) {
-      var2 = hunt_getnextclearpos();
+      var_2 = hunt_getnextclearpos();
     } else {
-      var2 = scripts\stealth\group::group_getinvestigatepoint(self, level.stealth.hunt_volumes[self.script_stealthgroup]);
+      var_2 = scripts\stealth\group::group_getinvestigatepoint(self, level.stealth.hunt_volumes[self.script_stealthgroup]);
     }
   }
 
-  return var2;
+  return var_2;
 }
 
 function hunt_init() {
@@ -1386,10 +1386,10 @@ function hunt_init() {
   self.allowturn45 = 1;
   self.last_set_goalnode = undefined;
   self.last_set_goalent = undefined;
-  var0 = scripts\stealth\group::getgroup(self.script_stealthgroup);
-  var1 = scripts\stealth\group::group_findpod(var0, self);
+  var_0 = scripts\stealth\group::getgroup(self.script_stealthgroup);
+  var_1 = scripts\stealth\group::group_findpod(var_0, self);
 
-  if(isDefined(var1.borigininvolume) && !var1.borigininvolume) {
+  if(isDefined(var_1.borigininvolume) && !var_1.borigininvolume) {
     self setbtgoalvolume(0, level.stealth.hunt_volumes[self.script_stealthgroup]);
 
     if(isDefined(self.script_combatmode)) {
@@ -1410,75 +1410,75 @@ function hunt_init() {
   }
 }
 
-function hunt_updateeveryframe(var0) {
+function hunt_updateeveryframe(var_0) {
   return anim.success;
 }
 
-function hunt_initialdelay_init(var0) {
-  self.bt.instancedata[var0] = gettime() + randomintrange(500, 1500);
+function hunt_initialdelay_init(var_0) {
+  self.bt.instancedata[var_0] = gettime() + randomintrange(500, 1500);
 }
 
-function hunt_initialdelay(var0) {
-  if(!isDefined(self.stealth.binitialhunt) || isDefined(scripts\asm\asm_bb::bb_getcovernode()) || gettime() >= self.bt.instancedata[var0]) {
+function hunt_initialdelay(var_0) {
+  if(!isDefined(self.stealth.binitialhunt) || isDefined(scripts\asm\asm_bb::bb_getcovernode()) || gettime() >= self.bt.instancedata[var_0]) {
     return anim.success;
   }
 
   return anim.running;
 }
 
-function hunt_initialdelay_terminate(var0) {
-  self.bt.instancedata[var0] = undefined;
+function hunt_initialdelay_terminate(var_0) {
+  self.bt.instancedata[var_0] = undefined;
 }
 
-function hunt_cqbtargetupdate(var0) {
-  var1 = scripts\stealth\group::getgroup(self.script_stealthgroup);
-  var2 = scripts\stealth\group::group_findpod(var1, self);
+function hunt_cqbtargetupdate(var_0) {
+  var_1 = scripts\stealth\group::getgroup(self.script_stealthgroup);
+  var_2 = scripts\stealth\group::group_findpod(var_1, self);
 
-  if(isDefined(var2.target)) {
-    var3 = gettime();
+  if(isDefined(var_2.target)) {
+    var_3 = gettime();
 
-    if(self cansee(var2.target) || self getthreatsight(var2.target) > 0.1) {
-      self.cqb_target = var2.target.origin;
-      var0.cqbtargettime = var3;
+    if(self cansee(var_2.target) || self getthreatsight(var_2.target) > 0.1) {
+      self.cqb_target = var_2.target.origin;
+      var_0.cqbtargettime = var_3;
       return true;
-    } else if(issentient(var2.target) && (isDefined(self.stealth.btargetlastknown) || isDefined(var0.cqbtargettime) && var3 - var0.cqbtargettime < 2000)) {
-      self.cqb_target = self lastknownpos(var2.target);
+    } else if(issentient(var_2.target) && (isDefined(self.stealth.btargetlastknown) || isDefined(var_0.cqbtargettime) && var_3 - var_0.cqbtargettime < 2000)) {
+      self.cqb_target = self lastknownpos(var_2.target);
       return true;
     }
   }
 
-  var4 = anglesToForward(self.angles);
-  self.cqb_target = self.origin + var4 * 384;
+  var_4 = anglesToForward(self.angles);
+  self.cqb_target = self.origin + var_4 * 384;
   return false;
 }
 
-function hunt_shouldhunker(var0) {
-  var1 = scripts\stealth\group::getgroup(self.script_stealthgroup);
-  var2 = scripts\stealth\group::group_findpod(var1, self);
+function hunt_shouldhunker(var_0) {
+  var_1 = scripts\stealth\group::getgroup(self.script_stealthgroup);
+  var_2 = scripts\stealth\group::group_findpod(var_1, self);
 
-  if(istrue(var2.bhunkering)) {
+  if(istrue(var_2.bhunkering)) {
     return anim.success;
   }
 
   return anim.failure;
 }
 
-function hunt_hunker_init(var0) {
-  var1 = gettime();
-  var2 = spawnStruct();
-  var2.nextcoverchecktime = var1 + randomintrange(4000, 6000);
-  self.bt.instancedata[var0] = var2;
-  self.stealth.hunthunkerlastexposetime = var1;
+function hunt_hunker_init(var_0) {
+  var_1 = gettime();
+  var_2 = spawnStruct();
+  var_2.nextcoverchecktime = var_1 + randomintrange(4000, 6000);
+  self.bt.instancedata[var_0] = var_2;
+  self.stealth.hunthunkerlastexposetime = var_1;
   scripts\stealth\utility::set_patrol_style("cqb");
-  var3 = scripts\stealth\group::getgroup(self.script_stealthgroup);
-  var4 = scripts\stealth\group::group_findpod(var3, self);
-  var5 = self findbestcovernode(undefined, 0, var4.origin);
+  var_3 = scripts\stealth\group::getgroup(self.script_stealthgroup);
+  var_4 = scripts\stealth\group::group_findpod(var_3, self);
+  var_5 = self findbestcovernode(undefined, 0, var_4.origin);
 
-  if(isDefined(var5)) {
-    if(!isDefined(self.node) || self.node != var5) {
+  if(isDefined(var_5)) {
+    if(!isDefined(self.node) || self.node != var_5) {
       self.keepclaimednode = 0;
       self.keepclaimednodeifvalid = 0;
-      self usecovernode(var5);
+      self usecovernode(var_5);
       return;
     }
 
@@ -1486,62 +1486,62 @@ function hunt_hunker_init(var0) {
   }
 }
 
-function hunt_hunker(var0) {
-  var1 = gettime();
+function hunt_hunker(var_0) {
+  var_1 = gettime();
 
-  if(var1 > self.bt.instancedata[var0].nextcoverchecktime) {
-    var2 = scripts\stealth\group::getgroup(self.script_stealthgroup);
-    var3 = scripts\stealth\group::group_findpod(var2, self);
-    var4 = randomint(3) < 1;
-    var5 = self findbestcovernode("cover_hunt_hunker", var4, var3.origin);
+  if(var_1 > self.bt.instancedata[var_0].nextcoverchecktime) {
+    var_2 = scripts\stealth\group::getgroup(self.script_stealthgroup);
+    var_3 = scripts\stealth\group::group_findpod(var_2, self);
+    var_4 = randomint(3) < 1;
+    var_5 = self findbestcovernode("cover_hunt_hunker", var_4, var_3.origin);
 
-    if(isDefined(var5)) {
-      var6 = 0;
+    if(isDefined(var_5)) {
+      var_6 = 0;
 
-      if(!isDefined(self.node) || self.node != var5) {
+      if(!isDefined(self.node) || self.node != var_5) {
         self.keepclaimednode = 0;
         self.keepclaimednodeifvalid = 0;
-        var6 = !self usecovernode(var5);
+        var_6 = !self usecovernode(var_5);
       }
 
-      if(var6) {
-        self.bt.instancedata[var0].nextcoverchecktime = var1 + 500;
+      if(var_6) {
+        self.bt.instancedata[var_0].nextcoverchecktime = var_1 + 500;
       } else {
-        self.bt.instancedata[var0].nextcoverchecktime = var1 + randomintrange(4000, 6000);
+        self.bt.instancedata[var_0].nextcoverchecktime = var_1 + randomintrange(4000, 6000);
       }
     } else {
-      self.bt.instancedata[var0].nextcoverchecktime = var1 + randomintrange(2000, 4000);
+      self.bt.instancedata[var_0].nextcoverchecktime = var_1 + randomintrange(2000, 4000);
     }
   }
 
-  hunt_cqbtargetupdate(self.bt.instancedata[var0]);
+  hunt_cqbtargetupdate(self.bt.instancedata[var_0]);
   return anim.running;
 }
 
-function hunt_hunker_terminate(var0) {
-  self.bt.instancedata[var0] = undefined;
+function hunt_hunker_terminate(var_0) {
+  self.bt.instancedata[var_0] = undefined;
 }
 
-function hunt_hunker_shouldexpose(var0) {
-  var1 = 5000;
+function hunt_hunker_shouldexpose(var_0) {
+  var_1 = 5000;
 
   if(!isinlight(self.lightmeter)) {
-    var1 = 3000;
+    var_1 = 3000;
   }
 
-  if(gettime() > self.stealth.hunthunkerlastexposetime + var1) {
+  if(gettime() > self.stealth.hunthunkerlastexposetime + var_1) {
     return anim.success;
   }
 
   return anim.failure;
 }
 
-function hunt_hunker_expose_init(var0) {
-  var1 = spawnStruct();
-  var1.endtime = gettime() + 4000;
-  var1.nextpostime = 0;
-  var1.nextposidx = 0;
-  self.bt.instancedata[var0] = var1;
+function hunt_hunker_expose_init(var_0) {
+  var_1 = spawnStruct();
+  var_1.endtime = gettime() + 4000;
+  var_1.nextpostime = 0;
+  var_1.nextposidx = 0;
+  self.bt.instancedata[var_0] = var_1;
   scripts\asm\asm_bb::bb_requestcoverstate("exposed");
 
   if(scripts\engine\utility::isnodecoverleft(self.node) || scripts\engine\utility::isnodecoverright(self.node)) {
@@ -1553,70 +1553,70 @@ function hunt_hunker_expose_init(var0) {
   self.stealth.btargetlastknown = 1;
 }
 
-function hunt_hunker_expose(var0) {
-  var1 = gettime();
-  var2 = self.bt.instancedata[var0];
+function hunt_hunker_expose(var_0) {
+  var_1 = gettime();
+  var_2 = self.bt.instancedata[var_0];
 
-  if(var1 > var2.endtime) {
+  if(var_1 > var_2.endtime) {
     return anim.success;
   }
 
   return anim.running;
 }
 
-function hunt_hunker_expose_terminate(var0) {
+function hunt_hunker_expose_terminate(var_0) {
   self.cqb_target = undefined;
-  self.bt.instancedata[var0] = undefined;
+  self.bt.instancedata[var_0] = undefined;
   scripts\asm\asm_bb::bb_requestcoverstate("hide");
   self.stealth.btargetlastknown = undefined;
   self.stealth.hunthunkerlastexposetime = gettime();
 }
 
-function hunt_isincover(var0) {
+function hunt_isincover(var_0) {
   if(!isDefined(self.node)) {
     return anim.failure;
   }
 
-  var1 = 16;
+  var_1 = 16;
 
   if(isDefined(self.pathgoalpos)) {
-    if(distancesquared(self.pathgoalpos, self.origin) > var1) {
+    if(distancesquared(self.pathgoalpos, self.origin) > var_1) {
       return anim.failure;
     }
   } else if(self.keepclaimednodeifvalid) {
-    var1 = 3600;
+    var_1 = 3600;
   } else {
-    var1 = 225;
+    var_1 = 225;
   }
 
-  if(distance2dsquared(self.node.origin, self.origin) > var1) {
+  if(distance2dsquared(self.node.origin, self.origin) > var_1) {
     return anim.failure;
   }
 
   return anim.success;
 }
 
-function hunt_active_terminate(var0) {
+function hunt_active_terminate(var_0) {
   scripts\smartobjects\utility::clearsmartobject(scripts\asm\asm_bb::bb_getrequestedsmartobject());
 }
 
-function hunt_move_init(var0) {
-  var1 = gettime();
-  var2 = spawnStruct();
-  self.bt.instancedata[var0] = var2;
-  var2.starttime = var1;
-  var3 = hunt_getpos();
-  self setbtgoalpos(0, var3);
-  var2.goalpos = var3;
-  var2.numfails = 0;
-  var4 = scripts\asm\asm_bb::bb_getrequestedsmartobject();
+function hunt_move_init(var_0) {
+  var_1 = gettime();
+  var_2 = spawnStruct();
+  self.bt.instancedata[var_0] = var_2;
+  var_2.starttime = var_1;
+  var_3 = hunt_getpos();
+  self setbtgoalpos(0, var_3);
+  var_2.goalpos = var_3;
+  var_2.numfails = 0;
+  var_4 = scripts\asm\asm_bb::bb_getrequestedsmartobject();
 
-  if(isDefined(var4)) {
-    scripts\smartobjects\utility::setcustomsmartobjectarrivaldata(var4);
+  if(isDefined(var_4)) {
+    scripts\smartobjects\utility::setcustomsmartobjectarrivaldata(var_4);
     self setbtgoalRadius(0, 12);
   } else {
     if(!isDefined(self.asm.customdata.arrivalangles)) {
-      self.asm.customdata.arrivalangles = findgoodinvestigatelookdir(var3);
+      self.asm.customdata.arrivalangles = findgoodinvestigatelookdir(var_3);
     }
 
     self setbtgoalRadius(0, 36);
@@ -1624,115 +1624,115 @@ function hunt_move_init(var0) {
 
   scripts\stealth\utility::set_patrol_style("cqb");
   self.disablelookdownpath = 1;
-  var2.enablelookdownpathtime = var1 + 2000;
+  var_2.enablelookdownpathtime = var_1 + 2000;
 }
 
-function hunt_sidechecks(var0) {
-  var1 = 36;
-  var2 = 36;
-  var3 = 36;
-  var4 = gettime();
-  var5 = 2000;
+function hunt_sidechecks(var_0) {
+  var_1 = 36;
+  var_2 = 36;
+  var_3 = 36;
+  var_4 = gettime();
+  var_5 = 2000;
 
-  if(isDefined(var0.cornerchecknode) && var4 >= var0.cornerchecknodestarttime + var5) {
-    var0.cornerchecknode = undefined;
-    var0.cornerchecknodestarttime = undefined;
+  if(isDefined(var_0.cornerchecknode) && var_4 >= var_0.cornerchecknodestarttime + var_5) {
+    var_0.cornerchecknode = undefined;
+    var_0.cornerchecknodestarttime = undefined;
     self._blackboard.forcestrafe = 0;
     self._blackboard.forcestrafefacingpos = undefined;
     scripts\stealth\utility::set_patrol_style("cqb");
     self.disablelookdownpath = undefined;
   }
 
-  if(!isDefined(var0.cornerchecknode) && !self.arriving && self.lookaheaddist > 32 && self pathdisttogoal() > 128) {
-    var6 = self getposonpath(var1);
-    var7 = anglesToForward(self.angles);
-    var8 = getnodesinradius(var6, var3, 0, 60, "Cover");
+  if(!isDefined(var_0.cornerchecknode) && !self.arriving && self.lookaheaddist > 32 && self pathdisttogoal() > 128) {
+    var_6 = self getposonpath(var_1);
+    var_7 = anglesToForward(self.angles);
+    var_8 = getnodesinradius(var_6, var_3, 0, 60, "Cover");
 
-    if(var8.size > 0) {
-      foreach(var10 in var8) {
-        if(!var10 doesnodeallowstance("stand")) {
+    if(var_8.size > 0) {
+      foreach(var_10 in var_8) {
+        if(!var_10 doesnodeallowstance("stand")) {
           continue;
         }
 
-        var11 = var10.origin - self.origin;
+        var_11 = var_10.origin - self.origin;
 
-        if(vectordot(var11, var7) < 0) {
+        if(vectordot(var_11, var_7) < 0) {
           continue;
         }
 
-        var12 = angleclamp180(var10.angles[1] - self.angles[1]);
+        var_12 = angleclamp180(var_10.angles[1] - self.angles[1]);
 
-        if(var12 > 0 && var10.type != "Cover Right") {
+        if(var_12 > 0 && var_10.type != "Cover Right") {
           continue;
-        } else if(var12 < 0 && var10.type != "Cover Left") {
-          continue;
-        }
-
-        var13 = anglesToForward(var10.angles);
-        var14 = vectordot(var13, var7);
-
-        if(var14 > 0.5 || var14 < -0.5) {
+        } else if(var_12 < 0 && var_10.type != "Cover Left") {
           continue;
         }
 
-        if(abs(angleclamp180(self.angles[1] - var10.angles[1])) < 45) {
+        var_13 = anglesToForward(var_10.angles);
+        var_14 = vectordot(var_13, var_7);
+
+        if(var_14 > 0.5 || var_14 < -0.5) {
           continue;
         }
 
-        if(vectordot(self.lookaheaddir, var11) > 32) {
+        if(abs(angleclamp180(self.angles[1] - var_10.angles[1])) < 45) {
           continue;
         }
 
-        var0.cornerchecknode = var10;
-        var0.cornerchecknodestarttime = var4;
+        if(vectordot(self.lookaheaddir, var_11) > 32) {
+          continue;
+        }
+
+        var_0.cornerchecknode = var_10;
+        var_0.cornerchecknodestarttime = var_4;
         break;
       }
     }
   }
 
-  if(isDefined(var0.cornerchecknode)) {
-    var17 = var0.cornerchecknode;
-    var18 = undefined;
-    var19 = anglestoaxis(var17.angles);
-    var20 = var19["right"];
+  if(isDefined(var_0.cornerchecknode)) {
+    var_17 = var_0.cornerchecknode;
+    var_18 = undefined;
+    var_19 = anglestoaxis(var_17.angles);
+    var_20 = var_19["right"];
 
-    if(var17.type == "Cover Left") {
-      var20 = -1 * var20;
+    if(var_17.type == "Cover Left") {
+      var_20 = -1 * var_20;
     }
 
-    var21 = 20;
-    var22 = var17.origin + var21 * var19["forward"] + var21 * var20;
-    var23 = self.origin - var17.origin;
+    var_21 = 20;
+    var_22 = var_17.origin + var_21 * var_19["forward"] + var_21 * var_20;
+    var_23 = self.origin - var_17.origin;
 
-    if(vectordot(var23, var20) < var21) {
-      var18 = var22;
+    if(vectordot(var_23, var_20) < var_21) {
+      var_18 = var_22;
     } else {
-      var18 = self.origin + rotatevector((128, 0, 0), var17.angles);
+      var_18 = self.origin + rotatevector((128, 0, 0), var_17.angles);
     }
 
     self._blackboard.forcestrafe = 1;
-    self._blackboard.forcestrafefacingpos = var18;
+    self._blackboard.forcestrafefacingpos = var_18;
     scripts\engine\utility::set_movement_speed(30);
     self.disablelookdownpath = 1;
     return;
   }
 }
 
-function hunt_move(var0) {
-  var1 = self.bt.instancedata[var0];
-  var2 = gettime();
-  var3 = scripts\asm\asm_bb::bb_smartobjectrequested();
+function hunt_move(var_0) {
+  var_1 = self.bt.instancedata[var_0];
+  var_2 = gettime();
+  var_3 = scripts\asm\asm_bb::bb_smartobjectrequested();
 
-  if(self.arriving && var3 && distancesquared(self.goalpos, self.origin) < 225) {
+  if(self.arriving && var_3 && distancesquared(self.goalpos, self.origin) < 225) {
     scripts\asm\asm_bb::bb_requestplaysmartobject();
   }
 
-  if(isdonewithsearchmove(var1)) {
+  if(isdonewithsearchmove(var_1)) {
     return anim.success;
   }
 
-  if(scripts\asm\asm::asm_ephemeraleventfired("hunt", "knownpos") && (!isDefined(self.stealth.lastephemeraleventrespondedtime) || var2 > self.stealth.lastephemeraleventrespondedtime)) {
-    if(var3) {
+  if(scripts\asm\asm::asm_ephemeraleventfired("hunt", "knownpos") && (!isDefined(self.stealth.lastephemeraleventrespondedtime) || var_2 > self.stealth.lastephemeraleventrespondedtime)) {
+    if(var_3) {
       scripts\smartobjects\utility::clearsmartobject(scripts\asm\asm_bb::bb_getrequestedsmartobject());
     }
 
@@ -1740,36 +1740,36 @@ function hunt_move(var0) {
   }
 
   if(hunt_shouldhunker() == anim.success) {
-    if(var3) {
+    if(var_3) {
       scripts\smartobjects\utility::clearsmartobject(scripts\asm\asm_bb::bb_getrequestedsmartobject());
     }
 
     return anim.success;
   }
 
-  if(isDefined(var1.enablelookdownpathtime) && var2 > var1.enablelookdownpathtime) {
+  if(isDefined(var_1.enablelookdownpathtime) && var_2 > var_1.enablelookdownpathtime) {
     self.disablelookdownpath = undefined;
-    var1.enablelookdownpathtime = undefined;
+    var_1.enablelookdownpathtime = undefined;
   }
 
-  if(isDefined(self.pathgoalpos) && (self.arrivalfailed || !self.facemotion) && var3 && self pathdisttogoal() < 56) {
+  if(isDefined(self.pathgoalpos) && (self.arrivalfailed || !self.facemotion) && var_3 && self pathdisttogoal() < 56) {
     self._blackboard.forcestrafe = 1;
-    var4 = scripts\asm\asm_bb::bb_getrequestedsmartobject();
-    self._blackboard.forcestrafefacingpos = var4.origin + rotatevector((128, 0, 0), var4.angles);
+    var_4 = scripts\asm\asm_bb::bb_getrequestedsmartobject();
+    self._blackboard.forcestrafefacingpos = var_4.origin + rotatevector((128, 0, 0), var_4.angles);
   } else {
-    hunt_sidechecks(var1);
+    hunt_sidechecks(var_1);
   }
 
   if(isDefined(self.stealth.cleardata) && isDefined(self.stealth.cleardata.curregion)) {
     scripts\stealth\clear_regions::hunttrytoenterregionvolume(self.stealth.cleardata.curregion);
   }
 
-  hunt_cqbtargetupdate(var1);
+  hunt_cqbtargetupdate(var_1);
   return anim.running;
 }
 
-function hunt_move_terminate(var0) {
-  self.bt.instancedata[var0] = undefined;
+function hunt_move_terminate(var_0) {
+  self.bt.instancedata[var_0] = undefined;
 
   if(isDefined(self.stealth.breacting)) {
     self.stealth.binitialhunt = 1;
@@ -1786,16 +1786,16 @@ function hunt_move_terminate(var0) {
   self._blackboard.forcestrafefacingpos = undefined;
 }
 
-function hunt_lookaround_init(var0) {
-  var1 = 8000;
-  var2 = spawnStruct();
-  var2.endtime = gettime() + var1;
+function hunt_lookaround_init(var_0) {
+  var_1 = 8000;
+  var_2 = spawnStruct();
+  var_2.endtime = gettime() + var_1;
 
   if(isDefined(self.stealth.script_huntlookaroundduration)) {
-    var2.endtime = gettime() + self.stealth.script_huntlookaroundduration;
+    var_2.endtime = gettime() + self.stealth.script_huntlookaroundduration;
   }
 
-  self.bt.instancedata[var0] = var2;
+  self.bt.instancedata[var_0] = var_2;
   self setbtgoalpos(0, self getnavposition());
   self setbtgoalRadius(0, 36);
 
@@ -1811,12 +1811,12 @@ function hunt_lookaround_init(var0) {
   self.stealth.binvestigatelookaround = 1;
 }
 
-function hunt_lookaround(var0) {
+function hunt_lookaround(var_0) {
   if(isDefined(self.stealth.binitialhunt)) {
     return anim.success;
   }
 
-  if(gettime() > self.bt.instancedata[var0].endtime) {
+  if(gettime() > self.bt.instancedata[var_0].endtime) {
     return anim.success;
   }
 
@@ -1825,25 +1825,25 @@ function hunt_lookaround(var0) {
     return anim.success;
   }
 
-  var1 = isDefined(self.cqb_target);
-  var2 = hunt_cqbtargetupdate(self.bt.instancedata[var0]);
+  var_1 = isDefined(self.cqb_target);
+  var_2 = hunt_cqbtargetupdate(self.bt.instancedata[var_0]);
 
-  if(!var1 && isDefined(self.cqb_target) && var2) {
+  if(!var_1 && isDefined(self.cqb_target) && var_2) {
     self.stealth.binvestigatelookaround = undefined;
-    var3 = self.cqb_target;
+    var_3 = self.cqb_target;
 
     if(!isvector(self.cqb_target)) {
-      var3 = self.cqb_target.origin;
+      var_3 = self.cqb_target.origin;
     }
 
-    scripts\stealth\utility::set_patrol_react(var3, "small");
+    scripts\stealth\utility::set_patrol_react(var_3, "small");
   }
 
   return anim.running;
 }
 
-function hunt_lookaround_terminate(var0) {
-  self.bt.instancedata[var0] = undefined;
+function hunt_lookaround_terminate(var_0) {
+  self.bt.instancedata[var_0] = undefined;
   self.stealth.binvestigatelookaround = undefined;
 }
 
@@ -1874,7 +1874,7 @@ function combat_init() {
   }
 
   scripts\stealth\enemy::set_sight_state("combat");
-  var0 = self.origin;
+  var_0 = self.origin;
 
   if(istrue(self._blackboard.bflashlight)) {
     if(isDefined(self.fnstealthflashlighton)) {
@@ -1882,10 +1882,10 @@ function combat_init() {
     }
   }
 
-  var1 = level.stealth.combat_volumes[self.script_stealthgroup];
+  var_1 = level.stealth.combat_volumes[self.script_stealthgroup];
 
-  if(isDefined(var1)) {
-    self setbtgoalvolume(0, var1);
+  if(isDefined(var_1)) {
+    self setbtgoalvolume(0, var_1);
   } else if(isDefined(level.stealth.combat_goalradius) && isDefined(level.stealth.combat_goalradius[self.script_stealthgroup])) {
     self setbtgoalpos(0, self.scriptgoalpos);
     self setbtgoalRadius(0, level.stealth.combat_goalradius[self.script_stealthgroup]);
@@ -1913,7 +1913,7 @@ function clearstealthvolume() {
   }
 }
 
-function setstealthstate(var0, var1) {
+function setstealthstate(var_0, var_1) {
   if(!scripts\engine\utility::flag("stealth_enabled") || !isDefined(self.stealth)) {
     return;
   }
@@ -1922,7 +1922,7 @@ function setstealthstate(var0, var1) {
     return;
   }
 
-  switch (var0) {
+  switch (var_0) {
     case "idle":
       self.dontattackme = 1;
       self.diequietly = 1;
@@ -1933,60 +1933,60 @@ function setstealthstate(var0, var1) {
         scripts\stealth\enemy::set_sight_state("hidden");
       }
 
-      var2 = scripts\stealth\group::getgroup(self.script_stealthgroup);
-      scripts\stealth\group::group_removefrompod(var2, self);
+      var_2 = scripts\stealth\group::getgroup(self.script_stealthgroup);
+      scripts\stealth\group::group_removefrompod(var_2, self);
       enterstealthstate(0);
       self notify("stealth_idle");
       break;
     case "investigate":
-      if(var1.type == "cover_blown") {
+      if(var_1.type == "cover_blown") {
         self.stealth.bcoverhasbeenblown = 1;
       }
 
       if(self.stealth.bsmstate == 1) {
-        if(isPlayer(self.stealth.investigate_entity) && !isPlayer(var1.entity) && var1.typeorig != "saw_corpse") {
+        if(isPlayer(self.stealth.investigate_entity) && !isPlayer(var_1.entity) && var_1.typeorig != "saw_corpse") {
           break;
         }
 
         if(isDefined(self.stealth.investigate_severity)) {
-          if(self.stealth.investigateevent.typeorig == "saw_corpse" && var1.typeorig == "found_corpse" && var1.entity == self.stealth.investigate_entity) {
+          if(self.stealth.investigateevent.typeorig == "saw_corpse" && var_1.typeorig == "found_corpse" && var_1.entity == self.stealth.investigate_entity) {
             break;
           }
 
-          var3 = scripts\stealth\event::event_severity_compare(self.stealth.investigate_severity, var1.type);
+          var_3 = scripts\stealth\event::event_severity_compare(self.stealth.investigate_severity, var_1.type);
 
-          if(var3 >= 0) {
-            self.stealth.investigate_severity = var1.type;
-            self.stealth.investigate_entity = var1.entity;
-            self.stealth.investigateevent = var1;
+          if(var_3 >= 0) {
+            self.stealth.investigate_severity = var_1.type;
+            self.stealth.investigate_entity = var_1.entity;
+            self.stealth.investigateevent = var_1;
           }
 
-          var4 = gettime();
-          var5 = var3 > 0 || var4 > self.stealth.investigateevent_time || distancesquared(var1.investigate_pos, self.origin) < distancesquared(self.stealth.investigateevent.investigate_pos, self.origin);
+          var_4 = gettime();
+          var_5 = var_3 > 0 || var_4 > self.stealth.investigateevent_time || distancesquared(var_1.investigate_pos, self.origin) < distancesquared(self.stealth.investigateevent.investigate_pos, self.origin);
 
-          if(var5) {
-            var2 = scripts\stealth\group::getgroup(self.script_stealthgroup);
-            var6 = scripts\stealth\group::group_findpod(var2, self);
-            var7 = scripts\stealth\group::group_trytojoinexistingpod(var2, var6, 1, self, var1.investigate_pos);
+          if(var_5) {
+            var_2 = scripts\stealth\group::getgroup(self.script_stealthgroup);
+            var_6 = scripts\stealth\group::group_findpod(var_2, self);
+            var_7 = scripts\stealth\group::group_trytojoinexistingpod(var_2, var_6, 1, self, var_1.investigate_pos);
 
-            if(isDefined(var7)) {
-              var6 = var7;
+            if(isDefined(var_7)) {
+              var_6 = var_7;
             }
 
-            var6 scripts\stealth\group::pod_updateinvestigateorigin(self, var1.investigate_pos);
-            self.stealth.investigateevent_time = var4;
+            var_6 scripts\stealth\group::pod_updateinvestigateorigin(self, var_1.investigate_pos);
+            self.stealth.investigateevent_time = var_4;
           }
 
           self.stealth.investigateendtime = undefined;
         }
       } else {
-        if(var1.type == "cover_blown") {
-          scripts\stealth\group::group_eventcoverblown(self.script_stealthgroup, self, var1);
+        if(var_1.type == "cover_blown") {
+          scripts\stealth\group::group_eventcoverblown(self.script_stealthgroup, self, var_1);
         } else {
-          scripts\stealth\group::group_eventinvestigate(self.script_stealthgroup, self, var1);
+          scripts\stealth\group::group_eventinvestigate(self.script_stealthgroup, self, var_1);
         }
 
-        self.stealth.investigateevent = var1;
+        self.stealth.investigateevent = var_1;
         self.stealth.investigateevent_time = gettime();
         enterstealthstate(1);
         self notify("stealth_investigate");
@@ -2001,74 +2001,74 @@ function setstealthstate(var0, var1) {
       break;
     case "combat":
       if(self.stealth.bsmstate != 3) {
-        var8 = isDefined(var1) && var1.typeorig == "damage" && self.allowpain && self.allowpain_internal && !self isinscriptedstate();
+        var_8 = isDefined(var_1) && var_1.typeorig == "damage" && self.allowpain && self.allowpain_internal && !self isinscriptedstate();
 
-        if(isDefined(var1) && !var8) {
-          var9 = "small";
+        if(isDefined(var_1) && !var_8) {
+          var_9 = "small";
 
-          switch (var1.typeorig) {
+          switch (var_1.typeorig) {
             case "proximity":
-              var9 = "smed";
+              var_9 = "smed";
               break;
             case "projectile_impact":
             case "gunshot":
             case "ally_killed":
             case "ally_damaged":
             case "bulletwhizby":
-              var9 = "med";
+              var_9 = "med";
               break;
             case "grenade danger":
             case "explode":
-              var9 = "large";
+              var_9 = "large";
               break;
             case "light_killed":
             case "attack":
             case "combat":
-              if(distancesquared(var1.investigate_pos, self.origin) < 40000) {
-                var9 = "med";
+              if(distancesquared(var_1.investigate_pos, self.origin) < 40000) {
+                var_9 = "med";
               }
 
               break;
           }
 
-          var10 = self.enemy;
+          var_10 = self.enemy;
 
-          if(!isDefined(var10) && isDefined(var1.entity) && issentient(var1.entity)) {
-            var10 = var1.entity;
+          if(!isDefined(var_10) && isDefined(var_1.entity) && issentient(var_1.entity)) {
+            var_10 = var_1.entity;
           }
 
-          if(var9 == "small" && isDefined(var10)) {
-            if(self cansee(var10)) {
-              var9 = "med";
-            } else if(var1.typeorig == "sight") {
-              var9 = "smed";
+          if(var_9 == "small" && isDefined(var_10)) {
+            if(self cansee(var_10)) {
+              var_9 = "med";
+            } else if(var_1.typeorig == "sight") {
+              var_9 = "smed";
             }
           }
 
-          scripts\stealth\utility::set_patrol_style("combat", 1, var1.investigate_pos, var9);
+          scripts\stealth\utility::set_patrol_style("combat", 1, var_1.investigate_pos, var_9);
         } else {
           scripts\stealth\utility::set_patrol_style("combat");
         }
 
-        if(isDefined(var1) && var8 && istrue(self.asm.flashlight)) {
+        if(isDefined(var_1) && var_8 && istrue(self.asm.flashlight)) {
           scripts\asm\soldier\patrol::detachflashlight();
         }
       }
 
       self.stealth.bcoverhasbeenblown = 1;
-      var10 = undefined;
+      var_10 = undefined;
 
-      if(isDefined(var1) && isDefined(var1.entity)) {
-        if(issentient(var1.entity) && var1.entity.team == self.team) {
-          if(isDefined(var1.entity.enemy) && issentient(var1.entity.enemy)) {
-            self copyenemyinfo(var1.entity);
+      if(isDefined(var_1) && isDefined(var_1.entity)) {
+        if(issentient(var_1.entity) && var_1.entity.team == self.team) {
+          if(isDefined(var_1.entity.enemy) && issentient(var_1.entity.enemy)) {
+            self copyenemyinfo(var_1.entity);
           }
         } else {
-          var10 = var1.entity;
+          var_10 = var_1.entity;
         }
       }
 
-      scripts\stealth\group::group_eventcombat(self.script_stealthgroup, self, var10);
+      scripts\stealth\group::group_eventcombat(self.script_stealthgroup, self, var_10);
       enterstealthstate(3);
       self notify("stealth_combat");
       break;

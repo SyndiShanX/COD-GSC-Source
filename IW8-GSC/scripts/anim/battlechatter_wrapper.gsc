@@ -3,12 +3,12 @@
  * Script: scripts\anim\battlechatter_wrapper.gsc
 **************************************************/
 
-function evaluatemoveevent(var0) {
+function evaluatemoveevent(var_0) {
   if(!isDefined(level._battlechatter)) {
     return;
   }
 
-  [[level._battlechatter.fnevaluatemoveevent]](var0);
+  [[level._battlechatter.fnevaluatemoveevent]](var_0);
 }
 
 function evaluatereloadevent() {
@@ -19,26 +19,26 @@ function evaluatereloadevent() {
   [[level._battlechatter.fnevaluatereloadevent]]();
 }
 
-function addthreatevent(var0, var1, var2) {
+function addthreatevent(var_0, var_1, var_2) {
   if(!isDefined(level._battlechatter)) {
     return;
   }
 
-  [[level._battlechatter.fnaddthreatevent]](var0, var1, var2);
+  [[level._battlechatter.fnaddthreatevent]](var_0, var_1, var_2);
 }
 
-function evaluateattackevent(var0) {
+function evaluateattackevent(var_0) {
   if(!isDefined(level._battlechatter)) {
     return;
   }
 
-  [[level._battlechatter.fnevaluateattackevent]](var0);
+  [[level._battlechatter.fnevaluateattackevent]](var_0);
 }
 
-function playbattlechatter(var0) {
+function playbattlechatter(var_0) {
   if(!isDefined(level._battlechatter)) {
     return;
   }
 
-  [[level._battlechatter.fnplaybattlechatter]](var0);
+  [[level._battlechatter.fnplaybattlechatter]](var_0);
 }

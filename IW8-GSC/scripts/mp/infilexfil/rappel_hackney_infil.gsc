@@ -3,27 +3,27 @@
  * Script: scripts\mp\infilexfil\rappel_hackney_infil.gsc
 **********************************************************/
 
-function rappel_hackney_init(var0) {
-  initanims(var0);
-  var1 = [];
+function rappel_hackney_init(var_0) {
+  initanims(var_0);
+  var_1 = [];
   GscBinSkip0(0x2e, 0, [0, 1]);
 }
 
-function rappel_hackney_spawn(var0, var1, var2, var3) {
-  var4 = scripts\engine\utility::getStruct(var1, "targetname");
-  var5 = spawn("script_origin", var4.origin);
-  var5.angles = var4.angles;
-  var5.scene_node = var4;
-  thread infilthink(var5, var0);
-  return var5;
+function rappel_hackney_spawn(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\engine\utility::getStruct(var_1, "targetname");
+  var_5 = spawn("script_origin", var_4.origin);
+  var_5.angles = var_4.angles;
+  var_5.scene_node = var_4;
+  thread infilthink(var_5, var_0);
+  return var_5;
 }
 
-function rappel_hackney_get_length(var0) {
-  var1 = getanimlength(level.scr_anim["slot_0"]["rappel_hackney_infil_" + var0]);
-  return var1;
+function rappel_hackney_get_length(var_0) {
+  var_1 = getanimlength(level.scr_anim["slot_0"]["rappel_hackney_infil_" + var_0]);
+  return var_1;
 }
 
-function player_rappel_hackney_infil_think(var0, var1) {
+function player_rappel_hackney_infil_think(var_0, var_1) {
   self endon("player_free_spot");
 
   if(isPlayer(self)) {
@@ -34,11 +34,11 @@ function player_rappel_hackney_infil_think(var0, var1) {
   thread scripts\mp\infilexfil\infilexfil::infil_scene_fade_in(0, 0.55);
   thread player_infil_end();
   thread heli_infil_radio_idle();
-  var2 = var0.linktoent gettagorigin("origin_animate_jnt");
-  var3 = var0.linktoent gettagangles("origin_animate_jnt");
-  thread scripts\mp\utility\infilexfil::infil_player_rig_updated("slot_" + var1, var2, var3);
-  self.player_rig linkTo(var0.linktoent, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
-  var0.linktoent scripts\common\anim::anim_first_frame_solo(self.player_rig, "rappel_hackney_infil_" + var0.subtype);
+  var_2 = var_0.linktoent gettagorigin("origin_animate_jnt");
+  var_3 = var_0.linktoent gettagangles("origin_animate_jnt");
+  thread scripts\mp\utility\infilexfil::infil_player_rig_updated("slot_" + var_1, var_2, var_3);
+  self.player_rig linkTo(var_0.linktoent, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
+  var_0.linktoent scripts\common\anim::anim_first_frame_solo(self.player_rig, "rappel_hackney_infil_" + var_0.subtype);
   thread player_rappel_disconnect();
   self.manualoverridewindmaterial = 1;
   self setscriptablepartstate("wind", "100", 0);
@@ -46,64 +46,64 @@ function player_rappel_hackney_infil_think(var0, var1) {
   scripts\mp\flags::gameflagwait("infil_started");
   self lerpfovscalefactor(0, 0);
 
-  if(var1 == 0) {
+  if(var_1 == 0) {
     self lerpfovbypreset("80_instant");
   }
 
   if(isDefined(self.team) && self.team != "spectator") {
-    var4 = [];
-    GscBinSkip0(0x2e, var4.size, "mp_infil_mix_musicheavy");
+    var_4 = [];
+    GscBinSkip0(0x2e, var_4.size, "mp_infil_mix_musicheavy");
   }
 
   if(isDefined(self.animname) && isPlayer(self)) {
-    var8 = "scn_infil_hackney_heli_plr1";
+    var_8 = "scn_infil_hackney_heli_plr1";
 
-    if(isDefined(var1.subtype)) {
-      if(var1.subtype == "alpha") {
+    if(isDefined(var_1.subtype)) {
+      if(var_1.subtype == "alpha") {
         switch (self.animname) {
           case "slot_0":
-            var8 = "scn_infil_hackney_heli_plr1";
+            var_8 = "scn_infil_hackney_heli_plr1";
             break;
           case "slot_1":
-            var8 = "scn_infil_hackney_heli_plr2";
+            var_8 = "scn_infil_hackney_heli_plr2";
             break;
           case "slot_2":
-            var8 = "scn_infil_hackney_heli_plr3";
+            var_8 = "scn_infil_hackney_heli_plr3";
             break;
           default:
-            var8 = "scn_infil_hackney_heli_plr1";
+            var_8 = "scn_infil_hackney_heli_plr1";
             break;
         }
       } else {
         switch (self.animname) {
           case "slot_0":
-            var8 = "scn_infil_hackney_heli_plr4";
+            var_8 = "scn_infil_hackney_heli_plr4";
             break;
           case "slot_1":
-            var8 = "scn_infil_hackney_heli_plr5";
+            var_8 = "scn_infil_hackney_heli_plr5";
             break;
           case "slot_2":
-            var8 = "scn_infil_hackney_heli_plr6";
+            var_8 = "scn_infil_hackney_heli_plr6";
             break;
           default:
-            var8 = "scn_infil_hackney_heli_plr4";
+            var_8 = "scn_infil_hackney_heli_plr4";
             break;
         }
       }
     }
 
     self setclienttriggeraudiozone("hackney_infil_heli", 2);
-    self playlocalsound(var8);
+    self playlocalsound(var_8);
   }
 
   self setcinematicmotionoverride("disabled");
-  thread player_normal_think(var1);
+  thread player_normal_think(var_1);
 }
 
-function player_normal_think(var0) {
+function player_normal_think(var_0) {
   self endon("player_free_spot");
   self lerpviewangleclamp(1, 0.25, 0.25, 30, 30, 30, 10);
-  var0.linktoent scripts\mp\anim::anim_player_solo(self, self.player_rig, "rappel_hackney_infil_" + var0.subtype);
+  var_0.linktoent scripts\mp\anim::anim_player_solo(self, self.player_rig, "rappel_hackney_infil_" + var_0.subtype);
 
   if(isDefined(self.player_rig) && self.player_rig islinked()) {
     self.player_rig unlink();
@@ -129,35 +129,35 @@ function clear_infil_ambient_zone() {
 
 function heli_infil_radio_idle() {
   if(isPlayer(self)) {
-    var0 = spawn("script_origin", (0, 0, 0));
-    var0 showonlytoplayer(self);
+    var_0 = spawn("script_origin", (0, 0, 0));
+    var_0 showonlytoplayer(self);
 
     if(isDefined(self.team)) {
-      var1 = scripts\mp\utility\teams::getteamvoiceinfix(self.team);
-      var2 = "dx_mpo_" + var1 + "op_drone_deathchatter";
+      var_1 = scripts\mp\utility\teams::getteamvoiceinfix(self.team);
+      var_2 = "dx_mpo_" + var_1 + "op_drone_deathchatter";
     } else {
-      var2 = "dx_mpo_usop_drone_deathchatter";
+      var_2 = "dx_mpo_usop_drone_deathchatter";
     }
 
-    if(soundexists(var2)) {
-      var2 playLoopSound(var2);
+    if(soundexists(var_2)) {
+      var_2 playLoopSound(var_2);
     } else {
-      var2 playLoopSound("dx_mpo_usop_drone_deathchatter");
+      var_2 playLoopSound("dx_mpo_usop_drone_deathchatter");
     }
 
     scripts\mp\flags::gameflagwait("infil_started");
     wait 2;
-    var2 stoploopsound(var2);
-    var2 delete();
+    var_2 stoploopsound(var_2);
+    var_2 delete();
     return;
   }
 }
 
-function player_interactive_think(var0) {
+function player_interactive_think(var_0) {
   self endon("player_free_spot");
-  self.player_rig linkTo(var0.linktoent, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
+  self.player_rig linkTo(var_0.linktoent, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
   self lerpviewangleclamp(1, 0.25, 0.25, 80, 80, 30, 70);
-  var0 scripts\mp\anim::anim_player_solo(self, self.player_rig, "rappel_hackney_infil_" + var0.subtype + "_interactive_intro");
+  var_0 scripts\mp\anim::anim_player_solo(self, self.player_rig, "rappel_hackney_infil_" + var_0.subtype + "_interactive_intro");
   thread combat_start();
   wait 15;
   thread combat_end();
@@ -167,7 +167,7 @@ function player_interactive_think(var0) {
   }
 
   self lerpviewangleclamp(1, 0.25, 0.25, 0, 0, 0, 0);
-  var0.linktoent scripts\mp\anim::anim_player_solo(self, self.player_rig, "rappel_hackney_infil_" + var0.subtype + "_interactive_exit");
+  var_0.linktoent scripts\mp\anim::anim_player_solo(self, self.player_rig, "rappel_hackney_infil_" + var_0.subtype + "_interactive_exit");
 
   if(isDefined(self.player_rig) && self.player_rig islinked()) {
     self.player_rig unlink();
@@ -205,33 +205,33 @@ function player_rappel_disconnect() {
   }
 }
 
-function spawnactors(var0, var1, var2) {
+function spawnactors(var_0, var_1, var_2) {
   if(!isDefined(self.actors)) {
     self.actors = [];
   }
 
-  var3 = getcommanderassets(var0);
-  self.actors[self.actors.size] = spawn_anim_model(self.linktoent, "commander", "origin_animate_jnt", var3.body, var3.head);
+  var_3 = getcommanderassets(var_0);
+  self.actors[self.actors.size] = spawn_anim_model(self.linktoent, "commander", "origin_animate_jnt", var_3.body, var_3.head);
   self.actors[self.actors.size] = spawn_anim_model(self.linktoent, "pilot", "origin_animate_jnt", "body_pilot_helicopter_british", "head_pilot_helicopter_british");
   self.actors[self.actors.size] = spawn_anim_model(self.linktoent, "copilot", "origin_animate_jnt", "body_pilot_helicopter_british", "head_mp_helicopter_crew");
 
-  foreach(var5 in self.actors) {
-    var5.infil = self;
+  foreach(var_5 in self.actors) {
+    var_5.infil = self;
   }
 
   scripts\mp\flags::gameflagwait("infil_started");
   self.actors[0].anim_playsound_func = &blima_commander_play_sound_func;
 }
 
-function infilthink(var0, var1) {
-  var2 = getdvarfloat("NMORQOTSK", 0.2);
+function infilthink(var_0, var_1) {
+  var_2 = getdvarfloat("NMORQOTSK", 0.2);
 
-  foreach(var4 in getEntArray("infil_delete", "script_noteworthy")) {
-    var4 delete();
+  foreach(var_4 in getEntArray("infil_delete", "script_noteworthy")) {
+    var_4 delete();
   }
 
-  thread helithink(var0, self.scene_node, var1);
-  thread actorthink(var0, self.scene_node, var1);
+  thread helithink(var_0, self.scene_node, var_1);
+  thread actorthink(var_0, self.scene_node, var_1);
   scripts\mp\flags::gameflagwait("infil_started");
   setDvar("TLMMOPMSK", 1);
   setDvar("NMORQOTSK", 1);
@@ -242,179 +242,179 @@ function infilthink(var0, var1) {
 
   level waittill("prematch_over");
   setDvar("TLMMOPMSK", 0);
-  setDvar("NMORQOTSK", var2);
+  setDvar("NMORQOTSK", var_2);
 }
 
-function helithink(var0, var1, var2) {
-  spawnheli(var1, var0, var2);
-  scripts\common\anim::anim_first_frame_solo(self.linktoent, "rappel_hackney_infil_" + var2);
+function helithink(var_0, var_1, var_2) {
+  spawnheli(var_1, var_0, var_2);
+  scripts\common\anim::anim_first_frame_solo(self.linktoent, "rappel_hackney_infil_" + var_2);
   scripts\mp\flags::gameflagwait("infil_started");
   self.linktoent setscriptablepartstate("engine", "on", 0);
   self.linktoent setscriptablepartstate("running_lights", "on", 0);
   self.linktoent setscriptablepartstate("infil_lights", "on", 0);
-  thread heli_normal_think(var0, var1, var2);
-  thread heli_interior_sfx(var2);
+  thread heli_normal_think(var_0, var_1, var_2);
+  thread heli_interior_sfx(var_2);
 }
 
-function heli_interior_sfx(var0) {
-  var1 = spawn("script_model", self.linktoent.origin);
-  var2 = spawn("script_model", self.linktoent.origin);
-  var2 linkTo(self.linktoent, "tag_light_cockpit01");
+function heli_interior_sfx(var_0) {
+  var_1 = spawn("script_model", self.linktoent.origin);
+  var_2 = spawn("script_model", self.linktoent.origin);
+  var_2 linkTo(self.linktoent, "tag_light_cockpit01");
   wait 0.1;
 
-  if(var0 == "alpha") {
+  if(var_0 == "alpha") {
     self.linktoent playsoundonmovingent("scn_mp_hackney_heli1_lr");
-    var1 linkTo(self.linktoent, "j_tied_cable_02");
+    var_1 linkTo(self.linktoent, "j_tied_cable_02");
     wait 0.1;
-    var1 playsoundonmovingent("scn_infil_hackney_heli1_ceiling_rattles");
-    var2 playsoundonmovingent("scn_infil_hackney_heli1_cockpit_rattles");
+    var_1 playsoundonmovingent("scn_infil_hackney_heli1_ceiling_rattles");
+    var_2 playsoundonmovingent("scn_infil_hackney_heli1_cockpit_rattles");
   } else {
     self.linktoent playsoundonmovingent("scn_mp_hackney_heli2_lr");
-    var1 linkTo(self.linktoent, "j_ceiling_cable_02");
+    var_1 linkTo(self.linktoent, "j_ceiling_cable_02");
     wait 0.1;
-    var1 playsoundonmovingent("scn_infil_hackney_heli2_ceiling_rattles");
-    var2 playsoundonmovingent("scn_infil_hackney_heli2_cockpit_rattles");
+    var_1 playsoundonmovingent("scn_infil_hackney_heli2_ceiling_rattles");
+    var_2 playsoundonmovingent("scn_infil_hackney_heli2_cockpit_rattles");
   }
 
   level waittill("prematch_over");
-  var1 delete();
-  var2 delete();
+  var_1 delete();
+  var_2 delete();
 }
 
-function heli_interactive_think(var0, var1, var2) {
-  thread scripts\common\anim::anim_single_solo(self.linktoent, "rappel_hackney_infil_" + var2 + "_interactive");
+function heli_interactive_think(var_0, var_1, var_2) {
+  thread scripts\common\anim::anim_single_solo(self.linktoent, "rappel_hackney_infil_" + var_2 + "_interactive");
   wait level.interactivecombatduration - 15;
-  thread ropethink(var2);
+  thread ropethink(var_2);
   wait 15;
   cleanup();
 }
 
-function heli_normal_think(var0, var1, var2) {
-  thread ropethink(var2);
+function heli_normal_think(var_0, var_1, var_2) {
+  thread ropethink(var_2);
 
   if(isDefined(self.path)) {
-    thread scripts\common\anim::anim_single_solo(self.linktoent, "rappel_hackney_infil_" + var2);
-    vehiclethinkpath(var0, var1, var2);
+    thread scripts\common\anim::anim_single_solo(self.linktoent, "rappel_hackney_infil_" + var_2);
+    vehiclethinkpath(var_0, var_1, var_2);
   } else {
-    thread scripts\common\anim::anim_single_solo(self.linktoent, "rappel_hackney_infil_" + var2);
-    var3 = getanimlength(level.scr_anim[self.linktoent.animname]["rappel_hackney_infil_" + var2]);
-    wait var3;
+    thread scripts\common\anim::anim_single_solo(self.linktoent, "rappel_hackney_infil_" + var_2);
+    var_3 = getanimlength(level.scr_anim[self.linktoent.animname]["rappel_hackney_infil_" + var_2]);
+    wait var_3;
   }
 
   cleanup();
 }
 
-function ropethink(var0) {
-  self.linktoent thread scripts\common\anim::anim_single_solo(self.linktoent.rope, "rappel_hackney_infil_" + var0, "origin_animate_jnt");
-  var1 = getanimlength(level.scr_anim[self.linktoent.rope.animname]["rappel_hackney_infil_" + var0]);
-  wait var1;
+function ropethink(var_0) {
+  self.linktoent thread scripts\common\anim::anim_single_solo(self.linktoent.rope, "rappel_hackney_infil_" + var_0, "origin_animate_jnt");
+  var_1 = getanimlength(level.scr_anim[self.linktoent.rope.animname]["rappel_hackney_infil_" + var_0]);
+  wait var_1;
   self.linktoent.rope unlink();
-  thread scripts\common\anim::anim_single_solo(self.linktoent.rope, "rappel_hackney_infil_" + var0 + "_fall");
+  thread scripts\common\anim::anim_single_solo(self.linktoent.rope, "rappel_hackney_infil_" + var_0 + "_fall");
 }
 
-function ref_13293(var0) {
-  var0 playsoundonmovingent("scn_infil_hackney_heli1_rope");
+function ref_13293(var_0) {
+  var_0 playsoundonmovingent("scn_infil_hackney_heli1_rope");
 }
 
-function ref_13294(var0) {
-  var0 playsoundonmovingent("scn_infil_hackney_heli2_rope");
+function ref_13294(var_0) {
+  var_0 playsoundonmovingent("scn_infil_hackney_heli2_rope");
 }
 
-function actorthink(var0, var1, var2, var3) {
-  thread spawnactors(var0, var2, var3);
-  actor_normal_think(var0, var1, var2);
+function actorthink(var_0, var_1, var_2, var_3) {
+  thread spawnactors(var_0, var_2, var_3);
+  actor_normal_think(var_0, var_1, var_2);
 }
 
-function actor_interactive_think(var0, var1, var2) {
-  self.linktoent scripts\common\anim::anim_first_frame(self.actors, "rappel_hackney_infil_" + var2 + "_interactive", "origin_animate_jnt");
+function actor_interactive_think(var_0, var_1, var_2) {
+  self.linktoent scripts\common\anim::anim_first_frame(self.actors, "rappel_hackney_infil_" + var_2 + "_interactive", "origin_animate_jnt");
   scripts\mp\utility\infilexfil::hideactors();
   level waittill("infil_started");
   scripts\mp\utility\infilexfil::showactors();
-  self.linktoent thread scripts\common\anim::anim_single(self.actors, "rappel_hackney_infil_" + var2 + "_interactive", "origin_animate_jnt");
-  self.actors[0].head scriptmodelplayanim(level.scr_anim[self.actors[0].animname]["rappel_hackney_infil_" + var2 + "_interactive"]);
+  self.linktoent thread scripts\common\anim::anim_single(self.actors, "rappel_hackney_infil_" + var_2 + "_interactive", "origin_animate_jnt");
+  self.actors[0].head scriptmodelplayanim(level.scr_anim[self.actors[0].animname]["rappel_hackney_infil_" + var_2 + "_interactive"]);
 }
 
-function actor_normal_think(var0, var1, var2) {
-  self.linktoent scripts\common\anim::anim_first_frame(self.actors, "rappel_hackney_infil_" + var2, "origin_animate_jnt");
+function actor_normal_think(var_0, var_1, var_2) {
+  self.linktoent scripts\common\anim::anim_first_frame(self.actors, "rappel_hackney_infil_" + var_2, "origin_animate_jnt");
   scripts\mp\utility\infilexfil::hideactors();
   scripts\mp\flags::gameflagwait("infil_started");
   scripts\mp\utility\infilexfil::showactors();
-  self.linktoent thread scripts\common\anim::anim_single(self.actors, "rappel_hackney_infil_" + var2, "origin_animate_jnt");
-  self.actors[0].head scriptmodelplayanim(level.scr_anim[self.actors[0].animname]["rappel_hackney_infil_" + var2]);
+  self.linktoent thread scripts\common\anim::anim_single(self.actors, "rappel_hackney_infil_" + var_2, "origin_animate_jnt");
+  self.actors[0].head scriptmodelplayanim(level.scr_anim[self.actors[0].animname]["rappel_hackney_infil_" + var_2]);
 }
 
-function spawn_anim_model(var0, var1, var2, var3, var4) {
-  var5 = 1;
+function spawn_anim_model(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = 1;
 
   if(scripts\engine\utility::cointoss()) {
-    var5 = 0;
+    var_5 = 0;
   }
 
-  if(var2 == "random") {
-    if(var5) {
-      var6 = randomint(3);
+  if(var_2 == "random") {
+    if(var_5) {
+      var_6 = randomint(3);
 
-      if(var6 == 0) {
-        var2 = "c_civ_pic_male_2_brown";
-      } else if(var6 == 1) {
-        var2 = "body_opforce_london_civ_1_1";
-      } else if(var6 == 2) {
-        var2 = "civ_london_male_2_5";
+      if(var_6 == 0) {
+        var_2 = "c_civ_pic_male_2_brown";
+      } else if(var_6 == 1) {
+        var_2 = "body_opforce_london_civ_1_1";
+      } else if(var_6 == 2) {
+        var_2 = "civ_london_male_2_5";
       }
     } else if(scripts\engine\utility::cointoss()) {
-      var2 = "civ_london_female_1_4";
+      var_2 = "civ_london_female_1_4";
     } else {
-      var2 = "c_civ_pic_female_5_6";
+      var_2 = "c_civ_pic_female_5_6";
     }
   }
 
-  var7 = spawn("script_model", (0, 0, 0));
-  var7 setModel(var2);
+  var_7 = spawn("script_model", (0, 0, 0));
+  var_7 setModel(var_2);
 
-  if(isDefined(var3)) {
-    if(var3 == "random") {
-      if(var5) {
+  if(isDefined(var_3)) {
+    if(var_3 == "random") {
+      if(var_5) {
         if(scripts\engine\utility::cointoss()) {
-          var3 = "head_bg_var_head_bg_male_09_head_sc_male_14";
+          var_3 = "head_bg_var_head_bg_male_09_head_sc_male_14";
         } else {
-          var3 = "head_bg_var_head_male_bc_01_head_hero_gator";
+          var_3 = "head_bg_var_head_male_bc_01_head_hero_gator";
         }
       } else if(scripts\engine\utility::cointoss()) {
-        var3 = "head_bg_var_head_female_bc_01_head_sc_female_10";
+        var_3 = "head_bg_var_head_female_bc_01_head_sc_female_10";
       } else {
-        var3 = "head_bg_var_head_sc_female_04_head_female_bc_02";
+        var_3 = "head_bg_var_head_sc_female_04_head_female_bc_02";
       }
     }
 
-    var8 = spawn("script_model", (0, 0, 0));
-    var8 setModel(var3);
-    var8 linkTo(var7, "j_spine4", (0, 0, 0), (0, 0, 0));
-    var7.head = var8;
-    var7 thread scripts\engine\utility::delete_on_death(var8);
+    var_8 = spawn("script_model", (0, 0, 0));
+    var_8 setModel(var_3);
+    var_8 linkTo(var_7, "j_spine4", (0, 0, 0), (0, 0, 0));
+    var_7.head = var_8;
+    var_7 thread scripts\engine\utility::delete_on_death(var_8);
   }
 
-  if(isDefined(var4)) {
-    var9 = spawn("script_model", (0, 0, 0));
-    var9 setModel(var4);
-    var9 linkTo(var7, "j_gun", (0, 0, 0), (0, 0, 0));
-    var7 thread scripts\engine\utility::delete_on_death(var9);
-    var7.weapon = var9;
+  if(isDefined(var_4)) {
+    var_9 = spawn("script_model", (0, 0, 0));
+    var_9 setModel(var_4);
+    var_9 linkTo(var_7, "j_gun", (0, 0, 0), (0, 0, 0));
+    var_7 thread scripts\engine\utility::delete_on_death(var_9);
+    var_7.weapon = var_9;
   }
 
-  var7.animname = var0;
-  var7 scripts\common\anim::setanimtree();
+  var_7.animname = var_0;
+  var_7 scripts\common\anim::setanimtree();
 
-  if(isDefined(var1)) {
-    thread scripts\engine\utility::delete_on_death(var7);
-    var7 linkTo(self, var1, (0, 0, 0), (0, 0, 0));
+  if(isDefined(var_1)) {
+    thread scripts\engine\utility::delete_on_death(var_7);
+    var_7 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   }
 
-  return var7;
+  return var_7;
 }
 
-function initanims(var0) {
-  script_model_alpha_anims(var0);
-  vehicles_alpha_anims(var0);
+function initanims(var_0) {
+  script_model_alpha_anims(var_0);
+  vehicles_alpha_anims(var_0);
 
   if(!isDefined(level.scr_notetrack) || !isDefined(level.scr_notetrack["commander"])) {
     scripts\common\anim::addnotetrack_customfunction("commander", "door_slam", &blima_door_slam);
@@ -426,7 +426,7 @@ function initanims(var0) {
     scripts\common\anim::addnotetrack_customfunction("commander", "scn_infil_hackney_heli2_rope", &ref_13294);
   }
 
-  switch (var0) {
+  switch (var_0) {
     case "alpha":
       scripts\common\anim::addnotetrack_customfunction("slot_0", "player_lock_look_1_second", &scripts\mp\utility\infilexfil::player_lock_look_1_second, "rappel_hackney_infil_alpha");
       scripts\common\anim::addnotetrack_customfunction("slot_0", "outside_heli", &outsideheli, "rappel_hackney_infil_alpha");
@@ -478,8 +478,8 @@ function initanims(var0) {
 
 #using_animtree("");
 
-function script_model_alpha_anims(var0) {
-  switch (var0) {
+function script_model_alpha_anims(var_0) {
+  switch (var_0) {
     case "alpha":
       level.scr_animtree["pilot"] = #animtree;
       level.scr_anim["pilot"]["rappel_hackney_infil_alpha"] = $mp_faridah_infill_bird_a_pilot_idle;
@@ -557,8 +557,8 @@ function script_model_alpha_anims(var0) {
   }
 }
 
-function vehicles_alpha_anims(var0) {
-  switch (var0) {
+function vehicles_alpha_anims(var_0) {
+  switch (var_0) {
     case "alpha":
       level.scr_animtree["blima"] = #animtree;
 
@@ -632,48 +632,48 @@ function vehicles_alpha_anims(var0) {
   }
 }
 
-function spawnheli(var0, var1, var2) {
-  var3 = "blima_desert_day_infil_mp";
+function spawnheli(var_0, var_1, var_2) {
+  var_3 = "blima_desert_day_infil_mp";
 
   if(level.mapname == "mp_hackney_yard") {
-    var3 = "blima_hackney_infil_mp";
+    var_3 = "blima_hackney_infil_mp";
   }
 
-  var4 = spawnVehicle("veh8_mil_air_blima_infils", var2, var3, var0.origin, var0.angles);
-  var4 setvehicleteam(var1);
-  var4 setCanDamage(0);
-  var4.animname = "blima";
-  self.linktoent = var4;
-  var4.infil = self;
+  var_4 = spawnVehicle("veh8_mil_air_blima_infils", var_2, var_3, var_0.origin, var_0.angles);
+  var_4 setvehicleteam(var_1);
+  var_4 setCanDamage(0);
+  var_4.animname = "blima";
+  self.linktoent = var_4;
+  var_4.infil = self;
   self.linktoent.rope = spawn_anim_model(self.linktoent, "rope", "origin_animate_jnt", "equipment_fast_rope_wm_01_infil_heli_l");
-  self.linktoent.rope scripts\common\anim::anim_first_frame_solo(self.linktoent.rope, "rappel_hackney_infil_" + var2);
-  return var4;
+  self.linktoent.rope scripts\common\anim::anim_first_frame_solo(self.linktoent.rope, "rappel_hackney_infil_" + var_2);
+  return var_4;
 }
 
-function helifollowpath(var0) {
-  if(!isDefined(var0)) {
+function helifollowpath(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var1 = scripts\engine\utility::getStruct(var0, "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  var2 = scripts\engine\utility::getStruct(var1.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
   self.speed = 500;
   self.accel = 175;
   self.combatmode = "guard_location";
   self notify(self.combatmode);
 
-  while(isDefined(var1.target)) {
-    thread scripts\mp\killstreaks\jackal::guardpositionescort(var2.origin, undefined, 800);
+  while(isDefined(var_1.target)) {
+    thread scripts\mp\killstreaks\jackal::guardpositionescort(var_2.origin, undefined, 800);
 
     for(;;) {
-      var3 = distance(self.origin, var2.origin);
+      var_3 = distance(self.origin, var_2.origin);
 
-      if(var3 < 2000) {
+      if(var_3 < 2000) {
         break;
       }
 
@@ -682,18 +682,18 @@ function helifollowpath(var0) {
 
     self notify("leaving");
 
-    if(!isDefined(var2.target)) {
+    if(!isDefined(var_2.target)) {
       break;
     }
 
-    var1 = var2;
-    var2 = scripts\engine\utility::getStruct(var1.target, "targetname");
+    var_1 = var_2;
+    var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
   }
 }
 
 function cleanup() {
-  foreach(var1 in self.actors) {
-    var1 delete();
+  foreach(var_1 in self.actors) {
+    var_1 delete();
   }
 
   self.linktoent.rope delete();
@@ -702,20 +702,20 @@ function cleanup() {
   self delete();
 }
 
-function spawn_infil_axis_ai(var0, var1, var2, var3) {
+function spawn_infil_axis_ai(var_0, var_1, var_2, var_3) {
   level.gameskill = 0;
-  var4 = scripts\mp\mp_agent::spawnnewagent("soldier_agent", "axis", var1, var2, scripts\engine\utility::ter_op(isDefined(var3), var3, "iw8_ar_mike4_mp"));
+  var_4 = scripts\mp\mp_agent::spawnnewagent("soldier_agent", "axis", var_1, var_2, scripts\engine\utility::ter_op(isDefined(var_3), var_3, "iw8_ar_mike4_mp"));
 
-  if(!isDefined(var4)) {
+  if(!isDefined(var_4)) {
     return undefined;
   }
 
-  var4.desiredmovetype = "combat";
-  var4 clearpath();
-  var4.goalradius = 999;
-  var4.fixednode = 0;
-  var4 scripts\mp\agents\agent_common::set_agent_health(50);
-  return var4;
+  var_4.desiredmovetype = "combat";
+  var_4 clearpath();
+  var_4.goalradius = 999;
+  var_4.fixednode = 0;
+  var_4 scripts\mp\agents\agent_common::set_agent_health(50);
+  return var_4;
 }
 
 function spawninteractiveinfilai() {
@@ -728,31 +728,31 @@ function alphaai() {
   level endon("prematch_over");
   level endon("infil_done");
   level.alphaagents = [];
-  var0 = scripts\engine\utility::getStructArray("ai_alpha_start", "targetname");
-  var1 = scripts\engine\utility::getStructArray("ai_alpha_respawn", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("ai_alpha_start", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("ai_alpha_respawn", "targetname");
 
-  foreach(var5, var3 in var0) {
-    var4 = spawn_infil_axis_ai("alpha", var3.origin, var3.angles);
+  foreach(var_5, var_3 in var_0) {
+    var_4 = spawn_infil_axis_ai("alpha", var_3.origin, var_3.angles);
 
-    if(isDefined(var4)) {
+    if(isDefined(var_4)) {
       thread alpha_ai_array_handler(level);
     }
   }
 
   for(;;) {
     if(level.alphaagents.size < 5) {
-      var6 = randomint(var1.size);
+      var_6 = randomint(var_1.size);
 
       if(randomint(100) > 75) {
-        var7 = "iw8_la_rpapa7_mp";
+        var_7 = "iw8_la_rpapa7_mp";
       } else {
-        var7 = undefined;
+        var_7 = undefined;
       }
 
-      var5 = spawn_infil_axis_ai("alpha", var2[var7].origin, var2[var7].angles, var7);
+      var_5 = spawn_infil_axis_ai("alpha", var_2[var_7].origin, var_2[var_7].angles, var_7);
 
-      if(isDefined(var5)) {
-        thread alpha_ai_array_handler(level, var5);
+      if(isDefined(var_5)) {
+        thread alpha_ai_array_handler(level, var_5);
       }
     }
 
@@ -760,12 +760,12 @@ function alphaai() {
   }
 }
 
-function alpha_ai_array_handler(var0, var1) {
-  level.alphaagents = scripts\engine\utility::array_add(level.alphaagents, var0);
-  var2 = scripts\mp\utility\outline::outlineenableforteam(var0, "allies", scripts\engine\utility::ter_op(isDefined(var1), "outline_depth_red", "outline_depth_orange"), "level_script");
-  var0 waittill("death");
-  scripts\mp\utility\outline::outlinedisable(var2, var0);
-  level.alphaagents = scripts\engine\utility::array_remove(level.alphaagents, var0);
+function alpha_ai_array_handler(var_0, var_1) {
+  level.alphaagents = scripts\engine\utility::array_add(level.alphaagents, var_0);
+  var_2 = scripts\mp\utility\outline::outlineenableforteam(var_0, "allies", scripts\engine\utility::ter_op(isDefined(var_1), "outline_depth_red", "outline_depth_orange"), "level_script");
+  var_0 waittill("death");
+  scripts\mp\utility\outline::outlinedisable(var_2, var_0);
+  level.alphaagents = scripts\engine\utility::array_remove(level.alphaagents, var_0);
 }
 
 function bravoai() {
@@ -773,31 +773,31 @@ function bravoai() {
   level endon("prematch_over");
   level endon("infil_done");
   level.bravoagents = [];
-  var0 = scripts\engine\utility::getStructArray("ai_bravo_start", "targetname");
-  var1 = scripts\engine\utility::getStructArray("ai_bravo_respawn", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("ai_bravo_start", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("ai_bravo_respawn", "targetname");
 
-  foreach(var5, var3 in var0) {
-    var4 = spawn_infil_axis_ai("bravo", var3.origin, var3.angles);
+  foreach(var_5, var_3 in var_0) {
+    var_4 = spawn_infil_axis_ai("bravo", var_3.origin, var_3.angles);
 
-    if(isDefined(var4)) {
+    if(isDefined(var_4)) {
       thread bravo_ai_array_handler(level);
     }
   }
 
   for(;;) {
     if(level.bravoagents.size < 5) {
-      var6 = randomint(var1.size);
+      var_6 = randomint(var_1.size);
 
       if(randomint(100) > 75) {
-        var7 = "iw8_la_rpapa7_mp";
+        var_7 = "iw8_la_rpapa7_mp";
       } else {
-        var7 = undefined;
+        var_7 = undefined;
       }
 
-      var5 = spawn_infil_axis_ai("bravo", var2[var7].origin, var2[var7].angles, var7);
+      var_5 = spawn_infil_axis_ai("bravo", var_2[var_7].origin, var_2[var_7].angles, var_7);
 
-      if(isDefined(var5)) {
-        thread bravo_ai_array_handler(level, var5);
+      if(isDefined(var_5)) {
+        thread bravo_ai_array_handler(level, var_5);
       }
     }
 
@@ -805,45 +805,45 @@ function bravoai() {
   }
 }
 
-function bravo_ai_array_handler(var0, var1) {
-  level.bravoagents = scripts\engine\utility::array_add(level.bravoagents, var0);
-  var2 = scripts\mp\utility\outline::outlineenableforteam(var0, "allies", scripts\engine\utility::ter_op(isDefined(var1), "outline_depth_red", "outline_depth_orange"), "level_script");
-  var0 waittill("death");
-  scripts\mp\utility\outline::outlinedisable(var2, var0);
-  level.bravoagents = scripts\engine\utility::array_remove(level.bravoagents, var0);
+function bravo_ai_array_handler(var_0, var_1) {
+  level.bravoagents = scripts\engine\utility::array_add(level.bravoagents, var_0);
+  var_2 = scripts\mp\utility\outline::outlineenableforteam(var_0, "allies", scripts\engine\utility::ter_op(isDefined(var_1), "outline_depth_red", "outline_depth_orange"), "level_script");
+  var_0 waittill("death");
+  scripts\mp\utility\outline::outlinedisable(var_2, var_0);
+  level.bravoagents = scripts\engine\utility::array_remove(level.bravoagents, var_0);
 }
 
 function cleanupinteractiveinfilai() {
-  var0 = getanimlength(level.scr_anim["slot_0"]["rappel_hackney_infil_alpha_interactive_intro"]);
-  var0 += 15;
-  wait var0;
+  var_0 = getanimlength(level.scr_anim["slot_0"]["rappel_hackney_infil_alpha_interactive_intro"]);
+  var_0 += 15;
+  wait var_0;
 
-  foreach(var2 in level.alphaagents) {
-    if(isalive(var2)) {
-      var2 kill();
+  foreach(var_2 in level.alphaagents) {
+    if(isalive(var_2)) {
+      var_2 kill();
     }
   }
 
-  foreach(var2 in level.bravoagents) {
-    if(isalive(var2)) {
-      var2 kill();
+  foreach(var_2 in level.bravoagents) {
+    if(isalive(var_2)) {
+      var_2 kill();
     }
   }
 }
 
-function agent_handledamagefeedback(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11) {
-  if(isDefined(var1) && var1.team != "axis") {
-    var1 scripts\mp\damagefeedback::updatedamagefeedback("", var2 >= self.health);
+function agent_handledamagefeedback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  if(isDefined(var_1) && var_1.team != "axis") {
+    var_1 scripts\mp\damagefeedback::updatedamagefeedback("", var_2 >= self.health);
 
-    if(var2 >= self.health) {
-      if(!isDefined(var1.infilscore)) {
-        var1.infilscore = 1;
+    if(var_2 >= self.health) {
+      if(!isDefined(var_1.infilscore)) {
+        var_1.infilscore = 1;
       } else {
-        var1.infilscore++;
+        var_1.infilscore++;
       }
 
-      if(var1.infilscore > level.highestinfilscore) {
-        updatehighinfilscore(level, var1);
+      if(var_1.infilscore > level.highestinfilscore) {
+        updatehighinfilscore(level, var_1);
         return;
       }
 
@@ -854,94 +854,94 @@ function agent_handledamagefeedback(var0, var1, var2, var3, var4, var5, var6, va
   }
 }
 
-function blima_door_slam(var0) {
-  foreach(var2 in var0.infil.players) {
-    var2 earthquakeforplayer(randomfloatrange(0.135, 0.15), 2, self.origin, 8000);
-    var2 playrumbleonpositionforclient("ground_pound_land", var2.origin);
+function blima_door_slam(var_0) {
+  foreach(var_2 in var_0.infil.players) {
+    var_2 earthquakeforplayer(randomfloatrange(0.135, 0.15), 2, self.origin, 8000);
+    var_2 playrumbleonpositionforclient("ground_pound_land", var_2.origin);
   }
 }
 
-function blima_cam_shake_low(var0) {
-  foreach(var2 in var0.infil.players) {
-    var2 scripts\mp\utility\infilexfil::updateshakeonplayer(0.06, 0.075, 2, var2.origin, 8000, "mig_rumble", 0.05, 0.1);
+function blima_cam_shake_low(var_0) {
+  foreach(var_2 in var_0.infil.players) {
+    var_2 scripts\mp\utility\infilexfil::updateshakeonplayer(0.06, 0.075, 2, var_2.origin, 8000, "mig_rumble", 0.05, 0.1);
   }
 }
 
-function blima_cam_shake_bump(var0) {
-  foreach(var2 in var0.infil.players) {
-    var2 scripts\mp\utility\infilexfil::updateshakeonplayer(0.145, 0.16, 2, var2.origin, 8000, "pistol_fire", 0.05, 0.15);
+function blima_cam_shake_bump(var_0) {
+  foreach(var_2 in var_0.infil.players) {
+    var_2 scripts\mp\utility\infilexfil::updateshakeonplayer(0.145, 0.16, 2, var_2.origin, 8000, "pistol_fire", 0.05, 0.15);
   }
 }
 
-function heli_door_open_sfx(var0) {
-  if(var0.infil.subtype == "alpha") {
-    var1 = spawn("script_origin", var0.infil.linktoent.origin);
-    var1 linkTo(var0.infil.linktoent, "side_door_l_jnt");
-    var1 playSound("scn_infil_hackney_heli1_door_open");
+function heli_door_open_sfx(var_0) {
+  if(var_0.infil.subtype == "alpha") {
+    var_1 = spawn("script_origin", var_0.infil.linktoent.origin);
+    var_1 linkTo(var_0.infil.linktoent, "side_door_l_jnt");
+    var_1 playSound("scn_infil_hackney_heli1_door_open");
     wait 3;
-    var1 delete();
+    var_1 delete();
     return;
   }
 
-  var1 = spawn("script_origin", var1.infil.linktoent.origin);
-  var1 linkTo(var1.infil.linktoent, "side_door_r_jnt");
-  var1 playSound("scn_infil_hackney_heli2_door_open");
+  var_1 = spawn("script_origin", var_1.infil.linktoent.origin);
+  var_1 linkTo(var_1.infil.linktoent, "side_door_r_jnt");
+  var_1 playSound("scn_infil_hackney_heli2_door_open");
   wait 3;
-  var1 delete();
+  var_1 delete();
 }
 
-function heli_commander_sfx(var0) {
-  if(var0.infil.subtype == "alpha") {
-    var0 playsoundonmovingent("scn_infil_hackney_heli1_commander");
+function heli_commander_sfx(var_0) {
+  if(var_0.infil.subtype == "alpha") {
+    var_0 playsoundonmovingent("scn_infil_hackney_heli1_commander");
     return;
   }
 
-  var0 playsoundonmovingent("scn_infil_hackney_heli2_commander");
+  var_0 playsoundonmovingent("scn_infil_hackney_heli2_commander");
 }
 
-function ref_12eee(var0) {
-  var0 playsoundonmovingent("scn_infil_hackney_heli_npc1");
+function ref_12eee(var_0) {
+  var_0 playsoundonmovingent("scn_infil_hackney_heli_npc1");
 }
 
-function ref_12eef(var0) {
-  var0 playsoundonmovingent("scn_infil_hackney_heli_npc2");
+function ref_12eef(var_0) {
+  var_0 playsoundonmovingent("scn_infil_hackney_heli_npc2");
 }
 
-function ref_12ef0(var0) {
-  var0 playsoundonmovingent("scn_infil_hackney_heli_npc3");
+function ref_12ef0(var_0) {
+  var_0 playsoundonmovingent("scn_infil_hackney_heli_npc3");
 }
 
-function ref_12ef1(var0) {
-  var0 playsoundonmovingent("scn_infil_hackney_heli_npc4");
+function ref_12ef1(var_0) {
+  var_0 playsoundonmovingent("scn_infil_hackney_heli_npc4");
 }
 
-function ref_12ef2(var0) {
-  var0 playsoundonmovingent("scn_infil_hackney_heli_npc5");
+function ref_12ef2(var_0) {
+  var_0 playsoundonmovingent("scn_infil_hackney_heli_npc5");
 }
 
-function ref_12ef3(var0) {
-  var0 playsoundonmovingent("scn_infil_hackney_heli_npc6");
+function ref_12ef3(var_0) {
+  var_0 playsoundonmovingent("scn_infil_hackney_heli_npc6");
 }
 
-function blima_rumble_rope(var0) {
+function blima_rumble_rope(var_0) {
   level endon("prematch_over");
   level endon("infil_done");
-  var1 = var0.player;
-  var1 notify("stop_cam_shake");
-  var1 endon("stop_cam_shake");
-  var1 endon("death_or_disconnect");
+  var_1 = var_0.player;
+  var_1 notify("stop_cam_shake");
+  var_1 endon("stop_cam_shake");
+  var_1 endon("death_or_disconnect");
 
   for(;;) {
-    var1 playrumbleonpositionforclient("pistol_fire", var1.origin);
+    var_1 playrumbleonpositionforclient("pistol_fire", var_1.origin);
     wait randomfloatrange(0.05, 0.15);
   }
 }
 
-function blima_rumble_ground(var0) {
-  var1 = var0.player;
-  var1 notify("stop_cam_shake");
-  var1 playRumbleOnEntity("ground_pound_land");
-  var1 lerpfovscalefactor(1, 0.5);
+function blima_rumble_ground(var_0) {
+  var_1 = var_0.player;
+  var_1 notify("stop_cam_shake");
+  var_1 playRumbleOnEntity("ground_pound_land");
+  var_1 lerpfovscalefactor(1, 0.5);
 }
 
 function combat_start() {
@@ -970,13 +970,13 @@ function combat_end() {
   scripts\mp\utility\weapon::setrecoilscale();
 }
 
-function blima_commander_play_sound_func(var0, var1, var2) {
-  foreach(var4 in self.infil.players) {
-    var4 playsoundtoplayer(var0, var4);
+function blima_commander_play_sound_func(var_0, var_1, var_2) {
+  foreach(var_4 in self.infil.players) {
+    var_4 playsoundtoplayer(var_0, var_4);
   }
 }
 
-function vehiclethinkpath(var0, var1, var2) {
+function vehiclethinkpath(var_0, var_1, var_2) {
   scripts\mp\flags::gameflagwait("infil_started");
   self.linktoent setscriptablepartstate("engine", "on", 0);
   self.linktoent.unload_hover_offset = 300;
@@ -989,30 +989,30 @@ function vehiclethinkpath(var0, var1, var2) {
 }
 
 function giveinteractiveinfilweapon() {
-  var0 = getcompleteweaponname("iw8_lm_kilo121infil_mp", ["acog_west01"]);
-  scripts\cp_mp\utility\inventory_utility::_giveweapon(var0, undefined, undefined, 1);
+  var_0 = getcompleteweaponname("iw8_lm_kilo121infil_mp", ["acog_west01"]);
+  scripts\cp_mp\utility\inventory_utility::_giveweapon(var_0, undefined, undefined, 1);
   scripts\common\utility::allow_weapon_switch(1);
-  var1 = scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var0, 0);
+  var_1 = scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var_0, 0);
 
-  if(var1) {
-    self.infilweapon = var0;
+  if(var_1) {
+    self.infilweapon = var_0;
     scripts\common\utility::allow_weapon_switch(0);
     scripts\mp\utility\weapon::setrecoilscale(0, 50);
   } else {
-    scripts\cp_mp\utility\inventory_utility::_takeweapon(var0);
+    scripts\cp_mp\utility\inventory_utility::_takeweapon(var_0);
     scripts\cp_mp\utility\inventory_utility::forcevalidweapon();
   }
 
-  return var1;
+  return var_1;
 }
 
-function updatehighinfilscore(var0) {
-  level.highestinfilname = var0.name;
-  level.highestinfilscore = var0.infilscore;
+function updatehighinfilscore(var_0) {
+  level.highestinfilname = var_0.name;
+  level.highestinfilscore = var_0.infilscore;
 
-  foreach(var2 in level.players) {
-    if(var2.team == "allies") {
-      var2 iprintlnbold(level.highestinfilname + " is in the lead with" + level.highestinfilscore + " kills");
+  foreach(var_2 in level.players) {
+    if(var_2.team == "allies") {
+      var_2 iprintlnbold(level.highestinfilname + " is in the lead with" + level.highestinfilscore + " kills");
     }
   }
 }
@@ -1024,40 +1024,40 @@ function announceinfilwinner() {
     return;
   }
 
-  foreach(var1 in level.players) {
-    if(var1.team == "allies") {
-      var1 iprintlnbold(level.highestinfilname + " won with" + level.highestinfilscore + " kills");
+  foreach(var_1 in level.players) {
+    if(var_1.team == "allies") {
+      var_1 iprintlnbold(level.highestinfilname + " won with" + level.highestinfilscore + " kills");
     }
   }
 }
 
 function dummychopper() {
-  var0 = (1325, -1200, 30);
-  var1 = (0, 90, 0);
-  var2 = spawnVehicle("veh8_mil_air_blima", "alpha", "blima_hackney_infil_mp", var0, var1);
-  var2 setvehicleteam("allies");
-  var2 setCanDamage(0);
-  var2.animname = "blima";
-  var2 setscriptablepartstate("engine", "on", 0);
-  var3 = spawn("script_model", var2.origin);
-  var3.angles = var2.angles;
-  var3 setModel("cop_marker_scriptable");
-  var3 setscriptablepartstate("marker", "heliLight");
-  var3 linkTo(var2, "tag_origin", (0, 0, -60), (-90, 0, 0));
-  var2 thread scripts\common\anim::anim_single_solo(var2, "rappel_hackney_infil_alpha");
-  var4 = (525, -1460, 30);
-  var5 = (0, 180, 0);
-  var6 = spawnVehicle("veh8_mil_air_blima", "bravo", "blima_hackney_infil_mp", var4, var5);
-  var6 setvehicleteam("allies");
-  var6 setCanDamage(0);
-  var6.animname = "blima";
-  var6 setscriptablepartstate("engine", "on", 0);
-  var3 = spawn("script_model", var6.origin);
-  var3.angles = var6.angles;
-  var3 setModel("cop_marker_scriptable");
-  var3 setscriptablepartstate("marker", "heliLight");
-  var3 linkTo(var6, "tag_origin", (0, 0, -60), (-90, 0, 0));
-  var6 thread scripts\common\anim::anim_single_solo(var6, "rappel_hackney_infil_bravo");
+  var_0 = (1325, -1200, 30);
+  var_1 = (0, 90, 0);
+  var_2 = spawnVehicle("veh8_mil_air_blima", "alpha", "blima_hackney_infil_mp", var_0, var_1);
+  var_2 setvehicleteam("allies");
+  var_2 setCanDamage(0);
+  var_2.animname = "blima";
+  var_2 setscriptablepartstate("engine", "on", 0);
+  var_3 = spawn("script_model", var_2.origin);
+  var_3.angles = var_2.angles;
+  var_3 setModel("cop_marker_scriptable");
+  var_3 setscriptablepartstate("marker", "heliLight");
+  var_3 linkTo(var_2, "tag_origin", (0, 0, -60), (-90, 0, 0));
+  var_2 thread scripts\common\anim::anim_single_solo(var_2, "rappel_hackney_infil_alpha");
+  var_4 = (525, -1460, 30);
+  var_5 = (0, 180, 0);
+  var_6 = spawnVehicle("veh8_mil_air_blima", "bravo", "blima_hackney_infil_mp", var_4, var_5);
+  var_6 setvehicleteam("allies");
+  var_6 setCanDamage(0);
+  var_6.animname = "blima";
+  var_6 setscriptablepartstate("engine", "on", 0);
+  var_3 = spawn("script_model", var_6.origin);
+  var_3.angles = var_6.angles;
+  var_3 setModel("cop_marker_scriptable");
+  var_3 setscriptablepartstate("marker", "heliLight");
+  var_3 linkTo(var_6, "tag_origin", (0, 0, -60), (-90, 0, 0));
+  var_6 thread scripts\common\anim::anim_single_solo(var_6, "rappel_hackney_infil_bravo");
 }
 
 function applymapvisionset() {
@@ -1076,29 +1076,29 @@ function removemapvisionset() {
   self visionsetnakedforplayer("", 1);
 }
 
-function getcommanderassets(var0) {
-  var1 = spawnStruct();
+function getcommanderassets(var_0) {
+  var_1 = spawnStruct();
 
-  if(var0 == "axis") {
-    var1.body = "body_russian_helicopter_pilot";
-    var1.head = "head_russian_helicopter_pilot_opaque";
+  if(var_0 == "axis") {
+    var_1.body = "body_russian_helicopter_pilot";
+    var_1.head = "head_russian_helicopter_pilot_opaque";
   } else {
-    var1.body = "body_mp_helicopter_crew";
-    var1.head = "head_mp_helicopter_crew";
+    var_1.body = "body_mp_helicopter_crew";
+    var_1.head = "head_mp_helicopter_crew";
   }
 
-  return var1;
+  return var_1;
 }
 
-function outsideheli(var0) {
-  if(!isDefined(var0)) {
+function outsideheli(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
   thread clear_infil_ambient_zone();

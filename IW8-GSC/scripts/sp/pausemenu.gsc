@@ -9,27 +9,27 @@ function main() {
 
 function pausemenu_think() {
   for(;;) {
-    level.player waittill("luinotifyserver", var0, var1);
+    level.player waittill("luinotifyserver", var_0, var_1);
 
-    if(var0 == "restartMission") {
+    if(var_0 == "restartMission") {
       restartmission();
     }
   }
 }
 
 function restartmission() {
-  var0 = getbuildversion();
+  var_0 = getbuildversion();
 
-  if(var0 != "" && (var0 == "IW8_PROFILE" || var0 == "IW8_DEMO")) {
+  if(var_0 != "" && (var_0 == "IW8_PROFILE" || var_0 == "IW8_DEMO")) {
     map_restart();
     return;
   }
 
   level.player enableinvulnerability();
-  var1 = scripts\sp\endmission::getrestartlevel(level.script);
+  var_1 = scripts\sp\endmission::getrestartlevel(level.script);
 
-  if(isDefined(var1)) {
-    changelevel(var1, 0, 0);
+  if(isDefined(var_1)) {
+    changelevel(var_1, 0, 0);
     return;
   }
 

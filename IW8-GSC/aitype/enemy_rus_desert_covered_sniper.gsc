@@ -28,10 +28,10 @@ function main() {
   self.usescriptedweapon = 1;
   self.scriptedweaponclassprimary = "sniper";
   self.weapon = scripts\code\ai::create_weapon_in_script(["iw8_sn_delta"]);
-  var0 = undefined;
-  var1 = ["character_iw8_russian_army_1_safehouse", "character_iw8_russian_army_2_hood_safehouse"];
+  var_0 = undefined;
+  var_1 = ["character_iw8_russian_army_1_safehouse", "character_iw8_russian_army_2_hood_safehouse"];
 
-  switch (scripts\code\character::get_random_character(2, var0, var1)) {
+  switch (scripts\code\character::get_random_character(2, var_0, var_1)) {
     case 0:
       character\character_iw8_russian_army_1_safehouse::main();
       break;
@@ -45,7 +45,7 @@ function spawner() {
   self setspawnerteam("axis");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\character_iw8_russian_army_1_safehouse::precache();
   character\character_iw8_russian_army_2_hood_safehouse::precache();
   scripts\aitypes\bt_util::init();

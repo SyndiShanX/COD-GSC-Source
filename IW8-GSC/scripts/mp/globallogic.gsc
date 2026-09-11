@@ -10,11 +10,11 @@ function init() {
   level.codcasterenabled = getdvarint("MOSNOQPOSS", 0) == 1;
   level.systemlink = getdvarint("LPSPMQSNPQ", 0) == 1;
   level.splitscreen = issplitscreen();
-  var0 = getdvarint("OLLOKOKKSM", 0) == 1 || !isgamebattlematch();
+  var_0 = getdvarint("OLLOKOKKSM", 0) == 1 || !isgamebattlematch();
   level.onlinegame = getdvarint("LTSNLQNRKO");
-  level.rankedmatch = level.onlinegame && !getdvarint("LSTLQTSSRM") && var0 || getdvarint("OSPNSPSKL");
+  level.rankedmatch = level.onlinegame && !getdvarint("LSTLQTSSRM") && var_0 || getdvarint("OSPNSPSKL");
   level.matchmakingmatch = level.onlinegame && !getdvarint("LSTLQTSSRM");
-  level.playerxpenabled = level.matchmakingmatch && var0 || getdvarint("OSPNSPSKL");
+  level.playerxpenabled = level.matchmakingmatch && var_0 || getdvarint("OSPNSPSKL");
   level.weaponxpenabled = level.playerxpenabled;
   level.challengesallowed = level.playerxpenabled || getdvarint("debug_challenges");
   level.enforceantiboosting = level.playerxpenabled || level.weaponxpenabled || level.challengesallowed;
@@ -42,17 +42,17 @@ function init() {
   }
 
   if(scripts\mp\utility\game::matchmakinggame()) {
-    var1 = " LB_MAP_" + getDvar("NSQLTTMRMP");
-    var2 = "";
-    var3 = "";
-    var3 = "LB_GB_TOTALXP_AT LB_GB_TOTALXP_LT LB_GB_WINS_AT LB_GB_WINS_LT LB_GB_KILLS_AT LB_GB_KILLS_LT LB_GB_ACCURACY_AT LB_ACCOLADES";
-    var2 = " LB_GM_" + level.gametype;
+    var_1 = " LB_MAP_" + getDvar("NSQLTTMRMP");
+    var_2 = "";
+    var_3 = "";
+    var_3 = "LB_GB_TOTALXP_AT LB_GB_TOTALXP_LT LB_GB_WINS_AT LB_GB_WINS_LT LB_GB_KILLS_AT LB_GB_KILLS_LT LB_GB_ACCURACY_AT LB_ACCOLADES";
+    var_2 = " LB_GM_" + level.gametype;
 
     if(getdvarint("OSMSLRTOP")) {
-      var2 += "_HC";
+      var_2 += "_HC";
     }
 
-    precacheleaderboards(var3 + var2 + var1);
+    precacheleaderboards(var_3 + var_2 + var_1);
     return;
   }
 }
@@ -69,15 +69,15 @@ function endmatchonhostdisconnect() {
   level endon("game_ended");
 
   for(;;) {
-    level waittill("connected", var0);
+    level waittill("connected", var_0);
 
-    if(var0 ishost()) {
-      var1 = var0;
+    if(var_0 ishost()) {
+      var_1 = var_0;
       break;
     }
   }
 
-  var1 waittill("disconnect");
+  var_1 waittill("disconnect");
   thread scripts\mp\gamelogic::endgame("draw", game["end_reason"]["host_ended_game"]);
 }
 
@@ -170,10 +170,10 @@ function setdefaultcallbacks() {
   level.callbackspawnpointcritscore = &scripts\mp\spawnlogic::codecallbackhandler_spawnpointcritscore;
 }
 
-function blank(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {}
+function blank(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {}
 
-function debugline(var0, var1) {
-  for(var2 = 0; var2 < 50; var2++) {
+function debugline(var_0, var_1) {
+  for(var_2 = 0; var_2 < 50; var_2++) {
     wait 0.05;
   }
 }

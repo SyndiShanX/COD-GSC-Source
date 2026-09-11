@@ -13,7 +13,7 @@ function init() {
 
 function inititems() {
   level.equipment.callbacks = [];
-  var0 = level.equipment;
+  var_0 = level.equipment;
   scripts\mp\equipment_interact::equipmentinteract_init();
 
   if(!istrue(game["isLaunchChunk"])) {
@@ -33,241 +33,241 @@ function inititems() {
   scripts\mp\equipment\weapon_drop::weapondrop_init();
   scripts\cp_mp\equipment\throwing_knife::throwing_knife_init();
   scripts\mp\equipment\numbers_grenade::init();
-  var0.callbacks["equip_helmet"]["onGive"] = &scripts\mp\perks\headgear::runheadgear;
-  var0.callbacks["equip_helmet"]["onTake"] = &scripts\mp\perks\headgear::removeheadgear;
-  var0.callbacks["equip_adrenaline"]["onFired"] = &scripts\mp\equipment\adrenaline::onequipmentfired;
-  var0.callbacks["equip_adrenaline"]["onTake"] = &scripts\mp\equipment\adrenaline::onequipmenttaken;
-  var0.callbacks["equip_c4"]["onGive"] = &scripts\mp\equipment\c4::c4_set;
-  var0.callbacks["equip_trophy"]["onGive"] = &scripts\mp\equipment\trophy_system::trophy_set;
-  var0.callbacks["equip_trophy"]["onTake"] = &scripts\mp\equipment\trophy_system::trophy_unset;
-  var0.callbacks["equip_decon_station"]["onTake"] = &_debug_rooftop_heli_start::jugg_go_to_node_callback;
-  var0.callbacks["equip_decon_station"]["onGive"] = &_debug_rooftop_heli_start::jugg_getminigunweapon;
-  var0.callbacks["equip_throwing_knife"]["onGive"] = &scripts\cp_mp\equipment\throwing_knife::throwing_knife_ongive;
-  var0.callbacks["equip_throwing_knife"]["onTake"] = &scripts\cp_mp\equipment\throwing_knife::throwing_knife_ontake;
-  var0.callbacks["equip_throwing_knife_fire"]["onGive"] = &scripts\cp_mp\equipment\throwing_knife::throwing_knife_ongive;
-  var0.callbacks["equip_throwing_knife_fire"]["onTake"] = &scripts\cp_mp\equipment\throwing_knife::throwing_knife_ontake;
-  var0.callbacks["equip_throwing_knife_electric"]["onGive"] = &scripts\cp_mp\equipment\throwing_knife::throwing_knife_ongive;
-  var0.callbacks["equip_throwing_knife_electric"]["onTake"] = &scripts\cp_mp\equipment\throwing_knife::throwing_knife_ontake;
-  var0.callbacks["equip_throwing_knife_drill"]["onGive"] = &scripts\cp_mp\equipment\throwing_knife::throwing_knife_ongive;
-  var0.callbacks["equip_throwing_knife_drill"]["onTake"] = &scripts\cp_mp\equipment\throwing_knife::throwing_knife_ontake;
-  var0.callbacks["equip_molotov"]["onGive"] = &scripts\mp\equipment\molotov::molotov_on_give;
-  var0.callbacks["equip_molotov"]["onTake"] = &scripts\mp\equipment\molotov::molotov_on_take;
-  var0.callbacks["equip_tac_cover"]["onGive"] = &scripts\mp\equipment\tactical_cover::tac_cover_on_give;
-  var0.callbacks["equip_tac_cover"]["onTake"] = &scripts\mp\equipment\tactical_cover::tac_cover_on_take;
-  var0.callbacks["equip_tac_cover"]["onFired"] = &scripts\mp\equipment\tactical_cover::tac_cover_on_fired;
-  var0.callbacks["equip_tac_insert"]["onGive"] = &scripts\mp\equipment\tac_insert::tacinsert_set;
-  var0.callbacks["equip_tac_insert"]["onTake"] = &scripts\mp\equipment\tac_insert::tacinsert_unset;
-  var0.callbacks["equip_binoculars"]["onGive"] = &_debug_rooftop_activesat::closeobjectiveiconid;
-  var0.callbacks["equip_binoculars"]["onTake"] = &_debug_rooftop_activesat::codeloc;
-  var0.callbacks["equip_gas_grenade"]["onPlayerDamaged"] = &scripts\mp\equipment\gas_grenade::gas_onplayerdamaged;
-  var0.callbacks["equip_flash"]["onPlayerDamaged"] = &scripts\mp\equipment\flash_grenade::onplayerdamaged;
-  var0.callbacks["equip_concussion"]["onPlayerDamaged"] = &scripts\mp\equipment\concussion_grenade::onplayerdamaged;
-  var0.callbacks["equip_thermite"]["onPlayerDamaged"] = &scripts\mp\equipment\thermite::thermite_onplayerdamaged;
-  var0.callbacks["equip_molotov"]["onPlayerDamaged"] = &scripts\mp\equipment\molotov::molotov_on_player_damaged;
-  var0.callbacks["equip_numbers_grenade"]["onPlayerDamaged"] = &scripts\mp\equipment\numbers_grenade::on_player_damaged;
-  var0.callbacks["equip_at_mine"]["onOwnerChanged"] = &scripts\mp\equipment\at_mine::at_mine_onownerchanged;
-  var0.callbacks["equip_claymore"]["onOwnerChanged"] = &scripts\mp\equipment\claymore::claymore_onownerchanged;
-  var0.callbacks["equip_c4"]["onOwnerChanged"] = &scripts\mp\equipment\c4::c4_onownerchanged;
-  var0.callbacks["equip_jammer"]["onOwnerChanged"] = &_donewithcorpse::vehicle_compass_updateallvisibilityforplayer;
-  var0.callbacks["equip_at_mine"]["onDestroyedByTrophy"] = &scripts\mp\equipment\at_mine::at_mine_delete;
-  var0.callbacks["equip_claymore"]["onDestroyedByTrophy"] = &scripts\mp\equipment\claymore::claymore_delete;
-  var0.callbacks["equip_trophy"]["onDestroyedByTrophy"] = &scripts\mp\equipment\trophy_system::trophy_delete;
-  var0.callbacks["equip_c4"]["onDestroyedByTrophy"] = &scripts\mp\equipment\c4::c4_delete;
-  var0.callbacks["equip_snapshot_grenade"]["onDestroyedByTrophy"] = &scripts\mp\equipment\snapshot_grenade::snapshot_grenade_delete;
+  var_0.callbacks["equip_helmet"]["onGive"] = &scripts\mp\perks\headgear::runheadgear;
+  var_0.callbacks["equip_helmet"]["onTake"] = &scripts\mp\perks\headgear::removeheadgear;
+  var_0.callbacks["equip_adrenaline"]["onFired"] = &scripts\mp\equipment\adrenaline::onequipmentfired;
+  var_0.callbacks["equip_adrenaline"]["onTake"] = &scripts\mp\equipment\adrenaline::onequipmenttaken;
+  var_0.callbacks["equip_c4"]["onGive"] = &scripts\mp\equipment\c4::c4_set;
+  var_0.callbacks["equip_trophy"]["onGive"] = &scripts\mp\equipment\trophy_system::trophy_set;
+  var_0.callbacks["equip_trophy"]["onTake"] = &scripts\mp\equipment\trophy_system::trophy_unset;
+  var_0.callbacks["equip_decon_station"]["onTake"] = &_debug_rooftop_heli_start::jugg_go_to_node_callback;
+  var_0.callbacks["equip_decon_station"]["onGive"] = &_debug_rooftop_heli_start::jugg_getminigunweapon;
+  var_0.callbacks["equip_throwing_knife"]["onGive"] = &scripts\cp_mp\equipment\throwing_knife::throwing_knife_ongive;
+  var_0.callbacks["equip_throwing_knife"]["onTake"] = &scripts\cp_mp\equipment\throwing_knife::throwing_knife_ontake;
+  var_0.callbacks["equip_throwing_knife_fire"]["onGive"] = &scripts\cp_mp\equipment\throwing_knife::throwing_knife_ongive;
+  var_0.callbacks["equip_throwing_knife_fire"]["onTake"] = &scripts\cp_mp\equipment\throwing_knife::throwing_knife_ontake;
+  var_0.callbacks["equip_throwing_knife_electric"]["onGive"] = &scripts\cp_mp\equipment\throwing_knife::throwing_knife_ongive;
+  var_0.callbacks["equip_throwing_knife_electric"]["onTake"] = &scripts\cp_mp\equipment\throwing_knife::throwing_knife_ontake;
+  var_0.callbacks["equip_throwing_knife_drill"]["onGive"] = &scripts\cp_mp\equipment\throwing_knife::throwing_knife_ongive;
+  var_0.callbacks["equip_throwing_knife_drill"]["onTake"] = &scripts\cp_mp\equipment\throwing_knife::throwing_knife_ontake;
+  var_0.callbacks["equip_molotov"]["onGive"] = &scripts\mp\equipment\molotov::molotov_on_give;
+  var_0.callbacks["equip_molotov"]["onTake"] = &scripts\mp\equipment\molotov::molotov_on_take;
+  var_0.callbacks["equip_tac_cover"]["onGive"] = &scripts\mp\equipment\tactical_cover::tac_cover_on_give;
+  var_0.callbacks["equip_tac_cover"]["onTake"] = &scripts\mp\equipment\tactical_cover::tac_cover_on_take;
+  var_0.callbacks["equip_tac_cover"]["onFired"] = &scripts\mp\equipment\tactical_cover::tac_cover_on_fired;
+  var_0.callbacks["equip_tac_insert"]["onGive"] = &scripts\mp\equipment\tac_insert::tacinsert_set;
+  var_0.callbacks["equip_tac_insert"]["onTake"] = &scripts\mp\equipment\tac_insert::tacinsert_unset;
+  var_0.callbacks["equip_binoculars"]["onGive"] = &_debug_rooftop_activesat::closeobjectiveiconid;
+  var_0.callbacks["equip_binoculars"]["onTake"] = &_debug_rooftop_activesat::codeloc;
+  var_0.callbacks["equip_gas_grenade"]["onPlayerDamaged"] = &scripts\mp\equipment\gas_grenade::gas_onplayerdamaged;
+  var_0.callbacks["equip_flash"]["onPlayerDamaged"] = &scripts\mp\equipment\flash_grenade::onplayerdamaged;
+  var_0.callbacks["equip_concussion"]["onPlayerDamaged"] = &scripts\mp\equipment\concussion_grenade::onplayerdamaged;
+  var_0.callbacks["equip_thermite"]["onPlayerDamaged"] = &scripts\mp\equipment\thermite::thermite_onplayerdamaged;
+  var_0.callbacks["equip_molotov"]["onPlayerDamaged"] = &scripts\mp\equipment\molotov::molotov_on_player_damaged;
+  var_0.callbacks["equip_numbers_grenade"]["onPlayerDamaged"] = &scripts\mp\equipment\numbers_grenade::on_player_damaged;
+  var_0.callbacks["equip_at_mine"]["onOwnerChanged"] = &scripts\mp\equipment\at_mine::at_mine_onownerchanged;
+  var_0.callbacks["equip_claymore"]["onOwnerChanged"] = &scripts\mp\equipment\claymore::claymore_onownerchanged;
+  var_0.callbacks["equip_c4"]["onOwnerChanged"] = &scripts\mp\equipment\c4::c4_onownerchanged;
+  var_0.callbacks["equip_jammer"]["onOwnerChanged"] = &_donewithcorpse::vehicle_compass_updateallvisibilityforplayer;
+  var_0.callbacks["equip_at_mine"]["onDestroyedByTrophy"] = &scripts\mp\equipment\at_mine::at_mine_delete;
+  var_0.callbacks["equip_claymore"]["onDestroyedByTrophy"] = &scripts\mp\equipment\claymore::claymore_delete;
+  var_0.callbacks["equip_trophy"]["onDestroyedByTrophy"] = &scripts\mp\equipment\trophy_system::trophy_delete;
+  var_0.callbacks["equip_c4"]["onDestroyedByTrophy"] = &scripts\mp\equipment\c4::c4_delete;
+  var_0.callbacks["equip_snapshot_grenade"]["onDestroyedByTrophy"] = &scripts\mp\equipment\snapshot_grenade::snapshot_grenade_delete;
   thread watchlethaldelay();
   scripts\mp\utility\disconnect_event_aggregator::registerondisconnecteventcallback(&onownerdisconnect);
 }
 
-function getcallback(var0, var1) {
-  if(!isDefined(level.equipment.callbacks[var0])) {
+function getcallback(var_0, var_1) {
+  if(!isDefined(level.equipment.callbacks[var_0])) {
     return undefined;
   }
 
-  return level.equipment.callbacks[var0][var1];
+  return level.equipment.callbacks[var_0][var_1];
 }
 
 function loadtable() {
   level.equipment.table = [];
 
-  for(var0 = 1;; var0++) {
-    var1 = tablelookupbyrow("mp/equipment.csv", var0, 1);
+  for(var_0 = 1;; var_0++) {
+    var_1 = tablelookupbyrow("mp/equipment.csv", var_0, 1);
 
-    if(!isDefined(var1) || var1 == "") {
+    if(!isDefined(var_1) || var_1 == "") {
       break;
     }
 
-    var2 = tolower(var1);
-    var3 = spawnStruct();
-    var3.ref = var2;
-    var4 = tablelookupbyrow("mp/equipment.csv", var0, 6);
+    var_2 = tolower(var_1);
+    var_3 = spawnStruct();
+    var_3.ref = var_2;
+    var_4 = tablelookupbyrow("mp/equipment.csv", var_0, 6);
 
-    if(var4 != "none") {
-      var5 = tablelookupbyrow("mp/equipment.csv", var0, 19);
-      var6 = undefined;
+    if(var_4 != "none") {
+      var_5 = tablelookupbyrow("mp/equipment.csv", var_0, 19);
+      var_6 = undefined;
 
-      if(var5 != "") {
-        var7 = getcompleteweaponname(var4);
+      if(var_5 != "") {
+        var_7 = getcompleteweaponname(var_4);
 
-        if(!nullweapon(var7)) {
-          var6 = [var5];
+        if(!nullweapon(var_7)) {
+          var_6 = [var_5];
         }
       }
 
-      var3.objweapon = getcompleteweaponname(var4, var6);
+      var_3.objweapon = getcompleteweaponname(var_4, var_6);
     }
 
-    var3.id = var0;
-    var3.image = tablelookupbyrow("mp/equipment.csv", var0, 4);
-    var3.defaultslot = scripts\engine\utility::ter_op(tablelookupbyrow("mp/equipment.csv", var0, 7) == "2", "secondary", "primary");
-    var3.scavengerammo = int(tablelookupbyrow("mp/equipment.csv", var0, 10));
-    var3.ispassive = tolower(tablelookupbyrow("mp/equipment.csv", var0, 11)) == "true";
-    var3.usecellspawns = tablelookupbyrow("mp/equipment.csv", var0, 8) != "-1";
-    var8 = tablelookupbyrow("mp/equipment.csv", var0, 12);
+    var_3.id = var_0;
+    var_3.image = tablelookupbyrow("mp/equipment.csv", var_0, 4);
+    var_3.defaultslot = scripts\engine\utility::ter_op(tablelookupbyrow("mp/equipment.csv", var_0, 7) == "2", "secondary", "primary");
+    var_3.scavengerammo = int(tablelookupbyrow("mp/equipment.csv", var_0, 10));
+    var_3.ispassive = tolower(tablelookupbyrow("mp/equipment.csv", var_0, 11)) == "true";
+    var_3.usecellspawns = tablelookupbyrow("mp/equipment.csv", var_0, 8) != "-1";
+    var_8 = tablelookupbyrow("mp/equipment.csv", var_0, 12);
 
-    if(var8 == "none") {} else if(var8 == "") {
-      if(var4 != "none") {
-        var3.damageweaponnames = [var4];
+    if(var_8 == "none") {} else if(var_8 == "") {
+      if(var_4 != "none") {
+        var_3.damageweaponnames = [var_4];
       }
     } else {
-      var9 = [];
+      var_9 = [];
 
-      if(var4 != "none") {
-        GscBinSkip0(0x2e, var9.size, var4);
+      if(var_4 != "none") {
+        GscBinSkip0(0x2e, var_9.size, var_4);
       }
 
-      var10 = strtok(var8, " ");
+      var_10 = strtok(var_8, " ");
 
-      foreach(var12 in var10) {
-        var9 = var12;
+      foreach(var_12 in var_10) {
+        var_9 = var_12;
       }
 
-      var3.damageweaponnames = var9;
+      var_3.damageweaponnames = var_9;
     }
 
-    level.equipment.table[var2] = var3;
+    level.equipment.table[var_2] = var_3;
   }
 }
 
-function getequipmenttableinfo(var0) {
-  return level.equipment.table[var0];
+function getequipmenttableinfo(var_0) {
+  return level.equipment.table[var_0];
 }
 
-function giveequipment(var0, var1) {
+function giveequipment(var_0, var_1) {
   if(!isDefined(self.equipment)) {
     self.equipment = [];
   }
 
-  if(var0 == "none") {
+  if(var_0 == "none") {
     return;
   }
 
-  var2 = getequipmenttableinfo(var0);
+  var_2 = getequipmenttableinfo(var_0);
 
-  if(!isDefined(var2)) {
-    scripts\mp\utility\script::laststand_dogtags("Attempting to give unknown equipment - " + var0 + " - in slot - " + var1);
+  if(!isDefined(var_2)) {
+    scripts\mp\utility\script::laststand_dogtags("Attempting to give unknown equipment - " + var_0 + " - in slot - " + var_1);
     return;
   }
 
-  if(var1 == "super") {
-    var3 = level.br_pickups.br_superreference[level.br_pickups.br_equipnametoscriptable[var0]];
-    var2.id = scripts\mp\supers::getsuperid(var3);
+  if(var_1 == "super") {
+    var_3 = level.br_pickups.br_superreference[level.br_pickups.br_equipnametoscriptable[var_0]];
+    var_2.id = scripts\mp\supers::getsuperid(var_3);
   }
 
-  takeequipment(var1);
+  takeequipment(var_1);
 
-  if(isDefined(var2.objweapon)) {
-    self giveweapon(var2.objweapon);
+  if(isDefined(var_2.objweapon)) {
+    self giveweapon(var_2.objweapon);
 
-    if(is_equipment_slot_allowed(var1) && !var2.ispassive) {
-      if(var1 == "primary") {
-        self assignweaponoffhandprimary(var2.objweapon);
-      } else if(var1 == "secondary") {
-        self assignweaponoffhandsecondary(var2.objweapon);
-      } else if(var1 == "super") {
-        self assignweaponoffhandspecial(var2.objweapon);
+    if(is_equipment_slot_allowed(var_1) && !var_2.ispassive) {
+      if(var_1 == "primary") {
+        self assignweaponoffhandprimary(var_2.objweapon);
+      } else if(var_1 == "secondary") {
+        self assignweaponoffhandsecondary(var_2.objweapon);
+      } else if(var_1 == "super") {
+        self assignweaponoffhandspecial(var_2.objweapon);
       }
     }
   }
 
-  sethudslot(var1, var2.id);
-  self.equipment[var1] = var0;
-  var4 = getcallback(var0, "onGive");
+  sethudslot(var_1, var_2.id);
+  self.equipment[var_1] = var_0;
+  var_4 = getcallback(var_0, "onGive");
 
-  if(isDefined(var4)) {
-    self thread[[var4]](var0, var1);
+  if(isDefined(var_4)) {
+    self thread[[var_4]](var_0, var_1);
   }
 
-  updateuiammocount(var1);
-  var5 = var0 == "equip_throwing_knife" || var0 == "equip_throwing_knife_fire" || var0 == "equip_throwing_knife_electric" || var0 == "equip_throwing_knife_drill";
+  updateuiammocount(var_1);
+  var_5 = var_0 == "equip_throwing_knife" || var_0 == "equip_throwing_knife_fire" || var_0 == "equip_throwing_knife_electric" || var_0 == "equip_throwing_knife_drill";
 
-  if(scripts\mp\utility\game::getgametype() == "arena" && var5) {
+  if(scripts\mp\utility\game::getgametype() == "arena" && var_5) {
     return;
   }
 
-  thread watchlethaldelayplayer(var0, var1);
+  thread watchlethaldelayplayer(var_0, var_1);
 }
 
-function takeequipment(var0) {
-  var1 = getcurrentequipment(var0);
+function takeequipment(var_0) {
+  var_1 = getcurrentequipment(var_0);
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  var2 = getequipmenttableinfo(var1);
+  var_2 = getequipmenttableinfo(var_1);
 
-  if(isDefined(var2.objweapon)) {
-    if(self hasweapon(var2.objweapon)) {
-      scripts\cp_mp\utility\inventory_utility::_takeweapon(var2.objweapon);
+  if(isDefined(var_2.objweapon)) {
+    if(self hasweapon(var_2.objweapon)) {
+      scripts\cp_mp\utility\inventory_utility::_takeweapon(var_2.objweapon);
 
-      if(var0 == "primary") {
+      if(var_0 == "primary") {
         self clearoffhandprimary();
-      } else if(var0 == "secondary") {
+      } else if(var_0 == "secondary") {
         self clearoffhandsecondary();
       }
     }
   }
 
-  sethudslot(var0, 0);
-  self.equipment[var0] = undefined;
-  var3 = getcallback(var1, "onTake");
+  sethudslot(var_0, 0);
+  self.equipment[var_0] = undefined;
+  var_3 = getcallback(var_1, "onTake");
 
-  if(isDefined(var3)) {
-    self thread[[var3]](var1, var0);
+  if(isDefined(var_3)) {
+    self thread[[var_3]](var_1, var_0);
   }
 
-  updateuiammocount(var0);
-  self notify("equipment_taken_" + var1);
+  updateuiammocount(var_0);
+  self notify("equipment_taken_" + var_1);
 }
 
-function equiponplayerdamaged(var0) {
-  var1 = var0.objweapon.basename;
+function equiponplayerdamaged(var_0) {
+  var_1 = var_0.objweapon.basename;
 
-  foreach(var3 in level.equipment.table) {
-    var4 = getcallback(var10, "onPlayerDamaged");
+  foreach(var_3 in level.equipment.table) {
+    var_4 = getcallback(var_10, "onPlayerDamaged");
 
-    if(isDefined(var4) && isDefined(var3.damageweaponnames)) {
-      foreach(var6 in var3.damageweaponnames) {
-        if(var6 == var1) {
-          var7 = gettime();
-          var8 = [[var4]](var0);
-          return var8;
+    if(isDefined(var_4) && isDefined(var_3.damageweaponnames)) {
+      foreach(var_6 in var_3.damageweaponnames) {
+        if(var_6 == var_1) {
+          var_7 = gettime();
+          var_8 = [[var_4]](var_0);
+          return var_8;
         }
       }
 
-      var8 = undefined;
+      var_8 = undefined;
     }
   }
 
-  var4 = undefined;
+  var_4 = undefined;
 }
 
 function ondestroyedbytrophy() {
   if(isDefined(self.equipmentref)) {
-    var0 = getcallback(self.equipmentref, "onDestroyedByTrophy");
+    var_0 = getcallback(self.equipmentref, "onDestroyedByTrophy");
 
-    if(isDefined(var0)) {
-      self thread[[var0]]();
+    if(isDefined(var_0)) {
+      self thread[[var_0]]();
       return true;
     } else if(scripts\mp\weapons::isplantedequipment(self)) {
       thread scripts\mp\weapons::deleteexplosive();
@@ -278,45 +278,45 @@ function ondestroyedbytrophy() {
   return false;
 }
 
-function disableslotinternal(var0) {
-  if(var0 == "primary") {
+function disableslotinternal(var_0) {
+  if(var_0 == "primary") {
     self clearoffhandprimary();
     return;
   }
 
-  if(var0 == "secondary") {
+  if(var_0 == "secondary") {
     self clearoffhandsecondary();
     return;
   }
 
-  if(var0 == "super") {
+  if(var_0 == "super") {
     self clearoffhandspecial();
     return;
   }
 }
 
-function enableslotinternal(var0) {
-  var1 = getcurrentequipment(var0);
+function enableslotinternal(var_0) {
+  var_1 = getcurrentequipment(var_0);
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  var2 = getequipmenttableinfo(var1);
+  var_2 = getequipmenttableinfo(var_1);
 
-  if(isDefined(var2.objweapon) && !var2.ispassive && self hasweapon(var2.objweapon)) {
-    if(var0 == "primary") {
-      self assignweaponoffhandprimary(var2.objweapon);
+  if(isDefined(var_2.objweapon) && !var_2.ispassive && self hasweapon(var_2.objweapon)) {
+    if(var_0 == "primary") {
+      self assignweaponoffhandprimary(var_2.objweapon);
       return;
     }
 
-    if(var0 == "secondary") {
-      self assignweaponoffhandsecondary(var2.objweapon);
+    if(var_0 == "secondary") {
+      self assignweaponoffhandsecondary(var_2.objweapon);
       return;
     }
 
-    if(var0 == "super") {
-      self assignweaponoffhandspecial(var2.objweapon);
+    if(var_0 == "super") {
+      self assignweaponoffhandspecial(var_2.objweapon);
       return;
     }
 
@@ -324,45 +324,45 @@ function enableslotinternal(var0) {
   }
 }
 
-function allow_equipment(var0, var1) {
-  allow_equipment_slot("primary", var0, var1);
-  allow_equipment_slot("secondary", var0, var1);
+function allow_equipment(var_0, var_1) {
+  allow_equipment_slot("primary", var_0, var_1);
+  allow_equipment_slot("secondary", var_0, var_1);
 }
 
-function allow_equipment_slot(var0, var1, var2) {
-  var3 = scripts\common\input_allow::allow_input_internal("equipment_" + var0, var1, var2);
+function allow_equipment_slot(var_0, var_1, var_2) {
+  var_3 = scripts\common\input_allow::allow_input_internal("equipment_" + var_0, var_1, var_2);
 
-  if(!isDefined(var3)) {
+  if(!isDefined(var_3)) {
     return;
   }
 
-  if(var1) {
-    enableslotinternal(var0);
+  if(var_1) {
+    enableslotinternal(var_0);
     return;
   }
 
-  disableslotinternal(var0);
+  disableslotinternal(var_0);
 }
 
-function is_equipment_slot_allowed(var0) {
-  return scripts\common\input_allow::is_input_allowed_internal("equipment_" + var0);
+function is_equipment_slot_allowed(var_0) {
+  return scripts\common\input_allow::is_input_allowed_internal("equipment_" + var_0);
 }
 
-function sethudslot(var0, var1) {
-  if(var0 != "super") {
-    self setclientomnvar("ui_equipment_id_" + var0, var1);
+function sethudslot(var_0, var_1) {
+  if(var_0 != "super") {
+    self setclientomnvar("ui_equipment_id_" + var_0, var_1);
     return;
   }
 
-  self setclientomnvar("ui_perk_package_super1", var1);
+  self setclientomnvar("ui_perk_package_super1", var_1);
 }
 
-function getcurrentequipment(var0) {
+function getcurrentequipment(var_0) {
   if(!isDefined(self.equipment)) {
     return undefined;
   }
 
-  return self.equipment[var0];
+  return self.equipment[var_0];
 }
 
 function clearallequipment() {
@@ -370,164 +370,164 @@ function clearallequipment() {
     return;
   }
 
-  foreach(var1 in self.equipment) {
-    takeequipment(var2);
+  foreach(var_1 in self.equipment) {
+    takeequipment(var_2);
   }
 }
 
-function getequipmentmaxammo(var0) {
-  var1 = getequipmenttableinfo(var0);
+function getequipmentmaxammo(var_0) {
+  var_1 = getequipmenttableinfo(var_0);
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return undefined;
   }
 
-  if(!isDefined(var1.objweapon)) {
+  if(!isDefined(var_1.objweapon)) {
     return 0;
   }
 
   jumpiffalse(level.gametype != "br") LOC_000000aa;
-  var2 = scripts\mp\utility\perk::_hasperk("specialty_extraoffhandammo");
-  var3 = weaponmaxammo(var1.objweapon, var2);
+  var_2 = scripts\mp\utility\perk::_hasperk("specialty_extraoffhandammo");
+  var_3 = weaponmaxammo(var_1.objweapon, var_2);
 
-  switch (var0) {
+  switch (var_0) {
     case "equip_hb_sensor":
     case "equip_binoculars":
     case "equip_tac_cover":
       break;
     default:
-      var3--;
+      var_3--;
       break;
   }
 
-  var4 = findequipmentslot(var0);
+  var_4 = findequipmentslot(var_0);
 
-  if(isDefined(var4) && scripts\mp\utility\perk::_hasperk("specialty_extra_deadly") && var4 == "primary") {
-    var3++;
+  if(isDefined(var_4) && scripts\mp\utility\perk::_hasperk("specialty_extra_deadly") && var_4 == "primary") {
+    var_3++;
   }
 
   goto LOC_00000112;
 }
 
-function getequipmentstartammo(var0) {
-  var1 = getequipmenttableinfo(var0);
+function getequipmentstartammo(var_0) {
+  var_1 = getequipmenttableinfo(var_0);
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return undefined;
   }
 
-  if(!isDefined(var1.objweapon)) {
+  if(!isDefined(var_1.objweapon)) {
     return 0;
   }
 
-  var2 = scripts\mp\utility\perk::_hasperk("specialty_extraoffhandammo");
-  return weaponstartammo(var1.objweapon, var2);
+  var_2 = scripts\mp\utility\perk::_hasperk("specialty_extraoffhandammo");
+  return weaponstartammo(var_1.objweapon, var_2);
 }
 
-function getequipmentammo(var0) {
-  var1 = getequipmenttableinfo(var0);
+function getequipmentammo(var_0) {
+  var_1 = getequipmenttableinfo(var_0);
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return undefined;
   }
 
-  if(!isDefined(var1.objweapon)) {
+  if(!isDefined(var_1.objweapon)) {
     return 0;
   }
 
-  return self getammocount(var1.objweapon);
+  return self getammocount(var_1.objweapon);
 }
 
-function setequipmentammo(var0, var1) {
-  var2 = getequipmenttableinfo(var0);
+function setequipmentammo(var_0, var_1) {
+  var_2 = getequipmenttableinfo(var_0);
 
-  if(!isDefined(var2.objweapon)) {
+  if(!isDefined(var_2.objweapon)) {
     return;
   }
 
-  self setweaponammoclip(var2.objweapon, var1);
-  updateuiammocount(findequipmentslot(var0));
+  self setweaponammoclip(var_2.objweapon, var_1);
+  updateuiammocount(findequipmentslot(var_0));
 }
 
-function incrementequipmentammo(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = 1;
+function incrementequipmentammo(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
-  var2 = getequipmentammo(var0);
-  var3 = int(min(var2 + var1, getequipmentmaxammo(var0)));
-  setequipmentammo(var0, var3);
+  var_2 = getequipmentammo(var_0);
+  var_3 = int(min(var_2 + var_1, getequipmentmaxammo(var_0)));
+  setequipmentammo(var_0, var_3);
 }
 
-function decrementequipmentammo(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = 1;
+function decrementequipmentammo(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
-  var2 = getequipmentammo(var0);
-  var1 = int(min(var1, var2));
+  var_2 = getequipmentammo(var_0);
+  var_1 = int(min(var_1, var_2));
 
-  if(var1 > 0) {
-    var3 = int(min(var2 - var1, getequipmentmaxammo(var0)));
-    setequipmentammo(var0, var3);
+  if(var_1 > 0) {
+    var_3 = int(min(var_2 - var_1, getequipmentmaxammo(var_0)));
+    setequipmentammo(var_0, var_3);
     return;
   }
 }
 
-function incrementequipmentslotammo(var0, var1) {
-  var2 = getcurrentequipment(var0);
+function incrementequipmentslotammo(var_0, var_1) {
+  var_2 = getcurrentequipment(var_0);
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return undefined;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 1;
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
-  var3 = getequipmentammo(var2);
-  var4 = int(min(var3 + var1, getequipmentmaxammo(var2)));
-  setequipmentammo(var2, var4);
+  var_3 = getequipmentammo(var_2);
+  var_4 = int(min(var_3 + var_1, getequipmentmaxammo(var_2)));
+  setequipmentammo(var_2, var_4);
 }
 
-function decrementequipmentslotammo(var0, var1) {
-  var2 = getcurrentequipment(var0);
+function decrementequipmentslotammo(var_0, var_1) {
+  var_2 = getcurrentequipment(var_0);
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return undefined;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 1;
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
-  var3 = getequipmentammo(var2);
-  var4 = int(min(var3 - var1, getequipmentmaxammo(var2)));
-  setequipmentammo(var2, var4);
+  var_3 = getequipmentammo(var_2);
+  var_4 = int(min(var_3 - var_1, getequipmentmaxammo(var_2)));
+  setequipmentammo(var_2, var_4);
 }
 
-function getequipmentslotammo(var0) {
-  var1 = getcurrentequipment(var0);
+function getequipmentslotammo(var_0) {
+  var_1 = getcurrentequipment(var_0);
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return undefined;
   }
 
-  return getequipmentammo(var1);
+  return getequipmentammo(var_1);
 }
 
-function setequipmentslotammo(var0, var1) {
-  var2 = getcurrentequipment(var0);
+function setequipmentslotammo(var_0, var_1) {
+  var_2 = getcurrentequipment(var_0);
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return undefined;
   }
 
-  return setequipmentammo(var2, var1);
+  return setequipmentammo(var_2, var_1);
 }
 
-function mapequipmentweaponforref(var0) {
-  switch (var0.basename) {
+function mapequipmentweaponforref(var_0) {
+  switch (var_0.basename) {
     case "claymore_radial_mp":
       return getcompleteweaponname("claymore_mp");
     case "at_mine_ap_mp":
@@ -537,38 +537,38 @@ function mapequipmentweaponforref(var0) {
       return getcompleteweaponname("thermite_mp");
   }
 
-  return var0;
+  return var_0;
 }
 
-function getequipmentreffromweapon(var0) {
-  var0 = mapequipmentweaponforref(var0);
+function getequipmentreffromweapon(var_0) {
+  var_0 = mapequipmentweaponforref(var_0);
 
-  foreach(var2 in level.equipment.table) {
-    if(isDefined(var2.objweapon) && var0 == var2.objweapon) {
-      return var2.ref;
+  foreach(var_2 in level.equipment.table) {
+    if(isDefined(var_2.objweapon) && var_0 == var_2.objweapon) {
+      return var_2.ref;
     }
   }
 
   return undefined;
 }
 
-function getweaponfromequipmentref(var0) {
-  foreach(var2 in level.equipment.table) {
-    if(isDefined(var2.ref) && var0 == var2.ref) {
-      return var2.objweapon;
+function getweaponfromequipmentref(var_0) {
+  foreach(var_2 in level.equipment.table) {
+    if(isDefined(var_2.ref) && var_0 == var_2.ref) {
+      return var_2.objweapon;
     }
   }
 
   return undefined;
 }
 
-function hasequipment(var0) {
+function hasequipment(var_0) {
   if(!isDefined(self.equipment)) {
     return false;
   }
 
-  foreach(var2 in self.equipment) {
-    if(var2 == var0) {
+  foreach(var_2 in self.equipment) {
+    if(var_2 == var_0) {
       return true;
     }
   }
@@ -576,79 +576,79 @@ function hasequipment(var0) {
   return false;
 }
 
-function findequipmentslot(var0) {
+function findequipmentslot(var_0) {
   if(!isDefined(self.equipment)) {
     return undefined;
   }
 
-  foreach(var2 in self.equipment) {
-    if(var2 == var0) {
-      return var3;
+  foreach(var_2 in self.equipment) {
+    if(var_2 == var_0) {
+      return var_3;
     }
   }
 }
 
-function isequipmentlethal(var0) {
-  return isequipmentprimary(var0);
+function isequipmentlethal(var_0) {
+  return isequipmentprimary(var_0);
 }
 
-function isequipmentprimary(var0) {
-  if(isDefined(level.equipment.table[var0])) {
-    return (level.equipment.table[var0].defaultslot == "primary");
+function isequipmentprimary(var_0) {
+  if(isDefined(level.equipment.table[var_0])) {
+    return (level.equipment.table[var_0].defaultslot == "primary");
   }
 
   return 0;
 }
 
-function isequipmenttactical(var0) {
-  return isequipmentsecondary(var0);
+function isequipmenttactical(var_0) {
+  return isequipmentsecondary(var_0);
 }
 
-function isequipmentsecondary(var0) {
-  if(isDefined(level.equipment.table[var0])) {
-    return (level.equipment.table[var0].defaultslot == "secondary");
+function isequipmentsecondary(var_0) {
+  if(isDefined(level.equipment.table[var_0])) {
+    return (level.equipment.table[var_0].defaultslot == "secondary");
   }
 
   return 0;
 }
 
-function unset_force_aitype_suicidebomber(var0) {
-  if(isDefined(level.equipment.table[var0])) {
-    return istrue(level.equipment.table[var0].usecellspawns);
+function unset_force_aitype_suicidebomber(var_0) {
+  if(isDefined(level.equipment.table[var_0])) {
+    return istrue(level.equipment.table[var_0].usecellspawns);
   }
 
   return 0;
 }
 
-function updateuiammocount(var0) {
+function updateuiammocount(var_0) {
   if(!isDefined(self.equipment)) {
     return;
   }
 
-  var1 = 0;
-  var2 = getcurrentequipment(var0);
+  var_1 = 0;
+  var_2 = getcurrentequipment(var_0);
 
-  if(isDefined(var2)) {
-    var1 = getequipmentslotammo(var0);
+  if(isDefined(var_2)) {
+    var_1 = getequipmentslotammo(var_0);
   }
 
-  if(var0 == "primary") {
-    self setclientomnvar("ui_power_num_charges", var1);
-    self trajectoryupdateoriginandangles("primary", var1);
+  if(var_0 == "primary") {
+    self setclientomnvar("ui_power_num_charges", var_1);
+    self trajectoryupdateoriginandangles("primary", var_1);
     return;
   }
 
-  if(var0 == "secondary") {
-    self setclientomnvar("ui_power_secondary_num_charges", var1);
-    self trajectoryupdateoriginandangles("secondary", var1);
+  if(var_0 == "secondary") {
+    self setclientomnvar("ui_power_secondary_num_charges", var_1);
+    self trajectoryupdateoriginandangles("secondary", var_1);
     return;
   }
 
-  if(var0 == "health") {
-    self setclientomnvar("ui_equipment_id_health_numCharges", var1);
+  if(var_0 == "health") {
+    self setclientomnvar("ui_equipment_id_health_numCharges", var_1);
 
     if(scripts\mp\utility\game::unset_relic_grounded()) {
-      scripts\mp\gametypes\br_public::updatebrextradata("armorPlateCount", var1);
+      scripts\mp\gametypes\br_public::updatebrextradata("armorPlateCount", var_1);
       return;
     }
 
@@ -664,24 +664,24 @@ function resetequipment() {
   self.equipment = [];
 }
 
-function executeoffhandfired(var0) {
-  foreach(var2 in self.equipment) {
-    var3 = getequipmenttableinfo(var2);
+function executeoffhandfired(var_0) {
+  foreach(var_2 in self.equipment) {
+    var_3 = getequipmenttableinfo(var_2);
 
-    if(isDefined(var3.objweapon) && var0 == var3.objweapon) {
+    if(isDefined(var_3.objweapon) && var_0 == var_3.objweapon) {
       if(scripts\mp\utility\game::getgametype() == "br") {
-        scripts\mp\gametypes\br_analytics::branalytics_equipmentuse(self, var0);
+        scripts\mp\gametypes\br_analytics::branalytics_equipmentuse(self, var_0);
       }
 
-      var4 = getequipmentreffromweapon(var0);
-      scripts\mp\damage::hide_name_fx_from_players(var4);
-      var5 = getcallback(var2, "onFired");
+      var_4 = getequipmentreffromweapon(var_0);
+      scripts\mp\damage::hide_name_fx_from_players(var_4);
+      var_5 = getcallback(var_2, "onFired");
 
-      if(isDefined(var5)) {
-        self thread[[var5]](var2, var6, var0);
+      if(isDefined(var_5)) {
+        self thread[[var_5]](var_2, var_6, var_0);
       }
 
-      updateuiammocount(var6);
+      updateuiammocount(var_6);
       break;
     }
   }
@@ -692,29 +692,29 @@ function watchoffhandfired() {
   self endon("death_or_disconnect");
 
   for(;;) {
-    self waittill("offhand_fired", var0);
-    executeoffhandfired(var0);
+    self waittill("offhand_fired", var_0);
+    executeoffhandfired(var_0);
   }
 }
 
 function givescavengerammo() {
-  foreach(var1 in self.equipment) {
-    var2 = getequipmenttableinfo(var1);
+  foreach(var_1 in self.equipment) {
+    var_2 = getequipmenttableinfo(var_1);
 
-    if(var2.scavengerammo > 0) {
-      incrementequipmentammo(var1, var2.scavengerammo);
+    if(var_2.scavengerammo > 0) {
+      incrementequipmentammo(var_1, var_2.scavengerammo);
     }
   }
 }
 
-function getdefaultslot(var0) {
-  var1 = getequipmenttableinfo(var0);
+function getdefaultslot(var_0) {
+  var_1 = getequipmenttableinfo(var_0);
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return undefined;
   }
 
-  return var1.defaultslot;
+  return var_1.defaultslot;
 }
 
 function watchlethaldelay() {
@@ -722,9 +722,9 @@ function watchlethaldelay() {
   level endon("round_end");
   level endon("game_ended");
   scripts\mp\flags::gameflagwait("prematch_done");
-  var0 = initstandardloadout();
+  var_0 = initstandardloadout();
 
-  if(var0) {
+  if(var_0) {
     level.lethaldelaystarttime = gettime();
   } else {
     level.lethaldelaystarttime = scripts\mp\utility\game::gettimepassed();
@@ -739,15 +739,15 @@ function watchlethaldelay() {
   level notify("lethal_delay_start");
 
   for(;;) {
-    var1 = undefined;
+    var_1 = undefined;
 
-    if(var0) {
-      var1 = gettime();
+    if(var_0) {
+      var_1 = gettime();
     } else {
-      var1 = scripts\mp\utility\game::gettimepassed();
+      var_1 = scripts\mp\utility\game::gettimepassed();
     }
 
-    if(var1 >= level.lethaldelayendtime) {
+    if(var_1 >= level.lethaldelayendtime) {
       break;
     }
 
@@ -757,7 +757,7 @@ function watchlethaldelay() {
   level notify("lethal_delay_end");
 }
 
-function watchlethaldelayplayer(var0, var1) {
+function watchlethaldelayplayer(var_0, var_1) {
   self endon("death_or_disconnect");
   level endon("round_end");
   level endon("game_ended");
@@ -766,65 +766,65 @@ function watchlethaldelayplayer(var0, var1) {
     return;
   }
 
-  self notify("watchLethalDelayPlayer_" + var1);
-  self endon("watchLethalDelayPlayer_" + var1);
-  self endon("equipment_taken_" + var0);
+  self notify("watchLethalDelayPlayer_" + var_1);
+  self endon("watchLethalDelayPlayer_" + var_1);
+  self endon("equipment_taken_" + var_0);
 
-  if(!isDefined(self.weapon_xp_iw8_sh_charlie725) || !istrue(self.weapon_xp_iw8_sh_charlie725[var1])) {
+  if(!isDefined(self.weapon_xp_iw8_sh_charlie725) || !istrue(self.weapon_xp_iw8_sh_charlie725[var_1])) {
     if(!isDefined(self.weapon_xp_iw8_sh_charlie725)) {
       self.weapon_xp_iw8_sh_charlie725 = [];
     }
 
-    self.weapon_xp_iw8_sh_charlie725[var1] = 1;
-    allow_equipment_slot(var1, 0);
+    self.weapon_xp_iw8_sh_charlie725[var_1] = 1;
+    allow_equipment_slot(var_1, 0);
   }
 
-  watchlethaldelayfeedbackplayer(self, var1);
+  watchlethaldelayfeedbackplayer(self, var_1);
 
-  if(isDefined(self.weapon_xp_iw8_sh_charlie725) && istrue(self.weapon_xp_iw8_sh_charlie725[var1])) {
-    self.weapon_xp_iw8_sh_charlie725[var1] = undefined;
+  if(isDefined(self.weapon_xp_iw8_sh_charlie725) && istrue(self.weapon_xp_iw8_sh_charlie725[var_1])) {
+    self.weapon_xp_iw8_sh_charlie725[var_1] = undefined;
 
     if(self.weapon_xp_iw8_sh_charlie725.size == 0) {
       self.weapon_xp_iw8_sh_charlie725 = undefined;
     }
 
-    allow_equipment_slot(var1, 1);
+    allow_equipment_slot(var_1, 1);
     return;
   }
 }
 
-function watchlethaldelayfeedbackplayer(var0, var1) {
+function watchlethaldelayfeedbackplayer(var_0, var_1) {
   level endon("lethal_delay_end");
 
   if(!istrue(scripts\mp\flags::gameflag("prematch_done"))) {
     level waittill("lethal_delay_start");
   }
 
-  var2 = "+frag";
+  var_2 = "+frag";
 
-  if(var1 != "primary") {
-    var2 = "+smoke";
+  if(var_1 != "primary") {
+    var_2 = "+smoke";
   }
 
-  if(!isai(var0)) {
-    var0 notifyonplayercommand("lethal_attempt_" + var1, var2);
+  if(!isai(var_0)) {
+    var_0 notifyonplayercommand("lethal_attempt_" + var_1, var_2);
   }
 
-  var3 = initstandardloadout();
+  var_3 = initstandardloadout();
 
   for(;;) {
-    self waittill("lethal_attempt_" + var1);
-    var4 = undefined;
+    self waittill("lethal_attempt_" + var_1);
+    var_4 = undefined;
 
-    if(var3) {
-      var4 = gettime();
+    if(var_3) {
+      var_4 = gettime();
     } else {
-      var4 = scripts\mp\utility\game::gettimepassed();
+      var_4 = scripts\mp\utility\game::gettimepassed();
     }
 
-    var5 = (level.lethaldelayendtime - var4) / 1000;
-    var5 = int(max(0, ceil(var5)));
-    var0 scripts\mp\hud_message::showerrormessage("MP/LETHALS_UNAVAILABLE_FOR_N", var5);
+    var_5 = (level.lethaldelayendtime - var_4) / 1000;
+    var_5 = int(max(0, ceil(var_5)));
+    var_0 scripts\mp\hud_message::showerrormessage("MP/LETHALS_UNAVAILABLE_FOR_N", var_5);
   }
 }
 
@@ -847,106 +847,106 @@ function lethaldelaypassed() {
   }
 
   if(isDefined(level.lethaldelayendtime)) {
-    var0 = undefined;
+    var_0 = undefined;
 
     if(initstandardloadout()) {
-      var0 = gettime();
+      var_0 = gettime();
     } else {
-      var0 = scripts\mp\utility\game::gettimepassed();
+      var_0 = scripts\mp\utility\game::gettimepassed();
     }
 
-    return (var0 > level.lethaldelayendtime);
+    return (var_0 > level.lethaldelayendtime);
   }
 
   return false;
 }
 
 function initstandardloadout() {
-  var0 = scripts\mp\utility\game::getgametype();
+  var_0 = scripts\mp\utility\game::getgametype();
 
-  if(var0 == "hq" || var0 == "grnd" || var0 == "koth") {
+  if(var_0 == "hq" || var_0 == "grnd" || var_0 == "koth") {
     return true;
   }
 
   return false;
 }
 
-function onownerdisconnect(var0) {
-  var1 = var0 scripts\mp\weapons::getallequip();
+function onownerdisconnect(var_0) {
+  var_1 = var_0 scripts\mp\weapons::getallequip();
 
-  foreach(var3 in var1) {
-    var3 notify("owner_disconnect");
+  foreach(var_3 in var_1) {
+    var_3 notify("owner_disconnect");
   }
 }
 
-function hackequipment(var0) {
+function hackequipment(var_0) {
   self.ishacked = 1;
-  var0 scripts\mp\gamelogic::sethasdonecombat(var0, 1);
-  var0 scripts\cp\vehicles\vehicle_compass_cp::ref_1203d(self.equipmentref);
-  changeowner(var0);
+  var_0 scripts\mp\gamelogic::sethasdonecombat(var_0, 1);
+  var_0 scripts\cp\vehicles\vehicle_compass_cp::ref_1203d(self.equipmentref);
+  changeowner(var_0);
 
   if(level.teambased) {
-    self filteroutplayermarks(var0.team);
+    self filteroutplayermarks(var_0.team);
   } else {
-    self filteroutplayermarks(var0);
+    self filteroutplayermarks(var_0);
   }
 
-  var0 scripts\mp\killstreaks\killstreaks::givescoreforhack();
+  var_0 scripts\mp\killstreaks\killstreaks::givescoreforhack();
 }
 
-function changeowner(var0) {
-  var1 = self.owner;
-  self setentityowner(var0);
-  self.owner = var0;
-  self.team = var0.team;
-  self setotherent(var0);
-  var1 scripts\mp\weapons::removeequip(self);
+function changeowner(var_0) {
+  var_1 = self.owner;
+  self setentityowner(var_0);
+  self.owner = var_0;
+  self.team = var_0.team;
+  self setotherent(var_0);
+  var_1 scripts\mp\weapons::removeequip(self);
   self.owner scripts\mp\weapons::updateplantedarray(self);
-  var2 = getcallback(self.equipmentref, "onOwnerChanged");
+  var_2 = getcallback(self.equipmentref, "onOwnerChanged");
   self notify("ownerChanged");
 
-  if(isDefined(var2)) {
-    self[[var2]](var1);
+  if(isDefined(var_2)) {
+    self[[var_2]](var_1);
     return;
   }
 }
 
-function scriptablescleanupbatchsize(var0, var1, var2) {
-  foreach(var4 in var0) {
-    if(istrue(var4.gulag)) {
+function scriptablescleanupbatchsize(var_0, var_1, var_2) {
+  foreach(var_4 in var_0) {
+    if(istrue(var_4.gulag)) {
       continue;
     }
 
-    var4.ref_12fb1 = getcurrentequipment(var4, var1);
-    var4.ref_12fb0 = getequipmentslotammo(var1);
-    takeequipment(var4, var1);
-    giveequipment(var4, var2, var1);
+    var_4.ref_12fb1 = getcurrentequipment(var_4, var_1);
+    var_4.ref_12fb0 = getequipmentslotammo(var_1);
+    takeequipment(var_4, var_1);
+    giveequipment(var_4, var_2, var_1);
   }
 }
 
-function ref_13a30(var0, var1, var2, var3) {
-  foreach(var5 in var0) {
-    if(istrue(var5.gulag)) {
+function ref_13a30(var_0, var_1, var_2, var_3) {
+  foreach(var_5 in var_0) {
+    if(istrue(var_5.gulag)) {
       continue;
     }
 
-    var6 = getcurrentequipment(var5, var1);
+    var_6 = getcurrentequipment(var_5, var_1);
 
-    if(!istrue(var3) && isDefined(var6) && var2 != var6) {
+    if(!istrue(var_3) && isDefined(var_6) && var_2 != var_6) {
       continue;
     }
 
-    takeequipment(var5, var1);
-    var7 = var5.ref_12fb1;
-    var8 = var5.ref_12fb0;
+    takeequipment(var_5, var_1);
+    var_7 = var_5.ref_12fb1;
+    var_8 = var_5.ref_12fb0;
 
-    if(isDefined(var7)) {
-      giveequipment(var5, var7, var1);
-      var5.ref_12fb1 = undefined;
+    if(isDefined(var_7)) {
+      giveequipment(var_5, var_7, var_1);
+      var_5.ref_12fb1 = undefined;
 
-      if(isDefined(var8)) {
-        setequipmentammo(var5, var7, var8);
-        var5.ref_12fb0 = undefined;
+      if(isDefined(var_8)) {
+        setequipmentammo(var_5, var_7, var_8);
+        var_5.ref_12fb0 = undefined;
       }
     }
   }
@@ -955,34 +955,34 @@ function ref_13a30(var0, var1, var2, var3) {
 function debughackequipment() {
   for(;;) {
     if(getdvarint("scr_debugHackEquipment") != 0) {
-      var0 = level.players[0];
-      var1 = undefined;
+      var_0 = level.players[0];
+      var_1 = undefined;
 
-      for(var2 = 1; var2 < level.players.size; var2++) {
-        if(var0 scripts\mp\utility\player::isenemy(level.players[var2])) {
-          var1 = level.players[var2];
+      for(var_2 = 1; var_2 < level.players.size; var_2++) {
+        if(var_0 scripts\mp\utility\player::isenemy(level.players[var_2])) {
+          var_1 = level.players[var_2];
           break;
         }
       }
 
-      if(!isDefined(var1)) {
+      if(!isDefined(var_1)) {
         iprintlnbold("Need a player on the other team to scr_debugHackEquipment");
         continue;
       }
 
-      var3 = var0 scripts\mp\weapons::getallequip();
-      var4 = undefined;
+      var_3 = var_0 scripts\mp\weapons::getallequip();
+      var_4 = undefined;
 
-      if(var3.size > 0) {
-        var4 = var3[0];
+      if(var_3.size > 0) {
+        var_4 = var_3[0];
       }
 
-      if(!isDefined(var4)) {
+      if(!isDefined(var_4)) {
         iprintlnbold("First player must have at least one piece of equipment to scr_debugHackEquipment");
         continue;
       }
 
-      hackequipment(var4, var1);
+      hackequipment(var_4, var_1);
     }
 
     waitframe();
@@ -997,8 +997,8 @@ function debugemp() {
         continue;
       }
 
-      var0 = level.players[1];
-      var0 scripts\mp\utility\weapon::_launchgrenade("emp_grenade_mp", (0, 0, 0), (0, 0, 0), 0.05, 0);
+      var_0 = level.players[1];
+      var_0 scripts\mp\utility\weapon::_launchgrenade("emp_grenade_mp", (0, 0, 0), (0, 0, 0), 0.05, 0);
     }
 
     waitframe();
@@ -1013,15 +1013,15 @@ function debugempdrone() {
         continue;
       }
 
-      var0 = level.players[0];
-      var1 = level.players[1];
-      var2 = spawnStruct();
-      var2.streakname = "emp_drone";
-      var2.owner = var1;
-      var2.id = scripts\cp_mp\utility\killstreak_utility::getuniquekillstreakid(var1);
-      var2.lifeid = 0;
-      var3 = var0.origin;
-      var4 = var1 scripts\cp_mp\killstreaks\emp_drone_targeted::empdrone_createdrone(var2, var3);
+      var_0 = level.players[0];
+      var_1 = level.players[1];
+      var_2 = spawnStruct();
+      var_2.streakname = "emp_drone";
+      var_2.owner = var_1;
+      var_2.id = scripts\cp_mp\utility\killstreak_utility::getuniquekillstreakid(var_1);
+      var_2.lifeid = 0;
+      var_3 = var_0.origin;
+      var_4 = var_1 scripts\cp_mp\killstreaks\emp_drone_targeted::empdrone_createdrone(var_2, var_3);
     }
 
     waitframe();
@@ -1031,9 +1031,9 @@ function debugempdrone() {
 function debugdestroyempdrones() {
   for(;;) {
     if(getdvarint("scr_testEMPDroneDestroy") != 0) {
-      foreach(var1 in level.activekillstreaks) {
-        if(isDefined(var1.streakinfo) && var1.streakinfo.streakname == "emp_drone") {
-          var1 scripts\cp_mp\killstreaks\emp_drone::empdrone_destroy();
+      foreach(var_1 in level.activekillstreaks) {
+        if(isDefined(var_1.streakinfo) && var_1.streakinfo.streakname == "emp_drone") {
+          var_1 scripts\cp_mp\killstreaks\emp_drone::empdrone_destroy();
         }
       }
     }
@@ -1044,22 +1044,22 @@ function debugdestroyempdrones() {
 
 function timeoflastexecute() {
   level.weapon_xp_iw8_pi_papa320 = [];
-  var0 = 0;
+  var_0 = 0;
 
-  foreach(var2 in level.equipment.table) {
-    if(!var2.usecellspawns) {
+  foreach(var_2 in level.equipment.table) {
+    if(!var_2.usecellspawns) {
       continue;
     }
 
-    if(var2.id <= 0) {
+    if(var_2.id <= 0) {
       continue;
     }
 
-    if(var2.defaultslot == "secondary") {
+    if(var_2.defaultslot == "secondary") {
       continue;
     }
 
-    level.weapon_xp_iw8_pi_papa320[var2.ref] = 1 << var0;
-    var0++;
+    level.weapon_xp_iw8_pi_papa320[var_2.ref] = 1 << var_0;
+    var_0++;
   }
 }

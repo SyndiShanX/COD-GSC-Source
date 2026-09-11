@@ -21,275 +21,275 @@ function register_ai_damage_callbacks() {
   level.agent_funcs["actor_enemy_lw_br_juggernaut"]["gametype_on_killed"] = &callbacksoldieragentgametypekilled;
 }
 
-function callbacksoldieragentdamaged(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13) {
-  var14 = self;
+function callbacksoldieragentdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
+  var_14 = self;
 
-  if(!isDefined(var14.agent_type)) {
+  if(!isDefined(var_14.agent_type)) {
     return;
   }
 
-  if(!isDefined(var12)) {
-    var12 = var5;
+  if(!isDefined(var_12)) {
+    var_12 = var_5;
   }
 
-  if(!isDefined(var13)) {
-    var13 = var2;
+  if(!isDefined(var_13)) {
+    var_13 = var_2;
   }
 
-  if(var4 != "MOD_SUICIDE") {
-    if(is_friendly_damage(var14, var0)) {
+  if(var_4 != "MOD_SUICIDE") {
+    if(is_friendly_damage(var_14, var_0)) {
       return;
     }
   }
 
-  if(!isDefined(var1)) {
-    var1 = var14;
+  if(!isDefined(var_1)) {
+    var_1 = var_14;
   }
 
-  var15 = should_do_damage_checks(var1, var2, var4, var5, var8, var14);
+  var_15 = should_do_damage_checks(var_1, var_2, var_4, var_5, var_8, var_14);
 
-  if(!var15) {
+  if(!var_15) {
     return;
   }
 
-  var3 |= 4;
-  var16 = var2;
-  var17 = var12.basename;
-  var18 = var12.classname;
-  var19 = is_suicide_bomber();
-  var20 = istrue(var1.inlaststand);
-  var21 = var4 == "MOD_MELEE";
-  var22 = scripts\engine\utility::isbulletdamage(var4) || var4 == "MOD_EXPLOSIVE_BULLET" && var8 != "none";
-  var23 = isDefined(var1) && isPlayer(var1);
-  var24 = isDefined(var1.owner) && isPlayer(var1.owner);
-  var25 = isDefined(var14.unittype) && var14.unittype == "juggernaut";
-  var26 = var22 && scripts\mp\utility\damage::isheadshot(var8, var4, var1);
-  var27 = var4 == "MOD_EXPLOSIVE_BULLET" && isDefined(var8) && var8 == "none" || var4 == "MOD_EXPLOSIVE" || var4 == "MOD_GRENADE_SPLASH" || var4 == "MOD_PROJECTILE" || var4 == "MOD_PROJECTILE_SPLASH" || var4 == "MOD_GRENADE";
-  var28 = var4 == "MOD_FIRE";
-  var29 = var23 && _hasperk(var1, "specialty_bulletdamage");
-  var30 = isDefined(var1.classname) && var1.classname == "script_vehicle" && isDefined(var1.owner) && isPlayer(var1.owner);
-  var31 = var30 && var4 == "MOD_CRUSH";
-  var32 = isDefined(var1.classname) && var1.classname == "script_vehicle" && !isDefined(var1.owner);
-  var33 = var32 && var4 == "MOD_CRUSH";
-  var34 = 0;
-  var35 = 0;
+  var_3 |= 4;
+  var_16 = var_2;
+  var_17 = var_12.basename;
+  var_18 = var_12.classname;
+  var_19 = is_suicide_bomber();
+  var_20 = istrue(var_1.inlaststand);
+  var_21 = var_4 == "MOD_MELEE";
+  var_22 = scripts\engine\utility::isbulletdamage(var_4) || var_4 == "MOD_EXPLOSIVE_BULLET" && var_8 != "none";
+  var_23 = isDefined(var_1) && isPlayer(var_1);
+  var_24 = isDefined(var_1.owner) && isPlayer(var_1.owner);
+  var_25 = isDefined(var_14.unittype) && var_14.unittype == "juggernaut";
+  var_26 = var_22 && scripts\mp\utility\damage::isheadshot(var_8, var_4, var_1);
+  var_27 = var_4 == "MOD_EXPLOSIVE_BULLET" && isDefined(var_8) && var_8 == "none" || var_4 == "MOD_EXPLOSIVE" || var_4 == "MOD_GRENADE_SPLASH" || var_4 == "MOD_PROJECTILE" || var_4 == "MOD_PROJECTILE_SPLASH" || var_4 == "MOD_GRENADE";
+  var_28 = var_4 == "MOD_FIRE";
+  var_29 = var_23 && _hasperk(var_1, "specialty_bulletdamage");
+  var_30 = isDefined(var_1.classname) && var_1.classname == "script_vehicle" && isDefined(var_1.owner) && isPlayer(var_1.owner);
+  var_31 = var_30 && var_4 == "MOD_CRUSH";
+  var_32 = isDefined(var_1.classname) && var_1.classname == "script_vehicle" && !isDefined(var_1.owner);
+  var_33 = var_32 && var_4 == "MOD_CRUSH";
+  var_34 = 0;
+  var_35 = 0;
 
-  if((var23 || var24) && istrue(var14.invulnerable) && var4 != "MOD_SUICIDE") {
+  if((var_23 || var_24) && istrue(var_14.invulnerable) && var_4 != "MOD_SUICIDE") {
     return;
   }
 
-  if(var25) {
-    if(var21) {
-      var2 = 0;
+  if(var_25) {
+    if(var_21) {
+      var_2 = 0;
     } else {
-      var2 *= 0.3;
+      var_2 *= 0.3;
 
-      if(var17 == "thermite_ap_mp" || var17 == "thermite_proj_cp") {
-        var2 *= 15;
+      if(var_17 == "thermite_ap_mp" || var_17 == "thermite_proj_cp") {
+        var_2 *= 15;
       }
 
-      if(var17 == "cruise_proj_mp") {
-        var2 = self.health + 1000;
+      if(var_17 == "cruise_proj_mp") {
+        var_2 = self.health + 1000;
       }
     }
 
-    if(var31) {
-      var36 = ["atv"];
+    if(var_31) {
+      var_36 = ["atv"];
 
-      if(scripts\engine\utility::array_contains(var36, var1.vehiclename)) {
-        var1 dodamage(10000, var1.origin, var14);
+      if(scripts\engine\utility::array_contains(var_36, var_1.vehiclename)) {
+        var_1 dodamage(10000, var_1.origin, var_14);
       } else {
         playsoundatpos(self.origin + (0, 0, 40), "gib_fullbody");
-        var2 = self.health + 1000;
+        var_2 = self.health + 1000;
       }
     }
-  } else if(var23) {
-    if(var17 == "throwingknife_mp") {
-      var2 = self.health + 1000;
+  } else if(var_23) {
+    if(var_17 == "throwingknife_mp") {
+      var_2 = self.health + 1000;
     }
 
-    if((var17 == "tur_bradley_mp" || var17 == "tur_bradley_ks_mp") && var4 == "MOD_PROJECTILE") {
-      var2 = self.health + 1000;
+    if((var_17 == "tur_bradley_mp" || var_17 == "tur_bradley_ks_mp") && var_4 == "MOD_PROJECTILE") {
+      var_2 = self.health + 1000;
     }
   }
 
   if(istrue(self.clearsoundsubmixmpbrinfilanim)) {
-    if(ref_132eb(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12)) {
+    if(ref_132eb(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12)) {
       return;
     }
 
-    if(var8 == "shield" && (var4 == "MOD_GRENADE" || var4 == "MOD_PROJECTILE") && var2 > 175) {
-      var2 *= 0.05;
-      var8 = "torso_lower";
+    if(var_8 == "shield" && (var_4 == "MOD_GRENADE" || var_4 == "MOD_PROJECTILE") && var_2 > 175) {
+      var_2 *= 0.05;
+      var_8 = "torso_lower";
     }
   }
 
-  if(var19) {
-    if(var17 == "emp_drone_player_mp") {
-      var2 = self.health + 1000;
+  if(var_19) {
+    if(var_17 == "emp_drone_player_mp") {
+      var_2 = self.health + 1000;
     }
   }
 
-  if(var31) {
+  if(var_31) {
     playsoundatpos(self.origin + (0, 0, 40), "gib_fullbody");
   }
 
-  if(var33) {
+  if(var_33) {
     if(istrue(self.trial_target_think_func)) {
-      var2 = 0;
-      var14 notify("veh_crush_damage", var1);
+      var_2 = 0;
+      var_14 notify("veh_crush_damage", var_1);
     }
   }
 
-  if(var23) {
-    var14.damaged_by_player = 1;
+  if(var_23) {
+    var_14.damaged_by_player = 1;
 
-    if(var26) {
-      if(var25) {
-        var2 = bink_save_hack(var2, var5, var18, var4, var1);
+    if(var_26) {
+      if(var_25) {
+        var_2 = bink_save_hack(var_2, var_5, var_18, var_4, var_1);
       }
     }
 
-    if(var29) {
-      var2 *= 2;
+    if(var_29) {
+      var_2 *= 2;
     }
 
-    if(var27) {
-      var37 = var2 * 2.5;
+    if(var_27) {
+      var_37 = var_2 * 2.5;
 
       if(isDefined(level.explosivedamagemod)) {
-        var37 *= level.explosivedamagemod;
+        var_37 *= level.explosivedamagemod;
       }
 
-      var2 += var37;
+      var_2 += var_37;
     }
 
-    if(var28) {
-      var2 += var2 * 3.5;
+    if(var_28) {
+      var_2 += var_2 * 3.5;
     }
 
-    if(var21 && !var25) {
-      if(istrue(var14.immune_to_melee_damage)) {
-        var2 = 0;
-        var14 notify("melee_hit_on_melee_immune", var1);
+    if(var_21 && !var_25) {
+      if(istrue(var_14.immune_to_melee_damage)) {
+        var_2 = 0;
+        var_14 notify("melee_hit_on_melee_immune", var_1);
       } else {
-        var2 = 150;
+        var_2 = 150;
 
-        if(issubstr(var17, "iw8_knife_mp")) {
-          var2 = 350;
+        if(issubstr(var_17, "iw8_knife_mp")) {
+          var_2 = 350;
         }
 
-        if(issubstr(var17, "iw8_me_")) {
-          var2 = 350;
-        } else if(isDefined(var12.muzzle)) {
-          if(issubstr(var12.muzzle, "muzzlemelee")) {
-            var2 = 350;
+        if(issubstr(var_17, "iw8_me_")) {
+          var_2 = 350;
+        } else if(isDefined(var_12.muzzle)) {
+          if(issubstr(var_12.muzzle, "muzzlemelee")) {
+            var_2 = 350;
           }
 
-          if(issubstr(var12.muzzle, "bayonet")) {
-            var2 = 350;
+          if(issubstr(var_12.muzzle, "bayonet")) {
+            var_2 = 350;
           }
         }
       }
     }
 
-    if(var22) {
-      if(!var26) {
+    if(var_22) {
+      if(!var_26) {
         if(!isDefined(level.bullet_damage_scalar)) {
           level.bullet_damage_scalar = 1;
         }
 
-        var2 *= level.bullet_damage_scalar;
+        var_2 *= level.bullet_damage_scalar;
       }
 
-      var2 *= 1;
+      var_2 *= 1;
     }
 
     if(scripts\mp\utility\game::getgametype() == "br") {
-      var38 = isDefined(var12) && scripts\mp\utility\weapon::iskillstreakweapon(var12.basename);
-      var39 = scripts\mp\damage::cac_modified_damage(var14, var1, var2, var4, var12, var6, var7, var8, var0, 0, var3, var38, var13);
-      var2 = var39[0];
-      var34 = var39[1];
-      var35 = var39[2];
+      var_38 = isDefined(var_12) && scripts\mp\utility\weapon::iskillstreakweapon(var_12.basename);
+      var_39 = scripts\mp\damage::cac_modified_damage(var_14, var_1, var_2, var_4, var_12, var_6, var_7, var_8, var_0, 0, var_3, var_38, var_13);
+      var_2 = var_39[0];
+      var_34 = var_39[1];
+      var_35 = var_39[2];
 
-      if(scripts\mp\damage::armorvest_washit(var1) || scripts\mp\damage::helmet_washit(var1)) {
-        var3 |= level.ss_circletick;
-        var1 playsoundtoplayer("hit_marker_3d_armor", var1);
+      if(scripts\mp\damage::armorvest_washit(var_1) || scripts\mp\damage::helmet_washit(var_1)) {
+        var_3 |= level.ss_circletick;
+        var_1 playsoundtoplayer("hit_marker_3d_armor", var_1);
       }
 
-      if(scripts\mp\damage::armorvest_wasbroke(var1) || scripts\mp\damage::helmet_wasbroke(var1)) {
-        var3 |= level.sr_next_ammo_restock_time;
-        var1 playsoundtoplayer("hit_marker_3d_armor_break", var1);
+      if(scripts\mp\damage::armorvest_wasbroke(var_1) || scripts\mp\damage::helmet_wasbroke(var_1)) {
+        var_3 |= level.sr_next_ammo_restock_time;
+        var_1 playsoundtoplayer("hit_marker_3d_armor_break", var_1);
       }
 
       if(isDefined(level.ref_11ffb)) {
-        var3 |= [[level.ref_11ffb]](var14);
+        var_3 |= [[level.ref_11ffb]](var_14);
       }
     }
   }
 
-  if(isDefined(var17) && var17 == "tur_bradley_mp" && isDefined(var4) && var4 == "MOD_PROJECTILE_SPLASH") {
-    var2 *= 2;
+  if(isDefined(var_17) && var_17 == "tur_bradley_mp" && isDefined(var_4) && var_4 == "MOD_PROJECTILE_SPLASH") {
+    var_2 *= 2;
   }
 
-  if(var23 || var24 || var31) {
-    if(isDefined(var12)) {
-      if(var24) {
-        var1 = var1.owner;
+  if(var_23 || var_24 || var_31) {
+    if(isDefined(var_12)) {
+      if(var_24) {
+        var_1 = var_1.owner;
       }
 
-      binoculars_onstateupdatefunc(self, var1, var0, var12, var2, var6, var7, var8, var9, var4);
+      binoculars_onstateupdatefunc(self, var_1, var_0, var_12, var_2, var_6, var_7, var_8, var_9, var_4);
     }
 
-    if(var2 >= var14.health) {
-      if(var12.basename == "none") {
-        if(isDefined(var0) && isDefined(var0.weapon_name)) {
-          var12 = getcompleteweaponname(var0.weapon_name);
+    if(var_2 >= var_14.health) {
+      if(var_12.basename == "none") {
+        if(isDefined(var_0) && isDefined(var_0.weapon_name)) {
+          var_12 = getcompleteweaponname(var_0.weapon_name);
         }
       }
 
-      var40 = spawnStruct();
-      var40.einflictor = var0;
-      var40.eattacker = var1;
-      var40.idamage = var2;
-      var40.idflags = var3;
-      var40.smeansofdeath = var4;
-      var40.sweapon = var5;
-      var40.vpoint = var6;
-      var40.vdir = var7;
-      var40.shitloc = var8;
-      var40.timeoffset = var9;
-      var40.modelindex = var10;
-      var40.partname = var11;
-      var40.objweapon = var12;
+      var_40 = spawnStruct();
+      var_40.einflictor = var_0;
+      var_40.eattacker = var_1;
+      var_40.idamage = var_2;
+      var_40.idflags = var_3;
+      var_40.smeansofdeath = var_4;
+      var_40.sweapon = var_5;
+      var_40.vpoint = var_6;
+      var_40.vdir = var_7;
+      var_40.shitloc = var_8;
+      var_40.timeoffset = var_9;
+      var_40.modelindex = var_10;
+      var_40.partname = var_11;
+      var_40.objweapon = var_12;
     }
   }
 
-  var2 = int(min(var2, var14.maxhealth));
+  var_2 = int(min(var_2, var_14.maxhealth));
 
-  if(is_flashbang(var17, var12, var0) && var4 == "MOD_GRENADE_SPLASH") {
-    var14 notify("flashbang", var8, 1, undefined, var1, "allies");
+  if(is_flashbang(var_17, var_12, var_0) && var_4 == "MOD_GRENADE_SPLASH") {
+    var_14 notify("flashbang", var_8, 1, undefined, var_1, "allies");
   }
 
-  if(is_gas(var17) && var4 == "MOD_GRENADE_SPLASH") {
-    var14 notify("flashbang", var8, 1, undefined, var1, "allies");
+  if(is_gas(var_17) && var_4 == "MOD_GRENADE_SPLASH") {
+    var_14 notify("flashbang", var_8, 1, undefined, var_1, "allies");
   }
 
-  if(isDefined(var14.unittype) && isDefined(level.agent_funcs[var14.unittype]) && isDefined(level.agent_funcs[var14.unittype]["on_damaged_finished"])) {
-    var14[[level.agent_funcs[var14.unittype]["on_damaged_finished"]]](var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, 0, var10, var11, var34, var35);
+  if(isDefined(var_14.unittype) && isDefined(level.agent_funcs[var_14.unittype]) && isDefined(level.agent_funcs[var_14.unittype]["on_damaged_finished"])) {
+    var_14[[level.agent_funcs[var_14.unittype]["on_damaged_finished"]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_10, var_11, var_34, var_35);
     return;
   }
 
-  var14[[level.agent_funcs[var14.agent_type]["on_damaged_finished"]]](var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, 0, var10, var11, var34, var35);
+  var_14[[level.agent_funcs[var_14.agent_type]["on_damaged_finished"]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_10, var_11, var_34, var_35);
 }
 
-function callbacksoldieragentgametypedamagefinished(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14) {
-  if(var4 == "MOD_SUICIDE") {
+function callbacksoldieragentgametypedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14) {
+  if(var_4 == "MOD_SUICIDE") {
     return;
   }
 
-  process_damage_feedback(var0, var1, var2, var3, var4, var5, var7, var7, var8, var9, self, var13, var14);
-  var3 = 0;
+  process_damage_feedback(var_0, var_1, var_2, var_3, var_4, var_5, var_7, var_7, var_8, var_9, self, var_13, var_14);
+  var_3 = 0;
 
   if(!isDefined(self.painsound)) {
     return;
@@ -305,14 +305,14 @@ function callbacksoldieragentgametypedamagefinished(var0, var1, var2, var3, var4
   }
 }
 
-function callbacksoldieragentgametypekilled(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
+function callbacksoldieragentgametypekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   deactivateagent();
 
   if(isDefined(level.spawnloopupdatefunc)) {
-    [[level.spawnloopupdatefunc]](var1, var4);
+    [[level.spawnloopupdatefunc]](var_1, var_4);
   }
 
-  if(isDefined(var3) && var3 == "MOD_SUICIDE") {
+  if(isDefined(var_3) && var_3 == "MOD_SUICIDE") {
     return;
   }
 
@@ -321,38 +321,38 @@ function callbacksoldieragentgametypekilled(var0, var1, var2, var3, var4, var5, 
   }
 
   if(isDefined(self.isinlaststand)) {
-    var9 = spawnStruct();
-    var9.einflictor = var0;
-    var9.eattacker = var1;
-    var9.idamage = var2;
-    var9.smeansofdeath = var3;
-    var9.sweapon = var4;
-    var9.vdir = var5;
-    var9.shitloc = var6;
-    var9.timeoffset = var7;
-    var9.deathanimduration = var8;
-    GscBinSkip1(0x74, self.isinlaststand, var9);
+    var_9 = spawnStruct();
+    var_9.einflictor = var_0;
+    var_9.eattacker = var_1;
+    var_9.idamage = var_2;
+    var_9.smeansofdeath = var_3;
+    var_9.sweapon = var_4;
+    var_9.vdir = var_5;
+    var_9.shitloc = var_6;
+    var_9.timeoffset = var_7;
+    var_9.deathanimduration = var_8;
+    GscBinSkip1(0x74, self.isinlaststand, var_9);
   }
 
-  if(isPlayer(var2)) {
-    thread handle_death_sounds(level, var2, self);
+  if(isPlayer(var_2)) {
+    thread handle_death_sounds(level, var_2, self);
   }
 
   if(isDefined(level.removefromtargetmarkeronkillfunc)) {
     level thread[[level.removefromtargetmarkeronkillfunc]](self);
   }
 
-  var10 = 0;
-  process_damage_feedback(var1, var2, var3, var10, var4, var5, var6, var6, var7, var8, self, 0, 0);
+  var_10 = 0;
+  process_damage_feedback(var_1, var_2, var_3, var_10, var_4, var_5, var_6, var_6, var_7, var_8, self, 0, 0);
 }
 
-function is_friendly_damage(var0, var1) {
-  if(isDefined(var1)) {
-    if(isDefined(var1.team) && var1.team == var0.team) {
+function is_friendly_damage(var_0, var_1) {
+  if(isDefined(var_1)) {
+    if(isDefined(var_1.team) && var_1.team == var_0.team) {
       return true;
     }
 
-    if(isDefined(var1.owner) && isDefined(var1.owner.team) && var1.owner.team == var0.team) {
+    if(isDefined(var_1.owner) && isDefined(var_1.owner.team) && var_1.owner.team == var_0.team) {
       return true;
     }
   }
@@ -360,12 +360,12 @@ function is_friendly_damage(var0, var1) {
   return false;
 }
 
-function should_do_damage_checks(var0, var1, var2, var3, var4, var5) {
-  if(!isDefined(var3)) {
+function should_do_damage_checks(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(!isDefined(var_3)) {
     return false;
-  } else if(var0 != var5 && isDefined(var0.team) && var0.team == var5.team) {
+  } else if(var_0 != var_5 && isDefined(var_0.team) && var_0.team == var_5.team) {
     return false;
-  } else if(isDefined(level.should_do_damage_check_func) && ![[level.should_do_damage_check_func]](var0, var1, var2, var3, var4, var5)) {
+  } else if(isDefined(level.should_do_damage_check_func) && ![[level.should_do_damage_check_func]](var_0, var_1, var_2, var_3, var_4, var_5)) {
     return false;
   }
 
@@ -376,118 +376,118 @@ function is_suicide_bomber() {
   return istrue(isDefined(self.unittype) && self.unittype == "suicidebomber");
 }
 
-function bink_save_hack(var0, var1, var2, var3, var4) {
-  var5 = var0;
+function bink_save_hack(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = var_0;
 
-  switch (var2) {
+  switch (var_2) {
     case "rifle":
-      var5 = min(var0, 84);
+      var_5 = min(var_0, 84);
       break;
     case "smg":
-      var5 = min(var0, 110);
+      var_5 = min(var_0, 110);
       break;
     case "mg":
-      var5 = min(var0, 105);
+      var_5 = min(var_0, 105);
       break;
     case "spread":
-      var5 = min(var0, 84);
+      var_5 = min(var_0, 84);
       break;
     case "pistol":
-      var5 = min(var0, 75);
+      var_5 = min(var_0, 75);
       break;
     case "sniper":
-      var5 = min(var0, 130);
+      var_5 = min(var_0, 130);
       break;
     default:
-      var5 = var0;
+      var_5 = var_0;
       break;
   }
 
-  return var0;
+  return var_0;
 }
 
-function binoculars_onstateupdatefunc(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
-  if(!isDefined(var0.attackerdata)) {
-    var0.attackerdata = [];
+function binoculars_onstateupdatefunc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  if(!isDefined(var_0.attackerdata)) {
+    var_0.attackerdata = [];
   }
 
-  if(!isDefined(var1.guid) && (isagent(var1) || isPlayer(var1))) {
-    var1.guid = var1 scripts\mp\utility\player::getuniqueid();
+  if(!isDefined(var_1.guid) && (isagent(var_1) || isPlayer(var_1))) {
+    var_1.guid = var_1 scripts\mp\utility\player::getuniqueid();
   }
 
-  if(!isDefined(var1.guid)) {
+  if(!isDefined(var_1.guid)) {
     return;
   }
 
-  if(!isDefined(var0.attackerdata[var1.guid])) {
-    var0.attackers[var1.guid] = var1;
-    var0.attackerdata[var1.guid] = spawnStruct();
-    var0.attackerdata[var1.guid].damage = 0;
-    var0.attackerdata[var1.guid].attackerent = var1;
-    var0.attackerdata[var1.guid].firsttimedamaged = gettime();
-    var0.attackerdata[var1.guid].hitcount = 1;
+  if(!isDefined(var_0.attackerdata[var_1.guid])) {
+    var_0.attackers[var_1.guid] = var_1;
+    var_0.attackerdata[var_1.guid] = spawnStruct();
+    var_0.attackerdata[var_1.guid].damage = 0;
+    var_0.attackerdata[var_1.guid].attackerent = var_1;
+    var_0.attackerdata[var_1.guid].firsttimedamaged = gettime();
+    var_0.attackerdata[var_1.guid].hitcount = 1;
   } else {
-    var0.attackerdata[var1.guid].hitcount++;
+    var_0.attackerdata[var_1.guid].hitcount++;
   }
 
-  if(scripts\mp\utility\weapon::iscacprimaryweapon(var3) && !scripts\mp\utility\weapon::iscacsecondaryweapon(var3)) {
-    var0.attackerdata[var1.guid].diddamagewithprimary = 1;
+  if(scripts\mp\utility\weapon::iscacprimaryweapon(var_3) && !scripts\mp\utility\weapon::iscacsecondaryweapon(var_3)) {
+    var_0.attackerdata[var_1.guid].diddamagewithprimary = 1;
   }
 
-  if(isDefined(var9) && var9 != "MOD_MELEE") {
-    var0.attackerdata[var1.guid].didnonmeleedamage = 1;
+  if(isDefined(var_9) && var_9 != "MOD_MELEE") {
+    var_0.attackerdata[var_1.guid].didnonmeleedamage = 1;
   }
 
-  var10 = scripts\mp\utility\weapon::getequipmenttype(var3.basename);
+  var_10 = scripts\mp\utility\weapon::getequipmenttype(var_3.basename);
 
-  if(isDefined(var10)) {
-    if(var10 == "lethal") {
-      var0.attackerdata[var1.guid].diddamagewithlethalequipment = 1;
+  if(isDefined(var_10)) {
+    if(var_10 == "lethal") {
+      var_0.attackerdata[var_1.guid].diddamagewithlethalequipment = 1;
     }
 
-    if(var10 == "tactical") {
-      var0.attackerdata[var1.guid].diddamagewithtacticalequipment = 1;
+    if(var_10 == "tactical") {
+      var_0.attackerdata[var_1.guid].diddamagewithtacticalequipment = 1;
     }
   }
 
-  var0.attackerdata[var1.guid].damage += var4;
-  var0.attackerdata[var1.guid].weapon = createheadicon(var3);
-  var0.attackerdata[var1.guid].objweapon = var3;
-  var0.attackerdata[var1.guid].vpoint = var5;
-  var0.attackerdata[var1.guid].vdir = var6;
-  var0.attackerdata[var1.guid].shitloc = var7;
-  var0.attackerdata[var1.guid].psoffsettime = var8;
-  var0.attackerdata[var1.guid].smeansofdeath = var9;
-  var0.attackerdata[var1.guid].attackerent = var1;
-  var0.attackerdata[var1.guid].lasttimedamaged = gettime();
+  var_0.attackerdata[var_1.guid].damage += var_4;
+  var_0.attackerdata[var_1.guid].weapon = createheadicon(var_3);
+  var_0.attackerdata[var_1.guid].objweapon = var_3;
+  var_0.attackerdata[var_1.guid].vpoint = var_5;
+  var_0.attackerdata[var_1.guid].vdir = var_6;
+  var_0.attackerdata[var_1.guid].shitloc = var_7;
+  var_0.attackerdata[var_1.guid].psoffsettime = var_8;
+  var_0.attackerdata[var_1.guid].smeansofdeath = var_9;
+  var_0.attackerdata[var_1.guid].attackerent = var_1;
+  var_0.attackerdata[var_1.guid].lasttimedamaged = gettime();
 
-  if(isDefined(var2) && !isPlayer(var2) && isDefined(var2.primaryweapon)) {
-    var0.attackerdata[var1.guid].sprimaryweapon = var2.primaryweapon;
+  if(isDefined(var_2) && !isPlayer(var_2) && isDefined(var_2.primaryweapon)) {
+    var_0.attackerdata[var_1.guid].sprimaryweapon = var_2.primaryweapon;
     return;
   }
 
-  if(isDefined(var1) && isPlayer(var1) && !nullweapon(var1 getcurrentprimaryweapon())) {
-    var0.attackerdata[var1.guid].sprimaryweapon = createheadicon(var1 getcurrentprimaryweapon());
+  if(isDefined(var_1) && isPlayer(var_1) && !nullweapon(var_1 getcurrentprimaryweapon())) {
+    var_0.attackerdata[var_1.guid].sprimaryweapon = createheadicon(var_1 getcurrentprimaryweapon());
     return;
   }
 
-  var0.attackerdata[var1.guid].sprimaryweapon = undefined;
+  var_0.attackerdata[var_1.guid].sprimaryweapon = undefined;
 }
 
-function is_flashbang(var0, var1, var2) {
-  if(isDefined(var1.underbarrel)) {
-    var3 = scripts\mp\utility\weapon::attachmentmap_tobase(var1.underbarrel);
+function is_flashbang(var_0, var_1, var_2) {
+  if(isDefined(var_1.underbarrel)) {
+    var_3 = scripts\mp\utility\weapon::attachmentmap_tobase(var_1.underbarrel);
 
-    if(var3 == "glflash" || var3 == "glconc") {
+    if(var_3 == "glflash" || var_3 == "glconc") {
       return true;
     }
   }
 
-  return var0 == "flash_grenade_mp";
+  return var_0 == "flash_grenade_mp";
 }
 
-function is_gas(var0) {
-  return var0 == "gas_mp";
+function is_gas(var_0) {
+  return var_0 == "gas_mp";
 }
 
 function deactivateagent() {
@@ -513,11 +513,11 @@ function deactivateagent() {
   self.target = undefined;
   self.mutations = undefined;
 
-  foreach(var1 in level.characters) {
-    if(isDefined(var1.attackers)) {
-      foreach(var3 in var1.attackers) {
-        if(var3 == self) {
-          var1.attackers[var4] = undefined;
+  foreach(var_1 in level.characters) {
+    if(isDefined(var_1.attackers)) {
+      foreach(var_3 in var_1.attackers) {
+        if(var_3 == self) {
+          var_1.attackers[var_4] = undefined;
         }
       }
     }
@@ -532,183 +532,183 @@ function deactivateagent() {
 }
 
 function removefromparticipantsarray() {
-  var0 = 0;
+  var_0 = 0;
 
-  for(var1 = 0; var1 < level.participants.size; var1++) {
-    if(level.participants[var1] == self) {
-      var0 = 1;
+  for(var_1 = 0; var_1 < level.participants.size; var_1++) {
+    if(level.participants[var_1] == self) {
+      var_0 = 1;
 
-      while(var1 < level.participants.size - 1) {
-        level.participants[var1] = level.participants[var1 + 1];
-        var1++;
+      while(var_1 < level.participants.size - 1) {
+        level.participants[var_1] = level.participants[var_1 + 1];
+        var_1++;
       }
 
-      level.participants[var1] = undefined;
+      level.participants[var_1] = undefined;
       break;
     }
   }
 }
 
 function removefromcharactersarray() {
-  var0 = 0;
+  var_0 = 0;
 
-  for(var1 = 0; var1 < level.characters.size; var1++) {
-    if(level.characters[var1] == self) {
-      var0 = 1;
+  for(var_1 = 0; var_1 < level.characters.size; var_1++) {
+    if(level.characters[var_1] == self) {
+      var_0 = 1;
 
-      while(var1 < level.characters.size - 1) {
-        level.characters[var1] = level.characters[var1 + 1];
-        var1++;
+      while(var_1 < level.characters.size - 1) {
+        level.characters[var_1] = level.characters[var_1 + 1];
+        var_1++;
       }
 
-      level.characters[var1] = undefined;
+      level.characters[var_1] = undefined;
       break;
     }
   }
 }
 
-function handle_death_sounds(var0, var1, var2) {
-  if(!scripts\engine\utility::isbulletdamage(var2)) {
+function handle_death_sounds(var_0, var_1, var_2) {
+  if(!scripts\engine\utility::isbulletdamage(var_2)) {
     return;
   }
 
-  if(isDefined(var1.deathsound) && soundexists(var1.deathsound)) {
-    playsoundatpos(var1.origin, var1.deathsound);
+  if(isDefined(var_1.deathsound) && soundexists(var_1.deathsound)) {
+    playsoundatpos(var_1.origin, var_1.deathsound);
   }
 
-  var3 = var1;
+  var_3 = var_1;
 
-  if(var2 == "MOD_HEAD_SHOT") {
-    var3 playsoundtoplayer("bullet_impact_headshot", var0);
-    var3 playsoundtoteam("bullet_impact_headshot_npc", var0.team, var0);
+  if(var_2 == "MOD_HEAD_SHOT") {
+    var_3 playsoundtoplayer("bullet_impact_headshot", var_0);
+    var_3 playsoundtoteam("bullet_impact_headshot_npc", var_0.team, var_0);
     return;
   }
 
-  var3 playsoundtoplayer("mp_kill_alert", var0);
-  var3 playsoundtoteam("mp_hit_alert_final_npc", var0.team, var0);
+  var_3 playsoundtoplayer("mp_kill_alert", var_0);
+  var_3 playsoundtoteam("mp_hit_alert_final_npc", var_0.team, var_0);
 }
 
-function process_damage_feedback(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12) {
-  var13 = isDefined(var1) && isDefined(var1.classname) && isDefined(var1.classname) && !isDefined(var1.gunner) && (var1.classname == "script_vehicle" || var1.classname == "misc_turret" || var1.classname == "script_model");
-  var14 = undefined;
+function process_damage_feedback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
+  var_13 = isDefined(var_1) && isDefined(var_1.classname) && isDefined(var_1.classname) && !isDefined(var_1.gunner) && (var_1.classname == "script_vehicle" || var_1.classname == "misc_turret" || var_1.classname == "script_model");
+  var_14 = undefined;
 
-  if(!isDefined(var11)) {
-    var11 = 0;
+  if(!isDefined(var_11)) {
+    var_11 = 0;
   }
 
-  if(!isDefined(var12)) {
-    var12 = 0;
+  if(!isDefined(var_12)) {
+    var_12 = 0;
   }
 
-  if(var13 && isDefined(var1.gunner)) {
-    var14 = var1.gunner;
-  } else if(isDefined(var1) && isDefined(var1.owner)) {
-    var14 = var1.owner;
+  if(var_13 && isDefined(var_1.gunner)) {
+    var_14 = var_1.gunner;
+  } else if(isDefined(var_1) && isDefined(var_1.owner)) {
+    var_14 = var_1.owner;
   } else {
-    var14 = var1;
+    var_14 = var_1;
   }
 
-  var15 = scripts\engine\utility::isbulletdamage(var4);
-  var16 = scripts\engine\utility::ter_op(var15 && scripts\mp\utility\weapon::isprimaryweapon(var5), "standardspread", "standard");
-  var17 = 0;
+  var_15 = scripts\engine\utility::isbulletdamage(var_4);
+  var_16 = scripts\engine\utility::ter_op(var_15 && scripts\mp\utility\weapon::isprimaryweapon(var_5), "standardspread", "standard");
+  var_17 = 0;
 
-  if(isDefined(var1) && isDefined(var1.class) && var1.class == "engineer") {
-    if(isDefined(var4) && scripts\engine\utility::isbulletdamage(var4)) {
-      var17 = 1;
+  if(isDefined(var_1) && isDefined(var_1.class) && var_1.class == "engineer") {
+    if(isDefined(var_4) && scripts\engine\utility::isbulletdamage(var_4)) {
+      var_17 = 1;
     }
   }
 
-  if(isDefined(var14) && var14 != var10 && var2 + var11 + var12 > 0 && (!isDefined(var8) || var8 != "shield")) {
-    var18 = !isalive(var10) || isagent(var10) && var2 >= var10.health;
+  if(isDefined(var_14) && var_14 != var_10 && var_2 + var_11 + var_12 > 0 && (!isDefined(var_8) || var_8 != "shield")) {
+    var_18 = !isalive(var_10) || isagent(var_10) && var_2 >= var_10.health;
 
     if(self.asm.archetype == "soldier_lw_br") {
-      var18 = !isalive(var10);
+      var_18 = !isalive(var_10);
     }
 
     if(istrue(self.ref_14693)) {
-      var18 = !isalive(var10);
+      var_18 = !isalive(var_10);
     }
 
-    if(istrue(var10.isjuggernaut)) {
-      var16 = "hitjuggernaut";
-    } else if(var10 scripts\mp\heavyarmor::hasheavyarmor() || var10 scripts\mp\heavyarmor::hasheavyarmorinvulnerability() || scripts\mp\damage::heavyarmorvest_washit(var1)) {
-      var16 = "hitarmorheavy";
-    } else if(var3 &level.idflags_stun) {
-      var16 = "stun";
-    } else if(scripts\mp\utility\damage::istacticaldamage(var5, var4) && _hasperk(var10, "specialty_stun_resistance") && !_hasperk(var10, "penalty_stun_more")) {
-      var16 = "hittacresist";
-    } else if(isexplosivedamagemod(var4) && _hasperk(var10, "specialty_blastshield") && !scripts\mp\utility\damage::damage_should_ignore_blast_shield(var1, var10, var5, var4, var0, var8)) {
-      var16 = "hitblastshield";
-    } else if(scripts\mp\utility\damage::hashealthshield(var10)) {
-      var16 = "hitarmorlight";
-    } else if(scripts\mp\damage::armorvest_wasbroke(var1)) {
-      var16 = "hitarmorlightbreak";
-    } else if(scripts\mp\damage::helmet_wasbroke(var1)) {
-      var16 = "hithelmetlightbreak";
-    } else if(scripts\mp\damage::armorvest_washit(var1)) {
-      var16 = "hitarmorlight";
-    } else if(scripts\mp\damage::helmet_washit(var1)) {
-      var16 = "hithelmetlight";
-    } else if(var11 > 0) {
-      var16 = "hitarmorlight";
-    } else if(_hasperk(var10, "specialty_pistoldeath") && isDefined(var10.inlaststand) && var10.inlaststand == 1 && !var10.hasshownlaststandicon) {
-      var10.hasshownlaststandicon = 1;
-      var16 = "hitlaststand";
+    if(istrue(var_10.isjuggernaut)) {
+      var_16 = "hitjuggernaut";
+    } else if(var_10 scripts\mp\heavyarmor::hasheavyarmor() || var_10 scripts\mp\heavyarmor::hasheavyarmorinvulnerability() || scripts\mp\damage::heavyarmorvest_washit(var_1)) {
+      var_16 = "hitarmorheavy";
+    } else if(var_3 &level.idflags_stun) {
+      var_16 = "stun";
+    } else if(scripts\mp\utility\damage::istacticaldamage(var_5, var_4) && _hasperk(var_10, "specialty_stun_resistance") && !_hasperk(var_10, "penalty_stun_more")) {
+      var_16 = "hittacresist";
+    } else if(isexplosivedamagemod(var_4) && _hasperk(var_10, "specialty_blastshield") && !scripts\mp\utility\damage::damage_should_ignore_blast_shield(var_1, var_10, var_5, var_4, var_0, var_8)) {
+      var_16 = "hitblastshield";
+    } else if(scripts\mp\utility\damage::hashealthshield(var_10)) {
+      var_16 = "hitarmorlight";
+    } else if(scripts\mp\damage::armorvest_wasbroke(var_1)) {
+      var_16 = "hitarmorlightbreak";
+    } else if(scripts\mp\damage::helmet_wasbroke(var_1)) {
+      var_16 = "hithelmetlightbreak";
+    } else if(scripts\mp\damage::armorvest_washit(var_1)) {
+      var_16 = "hitarmorlight";
+    } else if(scripts\mp\damage::helmet_washit(var_1)) {
+      var_16 = "hithelmetlight";
+    } else if(var_11 > 0) {
+      var_16 = "hitarmorlight";
+    } else if(_hasperk(var_10, "specialty_pistoldeath") && isDefined(var_10.inlaststand) && var_10.inlaststand == 1 && !var_10.hasshownlaststandicon) {
+      var_10.hasshownlaststandicon = 1;
+      var_16 = "hitlaststand";
     }
 
-    if(isDefined(var10.playerforcespawn) && var10.playerforcespawn.size > 1) {
-      var16 = "cp_relic_buff";
+    if(isDefined(var_10.playerforcespawn) && var_10.playerforcespawn.size > 1) {
+      var_16 = "cp_relic_buff";
     }
 
-    var19 = "standard";
+    var_19 = "standard";
 
-    if(var16 == "hitarmorlightbreak") {
-      if(var19 == "standardspread") {
-        var19 = "standardspreadarmor";
+    if(var_16 == "hitarmorlightbreak") {
+      if(var_19 == "standardspread") {
+        var_19 = "standardspreadarmor";
       } else {
-        var19 = "standardarmor";
+        var_19 = "standardarmor";
       }
     }
 
-    var20 = weaponclass(var5);
-    var21 = var20 == "spread";
-    var22 = !var21 && scripts\mp\utility\damage::isheadshot(var8, var4, var1);
-    var23 = 1;
-    var24 = var4 == "MOD_MELEE";
-    var25 = "" + gettime();
+    var_20 = weaponclass(var_5);
+    var_21 = var_20 == "spread";
+    var_22 = !var_21 && scripts\mp\utility\damage::isheadshot(var_8, var_4, var_1);
+    var_23 = 1;
+    var_24 = var_4 == "MOD_MELEE";
+    var_25 = "" + gettime();
 
-    if(!var24 && var21 && isDefined(var14.pelletdmg) && isDefined(var14.pelletdmg[var25]) && isDefined(var14.pelletdmg[var25][var10.guid]) && var14.pelletdmg[var25][var10.guid] > 1) {
-      if(var18) {
-        var24 = 1;
+    if(!var_24 && var_21 && isDefined(var_14.pelletdmg) && isDefined(var_14.pelletdmg[var_25]) && isDefined(var_14.pelletdmg[var_25][var_10.guid]) && var_14.pelletdmg[var_25][var_10.guid] > 1) {
+      if(var_18) {
+        var_24 = 1;
       } else {
-        var23 = 0;
+        var_23 = 0;
       }
     }
 
-    var26 = undefined;
+    var_26 = undefined;
 
-    if(var10.health <= var2) {
-      var26 = 1;
+    if(var_10.health <= var_2) {
+      var_26 = 1;
     }
 
     if(self.asm.archetype == "soldier_lw_br") {
-      var26 = var10.health <= 0;
+      var_26 = var_10.health <= 0;
     }
 
     if(istrue(self.ref_14693)) {
-      var26 = var10.health <= 0;
+      var_26 = var_10.health <= 0;
     }
 
-    var22 = scripts\mp\utility\damage::isheadshot(var8, var4, var1);
+    var_22 = scripts\mp\utility\damage::isheadshot(var_8, var_4, var_1);
 
-    if(var23) {
-      if(isDefined(var1)) {
-        if(isDefined(var1.owner)) {
-          var1.owner thread scripts\mp\damagefeedback::updatedamagefeedback(var16, var26, var22, var19);
+    if(var_23) {
+      if(isDefined(var_1)) {
+        if(isDefined(var_1.owner)) {
+          var_1.owner thread scripts\mp\damagefeedback::updatedamagefeedback(var_16, var_26, var_22, var_19);
           return;
         }
 
-        var1 thread scripts\mp\damagefeedback::updatedamagefeedback(var16, var26, var22, var19);
+        var_1 thread scripts\mp\damagefeedback::updatedamagefeedback(var_16, var_26, var_22, var_19);
         return;
       }
 
@@ -719,97 +719,97 @@ function process_damage_feedback(var0, var1, var2, var3, var4, var5, var6, var7,
   }
 }
 
-function _hasperk(var0) {
-  var1 = self.perks;
+function _hasperk(var_0) {
+  var_1 = self.perks;
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return false;
   }
 
-  if(isDefined(var1[var0])) {
+  if(isDefined(var_1[var_0])) {
     return true;
   }
 
   return false;
 }
 
-function ref_132eb(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12) {
-  var13 = var12.basename;
-  var14 = 0;
+function ref_132eb(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
+  var_13 = var_12.basename;
+  var_14 = 0;
 
-  if(isDefined(var0) && (issubstr(var13, "thermite") || isDefined(var12.magazine) && issubstr(var12.magazine, "boltfire") || isDefined(var0.weapon_name) && issubstr(var0.weapon_name, "incendiary"))) {
-    var14 = 1;
-    var15 = var8 == "shield";
+  if(isDefined(var_0) && (issubstr(var_13, "thermite") || isDefined(var_12.magazine) && issubstr(var_12.magazine, "boltfire") || isDefined(var_0.weapon_name) && issubstr(var_0.weapon_name, "incendiary"))) {
+    var_14 = 1;
+    var_15 = var_8 == "shield";
 
-    if(var15) {
-      var16 = scripts\engine\trace::create_character_contents();
-      var17 = vectorNormalize(var7);
-      var18 = var6 - var17 * 12;
-      var19 = var6 + var17 * 12;
-      var20 = scripts\engine\trace::ray_trace_detail(var18, var19, undefined, var16);
+    if(var_15) {
+      var_16 = scripts\engine\trace::create_character_contents();
+      var_17 = vectorNormalize(var_7);
+      var_18 = var_6 - var_17 * 12;
+      var_19 = var_6 + var_17 * 12;
+      var_20 = scripts\engine\trace::ray_trace_detail(var_18, var_19, undefined, var_16);
 
-      if(var20["fraction"] > 0 && var20["fraction"] < 1) {
-        var21 = var6 - self.origin;
-        var21 = (var21[0], var21[1], 0);
+      if(var_20["fraction"] > 0 && var_20["fraction"] < 1) {
+        var_21 = var_6 - self.origin;
+        var_21 = (var_21[0], var_21[1], 0);
 
-        if(vectordot(var21, var20["normal"]) < 0) {
-          var15 = 0;
+        if(vectordot(var_21, var_20["normal"]) < 0) {
+          var_15 = 0;
         }
       } else {
-        var15 = 0;
+        var_15 = 0;
       }
     }
 
-    if(var15) {
-      var22 = var0 getlinkedparent();
+    if(var_15) {
+      var_22 = var_0 getlinkedparent();
 
-      if(isDefined(var22) && var22 == self) {
+      if(isDefined(var_22) && var_22 == self) {
         self.clearspaceforscriptableinstance = 1;
         self.ref_13b2a = 0;
       }
-    } else if(var8 != "none") {
+    } else if(var_8 != "none") {
       self.clearspaceforscriptableinstance = undefined;
       self.ref_13b2a = undefined;
     }
   }
 
-  if(var8 == "shield") {
-    if(var14) {
+  if(var_8 == "shield") {
+    if(var_14) {
       return true;
     }
-  } else if(var8 == "none" && isDefined(var0)) {
-    var23 = var0 getlinkedparent();
+  } else if(var_8 == "none" && isDefined(var_0)) {
+    var_23 = var_0 getlinkedparent();
 
-    if(istrue(self.clearspaceforscriptableinstance) && var14 && isDefined(var23) && var23 == self) {
+    if(istrue(self.clearspaceforscriptableinstance) && var_14 && isDefined(var_23) && var_23 == self) {
       if(!isDefined(self.ref_13b2c)) {
-        self.ref_13b2c = [var0];
-      } else if(!scripts\engine\utility::array_contains(self.ref_13b2c, var0)) {
-        self.ref_13b2c[self.ref_13b2c.size] = var0;
+        self.ref_13b2c = [var_0];
+      } else if(!scripts\engine\utility::array_contains(self.ref_13b2c, var_0)) {
+        self.ref_13b2c[self.ref_13b2c.size] = var_0;
       }
 
       self.ref_13b2a++;
       return true;
-    } else if(issubstr(var13, "molotov")) {
-      var24 = var0.origin - self.origin;
-      var25 = vectorNormalize((var24[0], var24[1], 0));
-      var24 = vectorNormalize(var24);
+    } else if(issubstr(var_13, "molotov")) {
+      var_24 = var_0.origin - self.origin;
+      var_25 = vectorNormalize((var_24[0], var_24[1], 0));
+      var_24 = vectorNormalize(var_24);
 
-      if(vectordot(anglesToForward(self.angles), var25) > 0.5 && -0.98 < var24[2] && var24[2] < 0.98) {
+      if(vectordot(anglesToForward(self.angles), var_25) > 0.5 && -0.98 < var_24[2] && var_24[2] < 0.98) {
         return true;
       }
     }
   }
 
-  if(var4 == "MOD_MELEE") {
-    if(isDefined(var1)) {
-      var26 = vectorNormalize(var1.origin - self.origin);
+  if(var_4 == "MOD_MELEE") {
+    if(isDefined(var_1)) {
+      var_26 = vectorNormalize(var_1.origin - self.origin);
     } else {
-      var26 = vectorNormalize(var7 - self.origin);
+      var_26 = vectorNormalize(var_7 - self.origin);
     }
 
-    var27 = anglesToForward(self.angles);
+    var_27 = anglesToForward(self.angles);
 
-    if(vectordot(var27, var26) > 0.5) {
+    if(vectordot(var_27, var_26) > 0.5) {
       return true;
     }
   }

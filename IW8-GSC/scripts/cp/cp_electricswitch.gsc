@@ -7,56 +7,56 @@ function main() {
   script_model_anims();
 }
 
-function setup_switch(var0) {
-  var1 = getEnt(var0.target, "targetname");
-  var1 scripts\cp\utility::sethintobject("j_handle", "HINT_BUTTON", "icon_electrical_box", &"CP_STRIKE/TURN_ON_ALARM", 25, "duration_short", "hide", 128, 120, 70, 45);
-  var2 = spawnStruct();
-  var1.scenenode = var0;
-  var1 scripts\engine\utility::ent_flag_init("switch_on");
+function setup_switch(var_0) {
+  var_1 = getEnt(var_0.target, "targetname");
+  var_1 scripts\cp\utility::sethintobject("j_handle", "HINT_BUTTON", "icon_electrical_box", &"CP_STRIKE/TURN_ON_ALARM", 25, "duration_short", "hide", 128, 120, 70, 45);
+  var_2 = spawnStruct();
+  var_1.scenenode = var_0;
+  var_1 scripts\engine\utility::ent_flag_init("switch_on");
 
-  if(isDefined(var1)) {
+  if(isDefined(var_1)) {
     thread switch_think();
   }
 
-  return var1;
+  return var_1;
 }
 
 function switch_think() {
   level endon("game_ended");
 
   for(;;) {
-    self waittill("trigger", var0);
+    self waittill("trigger", var_0);
 
-    if(!isPlayer(var0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
 
     self makeunusable();
-    var1 = scripts\cp_mp\anim_scene::anim_scene_create_actor(var0, "player_rig", 1);
-    var2 = scripts\cp_mp\anim_scene::anim_scene_create_actor(self, "fusebox_prop");
+    var_1 = scripts\cp_mp\anim_scene::anim_scene_create_actor(var_0, "player_rig", 1);
+    var_2 = scripts\cp_mp\anim_scene::anim_scene_create_actor(self, "fusebox_prop");
 
     if(!scripts\engine\utility::ent_flag("switch_on")) {
-      var2 scripts\cp_mp\anim_scene::anim_scene_set_actor_interruptable(1, "interact_on", 1);
-      var3 = self.scenenode scripts\cp_mp\anim_scene::anim_scene([var2], "interact_on");
+      var_2 scripts\cp_mp\anim_scene::anim_scene_set_actor_interruptable(1, "interact_on", 1);
+      var_3 = self.scenenode scripts\cp_mp\anim_scene::anim_scene([var_2], "interact_on");
 
-      if(var3) {
+      if(var_3) {
         scripts\engine\utility::ent_flag_set("switch_on");
         self setHintString(&"CP_STRIKE/TURN_OFF_ALARM");
       }
     } else {
-      var2 scripts\cp_mp\anim_scene::anim_scene_set_actor_interruptable(1, "interact", 1);
-      var3 = self.scenenode scripts\cp_mp\anim_scene::anim_scene([var2], "interact");
+      var_2 scripts\cp_mp\anim_scene::anim_scene_set_actor_interruptable(1, "interact", 1);
+      var_3 = self.scenenode scripts\cp_mp\anim_scene::anim_scene([var_2], "interact");
 
-      if(var3) {
+      if(var_3) {
         scripts\engine\utility::ent_flag_clear("switch_on");
         self setHintString(&"CP_STRIKE/TURN_ON_ALARM");
       }
     }
 
-    self notify("interact", var0);
+    self notify("interact", var_0);
     self makeusable();
-    var1 = undefined;
-    var2 = undefined;
+    var_1 = undefined;
+    var_2 = undefined;
   }
 }
 

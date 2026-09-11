@@ -35,7 +35,7 @@ function spawner() {
   self setspawnerteam("neutral");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\civ_syrkistan_female_scarf_green::precache();
   scripts\aitypes\bt_util::init();
   scripts\aitypes\assets::civilian();

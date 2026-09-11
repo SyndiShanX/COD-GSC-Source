@@ -13,14 +13,14 @@ function init() {
   scripts\mp\flags::gameflaginit("sudden_death_complete", 0);
 }
 
-function start(var0) {
+function start(var_0) {
   addthrowingknifecharge();
   scripts\mp\flags::gameflagset("sudden_death_started");
   ambusher_spawn_func();
-  adsoff(var0);
-  thread ampeddelta(var0);
+  adsoff(var_0);
+  thread ampeddelta(var_0);
   level waittill("sudden_death_spawns_finished");
-  thread anim_guy_keep_hidden(var0);
+  thread anim_guy_keep_hidden(var_0);
   wait level.disable_super_in_turret.ref_13960 + level.disable_super_in_turret.ref_1395f;
   ai_operate_turret();
   adrenaline_crate_use();
@@ -42,35 +42,35 @@ function addthrowingknifecharge() {
 }
 
 function ambusher_spawn_func() {
-  foreach(var1 in level.players) {
-    var1 scripts\mp\gametypes\br_public::ref_1264c();
+  foreach(var_1 in level.players) {
+    var_1 scripts\mp\gametypes\br_public::ref_1264c();
   }
 }
 
-function adsoff(var0) {
-  if(isDefined(var0.has_ammo_drain_passive)) {
-    [[var0.has_ammo_drain_passive]](var0.ref_1367f);
+function adsoff(var_0) {
+  if(isDefined(var_0.has_ammo_drain_passive)) {
+    [[var_0.has_ammo_drain_passive]](var_0.ref_1367f);
     return;
   }
 }
 
-function ampeddelta(var0) {
-  foreach(var2 in level.players) {
-    var2 notify("sudden_death_started");
-    var3 = var2[[var0.ref_13688]](var0.ref_1367f);
-    thread amped_wid(var2);
+function ampeddelta(var_0) {
+  foreach(var_2 in level.players) {
+    var_2 notify("sudden_death_started");
+    var_3 = var_2[[var_0.ref_13688]](var_0.ref_1367f);
+    thread amped_wid(var_2);
   }
 
   wait 2;
   level notify("sudden_death_spawns_finished");
 }
 
-function amped_wid(var0) {
+function amped_wid(var_0) {
   self endon("disconnect");
   self.ref_12ca8 = 1;
   self.plotarmor = 1;
-  self.forcespawnorigin = var0.origin;
-  self.forcespawnangles = var0.angles;
+  self.forcespawnorigin = var_0.origin;
+  self.forcespawnangles = var_0.angles;
   scripts\mp\playerlogic::spawnplayer(0);
 
   if(istrue(self.delay_enter_combat_after_investigating_grenade)) {
@@ -85,18 +85,18 @@ function amped_wid(var0) {
 }
 
 function ai_operate_turret() {
-  foreach(var1 in level.players) {
-    var1 scripts\mp\playerlogic::playerprematchallow(0);
+  foreach(var_1 in level.players) {
+    var_1 scripts\mp\playerlogic::playerprematchallow(0);
   }
 }
 
 function ally_manager() {
-  foreach(var1 in level.players) {
-    var1 thread scripts\mp\gametypes\br::defend_wave_2();
-    var1 scripts\mp\playerlogic::playerprematchallow(1);
-    var1.plotarmor = undefined;
-    var1 setclientomnvar("ui_match_start_countdown", 0);
-    var1 setclientomnvar("ui_match_in_progress", 1);
+  foreach(var_1 in level.players) {
+    var_1 thread scripts\mp\gametypes\br::defend_wave_2();
+    var_1 scripts\mp\playerlogic::playerprematchallow(1);
+    var_1.plotarmor = undefined;
+    var_1 setclientomnvar("ui_match_start_countdown", 0);
+    var_1 setclientomnvar("ui_match_in_progress", 1);
     thread ref_12696();
   }
 }
@@ -112,18 +112,18 @@ function ref_12696() {
   self setclientomnvar("ui_objective_text", -1);
 }
 
-function anim_guy_keep_hidden(var0) {
+function anim_guy_keep_hidden(var_0) {
   level endon("game_ended");
-  var1 = var0.guard_spawners;
-  scripts\mp\gametypes\br_circle::teleport_players_inside_subway_car(var1, level.disable_super_in_turret.ref_13960, level.disable_super_in_turret.ref_13961, level.disable_super_in_turret.ref_1395f, level.disable_super_in_turret.ref_13962);
+  var_1 = var_0.guard_spawners;
+  scripts\mp\gametypes\br_circle::teleport_players_inside_subway_car(var_1, level.disable_super_in_turret.ref_13960, level.disable_super_in_turret.ref_13961, level.disable_super_in_turret.ref_1395f, level.disable_super_in_turret.ref_13962);
 }
 
-function allowed_gametypes(var0) {
-  scripts\mp\gamelogic::default_ondeadevent(var0);
-  ai_ascender_getclosestascender(var0);
+function allowed_gametypes(var_0) {
+  scripts\mp\gamelogic::default_ondeadevent(var_0);
+  ai_ascender_getclosestascender(var_0);
 }
 
-function ai_ascender_getclosestascender(var0) {
-  level.disable_super_in_turret.ref_1395e["losing_team"] = var0;
+function ai_ascender_getclosestascender(var_0) {
+  level.disable_super_in_turret.ref_1395e["losing_team"] = var_0;
   scripts\mp\flags::gameflagset("sudden_death_complete");
 }

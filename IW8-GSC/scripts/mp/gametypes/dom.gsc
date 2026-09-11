@@ -41,16 +41,16 @@ function seticonnames() {
 function onstartgametype() {
   seticonnames();
 
-  foreach(var1 in level.teamnamelist) {
-    scripts\mp\utility\game::setobjectivetext(var1, &"OBJECTIVES/DOM");
+  foreach(var_1 in level.teamnamelist) {
+    scripts\mp\utility\game::setobjectivetext(var_1, &"OBJECTIVES/DOM");
 
     if(level.splitscreen) {
-      scripts\mp\utility\game::setobjectivescoretext(var1, &"OBJECTIVES/DOM");
+      scripts\mp\utility\game::setobjectivescoretext(var_1, &"OBJECTIVES/DOM");
     } else {
-      scripts\mp\utility\game::setobjectivescoretext(var1, &"OBJECTIVES/DOM_SCORE");
+      scripts\mp\utility\game::setobjectivescoretext(var_1, &"OBJECTIVES/DOM_SCORE");
     }
 
-    scripts\mp\utility\game::setobjectivehinttext(var1, &"OBJECTIVES/DOM_HINT");
+    scripts\mp\utility\game::setobjectivehinttext(var_1, &"OBJECTIVES/DOM_HINT");
   }
 
   setclientnamemode("auto_change");
@@ -65,10 +65,10 @@ function onstartgametype() {
   }
 
   if(game["switchedsides"]) {
-    var3 = game["attackers"];
-    var4 = game["defenders"];
-    game["attackers"] = var4;
-    game["defenders"] = var3;
+    var_3 = game["attackers"];
+    var_4 = game["defenders"];
+    game["attackers"] = var_4;
+    game["defenders"] = var_3;
   }
 
   initspawns();
@@ -116,22 +116,22 @@ function initspawns() {
   scripts\mp\spawnlogic::addstartspawnpoints("mp_dom_spawn_axis_start");
   scripts\mp\spawnlogic::addspawnpoints(game["attackers"], "mp_dom_spawn_allies_start");
   scripts\mp\spawnlogic::addspawnpoints(game["defenders"], "mp_dom_spawn_axis_start");
-  var0 = scripts\mp\spawnlogic::getspawnpointarray("mp_dom_spawn_allies_start");
-  var1 = scripts\mp\spawnlogic::getspawnpointarray("mp_dom_spawn_axis_start");
-  scripts\mp\spawnlogic::registerspawnset("start_attackers", var0);
-  scripts\mp\spawnlogic::registerspawnset("start_defenders", var1);
+  var_0 = scripts\mp\spawnlogic::getspawnpointarray("mp_dom_spawn_allies_start");
+  var_1 = scripts\mp\spawnlogic::getspawnpointarray("mp_dom_spawn_axis_start");
+  scripts\mp\spawnlogic::registerspawnset("start_attackers", var_0);
+  scripts\mp\spawnlogic::registerspawnset("start_defenders", var_1);
   scripts\mp\spawnlogic::addspawnpoints("allies", "mp_dom_spawn");
   scripts\mp\spawnlogic::addspawnpoints("axis", "mp_dom_spawn");
   scripts\mp\spawnlogic::addspawnpoints("allies", "mp_dom_spawn_secondary", 1, 1);
   scripts\mp\spawnlogic::addspawnpoints("axis", "mp_dom_spawn_secondary", 1, 1);
-  var2 = scripts\mp\spawnlogic::getspawnpointarray("mp_dom_spawn");
-  var3 = scripts\mp\spawnlogic::getspawnpointarray("mp_dom_spawn_secondary");
-  scripts\mp\spawnlogic::registerspawnset("dom", var2);
-  scripts\mp\spawnlogic::registerspawnset("dom_fallback", var3);
+  var_2 = scripts\mp\spawnlogic::getspawnpointarray("mp_dom_spawn");
+  var_3 = scripts\mp\spawnlogic::getspawnpointarray("mp_dom_spawn_secondary");
+  scripts\mp\spawnlogic::registerspawnset("dom", var_2);
+  scripts\mp\spawnlogic::registerspawnset("dom_fallback", var_3);
 
   if(istrue(level.binoculars_clearuidata)) {
-    scripts\mp\spawnlogic::registerspawnset("normal", var2);
-    scripts\mp\spawnlogic::registerspawnset("fallback", var3);
+    scripts\mp\spawnlogic::registerspawnset("normal", var_2);
+    scripts\mp\spawnlogic::registerspawnset("fallback", var_3);
   }
 
   level.mapcenter = scripts\mp\spawnlogic::findboxcenter(level.spawnmins, level.spawnmaxs);
@@ -139,144 +139,144 @@ function initspawns() {
 }
 
 function getspawnpoint() {
-  var0 = self.pers["team"];
-  var1 = getteamdompoints(var0);
-  var2 = scripts\mp\utility\game::getotherteam(var0)[0];
-  var3 = getteamdompoints(var2);
-  var4 = getpreferreddompoints(var1, var3, var0, var2);
-  var5 = [];
-  GscBinSkip0(0x2e, "preferredDomPoints", var4["preferred"]);
+  var_0 = self.pers["team"];
+  var_1 = getteamdompoints(var_0);
+  var_2 = scripts\mp\utility\game::getotherteam(var_0)[0];
+  var_3 = getteamdompoints(var_2);
+  var_4 = getpreferreddompoints(var_1, var_3, var_0, var_2);
+  var_5 = [];
+  GscBinSkip0(0x2e, "preferredDomPoints", var_4["preferred"]);
 }
 
-function getteamdompoints(var0) {
-  var1 = [];
+function getteamdompoints(var_0) {
+  var_1 = [];
 
-  foreach(var3 in level.objectives) {
-    if(var3.ownerteam == var0) {
-      var1 = var3;
+  foreach(var_3 in level.objectives) {
+    if(var_3.ownerteam == var_0) {
+      var_1 = var_3;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function getpreferreddompoints(var0, var1, var2, var3) {
-  var4 = [];
+function getpreferreddompoints(var_0, var_1, var_2, var_3) {
+  var_4 = [];
 
-  if(var0.size == level.objectives.size) {
-    var5 = level.bestspawnflag[var3];
+  if(var_0.size == level.objectives.size) {
+    var_5 = level.bestspawnflag[var_3];
 
-    foreach(var7 in var0) {
-      if(var7 != var5) {
-        var4 = var7;
+    foreach(var_7 in var_0) {
+      if(var_7 != var_5) {
+        var_4 = var_7;
       }
     }
-  } else if(var0.size > 0) {
-    foreach(var7 in var0) {
-      var4 = var7;
+  } else if(var_0.size > 0) {
+    foreach(var_7 in var_0) {
+      var_4 = var_7;
     }
-  } else if(var0.size == 0) {
-    var11 = level.bestspawnflag[var2];
+  } else if(var_0.size == 0) {
+    var_11 = level.bestspawnflag[var_2];
 
-    if(var1.size > 0 && var1.size < level.objectives.size) {
-      var11 = scripts\mp\gametypes\obj_dom::getunownedflagneareststart(var2);
+    if(var_1.size > 0 && var_1.size < level.objectives.size) {
+      var_11 = scripts\mp\gametypes\obj_dom::getunownedflagneareststart(var_2);
     }
 
-    var4 = var11;
+    var_4 = var_11;
   }
 
-  var12 = 0;
-  var13 = 0;
+  var_12 = 0;
+  var_13 = 0;
 
-  foreach(var7 in var4) {
-    if(var7 scripts\mp\gameobjects::getclaimteam() == "none") {
-      var12 |= var7.spawnflagid;
+  foreach(var_7 in var_4) {
+    if(var_7 scripts\mp\gameobjects::getclaimteam() == "none") {
+      var_12 |= var_7.spawnflagid;
       continue;
     }
 
-    var13 |= var7.spawnflagid;
+    var_13 |= var_7.spawnflagid;
   }
 
-  if(var12 & 1 && var12 & 2) {
-    var12 |= 32;
+  if(var_12 & 1 && var_12 & 2) {
+    var_12 |= 32;
   }
 
-  if(var12 & 4 && var12 & 2) {
-    var12 |= 64;
+  if(var_12 & 4 && var_12 & 2) {
+    var_12 |= 64;
   }
 
-  if(var12 & 1 && var12 & 4) {
-    var12 |= 128;
+  if(var_12 & 1 && var_12 & 4) {
+    var_12 |= 128;
   }
 
-  var16 = [];
-  GscBinSkip0(0x2e, "preferred", var12);
+  var_16 = [];
+  GscBinSkip0(0x2e, "preferred", var_12);
 }
 
 function domflags() {
-  var0 = [];
+  var_0 = [];
   level.changenumdomflags = 0;
 
   if(isDefined(scripts\cp_mp\utility\game_utility::getlocaleid())) {
-    var1 = getEntArray("flag_primary", "targetname");
+    var_1 = getEntArray("flag_primary", "targetname");
 
-    foreach(var3 in var1) {
-      if(isDefined(var3.script_noteworthy) && var3.script_noteworthy == level.localeid) {
-        var0 = var3;
+    foreach(var_3 in var_1) {
+      if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == level.localeid) {
+        var_0 = var_3;
         continue;
       }
 
-      var3 delete();
+      var_3 delete();
     }
   } else {
     level.changenumdomflags = getdvarint("scr_dom_flagcount", 0);
-    var0 = getEntArray("flag_primary", "targetname");
+    var_0 = getEntArray("flag_primary", "targetname");
   }
 
-  var5 = getEntArray("flag_secondary", "targetname");
+  var_5 = getEntArray("flag_secondary", "targetname");
 
-  if(var0.size + var5.size < 2) {
+  if(var_0.size + var_5.size < 2) {
     return;
   }
 
   if(level.changenumdomflags == 3) {
     setomnvar("ui_num_dom_flags", level.changenumdomflags);
   } else {
-    setomnvar("ui_num_dom_flags", var0.size);
+    setomnvar("ui_num_dom_flags", var_0.size);
   }
 
-  var6 = [];
+  var_6 = [];
 
-  for(var7 = 0; var7 < var0.size; var7++) {
-    var6 = var0[var7];
+  for(var_7 = 0; var_7 < var_0.size; var_7++) {
+    var_6 = var_0[var_7];
   }
 
-  for(var7 = 0; var7 < var5.size; var7++) {
-    var6 = var5[var7];
+  for(var_7 = 0; var_7 < var_5.size; var_7++) {
+    var_6 = var_5[var_7];
   }
 
   if(level.changenumdomflags == 3 || level.mapname == "mp_rust") {
-    foreach(var9 in var6) {
-      remapdomtriggerscriptlabel(var9);
+    foreach(var_9 in var_6) {
+      remapdomtriggerscriptlabel(var_9);
     }
   }
 
-  foreach(var9 in var6) {
+  foreach(var_9 in var_6) {
     if(level.changenumdomflags == 3) {
-      if(var9.script_label == "_d" || var9.script_label == "_e") {
+      if(var_9.script_label == "_d" || var_9.script_label == "_e") {
         continue;
       }
     }
 
-    ref_11ca0(var9);
-    var12 = scripts\mp\gametypes\obj_dom::setupobjective(var9, undefined, 1, 1);
-    level.objectives[var12.objectivekey] = var12;
+    ref_11ca0(var_9);
+    var_12 = scripts\mp\gametypes\obj_dom::setupobjective(var_9, undefined, 1, 1);
+    level.objectives[var_12.objectivekey] = var_12;
   }
 
-  var14 = scripts\mp\spawnlogic::getspawnpointarray("mp_dom_spawn_axis_start");
-  var15 = scripts\mp\spawnlogic::getspawnpointarray("mp_dom_spawn_allies_start");
-  level.startpos["allies"] = var15[0].origin;
-  level.startpos["axis"] = var14[0].origin;
+  var_14 = scripts\mp\spawnlogic::getspawnpointarray("mp_dom_spawn_axis_start");
+  var_15 = scripts\mp\spawnlogic::getspawnpointarray("mp_dom_spawn_allies_start");
+  level.startpos["allies"] = var_15[0].origin;
+  level.startpos["axis"] = var_14[0].origin;
   level.bestspawnflag = [];
   level.bestspawnflag["allies"] = scripts\mp\gametypes\obj_dom::getunownedflagneareststart("allies", undefined);
   level.bestspawnflag["axis"] = scripts\mp\gametypes\obj_dom::getunownedflagneareststart("axis", level.bestspawnflag["allies"]);
@@ -287,22 +287,22 @@ function domflags() {
     level scripts\engine\utility::ref_143a5("prematch_done", "start_mode_setup");
   }
 
-  foreach(var3 in level.objectives) {
-    var17 = scripts\mp\gametypes\obj_dom::getreservedobjid(var3.objectivekey);
-    var3 scripts\mp\gameobjects::requestid(1, 1, var17);
-    var3.onuse = &scripts\mp\gametypes\obj_dom::dompoint_onuse;
-    var3.onbeginuse = &scripts\mp\gametypes\obj_dom::dompoint_onusebegin;
-    var3.onuseupdate = &scripts\mp\gametypes\obj_dom::dompoint_onuseupdate;
-    var3.onenduse = &scripts\mp\gametypes\obj_dom::dompoint_onuseend;
-    var3.oncontested = &scripts\mp\gametypes\obj_dom::dompoint_oncontested;
-    var3.onuncontested = &scripts\mp\gametypes\obj_dom::dompoint_onuncontested;
-    var3.onunoccupied = &scripts\mp\gametypes\obj_dom::dompoint_onunoccupied;
-    var3.onpinnedstate = &scripts\mp\gametypes\obj_dom::dompoint_onpinnedstate;
-    var3.onunpinnedstate = &scripts\mp\gametypes\obj_dom::dompoint_onunpinnedstate;
-    var3.stompprogressreward = &scripts\mp\gametypes\obj_dom::dompoint_stompprogressreward;
-    var3 scripts\mp\gameobjects::setobjectivestatusicons("waypoint_defend", "waypoint_target");
-    var3 scripts\mp\gameobjects::setvisibleteam("any");
-    var3 scripts\mp\gametypes\obj_dom::domflag_setneutral(undefined, 1);
+  foreach(var_3 in level.objectives) {
+    var_17 = scripts\mp\gametypes\obj_dom::getreservedobjid(var_3.objectivekey);
+    var_3 scripts\mp\gameobjects::requestid(1, 1, var_17);
+    var_3.onuse = &scripts\mp\gametypes\obj_dom::dompoint_onuse;
+    var_3.onbeginuse = &scripts\mp\gametypes\obj_dom::dompoint_onusebegin;
+    var_3.onuseupdate = &scripts\mp\gametypes\obj_dom::dompoint_onuseupdate;
+    var_3.onenduse = &scripts\mp\gametypes\obj_dom::dompoint_onuseend;
+    var_3.oncontested = &scripts\mp\gametypes\obj_dom::dompoint_oncontested;
+    var_3.onuncontested = &scripts\mp\gametypes\obj_dom::dompoint_onuncontested;
+    var_3.onunoccupied = &scripts\mp\gametypes\obj_dom::dompoint_onunoccupied;
+    var_3.onpinnedstate = &scripts\mp\gametypes\obj_dom::dompoint_onpinnedstate;
+    var_3.onunpinnedstate = &scripts\mp\gametypes\obj_dom::dompoint_onunpinnedstate;
+    var_3.stompprogressreward = &scripts\mp\gametypes\obj_dom::dompoint_stompprogressreward;
+    var_3 scripts\mp\gameobjects::setobjectivestatusicons("waypoint_defend", "waypoint_target");
+    var_3 scripts\mp\gameobjects::setvisibleteam("any");
+    var_3 scripts\mp\gametypes\obj_dom::domflag_setneutral(undefined, 1);
   }
 
   if(level.precappoints) {
@@ -315,27 +315,27 @@ function domflags() {
   }
 }
 
-function ref_11ca0(var0) {
+function ref_11ca0(var_0) {
   switch (level.mapname) {
     case "mp_piccadilly":
-      switch (var0.script_label) {
+      switch (var_0.script_label) {
         case "_a":
-          var0.origin = (983, 303, 110);
+          var_0.origin = (983, 303, 110);
           break;
         case "_b":
-          var0.origin = (-1064, -525, 110);
+          var_0.origin = (-1064, -525, 110);
           break;
         case "_c":
-          var0.origin = (-1605, -2298, 60);
+          var_0.origin = (-1605, -2298, 60);
           break;
       }
 
       break;
     case "mp_malyshev":
       if(level.ref_11ad3) {
-        switch (var0.script_label) {
+        switch (var_0.script_label) {
           case "_a":
-            var0.origin = (-520, 632.25, 16);
+            var_0.origin = (-520, 632.25, 16);
             break;
         }
       }
@@ -378,104 +378,104 @@ function remapdomtriggerscriptlabel() {
 
 function updatedomscores() {
   level endon("game_ended");
-  var0 = undefined;
-  var1 = undefined;
+  var_0 = undefined;
+  var_1 = undefined;
   level waittill("prematch_done");
 
   while(!level.gameended) {
-    var2 = 5;
-    var3 = scripts\mp\gamelogic::gettimeremaining();
+    var_2 = 5;
+    var_3 = scripts\mp\gamelogic::gettimeremaining();
 
-    if(var3 < 5000 && var3 > 0) {
-      var2 = var3 / 1000;
+    if(var_3 < 5000 && var_3 > 0) {
+      var_2 = var_3 / 1000;
     }
 
-    wait var2;
+    wait var_2;
     scripts\mp\hostmigration::waittillhostmigrationdone();
-    var4 = getowneddomflags();
+    var_4 = getowneddomflags();
 
     if(!isDefined(level.scoretick)) {
       level.scoretick = [];
     }
 
-    foreach(var6 in level.teamnamelist) {
-      level.scoretick[var6] = 0;
+    foreach(var_6 in level.teamnamelist) {
+      level.scoretick[var_6] = 0;
     }
 
-    if(var4.size) {
-      for(var8 = 1; var8 < var4.size; var8++) {
-        var9 = var4[var8];
-        var10 = gettime() - var9.capturetime;
+    if(var_4.size) {
+      for(var_8 = 1; var_8 < var_4.size; var_8++) {
+        var_9 = var_4[var_8];
+        var_10 = gettime() - var_9.capturetime;
 
-        for(var11 = var8 - 1; var11 >= 0 && var10 > gettime() - var4[var11].capturetime; var11--) {
-          var4 = var4[var11];
+        for(var_11 = var_8 - 1; var_11 >= 0 && var_10 > gettime() - var_4[var_11].capturetime; var_11--) {
+          var_4 = var_4[var_11];
         }
 
-        var4 = var9;
+        var_4 = var_9;
       }
 
-      foreach(var9 in var4) {
-        var13 = var9 scripts\mp\gameobjects::getownerteam();
-        var0 = getteamscore(var13);
-        var14 = scripts\mp\gametypes\obj_dom::getteamflagcount(var13);
+      foreach(var_9 in var_4) {
+        var_13 = var_9 scripts\mp\gameobjects::getownerteam();
+        var_0 = getteamscore(var_13);
+        var_14 = scripts\mp\gametypes\obj_dom::getteamflagcount(var_13);
 
-        if(var14 >= level.flagsrequiredtoscore) {
-          level.scoretick[var13] += level.pointsperflag;
+        if(var_14 >= level.flagsrequiredtoscore) {
+          level.scoretick[var_13] += level.pointsperflag;
         }
       }
     }
 
     updatescores();
-    checkendgame(var4.size);
+    checkendgame(var_4.size);
   }
 }
 
 function updatescores() {
-  var0 = [];
+  var_0 = [];
 
-  foreach(var2 in level.teamnamelist) {
-    var3 = game["teamScores"][var2] + level.scoretick[var2];
+  foreach(var_2 in level.teamnamelist) {
+    var_3 = game["teamScores"][var_2] + level.scoretick[var_2];
 
-    if(var3 >= level.roundscorelimit) {
-      var0 = var2;
+    if(var_3 >= level.roundscorelimit) {
+      var_0 = var_2;
     }
   }
 
-  if(var0.size == 1) {
-    level.scoretick[var0[0]] = level.roundscorelimit - game["teamScores"][var0[0]];
+  if(var_0.size == 1) {
+    level.scoretick[var_0[0]] = level.roundscorelimit - game["teamScores"][var_0[0]];
   }
 
-  var5 = scripts\mp\gamescore::freight_lift_door_switch();
+  var_5 = scripts\mp\gamescore::freight_lift_door_switch();
 
-  foreach(var2 in level.teamnamelist) {
-    if(level.scoretick[var2] > 0) {
-      scripts\mp\gamescore::giveteamscoreforobjective(var2, level.scoretick[var2], 1, undefined, 1);
+  foreach(var_2 in level.teamnamelist) {
+    if(level.scoretick[var_2] > 0) {
+      scripts\mp\gamescore::giveteamscoreforobjective(var_2, level.scoretick[var_2], 1, undefined, 1);
     }
   }
 
-  var8 = scripts\mp\gamescore::freight_lift_door_switch();
+  var_8 = scripts\mp\gamescore::freight_lift_door_switch();
 
-  if(var5 != var8) {
-    scripts\mp\gamescore::ref_12762(var8, 1, var5);
+  if(var_5 != var_8) {
+    scripts\mp\gamescore::ref_12762(var_8, 1, var_5);
     return;
   }
 }
 
-function checkendgame(var0) {
-  var1 = gettime() - level.lastcaptime;
+function checkendgame(var_0) {
+  var_1 = gettime() - level.lastcaptime;
 
-  if(scripts\mp\utility\game::matchmakinggame() && var0 < 2 && var1 > 120000) {
+  if(scripts\mp\utility\game::matchmakinggame() && var_0 < 2 && var_1 > 120000) {
     level.forcedend = 1;
     thread scripts\mp\gamelogic::endgame("none", game["end_reason"]["dom_force_end"]);
     return;
   }
 
-  if(level.objectives.size == 3 && level.playholdtwovo && var1 > 30000) {
-    foreach(var3 in level.teamnamelist) {
-      if(scripts\mp\gametypes\obj_dom::getteamflagcount(var3) == 2) {
-        var4 = scripts\mp\utility\game::getotherteam(var3)[0];
-        scripts\mp\utility\dialog::statusdialog("enemy_captured_2", var4);
-        scripts\mp\utility\dialog::statusdialog("friendly_captured_2", var3);
+  if(level.objectives.size == 3 && level.playholdtwovo && var_1 > 30000) {
+    foreach(var_3 in level.teamnamelist) {
+      if(scripts\mp\gametypes\obj_dom::getteamflagcount(var_3) == 2) {
+        var_4 = scripts\mp\utility\game::getotherteam(var_3)[0];
+        scripts\mp\utility\dialog::statusdialog("enemy_captured_2", var_4);
+        scripts\mp\utility\dialog::statusdialog("friendly_captured_2", var_3);
         level.playholdtwovo = 0;
         break;
       }
@@ -485,35 +485,35 @@ function checkendgame(var0) {
   }
 }
 
-function onplayerkilled(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
-  if(!isPlayer(var1) || var1.team == self.team) {
+function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  if(!isPlayer(var_1) || var_1.team == self.team) {
     return;
   }
 
-  if(isDefined(var4) && scripts\mp\utility\weapon::iskillstreakweapon(var4.basename)) {
+  if(isDefined(var_4) && scripts\mp\utility\weapon::iskillstreakweapon(var_4.basename)) {
     return;
   }
 
-  scripts\mp\gametypes\obj_dom::awardgenericmedals(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+  scripts\mp\gametypes\obj_dom::awardgenericmedals(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 }
 
-function onnormaldeath(var0, var1, var2, var3, var4, var5) {
-  if(level.teamscoresonkill[var1.team]) {
-    scripts\mp\gametypes\common::oncommonnormaldeath(var0, var1, var2, var3, var4, var5);
+function onnormaldeath(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(level.teamscoresonkill[var_1.team]) {
+    scripts\mp\gametypes\common::oncommonnormaldeath(var_0, var_1, var_2, var_3, var_4, var_5);
     return;
   }
 }
 
 function getowneddomflags() {
-  var0 = [];
+  var_0 = [];
 
-  foreach(var2 in level.objectives) {
-    if(var2 scripts\mp\gameobjects::getownerteam() != "neutral" && isDefined(var2.capturetime)) {
-      var0 = var2;
+  foreach(var_2 in level.objectives) {
+    if(var_2 scripts\mp\gameobjects::getownerteam() != "neutral" && isDefined(var_2.capturetime)) {
+      var_0 = var_2;
     }
   }
 
-  return var0;
+  return var_0;
 }
 
 function getflagteam() {
@@ -521,19 +521,19 @@ function getflagteam() {
 }
 
 function flagsetup() {
-  foreach(var1 in level.objectives) {
-    var1.spawnflagid = getflagspawnidforobjectivekey(var1.objectivekey);
+  foreach(var_1 in level.objectives) {
+    var_1.spawnflagid = getflagspawnidforobjectivekey(var_1.objectivekey);
   }
 
-  var3 = level.spawnpoints;
+  var_3 = level.spawnpoints;
 
-  foreach(var5 in var3) {
-    var5.scriptdata.domflagassignments = getspawnpointflagassignment(var5);
+  foreach(var_5 in var_3) {
+    var_5.scriptdata.domflagassignments = getspawnpointflagassignment(var_5);
   }
 }
 
-function getflagspawnidforobjectivekey(var0) {
-  switch (var0) {
+function getflagspawnidforobjectivekey(var_0) {
+  switch (var_0) {
     case "_a":
       return 1;
     case "_b":
@@ -549,31 +549,31 @@ function getflagspawnidforobjectivekey(var0) {
   return undefined;
 }
 
-function getspawnpointflagassignment(var0) {
+function getspawnpointflagassignment(var_0) {
   if(scripts\cp_mp\utility\game_utility::isarenamap()) {
-    if(var0.script_noteworthy == "1" || var0.script_noteworthy == "2" || var0.script_noteworthy == "3") {
-      var0.script_noteworthy = "";
+    if(var_0.script_noteworthy == "1" || var_0.script_noteworthy == "2" || var_0.script_noteworthy == "3") {
+      var_0.script_noteworthy = "";
     }
   }
 
-  if(isDefined(var0.script_noteworthy) && var0.script_noteworthy != "" && var0.script_noteworthy != "6v6" && var0.script_noteworthy != "10v10") {
+  if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy != "" && var_0.script_noteworthy != "6v6" && var_0.script_noteworthy != "10v10") {
     if(!isDefined(scripts\cp_mp\utility\game_utility::getlocaleid())) {
-      var1 = parseflagassignmentstring(var0.script_noteworthy);
+      var_1 = parseflagassignmentstring(var_0.script_noteworthy);
 
-      if(isDefined(var1)) {
-        return var1;
+      if(isDefined(var_1)) {
+        return var_1;
       }
     }
   }
 
-  var2 = findnearestdompoint(var0.origin);
-  return var2.spawnflagid;
+  var_2 = findnearestdompoint(var_0.origin);
+  return var_2.spawnflagid;
 }
 
-function parseflagassignmentstring(var0) {
-  var0 = tolower(var0);
+function parseflagassignmentstring(var_0) {
+  var_0 = tolower(var_0);
 
-  switch (var0) {
+  switch (var_0) {
     case "a":
       return 1;
     case "b":
@@ -598,45 +598,45 @@ function parseflagassignmentstring(var0) {
   }
 }
 
-function findnearestdompoint(var0) {
-  var1 = [];
+function findnearestdompoint(var_0) {
+  var_1 = [];
 
-  foreach(var3 in level.objectives) {
-    var3.navmeshpos = getclosestpointonnavmesh(var3.trigger.origin);
-    var1 = var3.navmeshpos;
+  foreach(var_3 in level.objectives) {
+    var_3.navmeshpos = getclosestpointonnavmesh(var_3.trigger.origin);
+    var_1 = var_3.navmeshpos;
   }
 
-  var5 = findclosestnonlospointwithinvolume(var1, getclosestpointonnavmesh(var0));
-  var6 = undefined;
+  var_5 = findclosestnonlospointwithinvolume(var_1, getclosestpointonnavmesh(var_0));
+  var_6 = undefined;
 
-  if(!isDefined(var5)) {
-    var7 = undefined;
+  if(!isDefined(var_5)) {
+    var_7 = undefined;
 
-    foreach(var3 in level.objectives) {
-      var9 = distancesquared(var3.trigger.origin, var0);
+    foreach(var_3 in level.objectives) {
+      var_9 = distancesquared(var_3.trigger.origin, var_0);
 
-      if(!isDefined(var6) || var9 < var7) {
-        var6 = var3;
-        var7 = var9;
+      if(!isDefined(var_6) || var_9 < var_7) {
+        var_6 = var_3;
+        var_7 = var_9;
       }
     }
   } else {
-    foreach(var3 in level.objectives) {
-      if(distance2dsquared(var3.navmeshpos, var5) < 1) {
-        var6 = var3;
+    foreach(var_3 in level.objectives) {
+      if(distance2dsquared(var_3.navmeshpos, var_5) < 1) {
+        var_6 = var_3;
         break;
       }
     }
   }
 
-  return var6;
+  return var_6;
 }
 
 function modifieddefendradiussetup() {
   if(level.mapname == "mp_frontier") {
-    foreach(var1 in level.objectives) {
-      if(var1.objectivekey == "_b") {
-        var1.trigger.modifieddefendcheck = 1;
+    foreach(var_1 in level.objectives) {
+      if(var_1.objectivekey == "_b") {
+        var_1.trigger.modifieddefendcheck = 1;
       }
     }
 
@@ -671,13 +671,13 @@ function getcapxpscale() {
   return 0.25;
 }
 
-function onplayerconnect(var0) {
-  var0.ui_dom_securing = undefined;
-  var0.ui_dom_stalemate = undefined;
+function onplayerconnect(var_0) {
+  var_0.ui_dom_securing = undefined;
+  var_0.ui_dom_stalemate = undefined;
   thread onplayerspawned();
 }
 
-function onplayerspawned(var0) {
+function onplayerspawned(var_0) {
   self endon("disconnect");
 
   for(;;) {
@@ -696,38 +696,38 @@ function onplayerspawned(var0) {
   }
 }
 
-function onflagcapture(var0, var1, var2, var3, var4, var5) {
+function onflagcapture(var_0, var_1, var_2, var_3, var_4, var_5) {
   level.usestartspawns = 0;
-  var6 = undefined;
-  var7 = scripts\mp\utility\game::getotherteam(var3)[0];
+  var_6 = undefined;
+  var_7 = scripts\mp\utility\game::getotherteam(var_3)[0];
 
-  if(scripts\mp\gametypes\obj_dom::getteamflagcount(var3) == level.objectives.size) {
-    var6 = "mp_dom_flag_captured_all";
+  if(scripts\mp\gametypes\obj_dom::getteamflagcount(var_3) == level.objectives.size) {
+    var_6 = "mp_dom_flag_captured_all";
   } else {
-    var6 = "mp_dom_flag_captured";
+    var_6 = "mp_dom_flag_captured";
   }
 
-  thread scripts\mp\utility\print::printandsoundoneveryone(var3, var7, undefined, undefined, var6, "mp_dom_flag_lost", var2);
+  thread scripts\mp\utility\print::printandsoundoneveryone(var_3, var_7, undefined, undefined, var_6, "mp_dom_flag_lost", var_2);
 
-  if(scripts\mp\gametypes\obj_dom::getteamflagcount(var3) < level.objectives.size) {
-    scripts\mp\utility\dialog::statusdialog("secured" + self.objectivekey, var3);
+  if(scripts\mp\gametypes\obj_dom::getteamflagcount(var_3) < level.objectives.size) {
+    scripts\mp\utility\dialog::statusdialog("secured" + self.objectivekey, var_3);
 
-    if(isDefined(var4) && var4 == "neutral") {
+    if(isDefined(var_4) && var_4 == "neutral") {
       if(isDefined(level.objectives) && level.objectives.size == 5 && (self.objectivekey == "_c" || self.objectivekey == "_d") || self.objectivekey == "_b") {
-        scripts\mp\utility\dialog::statusdialog("lost" + self.objectivekey, var7);
+        scripts\mp\utility\dialog::statusdialog("lost" + self.objectivekey, var_7);
         return;
       }
 
       return;
     }
 
-    scripts\mp\utility\dialog::statusdialog("lost" + self.objectivekey, var7);
+    scripts\mp\utility\dialog::statusdialog("lost" + self.objectivekey, var_7);
     return;
   }
 
-  thread scripts\mp\music_and_dialog::dominating_music(var3);
-  scripts\mp\utility\dialog::statusdialog("gamestate_domwinning", var3);
-  scripts\mp\utility\dialog::statusdialog("gamestate_domlosing", var7);
+  thread scripts\mp\music_and_dialog::dominating_music(var_3);
+  scripts\mp\utility\dialog::statusdialog("gamestate_domwinning", var_3);
+  scripts\mp\utility\dialog::statusdialog("gamestate_domlosing", var_7);
 }
 
 function updatescoremod() {
@@ -735,8 +735,8 @@ function updatescoremod() {
   level.onnormaldeath = &onnormaldeath;
   level.teamscoresonkill = [];
 
-  foreach(var1 in level.teamnamelist) {
-    level.teamscoresonkill[var1] = 0;
+  foreach(var_1 in level.teamnamelist) {
+    level.teamscoresonkill[var_1] = 0;
   }
 
   level.scoremod["kill"] = 1;
@@ -747,24 +747,24 @@ function removedompoint() {
 
   for(;;) {
     if(getDvar("scr_devRemoveDomFlag", "") != "") {
-      var0 = getDvar("scr_devRemoveDomFlag", "");
+      var_0 = getDvar("scr_devRemoveDomFlag", "");
 
-      foreach(var2 in level.objectives) {
-        if(isDefined(var2.objectivekey) && var2.objectivekey == var0) {
-          var2 scripts\mp\gameobjects::allowuse("none");
-          var2.trigger = undefined;
-          var2 notify("deleted");
-          var2.visibleteam = "none";
-          var2 scripts\mp\gameobjects::setobjectivestatusicons(undefined);
-          var3 = [];
+      foreach(var_2 in level.objectives) {
+        if(isDefined(var_2.objectivekey) && var_2.objectivekey == var_0) {
+          var_2 scripts\mp\gameobjects::allowuse("none");
+          var_2.trigger = undefined;
+          var_2 notify("deleted");
+          var_2.visibleteam = "none";
+          var_2 scripts\mp\gameobjects::setobjectivestatusicons(undefined);
+          var_3 = [];
 
-          foreach(var5 in level.objectives) {
-            if(var5.objectivekey != var0) {
-              var3 = var5;
+          foreach(var_5 in level.objectives) {
+            if(var_5.objectivekey != var_0) {
+              var_3 = var_5;
             }
           }
 
-          level.objectives = var3;
+          level.objectives = var_3;
           break;
         }
       }
@@ -781,61 +781,61 @@ function placedompoint() {
 
   for(;;) {
     if(getDvar("scr_devPlaceDomFlag", "") != "") {
-      var0 = getDvar("scr_devPlaceDomFlag", "");
-      var1 = spawnStruct();
-      var1.origin = level.players[0].origin;
-      var1.angles = level.players[0].angles;
-      var2 = spawn("trigger_radius", var1.origin, 0, 120, 128);
-      var1.trigger = var2;
-      var1.trigger.script_label = var0;
-      var1.ownerteam = "neutral";
-      var3 = var1.origin + (0, 0, 32);
-      var4 = var1.origin + (0, 0, -32);
-      var5 = scripts\engine\trace::ray_trace(var3, var4, undefined, scripts\engine\trace::create_default_contents(1));
-      var1.origin = var5["position"];
-      var1.upangles = vectortoangles(var5["normal"]);
-      var1.forward = anglesToForward(var1.upangles);
-      var1.right = anglestoright(var1.upangles);
-      var1.visuals[0] = spawn("script_model", var1.origin);
-      var1.visuals[0].angles = var1.angles;
-      var6 = scripts\mp\gameobjects::createuseobject("neutral", var1.trigger, var1.visuals, (0, 0, 100));
-      var6 scripts\mp\gameobjects::allowuse("enemy");
-      var6 scripts\mp\gameobjects::setusetime(10);
+      var_0 = getDvar("scr_devPlaceDomFlag", "");
+      var_1 = spawnStruct();
+      var_1.origin = level.players[0].origin;
+      var_1.angles = level.players[0].angles;
+      var_2 = spawn("trigger_radius", var_1.origin, 0, 120, 128);
+      var_1.trigger = var_2;
+      var_1.trigger.script_label = var_0;
+      var_1.ownerteam = "neutral";
+      var_3 = var_1.origin + (0, 0, 32);
+      var_4 = var_1.origin + (0, 0, -32);
+      var_5 = scripts\engine\trace::ray_trace(var_3, var_4, undefined, scripts\engine\trace::create_default_contents(1));
+      var_1.origin = var_5["position"];
+      var_1.upangles = vectortoangles(var_5["normal"]);
+      var_1.forward = anglesToForward(var_1.upangles);
+      var_1.right = anglestoright(var_1.upangles);
+      var_1.visuals[0] = spawn("script_model", var_1.origin);
+      var_1.visuals[0].angles = var_1.angles;
+      var_6 = scripts\mp\gameobjects::createuseobject("neutral", var_1.trigger, var_1.visuals, (0, 0, 100));
+      var_6 scripts\mp\gameobjects::allowuse("enemy");
+      var_6 scripts\mp\gameobjects::setusetime(10);
 
-      if(isDefined(var2.objectivekey)) {
-        var6.objectivekey = var2.objectivekey;
+      if(isDefined(var_2.objectivekey)) {
+        var_6.objectivekey = var_2.objectivekey;
       } else {
-        var6.objectivekey = var6 scripts\mp\gameobjects::getlabel();
+        var_6.objectivekey = var_6 scripts\mp\gameobjects::getlabel();
       }
 
-      if(isDefined(var2.iconname)) {
-        var6.iconname = var2.iconname;
+      if(isDefined(var_2.iconname)) {
+        var_6.iconname = var_2.iconname;
       } else {
-        var6.iconname = var6 scripts\mp\gameobjects::getlabel();
+        var_6.iconname = var_6 scripts\mp\gameobjects::getlabel();
       }
 
-      var6 scripts\mp\gameobjects::setobjectivestatusicons(level.icondefend, level.iconneutral);
-      var6 scripts\mp\gameobjects::setvisibleteam("any");
-      var6.onuse = &scripts\mp\gametypes\obj_dom::dompoint_onuse;
-      var6.onbeginuse = &scripts\mp\gametypes\obj_dom::dompoint_onusebegin;
-      var6.onuseupdate = &scripts\mp\gametypes\obj_dom::dompoint_onuseupdate;
-      var6.onenduse = &scripts\mp\gametypes\obj_dom::dompoint_onuseend;
-      var6.nousebar = 1;
-      var6.id = "domFlag";
-      var6.firstcapture = 1;
-      var6.claimgracetime = 10000;
-      var6.decayrate = 50;
-      var3 = var1.visuals[0].origin + (0, 0, 32);
-      var4 = var1.visuals[0].origin + (0, 0, -32);
-      var7 = scripts\engine\trace::create_contents(1, 1, 1, 1, 0, 1, 1);
-      var8 = [];
-      var5 = scripts\engine\trace::ray_trace(var3, var4, var8, var7);
-      var6.baseeffectpos = var5["position"];
-      var9 = vectortoangles(var5["normal"]);
-      var6.baseeffectforward = anglesToForward(var9);
-      var6 scripts\mp\gametypes\obj_dom::initializematchrecording();
-      var6 thread scripts\mp\gametypes\obj_dom::domflag_setneutral();
-      level.objectives[var6.objectivekey] = var6;
+      var_6 scripts\mp\gameobjects::setobjectivestatusicons(level.icondefend, level.iconneutral);
+      var_6 scripts\mp\gameobjects::setvisibleteam("any");
+      var_6.onuse = &scripts\mp\gametypes\obj_dom::dompoint_onuse;
+      var_6.onbeginuse = &scripts\mp\gametypes\obj_dom::dompoint_onusebegin;
+      var_6.onuseupdate = &scripts\mp\gametypes\obj_dom::dompoint_onuseupdate;
+      var_6.onenduse = &scripts\mp\gametypes\obj_dom::dompoint_onuseend;
+      var_6.nousebar = 1;
+      var_6.id = "domFlag";
+      var_6.firstcapture = 1;
+      var_6.claimgracetime = 10000;
+      var_6.decayrate = 50;
+      var_3 = var_1.visuals[0].origin + (0, 0, 32);
+      var_4 = var_1.visuals[0].origin + (0, 0, -32);
+      var_7 = scripts\engine\trace::create_contents(1, 1, 1, 1, 0, 1, 1);
+      var_8 = [];
+      var_5 = scripts\engine\trace::ray_trace(var_3, var_4, var_8, var_7);
+      var_6.baseeffectpos = var_5["position"];
+      var_9 = vectortoangles(var_5["normal"]);
+      var_6.baseeffectforward = anglesToForward(var_9);
+      var_6 scripts\mp\gametypes\obj_dom::initializematchrecording();
+      var_6 thread scripts\mp\gametypes\obj_dom::domflag_setneutral();
+      level.objectives[var_6.objectivekey] = var_6;
       setdynamicdvar("scr_devPlaceDomFlag", "");
     }
 
@@ -844,100 +844,100 @@ function placedompoint() {
 }
 
 function assigngamemodecallout() {
-  var0 = self getEye();
-  var1 = self getplayerangles();
-  var2 = anglesToForward(var1);
-  var3 = cos(10);
-  var4 = 250000;
-  var5 = undefined;
-  var6 = undefined;
-  var7 = undefined;
-  var8 = undefined;
-  var9 = undefined;
+  var_0 = self getEye();
+  var_1 = self getplayerangles();
+  var_2 = anglesToForward(var_1);
+  var_3 = cos(10);
+  var_4 = 250000;
+  var_5 = undefined;
+  var_6 = undefined;
+  var_7 = undefined;
+  var_8 = undefined;
+  var_9 = undefined;
 
-  foreach(var11 in level.objectives) {
-    var12 = vectorNormalize(var11.trigger.origin - var0);
-    var13 = vectordot(var2, var12);
-    var14 = distancesquared(var11.trigger.origin, var0);
+  foreach(var_11 in level.objectives) {
+    var_12 = vectorNormalize(var_11.trigger.origin - var_0);
+    var_13 = vectordot(var_2, var_12);
+    var_14 = distancesquared(var_11.trigger.origin, var_0);
 
-    if(!isDefined(var5) || var5 < var13) {
-      var5 = var13;
-      var7 = var14;
-      var6 = var11;
+    if(!isDefined(var_5) || var_5 < var_13) {
+      var_5 = var_13;
+      var_7 = var_14;
+      var_6 = var_11;
     }
 
-    if(!isDefined(var8) || var8 > var14) {
-      var8 = var14;
-      var9 = var11;
+    if(!isDefined(var_8) || var_8 > var_14) {
+      var_8 = var_14;
+      var_9 = var_11;
     }
   }
 
-  var11 = undefined;
-  var16 = undefined;
-  var17 = undefined;
+  var_11 = undefined;
+  var_16 = undefined;
+  var_17 = undefined;
 
-  if(isDefined(var5) && var5 > var3) {
-    var11 = var6;
-    var18 = getsubstr(var11.objectivekey, 1, 2);
+  if(isDefined(var_5) && var_5 > var_3) {
+    var_11 = var_6;
+    var_18 = getsubstr(var_11.objectivekey, 1, 2);
 
-    if(var11.ownerteam == "neutral") {
-      var16 = self.name + ": Capture " + var18 + "!";
-      var17 = "capture";
-    } else if(var11.ownerteam == self.team) {
-      var16 = self.name + ": Defend" + var18 + "!";
-      var17 = "defend";
+    if(var_11.ownerteam == "neutral") {
+      var_16 = self.name + ": Capture " + var_18 + "!";
+      var_17 = "capture";
+    } else if(var_11.ownerteam == self.team) {
+      var_16 = self.name + ": Defend" + var_18 + "!";
+      var_17 = "defend";
     } else {
-      var16 = self.name + ": Assault " + var18 + "!";
-      var17 = "assault";
+      var_16 = self.name + ": Assault " + var_18 + "!";
+      var_17 = "assault";
     }
-  } else if(isDefined(var8) && var8 < var4) {
-    var11 = var9;
-    var18 = getsubstr(var11.objectivekey, 1, 2);
+  } else if(isDefined(var_8) && var_8 < var_4) {
+    var_11 = var_9;
+    var_18 = getsubstr(var_11.objectivekey, 1, 2);
 
-    if(var11.ownerteam == "neutral") {
-      var16 = self.name + ": Capture " + var18 + "!";
-      var17 = "capture";
-    } else if(var11.ownerteam == self.team) {
-      var16 = self.name + ": Defend" + var18 + "!";
-      var17 = "defend";
+    if(var_11.ownerteam == "neutral") {
+      var_16 = self.name + ": Capture " + var_18 + "!";
+      var_17 = "capture";
+    } else if(var_11.ownerteam == self.team) {
+      var_16 = self.name + ": Defend" + var_18 + "!";
+      var_17 = "defend";
     } else {
-      var16 = self.name + ": Assault " + var18 + "!";
-      var17 = "assault";
+      var_16 = self.name + ": Assault " + var_18 + "!";
+      var_17 = "assault";
     }
   }
 
-  if(isDefined(var11)) {
-    thread scripts\cp_mp\gestures::applygamemodecallout(var11, var16, var17);
+  if(isDefined(var_11)) {
+    thread scripts\cp_mp\gestures::applygamemodecallout(var_11, var_16, var_17);
   }
 
-  return isDefined(var11);
+  return isDefined(var_11);
 }
 
-function verifygamemodecallout(var0, var1) {
-  var2 = 0;
+function verifygamemodecallout(var_0, var_1) {
+  var_2 = 0;
 
-  switch (var0) {
+  switch (var_0) {
     case "capture":
-      if(var1.team == self.team) {
-        var2 = 1;
+      if(var_1.team == self.team) {
+        var_2 = 1;
       }
 
       break;
     case "defend":
-      if(var1.team == self.team) {
-        var2 = 1;
+      if(var_1.team == self.team) {
+        var_2 = 1;
       }
 
       break;
     case "assault":
-      if(var1.team == self.team) {
-        var2 = 1;
+      if(var_1.team == self.team) {
+        var_2 = 1;
       }
 
       break;
   }
 
-  return var2;
+  return var_2;
 }
 
 function updatematchstatushintonspawn() {
@@ -950,24 +950,24 @@ function ref_1402b() {
   level waittill("prematch_done");
 
   while(!level.gameended) {
-    foreach(var1 in level.players) {
-      var2 = 0;
+    foreach(var_1 in level.players) {
+      var_2 = 0;
 
-      foreach(var4 in level.objectives) {
-        if(var1 istouching(var4.trigger) && isalive(var1)) {
-          var2 = scripts\mp\gametypes\obj_dom::getreservedobjid(var4.objectivekey) + 1;
+      foreach(var_4 in level.objectives) {
+        if(var_1 istouching(var_4.trigger) && isalive(var_1)) {
+          var_2 = scripts\mp\gametypes\obj_dom::getreservedobjid(var_4.objectivekey) + 1;
           break;
         }
       }
 
-      if(!isDefined(var1.ref_11c62) || var1.ref_11c62 != var2) {
-        var1 setmlgthirdpersonenabled(var2);
-        var1.ref_11c62 = var2;
-        var1 setgametypevip(1);
+      if(!isDefined(var_1.ref_11c62) || var_1.ref_11c62 != var_2) {
+        var_1 setmlgthirdpersonenabled(var_2);
+        var_1.ref_11c62 = var_2;
+        var_1 setgametypevip(1);
       }
 
-      if(var2 == 0) {
-        var1 setgametypevip(0);
+      if(var_2 == 0) {
+        var_1 setgametypevip(0);
       }
     }
 

@@ -5,12 +5,12 @@
 
 function onplayerconnect() {
   for(;;) {
-    level waittill("connected", var0);
-    var0.numareas = 0;
+    level waittill("connected", var_0);
+    var_0.numareas = 0;
   }
 }
 
-function playerenterarea(var0) {
+function playerenterarea(var_0) {
   self.numareas++;
 
   if(self.numareas == 1) {
@@ -19,7 +19,7 @@ function playerenterarea(var0) {
   }
 }
 
-function playerleavearea(var0) {
+function playerleavearea(var_0) {
   self.numareas--;
 
   if(self.numareas != 0) {
@@ -35,7 +35,7 @@ function playerleavearea(var0) {
   }
 }
 
-function soundwatcher(var0) {
+function soundwatcher(var_0) {
   scripts\engine\utility::ref_143a5("death", "leftTrigger");
   self stoploopsound();
 }
@@ -110,42 +110,42 @@ function blackout() {
     self.radiationoverlay.alpha = 0;
   }
 
-  var0 = 1;
-  var1 = 2;
-  var2 = 0.25;
-  var3 = 1;
-  var4 = 5;
-  var5 = 100;
-  var6 = 0;
+  var_0 = 1;
+  var_1 = 2;
+  var_2 = 0.25;
+  var_3 = 1;
+  var_4 = 5;
+  var_5 = 100;
+  var_6 = 0;
 
   for(;;) {
     while(self.poison > 1) {
-      var7 = var5 - var4;
-      var6 = (self.poison - var4) / var7;
+      var_7 = var_5 - var_4;
+      var_6 = (self.poison - var_4) / var_7;
 
-      if(var6 < 0) {
-        var6 = 0;
-      } else if(var6 > 1) {
-        var6 = 1;
+      if(var_6 < 0) {
+        var_6 = 0;
+      } else if(var_6 > 1) {
+        var_6 = 1;
       }
 
-      var8 = var1 - var0;
-      var9 = var0 + var8 * (1 - var6);
-      var10 = var3 - var2;
-      var11 = var2 + var10 * var6;
-      var12 = var6 * 0.5;
+      var_8 = var_1 - var_0;
+      var_9 = var_0 + var_8 * (1 - var_6);
+      var_10 = var_3 - var_2;
+      var_11 = var_2 + var_10 * var_6;
+      var_12 = var_6 * 0.5;
 
-      if(var6 == 1) {
+      if(var_6 == 1) {
         break;
       }
 
-      var13 = var9 / 2;
-      fadeinblackout(self.radiationoverlay, var13, var11);
-      fadeoutblackout(self.radiationoverlay, var13, var12);
-      wait var6 * 0.5;
+      var_13 = var_9 / 2;
+      fadeinblackout(self.radiationoverlay, var_13, var_11);
+      fadeoutblackout(self.radiationoverlay, var_13, var_12);
+      wait var_6 * 0.5;
     }
 
-    if(var6 == 1) {
+    if(var_6 == 1) {
       break;
     }
 
@@ -159,18 +159,18 @@ function blackout() {
   fadeinblackout(self.radiationoverlay, 2, 0);
 }
 
-function doradiationdamage(var0) {
-  self thread[[level.callbackplayerdamage]](self, self, var0, 0, "MOD_SUICIDE", "claymore_mp", self.origin, (0, 0, 0) - self.origin, "none", 0);
+function doradiationdamage(var_0) {
+  self thread[[level.callbackplayerdamage]](self, self, var_0, 0, "MOD_SUICIDE", "claymore_mp", self.origin, (0, 0, 0) - self.origin, "none", 0);
 }
 
-function fadeinblackout(var0, var1) {
-  self fadeovertime(var0);
-  self.alpha = var1;
-  wait var0;
+function fadeinblackout(var_0, var_1) {
+  self fadeovertime(var_0);
+  self.alpha = var_1;
+  wait var_0;
 }
 
-function fadeoutblackout(var0, var1) {
-  self fadeovertime(var0);
-  self.alpha = var1;
-  wait var0;
+function fadeoutblackout(var_0, var_1) {
+  self fadeovertime(var_0);
+  self.alpha = var_1;
+  wait var_0;
 }

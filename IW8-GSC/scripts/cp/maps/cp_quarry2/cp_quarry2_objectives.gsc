@@ -27,15 +27,15 @@ function levelregisterobjectives() {
   scripts\cp\maps\cp_quarry2\inside_obj\cp_inside_obj::main();
 }
 
-function waitforallplayersnearpoint(var0, var1) {
-  var2 = 0;
+function waitforallplayersnearpoint(var_0, var_1) {
+  var_2 = 0;
 
-  while(!var2) {
-    var2 = 1;
+  while(!var_2) {
+    var_2 = 1;
 
-    foreach(var4 in level.players) {
-      if(distance(var4.origin, var0) > var1) {
-        var2 = 0;
+    foreach(var_4 in level.players) {
+      if(distance(var_4.origin, var_0) > var_1) {
+        var_2 = 0;
       }
     }
 
@@ -43,29 +43,29 @@ function waitforallplayersnearpoint(var0, var1) {
   }
 }
 
-function waitforvehicleorplayernearpoint(var0, var1) {
+function waitforvehicleorplayernearpoint(var_0, var_1) {
   level endon("game_ended");
-  var2 = 0;
-  var3 = 0;
+  var_2 = 0;
+  var_3 = 0;
 
-  while(!var2 && !var3) {
-    var2 = 0;
-    var3 = 0;
+  while(!var_2 && !var_3) {
+    var_2 = 0;
+    var_3 = 0;
 
     if(!isDefined(level.vehicle_travel_array)) {
       wait 5;
       continue;
     }
 
-    foreach(var5 in level.vehicle_travel_array) {
-      if(distance(var5.origin, var0) <= var1) {
-        var2 = 1;
+    foreach(var_5 in level.vehicle_travel_array) {
+      if(distance(var_5.origin, var_0) <= var_1) {
+        var_2 = 1;
       }
     }
 
-    foreach(var8 in level.players) {
-      if(distance(var8.origin, var0) <= var1) {
-        var3 = 1;
+    foreach(var_8 in level.players) {
+      if(distance(var_8.origin, var_0) <= var_1) {
+        var_3 = 1;
       }
     }
 
@@ -73,11 +73,11 @@ function waitforvehicleorplayernearpoint(var0, var1) {
   }
 }
 
-function initobjective1(var0, var1) {
+function initobjective1(var_0, var_1) {
   iprintlnbold("objective 1 init");
 }
 
-function startobjective1(var0, var1) {
+function startobjective1(var_0, var_1) {
   iprintlnbold("objective 1 Start");
 
   while(distance(level.players[0].origin, (14214, -8782, 520)) > 100) {
@@ -85,6 +85,6 @@ function startobjective1(var0, var1) {
   }
 }
 
-function completeobjective1(var0) {
+function completeobjective1(var_0) {
   iprintlnbold("objective 1 finished");
 }

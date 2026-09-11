@@ -84,21 +84,21 @@ function proxywar_railyard_hints() {
 }
 
 function check_mount() {
-  var0 = 0;
+  var_0 = 0;
 
   if(isDefined(level.mount_tutorial_time) && level.player playermount() > 0.5) {
-    var0 = 1;
+    var_0 = 1;
   } else {
     level.mount_tutorial_time = gettime();
   }
 
-  return var0 && scripts\engine\utility::time_has_passed(level.mount_tutorial_time, 2);
+  return var_0 && scripts\engine\utility::time_has_passed(level.mount_tutorial_time, 2);
 }
 
 function check_alt_fire() {
-  var0 = level.player getcurrentweapon();
-  var1 = getweaponbasename(var0);
-  return var1 == "iw8_ar_mike4" && !var0.isalternate;
+  var_0 = level.player getcurrentweapon();
+  var_1 = getweaponbasename(var_0);
+  return var_1 == "iw8_ar_mike4" && !var_0.isalternate;
 }
 
 function check_grenade() {
@@ -121,7 +121,7 @@ function railyard_entrance_main() {
   scripts\engine\sp\utility::autosave_by_name("railyard_entrance");
   scripts\sp\maps\proxywar\proxywar_util::disable_allies_firing();
 
-  foreach(var1 in level.alpha_and_bravo_team) {
+  foreach(var_1 in level.alpha_and_bravo_team) {
     thread railyard_entrance_allies();
   }
 
@@ -236,7 +236,7 @@ function railyard_entrance_tower_collapse() {
   scripts\engine\sp\objectives::objective_set_position("objective", scripts\engine\utility::getStruct("obj_infil_4", "targetname").origin);
 }
 
-function railyard_entrance_setup_burned_rus(var0) {
+function railyard_entrance_setup_burned_rus(var_0) {
   self.health = 1;
   self.diequietly = 1;
   scripts\sp\utility::context_melee_allow(0);
@@ -248,7 +248,7 @@ function railyard_entrance_setup_burned_rus(var0) {
   self.skipdeathanim = 1;
   self.allowdeath = 1;
 
-  if(istrue(var0)) {
+  if(istrue(var_0)) {
     scripts\common\ai::gun_remove();
     return;
   }
@@ -258,42 +258,42 @@ function railyard_entrance_burning_guy() {
   scripts\engine\utility::flag_wait("reached_tower_collapse");
   wait 4;
   scripts\engine\utility::flag_wait("cue_burning_guy");
-  var0 = scripts\engine\sp\utility::spawn_targetname("rus_re_burning_guy", 1);
-  var0.animname = "burning_guy";
-  railyard_entrance_setup_burned_rus(var0, 1);
-  thread scripts\sp\maps\proxywar\proxywar_vo::vo_re_entrance_burner(var0);
-  var1 = scripts\engine\utility::getStruct("ap_burning_guy", "targetname");
-  var1 thread scripts\common\anim::anim_single_solo(var0, "burning_guy_death");
-  var0 scripts\engine\utility::delaythread(4, &scripts\engine\sp\utility::set_ignoreme, 1);
-  var2 = scripts\engine\utility::waittill_any_ents_return(var0, "damage", var1, "burning_guy_death");
+  var_0 = scripts\engine\sp\utility::spawn_targetname("rus_re_burning_guy", 1);
+  var_0.animname = "burning_guy";
+  railyard_entrance_setup_burned_rus(var_0, 1);
+  thread scripts\sp\maps\proxywar\proxywar_vo::vo_re_entrance_burner(var_0);
+  var_1 = scripts\engine\utility::getStruct("ap_burning_guy", "targetname");
+  var_1 thread scripts\common\anim::anim_single_solo(var_0, "burning_guy_death");
+  var_0 scripts\engine\utility::delaythread(4, &scripts\engine\sp\utility::set_ignoreme, 1);
+  var_2 = scripts\engine\utility::waittill_any_ents_return(var_0, "damage", var_1, "burning_guy_death");
 
-  if(isalive(var0)) {
-    if(var2 == "burning_guy_death") {
-      var0.noragdoll = 1;
+  if(isalive(var_0)) {
+    if(var_2 == "burning_guy_death") {
+      var_0.noragdoll = 1;
     }
 
-    var0 scripts\engine\sp\utility::die();
+    var_0 scripts\engine\sp\utility::die();
     return;
   }
 }
 
 function railyard_entrance_pistol_guy() {
   scripts\engine\utility::flag_wait("cue_pistol_guy");
-  var0 = scripts\engine\sp\utility::spawn_targetname("rus_re_pistol_guy", 1);
-  var0.script_noteworthy = "pistol_guy";
-  var0.animname = "pistol_guy";
-  thread railyard_entrance_setup_burned_rus(var0);
-  var0.sidearm = var0.weapon;
-  var1 = scripts\engine\utility::getStruct("ap_pistol_guy", "targetname");
-  var1 scripts\common\anim::anim_first_frame_solo(var0, "back_crawl_fire");
-  var2 = 0;
+  var_0 = scripts\engine\sp\utility::spawn_targetname("rus_re_pistol_guy", 1);
+  var_0.script_noteworthy = "pistol_guy";
+  var_0.animname = "pistol_guy";
+  thread railyard_entrance_setup_burned_rus(var_0);
+  var_0.sidearm = var_0.weapon;
+  var_1 = scripts\engine\utility::getStruct("ap_pistol_guy", "targetname");
+  var_1 scripts\common\anim::anim_first_frame_solo(var_0, "back_crawl_fire");
+  var_2 = 0;
 
-  while(!var2) {
+  while(!var_2) {
     if(scripts\engine\utility::flag("cue_crawling_guy")) {
-      var2 = 1;
-    } else if(scripts\sp\maps\proxywar\proxywar_util::within_player_fov(var0.origin)) {
-      if(level.player scripts\engine\utility::can_trace_to_ai(level.player getEye(), var0, level.alpha_and_bravo_team, scripts\engine\trace::create_ainosight_contents())) {
-        var2 = 1;
+      var_2 = 1;
+    } else if(scripts\sp\maps\proxywar\proxywar_util::within_player_fov(var_0.origin)) {
+      if(level.player scripts\engine\utility::can_trace_to_ai(level.player getEye(), var_0, level.alpha_and_bravo_team, scripts\engine\trace::create_ainosight_contents())) {
+        var_2 = 1;
       }
     }
 
@@ -302,13 +302,13 @@ function railyard_entrance_pistol_guy() {
 
   thread railyard_entrance_pistol_guy_burning_fx();
   scripts\engine\utility::flag_set("pistol_guy_firing");
-  thread scripts\sp\maps\proxywar\proxywar_vo::vo_re_pistol_burner(var0);
+  thread scripts\sp\maps\proxywar\proxywar_vo::vo_re_pistol_burner(var_0);
 
-  if(isalive(var0)) {
-    var0 thread scripts\common\anim::anim_single_solo(var0, "back_crawl_fire");
+  if(isalive(var_0)) {
+    var_0 thread scripts\common\anim::anim_single_solo(var_0, "back_crawl_fire");
 
-    if(isalive(var0)) {
-      var0 waittill("death");
+    if(isalive(var_0)) {
+      var_0 waittill("death");
     }
   }
 
@@ -332,29 +332,29 @@ function railyard_entrance_pistol_guy_burning_fx() {
 function railyard_entrance_crawling_guy() {
   scripts\engine\utility::flag_wait("cue_crawling_guy");
   wait 1.5;
-  var0 = scripts\engine\sp\utility::spawn_targetname("rus_re_crawling_guy", 1);
-  var0.animname = "crawling_guy";
-  var0.script_noteworthy = "rus_re_crawling_guy";
-  railyard_entrance_setup_burned_rus(var0, 1);
-  thread scripts\sp\maps\proxywar\proxywar_vo::vo_re_crawling_burner(var0);
-  var1 = scripts\engine\utility::getStruct("ap_crawling_guy", "targetname");
-  var1 scripts\common\anim::anim_single_solo(var0, "crawling_guy_enter");
+  var_0 = scripts\engine\sp\utility::spawn_targetname("rus_re_crawling_guy", 1);
+  var_0.animname = "crawling_guy";
+  var_0.script_noteworthy = "rus_re_crawling_guy";
+  railyard_entrance_setup_burned_rus(var_0, 1);
+  thread scripts\sp\maps\proxywar\proxywar_vo::vo_re_crawling_burner(var_0);
+  var_1 = scripts\engine\utility::getStruct("ap_crawling_guy", "targetname");
+  var_1 scripts\common\anim::anim_single_solo(var_0, "crawling_guy_enter");
 
-  if(isalive(var0)) {
-    var1 thread scripts\common\anim::anim_loop_solo(var0, "crawling_guy_idle", "stop_loop_crawler");
+  if(isalive(var_0)) {
+    var_1 thread scripts\common\anim::anim_loop_solo(var_0, "crawling_guy_idle", "stop_loop_crawler");
   }
 
   scripts\engine\utility::flag_set("crawling_guy_idling");
   scripts\engine\utility::flag_wait("cue_crawling_guy_death");
 
-  if(isalive(var0)) {
-    var1 notify("stop_loop_crawler");
-    var1 scripts\common\anim::anim_single_solo(var0, "crawling_guy_kill");
+  if(isalive(var_0)) {
+    var_1 notify("stop_loop_crawler");
+    var_1 scripts\common\anim::anim_single_solo(var_0, "crawling_guy_kill");
   }
 
-  if(isalive(var0)) {
-    var0.noragdoll = 1;
-    var0 scripts\engine\sp\utility::die();
+  if(isalive(var_0)) {
+    var_0.noragdoll = 1;
+    var_0 scripts\engine\sp\utility::die();
   }
 
   scripts\engine\utility::flag_set("crawling_guy_dead");
@@ -397,13 +397,13 @@ function railyard_breach_main() {
   thread audio_railyard_fires();
   scripts\engine\sp\objectives::objective_set_position("objective", scripts\engine\utility::getStruct("obj_breach_room", "targetname").origin);
   level.ap_breach = scripts\engine\utility::getStruct("ap_breach", "targetname");
-  var0 = scripts\engine\sp\utility::array_spawn_targetname("rus_breach_guys", 1);
+  var_0 = scripts\engine\sp\utility::array_spawn_targetname("rus_breach_guys", 1);
   thread scripts\sp\maps\proxywar\proxywar_vo::vo_rb_ru_breach_guys();
   scripts\engine\utility::array_thread(level.alpha_team, &railyard_breach_ally_alpha);
   scripts\engine\utility::array_thread(level.bravo_team, &railyard_breach_ally_bravo);
   thread railyard_breach_door_open_checker();
   thread railyard_breach_player_fire_checker();
-  thread railyard_breach_player_flashlight_checker(var0);
+  thread railyard_breach_player_flashlight_checker(var_0);
   thread railyard_breach_player_looking_at_breach();
   thread railyard_player_near_breach();
   thread railyard_breach_breach_door();
@@ -415,7 +415,7 @@ function railyard_breach_main() {
 
   if(railyard_player_skipped_breach()) {
     scripts\engine\utility::flag_set("player_skipped_breach");
-    thread railyard_breach_check_deaths(var0);
+    thread railyard_breach_check_deaths(var_0);
     thread scripts\sp\maps\proxywar\proxywar_vo::vo_rb_breaching();
     scripts\engine\utility::flag_wait("enemies_dead_breach_done");
     return;
@@ -426,8 +426,8 @@ function railyard_breach_main() {
   scripts\engine\utility::flag_wait_any("alpha1_breach_done", "alpha2_breach_done");
 }
 
-function railyard_breach_check_deaths(var0) {
-  scripts\engine\sp\utility::waittill_dead_or_dying(var0);
+function railyard_breach_check_deaths(var_0) {
+  scripts\engine\sp\utility::waittill_dead_or_dying(var_0);
   scripts\engine\utility::flag_set("enemies_dead_breach_done");
 }
 
@@ -453,8 +453,8 @@ function railyard_breach_ally_alpha() {
   self enableavoidance(1, 1);
 
   if(self.script_noteworthy == "alpha1") {
-    var0 = ["dx_vom_h71_railyard_breach_armory_10", "dx_vom_h71_railyard_breach_armory_20", "dx_vom_h71_railyard_breach_armory_30"];
-    level.alpha1 childthread scripts\sp\maps\proxywar\proxywar_vo::nagtill_delayed(12, "animated_breach_started", var0, 15);
+    var_0 = ["dx_vom_h71_railyard_breach_armory_10", "dx_vom_h71_railyard_breach_armory_20", "dx_vom_h71_railyard_breach_armory_30"];
+    level.alpha1 childthread scripts\sp\maps\proxywar\proxywar_vo::nagtill_delayed(12, "animated_breach_started", var_0, 15);
   }
 
   level.ap_breach thread scripts\common\anim::anim_loop_solo(self, "breach_idle", "stop_loop_" + self.script_noteworthy);
@@ -510,21 +510,21 @@ function railyard_breach_ally_bravo() {
 
 function railyard_breach_breach_door() {
   level endon("player_skipped_breach");
-  var0 = scripts\sp\door::get_interactive_door("breach_door");
+  var_0 = scripts\sp\door::get_interactive_door("breach_door");
   scripts\engine\utility::flag_wait("alpha2_breach_ready");
-  var0 scripts\sp\door::remove_open_ability();
+  var_0 scripts\sp\door::remove_open_ability();
   scripts\engine\utility::flag_wait("animated_breach_started");
   scripts\engine\utility::flag_set("breach_door_open");
-  level.ap_breach scripts\sp\maps\proxywar\proxywar_util::anim_door(var0, "breach_room");
+  level.ap_breach scripts\sp\maps\proxywar\proxywar_util::anim_door(var_0, "breach_room");
 }
 
 function railyard_breach_door_open_checker() {
   level endon("animated_breach_started");
-  var0 = scripts\sp\door::get_interactive_door("breach_door");
-  var1 = 15;
-  var2 = angleclamp180(var0.angles[1]);
+  var_0 = scripts\sp\door::get_interactive_door("breach_door");
+  var_1 = 15;
+  var_2 = angleclamp180(var_0.angles[1]);
 
-  while(angleclamp180(var0.angles[1] - var2) < var1) {
+  while(angleclamp180(var_0.angles[1] - var_2) < var_1) {
     waitframe();
   }
 
@@ -534,25 +534,25 @@ function railyard_breach_door_open_checker() {
 function railyard_breach_player_fire_checker() {
   level endon("animated_breach_started");
   level endon("player_fired_at_breach");
-  var0 = scripts\engine\utility::getStruct("player_vision_check", "targetname").origin;
-  var1 = 0;
+  var_0 = scripts\engine\utility::getStruct("player_vision_check", "targetname").origin;
+  var_1 = 0;
 
-  while(!var1) {
+  while(!var_1) {
     level.player scripts\engine\utility::waittill_any("weapon_fired", "grenade_fire");
-    var1 = level.player scripts\engine\trace::can_see_origin(var0);
+    var_1 = level.player scripts\engine\trace::can_see_origin(var_0);
     waitframe();
   }
 
   scripts\engine\utility::flag_set("player_fired_at_breach");
 }
 
-function railyard_breach_player_flashlight_checker(var0) {
+function railyard_breach_player_flashlight_checker(var_0) {
   level endon("animated_breach_started");
   level endon("player_fired_at_breach");
 
   while(!scripts\engine\utility::flag("player_fired_at_breach")) {
-    foreach(var2 in var0) {
-      if(scripts\sp\maps\proxywar\proxywar_util::player_shining_light_at(var2, 300)) {
+    foreach(var_2 in var_0) {
+      if(scripts\sp\maps\proxywar\proxywar_util::player_shining_light_at(var_2, 300)) {
         scripts\engine\utility::flag_set("player_fired_at_breach");
         break;
       }
@@ -566,8 +566,8 @@ function railyard_breach_player_looking_at_breach() {
   level endon("animated_breach_started");
   level endon("player_skipped_breach");
   scripts\engine\utility::flag_wait_all("alpha1_breach_ready", "alpha2_breach_ready");
-  var0 = scripts\engine\utility::getStruct("player_vision_check", "targetname").origin;
-  var1 = 0;
+  var_0 = scripts\engine\utility::getStruct("player_vision_check", "targetname").origin;
+  var_1 = 0;
 
   if(!isDefined(level.breach_trigger_time)) {
     level.breach_trigger_time = 0;
@@ -575,9 +575,9 @@ function railyard_breach_player_looking_at_breach() {
 
   while(level.breach_trigger_time < 6) {
     if(scripts\engine\utility::flag("breach_window_view")) {
-      var1 = level.player scripts\engine\trace::can_see_origin(var0);
+      var_1 = level.player scripts\engine\trace::can_see_origin(var_0);
 
-      if(var1) {
+      if(var_1) {
         level.breach_trigger_time += 0.05;
       }
     }
@@ -747,19 +747,19 @@ function railyard_combat_intro_main() {
 }
 
 function railyard_combat_intro_door() {
-  var0 = scripts\sp\door::get_interactive_door("breach_door_exit_left");
-  var1 = scripts\sp\door::get_interactive_door("breach_door_exit_right");
-  var1 scripts\sp\door::remove_open_ability();
-  thread railyard_combat_intro_player_looking(var0, var1);
+  var_0 = scripts\sp\door::get_interactive_door("breach_door_exit_left");
+  var_1 = scripts\sp\door::get_interactive_door("breach_door_exit_right");
+  var_1 scripts\sp\door::remove_open_ability();
+  thread railyard_combat_intro_player_looking(var_0, var_1);
   thread railyard_combat_intro_check_player_tries_door();
   scripts\engine\utility::flag_wait("hide_door_interact_combat_intro");
-  var0 scripts\sp\door::remove_open_ability();
+  var_0 scripts\sp\door::remove_open_ability();
   scripts\engine\utility::flag_wait_all("alpha1_railyard_enter_ready", "alpha2_railyard_enter_ready", "player_near_combat_intro", "player_looking_at_combat_intro");
   scripts\engine\utility::exploder("wp_explo_aftermath_02");
-  level.ap_combat_intro thread scripts\sp\maps\proxywar\proxywar_util::anim_door(var0, "combat_intro_halligan_door_l");
-  level.ap_combat_intro scripts\sp\maps\proxywar\proxywar_util::anim_door(var1, "combat_intro_halligan_door_r");
-  level.ap_combat_intro thread scripts\sp\maps\proxywar\proxywar_util::anim_door(var0, "combat_intro_scene_door_l");
-  level.ap_combat_intro scripts\sp\maps\proxywar\proxywar_util::anim_door(var1, "combat_intro_scene_door_r");
+  level.ap_combat_intro thread scripts\sp\maps\proxywar\proxywar_util::anim_door(var_0, "combat_intro_halligan_door_l");
+  level.ap_combat_intro scripts\sp\maps\proxywar\proxywar_util::anim_door(var_1, "combat_intro_halligan_door_r");
+  level.ap_combat_intro thread scripts\sp\maps\proxywar\proxywar_util::anim_door(var_0, "combat_intro_scene_door_l");
+  level.ap_combat_intro scripts\sp\maps\proxywar\proxywar_util::anim_door(var_1, "combat_intro_scene_door_r");
 }
 
 function railyard_combat_intro_check_player_tries_door() {
@@ -768,9 +768,9 @@ function railyard_combat_intro_check_player_tries_door() {
   thread scripts\sp\maps\proxywar\proxywar_vo::vo_rci_player_tries_door();
 }
 
-function railyard_combat_intro_player_looking(var0, var1) {
+function railyard_combat_intro_player_looking(var_0, var_1) {
   while(!scripts\engine\utility::flag("alpha1_railyard_enter_ready") || !scripts\engine\utility::flag("alpha2_railyard_enter_ready") || !scripts\engine\utility::flag("player_near_combat_intro") || !scripts\engine\utility::flag("player_looking_at_combat_intro")) {
-    if(scripts\sp\maps\proxywar\proxywar_util::within_player_fov_2d(var0.origin) || scripts\sp\maps\proxywar\proxywar_util::within_player_fov_2d(var1.origin)) {
+    if(scripts\sp\maps\proxywar\proxywar_util::within_player_fov_2d(var_0.origin) || scripts\sp\maps\proxywar\proxywar_util::within_player_fov_2d(var_1.origin)) {
       scripts\engine\utility::flag_set("player_looking_at_combat_intro");
     } else {
       scripts\engine\utility::flag_clear("player_looking_at_combat_intro");
@@ -823,8 +823,8 @@ function railyard_combat_intro_alpha2() {
   level.ap_combat_intro scripts\common\anim::anim_single_solo(self, "combat_intro_enter");
 
   if(!scripts\engine\utility::flag("player_near_combat_intro")) {
-    var0 = ["dx_vom_h71_railyard_breach_armory_230", "dx_vom_h71_railyard_breach_armory_240"];
-    level.alpha1 thread scripts\sp\maps\proxywar\proxywar_vo::nagtill_delayed(6, "player_near_combat_intro", var0, 12);
+    var_0 = ["dx_vom_h71_railyard_breach_armory_230", "dx_vom_h71_railyard_breach_armory_240"];
+    level.alpha1 thread scripts\sp\maps\proxywar\proxywar_vo::nagtill_delayed(6, "player_near_combat_intro", var_0, 12);
   }
 
   scripts\engine\utility::flag_set("alpha2_railyard_enter_ready");
@@ -855,54 +855,54 @@ function railyard_combat_intro_lmg() {
   scripts\engine\utility::flag_wait("start_combat_intro_scene");
   wait 4.9;
   railyard_combat_setup_lmg();
-  var0 = level.alpha2 gettagorigin("j_spine4");
-  level.railyard_lmg scripts\sp\maps\proxywar\proxywar_util::magic_gun_set_target(var0, 0);
-  var1 = scripts\engine\utility::spawn_tag_origin(var0);
-  var1 scripts\engine\sp\utility::assign_animtree("mg_target");
-  level.railyard_lmg thread scripts\sp\maps\proxywar\proxywar_util::magic_gun_track_ent(var1);
-  thread railyard_combat_intro_lmg_light(var0);
+  var_0 = level.alpha2 gettagorigin("j_spine4");
+  level.railyard_lmg scripts\sp\maps\proxywar\proxywar_util::magic_gun_set_target(var_0, 0);
+  var_1 = scripts\engine\utility::spawn_tag_origin(var_0);
+  var_1 scripts\engine\sp\utility::assign_animtree("mg_target");
+  level.railyard_lmg thread scripts\sp\maps\proxywar\proxywar_util::magic_gun_track_ent(var_1);
+  thread railyard_combat_intro_lmg_light(var_0);
   wait 0.5;
-  var2 = getEnt("combat_intro_player_blocker", "targetname");
-  var2 scripts\engine\utility::delaycall(1, &delete);
+  var_2 = getEnt("combat_intro_player_blocker", "targetname");
+  var_2 scripts\engine\utility::delaycall(1, &delete);
   level.alpha2 scripts\engine\utility::delaycall(1, &visiblenotsolid);
-  level.ap_combat_intro thread scripts\common\anim::anim_single_solo(var1, "combat_intro_scene");
+  level.ap_combat_intro thread scripts\common\anim::anim_single_solo(var_1, "combat_intro_scene");
   railyard_combat_lmg_fire(level.railyard_lmg, 100, 0.25);
   level.railyard_lmg thread scripts\sp\maps\proxywar\proxywar_util::magic_gun_stop_tracking();
-  var1 delete();
+  var_1 delete();
   scripts\engine\utility::flag_set("lmg_intro_done");
 }
 
-function railyard_combat_intro_lmg_light(var0) {
-  var1 = scripts\engine\utility::spawn_tag_origin((0, 0, 0));
-  var1.angles = vectortoangles(vectorNormalize(var0 - level.railyard_lmg.og_origin));
-  var1.origin = var0 + anglesToForward(var1.angles) * -1600;
-  playFXOnTag(scripts\engine\utility::getfx("vfx_proxywar_mg_searchlight_door"), var1, "tag_origin");
-  thread scripts\engine\utility::play_sound_in_space("proxy_light_turn_on", var1.origin);
+function railyard_combat_intro_lmg_light(var_0) {
+  var_1 = scripts\engine\utility::spawn_tag_origin((0, 0, 0));
+  var_1.angles = vectortoangles(vectorNormalize(var_0 - level.railyard_lmg.og_origin));
+  var_1.origin = var_0 + anglesToForward(var_1.angles) * -1600;
+  playFXOnTag(scripts\engine\utility::getfx("vfx_proxywar_mg_searchlight_door"), var_1, "tag_origin");
+  thread scripts\engine\utility::play_sound_in_space("proxy_light_turn_on", var_1.origin);
 
-  while(scripts\engine\utility::flag("player_inside_intro_room") && (!scripts\sp\maps\proxywar\proxywar_util::within_player_fov(var1.origin) || !scripts\engine\trace::ray_trace_passed(level.player getEye(), var1.origin, level.player, scripts\engine\trace::create_default_contents(1)))) {
+  while(scripts\engine\utility::flag("player_inside_intro_room") && (!scripts\sp\maps\proxywar\proxywar_util::within_player_fov(var_1.origin) || !scripts\engine\trace::ray_trace_passed(level.player getEye(), var_1.origin, level.player, scripts\engine\trace::create_default_contents(1)))) {
     wait 0.1;
   }
 
-  stopFXOnTag(scripts\engine\utility::getfx("vfx_proxywar_mg_searchlight_door"), var1, "tag_origin");
-  var1 delete();
+  stopFXOnTag(scripts\engine\utility::getfx("vfx_proxywar_mg_searchlight_door"), var_1, "tag_origin");
+  var_1 delete();
 }
 
 function railyard_combat_intro_catchup() {
   scripts\engine\utility::exploder("wp_explo_aftermath_02");
   scripts\engine\sp\objectives::objective_set_position("objective", scripts\engine\utility::getStruct("obj_enter_railyard", "targetname").origin);
   thread railyard_combat_intro_door_catchup();
-  var0 = getEnt("combat_intro_player_blocker", "targetname");
-  var0 delete();
+  var_0 = getEnt("combat_intro_player_blocker", "targetname");
+  var_0 delete();
 }
 
 function railyard_combat_intro_door_catchup() {
   level.ap_combat_intro = scripts\engine\utility::getStruct("ap_combat_intro", "targetname");
-  var0 = scripts\sp\door::get_interactive_door("breach_door_exit_left");
-  var1 = scripts\sp\door::get_interactive_door("breach_door_exit_right");
-  var0 scripts\sp\door::remove_open_ability();
-  var1 scripts\sp\door::remove_open_ability();
-  level.ap_combat_intro thread scripts\sp\maps\proxywar\proxywar_util::anim_last_frame_door(var0, "combat_intro_scene_door_l");
-  level.ap_combat_intro thread scripts\sp\maps\proxywar\proxywar_util::anim_last_frame_door(var1, "combat_intro_scene_door_r");
+  var_0 = scripts\sp\door::get_interactive_door("breach_door_exit_left");
+  var_1 = scripts\sp\door::get_interactive_door("breach_door_exit_right");
+  var_0 scripts\sp\door::remove_open_ability();
+  var_1 scripts\sp\door::remove_open_ability();
+  level.ap_combat_intro thread scripts\sp\maps\proxywar\proxywar_util::anim_last_frame_door(var_0, "combat_intro_scene_door_l");
+  level.ap_combat_intro thread scripts\sp\maps\proxywar\proxywar_util::anim_last_frame_door(var_1, "combat_intro_scene_door_r");
 }
 
 function railyard_combat_start() {
@@ -942,10 +942,10 @@ function railyard_combat_main() {
   thread scripts\engine\sp\utility::battlechatter_on("axis");
   scripts\sp\maps\proxywar\proxywar_util::enable_allies_firing();
 
-  foreach(var1 in level.alpha_and_bravo_team) {
-    var1 scripts\common\utility::clear_movement_speed();
-    var1 scripts\engine\sp\utility::enable_ai_color();
-    var1.disableplayeradsloscheck = 0;
+  foreach(var_1 in level.alpha_and_bravo_team) {
+    var_1 scripts\common\utility::clear_movement_speed();
+    var_1 scripts\engine\sp\utility::enable_ai_color();
+    var_1.disableplayeradsloscheck = 0;
   }
 
   thread railyard_combat_supressing_ally();
@@ -971,8 +971,8 @@ function railyard_combat_main() {
   thread scripts\sp\maps\proxywar\proxywar_vo::vo_rc_mg_suppress_reminder();
   scripts\engine\utility::flag_wait_any("machine_gunner_killed", "reached_courtyard_overlook");
 
-  foreach(var1 in level.alpha_and_bravo_team) {
-    var1 setthreatbiasgroup("allies");
+  foreach(var_1 in level.alpha_and_bravo_team) {
+    var_1 setthreatbiasgroup("allies");
   }
 
   level.bravo1.script_color_delay_override = undefined;
@@ -989,21 +989,21 @@ function railyard_combat_threat_think() {
   setignoremegroup("allies_left", "axis_right");
   setignoremegroup("allies_right", "axis_left");
   scripts\engine\utility::flag_wait("lmg_intro_done");
-  var0 = 0;
+  var_0 = 0;
 
   while(isDefined(level.railyard_lmg)) {
-    var1 = anglestoright(level.railyard_lmg.og_angles + (0, -30, 0));
-    var2 = scripts\engine\utility::flatten_vector(level.player.origin - level.railyard_lmg.og_origin);
-    var3 = vectordot(var1, var2);
+    var_1 = anglestoright(level.railyard_lmg.og_angles + (0, -30, 0));
+    var_2 = scripts\engine\utility::flatten_vector(level.player.origin - level.railyard_lmg.og_origin);
+    var_3 = vectordot(var_1, var_2);
 
-    if(!var0 && var3 > 0) {
-      var0 = 1;
+    if(!var_0 && var_3 > 0) {
+      var_0 = 1;
       setignoremegroup("player", "axis_right");
       setignoremegroup("axis_right", "player");
       setthreatbias("axis_left", "player", getthreatbias("axis", "player"));
       setthreatbias("player", "axis_left", getthreatbias("player", "axis"));
-    } else if(var0 && var3 < 0) {
-      var0 = 0;
+    } else if(var_0 && var_3 < 0) {
+      var_0 = 0;
       setignoremegroup("player", "axis_left");
       setignoremegroup("axis_left", "player");
       setthreatbias("axis_right", "player", getthreatbias("axis", "player"));
@@ -1021,14 +1021,14 @@ function railyard_combat_threat_think() {
 
 function railyard_combat_machine_gunner() {
   level endon("machine_gunner_killed");
-  var0 = getEnt("mg_pickup", "targetname");
-  var1 = getspawner("rus_railyard_mg", "targetname");
+  var_0 = getEnt("mg_pickup", "targetname");
+  var_1 = getspawner("rus_railyard_mg", "targetname");
   thread railyard_combat_lmg();
-  thread railyard_combat_mg_grenade_check(var1);
+  thread railyard_combat_mg_grenade_check(var_1);
   scripts\engine\utility::flag_wait("flanked_machine_gunner");
-  var1.count = 1;
-  var2 = var1 scripts\engine\sp\utility::spawn_ai(1);
-  var2.disablepistol = 1;
+  var_1.count = 1;
+  var_2 = var_1 scripts\engine\sp\utility::spawn_ai(1);
+  var_2.disablepistol = 1;
   thread railyard_combat_machine_gunner_flag_on_death();
   thread railyard_combat_machine_gunner_lethal_on_bypass();
   thread railyard_combat_machine_gunner_attack_point();
@@ -1037,9 +1037,9 @@ function railyard_combat_machine_gunner() {
 
 function railyard_combat_machine_gunner_flag_on_death() {
   self endon("machine_gunner_killed");
-  self waittill("death", var0, var1);
+  self waittill("death", var_0, var_1);
 
-  if(scripts\engine\utility::is_equal(var1, "MOD_GRENADE") || scripts\engine\utility::is_equal(var1, "MOD_GRENADE_SPLASH")) {
+  if(scripts\engine\utility::is_equal(var_1, "MOD_GRENADE") || scripts\engine\utility::is_equal(var_1, "MOD_GRENADE_SPLASH")) {
     scripts\sp\utility::giveachievement_wrapper("fogfrag");
   }
 
@@ -1047,15 +1047,15 @@ function railyard_combat_machine_gunner_flag_on_death() {
 }
 
 function railyard_combat_machine_gunner_drop_weapon() {
-  var0 = createheadicon(self.weapon);
-  var1 = scripts\engine\utility::waittill_any_return("death", "weapon_dropped");
+  var_0 = createheadicon(self.weapon);
+  var_1 = scripts\engine\utility::waittill_any_return("death", "weapon_dropped");
 
-  if(var1 == "death") {
-    var2 = self.origin;
-    var1 = scripts\engine\utility::waittill_notify_or_timeout_return("weapon_dropped", 0.5);
+  if(var_1 == "death") {
+    var_2 = self.origin;
+    var_1 = scripts\engine\utility::waittill_notify_or_timeout_return("weapon_dropped", 0.5);
 
-    if(var1 == "timeout") {
-      var3 = spawn("weapon_" + var0, var2 + (0, 0, 30));
+    if(var_1 == "timeout") {
+      var_3 = spawn("weapon_" + var_0, var_2 + (0, 0, 30));
       return;
     }
 
@@ -1108,37 +1108,37 @@ function railyard_combat_machine_gunner_lethal_on_bypass() {
   self setgoalentity(level.player);
   self.goalradius = 50;
   self.baseaccuracy = 1000;
-  var0 = 0;
+  var_0 = 0;
 
-  while(var0 < 5) {
-    var1 = level.player getEye();
-    var2 = var1 + vectorNormalize(self gettagorigin("tag_flash") - var1) * 300;
-    magicbullet("iw8_lm_pkilo", var2, var1, self);
+  while(var_0 < 5) {
+    var_1 = level.player getEye();
+    var_2 = var_1 + vectorNormalize(self gettagorigin("tag_flash") - var_1) * 300;
+    magicbullet("iw8_lm_pkilo", var_2, var_1, self);
 
-    if(var0 == 4) {
+    if(var_0 == 4) {
       level.player scripts\engine\sp\utility::die();
     }
 
-    var0++;
+    var_0++;
     wait randomfloatrange(0.1, 0.15);
   }
 }
 
-function railyard_combat_mg_grenade_check(var0) {
+function railyard_combat_mg_grenade_check(var_0) {
   while(!scripts\engine\utility::flag("machine_gunner_killed")) {
-    level.player waittill("grenade_fire", var1, var2);
+    level.player waittill("grenade_fire", var_1, var_2);
 
-    if(var2.basename == "frag") {
-      var1 waittill("explode", var3);
+    if(var_2.basename == "frag") {
+      var_1 waittill("explode", var_3);
 
-      if(ispointinvolume(var3, getEnt("mg_grenade_success", "targetname"))) {
+      if(ispointinvolume(var_3, getEnt("mg_grenade_success", "targetname"))) {
         thread railyard_combat_mg_nest_destruction_fx();
 
         if(!scripts\engine\utility::flag("flanked_machine_gunner")) {
-          var0.count = 1;
-          var4 = var0 scripts\engine\sp\utility::spawn_ai(1);
-          var4.diequietly = 1;
-          var4 scripts\engine\sp\utility::die();
+          var_0.count = 1;
+          var_4 = var_0 scripts\engine\sp\utility::spawn_ai(1);
+          var_4.diequietly = 1;
+          var_4 scripts\engine\sp\utility::die();
           scripts\sp\utility::giveachievement_wrapper("fogfrag");
           scripts\engine\utility::flag_set("machine_gunner_killed");
         }
@@ -1148,16 +1148,16 @@ function railyard_combat_mg_grenade_check(var0) {
 }
 
 function railyard_combat_mg_nest_destruction_fx() {
-  var0 = getEnt("lmg_destruction", "targetname");
-  var0 setscriptablepartstate("base", "dead");
+  var_0 = getEnt("lmg_destruction", "targetname");
+  var_0 setscriptablepartstate("base", "dead");
 }
 
 function railyard_combat_setup_lmg() {
-  var0 = scripts\engine\utility::getStruct("lmg_railyard", "targetname");
-  level.railyard_lmg = scripts\sp\maps\proxywar\proxywar_util::magic_gun_create_weapon("railyard_lmg", var0.origin, var0.angles, 200, 80, 50);
-  var1 = scripts\engine\utility::spawn_tag_origin(level.railyard_lmg gettagorigin("tag_flash"), level.railyard_lmg gettagangles("tag_flash"));
-  var1 linkTo(level.railyard_lmg, "tag_flash", (0, 0, 2), (0, 0, 0));
-  level.railyard_lmg.light = var1;
+  var_0 = scripts\engine\utility::getStruct("lmg_railyard", "targetname");
+  level.railyard_lmg = scripts\sp\maps\proxywar\proxywar_util::magic_gun_create_weapon("railyard_lmg", var_0.origin, var_0.angles, 200, 80, 50);
+  var_1 = scripts\engine\utility::spawn_tag_origin(level.railyard_lmg gettagorigin("tag_flash"), level.railyard_lmg gettagangles("tag_flash"));
+  var_1 linkTo(level.railyard_lmg, "tag_flash", (0, 0, 2), (0, 0, 0));
+  level.railyard_lmg.light = var_1;
   railyard_lmg_turn_on_light();
 }
 
@@ -1217,33 +1217,33 @@ function railyard_combat_lmg_suppress_door_behavior() {
   self notify("stop_behaviors");
   self endon("stop_behaviors");
   self.behavior = "suppressing_door";
-  var0 = scripts\engine\utility::getStruct("mg_room_suppress", "targetname");
+  var_0 = scripts\engine\utility::getStruct("mg_room_suppress", "targetname");
 
-  if(!isDefined(var0.ent)) {
-    var0.left_dir = anglestoleft(var0.angles);
-    var0.left_bound = var0.left_dir * 200 + var0.origin;
-    var0.right_bound = var0.left_dir * -200 + var0.origin;
-    var0.ent = scripts\engine\utility::spawn_tag_origin(var0.origin, var0.angles);
-    var0.ent thread scripts\sp\maps\proxywar\proxywar_util::delete_on_ent_notify(self, "kill_magic_gun");
+  if(!isDefined(var_0.ent)) {
+    var_0.left_dir = anglestoleft(var_0.angles);
+    var_0.left_bound = var_0.left_dir * 200 + var_0.origin;
+    var_0.right_bound = var_0.left_dir * -200 + var_0.origin;
+    var_0.ent = scripts\engine\utility::spawn_tag_origin(var_0.origin, var_0.angles);
+    var_0.ent thread scripts\sp\maps\proxywar\proxywar_util::delete_on_ent_notify(self, "kill_magic_gun");
   }
 
-  var0.ent.origin = var0.origin;
+  var_0.ent.origin = var_0.origin;
   childthread scripts\sp\maps\proxywar\proxywar_util::magic_gun_set_tracking_speed(200);
-  childthread scripts\sp\maps\proxywar\proxywar_util::magic_gun_track_ent(var0.ent);
-  var1 = 0;
-  var2 = 0;
-  var3 = 6;
+  childthread scripts\sp\maps\proxywar\proxywar_util::magic_gun_track_ent(var_0.ent);
+  var_1 = 0;
+  var_2 = 0;
+  var_3 = 6;
 
   for(;;) {
-    if(scripts\engine\utility::time_has_passed(var1, var3)) {
-      if(var2) {
-        var0.ent moveTo(var0.right_bound, var3);
+    if(scripts\engine\utility::time_has_passed(var_1, var_3)) {
+      if(var_2) {
+        var_0.ent moveTo(var_0.right_bound, var_3);
       } else {
-        var0.ent moveTo(var0.left_bound, var3);
+        var_0.ent moveTo(var_0.left_bound, var_3);
       }
 
-      var1 = gettime();
-      var2 = !var2;
+      var_1 = gettime();
+      var_2 = !var_2;
     }
 
     railyard_combat_lmg_fire(level.railyard_lmg);
@@ -1258,10 +1258,10 @@ function railyard_combat_lmg_track_player_behavior() {
   self.behavior = "tracking";
   childthread scripts\sp\maps\proxywar\proxywar_util::magic_gun_set_tracking_speed(200);
   childthread scripts\sp\maps\proxywar\proxywar_util::magic_gun_track_ent(level.player, undefined, 1);
-  var0 = cos(5);
+  var_0 = cos(5);
 
   for(;;) {
-    if(scripts\engine\utility::within_fov(self gettagorigin("tag_flash"), self gettagangles("tag_flash"), level.player getEye(), var0)) {
+    if(scripts\engine\utility::within_fov(self gettagorigin("tag_flash"), self gettagangles("tag_flash"), level.player getEye(), var_0)) {
       if(!scripts\engine\utility::flag("advance_to_start") && !scripts\engine\utility::flag("player_inside_intro_room")) {
         railyard_combat_lmg_fire(level.railyard_lmg, 25, 0.9);
       } else {
@@ -1278,38 +1278,38 @@ function railyard_combat_lmg_search_behavior() {
   self notify("stop_behaviors");
   self endon("stop_behaviors");
   self.behavior = "searching";
-  var0 = scripts\engine\utility::getStruct("mg_room_suppress", "targetname");
+  var_0 = scripts\engine\utility::getStruct("mg_room_suppress", "targetname");
 
-  if(!isDefined(var0.ent)) {
-    var0.ent = scripts\engine\utility::spawn_tag_origin(var0.origin, var0.angles);
-    var0.ent thread scripts\sp\maps\proxywar\proxywar_util::delete_on_ent_notify(self, "kill_magic_gun");
+  if(!isDefined(var_0.ent)) {
+    var_0.ent = scripts\engine\utility::spawn_tag_origin(var_0.origin, var_0.angles);
+    var_0.ent thread scripts\sp\maps\proxywar\proxywar_util::delete_on_ent_notify(self, "kill_magic_gun");
   }
 
-  var0.ent.lmg_zero = scripts\engine\sp\utility::set_z(level.railyard_lmg.og_origin, 0);
-  var0.ent.lmg_to_door = var0.origin - var0.ent.lmg_zero;
-  var0.ent.origin = var0.ent.lmg_zero + var0.ent.lmg_to_door / 2;
-  var0.ent.origin = scripts\engine\sp\utility::set_z(var0.ent.origin, 300);
+  var_0.ent.lmg_zero = scripts\engine\sp\utility::set_z(level.railyard_lmg.og_origin, 0);
+  var_0.ent.lmg_to_door = var_0.origin - var_0.ent.lmg_zero;
+  var_0.ent.origin = var_0.ent.lmg_zero + var_0.ent.lmg_to_door / 2;
+  var_0.ent.origin = scripts\engine\sp\utility::set_z(var_0.ent.origin, 300);
   childthread scripts\sp\maps\proxywar\proxywar_util::magic_gun_set_tracking_speed(150);
-  var1 = cos(5);
+  var_1 = cos(5);
 
   for(;;) {
-    childthread scripts\sp\maps\proxywar\proxywar_util::magic_gun_search_around_ent(var0.ent, 600);
+    childthread scripts\sp\maps\proxywar\proxywar_util::magic_gun_search_around_ent(var_0.ent, 600);
     wait 3;
     scripts\engine\utility::flag_clear("lmg_suppressing_allies");
     wait 15;
 
-    foreach(var3 in getaiarray("allies")) {
-      if(scripts\engine\math::within_fov_2d(self.origin, self.angles, var3.origin, var1) && !scripts\engine\utility::can_trace_to_ai(self gettagorigin("tag_flash"), var3)) {
+    foreach(var_3 in getaiarray("allies")) {
+      if(scripts\engine\math::within_fov_2d(self.origin, self.angles, var_3.origin, var_1) && !scripts\engine\utility::can_trace_to_ai(self gettagorigin("tag_flash"), var_3)) {
         scripts\engine\utility::flag_set("lmg_suppressing_allies");
         scripts\sp\maps\proxywar\proxywar_util::magic_gun_stop_search_around();
-        childthread scripts\sp\maps\proxywar\proxywar_util::magic_gun_track_ent(var3, undefined, 1);
+        childthread scripts\sp\maps\proxywar\proxywar_util::magic_gun_track_ent(var_3, undefined, 1);
 
-        for(var4 = 0; var4 < randomintrange(3, 6); var4++) {
+        for(var_4 = 0; var_4 < randomintrange(3, 6); var_4++) {
           railyard_combat_lmg_fire();
         }
 
         scripts\sp\maps\proxywar\proxywar_util::magic_gun_stop_tracking();
-        var3 notify("unsuppress_ally");
+        var_3 notify("unsuppress_ally");
         break;
       }
     }
@@ -1336,12 +1336,12 @@ function railyard_combat_lmg_suppressed_behavior() {
   scripts\engine\utility::flag_clear("lmg_suppressed");
 }
 
-function railyard_combat_lmg_fire(var0, var1) {
-  if(!isDefined(var0)) {
-    var0 = 30;
+function railyard_combat_lmg_fire(var_0, var_1) {
+  if(!isDefined(var_0)) {
+    var_0 = 30;
   }
 
-  scripts\sp\maps\proxywar\proxywar_util::magic_gun_fire(10, 20, var0, 0.1, 0.15, 1.5, 2.5, var1);
+  scripts\sp\maps\proxywar\proxywar_util::magic_gun_fire(10, 20, var_0, 0.1, 0.15, 1.5, 2.5, var_1);
 }
 
 function railyard_combat_lmg_check_can_see_player() {
@@ -1350,20 +1350,20 @@ function railyard_combat_lmg_check_can_see_player() {
   self.vis_changed_time = 0;
 
   for(;;) {
-    var0 = self.can_see_player;
-    var1 = scripts\engine\trace::create_contents(0, 1, 0, 1, 1, 0, 0, 0, 1);
-    var2 = level.player getEye();
-    var3 = level.railyard_lmg.og_angles;
-    var4 = scripts\sp\maps\proxywar\proxywar_util::within_bounds(level.railyard_lmg.og_origin, anglesToForward(var3), var2, level.railyard_lmg.max_angle_horiz, anglestoup(var3));
-    var5 = scripts\sp\maps\proxywar\proxywar_util::within_bounds(level.railyard_lmg.og_origin, anglesToForward(var3), var2, level.railyard_lmg.max_angle_vert, anglestoleft(var3));
+    var_0 = self.can_see_player;
+    var_1 = scripts\engine\trace::create_contents(0, 1, 0, 1, 1, 0, 0, 0, 1);
+    var_2 = level.player getEye();
+    var_3 = level.railyard_lmg.og_angles;
+    var_4 = scripts\sp\maps\proxywar\proxywar_util::within_bounds(level.railyard_lmg.og_origin, anglesToForward(var_3), var_2, level.railyard_lmg.max_angle_horiz, anglestoup(var_3));
+    var_5 = scripts\sp\maps\proxywar\proxywar_util::within_bounds(level.railyard_lmg.og_origin, anglesToForward(var_3), var_2, level.railyard_lmg.max_angle_vert, anglestoleft(var_3));
 
-    if(var4 && var5) {
-      self.can_see_player = scripts\engine\trace::ray_trace_passed(level.railyard_lmg gettagorigin("tag_flash"), var2, self, var1);
+    if(var_4 && var_5) {
+      self.can_see_player = scripts\engine\trace::ray_trace_passed(level.railyard_lmg gettagorigin("tag_flash"), var_2, self, var_1);
     } else {
       self.can_see_player = 0;
     }
 
-    if(var0 != self.can_see_player) {
+    if(var_0 != self.can_see_player) {
       self.vis_changed_time = gettime();
     }
 
@@ -1373,10 +1373,10 @@ function railyard_combat_lmg_check_can_see_player() {
 
 function railyard_combat_lmg_check_being_suppressed() {
   self endon("kill_magic_gun");
-  var0 = getEnt("mg_suppression_hit", "targetname");
+  var_0 = getEnt("mg_suppression_hit", "targetname");
 
   for(;;) {
-    var0 waittill("trigger");
+    var_0 waittill("trigger");
     scripts\engine\utility::flag_set("lmg_should_suppress");
     scripts\engine\utility::flag_wait("lmg_suppressed");
     scripts\engine\utility::flag_clear("lmg_should_suppress");
@@ -1390,8 +1390,8 @@ function railyard_combat_supressing_ally() {
   scripts\engine\utility::flag_wait_any("cue_ally_suppression", "lmg_suppressed");
 
   if(!scripts\engine\utility::flag("lmg_suppressed")) {
-    var0 = level.railyard_lmg.og_origin + anglesToForward(level.railyard_lmg.og_angles) * 15;
-    scripts\sp\utility::aim_at(var0, undefined, undefined, 0.5);
+    var_0 = level.railyard_lmg.og_origin + anglesToForward(level.railyard_lmg.og_angles) * 15;
+    scripts\sp\utility::aim_at(var_0, undefined, undefined, 0.5);
   }
 
   scripts\engine\utility::flag_wait("lmg_suppressed");
@@ -1474,35 +1474,35 @@ function railyard_combat_enemies() {
   thread railyard_combat_rus_railyard_mg_platform();
 }
 
-function railyard_combat_wait_dead_pct(var0, var1, var2) {
-  while(!isDefined(level.railyard_enemies[var0])) {
+function railyard_combat_wait_dead_pct(var_0, var_1, var_2) {
+  while(!isDefined(level.railyard_enemies[var_0])) {
     waitframe();
   }
 
-  var3 = level.railyard_enemies[var0];
-  var4 = 1;
+  var_3 = level.railyard_enemies[var_0];
+  var_4 = 1;
 
-  while(var4) {
-    if(isDefined(var2)) {
-      foreach(var6 in var2) {
-        if(scripts\engine\utility::flag(var6)) {
-          var4 = 0;
+  while(var_4) {
+    if(isDefined(var_2)) {
+      foreach(var_6 in var_2) {
+        if(scripts\engine\utility::flag(var_6)) {
+          var_4 = 0;
           break;
         }
       }
     }
 
-    if(var4) {
-      var8 = 0;
+    if(var_4) {
+      var_8 = 0;
 
-      foreach(var10 in var3) {
-        if(!isalive(var10)) {
-          var8++;
+      foreach(var_10 in var_3) {
+        if(!isalive(var_10)) {
+          var_8++;
         }
       }
 
-      var12 = var8 / var3.size;
-      var4 = var12 < var1;
+      var_12 = var_8 / var_3.size;
+      var_4 = var_12 < var_1;
     }
 
     waitframe();
@@ -1510,15 +1510,15 @@ function railyard_combat_wait_dead_pct(var0, var1, var2) {
 }
 
 function railyard_combat_enemy_individual_platform() {
-  var0 = 0;
+  var_0 = 0;
 
   if(isDefined(level.railyard_lmg)) {
-    var1 = anglestoright(level.railyard_lmg.og_angles + (0, -30, 0));
-    var2 = scripts\engine\utility::flatten_vector(level.player.origin - level.railyard_lmg.og_origin);
-    var0 = vectordot(var1, var2);
+    var_1 = anglestoright(level.railyard_lmg.og_angles + (0, -30, 0));
+    var_2 = scripts\engine\utility::flatten_vector(level.player.origin - level.railyard_lmg.og_origin);
+    var_0 = vectordot(var_1, var_2);
   }
 
-  if(var0 > 0) {
+  if(var_0 > 0) {
     self setgoalvolumeauto(getEnt("zn_rus_railyard_mg_platform_left", "targetname"));
     return;
   }
@@ -1526,15 +1526,15 @@ function railyard_combat_enemy_individual_platform() {
   self setgoalvolumeauto(getEnt("zn_rus_railyard_mg_platform_right", "targetname"));
 }
 
-function railyard_combat_enemy_individual(var0) {
+function railyard_combat_enemy_individual(var_0) {
   self endon("death");
-  self setthreatbiasgroup(var0);
+  self setthreatbiasgroup(var_0);
   thread railyard_combat_enemy_individual_player_near_check();
 
   for(;;) {
-    self waittill("damage", var1, var2);
+    self waittill("damage", var_1, var_2);
 
-    if(var2 == level.player) {
+    if(var_2 == level.player) {
       self setthreatbiasgroup("axis");
     }
   }
@@ -1558,9 +1558,9 @@ function railyard_combat_rus_railyard_start() {
   level.railyard_enemies["rus_railyard_start"] = scripts\engine\sp\utility::array_spawn_targetname("rus_railyard_right_start", 1);
   scripts\engine\utility::flag_wait_any("machine_gunner_killed", "reached_courtyard_overlook", "spawn_rus_railyard_right_traincar", "spawn_rus_railyard_left_start");
 
-  foreach(var1 in level.railyard_enemies["rus_railyard_start"]) {
-    if(isalive(var1)) {
-      var1 thread scripts\sp\maps\proxywar\proxywar_util::die_when_offscreen_and_distant();
+  foreach(var_1 in level.railyard_enemies["rus_railyard_start"]) {
+    if(isalive(var_1)) {
+      var_1 thread scripts\sp\maps\proxywar\proxywar_util::die_when_offscreen_and_distant();
     }
   }
 }
@@ -1573,9 +1573,9 @@ function railyard_combat_rus_railyard_right_traincar() {
   scripts\engine\utility::array_thread(level.railyard_enemies["rus_railyard_right_traincar"], &railyard_combat_enemy_individual, "axis_right");
   scripts\engine\utility::flag_wait_any("spawn_rus_railyard_right_room", "machine_gunner_killed", "spawn_rus_railyard_mg_platform");
 
-  foreach(var1 in level.railyard_enemies["rus_railyard_right_traincar"]) {
-    if(isalive(var1)) {
-      var1 thread scripts\sp\maps\proxywar\proxywar_util::die_when_offscreen_and_distant();
+  foreach(var_1 in level.railyard_enemies["rus_railyard_right_traincar"]) {
+    if(isalive(var_1)) {
+      var_1 thread scripts\sp\maps\proxywar\proxywar_util::die_when_offscreen_and_distant();
     }
   }
 }
@@ -1587,9 +1587,9 @@ function railyard_combat_rus_railyard_right_traincar_surprise() {
   scripts\engine\utility::array_thread(level.railyard_enemies["rus_railyard_right_traincar_surprise"], &railyard_combat_enemy_individual, "axis_right");
   scripts\engine\utility::flag_wait_any("spawn_rus_railyard_right_room", "machine_gunner_killed", "spawn_rus_railyard_mg_platform");
 
-  foreach(var1 in level.railyard_enemies["rus_railyard_right_traincar_surprise"]) {
-    if(isalive(var1)) {
-      var1 thread scripts\sp\maps\proxywar\proxywar_util::die_when_offscreen_and_distant();
+  foreach(var_1 in level.railyard_enemies["rus_railyard_right_traincar_surprise"]) {
+    if(isalive(var_1)) {
+      var_1 thread scripts\sp\maps\proxywar\proxywar_util::die_when_offscreen_and_distant();
     }
   }
 }
@@ -1602,9 +1602,9 @@ function railyard_combat_rus_railyard_right_room() {
   scripts\engine\utility::array_thread(level.railyard_enemies["rus_railyard_right_room"], &railyard_combat_enemy_individual, "axis_right");
   scripts\engine\utility::flag_wait_any("spawn_rus_railyard_mg_platform", "machine_gunner_killed");
 
-  foreach(var1 in level.railyard_enemies["rus_railyard_right_room"]) {
-    if(isalive(var1)) {
-      var1 thread scripts\sp\maps\proxywar\proxywar_util::die_when_offscreen_and_distant();
+  foreach(var_1 in level.railyard_enemies["rus_railyard_right_room"]) {
+    if(isalive(var_1)) {
+      var_1 thread scripts\sp\maps\proxywar\proxywar_util::die_when_offscreen_and_distant();
     }
   }
 }
@@ -1617,9 +1617,9 @@ function railyard_combat_rus_railyard_left_start() {
   scripts\engine\utility::array_thread(level.railyard_enemies["rus_railyard_left_start"], &railyard_combat_enemy_individual, "axis_left");
   scripts\engine\utility::flag_wait_any("spawn_rus_railyard_left_traincars", "machine_gunner_killed", "spawn_rus_railyard_mg_platform");
 
-  foreach(var1 in level.railyard_enemies["rus_railyard_left_start"]) {
-    if(isalive(var1)) {
-      var1 thread scripts\sp\maps\proxywar\proxywar_util::die_when_offscreen_and_distant();
+  foreach(var_1 in level.railyard_enemies["rus_railyard_left_start"]) {
+    if(isalive(var_1)) {
+      var_1 thread scripts\sp\maps\proxywar\proxywar_util::die_when_offscreen_and_distant();
     }
   }
 }
@@ -1632,9 +1632,9 @@ function railyard_combat_rus_railyard_left_traincars() {
   scripts\engine\utility::array_thread(level.railyard_enemies["rus_railyard_left_traincars"], &railyard_combat_enemy_individual, "axis_left");
   scripts\engine\utility::flag_wait_any("machine_gunner_killed", "spawn_rus_railyard_mg_platform");
 
-  foreach(var1 in level.railyard_enemies["rus_railyard_left_traincars"]) {
-    if(isalive(var1)) {
-      var1 thread scripts\sp\maps\proxywar\proxywar_util::die_when_offscreen_and_distant();
+  foreach(var_1 in level.railyard_enemies["rus_railyard_left_traincars"]) {
+    if(isalive(var_1)) {
+      var_1 thread scripts\sp\maps\proxywar\proxywar_util::die_when_offscreen_and_distant();
     }
   }
 }
@@ -1646,9 +1646,9 @@ function railyard_combat_rus_railyard_mg_platform() {
   level.railyard_enemies["rus_railyard_mg_platform"] = scripts\engine\sp\utility::array_spawn_targetname("rus_railyard_mg_platform", 1);
   scripts\engine\utility::flag_wait_any("reached_courtyard_start", "reached_courtyard_overlook");
 
-  foreach(var1 in level.railyard_enemies["rus_railyard_mg_platform"]) {
-    if(isalive(var1)) {
-      var1 thread scripts\sp\maps\proxywar\proxywar_util::die_when_offscreen_and_distant();
+  foreach(var_1 in level.railyard_enemies["rus_railyard_mg_platform"]) {
+    if(isalive(var_1)) {
+      var_1 thread scripts\sp\maps\proxywar\proxywar_util::die_when_offscreen_and_distant();
     }
   }
 }
@@ -1660,11 +1660,11 @@ function railyard_vfx_fire_blocker() {
   scripts\engine\utility::stop_exploder("towerfire");
   scripts\engine\utility::exploder("end_amb_fx");
   scripts\engine\utility::stop_exploder("wp_explo_aftermath_forest");
-  var0 = scripts\sp\door::get_interactive_door("breach_door");
-  var0 scripts\sp\door::door_close();
-  var0 scripts\sp\door::remove_open_ability();
-  var1 = getEnt("railyard_fire_blocker", "targetname");
-  var1.origin += (0, 0, 150);
+  var_0 = scripts\sp\door::get_interactive_door("breach_door");
+  var_0 scripts\sp\door::door_close();
+  var_0 scripts\sp\door::remove_open_ability();
+  var_1 = getEnt("railyard_fire_blocker", "targetname");
+  var_1.origin += (0, 0, 150);
   scripts\engine\sp\utility::transient_unload("pw_trainyard_front_detail_tr");
   scripts\engine\sp\utility::transient_load_array(["pw_courtyard_top_detail_tr", "pw_courtyard_detail_tr", "pw_rearyard_detail_tr"]);
   hidemayhem("vfx_mayh_proxywar_tower");

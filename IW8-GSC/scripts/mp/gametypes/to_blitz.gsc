@@ -67,16 +67,16 @@ function initializematchrules() {
   setdynamicdvar("scr_conf_promode", 0);
 }
 
-function onstartgametype(var0) {
+function onstartgametype(var_0) {
   GscBinSkip1(0x45, 0, "dd");
 }
 
 function setupbradleys() {
   level.tankobjkeys = [];
-  var0 = scripts\engine\utility::getStructArray("tank_spawn", "targetname");
-  var1 = 0;
+  var_0 = scripts\engine\utility::getStructArray("tank_spawn", "targetname");
+  var_1 = 0;
 
-  foreach(var3 in var0) {}
+  foreach(var_3 in var_0) {}
 
   thread initobjicons();
   setomnvar("ui_tacops_tank_a_health_percent", 1);
@@ -89,7 +89,7 @@ function bradleydamagewatcher() {
   level endon("switch_modes");
 
   for(;;) {
-    self waittill("damage", var0);
+    self waittill("damage", var_0);
 
     if(self.tacopsindex == 0) {
       setomnvar("ui_tacops_tank_a_health_percent", (self.maxhealth - self.damagetaken) / self.maxhealth);
@@ -104,59 +104,59 @@ function bradleydamagewatcher() {
 
 function setuptankendgoal() {
   level waittill("goal_opened");
-  var0 = getEnt("tank_goal", "targetname");
+  var_0 = getEnt("tank_goal", "targetname");
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     spawnmanualdomflag();
     return;
   }
 
   level.objectives = [];
-  level.objectives[0] = var0;
-  var1 = scripts\mp\gametypes\obj_dom::setupobjective(level.objectives[0]);
-  var1.onuse = &dompoint_onuse;
-  level.objectives[0] = var1;
+  level.objectives[0] = var_0;
+  var_1 = scripts\mp\gametypes\obj_dom::setupobjective(level.objectives[0]);
+  var_1.onuse = &dompoint_onuse;
+  level.objectives[0] = var_1;
   level.flagcapturetime = 1;
   level.flagneutralization = 1;
   waitframe();
-  var1.nocarryobject = 1;
-  var1 scripts\mp\gameobjects::setkeyobject(level.tankobjkeys);
-  var1 scripts\mp\gameobjects::setownerteam("axis");
-  var1 scripts\mp\gameobjects::setvisibleteam("any");
-  var1 scripts\mp\gameobjects::allowuse("enemy");
-  var1 scripts\mp\gameobjects::setobjectivestatusicons(level.icondefend, level.iconcapture);
+  var_1.nocarryobject = 1;
+  var_1 scripts\mp\gameobjects::setkeyobject(level.tankobjkeys);
+  var_1 scripts\mp\gameobjects::setownerteam("axis");
+  var_1 scripts\mp\gameobjects::setvisibleteam("any");
+  var_1 scripts\mp\gameobjects::allowuse("enemy");
+  var_1 scripts\mp\gameobjects::setobjectivestatusicons(level.icondefend, level.iconcapture);
 }
 
-function bradley_handletacopsdamage(var0) {
-  var1 = var0.attacker;
-  var2 = var0.objweapon;
-  var3 = var0.meansofdeath;
-  var4 = var0.damage;
-  var5 = var0.idflags;
+function bradley_handletacopsdamage(var_0) {
+  var_1 = var_0.attacker;
+  var_2 = var_0.objweapon;
+  var_3 = var_0.meansofdeath;
+  var_4 = var_0.damage;
+  var_5 = var_0.idflags;
 
-  if(var3 == "MOD_MELEE") {
+  if(var_3 == "MOD_MELEE") {
     return 0;
   }
 
-  if(var1.team == "allies") {
+  if(var_1.team == "allies") {
     return 0;
   }
 
-  var4 = getmodifiedtankdamage(var1, var2, var3, var4, 3000, 10, 15, 20);
-  var0.damage = var4;
-  return var4;
+  var_4 = getmodifiedtankdamage(var_1, var_2, var_3, var_4, 3000, 10, 15, 20);
+  var_0.damage = var_4;
+  return var_4;
 }
 
-function getmodifiedtankdamage(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
-  var9 = undefined;
+function getmodifiedtankdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  var_9 = undefined;
 
-  if(var2 != "MOD_MELEE") {
-    switch (var1.basename) {
+  if(var_2 != "MOD_MELEE") {
+    switch (var_1.basename) {
       case "kineticpulse_emp_mp":
       case "c4_mp_p":
       case "super_trophy_mp":
         self.largeprojectiledamage = 1;
-        var9 = var5;
+        var_9 = var_5;
         break;
       case "tur_bradley_tacops_mp":
       case "switch_blade_child_mp":
@@ -170,7 +170,7 @@ function getmodifiedtankdamage(var0, var1, var2, var3, var4, var5, var6, var7, v
       case "iw8_la_t9freefire_mp":
       case "iw8_la_t9standard_mp":
         self.largeprojectiledamage = 1;
-        var9 = var6;
+        var_9 = var_6;
         break;
       case "power_exploding_drone_mp":
       case "sentry_shock_missile_mp":
@@ -178,7 +178,7 @@ function getmodifiedtankdamage(var0, var1, var2, var3, var4, var5, var6, var7, v
       case "pop_rocket_proj_mp":
       case "artillery_mp":
         self.largeprojectiledamage = 0;
-        var9 = var7;
+        var_9 = var_7;
         break;
       default:
         self.largeprojectiledamage = 0;
@@ -186,50 +186,50 @@ function getmodifiedtankdamage(var0, var1, var2, var3, var4, var5, var6, var7, v
     }
   }
 
-  if(isDefined(var8)) {
-    self.largeprojectiledamage = var8;
+  if(isDefined(var_8)) {
+    self.largeprojectiledamage = var_8;
   }
 
   if(self.largeprojectiledamage == 0) {
     return 0;
   }
 
-  if(isDefined(var9) && isDefined(var2) && (var2 == "MOD_EXPLOSIVE" || var2 == "MOD_EXPLOSIVE_BULLET" || var2 == "MOD_PROJECTILE" || var2 == "MOD_PROJECTILE_SPLASH" || var2 == "MOD_GRENADE")) {
-    var3 = ceil(var4 / var9);
+  if(isDefined(var_9) && isDefined(var_2) && (var_2 == "MOD_EXPLOSIVE" || var_2 == "MOD_EXPLOSIVE_BULLET" || var_2 == "MOD_PROJECTILE" || var_2 == "MOD_PROJECTILE_SPLASH" || var_2 == "MOD_GRENADE")) {
+    var_3 = ceil(var_4 / var_9);
   }
 
-  if(isDefined(var0) && isDefined(self.owner)) {
-    if(isDefined(var0.owner)) {
-      var0 = var0.owner;
+  if(isDefined(var_0) && isDefined(self.owner)) {
+    if(isDefined(var_0.owner)) {
+      var_0 = var_0.owner;
     }
 
-    if(var0 == self.owner) {
-      var3 = ceil(var3 / 2);
+    if(var_0 == self.owner) {
+      var_3 = ceil(var_3 / 2);
     }
   }
 
-  return int(var3);
+  return int(var_3);
 }
 
-function bradley_handlefataltacopsdamage(var0) {
-  var1 = var0.attacker;
-  var2 = var0.objweapon;
-  var3 = var0.meansofdeath;
-  var4 = var0.damage;
-  var5 = var0.idflags;
+function bradley_handlefataltacopsdamage(var_0) {
+  var_1 = var_0.attacker;
+  var_2 = var_0.objweapon;
+  var_3 = var_0.meansofdeath;
+  var_4 = var_0.damage;
+  var_5 = var_0.idflags;
 
   if(level.teambased) {
-    var6 = "";
+    var_6 = "";
 
-    if(isDefined(var1) && isDefined(var1.team)) {
-      var6 = var1.team;
+    if(isDefined(var_1) && isDefined(var_1.team)) {
+      var_6 = var_1.team;
     }
 
-    if(var6 != self.team) {}
-  } else if(isDefined(var1) && (!isDefined(self.owner) || self.owner != var1)) {}
+    if(var_6 != self.team) {}
+  } else if(isDefined(var_1) && (!isDefined(self.owner) || self.owner != var_1)) {}
 
   self.trackedobject scripts\mp\gameobjects::deletetrackedobject();
-  thread bradley_vehicledestroy(var1, var2, var3, 0);
+  thread bradley_vehicledestroy(var_1, var_2, var_3, 0);
 
   if(self.tacopsindex == 0) {
     setomnvar("ui_tacops_tank_a_health_percent", 0);
@@ -242,12 +242,12 @@ function bradley_handlefataltacopsdamage(var0) {
   }
 }
 
-function bradley_vehicledestroy(var0, var1, var2, var3) {
-  var4 = spawnStruct();
-  var4.attacker = var0;
-  var4.objweapon = var1;
-  var4.meansofdeath = var2;
-  scripts\cp_mp\vehicles\light_tank::light_tank_explode(var4, var3);
+function bradley_vehicledestroy(var_0, var_1, var_2, var_3) {
+  var_4 = spawnStruct();
+  var_4.attacker = var_0;
+  var_4.objweapon = var_1;
+  var_4.meansofdeath = var_2;
+  scripts\cp_mp\vehicles\light_tank::light_tank_explode(var_4, var_3);
   level.to_blitzactivebradleys--;
 
   if(level.to_blitzactivebradleys == 0) {
@@ -264,31 +264,31 @@ function bradley_vehicledestroy(var0, var1, var2, var3) {
 }
 
 function initspawns() {
-  var0 = level.tacopsspawns;
+  var_0 = level.tacopsspawns;
   scripts\mp\spawnlogic::addspawnpoints("allies", "mp_toblitz_spawn_allies", 1);
   scripts\mp\spawnlogic::addspawnpoints("axis", "mp_toblitz_spawn_axis", 1);
-  var0.to_blitz_spawns = [];
-  var0.to_blitz_spawns["allies"] = scripts\mp\spawnlogic::getspawnpointarray("mp_toblitz_spawn_allies");
-  var0.to_blitz_spawns["axis"] = scripts\mp\spawnlogic::getspawnpointarray("mp_toblitz_spawn_axis");
+  var_0.to_blitz_spawns = [];
+  var_0.to_blitz_spawns["allies"] = scripts\mp\spawnlogic::getspawnpointarray("mp_toblitz_spawn_allies");
+  var_0.to_blitz_spawns["axis"] = scripts\mp\spawnlogic::getspawnpointarray("mp_toblitz_spawn_axis");
 
-  if(var0.to_blitz_spawns["allies"].size <= 0) {
+  if(var_0.to_blitz_spawns["allies"].size <= 0) {
     scripts\mp\spawnlogic::addspawnpoints("allies", "mp_front_spawn_allies");
-    var0.to_blitz_spawns["allies"] = scripts\mp\spawnlogic::getspawnpointarray("mp_front_spawn_allies");
+    var_0.to_blitz_spawns["allies"] = scripts\mp\spawnlogic::getspawnpointarray("mp_front_spawn_allies");
   }
 
-  if(var0.to_blitz_spawns["axis"].size <= 0) {
+  if(var_0.to_blitz_spawns["axis"].size <= 0) {
     scripts\mp\spawnlogic::addspawnpoints("axis", "mp_front_spawn_axis");
-    var0.to_blitz_spawns["axis"] = scripts\mp\spawnlogic::getspawnpointarray("mp_front_spawn_axis");
+    var_0.to_blitz_spawns["axis"] = scripts\mp\spawnlogic::getspawnpointarray("mp_front_spawn_axis");
     return;
   }
 }
 
 function getspawnpoint() {
-  var0 = level.tacopsspawns;
-  var1 = self.pers["team"];
-  var2 = scripts\mp\tac_ops_map::filterspawnpoints(var0.to_blitz_spawns[var1]);
-  var3 = undefined;
-  return var3;
+  var_0 = level.tacopsspawns;
+  var_1 = self.pers["team"];
+  var_2 = scripts\mp\tac_ops_map::filterspawnpoints(var_0.to_blitz_spawns[var_1]);
+  var_3 = undefined;
+  return var_3;
 }
 
 function activatespawns() {
@@ -302,8 +302,8 @@ function updategametypedvars() {
   scripts\mp\gametypes\common::updatecommongametypedvars();
 }
 
-function onnormaldeath(var0, var1, var2, var3, var4) {
-  scripts\mp\gametypes\common::oncommonnormaldeath(var0, var1, var2, var3, var4);
+function onnormaldeath(var_0, var_1, var_2, var_3, var_4) {
+  scripts\mp\gametypes\common::oncommonnormaldeath(var_0, var_1, var_2, var_3, var_4);
 }
 
 function onspawnplayer() {
@@ -311,15 +311,15 @@ function onspawnplayer() {
     thread onspawnfinished();
   }
 
-  var0 = 0;
+  var_0 = 0;
 
   if(self.team == "allies") {
-    var0 = 1;
+    var_0 = 1;
   } else if(self.team == "axis") {
-    var0 = 2;
+    var_0 = 2;
   }
 
-  self setclientomnvar("ui_tacops_team", var0);
+  self setclientomnvar("ui_tacops_team", var_0);
   scripts\mp\tac_ops\roles_utility::kitspawn();
 }
 
@@ -327,20 +327,20 @@ function onspawnfinished() {
   self endon("death_or_disconnect");
   self waittill("giveLoadout");
   scripts\mp\equipment::giveequipment("equip_c4", "primary");
-  var0 = self getweaponslist("primary");
+  var_0 = self getweaponslist("primary");
 
-  foreach(var2 in var0) {
-    var3 = getweaponbasename(var2);
+  foreach(var_2 in var_0) {
+    var_3 = getweaponbasename(var_2);
 
-    switch (var3) {
+    switch (var_3) {
       case "iw8_la_lapha_mp":
       case "iw8_la_juliet_mp":
       case "iw8_la_rpapa7_mp":
       case "iw8_la_t9freefire_mp":
-        var4 = getcompleteweaponname("iw8_pi_usierra45_mp");
-        scripts\cp_mp\utility\inventory_utility::takeweaponwhensafe(var2);
-        self giveweapon(var4);
-        self givestartammo(var4);
+        var_4 = getcompleteweaponname("iw8_pi_usierra45_mp");
+        scripts\cp_mp\utility\inventory_utility::takeweaponwhensafe(var_2);
+        self giveweapon(var_4);
+        self givestartammo(var_4);
         break;
     }
   }
@@ -348,84 +348,84 @@ function onspawnfinished() {
 
 function setuprpgcaches() {
   level.rpg7caches = [];
-  var0 = getEntArray("rpg_cache", "targetname");
-  var1 = getEntArray("rpg_use_trigger", "targetname");
+  var_0 = getEntArray("rpg_cache", "targetname");
+  var_1 = getEntArray("rpg_use_trigger", "targetname");
 
-  for(var2 = 0; var2 < var0.size; var2++) {
-    var3 = spawn("script_model", var0[var2].origin);
-    var3 setModel("care_package_iw7_dummy");
-    var3.angles = var0[var2].angles;
-    var0[var2] scripts\mp\utility\outline::outlineenableforteam(var0[var2], "axis", "outline_nodepth_cyan", "lowest");
-    var0[var2].ownerteam = "axis";
-    var0[var2].interactteam = "friendly";
-    var0[var2].exclusiveuse = 0;
-    var0[var2].curprogress = 0;
-    var0[var2].usetime = 0;
-    var0[var2].userate = 1;
-    var0[var2].id = "care_package";
-    var0[var2].skiptouching = 1;
-    var0[var2].trigger = var1[var2];
-    var0[var2].trigger.angles = var0[var2].angles;
-    var0[var2].trigger setCursorHint("HINT_NOICON");
-    var0[var2].trigger setHintString(&"MP/PICKUP_RPG7");
-    var0[var2].trigger.team = "axis";
-    var0[var2].trigger.destination = var0[var2].origin;
-    var0[var2].onuse = &rpgcrateenduse;
-    var0[var2] thread scripts\mp\gameobjects::useobjectusethink();
-    thread rpgcrateuseteamupdater(var0[var2]);
-    level.rpg7caches[level.rpg7caches.size] = var0[var2];
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    var_3 = spawn("script_model", var_0[var_2].origin);
+    var_3 setModel("care_package_iw7_dummy");
+    var_3.angles = var_0[var_2].angles;
+    var_0[var_2] scripts\mp\utility\outline::outlineenableforteam(var_0[var_2], "axis", "outline_nodepth_cyan", "lowest");
+    var_0[var_2].ownerteam = "axis";
+    var_0[var_2].interactteam = "friendly";
+    var_0[var_2].exclusiveuse = 0;
+    var_0[var_2].curprogress = 0;
+    var_0[var_2].usetime = 0;
+    var_0[var_2].userate = 1;
+    var_0[var_2].id = "care_package";
+    var_0[var_2].skiptouching = 1;
+    var_0[var_2].trigger = var_1[var_2];
+    var_0[var_2].trigger.angles = var_0[var_2].angles;
+    var_0[var_2].trigger setCursorHint("HINT_NOICON");
+    var_0[var_2].trigger setHintString(&"MP/PICKUP_RPG7");
+    var_0[var_2].trigger.team = "axis";
+    var_0[var_2].trigger.destination = var_0[var_2].origin;
+    var_0[var_2].onuse = &rpgcrateenduse;
+    var_0[var_2] thread scripts\mp\gameobjects::useobjectusethink();
+    thread rpgcrateuseteamupdater(var_0[var_2]);
+    level.rpg7caches[level.rpg7caches.size] = var_0[var_2];
   }
 }
 
-function rpgcrateenduse(var0) {
-  var0 setclientomnvar("ui_securing", 0);
-  var0 setclientomnvar("ui_securing_progress", 0.01);
-  var1 = var0.lastdroppableweaponobj;
-  var2 = var0 dropitem(var1);
+function rpgcrateenduse(var_0) {
+  var_0 setclientomnvar("ui_securing", 0);
+  var_0 setclientomnvar("ui_securing_progress", 0.01);
+  var_1 = var_0.lastdroppableweaponobj;
+  var_2 = var_0 dropitem(var_1);
 
-  if(isDefined(var2)) {
-    var2.owner = var0;
-    var2.targetname = "dropped_weapon";
-    var2 thread scripts\mp\weapons::watchpickup(var0);
-    var2 thread scripts\mp\weapons::deletepickupafterawhile();
+  if(isDefined(var_2)) {
+    var_2.owner = var_0;
+    var_2.targetname = "dropped_weapon";
+    var_2 thread scripts\mp\weapons::watchpickup(var_0);
+    var_2 thread scripts\mp\weapons::deletepickupafterawhile();
   }
 
-  var0 giveweapon("iw8_la_rpapa7_mp");
-  var0 givestartammo("iw8_la_rpapa7_mp");
-  var0 scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch("iw8_la_rpapa7_mp", 1);
-  var0 scripts\mp\weapons::ref_1316b(getcompleteweaponname("iw8_la_rpapa7_mp"));
+  var_0 giveweapon("iw8_la_rpapa7_mp");
+  var_0 givestartammo("iw8_la_rpapa7_mp");
+  var_0 scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch("iw8_la_rpapa7_mp", 1);
+  var_0 scripts\mp\weapons::ref_1316b(getcompleteweaponname("iw8_la_rpapa7_mp"));
 }
 
-function rpgcrateuseteamupdater(var0) {
+function rpgcrateuseteamupdater(var_0) {
   level endon("game_ended");
   self endon("death");
 
   for(;;) {
-    setusablebyteam(var0);
+    setusablebyteam(var_0);
     level waittill("joined_team");
   }
 }
 
-function setusablebyteam(var0) {
-  foreach(var2 in level.players) {
-    if(var2.team != var0) {
-      self.trigger disableplayeruse(var2);
+function setusablebyteam(var_0) {
+  foreach(var_2 in level.players) {
+    if(var_2.team != var_0) {
+      self.trigger disableplayeruse(var_2);
       continue;
     }
 
-    self.trigger enableplayeruse(var2);
+    self.trigger enableplayeruse(var_2);
   }
 }
 
 function initobjicons() {
-  foreach(var1 in level.bradley.activevehicles["allies"]) {
-    var1.trackedobject = var1 scripts\mp\gameobjects::createtrackedobject(var1, (0, 0, 0));
-    var1.trackedobject.objidpingfriendly = 0;
-    var1.trackedobject.objidpingenemy = 1;
-    var1.trackedobject.objpingdelay = 0.05;
-    var1.trackedobject.visibleteam = "any";
-    var1.invulnerable = 1;
-    var1.trackedobject scripts\mp\gameobjects::setobjectivestatusicons(level.icontake, level.iconkill);
+  foreach(var_1 in level.bradley.activevehicles["allies"]) {
+    var_1.trackedobject = var_1 scripts\mp\gameobjects::createtrackedobject(var_1, (0, 0, 0));
+    var_1.trackedobject.objidpingfriendly = 0;
+    var_1.trackedobject.objidpingenemy = 1;
+    var_1.trackedobject.objpingdelay = 0.05;
+    var_1.trackedobject.visibleteam = "any";
+    var_1.invulnerable = 1;
+    var_1.trackedobject scripts\mp\gameobjects::setobjectivestatusicons(level.icontake, level.iconkill);
     thread watchiconupdater();
   }
 }
@@ -435,9 +435,9 @@ function watchiconupdater() {
 
   for(;;) {
     scripts\engine\utility::ref_143a6("bradley_driverUpdate", "death", "bradley_vehicleExit");
-    var0 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getseatoccupant(self, "driver");
+    var_0 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getseatoccupant(self, "driver");
 
-    if(isDefined(var0) && isDefined(self.trackedobject.visibleteam)) {
+    if(isDefined(var_0) && isDefined(self.trackedobject.visibleteam)) {
       self.trackedobject scripts\mp\gameobjects::setobjectivestatusicons(level.icondefend, level.iconkill);
       continue;
     }
@@ -462,17 +462,17 @@ function seticonnames() {
 }
 
 function setupbarriers() {
-  var0 = getEntArray("barrier_checkpoint", "targetname");
+  var_0 = getEntArray("barrier_checkpoint", "targetname");
 
-  foreach(var2 in var0) {
-    var2 setCanDamage(1);
-    var2.health = 10000;
-    var2.team = "axis";
+  foreach(var_2 in var_0) {
+    var_2 setCanDamage(1);
+    var_2.health = 10000;
+    var_2.team = "axis";
     thread barriermonitordamage();
     thread barriermonitordeath();
   }
 
-  level.totalbarriers = var0.size;
+  level.totalbarriers = var_0.size;
 }
 
 function barriermonitordamage() {
@@ -480,8 +480,8 @@ function barriermonitordamage() {
   level endon("game_ended");
 
   for(;;) {
-    self waittill("damage", var0);
-    iprintln("Wall hit for " + var0 + ", health left " + self.health);
+    self waittill("damage", var_0);
+    iprintln("Wall hit for " + var_0 + ", health left " + self.health);
   }
 }
 
@@ -492,21 +492,21 @@ function barriermonitordeath() {
   thread barrier_destroy();
 }
 
-function barrier_deathfunc(var0, var1, var2, var3, var4) {
+function barrier_deathfunc(var_0, var_1, var_2, var_3, var_4) {
   if(level.teambased) {
-    var5 = "";
+    var_5 = "";
 
-    if(isDefined(var0) && isDefined(var0.team)) {
-      var5 = var0.team;
+    if(isDefined(var_0) && isDefined(var_0.team)) {
+      var_5 = var_0.team;
     }
 
-    if(var5 != self.team) {}
-  } else if(isDefined(var0) && (!isDefined(self.owner) || self.owner != var0)) {}
+    if(var_5 != self.team) {}
+  } else if(isDefined(var_0) && (!isDefined(self.owner) || self.owner != var_0)) {}
 
-  thread barrier_destroy(var0, var1, var2, 0);
+  thread barrier_destroy(var_0, var_1, var_2, 0);
 }
 
-function barrier_destroy(var0, var1, var2, var3) {
+function barrier_destroy(var_0, var_1, var_2, var_3) {
   playFX(level.barrier_explode, self.origin);
   playFX(level.barrier_explode, self.origin + (0, -150, 0));
   playFX(level.barrier_explode, self.origin + (0, 150, 0));
@@ -523,96 +523,96 @@ function barrier_destroy(var0, var1, var2, var3) {
   }
 }
 
-function barrier_dmgfunc(var0, var1, var2, var3, var4) {
-  if(var2 == "MOD_MELEE") {
+function barrier_dmgfunc(var_0, var_1, var_2, var_3, var_4) {
+  if(var_2 == "MOD_MELEE") {
     return 0;
   }
 
-  if(var0.team == self.team) {
+  if(var_0.team == self.team) {
     return 0;
   }
 
-  var3 = getmodifiedbarrierdamage(var0, var1, var2, var3, 10000, 10, 15, 50);
-  return var3;
+  var_3 = getmodifiedbarrierdamage(var_0, var_1, var_2, var_3, 10000, 10, 15, 50);
+  return var_3;
 }
 
-function getmodifiedbarrierdamage(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
-  var9 = var1.isalternate;
-  var10 = 0;
+function getmodifiedbarrierdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  var_9 = var_1.isalternate;
+  var_10 = 0;
 
-  if(istrue(var9)) {
-    var11 = scripts\mp\utility\weapon::getweaponattachmentsbasenames(var1);
+  if(istrue(var_9)) {
+    var_11 = scripts\mp\utility\weapon::getweaponattachmentsbasenames(var_1);
 
-    foreach(var13 in var11) {
-      if(var13 == "gl") {
-        var10 = 1;
+    foreach(var_13 in var_11) {
+      if(var_13 == "gl") {
+        var_10 = 1;
         break;
       }
     }
   }
 
-  var15 = undefined;
+  var_15 = undefined;
 
-  if(var2 != "MOD_MELEE") {
-    switch (var1.basename) {
+  if(var_2 != "MOD_MELEE") {
+    switch (var_1.basename) {
       case "iw8_la_lapha_mp":
       case "c4_mp_p":
       case "iw8_la_juliet_mp":
       case "iw8_la_rpapa7_mp":
       case "iw8_la_t9freefire_mp":
         self.largeprojectiledamage = 1;
-        var15 = var5;
+        var_15 = var_5;
         break;
       case "switch_blade_child_mp":
       case "drone_hive_projectile_mp":
       case "tur_bradley_mp":
         self.largeprojectiledamage = 1;
-        var15 = var6;
+        var_15 = var_6;
         break;
       case "jackal_cannon_mp":
       case "lighttank_mp":
       case "artillery_mp":
         self.largeprojectiledamage = 0;
-        var15 = var7;
+        var_15 = var_7;
         break;
       case "iw7_arclassic_mp":
-        if(istrue(var10)) {
+        if(istrue(var_10)) {
           self.largeprojectiledamage = 0;
-          var15 = var7;
+          var_15 = var_7;
         }
 
         break;
       default:
-        var3 = 0;
+        var_3 = 0;
         break;
     }
   }
 
-  if(isDefined(var8)) {
-    self.largeprojectiledamage = var8;
+  if(isDefined(var_8)) {
+    self.largeprojectiledamage = var_8;
   }
 
-  if(isDefined(var15) && isDefined(var2) && (var2 == "MOD_EXPLOSIVE" || var2 == "MOD_EXPLOSIVE_BULLET" || var2 == "MOD_PROJECTILE" || var2 == "MOD_PROJECTILE_SPLASH" || var2 == "MOD_GRENADE")) {
-    var3 = ceil(var4 / var15);
+  if(isDefined(var_15) && isDefined(var_2) && (var_2 == "MOD_EXPLOSIVE" || var_2 == "MOD_EXPLOSIVE_BULLET" || var_2 == "MOD_PROJECTILE" || var_2 == "MOD_PROJECTILE_SPLASH" || var_2 == "MOD_GRENADE")) {
+    var_3 = ceil(var_4 / var_15);
   }
 
-  if(isDefined(var0) && isDefined(self.owner)) {
-    if(isDefined(var0.owner)) {
-      var0 = var0.owner;
+  if(isDefined(var_0) && isDefined(self.owner)) {
+    if(isDefined(var_0.owner)) {
+      var_0 = var_0.owner;
     }
 
-    if(var0 == self.owner) {
-      var3 = ceil(var3 / 2);
+    if(var_0 == self.owner) {
+      var_3 = ceil(var_3 / 2);
     }
   }
 
-  return int(var3);
+  return int(var_3);
 }
 
 function ontimelimit() {
   if(isDefined(level.onphaseend)) {
-    var0 = scripts\mp\gamescore::freight_lift_door_switch(0);
-    [[level.onphaseend]](var0);
+    var_0 = scripts\mp\gamescore::freight_lift_door_switch(0);
+    [[level.onphaseend]](var_0);
   }
 
   scripts\mp\gamescore::_setteamscore("axis", 1, 0);
@@ -622,78 +622,78 @@ function ontimelimit() {
 function spawnmanualdomflag() {
   level.flagcapturetime = 1;
   level.flagneutralization = 1;
-  var0 = spawnStruct();
-  var0.origin = (7524, 11709, 308);
-  var0.angles = (0, 0, 0);
-  var1 = spawn("trigger_radius", var0.origin, 0, 160, 128);
-  var1.radius = 160;
-  var0.trigger = var1;
-  var0.trigger.script_label = "";
-  var0.ownerteam = "neutral";
-  var2 = var0.origin + (0, 0, 32);
-  var3 = var0.origin + (0, 0, -32);
-  var4 = scripts\engine\trace::ray_trace(var2, var3, undefined, scripts\engine\trace::create_default_contents(1));
-  var0.origin = var4["position"];
-  var0.upangles = vectortoangles(var4["normal"]);
-  var0.forward = anglesToForward(var0.upangles);
-  var0.right = anglestoright(var0.upangles);
-  var0.visuals[0] = spawn("script_model", var0.origin);
-  var0.visuals[0].angles = var0.angles;
-  var5 = scripts\mp\gameobjects::createuseobject("neutral", var0.trigger, var0.visuals, (0, 0, 100));
-  var5 scripts\mp\gameobjects::allowuse("enemy");
-  var5 scripts\mp\gameobjects::setusetime(1);
-  var5 scripts\mp\gameobjects::setusetext(&"MP/SECURING_POSITION");
-  var6 = "";
-  var5.label = var6;
-  var5 scripts\mp\gameobjects::setobjectivestatusicons(level.iconfriendlyextract3d, level.icondefend);
-  var5 scripts\mp\gameobjects::setvisibleteam("any");
-  var5.onuse = &dompoint_onuse;
-  var5.onbeginuse = &scripts\mp\gametypes\obj_dom::dompoint_onusebegin;
-  var5.onuseupdate = &scripts\mp\gametypes\obj_dom::dompoint_onuseupdate;
-  var5.onenduse = &scripts\mp\gametypes\obj_dom::dompoint_onuseend;
-  var5.oncontested = &scripts\mp\gametypes\obj_dom::dompoint_oncontested;
-  var5.onuncontested = &scripts\mp\gametypes\obj_dom::dompoint_onuncontested;
-  var5.nousebar = 1;
-  var5.id = "domFlag";
-  var5.claimgracetime = level.flagcapturetime * 1000;
-  var5.firstcapture = 1;
-  var5 scripts\mp\gameobjects::setkeyobject(level.tankobjkeys);
-  var5.nocarryobject = 1;
+  var_0 = spawnStruct();
+  var_0.origin = (7524, 11709, 308);
+  var_0.angles = (0, 0, 0);
+  var_1 = spawn("trigger_radius", var_0.origin, 0, 160, 128);
+  var_1.radius = 160;
+  var_0.trigger = var_1;
+  var_0.trigger.script_label = "";
+  var_0.ownerteam = "neutral";
+  var_2 = var_0.origin + (0, 0, 32);
+  var_3 = var_0.origin + (0, 0, -32);
+  var_4 = scripts\engine\trace::ray_trace(var_2, var_3, undefined, scripts\engine\trace::create_default_contents(1));
+  var_0.origin = var_4["position"];
+  var_0.upangles = vectortoangles(var_4["normal"]);
+  var_0.forward = anglesToForward(var_0.upangles);
+  var_0.right = anglestoright(var_0.upangles);
+  var_0.visuals[0] = spawn("script_model", var_0.origin);
+  var_0.visuals[0].angles = var_0.angles;
+  var_5 = scripts\mp\gameobjects::createuseobject("neutral", var_0.trigger, var_0.visuals, (0, 0, 100));
+  var_5 scripts\mp\gameobjects::allowuse("enemy");
+  var_5 scripts\mp\gameobjects::setusetime(1);
+  var_5 scripts\mp\gameobjects::setusetext(&"MP/SECURING_POSITION");
+  var_6 = "";
+  var_5.label = var_6;
+  var_5 scripts\mp\gameobjects::setobjectivestatusicons(level.iconfriendlyextract3d, level.icondefend);
+  var_5 scripts\mp\gameobjects::setvisibleteam("any");
+  var_5.onuse = &dompoint_onuse;
+  var_5.onbeginuse = &scripts\mp\gametypes\obj_dom::dompoint_onusebegin;
+  var_5.onuseupdate = &scripts\mp\gametypes\obj_dom::dompoint_onuseupdate;
+  var_5.onenduse = &scripts\mp\gametypes\obj_dom::dompoint_onuseend;
+  var_5.oncontested = &scripts\mp\gametypes\obj_dom::dompoint_oncontested;
+  var_5.onuncontested = &scripts\mp\gametypes\obj_dom::dompoint_onuncontested;
+  var_5.nousebar = 1;
+  var_5.id = "domFlag";
+  var_5.claimgracetime = level.flagcapturetime * 1000;
+  var_5.firstcapture = 1;
+  var_5 scripts\mp\gameobjects::setkeyobject(level.tankobjkeys);
+  var_5.nocarryobject = 1;
   level.objectives = [];
-  level.objectives[0] = var5;
-  var2 = var0.visuals[0].origin + (0, 0, 32);
-  var3 = var0.visuals[0].origin + (0, 0, -32);
-  var7 = scripts\engine\trace::create_contents(1, 1, 1, 1, 0, 1, 1);
-  var8 = [];
-  var4 = scripts\engine\trace::ray_trace(var2, var3, var8, var7);
-  var5.baseeffectpos = var4["position"];
-  var9 = vectortoangles(var4["normal"]);
-  var5.baseeffectforward = anglesToForward(var9);
-  var10 = spawn("script_model", var5.baseeffectpos);
-  var10 setModel("dom_flag_scriptable");
-  var10.angles = generateaxisanglesfromforwardvector(var5.baseeffectforward, var10.angles);
-  var5.scriptable = var10;
-  var5.vfxnamemod = "";
+  level.objectives[0] = var_5;
+  var_2 = var_0.visuals[0].origin + (0, 0, 32);
+  var_3 = var_0.visuals[0].origin + (0, 0, -32);
+  var_7 = scripts\engine\trace::create_contents(1, 1, 1, 1, 0, 1, 1);
+  var_8 = [];
+  var_4 = scripts\engine\trace::ray_trace(var_2, var_3, var_8, var_7);
+  var_5.baseeffectpos = var_4["position"];
+  var_9 = vectortoangles(var_4["normal"]);
+  var_5.baseeffectforward = anglesToForward(var_9);
+  var_10 = spawn("script_model", var_5.baseeffectpos);
+  var_10 setModel("dom_flag_scriptable");
+  var_10.angles = generateaxisanglesfromforwardvector(var_5.baseeffectforward, var_10.angles);
+  var_5.scriptable = var_10;
+  var_5.vfxnamemod = "";
 
-  if(var5.trigger.radius == 160) {
-    var5.vfxnamemod = "_160";
-  } else if(var5.trigger.radius == 90) {
-    var5.vfxnamemod = "_90";
-  } else if(var5.trigger.radius == 315) {
-    var5.vfxnamemod = "_300";
+  if(var_5.trigger.radius == 160) {
+    var_5.vfxnamemod = "_160";
+  } else if(var_5.trigger.radius == 90) {
+    var_5.vfxnamemod = "_90";
+  } else if(var_5.trigger.radius == 315) {
+    var_5.vfxnamemod = "_300";
   }
 
-  var5 scripts\mp\gameobjects::setownerteam("axis");
-  var5 scripts\mp\gameobjects::setvisibleteam("any");
-  var5 scripts\mp\gameobjects::allowuse("enemy");
-  var5 scripts\mp\gameobjects::setobjectivestatusicons(level.icondefend, level.iconcapture);
-  var5 scripts\mp\gametypes\obj_dom::updateflagstate("axis", 0);
+  var_5 scripts\mp\gameobjects::setownerteam("axis");
+  var_5 scripts\mp\gameobjects::setvisibleteam("any");
+  var_5 scripts\mp\gameobjects::allowuse("enemy");
+  var_5 scripts\mp\gameobjects::setobjectivestatusicons(level.icondefend, level.iconcapture);
+  var_5 scripts\mp\gametypes\obj_dom::updateflagstate("axis", 0);
 }
 
-function dompoint_onuse(var0) {
-  scripts\mp\gametypes\obj_dom::dompoint_onuse(var0);
+function dompoint_onuse(var_0) {
+  scripts\mp\gametypes\obj_dom::dompoint_onuse(var_0);
 
-  if(var0.team == "allies") {
+  if(var_0.team == "allies") {
     scripts\mp\gamescore::_setteamscore("allies", 1, 0);
     thread scripts\mp\gamelogic::endgame("allies", game["end_reason"]["objective_completed"]);
     return;

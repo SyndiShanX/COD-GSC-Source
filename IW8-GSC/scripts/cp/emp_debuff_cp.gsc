@@ -12,12 +12,12 @@ function getplayerempimmune() {
   return isDefined(self.empnotallowed);
 }
 
-function setplayerempimmune(var0) {
+function setplayerempimmune(var_0) {
   if(!isDefined(self.empnotallowed)) {
     self.empnotallowed = 0;
   }
 
-  if(var0) {
+  if(var_0) {
     self.empnotallowed--;
 
     if(self.empnotallowed == 0) {

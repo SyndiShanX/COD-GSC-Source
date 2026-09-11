@@ -11,29 +11,29 @@ function ref_120dc() {
 }
 
 function ref_120de() {
-  var0 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldataforvehicle("open_jeep_carpoc", 1);
-  var0.arenavday = &scripts\cp_mp\vehicles\vehicle_spawn::ref_14211;
+  var_0 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldataforvehicle("open_jeep_carpoc", 1);
+  var_0.arenavday = &scripts\cp_mp\vehicles\vehicle_spawn::ref_14211;
 }
 
 function ref_120dd() {
-  var0 = scripts\cp_mp\vehicles\vehicle_mines::vehicle_mines_getleveldataforvehicle("open_jeep_carpoc", 1);
-  var0.frontextents = 98;
-  var0.backextents = 89;
-  var0.leftextents = 36;
-  var0.rightextents = 36;
-  var0.bottomextents = 23;
-  var0.distancetobottom = 38;
-  var0.loscheckoffset = (0, 0, 55);
+  var_0 = scripts\cp_mp\vehicles\vehicle_mines::vehicle_mines_getleveldataforvehicle("open_jeep_carpoc", 1);
+  var_0.frontextents = 98;
+  var_0.backextents = 89;
+  var_0.leftextents = 36;
+  var_0.rightextents = 36;
+  var_0.bottomextents = 23;
+  var_0.distancetobottom = 38;
+  var_0.loscheckoffset = (0, 0, 55);
 }
 
-function ref_120e0(var0, var1) {
-  var2 = _calloutmarkerping_predicted_isanypingactive::ref_120c1(var0, var1);
+function ref_120e0(var_0, var_1) {
+  var_2 = _calloutmarkerping_predicted_isanypingactive::ref_120c1(var_0, var_1);
 
-  if(isDefined(var2) && scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_gamemodesupportsrespawn()) {
-    var2.ondeathrespawn = &ref_120df;
+  if(isDefined(var_2) && scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_gamemodesupportsrespawn()) {
+    var_2.ondeathrespawn = &ref_120df;
   }
 
-  return var2;
+  return var_2;
 }
 
 function ref_120df() {
@@ -41,9 +41,9 @@ function ref_120df() {
 }
 
 function ref_120e1() {
-  var0 = scripts\cp_mp\vehicles\vehicle_tracking::getvehiclespawndata(self);
-  var1 = spawnStruct();
-  scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(var0, var1);
-  var2 = spawnStruct();
-  var3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("open_jeep_carpoc", var1, var2);
+  var_0 = scripts\cp_mp\vehicles\vehicle_tracking::getvehiclespawndata(self);
+  var_1 = spawnStruct();
+  scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(var_0, var_1);
+  var_2 = spawnStruct();
+  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("open_jeep_carpoc", var_1, var_2);
 }

@@ -3,398 +3,398 @@
  * Script: scripts\mp\broshot_utilities.gsc
 ***********************************************/
 
-function processepictaunt(var0, var1, var2) {
-  if(var1 >= 0 && isDefined(level.camera_bro_shot.char_loc)) {
-    var3 = level.camera_bro_shot.char_loc[var1].origin;
-    var4 = level.camera_bro_shot.char_loc[var1].angles;
+function processepictaunt(var_0, var_1, var_2) {
+  if(var_1 >= 0 && isDefined(level.camera_bro_shot.char_loc)) {
+    var_3 = level.camera_bro_shot.char_loc[var_1].origin;
+    var_4 = level.camera_bro_shot.char_loc[var_1].angles;
 
     if(isDefined(level.overridebroslot)) {
-      var1 = level.overridebroslot - 1;
+      var_1 = level.overridebroslot - 1;
     }
   } else {
-    var3 = level.charactercac.origin;
-    var4 = level.charactercac.angles;
-    var3 = 0;
+    var_3 = level.charactercac.origin;
+    var_4 = level.charactercac.angles;
+    var_3 = 0;
   }
 
-  if(tauntinprogress(var3)) {
+  if(tauntinprogress(var_3)) {
     return;
   }
 
-  processtauntsound(var2);
-  deleteepictauntprops(var3);
-  var5 = [];
-  var6 = [];
-  var7 = [];
-  var8 = [];
-  var9 = [];
-  var10 = [];
-  var11 = [];
-  var12 = [];
-  var13 = 0;
-  var14 = 0;
-  var15 = [];
-  var16 = [];
-  var17 = [];
-  var18 = [];
-  var19 = [];
-  var20 = 0;
-  var21 = 0;
-  var22 = [];
-  var23 = [];
-  var24 = [];
-  var25 = [];
-  var26 = 0;
-  var27 = [];
-  var28 = 0;
+  processtauntsound(var_2);
+  deleteepictauntprops(var_3);
+  var_5 = [];
+  var_6 = [];
+  var_7 = [];
+  var_8 = [];
+  var_9 = [];
+  var_10 = [];
+  var_11 = [];
+  var_12 = [];
+  var_13 = 0;
+  var_14 = 0;
+  var_15 = [];
+  var_16 = [];
+  var_17 = [];
+  var_18 = [];
+  var_19 = [];
+  var_20 = 0;
+  var_21 = 0;
+  var_22 = [];
+  var_23 = [];
+  var_24 = [];
+  var_25 = [];
+  var_26 = 0;
+  var_27 = [];
+  var_28 = 0;
 
-  switch (var2) {
+  switch (var_2) {
     case "IW7_mp_taunt_ftl_1st_kills_456":
-      if(var4 && (!isDefined(level.losersinteractable) || level.losersinteractable == 1)) {
-        var7 = 10;
-        var23 = 0.85;
-        var23 = 2.05;
-        var23 = 1.15;
+      if(var_4 && (!isDefined(level.losersinteractable) || level.losersinteractable == 1)) {
+        var_7 = 10;
+        var_23 = 0.85;
+        var_23 = 2.05;
+        var_23 = 1.15;
         level.losersinteractable = 0;
       }
 
       break;
     case "IW7_mp_taunt_ftl_2nd_kills_456":
-      if(var4 && (!isDefined(level.losersinteractable) || level.losersinteractable == 1)) {
-        var7 = 10;
-        var23 = 1.1;
-        var23 = 2.7;
-        var23 = 1.467;
+      if(var_4 && (!isDefined(level.losersinteractable) || level.losersinteractable == 1)) {
+        var_7 = 10;
+        var_23 = 1.1;
+        var_23 = 2.7;
+        var_23 = 1.467;
         level.losersinteractable = 0;
       }
 
       break;
     case "IW7_mp_taunt_ftl_3rd_kills_456":
-      if(var4 && (!isDefined(level.losersinteractable) || level.losersinteractable == 1)) {
-        var7 = 10;
-        var23 = 1.03;
-        var23 = 2.76;
-        var23 = 1.43;
+      if(var_4 && (!isDefined(level.losersinteractable) || level.losersinteractable == 1)) {
+        var_7 = 10;
+        var_23 = 1.03;
+        var_23 = 2.76;
+        var_23 = 1.43;
         level.losersinteractable = 0;
       }
 
       break;
     case "IW7_mp_taunt_cod_champs":
-      var7 = 7.834;
+      var_7 = 7.834;
       break;
     case "iw7_mp_taunt_super_blackhole":
-      var7 = 7;
+      var_7 = 7;
 
-      for(var29 = 0; var29 < 20; var29++) {
-        var22 = 2.6 + var29 * 0.1;
+      for(var_29 = 0; var_29 < 20; var_29++) {
+        var_22 = 2.6 + var_29 * 0.1;
       }
 
       break;
     case "iw7_mp_taunt_epic_grenade_toss_back01":
-      var7 = 8;
-      var22 = 5.7;
-      var22 = 6.15;
-      var22 = 6.6;
+      var_7 = 8;
+      var_22 = 5.7;
+      var_22 = 6.15;
+      var_22 = 6.6;
       break;
     case "iw7_mp_taunt_super_warfighter_at_screen":
-      var7 = 6.6;
-      var22 = 1;
-      var22 = 1.2;
-      var22 = 1.4;
-      var22 = 1.6;
-      var22 = 1.8;
-      var22 = 2;
-      var22 = 2.2;
-      var22 = 2.4;
+      var_7 = 6.6;
+      var_22 = 1;
+      var_22 = 1.2;
+      var_22 = 1.4;
+      var_22 = 1.6;
+      var_22 = 1.8;
+      var_22 = 2;
+      var_22 = 2.2;
+      var_22 = 2.4;
       break;
     case "iw7_mp_taunt_bio_spike":
-      var7 = 6.6;
-      var22 = 1.65;
-      var22 = 2.05;
+      var_7 = 6.6;
+      var_22 = 1.65;
+      var_22 = 2.05;
       break;
     case "iw7_mp_taunt_synaptic_reaper_3rd":
     case "iw7_mp_taunt_synaptic_reaper_2nd":
     case "iw7_mp_taunt_synaptic_reaper":
-      var7 = 6.6;
-      var21 = 2;
+      var_7 = 6.6;
+      var_21 = 2;
       break;
     case "iw7_mp_taunt_killstreak_scorcher":
-      var5 = "veh_mil_air_ca_jackal_drone_atmos_periph_mp";
-      var6 = "iw7_mp_taunt_killstreak_scorcher_scorcher01";
-      var7 = 6.6;
-      var5 = "veh_mil_air_ca_jackal_drone_atmos_periph_mp";
-      var6 = "iw7_mp_taunt_killstreak_scorcher_scorcher02";
-      var7 = 6.6;
-      var5 = "veh_mil_air_ca_jackal_drone_atmos_periph_mp";
-      var6 = "iw7_mp_taunt_killstreak_scorcher_scorcher03";
-      var7 = 6.6;
-      var21 = 3;
-      var28 = 1;
+      var_5 = "veh_mil_air_ca_jackal_drone_atmos_periph_mp";
+      var_6 = "iw7_mp_taunt_killstreak_scorcher_scorcher01";
+      var_7 = 6.6;
+      var_5 = "veh_mil_air_ca_jackal_drone_atmos_periph_mp";
+      var_6 = "iw7_mp_taunt_killstreak_scorcher_scorcher02";
+      var_7 = 6.6;
+      var_5 = "veh_mil_air_ca_jackal_drone_atmos_periph_mp";
+      var_6 = "iw7_mp_taunt_killstreak_scorcher_scorcher03";
+      var_7 = 6.6;
+      var_21 = 3;
+      var_28 = 1;
       break;
     case "iw7_mp_taunt_killstreak_c8":
-      var5 = "mp_robot_c8";
-      var6 = "iw7_mp_taunt_killstreak_c8_robot";
-      var7 = 5.5;
-      var8 = [];
-      var8[0] = "weapon_c8_shield_top_mp";
-      var8[1] = "weapon_c8_shield_bottom_mp";
-      var9 = [];
-      var9[0] = "j_wristshield";
-      var9[1] = "j_wristbtmshield";
-      var21 = 1.67;
-      var22 = 5.15;
+      var_5 = "mp_robot_c8";
+      var_6 = "iw7_mp_taunt_killstreak_c8_robot";
+      var_7 = 5.5;
+      var_8 = [];
+      var_8[0] = "weapon_c8_shield_top_mp";
+      var_8[1] = "weapon_c8_shield_bottom_mp";
+      var_9 = [];
+      var_9[0] = "j_wristshield";
+      var_9[1] = "j_wristbtmshield";
+      var_21 = 1.67;
+      var_22 = 5.15;
       break;
     case "IW7_mp_taunt_killstreak_apex01":
-      var5 = "veh_mil_air_ca_oblivion_drone_mp";
-      var6 = "IW7_mp_taunt_killstreak_apex01_apex";
-      var7 = 5;
-      var22 = 2;
-      var22 = 2.4;
-      var22 = 2.6;
-      var22 = 3.2;
-      var22 = 3.6;
-      var22 = 3.8;
+      var_5 = "veh_mil_air_ca_oblivion_drone_mp";
+      var_6 = "IW7_mp_taunt_killstreak_apex01_apex";
+      var_7 = 5;
+      var_22 = 2;
+      var_22 = 2.4;
+      var_22 = 2.6;
+      var_22 = 3.2;
+      var_22 = 3.6;
+      var_22 = 3.8;
       break;
     case "iw7_mp_taunt_killstreak_thor":
-      var5 = "veh_mil_air_thor_wm";
-      var5 = "sdf_mp_cruise_missile_01";
-      var5 = "un_mp_jackal_exterior_missile";
-      var5 = "un_mp_jackal_exterior_missile";
-      var5 = "un_mp_jackal_exterior_missile";
-      var5 = "un_mp_jackal_exterior_missile";
-      var5 = "un_mp_jackal_exterior_missile";
-      var6 = "iw7_mp_taunt_killstreak_thor_prop";
-      var6 = "iw7_mp_taunt_killstreak_thor_missile01";
-      var6 = "iw7_mp_taunt_killstreak_thor_missile02";
-      var6 = "iw7_mp_taunt_killstreak_thor_missile03";
-      var6 = "iw7_mp_taunt_killstreak_thor_missile04";
-      var6 = "iw7_mp_taunt_killstreak_thor_missile05";
-      var6 = "iw7_mp_taunt_killstreak_thor_missile05";
-      var7 = 7.47;
-      var7 = 3.76;
-      var7 = 4.7;
-      var7 = 4.7;
-      var7 = 4.7;
-      var7 = 4.7;
-      var7 = 4.7;
-      var13 = 1;
-      var14 = 1.5;
-      var21 = 4.5;
-      var28 = 1;
+      var_5 = "veh_mil_air_thor_wm";
+      var_5 = "sdf_mp_cruise_missile_01";
+      var_5 = "un_mp_jackal_exterior_missile";
+      var_5 = "un_mp_jackal_exterior_missile";
+      var_5 = "un_mp_jackal_exterior_missile";
+      var_5 = "un_mp_jackal_exterior_missile";
+      var_5 = "un_mp_jackal_exterior_missile";
+      var_6 = "iw7_mp_taunt_killstreak_thor_prop";
+      var_6 = "iw7_mp_taunt_killstreak_thor_missile01";
+      var_6 = "iw7_mp_taunt_killstreak_thor_missile02";
+      var_6 = "iw7_mp_taunt_killstreak_thor_missile03";
+      var_6 = "iw7_mp_taunt_killstreak_thor_missile04";
+      var_6 = "iw7_mp_taunt_killstreak_thor_missile05";
+      var_6 = "iw7_mp_taunt_killstreak_thor_missile05";
+      var_7 = 7.47;
+      var_7 = 3.76;
+      var_7 = 4.7;
+      var_7 = 4.7;
+      var_7 = 4.7;
+      var_7 = 4.7;
+      var_7 = 4.7;
+      var_13 = 1;
+      var_14 = 1.5;
+      var_21 = 4.5;
+      var_28 = 1;
       break;
     case "IW7_mp_taunt_adrenaline":
-      var5 = "equipment_mp_nanoshot_wm";
-      var6 = "IW7_mp_taunt_adrenaline_nano";
-      var7 = 10;
-      var22 = 7.5;
+      var_5 = "equipment_mp_nanoshot_wm";
+      var_6 = "IW7_mp_taunt_adrenaline_nano";
+      var_7 = 10;
+      var_22 = 7.5;
       break;
     case "iw7_mp_taunt_super_shootdown":
-      var5 = "veh_mil_air_un_uav";
-      var6 = "iw7_mp_taunt_super_shootdown_uav";
-      var7 = 6;
-      var22 = 3.75;
+      var_5 = "veh_mil_air_un_uav";
+      var_6 = "iw7_mp_taunt_super_shootdown_uav";
+      var_7 = 6;
+      var_22 = 3.75;
       break;
     case "IW7_mp_taunt_phantom_cloak_3rd":
     case "IW7_mp_taunt_phantom_cloak_2nd":
     case "IW7_mp_taunt_phantom_cloak":
-      var10 = "cloak";
-      var11 = "on";
-      var12 = 0.01;
-      var10 = "cloak";
-      var11 = "off";
-      var12 = 1.5;
-      var10 = "cloak";
-      var11 = "on";
-      var12 = 3.2;
-      var10 = "cloak";
-      var11 = "off";
-      var12 = 4.7;
-      var7 = 5.1;
-      var13 = 1;
-      var14 = 2;
+      var_10 = "cloak";
+      var_11 = "on";
+      var_12 = 0.01;
+      var_10 = "cloak";
+      var_11 = "off";
+      var_12 = 1.5;
+      var_10 = "cloak";
+      var_11 = "on";
+      var_12 = 3.2;
+      var_10 = "cloak";
+      var_11 = "off";
+      var_12 = 4.7;
+      var_7 = 5.1;
+      var_13 = 1;
+      var_14 = 2;
       break;
     case "iw7_mp_taunt_super_merc_steeldragon":
-      var15 = 0.466;
-      var16 = 2.85;
-      var17 = "tag_accessory_right";
-      var18 = "tag_accessory_left";
-      var19 = "vfx_taunt_steel_dragon";
-      var7 = 4;
-      var22 = 0.5;
-      var22 = 0.7;
-      var22 = 0.9;
-      var22 = 1;
-      var22 = 1.2;
-      var22 = 1.4;
-      var22 = 1.6;
-      var22 = 1.8;
-      var22 = 2;
-      var22 = 2.2;
-      var22 = 2.4;
-      var22 = 2.7;
-      var22 = 2.9;
-      var22 = 3.1;
+      var_15 = 0.466;
+      var_16 = 2.85;
+      var_17 = "tag_accessory_right";
+      var_18 = "tag_accessory_left";
+      var_19 = "vfx_taunt_steel_dragon";
+      var_7 = 4;
+      var_22 = 0.5;
+      var_22 = 0.7;
+      var_22 = 0.9;
+      var_22 = 1;
+      var_22 = 1.2;
+      var_22 = 1.4;
+      var_22 = 1.6;
+      var_22 = 1.8;
+      var_22 = 2;
+      var_22 = 2.2;
+      var_22 = 2.4;
+      var_22 = 2.7;
+      var_22 = 2.9;
+      var_22 = 3.1;
       break;
     case "iw7_mp_taunt_killstreak_laser_strike":
-      var7 = 12;
-      var24 = "vfx_bombard_antigrav_pre_expl";
-      var24 = "vfx_bombard_projectile_trail";
-      var26 = 0.2;
-      var25 = (0, 80, 0);
-      var25 = (75, 140, 0);
-      var25 = (-165, 250, 0);
-      var25 = (50, 200, 0);
-      var25 = (155, 250, 0);
-      var25 = (-75, 140, 0);
-      var25 = (-50, 200, 0);
-      var27 = 1;
-      var27 = 1;
-      var27 = 3.5;
-      var22 = 3.5;
-      var22 = 3.7;
-      var22 = 3.9;
-      var22 = 4.1;
-      var22 = 4.3;
-      var22 = 4.5;
-      var22 = 4.7;
-      var22 = 4.9;
+      var_7 = 12;
+      var_24 = "vfx_bombard_antigrav_pre_expl";
+      var_24 = "vfx_bombard_projectile_trail";
+      var_26 = 0.2;
+      var_25 = (0, 80, 0);
+      var_25 = (75, 140, 0);
+      var_25 = (-165, 250, 0);
+      var_25 = (50, 200, 0);
+      var_25 = (155, 250, 0);
+      var_25 = (-75, 140, 0);
+      var_25 = (-50, 200, 0);
+      var_27 = 1;
+      var_27 = 1;
+      var_27 = 3.5;
+      var_22 = 3.5;
+      var_22 = 3.7;
+      var_22 = 3.9;
+      var_22 = 4.1;
+      var_22 = 4.3;
+      var_22 = 4.5;
+      var_22 = 4.7;
+      var_22 = 4.9;
       break;
     default:
       return;
   }
 
-  level.broshotepictauntprops[var3] = [];
-  level.broshotepictauntsubprops[var3] = [];
+  level.broshotepictauntprops[var_3] = [];
+  level.broshotepictauntsubprops[var_3] = [];
 
-  if(var4 && var13) {
+  if(var_4 && var_13) {
     if(!isDefined(level.queuedtaunts)) {
       level.queuedtaunts = [];
     }
 
-    if(isDefined(level.queuedtaunts[var2])) {
-      var30 = gettime() - level.queuedtaunts[var2];
+    if(isDefined(level.queuedtaunts[var_2])) {
+      var_30 = gettime() - level.queuedtaunts[var_2];
 
-      if(var30 < var14 * 1000) {
-        wait var14 - var30 / 1000;
+      if(var_30 < var_14 * 1000) {
+        wait var_14 - var_30 / 1000;
       }
     }
 
-    level.queuedtaunts[var2] = gettime();
+    level.queuedtaunts[var_2] = gettime();
   }
 
-  var31 = (0, 0, 0);
+  var_31 = (0, 0, 0);
 
-  if(var28 && isDefined(level.upsidedowntaunts) && level.upsidedowntaunts == 1) {
-    var31 = (180, 180, 0);
+  if(var_28 && isDefined(level.upsidedowntaunts) && level.upsidedowntaunts == 1) {
+    var_31 = (180, 180, 0);
   }
 
-  for(var29 = 0; var29 < var5.size; var29++) {
-    var32 = spawn("script_model", var3);
-    var32 setModel(var5[var29]);
-    var32.angles = var4 + var31;
-    var32 notsolid();
-    var32 dontinterpolate();
-    var32 scriptmodelplayanimdeltamotion(var6[var29]);
+  for(var_29 = 0; var_29 < var_5.size; var_29++) {
+    var_32 = spawn("script_model", var_3);
+    var_32 setModel(var_5[var_29]);
+    var_32.angles = var_4 + var_31;
+    var_32 notsolid();
+    var_32 dontinterpolate();
+    var_32 scriptmodelplayanimdeltamotion(var_6[var_29]);
 
     if(!isDefined(level.broshotepictauntprops)) {
       level.broshotepictauntprops = [];
     }
 
-    level.broshotepictauntprops[var3][var29] = var32;
+    level.broshotepictauntprops[var_3][var_29] = var_32;
 
-    if(!(isDefined(var8[var29]) && isarray(var8[var29]))) {
+    if(!(isDefined(var_8[var_29]) && isarray(var_8[var_29]))) {
       continue;
     }
 
-    level.broshotepictauntsubprops[var3] = [];
+    level.broshotepictauntsubprops[var_3] = [];
 
-    for(var33 = 0; var33 < var8[var29].size; var33++) {
-      var34 = spawn("script_model", var3);
-      var34 setModel(var8[var29][var33]);
-      var34.angles = var4 + var31;
-      var34 notsolid();
-      var34 dontinterpolate();
-      var34 linkTo(var32, var9[var29][var33], (0, 0, 0), (0, 0, 0));
-      level.broshotepictauntsubprops[var3][var33] = var34;
+    for(var_33 = 0; var_33 < var_8[var_29].size; var_33++) {
+      var_34 = spawn("script_model", var_3);
+      var_34 setModel(var_8[var_29][var_33]);
+      var_34.angles = var_4 + var_31;
+      var_34 notsolid();
+      var_34 dontinterpolate();
+      var_34 linkTo(var_32, var_9[var_29][var_33], (0, 0, 0), (0, 0, 0));
+      level.broshotepictauntsubprops[var_3][var_33] = var_34;
     }
   }
 
-  var35 = 0;
+  var_35 = 0;
 
-  for(var29 = 0; var29 < var7.size; var29++) {
-    var35 = max(var35, var7[var29]);
+  for(var_29 = 0; var_29 < var_7.size; var_29++) {
+    var_35 = max(var_35, var_7[var_29]);
   }
 
-  for(var29 = 0; var29 < var10.size; var29++) {
-    thread doepictauntscriptablestep(var4, var3, var10[var29], var11[var29], var12[var29]);
+  for(var_29 = 0; var_29 < var_10.size; var_29++) {
+    thread doepictauntscriptablestep(var_4, var_3, var_10[var_29], var_11[var_29], var_12[var_29]);
   }
 
-  if(var4 == 0) {
-    var36 = getplayercharacter(-1);
+  if(var_4 == 0) {
+    var_36 = getplayercharacter(-1);
   } else {
-    var36 = getplayercharacter(var4);
+    var_36 = getplayercharacter(var_4);
   }
 
-  if(var3 != 0) {
-    for(var32 = 0; var32 < var16.size; var32++) {
-      thread playbeamfx(var16[var32], var17[var32], var20[var32], var18[var32], var19[var32], var36);
+  if(var_3 != 0) {
+    for(var_32 = 0; var_32 < var_16.size; var_32++) {
+      thread playbeamfx(var_16[var_32], var_17[var_32], var_20[var_32], var_18[var_32], var_19[var_32], var_36);
     }
   }
 
-  if(var3 != 0 && var21 > 0) {
-    thread doshellshock(var21);
+  if(var_3 != 0 && var_21 > 0) {
+    thread doshellshock(var_21);
   }
 
-  if(var3 != 0 && var22 > 0) {
-    thread doearthquake(var22, 1);
+  if(var_3 != 0 && var_22 > 0) {
+    thread doearthquake(var_22, 1);
   }
 
-  for(var32 = 0; var32 < var23.size; var32++) {
-    thread doearthquake(var23[var32], 0);
+  for(var_32 = 0; var_32 < var_23.size; var_32++) {
+    thread doearthquake(var_23[var_32], 0);
   }
 
-  for(var32 = 0; var32 < var24.size; var32++) {
-    thread dodisintegrate(var24[var32], var32);
+  for(var_32 = 0; var_32 < var_24.size; var_32++) {
+    thread dodisintegrate(var_24[var_32], var_32);
   }
 
-  for(var32 = 0; var32 < var26.size; var32++) {
-    var37 = anglesToForward(level.camera_bro_shot.basecam.angles);
-    var38 = vectorNormalize((var37[0], var37[1], 0));
-    var39 = vectorcross(var38, (0, 0, 1));
-    var40 = var38 * var26[var32][1];
-    var41 = var39 * var26[var32][0];
-    var42 = var40 + var41;
+  for(var_32 = 0; var_32 < var_26.size; var_32++) {
+    var_37 = anglesToForward(level.camera_bro_shot.basecam.angles);
+    var_38 = vectorNormalize((var_37[0], var_37[1], 0));
+    var_39 = vectorcross(var_38, (0, 0, 1));
+    var_40 = var_38 * var_26[var_32][1];
+    var_41 = var_39 * var_26[var_32][0];
+    var_42 = var_40 + var_41;
 
-    if(var3 != 0) {
-      var43 = level.camera_bro_shot.char_loc[0].origin;
+    if(var_3 != 0) {
+      var_43 = level.camera_bro_shot.char_loc[0].origin;
     } else {
-      var43 = var4;
+      var_43 = var_4;
     }
 
-    for(var34 = 0; var34 < var25.size; var34++) {
-      thread dospawnvfx(var25[var34], var28[var34] + var27 * var32, var42, var43);
+    for(var_34 = 0; var_34 < var_25.size; var_34++) {
+      thread dospawnvfx(var_25[var_34], var_28[var_34] + var_27 * var_32, var_42, var_43);
     }
   }
 
-  thread cleanupepictauntprops(var4, var36, var3);
+  thread cleanupepictauntprops(var_4, var_36, var_3);
 }
 
-function dospawnvfx(var0, var1, var2, var3) {
+function dospawnvfx(var_0, var_1, var_2, var_3) {
   self endon("cancel_taunt_cleanup");
-  wait var1;
-  var4 = var3 + var2;
-  var5 = spawnfx(level._effect[var0], var4);
+  wait var_1;
+  var_4 = var_3 + var_2;
+  var_5 = spawnfx(level._effect[var_0], var_4);
 
-  if(isDefined(var5)) {
-    triggerfx(var5);
-    thread delayfxdelete(var5);
+  if(isDefined(var_5)) {
+    triggerfx(var_5);
+    thread delayfxdelete(var_5);
     return;
   }
 }
 
-function delayfxdelete(var0) {
+function delayfxdelete(var_0) {
   self endon("cancel_taunt_cleanup");
-  wait var0;
+  wait var_0;
 
   if(isDefined(self)) {
     self delete();
@@ -402,104 +402,104 @@ function delayfxdelete(var0) {
   }
 }
 
-function dodisintegrate(var0, var1) {
+function dodisintegrate(var_0, var_1) {
   self endon("cancel_taunt_cleanup");
-  wait var0;
+  wait var_0;
 
-  if(isDefined(level.topplayers[var1 + 3])) {
-    level.topplayers[var1 + 3].bro hide(1);
+  if(isDefined(level.topplayers[var_1 + 3])) {
+    level.topplayers[var_1 + 3].bro hide(1);
     return;
   }
 }
 
-function playbeamfx(var0, var1, var2, var3, var4, var5) {
+function playbeamfx(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon("cancel_taunt_cleanup");
-  wait var0;
-  var6 = playfxontagsbetweenclients(level._effect[var2], var5, var3, var5, var4);
-  thread cleanupbeamfx(var6, var1);
+  wait var_0;
+  var_6 = playfxontagsbetweenclients(level._effect[var_2], var_5, var_3, var_5, var_4);
+  thread cleanupbeamfx(var_6, var_1);
 }
 
-function cleanupbeamfx(var0, var1) {
-  waittill_notify_or_timeout("cancel_taunt_cleanup", var1);
-  var0 delete();
+function cleanupbeamfx(var_0, var_1) {
+  waittill_notify_or_timeout("cancel_taunt_cleanup", var_1);
+  var_0 delete();
 }
 
-function waittill_notify_or_timeout(var0, var1) {
-  self endon(var0);
-  wait var1;
+function waittill_notify_or_timeout(var_0, var_1) {
+  self endon(var_0);
+  wait var_1;
 }
 
-function doearthquake(var0, var1) {
+function doearthquake(var_0, var_1) {
   self endon("cancel_taunt_cleanup");
 
   if(!isDefined(level.players)) {
     return;
   }
 
-  wait var0;
+  wait var_0;
 
-  foreach(var3 in level.players) {
-    if(isbot(var3)) {
+  foreach(var_3 in level.players) {
+    if(isbot(var_3)) {
       continue;
     }
 
-    if(var1) {
-      var3 earthquakeforplayer(0.5, 0.65, var3.origin, 1000);
+    if(var_1) {
+      var_3 earthquakeforplayer(0.5, 0.65, var_3.origin, 1000);
       continue;
     }
 
-    var3 earthquakeforplayer(0.15, 0.25, var3.origin, 1000);
+    var_3 earthquakeforplayer(0.15, 0.25, var_3.origin, 1000);
   }
 }
 
-function doshellshock(var0) {
+function doshellshock(var_0) {
   self endon("cancel_taunt_cleanup");
-  wait var0;
+  wait var_0;
 
-  foreach(var2 in level.players) {
-    if(isbot(var2)) {}
+  foreach(var_2 in level.players) {
+    if(isbot(var_2)) {}
   }
 }
 
-function getplayercharacter(var0) {
-  if(var0 == -1) {
-    var1 = level.charactercac;
+function getplayercharacter(var_0) {
+  if(var_0 == -1) {
+    var_1 = level.charactercac;
   } else {
-    var1 = level.topplayers[var1].bro;
+    var_1 = level.topplayers[var_1].bro;
   }
 
-  return var1;
+  return var_1;
 }
 
-function doepictauntscriptablestep(var0, var1, var2, var3, var4) {
-  if(var0 == 0) {
-    var1 = -1;
+function doepictauntscriptablestep(var_0, var_1, var_2, var_3, var_4) {
+  if(var_0 == 0) {
+    var_1 = -1;
   }
 
   self endon("cancel_taunt_cleanup");
-  thread listenepictauntscriptablecancel(var1, var2);
-  wait var4;
-  var5 = getplayercharacter(var1);
+  thread listenepictauntscriptablecancel(var_1, var_2);
+  wait var_4;
+  var_5 = getplayercharacter(var_1);
 
-  if(!isDefined(var5)) {
+  if(!isDefined(var_5)) {
     return;
   }
 
-  var5 setscriptablepartstate(var2, var3, 0);
+  var_5 setscriptablepartstate(var_2, var_3, 0);
 }
 
-function listenepictauntscriptablecancel(var0, var1) {
+function listenepictauntscriptablecancel(var_0, var_1) {
   self waittill("cancel_taunt_cleanup");
-  var2 = getplayercharacter(var0);
-  var2 setscriptablepartstate(var1, "offImmediate", 0);
+  var_2 = getplayercharacter(var_0);
+  var_2 setscriptablepartstate(var_1, "offImmediate", 0);
 }
 
 function respawnclientcharacter() {
-  var0 = level.charactercac.angles;
-  var1 = level.charactercac.origin;
+  var_0 = level.charactercac.angles;
+  var_1 = level.charactercac.origin;
   level.charactercac delete();
-  level.charactercac = spawn("script_character", var1, 0, 0, 1, "MPClientCharacter");
-  level.charactercac.angles = var0;
+  level.charactercac = spawn("script_character", var_1, 0, 0, 1, "MPClientCharacter");
+  level.charactercac.angles = var_0;
   deleteepictauntprops(0);
 
   if(isDefined(level.last_taunt_sfx)) {
@@ -518,45 +518,45 @@ function respawnclientcharacter() {
   }
 }
 
-function tauntinprogress(var0) {
-  return isDefined(level.broshotepictauntprops) && isarray(level.broshotepictauntprops) && isDefined(level.broshotepictauntprops[var0]) && level.broshotepictauntprops[var0].size > 0;
+function tauntinprogress(var_0) {
+  return isDefined(level.broshotepictauntprops) && isarray(level.broshotepictauntprops) && isDefined(level.broshotepictauntprops[var_0]) && level.broshotepictauntprops[var_0].size > 0;
 }
 
-function cleanupepictauntprops(var0, var1, var2) {
+function cleanupepictauntprops(var_0, var_1, var_2) {
   self endon("cancel_taunt_cleanup");
-  wait var1;
+  wait var_1;
   level.taunts_done = 1;
-  deleteepictauntprops(var0);
+  deleteepictauntprops(var_0);
 }
 
-function deleteepictauntprops(var0) {
-  if(tauntinprogress(var0)) {
-    for(var1 = 0; var1 < level.broshotepictauntprops[var0].size; var1++) {
-      if(isDefined(level.broshotepictauntprops[var0][var1])) {
-        level.broshotepictauntprops[var0][var1] scriptmodelclearanim();
-        level.broshotepictauntprops[var0][var1] delete();
+function deleteepictauntprops(var_0) {
+  if(tauntinprogress(var_0)) {
+    for(var_1 = 0; var_1 < level.broshotepictauntprops[var_0].size; var_1++) {
+      if(isDefined(level.broshotepictauntprops[var_0][var_1])) {
+        level.broshotepictauntprops[var_0][var_1] scriptmodelclearanim();
+        level.broshotepictauntprops[var_0][var_1] delete();
       }
     }
 
-    level.broshotepictauntprops[var0] = [];
+    level.broshotepictauntprops[var_0] = [];
 
-    if(isDefined(level.broshotepictauntsubprops[var0]) && isarray(level.broshotepictauntsubprops[var0])) {
-      for(var1 = 0; var1 < level.broshotepictauntsubprops[var0].size; var1++) {
-        if(isDefined(level.broshotepictauntsubprops[var0][var1])) {
-          level.broshotepictauntsubprops[var0][var1] scriptmodelclearanim();
-          level.broshotepictauntsubprops[var0][var1] delete();
+    if(isDefined(level.broshotepictauntsubprops[var_0]) && isarray(level.broshotepictauntsubprops[var_0])) {
+      for(var_1 = 0; var_1 < level.broshotepictauntsubprops[var_0].size; var_1++) {
+        if(isDefined(level.broshotepictauntsubprops[var_0][var_1])) {
+          level.broshotepictauntsubprops[var_0][var_1] scriptmodelclearanim();
+          level.broshotepictauntsubprops[var_0][var_1] delete();
         }
       }
 
-      level.broshotepictauntsubprops[var0] = [];
+      level.broshotepictauntsubprops[var_0] = [];
     }
   }
 
   self notify("cancel_taunt_cleanup");
 }
 
-function processtauntsound(var0) {
-  if(!soundexists(var0)) {
+function processtauntsound(var_0) {
+  if(!soundexists(var_0)) {
     return;
   }
 
@@ -568,7 +568,7 @@ function processtauntsound(var0) {
     level.taunts_used = [];
   }
 
-  if(soundexists(var0)) {
+  if(soundexists(var_0)) {
     if(isDefined(level.last_taunt_sfx)) {
       self stoplocalsound(level.last_taunt_sfx);
 
@@ -583,17 +583,17 @@ function processtauntsound(var0) {
       level.last_taunt_sfx = undefined;
     }
 
-    playepicbroshotsound(var0);
-    level.taunts_used[level.taunts_used.size] = var0;
-    level.last_taunt_sfx = var0;
+    playepicbroshotsound(var_0);
+    level.taunts_used[level.taunts_used.size] = var_0;
+    level.last_taunt_sfx = var_0;
     return;
   }
 
-  if(soundexists(var0 + "_quiet")) {
-    if(!array_contains(level.taunts_used, var0)) {
-      playepicbroshotsound(var0 + "_quiet");
-      level.taunts_used[level.taunts_used.size] = var0;
-      level.last_taunt_sfx = var0 + "_quiet";
+  if(soundexists(var_0 + "_quiet")) {
+    if(!array_contains(level.taunts_used, var_0)) {
+      playepicbroshotsound(var_0 + "_quiet");
+      level.taunts_used[level.taunts_used.size] = var_0;
+      level.last_taunt_sfx = var_0 + "_quiet";
       return;
     }
 
@@ -601,27 +601,27 @@ function processtauntsound(var0) {
   }
 }
 
-function playepicbroshotsound(var0) {
+function playepicbroshotsound(var_0) {
   if(isDefined(level.players)) {
-    foreach(var2 in level.players) {
-      if(!isbot(var2)) {
-        var2 playlocalsound(var0);
+    foreach(var_2 in level.players) {
+      if(!isbot(var_2)) {
+        var_2 playlocalsound(var_0);
       }
     }
 
     return;
   }
 
-  self playlocalsound(var0);
+  self playlocalsound(var_0);
 }
 
-function array_contains(var0, var1) {
-  if(var0.size <= 0) {
+function array_contains(var_0, var_1) {
+  if(var_0.size <= 0) {
     return false;
   }
 
-  foreach(var3 in var0) {
-    if(var3 == var1) {
+  foreach(var_3 in var_0) {
+    if(var_3 == var_1) {
       return true;
     }
   }

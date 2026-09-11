@@ -13,12 +13,12 @@ function init() {
   level.offhands.precached = [];
 }
 
-function registeroffhandfirefunc(var0, var1) {
-  level.offhands.firefuncs[var0] = var1;
+function registeroffhandfirefunc(var_0, var_1) {
+  level.offhands.firefuncs[var_0] = var_1;
 }
 
-function offhandisprecached(var0) {
-  if(scripts\engine\utility::array_contains(level.offhands.precached, var0)) {
+function offhandisprecached(var_0) {
+  if(scripts\engine\utility::array_contains(level.offhands.precached, var_0)) {
     return 1;
   }
 
@@ -26,7 +26,7 @@ function offhandisprecached(var0) {
 }
 
 function offhandprecachefuncs() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, "frag", &scripts\sp\equipment\frag::precache);
 }
 
@@ -36,54 +36,54 @@ function offhandfiremanager() {
   self.offhands.lastusedoffhandtime = 0;
 
   for(;;) {
-    self waittill("grenade_fire", var0, var1);
+    self waittill("grenade_fire", var_0, var_1);
 
-    if(isDefined(level.offhands.firefuncs[var1.basename])) {
-      GscBinSkip1(0x74, level.offhands.firefuncs[var1.basename], var0);
+    if(isDefined(level.offhands.firefuncs[var_1.basename])) {
+      GscBinSkip1(0x74, level.offhands.firefuncs[var_1.basename], var_0);
     }
 
-    self.offhands.lastusedoffhandweapon = var1;
+    self.offhands.lastusedoffhandweapon = var_1;
     self.offhands.lastusedoffhandtime = gettime();
   }
 }
 
-function playeroffhandthread(var0) {
+function playeroffhandthread(var_0) {
   level.player endon("death");
-  level.player childthread[[var0]]();
+  level.player childthread[[var_0]]();
 }
 
-function remove_blackboard_isburning(var0) {
+function remove_blackboard_isburning(var_0) {
   waitframe();
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var0._blackboard.isburning = undefined;
+  var_0._blackboard.isburning = undefined;
 }
 
-function getweaponoffhandclass(var0) {
-  if(isstring(var0)) {
-    var1 = var0;
+function getweaponoffhandclass(var_0) {
+  if(isstring(var_0)) {
+    var_1 = var_0;
   } else {
-    var1 = var1.basename;
+    var_1 = var_1.basename;
   }
 
-  return weaponoffhandclass(var1);
+  return weaponoffhandclass(var_1);
 }
 
-function getweaponoffhandtype(var0) {
-  var1 = "primaryoffhand";
-  var2 = "secondaryoffhand";
-  var3 = "none";
+function getweaponoffhandtype(var_0) {
+  var_1 = "primaryoffhand";
+  var_2 = "secondaryoffhand";
+  var_3 = "none";
 
-  if(isstring(var0)) {
-    var4 = var0;
+  if(isstring(var_0)) {
+    var_4 = var_0;
   } else {
-    var4 = var1.basename;
+    var_4 = var_1.basename;
   }
 
-  switch (var4) {
+  switch (var_4) {
     case "c4_no_detonator":
     case "pipebomb":
     case "throwingknife":
@@ -92,15 +92,15 @@ function getweaponoffhandtype(var0) {
     case "frag_farah":
     case "frag":
     case "molotov":
-      return var2;
+      return var_2;
     case "signal":
     case "teargas":
     case "smoke_tall":
     case "smoke":
     case "noisemaker":
     case "flash":
-      return var3;
+      return var_3;
     case "none":
-      return var4;
+      return var_4;
   }
 }

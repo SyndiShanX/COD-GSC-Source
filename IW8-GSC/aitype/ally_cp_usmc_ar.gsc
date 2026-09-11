@@ -22,11 +22,11 @@ function main() {
   self.grenadeammo = 2;
 }
 
-function setup_model(var0) {
-  var1 = undefined;
-  var2 = ["character_cp_usmc_basic_ar_1", "character_cp_usmc_basic_ar_2", "character_cp_usmc_basic_ar_3", "character_cp_usmc_basic_ar_4", "character_cp_usmc_basic_lmg"];
+function setup_model(var_0) {
+  var_1 = undefined;
+  var_2 = ["character_cp_usmc_basic_ar_1", "character_cp_usmc_basic_ar_2", "character_cp_usmc_basic_ar_3", "character_cp_usmc_basic_ar_4", "character_cp_usmc_basic_lmg"];
 
-  switch (scripts\code\character::get_random_character(5, var1, var2, "actor_ally_cp_usmc_ar")) {
+  switch (scripts\code\character::get_random_character(5, var_1, var_2, "actor_ally_cp_usmc_ar")) {
     case 0:
       character\character_spetsnaz_ar_nvg_cp::main_mp();
       break;
@@ -46,31 +46,31 @@ function setup_model(var0) {
 }
 
 function precache() {
-  var0 = "actor_ally_cp_usmc_ar";
+  var_0 = "actor_ally_cp_usmc_ar";
 
   if(!isDefined(level.agent_definition)) {
     level.agent_definition = [];
   }
 
-  if(!isDefined(level.agent_definition[var0])) {
-    level.agent_definition[var0] = [];
-    level.agent_definition[var0]["species"] = "human";
-    level.agent_definition[var0]["traversal_unit_type"] = "soldier";
-    level.agent_definition[var0]["health"] = 150;
-    level.agent_definition[var0]["xp"] = 50;
-    level.agent_definition[var0]["reward"] = 100;
-    level.agent_definition[var0]["asm"] = "soldier_cp";
-    level.agent_definition[var0]["radius"] = 15;
-    level.agent_definition[var0]["height"] = 70;
-    level.agent_definition[var0]["behaviorTree"] = "soldier_agent";
-    level.agent_definition[var0]["team"] = "allies";
-    level.agent_definition[var0]["setup_func"] = &main;
-    level.agent_definition[var0]["setup_model_func"] = &setup_model;
-    character\character_spetsnaz_ar_nvg_cp::precache_mp(var0);
-    character\character_spetsnaz_ar_nvg_fixed_cp::precache_mp(var0);
-    character\character_spetsnaz_ar_trial::precache_mp(var0);
-    character\character_spetsnaz_cqc_nvg_cp::precache_mp(var0);
-    character\character_spetsnaz_cqc_trial::precache_mp(var0);
+  if(!isDefined(level.agent_definition[var_0])) {
+    level.agent_definition[var_0] = [];
+    level.agent_definition[var_0]["species"] = "human";
+    level.agent_definition[var_0]["traversal_unit_type"] = "soldier";
+    level.agent_definition[var_0]["health"] = 150;
+    level.agent_definition[var_0]["xp"] = 50;
+    level.agent_definition[var_0]["reward"] = 100;
+    level.agent_definition[var_0]["asm"] = "soldier_cp";
+    level.agent_definition[var_0]["radius"] = 15;
+    level.agent_definition[var_0]["height"] = 70;
+    level.agent_definition[var_0]["behaviorTree"] = "soldier_agent";
+    level.agent_definition[var_0]["team"] = "allies";
+    level.agent_definition[var_0]["setup_func"] = &main;
+    level.agent_definition[var_0]["setup_model_func"] = &setup_model;
+    character\character_spetsnaz_ar_nvg_cp::precache_mp(var_0);
+    character\character_spetsnaz_ar_nvg_fixed_cp::precache_mp(var_0);
+    character\character_spetsnaz_ar_trial::precache_mp(var_0);
+    character\character_spetsnaz_cqc_nvg_cp::precache_mp(var_0);
+    character\character_spetsnaz_cqc_trial::precache_mp(var_0);
   }
 
   scripts\aitypes\bt_util::init();

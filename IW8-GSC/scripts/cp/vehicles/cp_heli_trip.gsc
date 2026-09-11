@@ -3,10 +3,10 @@
  * Script: scripts\cp\vehicles\cp_heli_trip.gsc
 ************************************************/
 
-function start_heli_trip_sequence(var0, var1, var2, var3) {
+function start_heli_trip_sequence(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
   initanims();
-  level.heli_trip_vehicle = spawn_chopper(var0, var1);
+  level.heli_trip_vehicle = spawn_chopper(var_0, var_1);
   level.heli_trip_vehicle scripts\cp\infilexfil\blima_exfil::go_to_exfil_location(level.heli_trip_vehicle.exfil_struct, 1);
   thread wait_for_passengers(level.heli_trip_vehicle);
   level.heli_trip_vehicle scripts\engine\utility::ref_143a5("all_players_on_board", "heli_trip_timed_out");
@@ -17,7 +17,7 @@ function start_heli_trip_sequence(var0, var1, var2, var3) {
 
   level notify("heli_trip_took_off");
   level.heli_trip_vehicle notify("heli_taking_off");
-  level.heli_trip_vehicle scripts\common\vehicle_paths::vehicle_paths_helicopter(var2);
+  level.heli_trip_vehicle scripts\common\vehicle_paths::vehicle_paths_helicopter(var_2);
   level.heli_trip_vehicle notify("unload");
   level notify("heli_trip_over");
   wait 2;
@@ -27,25 +27,25 @@ function start_heli_trip_sequence(var0, var1, var2, var3) {
 
 #using_animtree("script_model");
 
-function playerpassengerthink(var0) {
+function playerpassengerthink(var_0) {
   level endon("game_ended");
   self endon("death");
   self endon("disconnect");
   self endon("player_free_spot");
-  var1 = "tag_seat_2";
+  var_1 = "tag_seat_2";
 
-  switch (var0) {
+  switch (var_0) {
     case "seat1":
-      var1 = "tag_seat_2";
+      var_1 = "tag_seat_2";
       break;
     case "seat2":
-      var1 = "tag_seat_3";
+      var_1 = "tag_seat_3";
       break;
     case "seat3":
-      var1 = "tag_seat_4";
+      var_1 = "tag_seat_4";
       break;
     case "seat4":
-      var1 = "tag_seat_5";
+      var_1 = "tag_seat_5";
       break;
   }
 
@@ -65,7 +65,7 @@ function playerpassengerthink(var0) {
   scripts\common\anim::anim_first_frame_solo(self.player_rig, "blima_getin");
   link_player_to_rig(self, 0.4);
   self.player_rig.weapon_state_func = &scripts\cp\cp_infilexfil::handleweaponstatenotetrackcp;
-  level.heli_trip_vehicle thread scripts\cp\cp_anim::anim_player_solo(self, self.player_rig, "blima_getin", var1);
+  level.heli_trip_vehicle thread scripts\cp\cp_anim::anim_player_solo(self, self.player_rig, "blima_getin", var_1);
   wait getanimlength(%sdr_cp_veh_lbravo_seat_2_getin);
   self.player_rig linkTo(level.heli_trip_vehicle, "body_animate_jnt", (0, 0, 0), (0, 0, 0));
   self lerpviewangleclamp(1, 0.25, 0.25, 60, 60, 30, 30);
@@ -73,7 +73,7 @@ function playerpassengerthink(var0) {
   level notify("exfil_sequence_started");
   level.heli_trip_vehicle notify("player_boarded_heli");
   thread ref_144c2();
-  thread rideloop(var1);
+  thread rideloop(var_1);
   level.heli_trip_vehicle waittill("unload");
   self lerpviewangleclamp(1, 0.25, 0.25, 0, 0, 0, 0);
   self stopanimscriptsceneevent();
@@ -88,8 +88,8 @@ function playerpassengerthink(var0) {
   scripts\cp\cp_infilexfil::takegunlesscp();
 
   if(istrue(self.clearsixthsense)) {
-    var2 = getcompleteweaponname("iw8_me_riotshield_mp");
-    scripts\cp_mp\utility\inventory_utility::_giveweapon(var2, undefined, undefined, 1);
+    var_2 = getcompleteweaponname("iw8_me_riotshield_mp");
+    scripts\cp_mp\utility\inventory_utility::_giveweapon(var_2, undefined, undefined, 1);
     scripts\cp\cp_weapon::riotshieldonweaponchange();
     self.clearsixthsense = undefined;
   }
@@ -100,31 +100,31 @@ function playerpassengerthink(var0) {
 function raid_seq4_objectives_func() {
   if(scripts\cp\cp_weapon::ref_124ad(self)) {
     scripts\cp\cp_weapon::minigamefinishcount(self);
-    var0 = undefined;
-    var1 = self getweaponslistprimaries();
+    var_0 = undefined;
+    var_1 = self getweaponslistprimaries();
 
-    foreach(var3 in var1) {
-      if(nullweapon(var3)) {
+    foreach(var_3 in var_1) {
+      if(nullweapon(var_3)) {
         continue;
       }
 
-      if(scripts\cp\utility::isriotshield(var3)) {
+      if(scripts\cp\utility::isriotshield(var_3)) {
         continue;
       }
 
-      if(!isDefined(var0)) {
-        var4 = var3 getnoaltweapon();
+      if(!isDefined(var_0)) {
+        var_4 = var_3 getnoaltweapon();
 
-        if(var4.inventorytype != "primary") {
+        if(var_4.inventorytype != "primary") {
           continue;
         }
 
-        var0 = var3;
+        var_0 = var_3;
       }
     }
 
-    if(isDefined(var0)) {
-      childthread scripts\cp_mp\utility\inventory_utility::forcevalidweapon(var0);
+    if(isDefined(var_0)) {
+      childthread scripts\cp_mp\utility\inventory_utility::forcevalidweapon(var_0);
       return;
     }
 
@@ -134,61 +134,61 @@ function raid_seq4_objectives_func() {
 
 #using_animtree("");
 
-function create_player_rig(var0, var1, var2) {
-  if(!isDefined(var0) || isDefined(var0.player_rig)) {
+function create_player_rig(var_0, var_1, var_2) {
+  if(!isDefined(var_0) || isDefined(var_0.player_rig)) {
     return;
   }
 
-  var0.animname = var1;
+  var_0.animname = var_1;
 
-  if(!isDefined(var2)) {
-    var2 = "viewhands_base_iw8";
+  if(!isDefined(var_2)) {
+    var_2 = "viewhands_base_iw8";
   }
 
-  var0 predictstreampos(var0.origin);
-  var3 = spawn("script_arms", var0.origin, 0, 0, var0);
-  var3.player = var0;
-  var0.player_rig = var3;
-  var0.player_rig hide();
-  var0.player_rig.animname = var1;
-  var0.player_rig useanimtree(#animtree);
-  var0.player_rig.angles = scripts\engine\utility::ter_op(isDefined(var0.angles), var0.angles, (0, 0, 0));
-  watch_remove_rig(var0);
-  remove_player_rig(var0);
+  var_0 predictstreampos(var_0.origin);
+  var_3 = spawn("script_arms", var_0.origin, 0, 0, var_0);
+  var_3.player = var_0;
+  var_0.player_rig = var_3;
+  var_0.player_rig hide();
+  var_0.player_rig.animname = var_1;
+  var_0.player_rig useanimtree(#animtree);
+  var_0.player_rig.angles = scripts\engine\utility::ter_op(isDefined(var_0.angles), var_0.angles, (0, 0, 0));
+  watch_remove_rig(var_0);
+  remove_player_rig(var_0);
 }
 
-function watch_remove_rig(var0) {
+function watch_remove_rig(var_0) {
   scripts\engine\utility::ref_143a6("remove_rig", "death", "disconnect");
 }
 
-function remove_player_rig(var0) {
-  if(!isDefined(var0) || !isDefined(var0.player_rig)) {
+function remove_player_rig(var_0) {
+  if(!isDefined(var_0) || !isDefined(var_0.player_rig)) {
     return;
   }
 
-  var0 unlink();
-  var0.player_rig delete();
-  var0.player_rig = undefined;
+  var_0 unlink();
+  var_0.player_rig delete();
+  var_0.player_rig = undefined;
 }
 
-function link_player_to_rig(var0, var1) {
-  var0 endon("death");
-  var0 endon("disconnect");
+function link_player_to_rig(var_0, var_1) {
+  var_0 endon("death");
+  var_0 endon("disconnect");
 
-  if(!isDefined(var0) || !isDefined(var0.player_rig)) {
+  if(!isDefined(var_0) || !isDefined(var_0.player_rig)) {
     return;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 0.2;
+  if(!isDefined(var_1)) {
+    var_1 = 0.2;
   }
 
-  var0 playerlinktoblend(var0.player_rig, "tag_player", var1, 0.25, 0.25);
-  wait var1;
-  var0 playerlinktodelta(var0.player_rig, "tag_player", 1, 0, 0, 0, 0, 1, 1, 1);
+  var_0 playerlinktoblend(var_0.player_rig, "tag_player", var_1, 0.25, 0.25);
+  wait var_1;
+  var_0 playerlinktodelta(var_0.player_rig, "tag_player", 1, 0, 0, 0, 0, 1, 1, 1);
 }
 
-function rideloop(var0) {
+function rideloop(var_0) {
   level endon("game_ended");
   self endon("death");
   self endon("disconnect");
@@ -197,7 +197,7 @@ function rideloop(var0) {
   level.heli_trip_vehicle endon("unload");
 
   for(;;) {
-    level.heli_trip_vehicle scripts\cp\cp_anim::anim_player_solo(self, self.player_rig, "blima_idle", var0);
+    level.heli_trip_vehicle scripts\cp\cp_anim::anim_player_solo(self, self.player_rig, "blima_idle", var_0);
   }
 }
 
@@ -222,48 +222,48 @@ function get_player_rig() {
   return "seat" + level.helitrip_next_rig_num;
 }
 
-function load_hvt(var0) {
+function load_hvt(var_0) {
   scripts\cp\cp_pickup_hostage::init_anims();
-  var1 = self;
-  var1.vip = var0.hostagecarried;
+  var_1 = self;
+  var_1.vip = var_0.hostagecarried;
 
-  if(!isDefined(var1.spawnintermissionatplayer)) {
-    var1.spawnintermissionatplayer = "left";
+  if(!isDefined(var_1.spawnintermissionatplayer)) {
+    var_1.spawnintermissionatplayer = "left";
   }
 
-  scripts\cp\cp_pickup_hostage::load_hvt(var0, var1, var1.spawnintermissionatplayer);
+  scripts\cp\cp_pickup_hostage::load_hvt(var_0, var_1, var_1.spawnintermissionatplayer);
   thread loscheckpassed(level);
 }
 
-function loscheckpassed(var0) {
+function loscheckpassed(var_0) {
   level endon("game_ended");
 
   while(istrue(level.validatealivecount)) {
     wait 1;
   }
 
-  wait level thread scripts\cp\cp_player_battlechatter::trysaylocalsound(var0, "obj_secured");
+  wait level thread scripts\cp\cp_player_battlechatter::trysaylocalsound(var_0, "obj_secured");
   level notify("cp_heli_trip_obj_secured_vo_done");
 }
 
 function all_alive_players_in_chopper() {
-  var0 = 0;
-  var1 = 0;
+  var_0 = 0;
+  var_1 = 0;
 
-  foreach(var3 in level.players) {
-    if(scripts\cp\cp_laststand::player_in_laststand(var3)) {
-      var1++;
+  foreach(var_3 in level.players) {
+    if(scripts\cp\cp_laststand::player_in_laststand(var_3)) {
+      var_1++;
     }
 
-    if(istrue(var3.inchopper)) {
-      var0++;
+    if(istrue(var_3.inchopper)) {
+      var_0++;
     }
   }
 
-  return var0 > 0 && level.players.size == var0 + var1;
+  return var_0 > 0 && level.players.size == var_0 + var_1;
 }
 
-function isvalidplayer(var0) {
+function isvalidplayer(var_0) {
   if(!isPlayer(self)) {
     return false;
   }
@@ -272,7 +272,7 @@ function isvalidplayer(var0) {
     return false;
   }
 
-  if(!isDefined(var0) && scripts\cp\cp_laststand::player_in_laststand(self)) {
+  if(!isDefined(var_0) && scripts\cp\cp_laststand::player_in_laststand(self)) {
     return false;
   }
 
@@ -302,78 +302,78 @@ function wait_for_all_players_ready() {
   }
 }
 
-function spawn_chopper(var0, var1) {
-  var2 = scripts\common\vehicle::vehicle_spawn(var0);
-  var2.vehicle_skipdeathmodel = 1;
-  var2.script_disconnectpaths = 0;
-  var2.death_fx_on_self = 1;
-  var2.exfil_struct = var1;
-  var1.smoke_canister = scripts\cp\cp_objective_mechanics::smoke_canister_spawn(var1.origin, 1);
-  scripts\cp\infilexfil\blima_exfil::spawn_vehicle_actors(var2);
-  var2.godmode = 1;
-  var2.health = 10000;
-  var2.maxhealth = 10000;
-  var2.team = "allies";
-  var2.script_team = "allies";
-  var2 setvehicleteam("allies");
-  var2 setCanDamage(0);
-  spawnhelihvtexfilactors(var2);
+function spawn_chopper(var_0, var_1) {
+  var_2 = scripts\common\vehicle::vehicle_spawn(var_0);
+  var_2.vehicle_skipdeathmodel = 1;
+  var_2.script_disconnectpaths = 0;
+  var_2.death_fx_on_self = 1;
+  var_2.exfil_struct = var_1;
+  var_1.smoke_canister = scripts\cp\cp_objective_mechanics::smoke_canister_spawn(var_1.origin, 1);
+  scripts\cp\infilexfil\blima_exfil::spawn_vehicle_actors(var_2);
+  var_2.godmode = 1;
+  var_2.health = 10000;
+  var_2.maxhealth = 10000;
+  var_2.team = "allies";
+  var_2.script_team = "allies";
+  var_2 setvehicleteam("allies");
+  var_2 setCanDamage(0);
+  spawnhelihvtexfilactors(var_2);
 
-  if(isDefined(var2.wmexfilally)) {
-    if(!isDefined(var2.actors)) {
-      var2.actors = [];
+  if(isDefined(var_2.wmexfilally)) {
+    if(!isDefined(var_2.actors)) {
+      var_2.actors = [];
     }
 
-    var2.actors[var2.actors.size] = var2.wmexfilally;
+    var_2.actors[var_2.actors.size] = var_2.wmexfilally;
   }
 
-  var2.headicon = deleteheadicon(var2);
-  setheadiconfriendlyimage(var2.headicon, "hud_icon_head_equipment_friendly");
-  setheadiconsnaptoedges(var2.headicon, 12000);
-  setheadiconmaxdistance(var2.headicon, 1500);
-  addclienttoheadiconmask(var2.headicon, 10);
-  setheadicondrawthroughgeo(var2.headicon, 1);
-  return var2;
+  var_2.headicon = deleteheadicon(var_2);
+  setheadiconfriendlyimage(var_2.headicon, "hud_icon_head_equipment_friendly");
+  setheadiconsnaptoedges(var_2.headicon, 12000);
+  setheadiconmaxdistance(var_2.headicon, 1500);
+  addclienttoheadiconmask(var_2.headicon, 10);
+  setheadicondrawthroughgeo(var_2.headicon, 1);
+  return var_2;
 }
 
-function spawnhelihvtexfilactors(var0, var1) {
-  if(!isDefined(var0)) {
-    var0 = "body_mp_western_fireteam_west_ar_1_1_lod1";
+function spawnhelihvtexfilactors(var_0, var_1) {
+  if(!isDefined(var_0)) {
+    var_0 = "body_mp_western_fireteam_west_ar_1_1_lod1";
   }
 
-  if(!isDefined(var1)) {
-    var1 = "head_sas_urban_ar_rain";
+  if(!isDefined(var_1)) {
+    var_1 = "head_sas_urban_ar_rain";
   }
 
-  var2 = self;
-  var3 = spawn("script_model", var2.origin);
-  var3 setModel("allied_pilot_fullbody_3");
-  var3 useanimtree(level.scr_animtree["exfil_ally"]);
-  var3.animname = "exfil_ally";
-  var4 = getstartorigin(var2.origin, var2.angles, level.scr_anim["exfil_ally"]["blima_drop_l_idle_in"]);
-  var5 = getstartangles(var2.origin, var2.angles, level.scr_anim["exfil_ally"]["blima_drop_l_idle_in"]);
-  var3.origin = var4;
-  var3.angles = var5;
-  var3 linkTo(var2);
-  var2.wmexfilally = var3;
-  thread idle_exfilally_loop(var2);
+  var_2 = self;
+  var_3 = spawn("script_model", var_2.origin);
+  var_3 setModel("allied_pilot_fullbody_3");
+  var_3 useanimtree(level.scr_animtree["exfil_ally"]);
+  var_3.animname = "exfil_ally";
+  var_4 = getstartorigin(var_2.origin, var_2.angles, level.scr_anim["exfil_ally"]["blima_drop_l_idle_in"]);
+  var_5 = getstartangles(var_2.origin, var_2.angles, level.scr_anim["exfil_ally"]["blima_drop_l_idle_in"]);
+  var_3.origin = var_4;
+  var_3.angles = var_5;
+  var_3 linkTo(var_2);
+  var_2.wmexfilally = var_3;
+  thread idle_exfilally_loop(var_2);
 }
 
-function idle_exfilally_loop(var0) {
+function idle_exfilally_loop(var_0) {
   self endon("death");
-  var0 endon("stop_idle_anim");
+  var_0 endon("stop_idle_anim");
 
   for(;;) {
-    scripts\common\anim::anim_single_solo(var0, "blima_drop_l_idle_in", "tag_origin");
+    scripts\common\anim::anim_single_solo(var_0, "blima_drop_l_idle_in", "tag_origin");
   }
 }
 
-function wait_for_passengers(var0) {
+function wait_for_passengers(var_0) {
   level endon("game_ended");
   self solid();
   self.navobstacle = createnavobstaclebybounds(self.origin, (350, 350, 350), (0, 0, 0), "axis");
 
-  if(istrue(var0)) {
+  if(istrue(var_0)) {
     heli_rpg_enemy_think(self);
     waitforhvtonboard();
     ref_1212d(level.heli_trip_vehicle, level.heli_trip_vehicle);
@@ -382,83 +382,83 @@ function wait_for_passengers(var0) {
   startplayerboarding();
 }
 
-function ref_13bc7(var0) {
-  var1 = self;
+function ref_13bc7(var_0) {
+  var_1 = self;
 
-  if(!isDefined(var1.ref_121fb)) {
-    var1.ref_121fb = spawn("script_model", var1.origin - (0, 0, 100));
-    var1.ref_121fb.angles = scripts\engine\utility::ter_op(isDefined(var1.angles), var1.angles, (0, 0, 0));
-    var1.ref_121fb hide();
-    var1.ref_121fb setModel(var1.model);
+  if(!isDefined(var_1.ref_121fb)) {
+    var_1.ref_121fb = spawn("script_model", var_1.origin - (0, 0, 100));
+    var_1.ref_121fb.angles = scripts\engine\utility::ter_op(isDefined(var_1.angles), var_1.angles, (0, 0, 0));
+    var_1.ref_121fb hide();
+    var_1.ref_121fb setModel(var_1.model);
   }
 
-  if(var0) {
-    var1.ref_121fb connectpaths();
-    var1.ref_121fb delete();
-    var1.ref_121fb = undefined;
+  if(var_0) {
+    var_1.ref_121fb connectpaths();
+    var_1.ref_121fb delete();
+    var_1.ref_121fb = undefined;
     return;
   }
 
-  var1.ref_121fb disconnectPaths();
+  var_1.ref_121fb disconnectPaths();
 }
 
-function init_interactions(var0) {
-  var1 = anglesToForward(self.angles);
-  var2 = anglestoright(self.angles);
-  var3 = anglestoleft(self.angles);
-  var4 = self.origin + (0, 0, -110);
-  var5 = var4 + var1 * 20 + var3 * 45;
-  var6 = var4 + var1 * 20 + var2 * 45;
-  var7 = var4 + var1 * -20 + var3 * 45;
-  var8 = var4 + var1 * -20 + var2 * 45;
-  create_vehicle_interaction(var8, &"CP_VEHICLE_TRAVEL/ENTER", "seat4", self, var0);
-  create_vehicle_interaction(var6, &"CP_VEHICLE_TRAVEL/ENTER", "seat3", self, var0);
-  create_vehicle_interaction(var7, &"CP_VEHICLE_TRAVEL/ENTER", "seat2", self, var0);
-  create_vehicle_interaction(var5, &"CP_VEHICLE_TRAVEL/ENTER", "seat1", self, var0);
+function init_interactions(var_0) {
+  var_1 = anglesToForward(self.angles);
+  var_2 = anglestoright(self.angles);
+  var_3 = anglestoleft(self.angles);
+  var_4 = self.origin + (0, 0, -110);
+  var_5 = var_4 + var_1 * 20 + var_3 * 45;
+  var_6 = var_4 + var_1 * 20 + var_2 * 45;
+  var_7 = var_4 + var_1 * -20 + var_3 * 45;
+  var_8 = var_4 + var_1 * -20 + var_2 * 45;
+  create_vehicle_interaction(var_8, &"CP_VEHICLE_TRAVEL/ENTER", "seat4", self, var_0);
+  create_vehicle_interaction(var_6, &"CP_VEHICLE_TRAVEL/ENTER", "seat3", self, var_0);
+  create_vehicle_interaction(var_7, &"CP_VEHICLE_TRAVEL/ENTER", "seat2", self, var_0);
+  create_vehicle_interaction(var_5, &"CP_VEHICLE_TRAVEL/ENTER", "seat1", self, var_0);
 }
 
-function create_vehicle_interaction(var0, var1, var2, var3, var4) {
-  var5 = spawn("script_model", var0);
-  var5 setModel("tag_origin");
-  var5 setHintString(var1);
-  var5 setCursorHint("HINT_BUTTON");
-  var5 sethintdisplayrange(200);
-  var5 sethintdisplayfov(90);
-  var5 setuserange(72);
-  var5 setusefov(90);
-  var5 sethintonobstruction("hide");
-  var5 setuseholdduration("duration_short");
+function create_vehicle_interaction(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = spawn("script_model", var_0);
+  var_5 setModel("tag_origin");
+  var_5 setHintString(var_1);
+  var_5 setCursorHint("HINT_BUTTON");
+  var_5 sethintdisplayrange(200);
+  var_5 sethintdisplayfov(90);
+  var_5 setuserange(72);
+  var_5 setusefov(90);
+  var_5 sethintonobstruction("hide");
+  var_5 setuseholdduration("duration_short");
 
-  if(isDefined(var4) && isbuiltinfunction(var4)) {
-    var5 thread[[var4]](var3, var2);
+  if(isDefined(var_4) && isbuiltinfunction(var_4)) {
+    var_5 thread[[var_4]](var_3, var_2);
   } else {
-    thread interaction_use_think(var5, var3);
+    thread interaction_use_think(var_5, var_3);
   }
 
-  thread interaction_disable_on_exit(var5);
+  thread interaction_disable_on_exit(var_5);
 }
 
-function interaction_use_think(var0, var1) {
+function interaction_use_think(var_0, var_1) {
   level endon("game_ended");
-  var0 endon("heli_taking_off");
+  var_0 endon("heli_taking_off");
   self makeusable();
 
   for(;;) {
-    self waittill("trigger", var2);
+    self waittill("trigger", var_2);
 
-    if(!var2 scripts\cp\utility::is_valid_player()) {
+    if(!var_2 scripts\cp\utility::is_valid_player()) {
       continue;
     }
 
     self makeunusable();
-    thread playerpassengerthink(var2);
+    thread playerpassengerthink(var_2);
     break;
   }
 }
 
-function interaction_disable_on_exit(var0) {
+function interaction_disable_on_exit(var_0) {
   level endon("game_ended");
-  var0 waittill("heli_taking_off");
+  var_0 waittill("heli_taking_off");
   self makeunusable();
 }
 
@@ -466,50 +466,50 @@ function ref_144ba() {
   level endon("game_ended");
   self endon("death");
   self endon("load_hvt_started");
-  var0 = anglesToForward(self.angles);
-  var1 = anglestoright(self.angles);
-  var2 = anglestoleft(self.angles);
-  var3 = self.origin + (0, 0, -110);
-  var4 = var3 + var0 * 20 + var2 * 45;
-  var5 = var3 + var0 * 20 + var1 * 45;
-  var6 = self.wmexfilally;
+  var_0 = anglesToForward(self.angles);
+  var_1 = anglestoright(self.angles);
+  var_2 = anglestoleft(self.angles);
+  var_3 = self.origin + (0, 0, -110);
+  var_4 = var_3 + var_0 * 20 + var_2 * 45;
+  var_5 = var_3 + var_0 * 20 + var_1 * 45;
+  var_6 = self.wmexfilally;
 
-  if(!isDefined(var6)) {
+  if(!isDefined(var_6)) {
     return;
   }
 
-  var7 = undefined;
+  var_7 = undefined;
 
-  foreach(var9 in level.players) {
-    if(isDefined(var9.hostagecarried)) {
-      var7 = var9.hostagecarried;
+  foreach(var_9 in level.players) {
+    if(isDefined(var_9.hostagecarried)) {
+      var_7 = var_9.hostagecarried;
       break;
     }
   }
 
-  if(!isDefined(var7)) {
-    level waittill("player_picked_up_hostage", var9);
-    var7 = var9.hostagecarried;
+  if(!isDefined(var_7)) {
+    level waittill("player_picked_up_hostage", var_9);
+    var_7 = var_9.hostagecarried;
   }
 
-  var11 = "left";
-  var12 = "left";
+  var_11 = "left";
+  var_12 = "left";
 
   for(;;) {
-    var13 = distance2dsquared(var7.origin, var5);
-    var14 = distance2dsquared(var7.origin, var4);
+    var_13 = distance2dsquared(var_7.origin, var_5);
+    var_14 = distance2dsquared(var_7.origin, var_4);
 
-    if(var13 > var14) {
-      var12 = "left";
+    if(var_13 > var_14) {
+      var_12 = "left";
     } else {
-      var12 = "right";
+      var_12 = "right";
     }
 
-    if(var11 != var12) {
+    if(var_11 != var_12) {
       self.onjointeamnospectatorcallbacks = 1;
-      var11 = var12;
-      ref_13e58(var6, self, var11);
-      self.spawnintermissionatplayer = var11;
+      var_11 = var_12;
+      ref_13e58(var_6, self, var_11);
+      self.spawnintermissionatplayer = var_11;
       self.onjointeamnospectatorcallbacks = 0;
     }
 
@@ -517,55 +517,55 @@ function ref_144ba() {
   }
 }
 
-function ref_13e58(var0, var1) {
+function ref_13e58(var_0, var_1) {
   self notify("stop_idle_anim");
-  var2 = scripts\engine\utility::ter_op(var1 == "left", "turn_left", "turn_right");
-  var3 = scripts\engine\utility::ter_op(var1 == "left", "blima_drop_l_idle_in", "blima_drop_r_idle_in");
-  var0 scripts\common\anim::anim_single_solo(self, var2, "tag_origin");
-  thread make_chopper_boss_look_at_ent(var0, self);
+  var_2 = scripts\engine\utility::ter_op(var_1 == "left", "turn_left", "turn_right");
+  var_3 = scripts\engine\utility::ter_op(var_1 == "left", "blima_drop_l_idle_in", "blima_drop_r_idle_in");
+  var_0 scripts\common\anim::anim_single_solo(self, var_2, "tag_origin");
+  thread make_chopper_boss_look_at_ent(var_0, self);
 }
 
-function make_chopper_boss_look_at_ent(var0, var1) {
+function make_chopper_boss_look_at_ent(var_0, var_1) {
   self endon("death");
-  var0 endon("stop_idle_anim");
+  var_0 endon("stop_idle_anim");
 
   for(;;) {
-    scripts\common\anim::anim_single_solo(var0, var1, "tag_origin");
+    scripts\common\anim::anim_single_solo(var_0, var_1, "tag_origin");
   }
 }
 
 function waitforhvtonboard() {
   level endon("game_ended");
-  var0 = self;
-  var0.animname = "exfil_chopper";
-  var1 = anglesToForward(var0.angles);
-  var2 = anglestoleft(var0.angles);
-  var3 = anglestoright(var0.angles);
-  var4 = var0.origin + var1 * 10 + var2 * 64 + (0, 0, -110);
-  var5 = spawn("trigger_radius", var4 + (0, 0, -200), 0, 64, 500);
-  var0.spawnintermissionatplayer = "left";
-  thread ref_14371(var0, var5, "left");
-  var0 waittill("load_hvt_started");
-  var5 delete();
+  var_0 = self;
+  var_0.animname = "exfil_chopper";
+  var_1 = anglesToForward(var_0.angles);
+  var_2 = anglestoleft(var_0.angles);
+  var_3 = anglestoright(var_0.angles);
+  var_4 = var_0.origin + var_1 * 10 + var_2 * 64 + (0, 0, -110);
+  var_5 = spawn("trigger_radius", var_4 + (0, 0, -200), 0, 64, 500);
+  var_0.spawnintermissionatplayer = "left";
+  thread ref_14371(var_0, var_5, "left");
+  var_0 waittill("load_hvt_started");
+  var_5 delete();
 }
 
-function ref_14371(var0, var1, var2) {
+function ref_14371(var_0, var_1, var_2) {
   level endon("game_ended");
-  level endon(var2);
-  var3 = 0;
+  level endon(var_2);
+  var_3 = 0;
 
   for(;;) {
-    var0 waittill("trigger", var4);
+    var_0 waittill("trigger", var_4);
 
-    if(!isvalidplayer(var4) && isDefined(var4.inchopper)) {
+    if(!isvalidplayer(var_4) && isDefined(var_4.inchopper)) {
       continue;
     }
 
-    if(isDefined(var4.hostagecarried) && !istrue(var4.trigger_water_fx) && !istrue(var3) && !isDefined(self.vip) && !istrue(self.onjointeamnospectatorcallbacks)) {
+    if(isDefined(var_4.hostagecarried) && !istrue(var_4.trigger_water_fx) && !istrue(var_3) && !isDefined(self.vip) && !istrue(self.onjointeamnospectatorcallbacks)) {
       self notify("load_hvt_started");
-      level notify("hvt_triggered_" + var1);
-      load_hvt(var4);
-      var3 = 1;
+      level notify("hvt_triggered_" + var_1);
+      load_hvt(var_4);
+      var_3 = 1;
       level notify("hvt_loaded_on_heli");
       break;
     }
@@ -584,98 +584,98 @@ function startplayerboarding() {
   level.heli_trip_vehicle notify("started_boarding");
   thread wait_for_all_players_ready();
   thread watchforhelitriptimeout();
-  var0 = self;
-  var0.animname = "exfil_chopper";
-  init_interactions(var0);
+  var_0 = self;
+  var_0.animname = "exfil_chopper";
+  init_interactions(var_0);
 }
 
 function watchforhelitriptimeout() {
   level endon("game_ended");
   self endon("all_players_on_board");
   self waittill("player_boarded_heli");
-  var0 = gettime() + 45000;
+  var_0 = gettime() + 45000;
 
-  while(gettime() <= var0) {
+  while(gettime() <= var_0) {
     wait 3;
   }
 
   self notify("heli_trip_timed_out");
 }
 
-function go_to_landing_destination(var0) {
+function go_to_landing_destination(var_0) {
   level endon("game_ended");
-  var1 = [];
-  GscBinSkip0(0x2e, 0, var0.origin);
+  var_1 = [];
+  GscBinSkip0(0x2e, 0, var_0.origin);
 }
 
 function exit_map() {
   level endon("game_ended");
-  var0 = self;
-  var0 vehicle_setspeed(5, 10);
-  var0 cleartargetyaw();
-  var0 setvehgoalpos(var0.origin + (0, 0, 1200), 1);
+  var_0 = self;
+  var_0 vehicle_setspeed(5, 10);
+  var_0 cleartargetyaw();
+  var_0 setvehgoalpos(var_0.origin + (0, 0, 1200), 1);
   wait 2;
-  var0 vehicle_setspeed(90, 10);
-  var0 waittill("goal");
-  var0 setvehgoalpos(var0.origin + (10000, 10000, 500));
+  var_0 vehicle_setspeed(90, 10);
+  var_0 waittill("goal");
+  var_0 setvehgoalpos(var_0.origin + (10000, 10000, 500));
   wait 15;
 
-  if(isDefined(var0.vip)) {
-    var0.vip scripts\cp\cp_pickup_hostage::deletepickuphostage();
+  if(isDefined(var_0.vip)) {
+    var_0.vip scripts\cp\cp_pickup_hostage::deletepickuphostage();
   }
 
-  if(isDefined(var0.minigun)) {
-    var0.minigun delete();
+  if(isDefined(var_0.minigun)) {
+    var_0.minigun delete();
   }
 
-  foreach(var2 in var0.actors) {
-    if(isDefined(var2.head)) {
-      var2.head delete();
+  foreach(var_2 in var_0.actors) {
+    if(isDefined(var_2.head)) {
+      var_2.head delete();
     }
 
-    var2 delete();
+    var_2 delete();
   }
 
-  if(isDefined(var0.headicon)) {
-    setheadiconimage(var0.headicon);
+  if(isDefined(var_0.headicon)) {
+    setheadiconimage(var_0.headicon);
   }
 
-  var0 delete();
+  var_0 delete();
   level.heli_trip_vehicle = undefined;
   level notify("heli_trip_deleted");
 }
 
 #using_animtree("mp_vehicles_always_loaded");
 
-function ref_1212d(var0) {
+function ref_1212d(var_0) {
   level endon("game_ended");
-  var0 endon("death");
-  var0 notify("opening_right_door");
-  var0 vehicleplayanim(%sdr_cp_hostage_dropoff_blima_r_door_open_blima);
+  var_0 endon("death");
+  var_0 notify("opening_right_door");
+  var_0 vehicleplayanim(%sdr_cp_hostage_dropoff_blima_r_door_open_blima);
 }
 
 #using_animtree("");
 
-function vehicle_register_on_level(var0) {
+function vehicle_register_on_level(var_0) {
   level endon("game_ended");
-  var0 endon("death");
-  var0 endon("opening_right_door");
-  var0 endon("closing_right_door");
+  var_0 endon("death");
+  var_0 endon("opening_right_door");
+  var_0 endon("closing_right_door");
 
   for(;;) {
-    var0 vehicleplayanim(%sdr_cp_hostage_dropoff_blima_r_door_close_idle_blima);
+    var_0 vehicleplayanim(%sdr_cp_hostage_dropoff_blima_r_door_close_idle_blima);
     wait getanimlength(%sdr_cp_hostage_dropoff_blima_r_door_close_idle_blima);
   }
 }
 
-function heli_rpg_enemy_think(var0) {
+function heli_rpg_enemy_think(var_0) {
   level endon("game_ended");
-  var0 endon("death");
-  var0 notify("closing_right_door");
-  var0 vehicleplayanim(%sdr_cp_hostage_dropoff_blima_r_door_close_blima);
+  var_0 endon("death");
+  var_0 notify("closing_right_door");
+  var_0 vehicleplayanim(%sdr_cp_hostage_dropoff_blima_r_door_close_blima);
 }
 
-function initanims(var0) {
+function initanims(var_0) {
   script_model_alpha_anims();
   vehicles_alpha_anims();
 }

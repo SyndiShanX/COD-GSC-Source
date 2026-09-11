@@ -123,20 +123,20 @@ function onstartgametype() {
     GscBinSkip1(0x45, 0, "dom", level);
   }
 
-  var1 = scripts\mp\utility\game::gettimelimit();
+  var_1 = scripts\mp\utility\game::gettimelimit();
   level.extratime = 0;
   scripts\mp\utility\dvars::setoverridewatchdvar("timelimit", 6);
   level.tacopssubmodetimeron = 1;
 }
 
-function setusablebyteam(var0) {
-  foreach(var2 in level.players) {
-    if(var2.team != var0) {
-      self disableplayeruse(var2);
+function setusablebyteam(var_0) {
+  foreach(var_2 in level.players) {
+    if(var_2.team != var_0) {
+      self disableplayeruse(var_2);
       continue;
     }
 
-    self enableplayeruse(var2);
+    self enableplayeruse(var_2);
   }
 }
 
@@ -172,8 +172,8 @@ function onspawnplayer() {
   scripts\mp\tac_ops\roles_utility::kitspawn();
 }
 
-function onplayerconnect(var0) {
-  var0.isscoring = 0;
+function onplayerconnect(var_0) {
+  var_0.isscoring = 0;
   thread monitorjointeam();
 }
 
@@ -182,15 +182,15 @@ function monitorjointeam() {
 
   for(;;) {
     self waittill("joined_team");
-    var0 = 0;
+    var_0 = 0;
 
     if(self.team == "allies") {
-      var0 = 1;
+      var_0 = 1;
     } else if(self.team == "axis") {
-      var0 = 2;
+      var_0 = 2;
     }
 
-    self setclientomnvar("ui_tacops_team", var0);
+    self setclientomnvar("ui_tacops_team", var_0);
 
     if(!isDefined(level.startedfromtacops)) {
       scripts\mp\supers::clearsuper();
@@ -200,9 +200,9 @@ function monitorjointeam() {
 }
 
 function createzones() {
-  var0 = scripts\engine\utility::getStructArray("hostage_extract_zone_A", "targetname");
-  var1 = scripts\engine\utility::getStructArray("hostage_extract_zone_B", "targetname");
-  level.fixedlzs = scripts\engine\utility::array_combine(var0, var1);
+  var_0 = scripts\engine\utility::getStructArray("hostage_extract_zone_A", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("hostage_extract_zone_B", "targetname");
+  level.fixedlzs = scripts\engine\utility::array_combine(var_0, var_1);
   level.objectives = [];
 }
 
@@ -212,31 +212,31 @@ function zone_ondisableobjective() {
 }
 
 function initspawns() {
-  var0 = level.tacopsspawns;
+  var_0 = level.tacopsspawns;
   scripts\mp\spawnlogic::addspawnpoints("allies", "mp_tohstg_spawn_allies", 1);
   scripts\mp\spawnlogic::addspawnpoints("axis", "mp_tohstg_spawn_axis", 1);
-  var0.to_hstg_spawns = [];
-  var0.to_hstg_spawns["allies"] = scripts\mp\spawnlogic::getspawnpointarray("mp_tohstg_spawn_allies");
-  var0.to_hstg_spawns["axis"] = scripts\mp\spawnlogic::getspawnpointarray("mp_tohstg_spawn_axis");
+  var_0.to_hstg_spawns = [];
+  var_0.to_hstg_spawns["allies"] = scripts\mp\spawnlogic::getspawnpointarray("mp_tohstg_spawn_allies");
+  var_0.to_hstg_spawns["axis"] = scripts\mp\spawnlogic::getspawnpointarray("mp_tohstg_spawn_axis");
 
-  if(var0.to_hstg_spawns["allies"].size <= 0) {
+  if(var_0.to_hstg_spawns["allies"].size <= 0) {
     scripts\mp\spawnlogic::addspawnpoints("allies", "mp_front_spawn_allies");
-    var0.to_hstg_spawns["allies"] = scripts\mp\spawnlogic::getspawnpointarray("mp_front_spawn_allies");
+    var_0.to_hstg_spawns["allies"] = scripts\mp\spawnlogic::getspawnpointarray("mp_front_spawn_allies");
   }
 
-  if(var0.to_hstg_spawns["axis"].size <= 0) {
+  if(var_0.to_hstg_spawns["axis"].size <= 0) {
     scripts\mp\spawnlogic::addspawnpoints("axis", "mp_front_spawn_axis");
-    var0.to_hstg_spawns["axis"] = scripts\mp\spawnlogic::getspawnpointarray("mp_front_spawn_axis");
+    var_0.to_hstg_spawns["axis"] = scripts\mp\spawnlogic::getspawnpointarray("mp_front_spawn_axis");
     return;
   }
 }
 
 function getspawnpoint() {
-  var0 = level.tacopsspawns;
-  var1 = self.pers["team"];
-  var2 = scripts\mp\tac_ops_map::filterspawnpoints(var0.to_hstg_spawns[var1]);
-  var3 = undefined;
-  return var3;
+  var_0 = level.tacopsspawns;
+  var_1 = self.pers["team"];
+  var_2 = scripts\mp\tac_ops_map::filterspawnpoints(var_0.to_hstg_spawns[var_1]);
+  var_3 = undefined;
+  return var_3;
 }
 
 function activatespawns() {
@@ -250,71 +250,71 @@ function ontimelimit() {
   endhostagegame("allies");
 }
 
-function endhostagegame(var0) {
+function endhostagegame(var_0) {
   level.extratime = undefined;
   level notify("switch_modes");
 
-  foreach(var2 in level.hostages) {
-    var2 scripts\mp\tac_ops\hostage_utility::removeminimapicons();
+  foreach(var_2 in level.hostages) {
+    var_2 scripts\mp\tac_ops\hostage_utility::removeminimapicons();
 
-    if(isDefined(var2.useobj)) {
-      var2.useobj delete();
+    if(isDefined(var_2.useobj)) {
+      var_2.useobj delete();
     }
 
-    var2.body delete();
-    var2.head delete();
-    var2 delete();
+    var_2.body delete();
+    var_2.head delete();
+    var_2 delete();
   }
 
   level.hostages = [];
 
-  foreach(var5 in level.activeextractions) {
-    cleanuplz(var5, 0);
-    var5 scripts\mp\gametypes\obj_grindzone::deactivatezone();
+  foreach(var_5 in level.activeextractions) {
+    cleanuplz(var_5, 0);
+    var_5 scripts\mp\gametypes\obj_grindzone::deactivatezone();
   }
 
   if(isDefined(level.onphaseend)) {
-    [[level.onphaseend]](var0);
+    [[level.onphaseend]](var_0);
   }
 
-  scripts\mp\gamescore::_setteamscore(var0, 1, 0);
-  thread scripts\mp\gamelogic::endgame(var0, game["end_reason"]["objective_completed"]);
+  scripts\mp\gamescore::_setteamscore(var_0, 1, 0);
+  thread scripts\mp\gamelogic::endgame(var_0, game["end_reason"]["objective_completed"]);
 }
 
-function onsuicidedeath(var0) {
-  if(isDefined(var0.hostagecarried)) {
-    scripts\mp\tac_ops\hostage_utility::drophostage(var0, var0.hostagecarried, var0.origin);
+function onsuicidedeath(var_0) {
+  if(isDefined(var_0.hostagecarried)) {
+    scripts\mp\tac_ops\hostage_utility::drophostage(var_0, var_0.hostagecarried, var_0.origin);
     return;
   }
 }
 
-function onnormaldeath(var0, var1, var2, var3, var4) {
-  scripts\mp\gametypes\common::oncommonnormaldeath(var0, var1, var2, var3, var4);
+function onnormaldeath(var_0, var_1, var_2, var_3, var_4) {
+  scripts\mp\gametypes\common::oncommonnormaldeath(var_0, var_1, var_2, var_3, var_4);
 
-  if(isDefined(var0.hostagecarried)) {
-    scripts\mp\tac_ops\hostage_utility::drophostage(var0, var0.hostagecarried, var0.origin);
+  if(isDefined(var_0.hostagecarried)) {
+    scripts\mp\tac_ops\hostage_utility::drophostage(var_0, var_0.hostagecarried, var_0.origin);
   }
 
-  if(!isDefined(var0.switching_teams)) {
-    var0 scripts\mp\playerlogic::decrementalivecount(var0.team);
+  if(!isDefined(var_0.switching_teams)) {
+    var_0 scripts\mp\playerlogic::decrementalivecount(var_0.team);
     return;
   }
 }
 
-function delayedhostagespawn(var0, var1, var2) {
+function delayedhostagespawn(var_0, var_1, var_2) {
   level endon("game_ended");
   level endon("hostage_spawn_early");
-  wait var0;
-  scripts\mp\tac_ops\hostage_utility::spawnrandomhostages(var1, var2);
+  wait var_0;
+  scripts\mp\tac_ops\hostage_utility::spawnrandomhostages(var_1, var_2);
 }
 
 function hostagecheckscoring() {
-  for(var0 = 0; var0 < level.activeextractions.size; var0++) {
-    var1 = level.activeextractions[var0];
+  for(var_0 = 0; var_0 < level.activeextractions.size; var_0++) {
+    var_1 = level.activeextractions[var_0];
 
-    if(distancesquared(self.origin, var1.origin) < 14400) {
+    if(distancesquared(self.origin, var_1.origin) < 14400) {
       iprintlnbold("OPFOR EXTRACTED A HOSTAGE");
-      scripts\mp\tac_ops\hostage_utility::scorehostage(var1.team, 3);
+      scripts\mp\tac_ops\hostage_utility::scorehostage(var_1.team, 3);
       return true;
     }
   }
@@ -327,8 +327,8 @@ function initializefixedlzs() {
   level endon("switch_modes");
   level.extractionteam = "allies";
 
-  for(var0 = 0; var0 < level.fixedlzs.size; var0++) {
-    level.inactiveextractions[var0] = level.fixedlzs[var0];
+  for(var_0 = 0; var_0 < level.fixedlzs.size; var_0++) {
+    level.inactiveextractions[var_0] = level.fixedlzs[var_0];
   }
 
   thread waitprematchdone();
@@ -339,10 +339,10 @@ function initializedynamiclzs() {
   level endon("switch_modes");
   level.extractionteam = "axis";
 
-  for(var0 = 0; var0 < 2; var0++) {
-    level.inactiveextractions[var0] = level.objective[var0];
-    updateextracticons(level.inactiveextractions[var0]);
-    level.inactiveextractions[var0] scripts\mp\gameobjects::setvisibleteam("none");
+  for(var_0 = 0; var_0 < 2; var_0++) {
+    level.inactiveextractions[var_0] = level.objective[var_0];
+    updateextracticons(level.inactiveextractions[var_0]);
+    level.inactiveextractions[var_0] scripts\mp\gameobjects::setvisibleteam("none");
   }
 
   thread waitprematchdone();
@@ -352,114 +352,114 @@ function waitprematchdone() {
   scripts\mp\flags::gameflagwait("prematch_done");
 }
 
-function createhostagelz(var0, var1) {
-  var2 = level.inactiveextractions.size;
-  var3 = level.inactiveextractions[var2 - 1];
-  var3.marker = var0;
-  level.inactiveextractions[var2 - 1] = undefined;
-  var4 = level.activeextractions.size;
-  level.activeextractions[var4] = var3;
-  level.activeextractors[var4] = self;
-  var5 = int(gettime() + 119000);
+function createhostagelz(var_0, var_1) {
+  var_2 = level.inactiveextractions.size;
+  var_3 = level.inactiveextractions[var_2 - 1];
+  var_3.marker = var_0;
+  level.inactiveextractions[var_2 - 1] = undefined;
+  var_4 = level.activeextractions.size;
+  level.activeextractions[var_4] = var_3;
+  level.activeextractors[var_4] = self;
+  var_5 = int(gettime() + 119000);
 
-  if(istrue(var1)) {
-    makelzextractionvisuals(var3);
+  if(istrue(var_1)) {
+    makelzextractionvisuals(var_3);
     return;
   }
 }
 
-function makelzextractionvisuals(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = level.extractionpos;
+function makelzextractionvisuals(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = level.extractionpos;
   }
 
-  var0.origin = var1;
+  var_0.origin = var_1;
 
-  if(isDefined(var0.trigger)) {
-    var0.trigger.origin = var1;
+  if(isDefined(var_0.trigger)) {
+    var_0.trigger.origin = var_1;
   }
 
-  var0.curorigin = var1;
-  var0 scripts\mp\gameobjects::requestid(1, 1);
-  updateextracticons(var0);
-  var0 scripts\mp\gametypes\obj_grindzone::activatezone();
-  var0.active = 1;
-  var0 scripts\mp\gameobjects::setvisibleteam("friendly");
-  var0.scriptable = scripts\mp\gametypes\obj_grindzone::setupscriptablevisuals(var1, var0);
-  var0 scripts\mp\gametypes\obj_grindzone::updateflagstate(var0.team, 0);
+  var_0.curorigin = var_1;
+  var_0 scripts\mp\gameobjects::requestid(1, 1);
+  updateextracticons(var_0);
+  var_0 scripts\mp\gametypes\obj_grindzone::activatezone();
+  var_0.active = 1;
+  var_0 scripts\mp\gameobjects::setvisibleteam("friendly");
+  var_0.scriptable = scripts\mp\gametypes\obj_grindzone::setupscriptablevisuals(var_1, var_0);
+  var_0 scripts\mp\gametypes\obj_grindzone::updateflagstate(var_0.team, 0);
 
-  if(isDefined(var0.team)) {
-    updateservericons(var0.team, 0);
+  if(isDefined(var_0.team)) {
+    updateservericons(var_0.team, 0);
   }
 
   level notify("zone_moved");
   scripts\mp\utility\sound::playsoundonplayers("mp_killstreak_radar");
-  var2 = spawnfx(level._effect["vfx_smk_signal"], var1);
+  var_2 = spawnfx(level._effect["vfx_smk_signal"], var_1);
 
-  if(isDefined(var2)) {
-    triggerfx(var2);
+  if(isDefined(var_2)) {
+    triggerfx(var_2);
   }
 
-  var0.fxtoplay = var2;
+  var_0.fxtoplay = var_2;
 }
 
-function spawnextractchopper(var0, var1) {
+function spawnextractchopper(var_0, var_1) {
   self endon("game_ended");
   self endon("switch_modes");
-  wait var1;
-  var2 = level.extractionpos;
-  var3 = (0, 0, 0);
-  var4 = 24000;
-  var5 = scripts\cp_mp\utility\killstreak_utility::removeextracthelipad();
-  var6 = var5.origin[2];
-  var7 = getexplodedistance(var6);
-  var8 = 4000;
-  var9 = "jackal";
-  var10 = scripts\cp_mp\killstreaks\airstrike::getflightpath(var2, var3, var4, var5, var6, var8, var7, var9);
-  var11 = fakestreakinfo();
-  var12 = scripts\mp\killstreaks\jackal::beginjackal(0, var10["startPoint"], var2, var11, var0);
-  return var12;
+  wait var_1;
+  var_2 = level.extractionpos;
+  var_3 = (0, 0, 0);
+  var_4 = 24000;
+  var_5 = scripts\cp_mp\utility\killstreak_utility::removeextracthelipad();
+  var_6 = var_5.origin[2];
+  var_7 = getexplodedistance(var_6);
+  var_8 = 4000;
+  var_9 = "jackal";
+  var_10 = scripts\cp_mp\killstreaks\airstrike::getflightpath(var_2, var_3, var_4, var_5, var_6, var_8, var_7, var_9);
+  var_11 = fakestreakinfo();
+  var_12 = scripts\mp\killstreaks\jackal::beginjackal(0, var_10["startPoint"], var_2, var_11, var_0);
+  return var_12;
 }
 
 function fakestreakinfo() {
-  var0 = spawnStruct();
-  var0.available = 1;
-  var0.firednotify = "offhand_fired";
-  var0.isgimme = 1;
-  var0.kid = 5;
-  var0.lifeid = 0;
-  var0.madeavailabletime = gettime();
-  var0.scriptuseagetype = "gesture_script_weapon";
-  var0.streakname = "jackal";
-  var0.streaksetupinfo = undefined;
-  var0.variantid = -1;
-  var0.weaponname = "ks_gesture_generic_mp";
-  var0.objweapon = getcompleteweaponname(var0.weaponname);
-  return var0;
+  var_0 = spawnStruct();
+  var_0.available = 1;
+  var_0.firednotify = "offhand_fired";
+  var_0.isgimme = 1;
+  var_0.kid = 5;
+  var_0.lifeid = 0;
+  var_0.madeavailabletime = gettime();
+  var_0.scriptuseagetype = "gesture_script_weapon";
+  var_0.streakname = "jackal";
+  var_0.streaksetupinfo = undefined;
+  var_0.variantid = -1;
+  var_0.weaponname = "ks_gesture_generic_mp";
+  var_0.objweapon = getcompleteweaponname(var_0.weaponname);
+  return var_0;
 }
 
-function getexplodedistance(var0) {
-  var1 = 850;
-  var2 = 1500;
-  var3 = var1 / var0;
-  var4 = var3 * var2;
-  return var4;
+function getexplodedistance(var_0) {
+  var_1 = 850;
+  var_2 = 1500;
+  var_3 = var_1 / var_0;
+  var_4 = var_3 * var_2;
+  return var_4;
 }
 
-function waitlzextractarrival(var0) {
+function waitlzextractarrival(var_0) {
   level endon("game_ended");
   level endon("switch_modes");
   self endon("extraction_destroyed");
   thread extractvehicledeathwatcher();
   wait 119;
 
-  foreach(var2 in level.jackals) {
-    if(!isDefined(var2.lz) || !isDefined(var2.lz.marker)) {
+  foreach(var_2 in level.jackals) {
+    if(!isDefined(var_2.lz) || !isDefined(var_2.lz.marker)) {
       continue;
     }
 
-    if(self.marker == var2.lz.marker) {
-      var2 notify("extract_hostages");
+    if(self.marker == var_2.lz.marker) {
+      var_2 notify("extract_hostages");
     }
   }
 
@@ -481,8 +481,8 @@ function extractvehicledeathwatcher() {
   cleanuplz(0);
 }
 
-function cleanuplz(var0) {
-  if(var0) {
+function cleanuplz(var_0) {
+  if(var_0) {
     checkhostagescoring();
   }
 
@@ -516,66 +516,66 @@ function cleanuplzvisuals() {
 }
 
 function checkhostagescoring() {
-  var0 = [];
-  var1 = "none";
+  var_0 = [];
+  var_1 = "none";
 
-  foreach(var3 in level.hostages) {
-    if(hostagecheckscoring(var3)) {
-      var0 = var3;
+  foreach(var_3 in level.hostages) {
+    if(hostagecheckscoring(var_3)) {
+      var_0 = var_3;
     }
 
-    var1 = var3.team;
+    var_1 = var_3.team;
   }
 
-  level.hostages = scripts\engine\utility::array_remove_array(level.hostages, var0);
-  tryhostagerespawn(var1);
+  level.hostages = scripts\engine\utility::array_remove_array(level.hostages, var_0);
+  tryhostagerespawn(var_1);
 }
 
-function tryhostagerespawn(var0) {
+function tryhostagerespawn(var_0) {
   if(level.hostages.size == 0) {
     level notify("hostage_spawn_early");
-    scripts\mp\tac_ops\hostage_utility::spawnrandomhostages(2, var0);
+    scripts\mp\tac_ops\hostage_utility::spawnrandomhostages(2, var_0);
     waitframe();
-    var1 = scripts\mp\gametypes\tac_ops::gettacopstimelimitms() / 1000;
-    thread delayedhostagespawn(var1 * 0.2, 2);
-    thread delayedhostagespawn(var1 * 0.4, 2);
-    thread delayedhostagespawn(var1 * 0.6, 2);
+    var_1 = scripts\mp\gametypes\tac_ops::gettacopstimelimitms() / 1000;
+    thread delayedhostagespawn(var_1 * 0.2, 2);
+    thread delayedhostagespawn(var_1 * 0.4, 2);
+    thread delayedhostagespawn(var_1 * 0.6, 2);
     return;
   }
 }
 
-function handlehostmigration(var0) {
+function handlehostmigration(var_0) {
   level endon("game_ended");
   level endon("bomb_defused");
   level endon("disconnect");
   level waittill("host_migration_begin");
-  var1 = scripts\mp\hostmigration::waittillhostmigrationdone();
+  var_1 = scripts\mp\hostmigration::waittillhostmigrationdone();
 
-  if(var1 > 0) {
+  if(var_1 > 0) {
     return;
   }
 }
 
-function updateservericons(var0, var1) {
-  var2 = -1;
+function updateservericons(var_0, var_1) {
+  var_2 = -1;
 
-  if(var1) {
-    var2 = -2;
+  if(var_1) {
+    var_2 = -2;
     return;
   }
 
-  switch (var0) {
+  switch (var_0) {
     case "axis":
     case "allies":
-      var3 = thread getownerteamplayer(var0);
+      var_3 = thread getownerteamplayer(var_0);
 
-      if(isDefined(var3)) {
-        var2 = var3 getentitynumber();
+      if(isDefined(var_3)) {
+        var_2 = var_3 getentitynumber();
       }
 
       break;
     case "zone_activation_delay":
-      var2 = -3;
+      var_2 = -3;
       break;
     case "zone_shift":
     default:
@@ -583,44 +583,44 @@ function updateservericons(var0, var1) {
   }
 }
 
-function getownerteamplayer(var0) {
-  var1 = undefined;
+function getownerteamplayer(var_0) {
+  var_1 = undefined;
 
-  foreach(var3 in level.players) {
-    if(var3.team == var0) {
-      var1 = var3;
+  foreach(var_3 in level.players) {
+    if(var_3.team == var_0) {
+      var_1 = var_3;
       break;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function setupextractioncallouts(var0) {
-  var1 = 1;
-  level.extractionteam = var0;
+function setupextractioncallouts(var_0) {
+  var_1 = 1;
+  level.extractionteam = var_0;
 
   if(!isDefined(level.extractionteam)) {
-    var1 = 2;
+    var_1 = 2;
   } else if(level.extractionteam == "allies") {
-    var1 = 0;
+    var_1 = 0;
   }
 
-  foreach(var3 in level.players) {
-    if(isDefined(var1)) {
-      var3 setclientomnvar("ui_hp_callout_id", var1);
+  foreach(var_3 in level.players) {
+    if(isDefined(var_1)) {
+      var_3 setclientomnvar("ui_hp_callout_id", var_1);
     }
   }
 }
 
-function trycreateextractpoint(var0, var1, var2) {
-  if(!isDefined(var2)) {
-    var2 = 1;
+function trycreateextractpoint(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
+    var_2 = 1;
   }
 
   if(level.activeextractions.size < 2) {
-    level.extractionpos = var0;
-    createhostagelz(var1, var2);
+    level.extractionpos = var_0;
+    createhostagelz(var_1, var_2);
     self iprintlnbold("Extraction copter deployed, hold out!");
     return 1;
   }
@@ -634,26 +634,26 @@ function getextractiontimeconst() {
 }
 
 function createhvt() {
-  var0 = getEnt("hvtSpawnLoc", "targetname");
-  level.hvtlocent = var0;
+  var_0 = getEnt("hvtSpawnLoc", "targetname");
+  level.hvtlocent = var_0;
 }
 
 function createhvtextractionsite() {
-  var0 = getEnt("hvtExtractionLoc", "targetname");
+  var_0 = getEnt("hvtExtractionLoc", "targetname");
   level.objectives = [];
-  level.objectives[0] = var0;
-  var1 = scripts\mp\gametypes\obj_dom::setupobjective(level.objectives[0]);
+  level.objectives[0] = var_0;
+  var_1 = scripts\mp\gametypes\obj_dom::setupobjective(level.objectives[0]);
   scripts\engine\utility::delaythread(3, &delayset);
-  var1.onuse = &hostagedompoint_onuse;
-  level.objectives[0] = var1;
+  var_1.onuse = &hostagedompoint_onuse;
+  level.objectives[0] = var_1;
   level.flagcapturetime = 0.1;
   level.flagneutralization = 0;
   waitframe();
-  var1 scripts\mp\gameobjects::setownerteam("neutral");
-  var1 scripts\mp\gameobjects::setvisibleteam("any");
-  var1 scripts\mp\gameobjects::allowuse("enemy");
-  var1 scripts\mp\gameobjects::cancontestclaim(1);
-  var1 scripts\mp\gameobjects::setobjectivestatusicons(level.icondefend, level.iconfriendlyextract3d);
+  var_1 scripts\mp\gameobjects::setownerteam("neutral");
+  var_1 scripts\mp\gameobjects::setvisibleteam("any");
+  var_1 scripts\mp\gameobjects::allowuse("enemy");
+  var_1 scripts\mp\gameobjects::cancontestclaim(1);
+  var_1 scripts\mp\gameobjects::setobjectivestatusicons(level.icondefend, level.iconfriendlyextract3d);
 }
 
 function delayset() {
@@ -666,32 +666,32 @@ function delayset() {
 function watchpushtriggers() {
   level endon("game_ended");
   level endon("hostage_phase_ended");
-  var0 = getEntArray("to_hstg_push_trigger", "targetname");
+  var_0 = getEntArray("to_hstg_push_trigger", "targetname");
 
-  if(!isDefined(var0) || var0.size <= 0) {
+  if(!isDefined(var_0) || var_0.size <= 0) {
     return;
   }
 
-  var1 = [];
+  var_1 = [];
 
-  foreach(var3 in var0) {
-    var4 = int(var3.script_noteworthy);
-    var1 = var3;
+  foreach(var_3 in var_0) {
+    var_4 = int(var_3.script_noteworthy);
+    var_1 = var_3;
   }
 
-  var6 = 0;
+  var_6 = 0;
 
   for(;;) {
     wait 1;
-    var7 = var1[var6 + 1];
+    var_7 = var_1[var_6 + 1];
 
-    if(isDefined(var7)) {
-      foreach(var9 in level.hostages) {
-        if(var9 istouching(var7)) {
-          var6++;
-          var10 = "to_hstg_" + var6;
-          scripts\mp\tac_ops_map::setactivemapconfig(var10, "allies");
-          scripts\mp\tac_ops_map::setactivemapconfig(var10, "axis");
+    if(isDefined(var_7)) {
+      foreach(var_9 in level.hostages) {
+        if(var_9 istouching(var_7)) {
+          var_6++;
+          var_10 = "to_hstg_" + var_6;
+          scripts\mp\tac_ops_map::setactivemapconfig(var_10, "allies");
+          scripts\mp\tac_ops_map::setactivemapconfig(var_10, "axis");
           level notify("hostage_spawns_pushed");
         }
       }
@@ -699,25 +699,25 @@ function watchpushtriggers() {
   }
 }
 
-function hostagedompoint_onuse(var0) {
-  scripts\mp\gametypes\obj_dom::dompoint_onuse(var0);
+function hostagedompoint_onuse(var_0) {
+  scripts\mp\gametypes\obj_dom::dompoint_onuse(var_0);
 
-  if(var0.team == "allies") {
-    if(isDefined(var0.hostagecarried)) {
-      var1 = scripts\mp\tac_ops\hostage_utility::drophostage(var0, var0.hostagecarried, var0.origin);
-      var1.trackedobject scripts\mp\gameobjects::deletetrackedobject();
-      var1 makeunusable();
-      var1.useobj unlink();
-      var1.useobj makeunusable();
+  if(var_0.team == "allies") {
+    if(isDefined(var_0.hostagecarried)) {
+      var_1 = scripts\mp\tac_ops\hostage_utility::drophostage(var_0, var_0.hostagecarried, var_0.origin);
+      var_1.trackedobject scripts\mp\gameobjects::deletetrackedobject();
+      var_1 makeunusable();
+      var_1.useobj unlink();
+      var_1.useobj makeunusable();
     }
 
-    thread trycreateextractpoint(var0, var0.origin, undefined);
-    var2 = scripts\mp\gametypes\tac_ops::gettacopstimeremainingms();
+    thread trycreateextractpoint(var_0, var_0.origin, undefined);
+    var_2 = scripts\mp\gametypes\tac_ops::gettacopstimeremainingms();
 
-    if(var2 < getextractiontimeconst() * 1000) {
-      scripts\mp\gametypes\tac_ops::extendtacopstimelimitms(getextractiontimeconst() * 1000 - var2);
+    if(var_2 < getextractiontimeconst() * 1000) {
+      scripts\mp\gametypes\tac_ops::extendtacopstimelimitms(getextractiontimeconst() * 1000 - var_2);
     } else {
-      scripts\mp\gametypes\tac_ops::reducetacopstimelimitms(var2 - getextractiontimeconst() * 1000);
+      scripts\mp\gametypes\tac_ops::reducetacopstimelimitms(var_2 - getextractiontimeconst() * 1000);
     }
 
     level.objectives[0].onuse = &scripts\mp\gametypes\obj_dom::dompoint_onuse;
@@ -727,13 +727,13 @@ function hostagedompoint_onuse(var0) {
 
     if(scripts\mp\utility\teams::getteamdata("allies", "teamCount")) {
       level.topplayers = scripts\engine\utility::array_sort_with_func(scripts\mp\utility\teams::getteamdata("allies", "players"), &compare_player_score);
-      var3 = spawnextractchopper(level.topplayers[0], self, 0);
-      var4 = scripts\mp\utility\teams::getteamdata("axis", "players");
-      var5 = var4.size;
-      var5 = max(var5, 1);
-      var6 = 1666.67;
-      var3.health = int(var5 * var6);
-      var3.maxhealth = var3.health;
+      var_3 = spawnextractchopper(level.topplayers[0], self, 0);
+      var_4 = scripts\mp\utility\teams::getteamdata("axis", "players");
+      var_5 = var_4.size;
+      var_5 = max(var_5, 1);
+      var_6 = 1666.67;
+      var_3.health = int(var_5 * var_6);
+      var_3.maxhealth = var_3.health;
       thread copterdeathwatcher();
       thread copterhealthwatcher();
       setomnvar("ui_tacops_helo_health_percent", 1);
@@ -754,7 +754,7 @@ function copterhealthwatcher() {
   level endon("game_ended");
 
   for(;;) {
-    self waittill("damage", var0);
+    self waittill("damage", var_0);
     setomnvar("ui_tacops_helo_health_percent", self.health / self.maxhealth);
   }
 }
@@ -786,21 +786,21 @@ function holdoutphase() {
 }
 
 function startcopteroutofbounds() {
-  var0 = getEntArray("holdout_outofbounds", "targetname");
-  var1 = scripts\mp\utility\teams::getteamdata("allies", "players");
+  var_0 = getEntArray("holdout_outofbounds", "targetname");
+  var_1 = scripts\mp\utility\teams::getteamdata("allies", "players");
 
-  foreach(var3 in var1) {
-    foreach(var5 in var0) {
-      startphaseoob(var3, var5, "copterHoldOut");
+  foreach(var_3 in var_1) {
+    foreach(var_5 in var_0) {
+      startphaseoob(var_3, var_5, "copterHoldOut");
     }
   }
 }
 
-function startphaseoob(var0, var1) {
+function startphaseoob(var_0, var_1) {
   level endon("game_ended");
   level endon("switch_modes");
 }
 
-function compare_player_score(var0, var1) {
-  return var0.score >= var1.score;
+function compare_player_score(var_0, var_1) {
+  return var_0.score >= var_1.score;
 }

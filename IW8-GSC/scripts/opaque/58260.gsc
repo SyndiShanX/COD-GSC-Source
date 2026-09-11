@@ -36,34 +36,34 @@ function init() {
   level._effect["vfx_loot_candy_prize"] = loadfx("vfx/iw8_br/gameplay/hween/vfx_loot_candy_prize.vfx");
 }
 
-function ref_12120(var0, var1, var2, var3) {
+function ref_12120(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
-  var4 = getdvarint("scr_halloween_candy_value", 10);
-  var5 = getdvarint("scr_halloween_candy_value_variance", 0);
-  var6 = var0 == "br_loot_cache_lege";
+  var_4 = getdvarint("scr_halloween_candy_value", 10);
+  var_5 = getdvarint("scr_halloween_candy_value_variance", 0);
+  var_6 = var_0 == "br_loot_cache_lege";
 
-  if(var6) {
-    var4 *= 2;
+  if(var_6) {
+    var_4 *= 2;
   }
 
-  if(var5 > 0) {
-    var4 += randomintrange(var5 * -1, var5);
+  if(var_5 > 0) {
+    var_4 += randomintrange(var_5 * -1, var_5);
   }
 
   if(getdvarint("scr_halloween_vfx_every_cache", 0) == 1) {
-    if(var6) {
-      thread ref_12458(level, var1);
+    if(var_6) {
+      thread ref_12458(level, var_1);
     } else {
-      thread ref_12458(level, var1);
+      thread ref_12458(level, var_1);
     }
   }
 
   if(_calloutmarkerping_handleluinotify_enemyrepinged::ref_124f5()) {
-    var7 = self getplayerdata("common", "halloweenTrickOrTreatLocations", 16);
+    var_7 = self getplayerdata("common", "halloweenTrickOrTreatLocations", 16);
 
-    if(!var7) {
+    if(!var_7) {
       thread ref_12776(level);
-      var8 = forceexplosivedeath();
+      var_8 = forceexplosivedeath();
       self reportchallengeuserevent("collect_item", "halloween_treat_15");
       self dlog_recordplayerevent("dlog_event_halloween_treat", ["reward_id", 15]);
       self setplayerdata("common", "halloweenTrickOrTreatLocations", 16, 1);
@@ -73,77 +73,77 @@ function ref_12120(var0, var1, var2, var3) {
     return;
   }
 
-  var9 = -1;
+  var_9 = -1;
 
-  if(isDefined(var4)) {
-    var9 = var4;
-  } else if(isDefined(var3)) {
-    switch (var3) {
+  if(isDefined(var_4)) {
+    var_9 = var_4;
+  } else if(isDefined(var_3)) {
+    switch (var_3) {
       case "militarybase":
       case "airfield":
-        var9 = 0;
+        var_9 = 0;
         break;
       case "graveyard":
       case "transit":
       case "junkyard":
       case "boneyard":
-        var9 = 1;
+        var_9 = 1;
         break;
       case "dam":
-        var9 = 2;
+        var_9 = 2;
         break;
       case "downtown":
-        var9 = 3;
+        var_9 = 3;
         break;
       case "storagetown":
-        var9 = 4;
+        var_9 = 4;
         break;
       case "hospital":
-        var9 = 5;
+        var_9 = 5;
         break;
       case "layover":
-        var9 = 6;
+        var_9 = 6;
         break;
       case "quarry":
-        var9 = 7;
+        var_9 = 7;
         break;
       case "port":
-        var9 = 8;
+        var_9 = 8;
         break;
       case "stadium":
-        var9 = 9;
+        var_9 = 9;
         break;
       case "gulag":
-        var9 = 10;
+        var_9 = 10;
         break;
       case "farm":
       case "lumber":
       case "farms":
-        var9 = 11;
+        var_9 = 11;
         break;
       case "tvstation":
-        var9 = 12;
+        var_9 = 12;
         break;
       case "super":
-        var9 = 13;
+        var_9 = 13;
         break;
       case "shopping_district_e":
       case "shopping_district_w":
       case "hills":
-        var9 = 14;
+        var_9 = 14;
         break;
       default:
         break;
     }
   }
 
-  if(var9 == -1) {
+  if(var_9 == -1) {
     return;
   }
 
-  var10 = self getplayerdata("common", "halloweenTrickOrTreatLocations", var9);
+  var_10 = self getplayerdata("common", "halloweenTrickOrTreatLocations", var_9);
 
-  if(var10) {
+  if(var_10) {
     ref_13e19();
 
     if(!istrue(self.setplayersquadindex)) {
@@ -154,88 +154,88 @@ function ref_12120(var0, var1, var2, var3) {
     return;
   }
 
-  var11 = self getplayerdata("common", "halloweenTrickOrTreatCandy");
-  var8 = forceexplosivedeath();
-  var12 = regulateturretrateoffire(var8, var11, var5);
-  ref_128b2(var9, var12, var2, var7);
+  var_11 = self getplayerdata("common", "halloweenTrickOrTreatCandy");
+  var_8 = forceexplosivedeath();
+  var_12 = regulateturretrateoffire(var_8, var_11, var_5);
+  ref_128b2(var_9, var_12, var_2, var_7);
 }
 
 function ref_13e19() {
-  var0 = randomfloat(1);
+  var_0 = randomfloat(1);
 
-  if(var0 < getdvarfloat("scr_halloween_finished_trick_chance", 0)) {
-    var1 = randomint(11);
-    self setclientomnvar("ui_halloween_event", var1);
+  if(var_0 < getdvarfloat("scr_halloween_finished_trick_chance", 0)) {
+    var_1 = randomint(11);
+    self setclientomnvar("ui_halloween_event", var_1);
     return true;
   }
 
   return false;
 }
 
-function ref_128b2(var0, var1, var2, var3) {
-  if(var1 == 0) {
-    thread ref_12458(level, var2);
+function ref_128b2(var_0, var_1, var_2, var_3) {
+  if(var_1 == 0) {
+    thread ref_12458(level, var_2);
   }
 
-  if(var1 < 0) {
+  if(var_1 < 0) {
     if(getdvarint("scr_halloween_trick_killswitch", 0) == 0) {
-      ref_12d34(var1);
+      ref_12d34(var_1);
       return;
     }
 
     return;
   }
 
-  if(var1 > 0) {
+  if(var_1 > 0) {
     self setclientomnvar("ui_halloween_event", 99);
     thread ref_12776(level);
-    thread ref_12d33(var1, var0);
+    thread ref_12d33(var_1, var_0);
     return;
   }
 }
 
 function isskydivestatedisabled() {
-  var0 = 0;
+  var_0 = 0;
 
-  for(var1 = 0; var1 < 15; var1++) {
-    var2 = self getplayerdata("common", "halloweenTrickOrTreatLocations", var1);
-    var0 = var1;
+  for(var_1 = 0; var_1 < 15; var_1++) {
+    var_2 = self getplayerdata("common", "halloweenTrickOrTreatLocations", var_1);
+    var_0 = var_1;
 
-    if(!var2) {
+    if(!var_2) {
       break;
     }
   }
 
-  var3 = self getplayerdata("common", "halloweenTrickOrTreatCandy");
-  var4 = getdvarint("scr_halloween_candy_value", 10);
-  var5 = forceexplosivedeath();
-  var6 = regulateturretrateoffire(var5, var3, var4);
-  ref_128b2(var0, var6);
+  var_3 = self getplayerdata("common", "halloweenTrickOrTreatCandy");
+  var_4 = getdvarint("scr_halloween_candy_value", 10);
+  var_5 = forceexplosivedeath();
+  var_6 = regulateturretrateoffire(var_5, var_3, var_4);
+  ref_128b2(var_0, var_6);
 }
 
-function isstandardsandbox(var0) {
+function isstandardsandbox(var_0) {
   issmallsplashdamage();
 
-  for(var1 = 0; var1 < var0; var1++) {
-    var2 = 0;
+  for(var_1 = 0; var_1 < var_0; var_1++) {
+    var_2 = 0;
 
-    for(var1 = 0; var1 < 15; var1++) {
-      var3 = self getplayerdata("common", "halloweenTrickOrTreatLocations", var1);
-      var2 = var1;
+    for(var_1 = 0; var_1 < 15; var_1++) {
+      var_3 = self getplayerdata("common", "halloweenTrickOrTreatLocations", var_1);
+      var_2 = var_1;
 
-      if(!var3) {
+      if(!var_3) {
         break;
       }
     }
 
-    ref_12120("", undefined, "", var2);
+    ref_12120("", undefined, "", var_2);
   }
 }
 
 function issmallsplashdamage() {
-  var0 = self getplayerdata("common", "halloweenTrickOrTreatLocations", 16);
+  var_0 = self getplayerdata("common", "halloweenTrickOrTreatLocations", 16);
 
-  if(!var0) {
+  if(!var_0) {
     self reportchallengeuserevent("collect_item", "halloween_treat_15");
     self dlog_recordplayerevent("dlog_event_halloween_treat", ["reward_id", 15]);
     self setplayerdata("common", "halloweenTrickOrTreatLocations", 16, 1);
@@ -244,93 +244,93 @@ function issmallsplashdamage() {
 }
 
 function isthrowingknifeequipment() {
-  for(var0 = 0; var0 <= 14; var0++) {
-    var1 = self getplayerdata("common", "halloweenTrickOrTreatLocations", var0);
+  for(var_0 = 0; var_0 <= 14; var_0++) {
+    var_1 = self getplayerdata("common", "halloweenTrickOrTreatLocations", var_0);
 
-    if(!var1) {
-      var2 = "";
+    if(!var_1) {
+      var_2 = "";
 
-      switch (var0) {
+      switch (var_0) {
         case 0:
-          var2 = "Mil Base";
+          var_2 = "Mil Base";
           break;
         case 1:
-          var2 = "Boneyard";
+          var_2 = "Boneyard";
           break;
         case 2:
-          var2 = "Dam";
+          var_2 = "Dam";
           break;
         case 3:
-          var2 = "Downtown";
+          var_2 = "Downtown";
           break;
         case 4:
-          var2 = "Storage Town";
+          var_2 = "Storage Town";
           break;
         case 5:
-          var2 = "Hospital";
+          var_2 = "Hospital";
           break;
         case 6:
-          var2 = "Layover";
+          var_2 = "Layover";
           break;
         case 7:
-          var2 = "Quarry";
+          var_2 = "Quarry";
           break;
         case 8:
-          var2 = "Port";
+          var_2 = "Port";
           break;
         case 9:
-          var2 = "Stadium";
+          var_2 = "Stadium";
           break;
         case 10:
-          var2 = "Gulag";
+          var_2 = "Gulag";
           break;
         case 11:
-          var2 = "Lumber";
+          var_2 = "Lumber";
           break;
         case 12:
-          var2 = "TV Station";
+          var_2 = "TV Station";
           break;
         case 13:
-          var2 = "Super";
+          var_2 = "Super";
           break;
         case 14:
-          var2 = "Hills";
+          var_2 = "Hills";
           break;
         default:
-          var2 = "Unkown_" + var0;
+          var_2 = "Unkown_" + var_0;
           break;
       }
 
-      self iprintln("Unfinished " + var2);
+      self iprintln("Unfinished " + var_2);
     }
   }
 
-  var3 = self getplayerdata("common", "halloweenTrickOrTreatLocations", 16);
+  var_3 = self getplayerdata("common", "halloweenTrickOrTreatLocations", 16);
 
-  if(!var3) {
+  if(!var_3) {
     self iprintln("Unfinished Train");
     return;
   }
 }
 
 function issmokinggun() {
-  var0 = forceexplosivedeath();
+  var_0 = forceexplosivedeath();
 
-  for(var1 = 0; var1 < var0 + 1; var1++) {
-    var2 = self getplayerdata("common", "halloweenTrickOrTreatLocations", var1);
+  for(var_1 = 0; var_1 < var_0 + 1; var_1++) {
+    var_2 = self getplayerdata("common", "halloweenTrickOrTreatLocations", var_1);
 
-    if(!var2) {
-      isstunnedby(var1);
+    if(!var_2) {
+      isstunnedby(var_1);
     }
   }
 }
 
-function isstunnedby(var0) {
-  self iprintln("Finishing location " + var0);
+function isstunnedby(var_0) {
+  self iprintln("Finishing location " + var_0);
   self setclientomnvar("ui_halloween_event", 99);
-  thread ref_12d33(10, var0);
+  thread ref_12d33(10, var_0);
 
-  if(var0 == 14) {
+  if(var_0 == 14) {
     self iprintln("Final Loot award!");
     wait 3;
     cheesewedge();
@@ -338,178 +338,178 @@ function isstunnedby(var0) {
   }
 }
 
-function regulateturretrateoffire(var0, var1, var2) {
-  var3 = var1 + var2;
-  self setplayerdata("common", "halloweenTrickOrTreatCandy", var3);
-  var4 = level.setplayervargulagjail[var0];
-  var5 = -1;
+function regulateturretrateoffire(var_0, var_1, var_2) {
+  var_3 = var_1 + var_2;
+  self setplayerdata("common", "halloweenTrickOrTreatCandy", var_3);
+  var_4 = level.setplayervargulagjail[var_0];
+  var_5 = -1;
 
-  if(var3 >= var4) {
-    var5 = var0;
-    return (var5 + 1);
+  if(var_3 >= var_4) {
+    var_5 = var_0;
+    return (var_5 + 1);
   }
 
-  var6 = -1;
+  var_6 = -1;
 
-  for(var7 = 0; var7 < level.setplunderifunchanged.size; var7++) {
-    var8 = level.setplunderifunchanged[var7];
+  for(var_7 = 0; var_7 < level.setplunderifunchanged.size; var_7++) {
+    var_8 = level.setplunderifunchanged[var_7];
 
-    if(var3 >= var8 && var1 < var8) {
-      var6 = var7;
+    if(var_3 >= var_8 && var_1 < var_8) {
+      var_6 = var_7;
     }
   }
 
-  return (var6 + 1) * -1;
+  return (var_6 + 1) * -1;
 }
 
-function ref_12d33(var0, var1) {
+function ref_12d33(var_0, var_1) {
   self setclientomnvar("ui_halloween_event", 99);
-  var2 = 0;
-  var3 = "";
+  var_2 = 0;
+  var_3 = "";
 
-  switch (var1) {
+  switch (var_1) {
     case 0:
-      var3 = "halloween_treat_0";
+      var_3 = "halloween_treat_0";
       break;
     case 1:
-      var3 = "halloween_treat_1";
+      var_3 = "halloween_treat_1";
       break;
     case 2:
-      var3 = "halloween_treat_2";
+      var_3 = "halloween_treat_2";
       break;
     case 3:
-      var3 = "halloween_treat_3";
+      var_3 = "halloween_treat_3";
       break;
     case 4:
-      var3 = "halloween_treat_4";
+      var_3 = "halloween_treat_4";
       break;
     case 5:
-      var3 = "halloween_treat_5";
+      var_3 = "halloween_treat_5";
       break;
     case 6:
-      var3 = "halloween_treat_6";
+      var_3 = "halloween_treat_6";
       break;
     case 7:
-      var3 = "halloween_treat_7";
+      var_3 = "halloween_treat_7";
       break;
     case 8:
-      var3 = "halloween_treat_8";
+      var_3 = "halloween_treat_8";
       break;
     case 9:
-      var3 = "halloween_treat_9";
+      var_3 = "halloween_treat_9";
       break;
     case 10:
-      var3 = "halloween_treat_10";
+      var_3 = "halloween_treat_10";
       break;
     case 11:
-      var3 = "halloween_treat_11";
+      var_3 = "halloween_treat_11";
       break;
     case 12:
-      var3 = "halloween_treat_12";
+      var_3 = "halloween_treat_12";
       break;
     case 13:
-      var3 = "halloween_treat_13";
+      var_3 = "halloween_treat_13";
       break;
     case 14:
-      var3 = "halloween_treat_14";
+      var_3 = "halloween_treat_14";
       break;
   }
 
-  if(var3 != "") {
-    self reportchallengeuserevent("collect_item", var3);
-    self dlog_recordplayerevent("dlog_event_halloween_treat", ["reward_id", var0]);
-    self setplayerdata("common", "halloweenTrickOrTreatLocations", var1, 1);
+  if(var_3 != "") {
+    self reportchallengeuserevent("collect_item", var_3);
+    self dlog_recordplayerevent("dlog_event_halloween_treat", ["reward_id", var_0]);
+    self setplayerdata("common", "halloweenTrickOrTreatLocations", var_1, 1);
     ref_13e12();
     return;
   }
 }
 
 function ref_13e12() {
-  var0 = 0;
+  var_0 = 0;
 
-  for(var1 = 0; var1 < 15; var1++) {
-    var2 = self getplayerdata("common", "halloweenTrickOrTreatLocations", var1);
-    var0 += var2;
-    var3 = var1;
+  for(var_1 = 0; var_1 < 15; var_1++) {
+    var_2 = self getplayerdata("common", "halloweenTrickOrTreatLocations", var_1);
+    var_0 += var_2;
+    var_3 = var_1;
   }
 
-  var4 = self getplayerdata("common", "halloweenTrickOrTreatLocations", 16);
-  var0 += var4;
+  var_4 = self getplayerdata("common", "halloweenTrickOrTreatLocations", 16);
+  var_0 += var_4;
 
-  if(var0 == 16) {
+  if(var_0 == 16) {
     wait 3;
     cheesewedge();
     return;
   }
 }
 
-function ref_12d34(var0) {
-  self setclientomnvar("ui_halloween_event", var0 * -1);
+function ref_12d34(var_0) {
+  self setclientomnvar("ui_halloween_event", var_0 * -1);
 }
 
-function ref_12458(var0, var1) {
+function ref_12458(var_0, var_1) {
   level endon("game_ended");
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var2 = "candySmall";
+  var_2 = "candySmall";
 
-  if(var1) {
-    var2 = "candyBig";
+  if(var_1) {
+    var_2 = "candyBig";
   }
 
-  var3 = spawnfx(level._effect[var2], var0.origin + (0, 0, 10));
-  var3.angles = var0.angles;
+  var_3 = spawnfx(level._effect[var_2], var_0.origin + (0, 0, 10));
+  var_3.angles = var_0.angles;
   wait 0.1;
-  triggerfx(var3);
+  triggerfx(var_3);
 }
 
-function ref_12776(var0) {
+function ref_12776(var_0) {
   level endon("game_ended");
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var1 = spawnfx(level._effect["vfx_loot_candy_prize"], var0.origin + (0, 0, 10));
-  var1.angles = var0.angles;
+  var_1 = spawnfx(level._effect["vfx_loot_candy_prize"], var_0.origin + (0, 0, 10));
+  var_1.angles = var_0.angles;
   wait 0.1;
-  triggerfx(var1);
+  triggerfx(var_1);
 }
 
 function forceexplosivedeath() {
-  var0 = 0;
+  var_0 = 0;
 
-  for(var1 = 0; var1 < 14; var1++) {
-    var2 = self getplayerdata("common", "halloweenTrickOrTreatLocations", var1);
+  for(var_1 = 0; var_1 < 14; var_1++) {
+    var_2 = self getplayerdata("common", "halloweenTrickOrTreatLocations", var_1);
 
-    if(var2) {
-      var0++;
+    if(var_2) {
+      var_0++;
     }
   }
 
-  return var0;
+  return var_0;
 }
 
-function isusingtacmap(var0) {
+function isusingtacmap(var_0) {
   if(!isbot(self)) {
     self setclientomnvar("ui_halloween_event", 99);
-    self reportchallengeuserevent("collect_item", "halloween_treat_" + var0);
-    self dlog_recordplayerevent("dlog_event_halloween_treat", ["reward_id", int(var0)]);
+    self reportchallengeuserevent("collect_item", "halloween_treat_" + var_0);
+    self dlog_recordplayerevent("dlog_event_halloween_treat", ["reward_id", int(var_0)]);
     return;
   }
 }
 
-function isvalidanimsuiteentity(var0) {
-  if(int(var0) < 0) {
+function isvalidanimsuiteentity(var_0) {
+  if(int(var_0) < 0) {
     ref_13e19();
     return;
   }
 
   if(!isbot(self)) {
-    self setclientomnvar("ui_halloween_event", int(var0));
+    self setclientomnvar("ui_halloween_event", int(var_0));
     return;
   }
 }

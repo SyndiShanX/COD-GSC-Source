@@ -4,9 +4,9 @@
 ***********************************************/
 
 function ref_13d4c() {
-  var0 = getDvar("LOQKLRKQMO");
+  var_0 = getDvar("LOQKLRKQMO");
 
-  if(var0 == "1") {
+  if(var_0 == "1") {
     return true;
   }
 
@@ -21,104 +21,104 @@ function ref_13d42() {
   return "mp/trial_mission_table.csv";
 }
 
-function trial_ui_set_main_score(var0) {
+function trial_ui_set_main_score(var_0) {
   if(istrue(level.ref_13d2e)) {
     return;
   }
 
-  setomnvar("ui_trial_main_score", int(var0));
+  setomnvar("ui_trial_main_score", int(var_0));
 }
 
-function trial_ui_set_main_time(var0) {
+function trial_ui_set_main_time(var_0) {
   if(istrue(level.ref_13d2e)) {
     return;
   }
 
-  var0 -= var0 % 100;
-  setomnvar("ui_trial_main_time", int(var0));
+  var_0 -= var_0 % 100;
+  setomnvar("ui_trial_main_time", int(var_0));
 }
 
-function trial_ui_set_subscore(var0) {
+function trial_ui_set_subscore(var_0) {
   if(istrue(level.ref_13d2e)) {
     return;
   }
 
-  setomnvar("ui_trial_subscore", int(var0));
+  setomnvar("ui_trial_subscore", int(var_0));
 }
 
-function trial_ui_set_subtime(var0) {
+function trial_ui_set_subtime(var_0) {
   if(istrue(level.ref_13d2e)) {
     return;
   }
 
-  var0 -= var0 % 100;
-  setomnvar("ui_trial_subtime", int(var0));
+  var_0 -= var_0 % 100;
+  setomnvar("ui_trial_subtime", int(var_0));
 }
 
-function trial_ui_set_secondary_timer(var0) {
-  setomnvar("ui_trial_secondary_time", int(var0));
+function trial_ui_set_secondary_timer(var_0) {
+  setomnvar("ui_trial_secondary_time", int(var_0));
 }
 
-function trial_ui_freeze_secondary_timer(var0) {
-  setomnvar("ui_trial_secondary_time_frozen", var0);
+function trial_ui_freeze_secondary_timer(var_0) {
+  setomnvar("ui_trial_secondary_time_frozen", var_0);
 }
 
 function trial_ui_hide_secondary_timer() {
   setomnvar("ui_trial_secondary_time", int(-1));
 }
 
-function trial_ui_set_best_score(var0) {
+function trial_ui_set_best_score(var_0) {
   if(istrue(level.ref_13d2e)) {
     return;
   }
 
-  game["trial"]["best_score"] = var0;
-  setomnvar("ui_trial_best_score", int(var0));
+  game["trial"]["best_score"] = var_0;
+  setomnvar("ui_trial_best_score", int(var_0));
 }
 
-function trial_ui_set_best_time(var0) {
+function trial_ui_set_best_time(var_0) {
   if(istrue(level.ref_13d2e)) {
     return;
   }
 
-  var0 -= var0 % 100;
-  game["trial"]["best_time"] = var0;
-  setomnvar("ui_trial_best_time", int(var0));
+  var_0 -= var_0 % 100;
+  game["trial"]["best_time"] = var_0;
+  setomnvar("ui_trial_best_time", int(var_0));
 }
 
-function trial_ui_set_objective_progress(var0, var1) {
-  setomnvar("ui_trial_objective_progress", var0);
-  setomnvar("ui_trial_objective_total", var1);
+function trial_ui_set_objective_progress(var_0, var_1) {
+  setomnvar("ui_trial_objective_progress", var_0);
+  setomnvar("ui_trial_objective_total", var_1);
 }
 
-function trial_ui_set_wave(var0, var1) {
-  setomnvar("ui_trial_wave_progress", var0);
-  setomnvar("ui_trial_wave_total", var1);
+function trial_ui_set_wave(var_0, var_1) {
+  setomnvar("ui_trial_wave_progress", var_0);
+  setomnvar("ui_trial_wave_total", var_1);
 }
 
-function ref_13d8d(var0, var1) {
-  setomnvar("ui_trial_lap_progress", var0);
-  setomnvar("ui_trial_lap_total", var1);
+function ref_13d8d(var_0, var_1) {
+  setomnvar("ui_trial_lap_progress", var_0);
+  setomnvar("ui_trial_lap_total", var_1);
 }
 
-function trial_ui_set_objective_icon_index(var0) {
-  setomnvar("ui_trial_objective_icon_index", var0);
+function trial_ui_set_objective_icon_index(var_0) {
+  setomnvar("ui_trial_objective_icon_index", var_0);
 }
 
-function trial_ui_set_reward_tier(var0) {
+function trial_ui_set_reward_tier(var_0) {
   if(istrue(level.ref_13d2e)) {
     return;
   }
 
-  setomnvar("ui_trial_reward_tier", int(var0));
+  setomnvar("ui_trial_reward_tier", int(var_0));
 }
 
-function trial_ui_set_reward_tier_preview(var0) {
+function trial_ui_set_reward_tier_preview(var_0) {
   if(istrue(level.ref_13d2e)) {
     return;
   }
 
-  setomnvar("ui_trial_reward_tier_preview", var0);
+  setomnvar("ui_trial_reward_tier_preview", var_0);
 }
 
 function ref_13d88() {
@@ -131,40 +131,40 @@ function ref_13d88() {
   setomnvar("ui_trial_tries_remaining", game["trial"]["tries_remaining"]);
 }
 
-function trial_ui_set_tries_remaining(var0) {
-  game["trial"]["tries_remaining"] = var0;
-  setomnvar("ui_trial_tries_remaining", var0);
+function trial_ui_set_tries_remaining(var_0) {
+  game["trial"]["tries_remaining"] = var_0;
+  setomnvar("ui_trial_tries_remaining", var_0);
 }
 
-function trial_ui_set_stat_and_bonus_score(var0, var1, var2, var3) {
-  if(getomnvar("ui_trial_stats_rows") < var0) {
-    setomnvar("ui_trial_stats_rows", int(var0));
+function trial_ui_set_stat_and_bonus_score(var_0, var_1, var_2, var_3) {
+  if(getomnvar("ui_trial_stats_rows") < var_0) {
+    setomnvar("ui_trial_stats_rows", int(var_0));
   }
 
-  var4 = tablelookup("mp/trial_stat_lines.csv", 1, var1, 0);
-  setomnvar("ui_trial_stats_row" + int(var0) + "_stat_index", int(var4));
-  setomnvar("ui_trial_stats_row" + int(var0) + "_stat", int(var2));
-  setomnvar("ui_trial_stats_row" + int(var0) + "_bonus_score", int(var3));
+  var_4 = tablelookup("mp/trial_stat_lines.csv", 1, var_1, 0);
+  setomnvar("ui_trial_stats_row" + int(var_0) + "_stat_index", int(var_4));
+  setomnvar("ui_trial_stats_row" + int(var_0) + "_stat", int(var_2));
+  setomnvar("ui_trial_stats_row" + int(var_0) + "_bonus_score", int(var_3));
 }
 
-function trial_ui_set_stat_and_bonus_time(var0, var1, var2, var3) {
-  if(getomnvar("ui_trial_stats_rows") < var0) {
-    setomnvar("ui_trial_stats_rows", int(var0));
+function trial_ui_set_stat_and_bonus_time(var_0, var_1, var_2, var_3) {
+  if(getomnvar("ui_trial_stats_rows") < var_0) {
+    setomnvar("ui_trial_stats_rows", int(var_0));
   }
 
-  var4 = tablelookup("mp/trial_stat_lines.csv", 1, var1, 0);
-  var3 -= var3 % 100;
-  setomnvar("ui_trial_stats_row" + int(var0) + "_stat_index", int(var4));
-  setomnvar("ui_trial_stats_row" + int(var0) + "_stat", int(var2));
-  setomnvar("ui_trial_stats_row" + int(var0) + "_bonus_time", int(var3));
+  var_4 = tablelookup("mp/trial_stat_lines.csv", 1, var_1, 0);
+  var_3 -= var_3 % 100;
+  setomnvar("ui_trial_stats_row" + int(var_0) + "_stat_index", int(var_4));
+  setomnvar("ui_trial_stats_row" + int(var_0) + "_stat", int(var_2));
+  setomnvar("ui_trial_stats_row" + int(var_0) + "_bonus_time", int(var_3));
 }
 
-function ref_13d89(var0) {
-  setomnvar("ui_trial_retry_disabled", var0);
+function ref_13d89(var_0) {
+  setomnvar("ui_trial_retry_disabled", var_0);
 }
 
-function intro_techos_deposit_fullcar(var0, var1) {
-  if(var0 == "bink_complete") {
+function intro_techos_deposit_fullcar(var_0, var_1) {
+  if(var_0 == "bink_complete") {
     level notify("bink_complete");
     return;
   }
@@ -195,36 +195,36 @@ function trial_ui_open_results_screen() {
   level.unset_stay_at_spawn_flag_on_entering_combat = 0;
 }
 
-function ref_13d8b(var0) {
-  setomnvar("ui_combo_bar_combo", int(var0));
+function ref_13d8b(var_0) {
+  setomnvar("ui_combo_bar_combo", int(var_0));
 }
 
-function ref_13d8c(var0) {
-  setomnvar("ui_combo_bar_duration", int(var0));
+function ref_13d8c(var_0) {
+  setomnvar("ui_combo_bar_duration", int(var_0));
 }
 
 function trial_ui_waittill_retry() {
   for(;;) {
-    level.player waittill("luinotifyserver", var0);
+    level.player waittill("luinotifyserver", var_0);
 
-    if(var0 == "trial_retry") {
+    if(var_0 == "trial_retry") {
       return;
     }
   }
 }
 
-function ref_13d8a(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = 5000;
+function ref_13d8a(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 5000;
   }
 
-  if(var0) {
+  if(var_0) {
     level.player endon("on_vehicle");
-    var2 = gettime() + var1;
+    var_2 = gettime() + var_1;
     level.player setclientomnvar("ui_out_of_bounds_type", int(3));
-    level.player setclientomnvar("ui_out_of_bounds_countdown", int(var2));
+    level.player setclientomnvar("ui_out_of_bounds_countdown", int(var_2));
 
-    while(gettime() < var2) {
+    while(gettime() < var_2) {
       waitframe();
     }
 
@@ -237,79 +237,79 @@ function ref_13d8a(var0, var1) {
   level.player setclientomnvar("ui_out_of_bounds_countdown", int(0));
 }
 
-function ref_13d4b(var0, var1, var2, var3) {
-  if(!isDefined(var1)) {
-    var1 = 0;
+function ref_13d4b(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  if(!isDefined(var3)) {
-    var3 = 0;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  var4 = getDvar("NSNPRRQTOP");
+  var_4 = getDvar("NSNPRRQTOP");
 
-  if(var3 && var1) {
+  if(var_3 && var_1) {
     level.player playlocalsound("mp_kill_alert");
-  } else if(isDefined(var0)) {
-    playsoundatpos(var0.origin, var4);
+  } else if(isDefined(var_0)) {
+    playsoundatpos(var_0.origin, var_4);
   } else {
-    self playSound(var4);
+    self playSound(var_4);
   }
 
-  ref_13d8e("standard", var1, 0, var2);
+  ref_13d8e("standard", var_1, 0, var_2);
 }
 
-function ref_13d8e(var0, var1, var2, var3, var4) {
-  if(!isDefined(var0)) {
+function ref_13d8e(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  if(!isDefined(var3)) {
-    var3 = 0;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  var5 = ref_13d47(var0);
+  var_5 = ref_13d47(var_0);
 
-  if(isDefined(self.lasthitmarkertime) && self.lasthitmarkertime == gettime() && var5 <= self.lasthitmarkerpriority && !var1) {
+  if(isDefined(self.lasthitmarkertime) && self.lasthitmarkertime == gettime() && var_5 <= self.lasthitmarkerpriority && !var_1) {
     return;
   }
 
   self.lasthitmarkertime = gettime();
-  self.lasthitmarkerpriority = var5;
+  self.lasthitmarkerpriority = var_5;
 
-  if(isDefined(var4) && !istrue(var1)) {
-    self setclientomnvar("damage_feedback_icon", var4);
+  if(isDefined(var_4) && !istrue(var_1)) {
+    self setclientomnvar("damage_feedback_icon", var_4);
     self setclientomnvar("damage_feedback_icon_notify", gettime());
   }
 
-  self setclientomnvar("damage_feedback", var0);
+  self setclientomnvar("damage_feedback", var_0);
   self setclientomnvar("damage_feedback_notify", gettime());
 
-  if(var1) {
+  if(var_1) {
     self setclientomnvar("damage_feedback_kill", 1);
   } else {
     self setclientomnvar("damage_feedback_kill", 0);
   }
 
-  if(var2) {
+  if(var_2) {
     self setclientomnvar("damage_feedback_headshot", 1);
   } else {
     self setclientomnvar("damage_feedback_headshot", 0);
   }
 
-  if(var3) {
+  if(var_3) {
     self setclientomnvar("damage_feedback_nonplayer", 1);
     return;
   }
@@ -317,12 +317,12 @@ function ref_13d8e(var0, var1, var2, var3, var4) {
   self setclientomnvar("damage_feedback_nonplayer", 0);
 }
 
-function ref_13d47(var0) {
-  if(!isDefined(level.hitmarkerpriorities[var0])) {
+function ref_13d47(var_0) {
+  if(!isDefined(level.hitmarkerpriorities[var_0])) {
     return 0;
   }
 
-  return level.hitmarkerpriorities[var0];
+  return level.hitmarkerpriorities[var_0];
 }
 
 function waittill_player_isDefined() {
@@ -345,14 +345,14 @@ function ref_13d5e() {
 
 function recentc4vehiclekillcount() {
   if(level.totaltime <= level.trial["tier3"]) {
-    var0 = 3;
+    var_0 = 3;
   } else if(level.totaltime <= level.trial["tier2"]) {
-    var0 = 2;
+    var_0 = 2;
   } else if(level.totaltime <= level.trial["tier1"]) {
-    var0 = 1;
+    var_0 = 1;
   } else {
-    var0 = 0;
+    var_0 = 0;
   }
 
-  return var0;
+  return var_0;
 }

@@ -16,31 +16,31 @@ function whizbythink() {
   self endon("death_or_disconnect");
   level endon("game_ended");
 
-  for(var0 = gettime();; var0 = dowhizby(var1, var0)) {
-    self waittill("bulletwhizby", var1, var2);
+  for(var_0 = gettime();; var_0 = dowhizby(var_1, var_0)) {
+    self waittill("bulletwhizby", var_1, var_2);
   }
 }
 
-function dowhizby(var0, var1) {
-  if(gettime() - var1 > 190 && !scripts\cp\utility::isusingremote() && getDvar("scr_whizby_off") == "") {
-    thread whizbyblurshoweffect(var0);
-    var1 = gettime();
+function dowhizby(var_0, var_1) {
+  if(gettime() - var_1 > 190 && !scripts\cp\utility::isusingremote() && getDvar("scr_whizby_off") == "") {
+    thread whizbyblurshoweffect(var_0);
+    var_1 = gettime();
   }
 
-  var2 = var0 getcurrentweapon();
+  var_2 = var_0 getcurrentweapon();
 
-  if(weaponclass(var2) == "sniper") {
+  if(weaponclass(var_2) == "sniper") {
     scripts\cp\cp_player_battlechatter::trysaylocalsound(self, "flavor_surprise", undefined, 0.2);
   }
 
-  thread scripts\cp\cp_player_battlechatter::addrecentattacker(var0);
-  return var1;
+  thread scripts\cp\cp_player_battlechatter::addrecentattacker(var_0);
+  return var_1;
 }
 
 function dowhizbycleanup() {
-  foreach(var1 in self._whizbyfxent) {
-    if(isalive(var1)) {
-      var1 delete();
+  foreach(var_1 in self._whizbyfxent) {
+    if(isalive(var_1)) {
+      var_1 delete();
     }
   }
 
@@ -50,20 +50,20 @@ function dowhizbycleanup() {
   }
 }
 
-function whizbyblurshoweffect(var0) {
+function whizbyblurshoweffect(var_0) {
   if(getdvarint("scr_suppression", 1) == 1) {
-    var1 = var0 getcurrentweapon();
-    var2 = weaponclass(var1);
+    var_1 = var_0 getcurrentweapon();
+    var_2 = weaponclass(var_1);
 
-    if((var1 hasattachment("linearbrake", 1) || var2 == "mg") && !scripts\cp\utility::iskillstreakweapon(var1) && !scripts\cp\utility::_hasperk("specialty_blastshield")) {
+    if((var_1 hasattachment("linearbrake", 1) || var_2 == "mg") && !scripts\cp\utility::iskillstreakweapon(var_1) && !scripts\cp\utility::_hasperk("specialty_blastshield")) {
       if(!isDefined(self.suppressionmagnitude)) {
         self.suppressionmagnitude = 0;
       }
 
       self notify("whizbyBlur_reset");
-      var3 = self.suppressionmagnitude;
-      self.suppressionmagnitude = clamp(self.suppressionmagnitude + getsuppressionstrength(var2, self, var0), 0, 100);
-      thread whizbyblurrampup(var3, self.suppressionmagnitude);
+      var_3 = self.suppressionmagnitude;
+      self.suppressionmagnitude = clamp(self.suppressionmagnitude + getsuppressionstrength(var_2, self, var_0), 0, 100);
+      thread whizbyblurrampup(var_3, self.suppressionmagnitude);
       return;
     }
 
@@ -71,20 +71,20 @@ function whizbyblurshoweffect(var0) {
   }
 }
 
-function whizbyblurrampup(var0, var1) {
+function whizbyblurrampup(var_0, var_1) {
   self endon("death_or_disconnect");
   self endon("whizbyBlur_reset");
-  var2 = 0.3;
+  var_2 = 0.3;
 
-  while(var0 < var1) {
-    var0 += 20;
-    self earthquakeforplayer(var2, 1.1, self.origin, 100);
-    var2 += 0.1;
+  while(var_0 < var_1) {
+    var_0 += 20;
+    self earthquakeforplayer(var_2, 1.1, self.origin, 100);
+    var_2 += 0.1;
     wait 0.05;
   }
 }
 
-function whizbyblurrampdown(var0, var1) {
+function whizbyblurrampdown(var_0, var_1) {
   self endon("death_or_disconnect");
   self endon("whizbyBlur_reset");
 
@@ -95,25 +95,25 @@ function whizbyblurrampdown(var0, var1) {
       self.suppressionmagnitude = 0;
     }
 
-    var2 = clamp(self.suppressionmagnitude, 0, 100);
+    var_2 = clamp(self.suppressionmagnitude, 0, 100);
     wait 0.2;
   }
 
   self.suppressionmagnitude = 0;
 }
 
-function getsuppressionstrength(var0, var1, var2) {
-  var3 = distance2d(var1.origin, var2.origin);
+function getsuppressionstrength(var_0, var_1, var_2) {
+  var_3 = distance2d(var_1.origin, var_2.origin);
 
-  if(var3 < 1024) {
-    var3 *= 0.25;
+  if(var_3 < 1024) {
+    var_3 *= 0.25;
   }
 
-  switch (var0) {
+  switch (var_0) {
     case "mg":
-      return (10 * var3 / 1024);
+      return (10 * var_3 / 1024);
     case "sniper":
-      return (5 * var3 / 1024);
+      return (5 * var_3 / 1024);
     default:
       return 0;
   }

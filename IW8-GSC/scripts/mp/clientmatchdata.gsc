@@ -13,33 +13,33 @@ function init() {
   level.heavydamageawardlaunchonly = &logplayerdeath;
 }
 
-function canlogclient(var0) {
-  if(isagent(var0)) {
+function canlogclient(var_0) {
+  if(isagent(var_0)) {
     return false;
   }
 
-  return var0.clientid < level.maxlogclients;
+  return var_0.clientid < level.maxlogclients;
 }
 
-function canlogdeath(var0) {
-  return var0 < 300;
+function canlogdeath(var_0) {
+  return var_0 < 300;
 }
 
-function logplayerdeath(var0) {
+function logplayerdeath(var_0) {
   if(getdvarint("MTKSQRQLKN") == 0) {
     return;
   }
 
-  var1 = getclientmatchdata("deathCount");
+  var_1 = getclientmatchdata("deathCount");
 
-  if(!canlogclient(self) || !canlogdeath(var1)) {
+  if(!canlogclient(self) || !canlogdeath(var_1)) {
     return;
   }
 
-  if(isPlayer(var0) && canlogclient(var0)) {
-    self logclientmatchdatadeath(var1, self.clientid, var0, var0.clientid);
+  if(isPlayer(var_0) && canlogclient(var_0)) {
+    self logclientmatchdatadeath(var_1, self.clientid, var_0, var_0.clientid);
     return;
   }
 
-  self logclientmatchdatadeath(var1, self.clientid, undefined, undefined);
+  self logclientmatchdatadeath(var_1, self.clientid, undefined, undefined);
 }

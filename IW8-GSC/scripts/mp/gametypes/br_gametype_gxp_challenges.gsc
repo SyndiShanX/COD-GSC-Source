@@ -3,89 +3,89 @@
  * Script: scripts\mp\gametypes\br_gametype_gxp_challenges.gsc
 ***************************************************************/
 
-function ref_11fef(var0) {
-  ref_12c3a(var0, "t9_ch_common_season_6_wz_event_challenge_6");
+function ref_11fef(var_0) {
+  ref_12c3a(var_0, "t9_ch_common_season_6_wz_event_challenge_6");
 }
 
-function ref_11ff1(var0) {
-  var1 = var0.victim;
-  var2 = var0.attacker;
+function ref_11ff1(var_0) {
+  var_1 = var_0.victim;
+  var_2 = var_0.attacker;
 
-  if(!isDefined(var1) || !isDefined(var2)) {
+  if(!isDefined(var_1) || !isDefined(var_2)) {
     return;
   }
 
-  if(!isPlayer(var2)) {
+  if(!isPlayer(var_2)) {
     return;
   }
 
-  if(var1.team == var2.team) {
+  if(var_1.team == var_2.team) {
     return;
   }
 
-  var3 = var1 scripts\mp\gametypes\br_public::ref_125ec();
-  var4 = var2 scripts\mp\gametypes\br_public::ref_125ec();
+  var_3 = var_1 scripts\mp\gametypes\br_public::ref_125ec();
+  var_4 = var_2 scripts\mp\gametypes\br_public::ref_125ec();
 
-  if(!var4 && !var3) {
-    ref_12c3a(var2, "t9_ch_common_season_6_wz_event_challenge_4");
+  if(!var_4 && !var_3) {
+    ref_12c3a(var_2, "t9_ch_common_season_6_wz_event_challenge_4");
     return;
   }
 
-  if(!var4 && var3) {
-    ref_12c3a(var2, "t9_ch_common_season_6_wz_event_challenge_3");
+  if(!var_4 && var_3) {
+    ref_12c3a(var_2, "t9_ch_common_season_6_wz_event_challenge_3");
     return;
   }
 
-  if(var4 && !var3) {
-    ref_12c3a(var2, "t9_ch_common_season_6_wz_event_challenge_5");
+  if(var_4 && !var_3) {
+    ref_12c3a(var_2, "t9_ch_common_season_6_wz_event_challenge_5");
     return;
   }
 }
 
-function ref_11ff0(var0, var1) {
-  var2 = level.disable_super_in_turret.setsuperisinuse[0].ref_13db4;
-  var3 = var0 scripts\mp\gametypes\br_gxp_fear::remove_flag_trig();
+function ref_11ff0(var_0, var_1) {
+  var_2 = level.disable_super_in_turret.setsuperisinuse[0].ref_13db4;
+  var_3 = var_0 scripts\mp\gametypes\br_gxp_fear::remove_flag_trig();
 
-  if(var3 < var2) {
+  if(var_3 < var_2) {
     return;
   }
 
-  ref_12c3a(var0, "t9_ch_common_season_6_wz_event_challenge_9");
+  ref_12c3a(var_0, "t9_ch_common_season_6_wz_event_challenge_9");
 }
 
-function ref_11fee(var0, var1) {
-  if(!isDefined(var1.id)) {
+function ref_11fee(var_0, var_1) {
+  if(!isDefined(var_1.id)) {
     return;
   }
 
-  if(!isDefined(var0.ref_12e77)) {
-    var0.ref_12e77 = [];
+  if(!isDefined(var_0.ref_12e77)) {
+    var_0.ref_12e77 = [];
   }
 
-  foreach(var3 in var0.ref_12e77) {
-    if(var3 == var1.id) {
+  foreach(var_3 in var_0.ref_12e77) {
+    if(var_3 == var_1.id) {
       return;
     }
   }
 
-  var0.ref_12e77[var0.ref_12e77.size] = var1.id;
-  ref_12c3a(var0, "t9_ch_common_season_6_wz_event_challenge_7");
+  var_0.ref_12e77[var_0.ref_12e77.size] = var_1.id;
+  ref_12c3a(var_0, "t9_ch_common_season_6_wz_event_challenge_7");
 }
 
-function ref_11fd2(var0) {
-  ref_12c3a(var0, "t9_ch_common_season_6_wz_event_challenge_8");
+function ref_11fd2(var_0) {
+  ref_12c3a(var_0, "t9_ch_common_season_6_wz_event_challenge_8");
 }
 
-function ref_12c3a(var0, var1) {
+function ref_12c3a(var_0, var_1) {
   if(!isDefined(level.getallactivequestsforteam) || level.getallactivequestsforteam < 12) {
     return;
   }
 
-  if(!var0 scripts\cp\vehicles\vehicle_compass_cp::challengesenabledforplayer()) {
+  if(!var_0 scripts\cp\vehicles\vehicle_compass_cp::challengesenabledforplayer()) {
     return;
   }
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
@@ -93,5 +93,5 @@ function ref_12c3a(var0, var1) {
     return;
   }
 
-  var0 scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f(var1, 1);
+  var_0 scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f(var_1, 1);
 }

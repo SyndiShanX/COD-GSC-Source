@@ -3,16 +3,16 @@
  * Script: scripts\mp\gametypes\br_asc_locations.gsc
 *****************************************************/
 
-function ref_11e58(var0, var1, var2) {
-  var3 = spawnStruct();
-  var3.name = var0;
-  var3.angles = var1;
-  var3.origin = var2;
-  var3.markingcoldblooded = undefined;
-  return var3;
+function ref_11e58(var_0, var_1, var_2) {
+  var_3 = spawnStruct();
+  var_3.name = var_0;
+  var_3.angles = var_1;
+  var_3.origin = var_2;
+  var_3.markingcoldblooded = undefined;
+  return var_3;
 }
 
 function stoppingpower_watchhcrammodrain() {
-  var0 = [];
-  level.canparachutebecut.canplaycircleclosedialog = var0;
+  var_0 = [];
+  level.canparachutebecut.canplaycircleclosedialog = var_0;
 }

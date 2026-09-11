@@ -4,23 +4,23 @@
 ******************************************************/
 
 function init() {
-  var0 = getdvarint("scr_br_sabotage_award_carpoc_jeep", 0) == 1;
+  var_0 = getdvarint("scr_br_sabotage_award_carpoc_jeep", 0) == 1;
 
-  if(getdvarint("scr_br_sabotage_award_truck", 1) == 1 || var0) {
-    scripts\mp\gametypes\br_gametype_truckwar::stoppingpower_givehcrdata(var0);
+  if(getdvarint("scr_br_sabotage_award_truck", 1) == 1 || var_0) {
+    scripts\mp\gametypes\br_gametype_truckwar::stoppingpower_givehcrdata(var_0);
     scripts\mp\gametypes\br_gametype_truckwar::stoppingpower_loadoutchangeremovehcr();
     level thread scripts\mp\gametypes\br_gametype_truckwar::ref_13df8();
   }
 
-  var1 = scripts\mp\gametypes\br_quest_util::registerquestcategory("sabotage", 1);
+  var_1 = scripts\mp\gametypes\br_quest_util::registerquestcategory("sabotage", 1);
 
-  if(!var1) {
+  if(!var_1) {
     return;
   }
 
-  var1 = scripts\mp\gametypes\br_quest_util::registerquestcategory("sabotage_redacted", 1);
+  var_1 = scripts\mp\gametypes\br_quest_util::registerquestcategory("sabotage_redacted", 1);
 
-  if(var1) {
+  if(var_1) {
     scripts\mp\gametypes\br_quest_util::ref_12b2a("sabotage_redacted", "brloot_redacted_sabotage_tablet");
   }
 
@@ -41,168 +41,168 @@ function init() {
   scripts\mp\gametypes\br_quest_util::ref_12b31("sabotage", &ref_12e45);
 }
 
-function takequestitem(var0) {
-  var1 = scripts\mp\gametypes\br_quest_util::createquestinstance("sabotage", self.team, var0.index, var0);
-  var1 scripts\mp\gametypes\br_quest_util::registerteamonquest(self.team, self);
-  var2 = "";
+function takequestitem(var_0) {
+  var_1 = scripts\mp\gametypes\br_quest_util::createquestinstance("sabotage", self.team, var_0.index, var_0);
+  var_1 scripts\mp\gametypes\br_quest_util::registerteamonquest(self.team, self);
+  var_2 = "";
 
-  if(var0.type == "brloot_redacted_sabotage_tablet") {
-    var2 = "_redacted";
+  if(var_0.type == "brloot_redacted_sabotage_tablet") {
+    var_2 = "_redacted";
   }
 
-  var1.modifier = var2;
+  var_1.modifier = var_2;
   scripts\mp\gametypes\br_quest_util::searchfunc(self.team, "br_mission_pickup_tablet");
-  var1.team = self.team;
-  var1.semtex_stuckplayer = self;
-  var1.playerlist = scripts\mp\utility\teams::getteamdata(self.team, "players");
-  var1.ŽK / ÃsˆE÷£ èûË = 1;
-  var3 = ref_12e41();
-  var4 = ref_12e4c(var1, var3);
-  var1.ref_14261 = sortbydistance(var4[0], var1.semtex_stuckplayer.origin);
-  var1.ref_1426a = sortbydistance(var4[1], var1.semtex_stuckplayer.origin);
+  var_1.team = self.team;
+  var_1.semtex_stuckplayer = self;
+  var_1.playerlist = scripts\mp\utility\teams::getteamdata(self.team, "players");
+  var_1.ŽK / ÃsˆE÷£ èûË = 1;
+  var_3 = ref_12e41();
+  var_4 = ref_12e4c(var_1, var_3);
+  var_1.ref_14261 = sortbydistance(var_4[0], var_1.semtex_stuckplayer.origin);
+  var_1.ref_1426a = sortbydistance(var_4[1], var_1.semtex_stuckplayer.origin);
 
-  if(isDefined(var1.ref_14261)) {
-    if(var1.ref_14261.size > 0) {
-      for(var5 = 0; var5 < var1.ref_14261.size; var5++) {
-        if(isDefined(var1.ref_14261[var5].ref_13aad)) {
-          if(var1.ref_14261[var5].ref_13aad != var1.semtex_stuckplayer.team && var1.ref_14261[var5].occupants.size > 0) {
-            var6 = 0;
+  if(isDefined(var_1.ref_14261)) {
+    if(var_1.ref_14261.size > 0) {
+      for(var_5 = 0; var_5 < var_1.ref_14261.size; var_5++) {
+        if(isDefined(var_1.ref_14261[var_5].ref_13aad)) {
+          if(var_1.ref_14261[var_5].ref_13aad != var_1.semtex_stuckplayer.team && var_1.ref_14261[var_5].occupants.size > 0) {
+            var_6 = 0;
 
-            for(var7 = 0; var7 < scripts\mp\gametypes\br_quest_util::getquestdata("sabotage").ref_13a76.size; var7++) {
-              if(scripts\mp\gametypes\br_quest_util::getquestdata("sabotage").ref_13a76[var7] == var1.ref_14261[var5]) {
-                var6 = 1;
+            for(var_7 = 0; var_7 < scripts\mp\gametypes\br_quest_util::getquestdata("sabotage").ref_13a76.size; var_7++) {
+              if(scripts\mp\gametypes\br_quest_util::getquestdata("sabotage").ref_13a76[var_7] == var_1.ref_14261[var_5]) {
+                var_6 = 1;
                 break;
               }
             }
 
-            if(!var6) {
-              var1.ref_13a92 = var1.ref_14261[var5];
+            if(!var_6) {
+              var_1.ref_13a92 = var_1.ref_14261[var_5];
             }
           }
         }
 
-        if(!isDefined(var1.ref_13a92)) {
-          var6 = 0;
+        if(!isDefined(var_1.ref_13a92)) {
+          var_6 = 0;
 
-          for(var7 = 0; var7 < scripts\mp\gametypes\br_quest_util::getquestdata("sabotage").ref_13a76.size; var7++) {
-            if(scripts\mp\gametypes\br_quest_util::getquestdata("sabotage").ref_13a76[var7] == var1.ref_14261[var5]) {
-              var6 = 1;
+          for(var_7 = 0; var_7 < scripts\mp\gametypes\br_quest_util::getquestdata("sabotage").ref_13a76.size; var_7++) {
+            if(scripts\mp\gametypes\br_quest_util::getquestdata("sabotage").ref_13a76[var_7] == var_1.ref_14261[var_5]) {
+              var_6 = 1;
               break;
             }
           }
 
-          if(!var6) {
-            var1.ref_13a92 = var1.ref_14261[var5];
+          if(!var_6) {
+            var_1.ref_13a92 = var_1.ref_14261[var_5];
           }
         }
       }
     }
   }
 
-  if(isDefined(var1.ref_1426a)) {
-    if(var1.ref_1426a.size > 0) {
-      for(var5 = var1.ref_1426a.size - 1; var5 >= 0; var5--) {
-        if(isDefined(var1.ref_1426a[var5].ref_13aad)) {
-          if(var1.ref_1426a[var5].ref_13aad != var1.semtex_stuckplayer.team && var1.ref_1426a[var5].occupants.size > 0) {
-            var6 = 0;
+  if(isDefined(var_1.ref_1426a)) {
+    if(var_1.ref_1426a.size > 0) {
+      for(var_5 = var_1.ref_1426a.size - 1; var_5 >= 0; var_5--) {
+        if(isDefined(var_1.ref_1426a[var_5].ref_13aad)) {
+          if(var_1.ref_1426a[var_5].ref_13aad != var_1.semtex_stuckplayer.team && var_1.ref_1426a[var_5].occupants.size > 0) {
+            var_6 = 0;
 
-            for(var7 = 0; var7 < scripts\mp\gametypes\br_quest_util::getquestdata("sabotage").ref_13a76.size; var7++) {
-              if(scripts\mp\gametypes\br_quest_util::getquestdata("sabotage").ref_13a76[var7] == var1.ref_1426a[var5]) {
-                var6 = 1;
+            for(var_7 = 0; var_7 < scripts\mp\gametypes\br_quest_util::getquestdata("sabotage").ref_13a76.size; var_7++) {
+              if(scripts\mp\gametypes\br_quest_util::getquestdata("sabotage").ref_13a76[var_7] == var_1.ref_1426a[var_5]) {
+                var_6 = 1;
                 break;
               }
             }
 
-            if(!var6) {
-              var1.ref_13a92 = var1.ref_1426a[var5];
+            if(!var_6) {
+              var_1.ref_13a92 = var_1.ref_1426a[var_5];
             }
           }
         }
 
-        if(!isDefined(var1.ref_13a92)) {
-          var6 = 0;
+        if(!isDefined(var_1.ref_13a92)) {
+          var_6 = 0;
 
-          for(var7 = 0; var7 < scripts\mp\gametypes\br_quest_util::getquestdata("sabotage").ref_13a76.size; var7++) {
-            if(scripts\mp\gametypes\br_quest_util::getquestdata("sabotage").ref_13a76[var7] == var1.ref_1426a[var5]) {
-              var6 = 1;
+          for(var_7 = 0; var_7 < scripts\mp\gametypes\br_quest_util::getquestdata("sabotage").ref_13a76.size; var_7++) {
+            if(scripts\mp\gametypes\br_quest_util::getquestdata("sabotage").ref_13a76[var_7] == var_1.ref_1426a[var_5]) {
+              var_6 = 1;
               break;
             }
           }
 
-          if(!var6) {
-            var1.ref_13a92 = var1.ref_1426a[var5];
+          if(!var_6) {
+            var_1.ref_13a92 = var_1.ref_1426a[var_5];
           }
         }
       }
     }
   }
 
-  var1 scripts\mp\gametypes\br_quest_util::init_tape_machine_animations("ui_mp_br_mapmenu_icon_sabotage_objective_enemy", "active");
-  ref_12e3f(var1);
-  var1 scripts\mp\gametypes\br_quest_util::ref_1297d(getdvarint("scr_br_sabotage_questTimeBase", 180), 4);
-  scripts\mp\gametypes\br_quest_util::addquestinstance("sabotage", var1);
+  var_1 scripts\mp\gametypes\br_quest_util::init_tape_machine_animations("ui_mp_br_mapmenu_icon_sabotage_objective_enemy", "active");
+  ref_12e3f(var_1);
+  var_1 scripts\mp\gametypes\br_quest_util::ref_1297d(getdvarint("scr_br_sabotage_questTimeBase", 180), 4);
+  scripts\mp\gametypes\br_quest_util::addquestinstance("sabotage", var_1);
   scripts\mp\gametypes\br_quest_util::ref_13879("sabotage", self, self.team);
-  var8 = spawnStruct();
-  var8.excludedplayers = [];
-  var8.excludedplayers[0] = self;
-  var8.ogangles = [];
-  var8.ogangles[0] = var1.team;
-  var8.ref_127d5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("sabotage", scripts\mp\gametypes\br_quest_util::ringing(self.team), var1.modifier);
-  scripts\mp\gametypes\br_quest_util::displayteamsplash(var1.team, "br_sabotage_quest_start_team", var8);
-  scripts\mp\gametypes\br_quest_util::displayplayersplash(var1.semtex_stuckplayer, "br_sabotage_quest_start_tablet_finder", var8);
-  level thread scripts\mp\gametypes\br_public::dmztut_luicallback("sabotage_accept", var1.team, 1, 0.5);
+  var_8 = spawnStruct();
+  var_8.excludedplayers = [];
+  var_8.excludedplayers[0] = self;
+  var_8.ogangles = [];
+  var_8.ogangles[0] = var_1.team;
+  var_8.ref_127d5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("sabotage", scripts\mp\gametypes\br_quest_util::ringing(self.team), var_1.modifier);
+  scripts\mp\gametypes\br_quest_util::displayteamsplash(var_1.team, "br_sabotage_quest_start_team", var_8);
+  scripts\mp\gametypes\br_quest_util::displayplayersplash(var_1.semtex_stuckplayer, "br_sabotage_quest_start_tablet_finder", var_8);
+  level thread scripts\mp\gametypes\br_public::dmztut_luicallback("sabotage_accept", var_1.team, 1, 0.5);
 
-  if(isDefined(var1.ref_13a92)) {
-    scripts\mp\gametypes\br_quest_util::getquestdata("sabotage").ref_13a76[scripts\mp\gametypes\br_quest_util::getquestdata("sabotage").ref_13a76.size] = var1.ref_13a92;
-    var1.ref_13a92.ref_12970 = var1;
-    var1.ref_13a92.center_node = [];
+  if(isDefined(var_1.ref_13a92)) {
+    scripts\mp\gametypes\br_quest_util::getquestdata("sabotage").ref_13a76[scripts\mp\gametypes\br_quest_util::getquestdata("sabotage").ref_13a76.size] = var_1.ref_13a92;
+    var_1.ref_13a92.ref_12970 = var_1;
+    var_1.ref_13a92.center_node = [];
     return;
   }
 
-  ref_12e49(var1, 1);
+  ref_12e49(var_1, 1);
 }
 
 function ref_12e3f() {
   objective_addalltomask(self.objectiveiconid);
-  var0 = scripts\mp\gametypes\br_quest_util::sortvalidplayersinarray(self.playerlist);
+  var_0 = scripts\mp\gametypes\br_quest_util::sortvalidplayersinarray(self.playerlist);
 
-  foreach(var2 in var0["valid"]) {
-    var2 scripts\mp\gametypes\br_quest_util::uiobjectiveshow("sabotage" + self.modifier);
-    scripts\mp\gametypes\br_quest_util::ref_1336c(var2);
+  foreach(var_2 in var_0["valid"]) {
+    var_2 scripts\mp\gametypes\br_quest_util::uiobjectiveshow("sabotage" + self.modifier);
+    scripts\mp\gametypes\br_quest_util::ref_1336c(var_2);
   }
 
-  foreach(var2 in var0["invalid"]) {
-    var2 scripts\mp\gametypes\br_quest_util::uiobjectivehide();
-    scripts\mp\gametypes\br_quest_util::spawn_downed_friendly(var2);
+  foreach(var_2 in var_0["invalid"]) {
+    var_2 scripts\mp\gametypes\br_quest_util::uiobjectivehide();
+    scripts\mp\gametypes\br_quest_util::spawn_downed_friendly(var_2);
   }
 }
 
-function ref_12e46(var0, var1) {
-  ref_12e48(var1, var0);
+function ref_12e46(var_0, var_1) {
+  ref_12e48(var_1, var_0);
 }
 
-function ref_12e47(var0) {
-  ref_12e48(var0);
+function ref_12e47(var_0) {
+  ref_12e48(var_0);
 }
 
-function ref_12e43(var0) {
-  ref_12e3e(var0);
+function ref_12e43(var_0) {
+  ref_12e3e(var_0);
 }
 
-function ref_12e44(var0) {
-  if(var0.team == self.team) {
-    ref_12e40(var0);
-    scripts\mp\gametypes\br_quest_util::ref_1336c(var0);
+function ref_12e44(var_0) {
+  if(var_0.team == self.team) {
+    ref_12e40(var_0);
+    scripts\mp\gametypes\br_quest_util::ref_1336c(var_0);
     return;
   }
 
-  scripts\mp\gametypes\br_quest_util::spawn_downed_friendly(var0);
+  scripts\mp\gametypes\br_quest_util::spawn_downed_friendly(var_0);
 }
 
-function ref_12e48(var0, var1) {
-  if(var0.team == self.team) {
-    ref_12e3e(var0);
-    scripts\mp\gametypes\br_quest_util::spawn_downed_friendly(var0);
+function ref_12e48(var_0, var_1) {
+  if(var_0.team == self.team) {
+    ref_12e3e(var_0);
+    scripts\mp\gametypes\br_quest_util::spawn_downed_friendly(var_0);
     return;
   }
 }
@@ -220,39 +220,39 @@ function ref_12e4b() {
   scripts\mp\gametypes\br_quest_util::releaseteamonquest(self.team);
 }
 
-function ref_12e40(var0) {
-  var0 scripts\mp\gametypes\br_quest_util::uiobjectiveshow("sabotage" + self.modifier);
-  scripts\mp\gametypes\br_quest_util::ref_1336c(var0);
+function ref_12e40(var_0) {
+  var_0 scripts\mp\gametypes\br_quest_util::uiobjectiveshow("sabotage" + self.modifier);
+  scripts\mp\gametypes\br_quest_util::ref_1336c(var_0);
 }
 
-function ref_12e3e(var0) {
-  var0 scripts\mp\gametypes\br_quest_util::uiobjectivehide();
-  scripts\mp\gametypes\br_quest_util::spawn_downed_friendly(var0);
+function ref_12e3e(var_0) {
+  var_0 scripts\mp\gametypes\br_quest_util::uiobjectivehide();
+  scripts\mp\gametypes\br_quest_util::spawn_downed_friendly(var_0);
 }
 
 function ref_12e3d() {
-  foreach(var1 in scripts\mp\utility\teams::getteamdata(self.team, "players")) {
-    ref_12e3e(var1);
+  foreach(var_1 in scripts\mp\utility\teams::getteamdata(self.team, "players")) {
+    ref_12e3e(var_1);
   }
 
   scripts\mp\gametypes\br_quest_util::lastdropedtime();
 }
 
-function ref_12e49(var0) {
+function ref_12e49(var_0) {
   wait 2;
   self.ref_12d2d = "_poached";
-  var1 = spawnStruct();
-  var2 = scripts\mp\gametypes\br_quest_util::ringing(self.team);
-  var3 = scripts\mp\gametypes\br_quest_util::getquestindex("sabotage");
-  var4 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("sabotage", self.ref_12d2d, self.modifier));
-  var5 = scripts\mp\gametypes\br_alt_mode_bblitz::clear_all_remaining(self.semtex_stuckplayer);
-  var1.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var3, var2, var4, undefined, var5);
+  var_1 = spawnStruct();
+  var_2 = scripts\mp\gametypes\br_quest_util::ringing(self.team);
+  var_3 = scripts\mp\gametypes\br_quest_util::getquestindex("sabotage");
+  var_4 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("sabotage", self.ref_12d2d, self.modifier));
+  var_5 = scripts\mp\gametypes\br_alt_mode_bblitz::clear_all_remaining(self.semtex_stuckplayer);
+  var_1.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var_3, var_2, var_4, undefined, var_5);
 
-  if(var0) {
-    scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_sabotage_quest_novehicle", var1);
+  if(var_0) {
+    scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_sabotage_quest_novehicle", var_1);
     level thread scripts\mp\gametypes\br_public::dmztut_luicallback("sabotage_fail", self.team, 1);
   } else {
-    scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_sabotage_quest_poached", var1);
+    scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_sabotage_quest_poached", var_1);
     level thread scripts\mp\gametypes\br_public::dmztut_luicallback("sabotage_fail", self.team, 1);
   }
 
@@ -263,13 +263,13 @@ function ref_12e49(var0) {
 }
 
 function ref_12e3b() {
-  var0 = spawnStruct();
-  var1 = scripts\mp\gametypes\br_quest_util::ringing(self.team);
-  var2 = scripts\mp\gametypes\br_quest_util::getquestindex("sabotage" + self.modifier);
-  var3 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("sabotage", self.modifier));
-  var4 = scripts\mp\gametypes\br_alt_mode_bblitz::clear_all_remaining(self.semtex_stuckplayer);
-  var0.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var2, var1, var3, undefined, var4);
-  scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_sabotage_quest_complete", var0);
+  var_0 = spawnStruct();
+  var_1 = scripts\mp\gametypes\br_quest_util::ringing(self.team);
+  var_2 = scripts\mp\gametypes\br_quest_util::getquestindex("sabotage" + self.modifier);
+  var_3 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("sabotage", self.modifier));
+  var_4 = scripts\mp\gametypes\br_alt_mode_bblitz::clear_all_remaining(self.semtex_stuckplayer);
+  var_0.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var_2, var_1, var_3, undefined, var_4);
+  scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_sabotage_quest_complete", var_0);
   level thread scripts\mp\gametypes\br_public::dmztut_luicallback("sabotage_success", self.team, 1);
   self.ref_12d2d = undefined;
   self.ref_12d2e = (0, 0, 0);
@@ -277,68 +277,68 @@ function ref_12e3b() {
   self.result = "success";
 
   if(getdvarint("scr_br_sabotage_award_truck", 1) == 1 || getdvarint("scr_br_sabotage_award_carpoc_jeep", 0) == 1) {
-    var5 = sabotage_truck_check_roof(self.ref_13a92.origin, self.ref_13a92);
-    var6 = self.ref_13a92;
+    var_5 = sabotage_truck_check_roof(self.ref_13a92.origin, self.ref_13a92);
+    var_6 = self.ref_13a92;
 
-    if(isDefined(var5) && var5.size > 0) {
-      var6.origin = var5["position"] + (0, 0, 6);
+    if(isDefined(var_5) && var_5.size > 0) {
+      var_6.origin = var_5["position"] + (0, 0, 6);
     } else {
-      var6.origin = getclosestpointonnavmesh(var6.origin);
+      var_6.origin = getclosestpointonnavmesh(var_6.origin);
     }
 
-    var7 = getvehiclespawnStruct(var6);
-    sabotage_spawnVehicle(var6, var7);
+    var_7 = getvehiclespawnStruct(var_6);
+    sabotage_spawnVehicle(var_6, var_7);
   }
 
   thread scripts\mp\gametypes\br_quest_util::removequestinstance();
 }
 
-function getvehiclespawnStruct(var0) {
-  var1 = spawn("script_model", var0.origin);
-  var1 setModel("ks_airdrop_crate_br");
-  var1 setscriptablepartstate("smoke_signal", "on", 0);
-  var2 = 17;
+function getvehiclespawnStruct(var_0) {
+  var_1 = spawn("script_model", var_0.origin);
+  var_1 setModel("ks_airdrop_crate_br");
+  var_1 setscriptablepartstate("smoke_signal", "on", 0);
+  var_2 = 17;
 
   if(getdvarint("scr_br_sabotage_award_carpoc_jeep", 0) == 1) {
-    var2 = 19;
+    var_2 = 19;
   }
 
-  var1 scripts\mp\gametypes\br_quest_util::init_tactical_boxes(11, var2, 2, var0.origin);
-  var1 scripts\mp\gametypes\br_quest_util::ref_1316f(1150);
-  var1 scripts\mp\gametypes\br_quest_util::ref_13369();
-  var1.location = var0;
-  return var1;
+  var_1 scripts\mp\gametypes\br_quest_util::init_tactical_boxes(11, var_2, 2, var_0.origin);
+  var_1 scripts\mp\gametypes\br_quest_util::ref_1316f(1150);
+  var_1 scripts\mp\gametypes\br_quest_util::ref_13369();
+  var_1.location = var_0;
+  return var_1;
 }
 
-function sabotage_spawnVehicle(var0, var1) {
-  var2 = spawnStruct();
-  var2.origin = var0.origin + (0, 0, 50000);
-  var3 = getrewardvehicle(var2);
+function sabotage_spawnVehicle(var_0, var_1) {
+  var_2 = spawnStruct();
+  var_2.origin = var_0.origin + (0, 0, 50000);
+  var_3 = getrewardvehicle(var_2);
 
-  if(isDefined(var3)) {
-    var4 = (0, var1.location.angles[1], 0);
-    level thread scripts\mp\gametypes\br_gametype_truckwar::ref_13de4(var3, var1.location.origin, var4, 1);
-    var1 scripts\mp\gametypes\br_quest_util::spawn_double_cargo();
-    thread scripts\mp\gametypes\br_publicevent_armoredtruck::ref_14235(var3, var1);
+  if(isDefined(var_3)) {
+    var_4 = (0, var_1.location.angles[1], 0);
+    level thread scripts\mp\gametypes\br_gametype_truckwar::ref_13de4(var_3, var_1.location.origin, var_4, 1);
+    var_1 scripts\mp\gametypes\br_quest_util::spawn_double_cargo();
+    thread scripts\mp\gametypes\br_publicevent_armoredtruck::ref_14235(var_3, var_1);
     return;
   }
 }
 
-function getrewardvehicle(var0, var1) {
+function getrewardvehicle(var_0, var_1) {
   if(getdvarint("scr_br_sabotage_award_carpoc_jeep", 0) == 1) {
-    if(!isDefined(var0.angles)) {
-      var0.angles = (0, randomfloat(360), 0);
+    if(!isDefined(var_0.angles)) {
+      var_0.angles = (0, randomfloat(360), 0);
     }
 
-    var2 = spawnStruct();
-    var2.origin = var0.origin;
-    var2.angles = var0.angles;
-    var2.spawntype = "GAME_MODE";
-    var2.showheadicon = 1;
-    return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("open_jeep_carpoc", var2, var1);
+    var_2 = spawnStruct();
+    var_2.origin = var_0.origin;
+    var_2.angles = var_0.angles;
+    var_2.spawntype = "GAME_MODE";
+    var_2.showheadicon = 1;
+    return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("open_jeep_carpoc", var_2, var_1);
   }
 
-  return scripts\mp\gametypes\br_gametype_truckwar::ref_14263(var1);
+  return scripts\mp\gametypes\br_gametype_truckwar::ref_14263(var_1);
 }
 
 function ref_12e3c() {
@@ -362,46 +362,46 @@ function ref_12e4a() {
 }
 
 function ref_12e41() {
-  var0 = [];
-  var1 = scripts\mp\gametypes\br_circle::getdangercircleorigin();
-  var2 = scripts\mp\gametypes\br_circle::getdangercircleradius();
+  var_0 = [];
+  var_1 = scripts\mp\gametypes\br_circle::getdangercircleorigin();
+  var_2 = scripts\mp\gametypes\br_circle::getdangercircleradius();
 
-  foreach(var4 in level.vehicle.instances) {
-    foreach(var6 in var4) {
-      if(isDefined(var6)) {
-        if(isDefined(var6.name)) {
-          if(var6.name == "convoy_truck") {
+  foreach(var_4 in level.vehicle.instances) {
+    foreach(var_6 in var_4) {
+      if(isDefined(var_6)) {
+        if(isDefined(var_6.name)) {
+          if(var_6.name == "convoy_truck") {
             continue;
           }
         }
 
-        if(distance2d(var6.origin, var1) >= var2 && var2 > 0) {
+        if(distance2d(var_6.origin, var_1) >= var_2 && var_2 > 0) {
           continue;
         }
 
-        if(istrue(var6.isdestroyed)) {
+        if(istrue(var_6.isdestroyed)) {
           continue;
         }
 
-        var0 = var6;
+        var_0 = var_6;
       }
     }
   }
 
-  return var0;
+  return var_0;
 }
 
-function ref_12e4c(var0) {
-  var1 = [];
+function ref_12e4c(var_0) {
+  var_1 = [];
   GscBinSkip0(0x2e, 0, []);
 }
 
-function sabotage_isvehicleincircle(var0) {
-  var1 = scripts\mp\gametypes\br_circle::getdangercircleorigin();
-  var2 = scripts\mp\gametypes\br_circle::getdangercircleradius();
+function sabotage_isvehicleincircle(var_0) {
+  var_1 = scripts\mp\gametypes\br_circle::getdangercircleorigin();
+  var_2 = scripts\mp\gametypes\br_circle::getdangercircleradius();
 
-  if(isDefined(var0)) {
-    if(distance2d(var0.origin, var1) >= var2 && var2 > 0) {
+  if(isDefined(var_0)) {
+    if(distance2d(var_0.origin, var_1) >= var_2 && var_2 > 0) {
       return false;
     } else {
       return true;
@@ -411,32 +411,32 @@ function sabotage_isvehicleincircle(var0) {
   return false;
 }
 
-function ref_12e42(var0, var1) {
+function ref_12e42(var_0, var_1) {
   level endon("game_ended");
 
-  if(isDefined(var1.ŽK / ÃsˆE÷£ èûË)) {
-    if(var1.ŽK / ÃsˆE÷£ èûË == 1) {
-      if(isDefined(var0.center_node)) {
-        var2 = 0;
+  if(isDefined(var_1.ŽK / ÃsˆE÷£ èûË)) {
+    if(var_1.ŽK / ÃsˆE÷£ èûË == 1) {
+      if(isDefined(var_0.center_node)) {
+        var_2 = 0;
 
-        for(var3 = var0.center_node.size - 1; var3 >= 0; var3--) {
-          if(var2 >= getdvarint("scr_sabotage_attacker_buffer", 3)) {
+        for(var_3 = var_0.center_node.size - 1; var_3 >= 0; var_3--) {
+          if(var_2 >= getdvarint("scr_sabotage_attacker_buffer", 3)) {
             break;
           }
 
-          if(var0.center_node[var3].team == var1.semtex_stuckplayer.team) {
-            ref_12e3b(var1);
+          if(var_0.center_node[var_3].team == var_1.semtex_stuckplayer.team) {
+            ref_12e3b(var_1);
             return;
           }
 
-          var2++;
+          var_2++;
         }
 
-        ref_12e49(var1, 0);
+        ref_12e49(var_1, 0);
         return;
       }
 
-      sabotage_circle_fail(var1);
+      sabotage_circle_fail(var_1);
       return;
     }
 
@@ -444,17 +444,17 @@ function ref_12e42(var0, var1) {
   }
 }
 
-function sabotage_circle_fail(var0) {
-  level thread scripts\mp\gametypes\br_public::dmztut_luicallback("sabotage_circle_consumed", var0.team, 1);
-  scripts\mp\gametypes\br_quest_util::displayteamsplash(var0.team, "br_sabotage_quest_circle_failure");
-  ref_12e3c(var0);
+function sabotage_circle_fail(var_0) {
+  level thread scripts\mp\gametypes\br_public::dmztut_luicallback("sabotage_circle_consumed", var_0.team, 1);
+  scripts\mp\gametypes\br_quest_util::displayteamsplash(var_0.team, "br_sabotage_quest_circle_failure");
+  ref_12e3c(var_0);
 }
 
-function sabotage_truck_check_roof(var0, var1) {
-  var2 = var0 + (0, 0, getdvarint("scr_sabotage_truck_drop_max_check_Height", 3937));
-  var3 = var0 + (0, 0, 10);
-  var4 = [var1];
-  var5 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_sky"]);
-  var6 = scripts\mp\gametypes\br_public::modifytriggerlocation(var2, 0, -100000, var5, var4);
-  return var6;
+function sabotage_truck_check_roof(var_0, var_1) {
+  var_2 = var_0 + (0, 0, getdvarint("scr_sabotage_truck_drop_max_check_Height", 3937));
+  var_3 = var_0 + (0, 0, 10);
+  var_4 = [var_1];
+  var_5 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_sky"]);
+  var_6 = scripts\mp\gametypes\br_public::modifytriggerlocation(var_2, 0, -100000, var_5, var_4);
+  return var_6;
 }

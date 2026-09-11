@@ -31,9 +31,9 @@ function airdrop_registerscoreinfo() {
 }
 
 function airdrop_registeractionset() {
-  var0 = getdvarint("scr_airDrop_use_weapon", 1);
+  var_0 = getdvarint("scr_airDrop_use_weapon", 1);
 
-  if(var0) {
+  if(var_0) {
     scripts\mp\playeractions::registeractionset("crateUse", ["offhand_weapons", "fire", "melee", "weapon_switch", "killstreaks", "supers"]);
     scripts\mp\playeractions::registeractionset("juggCrateUse", ["offhand_weapons", "weapon", "killstreaks", "supers"]);
     return;
@@ -42,74 +42,74 @@ function airdrop_registeractionset() {
   scripts\mp\playeractions::registeractionset("crateUse", ["offhand_weapons", "weapon", "killstreaks", "supers"]);
 }
 
-function airdrop_updateuiprogress(var0, var1) {
-  scripts\mp\gameobjects::updateuiprogress(var0, var1);
+function airdrop_updateuiprogress(var_0, var_1) {
+  scripts\mp\gameobjects::updateuiprogress(var_0, var_1);
 }
 
-function airdrop_allowactionset(var0, var1) {
-  scripts\mp\playeractions::allowactionset(var0, var1);
+function airdrop_allowactionset(var_0, var_1) {
+  scripts\mp\playeractions::allowactionset(var_0, var_1);
 }
 
-function airdrop_unresolvedcollisionnearestnode(var0, var1, var2) {
-  childthread scripts\mp\movers::unresolved_collision_nearest_node(var0, var1, var2);
+function airdrop_unresolvedcollisionnearestnode(var_0, var_1, var_2) {
+  childthread scripts\mp\movers::unresolved_collision_nearest_node(var_0, var_1, var_2);
 }
 
-function airdrop_awardkillstreak(var0, var1, var2) {
+function airdrop_awardkillstreak(var_0, var_1, var_2) {
   if(level.gametype == "grnd" || level.gametype == "infect") {
-    var3 = 0;
-    var4 = 0;
-    var5 = var1;
+    var_3 = 0;
+    var_4 = 0;
+    var_5 = var_1;
   } else {
-    var3 = var5.streakinfo.mpstreaksysteminfo.streaklifeid;
-    var4 = var5.streakinfo.mpstreaksysteminfo.ref_13913;
-    var5 = var5.streakinfo.owner;
+    var_3 = var_5.streakinfo.mpstreaksysteminfo.streaklifeid;
+    var_4 = var_5.streakinfo.mpstreaksysteminfo.ref_13913;
+    var_5 = var_5.streakinfo.owner;
   }
 
-  thread scripts\mp\killstreaks\killstreaks::awardkillstreak(var3, "carepackage", var3, var4, var5);
+  thread scripts\mp\killstreaks\killstreaks::awardkillstreak(var_3, "carepackage", var_3, var_4, var_5);
   scripts\mp\utility\stats::incpersstat("carepackagesCaptured", 1);
 }
 
-function airdrop_showkillstreaksplash(var0, var1, var2) {
-  scripts\mp\hud_message::showkillstreaksplash(var0, var1, var2);
+function airdrop_showkillstreaksplash(var_0, var_1, var_2) {
+  scripts\mp\hud_message::showkillstreaksplash(var_0, var_1, var_2);
 }
 
-function airdrop_gettargetmarker(var0) {
-  return scripts\mp\killstreaks\target_marker::gettargetmarker(var0);
+function airdrop_gettargetmarker(var_0) {
+  return scripts\mp\killstreaks\target_marker::gettargetmarker(var_0);
 }
 
-function airdrop_airdropmultipledropcrates(var0, var1, var2, var3, var4, var5) {
-  return scripts\cp_mp\killstreaks\airdrop_multiple::airdrop_multiple_dropcrates(var0, var1, var2, var3, var4, var5);
+function airdrop_airdropmultipledropcrates(var_0, var_1, var_2, var_3, var_4, var_5) {
+  return scripts\cp_mp\killstreaks\airdrop_multiple::airdrop_multiple_dropcrates(var_0, var_1, var_2, var_3, var_4, var_5);
 }
 
-function airdrop_outlinedisable(var0, var1) {
-  scripts\mp\utility\outline::outlinedisable(var0, var1);
+function airdrop_outlinedisable(var_0, var_1) {
+  scripts\mp\utility\outline::outlinedisable(var_0, var_1);
 }
 
 function airdrop_capturelootcachecallback() {
   return &scripts\mp\gametypes\plunder::capturelootcachecallback;
 }
 
-function airdrop_iskillstreakblockedforbots(var0) {
-  return scripts\mp\bots\bots_killstreaks::iskillstreakblockedforbots(var0);
+function airdrop_iskillstreakblockedforbots(var_0) {
+  return scripts\mp\bots\bots_killstreaks::iskillstreakblockedforbots(var_0);
 }
 
-function airdrop_botiskillstreaksupported(var0) {
-  return scripts\mp\bots\bots_killstreaks::bot_is_killstreak_supported(var0);
+function airdrop_botiskillstreaksupported(var_0) {
+  return scripts\mp\bots\bots_killstreaks::bot_is_killstreak_supported(var_0);
 }
 
-function br_armor_plate_broken_remove(var0) {
-  var1 = "juggernaut";
-  var2 = scripts\mp\killstreaks\killstreaks::createstreakitemstruct(var1);
-  var2.madeavailabletime = scripts\mp\matchdata::gettimefrommatchstart(gettime());
-  var2.streaklifeid = self.lifeid;
-  var2.ref_13913 = self.matchdatalifeindex;
-  var2.owner = self;
-  var2.ref_121b0 = self getxuid();
-  var2.attackerisinflictor = scripts\mp\matchdata::gettimefrommatchstart(gettime());
-  scripts\mp\analyticslog::logevent_killstreakactivated(self, var2.streaklifeid, var2.streakname, var2.isgimme, var2.attackerisinflictor, self.origin);
-  scripts\mp\killstreaks\killstreaks::combatrecordkillstreakuse(var1);
-  scripts\mp\utility\dialog::playkillstreakusedialog(var1);
-  var3 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo(var1, self);
-  var3.mpstreaksysteminfo = var2;
-  scripts\cp_mp\killstreaks\juggernaut::tryusejuggernautfromstruct(var3, var0);
+function br_armor_plate_broken_remove(var_0) {
+  var_1 = "juggernaut";
+  var_2 = scripts\mp\killstreaks\killstreaks::createstreakitemstruct(var_1);
+  var_2.madeavailabletime = scripts\mp\matchdata::gettimefrommatchstart(gettime());
+  var_2.streaklifeid = self.lifeid;
+  var_2.ref_13913 = self.matchdatalifeindex;
+  var_2.owner = self;
+  var_2.ref_121b0 = self getxuid();
+  var_2.attackerisinflictor = scripts\mp\matchdata::gettimefrommatchstart(gettime());
+  scripts\mp\analyticslog::logevent_killstreakactivated(self, var_2.streaklifeid, var_2.streakname, var_2.isgimme, var_2.attackerisinflictor, self.origin);
+  scripts\mp\killstreaks\killstreaks::combatrecordkillstreakuse(var_1);
+  scripts\mp\utility\dialog::playkillstreakusedialog(var_1);
+  var_3 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo(var_1, self);
+  var_3.mpstreaksysteminfo = var_2;
+  scripts\cp_mp\killstreaks\juggernaut::tryusejuggernautfromstruct(var_3, var_0);
 }

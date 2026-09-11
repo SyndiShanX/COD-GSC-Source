@@ -3,72 +3,72 @@
  * Script: scripts\common\anim.gsc
 ***********************************************/
 
-function anim_first_frame(var0, var1, var2) {
-  var3 = get_anim_position(var2);
-  var4 = var3["origin"];
-  var5 = var3["angles"];
-  scripts\engine\utility::array_levelthread(var0, &anim_first_frame_on_guy, var1, var4, var5);
+function anim_first_frame(var_0, var_1, var_2) {
+  var_3 = get_anim_position(var_2);
+  var_4 = var_3["origin"];
+  var_5 = var_3["angles"];
+  scripts\engine\utility::array_levelthread(var_0, &anim_first_frame_on_guy, var_1, var_4, var_5);
 }
 
-function anim_generic_first_frame(var0, var1, var2) {
-  var3 = get_anim_position(var2);
-  var4 = var3["origin"];
-  var5 = var3["angles"];
-  thread anim_first_frame_on_guy(var0, var1, var4, var5, "generic");
+function anim_generic_first_frame(var_0, var_1, var_2) {
+  var_3 = get_anim_position(var_2);
+  var_4 = var_3["origin"];
+  var_5 = var_3["angles"];
+  thread anim_first_frame_on_guy(var_0, var_1, var_4, var_5, "generic");
 }
 
-function anim_generic(var0, var1, var2) {
-  var3 = [];
-  GscBinSkip0(0x2e, 0, var0);
+function anim_generic(var_0, var_1, var_2) {
+  var_3 = [];
+  GscBinSkip0(0x2e, 0, var_0);
 }
 
-function anim_generic_run(var0, var1, var2) {
-  var3 = [];
-  GscBinSkip0(0x2e, 0, var0);
+function anim_generic_run(var_0, var_1, var_2) {
+  var_3 = [];
+  GscBinSkip0(0x2e, 0, var_0);
 }
 
-function anim_single_solo_run(var0, var1, var2) {
+function anim_single_solo_run(var_0, var_1, var_2) {
   self endon("death");
-  GscBinSkip1(0x45, 0, var0);
+  GscBinSkip1(0x45, 0, var_0);
 }
 
-function anim_first_frame_solo(var0, var1, var2) {
-  var3 = [];
-  GscBinSkip0(0x2e, 0, var0);
+function anim_first_frame_solo(var_0, var_1, var_2) {
+  var_3 = [];
+  GscBinSkip0(0x2e, 0, var_0);
 }
 
-function anim_first_frame_on_guy(var0, var1, var2, var3, var4) {
-  var0.first_frame_time = gettime();
-  var5 = undefined;
+function anim_first_frame_on_guy(var_0, var_1, var_2, var_3, var_4) {
+  var_0.first_frame_time = gettime();
+  var_5 = undefined;
 
-  if(isDefined(var4)) {
-    var5 = var4;
+  if(isDefined(var_4)) {
+    var_5 = var_4;
   } else {
-    var5 = var0.animname;
+    var_5 = var_0.animname;
   }
 
-  var6 = 0;
+  var_6 = 0;
 
-  if(isarray(level.scr_anim[var5][var1])) {
-    var7 = level.scr_anim[var5][var1][0];
-    var6 = 1;
+  if(isarray(level.scr_anim[var_5][var_1])) {
+    var_7 = level.scr_anim[var_5][var_1][0];
+    var_6 = 1;
   } else {
-    var7 = level.scr_anim[var6][var2];
+    var_7 = level.scr_anim[var_6][var_2];
   }
 
-  set_start_pos(var1, var2, var3, var4, var6, var7);
+  set_start_pos(var_1, var_2, var_3, var_4, var_6, var_7);
 
-  if(isai(var1)) {
-    var1[[anim.callbacks["AIAnimFirstFrame"]]](var7, var6);
+  if(isai(var_1)) {
+    var_1[[anim.callbacks["AIAnimFirstFrame"]]](var_7, var_6);
     return;
   }
 
-  var1 stopanimScripted();
-  var1 setanimknob(var7, 1, 0, 0);
+  var_1 stopanimScripted();
+  var_1 setanimknob(var_7, 1, 0, 0);
 
   if(!scripts\common\utility::issp()) {
-    if(!isPlayer(var1) && isDefined(level.scr_animname[var6]) && isDefined(level.scr_animname[var6][var2])) {
-      var1 builtin[[level.func["scriptModelPlayAnim"]]](level.scr_animname[var6][var2], undefined, 0, 0, "none");
+    if(!isPlayer(var_1) && isDefined(level.scr_animname[var_6]) && isDefined(level.scr_animname[var_6][var_2])) {
+      var_1 builtin[[level.func["scriptModelPlayAnim"]]](level.scr_animname[var_6][var_2], undefined, 0, 0, "none");
       return;
     }
 
@@ -76,446 +76,446 @@ function anim_first_frame_on_guy(var0, var1, var2, var3, var4) {
   }
 }
 
-function set_start_pos(var0, var1, var2, var3, var4) {
-  var5 = undefined;
+function set_start_pos(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = undefined;
 
-  if(isDefined(var3)) {
-    var5 = var3;
+  if(isDefined(var_3)) {
+    var_5 = var_3;
   } else {
-    var5 = self.animname;
+    var_5 = self.animname;
   }
 
-  if(isDefined(var4) && var4) {
-    var6 = level.scr_anim[var5][var0][0];
+  if(isDefined(var_4) && var_4) {
+    var_6 = level.scr_anim[var_5][var_0][0];
   } else {
-    var6 = level.scr_anim[var6][var1];
+    var_6 = level.scr_anim[var_6][var_1];
   }
 
-  var7 = getstartorigin(var2, var3, var6);
-  var8 = getstartangles(var2, var3, var6);
-  self[[anim.callbacks["TeleportEnt"]]](var7, var8);
+  var_7 = getstartorigin(var_2, var_3, var_6);
+  var_8 = getstartangles(var_2, var_3, var_6);
+  self[[anim.callbacks["TeleportEnt"]]](var_7, var_8);
 }
 
-function anim_start_pos(var0, var1, var2) {
-  var3 = get_anim_position(var2);
-  var4 = var3["origin"];
-  var5 = var3["angles"];
-  scripts\engine\utility::array_thread(var0, &set_start_pos, var1, var4, var5);
+function anim_start_pos(var_0, var_1, var_2) {
+  var_3 = get_anim_position(var_2);
+  var_4 = var_3["origin"];
+  var_5 = var_3["angles"];
+  scripts\engine\utility::array_thread(var_0, &set_start_pos, var_1, var_4, var_5);
 }
 
-function anim_start_pos_solo(var0, var1, var2) {
-  GscBinSkip1(0x45, 0, var0);
+function anim_start_pos_solo(var_0, var_1, var_2) {
+  GscBinSkip1(0x45, 0, var_0);
 }
 
-function anim_last_frame_solo(var0, var1, var2) {
-  var3 = [];
-  GscBinSkip0(0x2e, 0, var0);
+function anim_last_frame_solo(var_0, var_1, var_2) {
+  var_3 = [];
+  GscBinSkip0(0x2e, 0, var_0);
 }
 
-function anim_single_solo(var0, var1, var2, var3, var4) {
+function anim_single_solo(var_0, var_1, var_2, var_3, var_4) {
   self endon("death");
-  GscBinSkip1(0x45, 0, var0);
+  GscBinSkip1(0x45, 0, var_0);
 }
 
-function anim_single_internal(var0, var1, var2, var3, var4) {
-  var5 = self;
+function anim_single_internal(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = self;
 
-  foreach(var7 in var0) {
-    if(!isDefined(var7)) {
+  foreach(var_7 in var_0) {
+    if(!isDefined(var_7)) {
       continue;
     }
 
-    if(!isDefined(var7._animactive)) {
-      var7._animactive = 0;
+    if(!isDefined(var_7._animactive)) {
+      var_7._animactive = 0;
     }
 
-    var7._animactive++;
+    var_7._animactive++;
   }
 
-  var9 = get_anim_position(var2);
-  var10 = var9["origin"];
-  var11 = var9["angles"];
-  var12 = undefined;
-  var13 = 999999;
-  var14 = undefined;
-  var15 = undefined;
-  var16 = undefined;
-  var17 = undefined;
-  var18 = "single anim";
+  var_9 = get_anim_position(var_2);
+  var_10 = var_9["origin"];
+  var_11 = var_9["angles"];
+  var_12 = undefined;
+  var_13 = 999999;
+  var_14 = undefined;
+  var_15 = undefined;
+  var_16 = undefined;
+  var_17 = undefined;
+  var_18 = "single anim";
 
-  foreach(var30, var7 in var0) {
-    if(!isDefined(var7)) {
+  foreach(var_30, var_7 in var_0) {
+    if(!isDefined(var_7)) {
       continue;
     }
 
-    var20 = 0;
-    var21 = 0;
-    var22 = 0;
-    var23 = 0;
-    var24 = 0;
-    var25 = undefined;
-    var26 = undefined;
-    var27 = undefined;
-    var28 = undefined;
+    var_20 = 0;
+    var_21 = 0;
+    var_22 = 0;
+    var_23 = 0;
+    var_24 = 0;
+    var_25 = undefined;
+    var_26 = undefined;
+    var_27 = undefined;
+    var_28 = undefined;
 
-    if(isDefined(var4)) {
-      var28 = var4;
+    if(isDefined(var_4)) {
+      var_28 = var_4;
     } else {
-      var28 = var7.animname;
+      var_28 = var_7.animname;
     }
 
-    if(isDefined(level.scr_sound[var28]) && isDefined(level.scr_sound[var28][var1])) {
-      var22 = 1;
-      var25 = level.scr_sound[var28][var1];
+    if(isDefined(level.scr_sound[var_28]) && isDefined(level.scr_sound[var_28][var_1])) {
+      var_22 = 1;
+      var_25 = level.scr_sound[var_28][var_1];
     }
 
-    if(isDefined(level.scr_face[var28]) && isDefined(level.scr_face[var28][var1])) {
-      var20 = 1;
-      var26 = level.scr_face[var28][var1];
-      var16 = var26;
+    if(isDefined(level.scr_face[var_28]) && isDefined(level.scr_face[var_28][var_1])) {
+      var_20 = 1;
+      var_26 = level.scr_face[var_28][var_1];
+      var_16 = var_26;
 
-      if(var22) {
-        if(animhasnotetrack(var26, "vo_" + var25)) {
-          var22 = 0;
-          var25 = undefined;
+      if(var_22) {
+        if(animhasnotetrack(var_26, "vo_" + var_25)) {
+          var_22 = 0;
+          var_25 = undefined;
         }
       }
     }
 
-    if(isDefined(level.scr_head[var28]) && isDefined(level.scr_head[var28][var1])) {
-      var21 = 1;
-      var27 = level.scr_head[var28][var1];
-      var17 = var27;
+    if(isDefined(level.scr_head[var_28]) && isDefined(level.scr_head[var_28][var_1])) {
+      var_21 = 1;
+      var_27 = level.scr_head[var_28][var_1];
+      var_17 = var_27;
     }
 
-    if(isDefined(level.scr_anim[var28]) && isDefined(level.scr_anim[var28][var1]) && self[[anim.callbacks["ShouldDoAnim"]]]()) {
-      var23 = 1;
+    if(isDefined(level.scr_anim[var_28]) && isDefined(level.scr_anim[var_28][var_1]) && self[[anim.callbacks["ShouldDoAnim"]]]()) {
+      var_23 = 1;
     }
 
-    if(isDefined(level.scr_animsound[var28]) && isDefined(level.scr_animsound[var28][var1])) {
-      var7 playSound(level.scr_animsound[var28][var1]);
+    if(isDefined(level.scr_animsound[var_28]) && isDefined(level.scr_animsound[var_28][var_1])) {
+      var_7 playSound(level.scr_animsound[var_28][var_1]);
     }
 
-    if(var23) {
-      var29 = var7[[anim.callbacks["DoAnimation"]]](var10, var11, var28, var1, var18);
+    if(var_23) {
+      var_29 = var_7[[anim.callbacks["DoAnimation"]]](var_10, var_11, var_28, var_1, var_18);
 
-      if(var29 < var13) {
-        var13 = var29;
-        var12 = var30;
+      if(var_29 < var_13) {
+        var_13 = var_29;
+        var_12 = var_30;
       }
     }
 
-    if(var20 || var22) {
-      if(var7[[anim.callbacks["DoFacialAnim"]]](var20, var22, var23, var1, var28, var25, 0)) {
-        var15 = var30;
+    if(var_20 || var_22) {
+      if(var_7[[anim.callbacks["DoFacialAnim"]]](var_20, var_22, var_23, var_1, var_28, var_25, 0)) {
+        var_15 = var_30;
       }
 
-      var14 = var30;
+      var_14 = var_30;
     }
 
-    if(var21) {
-      thread play_addtive_head_anim(var7, var7);
+    if(var_21) {
+      thread play_addtive_head_anim(var_7, var_7);
     }
 
-    if(!isPlayer(var7) && isDefined(level.scr_animname[var28]) && isDefined(level.scr_animname[var28][var1])) {
-      var7 scripts\engine\utility::self_func("scriptModelPlayAnim", level.scr_animname[var28][var1]);
+    if(!isPlayer(var_7) && isDefined(level.scr_animname[var_28]) && isDefined(level.scr_animname[var_28][var_1])) {
+      var_7 scripts\engine\utility::self_func("scriptModelPlayAnim", level.scr_animname[var_28][var_1]);
     }
   }
 
-  if(isDefined(var12)) {
-    var31 = spawnStruct();
-    thread anim_deathnotify(var31, var0[var12]);
-    thread anim_animationendnotify(var31, var0[var12], var1, var13);
-    var31 waittill(var1);
-  } else if(isDefined(var15)) {
-    var31 = spawnStruct();
-    thread anim_deathnotify(var31, var0[var15]);
-    thread anim_facialendnotify(var31, var0[var15], var1);
-    var31 waittill(var1);
-  } else if(isDefined(var14)) {
-    var31 = spawnStruct();
-    thread anim_deathnotify(var31, var0[var14]);
-    thread anim_dialogueendnotify(var31, var0[var14]);
-    var31 waittill(var1);
+  if(isDefined(var_12)) {
+    var_31 = spawnStruct();
+    thread anim_deathnotify(var_31, var_0[var_12]);
+    thread anim_animationendnotify(var_31, var_0[var_12], var_1, var_13);
+    var_31 waittill(var_1);
+  } else if(isDefined(var_15)) {
+    var_31 = spawnStruct();
+    thread anim_deathnotify(var_31, var_0[var_15]);
+    thread anim_facialendnotify(var_31, var_0[var_15], var_1);
+    var_31 waittill(var_1);
+  } else if(isDefined(var_14)) {
+    var_31 = spawnStruct();
+    thread anim_deathnotify(var_31, var_0[var_14]);
+    thread anim_dialogueendnotify(var_31, var_0[var_14]);
+    var_31 waittill(var_1);
   }
 
-  foreach(var7 in var0) {
-    var7._animactive--;
-    var7._lastanimtime = gettime();
+  foreach(var_7 in var_0) {
+    var_7._animactive--;
+    var_7._lastanimtime = gettime();
     LOC_0000035e:
   }
 
-  self notify(var1);
+  self notify(var_1);
 }
 
-function anim_single(var0, var1, var2, var3, var4) {
-  if(!isDefined(var3)) {
-    var3 = 0;
+function anim_single(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  anim_single_internal(var0, var1, var2, var3, var4);
+  anim_single_internal(var_0, var_1, var_2, var_3, var_4);
 }
 
-function anim_loop_solo(var0, var1, var2, var3, var4, var5) {
+function anim_loop_solo(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon("death");
-  var0 endon("death");
-  GscBinSkip1(0x45, 0, var0);
+  var_0 endon("death");
+  GscBinSkip1(0x45, 0, var_0);
 }
 
-function anim_loop_solo_with_nags(var0, var1, var2, var3) {
+function anim_loop_solo_with_nags(var_0, var_1, var_2, var_3) {
   self endon("death");
-  var0 endon("death");
-  GscBinSkip1(0x45, 0, var0);
+  var_0 endon("death");
+  GscBinSkip1(0x45, 0, var_0);
 }
 
-function anim_generic_loop(var0, var1, var2, var3) {
-  var4 = [];
-  GscBinSkip0(0x2e, "guy", var0);
+function anim_generic_loop(var_0, var_1, var_2, var_3) {
+  var_4 = [];
+  GscBinSkip0(0x2e, "guy", var_0);
 }
 
-function anim_loop(var0, var1, var2, var3, var4, var5) {
-  var6 = [];
+function anim_loop(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = [];
 
-  foreach(var8 in var0) {
-    var9 = [];
-    var9 = var8;
-    var9 = self;
-    var9 = var3;
-    var9 = var4;
-    var6 = var9;
+  foreach(var_8 in var_0) {
+    var_9 = [];
+    var_9 = var_8;
+    var_9 = self;
+    var_9 = var_3;
+    var_9 = var_4;
+    var_6 = var_9;
   }
 
-  anim_loop_packet(var6, var1, var2, var5);
+  anim_loop_packet(var_6, var_1, var_2, var_5);
 }
 
-function anim_loop_packet_solo(var0, var1, var2, var3) {
-  var4 = [];
-  GscBinSkip0(0x2e, 0, var0);
+function anim_loop_packet_solo(var_0, var_1, var_2, var_3) {
+  var_4 = [];
+  GscBinSkip0(0x2e, 0, var_0);
 }
 
-function pick_nag_anim(var0) {
-  var1 = undefined;
+function pick_nag_anim(var_0) {
+  var_1 = undefined;
 
-  if(var0.nag_anims.size == 1) {
-    var1 = 0;
-  } else if(var0.currentnagindex == var0.nag_anims.size - 1) {
-    var1 = 0;
+  if(var_0.nag_anims.size == 1) {
+    var_1 = 0;
+  } else if(var_0.currentnagindex == var_0.nag_anims.size - 1) {
+    var_1 = 0;
   } else {
-    var1 = var0.currentnagindex + 1;
+    var_1 = var_0.currentnagindex + 1;
   }
 
-  var0.currentnagindex = var1;
-  var0.last_nag_time = gettime();
-  return var0.currentnagindex;
+  var_0.currentnagindex = var_1;
+  var_0.last_nag_time = gettime();
+  return var_0.currentnagindex;
 }
 
-function anim_loop_packet(var0, var1, var2, var3) {
-  foreach(var5 in var0) {
-    var6 = var5["guy"];
+function anim_loop_packet(var_0, var_1, var_2, var_3) {
+  foreach(var_5 in var_0) {
+    var_6 = var_5["guy"];
 
-    if(!isDefined(var6)) {
+    if(!isDefined(var_6)) {
       continue;
     }
 
-    if(!isDefined(var6._animactive)) {
-      var6._animactive = 0;
+    if(!isDefined(var_6._animactive)) {
+      var_6._animactive = 0;
     }
 
-    var6 endon("death");
-    var6._animactive++;
+    var_6 endon("death");
+    var_6._animactive++;
   }
 
-  var8 = var0[0]["guy"];
+  var_8 = var_0[0]["guy"];
 
-  if(!isDefined(var2)) {
-    var2 = "stop_loop";
+  if(!isDefined(var_2)) {
+    var_2 = "stop_loop";
   }
 
-  thread endonremoveanimactive(var2, var0);
-  self endon(var2);
-  var9 = "looping anim";
-  var10 = var1;
-  var11 = undefined;
+  thread endonremoveanimactive(var_2, var_0);
+  self endon(var_2);
+  var_9 = "looping anim";
+  var_10 = var_1;
+  var_11 = undefined;
 
-  if(isDefined(var3)) {
-    var11 = var3;
+  if(isDefined(var_3)) {
+    var_11 = var_3;
   } else {
-    var11 = var8.animname;
+    var_11 = var_8.animname;
   }
 
-  var12 = 0;
-  var13 = 0;
-  var14 = 0;
-  var15 = isDefined(level.scr_anim[var11][var1 + "_nags"]);
+  var_12 = 0;
+  var_13 = 0;
+  var_14 = 0;
+  var_15 = isDefined(level.scr_anim[var_11][var_1 + "_nags"]);
 
-  if(var15 && scripts\common\utility::issp()) {
-    var16 = 0;
+  if(var_15 && scripts\common\utility::issp()) {
+    var_16 = 0;
 
-    foreach(var18, var5 in var0) {
-      if(isai(var5["guy"])) {
-        var16++;
+    foreach(var_18, var_5 in var_0) {
+      if(isai(var_5["guy"])) {
+        var_16++;
       }
     }
 
-    if(isDefined(level.scr_anim[var11][var1 + "_nags_timer"])) {
-      var14 = level.scr_anim[var11][var1 + "_nags_timer"];
+    if(isDefined(level.scr_anim[var_11][var_1 + "_nags_timer"])) {
+      var_14 = level.scr_anim[var_11][var_1 + "_nags_timer"];
     } else {
-      var14 = 15;
+      var_14 = 15;
     }
   }
 
-  var19 = 0;
-  var20 = undefined;
-  var21 = 0;
-  jumpiffalse(var15) LOC_0000018a;
+  var_19 = 0;
+  var_20 = undefined;
+  var_21 = 0;
+  jumpiffalse(var_15) LOC_0000018a;
   setdvarifuninitialized("scr_debug_nags", 0);
-  var20 = spawnStruct();
-  var20.last_nag_time = gettime();
-  var20.nag_anims = level.scr_anim[var11][var1 + "_nags"];
-  var20.currentnagindex = 0;
-  GscBinSkip4(0x35, var14, var8);
+  var_20 = spawnStruct();
+  var_20.last_nag_time = gettime();
+  var_20.nag_anims = level.scr_anim[var_11][var_1 + "_nags"];
+  var_20.currentnagindex = 0;
+  GscBinSkip4(0x35, var_14, var_8);
 
   for(;;) {
-    if(!var19) {
-      var1 = var10;
+    if(!var_19) {
+      var_1 = var_10;
 
-      for(var12 = anim_weight(var11, var1); var12 == var13 && var12 != 0; var12 = anim_weight(var11, var1)) {}
+      for(var_12 = anim_weight(var_11, var_1); var_12 == var_13 && var_12 != 0; var_12 = anim_weight(var_11, var_1)) {}
     } else {
-      var12 = pick_nag_anim(var20);
-      var1 = var10 + "_nags";
-      GscBinSkip4(0x35, var14, var8);
+      var_12 = pick_nag_anim(var_20);
+      var_1 = var_10 + "_nags";
+      GscBinSkip4(0x35, var_14, var_8);
     }
 
-    var13 = var12;
-    var22 = undefined;
-    var23 = 999999;
-    var24 = undefined;
-    var6 = undefined;
+    var_13 = var_12;
+    var_22 = undefined;
+    var_23 = 999999;
+    var_24 = undefined;
+    var_6 = undefined;
 
-    foreach(var5 in var0) {
-      var26 = var5["entity"];
-      var6 = var5["guy"];
-      var27 = get_anim_position(var26, var5["tag"]);
-      var28 = var27["origin"];
-      var29 = var27["angles"];
+    foreach(var_5 in var_0) {
+      var_26 = var_5["entity"];
+      var_6 = var_5["guy"];
+      var_27 = get_anim_position(var_26, var_5["tag"]);
+      var_28 = var_27["origin"];
+      var_29 = var_27["angles"];
 
-      if(isDefined(var5["origin_offset"])) {
-        var30 = var5["origin_offset"];
-        var31 = anglesToForward(var29);
-        var32 = anglestoright(var29);
-        var33 = anglestoup(var29);
-        var28 += var31 * var30[0];
-        var28 += var32 * var30[1];
-        var28 += var33 * var30[2];
+      if(isDefined(var_5["origin_offset"])) {
+        var_30 = var_5["origin_offset"];
+        var_31 = anglesToForward(var_29);
+        var_32 = anglestoright(var_29);
+        var_33 = anglestoup(var_29);
+        var_28 += var_31 * var_30[0];
+        var_28 += var_32 * var_30[1];
+        var_28 += var_33 * var_30[2];
       }
 
-      if(isDefined(var6.remove_from_animloop)) {
-        var6.remove_from_animloop = undefined;
-        var0[var18] = undefined;
+      if(isDefined(var_6.remove_from_animloop)) {
+        var_6.remove_from_animloop = undefined;
+        var_0[var_18] = undefined;
         continue;
       }
 
-      var34 = 0;
-      var35 = 0;
-      var36 = 0;
-      var37 = 0;
-      var38 = undefined;
-      var39 = undefined;
-      var40 = undefined;
+      var_34 = 0;
+      var_35 = 0;
+      var_36 = 0;
+      var_37 = 0;
+      var_38 = undefined;
+      var_39 = undefined;
+      var_40 = undefined;
 
-      if(isDefined(var3)) {
-        var40 = var3;
+      if(isDefined(var_3)) {
+        var_40 = var_3;
       } else {
-        var40 = var6.animname;
+        var_40 = var_6.animname;
       }
 
-      if(isDefined(level.scr_face[var40]) && isDefined(level.scr_face[var40][var1]) && isDefined(level.scr_face[var40][var1][var12])) {
-        var34 = 1;
-        var38 = level.scr_face[var40][var1][var12];
+      if(isDefined(level.scr_face[var_40]) && isDefined(level.scr_face[var_40][var_1]) && isDefined(level.scr_face[var_40][var_1][var_12])) {
+        var_34 = 1;
+        var_38 = level.scr_face[var_40][var_1][var_12];
       }
 
-      if(isDefined(level.scr_sound[var40]) && isDefined(level.scr_sound[var40][var1]) && isDefined(level.scr_sound[var40][var1][var12])) {
-        var35 = 1;
-        var39 = level.scr_sound[var40][var1][var12];
+      if(isDefined(level.scr_sound[var_40]) && isDefined(level.scr_sound[var_40][var_1]) && isDefined(level.scr_sound[var_40][var_1][var_12])) {
+        var_35 = 1;
+        var_39 = level.scr_sound[var_40][var_1][var_12];
       }
 
-      if(isDefined(level.scr_animsound[var40]) && isDefined(level.scr_animsound[var40][var12 + var1])) {
-        var6 playSound(level.scr_animsound[var40][var12 + var1]);
+      if(isDefined(level.scr_animsound[var_40]) && isDefined(level.scr_animsound[var_40][var_12 + var_1])) {
+        var_6 playSound(level.scr_animsound[var_40][var_12 + var_1]);
       }
 
-      if(isDefined(level.scr_anim[var40]) && isDefined(level.scr_anim[var40][var1]) && self[[anim.callbacks["ShouldDoAnim"]]]()) {
-        var36 = 1;
+      if(isDefined(level.scr_anim[var_40]) && isDefined(level.scr_anim[var_40][var_1]) && self[[anim.callbacks["ShouldDoAnim"]]]()) {
+        var_36 = 1;
       }
 
-      if(var36) {
-        var41 = var6[[anim.callbacks["DoAnimation"]]](var28, var29, var40, var1, var9, var12);
+      if(var_36) {
+        var_41 = var_6[[anim.callbacks["DoAnimation"]]](var_28, var_29, var_40, var_1, var_9, var_12);
 
-        if(var41 < var23) {
-          var23 = var41;
-          var22 = var18;
+        if(var_41 < var_23) {
+          var_23 = var_41;
+          var_22 = var_18;
         }
       }
 
-      if(var34 || var35) {
-        var6[[anim.callbacks["DoFacialAnim"]]](var34, var35, var36, var1, var40, var39, 1);
-        var24 = var18;
+      if(var_34 || var_35) {
+        var_6[[anim.callbacks["DoFacialAnim"]]](var_34, var_35, var_36, var_1, var_40, var_39, 1);
+        var_24 = var_18;
       }
     }
 
-    if(!isDefined(var6)) {
+    if(!isDefined(var_6)) {
       break;
     }
 
-    if(isDefined(var22)) {
-      var42 = waittill_animend(var0[var22]["guy"], var9);
+    if(isDefined(var_22)) {
+      var_42 = waittill_animend(var_0[var_22]["guy"], var_9);
 
-      if(!isDefined(var42) && var15) {
-        var19 = 1;
+      if(!isDefined(var_42) && var_15) {
+        var_19 = 1;
 
         if(isDefined(anim.callbacks["StopAnimscripted"])) {
-          var6[[anim.callbacks["StopAnimscripted"]]]();
+          var_6[[anim.callbacks["StopAnimscripted"]]]();
         }
       }
-    } else if(isDefined(var24)) {
-      var0[var24]["guy"] waittill(var9);
+    } else if(isDefined(var_24)) {
+      var_0[var_24]["guy"] waittill(var_9);
     }
 
-    if(var21) {
+    if(var_21) {
       break;
     }
   }
 }
 
-function waittill_animend(var0, var1) {
+function waittill_animend(var_0, var_1) {
   self endon("do_nag");
-  var0 waittillmatch(var1, "end");
+  var_0 waittillmatch(var_1, "end");
   return true;
 }
 
-function nag_timer(var0, var1) {
+function nag_timer(var_0, var_1) {
   self endon("death");
-  var2 = var0;
-  var3 = gettime();
+  var_2 = var_0;
+  var_3 = gettime();
 
-  while(var3 + var0 * 1000 > gettime()) {
+  while(var_3 + var_0 * 1000 > gettime()) {
     wait 1;
   }
 
   self notify("do_nag");
 }
 
-function anim_set_time_solo(var0, var1, var2) {
+function anim_set_time_solo(var_0, var_1, var_2) {
   self endon("death");
-  GscBinSkip1(0x45, 0, var0);
+  GscBinSkip1(0x45, 0, var_0);
 }
 
-function anim_set_time(var0, var1, var2) {
-  scripts\engine\utility::array_thread(var0, &anim_self_set_time, var1, var2);
+function anim_set_time(var_0, var_1, var_2) {
+  scripts\engine\utility::array_thread(var_0, &anim_self_set_time, var_1, var_2);
 }
 
-function anim_self_set_time(var0, var1) {
-  var2 = scripts\engine\utility::getanim(var0);
-  self setanimtime(var2, var1);
+function anim_self_set_time(var_0, var_1) {
+  var_2 = scripts\engine\utility::getanim(var_0);
+  self setanimtime(var_2, var_1);
 }
 
 function last_anim_time_check() {
@@ -524,380 +524,380 @@ function last_anim_time_check() {
     return;
   }
 
-  var0 = gettime();
+  var_0 = gettime();
 
-  if(self.last_anim_time == var0) {
+  if(self.last_anim_time == var_0) {
     self endon("death");
     wait 0.05;
   }
 
-  self.last_anim_time = var0;
+  self.last_anim_time = var_0;
 }
 
-function anim_moveTo(var0, var1, var2, var3, var4, var5) {
-  var6 = get_anim_position(var2);
-  var7 = var6["origin"];
-  var8 = var6["angles"];
+function anim_moveTo(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = get_anim_position(var_2);
+  var_7 = var_6["origin"];
+  var_8 = var_6["angles"];
 
-  foreach(var10 in var0) {
-    var11 = getstartorigin(var7, var8, level.scr_anim[var10.animname][var1]);
-    var12 = getstartangles(var7, var8, level.scr_anim[var10.animname][var1]);
+  foreach(var_10 in var_0) {
+    var_11 = getstartorigin(var_7, var_8, level.scr_anim[var_10.animname][var_1]);
+    var_12 = getstartangles(var_7, var_8, level.scr_anim[var_10.animname][var_1]);
 
-    if(isai(var10)) {
+    if(isai(var_10)) {
       continue;
     }
 
-    var10 moveTo(var11, var3, var4, var5);
-    var10 rotateTo(var12, var3, var4, var5);
+    var_10 moveTo(var_11, var_3, var_4, var_5);
+    var_10 rotateTo(var_12, var_3, var_4, var_5);
   }
 }
 
-function anim_teleport_solo(var0, var1, var2) {
+function anim_teleport_solo(var_0, var_1, var_2) {
   self endon("death");
-  GscBinSkip1(0x45, 0, var0);
+  GscBinSkip1(0x45, 0, var_0);
 }
 
-function anim_teleport(var0, var1, var2) {
-  var3 = get_anim_position(var2);
-  var4 = var3["origin"];
-  var5 = var3["angles"];
+function anim_teleport(var_0, var_1, var_2) {
+  var_3 = get_anim_position(var_2);
+  var_4 = var_3["origin"];
+  var_5 = var_3["angles"];
 
-  foreach(var7 in var0) {
-    var8 = getstartorigin(var4, var5, level.scr_anim[var7.animname][var1]);
-    var9 = getstartangles(var4, var5, level.scr_anim[var7.animname][var1]);
-    var7[[anim.callbacks["TeleportEnt"]]](var8, var9);
+  foreach(var_7 in var_0) {
+    var_8 = getstartorigin(var_4, var_5, level.scr_anim[var_7.animname][var_1]);
+    var_9 = getstartangles(var_4, var_5, level.scr_anim[var_7.animname][var_1]);
+    var_7[[anim.callbacks["TeleportEnt"]]](var_8, var_9);
   }
 }
 
-function anim_generic_teleport(var0, var1, var2) {
-  var3 = get_anim_position(var2);
-  var4 = var3["origin"];
-  var5 = var3["angles"];
-  var6 = getstartorigin(var4, var5, level.scr_anim["generic"][var1]);
-  var7 = getstartangles(var4, var5, level.scr_anim["generic"][var1]);
-  var0[[anim.callbacks["TeleportEnt"]]](var6, var7);
+function anim_generic_teleport(var_0, var_1, var_2) {
+  var_3 = get_anim_position(var_2);
+  var_4 = var_3["origin"];
+  var_5 = var_3["angles"];
+  var_6 = getstartorigin(var_4, var_5, level.scr_anim["generic"][var_1]);
+  var_7 = getstartangles(var_4, var_5, level.scr_anim["generic"][var_1]);
+  var_0[[anim.callbacks["TeleportEnt"]]](var_6, var_7);
 }
 
-function anim_spawn_generic_model(var0, var1, var2) {
-  return anim_spawn_model(var0, "generic", var1, var2);
+function anim_spawn_generic_model(var_0, var_1, var_2) {
+  return anim_spawn_model(var_0, "generic", var_1, var_2);
 }
 
-function anim_spawn_model(var0, var1, var2, var3) {
-  var4 = get_anim_position(var3);
-  var5 = var4["origin"];
-  var6 = var4["angles"];
-  var7 = getstartorigin(var5, var6, level.scr_anim[var1][var2]);
-  var8 = getstartorigin(var5, var6, level.scr_anim[var1][var2]);
-  var9 = spawn("script_model", var7);
-  var9 setModel(var0);
-  var9.angles = var8;
-  return var9;
+function anim_spawn_model(var_0, var_1, var_2, var_3) {
+  var_4 = get_anim_position(var_3);
+  var_5 = var_4["origin"];
+  var_6 = var_4["angles"];
+  var_7 = getstartorigin(var_5, var_6, level.scr_anim[var_1][var_2]);
+  var_8 = getstartorigin(var_5, var_6, level.scr_anim[var_1][var_2]);
+  var_9 = spawn("script_model", var_7);
+  var_9 setModel(var_0);
+  var_9.angles = var_8;
+  return var_9;
 }
 
-function anim_spawn_tag_model(var0, var1) {
-  self attach(var0, var1);
+function anim_spawn_tag_model(var_0, var_1) {
+  self attach(var_0, var_1);
 }
 
-function anim_link_tag_model(var0, var1) {
-  var2 = self gettagorigin(var1);
-  var3 = spawn("script_model", var2);
-  var3 setModel(var0);
-  var3 linkTo(self, var1, (0, 0, 0), (0, 0, 0));
-  return var3;
+function anim_link_tag_model(var_0, var_1) {
+  var_2 = self gettagorigin(var_1);
+  var_3 = spawn("script_model", var_2);
+  var_3 setModel(var_0);
+  var_3 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
+  return var_3;
 }
 
-function removenotetrack(var0, var1, var2, var3, var4) {
-  var1 = tolower(var1);
-  var5 = level.scr_notetrack[var0][var2][var1];
-  var2 = get_generic_anime(var2);
-  var6 = -1;
+function removenotetrack(var_0, var_1, var_2, var_3, var_4) {
+  var_1 = tolower(var_1);
+  var_5 = level.scr_notetrack[var_0][var_2][var_1];
+  var_2 = get_generic_anime(var_2);
+  var_6 = -1;
 
-  if(!isDefined(var5) || !isarray(var5) || var5.size < 1) {
+  if(!isDefined(var_5) || !isarray(var_5) || var_5.size < 1) {
     return;
   }
 
-  for(var7 = 0; var7 < var5.size; var7++) {
-    if(isDefined(var5[var7][var3])) {
-      if(!isDefined(var4) || var5[var7][var3] == var4) {
-        var6 = var7;
+  for(var_7 = 0; var_7 < var_5.size; var_7++) {
+    if(isDefined(var_5[var_7][var_3])) {
+      if(!isDefined(var_4) || var_5[var_7][var_3] == var_4) {
+        var_6 = var_7;
         break;
       }
     }
   }
 
-  if(var6 < 0) {
+  if(var_6 < 0) {
     return;
   }
 
-  if(var5.size == 1) {
-    var5 = [];
+  if(var_5.size == 1) {
+    var_5 = [];
   } else {
-    var5 = scripts\engine\utility::array_remove_index(var5, var6);
+    var_5 = scripts\engine\utility::array_remove_index(var_5, var_6);
   }
 
-  level.scr_notetrack[var0][var2][var1] = var5;
+  level.scr_notetrack[var_0][var_2][var_1] = var_5;
 }
 
-function addnotetrack_flag(var0, var1, var2, var3) {
-  var1 = tolower(var1);
-  var3 = get_generic_anime(var3);
-  var4 = add_notetrack_and_get_index(var0, var1, var3);
-  var5 = [];
-  GscBinSkip0(0x2e, "flag", var2);
+function addnotetrack_flag(var_0, var_1, var_2, var_3) {
+  var_1 = tolower(var_1);
+  var_3 = get_generic_anime(var_3);
+  var_4 = add_notetrack_and_get_index(var_0, var_1, var_3);
+  var_5 = [];
+  GscBinSkip0(0x2e, "flag", var_2);
 }
 
-function addnotetrack_flag_clear(var0, var1, var2, var3) {
-  var1 = tolower(var1);
-  var3 = get_generic_anime(var3);
-  var4 = add_notetrack_and_get_index(var0, var1, var3);
-  var5 = [];
-  GscBinSkip0(0x2e, "flag_clear", var2);
+function addnotetrack_flag_clear(var_0, var_1, var_2, var_3) {
+  var_1 = tolower(var_1);
+  var_3 = get_generic_anime(var_3);
+  var_4 = add_notetrack_and_get_index(var_0, var_1, var_3);
+  var_5 = [];
+  GscBinSkip0(0x2e, "flag_clear", var_2);
 }
 
-function addnotetrack_dialogue(var0, var1, var2, var3) {
-  var1 = tolower(var1);
-  var2 = get_generic_anime(var2);
-  var4 = add_notetrack_and_get_index(var0, var1, var2);
-  level.scr_notetrack[var0][var2][var1][var4] = [];
-  level.scr_notetrack[var0][var2][var1][var4]["dialog"] = var3;
+function addnotetrack_dialogue(var_0, var_1, var_2, var_3) {
+  var_1 = tolower(var_1);
+  var_2 = get_generic_anime(var_2);
+  var_4 = add_notetrack_and_get_index(var_0, var_1, var_2);
+  level.scr_notetrack[var_0][var_2][var_1][var_4] = [];
+  level.scr_notetrack[var_0][var_2][var_1][var_4]["dialog"] = var_3;
 }
 
-function add_notetrack_and_get_index(var0, var1, var2) {
-  var1 = tolower(var1);
-  add_notetrack_array(var0, var1, var2);
-  return level.scr_notetrack[var0][var2][var1].size;
+function add_notetrack_and_get_index(var_0, var_1, var_2) {
+  var_1 = tolower(var_1);
+  add_notetrack_array(var_0, var_1, var_2);
+  return level.scr_notetrack[var_0][var_2][var_1].size;
 }
 
-function add_notetrack_array(var0, var1, var2) {
-  var1 = tolower(var1);
+function add_notetrack_array(var_0, var_1, var_2) {
+  var_1 = tolower(var_1);
 
   if(!isDefined(level.scr_notetrack)) {
     level.scr_notetrack = [];
   }
 
-  if(!isDefined(level.scr_notetrack[var0])) {
-    level.scr_notetrack[var0] = [];
+  if(!isDefined(level.scr_notetrack[var_0])) {
+    level.scr_notetrack[var_0] = [];
   }
 
-  if(!isDefined(level.scr_notetrack[var0][var2])) {
-    level.scr_notetrack[var0][var2] = [];
+  if(!isDefined(level.scr_notetrack[var_0][var_2])) {
+    level.scr_notetrack[var_0][var_2] = [];
   }
 
-  if(!isDefined(level.scr_notetrack[var0][var2][var1])) {
-    level.scr_notetrack[var0][var2][var1] = [];
+  if(!isDefined(level.scr_notetrack[var_0][var_2][var_1])) {
+    level.scr_notetrack[var_0][var_2][var_1] = [];
     return;
   }
 }
 
-function addnotetrack_sound(var0, var1, var2, var3, var4, var5) {
-  var1 = tolower(var1);
-  var2 = get_generic_anime(var2);
-  var6 = add_notetrack_and_get_index(var0, var1, var2);
-  level.scr_notetrack[var0][var2][var1][var6] = [];
-  level.scr_notetrack[var0][var2][var1][var6]["sound"] = var3;
+function addnotetrack_sound(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_1 = tolower(var_1);
+  var_2 = get_generic_anime(var_2);
+  var_6 = add_notetrack_and_get_index(var_0, var_1, var_2);
+  level.scr_notetrack[var_0][var_2][var_1][var_6] = [];
+  level.scr_notetrack[var_0][var_2][var_1][var_6]["sound"] = var_3;
 
-  if(isDefined(var4)) {
-    level.scr_notetrack[var0][var2][var1][var6]["sound_stays_death"] = 1;
+  if(isDefined(var_4)) {
+    level.scr_notetrack[var_0][var_2][var_1][var_6]["sound_stays_death"] = 1;
   }
 
-  if(isDefined(var5)) {
-    level.scr_notetrack[var0][var2][var1][var6]["sound_on_tag"] = var5;
+  if(isDefined(var_5)) {
+    level.scr_notetrack[var_0][var_2][var_1][var_6]["sound_on_tag"] = var_5;
     return;
   }
 }
 
-function note_track_start_sound(var0, var1, var2, var3) {
-  var4 = get_datascene();
-  addnotetrack_sound(var4.animname, var0, var4.anim_sequence, var1, var2, var3);
+function note_track_start_sound(var_0, var_1, var_2, var_3) {
+  var_4 = get_datascene();
+  addnotetrack_sound(var_4.animname, var_0, var_4.anim_sequence, var_1, var_2, var_3);
 }
 
-function addnotetrack_playersound(var0, var1, var2, var3) {
-  var1 = tolower(var1);
-  var2 = get_generic_anime(var2);
-  var4 = add_notetrack_and_get_index(var0, var1, var2);
-  level.scr_notetrack[var0][var2][var1][var4] = [];
-  level.scr_notetrack[var0][var2][var1][var4]["playersound"] = var3;
+function addnotetrack_playersound(var_0, var_1, var_2, var_3) {
+  var_1 = tolower(var_1);
+  var_2 = get_generic_anime(var_2);
+  var_4 = add_notetrack_and_get_index(var_0, var_1, var_2);
+  level.scr_notetrack[var_0][var_2][var_1][var_4] = [];
+  level.scr_notetrack[var_0][var_2][var_1][var_4]["playersound"] = var_3;
 }
 
-function get_generic_anime(var0) {
-  if(!isDefined(var0)) {
+function get_generic_anime(var_0) {
+  if(!isDefined(var_0)) {
     return "any";
   }
 
-  return var0;
+  return var_0;
 }
 
-function addonstart_animsound(var0, var1, var2) {
-  if(!isDefined(level.scr_animsound[var0])) {
-    level.scr_animsound[var0] = [];
+function addonstart_animsound(var_0, var_1, var_2) {
+  if(!isDefined(level.scr_animsound[var_0])) {
+    level.scr_animsound[var_0] = [];
   }
 
-  level.scr_animsound[var0][var1] = var2;
+  level.scr_animsound[var_0][var_1] = var_2;
 }
 
-function addnotetrack_playerdialogue(var0, var1, var2, var3) {
-  var1 = tolower(var1);
-  var2 = get_generic_anime(var2);
-  var4 = add_notetrack_and_get_index(var0, var1, var2);
-  level.scr_notetrack[var0][var2][var1][var4] = [];
-  level.scr_notetrack[var0][var2][var1][var4]["playerdialogue"] = var3;
+function addnotetrack_playerdialogue(var_0, var_1, var_2, var_3) {
+  var_1 = tolower(var_1);
+  var_2 = get_generic_anime(var_2);
+  var_4 = add_notetrack_and_get_index(var_0, var_1, var_2);
+  level.scr_notetrack[var_0][var_2][var_1][var_4] = [];
+  level.scr_notetrack[var_0][var_2][var_1][var_4]["playerdialogue"] = var_3;
 }
 
-function addnotetrack_animsound(var0, var1, var2, var3) {
-  var2 = tolower(var2);
-  var1 = get_generic_anime(var1);
-  var4 = add_notetrack_and_get_index(var0, var2, var1);
-  var5 = [];
-  GscBinSkip0(0x2e, "sound", var3);
+function addnotetrack_animsound(var_0, var_1, var_2, var_3) {
+  var_2 = tolower(var_2);
+  var_1 = get_generic_anime(var_1);
+  var_4 = add_notetrack_and_get_index(var_0, var_2, var_1);
+  var_5 = [];
+  GscBinSkip0(0x2e, "sound", var_3);
 }
 
-function addnotetrack_attach(var0, var1, var2, var3, var4) {
-  var1 = tolower(var1);
-  var4 = get_generic_anime(var4);
-  var5 = add_notetrack_and_get_index(var0, var1, var4);
-  var6 = [];
-  GscBinSkip0(0x2e, "attach model", var2);
+function addnotetrack_attach(var_0, var_1, var_2, var_3, var_4) {
+  var_1 = tolower(var_1);
+  var_4 = get_generic_anime(var_4);
+  var_5 = add_notetrack_and_get_index(var_0, var_1, var_4);
+  var_6 = [];
+  GscBinSkip0(0x2e, "attach model", var_2);
 }
 
-function addnotetrack_detach(var0, var1, var2, var3, var4) {
-  var1 = tolower(var1);
-  var4 = get_generic_anime(var4);
-  var5 = add_notetrack_and_get_index(var0, var1, var4);
-  var6 = [];
-  GscBinSkip0(0x2e, "detach model", var2);
+function addnotetrack_detach(var_0, var_1, var_2, var_3, var_4) {
+  var_1 = tolower(var_1);
+  var_4 = get_generic_anime(var_4);
+  var_5 = add_notetrack_and_get_index(var_0, var_1, var_4);
+  var_6 = [];
+  GscBinSkip0(0x2e, "detach model", var_2);
 }
 
-function addnotetrack_detach_gun(var0, var1, var2, var3) {
-  var1 = tolower(var1);
-  var2 = get_generic_anime(var2);
-  var4 = add_notetrack_and_get_index(var0, var1, var2);
-  var5 = [];
+function addnotetrack_detach_gun(var_0, var_1, var_2, var_3) {
+  var_1 = tolower(var_1);
+  var_2 = get_generic_anime(var_2);
+  var_4 = add_notetrack_and_get_index(var_0, var_1, var_2);
+  var_5 = [];
   GscBinSkip0(0x2e, "detach gun", 1);
 }
 
-function addnotetrack_attach_gun(var0, var1, var2, var3) {
-  var1 = tolower(var1);
-  var2 = get_generic_anime(var2);
-  var4 = add_notetrack_and_get_index(var0, var1, var2);
-  var5 = [];
+function addnotetrack_attach_gun(var_0, var_1, var_2, var_3) {
+  var_1 = tolower(var_1);
+  var_2 = get_generic_anime(var_2);
+  var_4 = add_notetrack_and_get_index(var_0, var_1, var_2);
+  var_5 = [];
 
-  if(isDefined(var3)) {
-    GscBinSkip0(0x2e, "attach gun " + var3, 1);
+  if(isDefined(var_3)) {
+    GscBinSkip0(0x2e, "attach gun " + var_3, 1);
   }
 
   GscBinSkip0(0x2e, "attach gun right", 1);
 }
 
-function addnotetrack_customfunction(var0, var1, var2, var3) {
-  var1 = tolower(var1);
-  var3 = get_generic_anime(var3);
-  var4 = add_notetrack_and_get_index(var0, var1, var3);
-  var5 = [];
-  GscBinSkip0(0x2e, "function", var2);
+function addnotetrack_customfunction(var_0, var_1, var_2, var_3) {
+  var_1 = tolower(var_1);
+  var_3 = get_generic_anime(var_3);
+  var_4 = add_notetrack_and_get_index(var_0, var_1, var_3);
+  var_5 = [];
+  GscBinSkip0(0x2e, "function", var_2);
 }
 
-function addnotetrack_startfxontag(var0, var1, var2, var3, var4, var5) {
-  scripts\engine\utility::getfx(var3);
-  var1 = tolower(var1);
-  var2 = get_generic_anime(var2);
-  var6 = add_notetrack_and_get_index(var0, var1, var2);
-  var7 = [];
-  GscBinSkip0(0x2e, "effect", var3);
+function addnotetrack_startfxontag(var_0, var_1, var_2, var_3, var_4, var_5) {
+  scripts\engine\utility::getfx(var_3);
+  var_1 = tolower(var_1);
+  var_2 = get_generic_anime(var_2);
+  var_6 = add_notetrack_and_get_index(var_0, var_1, var_2);
+  var_7 = [];
+  GscBinSkip0(0x2e, "effect", var_3);
 }
 
-function addnotetrack_stopFXOnTag(var0, var1, var2, var3, var4) {
-  scripts\engine\utility::getfx(var3);
-  var1 = tolower(var1);
-  var2 = get_generic_anime(var2);
-  var5 = add_notetrack_and_get_index(var0, var1, var2);
-  var6 = [];
-  GscBinSkip0(0x2e, "stop_effect", var3);
+function addnotetrack_stopFXOnTag(var_0, var_1, var_2, var_3, var_4) {
+  scripts\engine\utility::getfx(var_3);
+  var_1 = tolower(var_1);
+  var_2 = get_generic_anime(var_2);
+  var_5 = add_notetrack_and_get_index(var_0, var_1, var_2);
+  var_6 = [];
+  GscBinSkip0(0x2e, "stop_effect", var_3);
 }
 
-function addnotetrack_mayhemstart(var0, var1, var2, var3, var4) {
-  var1 = tolower(var1);
-  var3 = get_generic_anime(var3);
-  var5 = add_notetrack_and_get_index(var0, var1, var3);
-  var6 = [];
-  GscBinSkip0(0x2e, "mayhem_start", var2);
+function addnotetrack_mayhemstart(var_0, var_1, var_2, var_3, var_4) {
+  var_1 = tolower(var_1);
+  var_3 = get_generic_anime(var_3);
+  var_5 = add_notetrack_and_get_index(var_0, var_1, var_3);
+  var_6 = [];
+  GscBinSkip0(0x2e, "mayhem_start", var_2);
 }
 
-function addnotetrack_mayhemend(var0, var1, var2, var3, var4) {
-  var1 = tolower(var1);
-  var3 = get_generic_anime(var3);
-  var5 = add_notetrack_and_get_index(var0, var1, var3);
-  var6 = [];
-  GscBinSkip0(0x2e, "mayhem_end", var2);
+function addnotetrack_mayhemend(var_0, var_1, var_2, var_3, var_4) {
+  var_1 = tolower(var_1);
+  var_3 = get_generic_anime(var_3);
+  var_5 = add_notetrack_and_get_index(var_0, var_1, var_3);
+  var_6 = [];
+  GscBinSkip0(0x2e, "mayhem_end", var_2);
 }
 
-function note_track_swap_to_efx(var0, var1, var2) {
-  var3 = get_datascene();
-  scripts\engine\utility::add_fx(var1, var1);
-  addnotetrack_swapparttoefx(var3.animname, var0, var3.animsequence, var1, var2);
+function note_track_swap_to_efx(var_0, var_1, var_2) {
+  var_3 = get_datascene();
+  scripts\engine\utility::add_fx(var_1, var_1);
+  addnotetrack_swapparttoefx(var_3.animname, var_0, var_3.animsequence, var_1, var_2);
 }
 
-function note_track_stop_efx_on_tag(var0, var1, var2) {
-  var3 = get_datascene();
-  scripts\engine\utility::add_fx(var1, var1);
-  addnotetrack_stopFXOnTag(var3.animname, var0, var3.animsequence, var1, var2);
+function note_track_stop_efx_on_tag(var_0, var_1, var_2) {
+  var_3 = get_datascene();
+  scripts\engine\utility::add_fx(var_1, var_1);
+  addnotetrack_stopFXOnTag(var_3.animname, var_0, var_3.animsequence, var_1, var_2);
 }
 
-function addnotetrack_swapparttoefx(var0, var1, var2, var3, var4) {
-  scripts\engine\utility::getfx(var3);
-  var1 = tolower(var1);
-  var2 = get_generic_anime(var2);
-  var5 = add_notetrack_and_get_index(var0, var1, var2);
-  var6 = [];
-  GscBinSkip0(0x2e, "swap_part_to_efx", var3);
+function addnotetrack_swapparttoefx(var_0, var_1, var_2, var_3, var_4) {
+  scripts\engine\utility::getfx(var_3);
+  var_1 = tolower(var_1);
+  var_2 = get_generic_anime(var_2);
+  var_5 = add_notetrack_and_get_index(var_0, var_1, var_2);
+  var_6 = [];
+  GscBinSkip0(0x2e, "swap_part_to_efx", var_3);
 }
 
-function note_track_trace_to_efx(var0, var1, var2, var3, var4, var5) {
-  var6 = get_datascene();
+function note_track_trace_to_efx(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = get_datascene();
 
-  if(var0 != "start" && !animhasnotetrack(var6 scripts\engine\utility::getanim(var6.anim_sequence), var0)) {
+  if(var_0 != "start" && !animhasnotetrack(var_6 scripts\engine\utility::getanim(var_6.anim_sequence), var_0)) {
     return;
   }
 
-  scripts\engine\utility::add_fx(var3, var3);
+  scripts\engine\utility::add_fx(var_3, var_3);
 
-  if(isDefined(var4)) {
-    scripts\engine\utility::add_fx(var4, var4);
+  if(isDefined(var_4)) {
+    scripts\engine\utility::add_fx(var_4, var_4);
   }
 
-  addnotetrack_tracepartforefx(var6.animname, var0, var1, var6.anim_sequence, var2, var3, var4, var5);
+  addnotetrack_tracepartforefx(var_6.animname, var_0, var_1, var_6.anim_sequence, var_2, var_3, var_4, var_5);
 }
 
-function note_track_start_fx_on_tag(var0, var1, var2) {
-  var3 = get_datascene();
+function note_track_start_fx_on_tag(var_0, var_1, var_2) {
+  var_3 = get_datascene();
 
-  if(var0 != "start" && !animhasnotetrack(var3 scripts\engine\utility::getanim(var3.anim_sequence), var0)) {
+  if(var_0 != "start" && !animhasnotetrack(var_3 scripts\engine\utility::getanim(var_3.anim_sequence), var_0)) {
     return;
   }
 
-  scripts\engine\utility::add_fx(var2, var2);
-  addnotetrack_startfxontag(var3.animname, var0, var3.anim_sequence, var2, var1, 1);
+  scripts\engine\utility::add_fx(var_2, var_2);
+  addnotetrack_startfxontag(var_3.animname, var_0, var_3.anim_sequence, var_2, var_1, 1);
 }
 
 function get_datascene() {
-  var0 = level.current_anim_data_scene;
-  return var0;
+  var_0 = level.current_anim_data_scene;
+  return var_0;
 }
 
-function addnotetrack_tracepartforefx(var0, var1, var2, var3, var4, var5, var6, var7) {
-  scripts\engine\utility::getfx(var5);
-  var1 = tolower(var1);
-  var3 = get_generic_anime(var3);
-  var8 = add_notetrack_and_get_index(var0, var1, var3);
-  var9 = [];
-  GscBinSkip0(0x2e, "trace_part_for_efx", var5);
+function addnotetrack_tracepartforefx(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  scripts\engine\utility::getfx(var_5);
+  var_1 = tolower(var_1);
+  var_3 = get_generic_anime(var_3);
+  var_8 = add_notetrack_and_get_index(var_0, var_1, var_3);
+  var_9 = [];
+  GscBinSkip0(0x2e, "trace_part_for_efx", var_5);
 }
 
-function addnotetrack_notify(var0, var1, var2, var3) {
-  var1 = tolower(var1);
-  var3 = get_generic_anime(var3);
-  var4 = add_notetrack_and_get_index(var0, var1, var3);
-  var5 = [];
-  GscBinSkip0(0x2e, "notify", var2);
+function addnotetrack_notify(var_0, var_1, var_2, var_3) {
+  var_1 = tolower(var_1);
+  var_3 = get_generic_anime(var_3);
+  var_4 = add_notetrack_and_get_index(var_0, var_1, var_3);
+  var_5 = [];
+  GscBinSkip0(0x2e, "notify", var_2);
 }
 
 function setanimtree() {
@@ -979,18 +979,18 @@ function precache_script_models_thread() {
     return;
   }
 
-  var0 = getarraykeys(level.scr_model);
+  var_0 = getarraykeys(level.scr_model);
 
-  for(var1 = 0; var1 < var0.size; var1++) {
-    if(isarray(level.scr_model[var0[var1]])) {
-      for(var2 = 0; var2 < level.scr_model[var0[var1]].size; var2++) {
-        precachemodel(level.scr_model[var0[var1]][var2]);
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    if(isarray(level.scr_model[var_0[var_1]])) {
+      for(var_2 = 0; var_2 < level.scr_model[var_0[var_1]].size; var_2++) {
+        precachemodel(level.scr_model[var_0[var_1]][var_2]);
       }
 
       continue;
     }
 
-    precachemodel(level.scr_model[var0[var1]]);
+    precachemodel(level.scr_model[var_0[var_1]]);
   }
 }
 
@@ -1001,295 +1001,295 @@ function precache_weapon_models_thread() {
     return;
   }
 
-  var0 = getarraykeys(level.scr_weapon);
+  var_0 = getarraykeys(level.scr_weapon);
 
-  for(var1 = 0; var1 < var0.size; var1++) {
-    var2 = [];
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    var_2 = [];
 
-    if(isDefined(level.scr_weapon[var0[var1]][1])) {
-      var2 = level.scr_weapon[var0[var1]][1];
+    if(isDefined(level.scr_weapon[var_0[var_1]][1])) {
+      var_2 = level.scr_weapon[var_0[var_1]][1];
     }
 
-    scripts\common\utility::make_weapon_model(level.scr_weapon[var0[var1]][0], var2, 1, 1);
+    scripts\common\utility::make_weapon_model(level.scr_weapon[var_0[var_1]][0], var_2, 1, 1);
   }
 }
 
 function init_animsounds() {
   level.animsounds = [];
   level.animsound_aliases = [];
-  var0 = getarraykeys(level.scr_notetrack);
+  var_0 = getarraykeys(level.scr_notetrack);
 
-  for(var1 = 0; var1 < var0.size; var1++) {
-    init_notetracks_for_animname(var0[var1]);
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    init_notetracks_for_animname(var_0[var_1]);
   }
 
-  var0 = getarraykeys(level.scr_animsound);
+  var_0 = getarraykeys(level.scr_animsound);
 
-  for(var1 = 0; var1 < var0.size; var1++) {
-    init_animsounds_for_animname(var0[var1]);
-  }
-}
-
-function init_animsounds_for_animname(var0) {
-  var1 = getarraykeys(level.scr_animsound[var0]);
-
-  for(var2 = 0; var2 < var1.size; var2++) {
-    var3 = var1[var2];
-    var4 = level.scr_animsound[var0][var3];
-    level.animsound_aliases[var0][var3]["#" + var3]["soundalias"] = var4;
-    level.animsound_aliases[var0][var3]["#" + var3]["created_by_animSound"] = 1;
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    init_animsounds_for_animname(var_0[var_1]);
   }
 }
 
-function init_notetracks_for_animname(var0) {
-  foreach(var2 in level.scr_notetrack[var0]) {
-    foreach(var9, var4 in var2) {
-      foreach(var6 in var4) {
-        var7 = var6["sound"];
+function init_animsounds_for_animname(var_0) {
+  var_1 = getarraykeys(level.scr_animsound[var_0]);
 
-        if(!isDefined(var7)) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    var_3 = var_1[var_2];
+    var_4 = level.scr_animsound[var_0][var_3];
+    level.animsound_aliases[var_0][var_3]["#" + var_3]["soundalias"] = var_4;
+    level.animsound_aliases[var_0][var_3]["#" + var_3]["created_by_animSound"] = 1;
+  }
+}
+
+function init_notetracks_for_animname(var_0) {
+  foreach(var_2 in level.scr_notetrack[var_0]) {
+    foreach(var_9, var_4 in var_2) {
+      foreach(var_6 in var_4) {
+        var_7 = var_6["sound"];
+
+        if(!isDefined(var_7)) {
           continue;
         }
 
-        level.animsound_aliases[var0][var10][var9]["soundalias"] = var7;
+        level.animsound_aliases[var_0][var_10][var_9]["soundalias"] = var_7;
 
-        if(isDefined(var6["created_by_animSound"])) {
-          level.animsound_aliases[var0][var10][var9]["created_by_animSound"] = 1;
+        if(isDefined(var_6["created_by_animSound"])) {
+          level.animsound_aliases[var_0][var_10][var_9]["created_by_animSound"] = 1;
         }
       }
     }
   }
 }
 
-function endonremoveanimactive(var0, var1) {
-  self waittill(var0);
+function endonremoveanimactive(var_0, var_1) {
+  self waittill(var_0);
 
-  foreach(var3 in var1) {
-    var4 = var3["guy"];
+  foreach(var_3 in var_1) {
+    var_4 = var_3["guy"];
 
-    if(!isDefined(var4)) {
+    if(!isDefined(var_4)) {
       continue;
     }
 
-    var4._animactive--;
-    var4._lastanimtime = gettime();
+    var_4._animactive--;
+    var_4._lastanimtime = gettime();
   }
 }
 
-function anim_deathnotify(var0, var1) {
-  self endon(var1);
-  var0 waittill("death");
+function anim_deathnotify(var_0, var_1) {
+  self endon(var_1);
+  var_0 waittill("death");
 
-  if(isDefined(var0.anim_is_death) && var0.anim_is_death) {
+  if(isDefined(var_0.anim_is_death) && var_0.anim_is_death) {
     return;
   }
 
-  self notify(var1);
+  self notify(var_1);
 }
 
-function anim_facialendnotify(var0, var1, var2) {
-  self endon(var1);
-  var3 = getanimlength(var2);
-  wait var3;
-  self notify(var1);
+function anim_facialendnotify(var_0, var_1, var_2) {
+  self endon(var_1);
+  var_3 = getanimlength(var_2);
+  wait var_3;
+  self notify(var_1);
 }
 
-function anim_dialogueendnotify(var0, var1) {
-  self endon(var1);
-  var0 waittill("single dialogue");
-  self notify(var1);
+function anim_dialogueendnotify(var_0, var_1) {
+  self endon(var_1);
+  var_0 waittill("single dialogue");
+  self notify(var_1);
 }
 
-function anim_animationendnotify(var0, var1, var2, var3) {
-  self endon(var1);
-  var0 endon("death");
-  var2 -= var3;
+function anim_animationendnotify(var_0, var_1, var_2, var_3) {
+  self endon(var_1);
+  var_0 endon("death");
+  var_2 -= var_3;
 
-  if(var3 > 0 && var2 > 0) {
-    var0 scripts\engine\utility::waittill_match_or_timeout("single anim", "end", var2);
-    var0 stopanimScripted();
+  if(var_3 > 0 && var_2 > 0) {
+    var_0 scripts\engine\utility::waittill_match_or_timeout("single anim", "end", var_2);
+    var_0 stopanimScripted();
   } else {
-    var0 waittillmatch("single anim", "end");
+    var_0 waittillmatch("single anim", "end");
   }
 
-  self notify(var1);
+  self notify(var_1);
 }
 
-function anim_weight(var0, var1) {
-  var2 = level.scr_anim[var0][var1].size;
-  var3 = randomint(var2);
+function anim_weight(var_0, var_1) {
+  var_2 = level.scr_anim[var_0][var_1].size;
+  var_3 = randomint(var_2);
 
-  if(isDefined(level.scr_anim[var0][var1 + "weight"])) {
-    var3 = get_weighted_anim(var0, var1, var2);
+  if(isDefined(level.scr_anim[var_0][var_1 + "weight"])) {
+    var_3 = get_weighted_anim(var_0, var_1, var_2);
   }
 
-  return var3;
+  return var_3;
 }
 
-function get_weighted_anim(var0, var1, var2) {
-  var3 = undefined;
+function get_weighted_anim(var_0, var_1, var_2) {
+  var_3 = undefined;
 
-  if(var2 > 1) {
-    var4 = 0;
-    var5 = 0;
+  if(var_2 > 1) {
+    var_4 = 0;
+    var_5 = 0;
 
-    for(var6 = 0; var6 < var2; var6++) {
-      if(isDefined(level.scr_anim[var0][var1 + "weight"])) {
-        if(isDefined(level.scr_anim[var0][var1 + "weight"][var6])) {
-          var4++;
-          var5 += level.scr_anim[var0][var1 + "weight"][var6];
+    for(var_6 = 0; var_6 < var_2; var_6++) {
+      if(isDefined(level.scr_anim[var_0][var_1 + "weight"])) {
+        if(isDefined(level.scr_anim[var_0][var_1 + "weight"][var_6])) {
+          var_4++;
+          var_5 += level.scr_anim[var_0][var_1 + "weight"][var_6];
         }
       }
     }
 
-    if(var4 == var2) {
-      var7 = randomfloat(var5);
-      var5 = 0;
+    if(var_4 == var_2) {
+      var_7 = randomfloat(var_5);
+      var_5 = 0;
 
-      for(var6 = 0; var6 < var2; var6++) {
-        var5 += level.scr_anim[var0][var1 + "weight"][var6];
+      for(var_6 = 0; var_6 < var_2; var_6++) {
+        var_5 += level.scr_anim[var_0][var_1 + "weight"][var_6];
 
-        if(var7 < var5) {
-          var3 = var6;
+        if(var_7 < var_5) {
+          var_3 = var_6;
           break;
         }
       }
     }
   }
 
-  return var3;
+  return var_3;
 }
 
 #using_animtree("");
 
-function play_addtive_head_anim(var0, var1) {
-  var0 setanimlimited(%addtive_head_anims, 1, 0.2);
-  var0 setanimlimited(var1, 1, 0.2);
-  wait getanimlength(var1);
-  var0 clearanim($addtive_head_anims, 0.2);
-  var0 clearanim(var1, 0.2);
+function play_addtive_head_anim(var_0, var_1) {
+  var_0 setanimlimited(%addtive_head_anims, 1, 0.2);
+  var_0 setanimlimited(var_1, 1, 0.2);
+  wait getanimlength(var_1);
+  var_0 clearanim($addtive_head_anims, 0.2);
+  var_0 clearanim(var_1, 0.2);
 }
 
-function get_anim_position(var0) {
-  var1 = undefined;
-  var2 = undefined;
+function get_anim_position(var_0) {
+  var_1 = undefined;
+  var_2 = undefined;
 
-  if(isDefined(var0)) {
-    var1 = self gettagorigin(var0);
-    var2 = self gettagangles(var0);
+  if(isDefined(var_0)) {
+    var_1 = self gettagorigin(var_0);
+    var_2 = self gettagangles(var_0);
   } else {
-    var1 = self.origin;
-    var2 = self.angles;
+    var_1 = self.origin;
+    var_2 = self.angles;
 
-    if(!isDefined(var2)) {
-      var2 = (0, 0, 0);
+    if(!isDefined(var_2)) {
+      var_2 = (0, 0, 0);
     }
   }
 
-  var3 = [];
-  GscBinSkip0(0x2e, "angles", var2);
+  var_3 = [];
+  GscBinSkip0(0x2e, "angles", var_2);
 }
 
-function anim_at_self(var0, var1) {
-  var2 = [];
+function anim_at_self(var_0, var_1) {
+  var_2 = [];
   GscBinSkip0(0x2e, "guy", self);
 }
 
-function anim_at_entity(var0, var1) {
-  var2 = [];
+function anim_at_entity(var_0, var_1) {
+  var_2 = [];
   GscBinSkip0(0x2e, "guy", self);
 }
 
-function assert_existance_of_anim(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = self.animname;
+function assert_existance_of_anim(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = self.animname;
   }
 
-  var2 = 0;
+  var_2 = 0;
 
-  if(isDefined(level.scr_anim[var1])) {
-    var2 = 1;
+  if(isDefined(level.scr_anim[var_1])) {
+    var_2 = 1;
 
-    if(isDefined(level.scr_anim[var1][var0])) {
+    if(isDefined(level.scr_anim[var_1][var_0])) {
       return;
     }
   }
 
-  var3 = 0;
+  var_3 = 0;
 
-  if(isDefined(level.scr_face[var1])) {
-    var3 = 1;
+  if(isDefined(level.scr_face[var_1])) {
+    var_3 = 1;
 
-    if(isDefined(level.scr_face[var1][var0])) {
+    if(isDefined(level.scr_face[var_1][var_0])) {
       return;
     }
   }
 
-  var4 = 0;
+  var_4 = 0;
 
-  if(isDefined(level.scr_sound[var1])) {
-    var4 = 1;
+  if(isDefined(level.scr_sound[var_1])) {
+    var_4 = 1;
 
-    if(isDefined(level.scr_sound[var1][var0])) {
+    if(isDefined(level.scr_sound[var_1][var_0])) {
       return;
     }
   }
 
-  var5 = 0;
+  var_5 = 0;
 
-  if(isDefined(level.scr_blockin[var1])) {
-    var5 = 1;
+  if(isDefined(level.scr_blockin[var_1])) {
+    var_5 = 1;
 
-    if(isDefined(level.scr_blockin[var1][var0])) {
+    if(isDefined(level.scr_blockin[var_1][var_0])) {
       return;
     }
   }
 
-  if(var2 || var4 || var3 || var5) {
-    if(var2) {
-      var6 = getarraykeys(level.scr_anim[var1]);
+  if(var_2 || var_4 || var_3 || var_5) {
+    if(var_2) {
+      var_6 = getarraykeys(level.scr_anim[var_1]);
 
-      foreach(var8 in var6) {}
+      foreach(var_8 in var_6) {}
     }
 
-    if(var4) {
-      var6 = getarraykeys(level.scr_sound[var1]);
+    if(var_4) {
+      var_6 = getarraykeys(level.scr_sound[var_1]);
 
-      foreach(var8 in var6) {}
+      foreach(var_8 in var_6) {}
     }
 
-    if(var3) {
-      var6 = getarraykeys(level.scr_face[var1]);
+    if(var_3) {
+      var_6 = getarraykeys(level.scr_face[var_1]);
 
-      foreach(var8 in var6) {}
+      foreach(var_8 in var_6) {}
     }
 
-    if(var5) {
-      var6 = getarraykeys(level.scr_blockin[var1]);
+    if(var_5) {
+      var_6 = getarraykeys(level.scr_blockin[var_1]);
 
-      foreach(var8 in var6) {}
+      foreach(var_8 in var_6) {}
     }
 
     return;
   }
 
-  var16 = getarraykeys(level.scr_anim);
-  var16 = scripts\engine\utility::array_combine(var16, getarraykeys(level.scr_sound));
+  var_16 = getarraykeys(level.scr_anim);
+  var_16 = scripts\engine\utility::array_combine(var_16, getarraykeys(level.scr_sound));
 
-  foreach(var18 in var16) {}
+  foreach(var_18 in var_16) {}
 }
 
-function anim_single_failsafeonguy(var0, var1) {}
+function anim_single_failsafeonguy(var_0, var_1) {}
 
-function anim_single_failsafe(var0, var1) {
-  foreach(var3 in var0) {
-    thread anim_single_failsafeonguy(var3, self);
+function anim_single_failsafe(var_0, var_1) {
+  foreach(var_3 in var_0) {
+    thread anim_single_failsafeonguy(var_3, self);
   }
 }
 
-function anim_get_goal_time(var0, var1) {
-  if(isDefined(level.scr_goaltime[var0]) && isDefined(level.scr_goaltime[var0][var1])) {
-    return level.scr_goaltime[var0][var1];
+function anim_get_goal_time(var_0, var_1) {
+  if(isDefined(level.scr_goaltime[var_0]) && isDefined(level.scr_goaltime[var_0][var_1])) {
+    return level.scr_goaltime[var_0][var_1];
   }
 
   return 0.5;

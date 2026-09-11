@@ -5,30 +5,30 @@
 
 function assignclientmatchdataid() {
   if(getdvarint("scr_ri_boost_enable", 1) == 1) {
-    var0 = "incursion_boost";
-    var1 = accesscardsspawned_red::preinfilstreamfunc();
-    var2 = getdvarint("scr_ri_boost_duration", 30);
+    var_0 = "incursion_boost";
+    var_1 = accesscardsspawned_red::preinfilstreamfunc();
+    var_2 = getdvarint("scr_ri_boost_duration", 30);
 
-    if(!isDefined(var1) || var1 != var0) {
+    if(!isDefined(var_1) || var_1 != var_0) {
       thread apc_rus_postmoddamagecallback();
       thread ammobox_updateheadicononjointeam();
-      thread _watch_incursion_timer(var2);
+      thread _watch_incursion_timer(var_2);
       thread _watch_incursion_boost_deactivate();
     }
 
-    var3 = getdvarfloat("scr_ri_boost_scale", 1.5);
-    var4 = "actionhero_mp";
-    var5 = "zombiedefault";
-    var6 = 1;
-    thread accesscardsspawned_red::ref_1380c(var0, var2, var3, var4, var5, var6);
+    var_3 = getdvarfloat("scr_ri_boost_scale", 1.5);
+    var_4 = "actionhero_mp";
+    var_5 = "zombiedefault";
+    var_6 = 1;
+    thread accesscardsspawned_red::ref_1380c(var_0, var_2, var_3, var_4, var_5, var_6);
     return;
   }
 }
 
 function isdragonsbreath() {
-  var0 = accesscardsspawned_red::preinfilstreamfunc();
+  var_0 = accesscardsspawned_red::preinfilstreamfunc();
 
-  if(isDefined(var0) && var0 == "incursion_boost") {
+  if(isDefined(var_0) && var_0 == "incursion_boost") {
     accesscardsspawned_red::ref_138c8();
     return;
   }
@@ -42,15 +42,15 @@ function apc_rus_postmoddamagecallback() {
   self notify("force_regeneration");
 }
 
-function _watch_incursion_timer(var0) {
+function _watch_incursion_timer(var_0) {
   level endon("game_ended");
   self endon("disconnect");
   self endon("stop_speed_boost_incursion_boost");
 
   for(;;) {
-    var1 = gettime() + var0 * 1000;
-    self setclientomnvar("ui_privateevent_timer", var1);
-    self waittill("speed_boost_incursion_boost_timer_reset", var0);
+    var_1 = gettime() + var_0 * 1000;
+    self setclientomnvar("ui_privateevent_timer", var_1);
+    self waittill("speed_boost_incursion_boost_timer_reset", var_0);
   }
 }
 

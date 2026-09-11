@@ -27,19 +27,19 @@ function bot_conf_think() {
   GscBinSkip4(0x35);
 }
 
-function custom_death_func(var0) {
-  return scripts\mp\gameobjects::caninteractwith(var0);
+function custom_death_func(var_0) {
+  return scripts\mp\gameobjects::caninteractwith(var_0);
 }
 
-function bot_check_tag_above_head(var0) {
-  if(isDefined(var0.on_path_grid) && var0.on_path_grid) {
-    var1 = self.origin + (0, 0, 55);
+function bot_check_tag_above_head(var_0) {
+  if(isDefined(var_0.on_path_grid) && var_0.on_path_grid) {
+    var_1 = self.origin + (0, 0, 55);
 
-    if(distance2dsquared(var0.curorigin, var1) < 144) {
-      var2 = var0.curorigin[2] - var1[2];
+    if(distance2dsquared(var_0.curorigin, var_1) < 144) {
+      var_2 = var_0.curorigin[2] - var_1[2];
 
-      if(var2 > 0) {
-        if(var2 < level.bot_tag_allowable_jump_height) {
+      if(var_2 > 0) {
+        if(var_2 < level.bot_tag_allowable_jump_height) {
           if(!isDefined(self.last_time_jumped_for_tag)) {
             self.last_time_jumped_for_tag = 0;
           }
@@ -49,7 +49,7 @@ function bot_check_tag_above_head(var0) {
             thread bot_jump_for_tag();
           }
         } else {
-          var0.on_path_grid = 0;
+          var_0.on_path_grid = 0;
           return true;
         }
       }
@@ -70,29 +70,29 @@ function bot_jump_for_tag() {
 
 function bot_watch_new_tags() {
   for(;;) {
-    level waittill("new_tag_spawned", var0);
+    level waittill("new_tag_spawned", var_0);
     thread debug_display_veh_hit(level, self);
   }
 }
 
-function debug_display_veh_hit(var0, var1) {
+function debug_display_veh_hit(var_0, var_1) {
   if(level.gametype == "grind") {
     wait 1.5;
   }
 
-  var0.next_time_check_tags = -1;
+  var_0.next_time_check_tags = -1;
 
-  if(isDefined(var1)) {
-    if(isDefined(var1.victim) && var1.victim == var0 || isDefined(var1.attacker) && var1.attacker == var0) {
-      if(!isDefined(var1.on_path_grid) && !isDefined(var1.calculations_in_progress)) {
-        thread calculate_tag_on_path_grid(var1);
-        waittill_tag_calculated_on_path_grid(var1);
+  if(isDefined(var_1)) {
+    if(isDefined(var_1.victim) && var_1.victim == var_0 || isDefined(var_1.attacker) && var_1.attacker == var_0) {
+      if(!isDefined(var_1.on_path_grid) && !isDefined(var_1.calculations_in_progress)) {
+        thread calculate_tag_on_path_grid(var_1);
+        waittill_tag_calculated_on_path_grid(var_1);
 
-        if(var1.on_path_grid) {
-          var2 = spawnStruct();
-          var2.origin = var1.curorigin;
-          var2.tag = var1;
-          GscBinSkip1(0x45, 0, var2);
+        if(var_1.on_path_grid) {
+          var_2 = spawnStruct();
+          var_2.origin = var_1.curorigin;
+          var_2.tag = var_1;
+          GscBinSkip1(0x45, 0, var_2);
         }
 
         return;
@@ -105,52 +105,52 @@ function debug_display_veh_hit(var0, var1) {
   }
 }
 
-function bot_combine_tag_seen_arrays(var0, var1) {
-  var2 = var1;
+function bot_combine_tag_seen_arrays(var_0, var_1) {
+  var_2 = var_1;
 
-  foreach(var4 in var0) {
-    var5 = 0;
+  foreach(var_4 in var_0) {
+    var_5 = 0;
 
-    foreach(var7 in var1) {
-      if(var4.tag == var7.tag && scripts\mp\bots\bots_util::bot_vectors_are_equal(var4.origin, var7.origin)) {
-        var5 = 1;
+    foreach(var_7 in var_1) {
+      if(var_4.tag == var_7.tag && scripts\mp\bots\bots_util::bot_vectors_are_equal(var_4.origin, var_7.origin)) {
+        var_5 = 1;
         break;
       }
     }
 
-    if(!var5) {
-      var2 = scripts\engine\utility::array_add(var2, var4);
+    if(!var_5) {
+      var_2 = scripts\engine\utility::array_add(var_2, var_4);
     }
   }
 
-  return var2;
+  return var_2;
 }
 
-function bot_is_tag_visible(var0, var1, var2) {
-  if(!var0.calculated_nearest_node) {
-    var0.nearest_node = getclosestnodeinsight(var0.curorigin);
-    var0.calculated_nearest_node = 1;
+function bot_is_tag_visible(var_0, var_1, var_2) {
+  if(!var_0.calculated_nearest_node) {
+    var_0.nearest_node = getclosestnodeinsight(var_0.curorigin);
+    var_0.calculated_nearest_node = 1;
   }
 
-  if(isDefined(var0.calculations_in_progress)) {
+  if(isDefined(var_0.calculations_in_progress)) {
     return false;
   }
 
-  var3 = var0.nearest_node;
-  var4 = !isDefined(var0.on_path_grid);
+  var_3 = var_0.nearest_node;
+  var_4 = !isDefined(var_0.on_path_grid);
 
-  if(isDefined(var3) && (var4 || var0.on_path_grid)) {
-    var5 = var3 == var1 || nodesvisible(var3, var1, 1);
+  if(isDefined(var_3) && (var_4 || var_0.on_path_grid)) {
+    var_5 = var_3 == var_1 || nodesvisible(var_3, var_1, 1);
 
-    if(var5) {
-      var6 = scripts\engine\utility::within_fov(self.origin, self getplayerangles(), var0.curorigin, var2);
+    if(var_5) {
+      var_6 = scripts\engine\utility::within_fov(self.origin, self getplayerangles(), var_0.curorigin, var_2);
 
-      if(var6) {
-        if(var4) {
-          thread calculate_tag_on_path_grid(var0);
-          waittill_tag_calculated_on_path_grid(var0);
+      if(var_6) {
+        if(var_4) {
+          thread calculate_tag_on_path_grid(var_0);
+          waittill_tag_calculated_on_path_grid(var_0);
 
-          if(!var0.on_path_grid) {
+          if(!var_0.on_path_grid) {
             return false;
           }
         }
@@ -163,160 +163,160 @@ function bot_is_tag_visible(var0, var1, var2) {
   return false;
 }
 
-function bot_find_visible_tags(var0, var1, var2) {
-  var3 = undefined;
+function bot_find_visible_tags(var_0, var_1, var_2) {
+  var_3 = undefined;
 
-  if(isDefined(var1)) {
-    var3 = var1;
+  if(isDefined(var_1)) {
+    var_3 = var_1;
   } else {
-    var3 = self getnearestnode();
+    var_3 = self getnearestnode();
   }
 
-  var4 = undefined;
+  var_4 = undefined;
 
-  if(isDefined(var2)) {
-    var4 = var2;
+  if(isDefined(var_2)) {
+    var_4 = var_2;
   } else {
-    var4 = self botgetfovdot();
+    var_4 = self botgetfovdot();
   }
 
-  var5 = [];
+  var_5 = [];
 
-  if(isDefined(var3) && isDefined(level.dogtags)) {
-    foreach(var7 in level.dogtags) {
-      if(custom_death_func(var7, self.team)) {
-        var8 = 0;
+  if(isDefined(var_3) && isDefined(level.dogtags)) {
+    foreach(var_7 in level.dogtags) {
+      if(custom_death_func(var_7, self.team)) {
+        var_8 = 0;
 
-        if(!var0 || isDefined(var7.attacker) && var7.attacker == self || isDefined(var7.victim) && var7.victim == self) {
-          if(!isDefined(var7.calculations_in_progress)) {
-            if(!isDefined(var7.on_path_grid)) {
+        if(!var_0 || isDefined(var_7.attacker) && var_7.attacker == self || isDefined(var_7.victim) && var_7.victim == self) {
+          if(!isDefined(var_7.calculations_in_progress)) {
+            if(!isDefined(var_7.on_path_grid)) {
               thread calculate_tag_on_path_grid(level);
-              waittill_tag_calculated_on_path_grid(var7);
+              waittill_tag_calculated_on_path_grid(var_7);
             }
 
-            var8 = var7.on_path_grid;
+            var_8 = var_7.on_path_grid;
           }
-        } else if(bot_is_tag_visible(var7, var3, var4)) {
-          var8 = 1;
+        } else if(bot_is_tag_visible(var_7, var_3, var_4)) {
+          var_8 = 1;
         }
 
-        if(var8) {
-          var9 = spawnStruct();
-          var9.origin = var7.curorigin;
-          var9.tag = var7;
-          var5 = scripts\engine\utility::array_add(var5, var9);
+        if(var_8) {
+          var_9 = spawnStruct();
+          var_9.origin = var_7.curorigin;
+          var_9.tag = var_7;
+          var_5 = scripts\engine\utility::array_add(var_5, var_9);
         }
       }
     }
   }
 
-  return var5;
+  return var_5;
 }
 
-function calculate_tag_on_path_grid(var0) {
-  var0 endon("reset");
-  var0.calculations_in_progress = 1;
-  var0.on_path_grid = scripts\mp\bots\bots_util::bot_point_is_on_pathgrid(var0.curorigin, 16, level.bot_tag_allowable_jump_height + 55);
+function calculate_tag_on_path_grid(var_0) {
+  var_0 endon("reset");
+  var_0.calculations_in_progress = 1;
+  var_0.on_path_grid = scripts\mp\bots\bots_util::bot_point_is_on_pathgrid(var_0.curorigin, 16, level.bot_tag_allowable_jump_height + 55);
 
-  if(var0.on_path_grid) {
-    var0.ground_pos = getgroundposition(var0.curorigin, 0, 256, 32);
+  if(var_0.on_path_grid) {
+    var_0.ground_pos = getgroundposition(var_0.curorigin, 0, 256, 32);
 
-    if(!isDefined(var0.ground_pos)) {
-      var0.on_path_grid = 0;
+    if(!isDefined(var_0.ground_pos)) {
+      var_0.on_path_grid = 0;
     }
   }
 
-  var0.calculations_in_progress = undefined;
+  var_0.calculations_in_progress = undefined;
 }
 
-function waittill_tag_calculated_on_path_grid(var0) {
-  while(!isDefined(var0.on_path_grid)) {
+function waittill_tag_calculated_on_path_grid(var_0) {
+  while(!isDefined(var_0.on_path_grid)) {
     wait 0.05;
   }
 }
 
-function bot_find_best_tag_from_array(var0, var1) {
-  var2 = undefined;
+function bot_find_best_tag_from_array(var_0, var_1) {
+  var_2 = undefined;
 
-  if(var0.size > 0) {
-    var3 = 1409865409;
+  if(var_0.size > 0) {
+    var_3 = 1409865409;
 
-    foreach(var5 in var0) {
-      var6 = get_num_allies_getting_tag(var5.tag);
+    foreach(var_5 in var_0) {
+      var_6 = get_num_allies_getting_tag(var_5.tag);
 
-      if(!var1 || var6 < 2) {
-        var7 = distancesquared(var5.tag.ground_pos, self.origin);
+      if(!var_1 || var_6 < 2) {
+        var_7 = distancesquared(var_5.tag.ground_pos, self.origin);
 
-        if(var7 < var3) {
-          var2 = var5.tag;
-          var3 = var7;
+        if(var_7 < var_3) {
+          var_2 = var_5.tag;
+          var_3 = var_7;
         }
       }
     }
   }
 
-  return var2;
+  return var_2;
 }
 
-function bot_remove_invalid_tags(var0) {
-  var1 = [];
+function bot_remove_invalid_tags(var_0) {
+  var_1 = [];
 
-  foreach(var3 in var0) {
-    if(custom_death_func(var3.tag, self.team) && scripts\mp\bots\bots_util::bot_vectors_are_equal(var3.tag.curorigin, var3.origin)) {
-      if(!bot_check_tag_above_head(var3.tag) && var3.tag.on_path_grid) {
-        var1 = scripts\engine\utility::array_add(var1, var3);
+  foreach(var_3 in var_0) {
+    if(custom_death_func(var_3.tag, self.team) && scripts\mp\bots\bots_util::bot_vectors_are_equal(var_3.tag.curorigin, var_3.origin)) {
+      if(!bot_check_tag_above_head(var_3.tag) && var_3.tag.on_path_grid) {
+        var_1 = scripts\engine\utility::array_add(var_1, var_3);
       }
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function get_num_allies_getting_tag(var0) {
-  var1 = 0;
+function get_num_allies_getting_tag(var_0) {
+  var_1 = 0;
 
-  foreach(var3 in level.participants) {
-    if(!isDefined(var3.team)) {
+  foreach(var_3 in level.participants) {
+    if(!isDefined(var_3.team)) {
       continue;
     }
 
-    if(var3.team == self.team && var3 != self) {
-      if(isai(var3)) {
-        if(isDefined(var3.tag_getting) && var3.tag_getting == var0) {
-          var1++;
+    if(var_3.team == self.team && var_3 != self) {
+      if(isai(var_3)) {
+        if(isDefined(var_3.tag_getting) && var_3.tag_getting == var_0) {
+          var_1++;
         }
 
         continue;
       }
 
-      if(distancesquared(var3.origin, var0.curorigin) < 160000) {
-        var1++;
+      if(distancesquared(var_3.origin, var_0.curorigin) < 160000) {
+        var_1++;
       }
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function bot_camp_tag(var0, var1, var2) {
+function bot_camp_tag(var_0, var_1, var_2) {
   self notify("bot_camp_tag");
   self endon("bot_camp_tag");
   self endon("stop_camping_tag");
 
-  if(isDefined(var2)) {
-    self endon(var2);
+  if(isDefined(var_2)) {
+    self endon(var_2);
   }
 
-  self botsetscriptgoalnode(self.node_ambushing_from, var1, self.ambush_yaw);
-  var3 = scripts\mp\bots\bots_util::bot_waittill_goal_or_fail();
+  self botsetscriptgoalnode(self.node_ambushing_from, var_1, self.ambush_yaw);
+  var_3 = scripts\mp\bots\bots_util::bot_waittill_goal_or_fail();
 
-  if(var3 == "goal") {
-    var4 = var0.nearest_node;
+  if(var_3 == "goal") {
+    var_4 = var_0.nearest_node;
 
-    if(isDefined(var4)) {
-      var5 = findentrances(self.origin);
-      var5 = scripts\engine\utility::array_add(var5, var4);
-      childthread scripts\mp\bots\bots_util::bot_watch_nodes(var5);
+    if(isDefined(var_4)) {
+      var_5 = findentrances(self.origin);
+      var_5 = scripts\engine\utility::array_add(var_5, var_4);
+      childthread scripts\mp\bots\bots_util::bot_watch_nodes(var_5);
       return;
     }
 

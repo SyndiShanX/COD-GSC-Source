@@ -38,23 +38,23 @@ function init_vehicles() {
   scripts\common\vehicle::init_vehicles();
 }
 
-function vehicle_script_forcecolor_riders(var0) {
-  foreach(var2 in self.riders) {
-    if(isai(var2)) {
-      var2 scripts\engine\sp\utility::set_force_color(var0);
+function vehicle_script_forcecolor_riders(var_0) {
+  foreach(var_2 in self.riders) {
+    if(isai(var_2)) {
+      var_2 scripts\engine\sp\utility::set_force_color(var_0);
       continue;
     }
 
-    if(isDefined(var2.spawner)) {
-      var2.spawner.script_forcecolor = var0;
+    if(isDefined(var_2.spawner)) {
+      var_2.spawner.script_forcecolor = var_0;
     }
   }
 }
 
-function fastrope_anim(var0, var1, var2) {
-  var0 animScripted(var2, var0.origin, var0.angles, var1, undefined, undefined, 0);
+function fastrope_anim(var_0, var_1, var_2) {
+  var_0 animScripted(var_2, var_0.origin, var_0.angles, var_1, undefined, undefined, 0);
 }
 
-function door_anim(var0, var1) {
-  var0 setflaggedanimrestart("vehicle_anim_flag", var1);
+function door_anim(var_0, var_1) {
+  var_0 setflaggedanimrestart("vehicle_anim_flag", var_1);
 }

@@ -3,12 +3,12 @@
  * Script: scripts\sp\equipment\pipebomb.gsc
 ***********************************************/
 
-function precache(var0) {
-  scripts\sp\equipment\offhands::registeroffhandfirefunc(var0, &pipebombfiremain);
+function precache(var_0) {
+  scripts\sp\equipment\offhands::registeroffhandfirefunc(var_0, &pipebombfiremain);
 }
 
-function pipebombfiremain(var0) {
-  if(!isDefined(var0)) {
+function pipebombfiremain(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 

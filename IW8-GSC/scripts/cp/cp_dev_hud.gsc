@@ -11,16 +11,16 @@ function init_dev_hud() {
   level.dev_debug_menus = 1;
   level.hudelems = [];
   level.hudelem_count = 16;
-  var0 = [];
-  var1 = [];
-  var0 = 0;
+  var_0 = [];
+  var_1 = [];
+  var_0 = 0;
   GscBinSkip0(0x2e, 0, 0);
 }
 
-function highlight_current_selection(var0, var1) {
-  var0 notify("highlight_current_selection");
-  var0 endon("highlight_current_selection");
-  var0 endon("disconnect");
+function highlight_current_selection(var_0, var_1) {
+  var_0 notify("highlight_current_selection");
+  var_0 endon("highlight_current_selection");
+  var_0 endon("disconnect");
   level endon("game_ended");
 
   if(!isDefined(level.slot)) {
@@ -32,29 +32,29 @@ function highlight_current_selection(var0, var1) {
   }
 
   setDvar("scr_door_anim_override", "");
-  var0 notifyonplayercommand("B", "+stance");
-  var0 notifyonplayercommand("LT", "+speed_throw");
-  var0 notifyonplayercommand("A", "+goStand");
-  var0 notifyonplayercommand("X", "+usereload");
-  var0 notifyonplayercommand("X", "+activate");
-  var0 notifyonplayercommand("RS", "+melee_zoom");
-  var0 notifyonplayercommand("LS", "+breath_sprint");
-  var0 notifyonplayercommand("RT", "+attack");
-  var0 notifyonplayercommand("RB", "+frag");
-  var0 notifyonplayercommand("LB", "+smoke");
-  var0 notifyonplayercommand("Y", "+weapnext");
-  var0 notifyonplayercommand("UP", "+actionslot 1");
-  var0 notifyonplayercommand("DOWN", "+actionslot 2");
-  var0 notifyonplayercommand("LEFT", "+actionslot 3");
-  var0 notifyonplayercommand("RIGHT", "+actionslot 4");
-  var0 notifyonplayercommand("BACK", "+focus");
-  var0 notifyonplayercommand("START", "pause");
+  var_0 notifyonplayercommand("B", "+stance");
+  var_0 notifyonplayercommand("LT", "+speed_throw");
+  var_0 notifyonplayercommand("A", "+goStand");
+  var_0 notifyonplayercommand("X", "+usereload");
+  var_0 notifyonplayercommand("X", "+activate");
+  var_0 notifyonplayercommand("RS", "+melee_zoom");
+  var_0 notifyonplayercommand("LS", "+breath_sprint");
+  var_0 notifyonplayercommand("RT", "+attack");
+  var_0 notifyonplayercommand("RB", "+frag");
+  var_0 notifyonplayercommand("LB", "+smoke");
+  var_0 notifyonplayercommand("Y", "+weapnext");
+  var_0 notifyonplayercommand("UP", "+actionslot 1");
+  var_0 notifyonplayercommand("DOWN", "+actionslot 2");
+  var_0 notifyonplayercommand("LEFT", "+actionslot 3");
+  var_0 notifyonplayercommand("RIGHT", "+actionslot 4");
+  var_0 notifyonplayercommand("BACK", "+focus");
+  var_0 notifyonplayercommand("START", "pause");
   thread show_selection_menu(level, level.slot);
 
   for(;;) {
-    var2 = var0 scripts\engine\utility::waittill_any_in_array_return(["A", "B", "Y", "X", "LB", "RB", "RT", "LT", "RS", "LS", "UP", "DOWN", "LEFT", "RIGHT", "BACK"]);
+    var_2 = var_0 scripts\engine\utility::waittill_any_in_array_return(["A", "B", "Y", "X", "LB", "RB", "RT", "LT", "RS", "LS", "UP", "DOWN", "LEFT", "RIGHT", "BACK"]);
 
-    switch (var2) {
+    switch (var_2) {
       case "Y":
       case "B":
         clear_hud_elements();
@@ -64,13 +64,13 @@ function highlight_current_selection(var0, var1) {
         return level.menu_current_selection;
       case "DOWN":
         level.slot++;
-        level.slot = scripts\engine\math::wrap(0, var1.size - 1, level.slot);
-        thread show_selection_menu(level.slot, var1);
+        level.slot = scripts\engine\math::wrap(0, var_1.size - 1, level.slot);
+        thread show_selection_menu(level.slot, var_1);
         break;
       case "UP":
         level.slot--;
-        level.slot = scripts\engine\math::wrap(0, var1.size - 1, level.slot);
-        thread show_selection_menu(level.slot, var1);
+        level.slot = scripts\engine\math::wrap(0, var_1.size - 1, level.slot);
+        thread show_selection_menu(level.slot, var_1);
         break;
       case "RIGHT":
         break;
@@ -81,47 +81,47 @@ function highlight_current_selection(var0, var1) {
   }
 }
 
-function show_selection_menu(var0, var1) {
+function show_selection_menu(var_0, var_1) {
   clear_hud_elements();
-  var2 = [];
-  var3 = clamp(var1.size, 0, level.slot_cap);
-  var4 = var1.size - 1;
-  var5 = scripts\engine\math::wrap(0, var4, var0);
-  var6 = var1[var5];
-  var7 = min(level.slot_cap, var1.size);
-  var8 = int(var7 / 2);
-  var9 = var0 - var8;
-  var9 = scripts\engine\math::wrap(0, var4, var9);
+  var_2 = [];
+  var_3 = clamp(var_1.size, 0, level.slot_cap);
+  var_4 = var_1.size - 1;
+  var_5 = scripts\engine\math::wrap(0, var_4, var_0);
+  var_6 = var_1[var_5];
+  var_7 = min(level.slot_cap, var_1.size);
+  var_8 = int(var_7 / 2);
+  var_9 = var_0 - var_8;
+  var_9 = scripts\engine\math::wrap(0, var_4, var_9);
 
-  for(var10 = 0; var10 < var7; var10++) {
-    if(!isDefined(var1[var9])) {
+  for(var_10 = 0; var_10 < var_7; var_10++) {
+    if(!isDefined(var_1[var_9])) {
       continue;
     }
 
-    var2 = var1[var9];
-    var9++;
-    var9 = scripts\engine\math::wrap(0, var4, var9);
+    var_2 = var_1[var_9];
+    var_9++;
+    var_9 = scripts\engine\math::wrap(0, var_4, var_9);
   }
 
-  for(var10 = 0; var10 < var2.size; var10++) {
-    var11 = var2[var10];
+  for(var_10 = 0; var_10 < var_2.size; var_10++) {
+    var_11 = var_2[var_10];
 
-    if(var10 == var8) {
-      level.menu_current_selection = var11;
-      var11 = "->" + var11;
-      var12 = (1, 1, 0);
+    if(var_10 == var_8) {
+      level.menu_current_selection = var_11;
+      var_11 = "->" + var_11;
+      var_12 = (1, 1, 0);
     } else {
-      var12 = (1, 1, 1);
+      var_12 = (1, 1, 1);
     }
 
-    set_hud_element(var11, var12);
+    set_hud_element(var_11, var_12);
   }
 }
 
-function set_hud_element(var0, var1) {
-  for(var2 = 0; var2 < 1; var2++) {
-    if(isDefined(var1)) {
-      level.hudelems[level.placementhudelements][var2].color = var1;
+function set_hud_element(var_0, var_1) {
+  for(var_2 = 0; var_2 < 1; var_2++) {
+    if(isDefined(var_1)) {
+      level.hudelems[level.placementhudelements][var_2].color = var_1;
     }
   }
 
@@ -131,9 +131,9 @@ function set_hud_element(var0, var1) {
 function clear_hud_elements() {
   level.cleartextmarker clearalltextafterhudelem();
 
-  for(var0 = 0; var0 < level.hudelem_count; var0++) {
-    for(var1 = 0; var1 < 1; var1++) {
-      level.hudelems[var0][var1].color = (1, 1, 1);
+  for(var_0 = 0; var_0 < level.hudelem_count; var_0++) {
+    for(var_1 = 0; var_1 < 1; var_1++) {
+      level.hudelems[var_0][var_1].color = (1, 1, 1);
     }
   }
 

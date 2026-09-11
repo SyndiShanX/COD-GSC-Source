@@ -38,10 +38,10 @@ function main() {
 }
 
 function player_exfil_struct() {
-  var0 = getEnt("player256x256x8", "targetname");
-  var1 = spawn("script_model", (-8, 248, 440));
-  var1.angles = (0, 0, 0);
-  var1 clonebrushmodeltoscriptmodel(var0);
+  var_0 = getEnt("player256x256x8", "targetname");
+  var_1 = spawn("script_model", (-8, 248, 440));
+  var_1.angles = (0, 0, 0);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
 }
 
 #using_animtree("");
@@ -64,25 +64,25 @@ function managegate() {
   level.scr_animname["gate_right"]["close"] = "mp_trainyard_gateR_close";
   level.scr_anim["gate_right"]["open"] = % mp_trainyard_gater_open;
   level.scr_animname["gate_right"]["open"] = "mp_trainyard_gateR_open";
-  var0 = getEnt("infil_door_left", "targetname");
-  var1 = getEnt("infil_door_right", "targetname");
-  var2 = getEnt("infil_door_chain", "targetname");
-  var0.animname = "gate_left";
-  var0 scripts\common\anim::setanimtree();
-  var1.animname = "gate_right";
-  var1 scripts\common\anim::setanimtree();
-  var0 thread scripts\common\anim::anim_single_solo(var0, "open");
-  var1 thread scripts\common\anim::anim_single_solo(var1, "open");
-  var2 hide();
+  var_0 = getEnt("infil_door_left", "targetname");
+  var_1 = getEnt("infil_door_right", "targetname");
+  var_2 = getEnt("infil_door_chain", "targetname");
+  var_0.animname = "gate_left";
+  var_0 scripts\common\anim::setanimtree();
+  var_1.animname = "gate_right";
+  var_1 scripts\common\anim::setanimtree();
+  var_0 thread scripts\common\anim::anim_single_solo(var_0, "open");
+  var_1 thread scripts\common\anim::anim_single_solo(var_1, "open");
+  var_2 hide();
   level waittill("prematch_countdown");
   wait 4;
-  var0 thread scripts\common\anim::anim_single_solo(var0, "close");
-  var1 thread scripts\common\anim::anim_single_solo(var1, "close");
+  var_0 thread scripts\common\anim::anim_single_solo(var_0, "close");
+  var_1 thread scripts\common\anim::anim_single_solo(var_1, "close");
   GscBinSkip1(0x45, 0, "_left");
 }
 
 function ref_12f8e() {
-  var0 = [];
+  var_0 = [];
 
   switch (scripts\mp\utility\game::getgametype()) {
     case "tjugg":
@@ -94,14 +94,14 @@ function ref_12f8e() {
     case "conf":
     case "war":
     case "sr":
-      GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_tdm_spawn", (203, -1478, 272), (0, 110, 0)));
+      GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_tdm_spawn", (203, -1478, 272), (0, 110, 0)));
 
     case "dom":
-      GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_dom_spawn", (203, -1478, 272), (0, 110, 0)));
+      GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_dom_spawn", (203, -1478, 272), (0, 110, 0)));
   }
 
-  if(var0.size > 0) {
-    scripts\mp\spawnlogic::bdiedonce(var0);
+  if(var_0.size > 0) {
+    scripts\mp\spawnlogic::bdiedonce(var_0);
     return;
   }
 }

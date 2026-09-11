@@ -15,70 +15,70 @@ function init() {
 }
 
 function updateserversettings() {
-  var0 = scripts\mp\tweakables::gettweakablevalue("team", "fftype");
+  var_0 = scripts\mp\tweakables::gettweakablevalue("team", "fftype");
 
-  if(level.friendlyfire != var0) {
-    setfriendlyfire(var0);
+  if(level.friendlyfire != var_0) {
+    setfriendlyfire(var_0);
     return;
   }
 }
 
-function constraingametype(var0) {
-  var1 = getEntArray();
+function constraingametype(var_0) {
+  var_1 = getEntArray();
 
-  for(var2 = 0; var2 < var1.size; var2++) {
-    var3 = var1[var2];
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    var_3 = var_1[var_2];
 
-    if(var0 == "dm") {
-      if(isDefined(var3.script_gametype_dm) && var3.script_gametype_dm != "1") {
-        var3 delete();
+    if(var_0 == "dm") {
+      if(isDefined(var_3.script_gametype_dm) && var_3.script_gametype_dm != "1") {
+        var_3 delete();
       }
 
       continue;
     }
 
-    if(var0 == "tdm") {
-      if(isDefined(var3.script_gametype_tdm) && var3.script_gametype_tdm != "1") {
-        var3 delete();
+    if(var_0 == "tdm") {
+      if(isDefined(var_3.script_gametype_tdm) && var_3.script_gametype_tdm != "1") {
+        var_3 delete();
       }
 
       continue;
     }
 
-    if(var0 == "ctf") {
-      if(isDefined(var3.script_gametype_ctf) && var3.script_gametype_ctf != "1") {
-        var3 delete();
+    if(var_0 == "ctf") {
+      if(isDefined(var_3.script_gametype_ctf) && var_3.script_gametype_ctf != "1") {
+        var_3 delete();
       }
 
       continue;
     }
 
-    if(var0 == "hq") {
-      if(isDefined(var3.script_gametype_hq) && var3.script_gametype_hq != "1") {
-        var3 delete();
+    if(var_0 == "hq") {
+      if(isDefined(var_3.script_gametype_hq) && var_3.script_gametype_hq != "1") {
+        var_3 delete();
       }
 
       continue;
     }
 
-    if(var0 == "sd") {
-      if(isDefined(var3.script_gametype_sd) && var3.script_gametype_sd != "1") {
-        var3 delete();
+    if(var_0 == "sd") {
+      if(isDefined(var_3.script_gametype_sd) && var_3.script_gametype_sd != "1") {
+        var_3 delete();
       }
 
       continue;
     }
 
-    if(var0 == "koth") {
-      if(isDefined(var3.script_gametype_koth) && var3.script_gametype_koth != "1") {
-        var3 delete();
+    if(var_0 == "koth") {
+      if(isDefined(var_3.script_gametype_koth) && var_3.script_gametype_koth != "1") {
+        var_3 delete();
       }
     }
   }
 }
 
-function setfriendlyfire(var0) {
-  level.friendlyfire = var0;
-  setDvar("ui_friendlyfire", var0);
-  setDvar("LMQOKPRSML", var0);
+function setfriendlyfire(var_0) {
+  level.friendlyfire = var_0;
+  setDvar("ui_friendlyfire", var_0);
+  setDvar("LMQOKPRSML", var_0);
 }

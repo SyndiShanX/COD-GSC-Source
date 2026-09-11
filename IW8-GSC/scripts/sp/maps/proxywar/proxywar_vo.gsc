@@ -46,10 +46,10 @@ function vo_fo_spot_patrol() {
   level.alpha2 stopsounds();
   waitframe();
   say_as_chatter(level.alpha1, "dx_vom_h71_forest_trees_patrol_10");
-  var0 = getEnt("rus_overlook_patrol_1", "script_noteworthy");
-  var1 = getEnt("rus_overlook_patrol_2", "script_noteworthy");
-  say_as_chatter(var0, "dx_vom_ru1_forest_trees_hike_60");
-  say_as_chatter(var1, "dx_vom_ru2_forest_trees_hike_70");
+  var_0 = getEnt("rus_overlook_patrol_1", "script_noteworthy");
+  var_1 = getEnt("rus_overlook_patrol_2", "script_noteworthy");
+  say_as_chatter(var_0, "dx_vom_ru1_forest_trees_hike_60");
+  say_as_chatter(var_1, "dx_vom_ru2_forest_trees_hike_70");
   say_as_chatter(level.alpha2, "dx_vom_h72_forest_trees_patrol_20");
   say_as_chatter(level.alpha1, "dx_vom_h71_forest_trees_patrol_30");
 
@@ -57,23 +57,23 @@ function vo_fo_spot_patrol() {
     say_as_chatter(level.alpha1, "dx_vom_h71_forest_trees_patrol_140");
     wait 0.5;
     say_on_enemy_radio(level, "dx_vom_ru3_forest_trees_patrol_40");
-    say_as_chatter(var0, "dx_vom_ru1_forest_trees_patrol_70");
-    say_as_chatter(var1, "dx_vom_ru2_forest_trees_patrol_80");
-    say_as_chatter(var1, "dx_vom_ru2_forest_trees_patrol_160");
-    say_as_chatter(var1, "dx_vom_ru2_forest_trees_patrol_170");
+    say_as_chatter(var_0, "dx_vom_ru1_forest_trees_patrol_70");
+    say_as_chatter(var_1, "dx_vom_ru2_forest_trees_patrol_80");
+    say_as_chatter(var_1, "dx_vom_ru2_forest_trees_patrol_160");
+    say_as_chatter(var_1, "dx_vom_ru2_forest_trees_patrol_170");
     return;
   }
 }
 
 function vo_fo_turn_off_light() {
   level endon("end_flashlight_trees_check");
-  var0 = 0;
+  var_0 = 0;
 
-  while(var0 < 3) {
+  while(var_0 < 3) {
     if(level.player.flashlighton) {
       level notify("flashlight_nag");
 
-      switch (var0) {
+      switch (var_0) {
         case 0:
           thread say_as_chatter(level.alpha1);
           break;
@@ -85,7 +85,7 @@ function vo_fo_turn_off_light() {
           break;
       }
 
-      var0++;
+      var_0++;
       wait 10;
     }
 
@@ -93,14 +93,14 @@ function vo_fo_turn_off_light() {
   }
 }
 
-function vo_fo_overlook_kill_patrol(var0) {
-  foreach(var2 in var0) {
-    var2 endon("death");
+function vo_fo_overlook_kill_patrol(var_0) {
+  foreach(var_2 in var_0) {
+    var_2 endon("death");
   }
 
   thread say_as_chatter(level.alpha2, "dx_vom_h72_forest_trees_patrol_150");
-  var4 = lookupsoundlength("dx_vom_h72_forest_trees_patrol_150") / 1000;
-  wait var4 - 0.3;
+  var_4 = lookupsoundlength("dx_vom_h72_forest_trees_patrol_150") / 1000;
+  wait var_4 - 0.3;
 }
 
 function vo_fo_overlook_player_kill_patrol() {
@@ -153,8 +153,8 @@ function vo_fo_overlook_scope_enter_chatter() {
   if(!scripts\engine\utility::flag("done_aim_look")) {
     wait 3;
     say_as_chatter(level.alpha1, "dx_vom_h71_forest_overlook_ridge_40");
-    var0 = ["dx_vom_h71_forest_overlook_ridge_50", "dx_vom_h71_forest_overlook_ridge_60", "dx_vom_h71_forest_overlook_ridge_70", "dx_vom_h71_forest_overlook_ridge_80"];
-    nagtill_delayed(level.alpha1, 8, "done_aim_look", var0, 8, 1.2, 16);
+    var_0 = ["dx_vom_h71_forest_overlook_ridge_50", "dx_vom_h71_forest_overlook_ridge_60", "dx_vom_h71_forest_overlook_ridge_70", "dx_vom_h71_forest_overlook_ridge_80"];
+    nagtill_delayed(level.alpha1, 8, "done_aim_look", var_0, 8, 1.2, 16);
     return;
   }
 }
@@ -185,8 +185,8 @@ function vo_fo_callout_checkpoint() {
   scripts\engine\utility::flag_clear("spotter_actively_tracking");
 }
 
-function vo_fo_checkpoint(var0) {
-  switch (var0) {
+function vo_fo_checkpoint(var_0) {
+  switch (var_0) {
     case "overlook_tower_guard":
       thread say_as_chatter(level.player);
       say_as_chatter(level.alpha1, "dx_vom_h71_forest_overlook_scout_40");
@@ -234,8 +234,8 @@ function vo_fo_callin_strike() {
   level endon("overlook_went_hot");
   scripts\engine\utility::flag_set("allow_target_marking");
   say_as_chatter(level.alpha1, "dx_vom_h71_forest_overlook_scout_300");
-  var0 = ["dx_vom_h71_forest_overlook_scout_320", "dx_vom_h71_forest_overlook_scout_330"];
-  thread nagtill_delayed(level.alpha1, 8, "begin_airstrike", var0, 8, 1.2);
+  var_0 = ["dx_vom_h71_forest_overlook_scout_320", "dx_vom_h71_forest_overlook_scout_330"];
+  thread nagtill_delayed(level.alpha1, 8, "begin_airstrike", var_0, 8, 1.2);
 }
 
 function vo_fo_go_hot_admonishment() {
@@ -302,8 +302,8 @@ function vo_fa_post_phosphorus() {
   scripts\engine\utility::flag_set("phosphorus_vo_done");
 }
 
-function vo_increment_nag_counter(var0) {
-  if(!isDefined(level.nag_count) || level.nag_count > var0) {
+function vo_increment_nag_counter(var_0) {
+  if(!isDefined(level.nag_count) || level.nag_count > var_0) {
     level.nag_count = 0;
     return;
   }
@@ -311,26 +311,26 @@ function vo_increment_nag_counter(var0) {
   level.nag_count++;
 }
 
-function vo_nag_after_time(var0, var1, var2, var3) {
-  foreach(var5 in var1) {
-    level endon(var5);
+function vo_nag_after_time(var_0, var_1, var_2, var_3) {
+  foreach(var_5 in var_1) {
+    level endon(var_5);
   }
 
-  if(!isDefined(var3)) {
-    var3 = 15;
+  if(!isDefined(var_3)) {
+    var_3 = 15;
   }
 
-  if(istrue(var2)) {
-    [[var0]]();
+  if(istrue(var_2)) {
+    [[var_0]]();
   }
 
   for(;;) {
-    wait var3;
-    [[var0]]();
+    wait var_3;
+    [[var_0]]();
   }
 }
 
-function vo_fp_patrol_incoming(var0) {
+function vo_fp_patrol_incoming(var_0) {
   level endon("player_fired_at_patrol");
   level endon("player_too_close_to_patroller");
   level endon("reached_railyard_entrance");
@@ -338,22 +338,22 @@ function vo_fp_patrol_incoming(var0) {
   say_as_chatter(level.alpha1, "dx_vom_h71_forest_phosphorus_contact_70");
   thread scripts\sp\maps\proxywar\proxywar_util::hint_crouch();
   scripts\engine\utility::flag_wait("start_patrol_anim");
-  say_as_chatter(var0[0], "dx_vom_ru3_forest_patrol_combat_10");
+  say_as_chatter(var_0[0], "dx_vom_ru3_forest_patrol_combat_10");
   wait 0.5;
   say_as_chatter(level.alpha1, "dx_vom_h71_forest_phosphorus_contact_80");
   wait 0.5;
-  say_as_chatter(var0[1], "dx_vom_ru4_forest_patrol_combat_50");
+  say_as_chatter(var_0[1], "dx_vom_ru4_forest_patrol_combat_50");
   wait 3;
-  say_as_chatter(var0[1], "dx_vom_ru4_forest_patrol_combat_30");
+  say_as_chatter(var_0[1], "dx_vom_ru4_forest_patrol_combat_30");
   scripts\engine\utility::flag_set("player_prompted_for_patrol");
   say_as_chatter(level.alpha1, "dx_vom_h71_forest_patrol_combat_70");
 }
 
 function vo_fp_going_hot() {
-  var0 = ["dx_vom_h72_forest_patrol_combat_80", "dx_vom_h72_forest_patrol_combat_90", "dx_vom_h72_forest_patrol_combat_100", "dx_vom_h72_forest_patrol_combat_110"];
-  var1 = scripts\engine\utility::random(var0);
+  var_0 = ["dx_vom_h72_forest_patrol_combat_80", "dx_vom_h72_forest_patrol_combat_90", "dx_vom_h72_forest_patrol_combat_100", "dx_vom_h72_forest_patrol_combat_110"];
+  var_1 = scripts\engine\utility::random(var_0);
   wait 2;
-  say_as_chatter(level.alpha2, var1);
+  say_as_chatter(level.alpha2, var_1);
 }
 
 function vo_fp_patrol_eliminated() {
@@ -364,22 +364,22 @@ function vo_fp_patrol_eliminated() {
 function vo_fp_flashlight_nag() {
   level endon("end_flashlight_nag");
   level endon("eliminate_patrol_1");
-  var0 = 0;
+  var_0 = 0;
 
   while(!scripts\engine\utility::flag("eliminate_patrol_1")) {
     if(level.player.flashlighton) {
-      if(var0 == 0) {
+      if(var_0 == 0) {
         say_as_chatter(level.alpha1, "dx_vom_h71_railyard_entrance_sneak_10");
-        var0++;
+        var_0++;
       } else {
         say_as_chatter(level.alpha1, "dx_vom_h71_railyard_entrance_sneak_20");
-        var0 = 0;
+        var_0 = 0;
       }
 
       wait 1;
-      var1 = gettime();
+      var_1 = gettime();
 
-      while(!scripts\engine\utility::time_has_passed(var1, 10)) {
+      while(!scripts\engine\utility::time_has_passed(var_1, 10)) {
         if(!level.player.flashlighton) {
           break;
         }
@@ -408,14 +408,14 @@ function vo_re_tower_collapse() {
   say_as_chatter(level.alpha1, "dx_vom_h71_railyard_entrance_aftermath_60");
 }
 
-function vo_re_entrance_burner(var0) {
+function vo_re_entrance_burner(var_0) {
   scripts\engine\utility::flag_set("burning_guy_spawned");
-  var0 scripts\engine\utility::delaythread(1, &say, "dx_vom_ru1_railyard_entrance_aftermath_70");
-  var0 waittill("death", var1);
+  var_0 scripts\engine\utility::delaythread(1, &say, "dx_vom_ru1_railyard_entrance_aftermath_70");
+  var_0 waittill("death", var_1);
   level notify("burning_guy_killed");
   wait 1.8;
 
-  if(isDefined(var1) && var1 == level.player) {
+  if(isDefined(var_1) && var_1 == level.player) {
     say_as_chatter(level.player, "dx_vom_alx_railyard_entrance_aftermath_140");
     say_as_chatter(level.alpha1, "dx_vom_h71_railyard_entrance_aftermath_160");
   }
@@ -426,45 +426,45 @@ function vo_re_entrance_burner(var0) {
 
 function vo_re_entrance_fire_damage() {
   level endon("start_combat_intro_scene");
-  var0 = "";
+  var_0 = "";
 
-  while(var0 != "MOD_FIRE") {
-    level.player waittill("damage", var1, var2, var3, var4, var0);
+  while(var_0 != "MOD_FIRE") {
+    level.player waittill("damage", var_1, var_2, var_3, var_4, var_0);
   }
 
   wait 0.5;
   say_as_chatter(level.alpha1, "dx_vom_h71_railyard_entrance_aftermath_40");
 }
 
-function vo_re_pistol_burner(var0) {
+function vo_re_pistol_burner(var_0) {
   wait 6;
 
-  if(isalive(var0)) {
+  if(isalive(var_0)) {
     say_as_chatter(level.alpha1, "dx_vom_h71_railyard_entrance_aftermath_210");
     return;
   }
 }
 
-function vo_re_crawling_burner(var0) {
-  thread say(var0);
+function vo_re_crawling_burner(var_0) {
+  thread say(var_0);
   wait 1.5;
   say_as_chatter(level.player, "dx_vom_alx_railyard_entrance_aftermath_90");
 
-  if(isalive(var0)) {
+  if(isalive(var_0)) {
     say_as_chatter(level.alpha1, "dx_vom_h71_railyard_entrance_aftermath_200");
     return;
   }
 }
 
 function vo_rb_reached_breach() {
-  var0 = scripts\engine\utility::getStruct("ap_breach", "targetname");
+  var_0 = scripts\engine\utility::getStruct("ap_breach", "targetname");
 
-  while(distance2d(level.player.origin, var0.origin) > 450 && !scripts\engine\utility::flag("breach_window_view")) {
+  while(distance2d(level.player.origin, var_0.origin) > 450 && !scripts\engine\utility::flag("breach_window_view")) {
     waitframe();
   }
 
   if(!scripts\engine\utility::flag("player_skipped_breach")) {
-    if(distance2d(level.player.origin, var0.origin) > distance2d(level.alpha1.origin, var0.origin)) {
+    if(distance2d(level.player.origin, var_0.origin) > distance2d(level.alpha1.origin, var_0.origin)) {
       say_as_chatter(level.alpha1, "dx_vom_h71_railyard_breach_armory_10");
       return;
     }
@@ -476,17 +476,17 @@ function vo_rb_reached_breach() {
 }
 
 function vo_rb_ru_breach_guys() {
-  var0 = getEnt("rus_breach_guy_2", "script_noteworthy");
-  var1 = getEnt("rus_breach_guy_1", "script_noteworthy");
-  var0 endon("death");
-  var1 endon("death");
-  vo_rb_ru_breach_guys_pre_breach(var0, var1);
+  var_0 = getEnt("rus_breach_guy_2", "script_noteworthy");
+  var_1 = getEnt("rus_breach_guy_1", "script_noteworthy");
+  var_0 endon("death");
+  var_1 endon("death");
+  vo_rb_ru_breach_guys_pre_breach(var_0, var_1);
   wait 1.1;
-  var1 stopsounds();
-  say(var0, "dx_vom_ru1_railyard_breach_armory_190", 1);
+  var_1 stopsounds();
+  say(var_0, "dx_vom_ru1_railyard_breach_armory_190", 1);
 }
 
-function vo_rb_ru_breach_guys_pre_breach(var0, var1) {
+function vo_rb_ru_breach_guys_pre_breach(var_0, var_1) {
   if(scripts\engine\utility::flag("animated_breach_started")) {
     return;
   }
@@ -494,11 +494,11 @@ function vo_rb_ru_breach_guys_pre_breach(var0, var1) {
   level endon("animated_breach_started");
   wait 1;
   wait_for_break_in_chatter();
-  say(var0, "dx_vom_ru1_railyard_entrance_sneak_70");
-  say(var1, "dx_vom_ru2_railyard_entrance_sneak_80");
+  say(var_0, "dx_vom_ru1_railyard_entrance_sneak_70");
+  say(var_1, "dx_vom_ru2_railyard_entrance_sneak_80");
   wait_for_break_in_chatter();
-  say(var1, "dx_vom_ru2_railyard_breach_armory_40");
-  say(var0, "dx_vom_ru1_railyard_breach_armory_50");
+  say(var_1, "dx_vom_ru2_railyard_breach_armory_40");
+  say(var_0, "dx_vom_ru1_railyard_breach_armory_50");
   scripts\engine\utility::flag_wait("animated_breach_started");
 }
 
@@ -557,22 +557,22 @@ function vo_rc_set_mg_suppress_goal() {
 
 function vo_rc_mount_reminder() {
   level endon("lmg_suppressed");
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, "dx_vom_h71_railyard_combat_mgsuppress_170");
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, "dx_vom_h71_railyard_combat_mgsuppress_170");
 }
 
 function vo_rc_mg_suppress_reminder() {
   level endon("machine_gunner_killed");
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, "dx_vom_h71_railyard_combat_mgsuppress_20");
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, "dx_vom_h71_railyard_combat_mgsuppress_20");
 }
 
 function vo_rc_mg_suppressed() {
-  var0 = 0;
+  var_0 = 0;
 
   if(!isDefined(level.vo_suppress_count)) {
     wait 0.25;
-    var0 = 1;
+    var_0 = 1;
     level.vo_suppress_count = 0;
     level.vo_suppress_alias = [];
     level.vo_suppress_alias[level.vo_suppress_alias.size] = "dx_vom_h71_railyard_combat_mg_70";
@@ -593,7 +593,7 @@ function vo_rc_mg_suppressed() {
     say_as_chatter(level.alpha1, level.vo_suppress_alias[level.vo_suppress_count], 1);
   }
 
-  if(var0) {
+  if(var_0) {
     say_as_chatter(level.player, "dx_vom_alx_railyard_combat_mg_30");
     return;
   }
@@ -626,15 +626,15 @@ function vo_rc_mg_reminder() {
 function vo_rc_mg_hint() {
   level endon("machine_gunner_killed");
   scripts\engine\utility::flag_wait("advance_to_mg_platform");
-  var0 = 0;
+  var_0 = 0;
 
   if(isDefined(level.railyard_lmg)) {
-    var1 = anglestoleft(level.railyard_lmg.og_angles + (0, -45, 0));
-    var2 = level.player.origin - level.railyard_lmg.og_origin;
-    var0 = vectordot(var1, var2);
+    var_1 = anglestoleft(level.railyard_lmg.og_angles + (0, -45, 0));
+    var_2 = level.player.origin - level.railyard_lmg.og_origin;
+    var_0 = vectordot(var_1, var_2);
   }
 
-  if(!isDefined(level.railyard_lmg) || var0 < 0 || level.player getammocount("frag") <= 0) {
+  if(!isDefined(level.railyard_lmg) || var_0 < 0 || level.player getammocount("frag") <= 0) {
     say_as_chatter(level.alpha1, "dx_vom_h71_railyard_combat_mg_180");
     return;
   }
@@ -651,20 +651,20 @@ function vo_rc_mg_defeated() {
 }
 
 function vo_cr_enemies_fall_back() {
-  var0 = getEntArray("courtyard_defend_group", "targetname");
-  var0 = scripts\engine\utility::array_removedead_or_dying(var0);
-  var0 = sortbydistance(var0, level.player.origin);
-  var1 = var0[0];
-  say(var1, "dx_vom_ru4_courtyard_retreat_warehouse_10");
-  var0 = scripts\engine\utility::array_removedead_or_dying(var0);
-  var0 = sortbydistance(var0, level.player.origin);
-  var2 = var0[0];
+  var_0 = getEntArray("courtyard_defend_group", "targetname");
+  var_0 = scripts\engine\utility::array_removedead_or_dying(var_0);
+  var_0 = sortbydistance(var_0, level.player.origin);
+  var_1 = var_0[0];
+  say(var_1, "dx_vom_ru4_courtyard_retreat_warehouse_10");
+  var_0 = scripts\engine\utility::array_removedead_or_dying(var_0);
+  var_0 = sortbydistance(var_0, level.player.origin);
+  var_2 = var_0[0];
 
-  if(var2 == var1) {
-    var2 = var0[1];
+  if(var_2 == var_1) {
+    var_2 = var_0[1];
   }
 
-  say(var2, "dx_vom_ru1_courtyard_retreat_warehouse_20");
+  say(var_2, "dx_vom_ru1_courtyard_retreat_warehouse_20");
   say_as_chatter(level.bravo2, "dx_vom_h74_courtyard_retreat_warehouse_30");
   say_as_chatter(level.bravo3, "dx_vom_h75_courtyard_retreat_warehouse_40");
 }
@@ -699,8 +699,8 @@ function vo_we_door_approach() {
 function vo_we_nag_enter_warehouse() {
   level endon("done_objective_hint");
   level endon("near_warehouse_door");
-  var0 = ["dx_vom_h71_courtyard_retreat_warehouse_120", "dx_vom_h71_courtyard_retreat_warehouse_130", "dx_vom_h71_courtyard_retreat_warehouse_140"];
-  nagtill_delayed(level.alpha1, 8, "near_warehouse_door", var0, 12);
+  var_0 = ["dx_vom_h71_courtyard_retreat_warehouse_120", "dx_vom_h71_courtyard_retreat_warehouse_130", "dx_vom_h71_courtyard_retreat_warehouse_140"];
+  nagtill_delayed(level.alpha1, 8, "near_warehouse_door", var_0, 12);
 }
 
 function vo_we_open_door() {
@@ -725,15 +725,15 @@ function vo_we_power_off() {
 }
 
 function vo_wc_head_inside_nag() {
-  var0 = ["dx_vom_h73_warehouse_enter_power_100", "dx_vom_h73_warehouse_enter_power_110"];
-  var1 = scripts\engine\sp\utility::create_deck(var0, 0);
-  var0 = ["dx_vom_h71_warehouse_enter_power_70", "dx_vom_h71_warehouse_enter_power_80", "dx_vom_h71_warehouse_enter_power_90"];
-  var2 = scripts\engine\sp\utility::create_deck(var0, 0);
-  var2.autoshuffle = 1;
+  var_0 = ["dx_vom_h73_warehouse_enter_power_100", "dx_vom_h73_warehouse_enter_power_110"];
+  var_1 = scripts\engine\sp\utility::create_deck(var_0, 0);
+  var_0 = ["dx_vom_h71_warehouse_enter_power_70", "dx_vom_h71_warehouse_enter_power_80", "dx_vom_h71_warehouse_enter_power_90"];
+  var_2 = scripts\engine\sp\utility::create_deck(var_0, 0);
+  var_2.autoshuffle = 1;
 
   for(;;) {
-    nagtill_delayed(level.alpha1, 8, "near_warehouse_door", var2, 12, 1.2);
-    nagtill_open_delayed(level.bravo1, 8, "near_warehouse_door", var1, 12);
+    nagtill_delayed(level.alpha1, 8, "near_warehouse_door", var_2, 12, 1.2);
+    nagtill_open_delayed(level.bravo1, 8, "near_warehouse_door", var_1, 12);
   }
 }
 
@@ -779,12 +779,12 @@ function wait_first_contact() {
 
 function vo_wc_first_contact() {
   wait_first_contact();
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, "alpha1", "dx_vom_h71_warehouse_enter_search_80");
 }
 
-function vo_wc_kill_runner1(var0) {
-  var0 waittill("death");
+function vo_wc_kill_runner1(var_0) {
+  var_0 waittill("death");
   wait_combat_cooldown(0.4, 1, 1);
   say_as_chatter(level.alpha1, "dx_vom_h71_warehouse_enter_search_120");
 }
@@ -810,11 +810,11 @@ function vo_wc_shelf_runner() {
   say_as_chatter(level.alpha1, "dx_vom_h71_warehouse_enter_search_150");
 }
 
-function vo_wc_shelf_runner_killed(var0) {
-  var0 waittill("death", var1);
+function vo_wc_shelf_runner_killed(var_0) {
+  var_0 waittill("death", var_1);
   wait_combat_cooldown(0.4, 1, 1);
 
-  if(var1 == level.player) {
+  if(var_1 == level.player) {
     say_as_chatter(level.player, "dx_vom_alx_warehouse_enter_search_160");
     return;
   }
@@ -912,8 +912,8 @@ function vo_wdg_approach_gas_truck() {
   }
 
   level endon("started_swabbing");
-  var0 = ["dx_vom_h71_trucks_convoy_gas_10", "dx_vom_h71_trucks_convoy_gas_20", "dx_vom_h71_trucks_convoy_gas_30"];
-  var1 = scripts\engine\sp\utility::create_deck(var0);
+  var_0 = ["dx_vom_h71_trucks_convoy_gas_10", "dx_vom_h71_trucks_convoy_gas_20", "dx_vom_h71_trucks_convoy_gas_30"];
+  var_1 = scripts\engine\sp\utility::create_deck(var_0);
   wait 5;
 
   for(;;) {
@@ -969,16 +969,16 @@ function vo_ts_shotgun_nag() {
 
 function vo_ts_wrong_vehicle() {
   level endon("player_entered_truck");
-  var0 = 1;
+  var_0 = 1;
 
-  while(var0) {
+  while(var_0) {
     scripts\engine\utility::flag_wait("at_other_vehicle");
 
     if(!scripts\engine\utility::flag("driver_talking")) {
       scripts\engine\utility::flag_set("driver_talking");
       say_as_chatter(level.bravo1, "dx_vom_h73_trucks_convoy_exfil_50");
       scripts\engine\utility::flag_clear("driver_talking");
-      var0 = 0;
+      var_0 = 0;
     }
 
     waitframe();
@@ -1018,8 +1018,8 @@ function vo_radio_done() {
   level.player scripts\common\utility::allow_reload(1, "radio");
 }
 
-function say(var0, var1, var2) {
-  if(!soundexists(var0)) {
+function say(var_0, var_1, var_2) {
+  if(!soundexists(var_0)) {
     return false;
   }
 
@@ -1027,63 +1027,63 @@ function say(var0, var1, var2) {
     return false;
   }
 
-  self notify("started_speaking", var0);
+  self notify("started_speaking", var_0);
   self.lastspoketime = gettime();
-  self.lastaliassaid = var0;
+  self.lastaliassaid = var_0;
 
-  if(isPlayer(self) && isDefined(var2)) {
-    scripts\engine\sp\utility::player_gesture_force(var2);
-    var3 = lookupsoundlength(var0) / 1000;
-    scripts\engine\utility::delaycall(var3, &stopgestureviewmodel);
+  if(isPlayer(self) && isDefined(var_2)) {
+    scripts\engine\sp\utility::player_gesture_force(var_2);
+    var_3 = lookupsoundlength(var_0) / 1000;
+    scripts\engine\utility::delaycall(var_3, &stopgestureviewmodel);
   }
 
-  if(istrue(var1)) {
+  if(istrue(var_1)) {
     if(isstruct(self)) {
-      scripts\engine\sp\utility::smart_radio_dialogue_interrupt(var0);
+      scripts\engine\sp\utility::smart_radio_dialogue_interrupt(var_0);
     } else if(isPlayer(self)) {
-      scripts\engine\sp\utility::smart_player_dialogue_interrupt(var0);
+      scripts\engine\sp\utility::smart_player_dialogue_interrupt(var_0);
     } else if(isDefined(self.animname)) {
       self stopsounds();
       waitframe();
-      scripts\engine\sp\utility::smart_dialogue(var0);
+      scripts\engine\sp\utility::smart_dialogue(var_0);
     } else {
       if(issentient(self)) {
-        self playsoundatviewheight(var0);
+        self playsoundatviewheight(var_0);
       } else {
-        self playSound(var0);
+        self playSound(var_0);
       }
 
-      wait lookupsoundlength(var0) / 1000;
+      wait lookupsoundlength(var_0) / 1000;
     }
   } else if(isstruct(self)) {
-    scripts\engine\sp\utility::smart_radio_dialogue(var0);
+    scripts\engine\sp\utility::smart_radio_dialogue(var_0);
   } else if(isPlayer(self)) {
-    scripts\engine\sp\utility::smart_player_dialogue(var0);
+    scripts\engine\sp\utility::smart_player_dialogue(var_0);
   } else if(isDefined(self.animname)) {
-    scripts\engine\sp\utility::smart_dialogue(var0);
+    scripts\engine\sp\utility::smart_dialogue(var_0);
   } else {
     if(issentient(self)) {
-      self playsoundatviewheight(var0);
+      self playsoundatviewheight(var_0);
     } else {
-      self playSound(var0);
+      self playSound(var_0);
     }
 
-    wait lookupsoundlength(var0) / 1000;
+    wait lookupsoundlength(var_0) / 1000;
   }
 
-  self notify("finished_speaking", var0);
+  self notify("finished_speaking", var_0);
   return true;
 }
 
-function is_dead_or_dying(var0) {
-  if(!isDefined(var0)) {
+function is_dead_or_dying(var_0) {
+  if(!isDefined(var_0)) {
     return true;
   }
 
-  if(isai(var0)) {
-    return (!isalive(var0) || var0 scripts\engine\utility::doinglongdeath());
-  } else if(issentient(var0)) {
-    return !isalive(var0);
+  if(isai(var_0)) {
+    return (!isalive(var_0) || var_0 scripts\engine\utility::doinglongdeath());
+  } else if(issentient(var_0)) {
+    return !isalive(var_0);
   }
 
   return false;
@@ -1102,11 +1102,11 @@ function wait_finish_speaking() {
     return false;
   }
 
-  var0 = (gettime() - self.lastspoketime) / 1000;
-  var1 = lookupsoundlength(self.lastaliassaid) / 1000;
+  var_0 = (gettime() - self.lastspoketime) / 1000;
+  var_1 = lookupsoundlength(self.lastaliassaid) / 1000;
 
-  if(var0 < var1) {
-    wait var1 - var0;
+  if(var_0 < var_1) {
+    wait var_1 - var_0;
   }
 
   return true;
@@ -1117,48 +1117,48 @@ function time_since_spoke() {
     return undefined;
   }
 
-  var0 = self.lastspoketime + lookupsoundlength(self.lastaliassaid);
-  return (gettime() - var0) / 1000;
+  var_0 = self.lastspoketime + lookupsoundlength(self.lastaliassaid);
+  return (gettime() - var_0) / 1000;
 }
 
-function say_sequence(var0, var1) {
-  var2 = self;
+function say_sequence(var_0, var_1) {
+  var_2 = self;
 
-  if(!isarray(var0)) {
-    var0 = [var0];
+  if(!isarray(var_0)) {
+    var_0 = [var_0];
   }
 
-  foreach(var4 in var0) {
-    var2 = say_vo_item(var2, var4, var1);
+  foreach(var_4 in var_0) {
+    var_2 = say_vo_item(var_2, var_4, var_1);
   }
 }
 
-function say_vo_item(var0, var1) {
-  var2 = self;
+function say_vo_item(var_0, var_1) {
+  var_2 = self;
 
-  if(isarray(var0)) {
-    if((isint(var0[0]) || isfloat(var0[0])) && isint(var0[1]) || isfloat(var0[1])) {
-      wait randomfloatrange(var0[0], var0[1]);
-    } else if(isbuiltinfunction(var0[0]) || isbuiltinmethod(var0[0]) || isanimation(var0[0])) {
-      call_with_params(var2, var0[0], var0[1]);
+  if(isarray(var_0)) {
+    if((isint(var_0[0]) || isfloat(var_0[0])) && isint(var_0[1]) || isfloat(var_0[1])) {
+      wait randomfloatrange(var_0[0], var_0[1]);
+    } else if(isbuiltinfunction(var_0[0]) || isbuiltinmethod(var_0[0]) || isanimation(var_0[0])) {
+      call_with_params(var_2, var_0[0], var_0[1]);
     }
 
-    return var2;
+    return var_2;
   }
 
-  if(isent(var0) || isstruct(var0)) {
-    var2 = var0;
-  } else if(isstring(var0)) {
-    say(var2, var0, var1);
-  } else if(isint(var0) || isfloat(var0)) {
-    wait var0;
-  } else if(isbuiltinfunction(var0) || isbuiltinmethod(var0) || isanimation(var0)) {
-    call_with_params(var2, var0);
-  } else if(scripts\engine\sp\utility::is_deck(var0)) {
-    var2 = say_vo_item(var2, var0 scripts\engine\sp\utility::deck_draw(), var1);
+  if(isent(var_0) || isstruct(var_0)) {
+    var_2 = var_0;
+  } else if(isstring(var_0)) {
+    say(var_2, var_0, var_1);
+  } else if(isint(var_0) || isfloat(var_0)) {
+    wait var_0;
+  } else if(isbuiltinfunction(var_0) || isbuiltinmethod(var_0) || isanimation(var_0)) {
+    call_with_params(var_2, var_0);
+  } else if(scripts\engine\sp\utility::is_deck(var_0)) {
+    var_2 = say_vo_item(var_2, var_0 scripts\engine\sp\utility::deck_draw(), var_1);
   }
 
-  return var2;
+  return var_2;
 }
 
 function init_chatter() {
@@ -1172,312 +1172,312 @@ function terminate_chatter() {
   level.vo_chatter = undefined;
 }
 
-function say_as_chatter(var0, var1, var2) {
-  return do_as_chatter(&say, [var0, var1], var1, var2);
+function say_as_chatter(var_0, var_1, var_2) {
+  return do_as_chatter(&say, [var_0, var_1], var_1, var_2);
 }
 
-function say_as_chatter_with_gesture(var0, var1, var2, var3) {
-  return do_as_chatter(&say, [var1, var2, var0], var2, var3);
+function say_as_chatter_with_gesture(var_0, var_1, var_2, var_3) {
+  return do_as_chatter(&say, [var_1, var_2, var_0], var_2, var_3);
 }
 
-function say_sequence_as_chatter(var0, var1, var2) {
-  return do_as_chatter(&say_sequence, [var0], var1, var2);
+function say_sequence_as_chatter(var_0, var_1, var_2) {
+  return do_as_chatter(&say_sequence, [var_0], var_1, var_2);
 }
 
-function wait_for_break_in_chatter(var0) {
-  var1 = spawnStruct();
-  var2 = 0;
+function wait_for_break_in_chatter(var_0) {
+  var_1 = spawnStruct();
+  var_2 = 0;
 
   if(!isDefined(level.vo_chatter) || !level.vo_chatter.speaking) {
     return 1;
   }
 
-  level.vo_chatter.waiting = scripts\engine\utility::array_add(level.vo_chatter.waiting, var1);
+  level.vo_chatter.waiting = scripts\engine\utility::array_add(level.vo_chatter.waiting, var_1);
 
-  if(isDefined(var0) && isstring(var0)) {
-    var2 = scripts\engine\utility::waittill_any_ents_return(var1, "proceed", self, var0, level, var0) == var0;
-  } else if(isDefined(var0)) {
-    var2 = var1 scripts\engine\utility::waittill_notify_or_timeout_return("proceed", var0) == "timeout";
+  if(isDefined(var_0) && isstring(var_0)) {
+    var_2 = scripts\engine\utility::waittill_any_ents_return(var_1, "proceed", self, var_0, level, var_0) == var_0;
+  } else if(isDefined(var_0)) {
+    var_2 = var_1 scripts\engine\utility::waittill_notify_or_timeout_return("proceed", var_0) == "timeout";
   } else {
-    var1 waittill("proceed");
+    var_1 waittill("proceed");
   }
 
-  level.vo_chatter.waiting = scripts\engine\utility::array_remove(level.vo_chatter.waiting, var1);
-  return var2;
+  level.vo_chatter.waiting = scripts\engine\utility::array_remove(level.vo_chatter.waiting, var_1);
+  return var_2;
 }
 
-function do_as_chatter(var0, var1, var2, var3) {
+function do_as_chatter(var_0, var_1, var_2, var_3) {
   if(!isDefined(level.vo_chatter)) {
     thread init_chatter();
   }
 
   level.vo_chatter endon("terminate_chatter");
-  var4 = spawnStruct();
-  thread do_as_chatter_internal(var0, var1, var2, var3, var4);
-  var4 waittill("done", var5);
-  return var5;
+  var_4 = spawnStruct();
+  thread do_as_chatter_internal(var_0, var_1, var_2, var_3, var_4);
+  var_4 waittill("done", var_5);
+  return var_5;
 }
 
-function do_as_chatter_internal(var0, var1, var2, var3, var4) {
+function do_as_chatter_internal(var_0, var_1, var_2, var_3, var_4) {
   level.vo_chatter endon("terminate_chatter");
 
-  if(level.vo_chatter.speaking && (!istrue(var2) || isDefined(var3))) {
-    var5 = wait_for_break_in_chatter(var3);
+  if(level.vo_chatter.speaking && (!istrue(var_2) || isDefined(var_3))) {
+    var_5 = wait_for_break_in_chatter(var_3);
   } else {
-    var5 = 0;
+    var_5 = 0;
   }
 
-  var6 = undefined;
+  var_6 = undefined;
 
-  if(!level.vo_chatter.speaking || !var5 || istrue(var3)) {
-    level.vo_chatter notify("started_speaking", self, var1, var2);
+  if(!level.vo_chatter.speaking || !var_5 || istrue(var_3)) {
+    level.vo_chatter notify("started_speaking", self, var_1, var_2);
     level.vo_chatter.speaking++;
-    var6 = call_with_params(var1, var2);
+    var_6 = call_with_params(var_1, var_2);
     level.vo_chatter.speaking--;
-    level.vo_chatter notify("done_speaking", self, var1, var2);
+    level.vo_chatter notify("done_speaking", self, var_1, var_2);
   }
 
   if(!level.vo_chatter.speaking && isDefined(level.vo_chatter.waiting[0])) {
     level.vo_chatter.waiting[0] notify("proceed");
   }
 
-  var5 notify("done", var6);
+  var_5 notify("done", var_6);
 }
 
-function call_with_params(var0, var1) {
-  if(isbuiltinfunction(var0)) {
-    return call_with_params_script(var0, var1);
+function call_with_params(var_0, var_1) {
+  if(isbuiltinfunction(var_0)) {
+    return call_with_params_script(var_0, var_1);
   }
 
-  if(isbuiltinmethod(var0) || isanimation(var0)) {
-    return call_with_params_builtin(var0, var1);
+  if(isbuiltinmethod(var_0) || isanimation(var_0)) {
+    return call_with_params_builtin(var_0, var_1);
   }
 }
 
-function call_with_params_script(var0, var1) {
-  if(!isDefined(var1)) {
-    return self[[var0]]();
+function call_with_params_script(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    return self[[var_0]]();
   }
 
-  if(!isarray(var1)) {
-    return self[[var0]](var1);
+  if(!isarray(var_1)) {
+    return self[[var_0]](var_1);
   }
 
-  switch (var1.size) {
+  switch (var_1.size) {
     case 0:
-      return self[[var0]]();
+      return self[[var_0]]();
     case 1:
-      return self[[var0]](var1[0]);
+      return self[[var_0]](var_1[0]);
     case 2:
-      return self[[var0]](var1[0], var1[1]);
+      return self[[var_0]](var_1[0], var_1[1]);
     case 3:
-      return self[[var0]](var1[0], var1[1], var1[2]);
+      return self[[var_0]](var_1[0], var_1[1], var_1[2]);
     case 4:
-      return self[[var0]](var1[0], var1[1], var1[2], var1[3]);
+      return self[[var_0]](var_1[0], var_1[1], var_1[2], var_1[3]);
     case 5:
-      return self[[var0]](var1[0], var1[1], var1[2], var1[3], var1[4]);
+      return self[[var_0]](var_1[0], var_1[1], var_1[2], var_1[3], var_1[4]);
     case 6:
-      return self[[var0]](var1[0], var1[1], var1[2], var1[3], var1[4], var1[5]);
+      return self[[var_0]](var_1[0], var_1[1], var_1[2], var_1[3], var_1[4], var_1[5]);
     case 7:
-      return self[[var0]](var1[0], var1[1], var1[2], var1[3], var1[4], var1[5], var1[6]);
+      return self[[var_0]](var_1[0], var_1[1], var_1[2], var_1[3], var_1[4], var_1[5], var_1[6]);
     case 8:
-      return self[[var0]](var1[0], var1[1], var1[2], var1[3], var1[4], var1[5], var1[6], var1[7]);
+      return self[[var_0]](var_1[0], var_1[1], var_1[2], var_1[3], var_1[4], var_1[5], var_1[6], var_1[7]);
     case 9:
-      return self[[var0]](var1[0], var1[1], var1[2], var1[3], var1[4], var1[5], var1[6], var1[7], var1[8]);
+      return self[[var_0]](var_1[0], var_1[1], var_1[2], var_1[3], var_1[4], var_1[5], var_1[6], var_1[7], var_1[8]);
     default:
       break;
   }
 }
 
-function call_with_params_builtin(var0, var1) {
-  if(!isDefined(var1)) {
-    return self[[var0]]();
+function call_with_params_builtin(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    return self[[var_0]]();
   }
 
-  if(!isarray(var1)) {
-    return self builtin[[var0]](var1);
+  if(!isarray(var_1)) {
+    return self builtin[[var_0]](var_1);
   }
 
-  switch (var1.size) {
+  switch (var_1.size) {
     case 0:
-      return self builtin[[var0]]();
+      return self builtin[[var_0]]();
     case 1:
-      return self builtin[[var0]](var1[0]);
+      return self builtin[[var_0]](var_1[0]);
     case 2:
-      return self builtin[[var0]](var1[0], var1[1]);
+      return self builtin[[var_0]](var_1[0], var_1[1]);
     case 3:
-      return self builtin[[var0]](var1[0], var1[1], var1[2]);
+      return self builtin[[var_0]](var_1[0], var_1[1], var_1[2]);
     case 4:
-      return self builtin[[var0]](var1[0], var1[1], var1[2], var1[3]);
+      return self builtin[[var_0]](var_1[0], var_1[1], var_1[2], var_1[3]);
     case 5:
-      return self builtin[[var0]](var1[0], var1[1], var1[2], var1[3], var1[4]);
+      return self builtin[[var_0]](var_1[0], var_1[1], var_1[2], var_1[3], var_1[4]);
     case 6:
-      return self builtin[[var0]](var1[0], var1[1], var1[2], var1[3], var1[4], var1[5]);
+      return self builtin[[var_0]](var_1[0], var_1[1], var_1[2], var_1[3], var_1[4], var_1[5]);
     case 7:
-      return self builtin[[var0]](var1[0], var1[1], var1[2], var1[3], var1[4], var1[5], var1[6]);
+      return self builtin[[var_0]](var_1[0], var_1[1], var_1[2], var_1[3], var_1[4], var_1[5], var_1[6]);
     case 8:
-      return self builtin[[var0]](var1[0], var1[1], var1[2], var1[3], var1[4], var1[5], var1[6], var1[7]);
+      return self builtin[[var_0]](var_1[0], var_1[1], var_1[2], var_1[3], var_1[4], var_1[5], var_1[6], var_1[7]);
     case 9:
-      return self builtin[[var0]](var1[0], var1[1], var1[2], var1[3], var1[4], var1[5], var1[6], var1[7], var1[8]);
+      return self builtin[[var_0]](var_1[0], var_1[1], var_1[2], var_1[3], var_1[4], var_1[5], var_1[6], var_1[7], var_1[8]);
     default:
       break;
   }
 }
 
-function nagtill_or_timeout(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
-  var9 = spawnStruct();
-  var9 endon("stop");
-  var9 scripts\engine\utility::delaythread(var0, &scripts\engine\utility::send_notify, "stop");
-  nagtill(var1, var2, var3, var4, var5, var6, var7, var8);
+function nagtill_or_timeout(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  var_9 = spawnStruct();
+  var_9 endon("stop");
+  var_9 scripts\engine\utility::delaythread(var_0, &scripts\engine\utility::send_notify, "stop");
+  nagtill(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 }
 
-function nagtill_delayed(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
-  if(isDefined(var1)) {
-    if(!isarray(var1)) {
-      var1 = [var1];
+function nagtill_delayed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  if(isDefined(var_1)) {
+    if(!isarray(var_1)) {
+      var_1 = [var_1];
     }
 
-    foreach(var11 in var1) {
-      var12 = scripts\engine\utility::flag_exist(var11) && scripts\engine\utility::ter_op(istrue(var9), !scripts\engine\utility::flag(var11), scripts\engine\utility::flag(var11));
+    foreach(var_11 in var_1) {
+      var_12 = scripts\engine\utility::flag_exist(var_11) && scripts\engine\utility::ter_op(istrue(var_9), !scripts\engine\utility::flag(var_11), scripts\engine\utility::flag(var_11));
 
-      if(var12) {
+      if(var_12) {
         return;
       }
 
-      level endon(var11);
-      self endon(var11);
+      level endon(var_11);
+      self endon(var_11);
     }
   }
 
-  wait var0;
-  nagtill(var1, var2, var3, var4, var5, var6, var7, var8, var9);
+  wait var_0;
+  nagtill(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 }
 
-function nagtill_open_delayed(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
-  if(isDefined(var1)) {
-    if(!isarray(var1)) {
-      var1 = [var1];
+function nagtill_open_delayed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  if(isDefined(var_1)) {
+    if(!isarray(var_1)) {
+      var_1 = [var_1];
     }
 
-    foreach(var10 in var1) {
-      if(scripts\engine\utility::flag_exist(var10) && !scripts\engine\utility::flag(var10)) {
+    foreach(var_10 in var_1) {
+      if(scripts\engine\utility::flag_exist(var_10) && !scripts\engine\utility::flag(var_10)) {
         return;
       }
 
-      level endon(var10);
-      self endon(var10);
+      level endon(var_10);
+      self endon(var_10);
     }
   }
 
-  wait var0;
-  return nagtill(var1, var2, var3, var4, var5, var6, var7, var8, 1);
+  wait var_0;
+  return nagtill(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 1);
 }
 
-function nagtill_open(var0, var1, var2, var3, var4, var5, var6, var7) {
-  return nagtill(var0, var1, var2, var3, var4, var5, var6, var7, 1);
+function nagtill_open(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  return nagtill(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 1);
 }
 
-function nagtill(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
-  var2 = default_if_undefined(var2, 3);
-  var3 = default_if_undefined(var3, 1.5);
-  var4 = default_if_undefined(var4, 25);
-  var5 = default_if_undefined(var5, var2 / 4);
-  var6 = default_if_undefined(var6, var3);
-  var7 = default_if_undefined(var7, var4 / 4);
-  var9 = var4 > var2;
-  var10 = var7 > var5;
+function nagtill(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  var_2 = default_if_undefined(var_2, 3);
+  var_3 = default_if_undefined(var_3, 1.5);
+  var_4 = default_if_undefined(var_4, 25);
+  var_5 = default_if_undefined(var_5, var_2 / 4);
+  var_6 = default_if_undefined(var_6, var_3);
+  var_7 = default_if_undefined(var_7, var_4 / 4);
+  var_9 = var_4 > var_2;
+  var_10 = var_7 > var_5;
 
-  if(isDefined(var0)) {
-    if(!isarray(var0)) {
-      var0 = [var0];
+  if(isDefined(var_0)) {
+    if(!isarray(var_0)) {
+      var_0 = [var_0];
     }
 
-    foreach(var12 in var0) {
-      var13 = scripts\engine\utility::flag_exist(var12) && scripts\engine\utility::ter_op(istrue(var8), !scripts\engine\utility::flag(var12), scripts\engine\utility::flag(var12));
+    foreach(var_12 in var_0) {
+      var_13 = scripts\engine\utility::flag_exist(var_12) && scripts\engine\utility::ter_op(istrue(var_8), !scripts\engine\utility::flag(var_12), scripts\engine\utility::flag(var_12));
 
-      if(var13) {
+      if(var_13) {
         return;
       }
 
-      level endon(var12);
-      self endon(var12);
+      level endon(var_12);
+      self endon(var_12);
     }
   }
 
-  jumpiffalse(isarray(var1)) LOC_000000dc;
-  var1 = scripts\engine\sp\utility::create_deck(var1, 0);
-  var1.autoshuffle = 1;
+  jumpiffalse(isarray(var_1)) LOC_000000dc;
+  var_1 = scripts\engine\sp\utility::create_deck(var_1, 0);
+  var_1.autoshuffle = 1;
 
   for(;;) {
-    var15 = self;
-    var16 = var1 scripts\engine\sp\utility::deck_draw();
+    var_15 = self;
+    var_16 = var_1 scripts\engine\sp\utility::deck_draw();
 
-    if(isarray(var16)) {
-      var15 = var16[0];
-      var16 = var16[1];
+    if(isarray(var_16)) {
+      var_15 = var_16[0];
+      var_16 = var_16[1];
     }
 
-    thread notify_started_nag(var15);
-    say_as_chatter(var15, var16);
-    level notify("said_nag", var15, var16);
-    wait randomfloatrange(var2 - var5, var2 + var5);
+    thread notify_started_nag(var_15);
+    say_as_chatter(var_15, var_16);
+    level notify("said_nag", var_15, var_16);
+    wait randomfloatrange(var_2 - var_5, var_2 + var_5);
 
-    if(var9) {
-      var2 = min(var2 * var3, var4);
+    if(var_9) {
+      var_2 = min(var_2 * var_3, var_4);
     } else {
-      var2 = max(var2 * var3, var4);
+      var_2 = max(var_2 * var_3, var_4);
     }
 
-    if(var10) {
-      var5 = min(var5 * var6, var7);
+    if(var_10) {
+      var_5 = min(var_5 * var_6, var_7);
     } else {
-      var5 = max(var5 * var6, var7);
+      var_5 = max(var_5 * var_6, var_7);
     }
 
-    if(var1 scripts\engine\sp\utility::deck_is_empty()) {
-      array_deck_shuffle(var1);
+    if(var_1 scripts\engine\sp\utility::deck_is_empty()) {
+      array_deck_shuffle(var_1);
     }
   }
 }
 
-function notify_started_nag(var0) {
-  if(!isDefined(self) || !isDefined(var0)) {
+function notify_started_nag(var_0) {
+  if(!isDefined(self) || !isDefined(var_0)) {
     return;
   }
 
-  self waittillmatch("started_speaking", var0);
-  level notify("started_nag", self, var0);
+  self waittillmatch("started_speaking", var_0);
+  level notify("started_nag", self, var_0);
 }
 
-function compare(var0, var1) {
-  if(isarray(var0)) {
-    if(isarray(var1)) {
-      return compare_arrays(var0, var1);
+function compare(var_0, var_1) {
+  if(isarray(var_0)) {
+    if(isarray(var_1)) {
+      return compare_arrays(var_0, var_1);
     }
 
     return 0;
   }
 
-  if(isarray(var1)) {
+  if(isarray(var_1)) {
     return 0;
   }
 
-  return var0 == var1;
+  return var_0 == var_1;
 }
 
-function compare_arrays(var0, var1) {
-  if(var0.size != var1.size) {
+function compare_arrays(var_0, var_1) {
+  if(var_0.size != var_1.size) {
     return false;
   }
 
-  foreach(var3 in var0) {
-    if(!isDefined(var1[var5])) {
+  foreach(var_3 in var_0) {
+    if(!isDefined(var_1[var_5])) {
       return false;
     }
 
-    var4 = var1[var5];
+    var_4 = var_1[var_5];
 
-    if(compare(var4, var3)) {
+    if(compare(var_4, var_3)) {
       return false;
     }
   }
@@ -1486,66 +1486,66 @@ function compare_arrays(var0, var1) {
 }
 
 function array_deck_shuffle() {
-  var0 = self;
-  var0.index = 0;
-  var0.items = scripts\engine\utility::array_randomize(var0.items);
+  var_0 = self;
+  var_0.index = 0;
+  var_0.items = scripts\engine\utility::array_randomize(var_0.items);
 
-  if(!var0.prevent_redraw || !isDefined(var0.last_drawn) || var0.items.size <= 1) {
+  if(!var_0.prevent_redraw || !isDefined(var_0.last_drawn) || var_0.items.size <= 1) {
     return;
   }
 
-  var1 = compare(var0.items[0], var0.last_drawn);
+  var_1 = compare(var_0.items[0], var_0.last_drawn);
 
-  if(var1) {
-    var2 = randomintrange(1, var0.items.size);
-    var3 = var0.items[0];
-    var0.items[0] = var0.items[var2];
-    var0.items[var2] = var3;
+  if(var_1) {
+    var_2 = randomintrange(1, var_0.items.size);
+    var_3 = var_0.items[0];
+    var_0.items[0] = var_0.items[var_2];
+    var_0.items[var_2] = var_3;
     return;
   }
 }
 
-function default_if_undefined(var0, var1) {
-  if(!isDefined(var0)) {
-    var0 = var1;
+function default_if_undefined(var_0, var_1) {
+  if(!isDefined(var_0)) {
+    var_0 = var_1;
   }
 
-  return var0;
+  return var_0;
 }
 
-function wait_combat_cooldown(var0, var1, var2) {
-  if(istrue(var2)) {
-    wait var0;
+function wait_combat_cooldown(var_0, var_1, var_2) {
+  if(istrue(var_2)) {
+    wait var_0;
   }
 
-  while(!isDefined(var1) || var1 > 0) {
-    if(!recently_in_combat(var0)) {
+  while(!isDefined(var_1) || var_1 > 0) {
+    if(!recently_in_combat(var_0)) {
       return false;
     }
 
     waitframe();
 
-    if(isDefined(var1)) {
-      var1 -= 0.05;
+    if(isDefined(var_1)) {
+      var_1 -= 0.05;
     }
   }
 
   return true;
 }
 
-function recently_in_combat(var0) {
-  var1 = isDefined(level.player.last_weapon_fire_time) && !scripts\engine\utility::time_has_passed(level.player.last_weapon_fire_time, var0);
-  var2 = isDefined(level.player.last_damaged_time) && !scripts\engine\utility::time_has_passed(level.player.last_damaged_time, var0);
-  return level.player isfiring() || var1 || var2;
+function recently_in_combat(var_0) {
+  var_1 = isDefined(level.player.last_weapon_fire_time) && !scripts\engine\utility::time_has_passed(level.player.last_weapon_fire_time, var_0);
+  var_2 = isDefined(level.player.last_damaged_time) && !scripts\engine\utility::time_has_passed(level.player.last_damaged_time, var_0);
+  return level.player isfiring() || var_1 || var_2;
 }
 
 function track_player_combat_time() {
   level.player endon("death");
 
   for(;;) {
-    var0 = level.player scripts\engine\utility::waittill_any_return("weapon_fired", "damage") == "weapon_fired";
+    var_0 = level.player scripts\engine\utility::waittill_any_return("weapon_fired", "damage") == "weapon_fired";
 
-    if(var0) {
+    if(var_0) {
       level.player.last_weapon_fire_time = gettime();
       continue;
     }
@@ -1554,70 +1554,70 @@ function track_player_combat_time() {
   }
 }
 
-function wait_lookat_or_timeout(var0, var1, var2, var3, var4, var5, var6) {
-  return wait_lookat(var0, var1, var3, var4, var5, var6, var2, 1);
+function wait_lookat_or_timeout(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  return wait_lookat(var_0, var_1, var_3, var_4, var_5, var_6, var_2, 1);
 }
 
-function wait_lookat_ads_or_timeout(var0, var1, var2, var3, var4, var5, var6) {
-  return wait_lookat_ads(var0, var1, var3, var4, var5, var6, var2);
+function wait_lookat_ads_or_timeout(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  return wait_lookat_ads(var_0, var_1, var_3, var_4, var_5, var_6, var_2);
 }
 
-function wait_lookat_ads(var0, var1, var2, var3, var4, var5, var6) {
-  if(!istrue(var5)) {
-    var5 = 0;
+function wait_lookat_ads(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if(!istrue(var_5)) {
+    var_5 = 0;
   }
 
-  return wait_lookat(var0, var1, var2, var3, var4, var5, var6, 1);
+  return wait_lookat(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 1);
 }
 
-function wait_lookaway(var0, var1, var2, var3, var4, var5, var6, var7) {
-  return wait_lookat(var0, var1, var2, var3, var4, var5, var6, var7, 1);
+function wait_lookaway(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  return wait_lookat(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 1);
 }
 
-function wait_lookat(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
-  if(isDefined(var3)) {
-    var3 *= 1000;
+function wait_lookat(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  if(isDefined(var_3)) {
+    var_3 *= 1000;
   } else {
-    var3 = 0;
+    var_3 = 0;
   }
 
-  var9 = undefined;
+  var_9 = undefined;
 
-  while(!isDefined(var9) || gettime() - var9 <= var3) {
-    if(!isDefined(var0)) {
+  while(!isDefined(var_9) || gettime() - var_9 <= var_3) {
+    if(!isDefined(var_0)) {
       return;
     }
 
-    if(isDefined(var4)) {
-      wait_near(level.player, var0, var4);
+    if(isDefined(var_4)) {
+      wait_near(level.player, var_0, var_4);
     }
 
-    var10 = is_looking_at(var0, var1, var2, var5);
+    var_10 = is_looking_at(var_0, var_1, var_2, var_5);
 
-    if(var8) {
-      var10 = !var10;
+    if(var_8) {
+      var_10 = !var_10;
     }
 
-    if(istrue(var7)) {
-      var10 = var10 && level.player scripts\engine\sp\utility::isads();
+    if(istrue(var_7)) {
+      var_10 = var_10 && level.player scripts\engine\sp\utility::isads();
     }
 
-    if(var10 && !isDefined(var9)) {
-      var9 = gettime();
-    } else if(!var10) {
-      var9 = undefined;
+    if(var_10 && !isDefined(var_9)) {
+      var_9 = gettime();
+    } else if(!var_10) {
+      var_9 = undefined;
     }
 
-    if(var10 && (!isDefined(var3) || var3 == 0)) {
+    if(var_10 && (!isDefined(var_3) || var_3 == 0)) {
       break;
     }
 
     waitframe();
 
-    if(isDefined(var6)) {
-      var6 -= 0.05;
+    if(isDefined(var_6)) {
+      var_6 -= 0.05;
 
-      if(var6 <= 0) {
+      if(var_6 <= 0) {
         return 0;
       }
     }
@@ -1626,46 +1626,46 @@ function wait_lookat(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
   return 1;
 }
 
-function is_looking_at(var0, var1, var2, var3) {
-  if(isent(var0) && isDefined(var2)) {
-    var4 = var0 gettagorigin(var2);
-  } else if((isent(var1) || isstruct(var1)) && isDefined(var1.origin)) {
-    var4 = var1.origin;
+function is_looking_at(var_0, var_1, var_2, var_3) {
+  if(isent(var_0) && isDefined(var_2)) {
+    var_4 = var_0 gettagorigin(var_2);
+  } else if((isent(var_1) || isstruct(var_1)) && isDefined(var_1.origin)) {
+    var_4 = var_1.origin;
   } else {
-    var4 = var2;
+    var_4 = var_2;
   }
 
-  var5 = level.player worldpointtoscreenpos(var4, getdvarint("MRNKTKLLKP"));
+  var_5 = level.player worldpointtoscreenpos(var_4, getdvarint("MRNKTKLLKP"));
 
-  if(!isDefined(var5)) {
+  if(!isDefined(var_5)) {
     return 0;
   }
 
-  if(isDefined(var3) && length2d(var5) > var3) {
+  if(isDefined(var_3) && length2d(var_5) > var_3) {
     return 0;
   }
 
-  if(!isDefined(var4) || var4) {
-    jumpiffalse(isent(var2)) LOC_00000098;
-    var6 = [level.player, var2];
+  if(!isDefined(var_4) || var_4) {
+    jumpiffalse(isent(var_2)) LOC_00000098;
+    var_6 = [level.player, var_2];
     goto LOC_000000a3;
   } else {
-    var7 = 1;
+    var_7 = 1;
   }
 
-  return var7;
+  return var_7;
 }
 
-function wait_near(var0, var1) {
-  var2 = var1 * var1;
-  var3 = var0;
+function wait_near(var_0, var_1) {
+  var_2 = var_1 * var_1;
+  var_3 = var_0;
 
   for(;;) {
-    if(isent(var0)) {
-      var3 = var0.origin;
+    if(isent(var_0)) {
+      var_3 = var_0.origin;
     }
 
-    if(distance2dsquared(self.origin, var3) < var2) {
+    if(distance2dsquared(self.origin, var_3) < var_2) {
       break;
     }
 
@@ -1673,49 +1673,49 @@ function wait_near(var0, var1) {
   }
 }
 
-function say_on_enemy_radio(var0, var1, var2) {
-  var3 = 0;
+function say_on_enemy_radio(var_0, var_1, var_2) {
+  var_3 = 0;
 
-  if(!istrue(var1) || isDefined(var2)) {
-    var3 = wait_for_break_in_chatter(var2);
+  if(!istrue(var_1) || isDefined(var_2)) {
+    var_3 = wait_for_break_in_chatter(var_2);
   }
 
-  if(isDefined(var1) && !var1 && var3) {
+  if(isDefined(var_1) && !var_1 && var_3) {
     return;
   }
 
-  var4 = getcorpsearrayinradius(level.player.origin, 1000);
-  var5 = scripts\engine\utility::array_combine(var4, getaiarrayinradius(level.player.origin, 1000, "axis"));
+  var_4 = getcorpsearrayinradius(level.player.origin, 1000);
+  var_5 = scripts\engine\utility::array_combine(var_4, getaiarrayinradius(level.player.origin, 1000, "axis"));
 
-  if(var5.size == 0) {
+  if(var_5.size == 0) {
     return;
   }
 
-  var6 = undefined;
-  var7 = undefined;
+  var_6 = undefined;
+  var_7 = undefined;
 
-  foreach(var9 in var5) {
-    if(getsubstr(var9.classname, 0, 11) != "actor_enemy") {
+  foreach(var_9 in var_5) {
+    if(getsubstr(var_9.classname, 0, 11) != "actor_enemy") {
       continue;
     }
 
-    var10 = distance2dsquared(level.player.origin, var9 gettagorigin("j_chest"));
+    var_10 = distance2dsquared(level.player.origin, var_9 gettagorigin("j_chest"));
 
-    if(!isDefined(var7) || var10 < var7) {
-      var6 = var9;
-      var7 = var10;
+    if(!isDefined(var_7) || var_10 < var_7) {
+      var_6 = var_9;
+      var_7 = var_10;
     }
   }
 
-  if(!isDefined(var6)) {
+  if(!isDefined(var_6)) {
     return;
   }
 
-  var12 = var6 gettagorigin("j_chest");
-  var13 = var6 gettagangles("j_chest");
-  var14 = scripts\engine\utility::spawn_script_origin(var12, var13);
-  var14 linkTo(var6, "j_chest");
-  say(var14, var0, 1);
+  var_12 = var_6 gettagorigin("j_chest");
+  var_13 = var_6 gettagangles("j_chest");
+  var_14 = scripts\engine\utility::spawn_script_origin(var_12, var_13);
+  var_14 linkTo(var_6, "j_chest");
+  say(var_14, var_0, 1);
 }
 
 function mus_forest_overlook() {

@@ -28,10 +28,10 @@ function main() {
   self.usescriptedweapon = 1;
   self.scriptedweaponclassprimary = "ar";
   self.weapon = scripts\code\ai::create_weapon_in_script(["iw8_ar_akilo47", "iw8_ar_asierra12"]);
-  var0 = undefined;
-  var1 = ["character_iw8_russian_weapon_smugglers_1", "character_iw8_russian_weapon_smugglers_2", "character_iw8_russian_weapon_smugglers_3", "character_iw8_russian_weapon_smugglers_4", "character_iw8_russian_weapon_smugglers_5"];
+  var_0 = undefined;
+  var_1 = ["character_iw8_russian_weapon_smugglers_1", "character_iw8_russian_weapon_smugglers_2", "character_iw8_russian_weapon_smugglers_3", "character_iw8_russian_weapon_smugglers_4", "character_iw8_russian_weapon_smugglers_5"];
 
-  switch (scripts\code\character::get_random_character(5, var0, var1)) {
+  switch (scripts\code\character::get_random_character(5, var_0, var_1)) {
     case 0:
       character\character_iw8_russian_weapon_smugglers_1::main();
       break;
@@ -54,7 +54,7 @@ function spawner() {
   self setspawnerteam("axis");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\character_iw8_russian_weapon_smugglers_1::precache();
   character\character_iw8_russian_weapon_smugglers_2::precache();
   character\character_iw8_russian_weapon_smugglers_3::precache();

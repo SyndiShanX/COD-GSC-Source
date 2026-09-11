@@ -8,11 +8,11 @@ function init_sp_flags() {
     scripts\engine\flags::init_flags();
   }
 
-  var0 = ["missionfailed", "load_finished", "scriptables_ready"];
+  var_0 = ["missionfailed", "load_finished", "scriptables_ready"];
 
-  foreach(var2 in var0) {
-    if(!scripts\engine\utility::flag_exist(var2)) {
-      scripts\engine\utility::flag_init(var2);
+  foreach(var_2 in var_0) {
+    if(!scripts\engine\utility::flag_exist(var_2)) {
+      scripts\engine\utility::flag_init(var_2);
     }
   }
 }

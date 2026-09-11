@@ -7,6 +7,6 @@ function generic_combat() {
   scripts\anim\battlechatter::playbattlechatter();
 }
 
-function specific_combat(var0) {
+function specific_combat(var_0) {
   scripts\anim\battlechatter::playbattlechatter();
 }

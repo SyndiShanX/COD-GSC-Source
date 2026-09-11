@@ -10,14 +10,14 @@ function helper_drone_init() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("scrambler_drone_escort", &scripts\cp_mp\killstreaks\helper_drone::tryusehelperdronefromstruct);
   scripts\mp\killstreaks\killstreaks::registerkillstreak("scrambler_drone_guard", &scripts\cp_mp\killstreaks\helper_drone::tryusehelperdronefromstruct);
   scripts\mp\killstreaks\killstreaks::registerkillstreak("assault_drone", &scripts\cp_mp\killstreaks\helper_drone::tryusehelperdronefromstruct);
-  var0 = getarraykeys(level.helperdronesettings);
+  var_0 = getarraykeys(level.helperdronesettings);
 
-  foreach(var2 in var0) {
-    var3 = level.helperdronesettings[var2].hitstokill;
+  foreach(var_2 in var_0) {
+    var_3 = level.helperdronesettings[var_2].hitstokill;
 
-    if(isDefined(var3)) {
-      scripts\mp\vehicles\damage::set_vehicle_hit_damage_data(var2, var3);
-      scripts\mp\vehicles\damage::set_weapon_hit_damage_data_for_vehicle("emp_grenade_mp", var3, var2);
+    if(isDefined(var_3)) {
+      scripts\mp\vehicles\damage::set_vehicle_hit_damage_data(var_2, var_3);
+      scripts\mp\vehicles\damage::set_weapon_hit_damage_data_for_vehicle("emp_grenade_mp", var_3, var_2);
     }
   }
 
@@ -25,7 +25,7 @@ function helper_drone_init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("helperDrone", "onReconDroneSuperStarted", &spawn_addtoarrays);
 }
 
-function helperdrone_updateheadicononjointeam(var0) {}
+function helperdrone_updateheadicononjointeam(var_0) {}
 
 function spawn_addtoarrays() {
   if(scripts\mp\utility\game::getgametype() == "br" && !scripts\mp\flags::gameflag("prematch_fade_done")) {
@@ -39,10 +39,10 @@ function ref_12a97() {
   self endon("reconDroneEnded");
   self endon("reconDroneUnset");
   scripts\mp\flags::gameflagwait("prematch_fade_done");
-  var0 = getcompleteweaponname("ks_remote_drone_mp");
+  var_0 = getcompleteweaponname("ks_remote_drone_mp");
 
-  if(self hasweapon(var0)) {
-    scripts\cp_mp\utility\inventory_utility::_takeweapon(var0);
+  if(self hasweapon(var_0)) {
+    scripts\cp_mp\utility\inventory_utility::_takeweapon(var_0);
     return;
   }
 }

@@ -11,59 +11,59 @@ function init() {
   scripts\cp_mp\utility\killstreak_utility::registervisibilityomnvarforkillstreak("manual_turret", "on", 10);
 }
 
-function weaponcleanupmanualturret(var0, var1, var2) {
-  if(!istrue(var1)) {
-    scripts\cp_mp\killstreaks\killstreakdeploy::rocket_fuel(var2);
+function weaponcleanupmanualturret(var_0, var_1, var_2) {
+  if(!istrue(var_1)) {
+    scripts\cp_mp\killstreaks\killstreakdeploy::rocket_fuel(var_2);
     return;
   }
 }
 
-function tryusemanualturret(var0) {
-  var1 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo(var0, self);
-  return tryusemanualturretfromstruct(var1);
+function tryusemanualturret(var_0) {
+  var_1 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo(var_0, self);
+  return tryusemanualturretfromstruct(var_1);
 }
 
-function tryusemanualturretfromstruct(var0) {
+function tryusemanualturretfromstruct(var_0) {
   level endon("game_ended");
   self endon("disconnect");
 
   if(isDefined(level.killstreaktriggeredfunc)) {
-    if(!level[[level.killstreaktriggeredfunc]](var0)) {
+    if(!level[[level.killstreaktriggeredfunc]](var_0)) {
       return false;
     }
   }
 
   scripts\cp_mp\utility\weapon_utility::ref_12eb2();
-  var1 = scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_doweaponswitchdeploy(var0, getcompleteweaponname("deploy_manual_turret_mp"), 1, undefined, undefined, &weaponcleanupmanualturret);
+  var_1 = scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_doweaponswitchdeploy(var_0, getcompleteweaponname("deploy_manual_turret_mp"), 1, undefined, undefined, &weaponcleanupmanualturret);
 
-  if(!istrue(var1)) {
+  if(!istrue(var_1)) {
     return false;
   }
 
   if(isDefined(level.killstreakbeginusefunc)) {
-    if(!level[[level.killstreakbeginusefunc]](var0)) {
+    if(!level[[level.killstreakbeginusefunc]](var_0)) {
       return false;
     }
   }
 
   ref_11acc(0);
-  var2 = manualturret_create("manual_turret", var0);
+  var_2 = manualturret_create("manual_turret", var_0);
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     ref_11acc(1);
     return false;
   }
 
-  var3 = manualturret_watchplacement(var2, var0, 0, 1.25);
+  var_3 = manualturret_watchplacement(var_2, var_0, 0, 1.25);
 
-  if(!isDefined(var3)) {
+  if(!isDefined(var_3)) {
     ref_11acc(1);
-    var2 delete();
+    var_2 delete();
     return false;
   }
 
   ref_11acc(1);
-  manualturret_setplaced(var2, var3);
+  manualturret_setplaced(var_2, var_3);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("manual_turret", "munitionUsed")) {
     self[[scripts\cp_mp\utility\script_utility::getsharedfunc("manual_turret", "munitionUsed")]]();
@@ -72,21 +72,21 @@ function tryusemanualturretfromstruct(var0) {
   return true;
 }
 
-function manualturret_watchplacement(var0, var1, var2, var3) {
-  thread manualturret_delayplacementinstructions(var3);
-  var4 = undefined;
+function manualturret_watchplacement(var_0, var_1, var_2, var_3) {
+  thread manualturret_delayplacementinstructions(var_3);
+  var_4 = undefined;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("manual_turret", "watchForPlayerEnteringLastStand")) {
     self thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("manual_turret", "watchForPlayerEnteringLastStand")]]();
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("manual_turret", "getTargetMarker")) {
-    var4 = self[[scripts\cp_mp\utility\script_utility::getsharedfunc("manual_turret", "getTargetMarker")]](var1, var2);
+    var_4 = self[[scripts\cp_mp\utility\script_utility::getsharedfunc("manual_turret", "getTargetMarker")]](var_1, var_2);
   }
 
   self notify("turret_placement_finished");
 
-  if(!isDefined(var4) || !isDefined(var4.location)) {
+  if(!isDefined(var_4) || !isDefined(var_4.location)) {
     if(istrue(self.inlaststand)) {
       scripts\cp_mp\utility\inventory_utility::_takeweapon("deploy_manual_turret_mp");
     } else if(scripts\cp_mp\utility\player_utility::_isalive()) {
@@ -96,216 +96,216 @@ function manualturret_watchplacement(var0, var1, var2, var3) {
     return undefined;
   }
 
-  thread manualturret_disablefire(var0, self, 1);
+  thread manualturret_disablefire(var_0, self, 1);
 
   if(self hasweapon("deploy_manual_turret_mp")) {
     thread manualturret_switchbacklastweapon("deploy_manual_turret_mp", 1, 1);
   }
 
-  var5 = 0.85;
-  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var5);
-  return var4;
+  var_5 = 0.85;
+  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_5);
+  return var_4;
 }
 
-function manualturret_delayplacementinstructions(var0) {
+function manualturret_delayplacementinstructions(var_0) {
   self endon("death_or_disconnect");
   self endon("turret_placement_finished");
   level endon("game_ended");
-  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var0);
+  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_0);
   self setclientomnvar("ui_turret_placement", 1);
   thread ref_11ac6("death");
   thread ref_11ac6("turret_placement_finished");
 }
 
-function ref_11ac6(var0) {
+function ref_11ac6(var_0) {
   self endon("cleared_placement");
   self endon("disconnect");
   level endon("game_ended");
-  self waittill(var0);
+  self waittill(var_0);
   self setclientomnvar("ui_turret_placement", 0);
   self notify("cleared_placement");
 }
 
-function manualturret_create(var0, var1) {
-  var2 = level.sentrysettings[var0];
-  var3 = spawnturret("misc_turret", self.origin, level.sentrysettings[var0].weaponinfo);
-  var3.owner = self;
-  var3.team = self.team;
-  var3.angles = self.angles;
-  var3.health = 9999;
-  var3.maxhealth = var2.maxhealth;
-  var3.streakinfo = var1;
-  var3.turrettype = var0;
-  var3.shouldsplash = 1;
-  var3.ammocount = var2.ammo;
-  var3.reticlestate = "reticle_on";
-  var3.timeout = var2.timeout;
-  var3.carriedby = self;
-  manualturret_setturretmodel(var3, "placed");
-  var3 makeunusable();
-  var3 setnodeploy(1);
-  var3 setdefaultdroppitch(0);
-  var3 hide();
-  var3 scripts\cp_mp\emp_debuff::allow_emp(0);
-  var5 = anglesToForward(var3.angles);
-  var6 = var3 gettagorigin("tag_laser") + (0, 0, 10);
-  var6 -= var5 * 20;
-  var7 = spawn("script_model", var6);
-  var7 linkTo(var3);
-  var3.killcament = var7;
-  var3.helperdrone_isbeingpingedbydrone = spawn("script_model", var3.origin);
-  var3.helperdrone_isbeingpingedbydrone.team = var3.team;
-  var3.helperdrone_isbeingpingedbydrone.owner = var3.owner;
-  var3.helperdrone_isbeingpingedbydrone setModel("weapon_vm_mg_sentry_turret_invis_base");
-  var3.helperdrone_isbeingpingedbydrone dontinterpolate();
-  var3.helperdrone_isbeingpingedbydrone hide();
-  var3.helperdrone_isbeingpingedbydrone.moverdoesnotkill = 1;
-  var3.helperdrone_isbeingpingedbydrone.ref_13e8d = var3;
-  return var3;
+function manualturret_create(var_0, var_1) {
+  var_2 = level.sentrysettings[var_0];
+  var_3 = spawnturret("misc_turret", self.origin, level.sentrysettings[var_0].weaponinfo);
+  var_3.owner = self;
+  var_3.team = self.team;
+  var_3.angles = self.angles;
+  var_3.health = 9999;
+  var_3.maxhealth = var_2.maxhealth;
+  var_3.streakinfo = var_1;
+  var_3.turrettype = var_0;
+  var_3.shouldsplash = 1;
+  var_3.ammocount = var_2.ammo;
+  var_3.reticlestate = "reticle_on";
+  var_3.timeout = var_2.timeout;
+  var_3.carriedby = self;
+  manualturret_setturretmodel(var_3, "placed");
+  var_3 makeunusable();
+  var_3 setnodeploy(1);
+  var_3 setdefaultdroppitch(0);
+  var_3 hide();
+  var_3 scripts\cp_mp\emp_debuff::allow_emp(0);
+  var_5 = anglesToForward(var_3.angles);
+  var_6 = var_3 gettagorigin("tag_laser") + (0, 0, 10);
+  var_6 -= var_5 * 20;
+  var_7 = spawn("script_model", var_6);
+  var_7 linkTo(var_3);
+  var_3.killcament = var_7;
+  var_3.helperdrone_isbeingpingedbydrone = spawn("script_model", var_3.origin);
+  var_3.helperdrone_isbeingpingedbydrone.team = var_3.team;
+  var_3.helperdrone_isbeingpingedbydrone.owner = var_3.owner;
+  var_3.helperdrone_isbeingpingedbydrone setModel("weapon_vm_mg_sentry_turret_invis_base");
+  var_3.helperdrone_isbeingpingedbydrone dontinterpolate();
+  var_3.helperdrone_isbeingpingedbydrone hide();
+  var_3.helperdrone_isbeingpingedbydrone.moverdoesnotkill = 1;
+  var_3.helperdrone_isbeingpingedbydrone.ref_13e8d = var_3;
+  return var_3;
 }
 
-function manualturret_setplaced(var0, var1) {
-  var2 = level.sentrysettings[var0.turrettype];
-  manualturret_setturretmodel(var0, "placed");
+function manualturret_setplaced(var_0, var_1) {
+  var_2 = level.sentrysettings[var_0.turrettype];
+  manualturret_setturretmodel(var_0, "placed");
 
   if(!isDefined(self.placedsentries)) {
     self.placedsentries = [];
   }
 
-  if(!isDefined(self.placedsentries[var0.turrettype])) {
-    self.placedsentries[var0.turrettype] = [];
+  if(!isDefined(self.placedsentries[var_0.turrettype])) {
+    self.placedsentries[var_0.turrettype] = [];
   }
 
-  if(istrue(var0.shouldsplash)) {
+  if(istrue(var_0.shouldsplash)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("sound", "playKillstreakDeployDialog")) {
-      [[scripts\cp_mp\utility\script_utility::getsharedfunc("sound", "playKillstreakDeployDialog")]](self, var0.streakinfo.streakname);
+      [[scripts\cp_mp\utility\script_utility::getsharedfunc("sound", "playKillstreakDeployDialog")]](self, var_0.streakinfo.streakname);
     }
 
-    var3 = var2.teamsplash;
+    var_3 = var_2.teamsplash;
 
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "teamPlayerCardSplash")) {
-      level thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "teamPlayerCardSplash")]](var3, self);
+      level thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "teamPlayerCardSplash")]](var_3, self);
     }
 
-    var0.shouldsplash = 0;
+    var_0.shouldsplash = 0;
   }
 
-  var0 show();
-  var0 dontinterpolate();
-  var0.angles = var1.angles;
-  var0.carriedby = undefined;
+  var_0 show();
+  var_0 dontinterpolate();
+  var_0.angles = var_1.angles;
+  var_0.carriedby = undefined;
 
-  if(isDefined(var1.moving_platform)) {
-    var0.moving_platform = var1.moving_platform;
-    var0.ref_11dbe = var1.ref_11dbe;
-    var0.ref_11dbd = var1.ref_11dbd;
+  if(isDefined(var_1.moving_platform)) {
+    var_0.moving_platform = var_1.moving_platform;
+    var_0.ref_11dbe = var_1.ref_11dbe;
+    var_0.ref_11dbd = var_1.ref_11dbd;
   }
 
   if(isDefined(self.hideammoindex)) {
-    for(var4 = self.hideammoindex; var4 >= 1; var4--) {
-      var0 setscriptablepartstate("hide_ammo_" + var4, "on", 0);
+    for(var_4 = self.hideammoindex; var_4 >= 1; var_4--) {
+      var_0 setscriptablepartstate("hide_ammo_" + var_4, "on", 0);
     }
   }
 
-  var5 = "off";
+  var_5 = "off";
 
-  if(var0.reticlestate == "reticle_off") {
-    var5 = "on";
+  if(var_0.reticlestate == "reticle_off") {
+    var_5 = "on";
   }
 
-  var0 setscriptablepartstate("hide_reticle", var5, 0);
-  var0.origin = var1.location;
-  var0 playSound("sentry_gun_plant");
-  var0.helperdrone_isbeingpingedbydrone show();
-  var0.helperdrone_isbeingpingedbydrone.angles = var0.angles;
-  var0.helperdrone_isbeingpingedbydrone.origin = var0.origin;
-  var0.helperdrone_isbeingpingedbydrone linkTo(var0, "tag_aim_pivot");
-  var6 = scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "getGameType") && [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getGameType")]]() == "br";
+  var_0 setscriptablepartstate("hide_reticle", var_5, 0);
+  var_0.origin = var_1.location;
+  var_0 playSound("sentry_gun_plant");
+  var_0.helperdrone_isbeingpingedbydrone show();
+  var_0.helperdrone_isbeingpingedbydrone.angles = var_0.angles;
+  var_0.helperdrone_isbeingpingedbydrone.origin = var_0.origin;
+  var_0.helperdrone_isbeingpingedbydrone linkTo(var_0, "tag_aim_pivot");
+  var_6 = scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "getGameType") && [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getGameType")]]() == "br";
 
-  if(!var6) {
-    var7 = "icon_minimap_mobileturret";
+  if(!var_6) {
+    var_7 = "icon_minimap_mobileturret";
 
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "createObjective")) {
-      var0.minimapid = var0.helperdrone_isbeingpingedbydrone[[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "createObjective")]](var7, var0.team, undefined, 1, 1);
+      var_0.minimapid = var_0.helperdrone_isbeingpingedbydrone[[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "createObjective")]](var_7, var_0.team, undefined, 1, 1);
     }
   }
 
-  var8 = self.placedsentries[var0.turrettype].size;
-  self.placedsentries[var0.turrettype][var8] = var0;
+  var_8 = self.placedsentries[var_0.turrettype].size;
+  self.placedsentries[var_0.turrettype][var_8] = var_0;
 
-  if(var8 + 1 > 1) {
-    self.placedsentries[var0.turrettype][0] notify("kill_turret", 0, 0);
+  if(var_8 + 1 > 1) {
+    self.placedsentries[var_0.turrettype][0] notify("kill_turret", 0, 0);
   }
 
-  var9 = 70;
+  var_9 = 70;
 
-  if(var0.model == level.sentrysettings[var0.turrettype].modelbasecover) {
-    var9 = 35;
+  if(var_0.model == level.sentrysettings[var_0.turrettype].modelbasecover) {
+    var_9 = 35;
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "addToActiveKillstreakList")) {
-    var0[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "addToActiveKillstreakList")]](var0.turrettype, "Killstreak_Ground", self, 0, 1, var9, "carried_turret");
+    var_0[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "addToActiveKillstreakList")]](var_0.turrettype, "Killstreak_Ground", self, 0, 1, var_9, "carried_turret");
   }
 
-  var0 setmode(level.sentrysettings[var0.turrettype].sentrymodeon);
-  var10 = "j_trigger";
+  var_0 setmode(level.sentrysettings[var_0.turrettype].sentrymodeon);
+  var_10 = "j_trigger";
 
-  if(!isDefined(var0.useownerobj)) {
-    var11 = var0 gettagorigin(var10);
+  if(!isDefined(var_0.useownerobj)) {
+    var_11 = var_0 gettagorigin(var_10);
 
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("manual_turret", "createHintObject")) {
-      var0.useownerobj = [[scripts\cp_mp\utility\script_utility::getsharedfunc("manual_turret", "createHintObject")]](var11, "HINT_BUTTON", undefined, var2.ownerusehintstring, -1, "duration_none", undefined, 17, undefined, 17);
+      var_0.useownerobj = [[scripts\cp_mp\utility\script_utility::getsharedfunc("manual_turret", "createHintObject")]](var_11, "HINT_BUTTON", undefined, var_2.ownerusehintstring, -1, "duration_none", undefined, 17, undefined, 17);
     }
   } else {
-    var11 = var1 gettagorigin(var11);
-    var1.useownerobj makeusable();
-    var1.useownerobj dontinterpolate();
-    var1.useownerobj.origin = var11;
+    var_11 = var_1 gettagorigin(var_11);
+    var_1.useownerobj makeusable();
+    var_1.useownerobj dontinterpolate();
+    var_1.useownerobj.origin = var_11;
   }
 
-  var1.useownerobj linkTo(var1, var11);
+  var_1.useownerobj linkTo(var_1, var_11);
 
-  if(!isDefined(var1.useotherobj)) {
-    var11 = var1 gettagorigin(var11);
+  if(!isDefined(var_1.useotherobj)) {
+    var_11 = var_1 gettagorigin(var_11);
 
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("manual_turret", "createHintObject")) {
-      var1.useotherobj = [[scripts\cp_mp\utility\script_utility::getsharedfunc("manual_turret", "createHintObject")]](var11, "HINT_BUTTON", undefined, var5.otherusehintstring, -1, "duration_none", undefined, 17, undefined, 17);
+      var_1.useotherobj = [[scripts\cp_mp\utility\script_utility::getsharedfunc("manual_turret", "createHintObject")]](var_11, "HINT_BUTTON", undefined, var_5.otherusehintstring, -1, "duration_none", undefined, 17, undefined, 17);
     }
   } else {
-    var11 = var1 gettagorigin(var11);
-    var1.useotherobj makeusable();
-    var1.useotherobj dontinterpolate();
-    var1.useotherobj.origin = var11;
+    var_11 = var_1 gettagorigin(var_11);
+    var_1.useotherobj makeusable();
+    var_1.useotherobj dontinterpolate();
+    var_1.useotherobj.origin = var_11;
   }
 
-  var1.useotherobj linkTo(var1, var11);
+  var_1.useotherobj linkTo(var_1, var_11);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("manual_turret", "handleMovingPlatform")) {
-    [[scripts\cp_mp\utility\script_utility::getsharedfunc("manual_turret", "handleMovingPlatform")]](var1);
+    [[scripts\cp_mp\utility\script_utility::getsharedfunc("manual_turret", "handleMovingPlatform")]](var_1);
   }
 
-  var1 scripts\cp_mp\emp_debuff::allow_emp(1);
-  var1 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Static", self);
-  thread manualturret_delaydeletemarker(var1, self);
-  thread manualturret_watchuse(var1, self);
-  thread manualturret_watchuse(var1, self);
-  thread manualturret_watchpickup(var1);
-  thread manualturret_watchdamage(var1);
-  thread manualturret_watchdeath(var1);
+  var_1 scripts\cp_mp\emp_debuff::allow_emp(1);
+  var_1 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Static", self);
+  thread manualturret_delaydeletemarker(var_1, self);
+  thread manualturret_watchuse(var_1, self);
+  thread manualturret_watchuse(var_1, self);
+  thread manualturret_watchpickup(var_1);
+  thread manualturret_watchdamage(var_1);
+  thread manualturret_watchdeath(var_1);
   thread ref_11ace();
-  thread manualturret_watchtimeout(var1);
-  thread manualturret_watchdisown(var1);
+  thread manualturret_watchtimeout(var_1);
+  thread manualturret_watchdisown(var_1);
 }
 
-function manualturret_setcarried(var0) {
+function manualturret_setcarried(var_0) {
   self endon("kill_turret");
-  var0 endon("death_or_disconnect");
-  var0 endon("start_turret_use");
+  var_0 endon("death_or_disconnect");
+  var_0 endon("start_turret_use");
   level endon("game_ended");
 
   if(istrue(self.inuse)) {
     self.inuse = undefined;
-    ref_11acd(var0, 1);
+    ref_11acd(var_0, 1);
   }
 
   if(isDefined(self.moving_platform)) {
@@ -317,11 +317,11 @@ function manualturret_setcarried(var0) {
 
   scripts\cp_mp\emp_debuff::allow_emp(0);
   scripts\mp\sentientpoolmanager::unregistersentient(self.sentientpool, self.sentientpoolindex);
-  var1 = self getlinkedchildren();
+  var_1 = self getlinkedchildren();
 
-  foreach(var3 in var1) {
-    if(isDefined(var3)) {
-      var3 unlink();
+  foreach(var_3 in var_1) {
+    if(isDefined(var_3)) {
+      var_3 unlink();
     }
   }
 
@@ -334,87 +334,87 @@ function manualturret_setcarried(var0) {
   }
 
   self.helperdrone_isbeingpingedbydrone hide();
-  manualturret_setinactive(var0, self);
+  manualturret_setinactive(var_0, self);
   self hide();
-  self.carriedby = var0;
+  self.carriedby = var_0;
   self notify("carried_turret");
   self playSound("sentry_pickup");
-  var0 scripts\cp_mp\utility\weapon_utility::ref_12eb2();
-  var0 scripts\cp_mp\utility\inventory_utility::_giveweapon("deploy_manual_turret_mp");
-  var0 scripts\cp_mp\utility\inventory_utility::_switchtoweapon("deploy_manual_turret_mp");
-  ref_11acc(var0, 0);
-  var5 = manualturret_watchplacement(var0, self, self.streakinfo, 1, 2);
+  var_0 scripts\cp_mp\utility\weapon_utility::ref_12eb2();
+  var_0 scripts\cp_mp\utility\inventory_utility::_giveweapon("deploy_manual_turret_mp");
+  var_0 scripts\cp_mp\utility\inventory_utility::_switchtoweapon("deploy_manual_turret_mp");
+  ref_11acc(var_0, 0);
+  var_5 = manualturret_watchplacement(var_0, self, self.streakinfo, 1, 2);
 
-  if(!isDefined(var5)) {
-    ref_11acc(var0, 1);
+  if(!isDefined(var_5)) {
+    ref_11acc(var_0, 1);
     return 0;
   }
 
-  ref_11acc(var0, 1);
-  manualturret_setplaced(var0, self, var5);
+  ref_11acc(var_0, 1);
+  manualturret_setplaced(var_0, self, var_5);
 }
 
-function manualturret_switchbacklastweapon(var0, var1, var2) {
-  if(isDefined(var2) && var2 > 0) {
+function manualturret_switchbacklastweapon(var_0, var_1, var_2) {
+  if(isDefined(var_2) && var_2 > 0) {
     self endon("death_or_disconnect");
     level endon("game_ended");
-    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var2);
+    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_2);
   }
 
-  var3 = scripts\cp_mp\utility\weapon_utility::ref_12cc7(self.lastdroppableweaponobj);
+  var_3 = scripts\cp_mp\utility\weapon_utility::ref_12cc7(self.lastdroppableweaponobj);
 
-  if(istrue(var1)) {
-    scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate(var3);
+  if(istrue(var_1)) {
+    scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate(var_3);
   } else {
-    scripts\cp_mp\utility\inventory_utility::_switchtoweapon(var3);
+    scripts\cp_mp\utility\inventory_utility::_switchtoweapon(var_3);
   }
 
-  scripts\cp_mp\utility\inventory_utility::_takeweapon(var0);
+  scripts\cp_mp\utility\inventory_utility::_takeweapon(var_0);
 }
 
-function manualturret_setinactive(var0) {
-  var0 setmode(level.sentrysettings[var0.turrettype].sentrymodeoff);
-  var0 setturretminimapvisible(0);
-  manualturret_makealltriggersusable(var0, 0);
-  var0.useownerobj unlink();
-  var0.useotherobj unlink();
+function manualturret_setinactive(var_0) {
+  var_0 setmode(level.sentrysettings[var_0.turrettype].sentrymodeoff);
+  var_0 setturretminimapvisible(0);
+  manualturret_makealltriggersusable(var_0, 0);
+  var_0.useownerobj unlink();
+  var_0.useotherobj unlink();
 }
 
-function manualturret_delaydeletemarker(var0, var1) {
+function manualturret_delaydeletemarker(var_0, var_1) {
   self endon("kill_turret");
   level endon("game_ended");
   wait 0.25;
 
-  if(isDefined(var1.visual)) {
-    var1.visual delete();
+  if(isDefined(var_1.visual)) {
+    var_1.visual delete();
     return;
   }
 }
 
-function manualturret_watchuse(var0, var1) {
+function manualturret_watchuse(var_0, var_1) {
   self endon("kill_turret");
   self endon("carried_turret");
-  var0 endon("disconnect");
+  var_0 endon("disconnect");
   level endon("game_ended");
 
-  foreach(var3 in level.players) {
-    var1 enableplayeruse(var3);
+  foreach(var_3 in level.players) {
+    var_1 enableplayeruse(var_3);
 
-    if(var1 == self.useownerobj) {
-      if(var3 == var0) {
+    if(var_1 == self.useownerobj) {
+      if(var_3 == var_0) {
         continue;
       }
-    } else if(level.teambased && var3.team == var0.team && var3 != var0) {
+    } else if(level.teambased && var_3.team == var_0.team && var_3 != var_0) {
       continue;
     }
 
-    var1 disableplayeruse(var3);
+    var_1 disableplayeruse(var_3);
   }
 
-  thread manualturret_disableplayeruseonconnect(var0, var1);
+  thread manualturret_disableplayeruseonconnect(var_0, var_1);
 
   for(;;) {
-    var1 waittill("trigger", var3);
+    var_1 waittill("trigger", var_3);
 
     if(istrue(self.inuse)) {
       continue;
@@ -422,54 +422,54 @@ function manualturret_watchuse(var0, var1) {
 
     if(istrue(self.ref_138e0)) {
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
-        var3[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/TURRET_DYING");
+        var_3[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/TURRET_DYING");
       }
 
       continue;
     }
 
-    if(var3 isonladder() || !var3 isonground() || var3 ismantling()) {
+    if(var_3 isonladder() || !var_3 isonground() || var_3 ismantling()) {
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
-        var3[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/CANNOT_BE_USED");
+        var_3[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/CANNOT_BE_USED");
       }
 
       continue;
     }
 
-    if(istrue(var3.isjuggernaut)) {
+    if(istrue(var_3.isjuggernaut)) {
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
-        var3[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/JUGG_CANNOT_BE_USED");
+        var_3[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/JUGG_CANNOT_BE_USED");
       }
 
       continue;
     }
 
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("manual_turret", "allowPickupOfTurret")) {
-      if(!var3[[scripts\cp_mp\utility\script_utility::getsharedfunc("manual_turret", "allowPickupOfTurret")]]()) {
+      if(!var_3[[scripts\cp_mp\utility\script_utility::getsharedfunc("manual_turret", "allowPickupOfTurret")]]()) {
         continue;
       }
     }
 
     self.inuse = 1;
-    ref_11acd(var3, 0);
-    var3 disableturretdismount();
+    ref_11acd(var_3, 0);
+    var_3 disableturretdismount();
 
-    if(var3 == var0) {
-      var5 = 0;
+    if(var_3 == var_0) {
+      var_5 = 0;
 
-      while(isDefined(var3) && var3 useButtonPressed() && var5 < 0.25) {
+      while(isDefined(var_3) && var_3 useButtonPressed() && var_5 < 0.25) {
         waitframe();
-        var5 += level.framedurationseconds;
+        var_5 += level.framedurationseconds;
       }
 
-      if(var5 >= 0.25) {
+      if(var_5 >= 0.25) {
         self.inuse = undefined;
 
-        if(isDefined(var3)) {
-          var3 enableturretdismount();
+        if(isDefined(var_3)) {
+          var_3 enableturretdismount();
 
-          if(var3 scripts\cp_mp\utility\player_utility::_isalive()) {
-            ref_11acd(var3, 1);
+          if(var_3 scripts\cp_mp\utility\player_utility::_isalive()) {
+            ref_11acd(var_3, 1);
           }
         }
 
@@ -477,290 +477,290 @@ function manualturret_watchuse(var0, var1) {
       }
     }
 
-    var3 notify("start_turret_use");
-    self.ref_126e2 = var3;
+    var_3 notify("start_turret_use");
+    self.ref_126e2 = var_3;
     manualturret_makealltriggersusable(0);
-    var3 scripts\cp_mp\utility\weapon_utility::ref_12eb2();
-    var3.useweapon = level.sentrysettings[self.turrettype].playerweaponinfo;
-    var3 scripts\cp_mp\utility\inventory_utility::_giveweapon(var3.useweapon, undefined, undefined, 1);
-    var6 = gettime();
-    var7 = undefined;
+    var_3 scripts\cp_mp\utility\weapon_utility::ref_12eb2();
+    var_3.useweapon = level.sentrysettings[self.turrettype].playerweaponinfo;
+    var_3 scripts\cp_mp\utility\inventory_utility::_giveweapon(var_3.useweapon, undefined, undefined, 1);
+    var_6 = gettime();
+    var_7 = undefined;
 
-    while(gettime() - var6 < 1000) {
-      var7 = ref_11ac8(var3, var3.useweapon);
+    while(gettime() - var_6 < 1000) {
+      var_7 = ref_11ac8(var_3, var_3.useweapon);
 
-      if(!isDefined(var7) || istrue(var7)) {
+      if(!isDefined(var_7) || istrue(var_7)) {
         break;
       }
 
       waitframe();
     }
 
-    if(!istrue(var7)) {
+    if(!istrue(var_7)) {
       self.inuse = undefined;
       self.ref_126e2 = undefined;
       manualturret_makealltriggersusable(1);
 
-      if(isDefined(var3)) {
-        if(var3 scripts\cp_mp\utility\player_utility::_isalive()) {
-          ref_11acd(var3, 1);
-          var8 = var3 scripts\cp_mp\utility\weapon_utility::ref_12cc7(var3.lastdroppableweaponobj);
-          var3 switchtoweaponimmediate(var8);
+      if(isDefined(var_3)) {
+        if(var_3 scripts\cp_mp\utility\player_utility::_isalive()) {
+          ref_11acd(var_3, 1);
+          var_8 = var_3 scripts\cp_mp\utility\weapon_utility::ref_12cc7(var_3.lastdroppableweaponobj);
+          var_3 switchtoweaponimmediate(var_8);
         }
 
-        var3 clearhighpriorityweapon(var3.useweapon);
-        var3 scripts\cp_mp\utility\inventory_utility::_takeweapon(var3.useweapon);
+        var_3 clearhighpriorityweapon(var_3.useweapon);
+        var_3 scripts\cp_mp\utility\inventory_utility::_takeweapon(var_3.useweapon);
       }
 
       continue;
     }
 
-    var3.currentturret = self;
-    var3 controlturreton(self);
+    var_3.currentturret = self;
+    var_3 controlturreton(self);
 
     if(scripts\cp_mp\utility\game_utility::isnightmap()) {
-      var3 scripts\common\utility::brjugg_oncrateuse(0);
+      var_3 scripts\common\utility::brjugg_oncrateuse(0);
     }
 
-    manualturret_applyoverlay(var3);
-    thread manualturret_disablefire(var3, 0.5, 1);
-    thread manualturret_watchammotracker(var3);
-    thread ref_11ac9(var3);
-    thread ref_11aca(var3);
-    thread manualturret_endturretusewatch(var3);
-    thread manualturret_endturretonplayer(var3);
-    thread manualturret_watchplayerangles(var3);
+    manualturret_applyoverlay(var_3);
+    thread manualturret_disablefire(var_3, 0.5, 1);
+    thread manualturret_watchammotracker(var_3);
+    thread ref_11ac9(var_3);
+    thread ref_11aca(var_3);
+    thread manualturret_endturretusewatch(var_3);
+    thread manualturret_endturretonplayer(var_3);
+    thread manualturret_watchplayerangles(var_3);
   }
 }
 
-function ref_11ac8(var0, var1) {
+function ref_11ac8(var_0, var_1) {
   self endon("kill_turret");
   self endon("turret_switch_weapon_timeout");
-  var0 endon("death_or_disconnect");
+  var_0 endon("death_or_disconnect");
   level endon("game_ended");
   thread ref_11acf(1);
-  var2 = var0 scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var1, 1);
+  var_2 = var_0 scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var_1, 1);
   self notify("turret_switch_weapon_ended");
-  return var2;
+  return var_2;
 }
 
-function ref_11acf(var0) {
+function ref_11acf(var_0) {
   self endon("kill_turret");
   self endon("turret_switch_weapon_ended");
   level endon("game_ended");
-  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var0);
+  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_0);
   self notify("turret_switch_weapon_timeout");
 }
 
-function manualturret_watchdismantle(var0, var1) {
+function manualturret_watchdismantle(var_0, var_1) {
   self endon("kill_turret");
   self endon("carried_turret");
-  var0 endon("disconnect");
+  var_0 endon("disconnect");
   level endon("game_ended");
 
-  foreach(var3 in level.players) {
-    var1 enableplayeruse(var3);
+  foreach(var_3 in level.players) {
+    var_1 enableplayeruse(var_3);
 
-    if(level.teambased && var3.team != var0.team) {
+    if(level.teambased && var_3.team != var_0.team) {
       continue;
     } else if(!level.teambased) {
-      if(var3 != var0) {
+      if(var_3 != var_0) {
         continue;
       }
     }
 
-    var1 disableplayeruse(var3);
+    var_1 disableplayeruse(var_3);
   }
 
-  thread manualturret_disableplayerdismantleonconnect(var0);
+  thread manualturret_disableplayerdismantleonconnect(var_0);
 
   for(;;) {
-    var1 waittill("trigger", var3);
+    var_1 waittill("trigger", var_3);
     self notify("kill_turret", 0, 1);
     break;
   }
 }
 
-function manualturret_applyoverlay(var0) {
-  var0 scripts\cp_mp\utility\killstreak_utility::_setvisibiilityomnvarforkillstreak(self.streakinfo.streakname, "on");
-  var0 setclientomnvar("ui_mobile_turret_controls", 1);
-  var0 setclientomnvar("ui_killstreak_weapon_1_ammo", self.ammocount);
+function manualturret_applyoverlay(var_0) {
+  var_0 scripts\cp_mp\utility\killstreak_utility::_setvisibiilityomnvarforkillstreak(self.streakinfo.streakname, "on");
+  var_0 setclientomnvar("ui_mobile_turret_controls", 1);
+  var_0 setclientomnvar("ui_killstreak_weapon_1_ammo", self.ammocount);
 }
 
-function manualturret_removeoverlay(var0) {
-  var0 scripts\cp_mp\utility\killstreak_utility::_setvisibiilityomnvarforkillstreak(self.streakinfo.streakname, "off");
-  var0 setclientomnvar("ui_mobile_turret_controls", 0);
+function manualturret_removeoverlay(var_0) {
+  var_0 scripts\cp_mp\utility\killstreak_utility::_setvisibiilityomnvarforkillstreak(self.streakinfo.streakname, "off");
+  var_0 setclientomnvar("ui_mobile_turret_controls", 0);
 }
 
-function manualturret_disablefire(var0, var1, var2) {
-  if(istrue(var2)) {
-    var0 endon("death_or_disconnect");
+function manualturret_disablefire(var_0, var_1, var_2) {
+  if(istrue(var_2)) {
+    var_0 endon("death_or_disconnect");
     level endon("game_ended");
   }
 
-  if(isDefined(var0) && scripts\cp_mp\utility\player_utility::_isalive()) {
-    var0 freezecontrols(1);
+  if(isDefined(var_0) && scripts\cp_mp\utility\player_utility::_isalive()) {
+    var_0 freezecontrols(1);
   } else {
     return;
   }
 
-  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var1);
+  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_1);
 
   if(!isDefined(self)) {
     return;
   }
 
-  if(isDefined(var0) && scripts\cp_mp\utility\player_utility::_isalive()) {
-    var0 freezecontrols(0);
+  if(isDefined(var_0) && scripts\cp_mp\utility\player_utility::_isalive()) {
+    var_0 freezecontrols(0);
     return;
   }
 }
 
-function manualturret_enableenemyoutlines(var0) {
+function manualturret_enableenemyoutlines(var_0) {
   if(!isDefined(self.enemyoutlineinfos)) {
     self.enemyoutlineinfos = [];
   }
 
-  thread manualturret_enableenemyoutlinesonconnect(var0);
+  thread manualturret_enableenemyoutlinesonconnect(var_0);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("manual_turret", "getEnemyPlayers")) {
-    foreach(var2 in [[scripts\cp_mp\utility\script_utility::getsharedfunc("manual_turret", "getEnemyPlayers")]](var0.team)) {
+    foreach(var_2 in [[scripts\cp_mp\utility\script_utility::getsharedfunc("manual_turret", "getEnemyPlayers")]](var_0.team)) {
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("perk", "hasPerk")) {
-        if(var2[[scripts\cp_mp\utility\script_utility::getsharedfunc("perk", "hasPerk")]]("specialty_noscopeoutline")) {
-          if(!var2 scripts\cp_mp\utility\player_utility::_isalive()) {
-            thread manualturret_enableenemyoutlineafterprotection(var0, var2, 1);
-          } else if(isDefined(var2.avoidkillstreakonspawntimer) && var2.avoidkillstreakonspawntimer > 0) {
-            thread manualturret_enableenemyoutlineafterprotection(var0, var2);
+        if(var_2[[scripts\cp_mp\utility\script_utility::getsharedfunc("perk", "hasPerk")]]("specialty_noscopeoutline")) {
+          if(!var_2 scripts\cp_mp\utility\player_utility::_isalive()) {
+            thread manualturret_enableenemyoutlineafterprotection(var_0, var_2, 1);
+          } else if(isDefined(var_2.avoidkillstreakonspawntimer) && var_2.avoidkillstreakonspawntimer > 0) {
+            thread manualturret_enableenemyoutlineafterprotection(var_0, var_2);
           }
 
           continue;
         }
       }
 
-      manualturret_addtooutlinelist(var0, var2);
+      manualturret_addtooutlinelist(var_0, var_2);
     }
 
     return;
   }
 }
 
-function manualturret_enableenemyoutlinesonconnect(var0) {
+function manualturret_enableenemyoutlinesonconnect(var_0) {
   self endon("kill_turret");
-  var0 endon("end_turret_use");
+  var_0 endon("end_turret_use");
 
   for(;;) {
-    level waittill("connected", var1);
-    thread manualturret_enableenemyoutlineafterprotection(var0, var1, 1);
+    level waittill("connected", var_1);
+    thread manualturret_enableenemyoutlineafterprotection(var_0, var_1, 1);
   }
 }
 
-function manualturret_removeoutlineondeath(var0, var1, var2) {
+function manualturret_removeoutlineondeath(var_0, var_1, var_2) {
   self endon("kill_turret");
-  var0 endon("end_turret_use");
-  var1 waittill("death_or_disconnect");
-  manualturret_removefromoutlinelist(var1, var2);
+  var_0 endon("end_turret_use");
+  var_1 waittill("death_or_disconnect");
+  manualturret_removefromoutlinelist(var_1, var_2);
 
-  if(isDefined(var1)) {
-    thread manualturret_restoreoutlineonspawn(var0, var1);
+  if(isDefined(var_1)) {
+    thread manualturret_restoreoutlineonspawn(var_0, var_1);
     return;
   }
 }
 
-function manualturret_restoreoutlineonspawn(var0, var1) {
+function manualturret_restoreoutlineonspawn(var_0, var_1) {
   self endon("kill_turret");
-  var0 endon("end_turret_use");
-  var1 endon("disconnect");
+  var_0 endon("end_turret_use");
+  var_1 endon("disconnect");
 
   for(;;) {
-    level waittill("player_spawned", var2);
+    level waittill("player_spawned", var_2);
 
-    if(var2 != var1) {
+    if(var_2 != var_1) {
       continue;
     }
 
-    thread manualturret_enableenemyoutlineafterprotection(var0, var2);
+    thread manualturret_enableenemyoutlineafterprotection(var_0, var_2);
   }
 }
 
-function manualturret_enableenemyoutlineafterprotection(var0, var1, var2) {
+function manualturret_enableenemyoutlineafterprotection(var_0, var_1, var_2) {
   self endon("kill_turret");
-  var0 endon("end_turret_use");
+  var_0 endon("end_turret_use");
 
-  if(istrue(var2)) {
-    var1 waittill("spawned_player");
+  if(istrue(var_2)) {
+    var_1 waittill("spawned_player");
   }
 
-  if(isDefined(var1.avoidkillstreakonspawntimer) && var1.avoidkillstreakonspawntimer > 0) {
-    var1 waittill("removed_spawn_perks");
+  if(isDefined(var_1.avoidkillstreakonspawntimer) && var_1.avoidkillstreakonspawntimer > 0) {
+    var_1 waittill("removed_spawn_perks");
   }
 
-  if(level.teambased && var1.team == var0.team) {
+  if(level.teambased && var_1.team == var_0.team) {
     return;
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("perk", "hasPerk")) {
-    if(var1[[scripts\cp_mp\utility\script_utility::getsharedfunc("perk", "hasPerk")]]("specialty_noscopeoutline")) {
+    if(var_1[[scripts\cp_mp\utility\script_utility::getsharedfunc("perk", "hasPerk")]]("specialty_noscopeoutline")) {
       return;
     }
   }
 
-  manualturret_addtooutlinelist(var0, var1);
+  manualturret_addtooutlinelist(var_0, var_1);
 }
 
-function manualturret_addtooutlinelist(var0, var1) {
-  var2 = spawnStruct();
-  var2.ent = var1;
+function manualturret_addtooutlinelist(var_0, var_1) {
+  var_2 = spawnStruct();
+  var_2.ent = var_1;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("outline", "outlineEnableForPlayer")) {
-    var2.entoutlineid = [[scripts\cp_mp\utility\script_utility::getsharedfunc("outline", "outlineEnableForPlayer")]](var1, var0, "outline_nodepth_orange", "level_script");
+    var_2.entoutlineid = [[scripts\cp_mp\utility\script_utility::getsharedfunc("outline", "outlineEnableForPlayer")]](var_1, var_0, "outline_nodepth_orange", "level_script");
   }
 
-  self.enemyoutlineinfos[self.enemyoutlineinfos.size] = var2;
-  thread manualturret_removeoutlineondeath(var0, var1, var2.entoutlineid);
-  return var2;
+  self.enemyoutlineinfos[self.enemyoutlineinfos.size] = var_2;
+  thread manualturret_removeoutlineondeath(var_0, var_1, var_2.entoutlineid);
+  return var_2;
 }
 
-function manualturret_removefromoutlinelist(var0, var1) {
+function manualturret_removefromoutlinelist(var_0, var_1) {
   if(!isDefined(self.enemyoutlineinfos)) {
     return;
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("outline", "outlineDisable")) {
-    [[scripts\cp_mp\utility\script_utility::getsharedfunc("outline", "outlineDisable")]](var1, var0);
+    [[scripts\cp_mp\utility\script_utility::getsharedfunc("outline", "outlineDisable")]](var_1, var_0);
   }
 
-  var2 = [];
+  var_2 = [];
 
-  foreach(var4 in self.enemyoutlineinfos) {
-    if(var4.ent == var0) {
+  foreach(var_4 in self.enemyoutlineinfos) {
+    if(var_4.ent == var_0) {
       continue;
     }
 
-    var2 = var4;
+    var_2 = var_4;
   }
 
-  self.enemyoutlineinfos = var2;
+  self.enemyoutlineinfos = var_2;
 }
 
-function manualturret_disableenemyoutlines(var0) {
+function manualturret_disableenemyoutlines(var_0) {
   if(!isDefined(self.enemyoutlineinfos)) {
     return;
   }
 
-  foreach(var2 in self.enemyoutlineinfos) {
+  foreach(var_2 in self.enemyoutlineinfos) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("outline", "outlineDisable")) {
-      [[scripts\cp_mp\utility\script_utility::getsharedfunc("outline", "outlineDisable")]](var2.entoutlineid, var2.ent);
+      [[scripts\cp_mp\utility\script_utility::getsharedfunc("outline", "outlineDisable")]](var_2.entoutlineid, var_2.ent);
     }
   }
 
   self.enemyoutlineinfos = undefined;
 }
 
-function manualturret_endplayeruse(var0) {
-  if(isDefined(var0)) {
-    var0.inuse = undefined;
-    var0.ref_126e2 = undefined;
-    manualturret_makealltriggersusable(var0, 1);
+function manualturret_endplayeruse(var_0) {
+  if(isDefined(var_0)) {
+    var_0.inuse = undefined;
+    var_0.ref_126e2 = undefined;
+    manualturret_makealltriggersusable(var_0, 1);
   }
 
   if(isDefined(self)) {
@@ -768,16 +768,16 @@ function manualturret_endplayeruse(var0) {
       self enableturretdismount();
     }
 
-    if(isDefined(var0)) {
-      if(isDefined(self.currentturret) && self.currentturret != var0) {
+    if(isDefined(var_0)) {
+      if(isDefined(self.currentturret) && self.currentturret != var_0) {
         return;
       }
 
-      self controlturretoff(var0);
-      manualturret_removeoverlay(var0, self);
+      self controlturretoff(var_0);
+      manualturret_removeoverlay(var_0, self);
 
-      if(!istrue(var0.usedropspawn)) {
-        thread manualturret_watchpickup(var0);
+      if(!istrue(var_0.usedropspawn)) {
+        thread manualturret_watchpickup(var_0);
       }
     }
 
@@ -789,16 +789,16 @@ function manualturret_endplayeruse(var0) {
     }
 
     if(level.gametype != "br" || level.gametype == "br" && !istrue(self.inlaststand)) {
-      var1 = scripts\cp_mp\utility\weapon_utility::ref_12cc7(self.lastdroppableweaponobj);
-      self switchtoweaponimmediate(var1);
+      var_1 = scripts\cp_mp\utility\weapon_utility::ref_12cc7(self.lastdroppableweaponobj);
+      self switchtoweaponimmediate(var_1);
     }
 
     scripts\cp_mp\utility\inventory_utility::_takeweapon(self.useweapon);
     thread ref_11ac7();
 
     if(scripts\cp_mp\utility\player_utility::_isalive()) {
-      self setOrigin(var0.lastuserpos, 1);
-      self setplayerangles(var0.lastuserangles);
+      self setOrigin(var_0.lastuserpos, 1);
+      self setplayerangles(var_0.lastuserangles);
     }
 
     self notify("end_turret_use");
@@ -817,31 +817,31 @@ function ref_11ac7() {
   scripts\common\utility::allow_mantle(1, "manual_turret");
 }
 
-function manualturret_disableplayeruseonconnect(var0, var1) {
+function manualturret_disableplayeruseonconnect(var_0, var_1) {
   if(isDefined(self)) {
     self endon("kill_turret");
     self endon("carried_turret");
   }
 
-  var0 endon("disconnect");
+  var_0 endon("disconnect");
   level endon("game_ended");
 
   for(;;) {
-    level waittill("connected", var2);
-    var1 disableplayeruse(var2);
+    level waittill("connected", var_2);
+    var_1 disableplayeruse(var_2);
   }
 }
 
-function ref_11ac9(var0) {
+function ref_11ac9(var_0) {
   self endon("kill_turret");
   self endon("carried_turret");
-  var0 endon("end_turret_use");
-  var0 endon("disconnect");
+  var_0 endon("end_turret_use");
+  var_0 endon("disconnect");
   level endon("game_ended");
 
   for(;;) {
-    if(var0 isinexecutionvictim()) {
-      manualturret_endplayeruse(var0, self);
+    if(var_0 isinexecutionvictim()) {
+      manualturret_endplayeruse(var_0, self);
       break;
     }
 
@@ -849,21 +849,21 @@ function ref_11ac9(var0) {
   }
 }
 
-function ref_11aca(var0) {
+function ref_11aca(var_0) {
   self endon("kill_turret");
   self endon("carried_turret");
-  var0 endon("end_turret_use");
-  var0 endon("disconnect");
+  var_0 endon("end_turret_use");
+  var_0 endon("disconnect");
   level endon("game_ended");
-  var1 = 2500;
+  var_1 = 2500;
 
   if(isDefined(self.moving_platform)) {
-    var1 = 10000;
+    var_1 = 10000;
   }
 
   for(;;) {
-    if(distancesquared(self.origin, var0.origin) >= var1) {
-      manualturret_endplayeruse(var0, self);
+    if(distancesquared(self.origin, var_0.origin) >= var_1) {
+      manualturret_endplayeruse(var_0, self);
       break;
     }
 
@@ -871,20 +871,20 @@ function ref_11aca(var0) {
   }
 }
 
-function manualturret_endturretusewatch(var0) {
+function manualturret_endturretusewatch(var_0) {
   self endon("kill_turret");
   self endon("carried_turret");
-  var0 endon("end_turret_use");
-  var0 endon("disconnect");
+  var_0 endon("end_turret_use");
+  var_0 endon("disconnect");
   level endon("game_ended");
 
-  while(var0 useButtonPressed()) {
+  while(var_0 useButtonPressed()) {
     waitframe();
   }
 
   for(;;) {
-    if(var0 useButtonPressed()) {
-      manualturret_endplayeruse(var0, self);
+    if(var_0 useButtonPressed()) {
+      manualturret_endplayeruse(var_0, self);
       break;
     }
 
@@ -892,187 +892,187 @@ function manualturret_endturretusewatch(var0) {
   }
 }
 
-function manualturret_endturretonplayer(var0) {
-  var0 endon("end_turret_use");
+function manualturret_endturretonplayer(var_0) {
+  var_0 endon("end_turret_use");
   level endon("game_ended");
-  var0 scripts\engine\utility::ref_143a5("death_or_disconnect", "last_stand_start");
-  manualturret_endplayeruse(var0, self);
+  var_0 scripts\engine\utility::ref_143a5("death_or_disconnect", "last_stand_start");
+  manualturret_endplayeruse(var_0, self);
 }
 
-function manualturret_watchplayerangles(var0) {
+function manualturret_watchplayerangles(var_0) {
   self endon("kill_turret");
-  var0 endon("end_turret_use");
-  var0 endon("death_or_disconnect");
+  var_0 endon("end_turret_use");
+  var_0 endon("death_or_disconnect");
   level endon("game_ended");
 
   for(;;) {
-    self.lastuserpos = var0.origin;
-    self.lastuserangles = var0 getplayerangles();
+    self.lastuserpos = var_0.origin;
+    self.lastuserangles = var_0 getplayerangles();
     waitframe();
   }
 }
 
-function manualturret_watchpickup(var0) {
-  if(!isDefined(var0)) {
+function manualturret_watchpickup(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
   self endon("kill_turret");
   self endon("carried_turret");
-  var0 endon("disconnect");
-  var0 endon("start_turret_use");
+  var_0 endon("disconnect");
+  var_0 endon("start_turret_use");
   level endon("game_ended");
 
   while(isDefined(self) && isDefined(self.useownerobj)) {
-    self.useownerobj waittill("trigger_progress", var1);
-    var2 = 0;
+    self.useownerobj waittill("trigger_progress", var_1);
+    var_2 = 0;
 
-    while(var0 useButtonPressed() && var2 < 0.25) {
+    while(var_0 useButtonPressed() && var_2 < 0.25) {
       waitframe();
-      var2 += level.framedurationseconds;
+      var_2 += level.framedurationseconds;
     }
 
-    if(!isDefined(var1)) {
+    if(!isDefined(var_1)) {
       continue;
     }
 
-    if(var2 < 0.25) {
+    if(var_2 < 0.25) {
       continue;
     }
 
     if(istrue(self.ref_138e0)) {
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
-        var1[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/TURRET_DYING");
+        var_1[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/TURRET_DYING");
       }
 
       continue;
     }
 
-    if(istrue(var1.isjuggernaut)) {
+    if(istrue(var_1.isjuggernaut)) {
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
-        var1[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/JUGG_CANNOT_BE_USED");
+        var_1[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/JUGG_CANNOT_BE_USED");
       }
 
       continue;
     }
 
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("manual_turret", "allowPickupOfTurret")) {
-      if(!var1[[scripts\cp_mp\utility\script_utility::getsharedfunc("manual_turret", "allowPickupOfTurret")]]()) {
+      if(!var_1[[scripts\cp_mp\utility\script_utility::getsharedfunc("manual_turret", "allowPickupOfTurret")]]()) {
         continue;
       }
     }
 
     manualturret_makealltriggersusable(0);
     self setmode(level.sentrysettings[self.turrettype].sentrymodeoff);
-    var0.placedsentries[self.turrettype] = scripts\engine\utility::array_remove(var0.placedsentries[self.turrettype], self);
-    thread manualturret_setcarried(var0);
+    var_0.placedsentries[self.turrettype] = scripts\engine\utility::array_remove(var_0.placedsentries[self.turrettype], self);
+    thread manualturret_setcarried(var_0);
   }
 }
 
-function manualturret_watchdelayedpickup(var0) {
+function manualturret_watchdelayedpickup(var_0) {
   self endon("kill_turret");
-  var0 endon("disconnect");
+  var_0 endon("disconnect");
   level endon("game_ended");
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(0.5);
-  thread manualturret_watchpickup(var0);
+  thread manualturret_watchpickup(var_0);
 }
 
-function manualturret_disableplayerpickuponconnect(var0) {
-  var0 endon("kill_turret");
-  var0 endon("carried_turret");
+function manualturret_disableplayerpickuponconnect(var_0) {
+  var_0 endon("kill_turret");
+  var_0 endon("carried_turret");
   self endon("disconnect");
   level endon("game_ended");
 
   for(;;) {
-    level waittill("connected", var1);
-    var0.useownerobj disableplayeruse(var1);
+    level waittill("connected", var_1);
+    var_0.useownerobj disableplayeruse(var_1);
   }
 }
 
-function manualturret_watchdamage(var0) {
+function manualturret_watchdamage(var_0) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("manual_turret", "monitorDamage")) {
     self[[scripts\cp_mp\utility\script_utility::getsharedfunc("manual_turret", "monitorDamage")]](self.maxhealth, "hitequip", &manualturret_handledeathdamage, &manualturret_modifydamage, 1);
     return;
   }
 }
 
-function manualturret_handledeathdamage(var0) {
-  var1 = var0.attacker;
-  var2 = var0.objweapon;
-  var3 = var0.meansofdeath;
-  var4 = var0.damage;
-  var5 = var0.idflags;
-  var6 = level.sentrysettings[self.turrettype];
-  var7 = 0;
+function manualturret_handledeathdamage(var_0) {
+  var_1 = var_0.attacker;
+  var_2 = var_0.objweapon;
+  var_3 = var_0.meansofdeath;
+  var_4 = var_0.damage;
+  var_5 = var_0.idflags;
+  var_6 = level.sentrysettings[self.turrettype];
+  var_7 = 0;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("damage", "onKillstreakKilled")) {
-    var7 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("damage", "onKillstreakKilled")]](var6.streakname, var1, var2, var3, var4, var6.scorepopup, var6.vodestroyed, var6.destroyedsplash);
+    var_7 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("damage", "onKillstreakKilled")]](var_6.streakname, var_1, var_2, var_3, var_4, var_6.scorepopup, var_6.vodestroyed, var_6.destroyedsplash);
   }
 
-  if(var7) {
-    var1 notify("destroyed_equipment");
+  if(var_7) {
+    var_1 notify("destroyed_equipment");
   }
 
-  var8 = 0;
+  var_8 = 0;
 
-  if(var3 == "MOD_EXPLOSIVE" || var3 == "MOD_PROJECTILE" || var3 == "MOD_PROJECTILE_SPLASH" || var3 == "MOD_GRENADE_SPLASH") {
-    var8 = 1;
+  if(var_3 == "MOD_EXPLOSIVE" || var_3 == "MOD_PROJECTILE" || var_3 == "MOD_PROJECTILE_SPLASH" || var_3 == "MOD_GRENADE_SPLASH") {
+    var_8 = 1;
   }
 
-  self notify("kill_turret", var8, 1);
+  self notify("kill_turret", var_8, 1);
 }
 
-function manualturret_modifydamage(var0) {
-  var1 = var0.attacker;
-  var2 = var0.objweapon;
-  var3 = var0.meansofdeath;
-  var4 = var0.damage;
-  var5 = var0.idflags;
-  var6 = var4;
+function manualturret_modifydamage(var_0) {
+  var_1 = var_0.attacker;
+  var_2 = var_0.objweapon;
+  var_3 = var_0.meansofdeath;
+  var_4 = var_0.damage;
+  var_5 = var_0.idflags;
+  var_6 = var_4;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "getModifiedAntiKillstreakDamage")) {
-    var6 = self[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "getModifiedAntiKillstreakDamage")]](var1, var2, var3, var6, self.maxhealth, 1, 1, 2, 7, 5);
+    var_6 = self[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "getModifiedAntiKillstreakDamage")]](var_1, var_2, var_3, var_6, self.maxhealth, 1, 1, 2, 7, 5);
   }
 
-  return var6;
+  return var_6;
 }
 
-function manualturret_disableplayerdismantleonconnect(var0) {
+function manualturret_disableplayerdismantleonconnect(var_0) {
   self endon("kill_turret");
   self endon("carried_turret");
-  var0 endon("disconnect");
+  var_0 endon("disconnect");
   level endon("game_ended");
 
   for(;;) {
-    level waittill("connected", var1);
-    var1 waittill("spawned_player");
+    level waittill("connected", var_1);
+    var_1 waittill("spawned_player");
 
     if(level.teambased) {
-      if(var1.team != var0.team) {
+      if(var_1.team != var_0.team) {
         continue;
       }
     }
 
-    self.dismantleobj disableplayeruse(var1);
+    self.dismantleobj disableplayeruse(var_1);
   }
 }
 
-function manualturret_watchdeath(var0) {
+function manualturret_watchdeath(var_0) {
   self endon("carried_turret");
-  self waittill("kill_turret", var1, var2);
+  self waittill("kill_turret", var_1, var_2);
   self.usedropspawn = 1;
 
-  if(isDefined(var0)) {
-    var0.placedsentries[self.turrettype] = scripts\engine\utility::array_remove(var0.placedsentries[self.turrettype], self);
-    manualturret_setinactive(var0, self);
-    manualturret_disableenemyoutlines(var0);
+  if(isDefined(var_0)) {
+    var_0.placedsentries[self.turrettype] = scripts\engine\utility::array_remove(var_0.placedsentries[self.turrettype], self);
+    manualturret_setinactive(var_0, self);
+    manualturret_disableenemyoutlines(var_0);
 
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("player", "printGameAction")) {
-      var0[[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "printGameAction")]]("killstreak ended - manual_turret", var0);
+      var_0[[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "printGameAction")]]("killstreak ended - manual_turret", var_0);
     }
 
-    self.streakinfo.onspray = istrue(var2);
-    var0 scripts\cp_mp\utility\killstreak_utility::ref_12aa7(self.streakinfo);
+    self.streakinfo.onspray = istrue(var_2);
+    var_0 scripts\cp_mp\utility\killstreak_utility::ref_12aa7(self.streakinfo);
   }
 
   if(isDefined(self.ref_126e2)) {
@@ -1087,7 +1087,7 @@ function manualturret_watchdeath(var0) {
     self.useotherobj delete();
   }
 
-  if(!istrue(var1)) {
+  if(!istrue(var_1)) {
     self playSound("sentry_explode_smoke");
     self setscriptablepartstate("shutdown", "on");
     scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(2);
@@ -1135,54 +1135,54 @@ function manualturret_delayscriptabledelete() {
   self delete();
 }
 
-function manualturret_watchtimeout(var0) {
+function manualturret_watchtimeout(var_0) {
   self endon("kill_turret");
   self endon("carried_turret");
-  var0 endon("disconnect");
+  var_0 endon("disconnect");
   level endon("game_ended");
-  var1 = self.timeout;
+  var_1 = self.timeout;
   jumpiftrue(isDefined(self.timeelapsed)) LOC_00000035;
   self.timeelapsed = 0;
 
-  while(self.timeelapsed < var1) {
-    var2 = (var1 - self.timeelapsed) / var1;
-    var2 = int(ceil(clamp(var2, 0, 1) * 100));
+  while(self.timeelapsed < var_1) {
+    var_2 = (var_1 - self.timeelapsed) / var_1;
+    var_2 = int(ceil(clamp(var_2, 0, 1) * 100));
 
     if(isDefined(self.ref_126e2)) {
-      self.ref_126e2 setclientomnvar("ui_killstreak_countdown", int(var2));
+      self.ref_126e2 setclientomnvar("ui_killstreak_countdown", int(var_2));
     }
 
     self.timeelapsed += level.framedurationseconds;
 
-    if(self.timeelapsed >= var1 - 1.5 && !istrue(self.ref_138e0)) {
+    if(self.timeelapsed >= var_1 - 1.5 && !istrue(self.ref_138e0)) {
       self.ref_138e0 = 1;
     }
 
     waitframe();
   }
 
-  var0 scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("timeout_" + self.streakinfo.streakname, 1);
+  var_0 scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("timeout_" + self.streakinfo.streakname, 1);
   self notify("kill_turret", 0, 0);
 }
 
-function manualturret_watchammotracker(var0) {
+function manualturret_watchammotracker(var_0) {
   self endon("kill_turret");
   self endon("carried_turret");
-  var0 endon("end_turret_use");
-  var0 endon("disconnect");
+  var_0 endon("end_turret_use");
+  var_0 endon("disconnect");
   level endon("game_ended");
-  var1 = level.sentrysettings[self.turrettype];
-  var2 = weaponfiretime(var1.weaponinfo);
+  var_1 = level.sentrysettings[self.turrettype];
+  var_2 = weaponfiretime(var_1.weaponinfo);
 
   if(!isDefined(self.hideammoindex)) {
     self.hideammoindex = 1;
   }
 
-  while(var0 isusingturret()) {
-    while(var0 attackButtonPressed()) {
+  while(var_0 isusingturret()) {
+    while(var_0 attackButtonPressed()) {
       self.streakinfo.shots_fired++;
       self.ammocount--;
-      var0 setclientomnvar("ui_killstreak_weapon_1_ammo", self.ammocount);
+      var_0 setclientomnvar("ui_killstreak_weapon_1_ammo", self.ammocount);
 
       if(self.ammocount <= 12) {
         self setscriptablepartstate("hide_ammo_" + self.hideammoindex, "on", 0);
@@ -1190,52 +1190,52 @@ function manualturret_watchammotracker(var0) {
       }
 
       if(self.ammocount == 100) {
-        var0 scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog(self.streakinfo.streakname + "_low_ammo");
+        var_0 scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog(self.streakinfo.streakname + "_low_ammo");
       } else if(self.ammocount <= 0) {
-        var0 scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog(self.streakinfo.streakname + "_no_ammo");
+        var_0 scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog(self.streakinfo.streakname + "_no_ammo");
         self notify("kill_turret", 0, 0);
         break;
       }
 
-      wait var2;
+      wait var_2;
     }
 
     waitframe();
   }
 }
 
-function manualturret_watchdisown(var0) {
+function manualturret_watchdisown(var_0) {
   self endon("kill_turret");
   self endon("carried_turret");
-  thread manualturret_disownonaction(var0, self);
-  thread manualturret_disownonaction(var0, self);
-  thread manualturret_disownonaction(var0, self);
+  thread manualturret_disownonaction(var_0, self);
+  thread manualturret_disownonaction(var_0, self);
+  thread manualturret_disownonaction(var_0, self);
 }
 
-function manualturret_disownonaction(var0, var1) {
-  var0 endon("kill_turret");
+function manualturret_disownonaction(var_0, var_1) {
+  var_0 endon("kill_turret");
   self endon("carried_turret");
   self endon("disowned_turret");
   level endon("game_ended");
-  self waittill(var1);
-  var0 notify("kill_turret", 0, 0);
+  self waittill(var_1);
+  var_0 notify("kill_turret", 0, 0);
   self notify("disowned_turret");
 }
 
-function manualturret_setturretmodel(var0) {
-  var1 = undefined;
+function manualturret_setturretmodel(var_0) {
+  var_1 = undefined;
 
-  if(var0 == "placed") {
-    var1 = level.sentrysettings[self.turrettype].modelbaseground;
+  if(var_0 == "placed") {
+    var_1 = level.sentrysettings[self.turrettype].modelbaseground;
   } else {
-    var1 = level.sentrysettings[self.turrettype].modeldestroyedground;
+    var_1 = level.sentrysettings[self.turrettype].modeldestroyedground;
   }
 
-  self setModel(var1);
+  self setModel(var_1);
 }
 
-function manualturret_makealltriggersusable(var0) {
-  if(!istrue(var0)) {
+function manualturret_makealltriggersusable(var_0) {
+  if(!istrue(var_0)) {
     self.useownerobj makeunusable();
     self.useotherobj makeunusable();
     return;
@@ -1245,24 +1245,24 @@ function manualturret_makealltriggersusable(var0) {
   self.useotherobj makeusable();
 }
 
-function ref_11acc(var0) {
+function ref_11acc(var_0) {
   if(scripts\cp_mp\utility\player_utility::_isalive()) {
-    scripts\common\utility::allow_sprint(var0);
-    scripts\common\utility::allow_weapon_switch(var0);
-    scripts\common\utility::allow_offhand_weapons(var0);
-    scripts\common\utility::allow_melee(var0);
-    scripts\common\utility::allow_execution_attack(var0);
-    scripts\common\utility::allow_ladder_placement(var0);
+    scripts\common\utility::allow_sprint(var_0);
+    scripts\common\utility::allow_weapon_switch(var_0);
+    scripts\common\utility::allow_offhand_weapons(var_0);
+    scripts\common\utility::allow_melee(var_0);
+    scripts\common\utility::allow_execution_attack(var_0);
+    scripts\common\utility::allow_ladder_placement(var_0);
     return;
   }
 }
 
-function ref_11acd(var0) {
+function ref_11acd(var_0) {
   if(scripts\cp_mp\utility\player_utility::_isalive()) {
-    scripts\common\utility::allow_offhand_weapons(var0);
-    scripts\common\utility::allow_melee(var0);
-    scripts\common\utility::allow_supers(var0);
-    scripts\common\utility::allow_movement(var0);
+    scripts\common\utility::allow_offhand_weapons(var_0);
+    scripts\common\utility::allow_melee(var_0);
+    scripts\common\utility::allow_supers(var_0);
+    scripts\common\utility::allow_movement(var_0);
     return;
   }
 }

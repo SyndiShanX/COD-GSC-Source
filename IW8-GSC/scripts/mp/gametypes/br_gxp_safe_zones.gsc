@@ -23,7 +23,7 @@ function ref_11ff3() {
   thread ref_12e78();
 }
 
-function truckdoorleft(var0) {
+function truckdoorleft(var_0) {
   if(level.disable_super_in_turret.ref_12e6b != 1) {
     return 0;
   }
@@ -36,7 +36,7 @@ function truckdoorleft(var0) {
     return 0;
   }
 
-  return scripts\engine\utility::array_contains(level.ref_12e76.ref_12e62, var0);
+  return scripts\engine\utility::array_contains(level.ref_12e76.ref_12e62, var_0);
 }
 
 function put_players_out_of_black_screen() {
@@ -51,21 +51,21 @@ function put_players_out_of_black_screen() {
   return undefined;
 }
 
-function badpathnodes(var0, var1, var2, var3, var4) {
-  var3 = ref_140c6(var3);
+function badpathnodes(var_0, var_1, var_2, var_3, var_4) {
+  var_3 = ref_140c6(var_3);
 
-  if(!var3) {
+  if(!var_3) {
     return;
   }
 
-  var5 = spawnStruct();
-  var5.origin = var0;
-  var5.angles = var1;
-  var5.radius = var3;
-  var5.height = var4;
-  var6 = level.ref_12e76.ref_1472a.size;
-  var5.id = "safe_zone_" + var2;
-  level.ref_12e76.ref_1472a[var6] = var5;
+  var_5 = spawnStruct();
+  var_5.origin = var_0;
+  var_5.angles = var_1;
+  var_5.radius = var_3;
+  var_5.height = var_4;
+  var_6 = level.ref_12e76.ref_1472a.size;
+  var_5.id = "safe_zone_" + var_2;
+  level.ref_12e76.ref_1472a[var_6] = var_5;
 }
 
 function ref_131fb() {
@@ -94,16 +94,16 @@ function ref_131fc() {
 }
 
 function ref_135c5() {
-  var0 = put_players_out_of_black_screen();
+  var_0 = put_players_out_of_black_screen();
 
-  if(isDefined(var0)) {
-    level thread[[var0]]();
+  if(isDefined(var_0)) {
+    level thread[[var_0]]();
   }
 
-  foreach(var2 in level.ref_12e76.ref_1472a) {
-    var3 = ref_135c4(var2.origin, var2.angles, var2.radius, var2.height);
-    var3.id = var2.id;
-    level.ref_12e76.zones[level.ref_12e76.zones.size] = var3;
+  foreach(var_2 in level.ref_12e76.ref_1472a) {
+    var_3 = ref_135c4(var_2.origin, var_2.angles, var_2.radius, var_2.height);
+    var_3.id = var_2.id;
+    level.ref_12e76.zones[level.ref_12e76.zones.size] = var_3;
   }
 }
 
@@ -144,37 +144,37 @@ function tank_x1() {
   level._effect["gxp_safe_zone_player_eye"] = loadfx("vfx/iw8_br/gameplay/hween2/vfx_gxp_safespace_01.vfx");
 }
 
-function register_module_pause_unpause_funcs(var0, var1) {
-  var2 = "gxp_safe_zone_" + var0;
+function register_module_pause_unpause_funcs(var_0, var_1) {
+  var_2 = "gxp_safe_zone_" + var_0;
 
-  if(isDefined(var1)) {
-    var2 = var2 + "_" + var1;
+  if(isDefined(var_1)) {
+    var_2 = var_2 + "_" + var_1;
   }
 
-  return var2;
+  return var_2;
 }
 
-function ref_140c6(var0) {
-  if(!scripts\engine\utility::array_contains(level.disable_super_in_turret.ref_12e6d, var0)) {
-    var1 = 0;
-    var2 = var0;
+function ref_140c6(var_0) {
+  if(!scripts\engine\utility::array_contains(level.disable_super_in_turret.ref_12e6d, var_0)) {
+    var_1 = 0;
+    var_2 = var_0;
 
-    foreach(var4 in level.disable_super_in_turret.ref_12e6d) {
-      var5 = abs(var0 - var4);
+    foreach(var_4 in level.disable_super_in_turret.ref_12e6d) {
+      var_5 = abs(var_0 - var_4);
 
-      if(var5 < var2) {
-        var2 = var5;
-        var1 = var4;
+      if(var_5 < var_2) {
+        var_2 = var_5;
+        var_1 = var_4;
       }
     }
 
-    return var1;
+    return var_1;
   }
 
-  return var6;
+  return var_6;
 }
 
-function dangercircletick(var0, var1) {
+function dangercircletick(var_0, var_1) {
   if(level.disable_super_in_turret.ref_12e6b != 1) {
     return;
   }
@@ -187,47 +187,47 @@ function dangercircletick(var0, var1) {
     return;
   }
 
-  foreach(var3 in level.ref_12e76.zones) {
-    if(!isDefined(var3)) {
+  foreach(var_3 in level.ref_12e76.zones) {
+    if(!isDefined(var_3)) {
       continue;
     }
 
-    var4 = var1 - var3.radius + level.disable_super_in_turret.ref_12e6a;
-    var5 = var4 * var4;
+    var_4 = var_1 - var_3.radius + level.disable_super_in_turret.ref_12e6a;
+    var_5 = var_4 * var_4;
 
-    if(isDefined(var3) && distance2dsquared(var3.origin, var0) >= var5) {
-      lb_impulse_dmg_threshold_mid(var3);
+    if(isDefined(var_3) && distance2dsquared(var_3.origin, var_0) >= var_5) {
+      lb_impulse_dmg_threshold_mid(var_3);
     }
   }
 }
 
-function ref_135c4(var0, var1, var2, var3) {
-  var4 = spawn("trigger_radius", var0, 0, var2, var3);
-  var4.angles = var1;
-  var4.radius = var2;
-  var4.height = var3;
-  var4.health = level.disable_super_in_turret.ref_12e73;
-  var5 = register_module_pause_unpause_funcs(var2);
-  var4.ref_14725 = spawnfx(scripts\engine\utility::getfx(var5), var0, (1, 0, 0), (0, 0, 1));
-  triggerfx(var4.ref_14725);
-  var6 = (0, 0, 50);
-  var7 = scripts\engine\trace::ray_trace(var0 + var6, var0 - var6);
-  var4.cleanupexplosionleftovers = spawn("script_model", var7["position"]);
-  var4.cleanupexplosionleftovers setModel("p9_ver_soldier_gear");
-  var4.cleanupexplosionleftovers.angles = (var7["normal"][0], var1[1], var7["normal"][2]);
-  var4.objid = scripts\mp\objidpoolmanager::requestobjectiveid(99);
-  scripts\mp\objidpoolmanager::objective_add_objective(var4.objid, "active", var0);
-  getbnetigrbattlepassxpmultiplier(var4.objid, 4500, 5000);
-  objective_setbackground(var4.objid, 1);
-  objective_icon(var4.objid, "ui_mp_br_mapmenu_legend_sacredground_gxp");
-  function_0421(var4.objid, 1);
-  scripts\mp\utility\trigger::makeenterexittrigger(var4, &ref_1254c, &ref_12554);
+function ref_135c4(var_0, var_1, var_2, var_3) {
+  var_4 = spawn("trigger_radius", var_0, 0, var_2, var_3);
+  var_4.angles = var_1;
+  var_4.radius = var_2;
+  var_4.height = var_3;
+  var_4.health = level.disable_super_in_turret.ref_12e73;
+  var_5 = register_module_pause_unpause_funcs(var_2);
+  var_4.ref_14725 = spawnfx(scripts\engine\utility::getfx(var_5), var_0, (1, 0, 0), (0, 0, 1));
+  triggerfx(var_4.ref_14725);
+  var_6 = (0, 0, 50);
+  var_7 = scripts\engine\trace::ray_trace(var_0 + var_6, var_0 - var_6);
+  var_4.cleanupexplosionleftovers = spawn("script_model", var_7["position"]);
+  var_4.cleanupexplosionleftovers setModel("p9_ver_soldier_gear");
+  var_4.cleanupexplosionleftovers.angles = (var_7["normal"][0], var_1[1], var_7["normal"][2]);
+  var_4.objid = scripts\mp\objidpoolmanager::requestobjectiveid(99);
+  scripts\mp\objidpoolmanager::objective_add_objective(var_4.objid, "active", var_0);
+  getbnetigrbattlepassxpmultiplier(var_4.objid, 4500, 5000);
+  objective_setbackground(var_4.objid, 1);
+  objective_icon(var_4.objid, "ui_mp_br_mapmenu_legend_sacredground_gxp");
+  function_0421(var_4.objid, 1);
+  scripts\mp\utility\trigger::makeenterexittrigger(var_4, &ref_1254c, &ref_12554);
 
   if(level.disable_super_in_turret.scavengerlootcacheused) {
     thread ref_11ce0();
   }
 
-  return var4;
+  return var_4;
 }
 
 function ref_11ce0() {
@@ -235,11 +235,11 @@ function ref_11ce0() {
   level endon("game_ended");
 
   for(;;) {
-    self waittill("trigger", var0);
+    self waittill("trigger", var_0);
 
-    if(var0 scripts\mp\gametypes\br_public::ref_125ec()) {
-      ref_13ada(var0);
-      sat_play_unfolding_sounds(var0);
+    if(var_0 scripts\mp\gametypes\br_public::ref_125ec()) {
+      ref_13ada(var_0);
+      sat_play_unfolding_sounds(var_0);
 
       if(self.health <= 0) {
         lb_impulse_dmg_threshold_mid();
@@ -248,31 +248,31 @@ function ref_11ce0() {
   }
 }
 
-function sat_play_unfolding_sounds(var0) {
-  var1 = gettime();
+function sat_play_unfolding_sounds(var_0) {
+  var_1 = gettime();
 
-  if(isDefined(self.ref_11e83) && self.ref_11e83 > var1) {
+  if(isDefined(self.ref_11e83) && self.ref_11e83 > var_1) {
     return;
   }
 
-  var0 dodamage(level.disable_super_in_turret.ref_12e6e, self.origin, var0);
+  var_0 dodamage(level.disable_super_in_turret.ref_12e6e, self.origin, var_0);
   self.health -= level.disable_super_in_turret.ref_12e70;
   self.ref_11e83 = gettime() + level.disable_super_in_turret.ref_12e6f * 1000;
-  var2 = undefined;
+  var_2 = undefined;
 
   if(self.health <= level.disable_super_in_turret.ref_12e73 * level.disable_super_in_turret.ref_12e75) {
-    var2 = "yellow";
+    var_2 = "yellow";
   }
 
   if(self.health <= level.disable_super_in_turret.ref_12e73 * level.disable_super_in_turret.ref_12e74) {
-    var2 = "orange";
+    var_2 = "orange";
   }
 
-  if(isDefined(var2)) {
-    if(!isDefined(self.is_station_track_available) || isDefined(self.is_station_track_available) && self.is_station_track_available != var2) {
-      if(var2 == "yellow") {
+  if(isDefined(var_2)) {
+    if(!isDefined(self.is_station_track_available) || isDefined(self.is_station_track_available) && self.is_station_track_available != var_2) {
+      if(var_2 == "yellow") {
         playsoundatpos(self.origin, "br_gov_safespace_transition_low");
-      } else if(var2 == "orange") {
+      } else if(var_2 == "orange") {
         playsoundatpos(self.origin, "br_gov_safespace_transition_med");
       }
 
@@ -281,9 +281,9 @@ function sat_play_unfolding_sounds(var0) {
         self.ref_14725 = undefined;
       }
 
-      self.is_station_track_available = var2;
-      var3 = register_module_pause_unpause_funcs(self.radius, var2);
-      self.ref_14725 = spawnfx(scripts\engine\utility::getfx(var3), self.origin, (1, 0, 0), (0, 0, 1));
+      self.is_station_track_available = var_2;
+      var_3 = register_module_pause_unpause_funcs(self.radius, var_2);
+      self.ref_14725 = spawnfx(scripts\engine\utility::getfx(var_3), self.origin, (1, 0, 0), (0, 0, 1));
       triggerfx(self.ref_14725);
       return;
     }
@@ -304,157 +304,157 @@ function lb_impulse_dmg_threshold_mid() {
     self.cleanupexplosionleftovers delete();
   }
 
-  var0 = getarraykeys(self.triggerenterents);
+  var_0 = getarraykeys(self.triggerenterents);
 
-  for(var1 = 0; var1 < var0.size; var1++) {
-    var2 = var0[var1];
-    var3 = self.triggerenterents[var2];
-    ref_12554(var3, self);
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    var_2 = var_0[var_1];
+    var_3 = self.triggerenterents[var_2];
+    ref_12554(var_3, self);
   }
 
-  var4 = register_module_pause_unpause_funcs(self.radius, "destroy");
-  playFX(scripts\engine\utility::getfx(var4), self.origin, (1, 0, 0), (0, 0, 1));
+  var_4 = register_module_pause_unpause_funcs(self.radius, "destroy");
+  playFX(scripts\engine\utility::getfx(var_4), self.origin, (1, 0, 0), (0, 0, 1));
   playsoundatpos(self.origin, "br_gov_safespace_exp");
   self delete();
 }
 
-function ref_13ada(var0) {
+function ref_13ada(var_0) {
   if(level.disable_super_in_turret.scavengerlootcacheused) {
-    playsoundatpos(var0.origin, "br_gov_safespace_dmg");
-    var1 = var0.origin - self.origin;
-    var2 = self.radius + 400 - length2d(var1);
-    var1 = vectorNormalize((var1[0], var1[1], 0));
-    var3 = var1 * var2;
-    var4 = var0 getEye();
-    var5 = var4 + var3;
-    var6 = var5;
-    var7 = var0 scripts\mp\gametypes\br_gametype_gxp_ghost::chase_hvt_vo(var5, var4, var1, undefined, undefined, 1);
+    playsoundatpos(var_0.origin, "br_gov_safespace_dmg");
+    var_1 = var_0.origin - self.origin;
+    var_2 = self.radius + 400 - length2d(var_1);
+    var_1 = vectorNormalize((var_1[0], var_1[1], 0));
+    var_3 = var_1 * var_2;
+    var_4 = var_0 getEye();
+    var_5 = var_4 + var_3;
+    var_6 = var_5;
+    var_7 = var_0 scripts\mp\gametypes\br_gametype_gxp_ghost::chase_hvt_vo(var_5, var_4, var_1, undefined, undefined, 1);
 
-    if(isDefined(var7)) {
-      var8 = getrandomextractunlockablelootid(var7);
+    if(isDefined(var_7)) {
+      var_8 = getrandomextractunlockablelootid(var_7);
 
-      if(!var8) {
-        var7 = undefined;
+      if(!var_8) {
+        var_7 = undefined;
       }
     }
 
-    if(isDefined(var7)) {
+    if(isDefined(var_7)) {
       return;
     }
 
-    var9 = 45;
-    var10 = 1;
-    var11 = vectortoangles(var1);
+    var_9 = 45;
+    var_10 = 1;
+    var_11 = vectortoangles(var_1);
 
-    for(var12 = 1; !isDefined(var7) && var12 <= level.disable_super_in_turret.ref_12e68; var12++) {
-      var11 = (var11[0], var11[1] + var9 * var10, 0);
-      var13 = anglesToForward(var11);
-      var5 = var4 + var13 * var2;
-      var7 = var0 scripts\mp\gametypes\br_gametype_gxp_ghost::chase_hvt_vo(var5, var4, var13, undefined, undefined, 1);
+    for(var_12 = 1; !isDefined(var_7) && var_12 <= level.disable_super_in_turret.ref_12e68; var_12++) {
+      var_11 = (var_11[0], var_11[1] + var_9 * var_10, 0);
+      var_13 = anglesToForward(var_11);
+      var_5 = var_4 + var_13 * var_2;
+      var_7 = var_0 scripts\mp\gametypes\br_gametype_gxp_ghost::chase_hvt_vo(var_5, var_4, var_13, undefined, undefined, 1);
 
-      if(isDefined(var7)) {
-        var8 = getrandomextractunlockablelootid(var7);
+      if(isDefined(var_7)) {
+        var_8 = getrandomextractunlockablelootid(var_7);
 
-        if(!var8) {
-          var7 = undefined;
+        if(!var_8) {
+          var_7 = undefined;
         }
       }
 
-      var9 += 45;
-      var10 *= -1;
+      var_9 += 45;
+      var_10 *= -1;
     }
 
-    if(isDefined(var7)) {
+    if(isDefined(var_7)) {
       return;
     }
 
-    var12 = 1;
-    var3 = (0, 0, 1000);
-    var4 = var0 getEye();
+    var_12 = 1;
+    var_3 = (0, 0, 1000);
+    var_4 = var_0 getEye();
 
-    while(!isDefined(var7) && var12 < level.disable_super_in_turret.ref_12e68) {
-      var5 += var3;
-      var1 = vectorNormalize(var5 - var4);
-      var7 = var0 scripts\mp\gametypes\br_gametype_gxp_ghost::chase_hvt_vo(var5, var4, var1, undefined, undefined, 1);
-      var12++;
+    while(!isDefined(var_7) && var_12 < level.disable_super_in_turret.ref_12e68) {
+      var_5 += var_3;
+      var_1 = vectorNormalize(var_5 - var_4);
+      var_7 = var_0 scripts\mp\gametypes\br_gametype_gxp_ghost::chase_hvt_vo(var_5, var_4, var_1, undefined, undefined, 1);
+      var_12++;
     }
 
     return;
   }
 }
 
-function getrandomextractunlockablelootid(var0) {
-  var1 = 40;
-  var2 = length2dsquared(var0 - self.origin);
-  var3 = (self.radius + var1) * (self.radius + var1);
-  return var2 > var3;
+function getrandomextractunlockablelootid(var_0) {
+  var_1 = 40;
+  var_2 = length2dsquared(var_0 - self.origin);
+  var_3 = (self.radius + var_1) * (self.radius + var_1);
+  return var_2 > var_3;
 }
 
-function ref_1254c(var0, var1) {
-  if(!isPlayer(var0)) {
+function ref_1254c(var_0, var_1) {
+  if(!isPlayer(var_0)) {
     return;
   }
 
-  if(!var0 scripts\mp\gametypes\br_public::ref_125ec()) {
-    level.ref_12e76.ref_12e62 = scripts\engine\utility::array_add(level.ref_12e76.ref_12e62, var0);
-    var0 visionsetnakedforplayer("mp_gxp_safespace", 0.2);
-    playfxontagforclients(scripts\engine\utility::getfx("gxp_safe_zone_player_eye"), var0, "tag_eye", var0);
-    var0.setcheckliststateforteam = isDefined(level.disable_super_in_turret.ref_12e72) && level.disable_super_in_turret.ref_12e72 <= 0;
-    scripts\mp\gametypes\br_gametype_gxp_challenges::ref_11fee(var0, var1);
-    var0 playsoundtoplayer("br_gov_safespace_enter", var0);
+  if(!var_0 scripts\mp\gametypes\br_public::ref_125ec()) {
+    level.ref_12e76.ref_12e62 = scripts\engine\utility::array_add(level.ref_12e76.ref_12e62, var_0);
+    var_0 visionsetnakedforplayer("mp_gxp_safespace", 0.2);
+    playfxontagforclients(scripts\engine\utility::getfx("gxp_safe_zone_player_eye"), var_0, "tag_eye", var_0);
+    var_0.setcheckliststateforteam = isDefined(level.disable_super_in_turret.ref_12e72) && level.disable_super_in_turret.ref_12e72 <= 0;
+    scripts\mp\gametypes\br_gametype_gxp_challenges::ref_11fee(var_0, var_1);
+    var_0 playsoundtoplayer("br_gov_safespace_enter", var_0);
 
-    if(isDefined(var0.ref_12e66)) {
-      var0.ref_12e66 stoploopsound();
-      var0.ref_12e66 delete();
+    if(isDefined(var_0.ref_12e66)) {
+      var_0.ref_12e66 stoploopsound();
+      var_0.ref_12e66 delete();
     }
 
-    var0.ref_12e66 = spawn("script_origin", self.origin);
-    var0.ref_12e66 linkTo(var0);
-    var0.ref_12e66 hide();
-    var0.ref_12e66 showtoplayer(var0);
-    var0.ref_12e66 playLoopSound("br_gov_safespace_lp");
+    var_0.ref_12e66 = spawn("script_origin", self.origin);
+    var_0.ref_12e66 linkTo(var_0);
+    var_0.ref_12e66 hide();
+    var_0.ref_12e66 showtoplayer(var_0);
+    var_0.ref_12e66 playLoopSound("br_gov_safespace_lp");
     return;
   }
 
-  var2 = gettime();
+  var_2 = gettime();
 
-  if(!isDefined(var0.ref_12e71) || var0.ref_12e71 < var2) {
-    var3 = getdvarint("scr_br_safe_zones_ghost_vo_min", 45);
-    var4 = getdvarint("scr_br_safe_zones_ghost_vo_max", 60);
-    var5 = var3 * 1000;
-    var6 = var4 * 1000;
-    scripts\mp\gametypes\br_public::dmztut_endgamewithreward("safe_zone_ghost_vo", var0);
-    var0.ref_12e71 = var2 + randomintrange(var5, var6);
+  if(!isDefined(var_0.ref_12e71) || var_0.ref_12e71 < var_2) {
+    var_3 = getdvarint("scr_br_safe_zones_ghost_vo_min", 45);
+    var_4 = getdvarint("scr_br_safe_zones_ghost_vo_max", 60);
+    var_5 = var_3 * 1000;
+    var_6 = var_4 * 1000;
+    scripts\mp\gametypes\br_public::dmztut_endgamewithreward("safe_zone_ghost_vo", var_0);
+    var_0.ref_12e71 = var_2 + randomintrange(var_5, var_6);
     return;
   }
 }
 
-function ref_12555(var0) {
-  stopfxontagforclients(scripts\engine\utility::getfx("gxp_safe_zone_player_eye"), var0, "tag_eye", var0);
+function ref_12555(var_0) {
+  stopfxontagforclients(scripts\engine\utility::getfx("gxp_safe_zone_player_eye"), var_0, "tag_eye", var_0);
   wait 0.5;
 
-  if(isDefined(var0)) {
-    stopfxontagforclients(scripts\engine\utility::getfx("gxp_safe_zone_player_eye"), var0, "tag_eye", var0);
+  if(isDefined(var_0)) {
+    stopfxontagforclients(scripts\engine\utility::getfx("gxp_safe_zone_player_eye"), var_0, "tag_eye", var_0);
     return;
   }
 }
 
-function ref_12554(var0, var1) {
-  if(!isPlayer(var0)) {
+function ref_12554(var_0, var_1) {
+  if(!isPlayer(var_0)) {
     return;
   }
 
-  if(!var0 scripts\mp\gametypes\br_public::ref_125ec() || isDefined(var0.ref_12e66)) {
-    var0 visionsetnakedforplayer("", 0.2);
-    thread ref_12555(var0);
-    var0.setcheckliststateforteam = 0;
-    level.ref_12e76.ref_12e62 = scripts\engine\utility::array_remove(level.ref_12e76.ref_12e62, var0);
-    var0 playsoundtoplayer("br_gov_safespace_exit", var0);
+  if(!var_0 scripts\mp\gametypes\br_public::ref_125ec() || isDefined(var_0.ref_12e66)) {
+    var_0 visionsetnakedforplayer("", 0.2);
+    thread ref_12555(var_0);
+    var_0.setcheckliststateforteam = 0;
+    level.ref_12e76.ref_12e62 = scripts\engine\utility::array_remove(level.ref_12e76.ref_12e62, var_0);
+    var_0 playsoundtoplayer("br_gov_safespace_exit", var_0);
 
-    if(isDefined(var0.ref_12e66)) {
-      var0.ref_12e66 stoploopsound();
-      var0.ref_12e66 delete();
-      var0.ref_12e66 = undefined;
+    if(isDefined(var_0.ref_12e66)) {
+      var_0.ref_12e66 stoploopsound();
+      var_0.ref_12e66 delete();
+      var_0.ref_12e66 = undefined;
       return;
     }
 
@@ -464,37 +464,37 @@ function ref_12554(var0, var1) {
 
 function ref_12e78() {
   level endon("game_ended");
-  var0 = getdvarint("scr_br_safe_zones_human_vo_min", 45);
-  var1 = getdvarint("scr_br_safe_zones_human_vo_max", 60);
-  var2 = var0 * 1000;
-  var3 = var1 * 1000;
+  var_0 = getdvarint("scr_br_safe_zones_human_vo_min", 45);
+  var_1 = getdvarint("scr_br_safe_zones_human_vo_max", 60);
+  var_2 = var_0 * 1000;
+  var_3 = var_1 * 1000;
 
   for(;;) {
-    var4 = gettime();
-    var5 = [];
+    var_4 = gettime();
+    var_5 = [];
 
-    foreach(var7 in level.ref_12e76.ref_12e62) {
-      if(!isDefined(var7)) {
+    foreach(var_7 in level.ref_12e76.ref_12e62) {
+      if(!isDefined(var_7)) {
         continue;
       }
 
-      if(!isalive(var7)) {
+      if(!isalive(var_7)) {
         continue;
       }
 
-      if(var7 scripts\mp\gametypes\br_public::ref_125ec()) {
+      if(var_7 scripts\mp\gametypes\br_public::ref_125ec()) {
         continue;
       }
 
-      if(!isDefined(var7.ref_12e79) || var7.ref_12e79 < var4) {
-        scripts\mp\gametypes\br_public::dmztut_endgamewithreward("safe_zone_human_vo", var7);
-        var7.ref_12e79 = var4 + randomintrange(var2, var3);
+      if(!isDefined(var_7.ref_12e79) || var_7.ref_12e79 < var_4) {
+        scripts\mp\gametypes\br_public::dmztut_endgamewithreward("safe_zone_human_vo", var_7);
+        var_7.ref_12e79 = var_4 + randomintrange(var_2, var_3);
       }
 
-      var5 = var7;
+      var_5 = var_7;
     }
 
-    level.ref_12e76.ref_12e62 = var5;
+    level.ref_12e76.ref_12e62 = var_5;
     waitframe();
   }
 }

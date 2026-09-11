@@ -15,15 +15,15 @@ function init_anims() {
 function level_anims_script_model() {
   level.scr_animtree["level_oilPump"] = #animtree;
   level.scr_anim["level_oilPump"]["level_oilPumpIdle"][0] = $hod_me_machinery_oil_pumpjack_01;
-  var0 = ride_getgatetypes();
-  var1 = ride_getgateanimations();
+  var_0 = ride_getgatetypes();
+  var_1 = ride_getgateanimations();
 
-  for(var2 = 0; var2 < var0.size; var2++) {
-    var3 = var0[var2];
-    var4 = var1[var2];
-    level.scr_animtree["HOD_intro_truck_gate_" + var3] = #animtree;
-    level.scr_model["HOD_intro_truck_gate_" + var3] = "ygb_hse_d_carport_gate_a";
-    level.scr_anim["HOD_intro_truck_gate_" + var3]["ride"] = var4;
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    var_3 = var_0[var_2];
+    var_4 = var_1[var_2];
+    level.scr_animtree["HOD_intro_truck_gate_" + var_3] = #animtree;
+    level.scr_model["HOD_intro_truck_gate_" + var_3] = "ygb_hse_d_carport_gate_a";
+    level.scr_anim["HOD_intro_truck_gate_" + var_3]["ride"] = var_4;
   }
 
   level.scr_animtree["ride_vehicle"] = #animtree;
@@ -39,20 +39,20 @@ function level_anims_script_model() {
   level.scr_anim["intro_animatedPhone"]["intro_phoneIdleB"][0] = % hod_intro_rooftop_idle_ally04_phone;
   level.scr_animtree["intro_animatedHadirSniper"] = #animtree;
   level.scr_weapon["intro_animatedHadirSniper"] = ["hadir_sniper"];
-  var5 = intro_getstairscrateanimations();
+  var_5 = intro_getstairscrateanimations();
 
-  for(var6 = 0; var6 < var5.size; var6++) {
-    level.scr_animtree["intro_animatedStairsCrate" + var6] = #animtree;
-    level.scr_model["intro_animatedStairsCrate" + var6] = "container_ammo_box_small_animated";
-    level.scr_anim["intro_animatedStairsCrate" + var6]["intro_stairsEnter"] = var5[var6];
+  for(var_6 = 0; var_6 < var_5.size; var_6++) {
+    level.scr_animtree["intro_animatedStairsCrate" + var_6] = #animtree;
+    level.scr_model["intro_animatedStairsCrate" + var_6] = "container_ammo_box_small_animated";
+    level.scr_anim["intro_animatedStairsCrate" + var_6]["intro_stairsEnter"] = var_5[var_6];
   }
 
-  var7 = intro_getcinderblockanimations();
+  var_7 = intro_getcinderblockanimations();
 
-  for(var6 = 0; var6 < var7.size; var6++) {
-    level.scr_animtree["intro_animatedCinderblock" + var6] = #animtree;
-    level.scr_model["intro_animatedCinderblock" + var6] = "cinderblock_01_02";
-    level.scr_anim["intro_animatedCinderblock" + var6]["intro_cinderblockEnter"] = var7[var6];
+  for(var_6 = 0; var_6 < var_7.size; var_6++) {
+    level.scr_animtree["intro_animatedCinderblock" + var_6] = #animtree;
+    level.scr_model["intro_animatedCinderblock" + var_6] = "cinderblock_01_02";
+    level.scr_anim["intro_animatedCinderblock" + var_6]["intro_cinderblockEnter"] = var_7[var_6];
   }
 
   level.scr_animtree["intro_animatedCinderblockSledgehammer"] = #animtree;
@@ -300,7 +300,7 @@ function level_anims_generic_human() {
   level.scr_face["hadir"]["dx_vom_had_resupply_ieds_20"] = % dx_vom_had_resupply_ieds_20_face;
 }
 
-function custom_fov(var0) {
+function custom_fov(var_0) {
   level.player lerpfovscalefactor(1, 2);
 }
 

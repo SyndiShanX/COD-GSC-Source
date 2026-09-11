@@ -3,109 +3,109 @@
  * Script: scripts\mp\killstreaks\proxyagent.gsc
 *************************************************/
 
-function controlproxyagent(var0, var1, var2, var3, var4, var5) {
+function controlproxyagent(var_0, var_1, var_2, var_3, var_4, var_5) {
   self.proxydisableweapon = undefined;
 
-  if(var3 < 3) {
+  if(var_3 < 3) {
     return false;
   }
 
-  var6 = scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_doweapontabletdeploy(var1);
+  var_6 = scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_doweapontabletdeploy(var_1);
 
-  if(!var6) {
+  if(!var_6) {
     return false;
   }
 
-  thread watchplayerkillstreakend(var2);
+  thread watchplayerkillstreakend(var_2);
   thread watchgameend();
 
-  if(!isDefined(var4) || !var4) {
-    thread watchplayerkillstreakearlyexit(var2);
+  if(!isDefined(var_4) || !var_4) {
+    thread watchplayerkillstreakearlyexit(var_2);
   }
 
-  if(isalive(var0) && !istrue(var0.dying)) {
-    startcontrol(var0, var1.streakname, var2, var5);
+  if(isalive(var_0) && !istrue(var_0.dying)) {
+    startcontrol(var_0, var_1.streakname, var_2, var_5);
   } else {
-    self notify(var2);
+    self notify(var_2);
     return false;
   }
 
   return true;
 }
 
-function watchplayerkillstreakdeath(var0, var1) {
+function watchplayerkillstreakdeath(var_0, var_1) {
   self endon("disconnect");
-  self endon(var0);
+  self endon(var_0);
 
   for(;;) {
-    self waittill("player_killstreak_death", var2, var3, var4, var5, var6, var7);
+    self waittill("player_killstreak_death", var_2, var_3, var_4, var_5, var_6, var_7);
 
-    if(var3 != self && isPlayer(var3)) {
-      var3 scripts\mp\utility\points::giveunifiedpoints("destroyed_" + var1);
-      thread scripts\mp\hud_util::teamplayercardsplash("callout_destroyed_" + var1, var3);
-      var8 = asmdevgetallstates(var7);
-      thread scripts\cp\vehicles\vehicle_compass_cp::killstreakkilled(var1, self, self, var3, var4, var6, var8, "destroyed_" + var1);
-      thread scripts\mp\utility\dialog::leaderdialogonplayer(var1 + "_destroyed", undefined, undefined, self.origin);
+    if(var_3 != self && isPlayer(var_3)) {
+      var_3 scripts\mp\utility\points::giveunifiedpoints("destroyed_" + var_1);
+      thread scripts\mp\hud_util::teamplayercardsplash("callout_destroyed_" + var_1, var_3);
+      var_8 = asmdevgetallstates(var_7);
+      thread scripts\cp\vehicles\vehicle_compass_cp::killstreakkilled(var_1, self, self, var_3, var_4, var_6, var_8, "destroyed_" + var_1);
+      thread scripts\mp\utility\dialog::leaderdialogonplayer(var_1 + "_destroyed", undefined, undefined, self.origin);
     }
 
-    self notify(var0, 1);
+    self notify(var_0, 1);
   }
 }
 
-function watchplayerkillstreakdisconnect(var0) {
-  self endon(var0);
+function watchplayerkillstreakdisconnect(var_0) {
+  self endon(var_0);
   self waittill("disconnect");
-  self notify(var0, 1);
+  self notify(var_0, 1);
 }
 
-function watchplayerkillstreakswitchteam(var0) {
-  self endon(var0);
+function watchplayerkillstreakswitchteam(var_0) {
+  self endon(var_0);
   self waittill("joined_team");
-  self notify(var0, 1);
+  self notify(var_0, 1);
 }
 
-function watchplayerkillstreakearlyexit(var0) {
+function watchplayerkillstreakearlyexit(var_0) {
   self endon("disconnect");
-  self endon(var0);
-  var1 = level.framedurationseconds;
+  self endon(var_0);
+  var_1 = level.framedurationseconds;
 
   for(;;) {
-    var2 = 0;
+    var_2 = 0;
 
     while(self useButtonPressed()) {
-      var2 += var1;
+      var_2 += var_1;
 
-      if(var2 > 0.75) {
+      if(var_2 > 0.75) {
         self.playerkillstreakearlyexitlocation = self.origin;
-        self notify(var0);
+        self notify(var_0);
         return;
       }
 
-      wait var1;
+      wait var_1;
     }
 
     waitframe();
   }
 }
 
-function watchplayerkillstreaktimeout(var0, var1) {
+function watchplayerkillstreaktimeout(var_0, var_1) {
   self endon("disconnect");
-  self endon(var0);
-  wait var1;
-  self notify(var0, 1);
+  self endon(var_0);
+  wait var_1;
+  self notify(var_0, 1);
 }
 
-function watchplayerkillstreakemp(var0) {
+function watchplayerkillstreakemp(var_0) {
   self endon("disconnect");
-  self endon(var0);
+  self endon(var_0);
 
   for(;;) {
-    self waittill("emp_damage", var1, var2);
+    self waittill("emp_damage", var_1, var_2);
   }
 }
 
-function watchplayerkillstreakend(var0) {
-  scripts\engine\utility::ref_143a5(var0, "level_game_ended");
+function watchplayerkillstreakend(var_0) {
+  scripts\engine\utility::ref_143a5(var_0, "level_game_ended");
   stopcontrol();
 }
 
@@ -114,15 +114,15 @@ function watchgameend() {
   self notify("level_game_ended");
 }
 
-function startcontrol(var0, var1, var2, var3) {
-  if(isDefined(self) && isalive(var0)) {
-    self controlagent(var0);
+function startcontrol(var_0, var_1, var_2, var_3) {
+  if(isDefined(self) && isalive(var_0)) {
+    self controlagent(var_0);
 
-    if(isDefined(var3)) {
-      self visionsetnakedforplayer(var3, 0);
+    if(isDefined(var_3)) {
+      self visionsetnakedforplayer(var_3, 0);
     }
 
-    self.playerproxyagent = var0;
+    self.playerproxyagent = var_0;
     return;
   }
 }
@@ -141,26 +141,26 @@ function stopcontrol() {
   }
 }
 
-function cleararchetype(var0) {
-  scripts\mp\archetypes\archcommon::removearchetype(var0.loadoutarchetype);
+function cleararchetype(var_0) {
+  scripts\mp\archetypes\archcommon::removearchetype(var_0.loadoutarchetype);
   scripts\mp\class::loadout_clearperks();
 }
 
-function reapplyarchetype(var0) {
-  var1 = undefined;
+function reapplyarchetype(var_0) {
+  var_1 = undefined;
 
-  switch (var0.loadoutarchetype) {
+  switch (var_0.loadoutarchetype) {
     case "archetype_assault":
-      var1 = &scripts\mp\archetypes\archassault::applyarchetype;
+      var_1 = &scripts\mp\archetypes\archassault::applyarchetype;
       break;
   }
 
-  scripts\mp\class::loadout_updateplayerperks(var0);
+  scripts\mp\class::loadout_updateplayerperks(var_0);
 
-  if(isDefined(var1)) {
-    self[[var1]]();
+  if(isDefined(var_1)) {
+    self[[var_1]]();
     return;
   }
 }
 
-function killproxy(var0) {}
+function killproxy(var_0) {}

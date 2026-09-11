@@ -13,46 +13,46 @@ function hacking_init() {
     parsehackingtable();
   }
 
-  foreach(var1 in level.players) {
+  foreach(var_1 in level.players) {
     thread hacking_lua_notify();
   }
 
   level.setobjectivelocations = &hacking_lua_notify;
 }
 
-function parsehackingtable(var0) {
-  if(!isDefined(var0)) {
-    var0 = "cp/cp_milbase_hacking_objective.csv";
+function parsehackingtable(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = "cp/cp_milbase_hacking_objective.csv";
   }
 
-  var1 = 0;
-  var2 = 0;
-  var3 = 0;
+  var_1 = 0;
+  var_2 = 0;
+  var_3 = 0;
 
   for(;;) {
-    var4 = tablelookupbyrow(var0, var1, 0);
+    var_4 = tablelookupbyrow(var_0, var_1, 0);
 
-    if(var4 == "") {
+    if(var_4 == "") {
       break;
     }
 
-    var5 = spawnStruct();
-    var5.ref = var1;
-    var5.index = var4;
-    var5.time = int(tablelookupbyrow(var0, var1, 1));
-    var5.hackingspeed = int(tablelookupbyrow(var0, var1, 2));
-    var5.total = var5.time * var5.hackingspeed;
-    var3 += var5.total;
-    var2 += var5.time;
-    var5.totalmeter = var3;
-    var5.totaltime = var2;
-    level.hackingtabledata[var5.ref] = var5;
-    var1++;
+    var_5 = spawnStruct();
+    var_5.ref = var_1;
+    var_5.index = var_4;
+    var_5.time = int(tablelookupbyrow(var_0, var_1, 1));
+    var_5.hackingspeed = int(tablelookupbyrow(var_0, var_1, 2));
+    var_5.total = var_5.time * var_5.hackingspeed;
+    var_3 += var_5.total;
+    var_2 += var_5.time;
+    var_5.totalmeter = var_3;
+    var_5.totaltime = var_2;
+    level.hackingtabledata[var_5.ref] = var_5;
+    var_1++;
   }
 
-  level.hackingtotaltime = var2;
-  level.hackingtotalmeter = var3;
-  level.hackingtotalsteps = var1;
+  level.hackingtotaltime = var_2;
+  level.hackingtotalmeter = var_3;
+  level.hackingtotalsteps = var_1;
   level.objective_test = 0;
   scripts\engine\utility::flag_set("hacking_table_parsed");
 }
@@ -61,161 +61,161 @@ function hacking_lua_notify() {
   level endon("game_ended");
   self notify("hacking_lua_notify");
   self endon("hacking_lua_notify");
-  var0 = self;
+  var_0 = self;
 
   for(;;) {
-    var0 waittill("luinotifyserver", var1, var2);
+    var_0 waittill("luinotifyserver", var_1, var_2);
 
-    if(var1 == "cpu1_folder" || var1 == "cpu2_folder" || var1 == "cpu3_folder") {
-      var3 = computer_search_action(var2);
-      var4 = computer_result_omnvar(var1);
-      setomnvar(var4, var3);
-      level notify("player_computer_searched", var3, var4, var0);
+    if(var_1 == "cpu1_folder" || var_1 == "cpu2_folder" || var_1 == "cpu3_folder") {
+      var_3 = computer_search_action(var_2);
+      var_4 = computer_result_omnvar(var_1);
+      setomnvar(var_4, var_3);
+      level notify("player_computer_searched", var_3, var_4, var_0);
       continue;
     }
 
-    if(var1 == "cpu1_folder_startsearch" || var1 == "cpu2_folder_startsearch" || var1 == "cpu3_folder_startsearch") {
-      var3 = computer_search_action(var2);
-      var4 = computer_result_omnvar(var1);
-      level notify("player_computer_startsearch", var3, var4, var0);
+    if(var_1 == "cpu1_folder_startsearch" || var_1 == "cpu2_folder_startsearch" || var_1 == "cpu3_folder_startsearch") {
+      var_3 = computer_search_action(var_2);
+      var_4 = computer_result_omnvar(var_1);
+      level notify("player_computer_startsearch", var_3, var_4, var_0);
     }
   }
 }
 
-function computer_search_action(var0) {
-  if(var0 == 4) {
-    var1 = 4;
+function computer_search_action(var_0) {
+  if(var_0 == 4) {
+    var_1 = 4;
     thread scripts\cp\cp_hud_message::showsplash("cp_intel_hack_found", undefined, self);
-  } else if(var1 == 3) {
-    var1 = 3;
+  } else if(var_1 == 3) {
+    var_1 = 3;
     thread hacking_objective_time();
-  } else if(var1 == 2) {
-    var1 = 2;
+  } else if(var_1 == 2) {
+    var_1 = 2;
   } else {
-    var1 = 1;
+    var_1 = 1;
   }
 
-  return var1;
+  return var_1;
 }
 
-function computer_result_omnvar(var0) {
-  var1 = "cpu1_search_result";
+function computer_result_omnvar(var_0) {
+  var_1 = "cpu1_search_result";
 
-  switch (var0) {
+  switch (var_0) {
     case "cpu1_folder_startsearch":
     case "cpu1_folder":
-      var1 = "cpu1_search_result";
+      var_1 = "cpu1_search_result";
       break;
     case "cpu2_folder_startsearch":
     case "cpu2_folder":
-      var1 = "cpu2_search_result";
+      var_1 = "cpu2_search_result";
       break;
     case "cpu3_folder_startsearch":
     case "cpu3_folder":
-      var1 = "cpu3_search_result";
+      var_1 = "cpu3_search_result";
       break;
   }
 
-  return var1;
+  return var_1;
 }
 
 function hacking_objective_time() {
   level endon("game_ended");
   level notify("cpu_hacking_start");
-  var0 = level.hackingtotaltime;
+  var_0 = level.hackingtotaltime;
 
   if(isDefined(level.hack_duration)) {
-    var0 = level.hack_duration;
+    var_0 = level.hack_duration;
   }
 
   setomnvar("cpu_hacking_progress", 0);
-  var1 = gettime();
-  var2 = 0;
-  var3 = var1;
-  var4 = var1;
-  var5 = 0;
-  var6 = 1;
-  var7 = 0;
-  var8 = 0;
-  var9 = 0;
-  var10 = undefined;
+  var_1 = gettime();
+  var_2 = 0;
+  var_3 = var_1;
+  var_4 = var_1;
+  var_5 = 0;
+  var_6 = 1;
+  var_7 = 0;
+  var_8 = 0;
+  var_9 = 0;
+  var_10 = undefined;
 
-  if(isDefined(level.hackingtabledata[var5].hackingspeed)) {
-    var6 = level.hackingtabledata[var5].hackingspeed;
+  if(isDefined(level.hackingtabledata[var_5].hackingspeed)) {
+    var_6 = level.hackingtabledata[var_5].hackingspeed;
   }
 
-  var11 = (var0 - get_table_time(var5)) / level.hackingtabledata[var5].hackingspeed * 10;
-  setomnvar("cpu_hacking_time", int(var11));
-  setomnvar("cpu_hacking_speed", var6);
-  var7 = get_section_time(var5);
+  var_11 = (var_0 - get_table_time(var_5)) / level.hackingtabledata[var_5].hackingspeed * 10;
+  setomnvar("cpu_hacking_time", int(var_11));
+  setomnvar("cpu_hacking_speed", var_6);
+  var_7 = get_section_time(var_5);
 
   for(;;) {
-    var12 = gettime();
+    var_12 = gettime();
 
-    if(var5 < level.hackingtabledata.size - 1) {
+    if(var_5 < level.hackingtabledata.size - 1) {
       if(!istrue(level.hacking_paused)) {
-        if(istrue(var10)) {
-          var10 = undefined;
-          var6 = level.hackingtabledata[var5].hackingspeed;
-          var11 = (var0 - var7) / level.hackingtabledata[var5].hackingspeed * 10;
-          setomnvar("cpu_hacking_speed", var6);
-          setomnvar("cpu_hacking_time", int(var11));
+        if(istrue(var_10)) {
+          var_10 = undefined;
+          var_6 = level.hackingtabledata[var_5].hackingspeed;
+          var_11 = (var_0 - var_7) / level.hackingtabledata[var_5].hackingspeed * 10;
+          setomnvar("cpu_hacking_speed", var_6);
+          setomnvar("cpu_hacking_time", int(var_11));
         }
 
-        if(var12 > var4 + get_section_time(var5) * 1000) {
-          var5 += 1;
-          var4 = var12;
-          var6 = level.hackingtabledata[var5].hackingspeed;
-          var11 = (var0 - var7) / level.hackingtabledata[var5].hackingspeed * 10;
-          var7 += get_section_time(var5);
-          setomnvar("cpu_hacking_speed", var6);
-          setomnvar("cpu_hacking_time", int(var11));
-          var13 = var12 - var3;
-          var14 = level.hackingtabledata[var5].total / level.hackingtotalmeter;
-          var9 = var14 / get_section_time(var5) * 1000 * var13;
+        if(var_12 > var_4 + get_section_time(var_5) * 1000) {
+          var_5 += 1;
+          var_4 = var_12;
+          var_6 = level.hackingtabledata[var_5].hackingspeed;
+          var_11 = (var_0 - var_7) / level.hackingtabledata[var_5].hackingspeed * 10;
+          var_7 += get_section_time(var_5);
+          setomnvar("cpu_hacking_speed", var_6);
+          setomnvar("cpu_hacking_time", int(var_11));
+          var_13 = var_12 - var_3;
+          var_14 = level.hackingtabledata[var_5].total / level.hackingtotalmeter;
+          var_9 = var_14 / get_section_time(var_5) * 1000 * var_13;
         }
       } else {
-        var10 = 1;
+        var_10 = 1;
 
-        if(var12 > var4 + 1500) {
-          var4 = var12;
+        if(var_12 > var_4 + 1500) {
+          var_4 = var_12;
 
-          if(var6 >= 1) {
-            var6 = scripts\engine\math::lerp(var6, 0, 0.6);
-            var11 = scripts\engine\math::lerp(var11, 800, 0.25);
+          if(var_6 >= 1) {
+            var_6 = scripts\engine\math::lerp(var_6, 0, 0.6);
+            var_11 = scripts\engine\math::lerp(var_11, 800, 0.25);
           } else {
-            var6 = 0;
-            var11 = -1;
+            var_6 = 0;
+            var_11 = -1;
           }
 
-          setomnvar("cpu_hacking_speed", int(var6));
-          setomnvar("cpu_hacking_time", int(var11));
+          setomnvar("cpu_hacking_speed", int(var_6));
+          setomnvar("cpu_hacking_time", int(var_11));
         }
       }
     }
 
     if(!istrue(level.hacking_paused)) {
-      var15 = 1;
+      var_15 = 1;
 
       if(isDefined(level.hack_multiplier)) {
-        var15 = level.hack_multiplier;
+        var_15 = level.hack_multiplier;
       }
 
-      var2 += var9 * var15;
+      var_2 += var_9 * var_15;
 
-      if(var2 > 1) {
-        var2 = 1;
+      if(var_2 > 1) {
+        var_2 = 1;
       }
 
-      level.hack_progress = var2;
+      level.hack_progress = var_2;
     }
 
-    setomnvar("cpu_hacking_progress", var2);
-    var3 = var12;
+    setomnvar("cpu_hacking_progress", var_2);
+    var_3 = var_12;
 
-    if(var2 == 1) {
-      var2 = 0;
-      var2 = 1;
+    if(var_2 == 1) {
+      var_2 = 0;
+      var_2 = 1;
       level notify("cpu_hacking_done");
       thread scriptable_door_is_double_door_pair();
       level.hack_progress = -1;
@@ -230,32 +230,32 @@ function hacking_objective_time() {
 }
 
 function scriptable_door_is_double_door_pair() {
-  foreach(var1 in level.players) {
-    var1 thread scripts\cp\agents\gametype_cp_wave_sv::giveunifiedpoints("capture");
+  foreach(var_1 in level.players) {
+    var_1 thread scripts\cp\agents\gametype_cp_wave_sv::giveunifiedpoints("capture");
   }
 }
 
-function get_section_time(var0) {
-  var1 = level.hackingtotaltime;
-  var2 = undefined;
+function get_section_time(var_0) {
+  var_1 = level.hackingtotaltime;
+  var_2 = undefined;
 
   if(isDefined(level.hack_duration)) {
-    var2 = level.hack_duration / var1;
+    var_2 = level.hack_duration / var_1;
   }
 
-  var3 = level.hackingtabledata[var0].time;
+  var_3 = level.hackingtabledata[var_0].time;
 
-  if(isDefined(var2)) {
-    var3 *= var2;
+  if(isDefined(var_2)) {
+    var_3 *= var_2;
   }
 
-  return var3;
+  return var_3;
 }
 
-function get_table_time(var0) {
+function get_table_time(var_0) {
   if(isDefined(level.hack_duration)) {
     return level.hack_duration;
   }
 
-  return level.hackingtabledata[var0].totaltime;
+  return level.hackingtabledata[var_0].totaltime;
 }

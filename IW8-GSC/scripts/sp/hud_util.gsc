@@ -3,8 +3,8 @@
  * Script: scripts\sp\hud_util.gsc
 ***********************************************/
 
-function setparent(var0) {
-  if(isDefined(self.parent) && self.parent == var0) {
+function setparent(var_0) {
+  if(isDefined(self.parent) && self.parent == var_0) {
     return;
   }
 
@@ -12,7 +12,7 @@ function setparent(var0) {
     removechild(self.parent, self);
   }
 
-  self.parent = var0;
+  self.parent = var_0;
   addchild(self.parent, self);
 
   if(isDefined(self.point)) {
@@ -33,170 +33,170 @@ function removedestroyedchildren() {
   }
 
   self.childchecktime = gettime();
-  var0 = [];
+  var_0 = [];
 
-  foreach(var2 in self.children) {
-    if(!isDefined(var2)) {
+  foreach(var_2 in self.children) {
+    if(!isDefined(var_2)) {
       continue;
     }
 
-    var2.index = var0.size;
-    var0 = var2;
+    var_2.index = var_0.size;
+    var_0 = var_2;
   }
 
-  self.children = var0;
+  self.children = var_0;
 }
 
-function addchild(var0) {
-  var0.index = self.children.size;
-  self.children[self.children.size] = var0;
+function addchild(var_0) {
+  var_0.index = self.children.size;
+  self.children[self.children.size] = var_0;
   removedestroyedchildren();
 }
 
-function removechild(var0) {
-  var0.parent = undefined;
+function removechild(var_0) {
+  var_0.parent = undefined;
 
-  if(self.children[self.children.size - 1] != var0) {
-    self.children[var0.index] = self.children[self.children.size - 1];
-    self.children[var0.index].index = var0.index;
+  if(self.children[self.children.size - 1] != var_0) {
+    self.children[var_0.index] = self.children[self.children.size - 1];
+    self.children[var_0.index].index = var_0.index;
   }
 
   self.children[self.children.size - 1] = undefined;
-  var0.index = undefined;
+  var_0.index = undefined;
 }
 
-function setpoint(var0, var1, var2, var3, var4) {
-  if(!isDefined(var4)) {
-    var4 = 0;
+function setpoint(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_4)) {
+    var_4 = 0;
   }
 
-  var5 = getparent();
+  var_5 = getparent();
 
-  if(var4) {
-    self moveovertime(var4);
+  if(var_4) {
+    self moveovertime(var_4);
   }
 
-  if(!isDefined(var2)) {
-    var2 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  self.xoffset = var2;
+  self.xoffset = var_2;
 
-  if(!isDefined(var3)) {
-    var3 = 0;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  self.yoffset = var3;
-  self.point = var0;
+  self.yoffset = var_3;
+  self.point = var_0;
   self.alignx = "center";
   self.aligny = "middle";
 
-  if(issubstr(var0, "TOP")) {
+  if(issubstr(var_0, "TOP")) {
     self.aligny = "top";
   }
 
-  if(issubstr(var0, "BOTTOM")) {
+  if(issubstr(var_0, "BOTTOM")) {
     self.aligny = "bottom";
   }
 
-  if(issubstr(var0, "LEFT")) {
+  if(issubstr(var_0, "LEFT")) {
     self.alignx = "left";
   }
 
-  if(issubstr(var0, "RIGHT")) {
+  if(issubstr(var_0, "RIGHT")) {
     self.alignx = "right";
   }
 
-  if(!isDefined(var1)) {
-    var1 = var0;
+  if(!isDefined(var_1)) {
+    var_1 = var_0;
   }
 
-  self.relativepoint = var1;
-  var6 = "center";
-  var7 = "middle";
+  self.relativepoint = var_1;
+  var_6 = "center";
+  var_7 = "middle";
 
-  if(issubstr(var1, "TOP")) {
-    var7 = "top";
+  if(issubstr(var_1, "TOP")) {
+    var_7 = "top";
   }
 
-  if(issubstr(var1, "BOTTOM")) {
-    var7 = "bottom";
+  if(issubstr(var_1, "BOTTOM")) {
+    var_7 = "bottom";
   }
 
-  if(issubstr(var1, "LEFT")) {
-    var6 = "left";
+  if(issubstr(var_1, "LEFT")) {
+    var_6 = "left";
   }
 
-  if(issubstr(var1, "RIGHT")) {
-    var6 = "right";
+  if(issubstr(var_1, "RIGHT")) {
+    var_6 = "right";
   }
 
-  if(var5 == level.uiparent) {
-    self.horzalign = var6;
-    self.vertalign = var7;
+  if(var_5 == level.uiparent) {
+    self.horzalign = var_6;
+    self.vertalign = var_7;
   } else {
-    self.horzalign = var5.horzalign;
-    self.vertalign = var5.vertalign;
+    self.horzalign = var_5.horzalign;
+    self.vertalign = var_5.vertalign;
   }
 
-  if(var6 == var5.alignx) {
-    var8 = 0;
-    var9 = 0;
-  } else if(var8 == "center" || var7.alignx == "center") {
-    var8 = int(var7.width / 2);
+  if(var_6 == var_5.alignx) {
+    var_8 = 0;
+    var_9 = 0;
+  } else if(var_8 == "center" || var_7.alignx == "center") {
+    var_8 = int(var_7.width / 2);
 
-    if(var8 == "left" || var7.alignx == "right") {
-      var9 = -1;
+    if(var_8 == "left" || var_7.alignx == "right") {
+      var_9 = -1;
     } else {
-      var9 = 1;
-    }
-  } else {
-    var8 = var8.width;
-
-    if(var9 == "left") {
-      var9 = -1;
-    } else {
-      var9 = 1;
-    }
-  }
-
-  self.x = var9.x + var9 * var9;
-
-  if(var8 == var9.aligny) {
-    var10 = 0;
-    var11 = 0;
-  } else if(var9 == "middle" || var8.aligny == "middle") {
-    var10 = int(var8.height / 2);
-
-    if(var9 == "top" || var8.aligny == "bottom") {
-      var11 = -1;
-    } else {
-      var11 = 1;
+      var_9 = 1;
     }
   } else {
-    var10 = var10.height;
+    var_8 = var_8.width;
 
-    if(var10 == "top") {
-      var11 = -1;
+    if(var_9 == "left") {
+      var_9 = -1;
     } else {
-      var11 = 1;
+      var_9 = 1;
     }
   }
 
-  self.y = var11.y + var11 * var11;
+  self.x = var_9.x + var_9 * var_9;
+
+  if(var_8 == var_9.aligny) {
+    var_10 = 0;
+    var_11 = 0;
+  } else if(var_9 == "middle" || var_8.aligny == "middle") {
+    var_10 = int(var_8.height / 2);
+
+    if(var_9 == "top" || var_8.aligny == "bottom") {
+      var_11 = -1;
+    } else {
+      var_11 = 1;
+    }
+  } else {
+    var_10 = var_10.height;
+
+    if(var_10 == "top") {
+      var_11 = -1;
+    } else {
+      var_11 = 1;
+    }
+  }
+
+  self.y = var_11.y + var_11 * var_11;
   self.x += self.xoffset;
   self.y += self.yoffset;
 
   switch (self.elemtype) {
     case "bar":
-      setpointbar(var9, var8, var9, var9);
+      setpointbar(var_9, var_8, var_9, var_9);
       break;
   }
 
-  updatechildren(var10);
+  updatechildren(var_10);
 }
 
-function setpointbar(var0, var1, var2, var3) {
+function setpointbar(var_0, var_1, var_2, var_3) {
   self.bar.horzalign = self.horzalign;
   self.bar.vertalign = self.vertalign;
   self.bar.alignx = "left";
@@ -214,237 +214,237 @@ function setpointbar(var0, var1, var2, var3) {
   updatebar(self.bar.frac);
 }
 
-function updatebar(var0) {
-  var1 = int((self.width - self.xpadding * 2) * var0);
+function updatebar(var_0) {
+  var_1 = int((self.width - self.xpadding * 2) * var_0);
 
-  if(!var1) {
-    var1 = 1;
+  if(!var_1) {
+    var_1 = 1;
   }
 
-  self.bar.frac = var0;
-  self.bar setshader(self.bar.shader, var1, self.height - self.ypadding * 2);
+  self.bar.frac = var_0;
+  self.bar setshader(self.bar.shader, var_1, self.height - self.ypadding * 2);
 }
 
-function hidebar(var0) {
-  var0 = scripts\engine\utility::ter_op(isDefined(var0), var0, 1);
+function hidebar(var_0) {
+  var_0 = scripts\engine\utility::ter_op(isDefined(var_0), var_0, 1);
 
-  if(var0 || !isDefined(self.orig_alpha) || !isDefined(self.bar.orig_alpha)) {
+  if(var_0 || !isDefined(self.orig_alpha) || !isDefined(self.bar.orig_alpha)) {
     self.orig_alpha = self.alpha;
     self.bar.orig_alpha = self.bar.alpha;
   }
 
-  self.alpha = scripts\engine\utility::ter_op(var0, 0, self.orig_alpha);
-  self.bar.alpha = scripts\engine\utility::ter_op(var0, 0, self.bar.orig_alpha);
+  self.alpha = scripts\engine\utility::ter_op(var_0, 0, self.orig_alpha);
+  self.bar.alpha = scripts\engine\utility::ter_op(var_0, 0, self.bar.orig_alpha);
 }
 
-function createfontstring(var0, var1) {
-  var2 = newhudelem();
-  var2.elemtype = "font";
-  var2.font = var0;
-  var2.fontscale = var1;
-  var2.x = 0;
-  var2.y = 0;
-  var2.width = 0;
-  var2.height = int(level.fontheight * var1);
-  var2.xoffset = 0;
-  var2.yoffset = 0;
-  var2.children = [];
-  setparent(var2, level.uiparent);
-  return var2;
+function createfontstring(var_0, var_1) {
+  var_2 = newhudelem();
+  var_2.elemtype = "font";
+  var_2.font = var_0;
+  var_2.fontscale = var_1;
+  var_2.x = 0;
+  var_2.y = 0;
+  var_2.width = 0;
+  var_2.height = int(level.fontheight * var_1);
+  var_2.xoffset = 0;
+  var_2.yoffset = 0;
+  var_2.children = [];
+  setparent(var_2, level.uiparent);
+  return var_2;
 }
 
-function createclientfontstring(var0, var1) {
-  var2 = newclienthudelem(self);
-  var2.elemtype = "font";
-  var2.font = var0;
-  var2.fontscale = var1;
-  var2.x = 0;
-  var2.y = 0;
-  var2.width = 0;
-  var2.height = int(level.fontheight * var1);
-  var2.xoffset = 0;
-  var2.yoffset = 0;
-  var2.children = [];
-  setparent(var2, level.uiparent);
-  return var2;
+function createclientfontstring(var_0, var_1) {
+  var_2 = newclienthudelem(self);
+  var_2.elemtype = "font";
+  var_2.font = var_0;
+  var_2.fontscale = var_1;
+  var_2.x = 0;
+  var_2.y = 0;
+  var_2.width = 0;
+  var_2.height = int(level.fontheight * var_1);
+  var_2.xoffset = 0;
+  var_2.yoffset = 0;
+  var_2.children = [];
+  setparent(var_2, level.uiparent);
+  return var_2;
 }
 
-function createclienttimer(var0, var1) {
-  var2 = newclienthudelem(self);
-  var2.elemtype = "timer";
-  var2.font = var0;
-  var2.fontscale = var1;
-  var2.x = 0;
-  var2.y = 0;
-  var2.width = 0;
-  var2.height = int(level.fontheight * var1);
-  var2.xoffset = 0;
-  var2.yoffset = 0;
-  var2.children = [];
-  setparent(var2, level.uiparent);
-  return var2;
+function createclienttimer(var_0, var_1) {
+  var_2 = newclienthudelem(self);
+  var_2.elemtype = "timer";
+  var_2.font = var_0;
+  var_2.fontscale = var_1;
+  var_2.x = 0;
+  var_2.y = 0;
+  var_2.width = 0;
+  var_2.height = int(level.fontheight * var_1);
+  var_2.xoffset = 0;
+  var_2.yoffset = 0;
+  var_2.children = [];
+  setparent(var_2, level.uiparent);
+  return var_2;
 }
 
-function createservertimer(var0, var1) {
-  var2 = newhudelem();
-  var2.elemtype = "timer";
-  var2.font = var0;
-  var2.fontscale = var1;
-  var2.x = 0;
-  var2.y = 0;
-  var2.width = 0;
-  var2.height = int(level.fontheight * var1);
-  var2.xoffset = 0;
-  var2.yoffset = 0;
-  var2.children = [];
-  setparent(var2, level.uiparent);
-  return var2;
+function createservertimer(var_0, var_1) {
+  var_2 = newhudelem();
+  var_2.elemtype = "timer";
+  var_2.font = var_0;
+  var_2.fontscale = var_1;
+  var_2.x = 0;
+  var_2.y = 0;
+  var_2.width = 0;
+  var_2.height = int(level.fontheight * var_1);
+  var_2.xoffset = 0;
+  var_2.yoffset = 0;
+  var_2.children = [];
+  setparent(var_2, level.uiparent);
+  return var_2;
 }
 
-function createicon(var0, var1, var2) {
-  var3 = newhudelem();
-  return createicon_hudelem(var3, var0, var1, var2);
+function createicon(var_0, var_1, var_2) {
+  var_3 = newhudelem();
+  return createicon_hudelem(var_3, var_0, var_1, var_2);
 }
 
-function createclienticon(var0, var1, var2) {
-  var3 = newclienthudelem(self);
-  return createicon_hudelem(var3, var0, var1, var2);
+function createclienticon(var_0, var_1, var_2) {
+  var_3 = newclienthudelem(self);
+  return createicon_hudelem(var_3, var_0, var_1, var_2);
 }
 
-function createicon_hudelem(var0, var1, var2, var3) {
-  var0.elemtype = "icon";
-  var0.x = 0;
-  var0.y = 0;
-  var0.width = var2;
-  var0.height = var3;
-  var0.xoffset = 0;
-  var0.yoffset = 0;
-  var0.children = [];
-  setparent(var0, level.uiparent);
+function createicon_hudelem(var_0, var_1, var_2, var_3) {
+  var_0.elemtype = "icon";
+  var_0.x = 0;
+  var_0.y = 0;
+  var_0.width = var_2;
+  var_0.height = var_3;
+  var_0.xoffset = 0;
+  var_0.yoffset = 0;
+  var_0.children = [];
+  setparent(var_0, level.uiparent);
 
-  if(isDefined(var1)) {
-    var0 setshader(var1, var2, var3);
+  if(isDefined(var_1)) {
+    var_0 setshader(var_1, var_2, var_3);
   }
 
-  return var0;
+  return var_0;
 }
 
-function createbar(var0, var1, var2, var3, var4) {
-  if(!isDefined(var0)) {
-    var0 = "white";
+function createbar(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_0)) {
+    var_0 = "white";
   }
 
-  if(!isDefined(var1)) {
-    var1 = "black";
+  if(!isDefined(var_1)) {
+    var_1 = "black";
   }
 
-  if(!isDefined(var2)) {
-    var2 = 100;
+  if(!isDefined(var_2)) {
+    var_2 = 100;
   }
 
-  if(!isDefined(var3)) {
-    var3 = 9;
+  if(!isDefined(var_3)) {
+    var_3 = 9;
   }
 
-  var5 = newhudelem();
-  var5.x = 2;
-  var5.y = 2;
-  var5.frac = 0.25;
-  var5.shader = var0;
-  var5.sort = -1;
-  var5 setshader(var0, var2 - 2, var3 - 2);
+  var_5 = newhudelem();
+  var_5.x = 2;
+  var_5.y = 2;
+  var_5.frac = 0.25;
+  var_5.shader = var_0;
+  var_5.sort = -1;
+  var_5 setshader(var_0, var_2 - 2, var_3 - 2);
 
-  if(isDefined(var4)) {
-    var5.flashfrac = var4;
+  if(isDefined(var_4)) {
+    var_5.flashfrac = var_4;
     thread flashthread();
   }
 
-  var6 = newhudelem();
-  var6.elemtype = "bar";
-  var6.x = 0;
-  var6.y = 0;
-  var6.width = var2;
-  var6.height = var3;
-  var6.xoffset = 0;
-  var6.yoffset = 0;
-  var6.bar = var5;
-  var6.children = [];
-  var6.padding = 2;
-  var6.sort = -2;
-  var6.alpha = 0.5;
-  setparent(var6, level.uiparent);
-  var6 setshader(var1, var2, var3);
-  return var6;
+  var_6 = newhudelem();
+  var_6.elemtype = "bar";
+  var_6.x = 0;
+  var_6.y = 0;
+  var_6.width = var_2;
+  var_6.height = var_3;
+  var_6.xoffset = 0;
+  var_6.yoffset = 0;
+  var_6.bar = var_5;
+  var_6.children = [];
+  var_6.padding = 2;
+  var_6.sort = -2;
+  var_6.alpha = 0.5;
+  setparent(var_6, level.uiparent);
+  var_6 setshader(var_1, var_2, var_3);
+  return var_6;
 }
 
-function createclientprogressbar(var0, var1, var2, var3, var4, var5, var6, var7) {
-  var0 = scripts\engine\utility::ter_op(isDefined(var0), var0, level.player);
-  var1 = scripts\engine\utility::ter_op(isDefined(var1), var1, 90);
-  var2 = scripts\engine\utility::ter_op(isDefined(var2), var2, "white");
-  var3 = scripts\engine\utility::ter_op(isDefined(var3), var3, "black");
-  var4 = scripts\engine\utility::ter_op(isDefined(var4), var4, 100);
-  var5 = scripts\engine\utility::ter_op(isDefined(var5), var5, 9);
-  var6 = scripts\engine\utility::ter_op(isDefined(var6), var6, 2);
-  var7 = scripts\engine\utility::ter_op(isDefined(var7), var7, 2);
-  var8 = createclientbar(var0, var2, var3, var4, var5, undefined, var6, var7);
-  setpoint(var8, "CENTER", undefined, 0, var1);
-  return var8;
+function createclientprogressbar(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  var_0 = scripts\engine\utility::ter_op(isDefined(var_0), var_0, level.player);
+  var_1 = scripts\engine\utility::ter_op(isDefined(var_1), var_1, 90);
+  var_2 = scripts\engine\utility::ter_op(isDefined(var_2), var_2, "white");
+  var_3 = scripts\engine\utility::ter_op(isDefined(var_3), var_3, "black");
+  var_4 = scripts\engine\utility::ter_op(isDefined(var_4), var_4, 100);
+  var_5 = scripts\engine\utility::ter_op(isDefined(var_5), var_5, 9);
+  var_6 = scripts\engine\utility::ter_op(isDefined(var_6), var_6, 2);
+  var_7 = scripts\engine\utility::ter_op(isDefined(var_7), var_7, 2);
+  var_8 = createclientbar(var_0, var_2, var_3, var_4, var_5, undefined, var_6, var_7);
+  setpoint(var_8, "CENTER", undefined, 0, var_1);
+  return var_8;
 }
 
-function createclientbar(var0, var1, var2, var3, var4, var5, var6) {
-  if(!isDefined(var5)) {
-    var5 = 2;
+function createclientbar(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if(!isDefined(var_5)) {
+    var_5 = 2;
   }
 
-  if(!isDefined(var6)) {
-    var6 = 2;
+  if(!isDefined(var_6)) {
+    var_6 = 2;
   }
 
-  var7 = newclienthudelem(self);
-  var7.x = 0 - var5;
-  var7.y = 0 - var6;
-  var7.frac = 0.25;
-  var7.shader = var0;
-  var7.sort = -1;
-  var7 setshader(var0, var2 - var5 * 2, var3 - var6 * 2);
+  var_7 = newclienthudelem(self);
+  var_7.x = 0 - var_5;
+  var_7.y = 0 - var_6;
+  var_7.frac = 0.25;
+  var_7.shader = var_0;
+  var_7.sort = -1;
+  var_7 setshader(var_0, var_2 - var_5 * 2, var_3 - var_6 * 2);
 
-  if(isDefined(var4)) {
-    var7.flashfrac = var4;
+  if(isDefined(var_4)) {
+    var_7.flashfrac = var_4;
     thread flashthread();
   }
 
-  var8 = newclienthudelem(self);
-  var8.elemtype = "bar";
-  var8.x = 0;
-  var8.y = 0;
-  var8.width = var2;
-  var8.height = var3;
-  var8.xoffset = -1 * var5;
-  var8.yoffset = 0;
-  var8.bar = var7;
-  var8.children = [];
-  var8.xpadding = var5;
-  var8.ypadding = var6;
-  var8.sort = -2;
-  var8.alpha = 0.5;
-  setparent(var8, level.uiparent);
-  var8 setshader(var1, var2, var3);
-  return var8;
+  var_8 = newclienthudelem(self);
+  var_8.elemtype = "bar";
+  var_8.x = 0;
+  var_8.y = 0;
+  var_8.width = var_2;
+  var_8.height = var_3;
+  var_8.xoffset = -1 * var_5;
+  var_8.yoffset = 0;
+  var_8.bar = var_7;
+  var_8.children = [];
+  var_8.xpadding = var_5;
+  var_8.ypadding = var_6;
+  var_8.sort = -2;
+  var_8.alpha = 0.5;
+  setparent(var_8, level.uiparent);
+  var_8 setshader(var_1, var_2, var_3);
+  return var_8;
 }
 
-function setflashfrac(var0) {
-  self.bar.flashfrac = var0;
+function setflashfrac(var_0) {
+  self.bar.flashfrac = var_0;
 }
 
-function fade_over_time(var0, var1) {
-  if(isDefined(var1) && var1 > 0) {
-    self fadeovertime(var1);
+function fade_over_time(var_0, var_1) {
+  if(isDefined(var_1) && var_1 > 0) {
+    self fadeovertime(var_1);
   }
 
-  self.alpha = var0;
+  self.alpha = var_0;
 
-  if(isDefined(var1) && var1 > 0) {
-    wait var1;
+  if(isDefined(var_1) && var_1 > 0) {
+    wait var_1;
     return;
   }
 }
@@ -471,14 +471,14 @@ function flashthread() {
 
 function destroyelem() {
   if(isDefined(self.children) && self.children.size) {
-    var0 = [];
+    var_0 = [];
 
-    for(var1 = 0; var1 < self.children.size; var1++) {
-      var0 = self.children[var1];
+    for(var_1 = 0; var_1 < self.children.size; var_1++) {
+      var_0 = self.children[var_1];
     }
 
-    for(var1 = 0; var1 < var0.size; var1++) {
-      setparent(var0[var1], getparent());
+    for(var_1 = 0; var_1 < var_0.size; var_1++) {
+      setparent(var_0[var_1], getparent());
     }
   }
 
@@ -489,32 +489,32 @@ function destroyelem() {
   self destroy();
 }
 
-function seticonshader(var0) {
-  self setshader(var0, self.width, self.height);
+function seticonshader(var_0) {
+  self setshader(var_0, self.width, self.height);
 }
 
-function setwidth(var0) {
-  self.width = var0;
+function setwidth(var_0) {
+  self.width = var_0;
 }
 
-function setheight(var0) {
-  self.height = var0;
+function setheight(var_0) {
+  self.height = var_0;
 }
 
-function setsize(var0, var1) {
-  self.width = var0;
-  self.height = var1;
+function setsize(var_0, var_1) {
+  self.width = var_0;
+  self.height = var_1;
 }
 
-function updatechildren(var0) {
-  for(var1 = 0; var1 < self.children.size; var1++) {
-    var2 = self.children[var1];
-    setpoint(var2, var2.point, var2.relativepoint, var2.xoffset, var2.yoffset, var0);
+function updatechildren(var_0) {
+  for(var_1 = 0; var_1 < self.children.size; var_1++) {
+    var_2 = self.children[var_1];
+    setpoint(var_2, var_2.point, var_2.relativepoint, var_2.xoffset, var_2.yoffset, var_0);
   }
 }
 
-function stance_carry_icon_enable(var0) {
-  if(isDefined(var0) && var0 == 0) {
+function stance_carry_icon_enable(var_0) {
+  if(isDefined(var_0) && var_0 == 0) {
     stance_carry_icon_disable();
     return;
   }
@@ -556,274 +556,274 @@ function stance_carry_icon_disable() {
 
 function create_mantle() {
   if(isplatformpc()) {
-    var0 = createfontstring("default", 1.8);
-    setpoint(var0, "CENTER", undefined, -23, 115);
-    var0 settext(level.strings["mantle"]);
-    var1 = createicon("hint_mantle", 40, 40);
-    setpoint(var1, "CENTER", undefined, 73, 0);
-    setparent(var1, var0);
+    var_0 = createfontstring("default", 1.8);
+    setpoint(var_0, "CENTER", undefined, -23, 115);
+    var_0 settext(level.strings["mantle"]);
+    var_1 = createicon("hint_mantle", 40, 40);
+    setpoint(var_1, "CENTER", undefined, 73, 0);
+    setparent(var_1, var_0);
   } else {
-    var0 = createfontstring("default", 1.6);
-    setpoint(var0, "CENTER", undefined, 0, 115);
-    var0 settext(level.strings["mantle"]);
-    var1 = createicon("hint_mantle", 40, 40);
-    setpoint(var1, "CENTER", undefined, 0, 30);
-    setparent(var1, var0);
+    var_0 = createfontstring("default", 1.6);
+    setpoint(var_0, "CENTER", undefined, 0, 115);
+    var_0 settext(level.strings["mantle"]);
+    var_1 = createicon("hint_mantle", 40, 40);
+    setpoint(var_1, "CENTER", undefined, 0, 30);
+    setparent(var_1, var_0);
   }
 
-  var1.alpha = 0;
-  var0.alpha = 0;
+  var_1.alpha = 0;
+  var_0.alpha = 0;
   level.hud_mantle = [];
-  level.hud_mantle["text"] = var0;
-  level.hud_mantle["icon"] = var1;
+  level.hud_mantle["text"] = var_0;
+  level.hud_mantle["icon"] = var_1;
 }
 
-function get_countdown_hud(var0, var1, var2, var3) {
-  if(!isDefined(var3)) {
-    var3 = 0;
+function get_countdown_hud(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  var4 = undefined;
+  var_4 = undefined;
 
   if(!isplatformpc()) {
-    var4 = -250;
-  } else if(!isDefined(var0)) {
-    var4 = -225;
+    var_4 = -250;
+  } else if(!isDefined(var_0)) {
+    var_4 = -225;
   } else {
-    var4 = var0;
+    var_4 = var_0;
   }
 
-  if(var3) {
-    var4 = var0;
+  if(var_3) {
+    var_4 = var_0;
   }
 
-  if(!isDefined(var1)) {
-    var5 = 100;
+  if(!isDefined(var_1)) {
+    var_5 = 100;
   } else {
-    var5 = var2;
+    var_5 = var_2;
   }
 
-  if(isDefined(var3)) {
-    var6 = newclienthudelem(var3);
+  if(isDefined(var_3)) {
+    var_6 = newclienthudelem(var_3);
   } else {
-    var6 = newhudelem();
+    var_6 = newhudelem();
   }
 
-  var6.alignx = "left";
-  var6.aligny = "middle";
-  var6.horzalign = "right";
-  var6.vertalign = "top";
-  var6.x = var5;
-  var6.y = var6;
-  var6.fontscale = 1.6;
-  var6.color = (0.8, 1, 0.8);
-  var6.font = "objective";
-  var6.glowcolor = (0.3, 0.6, 0.3);
-  var6.glowalpha = 1;
-  var6.foreground = 1;
-  var6.hidewheninmenu = 1;
-  var6.hidewhendead = 1;
-  return var6;
+  var_6.alignx = "left";
+  var_6.aligny = "middle";
+  var_6.horzalign = "right";
+  var_6.vertalign = "top";
+  var_6.x = var_5;
+  var_6.y = var_6;
+  var_6.fontscale = 1.6;
+  var_6.color = (0.8, 1, 0.8);
+  var_6.font = "objective";
+  var_6.glowcolor = (0.3, 0.6, 0.3);
+  var_6.glowalpha = 1;
+  var_6.foreground = 1;
+  var_6.hidewheninmenu = 1;
+  var_6.hidewhendead = 1;
+  return var_6;
 }
 
-function get_download_state_hud(var0, var1, var2, var3) {
-  if(!isDefined(var3)) {
-    var3 = 0;
+function get_download_state_hud(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  var4 = undefined;
+  var_4 = undefined;
 
   if(!isplatformpc()) {
-    var4 = -250;
-  } else if(!isDefined(var0)) {
-    var4 = -170;
+    var_4 = -250;
+  } else if(!isDefined(var_0)) {
+    var_4 = -170;
   } else {
-    var4 = var0;
+    var_4 = var_0;
   }
 
-  if(var3) {
-    var4 = var0;
+  if(var_3) {
+    var_4 = var_0;
   }
 
-  if(!isDefined(var1)) {
-    var5 = 100;
+  if(!isDefined(var_1)) {
+    var_5 = 100;
   } else {
-    var5 = var2;
+    var_5 = var_2;
   }
 
-  if(isDefined(var3)) {
-    var6 = newclienthudelem(var3);
+  if(isDefined(var_3)) {
+    var_6 = newclienthudelem(var_3);
   } else {
-    var6 = newhudelem();
+    var_6 = newhudelem();
   }
 
-  var6.alignx = "right";
-  var6.aligny = "middle";
-  var6.horzalign = "right";
-  var6.vertalign = "top";
-  var6.x = var5;
-  var6.y = var6;
-  var6.fontscale = 1.6;
-  var6.color = (0.8, 1, 0.8);
-  var6.font = "objective";
-  var6.glowcolor = (0.3, 0.6, 0.3);
-  var6.glowalpha = 1;
-  var6.foreground = 1;
-  var6.hidewheninmenu = 1;
-  var6.hidewhendead = 1;
-  return var6;
+  var_6.alignx = "right";
+  var_6.aligny = "middle";
+  var_6.horzalign = "right";
+  var_6.vertalign = "top";
+  var_6.x = var_5;
+  var_6.y = var_6;
+  var_6.fontscale = 1.6;
+  var_6.color = (0.8, 1, 0.8);
+  var_6.font = "objective";
+  var_6.glowcolor = (0.3, 0.6, 0.3);
+  var_6.glowalpha = 1;
+  var_6.foreground = 1;
+  var_6.hidewheninmenu = 1;
+  var_6.hidewhendead = 1;
+  return var_6;
 }
 
-function create_client_overlay(var0, var1, var2) {
-  if(isDefined(var2)) {
-    var3 = newclienthudelem(var2);
+function create_client_overlay(var_0, var_1, var_2) {
+  if(isDefined(var_2)) {
+    var_3 = newclienthudelem(var_2);
   } else {
-    var3 = newhudelem();
+    var_3 = newhudelem();
   }
 
-  var3.x = 0;
-  var3.y = 0;
-  var3 setshader(var1, 640, 480);
-  var3.alignx = "left";
-  var3.aligny = "top";
-  var3.sort = 1;
-  var3.horzalign = "fullscreen";
-  var3.vertalign = "fullscreen";
-  var3.alpha = var2;
-  var3.foreground = 1;
-  return var3;
+  var_3.x = 0;
+  var_3.y = 0;
+  var_3 setshader(var_1, 640, 480);
+  var_3.alignx = "left";
+  var_3.aligny = "top";
+  var_3.sort = 1;
+  var_3.horzalign = "fullscreen";
+  var_3.vertalign = "fullscreen";
+  var_3.alpha = var_2;
+  var_3.foreground = 1;
+  return var_3;
 }
 
-function create_client_overlay_custom_size(var0, var1, var2, var3, var4) {
-  var5 = scripts\engine\sp\utility::get_player_from_self();
-  var6 = newclienthudelem(var5);
+function create_client_overlay_custom_size(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = scripts\engine\sp\utility::get_player_from_self();
+  var_6 = newclienthudelem(var_5);
 
-  if(!isDefined(var4)) {
-    var4 = 1;
+  if(!isDefined(var_4)) {
+    var_4 = 1;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  if(!isDefined(var3)) {
-    var3 = 0;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  var6.x = var2;
-  var6.y = var3;
-  var6 setshader(var0, int(640 * var4), int(480 * var4));
-  var6.alignx = "center";
-  var6.aligny = "middle";
-  var6.sort = 1;
-  var6.horzalign = "center";
-  var6.vertalign = "middle";
-  var6.alpha = var1;
-  var6.foreground = 1;
-  return var6;
+  var_6.x = var_2;
+  var_6.y = var_3;
+  var_6 setshader(var_0, int(640 * var_4), int(480 * var_4));
+  var_6.alignx = "center";
+  var_6.aligny = "middle";
+  var_6.sort = 1;
+  var_6.horzalign = "center";
+  var_6.vertalign = "middle";
+  var_6.alpha = var_1;
+  var_6.foreground = 1;
+  return var_6;
 }
 
-function create_client_overlay_fullscreen(var0, var1, var2, var3, var4) {
-  var5 = scripts\engine\sp\utility::get_player_from_self();
-  var6 = newclienthudelem(var5);
+function create_client_overlay_fullscreen(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = scripts\engine\sp\utility::get_player_from_self();
+  var_6 = newclienthudelem(var_5);
 
-  if(!isDefined(var4)) {
-    var4 = 1;
+  if(!isDefined(var_4)) {
+    var_4 = 1;
   }
 
-  var6.x = var2;
-  var6.y = var3;
-  var6 setshader(var0, int(640 * var4), int(480 * var4));
-  var6.alignx = "center";
-  var6.aligny = "middle";
-  var6.sort = 1;
-  var6.horzalign = "fullscreen";
-  var6.vertalign = "fullscreen";
-  var6.alpha = var1;
-  var6.foreground = 1;
-  return var6;
+  var_6.x = var_2;
+  var_6.y = var_3;
+  var_6 setshader(var_0, int(640 * var_4), int(480 * var_4));
+  var_6.alignx = "center";
+  var_6.aligny = "middle";
+  var_6.sort = 1;
+  var_6.horzalign = "fullscreen";
+  var_6.vertalign = "fullscreen";
+  var_6.alpha = var_1;
+  var_6.foreground = 1;
+  return var_6;
 }
 
-function fade_in(var0, var1) {
+function fade_in(var_0, var_1) {
   if(level.missionfailed) {
     return;
   }
 
-  if(!isDefined(var0)) {
-    var0 = 0.3;
+  if(!isDefined(var_0)) {
+    var_0 = 0.3;
   }
 
-  var2 = get_optional_overlay(var1);
+  var_2 = get_optional_overlay(var_1);
 
-  if(var0 > 0) {
-    var2 fadeovertime(var0);
+  if(var_0 > 0) {
+    var_2 fadeovertime(var_0);
   }
 
-  var2.alpha = 0;
+  var_2.alpha = 0;
 
-  if(var0 > 0) {
-    wait var0;
+  if(var_0 > 0) {
+    wait var_0;
     return;
   }
 }
 
-function get_optional_overlay(var0) {
-  if(!isDefined(var0)) {
-    var0 = "black";
+function get_optional_overlay(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = "black";
   }
 
-  return get_overlay(var0);
+  return get_overlay(var_0);
 }
 
-function fade_out(var0, var1) {
-  if(!isDefined(var0)) {
-    var0 = 0.3;
+function fade_out(var_0, var_1) {
+  if(!isDefined(var_0)) {
+    var_0 = 0.3;
   }
 
-  var2 = get_optional_overlay(var1);
+  var_2 = get_optional_overlay(var_1);
 
-  if(var0 > 0) {
-    var2 fadeovertime(var0);
+  if(var_0 > 0) {
+    var_2 fadeovertime(var_0);
   }
 
-  var2.alpha = 1;
+  var_2.alpha = 1;
 
-  if(var0 > 0) {
-    wait var0;
+  if(var_0 > 0) {
+    wait var_0;
     return;
   }
 }
 
-function start_overlay(var0) {
-  var1 = get_optional_overlay(var0);
-  var1.alpha = 1;
+function start_overlay(var_0) {
+  var_1 = get_optional_overlay(var_0);
+  var_1.alpha = 1;
 }
 
-function get_overlay(var0) {
+function get_overlay(var_0) {
   if(isPlayer(self)) {
-    var1 = self;
+    var_1 = self;
   } else {
-    var1 = level.player;
+    var_1 = level.player;
   }
 
-  if(!isDefined(var1.overlay)) {
-    var1.overlay = [];
+  if(!isDefined(var_1.overlay)) {
+    var_1.overlay = [];
   }
 
-  if(!isDefined(var1.overlay[var1])) {
-    var1.overlay[var1] = create_client_overlay(var1, 0, var1);
+  if(!isDefined(var_1.overlay[var_1])) {
+    var_1.overlay[var_1] = create_client_overlay(var_1, 0, var_1);
   }
 
-  var1.overlay[var1].sort = 0;
-  var1.overlay[var1].foreground = 1;
-  return var1.overlay[var1];
+  var_1.overlay[var_1].sort = 0;
+  var_1.overlay[var_1].foreground = 1;
+  return var_1.overlay[var_1];
 }
 
 function screen_detailed_alpha() {
-  var0 = 0.2;
+  var_0 = 0.2;
   self.alpha = 0.7;
-  self fadeovertime(var0);
+  self fadeovertime(var_0);
   self.alpha = 0;
-  wait var0;
+  wait var_0;
   self destroy();
 }

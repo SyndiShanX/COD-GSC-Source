@@ -3,43 +3,43 @@
  * Script: scripts\mp\utility\points.gsc
 ***********************************************/
 
-function givestreakpointswithtext(var0, var1, var2) {
+function givestreakpointswithtext(var_0, var_1, var_2) {
   if(istrue(level.ignorescoring)) {
     return;
   }
 
-  if(isDefined(var2)) {
-    var3 = var2;
+  if(isDefined(var_2)) {
+    var_3 = var_2;
   } else {
-    var3 = scripts\mp\rank::getscoreinfovalue(var1);
+    var_3 = scripts\mp\rank::getscoreinfovalue(var_1);
   }
 
-  var3 = modifyunifiedpoints(var1, var3, var2);
-  scripts\mp\killstreaks\killstreaks::givestreakpoints(var1, var3);
-  displayscoreeventpoints(var3, var1);
+  var_3 = modifyunifiedpoints(var_1, var_3, var_2);
+  scripts\mp\killstreaks\killstreaks::givestreakpoints(var_1, var_3);
+  displayscoreeventpoints(var_3, var_1);
 }
 
-function sec_sys_struct_1(var0, var1) {
+function sec_sys_struct_1(var_0, var_1) {
   if(istrue(level.ignorescoring)) {
     return;
   }
 
-  var2 = undefined;
+  var_2 = undefined;
 
-  if(isDefined(var1)) {
-    var2 = var1;
+  if(isDefined(var_1)) {
+    var_2 = var_1;
   } else {
-    var2 = scripts\mp\rank::getscoreinfovalue(var0);
+    var_2 = scripts\mp\rank::getscoreinfovalue(var_0);
   }
 
-  thread scripts\mp\rank::giverankxp(var0, var2);
-  thread scripts\mp\rank::scoreeventpopup(var0);
+  thread scripts\mp\rank::giverankxp(var_0, var_2);
+  thread scripts\mp\rank::scoreeventpopup(var_0);
 }
 
-function giveunifiedpoints(var0, var1, var2, var3, var4, var5, var6, var7) {
-  var8 = scripts\mp\utility\game::getgametype() == "br" && !scripts\mp\flags::gameflag("prematch_done");
+function giveunifiedpoints(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  var_8 = scripts\mp\utility\game::getgametype() == "br" && !scripts\mp\flags::gameflag("prematch_done");
 
-  if(istrue(level.ignorescoring) && !issubstr(var0, "assist") && !var8) {
+  if(istrue(level.ignorescoring) && !issubstr(var_0, "assist") && !var_8) {
     return;
   }
 
@@ -47,94 +47,94 @@ function giveunifiedpoints(var0, var1, var2, var3, var4, var5, var6, var7) {
     return;
   }
 
-  if(isDefined(var2)) {
-    var9 = var2;
+  if(isDefined(var_2)) {
+    var_9 = var_2;
   } else {
-    var9 = scripts\mp\rank::getscoreinfovalue(var1);
+    var_9 = scripts\mp\rank::getscoreinfovalue(var_1);
   }
 
-  scripts\mp\gamescore::giveplayerscore(var1, var9, var5);
-  var9 = modifyunifiedpoints(var1, var9, var2);
+  scripts\mp\gamescore::giveplayerscore(var_1, var_9, var_5);
+  var_9 = modifyunifiedpoints(var_1, var_9, var_2);
 
-  if(isDefined(var2)) {
-    var10 = scripts\mp\utility\weapon::mapweapon(var2);
-    var11 = createheadicon(var10);
-    thread scripts\mp\gamelogic::threadedsetweaponstatbyname(var11, var9, "total_score_earned");
+  if(isDefined(var_2)) {
+    var_10 = scripts\mp\utility\weapon::mapweapon(var_2);
+    var_11 = createheadicon(var_10);
+    thread scripts\mp\gamelogic::threadedsetweaponstatbyname(var_11, var_9, "total_score_earned");
   }
 
-  if(isDefined(var7)) {
-    var7.score += var9;
+  if(isDefined(var_7)) {
+    var_7.score += var_9;
   }
 
-  var12 = var1 == "kill" || !scripts\mp\utility\game::matchmakinggame() && var1 == "last_stand_kill";
-  var13 = scripts\mp\killstreaks\killstreaks::isbountyevent(var1);
-  var14 = scripts\mp\killstreaks\killstreaks::iskillstreakkillevent(var1);
-  var15 = istrue(self.isjuggernaut);
-  var16 = update_objective_setmlgbackground(var2);
-  var17 = scripts\mp\utility\perk::_hasperk("specialty_killstreak_to_scorestreak");
-  var18 = !istrue(level.vocalloutstring);
+  var_12 = var_1 == "kill" || !scripts\mp\utility\game::matchmakinggame() && var_1 == "last_stand_kill";
+  var_13 = scripts\mp\killstreaks\killstreaks::isbountyevent(var_1);
+  var_14 = scripts\mp\killstreaks\killstreaks::iskillstreakkillevent(var_1);
+  var_15 = istrue(self.isjuggernaut);
+  var_16 = update_objective_setmlgbackground(var_2);
+  var_17 = scripts\mp\utility\perk::_hasperk("specialty_killstreak_to_scorestreak");
+  var_18 = !istrue(level.vocalloutstring);
 
-  if((var12 || var14) && !scripts\mp\utility\perk::_hasperk("specialty_chain_killstreaks")) {
+  if((var_12 || var_14) && !scripts\mp\utility\perk::_hasperk("specialty_chain_killstreaks")) {
     self.pers["canKillChain"] = undefined;
   }
 
-  var19 = var14 && istrue(self.pers["canKillChain"]) && istrue(var6);
+  var_19 = var_14 && istrue(self.pers["canKillChain"]) && istrue(var_6);
 
-  if((var12 || var13 || var19 || var17) && (!var15 || var19 || var17) && !var16 && scripts\mp\utility\game::getgametype() != "br" && var18) {
+  if((var_12 || var_13 || var_19 || var_17) && (!var_15 || var_19 || var_17) && !var_16 && scripts\mp\utility\game::getgametype() != "br" && var_18) {
     if(scripts\cp_mp\utility\player_utility::_isalive()) {
-      scripts\mp\killstreaks\killstreaks::givestreakpoints(var1, 1, var9);
+      scripts\mp\killstreaks\killstreaks::givestreakpoints(var_1, 1, var_9);
     }
   }
 
   if(isDefined(level.ref_12073)) {
-    [[level.ref_12073]](self, var9, var1, var8);
+    [[level.ref_12073]](self, var_9, var_1, var_8);
   }
 
-  scripts\mp\supers::givesuperpoints(var9, var1);
+  scripts\mp\supers::givesuperpoints(var_9, var_1);
 
-  if(!istrue(var4)) {
-    var20 = var9;
-    thread scripts\mp\rank::giverankxp(var1, var20, var2);
+  if(!istrue(var_4)) {
+    var_20 = var_9;
+    thread scripts\mp\rank::giverankxp(var_1, var_20, var_2);
   }
 
-  thread scripts\mp\events::killeventtextpopup(var1, 0);
+  thread scripts\mp\events::killeventtextpopup(var_1, 0);
 }
 
-function modifyunifiedpoints(var0, var1, var2) {
-  switch (var0) {
+function modifyunifiedpoints(var_0, var_1, var_2) {
+  switch (var_0) {
     case "damage":
       return 0;
     default:
       break;
   }
 
-  var3 = 0;
-  var1 += var3;
+  var_3 = 0;
+  var_1 += var_3;
 
   if(isDefined(level.modifyunifiedpointscallback)) {
-    var1 = [[level.modifyunifiedpointscallback]](var1, var0, self, var2);
+    var_1 = [[level.modifyunifiedpointscallback]](var_1, var_0, self, var_2);
   }
 
-  return int(var1);
+  return int(var_1);
 }
 
-function displayscoreeventpoints(var0, var1) {
+function displayscoreeventpoints(var_0, var_1) {
   if(getdvarint("scr_disableScoreSplash", 0) == 1) {
     return;
   }
 
   if(level.codcasterenabled) {
-    foreach(var3 in level.players) {
-      if(var3 ismlgspectator()) {
-        var4 = var3 getspectatingplayer();
+    foreach(var_3 in level.players) {
+      if(var_3 ismlgspectator()) {
+        var_4 = var_3 getspectatingplayer();
 
-        if(isDefined(var4)) {
-          var5 = var4 getentitynumber();
-          var6 = self getentitynumber();
+        if(isDefined(var_4)) {
+          var_5 = var_4 getentitynumber();
+          var_6 = self getentitynumber();
 
-          if(var5 == var6) {
-            var3 thread scripts\mp\rank::scorepointspopup(var0);
-            var3 thread scripts\mp\rank::scoreeventpopup(var1);
+          if(var_5 == var_6) {
+            var_3 thread scripts\mp\rank::scorepointspopup(var_0);
+            var_3 thread scripts\mp\rank::scoreeventpopup(var_1);
           }
         }
       }
@@ -142,27 +142,27 @@ function displayscoreeventpoints(var0, var1) {
   }
 
   if(!isDefined(level.skippointdisplayxp)) {
-    var8 = 0;
+    var_8 = 0;
 
     if(scripts\mp\utility\game::issimultaneouskillenabled()) {
-      var8 = var1 == "kill";
+      var_8 = var_1 == "kill";
     }
 
-    thread scripts\mp\rank::scorepointspopup(var0, var8);
+    thread scripts\mp\rank::scorepointspopup(var_0, var_8);
     return;
   }
 }
 
-function update_objective_setmlgbackground(var0) {
-  if(!isDefined(var0)) {
+function update_objective_setmlgbackground(var_0) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
-  if(isstring(var0)) {
-    var0 = getcompleteweaponname(var0);
+  if(isstring(var_0)) {
+    var_0 = getcompleteweaponname(var_0);
   }
 
-  switch (var0.basename) {
+  switch (var_0.basename) {
     case "tur_apc_rus_mp":
     case "bradley_tow_proj_mp":
     case "lighttank_tur_mp":
@@ -172,16 +172,16 @@ function update_objective_setmlgbackground(var0) {
   return false;
 }
 
-function unset_relic_doomslayer(var0) {
-  if(!isDefined(var0)) {
+function unset_relic_doomslayer(var_0) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
-  if(isstring(var0)) {
-    var0 = getcompleteweaponname(var0);
+  if(isstring(var_0)) {
+    var_0 = getcompleteweaponname(var_0);
   }
 
-  switch (var0.basename) {
+  switch (var_0.basename) {
     case "deploy_airdrop_mp":
     case "iw8_spotter_scope_mp":
     case "iw8_spotter_scope_mp_ch3":

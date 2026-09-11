@@ -4,18 +4,18 @@
 **************************************************************/
 
 function init() {
-  var0 = spawnStruct();
-  var0.attackerswaittime = &ascendermodelview;
-  var0.isfeaturedisabled = &deactivate;
-  var0.‹Á¿ ø {
+  var_0 = spawnStruct();
+  var_0.attackerswaittime = &ascendermodelview;
+  var_0.isfeaturedisabled = &deactivate;
+  var_0.‹Á¿ ø {
     ÏXX;
     â # / = &postinitfunc;
-    var0.weight = getdvarfloat("scr_br_pe_resurgence_weight", 0);
-    var0.ref_11b78 = getdvarint("scr_br_pe_resurgence_max_times", 1);
-    var0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("resurgence", "55 1010105 5 1");
-    var0.£¼#w]
+    var_0.weight = getdvarfloat("scr_br_pe_resurgence_weight", 0);
+    var_0.ref_11b78 = getdvarint("scr_br_pe_resurgence_max_times", 1);
+    var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("resurgence", "55 1010105 5 1");
+    var_0.£¼#w]
   j‹ ƒ½ Ï‚ UÀíÌI¸ Û« = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("resurgence");
-  scripts\mp\gametypes\br_publicevents::ref_12b35(14, var0);
+  scripts\mp\gametypes\br_publicevents::ref_12b35(14, var_0);
 }
 
 function postinitfunc() {
@@ -43,17 +43,17 @@ function move_spawnpoints_to_ac130() {
   scripts\mp\gametypes\br_gametypes::ref_12b11("isTeamEliminated", &validate_and_activate_stations);
 }
 
-function validate_and_activate_stations(var0) {
-  var1 = scripts\mp\utility\teams::getteamdata(var0, "players");
+function validate_and_activate_stations(var_0) {
+  var_1 = scripts\mp\utility\teams::getteamdata(var_0, "players");
 
-  foreach(var3 in var1) {
-    if(isalive(var3)) {
+  foreach(var_3 in var_1) {
+    if(isalive(var_3)) {
       return false;
     }
 
-    var4 = var3 scripts\mp\gametypes\br_gulag::ref_12517();
+    var_4 = var_3 scripts\mp\gametypes\br_gulag::ref_12517();
 
-    if(var4) {
+    if(var_4) {
       return false;
     }
   }
@@ -75,32 +75,32 @@ function loadout_editglobalclassstruct() {
   scripts\mp\gametypes\br_gametypes::ref_13f25("isTeamEliminated");
 }
 
-function allassassin_givewait(var0) {
+function allassassin_givewait(var_0) {
   if(istrue(level.disable_super_in_turret.ref_12ca4)) {
-    return [[level.playjailbreakvo[var0]]]();
+    return [[level.playjailbreakvo[var_0]]]();
   }
 
   if(isDefined(level.disable_super_in_turret.ref_12883)) {
-    return [[level.disable_super_in_turret.ref_12883[var0]]]();
+    return [[level.disable_super_in_turret.ref_12883[var_0]]]();
   }
 
-  return [[level.playingthrowingknifewickfx[var0]]]();
+  return [[level.playingthrowingknifewickfx[var_0]]]();
 }
 
-function allassassin_init(var0, var1) {
+function allassassin_init(var_0, var_1) {
   if(istrue(level.disable_super_in_turret.ref_12ca4)) {
-    return [[level.playjailbreakvo[var0]]](var1);
+    return [[level.playjailbreakvo[var_0]]](var_1);
   }
 
   if(isDefined(level.disable_super_in_turret.ref_12883)) {
-    return [[level.disable_super_in_turret.ref_12883[var0]]](var1);
+    return [[level.disable_super_in_turret.ref_12883[var_0]]](var_1);
   }
 
-  return [[level.playingthrowingknifewickfx[var0]]](var1);
+  return [[level.playingthrowingknifewickfx[var_0]]](var_1);
 }
 
-function add_to_score_message(var0) {
-  return allassassin_init("mayConsiderPlayerDead", var0);
+function add_to_score_message(var_0) {
+  return allassassin_init("mayConsiderPlayerDead", var_0);
 }
 
 function add_to_spawnflags() {
@@ -115,76 +115,76 @@ function ascendermodelview() {
   move_spawnpoints_to_ac130();
   setDvar("scr_br_resurgence_respawn_enable", 1);
   scripts\mp\gametypes\br_publicevents::ref_13371("br_pe_resurgence_start");
-  var0 = "vov_redeploy_standby";
-  scripts\mp\gametypes\br_public::brleaderdialog(var0, 0);
+  var_0 = "vov_redeploy_standby";
+  scripts\mp\gametypes\br_public::brleaderdialog(var_0, 0);
   level.disable_super_in_turret.ref_12ca4 = 1;
   level.disable_super_in_turret.fly_to_laser_trap_start_pos = 1;
   level.disable_super_in_turret.ref_14081 = 1;
   scripts\mp\gametypes\br_gametype_rebirth::end_reach_icbm_launch();
-  var1 = 30;
-  level.disable_super_in_turret.ref_12a7b = var1;
+  var_1 = 30;
+  level.disable_super_in_turret.ref_12a7b = var_1;
 
-  foreach(var3 in level.teamnamelist) {
-    var4 = level.teamdata[var3]["players"];
+  foreach(var_3 in level.teamnamelist) {
+    var_4 = level.teamdata[var_3]["players"];
 
-    if(var4.size <= 1) {
+    if(var_4.size <= 1) {
       continue;
     }
 
-    var5 = 0;
-    var6 = undefined;
+    var_5 = 0;
+    var_6 = undefined;
 
-    foreach(var8 in var4) {
-      var9 = var8 scripts\mp\gametypes\br_public::updateinstantclassswapallowedinternal();
+    foreach(var_8 in var_4) {
+      var_9 = var_8 scripts\mp\gametypes\br_public::updateinstantclassswapallowedinternal();
 
-      if(isalive(var8) && !var9) {
-        var6 = var8;
+      if(isalive(var_8) && !var_9) {
+        var_6 = var_8;
         continue;
       }
 
-      var5 = 1;
+      var_5 = 1;
     }
 
-    if(!isDefined(var6) || !var5) {
+    if(!isDefined(var_6) || !var_5) {
       continue;
     }
 
-    foreach(var8 in var4) {
-      var12 = !isalive(var8);
-      var9 = var8 scripts\mp\gametypes\br_public::updateinstantclassswapallowedinternal();
+    foreach(var_8 in var_4) {
+      var_12 = !isalive(var_8);
+      var_9 = var_8 scripts\mp\gametypes\br_public::updateinstantclassswapallowedinternal();
 
-      if(var12 || var9) {
-        scripts\mp\gametypes\br_vip_quest::ref_142c5(var8, var6, "exfil_respawn");
+      if(var_12 || var_9) {
+        scripts\mp\gametypes\br_vip_quest::ref_142c5(var_8, var_6, "exfil_respawn");
         continue;
       }
 
-      var8 thread scripts\mp\hud_message::showsplash("br_squadmate_revived");
+      var_8 thread scripts\mp\hud_message::showsplash("br_squadmate_revived");
     }
   }
 
   setomnvar("ui_publicevent_minimap_pulse", 1);
   setomnvar("ui_publicevent_timer_type", 5);
-  var15 = scripts\mp\gametypes\br_circle::groupindex(level.br_circle.circleindex);
-  var16 = getdvarfloat("scr_br_pe_resurgence_duration", var15);
+  var_15 = scripts\mp\gametypes\br_circle::groupindex(level.br_circle.circleindex);
+  var_16 = getdvarfloat("scr_br_pe_resurgence_duration", var_15);
 
   if(scripts\mp\gametypes\br_publicevents::unset_relic_healthpacks()) {
-    var16 = scripts\mp\gametypes\br_circle::inithelirepository();
+    var_16 = scripts\mp\gametypes\br_circle::inithelirepository();
   }
 
-  var17 = gettime() + var16 * 1000;
-  setomnvar("ui_publicevent_timer", var17);
-  var18 = spawn("script_origin", (0, 0, 0));
-  var18 hide();
-  wait var16 - 5;
+  var_17 = gettime() + var_16 * 1000;
+  setomnvar("ui_publicevent_timer", var_17);
+  var_18 = spawn("script_origin", (0, 0, 0));
+  var_18 hide();
+  wait var_16 - 5;
 
-  for(var19 = 0; var19 < 5; var19++) {
-    var18 playSound("ui_mp_fire_sale_timer");
+  for(var_19 = 0; var_19 < 5; var_19++) {
+    var_18 playSound("ui_mp_fire_sale_timer");
     wait 1;
   }
 
   setomnvar("ui_publicevent_minimap_pulse", 0);
   setomnvar("ui_publicevent_timer_type", 0);
-  var18 delete();
+  var_18 delete();
 }
 
 function deactivate() {
@@ -193,14 +193,14 @@ function deactivate() {
   level.disable_super_in_turret.ref_12ca4 = 0;
   level.disable_super_in_turret.fly_to_laser_trap_start_pos = undefined;
 
-  foreach(var1 in level.players) {
-    if(!isDefined(var1)) {
+  foreach(var_1 in level.players) {
+    if(!isDefined(var_1)) {
       continue;
     }
 
-    var1 scripts\mp\gametypes\br_public::updatebrscoreboardstat("respawnInSeconds", 0);
+    var_1 scripts\mp\gametypes\br_public::updatebrscoreboardstat("respawnInSeconds", 0);
     setDvar("scr_br_resurgence_hide_close_ui", 1);
-    scripts\mp\gametypes\br_killstreaks::isbrsquadleader(var1, "respawn_disabled", undefined, 2);
-    var1 setclientomnvar("ui_br_plunder_extract_end_time", 0);
+    scripts\mp\gametypes\br_killstreaks::isbrsquadleader(var_1, "respawn_disabled", undefined, 2);
+    var_1 setclientomnvar("ui_br_plunder_extract_end_time", 0);
   }
 }

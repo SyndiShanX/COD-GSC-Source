@@ -3,15 +3,15 @@
  * Script: scripts\cp\cp_infilexfil.gsc
 ***********************************************/
 
-function infil_ended(var0) {
+function infil_ended(var_0) {
   level waittill("infil_started");
-  var1 = 0;
+  var_1 = 0;
 
   if(isDefined(level.extra_infil_time)) {
-    var1 = level.extra_infil_time;
+    var_1 = level.extra_infil_time;
   }
 
-  wait var0 + var1;
+  wait var_0 + var_1;
   level notify("prematch_over");
 
   if(scripts\engine\utility::flag_exist("infil_complete")) {
@@ -25,16 +25,16 @@ function onplayerspawnedinfil() {
   self endon("prematch_over");
 
   for(;;) {
-    level waittill("player_spawned", var0);
-    var0 setclientomnvar("ui_hide_hud", 1);
-    var1 = scripts\cp\infilexfil\infilexfil::get_spot_from_player(var0);
+    level waittill("player_spawned", var_0);
+    var_0 setclientomnvar("ui_hide_hud", 1);
+    var_1 = scripts\cp\infilexfil\infilexfil::get_spot_from_player(var_0);
 
-    if(isDefined(var1)) {
-      cp_player_free_spot(var0, scripts\cp\utility::getotherteam(var0.team));
+    if(isDefined(var_1)) {
+      cp_player_free_spot(var_0, scripts\cp\utility::getotherteam(var_0.team));
     }
 
     if(!scripts\engine\utility::flag("infil_started")) {
-      cp_player_join_infil_cp(var0);
+      cp_player_join_infil_cp(var_0);
     }
   }
 }
@@ -45,91 +45,91 @@ function cponplayerdisconnectinfil() {
   cp_player_free_spot(self);
 }
 
-function infil_is_type(var0) {
-  return self.script_noteworthy == var0;
+function infil_is_type(var_0) {
+  return self.script_noteworthy == var_0;
 }
 
-function infil_is_subtype(var0) {
-  return self.name == var0;
+function infil_is_subtype(var_0) {
+  return self.name == var_0;
 }
 
-function cp_infil_player_allow(var0) {
-  self allowmovement(var0);
-  scripts\common\utility::allow_prone(var0);
-  scripts\common\utility::allow_crouch(var0);
-  scripts\common\utility::allow_jump(var0);
-  scripts\common\utility::allow_fire(var0);
-  scripts\common\utility::allow_ads(var0);
-  scripts\common\utility::allow_sprint(var0);
-  scripts\common\utility::allow_melee(var0);
-  scripts\common\utility::allow_reload(var0);
-  scripts\common\utility::allow_lean(var0);
-  scripts\common\utility::allow_slide(var0);
-  scripts\common\utility::allow_offhand_weapons(var0);
-  scripts\common\utility::allow_weapon_switch(var0);
-  scripts\common\utility::allow_usability(var0);
+function cp_infil_player_allow(var_0) {
+  self allowmovement(var_0);
+  scripts\common\utility::allow_prone(var_0);
+  scripts\common\utility::allow_crouch(var_0);
+  scripts\common\utility::allow_jump(var_0);
+  scripts\common\utility::allow_fire(var_0);
+  scripts\common\utility::allow_ads(var_0);
+  scripts\common\utility::allow_sprint(var_0);
+  scripts\common\utility::allow_melee(var_0);
+  scripts\common\utility::allow_reload(var_0);
+  scripts\common\utility::allow_lean(var_0);
+  scripts\common\utility::allow_slide(var_0);
+  scripts\common\utility::allow_offhand_weapons(var_0);
+  scripts\common\utility::allow_weapon_switch(var_0);
+  scripts\common\utility::allow_usability(var_0);
 }
 
-function teamhasinfil(var0) {
+function teamhasinfil(var_0) {
   if(!isDefined(game["infil"])) {
     return false;
   }
 
-  return isDefined(game["infil"][var0]["lanes"]);
+  return isDefined(game["infil"][var_0]["lanes"]);
 }
 
-function cp_player_free_spot(var0, var1) {
-  if(!var0 scripts\cp_mp\utility\player_utility::_isalive()) {
+function cp_player_free_spot(var_0, var_1) {
+  if(!var_0 scripts\cp_mp\utility\player_utility::_isalive()) {
     return;
   }
 
-  if(!isDefined(var1)) {
-    var1 = var0.team;
+  if(!isDefined(var_1)) {
+    var_1 = var_0.team;
   }
 
-  if(isDefined(game["infil"][var1]["spots"])) {}
+  if(isDefined(game["infil"][var_1]["spots"])) {}
 
-  foreach(var3 in game["infil"][var1]["spots"]) {
-    if(scripts\cp\infilexfil\infilexfil::is_spot_taken(var1, var4) && var3["player"] == var0) {
-      game["infil"][var1]["spots"][var4]["player"] = undefined;
-      var0 notify("player_free_spot");
+  foreach(var_3 in game["infil"][var_1]["spots"]) {
+    if(scripts\cp\infilexfil\infilexfil::is_spot_taken(var_1, var_4) && var_3["player"] == var_0) {
+      game["infil"][var_1]["spots"][var_4]["player"] = undefined;
+      var_0 notify("player_free_spot");
       return;
     }
   }
 }
 
-function cp_get_spot_by_priority(var0) {
-  var1 = [];
+function cp_get_spot_by_priority(var_0) {
+  var_1 = [];
 
-  foreach(var3 in game["infil"][var0]["spots"]) {
-    if(!scripts\cp\infilexfil\infilexfil::is_spot_taken(var0, var4)) {
-      var1 = var4;
+  foreach(var_3 in game["infil"][var_0]["spots"]) {
+    if(!scripts\cp\infilexfil\infilexfil::is_spot_taken(var_0, var_4)) {
+      var_1 = var_4;
     }
   }
 
-  if(var1.size == 0) {
+  if(var_1.size == 0) {
     return undefined;
   }
 
-  var5 = getdvarint("scr_infil_force_seat", -1);
+  var_5 = getdvarint("scr_infil_force_seat", -1);
 
-  if(scripts\engine\utility::array_contains(var1, var5)) {
-    return var5;
+  if(scripts\engine\utility::array_contains(var_1, var_5)) {
+    return var_5;
   }
 
-  var6 = undefined;
-  var7 = -1;
+  var_6 = undefined;
+  var_7 = -1;
 
-  foreach(var3 in var1) {
-    var9 = game["infil"][var0]["spots"][var3]["priority"];
+  foreach(var_3 in var_1) {
+    var_9 = game["infil"][var_0]["spots"][var_3]["priority"];
 
-    if(!isDefined(var6) || var9 < var7) {
-      var6 = var3;
-      var7 = var9;
+    if(!isDefined(var_6) || var_9 < var_7) {
+      var_6 = var_3;
+      var_7 = var_9;
     }
   }
 
-  return var6;
+  return var_6;
 }
 
 function cp_player_join_infil_cp() {
@@ -137,92 +137,92 @@ function cp_player_join_infil_cp() {
     return;
   }
 
-  var0 = 0;
-  var1 = game["infil"][self.team]["spots"][0]["priority"] != -1;
+  var_0 = 0;
+  var_1 = game["infil"][self.team]["spots"][0]["priority"] != -1;
 
   if(level.gametype == "tac_ops" && isDefined(self.tacopsmapselectedarea.dynamicent)) {
-    var2 = get_random_spot_in_infil(self.team, self.tacopsmapselectedarea.dynamicent);
-  } else if(var1) {
-    var2 = scripts\cp\infilexfil\infilexfil::get_spot_taken_count(self.team);
-  } else if(var2) {
-    var2 = cp_get_spot_by_priority(self.team);
+    var_2 = get_random_spot_in_infil(self.team, self.tacopsmapselectedarea.dynamicent);
+  } else if(var_1) {
+    var_2 = scripts\cp\infilexfil\infilexfil::get_spot_taken_count(self.team);
+  } else if(var_2) {
+    var_2 = cp_get_spot_by_priority(self.team);
   } else {
-    var2 = scripts\cp\infilexfil\infilexfil::get_random_spot(self.team);
+    var_2 = scripts\cp\infilexfil\infilexfil::get_random_spot(self.team);
   }
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return;
   }
 
-  var3 = scripts\cp\infilexfil\infilexfil::player_on_spot(self, var2);
-  thread infil_player_array_handler(var3["infil"]);
+  var_3 = scripts\cp\infilexfil\infilexfil::player_on_spot(self, var_2);
+  thread infil_player_array_handler(var_3["infil"]);
   self notify("player_added_to_infil");
-  self thread[[var3["callback"]]](var3["infil"], var3["seat"]);
+  self thread[[var_3["callback"]]](var_3["infil"], var_3["seat"]);
   thread cponplayerdisconnectinfil();
 }
 
-function get_random_spot_in_infil(var0, var1) {
-  var2 = [];
+function get_random_spot_in_infil(var_0, var_1) {
+  var_2 = [];
 
-  foreach(var5, var4 in game["infil"][var0]["spots"]) {
-    if(var5["infil"] != var1) {
+  foreach(var_5, var_4 in game["infil"][var_0]["spots"]) {
+    if(var_5["infil"] != var_1) {
       continue;
     }
 
-    if(!scripts\cp\infilexfil\infilexfil::is_spot_taken(var0, var5)) {
-      var2 = var5;
+    if(!scripts\cp\infilexfil\infilexfil::is_spot_taken(var_0, var_5)) {
+      var_2 = var_5;
     }
   }
 
-  if(var2.size == 0) {}
+  if(var_2.size == 0) {}
 
-  var4 = scripts\engine\utility::random(var2);
-  return var4;
+  var_4 = scripts\engine\utility::random(var_2);
+  return var_4;
 }
 
-function infil_player_array_handler(var0) {
+function infil_player_array_handler(var_0) {
   self endon("death");
-  self.players = scripts\engine\utility::array_add(self.players, var0);
-  var0 scripts\engine\utility::waittill_either("death", "disconnect");
-  self.players = scripts\engine\utility::array_remove(self.players, var0);
+  self.players = scripts\engine\utility::array_add(self.players, var_0);
+  var_0 scripts\engine\utility::waittill_either("death", "disconnect");
+  self.players = scripts\engine\utility::array_remove(self.players, var_0);
 }
 
 function alwaysgamemodeclass() {
-  var0 = self getclantag();
+  var_0 = self getclantag();
 
-  if(var0 == "AR") {
-    var1 = "default1";
-  } else if(var1 == "SMG") {
-    var1 = "default2";
+  if(var_0 == "AR") {
+    var_1 = "default1";
+  } else if(var_1 == "SMG") {
+    var_1 = "default2";
   } else {
-    jumpiffalse(var1 == "LMG") LOC_00000049;
-    var1 = "default3";
+    jumpiffalse(var_1 == "LMG") LOC_00000049;
+    var_1 = "default3";
     goto LOC_00000072;
   }
 
   LOC_00000072:
-    self.pers["class"] = var2;
+    self.pers["class"] = var_2;
   self.pers["lastClass"] = "";
   self.class = self.pers["class"];
   self.lastclass = self.pers["lastClass"];
-  return var2;
+  return var_2;
 }
 
 #using_animtree("script_model");
 
-function infil_player_rig(var0, var1, var2) {
-  self.animname = var0;
+function infil_player_rig(var_0, var_1, var_2) {
+  self.animname = var_0;
   self predictstreampos(self.origin);
-  var3 = spawn("script_arms", self.origin, 0, 0, self);
-  var3.angles = self.angles;
-  var3.player = self;
-  self.player_rig = var3;
+  var_3 = spawn("script_arms", self.origin, 0, 0, self);
+  var_3.angles = self.angles;
+  var_3.player = self;
+  self.player_rig = var_3;
   self.player_rig hide(1);
-  self.player_rig.animname = var0;
+  self.player_rig.animname = var_0;
   self.player_rig useanimtree(#animtree);
   self playerlinktodelta(self.player_rig, "tag_player", 1, 0, 0, 0, 0, 1);
 
-  if(isDefined(var2) && var2) {
+  if(isDefined(var_2) && var_2) {
     self playersetgroundreferenceent(self.player_rig);
   }
 
@@ -236,7 +236,7 @@ function infil_player_rig(var0, var1, var2) {
   scripts\engine\utility::ref_143a6("remove_rig", "player_free_spot", "death");
   self[[level.prematchallowfunc]](1);
 
-  if(isDefined(var2) && var2) {
+  if(isDefined(var_2) && var_2) {
     self playersetgroundreferenceent(undefined);
   }
 
@@ -244,15 +244,15 @@ function infil_player_rig(var0, var1, var2) {
     self unlink();
   }
 
-  if(isDefined(var3)) {
-    var3 delete();
+  if(isDefined(var_3)) {
+    var_3 delete();
     return;
   }
 }
 
-function infil_play_sound_func(var0, var1, var2) {
-  foreach(var4 in self.players) {
-    var4 playsoundtoplayer(var0, var4);
+function infil_play_sound_func(var_0, var_1, var_2) {
+  foreach(var_4 in self.players) {
+    var_4 playsoundtoplayer(var_0, var_4);
   }
 }
 
@@ -261,59 +261,59 @@ function infil_wait_for_players() {
   scripts\engine\utility::flag_set("infil_started");
 }
 
-function infil_scene_fade_in(var0, var1, var2) {
-  if(!isDefined(var0)) {
-    var0 = 0;
+function infil_scene_fade_in(var_0, var_1, var_2) {
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 2;
+  if(!isDefined(var_1)) {
+    var_1 = 2;
   }
 
-  if(!isDefined(var2)) {
-    var2 = "infil_started";
+  if(!isDefined(var_2)) {
+    var_2 = "infil_started";
   }
 
-  var3 = newclienthudelem(self);
-  var3.x = 0;
-  var3.y = 0;
-  var3.alignx = "left";
-  var3.aligny = "top";
-  var3.sort = 1;
-  var3.horzalign = "fullscreen";
-  var3.vertalign = "fullscreen";
-  var3.alpha = 1;
-  var3.foreground = 1;
-  var3 setshader("black", 640, 480);
-  var3 endon("death");
-  scripts\engine\utility::ref_143a6(var2, "player_free_spot", "disconnect");
-  wait var0;
-  var3 fadeovertime(var1);
-  var3.alpha = 0;
-  wait var1;
-  var3 destroy();
+  var_3 = newclienthudelem(self);
+  var_3.x = 0;
+  var_3.y = 0;
+  var_3.alignx = "left";
+  var_3.aligny = "top";
+  var_3.sort = 1;
+  var_3.horzalign = "fullscreen";
+  var_3.vertalign = "fullscreen";
+  var_3.alpha = 1;
+  var_3.foreground = 1;
+  var_3 setshader("black", 640, 480);
+  var_3 endon("death");
+  scripts\engine\utility::ref_143a6(var_2, "player_free_spot", "disconnect");
+  wait var_0;
+  var_3 fadeovertime(var_1);
+  var_3.alpha = 0;
+  wait var_1;
+  var_3 destroy();
 }
 
 function givegunlesscp() {
-  var0 = getcompleteweaponname("iw8_gunless");
+  var_0 = getcompleteweaponname("iw8_gunless");
   self.post_infil_weapon = self getcurrentprimaryweapon();
-  scripts\cp\utility::_giveweapon(var0, undefined, undefined, 1);
+  scripts\cp\utility::_giveweapon(var_0, undefined, undefined, 1);
 
   if(!scripts\common\utility::is_script_weapon_switch_allowed()) {
     scripts\common\utility::allow_script_weapon_switch(1);
   }
 
-  var1 = 1;
-  self switchtoweapon(var0);
+  var_1 = 1;
+  self switchtoweapon(var_0);
 
-  if(var1) {
-    self.gunnlessweapon = var0;
+  if(var_1) {
+    self.gunnlessweapon = var_0;
     scripts\common\utility::allow_weapon_switch(0);
   } else {
-    self takeweapon(var0);
+    self takeweapon(var_0);
   }
 
-  return var1;
+  return var_1;
 }
 
 function takegunlesscp() {
@@ -331,8 +331,8 @@ function takegunlesscp() {
   scripts\common\utility::allow_weapon_switch(0);
 }
 
-function handleweaponstatenotetrackcp(var0) {
-  switch (var0) {
+function handleweaponstatenotetrackcp(var_0) {
+  switch (var_0) {
     case "drop":
       self.player setdemeanorviewmodel("normal");
       wait 0.1;

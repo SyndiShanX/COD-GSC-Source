@@ -10,132 +10,132 @@ function init() {
   level.hitmarkerpriorities["hitequip"] = 30;
 }
 
-function gethitmarkerpriority(var0) {
-  if(!isDefined(level.hitmarkerpriorities[var0])) {
+function gethitmarkerpriority(var_0) {
+  if(!isDefined(level.hitmarkerpriorities[var_0])) {
     return 0;
   }
 
-  return level.hitmarkerpriorities[var0];
+  return level.hitmarkerpriorities[var_0];
 }
 
-function hudicontype(var0) {
-  var1 = 0;
+function hudicontype(var_0) {
+  var_1 = 0;
 
   if(isDefined(level.damagefeedbacknosound) && level.damagefeedbacknosound) {
-    var1 = 1;
+    var_1 = 1;
   }
 
   if(!isPlayer(self)) {
     return;
   }
 
-  switch (var0) {
+  switch (var_0) {
     case "crossbowbolt":
     case "ammobox":
     case "scavenger":
     case "throwingknife":
-      if(!var1) {
+      if(!var_1) {
         self playlocalsound("scavenger_pack_pickup");
       }
 
       if(!level.hardcoremode) {
-        self setclientomnvar("damage_feedback_other", var0);
+        self setclientomnvar("damage_feedback_other", var_0);
       }
 
       break;
     case "eqp_ping":
       if(!level.hardcoremode) {
-        self setclientomnvar("damage_feedback_other", var0);
+        self setclientomnvar("damage_feedback_other", var_0);
       }
 
       break;
     case "suppression":
-      var0 = "suppression";
+      var_0 = "suppression";
 
       if(!level.hardcoremode) {
-        self setclientomnvar("damage_feedback_other", var0);
+        self setclientomnvar("damage_feedback_other", var_0);
       }
 
       break;
   }
 }
 
-function process_damage_feedback(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10) {
-  var11 = isDefined(var1) && isDefined(var1.classname) && isDefined(var1.classname) && !isDefined(var1.gunner) && (var1.classname == "script_vehicle" || var1.classname == "misc_turret" || var1.classname == "script_model");
-  var12 = undefined;
+function process_damage_feedback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+  var_11 = isDefined(var_1) && isDefined(var_1.classname) && isDefined(var_1.classname) && !isDefined(var_1.gunner) && (var_1.classname == "script_vehicle" || var_1.classname == "misc_turret" || var_1.classname == "script_model");
+  var_12 = undefined;
 
-  if(var11 && isDefined(var1.gunner)) {
-    var12 = var1.gunner;
-  } else if(isDefined(var1) && isDefined(var1.owner)) {
-    var12 = var1.owner;
+  if(var_11 && isDefined(var_1.gunner)) {
+    var_12 = var_1.gunner;
+  } else if(isDefined(var_1) && isDefined(var_1.owner)) {
+    var_12 = var_1.owner;
   } else {
-    var12 = var1;
+    var_12 = var_1;
   }
 
-  var13 = scripts\engine\utility::isbulletdamage(var4);
-  var14 = scripts\engine\utility::ter_op(var13 && scripts\cp\cp_weapon::isprimaryweapon(var5), "standardspread", "standard");
-  var15 = 0;
+  var_13 = scripts\engine\utility::isbulletdamage(var_4);
+  var_14 = scripts\engine\utility::ter_op(var_13 && scripts\cp\cp_weapon::isprimaryweapon(var_5), "standardspread", "standard");
+  var_15 = 0;
 
-  if(isDefined(var1) && isDefined(var1.class) && var1.class == "engineer") {
-    if(isDefined(var4) && scripts\engine\utility::isbulletdamage(var4)) {
-      var15 = 1;
+  if(isDefined(var_1) && isDefined(var_1.class) && var_1.class == "engineer") {
+    if(isDefined(var_4) && scripts\engine\utility::isbulletdamage(var_4)) {
+      var_15 = 1;
     }
   }
 
-  if(isDefined(var12) && var12 != var10 && var2 > 0 && (!isDefined(var8) || var8 != "shield")) {
-    var16 = !var10 scripts\cp_mp\utility\player_utility::_isalive() || isagent(var10) && var2 >= var10.health;
+  if(isDefined(var_12) && var_12 != var_10 && var_2 > 0 && (!isDefined(var_8) || var_8 != "shield")) {
+    var_16 = !var_10 scripts\cp_mp\utility\player_utility::_isalive() || isagent(var_10) && var_2 >= var_10.health;
 
-    if(istrue(var10.isjuggernaut)) {
-      var14 = "hitjuggernaut";
-    } else if(var3 &level.idflags_stun) {
-      var14 = "stun";
-    } else if(scripts\cp\cp_damage::istacticaldamage(var5, var4) && var10 scripts\cp\utility::_hasperk("specialty_stun_resistance")) {
-      var14 = "hittacresist";
-    } else if(isexplosivedamagemod(var4) && var10 scripts\cp\utility::_hasperk("specialty_blastshield") && !scripts\cp\cp_damage::damage_should_ignore_blast_shield(var1, var10, var5, var4, var0, var8)) {
-      var14 = "hitblastshield";
-    } else if(!var15 && scripts\cp\cp_modular_spawning::is_armored()) {
-      var14 = "hitarmorheavy";
-    } else if(var10 scripts\cp\utility::_hasperk("specialty_pistoldeath") && isDefined(var10.inlaststand) && var10.inlaststand == 1 && !var10.hasshownlaststandicon) {
-      var10.hasshownlaststandicon = 1;
-      var14 = "hitlaststand";
+    if(istrue(var_10.isjuggernaut)) {
+      var_14 = "hitjuggernaut";
+    } else if(var_3 &level.idflags_stun) {
+      var_14 = "stun";
+    } else if(scripts\cp\cp_damage::istacticaldamage(var_5, var_4) && var_10 scripts\cp\utility::_hasperk("specialty_stun_resistance")) {
+      var_14 = "hittacresist";
+    } else if(isexplosivedamagemod(var_4) && var_10 scripts\cp\utility::_hasperk("specialty_blastshield") && !scripts\cp\cp_damage::damage_should_ignore_blast_shield(var_1, var_10, var_5, var_4, var_0, var_8)) {
+      var_14 = "hitblastshield";
+    } else if(!var_15 && scripts\cp\cp_modular_spawning::is_armored()) {
+      var_14 = "hitarmorheavy";
+    } else if(var_10 scripts\cp\utility::_hasperk("specialty_pistoldeath") && isDefined(var_10.inlaststand) && var_10.inlaststand == 1 && !var_10.hasshownlaststandicon) {
+      var_10.hasshownlaststandicon = 1;
+      var_14 = "hitlaststand";
     }
 
-    if(isDefined(var10.playerforcespawn) && var10.playerforcespawn.size > 1) {
-      var14 = "cp_relic_buff";
+    if(isDefined(var_10.playerforcespawn) && var_10.playerforcespawn.size > 1) {
+      var_14 = "cp_relic_buff";
     }
 
-    var17 = "standard";
-    var18 = weaponclass(var5);
-    var19 = var18 == "spread";
-    var20 = !var19 && scripts\cp\utility::isheadshot(var5, var8, var4, var1);
-    var21 = 1;
-    var22 = var4 == "MOD_MELEE";
-    var23 = "" + gettime();
+    var_17 = "standard";
+    var_18 = weaponclass(var_5);
+    var_19 = var_18 == "spread";
+    var_20 = !var_19 && scripts\cp\utility::isheadshot(var_5, var_8, var_4, var_1);
+    var_21 = 1;
+    var_22 = var_4 == "MOD_MELEE";
+    var_23 = "" + gettime();
 
-    if(!var22 && var19 && isDefined(var12.pelletdmg) && isDefined(var12.pelletdmg[var23]) && isDefined(var12.pelletdmg[var23][var10.guid]) && var12.pelletdmg[var23][var10.guid] > 1) {
-      if(var16) {
-        var22 = 1;
+    if(!var_22 && var_19 && isDefined(var_12.pelletdmg) && isDefined(var_12.pelletdmg[var_23]) && isDefined(var_12.pelletdmg[var_23][var_10.guid]) && var_12.pelletdmg[var_23][var_10.guid] > 1) {
+      if(var_16) {
+        var_22 = 1;
       } else {
-        var21 = 0;
+        var_21 = 0;
       }
     }
 
-    var24 = undefined;
+    var_24 = undefined;
 
-    if(var10.health <= var2) {
-      var24 = 1;
+    if(var_10.health <= var_2) {
+      var_24 = 1;
     }
 
-    var20 = scripts\cp\utility::isheadshot(var5, var8, var4, var1);
+    var_20 = scripts\cp\utility::isheadshot(var_5, var_8, var_4, var_1);
 
-    if(var21) {
-      if(isDefined(var1)) {
-        if(isDefined(var1.owner)) {
-          thread updatedamagefeedback(var1.owner, var14, var24, var2, var20, 0, var1, var0, var1);
+    if(var_21) {
+      if(isDefined(var_1)) {
+        if(isDefined(var_1.owner)) {
+          thread updatedamagefeedback(var_1.owner, var_14, var_24, var_2, var_20, 0, var_1, var_0, var_1);
           return;
         }
 
-        thread updatedamagefeedback(var1, var14, var24, var2, var20, 0, var1, var0, var1);
+        thread updatedamagefeedback(var_1, var_14, var_24, var_2, var_20, 0, var_1, var_0, var_1);
         return;
       }
 
@@ -146,8 +146,8 @@ function process_damage_feedback(var0, var1, var2, var3, var4, var5, var6, var7,
   }
 }
 
-function updatedamagefeedback(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
-  if(isDefined(level.friendly_damage_check) && [[level.friendly_damage_check]](var5, var6, var7)) {
+function updatedamagefeedback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  if(isDefined(level.friendly_damage_check) && [[level.friendly_damage_check]](var_5, var_6, var_7)) {
     return;
   }
 
@@ -155,15 +155,15 @@ function updatedamagefeedback(var0, var1, var2, var3, var4, var5, var6, var7, va
     return;
   }
 
-  if(!isDefined(var0)) {
-    var0 = "standard";
+  if(!isDefined(var_0)) {
+    var_0 = "standard";
   }
 
-  if(!isDefined(var8)) {
-    var8 = 0;
+  if(!isDefined(var_8)) {
+    var_8 = 0;
   }
 
-  if((!isDefined(level.damagefeedbacknosound) || !level.damagefeedbacknosound) && !var8) {
+  if((!isDefined(level.damagefeedbacknosound) || !level.damagefeedbacknosound) && !var_8) {
     if(!isDefined(self.hitmarkeraudioevents)) {
       self.hitmarkeraudioevents = 0;
     }
@@ -172,12 +172,12 @@ function updatedamagefeedback(var0, var1, var2, var3, var4, var5, var6, var7, va
     self setclientomnvar("ui_hitmarker_audio_events", self.hitmarkeraudioevents % 16);
   }
 
-  switch (var0) {
+  switch (var_0) {
     case "none":
       break;
     case "hitcritical":
-      var0 = "standard";
-      var3 = 1;
+      var_0 = "standard";
+      var_3 = 1;
       break;
     case "hitnooutline":
     case "hithelmetheavybreak":
@@ -196,8 +196,8 @@ function updatedamagefeedback(var0, var1, var2, var3, var4, var5, var6, var7, va
     case "hittacresist":
     case "hitjuggernaut":
     case "hitequip":
-      if(!istrue(var1)) {
-        self setclientomnvar("damage_feedback_icon", var0);
+      if(!istrue(var_1)) {
+        self setclientomnvar("damage_feedback_icon", var_0);
         self setclientomnvar("damage_feedback_icon_notify", gettime());
       }
 
@@ -206,36 +206,36 @@ function updatedamagefeedback(var0, var1, var2, var3, var4, var5, var6, var7, va
       break;
   }
 
-  updatehitmarker(var0, var3, var2, var4, var1, 0);
+  updatehitmarker(var_0, var_3, var_2, var_4, var_1, 0);
 }
 
-function updatehitmarker(var0, var1, var2, var3, var4, var5) {
-  if(!isDefined(var0)) {
+function updatehitmarker(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(var0 == "") {
-    var0 = "standard";
+  if(var_0 == "") {
+    var_0 = "standard";
   }
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!isDefined(var4)) {
-    var4 = 0;
+  if(!isDefined(var_4)) {
+    var_4 = 0;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  if(!isDefined(var3)) {
-    var3 = 0;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  if(!isDefined(var5)) {
-    var5 = 0;
+  if(!isDefined(var_5)) {
+    var_5 = 0;
   }
 
   if(!isPlayer(self)) {
@@ -244,37 +244,37 @@ function updatehitmarker(var0, var1, var2, var3, var4, var5) {
     }
   }
 
-  var6 = gethitmarkerpriority(var0);
+  var_6 = gethitmarkerpriority(var_0);
 
-  if(isDefined(self.lasthitmarkertime) && self.lasthitmarkertime == gettime() && var6 <= self.lasthitmarkerpriority && !var4) {
+  if(isDefined(self.lasthitmarkertime) && self.lasthitmarkertime == gettime() && var_6 <= self.lasthitmarkerpriority && !var_4) {
     return;
   }
 
   self.lasthitmarkertime = gettime();
-  self.lasthitmarkerpriority = var6;
-  self setclientomnvar("damage_feedback", var0);
+  self.lasthitmarkerpriority = var_6;
+  self setclientomnvar("damage_feedback", var_0);
   self setclientomnvar("damage_feedback_notify", gettime());
 
-  if(var4) {
+  if(var_4) {
     self setclientomnvar("damage_feedback_kill", 1);
   } else {
     self setclientomnvar("damage_feedback_kill", 0);
   }
 
-  if(var1) {
+  if(var_1) {
     self setclientomnvar("damage_feedback_headshot", 1);
   } else {
     self setclientomnvar("damage_feedback_headshot", 0);
   }
 
-  if(var5) {
+  if(var_5) {
     self setclientomnvar("damage_feedback_nonplayer", 1);
   } else {
     self setclientomnvar("damage_feedback_nonplayer", 0);
   }
 
-  if(isDefined(var2)) {
-    self setclientomnvar("ui_damage_amount", int(var2));
+  if(isDefined(var_2)) {
+    self setclientomnvar("ui_damage_amount", int(var_2));
     return;
   }
 }

@@ -29,22 +29,22 @@ function onstartgametype() {
   }
 
   if(game["switchedsides"]) {
-    var0 = game["attackers"];
-    var1 = game["defenders"];
-    game["attackers"] = var1;
-    game["defenders"] = var0;
+    var_0 = game["attackers"];
+    var_1 = game["defenders"];
+    game["attackers"] = var_1;
+    game["defenders"] = var_0;
   }
 
-  foreach(var3 in level.teamnamelist) {
-    scripts\mp\utility\game::setobjectivetext(var3, &"OBJECTIVES/WAR");
+  foreach(var_3 in level.teamnamelist) {
+    scripts\mp\utility\game::setobjectivetext(var_3, &"OBJECTIVES/WAR");
 
     if(level.splitscreen) {
-      scripts\mp\utility\game::setobjectivescoretext(var3, &"OBJECTIVES/WAR");
+      scripts\mp\utility\game::setobjectivescoretext(var_3, &"OBJECTIVES/WAR");
     } else {
-      scripts\mp\utility\game::setobjectivescoretext(var3, &"OBJECTIVES/WAR_SCORE");
+      scripts\mp\utility\game::setobjectivescoretext(var_3, &"OBJECTIVES/WAR_SCORE");
     }
 
-    scripts\mp\utility\game::setobjectivehinttext(var3, &"OBJECTIVES/WAR_HINT");
+    scripts\mp\utility\game::setobjectivehinttext(var_3, &"OBJECTIVES/WAR_HINT");
   }
 
   scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_compass", "shouldBeVisibleToPlayer", &ref_1411d);
@@ -76,11 +76,11 @@ function updategametypedvars() {
   }
 
   level.endsuperdisableweaponbr.load_relics_vfx = [];
-  var0 = ["little_bird", "little_bird_mg", "atv", "cargo_truck", "cargo_truck_mg", "jeep", "tac_rover"];
+  var_0 = ["little_bird", "little_bird_mg", "atv", "cargo_truck", "cargo_truck_mg", "jeep", "tac_rover"];
 
-  foreach(var2 in var0) {
-    if(getdvarint("scr_brtdm_vehicle_disable_" + var2, 0) == 1) {
-      level.endsuperdisableweaponbr.load_relics_vfx[var2] = 1;
+  foreach(var_2 in var_0) {
+    if(getdvarint("scr_brtdm_vehicle_disable_" + var_2, 0) == 1) {
+      level.endsuperdisableweaponbr.load_relics_vfx[var_2] = 1;
     }
   }
 
@@ -89,8 +89,8 @@ function updategametypedvars() {
   level.endsuperdisableweaponbr.ref_136dc.angles = getdvarvector("scr_brtdm_spectate_angles", level.endsuperdisableweaponbr.ref_1196b["scr_brtdm_spectate_angles"]);
 }
 
-function ref_1316d(var0, var1) {
-  level.endsuperdisableweaponbr.ref_1196b[var0] = var1;
+function ref_1316d(var_0, var_1) {
+  level.endsuperdisableweaponbr.ref_1196b[var_0] = var_1;
 }
 
 function calculate_zone_node_extents() {
@@ -856,46 +856,46 @@ function getspawnpoint() {
   self.ti_spawn = 0;
 
   if(isDefined(self.setspawnpoint)) {
-    var0 = self.setspawnpoint;
+    var_0 = self.setspawnpoint;
 
     if(!istrue(self.setspawnpoint.notti)) {
       self.ti_spawn = 1;
       self playlocalsound("tactical_spawn");
 
-      foreach(var2 in level.teamnamelist) {
-        if(var2 != self.team) {
-          self playsoundtoteam("tactical_spawn", var2);
+      foreach(var_2 in level.teamnamelist) {
+        if(var_2 != self.team) {
+          self playsoundtoteam("tactical_spawn", var_2);
         }
       }
     }
 
-    foreach(var5 in level.ugvs) {
-      if(distancesquared(var5.origin, self.setspawnpoint.playerspawnpos) < 1024) {
-        var5 notify("damage", 5000, var5.owner, (0, 0, 0), (0, 0, 0), "MOD_EXPLOSIVE", "", "", "", undefined, getcompleteweaponname("killstreak_jammer_mp"));
+    foreach(var_5 in level.ugvs) {
+      if(distancesquared(var_5.origin, self.setspawnpoint.playerspawnpos) < 1024) {
+        var_5 notify("damage", 5000, var_5.owner, (0, 0, 0), (0, 0, 0), "MOD_EXPLOSIVE", "", "", "", undefined, getcompleteweaponname("killstreak_jammer_mp"));
       }
     }
 
-    var7 = vectortoangles(level.endsuperdisableweaponbr.ref_136a8[self.team]);
-    var8 = randomfloatrange(level.endsuperdisableweaponbr.ref_13608, level.endsuperdisableweaponbr.ref_13607);
-    var9 = anglesToForward((0, var7[1] + scripts\engine\utility::ter_op(scripts\engine\utility::cointoss(), var8, var8 * -1), 0));
-    var10 = randomfloatrange(level.endsuperdisableweaponbr.ref_13677, level.endsuperdisableweaponbr.ref_13676);
-    var11 = self.setspawnpoint.playerspawnpos + var9 * var10;
+    var_7 = vectortoangles(level.endsuperdisableweaponbr.ref_136a8[self.team]);
+    var_8 = randomfloatrange(level.endsuperdisableweaponbr.ref_13608, level.endsuperdisableweaponbr.ref_13607);
+    var_9 = anglesToForward((0, var_7[1] + scripts\engine\utility::ter_op(scripts\engine\utility::cointoss(), var_8, var_8 * -1), 0));
+    var_10 = randomfloatrange(level.endsuperdisableweaponbr.ref_13677, level.endsuperdisableweaponbr.ref_13676);
+    var_11 = self.setspawnpoint.playerspawnpos + var_9 * var_10;
 
-    if(distance2dsquared(var11, level.endsuperdisableweaponbr.circlecenter) > level.endsuperdisableweaponbr.gulagfadetoblackspectatorsofplayer * level.endsuperdisableweaponbr.gulagfadetoblackspectatorsofplayer) {
-      var12 = vectorNormalize(var11 - level.endsuperdisableweaponbr.circlecenter);
-      var11 = level.endsuperdisableweaponbr.circlecenter + var12 * level.endsuperdisableweaponbr.gulagfadetoblackspectatorsofplayer * 0.99;
+    if(distance2dsquared(var_11, level.endsuperdisableweaponbr.circlecenter) > level.endsuperdisableweaponbr.gulagfadetoblackspectatorsofplayer * level.endsuperdisableweaponbr.gulagfadetoblackspectatorsofplayer) {
+      var_12 = vectorNormalize(var_11 - level.endsuperdisableweaponbr.circlecenter);
+      var_11 = level.endsuperdisableweaponbr.circlecenter + var_12 * level.endsuperdisableweaponbr.gulagfadetoblackspectatorsofplayer * 0.99;
     }
 
-    var13 = scripts\engine\trace::create_default_contents(1);
-    var14 = scripts\engine\utility::drop_to_ground(var11, 10000, -20000, undefined, var13);
-    var11 = (var11[0], var11[1], var14[2]);
-    var11 += (0, 0, 1) * level.endsuperdisableweaponbr.ref_1365e[self.team];
+    var_13 = scripts\engine\trace::create_default_contents(1);
+    var_14 = scripts\engine\utility::drop_to_ground(var_11, 10000, -20000, undefined, var_13);
+    var_11 = (var_11[0], var_11[1], var_14[2]);
+    var_11 += (0, 0, 1) * level.endsuperdisableweaponbr.ref_1365e[self.team];
 
     if(getdvarint("scr_brtdm_spawn_debug") == 1) {
-      thread scripts\mp\utility\debug::drawline(var11, var14, 15, (1, 1, 0));
+      thread scripts\mp\utility\debug::drawline(var_11, var_14, 15, (1, 1, 0));
     }
 
-    self.ref_12ab3.origin = var11;
+    self.ref_12ab3.origin = var_11;
     self.ref_12ab3.angles = self.setspawnpoint.playerspawnangles;
     self.ref_12ab3.lifeid = self.lifeid;
     self.ref_12ab3.time = gettime();
@@ -911,72 +911,72 @@ function ref_12850() {
   level.ref_12ab4 = [];
   level.ref_12ab4["allies"] = [];
   level.ref_12ab4["axis"] = [];
-  var0 = getdvarint("scr_brtdm_spawn_count", 50);
-  var1 = getdvarint("scr_brtdm_spawn_trace_count", 5);
-  var2 = 0;
-  var3 = scripts\mp\teams::ref_132e6();
+  var_0 = getdvarint("scr_brtdm_spawn_count", 50);
+  var_1 = getdvarint("scr_brtdm_spawn_trace_count", 5);
+  var_2 = 0;
+  var_3 = scripts\mp\teams::ref_132e6();
 
-  foreach(var5 in level.teamnamelist) {
-    if(var3 && var5 == "team_two_hundred") {
+  foreach(var_5 in level.teamnamelist) {
+    if(var_3 && var_5 == "team_two_hundred") {
       continue;
     }
 
-    for(var6 = 0; var6 < var0; var6++) {
-      var7 = spawnStruct();
-      var8 = vectortoangles(level.endsuperdisableweaponbr.ref_136a8[var5]);
-      var9 = randomfloatrange(level.endsuperdisableweaponbr.ref_13608, level.endsuperdisableweaponbr.ref_13607);
-      var10 = anglesToForward((0, var8[1] + scripts\engine\utility::ter_op(scripts\engine\utility::cointoss(), var9, var9 * -1), 0));
-      var11 = randomfloatrange(level.endsuperdisableweaponbr.ref_13631, level.endsuperdisableweaponbr.ref_13630);
-      var12 = level.endsuperdisableweaponbr.circlecenter + var10 * level.endsuperdisableweaponbr.gulagfadetoblackspectatorsofplayer * var11;
+    for(var_6 = 0; var_6 < var_0; var_6++) {
+      var_7 = spawnStruct();
+      var_8 = vectortoangles(level.endsuperdisableweaponbr.ref_136a8[var_5]);
+      var_9 = randomfloatrange(level.endsuperdisableweaponbr.ref_13608, level.endsuperdisableweaponbr.ref_13607);
+      var_10 = anglesToForward((0, var_8[1] + scripts\engine\utility::ter_op(scripts\engine\utility::cointoss(), var_9, var_9 * -1), 0));
+      var_11 = randomfloatrange(level.endsuperdisableweaponbr.ref_13631, level.endsuperdisableweaponbr.ref_13630);
+      var_12 = level.endsuperdisableweaponbr.circlecenter + var_10 * level.endsuperdisableweaponbr.gulagfadetoblackspectatorsofplayer * var_11;
 
       if(istrue(level.endsuperdisableweaponbr.passes_final_capsule_check)) {
-        var13 = level.endsuperdisableweaponbr.spawnorigin[scripts\mp\utility\game::getotherteam(var5)[0]] - var12;
-        var8 = vectortoangles(var13);
+        var_13 = level.endsuperdisableweaponbr.spawnorigin[scripts\mp\utility\game::getotherteam(var_5)[0]] - var_12;
+        var_8 = vectortoangles(var_13);
       } else {
-        var8 = vectortoangles(var10 * -1);
+        var_8 = vectortoangles(var_10 * -1);
       }
 
-      var14 = scripts\engine\trace::create_default_contents(1);
-      var15 = 0;
-      var16 = 0;
-      var17 = 10;
-      var18 = [];
+      var_14 = scripts\engine\trace::create_default_contents(1);
+      var_15 = 0;
+      var_16 = 0;
+      var_17 = 10;
+      var_18 = [];
 
-      for(var19 = 0; var19 < var1; var19++) {
-        var20 = scripts\engine\trace::ray_trace(var12 + (0, 0, 10000), var12 - (0, 0, 20000) + anglesToForward(var8) * var19 * 2000, undefined, var14)["position"];
-        var18 = var20;
+      for(var_19 = 0; var_19 < var_1; var_19++) {
+        var_20 = scripts\engine\trace::ray_trace(var_12 + (0, 0, 10000), var_12 - (0, 0, 20000) + anglesToForward(var_8) * var_19 * 2000, undefined, var_14)["position"];
+        var_18 = var_20;
 
-        if(var20[2] > var15) {
-          var15 = var20[2];
-          var16 = var19;
+        if(var_20[2] > var_15) {
+          var_15 = var_20[2];
+          var_16 = var_19;
         }
 
-        var2++;
+        var_2++;
 
-        if(var2 == 5) {
+        if(var_2 == 5) {
           waitframe();
-          var2 = 0;
+          var_2 = 0;
         }
       }
 
-      var12 = (var12[0], var12[1], var15 + level.endsuperdisableweaponbr.ref_1365e[var5]);
-      var7.origin = var12;
-      var7.ref_13c33 = var18;
-      var7.spawn_exfil_heli = var16;
-      var7.angles = var8;
-      var7.time = gettime();
-      var7.team = var5;
-      var7.index = -1;
-      level.ref_12ab4[var5][level.ref_12ab4[var5].size] = var7;
+      var_12 = (var_12[0], var_12[1], var_15 + level.endsuperdisableweaponbr.ref_1365e[var_5]);
+      var_7.origin = var_12;
+      var_7.ref_13c33 = var_18;
+      var_7.spawn_exfil_heli = var_16;
+      var_7.angles = var_8;
+      var_7.time = gettime();
+      var_7.team = var_5;
+      var_7.index = -1;
+      level.ref_12ab4[var_5][level.ref_12ab4[var_5].size] = var_7;
     }
   }
 }
 
 function pre_race() {
-  var0 = randomint(level.ref_12ab4[self.team].size);
-  var1 = level.ref_12ab4[self.team][var0];
-  self.ref_12ab3.origin = var1.origin;
-  self.ref_12ab3.angles = var1.angles;
+  var_0 = randomint(level.ref_12ab4[self.team].size);
+  var_1 = level.ref_12ab4[self.team][var_0];
+  self.ref_12ab3.origin = var_1.origin;
+  self.ref_12ab3.angles = var_1.angles;
   self.ref_12ab3.time = gettime();
   self.ref_12ab3.team = self.team;
   self.ref_12ab3.index = -1;
@@ -984,14 +984,14 @@ function pre_race() {
   return self.ref_12ab3;
 }
 
-function onplayerconnect(var0) {
+function onplayerconnect(var_0) {
   if(!scripts\mp\flags::gameflag("prematch_done")) {
     thread ref_11aaf();
     return;
   }
 }
 
-function ref_11aaf(var0, var1) {
+function ref_11aaf(var_0, var_1) {
   self endon("disconnect");
   thread infil_radio_idle();
 
@@ -999,20 +999,20 @@ function ref_11aaf(var0, var1) {
     self setclienttriggeraudiozone("brtdm_intro", 1);
   }
 
-  var2 = 0;
-  var3 = 0.5;
-  thread ref_11ab0(var2, var3);
+  var_2 = 0;
+  var_3 = 0.5;
+  thread ref_11ab0(var_2, var_3);
   scripts\mp\flags::gameflagwait("prematch_done");
   self clearallsoundsubmixes(6);
   self clearclienttriggeraudiozone(6);
 }
 
-function ref_11c83(var0) {
+function ref_11c83(var_0) {
   thread playerrespawn();
   return true;
 }
 
-function ref_125f7(var0, var1) {
+function ref_125f7(var_0, var_1) {
   thread playerrespawn();
   return true;
 }
@@ -1031,31 +1031,31 @@ function playerrespawn() {
     self endon("brWaitAndSpawnClientComplete");
   }
 
-  var0 = getspawnpoint();
-  var1 = scripts\mp\gametypes\br_gulag::ref_1263e(var0);
+  var_0 = getspawnpoint();
+  var_1 = scripts\mp\gametypes\br_gulag::ref_1263e(var_0);
 
   if(scripts\mp\flags::gameflag("prematch_done")) {
-    var2 = 0;
-    var3 = 0.5;
-    thread ref_11ab0(var2, var3);
+    var_2 = 0;
+    var_3 = 0.5;
+    thread ref_11ab0(var_2, var_3);
 
-    if(var2 > 0) {
+    if(var_2 > 0) {
       self waittill("fadeDown_complete");
     }
   }
 
   scripts\mp\gametypes\br_spectate::ref_1252a();
-  scripts\mp\gametypes\br::spawnintermission(var0.origin, var0.angles);
+  scripts\mp\gametypes\br::spawnintermission(var_0.origin, var_0.angles);
   scripts\mp\spectating::setdisabled();
   scripts\mp\gametypes\br_public::ref_126ed();
   scripts\mp\playerlogic::spawnplayer(undefined, 0);
   scripts\mp\gametypes\br_pickups::initplayer(1);
-  scripts\mp\gametypes\br_gulag::gulagwinnerrespawn(1, undefined, var0, 1, var1, undefined, undefined, 0, 0, 1);
+  scripts\mp\gametypes\br_gulag::gulagwinnerrespawn(1, undefined, var_0, 1, var_1, undefined, undefined, 0, 0, 1);
   scripts\mp\damage::resetplayervariables();
   scripts\mp\damage::resetplayeromnvarsonspawn();
 }
 
-function ref_11ab0(var0, var1) {
+function ref_11ab0(var_0, var_1) {
   self endon("disconnect");
 
   if(istrue(self.ref_12ca6)) {
@@ -1065,23 +1065,23 @@ function ref_11ab0(var0, var1) {
   self.ref_12ca6 = 1;
   self notify("fadeDown_start");
 
-  if(!isDefined(var0)) {
-    var0 = 0;
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  var2 = var0;
+  var_2 = var_0;
 
-  if(var2 > 0) {
-    var3 = 0;
-    var4 = var2 / level.framedurationseconds;
-    var5 = 1 / var4;
-    var6 = 0;
+  if(var_2 > 0) {
+    var_3 = 0;
+    var_4 = var_2 / level.framedurationseconds;
+    var_5 = 1 / var_4;
+    var_6 = 0;
 
-    while(var6 < var4) {
-      var6++;
-      var3 += var5;
-      var3 = clamp(var3, 0, 1);
-      self setclientomnvar("ui_world_fade", var3);
+    while(var_6 < var_4) {
+      var_6++;
+      var_3 += var_5;
+      var_3 = clamp(var_3, 0, 1);
+      self setclientomnvar("ui_world_fade", var_3);
       waitframe();
     }
   } else {
@@ -1089,46 +1089,46 @@ function ref_11ab0(var0, var1) {
   }
 
   self notify("fadeDown_complete");
-  var7 = 0;
+  var_7 = 0;
 
   if(!scripts\mp\utility\player::isreallyalive(self)) {
     self waittill("spawned_player");
-    var7 = 1;
+    var_7 = 1;
   }
 
   scripts\mp\flags::gameflagwait("prematch_done");
 
-  if(var7) {
+  if(var_7) {
     scripts\mp\utility\player::hidehudenable();
   }
 
   wait 2;
   self notify("fadeUp_start");
 
-  if(!isDefined(var1)) {
-    var1 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  var2 = var1;
+  var_2 = var_1;
 
-  if(var2 > 0) {
-    var3 = 1;
-    var4 = var2 / level.framedurationseconds;
-    var5 = 1 / var4;
-    var6 = 0;
+  if(var_2 > 0) {
+    var_3 = 1;
+    var_4 = var_2 / level.framedurationseconds;
+    var_5 = 1 / var_4;
+    var_6 = 0;
 
-    while(var6 < var4) {
-      var6++;
-      var3 -= var5;
-      var3 = clamp(var3, 0, 1);
-      self setclientomnvar("ui_world_fade", var3);
+    while(var_6 < var_4) {
+      var_6++;
+      var_3 -= var_5;
+      var_3 = clamp(var_3, 0, 1);
+      self setclientomnvar("ui_world_fade", var_3);
       waitframe();
     }
   } else {
     self setclientomnvar("ui_world_fade", 0);
   }
 
-  if(var7) {
+  if(var_7) {
     scripts\mp\utility\player::hidehuddisable();
   }
 
@@ -1190,48 +1190,48 @@ function ref_11aa7() {
   self notify("afk_tracking_resume");
 }
 
-function onnormaldeath(var0, var1, var2, var3, var4, var5) {
-  scripts\mp\gametypes\common::oncommonnormaldeath(var0, var1, var2, var3, var4, var5);
+function onnormaldeath(var_0, var_1, var_2, var_3, var_4, var_5) {
+  scripts\mp\gametypes\common::oncommonnormaldeath(var_0, var_1, var_2, var_3, var_4, var_5);
 }
 
-function onplayerkilled(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
+function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   scripts\mp\menus::updatesquadomnvars(self.team, self.squadindex);
 }
 
 function ontimelimit() {
-  var0 = scripts\mp\gamescore::gethighestscoringteam();
+  var_0 = scripts\mp\gamescore::gethighestscoringteam();
 
   if(game["status"] == "overtime") {
-    var0 = "forfeit";
+    var_0 = "forfeit";
   } else if("tie") {
-    var0 = "overtime";
+    var_0 = "overtime";
   }
 
-  thread scripts\mp\gamelogic::endgame(var0, game["end_reason"]["time_limit_reached"]);
+  thread scripts\mp\gamelogic::endgame(var_0, game["end_reason"]["time_limit_reached"]);
 }
 
 function ref_132fe() {
-  var0 = int(game["teamScores"]["axis"]);
-  var1 = int(game["teamScores"]["allies"]);
-  var2 = var0 - var1;
-  return var2 < 10;
+  var_0 = int(game["teamScores"]["axis"]);
+  var_1 = int(game["teamScores"]["allies"]);
+  var_2 = var_0 - var_1;
+  return var_2 < 10;
 }
 
-function vehiclespawn_getspawndata(var0) {
-  var1 = spawnStruct();
-  var1.origin = var0.origin;
-  var1.angles = var0.angles;
-  var1.spawntype = "GAME_MODE";
-  var1.showheadicon = 1;
-  return var1;
+function vehiclespawn_getspawndata(var_0) {
+  var_1 = spawnStruct();
+  var_1.origin = var_0.origin;
+  var_1.angles = var_0.angles;
+  var_1.spawntype = "GAME_MODE";
+  var_1.showheadicon = 1;
+  return var_1;
 }
 
-function registervehicletype(var0, var1, var2) {
-  var3 = spawnStruct();
-  var3.refname = var0;
-  var3.spawncallback = var2;
-  var3.vehiclespawns = [[var1]]();
-  level.vehicleinfo[var0] = var3;
+function registervehicletype(var_0, var_1, var_2) {
+  var_3 = spawnStruct();
+  var_3.refname = var_0;
+  var_3.spawncallback = var_2;
+  var_3.vehiclespawns = [[var_1]]();
+  level.vehicleinfo[var_0] = var_3;
 }
 
 function trace_to_eye_weight() {
@@ -1269,443 +1269,443 @@ function trace_to_eye_weight() {
 
   level.vehiclespawnlocs = [];
 
-  foreach(var1 in level.vehicleinfo) {
-    switch (var1.refname) {
+  foreach(var_1 in level.vehicleinfo) {
+    switch (var_1.refname) {
       case "little_bird":
-        var1.vehiclespawns = rundrawprematchareas("little_bird", "lbravo_physics_mp");
+        var_1.vehiclespawns = rundrawprematchareas("little_bird", "lbravo_physics_mp");
         break;
       case "little_bird_mg":
-        var1.vehiclespawns = rundrawprematchareas("little_bird_mg", "lbravo_physics_mp");
+        var_1.vehiclespawns = rundrawprematchareas("little_bird_mg", "lbravo_physics_mp");
         break;
       case "atv":
-        var1.vehiclespawns = rundrawprematchareas("atv", "atango_physics_mp");
+        var_1.vehiclespawns = rundrawprematchareas("atv", "atango_physics_mp");
         break;
       case "cargo_truck":
-        var1.vehiclespawns = rundrawprematchareas("cargo_truck", "mkilo_physics_mp");
+        var_1.vehiclespawns = rundrawprematchareas("cargo_truck", "mkilo_physics_mp");
         break;
       case "cargo_truck_mg":
-        var1.vehiclespawns = rundrawprematchareas("cargo_truck_mg", "mkilo_physics_mg");
+        var_1.vehiclespawns = rundrawprematchareas("cargo_truck_mg", "mkilo_physics_mg");
         break;
       case "jeep":
-        var1.vehiclespawns = rundrawprematchareas("jeep", "decho_physics_mp");
+        var_1.vehiclespawns = rundrawprematchareas("jeep", "decho_physics_mp");
         break;
       case "tac_rover":
-        var1.vehiclespawns = rundrawprematchareas("tac_rover", "tromeo_physics_mp");
+        var_1.vehiclespawns = rundrawprematchareas("tac_rover", "tromeo_physics_mp");
         break;
     }
 
-    foreach(var3 in var1.vehiclespawns) {
-      var4 = level.vehiclespawnlocs.size;
-      level.vehiclespawnlocs[var4] = var3;
-      level.vehiclespawnlocs[var4].refname = var1.refname;
+    foreach(var_3 in var_1.vehiclespawns) {
+      var_4 = level.vehiclespawnlocs.size;
+      level.vehiclespawnlocs[var_4] = var_3;
+      level.vehiclespawnlocs[var_4].refname = var_1.refname;
     }
   }
 
   if(false) {
-    foreach(var8 in level.vehiclespawnlocs) {
-      thread scripts\mp\utility\debug::drawline(var8.origin, var8.origin + (0, 0, 1500), 1000, (1, 0, 0));
+    foreach(var_8 in level.vehiclespawnlocs) {
+      thread scripts\mp\utility\debug::drawline(var_8.origin, var_8.origin + (0, 0, 1500), 1000, (1, 0, 0));
     }
   }
 
   level.vehiclespawnlocs = scripts\engine\utility::array_randomize(level.vehiclespawnlocs);
-  var10 = level.ref_11f41;
+  var_10 = level.ref_11f41;
 
   if(!isDefined(level.ref_11f41)) {
-    var10 = 25;
+    var_10 = 25;
   }
 
   if(false) {
-    for(var11 = 0; var11 < var10; var11++) {
-      var8 = level.vehiclespawnlocs[var11];
-      thread scripts\mp\utility\debug::drawline(var8.origin + (0, 0, 1500), var8.origin + (0, 0, 2500), 1000, (0, 1, 0));
+    for(var_11 = 0; var_11 < var_10; var_11++) {
+      var_8 = level.vehiclespawnlocs[var_11];
+      thread scripts\mp\utility\debug::drawline(var_8.origin + (0, 0, 1500), var_8.origin + (0, 0, 2500), 1000, (0, 1, 0));
     }
   }
 
-  for(var11 = 0; var11 < var10; var11++) {
-    var8 = level.vehiclespawnlocs[var11];
+  for(var_11 = 0; var_11 < var_10; var_11++) {
+    var_8 = level.vehiclespawnlocs[var_11];
 
-    if(isDefined(var8)) {
-      var1 = level.vehicleinfo[var8.refname];
-      [[var1.spawncallback]](var8);
+    if(isDefined(var_8)) {
+      var_1 = level.vehicleinfo[var_8.refname];
+      [[var_1.spawncallback]](var_8);
     }
   }
 }
 
-function rundrawprematchareas(var0, var1) {
-  var2 = [];
-  var3 = "scr_brtdm_vehicle_" + var0;
+function rundrawprematchareas(var_0, var_1) {
+  var_2 = [];
+  var_3 = "scr_brtdm_vehicle_" + var_0;
 
-  for(var4 = 0;; var4++) {
-    var5 = var3 + "_origin_" + var4;
-    var6 = var3 + "_angles_" + var4;
-    var7 = (0, 0, 0);
+  for(var_4 = 0;; var_4++) {
+    var_5 = var_3 + "_origin_" + var_4;
+    var_6 = var_3 + "_angles_" + var_4;
+    var_7 = (0, 0, 0);
 
-    if(isDefined(level.endsuperdisableweaponbr.ref_1196b[var5])) {
-      var7 = level.endsuperdisableweaponbr.ref_1196b[var5];
+    if(isDefined(level.endsuperdisableweaponbr.ref_1196b[var_5])) {
+      var_7 = level.endsuperdisableweaponbr.ref_1196b[var_5];
     }
 
-    var8 = getdvarvector(var5, var7);
+    var_8 = getdvarvector(var_5, var_7);
 
-    if(var8 == (0, 0, 0)) {
+    if(var_8 == (0, 0, 0)) {
       break;
     }
 
-    if(!scripts\mp\gametypes\br_circle::ispointincurrentsafecircle(var8)) {
-      var4++;
+    if(!scripts\mp\gametypes\br_circle::ispointincurrentsafecircle(var_8)) {
+      var_4++;
       continue;
     }
 
-    var9 = spawnStruct();
-    var9.origin = var8;
-    var10 = (0, 0, 0);
+    var_9 = spawnStruct();
+    var_9.origin = var_8;
+    var_10 = (0, 0, 0);
 
-    if(isDefined(level.endsuperdisableweaponbr.ref_1196b[var6])) {
-      var10 = level.endsuperdisableweaponbr.ref_1196b[var6];
+    if(isDefined(level.endsuperdisableweaponbr.ref_1196b[var_6])) {
+      var_10 = level.endsuperdisableweaponbr.ref_1196b[var_6];
     }
 
-    var9.angles = getdvarvector(var10, var10);
-    var9.targetname = var0;
-    var9.vehicletype = var1;
-    var2 = var9;
+    var_9.angles = getdvarvector(var_10, var_10);
+    var_9.targetname = var_0;
+    var_9.vehicletype = var_1;
+    var_2 = var_9;
   }
 
-  return var2;
+  return var_2;
 }
 
 function registeronentergulag() {
-  var0 = [];
+  var_0 = [];
 
   switch (level.endsuperdisableweaponbr.locale) {
     case "lumber":
-      var1 = spawnStruct();
-      var1.origin = (53308, 6374, 100);
-      var1.angles = (0, 155, 0);
-      var1.targetname = "atv";
-      var1.vehicletype = "atango_physics_mp";
-      var0 = var1;
-      var1 = spawnStruct();
-      var1.origin = (52810, 6734, 100);
-      var1.angles = (0, 250, 0);
-      var1.targetname = "atv";
-      var1.vehicletype = "atango_physics_mp";
-      var0 = var1;
-      var1 = spawnStruct();
-      var1.origin = (49169, -478, 100);
-      var1.angles = (0, 72, 0);
-      var1.targetname = "atv";
-      var1.vehicletype = "atango_physics_mp";
-      var0 = var1;
-      var1 = spawnStruct();
-      var1.origin = (49156, 1313, 100);
-      var1.angles = (0, 60, 0);
-      var1.targetname = "atv";
-      var1.vehicletype = "atango_physics_mp";
-      var0 = var1;
+      var_1 = spawnStruct();
+      var_1.origin = (53308, 6374, 100);
+      var_1.angles = (0, 155, 0);
+      var_1.targetname = "atv";
+      var_1.vehicletype = "atango_physics_mp";
+      var_0 = var_1;
+      var_1 = spawnStruct();
+      var_1.origin = (52810, 6734, 100);
+      var_1.angles = (0, 250, 0);
+      var_1.targetname = "atv";
+      var_1.vehicletype = "atango_physics_mp";
+      var_0 = var_1;
+      var_1 = spawnStruct();
+      var_1.origin = (49169, -478, 100);
+      var_1.angles = (0, 72, 0);
+      var_1.targetname = "atv";
+      var_1.vehicletype = "atango_physics_mp";
+      var_0 = var_1;
+      var_1 = spawnStruct();
+      var_1.origin = (49156, 1313, 100);
+      var_1.angles = (0, 60, 0);
+      var_1.targetname = "atv";
+      var_1.vehicletype = "atango_physics_mp";
+      var_0 = var_1;
       break;
     case "":
-      var1 = spawnStruct();
-      var1.origin = (500, -3000, 0);
-      var1.angles = (0, 90, 0);
-      var1.targetname = "atv";
-      var1.vehicletype = "atango_physics_mp";
-      var0 = var1;
-      var1 = spawnStruct();
-      var1.origin = (-500, 2000, 0);
-      var1.angles = (0, 270, 0);
-      var1.targetname = "atv";
-      var1.vehicletype = "atango_physics_mp";
-      var0 = var1;
+      var_1 = spawnStruct();
+      var_1.origin = (500, -3000, 0);
+      var_1.angles = (0, 90, 0);
+      var_1.targetname = "atv";
+      var_1.vehicletype = "atango_physics_mp";
+      var_0 = var_1;
+      var_1 = spawnStruct();
+      var_1.origin = (-500, 2000, 0);
+      var_1.angles = (0, 270, 0);
+      var_1.targetname = "atv";
+      var_1.vehicletype = "atango_physics_mp";
+      var_0 = var_1;
       break;
   }
 
-  return var0;
+  return var_0;
 }
 
 function relic_amped_clear_victim() {
-  var0 = [];
+  var_0 = [];
 
   switch (level.endsuperdisableweaponbr.locale) {
     case "lumber":
-      var1 = spawnStruct();
-      var1.origin = (52481, 5490, 0);
-      var1.angles = (0, 247, 0);
-      var1.targetname = "cargo_truck";
-      var1.vehicletype = "mkilo_physics_mp";
-      var0 = var1;
-      var1 = spawnStruct();
-      var1.origin = (49837, 1321, 0);
-      var1.angles = (0, 26, 0);
-      var1.targetname = "cargo_truck";
-      var1.vehicletype = "mkilo_physics_mp";
-      var0 = var1;
+      var_1 = spawnStruct();
+      var_1.origin = (52481, 5490, 0);
+      var_1.angles = (0, 247, 0);
+      var_1.targetname = "cargo_truck";
+      var_1.vehicletype = "mkilo_physics_mp";
+      var_0 = var_1;
+      var_1 = spawnStruct();
+      var_1.origin = (49837, 1321, 0);
+      var_1.angles = (0, 26, 0);
+      var_1.targetname = "cargo_truck";
+      var_1.vehicletype = "mkilo_physics_mp";
+      var_0 = var_1;
       break;
     case "":
-      var1 = spawnStruct();
-      var1.origin = (1000, -3000, 0);
-      var1.angles = (0, 90, 0);
-      var1.targetname = "cargo_truck";
-      var1.vehicletype = "mkilo_physics_mp";
-      var0 = var1;
-      var1 = spawnStruct();
-      var1.origin = (-1000, 2000, 0);
-      var1.angles = (0, 270, 0);
-      var1.targetname = "cargo_truck";
-      var1.vehicletype = "mkilo_physics_mp";
-      var0 = var1;
+      var_1 = spawnStruct();
+      var_1.origin = (1000, -3000, 0);
+      var_1.angles = (0, 90, 0);
+      var_1.targetname = "cargo_truck";
+      var_1.vehicletype = "mkilo_physics_mp";
+      var_0 = var_1;
+      var_1 = spawnStruct();
+      var_1.origin = (-1000, 2000, 0);
+      var_1.angles = (0, 270, 0);
+      var_1.targetname = "cargo_truck";
+      var_1.vehicletype = "mkilo_physics_mp";
+      var_0 = var_1;
       break;
   }
 
-  return var0;
+  return var_0;
 }
 
 function remove_soldier_armor() {
-  var0 = [];
+  var_0 = [];
 
   switch (level.endsuperdisableweaponbr.locale) {
     case "lumber":
-      var1 = spawnStruct();
-      var1.origin = (54585, 6990, 100);
-      var1.angles = (0, 323, 0);
-      var1.targetname = "jeep";
-      var1.vehicletype = "decho_physics_mp";
-      var0 = var1;
-      var1 = spawnStruct();
-      var1.origin = (51816, 6727, 100);
-      var1.angles = (0, 200, 0);
-      var1.targetname = "jeep";
-      var1.vehicletype = "decho_physics_mp";
-      var0 = var1;
-      var1 = spawnStruct();
-      var1.origin = (49599, -109, 100);
-      var1.angles = (0, 333, 0);
-      var1.targetname = "jeep";
-      var1.vehicletype = "decho_physics_mp";
-      var0 = var1;
-      var1 = spawnStruct();
-      var1.origin = (48721, 1557, 100);
-      var1.angles = (0, 131, 0);
-      var1.targetname = "jeep";
-      var1.vehicletype = "decho_physics_mp";
-      var0 = var1;
+      var_1 = spawnStruct();
+      var_1.origin = (54585, 6990, 100);
+      var_1.angles = (0, 323, 0);
+      var_1.targetname = "jeep";
+      var_1.vehicletype = "decho_physics_mp";
+      var_0 = var_1;
+      var_1 = spawnStruct();
+      var_1.origin = (51816, 6727, 100);
+      var_1.angles = (0, 200, 0);
+      var_1.targetname = "jeep";
+      var_1.vehicletype = "decho_physics_mp";
+      var_0 = var_1;
+      var_1 = spawnStruct();
+      var_1.origin = (49599, -109, 100);
+      var_1.angles = (0, 333, 0);
+      var_1.targetname = "jeep";
+      var_1.vehicletype = "decho_physics_mp";
+      var_0 = var_1;
+      var_1 = spawnStruct();
+      var_1.origin = (48721, 1557, 100);
+      var_1.angles = (0, 131, 0);
+      var_1.targetname = "jeep";
+      var_1.vehicletype = "decho_physics_mp";
+      var_0 = var_1;
       break;
     case "":
-      var1 = spawnStruct();
-      var1.origin = (1500, -3000, 0);
-      var1.angles = (0, 90, 0);
-      var1.targetname = "jeep";
-      var1.vehicletype = "decho_physics_mp";
-      var0 = var1;
-      var1 = spawnStruct();
-      var1.origin = (-1500, 2000, 0);
-      var1.angles = (0, 270, 0);
-      var1.targetname = "jeep";
-      var1.vehicletype = "decho_physics_mp";
-      var0 = var1;
+      var_1 = spawnStruct();
+      var_1.origin = (1500, -3000, 0);
+      var_1.angles = (0, 90, 0);
+      var_1.targetname = "jeep";
+      var_1.vehicletype = "decho_physics_mp";
+      var_0 = var_1;
+      var_1 = spawnStruct();
+      var_1.origin = (-1500, 2000, 0);
+      var_1.angles = (0, 270, 0);
+      var_1.targetname = "jeep";
+      var_1.vehicletype = "decho_physics_mp";
+      var_0 = var_1;
       break;
   }
 
-  return var0;
+  return var_0;
 }
 
 function rpg_enemy_damage_debug() {
-  var0 = [];
+  var_0 = [];
 
   switch (level.endsuperdisableweaponbr.locale) {
     case "lumber":
-      var1 = spawnStruct();
-      var1.origin = (53180, 7980, 100);
-      var1.angles = (0, 255, 0);
-      var1.targetname = "tac_rover";
-      var1.vehicletype = "tromeo_physics_mp";
-      var0 = var1;
-      var1 = spawnStruct();
-      var1.origin = (53767, 7455, 100);
-      var1.angles = (0, 270, 0);
-      var1.targetname = "tac_rover";
-      var1.vehicletype = "tromeo_physics_mp";
-      var0 = var1;
-      var1 = spawnStruct();
-      var1.origin = (48642, -115, 100);
-      var1.angles = (0, 23, 0);
-      var1.targetname = "tac_rover";
-      var1.vehicletype = "tromeo_physics_mp";
-      var0 = var1;
-      var1 = spawnStruct();
-      var1.origin = (50339, 559, 100);
-      var1.angles = (0, 58, 0);
-      var1.targetname = "tac_rover";
-      var1.vehicletype = "tromeo_physics_mp";
-      var0 = var1;
+      var_1 = spawnStruct();
+      var_1.origin = (53180, 7980, 100);
+      var_1.angles = (0, 255, 0);
+      var_1.targetname = "tac_rover";
+      var_1.vehicletype = "tromeo_physics_mp";
+      var_0 = var_1;
+      var_1 = spawnStruct();
+      var_1.origin = (53767, 7455, 100);
+      var_1.angles = (0, 270, 0);
+      var_1.targetname = "tac_rover";
+      var_1.vehicletype = "tromeo_physics_mp";
+      var_0 = var_1;
+      var_1 = spawnStruct();
+      var_1.origin = (48642, -115, 100);
+      var_1.angles = (0, 23, 0);
+      var_1.targetname = "tac_rover";
+      var_1.vehicletype = "tromeo_physics_mp";
+      var_0 = var_1;
+      var_1 = spawnStruct();
+      var_1.origin = (50339, 559, 100);
+      var_1.angles = (0, 58, 0);
+      var_1.targetname = "tac_rover";
+      var_1.vehicletype = "tromeo_physics_mp";
+      var_0 = var_1;
       break;
     case "":
-      var1 = spawnStruct();
-      var1.origin = (2000, -3000, 0);
-      var1.angles = (0, 90, 0);
-      var1.targetname = "tac_rover";
-      var1.vehicletype = "tromeo_physics_mp";
-      var0 = var1;
-      var1 = spawnStruct();
-      var1.origin = (-2000, 2000, 0);
-      var1.angles = (0, 270, 0);
-      var1.targetname = "tac_rover";
-      var1.vehicletype = "tromeo_physics_mp";
-      var0 = var1;
+      var_1 = spawnStruct();
+      var_1.origin = (2000, -3000, 0);
+      var_1.angles = (0, 90, 0);
+      var_1.targetname = "tac_rover";
+      var_1.vehicletype = "tromeo_physics_mp";
+      var_0 = var_1;
+      var_1 = spawnStruct();
+      var_1.origin = (-2000, 2000, 0);
+      var_1.angles = (0, 270, 0);
+      var_1.targetname = "tac_rover";
+      var_1.vehicletype = "tromeo_physics_mp";
+      var_0 = var_1;
       break;
   }
 
-  return var0;
+  return var_0;
 }
 
-function vehiclespawn_littlebird(var0, var1) {
-  if(!isDefined(var0.angles)) {
-    var0.angles = (0, randomfloat(360), 0);
+function vehiclespawn_littlebird(var_0, var_1) {
+  if(!isDefined(var_0.angles)) {
+    var_0.angles = (0, randomfloat(360), 0);
   }
 
-  var2 = vehiclespawn_getspawndata(var0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("little_bird", var2, var1);
+  var_2 = vehiclespawn_getspawndata(var_0);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("little_bird", var_2, var_1);
 }
 
-function ref_14266(var0, var1) {
-  if(!isDefined(var0.angles)) {
-    var0.angles = (0, randomfloat(360), 0);
+function ref_14266(var_0, var_1) {
+  if(!isDefined(var_0.angles)) {
+    var_0.angles = (0, randomfloat(360), 0);
   }
 
-  var2 = vehiclespawn_getspawndata(var0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("little_bird_mg", var2, var1);
+  var_2 = vehiclespawn_getspawndata(var_0);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("little_bird_mg", var_2, var_1);
 }
 
-function vehiclespawn_atv(var0, var1) {
-  if(!isDefined(var0.angles)) {
-    var0.angles = (0, randomfloat(360), 0);
+function vehiclespawn_atv(var_0, var_1) {
+  if(!isDefined(var_0.angles)) {
+    var_0.angles = (0, randomfloat(360), 0);
   }
 
-  var2 = vehiclespawn_getspawndata(var0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("atv", var2, var1);
+  var_2 = vehiclespawn_getspawndata(var_0);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("atv", var_2, var_1);
 }
 
-function vehiclespawn_cargotruck(var0, var1) {
-  if(!isDefined(var0.angles)) {
-    var0.angles = (0, randomfloat(360), 0);
+function vehiclespawn_cargotruck(var_0, var_1) {
+  if(!isDefined(var_0.angles)) {
+    var_0.angles = (0, randomfloat(360), 0);
   }
 
-  var2 = vehiclespawn_getspawndata(var0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("cargo_truck", var2, var1);
+  var_2 = vehiclespawn_getspawndata(var_0);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("cargo_truck", var_2, var_1);
 }
 
-function ref_14264(var0, var1) {
-  if(!isDefined(var0.angles)) {
-    var0.angles = (0, randomfloat(360), 0);
+function ref_14264(var_0, var_1) {
+  if(!isDefined(var_0.angles)) {
+    var_0.angles = (0, randomfloat(360), 0);
   }
 
-  var2 = vehiclespawn_getspawndata(var0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("cargo_truck_mg", var2, var1);
+  var_2 = vehiclespawn_getspawndata(var_0);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("cargo_truck_mg", var_2, var_1);
 }
 
-function vehiclespawn_tacrover(var0, var1) {
-  if(!isDefined(var0.angles)) {
-    var0.angles = (0, randomfloat(360), 0);
+function vehiclespawn_tacrover(var_0, var_1) {
+  if(!isDefined(var_0.angles)) {
+    var_0.angles = (0, randomfloat(360), 0);
   }
 
-  var2 = vehiclespawn_getspawndata(var0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("tac_rover", var2, var1);
+  var_2 = vehiclespawn_getspawndata(var_0);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("tac_rover", var_2, var_1);
 }
 
-function vehiclespawn_jeep(var0, var1) {
-  if(!isDefined(var0.angles)) {
-    var0.angles = (0, randomfloat(360), 0);
+function vehiclespawn_jeep(var_0, var_1) {
+  if(!isDefined(var_0.angles)) {
+    var_0.angles = (0, randomfloat(360), 0);
   }
 
-  var2 = vehiclespawn_getspawndata(var0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("jeep", var2, var1);
+  var_2 = vehiclespawn_getspawndata(var_0);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("jeep", var_2, var_1);
 }
 
-function play_nag_intro_vo(var0) {
-  var1 = [];
+function play_nag_intro_vo(var_0) {
+  var_1 = [];
 
   if(getdvarint("scr_brtdm_disable_radiant_vehicles", level.endsuperdisableweaponbr.ref_1196b["scr_brtdm_disable_radiant_vehicles"]) == 1) {
-    return var1;
+    return var_1;
   }
 
-  foreach(var3 in var0) {
-    if(distance2dsquared(var3.origin, level.endsuperdisableweaponbr.circlecenter) < level.endsuperdisableweaponbr.gulagfadetoblackspectatorsofplayer * level.endsuperdisableweaponbr.gulagfadetoblackspectatorsofplayer) {
-      var1 = var3;
+  foreach(var_3 in var_0) {
+    if(distance2dsquared(var_3.origin, level.endsuperdisableweaponbr.circlecenter) < level.endsuperdisableweaponbr.gulagfadetoblackspectatorsofplayer * level.endsuperdisableweaponbr.gulagfadetoblackspectatorsofplayer) {
+      var_1 = var_3;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
 function tokenrespawnwaittime() {
   level waittill("prematch_countdown");
-  var0 = 15000;
-  var1 = 50000;
-  var2 = 5000;
-  var3 = 10;
-  var4 = vectortoangles(level.endsuperdisableweaponbr.ref_136a8["allies"] * -1);
-  var5 = anglesToForward((0, var4[1] + var3, 0));
-  var6 = level.endsuperdisableweaponbr.circlecenter + level.endsuperdisableweaponbr.ref_136a8["allies"] * (level.endsuperdisableweaponbr.gulagfadetoblackspectatorsofplayer + var0) + (0, 0, 1);
-  var7 = level.endsuperdisableweaponbr.circlecenter + var5 * (level.endsuperdisableweaponbr.gulagfadetoblackspectatorsofplayer * 2 + var1);
-  var8 = scripts\engine\trace::create_default_contents(1);
-  var6 = scripts\engine\utility::drop_to_ground(var6, level.endsuperdisableweaponbr.ref_1365e["allies"], -1 * level.endsuperdisableweaponbr.ref_1365e["allies"], undefined, var8);
-  var6 += (0, 0, 1) * (level.endsuperdisableweaponbr.ref_1365e["allies"] + var2);
-  var7 = scripts\engine\utility::drop_to_ground(var7, level.endsuperdisableweaponbr.ref_1365e["allies"], -1 * level.endsuperdisableweaponbr.ref_1365e["allies"], undefined, var8);
-  var7 += (0, 0, 1) * (level.endsuperdisableweaponbr.ref_1365e["allies"] + var2);
-  var9 = spawnStruct();
-  var9.startpt = var6;
-  var9.endpt = var7;
-  var9.angle = vectortoangles(var5);
-  var10 = distance(var9.startpt, var9.endpt);
-  var11 = scripts\mp\gametypes\br_c130::getc130speed();
-  var12 = var10 / var11;
-  var13 = scripts\mp\gametypes\br_c130airdrop::fntrapdeactivation(var9, var10, var11, var12);
-  var13 scripts\mp\gametypes\br_c130airdrop::fob(0);
-  var4 = vectortoangles(level.endsuperdisableweaponbr.ref_136a8["axis"] * -1);
-  var5 = anglesToForward((0, var4[1] + var3, 0));
-  var6 = level.endsuperdisableweaponbr.circlecenter + level.endsuperdisableweaponbr.ref_136a8["axis"] * (level.endsuperdisableweaponbr.gulagfadetoblackspectatorsofplayer + var0) + (0, 0, 1);
-  var7 = level.endsuperdisableweaponbr.circlecenter + var5 * (level.endsuperdisableweaponbr.gulagfadetoblackspectatorsofplayer * 2 + var1);
-  var6 = scripts\engine\utility::drop_to_ground(var6, level.endsuperdisableweaponbr.ref_1365e["axis"], -1 * level.endsuperdisableweaponbr.ref_1365e["axis"], undefined, var8);
-  var6 += (0, 0, 1) * (level.endsuperdisableweaponbr.ref_1365e["axis"] + var2);
-  var7 = scripts\engine\utility::drop_to_ground(var7, level.endsuperdisableweaponbr.ref_1365e["axis"], -1 * level.endsuperdisableweaponbr.ref_1365e["axis"], undefined, var8);
-  var7 += (0, 0, 1) * (level.endsuperdisableweaponbr.ref_1365e["axis"] + var2);
-  var9 = spawnStruct();
-  var9.startpt = var6;
-  var9.endpt = var7;
-  var9.angle = vectortoangles(var5);
-  var10 = distance(var9.startpt, var9.endpt);
-  var11 = scripts\mp\gametypes\br_c130::getc130speed();
-  var12 = var10 / var11;
-  var13 = scripts\mp\gametypes\br_c130airdrop::fntrapdeactivation(var9, var10, var11, var12);
-  var13 scripts\mp\gametypes\br_c130airdrop::fob(0);
+  var_0 = 15000;
+  var_1 = 50000;
+  var_2 = 5000;
+  var_3 = 10;
+  var_4 = vectortoangles(level.endsuperdisableweaponbr.ref_136a8["allies"] * -1);
+  var_5 = anglesToForward((0, var_4[1] + var_3, 0));
+  var_6 = level.endsuperdisableweaponbr.circlecenter + level.endsuperdisableweaponbr.ref_136a8["allies"] * (level.endsuperdisableweaponbr.gulagfadetoblackspectatorsofplayer + var_0) + (0, 0, 1);
+  var_7 = level.endsuperdisableweaponbr.circlecenter + var_5 * (level.endsuperdisableweaponbr.gulagfadetoblackspectatorsofplayer * 2 + var_1);
+  var_8 = scripts\engine\trace::create_default_contents(1);
+  var_6 = scripts\engine\utility::drop_to_ground(var_6, level.endsuperdisableweaponbr.ref_1365e["allies"], -1 * level.endsuperdisableweaponbr.ref_1365e["allies"], undefined, var_8);
+  var_6 += (0, 0, 1) * (level.endsuperdisableweaponbr.ref_1365e["allies"] + var_2);
+  var_7 = scripts\engine\utility::drop_to_ground(var_7, level.endsuperdisableweaponbr.ref_1365e["allies"], -1 * level.endsuperdisableweaponbr.ref_1365e["allies"], undefined, var_8);
+  var_7 += (0, 0, 1) * (level.endsuperdisableweaponbr.ref_1365e["allies"] + var_2);
+  var_9 = spawnStruct();
+  var_9.startpt = var_6;
+  var_9.endpt = var_7;
+  var_9.angle = vectortoangles(var_5);
+  var_10 = distance(var_9.startpt, var_9.endpt);
+  var_11 = scripts\mp\gametypes\br_c130::getc130speed();
+  var_12 = var_10 / var_11;
+  var_13 = scripts\mp\gametypes\br_c130airdrop::fntrapdeactivation(var_9, var_10, var_11, var_12);
+  var_13 scripts\mp\gametypes\br_c130airdrop::fob(0);
+  var_4 = vectortoangles(level.endsuperdisableweaponbr.ref_136a8["axis"] * -1);
+  var_5 = anglesToForward((0, var_4[1] + var_3, 0));
+  var_6 = level.endsuperdisableweaponbr.circlecenter + level.endsuperdisableweaponbr.ref_136a8["axis"] * (level.endsuperdisableweaponbr.gulagfadetoblackspectatorsofplayer + var_0) + (0, 0, 1);
+  var_7 = level.endsuperdisableweaponbr.circlecenter + var_5 * (level.endsuperdisableweaponbr.gulagfadetoblackspectatorsofplayer * 2 + var_1);
+  var_6 = scripts\engine\utility::drop_to_ground(var_6, level.endsuperdisableweaponbr.ref_1365e["axis"], -1 * level.endsuperdisableweaponbr.ref_1365e["axis"], undefined, var_8);
+  var_6 += (0, 0, 1) * (level.endsuperdisableweaponbr.ref_1365e["axis"] + var_2);
+  var_7 = scripts\engine\utility::drop_to_ground(var_7, level.endsuperdisableweaponbr.ref_1365e["axis"], -1 * level.endsuperdisableweaponbr.ref_1365e["axis"], undefined, var_8);
+  var_7 += (0, 0, 1) * (level.endsuperdisableweaponbr.ref_1365e["axis"] + var_2);
+  var_9 = spawnStruct();
+  var_9.startpt = var_6;
+  var_9.endpt = var_7;
+  var_9.angle = vectortoangles(var_5);
+  var_10 = distance(var_9.startpt, var_9.endpt);
+  var_11 = scripts\mp\gametypes\br_c130::getc130speed();
+  var_12 = var_10 / var_11;
+  var_13 = scripts\mp\gametypes\br_c130airdrop::fntrapdeactivation(var_9, var_10, var_11, var_12);
+  var_13 scripts\mp\gametypes\br_c130airdrop::fob(0);
 }
 
 function infil_radio_idle() {
   self endon("death_or_disconnect");
 
   if(isPlayer(self)) {
-    var0 = spawn("script_origin", (0, 0, 0));
-    var0 showonlytoplayer(self);
+    var_0 = spawn("script_origin", (0, 0, 0));
+    var_0 showonlytoplayer(self);
 
     if(isDefined(self.team)) {
-      var1 = scripts\mp\utility\teams::getteamvoiceinfix(self.team);
-      var2 = "dx_mpo_" + var1 + "op_drone_deathchatter";
+      var_1 = scripts\mp\utility\teams::getteamvoiceinfix(self.team);
+      var_2 = "dx_mpo_" + var_1 + "op_drone_deathchatter";
     } else {
-      var2 = "dx_mpo_usop_drone_deathchatter";
+      var_2 = "dx_mpo_usop_drone_deathchatter";
     }
 
-    if(soundexists(var2)) {
-      var2 playLoopSound(var2);
+    if(soundexists(var_2)) {
+      var_2 playLoopSound(var_2);
     } else {
-      var2 playLoopSound("dx_mpo_usop_drone_deathchatter");
+      var_2 playLoopSound("dx_mpo_usop_drone_deathchatter");
     }
 
     scripts\mp\flags::gameflagwait("prematch_done");
     wait 2;
-    var2 stoploopsound(var2);
-    var2 delete();
+    var_2 stoploopsound(var_2);
+    var_2 delete();
     return;
   }
 }
 
-function ref_1411d(var0, var1) {
+function ref_1411d(var_0, var_1) {
   return true;
 }

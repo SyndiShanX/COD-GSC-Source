@@ -10,17 +10,17 @@ function ref_13a9e() {
   }
 }
 
-function getfriendlyplayers(var0, var1) {
+function getfriendlyplayers(var_0, var_1) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("team_utility", "getFriendlyPlayers")) {
-    return [[scripts\cp_mp\utility\script_utility::getsharedfunc("team_utility", "getFriendlyPlayers")]](var0, var1);
+    return [[scripts\cp_mp\utility\script_utility::getsharedfunc("team_utility", "getFriendlyPlayers")]](var_0, var_1);
   }
 
   return [];
 }
 
-function getenemyplayers(var0, var1) {
+function getenemyplayers(var_0, var_1) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("team_utility", "getEnemyPlayers")) {
-    return [[scripts\cp_mp\utility\script_utility::getsharedfunc("team_utility", "getEnemyPlayers")]](var0, var1);
+    return [[scripts\cp_mp\utility\script_utility::getsharedfunc("team_utility", "getEnemyPlayers")]](var_0, var_1);
   }
 
   return [];

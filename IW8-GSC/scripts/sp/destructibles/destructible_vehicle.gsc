@@ -10,10 +10,10 @@ function destructible_vehicle_init() {
 
 function destructible_vehicle_main() {
   waitframe();
-  var0 = getEntArray("scriptable", "code_classname");
+  var_0 = getEntArray("scriptable", "code_classname");
 
-  foreach(var2 in var0) {
-    if(issubstr(var2.model, "veh_") || issubstr(var2.model, "veh8_")) {
+  foreach(var_2 in var_0) {
+    if(issubstr(var_2.model, "veh_") || issubstr(var_2.model, "veh8_")) {
       thread destructible_vehicle_thread();
     }
   }
@@ -23,9 +23,9 @@ function destructible_vehicle_thread() {
   self.destructible_type = "vehicle";
 
   for(;;) {
-    self waittill("scriptableNotification", var0, var1);
+    self waittill("scriptableNotification", var_0, var_1);
 
-    switch (var0) {
+    switch (var_0) {
       case "flareup":
       case "onfire":
         thread burningcar_indicator();

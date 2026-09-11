@@ -3,8 +3,8 @@
  * Script: scripts\sp\equipment\smoke.gsc
 ***********************************************/
 
-function precache(var0) {
-  scripts\sp\equipment\offhands::registeroffhandfirefunc(var0, &smokefiremain);
+function precache(var_0) {
+  scripts\sp\equipment\offhands::registeroffhandfirefunc(var_0, &smokefiremain);
 }
 
-function smokefiremain(var0) {}
+function smokefiremain(var_0) {}

@@ -15,16 +15,16 @@ function setuphudelements() {
   level.iconfriendlycontested = "waypoint_contested_";
 }
 
-function setupobjective(var0, var1, var2) {
-  var3 = spawn("trigger_radius", var0.origin, 0, 90, 128);
-  var3.script_label = var0.script_label;
-  var0 = var3;
-  GscBinSkip1(0x45, 0, spawn("script_model", var0.origin));
+function setupobjective(var_0, var_1, var_2) {
+  var_3 = spawn("trigger_radius", var_0.origin, 0, 90, 128);
+  var_3.script_label = var_0.script_label;
+  var_0 = var_3;
+  GscBinSkip1(0x45, 0, spawn("script_model", var_0.origin));
 }
 
-function ref_14395(var0) {
+function ref_14395(var_0) {
   scripts\mp\flags::gameflagwait("prematch_done");
-  playFX(level.spawnoffsettacinsertmax["blood_floor_hw"], getgroundposition(var0.trigger.origin, 4) + (0, 0, 2));
+  playFX(level.spawnoffsettacinsertmax["blood_floor_hw"], getgroundposition(var_0.trigger.origin, 4) + (0, 0, 2));
 }
 
 function ref_1317d() {
@@ -41,42 +41,42 @@ function ref_1317d() {
   self.scriptable = setupscriptablevisuals(self.visuals[0].origin, self);
 }
 
-function getreservedobjid(var0) {
-  if(var0 == "a") {
-    var1 = 0;
+function getreservedobjid(var_0) {
+  if(var_0 == "a") {
+    var_1 = 0;
   } else {
-    var1 = 1;
+    var_1 = 1;
   }
 
-  return var1;
+  return var_1;
 }
 
-function setupscriptablevisuals(var0, var1) {
-  var2 = var0 + (0, 0, 32);
-  var3 = var0 + (0, 0, -32);
-  var4 = scripts\engine\trace::create_contents(1, 1, 1, 1, 0, 1, 1);
-  var5 = [];
-  var6 = scripts\engine\trace::ray_trace(var2, var3, var5, var4);
-  var1.baseeffectpos = var6["position"];
-  var7 = vectortoangles(var6["normal"]);
-  var1.baseeffectforward = anglesToForward(var7);
-  var1.baseeffectpos = player_give_intel_2_ks(var1);
-  var8 = spawn("script_model", var1.baseeffectpos);
-  var8 setModel("grind_flag_scriptable");
-  var8.angles = generateaxisanglesfromforwardvector(var1.baseeffectforward, var8.angles);
-  return var8;
+function setupscriptablevisuals(var_0, var_1) {
+  var_2 = var_0 + (0, 0, 32);
+  var_3 = var_0 + (0, 0, -32);
+  var_4 = scripts\engine\trace::create_contents(1, 1, 1, 1, 0, 1, 1);
+  var_5 = [];
+  var_6 = scripts\engine\trace::ray_trace(var_2, var_3, var_5, var_4);
+  var_1.baseeffectpos = var_6["position"];
+  var_7 = vectortoangles(var_6["normal"]);
+  var_1.baseeffectforward = anglesToForward(var_7);
+  var_1.baseeffectpos = player_give_intel_2_ks(var_1);
+  var_8 = spawn("script_model", var_1.baseeffectpos);
+  var_8 setModel("grind_flag_scriptable");
+  var_8.angles = generateaxisanglesfromforwardvector(var_1.baseeffectforward, var_8.angles);
+  return var_8;
 }
 
-function player_give_intel_2_ks(var0) {
-  var1 = var0.baseeffectpos;
+function player_give_intel_2_ks(var_0) {
+  var_1 = var_0.baseeffectpos;
 
   if(level.mapname == "mp_village2") {
-    if(var0.trigger.script_label == "b") {
-      var1 = var0.baseeffectpos + (0, 0, 10);
+    if(var_0.trigger.script_label == "b") {
+      var_1 = var_0.baseeffectpos + (0, 0, 10);
     }
   }
 
-  return var1;
+  return var_1;
 }
 
 function activatezone() {
@@ -105,17 +105,17 @@ function setneutral() {
   updateflagstate("idle", 0);
 }
 
-function zone_onusebegin(var0) {
+function zone_onusebegin(var_0) {
   self.didstatusnotify = 0;
-  thread scripts\mp\gameobjects::useobjectdecay(var0.team);
+  thread scripts\mp\gameobjects::useobjectdecay(var_0.team);
 }
 
-function zone_onuseupdate(var0, var1, var2, var3) {
-  var4 = scripts\mp\gameobjects::getownerteam();
+function zone_onuseupdate(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\mp\gameobjects::getownerteam();
 
-  if(var1 > 0.05 && var2 && !self.didstatusnotify) {
-    if(!isagent(var3)) {
-      updateflagcapturestate(var0);
+  if(var_1 > 0.05 && var_2 && !self.didstatusnotify) {
+    if(!isagent(var_3)) {
+      updateflagcapturestate(var_0);
     }
 
     self.didstatusnotify = 1;
@@ -123,27 +123,27 @@ function zone_onuseupdate(var0, var1, var2, var3) {
   }
 }
 
-function zone_onuseend(var0, var1, var2) {
-  var3 = scripts\mp\gameobjects::getownerteam();
+function zone_onuseend(var_0, var_1, var_2) {
+  var_3 = scripts\mp\gameobjects::getownerteam();
 
-  if(var3 == "neutral") {
+  if(var_3 == "neutral") {
     setneutralicons();
     updateflagstate("idle", 0);
     return;
   }
 
   setteamicons();
-  updateflagstate(var3, 0);
+  updateflagstate(var_3, 0);
 }
 
-function zone_onuse(var0) {
-  var1 = var0.team;
-  var2 = scripts\mp\gameobjects::getownerteam();
-  var3 = scripts\mp\utility\game::getotherteam(var1)[0];
-  var4 = gettime();
+function zone_onuse(var_0) {
+  var_1 = var_0.team;
+  var_2 = scripts\mp\gameobjects::getownerteam();
+  var_3 = scripts\mp\utility\game::getotherteam(var_1)[0];
+  var_4 = gettime();
   setteamicons();
-  updateflagstate(var1, 0);
-  scripts\mp\gameobjects::setownerteam(var1);
+  updateflagstate(var_1, 0);
+  scripts\mp\gameobjects::setownerteam(var_1);
 }
 
 function zone_onunoccupied() {
@@ -156,22 +156,22 @@ function zone_oncontested() {
   updateflagstate("contested", 0);
 }
 
-function zone_onuncontested(var0) {
-  var1 = scripts\mp\gameobjects::getownerteam();
+function zone_onuncontested(var_0) {
+  var_1 = scripts\mp\gameobjects::getownerteam();
 
-  if(var0 == "none" || var1 == "neutral") {
+  if(var_0 == "none" || var_1 == "neutral") {
     setneutralicons();
   } else {
     setteamicons();
   }
 
-  var2 = scripts\engine\utility::ter_op(var1 == "neutral", "idle", var1);
-  updateflagstate(var2, 0);
+  var_2 = scripts\engine\utility::ter_op(var_1 == "neutral", "idle", var_1);
+  updateflagstate(var_2, 0);
 }
 
-function setcrankedtimerzonecap(var0) {
-  if(isDefined(level.supportcranked) && level.supportcranked && isDefined(var0.cranked) && var0.cranked) {
-    var0 scripts\mp\cranked::setcrankedplayerbombtimer("assist");
+function setcrankedtimerzonecap(var_0) {
+  if(isDefined(level.supportcranked) && level.supportcranked && isDefined(var_0.cranked) && var_0.cranked) {
+    var_0 scripts\mp\cranked::setcrankedplayerbombtimer("assist");
     return;
   }
 }
@@ -191,15 +191,15 @@ function setcontestedicons() {
   scripts\mp\gameobjects::setobjectivestatusicons(level.iconfriendlycontested);
 }
 
-function updateflagstate(var0, var1) {
-  self.scriptable setscriptablepartstate("flag", var0);
+function updateflagstate(var_0, var_1) {
+  self.scriptable setscriptablepartstate("flag", var_0);
 
-  if(!istrue(var1)) {
+  if(!istrue(var_1)) {
     self.scriptable setscriptablepartstate("pulse", "off");
     return;
   }
 }
 
-function updateflagcapturestate(var0) {
-  self.scriptable setscriptablepartstate("pulse", var0);
+function updateflagcapturestate(var_0) {
+  self.scriptable setscriptablepartstate("pulse", var_0);
 }

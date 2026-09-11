@@ -3,124 +3,124 @@
  * Script: scripts\cp\coop_personal_ents.gsc
 ***********************************************/
 
-function assignpersonalmodelents(var0) {
+function assignpersonalmodelents(var_0) {
   if(getdvarint("scr_use_personal_ents", 1)) {
-    if(!isDefined(var0.personalents) || var0.personalents.size < 1) {
-      var0.personalents = [];
-      var0 scripts\engine\utility::ent_flag_init("personal_ents_updating");
+    if(!isDefined(var_0.personalents) || var_0.personalents.size < 1) {
+      var_0.personalents = [];
+      var_0 scripts\engine\utility::ent_flag_init("personal_ents_updating");
 
-      for(var1 = 0; var1 < 20; var1++) {
-        var2 = spawn("script_model", (0, 0, -5000));
-        var2.ogorigin = (0, 0, -5000);
-        var2 setModel("tag_origin");
-        var2.claimed = 0;
-        var2.used = 0;
-        adjustmodelvis(var0, var2);
-        var0.personalents[var0.personalents.size] = var2;
+      for(var_1 = 0; var_1 < 20; var_1++) {
+        var_2 = spawn("script_model", (0, 0, -5000));
+        var_2.ogorigin = (0, 0, -5000);
+        var_2 setModel("tag_origin");
+        var_2.claimed = 0;
+        var_2.used = 0;
+        adjustmodelvis(var_0, var_2);
+        var_0.personalents[var_0.personalents.size] = var_2;
       }
     }
 
-    local_waittill_any_return_6(var0);
+    local_waittill_any_return_6(var_0);
     thread deletepentsondisconnect(level);
     thread deletepentsonrespawn(level);
     return;
   }
 }
 
-function deletepentsonrespawn(var0) {
-  var0 notify("deletePEntsOnRespawn");
-  var0 endon("deletePEntsOnRespawn");
-  var0 endon("disconnect");
+function deletepentsonrespawn(var_0) {
+  var_0 notify("deletePEntsOnRespawn");
+  var_0 endon("deletePEntsOnRespawn");
+  var_0 endon("disconnect");
   level endon("game_ended");
-  var0 waittill("respawn_player", var1);
+  var_0 waittill("respawn_player", var_1);
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!isDefined(var0.personalents)) {
+  if(!isDefined(var_0.personalents)) {
     return;
   }
 
-  for(var2 = 0; var2 < var0.personalents.size; var2++) {
-    if(isDefined(var0.personalents[var2])) {
-      var0.personalents[var2] delete();
+  for(var_2 = 0; var_2 < var_0.personalents.size; var_2++) {
+    if(isDefined(var_0.personalents[var_2])) {
+      var_0.personalents[var_2] delete();
     }
   }
 
-  var0.personalents = [];
+  var_0.personalents = [];
 }
 
-function deletepentsondisconnect(var0) {
+function deletepentsondisconnect(var_0) {
   level endon("game_ended");
-  var0 notify("deletePEntsOnDisconnect");
-  var0 endon("deletePEntsOnDisconnect");
-  var0 waittill("disconnect");
+  var_0 notify("deletePEntsOnDisconnect");
+  var_0 endon("deletePEntsOnDisconnect");
+  var_0 waittill("disconnect");
 
-  if(!isDefined(var0.personalents)) {
+  if(!isDefined(var_0.personalents)) {
     return;
   }
 
-  for(var1 = 0; var1 < var0.personalents.size; var1++) {
-    if(isDefined(var0.personalents[var1])) {
-      var0.personalents[var1] delete();
+  for(var_1 = 0; var_1 < var_0.personalents.size; var_1++) {
+    if(isDefined(var_0.personalents[var_1])) {
+      var_0.personalents[var_1] delete();
     }
   }
 }
 
-function registerpentparams(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10) {
-  var11 = spawnStruct();
-  var11.type = var1;
-  var11.icon = var2;
-  var11.hintstring = var3;
-  var11.priority = var4;
-  var11.duration = var5;
-  var11.onobstruction = var6;
-  var11.hintdist = var7;
-  var11.hintfov = var8;
-  var11.usedist = var9;
-  var11.usefov = var10;
-  var11.hint_func = level.interactions[var0].hint_func;
-  var11.activation_func = level.interactions[var0].activation_func;
-  level.pentparams[var0] = var11;
-  level.interactions[var0].hint_func = undefined;
-  level.interactions[var0].activation_func = undefined;
+function registerpentparams(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+  var_11 = spawnStruct();
+  var_11.type = var_1;
+  var_11.icon = var_2;
+  var_11.hintstring = var_3;
+  var_11.priority = var_4;
+  var_11.duration = var_5;
+  var_11.onobstruction = var_6;
+  var_11.hintdist = var_7;
+  var_11.hintfov = var_8;
+  var_11.usedist = var_9;
+  var_11.usefov = var_10;
+  var_11.hint_func = level.interactions[var_0].hint_func;
+  var_11.activation_func = level.interactions[var_0].activation_func;
+  level.pentparams[var_0] = var_11;
+  level.interactions[var_0].hint_func = undefined;
+  level.interactions[var_0].activation_func = undefined;
 }
 
-function pentparamsdefined(var0) {
-  return isDefined(level.pentparams[var0]);
+function pentparamsdefined(var_0) {
+  return isDefined(level.pentparams[var_0]);
 }
 
-function getpentparams(var0) {
-  return level.pentparams[var0];
+function getpentparams(var_0) {
+  return level.pentparams[var_0];
 }
 
-function createpenthintobj(var0, var1, var2) {
-  var3 = scripts\cp\utility::createhintobject(var1.origin, var0.type, var0.icon, var0.hintstring, var0.priority, var0.duration, var0.onobstruction, var0.hintdist, var0.hintfov, var0.usedist, var0.usefov);
-  return var3;
+function createpenthintobj(var_0, var_1, var_2) {
+  var_3 = scripts\cp\utility::createhintobject(var_1.origin, var_0.type, var_0.icon, var_0.hintstring, var_0.priority, var_0.duration, var_0.onobstruction, var_0.hintdist, var_0.hintfov, var_0.usedist, var_0.usefov);
+  return var_3;
 }
 
-function addtopersonalinteractionlist(var0) {
-  var0 notify("addToPersonalInteractionList");
+function addtopersonalinteractionlist(var_0) {
+  var_0 notify("addToPersonalInteractionList");
 
-  if(!scripts\engine\utility::array_contains(level.current_personal_interaction_structs, var0)) {
-    level.current_personal_interaction_structs = scripts\engine\utility::array_add(level.current_personal_interaction_structs, var0);
+  if(!scripts\engine\utility::array_contains(level.current_personal_interaction_structs, var_0)) {
+    level.current_personal_interaction_structs = scripts\engine\utility::array_add(level.current_personal_interaction_structs, var_0);
 
     if(scripts\engine\utility::flag_exist("personal_ent_zones_initialized") && scripts\engine\utility::flag("personal_ent_zones_initialized")) {
       if(isDefined(level.personal_ent_zones) && level.personal_ent_zones.size > 0) {
-        foreach(var2 in level.personal_ent_zones) {
-          if(!isDefined(var2.attached_pents)) {
+        foreach(var_2 in level.personal_ent_zones) {
+          if(!isDefined(var_2.attached_pents)) {
             continue;
           }
 
-          if(!isDefined(var0.p_ent_zones)) {
+          if(!isDefined(var_0.p_ent_zones)) {
             continue;
           }
 
-          if(ispointinvolume(var0.origin, var2)) {
-            var2.attached_pents[var2.attached_pents.size] = var0;
-            var0.p_ent_zones[var0.p_ent_zones.size] = var2;
-            var2.attached_pents = scripts\engine\utility::array_remove_duplicates(var2.attached_pents);
+          if(ispointinvolume(var_0.origin, var_2)) {
+            var_2.attached_pents[var_2.attached_pents.size] = var_0;
+            var_0.p_ent_zones[var_0.p_ent_zones.size] = var_2;
+            var_2.attached_pents = scripts\engine\utility::array_remove_duplicates(var_2.attached_pents);
           }
         }
       }
@@ -130,17 +130,17 @@ function addtopersonalinteractionlist(var0) {
   update_special_mode_for_all_players(1);
 }
 
-function removefrompersonalinteractionlist(var0) {
-  var0 notify("removeFromPersonalInteractionList");
+function removefrompersonalinteractionlist(var_0) {
+  var_0 notify("removeFromPersonalInteractionList");
 
-  if(scripts\engine\utility::array_contains(level.current_personal_interaction_structs, var0)) {
-    level.current_personal_interaction_structs = scripts\engine\utility::array_remove(level.current_personal_interaction_structs, var0);
+  if(scripts\engine\utility::array_contains(level.current_personal_interaction_structs, var_0)) {
+    level.current_personal_interaction_structs = scripts\engine\utility::array_remove(level.current_personal_interaction_structs, var_0);
 
     if(scripts\engine\utility::flag_exist("personal_ent_zones_initialized") && scripts\engine\utility::flag("personal_ent_zones_initialized")) {
-      if(isDefined(var0.p_ent_zones)) {
-        foreach(var2 in var0.p_ent_zones) {
-          var2.attached_pents = scripts\engine\utility::array_remove(var2.attached_pents, var0);
-          var2.attached_pents = scripts\engine\utility::array_remove_duplicates(var2.attached_pents);
+      if(isDefined(var_0.p_ent_zones)) {
+        foreach(var_2 in var_0.p_ent_zones) {
+          var_2.attached_pents = scripts\engine\utility::array_remove(var_2.attached_pents, var_0);
+          var_2.attached_pents = scripts\engine\utility::array_remove_duplicates(var_2.attached_pents);
         }
       }
     }
@@ -149,55 +149,55 @@ function removefrompersonalinteractionlist(var0) {
   update_special_mode_for_all_players(1);
 }
 
-function delayed_remove_peent_interaction(var0) {
+function delayed_remove_peent_interaction(var_0) {
   wait 0.25;
-  removefrompersonalinteractionlist(var0);
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(var0);
+  removefrompersonalinteractionlist(var_0);
+  scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
 }
 
-function movepentstostructs(var0) {
-  var0 endon("disconnect");
-  var0 notify("movePEntsToStructs");
-  var0 endon("movePEntsToStructs");
+function movepentstostructs(var_0) {
+  var_0 endon("disconnect");
+  var_0 notify("movePEntsToStructs");
+  var_0 endon("movePEntsToStructs");
   jumpiftrue(scripts\engine\utility::flag("init_interaction_done")) LOC_00000031;
   scripts\engine\utility::flag_wait("init_interaction_done");
 
   for(;;) {
-    if(var0 scripts\engine\utility::ent_flag_exist("personal_ents_updating")) {
-      var0 scripts\engine\utility::ent_flag_set("personal_ents_updating");
+    if(var_0 scripts\engine\utility::ent_flag_exist("personal_ents_updating")) {
+      var_0 scripts\engine\utility::ent_flag_set("personal_ents_updating");
     }
 
-    var6 = 0;
-    var7 = 0;
+    var_6 = 0;
+    var_7 = 0;
 
-    if(isDefined(var0.all_available_pents)) {
-      var8 = var0.all_available_pents;
+    if(isDefined(var_0.all_available_pents)) {
+      var_8 = var_0.all_available_pents;
     } else {
-      var8 = scripts\engine\utility::get_array_of_closest(var0.origin, level.current_personal_interaction_structs, undefined, 100);
+      var_8 = scripts\engine\utility::get_array_of_closest(var_0.origin, level.current_personal_interaction_structs, undefined, 100);
     }
 
-    if(var8.size > 0) {
-      var8 = removeinvalidstructs(var8, var0);
-      resetents(var0, var0, var8);
+    if(var_8.size > 0) {
+      var_8 = removeinvalidstructs(var_8, var_0);
+      resetents(var_0, var_0, var_8);
 
-      foreach(var10 in var8) {
-        var11 = undefined;
+      foreach(var_10 in var_8) {
+        var_11 = undefined;
 
-        if(isDefined(var10.target)) {
-          var11 = scripts\engine\utility::getStruct(var10.target, "targetname");
+        if(isDefined(var_10.target)) {
+          var_11 = scripts\engine\utility::getStruct(var_10.target, "targetname");
         }
 
-        if(hasplayerentattached(var10, var0, var10)) {
-          var12 = getattachedpersonalent(var0, var10);
+        if(hasplayerentattached(var_10, var_0, var_10)) {
+          var_12 = getattachedpersonalent(var_0, var_10);
 
-          if(isDefined(var12)) {
-            if(isDefined(var10.pentmodel) && var10.pentmodel != var12.model) {
-              var12 setModel(var10.pentmodel);
+          if(isDefined(var_12)) {
+            if(isDefined(var_10.pentmodel) && var_10.pentmodel != var_12.model) {
+              var_12 setModel(var_10.pentmodel);
             }
 
-            if(istrue(var0.force_p_ent_reset)) {
-              if(struct_has_advanced_settings(var10)) {
-                thread pentadvancedoptions(var12, 0, var10, var12, var0);
+            if(istrue(var_0.force_p_ent_reset)) {
+              if(struct_has_advanced_settings(var_10)) {
+                thread pentadvancedoptions(var_12, 0, var_10, var_12, var_0);
               }
             }
           }
@@ -205,36 +205,36 @@ function movepentstostructs(var0) {
           continue;
         }
 
-        var12 = getunclaimedpersonalent(var0, var8);
+        var_12 = getunclaimedpersonalent(var_0, var_8);
 
-        if(isDefined(var12)) {
-          var10.awaitingpent = 1;
-          var12 dontinterpolate();
+        if(isDefined(var_12)) {
+          var_10.awaitingpent = 1;
+          var_12 dontinterpolate();
 
-          if(isDefined(var11)) {
-            var12.origin = var11.origin;
+          if(isDefined(var_11)) {
+            var_12.origin = var_11.origin;
 
-            if(isDefined(var11.angles)) {
-              var12.angles = var11.angles;
+            if(isDefined(var_11.angles)) {
+              var_12.angles = var_11.angles;
             } else {
-              var12.angles = (0, 0, 0);
+              var_12.angles = (0, 0, 0);
             }
           } else {
-            var12.origin = var10.origin;
+            var_12.origin = var_10.origin;
 
-            if(isDefined(var10.angles)) {
-              var12.angles = var10.angles;
+            if(isDefined(var_10.angles)) {
+              var_12.angles = var_10.angles;
             } else {
-              var12.angles = (0, 0, 0);
+              var_12.angles = (0, 0, 0);
             }
           }
 
-          if(isDefined(var10.pentmodel)) {
-            thread pentdelaysetModel(var0, var12, var10);
+          if(isDefined(var_10.pentmodel)) {
+            thread pentdelaysetModel(var_0, var_12, var_10);
           }
 
-          if(struct_has_advanced_settings(var10)) {
-            thread pentadvancedoptions(var12, 0, var10, var12, var0);
+          if(struct_has_advanced_settings(var_10)) {
+            thread pentadvancedoptions(var_12, 0, var_10, var_12, var_0);
             LOC_0000022e:
           }
           LOC_0000022e:
@@ -243,33 +243,33 @@ function movepentstostructs(var0) {
       }
     }
 
-    var0.force_p_ent_reset = undefined;
+    var_0.force_p_ent_reset = undefined;
     wait 0.25;
 
-    if(var0 scripts\engine\utility::ent_flag_exist("personal_ents_updating")) {
-      var0 scripts\engine\utility::ent_flag_clear("personal_ents_updating");
+    if(var_0 scripts\engine\utility::ent_flag_exist("personal_ents_updating")) {
+      var_0 scripts\engine\utility::ent_flag_clear("personal_ents_updating");
     }
 
-    var0 notify("pEntsUpdated");
-    var0 scripts\engine\utility::waittill_any_in_array_return_no_endon_death(["zone_change", "updatePEnts"]);
+    var_0 notify("pEntsUpdated");
+    var_0 scripts\engine\utility::waittill_any_in_array_return_no_endon_death(["zone_change", "updatePEnts"]);
   }
 }
 
-function player_can_see_p_ent(var0, var1) {
-  if(istrue(var0.p_ent_skip_fov)) {
+function player_can_see_p_ent(var_0, var_1) {
+  if(istrue(var_0.p_ent_skip_fov)) {
     return 0;
   }
 
-  if(isDefined(level.pentskipfov) && istrue(level.pentskipfov[var0.script_noteworthy])) {
+  if(isDefined(level.pentskipfov) && istrue(level.pentskipfov[var_0.script_noteworthy])) {
     return 0;
   }
 
-  var2 = scripts\engine\utility::within_fov(var1 getEye(), var1 getplayerangles(), var0.origin, cos(65));
+  var_2 = scripts\engine\utility::within_fov(var_1 getEye(), var_1 getplayerangles(), var_0.origin, cos(65));
 
-  if(var2) {
-    var3 = scripts\engine\trace::ray_trace_passed(var1 getEye(), var0.origin, scripts\engine\utility::array_combine(level.players, var1.personalents));
+  if(var_2) {
+    var_3 = scripts\engine\trace::ray_trace_passed(var_1 getEye(), var_0.origin, scripts\engine\utility::array_combine(level.players, var_1.personalents));
 
-    if(var3) {
+    if(var_3) {
       return 1;
     }
 
@@ -279,174 +279,174 @@ function player_can_see_p_ent(var0, var1) {
   return 0;
 }
 
-function struct_has_advanced_settings(var0) {
-  if(isDefined(var0.script_noteworthy)) {
-    var1 = var0.script_noteworthy;
+function struct_has_advanced_settings(var_0) {
+  if(isDefined(var_0.script_noteworthy)) {
+    var_1 = var_0.script_noteworthy;
   } else {
     return 0;
   }
 
-  if(istrue(var0.pentadvanced)) {
+  if(istrue(var_0.pentadvanced)) {
     return 1;
   }
 
-  if(isDefined(level.normal_mode_activation_funcs[var1])) {
+  if(isDefined(level.normal_mode_activation_funcs[var_1])) {
     return 1;
   }
 
-  if(isDefined(level.special_mode_activation_funcs[var1])) {
+  if(isDefined(level.special_mode_activation_funcs[var_1])) {
     return 1;
   }
 
-  if(pentparamsdefined(var0.script_noteworthy)) {
+  if(pentparamsdefined(var_0.script_noteworthy)) {
     return 1;
   }
 
   return 0;
 }
 
-function pentdelaysetModel(var0, var1, var2) {
+function pentdelaysetModel(var_0, var_1, var_2) {
   level endon("game_ended");
-  var0 endon("disconnect");
-  var1 endon("p_ent_reset");
-  var1.claimed = 1;
-  var1.parentstruct = var2;
+  var_0 endon("disconnect");
+  var_1 endon("p_ent_reset");
+  var_1.claimed = 1;
+  var_1.parentstruct = var_2;
 
-  if(!isDefined(var2.linkedpents)) {
-    var2.linkedpents = [];
+  if(!isDefined(var_2.linkedpents)) {
+    var_2.linkedpents = [];
   }
 
-  var2.linkedpents[var2.linkedpents.size] = var1;
-  var1.used = 1;
+  var_2.linkedpents[var_2.linkedpents.size] = var_1;
+  var_1.used = 1;
 
-  if(player_can_see_p_ent(var2, var0)) {
-    resetpersonalent(var1, var1, var0);
+  if(player_can_see_p_ent(var_2, var_0)) {
+    resetpersonalent(var_1, var_1, var_0);
     return;
   }
 
   wait 0.1;
-  var1 setModel(var2.pentmodel);
+  var_1 setModel(var_2.pentmodel);
 
-  if(isDefined(var2.expectedstate)) {
-    var1 setscriptablepartstate(var2.expectedstate[0], var2.expectedstate[1], 1);
+  if(isDefined(var_2.expectedstate)) {
+    var_1 setscriptablepartstate(var_2.expectedstate[0], var_2.expectedstate[1], 1);
   }
 
-  var2.awaitingpent = undefined;
+  var_2.awaitingpent = undefined;
 }
 
-function update_special_mode_for_player(var0, var1) {
+function update_special_mode_for_player(var_0, var_1) {
   level endon("game_ended");
-  var0 endon("disconnect");
-  var0 notify("update_special_mode_for_player");
-  var0 endon("update_special_mode_for_player");
+  var_0 endon("disconnect");
+  var_0 notify("update_special_mode_for_player");
+  var_0 endon("update_special_mode_for_player");
 
-  if(istrue(var1)) {}
+  if(istrue(var_1)) {}
 
-  if(var0 scripts\engine\utility::ent_flag_exist("personal_ents_updating") && var0 scripts\engine\utility::ent_flag("personal_ents_updating")) {
-    var0 scripts\engine\utility::ent_flag_waitopen("personal_ents_updating");
+  if(var_0 scripts\engine\utility::ent_flag_exist("personal_ents_updating") && var_0 scripts\engine\utility::ent_flag("personal_ents_updating")) {
+    var_0 scripts\engine\utility::ent_flag_waitopen("personal_ents_updating");
   }
 
-  var0 notify("updatePEnts");
+  var_0 notify("updatePEnts");
 }
 
-function update_special_mode_for_all_players(var0) {
+function update_special_mode_for_all_players(var_0) {
   level endon("game_ended");
 
-  foreach(var2 in level.players) {
-    thread update_special_mode_for_player(var2, var0);
+  foreach(var_2 in level.players) {
+    thread update_special_mode_for_player(var_2, var_0);
   }
 }
 
-function resetents(var0, var1) {
-  var2 = [];
-  var3 = undefined;
-  var4 = undefined;
+function resetents(var_0, var_1) {
+  var_2 = [];
+  var_3 = undefined;
+  var_4 = undefined;
 
-  foreach(var6 in var0.personalents) {
-    if(!isent(var6)) {
+  foreach(var_6 in var_0.personalents) {
+    if(!isent(var_6)) {
       continue;
     }
 
-    var7 = 0;
+    var_7 = 0;
 
-    foreach(var4 in var1) {
-      if(isDefined(var4.playeroffset) && isDefined(var4.playeroffset[var0.name])) {
-        if(var6.origin == var4.playeroffset[var0.name]) {
-          var3 = var4.script_noteworthy;
-          var7 = 1;
+    foreach(var_4 in var_1) {
+      if(isDefined(var_4.playeroffset) && isDefined(var_4.playeroffset[var_0.name])) {
+        if(var_6.origin == var_4.playeroffset[var_0.name]) {
+          var_3 = var_4.script_noteworthy;
+          var_7 = 1;
           break;
         }
       }
 
-      if(isDefined(var4.target)) {
-        var9 = scripts\engine\utility::getStruct(var4.target, "targetname");
+      if(isDefined(var_4.target)) {
+        var_9 = scripts\engine\utility::getStruct(var_4.target, "targetname");
 
-        if(isDefined(var9) && var6.origin == var9.origin) {
-          var3 = var4.script_noteworthy;
-          var7 = 1;
+        if(isDefined(var_9) && var_6.origin == var_9.origin) {
+          var_3 = var_4.script_noteworthy;
+          var_7 = 1;
           break;
-        } else if(var5.origin == var3.origin) {
-          var2 = var3.script_noteworthy;
-          var6 = 1;
+        } else if(var_5.origin == var_3.origin) {
+          var_2 = var_3.script_noteworthy;
+          var_6 = 1;
           break;
         }
 
         continue;
       }
 
-      if(var4.origin == var2.origin) {
-        var1 = var2.script_noteworthy;
-        var5 = 1;
+      if(var_4.origin == var_2.origin) {
+        var_1 = var_2.script_noteworthy;
+        var_5 = 1;
         break;
       }
     }
 
-    var6 = undefined;
-    var7 = undefined;
+    var_6 = undefined;
+    var_7 = undefined;
 
-    if(!var5) {
-      if(isDefined(var2) && player_can_see_p_ent(var2, < error > )) {
+    if(!var_5) {
+      if(isDefined(var_2) && player_can_see_p_ent(var_2, < error > )) {
         continue;
       }
 
-      resetpersonalent(var4, var4, < error > );
+      resetpersonalent(var_4, var_4, < error > );
     }
   }
 
-  var3 = undefined;
-  var8 = undefined;
+  var_3 = undefined;
+  var_8 = undefined;
   wait 0.1;
 }
 
-function removeinvalidstructs(var0, var1) {
-  var2 = [];
-  var0 = sortbydistance(var0, var1.origin);
+function removeinvalidstructs(var_0, var_1) {
+  var_2 = [];
+  var_0 = sortbydistance(var_0, var_1.origin);
 
-  foreach(var4 in var0) {
-      if(isDefined(var1.disabled_interactions) && scripts\engine\utility::array_contains(var1.disabled_interactions, var4)) {
+  foreach(var_4 in var_0) {
+      if(isDefined(var_1.disabled_interactions) && scripts\engine\utility::array_contains(var_1.disabled_interactions, var_4)) {
         continue;
       }
 
-      if(isDefined(var4.in_array)) {
-        if(!istrue(var4.in_array)) {
+      if(isDefined(var_4.in_array)) {
+        if(!istrue(var_4.in_array)) {
           continue;
         }
-      } else if(isDefined(level.current_interaction_structs) && !scripts\engine\utility::array_contains(level.current_interaction_structs, var4)) {
+      } else if(isDefined(level.current_interaction_structs) && !scripts\engine\utility::array_contains(level.current_interaction_structs, var_4)) {
         continue;
       }
 
-      if(isDefined(var4.target)) {
-        var5 = scripts\engine\utility::getStructArray(var4.targetname, "targetname");
+      if(isDefined(var_4.target)) {
+        var_5 = scripts\engine\utility::getStructArray(var_4.targetname, "targetname");
 
-        foreach(var7 in var5) {
-          if(isDefined(var7.target) && var7.target == var4.target) {
-            var0 = scripts\engine\utility::array_remove(var0, var7);
+        foreach(var_7 in var_5) {
+          if(isDefined(var_7.target) && var_7.target == var_4.target) {
+            var_0 = scripts\engine\utility::array_remove(var_0, var_7);
           }
         }
 
-        var2 = var4;
+        var_2 = var_4;
 
-        if(var2.size >= 20) {
+        if(var_2.size >= 20) {
           break;
         }
 
@@ -454,7 +454,7 @@ function removeinvalidstructs(var0, var1) {
       }
 
       <
-      error > = var0;
+      error > = var_0;
 
       if( < error > .size >= 20) {
         break;
@@ -463,30 +463,30 @@ function removeinvalidstructs(var0, var1) {
 
     <
     error > = undefined;
-  var1 = undefined;
+  var_1 = undefined;
   return < error > ;
 }
 
-function hasplayerentattached(var0, var1) {
-  foreach(var3 in var0.personalents) {
-    if(isDefined(var1.playeroffset) && isDefined(var1.playeroffset[var0.name])) {
-      if(var3.origin == var1.playeroffset[var0.name]) {
-        var3.used = 1;
+function hasplayerentattached(var_0, var_1) {
+  foreach(var_3 in var_0.personalents) {
+    if(isDefined(var_1.playeroffset) && isDefined(var_1.playeroffset[var_0.name])) {
+      if(var_3.origin == var_1.playeroffset[var_0.name]) {
+        var_3.used = 1;
         return true;
       }
     }
 
-    if(isDefined(var1.target)) {
-      var4 = scripts\engine\utility::getStruct(var1.target, "targetname");
+    if(isDefined(var_1.target)) {
+      var_4 = scripts\engine\utility::getStruct(var_1.target, "targetname");
 
-      if(isDefined(var4) && var3.origin == var4.origin) {
-        var3.used = 1;
+      if(isDefined(var_4) && var_3.origin == var_4.origin) {
+        var_3.used = 1;
         return true;
       }
     }
 
-    if(var3.origin == var1.origin) {
-      var3.used = 1;
+    if(var_3.origin == var_1.origin) {
+      var_3.used = 1;
       return true;
     }
   }
@@ -494,116 +494,116 @@ function hasplayerentattached(var0, var1) {
   return false;
 }
 
-function adjustmodelvis(var0, var1) {
-  foreach(var3 in level.players) {
-    if(var3 == var0) {
-      var1 showtoplayer(var3);
+function adjustmodelvis(var_0, var_1) {
+  foreach(var_3 in level.players) {
+    if(var_3 == var_0) {
+      var_1 showtoplayer(var_3);
       continue;
     }
 
-    var1 hidefromplayer(var3);
+    var_1 hidefromplayer(var_3);
   }
 }
 
-function resetpersonalent(var0, var1) {
-  var0 setModel("tag_origin");
-  var0.claimed = 0;
-  var0.used = 0;
-  var0 dontinterpolate();
-  var0.origin = var0.ogorigin;
+function resetpersonalent(var_0, var_1) {
+  var_0 setModel("tag_origin");
+  var_0.claimed = 0;
+  var_0.used = 0;
+  var_0 dontinterpolate();
+  var_0.origin = var_0.ogorigin;
 
-  if(isDefined(var0.parentstruct)) {
-    if(isDefined(var0.parentstruct.linkedpents)) {
-      if(scripts\engine\utility::array_contains(var0.parentstruct.linkedpents, var0)) {
-        var0.parentstruct.linkedpents = scripts\engine\utility::array_remove(var0.parentstruct.linkedpents, var0);
+  if(isDefined(var_0.parentstruct)) {
+    if(isDefined(var_0.parentstruct.linkedpents)) {
+      if(scripts\engine\utility::array_contains(var_0.parentstruct.linkedpents, var_0)) {
+        var_0.parentstruct.linkedpents = scripts\engine\utility::array_remove(var_0.parentstruct.linkedpents, var_0);
       }
     }
 
-    var0.parentstruct notify("p_ents_updated");
-    var0.parentstruct = undefined;
+    var_0.parentstruct notify("p_ents_updated");
+    var_0.parentstruct = undefined;
   }
 
-  var0 notify("p_ent_reset");
+  var_0 notify("p_ent_reset");
 }
 
-function getattachedpersonalent(var0, var1) {
-  var2 = [];
+function getattachedpersonalent(var_0, var_1) {
+  var_2 = [];
 
-  foreach(var4 in var0.personalents) {
-    if(isDefined(var1.playeroffset) && isDefined(var1.playeroffset[var0.name])) {
-      if(var4.origin == var1.playeroffset[var0.name]) {
-        return var4;
+  foreach(var_4 in var_0.personalents) {
+    if(isDefined(var_1.playeroffset) && isDefined(var_1.playeroffset[var_0.name])) {
+      if(var_4.origin == var_1.playeroffset[var_0.name]) {
+        return var_4;
       }
     }
 
-    if(isDefined(var1.target)) {
-      var5 = scripts\engine\utility::getStruct(var1.target, "targetname");
+    if(isDefined(var_1.target)) {
+      var_5 = scripts\engine\utility::getStruct(var_1.target, "targetname");
 
-      if(isDefined(var5) && var4.origin == var5.origin) {
-        return var4;
+      if(isDefined(var_5) && var_4.origin == var_5.origin) {
+        return var_4;
       }
     }
 
-    if(var4.origin == var1.origin) {
-      return var4;
+    if(var_4.origin == var_1.origin) {
+      return var_4;
     }
   }
 
   return undefined;
 }
 
-function getunclaimedpersonalent(var0, var1) {
-  var2 = [];
+function getunclaimedpersonalent(var_0, var_1) {
+  var_2 = [];
 
-  foreach(var4 in var0.personalents) {
-    var5 = 0;
+  foreach(var_4 in var_0.personalents) {
+    var_5 = 0;
 
-    foreach(var7 in var1) {
-      if(isDefined(var7.playeroffset) && isDefined(var7.playeroffset[var0.name])) {
-        if(var4.origin == var7.playeroffset[var0.name]) {
-          var5 = 1;
+    foreach(var_7 in var_1) {
+      if(isDefined(var_7.playeroffset) && isDefined(var_7.playeroffset[var_0.name])) {
+        if(var_4.origin == var_7.playeroffset[var_0.name]) {
+          var_5 = 1;
           break;
         }
       }
 
-      if(isDefined(var7.target)) {
-        var8 = scripts\engine\utility::getStruct(var7.target, "targetname");
+      if(isDefined(var_7.target)) {
+        var_8 = scripts\engine\utility::getStruct(var_7.target, "targetname");
 
-        if(isDefined(var8) && var4.origin == var8.origin) {
-          var5 = 1;
+        if(isDefined(var_8) && var_4.origin == var_8.origin) {
+          var_5 = 1;
           break;
         }
       }
 
-      if(var3.origin == var6.origin) {
-        var4 = 1;
+      if(var_3.origin == var_6.origin) {
+        var_4 = 1;
         break;
       }
     }
 
-    var5 = undefined;
-    var7 = undefined;
+    var_5 = undefined;
+    var_7 = undefined;
 
-    if(!var4) {
-      return var3;
+    if(!var_4) {
+      return var_3;
     }
   }
 
-  var2 = undefined;
-  var9 = undefined;
+  var_2 = undefined;
+  var_9 = undefined;
   return undefined;
 }
 
-function watchforplayerzonechange(var0) {
+function watchforplayerzonechange(var_0) {
   level endon("game_ended");
-  var0 endon("disconnect");
+  var_0 endon("disconnect");
   scripts\engine\utility::flag_wait("init_interaction_done");
-  var1 = getEnt("zone_change", "targetname");
+  var_1 = getEnt("zone_change", "targetname");
 
-  if(isDefined(var1)) {
+  if(isDefined(var_1)) {
     for(;;) {
-      if(var0 istouching(var1)) {
-        var0 notify("rave_status_changed");
+      if(var_0 istouching(var_1)) {
+        var_0 notify("rave_status_changed");
         wait 1;
         continue;
       }
@@ -615,80 +615,80 @@ function watchforplayerzonechange(var0) {
   }
 }
 
-function pentadvancedoptions(var0, var1, var2, var3, var4) {
-  var5 = scripts\engine\utility::ter_op(isDefined(var1.name), var1.name, var1.script_noteworthy);
+function pentadvancedoptions(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = scripts\engine\utility::ter_op(isDefined(var_1.name), var_1.name, var_1.script_noteworthy);
 
-  if(isDefined(level.normal_mode_activation_funcs[var5])) {
-    if(isDefined(var4)) {
-      var2[[level.normal_mode_activation_funcs[var5]]](var2, var4, 0, var3);
+  if(isDefined(level.normal_mode_activation_funcs[var_5])) {
+    if(isDefined(var_4)) {
+      var_2[[level.normal_mode_activation_funcs[var_5]]](var_2, var_4, 0, var_3);
     } else {
-      var2 thread[[level.normal_mode_activation_funcs[var5]]](var2, var1, 0, var3);
+      var_2 thread[[level.normal_mode_activation_funcs[var_5]]](var_2, var_1, 0, var_3);
     }
   }
 
-  if(pentparamsdefined(var1.script_noteworthy)) {
-    var6 = createpenthintobj(getpentparams(var1.script_noteworthy), var1, undefined);
-    var2.hintobj = var6;
+  if(pentparamsdefined(var_1.script_noteworthy)) {
+    var_6 = createpenthintobj(getpentparams(var_1.script_noteworthy), var_1, undefined);
+    var_2.hintobj = var_6;
 
-    foreach(var8 in level.players) {
-      if(var8 == var3) {
-        var6 enableplayeruse(var3);
+    foreach(var_8 in level.players) {
+      if(var_8 == var_3) {
+        var_6 enableplayeruse(var_3);
         continue;
       }
 
-      var6 disableplayeruse(var8);
+      var_6 disableplayeruse(var_8);
     }
 
-    thread watch_for_player_trigger(var2, var1, var3, var6);
-    thread reset_struct_when_pent_moves(var2, var1, var3, var6);
-    thread watch_for_hintstring_updates(var2, var1, var3, var6);
+    thread watch_for_player_trigger(var_2, var_1, var_3, var_6);
+    thread reset_struct_when_pent_moves(var_2, var_1, var_3, var_6);
+    thread watch_for_hintstring_updates(var_2, var_1, var_3, var_6);
     return;
   }
 }
 
-function reset_struct_when_pent_moves(var0, var1, var2, var3) {
-  var0 notify("reset_struct_when_pent_moves");
-  var0 endon("reset_struct_when_pent_moves");
-  var1 notify("reset_struct_when_pent_moves_" + var2.name);
-  var1 endon("reset_struct_when_pent_moves_" + var2.name);
+function reset_struct_when_pent_moves(var_0, var_1, var_2, var_3) {
+  var_0 notify("reset_struct_when_pent_moves");
+  var_0 endon("reset_struct_when_pent_moves");
+  var_1 notify("reset_struct_when_pent_moves_" + var_2.name);
+  var_1 endon("reset_struct_when_pent_moves_" + var_2.name);
   level endon("game_ended");
-  scripts\engine\utility::waittill_any_ents(var0, "p_ent_reset", var1, "remove_from_current_interaction_list", var2, "remove_from_current_interaction_list_for_player_" + var2.name);
+  scripts\engine\utility::waittill_any_ents(var_0, "p_ent_reset", var_1, "remove_from_current_interaction_list", var_2, "remove_from_current_interaction_list_for_player_" + var_2.name);
 
-  if(isDefined(var3) && var3 != var0) {
-    var3 delete();
-  } else if(isDefined(var3)) {
-    var3 scripts\cp\utility::clearhintobject(var3);
+  if(isDefined(var_3) && var_3 != var_0) {
+    var_3 delete();
+  } else if(isDefined(var_3)) {
+    var_3 scripts\cp\utility::clearhintobject(var_3);
   }
 
-  if(isDefined(var0.hintobj)) {
-    var0.hintobj = undefined;
+  if(isDefined(var_0.hintobj)) {
+    var_0.hintobj = undefined;
   }
 
-  if(isDefined(var0.collision)) {
-    var0.collision delete();
+  if(isDefined(var_0.collision)) {
+    var_0.collision delete();
   }
 
-  if(isDefined(var1.collision)) {
-    var1.collision delete();
+  if(isDefined(var_1.collision)) {
+    var_1.collision delete();
   }
 
-  scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(var1, var2);
+  scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(var_1, var_2);
   update_special_mode_for_all_players(1);
 }
 
-function local_waittill_any_return_6(var0) {
-  foreach(var2 in level.players) {
-    if(var2 == var0) {
+function local_waittill_any_return_6(var_0) {
+  foreach(var_2 in level.players) {
+    if(var_2 == var_0) {
       continue;
     }
 
-    if(isDefined(var2.personalents)) {
-      for(var3 = 0; var3 < var2.personalents.size; var3++) {
-        if(isDefined(var2.personalents[var3])) {
-          var2.personalents[var3] disableplayeruse(var0);
+    if(isDefined(var_2.personalents)) {
+      for(var_3 = 0; var_3 < var_2.personalents.size; var_3++) {
+        if(isDefined(var_2.personalents[var_3])) {
+          var_2.personalents[var_3] disableplayeruse(var_0);
 
-          if(isDefined(var2.personalents[var3].hintobj)) {
-            var2.personalents[var3].hintobj disableplayeruse(var0);
+          if(isDefined(var_2.personalents[var_3].hintobj)) {
+            var_2.personalents[var_3].hintobj disableplayeruse(var_0);
           }
         }
       }
@@ -696,32 +696,32 @@ function local_waittill_any_return_6(var0) {
   }
 }
 
-function watch_for_player_trigger(var0, var1, var2, var3) {
-  var1 notify("watch_for_player_trigger_" + var2.name);
-  var1 endon("watch_for_player_trigger_" + var2.name);
-  var0 notify("watch_for_player_trigger");
-  var0 endon("watch_for_player_trigger");
-  var0 endon("p_ent_reset");
-  var4 = getpentinteractionusefunc(var1);
-  var0.hintobj = var3;
+function watch_for_player_trigger(var_0, var_1, var_2, var_3) {
+  var_1 notify("watch_for_player_trigger_" + var_2.name);
+  var_1 endon("watch_for_player_trigger_" + var_2.name);
+  var_0 notify("watch_for_player_trigger");
+  var_0 endon("watch_for_player_trigger");
+  var_0 endon("p_ent_reset");
+  var_4 = getpentinteractionusefunc(var_1);
+  var_0.hintobj = var_3;
 
-  if(isDefined(var4)) {
+  if(isDefined(var_4)) {
     for(;;) {
-      var3 makeusable();
+      var_3 makeusable();
 
-      foreach(var6 in level.players) {
-        if(var6 == var2) {
-          var3 enableplayeruse(var2);
+      foreach(var_6 in level.players) {
+        if(var_6 == var_2) {
+          var_3 enableplayeruse(var_2);
           continue;
         }
 
-        var3 disableplayeruse(var6);
+        var_3 disableplayeruse(var_6);
       }
 
-      var3 waittill("trigger", var8);
+      var_3 waittill("trigger", var_8);
 
-      if(isPlayer(var8)) {
-        level thread[[var4]](var1, var2);
+      if(isPlayer(var_8)) {
+        level thread[[var_4]](var_1, var_2);
       }
     }
 
@@ -729,53 +729,53 @@ function watch_for_player_trigger(var0, var1, var2, var3) {
   }
 }
 
-function getpentinteractionusefunc(var0) {
-  if(isDefined(level.pentparams[var0.script_noteworthy].activation_func)) {
-    return level.pentparams[var0.script_noteworthy].activation_func;
+function getpentinteractionusefunc(var_0) {
+  if(isDefined(level.pentparams[var_0.script_noteworthy].activation_func)) {
+    return level.pentparams[var_0.script_noteworthy].activation_func;
   }
 
-  if(isDefined(level.interactions[var0.script_noteworthy].activation_func)) {
-    return level.interactions[var0.script_noteworthy].activation_func;
+  if(isDefined(level.interactions[var_0.script_noteworthy].activation_func)) {
+    return level.interactions[var_0.script_noteworthy].activation_func;
   }
 
   return undefined;
 }
 
-function update_pent_hintstring(var0, var1) {
-  var0.hintstring = var1;
-  var0 notify("pent_update_hint", var1);
+function update_pent_hintstring(var_0, var_1) {
+  var_0.hintstring = var_1;
+  var_0 notify("pent_update_hint", var_1);
 }
 
-function watch_for_hintstring_updates(var0, var1, var2, var3) {
-  var1 endon("watch_for_player_trigger_" + var2.name);
-  var0 endon("watch_for_player_trigger");
-  var0 endon("p_ent_reset");
+function watch_for_hintstring_updates(var_0, var_1, var_2, var_3) {
+  var_1 endon("watch_for_player_trigger_" + var_2.name);
+  var_0 endon("watch_for_player_trigger");
+  var_0 endon("p_ent_reset");
 
   for(;;) {
-    var1 waittill("pent_update_hint", var4);
+    var_1 waittill("pent_update_hint", var_4);
 
-    if(!hasplayerentattached(var2, var1)) {
+    if(!hasplayerentattached(var_2, var_1)) {
       return;
     }
 
-    var3 setHintString(var4);
+    var_3 setHintString(var_4);
   }
 }
 
-function player_run_pent_updates(var0) {
+function player_run_pent_updates(var_0) {
   if(isDefined(level.personal_ent_zones)) {
-    thread update_pents_from_volumes(var0);
+    thread update_pents_from_volumes(var_0);
     return;
   }
 
-  thread update_pents_global(var0);
+  thread update_pents_global(var_0);
 }
 
-function update_pents_from_volumes(var0) {
+function update_pents_from_volumes(var_0) {
   level endon("game_ended");
-  var0 notify("update_pents_from_volumes");
-  var0 endon("update_pents_from_volumes");
-  var0 endon("disconnect");
+  var_0 notify("update_pents_from_volumes");
+  var_0 endon("update_pents_from_volumes");
+  var_0 endon("disconnect");
 
   if(!scripts\engine\utility::flag_exist("personal_ent_zones_initialized")) {
     return;
@@ -784,24 +784,24 @@ function update_pents_from_volumes(var0) {
   scripts\engine\utility::flag_wait("personal_ent_zones_initialized");
 
   for(;;) {
-    var0.all_available_pents = [];
+    var_0.all_available_pents = [];
 
-    foreach(var2 in level.personal_ent_zones) {
-      if(ispointinvolume(var0.origin, var2)) {
-        var0.all_available_pents = scripts\engine\utility::array_combine(var0.all_available_pents, var2.attached_pents);
+    foreach(var_2 in level.personal_ent_zones) {
+      if(ispointinvolume(var_0.origin, var_2)) {
+        var_0.all_available_pents = scripts\engine\utility::array_combine(var_0.all_available_pents, var_2.attached_pents);
       }
     }
 
     wait 1;
-    update_special_mode_for_player(var0);
+    update_special_mode_for_player(var_0);
   }
 }
 
-function update_pents_global(var0) {
+function update_pents_global(var_0) {
   level endon("game_ended");
-  var0 notify("update_pents_from_volumes");
-  var0 endon("update_pents_from_volumes");
-  var0 endon("disconnect");
+  var_0 notify("update_pents_from_volumes");
+  var_0 endon("update_pents_from_volumes");
+  var_0 endon("disconnect");
 
   if(!scripts\engine\utility::flag_exist("personal_ent_zones_initialized")) {
     return;
@@ -811,31 +811,31 @@ function update_pents_global(var0) {
 
   for(;;) {
     wait 1;
-    update_special_mode_for_player(var0);
+    update_special_mode_for_player(var_0);
   }
 }
 
 function init_personal_ent_zones() {
-  var0 = level.current_personal_interaction_structs;
-  var1 = getEntArray("p_ent_zone", "targetname");
+  var_0 = level.current_personal_interaction_structs;
+  var_1 = getEntArray("p_ent_zone", "targetname");
 
-  foreach(var3 in var1) {
-    var3.attached_pents = [];
+  foreach(var_3 in var_1) {
+    var_3.attached_pents = [];
 
-    foreach(var5 in var0) {
-      if(!isDefined(var5.p_ent_zones)) {
-        var5.p_ent_zones = [];
+    foreach(var_5 in var_0) {
+      if(!isDefined(var_5.p_ent_zones)) {
+        var_5.p_ent_zones = [];
       }
 
-      if(ispointinvolume(var5.origin, var3)) {
-        var3.attached_pents[var3.attached_pents.size] = var5;
-        var5.p_ent_zones[var5.p_ent_zones.size] = var3;
+      if(ispointinvolume(var_5.origin, var_3)) {
+        var_3.attached_pents[var_3.attached_pents.size] = var_5;
+        var_5.p_ent_zones[var_5.p_ent_zones.size] = var_3;
       }
     }
   }
 
-  if(var1.size > 0) {
-    level.personal_ent_zones = var1;
+  if(var_1.size > 0) {
+    level.personal_ent_zones = var_1;
   }
 
   scripts\engine\utility::flag_set("personal_ent_zones_initialized");

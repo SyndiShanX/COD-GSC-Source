@@ -17,20 +17,20 @@ function ref_14161() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_damage", "giveAward", &ref_14153);
 }
 
-function ref_14154(var0, var1, var2) {
-  if(istrue(var2)) {
-    scripts\mp\rank::scoreeventpopup(var0);
+function ref_14154(var_0, var_1, var_2) {
+  if(istrue(var_2)) {
+    scripts\mp\rank::scoreeventpopup(var_0);
     return;
   }
 
-  scripts\mp\utility\points::giveunifiedpoints(var0, var1);
+  scripts\mp\utility\points::giveunifiedpoints(var_0, var_1);
 }
 
-function ref_14153(var0, var1, var2) {
-  thread scripts\mp\events::killeventtextpopup(var0);
+function ref_14153(var_0, var_1, var_2) {
+  thread scripts\mp\events::killeventtextpopup(var_0);
 
-  if(!istrue(var2)) {
-    scripts\mp\awards::givemidmatchaward(var0, undefined, undefined, undefined, undefined, undefined, undefined, undefined, var1);
+  if(!istrue(var_2)) {
+    scripts\mp\awards::givemidmatchaward(var_0, undefined, undefined, undefined, undefined, undefined, undefined, undefined, var_1);
     return;
   }
 }

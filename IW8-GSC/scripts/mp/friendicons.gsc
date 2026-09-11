@@ -54,41 +54,41 @@ function showfriendicon() {
 }
 
 function updatefriendiconsettings() {
-  var0 = scripts\mp\utility\dvars::getintproperty("scr_drawfriend", level.drawfriend);
+  var_0 = scripts\mp\utility\dvars::getintproperty("scr_drawfriend", level.drawfriend);
 
-  if(level.drawfriend != var0) {
-    level.drawfriend = var0;
+  if(level.drawfriend != var_0) {
+    level.drawfriend = var_0;
     updatefriendicons();
     return;
   }
 }
 
 function updatefriendicons() {
-  var0 = level.players;
+  var_0 = level.players;
 
-  for(var1 = 0; var1 < var0.size; var1++) {
-    var2 = var0[var1];
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    var_2 = var_0[var_1];
 
-    if(isDefined(var2.pers["team"]) && var2.pers["team"] != "spectator" && var2.sessionstate == "playing") {
+    if(isDefined(var_2.pers["team"]) && var_2.pers["team"] != "spectator" && var_2.sessionstate == "playing") {
       if(level.drawfriend) {
-        if(var2.pers["team"] == "allies") {
-          var2.headicon = game["headicon_allies"];
-          var2.headiconteam = "allies";
+        if(var_2.pers["team"] == "allies") {
+          var_2.headicon = game["headicon_allies"];
+          var_2.headiconteam = "allies";
         } else {
-          var2.headicon = game["headicon_axis"];
-          var2.headiconteam = "axis";
+          var_2.headicon = game["headicon_axis"];
+          var_2.headiconteam = "axis";
         }
 
         continue;
       }
 
-      var0 = level.players;
+      var_0 = level.players;
 
-      for(var1 = 0; var1 < var0.size; var1++) {
-        var2 = var0[var1];
+      for(var_1 = 0; var_1 < var_0.size; var_1++) {
+        var_2 = var_0[var_1];
 
-        if(isDefined(var2.pers["team"]) && var2.pers["team"] != "spectator" && var2.sessionstate == "playing") {
-          var2.headicon = "";
+        if(isDefined(var_2.pers["team"]) && var_2.pers["team"] != "spectator" && var_2.sessionstate == "playing") {
+          var_2.headicon = "";
         }
       }
     }

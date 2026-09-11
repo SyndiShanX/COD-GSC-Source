@@ -10,22 +10,22 @@ function init() {
 
   level.petconsts = [];
 
-  for(var0 = 0;; var0++) {
-    var1 = tablelookupbyrow("mp/petWatchTable.csv", var0, 1);
-    var1 = int(var1);
-    var2 = spawnStruct();
-    var2.phasetime = int(tablelookupbyrow("mp/petWatchTable.csv", var0, 2));
-    var2.bonustimemax = int(tablelookupbyrow("mp/petWatchTable.csv", var0, 3));
-    var2.boredomrate = int(tablelookupbyrow("mp/petWatchTable.csv", var0, 4));
-    var2.dirtyrate = int(tablelookupbyrow("mp/petWatchTable.csv", var0, 5));
-    var2.unrulyrate = int(tablelookupbyrow("mp/petWatchTable.csv", var0, 6));
-    var2.hungryrate = int(tablelookupbyrow("mp/petWatchTable.csv", var0, 7));
-    var2.bonustype = tablelookupbyrow("mp/petWatchTable.csv", var0, 8);
-    var2.boredstart = int(tablelookupbyrow("mp/petWatchTable.csv", var0, 9));
-    var2.dirtystart = int(tablelookupbyrow("mp/petWatchTable.csv", var0, 10));
-    var2.unrulystart = int(tablelookupbyrow("mp/petWatchTable.csv", var0, 11));
-    var2.hungrystart = int(tablelookupbyrow("mp/petWatchTable.csv", var0, 12));
-    level.petconsts[var1] = var2;
+  for(var_0 = 0;; var_0++) {
+    var_1 = tablelookupbyrow("mp/petWatchTable.csv", var_0, 1);
+    var_1 = int(var_1);
+    var_2 = spawnStruct();
+    var_2.phasetime = int(tablelookupbyrow("mp/petWatchTable.csv", var_0, 2));
+    var_2.bonustimemax = int(tablelookupbyrow("mp/petWatchTable.csv", var_0, 3));
+    var_2.boredomrate = int(tablelookupbyrow("mp/petWatchTable.csv", var_0, 4));
+    var_2.dirtyrate = int(tablelookupbyrow("mp/petWatchTable.csv", var_0, 5));
+    var_2.unrulyrate = int(tablelookupbyrow("mp/petWatchTable.csv", var_0, 6));
+    var_2.hungryrate = int(tablelookupbyrow("mp/petWatchTable.csv", var_0, 7));
+    var_2.bonustype = tablelookupbyrow("mp/petWatchTable.csv", var_0, 8);
+    var_2.boredstart = int(tablelookupbyrow("mp/petWatchTable.csv", var_0, 9));
+    var_2.dirtystart = int(tablelookupbyrow("mp/petWatchTable.csv", var_0, 10));
+    var_2.unrulystart = int(tablelookupbyrow("mp/petWatchTable.csv", var_0, 11));
+    var_2.hungrystart = int(tablelookupbyrow("mp/petWatchTable.csv", var_0, 12));
+    level.petconsts[var_1] = var_2;
   }
 
   LOC_00000152:
@@ -52,9 +52,9 @@ function checkgreenmassacre() {
   level endon("game_ended");
 
   for(;;) {
-    foreach(var1 in level.players) {
-      if(isDefined(var1.petwatch)) {
-        feedaction(var1);
+    foreach(var_1 in level.players) {
+      if(isDefined(var_1.petwatch)) {
+        feedaction(var_1);
       }
     }
 
@@ -62,14 +62,14 @@ function checkgreenmassacre() {
   }
 }
 
-function setstate(var0, var1) {
-  self setclientomnvar("ui_pet_watch_action", var0 * -1);
-  self.petwatch.phase = var0;
+function setstate(var_0, var_1) {
+  self setclientomnvar("ui_pet_watch_action", var_0 * -1);
+  self.petwatch.phase = var_0;
   updateuistate();
 }
 
-function doaction(var0) {
-  switch (var0) {
+function doaction(var_0) {
+  switch (var_0) {
     case 1:
       growpet();
       break;
@@ -95,9 +95,9 @@ function doaction(var0) {
 }
 
 function growpet() {
-  var0 = level.petconsts[self.petwatch.phase].phasetime;
-  self.petwatch.growthtime = var0;
-  debugsetlasttime(var0);
+  var_0 = level.petconsts[self.petwatch.phase].phasetime;
+  self.petwatch.growthtime = var_0;
+  debugsetlasttime(var_0);
 }
 
 function ref_12044() {
@@ -110,10 +110,10 @@ function ref_13e38() {
   self endon("turboPetChallengeWatcher()");
 
   for(;;) {
-    self waittill("luinotifyserver", var0, var1);
+    self waittill("luinotifyserver", var_0, var_1);
 
-    if(var0 == "petwatch_turbo_grow") {
-      switch (var1) {
+    if(var_0 == "petwatch_turbo_grow") {
+      switch (var_1) {
         case 1:
           self reportchallengeuserevent("collect_item", "petwatch_turbo_egg");
           break;
@@ -163,35 +163,35 @@ function ref_13e38() {
       continue;
     }
 
-    if(var0 == "petwatch_turbo_state") {
-      self setclientomnvar("ui_pet_watch_state", var1);
+    if(var_0 == "petwatch_turbo_state") {
+      self setclientomnvar("ui_pet_watch_state", var_1);
     }
   }
 }
 
-function initpet(var0, var1, var2) {
+function initpet(var_0, var_1, var_2) {
   if(!isDefined(self.petwatch)) {
     self setclientomnvar("ui_pet_watch_state", 0);
     self.petwatch = spawnStruct();
-    self.petwatch.ref_12314 = var1;
+    self.petwatch.ref_12314 = var_1;
 
-    if(var1 == "pet_black") {
+    if(var_1 == "pet_black") {
       self.petwatch.ref_12533 = "petWatchDataBlack";
-    } else if(var1 == "pet_turbo") {
+    } else if(var_1 == "pet_turbo") {
       self.petwatch.ref_12533 = "petWatchDataTurbo";
       thread ref_13e38();
     } else {
       self.petwatch.ref_12533 = "petWatchData";
     }
 
-    if(var0 && !istrue(var2)) {
+    if(var_0 && !istrue(var_2)) {
       self setclientomnvar("ui_pet_watch_action", -1);
       setphase(0);
     } else {
       setphase(self getplayerdata("common", self.petwatch.ref_12533, "phase"));
     }
   } else {
-    if(var0) {
+    if(var_0) {
       self setclientomnvar("ui_pet_watch_action", -1);
       setphase(0);
     }
@@ -200,7 +200,7 @@ function initpet(var0, var1, var2) {
       resetpet(1);
     }
 
-    if(!istrue(var0)) {
+    if(!istrue(var_0)) {
       return;
     }
   }
@@ -226,10 +226,10 @@ function initpet(var0, var1, var2) {
     self.petwatch.waittillarenaplayersnotcapturing = self.petwatch.dirty;
     self.petwatch.watch_for_players_in_plane_trigger = self.petwatch.unruly;
     self.petwatch.waittoshow = self.petwatch.hungry;
-    var3 = self.petwatch.reproductionstreak % 10;
-    var4 = var3 / 10;
-    self.petwatch.growthtime += var4;
-    self.petwatch.currentbestdist += var4;
+    var_3 = self.petwatch.reproductionstreak % 10;
+    var_4 = var_3 / 10;
+    self.petwatch.growthtime += var_4;
+    self.petwatch.currentbestdist += var_4;
     self.petwatch.reproductionstreak = int(self.petwatch.reproductionstreak / 10);
     self.petwatch.ref_13f07 = self getplayerdata("common", self.petwatch.ref_12533, "orcaPoints");
     self.petwatch.ref_140e2 = self getplayerdata("common", self.petwatch.ref_12533, "apachePoints");
@@ -256,70 +256,70 @@ function initpet(var0, var1, var2) {
   updateuistate();
 }
 
-function gethours(var0) {
-  var1 = 3600;
-  return int(var0 / var1);
+function gethours(var_0) {
+  var_1 = 3600;
+  return int(var_0 / var_1);
 }
 
-function gethourtime(var0) {
-  var1 = 3600;
-  var2 = 24 * var1;
-  var3 = var2 * 365.25;
-  var4 = var0 / int(var3);
-  var5 = int(var0 % var3) / int(var2);
-  var6 = int(var0 % var2) / int(var1);
-  return int(var6);
+function gethourtime(var_0) {
+  var_1 = 3600;
+  var_2 = 24 * var_1;
+  var_3 = var_2 * 365.25;
+  var_4 = var_0 / int(var_3);
+  var_5 = int(var_0 % var_3) / int(var_2);
+  var_6 = int(var_0 % var_2) / int(var_1);
+  return int(var_6);
 }
 
 function testtiming() {
-  var0 = getsystemtime();
-  var1 = var0 - 300;
-  var2 = var0 - 7200;
-  var3 = var0 - 3480;
-  var4 = var0 - 3720;
-  var5 = var0 - 43200;
-  var6 = var0 - 86400;
-  var7 = var6 - 43200;
-  var8 = var0 - 604800;
-  var9 = hoursawakesincelastupdate(var0, var1).spawn_real_number;
-  var10 = hoursawakesincelastupdate(var0, var3).spawn_real_number;
-  var11 = hoursawakesincelastupdate(var0, var4).spawn_real_number;
-  var12 = hoursawakesincelastupdate(var0, var2).spawn_real_number;
-  var13 = hoursawakesincelastupdate(var0, var5).spawn_real_number;
-  var14 = hoursawakesincelastupdate(var0, var6).spawn_real_number;
-  var15 = hoursawakesincelastupdate(var0, var7).spawn_real_number;
-  var16 = hoursawakesincelastupdate(var0, var8).spawn_real_number;
-  var17 = 1;
+  var_0 = getsystemtime();
+  var_1 = var_0 - 300;
+  var_2 = var_0 - 7200;
+  var_3 = var_0 - 3480;
+  var_4 = var_0 - 3720;
+  var_5 = var_0 - 43200;
+  var_6 = var_0 - 86400;
+  var_7 = var_6 - 43200;
+  var_8 = var_0 - 604800;
+  var_9 = hoursawakesincelastupdate(var_0, var_1).spawn_real_number;
+  var_10 = hoursawakesincelastupdate(var_0, var_3).spawn_real_number;
+  var_11 = hoursawakesincelastupdate(var_0, var_4).spawn_real_number;
+  var_12 = hoursawakesincelastupdate(var_0, var_2).spawn_real_number;
+  var_13 = hoursawakesincelastupdate(var_0, var_5).spawn_real_number;
+  var_14 = hoursawakesincelastupdate(var_0, var_6).spawn_real_number;
+  var_15 = hoursawakesincelastupdate(var_0, var_7).spawn_real_number;
+  var_16 = hoursawakesincelastupdate(var_0, var_8).spawn_real_number;
+  var_17 = 1;
 }
 
 function printplayerdatastats() {
-  var0 = self getplayerdata("common", self.petwatch.ref_12533, "phase");
-  var1 = self getplayerdata("common", self.petwatch.ref_12533, "lastUpdateTime");
-  var2 = self getplayerdata("common", self.petwatch.ref_12533, "boredDmg");
-  var3 = self getplayerdata("common", self.petwatch.ref_12533, "dirtyDmg");
-  var4 = self getplayerdata("common", self.petwatch.ref_12533, "unrulyDmg");
-  var5 = self getplayerdata("common", self.petwatch.ref_12533, "hungryDmg");
-  var6 = self getplayerdata("common", self.petwatch.ref_12533, "bonusTime");
-  var7 = self getplayerdata("common", self.petwatch.ref_12533, "charged");
-  var8 = self getplayerdata("common", self.petwatch.ref_12533, "growthTime");
-  var9 = self getplayerdata("common", self.petwatch.ref_12533, "reproductionStreak");
-  var10 = self getplayerdata("common", self.petwatch.ref_12533, "damage");
-  var11 = self getplayerdata("common", self.petwatch.ref_12533, "orcaPoints");
-  var12 = self getplayerdata("common", self.petwatch.ref_12533, "apachePoints");
-  var13 = self getplayerdata("common", self.petwatch.ref_12533, "dragonPoints");
-  var14 = self getplayerdata("common", self.petwatch.ref_12533, "killstreakCharge");
-  var15 = self getplayerdata("common", self.petwatch.ref_12533, "winGamesCharge");
-  var16 = self getplayerdata("common", self.petwatch.ref_12533, "objectiveScoreCharge");
-  var17 = self getplayerdata("common", self.petwatch.ref_12533, "killsCharge");
-  var18 = self getplayerdata("common", self.petwatch.ref_12533, "topKillstreakCharge");
-  var19 = self getplayerdata("common", self.petwatch.ref_12533, "nukeCharge");
-  var20 = self getplayerdata("common", self.petwatch.ref_12533, "winGamesTop3");
-  var21 = self getplayerdata("common", self.petwatch.ref_12533, "plantsCharge");
-  var22 = self getplayerdata("common", self.petwatch.ref_12533, "executionsCharge");
+  var_0 = self getplayerdata("common", self.petwatch.ref_12533, "phase");
+  var_1 = self getplayerdata("common", self.petwatch.ref_12533, "lastUpdateTime");
+  var_2 = self getplayerdata("common", self.petwatch.ref_12533, "boredDmg");
+  var_3 = self getplayerdata("common", self.petwatch.ref_12533, "dirtyDmg");
+  var_4 = self getplayerdata("common", self.petwatch.ref_12533, "unrulyDmg");
+  var_5 = self getplayerdata("common", self.petwatch.ref_12533, "hungryDmg");
+  var_6 = self getplayerdata("common", self.petwatch.ref_12533, "bonusTime");
+  var_7 = self getplayerdata("common", self.petwatch.ref_12533, "charged");
+  var_8 = self getplayerdata("common", self.petwatch.ref_12533, "growthTime");
+  var_9 = self getplayerdata("common", self.petwatch.ref_12533, "reproductionStreak");
+  var_10 = self getplayerdata("common", self.petwatch.ref_12533, "damage");
+  var_11 = self getplayerdata("common", self.petwatch.ref_12533, "orcaPoints");
+  var_12 = self getplayerdata("common", self.petwatch.ref_12533, "apachePoints");
+  var_13 = self getplayerdata("common", self.petwatch.ref_12533, "dragonPoints");
+  var_14 = self getplayerdata("common", self.petwatch.ref_12533, "killstreakCharge");
+  var_15 = self getplayerdata("common", self.petwatch.ref_12533, "winGamesCharge");
+  var_16 = self getplayerdata("common", self.petwatch.ref_12533, "objectiveScoreCharge");
+  var_17 = self getplayerdata("common", self.petwatch.ref_12533, "killsCharge");
+  var_18 = self getplayerdata("common", self.petwatch.ref_12533, "topKillstreakCharge");
+  var_19 = self getplayerdata("common", self.petwatch.ref_12533, "nukeCharge");
+  var_20 = self getplayerdata("common", self.petwatch.ref_12533, "winGamesTop3");
+  var_21 = self getplayerdata("common", self.petwatch.ref_12533, "plantsCharge");
+  var_22 = self getplayerdata("common", self.petwatch.ref_12533, "executionsCharge");
 }
 
-function testpetdebug(var0) {
-  if(var0 > 16 && !isDefined(self.petwatch)) {
+function testpetdebug(var_0) {
+  if(var_0 > 16 && !isDefined(self.petwatch)) {
     initpet(1, "pet_turbo");
   }
 
@@ -327,7 +327,7 @@ function testpetdebug(var0) {
     return;
   }
 
-  switch (var0) {
+  switch (var_0) {
     case 1:
       testtiming();
       break;
@@ -400,16 +400,16 @@ function testpetdebug(var0) {
   }
 }
 
-function hoursawakesincelastupdate(var0, var1, var2) {
-  var3 = gethourtime(var0);
-  var4 = gethours(var0 - var1);
-  var5 = max(0, var4);
-  var6 = spawnStruct();
-  var6.spawn_real_number = var5;
-  return var6;
+function hoursawakesincelastupdate(var_0, var_1, var_2) {
+  var_3 = gethourtime(var_0);
+  var_4 = gethours(var_0 - var_1);
+  var_5 = max(0, var_4);
+  var_6 = spawnStruct();
+  var_6.spawn_real_number = var_5;
+  return var_6;
 }
 
-function updatepetstatesincelastupdate(var0) {
+function updatepetstatesincelastupdate(var_0) {
   self endon("disconnect");
 }
 
@@ -469,23 +469,23 @@ function bhasriotshieldattached() {
 }
 
 function round_vehicle_logic() {
-  var0 = level.gametype;
+  var_0 = level.gametype;
 
-  if(var0 == "br") {
-    var1 = getDvar("scr_br_gametype", "");
+  if(var_0 == "br") {
+    var_1 = getDvar("scr_br_gametype", "");
 
-    if(var1 != "") {
-      return var1;
+    if(var_1 != "") {
+      return var_1;
     }
   }
 
-  return var0;
+  return var_0;
 }
 
 function below_player_eye_allowance() {
-  var0 = round_vehicle_logic();
+  var_0 = round_vehicle_logic();
 
-  if(level.gametype == "br" && (var0 == "br" || var0 == "jugg" || var0 == "mini")) {
+  if(level.gametype == "br" && (var_0 == "br" || var_0 == "jugg" || var_0 == "mini")) {
     if(isDefined(self.petwatch) && self.petwatch.ref_12314 == "pet_turbo") {
       self setclientomnvar("ui_pet_watch_bonus_earned_1", 90000);
       return;
@@ -507,73 +507,73 @@ function ref_13fbd() {
     return;
   }
 
-  var0 = game["roundsPlayed"];
+  var_0 = game["roundsPlayed"];
 
-  foreach(var2 in level.teamnamelist) {
-    var3 = game["roundsWon"][var2];
-    var4 = var3 / level.winlimit;
-    var5 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getTeamData")]](var2, "players");
+  foreach(var_2 in level.teamnamelist) {
+    var_3 = game["roundsWon"][var_2];
+    var_4 = var_3 / level.winlimit;
+    var_5 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getTeamData")]](var_2, "players");
 
-    foreach(var7 in var5) {
-      if(isDefined(var7.petwatch) && var7.petwatch.ref_12314 == "pet_turbo") {
-        ref_13e23(var7, var4, 2);
+    foreach(var_7 in var_5) {
+      if(isDefined(var_7.petwatch) && var_7.petwatch.ref_12314 == "pet_turbo") {
+        ref_13e23(var_7, var_4, 2);
       }
     }
   }
 }
 
-function ref_13e23(var0, var1) {
+function ref_13e23(var_0, var_1) {
   if(isDefined(self.petwatch) && self.petwatch.ref_12314 == "pet_turbo") {
-    var0 = min(1, var0);
-    self setclientomnvar("ui_pet_watch_bonus_earned_4", 50000 + int(var0 * 10) + var1 * 100);
+    var_0 = min(1, var_0);
+    self setclientomnvar("ui_pet_watch_bonus_earned_4", 50000 + int(var_0 * 10) + var_1 * 100);
     return;
   }
 }
 
-function ref_13c43(var0) {
+function ref_13c43(var_0) {
   if(isDefined(self.petwatch) && self.petwatch.ref_12314 == "pet_turbo") {
-    if(!isDefined(var0.get_search_node_closest_to_spotlight_goal_node)) {
-      var0.get_search_node_closest_to_spotlight_goal_node = [];
-      var0.get_safe_set_spawn_weapons = [];
+    if(!isDefined(var_0.get_search_node_closest_to_spotlight_goal_node)) {
+      var_0.get_search_node_closest_to_spotlight_goal_node = [];
+      var_0.get_safe_set_spawn_weapons = [];
     }
 
-    var1 = -1;
+    var_1 = -1;
 
-    foreach(var3 in var0.get_search_node_closest_to_spotlight_goal_node) {
-      if(var3 == self) {
-        var1 = var4;
+    foreach(var_3 in var_0.get_search_node_closest_to_spotlight_goal_node) {
+      if(var_3 == self) {
+        var_1 = var_4;
         break;
       }
     }
 
-    if(var1 == -1) {
-      var1 = var0.get_search_node_closest_to_spotlight_goal_node.size;
-      var0.get_search_node_closest_to_spotlight_goal_node[var1] = self;
-      var0.get_safe_set_spawn_weapons[var1] = 1;
+    if(var_1 == -1) {
+      var_1 = var_0.get_search_node_closest_to_spotlight_goal_node.size;
+      var_0.get_search_node_closest_to_spotlight_goal_node[var_1] = self;
+      var_0.get_safe_set_spawn_weapons[var_1] = 1;
     } else {
-      var0.get_safe_set_spawn_weapons[var1]++;
+      var_0.get_safe_set_spawn_weapons[var_1]++;
     }
 
-    ref_13e23(var0.get_safe_set_spawn_weapons[var1] / 10, 3);
+    ref_13e23(var_0.get_safe_set_spawn_weapons[var_1] / 10, 3);
     return;
   }
 }
 
 function getfullweaponobjforscriptablepartname() {
   if(isDefined(self.get_search_node_closest_to_spotlight_goal_node)) {
-    var0 = 0;
+    var_0 = 0;
 
-    foreach(var2 in self.get_search_node_closest_to_spotlight_goal_node) {
-      var3 = isDefined(var2.petwatch) && var2.petwatch.ref_12314 == "pet_turbo";
+    foreach(var_2 in self.get_search_node_closest_to_spotlight_goal_node) {
+      var_3 = isDefined(var_2.petwatch) && var_2.petwatch.ref_12314 == "pet_turbo";
 
-      if(!var3) {
+      if(!var_3) {
         continue;
       }
 
-      var0 = self.get_safe_set_spawn_weapons[var4];
+      var_0 = self.get_safe_set_spawn_weapons[var_4];
 
-      if(var0 >= 10) {
-        var2 setclientomnvar("ui_pet_watch_bonus_earned_1", 10000);
+      if(var_0 >= 10) {
+        var_2 setclientomnvar("ui_pet_watch_bonus_earned_1", 10000);
       }
     }
 
@@ -581,19 +581,19 @@ function getfullweaponobjforscriptablepartname() {
   }
 }
 
-function getfullweaponobjforpickup(var0) {
+function getfullweaponobjforpickup(var_0) {
   if(isDefined(self.petwatch) && self.petwatch.ref_12314 == "pet_turbo") {
-    if(isDefined(var0.get_search_node_closest_to_spotlight_goal_node)) {
-      var1 = 0;
+    if(isDefined(var_0.get_search_node_closest_to_spotlight_goal_node)) {
+      var_1 = 0;
 
-      foreach(var3 in var0.get_search_node_closest_to_spotlight_goal_node) {
-        if(var3 == self) {
-          var1 = var0.get_safe_set_spawn_weapons[var4];
+      foreach(var_3 in var_0.get_search_node_closest_to_spotlight_goal_node) {
+        if(var_3 == self) {
+          var_1 = var_0.get_safe_set_spawn_weapons[var_4];
           break;
         }
       }
 
-      if(var1 >= 10) {
+      if(var_1 >= 10) {
         self setclientomnvar("ui_pet_watch_bonus_earned_1", 10000);
         return;
       }
@@ -608,13 +608,13 @@ function getfullweaponobjforpickup(var0) {
 function addnukecharge() {
   if(isDefined(self.petwatch)) {
     self.petwatch.nukecharge++;
-    var0 = 10000 + self.petwatch.nukecharge;
+    var_0 = 10000 + self.petwatch.nukecharge;
 
     if(self.petwatch.ref_12314 == "pet_turbo") {
-      var0 += 100;
+      var_0 += 100;
     }
 
-    self setclientomnvar("ui_pet_watch_bonus_earned_4", var0);
+    self setclientomnvar("ui_pet_watch_bonus_earned_4", var_0);
     return;
   }
 }
@@ -642,10 +642,10 @@ function addplantingcharge() {
   }
 }
 
-function addobjectivescorecharge(var0, var1) {
-  if(isDefined(self.petwatch) && self.petwatch.ref_12314 != "pet_turbo" && !istrue(level.ref_12309[var0]) && !issubstr(var0, "kill")) {
-    self.petwatch.current_zone += var1;
-    self.petwatch.objectivescorecharge += var1;
+function addobjectivescorecharge(var_0, var_1) {
+  if(isDefined(self.petwatch) && self.petwatch.ref_12314 != "pet_turbo" && !istrue(level.ref_12309[var_0]) && !issubstr(var_0, "kill")) {
+    self.petwatch.current_zone += var_1;
+    self.petwatch.objectivescorecharge += var_1;
     self setclientomnvar("ui_pet_watch_bonus_earned_3", 50000 + self.petwatch.objectivescorecharge);
     return;
   }
@@ -699,20 +699,20 @@ function ref_1230a() {
   self endon("disconnect");
   self endon("cancel_pet_plunder_timer");
   self.petwatch.ref_127cf = 1;
-  var0 = 180;
-  var1 = var0 / 5;
+  var_0 = 180;
+  var_1 = var_0 / 5;
 
-  for(var2 = 1; var2 <= 5; var2++) {
-    wait var1;
-    ref_13e23(var2 / 5, 4);
+  for(var_2 = 1; var_2 <= 5; var_2++) {
+    wait var_1;
+    ref_13e23(var_2 / 5, 4);
   }
 
   battle_tracks_vehicleallowlisteningoutsideoccupancy();
 }
 
-function ref_13ffd(var0) {
+function ref_13ffd(var_0) {
   if(isDefined(self.petwatch) && self.petwatch.ref_12314 == "pet_turbo") {
-    ref_13e23(var0, 1);
+    ref_13e23(var_0, 1);
     return;
   }
 }
@@ -739,35 +739,35 @@ function ref_1206d() {
   }
 }
 
-function setphase(var0) {
-  self.petwatch.phase = var0;
-  self.pers["petWatchData_phase"] = var0;
+function setphase(var_0) {
+  self.petwatch.phase = var_0;
+  self.pers["petWatchData_phase"] = var_0;
 }
 
 function updateuistate() {
-  var0 = 0;
+  var_0 = 0;
 
   if(self.petwatch.bored < 0) {
-    var0 += 20;
+    var_0 += 20;
   }
 
   if(self.petwatch.dirty < 0) {
-    var0 += 100;
+    var_0 += 100;
   }
 
   if(self.petwatch.unruly < 0) {
-    var0 += 1000;
+    var_0 += 1000;
   }
 
   if(self.petwatch.hungry < 0) {
-    var0 += 10000;
+    var_0 += 10000;
   }
 
-  var1 = int(self.petwatch.damage / 100) - 1;
-  var1 = int(max(0, min(var1, 9)));
-  var0 += 100000 * var1;
-  var2 = var0 + self.petwatch.phase;
-  self setclientomnvar("ui_pet_watch_state", var2);
+  var_1 = int(self.petwatch.damage / 100) - 1;
+  var_1 = int(max(0, min(var_1, 9)));
+  var_0 += 100000 * var_1;
+  var_2 = var_0 + self.petwatch.phase;
+  self setclientomnvar("ui_pet_watch_state", var_2);
 }
 
 function ref_12c76() {
@@ -802,9 +802,9 @@ function ref_12c76() {
   self.petwatch.executionscharge = 0;
 }
 
-function resetpet(var0, var1) {
-  if(isDefined(var1)) {
-    setphase(var1);
+function resetpet(var_0, var_1) {
+  if(isDefined(var_1)) {
+    setphase(var_1);
   } else {
     setphase(1);
   }
@@ -813,8 +813,8 @@ function resetpet(var0, var1) {
   ref_12c76();
 }
 
-function debugsetlasttime(var0) {
-  self setclientomnvar("ui_pet_watch_action", var0);
+function debugsetlasttime(var_0) {
+  self setclientomnvar("ui_pet_watch_action", var_0);
 }
 
 function feedaction() {
@@ -830,75 +830,75 @@ function feedaction() {
     return;
   }
 
-  var0 = self.petwatch.killstreakcharge * 20;
-  var1 = self.petwatch.wingamescharge * 20;
-  var2 = self.petwatch.objectivescorecharge * 0.5;
-  var3 = self.petwatch.killscharge * 1;
-  var4 = self.petwatch.waittothrowsmoke < var3;
-  var5 = self.petwatch.waittillhuntersdrop < var1;
-  var6 = self.petwatch.waittill_player_uses_assassination_contract < var0;
-  var7 = self.petwatch.watch_for_players_joining < var2;
+  var_0 = self.petwatch.killstreakcharge * 20;
+  var_1 = self.petwatch.wingamescharge * 20;
+  var_2 = self.petwatch.objectivescorecharge * 0.5;
+  var_3 = self.petwatch.killscharge * 1;
+  var_4 = self.petwatch.waittothrowsmoke < var_3;
+  var_5 = self.petwatch.waittillhuntersdrop < var_1;
+  var_6 = self.petwatch.waittill_player_uses_assassination_contract < var_0;
+  var_7 = self.petwatch.watch_for_players_joining < var_2;
 
-  if(!var4 && !var5 && !var6 && !var7) {
+  if(!var_4 && !var_5 && !var_6 && !var_7) {
     return;
   }
 
-  var0 = max(-240, min(var0, 240));
-  var1 = max(-240, min(var1, 240));
-  var2 = max(-240, min(var2, 240));
-  var3 = max(-240, min(var3, 240));
+  var_0 = max(-240, min(var_0, 240));
+  var_1 = max(-240, min(var_1, 240));
+  var_2 = max(-240, min(var_2, 240));
+  var_3 = max(-240, min(var_3, 240));
 
-  if(var5) {
-    var1 = int(var1);
+  if(var_5) {
+    var_1 = int(var_1);
 
-    if(var1 == 0) {
-      var1 = 1;
+    if(var_1 == 0) {
+      var_1 = 1;
     }
 
-    self setclientomnvar("ui_pet_watch_health_dirty", var1);
+    self setclientomnvar("ui_pet_watch_health_dirty", var_1);
   }
 
-  if(var7) {
-    var2 = int(var2);
+  if(var_7) {
+    var_2 = int(var_2);
 
-    if(var2 == 0) {
-      var2 = 1;
+    if(var_2 == 0) {
+      var_2 = 1;
     }
 
-    self setclientomnvar("ui_pet_watch_health_unruly", int(var2));
+    self setclientomnvar("ui_pet_watch_health_unruly", int(var_2));
   }
 
-  if(var4) {
-    var3 = int(var3);
+  if(var_4) {
+    var_3 = int(var_3);
 
-    if(var3 == 0) {
-      var3 = 1;
+    if(var_3 == 0) {
+      var_3 = 1;
     }
 
-    self setclientomnvar("ui_pet_watch_health_hungry", int(var3));
+    self setclientomnvar("ui_pet_watch_health_hungry", int(var_3));
   }
 
-  if(var6) {
-    var0 = int(var0);
+  if(var_6) {
+    var_0 = int(var_0);
 
-    if(var0 == 0) {
-      var0 = 1;
+    if(var_0 == 0) {
+      var_0 = 1;
     }
 
-    self setclientomnvar("ui_pet_watch_health_bored", int(var0));
+    self setclientomnvar("ui_pet_watch_health_bored", int(var_0));
   }
 
-  self.petwatch.waittothrowsmoke = var3;
-  self.petwatch.waittillhuntersdrop = var1;
-  self.petwatch.waittill_player_uses_assassination_contract = var0;
-  self.petwatch.watch_for_players_joining = var2;
+  self.petwatch.waittothrowsmoke = var_3;
+  self.petwatch.waittillhuntersdrop = var_1;
+  self.petwatch.waittill_player_uses_assassination_contract = var_0;
+  self.petwatch.watch_for_players_joining = var_2;
   self.petwatch.topkillstreakcharge = 0;
   self.petwatch.nukecharge = 0;
   self.petwatch.wingamestop3 = 0;
   self.petwatch.plantscharge = 0;
   self.petwatch.executionscharge = 0;
-  self.petwatch.bored = var0;
-  self.petwatch.dirty = var1;
-  self.petwatch.unruly = var2;
-  self.petwatch.hungry = var3;
+  self.petwatch.bored = var_0;
+  self.petwatch.dirty = var_1;
+  self.petwatch.unruly = var_2;
+  self.petwatch.hungry = var_3;
 }

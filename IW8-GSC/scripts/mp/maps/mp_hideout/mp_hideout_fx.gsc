@@ -46,15 +46,15 @@ function main() {
 }
 
 function combo_reset() {
-  var0 = getEnt("birds_in_square", "targetname");
+  var_0 = getEnt("birds_in_square", "targetname");
 
   for(;;) {
-    var0 waittill("trigger", var1);
+    var_0 waittill("trigger", var_1);
 
-    if(isPlayer(var1)) {
+    if(isPlayer(var_1)) {
       scripts\engine\utility::exploder("birds_fly");
       playsoundatpos((896, 192, 224), "emt_mp_hideout_birds_flyaway");
-      var0 delete();
+      var_0 delete();
       return;
     }
   }

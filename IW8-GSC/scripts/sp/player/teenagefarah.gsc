@@ -32,9 +32,9 @@ function teenage_farah_cell_setup() {
 
   thread prone_speedup();
   level.player modifybasefov(50, 0.1);
-  var0 = scripts\sp\utility::make_weapon("iw8_gunless_teen_farah");
-  level.player giveweapon(var0);
-  level.player switchtoweapon(var0);
+  var_0 = scripts\sp\utility::make_weapon("iw8_gunless_teen_farah");
+  level.player giveweapon(var_0);
+  level.player switchtoweapon(var_0);
   level.player scripts\common\utility::allow_melee(0, "cell_setup");
   level.player scripts\common\utility::allow_mantle(0, "cell_setup");
 }
@@ -69,9 +69,9 @@ function teenage_farah_stealth_setup() {
     level.player modifybasefov(50, 0.05);
   }
 
-  var0 = scripts\sp\utility::make_weapon("iw8_farahspoon_sp");
-  level.player giveweapon(var0);
-  level.player switchtoweapon(var0);
+  var_0 = scripts\sp\utility::make_weapon("iw8_farahspoon_sp");
+  level.player giveweapon(var_0);
+  level.player switchtoweapon(var_0);
 }
 
 function teenage_farah_combat_setup() {
@@ -96,23 +96,23 @@ function teenage_farah_combat_setup() {
   }
 
   thread prone_speedup();
-  var0 = scripts\sp\utility::make_weapon("iw8_pi_golf21_tfarah");
-  level.player scripts\sp\utility::give_weapon(var0);
-  var1 = scripts\sp\utility::make_weapon("iw8_ar_akilo47_tfarah");
-  level.player giveweapon(var1);
-  level.player switchtoweapon(var1);
+  var_0 = scripts\sp\utility::make_weapon("iw8_pi_golf21_tfarah");
+  level.player scripts\sp\utility::give_weapon(var_0);
+  var_1 = scripts\sp\utility::make_weapon("iw8_ar_akilo47_tfarah");
+  level.player giveweapon(var_1);
+  level.player switchtoweapon(var_1);
   level.player modifybasefov(55, 0.05);
 }
 
-function set_player_viewmodel(var0, var1, var2) {
-  if(isDefined(var0)) {
-    level.player setviewmodel(var0);
+function set_player_viewmodel(var_0, var_1, var_2) {
+  if(isDefined(var_0)) {
+    level.player setviewmodel(var_0);
   }
 
-  if(isDefined(var1)) {}
+  if(isDefined(var_1)) {}
 
-  if(isDefined(var2)) {
-    level.player setshadowmodel(var2);
+  if(isDefined(var_2)) {
+    level.player setshadowmodel(var_2);
     return;
   }
 }

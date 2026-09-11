@@ -5,81 +5,81 @@
 
 function init() {}
 
-function hidehudintermission(var0, var1) {
-  level notify("commandWatcher_" + var0);
-  level endon("commandWatcher_" + var0);
-  setDvar(var0, "");
+function hidehudintermission(var_0, var_1) {
+  level notify("commandWatcher_" + var_0);
+  level endon("commandWatcher_" + var_0);
+  setDvar(var_0, "");
 
   for(;;) {
     waitframe();
-    var2 = getDvar(var0);
+    var_2 = getDvar(var_0);
 
-    if(var2 == "") {
+    if(var_2 == "") {
       continue;
     }
 
-    setDvar(var0, "");
-    var3 = strtok(var2, " ");
+    setDvar(var_0, "");
+    var_3 = strtok(var_2, " ");
 
-    if(!isDefined(var3) || var3.size < 1) {
+    if(!isDefined(var_3) || var_3.size < 1) {
       continue;
     }
 
-    var4 = var3[0];
-    var5 = scripts\engine\utility::array_slice(var3, 1);
-    [[var1]](var4, var5);
+    var_4 = var_3[0];
+    var_5 = scripts\engine\utility::array_slice(var_3, 1);
+    [[var_1]](var_4, var_5);
   }
 }
 
-function setup_level_for_nightvision(var0, var1) {
+function setup_level_for_nightvision(var_0, var_1) {
   if(!isDefined(level.setup_manned_turret)) {
     return;
   }
 
-  foreach(var3 in level.setup_manned_turret) {
-    [[var3]](var0, var1);
+  foreach(var_3 in level.setup_manned_turret) {
+    [[var_3]](var_0, var_1);
   }
 }
 
-function ref_12b21(var0) {
+function ref_12b21(var_0) {
   if(!isDefined(level.setup_manned_turret)) {
     level.setup_manned_turret = [];
   }
 
-  level.setup_manned_turret[level.setup_manned_turret.size] = var0;
+  level.setup_manned_turret[level.setup_manned_turret.size] = var_0;
 }
 
-function setup_lights_in_region(var0, var1) {
-  switch (var0) {
+function setup_lights_in_region(var_0, var_1) {
+  switch (var_0) {
     case "st":
-      thread level_getspawnpoint(var1);
+      thread level_getspawnpoint(var_1);
       break;
     case "payload2":
-      thread scripts\mp\gametypes\br_gametype_payload_dev::ref_12e0a(var1);
+      thread scripts\mp\gametypes\br_gametype_payload_dev::ref_12e0a(var_1);
       break;
     default:
       break;
   }
 }
 
-function level_getspawnpoint(var0) {
+function level_getspawnpoint(var_0) {
   level notify("devScriptedTests");
   level endon("devScriptedTests");
-  var1 = remove_map_hint(var0);
+  var_1 = remove_map_hint(var_0);
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  var2 = [scripts\mp\gametypes\br::createspawnlocation((-21500, 46200, -300), 0, 6000), scripts\mp\gametypes\br::createspawnlocation((51000, -39000, 1401), 0, 4000), scripts\mp\gametypes\br::createspawnlocation((32000, 40000, 767), 0, 5500), scripts\mp\gametypes\br::createspawnlocation((23000, -15000, -158), 0, 6000)];
+  var_2 = [scripts\mp\gametypes\br::createspawnlocation((-21500, 46200, -300), 0, 6000), scripts\mp\gametypes\br::createspawnlocation((51000, -39000, 1401), 0, 4000), scripts\mp\gametypes\br::createspawnlocation((32000, 40000, 767), 0, 5500), scripts\mp\gametypes\br::createspawnlocation((23000, -15000, -158), 0, 6000)];
 
   if(!scripts\cp_mp\utility\game_utility::unlink_on_ai_death()) {
-    var2 = undefined;
+    var_2 = undefined;
   }
 
   if(istrue(level.usegulag)) {
-    foreach(var4 in level.gulag.arenas) {
-      var4.matches = [];
+    foreach(var_4 in level.gulag.arenas) {
+      var_4.matches = [];
     }
 
     level.gulag.arenas = sortbydistance(level.gulag.arenas, level.mapcorners[0].origin);
@@ -107,42 +107,42 @@ function level_getspawnpoint(var0) {
   setDvar("scr_br_hold_in_gulag", 0);
 
   if(isDefined(level.gulag) && istrue(level.gulag.shutdown)) {
-    foreach(var4 in level.gulag.arenas) {
-      var4.shutdown = undefined;
+    foreach(var_4 in level.gulag.arenas) {
+      var_4.shutdown = undefined;
     }
 
     level.gulag.shutdown = undefined;
   }
 
-  foreach(var9 in level.players) {
-    if(var9 calloutmarkerping_getEnt()) {
-      var9 allowmovement(0);
-      var9 allowfire(0);
-      var9 allowmelee(0);
+  foreach(var_9 in level.players) {
+    if(var_9 calloutmarkerping_getEnt()) {
+      var_9 allowmovement(0);
+      var_9 allowfire(0);
+      var_9 allowmelee(0);
     }
 
-    var9.br_infilstarted = undefined;
-    var9.gulag = undefined;
-    var9.jailed = undefined;
-    var9.gulagarena = undefined;
-    var9.ref_14439 = undefined;
-    var9.ref_126cc = undefined;
-    var9.ref_11e80 = undefined;
-    var9.gulagloser = undefined;
-    var9.gulaguses = undefined;
-    var9.ref_119d7 = undefined;
-    var9.set_relic_nuketimer = undefined;
-    var9 notify("gulag_end");
-    var9 notify("last_stand_start");
-    var9 scripts\mp\laststand::playanim_aibegindismountturret("self_revive_success", var9);
-    var9 setstance("stand");
-    var9 calloutmarkerping_getcreatedtime(0);
-    var9 playershow();
-    var9.setspawnpoint = undefined;
+    var_9.br_infilstarted = undefined;
+    var_9.gulag = undefined;
+    var_9.jailed = undefined;
+    var_9.gulagarena = undefined;
+    var_9.ref_14439 = undefined;
+    var_9.ref_126cc = undefined;
+    var_9.ref_11e80 = undefined;
+    var_9.gulagloser = undefined;
+    var_9.gulaguses = undefined;
+    var_9.ref_119d7 = undefined;
+    var_9.set_relic_nuketimer = undefined;
+    var_9 notify("gulag_end");
+    var_9 notify("last_stand_start");
+    var_9 scripts\mp\laststand::playanim_aibegindismountturret("self_revive_success", var_9);
+    var_9 setstance("stand");
+    var_9 calloutmarkerping_getcreatedtime(0);
+    var_9 playershow();
+    var_9.setspawnpoint = undefined;
 
     if(istrue(level.usegulag)) {
-      var9 scripts\mp\gametypes\br_gulag::playerrespawngulagcleanup(0);
-      var9 scripts\mp\gametypes\br_gulag::playergulagarenaready();
+      var_9 scripts\mp\gametypes\br_gulag::playerrespawngulagcleanup(0);
+      var_9 scripts\mp\gametypes\br_gulag::playergulagarenaready();
     }
   }
 
@@ -159,342 +159,342 @@ function level_getspawnpoint(var0) {
   }
 
   if(!isDefined(level.level_killstreak_spawn)) {
-    for(var11 = 0; var11 < level.teamnamelist.size; var11++) {
-      var12 = level.teamnamelist[var11];
+    for(var_11 = 0; var_11 < level.teamnamelist.size; var_11++) {
+      var_12 = level.teamnamelist[var_11];
 
-      if(var12 != var1.team) {
+      if(var_12 != var_1.team) {
         if(!isDefined(level.level_killstreak_spawn)) {
-          level.level_killstreak_spawn = var12;
+          level.level_killstreak_spawn = var_12;
           continue;
         }
 
-        level.level_light = var12;
+        level.level_light = var_12;
         break;
       }
     }
   }
 
-  ref_12d1c(var1, var1.team);
-  ref_12d1c(var1, level.level_killstreak_spawn);
+  ref_12d1c(var_1, var_1.team);
+  ref_12d1c(var_1, level.level_killstreak_spawn);
 
   if(isDefined(level.level_light)) {
-    ref_12d1c(var1, level.level_light);
+    ref_12d1c(var_1, level.level_light);
   }
 
-  var13 = run_current_spawn_group(var1, var1.team);
-  var14 = run_current_spawn_group(var1, level.level_killstreak_spawn);
-  var15 = [];
+  var_13 = run_current_spawn_group(var_1, var_1.team);
+  var_14 = run_current_spawn_group(var_1, level.level_killstreak_spawn);
+  var_15 = [];
 
   if(isDefined(level.level_light)) {
-    var15 = run_current_spawn_group(var1, level.level_light);
+    var_15 = run_current_spawn_group(var_1, level.level_light);
   }
 
-  for(var11 = 0; var11 < var13.size; var11++) {
-    var16 = var13[var11];
-    var17 = var14[var11];
-    var18 = undefined;
+  for(var_11 = 0; var_11 < var_13.size; var_11++) {
+    var_16 = var_13[var_11];
+    var_17 = var_14[var_11];
+    var_18 = undefined;
 
     if(isDefined(level.level_light)) {
-      var18 = var15[var11];
+      var_18 = var_15[var_11];
     }
 
-    var19 = undefined;
+    var_19 = undefined;
 
-    if(isDefined(var2)) {
-      var19 = var2[var11].origin;
+    if(isDefined(var_2)) {
+      var_19 = var_2[var_11].origin;
     } else {
-      var19 = var16.origin;
+      var_19 = var_16.origin;
     }
 
-    ref_126c5(var16, var19, 0);
-    ref_126c5(var17, var19, 1);
+    ref_126c5(var_16, var_19, 0);
+    ref_126c5(var_17, var_19, 1);
 
     if(isDefined(level.level_light)) {
-      ref_126c5(var18, var19, 2);
+      ref_126c5(var_18, var_19, 2);
     }
   }
 
   level.disablespawning = 1;
-  var20 = scripts\mp\utility\game::getlivingplayers();
-  level.totalplayers = var20.size;
-  var1 iprintlnbold("Test ready");
+  var_20 = scripts\mp\utility\game::getlivingplayers();
+  level.totalplayers = var_20.size;
+  var_1 iprintlnbold("Test ready");
   wait 2;
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "killcam1") || calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "killchain") || calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "disconnect1") || calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "disconnect2") || calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "disconnect3")) {
-    killplayer(var1, var1, var14);
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "killcam1") || calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "killchain") || calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "disconnect1") || calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "disconnect2") || calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "disconnect3")) {
+    killplayer(var_1, var_1, var_14);
 
-    if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "disconnect2")) {
-      while(var1.sessionstate != "intermission") {
+    if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "disconnect2")) {
+      while(var_1.sessionstate != "intermission") {
         waitframe();
       }
 
-      while(var1.sessionstate == "intermission") {
+      while(var_1.sessionstate == "intermission") {
         waitframe();
       }
-    } else if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "disconnect3")) {
-      while(var1.sessionstate != "intermission") {
+    } else if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "disconnect3")) {
+      while(var_1.sessionstate != "intermission") {
         waitframe();
       }
 
       wait 0.5;
     } else {
-      scripts\mp\gametypes\br_spectate::ref_143fa(var1);
+      scripts\mp\gametypes\br_spectate::ref_143fa(var_1);
       wait 3;
 
-      if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "disconnect1")) {
-        var1 iprintlnbold("Waiting");
+      if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "disconnect1")) {
+        var_1 iprintlnbold("Waiting");
         wait 10;
       }
     }
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "disconnect1") || calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "disconnect2") || calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "disconnect3")) {
-    var21 = var1 scripts\mp\gametypes\br_spectate::ref_12580();
-    kick(var21 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "disconnect1") || calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "disconnect2") || calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "disconnect3")) {
+    var_21 = var_1 scripts\mp\gametypes\br_spectate::ref_12580();
+    kick(var_21 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "killchain")) {
-    for(var21 = var1 scripts\mp\gametypes\br_spectate::ref_12580(); !isDefined(var21); var21 = var1 scripts\mp\gametypes\br_spectate::ref_12580()) {
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "killchain")) {
+    for(var_21 = var_1 scripts\mp\gametypes\br_spectate::ref_12580(); !isDefined(var_21); var_21 = var_1 scripts\mp\gametypes\br_spectate::ref_12580()) {
       waitframe();
     }
 
-    killplayer(var1, var21, var14);
-    scripts\mp\gametypes\br_spectate::ref_143fa(var1);
+    killplayer(var_1, var_21, var_14);
+    scripts\mp\gametypes\br_spectate::ref_143fa(var_1);
     wait 3;
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "killchain")) {
-    for(var21 = var1 scripts\mp\gametypes\br_spectate::ref_12580(); !isDefined(var21); var21 = var1 scripts\mp\gametypes\br_spectate::ref_12580()) {
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "killchain")) {
+    for(var_21 = var_1 scripts\mp\gametypes\br_spectate::ref_12580(); !isDefined(var_21); var_21 = var_1 scripts\mp\gametypes\br_spectate::ref_12580()) {
       waitframe();
     }
 
-    killplayer(var1, var21, var14);
-    scripts\mp\gametypes\br_spectate::ref_143fa(var1);
+    killplayer(var_1, var_21, var_14);
+    scripts\mp\gametypes\br_spectate::ref_143fa(var_1);
     wait 3;
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "killchain")) {
-    for(var21 = var1 scripts\mp\gametypes\br_spectate::ref_12580(); !isDefined(var21); var21 = var1 scripts\mp\gametypes\br_spectate::ref_12580()) {
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "killchain")) {
+    for(var_21 = var_1 scripts\mp\gametypes\br_spectate::ref_12580(); !isDefined(var_21); var_21 = var_1 scripts\mp\gametypes\br_spectate::ref_12580()) {
       waitframe();
     }
 
-    killplayer(var1, var21, var15);
-    scripts\mp\gametypes\br_spectate::ref_143fa(var1);
+    killplayer(var_1, var_21, var_15);
+    scripts\mp\gametypes\br_spectate::ref_143fa(var_1);
     wait 3;
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "killchain")) {
-    for(var21 = var1 scripts\mp\gametypes\br_spectate::ref_12580(); !isDefined(var21); var21 = var1 scripts\mp\gametypes\br_spectate::ref_12580()) {
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "killchain")) {
+    for(var_21 = var_1 scripts\mp\gametypes\br_spectate::ref_12580(); !isDefined(var_21); var_21 = var_1 scripts\mp\gametypes\br_spectate::ref_12580()) {
       waitframe();
     }
 
-    killplayer(var1, var21, var15);
-    scripts\mp\gametypes\br_spectate::ref_143fa(var1);
+    killplayer(var_1, var_21, var_15);
+    scripts\mp\gametypes\br_spectate::ref_143fa(var_1);
     wait 3;
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "killchain")) {
-    for(var21 = var1 scripts\mp\gametypes\br_spectate::ref_12580(); !isDefined(var21); var21 = var1 scripts\mp\gametypes\br_spectate::ref_12580()) {
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "killchain")) {
+    for(var_21 = var_1 scripts\mp\gametypes\br_spectate::ref_12580(); !isDefined(var_21); var_21 = var_1 scripts\mp\gametypes\br_spectate::ref_12580()) {
       waitframe();
     }
 
-    killplayer(var1, var21, var15);
-    scripts\mp\gametypes\br_spectate::ref_143fa(var1);
+    killplayer(var_1, var_21, var_15);
+    scripts\mp\gametypes\br_spectate::ref_143fa(var_1);
     wait 3;
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "gulag1")) {
-    foreach(var9 in var13) {
-      if(var9 != var1) {
-        var9.br_infilstarted = 1;
-        killplayer(var1, var9, var14);
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "gulag1")) {
+    foreach(var_9 in var_13) {
+      if(var_9 != var_1) {
+        var_9.br_infilstarted = 1;
+        killplayer(var_1, var_9, var_14);
       }
     }
 
     wait 10;
-    killplayer(var1, var1, var14);
+    killplayer(var_1, var_1, var_14);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "gulag2") || calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "gulag3")) {
-    killplayer(var1, var1, var14);
-    var1 waittill("killcam_ended");
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "gulag2") || calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "gulag3")) {
+    killplayer(var_1, var_1, var_14);
+    var_1 waittill("killcam_ended");
     wait 2;
 
-    foreach(var9 in var13) {
-      if(var9 != var1) {
-        var9.br_infilstarted = 1;
-        killplayer(var1, var9, var14);
+    foreach(var_9 in var_13) {
+      if(var_9 != var_1) {
+        var_9.br_infilstarted = 1;
+        killplayer(var_1, var_9, var_14);
       }
     }
 
-    while(!isDefined(var1 getspectatingplayer())) {
+    while(!isDefined(var_1 getspectatingplayer())) {
       waitframe();
     }
 
-    var26 = var1 getspectatingplayer();
-    var26.br_infilstarted = 1;
+    var_26 = var_1 getspectatingplayer();
+    var_26.br_infilstarted = 1;
     wait 1;
 
-    foreach(var9 in var14) {
-      var9.br_infilstarted = 1;
-      killplayer(var1, var9, var15);
+    foreach(var_9 in var_14) {
+      var_9.br_infilstarted = 1;
+      killplayer(var_1, var_9, var_15);
     }
 
-    while(!istrue(var26.gulagarena)) {
+    while(!istrue(var_26.gulagarena)) {
       waitframe();
     }
 
     wait 5;
 
-    if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "gulag2")) {
-      var29 = spawnStruct();
-      var29.playerspawnpos = (26474, -16709, -162);
-      var29.playerspawnangles = (85, 135, 0);
-      var26.setspawnpoint = var29;
+    if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "gulag2")) {
+      var_29 = spawnStruct();
+      var_29.playerspawnpos = (26474, -16709, -162);
+      var_29.playerspawnangles = (85, 135, 0);
+      var_26.setspawnpoint = var_29;
 
-      foreach(var9 in var14) {
-        if(istrue(var9.gulagarena)) {
-          var9.br_infilstarted = 1;
-          killplayer(var1, var9, var15);
+      foreach(var_9 in var_14) {
+        if(istrue(var_9.gulagarena)) {
+          var_9.br_infilstarted = 1;
+          killplayer(var_1, var_9, var_15);
           break;
         }
       }
 
-      while(!var26 islinked()) {
+      while(!var_26 islinked()) {
         waitframe();
       }
 
-      while(var26 islinked()) {
+      while(var_26 islinked()) {
         waitframe();
       }
 
       waitframe();
-      var32 = var26 getplayerangles();
-      var26 setplayerangles((85, var32[1], 0));
+      var_32 = var_26 getplayerangles();
+      var_26 setplayerangles((85, var_32[1], 0));
     } else {
-      killplayer(var1, var26, var15);
+      killplayer(var_1, var_26, var_15);
     }
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "gulag4")) {
-    var1.br_infilstarted = 1;
-    var33 = killplayer(var1, var1, var14);
-    var33.br_infilstarted = 1;
-    killplayer(var1, var33, var13);
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "gulag4")) {
+    var_1.br_infilstarted = 1;
+    var_33 = killplayer(var_1, var_1, var_14);
+    var_33.br_infilstarted = 1;
+    killplayer(var_1, var_33, var_13);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "gulaggulag")) {
-    var34 = getdvarint("scr_br_fc_arena1", 0);
-    var35 = getdvarint("scr_br_fc_arena2", 5);
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "gulaggulag")) {
+    var_34 = getdvarint("scr_br_fc_arena1", 0);
+    var_35 = getdvarint("scr_br_fc_arena2", 5);
     setDvar("scr_br_fc_jailTimeout", 9999);
-    setDvar("scr_br_fc_forceArena", var34);
-    var1.br_infilstarted = 1;
-    var33 = killplayer(var1, var1, var14);
-    setDvar("scr_br_fc_forceArena", var35);
+    setDvar("scr_br_fc_forceArena", var_34);
+    var_1.br_infilstarted = 1;
+    var_33 = killplayer(var_1, var_1, var_14);
+    setDvar("scr_br_fc_forceArena", var_35);
 
-    foreach(var9 in var13) {
-      if(var9 != var1) {
-        var9.br_infilstarted = 1;
-        killplayer(var1, var9, var14);
+    foreach(var_9 in var_13) {
+      if(var_9 != var_1) {
+        var_9.br_infilstarted = 1;
+        killplayer(var_1, var_9, var_14);
       }
     }
 
-    setDvar("scr_br_fc_forceArena", var34);
-    var33.br_infilstarted = 1;
-    killplayer(var1, var33, var15);
+    setDvar("scr_br_fc_forceArena", var_34);
+    var_33.br_infilstarted = 1;
+    killplayer(var_1, var_33, var_15);
 
-    while(!istrue(var1.gulagarena) && !istrue(var33.gulagarena)) {
+    while(!istrue(var_1.gulagarena) && !istrue(var_33.gulagarena)) {
       waitframe();
     }
 
     wait 5;
-    killplayer(var1, var1, undefined, var33);
+    killplayer(var_1, var_1, undefined, var_33);
     setDvar("scr_br_fc_jailTimeout", 90);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "killkill")) {
-    var33 = var14[0];
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "killkill")) {
+    var_33 = var_14[0];
 
-    foreach(var9 in var13) {
-      if(var9 != var1) {
-        killplayer(var1, var9, undefined, var33);
+    foreach(var_9 in var_13) {
+      if(var_9 != var_1) {
+        killplayer(var_1, var_9, undefined, var_33);
       }
     }
 
-    killplayer(var1, var33, undefined, var1);
+    killplayer(var_1, var_33, undefined, var_1);
     wait 10;
-    killplayer(var1, var1, undefined, var33);
+    killplayer(var_1, var_1, undefined, var_33);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "killcam2")) {
-    var33 = killplayer(var1, var1, var14);
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "killcam2")) {
+    var_33 = killplayer(var_1, var_1, var_14);
     wait 3;
-    killplayer(var1, var1.ref_11e80, var14);
+    killplayer(var_1, var_1.ref_11e80, var_14);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "gulag5") || calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "gulag6")) {
-    var40 = undefined;
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "gulag5") || calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "gulag6")) {
+    var_40 = undefined;
 
-    foreach(var9 in var13) {
-      if(!isDefined(var40) && var9 != var1) {
-        var40 = var9;
+    foreach(var_9 in var_13) {
+      if(!isDefined(var_40) && var_9 != var_1) {
+        var_40 = var_9;
         continue;
       }
 
-      killplayer(var1, var9, var14);
-      scripts\mp\gametypes\br_spectate::ref_143fa(var9);
+      killplayer(var_1, var_9, var_14);
+      scripts\mp\gametypes\br_spectate::ref_143fa(var_9);
     }
 
-    var40.br_infilstarted = 1;
+    var_40.br_infilstarted = 1;
 
-    if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "gulag6")) {
+    if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "gulag6")) {
       setDvar("scr_br_fc_jailTimeout", 9999);
-      var34 = getdvarint("scr_br_fc_arena1", 5);
-      setDvar("scr_br_fc_forceArena", var34);
-      var40.ref_119d7 = 1;
+      var_34 = getdvarint("scr_br_fc_arena1", 5);
+      setDvar("scr_br_fc_forceArena", var_34);
+      var_40.ref_119d7 = 1;
     }
 
-    killplayer(var1, var40, var14);
+    killplayer(var_1, var_40, var_14);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "gulag7")) {
-    killplayer(var1, var1, var14);
-    var1 waittill("killcam_ended");
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "gulag7")) {
+    killplayer(var_1, var_1, var_14);
+    var_1 waittill("killcam_ended");
     wait 2;
-    var43 = undefined;
+    var_43 = undefined;
 
-    foreach(var9 in var13) {
-      if(var9 != var1) {
-        var9.br_infilstarted = 1;
-        var43 = var9;
-        var43 scripts\mp\gametypes\br_gulag::initplayerjail();
+    foreach(var_9 in var_13) {
+      if(var_9 != var_1) {
+        var_9.br_infilstarted = 1;
+        var_43 = var_9;
+        var_43 scripts\mp\gametypes\br_gulag::initplayerjail();
         break;
       }
     }
 
-    while(!isDefined(var1 getspectatingplayer())) {
+    while(!isDefined(var_1 getspectatingplayer())) {
       waitframe();
     }
 
     wait 1;
-    var46 = undefined;
+    var_46 = undefined;
 
-    foreach(var9 in var14) {
-      var9.br_infilstarted = 1;
-      var46 = var9;
-      killplayer(var1, var9, var15);
+    foreach(var_9 in var_14) {
+      var_9.br_infilstarted = 1;
+      var_46 = var_9;
+      killplayer(var_1, var_9, var_15);
       break;
     }
 
-    while(!istrue(var43.gulagarena) && !istrue(var46.gulagarena)) {
+    while(!istrue(var_43.gulagarena) && !istrue(var_46.gulagarena)) {
       waitframe();
     }
 
     wait 5;
     setDvar("scr_br_gulag_win_hold", 1);
-    killplayer(var1, var46, undefined, var43);
+    killplayer(var_1, var_46, undefined, var_43);
 
-    while(var1 getspectatingplayer() != var43) {
+    while(var_1 getspectatingplayer() != var_43) {
       wait 1;
     }
 
@@ -502,1072 +502,1072 @@ function level_getspawnpoint(var0) {
     setDvar("scr_br_gulag_win_hold", 0);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "gulag8")) {
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "gulag8")) {
     level.gulag.timelimit = 3;
     setDvar("scr_br_fc_overtime", 3);
     setDvar("scr_br_fc_jailTimeout", -1);
-    killplayer(var1, var1, var14);
-    var1 waittill("killcam_ended");
+    killplayer(var_1, var_1, var_14);
+    var_1 waittill("killcam_ended");
     wait 2;
-    var43 = undefined;
+    var_43 = undefined;
 
-    foreach(var9 in var13) {
-      if(var9 != var1) {
-        var9.br_infilstarted = 1;
-        var43 = var9;
-        var43 scripts\mp\gametypes\br_gulag::initplayerjail();
+    foreach(var_9 in var_13) {
+      if(var_9 != var_1) {
+        var_9.br_infilstarted = 1;
+        var_43 = var_9;
+        var_43 scripts\mp\gametypes\br_gulag::initplayerjail();
         break;
       }
     }
 
-    while(!isDefined(var1 getspectatingplayer())) {
+    while(!isDefined(var_1 getspectatingplayer())) {
       waitframe();
     }
 
-    while(var1 getspectatingplayer() != var43) {
+    while(var_1 getspectatingplayer() != var_43) {
       iprintlnbold("Switch to spectating gulag player");
       waitframe();
     }
 
     wait 1;
-    var46 = undefined;
+    var_46 = undefined;
 
-    foreach(var9 in var14) {
-      var9.br_infilstarted = 1;
-      var46 = var9;
-      killplayer(var1, var9, var15);
+    foreach(var_9 in var_14) {
+      var_9.br_infilstarted = 1;
+      var_46 = var_9;
+      killplayer(var_1, var_9, var_15);
       break;
     }
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "gulag9")) {
-    var1.br_infilstarted = 1;
-    var33 = killplayer(var1, var1, var14);
-    var33.br_infilstarted = 1;
-    killplayer(var1, var33, var13);
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "gulag9")) {
+    var_1.br_infilstarted = 1;
+    var_33 = killplayer(var_1, var_1, var_14);
+    var_33.br_infilstarted = 1;
+    killplayer(var_1, var_33, var_13);
 
-    foreach(var9 in var13) {
-      if(var9 != var1) {
-        killplayer(var1, var9, var14);
+    foreach(var_9 in var_13) {
+      if(var_9 != var_1) {
+        killplayer(var_1, var_9, var_14);
       }
     }
 
-    foreach(var9 in var14) {
-      if(var9 != var33) {
-        killplayer(var1, var9, var15);
+    foreach(var_9 in var_14) {
+      if(var_9 != var_33) {
+        killplayer(var_1, var_9, var_15);
       }
     }
 
-    while(!istrue(var1.gulagarena)) {
+    while(!istrue(var_1.gulagarena)) {
       waitframe();
     }
 
     wait 5;
     setDvar("scr_br_gulag_win_hold", 1);
     setDvar("scr_br_spectateMinStreamWaitDebug", 3);
-    killplayer(var1, var1, undefined, var33);
+    killplayer(var_1, var_1, undefined, var_33);
     wait 9;
     setDvar("scr_br_gulag_win_hold", 0);
     setDvar("scr_br_spectateMinStreamWaitDebug", 0);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "gulag10")) {
-    var57 = var14[0];
-    var57.br_infilstarted = 1;
-    killplayer(var1, var57, var15);
-    var58 = var15[0];
-    var58.br_infilstarted = 1;
-    killplayer(var1, var58, var14);
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "gulag10")) {
+    var_57 = var_14[0];
+    var_57.br_infilstarted = 1;
+    killplayer(var_1, var_57, var_15);
+    var_58 = var_15[0];
+    var_58.br_infilstarted = 1;
+    killplayer(var_1, var_58, var_14);
     wait 1;
-    var59 = var1;
-    var59.br_infilstarted = 1;
-    killplayer(var1, var59, var14);
-    var60 = var14[1];
-    var60.br_infilstarted = 1;
-    killplayer(var1, var60, var15);
+    var_59 = var_1;
+    var_59.br_infilstarted = 1;
+    killplayer(var_1, var_59, var_14);
+    var_60 = var_14[1];
+    var_60.br_infilstarted = 1;
+    killplayer(var_1, var_60, var_15);
 
-    while(!istrue(var57.gulagarena) || !istrue(var58.gulagarena) || !istrue(var59.jailed) || !istrue(var60.jailed)) {
+    while(!istrue(var_57.gulagarena) || !istrue(var_58.gulagarena) || !istrue(var_59.jailed) || !istrue(var_60.jailed)) {
       waitframe();
     }
 
     setDvar("scr_br_hold_in_gulag", 1);
-    var61 = var15[1];
-    var61.br_infilstarted = 1;
-    killplayer(var1, var61, var14);
+    var_61 = var_15[1];
+    var_61.br_infilstarted = 1;
+    killplayer(var_1, var_61, var_14);
     wait 1;
 
-    while(istrue(var61.set_relic_steelballs_perks)) {
+    while(istrue(var_61.set_relic_steelballs_perks)) {
       waitframe();
     }
 
     scripts\mp\gametypes\br_gulag::shutdowngulag("circle_index", 0);
     wait 1;
-    kick(var61 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
+    kick(var_61 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
     wait 3;
     setDvar("scr_br_hold_in_gulag", 0);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "gulag11")) {
-    var1.br_infilstarted = 1;
-    ref_1294d(var1, var1, var15);
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "gulag11")) {
+    var_1.br_infilstarted = 1;
+    ref_1294d(var_1, var_1, var_15);
     wait 1;
     scripts\mp\gametypes\br_gulag::shutdowngulag("circle_index", 0);
     wait 1;
-    var1 scripts\mp\laststand::playanim_aibegindismountturret("self_revive_success", var1);
+    var_1 scripts\mp\laststand::playanim_aibegindismountturret("self_revive_success", var_1);
     wait 5;
-    killplayer(var1, var1, var14);
+    killplayer(var_1, var_1, var_14);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "gulagVIP")) {
-    var62 = undefined;
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "gulagVIP")) {
+    var_62 = undefined;
 
-    foreach(var9 in var13) {
-      if(var9 != var1) {
-        var62 = var9;
+    foreach(var_9 in var_13) {
+      if(var_9 != var_1) {
+        var_62 = var_9;
         break;
       }
     }
 
-    var1.br_infilstarted = 1;
-    killplayer(var1, var1, var14);
-    var65 = getdvarfloat("scr_gulagvip_wait", 0.1);
-    wait var65;
-    scripts\mp\gametypes\br_vip_quest::ref_142c5(var1, var62, "vip");
+    var_1.br_infilstarted = 1;
+    killplayer(var_1, var_1, var_14);
+    var_65 = getdvarfloat("scr_gulagvip_wait", 0.1);
+    wait var_65;
+    scripts\mp\gametypes\br_vip_quest::ref_142c5(var_1, var_62, "vip");
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "twooneframe")) {
-    foreach(var9 in var13) {
-      if(var9 != var1) {
-        killplayer(var1, var9, var14);
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "twooneframe")) {
+    foreach(var_9 in var_13) {
+      if(var_9 != var_1) {
+        killplayer(var_1, var_9, var_14);
         break;
       }
     }
 
     wait 5;
 
-    foreach(var9 in var13) {
-      if(isalive(var9)) {
-        vo_nag_mark_crates(var1, var9, var14);
+    foreach(var_9 in var_13) {
+      if(isalive(var_9)) {
+        vo_nag_mark_crates(var_1, var_9, var_14);
       }
     }
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "suicide")) {
-    foreach(var9 in var13) {
-      if(var9 != var1) {
-        killplayer(var1, var9, var14);
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "suicide")) {
+    foreach(var_9 in var_13) {
+      if(var_9 != var_1) {
+        killplayer(var_1, var_9, var_14);
       }
     }
 
     wait 5;
 
-    if(var1 scripts\mp\utility\perk::_hasperk("specialty_pistoldeath")) {
-      var1 scripts\mp\utility\perk::removeperk("specialty_pistoldeath");
+    if(var_1 scripts\mp\utility\perk::_hasperk("specialty_pistoldeath")) {
+      var_1 scripts\mp\utility\perk::removeperk("specialty_pistoldeath");
     }
 
-    var1 suicide();
+    var_1 suicide();
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "team")) {
-    foreach(var9 in var13) {
-      if(var9 != var1) {
-        vo_nag_mark_crates(var1, var9, var14);
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "team")) {
+    foreach(var_9 in var_13) {
+      if(var_9 != var_1) {
+        vo_nag_mark_crates(var_1, var_9, var_14);
       }
     }
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "moving")) {
-    vo_nag_mark_crates(var1, var1, var14);
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "moving")) {
+    vo_nag_mark_crates(var_1, var_1, var_14);
 
-    while(!isDefined(var1.ref_126cc)) {
+    while(!isDefined(var_1.ref_126cc)) {
       waitframe();
     }
 
-    var9 = var1.ref_126cc;
-    var74 = anglesToForward(var9.angles);
-    var75 = getdvarint("testforward", 5);
+    var_9 = var_1.ref_126cc;
+    var_74 = anglesToForward(var_9.angles);
+    var_75 = getdvarint("testforward", 5);
 
-    for(var76 = var1 getspectatingplayer(); !isDefined(var76); var76 = var1 getspectatingplayer()) {
-      var77 = var9.origin + var74 * var75;
-      var9 setOrigin(var77);
+    for(var_76 = var_1 getspectatingplayer(); !isDefined(var_76); var_76 = var_1 getspectatingplayer()) {
+      var_77 = var_9.origin + var_74 * var_75;
+      var_9 setOrigin(var_77);
       waitframe();
     }
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "heli1") || calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "heli2")) {
-    var26 = undefined;
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "heli1") || calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "heli2")) {
+    var_26 = undefined;
 
-    foreach(var9 in var13) {
-      if(var9 != var1) {
-        if(!isDefined(var26)) {
-          var26 = var9;
+    foreach(var_9 in var_13) {
+      if(var_9 != var_1) {
+        if(!isDefined(var_26)) {
+          var_26 = var_9;
           continue;
         }
 
-        vo_nag_mark_crates(var1, var9, var14);
+        vo_nag_mark_crates(var_1, var_9, var_14);
       }
     }
 
     wait 1;
-    vo_nag_mark_crates(var1, var1, var14);
-    scripts\mp\gametypes\br_spectate::ref_143fa(var1);
+    vo_nag_mark_crates(var_1, var_1, var_14);
+    scripts\mp\gametypes\br_spectate::ref_143fa(var_1);
     wait 1;
-    var80 = getarraykeys(level.vehicle.instances["little_bird"]);
-    var81 = level.vehicle.instances["little_bird"][var80[0]];
-    var82 = var81 getlinkedscriptableinstance();
-    var26 setOrigin(var81.origin);
+    var_80 = getarraykeys(level.vehicle.instances["little_bird"]);
+    var_81 = level.vehicle.instances["little_bird"][var_80[0]];
+    var_82 = var_81 getlinkedscriptableinstance();
+    var_26 setOrigin(var_81.origin);
     wait 1;
-    scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_scriptableused(var82, "single", "vehicle_use", var26, 0);
+    scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_scriptableused(var_82, "single", "vehicle_use", var_26, 0);
 
-    if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "heli2")) {
+    if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "heli2")) {
       wait 3;
-      kick(var26 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
+      kick(var_26 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
     }
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "water")) {
-    var1 setOrigin((28252, -32627, -415));
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "water")) {
+    var_1 setOrigin((28252, -32627, -415));
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "disconnectswitch1")) {
-    vo_nag_mark_crates(var1, var1, var14);
-    scripts\mp\gametypes\br_spectate::ref_143fa(var1);
-    var26 = var1 scripts\mp\gametypes\br_spectate::ref_12580();
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "disconnectswitch1")) {
+    vo_nag_mark_crates(var_1, var_1, var_14);
+    scripts\mp\gametypes\br_spectate::ref_143fa(var_1);
+    var_26 = var_1 scripts\mp\gametypes\br_spectate::ref_12580();
 
-    while(!var1 buttonPressed("BUTTON_RSHLDR")) {
+    while(!var_1 buttonPressed("BUTTON_RSHLDR")) {
       waitframe();
     }
 
-    var83 = undefined;
+    var_83 = undefined;
 
-    foreach(var9 in var13) {
-      if(var9 != var1 && var9 != var26) {
-        var83 = var9;
+    foreach(var_9 in var_13) {
+      if(var_9 != var_1 && var_9 != var_26) {
+        var_83 = var_9;
         break;
       }
     }
 
     wait 0.5;
-    kick(var83 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
+    kick(var_83 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "disconnectswitch2")) {
-    vo_nag_mark_crates(var1, var1, var14);
-    scripts\mp\gametypes\br_spectate::ref_143fa(var1);
-    var26 = var1 scripts\mp\gametypes\br_spectate::ref_12580();
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "disconnectswitch2")) {
+    vo_nag_mark_crates(var_1, var_1, var_14);
+    scripts\mp\gametypes\br_spectate::ref_143fa(var_1);
+    var_26 = var_1 scripts\mp\gametypes\br_spectate::ref_12580();
 
-    while(!var1 buttonPressed("BUTTON_RSHLDR")) {
+    while(!var_1 buttonPressed("BUTTON_RSHLDR")) {
       waitframe();
     }
 
     wait 0.5;
-    kick(var26 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
+    kick(var_26 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "endspectate")) {
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "endspectate")) {
     level.br_infils_disabled = 1;
     setDvar("br_minplayers", 2);
     level.gulag.maxuses = 0;
     wait 1;
-    vo_nag_mark_crates(var1, var1, var14);
-    scripts\mp\gametypes\br_spectate::ref_143fa(var1);
+    vo_nag_mark_crates(var_1, var_1, var_14);
+    scripts\mp\gametypes\br_spectate::ref_143fa(var_1);
     wait 2;
 
-    foreach(var9 in var13) {
-      if(var9 != var1) {
-        vo_nag_mark_crates(var1, var9, var14);
+    foreach(var_9 in var_13) {
+      if(var_9 != var_1) {
+        vo_nag_mark_crates(var_1, var_9, var_14);
       }
     }
 
-    scripts\mp\gametypes\br_spectate::ref_143fa(var1);
+    scripts\mp\gametypes\br_spectate::ref_143fa(var_1);
     wait 2;
-    var33 = var1 scripts\mp\gametypes\br_spectate::ref_12580();
-    vo_nag_mark_crates(var1, var33, var15);
-    scripts\mp\gametypes\br_spectate::ref_143fa(var1);
+    var_33 = var_1 scripts\mp\gametypes\br_spectate::ref_12580();
+    vo_nag_mark_crates(var_1, var_33, var_15);
+    scripts\mp\gametypes\br_spectate::ref_143fa(var_1);
     wait 2;
-    var33 = var1 scripts\mp\gametypes\br_spectate::ref_12580();
-    vo_nag_mark_crates(var1, var33, var15);
-    scripts\mp\gametypes\br_spectate::ref_143fa(var1);
+    var_33 = var_1 scripts\mp\gametypes\br_spectate::ref_12580();
+    vo_nag_mark_crates(var_1, var_33, var_15);
+    scripts\mp\gametypes\br_spectate::ref_143fa(var_1);
     wait 2;
-    var33 = var1 scripts\mp\gametypes\br_spectate::ref_12580();
-    vo_nag_mark_crates(var1, var33, var15);
-    scripts\mp\gametypes\br_spectate::ref_143fa(var1);
+    var_33 = var_1 scripts\mp\gametypes\br_spectate::ref_12580();
+    vo_nag_mark_crates(var_1, var_33, var_15);
+    scripts\mp\gametypes\br_spectate::ref_143fa(var_1);
     wait 2;
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "teamwipe1")) {
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "teamwipe1")) {
     setDvar("scr_br_spectateMinStreamWaitDebug", 5);
 
-    foreach(var9 in var13) {
-      if(var9 != var1) {
-        vo_nag_mark_crates(var1, var9, var14);
+    foreach(var_9 in var_13) {
+      if(var_9 != var_1) {
+        vo_nag_mark_crates(var_1, var_9, var_14);
       }
     }
 
     wait getdvarfloat("test_teamwipe", 5);
-    var33 = vo_nag_mark_crates(var1, var1, var14);
+    var_33 = vo_nag_mark_crates(var_1, var_1, var_14);
     wait getdvarfloat("test_teamwipe2", 13);
-    vo_nag_mark_crates(var1, var33, var15);
+    vo_nag_mark_crates(var_1, var_33, var_15);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "deathswitch1")) {
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "deathswitch1")) {
     setDvar("scr_br_spectateMinStreamWaitDebug", 5);
-    vo_nag_mark_crates(var1, var1, var14);
-    scripts\mp\gametypes\br_spectate::ref_143fa(var1);
-    var26 = var1 scripts\mp\gametypes\br_spectate::ref_12580();
+    vo_nag_mark_crates(var_1, var_1, var_14);
+    scripts\mp\gametypes\br_spectate::ref_143fa(var_1);
+    var_26 = var_1 scripts\mp\gametypes\br_spectate::ref_12580();
 
-    while(!var1 buttonPressed("BUTTON_RSHLDR")) {
+    while(!var_1 buttonPressed("BUTTON_RSHLDR")) {
       waitframe();
     }
 
-    var83 = undefined;
+    var_83 = undefined;
 
-    foreach(var9 in var13) {
-      if(var9 != var1 && var9 != var26) {
-        var83 = var9;
+    foreach(var_9 in var_13) {
+      if(var_9 != var_1 && var_9 != var_26) {
+        var_83 = var_9;
         break;
       }
     }
 
     wait 0.5;
-    vo_nag_mark_crates(var1, var83, var14);
+    vo_nag_mark_crates(var_1, var_83, var_14);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "squadwidget")) {
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "squadwidget")) {
     setDvar("scr_br_fc_jailTimeout", 9999);
     setDvar("scr_br_spectateMinStreamWaitDebug", 3);
 
-    foreach(var9 in var13) {
-      if(var9 != var1) {
-        kick(var9 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
+    foreach(var_9 in var_13) {
+      if(var_9 != var_1) {
+        kick(var_9 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
       }
     }
 
     wait 5;
-    var94 = var14[0];
-    var95 = var14[1];
-    var94.br_infilstarted = 1;
-    vo_nag_mark_crates(var1, var94, undefined, var1);
+    var_94 = var_14[0];
+    var_95 = var_14[1];
+    var_94.br_infilstarted = 1;
+    vo_nag_mark_crates(var_1, var_94, undefined, var_1);
     wait getdvarfloat("test_squadwidget", 4);
-    vo_nag_mark_crates(var1, var1, undefined, var95);
+    vo_nag_mark_crates(var_1, var_1, undefined, var_95);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "killall")) {
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "killall")) {
     level.overrideingraceperiod = 1;
-    var96 = var13[1];
+    var_96 = var_13[1];
 
-    foreach(var9 in var13) {
-      if(var9 != var96) {
-        vo_nag_mark_crates(var1, var9, var14);
+    foreach(var_9 in var_13) {
+      if(var_9 != var_96) {
+        vo_nag_mark_crates(var_1, var_9, var_14);
       }
     }
 
-    foreach(var9 in var14) {
-      vo_nag_mark_crates(var1, var9, var15);
+    foreach(var_9 in var_14) {
+      vo_nag_mark_crates(var_1, var_9, var_15);
     }
 
-    foreach(var9 in var15) {
-      vo_nag_mark_crates(var1, var9, var14);
+    foreach(var_9 in var_15) {
+      vo_nag_mark_crates(var_1, var_9, var_14);
     }
 
     wait 10;
-    kick(var96 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
+    kick(var_96 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
     level.overrideingraceperiod = undefined;
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "moneykill")) {
-    foreach(var9 in var13) {
-      if(var9 != var1) {
-        var9 scripts\mp\gametypes\br_plunder::playersetplundercount(45);
-        var9.br_infilstarted = 1;
-        vo_nag_mark_crates(var1, var9, var14);
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "moneykill")) {
+    foreach(var_9 in var_13) {
+      if(var_9 != var_1) {
+        var_9 scripts\mp\gametypes\br_plunder::playersetplundercount(45);
+        var_9.br_infilstarted = 1;
+        vo_nag_mark_crates(var_1, var_9, var_14);
       }
     }
 
     wait 5;
-    vo_nag_mark_crates(var1, var1, var14);
+    vo_nag_mark_crates(var_1, var_1, var_14);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "buyback1")) {
-    ref_12f81(var1.origin, 500);
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "buyback1")) {
+    ref_12f81(var_1.origin, 500);
     setDvar("scr_br_fc_jailTimeout", -1);
-    var105 = var1;
-    var105.br_infilstarted = 1;
-    killplayer(var1, var105, var15);
-    var106 = var15[0];
-    var106.br_infilstarted = 1;
-    killplayer(var1, var106, var15);
+    var_105 = var_1;
+    var_105.br_infilstarted = 1;
+    killplayer(var_1, var_105, var_15);
+    var_106 = var_15[0];
+    var_106.br_infilstarted = 1;
+    killplayer(var_1, var_106, var_15);
 
-    while(!istrue(var105.gulagarena)) {
+    while(!istrue(var_105.gulagarena)) {
       waitframe();
     }
 
     wait 5;
-    vo_nag_mark_crates(var1, var105, []);
+    vo_nag_mark_crates(var_1, var_105, []);
 
-    while(!isDefined(var105 getspectatingplayer())) {
+    while(!isDefined(var_105 getspectatingplayer())) {
       waitframe();
     }
 
-    var107 = var105 getspectatingplayer();
-    var107.br_infilstarted = 1;
-    var61 = undefined;
+    var_107 = var_105 getspectatingplayer();
+    var_107.br_infilstarted = 1;
+    var_61 = undefined;
 
-    foreach(var9 in var13) {
-      if(var9 != var105 && var9 != var107) {
-        var61 = var9;
+    foreach(var_9 in var_13) {
+      if(var_9 != var_105 && var_9 != var_107) {
+        var_61 = var_9;
         break;
       }
     }
 
-    var61 scripts\mp\gametypes\br_plunder::playersetplundercount(45);
-    killplayer(var1, var107, var15);
+    var_61 scripts\mp\gametypes\br_plunder::playersetplundercount(45);
+    killplayer(var_1, var_107, var_15);
 
-    while(!istrue(var107.jailed)) {
+    while(!istrue(var_107.jailed)) {
       waitframe();
     }
 
-    while(!isDefined(var105 getspectatingplayer()) || var105 getspectatingplayer() != var107) {
+    while(!isDefined(var_105 getspectatingplayer()) || var_105 getspectatingplayer() != var_107) {
       waitframe();
     }
 
-    var110 = var15[1];
-    var110.br_infilstarted = 1;
-    killplayer(var1, var110, var15);
+    var_110 = var_15[1];
+    var_110.br_infilstarted = 1;
+    killplayer(var_1, var_110, var_15);
 
-    while(!istrue(var107.gulagarena)) {
+    while(!istrue(var_107.gulagarena)) {
       waitframe();
     }
 
     wait 5;
     setDvar("scr_br_spectateMinStreamWaitDebug", 3);
-    vo_nag_mark_crates(var1, var107, []);
-    var61 scripts\mp\gametypes\br_pickups::addrespawntoken(1);
-    var105 thread scripts\mp\gametypes\br_gulag::playergulagautowin("dev", var61, 0);
+    vo_nag_mark_crates(var_1, var_107, []);
+    var_61 scripts\mp\gametypes\br_pickups::addrespawntoken(1);
+    var_105 thread scripts\mp\gametypes\br_gulag::playergulagautowin("dev", var_61, 0);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "teamwipe2")) {
-    vo_nag_mark_crates(var1, var1, var14);
-    var1 waittill("killcam_ended");
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "teamwipe2")) {
+    vo_nag_mark_crates(var_1, var_1, var_14);
+    var_1 waittill("killcam_ended");
     wait 2;
-    var111 = 0;
+    var_111 = 0;
 
-    foreach(var9 in var13) {
-      if(var9 != var1) {
-        if(var111 > 0) {
-          var9 scripts\mp\gametypes\br_plunder::playersetplundercount(45);
-          var9.br_infilstarted = 1;
+    foreach(var_9 in var_13) {
+      if(var_9 != var_1) {
+        if(var_111 > 0) {
+          var_9 scripts\mp\gametypes\br_plunder::playersetplundercount(45);
+          var_9.br_infilstarted = 1;
         }
 
-        vo_nag_mark_crates(var1, var9, var15);
-        var111++;
+        vo_nag_mark_crates(var_1, var_9, var_15);
+        var_111++;
         wait 5;
       }
     }
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "hvt1")) {
-    ref_12f81(var1.origin, 700);
-    var1.br_infilstarted = 1;
-    var26 = var13[1];
-    var114 = spawnStruct();
-    var114.vip = var26;
-    var114.team = var26.team;
-    var114.isvalidkillcam = "instance";
-    var114.removed = 1;
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "hvt1")) {
+    ref_12f81(var_1.origin, 700);
+    var_1.br_infilstarted = 1;
+    var_26 = var_13[1];
+    var_114 = spawnStruct();
+    var_114.vip = var_26;
+    var_114.team = var_26.team;
+    var_114.isvalidkillcam = "instance";
+    var_114.removed = 1;
     setDvar("scr_br_hold_in_gulag", 2);
-    killplayer(var1, var1, var14);
+    killplayer(var_1, var_1, var_14);
 
-    while(!istrue(var1.set_relic_nuketimer)) {
+    while(!istrue(var_1.set_relic_nuketimer)) {
       waitframe();
     }
 
-    var114 scripts\mp\gametypes\br_vip_quest::ref_142b7();
+    var_114 scripts\mp\gametypes\br_vip_quest::ref_142b7();
     wait 5;
     setDvar("scr_br_hold_in_gulag", 0);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "infilDeath")) {
-    thread ref_14366(getdvarint("test_suicide", 1), var13[1]);
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "infilDeath")) {
+    thread ref_14366(getdvarint("test_suicide", 1), var_13[1]);
     ref_12078();
     level waittill("br_c130_left_bounds");
     wait 2;
-    var13[2].br_infilstarted = 0;
-    vo_nag_mark_crates(var1, var13[2], var14);
+    var_13[2].br_infilstarted = 0;
+    vo_nag_mark_crates(var_1, var_13[2], var_14);
     wait 5;
-    var1.br_infilstarted = 0;
-    vo_nag_mark_crates(var1, var1, var14);
+    var_1.br_infilstarted = 0;
+    vo_nag_mark_crates(var_1, var_1, var_14);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "reconGulag1")) {
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "reconGulag1")) {
     setDvar("br_minplayers", 9);
     wait 5;
-    var94 = var14[0];
-    var95 = var15[0];
-    kick(var14[2] getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
-    kick(var14[1] getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
-    kick(var15[2] getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
-    kick(var15[1] getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
-    kick(var13[2] getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
-    kick(var13[1] getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
+    var_94 = var_14[0];
+    var_95 = var_15[0];
+    kick(var_14[2] getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
+    kick(var_14[1] getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
+    kick(var_15[2] getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
+    kick(var_15[1] getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
+    kick(var_13[2] getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
+    kick(var_13[1] getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
     wait 1;
-    ref_126b5(var1);
-    var94.br_infilstarted = 1;
-    vo_nag_mark_crates(var1, var94, undefined, var95);
+    ref_126b5(var_1);
+    var_94.br_infilstarted = 1;
+    vo_nag_mark_crates(var_1, var_94, undefined, var_95);
     wait 7;
-    var1.br_infilstarted = 1;
+    var_1.br_infilstarted = 1;
 
-    if(!var1 scripts\mp\utility\perk::_hasperk("specialty_pistoldeath")) {
-      var1 scripts\mp\utility\perk::giveperk("specialty_pistoldeath");
+    if(!var_1 scripts\mp\utility\perk::_hasperk("specialty_pistoldeath")) {
+      var_1 scripts\mp\utility\perk::giveperk("specialty_pistoldeath");
     }
 
-    vo_nag_mark_crates(var1, var1, undefined, var95, 1);
+    vo_nag_mark_crates(var_1, var_1, undefined, var_95, 1);
 
-    while(!istrue(var1.gulagarena)) {
+    while(!istrue(var_1.gulagarena)) {
       waitframe();
     }
 
     wait 5;
-    vo_nag_mark_crates(var1, var94, undefined, var1);
+    vo_nag_mark_crates(var_1, var_94, undefined, var_1);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "reconGulag2")) {
-    var94 = var14[0];
-    var95 = var14[1];
-    var115 = var13[1];
-    var83 = var13[2];
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "reconGulag2")) {
+    var_94 = var_14[0];
+    var_95 = var_14[1];
+    var_115 = var_13[1];
+    var_83 = var_13[2];
 
-    if(var115 == var1) {
-      var115 = var13[0];
-    } else if(var83 == var1) {
-      var83 = var13[0];
+    if(var_115 == var_1) {
+      var_115 = var_13[0];
+    } else if(var_83 == var_1) {
+      var_83 = var_13[0];
     }
 
-    kick(var14[2] getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
-    kick(var15[2] getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
-    kick(var15[1] getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
-    kick(var15[0] getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
-    vo_nag_mark_crates(var1, var83, undefined, var94);
+    kick(var_14[2] getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
+    kick(var_15[2] getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
+    kick(var_15[1] getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
+    kick(var_15[0] getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
+    vo_nag_mark_crates(var_1, var_83, undefined, var_94);
     wait 1;
-    ref_126b5(var115);
+    ref_126b5(var_115);
     wait 2;
-    vo_nag_mark_crates(var1, var1, undefined, var94);
-    var1 waittill("killcam_ended");
+    vo_nag_mark_crates(var_1, var_1, undefined, var_94);
+    var_1 waittill("killcam_ended");
     wait 3;
-    var95.br_infilstarted = 1;
-    vo_nag_mark_crates(var1, var95, undefined, var115);
-    var115.br_infilstarted = 1;
+    var_95.br_infilstarted = 1;
+    vo_nag_mark_crates(var_1, var_95, undefined, var_115);
+    var_115.br_infilstarted = 1;
 
-    if(!var115 scripts\mp\utility\perk::_hasperk("specialty_pistoldeath")) {
-      var115 scripts\mp\utility\perk::giveperk("specialty_pistoldeath");
+    if(!var_115 scripts\mp\utility\perk::_hasperk("specialty_pistoldeath")) {
+      var_115 scripts\mp\utility\perk::giveperk("specialty_pistoldeath");
     }
 
-    vo_nag_mark_crates(var1, var115, undefined, var94, 1);
+    vo_nag_mark_crates(var_1, var_115, undefined, var_94, 1);
 
-    while(!istrue(var115.gulagarena)) {
+    while(!istrue(var_115.gulagarena)) {
       waitframe();
     }
 
     wait 5;
-    vo_nag_mark_crates(var1, var115, undefined, var95);
+    vo_nag_mark_crates(var_1, var_115, undefined, var_95);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "endGameTwoDie")) {
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "endGameTwoDie")) {
     setDvar("br_minplayers", 8);
     wait 5;
     scripts\mp\gametypes\br_gulag::shutdowngulag("circle_index", 0);
-    var94 = var14[0];
-    var115 = var13[1];
-    var83 = var13[2];
+    var_94 = var_14[0];
+    var_115 = var_13[1];
+    var_83 = var_13[2];
 
-    if(var115 == var1) {
-      var115 = var13[0];
-    } else if(var83 == var1) {
-      var83 = var13[0];
+    if(var_115 == var_1) {
+      var_115 = var_13[0];
+    } else if(var_83 == var_1) {
+      var_83 = var_13[0];
     }
 
-    vo_nag_mark_crates(var1, var14[2], undefined, var1);
-    vo_nag_mark_crates(var1, var14[1], undefined, var1);
-    vo_nag_mark_crates(var1, var15[2], undefined, var1);
-    vo_nag_mark_crates(var1, var15[1], undefined, var1);
-    vo_nag_mark_crates(var1, var15[0], undefined, var1);
-    vo_nag_mark_crates(var1, var115, undefined, var94);
-    vo_nag_mark_crates(var1, var83, undefined, var94);
+    vo_nag_mark_crates(var_1, var_14[2], undefined, var_1);
+    vo_nag_mark_crates(var_1, var_14[1], undefined, var_1);
+    vo_nag_mark_crates(var_1, var_15[2], undefined, var_1);
+    vo_nag_mark_crates(var_1, var_15[1], undefined, var_1);
+    vo_nag_mark_crates(var_1, var_15[0], undefined, var_1);
+    vo_nag_mark_crates(var_1, var_115, undefined, var_94);
+    vo_nag_mark_crates(var_1, var_83, undefined, var_94);
     wait 3;
-    var1 scripts\mp\juggernaut::jugg_makejuggernaut(level.juggksglobals.config);
+    var_1 scripts\mp\juggernaut::jugg_makejuggernaut(level.juggksglobals.config);
     wait 3;
-    var94 dodamage(999, var94.origin, var94, undefined, "MOD_TRIGGER_HURT", "danger_circle_br");
+    var_94 dodamage(999, var_94.origin, var_94, undefined, "MOD_TRIGGER_HURT", "danger_circle_br");
 
-    while(isalive(var1)) {
-      var1 dodamage(999, var1.origin, var1, undefined, "MOD_TRIGGER_HURT", "danger_circle_br");
+    while(isalive(var_1)) {
+      var_1 dodamage(999, var_1.origin, var_1, undefined, "MOD_TRIGGER_HURT", "danger_circle_br");
       waitframe();
     }
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "infiniteLoot")) {
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "infiniteLoot")) {
     setomnvar("scriptable_loot_hide", 0);
-    var116 = var1.origin;
-    var117 = var1.angles;
-    var118 = 0;
-    var119 = 0;
+    var_116 = var_1.origin;
+    var_117 = var_1.angles;
+    var_118 = 0;
+    var_119 = 0;
 
-    for(var120 = 0;; var120 = 0) {
-      var121 = scripts\mp\gametypes\br_pickups::remove_roof_nodes(var116 + (var118, var119, 0), var117);
-      scripts\mp\gametypes\br_pickups::spawnpickup("brloot_self_revive", var121);
-      var120++;
-      var118 += 10;
+    for(var_120 = 0;; var_120 = 0) {
+      var_121 = scripts\mp\gametypes\br_pickups::remove_roof_nodes(var_116 + (var_118, var_119, 0), var_117);
+      scripts\mp\gametypes\br_pickups::spawnpickup("brloot_self_revive", var_121);
+      var_120++;
+      var_118 += 10;
 
-      if(var118 > 5000) {
-        var118 = 0;
-        var119 += 10;
+      if(var_118 > 5000) {
+        var_118 = 0;
+        var_119 += 10;
 
-        if(var119 > 100) {
-          var119 = 0;
+        if(var_119 > 100) {
+          var_119 = 0;
         }
       }
 
-      if(var120 > 8) {
+      if(var_120 > 8) {
         waitframe();
       }
     }
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "dieToZombie")) {
-    var94 = var14[0];
-    var115 = var13[1];
-    var83 = var13[2];
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "dieToZombie")) {
+    var_94 = var_14[0];
+    var_115 = var_13[1];
+    var_83 = var_13[2];
 
-    if(var115 == var1) {
-      var115 = var13[0];
-    } else if(var83 == var1) {
-      var83 = var13[0];
+    if(var_115 == var_1) {
+      var_115 = var_13[0];
+    } else if(var_83 == var_1) {
+      var_83 = var_13[0];
     }
 
-    kick(var83 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
-    var1 scripts\mp\gametypes\br_alt_mode_zxp::ref_12723(0);
+    kick(var_83 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
+    var_1 scripts\mp\gametypes\br_alt_mode_zxp::ref_12723(0);
     wait 2;
-    vo_nag_mark_crates(var1, var1, undefined, var94);
-    var1 waittill("killcam_ended");
+    vo_nag_mark_crates(var_1, var_1, undefined, var_94);
+    var_1 waittill("killcam_ended");
     wait 2;
-    var115.br_infilstarted = 1;
-    vo_nag_mark_crates(var1, var115, undefined, var94);
+    var_115.br_infilstarted = 1;
+    vo_nag_mark_crates(var_1, var_115, undefined, var_94);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "zombieSpectatePing")) {
-    var94 = var14[0];
-    var115 = var13[1];
-    var83 = var13[2];
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "zombieSpectatePing")) {
+    var_94 = var_14[0];
+    var_115 = var_13[1];
+    var_83 = var_13[2];
 
-    if(var115 == var1) {
-      var115 = var13[0];
-    } else if(var83 == var1) {
-      var83 = var13[0];
+    if(var_115 == var_1) {
+      var_115 = var_13[0];
+    } else if(var_83 == var_1) {
+      var_83 = var_13[0];
     }
 
-    kick(var83 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
-    var1 scripts\mp\gametypes\br_alt_mode_zxp::ref_12723(0);
-    var115 scripts\mp\gametypes\br_alt_mode_zxp::ref_12723(0);
+    kick(var_83 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
+    var_1 scripts\mp\gametypes\br_alt_mode_zxp::ref_12723(0);
+    var_115 scripts\mp\gametypes\br_alt_mode_zxp::ref_12723(0);
     wait 2;
-    vo_nag_mark_crates(var1, var1, undefined, var94);
-    var1 waittill("killcam_ended");
+    vo_nag_mark_crates(var_1, var_1, undefined, var_94);
+    var_1 waittill("killcam_ended");
     wait 2;
-    var122 = scripts\mp\gametypes\br_gametype_zxp::spawndogtags();
-    scripts\mp\gametypes\br_gametype_zxp::ref_13238(var122, (0, 0, 200));
+    var_122 = scripts\mp\gametypes\br_gametype_zxp::spawndogtags();
+    scripts\mp\gametypes\br_gametype_zxp::ref_13238(var_122, (0, 0, 200));
 
-    for(var123 = var1 getnodeoffset_code(7); var123 == -1; var123 = var1 getnodeoffset_code(7)) {
+    for(var_123 = var_1 getnodeoffset_code(7); var_123 == -1; var_123 = var_1 getnodeoffset_code(7)) {
       waitframe();
     }
 
     wait 2;
-    var115 scripts\mp\gametypes\br_pickups::addrespawntoken(1);
-    var1 scripts\mp\gametypes\br_alt_mode_zxp::wait_for_chopper_boss_finish_turning(var115);
+    var_115 scripts\mp\gametypes\br_pickups::addrespawntoken(1);
+    var_1 scripts\mp\gametypes\br_alt_mode_zxp::wait_for_chopper_boss_finish_turning(var_115);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "endGameZombieSpectate")) {
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "endGameZombieSpectate")) {
     setDvar("br_minplayers", 8);
     wait 5;
-    var94 = var14[0];
-    var115 = var13[1];
-    var83 = var13[2];
+    var_94 = var_14[0];
+    var_115 = var_13[1];
+    var_83 = var_13[2];
 
-    if(var115 == var1) {
-      var115 = var13[0];
-    } else if(var83 == var1) {
-      var83 = var13[0];
+    if(var_115 == var_1) {
+      var_115 = var_13[0];
+    } else if(var_83 == var_1) {
+      var_83 = var_13[0];
     }
 
-    kick(var83 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
-    var115 scripts\mp\gametypes\br_alt_mode_zxp::ref_12723(0);
+    kick(var_83 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
+    var_115 scripts\mp\gametypes\br_alt_mode_zxp::ref_12723(0);
     wait 2;
-    vo_nag_mark_crates(var1, var1, undefined, var94);
-    var1 waittill("killcam_ended");
+    vo_nag_mark_crates(var_1, var_1, undefined, var_94);
+    var_1 waittill("killcam_ended");
     wait 2;
-    vo_nag_mark_crates(var1, var14[2], undefined, var1);
-    vo_nag_mark_crates(var1, var14[1], undefined, var1);
-    vo_nag_mark_crates(var1, var14[0], undefined, var1);
-    vo_nag_mark_crates(var1, var15[2], undefined, var1);
-    vo_nag_mark_crates(var1, var15[1], undefined, var1);
-    vo_nag_mark_crates(var1, var15[0], undefined, var1);
+    vo_nag_mark_crates(var_1, var_14[2], undefined, var_1);
+    vo_nag_mark_crates(var_1, var_14[1], undefined, var_1);
+    vo_nag_mark_crates(var_1, var_14[0], undefined, var_1);
+    vo_nag_mark_crates(var_1, var_15[2], undefined, var_1);
+    vo_nag_mark_crates(var_1, var_15[1], undefined, var_1);
+    vo_nag_mark_crates(var_1, var_15[0], undefined, var_1);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "buyback2")) {
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "buyback2")) {
     setDvar("scr_br_fc_jailTimeout", -1);
-    var94 = var14[0];
-    var115 = var13[1];
-    var83 = var13[2];
+    var_94 = var_14[0];
+    var_115 = var_13[1];
+    var_83 = var_13[2];
 
-    if(var115 == var1) {
-      var115 = var13[0];
-    } else if(var83 == var1) {
-      var83 = var13[0];
+    if(var_115 == var_1) {
+      var_115 = var_13[0];
+    } else if(var_83 == var_1) {
+      var_83 = var_13[0];
     }
 
-    kick(var83 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
-    vo_nag_mark_crates(var1, var115, undefined, var94);
-    var1 scripts\engine\utility::waittill_notify_or_timeout("killcam_ended", 8);
+    kick(var_83 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
+    vo_nag_mark_crates(var_1, var_115, undefined, var_94);
+    var_1 scripts\engine\utility::waittill_notify_or_timeout("killcam_ended", 8);
     wait 2;
-    var1 scripts\mp\gametypes\br_pickups::addrespawntoken(1);
-    var115 thread scripts\mp\gametypes\br_gulag::playergulagautowin("dev", var1, 0);
-    vo_nag_mark_crates(var1, var1, undefined, var94);
+    var_1 scripts\mp\gametypes\br_pickups::addrespawntoken(1);
+    var_115 thread scripts\mp\gametypes\br_gulag::playergulagautowin("dev", var_1, 0);
+    vo_nag_mark_crates(var_1, var_1, undefined, var_94);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "throwback")) {
-    var1 setOrigin((1710, -1703, 58));
-    var1 setplayerangles((19, 268, 0));
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "throwback")) {
+    var_1 setOrigin((1710, -1703, 58));
+    var_1 setplayerangles((19, 268, 0));
     waitframe();
     waitframe();
 
-    while(!var1 isthrowingbackgrenade()) {
+    while(!var_1 isthrowingbackgrenade()) {
       waitframe();
     }
 
     wait 0.5;
-    var1 scripts\mp\gametypes\br_pickups::ref_1298f(9);
+    var_1 scripts\mp\gametypes\br_pickups::ref_1298f(9);
     wait 0.5;
-    var124 = var1 getcurrentprimaryweapon();
+    var_124 = var_1 getcurrentprimaryweapon();
 
-    if(var124.basename != "iw8_fists_mp") {
-      var1 scripts\mp\gametypes\br_pickups::ref_1298f(9);
+    if(var_124.basename != "iw8_fists_mp") {
+      var_1 scripts\mp\gametypes\br_pickups::ref_1298f(9);
     }
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "respawnPayload")) {
-    while(!var1 isspectatingplayer()) {
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "respawnPayload")) {
+    while(!var_1 isspectatingplayer()) {
       waitframe();
     }
 
-    var26 = var1 getspectatingplayer();
+    var_26 = var_1 getspectatingplayer();
     wait 1;
-    vo_nag_mark_crates(var1, var26, var14);
+    vo_nag_mark_crates(var_1, var_26, var_14);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "gulag12")) {
-    var94 = var14[0];
-    var94.br_infilstarted = 1;
-    killplayer(var1, var94, var15);
-    var115 = var13[1];
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "gulag12")) {
+    var_94 = var_14[0];
+    var_94.br_infilstarted = 1;
+    killplayer(var_1, var_94, var_15);
+    var_115 = var_13[1];
 
-    if(var115 == var1) {
-      var115 = var13[0];
+    if(var_115 == var_1) {
+      var_115 = var_13[0];
     }
 
-    var115.br_infilstarted = 1;
-    killplayer(var1, var115, var15);
+    var_115.br_infilstarted = 1;
+    killplayer(var_1, var_115, var_15);
 
-    while(!istrue(var94.gulagarena) || !istrue(var115.gulagarena)) {
+    while(!istrue(var_94.gulagarena) || !istrue(var_115.gulagarena)) {
       waitframe();
     }
 
     wait 5;
-    killplayer(var1, var115, undefined, var94);
+    killplayer(var_1, var_115, undefined, var_94);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "helimg")) {
-    var26 = undefined;
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "helimg")) {
+    var_26 = undefined;
 
-    foreach(var9 in var13) {
-      if(var9 != var1) {
-        if(!isDefined(var26)) {
-          var26 = var9;
+    foreach(var_9 in var_13) {
+      if(var_9 != var_1) {
+        if(!isDefined(var_26)) {
+          var_26 = var_9;
           break;
         }
       }
     }
 
     wait 1;
-    var81 = undefined;
-    var82 = undefined;
+    var_81 = undefined;
+    var_82 = undefined;
 
     if(isDefined(level.vehicle.instances["little_bird_mg"])) {
-      var80 = getarraykeys(level.vehicle.instances["little_bird_mg"]);
+      var_80 = getarraykeys(level.vehicle.instances["little_bird_mg"]);
 
-      if(var80.size > 0) {
-        var81 = level.vehicle.instances["little_bird_mg"][var80[0]];
+      if(var_80.size > 0) {
+        var_81 = level.vehicle.instances["little_bird_mg"][var_80[0]];
       }
     }
 
-    if(!isDefined(var81)) {
-      var127 = spawnStruct();
-      var127.origin = (1000, -2000, 100);
-      var127.angles = (0, 0, 0);
-      var127.owner = var1;
-      var127.spawntype = "DEVGUI";
-      var81 = _calloutmarkerping_poolidisdanger::x1opsruntoicon(var127);
+    if(!isDefined(var_81)) {
+      var_127 = spawnStruct();
+      var_127.origin = (1000, -2000, 100);
+      var_127.angles = (0, 0, 0);
+      var_127.owner = var_1;
+      var_127.spawntype = "DEVGUI";
+      var_81 = _calloutmarkerping_poolidisdanger::x1opsruntoicon(var_127);
     }
 
-    var82 = var81 getlinkedscriptableinstance();
-    var26 setOrigin(var81.origin);
+    var_82 = var_81 getlinkedscriptableinstance();
+    var_26 setOrigin(var_81.origin);
     wait 1;
-    scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_scriptableused(var82, "single", "vehicle_use", var26, 0);
+    scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_scriptableused(var_82, "single", "vehicle_use", var_26, 0);
     wait 5;
-    var128 = "br_gunner";
-    var129 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getoccupantseat(var81, var26);
-    thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_enter(var81, var128, var26);
-    var26 dodamage(500, var14[0].origin, var14[0], undefined, "MOD_EXPLOSIVE", var14[0] getcurrentprimaryweapon());
+    var_128 = "br_gunner";
+    var_129 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getoccupantseat(var_81, var_26);
+    thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_enter(var_81, var_128, var_26);
+    var_26 dodamage(500, var_14[0].origin, var_14[0], undefined, "MOD_EXPLOSIVE", var_14[0] getcurrentprimaryweapon());
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "helimg2")) {
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "helimg2")) {
     wait 1;
-    var81 = undefined;
-    var82 = undefined;
+    var_81 = undefined;
+    var_82 = undefined;
 
     if(isDefined(level.vehicle.instances["little_bird_mg"])) {
-      var80 = getarraykeys(level.vehicle.instances["little_bird_mg"]);
+      var_80 = getarraykeys(level.vehicle.instances["little_bird_mg"]);
 
-      if(var80.size > 0) {
-        var81 = level.vehicle.instances["little_bird_mg"][var80[0]];
+      if(var_80.size > 0) {
+        var_81 = level.vehicle.instances["little_bird_mg"][var_80[0]];
       }
     }
 
-    if(!isDefined(var81)) {
-      var127 = spawnStruct();
-      var127.origin = (1000, -2000, 100);
-      var127.angles = (0, 0, 0);
-      var127.owner = var1;
-      var127.spawntype = "DEVGUI";
-      var81 = _calloutmarkerping_poolidisdanger::x1opsruntoicon(var127);
+    if(!isDefined(var_81)) {
+      var_127 = spawnStruct();
+      var_127.origin = (1000, -2000, 100);
+      var_127.angles = (0, 0, 0);
+      var_127.owner = var_1;
+      var_127.spawntype = "DEVGUI";
+      var_81 = _calloutmarkerping_poolidisdanger::x1opsruntoicon(var_127);
     }
 
-    var82 = var81 getlinkedscriptableinstance();
-    var1 setOrigin(var81.origin);
+    var_82 = var_81 getlinkedscriptableinstance();
+    var_1 setOrigin(var_81.origin);
     wait 1;
-    scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_scriptableused(var82, "single", "vehicle_use", var1, 0);
+    scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_scriptableused(var_82, "single", "vehicle_use", var_1, 0);
     wait 5;
-    var128 = "br_gunner";
-    var129 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getoccupantseat(var81, var1);
-    thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_enter(var81, var128, var1);
+    var_128 = "br_gunner";
+    var_129 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getoccupantseat(var_81, var_1);
+    thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_enter(var_81, var_128, var_1);
 
-    if(!var1 scripts\mp\utility\perk::_hasperk("specialty_pistoldeath")) {
-      var1 scripts\mp\utility\perk::giveperk("specialty_pistoldeath");
+    if(!var_1 scripts\mp\utility\perk::_hasperk("specialty_pistoldeath")) {
+      var_1 scripts\mp\utility\perk::giveperk("specialty_pistoldeath");
     }
 
-    var1 dodamage(500, var14[0].origin, var14[0], undefined, "MOD_EXPLOSIVE", var14[0] getcurrentprimaryweapon());
+    var_1 dodamage(500, var_14[0].origin, var_14[0], undefined, "MOD_EXPLOSIVE", var_14[0] getcurrentprimaryweapon());
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "truckmg")) {
-    var26 = undefined;
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "truckmg")) {
+    var_26 = undefined;
 
-    foreach(var9 in var13) {
-      if(var9 != var1) {
-        if(!isDefined(var26)) {
-          var26 = var9;
+    foreach(var_9 in var_13) {
+      if(var_9 != var_1) {
+        if(!isDefined(var_26)) {
+          var_26 = var_9;
           break;
         }
       }
     }
 
     wait 1;
-    var132 = undefined;
-    var82 = undefined;
+    var_132 = undefined;
+    var_82 = undefined;
 
     if(isDefined(level.vehicle.instances["cargo_truck_mg"])) {
-      var80 = getarraykeys(level.vehicle.instances["cargo_truck_mg"]);
+      var_80 = getarraykeys(level.vehicle.instances["cargo_truck_mg"]);
 
-      if(var80.size > 0) {
-        var132 = level.vehicle.instances["cargo_truck_mg"][var80[0]];
+      if(var_80.size > 0) {
+        var_132 = level.vehicle.instances["cargo_truck_mg"][var_80[0]];
       }
     }
 
-    if(!isDefined(var132)) {
-      var127 = spawnStruct();
-      var127.origin = (400, -2100, 100);
-      var127.angles = (0, 0, 0);
-      var127.owner = var1;
-      var127.spawntype = "DEVGUI";
-      var132 = _calloutmarkerping_isdropcrate::get_friendly_convoy_vehicle(var127);
+    if(!isDefined(var_132)) {
+      var_127 = spawnStruct();
+      var_127.origin = (400, -2100, 100);
+      var_127.angles = (0, 0, 0);
+      var_127.owner = var_1;
+      var_127.spawntype = "DEVGUI";
+      var_132 = _calloutmarkerping_isdropcrate::get_friendly_convoy_vehicle(var_127);
     }
 
-    var133 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("cargo_truck_mg");
+    var_133 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("cargo_truck_mg");
 
-    foreach(var129, var135 in var133.ref_11fa5) {
-      var133.ref_11fa5[var129] = 1;
+    foreach(var_129, var_135 in var_133.ref_11fa5) {
+      var_133.ref_11fa5[var_129] = 1;
     }
 
-    foreach(var129, var135 in var133.ref_11fa4) {
-      var133.ref_11fa4[var129] = 500;
+    foreach(var_129, var_135 in var_133.ref_11fa4) {
+      var_133.ref_11fa4[var_129] = 500;
     }
 
-    var82 = var132 getlinkedscriptableinstance();
-    var26 setOrigin(var132.origin);
+    var_82 = var_132 getlinkedscriptableinstance();
+    var_26 setOrigin(var_132.origin);
     wait 1;
-    scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_scriptableused(var82, "single", "vehicle_use", var26, 0);
+    scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_scriptableused(var_82, "single", "vehicle_use", var_26, 0);
     wait 5;
-    var137 = "gunner";
-    var129 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getoccupantseat(var132, var26);
-    thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_enter(var132, var137, var26);
+    var_137 = "gunner";
+    var_129 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getoccupantseat(var_132, var_26);
+    thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_enter(var_132, var_137, var_26);
 
-    if(!var26 scripts\mp\utility\perk::_hasperk("specialty_pistoldeath")) {
-      var26 scripts\mp\utility\perk::giveperk("specialty_pistoldeath");
+    if(!var_26 scripts\mp\utility\perk::_hasperk("specialty_pistoldeath")) {
+      var_26 scripts\mp\utility\perk::giveperk("specialty_pistoldeath");
     }
 
-    var26 dodamage(500, var14[0].origin, var14[0], undefined, "MOD_RIFLE_BULLET", var14[0] getcurrentprimaryweapon());
+    var_26 dodamage(500, var_14[0].origin, var_14[0], undefined, "MOD_RIFLE_BULLET", var_14[0] getcurrentprimaryweapon());
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "truckmg2")) {
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "truckmg2")) {
     wait 1;
-    var132 = undefined;
-    var82 = undefined;
+    var_132 = undefined;
+    var_82 = undefined;
 
     if(isDefined(level.vehicle.instances["cargo_truck_mg"])) {
-      var80 = getarraykeys(level.vehicle.instances["cargo_truck_mg"]);
+      var_80 = getarraykeys(level.vehicle.instances["cargo_truck_mg"]);
 
-      if(var80.size > 0) {
-        var132 = level.vehicle.instances["cargo_truck_mg"][var80[0]];
+      if(var_80.size > 0) {
+        var_132 = level.vehicle.instances["cargo_truck_mg"][var_80[0]];
       }
     }
 
-    if(!isDefined(var132)) {
-      var127 = spawnStruct();
-      var127.origin = (400, -2100, 100);
-      var127.angles = (0, 0, 0);
-      var127.owner = var1;
-      var127.spawntype = "DEVGUI";
-      var132 = _calloutmarkerping_isdropcrate::get_friendly_convoy_vehicle(var127);
+    if(!isDefined(var_132)) {
+      var_127 = spawnStruct();
+      var_127.origin = (400, -2100, 100);
+      var_127.angles = (0, 0, 0);
+      var_127.owner = var_1;
+      var_127.spawntype = "DEVGUI";
+      var_132 = _calloutmarkerping_isdropcrate::get_friendly_convoy_vehicle(var_127);
     }
 
-    var133 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("cargo_truck_mg");
+    var_133 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("cargo_truck_mg");
 
-    foreach(var129, var135 in var133.ref_11fa5) {
-      var133.ref_11fa5[var129] = 1;
+    foreach(var_129, var_135 in var_133.ref_11fa5) {
+      var_133.ref_11fa5[var_129] = 1;
     }
 
-    foreach(var135 in var133.ref_11fa4) {
-      var133.ref_11fa4[var129] = 500;
+    foreach(var_135 in var_133.ref_11fa4) {
+      var_133.ref_11fa4[var_129] = 500;
     }
 
-    var82 = var132 getlinkedscriptableinstance();
-    var1 setOrigin(var132.origin);
+    var_82 = var_132 getlinkedscriptableinstance();
+    var_1 setOrigin(var_132.origin);
     wait 1;
-    scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_scriptableused(var82, "single", "vehicle_use", var1, 0);
+    scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_scriptableused(var_82, "single", "vehicle_use", var_1, 0);
     wait 5;
-    var137 = "gunner";
-    var129 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getoccupantseat(var132, var1);
-    thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_enter(var132, var137, var1);
+    var_137 = "gunner";
+    var_129 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getoccupantseat(var_132, var_1);
+    thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_enter(var_132, var_137, var_1);
 
-    if(!var1 scripts\mp\utility\perk::_hasperk("specialty_pistoldeath")) {
-      var1 scripts\mp\utility\perk::giveperk("specialty_pistoldeath");
+    if(!var_1 scripts\mp\utility\perk::_hasperk("specialty_pistoldeath")) {
+      var_1 scripts\mp\utility\perk::giveperk("specialty_pistoldeath");
     }
 
-    for(var140 = getdvarint("scr_test_frames", 1); var140 > 0; var140--) {
+    for(var_140 = getdvarint("scr_test_frames", 1); var_140 > 0; var_140--) {
       waitframe();
     }
 
-    var1 dodamage(500, var14[0].origin, var14[0], undefined, "MOD_RIFLE_BULLET", var14[0] getcurrentprimaryweapon());
+    var_1 dodamage(500, var_14[0].origin, var_14[0], undefined, "MOD_RIFLE_BULLET", var_14[0] getcurrentprimaryweapon());
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "exfil_spectate")) {
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "exfil_spectate")) {
     setDvar("br_minplayers", 8);
     wait 5;
-    var26 = var13[1];
+    var_26 = var_13[1];
 
-    if(var26 == var1) {
-      var26 = var13[0];
+    if(var_26 == var_1) {
+      var_26 = var_13[0];
     }
 
-    foreach(var9 in var13) {
-      if(var9 == var1 || var9 == var26) {
+    foreach(var_9 in var_13) {
+      if(var_9 == var_1 || var_9 == var_26) {
         continue;
       }
 
-      vo_nag_mark_crates(var1, var9, var14);
+      vo_nag_mark_crates(var_1, var_9, var_14);
     }
 
-    foreach(var9 in var15) {
-      vo_nag_mark_crates(var1, var9, var14);
+    foreach(var_9 in var_15) {
+      vo_nag_mark_crates(var_1, var_9, var_14);
     }
 
     wait 2;
-    vo_nag_mark_crates(var1, var1, var14);
-    var1 waittill("killcam_ended");
+    vo_nag_mark_crates(var_1, var_1, var_14);
+    var_1 waittill("killcam_ended");
     wait 2;
-    vo_nag_mark_crates(var1, var26, var14);
+    vo_nag_mark_crates(var_1, var_26, var_14);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "simulKill")) {
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "simulKill")) {
     setDvar("br_minplayers", 8);
     wait 5;
-    var26 = var13[1];
+    var_26 = var_13[1];
 
-    if(var26 == var1) {
-      var26 = var13[0];
+    if(var_26 == var_1) {
+      var_26 = var_13[0];
     }
 
-    var94 = var14[0];
-    var95 = var15[0];
+    var_94 = var_14[0];
+    var_95 = var_15[0];
 
-    foreach(var33 in var14) {
-      if(var33 == var94) {
+    foreach(var_33 in var_14) {
+      if(var_33 == var_94) {
         continue;
       }
 
-      vo_nag_mark_crates(var1, var33, undefined, var1);
+      vo_nag_mark_crates(var_1, var_33, undefined, var_1);
     }
 
-    foreach(var33 in var15) {
-      if(var33 == var95) {
+    foreach(var_33 in var_15) {
+      if(var_33 == var_95) {
         continue;
       }
 
-      vo_nag_mark_crates(var1, var33, undefined, var1);
+      vo_nag_mark_crates(var_1, var_33, undefined, var_1);
     }
 
-    foreach(var62 in var13) {
-      if(var62 == var26 || var62 == var1) {
+    foreach(var_62 in var_13) {
+      if(var_62 == var_26 || var_62 == var_1) {
         continue;
       }
 
-      kick(var62 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
+      kick(var_62 getentitynumber(), "EXE/PLAYERKICKED_BOT_BALANCE");
     }
 
     wait 5;
-    thread vo_nag_mark_crates(level, var1, var94, undefined);
-    thread vo_nag_mark_crates(level, var1, var95, undefined);
+    thread vo_nag_mark_crates(level, var_1, var_94, undefined);
+    thread vo_nag_mark_crates(level, var_1, var_95, undefined);
   }
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "fd_shoot_1")) {
-    var1 setOrigin((12799, 16985, 10014));
-    var1 setplayerangles((351, 35, 0));
-    var151 = _calloutmarkerping_isvehicleoccupiedbyenemy::bot_give_weapon();
-    var152 = spawnturret("misc_turret", (23271, 24389, 13789), var151, 0);
-    var74 = vectorNormalize(var1 getEye() - var152.origin);
-    var153 = vectortoangles(var74);
-    var152.angles = var153;
-    var152 setModel("veh_s4_mil_air_dalpha_wz_turret_attach");
-    var152 setmode("manual_target");
-    var152 setsentryowner(undefined);
-    var152 makeunusable();
-    var152 setdefaultdroppitch(0);
-    var152 setturretmodechangewait(1);
-    var154 = 0;
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "fd_shoot_1")) {
+    var_1 setOrigin((12799, 16985, 10014));
+    var_1 setplayerangles((351, 35, 0));
+    var_151 = _calloutmarkerping_isvehicleoccupiedbyenemy::bot_give_weapon();
+    var_152 = spawnturret("misc_turret", (23271, 24389, 13789), var_151, 0);
+    var_74 = vectorNormalize(var_1 getEye() - var_152.origin);
+    var_153 = vectortoangles(var_74);
+    var_152.angles = var_153;
+    var_152 setModel("veh_s4_mil_air_dalpha_wz_turret_attach");
+    var_152 setmode("manual_target");
+    var_152 setsentryowner(undefined);
+    var_152 makeunusable();
+    var_152 setdefaultdroppitch(0);
+    var_152 setturretmodechangewait(1);
+    var_154 = 0;
 
     for(;;) {
       if(getdvarint("test_force", 0)) {
         setDvar("test_force", 0);
-        var154 = !var154;
-        var152 unmarkkeyframedmover(var154);
+        var_154 = !var_154;
+        var_152 unmarkkeyframedmover(var_154);
       }
 
-      var152 shootturret("tag_barrel");
+      var_152 shootturret("tag_barrel");
       waitframe();
     }
 
@@ -1576,44 +1576,44 @@ function level_getspawnpoint(var0) {
 }
 
 function ref_126b5() {
-  var0 = spawnStruct();
-  var0.scriptablename = "brloot_killstreak_recondrone";
-  var0.count = 1;
-  scripts\mp\gametypes\br_pickups::takesuperpickup(var0);
+  var_0 = spawnStruct();
+  var_0.scriptablename = "brloot_killstreak_recondrone";
+  var_0.count = 1;
+  scripts\mp\gametypes\br_pickups::takesuperpickup(var_0);
   wait 1;
-  var1 = getcompleteweaponname("super_default_mp");
-  scripts\mp\supers::trysuperusebegin(var1);
+  var_1 = getcompleteweaponname("super_default_mp");
+  scripts\mp\supers::trysuperusebegin(var_1);
 
   while(self getcurrentprimaryweapon().basename != "ks_remote_drone_mp") {
     waitframe();
   }
 }
 
-function ref_14366(var0, var1) {
-  wait var0;
-  var1 suicide();
+function ref_14366(var_0, var_1) {
+  wait var_0;
+  var_1 suicide();
 }
 
 function ref_12078() {
   level notify("onPrematchFadeDoneClear");
   thread ref_12077();
-  var0 = undefined;
+  var_0 = undefined;
 
   if(!istrue(level.br_infils_disabled) && !scripts\mp\gametypes\br_public::isusinginfilselection()) {
-    var0 = scripts\mp\gametypes\br_c130::createtestc130path();
+    var_0 = scripts\mp\gametypes\br_c130::createtestc130path();
   }
 
   waitframe();
-  var1 = 0;
+  var_1 = 0;
   level.debugnextpropindex = 0;
   level.delay_music_reinforcements = 0;
-  scripts\mp\gametypes\br_infils::clear_tier_lights(var0, "player");
+  scripts\mp\gametypes\br_infils::clear_tier_lights(var_0, "player");
   level thread scripts\mp\gametypes\br_c130::waittoplayinfildialog();
   level notify("infils_ready");
 }
 
 function ref_12077() {
-  var0 = 1.4;
+  var_0 = 1.4;
   level endon("onPrematchFadeDoneClear");
 
   if(!isDefined(level.ref_136de)) {
@@ -1622,32 +1622,32 @@ function ref_12077() {
   }
 
   scripts\mp\flags::gameflagwait("prematch_fade_done");
-  level thread scripts\mp\gametypes\br::resetalldoors(var0 * 1.5);
+  level thread scripts\mp\gametypes\br::resetalldoors(var_0 * 1.5);
   level thread scripts\cp\vehicles\little_bird_mg_cp::fulton_destroy(1);
   level thread scripts\mp\gametypes\br_vehicles::brvehicleonprematchstarted();
   level thread scripts\mp\gametypes\br_functional_poi::onprematchdone();
   scripts\mp\gametypes\br::has_focus_fire_objective();
   scripts\mp\gametypes\br_vehicles::emptyallvehicles();
 
-  foreach(var2 in level.players) {
-    var2 scripts\mp\gametypes\br_infils::setplayerprematchallows();
-    var2 thread scripts\mp\gametypes\br_pickups::resetplayerinventory();
+  foreach(var_2 in level.players) {
+    var_2 scripts\mp\gametypes\br_infils::setplayerprematchallows();
+    var_2 thread scripts\mp\gametypes\br_pickups::resetplayerinventory();
 
-    if(istrue(var2.hasspawned)) {
-      if(istrue(var2.usingascender)) {
-        var2 scripts\cp_mp\auto_ascender::canseesafecircleui();
+    if(istrue(var_2.hasspawned)) {
+      if(istrue(var_2.usingascender)) {
+        var_2 scripts\cp_mp\auto_ascender::canseesafecircleui();
       }
 
-      var2 thread scripts\mp\weapons::deleteplacedequipment(1);
+      var_2 thread scripts\mp\weapons::deleteplacedequipment(1);
     }
   }
 
-  foreach(var2 in level.players) {
-    if(isDefined(var2.burninginfo)) {
-      var2 scripts\mp\equipment\molotov::molotov_clear_burning();
+  foreach(var_2 in level.players) {
+    if(isDefined(var_2.burninginfo)) {
+      var_2 scripts\mp\equipment\molotov::molotov_clear_burning();
     }
 
-    var2 scripts\mp\javelin::vehicle_damage_deregistervisualpercentcallback();
+    var_2 scripts\mp\javelin::vehicle_damage_deregistervisualpercentcallback();
   }
 
   level notify("prematch_cleanup");
@@ -1658,7 +1658,7 @@ function ref_12077() {
   }
 }
 
-function ref_12f81(var0, var1) {
+function ref_12f81(var_0, var_1) {
   if(!isDefined(level.br_circle.safecircleent)) {
     thread scripts\mp\gametypes\br_circle::ref_12e09(1);
     level.br_circle thread scripts\mp\gametypes\br_circle::circledamagetick();
@@ -1666,164 +1666,164 @@ function ref_12f81(var0, var1) {
 
   waitframe();
   level notify("CirclePeekCleanup");
-  var2 = 1;
+  var_2 = 1;
   level.br_circle.starttime = gettime();
-  level.br_circle.circleindex = var2;
-  var3 = var2 == 0;
-  var4 = var2 == level.br_level.br_circleclosetimes.size - 1;
-  var5 = level.br_level.br_circledelaytimes[var2];
-  var6 = level.br_level.br_circleclosetimes[var2];
-  var7 = level.br_level.br_circleradii[var2 + 1];
-  setomnvar("ui_br_circle_num", var2 + 1);
-  level.br_circle.centertarget = var0;
-  level.br_circle.safecircleent.origin = var0;
+  level.br_circle.circleindex = var_2;
+  var_3 = var_2 == 0;
+  var_4 = var_2 == level.br_level.br_circleclosetimes.size - 1;
+  var_5 = level.br_level.br_circledelaytimes[var_2];
+  var_6 = level.br_level.br_circleclosetimes[var_2];
+  var_7 = level.br_level.br_circleradii[var_2 + 1];
+  setomnvar("ui_br_circle_num", var_2 + 1);
+  level.br_circle.centertarget = var_0;
+  level.br_circle.safecircleent.origin = var_0;
   level.br_circle.dangercircleui.hidden = 0;
   level.br_circle.dangercircleent.hidden = 0;
   level.br_circle.safecircleui.hidden = 0;
   level.br_circle.safecircleent.hidden = 0;
   level notify("update_circle_hide");
   level.br_circle.safecircleui.origin = level.br_circle.safecircleent.origin;
-  level.br_circle.dangercircleui.origin = var0 + (0, 0, var1);
-  scripts\mp\gametypes\br_circle::setstaticuicircles(999, level.br_circle.safecircleui, level.br_circle.dangercircleui, var4);
+  level.br_circle.dangercircleui.origin = var_0 + (0, 0, var_1);
+  scripts\mp\gametypes\br_circle::setstaticuicircles(999, level.br_circle.safecircleui, level.br_circle.dangercircleui, var_4);
   level notify("br_circle_set");
   waitframe();
   level notify("br_circle_started");
-  level.br_circle.dangercircleent brcirclemoveTo(var0[0], var0[1], var1, 1);
+  level.br_circle.dangercircleent brcirclemoveTo(var_0[0], var_0[1], var_1, 1);
 }
 
-function ref_126c5(var0, var1) {
+function ref_126c5(var_0, var_1) {
   if(self calloutmarkerping_getEnt()) {
     self allowmovement(0);
     self allowfire(0);
     self allowmelee(0);
   }
 
-  var2 = self getentitynumber();
+  var_2 = self getentitynumber();
 
-  if(isDefined(level.level_logic[var2])) {
-    var0 = level.level_logic[var2];
+  if(isDefined(level.level_logic[var_2])) {
+    var_0 = level.level_logic[var_2];
   } else {
-    var3 = anglesToForward((0, 0, 0));
-    var0 += var3 * var1 * 50;
-    var0 = getgroundposition(var0, 15, 100);
+    var_3 = anglesToForward((0, 0, 0));
+    var_0 += var_3 * var_1 * 50;
+    var_0 = getgroundposition(var_0, 15, 100);
   }
 
-  self setOrigin(var0);
+  self setOrigin(var_0);
   self setplayerangles((0, 0, 0));
 
-  if(!isDefined(level.level_logic[var2])) {
-    level.level_logic[var2] = var0;
+  if(!isDefined(level.level_logic[var_2])) {
+    level.level_logic[var_2] = var_0;
     return;
   }
 }
 
-function killplayer(var0, var1, var2, var3) {
-  if(!isDefined(var3)) {
-    var3 = reset_button_handler(var0, var1.origin, var2);
+function killplayer(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_3)) {
+    var_3 = reset_button_handler(var_0, var_1.origin, var_2);
   }
 
-  var1 dodamage(500, var3.origin, var3, undefined, "MOD_EXPLOSIVE", var3 getcurrentprimaryweapon());
+  var_1 dodamage(500, var_3.origin, var_3, undefined, "MOD_EXPLOSIVE", var_3 getcurrentprimaryweapon());
   wait 1;
 
-  while(isalive(var1)) {
-    var1 dodamage(500, var3.origin, var3, undefined, "MOD_EXPLOSIVE", var3 getcurrentprimaryweapon());
+  while(isalive(var_1)) {
+    var_1 dodamage(500, var_3.origin, var_3, undefined, "MOD_EXPLOSIVE", var_3 getcurrentprimaryweapon());
     waitframe();
   }
 
-  return var3;
+  return var_3;
 }
 
-function vo_nag_mark_crates(var0, var1, var2, var3, var4) {
-  if(!isDefined(var3)) {
-    var3 = reset_button_handler(var0, var1.origin, var2);
+function vo_nag_mark_crates(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_3)) {
+    var_3 = reset_button_handler(var_0, var_1.origin, var_2);
   }
 
-  if(!isDefined(var3)) {
-    var3 = var1;
+  if(!isDefined(var_3)) {
+    var_3 = var_1;
   }
 
-  if(!istrue(var4) && var1 scripts\mp\utility\perk::_hasperk("specialty_pistoldeath")) {
-    var1 scripts\mp\utility\perk::removeperk("specialty_pistoldeath");
+  if(!istrue(var_4) && var_1 scripts\mp\utility\perk::_hasperk("specialty_pistoldeath")) {
+    var_1 scripts\mp\utility\perk::removeperk("specialty_pistoldeath");
   }
 
-  while(isalive(var1)) {
-    var1 dodamage(500, var3.origin, var3, undefined, "MOD_EXPLOSIVE", var3 getcurrentprimaryweapon());
+  while(isalive(var_1)) {
+    var_1 dodamage(500, var_3.origin, var_3, undefined, "MOD_EXPLOSIVE", var_3 getcurrentprimaryweapon());
 
-    if(!isalive(var1)) {
+    if(!isalive(var_1)) {
       break;
     }
 
     waitframe();
   }
 
-  return var3;
+  return var_3;
 }
 
-function ref_1294d(var0, var1, var2, var3) {
-  if(!isDefined(var3)) {
-    var3 = reset_button_handler(var0, var1.origin, var2);
+function ref_1294d(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_3)) {
+    var_3 = reset_button_handler(var_0, var_1.origin, var_2);
   }
 
-  if(!isDefined(var3)) {
-    var3 = var1;
+  if(!isDefined(var_3)) {
+    var_3 = var_1;
   }
 
-  if(!var1 scripts\mp\utility\perk::_hasperk("specialty_pistoldeath")) {
-    var1 scripts\mp\utility\perk::giveperk("specialty_pistoldeath");
+  if(!var_1 scripts\mp\utility\perk::_hasperk("specialty_pistoldeath")) {
+    var_1 scripts\mp\utility\perk::giveperk("specialty_pistoldeath");
   }
 
-  while(!istrue(var1.inlaststand)) {
-    var1 dodamage(30, var3.origin, var3, undefined, "MOD_EXPLOSIVE", var3 getcurrentprimaryweapon());
+  while(!istrue(var_1.inlaststand)) {
+    var_1 dodamage(30, var_3.origin, var_3, undefined, "MOD_EXPLOSIVE", var_3 getcurrentprimaryweapon());
     wait 0.1;
   }
 
-  return var3;
+  return var_3;
 }
 
-function reset_button_handler(var0, var1, var2) {
-  var2 = sortbydistance(var2, var1);
+function reset_button_handler(var_0, var_1, var_2) {
+  var_2 = sortbydistance(var_2, var_1);
 
-  if(isalive(var2[0])) {
-    var3 = distance2dsquared(var1, var2[0].origin);
+  if(isalive(var_2[0])) {
+    var_3 = distance2dsquared(var_1, var_2[0].origin);
 
-    if(var3 < 40000) {
-      return var2[0];
+    if(var_3 < 40000) {
+      return var_2[0];
     }
   }
 
-  var4 = undefined;
+  var_4 = undefined;
 
-  for(var5 = 1; var5 < var2.size; var5++) {
-    var6 = var2[var5];
+  for(var_5 = 1; var_5 < var_2.size; var_5++) {
+    var_6 = var_2[var_5];
 
-    if(isalive(var6)) {
-      var4 = var6;
+    if(isalive(var_6)) {
+      var_4 = var_6;
       break;
     }
   }
 
-  return var4;
+  return var_4;
 }
 
-function remove_map_hint(var0) {
+function remove_map_hint(var_0) {
   if(isDefined(level.level_offhand_spawn)) {
     return level.level_offhand_spawn;
   }
 
-  var1 = scripts\mp\gamelogic::gethostplayer();
+  var_1 = scripts\mp\gamelogic::gethostplayer();
 
-  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, "clientHost")) {
-    foreach(var3 in level.players) {
-      if(!isai(var3) && !var3 calloutmarkerping_getEnt() && (!isDefined(var1) || var3 != var1)) {
-        var1 = var3;
+  if(calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, "clientHost")) {
+    foreach(var_3 in level.players) {
+      if(!isai(var_3) && !var_3 calloutmarkerping_getEnt() && (!isDefined(var_1) || var_3 != var_1)) {
+        var_1 = var_3;
         break;
       }
     }
-  } else if(!isDefined(var1)) {
-    foreach(var3 in level.players) {
-      if(!isai(var3) && !var3 calloutmarkerping_getEnt()) {
-        level.level_offhand_spawn = var3;
-        var1 = var3;
+  } else if(!isDefined(var_1)) {
+    foreach(var_3 in level.players) {
+      if(!isai(var_3) && !var_3 calloutmarkerping_getEnt()) {
+        level.level_offhand_spawn = var_3;
+        var_1 = var_3;
         break;
       }
     }
@@ -1832,15 +1832,15 @@ function remove_map_hint(var0) {
   }
 
   if(!isDefined(level.level_offhand_spawn)) {
-    level.level_offhand_spawn = var1;
+    level.level_offhand_spawn = var_1;
   }
 
-  return var1;
+  return var_1;
 }
 
-function calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, var1) {
-  foreach(var3 in var0) {
-    if(var3 == var1) {
+function calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var_0, var_1) {
+  foreach(var_3 in var_0) {
+    if(var_3 == var_1) {
       return true;
     }
   }
@@ -1848,70 +1848,70 @@ function calloutmarkerpingvo_getfulloperatorvoaliasfromsimplealias3d(var0, var1)
   return false;
 }
 
-function ref_12d1c(var0, var1) {
-  var2 = level.teamdata[var1]["players"];
-  var3 = 0;
+function ref_12d1c(var_0, var_1) {
+  var_2 = level.teamdata[var_1]["players"];
+  var_3 = 0;
 
-  foreach(var5 in var2) {
-    if(!isalive(var5) || var5.sessionstate != "playing") {
-      var6 = var5 getentitynumber();
+  foreach(var_5 in var_2) {
+    if(!isalive(var_5) || var_5.sessionstate != "playing") {
+      var_6 = var_5 getentitynumber();
 
-      if(isDefined(level.level_logic[var6])) {
-        var5.forcespawnangles = (0, 0, 0);
-        var5.forcespawnorigin = level.level_logic[var6];
+      if(isDefined(level.level_logic[var_6])) {
+        var_5.forcespawnangles = (0, 0, 0);
+        var_5.forcespawnorigin = level.level_logic[var_6];
       } else {
-        var5.forcespawnangles = var5.angles;
-        var5.forcespawnorigin = var5.origin;
+        var_5.forcespawnangles = var_5.angles;
+        var_5.forcespawnorigin = var_5.origin;
       }
 
-      ref_13623(var5, 0);
-      var3 = 1;
+      ref_13623(var_5, 0);
+      var_3 = 1;
     }
 
-    if(istrue(var5.delay_enter_combat_after_investigating_grenade)) {
-      scripts\mp\gametypes\br::ref_13f21(var5, "reviveTeam");
+    if(istrue(var_5.delay_enter_combat_after_investigating_grenade)) {
+      scripts\mp\gametypes\br::ref_13f21(var_5, "reviveTeam");
     }
   }
 
-  if(var3) {
-    var0 iprintlnbold("Reviving Team: " + var1);
+  if(var_3) {
+    var_0 iprintlnbold("Reviving Team: " + var_1);
     wait 1;
     return;
   }
 }
 
-function run_current_spawn_group(var0, var1) {
-  var2 = 0;
+function run_current_spawn_group(var_0, var_1) {
+  var_2 = 0;
 
-  if(level.teamdata[var1]["teamCount"] < level.maxteamsize) {
-    var2 = level.maxteamsize - level.teamdata[var1]["teamCount"];
+  if(level.teamdata[var_1]["teamCount"] < level.maxteamsize) {
+    var_2 = level.maxteamsize - level.teamdata[var_1]["teamCount"];
   }
 
-  if(var2 > 0) {
+  if(var_2 > 0) {
     level.ref_11c84 = &ref_13623;
-    var3 = level.players.size;
-    addbots(var2, var1);
-    var0 iprintlnbold("Spawning Team: " + var1);
-    var4 = gettime() + 10000;
+    var_3 = level.players.size;
+    addbots(var_2, var_1);
+    var_0 iprintlnbold("Spawning Team: " + var_1);
+    var_4 = gettime() + 10000;
 
-    while(gettime() < var4 && level.teamdata[var1]["aliveCount"] < level.maxteamsize) {
+    while(gettime() < var_4 && level.teamdata[var_1]["aliveCount"] < level.maxteamsize) {
       waitframe();
     }
 
     level.ref_11c84 = &scripts\mp\gametypes\br::spawnclientbr;
   }
 
-  return level.teamdata[var1]["alivePlayers"];
+  return level.teamdata[var_1]["alivePlayers"];
 }
 
-function addbots(var0, var1) {
+function addbots(var_0, var_1) {
   setDvar("MSLNRKRRKK", "1");
 
-  if(!isDefined(var1)) {
-    var1 = "autoassign";
+  if(!isDefined(var_1)) {
+    var_1 = "autoassign";
   }
 
-  level thread[[level.bot_funcs["bots_spawn"]]](var0, var1);
+  level thread[[level.bot_funcs["bots_spawn"]]](var_0, var_1);
 
   if(level.matchmakingmatch) {
     setmatchdata("hasBots", 1);
@@ -1919,7 +1919,7 @@ function addbots(var0, var1) {
   }
 }
 
-function ref_13623(var0) {
+function ref_13623(var_0) {
   self.class = scripts\mp\gametypes\br::ref_1234a();
   self.pers["class"] = self.class;
   scripts\mp\playerlogic::spawnplayer(undefined, 0);
@@ -1927,9 +1927,9 @@ function ref_13623(var0) {
   waitframe();
   self skydive_setdeploymentstatus(0);
   self skydive_setbasejumpingstatus(0);
-  var1 = !self calloutmarkerping_getEnt();
+  var_1 = !self calloutmarkerping_getEnt();
 
-  if(var1) {
+  if(var_1) {
     while(isalive(self) && isDefined(self.weaponlist) && !self hasloadedviewweapons(self.weaponlist)) {
       waitframe();
     }
@@ -1940,8 +1940,8 @@ function ref_13623(var0) {
   self freezecontrols(0);
 }
 
-function showsplash(var0) {
-  foreach(var2 in level.players) {
-    var2 scripts\mp\hud_message::showsplash(var0);
+function showsplash(var_0) {
+  foreach(var_2 in level.players) {
+    var_2 scripts\mp\hud_message::showsplash(var_0);
   }
 }

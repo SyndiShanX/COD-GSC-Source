@@ -15,13 +15,13 @@ function main() {
 
 function main_thread() {
   scripts\engine\utility::flag_wait("start_is_set");
-  var0 = 0;
+  var_0 = 0;
 
   if(!level_has_chyron()) {
     thread quick_fadeup();
   }
 
-  if(!scripts\engine\sp\utility::is_default_start() || var0) {
+  if(!scripts\engine\sp\utility::is_default_start() || var_0) {
     scripts\engine\utility::delaythread(0.05, &scripts\engine\utility::flag_set, "introscreen_complete");
     return;
   }
@@ -35,8 +35,8 @@ function main_thread() {
 }
 
 function level_has_chyron() {
-  var0 = tablelookup("sp/levels.csv", 1, level.script, 14);
-  return var0 != "";
+  var_0 = tablelookup("sp/levels.csv", 1, level.script, 14);
+  return var_0 != "";
 }
 
 function quick_fadeup() {
@@ -45,19 +45,19 @@ function quick_fadeup() {
   thread scripts\sp\hud_util::fade_in(0);
 }
 
-function introscreen(var0, var1) {
+function introscreen(var_0, var_1) {
   if(scripts\engine\utility::flag_exist("introscreen_start_wait")) {
     scripts\engine\utility::flag_wait("introscreen_start_wait");
   }
 
-  var2 = scripts\sp\endmission::getlevelindex(level.script);
+  var_2 = scripts\sp\endmission::getlevelindex(level.script);
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return;
   }
 
-  var2 += 1;
-  setomnvar("ui_chyron_level_index", var2);
+  var_2 += 1;
+  setomnvar("ui_chyron_level_index", var_2);
   setomnvar("ui_chyron_on", 1);
   setomnvar("ui_hide_dpad_hud", 1);
   wait 6;

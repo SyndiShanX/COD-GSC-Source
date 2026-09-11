@@ -3,8 +3,8 @@
  * Script: scripts\cp\cp_remote_tank.gsc
 ***********************************************/
 
-function main(var0, var1, var2) {
-  scripts\common\vehicle_build::build_template("veh_pac_sentry_mp", var0, var1, var2);
+function main(var_0, var_1, var_2) {
+  scripts\common\vehicle_build::build_template("veh_pac_sentry_mp", var_0, var_1, var_2);
   scripts\common\vehicle_build::build_localinit(&init_local);
   scripts\common\vehicle_build::build_life(1500, 1499, 1500);
   scripts\common\vehicle_build::build_team("axis");
@@ -40,65 +40,65 @@ function init_remote_tank() {
   setdvarifuninitialized("scr_pac_sentry_instaspawn", 0);
 }
 
-function spawn_remote_tank(var0, var1, var2) {
-  var3 = level.tanksettings["remote_tank"];
+function spawn_remote_tank(var_0, var_1, var_2) {
+  var_3 = level.tanksettings["remote_tank"];
 
-  if(isDefined(var2)) {
-    var3 = var2;
+  if(isDefined(var_2)) {
+    var_3 = var_2;
   }
 
-  var4 = var0.origin;
-  var5 = var0.angles;
+  var_4 = var_0.origin;
+  var_5 = var_0.angles;
 
-  if(!isDefined(var5)) {
-    var5 = (0, 0, 0);
+  if(!isDefined(var_5)) {
+    var_5 = (0, 0, 0);
   }
 
-  var6 = spawnVehicle(var3.modelbase, "veh_pac_sentry_mp_cp", var3.vehicleinfo, var4, var5);
+  var_6 = spawnVehicle(var_3.modelbase, "veh_pac_sentry_mp_cp", var_3.vehicleinfo, var_4, var_5);
 
-  if(!isDefined(var6)) {
+  if(!isDefined(var_6)) {
     return undefined;
   }
 
-  var6.team = "axis";
-  var6.tanktype = "remote_tank";
-  var6.streakname = "pac_sentry";
-  var6.config = var3;
-  var6.maxhealth = var3.maxhealth;
-  var6.health = var6.maxhealth;
-  var6.lifetime = var3.lifetime;
-  var7 = var6 getentitynumber();
-  addtoassaultdronelist(var6, var7);
-  thread removefromassaultdronelistondeath(var6);
-  var8 = var6 gettagorigin("tag_turret");
-  var9 = spawnturret("misc_turret", var8, var3.mgturretinfo, 0);
-  var9 linkTo(var6, "tag_turret", (0, 0, 0), (0, 0, 0));
-  var9 setModel(level.tanksettings["remote_tank"].mgturretmodelbase);
-  var9.angles = var6.angles;
-  var9.tank = var6;
-  var9 setmode("manual");
-  var9 setturretteam("axis");
-  var9 setdefaultdroppitch(0);
-  var9 setleftarc(360);
-  var9 setrightarc(360);
-  var9 settoparc(45);
-  var9 setbottomarc(45);
-  var9 setconvergencetime(0.05, "yaw");
-  var9 setconvergencetime(0.05, "pitch");
-  var6.mgturret = var9;
-  var6.spawn_node = var0;
-  var6.repulsor = createnavrepulsor("tank_repulsor", 0, var6, 128, 1);
+  var_6.team = "axis";
+  var_6.tanktype = "remote_tank";
+  var_6.streakname = "pac_sentry";
+  var_6.config = var_3;
+  var_6.maxhealth = var_3.maxhealth;
+  var_6.health = var_6.maxhealth;
+  var_6.lifetime = var_3.lifetime;
+  var_7 = var_6 getentitynumber();
+  addtoassaultdronelist(var_6, var_7);
+  thread removefromassaultdronelistondeath(var_6);
+  var_8 = var_6 gettagorigin("tag_turret");
+  var_9 = spawnturret("misc_turret", var_8, var_3.mgturretinfo, 0);
+  var_9 linkTo(var_6, "tag_turret", (0, 0, 0), (0, 0, 0));
+  var_9 setModel(level.tanksettings["remote_tank"].mgturretmodelbase);
+  var_9.angles = var_6.angles;
+  var_9.tank = var_6;
+  var_9 setmode("manual");
+  var_9 setturretteam("axis");
+  var_9 setdefaultdroppitch(0);
+  var_9 setleftarc(360);
+  var_9 setrightarc(360);
+  var_9 settoparc(45);
+  var_9 setbottomarc(45);
+  var_9 setconvergencetime(0.05, "yaw");
+  var_9 setconvergencetime(0.05, "pitch");
+  var_6.mgturret = var_9;
+  var_6.spawn_node = var_0;
+  var_6.repulsor = createnavrepulsor("tank_repulsor", 0, var_6, 128, 1);
 
-  if(isDefined(var1)) {
+  if(isDefined(var_1)) {
     if(!isDefined(level.remote_tanks)) {
       level.remote_tanks = [];
     }
 
-    level.remote_tanks[var1] = var6;
+    level.remote_tanks[var_1] = var_6;
   }
 
   thread remotetank_rumble();
-  return var6;
+  return var_6;
 }
 
 function remotetank_rumble() {
@@ -110,71 +110,71 @@ function remotetank_rumble() {
   }
 }
 
-function use_remote_tank(var0) {
-  var1 = playremotesequence("remotetank", 1);
+function use_remote_tank(var_0) {
+  var_1 = playremotesequence("remotetank", 1);
 
-  if(var1) {
-    tank_finishdropoffsequence(self, var0);
+  if(var_1) {
+    tank_finishdropoffsequence(self, var_0);
     return;
   }
 }
 
-function addtoassaultdronelist(var0) {
+function addtoassaultdronelist(var_0) {
   if(!isDefined(level.assaultdrones)) {
     level.assaultdrones = [];
   }
 
-  level.assaultdrones[var0] = self;
+  level.assaultdrones[var_0] = self;
 }
 
-function removefromassaultdronelistondeath(var0) {
+function removefromassaultdronelistondeath(var_0) {
   self waittill("death");
-  level.assaultdrones[var0] = undefined;
+  level.assaultdrones[var_0] = undefined;
 }
 
-function tank_finishdropoffsequence(var0, var1) {
-  var2 = var1.origin + (0, 0, 200);
-  var3 = var1.angles;
-  var4 = var2 - anglesToForward(var3) * 100;
-  var5 = var3;
-  var6 = "on";
+function tank_finishdropoffsequence(var_0, var_1) {
+  var_2 = var_1.origin + (0, 0, 200);
+  var_3 = var_1.angles;
+  var_4 = var_2 - anglesToForward(var_3) * 100;
+  var_5 = var_3;
+  var_6 = "on";
 
   if(isDefined(self.config.ref_13e88)) {
-    var6 = self.config.ref_13e88;
+    var_6 = self.config.ref_13e88;
   }
 
-  var1.mgturret setscriptablepartstate("lights", var6);
-  var1.mgturret laseron();
-  var0 scripts\common\utility::allow_fire(0);
-  var1.owner = var0;
-  var1.mgturret maketurretoperable();
-  tank_playercameratransition(var1, var2, var3, var4, var5);
-  var0 scripts\common\utility::allow_fire(1);
-  thread startusingtank(var0);
+  var_1.mgturret setscriptablepartstate("lights", var_6);
+  var_1.mgturret laseron();
+  var_0 scripts\common\utility::allow_fire(0);
+  var_1.owner = var_0;
+  var_1.mgturret maketurretoperable();
+  tank_playercameratransition(var_1, var_2, var_3, var_4, var_5);
+  var_0 scripts\common\utility::allow_fire(1);
+  thread startusingtank(var_0);
   thread tank_watchfortimeoutdisowned();
   thread tank_handleairburst();
   thread tank_handlewheeldustfx();
 }
 
-function tank_playercameratransition(var0, var1, var2, var3) {
+function tank_playercameratransition(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
   self.owner unlink();
-  var4 = spawn("script_model", var0);
-  var4 setModel("tag_player");
-  var4.owner = self.owner;
-  var4.angles = var1;
-  self.owner playerlinkweaponviewtodelta(var4, "tag_player", 1, 0, 0, 0, 0, 1);
+  var_4 = spawn("script_model", var_0);
+  var_4 setModel("tag_player");
+  var_4.owner = self.owner;
+  var_4.angles = var_1;
+  self.owner playerlinkweaponviewtodelta(var_4, "tag_player", 1, 0, 0, 0, 0, 1);
   self.owner playerlinkedsetviewznear(0);
   level notify("vision_set_change_request", "tac_ops_slamzoom", self.owner, 0.2);
-  var2 += (0, 0, 20);
-  var3 = vectortoangles(var0 - var2);
-  var4 moveTo(var2, 0.5);
-  var4 rotateTo(var3, 0.5);
+  var_2 += (0, 0, 20);
+  var_3 = vectortoangles(var_0 - var_2);
+  var_4 moveTo(var_2, 0.5);
+  var_4 rotateTo(var_3, 0.5);
   thread tank_startfadetransition();
   scripts\cp\cp_hostmigration::waitlongdurationwithhostmigrationpause(0.5);
   level notify("vision_set_change_request", undefined, self.owner, 0.2, "tac_ops_slamzoom");
   self.owner unlink();
-  var4 delete();
+  var_4 delete();
 }
 
 function tank_startfadetransition() {
@@ -184,28 +184,28 @@ function tank_startfadetransition() {
   level notify("vision_set_change_request", undefined, self, 0.5, "tac_ops_slamzoom");
 }
 
-function startusingtank(var0) {
+function startusingtank(var_0) {
   level endon("game_ended");
   self endon("disconnect");
   self.isusingremotetank = 1;
-  var0.mgturret setCanDamage(1);
-  var0 setCanDamage(1);
-  var1 = spawnStruct();
-  var1.playdeathfx = 1;
-  var1.deathoverridecallback = &tank_override_moving_platform_death;
-  var0 setotherent(self);
-  var0 setentityowner(self);
-  var0.driver = self;
-  self controlslinkTo(var0);
-  self remotecontrolturret(var0.mgturret);
+  var_0.mgturret setCanDamage(1);
+  var_0 setCanDamage(1);
+  var_1 = spawnStruct();
+  var_1.playdeathfx = 1;
+  var_1.deathoverridecallback = &tank_override_moving_platform_death;
+  var_0 setotherent(self);
+  var_0 setentityowner(self);
+  var_0.driver = self;
+  self controlslinkTo(var_0);
+  self remotecontrolturret(var_0.mgturret);
   self painvisionoff();
   self setclientomnvar("ui_hide_hud", 1);
   self setclientomnvar("ui_pac_sentry_controls", 1);
   self setclientomnvar("ui_pac_sentry_speed", 0);
-  self setclientomnvar("ui_killstreak_countdown", gettime() + int(var0.lifetime * 1000));
-  self setclientomnvar("ui_killstreak_health", var0.health / var0.maxhealth);
+  self setclientomnvar("ui_killstreak_countdown", gettime() + int(var_0.lifetime * 1000));
+  self setclientomnvar("ui_killstreak_health", var_0.health / var_0.maxhealth);
   thread tank_earthquake();
-  var0 thread scripts\cp\utility::allowridekillstreakplayerexit("death");
+  var_0 thread scripts\cp\utility::allowridekillstreakplayerexit("death");
   scripts\cp\utility::_freezecontrols(0);
 }
 
@@ -213,22 +213,22 @@ function tank_handlehelidamage() {
   self endon("death");
 }
 
-function tank_modifyhelidamage(var0) {
-  var1 = var0.attacker;
-  var2 = var0.objweapon;
-  var3 = var0.meansofdeath;
-  var4 = var0.damage;
-  var5 = var0.idflags;
-  var6 = var4;
-  return var6;
+function tank_modifyhelidamage(var_0) {
+  var_1 = var_0.attacker;
+  var_2 = var_0.objweapon;
+  var_3 = var_0.meansofdeath;
+  var_4 = var_0.damage;
+  var_5 = var_0.idflags;
+  var_6 = var_4;
+  return var_6;
 }
 
-function tank_handlehelideathdamage(var0) {
-  var1 = var0.attacker;
-  var2 = var0.objweapon;
-  var3 = var0.meansofdeath;
-  var4 = var0.damage;
-  var5 = var0.idflags;
+function tank_handlehelideathdamage(var_0) {
+  var_1 = var_0.attacker;
+  var_2 = var_0.objweapon;
+  var_3 = var_0.meansofdeath;
+  var_4 = var_0.damage;
+  var_5 = var_0.idflags;
 
   if(isDefined(self.intromodel)) {
     self.intromodel delete();
@@ -237,20 +237,20 @@ function tank_handlehelideathdamage(var0) {
   self notify("death");
 }
 
-function tank_modifydamageresponse(var0) {
-  thread tank_modifydamagestate(var0);
-  var1 = var0.damage;
-  var2 = var0.meansofdeath;
+function tank_modifydamageresponse(var_0) {
+  thread tank_modifydamagestate(var_0);
+  var_1 = var_0.damage;
+  var_2 = var_0.meansofdeath;
   return true;
 }
 
-function tank_modifydamagestate(var0) {
-  var1 = var0.damage;
-  self.currenthealth = self.health - var1;
+function tank_modifydamagestate(var_0) {
+  var_1 = var_0.damage;
+  self.currenthealth = self.health - var_1;
   return true;
 }
 
-function tank_override_moving_platform_death(var0) {
+function tank_override_moving_platform_death(var_0) {
   thread tank_destroy();
 }
 
@@ -269,7 +269,7 @@ function tank_watchfortimeoutdisownedendearly() {
   scripts\cp\cp_hostmigration::waitlongdurationwithhostmigrationpause(self.lifetime);
 }
 
-function tank_destroy(var0) {
+function tank_destroy(var_0) {
   if(istrue(self.destroyed)) {
     return;
   } else {
@@ -280,8 +280,8 @@ function tank_destroy(var0) {
   self notify("death");
   self.mgturret notify("death");
 
-  if(!isDefined(var0)) {
-    var0 = self.owner;
+  if(!isDefined(var_0)) {
+    var_0 = self.owner;
   }
 
   if(isDefined(self.driver)) {
@@ -294,69 +294,69 @@ function tank_destroy(var0) {
   waitframe();
 }
 
-function tank_destroycallback(var0) {
-  thread tank_destroy(var0.attacker);
+function tank_destroycallback(var_0) {
+  thread tank_destroy(var_0.attacker);
   return false;
 }
 
-function tank_driverexit(var0) {
+function tank_driverexit(var_0) {
   self waittill("killstreakExit");
   self notify("end_remote");
   self.driver = undefined;
-  var0.isusingremotetank = undefined;
-  var0 controlsunlink();
+  var_0.isusingremotetank = undefined;
+  var_0 controlsunlink();
 
   if(isDefined(self.mgturret)) {
-    var0 remotecontrolturretoff(self.mgturret);
+    var_0 remotecontrolturretoff(self.mgturret);
   }
 
-  if(isDefined(var0.restoreangles)) {
-    var0 setplayerangles(var0.restoreangles);
-    var0.restoreangles = undefined;
+  if(isDefined(var_0.restoreangles)) {
+    var_0 setplayerangles(var_0.restoreangles);
+    var_0.restoreangles = undefined;
   }
 
-  var0 setclientomnvar("ui_pac_sentry_controls", 0);
-  thread stopremotesequence(var0);
+  var_0 setclientomnvar("ui_pac_sentry_controls", 0);
+  thread stopremotesequence(var_0);
   self setotherent(undefined);
   self setentityowner(undefined);
   self.owner = undefined;
   self.mgturret maketurretinoperable();
-  var0 painvisionon();
+  var_0 painvisionon();
 }
 
 function tank_handleairburst() {
   self endon("death");
 
   for(;;) {
-    self.mgturret waittill("missile_fire", var0);
-    var1 = spawn("script_model", var0.origin);
-    var1 setModel("ks_pac_sentry_mp");
-    var1.angles = var0.angles;
-    var1 linkTo(var0);
-    var1 setentityowner(self.owner);
-    thread tank_watchprojectiledeath(var0, var1);
-    thread tank_findclosestairbursttarget(var0);
+    self.mgturret waittill("missile_fire", var_0);
+    var_1 = spawn("script_model", var_0.origin);
+    var_1 setModel("ks_pac_sentry_mp");
+    var_1.angles = var_0.angles;
+    var_1 linkTo(var_0);
+    var_1 setentityowner(self.owner);
+    thread tank_watchprojectiledeath(var_0, var_1);
+    thread tank_findclosestairbursttarget(var_0);
   }
 }
 
-function tank_watchprojectiledeath(var0, var1) {
-  var1 endon("death");
-  var2 = var0 scripts\engine\utility::ref_143ad("death", "perform_airburst");
+function tank_watchprojectiledeath(var_0, var_1) {
+  var_1 endon("death");
+  var_2 = var_0 scripts\engine\utility::ref_143ad("death", "perform_airburst");
 
-  if(isDefined(var2) && var2 == "perform_airburst") {
-    var1 setscriptablepartstate("airburst", "airExpl");
-    var1 unlink();
+  if(isDefined(var_2) && var_2 == "perform_airburst") {
+    var_1 setscriptablepartstate("airburst", "airExpl");
+    var_1 unlink();
     thread tank_delayairburstscriptabledeath();
 
-    if(isDefined(var0)) {
-      var0 delete();
+    if(isDefined(var_0)) {
+      var_0 delete();
       return;
     }
 
     return;
   }
 
-  var1 delete();
+  var_1 delete();
 }
 
 function tank_delayairburstscriptabledeath() {
@@ -365,35 +365,35 @@ function tank_delayairburstscriptabledeath() {
   self delete();
 }
 
-function tank_findclosestairbursttarget(var0) {
-  var0 endon("death");
+function tank_findclosestairbursttarget(var_0) {
+  var_0 endon("death");
   self endon("death");
 
   for(;;) {
-    var1 = undefined;
-    var2 = undefined;
-    var3 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-    var4 = scripts\engine\utility::get_array_of_closest(var0.origin, var3, undefined, 10, 100);
+    var_1 = undefined;
+    var_2 = undefined;
+    var_3 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
+    var_4 = scripts\engine\utility::get_array_of_closest(var_0.origin, var_3, undefined, 10, 100);
 
-    foreach(var6 in var4) {
-      if(!isDefined(var6) || !scripts\cp\utility::should_be_affected_by_trap(var6, 1)) {
+    foreach(var_6 in var_4) {
+      if(!isDefined(var_6) || !scripts\cp\utility::should_be_affected_by_trap(var_6, 1)) {
         continue;
       }
 
-      if(level.teambased && var6.team == self.owner.team) {
+      if(level.teambased && var_6.team == self.owner.team) {
         continue;
       }
 
-      if(!tank_canseetarget(var0, var6)) {
+      if(!tank_canseetarget(var_0, var_6)) {
         continue;
       }
 
-      var2 = var6;
+      var_2 = var_6;
       break;
     }
 
-    if(isDefined(var2)) {
-      var0 notify("perform_airburst");
+    if(isDefined(var_2)) {
+      var_0 notify("perform_airburst");
       break;
     }
 
@@ -403,7 +403,7 @@ function tank_findclosestairbursttarget(var0) {
 
 function tank_handlewheeldustfx() {
   self endon("death");
-  var0 = 0;
+  var_0 = 0;
   jumpiffalse(istrue(level.wet_level)) LOC_00000015;
   return;
 }
@@ -421,29 +421,29 @@ function tank_empgrenaded() {
   self.mgturret turretfireenable();
 }
 
-function tank_watchfiring(var0) {
+function tank_watchfiring(var_0) {
   self endon("disconnect");
   self endon("end_remote");
-  var0 endon("death");
-  var1 = 50;
-  var2 = var1;
-  var3 = weaponfiretime(level.tanksettings[var0.tanktype].mgturretinfo);
+  var_0 endon("death");
+  var_1 = 50;
+  var_2 = var_1;
+  var_3 = weaponfiretime(level.tanksettings[var_0.tanktype].mgturretinfo);
 
   for(;;) {
-    if(var0.mgturret isfiringvehicleturret()) {
-      var2--;
+    if(var_0.mgturret isfiringvehicleturret()) {
+      var_2--;
 
-      if(var2 <= 0) {
-        var0.mgturret turretfiredisable();
+      if(var_2 <= 0) {
+        var_0.mgturret turretfiredisable();
         wait 2.5;
-        var0 playSound("talon_reload");
+        var_0 playSound("talon_reload");
         self playlocalsound("talon_reload_plr");
-        var2 = var1;
-        var0.mgturret turretfireenable();
+        var_2 = var_1;
+        var_0.mgturret turretfireenable();
       }
     }
 
-    wait var3;
+    wait var_3;
   }
 }
 
@@ -458,43 +458,43 @@ function tank_earthquake() {
   }
 }
 
-function tank_canseetarget(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = (0, 0, 0);
+function tank_canseetarget(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = (0, 0, 0);
   }
 
-  var2 = 0;
-  var3 = scripts\engine\trace::create_contents(0, 1, 1, 1, 1, 1, 0, 1);
-  var4 = [var0 gettagorigin("j_head"), var0 gettagorigin("j_mainroot"), var0 gettagorigin("tag_origin")];
+  var_2 = 0;
+  var_3 = scripts\engine\trace::create_contents(0, 1, 1, 1, 1, 1, 0, 1);
+  var_4 = [var_0 gettagorigin("j_head"), var_0 gettagorigin("j_mainroot"), var_0 gettagorigin("tag_origin")];
 
-  for(var5 = 0; var5 < var4.size; var5++) {
-    if(!scripts\engine\trace::ray_trace_passed(self.origin + var1, var4[var5], self, var3)) {
+  for(var_5 = 0; var_5 < var_4.size; var_5++) {
+    if(!scripts\engine\trace::ray_trace_passed(self.origin + var_1, var_4[var_5], self, var_3)) {
       continue;
     }
 
-    var2 = 1;
+    var_2 = 1;
     break;
   }
 
-  return var2;
+  return var_2;
 }
 
-function stopremotesequence(var0) {
+function stopremotesequence(var_0) {
   self endon("disconnect");
   level endon("game_ended");
   self notify("stop_remote_sequence");
 
   if(scripts\cp_mp\utility\player_utility::_isalive()) {
-    var1 = "ks_remote_device_mp";
+    var_1 = "ks_remote_device_mp";
 
-    if(istrue(var0)) {
+    if(istrue(var_0)) {
       wait 0.1;
-      self notify("finished_with_manual_weapon_" + var1);
+      self notify("finished_with_manual_weapon_" + var_1);
     } else {
-      self notify("killstreak_finished_with_weapon_" + var1);
+      self notify("killstreak_finished_with_weapon_" + var_1);
     }
 
-    self takeweapon(var1);
+    self takeweapon(var_1);
   }
 
   scripts\cp\utility::clearusingremote();
@@ -503,7 +503,7 @@ function stopremotesequence(var0) {
   self setclientomnvar("ui_hide_hud", 0);
 }
 
-function playremotesequence(var0, var1) {
+function playremotesequence(var_0, var_1) {
   self endon("disconnect");
   level endon("game_ended");
 
@@ -517,20 +517,20 @@ function playremotesequence(var0, var1) {
 
   self notify("play_remote_sequence");
   self playlocalsound("mp_killstreak_tablet_gear");
-  var2 = undefined;
+  var_2 = undefined;
 
-  if(istrue(var1)) {
+  if(istrue(var_1)) {
     if(self isonladder() || self ismantling() || !self isonground()) {
       scripts\cp\cp_hud_message::showerrormessage("KILLSTREAKS/UNAVAILABLE");
       return false;
     }
 
-    var2 = "ks_remote_device_mp";
-    scripts\cp\utility::_giveweapon(var2, 0, 0, 1);
+    var_2 = "ks_remote_device_mp";
+    scripts\cp\utility::_giveweapon(var_2, 0, 0, 1);
     self setclientomnvar("ui_remote_control_sequence", 1);
-    var3 = scripts\cp\cp_weapons::switchtoweaponreliable(var2);
+    var_3 = scripts\cp\cp_weapons::switchtoweaponreliable(var_2);
 
-    if(!istrue(var3)) {
+    if(!istrue(var_3)) {
       return false;
     }
   }
@@ -539,16 +539,16 @@ function playremotesequence(var0, var1) {
   scripts\cp\utility::_freezecontrols(1);
   thread scripts\cp\cp_weapons::unfreezeonroundend();
   thread scripts\cp\cp_weapons::startfadetransition(1.8);
-  var4 = scripts\engine\utility::ref_143b9(1.8, "death");
+  var_4 = scripts\engine\utility::ref_143b9(1.8, "death");
   self notify("ks_freeze_end");
 
-  if(!isDefined(var4) || var4 != "timeout") {
+  if(!isDefined(var_4) || var_4 != "timeout") {
     self setclientomnvar("ui_remote_control_sequence", 0);
     scripts\cp\utility::_freezecontrols(0);
     scripts\cp\utility::clearusingremote();
 
-    if(isDefined(var2)) {
-      self notify("finished_with_manual_weapon_" + var2);
+    if(isDefined(var_2)) {
+      self notify("finished_with_manual_weapon_" + var_2);
     }
 
     self stoplocalsound("mp_killstreak_tablet_gear");
@@ -561,21 +561,21 @@ function playremotesequence(var0, var1) {
   return true;
 }
 
-function fire_on_nearby_players(var0) {
+function fire_on_nearby_players(var_0) {
   self endon("death");
   level endon("wheelsons_deactivated");
   self.targetent = spawn("script_origin", self.origin);
-  var1 = 0;
-  var2 = 0.75;
+  var_1 = 0;
+  var_2 = 0.75;
 
   if(isDefined(self.ref_13b64)) {
-    var2 = self.ref_13b64;
+    var_2 = self.ref_13b64;
   }
 
-  var3 = 0.5;
+  var_3 = 0.5;
 
   if(isDefined(self.ref_13b63)) {
-    var3 = self.ref_13b63;
+    var_3 = self.ref_13b63;
   }
 
   if(!isDefined(self.max_detection_sq)) {
@@ -583,101 +583,101 @@ function fire_on_nearby_players(var0) {
   }
 
   thread flicker_tank_lights();
-  var4 = (0, 0, 50);
+  var_4 = (0, 0, 50);
 
   for(;;) {
     while(!isDefined(self.owner)) {
-      var5 = undefined;
+      var_5 = undefined;
 
-      foreach(var7 in level.players) {
-        if(distancesquared(self.mgturret.origin, var7.origin) > self.max_detection_sq) {
+      foreach(var_7 in level.players) {
+        if(distancesquared(self.mgturret.origin, var_7.origin) > self.max_detection_sq) {
           continue;
         }
 
-        if(isDefined(self.waittill_any_return_no_endon_death_5) && gettime() <= self.waittill_any_return_no_endon_death_4 + 5000) {} else if(isDefined(var0)) {
-          var8 = var0;
+        if(isDefined(self.waittill_any_return_no_endon_death_5) && gettime() <= self.waittill_any_return_no_endon_death_4 + 5000) {} else if(isDefined(var_0)) {
+          var_8 = var_0;
 
-          if(!scripts\engine\math::within_fov_2d(self.mgturret.origin, self.mgturret.angles, var7.origin, var8)) {
+          if(!scripts\engine\math::within_fov_2d(self.mgturret.origin, self.mgturret.angles, var_7.origin, var_8)) {
             continue;
           }
         }
 
-        var4 = questtimerupdate(var5);
+        var_4 = questtimerupdate(var_5);
 
-        if(!tank_canseetarget(var7, var4)) {
+        if(!tank_canseetarget(var_7, var_4)) {
           continue;
         }
 
-        if(!isDefined(self.waittill_objective_start) || var7 != self.waittill_objective_start) {
+        if(!isDefined(self.waittill_objective_start) || var_7 != self.waittill_objective_start) {
           self.waittill_objective_start = undefined;
         }
 
-        var5 = var7;
+        var_5 = var_7;
         break;
       }
 
-      if(!isDefined(var5)) {
+      if(!isDefined(var_5)) {
         wait 0.5;
         self.mgturret cleartargetentity();
 
-        if(var1) {
+        if(var_1) {
           self.mgturret laseroff();
-          var1 = 0;
+          var_1 = 0;
         }
 
         self.waittill_objective_start = undefined;
         continue;
       } else {
-        if(!var1) {
+        if(!var_1) {
           self.mgturret laseron();
           thread flicker_tank_lights();
-          var1 = 1;
+          var_1 = 1;
         }
 
-        var4 = questtimerupdate(var5);
-        self.mgturret settargetentity(var5, var4);
+        var_4 = questtimerupdate(var_5);
+        self.mgturret settargetentity(var_5, var_4);
         self.mgturret scripts\engine\utility::ref_143b9(5, "turret_on_target");
 
-        if(!var5 scripts\cp\utility::is_valid_player() || !tank_canseetarget(var5, var4)) {
+        if(!var_5 scripts\cp\utility::is_valid_player() || !tank_canseetarget(var_5, var_4)) {
           wait 0.5;
 
-          if(var1) {
+          if(var_1) {
             self.mgturret laseroff();
-            var1 = 0;
+            var_1 = 0;
           }
 
           self.waittill_objective_start = undefined;
           continue;
         }
 
-        if(var5 scripts\cp\utility::is_valid_player()) {
+        if(var_5 scripts\cp\utility::is_valid_player()) {
           if(!isDefined(self.waittill_objective_start)) {
-            self.waittill_objective_start = var5;
-            var5 playlocalsound("canister_warning");
+            self.waittill_objective_start = var_5;
+            var_5 playlocalsound("canister_warning");
           }
         }
 
-        wait var2;
-        var4 = questtimerupdate(var5);
+        wait var_2;
+        var_4 = questtimerupdate(var_5);
 
-        if(!var5 scripts\cp\utility::is_valid_player() || !tank_canseetarget(var5, var4) || distancesquared(self.mgturret.origin, var5.origin) > self.max_detection_sq) {
-          if(var1) {
+        if(!var_5 scripts\cp\utility::is_valid_player() || !tank_canseetarget(var_5, var_4) || distancesquared(self.mgturret.origin, var_5.origin) > self.max_detection_sq) {
+          if(var_1) {
             self.mgturret laseroff();
-            var1 = 0;
+            var_1 = 0;
           }
 
           continue;
         }
 
         if(isDefined(self.config.ref_13e8c)) {
-          [[self.config.ref_13e8c]](var5);
+          [[self.config.ref_13e8c]](var_5);
         } else {
           self.mgturret shootturret();
         }
 
         thread notify_nearby_enemies();
         thread damage_nearby_dynolights();
-        wait var3;
+        wait var_3;
       }
 
       wait 0.5;
@@ -689,40 +689,40 @@ function fire_on_nearby_players(var0) {
 
 function notify_nearby_enemies() {
   level notify("enemy_spotted", self);
-  var0 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-  var1 = 1000;
+  var_0 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
+  var_1 = 1000;
 
   if(isDefined(self.enemy_notify_range)) {
-    var1 = self.enemy_notify_range;
+    var_1 = self.enemy_notify_range;
   }
 
-  var2 = scripts\engine\utility::get_array_of_closest(self.origin, var0, undefined, undefined, var1);
+  var_2 = scripts\engine\utility::get_array_of_closest(self.origin, var_0, undefined, undefined, var_1);
 
-  foreach(var4 in var2) {
-    var4 notify("bulletwhizby");
+  foreach(var_4 in var_2) {
+    var_4 notify("bulletwhizby");
   }
 }
 
-function questtimerupdate(var0) {
-  var1 = (0, 0, 50);
+function questtimerupdate(var_0) {
+  var_1 = (0, 0, 50);
 
-  if(isPlayer(var0)) {
-    var2 = var0 getstance();
+  if(isPlayer(var_0)) {
+    var_2 = var_0 getstance();
 
-    switch (var2) {
+    switch (var_2) {
       case "crouch":
-        var1 = (0, 0, 25);
+        var_1 = (0, 0, 25);
         break;
       case "prone":
-        var1 = (0, 0, 0);
+        var_1 = (0, 0, 0);
         break;
       default:
-        var1 = (0, 0, 50);
+        var_1 = (0, 0, 50);
         break;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
 function damage_nearby_dynolights() {
@@ -730,27 +730,27 @@ function damage_nearby_dynolights() {
     return;
   }
 
-  var0 = getEntArray("office_light_destructible", "script_noteworthy");
-  var1 = scripts\engine\utility::get_array_of_closest(self.origin, var0, undefined, 2, 350);
+  var_0 = getEntArray("office_light_destructible", "script_noteworthy");
+  var_1 = scripts\engine\utility::get_array_of_closest(self.origin, var_0, undefined, 2, 350);
 
-  if(var1.size == 0) {
+  if(var_1.size == 0) {
     return;
   }
 
-  foreach(var3 in var1) {
-    var3 notify("damage", 1000);
+  foreach(var_3 in var_1) {
+    var_3 notify("damage", 1000);
   }
 }
 
 function flicker_tank_lights() {
   self endon("death");
-  var0 = "on";
+  var_0 = "on";
 
   if(isDefined(self.config.ref_13e88)) {
-    var0 = self.config.ref_13e88;
+    var_0 = self.config.ref_13e88;
   }
 
   self.mgturret setscriptablepartstate("lights", "off");
   wait 0.5;
-  self.mgturret setscriptablepartstate("lights", var0);
+  self.mgturret setscriptablepartstate("lights", var_0);
 }

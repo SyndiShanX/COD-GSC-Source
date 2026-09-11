@@ -23,100 +23,100 @@ function vehicle_occupancy_mp_init() {
   level.vehicle.ref_1424e = getdvarint("scr_vehicle_lights", 1);
 }
 
-function vehicle_occupancy_mp_onentervehicle(var0, var1, var2, var3) {
-  var2 scripts\mp\utility\perk::giveperk("specialty_ghost");
-  var2 scripts\mp\utility\perk::giveperk("specialty_tracker_jammer");
-  var4 = level.gametype == "br";
+function vehicle_occupancy_mp_onentervehicle(var_0, var_1, var_2, var_3) {
+  var_2 scripts\mp\utility\perk::giveperk("specialty_ghost");
+  var_2 scripts\mp\utility\perk::giveperk("specialty_tracker_jammer");
+  var_4 = level.gametype == "br";
 
-  if(!var4 || scripts\cp_mp\vehicles\vehicle_occupancy::ref_141df(var0, var1)) {
-    var2 scripts\mp\playeractions::allowactionset("vehicle", 0);
-  } else if(var4) {
-    var2 scripts\mp\playeractions::allowactionset("vehicle_passenger", 0);
+  if(!var_4 || scripts\cp_mp\vehicles\vehicle_occupancy::ref_141df(var_0, var_1)) {
+    var_2 scripts\mp\playeractions::allowactionset("vehicle", 0);
+  } else if(var_4) {
+    var_2 scripts\mp\playeractions::allowactionset("vehicle_passenger", 0);
   }
 
   if(getDvar("scr_br_gametype", "") == "dmz" || getDvar("scr_br_gametype", "") == "rat_race" || getDvar("scr_br_gametype", "") == "risk" || getDvar("scr_br_gametype", "") == "gold_war") {
-    scripts\mp\gametypes\br_plunder::ref_12781(var2, 0, 1);
+    scripts\mp\gametypes\br_plunder::ref_12781(var_2, 0, 1);
   }
 
-  ref_141f0(var2);
-  scripts\mp\outofbounds::enableoobimmunity(var2);
+  ref_141f0(var_2);
+  scripts\mp\outofbounds::enableoobimmunity(var_2);
 
-  if(scripts\mp\outofbounds::isoob(var0, 1)) {
-    var0 thread scripts\mp\vehicles\vehicle_oob_mp::vehicle_oob_mp_entercallbackforplayer(var2);
+  if(scripts\mp\outofbounds::isoob(var_0, 1)) {
+    var_0 thread scripts\mp\vehicles\vehicle_oob_mp::vehicle_oob_mp_entercallbackforplayer(var_2);
   }
 
-  if(isDefined(var2.team) && isDefined(var2.squadindex) && istrue(var0.israllypointvehicle)) {
-    thread scripts\mp\spawnselection::ref_12acb(var2.team, var2.squadindex);
+  if(isDefined(var_2.team) && isDefined(var_2.squadindex) && istrue(var_0.israllypointvehicle)) {
+    thread scripts\mp\spawnselection::ref_12acb(var_2.team, var_2.squadindex);
   }
 
-  if(isDefined(level.playerconnectwatcher) && var2[[level.playerconnectwatcher]]()) {
+  if(isDefined(level.playerconnectwatcher) && var_2[[level.playerconnectwatcher]]()) {
     if(isDefined(level.playerexecutionsenable)) {
-      var2[[level.playerexecutionsenable]]();
+      var_2[[level.playerexecutionsenable]]();
     }
   }
 
-  vehicle_occupancy_mp_updatemarkfilter(var0);
-  ref_141f1(var0);
-  ref_141f3(var0);
+  vehicle_occupancy_mp_updatemarkfilter(var_0);
+  ref_141f1(var_0);
+  ref_141f3(var_0);
 }
 
-function vehicle_occupancy_mp_onexitvehicle(var0, var1, var2, var3) {
-  if(!istrue(var3.playerdisconnect) && isDefined(var2)) {
-    if(!istrue(var3.playerdeath)) {
-      var2 scripts\mp\utility\perk::removeperk("specialty_ghost");
-      var2 scripts\mp\utility\perk::removeperk("specialty_tracker_jammer");
-      var4 = level.gametype == "br";
+function vehicle_occupancy_mp_onexitvehicle(var_0, var_1, var_2, var_3) {
+  if(!istrue(var_3.playerdisconnect) && isDefined(var_2)) {
+    if(!istrue(var_3.playerdeath)) {
+      var_2 scripts\mp\utility\perk::removeperk("specialty_ghost");
+      var_2 scripts\mp\utility\perk::removeperk("specialty_tracker_jammer");
+      var_4 = level.gametype == "br";
 
-      if(!var4 || scripts\cp_mp\vehicles\vehicle_occupancy::ref_141df(var0, var1)) {
-        var2 scripts\mp\playeractions::allowactionset("vehicle", 1);
-      } else if(var4) {
-        var2 scripts\mp\playeractions::allowactionset("vehicle_passenger", 1);
+      if(!var_4 || scripts\cp_mp\vehicles\vehicle_occupancy::ref_141df(var_0, var_1)) {
+        var_2 scripts\mp\playeractions::allowactionset("vehicle", 1);
+      } else if(var_4) {
+        var_2 scripts\mp\playeractions::allowactionset("vehicle_passenger", 1);
       }
 
       if(getDvar("scr_br_gametype", "") == "dmz" || getDvar("scr_br_gametype", "") == "rat_race" || getDvar("scr_br_gametype", "") == "risk" || getDvar("scr_br_gametype", "") == "gold_war") {
-        scripts\mp\gametypes\br_plunder::ref_12781(var2, 1, 1);
+        scripts\mp\gametypes\br_plunder::ref_12781(var_2, 1, 1);
       }
 
-      if(scripts\mp\outofbounds::isoob(var0, 1)) {
-        var0 thread scripts\mp\vehicles\vehicle_oob_mp::vehicle_oob_mp_exitcallbackforplayer(var2);
+      if(scripts\mp\outofbounds::isoob(var_0, 1)) {
+        var_0 thread scripts\mp\vehicles\vehicle_oob_mp::vehicle_oob_mp_exitcallbackforplayer(var_2);
       }
 
-      scripts\mp\outofbounds::disableoobimmunity(var2);
+      scripts\mp\outofbounds::disableoobimmunity(var_2);
     }
 
-    ref_141ed(var2, var3.playerdeath, var3.playerlaststand);
+    ref_141ed(var_2, var_3.playerdeath, var_3.playerlaststand);
 
-    if(isDefined(var2.team) && isDefined(var2.squadindex) && istrue(var0.israllypointvehicle)) {
-      thread scripts\mp\spawnselection::ref_12acb(var3.team, var3.squadindex);
+    if(isDefined(var_2.team) && isDefined(var_2.squadindex) && istrue(var_0.israllypointvehicle)) {
+      thread scripts\mp\spawnselection::ref_12acb(var_3.team, var_3.squadindex);
     }
 
-    if(isDefined(level.playerconnectwatcher) && var2[[level.playerconnectwatcher]]()) {
+    if(isDefined(level.playerconnectwatcher) && var_2[[level.playerconnectwatcher]]()) {
       if(isDefined(level.playerexitcombatarea)) {
-        var2[[level.playerexitcombatarea]]();
+        var_2[[level.playerexitcombatarea]]();
       }
     }
 
-    var2 notify("vehicle_exit");
+    var_2 notify("vehicle_exit");
   }
 
-  vehicle_occupancy_mp_updatemarkfilter(var0);
-  ref_141f1(var0);
-  ref_141f3(var0);
+  vehicle_occupancy_mp_updatemarkfilter(var_0);
+  ref_141f1(var_0);
+  ref_141f3(var_0);
 }
 
-function ref_141ec(var0, var1, var2, var3) {
-  var4 = level.gametype == "br";
+function ref_141ec(var_0, var_1, var_2, var_3) {
+  var_4 = level.gametype == "br";
 
-  if(var4 && isDefined(var2) && isDefined(var3)) {
-    if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141df(var1, var2)) {
-      var0 scripts\mp\playeractions::allowactionset("vehicle", 1);
-      var0 scripts\mp\playeractions::allowactionset("vehicle_passenger", 0);
+  if(var_4 && isDefined(var_2) && isDefined(var_3)) {
+    if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141df(var_1, var_2)) {
+      var_0 scripts\mp\playeractions::allowactionset("vehicle", 1);
+      var_0 scripts\mp\playeractions::allowactionset("vehicle_passenger", 0);
       return;
     }
 
-    if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141df(var1, var3)) {
-      var0 scripts\mp\playeractions::allowactionset("vehicle_passenger", 1);
-      var0 scripts\mp\playeractions::allowactionset("vehicle", 0);
+    if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141df(var_1, var_3)) {
+      var_0 scripts\mp\playeractions::allowactionset("vehicle_passenger", 1);
+      var_0 scripts\mp\playeractions::allowactionset("vehicle", 0);
       return;
     }
 
@@ -124,65 +124,65 @@ function ref_141ec(var0, var1, var2, var3) {
   }
 }
 
-function vehicle_occupancy_mp_updatemarkfilter(var0) {
-  if(!isDefined(var0.occupants)) {
+function vehicle_occupancy_mp_updatemarkfilter(var_0) {
+  if(!isDefined(var_0.occupants)) {
     return;
   }
 
-  if(!isDefined(var0.ref_11b19)) {
-    var0.ref_11b19 = 1;
+  if(!isDefined(var_0.ref_11b19)) {
+    var_0.ref_11b19 = 1;
   }
 
-  var1 = var0.ref_11b19;
-  var2 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getalloccupants(var0);
-  var0.ref_11b19 = var2.size > 0;
+  var_1 = var_0.ref_11b19;
+  var_2 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getalloccupants(var_0);
+  var_0.ref_11b19 = var_2.size > 0;
 
-  if(var1 && !var0.ref_11b19) {
-    var0 disableplayermarks("killstreak");
-  } else if(!var1 && var0.ref_11b19) {
-    var0 enableplayermarks("killstreak");
+  if(var_1 && !var_0.ref_11b19) {
+    var_0 disableplayermarks("killstreak");
+  } else if(!var_1 && var_0.ref_11b19) {
+    var_0 enableplayermarks("killstreak");
   }
 
-  if(var0.ref_11b19) {
+  if(var_0.ref_11b19) {
     if(level.teambased) {
-      var3 = [];
+      var_3 = [];
 
-      foreach(var5 in var2) {
-        if(!scripts\engine\utility::array_contains(var3, var5.team)) {
-          var3 = var5.team;
+      foreach(var_5 in var_2) {
+        if(!scripts\engine\utility::array_contains(var_3, var_5.team)) {
+          var_3 = var_5.team;
         }
       }
 
-      var0 filteroutplayermarks(var3);
+      var_0 filteroutplayermarks(var_3);
       return;
     }
 
-    var0 filteroutplayermarks(var2);
+    var_0 filteroutplayermarks(var_2);
     return;
   }
 }
 
-function vehicle_occupancy_mp_registerinstance(var0) {}
+function vehicle_occupancy_mp_registerinstance(var_0) {}
 
-function vehicle_occupancy_mp_deregisterinstance(var0) {}
+function vehicle_occupancy_mp_deregisterinstance(var_0) {}
 
-function ref_141ee(var0, var1, var2, var3) {
-  var4 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getleveldataforseat(var0.vehiclename, var1);
+function ref_141ee(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getleveldataforseat(var_0.vehiclename, var_1);
 
-  if(istrue(var4.ref_13345)) {
+  if(istrue(var_4.ref_13345)) {
     return;
   }
 
-  if(isDefined(level.ref_11a32) && scripts\engine\utility::array_contains(level.ref_11a32, var2)) {
-    if(isDefined(var2.carriable_set_dropped)) {
-      killfxontag(level._effect["vfx_br_cashLeaderBag"], var2, "j_bag_left");
-      var5 = "accessory_money_bag_large_closed_player";
+  if(isDefined(level.ref_11a32) && scripts\engine\utility::array_contains(level.ref_11a32, var_2)) {
+    if(isDefined(var_2.carriable_set_dropped)) {
+      killfxontag(level._effect["vfx_br_cashLeaderBag"], var_2, "j_bag_left");
+      var_5 = "accessory_money_bag_large_closed_player";
 
       if(scripts\mp\gametypes\br_public::shouldusegoldbarassets()) {
-        var5 = "accessory_gold_bar_bag_player";
+        var_5 = "accessory_gold_bar_bag_player";
       }
 
-      var2 hidepart("j_bag_left", var5);
+      var_2 hidepart("j_bag_left", var_5);
       return;
     }
 
@@ -190,23 +190,23 @@ function ref_141ee(var0, var1, var2, var3) {
   }
 }
 
-function ref_141ef(var0, var1, var2, var3) {
-  var4 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getleveldataforseat(var0.vehiclename, var1);
+function ref_141ef(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getleveldataforseat(var_0.vehiclename, var_1);
 
-  if(istrue(var4.ref_13345)) {
+  if(istrue(var_4.ref_13345)) {
     return;
   }
 
-  if(isDefined(level.ref_11a32) && scripts\engine\utility::array_contains(level.ref_11a32, var2)) {
-    if(isDefined(var2.carriable_set_dropped)) {
-      var5 = "accessory_money_bag_large_closed_player";
+  if(isDefined(level.ref_11a32) && scripts\engine\utility::array_contains(level.ref_11a32, var_2)) {
+    if(isDefined(var_2.carriable_set_dropped)) {
+      var_5 = "accessory_money_bag_large_closed_player";
 
       if(scripts\mp\gametypes\br_public::shouldusegoldbarassets()) {
-        var5 = "accessory_gold_bar_bag_player";
+        var_5 = "accessory_gold_bar_bag_player";
       }
 
-      var2 showpart("j_bag_left", var5);
-      playFXOnTag(level._effect["vfx_br_cashLeaderBag"], var2, "j_bag_left");
+      var_2 showpart("j_bag_left", var_5);
+      playFXOnTag(level._effect["vfx_br_cashLeaderBag"], var_2, "j_bag_left");
       return;
     }
 
@@ -214,129 +214,129 @@ function ref_141ef(var0, var1, var2, var3) {
   }
 }
 
-function vehicle_occupancy_mp_updateowner(var0) {
-  vehicle_occupancy_mp_updatemarkfilter(var0);
+function vehicle_occupancy_mp_updateowner(var_0) {
+  vehicle_occupancy_mp_updatemarkfilter(var_0);
 }
 
-function ref_141f0(var0, var1, var2) {
-  var3 = undefined;
-  var4 = undefined;
-  var5 = undefined;
-  var6 = var0 getweaponslistprimaries();
+function ref_141f0(var_0, var_1, var_2) {
+  var_3 = undefined;
+  var_4 = undefined;
+  var_5 = undefined;
+  var_6 = var_0 getweaponslistprimaries();
 
-  foreach(var8 in var6) {
-    if(nullweapon(var8)) {
+  foreach(var_8 in var_6) {
+    if(nullweapon(var_8)) {
       continue;
     }
 
-    if(scripts\mp\riotshield::isriotshield(var8)) {
-      var3 = var8;
+    if(scripts\mp\riotshield::isriotshield(var_8)) {
+      var_3 = var_8;
 
-      if(isnullweapon(var3, var0 getcurrentprimaryweapon())) {
-        var4 = 1;
+      if(isnullweapon(var_3, var_0 getcurrentprimaryweapon())) {
+        var_4 = 1;
       }
 
       continue;
     }
 
-    if(!isDefined(var5)) {
-      var9 = var8 getnoaltweapon();
+    if(!isDefined(var_5)) {
+      var_9 = var_8 getnoaltweapon();
 
-      if(var9.inventorytype != "primary") {
+      if(var_9.inventorytype != "primary") {
         continue;
       }
 
-      var5 = var8;
+      var_5 = var_8;
     }
   }
 
-  if(isDefined(var3)) {
-    var0 scripts\cp_mp\utility\inventory_utility::_takeweapon(var3);
-    var0.ref_12d53 = var3;
-    var0.ref_12d4f = var4;
+  if(isDefined(var_3)) {
+    var_0 scripts\cp_mp\utility\inventory_utility::_takeweapon(var_3);
+    var_0.ref_12d53 = var_3;
+    var_0.ref_12d4f = var_4;
 
-    if(istrue(var4)) {
-      ref_141f2(var0, var1, var2);
+    if(istrue(var_4)) {
+      ref_141f2(var_0, var_1, var_2);
     }
 
-    var0 scripts\mp\class::riotshieldonweaponchange(var5);
-    var0 notify("modified_riot_shield");
-    var0 endon("modified_riot_shield");
-    var0 childthread scripts\cp_mp\utility\inventory_utility::forcevalidweapon(var5);
+    var_0 scripts\mp\class::riotshieldonweaponchange(var_5);
+    var_0 notify("modified_riot_shield");
+    var_0 endon("modified_riot_shield");
+    var_0 childthread scripts\cp_mp\utility\inventory_utility::forcevalidweapon(var_5);
     return;
   }
 }
 
-function ref_141ed(var0, var1, var2) {
-  if(isDefined(var0.ref_12d53)) {
-    var3 = level.gametype == "br";
+function ref_141ed(var_0, var_1, var_2) {
+  if(isDefined(var_0.ref_12d53)) {
+    var_3 = level.gametype == "br";
 
-    if(!istrue(var1) && (var3 || !istrue(var2))) {
-      var0 scripts\cp_mp\utility\inventory_utility::_giveweapon(var0.ref_12d53);
-      var0 scripts\mp\class::ref_13c5c();
+    if(!istrue(var_1) && (var_3 || !istrue(var_2))) {
+      var_0 scripts\cp_mp\utility\inventory_utility::_giveweapon(var_0.ref_12d53);
+      var_0 scripts\mp\class::ref_13c5c();
 
-      if(istrue(var0.ref_12d4f)) {
-        var0 notify("modified_riot_shield");
-        var0 endon("modified_riot_shield");
+      if(istrue(var_0.ref_12d4f)) {
+        var_0 notify("modified_riot_shield");
+        var_0 endon("modified_riot_shield");
 
-        if(!istrue(var2)) {
-          var0 childthread scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate(var0.ref_12d53);
+        if(!istrue(var_2)) {
+          var_0 childthread scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate(var_0.ref_12d53);
         }
       }
     }
 
-    var0.ref_12d53 = undefined;
-    var0.ref_12d4f = undefined;
-    var0 notify("modified_riot_shield");
+    var_0.ref_12d53 = undefined;
+    var_0.ref_12d4f = undefined;
+    var_0 notify("modified_riot_shield");
     return;
   }
 }
 
-function ref_141f2(var0, var1, var2) {
-  if(isDefined(var0.ref_12d53) && istrue(var0.ref_12d4f)) {
-    if(!isDefined(var2)) {
+function ref_141f2(var_0, var_1, var_2) {
+  if(isDefined(var_0.ref_12d53) && istrue(var_0.ref_12d4f)) {
+    if(!isDefined(var_2)) {
       return;
     }
 
-    if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141df(var1, var2)) {
+    if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141df(var_1, var_2)) {
       return;
     }
 
-    if(scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_shouldhideoccupantforseat(var1, var2)) {
+    if(scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_shouldhideoccupantforseat(var_1, var_2)) {
       return;
     }
 
-    var3 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getleveldataforseat(var1.vehiclename, var2);
+    var_3 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getleveldataforseat(var_1.vehiclename, var_2);
 
-    if(isDefined(var3.ref_13e8a)) {
+    if(isDefined(var_3.ref_13e8a)) {
       return;
     }
 
-    var0.ref_12d4f = undefined;
+    var_0.ref_12d4f = undefined;
     return;
   }
 }
 
-function ref_141f3(var0) {
-  if(!var0 getscriptablehaspart("stability")) {
+function ref_141f3(var_0) {
+  if(!var_0 getscriptablehaspart("stability")) {
     return;
   }
 
-  var1 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getalloccupants(var0);
-  var2 = var0 vehicle_getspeed();
+  var_1 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getalloccupants(var_0);
+  var_2 = var_0 vehicle_getspeed();
 
-  if(var1.size > 0) {
-    var0 setscriptablepartstate("stability", "stable", 1);
+  if(var_1.size > 0) {
+    var_0 setscriptablepartstate("stability", "stable", 1);
     return;
   }
 
-  if(var1.size == 0 && var2 > 10) {
-    var0 setscriptablepartstate("stability", "unstable", 1);
+  if(var_1.size == 0 && var_2 > 10) {
+    var_0 setscriptablepartstate("stability", "unstable", 1);
     return;
   }
 }
 
-function ref_141f1(var0) {
+function ref_141f1(var_0) {
   if(!level.vehicle.ref_1424e) {
     return;
   }
@@ -345,25 +345,25 @@ function ref_141f1(var0) {
     return;
   }
 
-  if(!var0 getscriptablehaspart("lights")) {
+  if(!var_0 getscriptablehaspart("lights")) {
     return;
   }
 
-  if(!isDefined(var0.showmapchyron)) {
-    var0.showmapchyron = 0;
+  if(!isDefined(var_0.showmapchyron)) {
+    var_0.showmapchyron = 0;
   }
 
-  var1 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getalloccupants(var0);
+  var_1 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getalloccupants(var_0);
 
-  if(var1.size > 0 && !var0.showmapchyron) {
-    var0 setscriptablepartstate("lights", "on", 1);
-    var0.showmapchyron = 1;
+  if(var_1.size > 0 && !var_0.showmapchyron) {
+    var_0 setscriptablepartstate("lights", "on", 1);
+    var_0.showmapchyron = 1;
     return;
   }
 
-  if(var1.size == 0 && var0.showmapchyron) {
-    var0 setscriptablepartstate("lights", "off", 1);
-    var0.showmapchyron = 0;
+  if(var_1.size == 0 && var_0.showmapchyron) {
+    var_0 setscriptablepartstate("lights", "off", 1);
+    var_0.showmapchyron = 0;
     return;
   }
 }
@@ -381,37 +381,37 @@ function ref_141e6() {
   return false;
 }
 
-function vehicle_occupancy_mp_registersentient(var0) {
-  var1 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getleveldataforvehicle(var0.vehiclename);
+function vehicle_occupancy_mp_registersentient(var_0) {
+  var_1 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getleveldataforvehicle(var_0.vehiclename);
 
-  if(!isDefined(var1.threatbiasgroup)) {
+  if(!isDefined(var_1.threatbiasgroup)) {
     return;
   }
 
   if(level.teambased) {
-    var2 = var0.team;
+    var_2 = var_0.team;
 
-    if(isDefined(var0.team) && var0.team == "neutral") {
-      var2 = undefined;
+    if(isDefined(var_0.team) && var_0.team == "neutral") {
+      var_2 = undefined;
     }
 
-    if(!isDefined(var2) && isDefined(var0.owner)) {
-      var2 = var0.owner.team;
+    if(!isDefined(var_2) && isDefined(var_0.owner)) {
+      var_2 = var_0.owner.team;
     }
 
-    if(isDefined(var2)) {
-      if(!isDefined(var0.sentientteam) || var0.sentientteam != var2) {
-        vehicle_occupancy_mp_unregistersentient(var0);
-        var0 scripts\mp\sentientpoolmanager::registersentient(var1.threatbiasgroup, var2);
-        var0.sentientteam = var2;
+    if(isDefined(var_2)) {
+      if(!isDefined(var_0.sentientteam) || var_0.sentientteam != var_2) {
+        vehicle_occupancy_mp_unregistersentient(var_0);
+        var_0 scripts\mp\sentientpoolmanager::registersentient(var_1.threatbiasgroup, var_2);
+        var_0.sentientteam = var_2;
         return;
       }
 
       return;
     }
 
-    if(isDefined(var0.sentientteam)) {
-      vehicle_occupancy_mp_unregistersentient(var0);
+    if(isDefined(var_0.sentientteam)) {
+      vehicle_occupancy_mp_unregistersentient(var_0);
       return;
     }
 
@@ -419,11 +419,11 @@ function vehicle_occupancy_mp_registersentient(var0) {
   }
 }
 
-function vehicle_occupancy_mp_unregistersentient(var0) {
-  var0 notify("remove_sentient");
-  var0.sentientteam = undefined;
+function vehicle_occupancy_mp_unregistersentient(var_0) {
+  var_0 notify("remove_sentient");
+  var_0.sentientteam = undefined;
 }
 
-function vehicle_occupancy_mp_issentient(var0) {
-  return isDefined(var0.sentientteam);
+function vehicle_occupancy_mp_issentient(var_0) {
+  return isDefined(var_0.sentientteam);
 }

@@ -4,15 +4,15 @@
 ****************************************************/
 
 function vehicle_spawn_cp_init() {
-  var0 = getdvarint("scr_max_vehicles", 128);
-  var1 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldata();
-  var1.maxinstancecount = var0;
+  var_0 = getdvarint("scr_max_vehicles", 128);
+  var_1 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldata();
+  var_1.maxinstancecount = var_0;
   scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_spawn", "canSpawnVehicle", &vehicle_spawn_cp_canspawnvehicle);
   scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_spawn", "gameModeSupportsRespawn", &vehicle_spawn_cp_gamemodesupportsrespawn);
   scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_spawn", "gameModeSupportsAbandonedTimeout", &ref_14213);
 }
 
-function vehicle_spawn_cp_canspawnVehicle(var0, var1, var2) {
+function vehicle_spawn_cp_canspawnVehicle(var_0, var_1, var_2) {
   if(getdvarint("LLQQOPKTKM", 0) == 1) {
     return false;
   }

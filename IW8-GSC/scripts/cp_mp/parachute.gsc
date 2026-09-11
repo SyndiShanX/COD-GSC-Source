@@ -65,9 +65,9 @@ function initparachutedvars() {
   level.ref_133f9.pe_chopper_zones = getdvarfloat("scr_parachute_hint_falling_xyratio", 0);
 }
 
-function startfreefall(var0, var1, var2, var3, var4, var5, var6) {
+function startfreefall(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(getdvarint("scr_parachute_FFSM_enabled", 0)) {
-    thread playerpowerresetpowers(var0, var1, var2, var3, var4, var5, var6);
+    thread playerpowerresetpowers(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
     return;
   }
 
@@ -75,8 +75,8 @@ function startfreefall(var0, var1, var2, var3, var4, var5, var6) {
   thread parachutemidairdeathwatcher();
   self skydive_interrupt();
 
-  if(!isDefined(var5)) {
-    var5 = 1;
+  if(!isDefined(var_5)) {
+    var_5 = 1;
   }
 
   if(!istrue(level.parachuteinitfinished)) {
@@ -107,11 +107,11 @@ function startfreefall(var0, var1, var2, var3, var4, var5, var6) {
     level.parachuterestoreweaponscb = &norestoreweaponsdefaultfunc;
   }
 
-  if(!isDefined(var0)) {
-    var0 = 4;
+  if(!isDefined(var_0)) {
+    var_0 = 4;
   }
 
-  if(var5) {
+  if(var_5) {
     self[[level.parachutetakeweaponscb]]();
   }
 
@@ -121,14 +121,14 @@ function startfreefall(var0, var1, var2, var3, var4, var5, var6) {
     self setclientomnvar("ui_br_altimeter_state", 1);
   }
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     self notifyonplayercommand("open_parachute", "+gostand");
   }
 
   self animscriptsetinputparamreplicationstatus(1);
 
-  if(isDefined(var3)) {
-    self setvelocity(var3);
+  if(isDefined(var_3)) {
+    self setvelocity(var_3);
   }
 
   if(!istrue(level.client_activate)) {
@@ -139,59 +139,59 @@ function startfreefall(var0, var1, var2, var3, var4, var5, var6) {
     self skydive_setforcethirdpersonstatus(1);
   }
 
-  if(level.gametype == "br" && (!istrue(var4) || getDvar("scr_br_gametype", "") == "dmz" || getDvar("scr_br_gametype", "") == "rat_race" || getDvar("scr_br_gametype", "") == "risk" || getDvar("scr_br_gametype", "") == "gold_war") && getdvarint("scr_infil_parachute_vfx", 1)) {
+  if(level.gametype == "br" && (!istrue(var_4) || getDvar("scr_br_gametype", "") == "dmz" || getDvar("scr_br_gametype", "") == "rat_race" || getDvar("scr_br_gametype", "") == "risk" || getDvar("scr_br_gametype", "") == "gold_war") && getdvarint("scr_infil_parachute_vfx", 1)) {
     thread stop_restock_recharge(getdvarint("scr_bmo_parachuteTouchdownVFX", 1) == 1 && (getDvar("scr_br_gametype", "") == "dmz" || getDvar("scr_br_gametype", "") == "rat_race" || getDvar("scr_br_gametype", "") == "risk" || getDvar("scr_br_gametype", "") == "gold_war"));
   }
 
-  if(!istrue(var1)) {
-    wait var0;
+  if(!istrue(var_1)) {
+    wait var_0;
   }
 
-  thread pullchute(var2, var1);
+  thread pullchute(var_2, var_1);
 }
 
-function stop_restock_recharge(var0) {
-  var1 = self;
+function stop_restock_recharge(var_0) {
+  var_1 = self;
   level endon("game_ended");
-  var1 endon("disconnect");
-  var1 = self;
+  var_1 endon("disconnect");
+  var_1 = self;
   wait 1;
-  var2 = "enabled";
+  var_2 = "enabled";
 
   if(isDefined(self.operatorcustomization) && isDefined(self.operatorcustomization.disabledebugdialogue)) {
-    var2 += self.operatorcustomization.disabledebugdialogue;
+    var_2 += self.operatorcustomization.disabledebugdialogue;
   }
 
-  var1 setscriptablepartstate("skydiveVfx", var2, 0);
-  var1 setisinfilskydive(1);
+  var_1 setscriptablepartstate("skydiveVfx", var_2, 0);
+  var_1 setisinfilskydive(1);
   wait 2;
 
-  while(isalive(var1) && !var1 shoulddisableskydivevfx()) {
+  while(isalive(var_1) && !var_1 shoulddisableskydivevfx()) {
     wait 0.25;
   }
 
-  if(var0) {
-    while(isalive(var1) && !var1 isonground()) {
+  if(var_0) {
+    while(isalive(var_1) && !var_1 isonground()) {
       wait 0.25;
     }
   }
 
-  var1 setscriptablepartstate("skydiveVfx", "default", 0);
-  var1 setisinfilskydive(0);
+  var_1 setscriptablepartstate("skydiveVfx", "default", 0);
+  var_1 setisinfilskydive(0);
 }
 
-function riotshield_attach_parachute(var0, var1) {
-  var2 = undefined;
+function riotshield_attach_parachute(var_0, var_1) {
+  var_2 = undefined;
 
-  if(var0) {
-    self.riotshieldmodel = var1;
-    var2 = "tag_weapon_right";
+  if(var_0) {
+    self.riotshieldmodel = var_1;
+    var_2 = "tag_weapon_right";
   } else {
-    self.riotshieldmodelstowed = var1;
-    var2 = "tag_shield_back";
+    self.riotshieldmodelstowed = var_1;
+    var_2 = "tag_shield_back";
   }
 
-  self attachshieldmodel(var1, var2);
+  self attachshieldmodel(var_1, var_2);
   self.hasriotshield = riotshield_hasweapon_parachute();
 }
 
@@ -200,29 +200,29 @@ function riotshield_getmodel_parachute() {
 }
 
 function riotshield_hasweapon_parachute() {
-  var0 = 0;
-  var1 = self getweaponslistprimaries();
+  var_0 = 0;
+  var_1 = self getweaponslistprimaries();
 
-  foreach(var3 in var1) {
-    if(isriotshield_parachute(var3)) {
-      var0 = 1;
+  foreach(var_3 in var_1) {
+    if(isriotshield_parachute(var_3)) {
+      var_0 = 1;
       break;
     }
   }
 
-  return var0;
+  return var_0;
 }
 
-function isriotshield_parachute(var0) {
-  if(issameweapon(var0) && nullweapon(var0)) {
+function isriotshield_parachute(var_0) {
+  if(issameweapon(var_0) && nullweapon(var_0)) {
     return false;
   }
 
-  if(isstring(var0) && var0 == "none") {
+  if(isstring(var_0) && var_0 == "none") {
     return false;
   }
 
-  return weapontype(var0) == "riotshield";
+  return weapontype(var_0) == "riotshield";
 }
 
 function isparachutegametype() {
@@ -253,166 +253,166 @@ function getc130sealevel() {
   return 650;
 }
 
-function steerfalling(var0) {
-  var1 = spawn("script_model", self.origin);
-  var1.angles = self.angles;
-  var1 setModel("viewhands_base_iw8");
-  var1 hide();
-  self playerlinktodelta(var1, "tag_player");
-  steerfallinginternal(var1, var0);
-  var1 delete();
+function steerfalling(var_0) {
+  var_1 = spawn("script_model", self.origin);
+  var_1.angles = self.angles;
+  var_1 setModel("viewhands_base_iw8");
+  var_1 hide();
+  self playerlinktodelta(var_1, "tag_player");
+  steerfallinginternal(var_1, var_0);
+  var_1 delete();
 }
 
-function steerfallinginternal(var0, var1) {
+function steerfallinginternal(var_0, var_1) {
   level endon("game_ended");
   self endon("death_or_disconnect");
   self endon("freefall_complete");
   self endon("parachute_complete");
   self notify("steerFalling()");
   self endon("steerFalling()");
-  var2 = 13.8;
-  var3 = 0.0001;
-  var4 = -1350;
-  var5 = 1400;
-  var6 = 1600;
-  var7 = -100;
+  var_2 = 13.8;
+  var_3 = 0.0001;
+  var_4 = -1350;
+  var_5 = 1400;
+  var_6 = 1600;
+  var_7 = -100;
 
   if(level.gametype == "arm") {
-    var4 = -1750;
-    var5 = 400;
-    var6 = 400;
+    var_4 = -1750;
+    var_5 = 400;
+    var_6 = 400;
   }
 
-  if(isDefined(var1)) {
-    var5 *= var1;
-    var6 *= var1;
+  if(isDefined(var_1)) {
+    var_5 *= var_1;
+    var_6 *= var_1;
   }
 
-  var8 = level.framedurationseconds * var3;
-  var0.vel = (0, 0, var7);
+  var_8 = level.framedurationseconds * var_3;
+  var_0.vel = (0, 0, var_7);
   waitframe();
-  var9 = getdvarint("NPOQPMP");
-  var10 = (0, 0, 0);
+  var_9 = getdvarint("NPOQPMP");
+  var_10 = (0, 0, 0);
 
   for(;;) {
-    var11 = self getnormalizedmovement();
-    var12 = var11[0];
-    var13 = var11[1];
-    var14 = self getplayerangles(1);
-    var15 = anglesToForward(var14) * var12;
-    var16 = anglestoright(var14) * var13;
-    var17 = var16 + var15;
-    var18 = vectorNormalize(var17) * var6;
-    var10 += vectorNormalize(var18 - var10) * level.framedurationseconds * var5;
-    var10 -= var10 * length(var10) * var8;
-    var19 = var0.vel[2] - var2 * 39.37 * level.framedurationseconds;
-    var19 = max(var4, var19);
-    var20 = (0, 0, var19);
-    var0.vel = var20 + var10;
-    var0.origin += level.framedurationseconds * var0.vel;
-    var21 = sqrt(var0.vel[0] * var0.vel[0] + var0.vel[1] * var0.vel[1]);
-    var22 = veltomph(var0.vel[2] * -1);
-    var23 = veltomph(var21);
-    var24 = min(1, (self.origin[2] - getc130sealevel()) / (getc130height() - getc130sealevel()));
+    var_11 = self getnormalizedmovement();
+    var_12 = var_11[0];
+    var_13 = var_11[1];
+    var_14 = self getplayerangles(1);
+    var_15 = anglesToForward(var_14) * var_12;
+    var_16 = anglestoright(var_14) * var_13;
+    var_17 = var_16 + var_15;
+    var_18 = vectorNormalize(var_17) * var_6;
+    var_10 += vectorNormalize(var_18 - var_10) * level.framedurationseconds * var_5;
+    var_10 -= var_10 * length(var_10) * var_8;
+    var_19 = var_0.vel[2] - var_2 * 39.37 * level.framedurationseconds;
+    var_19 = max(var_4, var_19);
+    var_20 = (0, 0, var_19);
+    var_0.vel = var_20 + var_10;
+    var_0.origin += level.framedurationseconds * var_0.vel;
+    var_21 = sqrt(var_0.vel[0] * var_0.vel[0] + var_0.vel[1] * var_0.vel[1]);
+    var_22 = veltomph(var_0.vel[2] * -1);
+    var_23 = veltomph(var_21);
+    var_24 = min(1, (self.origin[2] - getc130sealevel()) / (getc130height() - getc130sealevel()));
 
     if(isparachutegametype()) {
-      self setclientomnvar("ui_br_altimeter_height", var24);
+      self setclientomnvar("ui_br_altimeter_height", var_24);
     }
 
     waitframe();
   }
 }
 
-function veltomph(var0) {
-  var1 = var0 * 0.05682;
-  return var1;
+function veltomph(var_0) {
+  var_1 = var_0 * 0.05682;
+  return var_1;
 }
 
-function steerparachuting(var0) {
-  var1 = spawn("script_model", self.origin);
-  var1.angles = self.angles;
-  var1 setModel("viewhands_base_iw8");
-  var1 hide();
-  self playerlinktodelta(var1, "tag_player");
-  steerparachutinginternal(var1, var0);
-  var1 delete();
+function steerparachuting(var_0) {
+  var_1 = spawn("script_model", self.origin);
+  var_1.angles = self.angles;
+  var_1 setModel("viewhands_base_iw8");
+  var_1 hide();
+  self playerlinktodelta(var_1, "tag_player");
+  steerparachutinginternal(var_1, var_0);
+  var_1 delete();
 }
 
-function steerparachutinginternal(var0, var1) {
+function steerparachutinginternal(var_0, var_1) {
   level endon("game_ended");
   self endon("death_or_disconnect");
   self endon("freefall_complete");
   self endon("parachute_landed");
   self notify("steerFalling()");
   self endon("steerFalling()");
-  var2 = 100;
-  var3 = -200;
-  var4 = 600;
-  var5 = 240;
-  var6 = 120;
-  var7 = 60;
-  var8 = 48;
-  var9 = 35;
-  var10 = 700;
-  var11 = 100;
-  var12 = 600;
-  var13 = 300;
-  var14 = 100;
-  var15 = -150;
+  var_2 = 100;
+  var_3 = -200;
+  var_4 = 600;
+  var_5 = 240;
+  var_6 = 120;
+  var_7 = 60;
+  var_8 = 48;
+  var_9 = 35;
+  var_10 = 700;
+  var_11 = 100;
+  var_12 = 600;
+  var_13 = 300;
+  var_14 = 100;
+  var_15 = -150;
 
   if(level.gametype == "arm") {
-    var15 = -200;
+    var_15 = -200;
   }
 
-  if(isDefined(var1)) {
-    var2 *= var1;
-    var3 *= var1;
-    var4 *= var1;
-    var5 *= var1;
-    var6 *= var1;
-    var7 *= var1;
-    var10 *= var1;
-    var12 *= var1;
-    var13 *= var1;
-    var14 *= var1;
+  if(isDefined(var_1)) {
+    var_2 *= var_1;
+    var_3 *= var_1;
+    var_4 *= var_1;
+    var_5 *= var_1;
+    var_6 *= var_1;
+    var_7 *= var_1;
+    var_10 *= var_1;
+    var_12 *= var_1;
+    var_13 *= var_1;
+    var_14 *= var_1;
   }
 
-  var16 = 100;
-  var17 = 0;
-  var18 = 0;
-  var0.vel = (0, 0, 0);
+  var_16 = 100;
+  var_17 = 0;
+  var_18 = 0;
+  var_0.vel = (0, 0, 0);
 
   for(;;) {
-    var19 = self getnormalizedmovement();
-    var20 = var19[0];
-    var21 = var19[1];
-    var22 = self getplayerangles(1);
-    var23 = anglesToForward(var22);
-    var24 = anglestoright(var22);
-    var25 = scripts\engine\utility::ter_op(var20 > 0, var5, var6);
-    var16 += var20 * var25 * level.framedurationseconds;
-    var16 += var7 * level.framedurationseconds * scripts\engine\utility::sign(var2 - var16);
-    var16 = clamp(var16, var3, var4);
-    var26 = -1 * var20 * var9;
-    var17 += scripts\engine\utility::sign(var26 - var17) * var8 * level.framedurationseconds;
-    var27 = rotatepointaroundvector(var24, var23, var17);
-    var28 = var16 * var27;
-    var29 = var23 * var14 + (0, 0, var15);
-    var18 += var12 * level.framedurationseconds * var21;
-    var18 -= var13 * level.framedurationseconds * scripts\engine\utility::sign(var18);
-    var18 = clamp(var18, -1 * var10, var10);
-    var30 = var18 * var24;
-    var31 = var11 * abs(var21);
-    var30 += (0, 0, -1 * var31);
-    var0.vel = var28 + var30 + var29;
-    var0.origin += var0.vel * level.framedurationseconds;
-    var32 = sqrt(var0.vel[0] * var0.vel[0] + var0.vel[1] * var0.vel[1]);
-    var33 = max(0, veltomph(var0.vel[2] * -1));
-    var34 = max(0, veltomph(var32));
-    var35 = min(1, (self.origin[2] - getc130sealevel()) / (getc130height() - getc130sealevel()));
+    var_19 = self getnormalizedmovement();
+    var_20 = var_19[0];
+    var_21 = var_19[1];
+    var_22 = self getplayerangles(1);
+    var_23 = anglesToForward(var_22);
+    var_24 = anglestoright(var_22);
+    var_25 = scripts\engine\utility::ter_op(var_20 > 0, var_5, var_6);
+    var_16 += var_20 * var_25 * level.framedurationseconds;
+    var_16 += var_7 * level.framedurationseconds * scripts\engine\utility::sign(var_2 - var_16);
+    var_16 = clamp(var_16, var_3, var_4);
+    var_26 = -1 * var_20 * var_9;
+    var_17 += scripts\engine\utility::sign(var_26 - var_17) * var_8 * level.framedurationseconds;
+    var_27 = rotatepointaroundvector(var_24, var_23, var_17);
+    var_28 = var_16 * var_27;
+    var_29 = var_23 * var_14 + (0, 0, var_15);
+    var_18 += var_12 * level.framedurationseconds * var_21;
+    var_18 -= var_13 * level.framedurationseconds * scripts\engine\utility::sign(var_18);
+    var_18 = clamp(var_18, -1 * var_10, var_10);
+    var_30 = var_18 * var_24;
+    var_31 = var_11 * abs(var_21);
+    var_30 += (0, 0, -1 * var_31);
+    var_0.vel = var_28 + var_30 + var_29;
+    var_0.origin += var_0.vel * level.framedurationseconds;
+    var_32 = sqrt(var_0.vel[0] * var_0.vel[0] + var_0.vel[1] * var_0.vel[1]);
+    var_33 = max(0, veltomph(var_0.vel[2] * -1));
+    var_34 = max(0, veltomph(var_32));
+    var_35 = min(1, (self.origin[2] - getc130sealevel()) / (getc130height() - getc130sealevel()));
 
     if(isparachutegametype()) {
-      self setclientomnvar("ui_br_altimeter_height", var35);
+      self setclientomnvar("ui_br_altimeter_height", var_35);
     }
 
     waitframe();
@@ -423,13 +423,13 @@ function usefailextractingmsg() {
   return isDefined(self.play_disguise_vo) && (self.play_disguise_vo == 5 || self.play_disguise_vo == 6);
 }
 
-function enablemanualpullchute(var0) {
+function enablemanualpullchute(var_0) {
   self endon("death_or_disconnect");
 
-  if(isDefined(var0) && var0 > 0) {
+  if(isDefined(var_0) && var_0 > 0) {
     self skydive_setdeploymentstatus(0);
     self skydive_setbasejumpingstatus(0);
-    wait var0;
+    wait var_0;
   }
 
   if(isDefined(self)) {
@@ -443,7 +443,7 @@ function enablemanualpullchute(var0) {
   }
 }
 
-function pullchute(var0, var1, var2) {
+function pullchute(var_0, var_1, var_2) {
   self endon("death_or_disconnect");
   thread enablemanualpullchute(3);
   self waittill("skydive_deployparachute");
@@ -461,32 +461,32 @@ function pullchute(var0, var1, var2) {
   thread startparachute();
 }
 
-function parachutedamagemonitor(var0) {
+function parachutedamagemonitor(var_0) {
   self endon("death_or_disconnect");
   self endon("parachute_complete");
-  var0 endon("death");
-  var0 setCanDamage(1);
-  var1 = undefined;
-  var2 = undefined;
-  var3 = undefined;
-  var4 = undefined;
-  var5 = undefined;
-  var6 = undefined;
-  var7 = undefined;
-  var8 = undefined;
-  var9 = undefined;
-  var10 = undefined;
-  var11 = undefined;
-  var12 = undefined;
-  var13 = undefined;
-  var0.shotstaken = 0;
+  var_0 endon("death");
+  var_0 setCanDamage(1);
+  var_1 = undefined;
+  var_2 = undefined;
+  var_3 = undefined;
+  var_4 = undefined;
+  var_5 = undefined;
+  var_6 = undefined;
+  var_7 = undefined;
+  var_8 = undefined;
+  var_9 = undefined;
+  var_10 = undefined;
+  var_11 = undefined;
+  var_12 = undefined;
+  var_13 = undefined;
+  var_0.shotstaken = 0;
 
   for(;;) {
-    var0 waittill("damage", var1, var2, var3, var14, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13);
+    var_0 waittill("damage", var_1, var_2, var_3, var_14, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
 
-    if(isDefined(var4)) {
-      if(scripts\engine\utility::isbulletdamage(var4)) {
-        var0.shotstaken++;
+    if(isDefined(var_4)) {
+      if(scripts\engine\utility::isbulletdamage(var_4)) {
+        var_0.shotstaken++;
       }
     }
   }
@@ -597,25 +597,25 @@ function takeweaponsdefaultfunc() {
     self.secondaryweaponstockammo = self getweaponammostock(self.secondaryweaponobj);
   }
 
-  var0 = getcompleteweaponname("iw8_fists_mp");
-  var1 = getcompleteweaponname("none");
+  var_0 = getcompleteweaponname("iw8_fists_mp");
+  var_1 = getcompleteweaponname("none");
   self.weaponlist = self.primaryweapons;
 
-  for(var2 = 0; var2 < self.weaponlist.size; var2++) {
-    var3 = self.weaponlist[var2];
+  for(var_2 = 0; var_2 < self.weaponlist.size; var_2++) {
+    var_3 = self.weaponlist[var_2];
 
-    if(isDefined(var3) && !isnullweapon(var0, var3) && !isnullweapon(var1, var3)) {
-      self takeweapon(var3);
+    if(isDefined(var_3) && !isnullweapon(var_0, var_3) && !isnullweapon(var_1, var_3)) {
+      self takeweapon(var_3);
     }
   }
 
   self clearaccessory();
 
-  if(!self hasweapon(var0)) {
-    scripts\cp_mp\utility\inventory_utility::_giveweapon(var0, undefined, undefined, 1);
+  if(!self hasweapon(var_0)) {
+    scripts\cp_mp\utility\inventory_utility::_giveweapon(var_0, undefined, undefined, 1);
   }
 
-  scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var0, 1);
+  scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var_0, 1);
 }
 
 function restoreweaponsdefaultfunc() {
@@ -664,24 +664,24 @@ function playerwatchforredeploy() {
     self endon("death");
   }
 
-  var0 = getdvarfloat("scr_parachute_redeploy_min_height", 256);
-  var1 = 0;
+  var_0 = getdvarfloat("scr_parachute_redeploy_min_height", 256);
+  var_1 = 0;
   self.redeployenabled = 1;
 
   for(;;) {
     if(istrue(self.redeployenabled) && !self isonground() && scripts\cp_mp\utility\player_utility::_isalive() && !self isskydiving() && !self islinked() && !istrue(self.carrying) && !istrue(level.client_activate)) {
-      var2 = 0;
+      var_2 = 0;
 
       switch (getdvarint("scr_parachute_redeploy_input_type", 0)) {
         case 0:
-          if(var1 == 0 && self jumpbuttonPressed()) {
-            var2 = 1;
+          if(var_1 == 0 && self jumpbuttonPressed()) {
+            var_2 = 1;
           }
 
           break;
         case 1:
-          if(self jumpbuttonPressed() && var1 + 500 < gettime()) {
-            var2 = 1;
+          if(self jumpbuttonPressed() && var_1 + 500 < gettime()) {
+            var_2 = 1;
           }
 
           break;
@@ -691,7 +691,7 @@ function playerwatchforredeploy() {
           }
 
           if(istrue(self.doublejumpdetected)) {
-            var2 = 1;
+            var_2 = 1;
           }
 
           break;
@@ -699,11 +699,11 @@ function playerwatchforredeploy() {
           break;
       }
 
-      if(var2) {
-        var3 = scripts\common\utility::groundpos(self.origin);
-        var4 = self.origin[2] - var3[2];
+      if(var_2) {
+        var_3 = scripts\common\utility::groundpos(self.origin);
+        var_4 = self.origin[2] - var_3[2];
 
-        if(var4 > var0) {
+        if(var_4 > var_0) {
           self notify("skydive_deployparachute");
           self skydive_deployparachute();
         }
@@ -712,12 +712,12 @@ function playerwatchforredeploy() {
 
     if(isDefined(self) && scripts\cp_mp\utility\player_utility::_isalive()) {
       if(!self jumpbuttonPressed()) {
-        var1 = 0;
-      } else if(var1 == 0) {
-        var1 = gettime();
+        var_1 = 0;
+      } else if(var_1 == 0) {
+        var_1 = gettime();
       }
     } else {
-      var1 = 0;
+      var_1 = 0;
     }
 
     waitframe();
@@ -731,27 +731,27 @@ function watchfordoublejump() {
 
   for(;;) {
     if(self jumpbuttonPressed()) {
-      var0 = gettime();
-      var1 = 0;
+      var_0 = gettime();
+      var_1 = 0;
       waitframe();
 
       for(;;) {
         if(!self jumpbuttonPressed()) {
-          if(gettime() < var0 + 500 && !self isonground()) {
-            var1 = gettime();
+          if(gettime() < var_0 + 500 && !self isonground()) {
+            var_1 = gettime();
           }
 
           break;
         }
 
-        if(gettime() > var0 + 500) {
+        if(gettime() > var_0 + 500) {
           break;
         }
 
         waitframe();
       }
 
-      if(var1 == 0) {
+      if(var_1 == 0) {
         continue;
       }
 
@@ -759,7 +759,7 @@ function watchfordoublejump() {
 
       for(;;) {
         if(self jumpbuttonPressed()) {
-          if(gettime() < var1 + 500 && !self isonground()) {
+          if(gettime() < var_1 + 500 && !self isonground()) {
             self.doublejumpdetected = 1;
             waitframe();
             self.doublejumpdetected = 0;
@@ -768,7 +768,7 @@ function watchfordoublejump() {
           break;
         }
 
-        if(gettime() > var1 + 500) {
+        if(gettime() > var_1 + 500) {
           break;
         }
 
@@ -781,12 +781,12 @@ function watchfordoublejump() {
 }
 
 function ref_121d2() {
-  var0 = self;
+  var_0 = self;
 
   if(level.gametype == "br") {
-    if(isDefined(var0.play_disguise_vo) && (var0.play_disguise_vo == 1 || var0.play_disguise_vo == 2)) {
-      play_collected_key_vo(var0);
-      var0.play_disguise_vo = 3;
+    if(isDefined(var_0.play_disguise_vo) && (var_0.play_disguise_vo == 1 || var_0.play_disguise_vo == 2)) {
+      play_collected_key_vo(var_0);
+      var_0.play_disguise_vo = 3;
       return;
     }
 
@@ -794,55 +794,55 @@ function ref_121d2() {
   }
 
   if(level.gametype == "cp_survival") {
-    var0 setclientomnvar("ui_br_altimeter_state", 0);
-    play_collected_key_vo(var0, 1);
+    var_0 setclientomnvar("ui_br_altimeter_state", 0);
+    play_collected_key_vo(var_0, 1);
     return;
   }
 }
 
 function ref_14002() {
-  var0 = self;
-  var1 = var0 getvelocity();
-  var2 = clamp(var0.origin[2], 0, level.ref_133f9.ref_1467d) / level.ref_133f9.ref_1467d;
-  var3 = level.ref_133f9.ref_1467c + (level.ref_133f9.ref_1467b - level.ref_133f9.ref_1467c) * var2;
-  var4 = var1 * (1, 1, 0);
-  var5 = length(var4);
-  var6 = var4 * var3;
-  var7 = var5 * var3;
+  var_0 = self;
+  var_1 = var_0 getvelocity();
+  var_2 = clamp(var_0.origin[2], 0, level.ref_133f9.ref_1467d) / level.ref_133f9.ref_1467d;
+  var_3 = level.ref_133f9.ref_1467c + (level.ref_133f9.ref_1467b - level.ref_133f9.ref_1467c) * var_2;
+  var_4 = var_1 * (1, 1, 0);
+  var_5 = length(var_4);
+  var_6 = var_4 * var_3;
+  var_7 = var_5 * var_3;
 
-  if(var7 > level.ref_133f9.ref_1467a) {
-    var6 *= level.ref_133f9.ref_1467a / var7;
+  if(var_7 > level.ref_133f9.ref_1467a) {
+    var_6 *= level.ref_133f9.ref_1467a / var_7;
   }
 
-  var8 = 0;
-  var8 -= var0.origin[2] * level.ref_133f9.ref_1468f;
-  var8 += level.ref_133f9.zoffset;
-  var8 += var1[2] * level.ref_133f9.ref_1472c;
-  var8 = clamp(var8, -1 * level.ref_133f9.ref_14690, 0);
-  var9 = 1;
+  var_8 = 0;
+  var_8 -= var_0.origin[2] * level.ref_133f9.ref_1468f;
+  var_8 += level.ref_133f9.zoffset;
+  var_8 += var_1[2] * level.ref_133f9.ref_1472c;
+  var_8 = clamp(var_8, -1 * level.ref_133f9.ref_14690, 0);
+  var_9 = 1;
 
-  if(var5 < level.ref_133f9.pe_chopper_zones * var1[2]) {
-    var9 = 2;
+  if(var_5 < level.ref_133f9.pe_chopper_zones * var_1[2]) {
+    var_9 = 2;
   }
 
-  var0 setadditionalstreampos(var0.origin + (var6[0], var6[1], var8), 0, var9);
+  var_0 setadditionalstreampos(var_0.origin + (var_6[0], var_6[1], var_8), 0, var_9);
 }
 
-function playerpowerresetpowers(var0, var1, var2, var3, var4, var5, var6) {
+function playerpowerresetpowers(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self endon("disconnect");
   level endon("game_ended");
   self notify("freeFallFromPlaneStateMachine");
   self endon("freeFallFromPlaneStateMachine");
-  var7 = self;
-  var7.play_disguise_vo = 1;
-  var7.play_cinderblock_broken_fx = istrue(var4);
-  var7.play_contract_announcer_maybe = 0;
-  play_chopper_kill_vo(var7, var0, var1, var2, var3, var5, var6);
-  play_death_sound_with_global_cooldown(var7);
-  var8 = gettime();
+  var_7 = self;
+  var_7.play_disguise_vo = 1;
+  var_7.play_cinderblock_broken_fx = istrue(var_4);
+  var_7.play_contract_announcer_maybe = 0;
+  play_chopper_kill_vo(var_7, var_0, var_1, var_2, var_3, var_5, var_6);
+  play_death_sound_with_global_cooldown(var_7);
+  var_8 = gettime();
 
   for(;;) {
-    if(var7 isskydiving() || var8 + 2000 < gettime() || usefailextractingmsg(var7)) {
+    if(var_7 isskydiving() || var_8 + 2000 < gettime() || usefailextractingmsg(var_7)) {
       goto LOC_00000087;
     }
 
@@ -850,44 +850,44 @@ function playerpowerresetpowers(var0, var1, var2, var3, var4, var5, var6) {
   }
 
   for(;;) {
-    if(level.ref_133f9.ref_13918 && var7.play_contract_announcer_maybe < gettime()) {
-      ref_14002(var7);
-      var7.play_contract_announcer_maybe = gettime() + 500;
+    if(level.ref_133f9.ref_13918 && var_7.play_contract_announcer_maybe < gettime()) {
+      ref_14002(var_7);
+      var_7.play_contract_announcer_maybe = gettime() + 500;
     }
 
-    if(var7 isinfreefall() && var7.play_disguise_vo != 1) {
-      play_death_sound_with_global_cooldown(var7);
-      var7.play_disguise_vo = 1;
+    if(var_7 isinfreefall() && var_7.play_disguise_vo != 1) {
+      play_death_sound_with_global_cooldown(var_7);
+      var_7.play_disguise_vo = 1;
     }
 
-    if(var7 isparachuting() && var7.play_disguise_vo != 2) {
-      play_death_audio(var7);
-      var7.play_disguise_vo = 2;
+    if(var_7 isparachuting() && var_7.play_disguise_vo != 2) {
+      play_death_audio(var_7);
+      var_7.play_disguise_vo = 2;
     }
 
-    if(!var7 isskydiving() && var7.play_disguise_vo != 3 && var7.play_disguise_vo != 4 && var7.play_disguise_vo != 6 || var7.play_disguise_vo == 5) {
-      play_collected_key_vo(var7);
+    if(!var_7 isskydiving() && var_7.play_disguise_vo != 3 && var_7.play_disguise_vo != 4 && var_7.play_disguise_vo != 6 || var_7.play_disguise_vo == 5) {
+      play_collected_key_vo(var_7);
 
-      if(var7.play_disguise_vo != 5) {
-        var7.play_disguise_vo = 3;
+      if(var_7.play_disguise_vo != 5) {
+        var_7.play_disguise_vo = 3;
       } else {
-        var7.play_disguise_vo = 6;
+        var_7.play_disguise_vo = 6;
       }
     }
 
-    var9 = istrue(var7.inlaststand);
-    var10 = var7 isonground() && (var7.play_disguise_vo == 3 || usefailextractingmsg(var7));
-    var11 = var7 isonladder();
-    var12 = !scripts\mp\utility\player::isreallyalive(var7);
+    var_9 = istrue(var_7.inlaststand);
+    var_10 = var_7 isonground() && (var_7.play_disguise_vo == 3 || usefailextractingmsg(var_7));
+    var_11 = var_7 isonladder();
+    var_12 = !scripts\mp\utility\player::isreallyalive(var_7);
 
-    if(var9 || var10 || var11 || var12) {
-      play_counter_beep_sfx_on_bomb_vests(var7);
-      var7.play_disguise_vo = undefined;
-      var7.play_cinderblock_broken_fx = undefined;
-      var7.play_contract_announcer_maybe = undefined;
+    if(var_9 || var_10 || var_11 || var_12) {
+      play_counter_beep_sfx_on_bomb_vests(var_7);
+      var_7.play_disguise_vo = undefined;
+      var_7.play_cinderblock_broken_fx = undefined;
+      var_7.play_contract_announcer_maybe = undefined;
 
-      if(var11) {
-        var7 skydive_interrupt();
+      if(var_11) {
+        var_7 skydive_interrupt();
       }
 
       return;
@@ -897,44 +897,44 @@ function playerpowerresetpowers(var0, var1, var2, var3, var4, var5, var6) {
   }
 }
 
-function play_chopper_kill_vo(var0, var1, var2, var3, var4, var5) {
+function play_chopper_kill_vo(var_0, var_1, var_2, var_3, var_4, var_5) {
   self skydive_interrupt();
 
   if(!istrue(level.parachuteinitfinished)) {
     initparachutedvars();
   }
 
-  if(!isDefined(var0)) {
-    var0 = 4;
+  if(!isDefined(var_0)) {
+    var_0 = 4;
   }
 
-  if(!isDefined(var4)) {
-    var4 = 1;
+  if(!isDefined(var_4)) {
+    var_4 = 1;
   }
 
-  if(var4 && level.gametype != "br") {
+  if(var_4 && level.gametype != "br") {
     self[[level.parachutetakeweaponscb]]();
   }
 
   self[[level.freefallstartcb]]();
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     self notifyonplayercommand("open_parachute", "+gostand");
   }
 
   self animscriptsetinputparamreplicationstatus(1);
 
-  if(isDefined(var3)) {
-    self setvelocity(var3);
+  if(isDefined(var_3)) {
+    self setvelocity(var_3);
   }
 
-  var6 = level.client_activate;
+  var_6 = level.client_activate;
 
-  if(isDefined(var5)) {
-    var6 = var5;
+  if(isDefined(var_5)) {
+    var_6 = var_5;
   }
 
-  if(!istrue(var6)) {
+  if(!istrue(var_6)) {
     self skydive_beginfreefall();
   }
 
@@ -946,10 +946,10 @@ function play_chopper_kill_vo(var0, var1, var2, var3, var4, var5) {
     thread stop_restock_recharge(getdvarint("scr_bmo_parachuteTouchdownVFX", 1) == 1 && (getDvar("scr_br_gametype", "") == "dmz" || getDvar("scr_br_gametype", "") == "rat_race" || getDvar("scr_br_gametype", "") == "risk" || getDvar("scr_br_gametype", "") == "gold_war"));
   }
 
-  if(istrue(var1)) {
+  if(istrue(var_1)) {
     thread enablemanualpullchute(0);
   } else {
-    thread enablemanualpullchute(var0);
+    thread enablemanualpullchute(var_0);
   }
 
   self[[level.parachuterestoreweaponscb]]();
@@ -962,10 +962,10 @@ function play_death_sound_with_global_cooldown() {
   }
 
   if(!self.play_cinderblock_broken_fx) {
-    var0 = "enabled";
+    var_0 = "enabled";
 
     if(isDefined(self.operatorcustomization) && isDefined(self.operatorcustomization.disabledebugdialogue)) {
-      var0 += self.operatorcustomization.disabledebugdialogue;
+      var_0 += self.operatorcustomization.disabledebugdialogue;
     }
   }
 
@@ -977,13 +977,13 @@ function play_death_sound_with_global_cooldown() {
 
 function play_death_audio() {
   self notify("freefall_complete");
-  var0 = scripts\cp_mp\utility\script_utility::ref_140de("game", "isGameTypeBR", 0);
-  var1 = scripts\cp_mp\utility\script_utility::ref_140de("game", "getSubGameType", "");
-  var2 = var1 != "truckwar" && var1 != "reveal" && var1 != "brdov";
+  var_0 = scripts\cp_mp\utility\script_utility::ref_140de("game", "isGameTypeBR", 0);
+  var_1 = scripts\cp_mp\utility\script_utility::ref_140de("game", "getSubGameType", "");
+  var_2 = var_1 != "truckwar" && var_1 != "reveal" && var_1 != "brdov";
 
-  if(var0 && var2 && istrue(self.stickers)) {
-    var3 = scripts\cp_mp\utility\script_utility::ref_140de("music", "getRandomMusicSet", "", ["br_infil_jump_parachute"]);
-    self setplayermusicstate(var3);
+  if(var_0 && var_2 && istrue(self.stickers)) {
+    var_3 = scripts\cp_mp\utility\script_utility::ref_140de("music", "getRandomMusicSet", "", ["br_infil_jump_parachute"]);
+    self setplayermusicstate(var_3);
     self.stickers = undefined;
   }
 
@@ -1007,7 +1007,7 @@ function play_death_audio() {
   }
 }
 
-function play_collected_key_vo(var0) {
+function play_collected_key_vo(var_0) {
   self.ignorefalldamagetime = gettime() + 5000;
   self.waitillcanspawnclient = gettime();
 
@@ -1071,13 +1071,13 @@ function ref_1274e() {
   if(isalive(self) && self.sessionstate == "playing") {
     self playlocalsound("plr_breath_land_parachute", self);
     self playsoundonmovingent("breath_land_parachute_npc");
-    var0 = scripts\cp_mp\utility\script_utility::ref_140de("game", "isGameTypeBR", 0);
+    var_0 = scripts\cp_mp\utility\script_utility::ref_140de("game", "isGameTypeBR", 0);
 
-    if(var0) {
+    if(var_0) {
       wait 5;
-      var1 = scripts\cp_mp\utility\script_utility::ref_140de("music", "isBRSuspenseMusicEnabled", 0, [self]);
+      var_1 = scripts\cp_mp\utility\script_utility::ref_140de("music", "isBRSuspenseMusicEnabled", 0, [self]);
 
-      if(var1) {
+      if(var_1) {
         self.nosuspensemusic = undefined;
         return;
       }
@@ -1090,11 +1090,11 @@ function ref_1274e() {
 }
 
 function ref_121ca() {
-  var0 = self;
-  var0 skydive_interrupt();
+  var_0 = self;
+  var_0 skydive_interrupt();
 
-  if(isDefined(var0.parachute)) {
-    var0.parachute delete();
+  if(isDefined(var_0.parachute)) {
+    var_0.parachute delete();
     return;
   }
 }

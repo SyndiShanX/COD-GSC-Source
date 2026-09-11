@@ -11,29 +11,29 @@ function ref_11d6a() {
 }
 
 function ref_11d6c() {
-  var0 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldataforvehicle("motorcycle", 1);
-  var0.arenavday = &scripts\cp_mp\vehicles\vehicle_spawn::ref_14211;
+  var_0 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldataforvehicle("motorcycle", 1);
+  var_0.arenavday = &scripts\cp_mp\vehicles\vehicle_spawn::ref_14211;
 }
 
 function ref_11d6b() {
-  var0 = scripts\cp_mp\vehicles\vehicle_mines::vehicle_mines_getleveldataforvehicle("motorcycle", 1);
-  var0.frontextents = 45;
-  var0.backextents = 45;
-  var0.leftextents = 28;
-  var0.rightextents = 28;
-  var0.bottomextents = 15;
-  var0.distancetobottom = 30;
-  var0.loscheckoffset = (0, 0, 30);
+  var_0 = scripts\cp_mp\vehicles\vehicle_mines::vehicle_mines_getleveldataforvehicle("motorcycle", 1);
+  var_0.frontextents = 45;
+  var_0.backextents = 45;
+  var_0.leftextents = 28;
+  var_0.rightextents = 28;
+  var_0.bottomextents = 15;
+  var_0.distancetobottom = 30;
+  var_0.loscheckoffset = (0, 0, 30);
 }
 
-function ref_11d6e(var0, var1) {
-  var2 = _calloutmarkerping_poolidisentity::ref_11d56(var0, var1);
+function ref_11d6e(var_0, var_1) {
+  var_2 = _calloutmarkerping_poolidisentity::ref_11d56(var_0, var_1);
 
-  if(isDefined(var2) && scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_gamemodesupportsrespawn()) {
-    var2.ondeathrespawn = &ref_11d6d;
+  if(isDefined(var_2) && scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_gamemodesupportsrespawn()) {
+    var_2.ondeathrespawn = &ref_11d6d;
   }
 
-  return var2;
+  return var_2;
 }
 
 function ref_11d6d() {
@@ -41,9 +41,9 @@ function ref_11d6d() {
 }
 
 function ref_11d6f() {
-  var0 = scripts\cp_mp\vehicles\vehicle_tracking::getvehiclespawndata(self);
-  var1 = spawnStruct();
-  scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(var0, var1);
-  var2 = spawnStruct();
-  var3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("motorcycle", var1, var2);
+  var_0 = scripts\cp_mp\vehicles\vehicle_tracking::getvehiclespawndata(self);
+  var_1 = spawnStruct();
+  scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(var_0, var_1);
+  var_2 = spawnStruct();
+  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("motorcycle", var_1, var_2);
 }

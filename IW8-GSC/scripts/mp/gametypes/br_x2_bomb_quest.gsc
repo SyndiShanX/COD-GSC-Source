@@ -4,9 +4,9 @@
 *****************************************************/
 
 function init() {
-  var0 = scripts\mp\gametypes\br_quest_util::registerquestcategory("x2_bomb", 0);
+  var_0 = scripts\mp\gametypes\br_quest_util::registerquestcategory("x2_bomb", 0);
 
-  if(!var0) {
+  if(!var_0) {
     return;
   }
 
@@ -30,17 +30,17 @@ function init() {
 }
 
 function init_post_bsp_entities() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, []);
 }
 
-function ref_14650(var0) {
-  if(!gethillspawnshutofforigin(var0)) {
+function ref_14650(var_0) {
+  if(!gethillspawnshutofforigin(var_0)) {
     return;
   }
 
-  var0 scripts\mp\gametypes\br_quest_util::uiobjectiveshow("x2_bomb");
-  scripts\mp\gametypes\br_quest_util::ref_1336c(var0);
+  var_0 scripts\mp\gametypes\br_quest_util::uiobjectiveshow("x2_bomb");
+  scripts\mp\gametypes\br_quest_util::ref_1336c(var_0);
 }
 
 function ref_1464c() {
@@ -49,10 +49,10 @@ function ref_1464c() {
 
 function ref_1464f() {
   if(isDefined(self.initspawnswar)) {
-    foreach(var1 in self.playerlist) {
-      if(isDefined(var1)) {
-        self.initspawnswar.gameobject hidefromplayer(var1);
-        self.initspawnswar.gameobject disableplayeruse(var1);
+    foreach(var_1 in self.playerlist) {
+      if(isDefined(var_1)) {
+        self.initspawnswar.gameobject hidefromplayer(var_1);
+        self.initspawnswar.gameobject disableplayeruse(var_1);
       }
     }
   }
@@ -61,9 +61,9 @@ function ref_1464f() {
   scripts\mp\gametypes\br_quest_util::releaseteamonquest(self.team);
 }
 
-function ref_1464d(var0) {
-  if(var0.team == self.team) {
-    if(!scripts\mp\gametypes\br_quest_util::isteamvalid(var0.team)) {
+function ref_1464d(var_0) {
+  if(var_0.team == self.team) {
+    if(!scripts\mp\gametypes\br_quest_util::isteamvalid(var_0.team)) {
       self.result = "fail";
       scripts\mp\gametypes\br_quest_util::removequestinstance();
       return;
@@ -73,63 +73,63 @@ function ref_1464d(var0) {
   }
 }
 
-function gethillspawnshutofforigin(var0) {
-  return scripts\mp\gametypes\br_gametype_x2::extra_riders_func(var0);
+function gethillspawnshutofforigin(var_0) {
+  return scripts\mp\gametypes\br_gametype_x2::extra_riders_func(var_0);
 }
 
-function search(var0, var1, var2, var3, var4) {
-  var5 = scripts\mp\gametypes\br_gametype_x2::extra_riders_getin_anim_func("x2_bomb", var0, var1, var4);
-  var6 = undefined;
-  var7 = undefined;
-  var8 = undefined;
+function search(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = scripts\mp\gametypes\br_gametype_x2::extra_riders_getin_anim_func("x2_bomb", var_0, var_1, var_4);
+  var_6 = undefined;
+  var_7 = undefined;
+  var_8 = undefined;
 
   switch (level.ref_1464e) {
     case "signal":
-      var6 = "x2_signal";
-      var7 = "br_x2_signal_quest_start_team_notify";
-      var8 = "ui_mp_br_mapmenu_icon_x2_02_objective";
+      var_6 = "x2_signal";
+      var_7 = "br_x2_signal_quest_start_team_notify";
+      var_8 = "ui_mp_br_mapmenu_icon_x2_02_objective";
       break;
     case "bomb":
     default:
-      var6 = "x2_bomb";
-      var7 = "br_x2_bomb_quest_start_team_notify";
-      var8 = "ui_mp_br_mapmenu_icon_x2_01_objective";
+      var_6 = "x2_bomb";
+      var_7 = "br_x2_bomb_quest_start_team_notify";
+      var_8 = "ui_mp_br_mapmenu_icon_x2_01_objective";
       break;
   }
 
-  var5 scripts\mp\gametypes\br_quest_util::init_tape_machine_animations(var8, "current", (0, 0, 0));
-  ref_1312d(var5);
+  var_5 scripts\mp\gametypes\br_quest_util::init_tape_machine_animations(var_8, "current", (0, 0, 0));
+  ref_1312d(var_5);
 
-  foreach(var2 in var5.playerlist) {
-    if(isDefined(var2)) {
-      var5 scripts\mp\gametypes\br_quest_util::ref_1336c(var2);
-      var2.ref_1296e = var5.initspawnswar.origin;
+  foreach(var_2 in var_5.playerlist) {
+    if(isDefined(var_2)) {
+      var_5 scripts\mp\gametypes\br_quest_util::ref_1336c(var_2);
+      var_2.ref_1296e = var_5.initspawnswar.origin;
     }
   }
 
-  scripts\mp\gametypes\br_quest_util::uiobjectiveshowtoteam(var6, self.team);
-  var5 scripts\mp\gametypes\br_quest_util::ref_1297d(scripts\mp\gametypes\br_quest_util::getquestdata("x2_bomb").ref_11c4c, 4);
-  scripts\mp\gametypes\br_quest_util::addquestinstance("x2_bomb", var5);
+  scripts\mp\gametypes\br_quest_util::uiobjectiveshowtoteam(var_6, self.team);
+  var_5 scripts\mp\gametypes\br_quest_util::ref_1297d(scripts\mp\gametypes\br_quest_util::getquestdata("x2_bomb").ref_11c4c, 4);
+  scripts\mp\gametypes\br_quest_util::addquestinstance("x2_bomb", var_5);
   scripts\mp\gametypes\br_quest_util::ref_13879("x2_bomb", self, self.team);
-  var11 = spawnStruct();
-  var11.ref_127d5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("x2_bomb", scripts\mp\gametypes\br_quest_util::ringing(self.team));
-  scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, var7, var11);
-  return var5;
+  var_11 = spawnStruct();
+  var_11.ref_127d5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("x2_bomb", scripts\mp\gametypes\br_quest_util::ringing(self.team));
+  scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, var_7, var_11);
+  return var_5;
 }
 
 function calculatehelispawndata() {
   return scripts\mp\gametypes\br_gametype_x2::enemy_signal_flare("x2_bomb", &search);
 }
 
-function init_reach_icbm_launch(var0) {
-  var1 = spawnStruct();
-  var1.origin = scripts\mp\gametypes\br_public::modifyplayer_damage(var0, 0, -200) + (0, 0, 20);
-  var1.gameobject = spawn("script_model", var1.origin);
-  var1.gameobject.origin = var0;
-  var1.gameobject.angles = (45, 0, 45);
-  var1.gameobject hide();
+function init_reach_icbm_launch(var_0) {
+  var_1 = spawnStruct();
+  var_1.origin = scripts\mp\gametypes\br_public::modifyplayer_damage(var_0, 0, -200) + (0, 0, 20);
+  var_1.gameobject = spawn("script_model", var_1.origin);
+  var_1.gameobject.origin = var_0;
+  var_1.gameobject.angles = (45, 0, 45);
+  var_1.gameobject hide();
   thread ref_1464b();
-  return var1;
+  return var_1;
 }
 
 function ref_1464b() {
@@ -137,37 +137,37 @@ function ref_1464b() {
   self endon("death");
 
   for(;;) {
-    self waittill("trigger", var0);
-    ref_14065(var0, self);
-    var0 playlocalsound("br_pickup_generic");
+    self waittill("trigger", var_0);
+    ref_14065(var_0, self);
+    var_0 playlocalsound("br_pickup_generic");
   }
 }
 
-function ref_14065(var0) {
-  var1 = scripts\mp\gametypes\br_gametype_x2::entmantling("x2_bomb", self);
+function ref_14065(var_0) {
+  var_1 = scripts\mp\gametypes\br_gametype_x2::entmantling("x2_bomb", self);
 
   if(level.ref_1464e == "signal") {
-    thread init_trap_room_spawning_module(var0.origin);
+    thread init_trap_room_spawning_module(var_0.origin);
     thread ref_126c7();
   } else {
-    var2 = spawn("script_model", var0.origin);
-    var2 setModel("us_military_tnt_bundle_01");
-    var2.angles = (0, 180, 0);
-    var2 istacmapactive();
-    level.disable_super_in_turret.ref_12391[level.disable_super_in_turret.ref_12391.size] = var2;
+    var_2 = spawn("script_model", var_0.origin);
+    var_2 setModel("us_military_tnt_bundle_01");
+    var_2.angles = (0, 180, 0);
+    var_2 istacmapactive();
+    level.disable_super_in_turret.ref_12391[level.disable_super_in_turret.ref_12391.size] = var_2;
   }
 
-  var3 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.team, self.squadindex);
+  var_3 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.team, self.squadindex);
 
-  foreach(var5 in var3) {
-    if(isDefined(var5)) {
-      var5 notify("bomb_used");
+  foreach(var_5 in var_3) {
+    if(isDefined(var_5)) {
+      var_5 notify("bomb_used");
     }
   }
 
   level.ref_14639 += scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.team, self.squadindex).size;
   level.ref_14651++;
-  ref_12a37(var1);
+  ref_12a37(var_1);
 }
 
 function ref_1312d() {
@@ -188,9 +188,9 @@ function ref_1312d() {
     self.initspawnswar.gameobject setuseprioritymax();
   }
 
-  foreach(var1 in self.playerlist) {
-    if(isDefined(var1)) {
-      self.initspawnswar.gameobject enableplayeruse(var1);
+  foreach(var_1 in self.playerlist) {
+    if(isDefined(var_1)) {
+      self.initspawnswar.gameobject enableplayeruse(var_1);
     }
   }
 
@@ -199,9 +199,9 @@ function ref_1312d() {
 }
 
 function ref_12a37() {
-  foreach(var1 in self.playerlist) {
-    if(isDefined(var1)) {
-      var1 scripts\cp\vehicles\little_bird_mg_cp::calloutmarkerping_removecallout(7);
+  foreach(var_1 in self.playerlist) {
+    if(isDefined(var_1)) {
+      var_1 scripts\cp\vehicles\little_bird_mg_cp::calloutmarkerping_removecallout(7);
     }
   }
 
@@ -220,34 +220,34 @@ function ref_14652() {
 }
 
 function ref_1464a() {
-  var0 = spawnStruct();
-  var1 = scripts\mp\gametypes\br_quest_util::ringing(self.team);
-  var2 = scripts\mp\gametypes\br_quest_util::getquestindex("x2_bomb");
-  var3 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("x2_bomb"));
-  var0.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var2, var1, var3);
-  var4 = undefined;
+  var_0 = spawnStruct();
+  var_1 = scripts\mp\gametypes\br_quest_util::ringing(self.team);
+  var_2 = scripts\mp\gametypes\br_quest_util::getquestindex("x2_bomb");
+  var_3 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("x2_bomb"));
+  var_0.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var_2, var_1, var_3);
+  var_4 = undefined;
 
   switch (level.ref_1464e) {
     case "signal":
-      var4 = "br_x2_signal_quest_complete";
+      var_4 = "br_x2_signal_quest_complete";
       break;
     case "bomb":
     default:
-      var4 = "br_x2_bomb_quest_complete";
+      var_4 = "br_x2_bomb_quest_complete";
       break;
   }
 
   if(getdvarint("scr_br_x2_contractKillcamFix", 1)) {
-    var5 = scripts\mp\gametypes\br_gametype_x2::enter_laser_panel_anim_sequence(self.playerlist);
-    scripts\mp\gametypes\br_quest_util::longwaitradarsweep(var5, var4, var0);
+    var_5 = scripts\mp\gametypes\br_gametype_x2::enter_laser_panel_anim_sequence(self.playerlist);
+    scripts\mp\gametypes\br_quest_util::longwaitradarsweep(var_5, var_4, var_0);
 
-    foreach(var7 in self.playerlist) {
-      if(isDefined(var7)) {
-        var7 thread scripts\mp\utility\points::giveunifiedpoints("br_x2_ambush");
+    foreach(var_7 in self.playerlist) {
+      if(isDefined(var_7)) {
+        var_7 thread scripts\mp\utility\points::giveunifiedpoints("br_x2_ambush");
       }
     }
   } else {
-    scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, var4, var0);
+    scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, var_4, var_0);
   }
 
   self.ref_12d2e = self.playerlist[0].origin;
@@ -265,92 +265,92 @@ function path_timeout() {
 }
 
 function ref_13fc5() {
-  foreach(var1 in self.playerlist) {
-    if(!isDefined(var1)) {
+  foreach(var_1 in self.playerlist) {
+    if(!isDefined(var_1)) {
       continue;
     }
 
-    var2 = undefined;
+    var_2 = undefined;
 
     switch (level.ref_1464e) {
       case "signal":
-        var2 = "x2_signal";
+        var_2 = "x2_signal";
         break;
       case "bomb":
       default:
-        var2 = "x2_bomb";
+        var_2 = "x2_bomb";
         break;
     }
 
-    var1 scripts\mp\gametypes\br_quest_util::uiobjectiveshow(var2);
-    scripts\mp\gametypes\br_quest_util::ref_1336c(var1);
+    var_1 scripts\mp\gametypes\br_quest_util::uiobjectiveshow(var_2);
+    scripts\mp\gametypes\br_quest_util::ref_1336c(var_1);
   }
 }
 
-function spawn_caches_tank(var0) {
-  scripts\mp\gametypes\br_quest_util::spawn_downed_friendly(var0);
-  var0 scripts\mp\gametypes\br_quest_util::uiobjectivehide();
+function spawn_caches_tank(var_0) {
+  scripts\mp\gametypes\br_quest_util::spawn_downed_friendly(var_0);
+  var_0 scripts\mp\gametypes\br_quest_util::uiobjectivehide();
 }
 
 function last_time_calc_defuser() {
-  foreach(var1 in self.playerlist) {
-    if(isDefined(var1)) {
-      spawn_caches_tank(var1);
+  foreach(var_1 in self.playerlist) {
+    if(isDefined(var_1)) {
+      spawn_caches_tank(var_1);
     }
   }
 
   scripts\mp\gametypes\br_quest_util::lastdropedtime();
 
-  foreach(var1 in self.playerlist) {
-    if(isDefined(var1)) {
-      var1 scripts\cp\vehicles\little_bird_mg_cp::calloutmarkerping_removecallout(7);
+  foreach(var_1 in self.playerlist) {
+    if(isDefined(var_1)) {
+      var_1 scripts\cp\vehicles\little_bird_mg_cp::calloutmarkerping_removecallout(7);
     }
   }
 }
 
 function regroup_trigger() {
-  var0 = undefined;
+  var_0 = undefined;
 
   switch (level.ref_1464e) {
     case "signal":
-      var0 = &"BR_REVEAL_X2_EVENT/X2_MARK_AREA";
+      var_0 = &"BR_REVEAL_X2_EVENT/X2_MARK_AREA";
       break;
     case "bomb":
     default:
-      var0 = &"BR_REVEAL_X2_EVENT/X2_SET_TNT";
+      var_0 = &"BR_REVEAL_X2_EVENT/X2_SET_TNT";
       break;
   }
 
-  return var0;
+  return var_0;
 }
 
-function init_trap_room_spawning_module(var0, var1) {
+function init_trap_room_spawning_module(var_0, var_1) {
   level endon("game_ended");
   wait 1.35;
 
-  if(!isDefined(var1)) {
-    var1 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  var2 = spawn("script_model", var0);
-  var2 setModel("x2_smoke_marker");
-  var2.origin += (0, 0, var1);
-  var2.angles = (0, 0, 0);
-  var2 playSound("smoke_carepackage_expl_trans");
-  var2 playLoopSound("smoke_carepackage_smoke_lp");
-  var2 setscriptablepartstate("smoke", "on");
-  var2 unmarkkeyframedmover(1);
-  level.disable_super_in_turret.ref_12391[level.disable_super_in_turret.ref_12391.size] = var2;
+  var_2 = spawn("script_model", var_0);
+  var_2 setModel("x2_smoke_marker");
+  var_2.origin += (0, 0, var_1);
+  var_2.angles = (0, 0, 0);
+  var_2 playSound("smoke_carepackage_expl_trans");
+  var_2 playLoopSound("smoke_carepackage_smoke_lp");
+  var_2 setscriptablepartstate("smoke", "on");
+  var_2 unmarkkeyframedmover(1);
+  level.disable_super_in_turret.ref_12391[level.disable_super_in_turret.ref_12391.size] = var_2;
 }
 
-function loop_station_closed_vo(var0) {
+function loop_station_closed_vo(var_0) {
   level endon("game_ended");
-  var0 setscriptablepartstate("smoke", "dissipate");
-  var0 playSound("smoke_canister_tail_dissipate");
+  var_0 setscriptablepartstate("smoke", "dissipate");
+  var_0 playSound("smoke_canister_tail_dissipate");
   wait 1;
-  var0 stoploopsound();
+  var_0 stoploopsound();
   wait 4.5;
-  var0 delete();
+  var_0 delete();
 }
 
 function ref_126c7() {
@@ -360,15 +360,15 @@ function ref_126c7() {
 }
 
 function has_headicon() {
-  foreach(var1 in level.disable_super_in_turret.ref_12391) {
-    if(isDefined(var1)) {
+  foreach(var_1 in level.disable_super_in_turret.ref_12391) {
+    if(isDefined(var_1)) {
       switch (level.ref_1464e) {
         case "signal":
-          thread loop_station_closed_vo(var1);
+          thread loop_station_closed_vo(var_1);
           break;
         case "bomb":
         default:
-          var1 delete();
+          var_1 delete();
           break;
       }
     }
@@ -377,7 +377,7 @@ function has_headicon() {
   level.disable_super_in_turret.ref_12391 = [];
 }
 
-function ref_1362d(var0, var1) {
-  var2 = scripts\mp\gametypes\br_public::modifyplayer_damage(var0, 100, -200);
-  init_trap_room_spawning_module(var2, var1);
+function ref_1362d(var_0, var_1) {
+  var_2 = scripts\mp\gametypes\br_public::modifyplayer_damage(var_0, 100, -200);
+  init_trap_room_spawning_module(var_2, var_1);
 }

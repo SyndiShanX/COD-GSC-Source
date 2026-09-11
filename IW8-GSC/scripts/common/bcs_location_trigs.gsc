@@ -18,65 +18,65 @@ function bcs_location_trigs_init() {
 
 function bcs_trigs_assign_aliases() {
   anim.bcs_locations = [];
-  var0 = getEntArray("trigger_multiple", "code_classname");
-  var1 = [];
+  var_0 = getEntArray("trigger_multiple", "code_classname");
+  var_1 = [];
 
-  foreach(var3 in var0) {
-    if(!issubstr(var3.classname, "trigger_multiple_bcs")) {
+  foreach(var_3 in var_0) {
+    if(!issubstr(var_3.classname, "trigger_multiple_bcs")) {
       continue;
     }
 
-    if(level.mapname == "mp_crash2" && var3.classname == "trigger_multiple_bcs_dronecrash") {
+    if(level.mapname == "mp_crash2" && var_3.classname == "trigger_multiple_bcs_dronecrash") {
       continue;
     }
 
-    var1 = var3;
+    var_1 = var_3;
 
-    if(!isDefined(level.bcs_location_mappings[var3.classname])) {
+    if(!isDefined(level.bcs_location_mappings[var_3.classname])) {
       continue;
     }
 
-    var4 = parselocationaliases(level.bcs_location_mappings[var3.classname]);
+    var_4 = parselocationaliases(level.bcs_location_mappings[var_3.classname]);
 
-    if(var4.size > 1) {
-      var4 = scripts\engine\utility::array_randomize(var4);
+    if(var_4.size > 1) {
+      var_4 = scripts\engine\utility::array_randomize(var_4);
     }
 
-    var3.locationaliases = var4;
+    var_3.locationaliases = var_4;
 
-    if(var3.spawnflags & 1) {
-      var3.islandmark = 1;
+    if(var_3.spawnflags & 1) {
+      var_3.islandmark = 1;
     }
   }
 
-  anim.bcs_locations = var1;
+  anim.bcs_locations = var_1;
 }
 
-function parselocationaliases(var0) {
-  var1 = strtok(var0, " ");
-  return var1;
+function parselocationaliases(var_0) {
+  var_1 = strtok(var_0, " ");
+  return var_1;
 }
 
-function add_bcs_location_mapping(var0, var1) {
-  if(isDefined(level.bcs_location_mappings[var0])) {
-    var2 = level.bcs_location_mappings[var0];
-    var3 = parselocationaliases(var2);
-    var4 = parselocationaliases(var1);
+function add_bcs_location_mapping(var_0, var_1) {
+  if(isDefined(level.bcs_location_mappings[var_0])) {
+    var_2 = level.bcs_location_mappings[var_0];
+    var_3 = parselocationaliases(var_2);
+    var_4 = parselocationaliases(var_1);
 
-    foreach(var6 in var4) {
-      foreach(var8 in var3) {
-        if(var6 == var8) {
+    foreach(var_6 in var_4) {
+      foreach(var_8 in var_3) {
+        if(var_6 == var_8) {
           return;
         }
       }
     }
 
-    var2 += " " + var1;
-    level.bcs_location_mappings[var0] = var2;
+    var_2 += " " + var_1;
+    level.bcs_location_mappings[var_0] = var_2;
     return;
   }
 
-  level.bcs_location_mappings[var0] = var1;
+  level.bcs_location_mappings[var_0] = var_1;
 }
 
 function bcs_location_trigger_mapping() {

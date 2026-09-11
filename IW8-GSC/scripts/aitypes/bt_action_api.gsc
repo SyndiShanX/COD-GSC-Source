@@ -3,10 +3,10 @@
  * Script: scripts\aitypes\bt_action_api.gsc
 ***********************************************/
 
-function setupbtaction(var0, var1, var2, var3) {
-  var4 = scripts\aitypes\bt_state_api::btstate_setupstate(var0, var1, var2, var3);
-  self._btactions[var0] = var4;
-  return var4;
+function setupbtaction(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\aitypes\bt_state_api::btstate_setupstate(var_0, var_1, var_2, var_3);
+  self._btactions[var_0] = var_4;
+  return var_4;
 }
 
 function cleanupbtactions() {
@@ -14,40 +14,40 @@ function cleanupbtactions() {
     return;
   }
 
-  var0 = getarraykeys(self._btactions);
+  var_0 = getarraykeys(self._btactions);
 
-  foreach(var2 in var0) {
-    scripts\aitypes\bt_state_api::btstate_clearsubstates(self._btactions[var2]);
-    self._btactions[var2] = undefined;
+  foreach(var_2 in var_0) {
+    scripts\aitypes\bt_state_api::btstate_clearsubstates(self._btactions[var_2]);
+    self._btactions[var_2] = undefined;
   }
 
   self._btactions = undefined;
 }
 
-function getbtaction(var0) {
+function getbtaction(var_0) {
   if(!isDefined(self._btactions)) {
     return undefined;
   }
 
-  return self._btactions[var0];
+  return self._btactions[var_0];
 }
 
-function setdesiredbtaction(var0, var1) {
-  if(isDefined(var1) && !isDefined(self._btactions[var1])) {
+function setdesiredbtaction(var_0, var_1) {
+  if(isDefined(var_1) && !isDefined(self._btactions[var_1])) {
     return false;
   }
 
-  var2 = getcurrentdesiredbtactionname(var0);
-  self.desiredaction = var1;
+  var_2 = getcurrentdesiredbtactionname(var_0);
+  self.desiredaction = var_1;
 
-  if(isDefined(var2) && var2 != var1) {
+  if(isDefined(var_2) && var_2 != var_1) {
     self notify("newaction");
   }
 
   return true;
 }
 
-function getcurrentdesiredbtactionname(var0) {
+function getcurrentdesiredbtactionname(var_0) {
   if(!isDefined(self.bt.currentaction)) {
     return undefined;
   }
@@ -55,42 +55,42 @@ function getcurrentdesiredbtactionname(var0) {
   return self.bt.currentaction;
 }
 
-function getcurrentbtaction(var0) {
-  var1 = getcurrentdesiredbtactionname(var0);
+function getcurrentbtaction(var_0) {
+  var_1 = getcurrentdesiredbtactionname(var_0);
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return undefined;
   }
 
-  var2 = getbtaction(var1);
-  return var2;
+  var_2 = getbtaction(var_1);
+  return var_2;
 }
 
-function doaction_begin(var0) {
-  self.bt.instancedata[var0] = spawnStruct();
+function doaction_begin(var_0) {
+  self.bt.instancedata[var_0] = spawnStruct();
   self.bt.currentaction = self.desiredaction;
-  var1 = self._btactions[self.desiredaction];
-  var1.taskid = var0;
-  var2 = var1.fnbegin;
+  var_1 = self._btactions[self.desiredaction];
+  var_1.taskid = var_0;
+  var_2 = var_1.fnbegin;
   self.desiredaction = undefined;
 
-  if(isDefined(var2)) {
-    [[var2]](var1);
+  if(isDefined(var_2)) {
+    [[var_2]](var_1);
     return;
   }
 }
 
-function doaction_tick(var0) {
-  var1 = getcurrentdesiredbtactionname(var0);
-  var2 = self._btactions[var1];
-  var3 = var2.fntick;
+function doaction_tick(var_0) {
+  var_1 = getcurrentdesiredbtactionname(var_0);
+  var_2 = self._btactions[var_1];
+  var_3 = var_2.fntick;
 
-  if(isDefined(var3)) {
-    var4 = [[var3]](var2);
+  if(isDefined(var_3)) {
+    var_4 = [[var_3]](var_2);
 
     if(!isDefined(self.desiredaction)) {
-      if(isDefined(var4)) {
-        return var4;
+      if(isDefined(var_4)) {
+        return var_4;
       }
 
       return anim.failure;
@@ -98,23 +98,23 @@ function doaction_tick(var0) {
   }
 
   if(isDefined(self.desiredaction)) {
-    doaction_end(var0);
-    doaction_begin(var0);
+    doaction_end(var_0);
+    doaction_begin(var_0);
     return anim.running;
   }
 
   return anim.failure;
 }
 
-function doaction_end(var0) {
-  var1 = getcurrentdesiredbtactionname(var0);
-  var2 = self._btactions[var1];
-  var3 = var2.fnend;
+function doaction_end(var_0) {
+  var_1 = getcurrentdesiredbtactionname(var_0);
+  var_2 = self._btactions[var_1];
+  var_3 = var_2.fnend;
 
-  if(isDefined(var3)) {
-    [[var3]](var2);
+  if(isDefined(var_3)) {
+    [[var_3]](var_2);
   }
 
-  scripts\aitypes\bt_state_api::btstate_endstates(var0, var2);
-  self.bt.instancedata[var0] = undefined;
+  scripts\aitypes\bt_state_api::btstate_endstates(var_0, var_2);
+  self.bt.instancedata[var_0] = undefined;
 }

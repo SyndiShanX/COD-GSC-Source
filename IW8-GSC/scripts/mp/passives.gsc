@@ -13,133 +13,133 @@ function passiveparsetable() {
     level.passivemap = [];
   }
 
-  for(var0 = 0;; var0++) {
-    var1 = tablelookupbyrow("mp/passivetable.csv", var0, 0);
+  for(var_0 = 0;; var_0++) {
+    var_1 = tablelookupbyrow("mp/passivetable.csv", var_0, 0);
 
-    if(var1 == "") {
+    if(var_1 == "") {
       break;
     }
 
-    var2 = tablelookupbyrow("mp/passivetable.csv", var0, 1);
-    var3 = tablelookupbyrow("mp/passivetable.csv", var0, 12);
-    var4 = tablelookupbyrow("mp/passivetable.csv", var0, 13);
-    var5 = tablelookupbyrow("mp/passivetable.csv", var0, 14);
-    var6 = spawnStruct();
-    var6.name = var2;
-    var6.weapontype = scripts\engine\utility::ter_op(tablelookupbyrow("mp/passivetable.csv", var0, 8) == "", 0, 1);
-    var6.killstreaktype = scripts\engine\utility::ter_op(tablelookupbyrow("mp/passivetable.csv", var0, 9) == "", 0, 1);
-    var6.lethaltype = scripts\engine\utility::ter_op(tablelookupbyrow("mp/passivetable.csv", var0, 10) == "", 0, 1);
-    var6.tacticaltype = scripts\engine\utility::ter_op(tablelookupbyrow("mp/passivetable.csv", var0, 11) == "", 0, 1);
+    var_2 = tablelookupbyrow("mp/passivetable.csv", var_0, 1);
+    var_3 = tablelookupbyrow("mp/passivetable.csv", var_0, 12);
+    var_4 = tablelookupbyrow("mp/passivetable.csv", var_0, 13);
+    var_5 = tablelookupbyrow("mp/passivetable.csv", var_0, 14);
+    var_6 = spawnStruct();
+    var_6.name = var_2;
+    var_6.weapontype = scripts\engine\utility::ter_op(tablelookupbyrow("mp/passivetable.csv", var_0, 8) == "", 0, 1);
+    var_6.killstreaktype = scripts\engine\utility::ter_op(tablelookupbyrow("mp/passivetable.csv", var_0, 9) == "", 0, 1);
+    var_6.lethaltype = scripts\engine\utility::ter_op(tablelookupbyrow("mp/passivetable.csv", var_0, 10) == "", 0, 1);
+    var_6.tacticaltype = scripts\engine\utility::ter_op(tablelookupbyrow("mp/passivetable.csv", var_0, 11) == "", 0, 1);
 
-    if(var3 != "") {
-      var6.attachmentref = var3;
+    if(var_3 != "") {
+      var_6.attachmentref = var_3;
     }
 
     if(getDvar("MOLPOSLOMO") == "zombie") {
-      var7 = tablelookupbyrow("mp/passivetable.csv", var0, 22);
+      var_7 = tablelookupbyrow("mp/passivetable.csv", var_0, 22);
 
-      if(var7 != "") {
-        var6.attachmentref = var7;
+      if(var_7 != "") {
+        var_6.attachmentref = var_7;
       }
     }
 
-    if(var4 != "") {
-      var6.perkref = var4;
+    if(var_4 != "") {
+      var_6.perkref = var_4;
     }
 
-    if(var5 != "") {
-      var6.messageref = var5;
+    if(var_5 != "") {
+      var_6.messageref = var_5;
     }
 
-    if(!isDefined(level.passivemap[var2])) {
-      level.passivemap[var2] = var6;
+    if(!isDefined(level.passivemap[var_2])) {
+      level.passivemap[var_2] = var_6;
     }
   }
 }
 
-function getpassivestruct(var0) {
-  if(!isDefined(level.passivemap[var0])) {
+function getpassivestruct(var_0) {
+  if(!isDefined(level.passivemap[var_0])) {
     return undefined;
   }
 
-  var1 = level.passivemap[var0];
-  return var1;
+  var_1 = level.passivemap[var_0];
+  return var_1;
 }
 
-function getpassiveattachment(var0) {
-  var1 = getpassivestruct(var0);
+function getpassiveattachment(var_0) {
+  var_1 = getpassivestruct(var_0);
 
-  if(!isDefined(var1) || !isDefined(var1.attachmentref)) {
+  if(!isDefined(var_1) || !isDefined(var_1.attachmentref)) {
     return undefined;
   }
 
-  return var1.attachmentref;
+  return var_1.attachmentref;
 }
 
-function getpassiveperk(var0) {
-  var1 = getpassivestruct(var0);
+function getpassiveperk(var_0) {
+  var_1 = getpassivestruct(var_0);
 
-  if(!isDefined(var1) || !isDefined(var1.perkref)) {
+  if(!isDefined(var_1) || !isDefined(var_1.perkref)) {
     return undefined;
   }
 
-  return var1.perkref;
+  return var_1.perkref;
 }
 
-function getpassivemessage(var0) {
-  var1 = getpassivestruct(var0);
+function getpassivemessage(var_0) {
+  var_1 = getpassivestruct(var_0);
 
-  if(!isDefined(var1) || !isDefined(var1.messageref)) {
+  if(!isDefined(var_1) || !isDefined(var_1.messageref)) {
     return undefined;
   }
 
-  return var1.messageref;
+  return var_1.messageref;
 }
 
 function getweapontypepassives() {
-  var0 = [];
+  var_0 = [];
 
-  foreach(var2 in level.passivemap) {
-    if(var2.weapontype) {
-      var0 = var2.name;
+  foreach(var_2 in level.passivemap) {
+    if(var_2.weapontype) {
+      var_0 = var_2.name;
     }
   }
 
-  return var0;
+  return var_0;
 }
 
 function getkillstreaktypepassives() {
-  var0 = [];
+  var_0 = [];
 
-  foreach(var2 in level.passivemap) {
-    if(var2.killstreaktype) {
-      var0 = var2.name;
+  foreach(var_2 in level.passivemap) {
+    if(var_2.killstreaktype) {
+      var_0 = var_2.name;
     }
   }
 
-  return var0;
+  return var_0;
 }
 
 function getlethaltypepassives() {
-  var0 = [];
+  var_0 = [];
 
-  foreach(var2 in level.passivemap) {
-    if(var2.lethaltype) {
-      var0 = var2.name;
+  foreach(var_2 in level.passivemap) {
+    if(var_2.lethaltype) {
+      var_0 = var_2.name;
     }
   }
 
-  return var0;
+  return var_0;
 }
 
 function gettacticaltypepassives() {
-  var0 = [];
+  var_0 = [];
 
-  foreach(var2 in level.passivemap) {
-    if(var2.tacticaltype) {
-      var0 = var2.name;
+  foreach(var_2 in level.passivemap) {
+    if(var_2.tacticaltype) {
+      var_0 = var_2.name;
     }
   }
 
-  return var0;
+  return var_0;
 }

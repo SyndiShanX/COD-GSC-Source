@@ -13,15 +13,15 @@ function init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("sentry_gun", "allowPickupOfTurret", &ref_13026);
 }
 
-function sentryturret_gettargetmarker(var0, var1) {
-  return scripts\cp\inventory\cp_target_marker::gettargetmarker(var0, var1);
+function sentryturret_gettargetmarker(var_0, var_1) {
+  return scripts\cp\inventory\cp_target_marker::gettargetmarker(var_0, var_1);
 }
 
-function sentryturret_createhintobject(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11) {
-  return scripts\cp\utility::createhintobject(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11);
+function sentryturret_createhintobject(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  return scripts\cp\utility::createhintobject(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 }
 
-function sentryturret_munitionused(var0, var1) {
+function sentryturret_munitionused(var_0, var_1) {
   self notify("munitions_used", "sentry");
 }
 

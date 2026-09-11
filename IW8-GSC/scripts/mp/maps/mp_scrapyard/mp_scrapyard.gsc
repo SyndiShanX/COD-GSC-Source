@@ -25,12 +25,12 @@ function main() {
 }
 
 function player_exfil_struct() {
-  var0 = getEnt("clip64x64x256", "targetname");
-  var1 = spawn("script_model", (-25082, -12290, 220));
-  var1.angles = (270, 192, -177);
-  var1 clonebrushmodeltoscriptmodel(var0);
-  var2 = getEnt("player256x256x8", "targetname");
-  var3 = spawn("script_model", (-26720, -10806, 180));
-  var3.angles = (0, 15, 90);
-  var3 clonebrushmodeltoscriptmodel(var2);
+  var_0 = getEnt("clip64x64x256", "targetname");
+  var_1 = spawn("script_model", (-25082, -12290, 220));
+  var_1.angles = (270, 192, -177);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = getEnt("player256x256x8", "targetname");
+  var_3 = spawn("script_model", (-26720, -10806, 180));
+  var_3.angles = (0, 15, 90);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
 }

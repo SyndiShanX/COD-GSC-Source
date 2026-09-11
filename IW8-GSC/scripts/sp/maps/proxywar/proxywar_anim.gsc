@@ -371,53 +371,53 @@ function vehicles() {
   level.scr_anim["truck3"]["truck_enter"] = % pw_swab_010_trck_door;
 }
 
-function player_on_fast_rope(var0) {
+function player_on_fast_rope(var_0) {
   level.playerheli notify("heli_leaving");
   level notify("player_on_rope");
   level.player playrumblelooponentity("tank_rumble");
 }
 
-function end_rope_rumble(var0) {
+function end_rope_rumble(var_0) {
   level.player stoprumble("tank_rumble");
   level.playerheli stoprumble("subtle_tank_rumble");
 }
 
-function fov_open(var0) {
+function fov_open(var_0) {
   level.player modifybasefov(65, 1);
 }
 
-function fov_close(var0) {
+function fov_close(var_0) {
   level.player modifybasefov(50, 1);
 }
 
-function lock_in_death_anim(var0) {
-  if(isalive(var0)) {
-    var0.allowdeath = 0;
-    var0 scripts\engine\sp\utility::clear_deathanim();
-    var0.skipdeathanim = 1;
-    var0.a.nodeath = 1;
-    var0.noragdoll = 1;
+function lock_in_death_anim(var_0) {
+  if(isalive(var_0)) {
+    var_0.allowdeath = 0;
+    var_0 scripts\engine\sp\utility::clear_deathanim();
+    var_0.skipdeathanim = 1;
+    var_0.a.nodeath = 1;
+    var_0.noragdoll = 1;
     return;
   }
 }
 
-function infil_remove_fov_user_scale_override(var0) {
+function infil_remove_fov_user_scale_override(var_0) {
   level.player lerpfovscalefactor(1, 2);
 }
 
-function exited_suv(var0) {
+function exited_suv(var_0) {
   scripts\engine\utility::flag_set("suv_patrol_started");
   thread scripts\sp\maps\proxywar\proxywar_lighting::lights_off("suv_c_head_lights");
   thread scripts\sp\maps\proxywar\proxywar_lighting::lights_off("suv_c_tail_lights");
 }
 
-function delete_bomb_strip(var0) {
+function delete_bomb_strip(var_0) {
   if(isDefined(level.bombstrip)) {
-    var1 = distance2d(level.bombstrip.origin, level.player.origin);
+    var_1 = distance2d(level.bombstrip.origin, level.player.origin);
 
-    if(var1 <= 150) {
-      var2 = scripts\engine\math::remap(var1, 0, 150, 500, 0);
-      level.player scripts\sp\utility::do_damage(var2, level.bombstrip.origin, undefined, undefined, "MOD_EXPLOSIVE", "frag");
+    if(var_1 <= 150) {
+      var_2 = scripts\engine\math::remap(var_1, 0, 150, 500, 0);
+      level.player scripts\sp\utility::do_damage(var_2, level.bombstrip.origin, undefined, undefined, "MOD_EXPLOSIVE", "frag");
     }
 
     level.bombstrip delete();
@@ -425,81 +425,81 @@ function delete_bomb_strip(var0) {
   }
 }
 
-function team_mask_up(var0) {
+function team_mask_up(var_0) {
   level thread scripts\sp\maps\proxywar\proxywar_util::gasmask_on();
   wait 2.3;
 
-  foreach(var2 in level.alpha_and_bravo_team) {
-    var2 detach(var2.hatmodel);
-    var2.hatmodel += "_gasmask";
-    var2 attach(var2.hatmodel);
+  foreach(var_2 in level.alpha_and_bravo_team) {
+    var_2 detach(var_2.hatmodel);
+    var_2.hatmodel += "_gasmask";
+    var_2 attach(var_2.hatmodel);
   }
 }
 
-function swab_add_fov_user_scale_override(var0) {
+function swab_add_fov_user_scale_override(var_0) {
   level.player lerpfovscalefactor(0, 0.6);
 }
 
-function swab_remove_fov_user_scale_override(var0) {
+function swab_remove_fov_user_scale_override(var_0) {
   level.player lerpfovscalefactor(1, 1);
 }
 
-function turn_on_suv_interior_light(var0) {
+function turn_on_suv_interior_light(var_0) {
   thread scripts\sp\maps\proxywar\proxywar_lighting::lights_on("suv_b_dome_light");
 }
 
-function turn_off_suv_interior_light(var0) {
+function turn_off_suv_interior_light(var_0) {
   thread scripts\sp\maps\proxywar\proxywar_lighting::lights_off("suv_b_dome_light");
 }
 
-function hide_mask(var0) {
-  if(isDefined(var0)) {
-    var0 hide();
+function hide_mask(var_0) {
+  if(isDefined(var_0)) {
+    var_0 hide();
     return;
   }
 }
 
-function show_mask(var0) {
-  if(isDefined(var0)) {
-    var0 show();
+function show_mask(var_0) {
+  if(isDefined(var_0)) {
+    var_0 show();
     return;
   }
 }
 
-function mask_is_on(var0) {
+function mask_is_on(var_0) {
   scripts\engine\utility::flag_set("player_mask_on");
 }
 
-function fire_if_alive(var0) {
-  var1 = var0.scene_kill_target[0];
-  var2 = getEnt(var1, "script_noteworthy");
+function fire_if_alive(var_0) {
+  var_1 = var_0.scene_kill_target[0];
+  var_2 = getEnt(var_1, "script_noteworthy");
 
-  if(isalive(var2)) {
-    var0 shoot(1000);
+  if(isalive(var_2)) {
+    var_0 shoot(1000);
   }
 
-  var0.scene_kill_target = scripts\engine\utility::array_remove(var0.scene_kill_target, var1);
+  var_0.scene_kill_target = scripts\engine\utility::array_remove(var_0.scene_kill_target, var_1);
 }
 
-function truck1_flip(var0) {
-  var1 = ["tag_window_front_left", "tag_window_front_right", "tag_window_back_left", "tag_window_back_right", "tag_windshield_front", "tag_windshield_back"];
+function truck1_flip(var_0) {
+  var_1 = ["tag_window_front_left", "tag_window_front_right", "tag_window_back_left", "tag_window_back_right", "tag_windshield_front", "tag_windshield_back"];
 
-  foreach(var3 in var1) {
-    var0 hidepart(var3);
+  foreach(var_3 in var_1) {
+    var_0 hidepart(var_3);
 
-    if(issubstr(var3, "windshield")) {
-      playFXOnTag(scripts\engine\utility::getfx("vfx_veh_glass_windshield"), var0, var3);
+    if(issubstr(var_3, "windshield")) {
+      playFXOnTag(scripts\engine\utility::getfx("vfx_veh_glass_windshield"), var_0, var_3);
       continue;
     }
 
-    playFXOnTag(scripts\engine\utility::getfx("vfx_veh_glass_window_side"), var0, var3);
+    playFXOnTag(scripts\engine\utility::getfx("vfx_veh_glass_window_side"), var_0, var_3);
   }
 
-  var5 = ["tag_light_back_left", "tag_light_back_right", "tag_light_front_left", "tag_light_front_right"];
+  var_5 = ["tag_light_back_left", "tag_light_back_right", "tag_light_front_left", "tag_light_front_right"];
 
-  foreach(var7 in var5) {
-    var0 hidepart(var7);
-    playFXOnTag(scripts\engine\utility::getfx("vfx_veh_glass_lamp"), var0, var7);
+  foreach(var_7 in var_5) {
+    var_0 hidepart(var_7);
+    playFXOnTag(scripts\engine\utility::getfx("vfx_veh_glass_lamp"), var_0, var_7);
   }
 
   thread scripts\sp\maps\proxywar\proxywar_lighting::lights_off("suv_a_head_lights");
@@ -508,152 +508,152 @@ function truck1_flip(var0) {
   decho_brakes_off(level.truck1);
   waitframe();
   decho_lights_off(level.truck1);
-  var0 setModel("proxywar_decho_dst_black");
+  var_0 setModel("proxywar_decho_dst_black");
   waitframe();
   scripts\engine\utility::exploder("crash_backlight");
 }
 
-function decho_brakes_on(var0) {
-  playFXOnTag(scripts\engine\utility::getfx("vfx_pw_veh_taillight_decho_left_nolight_braking"), var0, "tag_light_back_left");
-  playFXOnTag(scripts\engine\utility::getfx("vfx_pw_veh_taillight_decho_right_nolight_braking"), var0, "tag_light_back_right");
+function decho_brakes_on(var_0) {
+  playFXOnTag(scripts\engine\utility::getfx("vfx_pw_veh_taillight_decho_left_nolight_braking"), var_0, "tag_light_back_left");
+  playFXOnTag(scripts\engine\utility::getfx("vfx_pw_veh_taillight_decho_right_nolight_braking"), var_0, "tag_light_back_right");
 }
 
-function decho_brakes_off(var0) {
-  killfxontag(scripts\engine\utility::getfx("vfx_pw_veh_taillight_decho_left_nolight_braking"), var0, "tag_light_back_left");
-  killfxontag(scripts\engine\utility::getfx("vfx_pw_veh_taillight_decho_right_nolight_braking"), var0, "tag_light_back_right");
+function decho_brakes_off(var_0) {
+  killfxontag(scripts\engine\utility::getfx("vfx_pw_veh_taillight_decho_left_nolight_braking"), var_0, "tag_light_back_left");
+  killfxontag(scripts\engine\utility::getfx("vfx_pw_veh_taillight_decho_right_nolight_braking"), var_0, "tag_light_back_right");
 }
 
-function decho_lights_on(var0) {
-  playFXOnTag(scripts\engine\utility::getfx("vfx_pw_veh_taillight_decho_left_nolight"), var0, "tag_light_back_left");
-  playFXOnTag(scripts\engine\utility::getfx("vfx_pw_veh_taillight_decho_right_nolight"), var0, "tag_light_back_right");
-  playFXOnTag(scripts\engine\utility::getfx("vfx_pw_veh_headlight_decho_left_nolight"), var0, "tag_light_front_left");
-  playFXOnTag(scripts\engine\utility::getfx("vfx_pw_veh_headlight_decho_right_nolight"), var0, "tag_light_front_right");
+function decho_lights_on(var_0) {
+  playFXOnTag(scripts\engine\utility::getfx("vfx_pw_veh_taillight_decho_left_nolight"), var_0, "tag_light_back_left");
+  playFXOnTag(scripts\engine\utility::getfx("vfx_pw_veh_taillight_decho_right_nolight"), var_0, "tag_light_back_right");
+  playFXOnTag(scripts\engine\utility::getfx("vfx_pw_veh_headlight_decho_left_nolight"), var_0, "tag_light_front_left");
+  playFXOnTag(scripts\engine\utility::getfx("vfx_pw_veh_headlight_decho_right_nolight"), var_0, "tag_light_front_right");
 }
 
-function decho_lights_off(var0) {
-  killfxontag(scripts\engine\utility::getfx("vfx_pw_veh_taillight_decho_left_nolight"), var0, "tag_light_back_left");
-  killfxontag(scripts\engine\utility::getfx("vfx_pw_veh_taillight_decho_right_nolight"), var0, "tag_light_back_right");
-  killfxontag(scripts\engine\utility::getfx("vfx_pw_veh_headlight_decho_left_nolight"), var0, "tag_light_front_left");
-  killfxontag(scripts\engine\utility::getfx("vfx_pw_veh_headlight_decho_right_nolight"), var0, "tag_light_front_right");
+function decho_lights_off(var_0) {
+  killfxontag(scripts\engine\utility::getfx("vfx_pw_veh_taillight_decho_left_nolight"), var_0, "tag_light_back_left");
+  killfxontag(scripts\engine\utility::getfx("vfx_pw_veh_taillight_decho_right_nolight"), var_0, "tag_light_back_right");
+  killfxontag(scripts\engine\utility::getfx("vfx_pw_veh_headlight_decho_left_nolight"), var_0, "tag_light_front_left");
+  killfxontag(scripts\engine\utility::getfx("vfx_pw_veh_headlight_decho_right_nolight"), var_0, "tag_light_front_right");
 
-  if(var0 == level.truck2) {
+  if(var_0 == level.truck2) {
     thread scripts\sp\maps\proxywar\proxywar_lighting::lights_off("suv_b_head_lights");
     thread scripts\sp\maps\proxywar\proxywar_lighting::lights_off("suv_b_tail_lights");
     return;
   }
 }
 
-function driver_ready(var0) {
+function driver_ready(var_0) {
   scripts\engine\utility::flag_set("driver_ready");
 }
 
-function final_scene_remove_weapons(var0) {
+function final_scene_remove_weapons(var_0) {
   level.alpha1 scripts\common\ai::gun_remove();
 }
 
-function forest_magic_bullet_volley(var0) {
-  var1 = scripts\engine\utility::getStructArray("mb_forest", "targetname");
-  var2 = [];
+function forest_magic_bullet_volley(var_0) {
+  var_1 = scripts\engine\utility::getStructArray("mb_forest", "targetname");
+  var_2 = [];
 
-  foreach(var4 in var1) {
-    var2 = scripts\engine\utility::spawn_tag_origin(var4.origin, var4.angles);
+  foreach(var_4 in var_1) {
+    var_2 = scripts\engine\utility::spawn_tag_origin(var_4.origin, var_4.angles);
   }
 
-  foreach(var7 in var2) {
-    var8 = [];
+  foreach(var_7 in var_2) {
+    var_8 = [];
 
-    switch (var9) {
+    switch (var_9) {
       case 0:
-        var8 = [level.truck2 gettagorigin("tag_hood"), level.truck2 gettagorigin("tag_hood") + (20, 0, 10), level.truck2 gettagorigin("tag_hood") + (25, 0, 15)];
+        var_8 = [level.truck2 gettagorigin("tag_hood"), level.truck2 gettagorigin("tag_hood") + (20, 0, 10), level.truck2 gettagorigin("tag_hood") + (25, 0, 15)];
         break;
       case 1:
-        var8 = [level.truck2 gettagorigin("tag_light_front_left"), level.truck2 gettagorigin("tag_light_front_left") + (20, 0, 10), level.truck2 gettagorigin("tag_light_front_left") + (25, 0, 15)];
+        var_8 = [level.truck2 gettagorigin("tag_light_front_left"), level.truck2 gettagorigin("tag_light_front_left") + (20, 0, 10), level.truck2 gettagorigin("tag_light_front_left") + (25, 0, 15)];
         break;
       case 2:
-        var8 = [level.truck2 gettagorigin("tag_light_front_right"), level.truck2 gettagorigin("tag_light_front_right") + (-20, 0, 25), level.truck2 gettagorigin("tag_light_front_right") + (-25, 0, 35)];
+        var_8 = [level.truck2 gettagorigin("tag_light_front_right"), level.truck2 gettagorigin("tag_light_front_right") + (-20, 0, 25), level.truck2 gettagorigin("tag_light_front_right") + (-25, 0, 35)];
         break;
     }
 
-    thread magic_bullet_volley(var7);
+    thread magic_bullet_volley(var_7);
     wait 0.4;
   }
 
   wait 3;
 
-  foreach(var7 in var2) {
-    var7 notify("end_volley");
-    var7 delete();
+  foreach(var_7 in var_2) {
+    var_7 notify("end_volley");
+    var_7 delete();
     wait 0.2;
   }
 }
 
-function magic_bullet_volley(var0) {
+function magic_bullet_volley(var_0) {
   self endon("end_volley");
 
   for(;;) {
     playFXOnTag(scripts\engine\utility::getfx("ak_muzzle_flash"), self, "tag_origin");
-    magicbullet("iw8_ar_akilo47", self.origin, scripts\engine\utility::random(var0));
+    magicbullet("iw8_ar_akilo47", self.origin, scripts\engine\utility::random(var_0));
     wait randomfloatrange(0.2, 0.4);
   }
 }
 
-function fire_mb_1_miss(var0) {
+function fire_mb_1_miss(var_0) {
   if(!isDefined(level.mbsource1)) {
     level.mbsource1 = scripts\engine\utility::spawn_tag_origin(scripts\engine\utility::getStruct("mb_fire_1", "targetname").origin, (0, 0, 0));
   }
 
-  var1 = [(20, 10, 63), (-20, 10, 32), (20, 10, 45)];
+  var_1 = [(20, 10, 63), (-20, 10, 32), (20, 10, 45)];
   playFXOnTag(scripts\engine\utility::getfx("ak_muzzle_flash"), level.mbsource1, "tag_origin");
-  magicbullet("iw8_ar_akilo47", level.mbsource1.origin, level.alpha1.origin + scripts\engine\utility::random(var1));
+  magicbullet("iw8_ar_akilo47", level.mbsource1.origin, level.alpha1.origin + scripts\engine\utility::random(var_1));
 }
 
-function fire_mb_1_hit(var0) {
+function fire_mb_1_hit(var_0) {
   playFXOnTag(scripts\engine\utility::getfx("ak_muzzle_flash"), level.mbsource1, "tag_origin");
   magicbullet("iw8_ar_akilo47", level.mbsource1.origin, level.alpha1 gettagorigin("j_spine4"));
 }
 
-function fire_mb_2_miss(var0) {
+function fire_mb_2_miss(var_0) {
   if(!isDefined(level.mbsource2)) {
     level.mbsource2 = scripts\engine\utility::spawn_tag_origin(scripts\engine\utility::getStruct("mb_fire_2", "targetname").origin, (0, 0, 0));
   }
 
-  var1 = [(20, 10, 63), (-20, 10, 32), (20, 10, 45)];
+  var_1 = [(20, 10, 63), (-20, 10, 32), (20, 10, 45)];
   playFXOnTag(scripts\engine\utility::getfx("ak_muzzle_flash"), level.mbsource2, "tag_origin");
-  magicbullet("iw8_ar_akilo47", level.mbsource2.origin, level.bravo3.origin + scripts\engine\utility::random(var1));
+  magicbullet("iw8_ar_akilo47", level.mbsource2.origin, level.bravo3.origin + scripts\engine\utility::random(var_1));
 }
 
-function fire_mb_2_hit(var0) {
+function fire_mb_2_hit(var_0) {
   magicbullet("iw8_ar_akilo47", scripts\engine\utility::getStruct("mb_fire_2", "targetname").origin, level.bravo3 gettagorigin("j_spine4"));
 }
 
-function enable_springcam(var0) {
+function enable_springcam(var_0) {
   level.player springcamenabled(2, 5, 0.2);
 }
 
-function start_drag_rumble(var0) {
+function start_drag_rumble(var_0) {
   level.player playrumblelooponentity("subtle_tank_rumble");
 }
 
-function stop_drag_rumble(var0) {
+function stop_drag_rumble(var_0) {
   level.player stoprumble("subtle_tank_rumble");
 }
 
-function remove_player_gasmask(var0) {
+function remove_player_gasmask(var_0) {
   level notify("remove_gasmask");
   scripts\sp\maps\proxywar\proxywar_util::remove_mask_overlay();
 }
 
-function start_truck_rumble(var0) {
+function start_truck_rumble(var_0) {
   level.truck3 playrumblelooponentity("subtle_tank_rumble");
 }
 
-function switch_to_bodydouble(var0) {
+function switch_to_bodydouble(var_0) {
   level.player_rig hide();
   level.player lerpviewangleclamp(1, 0.1, 0.1, 0, 0, 0, 0);
   level.player.bodydouble show();
 }
 
-function audio_truck_exit(var0) {
+function audio_truck_exit(var_0) {
   level.truck3 playSound("scn_proxy_truck3_drive_off_lr");
   level notify("audio_truck3_driving_off");
 }

@@ -3,89 +3,89 @@
  * Script: scripts\mp\utility\usability.gsc
 ***********************************************/
 
-function setselfusable(var0) {
+function setselfusable(var_0) {
   self makeusable();
 
-  foreach(var2 in level.players) {
-    if(var2 != var0) {
-      self disableplayeruse(var2);
+  foreach(var_2 in level.players) {
+    if(var_2 != var_0) {
+      self disableplayeruse(var_2);
       continue;
     }
 
-    self enableplayeruse(var2);
+    self enableplayeruse(var_2);
   }
 }
 
 function setallunusable() {
-  foreach(var1 in level.players) {
-    self disableplayeruse(var1);
+  foreach(var_1 in level.players) {
+    self disableplayeruse(var_1);
   }
 }
 
-function maketeamusable(var0) {
+function maketeamusable(var_0) {
   self makeusable();
-  thread _updateteamusable(var0);
+  thread _updateteamusable(var_0);
 }
 
-function _updateteamusable(var0) {
+function _updateteamusable(var_0) {
   self endon("death");
 
   for(;;) {
-    foreach(var2 in level.players) {
-      if(var2.team == var0) {
-        self enableplayeruse(var2);
+    foreach(var_2 in level.players) {
+      if(var_2.team == var_0) {
+        self enableplayeruse(var_2);
         continue;
       }
 
-      self disableplayeruse(var2);
+      self disableplayeruse(var_2);
     }
 
     level waittill("joined_team");
   }
 }
 
-function makeenemyusable(var0, var1) {
+function makeenemyusable(var_0, var_1) {
   self makeusable();
-  thread _updateenemyusable(var0, var1);
+  thread _updateenemyusable(var_0, var_1);
 }
 
-function _updateenemyusable(var0, var1) {
+function _updateenemyusable(var_0, var_1) {
   self endon("death");
-  var2 = var0.team;
+  var_2 = var_0.team;
 
   for(;;) {
     if(level.teambased) {
-      foreach(var4 in level.players) {
-        if(istrue(var1)) {
-          if(var4.team != var2 || var4 == var0) {
-            self enableplayeruse(var4);
+      foreach(var_4 in level.players) {
+        if(istrue(var_1)) {
+          if(var_4.team != var_2 || var_4 == var_0) {
+            self enableplayeruse(var_4);
           } else {
-            self disableplayeruse(var4);
+            self disableplayeruse(var_4);
           }
 
           continue;
         }
 
-        if(var4.team != var2) {
-          self enableplayeruse(var4);
+        if(var_4.team != var_2) {
+          self enableplayeruse(var_4);
           continue;
         }
 
-        self disableplayeruse(var4);
+        self disableplayeruse(var_4);
       }
     } else {
-      foreach(var4 in level.players) {
-        if(istrue(var1)) {
-          self enableplayeruse(var4);
+      foreach(var_4 in level.players) {
+        if(istrue(var_1)) {
+          self enableplayeruse(var_4);
           continue;
         }
 
-        if(var4 != var0) {
-          self enableplayeruse(var4);
+        if(var_4 != var_0) {
+          self enableplayeruse(var_4);
           continue;
         }
 
-        self disableplayeruse(var4);
+        self disableplayeruse(var_4);
       }
     }
 
@@ -93,33 +93,33 @@ function _updateenemyusable(var0, var1) {
   }
 }
 
-function notusableforjoiningplayers(var0) {
+function notusableforjoiningplayers(var_0) {
   self notify("notusablejoiningplayers");
   self endon("death");
   level endon("game_ended");
-  var0 endon("death_or_disconnect");
+  var_0 endon("death_or_disconnect");
   self endon("notusablejoiningplayers");
   self endon("makeExplosiveUnusable");
 
   for(;;) {
-    level waittill("player_spawned", var1);
+    level waittill("player_spawned", var_1);
 
-    if(isDefined(var1) && var1 != var0) {
-      self disableplayeruse(var1);
+    if(isDefined(var_1) && var_1 != var_0) {
+      self disableplayeruse(var_1);
     }
   }
 }
 
-function notusableafterownerchange(var0, var1) {
+function notusableafterownerchange(var_0, var_1) {
   self notify("notusableafterownerchange");
   self endon("death");
   level endon("game_ended");
-  var0 endon("death_or_disconnect");
+  var_0 endon("death_or_disconnect");
   self endon("notusableafterownerchange");
   self endon("makeExplosiveUnusable");
 
   for(;;) {
-    var1 waittill("ownerChanged");
-    self disableplayeruse(var0);
+    var_1 waittill("ownerChanged");
+    self disableplayeruse(var_0);
   }
 }

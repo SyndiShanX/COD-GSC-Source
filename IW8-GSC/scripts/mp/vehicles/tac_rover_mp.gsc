@@ -11,29 +11,29 @@ function tac_rover_mp_init() {
 }
 
 function tac_rover_mp_initspawning() {
-  var0 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldataforvehicle("tac_rover", 1);
-  var0.arenavday = &scripts\cp_mp\vehicles\vehicle_spawn::ref_14211;
+  var_0 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldataforvehicle("tac_rover", 1);
+  var_0.arenavday = &scripts\cp_mp\vehicles\vehicle_spawn::ref_14211;
 }
 
 function tacrover_mp_initmines() {
-  var0 = scripts\cp_mp\vehicles\vehicle_mines::vehicle_mines_getleveldataforvehicle("tac_rover", 1);
-  var0.frontextents = 90;
-  var0.backextents = 115;
-  var0.leftextents = 38;
-  var0.rightextents = 38;
-  var0.bottomextents = 20;
-  var0.distancetobottom = 35;
-  var0.loscheckoffset = (0, -8, 50);
+  var_0 = scripts\cp_mp\vehicles\vehicle_mines::vehicle_mines_getleveldataforvehicle("tac_rover", 1);
+  var_0.frontextents = 90;
+  var_0.backextents = 115;
+  var_0.leftextents = 38;
+  var_0.rightextents = 38;
+  var_0.bottomextents = 20;
+  var_0.distancetobottom = 35;
+  var_0.loscheckoffset = (0, -8, 50);
 }
 
-function tac_rover_mp_spawncallback(var0, var1) {
-  var2 = scripts\cp_mp\vehicles\tac_rover::tac_rover_create(var0, var1);
+function tac_rover_mp_spawncallback(var_0, var_1) {
+  var_2 = scripts\cp_mp\vehicles\tac_rover::tac_rover_create(var_0, var_1);
 
-  if(isDefined(var2) && scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_gamemodesupportsrespawn()) {
-    var2.ondeathrespawn = &tac_rover_mp_ondeathrespawncallback;
+  if(isDefined(var_2) && scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_gamemodesupportsrespawn()) {
+    var_2.ondeathrespawn = &tac_rover_mp_ondeathrespawncallback;
   }
 
-  return var2;
+  return var_2;
 }
 
 function tac_rover_mp_ondeathrespawncallback() {
@@ -41,9 +41,9 @@ function tac_rover_mp_ondeathrespawncallback() {
 }
 
 function tac_rover_mp_waitandspawn() {
-  var0 = scripts\cp_mp\vehicles\vehicle_tracking::getvehiclespawndata(self);
-  var1 = spawnStruct();
-  scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(var0, var1);
-  var2 = spawnStruct();
-  var3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("tac_rover", var1, var2);
+  var_0 = scripts\cp_mp\vehicles\vehicle_tracking::getvehiclespawndata(self);
+  var_1 = spawnStruct();
+  scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(var_0, var_1);
+  var_2 = spawnStruct();
+  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("tac_rover", var_1, var_2);
 }

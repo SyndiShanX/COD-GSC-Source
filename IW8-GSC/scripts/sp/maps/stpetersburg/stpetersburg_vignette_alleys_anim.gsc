@@ -124,33 +124,33 @@ function level_anims_vehicles() {
   level.scr_anim["car"]["doors_close_rear_van"] = % stp_gauntlet_doors_close_rear_van;
 }
 
-function enforcer_van_hit(var0) {
+function enforcer_van_hit(var_0) {
   scripts\engine\utility::flag_set("flag_gauntlet_enforcer_van_hit");
   playrumbleonposition("grenade_rumble", level.enforcer.origin);
   earthquake(0.4, 0.5, level.enforcer.origin, 800);
   waitframe();
-  var1 = playFXOnTag(scripts\engine\utility::getfx("vfx_bd_blood_hit_01"), level.enforcer, "j_spine4");
-  var2 = playFXOnTag(scripts\engine\utility::getfx("vfx_blood_hit_01"), level.enforcer, "j_head");
+  var_1 = playFXOnTag(scripts\engine\utility::getfx("vfx_bd_blood_hit_01"), level.enforcer, "j_spine4");
+  var_2 = playFXOnTag(scripts\engine\utility::getfx("vfx_blood_hit_01"), level.enforcer, "j_head");
   playFXOnTag(scripts\engine\utility::getfx("cold_breath_run"), level.enforcer, "j_head");
 }
 
-function enforcer_ground_impact(var0) {
+function enforcer_ground_impact(var_0) {
   scripts\engine\utility::flag_set("flag_gauntlet_enforcer_ground_impact");
   waitframe();
-  var1 = playFXOnTag(scripts\engine\utility::getfx("vfx_bd_blood_hit_01"), level.enforcer, "j_head");
+  var_1 = playFXOnTag(scripts\engine\utility::getfx("vfx_bd_blood_hit_01"), level.enforcer, "j_head");
   playFXOnTag(scripts\engine\utility::getfx("cold_breath_run"), level.enforcer, "j_head");
 }
 
-function civ_stairs_death(var0) {
+function civ_stairs_death(var_0) {
   thread civ_stairs_blood_splatter();
-  playFXOnTag(scripts\engine\utility::getfx("vfx_bd_blood_hit_01"), var0, "j_shoulder_ri");
+  playFXOnTag(scripts\engine\utility::getfx("vfx_bd_blood_hit_01"), var_0, "j_shoulder_ri");
   wait 0.1;
-  playFXOnTag(scripts\engine\utility::getfx("vfx_blood_hit_01"), var0, "j_shoulder_le");
+  playFXOnTag(scripts\engine\utility::getfx("vfx_blood_hit_01"), var_0, "j_shoulder_le");
   wait 0.1;
-  playFXOnTag(scripts\engine\utility::getfx("vfx_body_explode_gib2"), var0, "j_spine4");
+  playFXOnTag(scripts\engine\utility::getfx("vfx_body_explode_gib2"), var_0, "j_spine4");
   wait 0.1;
-  playFXOnTag(scripts\engine\utility::getfx("vfx_blood_hit_01"), var0, "tag_eye");
-  var0 notify("end_blood_splatter");
+  playFXOnTag(scripts\engine\utility::getfx("vfx_blood_hit_01"), var_0, "tag_eye");
+  var_0 notify("end_blood_splatter");
 }
 
 function civ_stairs_blood_splatter() {
@@ -168,17 +168,17 @@ function civ_stairs_blood_splatter() {
   }
 }
 
-function enforcer_grenade_throw(var0) {
+function enforcer_grenade_throw(var_0) {
   scripts\engine\utility::flag_set("flag_apartment_enforcer_grenade_throw");
 }
 
-function enforcer_window_break(var0) {
+function enforcer_window_break(var_0) {
   scripts\engine\utility::flag_set("flag_apartment_enforcer_window_break");
 }
 
-function bar_street_civ_shot_squib(var0) {
-  var1 = scripts\engine\utility::getStruct("street_pursuit_magicbullet_start", "targetname");
-  var2 = getcompleteweaponname("iw8_ar_akilo47");
-  magicbullet(var2, var1.origin, var0 gettagorigin("j_spine4"));
-  playFXOnTag(scripts\engine\utility::getfx("vfx_body_explode_gib2"), var0, "j_spine4");
+function bar_street_civ_shot_squib(var_0) {
+  var_1 = scripts\engine\utility::getStruct("street_pursuit_magicbullet_start", "targetname");
+  var_2 = getcompleteweaponname("iw8_ar_akilo47");
+  magicbullet(var_2, var_1.origin, var_0 gettagorigin("j_spine4"));
+  playFXOnTag(scripts\engine\utility::getfx("vfx_body_explode_gib2"), var_0, "j_spine4");
 }

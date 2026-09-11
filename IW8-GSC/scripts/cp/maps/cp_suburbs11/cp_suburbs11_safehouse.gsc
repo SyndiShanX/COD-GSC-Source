@@ -20,9 +20,9 @@ function safehouse_obj_func() {
   level thread scripts\mp\vehicles\vehicle_damage_mp::ref_12e57();
 }
 
-function debugbeatobjective(var0) {}
+function debugbeatobjective(var_0) {}
 
-function debug_safehouse_start(var0) {
+function debug_safehouse_start(var_0) {
   thread threaded_debug_start();
 }
 
@@ -32,10 +32,10 @@ function threaded_debug_start() {
   thread start_safehouse_objective();
 }
 
-function spawn_atvs(var0, var1) {
+function spawn_atvs(var_0, var_1) {
   scripts\engine\utility::flag_wait("cp_donetsk_safehouse_suburbs11_cs_completed");
 
-  if(istrue(var1)) {
+  if(istrue(var_1)) {
     scripts\engine\utility::flag_wait("cp_quarry2_convoy4_create_script_completed");
   }
 
@@ -43,11 +43,11 @@ function spawn_atvs(var0, var1) {
     level.atvs = [];
   }
 
-  var2 = scripts\engine\utility::getStructArray(var0, "targetname");
-  level thread scripts\cp\vehicles\atv_cp::atv_cp_createfromstructs(var2, 1);
+  var_2 = scripts\engine\utility::getStructArray(var_0, "targetname");
+  level thread scripts\cp\vehicles\atv_cp::atv_cp_createfromstructs(var_2, 1);
 }
 
-function ref_135e1(var0) {
+function ref_135e1(var_0) {
   scripts\engine\utility::flag_wait("objectives_registered");
   wait 3;
 
@@ -55,32 +55,32 @@ function ref_135e1(var0) {
     level.tacrovers = [];
   }
 
-  var1 = scripts\engine\utility::getStructArray(var0, "targetname");
-  level thread scripts\cp\vehicles\tac_rover_cp::tac_rover_cp_createfromstructs(var1, 1);
+  var_1 = scripts\engine\utility::getStructArray(var_0, "targetname");
+  level thread scripts\cp\vehicles\tac_rover_cp::tac_rover_cp_createfromstructs(var_1, 1);
 }
 
 function start_safehouse_objective() {
   scripts\engine\utility::flag_wait("cp_donetsk_safehouse_suburbs11_cs_completed");
   scripts\cp\utility::teleportallplayersinteamtostructs("allies", "safehouse_s11_playerstart");
-  var0 = scripts\engine\utility::getStructArray("safehouse_s11_playerstart", "targetname")[0].origin;
+  var_0 = scripts\engine\utility::getStructArray("safehouse_s11_playerstart", "targetname")[0].origin;
   thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc2(1);
   thread scripts\mp\vehicles\vehicle_damage_mp::molotov_get_pool_level_data(scripts\engine\utility::getStruct("smuggler_safehouse1_loadout", "targetname"));
   thread scripts\mp\brclientmatchdata::getnextrpgspawnmodule("smuggler_1", "safehouse_door_opened", 10, 1);
   scripts\engine\utility::flag_wait("player_spawned_with_loadout");
   thread spawn_atvs("smuggler_atv_spawn");
   thread ref_135e1("smuggler_tacrover_spawn");
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(1, var0, 2048, "scriptable_door_wooden_panel_mp_01", "classname");
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(1, var0, 2048, "scriptable_door_wooden_hollow_mp_01", "classname");
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(1, var_0, 2048, "scriptable_door_wooden_panel_mp_01", "classname");
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(1, var_0, 2048, "scriptable_door_wooden_hollow_mp_01", "classname");
   scripts\cp\cp_objectives::run_objective("obj_caches", "primary", "allies");
   wait 0.7;
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(0, var0, 2048, "scriptable_door_wooden_panel_mp_01", "classname");
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(0, var0, 2048, "scriptable_door_wooden_hollow_mp_01", "classname");
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_14325(var0, 2048, "scriptable_door_wooden_panel_mp_01", "classname");
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_14325(var0, 2048, "scriptable_door_wooden_hollow_mp_01", "classname");
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(0, var_0, 2048, "scriptable_door_wooden_panel_mp_01", "classname");
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(0, var_0, 2048, "scriptable_door_wooden_hollow_mp_01", "classname");
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_14325(var_0, 2048, "scriptable_door_wooden_panel_mp_01", "classname");
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_14325(var_0, 2048, "scriptable_door_wooden_hollow_mp_01", "classname");
   level waittill("safehouse_door_opened");
   thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc2(0);
 
-  foreach(var2 in level.players) {
+  foreach(var_2 in level.players) {
     thread precomputeddropbagpos();
   }
 
@@ -95,49 +95,49 @@ function start_safehouse_objective() {
 function precomputeddropbagpos() {
   level endon("game_ended");
   self endon("death_or_disconnect");
-  var0 = "iw8_ges_demeanor_safe";
+  var_0 = "iw8_ges_demeanor_safe";
   jumpiftrue(istrue(self.ref_124c8)) LOC_00000020;
   return;
 }
 
-function start_safehouse(var0) {
+function start_safehouse(var_0) {
   scripts\engine\utility::flag_wait("cp_donetsk_safehouse_suburbs11_cs_completed");
   wait 1;
-  scripts\cp\cp_objectives::overridenextstep(var0, "obj_caches");
+  scripts\cp\cp_objectives::overridenextstep(var_0, "obj_caches");
 }
 
-function ref_12e58(var0) {
+function ref_12e58(var_0) {
   scripts\engine\utility::flag_set("cp_smuggler_safehouse_createscript");
   scripts\engine\utility::flag_wait("cp_smuggler_safehouse_createscript_completed");
-  var1 = scripts\engine\utility::getStruct("smuggler_safehouse_2_regroup_pos", "targetname");
-  objective_position(var0.objectiveindex, var1.origin);
-  scripts\cp\cp_objectives::ref_11f80(var0.objectiveindex);
+  var_1 = scripts\engine\utility::getStruct("smuggler_safehouse_2_regroup_pos", "targetname");
+  objective_position(var_0.objectiveindex, var_1.origin);
+  scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
   regroup_at_safehouse();
 }
 
 function regroup_at_safehouse() {
-  var0 = getEnt("smuggler_safehouse_2_volume", "targetname");
+  var_0 = getEnt("smuggler_safehouse_2_volume", "targetname");
   scripts\cp\cp_hud_message::teamhudtutorialmessage(&"CP_DWN_TWN_OBJECTIVES/GOTO_SAFEHOUSE_WORLD", "allies", 5);
-  scripts\mp\vehicles\vehicle_damage_mp::ref_12e58(var0, "players_regrouped");
+  scripts\mp\vehicles\vehicle_damage_mp::ref_12e58(var_0, "players_regrouped");
   level notify("smuggler_regrouped");
   thread mover_update();
 }
 
 function mover_update() {
-  for(var0 = 0; var0 < level.players.size; var0++) {
-    level.players[var0].ability_invulnerable = 1;
+  for(var_0 = 0; var_0 < level.players.size; var_0++) {
+    level.players[var_0].ability_invulnerable = 1;
   }
 
-  foreach(var2 in level.players) {
-    var2 scripts\cp_mp\xmike109::scriptable_callback("harbinger");
+  foreach(var_2 in level.players) {
+    var_2 scripts\cp_mp\xmike109::scriptable_callback("harbinger");
 
     if(scripts\cp\cp_relics::calldropbag()) {
       if(scripts\cp\cp_gameskill::get_gameskill() != 3) {
-        var2 thread scripts\cp_mp\xmike109::scriptable_callback("harbinger_mod");
+        var_2 thread scripts\cp_mp\xmike109::scriptable_callback("harbinger_mod");
         continue;
       }
 
-      var2 thread scripts\cp_mp\xmike109::scriptable_callback("harbinger_mod_vet");
+      var_2 thread scripts\cp_mp\xmike109::scriptable_callback("harbinger_mod_vet");
     }
   }
 
@@ -147,36 +147,36 @@ function mover_update() {
 
 function ref_137f7() {
   scripts\engine\utility::flag_init("quarry_intro_vo_finished");
-  var0 = "cp_smuggler_safehouse_createscript";
+  var_0 = "cp_smuggler_safehouse_createscript";
 
-  if(!scripts\engine\utility::flag_exist(var0)) {
-    scripts\engine\utility::flag_init(var0);
+  if(!scripts\engine\utility::flag_exist(var_0)) {
+    scripts\engine\utility::flag_init(var_0);
   }
 
-  if(!scripts\engine\utility::flag(var0)) {
-    scripts\engine\utility::flag_set(var0);
+  if(!scripts\engine\utility::flag(var_0)) {
+    scripts\engine\utility::flag_set(var_0);
   }
 
-  scripts\engine\utility::flag_wait(var0 + "_completed");
+  scripts\engine\utility::flag_wait(var_0 + "_completed");
   wait 1;
-  var1 = scripts\engine\utility::getStruct("smuggler_safehouse_2_edit_loadout", "targetname");
-  var2 = scripts\engine\utility::getStructArray("smuggler_safehouse_2_player_spawn", "targetname");
-  var3 = getEntArray("smuggler_safehouse_2_loot", "targetname");
-  var4 = scripts\engine\utility::getStruct("smuggler_safehouse_2_regroup_pos", "targetname");
+  var_1 = scripts\engine\utility::getStruct("smuggler_safehouse_2_edit_loadout", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("smuggler_safehouse_2_player_spawn", "targetname");
+  var_3 = getEntArray("smuggler_safehouse_2_loot", "targetname");
+  var_4 = scripts\engine\utility::getStruct("smuggler_safehouse_2_regroup_pos", "targetname");
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  thread scripts\mp\vehicles\vehicle_damage_mp::molotov_get_pool_level_data(var1);
+  thread scripts\mp\vehicles\vehicle_damage_mp::molotov_get_pool_level_data(var_1);
   thread scripts\mp\brclientmatchdata::getnextrpgspawnmodule("smuggler_2", "safehouse_door_opened", 10, 1);
   thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc2(1);
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_12e56(var3);
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_12e56(var_3);
   setDvar("restart_checkpoint", "");
-  level.initlocs_bunkertest = var2;
+  level.initlocs_bunkertest = var_2;
   level.ref_139b5 = 1;
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(1, var4.origin, 2048, "scriptable_door_wooden_panel_mp_01", "classname");
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(1, var4.origin, 2048, "scriptable_door_wooden_hollow_mp_01", "classname");
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(1, var_4.origin, 2048, "scriptable_door_wooden_panel_mp_01", "classname");
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(1, var_4.origin, 2048, "scriptable_door_wooden_hollow_mp_01", "classname");
   scripts\engine\utility::flag_wait("player_spawned_with_loadout");
 
   if(getDvar("cp_smuggler_skip_vo", "") == "") {
@@ -189,13 +189,13 @@ function ref_137f7() {
 
   setDvar("cp_smuggler_skip_vo", "skip");
   scripts\engine\utility::flag_set("quarry_intro_vo_finished");
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(0, var4.origin, 2048, "scriptable_door_wooden_panel_mp_01", "classname");
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(0, var4.origin, 2048, "scriptable_door_wooden_hollow_mp_01", "classname");
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_14325(var4.origin, 2048, "scriptable_door_wooden_panel_mp_01", "classname");
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_14325(var4.origin, 2048, "scriptable_door_wooden_hollow_mp_01", "classname");
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(0, var_4.origin, 2048, "scriptable_door_wooden_panel_mp_01", "classname");
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(0, var_4.origin, 2048, "scriptable_door_wooden_hollow_mp_01", "classname");
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_14325(var_4.origin, 2048, "scriptable_door_wooden_panel_mp_01", "classname");
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_14325(var_4.origin, 2048, "scriptable_door_wooden_hollow_mp_01", "classname");
   level waittill("safehouse_door_opened");
 
-  foreach(var6 in level.players) {
+  foreach(var_6 in level.players) {
     thread precomputeddropbagpos();
   }
 
@@ -204,11 +204,11 @@ function ref_137f7() {
   level.ref_139b5 = 0;
 }
 
-function ref_12414(var0) {
+function ref_12414(var_0) {
   level endon("stop_searching_vo");
   wait 5;
 
-  if(!istrue(var0)) {
+  if(!istrue(var_0)) {
     scripts\mp\vehicles\vehicle_damage_mp::ref_12409("lass");
     play_vo_delay(level, "dx_cps_lass_quarry2_mission_intro_10");
     wait 1.5;
@@ -223,21 +223,21 @@ function ref_12414(var0) {
   scripts\mp\vehicles\vehicle_damage_mp::ref_12408(undefined, "conv_generic_affirm");
 }
 
-function play_vo_delay(var0, var1, var2, var3, var4, var5, var6) {
-  if(isDefined(var4)) {
-    wait var4;
+function play_vo_delay(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if(isDefined(var_4)) {
+    wait var_4;
   }
 
-  if(isDefined(var0)) {
-    level scripts\cp\cp_vo::try_to_play_vo_on_team(var0, "allies", var3, var5, var6);
+  if(isDefined(var_0)) {
+    level scripts\cp\cp_vo::try_to_play_vo_on_team(var_0, "allies", var_3, var_5, var_6);
   }
 
-  if(isDefined(var1)) {
-    wait var1;
+  if(isDefined(var_1)) {
+    wait var_1;
   }
 
-  if(isDefined(var2)) {
-    level thread scripts\cp\utility::cp_add_dialogue_line(var2);
+  if(isDefined(var_2)) {
+    level thread scripts\cp\utility::cp_add_dialogue_line(var_2);
     return;
   }
 }

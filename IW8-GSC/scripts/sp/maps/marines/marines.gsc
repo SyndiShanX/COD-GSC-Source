@@ -51,8 +51,8 @@ function main() {
 }
 
 function helicopter_spawn_function_init() {
-  var0 = getEntArray("script_vehicle_apache", "classname");
-  scripts\engine\sp\utility::array_spawn_function(var0, &scripts\common\vehicle::vehicle_lights_off, "running");
+  var_0 = getEntArray("script_vehicle_apache", "classname");
+  scripts\engine\sp\utility::array_spawn_function(var_0, &scripts\common\vehicle::vehicle_lights_off, "running");
 }
 
 function init_hints() {
@@ -87,19 +87,19 @@ function marines_precache() {
 
 function marines_starts() {
   scripts\engine\sp\utility::set_default_start("intro");
-  var0 = undefined;
-  scripts\engine\sp\utility::add_start("intro", &scripts\sp\maps\marines\marines_gameplay_convoy::intro_start, var0, &scripts\sp\maps\marines\marines_gameplay_convoy::intro_main, "11000_011101000000", &scripts\sp\maps\marines\marines_gameplay_convoy::intro_catchup);
-  scripts\engine\sp\utility::add_start("convoy_ambush", &scripts\sp\maps\marines\marines_gameplay_convoy::convoy_ambush_start, var0, &scripts\sp\maps\marines\marines_gameplay_convoy::convoy_ambush_main, "11000_111100100000", &scripts\sp\maps\marines\marines_gameplay_convoy::convoy_ambush_catchup);
-  scripts\engine\sp\utility::add_start("murderhole", &scripts\sp\maps\marines\marines_gameplay_streets::murderhole_start, var0, &scripts\sp\maps\marines\marines_gameplay_streets::murderhole_main, "11000_111110100000", &scripts\sp\maps\marines\marines_gameplay_streets::murderhole_catchup);
-  scripts\engine\sp\utility::add_start("alley", &scripts\sp\maps\marines\marines_gameplay_streets::alley_start, var0, &scripts\sp\maps\marines\marines_gameplay_streets::alley_main, "11000_111110100000", &scripts\sp\maps\marines\marines_gameplay_streets::alley_catchup);
-  scripts\engine\sp\utility::add_start("murderhole_breach", &scripts\sp\maps\marines\marines_gameplay_streets::murderhole_breach_start, var0, &scripts\sp\maps\marines\marines_gameplay_streets::murderhole_breach_main, "11110_111110100000", &scripts\sp\maps\marines\marines_gameplay_streets::murderhole_breach_catchup);
-  scripts\engine\sp\utility::add_start("retreat", &scripts\sp\maps\marines\marines_gameplay_parkinglot::retreat_start, var0, &scripts\sp\maps\marines\marines_gameplay_parkinglot::retreat_main, "11110_111111011000", &scripts\sp\maps\marines\marines_gameplay_parkinglot::retreat_catchup);
-  scripts\engine\sp\utility::add_start("lobby", &scripts\sp\maps\marines\marines_gameplay_hospital::lobby_start, var0, &scripts\sp\maps\marines\marines_gameplay_hospital::lobby_main, "11110_101111011000", &scripts\sp\maps\marines\marines_gameplay_hospital::lobby_catchup);
-  scripts\engine\sp\utility::add_start("groundfloor", &scripts\sp\maps\marines\marines_gameplay_hospital::groundfloor_start, var0, &scripts\sp\maps\marines\marines_gameplay_hospital::groundfloor_main, "11110_101111011000", &scripts\sp\maps\marines\marines_gameplay_hospital::groundfloor_catchup);
-  scripts\engine\sp\utility::add_start("civ_ambush", &scripts\sp\maps\marines\marines_gameplay_civ_ambush::civ_ambush_start, var0, &scripts\sp\maps\marines\marines_gameplay_civ_ambush::civ_ambush_main, "01110_000001011110", &scripts\sp\maps\marines\marines_gameplay_civ_ambush::civ_ambush_catchup);
-  scripts\engine\sp\utility::add_start("mg_hall", &scripts\sp\maps\marines\marines_gameplay_hospital_upper::mg_hall_start, var0, &scripts\sp\maps\marines\marines_gameplay_hospital_upper::mg_hall_main, "01110_000001011111", &scripts\sp\maps\marines\marines_gameplay_hospital_upper::mg_hall_catchup);
-  scripts\engine\sp\utility::add_start("snakecam", &scripts\sp\maps\marines\marines_gameplay_hospital_upper::snakecam_start, var0, &scripts\sp\maps\marines\marines_gameplay_hospital_upper::snakecam_main, "01111_000001000011", &scripts\sp\maps\marines\marines_gameplay_hospital_upper::snakecam_catchup);
-  scripts\engine\sp\utility::add_start("wolf", &scripts\sp\maps\marines\marines_gameplay_hospital_upper::wolf_start, var0, &scripts\sp\maps\marines\marines_gameplay_hospital_upper::wolf_main, "00011_000001000001", &scripts\sp\maps\marines\marines_gameplay_hospital_upper::wolf_catchup);
+  var_0 = undefined;
+  scripts\engine\sp\utility::add_start("intro", &scripts\sp\maps\marines\marines_gameplay_convoy::intro_start, var_0, &scripts\sp\maps\marines\marines_gameplay_convoy::intro_main, "11000_011101000000", &scripts\sp\maps\marines\marines_gameplay_convoy::intro_catchup);
+  scripts\engine\sp\utility::add_start("convoy_ambush", &scripts\sp\maps\marines\marines_gameplay_convoy::convoy_ambush_start, var_0, &scripts\sp\maps\marines\marines_gameplay_convoy::convoy_ambush_main, "11000_111100100000", &scripts\sp\maps\marines\marines_gameplay_convoy::convoy_ambush_catchup);
+  scripts\engine\sp\utility::add_start("murderhole", &scripts\sp\maps\marines\marines_gameplay_streets::murderhole_start, var_0, &scripts\sp\maps\marines\marines_gameplay_streets::murderhole_main, "11000_111110100000", &scripts\sp\maps\marines\marines_gameplay_streets::murderhole_catchup);
+  scripts\engine\sp\utility::add_start("alley", &scripts\sp\maps\marines\marines_gameplay_streets::alley_start, var_0, &scripts\sp\maps\marines\marines_gameplay_streets::alley_main, "11000_111110100000", &scripts\sp\maps\marines\marines_gameplay_streets::alley_catchup);
+  scripts\engine\sp\utility::add_start("murderhole_breach", &scripts\sp\maps\marines\marines_gameplay_streets::murderhole_breach_start, var_0, &scripts\sp\maps\marines\marines_gameplay_streets::murderhole_breach_main, "11110_111110100000", &scripts\sp\maps\marines\marines_gameplay_streets::murderhole_breach_catchup);
+  scripts\engine\sp\utility::add_start("retreat", &scripts\sp\maps\marines\marines_gameplay_parkinglot::retreat_start, var_0, &scripts\sp\maps\marines\marines_gameplay_parkinglot::retreat_main, "11110_111111011000", &scripts\sp\maps\marines\marines_gameplay_parkinglot::retreat_catchup);
+  scripts\engine\sp\utility::add_start("lobby", &scripts\sp\maps\marines\marines_gameplay_hospital::lobby_start, var_0, &scripts\sp\maps\marines\marines_gameplay_hospital::lobby_main, "11110_101111011000", &scripts\sp\maps\marines\marines_gameplay_hospital::lobby_catchup);
+  scripts\engine\sp\utility::add_start("groundfloor", &scripts\sp\maps\marines\marines_gameplay_hospital::groundfloor_start, var_0, &scripts\sp\maps\marines\marines_gameplay_hospital::groundfloor_main, "11110_101111011000", &scripts\sp\maps\marines\marines_gameplay_hospital::groundfloor_catchup);
+  scripts\engine\sp\utility::add_start("civ_ambush", &scripts\sp\maps\marines\marines_gameplay_civ_ambush::civ_ambush_start, var_0, &scripts\sp\maps\marines\marines_gameplay_civ_ambush::civ_ambush_main, "01110_000001011110", &scripts\sp\maps\marines\marines_gameplay_civ_ambush::civ_ambush_catchup);
+  scripts\engine\sp\utility::add_start("mg_hall", &scripts\sp\maps\marines\marines_gameplay_hospital_upper::mg_hall_start, var_0, &scripts\sp\maps\marines\marines_gameplay_hospital_upper::mg_hall_main, "01110_000001011111", &scripts\sp\maps\marines\marines_gameplay_hospital_upper::mg_hall_catchup);
+  scripts\engine\sp\utility::add_start("snakecam", &scripts\sp\maps\marines\marines_gameplay_hospital_upper::snakecam_start, var_0, &scripts\sp\maps\marines\marines_gameplay_hospital_upper::snakecam_main, "01111_000001000011", &scripts\sp\maps\marines\marines_gameplay_hospital_upper::snakecam_catchup);
+  scripts\engine\sp\utility::add_start("wolf", &scripts\sp\maps\marines\marines_gameplay_hospital_upper::wolf_start, var_0, &scripts\sp\maps\marines\marines_gameplay_hospital_upper::wolf_main, "00011_000001000001", &scripts\sp\maps\marines\marines_gameplay_hospital_upper::wolf_catchup);
 }
 
 function marines_transients() {
@@ -127,13 +127,13 @@ function marines_transients() {
 function marines_player_setup() {
   setplayerviewmodel("viewmodel_arms_alex_desert", undefined, "default_character_shadow");
   scripts\sp\utility::context_melee_set_arms("viewmodel_arms_alex_desert");
-  var0 = ["frag", "smoke_tall"];
-  scripts\engine\sp\utility::offhandprecache(var0);
+  var_0 = ["frag", "smoke_tall"];
+  scripts\engine\sp\utility::offhandprecache(var_0);
   level.primaryweapon = scripts\sp\utility::make_weapon("iw8_ar_mike4", ["hybrid_west02", "ub_mike203_sp"]);
-  var1 = scripts\sp\utility::make_weapon("iw8_pi_mike1911");
-  var1 = var1 withoutattachment("slide_mike1911");
-  var1 = var1 withattachment("slide_tritium_mike1911");
-  level.secondaryweapon = var1;
+  var_1 = scripts\sp\utility::make_weapon("iw8_pi_mike1911");
+  var_1 = var_1 withoutattachment("slide_mike1911");
+  var_1 = var_1 withattachment("slide_tritium_mike1911");
+  level.secondaryweapon = var_1;
   level.player giveweapon(level.secondaryweapon);
   level.player giveweapon(level.primaryweapon, 0, 0, 0, 1);
   level.player switchtoweaponimmediate(level.primaryweapon);
@@ -146,26 +146,26 @@ function marines_player_setup() {
   setup_player_rig();
 }
 
-function setplayerviewmodel(var0, var1, var2) {
-  if(isDefined(var0)) {
-    level.player setviewmodel(var0);
+function setplayerviewmodel(var_0, var_1, var_2) {
+  if(isDefined(var_0)) {
+    level.player setviewmodel(var_0);
   }
 
-  if(isDefined(var1)) {}
+  if(isDefined(var_1)) {}
 
-  if(isDefined(var2)) {
-    level.player setshadowmodel(var2);
+  if(isDefined(var_2)) {
+    level.player setshadowmodel(var_2);
     return;
   }
 }
 
 function marines_objectives() {
   level.player endon("death");
-  var0 = getEnt("objective_marker_retreat_stackup", "targetname");
-  var1 = getEnt("objective_marker_hospital_entrance", "targetname");
-  var2 = getEnt("objective_hospital_lobby_breach_marker", "targetname");
-  var3 = getEnt("objective_hospital_snakecam_marker", "targetname");
-  var4 = getEnt("objective_hospital_wolf_flank_1", "targetname");
+  var_0 = getEnt("objective_marker_retreat_stackup", "targetname");
+  var_1 = getEnt("objective_marker_hospital_entrance", "targetname");
+  var_2 = getEnt("objective_hospital_lobby_breach_marker", "targetname");
+  var_3 = getEnt("objective_hospital_snakecam_marker", "targetname");
+  var_4 = getEnt("objective_hospital_wolf_flank_1", "targetname");
 
   if(!scripts\sp\starts::is_after_start("convoy_ambush")) {
     if(!scripts\engine\sp\objectives::objective_exists("objective_convoy_start")) {
@@ -184,29 +184,29 @@ function marines_objectives() {
     scripts\engine\sp\objectives::objective_add("objective_convoy_start_ied", "current", undefined, &"MARINES/OBJ_REACH_HOSPITAL");
     wait 1;
     scripts\engine\sp\objectives::objective_remove("objective_convoy_start_ied");
-    var5 = getEnt("objective_marker_humvee", "targetname");
-    scripts\engine\sp\objectives::objective_add("objective_humvee", "current", var5.origin, &"MARINES/OBJ_HELP_MARINE");
+    var_5 = getEnt("objective_marker_humvee", "targetname");
+    scripts\engine\sp\objectives::objective_add("objective_humvee", "current", var_5.origin, &"MARINES/OBJ_HELP_MARINE");
     scripts\engine\utility::flag_wait_any("murderhole_spawn", "marine_01_reached_IED", "marine_02_reached_IED", "marine_03_reached_IED", "griggs_at_mg_cover_node");
     wait 5;
     scripts\engine\sp\objectives::objective_remove("objective_humvee");
-    var6 = getEnt("objective_marker_alley", "targetname");
-    scripts\engine\sp\objectives::objective_add("objective_alley", "current", var6.origin, &"MARINES/OBJ_REACH_MG");
+    var_6 = getEnt("objective_marker_alley", "targetname");
+    scripts\engine\sp\objectives::objective_add("objective_alley", "current", var_6.origin, &"MARINES/OBJ_REACH_MG");
     scripts\engine\utility::flag_wait("objective_marker_switch");
     scripts\engine\sp\objectives::objective_remove("objective_alley");
   }
 
   if(!scripts\sp\starts::is_after_start("alley")) {
-    var7 = getEnt("objective_marker_general_MH", "targetname");
-    var8 = getEnt("objective_marker_MH_right", "targetname");
+    var_7 = getEnt("objective_marker_general_MH", "targetname");
+    var_8 = getEnt("objective_marker_MH_right", "targetname");
 
     if(!scripts\engine\sp\objectives::objective_exists("objective_alley")) {
-      scripts\engine\sp\objectives::objective_add("objective_alley", "current", var7.origin, &"MARINES/OBJ_REACH_MG", undefined);
+      scripts\engine\sp\objectives::objective_add("objective_alley", "current", var_7.origin, &"MARINES/OBJ_REACH_MG", undefined);
     } else {
-      scripts\engine\sp\objectives::objective_update("objective_alley", "current", var7.origin, &"MARINES/OBJ_REACH_MG", undefined);
+      scripts\engine\sp\objectives::objective_update("objective_alley", "current", var_7.origin, &"MARINES/OBJ_REACH_MG", undefined);
     }
 
     scripts\engine\utility::flag_wait("ready_to_cross_street");
-    scripts\engine\sp\objectives::objective_update("objective_alley", "current", var8.origin, &"MARINES/OBJ_REACH_MG");
+    scripts\engine\sp\objectives::objective_update("objective_alley", "current", var_8.origin, &"MARINES/OBJ_REACH_MG");
     scripts\engine\utility::flag_wait("murderhole_breach_save_point");
     scripts\engine\sp\objectives::objective_remove("objective_alley");
   }
@@ -219,7 +219,7 @@ function marines_objectives() {
   }
 
   if(!scripts\sp\starts::is_after_start("retreat")) {
-    scripts\engine\sp\objectives::objective_add("objective_retreat_stackup", "current", var0.origin, &"MARINES/OBJ_REGROUP_GRIGGS");
+    scripts\engine\sp\objectives::objective_add("objective_retreat_stackup", "current", var_0.origin, &"MARINES/OBJ_REGROUP_GRIGGS");
     scripts\engine\utility::flag_wait("flag_retreat_exiting_mg_house");
     scripts\engine\sp\objectives::objective_set_on_entity("objective_retreat_stackup", "griggs", level.griggs);
     scripts\engine\utility::flag_wait("flag_retreat_smash_gate_tank_hitting_gate");
@@ -228,10 +228,10 @@ function marines_objectives() {
     scripts\engine\sp\objectives::objective_add("objective_retreat_bombardment", "current", undefined, &"MARINES/OBJ_HOLD_POSITION");
     scripts\engine\utility::flag_wait("flag_retreat_bombardment_complete");
     scripts\engine\sp\objectives::objective_remove("objective_retreat_bombardment");
-    scripts\engine\sp\objectives::objective_add("objective_retreat_hospital_enter", "current", var1.origin, &"MARINES/OBJ_ADVANCE_HOSPITAL");
+    scripts\engine\sp\objectives::objective_add("objective_retreat_hospital_enter", "current", var_1.origin, &"MARINES/OBJ_ADVANCE_HOSPITAL");
     scripts\engine\utility::flag_wait("flag_set_push_hospital_objective");
     scripts\engine\sp\objectives::objective_remove("objective_retreat_hospital_enter");
-    scripts\engine\sp\objectives::objective_add("objective_hospital_lobby_breach", "current", var2.origin, &"MARINES/OBJ_ENTER_HOSPITAL");
+    scripts\engine\sp\objectives::objective_add("objective_hospital_lobby_breach", "current", var_2.origin, &"MARINES/OBJ_ENTER_HOSPITAL");
     scripts\engine\utility::flag_wait("flag_lobby_entered");
     scripts\engine\sp\objectives::objective_remove("objective_hospital_lobby_breach");
   }
@@ -268,7 +268,7 @@ function marines_objectives() {
 
     scripts\engine\utility::flag_wait("snakecam_enable_flag");
     scripts\engine\sp\objectives::objective_complete("objective_snakecam_locate_wolf");
-    scripts\engine\sp\objectives::objective_add("objective_hospital_snakecam_1", "current", var3.origin, &"MARINES/OBJ_SNAKECAM_DOOR");
+    scripts\engine\sp\objectives::objective_add("objective_hospital_snakecam_1", "current", var_3.origin, &"MARINES/OBJ_SNAKECAM_DOOR");
     scripts\engine\utility::flag_wait("flag_wolf_snakecam_starting");
     scripts\engine\sp\objectives::objective_remove("objective_hospital_snakecam_1");
     scripts\engine\sp\objectives::objective_add("objective_hospital_snakecam_2", "current", undefined, &"MARINES/OBJ_SNAKECAM_DOOR");
@@ -329,9 +329,9 @@ function objective_hospital_snakecam_wolf_marker_manager() {
   }
 }
 
-function exterior_aq_face_enemy_dist_override(var0, var1, var2) {
+function exterior_aq_face_enemy_dist_override(var_0, var_1, var_2) {
   if(isDefined(self.spawner.script_parameters)) {
-    if(self.spawner.script_parameters == var0 || self.spawner.script_parameters == var1 || self.spawner.script_parameters == var2) {
+    if(self.spawner.script_parameters == var_0 || self.spawner.script_parameters == var_1 || self.spawner.script_parameters == var_2) {
       self.maxfaceenemydist = 0;
       self.maxfacenewenemydist = 0;
       return;

@@ -10,8 +10,8 @@ function main() {
 
   scripts\mp\globallogic::init();
   scripts\mp\globallogic::setupcallbacks();
-  var0 = [];
-  scripts\mp\gameobjects::main(var0);
+  var_0 = [];
+  scripts\mp\gameobjects::main(var_0);
 
   if(isusingmatchrulesdata()) {
     level.initializematchrules = &initializematchrules;
@@ -82,26 +82,26 @@ function onstartgametype() {
   }
 
   if(game["switchedsides"]) {
-    var0 = game["attackers"];
-    var1 = game["defenders"];
-    game["attackers"] = var1;
-    game["defenders"] = var0;
+    var_0 = game["attackers"];
+    var_1 = game["defenders"];
+    game["attackers"] = var_1;
+    game["defenders"] = var_0;
   }
 
-  var2 = &"OBJECTIVES/WAR";
-  var3 = &"OBJECTIVES/WAR_SCORE";
-  var4 = &"OBJECTIVES/WAR_HINT";
+  var_2 = &"OBJECTIVES/WAR";
+  var_3 = &"OBJECTIVES/WAR_SCORE";
+  var_4 = &"OBJECTIVES/WAR_HINT";
 
-  foreach(var6 in level.teamnamelist) {
-    scripts\mp\utility\game::setobjectivetext(var6, var2);
+  foreach(var_6 in level.teamnamelist) {
+    scripts\mp\utility\game::setobjectivetext(var_6, var_2);
 
     if(level.splitscreen) {
-      scripts\mp\utility\game::setobjectivescoretext(var6, var2);
+      scripts\mp\utility\game::setobjectivescoretext(var_6, var_2);
     } else {
-      scripts\mp\utility\game::setobjectivescoretext(var6, var3);
+      scripts\mp\utility\game::setobjectivescoretext(var_6, var_3);
     }
 
-    scripts\mp\utility\game::setobjectivehinttext(var6, var4);
+    scripts\mp\utility\game::setobjectivehinttext(var_6, var_4);
   }
 
   initspawns();
@@ -122,16 +122,16 @@ function initspawns() {
 
 function setplayerloadout() {
   definechestweapons();
-  var0 = getrandomweapon(level.pistolarray);
-  var1 = scripts\mp\utility\weapon::getweaponrootname(var0["name"]);
-  var2 = tablelookup("mp/sotfWeapons.csv", 2, var1, 0);
-  setomnvar("ui_sotf_pistol", int(var2));
+  var_0 = getrandomweapon(level.pistolarray);
+  var_1 = scripts\mp\utility\weapon::getweaponrootname(var_0["name"]);
+  var_2 = tablelookup("mp/sotfWeapons.csv", 2, var_1, 0);
+  setomnvar("ui_sotf_pistol", int(var_2));
   level.sotf_loadouts["axis"]["loadoutPrimary"] = "none";
   level.sotf_loadouts["axis"]["loadoutPrimaryAttachment"] = "none";
   level.sotf_loadouts["axis"]["loadoutPrimaryAttachment2"] = "none";
   level.sotf_loadouts["axis"]["loadoutPrimaryCamo"] = "none";
   level.sotf_loadouts["axis"]["loadoutPrimaryReticle"] = "none";
-  level.sotf_loadouts["axis"]["loadoutSecondary"] = var0["name"];
+  level.sotf_loadouts["axis"]["loadoutSecondary"] = var_0["name"];
   level.sotf_loadouts["axis"]["loadoutSecondaryAttachment"] = "none";
   level.sotf_loadouts["axis"]["loadoutSecondaryAttachment2"] = "none";
   level.sotf_loadouts["axis"]["loadoutSecondaryCamo"] = "none";
@@ -147,20 +147,20 @@ function setplayerloadout() {
 }
 
 function getspawnpoint() {
-  var0 = self.pers["team"];
+  var_0 = self.pers["team"];
 
   if(game["switchedsides"]) {
-    var0 = scripts\mp\utility\game::getotherteam(var0)[0];
+    var_0 = scripts\mp\utility\game::getotherteam(var_0)[0];
   }
 
   if(scripts\mp\spawnlogic::shoulduseteamstartspawn()) {
-    var1 = scripts\mp\spawnlogic::getspawnpointarray("mp_tdm_spawn_" + var0 + "_start");
-    var2 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var1);
+    var_1 = scripts\mp\spawnlogic::getspawnpointarray("mp_tdm_spawn_" + var_0 + "_start");
+    var_2 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_1);
   } else {
-    var2 = undefined;
+    var_2 = undefined;
   }
 
-  return var2;
+  return var_2;
 }
 
 function onspawnplayer() {
@@ -179,24 +179,24 @@ function waitloadoutdone() {
   level endon("game_ended");
   self endon("disconnect");
   self waittill("giveLoadout");
-  var0 = self getcurrentweapon();
-  self setweaponammostock(var0, 0);
-  self.oldprimarygun = var0;
+  var_0 = self getcurrentweapon();
+  self setweaponammostock(var_0, 0);
+  self.oldprimarygun = var_0;
   thread pickupweaponhandler();
 }
 
-function onplayerscore(var0, var1) {
-  if(var0 == "kill") {
-    var2 = scripts\mp\rank::getscoreinfovalue("score_increment");
-    return var2;
+function onplayerscore(var_0, var_1) {
+  if(var_0 == "kill") {
+    var_2 = scripts\mp\rank::getscoreinfovalue("score_increment");
+    return var_2;
   }
 
   return 0;
 }
 
-function onnormaldeath(var0, var1, var2, var3, var4, var5) {
-  scripts\mp\gametypes\common::oncommonnormaldeath(var0, var1, var2, var3, var4, var5);
-  perkwatcher(var1);
+function onnormaldeath(var_0, var_1, var_2, var_3, var_4, var_5) {
+  scripts\mp\gametypes\common::oncommonnormaldeath(var_0, var_1, var_2, var_3, var_4, var_5);
+  perkwatcher(var_1);
 }
 
 function sotf() {
@@ -206,29 +206,29 @@ function sotf() {
 function startspawnchest() {
   level endon("game_ended");
   self endon("disconnect");
-  var0 = getdvarint("scr_sotf_crateamount", 1);
-  var1 = getdvarint("scr_sotf_cratetimer", 30);
-  level waittill("sotf_player_spawned", var2);
+  var_0 = getdvarint("scr_sotf_crateamount", 1);
+  var_1 = getdvarint("scr_sotf_cratetimer", 30);
+  level waittill("sotf_player_spawned", var_2);
 
   for(;;) {
-    if(!isalive(var2)) {
-      var2 = findnewowner(level.players);
+    if(!isalive(var_2)) {
+      var_2 = findnewowner(level.players);
 
-      if(!isDefined(var2)) {
+      if(!isDefined(var_2)) {
         continue;
       }
 
       continue;
     }
 
-    while(isalive(var2)) {
+    while(isalive(var_2)) {
       if(level.emptylocations) {
-        for(var3 = 0; var3 < var0; var3++) {
+        for(var_3 = 0; var_3 < var_0; var_3++) {
           thread spawnchests(level);
         }
 
         thread showcratesplash(level);
-        wait var1;
+        wait var_1;
         continue;
       }
 
@@ -237,121 +237,121 @@ function startspawnchest() {
   }
 }
 
-function showcratesplash(var0) {
-  foreach(var2 in level.players) {
-    var2 thread scripts\mp\hud_message::showsplash(var0);
+function showcratesplash(var_0) {
+  foreach(var_2 in level.players) {
+    var_2 thread scripts\mp\hud_message::showsplash(var_0);
   }
 }
 
-function findnewowner(var0) {
-  foreach(var2 in var0) {
-    if(isalive(var2)) {
-      return var2;
+function findnewowner(var_0) {
+  foreach(var_2 in var_0) {
+    if(isalive(var_2)) {
+      return var_2;
     }
   }
 
-  level waittill("sotf_player_spawned", var4);
-  return var4;
+  level waittill("sotf_player_spawned", var_4);
+  return var_4;
 }
 
-function spawnchests(var0) {
-  var1 = scripts\engine\utility::getStructArray("sotf_chest_spawnpoint", "targetname");
+function spawnchests(var_0) {
+  var_1 = scripts\engine\utility::getStructArray("sotf_chest_spawnpoint", "targetname");
 
   if(level.firstcratedrop) {
-    var2 = getcenterpoint(var1);
+    var_2 = getcenterpoint(var_1);
     level.firstcratedrop = 0;
   } else {
-    var2 = getrandompoint(var2);
+    var_2 = getrandompoint(var_2);
   }
 
-  if(isDefined(var2)) {
-    playfxatpoint(var2);
+  if(isDefined(var_2)) {
+    playfxatpoint(var_2);
     return;
   }
 }
 
-function playfxatpoint(var0) {
-  var1 = var0 + (0, 0, 30);
-  var2 = var0 + (0, 0, -1000);
-  var3 = scripts\engine\trace::ray_trace(var1, var2, undefined, scripts\engine\trace::create_default_contents(1));
-  var4 = var3["position"] + (0, 0, 1);
-  var5 = var3["entity"];
+function playfxatpoint(var_0) {
+  var_1 = var_0 + (0, 0, 30);
+  var_2 = var_0 + (0, 0, -1000);
+  var_3 = scripts\engine\trace::ray_trace(var_1, var_2, undefined, scripts\engine\trace::create_default_contents(1));
+  var_4 = var_3["position"] + (0, 0, 1);
+  var_5 = var_3["entity"];
 
-  if(isDefined(var5)) {
-    for(var6 = var5 getlinkedparent(); isDefined(var6); var6 = var5 getlinkedparent()) {
-      var5 = var6;
+  if(isDefined(var_5)) {
+    for(var_6 = var_5 getlinkedparent(); isDefined(var_6); var_6 = var_5 getlinkedparent()) {
+      var_5 = var_6;
     }
   }
 
-  if(isDefined(var5)) {
-    var7 = spawn("script_model", var4);
-    var7 setModel("tag_origin");
-    var7.angles = (90, randomintrange(-180, 179), 0);
-    var7 linkTo(var5);
-    thread playlinkedsmokeeffect(scripts\engine\utility::getfx("signal_chest_drop_mover"), var7);
+  if(isDefined(var_5)) {
+    var_7 = spawn("script_model", var_4);
+    var_7 setModel("tag_origin");
+    var_7.angles = (90, randomintrange(-180, 179), 0);
+    var_7 linkTo(var_5);
+    thread playlinkedsmokeeffect(scripts\engine\utility::getfx("signal_chest_drop_mover"), var_7);
     return;
   }
 
-  playFX(scripts\engine\utility::getfx("signal_chest_drop"), var4);
+  playFX(scripts\engine\utility::getfx("signal_chest_drop"), var_4);
 }
 
-function playlinkedsmokeeffect(var0, var1) {
+function playlinkedsmokeeffect(var_0, var_1) {
   level endon("game_ended");
   wait 0.05;
-  playFXOnTag(var0, var1, "tag_origin");
+  playFXOnTag(var_0, var_1, "tag_origin");
   wait 6;
-  stopFXOnTag(var0, var1, "tag_origin");
+  stopFXOnTag(var_0, var_1, "tag_origin");
   wait 0.05;
-  var1 delete();
+  var_1 delete();
 }
 
-function getcenterpoint(var0) {
-  var1 = undefined;
-  var2 = undefined;
+function getcenterpoint(var_0) {
+  var_1 = undefined;
+  var_2 = undefined;
 
-  foreach(var4 in var0) {
-    var5 = distance2dsquared(level.mapcenter, var4.origin);
+  foreach(var_4 in var_0) {
+    var_5 = distance2dsquared(level.mapcenter, var_4.origin);
 
-    if(!isDefined(var1) || var5 < var2) {
-      var1 = var4;
-      var2 = var5;
+    if(!isDefined(var_1) || var_5 < var_2) {
+      var_1 = var_4;
+      var_2 = var_5;
     }
   }
 
-  level.usedlocations[level.usedlocations.size] = var1.origin;
-  return var1.origin;
+  level.usedlocations[level.usedlocations.size] = var_1.origin;
+  return var_1.origin;
 }
 
-function getrandompoint(var0) {
-  var1 = [];
+function getrandompoint(var_0) {
+  var_1 = [];
 
-  for(var2 = 0; var2 < var0.size; var2++) {
-    var3 = 0;
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    var_3 = 0;
 
     if(isDefined(level.usedlocations) && level.usedlocations.size > 0) {
-      foreach(var5 in level.usedlocations) {
-        if(var0[var2].origin == var5) {
-          var3 = 1;
+      foreach(var_5 in level.usedlocations) {
+        if(var_0[var_2].origin == var_5) {
+          var_3 = 1;
           break;
         }
       }
 
-      if(var3) {
+      if(var_3) {
         continue;
       }
 
-      var1 = var0[var2].origin;
+      var_1 = var_0[var_2].origin;
       continue;
     }
 
-    var1 = var0[var2].origin;
+    var_1 = var_0[var_2].origin;
   }
 
-  if(var1.size > 0) {
-    var7 = randomint(var1.size);
-    var8 = var1[var7];
-    level.usedlocations[level.usedlocations.size] = var8;
-    return var8;
+  if(var_1.size > 0) {
+    var_7 = randomint(var_1.size);
+    var_8 = var_1[var_7];
+    level.usedlocations[level.usedlocations.size] = var_8;
+    return var_8;
   }
 
   level.emptylocations = 0;
@@ -359,76 +359,76 @@ function getrandompoint(var0) {
 }
 
 function definechestweapons() {
-  var0 = [];
-  var1 = [];
+  var_0 = [];
+  var_1 = [];
 
-  for(var2 = 0; tablelookupbyrow("mp/sotfWeapons.csv", var2, 0) != ""; var2++) {
-    var3 = tablelookupbyrow("mp/sotfWeapons.csv", var2, 2);
-    var4 = tablelookupbyrow("mp/sotfWeapons.csv", var2, 1);
-    var5 = isselectableweapon(var3);
+  for(var_2 = 0; tablelookupbyrow("mp/sotfWeapons.csv", var_2, 0) != ""; var_2++) {
+    var_3 = tablelookupbyrow("mp/sotfWeapons.csv", var_2, 2);
+    var_4 = tablelookupbyrow("mp/sotfWeapons.csv", var_2, 1);
+    var_5 = isselectableweapon(var_3);
 
-    if(isDefined(var4) && var5 && var4 == "weapon_pistol") {
-      var6 = 30;
-      var0["name"] = var3;
-      var0["weight"] = var6;
+    if(isDefined(var_4) && var_5 && var_4 == "weapon_pistol") {
+      var_6 = 30;
+      var_0["name"] = var_3;
+      var_0["weight"] = var_6;
       continue;
     }
 
-    if(isDefined(var4) && var5 && (var4 == "weapon_shotgun" || var4 == "weapon_smg" || var4 == "weapon_assault" || var4 == "weapon_tactical" || var4 == "weapon_sniper" || var4 == "weapon_dmr" || var4 == "weapon_lmg" || var4 == "weapon_projectile")) {
-      var6 = 0;
+    if(isDefined(var_4) && var_5 && (var_4 == "weapon_shotgun" || var_4 == "weapon_smg" || var_4 == "weapon_assault" || var_4 == "weapon_tactical" || var_4 == "weapon_sniper" || var_4 == "weapon_dmr" || var_4 == "weapon_lmg" || var_4 == "weapon_projectile")) {
+      var_6 = 0;
 
-      switch (var4) {
+      switch (var_4) {
         case "weapon_shotgun":
-          var6 = 35;
+          var_6 = 35;
           break;
         case "weapon_assault":
         case "weapon_smg":
         case "weapon_tactical":
-          var6 = 25;
+          var_6 = 25;
           break;
         case "weapon_dmr":
         case "weapon_sniper":
-          var6 = 15;
+          var_6 = 15;
           break;
         case "weapon_lmg":
-          var6 = 10;
+          var_6 = 10;
           break;
         case "weapon_projectile":
-          var6 = 30;
+          var_6 = 30;
           break;
       }
 
-      var1["name"] = var3 + "_mp";
-      var1["group"] = var4;
-      var1["weight"] = var6;
+      var_1["name"] = var_3 + "_mp";
+      var_1["group"] = var_4;
+      var_1["weight"] = var_6;
       continue;
     }
   }
 
-  var1 = sortbyweight(var1);
-  level.pistolarray = var0;
-  level.weaponarray = var1;
+  var_1 = sortbyweight(var_1);
+  level.pistolarray = var_0;
+  level.weaponarray = var_1;
 }
 
-function sotfcratethink(var0) {
+function sotfcratethink(var_0) {
   self endon("death");
   self endon("restarting_physics");
   level endon("game_ended");
 
   if(isDefined(game["strings"][self.cratetype + "_hint"])) {
-    var1 = game["strings"][self.cratetype + "_hint"];
+    var_1 = game["strings"][self.cratetype + "_hint"];
   } else {
-    var1 = &"MP/GET_KILLSTREAK";
+    var_1 = &"MP/GET_KILLSTREAK";
   }
 
-  var2 = "icon_hunted";
-  scripts\cp_mp\killstreaks\airdrop::cratesetupforuse(var1, var2);
+  var_2 = "icon_hunted";
+  scripts\cp_mp\killstreaks\airdrop::cratesetupforuse(var_1, var_2);
   thread scripts\cp_mp\killstreaks\airdrop::crateallcapturethink();
   GscBinSkip4(0x35, 60);
 }
 
-function cratewatcher(var0) {
-  wait var0;
+function cratewatcher(var_0) {
+  wait var_0;
 
   while(isDefined(self.inuse) && self.inuse) {
     waitframe();
@@ -439,137 +439,137 @@ function cratewatcher(var0) {
 
 function playerjoinwatcher() {
   for(;;) {
-    level waittill("connected", var0);
+    level waittill("connected", var_0);
 
-    if(!isDefined(var0)) {
+    if(!isDefined(var_0)) {
       continue;
     }
 
     if(isDefined(self.crateiconid)) {
-      scripts\cp_mp\entityheadicons::ref_1315d(self.crateiconid, var0);
+      scripts\cp_mp\entityheadicons::ref_1315d(self.crateiconid, var_0);
     }
   }
 }
 
-function cratekill(var0) {
-  for(var1 = 0; var1 < level.usedlocations.size; var1++) {
-    if(var0 != level.usedlocations[var1]) {
+function cratekill(var_0) {
+  for(var_1 = 0; var_1 < level.usedlocations.size; var_1++) {
+    if(var_0 != level.usedlocations[var_1]) {
       continue;
     }
 
-    level.usedlocations = scripts\engine\utility::array_remove(level.usedlocations, var0);
+    level.usedlocations = scripts\engine\utility::array_remove(level.usedlocations, var_0);
   }
 
   level.emptylocations = 1;
 }
 
-function isselectableweapon(var0) {
-  var1 = tablelookup("mp/sotfWeapons.csv", 2, var0, 3);
-  var2 = tablelookup("mp/sotfWeapons.csv", 2, var0, 4);
+function isselectableweapon(var_0) {
+  var_1 = tablelookup("mp/sotfWeapons.csv", 2, var_0, 3);
+  var_2 = tablelookup("mp/sotfWeapons.csv", 2, var_0, 4);
 
-  if(var1 == "TRUE" && (var2 == "" || getdvarint(var2, 0) == 1)) {
+  if(var_1 == "TRUE" && (var_2 == "" || getdvarint(var_2, 0) == 1)) {
     return true;
   }
 
   return false;
 }
 
-function getrandomweapon(var0) {
-  var1 = setbucketval(var0);
-  var2 = randomint(level.weaponmaxval["sum"]);
-  var3 = undefined;
+function getrandomweapon(var_0) {
+  var_1 = setbucketval(var_0);
+  var_2 = randomint(level.weaponmaxval["sum"]);
+  var_3 = undefined;
 
-  for(var4 = 0; var4 < var1.size; var4++) {
-    if(!var1[var4]["weight"]) {
+  for(var_4 = 0; var_4 < var_1.size; var_4++) {
+    if(!var_1[var_4]["weight"]) {
       continue;
     }
 
-    if(var1[var4]["weight"] > var2) {
-      var3 = var1[var4];
+    if(var_1[var_4]["weight"] > var_2) {
+      var_3 = var_1[var_4];
       break;
     }
   }
 
-  return var3;
+  return var_3;
 }
 
-function getrandomattachments(var0) {
-  var1 = [];
-  var2 = [];
-  var3 = [];
-  var4 = scripts\mp\utility\weapon::getweaponrootname(var0["name"]);
-  var5 = scripts\mp\utility\weapon::register_wave_spawner(var4);
+function getrandomattachments(var_0) {
+  var_1 = [];
+  var_2 = [];
+  var_3 = [];
+  var_4 = scripts\mp\utility\weapon::getweaponrootname(var_0["name"]);
+  var_5 = scripts\mp\utility\weapon::register_wave_spawner(var_4);
 
-  if(var5.size > 0) {
-    var6 = randomint(5);
+  if(var_5.size > 0) {
+    var_6 = randomint(5);
 
-    for(var7 = 0; var7 < var6; var7++) {
-      var1 = getvalidattachments(var0, var2, var5);
+    for(var_7 = 0; var_7 < var_6; var_7++) {
+      var_1 = getvalidattachments(var_0, var_2, var_5);
 
-      if(var1.size == 0) {
+      if(var_1.size == 0) {
         break;
       }
 
-      var8 = randomint(var1.size);
-      var2 = var1[var8];
-      var9 = scripts\mp\utility\weapon::attachmentmap_tounique(var1[var8], var4);
-      var3 = var9;
+      var_8 = randomint(var_1.size);
+      var_2 = var_1[var_8];
+      var_9 = scripts\mp\utility\weapon::attachmentmap_tounique(var_1[var_8], var_4);
+      var_3 = var_9;
     }
 
-    var10 = scripts\mp\utility\weapon::getweapongroup(var0["name"]);
+    var_10 = scripts\mp\utility\weapon::getweapongroup(var_0["name"]);
 
-    if(var10 == "weapon_dmr" || var10 == "weapon_sniper" || var4 == "iw7_ripper") {
-      var11 = 0;
+    if(var_10 == "weapon_dmr" || var_10 == "weapon_sniper" || var_4 == "iw7_ripper") {
+      var_11 = 0;
 
-      foreach(var13 in var2) {
-        if(scripts\mp\utility\weapon::getattachmenttype(var13) == "rail") {
-          var11 = 1;
+      foreach(var_13 in var_2) {
+        if(scripts\mp\utility\weapon::getattachmenttype(var_13) == "rail") {
+          var_11 = 1;
           break;
         }
       }
 
-      if(!var11 && var0["name"] != "iw7_m1_mp") {
-        var15 = strtok(var4, "_")[1];
-        var3 = var15 + "scope";
+      if(!var_11 && var_0["name"] != "iw7_m1_mp") {
+        var_15 = strtok(var_4, "_")[1];
+        var_3 = var_15 + "scope";
       }
     }
 
-    if(var3.size > 0) {
-      var3 = scripts\engine\utility::alphabetize(var3);
+    if(var_3.size > 0) {
+      var_3 = scripts\engine\utility::alphabetize(var_3);
 
-      foreach(var17 in var3) {
-        var0 = var0["name"] + "_" + var17;
+      foreach(var_17 in var_3) {
+        var_0 = var_0["name"] + "_" + var_17;
       }
     }
   }
 
-  return var0["name"];
+  return var_0["name"];
 }
 
-function getvalidattachments(var0, var1, var2) {
-  var3 = [];
-  var4 = scripts\mp\weapons::safechecknum(var0["name"]);
+function getvalidattachments(var_0, var_1, var_2) {
+  var_3 = [];
+  var_4 = scripts\mp\weapons::safechecknum(var_0["name"]);
 
-  foreach(var6 in var2) {
-    if(var6 == "gl" || var6 == "shotgun") {
+  foreach(var_6 in var_2) {
+    if(var_6 == "gl" || var_6 == "shotgun") {
       continue;
     }
 
-    var7 = attachmentcheck(var4, var6, var1);
+    var_7 = attachmentcheck(var_4, var_6, var_1);
 
-    if(!var7) {
+    if(!var_7) {
       continue;
     }
 
-    var3 = var6;
+    var_3 = var_6;
   }
 
-  return var3;
+  return var_3;
 }
 
-function attachmentcheck(var0, var1, var2) {
-  for(var3 = 0; var3 < var2.size; var3++) {
-    if(var1 == var2[var3] || !scripts\mp\utility\weapon::attachmentscompatible(var0, var1, var2[var3])) {
+function attachmentcheck(var_0, var_1, var_2) {
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
+    if(var_1 == var_2[var_3] || !scripts\mp\utility\weapon::attachmentscompatible(var_0, var_1, var_2[var_3])) {
       return false;
     }
   }
@@ -577,9 +577,9 @@ function attachmentcheck(var0, var1, var2) {
   return true;
 }
 
-function checkscopes(var0) {
-  foreach(var2 in var0) {
-    if(var2 == "thermal" || var2 == "vzscope" || var2 == "acog" || var2 == "ironsight") {
+function checkscopes(var_0) {
+  foreach(var_2 in var_0) {
+    if(var_2 == "thermal" || var_2 == "vzscope" || var_2 == "acog" || var_2 == "ironsight") {
       return true;
     }
   }
@@ -593,26 +593,26 @@ function pickupweaponhandler() {
 
   for(;;) {
     waitframe();
-    var0 = self getweaponslistprimaries();
+    var_0 = self getweaponslistprimaries();
 
-    if(var0.size > 1) {
-      var1 = self.oldprimarygun;
+    if(var_0.size > 1) {
+      var_1 = self.oldprimarygun;
 
-      foreach(var3 in var0) {
-        if(var3 == var1) {
-          var4 = self getammocount(var3);
-          var5 = self dropitem(var3);
+      foreach(var_3 in var_0) {
+        if(var_3 == var_1) {
+          var_4 = self getammocount(var_3);
+          var_5 = self dropitem(var_3);
 
-          if(isDefined(var5) && var4 > 0) {
-            var5.targetname = "dropped_weapon";
+          if(isDefined(var_5) && var_4 > 0) {
+            var_5.targetname = "dropped_weapon";
           }
 
           break;
         }
       }
 
-      var0 = scripts\engine\utility::array_remove(var0, var1);
-      self.oldprimarygun = var0[0];
+      var_0 = scripts\engine\utility::array_remove(var_0, var_1);
+      self.oldprimarygun = var_0[0];
     }
   }
 }
@@ -656,50 +656,50 @@ function perkwatcher() {
   }
 }
 
-function iconvisall(var0, var1) {
-  var2 = var0 thread scripts\cp_mp\entityheadicons::setheadicon_singleimage(level.players, var1, 24, 1);
-  self.crateheadicon = var1;
-  self.crateiconid = var2;
+function iconvisall(var_0, var_1) {
+  var_2 = var_0 thread scripts\cp_mp\entityheadicons::setheadicon_singleimage(level.players, var_1, 24, 1);
+  self.crateheadicon = var_1;
+  self.crateiconid = var_2;
 }
 
-function objvisall(var0) {
-  scripts\mp\objidpoolmanager::objective_playermask_showtoall(var0);
+function objvisall(var_0) {
+  scripts\mp\objidpoolmanager::objective_playermask_showtoall(var_0);
 }
 
-function setbucketval(var0) {
+function setbucketval(var_0) {
   level.weaponmaxval["sum"] = 0;
-  var1 = var0;
+  var_1 = var_0;
 
-  for(var2 = 0; var2 < var1.size; var2++) {
-    if(!var1[var2]["weight"]) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    if(!var_1[var_2]["weight"]) {
       continue;
     }
 
-    level.weaponmaxval["sum"] = level.weaponmaxval["sum"] + var1[var2]["weight"];
-    var1["weight"] = level.weaponmaxval["sum"];
+    level.weaponmaxval["sum"] = level.weaponmaxval["sum"] + var_1[var_2]["weight"];
+    var_1["weight"] = level.weaponmaxval["sum"];
   }
 
-  return var1;
+  return var_1;
 }
 
-function sortbyweight(var0) {
-  var1 = [];
-  var2 = [];
+function sortbyweight(var_0) {
+  var_1 = [];
+  var_2 = [];
 
-  for(var3 = 1; var3 < var0.size; var3++) {
-    var4 = var0[var3]["weight"];
-    var1 = var0[var3];
+  for(var_3 = 1; var_3 < var_0.size; var_3++) {
+    var_4 = var_0[var_3]["weight"];
+    var_1 = var_0[var_3];
 
-    for(var5 = var3 - 1; var5 >= 0 && is_weight_a_less_than_b(var0[var5]["weight"], var4); var5--) {
-      var2 = var0[var5];
-      var0 = var1;
-      var0 = var2;
+    for(var_5 = var_3 - 1; var_5 >= 0 && is_weight_a_less_than_b(var_0[var_5]["weight"], var_4); var_5--) {
+      var_2 = var_0[var_5];
+      var_0 = var_1;
+      var_0 = var_2;
     }
   }
 
-  return var0;
+  return var_0;
 }
 
-function is_weight_a_less_than_b(var0, var1) {
-  return var0 < var1;
+function is_weight_a_less_than_b(var_0, var_1) {
+  return var_0 < var_1;
 }

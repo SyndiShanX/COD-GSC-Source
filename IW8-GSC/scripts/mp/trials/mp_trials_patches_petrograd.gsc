@@ -3,25 +3,25 @@
  * Script: scripts\mp\trials\mp_trials_patches_petrograd.gsc
 *************************************************************/
 
-function ref_134b3(var0, var1, var2) {
-  thread ref_134a0(var0, var1);
+function ref_134b3(var_0, var_1, var_2) {
+  thread ref_134a0(var_0, var_1);
 
   if(scripts\asm\asm_bb::bb_moverequested()) {
     return;
   }
 
   self.bshootidle = 1;
-  scripts\asm\asm::asm_playadditiveanimloopstate(var0, var1, var2);
+  scripts\asm\asm::asm_playadditiveanimloopstate(var_0, var_1, var_2);
 }
 
-function ref_134a0(var0, var1) {
-  self endon(var1 + "_finished");
+function ref_134a0(var_0, var_1) {
+  self endon(var_1 + "_finished");
 
   if(!istrue(self.ignoreburstdelay)) {
     ref_13483();
   }
 
-  scripts\asm\asm::asm_fireevent(var0, "burst_delay_finished");
+  scripts\asm\asm::asm_fireevent(var_0, "burst_delay_finished");
 }
 
 function ref_13483() {
@@ -33,20 +33,20 @@ function ref_13483() {
     return;
   }
 
-  var0 = ref_1349d();
+  var_0 = ref_1349d();
 
-  if(var0) {
-    wait var0;
+  if(var_0) {
+    wait var_0;
     return;
   }
 }
 
 function ref_1349d() {
-  var0 = (gettime() - self.a.lastshoottime) / 1000;
-  var1 = ref_13499();
+  var_0 = (gettime() - self.a.lastshoottime) / 1000;
+  var_1 = ref_13499();
 
-  if(var1 > var0) {
-    return (var1 - var0);
+  if(var_1 > var_0) {
+    return (var_1 - var_0);
   }
 
   return 0;

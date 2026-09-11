@@ -3,226 +3,226 @@
  * Script: scripts\mp\utility\infilexfil.gsc
 ***********************************************/
 
-function getinfilpath(var0) {
-  var1 = scripts\engine\utility::getStructArray(var0, "targetname");
+function getinfilpath(var_0) {
+  var_1 = scripts\engine\utility::getStructArray(var_0, "targetname");
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  foreach(var3 in var1) {
+  foreach(var_3 in var_1) {
     if(istrue(level.interactiveinfil)) {
-      if(isDefined(var3.script_noteworthy) && var3.script_noteworthy == "interactive") {
-        return var3;
+      if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "interactive") {
+        return var_3;
       }
 
       continue;
     }
 
-    if(!isDefined(var3.script_noteworthy) || var3.script_noteworthy != "interactive") {
-      return var3;
+    if(!isDefined(var_3.script_noteworthy) || var_3.script_noteworthy != "interactive") {
+      return var_3;
     }
   }
 }
 
-function player_unlink(var0) {
-  if(!isDefined(var0)) {
+function player_unlink(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  if(var1 islinked()) {
-    var1 unlink();
+  if(var_1 islinked()) {
+    var_1 unlink();
     return;
   }
 }
 
-function player_free_look(var0) {
-  if(!isDefined(var0)) {
+function player_free_look(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  if(var1 islinked()) {
-    var1 lerpviewangleclamp(0, 0, 0, 45, 45, 45, 45);
+  if(var_1 islinked()) {
+    var_1 lerpviewangleclamp(0, 0, 0, 45, 45, 45, 45);
     return;
   }
 }
 
-function player_fov_80_instant(var0) {
-  if(!isDefined(var0)) {
+function player_fov_80_instant(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  var1 lerpfovbypreset("80_instant");
+  var_1 lerpfovbypreset("80_instant");
 }
 
-function ref_12497(var0) {
-  if(!isDefined(var0)) {
+function ref_12497(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  var1 lerpfovbypreset("zombiearcade");
+  var_1 lerpfovbypreset("zombiearcade");
 }
 
-function player_fov_default_2(var0) {
-  if(!isDefined(var0)) {
+function player_fov_default_2(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  var1 lerpfovbypreset("default_2seconds");
+  var_1 lerpfovbypreset("default_2seconds");
 }
 
-function player_lock_look_1_second(var0) {
-  if(!isDefined(var0)) {
+function player_lock_look_1_second(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  if(var1 islinked()) {
-    var1 lerpviewangleclamp(1, 0.25, 0.25, 0, 0, 0, 0);
-    return;
-  }
-}
-
-function player_lock_look_2_second(var0) {
-  if(!isDefined(var0)) {
-    return;
-  }
-
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
-  } else {
-    var1 = var1;
-  }
-
-  if(var1 islinked()) {
-    var1 lerpviewangleclamp(2, 0.5, 0.5, 0, 0, 0, 0);
+  if(var_1 islinked()) {
+    var_1 lerpviewangleclamp(1, 0.25, 0.25, 0, 0, 0, 0);
     return;
   }
 }
 
-function player_lock_look_instant(var0) {
-  if(!isDefined(var0)) {
+function player_lock_look_2_second(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  if(var1 islinked()) {
-    var1 lerpviewangleclamp(0, 0, 0, 0, 0, 0, 0);
+  if(var_1 islinked()) {
+    var_1 lerpviewangleclamp(2, 0.5, 0.5, 0, 0, 0, 0);
     return;
   }
 }
 
-function rumble_low(var0) {
-  if(!isDefined(var0)) {
+function player_lock_look_instant(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  thread updateshakeonplayer(var1, undefined, undefined, undefined, undefined, undefined, "mig_rumble", 0.05);
+  if(var_1 islinked()) {
+    var_1 lerpviewangleclamp(0, 0, 0, 0, 0, 0, 0);
+    return;
+  }
 }
 
-function cam_shake_low(var0) {
-  if(!isDefined(var0)) {
+function rumble_low(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  thread updateshakeonplayer(var1, 0.06, 0.075, 2, var1.origin, 8000, "mig_rumble", 0.05);
+  thread updateshakeonplayer(var_1, undefined, undefined, undefined, undefined, undefined, "mig_rumble", 0.05);
 }
 
-function cam_shake_running(var0) {
-  if(!isDefined(var0)) {
+function cam_shake_low(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  thread updateshakeonplayer(var1, 0.09, 0.115, 2, var1.origin, 8000, undefined, 0.15);
+  thread updateshakeonplayer(var_1, 0.06, 0.075, 2, var_1.origin, 8000, "mig_rumble", 0.05);
 }
 
-function cam_shake_parked(var0) {
-  if(!isDefined(var0)) {
+function cam_shake_running(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  thread updateshakeonplayer(var1, 0.065, 0.09, 0.5, var1.origin, 8000, undefined, 0.15);
+  thread updateshakeonplayer(var_1, 0.09, 0.115, 2, var_1.origin, 8000, undefined, 0.15);
 }
 
-function cam_shake_off(var0) {
-  if(!isDefined(var0)) {
+function cam_shake_parked(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  var1 notify("stop_cam_shake");
+  thread updateshakeonplayer(var_1, 0.065, 0.09, 0.5, var_1.origin, 8000, undefined, 0.15);
 }
 
-function updateshakeonplayer(var0, var1, var2, var3, var4, var5, var6, var7) {
+function cam_shake_off(var_0) {
+  if(!isDefined(var_0)) {
+    return;
+  }
+
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
+  } else {
+    var_1 = var_1;
+  }
+
+  var_1 notify("stop_cam_shake");
+}
+
+function updateshakeonplayer(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(istrue(level.interactiveinfil) && istrue(self.interactivecombat)) {
     return;
   }
@@ -234,15 +234,15 @@ function updateshakeonplayer(var0, var1, var2, var3, var4, var5, var6, var7) {
   self endon("death_or_disconnect");
 
   while(isDefined(self)) {
-    if(isDefined(var0) && isDefined(var1)) {
-      self earthquakeforplayer(randomfloatrange(var0, var1), var2, var3, var4);
+    if(isDefined(var_0) && isDefined(var_1)) {
+      self earthquakeforplayer(randomfloatrange(var_0, var_1), var_2, var_3, var_4);
     }
 
-    if(isDefined(var5)) {
-      self playrumbleonpositionforclient(var5, self.origin);
+    if(isDefined(var_5)) {
+      self playrumbleonpositionforclient(var_5, self.origin);
     }
 
-    wait randomfloatrange(var6, var7);
+    wait randomfloatrange(var_6, var_7);
   }
 }
 
@@ -251,8 +251,8 @@ function hideactors() {
     return;
   }
 
-  foreach(var1 in self.actors) {
-    var1 hide();
+  foreach(var_1 in self.actors) {
+    var_1 hide();
   }
 }
 
@@ -261,74 +261,74 @@ function showactors() {
     return;
   }
 
-  foreach(var1 in self.actors) {
-    var1 show();
+  foreach(var_1 in self.actors) {
+    var_1 show();
   }
 }
 
-function setcinematicmotion_heli(var0) {
-  if(!isDefined(var0)) {
+function setcinematicmotion_heli(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  var1 setcinematicmotionoverride("player_heli_ride");
+  var_1 setcinematicmotionoverride("player_heli_ride");
 }
 
-function setcinematicmotion_playermotion(var0) {
-  if(!isDefined(var0)) {
+function setcinematicmotion_playermotion(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  var1 setcinematicmotionoverride("iw8_playermotion_mp");
+  var_1 setcinematicmotionoverride("iw8_playermotion_mp");
 }
 
-function setcinematicmotion_disabled(var0) {
-  if(!isDefined(var0)) {
+function setcinematicmotion_disabled(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  var1 setcinematicmotionoverride("disabled");
+  var_1 setcinematicmotionoverride("disabled");
 }
 
-function set_cinematicmotionomnvaroverrides(var0) {
-  self setclientomnvar("handheld_camera_rotation_move_mod_override", var0);
-  self setclientomnvar("handheld_camera_rotation_view_mod_override", var0);
-  self setclientomnvar("handheld_camera_translation_move_mod_override", var0);
-  self setclientomnvar("handheld_camera_translation_view_mod_override", var0);
+function set_cinematicmotionomnvaroverrides(var_0) {
+  self setclientomnvar("handheld_camera_rotation_move_mod_override", var_0);
+  self setclientomnvar("handheld_camera_rotation_view_mod_override", var_0);
+  self setclientomnvar("handheld_camera_translation_move_mod_override", var_0);
+  self setclientomnvar("handheld_camera_translation_view_mod_override", var_0);
 }
 
-function set_cinematicmotionomnvarovertime(var0, var1, var2) {
+function set_cinematicmotionomnvarovertime(var_0, var_1, var_2) {
   self endon("death_or_disconnect");
-  var3 = gettime();
-  var2 *= 1000;
-  var4 = int(var3 + var2);
-  var5 = abs(var0 - var1);
+  var_3 = gettime();
+  var_2 *= 1000;
+  var_4 = int(var_3 + var_2);
+  var_5 = abs(var_0 - var_1);
 
   for(;;) {
-    var3 = gettime();
-    var6 = clamp(1 - (var4 - var3) / var2, 0, 1);
-    var7 = scripts\engine\utility::ter_op(var0 < var1, var5 * var6 + var0, var0 - var5 * var6);
-    set_cinematicmotionomnvaroverrides(var7);
+    var_3 = gettime();
+    var_6 = clamp(1 - (var_4 - var_3) / var_2, 0, 1);
+    var_7 = scripts\engine\utility::ter_op(var_0 < var_1, var_5 * var_6 + var_0, var_0 - var_5 * var_6);
+    set_cinematicmotionomnvaroverrides(var_7);
 
-    if(var6 == 1) {
+    if(var_6 == 1) {
       break;
     }
 
@@ -336,225 +336,225 @@ function set_cinematicmotionomnvarovertime(var0, var1, var2) {
   }
 }
 
-function setcinematicmotion_omnvaroverride_max_instant(var0) {
-  if(!isDefined(var0)) {
+function setcinematicmotion_omnvaroverride_max_instant(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  set_cinematicmotionomnvaroverrides(var1, 1);
+  set_cinematicmotionomnvaroverrides(var_1, 1);
 }
 
-function setcinematicmotion_omnvaroverride_max_1(var0) {
-  if(!isDefined(var0)) {
+function setcinematicmotion_omnvaroverride_max_1(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  thread set_cinematicmotionomnvarovertime(var1, 0, 1);
+  thread set_cinematicmotionomnvarovertime(var_1, 0, 1);
 }
 
-function setcinematicmotion_omnvaroverride_max_2(var0) {
-  if(!isDefined(var0)) {
+function setcinematicmotion_omnvaroverride_max_2(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  thread set_cinematicmotionomnvarovertime(var1, 0, 1);
+  thread set_cinematicmotionomnvarovertime(var_1, 0, 1);
 }
 
-function setcinematicmotion_omnvaroverride_max_3(var0) {
-  if(!isDefined(var0)) {
+function setcinematicmotion_omnvaroverride_max_3(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  thread set_cinematicmotionomnvarovertime(var1, 0, 1);
+  thread set_cinematicmotionomnvarovertime(var_1, 0, 1);
 }
 
-function setcinematicmotion_omnvaroverride_max_4(var0) {
-  if(!isDefined(var0)) {
+function setcinematicmotion_omnvaroverride_max_4(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  thread set_cinematicmotionomnvarovertime(var1, 0, 1);
+  thread set_cinematicmotionomnvarovertime(var_1, 0, 1);
 }
 
-function setcinematicmotion_omnvaroverride_max_5(var0) {
-  if(!isDefined(var0)) {
+function setcinematicmotion_omnvaroverride_max_5(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  thread set_cinematicmotionomnvarovertime(var1, 0, 1);
+  thread set_cinematicmotionomnvarovertime(var_1, 0, 1);
 }
 
-function setcinematicmotion_omnvaroverride_min_instant(var0) {
-  if(!isDefined(var0)) {
+function setcinematicmotion_omnvaroverride_min_instant(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  set_cinematicmotionomnvaroverrides(var1, 0);
+  set_cinematicmotionomnvaroverrides(var_1, 0);
 }
 
-function setcinematicmotion_omnvaroverride_min_1(var0) {
-  if(!isDefined(var0)) {
+function setcinematicmotion_omnvaroverride_min_1(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  thread set_cinematicmotionomnvarovertime(var1, 1, 0);
+  thread set_cinematicmotionomnvarovertime(var_1, 1, 0);
 }
 
-function setcinematicmotion_omnvaroverride_min_2(var0) {
-  if(!isDefined(var0)) {
+function setcinematicmotion_omnvaroverride_min_2(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  thread set_cinematicmotionomnvarovertime(var1, 1, 0);
+  thread set_cinematicmotionomnvarovertime(var_1, 1, 0);
 }
 
-function setcinematicmotion_omnvaroverride_min_3(var0) {
-  if(!isDefined(var0)) {
+function setcinematicmotion_omnvaroverride_min_3(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  thread set_cinematicmotionomnvarovertime(var1, 1, 0);
+  thread set_cinematicmotionomnvarovertime(var_1, 1, 0);
 }
 
-function setcinematicmotion_omnvaroverride_min_4(var0) {
-  if(!isDefined(var0)) {
+function setcinematicmotion_omnvaroverride_min_4(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  thread set_cinematicmotionomnvarovertime(var1, 1, 0);
+  thread set_cinematicmotionomnvarovertime(var_1, 1, 0);
 }
 
-function setcinematicmotion_omnvaroverride_min_5(var0) {
-  if(!isDefined(var0)) {
+function setcinematicmotion_omnvaroverride_min_5(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  thread set_cinematicmotionomnvarovertime(var1, 1, 0);
+  thread set_cinematicmotionomnvarovertime(var_1, 1, 0);
 }
 
-function player_equip_nvg(var0) {
+function player_equip_nvg(var_0) {
   if(!scripts\cp_mp\utility\game_utility::isnightmap()) {
     return;
   }
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  var1 nightvisionviewon();
+  var_1 nightvisionviewon();
 }
 
-function getgroundcompensationheight(var0) {
-  if(!isDefined(var0)) {
+function getgroundcompensationheight(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  var2 = var1.origin[2];
-  var3 = scripts\engine\trace::create_solid_ai_contents(1);
-  var4 = var1.origin + (0, 0, 12);
-  var5 = var1.origin - (0, 0, 24);
-  var6 = scripts\engine\trace::player_trace(var4, var5, var1.angles, [var1, var1.infil.linktoent], var3)["position"];
-  var7 = var6[2];
-  var1.infilheightcompensation = var7 - var2;
+  var_2 = var_1.origin[2];
+  var_3 = scripts\engine\trace::create_solid_ai_contents(1);
+  var_4 = var_1.origin + (0, 0, 12);
+  var_5 = var_1.origin - (0, 0, 24);
+  var_6 = scripts\engine\trace::player_trace(var_4, var_5, var_1.angles, [var_1, var_1.infil.linktoent], var_3)["position"];
+  var_7 = var_6[2];
+  var_1.infilheightcompensation = var_7 - var_2;
 }
 
 function compensatetoground() {
   level endon("prematch_over");
   self endon("death_or_disconnect");
-  var0 = 0;
+  var_0 = 0;
   self.personalscenenode unlink();
 
   while(isDefined(self.personalscenenode)) {
     getgroundcompensationheight(self.player_rig);
-    var1 = (self.personalscenenode.origin[0], self.personalscenenode.origin[1], self.personalscenenode.origin[2] + self.infilheightcompensation);
+    var_1 = (self.personalscenenode.origin[0], self.personalscenenode.origin[1], self.personalscenenode.origin[2] + self.infilheightcompensation);
 
-    if(abs(var0 - self.infilheightcompensation) > 0.01) {
-      var0 = self.infilheightcompensation;
-      self.personalscenenode moveTo(var1, 0.25, 0.05, 0.2);
+    if(abs(var_0 - self.infilheightcompensation) > 0.01) {
+      var_0 = self.infilheightcompensation;
+      self.personalscenenode moveTo(var_1, 0.25, 0.05, 0.2);
     }
 
     waitframe();
@@ -563,24 +563,24 @@ function compensatetoground() {
 
 #using_animtree("script_model");
 
-function infil_player_rig_updated(var0, var1, var2) {
-  self.animname = var0;
+function infil_player_rig_updated(var_0, var_1, var_2) {
+  self.animname = var_0;
 
-  if(!isDefined(var1)) {
-    var1 = (0, 0, 0);
+  if(!isDefined(var_1)) {
+    var_1 = (0, 0, 0);
   }
 
-  if(!isDefined(var2)) {
-    var2 = (0, 0, 0);
+  if(!isDefined(var_2)) {
+    var_2 = (0, 0, 0);
   }
 
-  self predictstreampos(var1);
-  var3 = spawn("script_arms", var1, 0, 0, self);
-  var3.angles = var2;
-  var3.player = self;
-  self.player_rig = var3;
+  self predictstreampos(var_1);
+  var_3 = spawn("script_arms", var_1, 0, 0, self);
+  var_3.angles = var_2;
+  var_3.player = self;
+  self.player_rig = var_3;
   self.player_rig hide(1);
-  self.player_rig.animname = var0;
+  self.player_rig.animname = var_0;
   self.player_rig useanimtree(#animtree);
   self.player_rig.updatedversion = 1;
   self.player_rig.weapon_state_func = &handleweaponstatenotetrack;
@@ -599,18 +599,18 @@ function infil_player_rig_updated(var0, var1, var2) {
     thread takegunless();
   }
 
-  if(isDefined(var3)) {
-    var3 delete();
+  if(isDefined(var_3)) {
+    var_3 delete();
     return;
   }
 }
 
-function handledofnotetrack(var0) {
+function handledofnotetrack(var_0) {
   if(!isDefined(self) || !isDefined(self.player)) {
     return;
   }
 
-  switch (var0) {
+  switch (var_0) {
     case "blima_interior":
       self.player enablephysicaldepthoffieldscripting();
 
@@ -692,20 +692,20 @@ function handledofnotetrack(var0) {
   }
 }
 
-function handlecinematicmotionnotetrack(var0) {
+function handlecinematicmotionnotetrack(var_0) {
   if(!isDefined(self) || !isDefined(self.player)) {
     return;
   }
 
-  var1 = getsubstr(var0, 0, 4);
+  var_1 = getsubstr(var_0, 0, 4);
 
-  if(var1 == "set_") {
-    var2 = getsubstr(var0, 4);
-    self.player setcinematicmotionoverride(var2);
+  if(var_1 == "set_") {
+    var_2 = getsubstr(var_0, 4);
+    self.player setcinematicmotionoverride(var_2);
     return;
   }
 
-  switch (var1) {
+  switch (var_1) {
     case "max_instant":
       setcinematicmotion_omnvaroverride_max_instant(self);
       break;
@@ -745,12 +745,12 @@ function handlecinematicmotionnotetrack(var0) {
   }
 }
 
-function handleweaponstatenotetrack(var0) {
+function handleweaponstatenotetrack(var_0) {
   if(!isDefined(self) || !isDefined(self.player)) {
     return;
   }
 
-  switch (var0) {
+  switch (var_0) {
     case "drop":
       self.player setdemeanorviewmodel("normal");
       self.player scripts\engine\utility::ent_flag_init("swapLoadout_blocked");
@@ -875,22 +875,22 @@ function givegunless() {
     return;
   }
 
-  var0 = getcompleteweaponname("iw8_gunless_infil");
-  scripts\cp_mp\utility\inventory_utility::_giveweapon(var0, undefined, undefined, 1);
+  var_0 = getcompleteweaponname("iw8_gunless_infil");
+  scripts\cp_mp\utility\inventory_utility::_giveweapon(var_0, undefined, undefined, 1);
 
   if(!scripts\common\utility::is_script_weapon_switch_allowed()) {
     scripts\common\utility::allow_script_weapon_switch(1);
   }
 
-  var1 = scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var0, 0);
+  var_1 = scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var_0, 0);
 
-  if(var1) {
-    self.gunnlessweapon = var0;
+  if(var_1) {
+    self.gunnlessweapon = var_0;
   } else {
-    scripts\cp_mp\utility\inventory_utility::_takeweapon(var0);
+    scripts\cp_mp\utility\inventory_utility::_takeweapon(var_0);
     scripts\cp_mp\utility\inventory_utility::forcevalidweapon();
   }
 
   scripts\common\utility::allow_script_weapon_switch(0);
-  return var1;
+  return var_1;
 }

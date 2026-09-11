@@ -19,35 +19,35 @@ function hostmigrationwaitforplayers() {
   wait 15;
 }
 
-function hostmigrationname(var0) {
-  if(!isDefined(var0)) {
+function hostmigrationname(var_0) {
+  if(!isDefined(var_0)) {
     return "<removed_ent>";
   }
 
-  var1 = -1;
-  var2 = "?";
+  var_1 = -1;
+  var_2 = "?";
 
-  if(isDefined(var0.entity_number)) {
-    var1 = var0.entity_number;
+  if(isDefined(var_0.entity_number)) {
+    var_1 = var_0.entity_number;
   }
 
-  if(isPlayer(var0) && isDefined(var0.name)) {
-    var2 = var0.name;
+  if(isPlayer(var_0) && isDefined(var_0.name)) {
+    var_2 = var_0.name;
   }
 
-  if(isPlayer(var0)) {
-    return ("player <" + var2 + ">");
+  if(isPlayer(var_0)) {
+    return ("player <" + var_2 + ">");
   }
 
-  if(isagent(var0) && scripts\cp\utility::isgameparticipant(var0)) {
-    return ("participant agent <" + var1 + ">");
+  if(isagent(var_0) && scripts\cp\utility::isgameparticipant(var_0)) {
+    return ("participant agent <" + var_1 + ">");
   }
 
-  if(isagent(var0)) {
-    return ("non-participant agent <" + var1 + ">");
+  if(isagent(var_0)) {
+    return ("non-participant agent <" + var_1 + ">");
   }
 
-  return "unknown entity <" + var1 + ">";
+  return "unknown entity <" + var_1 + ">";
 }
 
 function hostmigrationtimerthink_internal() {
@@ -82,100 +82,100 @@ function waittillhostmigrationdone() {
     return 0;
   }
 
-  var0 = gettime();
+  var_0 = gettime();
   level waittill("host_migration_end");
-  return gettime() - var0;
+  return gettime() - var_0;
 }
 
-function waittillhostmigrationstarts(var0) {
+function waittillhostmigrationstarts(var_0) {
   if(isDefined(level.hostmigrationtimer)) {
     return;
   }
 
   level endon("host_migration_begin");
-  wait var0;
+  wait var_0;
 }
 
-function waitlongdurationwithhostmigrationpause(var0) {
-  if(var0 == 0) {
+function waitlongdurationwithhostmigrationpause(var_0) {
+  if(var_0 == 0) {
     return;
   }
 
-  var1 = gettime();
-  var2 = gettime() + var0 * 1000;
+  var_1 = gettime();
+  var_2 = gettime() + var_0 * 1000;
 
-  while(gettime() < var2) {
-    waittillhostmigrationstarts((var2 - gettime()) / 1000);
+  while(gettime() < var_2) {
+    waittillhostmigrationstarts((var_2 - gettime()) / 1000);
 
     if(isDefined(level.hostmigrationtimer)) {
-      var3 = waittillhostmigrationdone();
-      var2 += var3;
+      var_3 = waittillhostmigrationdone();
+      var_2 += var_3;
     }
   }
 
   waittillhostmigrationdone();
-  return gettime() - var1;
+  return gettime() - var_1;
 }
 
-function waittill_notify_or_timeout_hostmigration_pause(var0, var1) {
-  self endon(var0);
+function waittill_notify_or_timeout_hostmigration_pause(var_0, var_1) {
+  self endon(var_0);
 
-  if(var1 == 0) {
+  if(var_1 == 0) {
     return;
   }
 
-  var2 = gettime();
-  var3 = gettime() + var1 * 1000;
+  var_2 = gettime();
+  var_3 = gettime() + var_1 * 1000;
 
-  while(gettime() < var3) {
-    waittillhostmigrationstarts((var3 - gettime()) / 1000);
+  while(gettime() < var_3) {
+    waittillhostmigrationstarts((var_3 - gettime()) / 1000);
 
     if(isDefined(level.hostmigrationtimer)) {
-      var4 = waittillhostmigrationdone();
-      var3 += var4;
+      var_4 = waittillhostmigrationdone();
+      var_3 += var_4;
     }
   }
 
   waittillhostmigrationdone();
-  return gettime() - var2;
+  return gettime() - var_2;
 }
 
-function waitlongdurationwithgameendtimeupdate(var0) {
-  if(var0 == 0) {
+function waitlongdurationwithgameendtimeupdate(var_0) {
+  if(var_0 == 0) {
     return;
   }
 
-  var1 = gettime();
-  var2 = gettime() + var0 * 1000;
+  var_1 = gettime();
+  var_2 = gettime() + var_0 * 1000;
 
-  while(gettime() < var2) {
-    waittillhostmigrationstarts((var2 - gettime()) / 1000);
+  while(gettime() < var_2) {
+    waittillhostmigrationstarts((var_2 - gettime()) / 1000);
 
     while(isDefined(level.hostmigrationtimer)) {
-      var2 += 1000;
-      setgameendtime(int(var2));
+      var_2 += 1000;
+      setgameendtime(int(var_2));
       wait 1;
     }
   }
 
   while(isDefined(level.hostmigrationtimer)) {
-    var2 += 1000;
-    setgameendtime(int(var2));
+    var_2 += 1000;
+    setgameendtime(int(var_2));
     wait 1;
   }
 
-  return gettime() - var1;
+  return gettime() - var_1;
 }
 
-function matchstarttimer(var0, var1) {
+function matchstarttimer(var_0, var_1) {
   self notify("matchStartTimer");
   self endon("matchStartTimer");
   level notify("match_start_timer_beginning");
-  var2 = int(var1);
+  var_2 = int(var_1);
 
-  if(var2 >= 2) {
-    setomnvar("ui_match_start_text", var0);
-    matchstarttimer_internal(var2);
+  if(var_2 >= 2) {
+    setomnvar("ui_match_start_text", var_0);
+    matchstarttimer_internal(var_2);
     visionsetnaked("", 3);
     return;
   }
@@ -184,28 +184,28 @@ function matchstarttimer(var0, var1) {
   visionsetnaked("", 1);
 }
 
-function matchstarttimer_internal(var0) {
+function matchstarttimer_internal(var_0) {
   waittillframeend();
   introvisionset();
   level endon("match_start_timer_beginning");
 
-  while(var0 > 0 && !level.gameended) {
-    foreach(var2 in level.players) {
-      var2 setclientomnvar("ui_match_start_countdown", var0);
-      var2 setclientomnvar("ui_match_in_progress", 0);
+  while(var_0 > 0 && !level.gameended) {
+    foreach(var_2 in level.players) {
+      var_2 setclientomnvar("ui_match_start_countdown", var_0);
+      var_2 setclientomnvar("ui_match_in_progress", 0);
     }
 
-    if(var0 == 0) {
+    if(var_0 == 0) {
       visionsetnaked("", 0);
     }
 
-    var0--;
+    var_0--;
     wait 1;
   }
 
-  foreach(var2 in level.players) {
-    var2 setclientomnvar("ui_match_start_countdown", 0);
-    var2 setclientomnvar("ui_match_in_progress", 1);
+  foreach(var_2 in level.players) {
+    var_2 setclientomnvar("ui_match_start_countdown", 0);
+    var_2 setclientomnvar("ui_match_in_progress", 1);
   }
 }
 

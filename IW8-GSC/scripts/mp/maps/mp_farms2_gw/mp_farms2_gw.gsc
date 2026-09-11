@@ -43,28 +43,28 @@ function main() {
 }
 
 function player_fired_gun_monitor() {
-  var0 = getEnt("clip64x64x8", "targetname");
-  var1 = spawn("script_model", (51682, -15944, -202));
-  var1.angles = (0, 0, -90);
-  var1 clonebrushmodeltoscriptmodel(var0);
-  var2 = getEnt("clip64x64x8", "targetname");
-  var3 = spawn("script_model", (51532, -15944, -202));
-  var3.angles = (0, 0, -90);
-  var3 clonebrushmodeltoscriptmodel(var2);
-  var4 = getEnt("clip64x64x8", "targetname");
-  var5 = spawn("script_model", (51404, -15944, -202));
-  var5.angles = (0, 0, -90);
-  var5 clonebrushmodeltoscriptmodel(var4);
-  var6 = getEnt("clip64x64x8", "targetname");
-  var7 = spawn("script_model", (51854, -15944, -202));
-  var7.angles = (0, 0, -90);
-  var7 clonebrushmodeltoscriptmodel(var6);
+  var_0 = getEnt("clip64x64x8", "targetname");
+  var_1 = spawn("script_model", (51682, -15944, -202));
+  var_1.angles = (0, 0, -90);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = getEnt("clip64x64x8", "targetname");
+  var_3 = spawn("script_model", (51532, -15944, -202));
+  var_3.angles = (0, 0, -90);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
+  var_4 = getEnt("clip64x64x8", "targetname");
+  var_5 = spawn("script_model", (51404, -15944, -202));
+  var_5.angles = (0, 0, -90);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_6 = getEnt("clip64x64x8", "targetname");
+  var_7 = spawn("script_model", (51854, -15944, -202));
+  var_7.angles = (0, 0, -90);
+  var_7 clonebrushmodeltoscriptmodel(var_6);
 }
 
 function ref_136a5() {
-  var0 = spawn("script_model", (46894.9, -8506.3, 343.159));
-  var0 setModel("ee_electronics_television_wall_mounted_large");
-  var0.angles = (0, 5, 0);
+  var_0 = spawn("script_model", (46894.9, -8506.3, 343.159));
+  var_0 setModel("ee_electronics_television_wall_mounted_large");
+  var_0.angles = (0, 5, 0);
 }
 
 function runmisteffects() {
@@ -72,7 +72,7 @@ function runmisteffects() {
     return;
   }
 
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, (51013, 3186, 0));
 }
 
@@ -103,21 +103,21 @@ function ref_12e11() {
   level.weapons_that_can_stun[6] = (21343, -11066, 1400);
 
   for(;;) {
-    var0 = randomintrange(0, level.weapons_that_can_stun.size);
-    var1 = level.weapons_that_can_stun[var0];
-    playFX(scripts\engine\utility::getfx("vfx_gw_lrg_explosion"), var1 + (randomfloatrange(-1500, 1500), randomfloatrange(-1500, 1500), 0));
+    var_0 = randomintrange(0, level.weapons_that_can_stun.size);
+    var_1 = level.weapons_that_can_stun[var_0];
+    playFX(scripts\engine\utility::getfx("vfx_gw_lrg_explosion"), var_1 + (randomfloatrange(-1500, 1500), randomfloatrange(-1500, 1500), 0));
     wait 0.5;
-    playFX(scripts\engine\utility::getfx("vfx_gw_lrg_explosion"), var1 + (randomfloatrange(-2500, 2500), randomfloatrange(-2500, 2500), 0));
+    playFX(scripts\engine\utility::getfx("vfx_gw_lrg_explosion"), var_1 + (randomfloatrange(-2500, 2500), randomfloatrange(-2500, 2500), 0));
     wait randomfloatrange(1, 2);
-    playFX(scripts\engine\utility::getfx("vfx_gw_lrg_explosion"), var1 + (randomfloatrange(-1500, 1500), randomfloatrange(-1500, 1500), 0));
+    playFX(scripts\engine\utility::getfx("vfx_gw_lrg_explosion"), var_1 + (randomfloatrange(-1500, 1500), randomfloatrange(-1500, 1500), 0));
     wait 0.25;
-    playFX(scripts\engine\utility::getfx("vfx_gw_lrg_explosion"), var1 + (randomfloatrange(-2500, 2500), randomfloatrange(-2500, 2500), 0));
+    playFX(scripts\engine\utility::getfx("vfx_gw_lrg_explosion"), var_1 + (randomfloatrange(-2500, 2500), randomfloatrange(-2500, 2500), 0));
     wait randomfloatrange(0.5, 2);
   }
 }
 
 function ref_12e14() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, (53038, -38220, 15150));
 }
 
@@ -127,22 +127,22 @@ function ref_12e12() {
 }
 
 function ref_12e13() {
-  foreach(var1 in level.setallclientomnvarot) {
-    playFX(scripts\engine\utility::getfx("vfx_gw_smoke_plume_bg_01"), var1, (0, 100, 0));
+  foreach(var_1 in level.setallclientomnvarot) {
+    playFX(scripts\engine\utility::getfx("vfx_gw_smoke_plume_bg_01"), var_1, (0, 100, 0));
   }
 }
 
 function perkpackage_giveoverridefieldupgrades() {
   wait 5;
-  var0 = spawn("sound_transient_soundbanks", (0, 0, 0));
-  var0 settransientsoundbank("donetsk_farms2.all", 1);
+  var_0 = spawn("sound_transient_soundbanks", (0, 0, 0));
+  var_0 settransientsoundbank("donetsk_farms2.all", 1);
 }
 
 function ref_145f0() {
-  var0 = getdvarint("OKSRMNKKOS", 0);
+  var_0 = getdvarint("OKSRMNKKOS", 0);
   wait 3;
 
-  switch (var0) {
+  switch (var_0) {
     case 0:
       break;
     case 1:
@@ -161,21 +161,21 @@ function ref_145f0() {
 }
 
 function ref_12f8e() {
-  var0 = [];
+  var_0 = [];
 
   switch (scripts\mp\utility\game::getgametype()) {
     case "siege":
       if(!isDefined(game["roundsPlayed"]) || game["roundsPlayed"] == 0) {
         break;
       } else {
-        GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_gw_spawn_axis_start_mod", (48642.2, -23600.2, -396.069), (0, 90, 0)));
+        GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_gw_spawn_axis_start_mod", (48642.2, -23600.2, -396.069), (0, 90, 0)));
       }
 
       break;
   }
 
-  if(var0.size > 0) {
-    scripts\mp\spawnlogic::bdiedonce(var0);
+  if(var_0.size > 0) {
+    scripts\mp\spawnlogic::bdiedonce(var_0);
     return;
   }
 }

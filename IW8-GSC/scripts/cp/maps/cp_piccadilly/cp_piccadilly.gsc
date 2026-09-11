@@ -64,9 +64,9 @@ function main() {
     scripts\engine\utility::flag_init("infil_complete");
   }
 
-  var0 = getDvar("cp_piccadilly_start_obj", "");
+  var_0 = getDvar("cp_piccadilly_start_obj", "");
 
-  if(isDefined(var0) && var0 != "") {
+  if(isDefined(var_0) && var_0 != "") {
     thread rundebugstartobjective(level);
   }
 
@@ -78,52 +78,52 @@ function main() {
   thread ref_121f0();
 }
 
-function rundebugstartobjective(var0) {
+function rundebugstartobjective(var_0) {
   wait 2;
   scripts\engine\utility::flag_wait("infil_complete");
   scripts\engine\utility::flag_wait("objective_table_parsed");
 
-  if(isDefined(level.objectivestabledata[var0])) {
-    var1 = level.objectivestabledata[var0];
+  if(isDefined(level.objectivestabledata[var_0])) {
+    var_1 = level.objectivestabledata[var_0];
 
-    if(isDefined(var1.ondebugstartfunc)) {
-      [[var1.ondebugstartfunc]](var1);
+    if(isDefined(var_1.ondebugstartfunc)) {
+      [[var_1.ondebugstartfunc]](var_1);
     }
 
-    thread scripts\cp\cp_objectives::run_objective(var1.objname, var1.questtype);
+    thread scripts\cp\cp_objectives::run_objective(var_1.objname, var_1.questtype);
     return;
   }
 }
 
-function onplayerspawneddevguisetup(var0) {
-  var1 = var0.name;
-  var2 = undefined;
+function onplayerspawneddevguisetup(var_0) {
+  var_1 = var_0.name;
+  var_2 = undefined;
 
-  foreach(var4 in level.players) {
-    if(var4 == var0) {
-      var2 = int(var5);
+  foreach(var_4 in level.players) {
+    if(var_4 == var_0) {
+      var_2 = int(var_5);
       break;
     }
   }
 
-  if(isDefined(var2)) {
-    thread setupdevguientries(var0, var0, var1);
+  if(isDefined(var_2)) {
+    thread setupdevguientries(var_0, var_0, var_1);
     return;
   }
 }
 
-function play_movie(var0) {
+function play_movie(var_0) {
   if(getdvarint("LLQQOPKTKM") == 1) {
     return;
   }
 
   for(;;) {
-    playcinematicforalllooping(var0);
+    playcinematicforalllooping(var_0);
     wait 3;
   }
 }
 
-function setupdevguientries(var0, var1, var2) {}
+function setupdevguientries(var_0, var_1, var_2) {}
 
 function wait_for_pre_game_period() {
   if(!isDefined(level.agent_funcs)) {
@@ -139,10 +139,10 @@ function wait_for_strike_init_complete() {
 
   if(scripts\engine\utility::flag_exist("strike_init_done")) {
     scripts\engine\utility::flag_wait("strike_init_done");
-    var0 = getDvar("scr_strike_name");
-    var1 = undefined;
+    var_0 = getDvar("scr_strike_name");
+    var_1 = undefined;
 
-    switch (var0) {
+    switch (var_0) {
       case "putnewstrikehere":
         break;
       default:
@@ -155,10 +155,10 @@ function wait_for_strike_init_complete() {
 }
 
 function stunboltdelete() {
-  var0 = getEntArray("survival_out_bounds", "targetname");
+  var_0 = getEntArray("survival_out_bounds", "targetname");
 
-  for(var1 = 0; var1 < var0.size; var1++) {
-    level thread scripts\cp\cp_outofbounds::basic_combat(var0[var1]);
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    level thread scripts\cp\cp_outofbounds::basic_combat(var_0[var_1]);
   }
 }
 
@@ -168,7 +168,7 @@ function registerscriptedagents() {
   scripts\mp\agents\juggernaut\juggernaut_agent::registerscriptedagent();
 }
 
-function onplayerconnect(var0) {
+function onplayerconnect(var_0) {
   thread bug_test_move_startpoint();
 }
 
@@ -176,31 +176,31 @@ function onplayerspawned() {}
 
 function bug_test_move_startpoint() {
   if(getdvarint("scr_linkto_test", 0)) {
-    var0 = scripts\engine\utility::getStructArray("default_player_start", "targetname");
+    var_0 = scripts\engine\utility::getStructArray("default_player_start", "targetname");
 
-    foreach(var2 in var0) {
-      var2.origin = (3743, -1008, 384);
-      var2.angles = (6, 265, 0);
+    foreach(var_2 in var_0) {
+      var_2.origin = (3743, -1008, 384);
+      var_2.angles = (6, 265, 0);
     }
 
     return;
   }
 }
 
-function should_run_event(var0) {
+function should_run_event(var_0) {
   return false;
 }
 
 function setup_map_specific_devgui() {}
 
-function interaction_trigger_properties(var0, var1, var2) {
-  switch (var1.script_noteworthy) {
+function interaction_trigger_properties(var_0, var_1, var_2) {
+  switch (var_1.script_noteworthy) {
     default:
       self.interaction_trigger setusefov(360);
       self.interaction_trigger sethintrequiresholding(0);
 
-      if(isDefined(var1.useduration)) {
-        self.interaction_trigger setuseholdduration(var1.useduration);
+      if(isDefined(var_1.useduration)) {
+        self.interaction_trigger setuseholdduration(var_1.useduration);
       }
 
       break;
@@ -223,21 +223,21 @@ function setup_create_script() {
   register_create_script_arrays("cp_piccadilly_create_script", "cp_piccadilly_create_script", level.scripted_spawner_func.size, &scripts\cp\maps\cp_piccadilly\cp_piccadilly_create_script::main);
 }
 
-function register_create_script_arrays(var0, var1, var2, var3) {
-  if(isDefined(var0)) {
-    level.scripted_spawner_func_strings[level.scripted_spawner_func_strings.size] = var0;
+function register_create_script_arrays(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_0)) {
+    level.scripted_spawner_func_strings[level.scripted_spawner_func_strings.size] = var_0;
   }
 
-  if(isDefined(var1)) {
-    level.scripted_spawner_map_strings[level.scripted_spawner_func_strings.size] = var1;
+  if(isDefined(var_1)) {
+    level.scripted_spawner_map_strings[level.scripted_spawner_func_strings.size] = var_1;
   }
 
-  if(isDefined(var2)) {
-    level.create_script_file_ids[var0] = "cs" + var2;
+  if(isDefined(var_2)) {
+    level.create_script_file_ids[var_0] = "cs" + var_2;
   }
 
-  if(isDefined(var3)) {
-    level.scripted_spawner_func[level.scripted_spawner_func.size] = var3;
+  if(isDefined(var_3)) {
+    level.scripted_spawner_func[level.scripted_spawner_func.size] = var_3;
     return;
   }
 }
@@ -247,11 +247,11 @@ function ref_121f5() {
     level.outofboundstriggers = [];
   }
 
-  var0 = [(1953, -996, 87)];
+  var_0 = [(1953, -996, 87)];
 
-  foreach(var2 in var0) {
-    var3 = spawn("trigger_radius", var2, 0, 400, 128);
-    level.outofboundstriggers[level.outofboundstriggers.size] = var3;
+  foreach(var_2 in var_0) {
+    var_3 = spawn("trigger_radius", var_2, 0, 400, 128);
+    level.outofboundstriggers[level.outofboundstriggers.size] = var_3;
   }
 }
 
@@ -262,44 +262,44 @@ function ref_12f82() {
 
   wait 2;
 
-  foreach(var1 in level.doors) {
-    var1 notify("stateChanged");
-    var2 = 0;
-    var3 = 90;
+  foreach(var_1 in level.doors) {
+    var_1 notify("stateChanged");
+    var_2 = 0;
+    var_3 = 90;
 
-    if(distancesquared(var1.origin, (214, 745, 132)) < 12) {
-      var3 = -110;
-    } else if(distancesquared(var1.origin, (854, 1254, 140)) < 12) {
-      var3 = 110;
-    } else if(distancesquared(var1.origin, (795, 1339, 140)) < 12) {
-      var2 = 1;
-    } else if(distancesquared(var1.origin, (-116, 1025, 128)) < 12) {
-      var3 = 105;
+    if(distancesquared(var_1.origin, (214, 745, 132)) < 12) {
+      var_3 = -110;
+    } else if(distancesquared(var_1.origin, (854, 1254, 140)) < 12) {
+      var_3 = 110;
+    } else if(distancesquared(var_1.origin, (795, 1339, 140)) < 12) {
+      var_2 = 1;
+    } else if(distancesquared(var_1.origin, (-116, 1025, 128)) < 12) {
+      var_3 = 105;
     }
 
-    var1.angles = (var1.angles[0], var1.angles[1] + var3, var1.angles[2]);
-    var1.useprompt makeunusable();
+    var_1.angles = (var_1.angles[0], var_1.angles[1] + var_3, var_1.angles[2]);
+    var_1.useprompt makeunusable();
 
-    if(isDefined(var1.lockprompt)) {
-      var1.lockprompt makeunusable();
+    if(isDefined(var_1.lockprompt)) {
+      var_1.lockprompt makeunusable();
     }
 
-    if(var2) {
-      var1.clipent delete();
-      var1 delete();
+    if(var_2) {
+      var_1.clipent delete();
+      var_1 delete();
     }
   }
 }
 
 function ref_121f0() {
-  var0 = getEntArray("clip128x128x8", "targetname");
-  var1 = spawn("script_model", (-3246.5, -3351, 56));
-  var2 = spawn("script_model", (-3118.5, -3351, 56));
-  var3 = spawn("script_model", (-2854.5, -3351, 56));
-  var1 clonebrushmodeltoscriptmodel(var0[0]);
-  var1.angles = (360, 0, 90);
-  var2 clonebrushmodeltoscriptmodel(var0[0]);
-  var2.angles = (360, 0, 90);
-  var3 clonebrushmodeltoscriptmodel(var0[0]);
-  var3.angles = (360, 0, 90);
+  var_0 = getEntArray("clip128x128x8", "targetname");
+  var_1 = spawn("script_model", (-3246.5, -3351, 56));
+  var_2 = spawn("script_model", (-3118.5, -3351, 56));
+  var_3 = spawn("script_model", (-2854.5, -3351, 56));
+  var_1 clonebrushmodeltoscriptmodel(var_0[0]);
+  var_1.angles = (360, 0, 90);
+  var_2 clonebrushmodeltoscriptmodel(var_0[0]);
+  var_2.angles = (360, 0, 90);
+  var_3 clonebrushmodeltoscriptmodel(var_0[0]);
+  var_3.angles = (360, 0, 90);
 }

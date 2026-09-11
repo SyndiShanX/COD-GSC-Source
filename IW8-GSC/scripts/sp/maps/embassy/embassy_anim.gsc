@@ -748,12 +748,12 @@ function humans() {
   level.scr_anim["hadir"]["fridge_takedown_enter_idle"][0] = % emb_def_067_fridge_takedown_idle_hadir;
   level.scr_anim["hadir"]["fridge_takedown"] = % emb_def_067_fridge_takedown_scene_hadir;
   level.scr_anim["aq_1"]["fridge_takedown"] = % emb_def_067_fridge_takedown_scene_aq;
-  var0 = "generic";
-  level.scr_anim[var0]["faveladoor_fastopen"] = % sh_sch_060_doorbustr_enemy;
-  level.scr_anim[var0]["faveladoor_idle"][0] = % reb_smtobj_door_r_loop;
-  level.scr_anim[var0]["faveladoor_kick"] = % reb_smtobj_door_r_kick01;
-  level.scr_anim[var0]["faveladoor_peak"] = % reb_smtobj_door_r_peak;
-  level.scr_anim[var0]["faveladoor_gren"] = % reb_smtobj_door_r_grenade;
+  var_0 = "generic";
+  level.scr_anim[var_0]["faveladoor_fastopen"] = % sh_sch_060_doorbustr_enemy;
+  level.scr_anim[var_0]["faveladoor_idle"][0] = % reb_smtobj_door_r_loop;
+  level.scr_anim[var_0]["faveladoor_kick"] = % reb_smtobj_door_r_kick01;
+  level.scr_anim[var_0]["faveladoor_peak"] = % reb_smtobj_door_r_peak;
+  level.scr_anim[var_0]["faveladoor_gren"] = % reb_smtobj_door_r_grenade;
   level.scr_anim["soldier_01"]["sniper_start_idle"][0] = % emb_def_060_sniper_start_idle_ally01;
   level.scr_anim["soldier_01"]["sniper_start_death"] = % emb_def_060_sniper_death_ally01;
   scripts\common\anim::addnotetrack_customfunction("soldier_01", "kill_me", &kill_me_no_anim, "sniper_start_death");
@@ -872,37 +872,37 @@ function humans() {
   level.scr_face["ambo"]["dx_vom_amba_cctv_01_intro_20"] = % dx_vom_amba_cctv_01_intro_20_face;
 }
 
-function cue_exit_civs(var0) {
+function cue_exit_civs(var_0) {
   scripts\engine\utility::flag_set("cue_exit_civs");
 }
 
-function emb_roof_vo(var0) {
-  var1 = lookupsoundlength("dx_vom_pri_roof_crash_10");
-  wait var1;
+function emb_roof_vo(var_0) {
+  var_1 = lookupsoundlength("dx_vom_pri_roof_crash_10");
+  wait var_1;
   wait 0.4;
   thread scripts\engine\sp\utility::smart_radio_dialogue("dx_vom_alx_roof_crash_15");
   wait 0.3;
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_pri_roof_crash_30");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_pri_roof_crash_30");
   scripts\engine\sp\utility::smart_radio_dialogue("dx_vom_alx_roof_crash_35");
 }
 
-function roof_to_stairs_vo(var0) {
+function roof_to_stairs_vo(var_0) {
   thread emb_roof_pre_office_vo();
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_pri_topfloor_office_03");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_pri_topfloor_office_03");
   wait 0.8;
   level.player scripts\engine\sp\utility::smart_dialogue("dx_vom_kyle_topfloor_office_04");
   wait 1.3;
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_pri_topfloor_office_07");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_pri_topfloor_office_07");
 }
 
 function emb_roof_pre_office_vo() {
   scripts\engine\utility::flag_wait("near_office_door");
-  var0 = scripts\engine\utility::getStruct("ap_offices_chaos", "targetname");
-  var1 = spawn("script_origin", var0.origin);
-  var1 scripts\engine\sp\utility::smart_dialogue_generic("dx_vom_fmgr_topfloor_office_02");
+  var_0 = scripts\engine\utility::getStruct("ap_offices_chaos", "targetname");
+  var_1 = spawn("script_origin", var_0.origin);
+  var_1 scripts\engine\sp\utility::smart_dialogue_generic("dx_vom_fmgr_topfloor_office_02");
 }
 
-function office_side_vo_1(var0) {
+function office_side_vo_1(var_0) {
   level endon("passed_door_to_stairs");
 
   if(scripts\engine\utility::flag("office_side_vo_1")) {
@@ -911,14 +911,14 @@ function office_side_vo_1(var0) {
 
   scripts\engine\utility::flag_set("office_side_vo_1");
   thread stop_office_side_vo();
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_cvm1_topfloor_office_80");
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_cvm2_topfloor_office_90");
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_cvm1_topfloor_office_100");
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_cvm2_topfloor_office_110");
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_cvm1_topfloor_office_120");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_cvm1_topfloor_office_80");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_cvm2_topfloor_office_90");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_cvm1_topfloor_office_100");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_cvm2_topfloor_office_110");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_cvm1_topfloor_office_120");
 }
 
-function office_side_vo_2(var0) {
+function office_side_vo_2(var_0) {
   level endon("passed_door_to_stairs");
 
   if(scripts\engine\utility::flag("office_side_vo_2")) {
@@ -928,16 +928,16 @@ function office_side_vo_2(var0) {
   scripts\engine\utility::flag_set("office_side_vo_2");
   scripts\engine\utility::flag_wait("cue_exit_civs");
   thread stop_office_side_vo();
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_wk3_topfloor_office_130");
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_wk3_topfloor_office_140");
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_cvm1_topfloor_office_150");
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_wk3_topfloor_office_160");
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_wk3_topfloor_office_170");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_wk3_topfloor_office_130");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_wk3_topfloor_office_140");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_cvm1_topfloor_office_150");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_wk3_topfloor_office_160");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_wk3_topfloor_office_170");
   wait 1;
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_wk3_topfloor_office_180");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_wk3_topfloor_office_180");
 }
 
-function office_side_vo_3(var0) {
+function office_side_vo_3(var_0) {
   level endon("passed_door_to_stairs");
 
   if(scripts\engine\utility::flag("office_side_vo_3")) {
@@ -947,31 +947,31 @@ function office_side_vo_3(var0) {
   scripts\engine\utility::flag_set("office_side_vo_3");
   scripts\engine\utility::flag_wait("cue_exit_civs");
   wait 2.5;
-  var0 scripts\engine\sp\utility::smart_dialogue_generic("dx_vom_cvf1_topfloor_office_340");
-  var0 scripts\engine\sp\utility::smart_dialogue_generic("dx_vom_civ4_topfloor_office_350");
-  var0 scripts\engine\sp\utility::smart_dialogue_generic("dx_vom_cvm1_topfloor_office_360");
+  var_0 scripts\engine\sp\utility::smart_dialogue_generic("dx_vom_cvf1_topfloor_office_340");
+  var_0 scripts\engine\sp\utility::smart_dialogue_generic("dx_vom_civ4_topfloor_office_350");
+  var_0 scripts\engine\sp\utility::smart_dialogue_generic("dx_vom_cvm1_topfloor_office_360");
 }
 
-function attach_keycard_left(var0) {
-  var0.keycard = scripts\engine\sp\utility::getmodel("keycard");
-  var0 attach(var0.keycard, "tag_accessory_left");
+function attach_keycard_left(var_0) {
+  var_0.keycard = scripts\engine\sp\utility::getmodel("keycard");
+  var_0 attach(var_0.keycard, "tag_accessory_left");
   level waittill("detach_keycard");
-  var0 detach(var0.keycard, "tag_accessory_left");
+  var_0 detach(var_0.keycard, "tag_accessory_left");
 }
 
-function attach_keycard_right(var0) {
-  var0.keycard = scripts\engine\sp\utility::getmodel("keycard");
-  var0 attach(var0.keycard, "tag_accessory_right");
+function attach_keycard_right(var_0) {
+  var_0.keycard = scripts\engine\sp\utility::getmodel("keycard");
+  var_0 attach(var_0.keycard, "tag_accessory_right");
   level waittill("detach_keycard");
-  var0 detach(var0.keycard, "tag_accessory_right");
+  var_0 detach(var_0.keycard, "tag_accessory_right");
 }
 
-function enforcer_pistol_fire(var0) {
-  var1 = var0 gettagorigin("tag_weapon_left");
-  var2 = var0 gettagangles("tag_weapon_left");
-  var3 = var1 + anglesToForward(var2) * 1.3 + anglestoup(var2) * 2.1;
-  var4 = var3 + anglesToForward(var2) * 100;
-  magicbullet(var0.sidearm, var3, var4);
+function enforcer_pistol_fire(var_0) {
+  var_1 = var_0 gettagorigin("tag_weapon_left");
+  var_2 = var_0 gettagangles("tag_weapon_left");
+  var_3 = var_1 + anglesToForward(var_2) * 1.3 + anglestoup(var_2) * 2.1;
+  var_4 = var_3 + anglesToForward(var_2) * 100;
+  magicbullet(var_0.sidearm, var_3, var_4);
 }
 
 function stop_office_side_vo() {
@@ -983,7 +983,7 @@ function stop_office_side_vo() {
   }
 }
 
-function md_vo(var0) {
+function md_vo(var_0) {
   wait 2;
   level.player scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_kyle_entrance_overrun_55");
   level.player scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_kyle_entrance_overrun_56");
@@ -995,31 +995,31 @@ function md_vo(var0) {
   level.price scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_pri_entrance_overrun_131");
 }
 
-function headtrack_on(var0) {
-  var0 scripts\common\utility::lookatentity(level.player);
+function headtrack_on(var_0) {
+  var_0 scripts\common\utility::lookatentity(level.player);
 }
 
-function headtrack_off(var0) {
-  var0 scripts\common\utility::lookatentity();
+function headtrack_off(var_0) {
+  var_0 scripts\common\utility::lookatentity();
 }
 
-function bpg_scene_price_vo_nag(var0) {
+function bpg_scene_price_vo_nag(var_0) {
   level endon("bpg_scene_enforcer_done");
   level endon("bpg_scene_interact_success");
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_pri_reception_bulletproof_124");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_pri_reception_bulletproof_124");
   wait 15;
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_pri_reception_bulletproof_122");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_pri_reception_bulletproof_122");
 }
 
-function bpg_scene_civ_vo(var0) {
+function bpg_scene_civ_vo(var_0) {
   wait 14;
   wait 7;
 }
 
-function bpg_scene_escape_idle_nag_vo(var0) {
+function bpg_scene_escape_idle_nag_vo(var_0) {
   if(!isDefined(level.price.escape_idle_nags)) {
-    var1 = ["dx_vom_pri_reception_bulletproof_140", "dx_vom_pri_reception_bulletproof_132", "dx_vom_pri_reception_bulletproof_135"];
-    level.price.escape_idle_nags = scripts\engine\sp\utility::create_deck(var1);
+    var_1 = ["dx_vom_pri_reception_bulletproof_140", "dx_vom_pri_reception_bulletproof_132", "dx_vom_pri_reception_bulletproof_135"];
+    level.price.escape_idle_nags = scripts\engine\sp\utility::create_deck(var_1);
   }
 
   if(level.price scripts\sp\maps\embassy\embassy_util::player_moving_toward()) {
@@ -1029,55 +1029,55 @@ function bpg_scene_escape_idle_nag_vo(var0) {
   level.price scripts\engine\sp\utility::smart_dialogue(level.price.escape_idle_nags scripts\engine\sp\utility::deck_draw());
 }
 
-function bpg_scene_price_push_door(var0) {
-  var1 = scripts\sp\door::get_interactive_door("bpg_scene_entrance_door");
+function bpg_scene_price_push_door(var_0) {
+  var_1 = scripts\sp\door::get_interactive_door("bpg_scene_entrance_door");
 
-  if(var1.angles[1] < 350) {
-    var1 thread scripts\sp\door::remove_open_ability();
-    var1 thread scripts\sp\door::door_open_completely(level.price, 0.5);
+  if(var_1.angles[1] < 350) {
+    var_1 thread scripts\sp\door::remove_open_ability();
+    var_1 thread scripts\sp\door::door_open_completely(level.price, 0.5);
     return;
   }
 }
 
-function halligan_breakout_a(var0) {
+function halligan_breakout_a(var_0) {
   level.halligan_breakout = "breakout_a";
 }
 
-function halligan_breakout_b(var0) {
+function halligan_breakout_b(var_0) {
   level.halligan_breakout = "breakout_b";
 }
 
-function halligan_breakout_end(var0) {
+function halligan_breakout_end(var_0) {
   level.halligan_breakout = undefined;
 }
 
-function drag_scene_shoot(var0) {
-  var1 = scripts\engine\utility::getStruct("drag_scene_shooter", "targetname");
-  var1.groundorigin = scripts\engine\utility::drop_to_ground(var1.origin, 0, -100);
-  var2 = 100;
-  var3 = 0.5;
-  var4 = var3 * 20;
-  var5 = var4 * 0.5;
+function drag_scene_shoot(var_0) {
+  var_1 = scripts\engine\utility::getStruct("drag_scene_shooter", "targetname");
+  var_1.groundorigin = scripts\engine\utility::drop_to_ground(var_1.origin, 0, -100);
+  var_2 = 100;
+  var_3 = 0.5;
+  var_4 = var_3 * 20;
+  var_5 = var_4 * 0.5;
 
-  for(var6 = 0; var6 < var4; var6++) {
-    if(var6 < var5) {
-      var7 = var6 / var5;
-      var7 = 1 - var7;
-      var8 = vectorNormalize(var1.groundorigin - var0.origin);
-      var9 = var0.origin + var8 * var2 * var7;
+  for(var_6 = 0; var_6 < var_4; var_6++) {
+    if(var_6 < var_5) {
+      var_7 = var_6 / var_5;
+      var_7 = 1 - var_7;
+      var_8 = vectorNormalize(var_1.groundorigin - var_0.origin);
+      var_9 = var_0.origin + var_8 * var_2 * var_7;
     } else {
-      var7 = (var6 - var5) / var4;
-      var10 = var0.origin + (0, 0, 52);
-      var8 = vectorNormalize(var10 - var0.origin);
-      var9 = var0.origin + var8 * var2 * var7;
+      var_7 = (var_6 - var_5) / var_4;
+      var_10 = var_0.origin + (0, 0, 52);
+      var_8 = vectorNormalize(var_10 - var_0.origin);
+      var_9 = var_0.origin + var_8 * var_2 * var_7;
     }
 
-    magicbullet("iw8_ar_akilo47", var1.origin, var9);
+    magicbullet("iw8_ar_akilo47", var_1.origin, var_9);
     waitframe();
   }
 }
 
-function price_directions_finished(var0) {
+function price_directions_finished(var_0) {
   wait lookupsoundlength("dx_vom_pri_defend_intro_30") / 1000;
   wait 0.25;
   level.alex scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_alx_defend_intro_40");
@@ -1085,58 +1085,58 @@ function price_directions_finished(var0) {
   level.player scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_kyle_defend_intro_130");
 }
 
-function price_intro_vo_finished(var0) {
+function price_intro_vo_finished(var_0) {
   wait lookupsoundlength("dx_vom_pri_defend_roof_60") / 1000;
   scripts\engine\utility::flag_set("intro_vo_finished");
 }
 
-function grab_glowstick(var0) {
-  var1 = getEnt("light_stick", "targetname");
-  var1 show();
-  var1 linkTo(var0, "tag_ik_wrist_loc_ri", (3, 0, 0), (0, 0, 0));
-  var0.glowstick = var1;
-  var2 = var0.glowstick.light;
-  var2.origin = var1.origin;
-  var2 linkTo(var1);
-  var3 = scripts\engine\utility::spawn_tag_origin(var1.origin, var1.angles);
-  var3 linkTo(var1);
-  var1 hide();
-  playFXOnTag(scripts\engine\utility::getfx("vfx_glow_stick"), var3, "tag_origin");
+function grab_glowstick(var_0) {
+  var_1 = getEnt("light_stick", "targetname");
+  var_1 show();
+  var_1 linkTo(var_0, "tag_ik_wrist_loc_ri", (3, 0, 0), (0, 0, 0));
+  var_0.glowstick = var_1;
+  var_2 = var_0.glowstick.light;
+  var_2.origin = var_1.origin;
+  var_2 linkTo(var_1);
+  var_3 = scripts\engine\utility::spawn_tag_origin(var_1.origin, var_1.angles);
+  var_3 linkTo(var_1);
+  var_1 hide();
+  playFXOnTag(scripts\engine\utility::getfx("vfx_glow_stick"), var_3, "tag_origin");
   level waittill("mortar_impact");
   waitframe();
   level waittill("mortar_impact");
-  stopFXOnTag(scripts\engine\utility::getfx("vfx_glow_stick"), var3, "tag_origin");
+  stopFXOnTag(scripts\engine\utility::getfx("vfx_glow_stick"), var_3, "tag_origin");
 }
 
-function toss_glowstick(var0) {
+function toss_glowstick(var_0) {
   wait 0.1;
-  var1 = var0.glowstick;
-  var1 unlink();
-  var2 = getdvarint("NPOQPMP");
-  var3 = distance(var1.origin, var1.og_origin);
-  var4 = round_server_time(var3 / 175);
-  var5 = var1.og_origin - var1.origin;
-  var6 = 0.5 * var2 * squared(var4) * -1;
-  var7 = (var5[0] / var4, var5[1] / var4, (var5[2] - var6) / var4);
-  var1.light unlink();
-  var1.light moveTo(var1.light.og_origin, var4);
-  var1.light rotateTo(var1.light.og_angles, var4);
-  var1 movegravity(var7, var4);
-  var1 rotateTo(var1.og_angles, var4);
+  var_1 = var_0.glowstick;
+  var_1 unlink();
+  var_2 = getdvarint("NPOQPMP");
+  var_3 = distance(var_1.origin, var_1.og_origin);
+  var_4 = round_server_time(var_3 / 175);
+  var_5 = var_1.og_origin - var_1.origin;
+  var_6 = 0.5 * var_2 * squared(var_4) * -1;
+  var_7 = (var_5[0] / var_4, var_5[1] / var_4, (var_5[2] - var_6) / var_4);
+  var_1.light unlink();
+  var_1.light moveTo(var_1.light.og_origin, var_4);
+  var_1.light rotateTo(var_1.light.og_angles, var_4);
+  var_1 movegravity(var_7, var_4);
+  var_1 rotateTo(var_1.og_angles, var_4);
 }
 
-function round_server_time(var0) {
-  var0 *= 20;
-  var1 = int(var0);
-  return var1 / 20;
+function round_server_time(var_0) {
+  var_0 *= 20;
+  var_1 = int(var_0);
+  return var_1 / 20;
 }
 
-function crowguy_vo(var0) {
+function crowguy_vo(var_0) {
   level notify("stop_basement_vo");
-  var0 scripts\engine\sp\utility::smart_dialogue_generic("dx_vom_aq1_basement_traverse_08");
+  var_0 scripts\engine\sp\utility::smart_dialogue_generic("dx_vom_aq1_basement_traverse_08");
 }
 
-function arrival_hadir_pistol_holster(var0) {
+function arrival_hadir_pistol_holster(var_0) {
   if(isDefined(level.hadir.stowsidearmposition)) {
     level.hadir scripts\anim\shared::placeweaponon(level.hadir.sidearm, level.hadir.stowsidearmposition);
     return;
@@ -1145,7 +1145,7 @@ function arrival_hadir_pistol_holster(var0) {
   level.hadir scripts\anim\shared::placeweaponon(level.hadir.sidearm, "none");
 }
 
-function arrival_hadir_pickup_rifle(var0) {
+function arrival_hadir_pickup_rifle(var_0) {
   level.hadir scripts\anim\shared::placeweaponon(level.hadir.primaryweapon, "right");
   level.hadir.weapon = level.hadir.primaryweapon;
 }
@@ -1588,15 +1588,15 @@ function script_models() {
   level.scr_anim["door"]["halligan_scene_reverse"] = % emb_oc_030_basement_close_door;
 }
 
-function emb_nt_fire_magic_bullet(var0) {
-  var1 = var0 gettagorigin("tag_flash");
-  var2 = var0 gettagangles("tag_flash");
-  var3 = var1 + anglesToForward(var2) * 1000;
-  playFXOnTag(scripts\engine\utility::getfx("vfx_muz_pis_w"), var0, "tag_flash");
-  magicbullet("iw8_pi_golf21", var1, var3);
+function emb_nt_fire_magic_bullet(var_0) {
+  var_1 = var_0 gettagorigin("tag_flash");
+  var_2 = var_0 gettagangles("tag_flash");
+  var_3 = var_1 + anglesToForward(var_2) * 1000;
+  playFXOnTag(scripts\engine\utility::getfx("vfx_muz_pis_w"), var_0, "tag_flash");
+  magicbullet("iw8_pi_golf21", var_1, var_3);
 }
 
-function emb_nt_hide_viewmodel(var0) {
+function emb_nt_hide_viewmodel(var_0) {
   level notify("wolf_cam_swap");
 }
 
@@ -1627,47 +1627,47 @@ function vehicles() {
   level.scr_anim["truck_01"]["wolf_escapes"] = % emb_exfil_010_wolfescapes_truck;
 }
 
-function kill_me_no_anim(var0) {
-  if(isDefined(var0.magic_bullet_shield) && var0.magic_bullet_shield) {
-    var0 scripts\common\ai::stop_magic_bullet_shield();
+function kill_me_no_anim(var_0) {
+  if(isDefined(var_0.magic_bullet_shield) && var_0.magic_bullet_shield) {
+    var_0 scripts\common\ai::stop_magic_bullet_shield();
   }
 
-  var0.allowdeath = 1;
-  var0.a.nodeath = 1;
-  var0 kill();
+  var_0.allowdeath = 1;
+  var_0.a.nodeath = 1;
+  var_0 kill();
 }
 
-function drag_pistol_swap(var0) {}
+function drag_pistol_swap(var_0) {}
 
-function notetrack_civ_killed(var0) {
+function notetrack_civ_killed(var_0) {
   level notify("cctv_civ_killed");
 }
 
-function embassy_infil_chopper_crash_explo_sfx(var0) {
-  var0 playexplosionsound("embassy_infil_chopper_crash_explo_lr", "exp");
+function embassy_infil_chopper_crash_explo_sfx(var_0) {
+  var_0 playexplosionsound("embassy_infil_chopper_crash_explo_lr", "exp");
 }
 
-function sfx_glass_crack_01(var0) {
+function sfx_glass_crack_01(var_0) {
   thread scripts\engine\utility::play_sound_in_space("scn_embassy_glass_crack_01", (-6504, -2686, 92));
   wait 4;
   thread scripts\engine\utility::play_sound_in_space("scn_embassy_glass_spidering_01", (-6504, -2686, 92));
 }
 
-function sfx_glass_crack_02(var0) {
+function sfx_glass_crack_02(var_0) {
   wait 2;
   thread scripts\engine\utility::play_sound_in_space("scn_embassy_glass_crack_02", (-6418, -2682, 92));
   wait 3;
   thread scripts\engine\utility::play_sound_in_space("scn_embassy_glass_spidering_02", (-6418, -2682, 92));
 }
 
-function sfx_glass_crack_03(var0) {
+function sfx_glass_crack_03(var_0) {
   wait 3;
   thread scripts\engine\utility::play_sound_in_space("scn_embassy_glass_crack_03", (-6331, -2682, 91));
   wait 6;
   thread scripts\engine\utility::play_sound_in_space("scn_embassy_glass_spidering_03", (-6331, -2682, 91));
 }
 
-function sfx_glass_crack_04(var0) {
+function sfx_glass_crack_04(var_0) {
   thread scripts\engine\utility::play_sound_in_space("scn_embassy_glass_chair_throw", (-6249, -2686, 94));
   wait 0.2;
   thread scripts\engine\utility::play_sound_in_space("scn_embassy_glass_crack_04", (-6249, -2686, 94));
@@ -1675,38 +1675,38 @@ function sfx_glass_crack_04(var0) {
   thread scripts\engine\utility::play_sound_in_space("scn_embassy_glass_spidering_04", (-6249, -2686, 94));
 }
 
-function sfx_glass_crack_05(var0) {
+function sfx_glass_crack_05(var_0) {
   thread scripts\engine\utility::play_sound_in_space("scn_embassy_glass_crack_05", (-6164, -2690, 92));
   wait 6;
   thread scripts\engine\utility::play_sound_in_space("scn_embassy_glass_spidering_05", (-6164, -2690, 92));
 }
 
-function sfx_glass_crack_06a(var0) {
+function sfx_glass_crack_06a(var_0) {
   thread scripts\engine\utility::play_sound_in_space("scn_embassy_glass_crack_04", (-7110, -2375, 92));
   wait 2;
   thread scripts\engine\utility::play_sound_in_space("scn_embassy_glass_spidering_01", (-7110, -2375, 92));
 }
 
-function sfx_glass_crack_06b(var0) {
+function sfx_glass_crack_06b(var_0) {
   thread scripts\engine\utility::play_sound_in_space("scn_embassy_glass_crack_05", (-7110, -2375, 92));
 }
 
-function sfx_glass_crack_06c(var0) {
+function sfx_glass_crack_06c(var_0) {
   thread scripts\engine\utility::play_sound_in_space("scn_embassy_glass_crack_03", (-7110, -2375, 92));
 }
 
-function crash_fall_remove_fov_scale_factor_override(var0) {
+function crash_fall_remove_fov_scale_factor_override(var_0) {
   level.player lerpfovscalefactor(1, 1.2);
 }
 
-function cctv_enter_add_fov_user_scale_override(var0) {
+function cctv_enter_add_fov_user_scale_override(var_0) {
   level.player lerpfovscalefactor(0, 1);
 }
 
-function mortar_add_fov_user_scale(var0) {
+function mortar_add_fov_user_scale(var_0) {
   level.player lerpfovscalefactor(0, 0.4);
 }
 
-function mortar_remove_fov_user_scale(var0) {
+function mortar_remove_fov_user_scale(var_0) {
   level.player lerpfovscalefactor(1, 0.4);
 }

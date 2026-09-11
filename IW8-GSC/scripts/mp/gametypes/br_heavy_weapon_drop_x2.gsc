@@ -5,33 +5,33 @@
 
 function init() {
   level.shutdownattractionicontrigger = [];
-  var0 = scripts\cp_mp\killstreaks\airdrop::getleveldata("heavy_weapon_crate");
-  var0.capturestring = &"MP/GENERIC_LOOT_CRATE_CAPTURE";
-  var0.dummymodel = "military_carepackage_01_br_legendary";
-  var0.friendlymodel = undefined;
-  var0.enemymodel = undefined;
-  var0.mountmantlemodel = undefined;
-  var0.supportsownercapture = 0;
-  var0.headicon = undefined;
-  var0.minimapicon = undefined;
-  var0.usepriority = -1;
-  var0.usefov = 180;
-  var0.timeout = undefined;
-  var0.friendlyuseonly = 0;
-  var0.ownerusetime = 0.5;
-  var0.otherusetime = 0.5;
-  var0.activatecallback = &signal_nag;
-  var0.capturecallback = &signal_strength;
-  var0.destroycallback = &signal_yaw;
-  var0.ingame = &signalomnvar;
-  var0.destroyoncapture = 1;
+  var_0 = scripts\cp_mp\killstreaks\airdrop::getleveldata("heavy_weapon_crate");
+  var_0.capturestring = &"MP/GENERIC_LOOT_CRATE_CAPTURE";
+  var_0.dummymodel = "military_carepackage_01_br_legendary";
+  var_0.friendlymodel = undefined;
+  var_0.enemymodel = undefined;
+  var_0.mountmantlemodel = undefined;
+  var_0.supportsownercapture = 0;
+  var_0.headicon = undefined;
+  var_0.minimapicon = undefined;
+  var_0.usepriority = -1;
+  var_0.usefov = 180;
+  var_0.timeout = undefined;
+  var_0.friendlyuseonly = 0;
+  var_0.ownerusetime = 0.5;
+  var_0.otherusetime = 0.5;
+  var_0.activatecallback = &signal_nag;
+  var_0.capturecallback = &signal_strength;
+  var_0.destroycallback = &signal_yaw;
+  var_0.ingame = &signalomnvar;
+  var_0.destroyoncapture = 1;
   level.shrink_poi_into_the_bank = spawnStruct();
-  var1 = getdvarint("x2_heavy_drop_loadout", 0);
-  level.shrink_poi_into_the_bank.equipment = remove_from_bomb_detonator_waiting_for_pick_up_array(var1);
+  var_1 = getdvarint("x2_heavy_drop_loadout", 0);
+  level.shrink_poi_into_the_bank.equipment = remove_from_bomb_detonator_waiting_for_pick_up_array(var_1);
 }
 
-function remove_from_bomb_detonator_waiting_for_pick_up_array(var0) {
-  switch (var0) {
+function remove_from_bomb_detonator_waiting_for_pick_up_array(var_0) {
+  switch (var_0) {
     case 1:
       return [["brloot_super_munitionsbox", 8]];
     default:
@@ -39,8 +39,8 @@ function remove_from_bomb_detonator_waiting_for_pick_up_array(var0) {
   }
 }
 
-function signal_nag(var0) {
-  if(istrue(var0)) {
+function signal_nag(var_0) {
+  if(istrue(var_0)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "registerCrateForCleanup")) {
       [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "registerCrateForCleanup")]](self);
     }
@@ -49,7 +49,7 @@ function signal_nag(var0) {
   level.shutdownattractionicontrigger[level.shutdownattractionicontrigger.size] = self;
 }
 
-function signal_strength(var0) {
+function signal_strength(var_0) {
   if(isDefined(self.ref_13428)) {
     self.ref_13428 setscriptablepartstate("smoke_signal", "off", 0);
     self.ref_13428 delete();
@@ -59,7 +59,7 @@ function signal_strength(var0) {
   shut_down_station();
 }
 
-function signal_yaw(var0) {
+function signal_yaw(var_0) {
   if(isDefined(self.ref_13428)) {
     self.ref_13428 setscriptablepartstate("smoke_signal", "off", 0);
     self.ref_13428 delete();
@@ -68,22 +68,22 @@ function signal_yaw(var0) {
   level.shutdownattractionicontrigger = scripts\engine\utility::array_remove(level.shutdownattractionicontrigger, self);
 }
 
-function signalomnvar(var0, var1) {
+function signalomnvar(var_0, var_1) {
   self setscriptablepartstate("crate_audio", "detach", 0);
 }
 
 function shut_down_station() {
-  var0 = [];
-  var1 = 0;
-  var2 = scripts\mp\gametypes\br_pickups::test_ai_anim();
+  var_0 = [];
+  var_1 = 0;
+  var_2 = scripts\mp\gametypes\br_pickups::test_ai_anim();
 
-  foreach(var4 in level.shrink_poi_into_the_bank.equipment) {
-    var5 = var4[0];
-    var6 = var4[1];
+  foreach(var_4 in level.shrink_poi_into_the_bank.equipment) {
+    var_5 = var_4[0];
+    var_6 = var_4[1];
 
-    if(scripts\mp\gametypes\br_lootcache::get_bonus_targets(var5)) {
-      for(var7 = 0; var7 < var6; var7++) {
-        var8 = scripts\mp\gametypes\br_lootcache::ref_11a41(var5, var2, self.origin, self.angles, 0, 1);
+    if(scripts\mp\gametypes\br_lootcache::get_bonus_targets(var_5)) {
+      for(var_7 = 0; var_7 < var_6; var_7++) {
+        var_8 = scripts\mp\gametypes\br_lootcache::ref_11a41(var_5, var_2, self.origin, self.angles, 0, 1);
       }
     }
   }

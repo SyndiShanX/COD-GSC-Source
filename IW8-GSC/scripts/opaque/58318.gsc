@@ -3,82 +3,82 @@
  * Script: scripts\opaque\58318.gsc
 ***********************************************/
 
-function tut_bots_forcelaststand_onknock(var0) {
+function tut_bots_forcelaststand_onknock(var_0) {
   if(isDefined(level.isaxeweapon)) {
-    return [[level.isaxeweapon]](var0);
+    return [[level.isaxeweapon]](var_0);
   }
 
   return 0;
 }
 
-function watchgrenadeaxepickup(var0, var1) {
+function watchgrenadeaxepickup(var_0, var_1) {
   self endon("death");
   level endon("game_ended");
-  jumpiffalse(!isDefined(self.weapon_name) && isDefined(var1)) LOC_00000028;
-  self.weapon_name = var1;
-  self waittill("missile_stuck", var2, var3);
-  var4 = 45;
-  thread watchaxetimeout(var4);
+  jumpiffalse(!isDefined(self.weapon_name) && isDefined(var_1)) LOC_00000028;
+  self.weapon_name = var_1;
+  self waittill("missile_stuck", var_2, var_3);
+  var_4 = 45;
+  thread watchaxetimeout(var_4);
   thread watchgrenadedeath();
 
   if(!scripts\mp\flags::gameflag("prematch_fade_done")) {
     thread watchprematchend();
   }
 
-  var5 = self.weapon_object;
-  thread watchaxeuse(var0, var5);
-  thread watchaxeautopickup(var0, var5);
+  var_5 = self.weapon_object;
+  thread watchaxeuse(var_0, var_5);
+  thread watchaxeautopickup(var_0, var_5);
 }
 
-function watchaxetimeout(var0) {
+function watchaxetimeout(var_0) {
   self endon("death");
   level endon("game_ended");
 
   if(isDefined(level.hostmigrationwait)) {
-    [[level.hostmigrationwait]](var0);
+    [[level.hostmigrationwait]](var_0);
   }
 
   self delete();
 }
 
-function watchaxeautopickup(var0, var1) {
+function watchaxeautopickup(var_0, var_1) {
   self endon("death");
   level endon("game_ended");
-  var2 = spawn("trigger_radius", self.origin - (0, 0, 40), 0, 64, 64);
-  var2 enablelinkTo();
-  var2 linkTo(self);
-  self.knife_trigger = var2;
-  var2 endon("death");
+  var_2 = spawn("trigger_radius", self.origin - (0, 0, 40), 0, 64, 64);
+  var_2 enablelinkTo();
+  var_2 linkTo(self);
+  self.knife_trigger = var_2;
+  var_2 endon("death");
 
   for(;;) {
-    var2 waittill("trigger", var0);
+    var_2 waittill("trigger", var_0);
 
-    if(!isPlayer(var0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
 
-    if(!var0 hasweapon(var1)) {
+    if(!var_0 hasweapon(var_1)) {
       continue;
     }
 
-    if(playercanautopickupaxe(var0, self)) {
-      playerpickupaxe(var0, var1, 1);
+    if(playercanautopickupaxe(var_0, self)) {
+      playerpickupaxe(var_0, var_1, 1);
       self delete();
       break;
     }
   }
 }
 
-function watchaxeuse(var0, var1) {
+function watchaxeuse(var_0, var_1) {
   self endon("death");
   level endon("game_ended");
-  var2 = spawn("script_model", self.origin);
-  var2 linkTo(self);
-  self.useobj_trigger = var2;
-  var2 makeusable();
-  var2 setusefov(360);
-  var2 setuserange(64);
-  var2 setusepriority(0);
+  var_2 = spawn("script_model", self.origin);
+  var_2 linkTo(self);
+  self.useobj_trigger = var_2;
+  var_2 makeusable();
+  var_2 setusefov(360);
+  var_2 setuserange(64);
+  var_2 setusepriority(0);
 }
 
 function watchprematchend() {
@@ -88,78 +88,78 @@ function watchprematchend() {
   self delete();
 }
 
-function playercanautopickupaxe(var0) {
-  if(isDefined(var0.owner) && self != var0.owner) {
+function playercanautopickupaxe(var_0) {
+  if(isDefined(var_0.owner) && self != var_0.owner) {
     return false;
   }
 
-  var1 = 0;
-  var2 = 0;
-  var3 = 0;
-  var4 = self getweaponslistprimaries();
+  var_1 = 0;
+  var_2 = 0;
+  var_3 = 0;
+  var_4 = self getweaponslistprimaries();
 
-  foreach(var6 in var4) {
-    if(tut_bots_forcelaststand_onknock(var6)) {
-      var3 = 1;
+  foreach(var_6 in var_4) {
+    if(tut_bots_forcelaststand_onknock(var_6)) {
+      var_3 = 1;
     }
 
-    if(issubstr(var6.basename, "iw8_fists_mp")) {
-      var2 = 1;
+    if(issubstr(var_6.basename, "iw8_fists_mp")) {
+      var_2 = 1;
     }
 
-    if(!var6.isalternate) {
-      var1++;
+    if(!var_6.isalternate) {
+      var_1++;
     }
   }
 
-  var8 = scripts\mp\gametypes\br_weapons::br_ammo_type_player_full(self, "brloot_ammo_rocket");
+  var_8 = scripts\mp\gametypes\br_weapons::br_ammo_type_player_full(self, "brloot_ammo_rocket");
 
-  if(var3) {
-    return !var8;
+  if(var_3) {
+    return !var_8;
   }
 
-  if(var2 || var1 < 2) {
+  if(var_2 || var_1 < 2) {
     return true;
   }
 
   return false;
 }
 
-function playerpickupaxe(var0, var1) {
-  var2 = var0 getnoaltweapon();
-  var3 = self getcurrentweapon();
-  var4 = self getweaponslistprimaries();
+function playerpickupaxe(var_0, var_1) {
+  var_2 = var_0 getnoaltweapon();
+  var_3 = self getcurrentweapon();
+  var_4 = self getweaponslistprimaries();
 
-  if(self hasweapon(var0)) {
-    var5 = self getweaponammoclip(var0);
-    var6 = self getweaponammostock(var0);
+  if(self hasweapon(var_0)) {
+    var_5 = self getweaponammoclip(var_0);
+    var_6 = self getweaponammostock(var_0);
 
-    if(!var1 && var5 > 0) {
-      self dropitem(var0);
-      scripts\cp_mp\utility\inventory_utility::_giveweapon(var2);
-    } else if(!issubstr(var3.basename, var0.basename)) {
-      scripts\cp_mp\utility\inventory_utility::_takeweapon(var0);
-      scripts\cp_mp\utility\inventory_utility::_giveweapon(var2);
+    if(!var_1 && var_5 > 0) {
+      self dropitem(var_0);
+      scripts\cp_mp\utility\inventory_utility::_giveweapon(var_2);
+    } else if(!issubstr(var_3.basename, var_0.basename)) {
+      scripts\cp_mp\utility\inventory_utility::_takeweapon(var_0);
+      scripts\cp_mp\utility\inventory_utility::_giveweapon(var_2);
     }
 
-    var7 = self getweaponammoclip(var3) == 0 && tut_bots_forcelaststand_onknock(var3);
-    var8 = issubstr(var3.basename, "iw8_fists_mp");
+    var_7 = self getweaponammoclip(var_3) == 0 && tut_bots_forcelaststand_onknock(var_3);
+    var_8 = issubstr(var_3.basename, "iw8_fists_mp");
 
-    if(!var1 || var8 || var7) {
-      scripts\cp_mp\utility\inventory_utility::_switchtoweapon(var2);
+    if(!var_1 || var_8 || var_7) {
+      scripts\cp_mp\utility\inventory_utility::_switchtoweapon(var_2);
     }
 
-    var9 = 0;
+    var_9 = 0;
 
-    if(var5 == 0) {
-      self setweaponammoclip(var2, 1);
-      var9 = 1;
+    if(var_5 == 0) {
+      self setweaponammoclip(var_2, 1);
+      var_9 = 1;
     }
 
-    if(var9) {
-      self setweaponammostock(var2, var6);
+    if(var_9) {
+      self setweaponammostock(var_2, var_6);
     } else {
-      self setweaponammostock(var2, var6 + 1);
+      self setweaponammostock(var_2, var_6 + 1);
       scripts\mp\gametypes\br_weapons::br_ammo_give_type(self, "brloot_ammo_rocket", 1, 0);
     }
 
@@ -170,91 +170,91 @@ function playerpickupaxe(var0, var1) {
     return;
   }
 
-  var10 = undefined;
-  var11 = 0;
+  var_10 = undefined;
+  var_11 = 0;
 
-  foreach(var13 in var9) {
-    if(var13.isalternate) {
+  foreach(var_13 in var_9) {
+    if(var_13.isalternate) {
       continue;
     }
 
-    if(issubstr(var13.basename, "uplinkball")) {
+    if(issubstr(var_13.basename, "uplinkball")) {
       continue;
     }
 
-    var14 = self getweaponammoclip(var13) == 0 && tut_bots_forcelaststand_onknock(var13);
+    var_14 = self getweaponammoclip(var_13) == 0 && tut_bots_forcelaststand_onknock(var_13);
 
-    if(!isDefined(var10) && (weaponispreferreddrop(var13) || var14)) {
-      var10 = var13;
+    if(!isDefined(var_10) && (weaponispreferreddrop(var_13) || var_14)) {
+      var_10 = var_13;
     }
 
-    var11++;
+    var_11++;
   }
 
-  var16 = undefined;
+  var_16 = undefined;
 
-  if(isDefined(var10)) {
-    var16 = var10;
-  } else if(var11 >= 2) {
-    var16 = var8;
+  if(isDefined(var_10)) {
+    var_16 = var_10;
+  } else if(var_11 >= 2) {
+    var_16 = var_8;
   }
 
-  var17 = !var6 || isDefined(var16) && issubstr(var8.basename, var16.basename);
+  var_17 = !var_6 || isDefined(var_16) && issubstr(var_8.basename, var_16.basename);
 
-  if(isDefined(var16)) {
-    var14 = self getweaponammoclip(var16) == 0 && tut_bots_forcelaststand_onknock(var16);
-    var18 = var16.basename == "iw8_fists_mp";
-    var19 = weaponcandrop(var16) && !var14;
+  if(isDefined(var_16)) {
+    var_14 = self getweaponammoclip(var_16) == 0 && tut_bots_forcelaststand_onknock(var_16);
+    var_18 = var_16.basename == "iw8_fists_mp";
+    var_19 = weaponcandrop(var_16) && !var_14;
 
-    if(var19) {
-      var20 = self dropitem(var16);
+    if(var_19) {
+      var_20 = self dropitem(var_16);
 
-      if(isDefined(var20)) {
-        var21 = createheadicon(var16);
+      if(isDefined(var_20)) {
+        var_21 = createheadicon(var_16);
 
-        if(isDefined(self.tookweaponfrom[var21])) {
-          var20.owner = self.tookweaponfrom[var21];
-          self.tookweaponfrom[var21] = undefined;
+        if(isDefined(self.tookweaponfrom[var_21])) {
+          var_20.owner = self.tookweaponfrom[var_21];
+          self.tookweaponfrom[var_21] = undefined;
         } else {
-          var20.owner = self;
+          var_20.owner = self;
         }
 
-        var20.targetname = "dropped_weapon";
-        var20.objweapon = var16;
+        var_20.targetname = "dropped_weapon";
+        var_20.objweapon = var_16;
 
         if(isDefined(level.watchweaponpickup)) {
-          var20 thread[[level.watchweaponpickup]]();
+          var_20 thread[[level.watchweaponpickup]]();
         }
 
         thread lastseentime();
       }
-    } else if(!var19 && !(var18 && var11 < 2) && !(var14 && var11 < 2)) {
-      self takeweapon(var16);
+    } else if(!var_19 && !(var_18 && var_11 < 2) && !(var_14 && var_11 < 2)) {
+      self takeweapon(var_16);
     }
   }
 
-  var22 = 0;
+  var_22 = 0;
 
   if(isDefined(self) && isDefined(self.br_ammo["brloot_ammo_rocket"])) {
-    var22 = self.br_ammo["brloot_ammo_rocket"];
+    var_22 = self.br_ammo["brloot_ammo_rocket"];
   }
 
-  scripts\cp_mp\utility\inventory_utility::_giveweapon(var7);
-  self setweaponammoclip(var7, 1);
+  scripts\cp_mp\utility\inventory_utility::_giveweapon(var_7);
+  self setweaponammoclip(var_7, 1);
 
-  if(var17) {
-    scripts\cp_mp\utility\inventory_utility::_switchtoweapon(var7);
+  if(var_17) {
+    scripts\cp_mp\utility\inventory_utility::_switchtoweapon(var_7);
   }
 
-  self setweaponammoclip(var7, 1);
-  self setweaponammostock(var7, var22);
+  self setweaponammoclip(var_7, 1);
+  self setweaponammostock(var_7, var_22);
 
   if(isDefined(level.long_death_manager)) {
     self[[level.long_death_manager]]("axe");
   }
 
   if(isDefined(level.fixupplayerweapons)) {
-    [[level.fixupplayerweapons]](self, var7);
+    [[level.fixupplayerweapons]](self, var_7);
     return;
   }
 }
@@ -285,17 +285,17 @@ function watchgrenadedeath() {
 
 function waittill_grenade_throw() {
   for(;;) {
-    self waittill("grenade_fire", var0, var1, var2, var3);
+    self waittill("grenade_fire", var_0, var_1, var_2, var_3);
 
-    if(!scripts\mp\utility\weapon::grenadethrown(var0)) {
+    if(!scripts\mp\utility\weapon::grenadethrown(var_0)) {
       continue;
     }
 
     if(isDefined(level.grenadeinitialize)) {
-      self[[level.grenadeinitialize]](var0, var1, var2, var3);
+      self[[level.grenadeinitialize]](var_0, var_1, var_2, var_3);
     }
 
     self notify("grenade_throw");
-    return var0;
+    return var_0;
   }
 }

@@ -16,44 +16,44 @@ function rockable_cars_init() {
     return;
   }
 
-  var0 = 0;
+  var_0 = 0;
 
-  foreach(var2 in level.rockablecars.cars) {
-    if(var0 > 19) {
-      var0 = 0;
+  foreach(var_2 in level.rockablecars.cars) {
+    if(var_0 > 19) {
+      var_0 = 0;
       waitframe();
     }
 
-    var0 += 1;
+    var_0 += 1;
 
     if(scripts\common\utility::issp()) {
-      if(!isDefined(var2.model) || !valid_rockable_vehicle(var2)) {
-        level.rockablecars.cars = scripts\engine\utility::array_remove(level.rockablecars.cars, var2);
+      if(!isDefined(var_2.model) || !valid_rockable_vehicle(var_2)) {
+        level.rockablecars.cars = scripts\engine\utility::array_remove(level.rockablecars.cars, var_2);
         continue;
       }
     }
 
-    if(!isDefined(var2 getscriptablepartstate("Anim_Explosion", 1)) && !isDefined(var2 getscriptablepartstate("Anim_PlayerStandRock", 1))) {
-      level.rockablecars.cars = scripts\engine\utility::array_remove(level.rockablecars.cars, var2);
+    if(!isDefined(var_2 getscriptablepartstate("Anim_Explosion", 1)) && !isDefined(var_2 getscriptablepartstate("Anim_PlayerStandRock", 1))) {
+      level.rockablecars.cars = scripts\engine\utility::array_remove(level.rockablecars.cars, var_2);
       continue;
     }
 
-    var2.forward = anglesToForward(var2.angles);
-    var2.right = anglestoright(var2.angles);
+    var_2.forward = anglesToForward(var_2.angles);
+    var_2.right = anglestoright(var_2.angles);
 
     if(!scripts\common\utility::issp()) {
-      var2.up = anglestoup(var2.angles);
-      var2.frontpoint = var2 getpointinbounds(1, 0, 0);
-      var2.backpoint = var2 getpointinbounds(-1, 0, 0);
-      var2.leftpoint = var2 getpointinbounds(0, 1, 0);
-      var2.rightpoint = var2 getpointinbounds(0, -1, 0);
-      var2.toppoint = var2 getpointinbounds(0, 0, 0.25);
-      var2.halflength = vectordot(var2.forward, var2.frontpoint - var2.backpoint) / 2;
-      var2.halfwidth = vectordot(var2.right, var2.rightpoint - var2.leftpoint) / 2;
-      var2.players = [];
-      var2.touchtimes = [];
-      var2.rocktimes = [];
-      var2.rockstrings = [];
+      var_2.up = anglestoup(var_2.angles);
+      var_2.frontpoint = var_2 getpointinbounds(1, 0, 0);
+      var_2.backpoint = var_2 getpointinbounds(-1, 0, 0);
+      var_2.leftpoint = var_2 getpointinbounds(0, 1, 0);
+      var_2.rightpoint = var_2 getpointinbounds(0, -1, 0);
+      var_2.toppoint = var_2 getpointinbounds(0, 0, 0.25);
+      var_2.halflength = vectordot(var_2.forward, var_2.frontpoint - var_2.backpoint) / 2;
+      var_2.halfwidth = vectordot(var_2.right, var_2.rightpoint - var_2.leftpoint) / 2;
+      var_2.players = [];
+      var_2.touchtimes = [];
+      var_2.rocktimes = [];
+      var_2.rockstrings = [];
     }
 
     thread rockable_car_debug();
@@ -85,10 +85,10 @@ function rockable_car_watch_damage() {
 
   for(;;) {
     self.health = 99999;
-    self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13);
-    self.rockable_last_point = var3;
-    self.rockable_last_meansofdeath = var4;
-    print3d_debug(self.origin + (0, 0, 0), "Damage by: " + var4 + " " + var0, (1, 1, 1), 1, 0.25, 100);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
+    self.rockable_last_point = var_3;
+    self.rockable_last_meansofdeath = var_4;
+    print3d_debug(self.origin + (0, 0, 0), "Damage by: " + var_4 + " " + var_0, (1, 1, 1), 1, 0.25, 100);
   }
 }
 
@@ -98,19 +98,19 @@ function rockable_car_watch_death() {
   self notify("rocked");
 
   if(isexplosivedamagemod(self.rockable_last_meansofdeath)) {
-    var0 = self.rockable_last_point - self.origin;
-    var1 = scripts\engine\utility::ter_op(vectordot(self.forward, var0) > 0, "front", "back");
-    var2 = scripts\engine\utility::ter_op(vectordot(self.right, var0) > 0, "right", "left");
-    self setscriptablepartstate("Anim_Explosion", var1 + "_" + var2, 0);
+    var_0 = self.rockable_last_point - self.origin;
+    var_1 = scripts\engine\utility::ter_op(vectordot(self.forward, var_0) > 0, "front", "back");
+    var_2 = scripts\engine\utility::ter_op(vectordot(self.right, var_0) > 0, "right", "left");
+    self setscriptablepartstate("Anim_Explosion", var_1 + "_" + var_2, 0);
     print3d_debug(self.origin + (0, 0, -5), "Death by: " + self.rockable_last_meansofdeath, (1, 0, 0), 1, 0.25, 1000);
-    print3d_debug(self.origin + (0, 0, 12), "Animation: " + var1 + "_" + var2, (1, 1, 1), 1, 0.25, 1000);
+    print3d_debug(self.origin + (0, 0, 12), "Animation: " + var_1 + "_" + var_2, (1, 1, 1), 1, 0.25, 1000);
   } else {
-    var3 = ["front_left", "front_right", "back_left", "back_right"];
-    var4 = var3[randomint(var3.size - 1)];
-    self setscriptablepartstate("Anim_Explosion", var4, 0);
+    var_3 = ["front_left", "front_right", "back_left", "back_right"];
+    var_4 = var_3[randomint(var_3.size - 1)];
+    self setscriptablepartstate("Anim_Explosion", var_4, 0);
     print3d_debug(self.origin + (0, 0, -5), "Death by: " + self.rockable_last_meansofdeath, (1, 0, 0), 1, 0.25, 1000);
     print3d_debug(self.origin + (0, 0, 5), "scripted explosion", (1, 0, 0), 1, 0.5, 500);
-    print3d_debug(self.origin + (0, 0, 10), "Animation: " + var4, (1, 1, 1), 1, 0.25, 1000);
+    print3d_debug(self.origin + (0, 0, 10), "Animation: " + var_4, (1, 1, 1), 1, 0.25, 1000);
   }
 
   self waittillmatch("scriptableNotification", "anim_explosion_complete");
@@ -122,14 +122,14 @@ function rockable_car_watch_dead() {
 
   for(;;) {
     self.health = 99999;
-    self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
 
-    if(isexplosivedamagemod(var4) && var0 > 10) {
+    if(isexplosivedamagemod(var_4) && var_0 > 10) {
       self setscriptablepartstate("Anim_Explosion", "rock", 1);
     }
 
     print3d_debug(self.origin + (0, 0, 7), "Death animation: rock", (1, 1, 1), 1, 0.25, 1000);
-    print3d_debug(self.origin + (0, 0, 0), "Death damage by: " + var4 + " " + var0, (1, 1, 1), 1, 0.25, 150);
+    print3d_debug(self.origin + (0, 0, 0), "Death damage by: " + var_4 + " " + var_0, (1, 1, 1), 1, 0.25, 150);
   }
 }
 
@@ -150,18 +150,18 @@ function rockable_car_debug() {
 function alarm_cars_init() {
   level.alarmcars = spawnStruct();
   level.alarmcars.cars = level.rockablecars.cars;
-  var0 = 0;
+  var_0 = 0;
 
-  foreach(var2 in level.alarmcars.cars) {
-    if(var0 > 19) {
-      var0 = 0;
+  foreach(var_2 in level.alarmcars.cars) {
+    if(var_0 > 19) {
+      var_0 = 0;
       waitframe();
     }
 
-    var0 += 1;
+    var_0 += 1;
 
-    if(!isDefined(var2.script_noteworthy) || var2.script_noteworthy != "car_alarm" || !isDefined(var2 getscriptablehaspart("Car_Alarm"))) {
-      level.alarmcars.cars = scripts\engine\utility::array_remove(level.alarmcars.cars, var2);
+    if(!isDefined(var_2.script_noteworthy) || var_2.script_noteworthy != "car_alarm" || !isDefined(var_2 getscriptablehaspart("Car_Alarm"))) {
+      level.alarmcars.cars = scripts\engine\utility::array_remove(level.alarmcars.cars, var_2);
       continue;
     }
 
@@ -179,9 +179,9 @@ function alarm_car_watch_damage() {
 
   for(;;) {
     self.health = 99999;
-    self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13);
-    print3d_debug(self.origin + (0, 0, -7), "Alarm damage by: " + var4 + " " + var0, (1, 1, 1), 1, 0.25, 150);
-    self.alarmdamage += var0;
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
+    print3d_debug(self.origin + (0, 0, -7), "Alarm damage by: " + var_4 + " " + var_0, (1, 1, 1), 1, 0.25, 150);
+    self.alarmdamage += var_0;
     waitframe();
 
     if(self.alarmdamage > 200) {
@@ -206,7 +206,7 @@ function alarm_car_debug() {
   }
 }
 
-function print3d_debug(var0, var1, var2, var3, var4, var5) {
+function print3d_debug(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(getdvarint("scr_rockable_vehicle_debug")) {
     return;
   }

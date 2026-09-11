@@ -41,10 +41,10 @@ function main() {
   setsaveddvar("MRMLLTQQN", 64);
   setsaveddvar("TLMMOPMSK", 1);
   setsaveddvar("OKORSKLQRT", 1);
-  var0 = 850;
-  setsaveddvar("LRTTMPMQOO", var0);
-  setsaveddvar("NTQKQKNRPQ", var0);
-  setsaveddvar("RKTKKSMM", var0);
+  var_0 = 850;
+  setsaveddvar("LRTTMPMQOO", var_0);
+  setsaveddvar("NTQKQKNRPQ", var_0);
+  setsaveddvar("RKTKKSMM", var_0);
   setsaveddvar("NORSNTKLQ", 150);
   setsaveddvar("TQNRLLORQ", 5);
   setsaveddvar("LSRNSSQNN", 1);
@@ -71,8 +71,8 @@ function main() {
   level.hassuppressedweapons = 1;
   level.fuseboxes = getEntArray("fusebox", "script_noteworthy");
 
-  foreach(var2 in level.fuseboxes) {
-    var2 scripts\sp\maps\estate\estate_util::fusebox_init();
+  foreach(var_2 in level.fuseboxes) {
+    var_2 scripts\sp\maps\estate\estate_util::fusebox_init();
   }
 
   level.tut_fusebox = getEnt("light_tut_fusebox", "script_noteworthy");
@@ -90,10 +90,10 @@ function estate_intro() {
   setomnvar("ui_hide_dpad_hud", 1);
   level.player scripts\sp\utility::allow_cg_drawcrosshair(0);
   setomnvar("ui_hide_weapon_info", 1);
-  var0 = 2;
-  scripts\engine\utility::delaythread(var0, &scripts\sp\introscreen::introscreen, 1);
+  var_0 = 2;
+  scripts\engine\utility::delaythread(var_0, &scripts\sp\introscreen::introscreen, 1);
   level.player scripts\engine\utility::delaycall(0.2, &clearclienttriggeraudiozone, 1.2);
-  wait var0 + 1.95;
+  wait var_0 + 1.95;
   level.player scripts\sp\utility::allow_cg_drawcrosshair(1);
   setomnvar("ui_hide_weapon_info", 0);
   scripts\engine\utility::noself_delaycall(6, &setomnvar, "ui_hide_dpad_hud", 0);
@@ -152,15 +152,15 @@ function loadout() {
 }
 
 function player_health_difficulty_thread() {
-  var0 = -1;
+  var_0 = -1;
 
   while(!scripts\engine\utility::flag("grounds_cleared")) {
-    var1 = scripts\sp\utility::get_adjusted_difficulty();
+    var_1 = scripts\sp\utility::get_adjusted_difficulty();
 
-    if(var0 != var1) {
-      var0 = var1;
+    if(var_0 != var_1) {
+      var_0 = var_1;
 
-      if(var0 < 1) {
+      if(var_0 < 1) {
         level.player scripts\sp\player::set_player_max_health(level.player.maxhealth);
         level.player scripts\sp\player::scale_player_death_shield_duration(1);
       } else {
@@ -201,25 +201,25 @@ function fakeactor_spawn() {}
 function interiors_init() {
   level.interior_volumes = [];
 
-  foreach(var1 in getEntArray("interior_volume", "targetname")) {
-    level.interior_volumes[var1.script_noteworthy] = var1;
+  foreach(var_1 in getEntArray("interior_volume", "targetname")) {
+    level.interior_volumes[var_1.script_noteworthy] = var_1;
   }
 
   level.player thread scripts\sp\maps\estate\estate_util::indoor_monitor();
 }
 
 function store_vehicle_nodes_ground_pos() {
-  var0 = getallvehiclenodes();
-  var1 = 1;
-  var2 = 0;
+  var_0 = getallvehiclenodes();
+  var_1 = 1;
+  var_2 = 0;
 
-  foreach(var4 in var0) {
-    var4.ground_pos = scripts\common\utility::groundpos(var4.origin);
-    var2++;
+  foreach(var_4 in var_0) {
+    var_4.ground_pos = scripts\common\utility::groundpos(var_4.origin);
+    var_2++;
 
-    if(var2 >= var1) {
+    if(var_2 >= var_1) {
       waitframe();
-      var2 = 0;
+      var_2 = 0;
     }
   }
 }
@@ -255,51 +255,51 @@ function thread_audio_doorpropagation_init() {
 
 function audio_door_sound_clip_init() {
   scripts\engine\utility::flag_wait("interactive_doors_ready");
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, "pool_door_1");
 }
 
-function audio_door_clip_thread(var0) {
-  var1 = scripts\sp\door::get_interactive_door(var0);
-  var2 = getEnt(var0 + "_soundclip", "targetname");
-  var3 = getEnt(var0 + "_propportal", "targetname");
-  var3 enableaudioportal(0);
-  thread audio_door_interaction_wait(var1, var2);
+function audio_door_clip_thread(var_0) {
+  var_1 = scripts\sp\door::get_interactive_door(var_0);
+  var_2 = getEnt(var_0 + "_soundclip", "targetname");
+  var_3 = getEnt(var_0 + "_propportal", "targetname");
+  var_3 enableaudioportal(0);
+  thread audio_door_interaction_wait(var_1, var_2);
 }
 
-function audio_door_interaction_wait(var0, var1) {
+function audio_door_interaction_wait(var_0, var_1) {
   while(!self.open_completely) {
-    var2 = waittill_door_open_or_notifies("ajar", "bashed");
-    audio_door_set_state(1, var0, var1);
+    var_2 = waittill_door_open_or_notifies("ajar", "bashed");
+    audio_door_set_state(1, var_0, var_1);
 
-    if(istrue(var2)) {
+    if(istrue(var_2)) {
       return;
     }
 
-    var2 = waittill_door_open_or_notifies("reset_door", "first_interact");
+    var_2 = waittill_door_open_or_notifies("reset_door", "first_interact");
 
-    if(istrue(var2)) {
+    if(istrue(var_2)) {
       return;
     }
 
-    audio_door_set_state(0, var0, var1);
+    audio_door_set_state(0, var_0, var_1);
   }
 }
 
-function audio_door_set_state(var0, var1, var2) {
-  var3 = 1;
+function audio_door_set_state(var_0, var_1, var_2) {
+  var_3 = 1;
 
-  if(!var0) {
-    var3 = -1;
+  if(!var_0) {
+    var_3 = -1;
   }
 
-  var1 movey(var3 * 128, 0.05);
-  var2 enableaudioportal(var0);
+  var_1 movey(var_3 * 128, 0.05);
+  var_2 enableaudioportal(var_0);
 }
 
-function waittill_door_open_or_notifies(var0, var1) {
-  self endon(var0);
-  self endon(var1);
+function waittill_door_open_or_notifies(var_0, var_1) {
+  self endon(var_0);
+  self endon(var_1);
   self waittill("open_completely");
   return true;
 }

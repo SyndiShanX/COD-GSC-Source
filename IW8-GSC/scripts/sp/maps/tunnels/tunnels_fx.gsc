@@ -161,7 +161,7 @@ function main() {
 
 function footsteps() {
   wait 1.1;
-  var0 = "soldier";
-  scripts\anim\utility::setfootstepeffect(var0, "wood_solid", loadfx("vfx/iw8/char/footsteps/vfx_footstep_wood.vfx"));
-  scripts\anim\utility::setfootstepeffectsmall(var0, "wood_solid", loadfx("vfx/iw8/char/footsteps/vfx_footstep_wood.vfx"));
+  var_0 = "soldier";
+  scripts\anim\utility::setfootstepeffect(var_0, "wood_solid", loadfx("vfx/iw8/char/footsteps/vfx_footstep_wood.vfx"));
+  scripts\anim\utility::setfootstepeffectsmall(var_0, "wood_solid", loadfx("vfx/iw8/char/footsteps/vfx_footstep_wood.vfx"));
 }

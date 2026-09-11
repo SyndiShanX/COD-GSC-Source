@@ -3,9 +3,9 @@
  * Script: scripts\asm\shared\utility.gsc
 ***********************************************/
 
-function set_default_aim_limits(var0) {
-  if(isDefined(var0)) {
-    self setdefaultaimlimits(var0);
+function set_default_aim_limits(var_0) {
+  if(isDefined(var_0)) {
+    self setdefaultaimlimits(var_0);
   } else {
     self setdefaultaimlimits();
   }
@@ -38,136 +38,136 @@ function set_aim_and_turn_limits() {
   self.pitchturnthreshold = self.defaultpitchturnthreshold;
 }
 
-function chooseanimshoot(var0, var1, var2) {
-  var3 = var2;
-  var4 = self._blackboard.shootstate + "_" + var3;
+function chooseanimshoot(var_0, var_1, var_2) {
+  var_3 = var_2;
+  var_4 = self._blackboard.shootstate + "_" + var_3;
 
-  if(isDefined(self._blackboard.shootstate) && scripts\asm\asm::asm_hasalias(var1, var4)) {
-    return scripts\asm\asm::asm_lookupanimfromalias(var1, var4);
+  if(isDefined(self._blackboard.shootstate) && scripts\asm\asm::asm_hasalias(var_1, var_4)) {
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_4);
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, var2);
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_2);
 }
 
-function choosedemeanoranimwithoverride(var0, var1, var2) {
-  var3 = scripts\asm\asm::asm_getdemeanor();
+function choosedemeanoranimwithoverride(var_0, var_1, var_2) {
+  var_3 = scripts\asm\asm::asm_getdemeanor();
 
-  if(scripts\asm\asm::asm_hasdemeanoranimoverride(var3, var2)) {
-    var4 = scripts\asm\asm::asm_getdemeanoranimoverride(var3, var2);
+  if(scripts\asm\asm::asm_hasdemeanoranimoverride(var_3, var_2)) {
+    var_4 = scripts\asm\asm::asm_getdemeanoranimoverride(var_3, var_2);
 
-    if(isarray(var4)) {
-      return var4[randomint(var4.size)];
+    if(isarray(var_4)) {
+      return var_4[randomint(var_4.size)];
     }
 
-    return var4;
+    return var_4;
   }
 
-  if(!scripts\asm\asm::asm_hasalias(var2, var4)) {
-    return scripts\asm\asm::asm_lookupanimfromalias(var2, "default");
+  if(!scripts\asm\asm::asm_hasalias(var_2, var_4)) {
+    return scripts\asm\asm::asm_lookupanimfromalias(var_2, "default");
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(var2, var4);
+  return scripts\asm\asm::asm_lookupanimfromalias(var_2, var_4);
 }
 
-function choosedemeanoranimwithoverridevariants(var0, var1, var2) {
-  var3 = scripts\asm\asm::asm_getdemeanor();
+function choosedemeanoranimwithoverridevariants(var_0, var_1, var_2) {
+  var_3 = scripts\asm\asm::asm_getdemeanor();
 
-  if(scripts\asm\asm::asm_hasdemeanoranimoverride(var3, var2)) {
-    var4 = scripts\asm\asm::asm_getdemeanoranimoverride(var3, var2);
+  if(scripts\asm\asm::asm_hasdemeanoranimoverride(var_3, var_2)) {
+    var_4 = scripts\asm\asm::asm_getdemeanoranimoverride(var_3, var_2);
 
-    if(isarray(var4)) {
-      return var4[randomint(var4.size)];
+    if(isarray(var_4)) {
+      return var_4[randomint(var_4.size)];
     }
 
-    return var4;
+    return var_4;
   }
 
-  if(!scripts\asm\asm::asm_hasalias(var2, var4)) {
-    var5 = [];
-    GscBinSkip0(0x2e, 0, scripts\asm\asm::asm_lookupanimfromalias(var2, "trans_to_one_hand_run"));
+  if(!scripts\asm\asm::asm_hasalias(var_2, var_4)) {
+    var_5 = [];
+    GscBinSkip0(0x2e, 0, scripts\asm\asm::asm_lookupanimfromalias(var_2, "trans_to_one_hand_run"));
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(var3, var5);
+  return scripts\asm\asm::asm_lookupanimfromalias(var_3, var_5);
 }
 
-function chooseanim_exposedreload(var0, var1, var2) {
-  var2 = "";
+function chooseanim_exposedreload(var_0, var_1, var_2) {
+  var_2 = "";
 
   if(isDefined(self.node) && self.node.type == "Cover Stand") {
     if(!self.node scripts\engine\utility::isvalidpeekoutdir("over")) {
-      var2 += "_high";
+      var_2 += "_high";
     }
   }
 
-  return chooseanim_weaponclassprepended(var0, var1, var2);
+  return chooseanim_weaponclassprepended(var_0, var_1, var_2);
 }
 
-function chooseanim_weaponswitch(var0, var1, var2) {
-  if(weaponclass(self.weapon) == "rocketlauncher" && scripts\asm\asm::asm_hasalias(var1, "drop_rpg")) {
-    return scripts\asm\asm::asm_lookupanimfromalias(var1, "drop_rpg");
+function chooseanim_weaponswitch(var_0, var_1, var_2) {
+  if(weaponclass(self.weapon) == "rocketlauncher" && scripts\asm\asm::asm_hasalias(var_1, "drop_rpg")) {
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, "drop_rpg");
   }
 
-  var3 = scripts\asm\asm_bb::bb_getrequestedweapon();
+  var_3 = scripts\asm\asm_bb::bb_getrequestedweapon();
 
-  if(!scripts\asm\asm::asm_hasalias(var1, var3)) {
-    var3 = "rifle";
+  if(!scripts\asm\asm::asm_hasalias(var_1, var_3)) {
+    var_3 = "rifle";
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, var3);
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
 }
 
-function isspeedwithincqbrange(var0, var1) {
-  if(!getanimspeedthreshold(var0, "fast") || !getanimspeedthreshold(var0, "jog")) {
+function isspeedwithincqbrange(var_0, var_1) {
+  if(!getanimspeedthreshold(var_0, "fast") || !getanimspeedthreshold(var_0, "jog")) {
     return false;
   }
 
-  return var1 < getcoveranglelimits(var0, "fast", "jog", 0.1);
+  return var_1 < getcoveranglelimits(var_0, "fast", "jog", 0.1);
 }
 
-function isspeedwithinsprintrange(var0, var1) {
-  return var1 > getcoveranglelimits(var0, "run", "sprint", 0.1);
+function isspeedwithinsprintrange(var_0, var_1) {
+  return var_1 > getcoveranglelimits(var_0, "run", "sprint", 0.1);
 }
 
-function isspeedwithincombatrange(var0, var1) {
-  if(getanimspeedthreshold(var0, "fast") && getanimspeedthreshold(var0, "jog") && var1 < getcoveranglelimits(var0, "fast", "jog", 0.9)) {
+function isspeedwithincombatrange(var_0, var_1) {
+  if(getanimspeedthreshold(var_0, "fast") && getanimspeedthreshold(var_0, "jog") && var_1 < getcoveranglelimits(var_0, "fast", "jog", 0.9)) {
     return false;
   }
 
-  if(getanimspeedthreshold(var0, "run") && getanimspeedthreshold(var0, "sprint") && var1 > getcoveranglelimits(var0, "run", "sprint", 0.1)) {
-    return false;
-  }
-
-  return true;
-}
-
-function isspeedwithincombatrangeextended(var0, var1) {
-  if(getanimspeedthreshold(var0, "fast") && getanimspeedthreshold(var0, "jog") && var1 < getcoveranglelimits(var0, "fast", "jog", 0.8)) {
-    return false;
-  }
-
-  if(getanimspeedthreshold(var0, "run") && getanimspeedthreshold(var0, "sprint") && var1 > getcoveranglelimits(var0, "run", "sprint", 0.3)) {
+  if(getanimspeedthreshold(var_0, "run") && getanimspeedthreshold(var_0, "sprint") && var_1 > getcoveranglelimits(var_0, "run", "sprint", 0.1)) {
     return false;
   }
 
   return true;
 }
 
-function movetypeisnotcasual(var0, var1, var2, var3) {
-  var4 = scripts\asm\asm::asm_getdemeanor();
-  return var4 != "casual" && var4 != "casual_gun";
+function isspeedwithincombatrangeextended(var_0, var_1) {
+  if(getanimspeedthreshold(var_0, "fast") && getanimspeedthreshold(var_0, "jog") && var_1 < getcoveranglelimits(var_0, "fast", "jog", 0.8)) {
+    return false;
+  }
+
+  if(getanimspeedthreshold(var_0, "run") && getanimspeedthreshold(var_0, "sprint") && var_1 > getcoveranglelimits(var_0, "run", "sprint", 0.3)) {
+    return false;
+  }
+
+  return true;
 }
 
-function getnodeforwardyawnodetypelookupoverride(var0, var1) {
-  if(isDefined(var0)) {
-    switch (var0) {
+function movetypeisnotcasual(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\asm\asm::asm_getdemeanor();
+  return var_4 != "casual" && var_4 != "casual_gun";
+}
+
+function getnodeforwardyawnodetypelookupoverride(var_0, var_1) {
+  if(isDefined(var_0)) {
+    switch (var_0) {
       case "Cover Left":
-        if(var1 == "crouch") {
+        if(var_1 == "crouch") {
           return "Cover Left Crouch";
         }
 
         break;
       case "Cover Right":
-        if(var1 == "crouch") {
+        if(var_1 == "crouch") {
           return "Cover Right Crouch";
         }
 
@@ -183,45 +183,45 @@ function getnodeforwardyawnodetypelookupoverride(var0, var1) {
   return undefined;
 }
 
-function overridecovercrouchnodetype(var0) {
-  if(var0.type == "Cover Crouch" && isDefined(self._blackboard.croucharrivaltype)) {
+function overridecovercrouchnodetype(var_0) {
+  if(var_0.type == "Cover Crouch" && isDefined(self._blackboard.croucharrivaltype)) {
     return self._blackboard.croucharrivaltype;
   }
 
-  return var0.type;
+  return var_0.type;
 }
 
-function getnodeoffsetposeoverride(var0, var1, var2) {
-  var3 = self.currentpose;
+function getnodeoffsetposeoverride(var_0, var_1, var_2) {
+  var_3 = self.currentpose;
 
-  if(isDefined(var2)) {
-    var3 = var2;
-  } else if(isnode(var0) && !var0 doesnodeallowstance(var3)) {
-    var3 = var0 gethighestnodestance();
+  if(isDefined(var_2)) {
+    var_3 = var_2;
+  } else if(isnode(var_0) && !var_0 doesnodeallowstance(var_3)) {
+    var_3 = var_0 gethighestnodestance();
   }
 
-  var4 = getnodeforwardyawnodetypelookupoverride(var1, var3);
-  return var4;
+  var_4 = getnodeforwardyawnodetypelookupoverride(var_1, var_3);
+  return var_4;
 }
 
-function getnodeyawfromoffsettable(var0, var1, var2) {
-  var3 = self.currentpose;
+function getnodeyawfromoffsettable(var_0, var_1, var_2) {
+  var_3 = self.currentpose;
 
-  if(isDefined(var2)) {
-    var3 = var2;
-  } else if(isnode(var1) && !var1 doesnodeallowstance(var3)) {
-    var3 = var1 gethighestnodestance();
+  if(isDefined(var_2)) {
+    var_3 = var_2;
+  } else if(isnode(var_1) && !var_1 doesnodeallowstance(var_3)) {
+    var_3 = var_1 gethighestnodestance();
   }
 
-  var4 = overridecovercrouchnodetype(var1);
-  var5 = getnodeforwardyawnodetypelookupoverride(var4, var3);
+  var_4 = overridecovercrouchnodetype(var_1);
+  var_5 = getnodeforwardyawnodetypelookupoverride(var_4, var_3);
 
-  if(isDefined(var5) && isDefined(var0[var5])) {
-    return var0[var5];
+  if(isDefined(var_5) && isDefined(var_0[var_5])) {
+    return var_0[var_5];
   }
 
-  if(isDefined(var0[var4])) {
-    return var0[var4];
+  if(isDefined(var_0[var_4])) {
+    return var_0[var_4];
   }
 
   return undefined;
@@ -232,9 +232,9 @@ function allowlmgarrival() {
     return false;
   }
 
-  var0 = weaponclass(self.weapon) == "mg";
+  var_0 = weaponclass(self.weapon) == "mg";
 
-  if(var0) {
+  if(var_0) {
     if(!isDefined(self.node) || self.node isnodelmgmountable()) {
       return true;
     }
@@ -249,8 +249,8 @@ function allowlmgarrival() {
   return false;
 }
 
-function getnodeyawoffset(var0, var1, var2) {
-  if(isstruct(var0) || !isDefined(var0.type)) {
+function getnodeyawoffset(var_0, var_1, var_2) {
+  if(isstruct(var_0) || !isDefined(var_0.type)) {
     return 0;
   }
 
@@ -258,81 +258,81 @@ function getnodeyawoffset(var0, var1, var2) {
     return 0;
   }
 
-  var3 = overridecovercrouchnodetype(var0);
-  var4 = self getnodehideyaw(var0, var3, var1, var2);
-  return var4;
+  var_3 = overridecovercrouchnodetype(var_0);
+  var_4 = self getnodehideyaw(var_0, var_3, var_1, var_2);
+  return var_4;
 }
 
-function getnodeforwardyaw(var0, var1, var2) {
-  if(!isDefined(var2)) {
-    var2 = 1;
+function getnodeforwardyaw(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
+    var_2 = 1;
   }
 
-  var3 = getnodeyawoffset(var0, var1, var2);
-  return var0.angles[1] + var3;
+  var_3 = getnodeyawoffset(var_0, var_1, var_2);
+  return var_0.angles[1] + var_3;
 }
 
-function getnodeforwardangles(var0, var1) {
-  var2 = getnodeyawoffset(var0, var1, 1);
-  return combineangles(var0.angles, (0, var2, 0));
+function getnodeforwardangles(var_0, var_1) {
+  var_2 = getnodeyawoffset(var_0, var_1, 1);
+  return combineangles(var_0.angles, (0, var_2, 0));
 }
 
-function getnodeleanyaw(var0, var1, var2) {
-  if(!isDefined(var1)) {
-    var1 = var0.type;
+function getnodeleanyaw(var_0, var_1, var_2) {
+  if(!isDefined(var_1)) {
+    var_1 = var_0.type;
   }
 
-  var3 = getnodeoffsetposeoverride(var0, var1, var2);
+  var_3 = getnodeoffsetposeoverride(var_0, var_1, var_2);
 
-  if(isDefined(var3)) {
-    return self getnodeleanaimyawoffset(var3);
+  if(isDefined(var_3)) {
+    return self getnodeleanaimyawoffset(var_3);
   }
 
-  return self getnodeleanaimyawoffset(var1);
+  return self getnodeleanaimyawoffset(var_1);
 }
 
-function getnodeaimpitchoffset(var0, var1, var2) {
-  var3 = undefined;
+function getnodeaimpitchoffset(var_0, var_1, var_2) {
+  var_3 = undefined;
 
-  if(var2 == "exposed") {
-    var3 = anim.nodeexposedpitches[var0];
-  } else if(var2 == "lean" || var2 == "leanover") {
-    var3 = anim.nodeleanpitches[var0];
-  } else if(var2 == "overlean") {
-    var3 = anim.nodeoverleanpitches[var0];
+  if(var_2 == "exposed") {
+    var_3 = anim.nodeexposedpitches[var_0];
+  } else if(var_2 == "lean" || var_2 == "leanover") {
+    var_3 = anim.nodeleanpitches[var_0];
+  } else if(var_2 == "overlean") {
+    var_3 = anim.nodeoverleanpitches[var_0];
   }
 
-  if(isDefined(var3)) {
-    var4 = getnodeyawfromoffsettable(var3, var1, undefined);
+  if(isDefined(var_3)) {
+    var_4 = getnodeyawfromoffsettable(var_3, var_1, undefined);
 
-    if(isDefined(var4)) {
-      return var4;
+    if(isDefined(var_4)) {
+      return var_4;
     }
   }
 
   return 0;
 }
 
-function getnodeaimyawoffset(var0, var1, var2) {
-  if(var2 == "lean") {
-    var3 = overridecovercrouchnodetype(var1);
-    return self getnodeleanaimyaw(var1, var3);
+function getnodeaimyawoffset(var_0, var_1, var_2) {
+  if(var_2 == "lean") {
+    var_3 = overridecovercrouchnodetype(var_1);
+    return self getnodeleanaimyaw(var_1, var_3);
   }
 
   return 0;
 }
 
-function nodeiscoverstand3dtype(var0) {
-  if(var0.type == "Cover Stand 3D") {
-    return !nodeiscoverexposed3dtype(var0);
+function nodeiscoverstand3dtype(var_0) {
+  if(var_0.type == "Cover Stand 3D") {
+    return !nodeiscoverexposed3dtype(var_0);
   }
 
   return false;
 }
 
-function nodeiscoverexposed3dtype(var0) {
-  if(var0.type == "Cover Stand 3D") {
-    if(isDefined(var0.script_parameters) && var0.script_parameters == "exposed") {
+function nodeiscoverexposed3dtype(var_0) {
+  if(var_0.type == "Cover Stand 3D") {
+    if(isDefined(var_0.script_parameters) && var_0.script_parameters == "exposed") {
       return true;
     }
   }
@@ -340,72 +340,72 @@ function nodeiscoverexposed3dtype(var0) {
   return false;
 }
 
-function getnodetypename(var0) {
-  if(isDefined(var0)) {
-    if(nodeiscoverexposed3dtype(var0)) {
+function getnodetypename(var_0) {
+  if(isDefined(var_0)) {
+    if(nodeiscoverexposed3dtype(var_0)) {
       return "Cover Exposed 3D";
     } else {
-      return var0.type;
+      return var_0.type;
     }
   }
 
   return "undefined";
 }
 
-function choosestrongdamagedeath(var0, var1, var2) {
-  var3 = undefined;
+function choosestrongdamagedeath(var_0, var_1, var_2) {
+  var_3 = undefined;
 
   if(abs(self.damageyaw) > 150) {
     if(scripts\engine\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower", "left_foot", "right_foot")) {
-      var3 = "legs";
+      var_3 = "legs";
     } else if(self.damagelocation == "torso_lower") {
-      var3 = "torso_lower";
+      var_3 = "torso_lower";
     } else {
-      var3 = "default";
+      var_3 = "default";
     }
   } else if(self.damageyaw < 0) {
-    var3 = "right";
+    var_3 = "right";
   } else {
-    var3 = "left";
+    var_3 = "left";
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, var3);
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
 }
 
 function isatcovernode() {
   return isDefined(scripts\asm\asm_bb::bb_getcovernode());
 }
 
-function setuseanimgoalweight(var0, var1) {
-  self endon(var0 + "_finished");
+function setuseanimgoalweight(var_0, var_1) {
+  self endon(var_0 + "_finished");
   self.useanimgoalweight = 1;
-  thread setuseanimgoalweight_wait(var0);
+  thread setuseanimgoalweight_wait(var_0);
 
-  if(var1 > 0) {
-    wait var1;
+  if(var_1 > 0) {
+    wait var_1;
   }
 
   self.useanimgoalweight = 0;
   self notify("StopUseAnimGoalWeight");
 }
 
-function setuseanimgoalweight_wait(var0) {
+function setuseanimgoalweight_wait(var_0) {
   self notify("StopUseAnimGoalWeight");
   self endon("StopUseAnimGoalWeight");
   self endon("death");
   self endon("entitydeleted");
-  self waittill(var0 + "_finished");
+  self waittill(var_0 + "_finished");
   self.useanimgoalweight = 0;
 }
 
-function shouldleaveanimScripted(var0, var1, var2, var3) {
+function shouldleaveanimScripted(var_0, var_1, var_2, var_3) {
   if(scripts\asm\asm_bb::bb_isanimScripted()) {
     return false;
   }
 
-  var4 = var3;
+  var_4 = var_3;
 
-  if(var4) {
+  if(var_4) {
     if(self.a.movement == "stop") {
       return false;
     }
@@ -420,10 +420,10 @@ function shouldleaveanimScripted(var0, var1, var2, var3) {
   return true;
 }
 
-function scriptedcoverposerequestis(var0, var1, var2, var3) {
-  var4 = var3;
+function scriptedcoverposerequestis(var_0, var_1, var_2, var_3) {
+  var_4 = var_3;
 
-  if(self.a.coverpose_request == var4) {
+  if(self.a.coverpose_request == var_4) {
     self.a.coverpose_request = undefined;
     return true;
   }
@@ -431,61 +431,61 @@ function scriptedcoverposerequestis(var0, var1, var2, var3) {
   return false;
 }
 
-function scriptedcoverposerequestisDefined(var0, var1, var2, var3) {
+function scriptedcoverposerequestisDefined(var_0, var_1, var_2, var_3) {
   return isDefined(self.a.coverpose_request);
 }
 
-function animscriptedaction(var0, var1, var2) {
-  self endon(var1 + "_finished");
+function animscriptedaction(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
   self.a.movement = "run";
   self.gunposeoverride_internal = "disable";
-  var3 = scripts\asm\asm::asm_lookupanimfromalias(var1, "blank");
-  self aisetanim(var1, var3);
-  scripts\asm\asm::asm_donotetracks(var0, var1, scripts\asm\asm::asm_getnotehandler(var0, var1));
+  var_3 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "blank");
+  self aisetanim(var_1, var_3);
+  scripts\asm\asm::asm_donotetracks(var_0, var_1, scripts\asm\asm::asm_getnotehandler(var_0, var_1));
 }
 
-function randomizepassthroughchildren(var0, var1, var2, var3) {
-  var4 = anim.asm[var0].states[var2];
+function randomizepassthroughchildren(var_0, var_1, var_2, var_3) {
+  var_4 = anim.asm[var_0].states[var_2];
 
-  if(isDefined(var4.transitions)) {
-    if(var4.transitions.size == 2) {
+  if(isDefined(var_4.transitions)) {
+    if(var_4.transitions.size == 2) {
       if(scripts\engine\utility::cointoss()) {
-        var5 = var4.transitions[0];
-        var4.transitions[0] = var4.transitions[1];
-        var4.transitions[1] = var5;
+        var_5 = var_4.transitions[0];
+        var_4.transitions[0] = var_4.transitions[1];
+        var_4.transitions[1] = var_5;
       }
     } else {
-      var4.transitions = scripts\engine\utility::array_randomize(var4.transitions);
+      var_4.transitions = scripts\engine\utility::array_randomize(var_4.transitions);
     }
   }
 
   return true;
 }
 
-function blockedbywall(var0) {
-  if(!isDefined(var0)) {
-    var0 = 1;
+function blockedbywall(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 1;
   }
 
   if(isDefined(self._blackboard)) {
-    var1 = gettime();
+    var_1 = gettime();
 
     if(isDefined(self._blackboard.gunblockedbywalltime)) {
-      if(var1 - self._blackboard.gunblockedbywalltime < 300) {
+      if(var_1 - self._blackboard.gunblockedbywalltime < 300) {
         return true;
       }
 
       self._blackboard.gunblockedbywalltime = undefined;
     }
 
-    if(!var0 && isDefined(self._blackboard.lastblockedbywallchecktime) && var1 - self._blackboard.lastblockedbywallchecktime < 200) {
+    if(!var_0 && isDefined(self._blackboard.lastblockedbywallchecktime) && var_1 - self._blackboard.lastblockedbywallchecktime < 200) {
       return false;
     }
 
-    self._blackboard.lastblockedbywallchecktime = var1;
+    self._blackboard.lastblockedbywallchecktime = var_1;
 
     if(self isgunblockedbywall()) {
-      self._blackboard.gunblockedbywalltime = var1;
+      self._blackboard.gunblockedbywalltime = var_1;
 
       if(isDefined(scripts\asm\asm_bb::bb_getcovernode()) && !isDefined(self._blackboard.initialcovergunblockedbywalltime) && scripts\asm\asm_bb::bb_getrequestedcoverstate() == "exposed") {
         self._blackboard.initialcovergunblockedbywalltime = self._blackboard.gunblockedbywalltime;
@@ -500,28 +500,28 @@ function blockedbywall(var0) {
   return false;
 }
 
-function nodeshouldfaceangles(var0) {
-  if(!isDefined(var0)) {
+function nodeshouldfaceangles(var_0) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
-  if(isDefined(var0.angles)) {
+  if(isDefined(var_0.angles)) {
     return true;
   }
 
-  if(isstruct(var0)) {
+  if(isstruct(var_0)) {
     return false;
   }
 
-  return isDefined(var0.type) && var0.type != "Path" && !scripts\engine\utility::isnodeexposed3d(var0);
+  return isDefined(var_0.type) && var_0.type != "Path" && !scripts\engine\utility::isnodeexposed3d(var_0);
 }
 
-function choosecrouchorstand(var0, var1) {
-  return int(var1.origin[0] + var1.origin[1] + var1.origin[2] + var0 getentitynumber()) % 2;
+function choosecrouchorstand(var_0, var_1) {
+  return int(var_1.origin[0] + var_1.origin[1] + var_1.origin[2] + var_0 getentitynumber()) % 2;
 }
 
-function getwincost(var0, var1) {
-  return int(abs(var1[0] + var1[1] + var1[2] + var0 getentitynumber())) % 2;
+function getwincost(var_0, var_1) {
+  return int(abs(var_1[0] + var_1[1] + var_1[2] + var_0 getentitynumber())) % 2;
 }
 
 function getarrivalnode() {
@@ -548,140 +548,140 @@ function getarrivalnode() {
   return self.last_set_goalent;
 }
 
-function isarrivaltypecivilian(var0, var1) {
+function isarrivaltypecivilian(var_0, var_1) {
   if(isDefined(self.asm.customdata.arrivalstate)) {
-    return (var1 == "Custom");
+    return (var_1 == "Custom");
   }
 
   if(scripts\asm\asm_bb::bb_smartobjectrequested()) {
-    return (var1 == "Exposed");
+    return (var_1 == "Exposed");
   }
 
-  var2 = getarrivalnode();
+  var_2 = getarrivalnode();
 
-  if(isDefined(var2) && isnode(var2) && var2 iscovermultinode()) {
-    var3 = scripts\engine\utility::getbestcovermultinodetype(var2);
+  if(isDefined(var_2) && isnode(var_2) && var_2 iscovermultinode()) {
+    var_3 = scripts\engine\utility::getbestcovermultinodetype(var_2);
 
-    if(isDefined(var3)) {
-      var2 setcovermultinodetype(var3);
+    if(isDefined(var_3)) {
+      var_2 setcovermultinodetype(var_3);
     }
   }
 
-  if(!isDefined(var2) || !isDefined(var2.type) || var2.type == "struct" || self.combatmode == "no_cover") {
-    return (var1 == "Exposed");
+  if(!isDefined(var_2) || !isDefined(var_2.type) || var_2.type == "struct" || self.combatmode == "no_cover") {
+    return (var_1 == "Exposed");
   }
 
-  if(isDefined(var2) && var2.type == "Cover Crouch") {
-    var4 = getDvar("scr_ai_cover_crouch_type");
+  if(isDefined(var_2) && var_2.type == "Cover Crouch") {
+    var_4 = getDvar("scr_ai_cover_crouch_type");
 
-    if(var4 != "") {
-      return (var1 == var4);
+    if(var_4 != "") {
+      return (var_1 == var_4);
     }
 
     if(isDefined(self._blackboard.croucharrivaltype)) {
-      return (var1 == self._blackboard.croucharrivaltype);
-    } else if(isDefined(var2.covercrouchtype)) {
-      return (var1 == var2.covercrouchtype);
+      return (var_1 == self._blackboard.croucharrivaltype);
+    } else if(isDefined(var_2.covercrouchtype)) {
+      return (var_1 == var_2.covercrouchtype);
     }
   }
 
-  var5 = scripts\asm\asm::asm_getdemeanor();
-  var6 = (!isnode(var2) || var2 doesnodeallowstance("stand")) && self isstanceallowed("stand");
-  var7 = (!isnode(var2) || var2 doesnodeallowstance("crouch")) && self isstanceallowed("crouch") && var5 != "casual" && var5 != "casual_gun";
+  var_5 = scripts\asm\asm::asm_getdemeanor();
+  var_6 = (!isnode(var_2) || var_2 doesnodeallowstance("stand")) && self isstanceallowed("stand");
+  var_7 = (!isnode(var_2) || var_2 doesnodeallowstance("crouch")) && self isstanceallowed("crouch") && var_5 != "casual" && var_5 != "casual_gun";
 
-  switch (var1) {
+  switch (var_1) {
     case "Exposed":
-      if(var2.type != "Path" && var2.type != "Exposed") {
+      if(var_2.type != "Path" && var_2.type != "Exposed") {
         return 0;
       }
 
-      if(var7 && choosecrouchorstand(self, var2)) {
+      if(var_7 && choosecrouchorstand(self, var_2)) {
         return 0;
       }
 
-      return var6;
+      return var_6;
     case "Exposed Crouch":
-      if(var2.type != "Path" && var2.type != "Exposed") {
+      if(var_2.type != "Path" && var_2.type != "Exposed") {
         return 0;
       }
 
-      if(var6 && !choosecrouchorstand(self, var2)) {
+      if(var_6 && !choosecrouchorstand(self, var_2)) {
         return 0;
       }
 
-      return var7;
+      return var_7;
     case "Cover Crouch":
-      return (var2.type == "Cover Crouch" || var2.type == "Conceal Crouch" || var2.type == "Cover Crouch Window" || var2.type == "Cover Stand" || var2.type == "Conceal Stand" || var2.type == "Cover Prone" || var2.type == "Conceal Prone");
+      return (var_2.type == "Cover Crouch" || var_2.type == "Conceal Crouch" || var_2.type == "Cover Crouch Window" || var_2.type == "Cover Stand" || var_2.type == "Conceal Stand" || var_2.type == "Cover Prone" || var_2.type == "Conceal Prone");
     case "Cover Left":
-      return (var2.type == "Cover Left");
+      return (var_2.type == "Cover Left");
     case "Cover Right":
-      return (var2.type == "Cover Right");
+      return (var_2.type == "Cover Right");
     case "Exposed Moving":
-      return (var2.type == "Exposed Moving");
+      return (var_2.type == "Exposed Moving");
   }
 
-  return var1 == var2.type;
+  return var_1 == var_2.type;
 }
 
-function isarrivaltype(var0, var1, var2, var3) {
-  var4 = var3;
+function isarrivaltype(var_0, var_1, var_2, var_3) {
+  var_4 = var_3;
 
   if(isDefined(self.asm.customdata.arrivalstate)) {
-    return (var4 == "Custom");
+    return (var_4 == "Custom");
   }
 
   if(scripts\asm\asm_bb::bb_smartobjectrequested()) {
-    return (var4 == "Exposed");
+    return (var_4 == "Exposed");
   }
 
-  var5 = getarrivalnode();
+  var_5 = getarrivalnode();
 
-  if(isDefined(var5) && isnode(var5) && var5 iscovermultinode()) {
-    var6 = scripts\engine\utility::getbestcovermultinodetype(var5);
+  if(isDefined(var_5) && isnode(var_5) && var_5 iscovermultinode()) {
+    var_6 = scripts\engine\utility::getbestcovermultinodetype(var_5);
 
-    if(isDefined(var6) && var5.type != var6 && var4 == var6) {
-      var5 setcovermultinodetype(var6);
+    if(isDefined(var_6) && var_5.type != var_6 && var_4 == var_6) {
+      var_5 setcovermultinodetype(var_6);
     }
   }
 
-  if(!isDefined(var5) || !isDefined(var5.type) || var5.type == "struct" || self.combatmode == "no_cover") {
+  if(!isDefined(var_5) || !isDefined(var_5.type) || var_5.type == "struct" || self.combatmode == "no_cover") {
     if(scripts\engine\utility::actor_is3d()) {
-      return (var4 == "Exposed 3D");
+      return (var_4 == "Exposed 3D");
     } else {
-      return (var4 == "Exposed");
+      return (var_4 == "Exposed");
     }
   }
 
-  var7 = allowlmgarrival();
+  var_7 = allowlmgarrival();
 
-  if(isDefined(var5) && var5.type == "Cover Crouch" && !var7) {
-    var8 = getDvar("scr_ai_cover_crouch_type");
+  if(isDefined(var_5) && var_5.type == "Cover Crouch" && !var_7) {
+    var_8 = getDvar("scr_ai_cover_crouch_type");
 
-    if(var8 != "") {
-      return (var4 == var8);
+    if(var_8 != "") {
+      return (var_4 == var_8);
     }
 
     if(isDefined(self._blackboard.croucharrivaltype)) {
-      return (var4 == self._blackboard.croucharrivaltype);
-    } else if(isDefined(var5.covercrouchtype)) {
-      return (var4 == var5.covercrouchtype);
+      return (var_4 == self._blackboard.croucharrivaltype);
+    } else if(isDefined(var_5.covercrouchtype)) {
+      return (var_4 == var_5.covercrouchtype);
     }
   }
 
-  var9 = scripts\asm\asm::asm_getdemeanor();
-  var10 = (!isnode(var5) || var5 doesnodeallowstance("stand")) && self isstanceallowed("stand");
-  var11 = (!isnode(var5) || var5 doesnodeallowstance("crouch")) && self isstanceallowed("crouch") && var9 != "casual" && var9 != "casual_gun";
+  var_9 = scripts\asm\asm::asm_getdemeanor();
+  var_10 = (!isnode(var_5) || var_5 doesnodeallowstance("stand")) && self isstanceallowed("stand");
+  var_11 = (!isnode(var_5) || var_5 doesnodeallowstance("crouch")) && self isstanceallowed("crouch") && var_9 != "casual" && var_9 != "casual_gun";
 
-  if(var0 == "zero_gravity_space") {
-    switch (var4) {
+  if(var_0 == "zero_gravity_space") {
+    switch (var_4) {
       case "Exposed 3D":
-        return (scripts\engine\utility::isnodeexposed3d(var5) && var10);
+        return (scripts\engine\utility::isnodeexposed3d(var_5) && var_10);
       case "Cover 3D":
-        return (var5.type == "Cover 3D");
+        return (var_5.type == "Cover 3D");
       case "Cover Stand 3D":
-        return nodeiscoverstand3dtype(var5);
+        return nodeiscoverstand3dtype(var_5);
       case "Cover Exposed 3D":
-        return nodeiscoverexposed3dtype(var5);
+        return nodeiscoverexposed3dtype(var_5);
       case "Cover Prone":
       case "Exposed Crouch":
       case "Exposed":
@@ -693,16 +693,16 @@ function isarrivaltype(var0, var1, var2, var3) {
       case "Cover Crouch":
         break;
     }
-  } else if(var0 == "zero_gravity") {
-    switch (var4) {
+  } else if(var_0 == "zero_gravity") {
+    switch (var_4) {
       case "Exposed":
-        return ((var5.type == "Path" || var5.type == "Exposed") && var10);
+        return ((var_5.type == "Path" || var_5.type == "Exposed") && var_10);
       case "Exposed Crouch":
-        return ((var5.type == "Path" || var5.type == "Exposed") && var11);
+        return ((var_5.type == "Path" || var_5.type == "Exposed") && var_11);
       case "Cover Crouch":
-        return (var5.type == "Cover Crouch" || var5.type == "Conceal Crouch");
+        return (var_5.type == "Cover Crouch" || var_5.type == "Conceal Crouch");
       case "Cover Stand":
-        return (var5.type == "Cover Stand" || var5.type == "Conceal Stand");
+        return (var_5.type == "Cover Stand" || var_5.type == "Conceal Stand");
       case "Cover Prone":
       case "Cover Right Crouch":
       case "Cover Right":
@@ -711,187 +711,187 @@ function isarrivaltype(var0, var1, var2, var3) {
         break;
     }
   } else {
-    switch (var4) {
+    switch (var_4) {
       case "Exposed":
-        if(var5.type != "Path" && var5.type != "Exposed") {
+        if(var_5.type != "Path" && var_5.type != "Exposed") {
           return 0;
         }
 
-        if(var11 && choosecrouchorstand(self, var5)) {
+        if(var_11 && choosecrouchorstand(self, var_5)) {
           return 0;
         }
 
-        return var10;
+        return var_10;
       case "Exposed Crouch":
-        if(var5.type != "Path" && var5.type != "Exposed") {
+        if(var_5.type != "Path" && var_5.type != "Exposed") {
           return 0;
         }
 
-        if(var10 && !choosecrouchorstand(self, var5)) {
+        if(var_10 && !choosecrouchorstand(self, var_5)) {
           return 0;
         }
 
-        return var11;
+        return var_11;
       case "Cover Crouch":
-        return (var5.type == "Cover Crouch" || var5.type == "Conceal Crouch" || var5.type == "Cover Crouch Window");
+        return (var_5.type == "Cover Crouch" || var_5.type == "Conceal Crouch" || var_5.type == "Cover Crouch Window");
       case "Cover Stand":
-        return (var5.type == "Cover Stand" || var5.type == "Conceal Stand");
+        return (var_5.type == "Cover Stand" || var_5.type == "Conceal Stand");
       case "Cover Prone":
-        return (var5.type == "Cover Prone" || var5.type == "Conceal Prone");
+        return (var_5.type == "Cover Prone" || var_5.type == "Conceal Prone");
       case "Cover Left":
-        if(var5.type != "Cover Left") {
+        if(var_5.type != "Cover Left") {
           return 0;
         }
 
-        if(var11 && choosecrouchorstand(self, var5)) {
+        if(var_11 && choosecrouchorstand(self, var_5)) {
           return 0;
         }
 
-        return var10;
+        return var_10;
       case "Cover Left Crouch":
-        if(var5.type != "Cover Left") {
+        if(var_5.type != "Cover Left") {
           return 0;
         }
 
-        if(var10 && !choosecrouchorstand(self, var5)) {
+        if(var_10 && !choosecrouchorstand(self, var_5)) {
           return 0;
         }
 
-        return var11;
+        return var_11;
       case "Cover Right":
-        if(var5.type != "Cover Right") {
+        if(var_5.type != "Cover Right") {
           return 0;
         }
 
-        if(var11 && choosecrouchorstand(self, var5)) {
+        if(var_11 && choosecrouchorstand(self, var_5)) {
           return 0;
         }
 
-        return var10;
+        return var_10;
       case "Cover Right Crouch":
-        if(var5.type != "Cover Right") {
+        if(var_5.type != "Cover Right") {
           return 0;
         }
 
-        if(var10 && !choosecrouchorstand(self, var5)) {
+        if(var_10 && !choosecrouchorstand(self, var_5)) {
           return 0;
         }
 
-        return var11;
+        return var_11;
       case "Cover Crouch LMG":
-        return ((var5.type == "Cover Crouch" || var5.type == "Cover Prone") && allowlmgarrival());
+        return ((var_5.type == "Cover Crouch" || var_5.type == "Cover Prone") && allowlmgarrival());
       case "Cover Stand LMG":
-        return (var5.type == "Cover Stand" && allowlmgarrival());
+        return (var_5.type == "Cover Stand" && allowlmgarrival());
       case "Exposed Moving":
-        return (var5.type == "Exposed Moving");
+        return (var_5.type == "Exposed Moving");
     }
   }
 
-  return var4 == var5.type;
+  return var_4 == var_5.type;
 }
 
-function playmoveloop(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  thread waitforcoverapproach(var0, var1);
-  thread waitforsharpturn(var0, var1);
-  thread waitfordooropen(var0, var1, 0);
-  var3 = 1;
+function playmoveloop(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  thread waitforcoverapproach(var_0, var_1);
+  thread waitforsharpturn(var_0, var_1);
+  thread waitfordooropen(var_0, var_1, 0);
+  var_3 = 1;
   scripts\asm\asm::asm_updatefrantic();
-  scripts\asm\asm::asm_loopanimstate(var0, var1, var3, 1);
+  scripts\asm\asm::asm_loopanimstate(var_0, var_1, var_3, 1);
   scripts\asm\asm::asm_updatefrantic();
 }
 
-function playmoveloopcasual(var0, var1, var2) {
-  playmoveloop(var0, var1, var2);
+function playmoveloopcasual(var_0, var_1, var_2) {
+  playmoveloop(var_0, var_1, var_2);
 }
 
-function ref_1244e(var0, var1, var2) {
-  thread waitfordooropen(var0, var1, 1);
-  playanim(var0, var1, var2);
+function ref_1244e(var_0, var_1, var_2) {
+  thread waitfordooropen(var_0, var_1, 1);
+  playanim(var_0, var_1, var_2);
 }
 
-function waitforcoverapproach(var0, var1) {
-  self endon(var1 + "_finished");
+function waitforcoverapproach(var_0, var_1) {
+  self endon(var_1 + "_finished");
 
   for(;;) {
     self.requestarrivalnotify = 1;
-    self waittill("cover_approach", var2);
-    scripts\asm\asm::asm_fireevent(var0, "cover_approach", var2);
-    self.a.approachdir = var2;
+    self waittill("cover_approach", var_2);
+    scripts\asm\asm::asm_fireevent(var_0, "cover_approach", var_2);
+    self.a.approachdir = var_2;
   }
 }
 
-function waitforsharpturn(var0, var1) {
-  self endon(var1 + "_finished");
-  self waittill("path_changed", var2, var3, var4, var5, var6);
-  var7 = [var2, var3, var4, var5, var6];
-  scripts\asm\asm::asm_fireevent(var0, "sharp_turn", var7);
-  thread waitforsharpturn(var0, var1);
+function waitforsharpturn(var_0, var_1) {
+  self endon(var_1 + "_finished");
+  self waittill("path_changed", var_2, var_3, var_4, var_5, var_6);
+  var_7 = [var_2, var_3, var_4, var_5, var_6];
+  scripts\asm\asm::asm_fireevent(var_0, "sharp_turn", var_7);
+  thread waitforsharpturn(var_0, var_1);
 }
 
-function playmoveloopcasualcleanup(var0, var1, var2) {}
+function playmoveloopcasualcleanup(var_0, var_1, var_2) {}
 
 function calcdooropenspeed() {
   if(scripts\common\utility::iscp()) {
     return 0.8;
   }
 
-  var0 = 0.75;
-  var1 = length(self.velocity);
+  var_0 = 0.75;
+  var_1 = length(self.velocity);
 
-  if(var1 > 0) {
-    var0 = 24 / var1;
+  if(var_1 > 0) {
+    var_0 = 24 / var_1;
   }
 
-  if(var0 < 0.15) {
-    var0 = 0.15;
-  } else if(var0 > 1) {
-    var0 = 1;
+  if(var_0 < 0.15) {
+    var_0 = 0.15;
+  } else if(var_0 > 1) {
+    var_0 = 1;
   }
 
-  return var0;
+  return var_0;
 }
 
 function opendooratreasonabletime() {
-  var0 = self._blackboard.doortoopen;
-  var1 = self.fndooropen;
+  var_0 = self._blackboard.doortoopen;
+  var_1 = self.fndooropen;
 
-  if(!isDefined(var0) || !isDefined(var1)) {
+  if(!isDefined(var_0) || !isDefined(var_1)) {
     return;
   }
 
   self._blackboard.door_opened = 1;
   self endon("death");
-  var0 endon("death");
+  var_0 endon("death");
   self endon("path_has_door");
-  var2 = self[[self.fngetdoorcenter]](var0);
-  var3 = distance2dsquared(var2, self.origin);
-  var4 = 4096;
+  var_2 = self[[self.fngetdoorcenter]](var_0);
+  var_3 = distance2dsquared(var_2, self.origin);
+  var_4 = 4096;
 
   if(scripts\common\utility::iscp()) {
-    var5 = 0.8 * length(self.velocity);
-    var5 *= 0.9;
-    var4 = max(var5 * var5, var4);
+    var_5 = 0.8 * length(self.velocity);
+    var_5 *= 0.9;
+    var_4 = max(var_5 * var_5, var_4);
   }
 
-  while(var3 > var4) {
-    if(isDefined(self._blackboard.doortoopen) && var0 != self._blackboard.doortoopen) {
+  while(var_3 > var_4) {
+    if(isDefined(self._blackboard.doortoopen) && var_0 != self._blackboard.doortoopen) {
       return;
     }
 
-    var3 = distance2dsquared(var2, self.origin);
+    var_3 = distance2dsquared(var_2, self.origin);
     waitframe();
   }
 
-  var6 = calcdooropenspeed();
+  var_6 = calcdooropenspeed();
   self notify("opening_door");
-  self thread[[var1]](var0, var6);
-  return var6;
+  self thread[[var_1]](var_0, var_6);
+  return var_6;
 }
 
-function opendooratreasonabletime_waitforabort(var0) {
+function opendooratreasonabletime_waitforabort(var_0) {
   self endon("opening_door_done");
-  self waittill(var0 + "_finished");
+  self waittill(var_0 + "_finished");
 
   if(!isalive(self)) {
     return;
@@ -902,51 +902,51 @@ function opendooratreasonabletime_waitforabort(var0) {
   self notify("opening_door_done");
 }
 
-function closedoorifnecessary(var0) {
-  if(self[[self.fndoorneedstoclose]](var0)) {
-    self[[self.fndoorclose]](var0);
+function closedoorifnecessary(var_0) {
+  if(self[[self.fndoorneedstoclose]](var_0)) {
+    self[[self.fndoorclose]](var_0);
     return;
   }
 }
 
-function waitfordooropen(var0, var1, var2) {
-  self endon(var1 + "_finished");
+function waitfordooropen(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
   self endon("death");
   self endon("terminate_ai_threads");
   waitframe();
 
   for(;;) {
     if(isDefined(self._blackboard.doortoopen)) {
-      var3 = 0;
+      var_3 = 0;
 
       if(self[[self.fndooralreadyopen]](self._blackboard.doortoopen)) {
-        var3 = 1;
+        var_3 = 1;
       }
 
-      if(!var3 && !isent(self._blackboard.doortoopen)) {
+      if(!var_3 && !isent(self._blackboard.doortoopen)) {
         if(!isDefined(self getmodifierlocationonpath("door", 200))) {
-          var3 = 1;
+          var_3 = 1;
         }
       }
 
-      if(var3) {
+      if(var_3) {
         self._blackboard.doortoopen = undefined;
         waitframe();
         continue;
       }
 
       if(!self.facemotion) {
-        var4 = self.lookaheaddir;
-        var4 = vectorNormalize((var4[0], var4[1], 0));
-        var5 = anglesToForward(self.angles);
+        var_4 = self.lookaheaddir;
+        var_4 = vectorNormalize((var_4[0], var_4[1], 0));
+        var_5 = anglesToForward(self.angles);
 
-        if(vectordot(var4, var5) < 0.966) {
+        if(vectordot(var_4, var_5) < 0.966) {
           self.isopeningdoor = 1;
-          var6 = opendooratreasonabletime();
+          var_6 = opendooratreasonabletime();
 
-          if(isDefined(var6)) {
-            thread opendooratreasonabletime_waitforabort(var1);
-            wait var6;
+          if(isDefined(var_6)) {
+            thread opendooratreasonabletime_waitforabort(var_1);
+            wait var_6;
           }
 
           self notify("opening_door_done");
@@ -956,67 +956,67 @@ function waitfordooropen(var0, var1, var2) {
         }
       }
 
-      var7 = self._blackboard.doortoopen;
+      var_7 = self._blackboard.doortoopen;
       self._blackboard.door_opened = undefined;
-      var8 = 1;
-      var9 = 160;
-      var10 = 2;
-      var11 = length2d(self.velocity);
+      var_8 = 1;
+      var_9 = 160;
+      var_10 = 2;
+      var_11 = length2d(self.velocity);
 
-      if(!istrue(var2)) {
-        var12 = var1;
-        var13 = scripts\asm\asm::asm_lookupanimfromaliasifexists(var1, "2");
+      if(!istrue(var_2)) {
+        var_12 = var_1;
+        var_13 = scripts\asm\asm::asm_lookupanimfromaliasifexists(var_1, "2");
 
-        if(!isDefined(var13)) {
-          var11 = self aigettargetspeed();
-          var14 = getnextlowestspeedthresholdstring(self.basearchetype, var11);
+        if(!isDefined(var_13)) {
+          var_11 = self aigettargetspeed();
+          var_14 = getnextlowestspeedthresholdstring(self.basearchetype, var_11);
 
-          if(isDefined(var14)) {
-            var15 = var14 + "2";
-            var13 = scripts\asm\asm::asm_lookupanimfromaliasifexists(var1, var15);
+          if(isDefined(var_14)) {
+            var_15 = var_14 + "2";
+            var_13 = scripts\asm\asm::asm_lookupanimfromaliasifexists(var_1, var_15);
 
-            if(!isDefined(var13)) {
-              var12 = "door_open";
-              var13 = scripts\asm\asm::asm_lookupanimfromaliasifexists("door_open", var15);
+            if(!isDefined(var_13)) {
+              var_12 = "door_open";
+              var_13 = scripts\asm\asm::asm_lookupanimfromaliasifexists("door_open", var_15);
             }
           }
         }
 
-        if(!isDefined(var13)) {
-          var13 = scripts\asm\asm::asm_lookupanimfromaliasifexists("door_open", "2");
+        if(!isDefined(var_13)) {
+          var_13 = scripts\asm\asm::asm_lookupanimfromaliasifexists("door_open", "2");
         }
 
-        if(isDefined(var13)) {
-          var16 = scripts\asm\asm::asm_getxanim(var12, var13);
-          var17 = getnotetracktimes(var16, "door_touch");
-          var18 = (var17[0] * getanimlength(var16) + 2 * level.framedurationseconds) * var11;
-          var9 = var18 + 24;
+        if(isDefined(var_13)) {
+          var_16 = scripts\asm\asm::asm_getxanim(var_12, var_13);
+          var_17 = getnotetracktimes(var_16, "door_touch");
+          var_18 = (var_17[0] * getanimlength(var_16) + 2 * level.framedurationseconds) * var_11;
+          var_9 = var_18 + 24;
         }
       }
 
-      var19 = var8 + var9 + var10;
-      var20 = self[[self.fngetdoorcenter]](var7);
-      var21 = distance2d(var20, self.origin);
+      var_19 = var_8 + var_9 + var_10;
+      var_20 = self[[self.fngetdoorcenter]](var_7);
+      var_21 = distance2d(var_20, self.origin);
 
-      if(var21 < var19) {
+      if(var_21 < var_19) {
         self.isopeningdoor = 1;
-        thread closedoorifnecessary(var7);
+        thread closedoorifnecessary(var_7);
 
-        if(istrue(var2) || var21 < var19 - var11 * 2 * level.framedurationseconds) {
-          var6 = opendooratreasonabletime();
+        if(istrue(var_2) || var_21 < var_19 - var_11 * 2 * level.framedurationseconds) {
+          var_6 = opendooratreasonabletime();
 
-          if(isDefined(var6)) {
-            thread opendooratreasonabletime_waitforabort(var1);
-            wait var6;
+          if(isDefined(var_6)) {
+            thread opendooratreasonabletime_waitforabort(var_1);
+            wait var_6;
           }
 
           self notify("opening_door_done");
           self._blackboard.doortoopen = undefined;
           self.isopeningdoor = undefined;
         } else {
-          self setupdooropen(var7, var19, getdooropenspeedlookup());
-          thread handledooropennotetrack(var0, var1);
-          thread handledooropenterminate(var0, var1);
+          self setupdooropen(var_7, var_19, getdooropenspeedlookup());
+          thread handledooropennotetrack(var_0, var_1);
+          thread handledooropenterminate(var_0, var_1);
           self waittill("opening_door_done");
         }
       }
@@ -1026,30 +1026,30 @@ function waitfordooropen(var0, var1, var2) {
   }
 }
 
-function handledooropennotetrack(var0, var1) {
-  self endon(var1 + "_finished");
+function handledooropennotetrack(var_0, var_1) {
+  self endon(var_1 + "_finished");
   self endon("opening_door_done");
 
   for(;;) {
-    self waittill("door_open", var2);
+    self waittill("door_open", var_2);
 
-    if(!isarray(var2)) {
-      var2 = [var2];
+    if(!isarray(var_2)) {
+      var_2 = [var_2];
     }
 
-    for(var3 = 0; var3 < var2.size; var3++) {
-      if(var2[var3] == "door_open") {
+    for(var_3 = 0; var_3 < var_2.size; var_3++) {
+      if(var_2[var_3] == "door_open") {
         if(isDefined(self.fndooropen) && isDefined(self._blackboard.doortoopen)) {
           self notify("opening_door");
-          var4 = calcdooropenspeed();
-          self thread[[self.fndooropen]](self._blackboard.doortoopen, var4);
+          var_4 = calcdooropenspeed();
+          self thread[[self.fndooropen]](self._blackboard.doortoopen, var_4);
           self._blackboard.door_opened = 1;
         }
 
         continue;
       }
 
-      if(var2[var3] == "end") {
+      if(var_2[var_3] == "end") {
         self._blackboard.doortoopen = undefined;
         self.isopeningdoor = undefined;
         self cleardooropen();
@@ -1061,9 +1061,9 @@ function handledooropennotetrack(var0, var1) {
   }
 }
 
-function handledooropenterminate(var0, var1) {
+function handledooropenterminate(var_0, var_1) {
   self endon("opening_door_done");
-  self waittill(var1 + "_finished");
+  self waittill(var_1 + "_finished");
 
   if(!isDefined(self) || !isalive(self)) {
     return;
@@ -1094,59 +1094,59 @@ function getdooropenspeedlookup() {
   return "soldier";
 }
 
-function playanim(var0, var1, var2) {
-  scripts\asm\asm::asm_playanimstate(var0, var1, var2);
+function playanim(var_0, var_1, var_2) {
+  scripts\asm\asm::asm_playanimstate(var_0, var_1, var_2);
 }
 
-function playanimwithsound(var0, var1, var2) {
-  self playSound(var2);
-  scripts\asm\asm::asm_playanimstate(var0, var1, var2);
+function playanimwithsound(var_0, var_1, var_2) {
+  self playSound(var_2);
+  scripts\asm\asm::asm_playanimstate(var_0, var_1, var_2);
 }
 
-function loopanim(var0, var1, var2) {
-  scripts\asm\asm::asm_loopanimstate(var0, var1, 1);
+function loopanim(var_0, var_1, var_2) {
+  scripts\asm\asm::asm_loopanimstate(var_0, var_1, 1);
 }
 
-function chooseanimidle(var0, var1, var2) {
-  var3 = scripts\asm\asm::asm_getdemeanor();
+function chooseanimidle(var_0, var_1, var_2) {
+  var_3 = scripts\asm\asm::asm_getdemeanor();
 
-  if(scripts\asm\asm::asm_hasdemeanoranimoverride(var3, "idle")) {
-    var4 = scripts\asm\asm::asm_getdemeanoranimoverride(var3, "idle");
+  if(scripts\asm\asm::asm_hasdemeanoranimoverride(var_3, "idle")) {
+    var_4 = scripts\asm\asm::asm_getdemeanoranimoverride(var_3, "idle");
 
-    if(isarray(var4)) {
-      return var4[randomint(var4.size)];
+    if(isarray(var_4)) {
+      return var_4[randomint(var_4.size)];
     }
 
-    return var4;
+    return var_4;
   }
 
   if(isDefined(self.node) && self.node.type == "Cover Stand") {
     if(!self.node scripts\engine\utility::isvalidpeekoutdir("over")) {
-      var3 += "_high";
+      var_3 += "_high";
     }
   }
 
-  return chooseanim_weaponclassprepended(var1, var2, var3);
+  return chooseanim_weaponclassprepended(var_1, var_2, var_3);
 }
 
-function chooseanim_weaponclassprepended(var0, var1, var2) {
-  var3 = weaponclass(self.weapon);
-  var4 = undefined;
+function chooseanim_weaponclassprepended(var_0, var_1, var_2) {
+  var_3 = weaponclass(self.weapon);
+  var_4 = undefined;
 
-  if(!isDefined(var2)) {
-    return scripts\asm\asm::asm_getrandomanim(var0, var1);
+  if(!isDefined(var_2)) {
+    return scripts\asm\asm::asm_getrandomanim(var_0, var_1);
   } else {
-    var4 = var2;
+    var_4 = var_2;
   }
 
-  if(!scripts\asm\asm::asm_hasalias(var1, var3 + var4)) {
-    var3 = "rifle";
+  if(!scripts\asm\asm::asm_hasalias(var_1, var_3 + var_4)) {
+    var_3 = "rifle";
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, var3 + var4);
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3 + var_4);
 }
 
-function calcarrivaltype(var0, var1, var2) {
+function calcarrivaltype(var_0, var_1, var_2) {
   self._blackboard.runpassthroughtype = getarrivaltype();
 }
 
@@ -1159,16 +1159,16 @@ function getarrivaltype() {
     return "Exposed";
   }
 
-  var0 = getarrivalnode();
+  var_0 = getarrivalnode();
 
-  if(!isDefined(var0) || !isnode(var0) || !isDefined(var0.type) || var0.type == "struct" || self.combatmode == "no_cover") {
-    var1 = self setcorpsemodel();
+  if(!isDefined(var_0) || !isnode(var_0) || !isDefined(var_0.type) || var_0.type == "struct" || self.combatmode == "no_cover") {
+    var_1 = self setcorpsemodel();
 
-    if(isDefined(var1)) {
-      var2 = scripts\asm\asm::asm_getdemeanor();
-      var3 = self isstanceallowed("crouch") && var2 == "combat";
+    if(isDefined(var_1)) {
+      var_2 = scripts\asm\asm::asm_getdemeanor();
+      var_3 = self isstanceallowed("crouch") && var_2 == "combat";
 
-      if(var3 && getwincost(self, var1)) {
+      if(var_3 && getwincost(self, var_1)) {
         return "Exposed Crouch";
       }
 
@@ -1182,29 +1182,29 @@ function getarrivaltype() {
     return "Exposed";
   }
 
-  if(isDefined(self.enemy) && iscoverinvalidagainstenemy(var3) || shouldinitiallyattackfromexposed(var3)) {
-    if(var3 doesnodeallowstance("stand") && self isstanceallowed("stand")) {
+  if(isDefined(self.enemy) && iscoverinvalidagainstenemy(var_3) || shouldinitiallyattackfromexposed(var_3)) {
+    if(var_3 doesnodeallowstance("stand") && self isstanceallowed("stand")) {
       return "Exposed";
-    } else if(var3 doesnodeallowstance("crouch") && self isstanceallowed("crouch")) {
+    } else if(var_3 doesnodeallowstance("crouch") && self isstanceallowed("crouch")) {
       return "Exposed Crouch";
     } else {
       return "Cover Prone";
     }
   }
 
-  if(isnode(var3) && var3 iscovermultinode()) {
-    var4 = scripts\engine\utility::getbestcovermultinodetype(var3);
+  if(isnode(var_3) && var_3 iscovermultinode()) {
+    var_4 = scripts\engine\utility::getbestcovermultinodetype(var_3);
 
-    if(isDefined(var4) && var4 != var3.type) {
-      var3 setcovermultinodetype(var4);
+    if(isDefined(var_4) && var_4 != var_3.type) {
+      var_3 setcovermultinodetype(var_4);
     }
   }
 
-  var5 = var3.type;
-  var6 = allowlmgarrival();
+  var_5 = var_3.type;
+  var_6 = allowlmgarrival();
 
-  if(var6) {
-    switch (var5) {
+  if(var_6) {
+    switch (var_5) {
       case "Cover Prone":
       case "Cover Crouch":
         return "Cover Crouch LMG";
@@ -1213,19 +1213,19 @@ function getarrivaltype() {
     }
   }
 
-  if(isDefined(self._blackboard.croucharrivaltype) && !var6) {
+  if(isDefined(self._blackboard.croucharrivaltype) && !var_6) {
     return self._blackboard.croucharrivaltype;
   }
 
-  return self choosearrivaltype(var3, var5);
+  return self choosearrivaltype(var_3, var_5);
 }
 
-function shouldstrafe(var0, var1, var2, var3) {
+function shouldstrafe(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested() && !self.facemotion && self.allowstrafe;
 }
 
-function shouldabortstrafe(var0, var1, var2, var3) {
-  if(!shouldstrafe(var0, var1, var2, var3)) {
+function shouldabortstrafe(var_0, var_1, var_2, var_3) {
+  if(!shouldstrafe(var_0, var_1, var_2, var_3)) {
     return true;
   }
 
@@ -1240,47 +1240,47 @@ function shouldabortstrafe(var0, var1, var2, var3) {
   return false;
 }
 
-function chooseanimmovetype(var0, var1, var2) {
-  var3 = scripts\asm\asm::asm_getdemeanor();
+function chooseanimmovetype(var_0, var_1, var_2) {
+  var_3 = scripts\asm\asm::asm_getdemeanor();
 
-  if(!scripts\asm\asm::asm_hasalias(var1, var3)) {
-    return scripts\asm\asm::asm_chooseanim(var0, var1, var2);
+  if(!scripts\asm\asm::asm_hasalias(var_1, var_3)) {
+    return scripts\asm\asm::asm_chooseanim(var_0, var_1, var_2);
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, var3);
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
 }
 
-function transition_isflashed(var0, var1, var2, var3) {
+function transition_isflashed(var_0, var_1, var_2, var_3) {
   return scripts\engine\utility::isflashed();
 }
 
-function transition_isburning(var0, var1, var2, var3) {
+function transition_isburning(var_0, var_1, var_2, var_3) {
   return isDefined(self._blackboard.isburning) && !istrue(self.damageshield);
 }
 
-function isdeafened(var0, var1, var2, var3) {
-  var4 = self.damagetaken;
+function isdeafened(var_0, var_1, var_2, var_3) {
+  var_4 = self.damagetaken;
 
   if(isDefined(self.paindamage)) {
-    var4 = self.paindamage;
+    var_4 = self.paindamage;
   }
 
-  if(scripts\common\utility::isdamageweapon(getcompleteweaponname("iw7_sonic")) && self.damagemod != "MOD_MELEE" && var4 >= 75) {
+  if(scripts\common\utility::isdamageweapon(getcompleteweaponname("iw7_sonic")) && self.damagemod != "MOD_MELEE" && var_4 >= 75) {
     return true;
   }
 
   return false;
 }
 
-function isspecialpain(var0, var1, var2, var3) {
+function isspecialpain(var_0, var_1, var_2, var_3) {
   return true;
 }
 
-function shouldreacttolight(var0, var1, var2, var3) {
+function shouldreacttolight(var_0, var_1, var_2, var_3) {
   if(isDefined(self.lightreaction_requesttime) && self.lightreaction_requesttime >= gettime() - 1000) {
-    var4 = getbasearchetype();
+    var_4 = getbasearchetype();
 
-    if(isspeedwithincqbrange(var4, self aigetdesiredspeed())) {
+    if(isspeedwithincqbrange(var_4, self aigetdesiredspeed())) {
       return true;
     }
   }
@@ -1288,38 +1288,38 @@ function shouldreacttolight(var0, var1, var2, var3) {
   return false;
 }
 
-function chooselightreactionanim(var0, var1, var2) {
-  var3 = "center";
+function chooselightreactionanim(var_0, var_1, var_2) {
+  var_3 = "center";
 
   if(!isDefined(self.lightreaction_lightorigin)) {
-    return scripts\asm\asm::asm_lookupanimfromalias(var1, var3);
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
   }
 
   if(isDefined(self.covernode)) {
-    var4 = anglestoright(self.covernode.angles);
-    var5 = anglesToForward(self.covernode.angles);
-    var6 = vectorNormalize(self.lightreaction_lightorigin - self.origin);
+    var_4 = anglestoright(self.covernode.angles);
+    var_5 = anglesToForward(self.covernode.angles);
+    var_6 = vectorNormalize(self.lightreaction_lightorigin - self.origin);
   } else {
-    var4 = anglestoright(self.angles);
-    var5 = anglesToForward(self.angles);
-    var6 = vectorNormalize(self.lightreaction_lightorigin - self.origin);
+    var_4 = anglestoright(self.angles);
+    var_5 = anglesToForward(self.angles);
+    var_6 = vectorNormalize(self.lightreaction_lightorigin - self.origin);
   }
 
-  var7 = vectordot(var4, var6) >= 0;
-  var8 = vectordot(var5, var6);
+  var_7 = vectordot(var_4, var_6) >= 0;
+  var_8 = vectordot(var_5, var_6);
 
-  if(var8 >= 0.866) {
-    var6 = "center";
-  } else if(var7) {
-    var6 = "right";
+  if(var_8 >= 0.866) {
+    var_6 = "center";
+  } else if(var_7) {
+    var_6 = "right";
   } else {
-    var6 = "left";
+    var_6 = "left";
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(var4, var6);
+  return scripts\asm\asm::asm_lookupanimfromalias(var_4, var_6);
 }
 
-function isshocked(var0, var1, var2, var3) {
+function isshocked(var_0, var_1, var_2, var_3) {
   if(isDefined(self.damagemod) && self.damagemod == "MOD_IMPACT") {
     return false;
   }
@@ -1342,21 +1342,21 @@ function isshocked(var0, var1, var2, var3) {
 }
 
 function getdamagedirstring() {
-  var0 = -1 * self.damagedir;
-  var1 = anglesToForward(self.angles);
-  var2 = vectordot(var1, var0);
+  var_0 = -1 * self.damagedir;
+  var_1 = anglesToForward(self.angles);
+  var_2 = vectordot(var_1, var_0);
 
-  if(var2 > 0.707) {
+  if(var_2 > 0.707) {
     return "front";
   }
 
-  if(var2 < -0.707) {
+  if(var_2 < -0.707) {
     return "back";
   }
 
-  var3 = vectorcross(var1, var0);
+  var_3 = vectorcross(var_1, var_0);
 
-  if(var3[2] > 0) {
+  if(var_3[2] > 0) {
     return "left";
   }
 
@@ -1364,30 +1364,30 @@ function getdamagedirstring() {
 }
 
 function gethumandamagedirstring() {
-  var0 = -1 * self.damagedir;
-  var1 = anglesToForward(self.angles);
-  var2 = vectordot(var1, var0);
+  var_0 = -1 * self.damagedir;
+  var_1 = anglesToForward(self.angles);
+  var_2 = vectordot(var_1, var_0);
 
-  if(var2 < -0.5) {
+  if(var_2 < -0.5) {
     return true;
   }
 
   return false;
 }
 
-function playanimandusegoalweight(var0, var1, var2) {
-  GscBinSkip4(0x35, var1, 0.2);
+function playanimandusegoalweight(var_0, var_1, var_2) {
+  GscBinSkip4(0x35, var_1, 0.2);
 }
 
-function animscriptedaction_terminate(var0, var1, var2) {
+function animscriptedaction_terminate(var_0, var_1, var_2) {
   self orientmode("face angle 3d", self.angles);
   self.gunposeoverride_internal = undefined;
 
   if(isDefined(self.lookatatrnode)) {
-    var3 = scripts\asm\asm::asm_getheadlookknobifexists();
+    var_3 = scripts\asm\asm::asm_getheadlookknobifexists();
 
-    if(isDefined(var3)) {
-      self clearanim(var3, 0.2, self.lookatatrnode);
+    if(isDefined(var_3)) {
+      self clearanim(var_3, 0.2, self.lookatatrnode);
       self.lookatatrnode = undefined;
       return;
     }
@@ -1396,12 +1396,12 @@ function animscriptedaction_terminate(var0, var1, var2) {
   }
 }
 
-function animsriptedactioncivilian_terminate(var0, var1, var2) {
+function animsriptedactioncivilian_terminate(var_0, var_1, var_2) {
   if(isDefined(self.lookatatrnode)) {
-    var3 = scripts\asm\asm::asm_getheadlookknobifexists();
+    var_3 = scripts\asm\asm::asm_getheadlookknobifexists();
 
-    if(isDefined(var3)) {
-      self clearanim(var3, 0.2, self.lookatatrnode);
+    if(isDefined(var_3)) {
+      self clearanim(var_3, 0.2, self.lookatatrnode);
       self.lookatatrnode = undefined;
       return;
     }
@@ -1415,25 +1415,25 @@ function cleanupanimscriptedheadlook() {
   scripts\common\utility::lookatentity();
 }
 
-function animscriptedstartup(var0, var1, var2) {
+function animscriptedstartup(var_0, var_1, var_2) {
   self.ht_on = undefined;
   self stoplookat();
 }
 
-function animscriptedcleanup(var0, var1, var2) {
+function animscriptedcleanup(var_0, var_1, var_2) {
   cleanupanimscriptedheadlook();
 }
 
-function animscriptedaction_cleanup(var0, var1, var2) {
+function animscriptedaction_cleanup(var_0, var_1, var_2) {
   cleanupanimscriptedheadlook();
 }
 
-function disabledefaultfacialanims(var0) {
+function disabledefaultfacialanims(var_0) {
   if(!isDefined(self.headknob)) {
     self.headknob = scripts\asm\asm::asm_getxanim("knobs", scripts\asm\asm::asm_lookupanimfromalias("knobs", "head"));
   }
 
-  if(!isDefined(var0) || var0) {
+  if(!isDefined(var_0) || var_0) {
     setfacialstate("vignette");
 
     if(isai(self)) {
@@ -1448,16 +1448,16 @@ function disabledefaultfacialanims(var0) {
   clearfacialstate("vignette");
 }
 
-function setfacialindexfornonai(var0) {
-  var1 = [];
+function setfacialindexfornonai(var_0) {
+  var_1 = [];
   GscBinSkip0(0x2e, "none", 0);
 }
 
-function setfacialstate(var0) {
-  self.facialstate = var0;
+function setfacialstate(var_0) {
+  self.facialstate = var_0;
 }
 
-function clearfacialstate(var0) {
+function clearfacialstate(var_0) {
   self.facialstate = "asm";
 
   if(!isDefined(self.fakeactor_face_anim) || !self.fakeactor_face_anim) {
@@ -1466,7 +1466,7 @@ function clearfacialstate(var0) {
   }
 }
 
-function isfacialstateallowed(var0) {
+function isfacialstateallowed(var_0) {
   if(!isai(self) && (!isDefined(self.fakeactor_face_anim) || !self.fakeactor_face_anim)) {
     return false;
   }
@@ -1475,7 +1475,7 @@ function isfacialstateallowed(var0) {
     self.facialstate = "asm";
   }
 
-  var1 = [];
+  var_1 = [];
   GscBinSkip0(0x2e, "asm", 0);
 }
 
@@ -1485,13 +1485,13 @@ function getshootfrompos() {
   }
 
   if(isDefined(self.usemuzzlesideoffset) && self.usemuzzlesideoffset) {
-    var0 = self getmuzzlesideoffsetpos();
+    var_0 = self getmuzzlesideoffsetpos();
 
     if(isDefined(self.usemuzzleheightoffset)) {
-      return var0;
+      return var_0;
     }
 
-    return (var0[0], var0[1], self getEye()[2]);
+    return (var_0[0], var_0[1], self getEye()[2]);
   }
 
   if(isai(self)) {
@@ -1532,36 +1532,36 @@ function getsniperburstdelaytime() {
   return randomfloatrange(anim.min_sniper_burst_delay_time, anim.max_sniper_burst_delay_time);
 }
 
-function melee_checktimer(var0, var1) {
+function melee_checktimer(var_0, var_1) {
   if(isDefined(self.meleeignoretimer) && self.meleeignoretimer) {
     return 1;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  if(var1) {
+  if(var_1) {
     if(!isDefined(anim.meleechargeplayertimers)) {
       return 1;
     }
 
-    if(!isDefined(anim.meleechargeplayertimers[var0])) {
+    if(!isDefined(anim.meleechargeplayertimers[var_0])) {
       return 1;
     }
 
-    return (gettime() > anim.meleechargeplayertimers[var0]);
+    return (gettime() > anim.meleechargeplayertimers[var_0]);
   }
 
   if(!isDefined(anim.meleechargetimers)) {
     return 1;
   }
 
-  if(!isDefined(anim.meleechargetimers[var0])) {
+  if(!isDefined(anim.meleechargetimers[var_0])) {
     return 1;
   }
 
-  return gettime() > anim.meleechargetimers[var0];
+  return gettime() > anim.meleechargetimers[var_0];
 }
 
 function setup_run_n_gun() {
@@ -1635,22 +1635,22 @@ function setupsoldierdefaults() {
   setup_run_n_gun();
 }
 
-function getspeedmatchanimrate(var0, var1, var2) {
-  var3 = length(self.velocity);
+function getspeedmatchanimrate(var_0, var_1, var_2) {
+  var_3 = length(self.velocity);
 
-  if(var3 < 1) {
+  if(var_3 < 1) {
     return 1;
   }
 
-  var4 = length(getmovedelta(var0, var1, var2));
+  var_4 = length(getmovedelta(var_0, var_1, var_2));
 
-  if(var4 < 1) {
+  if(var_4 < 1) {
     return 1;
   }
 
-  var5 = getanimlength(var0) * (var2 - var1);
-  var6 = var4 / var5;
-  return var3 / var6;
+  var_5 = getanimlength(var_0) * (var_2 - var_1);
+  var_6 = var_4 / var_5;
+  return var_3 / var_6;
 }
 
 function isentasoldier() {
@@ -1662,8 +1662,8 @@ function isentnotabomber() {
 }
 
 function demeanorhasblendspace() {
-  var0 = scripts\asm\asm::asm_getdemeanor();
-  return var0 == "combat";
+  var_0 = scripts\asm\asm::asm_getdemeanor();
+  return var_0 == "combat";
 }
 
 function isfixednodeinbadplaceandshouldcrouch() {
@@ -1675,32 +1675,32 @@ function isfixednodeinbadplaceandshouldcrouch() {
 }
 
 function gethighestallowedstance() {
-  var0 = undefined;
-  var1 = 1;
-  var2 = 1;
-  var3 = 1;
+  var_0 = undefined;
+  var_1 = 1;
+  var_2 = 1;
+  var_3 = 1;
 
   if(isDefined(self.node) && isatcovernode()) {
-    var1 = self.node doesnodeallowstance("stand");
-    var2 = self.node doesnodeallowstance("crouch");
-    var3 = self.node doesnodeallowstance("prone");
+    var_1 = self.node doesnodeallowstance("stand");
+    var_2 = self.node doesnodeallowstance("crouch");
+    var_3 = self.node doesnodeallowstance("prone");
   } else if(!scripts\asm\asm_bb::bb_moverequested() && istrue(self._blackboard.shootparams_valid) && isDefined(self._blackboard.shootparams_pos)) {
-    var4 = self isstanceallowed("crouch");
+    var_4 = self isstanceallowed("crouch");
 
-    if(var4 && isfixednodeinbadplaceandshouldcrouch()) {
+    if(var_4 && isfixednodeinbadplaceandshouldcrouch()) {
       return "crouch";
     }
 
-    var5 = distancesquared(self.origin, self._blackboard.shootparams_pos);
+    var_5 = distancesquared(self.origin, self._blackboard.shootparams_pos);
 
-    if(var5 > 262144 && var4 && !scripts\engine\utility::actor_is3d() && !scripts\anim\utility_common::isusingsidearm()) {
-      var4 = 1;
+    if(var_5 > 262144 && var_4 && !scripts\engine\utility::actor_is3d() && !scripts\anim\utility_common::isusingsidearm()) {
+      var_4 = 1;
 
       if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 16 && !self.node doesnodeallowstance("crouch")) {
-        var4 = abs(angleclamp180(self.node.angles[1] - self.angles[1])) > 90;
+        var_4 = abs(angleclamp180(self.node.angles[1] - self.angles[1])) > 90;
       }
 
-      if(var4) {
+      if(var_4) {
         if(sighttracepassed(self.origin + (0, 0, 32), self._blackboard.shootparams_pos, 0, undefined)) {
           return "crouch";
         }
@@ -1709,22 +1709,22 @@ function gethighestallowedstance() {
   }
 
   for(;;) {
-    if(self isstanceallowed("stand") && var1) {
+    if(self isstanceallowed("stand") && var_1) {
       return "stand";
     }
 
-    if(self isstanceallowed("crouch") && var2) {
+    if(self isstanceallowed("crouch") && var_2) {
       return "crouch";
     }
 
-    if(self isstanceallowed("prone") && var3) {
+    if(self isstanceallowed("prone") && var_3) {
       return "prone";
     }
 
-    if(!var1 || !var2 || !var3) {
-      var1 = 1;
-      var2 = 1;
-      var3 = 1;
+    if(!var_1 || !var_2 || !var_3) {
+      var_1 = 1;
+      var_2 = 1;
+      var_3 = 1;
       continue;
     }
 
@@ -1735,21 +1735,21 @@ function gethighestallowedstance() {
 }
 
 function determinerequestedstance() {
-  var0 = gethighestallowedstance();
-  var1 = scripts\asm\asm_bb::bb_getrequestedstance();
-  var2 = [];
+  var_0 = gethighestallowedstance();
+  var_1 = scripts\asm\asm_bb::bb_getrequestedstance();
+  var_2 = [];
   GscBinSkip0(0x2e, "prone", 0);
 }
 
-function mapangleindextonumpad(var0) {
-  var1 = [2, 3, 6, 9, 8, 7, 4, 1, 2];
-  return var1[var0];
+function mapangleindextonumpad(var_0) {
+  var_1 = [2, 3, 6, 9, 8, 7, 4, 1, 2];
+  return var_1[var_0];
 }
 
-function toggle_poiauto(var0, var1, var2, var3, var4) {
-  if(var0) {
+function toggle_poiauto(var_0, var_1, var_2, var_3, var_4) {
+  if(var_0) {
     if(!isDefined(self.poiauto)) {
-      poiauto_init(var1, var2, var3, var4);
+      poiauto_init(var_1, var_2, var_3, var_4);
       thread poiauto_think();
       scripts\common\ai::set_gunpose("disable");
       return;
@@ -1764,7 +1764,7 @@ function toggle_poiauto(var0, var1, var2, var3, var4) {
   self stoplookat();
 }
 
-function set_poiauto_constraints(var0, var1, var2, var3) {
+function set_poiauto_constraints(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.poiauto.og_yawmax)) {
     self.poiauto.og_yawmax = self.poiauto.yawmax;
   }
@@ -1781,10 +1781,10 @@ function set_poiauto_constraints(var0, var1, var2, var3) {
     self.poiauto.og_pitchmax = self.poiauto.pitchmax;
   }
 
-  self.poiauto.yawmax = var0;
-  self.poiauto.yawmin = var1;
-  self.poiauto.pitchmin = var2;
-  self.poiauto.pitchmax = var3;
+  self.poiauto.yawmax = var_0;
+  self.poiauto.yawmin = var_1;
+  self.poiauto.pitchmin = var_2;
+  self.poiauto.pitchmax = var_3;
 }
 
 function reset_poiauto_constraints() {
@@ -1794,14 +1794,14 @@ function reset_poiauto_constraints() {
   self.poiauto.pitchmax = self.poiauto.og_pitchmax;
 }
 
-function toggle_poi(var0, var1) {
+function toggle_poi(var_0, var_1) {
   self.currentpoi = undefined;
   self.nextpoi = undefined;
-  self.doingpoi = var0;
-  self.disablelookdownpath = var0;
+  self.doingpoi = var_0;
+  self.disablelookdownpath = var_0;
   self.cqb_point_of_interest = undefined;
 
-  if(!var0) {
+  if(!var_0) {
     level.poi_activeai = scripts\engine\utility::array_remove(level.poi_activeai, self);
     self.turnrate = scripts\engine\utility::ter_op(isDefined(self.poi_oldturnrate), self.poi_oldturnrate, self.turnrate);
     self.gunadditiveoverride = undefined;
@@ -1812,10 +1812,10 @@ function toggle_poi(var0, var1) {
     return;
   }
 
-  var2 = self aigetdesiredspeed();
-  var3 = getbasearchetype();
-  var4 = getnearestspeedthresholdname(var3, "fast");
-  self aisetdesiredspeed(min(var2, var4));
+  var_2 = self aigetdesiredspeed();
+  var_3 = getbasearchetype();
+  var_4 = getnearestspeedthresholdname(var_3, "fast");
+  self aisetdesiredspeed(min(var_2, var_4));
 
   if(!isDefined(level.poi_activeai)) {
     level.poi_activeai = [];
@@ -1832,13 +1832,13 @@ function toggle_poi(var0, var1) {
   self.turnrate = 0.25;
   self.leftaimlimit = 90;
   self.rightaimlimit = -90;
-  self.poi_firstpoint = var1;
+  self.poi_firstpoint = var_1;
   self.gunposeoverride = "disable";
 }
 
-function shouldinitiallyattackfromexposed(var0) {
-  if(!isDefined(var0)) {
-    var0 = self.node;
+function shouldinitiallyattackfromexposed(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = self.node;
   }
 
   if(isDefined(self._blackboard.shufflenode)) {
@@ -1849,14 +1849,14 @@ function shouldinitiallyattackfromexposed(var0) {
     return 0;
   }
 
-  if(isDefined(var0) && (var0.type == "Conceal Stand" || var0.type == "Conceal Crouch")) {
-    var1 = vectorNormalize(var0.origin - self.origin);
-    var2 = generateaxisanglesfromforwardvector(var1, self.angles);
-    var3 = var0.angles[1];
-    var4 = angleclamp180(var3 - var2[1]);
-    var5 = getangleindex(var4, 22.5);
+  if(isDefined(var_0) && (var_0.type == "Conceal Stand" || var_0.type == "Conceal Crouch")) {
+    var_1 = vectorNormalize(var_0.origin - self.origin);
+    var_2 = generateaxisanglesfromforwardvector(var_1, self.angles);
+    var_3 = var_0.angles[1];
+    var_4 = angleclamp180(var_3 - var_2[1]);
+    var_5 = getangleindex(var_4, 22.5);
 
-    if(var5 == 0 || var5 == 1 || var5 == 7 || var5 == 8) {
+    if(var_5 == 0 || var_5 == 1 || var_5 == 7 || var_5 == 8) {
       self._blackboard.shouldinitiallyattackfromexposed = 1;
       return 1;
     }
@@ -1872,32 +1872,32 @@ function shouldinitiallyattackfromexposed(var0) {
     }
 
     if(isai(self.enemy) && !isbot(self.enemy)) {
-      var6 = self.enemy getapproxeyepos();
+      var_6 = self.enemy getapproxeyepos();
     } else {
-      var6 = self.enemy getEye();
+      var_6 = self.enemy getEye();
     }
 
-    var7 = undefined;
+    var_7 = undefined;
 
-    if(isDefined(var6)) {
-      var7 = var6.origin + (0, 0, 56);
-      self._blackboard.shouldinitiallyattackfromexposed = sighttracepassed(var7, var6, 0, undefined);
+    if(isDefined(var_6)) {
+      var_7 = var_6.origin + (0, 0, 56);
+      self._blackboard.shouldinitiallyattackfromexposed = sighttracepassed(var_7, var_6, 0, undefined);
     } else if(istrue(self.brjugg_watchstartnotify)) {
-      var8 = 0;
+      var_8 = 0;
 
       if(isDefined(self.pathgoalpos)) {
         if(issentient(self.enemy)) {
-          var8 = enablegroundwarspawnlogic(self.pathgoalpos, self.enemy);
+          var_8 = enablegroundwarspawnlogic(self.pathgoalpos, self.enemy);
         } else {
-          var8 = enablegroundwarspawnlogic(self.pathgoalpos, self.enemy.origin);
+          var_8 = enablegroundwarspawnlogic(self.pathgoalpos, self.enemy.origin);
         }
       } else if(issentient(self.enemy)) {
-        var8 = self hastacvis(self.enemy);
+        var_8 = self hastacvis(self.enemy);
       } else {
-        var8 = enablegroundwarspawnlogic(self.origin, self.enemy.origin);
+        var_8 = enablegroundwarspawnlogic(self.origin, self.enemy.origin);
       }
 
-      self._blackboard.shouldinitiallyattackfromexposed = var8;
+      self._blackboard.shouldinitiallyattackfromexposed = var_8;
     } else {
       return 0;
     }
@@ -1910,7 +1910,7 @@ function shouldinitiallyattackfromexposed(var0) {
   return 0;
 }
 
-function cover_canattackfromexposed(var0, var1) {
+function cover_canattackfromexposed(var_0, var_1) {
   if(!isPlayer(self.enemy) && !isai(self.enemy)) {
     return 1;
   }
@@ -1919,38 +1919,38 @@ function cover_canattackfromexposed(var0, var1) {
     return cover_canattackfromexposedgetcache();
   }
 
-  if(!isDefined(var1)) {
-    var1 = self.covernode;
+  if(!isDefined(var_1)) {
+    var_1 = self.covernode;
   }
 
-  if(!isDefined(var1)) {
-    var1 = self.node;
+  if(!isDefined(var_1)) {
+    var_1 = self.node;
   }
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return 0;
   }
 
-  var2 = gethighestallowedstance();
-  var3 = 56;
+  var_2 = gethighestallowedstance();
+  var_3 = 56;
 
-  if(var2 != "stand") {
-    var3 = 32;
+  if(var_2 != "stand") {
+    var_3 = 32;
   }
 
-  var4 = var1.origin + (0, 0, var3);
+  var_4 = var_1.origin + (0, 0, var_3);
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     if(isai(self.enemy) && !isbot(self.enemy)) {
-      var0 = self.enemy getapproxeyepos();
+      var_0 = self.enemy getapproxeyepos();
     } else {
-      var0 = self.enemy getEye();
+      var_0 = self.enemy getEye();
     }
   }
 
-  var5 = 1000;
-  self._blackboard.canattackfromexposed = sighttracepassed(var4, var0, 0, undefined);
-  self._blackboard.canattackfromexposedtime = gettime() + var5;
+  var_5 = 1000;
+  self._blackboard.canattackfromexposed = sighttracepassed(var_4, var_0, 0, undefined);
+  self._blackboard.canattackfromexposedtime = gettime() + var_5;
   return self._blackboard.canattackfromexposed;
 }
 
@@ -1962,26 +1962,26 @@ function cover_canattackfromexposedgetcache() {
   return self._blackboard.canattackfromexposed;
 }
 
-function iscoverinvalidagainstenemy(var0) {
-  if(!isDefined(var0)) {
-    var1 = iscovervalid();
+function iscoverinvalidagainstenemy(var_0) {
+  if(!isDefined(var_0)) {
+    var_1 = iscovervalid();
   } else {
-    var1 = iscovernodevalid(var1);
+    var_1 = iscovernodevalid(var_1);
   }
 
-  return !var1 && !fixednodeshouldsticktocover(var1) && cover_canattackfromexposed(undefined, var1);
+  return !var_1 && !fixednodeshouldsticktocover(var_1) && cover_canattackfromexposed(undefined, var_1);
 }
 
-function fixednodeshouldsticktocover(var0) {
-  if(!isDefined(var0)) {
-    var0 = self.node;
+function fixednodeshouldsticktocover(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = self.node;
   }
 
   if(!self.fixednode) {
     return 0;
   }
 
-  if(isDefined(self.enemy.node) && !nodesvisible(var0, self.enemy.node)) {
+  if(isDefined(self.enemy.node) && !nodesvisible(var_0, self.enemy.node)) {
     return 1;
   }
 
@@ -1993,14 +1993,14 @@ function fixednodeshouldsticktocover(var0) {
     return 1;
   }
 
-  if(distancesquared(var0.origin, self.enemy.origin) > 4096) {
+  if(distancesquared(var_0.origin, self.enemy.origin) > 4096) {
     if(!isDefined(self._blackboard.fixedshouldsticktocovertime) || self._blackboard.fixedshouldsticktocovertime < gettime()) {
-      var1 = (0, 0, 50);
-      var2 = vectorNormalize(self.enemy.origin - var0.origin);
-      var3 = var0.origin + var1;
-      var4 = var3 + var2 * 64;
+      var_1 = (0, 0, 50);
+      var_2 = vectorNormalize(self.enemy.origin - var_0.origin);
+      var_3 = var_0.origin + var_1;
+      var_4 = var_3 + var_2 * 64;
       self._blackboard.fixedshouldsticktocovertime = gettime() + 1050;
-      self._blackboard.fixedshouldsticktocovercached = !scripts\engine\trace::_bullet_trace_passed(var3, var4, 0, self);
+      self._blackboard.fixedshouldsticktocovercached = !scripts\engine\trace::_bullet_trace_passed(var_3, var_4, 0, self);
     }
 
     return self._blackboard.fixedshouldsticktocovercached;
@@ -2009,16 +2009,16 @@ function fixednodeshouldsticktocover(var0) {
   return 0;
 }
 
-function iscovernodevalid(var0) {
-  return istrue(self.ignorecovervalidity) || self iscovervalidagainstenemy(var0);
+function iscovernodevalid(var_0) {
+  return istrue(self.ignorecovervalidity) || self iscovervalidagainstenemy(var_0);
 }
 
 function iscovervalid() {
   return istrue(self.ignorecovervalidity) || self iscovervalidagainstenemy();
 }
 
-function addoverridearchetypepriority(var0) {
-  level.archetypeoverridepriorities[var0] = level.archetypeoverridepriorities.size;
+function addoverridearchetypepriority(var_0) {
+  level.archetypeoverridepriorities[var_0] = level.archetypeoverridepriorities.size;
 }
 
 function setupoverridearchetypeprioritytable() {
@@ -2035,74 +2035,74 @@ function setupoverridearchetypeprioritytable() {
   addoverridearchetypepriority("animscript");
 }
 
-function setoverridearchetype(var0, var1, var2) {
+function setoverridearchetype(var_0, var_1, var_2) {
   setupoverridearchetypeprioritytable();
-  var3 = level.archetypeoverridepriorities[var0];
+  var_3 = level.archetypeoverridepriorities[var_0];
 
   if(!isDefined(self.archetypeoverrides)) {
     setbasearchetype(self.asm.archetype);
   }
 
-  clearoverridearchetype(var0, 1);
-  var4 = spawnStruct();
-  var4.archetypepriority = var3;
-  var4.archetype = var1;
-  self.archetypeoverrides = scripts\engine\utility::array_add(self.archetypeoverrides, var4);
-  pickoverridearchetype(var2);
+  clearoverridearchetype(var_0, 1);
+  var_4 = spawnStruct();
+  var_4.archetypepriority = var_3;
+  var_4.archetype = var_1;
+  self.archetypeoverrides = scripts\engine\utility::array_add(self.archetypeoverrides, var_4);
+  pickoverridearchetype(var_2);
 }
 
-function clearoverridearchetype(var0, var1, var2) {
+function clearoverridearchetype(var_0, var_1, var_2) {
   if(self.archetypeoverrides.size == 0) {
     return;
   }
 
-  var3 = level.archetypeoverridepriorities[var0];
-  var4 = [];
+  var_3 = level.archetypeoverridepriorities[var_0];
+  var_4 = [];
 
-  foreach(var6 in self.archetypeoverrides) {
-    if(var6.archetypepriority != var3) {
-      var4 = var6;
+  foreach(var_6 in self.archetypeoverrides) {
+    if(var_6.archetypepriority != var_3) {
+      var_4 = var_6;
     }
   }
 
-  self.archetypeoverrides = var4;
+  self.archetypeoverrides = var_4;
 
-  if(!istrue(var1)) {
-    pickoverridearchetype(var2);
+  if(!istrue(var_1)) {
+    pickoverridearchetype(var_2);
     return;
   }
 }
 
-function pickoverridearchetype(var0) {
+function pickoverridearchetype(var_0) {
   self.changearchetype = undefined;
-  var1 = undefined;
+  var_1 = undefined;
 
-  foreach(var3 in self.archetypeoverrides) {
-    if(!isDefined(var1) || var3.archetypepriority > var1.archetypepriority) {
-      var1 = var3;
+  foreach(var_3 in self.archetypeoverrides) {
+    if(!isDefined(var_1) || var_3.archetypepriority > var_1.archetypepriority) {
+      var_1 = var_3;
     }
   }
 
-  if(self.asm.archetype == var1.archetype) {
+  if(self.asm.archetype == var_1.archetype) {
     return;
   }
 
-  if(istrue(var0)) {
-    self.animationarchetype = var1.archetype;
-    self.asm.archetype = var1.archetype;
-    self setanimset(var1.archetype);
+  if(istrue(var_0)) {
+    self.animationarchetype = var_1.archetype;
+    self.asm.archetype = var_1.archetype;
+    self setanimset(var_1.archetype);
     return;
   }
 
-  self.changearchetype = var1.archetype;
+  self.changearchetype = var_1.archetype;
 }
 
-function findoverridearchetype(var0) {
-  var1 = level.archetypeoverridepriorities[var0];
+function findoverridearchetype(var_0) {
+  var_1 = level.archetypeoverridepriorities[var_0];
 
-  foreach(var3 in self.archetypeoverrides) {
-    if(var3.archetypepriority == var1) {
-      return var3.archetype;
+  foreach(var_3 in self.archetypeoverrides) {
+    if(var_3.archetypepriority == var_1) {
+      return var_3.archetype;
     }
   }
 
@@ -2117,74 +2117,74 @@ function getbasearchetype() {
   return findoverridearchetype("base");
 }
 
-function setbasearchetype(var0) {
+function setbasearchetype(var_0) {
   if(!isDefined(self.archetypeoverrides)) {
     self.archetypeoverrides = [];
     setoverridearchetype("default", self.asm.archetype);
   }
 
-  setoverridearchetype("base", var0);
-  self.basearchetype = var0;
+  setoverridearchetype("base", var_0);
+  self.basearchetype = var_0;
 }
 
-function poiauto_init(var0, var1, var2, var3) {
-  if(!isDefined(var0)) {
-    var0 = 15;
+function poiauto_init(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_0)) {
+    var_0 = 15;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 35;
+  if(!isDefined(var_1)) {
+    var_1 = 35;
   }
 
-  if(!isDefined(var2)) {
-    var2 = -20;
+  if(!isDefined(var_2)) {
+    var_2 = -20;
   }
 
-  if(!isDefined(var3)) {
-    var3 = 0;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
   self.poiauto = spawnStruct();
-  self.poiauto.yawmax = var1;
-  self.poiauto.yawmin = var0;
-  self.poiauto.pitchmin = var2;
-  self.poiauto.pitchmax = var3;
+  self.poiauto.yawmax = var_1;
+  self.poiauto.yawmin = var_0;
+  self.poiauto.pitchmin = var_2;
+  self.poiauto.pitchmax = var_3;
 }
 
 function poiauto_think() {
   self endon("poiauto_disable");
   self endon("death");
-  var0 = 500;
-  var1 = 0;
-  var2 = 0;
-  var3 = gettime() + 30000;
+  var_0 = 500;
+  var_1 = 0;
+  var_2 = 0;
+  var_3 = gettime() + 30000;
   jumpiftrue(isDefined(self.poiauto)) LOC_00000031;
   poiauto_init();
 
   for(;;) {
-    var4 = 0;
+    var_4 = 0;
 
-    if(var3 <= gettime()) {
+    if(var_3 <= gettime()) {
       self.poiauto_angles = (0, 0, 0);
 
-      if(var3 == var1) {
-        var4 = 1;
+      if(var_3 == var_1) {
+        var_4 = 1;
       }
     }
 
-    if(var1 <= gettime()) {
-      var3 = gettime() + int(randomfloatrange(0.8, 1.8) * 1000);
-      var2 = gettime();
-      poiauto_setnewaimangle(var4);
-      var5 = var0 - gettime();
-      var6 = var3 - gettime();
+    if(var_1 <= gettime()) {
+      var_3 = gettime() + int(randomfloatrange(0.8, 1.8) * 1000);
+      var_2 = gettime();
+      poiauto_setnewaimangle(var_4);
+      var_5 = var_0 - gettime();
+      var_6 = var_3 - gettime();
 
-      if(abs(var6 - var5) >= 550 && scripts\engine\utility::cointoss()) {
-        var1 = var3;
-      } else if(var5 > 3000) {
-        var1 = gettime() + randomintrange(2000, 3000);
+      if(abs(var_6 - var_5) >= 550 && scripts\engine\utility::cointoss()) {
+        var_1 = var_3;
+      } else if(var_5 > 3000) {
+        var_1 = gettime() + randomintrange(2000, 3000);
       } else {
-        var1 = gettime() + var5 + 550 + randomintrange(1000, 2000);
+        var_1 = gettime() + var_5 + 550 + randomintrange(1000, 2000);
       }
     }
 
@@ -2192,21 +2192,21 @@ function poiauto_think() {
   }
 }
 
-function poiauto_relativeangletopos(var0) {
-  var1 = anglesToForward(var0);
-  var2 = rotatevector(var1, self.angles);
-  var3 = self getapproxeyepos();
-  var4 = var3 + var2 * 128;
-  return var4;
+function poiauto_relativeangletopos(var_0) {
+  var_1 = anglesToForward(var_0);
+  var_2 = rotatevector(var_1, self.angles);
+  var_3 = self getapproxeyepos();
+  var_4 = var_3 + var_2 * 128;
+  return var_4;
 }
 
 function poiauto_glancerandom() {
-  var0 = randomfloatrange(-45, 45);
-  var1 = randomfloatrange(-20, 20);
-  var2 = poiauto_relativeangletopos((var1, var0, 0));
+  var_0 = randomfloatrange(-45, 45);
+  var_1 = randomfloatrange(-20, 20);
+  var_2 = poiauto_relativeangletopos((var_1, var_0, 0));
   self.poiauto.glancing = 1;
   thread poiauto_glanceend();
-  self glanceatpos(var2);
+  self glanceatpos(var_2);
 }
 
 function poiauto_glanceend() {
@@ -2220,78 +2220,78 @@ function poiauto_isglancing() {
   return istrue(self.poiauto.glancing);
 }
 
-function poiauto_setnewaimangle(var0) {
-  jumpiffalse(var0) LOC_00000046;
-  var1 = randomfloatrange(self.poiauto_angles[1] + 5, self.poiauto_angles[1] + 10);
-  var2 = randomfloatrange(5, 10);
+function poiauto_setnewaimangle(var_0) {
+  jumpiffalse(var_0) LOC_00000046;
+  var_1 = randomfloatrange(self.poiauto_angles[1] + 5, self.poiauto_angles[1] + 10);
+  var_2 = randomfloatrange(5, 10);
 
   if(scripts\engine\utility::cointoss()) {
-    var2 *= -1;
+    var_2 *= -1;
   }
 
-  var2 = self.poiauto_angles[0] + var2;
+  var_2 = self.poiauto_angles[0] + var_2;
   goto LOC_00000079;
 }
 
-function preventrecentanimindex(var0, var1, var2) {
-  var3 = self.asm.archetype;
+function preventrecentanimindex(var_0, var_1, var_2) {
+  var_3 = self.asm.archetype;
 
   if(isDefined(self.animationarchetype)) {
-    var3 = self.animationarchetype;
+    var_3 = self.animationarchetype;
   }
 
   if(!isDefined(anim.recentindices)) {
     anim.recentindices = [];
   }
 
-  var4 = gettime();
-  var5 = 1000;
-  var6 = 2;
-  var7 = 0;
-  var8 = 1;
-  var9 = var3 + var0;
+  var_4 = gettime();
+  var_5 = 1000;
+  var_6 = 2;
+  var_7 = 0;
+  var_8 = 1;
+  var_9 = var_3 + var_0;
 
-  if(isDefined(anim.recentindices[var9])) {
-    var10 = anim.recentindices[var9][var2];
+  if(isDefined(anim.recentindices[var_9])) {
+    var_10 = anim.recentindices[var_9][var_2];
 
-    if(var4 - var10[var7] <= var5 && var10[var8] >= var6) {
-      var11 = scripts\asm\asm::asm_getallanimindicesforalias(var0, var1);
-      var12 = var11[0];
-      var13 = var11[var11.size - 1];
+    if(var_4 - var_10[var_7] <= var_5 && var_10[var_8] >= var_6) {
+      var_11 = scripts\asm\asm::asm_getallanimindicesforalias(var_0, var_1);
+      var_12 = var_11[0];
+      var_13 = var_11[var_11.size - 1];
 
-      for(var14 = 1; var14 < var11.size; var14++) {
-        var15 = scripts\engine\math::wrap(var12, var13 - 1, var2 + var14);
+      for(var_14 = 1; var_14 < var_11.size; var_14++) {
+        var_15 = scripts\engine\math::wrap(var_12, var_13 - 1, var_2 + var_14);
 
-        if(anim.recentindices[var9][var15][var8] < var6) {
-          var2 = var15;
-          var10 = anim.recentindices[var9][var2];
+        if(anim.recentindices[var_9][var_15][var_8] < var_6) {
+          var_2 = var_15;
+          var_10 = anim.recentindices[var_9][var_2];
           break;
         }
       }
     }
 
-    if(var4 - var10[var7] > var5) {
-      GscBinSkip0(0x2e, var7, var4);
+    if(var_4 - var_10[var_7] > var_5) {
+      GscBinSkip0(0x2e, var_7, var_4);
     }
 
-    GscBinSkip0(0x2e, var8, var10[var8] + 1);
+    GscBinSkip0(0x2e, var_8, var_10[var_8] + 1);
   }
 
-  anim.recentindices[var10] = [];
-  var16 = scripts\asm\asm::asm_getallanimsforstate(var1);
+  anim.recentindices[var_10] = [];
+  var_16 = scripts\asm\asm::asm_getallanimsforstate(var_1);
 
-  for(var14 = 0; var14 < var16.size; var14++) {
-    anim.recentindices[var10][var14] = [0, 0];
+  for(var_14 = 0; var_14 < var_16.size; var_14++) {
+    anim.recentindices[var_10][var_14] = [0, 0];
   }
 
-  anim.recentindices[var10][var3][var8] = var5;
-  anim.recentindices[var10][var3][var9] = 1;
-  return var3;
+  anim.recentindices[var_10][var_3][var_8] = var_5;
+  anim.recentindices[var_10][var_3][var_9] = 1;
+  return var_3;
 }
 
-function intro_addplayer(var0, var1, var2, var3) {
+function intro_addplayer(var_0, var_1, var_2, var_3) {
   if(isDefined(self.intro_heli_animate_player)) {
-    return self[[self.intro_heli_animate_player]](var0, var1, var2, var3);
+    return self[[self.intro_heli_animate_player]](var_0, var_1, var_2, var_3);
   }
 
   return 0;

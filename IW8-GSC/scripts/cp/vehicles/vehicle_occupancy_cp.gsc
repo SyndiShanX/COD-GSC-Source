@@ -13,166 +13,166 @@ function vehicle_occupancy_cp_init() {
   scripts\mp\playeractions::registeractionset("vehicle", ["gesture", "killstreaks", "supers", "cp_munitions"]);
 }
 
-function vehicle_occupancy_cp_onentervehicle(var0, var1, var2, var3) {
-  if(isDefined(var0.vehicle_specific_onentervehicle)) {
-    [[var0.vehicle_specific_onentervehicle]](var0, var1, var2, var3);
+function vehicle_occupancy_cp_onentervehicle(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_0.vehicle_specific_onentervehicle)) {
+    [[var_0.vehicle_specific_onentervehicle]](var_0, var_1, var_2, var_3);
   }
 
-  var2 scripts\mp\playeractions::allowactionset("vehicle", 0);
-  scripts\cp\cp_outofbounds::enableoobimmunity(var2);
+  var_2 scripts\mp\playeractions::allowactionset("vehicle", 0);
+  scripts\cp\cp_outofbounds::enableoobimmunity(var_2);
 
-  if(scripts\cp\cp_outofbounds::isoob(var0, 1)) {
-    var0 thread scripts\cp\vehicles\vehicle_oob_cp::vehicle_oob_cp_entercallbackforplayer(var2);
+  if(scripts\cp\cp_outofbounds::isoob(var_0, 1)) {
+    var_0 thread scripts\cp\vehicles\vehicle_oob_cp::vehicle_oob_cp_entercallbackforplayer(var_2);
   }
 
-  if(isDefined(var2.x1circletime)) {
-    var2.x1circletime hide();
-    var2.x1circletime unlink();
+  if(isDefined(var_2.x1circletime)) {
+    var_2.x1circletime hide();
+    var_2.x1circletime unlink();
   }
 
-  if(istrue(var0.bshouldoccupantsbeignored)) {
-    var2 scripts\cp\utility::allow_player_ignore_me(1);
+  if(istrue(var_0.bshouldoccupantsbeignored)) {
+    var_2 scripts\cp\utility::allow_player_ignore_me(1);
   }
 
-  var2.binvehicle = 1;
-  var2.dontmelee = 1;
-  var2.dontmeleeme = 1;
-  var2 notify("entered_vehicle");
+  var_2.binvehicle = 1;
+  var_2.dontmelee = 1;
+  var_2.dontmeleeme = 1;
+  var_2 notify("entered_vehicle");
 }
 
-function vehicle_occupancy_cp_onexitvehicle(var0, var1, var2, var3) {
-  if(isDefined(var0.vehicle_specific_onexitvehicle)) {
-    [[var0.vehicle_specific_onexitvehicle]](var0, var1, var2, var3);
+function vehicle_occupancy_cp_onexitvehicle(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_0.vehicle_specific_onexitvehicle)) {
+    [[var_0.vehicle_specific_onexitvehicle]](var_0, var_1, var_2, var_3);
   }
 
-  if(!istrue(var3.playerdisconnect)) {
-    if(!istrue(var3.playerdeath)) {
-      var2 scripts\mp\playeractions::allowactionset("vehicle", 1);
+  if(!istrue(var_3.playerdisconnect)) {
+    if(!istrue(var_3.playerdeath)) {
+      var_2 scripts\mp\playeractions::allowactionset("vehicle", 1);
 
-      if(scripts\cp\cp_outofbounds::isoob(var0, 1)) {
-        var0 thread scripts\cp\vehicles\vehicle_oob_cp::vehicle_oob_cp_exitcallbackforplayer(var2);
+      if(scripts\cp\cp_outofbounds::isoob(var_0, 1)) {
+        var_0 thread scripts\cp\vehicles\vehicle_oob_cp::vehicle_oob_cp_exitcallbackforplayer(var_2);
       }
 
-      scripts\cp\cp_outofbounds::disableoobimmunity(var2);
+      scripts\cp\cp_outofbounds::disableoobimmunity(var_2);
     }
 
-    var2 notify("vehicle_exit");
+    var_2 notify("vehicle_exit");
   }
 
-  if(istrue(var0.bshouldoccupantsbeignored)) {
-    var2 scripts\cp\utility::allow_player_ignore_me(0);
+  if(istrue(var_0.bshouldoccupantsbeignored)) {
+    var_2 scripts\cp\utility::allow_player_ignore_me(0);
   }
 
-  if(isDefined(var2.x1circletime)) {
-    var2.x1circletime linkTo(var2, "tag_shield_back", (5, 10, 0), (0, 0, 90));
-    var2.x1circletime show();
+  if(isDefined(var_2.x1circletime)) {
+    var_2.x1circletime linkTo(var_2, "tag_shield_back", (5, 10, 0), (0, 0, 90));
+    var_2.x1circletime show();
   }
 
-  var2.shouldskiplaststand = undefined;
-  var2.binvehicle = 0;
-  var2.dontmelee = undefined;
-  var2.dontmeleeme = undefined;
-  var2 notify("exited_vehicle");
+  var_2.shouldskiplaststand = undefined;
+  var_2.binvehicle = 0;
+  var_2.dontmelee = undefined;
+  var_2.dontmeleeme = undefined;
+  var_2 notify("exited_vehicle");
 }
 
-function ref_141ce(var0) {
-  var0.shouldskipdeathsshield = 1;
-  var0.shouldskiplaststand = 1;
-  var0 dodamage(var0.health + 50, var0.origin);
+function ref_141ce(var_0) {
+  var_0.shouldskipdeathsshield = 1;
+  var_0.shouldskiplaststand = 1;
+  var_0 dodamage(var_0.health + 50, var_0.origin);
 }
 
-function ref_141cf(var0, var1, var2) {
-  var3 = undefined;
-  var4 = undefined;
-  var5 = undefined;
-  var6 = var0 getweaponslistprimaries();
+function ref_141cf(var_0, var_1, var_2) {
+  var_3 = undefined;
+  var_4 = undefined;
+  var_5 = undefined;
+  var_6 = var_0 getweaponslistprimaries();
 
-  foreach(var8 in var6) {
-    if(nullweapon(var8)) {
+  foreach(var_8 in var_6) {
+    if(nullweapon(var_8)) {
       continue;
     }
 
-    if(scripts\cp\utility::isriotshield(var8)) {
-      var3 = var8;
+    if(scripts\cp\utility::isriotshield(var_8)) {
+      var_3 = var_8;
 
-      if(isnullweapon(var3, var0 getcurrentprimaryweapon())) {
-        var4 = 1;
+      if(isnullweapon(var_3, var_0 getcurrentprimaryweapon())) {
+        var_4 = 1;
       }
 
       continue;
     }
 
-    if(!isDefined(var5)) {
-      var9 = var8 getnoaltweapon();
+    if(!isDefined(var_5)) {
+      var_9 = var_8 getnoaltweapon();
 
-      if(var9.inventorytype != "primary") {
+      if(var_9.inventorytype != "primary") {
         continue;
       }
 
-      var5 = var8;
+      var_5 = var_8;
     }
   }
 
-  if(isDefined(var3)) {
-    var0 scripts\cp_mp\utility\inventory_utility::_takeweapon(var3);
-    var0.ref_12d53 = var3;
-    var0.ref_12d4f = var4;
+  if(isDefined(var_3)) {
+    var_0 scripts\cp_mp\utility\inventory_utility::_takeweapon(var_3);
+    var_0.ref_12d53 = var_3;
+    var_0.ref_12d4f = var_4;
 
-    if(istrue(var4)) {
-      ref_141d0(var0, var1, var2);
+    if(istrue(var_4)) {
+      ref_141d0(var_0, var_1, var_2);
     }
 
-    var0 scripts\cp\cp_weapon::riotshieldonweaponchange(var5);
-    var0 notify("modified_riot_shield");
-    var0 endon("modified_riot_shield");
-    var0 childthread scripts\cp_mp\utility\inventory_utility::forcevalidweapon(var5);
+    var_0 scripts\cp\cp_weapon::riotshieldonweaponchange(var_5);
+    var_0 notify("modified_riot_shield");
+    var_0 endon("modified_riot_shield");
+    var_0 childthread scripts\cp_mp\utility\inventory_utility::forcevalidweapon(var_5);
     return;
   }
 }
 
-function ref_141cd(var0, var1, var2) {
-  if(isDefined(var0.ref_12d53)) {
-    if(!istrue(var1) && !istrue(var2)) {
-      var0 scripts\cp_mp\utility\inventory_utility::_giveweapon(var0.ref_12d53);
-      var0 scripts\cp\cp_weapon::ref_13c5c();
+function ref_141cd(var_0, var_1, var_2) {
+  if(isDefined(var_0.ref_12d53)) {
+    if(!istrue(var_1) && !istrue(var_2)) {
+      var_0 scripts\cp_mp\utility\inventory_utility::_giveweapon(var_0.ref_12d53);
+      var_0 scripts\cp\cp_weapon::ref_13c5c();
 
-      if(istrue(var0.ref_12d4f)) {
-        var0 notify("modified_riot_shield");
-        var0 endon("modified_riot_shield");
-        var0 childthread scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate(var0.ref_12d53);
+      if(istrue(var_0.ref_12d4f)) {
+        var_0 notify("modified_riot_shield");
+        var_0 endon("modified_riot_shield");
+        var_0 childthread scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate(var_0.ref_12d53);
       }
-    } else if(!istrue(var1) && istrue(var2)) {
-      var0.ref_12d4d = var0.ref_12d53;
+    } else if(!istrue(var_1) && istrue(var_2)) {
+      var_0.ref_12d4d = var_0.ref_12d53;
     }
 
-    var0.ref_12d53 = undefined;
-    var0.ref_12d4f = undefined;
-    var0 notify("modified_riot_shield");
+    var_0.ref_12d53 = undefined;
+    var_0.ref_12d4f = undefined;
+    var_0 notify("modified_riot_shield");
     return;
   }
 }
 
-function ref_141d0(var0, var1, var2) {
-  if(isDefined(var0.ref_12d53) && istrue(var0.ref_12d4f)) {
-    if(!isDefined(var2)) {
+function ref_141d0(var_0, var_1, var_2) {
+  if(isDefined(var_0.ref_12d53) && istrue(var_0.ref_12d4f)) {
+    if(!isDefined(var_2)) {
       return;
     }
 
-    if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141df(var1, var2)) {
+    if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141df(var_1, var_2)) {
       return;
     }
 
-    if(scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_shouldhideoccupantforseat(var1, var2)) {
+    if(scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_shouldhideoccupantforseat(var_1, var_2)) {
       return;
     }
 
-    var3 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getleveldataforseat(var1.vehiclename, var2);
+    var_3 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getleveldataforseat(var_1.vehiclename, var_2);
 
-    if(isDefined(var3.ref_13e8a)) {
+    if(isDefined(var_3.ref_13e8a)) {
       return;
     }
 
-    var0.ref_12d4f = undefined;
+    var_0.ref_12d4f = undefined;
     return;
   }
 }

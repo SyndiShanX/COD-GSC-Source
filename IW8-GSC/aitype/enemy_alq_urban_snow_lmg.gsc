@@ -28,10 +28,10 @@ function main() {
   self.usescriptedweapon = 1;
   self.scriptedweaponclassprimary = "lmg";
   self.weapon = scripts\code\ai::create_weapon_in_script(["iw8_lm_pkilo", "iw8_lm_mgolf34"]);
-  var0 = undefined;
-  var1 = ["character_al_qatala_urban_lmg_variant"];
+  var_0 = undefined;
+  var_1 = ["character_al_qatala_urban_lmg_variant"];
 
-  switch (scripts\code\character::get_random_character(1, var0, var1)) {
+  switch (scripts\code\character::get_random_character(1, var_0, var_1)) {
     case 0:
       character\character_al_qatala_urban_lmg_variant::main();
       break;
@@ -42,7 +42,7 @@ function spawner() {
   self setspawnerteam("axis");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\character_al_qatala_urban_lmg_variant::precache();
   scripts\aitypes\bt_util::init();
   scripts\aitypes\assets::soldier();

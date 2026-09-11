@@ -3,58 +3,58 @@
  * Script: scripts\stealth\group.gsc
 ***********************************************/
 
-function initgroup(var0) {
+function initgroup(var_0) {
   if(!isDefined(level.stealth.groupdata)) {
     level.stealth.groupdata = spawnStruct();
   }
 
-  var1 = level.stealth.groupdata;
+  var_1 = level.stealth.groupdata;
 
-  if(!isDefined(var1.groups)) {
-    var1.groups = [];
+  if(!isDefined(var_1.groups)) {
+    var_1.groups = [];
   }
 
-  var2 = var1.groups[var0];
+  var_2 = var_1.groups[var_0];
 
-  if(!isDefined(var2)) {
-    var2 = spawnStruct();
-    var1.groups[var0] = var2;
-    var2.name = var0;
-    var2.members = [];
-    var2.pods = [];
+  if(!isDefined(var_2)) {
+    var_2 = spawnStruct();
+    var_1.groups[var_0] = var_2;
+    var_2.name = var_0;
+    var_2.members = [];
+    var_2.pods = [];
   }
 
-  level.stealth.groupdata notify(var0);
+  level.stealth.groupdata notify(var_0);
 }
 
-function addtogroup(var0, var1) {
-  if(!isDefined(level.stealth.groupdata) || !isDefined(level.stealth.groupdata.groups) || !isDefined(level.stealth.groupdata.groups[var0])) {
-    initgroup(var0);
+function addtogroup(var_0, var_1) {
+  if(!isDefined(level.stealth.groupdata) || !isDefined(level.stealth.groupdata.groups) || !isDefined(level.stealth.groupdata.groups[var_0])) {
+    initgroup(var_0);
   }
 
-  var2 = level.stealth.groupdata.groups[var0];
-  var2.members[var2.members.size] = var1;
-  thread group_waitfordeath(var2);
+  var_2 = level.stealth.groupdata.groups[var_0];
+  var_2.members[var_2.members.size] = var_1;
+  thread group_waitfordeath(var_2);
 }
 
-function group_waitfordeath(var0) {
-  var0 waittill("death");
-  var0 thread scripts\stealth\enemy::death_cleanup();
-  group_removefrompod(self, var0);
-  var1 = self.members.size;
+function group_waitfordeath(var_0) {
+  var_0 waittill("death");
+  var_0 thread scripts\stealth\enemy::death_cleanup();
+  group_removefrompod(self, var_0);
+  var_1 = self.members.size;
 
-  for(var2 = 0; var2 < var1; var2++) {
-    if(self.members[var2] == var0) {
-      var3 = self.members.size - 1;
-      self.members[var2] = self.members[var3];
-      self.members[var3] = undefined;
+  for(var_2 = 0; var_2 < var_1; var_2++) {
+    if(self.members[var_2] == var_0) {
+      var_3 = self.members.size - 1;
+      self.members[var_2] = self.members[var_3];
+      self.members[var_3] = undefined;
       break;
     }
   }
 
-  if(isDefined(var0.stealth) && isDefined(var0.stealth.cleardata)) {
-    var4 = var0.stealth.cleardata.curregion;
-    var0 scripts\stealth\clear_regions::huntunassignfromregion(var4);
+  if(isDefined(var_0.stealth) && isDefined(var_0.stealth.cleardata)) {
+    var_4 = var_0.stealth.cleardata.curregion;
+    var_0 scripts\stealth\clear_regions::huntunassignfromregion(var_4);
     return;
   }
 }
@@ -71,82 +71,82 @@ function clearallgroups() {
   level.stealth.groupdata.groups = undefined;
 }
 
-function getgroup(var0) {
-  return level.stealth.groupdata.groups[var0];
+function getgroup(var_0) {
+  return level.stealth.groupdata.groups[var_0];
 }
 
-function makenewpod(var0, var1, var2) {
-  var3 = spawnStruct();
-  var3.state = var1;
-  var3.origin = var2;
-  var3.members = [];
-  var3.parentgroup = var0;
-  var0.pods[var0.pods.size] = var3;
-  return var3;
+function makenewpod(var_0, var_1, var_2) {
+  var_3 = spawnStruct();
+  var_3.state = var_1;
+  var_3.origin = var_2;
+  var_3.members = [];
+  var_3.parentgroup = var_0;
+  var_0.pods[var_0.pods.size] = var_3;
+  return var_3;
 }
 
-function addtopod(var0, var1) {
-  var0.members[var0.members.size] = var1;
+function addtopod(var_0, var_1) {
+  var_0.members[var_0.members.size] = var_1;
 }
 
-function group_trytojoinexistingpod(var0, var1, var2, var3, var4) {
-  var5 = 65536;
+function group_trytojoinexistingpod(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = 65536;
 
-  foreach(var7 in var0.pods) {
-    if(isDefined(var1) && var1 == var7) {
+  foreach(var_7 in var_0.pods) {
+    if(isDefined(var_1) && var_1 == var_7) {
       continue;
     }
 
-    if(var7.state == var2) {
-      if(distancesquared(var4, var7.origin) < var5) {
-        group_removefrompod(var0, var3);
-        addtopod(var7, var3);
-        return var7;
+    if(var_7.state == var_2) {
+      if(distancesquared(var_4, var_7.origin) < var_5) {
+        group_removefrompod(var_0, var_3);
+        addtopod(var_7, var_3);
+        return var_7;
       }
     }
   }
 }
 
-function group_assigntoinvestigatepod(var0, var1, var2) {
-  var3 = 65536;
-  var4 = group_trytojoinexistingpod(var0, undefined, 1, var1, var2);
+function group_assigntoinvestigatepod(var_0, var_1, var_2) {
+  var_3 = 65536;
+  var_4 = group_trytojoinexistingpod(var_0, undefined, 1, var_1, var_2);
 
-  if(isDefined(var4)) {
-    if(!isDefined(var4.investigateoriginguy)) {
-      pod_updateinvestigateorigin(var4, var1, var2);
+  if(isDefined(var_4)) {
+    if(!isDefined(var_4.investigateoriginguy)) {
+      pod_updateinvestigateorigin(var_4, var_1, var_2);
     }
 
     return false;
   }
 
-  group_removefrompod(var0, var1);
-  var5 = makenewpod(var0, 1, var2);
-  addtopod(var5, var1);
-  var5.investigateoriginguy = var1;
-  group_generateinitialinvestigatepoints(var5, var1.script_stealthgroup, var2);
-  var6 = level.stealth.investigate_volumes[self.script_stealthgroup];
+  group_removefrompod(var_0, var_1);
+  var_5 = makenewpod(var_0, 1, var_2);
+  addtopod(var_5, var_1);
+  var_5.investigateoriginguy = var_1;
+  group_generateinitialinvestigatepoints(var_5, var_1.script_stealthgroup, var_2);
+  var_6 = level.stealth.investigate_volumes[self.script_stealthgroup];
 
-  if(isDefined(var6)) {
-    var5.volume = var6;
-    var5.borigininvolume = ispointinvolume(var2, var6);
+  if(isDefined(var_6)) {
+    var_5.volume = var_6;
+    var_5.borigininvolume = ispointinvolume(var_2, var_6);
   }
 
   return true;
 }
 
-function group_assigntohuntpod(var0, var1, var2, var3) {
-  group_removefrompod(var0, var1);
+function group_assigntohuntpod(var_0, var_1, var_2, var_3) {
+  group_removefrompod(var_0, var_1);
 
-  foreach(var5 in var0.pods) {
-    if(var5.state == 2) {
-      if(!isDefined(var1.enemy) || !isDefined(var5.target) || var5.target == var1.enemy) {
-        addtopod(var5, var1);
+  foreach(var_5 in var_0.pods) {
+    if(var_5.state == 2) {
+      if(!isDefined(var_1.enemy) || !isDefined(var_5.target) || var_5.target == var_1.enemy) {
+        addtopod(var_5, var_1);
 
-        if(!isDefined(var5.target)) {
-          var5.target = var1.enemy;
+        if(!isDefined(var_5.target)) {
+          var_5.target = var_1.enemy;
 
-          if(isDefined(var2)) {
-            var5.origin = var2;
+          if(isDefined(var_2)) {
+            var_5.origin = var_2;
           }
         }
 
@@ -155,115 +155,115 @@ function group_assigntohuntpod(var0, var1, var2, var3) {
     }
   }
 
-  if(!isDefined(var2)) {
-    var2 = var1.origin;
+  if(!isDefined(var_2)) {
+    var_2 = var_1.origin;
   }
 
-  var7 = makenewpod(var0, 2, var2);
-  addtopod(var7, var1);
-  var7.target = var1.enemy;
-  group_generateinitialinvestigatepoints(var7, var1.script_stealthgroup, var2);
-  var8 = level.stealth.hunt_volumes[self.script_stealthgroup];
+  var_7 = makenewpod(var_0, 2, var_2);
+  addtopod(var_7, var_1);
+  var_7.target = var_1.enemy;
+  group_generateinitialinvestigatepoints(var_7, var_1.script_stealthgroup, var_2);
+  var_8 = level.stealth.hunt_volumes[self.script_stealthgroup];
 
-  if(isDefined(var8)) {
-    var7.volume = var8;
-    var7.borigininvolume = ispointinvolume(var2, var8);
+  if(isDefined(var_8)) {
+    var_7.volume = var_8;
+    var_7.borigininvolume = ispointinvolume(var_2, var_8);
   }
 
-  var7.lastannouncetime = gettime();
+  var_7.lastannouncetime = gettime();
   thread pod_hunt_vo();
   thread pod_hunt_update();
   thread pod_hunt_delayednotify();
 }
 
-function group_removefrompod(var0, var1) {
-  if(!isDefined(var0)) {
-    var0 = getgroup(var1.script_stealthgroup);
+function group_removefrompod(var_0, var_1) {
+  if(!isDefined(var_0)) {
+    var_0 = getgroup(var_1.script_stealthgroup);
   }
 
-  var2 = group_findpod(var0, var1);
+  var_2 = group_findpod(var_0, var_1);
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return;
   }
 
-  var3 = var2.members.size;
+  var_3 = var_2.members.size;
 
-  for(var4 = 0; var4 < var3; var4++) {
-    if(var2.members[var4] == var1) {
-      var5 = var2.members.size - 1;
-      var2.members[var4] = var2.members[var5];
-      var2.members[var5] = undefined;
+  for(var_4 = 0; var_4 < var_3; var_4++) {
+    if(var_2.members[var_4] == var_1) {
+      var_5 = var_2.members.size - 1;
+      var_2.members[var_4] = var_2.members[var_5];
+      var_2.members[var_5] = undefined;
       break;
     }
   }
 
-  if(var2.members.size == 0) {
-    pod_delete(var2);
+  if(var_2.members.size == 0) {
+    pod_delete(var_2);
     return;
   }
 }
 
-function group_findsomeotherguytoinvestigate(var0, var1) {
-  var2 = 2304;
-  var3 = undefined;
-  var4 = 2359296;
-  var5 = [];
+function group_findsomeotherguytoinvestigate(var_0, var_1) {
+  var_2 = 2304;
+  var_3 = undefined;
+  var_4 = 2359296;
+  var_5 = [];
 
-  foreach(var7 in level.stealth.groupdata.groups) {
-    if(var7.name == var1) {
+  foreach(var_7 in level.stealth.groupdata.groups) {
+    if(var_7.name == var_1) {
       continue;
     }
 
-    var8 = level.stealth.investigate_volumes[var7.name];
+    var_8 = level.stealth.investigate_volumes[var_7.name];
 
-    if(isDefined(var8) && !ispointinvolume(var0, var8)) {
+    if(isDefined(var_8) && !ispointinvolume(var_0, var_8)) {
       continue;
     }
 
-    foreach(var11, var10 in var7.pods) {
-      if(var10.state == 1 && distance2dsquared(var10.origin, var0) < var2) {
+    foreach(var_11, var_10 in var_7.pods) {
+      if(var_10.state == 1 && distance2dsquared(var_10.origin, var_0) < var_2) {
         return undefined;
       }
     }
 
-    foreach(var13 in var7.members) {
+    foreach(var_13 in var_7.members) {
       if([[self.fnisinstealthidle]]()) {
-        var14 = distancesquared(var13.origin, var0);
+        var_14 = distancesquared(var_13.origin, var_0);
 
-        if(var14 < var4) {
-          var5 = var13;
+        if(var_14 < var_4) {
+          var_5 = var_13;
 
-          if(var5.size > 8) {
+          if(var_5.size > 8) {
             break;
           }
         }
       }
     }
 
-    var11 = undefined;
-    var13 = undefined;
+    var_11 = undefined;
+    var_13 = undefined;
   }
 
-  var5 = undefined;
-  var15 = undefined;
+  var_5 = undefined;
+  var_15 = undefined;
 
-  if(var4.size > 0) {
-    var2 = findclosestnonlospointwithinvolume(var4, < error > );
+  if(var_4.size > 0) {
+    var_2 = findclosestnonlospointwithinvolume(var_4, < error > );
   }
 
-  return var2;
+  return var_2;
 }
 
-function group_checkrequestbackupoutsideofvolume(var0) {
-  var1 = level.stealth.investigate_volumes[self.script_stealthgroup];
+function group_checkrequestbackupoutsideofvolume(var_0) {
+  var_1 = level.stealth.investigate_volumes[self.script_stealthgroup];
 
-  if(isDefined(var1)) {
-    if(!ispointinvolume(var0.investigate_pos, var1)) {
-      var2 = group_findsomeotherguytoinvestigate(var0.investigate_pos, self.script_stealthgroup);
+  if(isDefined(var_1)) {
+    if(!ispointinvolume(var_0.investigate_pos, var_1)) {
+      var_2 = group_findsomeotherguytoinvestigate(var_0.investigate_pos, self.script_stealthgroup);
 
-      if(isDefined(var2)) {
-        var2 aieventlistenerevent("seek_backup", self, var0.investigate_pos);
+      if(isDefined(var_2)) {
+        var_2 aieventlistenerevent("seek_backup", self, var_0.investigate_pos);
         return true;
       }
     }
@@ -272,37 +272,37 @@ function group_checkrequestbackupoutsideofvolume(var0) {
   return false;
 }
 
-function group_eventinvestigate(var0, var1, var2) {
-  var3 = getgroup(var0);
-  var4 = group_assigntoinvestigatepod(var3, var1, var2.investigate_pos);
+function group_eventinvestigate(var_0, var_1, var_2) {
+  var_3 = getgroup(var_0);
+  var_4 = group_assigntoinvestigatepod(var_3, var_1, var_2.investigate_pos);
 
-  if(var4) {
-    thread group_investigate_seekbackup(var1);
+  if(var_4) {
+    thread group_investigate_seekbackup(var_1);
     return;
   }
 }
 
-function group_investigate_seekbackup(var0) {
+function group_investigate_seekbackup(var_0) {
   self endon("death");
   self endon("start_context_melee");
   waitframe();
-  group_checkrequestbackupoutsideofvolume(var0);
+  group_checkrequestbackupoutsideofvolume(var_0);
   waitframe();
-  var1 = getgroup(self.script_stealthgroup);
-  var2 = group_findpod(var1, self);
+  var_1 = getgroup(self.script_stealthgroup);
+  var_2 = group_findpod(var_1, self);
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return;
   }
 
-  if(var2.members.size == 1) {
-    var3 = var1.members.size;
+  if(var_2.members.size == 1) {
+    var_3 = var_1.members.size;
 
-    for(var4 = 0; var4 < var3; var4++) {
-      var5 = var1.members[var4];
+    for(var_4 = 0; var_4 < var_3; var_4++) {
+      var_5 = var_1.members[var_4];
 
-      if(var5.stealth.bsmstate == 0 && distancesquared(var5.origin, self.origin) < 10000) {
-        var5 glanceatentity(self);
+      if(var_5.stealth.bsmstate == 0 && distancesquared(var_5.origin, self.origin) < 10000) {
+        var_5 glanceatentity(self);
       }
     }
 
@@ -310,168 +310,168 @@ function group_investigate_seekbackup(var0) {
   }
 }
 
-function group_generateinitialinvestigatepoints(var0, var1, var2) {
-  var3 = getgroup(var1);
-  var4 = 1000000;
-  var5 = [];
-  var6 = getnodearray("seek_patrol", "targetname");
-  var7 = scripts\engine\utility::getStructArray("seek_patrol", "targetname");
-  var6 = scripts\engine\utility::array_combine(var6, var7);
+function group_generateinitialinvestigatepoints(var_0, var_1, var_2) {
+  var_3 = getgroup(var_1);
+  var_4 = 1000000;
+  var_5 = [];
+  var_6 = getnodearray("seek_patrol", "targetname");
+  var_7 = scripts\engine\utility::getStructArray("seek_patrol", "targetname");
+  var_6 = scripts\engine\utility::array_combine(var_6, var_7);
 
-  for(var8 = 0; var8 < var6.size; var8++) {
-    var9 = 0;
-    var10 = var6[var8];
+  for(var_8 = 0; var_8 < var_6.size; var_8++) {
+    var_9 = 0;
+    var_10 = var_6[var_8];
 
-    if(distancesquared(var10.origin, var2) > var4) {
-      var9 = 1;
-    } else if(isDefined(var10.script_stealthgroup)) {
-      if(var10.script_stealthgroup == var1) {
-        var5 = var10;
+    if(distancesquared(var_10.origin, var_2) > var_4) {
+      var_9 = 1;
+    } else if(isDefined(var_10.script_stealthgroup)) {
+      if(var_10.script_stealthgroup == var_1) {
+        var_5 = var_10;
       }
 
-      var9 = 1;
+      var_9 = 1;
     }
 
-    if(var9) {
-      var11 = var6.size - 1;
-      var6 = var6[var11];
-      var6[var11] = undefined;
+    if(var_9) {
+      var_11 = var_6.size - 1;
+      var_6 = var_6[var_11];
+      var_6[var_11] = undefined;
       continue;
     }
   }
 
-  var5 = sortbydistance(var5, var2);
-  var6 = sortbydistance(var6, var2);
-  var0.investigatepoints = scripts\engine\utility::array_combine(var5, var6);
+  var_5 = sortbydistance(var_5, var_2);
+  var_6 = sortbydistance(var_6, var_2);
+  var_0.investigatepoints = scripts\engine\utility::array_combine(var_5, var_6);
 }
 
-function group_findpod(var0, var1) {
-  if(!isDefined(var0.pods)) {
+function group_findpod(var_0, var_1) {
+  if(!isDefined(var_0.pods)) {
     return;
   }
 
-  var2 = var0.pods.size;
+  var_2 = var_0.pods.size;
 
-  for(var3 = 0; var3 < var2; var3++) {
-    var4 = var0.pods[var3];
-    var5 = var4.members.size;
+  for(var_3 = 0; var_3 < var_2; var_3++) {
+    var_4 = var_0.pods[var_3];
+    var_5 = var_4.members.size;
 
-    for(var6 = 0; var6 < var5; var6++) {
-      if(var4.members[var6] == var1) {
-        return var4;
+    for(var_6 = 0; var_6 < var_5; var_6++) {
+      if(var_4.members[var_6] == var_1) {
+        return var_4;
       }
     }
   }
 }
 
-function pod_addusedpoint(var0, var1) {
-  var0.usedpoints[var0.usedpoints.size] = var1;
-  var0.usedpointsexpiry[var0.usedpointsexpiry.size] = gettime() + 5000;
+function pod_addusedpoint(var_0, var_1) {
+  var_0.usedpoints[var_0.usedpoints.size] = var_1;
+  var_0.usedpointsexpiry[var_0.usedpointsexpiry.size] = gettime() + 5000;
 }
 
-function pod_cleanupusedpoints(var0) {
-  var1 = gettime();
+function pod_cleanupusedpoints(var_0) {
+  var_1 = gettime();
 
-  for(var2 = 0; var2 < var0.usedpointsexpiry.size; var2++) {
-    if(var1 >= var0.usedpointsexpiry[var2]) {
-      var3 = var0.usedpointsexpiry.size - 1;
-      var0.usedpointsexpiry[var2] = var0.usedpointsexpiry[var3];
-      var0.usedpointsexpiry[var3] = undefined;
-      var0.usedpoints[var2] = var0.usedpoints[var3];
-      var0.usedpoints[var3] = undefined;
+  for(var_2 = 0; var_2 < var_0.usedpointsexpiry.size; var_2++) {
+    if(var_1 >= var_0.usedpointsexpiry[var_2]) {
+      var_3 = var_0.usedpointsexpiry.size - 1;
+      var_0.usedpointsexpiry[var_2] = var_0.usedpointsexpiry[var_3];
+      var_0.usedpointsexpiry[var_3] = undefined;
+      var_0.usedpoints[var_2] = var_0.usedpoints[var_3];
+      var_0.usedpoints[var_3] = undefined;
       continue;
     }
   }
 }
 
-function group_getinvestigatepoint(var0, var1) {
-  var2 = getgroup(var0.script_stealthgroup);
-  var3 = group_findpod(var2, var0);
+function group_getinvestigatepoint(var_0, var_1) {
+  var_2 = getgroup(var_0.script_stealthgroup);
+  var_3 = group_findpod(var_2, var_0);
 
-  if(!isDefined(var3.usedpoints)) {
-    var3.usedpoints = [];
-    var3.usedpointsexpiry = [];
+  if(!isDefined(var_3.usedpoints)) {
+    var_3.usedpoints = [];
+    var_3.usedpointsexpiry = [];
   }
 
-  pod_cleanupusedpoints(var3);
-  var4 = undefined;
-  var5 = [];
+  pod_cleanupusedpoints(var_3);
+  var_4 = undefined;
+  var_5 = [];
 
-  foreach(var7 in var3.members) {
-    var8 = spawnStruct();
-    var8.guy = var7;
-    var9 = var7.origin - var3.origin;
-    var8.angle = vectortoyaw(var9);
-    var5 = var8;
+  foreach(var_7 in var_3.members) {
+    var_8 = spawnStruct();
+    var_8.guy = var_7;
+    var_9 = var_7.origin - var_3.origin;
+    var_8.angle = vectortoyaw(var_9);
+    var_5 = var_8;
 
-    if(var7 == var0) {
-      var4 = var8.angle;
+    if(var_7 == var_0) {
+      var_4 = var_8.angle;
     }
   }
 
-  var11 = 0;
+  var_11 = 0;
 
-  foreach(var13 in var5) {
-    if(var13.angle < var4) {
-      var11++;
+  foreach(var_13 in var_5) {
+    if(var_13.angle < var_4) {
+      var_11++;
     }
   }
 
-  var9 = var0.origin - var3.origin;
-  var15 = length(var9);
-  var16 = 768;
-  var17 = 512;
-  var18 = 256;
-  var19 = -128;
-  var20 = 64;
-  var21 = 360 / var5.size;
-  var22 = var11 * var21;
+  var_9 = var_0.origin - var_3.origin;
+  var_15 = length(var_9);
+  var_16 = 768;
+  var_17 = 512;
+  var_18 = 256;
+  var_19 = -128;
+  var_20 = 64;
+  var_21 = 360 / var_5.size;
+  var_22 = var_11 * var_21;
 
-  foreach(var24 in var3.investigatepoints) {
-    if(isDefined(var24.lastinvestigatedtime)) {
+  foreach(var_24 in var_3.investigatepoints) {
+    if(isDefined(var_24.lastinvestigatedtime)) {
       continue;
     }
 
-    if(ispointinlane(var24, var3, var22, var21, var15, var18)) {
-      var24.lastinvestigatedtime = gettime();
-      return var24.origin;
+    if(ispointinlane(var_24, var_3, var_22, var_21, var_15, var_18)) {
+      var_24.lastinvestigatedtime = gettime();
+      return var_24.origin;
     }
   }
 
-  var26 = var15;
+  var_26 = var_15;
 
-  if(var15 > var16) {
-    var26 = max(60, randomfloatrange(var15 - var18 * 2, var15 - var18));
-  } else if(var15 > var17) {
-    var26 = randomfloatrange(var15 + var19, var15 + var18);
+  if(var_15 > var_16) {
+    var_26 = max(60, randomfloatrange(var_15 - var_18 * 2, var_15 - var_18));
+  } else if(var_15 > var_17) {
+    var_26 = randomfloatrange(var_15 + var_19, var_15 + var_18);
   } else {
-    var26 = randomfloatrange(var15, var15 + var18);
+    var_26 = randomfloatrange(var_15, var_15 + var_18);
   }
 
-  var27 = (0.5 + var11 + randomfloatrange(-0.5, 0.5)) * var21;
-  var28 = (cos(var27), sin(var27), 0);
-  var29 = var3.origin + var26 * var28;
-  var30 = scripts\smartobjects\utility::getbestsmartobject(var29, var3.volume, 256);
+  var_27 = (0.5 + var_11 + randomfloatrange(-0.5, 0.5)) * var_21;
+  var_28 = (cos(var_27), sin(var_27), 0);
+  var_29 = var_3.origin + var_26 * var_28;
+  var_30 = scripts\smartobjects\utility::getbestsmartobject(var_29, var_3.volume, 256);
 
-  if(isDefined(var30)) {
-    self.asm.customdata.arrivalangles = var30.angles;
-    scripts\smartobjects\utility::setsmartobject(var30);
-    pod_addusedpoint(var3, var30.origin);
-    return var30.origin;
+  if(isDefined(var_30)) {
+    self.asm.customdata.arrivalangles = var_30.angles;
+    scripts\smartobjects\utility::setsmartobject(var_30);
+    pod_addusedpoint(var_3, var_30.origin);
+    return var_30.origin;
   }
 
-  var31 = var3.usedpoints;
-  GscBinSkip0(0x2e, var31.size, self.origin);
+  var_31 = var_3.usedpoints;
+  GscBinSkip0(0x2e, var_31.size, self.origin);
 }
 
-function ispointinlane(var0, var1, var2, var3, var4, var5) {
-  var6 = var0.origin - var1.origin;
-  var7 = length(var6);
-  var8 = vectortoyaw(var6);
-  var9 = var8 - var2;
+function ispointinlane(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = var_0.origin - var_1.origin;
+  var_7 = length(var_6);
+  var_8 = vectortoyaw(var_6);
+  var_9 = var_8 - var_2;
 
-  if(var9 >= 0 && var9 <= var3) {
-    if(var4 + var5 > var7) {
+  if(var_9 >= 0 && var_9 <= var_3) {
+    if(var_4 + var_5 > var_7) {
       return true;
     }
   }
@@ -479,56 +479,56 @@ function ispointinlane(var0, var1, var2, var3, var4, var5) {
   return false;
 }
 
-function group_eventcoverblown(var0, var1, var2) {
-  var3 = getgroup(var0);
-  thread group_delayedcoverblownpropagation(var3);
-  var4 = group_assigntoinvestigatepod(var3, var1, var2.investigate_pos);
+function group_eventcoverblown(var_0, var_1, var_2) {
+  var_3 = getgroup(var_0);
+  thread group_delayedcoverblownpropagation(var_3);
+  var_4 = group_assigntoinvestigatepod(var_3, var_1, var_2.investigate_pos);
 
-  if(var4) {
-    thread group_coverblown_seekbackup(var3, var2);
+  if(var_4) {
+    thread group_coverblown_seekbackup(var_3, var_2);
     return;
   }
 }
 
-function group_delayedcoverblownpropagation(var0) {
+function group_delayedcoverblownpropagation(var_0) {
   wait 2;
 
-  if(isDefined(var0) && isalive(var0)) {
+  if(isDefined(var_0) && isalive(var_0)) {
     self.bcoverhasbeenblown = 1;
     return;
   }
 }
 
-function group_coverblown_seekbackup(var0, var1) {
+function group_coverblown_seekbackup(var_0, var_1) {
   self endon("death");
   self endon("start_context_melee");
   waitframe();
-  var2 = group_findpod(var0, self);
+  var_2 = group_findpod(var_0, self);
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return;
   }
 
-  if(var2.members.size == 1) {
-    var3 = var0.members.size;
+  if(var_2.members.size == 1) {
+    var_3 = var_0.members.size;
 
-    for(var4 = 0; var4 < var3; var4++) {
-      var5 = var0.members[var4];
+    for(var_4 = 0; var_4 < var_3; var_4++) {
+      var_5 = var_0.members[var_4];
 
-      if(var5 != self && var5.stealth.bsmstate == 0 && distancesquared(var5.origin, self.origin) < 10000) {
-        var5 glanceatentity(self);
+      if(var_5 != self && var_5.stealth.bsmstate == 0 && distancesquared(var_5.origin, self.origin) < 10000) {
+        var_5 glanceatentity(self);
       }
     }
   }
 
-  if(group_checkrequestbackupoutsideofvolume(var1)) {
+  if(group_checkrequestbackupoutsideofvolume(var_1)) {
     return;
   }
 
-  if(var0.members.size > 1) {
-    var2 = group_findpod(var0, self);
+  if(var_0.members.size > 1) {
+    var_2 = group_findpod(var_0, self);
 
-    if(isDefined(var2) && var2.state == 1 && var2.members.size == 1 && (!isDefined(var2.borigininvolume) || var2.borigininvolume)) {
+    if(isDefined(var_2) && var_2.state == 1 && var_2.members.size == 1 && (!isDefined(var_2.borigininvolume) || var_2.borigininvolume)) {
       thread scripts\stealth\utility::addeventplaybcs("stealth", "announce2", "seek_backup", 2, undefined, 1);
       return;
     }
@@ -537,43 +537,43 @@ function group_coverblown_seekbackup(var0, var1) {
   }
 }
 
-function pod_updateinvestigateorigin(var0, var1) {
-  self.origin = var1;
+function pod_updateinvestigateorigin(var_0, var_1) {
+  self.origin = var_1;
 
   if(!isDefined(self.needsupdate)) {
     self.needsupdate = [];
   }
 
-  self.investigateoriginguy = var0;
-  self.needsupdate[self.needsupdate.size] = var0;
+  self.investigateoriginguy = var_0;
+  self.needsupdate[self.needsupdate.size] = var_0;
 }
 
-function group_eventhunt(var0, var1) {
-  var2 = getgroup(var0);
-  var3 = self.origin;
-  var4 = 0;
+function group_eventhunt(var_0, var_1) {
+  var_2 = getgroup(var_0);
+  var_3 = self.origin;
+  var_4 = 0;
 
-  if(isDefined(var1.enemy)) {
-    var3 = var1 lastknownpos(var1.enemy);
-    var4 = var1 lastknowntime(var1.enemy);
-    var3 = getclosestpointonnavmesh(var3, self);
+  if(isDefined(var_1.enemy)) {
+    var_3 = var_1 lastknownpos(var_1.enemy);
+    var_4 = var_1 lastknowntime(var_1.enemy);
+    var_3 = getclosestpointonnavmesh(var_3, self);
   }
 
-  group_removefrompod(var2, var1);
-  group_assigntohuntpod(var2, var1, var3, var4);
+  group_removefrompod(var_2, var_1);
+  group_assigntohuntpod(var_2, var_1, var_3, var_4);
 }
 
-function group_updatepodhuntorigin(var0, var1) {
-  var2 = getgroup(var0.script_stealthgroup);
-  var3 = group_findpod(var2, var0);
-  var3.origin = getclosestpointonnavmesh(var1, var0);
-  var3.borigininvestigated = undefined;
+function group_updatepodhuntorigin(var_0, var_1) {
+  var_2 = getgroup(var_0.script_stealthgroup);
+  var_3 = group_findpod(var_2, var_0);
+  var_3.origin = getclosestpointonnavmesh(var_1, var_0);
+  var_3.borigininvestigated = undefined;
 
-  if(isDefined(var3.volume)) {
-    var3.borigininvolume = ispointinvolume(var1, var3.volume);
+  if(isDefined(var_3.volume)) {
+    var_3.borigininvolume = ispointinvolume(var_1, var_3.volume);
   }
 
-  return var3.origin;
+  return var_3.origin;
 }
 
 function pod_hunt_update() {
@@ -581,8 +581,8 @@ function pod_hunt_update() {
   thread pod_hunt_hunker_update();
 
   if(isDefined(level.stealth.hunttimeout) && level.stealth.hunttimeout[self.script_stealthgroup]) {
-    var0 = level.stealth.hunttimeout[self.script_stealthgroup];
-    wait var0;
+    var_0 = level.stealth.hunttimeout[self.script_stealthgroup];
+    wait var_0;
     thread pod_settoidle();
     return;
   }
@@ -592,9 +592,9 @@ function pod_hunt_hunker_update() {
   self endon("state_change");
 
   for(;;) {
-    var0 = isDefined(self.volume) && !istrue(self.borigininvolume);
+    var_0 = isDefined(self.volume) && !istrue(self.borigininvolume);
 
-    if(var0) {
+    if(var_0) {
       if(!isDefined(self.hunkerstarttime)) {
         self.hunkerstarttime = gettime();
         self.bhunkering = 1;
@@ -613,18 +613,18 @@ function pod_hunt_hunker_update() {
 function pod_hunt_delayednotify() {
   self endon("state_change");
   wait 3;
-  var0 = self.parentgroup;
+  var_0 = self.parentgroup;
 
-  foreach(var2 in var0.members) {
-    if(var2[[var2.fnisinstealthidle]]() || var2[[var2.fnisinstealthinvestigate]]()) {
-      var3 = 1;
+  foreach(var_2 in var_0.members) {
+    if(var_2[[var_2.fnisinstealthidle]]() || var_2[[var_2.fnisinstealthinvestigate]]()) {
+      var_3 = 1;
 
-      if(isDefined(var2.stealth.funcs) && isDefined(var2.stealth.funcs["should_hunt"])) {
-        var3 = var2[[var2.stealth.funcs["should_hunt"]]]();
+      if(isDefined(var_2.stealth.funcs) && isDefined(var_2.stealth.funcs["should_hunt"])) {
+        var_3 = var_2[[var_2.stealth.funcs["should_hunt"]]]();
       }
 
-      if(var3) {
-        var2 scripts\stealth\enemy::bt_set_stealth_state("hunt", undefined);
+      if(var_3) {
+        var_2 scripts\stealth\enemy::bt_set_stealth_state("hunt", undefined);
       }
     }
   }
@@ -637,67 +637,67 @@ function pod_hunt_vo() {
     return;
   }
 
-  var0 = undefined;
+  var_0 = undefined;
 
   for(;;) {
-    var1 = [];
+    var_1 = [];
 
-    foreach(var10, var3 in level.stealth.groupdata.groups) {
-      if(isDefined(var3.pods)) {
-        foreach(var5 in var3.pods) {
-          if(isDefined(var5.state) && var5.state == 2) {
-            foreach(var7 in var5.members) {
-              var1 = scripts\engine\utility::array_add(var1, var7);
+    foreach(var_10, var_3 in level.stealth.groupdata.groups) {
+      if(isDefined(var_3.pods)) {
+        foreach(var_5 in var_3.pods) {
+          if(isDefined(var_5.state) && var_5.state == 2) {
+            foreach(var_7 in var_5.members) {
+              var_1 = scripts\engine\utility::array_add(var_1, var_7);
             }
           }
         }
       }
     }
 
-    if(var1.size < 1) {
+    if(var_1.size < 1) {
       break;
     }
 
-    if(var1.size > 1) {
-      var1 = sortbydistance(var1, level.player.origin);
-      var1[0].battlechatter.customgroup = var1;
-      var1[0] thread scripts\stealth\utility::addeventplaybcs("stealth", "hunt", "teaminquiry", undefined, undefined, 1);
-      var11 = var1[0];
-      var1 = scripts\engine\utility::array_remove(var1, var11);
+    if(var_1.size > 1) {
+      var_1 = sortbydistance(var_1, level.player.origin);
+      var_1[0].battlechatter.customgroup = var_1;
+      var_1[0] thread scripts\stealth\utility::addeventplaybcs("stealth", "hunt", "teaminquiry", undefined, undefined, 1);
+      var_11 = var_1[0];
+      var_1 = scripts\engine\utility::array_remove(var_1, var_11);
       wait randomfloatrange(2, 2.5);
-      var1 = scripts\engine\utility::array_removedead_or_dying(var1);
-      var1 = sortbydistance(var1, level.player.origin);
-      var7 = undefined;
+      var_1 = scripts\engine\utility::array_removedead_or_dying(var_1);
+      var_1 = sortbydistance(var_1, level.player.origin);
+      var_7 = undefined;
 
-      switch (var1.size) {
+      switch (var_1.size) {
         case 0:
           break;
         case 3:
         case 2:
         case 1:
-          var7 = var1[randomint(var1.size)];
+          var_7 = var_1[randomint(var_1.size)];
           break;
         default:
-          var7 = var1[randomint(3)];
+          var_7 = var_1[randomint(3)];
           break;
       }
 
-      if(!isDefined(var7)) {
+      if(!isDefined(var_7)) {
         break;
       }
 
-      var0 = scripts\engine\utility::array_add(var0, var7);
-      var10.battlechatter.customgroup = var0;
-      var10 thread scripts\stealth\utility::addeventplaybcs("stealth", "hunt", "lost_sight", undefined, undefined, 1);
+      var_0 = scripts\engine\utility::array_add(var_0, var_7);
+      var_10.battlechatter.customgroup = var_0;
+      var_10 thread scripts\stealth\utility::addeventplaybcs("stealth", "hunt", "lost_sight", undefined, undefined, 1);
     } else {
-      var10 = var0[0];
+      var_10 = var_0[0];
 
       if(!isDefined( < error > )) {
         <
         error > = 1;
-        var10 thread scripts\stealth\utility::addeventplaybcs("stealth", "hunt", "first_lost");
+        var_10 thread scripts\stealth\utility::addeventplaybcs("stealth", "hunt", "first_lost");
       } else {
-        var10 thread scripts\stealth\utility::addeventplaybcs("stealth", "hunt", "lost_sight");
+        var_10 thread scripts\stealth\utility::addeventplaybcs("stealth", "hunt", "lost_sight");
       }
     }
 
@@ -707,28 +707,28 @@ function pod_hunt_vo() {
   level.bcs_stealthhuntthink = undefined;
 }
 
-function group_assigntocombatpod(var0, var1) {
-  group_removefrompod(var0, var1);
+function group_assigntocombatpod(var_0, var_1) {
+  group_removefrompod(var_0, var_1);
 
-  foreach(var3 in var0.pods) {
-    if(var3.state == 3) {
-      addtopod(var3, var1);
+  foreach(var_3 in var_0.pods) {
+    if(var_3.state == 3) {
+      addtopod(var_3, var_1);
       return false;
     }
   }
 
-  var5 = makenewpod(var0, 3, undefined);
-  addtopod(var5, var1);
+  var_5 = makenewpod(var_0, 3, undefined);
+  addtopod(var_5, var_1);
   thread pod_combat_update_checklosttarget();
   thread pod_combat_periodicping();
   return true;
 }
 
-function group_anyoneincombat(var0) {
-  var1 = getgroup(var0);
+function group_anyoneincombat(var_0) {
+  var_1 = getgroup(var_0);
 
-  foreach(var3 in var1.pods) {
-    if(var3.state == 3) {
+  foreach(var_3 in var_1.pods) {
+    if(var_3.state == 3) {
       return true;
     }
   }
@@ -736,125 +736,125 @@ function group_anyoneincombat(var0) {
   return false;
 }
 
-function group_eventcombat(var0, var1, var2) {
-  var3 = getgroup(var0);
-  var4 = undefined;
+function group_eventcombat(var_0, var_1, var_2) {
+  var_3 = getgroup(var_0);
+  var_4 = undefined;
 
-  if(isDefined(var2)) {
-    var4 = var2.origin;
+  if(isDefined(var_2)) {
+    var_4 = var_2.origin;
   }
 
-  var5 = group_findpod(var3, var1);
-  group_assigntocombatpod(var3, var1);
-  thread group_delayedcombatpropagation(var3, 2, var1, var2);
-  thread group_delayedcombatpropagationfromhunt(var3, 3, var1, var2);
+  var_5 = group_findpod(var_3, var_1);
+  group_assigntocombatpod(var_3, var_1);
+  thread group_delayedcombatpropagation(var_3, 2, var_1, var_2);
+  thread group_delayedcombatpropagationfromhunt(var_3, 3, var_1, var_2);
 }
 
-function group_delayedcombatpropagationfromhunt(var0, var1, var2, var3) {
-  var1 endon("death");
-  wait var0;
+function group_delayedcombatpropagationfromhunt(var_0, var_1, var_2, var_3) {
+  var_1 endon("death");
+  wait var_0;
 
-  if(!isDefined(var1) || !isalive(var1) || istrue(var1.in_melee_death)) {
+  if(!isDefined(var_1) || !isalive(var_1) || istrue(var_1.in_melee_death)) {
     return;
   }
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return;
   }
 
-  var4 = 65536;
+  var_4 = 65536;
 
-  foreach(var6 in level.stealth.groupdata.groups) {
-    foreach(var8 in var6.members) {
-      if(var1 == var8) {
+  foreach(var_6 in level.stealth.groupdata.groups) {
+    foreach(var_8 in var_6.members) {
+      if(var_1 == var_8) {
         continue;
       }
 
-      var9 = group_findpod(var6, var8);
+      var_9 = group_findpod(var_6, var_8);
 
-      if(!isDefined(var9)) {
+      if(!isDefined(var_9)) {
         continue;
       }
 
-      if(var9.state == 1 || var9.state == 2 && isDefined(var9.target) && var9.target == var2) {
-        if(var1.script_stealthgroup == var8.script_stealthgroup || distancesquared(var1.origin, var8.origin) < var4) {
-          var8 getenemyinfo(var2);
-          var8 aieventlistenerevent("combat", var2, var3);
+      if(var_9.state == 1 || var_9.state == 2 && isDefined(var_9.target) && var_9.target == var_2) {
+        if(var_1.script_stealthgroup == var_8.script_stealthgroup || distancesquared(var_1.origin, var_8.origin) < var_4) {
+          var_8 getenemyinfo(var_2);
+          var_8 aieventlistenerevent("combat", var_2, var_3);
         }
       }
     }
   }
 }
 
-function group_delayedcombatpropagation(var0, var1, var2, var3) {
-  wait var0;
-  var4 = 16384;
+function group_delayedcombatpropagation(var_0, var_1, var_2, var_3) {
+  wait var_0;
+  var_4 = 16384;
 
-  if(!isDefined(var1) || !isalive(var1) || istrue(var1.in_melee_death)) {
+  if(!isDefined(var_1) || !isalive(var_1) || istrue(var_1.in_melee_death)) {
     return;
   }
 
   self.bcoverhasbeenblown = 1;
   level notify("cover_blown");
 
-  foreach(var6 in level.stealth.groupdata.groups) {
-    foreach(var8 in var6.members) {
-      if(var1 == var8) {
+  foreach(var_6 in level.stealth.groupdata.groups) {
+    foreach(var_8 in var_6.members) {
+      if(var_1 == var_8) {
         continue;
       }
 
-      var9 = 0;
-      var10 = 0;
-      var11 = group_findpod(var6, var8);
+      var_9 = 0;
+      var_10 = 0;
+      var_11 = group_findpod(var_6, var_8);
 
-      if(isDefined(var11) && var11.state == 3) {
+      if(isDefined(var_11) && var_11.state == 3) {
         continue;
       }
 
-      if(isDefined(var2)) {
-        if(var8 cansee(var2)) {
-          var9 = 1;
-          var10 = 1;
+      if(isDefined(var_2)) {
+        if(var_8 cansee(var_2)) {
+          var_9 = 1;
+          var_10 = 1;
         }
       }
 
-      if(!var9 && var8 cansee(var1)) {
-        var9 = 1;
+      if(!var_9 && var_8 cansee(var_1)) {
+        var_9 = 1;
       }
 
-      if(!var9 && distancesquared(var8.origin, var1.origin) < var4 && var8 hastacvis(var1)) {
-        var9 = 1;
+      if(!var_9 && distancesquared(var_8.origin, var_1.origin) < var_4 && var_8 hastacvis(var_1)) {
+        var_9 = 1;
 
-        if(isDefined(var2)) {
-          var10 = 1;
+        if(isDefined(var_2)) {
+          var_10 = 1;
         }
       }
 
-      if(var10) {
-        var8 getenemyinfo(var2);
+      if(var_10) {
+        var_8 getenemyinfo(var_2);
       }
 
-      if(var9) {
-        if(isDefined(var2)) {
-          var8 aieventlistenerevent("combat", var2, var3);
+      if(var_9) {
+        if(isDefined(var_2)) {
+          var_8 aieventlistenerevent("combat", var_2, var_3);
           continue;
         }
 
-        var8 aieventlistenerevent("combat", var1, var1.origin);
+        var_8 aieventlistenerevent("combat", var_1, var_1.origin);
       }
     }
   }
 }
 
-function pod_settocombat(var0, var1) {
-  var2 = self.members;
+function pod_settocombat(var_0, var_1) {
+  var_2 = self.members;
 
-  foreach(var4 in var2) {
-    if(var0) {
-      var4 getenemyinfo(var1);
+  foreach(var_4 in var_2) {
+    if(var_0) {
+      var_4 getenemyinfo(var_1);
     }
 
-    var4 aieventlistenerevent("combat", var1, var1.origin);
+    var_4 aieventlistenerevent("combat", var_1, var_1.origin);
   }
 }
 
@@ -864,29 +864,29 @@ function groups_combat_checklosttarget() {
   waitframe();
 
   while(!isDefined(level.stealth.bstayincombatoncealerted)) {
-    var0 = [];
-    var1 = 1;
+    var_0 = [];
+    var_1 = 1;
 
-    foreach(var3 in level.stealth.groupdata.groups) {
-      foreach(var5 in var3.pods) {
-        if(var5.state == 3) {
-          var0 = var5;
+    foreach(var_3 in level.stealth.groupdata.groups) {
+      foreach(var_5 in var_3.pods) {
+        if(var_5.state == 3) {
+          var_0 = var_5;
 
-          if(!isDefined(var5.bchecklosttarget) || !pod_haslostenemy(var5)) {
-            var1 = 0;
+          if(!isDefined(var_5.bchecklosttarget) || !pod_haslostenemy(var_5)) {
+            var_1 = 0;
             break;
           }
         }
       }
 
-      if(!var1) {
+      if(!var_1) {
         break;
       }
     }
 
-    if(var1) {
-      foreach(var9 in var0) {
-        pod_settohunt(var9);
+    if(var_1) {
+      foreach(var_9 in var_0) {
+        pod_settohunt(var_9);
       }
 
       return;
@@ -913,37 +913,37 @@ function pod_combat_update_checklosttarget() {
 }
 
 function pod_haslostenemy() {
-  var0 = 10000;
-  var1 = 15000;
-  var2 = 50625;
-  var3 = gettime();
-  var4 = undefined;
+  var_0 = 10000;
+  var_1 = 15000;
+  var_2 = 50625;
+  var_3 = gettime();
+  var_4 = undefined;
 
-  foreach(var6 in self.members) {
-    if(isDefined(var6.stealth.funcs) && isDefined(var6.stealth.funcs["has_lost_enemy"])) {
-      return var6[[var6.stealth.funcs["has_lost_enemy"]]]();
+  foreach(var_6 in self.members) {
+    if(isDefined(var_6.stealth.funcs) && isDefined(var_6.stealth.funcs["has_lost_enemy"])) {
+      return var_6[[var_6.stealth.funcs["has_lost_enemy"]]]();
     }
 
-    var7 = var6.enemy;
+    var_7 = var_6.enemy;
 
-    if(isDefined(var7) && issentient(var7) && isalive(var7)) {
-      if(var7.team != "allies") {
+    if(isDefined(var_7) && issentient(var_7) && isalive(var_7)) {
+      if(var_7.team != "allies") {
         return 0;
       }
 
-      var8 = var6 lastknowntime(var7);
+      var_8 = var_6 lastknowntime(var_7);
 
-      if(var3 < var8 + var0) {
+      if(var_3 < var_8 + var_0) {
         return 0;
       }
 
-      var9 = var6 lastknownpos(var7);
+      var_9 = var_6 lastknownpos(var_7);
 
-      if(var8 > 0 && distancesquared(var7.origin, var9) < var2) {
+      if(var_8 > 0 && distancesquared(var_7.origin, var_9) < var_2) {
         return 0;
       }
 
-      if(var3 < var8 + var1 && var7 hastacvis(var9)) {
+      if(var_3 < var_8 + var_1 && var_7 hastacvis(var_9)) {
         return 0;
       }
 
@@ -954,7 +954,7 @@ function pod_haslostenemy() {
       continue;
     }
 
-    if(!isDefined(var6.enemy) && var6 scripts\engine\utility::ent_flag_exist("in_the_dark") && var6 scripts\engine\utility::ent_flag("in_the_dark") && var3 - var6.lastenemysighttime < var0) {
+    if(!isDefined(var_6.enemy) && var_6 scripts\engine\utility::ent_flag_exist("in_the_dark") && var_6 scripts\engine\utility::ent_flag("in_the_dark") && var_3 - var_6.lastenemysighttime < var_0) {
       return 0;
     }
   }
@@ -962,19 +962,19 @@ function pod_haslostenemy() {
   return 1;
 }
 
-function pod_isclosetoanymembers(var0, var1, var2) {
-  if(!var2) {
-    var2 = 0;
+function pod_isclosetoanymembers(var_0, var_1, var_2) {
+  if(!var_2) {
+    var_2 = 0;
   }
 
-  var3 = var1 * var1;
+  var_3 = var_1 * var_1;
 
-  foreach(var5 in self.members) {
-    if(distancesquared(var0.origin, var5.origin) > var3) {
+  foreach(var_5 in self.members) {
+    if(distancesquared(var_0.origin, var_5.origin) > var_3) {
       continue;
     }
 
-    if(var2 && !var0 hastacvis(var5)) {
+    if(var_2 && !var_0 hastacvis(var_5)) {
       continue;
     }
 
@@ -986,89 +986,89 @@ function pod_isclosetoanymembers(var0, var1, var2) {
 
 function pod_combat_periodicping() {
   self endon("state_change");
-  var0 = 1;
-  var1 = 384;
-  wait var0;
+  var_0 = 1;
+  var_1 = 384;
+  wait var_0;
 
   for(;;) {
-    foreach(var3 in level.stealth.groupdata.groups) {
-      foreach(var5 in var3.members) {
-        if(var5.stealth.bsmstate == 3 || var5.stealth.bsmstate == 2) {
+    foreach(var_3 in level.stealth.groupdata.groups) {
+      foreach(var_5 in var_3.members) {
+        if(var_5.stealth.bsmstate == 3 || var_5.stealth.bsmstate == 2) {
           continue;
         }
 
-        if(pod_isclosetoanymembers(var5, var1, 1)) {
-          var5 aieventlistenerevent("combat", var5, var5.origin);
+        if(pod_isclosetoanymembers(var_5, var_1, 1)) {
+          var_5 aieventlistenerevent("combat", var_5, var_5.origin);
         }
       }
     }
 
-    wait var0;
+    wait var_0;
   }
 }
 
 function pod_settohunt() {
-  var0 = self.members;
+  var_0 = self.members;
 
-  foreach(var2 in var0) {
-    var3 = 1;
+  foreach(var_2 in var_0) {
+    var_3 = 1;
 
-    if(isDefined(var2.stealth.funcs) && isDefined(var2.stealth.funcs["should_hunt"])) {
-      var3 = var2[[var2.stealth.funcs["should_hunt"]]]();
+    if(isDefined(var_2.stealth.funcs) && isDefined(var_2.stealth.funcs["should_hunt"])) {
+      var_3 = var_2[[var_2.stealth.funcs["should_hunt"]]]();
     }
 
-    if(!var3) {
-      var2 scripts\stealth\enemy::bt_set_stealth_state("idle", undefined);
+    if(!var_3) {
+      var_2 scripts\stealth\enemy::bt_set_stealth_state("idle", undefined);
       continue;
     }
 
-    var2 scripts\stealth\enemy::bt_set_stealth_state("hunt", undefined);
+    var_2 scripts\stealth\enemy::bt_set_stealth_state("hunt", undefined);
   }
 }
 
 function pod_settoidle() {
-  foreach(var1 in self.members) {
-    var1 aieventlistenerevent("reset", var1, var1.origin);
+  foreach(var_1 in self.members) {
+    var_1 aieventlistenerevent("reset", var_1, var_1.origin);
   }
 }
 
-function pod_isleader(var0) {
-  var1 = getgroup(var0.script_stealthgroup);
-  var2 = group_findpod(var1, var0);
+function pod_isleader(var_0) {
+  var_1 = getgroup(var_0.script_stealthgroup);
+  var_2 = group_findpod(var_1, var_0);
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return false;
   }
 
-  return var2.members[0] == var0;
+  return var_2.members[0] == var_0;
 }
 
-function pod_getclosestguy(var0) {
-  var1 = undefined;
-  var2 = 99999999;
+function pod_getclosestguy(var_0) {
+  var_1 = undefined;
+  var_2 = 99999999;
 
-  foreach(var4 in self.members) {
-    var5 = distancesquared(var4.origin, var0);
+  foreach(var_4 in self.members) {
+    var_5 = distancesquared(var_4.origin, var_0);
 
-    if(!isDefined(var1) || var5 < var2) {
-      var1 = var4;
-      var2 = var5;
+    if(!isDefined(var_1) || var_5 < var_2) {
+      var_1 = var_4;
+      var_2 = var_5;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
 function pod_delete() {
   self notify("state_change");
-  var0 = self.parentgroup;
-  var1 = var0.pods.size;
+  var_0 = self.parentgroup;
+  var_1 = var_0.pods.size;
 
-  for(var2 = 0; var2 < var1; var2++) {
-    if(var0.pods[var2] == self) {
-      var3 = var0.pods.size - 1;
-      var0.pods[var2] = var0.pods[var3];
-      var0.pods[var3] = undefined;
+  for(var_2 = 0; var_2 < var_1; var_2++) {
+    if(var_0.pods[var_2] == self) {
+      var_3 = var_0.pods.size - 1;
+      var_0.pods[var_2] = var_0.pods[var_3];
+      var_0.pods[var_3] = undefined;
       break;
     }
   }

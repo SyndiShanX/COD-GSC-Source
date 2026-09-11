@@ -28,10 +28,10 @@ function main() {
   self.usescriptedweapon = 1;
   self.scriptedweaponclassprimary = "ar";
   self.weapon = scripts\code\ai::create_weapon_in_script(["iw8_ar_akilo47"]);
-  var0 = undefined;
-  var1 = ["character_iw8_russian_army_ar_1_gasmask", "character_iw8_russian_army_ar_1_gasmask_only", "character_iw8_russian_army_ar_2_gasmask", "character_iw8_russian_army_ar_2_gasmask_only", "character_iw8_russian_army_ar_3_gasmask_only", "character_iw8_russian_army_ar_4_gasmask", "character_iw8_russian_army_ar_4_gasmask_only", "character_iw8_russian_army_ar_5_gasmask", "character_iw8_russian_army_ar_5_gasmask_only", "character_iw8_russian_army_ar_6_gasmask_only"];
+  var_0 = undefined;
+  var_1 = ["character_iw8_russian_army_ar_1_gasmask", "character_iw8_russian_army_ar_1_gasmask_only", "character_iw8_russian_army_ar_2_gasmask", "character_iw8_russian_army_ar_2_gasmask_only", "character_iw8_russian_army_ar_3_gasmask_only", "character_iw8_russian_army_ar_4_gasmask", "character_iw8_russian_army_ar_4_gasmask_only", "character_iw8_russian_army_ar_5_gasmask", "character_iw8_russian_army_ar_5_gasmask_only", "character_iw8_russian_army_ar_6_gasmask_only"];
 
-  switch (scripts\code\character::get_random_character(10, var0, var1)) {
+  switch (scripts\code\character::get_random_character(10, var_0, var_1)) {
     case 0:
       character\character_iw8_russian_army_ar_1_gasmask::main();
       break;
@@ -69,7 +69,7 @@ function spawner() {
   self setspawnerteam("axis");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\character_iw8_russian_army_ar_1_gasmask::precache();
   character\character_iw8_russian_army_ar_1_gasmask_only::precache();
   character\character_iw8_russian_army_ar_2_gasmask::precache();

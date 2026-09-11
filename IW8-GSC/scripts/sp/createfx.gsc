@@ -17,8 +17,8 @@ function createfx() {
   level.mp_createfx = 0;
   scripts\engine\utility::array_call(getaiarray(), &delete);
   scripts\engine\utility::array_call(getspawnerarray(), &delete);
-  var0 = getaiarray();
-  scripts\engine\utility::array_call(var0, &delete);
+  var_0 = getaiarray();
+  scripts\engine\utility::array_call(var_0, &delete);
   scripts\common\createfx::createfx_common();
   thread scripts\common\createfx::createfxlogic();
   thread scripts\common\createfx::func_get_level_fx();
@@ -29,12 +29,12 @@ function createfx() {
 }
 
 function createfx_only_triggers() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, "trigger_multiple_createart_transient", &scripts\sp\trigger::trigger_createart_transient);
 }
 
-function func_position_player_get(var0) {
-  if(distancesquared(var0, level.player.origin) > 4096) {
+function func_position_player_get(var_0) {
+  if(distancesquared(var_0, level.player.origin) > 4096) {
     setDvar("createfx_playerpos_x", level.player.origin[0]);
     setDvar("createfx_playerpos_y", level.player.origin[1]);
     setDvar("createfx_playerpos_z", level.player.origin[2]);
@@ -44,7 +44,7 @@ function func_position_player_get(var0) {
 }
 
 function func_position_player() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, getdvarint("createfx_playerpos_x"));
 }
 

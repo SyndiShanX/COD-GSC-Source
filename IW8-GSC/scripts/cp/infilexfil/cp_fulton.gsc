@@ -3,41 +3,41 @@
  * Script: scripts\cp\infilexfil\cp_fulton.gsc
 ***********************************************/
 
-function fulton_group_exfil_at_pos(var0, var1, var2, var3) {
-  thread fulton_group_exfil_at_pos_internal(level, var0, var1, var2);
+function fulton_group_exfil_at_pos(var_0, var_1, var_2, var_3) {
+  thread fulton_group_exfil_at_pos_internal(level, var_0, var_1, var_2);
 }
 
-function fulton_group_exfil_at_pos_internal(var0, var1, var2, var3) {
-  var4 = spawnStruct();
-  var4.origin = var0;
-  var4.angles = var1;
-  var4.buildweaponfromrandomcategory = var3;
-  var5 = 120;
+function fulton_group_exfil_at_pos_internal(var_0, var_1, var_2, var_3) {
+  var_4 = spawnStruct();
+  var_4.origin = var_0;
+  var_4.angles = var_1;
+  var_4.buildweaponfromrandomcategory = var_3;
+  var_5 = 120;
 
-  if(isDefined(var2)) {
-    var5 = var2;
+  if(isDefined(var_2)) {
+    var_5 = var_2;
   }
 
   thread anim_init_exfil_fulton();
-  thread launch_evac_box(level, var5);
-  thread ref_1353a(level, var0, var1);
+  thread launch_evac_box(level, var_5);
+  thread ref_1353a(level, var_0, var_1);
 }
 
-function ref_1353a(var0, var1, var2) {
-  var3 = var0 - (0, 0, 192);
-  var2.modsforclass = spawn("script_model", var3);
-  var2.modsforclass setModel("military_fulton_assembly_ks");
+function ref_1353a(var_0, var_1, var_2) {
+  var_3 = var_0 - (0, 0, 192);
+  var_2.modsforclass = spawn("script_model", var_3);
+  var_2.modsforclass setModel("military_fulton_assembly_ks");
 }
 
-function launch_evac_box(var0, var1) {
+function launch_evac_box(var_0, var_1) {
   thread temp_move_exfil_box(level);
-  var2 = 3;
+  var_2 = 3;
 
-  if(var0 > 3) {
-    var2 = var0;
+  if(var_0 > 3) {
+    var_2 = var_0;
   }
 
-  wait var2;
+  wait var_2;
   level notify("drop_evac_box");
 }
 
@@ -50,104 +50,104 @@ function init_crate_type() {
   level.cratedata.configs["cp_fulton_exfil"].friendlymodel = "military_fulton_assembly_ks";
 }
 
-function play_airdrop_crate(var0) {
+function play_airdrop_crate(var_0) {
   init_crate_type(level);
-  var1 = var0.origin;
-  var2 = var0.angles;
-  var3 = (0, 0, 0);
+  var_1 = var_0.origin;
+  var_2 = var_0.angles;
+  var_3 = (0, 0, 0);
 
-  if(isDefined(var0.buildweaponfromrandomcategory)) {
-    var3 = var0.buildweaponfromrandomcategory;
+  if(isDefined(var_0.buildweaponfromrandomcategory)) {
+    var_3 = var_0.buildweaponfromrandomcategory;
   }
 
-  var4 = 1024000000;
-  var5 = scripts\cp\utility::give_closest_player_nearby(var1, var4, "allies");
-  var6 = var5 scripts\cp_mp\utility\killstreak_utility::createstreakinfo("", var5);
-  var6.numcrates = 1;
-  var6.cratetype = "cp_fulton_exfil";
-  var6.scenenodeoffset = var3;
-  var6.usephysics = 1;
-  var7 = &scripts\cp_mp\killstreaks\airdrop_multiple::airdrop_multiple_dropcrates;
-  var8 = level thread[[var7]](var5, var5.team, var1, var2, var1, var6);
+  var_4 = 1024000000;
+  var_5 = scripts\cp\utility::give_closest_player_nearby(var_1, var_4, "allies");
+  var_6 = var_5 scripts\cp_mp\utility\killstreak_utility::createstreakinfo("", var_5);
+  var_6.numcrates = 1;
+  var_6.cratetype = "cp_fulton_exfil";
+  var_6.scenenodeoffset = var_3;
+  var_6.usephysics = 1;
+  var_7 = &scripts\cp_mp\killstreaks\airdrop_multiple::airdrop_multiple_dropcrates;
+  var_8 = level thread[[var_7]](var_5, var_5.team, var_1, var_2, var_1, var_6);
   waitframe();
-  var9 = undefined;
+  var_9 = undefined;
 
-  foreach(var11 in var8.crates) {
-    var9 = var11;
+  foreach(var_11 in var_8.crates) {
+    var_9 = var_11;
     break;
   }
 
-  return var9;
+  return var_9;
 }
 
-function temp_move_exfil_box(var0) {
-  var1 = spawn_fulton_crate_model(var0);
-  var1 hide();
+function temp_move_exfil_box(var_0) {
+  var_1 = spawn_fulton_crate_model(var_0);
+  var_1 hide();
   level waittill("drop_evac_box");
-  var2 = play_airdrop_crate(level, var0);
-  var2 hide();
-  var2.isdummyarmcrate = 1;
-  var2 scripts\cp_mp\killstreaks\airdrop::deactivatecrate();
-  var2 scripts\engine\utility::delaythread(2, &scripts\cp_mp\killstreaks\airdrop::deactivatecrate);
-  var2 dontinterpolate();
-  var2.heli_assault3_death_watcher = spawn("script_model", var2.origin);
-  var3 = getdvarint("scr_fultonextract_scriptablebroken", 0);
+  var_2 = play_airdrop_crate(level, var_0);
+  var_2 hide();
+  var_2.isdummyarmcrate = 1;
+  var_2 scripts\cp_mp\killstreaks\airdrop::deactivatecrate();
+  var_2 scripts\engine\utility::delaythread(2, &scripts\cp_mp\killstreaks\airdrop::deactivatecrate);
+  var_2 dontinterpolate();
+  var_2.heli_assault3_death_watcher = spawn("script_model", var_2.origin);
+  var_3 = getdvarint("scr_fultonextract_scriptablebroken", 0);
 
-  if(var3 > 0) {
-    var2.heli_assault3_death_watcher setModel("military_fulton_assembly_ks");
-    var2.heli_assault3_death_watcher.angles = var2.angles;
-    var2.heli_assault3_death_watcher setscriptablepartstate("anims", "idle");
+  if(var_3 > 0) {
+    var_2.heli_assault3_death_watcher setModel("military_fulton_assembly_ks");
+    var_2.heli_assault3_death_watcher.angles = var_2.angles;
+    var_2.heli_assault3_death_watcher setscriptablepartstate("anims", "idle");
   } else {
-    var2.heli_assault3_death_watcher setModel("military_fulton_assembly");
-    var2.heli_assault3_death_watcher.angles = var2.friendlymodel.angles;
-    var2.heli_assault3_death_watcher linkTo(var2.friendlymodel, "tag_origin");
+    var_2.heli_assault3_death_watcher setModel("military_fulton_assembly");
+    var_2.heli_assault3_death_watcher.angles = var_2.friendlymodel.angles;
+    var_2.heli_assault3_death_watcher linkTo(var_2.friendlymodel, "tag_origin");
     thread playerstreamwaittillcomplete();
-    var2.friendlymodel hide();
+    var_2.friendlymodel hide();
   }
 
-  var2 waittill("anim_finished");
-  var4 = var2.origin;
-  var2.angles = var0.angles;
-  var2.physicsactivated = 0;
-  var2.friendlymodel hide();
+  var_2 waittill("anim_finished");
+  var_4 = var_2.origin;
+  var_2.angles = var_0.angles;
+  var_2.physicsactivated = 0;
+  var_2.friendlymodel hide();
   waitframe();
-  var2.heli_assault3_death_watcher.angles = var0.angles;
-  var5 = var4[2];
-  var6 = var5 - var0.origin[2] + 100;
-  var7 = var5 - var0.origin[2];
+  var_2.heli_assault3_death_watcher.angles = var_0.angles;
+  var_5 = var_4[2];
+  var_6 = var_5 - var_0.origin[2] + 100;
+  var_7 = var_5 - var_0.origin[2];
 
-  if(var6 > 0) {
-    var8 = (var2.angles[0], var2.angles[1] + 180, var2.angles[2]);
-    var2 dontinterpolate();
-    var2.origin = var4;
-    var2.angles = var8;
-    var2.heli_assault3_death_watcher dontinterpolate();
-    var2.heli_assault3_death_watcher.origin = var4;
-    var2.heli_assault3_death_watcher.angles = var8;
-    var9 = var7 / 400;
-    var10 = max(var9 * 0.33 - 0.05, 0.05);
-    var2 moveTo(var0.origin + (0, 0, 8), var9, var10, 0.05);
-    var2.heli_assault3_death_watcher moveTo(var0.origin + (0, 0, 8), var9, var10, 0.05);
-    var2.heli_assault3_death_watcher rotateTo(var0.angles, var9, 0.05, 0.05);
-    wait var9;
+  if(var_6 > 0) {
+    var_8 = (var_2.angles[0], var_2.angles[1] + 180, var_2.angles[2]);
+    var_2 dontinterpolate();
+    var_2.origin = var_4;
+    var_2.angles = var_8;
+    var_2.heli_assault3_death_watcher dontinterpolate();
+    var_2.heli_assault3_death_watcher.origin = var_4;
+    var_2.heli_assault3_death_watcher.angles = var_8;
+    var_9 = var_7 / 400;
+    var_10 = max(var_9 * 0.33 - 0.05, 0.05);
+    var_2 moveTo(var_0.origin + (0, 0, 8), var_9, var_10, 0.05);
+    var_2.heli_assault3_death_watcher moveTo(var_0.origin + (0, 0, 8), var_9, var_10, 0.05);
+    var_2.heli_assault3_death_watcher rotateTo(var_0.angles, var_9, 0.05, 0.05);
+    wait var_9;
   }
 
-  var2 playRumbleOnEntity("grenade_rumble");
-  earthquake(0.2, 0.75, var2.origin, 600);
-  var2 playSound("scn_cp_group_fulton_crate_impact");
+  var_2 playRumbleOnEntity("grenade_rumble");
+  earthquake(0.2, 0.75, var_2.origin, 600);
+  var_2 playSound("scn_cp_group_fulton_crate_impact");
   waitframe();
-  var2 scripts\cp_mp\killstreaks\airdrop::deactivatecrate(1);
-  thread delayed_enable_fulton_extract(level, var1, var2);
+  var_2 scripts\cp_mp\killstreaks\airdrop::deactivatecrate(1);
+  thread delayed_enable_fulton_extract(level, var_1, var_2);
 }
 
-function spawn_fulton_crate_model(var0) {
-  var1 = var0.origin;
-  var2 = var0.angles;
-  var3 = spawn("script_model", var1);
-  var3 setModel("military_fulton_assembly");
-  var3.angles = var2;
-  var3.targetname = "fulton_carepackage_model";
-  return var3;
+function spawn_fulton_crate_model(var_0) {
+  var_1 = var_0.origin;
+  var_2 = var_0.angles;
+  var_3 = spawn("script_model", var_1);
+  var_3 setModel("military_fulton_assembly");
+  var_3.angles = var_2;
+  var_3.targetname = "fulton_carepackage_model";
+  return var_3;
 }
 
 function playerstreamwaittillcomplete() {
@@ -162,41 +162,41 @@ function playerstreamwaittillcomplete() {
   self hidepart("j_baloon_upr_tip_dwn");
 }
 
-function delayed_enable_fulton_extract(var0, var1, var2) {
-  thread infil_name(level, var0, var1);
+function delayed_enable_fulton_extract(var_0, var_1, var_2) {
+  thread infil_name(level, var_0, var_1);
   thread play_crate_vfx(level);
-  thread create_fulton_group_interactions(level, var0);
+  thread create_fulton_group_interactions(level, var_0);
   thread track_fulton_uses();
   level.obj_allow_fulton = 1;
 }
 
-function infil_name(var0, var1, var2) {
-  var3 = spawnStruct();
-  var3.origin = var2.origin;
-  var3.angles = var2.angles;
-  thread ref_14402(var0);
+function infil_name(var_0, var_1, var_2) {
+  var_3 = spawnStruct();
+  var_3.origin = var_2.origin;
+  var_3.angles = var_2.angles;
+  thread ref_14402(var_0);
   thread ref_14401();
-  var4 = thread ref_13559(var3);
-  var5 = scripts\cp_mp\anim_scene::anim_scene_create_actor(var4, "fulton_ac130");
-  var5 scripts\cp_mp\anim_scene::anim_scene_set_actor_interruptable(0);
-  thread ref_123bf(level, var3, 0.2, var5);
-  var6 = scripts\cp_mp\anim_scene::anim_scene_create_actor(var0, "device");
-  var6 scripts\cp_mp\anim_scene::anim_scene_set_actor_interruptable(0);
-  baloon_deposit_death_check(var5, "ac130");
-  baloon_deposit_death_check(var6, "crate");
-  var0 dontinterpolate();
-  var4 dontinterpolate();
-  var3 scripts\cp_mp\anim_scene::anim_scene([var6], "device_setup", 1, 0);
-  var3 scripts\cp_mp\anim_scene::anim_scene_stop();
+  var_4 = thread ref_13559(var_3);
+  var_5 = scripts\cp_mp\anim_scene::anim_scene_create_actor(var_4, "fulton_ac130");
+  var_5 scripts\cp_mp\anim_scene::anim_scene_set_actor_interruptable(0);
+  thread ref_123bf(level, var_3, 0.2, var_5);
+  var_6 = scripts\cp_mp\anim_scene::anim_scene_create_actor(var_0, "device");
+  var_6 scripts\cp_mp\anim_scene::anim_scene_set_actor_interruptable(0);
+  baloon_deposit_death_check(var_5, "ac130");
+  baloon_deposit_death_check(var_6, "crate");
+  var_0 dontinterpolate();
+  var_4 dontinterpolate();
+  var_3 scripts\cp_mp\anim_scene::anim_scene([var_6], "device_setup", 1, 0);
+  var_3 scripts\cp_mp\anim_scene::anim_scene_stop();
   level waittill("play_fulton_evac_together");
 
-  foreach(var8 in level.playerstoptimerdelete) {
-    var8.entity playsoundonmovingent("scn_cp_group_fulton_exfil_wind");
+  foreach(var_8 in level.playerstoptimerdelete) {
+    var_8.entity playsoundonmovingent("scn_cp_group_fulton_exfil_wind");
     thread ref_12498();
-    thread ref_123eb(var8);
+    thread ref_123eb(var_8);
   }
 
-  var3 thread scripts\cp_mp\anim_scene::anim_scene([var5, var6], "fulton_evac", 0, 0);
+  var_3 thread scripts\cp_mp\anim_scene::anim_scene([var_5, var_6], "fulton_evac", 0, 0);
 }
 
 function ref_12498() {
@@ -210,78 +210,78 @@ function ref_12498() {
   scripts\cp\cp_player_battlechatter::trysaylocalsound(self, "flavor_awesome");
 }
 
-function ref_123eb(var0) {
-  var1 = self;
-  var2 = var1.auto_respawn_timer;
-  var3 = var1.audio_stop_obj_room_fires;
-  var4 = undefined;
+function ref_123eb(var_0) {
+  var_1 = self;
+  var_2 = var_1.auto_respawn_timer;
+  var_3 = var_1.audio_stop_obj_room_fires;
+  var_4 = undefined;
 
-  switch (var3) {
+  switch (var_3) {
     case 1:
-      var4 = "crate_hook_fk_BK_ctrl";
+      var_4 = "crate_hook_fk_BK_ctrl";
       break;
     case 2:
-      var4 = "crate_hook_fk_RI_ctrl";
+      var_4 = "crate_hook_fk_RI_ctrl";
       break;
     case 3:
-      var4 = "crate_hook_fk_LE_ctrl";
+      var_4 = "crate_hook_fk_LE_ctrl";
       break;
     case 4:
-      var4 = "crate_hook_fk_FR_ctrl";
+      var_4 = "crate_hook_fk_FR_ctrl";
       break;
   }
 
-  var5 = var0.entity scripts\engine\utility::spawn_tag_origin();
-  var5 linkTo(var0.entity, var4, (0, 0, 0), (0, 0, 0));
-  var2.entity linkTo(var5, "tag_origin");
-  var1.player_rig linkTo(var5, "tag_origin");
-  var6 = spawn("script_model", var1.entity.origin);
-  var6 setModel(var1.entity.model);
-  var6.angles = var1.entity.angles;
-  var6 linkTo(var5, "tag_origin", (0, 0, 0), (0, 0, 0));
-  var7 = scripts\cp_mp\anim_scene::anim_scene_create_actor(var6, "player_" + var3);
-  var7 scripts\cp_mp\anim_scene::anim_scene_set_actor_interruptable(0);
-  thread ref_11aa5(var1, var6);
-  var5 thread scripts\cp_mp\anim_scene::anim_scene([var1, var2, var7], "fulton_evac", 0, 0);
+  var_5 = var_0.entity scripts\engine\utility::spawn_tag_origin();
+  var_5 linkTo(var_0.entity, var_4, (0, 0, 0), (0, 0, 0));
+  var_2.entity linkTo(var_5, "tag_origin");
+  var_1.player_rig linkTo(var_5, "tag_origin");
+  var_6 = spawn("script_model", var_1.entity.origin);
+  var_6 setModel(var_1.entity.model);
+  var_6.angles = var_1.entity.angles;
+  var_6 linkTo(var_5, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_7 = scripts\cp_mp\anim_scene::anim_scene_create_actor(var_6, "player_" + var_3);
+  var_7 scripts\cp_mp\anim_scene::anim_scene_set_actor_interruptable(0);
+  thread ref_11aa5(var_1, var_6);
+  var_5 thread scripts\cp_mp\anim_scene::anim_scene([var_1, var_2, var_7], "fulton_evac", 0, 0);
 }
 
-function ref_11aa5(var0, var1) {
-  var1 hide();
+function ref_11aa5(var_0, var_1) {
+  var_1 hide();
   wait 2;
 
-  for(var2 = 0; var2 < level.players.size; var2++) {
-    if(var0.entity != level.players[var2]) {
-      var1 showtoplayer(level.players[var2]);
+  for(var_2 = 0; var_2 < level.players.size; var_2++) {
+    if(var_0.entity != level.players[var_2]) {
+      var_1 showtoplayer(level.players[var_2]);
     }
   }
 
-  var0.entity playerhide();
+  var_0.entity playerhide();
 }
 
-function baloon_deposit_death_check(var0) {
+function baloon_deposit_death_check(var_0) {
   if(!isDefined(level.playerstarttimetracking)) {
     level.playerstarttimetracking = [];
   }
 
-  self.type = var0;
+  self.type = var_0;
   level.playerstarttimetracking[level.playerstarttimetracking.size] = self;
 }
 
-function ballowexecutions(var0, var1) {
+function ballowexecutions(var_0, var_1) {
   if(!isDefined(level.playerstoptimerdelete)) {
     level.playerstoptimerdelete = [];
   }
 
-  self.auto_respawn_timer = var0;
-  self.audio_stop_obj_room_fires = var1;
+  self.auto_respawn_timer = var_0;
+  self.audio_stop_obj_room_fires = var_1;
   level.playerstoptimerdelete[level.playerstoptimerdelete.size] = self;
 }
 
-function ref_14402(var0) {
+function ref_14402(var_0) {
   wait 1;
   self show();
-  var0.heli_assault3_death_watcher delete();
-  var0 scripts\cp_mp\killstreaks\airdrop::destroycrate(1);
+  var_0.heli_assault3_death_watcher delete();
+  var_0 scripts\cp_mp\killstreaks\airdrop::destroycrate(1);
 }
 
 function ref_14401() {
@@ -290,88 +290,88 @@ function ref_14401() {
   earthquake(0.1, 0.45, self.origin, 600);
 }
 
-function play_crate_vfx(var0) {
-  playFX(scripts\engine\utility::getfx("vfx_carepkg_landing_dust"), var0.origin, anglesToForward(var0.angles), anglestoup(var0.angles));
+function play_crate_vfx(var_0) {
+  playFX(scripts\engine\utility::getfx("vfx_carepkg_landing_dust"), var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles));
 }
 
-function create_fulton_group_interactions(var0, var1) {
-  level.playertakeextractionplunder = var0;
-  var2 = 16;
+function create_fulton_group_interactions(var_0, var_1) {
+  level.playertakeextractionplunder = var_0;
+  var_2 = 16;
   wait 2.5;
-  var3 = var0.origin + rotatevector((0, 35, var2), var1.angles);
-  var4 = thread spawn_fulton_group_use_interaction(var3, var0.angles, 4, var0, var1);
-  var5 = var0.origin + rotatevector((-35, 0, var2), var1.angles);
-  var6 = thread spawn_fulton_group_use_interaction(var5, var0.angles, 3, var0, var1);
-  var7 = var0.origin + rotatevector((35, 0, var2), var1.angles);
-  var8 = thread spawn_fulton_group_use_interaction(var7, var0.angles, 2, var0, var1);
-  var9 = var0.origin + rotatevector((0, -35, var2), var1.angles);
-  var10 = thread spawn_fulton_group_use_interaction(var9, var0.angles, 1, var0, var1);
+  var_3 = var_0.origin + rotatevector((0, 35, var_2), var_1.angles);
+  var_4 = thread spawn_fulton_group_use_interaction(var_3, var_0.angles, 4, var_0, var_1);
+  var_5 = var_0.origin + rotatevector((-35, 0, var_2), var_1.angles);
+  var_6 = thread spawn_fulton_group_use_interaction(var_5, var_0.angles, 3, var_0, var_1);
+  var_7 = var_0.origin + rotatevector((35, 0, var_2), var_1.angles);
+  var_8 = thread spawn_fulton_group_use_interaction(var_7, var_0.angles, 2, var_0, var_1);
+  var_9 = var_0.origin + rotatevector((0, -35, var_2), var_1.angles);
+  var_10 = thread spawn_fulton_group_use_interaction(var_9, var_0.angles, 1, var_0, var_1);
   level.fulton_interactions = [];
-  level.fulton_interactions[level.fulton_interactions.size] = var4;
-  level.fulton_interactions[level.fulton_interactions.size] = var6;
-  level.fulton_interactions[level.fulton_interactions.size] = var8;
-  level.fulton_interactions[level.fulton_interactions.size] = var10;
+  level.fulton_interactions[level.fulton_interactions.size] = var_4;
+  level.fulton_interactions[level.fulton_interactions.size] = var_6;
+  level.fulton_interactions[level.fulton_interactions.size] = var_8;
+  level.fulton_interactions[level.fulton_interactions.size] = var_10;
 }
 
-function spawn_fulton_group_use_interaction(var0, var1, var2, var3, var4) {
-  var5 = scripts\engine\utility::spawn_tag_origin(var0, var1);
-  var5 show();
-  var5 setHintString(&"CP_QUARRY2_OBJECTIVES/CONVOY4_FULTON_USER");
-  var5 setCursorHint("HINT_BUTTON");
-  var5 sethinticon("cp_tac_waypoint_fulton");
-  var5 sethintdisplayrange(500);
-  var5 sethintdisplayfov(110);
-  var5 setuserange(128);
-  var5 setusefov(110);
-  var5 sethintonobstruction("hide");
-  var5 setuseholdduration("duration_short");
-  var5 makeusable();
-  thread fulton_group_use_think(var5, 120, var2, var3);
-  return var5;
+function spawn_fulton_group_use_interaction(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = scripts\engine\utility::spawn_tag_origin(var_0, var_1);
+  var_5 show();
+  var_5 setHintString(&"CP_QUARRY2_OBJECTIVES/CONVOY4_FULTON_USER");
+  var_5 setCursorHint("HINT_BUTTON");
+  var_5 sethinticon("cp_tac_waypoint_fulton");
+  var_5 sethintdisplayrange(500);
+  var_5 sethintdisplayfov(110);
+  var_5 setuserange(128);
+  var_5 setusefov(110);
+  var_5 sethintonobstruction("hide");
+  var_5 setuseholdduration("duration_short");
+  var_5 makeusable();
+  thread fulton_group_use_think(var_5, 120, var_2, var_3);
+  return var_5;
 }
 
-function fulton_group_use_think(var0, var1, var2, var3) {
+function fulton_group_use_think(var_0, var_1, var_2, var_3) {
   self endon("death");
 
   for(;;) {
-    self waittill("trigger", var4);
+    self waittill("trigger", var_4);
 
-    if(isDefined(var4)) {
-      if(!var4 scripts\cp\utility::is_valid_player()) {
+    if(isDefined(var_4)) {
+      if(!var_4 scripts\cp\utility::is_valid_player()) {
         continue;
       }
 
-      activate_group_fulton_interact(var4, var1, var2, var3);
-      remove_group_fulton_interact(var0);
+      activate_group_fulton_interact(var_4, var_1, var_2, var_3);
+      remove_group_fulton_interact(var_0);
     }
   }
 }
 
-function activate_group_fulton_interact(var0, var1, var2, var3) {
-  var0.used_fulton_interact = 1;
-  var0.ability_invulnerable = 1;
+function activate_group_fulton_interact(var_0, var_1, var_2, var_3) {
+  var_0.used_fulton_interact = 1;
+  var_0.ability_invulnerable = 1;
   level.fulton_interactions = scripts\engine\utility::array_remove(level.fulton_interactions, self);
-  var0 disableusability();
-  thread anim_fulton_exfil_player_scene(level, undefined, var0, var1, var2);
-  level notify("player_used_extract", var0);
-  scripts\cp\cp_outofbounds::enableoobimmunity(var0);
+  var_0 disableusability();
+  thread anim_fulton_exfil_player_scene(level, undefined, var_0, var_1, var_2);
+  level notify("player_used_extract", var_0);
+  scripts\cp\cp_outofbounds::enableoobimmunity(var_0);
 }
 
-function remove_group_fulton_interact(var0) {
+function remove_group_fulton_interact(var_0) {
   self makeunusable();
-  wait var0;
+  wait var_0;
   self delete();
 }
 
-function listen_for_emp_drone_ent(var0) {
-  if(isDefined(var0)) {
-    wait var0;
+function listen_for_emp_drone_ent(var_0) {
+  if(isDefined(var_0)) {
+    wait var_0;
   }
 
   level.playertouching = 1;
 
-  foreach(var2 in level.fulton_interactions) {
-    var2 makeunusable();
+  foreach(var_2 in level.fulton_interactions) {
+    var_2 makeunusable();
   }
 }
 
@@ -503,61 +503,61 @@ function anim_init_exfil_fulton() {
   scripts\engine\utility::flag_init("fulton_ac130_approached");
 }
 
-function anim_fulton_exfil_player_scene(var0, var1, var2, var3, var4) {
-  if(!isDefined(var0)) {
-    var0 = spawnStruct();
-    var0.origin = var4.origin;
-    var0.angles = var4.angles;
+function anim_fulton_exfil_player_scene(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_0)) {
+    var_0 = spawnStruct();
+    var_0.origin = var_4.origin;
+    var_0.angles = var_4.angles;
   }
 
-  var5 = 0.2;
-  var6 = scripts\cp_mp\anim_scene::anim_scene_create_actor(var1, "player_" + var2, 1, 1, 1);
-  var7 = ref_1355a(var0, var1, "player_" + var2);
-  var8 = scripts\cp_mp\anim_scene::anim_scene_create_actor(var7, "ropes_" + var2);
-  var8 scripts\cp_mp\anim_scene::anim_scene_set_actor_interruptable(0);
-  thread autoapplyquest(var8, var0, var8, var2);
-  baloon_deposit_death_check(var8, "hook_" + var2);
-  ballowexecutions(var6, var8, var2);
-  baloon_deposit_death_check(var6, "player_" + var2);
-  var0 scripts\cp_mp\anim_scene::anim_scene([var6], "fulton_hookup", 1, 0, undefined, var5);
+  var_5 = 0.2;
+  var_6 = scripts\cp_mp\anim_scene::anim_scene_create_actor(var_1, "player_" + var_2, 1, 1, 1);
+  var_7 = ref_1355a(var_0, var_1, "player_" + var_2);
+  var_8 = scripts\cp_mp\anim_scene::anim_scene_create_actor(var_7, "ropes_" + var_2);
+  var_8 scripts\cp_mp\anim_scene::anim_scene_set_actor_interruptable(0);
+  thread autoapplyquest(var_8, var_0, var_8, var_2);
+  baloon_deposit_death_check(var_8, "hook_" + var_2);
+  ballowexecutions(var_6, var_8, var_2);
+  baloon_deposit_death_check(var_6, "player_" + var_2);
+  var_0 scripts\cp_mp\anim_scene::anim_scene([var_6], "fulton_hookup", 1, 0, undefined, var_5);
 
   if(!scripts\engine\utility::flag("fulton_ac130_approached")) {
-    var0 thread scripts\cp_mp\anim_scene::anim_scene_loop([var6, var8], "fulton_idle", 0, 0, undefined, var5);
-    player_cam_enable(var1);
+    var_0 thread scripts\cp_mp\anim_scene::anim_scene_loop([var_6, var_8], "fulton_idle", 0, 0, undefined, var_5);
+    player_cam_enable(var_1);
     level waittill("continue_fulton_extraction");
   }
 
-  var0 scripts\cp_mp\anim_scene::anim_scene_stop();
+  var_0 scripts\cp_mp\anim_scene::anim_scene_stop();
   waitframe();
   scripts\engine\utility::flag_wait("fulton_ac130_approached");
-  ref_12472(var1);
-  var0 scripts\cp_mp\anim_scene::anim_scene_stop();
+  ref_12472(var_1);
+  var_0 scripts\cp_mp\anim_scene::anim_scene_stop();
   level notify("play_fulton_evac_together");
 }
 
-function player_cam_enable(var0) {
+function player_cam_enable(var_0) {
   if(!scripts\engine\utility::flag("fulton_ac130_approached")) {
-    var0 cameraset("camera_custom_orbit_0_noremote");
-    var0.gasmask_resist = 1;
+    var_0 cameraset("camera_custom_orbit_0_noremote");
+    var_0.gasmask_resist = 1;
     return;
   }
 }
 
-function ref_12472(var0) {
-  if(istrue(var0.gasmask_resist)) {
-    var0 cameradefault();
+function ref_12472(var_0) {
+  if(istrue(var_0.gasmask_resist)) {
+    var_0 cameradefault();
     return;
   }
 }
 
-function ref_13559(var0, var1) {
+function ref_13559(var_0, var_1) {
   if(isDefined(level.playerstartrecondronewait)) {
     return;
   }
 
-  level.playerstartrecondronewait = spawn("script_model", var0.origin - (0, 0, 2000));
+  level.playerstartrecondronewait = spawn("script_model", var_0.origin - (0, 0, 2000));
   level.playerstartrecondronewait setModel("veh8_mil_air_acharlie130_small");
-  level.playerstartrecondronewait.angles = var0.angles;
+  level.playerstartrecondronewait.angles = var_0.angles;
   level.playerstartrecondronewait.animname = "fulton_ac130";
   level.playerstartrecondronewait useanimtree(level.scr_animtree["fulton_ac130"]);
   level.playerstartrecondronewait hide();
@@ -565,14 +565,14 @@ function ref_13559(var0, var1) {
   return level.playerstartrecondronewait;
 }
 
-function ref_123be(var0) {
+function ref_123be(var_0) {
   thread listen_for_emp_drone_ent(level);
-  var1 = 7;
-  wait var0 - var1;
+  var_1 = 7;
+  wait var_0 - var_1;
   level notify("continue_fulton_ac130");
 }
 
-function ref_123bf(var0, var1, var2, var3) {
+function ref_123bf(var_0, var_1, var_2, var_3) {
   level waittill("continue_fulton_ac130");
 
   if(istrue(level.ref_12461)) {
@@ -580,32 +580,32 @@ function ref_123bf(var0, var1, var2, var3) {
   }
 
   level.ref_12461 = 1;
-  var3 dontinterpolate();
-  var3 show();
-  var0 scripts\cp_mp\anim_scene::anim_scene([var2], "ac130_approach", undefined, undefined, undefined, 0, 0);
+  var_3 dontinterpolate();
+  var_3 show();
+  var_0 scripts\cp_mp\anim_scene::anim_scene([var_2], "ac130_approach", undefined, undefined, undefined, 0, 0);
   scripts\engine\utility::flag_set("fulton_ac130_approached");
   level notify("continue_fulton_extraction");
 }
 
-function ref_1355a(var0, var1, var2) {
-  var3 = spawn("script_model", var0.origin);
-  var3 setModel("military_fulton_rope");
-  var3.angles = var0.angles;
-  var3.animname = "ropes";
-  var3 useanimtree(level.scr_animtree[var2]);
+function ref_1355a(var_0, var_1, var_2) {
+  var_3 = spawn("script_model", var_0.origin);
+  var_3 setModel("military_fulton_rope");
+  var_3.angles = var_0.angles;
+  var_3.animname = "ropes";
+  var_3 useanimtree(level.scr_animtree[var_2]);
   waitframe();
-  return var3;
+  return var_3;
 }
 
-function autoapplyquest(var0, var1, var2, var3) {
-  var0 scripts\cp_mp\anim_scene::anim_scene([var1], "fulton_hookup", 1, 0);
+function autoapplyquest(var_0, var_1, var_2, var_3) {
+  var_0 scripts\cp_mp\anim_scene::anim_scene([var_1], "fulton_hookup", 1, 0);
 }
 
 function track_fulton_uses() {
   level endon("continue_fulton_extraction");
 
   for(;;) {
-    level waittill("player_used_extract", var0);
+    level waittill("player_used_extract", var_0);
     level.fulton_last_usetime = gettime();
   }
 }

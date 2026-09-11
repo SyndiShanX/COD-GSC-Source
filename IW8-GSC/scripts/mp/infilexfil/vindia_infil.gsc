@@ -3,44 +3,44 @@
  * Script: scripts\mp\infilexfil\vindia_infil.gsc
 **************************************************/
 
-function vindia_init(var0) {
-  initanims(var0);
-  var1 = [];
+function vindia_init(var_0) {
+  initanims(var_0);
+  var_1 = [];
   GscBinSkip0(0x2e, 0, [0]);
 }
 
-function vindia_spawn(var0, var1, var2, var3) {
-  var4 = scripts\engine\utility::getStruct(var1, "targetname");
-  var5 = spawn("script_origin", var4.origin);
-  var5.angles = var4.angles;
-  var5.scene_node = var4;
-  thread infilthink(var5, var0);
-  return var5;
+function vindia_spawn(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\engine\utility::getStruct(var_1, "targetname");
+  var_5 = spawn("script_origin", var_4.origin);
+  var_5.angles = var_4.angles;
+  var_5.scene_node = var_4;
+  thread infilthink(var_5, var_0);
+  return var_5;
 }
 
-function vindia_get_length(var0) {
-  var1 = getanimlength(level.scr_anim["slot_0"]["vindia_infil_intro"]);
-  var1 += getanimlength(level.scr_anim["slot_0"]["vindia_infil_exit"]);
-  return var1;
+function vindia_get_length(var_0) {
+  var_1 = getanimlength(level.scr_anim["slot_0"]["vindia_infil_intro"]);
+  var_1 += getanimlength(level.scr_anim["slot_0"]["vindia_infil_exit"]);
+  return var_1;
 }
 
-function player_vindia_infil_think(var0, var1) {
+function player_vindia_infil_think(var_0, var_1) {
   self endon("player_free_spot");
   thread player_infil_end();
-  thread scripts\mp\infilexfil\infilexfil::infil_player_rig("slot_" + var1, "viewhands_base_iw8");
+  thread scripts\mp\infilexfil\infilexfil::infil_player_rig("slot_" + var_1, "viewhands_base_iw8");
   self.player_rig.weapon_state_func = &scripts\mp\utility\infilexfil::handleweaponstatenotetrack;
   thread scripts\mp\infilexfil\infilexfil::infil_scene_fade_in(0, 0.55);
   thread player_van_disconnect();
   level waittill("start_scene");
   self setcinematicmotionoverride("disabled");
-  self.player_rig linkTo(var0.linktoent, "tag_body_animate", (0, 0, 0), (0, 0, 0));
+  self.player_rig linkTo(var_0.linktoent, "tag_body_animate", (0, 0, 0), (0, 0, 0));
   self setdemeanorviewmodel("safe", "iw8_ges_demeanor_safe_van");
   self lerpviewangleclamp(1, 0.25, 0.25, 60, 60, 30, 30);
-  var0.linktoent scripts\mp\anim::anim_player_solo(self, self.player_rig, "vindia_infil_intro", "tag_body_animate");
+  var_0.linktoent scripts\mp\anim::anim_player_solo(self, self.player_rig, "vindia_infil_intro", "tag_body_animate");
   self lerpviewangleclamp(1, 0.25, 0.25, 0, 0, 0, 0);
   thread clear_infil_ambient_zone();
   level notify("depthSortViewmodel_true");
-  var0.linktoent scripts\mp\anim::anim_player_solo(self, self.player_rig, "vindia_infil_exit", "tag_body_animate");
+  var_0.linktoent scripts\mp\anim::anim_player_solo(self, self.player_rig, "vindia_infil_exit", "tag_body_animate");
 
   if(isDefined(self.player_rig) && self.player_rig islinked()) {
     self.player_rig unlink();
@@ -66,7 +66,7 @@ function player_infil_end() {
   scripts\mp\utility\player::setdof_default();
 }
 
-function van_infil_radio_idle(var0) {
+function van_infil_radio_idle(var_0) {
   self endon("death_or_disconnect");
 
   if(isPlayer(self)) {
@@ -94,7 +94,7 @@ function player_van_disconnect() {
   }
 }
 
-function spawnactors(var0, var1, var2) {
+function spawnactors(var_0, var_1, var_2) {
   if(!isDefined(self.actors)) {
     self.actors = [];
   }
@@ -103,21 +103,21 @@ function spawnactors(var0, var1, var2) {
   self.commander.infil = self;
   self.actors[self.actors.size] = spawn_anim_model(self.linktoent, "driver", "tag_body_animate", "body_al_qatala_1_ar", "head_sc_finkelstein");
 
-  foreach(var4 in self.actors) {
-    var4.infil = self;
+  foreach(var_4 in self.actors) {
+    var_4.infil = self;
   }
 
   self.commander.anim_playsound_func = &commander_play_sound_func;
   self.actors[0].anim_playsound_func = &driver_play_sound_func;
 }
 
-function infilthink(var0, var1) {
-  foreach(var3 in getEntArray("infil_delete", "script_noteworthy")) {
-    var3 delete();
+function infilthink(var_0, var_1) {
+  foreach(var_3 in getEntArray("infil_delete", "script_noteworthy")) {
+    var_3 delete();
   }
 
-  thread vehiclethink(var0, self.scene_node, var1);
-  thread actorthink(var0, self.scene_node, var1);
+  thread vehiclethink(var_0, self.scene_node, var_1);
+  thread actorthink(var_0, self.scene_node, var_1);
   level waittill("infil_started");
   setDvar("TLMMOPMSK", 1);
   level notify("start_scene");
@@ -135,82 +135,82 @@ function infilthink(var0, var1) {
   self delete();
 }
 
-function vehiclethink(var0, var1, var2, var3) {
-  var4 = spawninfilvehicle(var1, var0, var2);
-  scripts\common\anim::anim_first_frame_solo(var4, "vindia_infil_intro");
+function vehiclethink(var_0, var_1, var_2, var_3) {
+  var_4 = spawninfilvehicle(var_1, var_0, var_2);
+  scripts\common\anim::anim_first_frame_solo(var_4, "vindia_infil_intro");
   level waittill("infil_started");
-  var4.interiorlights[0] setscriptablepartstate("marker", "vanLight");
-  scripts\common\anim::anim_single_solo(var4, "vindia_infil_intro");
-  scripts\common\anim::anim_single_solo(var4, "vindia_infil_outro_leftrightreardoor");
+  var_4.interiorlights[0] setscriptablepartstate("marker", "vanLight");
+  scripts\common\anim::anim_single_solo(var_4, "vindia_infil_intro");
+  scripts\common\anim::anim_single_solo(var_4, "vindia_infil_outro_leftrightreardoor");
 
-  foreach(var6 in var4.interiorlights) {
-    var6 delete();
+  foreach(var_6 in var_4.interiorlights) {
+    var_6 delete();
   }
 
   level waittill("prematch_over");
-  game["infil"]["types"][self.type][var2]["persistentVehicle"] = &spawnpersistentvehicle;
-  game["infil"]["types"][self.type][var2]["vehicleOrg"] = self.linktoent.origin;
-  game["infil"]["types"][self.type][var2]["vehicleAng"] = self.linktoent.angles;
+  game["infil"]["types"][self.type][var_2]["persistentVehicle"] = &spawnpersistentvehicle;
+  game["infil"]["types"][self.type][var_2]["vehicleOrg"] = self.linktoent.origin;
+  game["infil"]["types"][self.type][var_2]["vehicleAng"] = self.linktoent.angles;
 }
 
-function spawnpersistentvehicle(var0, var1) {
-  var2 = game["infil"]["types"][var0][var1]["vehicleOrg"];
-  var3 = game["infil"]["types"][var0][var1]["vehicleAng"];
-  var4 = spawn("script_model", var2);
-  var4.angles = var3;
-  var4 setModel("veh8_mil_lnd_vindia_a1");
-  var4.animname = "vindia";
-  var4 scripts\common\anim::setanimtree();
-  var5 = spawn("script_model", var2);
-  var5.angles = var3;
-  var5 setModel("veh8_mil_lnd_vindia_a1_turret");
-  var5 linkTo(var4, "tag_turret", (0, 0, 0), (0, 0, 0));
-  var4.turret = var5;
+function spawnpersistentvehicle(var_0, var_1) {
+  var_2 = game["infil"]["types"][var_0][var_1]["vehicleOrg"];
+  var_3 = game["infil"]["types"][var_0][var_1]["vehicleAng"];
+  var_4 = spawn("script_model", var_2);
+  var_4.angles = var_3;
+  var_4 setModel("veh8_mil_lnd_vindia_a1");
+  var_4.animname = "vindia";
+  var_4 scripts\common\anim::setanimtree();
+  var_5 = spawn("script_model", var_2);
+  var_5.angles = var_3;
+  var_5 setModel("veh8_mil_lnd_vindia_a1_turret");
+  var_5 linkTo(var_4, "tag_turret", (0, 0, 0), (0, 0, 0));
+  var_4.turret = var_5;
 }
 
-function van_interior_sfx(var0) {
-  var1 = spawn("script_model", self.linktoent.origin);
-  var1 linkTo(self.linktoent, "tag_trunk_hint_outside");
-  var2 = spawn("script_model", self.linktoent.origin);
-  var2 linkTo(self.linktoent, "tag_hood");
+function van_interior_sfx(var_0) {
+  var_1 = spawn("script_model", self.linktoent.origin);
+  var_1 linkTo(self.linktoent, "tag_trunk_hint_outside");
+  var_2 = spawn("script_model", self.linktoent.origin);
+  var_2 linkTo(self.linktoent, "tag_hood");
   wait 0.1;
-  var1 playsoundonmovingent("scn_infil_hackney_van_int_rear");
-  var2 playsoundonmovingent("scn_infil_hackney_van_int_front");
+  var_1 playsoundonmovingent("scn_infil_hackney_van_int_rear");
+  var_2 playsoundonmovingent("scn_infil_hackney_van_int_front");
   wait 7.75;
-  var1 playsoundonmovingent("scn_infil_hackney_van_door_open");
+  var_1 playsoundonmovingent("scn_infil_hackney_van_door_open");
   wait 8;
-  var1 playsoundonmovingent("scn_infil_hackney_van_door_close");
+  var_1 playsoundonmovingent("scn_infil_hackney_van_door_close");
   level waittill("prematch_over");
-  var2 delete();
-  var1 delete();
+  var_2 delete();
+  var_1 delete();
 }
 
-function van_infil_sfx_npc1(var0) {
-  var0 playsoundonmovingent("scn_infil_hackney_van_npc3");
+function van_infil_sfx_npc1(var_0) {
+  var_0 playsoundonmovingent("scn_infil_hackney_van_npc3");
 }
 
-function van_infil_sfx_npc2(var0) {
-  var0 playsoundonmovingent("scn_infil_hackney_van_npc2");
+function van_infil_sfx_npc2(var_0) {
+  var_0 playsoundonmovingent("scn_infil_hackney_van_npc2");
 }
 
-function van_infil_sfx_npc3(var0) {
-  var0 playsoundonmovingent("scn_infil_hackney_van_npc1");
+function van_infil_sfx_npc3(var_0) {
+  var_0 playsoundonmovingent("scn_infil_hackney_van_npc1");
 }
 
-function van_infil_sfx_npc4(var0) {
-  var0 playsoundonmovingent("scn_infil_hackney_van_npc6");
+function van_infil_sfx_npc4(var_0) {
+  var_0 playsoundonmovingent("scn_infil_hackney_van_npc6");
 }
 
-function van_infil_sfx_npc5(var0) {
-  var0 playsoundonmovingent("scn_infil_hackney_van_npc5");
+function van_infil_sfx_npc5(var_0) {
+  var_0 playsoundonmovingent("scn_infil_hackney_van_npc5");
 }
 
-function van_infil_sfx_npc6(var0) {
-  var0 playsoundonmovingent("scn_infil_hackney_van_npc4");
+function van_infil_sfx_npc6(var_0) {
+  var_0 playsoundonmovingent("scn_infil_hackney_van_npc4");
 }
 
-function actorthink(var0, var1, var2, var3) {
-  thread spawnactors(var0, var2, var3);
+function actorthink(var_0, var_1, var_2, var_3) {
+  thread spawnactors(var_0, var_2, var_3);
   self.linktoent scripts\common\anim::anim_first_frame_solo(self.commander, "vindia_infil", "tag_turret");
   self.linktoent scripts\common\anim::anim_first_frame(self.actors, "vindia_infil", "tag_body_animate");
   self.commander hide();
@@ -221,88 +221,88 @@ function actorthink(var0, var1, var2, var3) {
   self.linktoent thread scripts\common\anim::anim_single_solo(self.commander, "vindia_infil", "tag_turret");
   self.commander.head scriptmodelplayanim(level.scr_anim[self.commander.animname]["vindia_infil"]);
   self.linktoent thread scripts\common\anim::anim_single(self.actors, "vindia_infil", "tag_body_animate");
-  var4 = getanimlength(level.scr_anim["commander"]["vindia_infil"]);
-  wait var4;
+  var_4 = getanimlength(level.scr_anim["commander"]["vindia_infil"]);
+  wait var_4;
   self.commander delete();
   self.commander = undefined;
 
-  foreach(var6 in self.actors) {
-    var6 delete();
+  foreach(var_6 in self.actors) {
+    var_6 delete();
   }
 
   self.actors = undefined;
 }
 
-function spawn_anim_model(var0, var1, var2, var3, var4) {
-  var5 = 1;
+function spawn_anim_model(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = 1;
 
   if(scripts\engine\utility::cointoss()) {
-    var5 = 0;
+    var_5 = 0;
   }
 
-  if(var2 == "random") {
-    if(var5) {
-      var6 = randomint(3);
+  if(var_2 == "random") {
+    if(var_5) {
+      var_6 = randomint(3);
 
-      if(var6 == 0) {
-        var2 = "c_civ_pic_male_2_brown";
-      } else if(var6 == 1) {
-        var2 = "body_opforce_london_civ_1_1";
-      } else if(var6 == 2) {
-        var2 = "civ_london_male_2_5";
+      if(var_6 == 0) {
+        var_2 = "c_civ_pic_male_2_brown";
+      } else if(var_6 == 1) {
+        var_2 = "body_opforce_london_civ_1_1";
+      } else if(var_6 == 2) {
+        var_2 = "civ_london_male_2_5";
       }
     } else if(scripts\engine\utility::cointoss()) {
-      var2 = "civ_london_female_1_4";
+      var_2 = "civ_london_female_1_4";
     } else {
-      var2 = "c_civ_pic_female_5_6";
+      var_2 = "c_civ_pic_female_5_6";
     }
   }
 
-  var7 = spawn("script_model", (0, 0, 0));
-  var7 setModel(var2);
+  var_7 = spawn("script_model", (0, 0, 0));
+  var_7 setModel(var_2);
 
-  if(isDefined(var3)) {
-    if(var3 == "random") {
-      if(var5) {
+  if(isDefined(var_3)) {
+    if(var_3 == "random") {
+      if(var_5) {
         if(scripts\engine\utility::cointoss()) {
-          var3 = "head_bg_var_head_bg_male_09_head_sc_male_14";
+          var_3 = "head_bg_var_head_bg_male_09_head_sc_male_14";
         } else {
-          var3 = "head_bg_var_head_male_bc_01_head_hero_gator";
+          var_3 = "head_bg_var_head_male_bc_01_head_hero_gator";
         }
       } else if(scripts\engine\utility::cointoss()) {
-        var3 = "head_bg_var_head_female_bc_01_head_sc_female_10";
+        var_3 = "head_bg_var_head_female_bc_01_head_sc_female_10";
       } else {
-        var3 = "head_bg_var_head_sc_female_04_head_female_bc_02";
+        var_3 = "head_bg_var_head_sc_female_04_head_female_bc_02";
       }
     }
 
-    var8 = spawn("script_model", (0, 0, 0));
-    var8 setModel(var3);
-    var8 linkTo(var7, "j_spine4", (0, 0, 0), (0, 0, 0));
-    var7.head = var8;
-    var7 thread scripts\engine\utility::delete_on_death(var8);
+    var_8 = spawn("script_model", (0, 0, 0));
+    var_8 setModel(var_3);
+    var_8 linkTo(var_7, "j_spine4", (0, 0, 0), (0, 0, 0));
+    var_7.head = var_8;
+    var_7 thread scripts\engine\utility::delete_on_death(var_8);
   }
 
-  if(isDefined(var4)) {
-    var9 = spawn("script_model", (0, 0, 0));
-    var9 setModel(var4);
-    var9 linkTo(var7, "j_gun", (0, 0, 0), (0, 0, 0));
-    var7 thread scripts\engine\utility::delete_on_death(var9);
-    var7.weapon = var9;
+  if(isDefined(var_4)) {
+    var_9 = spawn("script_model", (0, 0, 0));
+    var_9 setModel(var_4);
+    var_9 linkTo(var_7, "j_gun", (0, 0, 0), (0, 0, 0));
+    var_7 thread scripts\engine\utility::delete_on_death(var_9);
+    var_7.weapon = var_9;
   }
 
-  var7.animname = var0;
-  var7 scripts\common\anim::setanimtree();
+  var_7.animname = var_0;
+  var_7 scripts\common\anim::setanimtree();
 
-  if(isDefined(var1)) {
-    thread scripts\engine\utility::delete_on_death(var7);
-    var7 linkTo(self, var1, (0, 0, 0), (0, 0, 0));
+  if(isDefined(var_1)) {
+    thread scripts\engine\utility::delete_on_death(var_7);
+    var_7 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   }
 
-  return var7;
+  return var_7;
 }
 
-function initanims(var0) {
+function initanims(var_0) {
   script_model_alpha_anims();
   vehicles_alpha_anims();
   scripts\common\anim::addnotetrack_customfunction("slot_0", "player_lock_look_1_second", &scripts\mp\utility\infilexfil::player_lock_look_1_second, "vindia_infil_intro");
@@ -386,38 +386,38 @@ function script_model_alpha_anims() {
 
 function vehicles_alpha_anims() {}
 
-function spawninfilvehicle(var0, var1, var2) {
-  var3 = spawn("script_model", var0.origin);
-  var3.angles = var0.angles;
-  var3 setModel("veh8_mil_lnd_vindia_a1");
-  var3.animname = "vindia";
-  var3 scripts\common\anim::setanimtree();
-  var3 setCanDamage(0);
-  var4 = spawn("script_model", var0.origin);
-  var4.angles = var0.angles;
-  var4 setModel("veh8_mil_lnd_vindia_a1_turret");
-  var4 linkTo(var3, "tag_turret", (0, 0, 0), (0, 0, 0));
-  var3.turret = var4;
-  self.linktoent = var3;
-  var3.infil = self;
-  var5 = [];
-  var6 = spawn("script_model", var3.origin);
-  var6.angles = var3.angles;
-  var6 setModel("cop_marker_scriptable");
-  var6 linkTo(var3, "tag_body_animate", (-60, 0, 32), (-90, 0, 0));
-  var5 = var6;
-  var3.interiorlights = var5;
-  return var3;
+function spawninfilvehicle(var_0, var_1, var_2) {
+  var_3 = spawn("script_model", var_0.origin);
+  var_3.angles = var_0.angles;
+  var_3 setModel("veh8_mil_lnd_vindia_a1");
+  var_3.animname = "vindia";
+  var_3 scripts\common\anim::setanimtree();
+  var_3 setCanDamage(0);
+  var_4 = spawn("script_model", var_0.origin);
+  var_4.angles = var_0.angles;
+  var_4 setModel("veh8_mil_lnd_vindia_a1_turret");
+  var_4 linkTo(var_3, "tag_turret", (0, 0, 0), (0, 0, 0));
+  var_3.turret = var_4;
+  self.linktoent = var_3;
+  var_3.infil = self;
+  var_5 = [];
+  var_6 = spawn("script_model", var_3.origin);
+  var_6.angles = var_3.angles;
+  var_6 setModel("cop_marker_scriptable");
+  var_6 linkTo(var_3, "tag_body_animate", (-60, 0, 32), (-90, 0, 0));
+  var_5 = var_6;
+  var_3.interiorlights = var_5;
+  return var_3;
 }
 
-function commander_play_sound_func(var0, var1, var2) {
-  foreach(var4 in self.infil.players) {
-    self playsoundtoplayer(var0, var4);
+function commander_play_sound_func(var_0, var_1, var_2) {
+  foreach(var_4 in self.infil.players) {
+    self playsoundtoplayer(var_0, var_4);
   }
 }
 
-function driver_play_sound_func(var0, var1, var2) {
-  foreach(var4 in self.infil.players) {
-    self playsoundtoplayer(var0, var4);
+function driver_play_sound_func(var_0, var_1, var_2) {
+  foreach(var_4 in self.infil.players) {
+    self playsoundtoplayer(var_0, var_4);
   }
 }

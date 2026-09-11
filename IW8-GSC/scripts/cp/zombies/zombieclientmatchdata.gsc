@@ -13,22 +13,22 @@ function init() {
   level.maxdeaths = 50;
 }
 
-function canlogclient(var0) {
-  if(isagent(var0)) {
+function canlogclient(var_0) {
+  if(isagent(var_0)) {
     return false;
   }
 
-  return var0.clientid < level.maxlogclients;
+  return var_0.clientid < level.maxlogclients;
 }
 
-function canlogdeath(var0) {
-  return var0 < level.maxdeaths;
+function canlogdeath(var_0) {
+  return var_0 < level.maxdeaths;
 }
 
 function logplayerdeath() {
-  var0 = getclientmatchdata("deathCount");
+  var_0 = getclientmatchdata("deathCount");
 
-  if(!canlogclient(self) || !canlogdeath(var0)) {
+  if(!canlogclient(self) || !canlogdeath(var_0)) {
     return;
   }
 }

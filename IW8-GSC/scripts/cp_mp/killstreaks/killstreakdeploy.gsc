@@ -5,22 +5,22 @@
 
 function onplayerconnect() {
   for(;;) {
-    level waittill("connected", var0);
+    level waittill("connected", var_0);
 
-    if(!isDefined(var0.pers["startedMapSelect"])) {
-      var0.pers["startedMapSelect"] = 0;
+    if(!isDefined(var_0.pers["startedMapSelect"])) {
+      var_0.pers["startedMapSelect"] = 0;
     }
   }
 }
 
-function candeploykillstreak(var0, var1) {
-  if(!scripts\cp_mp\utility\killstreak_utility::killstreakcanbeusedatroundstart(var0.streakname)) {
+function candeploykillstreak(var_0, var_1) {
+  if(!scripts\cp_mp\utility\killstreak_utility::killstreakcanbeusedatroundstart(var_0.streakname)) {
     if(isDefined(level.killstreakrounddelay) && level.killstreakrounddelay > 0) {
       if(level.graceperiod - level.ingraceperiod < level.killstreakrounddelay) {
-        var2 = level.killstreakrounddelay - level.graceperiod - level.ingraceperiod;
+        var_2 = level.killstreakrounddelay - level.graceperiod - level.ingraceperiod;
 
         if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
-          self[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/UNAVAILABLE_FOR_N", var2);
+          self[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/UNAVAILABLE_FOR_N", var_2);
         }
 
         return false;
@@ -28,12 +28,12 @@ function candeploykillstreak(var0, var1) {
     }
   }
 
-  if(isDefined(var2)) {
-    var3 = candeploykillstreakweapon(var1, var2);
+  if(isDefined(var_2)) {
+    var_3 = candeploykillstreakweapon(var_1, var_2);
 
-    if(isDefined(var3)) {
+    if(isDefined(var_3)) {
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
-        self[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]](var3);
+        self[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]](var_3);
       }
 
       return false;
@@ -43,136 +43,136 @@ function candeploykillstreak(var0, var1) {
   return true;
 }
 
-function ondeploystart(var0) {
-  var0.isdeploying = 1;
-  var0.owner.isdeploying = 1;
-  var0.owner scripts\common\utility::allow_crate_use(0);
-  var0.owner scripts\common\utility::brjugg_droponplayerdeath(0);
+function ondeploystart(var_0) {
+  var_0.isdeploying = 1;
+  var_0.owner.isdeploying = 1;
+  var_0.owner scripts\common\utility::allow_crate_use(0);
+  var_0.owner scripts\common\utility::brjugg_droponplayerdeath(0);
 }
 
-function ondeployfinished(var0, var1) {
-  var0.isdeploying = 0;
-  var0.owner.isdeploying = 0;
-  var0.owner scripts\common\utility::allow_crate_use(1);
-  var0.owner scripts\common\utility::brjugg_droponplayerdeath(1);
+function ondeployfinished(var_0, var_1) {
+  var_0.isdeploying = 0;
+  var_0.owner.isdeploying = 0;
+  var_0.owner scripts\common\utility::allow_crate_use(1);
+  var_0.owner scripts\common\utility::brjugg_droponplayerdeath(1);
 }
 
 function streakdeploy_cancelalldeployments() {
   self notify("cancel_all_killstreak_deployments");
 }
 
-function streakdeploy_dogesturedeploy(var0, var1) {
+function streakdeploy_dogesturedeploy(var_0, var_1) {
   level endon("game_ended");
   self endon("disconnect");
 
-  if(!candeploykillstreak(var0, var1)) {
+  if(!candeploykillstreak(var_0, var_1)) {
     return 0;
   }
 
-  ondeploystart(var0);
-  thread watchforcancelduringgesture(var0, var1);
-  var2 = streakdeploy_giveandfireoffhandreliable(var1);
-  var0 notify("gesture_deploy_ended");
-  ondeployfinished(var0, var2);
+  ondeploystart(var_0);
+  thread watchforcancelduringgesture(var_0, var_1);
+  var_2 = streakdeploy_giveandfireoffhandreliable(var_1);
+  var_0 notify("gesture_deploy_ended");
+  ondeployfinished(var_0, var_2);
 
   if(istrue(self.inlaststand)) {
-    thread ref_144e2(var1);
+    thread ref_144e2(var_1);
   }
 
-  return var2;
+  return var_2;
 }
 
-function watchforcancelduringgesture(var0, var1) {
+function watchforcancelduringgesture(var_0, var_1) {
   level endon("game_ended");
   self endon("disconnect");
   self endon("death");
-  var0 endon("gesture_deploy_ended");
+  var_0 endon("gesture_deploy_ended");
   self waittill("cancel_all_killstreak_deployments");
-  self takeweapon(var1);
+  self takeweapon(var_1);
 }
 
-function ref_144e2(var0) {
+function ref_144e2(var_0) {
   level endon("game_ended");
   self endon("death_or_disconnect");
   self waittill("last_stand_finished");
-  self takeweapon(var0);
+  self takeweapon(var_0);
 }
 
-function streakdeploy_doweaponswitchdeploy(var0, var1, var2, var3, var4, var5, var6) {
-  if(!candeploykillstreak(var0, var1)) {
+function streakdeploy_doweaponswitchdeploy(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if(!candeploykillstreak(var_0, var_1)) {
     return false;
   }
 
-  ondeploystart(var0);
-  var7 = scripts\engine\utility::ter_op(istrue(var2), &waituntilfinishedwithdeployweapon, undefined);
-  var8 = switchtodeployweapon(var1, var0, var7, var3, var4, var5, var6);
+  ondeploystart(var_0);
+  var_7 = scripts\engine\utility::ter_op(istrue(var_2), &waituntilfinishedwithdeployweapon, undefined);
+  var_8 = switchtodeployweapon(var_1, var_0, var_7, var_3, var_4, var_5, var_6);
 
-  if(!istrue(var8)) {
-    ondeployfinished(var0, 0);
+  if(!istrue(var_8)) {
+    ondeployfinished(var_0, 0);
     return false;
   }
 
-  ondeployfinished(var0, var8);
+  ondeployfinished(var_0, var_8);
   return true;
 }
 
-function streakdeploy_doweaponfireddeploy(var0, var1, var2, var3, var4, var5, var6, var7) {
+function streakdeploy_doweaponfireddeploy(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   level endon("game_ended");
   self endon("disconnect");
 
-  if(!candeploykillstreak(var0, var1)) {
+  if(!candeploykillstreak(var_0, var_1)) {
     return false;
   }
 
-  ondeploystart(var0);
-  var8 = switchtodeployweapon(var1, var0, &waituntilfinishedwithdeployweapon, var3, var4, var6, var7);
+  ondeploystart(var_0);
+  var_8 = switchtodeployweapon(var_1, var_0, &waituntilfinishedwithdeployweapon, var_3, var_4, var_6, var_7);
 
-  if(!istrue(var8)) {
-    ondeployfinished(var0, 0);
+  if(!istrue(var_8)) {
+    ondeployfinished(var_0, 0);
     return false;
   }
 
   scripts\common\utility::allow_offhand_weapons(0);
-  var9 = watchdeployweaponfired(var0, var2, var1, var5);
+  var_9 = watchdeployweaponfired(var_0, var_2, var_1, var_5);
   scripts\common\utility::allow_offhand_weapons(1);
-  ondeployfinished(var0, var9);
-  return istrue(var9);
+  ondeployfinished(var_0, var_9);
+  return istrue(var_9);
 }
 
-function streakdeploy_doweapontabletdeploy(var0, var1, var2, var3, var4, var5, var6, var7) {
+function streakdeploy_doweapontabletdeploy(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   level endon("game_ended");
   self endon("disconnect");
 
-  if(!isDefined(var7)) {
-    var7 = &waituntilfinishedwithdeployweapon;
+  if(!isDefined(var_7)) {
+    var_7 = &waituntilfinishedwithdeployweapon;
   }
 
-  var8 = "ks_remote_device_mp";
+  var_8 = "ks_remote_device_mp";
 
-  if(isDefined(var5)) {
-    var8 = var5;
+  if(isDefined(var_5)) {
+    var_8 = var_5;
   }
 
-  var9 = getcompleteweaponname(var8);
-  var10 = 1.6;
+  var_9 = getcompleteweaponname(var_8);
+  var_10 = 1.6;
 
-  if(var8 == "ks_remote_nuke_mp") {
-    var10 = 2.133;
+  if(var_8 == "ks_remote_nuke_mp") {
+    var_10 = 2.133;
   }
 
-  if(!candeploykillstreak(var0, var9)) {
+  if(!candeploykillstreak(var_0, var_9)) {
     return false;
   }
 
-  ondeploystart(var0);
-  thread ref_13912(var0);
-  scripts\cp_mp\utility\killstreak_utility::starttabletscreen(var0.streakname, 0.75);
+  ondeploystart(var_0);
+  thread ref_13912(var_0);
+  scripts\cp_mp\utility\killstreak_utility::starttabletscreen(var_0.streakname, 0.75);
   scripts\common\utility::allow_movement(0);
   scripts\common\utility::allow_jump(0);
   scripts\common\utility::allow_usability(0);
   scripts\common\utility::allow_melee(0);
   scripts\common\utility::allow_offhand_weapons(0);
-  var11 = switchtodeployweapon(var9, var0, var7, var1, var2, var3, var4);
+  var_11 = switchtodeployweapon(var_9, var_0, var_7, var_1, var_2, var_3, var_4);
 
   if(isDefined(self) && scripts\cp_mp\utility\player_utility::_isalive()) {
     scripts\common\utility::allow_movement(1);
@@ -182,8 +182,8 @@ function streakdeploy_doweapontabletdeploy(var0, var1, var2, var3, var4, var5, v
     scripts\common\utility::allow_offhand_weapons(1);
   }
 
-  if(!istrue(var11)) {
-    ondeployfinished(var0, 0);
+  if(!istrue(var_11)) {
+    ondeployfinished(var_0, 0);
 
     if(isDefined(self)) {
       scripts\cp_mp\utility\killstreak_utility::stoptabletscreen(0, 1);
@@ -192,57 +192,57 @@ function streakdeploy_doweapontabletdeploy(var0, var1, var2, var3, var4, var5, v
     return false;
   }
 
-  var12 = watchdeployweaponanimtransition(var0, var10, var6);
-  ondeployfinished(var0, var12);
-  return istrue(var12);
+  var_12 = watchdeployweaponanimtransition(var_0, var_10, var_6);
+  ondeployfinished(var_0, var_12);
+  return istrue(var_12);
 }
 
-function ref_13912(var0) {
+function ref_13912(var_0) {
   self endon("death_or_disconnect");
   level endon("game_ended");
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(0.5);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("sound", "playKillstreakDeployDialog")) {
-    [[scripts\cp_mp\utility\script_utility::getsharedfunc("sound", "playKillstreakDeployDialog")]](self, var0.streakname);
+    [[scripts\cp_mp\utility\script_utility::getsharedfunc("sound", "playKillstreakDeployDialog")]](self, var_0.streakname);
     return;
   }
 }
 
-function streakdeploy_dothrowbackmarkerdeploy(var0, var1, var2, var3, var4, var5, var6) {
+function streakdeploy_dothrowbackmarkerdeploy(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   level endon("game_ended");
   self endon("disconnect");
-  var7 = "throwback_marker_mp";
+  var_7 = "throwback_marker_mp";
 
-  if(isDefined(var1)) {
-    var7 = var1;
+  if(isDefined(var_1)) {
+    var_7 = var_1;
   }
 
-  var0.deployweaponobj = getcompleteweaponname(var7);
-  var8 = var0.deployweaponobj;
+  var_0.deployweaponobj = getcompleteweaponname(var_7);
+  var_8 = var_0.deployweaponobj;
 
-  if(!candeploykillstreak(var0, var8)) {
+  if(!candeploykillstreak(var_0, var_8)) {
     return false;
   }
 
-  ondeploystart(var0);
-  var9 = switchtodeployweapon(var8, var0, &waituntilfinishedwithdeployweapon, var2, var3, var5, var6);
+  ondeploystart(var_0);
+  var_9 = switchtodeployweapon(var_8, var_0, &waituntilfinishedwithdeployweapon, var_2, var_3, var_5, var_6);
 
-  if(!istrue(var9)) {
-    ondeployfinished(var0, 0);
+  if(!istrue(var_9)) {
+    ondeployfinished(var_0, 0);
     return false;
   }
 
-  var10 = watchdeployweaponfired(var0, "grenade_fire", var8, var4);
-  ondeployfinished(var0, var10);
-  return istrue(var10);
+  var_10 = watchdeployweaponfired(var_0, "grenade_fire", var_8, var_4);
+  ondeployfinished(var_0, var_10);
+  return istrue(var_10);
 }
 
-function switchtodeployweapon(var0, var1, var2, var3, var4, var5, var6, var7) {
+function switchtodeployweapon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   level endon("game_ended");
   self endon("disconnect");
   self endon("death");
 
-  if(self hasweapon(var0)) {
+  if(self hasweapon(var_0)) {
     return 0;
   }
 
@@ -256,84 +256,84 @@ function switchtodeployweapon(var0, var1, var2, var3, var4, var5, var6, var7) {
     }
   }
 
-  if(!isDefined(var7)) {
-    var7 = 1;
+  if(!isDefined(var_7)) {
+    var_7 = 1;
   }
 
-  scripts\cp_mp\utility\inventory_utility::_giveweapon(var0, 0, 0, var7);
-  var8 = callweapongivencallback(var1, var3);
+  scripts\cp_mp\utility\inventory_utility::_giveweapon(var_0, 0, 0, var_7);
+  var_8 = callweapongivencallback(var_1, var_3);
 
-  if(!istrue(var8)) {
-    scripts\cp_mp\utility\inventory_utility::_takeweapon(var0);
+  if(!istrue(var_8)) {
+    scripts\cp_mp\utility\inventory_utility::_takeweapon(var_0);
     return 0;
   }
 
-  thread watchforcancelduringweaponswitch(var1, var0);
-  thread watchformeleeduringweaponswitch(var1, var0);
-  var9 = scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var0);
-  var1 notify("deploy_weapon_switch_ended");
+  thread watchforcancelduringweaponswitch(var_1, var_0);
+  thread watchformeleeduringweaponswitch(var_1, var_0);
+  var_9 = scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var_0);
+  var_1 notify("deploy_weapon_switch_ended");
 
-  if(isDefined(var4)) {
-    self thread[[var4]](var1, var9);
+  if(isDefined(var_4)) {
+    self thread[[var_4]](var_1, var_9);
   }
 
   waitframe();
 
-  if(!var9) {
-    var2 = undefined;
+  if(!var_9) {
+    var_2 = undefined;
   }
 
   if(!scripts\cp_mp\utility\player_utility::_isalive()) {
     return 0;
   }
 
-  thread cleanupdeployweapon(var9, var1, var0, var2, var5, var6);
-  return var9;
+  thread cleanupdeployweapon(var_9, var_1, var_0, var_2, var_5, var_6);
+  return var_9;
 }
 
-function callweapongivencallback(var0, var1) {
+function callweapongivencallback(var_0, var_1) {
   level endon("game_ended");
   self endon("disconnect");
   self endon("death");
   self endon("cancel_all_killstreak_deployments");
 
-  if(isDefined(var1)) {
-    return self[[var1]](var0);
+  if(isDefined(var_1)) {
+    return self[[var_1]](var_0);
   }
 
   return 1;
 }
 
-function watchforcancelduringweaponswitch(var0, var1) {
+function watchforcancelduringweaponswitch(var_0, var_1) {
   level endon("game_ended");
   self endon("disconnect");
   self endon("death");
-  var0 endon("deploy_weapon_switch_ended");
+  var_0 endon("deploy_weapon_switch_ended");
   self waittill("cancel_all_killstreak_deployments");
 
-  if(scripts\cp_mp\utility\inventory_utility::isswitchingtoweaponwithmonitoring(var1)) {
-    scripts\cp_mp\utility\inventory_utility::abortmonitoredweaponswitch(var1);
+  if(scripts\cp_mp\utility\inventory_utility::isswitchingtoweaponwithmonitoring(var_1)) {
+    scripts\cp_mp\utility\inventory_utility::abortmonitoredweaponswitch(var_1);
     return;
   }
 }
 
-function watchformeleeduringweaponswitch(var0, var1) {
+function watchformeleeduringweaponswitch(var_0, var_1) {
   level endon("game_ended");
   self endon("disconnect");
   self endon("death");
-  var0 endon("deploy_weapon_switch_ended");
+  var_0 endon("deploy_weapon_switch_ended");
   self waittill("melee_swipe_start");
 
-  if(scripts\cp_mp\utility\inventory_utility::isswitchingtoweaponwithmonitoring(var1)) {
-    scripts\cp_mp\utility\inventory_utility::abortmonitoredweaponswitch(var1);
+  if(scripts\cp_mp\utility\inventory_utility::isswitchingtoweaponwithmonitoring(var_1)) {
+    scripts\cp_mp\utility\inventory_utility::abortmonitoredweaponswitch(var_1);
     return;
   }
 
-  scripts\cp_mp\utility\inventory_utility::_takeweapon(var1);
+  scripts\cp_mp\utility\inventory_utility::_takeweapon(var_1);
   thread scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(self.lastdroppableweaponobj);
 }
 
-function watchdeployweaponfired(var0, var1, var2, var3) {
+function watchdeployweaponfired(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
   self endon("disconnect");
   self endon("death");
@@ -341,39 +341,39 @@ function watchdeployweaponfired(var0, var1, var2, var3) {
   self endon("cancel_all_killstreak_deployments");
 
   for(;;) {
-    var4 = undefined;
-    var5 = undefined;
+    var_4 = undefined;
+    var_5 = undefined;
 
-    switch (var1) {
+    switch (var_1) {
       case "weapon_fired":
-        self waittill(var1, var4);
+        self waittill(var_1, var_4);
         break;
       case "offhand_fired":
-        self waittill(var1, var4);
+        self waittill(var_1, var_4);
         break;
       case "grenade_fire":
-        self waittill(var1, var5, var4);
+        self waittill(var_1, var_5, var_4);
         break;
       default:
-        self waittill(var1);
+        self waittill(var_1);
         break;
     }
 
-    if(var4 == var2) {
-      if(isDefined(var3)) {
-        var6 = [[var3]](var0, var4, var5);
+    if(var_4 == var_2) {
+      if(isDefined(var_3)) {
+        var_6 = [[var_3]](var_0, var_4, var_5);
 
-        if(!isDefined(var6)) {
+        if(!isDefined(var_6)) {
           return false;
-        } else if(var6 == "failure") {
+        } else if(var_6 == "failure") {
           return false;
-        } else if(var6 == "continue") {
+        } else if(var_6 == "continue") {
           if(isDefined(level.votes)) {
             [[level.votes]]();
           }
 
           continue;
-        } else if(var6 == "success") {
+        } else if(var_6 == "success") {
           return true;
         } else {
           return false;
@@ -387,36 +387,36 @@ function watchdeployweaponfired(var0, var1, var2, var3) {
   return false;
 }
 
-function watchdeployweaponanimtransition(var0, var1, var2) {
+function watchdeployweaponanimtransition(var_0, var_1, var_2) {
   level endon("game_ended");
   self endon("disconnect");
 
-  if(!isDefined(var2)) {
-    var2 = 1;
+  if(!isDefined(var_2)) {
+    var_2 = 1;
   }
 
-  var3 = "mp_killstreak_tablet_gear";
+  var_3 = "mp_killstreak_tablet_gear";
 
-  switch (var0.streakname) {
+  switch (var_0.streakname) {
     case "nuke":
-      var3 = "mp_killstreak_nuke_tablet";
+      var_3 = "mp_killstreak_nuke_tablet";
       break;
     case "chopper_gunner":
-      var3 = "iw8_chopper_gunner_tablet";
+      var_3 = "iw8_chopper_gunner_tablet";
       break;
     case "cruise_predator":
-      var3 = "iw8_cruise_missile_tablet";
+      var_3 = "iw8_cruise_missile_tablet";
       break;
     case "gunship":
-      var3 = "iw8_gunship_tablet";
+      var_3 = "iw8_gunship_tablet";
       break;
     case "pac_sentry":
-      var3 = "iw8_wheelson_tablet";
+      var_3 = "iw8_wheelson_tablet";
       break;
   }
 
-  self playlocalsound(var3);
-  scripts\cp_mp\utility\player_utility::setusingremote(var0.streakname);
+  self playlocalsound(var_3);
+  scripts\cp_mp\utility\player_utility::setusingremote(var_0.streakname);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "objectiveUnPinPlayer") && isDefined(self.pinnedobjid)) {
     [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "objectiveUnPinPlayer")]](self.pinnedobjid, self);
@@ -426,18 +426,18 @@ function watchdeployweaponanimtransition(var0, var1, var2) {
   scripts\cp_mp\utility\player_utility::_freezecontrols(1, undefined, "killstreakDeploy");
   thread unfreezecontrolsonroundend();
 
-  if(istrue(var2)) {
-    thread startweapontabletfadetransition(var1 - 0.3);
+  if(istrue(var_2)) {
+    thread startweapontabletfadetransition(var_1 - 0.3);
   }
 
-  thread watchweapontabletstop(var0);
+  thread watchweapontabletstop(var_0);
   thread watchweapontabletcallinpos();
-  var4 = scripts\engine\utility::ref_143bb(var1, "death", "weapon_change", "cancel_all_killstreak_deployments");
+  var_4 = scripts\engine\utility::ref_143bb(var_1, "death", "weapon_change", "cancel_all_killstreak_deployments");
   self notify("ks_freeze_end");
   scripts\cp_mp\utility\player_utility::_freezecontrols(0, undefined, "killstreakDeploy");
 
-  if(!isDefined(var4) || var4 != "timeout" || !self isonground() || self isonladder()) {
-    var0 notify("killstreak_finished_with_deploy_weapon");
+  if(!isDefined(var_4) || var_4 != "timeout" || !self isonground() || self isonladder()) {
+    var_0 notify("killstreak_finished_with_deploy_weapon");
     self stoplocalsound("mp_killstreak_tablet_gear");
     self notify("cancel_remote_sequence");
     return false;
@@ -454,20 +454,20 @@ function unfreezecontrolsonroundend() {
   scripts\cp_mp\utility\player_utility::_freezecontrols(0, undefined, "killstreakDeploy");
 }
 
-function startweapontabletfadetransition(var0) {
+function startweapontabletfadetransition(var_0) {
   self endon("disconnect");
-  var1 = scripts\engine\utility::ref_143b9(var0, "cancel_remote_sequence");
+  var_1 = scripts\engine\utility::ref_143b9(var_0, "cancel_remote_sequence");
 
-  if(!isDefined(var1) || var1 == "cancel_remote_sequence") {
+  if(!isDefined(var_1) || var_1 == "cancel_remote_sequence") {
     return;
   }
 
   if(scripts\cp_mp\utility\player_utility::_isalive()) {
     self playlocalsound("mp_killstreak_transition_whoosh");
     level thread scripts\cp_mp\utility\game_utility::fadetoblackforplayer(self, 1, 0.3);
-    var1 = scripts\engine\utility::ref_143b9(0.7, "death");
+    var_1 = scripts\engine\utility::ref_143b9(0.7, "death");
 
-    if(!isDefined(var1) || var1 == "death") {
+    if(!isDefined(var_1) || var_1 == "death") {
       self stoplocalsound("mp_killstreak_transition_whoosh");
     }
 
@@ -476,10 +476,10 @@ function startweapontabletfadetransition(var0) {
   }
 }
 
-function watchweapontabletstop(var0) {
+function watchweapontabletstop(var_0) {
   level endon("game_ended");
   self endon("disconnect");
-  var0 waittill("killstreak_finished_with_deploy_weapon");
+  var_0 waittill("killstreak_finished_with_deploy_weapon");
   scripts\cp_mp\utility\killstreak_utility::stoptabletscreen(0.325);
   scripts\cp_mp\utility\player_utility::clearusingremote();
 }
@@ -500,74 +500,74 @@ function watchweapontabletcallinpos() {
   }
 }
 
-function waituntilfinishedwithdeployweapon(var0) {
+function waituntilfinishedwithdeployweapon(var_0) {
   level endon("game_ended");
   self endon("disconnect");
   self endon("death");
-  scripts\engine\utility::waittill_any_ents(var0, "killstreak_finished_with_deploy_weapon", self, "cancel_all_killstreak_deployments", self, "weapon_change");
+  scripts\engine\utility::waittill_any_ents(var_0, "killstreak_finished_with_deploy_weapon", self, "cancel_all_killstreak_deployments", self, "weapon_change");
 }
 
-function cleanupdeployweapon(var0, var1, var2, var3, var4, var5) {
+function cleanupdeployweapon(var_0, var_1, var_2, var_3, var_4, var_5) {
   level endon("game_ended");
   self endon("disconnect");
   self endon("death");
 
-  if(isDefined(var3)) {
-    self[[var3]](var1);
+  if(isDefined(var_3)) {
+    self[[var_3]](var_1);
   }
 
-  if(self hasweapon(var2)) {
-    var6 = scripts\cp_mp\utility\killstreak_utility::use_contract(var2.basename);
-    var7 = scripts\cp_mp\utility\killstreak_utility::ismapselectkillstreak(var1.streakname);
+  if(self hasweapon(var_2)) {
+    var_6 = scripts\cp_mp\utility\killstreak_utility::use_contract(var_2.basename);
+    var_7 = scripts\cp_mp\utility\killstreak_utility::ismapselectkillstreak(var_1.streakname);
     scripts\common\utility::allow_melee(0);
     scripts\common\utility::allow_offhand_weapons(0);
     scripts\common\utility::brjugg_droponplayerdeath(0);
 
-    if(var6) {
+    if(var_6) {
       scripts\common\utility::allow_mantle(0);
       scripts\common\utility::allow_movement(0);
       scripts\cp_mp\utility\player_utility::_freezelookcontrols(1);
-    } else if(istrue(var7)) {
+    } else if(istrue(var_7)) {
       scripts\common\utility::allow_mantle(0);
     }
 
-    if(isDefined(var4)) {
-      self[[var4]](var1, var0, var2);
+    if(isDefined(var_4)) {
+      self[[var_4]](var_1, var_0, var_2);
     } else {
-      rocket_fuel(var2);
+      rocket_fuel(var_2);
     }
 
     scripts\common\utility::allow_melee(1);
     scripts\common\utility::allow_offhand_weapons(1);
     scripts\common\utility::brjugg_droponplayerdeath(1);
 
-    if(var6) {
+    if(var_6) {
       scripts\common\utility::allow_mantle(1);
       scripts\common\utility::allow_movement(1);
       scripts\cp_mp\utility\player_utility::_freezelookcontrols(0);
-    } else if(istrue(var7)) {
+    } else if(istrue(var_7)) {
       scripts\common\utility::allow_mantle(1);
     }
   }
 
-  if(isDefined(var5)) {
-    self[[var5]](var1);
+  if(isDefined(var_5)) {
+    self[[var_5]](var_1);
     return;
   }
 }
 
-function rocket_fuel(var0) {
-  scripts\cp_mp\utility\inventory_utility::getridofweapon(var0);
-  var1 = self getcurrentweapon();
+function rocket_fuel(var_0) {
+  scripts\cp_mp\utility\inventory_utility::getridofweapon(var_0);
+  var_1 = self getcurrentweapon();
 
-  if(var1.basename == "none") {
+  if(var_1.basename == "none") {
     scripts\cp_mp\utility\inventory_utility::forcevalidweapon();
     return;
   }
 }
 
-function candeploykillstreakweapon(var0, var1) {
-  if(self hasweapon(var1)) {
+function candeploykillstreakweapon(var_0, var_1) {
+  if(self hasweapon(var_1)) {
     return "KILLSTREAKS/CANNOT_BE_USED";
   }
 
@@ -587,7 +587,7 @@ function candeploykillstreakweapon(var0, var1) {
     return "KILLSTREAKS/CANNOT_BE_USED";
   }
 
-  if((scripts\cp_mp\utility\killstreak_utility::isridekillstreak(var0.streakname) || scripts\cp_mp\utility\killstreak_utility::ismapselectkillstreak(var0.streakname)) && !self isonground()) {
+  if((scripts\cp_mp\utility\killstreak_utility::isridekillstreak(var_0.streakname) || scripts\cp_mp\utility\killstreak_utility::ismapselectkillstreak(var_0.streakname)) && !self isonground()) {
     return "KILLSTREAKS/CANNOT_BE_USED";
   }
 
@@ -596,31 +596,31 @@ function candeploykillstreakweapon(var0, var1) {
   }
 }
 
-function streakdeploy_giveandfireoffhandreliable(var0) {
+function streakdeploy_giveandfireoffhandreliable(var_0) {
   self endon("death");
   self endon("disconnect");
-  self giveandfireoffhand(var0);
+  self giveandfireoffhand(var_0);
 
-  if(!self hasweapon(var0)) {
-    self notify("giveAndFireOffhandReliableFailed", var0);
+  if(!self hasweapon(var_0)) {
+    self notify("giveAndFireOffhandReliableFailed", var_0);
     return false;
   }
 
-  var1 = spawnStruct();
-  GscBinSkip4(0x6e, var1, self, var0);
+  var_1 = spawnStruct();
+  GscBinSkip4(0x6e, var_1, self, var_0);
 }
 
-function streakdeploy_watchgiveandfireoffhandreliablesuccess(var0, var1) {
+function streakdeploy_watchgiveandfireoffhandreliablesuccess(var_0, var_1) {
   self endon("race_end");
-  var0 waittillmatch("offhand_fired", var1);
+  var_0 waittillmatch("offhand_fired", var_1);
   self.success = 1;
   self notify("race_start");
 }
 
-function streakdeploy_watchgiveandfireoffhandreliablefailure(var0, var1) {
+function streakdeploy_watchgiveandfireoffhandreliablefailure(var_0, var_1) {
   self endon("race_end");
 
-  while(var0 hasweapon(var1)) {
+  while(var_0 hasweapon(var_1)) {
     waitframe();
   }
 

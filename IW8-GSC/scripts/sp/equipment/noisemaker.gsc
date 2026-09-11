@@ -3,12 +3,12 @@
  * Script: scripts\sp\equipment\noisemaker.gsc
 ***********************************************/
 
-function precache(var0) {
-  scripts\sp\equipment\offhands::registeroffhandfirefunc(var0, &noisemakerfiremain);
+function precache(var_0) {
+  scripts\sp\equipment\offhands::registeroffhandfirefunc(var_0, &noisemakerfiremain);
 }
 
-function noisemakerfiremain(var0) {
-  if(!isDefined(var0)) {
+function noisemakerfiremain(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
@@ -16,52 +16,52 @@ function noisemakerfiremain(var0) {
     level.currentthrowobject = "";
   }
 
-  var0 setModel(level.currentthrowobject);
-  level.player notify("noisemaker_thrown", var0);
-  var1 = level.player getcurrentoffhand("secondaryoffhand");
-  var0 waittill("missile_stuck", var2);
+  var_0 setModel(level.currentthrowobject);
+  level.player notify("noisemaker_thrown", var_0);
+  var_1 = level.player getcurrentoffhand("secondaryoffhand");
+  var_0 waittill("missile_stuck", var_2);
 
-  foreach(var4 in getaiarray("axis")) {
-    if(isDefined(var4)) {
-      var5 = distance(var4.origin, var0.origin);
+  foreach(var_4 in getaiarray("axis")) {
+    if(isDefined(var_4)) {
+      var_5 = distance(var_4.origin, var_0.origin);
 
-      if(var5 < 650) {
-        var4 aieventlistenerevent("cover_blown", level.player, var0.origin);
+      if(var_5 < 650) {
+        var_4 aieventlistenerevent("cover_blown", level.player, var_0.origin);
       }
     }
   }
 
-  var7 = spawn("script_model", var0.origin);
-  var7.angles = var0.angles;
-  var7 setModel(level.currentthrowobject);
+  var_7 = spawn("script_model", var_0.origin);
+  var_7.angles = var_0.angles;
+  var_7 setModel(level.currentthrowobject);
   thread noisemakerwaitpickup();
-  var8 = 1;
+  var_8 = 1;
 
   if(isDefined(level.allownoisemakerpickups) && !level.allownoisemakerpickups) {
-    var8 = 0;
+    var_8 = 0;
   }
 
-  if(var8) {
+  if(var_8) {
     noisemakersenablecursors();
   }
 
-  var0 delete();
+  var_0 delete();
 }
 
 function noisemakersenablecursors() {
   if(!istrue(level.disablenoisemakers)) {
-    var0 = getEntArray("offhand_noisemaker", "targetname");
+    var_0 = getEntArray("offhand_noisemaker", "targetname");
 
-    foreach(var2 in var0) {
-      if(isDefined(var2.script_parameters)) {
-        var2.zoffset = stringtofloat(var2.script_parameters);
+    foreach(var_2 in var_0) {
+      if(isDefined(var_2.script_parameters)) {
+        var_2.zoffset = stringtofloat(var_2.script_parameters);
       } else {
-        var2.zoffset = 1.5;
+        var_2.zoffset = 1.5;
       }
 
-      if(!isDefined(var2.cursor_hint_ent)) {
-        var3 = rotatevectorinverted((0, 0, var2.zoffset), var2.angles);
-        var2 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, var3, &"CAPTIVE/CURSOR_PICKUP", 360, 128, 64);
+      if(!isDefined(var_2.cursor_hint_ent)) {
+        var_3 = rotatevectorinverted((0, 0, var_2.zoffset), var_2.angles);
+        var_2 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, var_3, &"CAPTIVE/CURSOR_PICKUP", 360, 128, 64);
       }
     }
 
@@ -70,10 +70,10 @@ function noisemakersenablecursors() {
 }
 
 function noisemakersdisablecursors() {
-  var0 = getEntArray("offhand_noisemaker", "targetname");
+  var_0 = getEntArray("offhand_noisemaker", "targetname");
 
-  foreach(var2 in var0) {
-    var2 scripts\sp\player\cursor_hint::remove_cursor_hint();
+  foreach(var_2 in var_0) {
+    var_2 scripts\sp\player\cursor_hint::remove_cursor_hint();
   }
 }
 
@@ -84,9 +84,9 @@ function noisemakerwaitpickup() {
 
   for(;;) {
     self waittill("trigger");
-    var0 = level.player getammocount("noisemaker");
+    var_0 = level.player getammocount("noisemaker");
 
-    if(var0 == 0) {
+    if(var_0 == 0) {
       level.currentthrowobject = self.model;
       level.player scripts\engine\sp\utility::give_offhand("noisemaker");
       level.player notify("noisemaker_pickedup", self);
@@ -98,19 +98,19 @@ function noisemakerwaitpickup() {
   }
 }
 
-function stringtofloat(var0) {
-  var1 = strtok(var0, ".");
-  var2 = int(var1[0]);
+function stringtofloat(var_0) {
+  var_1 = strtok(var_0, ".");
+  var_2 = int(var_1[0]);
 
-  if(isDefined(var1[1])) {
-    var3 = 1;
+  if(isDefined(var_1[1])) {
+    var_3 = 1;
 
-    for(var4 = 0; var4 < var1[1].size; var4++) {
-      var3 *= 0.1;
+    for(var_4 = 0; var_4 < var_1[1].size; var_4++) {
+      var_3 *= 0.1;
     }
 
-    var2 += int(var1[1]) * var3;
+    var_2 += int(var_1[1]) * var_3;
   }
 
-  return var2;
+  return var_2;
 }

@@ -3,7 +3,7 @@
  * Script: scripts\asm\suicidebomber\suicidebomber.gsc
 *******************************************************/
 
-function bomber_init(var0, var1, var2) {
+function bomber_init(var_0, var_1, var_2) {
   scripts\asm\shared\utility::setbasearchetype("suicidebomber");
 
   if(self isscriptable()) {
@@ -18,24 +18,24 @@ function initscriptable() {
   self setscriptablepartstate("notetrack_handler", "active", 0);
 }
 
-function shouldexplode(var0, var1, var2, var3) {
+function shouldexplode(var_0, var_1, var_2, var_3) {
   return istrue(self.explode);
 }
 
-function playanim_explode(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  thread scripts\asm\shared\utility::waitfordooropen(var0, var1, 1);
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  var4 = scripts\asm\asm::asm_getxanim(var1, var3);
-  self aisetanim(var1, var3);
-  var5 = getanimlength(var4);
-  var6 = getnotetracktimes(var4, "explode")[0];
+function playanim_explode(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  thread scripts\asm\shared\utility::waitfordooropen(var_0, var_1, 1);
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, var_3);
+  self aisetanim(var_1, var_3);
+  var_5 = getanimlength(var_4);
+  var_6 = getnotetracktimes(var_4, "explode")[0];
 
-  if(isDefined(var6)) {
-    var5 *= var6;
+  if(isDefined(var_6)) {
+    var_5 *= var_6;
   }
 
-  wait var5;
+  wait var_5;
 
   if(isDefined(level.suicide_bomber_explode_func)) {
     self thread[[level.suicide_bomber_explode_func]](self);
@@ -44,10 +44,10 @@ function playanim_explode(var0, var1, var2) {
   thread bomber_detonation();
 }
 
-function playanim_bomberdeath(var0, var1, var2) {
+function playanim_bomberdeath(var_0, var_1, var_2) {
   if(!istrue(self.hasexploded) && !istrue(self.skipdetonation)) {
     if(!istrue(self.instantexplode)) {
-      thread scripts\asm\soldier\death::playdeathanim(var0, var1);
+      thread scripts\asm\soldier\death::playdeathanim(var_0, var_1);
 
       if(!isagent(self)) {
         wait 1.2;
@@ -72,7 +72,7 @@ function bomber_detonation() {
 
   if(getdvarint("NTMLLPTNLT")) {
     if(isDefined(self) && isDefined(self.grenadeweapon) && istrue(self.bomberusegrenade)) {
-      var0 = self magicgrenade(self.origin + (0, 0, 60), self.origin, 0, 0);
+      var_0 = self magicgrenade(self.origin + (0, 0, 60), self.origin, 0, 0);
     } else {
       playFX(level.g_effect["human_gib_fullbody"], self.origin);
       playFX(level.g_effect["vfx_suicide_bomber_gib_explode"], self.origin);
@@ -98,34 +98,34 @@ function bomber_detonation() {
   self kill();
 }
 
-function bomber_finishpainhead(var0, var1, var2) {
-  scripts\asm\soldier\pain::cleanuppainanim(var0, var1, var2);
+function bomber_finishpainhead(var_0, var_1, var_2) {
+  scripts\asm\soldier\pain::cleanuppainanim(var_0, var_1, var_2);
   self kill();
 }
 
-function playanim_bombermoveloop(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  thread scripts\asm\shared\utility::waitfordooropen(var0, var1, 1);
-  var3 = scripts\asm\asm::asm_lookupanimfromalias(var1, "blank");
-  self aisetanim(var1, var3);
-  thread blendspacerndm(var1);
+function playanim_bombermoveloop(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  thread scripts\asm\shared\utility::waitfordooropen(var_0, var_1, 1);
+  var_3 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "blank");
+  self aisetanim(var_1, var_3);
+  thread blendspacerndm(var_1);
 
   for(;;) {
-    scripts\asm\asm::asm_donotetracks(var0, var1);
+    scripts\asm\asm::asm_donotetracks(var_0, var_1);
   }
 }
 
-function blendspacerndm(var0) {
+function blendspacerndm(var_0) {
   self endon("death");
-  self endon(var0 + "_finished");
+  self endon(var_0 + "_finished");
 
   for(;;) {
-    var1 = randomfloatrange(-1, 1);
-    self setcivilianfocus(var1);
+    var_1 = randomfloatrange(-1, 1);
+    self setcivilianfocus(var_1);
     wait randomfloatrange(0.25, 2);
   }
 }
 
-function bomber_shouldraisearm(var0, var1, var2, var3) {
+function bomber_shouldraisearm(var_0, var_1, var_2, var_3) {
   return istrue(self.bomberraisearm);
 }

@@ -7,11 +7,11 @@ function vo_intro_marine_oorah_dialogue() {
   scripts\engine\utility::flag_wait("intro_cinematic_complete");
   wait 2;
   level.griggs scripts\engine\utility::waittill_any_timeout(5, "sounddone", "face_sounddone");
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-  var0 thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_igc_intro_170");
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+  var_0 thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_igc_intro_170");
   wait 0.1;
-  var0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
-  var0 thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_igc_intro_180");
+  var_0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
+  var_0 thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_igc_intro_180");
   thread vo_convoy_griggs_move_out_dialogue();
 }
 
@@ -56,8 +56,8 @@ function vo_intro_nag_manager_3() {
 }
 
 function vo_intro_griggs_nag_dialogue() {
-  var0 = [level.griggs, "dx_vom_grg_intro_convoy_60", "dx_vom_grg_intro_convoy_61", level.griggs, "dx_vom_grg_intro_convoy_70", "dx_vom_grg_intro_convoy_71", level.griggs, "dx_vom_grg_intro_convoy_80", "dx_vom_grg_intro_convoy_81"];
-  vo_knockout_manager("intro_griggs_nag", var0, level.player);
+  var_0 = [level.griggs, "dx_vom_grg_intro_convoy_60", "dx_vom_grg_intro_convoy_61", level.griggs, "dx_vom_grg_intro_convoy_70", "dx_vom_grg_intro_convoy_71", level.griggs, "dx_vom_grg_intro_convoy_80", "dx_vom_grg_intro_convoy_81"];
+  vo_knockout_manager("intro_griggs_nag", var_0, level.player);
 }
 
 function vo_convoy_griggs_move_out_dialogue() {
@@ -132,12 +132,12 @@ function vo_convoy_sledgehammer_dialogue() {
 }
 
 function vo_convoy_a10_flyby_react_dialogue() {
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_intro_airstrike_10");
-  var0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_intro_airstrike_20");
-  var0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_intro_airstrike_30");
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_intro_airstrike_10");
+  var_0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_intro_airstrike_20");
+  var_0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_intro_airstrike_30");
 }
 
 function vo_convoy_alex_tripwire_callout_dialogue() {
@@ -159,8 +159,8 @@ function vo_convoy_griggs_tripwire_callout_dialogue() {
 
   if(!scripts\engine\utility::flag("tripwire_hint_flag") && !scripts\engine\utility::flag("tripwire_cleared_flag") && !scripts\engine\utility::flag("flag_vo_alex_discovered_tripwires")) {
     level notify("convoy_tripwire_discovered");
-    var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-    var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_intro_tripwires_10");
+    var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+    var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_intro_tripwires_10");
   }
 
   if(!scripts\engine\utility::flag("tripwire_cleared_flag")) {
@@ -194,8 +194,8 @@ function convoy_tripwire_nag_handler() {
 }
 
 function vo_convoy_tripwire_nag_dialogue() {
-  var0 = [level.griggs, "dx_vom_grg_intro_tripwires_30", "dx_vom_grg_intro_tripwires_31", level.griggs, "dx_vom_grg_intro_tripwires_40", "dx_vom_grg_intro_tripwires_41", level.griggs, "dx_vom_grg_intro_tripwires_50", "dx_vom_grg_intro_tripwires_51", &scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine, "dx_vom_us1_intro_tripwires_60", "dx_vom_us1_intro_tripwires_61", &scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine, "dx_vom_us1_intro_tripwires_70", "dx_vom_us1_intro_tripwires_71"];
-  vo_knockout_manager("convoy_tripwire_nag", var0, level.player);
+  var_0 = [level.griggs, "dx_vom_grg_intro_tripwires_30", "dx_vom_grg_intro_tripwires_31", level.griggs, "dx_vom_grg_intro_tripwires_40", "dx_vom_grg_intro_tripwires_41", level.griggs, "dx_vom_grg_intro_tripwires_50", "dx_vom_grg_intro_tripwires_51", &scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine, "dx_vom_us1_intro_tripwires_60", "dx_vom_us1_intro_tripwires_61", &scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine, "dx_vom_us1_intro_tripwires_70", "dx_vom_us1_intro_tripwires_71"];
+  vo_knockout_manager("convoy_tripwire_nag", var_0, level.player);
 }
 
 function vo_convoy_tutorial_tripwire_disabled_dialogue() {
@@ -206,40 +206,40 @@ function vo_convoy_tutorial_tripwire_disabled_dialogue() {
 function vo_convoy_griggs_convoy_approach_dialogue() {
   scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs("dx_vom_grg_intro_street_11");
   wait 0.5;
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
 
   if(isalive(level.player)) {
-    var0 thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_convoy_ambush_attack_40");
+    var_0 thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_convoy_ambush_attack_40");
   }
 
   wait 0.1;
-  var0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
+  var_0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
 
   if(isalive(level.player)) {
-    var0 thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_convoy_ambush_attack_50");
+    var_0 thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_convoy_ambush_attack_50");
   }
 
   wait 0.25;
-  var0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
+  var_0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
 
   if(isalive(level.player)) {
-    var0 thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us3_convoy_ambush_attack_60");
+    var_0 thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us3_convoy_ambush_attack_60");
   }
 
   wait 0.1;
-  var0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
+  var_0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
 
   if(isalive(level.player)) {
-    var0 thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us4_convoy_ambush_attack_70");
+    var_0 thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us4_convoy_ambush_attack_70");
     return;
   }
 }
 
 function vo_convoy_marine_convoy_greeter_dialogue() {
-  var0 = scripts\engine\sp\utility::get_living_ai("convoy_greeter", "targetname");
+  var_0 = scripts\engine\sp\utility::get_living_ai("convoy_greeter", "targetname");
 
-  if(isDefined(var0) && isalive(var0)) {
-    var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_convoy_ambush_attack_10");
+  if(isDefined(var_0) && isalive(var_0)) {
+    var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_convoy_ambush_attack_10");
     return;
   }
 }
@@ -257,43 +257,43 @@ function vo_murderhole_griggs_ied_dialogue() {
   scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs("dx_vom_grg_convoy_ambush_attack_90");
   scripts\engine\utility::flag_wait("wounded_kill");
   wait 1;
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_convoy_ambush_attack_100", undefined, undefined, undefined, undefined, undefined, undefined, undefined, "dx_vom_us1_convoy_ambush_attack_101");
-  var1 = [];
-  var2 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("r");
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_convoy_ambush_attack_100", undefined, undefined, undefined, undefined, undefined, undefined, undefined, "dx_vom_us1_convoy_ambush_attack_101");
+  var_1 = [];
+  var_2 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("r");
 
-  foreach(var4 in var2) {
-    if(isDefined(var4)) {
-      var1 = scripts\engine\utility::array_add(var1, var4);
+  foreach(var_4 in var_2) {
+    if(isDefined(var_4)) {
+      var_1 = scripts\engine\utility::array_add(var_1, var_4);
     }
   }
 
-  var6 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("c");
+  var_6 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("c");
 
-  foreach(var4 in var6) {
-    if(isDefined(var4)) {
-      var1 = scripts\engine\utility::array_add(var1, var4);
+  foreach(var_4 in var_6) {
+    if(isDefined(var_4)) {
+      var_1 = scripts\engine\utility::array_add(var_1, var_4);
     }
   }
 
-  var9 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("p");
+  var_9 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("p");
 
-  foreach(var4 in var9) {
-    if(isDefined(var4)) {
-      var1 = scripts\engine\utility::array_add(var1, var4);
+  foreach(var_4 in var_9) {
+    if(isDefined(var_4)) {
+      var_1 = scripts\engine\utility::array_add(var_1, var_4);
     }
   }
 
-  var12 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("b");
+  var_12 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("b");
 
-  foreach(var4 in var12) {
-    if(isDefined(var4)) {
-      var1 = scripts\engine\utility::array_add(var1, var4);
+  foreach(var_4 in var_12) {
+    if(isDefined(var_4)) {
+      var_1 = scripts\engine\utility::array_add(var_1, var_4);
     }
   }
 
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine(var1);
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_murderhole_smoke_10");
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine(var_1);
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_murderhole_smoke_10");
 
   if(!scripts\engine\utility::flag("obj_update_to_gate")) {
     scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs("dx_vom_grg_murderhole_smoke_20");
@@ -302,18 +302,18 @@ function vo_murderhole_griggs_ied_dialogue() {
 }
 
 function vo_murderhole_throw_smoke_nag_dialogue() {
-  var0 = [level.griggs, "dx_vom_grg_murderhole_smoke_30", "dx_vom_grg_murderhole_smoke_31", level.griggs, "dx_vom_grg_murderhole_smoke_40", "dx_vom_grg_murderhole_smoke_41"];
-  vo_knockout_manager("murderhole_throw_smoke_nag", var0, level.player);
+  var_0 = [level.griggs, "dx_vom_grg_murderhole_smoke_30", "dx_vom_grg_murderhole_smoke_31", level.griggs, "dx_vom_grg_murderhole_smoke_40", "dx_vom_grg_murderhole_smoke_41"];
+  vo_knockout_manager("murderhole_throw_smoke_nag", var_0, level.player);
 }
 
 function vo_murderhole_mg_dontshoot_nag_dialogue() {
-  var0 = [level.griggs, "dx_vom_grg_murderhole_smoke_80", "dx_vom_grg_murderhole_smoke_81", level.griggs, "dx_vom_grg_murderhole_smoke_90", "dx_vom_grg_murderhole_smoke_91", level.griggs, "dx_vom_grg_murderhole_smoke_100", "dx_vom_grg_murderhole_smoke_101"];
-  vo_knockout_manager("murderhole_mg_dontshoot_nag", var0, level.player);
+  var_0 = [level.griggs, "dx_vom_grg_murderhole_smoke_80", "dx_vom_grg_murderhole_smoke_81", level.griggs, "dx_vom_grg_murderhole_smoke_90", "dx_vom_grg_murderhole_smoke_91", level.griggs, "dx_vom_grg_murderhole_smoke_100", "dx_vom_grg_murderhole_smoke_101"];
+  vo_knockout_manager("murderhole_mg_dontshoot_nag", var_0, level.player);
 }
 
 function vo_murderhole_marine_throws_smokes_dialogue() {
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_murderhole_smoke_110");
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_murderhole_smoke_110");
   scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs("dx_vom_grg_murderhole_smoke_120", undefined, undefined, undefined, undefined, undefined, undefined, undefined, "dx_vom_grg_murderhole_smoke_121");
 }
 
@@ -335,11 +335,11 @@ function vo_alley_griggs_mg_warning() {
 
 function vo_alley_marine_pinned_down_dialogue() {
   wait 3;
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us3_alley_combat_10");
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us3_alley_combat_10");
   wait 2;
-  var0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_alley_combat_40");
+  var_0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_alley_combat_40");
   wait 3;
   scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs("dx_vom_grg_alley_combat_20");
 }
@@ -349,8 +349,8 @@ function vo_alley_mg_initial_callout_dialogue() {
 }
 
 function vo_alley_marine_technical_arrive_dialogue() {
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_street_approach_170");
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_street_approach_170");
 }
 
 function vo_alley_scripted_push_up_dialogue() {
@@ -358,26 +358,26 @@ function vo_alley_scripted_push_up_dialogue() {
 }
 
 function vo_alley_griggs_final_smoke_dialogue() {
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_murderhole_smoke_110");
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_murderhole_smoke_110");
   wait 0.5;
   scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs("dx_vom_grg_murderhole_smoke_120", undefined, undefined, undefined, undefined, undefined, undefined, undefined, "dx_vom_grg_murderhole_smoke_121");
   scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs("dx_vom_grg_murderhole_smoke_140");
 }
 
 function vo_marines_leaving_area_nag() {
-  var0 = [level.griggs, "dx_vom_grg_murderhole_smoke_150", "dx_vom_grg_murderhole_smoke_151", level.griggs, "dx_vom_grg_murderhole_smoke_160", "dx_vom_grg_murderhole_smoke_161", level.griggs, "dx_vom_grg_murderhole_smoke_170", "dx_vom_grg_murderhole_smoke_171"];
-  vo_knockout_manager("marines_leaving_area_nag", var0);
+  var_0 = [level.griggs, "dx_vom_grg_murderhole_smoke_150", "dx_vom_grg_murderhole_smoke_151", level.griggs, "dx_vom_grg_murderhole_smoke_160", "dx_vom_grg_murderhole_smoke_161", level.griggs, "dx_vom_grg_murderhole_smoke_170", "dx_vom_grg_murderhole_smoke_171"];
+  vo_knockout_manager("marines_leaving_area_nag", var_0);
 }
 
 function vo_alley_push_up_nag_dialogue() {
-  var0 = ["dx_vom_grg_retreat_hospital_60", "dx_vom_grg_murderhole_smoke_160"];
-  var1 = ["dx_vom_grg_retreat_hospital_61", "dx_vom_grg_murderhole_smoke_161"];
+  var_0 = ["dx_vom_grg_retreat_hospital_60", "dx_vom_grg_murderhole_smoke_160"];
+  var_1 = ["dx_vom_grg_retreat_hospital_61", "dx_vom_grg_murderhole_smoke_161"];
 
   if(level.griggs_can_smoke_nag == 1) {
     level.griggs_can_smoke_nag = 0;
-    var2 = randomint(var0.size);
-    scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs(var0[var2], undefined, undefined, undefined, undefined, undefined, undefined, undefined, var1[var2]);
+    var_2 = randomint(var_0.size);
+    scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs(var_0[var_2], undefined, undefined, undefined, undefined, undefined, undefined, undefined, var_1[var_2]);
     wait 5;
     level.griggs_can_smoke_nag = 1;
     return;
@@ -385,13 +385,13 @@ function vo_alley_push_up_nag_dialogue() {
 }
 
 function vo_alley_throw_smoke_nag_dialogue() {
-  var0 = ["dx_vom_grg_murderhole_smoke_30", "dx_vom_grg_murderhole_smoke_40", "dx_vom_grg_murderhole_smoke_50"];
-  var1 = ["dx_vom_grg_murderhole_smoke_31", "dx_vom_grg_murderhole_smoke_41", "dx_vom_grg_murderhole_smoke_51"];
+  var_0 = ["dx_vom_grg_murderhole_smoke_30", "dx_vom_grg_murderhole_smoke_40", "dx_vom_grg_murderhole_smoke_50"];
+  var_1 = ["dx_vom_grg_murderhole_smoke_31", "dx_vom_grg_murderhole_smoke_41", "dx_vom_grg_murderhole_smoke_51"];
 
   if(level.griggs_can_smoke_nag == 1) {
     level.griggs_can_smoke_nag = 0;
-    var2 = randomint(var0.size);
-    scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs(var0[var2], undefined, undefined, undefined, undefined, undefined, undefined, undefined, var1[var2]);
+    var_2 = randomint(var_0.size);
+    scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs(var_0[var_2], undefined, undefined, undefined, undefined, undefined, undefined, undefined, var_1[var_2]);
     wait 5;
     level.griggs_can_smoke_nag = 1;
     return;
@@ -399,7 +399,7 @@ function vo_alley_throw_smoke_nag_dialogue() {
 }
 
 function vo_mhbreach_griggs_breach_dialogue() {
-  var0 = getEnt("door_breach_check_volume", "targetname");
+  var_0 = getEnt("door_breach_check_volume", "targetname");
 
   if(!scripts\engine\utility::flag("ready_to_breach_MH")) {
     if(scripts\engine\utility::cointoss()) {
@@ -418,9 +418,9 @@ function vo_mhbreach_griggs_breach_dialogue() {
 
     while(!scripts\engine\utility::flag("murderhole_breach_save_point")) {
       if(!scripts\engine\utility::flag("murderhole_breach_save_point")) {
-        if(level.player istouching(var0)) {
-          var1 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-          var1 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_murderhole_breach_door_30");
+        if(level.player istouching(var_0)) {
+          var_1 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+          var_1 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_murderhole_breach_door_30");
           wait 1;
           thread vo_mhbreach_marine_ready();
           wait 15;
@@ -442,9 +442,9 @@ function vo_mhbreach_griggs_breach_dialogue() {
 
   while(!scripts\engine\utility::flag("murderhole_breach_save_point")) {
     if(!scripts\engine\utility::flag("murderhole_breach_save_point")) {
-      if(level.player istouching(var0)) {
-        var1 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-        var1 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_murderhole_breach_door_30");
+      if(level.player istouching(var_0)) {
+        var_1 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+        var_1 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_murderhole_breach_door_30");
         wait 1;
         thread vo_mhbreach_marine_ready();
         wait 15;
@@ -468,8 +468,8 @@ function vo_mhbreach_griggs_breach_dialogue() {
 }
 
 function vo_mhbreach_marine_ready() {
-  var0 = [ &scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine, "dx_vom_us2_murderhole_breach_door_20", undefined, &scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine, "dx_vom_us2_murderhole_breach_door_40", undefined];
-  vo_knockout_manager("mhbreach_marine_ready", var0, level.player);
+  var_0 = [ &scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine, "dx_vom_us2_murderhole_breach_door_20", undefined, &scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine, "dx_vom_us2_murderhole_breach_door_40", undefined];
+  vo_knockout_manager("mhbreach_marine_ready", var_0, level.player);
 }
 
 function vo_mhbreach_alex_kitchen_clear_dialogue() {
@@ -482,11 +482,11 @@ function vo_mhbreach_alex_stairs_climbing_dialogue() {
   wait 1;
   scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs("dx_vom_grg_murderhole_breach_firstfloor_30");
   wait 1;
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_murderhole_breach_firstfloor_40");
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_murderhole_breach_firstfloor_40");
   wait 0.5;
-  var0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_murderhole_breach_firstfloor_50");
+  var_0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_murderhole_breach_firstfloor_50");
 }
 
 function vo_mhbreach_alex_tripwire_dialogue() {
@@ -494,22 +494,22 @@ function vo_mhbreach_alex_tripwire_dialogue() {
 }
 
 function vo_mhbreach_marine_defuse_nag_1_dialogue() {
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_murderhole_breach_tripwires_50");
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_murderhole_breach_tripwires_50");
 }
 
 function vo_mhbreach_marine_defuse_nag_2_dialogue() {
-  var0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_murderhole_breach_tripwires_60");
+  var_0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_murderhole_breach_tripwires_60");
 }
 
 function vo_mhbreach_alex_civ_down_dialogue() {
   wait 1;
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_murderhole_breach_civs_20");
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_murderhole_breach_civs_20");
   wait 2;
-  var0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_murderhole_breach_civs_30");
+  var_0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_murderhole_breach_civs_30");
 }
 
 function vo_mhbreach_alex_bedroom_clear_dialogue() {
@@ -517,11 +517,11 @@ function vo_mhbreach_alex_bedroom_clear_dialogue() {
 }
 
 function vo_mhbreach_marine_bedroom_clear_dialogue() {
-  var0 = ["dx_vom_us2_intro_clearance_50", "dx_vom_us1_intro_clearance_60", "dx_vom_us2_lobby_entrance_230"];
+  var_0 = ["dx_vom_us2_intro_clearance_50", "dx_vom_us1_intro_clearance_60", "dx_vom_us2_lobby_entrance_230"];
 
   if(!scripts\engine\utility::flag("player_ready_for_marine")) {
-    var1 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-    var1 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine(scripts\engine\utility::random(var0));
+    var_1 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+    var_1 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine(scripts\engine\utility::random(var_0));
     return;
   }
 }
@@ -539,8 +539,8 @@ function vo_mhbreach_alex_staircase_dialogue() {
 
 function vo_mhbreach_marine_clear_dialogue() {
   if(!scripts\engine\utility::flag("mg_team_alerted")) {
-    var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-    var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_murderhole_breach_thirdfloor_90");
+    var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+    var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_murderhole_breach_thirdfloor_90");
     return;
   }
 }
@@ -637,25 +637,25 @@ function vo_retreat_helo_air_support_intro_dialogue() {
 }
 
 function vo_retreat_marine_bombardment_reaction_dialogue() {
-  var0 = [self, "dx_vom_us2_retreat_helos_70", undefined, self, "dx_vom_us3_retreat_helos_80", undefined, self, "dx_vom_us4_retreat_helos_90", undefined];
-  vo_knockout_manager("retreat_marine_bombardment_reaction", var0);
+  var_0 = [self, "dx_vom_us2_retreat_helos_70", undefined, self, "dx_vom_us3_retreat_helos_80", undefined, self, "dx_vom_us4_retreat_helos_90", undefined];
+  vo_knockout_manager("retreat_marine_bombardment_reaction", var_0);
 }
 
 function vo_retreat_griggs_advance_bombardment_dialogue() {
   scripts\sp\maps\marines\marines_utility::add_dialogue_line_heli_pilot("dx_vom_usgp_retreat_helos_100", undefined, undefined, undefined, 1);
   level.griggs scripts\engine\sp\utility::smart_dialogue("dx_vom_grg_retreat_hospital_10");
   scripts\engine\utility::flag_set("flag_retreat_advance_vo_complete");
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-  var0 thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_retreat_hospital_20");
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+  var_0 thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_retreat_hospital_20");
   wait 0.1;
-  var0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
-  var0 thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_retreat_hospital_30");
+  var_0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
+  var_0 thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_retreat_hospital_30");
   wait 0.15;
-  var0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
-  var0 thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us3_retreat_hospital_40");
+  var_0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
+  var_0 thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us3_retreat_hospital_40");
   wait 0.1;
-  var0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
-  var0 thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us4_retreat_hospital_50");
+  var_0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
+  var_0 thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us4_retreat_hospital_50");
   thread vo_retreat_griggs_advance_nags();
   thread vo_retreat_marine_advance_reactions_dialogue();
 }
@@ -666,8 +666,8 @@ function vo_retreat_marine_advance_reactions_dialogue() {
   wait 3;
 
   if(!scripts\engine\utility::flag("flag_retreat_trigger_counterattack")) {
-    var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-    var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_retreat_hospital_100");
+    var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+    var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_retreat_hospital_100");
     return;
   }
 }
@@ -690,16 +690,16 @@ function vo_retreat_griggs_advance_nags() {
 
 function vo_retreat_marine_advance_ambush_initial_dialogue() {
   wait 2.5;
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_lobby_entrance_20");
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_lobby_entrance_20");
   wait 2;
-  var0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_lobby_entrance_30");
+  var_0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_lobby_entrance_30");
   wait 1;
   scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs("dx_vom_grg_lobby_entrance_40");
   wait 4;
-  var0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_ma1_street_approach_160");
+  var_0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_ma1_street_approach_160");
   wait 4;
 
   if(!scripts\engine\utility::flag("flag_retreat_rpg_killed")) {
@@ -710,8 +710,8 @@ function vo_retreat_marine_advance_ambush_initial_dialogue() {
 
 function vo_retreat_marine_rpgs_clear_dialogue() {
   wait 1;
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_lobby_entrance_70");
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_lobby_entrance_70");
 }
 
 function vo_retreat_griggs_advance_dialogue() {
@@ -725,8 +725,8 @@ function vo_lobby_griggs_secure_lobby_dialogue() {
 
 function vo_lobby_marine_civ_warning_dialogue() {
   if(!scripts\engine\utility::flag("flag_groundfloor_hallway_ambush_start")) {
-    var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-    var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_lobby_entrance_180");
+    var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+    var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_lobby_entrance_180");
     return;
   }
 }
@@ -757,41 +757,41 @@ function vo_lobby_marines_secured_dialogue() {
 }
 
 function vo_lobby_griggs_nag_dialogue() {
-  var0 = [level.griggs, "dx_vom_grg_groundfloor_door_50", "dx_vom_grg_groundfloor_door_51", level.griggs, "dx_vom_grg_groundfloor_door_60", "dx_vom_grg_groundfloor_door_61", level.griggs, "dx_vom_grg_groundfloor_door_70", "dx_vom_grg_groundfloor_door_71"];
-  vo_knockout_manager("lobby_griggs_nag_dialogue", var0, level.player);
+  var_0 = [level.griggs, "dx_vom_grg_groundfloor_door_50", "dx_vom_grg_groundfloor_door_51", level.griggs, "dx_vom_grg_groundfloor_door_60", "dx_vom_grg_groundfloor_door_61", level.griggs, "dx_vom_grg_groundfloor_door_70", "dx_vom_grg_groundfloor_door_71"];
+  vo_knockout_manager("lobby_griggs_nag_dialogue", var_0, level.player);
 }
 
 function vo_groundfloor_civilian_screams_dialogue() {
-  var0 = [];
-  var1 = scripts\sp\maps\marines\marines_utility::get_closest_civ();
+  var_0 = [];
+  var_1 = scripts\sp\maps\marines\marines_utility::get_closest_civ();
   wait 0.5;
 
-  if(isDefined(var1) && isalive(var1)) {
-    var1 scripts\engine\utility::playsoundonentity("dx_vom_civ_female_scream");
+  if(isDefined(var_1) && isalive(var_1)) {
+    var_1 scripts\engine\utility::playsoundonentity("dx_vom_civ_female_scream");
   }
 
-  if(isDefined(var1)) {
-    var0 = scripts\engine\utility::array_add(var0, var1);
+  if(isDefined(var_1)) {
+    var_0 = scripts\engine\utility::array_add(var_0, var_1);
   }
 
   wait 0.5;
 
-  if(var0.size > 0) {
-    var2 = scripts\sp\maps\marines\marines_utility::get_closest_civ(var0);
+  if(var_0.size > 0) {
+    var_2 = scripts\sp\maps\marines\marines_utility::get_closest_civ(var_0);
   } else {
-    var2 = scripts\sp\maps\marines\marines_utility::get_closest_civ();
+    var_2 = scripts\sp\maps\marines\marines_utility::get_closest_civ();
   }
 
-  if(isDefined(var2) && isalive(var2)) {
-    var2 scripts\engine\utility::playsoundonentity("dx_vom_civ_male_scream");
+  if(isDefined(var_2) && isalive(var_2)) {
+    var_2 scripts\engine\utility::playsoundonentity("dx_vom_civ_male_scream");
     return;
   }
 }
 
 function vo_groundfloor_griggs_hallway_ambush_dialogue() {
   if(level.griggs_lobby_cleared_vo_done == 0) {
-    var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-    var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_groundfloor_combat_20");
+    var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+    var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_groundfloor_combat_20");
     wait 1;
 
     if(level.griggs_lobby_cleared_vo_done == 1) {
@@ -804,8 +804,8 @@ function vo_groundfloor_griggs_hallway_ambush_dialogue() {
 
   scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs("dx_vom_grg_groundfloor_combat_10");
   wait 1;
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_groundfloor_combat_20");
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_groundfloor_combat_20");
   wait 1;
   scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs("dx_vom_grg_groundfloor_combat_30");
 }
@@ -814,8 +814,8 @@ function vo_groundfloor_alex_tripwire_defused_dialogue() {
   scripts\engine\utility::flag_wait_any("flag_groundfloor_tripwire_defused", "flag_stairwell_reached");
 
   if(!scripts\engine\utility::flag("flag_stairwell_reached")) {
-    var0 = ["dx_vom_alx_civ_ambush_gun_120", "dx_vom_alx_mg_hall_tripwires_70"];
-    scripts\sp\maps\marines\marines_utility::add_dialogue_line_alex(scripts\engine\utility::random(var0));
+    var_0 = ["dx_vom_alx_civ_ambush_gun_120", "dx_vom_alx_mg_hall_tripwires_70"];
+    scripts\sp\maps\marines\marines_utility::add_dialogue_line_alex(scripts\engine\utility::random(var_0));
     return;
   }
 }
@@ -828,8 +828,8 @@ function vo_civambush_griggs_stairwell_advance_dialogue() {
   scripts\engine\utility::flag_wait_or_timeout("flag_vo_stairwell_starting", 2);
 
   if(scripts\engine\sp\utility::get_living_ai_array("ai_aq_groundfloor", "script_noteworthy").size < 1) {
-    var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-    var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_groundfloor_combat_160");
+    var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+    var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_groundfloor_combat_160");
     wait 1;
   }
 
@@ -863,8 +863,8 @@ function vo_civambush_group_progress_dialogue() {
 }
 
 function vo_civambush_griggs_nag_dialogue() {
-  var0 = [level.griggs, "dx_vom_grg_civ_ambush_stairs_30", "dx_vom_grg_civ_ambush_stairs_31", level.griggs, "dx_vom_grg_civ_ambush_stairs_40", "dx_vom_grg_civ_ambush_stairs_41", level.griggs, "dx_vom_grg_civ_ambush_stairs_50", "dx_vom_grg_civ_ambush_stairs_51"];
-  vo_knockout_manager("civambush_griggs_nag", var0);
+  var_0 = [level.griggs, "dx_vom_grg_civ_ambush_stairs_30", "dx_vom_grg_civ_ambush_stairs_31", level.griggs, "dx_vom_grg_civ_ambush_stairs_40", "dx_vom_grg_civ_ambush_stairs_41", level.griggs, "dx_vom_grg_civ_ambush_stairs_50", "dx_vom_grg_civ_ambush_stairs_51"];
+  vo_knockout_manager("civambush_griggs_nag", var_0);
 }
 
 function vo_civambush_marine_intro_dialogue() {
@@ -875,10 +875,10 @@ function vo_civambush_marine_intro_dialogue() {
   }
 
   wait 0.5;
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
 
   if(!scripts\engine\utility::flag("flag_griggs_corner_gate")) {
-    var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_civ_ambush_triage_10");
+    var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_civ_ambush_triage_10");
   }
 
   level.griggs_vo_civambush_speaking = 1;
@@ -886,13 +886,13 @@ function vo_civambush_marine_intro_dialogue() {
   level.griggs_vo_civambush_speaking = 0;
   wait 0.5;
 
-  if(isDefined(var0) && isalive(var0) && !scripts\engine\utility::flag("flag_griggs_corner_gate")) {
-    var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_civ_ambush_triage_30");
+  if(isDefined(var_0) && isalive(var_0) && !scripts\engine\utility::flag("flag_griggs_corner_gate")) {
+    var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_civ_ambush_triage_30");
   }
 
   wait 0.5;
 
-  if(isDefined(var0) && isalive(var0) && !scripts\engine\utility::flag("flag_civ_ambush_vo_expire")) {
+  if(isDefined(var_0) && isalive(var_0) && !scripts\engine\utility::flag("flag_civ_ambush_vo_expire")) {
     level.griggs_vo_civambush_speaking = 1;
     scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs("dx_vom_grg_civ_ambush_triage_40");
     level.griggs_vo_civambush_speaking = 0;
@@ -900,8 +900,8 @@ function vo_civambush_marine_intro_dialogue() {
 
   wait 2;
 
-  if(isDefined(var0) && isalive(var0)) {
-    var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_civ_ambush_triage_50");
+  if(isDefined(var_0) && isalive(var_0)) {
+    var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_civ_ambush_triage_50");
     return;
   }
 }
@@ -924,12 +924,12 @@ function vo_civambush_alex_take_point() {
   }
 }
 
-function vo_civ_ambush_player_handsup_responsive_dialogue(var0) {
-  var1 = [level.player, "dx_vom_alx_civ_ambush_search_10", undefined, level.player, "dx_vom_alx_civ_ambush_search_30", undefined];
-  vo_knockout_manager("civ_ambush_player_handsup_responsive", var1, undefined, undefined, undefined, 0);
+function vo_civ_ambush_player_handsup_responsive_dialogue(var_0) {
+  var_1 = [level.player, "dx_vom_alx_civ_ambush_search_10", undefined, level.player, "dx_vom_alx_civ_ambush_search_30", undefined];
+  vo_knockout_manager("civ_ambush_player_handsup_responsive", var_1, undefined, undefined, undefined, 0);
   wait 1.5;
 
-  if(isDefined(var0) && isalive(var0)) {
+  if(isDefined(var_0) && isalive(var_0)) {
     thread vo_civ_ambush_civ_react_dialogue();
     return;
   }
@@ -943,8 +943,8 @@ function vo_civ_ambush_friendly_hands_up_dialogue() {
 }
 
 function vo_civ_ambush_marine_hands_up_dialogue() {
-  var0 = [self, "dx_vom_us2_intro_clearance_90", undefined, self, "dx_vom_us2_intro_clearance_100", undefined, self, "dx_vom_us1_intro_clearance_180", undefined, self, "dx_vom_us1_intro_clearance_190", undefined, self, "dx_vom_us1_intro_clearance_220", undefined];
-  vo_knockout_manager("civ_ambush_marine_hands_up_dialogue", var0);
+  var_0 = [self, "dx_vom_us2_intro_clearance_90", undefined, self, "dx_vom_us2_intro_clearance_100", undefined, self, "dx_vom_us1_intro_clearance_180", undefined, self, "dx_vom_us1_intro_clearance_190", undefined, self, "dx_vom_us1_intro_clearance_220", undefined];
+  vo_knockout_manager("civ_ambush_marine_hands_up_dialogue", var_0);
 }
 
 function vo_civ_ambush_civ_react_dialogue() {
@@ -964,13 +964,13 @@ function vo_civ_ambush_civ_react_dialogue() {
 }
 
 function vo_civ_ambush_civ_react_male_dialogue() {
-  var0 = [self, "dx_vom_cvm1_civ_ambush_civ_10", undefined, self, "dx_vom_cvm1_civ_ambush_civ_20", undefined, self, "dx_vom_cvm1_civ_ambush_civ_30", undefined, self, "dx_vom_cvm1_civ_ambush_civ_40", undefined, self, "dx_vom_cvm1_civ_ambush_civ_50", undefined];
-  vo_knockout_manager("civ_ambush_civ_react_male_dialogue", var0);
+  var_0 = [self, "dx_vom_cvm1_civ_ambush_civ_10", undefined, self, "dx_vom_cvm1_civ_ambush_civ_20", undefined, self, "dx_vom_cvm1_civ_ambush_civ_30", undefined, self, "dx_vom_cvm1_civ_ambush_civ_40", undefined, self, "dx_vom_cvm1_civ_ambush_civ_50", undefined];
+  vo_knockout_manager("civ_ambush_civ_react_male_dialogue", var_0);
 }
 
-function vo_civ_ambush_civ_react_female_dialogue(var0) {
-  var1 = [self, "dx_vom_cvf1_civ_ambush_civ_60", undefined, self, "dx_vom_cvf1_civ_ambush_civ_70", undefined, self, "dx_vom_cvf1_civ_ambush_civ_80", undefined, self, "dx_vom_cvf1_civ_ambush_civ_90", undefined];
-  vo_knockout_manager("civ_ambush_civ_react_female_dialogue", var1);
+function vo_civ_ambush_civ_react_female_dialogue(var_0) {
+  var_1 = [self, "dx_vom_cvf1_civ_ambush_civ_60", undefined, self, "dx_vom_cvf1_civ_ambush_civ_70", undefined, self, "dx_vom_cvf1_civ_ambush_civ_80", undefined, self, "dx_vom_cvf1_civ_ambush_civ_90", undefined];
+  vo_knockout_manager("civ_ambush_civ_react_female_dialogue", var_1);
 }
 
 function vo_civ_ambush_alex_dialogue() {
@@ -985,17 +985,17 @@ function vo_civ_ambush_alex_dialogue() {
   level.griggs_vo_civambush_speaking = 1;
   scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs("dx_vom_grg_civ_ambush_corridor_70", undefined, undefined, undefined, undefined, undefined, undefined, undefined, "dx_vom_grg_civ_ambush_corridor_71");
   level.griggs_vo_civambush_speaking = 0;
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_civ_ambush_corridor_80");
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_civ_ambush_corridor_80");
   scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs("dx_vom_grg_civ_ambush_corridor_90");
 }
 
 function vo_civambush_alex_shoot_dialogue() {
-  var0 = ["dx_vom_alx_civ_ambush_gun_10", "dx_vom_alx_civ_ambush_gun_20"];
+  var_0 = ["dx_vom_alx_civ_ambush_gun_10", "dx_vom_alx_civ_ambush_gun_20"];
 
   if(isDefined(level.civ_ambusher) && isalive(level.civ_ambusher)) {
     if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), level.civ_ambusher getEye(), cos(45))) {
-      thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_alex(scripts\engine\utility::random(var0));
+      thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_alex(scripts\engine\utility::random(var_0));
       return;
     }
 
@@ -1004,15 +1004,15 @@ function vo_civambush_alex_shoot_dialogue() {
 }
 
 function vo_civambush_griggs_shoot_dialogue() {
-  var0 = ["dx_vom_grg_civ_ambush_gun_40", "dx_vom_grg_civ_ambush_gun_50", "dx_vom_grg_civ_ambush_gun_60"];
-  thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs(scripts\engine\utility::random(var0));
+  var_0 = ["dx_vom_grg_civ_ambush_gun_40", "dx_vom_grg_civ_ambush_gun_50", "dx_vom_grg_civ_ambush_gun_60"];
+  thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs(scripts\engine\utility::random(var_0));
 }
 
 function vo_civ_ambush_ambusher_shoot_dialogue() {
-  var0 = ["dx_vom_aq1_civ_ambush_attack_10", "dx_vom_aq2_civ_ambush_attack_20", "dx_vom_aq3_civ_ambush_attack_30"];
+  var_0 = ["dx_vom_aq1_civ_ambush_attack_10", "dx_vom_aq2_civ_ambush_attack_20", "dx_vom_aq3_civ_ambush_attack_30"];
 
   if(isDefined(level.civ_ambusher) && isalive(level.civ_ambusher)) {
-    thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_civ_ambusher(scripts\engine\utility::random(var0));
+    thread scripts\sp\maps\marines\marines_utility::add_dialogue_line_civ_ambusher(scripts\engine\utility::random(var_0));
     return;
   }
 }
@@ -1025,16 +1025,16 @@ function vo_civ_ambush_ambusher_killed_dialogue() {
   }
 }
 
-function vo_mghall_enemy_trap_shout(var0) {
-  var1 = ["dx_cbc_aq1_reaction_hostile_burst", "dx_cbc_aq2_reaction_hostile_burst", "dx_cbc_aq3_reaction_hostile_burst"];
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_aq(scripts\engine\utility::random(var1));
+function vo_mghall_enemy_trap_shout(var_0) {
+  var_1 = ["dx_cbc_aq1_reaction_hostile_burst", "dx_cbc_aq2_reaction_hostile_burst", "dx_cbc_aq3_reaction_hostile_burst"];
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_aq(scripts\engine\utility::random(var_1));
 }
 
 function vo_mghall_marines_intro_dialogue() {
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_mg_hall_assault_20");
-  var0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_convoy_ambush_attack_100", undefined, undefined, undefined, undefined, undefined, undefined, undefined, "dx_vom_us1_convoy_ambush_attack_101");
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us2_mg_hall_assault_20");
+  var_0 = scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_convoy_ambush_attack_100", undefined, undefined, undefined, undefined, undefined, undefined, undefined, "dx_vom_us1_convoy_ambush_attack_101");
   wait 1;
   scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs("dx_vom_grg_mg_hall_assault_10");
   wait 3;
@@ -1056,10 +1056,10 @@ function vo_mghall_griggs_shoot_nag_2_dialogue() {
 function vo_mghall_marine_reloading_dialogue() {
   level waittill("mg_reloading");
   wait 0.5;
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
 
-  if(isDefined(var0) && isalive(var0)) {
-    var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_mg_hall_assault_110", undefined, undefined, undefined, undefined, undefined, undefined, undefined, "dx_vom_us1_mg_hall_assault_111");
+  if(isDefined(var_0) && isalive(var_0)) {
+    var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_mg_hall_assault_110", undefined, undefined, undefined, undefined, undefined, undefined, undefined, "dx_vom_us1_mg_hall_assault_111");
     return;
   }
 }
@@ -1082,8 +1082,8 @@ function vo_mghall_alex_tripwire_l_defused_dialogue() {
   scripts\engine\utility::flag_wait_any("flag_mghall_tripwire_l_defused", "mg_hall_gunner_dead");
 
   if(!scripts\engine\utility::flag("mg_hall_gunner_dead")) {
-    var0 = ["dx_vom_alx_civ_ambush_gun_120", "dx_vom_alx_mg_hall_tripwires_70"];
-    scripts\sp\maps\marines\marines_utility::add_dialogue_line_alex(scripts\engine\utility::random(var0));
+    var_0 = ["dx_vom_alx_civ_ambush_gun_120", "dx_vom_alx_mg_hall_tripwires_70"];
+    scripts\sp\maps\marines\marines_utility::add_dialogue_line_alex(scripts\engine\utility::random(var_0));
     return;
   }
 }
@@ -1092,8 +1092,8 @@ function vo_mghall_alex_tripwire_r_defused_dialogue() {
   scripts\engine\utility::flag_wait_any("flag_mghall_tripwire_r_defused", "mg_hall_gunner_dead");
 
   if(!scripts\engine\utility::flag("mg_hall_gunner_dead")) {
-    var0 = ["dx_vom_alx_civ_ambush_gun_120", "dx_vom_alx_mg_hall_tripwires_50"];
-    scripts\sp\maps\marines\marines_utility::add_dialogue_line_alex(scripts\engine\utility::random(var0));
+    var_0 = ["dx_vom_alx_civ_ambush_gun_120", "dx_vom_alx_mg_hall_tripwires_50"];
+    scripts\sp\maps\marines\marines_utility::add_dialogue_line_alex(scripts\engine\utility::random(var_0));
     return;
   }
 }
@@ -1123,8 +1123,8 @@ function vo_mghall_marine_clear_dialogue() {
   scripts\engine\utility::flag_wait("flag_mg_hall_cleared");
 
   if(!scripts\engine\utility::flag("flag_snakecam_tripwire_cleared")) {
-    var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-    var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_mg_hall_assault_170");
+    var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+    var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_mg_hall_assault_170");
     scripts\sp\maps\marines\marines_utility::add_dialogue_line_alex("dx_vom_alx_mg_hall_assault_180");
     scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs("dx_vom_grg_mg_hall_assault_190");
     level.mg_hall_cleared_vo_done = 1;
@@ -1144,19 +1144,19 @@ function vo_snakecam_griggs_tripwire_start_dialogue() {
   }
 
   scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs("dx_vom_grg_mg_hall_tripwires_190");
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-  var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_mg_hall_tripwires_200");
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+  var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_mg_hall_tripwires_200");
   scripts\sp\maps\marines\marines_utility::add_dialogue_line_griggs("dx_vom_grg_snakecam_wolfdoor_10");
 
   if(!scripts\engine\utility::flag("flag_wolf_tripwire_cleared")) {
     if(!isDefined(level.snakecam_setting_up_vo)) {
-      if(isDefined(var0) && isalive(var0)) {
-        var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us3_snakecam_wolfdoor_20");
+      if(isDefined(var_0) && isalive(var_0)) {
+        var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us3_snakecam_wolfdoor_20");
         return;
       }
 
-      var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
-      var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us3_snakecam_wolfdoor_20");
+      var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+      var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us3_snakecam_wolfdoor_20");
       return;
     }
 
@@ -1275,22 +1275,22 @@ function vo_wolf_alex_start_dialogue() {
   scripts\sp\maps\marines\marines_utility::add_dialogue_line_alex("dx_vom_alx_civ_ambush_corridor_30");
 }
 
-function vo_wolf_marine_balcony_advance_dialogue(var0) {
-  var1 = getEnt("wolf_alternate_path_marine_faketarget", "targetname");
+function vo_wolf_marine_balcony_advance_dialogue(var_0) {
+  var_1 = getEnt("wolf_alternate_path_marine_faketarget", "targetname");
 
   for(;;) {
-    var2 = sighttracepassed(var1.origin, level.player getEye(), 0, level.player);
-    var3 = scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var1.origin, 0.95);
+    var_2 = sighttracepassed(var_1.origin, level.player getEye(), 0, level.player);
+    var_3 = scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_1.origin, 0.95);
 
-    if(var2 && var3) {
+    if(var_2 && var_3) {
       break;
     }
 
     wait 1;
   }
 
-  if(isDefined(var0) && isalive(var0)) {
-    var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_wolf_capture_42");
+  if(isDefined(var_0) && isalive(var_0)) {
+    var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_vom_us1_wolf_capture_42");
     return;
   }
 }
@@ -1313,20 +1313,20 @@ function vo_wolf_alex_tripwire_encountered_dialogue() {
 }
 
 function vo_wolf_wolf_tripwire_cleared_speech_dialogue() {
-  var0 = ["dx_vom_wolf_wolf_capture_40", "dx_vom_wolf_wolf_capture_401", "dx_vom_wolf_wolf_capture_402"];
-  var1 = 0;
+  var_0 = ["dx_vom_wolf_wolf_capture_40", "dx_vom_wolf_wolf_capture_401", "dx_vom_wolf_wolf_capture_402"];
+  var_1 = 0;
 
   if(level.wolf_nag_count > 0) {
-    var1 = level.wolf_nag_count + 1;
+    var_1 = level.wolf_nag_count + 1;
   }
 
   scripts\engine\utility::flag_wait_or_timeout("flag_wolf_tripwire_cleared", 3);
 
-  while(var1 < var0.size && !scripts\engine\utility::flag("flag_wolf_vo_expire") && level.wolf_killed == 0) {
+  while(var_1 < var_0.size && !scripts\engine\utility::flag("flag_wolf_vo_expire") && level.wolf_killed == 0) {
     if(level.wolf_killed == 0) {
-      scripts\sp\maps\marines\marines_utility::add_dialogue_line_wolf(var0[var1]);
+      scripts\sp\maps\marines\marines_utility::add_dialogue_line_wolf(var_0[var_1]);
       wait randomfloatrange(3, 5);
-      var1++;
+      var_1++;
     }
   }
 }
@@ -1338,69 +1338,69 @@ function vo_wolf_alex_tripwire_cleared_dialogue() {
 
 function vo_wolf_marine_tripwire_triggered_dialogue() {
   wait 1;
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_marine();
 
-  if(isDefined(var0) && isalive(var0)) {
-    var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_cbc_usm1_reaction_casualty");
+  if(isDefined(var_0) && isalive(var_0)) {
+    var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_marine("dx_cbc_usm1_reaction_casualty");
     return;
   }
 }
 
 function vo_wolf_aq_takedown_alerted_dialogue() {
-  var0 = scripts\sp\maps\marines\marines_utility::get_closest_aq();
+  var_0 = scripts\sp\maps\marines\marines_utility::get_closest_aq();
 
-  if(isDefined(var0) && isalive(var0)) {
-    var0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_aq("dx_vom_aq1_wolf_capture_100");
+  if(isDefined(var_0) && isalive(var_0)) {
+    var_0 scripts\sp\maps\marines\marines_utility::add_dialogue_line_aq("dx_vom_aq1_wolf_capture_100");
     return;
   }
 }
 
 function vo_smoke_nag_dialogue() {
-  var0 = [level.griggs, "dx_vom_grg_mg_hall_assault_60", "dx_vom_grg_mg_hall_assault_61", level.griggs, "dx_vom_grg_mg_hall_assault_70", "dx_vom_grg_mg_hall_assault_71"];
-  vo_knockout_manager("smoke_nag", var0, level.player);
+  var_0 = [level.griggs, "dx_vom_grg_mg_hall_assault_60", "dx_vom_grg_mg_hall_assault_61", level.griggs, "dx_vom_grg_mg_hall_assault_70", "dx_vom_grg_mg_hall_assault_71"];
+  vo_knockout_manager("smoke_nag", var_0, level.player);
 }
 
 function vo_wolf_fail_timer_nag() {
-  var0 = [level.griggs, "dx_vom_grg_intro_convoy_80", undefined, level.griggs, "dx_vom_grg_murderhole_smoke_140", undefined];
-  vo_knockout_manager("wolf_fail_timer_nag", var0, level.player);
+  var_0 = [level.griggs, "dx_vom_grg_intro_convoy_80", undefined, level.griggs, "dx_vom_grg_murderhole_smoke_140", undefined];
+  vo_knockout_manager("wolf_fail_timer_nag", var_0, level.player);
 }
 
 function vo_wolf_fail_timer_radio_nag() {
-  var0 = [level.griggs, "dx_vom_grg_murderhole_smoke_150", undefined, level.griggs, "dx_vom_grg_murderhole_breach_thirdfloor_70", undefined, level.griggs, "dx_vom_grg_murderhole_smoke_160", undefined];
-  vo_knockout_manager("wolf_fail_timer_radio_nag", var0, level.player);
+  var_0 = [level.griggs, "dx_vom_grg_murderhole_smoke_150", undefined, level.griggs, "dx_vom_grg_murderhole_breach_thirdfloor_70", undefined, level.griggs, "dx_vom_grg_murderhole_smoke_160", undefined];
+  vo_knockout_manager("wolf_fail_timer_radio_nag", var_0, level.player);
 }
 
 function vo_friendly_fire_dialogue() {
-  var0 = [level.griggs, "dx_vom_grg_civ_ambush_civkill_10", "dx_vom_grg_civ_ambush_civkill_11", level.griggs, "dx_vom_grg_civ_ambush_civkill_20", "dx_vom_grg_civ_ambush_civkill_21", level.griggs, "dx_vom_grg_civ_ambush_civkill_30", "dx_vom_grg_civ_ambush_civkill_31", &scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine, "dx_cbc_usm1_response_check_fire", undefined, &scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine, "dx_cbc_usm2_response_check_fire", undefined, &scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine, "dx_cbc_usm3_response_check_fire", undefined];
-  vo_knockout_manager("friendly_fire_dialogue", var0, level.player);
+  var_0 = [level.griggs, "dx_vom_grg_civ_ambush_civkill_10", "dx_vom_grg_civ_ambush_civkill_11", level.griggs, "dx_vom_grg_civ_ambush_civkill_20", "dx_vom_grg_civ_ambush_civkill_21", level.griggs, "dx_vom_grg_civ_ambush_civkill_30", "dx_vom_grg_civ_ambush_civkill_31", &scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine, "dx_cbc_usm1_response_check_fire", undefined, &scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine, "dx_cbc_usm2_response_check_fire", undefined, &scripts\sp\maps\marines\marines_utility::vo_get_closest_available_marine, "dx_cbc_usm3_response_check_fire", undefined];
+  vo_knockout_manager("friendly_fire_dialogue", var_0, level.player);
 }
 
-function vo_knockout_manager(var0, var1, var2, var3, var4, var5) {
+function vo_knockout_manager(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(level.knockout_manager)) {
     level.knockout_manager = [];
   }
 
-  if(!isDefined(level.knockout_manager[var0])) {
-    level.knockout_manager[var0] = [];
+  if(!isDefined(level.knockout_manager[var_0])) {
+    level.knockout_manager[var_0] = [];
 
-    for(var6 = 0; var6 < var1.size; var6++) {
-      switch (var6 % 3) {
+    for(var_6 = 0; var_6 < var_1.size; var_6++) {
+      switch (var_6 % 3) {
         case 0:
-          level.knockout_manager[var0][int(var6 / 3)] = [];
-          level.knockout_manager[var0][int(var6 / 3)]["used"] = 0;
-          level.knockout_manager[var0][int(var6 / 3)]["speaker"] = var1[var6];
-          level.knockout_manager[var0][int(var6 / 3)]["glance_entity"] = var2;
-          level.knockout_manager[var0][int(var6 / 3)]["glance_duration"] = var3;
-          level.knockout_manager[var0][int(var6 / 3)]["glance_intensity"] = var4;
+          level.knockout_manager[var_0][int(var_6 / 3)] = [];
+          level.knockout_manager[var_0][int(var_6 / 3)]["used"] = 0;
+          level.knockout_manager[var_0][int(var_6 / 3)]["speaker"] = var_1[var_6];
+          level.knockout_manager[var_0][int(var_6 / 3)]["glance_entity"] = var_2;
+          level.knockout_manager[var_0][int(var_6 / 3)]["glance_duration"] = var_3;
+          level.knockout_manager[var_0][int(var_6 / 3)]["glance_intensity"] = var_4;
           break;
         case 1:
-          level.knockout_manager[var0][int((var6 - 1) / 3)]["dialogue"] = var1[var6];
-          level.knockout_manager[var0][int((var6 - 1) / 3)]["glance_entity"] = var2;
-          level.knockout_manager[var0][int((var6 - 1) / 3)]["glance_duration"] = var3;
-          level.knockout_manager[var0][int((var6 - 1) / 3)]["glance_intensity"] = var4;
+          level.knockout_manager[var_0][int((var_6 - 1) / 3)]["dialogue"] = var_1[var_6];
+          level.knockout_manager[var_0][int((var_6 - 1) / 3)]["glance_entity"] = var_2;
+          level.knockout_manager[var_0][int((var_6 - 1) / 3)]["glance_duration"] = var_3;
+          level.knockout_manager[var_0][int((var_6 - 1) / 3)]["glance_intensity"] = var_4;
           break;
         case 2:
-          level.knockout_manager[var0][int((var6 - 2) / 3)]["radio"] = var1[var6];
+          level.knockout_manager[var_0][int((var_6 - 2) / 3)]["radio"] = var_1[var_6];
           break;
         default:
           break;
@@ -1408,68 +1408,68 @@ function vo_knockout_manager(var0, var1, var2, var3, var4, var5) {
     }
   }
 
-  if(!isDefined(var5)) {
-    var5 = 1;
+  if(!isDefined(var_5)) {
+    var_5 = 1;
   }
 
-  vo_knockout_manager_dialogue(var0, var5);
+  vo_knockout_manager_dialogue(var_0, var_5);
 }
 
-function vo_knockout_manager_dialogue(var0, var1) {
-  if(var1 == 0) {
-    var2 = 1;
+function vo_knockout_manager_dialogue(var_0, var_1) {
+  if(var_1 == 0) {
+    var_2 = 1;
 
-    foreach(var4 in level.knockout_manager[var0]) {
-      if(var4["used"] == 0) {
-        var2 = 0;
+    foreach(var_4 in level.knockout_manager[var_0]) {
+      if(var_4["used"] == 0) {
+        var_2 = 0;
       }
     }
 
-    if(var2 == 1) {
+    if(var_2 == 1) {
       return;
     }
   }
 
-  level.knockout_manager[var0] = vo_knockout_manager_reset_check(level.knockout_manager[var0]);
-  var6 = vo_knockout_manager_get_random(level.knockout_manager[var0]);
-  level.knockout_manager[var0][var6]["used"] = 1;
+  level.knockout_manager[var_0] = vo_knockout_manager_reset_check(level.knockout_manager[var_0]);
+  var_6 = vo_knockout_manager_get_random(level.knockout_manager[var_0]);
+  level.knockout_manager[var_0][var_6]["used"] = 1;
 
-  if(isDefined(level.knockout_manager[var0][var6]["speaker"])) {
-    var7 = undefined;
+  if(isDefined(level.knockout_manager[var_0][var_6]["speaker"])) {
+    var_7 = undefined;
 
-    if(isent(level.knockout_manager[var0][var6]["speaker"])) {
-      var7 = level.knockout_manager[var0][var6]["speaker"];
+    if(isent(level.knockout_manager[var_0][var_6]["speaker"])) {
+      var_7 = level.knockout_manager[var_0][var_6]["speaker"];
     } else {
-      var7 = [[level.knockout_manager[var0][var6]["speaker"]]]();
+      var_7 = [[level.knockout_manager[var_0][var_6]["speaker"]]]();
     }
 
-    if(!isDefined(var7.animname)) {
-      var7.animname = "generic";
+    if(!isDefined(var_7.animname)) {
+      var_7.animname = "generic";
     }
 
-    var7 thread scripts\sp\maps\marines\marines_utility::dialogue(level.knockout_manager[var0][var6]["dialogue"], undefined, undefined, undefined, undefined, level.knockout_manager[var0][var6]["glance_entity"], level.knockout_manager[var0][var6]["glance_duration"], level.knockout_manager[var0][var6]["glance_intensity"], level.knockout_manager[var0][var6]["radio"]);
+    var_7 thread scripts\sp\maps\marines\marines_utility::dialogue(level.knockout_manager[var_0][var_6]["dialogue"], undefined, undefined, undefined, undefined, level.knockout_manager[var_0][var_6]["glance_entity"], level.knockout_manager[var_0][var_6]["glance_duration"], level.knockout_manager[var_0][var_6]["glance_intensity"], level.knockout_manager[var_0][var_6]["radio"]);
     return;
   }
 }
 
-function vo_knockout_manager_reset_check(var0) {
-  foreach(var2 in var0) {
-    if(var2["used"] == 0) {
-      return var0;
+function vo_knockout_manager_reset_check(var_0) {
+  foreach(var_2 in var_0) {
+    if(var_2["used"] == 0) {
+      return var_0;
     }
   }
 
-  for(var4 = 0; var4 < var0.size; var4++) {
-    var0["used"] = 0;
+  for(var_4 = 0; var_4 < var_0.size; var_4++) {
+    var_0["used"] = 0;
   }
 
-  return var0;
+  return var_0;
 }
 
-function vo_knockout_manager_get_random(var0) {
-  for(var1 = randomintrange(0, var0.size); var0[var1]["used"] == 1; var1 = randomintrange(0, var0.size)) {}
+function vo_knockout_manager_get_random(var_0) {
+  for(var_1 = randomintrange(0, var_0.size); var_0[var_1]["used"] == 1; var_1 = randomintrange(0, var_0.size)) {}
 
-  return var1;
+  return var_1;
 }
 
 function mus_infil() {
@@ -1496,8 +1496,8 @@ function mus_wolf_captured() {
 
 function sphere_test() {
   for(;;) {
-    var0 = distance2d(level.player.origin, level.griggs.origin);
-    iprintln(" " + var0);
+    var_0 = distance2d(level.player.origin, level.griggs.origin);
+    iprintln(" " + var_0);
     waitframe();
   }
 }

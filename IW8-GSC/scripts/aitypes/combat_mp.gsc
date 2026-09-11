@@ -3,17 +3,17 @@
  * Script: scripts\aitypes\combat_mp.gsc
 ***********************************************/
 
-function makearray(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13) {
-  var14 = [];
+function makearray(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
+  var_14 = [];
 
-  if(isDefined(var0)) {
-    GscBinSkip0(0x2e, 0, var0);
+  if(isDefined(var_0)) {
+    GscBinSkip0(0x2e, 0, var_0);
   }
 
-  return var14;
+  return var_14;
 }
 
-function initcombatfunctions_mp(var0) {
+function initcombatfunctions_mp(var_0) {
   self.fnsetlaserflag = &noop;
   self.fnlaseron = &noop;
   self.fnlaseroff = &noop;
@@ -67,7 +67,7 @@ function initcombatfunctions_mp(var0) {
   return anim.success;
 }
 
-function noop(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12) {
+function noop(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
   return false;
 }
 
@@ -89,13 +89,13 @@ function resetmisstime() {
   scripts\common\gameskill::resetmisstime();
 }
 
-function shootenemywrapper_shootnotify(var0) {
+function shootenemywrapper_shootnotify(var_0) {
   self.lastshoottime = gettime();
-  var1 = scripts\asm\shared\utility::getshootfrompos();
-  var2 = scripts\asm\shared\mp\utility::getshootpos(var1);
-  shootposwrapper(var2, var0);
+  var_1 = scripts\asm\shared\utility::getshootfrompos();
+  var_2 = scripts\asm\shared\mp\utility::getshootpos(var_1);
+  shootposwrapper(var_2, var_0);
 }
 
-function shootposwrapper(var0, var1) {
-  self shoot(1, var0, 1, 0, 1);
+function shootposwrapper(var_0, var_1) {
+  self shoot(1, var_0, 1, 0, 1);
 }

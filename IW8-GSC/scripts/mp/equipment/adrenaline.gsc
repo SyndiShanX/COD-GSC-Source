@@ -19,15 +19,15 @@ function useadrenaline() {
   scripts\mp\gamelogic::sethasdonecombat(self, 1);
 
   if(getdvarint("scr_adrenaline_BR_allow_overdrive", 1) == 1) {
-    var0 = scripts\mp\utility\game::unset_relic_grounded();
+    var_0 = scripts\mp\utility\game::unset_relic_grounded();
 
-    if(var0) {
+    if(var_0) {
       if(isDefined(self.are_players_nearby_turret) && isDefined(self.are_players_nearby_turret["speed_boost"])) {
-        var1 = self.are_players_nearby_turret["speed_boost"].mp_layover_patch - gettime();
-        var1 /= 1000;
+        var_1 = self.are_players_nearby_turret["speed_boost"].mp_layover_patch - gettime();
+        var_1 /= 1000;
 
         if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("br_powerup_speed_boost", "extend_time_by")) {
-          self.are_players_nearby_turret["speed_boost"][[scripts\cp_mp\utility\script_utility::getsharedfunc("br_powerup_speed_boost", "extend_time_by")]](var1 + 3);
+          self.are_players_nearby_turret["speed_boost"][[scripts\cp_mp\utility\script_utility::getsharedfunc("br_powerup_speed_boost", "extend_time_by")]](var_1 + 3);
         }
 
         return true;
@@ -51,18 +51,18 @@ function removeadrenaline() {
   }
 }
 
-function onequipmenttaken(var0, var1) {
+function onequipmenttaken(var_0, var_1) {
   removeadrenaline();
 }
 
-function onequipmentfired(var0, var1, var2) {
+function onequipmentfired(var_0, var_1, var_2) {
   if(self isthrowingbackgrenade()) {
     self method_87a9();
 
-    if(isDefined(var2)) {
-      var3 = self getweaponammoclip(var2);
-      var4 = int(max(var3 - 1, 0));
-      self setweaponammoclip(var2, var4);
+    if(isDefined(var_2)) {
+      var_3 = self getweaponammoclip(var_2);
+      var_4 = int(max(var_3 - 1, 0));
+      self setweaponammoclip(var_2, var_4);
     }
   }
 
@@ -80,9 +80,9 @@ function adrenaline_removeonplayernotifies() {
 
 function adrenaline_removeondamage() {
   for(;;) {
-    self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-    if(isDefined(level.deletescriptableinstanceaftertime_proc) && istrue(level.deleteallglass) && isPlayer(var1) && var1 != self && var0 > level.deletescriptableinstanceaftertime_proc) {
+    if(isDefined(level.deletescriptableinstanceaftertime_proc) && istrue(level.deleteallglass) && isPlayer(var_1) && var_1 != self && var_0 > level.deletescriptableinstanceaftertime_proc) {
       if(istrue(level.deleteable)) {
         self notify("healhRegenThink");
       }
@@ -91,7 +91,7 @@ function adrenaline_removeondamage() {
       return;
     }
 
-    if(level.gametype == "br" && (var4 == "MOD_TRIGGER_HURT" || var4 == "MOD_UNKNOWN")) {
+    if(level.gametype == "br" && (var_4 == "MOD_TRIGGER_HURT" || var_4 == "MOD_UNKNOWN")) {
       continue;
     }
 
@@ -125,15 +125,15 @@ function adrenaline_missionondeaththink() {
 function ref_12170() {
   level endon("game_ended");
   self endon("disconnect");
-  var0 = self;
-  binoculars_isads(var0);
-  var0 scripts\engine\utility::waittill_notify_or_timeout("death", getdvarint("scr_adrenaline_overdrive_duration", 3));
+  var_0 = self;
+  binoculars_isads(var_0);
+  var_0 scripts\engine\utility::waittill_notify_or_timeout("death", getdvarint("scr_adrenaline_overdrive_duration", 3));
 
   if(isDefined(self.are_players_nearby_turret) && isDefined(self.are_players_nearby_turret["speed_boost"])) {
     return;
   }
 
-  binoculars_hidetargetmarker(var0);
+  binoculars_hidetargetmarker(var_0);
 }
 
 function binoculars_isads() {

@@ -48,22 +48,22 @@ function registernotetracks() {
   anim.notetracks["ht_off"] = &notetrackhtoff;
 
   if(isDefined(level._notetrackfx)) {
-    var0 = getarraykeys(level._notetrackfx);
+    var_0 = getarraykeys(level._notetrackfx);
 
-    foreach(var2 in var0) {
-      anim.notetracks[var2] = &customnotetrackfx;
+    foreach(var_2 in var_0) {
+      anim.notetracks[var_2] = &customnotetrackfx;
     }
 
     return;
   }
 }
 
-function notetrackstopanim(var0, var1) {}
+function notetrackstopanim(var_0, var_1) {}
 
-function notetrackcoverposerequest(var0, var1) {
-  var2 = strtok(var0, " = ")[1];
+function notetrackcoverposerequest(var_0, var_1) {
+  var_2 = strtok(var_0, " = ")[1];
 
-  switch (var2) {
+  switch (var_2) {
     case "cover_left":
     case "cover_stand":
     case "cover_crouch":
@@ -73,155 +73,155 @@ function notetrackcoverposerequest(var0, var1) {
     case "cover_right":
     case "exposed":
     case "prone":
-      self.a.coverpose_request = var2;
+      self.a.coverpose_request = var_2;
       break;
     default:
       break;
   }
 }
 
-function notetrackmovementstop(var0, var1) {
+function notetrackmovementstop(var_0, var_1) {
   self.a.movement = "stop";
 }
 
-function notetrackmovementwalk(var0, var1) {
+function notetrackmovementwalk(var_0, var_1) {
   self.a.movement = "walk";
 }
 
-function notetrackmovementrun(var0, var1) {
+function notetrackmovementrun(var_0, var_1) {
   self.a.movement = "run";
 }
 
-function notetrackmovementgunposeoverride(var0, var1) {
+function notetrackmovementgunposeoverride(var_0, var_1) {
   self.asm.movementgunposeoverride = "run_gun_down";
 }
 
-function notetrackalertnessaiming(var0, var1) {}
+function notetrackalertnessaiming(var_0, var_1) {}
 
-function notetrackalertnesscasual(var0, var1) {}
+function notetrackalertnesscasual(var_0, var_1) {}
 
-function notetrackalertnessalert(var0, var1) {}
+function notetrackalertnessalert(var_0, var_1) {}
 
-function notetrackloadshell(var0, var1) {}
+function notetrackloadshell(var_0, var_1) {}
 
-function notetrackpistolrechamber(var0, var1) {}
+function notetrackpistolrechamber(var_0, var_1) {}
 
-function notetrackgravity(var0, var1) {
-  if(issubstr(var0, "on")) {
+function notetrackgravity(var_0, var_1) {
+  if(issubstr(var_0, "on")) {
     self animmode("gravity");
     return;
   }
 
-  if(issubstr(var0, "off")) {
+  if(issubstr(var_0, "off")) {
     self animmode("nogravity");
     return;
   }
 }
 
-function customnotetrackfx(var0, var1) {
+function customnotetrackfx(var_0, var_1) {
   if(isDefined(self.groundtype)) {
-    var2 = self.groundtype;
+    var_2 = self.groundtype;
   } else {
-    var2 = "dirt";
+    var_2 = "dirt";
   }
 
-  var3 = undefined;
+  var_3 = undefined;
 
-  if(isDefined(level._notetrackfx[var1][var2])) {
-    var3 = level._notetrackfx[var1][var2];
-  } else if(isDefined(level._notetrackfx[var1]["all"])) {
-    var3 = level._notetrackfx[var1]["all"];
+  if(isDefined(level._notetrackfx[var_1][var_2])) {
+    var_3 = level._notetrackfx[var_1][var_2];
+  } else if(isDefined(level._notetrackfx[var_1]["all"])) {
+    var_3 = level._notetrackfx[var_1]["all"];
   }
 
-  if(!isDefined(var3)) {
+  if(!isDefined(var_3)) {
     return;
   }
 
-  if(isai(self) && isDefined(var3.fx)) {
-    playFXOnTag(var3.fx, self, var3.tag);
+  if(isai(self) && isDefined(var_3.fx)) {
+    playFXOnTag(var_3.fx, self, var_3.tag);
   }
 
-  if(!isDefined(var3.sound_prefix) && !isDefined(var3.sound_suffix)) {
+  if(!isDefined(var_3.sound_prefix) && !isDefined(var_3.sound_suffix)) {
     return;
   }
 
-  var4 = "" + var3.sound_prefix + var2 + var3.sound_suffix;
+  var_4 = "" + var_3.sound_prefix + var_2 + var_3.sound_suffix;
 
-  if(soundexists(var4)) {
-    self playSound(var4);
+  if(soundexists(var_4)) {
+    self playSound(var_4);
     return;
   }
 }
 
-function notetrackcodemove(var0, var1) {
+function notetrackcodemove(var_0, var_1) {
   return "code_move";
 }
 
-function notetrackfaceenemy(var0, var1) {
+function notetrackfaceenemy(var_0, var_1) {
   self orientmode("face enemy");
 }
 
-function notetrackbodyfall(var0, var1) {
-  var2 = "_small";
+function notetrackbodyfall(var_0, var_1) {
+  var_2 = "_small";
 
-  if(issubstr(var0, "large")) {
-    var2 = "_large";
+  if(issubstr(var_0, "large")) {
+    var_2 = "_large";
   }
 
   if(isDefined(self.groundtype)) {
-    var3 = self.groundtype;
+    var_3 = self.groundtype;
   } else {
-    var3 = "dirt";
+    var_3 = "dirt";
   }
 
-  if(var3 == "_large") {
-    self playsurfacesound("bodyfall_torso", var3);
+  if(var_3 == "_large") {
+    self playsurfacesound("bodyfall_torso", var_3);
     return;
   }
 
-  self playsurfacesound("bodyfall_limb_small", var3);
+  self playsurfacesound("bodyfall_limb_small", var_3);
 }
 
-function donotetracks(var0, var1, var2) {
+function donotetracks(var_0, var_1, var_2) {
   for(;;) {
-    self waittill(var0, var3);
+    self waittill(var_0, var_3);
 
-    if(!isDefined(var3)) {
-      var3 = ["undefined"];
+    if(!isDefined(var_3)) {
+      var_3 = ["undefined"];
     }
 
-    if(!isarray(var3)) {
-      var3 = [var3];
+    if(!isarray(var_3)) {
+      var_3 = [var_3];
     }
 
-    scripts\common\notetrack::validatenotetracks(var0, var3);
+    scripts\common\notetrack::validatenotetracks(var_0, var_3);
 
-    foreach(var5 in var3) {
-      var6 = handlenotetrack(var5, var0, var1);
+    foreach(var_5 in var_3) {
+      var_6 = handlenotetrack(var_5, var_0, var_1);
 
-      if(isDefined(var6)) {
-        return var6;
+      if(isDefined(var_6)) {
+        return var_6;
       }
     }
   }
 }
 
-function handlenotetrack(var0, var1, var2, var3) {
+function handlenotetrack(var_0, var_1, var_2, var_3) {
   if(isDefined(self.fnasm_handlenotetrack)) {
-    [[self.fnasm_handlenotetrack]](var0, var1, var2, var3);
+    [[self.fnasm_handlenotetrack]](var_0, var_1, var_2, var_3);
     return;
   }
 
   if(isDefined(level._defaultnotetrackhandler)) {
-    [[level._defaultnotetrackhandler]](var0, var1, var2, var3);
+    [[level._defaultnotetrackhandler]](var_0, var_1, var_2, var_3);
     return;
   }
 }
 
-function hascustomnotetrackhandler(var0) {
-  var1 = anim.notetracks[var0];
+function hascustomnotetrackhandler(var_0) {
+  var_1 = anim.notetracks[var_0];
 
-  if(isDefined(var1)) {
+  if(isDefined(var_1)) {
     return true;
   }
 
@@ -232,31 +232,31 @@ function hascustomnotetrackhandler(var0) {
   return false;
 }
 
-function handlecustomnotetrackhandler(var0, var1, var2, var3) {
-  var4 = anim.notetracks[var0];
+function handlecustomnotetrackhandler(var_0, var_1, var_2, var_3) {
+  var_4 = anim.notetracks[var_0];
 
-  if(isDefined(var4)) {
-    return [[var4]](var0, var1);
+  if(isDefined(var_4)) {
+    return [[var_4]](var_0, var_1);
   }
 
   if(isDefined(self.customnotetrackhandler)) {
-    if(isDefined(var3)) {
-      return [[self.customnotetrackhandler]](var0, var1, var2, var3);
+    if(isDefined(var_3)) {
+      return [[self.customnotetrackhandler]](var_0, var_1, var_2, var_3);
     }
 
-    return [[self.customnotetrackhandler]](var0, var1, var2);
+    return [[self.customnotetrackhandler]](var_0, var_1, var_2);
   }
 }
 
-function handlecommonnotetrack(var0, var1, var2, var3) {
-  switch (var0) {
+function handlecommonnotetrack(var_0, var_1, var_2, var_3) {
+  switch (var_0) {
     case "undefined":
     case "finish":
     case "end":
-      return var0;
+      return var_0;
     case "finish early":
       if(isDefined(self.enemy)) {
-        return var0;
+        return var_0;
       }
 
       break;
@@ -313,145 +313,145 @@ function handlecommonnotetrack(var0, var1, var2, var3) {
   }
 }
 
-function donotetracksintercept(var0, var1, var2) {
+function donotetracksintercept(var_0, var_1, var_2) {
   for(;;) {
-    self waittill(var0, var3);
+    self waittill(var_0, var_3);
 
-    if(!isDefined(var3)) {
-      var3 = ["undefined"];
+    if(!isDefined(var_3)) {
+      var_3 = ["undefined"];
     }
 
-    if(!isarray(var3)) {
-      var3 = [var3];
+    if(!isarray(var_3)) {
+      var_3 = [var_3];
     }
 
-    scripts\common\notetrack::validatenotetracks(var0, var3);
-    var4 = [[var1]](var3);
+    scripts\common\notetrack::validatenotetracks(var_0, var_3);
+    var_4 = [[var_1]](var_3);
 
-    if(isDefined(var4) && var4) {
+    if(isDefined(var_4) && var_4) {
       continue;
     }
 
-    var5 = undefined;
+    var_5 = undefined;
 
-    foreach(var7 in var3) {
-      var8 = handlenotetrack(var7, var0);
+    foreach(var_7 in var_3) {
+      var_8 = handlenotetrack(var_7, var_0);
 
-      if(isDefined(var8)) {
-        var5 = var8;
+      if(isDefined(var_8)) {
+        var_5 = var_8;
         break;
       }
     }
 
-    if(isDefined(var5)) {
-      return var5;
+    if(isDefined(var_5)) {
+      return var_5;
     }
   }
 }
 
-function donotetrackspostcallback(var0, var1) {
+function donotetrackspostcallback(var_0, var_1) {
   for(;;) {
-    self waittill(var0, var2);
+    self waittill(var_0, var_2);
 
-    if(!isDefined(var2)) {
-      var2 = ["undefined"];
+    if(!isDefined(var_2)) {
+      var_2 = ["undefined"];
     }
 
-    if(!isarray(var2)) {
-      var2 = [var2];
+    if(!isarray(var_2)) {
+      var_2 = [var_2];
     }
 
-    scripts\common\notetrack::validatenotetracks(var0, var2);
-    var3 = undefined;
+    scripts\common\notetrack::validatenotetracks(var_0, var_2);
+    var_3 = undefined;
 
-    foreach(var5 in var2) {
-      var6 = handlenotetrack(var5, var0);
+    foreach(var_5 in var_2) {
+      var_6 = handlenotetrack(var_5, var_0);
 
-      if(isDefined(var6)) {
-        var3 = var6;
+      if(isDefined(var_6)) {
+        var_3 = var_6;
         break;
       }
     }
 
-    [[var1]](var2);
+    [[var_1]](var_2);
 
-    if(isDefined(var3)) {
-      return var3;
+    if(isDefined(var_3)) {
+      return var_3;
     }
   }
 }
 
-function donotetracksfortimeout(var0, var1, var2, var3) {
-  donotetracks(var0, var2, var3);
+function donotetracksfortimeout(var_0, var_1, var_2, var_3) {
+  donotetracks(var_0, var_2, var_3);
 }
 
-function donotetracksforever(var0, var1, var2, var3) {
-  donotetracksforeverproc(&donotetracks, var0, var1, var2, var3);
+function donotetracksforever(var_0, var_1, var_2, var_3) {
+  donotetracksforeverproc(&donotetracks, var_0, var_1, var_2, var_3);
 }
 
-function donotetracksforeverintercept(var0, var1, var2, var3) {
-  donotetracksforeverproc(&donotetracksintercept, var0, var1, var2, var3);
+function donotetracksforeverintercept(var_0, var_1, var_2, var_3) {
+  donotetracksforeverproc(&donotetracksintercept, var_0, var_1, var_2, var_3);
 }
 
-function donotetracksforeverproc(var0, var1, var2, var3, var4) {
-  if(isDefined(var2)) {
-    self endon(var2);
+function donotetracksforeverproc(var_0, var_1, var_2, var_3, var_4) {
+  if(isDefined(var_2)) {
+    self endon(var_2);
   }
 
   self endon("killanimscript");
-  jumpiftrue(isDefined(var4)) LOC_00000021;
-  var4 = "undefined";
+  jumpiftrue(isDefined(var_4)) LOC_00000021;
+  var_4 = "undefined";
 
   for(;;) {
-    var5 = gettime();
-    var6 = [[var0]](var1, var3, var4);
-    var7 = gettime() - var5;
+    var_5 = gettime();
+    var_6 = [[var_0]](var_1, var_3, var_4);
+    var_7 = gettime() - var_5;
 
-    if(var7 < 0.05) {
-      var5 = gettime();
-      var6 = [[var0]](var1, var3, var4);
-      var7 = gettime() - var5;
+    if(var_7 < 0.05) {
+      var_5 = gettime();
+      var_6 = [[var_0]](var_1, var_3, var_4);
+      var_7 = gettime() - var_5;
 
-      if(var7 < 0.05) {
-        wait 0.05 - var7;
+      if(var_7 < 0.05) {
+        wait 0.05 - var_7;
       }
     }
   }
 }
 
-function donotetrackswithtimeout(var0, var1, var2, var3) {
-  var4 = spawnStruct();
-  thread donotetracksfortimeendnotify(var4);
-  donotetracksfortimeproc(&donotetracksfortimeout, var0, var2, var3, var4);
+function donotetrackswithtimeout(var_0, var_1, var_2, var_3) {
+  var_4 = spawnStruct();
+  thread donotetracksfortimeendnotify(var_4);
+  donotetracksfortimeproc(&donotetracksfortimeout, var_0, var_2, var_3, var_4);
 }
 
-function donotetracksfortime(var0, var1, var2, var3) {
-  var4 = spawnStruct();
-  thread donotetracksfortimeendnotify(var4);
-  donotetracksfortimeproc(&donotetracksforever, var1, var2, var3, var4);
+function donotetracksfortime(var_0, var_1, var_2, var_3) {
+  var_4 = spawnStruct();
+  thread donotetracksfortimeendnotify(var_4);
+  donotetracksfortimeproc(&donotetracksforever, var_1, var_2, var_3, var_4);
 }
 
-function donotetracksfortimeintercept(var0, var1, var2, var3) {
-  var4 = spawnStruct();
-  thread donotetracksfortimeendnotify(var4);
-  donotetracksfortimeproc(&donotetracksforeverintercept, var1, var2, var3, var4);
+function donotetracksfortimeintercept(var_0, var_1, var_2, var_3) {
+  var_4 = spawnStruct();
+  thread donotetracksfortimeendnotify(var_4);
+  donotetracksfortimeproc(&donotetracksforeverintercept, var_1, var_2, var_3, var_4);
 }
 
-function donotetracksfortimeproc(var0, var1, var2, var3, var4) {
-  var4 endon("stop_notetracks");
-  [[var0]](var1, undefined, var2, var3);
+function donotetracksfortimeproc(var_0, var_1, var_2, var_3, var_4) {
+  var_4 endon("stop_notetracks");
+  [[var_0]](var_1, undefined, var_2, var_3);
 }
 
-function donotetracksfortimeendnotify(var0) {
-  wait var0;
+function donotetracksfortimeendnotify(var_0) {
+  wait var_0;
   self notify("stop_notetracks");
 }
 
-function notetrack_prefix_handler(var0) {
-  return [[level.fnnotetrackprefixhandler]](var0);
+function notetrack_prefix_handler(var_0) {
+  return [[level.fnnotetrackprefixhandler]](var_0);
 }
 
-function notetrack_prefix_handler_common(var0) {
+function notetrack_prefix_handler_common(var_0) {
   return false;
 }
 
@@ -460,12 +460,12 @@ function shootnotetrack() {
 
   if(isDefined(self) && gettime() > self.a.lastshoottime) {
     if(istrue(self._blackboard.shootparams_valid)) {
-      var0 = self._blackboard.shootparams_shotsperburst == 1;
+      var_0 = self._blackboard.shootparams_shotsperburst == 1;
     } else {
-      var0 = 1;
+      var_0 = 1;
     }
 
-    scripts\anim\utility_common::shootenemywrapper(var0);
+    scripts\anim\utility_common::shootenemywrapper(var_0);
     scripts\asm\shared\utility::decrementbulletsinclip();
 
     if(weaponclass(self.weapon) == "rocketlauncher") {
@@ -477,7 +477,7 @@ function shootnotetrack() {
   }
 }
 
-function notetrackfire(var0, var1) {
+function notetrackfire(var_0, var_1) {
   if(isDefined(self.script) && isDefined(anim.fire_notetrack_functions[self.script])) {
     GscBinSkip1(0x74, anim.fire_notetrack_functions[self.script]);
   }
@@ -485,7 +485,7 @@ function notetrackfire(var0, var1) {
   thread shootnotetrack();
 }
 
-function notetrackfirespray(var0, var1) {
+function notetrackfirespray(var_0, var_1) {
   if(!isalive(self) && self isbadguy()) {
     if(isDefined(self.changed_team)) {
       return;
@@ -504,36 +504,36 @@ function notetrackfirespray(var0, var1) {
     return;
   }
 
-  var3 = self getmuzzlepos();
-  var4 = anglesToForward(self getmuzzleangle());
-  var5 = 10;
+  var_3 = self getmuzzlepos();
+  var_4 = anglesToForward(self getmuzzleangle());
+  var_5 = 10;
 
   if(isDefined(self.isrambo)) {
-    var5 = 20;
+    var_5 = 20;
   }
 
-  var6 = 0;
+  var_6 = 0;
 
   if(isalive(self.enemy) && issentient(self.enemy) && self canshootenemy()) {
-    var7 = vectorNormalize(self.enemy getEye() - var3);
+    var_7 = vectorNormalize(self.enemy getEye() - var_3);
 
-    if(vectordot(var4, var7) > cos(var5)) {
-      var6 = 1;
+    if(vectordot(var_4, var_7) > cos(var_5)) {
+      var_6 = 1;
     }
   }
 
-  if(var6) {
+  if(var_6) {
     scripts\anim\utility_common::shootenemywrapper();
   } else {
-    var4 += ((randomfloat(2) - 1) * 0.1, (randomfloat(2) - 1) * 0.1, (randomfloat(2) - 1) * 0.1);
-    var8 = var3 + var4 * 1000;
-    self[[anim.shootposwrapper_func]](var8);
+    var_4 += ((randomfloat(2) - 1) * 0.1, (randomfloat(2) - 1) * 0.1, (randomfloat(2) - 1) * 0.1);
+    var_8 = var_3 + var_4 * 1000;
+    self[[anim.shootposwrapper_func]](var_8);
   }
 
   scripts\asm\shared\utility::decrementbulletsinclip();
 }
 
-function notetrackrefillclip(var0, var1) {
+function notetrackrefillclip(var_0, var_1) {
   scripts\anim\weaponlist::refillclip();
   self.a.needstorechamber = 0;
 }
@@ -550,14 +550,14 @@ function getpreferredweapon() {
   return self.primaryweapon;
 }
 
-function notetrackguntochest(var0, var1) {
+function notetrackguntochest(var_0, var_1) {
   if(isDefined(self.fnplaceweaponon)) {
     self[[self.fnplaceweaponon]](self.weapon, "chest");
     return;
   }
 }
 
-function notetrackguntoback(var0, var1) {
+function notetrackguntoback(var_0, var_1) {
   if(isDefined(self.fnplaceweaponon)) {
     self[[self.fnplaceweaponon]](self.weapon, "back");
   }
@@ -566,7 +566,7 @@ function notetrackguntoback(var0, var1) {
   self.bulletsinclip = weaponclipsize(self.weapon);
 }
 
-function notetrackpistolpickup(var0, var1) {
+function notetrackpistolpickup(var_0, var_1) {
   if(isDefined(self.fnplaceweaponon)) {
     self[[self.fnplaceweaponon]](self.sidearm, "right");
   }
@@ -575,7 +575,7 @@ function notetrackpistolpickup(var0, var1) {
   self notify("weapon_switch_done");
 }
 
-function notetrackpistolputaway(var0, var1) {
+function notetrackpistolputaway(var_0, var_1) {
   if(isDefined(self.fnplaceweaponon)) {
     if(isDefined(self.stowsidearmposition)) {
       self[[self.fnplaceweaponon]](self.weapon, self.stowsidearmposition);
@@ -588,7 +588,7 @@ function notetrackpistolputaway(var0, var1) {
   self.bulletsinclip = weaponclipsize(self.weapon);
 }
 
-function notetrackguntoright(var0, var1) {
+function notetrackguntoright(var_0, var_1) {
   if(isDefined(self.fnplaceweaponon)) {
     self[[self.fnplaceweaponon]](self.weapon, "right");
   }
@@ -596,21 +596,21 @@ function notetrackguntoright(var0, var1) {
   self.bulletsinclip = weaponclipsize(self.weapon);
 }
 
-function notetrackhton0(var0, var1) {
+function notetrackhton0(var_0, var_1) {
   if(!self isinscriptedstate()) {
     self enablestatelookat(1, 0);
     return;
   }
 }
 
-function notetrackhton1(var0, var1) {
+function notetrackhton1(var_0, var_1) {
   if(!self isinscriptedstate()) {
     self enablestatelookat(1, 1);
     return;
   }
 }
 
-function notetrackhtoff(var0, var1) {
+function notetrackhtoff(var_0, var_1) {
   if(!self isinscriptedstate()) {
     self enablestatelookat(0);
     return;

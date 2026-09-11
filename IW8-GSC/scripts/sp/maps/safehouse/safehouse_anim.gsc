@@ -54,12 +54,12 @@ function init_anim_script_model() {
   level.scr_anim["level_civilianWorkerCinderblock"]["level_civilianWorkerUnload"] = % sh_030_cinderblocks_scenea_brick01;
   level.scr_animtree["escape_door"] = #animtree;
   level.scr_anim["escape_door"]["escape_sceneA"] = % sh_032_alley_takedown_scene_door;
-  var0 = escape_getcinderblockanimations();
+  var_0 = escape_getcinderblockanimations();
 
-  for(var1 = 0; var1 < var0.size; var1++) {
-    level.scr_animtree["escape_civilianCinderblock" + var1] = #animtree;
-    level.scr_model["escape_civilianCinderblock" + var1] = "construction_worldmodel_cinderblock_01";
-    level.scr_anim["escape_civilianCinderblock" + var1]["escape_civilianBuilder"] = var0[var1];
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    level.scr_animtree["escape_civilianCinderblock" + var_1] = #animtree;
+    level.scr_model["escape_civilianCinderblock" + var_1] = "construction_worldmodel_cinderblock_01";
+    level.scr_anim["escape_civilianCinderblock" + var_1]["escape_civilianBuilder"] = var_0[var_1];
   }
 
   level.scr_animtree["escape_playerCinderblock"] = #animtree;
@@ -387,17 +387,17 @@ function init_anim_generic_human() {
   level.scr_anim["level_farah"]["carnage_farahSceneB"] = % sh_120_massacre_get_down_farah;
   level.scr_anim["level_farah"]["carnage_farahSceneBIdle"][0] = % sh_120_massacre_down_idle;
   level.scr_anim["level_farah"]["carnage_farahSceneBExit"] = % sh_120_massacre_down_exit;
-  var0 = carnage_getenemyanimations();
+  var_0 = carnage_getenemyanimations();
 
-  for(var1 = 0; var1 < var0.size; var1++) {
-    level.scr_anim["carnage_enemy"]["carnage_enemyEnter" + var1] = var0[var1];
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    level.scr_anim["carnage_enemy"]["carnage_enemyEnter" + var_1] = var_0[var_1];
   }
 
   level.scr_animtree["carnage_enemy"] = #animtree;
-  var2 = carnage_getcorpseanimations();
+  var_2 = carnage_getcorpseanimations();
 
-  for(var1 = 0; var1 < var2.size; var1++) {
-    level.scr_anim["carnage_corpse"]["carnage_corpse" + var1] = var2[var1];
+  for(var_1 = 0; var_1 < var_2.size; var_1++) {
+    level.scr_anim["carnage_corpse"]["carnage_corpse" + var_1] = var_2[var_1];
   }
 
   level.scr_animtree["carnage_corpse"] = #animtree;
@@ -569,49 +569,49 @@ function init_anim_generic_human_level_execution() {
   level.scr_anim["level_executionCivilian8"]["level_executionSceneCIdle"][0] = % sh_050_execution_scenec_idle_civ08;
 }
 
-function level_farahkeydetachearlylogic(var0) {
-  var0 endon("death");
-  var0 endon("entitydeleted");
-  thread scripts\sp\maps\safehouse\safehouse_utility::animation_notifyonnotetrack(var0, "detach_key");
-  var0 endon("detach_key");
-  var0 waittill("level_guardFight");
-  var0 detach("accessory_locker_key_02", "tag_accessory_right");
+function level_farahkeydetachearlylogic(var_0) {
+  var_0 endon("death");
+  var_0 endon("entitydeleted");
+  thread scripts\sp\maps\safehouse\safehouse_utility::animation_notifyonnotetrack(var_0, "detach_key");
+  var_0 endon("detach_key");
+  var_0 waittill("level_guardFight");
+  var_0 detach("accessory_locker_key_02", "tag_accessory_right");
 }
 
-function level_farahknifedetachearlylogic(var0) {
-  var0 endon("death");
-  var0 endon("entitydeleted");
-  thread scripts\sp\maps\safehouse\safehouse_utility::animation_notifyonnotetrack(var0, "detach_knife");
-  var0 endon("detach_knife");
-  var0 scripts\engine\utility::waittill_any("level_guardFight", "level_farahKnifeDetach");
-  var0 detach("weapon_wm_me_soscar_knife", "tag_accessory_right");
+function level_farahknifedetachearlylogic(var_0) {
+  var_0 endon("death");
+  var_0 endon("entitydeleted");
+  thread scripts\sp\maps\safehouse\safehouse_utility::animation_notifyonnotetrack(var_0, "detach_knife");
+  var_0 endon("detach_knife");
+  var_0 scripts\engine\utility::waittill_any("level_guardFight", "level_farahKnifeDetach");
+  var_0 detach("weapon_wm_me_soscar_knife", "tag_accessory_right");
 }
 
-function escape_bullyenemyknifefxlogic(var0) {
-  if(!isDefined(var0)) {
+function escape_bullyenemyknifefxlogic(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  playFXOnTag(scripts\engine\utility::getfx("vfx_contextmelee_stab"), var0, "j_neck");
+  playFXOnTag(scripts\engine\utility::getfx("vfx_contextmelee_stab"), var_0, "j_neck");
 }
 
-function plant_ied_add_fov_user_scale_override(var0) {
+function plant_ied_add_fov_user_scale_override(var_0) {
   level.player lerpfovscalefactor(0, 0.6);
 }
 
-function plant_ied_remove_fov_user_scale_override(var0) {
+function plant_ied_remove_fov_user_scale_override(var_0) {
   level.player lerpfovscalefactor(1, 0.8);
 }
 
-function leave_exit_add_fov_user_scale_override(var0) {
+function leave_exit_add_fov_user_scale_override(var_0) {
   level.player lerpfovscalefactor(0, 1);
 }
 
-function disguise_intro_remove_fov_user_scale(var0) {
+function disguise_intro_remove_fov_user_scale(var_0) {
   level.player lerpfovscalefactor(1, 1);
 }
 
-function plant_add_zplanes_override(var0) {
+function plant_add_zplanes_override(var_0) {
   if(level.player ispcplayer()) {
     level.og_zplanes = getDvar("OMNONNMOTP");
     setsaveddvar("OMNONNMOTP", "0.1 500 2.5 10000");
@@ -619,7 +619,7 @@ function plant_add_zplanes_override(var0) {
   }
 }
 
-function plant_remove_zplanes_override(var0) {
+function plant_remove_zplanes_override(var_0) {
   if(level.player ispcplayer() && isDefined(level.og_zplanes)) {
     setsaveddvar("OMNONNMOTP", level.og_zplanes);
     level.og_zplanes = undefined;

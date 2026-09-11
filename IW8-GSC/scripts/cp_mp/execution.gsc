@@ -3,22 +3,22 @@
  * Script: scripts\cp_mp\execution.gsc
 ***********************************************/
 
-function _giveexecution(var0) {
+function _giveexecution(var_0) {
   if(isbot(self) || isagent(self)) {
     return;
   }
 
   _clearexecution();
-  var1 = execution_getpropweaponbyref(var0);
+  var_1 = execution_getpropweaponbyref(var_0);
 
-  if(isDefined(var1)) {
-    self giveweapon(var1);
-    self giveexecution(execution_getexecutionbyref(var0), var1);
+  if(isDefined(var_1)) {
+    self giveweapon(var_1);
+    self giveexecution(execution_getexecutionbyref(var_0), var_1);
   } else {
-    self giveexecution(execution_getexecutionbyref(var0));
+    self giveexecution(execution_getexecutionbyref(var_0));
   }
 
-  self.executionref = var0;
+  self.executionref = var_0;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("teams", "createOperatorCustomization")) {
     self[[scripts\cp_mp\utility\script_utility::getsharedfunc("teams", "createOperatorCustomization")]]();
@@ -33,10 +33,10 @@ function _giveexecution(var0) {
 function _clearexecution() {
   if(isDefined(self.executionref)) {
     self clearexecution();
-    var0 = execution_getpropweaponbyref(self.executionref);
+    var_0 = execution_getpropweaponbyref(self.executionref);
 
-    if(isDefined(var0) && self hasweapon(var0)) {
-      self takeweapon(var0);
+    if(isDefined(var_0) && self hasweapon(var_0)) {
+      self takeweapon(var_0);
     }
 
     self.executionref = undefined;
@@ -81,82 +81,82 @@ function disableexecutionvictimwrapper() {
 function execution_loadtable() {
   level.execution.table = [];
 
-  for(var0 = 0;; var0++) {
-    var1 = tablelookupbyrow("mp_cp/executiontable.csv", var0, 1);
+  for(var_0 = 0;; var_0++) {
+    var_1 = tablelookupbyrow("mp_cp/executiontable.csv", var_0, 1);
 
-    if(!isDefined(var1) || var1 == "") {
+    if(!isDefined(var_1) || var_1 == "") {
       break;
     }
 
     if(scripts\common\utility::iscp()) {
-      var2 = scripts\engine\utility::multitablelookup(["mp/itemsourcetable.csv", "mp/itemsourcetable_ch2.csv"], 2, var1, 3);
+      var_2 = scripts\engine\utility::multitablelookup(["mp/itemsourcetable.csv", "mp/itemsourcetable_ch2.csv"], 2, var_1, 3);
 
-      if(isDefined(var2) && var2 != "" && var2 != "iw8") {
-        var0++;
+      if(isDefined(var_2) && var_2 != "" && var_2 != "iw8") {
+        var_0++;
         continue;
       }
     }
 
-    var3 = tolower(var1);
-    var4 = spawnStruct();
-    var4.ref = var3;
-    var5 = tablelookupbyrow("mp_cp/executiontable.csv", var0, 0);
-    var4.id = int(var5);
-    var6 = tablelookupbyrow("mp_cp/executiontable.csv", var0, 12);
+    var_3 = tolower(var_1);
+    var_4 = spawnStruct();
+    var_4.ref = var_3;
+    var_5 = tablelookupbyrow("mp_cp/executiontable.csv", var_0, 0);
+    var_4.id = int(var_5);
+    var_6 = tablelookupbyrow("mp_cp/executiontable.csv", var_0, 12);
 
-    if(var6 != "none") {
-      var4.execution = var6;
+    if(var_6 != "none") {
+      var_4.execution = var_6;
     }
 
-    var7 = tablelookupbyrow("mp_cp/executiontable.csv", var0, 13);
+    var_7 = tablelookupbyrow("mp_cp/executiontable.csv", var_0, 13);
 
-    if(var7 != "none") {
-      var4.propweapon = getcompleteweaponname(var7);
+    if(var_7 != "none") {
+      var_4.propweapon = getcompleteweaponname(var_7);
 
-      if(nullweapon(var4.propweapon)) {
-        var0++;
+      if(nullweapon(var_4.propweapon)) {
+        var_0++;
         continue;
       }
     }
 
-    level.execution.table[var3] = var4;
+    level.execution.table[var_3] = var_4;
   }
 }
 
-function execution_getexecutionbyref(var0) {
-  var1 = level.execution.table[var0];
+function execution_getexecutionbyref(var_0) {
+  var_1 = level.execution.table[var_0];
 
-  if(isDefined(var1)) {
-    return var1.execution;
+  if(isDefined(var_1)) {
+    return var_1.execution;
   }
 
-  if(isDefined(var0)) {
-    var2 = "execution ref " + var0 + " not found in the execution table";
-    var3 = var2 == undefined;
+  if(isDefined(var_0)) {
+    var_2 = "execution ref " + var_0 + " not found in the execution table";
+    var_3 = var_2 == undefined;
   }
 
   return undefined;
 }
 
-function execution_getpropweaponbyref(var0) {
-  var1 = level.execution.table[var0];
+function execution_getpropweaponbyref(var_0) {
+  var_1 = level.execution.table[var_0];
 
-  if(isDefined(var1)) {
-    return var1.propweapon;
+  if(isDefined(var_1)) {
+    return var_1.propweapon;
   }
 
   return undefined;
 }
 
-function execution_getrefbyplayer(var0) {
-  return var0.executionref;
+function execution_getrefbyplayer(var_0) {
+  return var_0.executionref;
 }
 
-function execution_getidbyref(var0) {
-  var1 = level.execution.table[var0];
+function execution_getidbyref(var_0) {
+  var_1 = level.execution.table[var_0];
 
-  if(isDefined(var1)) {
-    return var1.id;
+  if(isDefined(var_1)) {
+    return var_1.id;
   }
 }
 
@@ -184,13 +184,13 @@ function ref_144e0() {
   self endon("disconnect");
   self notify("watchInExecution");
   self endon("watchInExecution");
-  var0 = 0;
+  var_0 = 0;
 
   for(;;) {
-    var1 = self isinexecutionattack() || self isinexecutionvictim();
+    var_1 = self isinexecutionattack() || self isinexecutionvictim();
 
-    if(var1 != var0) {
-      if(var1) {
+    if(var_1 != var_0) {
+      if(var_1) {
         self enablephysicaldepthoffieldscripting();
         self setphysicaldepthoffield(2.5, 60, 20, 20);
       } else {
@@ -198,7 +198,7 @@ function ref_144e0() {
       }
     }
 
-    var0 = var1;
+    var_0 = var_1;
     waitframe();
   }
 }

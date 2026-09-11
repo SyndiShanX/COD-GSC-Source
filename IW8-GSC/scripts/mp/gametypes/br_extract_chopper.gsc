@@ -3,163 +3,163 @@
  * Script: scripts\mp\gametypes\br_extract_chopper.gsc
 *******************************************************/
 
-function spawnextractchopper(var0, var1, var2, var3) {
-  var4 = var0.origin;
-  var5 = var4;
-  var6 = (0, 0, 0);
-  var7 = 24000;
-  var8 = getEnt("airstrikeheight", "targetname");
-  var9 = var8.origin[2];
-  var10 = "jackal";
-  var11 = level.mapcenter - var0.origin;
-  var11 = (var11[0], var11[1], 0);
-  var12 = vectorNormalize(var11);
-  var13 = var12 * -10000 + (0, 0, 1) * var9;
-  var14 = (var4[0], var4[1], var9);
-  var15 = fakestreakinfo();
-  var16 = spawn("trigger_radius", var4, 0, 90, 128);
-  var16.angles = (0, 0, 0);
-  var16.team = self.team;
-  var16.ownerteam = self.team;
-  var16.visibleteam = "any";
-  var16.offset3d = (0, 0, 16);
-  var16.location = var4;
-  var17 = beginlittlebird(0, var13, var14, var15, var16, var1, self.team, var3);
-  var17.onhelikilled = var2;
-  var17.zone = var0;
-  return var17;
+function spawnextractchopper(var_0, var_1, var_2, var_3) {
+  var_4 = var_0.origin;
+  var_5 = var_4;
+  var_6 = (0, 0, 0);
+  var_7 = 24000;
+  var_8 = getEnt("airstrikeheight", "targetname");
+  var_9 = var_8.origin[2];
+  var_10 = "jackal";
+  var_11 = level.mapcenter - var_0.origin;
+  var_11 = (var_11[0], var_11[1], 0);
+  var_12 = vectorNormalize(var_11);
+  var_13 = var_12 * -10000 + (0, 0, 1) * var_9;
+  var_14 = (var_4[0], var_4[1], var_9);
+  var_15 = fakestreakinfo();
+  var_16 = spawn("trigger_radius", var_4, 0, 90, 128);
+  var_16.angles = (0, 0, 0);
+  var_16.team = self.team;
+  var_16.ownerteam = self.team;
+  var_16.visibleteam = "any";
+  var_16.offset3d = (0, 0, 16);
+  var_16.location = var_4;
+  var_17 = beginlittlebird(0, var_13, var_14, var_15, var_16, var_1, self.team, var_3);
+  var_17.onhelikilled = var_2;
+  var_17.zone = var_0;
+  return var_17;
 }
 
 function fakestreakinfo() {
-  var0 = spawnStruct();
-  var0.available = 1;
-  var0.firednotify = "offhand_fired";
-  var0.isgimme = 1;
-  var0.kid = 5;
-  var0.lifeid = 0;
-  var0.madeavailabletime = gettime();
-  var0.scriptuseagetype = "gesture_script_weapon";
-  var0.streakname = "jackal";
-  var0.streaksetupinfo = undefined;
-  var0.variantid = -1;
-  var0.weaponname = "ks_gesture_generic_mp";
-  var0.objweapon = getcompleteweaponname(var0.weaponname);
-  return var0;
+  var_0 = spawnStruct();
+  var_0.available = 1;
+  var_0.firednotify = "offhand_fired";
+  var_0.isgimme = 1;
+  var_0.kid = 5;
+  var_0.lifeid = 0;
+  var_0.madeavailabletime = gettime();
+  var_0.scriptuseagetype = "gesture_script_weapon";
+  var_0.streakname = "jackal";
+  var_0.streaksetupinfo = undefined;
+  var_0.variantid = -1;
+  var_0.weaponname = "ks_gesture_generic_mp";
+  var_0.objweapon = getcompleteweaponname(var_0.weaponname);
+  return var_0;
 }
 
-function beginlittlebird(var0, var1, var2, var3, var4, var5, var6, var7) {
-  var8 = undefined;
+function beginlittlebird(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  var_8 = undefined;
 
-  if(isDefined(var4)) {
-    var8 = var4.marker;
+  if(isDefined(var_4)) {
+    var_8 = var_4.marker;
 
-    if(!isDefined(var8)) {
-      var8 = spawnStruct();
+    if(!isDefined(var_8)) {
+      var_8 = spawnStruct();
 
-      if(isDefined(var5)) {
-        var8.location = var5;
-      } else if(isDefined(var4.location)) {
-        var8.location = var4.location;
+      if(isDefined(var_5)) {
+        var_8.location = var_5;
+      } else if(isDefined(var_4.location)) {
+        var_8.location = var_4.location;
       } else {
-        var8.location = var4.trigger.origin;
+        var_8.location = var_4.trigger.origin;
       }
 
-      var8.angles = (0, 0, 0);
-      var8.string = "equip_deploy_succeeded";
-      var8.visual = spawn("script_model", var8.location);
-      var8.visual setModel("ks_marker_mp");
-      var8.visual setotherent(self);
+      var_8.angles = (0, 0, 0);
+      var_8.string = "equip_deploy_succeeded";
+      var_8.visual = spawn("script_model", var_8.location);
+      var_8.visual setModel("ks_marker_mp");
+      var_8.visual setotherent(self);
     }
 
-    if(!isDefined(var8.location)) {
+    if(!isDefined(var_8.location)) {
       self notify("cancel_littlebird");
       return 0;
     }
   }
 
   self notify("called_in_littlebird");
-  var9 = getEnt("airstrikeheight", "targetname");
+  var_9 = getEnt("airstrikeheight", "targetname");
 
-  if(isDefined(var9)) {
-    var10 = var9.origin[2] + 500;
+  if(isDefined(var_9)) {
+    var_10 = var_9.origin[2] + 500;
   } else {
-    var10 = 1300;
+    var_10 = 1300;
   }
 
-  if(isDefined(var9) && isDefined(var9.location)) {
-    var3 = var9.location;
+  if(isDefined(var_9) && isDefined(var_9.location)) {
+    var_3 = var_9.location;
   }
 
-  var3 *= (1, 1, 0);
-  var11 = var3 + (0, 0, var10);
-  var12 = spawnlittlebird(var1, self, var2, var11, var4, var5);
-  var12.lz = var5;
-  var12.pathgoal = var11;
-  thread monitorarriveoverdestination(var12, var9, var7, var8);
-  return var12;
+  var_3 *= (1, 1, 0);
+  var_11 = var_3 + (0, 0, var_10);
+  var_12 = spawnlittlebird(var_1, self, var_2, var_11, var_4, var_5);
+  var_12.lz = var_5;
+  var_12.pathgoal = var_11;
+  thread monitorarriveoverdestination(var_12, var_9, var_7, var_8);
+  return var_12;
 }
 
-function spawnlittlebird(var0, var1, var2, var3, var4, var5) {
-  var6 = vectortoangles(var3 - var2);
+function spawnlittlebird(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = vectortoangles(var_3 - var_2);
 
   if(scripts\mp\utility\game::getgametype() == "arm") {
-    var7 = 99;
-    var8 = 10000;
+    var_7 = 99;
+    var_8 = 10000;
   } else if(scripts\mp\utility\game::getgametype() == "btm") {
-    var7 = 99;
-    var8 = 99999;
+    var_7 = 99;
+    var_8 = 99999;
   } else {
-    var7 = 1;
-    var8 = 10000;
+    var_7 = 1;
+    var_8 = 10000;
   }
 
-  var9 = "veh8_mil_air_lbravo";
-  var10 = spawnhelicopter(var5, var6, var8, "lbravo_infil_mp", var9);
+  var_9 = "veh8_mil_air_lbravo";
+  var_10 = spawnhelicopter(var_5, var_6, var_8, "lbravo_infil_mp", var_9);
 
-  if(!isDefined(var10)) {
+  if(!isDefined(var_10)) {
     return;
   }
 
-  if(isDefined(var7)) {
-    var10.lz = var7;
+  if(isDefined(var_7)) {
+    var_10.lz = var_7;
   }
 
   thread handledestroydamage();
-  var10.damagecallback = &callback_vehicledamage;
-  var10.speed = 50;
-  var10.accel = 125;
-  var10.health = var8;
-  var10.maxhealth = var10.health;
-  var10.team = var5.team;
-  var10.owner = var5;
-  var10 setCanDamage(1);
-  var10.defendloc = var7;
-  var10.lifeid = var4;
-  var10.jackal = 1;
-  var10.streakinfo = var8;
-  var10.streakname = var8.streakname;
-  var10.streakinfo = var8;
-  var10.flaresreservecount = var7;
-  var10 scripts\mp\utility\killstreak::addtoactivekillstreaklist(var8.streakname, "Killstreak_Air", var5, 0, 1, 100);
-  var10 setmaxpitchroll(0, 90);
-  var10 vehicle_setspeed(var10.speed, var10.accel);
-  var10 sethoverparams(50, 100, 50);
-  var10 setturningability(0.05);
-  var10 setyawspeed(45, 25, 25, 0.5);
-  var10 setotherent(var5);
-  var10.useobj = spawn("script_model", var10 gettagorigin("tag_origin"));
-  var10.useobj linkTo(var10, "tag_origin");
+  var_10.damagecallback = &callback_vehicledamage;
+  var_10.speed = 50;
+  var_10.accel = 125;
+  var_10.health = var_8;
+  var_10.maxhealth = var_10.health;
+  var_10.team = var_5.team;
+  var_10.owner = var_5;
+  var_10 setCanDamage(1);
+  var_10.defendloc = var_7;
+  var_10.lifeid = var_4;
+  var_10.jackal = 1;
+  var_10.streakinfo = var_8;
+  var_10.streakname = var_8.streakname;
+  var_10.streakinfo = var_8;
+  var_10.flaresreservecount = var_7;
+  var_10 scripts\mp\utility\killstreak::addtoactivekillstreaklist(var_8.streakname, "Killstreak_Air", var_5, 0, 1, 100);
+  var_10 setmaxpitchroll(0, 90);
+  var_10 vehicle_setspeed(var_10.speed, var_10.accel);
+  var_10 sethoverparams(50, 100, 50);
+  var_10 setturningability(0.05);
+  var_10 setyawspeed(45, 25, 25, 0.5);
+  var_10 setotherent(var_5);
+  var_10.useobj = spawn("script_model", var_10 gettagorigin("tag_origin"));
+  var_10.useobj linkTo(var_10, "tag_origin");
 
   if(!isDefined(level.jackals)) {
     level.jackals = [];
   }
 
-  level.jackals[level.jackals.size] = var10;
+  level.jackals[level.jackals.size] = var_10;
   level.jackals = scripts\engine\utility::array_removeundefined(level.jackals);
-  var10 thread scripts\mp\killstreaks\flares::flares_handleincomingstinger(undefined, undefined);
+  var_10 thread scripts\mp\killstreaks\flares::flares_handleincomingstinger(undefined, undefined);
   thread littlebirddestroyed();
   thread delay_jackal_arrive_sfx();
-  return var10;
+  return var_10;
 }
 
 function delay_jackal_arrive_sfx() {
@@ -167,15 +167,15 @@ function delay_jackal_arrive_sfx() {
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(6);
 }
 
-function delayjackalloopsfx(var0, var1) {
+function delayjackalloopsfx(var_0, var_1) {
   self endon("death");
-  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var0);
-  self playLoopSound(var1);
+  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_0);
+  self playLoopSound(var_1);
 }
 
 function littlebirddestroyed() {
   self endon("jackal_gone");
-  var0 = self.owner;
+  var_0 = self.owner;
   self waittill("death");
 
   if(isDefined(self.turrettarget) && isDefined(self.targetoutline)) {
@@ -227,21 +227,21 @@ function littlebirddelete() {
     self.useobj delete();
   }
 
-  foreach(var1 in level.carepackagedropnodes) {
-    var1.free = undefined;
+  foreach(var_1 in level.carepackagedropnodes) {
+    var_1.free = undefined;
   }
 
   self delete();
 }
 
-function littlebirdcrash(var0) {
+function littlebirdcrash(var_0) {
   self endon("explode");
   self clearlookatent();
   self notify("jackal_crashing");
   self setvehgoalpos(self.origin + (0, 0, 100), 1);
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(1.5);
-  self setyawspeed(var0, var0, var0);
-  self settargetyaw(self.angles[1] + var0 * 2.5);
+  self setyawspeed(var_0, var_0, var_0);
+  self settargetyaw(self.angles[1] + var_0 * 2.5);
 }
 
 function handledestroydamage() {
@@ -249,27 +249,27 @@ function handledestroydamage() {
   self endon("leaving");
 
   for(;;) {
-    self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13);
-    var9 = scripts\mp\utility\weapon::mapweapon(var9, var13);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
+    var_9 = scripts\mp\utility\weapon::mapweapon(var_9, var_13);
 
-    if((var9.basename == "aamissile_projectile_mp" || var9.basename == "nuke_mp") && var4 == "MOD_EXPLOSIVE" && var0 >= self.health) {
+    if((var_9.basename == "aamissile_projectile_mp" || var_9.basename == "nuke_mp") && var_4 == "MOD_EXPLOSIVE" && var_0 >= self.health) {
       if(isDefined(self.onhelikilled)) {
         [[self.onhelikilled]](self.team);
       }
 
-      callback_vehicledamage(var1, var1, 9001, 0, var4, var9, var3, var2, var3, 0, 0, var7);
+      callback_vehicledamage(var_1, var_1, 9001, 0, var_4, var_9, var_3, var_2, var_3, 0, 0, var_7);
     }
   }
 }
 
-function callback_vehicledamage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12) {
-  if(isDefined(var1)) {
-    if(isDefined(var1.owner)) {
-      var1 = var1.owner;
+function callback_vehicledamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
+  if(isDefined(var_1)) {
+    if(isDefined(var_1.owner)) {
+      var_1 = var_1.owner;
     }
   }
 
-  if((var1 == self || isDefined(var1.pers) && var1.pers["team"] == self.team && !level.friendlyfire && level.teambased) && var1 != self.owner) {
+  if((var_1 == self || isDefined(var_1.pers) && var_1.pers["team"] == self.team && !level.friendlyfire && level.teambased) && var_1 != self.owner) {
     return;
   }
 
@@ -277,48 +277,48 @@ function callback_vehicledamage(var0, var1, var2, var3, var4, var5, var6, var7, 
     return;
   }
 
-  var2 = scripts\mp\utility\killstreak::getmodifiedantikillstreakdamage(var1, var5, var4, var2, self.maxhealth, 3, 4, 5);
-  scripts\mp\killstreaks\killstreaks::killstreakhit(var1, var5, self, var4, var2);
-  var1 scripts\mp\damagefeedback::updatedamagefeedback("");
-  scripts\mp\damage::logattackerkillstreak(self, var2, var1, var7, var6, var4, var10, undefined, var11, var3, createheadicon(var5));
+  var_2 = scripts\mp\utility\killstreak::getmodifiedantikillstreakdamage(var_1, var_5, var_4, var_2, self.maxhealth, 3, 4, 5);
+  scripts\mp\killstreaks\killstreaks::killstreakhit(var_1, var_5, self, var_4, var_2);
+  var_1 scripts\mp\damagefeedback::updatedamagefeedback("");
+  scripts\mp\damage::logattackerkillstreak(self, var_2, var_1, var_7, var_6, var_4, var_10, undefined, var_11, var_3, createheadicon(var_5));
 
-  if(self.health <= var2) {
-    if(isPlayer(var1) && (!isDefined(self.owner) || var1 != self.owner)) {
-      scripts\mp\damage::onkillstreakkilled("jackal", var1, var5, var4, var2, "destroyed_jackal", "jackal_destroyed", "callout_destroyed_harrier");
+  if(self.health <= var_2) {
+    if(isPlayer(var_1) && (!isDefined(self.owner) || var_1 != self.owner)) {
+      scripts\mp\damage::onkillstreakkilled("jackal", var_1, var_5, var_4, var_2, "destroyed_jackal", "jackal_destroyed", "callout_destroyed_harrier");
     }
   }
 
-  if(self.health - var2 <= 900 && (!isDefined(self.smoking) || !self.smoking)) {
+  if(self.health - var_2 <= 900 && (!isDefined(self.smoking) || !self.smoking)) {
     self.smoking = 1;
   }
 
-  self vehicle_finishdamage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11);
+  self vehicle_finishdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 }
 
-function monitorarriveoverdestination(var0, var1, var2, var3) {
-  var0 endon("death");
-  var0 endon("leaving");
-  var0 setvehgoalpos(var0.pathgoal, 1);
-  thread changemaxpitchrollwhenclosetogoal(var0);
-  var0 waittill("goal");
+function monitorarriveoverdestination(var_0, var_1, var_2, var_3) {
+  var_0 endon("death");
+  var_0 endon("leaving");
+  var_0 setvehgoalpos(var_0.pathgoal, 1);
+  thread changemaxpitchrollwhenclosetogoal(var_0);
+  var_0 waittill("goal");
   thread watchgameendleave();
 
-  if(isDefined(var3)) {
-    var4 = var0.speed;
-    var5 = var0.accel;
+  if(isDefined(var_3)) {
+    var_4 = var_0.speed;
+    var_5 = var_0.accel;
   } else {
-    var4 = var2.speed / 4;
-    var5 = var2.accel / 6;
+    var_4 = var_2.speed / 4;
+    var_5 = var_2.accel / 6;
   }
 
-  var2 vehicle_setspeed(var4, var5);
-  littlebirddescendtoextraction(var2, var3.location, var2.zone, var4);
+  var_2 vehicle_setspeed(var_4, var_5);
+  littlebirddescendtoextraction(var_2, var_3.location, var_2.zone, var_4);
 }
 
 function littlebirdleave() {
   self endon("death");
-  var0 = self.speed;
-  var1 = self.accel;
+  var_0 = self.speed;
+  var_1 = self.accel;
   self setmaxpitchroll(0, 0);
   self notify("leaving");
   self.leaving = 1;
@@ -328,30 +328,30 @@ function littlebirdleave() {
     scripts\mp\utility\outline::outlinedisable(self.targetoutline, self.turrettarget);
   }
 
-  var2 = int(self.speed / 14);
-  var3 = int(self.accel / 16);
+  var_2 = int(self.speed / 14);
+  var_3 = int(self.accel / 16);
 
-  if(isDefined(var0)) {
-    var2 = var0;
+  if(isDefined(var_0)) {
+    var_2 = var_0;
   }
 
-  if(isDefined(var1)) {
-    var3 = var1;
+  if(isDefined(var_1)) {
+    var_3 = var_1;
   }
 
-  self vehicle_setspeed(var2, var3);
-  var4 = self.origin + anglesToForward((0, randomint(360), 0)) * 500;
-  var4 += (0, 0, 1000);
-  self setvehgoalpos(var4, 1);
+  self vehicle_setspeed(var_2, var_3);
+  var_4 = self.origin + anglesToForward((0, randomint(360), 0)) * 500;
+  var_4 += (0, 0, 1000);
+  self setvehgoalpos(var_4, 1);
 
   if(isDefined(self.useobj)) {
     self.useobj delete();
   }
 
   self waittill("goal");
-  var5 = getpathend();
+  var_5 = getpathend();
   self vehicle_setspeed(250, 75);
-  self setvehgoalpos(var5, 1);
+  self setvehgoalpos(var_5, 1);
   self waittill("goal");
   self stoploopsound();
   level.jackals[level.jackals.size - 1] = undefined;
@@ -364,39 +364,39 @@ function littlebirdleave() {
 }
 
 function getpathend() {
-  var0 = 150;
-  var1 = 15000;
-  var2 = self.angles[1];
-  var3 = (0, var2, 0);
-  var4 = self.origin + anglesToForward(var3) * var1;
-  return var4;
+  var_0 = 150;
+  var_1 = 15000;
+  var_2 = self.angles[1];
+  var_3 = (0, var_2, 0);
+  var_4 = self.origin + anglesToForward(var_3) * var_1;
+  return var_4;
 }
 
-function littlebirddescendtoextraction(var0, var1, var2) {
-  descend(var0, var1);
+function littlebirddescendtoextraction(var_0, var_1, var_2) {
+  descend(var_0, var_1);
 
   if(scripts\mp\utility\game::getgametype() != "vip" && scripts\mp\utility\game::getgametype() != "arm" && scripts\mp\utility\game::getgametype() != "btm") {
-    var1.teamsextracting = scripts\engine\utility::array_remove(var1.teamsextracting, var2 + self.squadindex);
+    var_1.teamsextracting = scripts\engine\utility::array_remove(var_1.teamsextracting, var_2 + self.squadindex);
     thread littlebirdleave();
     return;
   }
 }
 
-function descend(var0, var1) {
+function descend(var_0, var_1) {
   self endon("bugOut");
-  var2 = undefined;
-  var3 = var0[0];
-  var4 = var0[1];
-  var5 = tracegroundheight(var3, var4, 20);
-  var2 = (var3, var4, var5);
+  var_2 = undefined;
+  var_3 = var_0[0];
+  var_4 = var_0[1];
+  var_5 = tracegroundheight(var_3, var_4, 20);
+  var_2 = (var_3, var_4, var_5);
 
   if(scripts\mp\utility\game::getgametype() == "arm") {
-    var5 = tracegroundheight(var3, var4, 5, 1);
-    var2 = (var3, var4, var5 + 200);
+    var_5 = tracegroundheight(var_3, var_4, 5, 1);
+    var_2 = (var_3, var_4, var_5 + 200);
   }
 
   self clearlookatent();
-  self setvehgoalpos(var2, 1);
+  self setvehgoalpos(var_2, 1);
   self waittill("goal");
 
   if(scripts\mp\utility\game::getgametype() == "vip") {
@@ -406,9 +406,9 @@ function descend(var0, var1) {
 
   if(scripts\mp\utility\game::getgametype() == "arm") {
     self vehicle_setspeed(self.speed / 8, self.accel / 12);
-    var5 = tracegroundheight(var3, var4, undefined, 1);
-    var2 = (var3, var4, var5 + 120);
-    self setvehgoalpos(var2, 1);
+    var_5 = tracegroundheight(var_3, var_4, undefined, 1);
+    var_2 = (var_3, var_4, var_5 + 120);
+    self setvehgoalpos(var_2, 1);
     self notify("esc_littlebird_arrive");
     self waittill("goal");
     self vehicle_setspeed(self.speed / 3, self.accel / 4);
@@ -421,48 +421,48 @@ function descend(var0, var1) {
   }
 }
 
-function tracegroundheight(var0, var1, var2, var3) {
-  var4 = 30;
-  var5 = tracegroundpoint(var0, var1, var3);
-  var6 = var5 + var4;
+function tracegroundheight(var_0, var_1, var_2, var_3) {
+  var_4 = 30;
+  var_5 = tracegroundpoint(var_0, var_1, var_3);
+  var_6 = var_5 + var_4;
 
-  if(isDefined(var2)) {
-    var6 += randomint(var2);
+  if(isDefined(var_2)) {
+    var_6 += randomint(var_2);
   }
 
-  return var6;
+  return var_6;
 }
 
-function tracegroundpoint(var0, var1, var2) {
+function tracegroundpoint(var_0, var_1, var_2) {
   self endon("death");
   self endon("acquiringTarget");
   self endon("leaving");
-  var3 = -99999;
-  var4 = self.origin[2] + 2000;
-  var5 = level.averagealliesz;
-  var6 = [self];
+  var_3 = -99999;
+  var_4 = self.origin[2] + 2000;
+  var_5 = level.averagealliesz;
+  var_6 = [self];
 
   if(isDefined(self.dropcrates)) {
-    foreach(var8 in self.dropcrates) {
-      var6 = var8;
+    foreach(var_8 in self.dropcrates) {
+      var_6 = var_8;
     }
   }
 
-  var10 = 256;
+  var_10 = 256;
 
-  if(isDefined(var2)) {
-    var11 = scripts\engine\trace::ray_trace((var0, var1, var4), (var0, var1, var3), var6, undefined, undefined, 1);
+  if(isDefined(var_2)) {
+    var_11 = scripts\engine\trace::ray_trace((var_0, var_1, var_4), (var_0, var_1, var_3), var_6, undefined, undefined, 1);
   } else {
-    var11 = scripts\engine\trace::sphere_trace((var1, var2, var5), (var1, var2, var4), 256, var10, undefined, 1);
+    var_11 = scripts\engine\trace::sphere_trace((var_1, var_2, var_5), (var_1, var_2, var_4), 256, var_10, undefined, 1);
   }
 
-  if(var11["position"][2] < var6) {
-    var12 = var6;
+  if(var_11["position"][2] < var_6) {
+    var_12 = var_6;
   } else {
-    var12 = var12["position"][2];
+    var_12 = var_12["position"][2];
   }
 
-  return var12;
+  return var_12;
 }
 
 function watchgameendleave() {
@@ -472,13 +472,13 @@ function watchgameendleave() {
   thread littlebirdleave();
 }
 
-function changemaxpitchrollwhenclosetogoal(var0) {
+function changemaxpitchrollwhenclosetogoal(var_0) {
   self endon("goal");
   self endon("death");
   self endon("leaving");
 
   for(;;) {
-    if(distance2d(self.origin, var0) < 768) {
+    if(distance2d(self.origin, var_0) < 768) {
       self setmaxpitchroll(10, 25);
       break;
     }

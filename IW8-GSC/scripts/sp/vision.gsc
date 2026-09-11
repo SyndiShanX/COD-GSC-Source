@@ -23,9 +23,9 @@ function init_pain() {
   visionsetpain("damage_dead");
 }
 
-function set_vision_naked(var0, var1) {
-  level.visionnakeddefault = var0;
-  visionsetnaked(var0, var1);
+function set_vision_naked(var_0, var_1) {
+  level.visionnakeddefault = var_0;
+  visionsetnaked(var_0, var_1);
 }
 
 function clear_vision() {

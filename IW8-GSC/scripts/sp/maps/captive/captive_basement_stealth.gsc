@@ -44,7 +44,7 @@ function basement_stealth_main() {
   level thread scripts\sp\maps\captive\captive_util::notetrack_listener_close_cellblock_door();
   scripts\sp\utility::context_melee_set_silent_kill(0);
   scripts\sp\utility::context_melee_set_weapon("weapon_wm_me_spoonshank");
-  var0 = getEnt("grate", "targetname");
+  var_0 = getEnt("grate", "targetname");
   thread check_use_grate_cover();
   thread check_rat_run(level);
   thread vent_crawl_presentation();
@@ -63,9 +63,9 @@ function basement_stealth_main() {
   level notify("end_window_view");
 
   if(isDefined(level.windowguys)) {
-    foreach(var2 in level.windowguys) {
-      if(isDefined(var2)) {
-        var2 delete();
+    foreach(var_2 in level.windowguys) {
+      if(isDefined(var_2)) {
+        var_2 delete();
       }
     }
   }
@@ -118,34 +118,34 @@ function basement_stealth_main() {
 function vent_crawl_presentation() {
   level.player endon("death");
   level endon("reached_upstairs");
-  var0 = level.player scripts\engine\sp\utility::get_rumble_ent("steady_rumble");
-  var0 thread scripts\engine\sp\utility::rumble_ramp_to(0, 0.05);
-  var1 = 0.6;
-  var2 = 0.3;
-  var3 = 1.6;
-  var4 = 0.45;
+  var_0 = level.player scripts\engine\sp\utility::get_rumble_ent("steady_rumble");
+  var_0 thread scripts\engine\sp\utility::rumble_ramp_to(0, 0.05);
+  var_1 = 0.6;
+  var_2 = 0.3;
+  var_3 = 1.6;
+  var_4 = 0.45;
   thread audio_player_spawn_mud_loop();
 
   for(;;) {
     if(scripts\engine\utility::flag("in_drain") && level.player getstance() == "prone") {
-      var0.intensity = 0;
-      var5 = abs(level.player getnormalizedmovement()[0]);
+      var_0.intensity = 0;
+      var_5 = abs(level.player getnormalizedmovement()[0]);
 
-      if(var5 < 0.13) {
+      if(var_5 < 0.13) {
         waitframe();
         continue;
       }
 
-      var6 = scripts\engine\math::factor_value(var2, var1, var5);
-      var7 = scripts\engine\math::factor_value(var3, var4, var5);
-      thread do_vent_rumble(var0, var6);
-      var8 = gettime() + var7 * 1000;
+      var_6 = scripts\engine\math::factor_value(var_2, var_1, var_5);
+      var_7 = scripts\engine\math::factor_value(var_3, var_4, var_5);
+      thread do_vent_rumble(var_0, var_6);
+      var_8 = gettime() + var_7 * 1000;
       thread audio_player_start_mud_loop();
 
-      while(gettime() < var8) {
+      while(gettime() < var_8) {
         if(!abs(level.player getnormalizedmovement()[0])) {
           level notify("interupt_rumble");
-          var0.intensity = 0;
+          var_0.intensity = 0;
           thread audio_player_stop_mud_loop();
           break;
         }
@@ -192,10 +192,10 @@ function audio_player_delete_mud_loop() {
   }
 }
 
-function do_vent_rumble(var0, var1) {
+function do_vent_rumble(var_0, var_1) {
   level endon("interupt_rumble");
-  scripts\engine\sp\utility::rumble_ramp_to(var0, var1 * 0.5);
-  scripts\engine\sp\utility::rumble_ramp_to(0, var1 * 0.5);
+  scripts\engine\sp\utility::rumble_ramp_to(var_0, var_1 * 0.5);
+  scripts\engine\sp\utility::rumble_ramp_to(0, var_1 * 0.5);
 }
 
 function check_swipe_melee_dmg() {
@@ -203,9 +203,9 @@ function check_swipe_melee_dmg() {
   self endon("start_context_melee");
 
   for(;;) {
-    self waittill("damage", var0, var1, var0, var0, var2, var0, var0, var0, var0, var0);
+    self waittill("damage", var_0, var_1, var_0, var_0, var_2, var_0, var_0, var_0, var_0, var_0);
 
-    if(scripts\engine\utility::is_equal(var1, level.player) && scripts\engine\utility::is_equal(var2, "MOD_MELEE")) {
+    if(scripts\engine\utility::is_equal(var_1, level.player) && scripts\engine\utility::is_equal(var_2, "MOD_MELEE")) {
       wait 1;
       scripts\engine\utility::disable_pain();
       wait 10;
@@ -224,7 +224,7 @@ function basement_stealth_catchup() {
   setaudiotriggerstate("cap_battle", "", 3);
 }
 
-function check_rat_run(var0) {
+function check_rat_run(var_0) {
   scripts\engine\utility::flag_wait("in_drain");
   scripts\engine\utility::exploder("sewer_rat_static");
   scripts\engine\utility::exploder("sewer_rat_static_1");
@@ -249,23 +249,23 @@ function check_rat_run(var0) {
 function check_use_grate_cover() {
   self.animname = "grate";
   scripts\engine\sp\utility::assign_animtree();
-  var0 = undefined;
-  var1 = scripts\engine\utility::get_linked_structs();
+  var_0 = undefined;
+  var_1 = scripts\engine\utility::get_linked_structs();
 
-  foreach(var3 in var1) {
-    if(var3.script_parameters == "grate_interact") {
-      var0 = var3;
+  foreach(var_3 in var_1) {
+    if(var_3.script_parameters == "grate_interact") {
+      var_0 = var_3;
     }
   }
 
-  var0 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"CAPTIVE/CURSOR_OPEN", 180, 80, 64);
-  var0 waittill("trigger");
+  var_0 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"CAPTIVE/CURSOR_OPEN", 180, 80, 64);
+  var_0 waittill("trigger");
   scripts\engine\utility::flag_set("opened_grate");
-  var5 = scripts\engine\utility::get_linked_ents();
+  var_5 = scripts\engine\utility::get_linked_ents();
 
-  foreach(var7 in var5) {
-    if(var7.script_parameters == "collision") {
-      var7 delete();
+  foreach(var_7 in var_5) {
+    if(var_7.script_parameters == "collision") {
+      var_7 delete();
     }
   }
 
@@ -345,33 +345,33 @@ function guard_2_patrol_unaware() {
 
 function basement_stealth_eventdists() {
   scripts\engine\utility::flag_wait("stealth_enabled");
-  var0 = level.stealth.ai_event;
+  var_0 = level.stealth.ai_event;
   GscBinSkip1(0x45, "ai_eventDistFootstepSprint", "spotted", 200);
 }
 
 function basement_stealth_melee_counter_monitor() {
-  var0 = level scripts\engine\utility::waittill_any_return("got_gun", "melee_fail");
+  var_0 = level scripts\engine\utility::waittill_any_return("got_gun", "melee_fail");
 
-  if(var0 == "melee_fail") {
-    var1 = 1.5;
-    thread counter_black_fade(var1);
+  if(var_0 == "melee_fail") {
+    var_1 = 1.5;
+    thread counter_black_fade(var_1);
     level.player enabledeathshield(0);
     level.player disableinvulnerability();
-    wait var1;
+    wait var_1;
     level.player scripts\sp\utility::do_damage(2000, level.player.origin, level.player, undefined, "MOD_PISTOL_BULLET");
     return;
   }
 }
 
-function counter_black_fade(var0) {
+function counter_black_fade(var_0) {
   level.counterblackoverlay = scripts\sp\hud_util::create_client_overlay("black", 0);
   waitframe();
-  level.counterblackoverlay fadeovertime(var0);
+  level.counterblackoverlay fadeovertime(var_0);
   level.counterblackoverlay.alpha = 1;
 }
 
-function kill_on_damage(var0, var1, var2, var3, var4, var5, var6) {
-  self kill(var3, var1, var6, var4);
+function kill_on_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  self kill(var_3, var_1, var_6, var_4);
 }
 
 function dontsave() {
@@ -436,18 +436,18 @@ function basement_guard_death_func() {
   if(self.script_noteworthy == "basement_guard_2") {
     scripts\engine\utility::flag_set("killed_guard_2");
     scripts\sp\utility::nvidiaansel_scriptdisable(0);
-    var0 = 1;
+    var_0 = 1;
 
-    foreach(var2 in level.player.primaryweapons) {
-      if(issubstr(var2.basename, "_pi_")) {
-        var0 = 0;
+    foreach(var_2 in level.player.primaryweapons) {
+      if(issubstr(var_2.basename, "_pi_")) {
+        var_0 = 0;
       }
     }
 
-    if(var0) {
-      var4 = scripts\sp\utility::make_weapon("iw8_pi_golf21_tfarah");
-      level.player scripts\sp\utility::give_weapon(var4);
-      level.player switchtoweapon(var4);
+    if(var_0) {
+      var_4 = scripts\sp\utility::make_weapon("iw8_pi_golf21_tfarah");
+      level.player scripts\sp\utility::give_weapon(var_4);
+      level.player switchtoweapon(var_4);
     }
 
     level.player scripts\sp\utility::take_weapon("iw8_farahspoon_sp");
@@ -467,13 +467,13 @@ function basement_guard_death_func() {
     return false;
   }
 
-  foreach(var6 in level.basement_guards) {
-    if(scripts\engine\utility::is_equal(var6, level.guard3)) {
-      var6.target = "stairwell_guard_cover_node";
-      var6.combat_volume = getEnt("stairwell_guard_cover_volume", "targetname");
+  foreach(var_6 in level.basement_guards) {
+    if(scripts\engine\utility::is_equal(var_6, level.guard3)) {
+      var_6.target = "stairwell_guard_cover_node";
+      var_6.combat_volume = getEnt("stairwell_guard_cover_volume", "targetname");
 
-      if(var6[[var6.fnisinstealthcombat]]()) {
-        var6 setgoalvolumeauto(var6.combat_volume);
+      if(var_6[[var_6.fnisinstealthcombat]]()) {
+        var_6 setgoalvolumeauto(var_6.combat_volume);
       }
     }
   }
@@ -489,25 +489,25 @@ function check_got_gun() {
   self endon("kill_gun_check");
 
   while(!scripts\engine\utility::flag("got_gun")) {
-    self waittill("weapon_change", var0);
+    self waittill("weapon_change", var_0);
 
-    if(var0.basename != "none" && var0.basename != "iw8_farahspoon_sp") {
+    if(var_0.basename != "none" && var_0.basename != "iw8_farahspoon_sp") {
       thread scripts\engine\sp\utility::autosave_by_name("basement_stealth_got_gun");
       scripts\engine\utility::flag_set("got_gun");
     }
   }
 }
 
-function basement_guard_stealth_filter(var0) {
-  var1 = ["grenade danger"];
+function basement_guard_stealth_filter(var_0) {
+  var_1 = ["grenade danger"];
 
-  if(scripts\engine\utility::array_contains(var1, var0.typeorig)) {
+  if(scripts\engine\utility::array_contains(var_1, var_0.typeorig)) {
     return true;
   }
 
   scripts\sp\nvg\nvg_ai::flashlight_on();
 
-  if(var0.type == "combat") {
+  if(var_0.type == "combat") {
     if(scripts\engine\utility::is_equal(self, level.guard1)) {
       thread stairwell_guard_combat_think();
     } else {
@@ -518,10 +518,10 @@ function basement_guard_stealth_filter(var0) {
   return false;
 }
 
-function basement_guard_pre_stealth_filter(var0) {
-  var1 = ["grenade danger"];
+function basement_guard_pre_stealth_filter(var_0) {
+  var_1 = ["grenade danger"];
 
-  if(scripts\engine\utility::array_contains(var1, var0.typeorig)) {
+  if(scripts\engine\utility::array_contains(var_1, var_0.typeorig)) {
     return true;
   }
 
@@ -529,41 +529,41 @@ function basement_guard_pre_stealth_filter(var0) {
   return false;
 }
 
-function basement_guard_combat_stealth_filter(var0) {
+function basement_guard_combat_stealth_filter(var_0) {
   scripts\common\utility::enable_cqbwalk(1);
   self.combatmode = "cover";
   scripts\engine\utility::flag_set("spotted_player");
-  return basement_guard_stealth_filter(var0);
+  return basement_guard_stealth_filter(var_0);
 }
 
-function basement_guard_pre_combat_stealth_filter(var0) {
+function basement_guard_pre_combat_stealth_filter(var_0) {
   scripts\common\utility::enable_cqbwalk(1);
   self setgoalvolumeauto(self.combat_volume);
   scripts\engine\utility::flag_set("spotted_player");
-  return basement_guard_stealth_filter(var0);
+  return basement_guard_stealth_filter(var_0);
 }
 
 function basement_guard_has_lost_enemy() {
-  var0 = 10000;
-  var1 = 10000;
-  var2 = 8000;
-  var3 = gettime();
-  var4 = self.enemy;
+  var_0 = 10000;
+  var_1 = 10000;
+  var_2 = 8000;
+  var_3 = gettime();
+  var_4 = self.enemy;
 
-  if(isDefined(var4) && issentient(var4) && isalive(var4)) {
-    if(var4.team != "allies") {
+  if(isDefined(var_4) && issentient(var_4) && isalive(var_4)) {
+    if(var_4.team != "allies") {
       return false;
     }
 
-    var5 = self lastknowntime(var4);
+    var_5 = self lastknowntime(var_4);
 
-    if(var3 < var5 + var0) {
+    if(var_3 < var_5 + var_0) {
       return false;
     }
 
-    var6 = self lastknownpos(var4);
+    var_6 = self lastknownpos(var_4);
 
-    if(var5 > 0 && distancesquared(var4.origin, var6) < var1 && self cansee(var4) && self canshootenemy()) {
+    if(var_5 > 0 && distancesquared(var_4.origin, var_6) < var_1 && self cansee(var_4) && self canshootenemy()) {
       return false;
     }
 
@@ -592,17 +592,17 @@ function check_in_drain() {
   for(;;) {
     scripts\engine\utility::flag_wait("in_drain");
 
-    foreach(var1 in level.basementguards) {
-      if(isalive(var1)) {
-        var1 enableavoidance(0);
+    foreach(var_1 in level.basementguards) {
+      if(isalive(var_1)) {
+        var_1 enableavoidance(0);
       }
     }
 
     scripts\engine\utility::flag_waitopen("in_drain");
 
-    foreach(var1 in level.basementguards) {
-      if(isalive(var1)) {
-        var1 enableavoidance(1);
+    foreach(var_1 in level.basementguards) {
+      if(isalive(var_1)) {
+        var_1 enableavoidance(1);
       }
     }
   }
@@ -633,9 +633,9 @@ function check_rush_past_guards() {
 
   if(!scripts\engine\utility::flag("killed_guard_2") && isalive(level.guard1) && ispointinvolume(level.guard1.origin, getEnt("stairwell_base_volume", "targetname"))) {
     scripts\engine\utility::flag_wait("reached_wait_point");
-    var0 = scripts\engine\utility::getStruct("stairwell_guard_melee_kill_ref", "targetname");
-    var0 scripts\sp\player_rig::link_player_to_rig("melee_fail_front", "stand", 1, 0.3);
-    var0 thread scripts\common\anim::anim_single([level.guard1, level.player_rig], "melee_fail_front");
+    var_0 = scripts\engine\utility::getStruct("stairwell_guard_melee_kill_ref", "targetname");
+    var_0 scripts\sp\player_rig::link_player_to_rig("melee_fail_front", "stand", 1, 0.3);
+    var_0 thread scripts\common\anim::anim_single([level.guard1, level.player_rig], "melee_fail_front");
     level waittill("first_shot");
     level.player scripts\sp\utility::do_damage(level.player.health / 2, level.guard1.origin);
     level waittill("kill_player");
@@ -643,25 +643,25 @@ function check_rush_past_guards() {
     return;
   }
 
-  var1 = scripts\sp\door::get_interactive_door("basement_door");
-  var1 scripts\engine\utility::waittill_any("first_interact", "bashed");
-  var2 = undefined;
+  var_1 = scripts\sp\door::get_interactive_door("basement_door");
+  var_1 scripts\engine\utility::waittill_any("first_interact", "bashed");
+  var_2 = undefined;
 
   if(isalive(level.guard1)) {
-    var2 = level.guard1;
+    var_2 = level.guard1;
   }
 
-  if(!isDefined(var2) && isalive(level.guard2)) {
-    var2 = level.guard2;
+  if(!isDefined(var_2) && isalive(level.guard2)) {
+    var_2 = level.guard2;
   }
 
-  if(isDefined(var2)) {
+  if(isDefined(var_2)) {
     magicbullet("iw8_pi_golf21", level.player getEye() + (0, 0, 30), level.player.origin);
     wait 0.1;
     magicbullet("iw8_pi_golf21", level.player getEye() + (0, 0, 30), level.player.origin);
 
     if(isalive(level.player)) {
-      level.player scripts\sp\utility::do_damage(level.player.health + 100, level.player getEye(), var2);
+      level.player scripts\sp\utility::do_damage(level.player.health + 100, level.player getEye(), var_2);
     }
 
     waitframe();

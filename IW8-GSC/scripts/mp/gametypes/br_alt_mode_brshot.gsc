@@ -19,19 +19,19 @@ function init() {
 }
 
 function ref_13380() {
-  var0 = self;
+  var_0 = self;
   level.deletescriptableinstanceaftertime = ref_1337f();
-  var0 scripts\mp\class::loadout_emptycacheofloadout("gamemode");
-  var0 scripts\mp\gametypes\br::searchcircleorigin(0, 1, 0);
-  var0 scripts\mp\gametypes\br_armor::searchcirclesize();
+  var_0 scripts\mp\class::loadout_emptycacheofloadout("gamemode");
+  var_0 scripts\mp\gametypes\br::searchcircleorigin(0, 1, 0);
+  var_0 scripts\mp\gametypes\br_armor::searchcirclesize();
   scripts\mp\gametypes\br_weapons::br_ammo_player_clear();
   scripts\mp\gametypes\br_weapons::br_ammo_give_type(self, "brloot_ammo_12g", 4, 0);
 
   if(!isDefined(self.player_enable_invulnerability)) {
     self.player_enable_invulnerability = 1;
-    var1 = getdvarint("scr_br_give_self_revive_on_spawn", 1);
+    var_1 = getdvarint("scr_br_give_self_revive_on_spawn", 1);
 
-    if(var1) {
+    if(var_1) {
       scripts\mp\gametypes\br_pickups::bdroppingshield(1);
       return;
     }
@@ -39,15 +39,15 @@ function ref_13380() {
     return;
   }
 
-  var1 = getdvarint("scr_br_give_self_revive_on_respawn", 0);
+  var_1 = getdvarint("scr_br_give_self_revive_on_respawn", 0);
 
-  if(var1) {
+  if(var_1) {
     scripts\mp\gametypes\br_pickups::bdroppingshield(1);
     return;
   }
 }
 
 function ref_1337f() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, "loadoutArchetype", "archetype_assault");
 }

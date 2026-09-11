@@ -3,8 +3,8 @@
  * Script: scripts\mp\hud_util.gsc
 ***********************************************/
 
-function setparent(var0) {
-  if(isDefined(self.parent) && self.parent == var0) {
+function setparent(var_0) {
+  if(isDefined(self.parent) && self.parent == var_0) {
     return;
   }
 
@@ -12,7 +12,7 @@ function setparent(var0) {
     removechild(self.parent, self);
   }
 
-  self.parent = var0;
+  self.parent = var_0;
   addchild(self.parent, self);
 
   if(isDefined(self.point)) {
@@ -33,170 +33,170 @@ function removedestroyedchildren() {
   }
 
   self.childchecktime = gettime();
-  var0 = [];
+  var_0 = [];
 
-  foreach(var2 in self.children) {
-    if(!isDefined(var2)) {
+  foreach(var_2 in self.children) {
+    if(!isDefined(var_2)) {
       continue;
     }
 
-    var2.index = var0.size;
-    var0 = var2;
+    var_2.index = var_0.size;
+    var_0 = var_2;
   }
 
-  self.children = var0;
+  self.children = var_0;
 }
 
-function addchild(var0) {
-  var0.index = self.children.size;
-  self.children[self.children.size] = var0;
+function addchild(var_0) {
+  var_0.index = self.children.size;
+  self.children[self.children.size] = var_0;
   removedestroyedchildren();
 }
 
-function removechild(var0) {
-  var0.parent = undefined;
+function removechild(var_0) {
+  var_0.parent = undefined;
 
-  if(self.children[self.children.size - 1] != var0) {
-    self.children[var0.index] = self.children[self.children.size - 1];
-    self.children[var0.index].index = var0.index;
+  if(self.children[self.children.size - 1] != var_0) {
+    self.children[var_0.index] = self.children[self.children.size - 1];
+    self.children[var_0.index].index = var_0.index;
   }
 
   self.children[self.children.size - 1] = undefined;
-  var0.index = undefined;
+  var_0.index = undefined;
 }
 
-function setpoint(var0, var1, var2, var3, var4) {
-  if(!isDefined(var4)) {
-    var4 = 0;
+function setpoint(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_4)) {
+    var_4 = 0;
   }
 
-  var5 = getparent();
+  var_5 = getparent();
 
-  if(var4) {
-    self moveovertime(var4);
+  if(var_4) {
+    self moveovertime(var_4);
   }
 
-  if(!isDefined(var2)) {
-    var2 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  self.xoffset = var2;
+  self.xoffset = var_2;
 
-  if(!isDefined(var3)) {
-    var3 = 0;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  self.yoffset = var3;
-  self.point = var0;
+  self.yoffset = var_3;
+  self.point = var_0;
   self.alignx = "center";
   self.aligny = "middle";
 
-  if(issubstr(var0, "TOP")) {
+  if(issubstr(var_0, "TOP")) {
     self.aligny = "top";
   }
 
-  if(issubstr(var0, "BOTTOM")) {
+  if(issubstr(var_0, "BOTTOM")) {
     self.aligny = "bottom";
   }
 
-  if(issubstr(var0, "LEFT")) {
+  if(issubstr(var_0, "LEFT")) {
     self.alignx = "left";
   }
 
-  if(issubstr(var0, "RIGHT")) {
+  if(issubstr(var_0, "RIGHT")) {
     self.alignx = "right";
   }
 
-  if(!isDefined(var1)) {
-    var1 = var0;
+  if(!isDefined(var_1)) {
+    var_1 = var_0;
   }
 
-  self.relativepoint = var1;
-  var6 = "center_adjustable";
-  var7 = "middle";
+  self.relativepoint = var_1;
+  var_6 = "center_adjustable";
+  var_7 = "middle";
 
-  if(issubstr(var1, "TOP")) {
-    var7 = "top_adjustable";
+  if(issubstr(var_1, "TOP")) {
+    var_7 = "top_adjustable";
   }
 
-  if(issubstr(var1, "BOTTOM")) {
-    var7 = "bottom_adjustable";
+  if(issubstr(var_1, "BOTTOM")) {
+    var_7 = "bottom_adjustable";
   }
 
-  if(issubstr(var1, "LEFT")) {
-    var6 = "left_adjustable";
+  if(issubstr(var_1, "LEFT")) {
+    var_6 = "left_adjustable";
   }
 
-  if(issubstr(var1, "RIGHT")) {
-    var6 = "right_adjustable";
+  if(issubstr(var_1, "RIGHT")) {
+    var_6 = "right_adjustable";
   }
 
-  if(var5 == level.uiparent) {
-    self.horzalign = var6;
-    self.vertalign = var7;
+  if(var_5 == level.uiparent) {
+    self.horzalign = var_6;
+    self.vertalign = var_7;
   } else {
-    self.horzalign = var5.horzalign;
-    self.vertalign = var5.vertalign;
+    self.horzalign = var_5.horzalign;
+    self.vertalign = var_5.vertalign;
   }
 
-  if(scripts\mp\utility\script::strip_suffix(var6, "_adjustable") == var5.alignx) {
-    var8 = 0;
-    var9 = 0;
-  } else if(var8 == "center" || var7.alignx == "center") {
-    var8 = int(var7.width / 2);
+  if(scripts\mp\utility\script::strip_suffix(var_6, "_adjustable") == var_5.alignx) {
+    var_8 = 0;
+    var_9 = 0;
+  } else if(var_8 == "center" || var_7.alignx == "center") {
+    var_8 = int(var_7.width / 2);
 
-    if(var8 == "left_adjustable" || var7.alignx == "right") {
-      var9 = -1;
+    if(var_8 == "left_adjustable" || var_7.alignx == "right") {
+      var_9 = -1;
     } else {
-      var9 = 1;
-    }
-  } else {
-    var8 = var8.width;
-
-    if(var9 == "left_adjustable") {
-      var9 = -1;
-    } else {
-      var9 = 1;
-    }
-  }
-
-  self.x = var9.x + var9 * var9;
-
-  if(scripts\mp\utility\script::strip_suffix(var8, "_adjustable") == var9.aligny) {
-    var10 = 0;
-    var11 = 0;
-  } else if(var9 == "middle" || var8.aligny == "middle") {
-    var10 = int(var8.height / 2);
-
-    if(var9 == "top_adjustable" || var8.aligny == "bottom") {
-      var11 = -1;
-    } else {
-      var11 = 1;
+      var_9 = 1;
     }
   } else {
-    var10 = var10.height;
+    var_8 = var_8.width;
 
-    if(var10 == "top_adjustable") {
-      var11 = -1;
+    if(var_9 == "left_adjustable") {
+      var_9 = -1;
     } else {
-      var11 = 1;
+      var_9 = 1;
     }
   }
 
-  self.y = var11.y + var11 * var11;
+  self.x = var_9.x + var_9 * var_9;
+
+  if(scripts\mp\utility\script::strip_suffix(var_8, "_adjustable") == var_9.aligny) {
+    var_10 = 0;
+    var_11 = 0;
+  } else if(var_9 == "middle" || var_8.aligny == "middle") {
+    var_10 = int(var_8.height / 2);
+
+    if(var_9 == "top_adjustable" || var_8.aligny == "bottom") {
+      var_11 = -1;
+    } else {
+      var_11 = 1;
+    }
+  } else {
+    var_10 = var_10.height;
+
+    if(var_10 == "top_adjustable") {
+      var_11 = -1;
+    } else {
+      var_11 = 1;
+    }
+  }
+
+  self.y = var_11.y + var_11 * var_11;
   self.x += self.xoffset;
   self.y += self.yoffset;
 
   switch (self.elemtype) {
     case "bar":
-      setpointbar(var9, var8, var9, var9);
+      setpointbar(var_9, var_8, var_9, var_9);
       break;
   }
 
   updatechildren();
 }
 
-function setpointbar(var0, var1, var2, var3) {
+function setpointbar(var_0, var_1, var_2, var_3) {
   self.bar.horzalign = self.horzalign;
   self.bar.vertalign = self.vertalign;
   self.bar.alignx = "left";
@@ -220,225 +220,225 @@ function setpointbar(var0, var1, var2, var3) {
   updatebar(self.bar.frac);
 }
 
-function updatebar(var0, var1) {
+function updatebar(var_0, var_1) {
   if(self.elemtype == "bar") {
-    updatebarscale(var0, var1);
+    updatebarscale(var_0, var_1);
     return;
   }
 }
 
-function updatebarscale(var0, var1) {
-  var2 = int(self.width * var0 + 0.5);
+function updatebarscale(var_0, var_1) {
+  var_2 = int(self.width * var_0 + 0.5);
 
-  if(!var2) {
-    var2 = 1;
+  if(!var_2) {
+    var_2 = 1;
   }
 
-  self.bar.frac = var0;
-  self.bar setshader(self.bar.shader, var2, self.height);
+  self.bar.frac = var_0;
+  self.bar setshader(self.bar.shader, var_2, self.height);
 
-  if(isDefined(var1) && var2 < self.width) {
-    if(var1 > 0) {
-      self.bar scaleovertime((1 - var0) / var1, self.width, self.height);
-    } else if(var1 < 0) {
-      self.bar scaleovertime(var0 / -1 * var1, 1, self.height);
+  if(isDefined(var_1) && var_2 < self.width) {
+    if(var_1 > 0) {
+      self.bar scaleovertime((1 - var_0) / var_1, self.width, self.height);
+    } else if(var_1 < 0) {
+      self.bar scaleovertime(var_0 / -1 * var_1, 1, self.height);
     }
   }
 
-  self.bar.rateofchange = var1;
+  self.bar.rateofchange = var_1;
   self.bar.lastupdatetime = gettime();
 }
 
-function createfontstring(var0, var1) {
-  var2 = newclienthudelem(self);
-  var2.elemtype = "font";
-  var2.font = var0;
-  var2.fontscale = var1;
-  var2.basefontscale = var1;
-  var2.x = 0;
-  var2.y = 0;
-  var2.width = 0;
-  var2.height = int(level.fontheight * var1);
-  var2.xoffset = 0;
-  var2.yoffset = 0;
-  var2.children = [];
-  setparent(var2, level.uiparent);
-  var2.hidden = 0;
-  return var2;
+function createfontstring(var_0, var_1) {
+  var_2 = newclienthudelem(self);
+  var_2.elemtype = "font";
+  var_2.font = var_0;
+  var_2.fontscale = var_1;
+  var_2.basefontscale = var_1;
+  var_2.x = 0;
+  var_2.y = 0;
+  var_2.width = 0;
+  var_2.height = int(level.fontheight * var_1);
+  var_2.xoffset = 0;
+  var_2.yoffset = 0;
+  var_2.children = [];
+  setparent(var_2, level.uiparent);
+  var_2.hidden = 0;
+  return var_2;
 }
 
-function createservertimer(var0, var1, var2) {
-  if(isDefined(var2)) {
-    var3 = newteamhudelem(var2);
+function createservertimer(var_0, var_1, var_2) {
+  if(isDefined(var_2)) {
+    var_3 = newteamhudelem(var_2);
   } else {
-    var3 = newhudelem();
+    var_3 = newhudelem();
   }
 
-  var3.elemtype = "timer";
-  var3.font = var1;
-  var3.fontscale = var2;
-  var3.basefontscale = var2;
-  var3.x = 0;
-  var3.y = 0;
-  var3.width = 0;
-  var3.height = int(level.fontheight * var2);
-  var3.xoffset = 0;
-  var3.yoffset = 0;
-  var3.children = [];
-  setparent(var3, level.uiparent);
-  var3.hidden = 0;
-  return var3;
+  var_3.elemtype = "timer";
+  var_3.font = var_1;
+  var_3.fontscale = var_2;
+  var_3.basefontscale = var_2;
+  var_3.x = 0;
+  var_3.y = 0;
+  var_3.width = 0;
+  var_3.height = int(level.fontheight * var_2);
+  var_3.xoffset = 0;
+  var_3.yoffset = 0;
+  var_3.children = [];
+  setparent(var_3, level.uiparent);
+  var_3.hidden = 0;
+  return var_3;
 }
 
-function createtimer(var0, var1) {
-  var2 = newclienthudelem(self);
-  var2.elemtype = "timer";
-  var2.font = var0;
-  var2.fontscale = var1;
-  var2.basefontscale = var1;
-  var2.x = 0;
-  var2.y = 0;
-  var2.width = 0;
-  var2.height = int(level.fontheight * var1);
-  var2.xoffset = 0;
-  var2.yoffset = 0;
-  var2.children = [];
-  setparent(var2, level.uiparent);
-  var2.hidden = 0;
-  return var2;
+function createtimer(var_0, var_1) {
+  var_2 = newclienthudelem(self);
+  var_2.elemtype = "timer";
+  var_2.font = var_0;
+  var_2.fontscale = var_1;
+  var_2.basefontscale = var_1;
+  var_2.x = 0;
+  var_2.y = 0;
+  var_2.width = 0;
+  var_2.height = int(level.fontheight * var_1);
+  var_2.xoffset = 0;
+  var_2.yoffset = 0;
+  var_2.children = [];
+  setparent(var_2, level.uiparent);
+  var_2.hidden = 0;
+  return var_2;
 }
 
-function createicon(var0, var1, var2) {
-  var3 = newclienthudelem(self);
-  var3.elemtype = "icon";
-  var3.x = 0;
-  var3.y = 0;
-  var3.width = var1;
-  var3.height = var2;
-  var3.basewidth = var3.width;
-  var3.baseheight = var3.height;
-  var3.xoffset = 0;
-  var3.yoffset = 0;
-  var3.children = [];
-  setparent(var3, level.uiparent);
-  var3.hidden = 0;
+function createicon(var_0, var_1, var_2) {
+  var_3 = newclienthudelem(self);
+  var_3.elemtype = "icon";
+  var_3.x = 0;
+  var_3.y = 0;
+  var_3.width = var_1;
+  var_3.height = var_2;
+  var_3.basewidth = var_3.width;
+  var_3.baseheight = var_3.height;
+  var_3.xoffset = 0;
+  var_3.yoffset = 0;
+  var_3.children = [];
+  setparent(var_3, level.uiparent);
+  var_3.hidden = 0;
 
-  if(isDefined(var0)) {
-    var3 setshader(var0, var1, var2);
-    var3.shader = var0;
+  if(isDefined(var_0)) {
+    var_3 setshader(var_0, var_1, var_2);
+    var_3.shader = var_0;
   }
 
-  return var3;
+  return var_3;
 }
 
-function createbar(var0, var1, var2, var3) {
-  var4 = newclienthudelem(self);
-  var4.x = 0;
-  var4.y = 0;
-  var4.frac = 0;
-  var4.color = var0;
-  var4.sort = -2;
-  var4.shader = "progress_bar_fill";
-  var4 setshader("progress_bar_fill", var1, var2);
-  var4.hidden = 0;
+function createbar(var_0, var_1, var_2, var_3) {
+  var_4 = newclienthudelem(self);
+  var_4.x = 0;
+  var_4.y = 0;
+  var_4.frac = 0;
+  var_4.color = var_0;
+  var_4.sort = -2;
+  var_4.shader = "progress_bar_fill";
+  var_4 setshader("progress_bar_fill", var_1, var_2);
+  var_4.hidden = 0;
 
-  if(isDefined(var3)) {
-    var4.flashfrac = var3;
+  if(isDefined(var_3)) {
+    var_4.flashfrac = var_3;
   }
 
-  var5 = newclienthudelem(self);
-  var5.elemtype = "bar";
-  var5.width = var1;
-  var5.height = var2;
-  var5.xoffset = 0;
-  var5.yoffset = 0;
-  var5.bar = var4;
-  var5.children = [];
-  var5.sort = -3;
-  var5.color = (0, 0, 0);
-  var5.alpha = 0.5;
-  setparent(var5, level.uiparent);
-  var5 setshader("progress_bar_bg", var1 + 4, var2 + 4);
-  var5.hidden = 0;
-  return var5;
+  var_5 = newclienthudelem(self);
+  var_5.elemtype = "bar";
+  var_5.width = var_1;
+  var_5.height = var_2;
+  var_5.xoffset = 0;
+  var_5.yoffset = 0;
+  var_5.bar = var_4;
+  var_5.children = [];
+  var_5.sort = -3;
+  var_5.color = (0, 0, 0);
+  var_5.alpha = 0.5;
+  setparent(var_5, level.uiparent);
+  var_5 setshader("progress_bar_bg", var_1 + 4, var_2 + 4);
+  var_5.hidden = 0;
+  return var_5;
 }
 
 function getcurrentfraction() {
-  var0 = self.bar.frac;
+  var_0 = self.bar.frac;
 
   if(isDefined(self.bar.rateofchange)) {
-    var0 += (gettime() - self.bar.lastupdatetime) * self.bar.rateofchange;
+    var_0 += (gettime() - self.bar.lastupdatetime) * self.bar.rateofchange;
 
-    if(var0 > 1) {
-      var0 = 1;
+    if(var_0 > 1) {
+      var_0 = 1;
     }
 
-    if(var0 < 0) {
-      var0 = 0;
+    if(var_0 < 0) {
+      var_0 = 0;
     }
   }
 
-  return var0;
+  return var_0;
 }
 
-function createprimaryprogressbar(var0, var1) {
+function createprimaryprogressbar(var_0, var_1) {
   if(isagent(self)) {
     return undefined;
   }
 
-  if(!isDefined(var0)) {
-    var0 = 0;
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  if(!isDefined(var1)) {
-    var1 = -25;
+  if(!isDefined(var_1)) {
+    var_1 = -25;
   }
 
   if(self issplitscreenplayer()) {
-    var1 += 20;
+    var_1 += 20;
   }
 
-  var2 = createbar((1, 1, 1), level.primaryprogressbarwidth, level.primaryprogressbarheight);
-  setpoint(var2, "CENTER", undefined, level.primaryprogressbarx + var0, level.primaryprogressbary + var1);
-  return var2;
+  var_2 = createbar((1, 1, 1), level.primaryprogressbarwidth, level.primaryprogressbarheight);
+  setpoint(var_2, "CENTER", undefined, level.primaryprogressbarx + var_0, level.primaryprogressbary + var_1);
+  return var_2;
 }
 
-function createprimaryprogressbartext(var0, var1, var2, var3) {
+function createprimaryprogressbartext(var_0, var_1, var_2, var_3) {
   if(isagent(self)) {
     return undefined;
   }
 
-  if(!isDefined(var0)) {
-    var0 = 0;
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  if(!isDefined(var1)) {
-    var1 = -25;
+  if(!isDefined(var_1)) {
+    var_1 = -25;
   }
 
   if(self issplitscreenplayer()) {
-    var1 += 20;
+    var_1 += 20;
   }
 
-  var4 = level.primaryprogressbarfontsize;
-  var5 = "default";
+  var_4 = level.primaryprogressbarfontsize;
+  var_5 = "default";
 
-  if(isDefined(var2)) {
-    var4 = var2;
+  if(isDefined(var_2)) {
+    var_4 = var_2;
   }
 
-  if(isDefined(var3)) {
-    var5 = var3;
+  if(isDefined(var_3)) {
+    var_5 = var_3;
   }
 
-  var6 = createfontstring(var5, var4);
-  setpoint(var6, "CENTER", undefined, level.primaryprogressbartextx + var0, level.primaryprogressbartexty + var1);
-  var6.sort = -1;
-  return var6;
+  var_6 = createfontstring(var_5, var_4);
+  setpoint(var_6, "CENTER", undefined, level.primaryprogressbartextx + var_0, level.primaryprogressbartexty + var_1);
+  var_6.sort = -1;
+  return var_6;
 }
 
-function setflashfrac(var0) {
-  self.bar.flashfrac = var0;
+function setflashfrac(var_0) {
+  self.bar.flashfrac = var_0;
 }
 
 function hideelem() {
@@ -522,16 +522,16 @@ function flashthread() {
 }
 
 function destroyelem() {
-  var0 = [];
+  var_0 = [];
 
-  for(var1 = 0; var1 < self.children.size; var1++) {
-    if(isDefined(self.children[var1])) {
-      var0 = self.children[var1];
+  for(var_1 = 0; var_1 < self.children.size; var_1++) {
+    if(isDefined(self.children[var_1])) {
+      var_0 = self.children[var_1];
     }
   }
 
-  for(var1 = 0; var1 < var0.size; var1++) {
-    setparent(var0[var1], getparent());
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    setparent(var_0[var_1], getparent());
   }
 
   if(self.elemtype == "bar" || self.elemtype == "bar_shader") {
@@ -541,36 +541,36 @@ function destroyelem() {
   self destroy();
 }
 
-function seticonshader(var0) {
-  self setshader(var0, self.width, self.height);
-  self.shader = var0;
+function seticonshader(var_0) {
+  self setshader(var_0, self.width, self.height);
+  self.shader = var_0;
 }
 
-function geticonshader(var0) {
+function geticonshader(var_0) {
   return self.shader;
 }
 
-function seticonsize(var0, var1) {
-  self setshader(self.shader, var0, var1);
+function seticonsize(var_0, var_1) {
+  self setshader(self.shader, var_0, var_1);
 }
 
-function setwidth(var0) {
-  self.width = var0;
+function setwidth(var_0) {
+  self.width = var_0;
 }
 
-function setheight(var0) {
-  self.height = var0;
+function setheight(var_0) {
+  self.height = var_0;
 }
 
-function setsize(var0, var1) {
-  self.width = var0;
-  self.height = var1;
+function setsize(var_0, var_1) {
+  self.width = var_0;
+  self.height = var_1;
 }
 
 function updatechildren() {
-  for(var0 = 0; var0 < self.children.size; var0++) {
-    var1 = self.children[var0];
-    setpoint(var1, var1.point, var1.relativepoint, var1.xoffset, var1.yoffset);
+  for(var_0 = 0; var_0 < self.children.size; var_0++) {
+    var_1 = self.children[var_0];
+    setpoint(var_1, var_1.point, var_1.relativepoint, var_1.xoffset, var_1.yoffset);
   }
 }
 
@@ -588,41 +588,41 @@ function transitionreset() {
   self.alpha = 0;
 }
 
-function transitionzoomin(var0) {
+function transitionzoomin(var_0) {
   switch (self.elemtype) {
     case "timer":
     case "font":
       self.fontscale = 6.3;
-      self changefontscaleovertime(var0);
+      self changefontscaleovertime(var_0);
       self.fontscale = self.basefontscale;
       break;
     case "icon":
       self setshader(self.shader, self.width * 6, self.height * 6);
-      self scaleovertime(var0, self.width, self.height);
+      self scaleovertime(var_0, self.width, self.height);
       break;
   }
 }
 
-function transitionpulsefxin(var0, var1) {
-  var2 = int(var0) * 1000;
-  var3 = int(var1) * 1000;
+function transitionpulsefxin(var_0, var_1) {
+  var_2 = int(var_0) * 1000;
+  var_3 = int(var_1) * 1000;
 
   switch (self.elemtype) {
     case "timer":
     case "font":
-      self setpulsefx(var2 + 250, var3 + var2, var2 + 250);
+      self setpulsefx(var_2 + 250, var_3 + var_2, var_2 + 250);
       break;
     default:
       break;
   }
 }
 
-function transitionslidein(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = "left";
+function transitionslidein(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = "left";
   }
 
-  switch (var1) {
+  switch (var_1) {
     case "left":
       self.x += 1000;
       break;
@@ -637,54 +637,54 @@ function transitionslidein(var0, var1) {
       break;
   }
 
-  self moveovertime(var0);
+  self moveovertime(var_0);
   self.x = self.xoffset;
   self.y = self.yoffset;
 }
 
-function transitionslideout(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = "left";
+function transitionslideout(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = "left";
   }
 
-  var2 = self.xoffset;
-  var3 = self.yoffset;
+  var_2 = self.xoffset;
+  var_3 = self.yoffset;
 
-  switch (var1) {
+  switch (var_1) {
     case "left":
-      var2 += 1000;
+      var_2 += 1000;
       break;
     case "right":
-      var2 -= 1000;
+      var_2 -= 1000;
       break;
     case "up":
-      var3 -= 1000;
+      var_3 -= 1000;
       break;
     case "down":
-      var3 += 1000;
+      var_3 += 1000;
       break;
   }
 
   self.alpha = 1;
-  self moveovertime(var0);
-  self.x = var2;
-  self.y = var3;
+  self moveovertime(var_0);
+  self.x = var_2;
+  self.y = var_3;
 }
 
-function transitionzoomout(var0) {
+function transitionzoomout(var_0) {
   switch (self.elemtype) {
     case "timer":
     case "font":
-      self changefontscaleovertime(var0);
+      self changefontscaleovertime(var_0);
       self.fontscale = 6.3;
     case "icon":
-      self scaleovertime(var0, self.width * 6, self.height * 6);
+      self scaleovertime(var_0, self.width * 6, self.height * 6);
       break;
   }
 }
 
-function transitionfadein(var0) {
-  self fadeovertime(var0);
+function transitionfadein(var_0) {
+  self fadeovertime(var_0);
 
   if(isDefined(self.maxalpha)) {
     self.alpha = self.maxalpha;
@@ -694,31 +694,31 @@ function transitionfadein(var0) {
   self.alpha = 1;
 }
 
-function transitionfadeout(var0) {
+function transitionfadeout(var_0) {
   self fadeovertime(0.15);
   self.alpha = 0;
 }
 
-function teamplayercardsplash(var0, var1, var2, var3, var4) {
+function teamplayercardsplash(var_0, var_1, var_2, var_3, var_4) {
   if(level.hardcoremode) {
     return;
   }
 
-  if(!canshowsplash(var0)) {
+  if(!canshowsplash(var_0)) {
     return;
   }
 
   if(scripts\cp_mp\utility\game_utility::update_ai_volumes()) {
-    var5 = scripts\mp\utility\teams::getteamdata(var1.team, "players");
+    var_5 = scripts\mp\utility\teams::getteamdata(var_1.team, "players");
 
-    if(isDefined(var5)) {
-      foreach(var7 in var5) {
-        if(!isDefined(var7) || !scripts\mp\utility\player::isreallyalive(var7) || var7 scripts\mp\gametypes\br_public::isplayeringulag()) {
+    if(isDefined(var_5)) {
+      foreach(var_7 in var_5) {
+        if(!isDefined(var_7) || !scripts\mp\utility\player::isreallyalive(var_7) || var_7 scripts\mp\gametypes\br_public::isplayeringulag()) {
           continue;
         }
 
-        if(!istrue(var4)) {
-          var7 thread scripts\mp\hud_message::showsplash(var0, var3, var1);
+        if(!istrue(var_4)) {
+          var_7 thread scripts\mp\hud_message::showsplash(var_0, var_3, var_1);
         }
       }
 
@@ -728,93 +728,93 @@ function teamplayercardsplash(var0, var1, var2, var3, var4) {
     return;
   }
 
-  foreach(var7 in level.players) {
-    if(var7 ismlgspectator()) {
-      var10 = var7 getspectatingplayer();
+  foreach(var_7 in level.players) {
+    if(var_7 ismlgspectator()) {
+      var_10 = var_7 getspectatingplayer();
 
-      if(isDefined(var10) && isDefined(var5) && var10.team != var5) {
+      if(isDefined(var_10) && isDefined(var_5) && var_10.team != var_5) {
         continue;
       }
     } else {
-      if(isDefined(var5) && var7.team != var5) {
+      if(isDefined(var_5) && var_7.team != var_5) {
         continue;
       }
 
-      if(!isPlayer(var7)) {
+      if(!isPlayer(var_7)) {
         continue;
       }
     }
 
-    if(!isDefined(var7)) {
-      var7 thread scripts\mp\hud_message::showsplash(var3, var6, var4);
-    }
-  }
-}
-
-function iskillstreakcalloutsplash(var0) {
-  var1 = 0;
-
-  if(issubstr(var0, "used_")) {
-    var2 = strtok(var0, "_");
-    var3 = undefined;
-
-    foreach(var5 in var2) {
-      if(var5 == "used") {
-        continue;
-      }
-
-      if(!isDefined(var3)) {
-        var3 = var5;
-        continue;
-      }
-
-      var3 = var3 + "_" + var5;
-    }
-
-    if(isDefined(var3) && isDefined(level.killstreakglobals.streaktable.tabledatabyref[var3])) {
-      var1 = 1;
+    if(!isDefined(var_7)) {
+      var_7 thread scripts\mp\hud_message::showsplash(var_3, var_6, var_4);
     }
   }
-
-  return var1;
 }
 
-function iseventcalloutsplash(var0) {
-  return issubstr(var0, "callout_");
+function iskillstreakcalloutsplash(var_0) {
+  var_1 = 0;
+
+  if(issubstr(var_0, "used_")) {
+    var_2 = strtok(var_0, "_");
+    var_3 = undefined;
+
+    foreach(var_5 in var_2) {
+      if(var_5 == "used") {
+        continue;
+      }
+
+      if(!isDefined(var_3)) {
+        var_3 = var_5;
+        continue;
+      }
+
+      var_3 = var_3 + "_" + var_5;
+    }
+
+    if(isDefined(var_3) && isDefined(level.killstreakglobals.streaktable.tabledatabyref[var_3])) {
+      var_1 = 1;
+    }
+  }
+
+  return var_1;
 }
 
-function getbaseeventcalloutsplash(var0) {
-  var1 = undefined;
-  var2 = strtok(var0, "_");
+function iseventcalloutsplash(var_0) {
+  return issubstr(var_0, "callout_");
+}
 
-  foreach(var4 in var2) {
-    if(var4 == "callout") {
+function getbaseeventcalloutsplash(var_0) {
+  var_1 = undefined;
+  var_2 = strtok(var_0, "_");
+
+  foreach(var_4 in var_2) {
+    if(var_4 == "callout") {
       continue;
     }
 
-    if(!isDefined(var1)) {
-      var1 = var4;
+    if(!isDefined(var_1)) {
+      var_1 = var_4;
       continue;
     }
 
-    var1 = var1 + "_" + var4;
+    var_1 = var_1 + "_" + var_4;
   }
 
-  return var1;
+  return var_1;
 }
 
-function canshowsplash(var0) {
-  var1 = 1;
+function canshowsplash(var_0) {
+  var_1 = 1;
 
   switch (scripts\mp\utility\game::getgametype()) {
     case "brtdm":
     case "arm":
-      if(iskillstreakcalloutsplash(var0)) {
-        var1 = 0;
-      } else if(iseventcalloutsplash(var0)) {
-        var2 = getbaseeventcalloutsplash(var0);
+      if(iskillstreakcalloutsplash(var_0)) {
+        var_1 = 0;
+      } else if(iseventcalloutsplash(var_0)) {
+        var_2 = getbaseeventcalloutsplash(var_0);
 
-        switch (var2) {
+        switch (var_2) {
           case "firstblood":
           case "9xkill":
           case "8xkill":
@@ -823,17 +823,17 @@ function canshowsplash(var0) {
           case "5xkill":
           case "4xkill":
           case "3xkill":
-            var1 = 0;
+            var_1 = 0;
             break;
         }
       }
 
       break;
     case "br":
-      if(iseventcalloutsplash(var0)) {
-        var2 = getbaseeventcalloutsplash(var0);
+      if(iseventcalloutsplash(var_0)) {
+        var_2 = getbaseeventcalloutsplash(var_0);
 
-        switch (var2) {
+        switch (var_2) {
           case "firstblood":
           case "9xkill":
           case "8xkill":
@@ -842,7 +842,7 @@ function canshowsplash(var0) {
           case "5xkill":
           case "4xkill":
           case "3xkill":
-            var1 = 0;
+            var_1 = 0;
             break;
         }
       }
@@ -850,5 +850,5 @@ function canshowsplash(var0) {
       break;
   }
 
-  return var1;
+  return var_1;
 }

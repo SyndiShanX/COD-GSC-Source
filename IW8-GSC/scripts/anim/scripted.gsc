@@ -17,12 +17,12 @@ function main() {
 
   if(isDefined(self.asm.archetype) || isDefined(self.animationarchetype)) {
     if(isDefined(self.codescripted["pitch_min"])) {
-      var0 = scripts\asm\asm::asm_getheadlookknobifexists();
+      var_0 = scripts\asm\asm::asm_getheadlookknobifexists();
 
-      if(isDefined(var0)) {
+      if(isDefined(var_0)) {
         self.lookatatrnode = self.codescripted["lookat_atr_node"];
         self setanimlookatranges(self.codescripted["pitch_min"], self.codescripted["pitch_max"], self.codescripted["yaw_min"], self.codescripted["yaw_max"]);
-        self setanim(var0, 1, 0.2, 1, self.lookatatrnode);
+        self setanim(var_0, 1, 0.2, 1, self.lookatatrnode);
       }
     }
   }
@@ -48,26 +48,26 @@ function main() {
   self waittill("killanimscript");
 }
 
-function init(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12) {
-  self.codescripted["notifyName"] = var0;
-  self.codescripted["origin"] = var1;
-  self.codescripted["angles"] = var2;
-  self.codescripted["anim"] = var3;
+function init(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
+  self.codescripted["notifyName"] = var_0;
+  self.codescripted["origin"] = var_1;
+  self.codescripted["angles"] = var_2;
+  self.codescripted["anim"] = var_3;
 
-  if(isDefined(var4)) {
-    self.codescripted["animMode"] = var4;
+  if(isDefined(var_4)) {
+    self.codescripted["animMode"] = var_4;
   } else {
     self.codescripted["animMode"] = "normal";
   }
 
-  self.codescripted["goalTime"] = var6;
-  self.codescripted["animRate"] = var7;
-  self.codescripted["root"] = var5;
-  self.codescripted["pitch_min"] = var8;
-  self.codescripted["pitch_max"] = var9;
-  self.codescripted["yaw_min"] = var10;
-  self.codescripted["yaw_max"] = var11;
-  self.codescripted["lookat_atr_node"] = var12;
+  self.codescripted["goalTime"] = var_6;
+  self.codescripted["animRate"] = var_7;
+  self.codescripted["root"] = var_5;
+  self.codescripted["pitch_min"] = var_8;
+  self.codescripted["pitch_max"] = var_9;
+  self.codescripted["yaw_min"] = var_10;
+  self.codescripted["yaw_max"] = var_11;
+  self.codescripted["lookat_atr_node"] = var_12;
 
   switch (self.unittype) {
     case "dog":

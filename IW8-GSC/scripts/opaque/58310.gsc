@@ -17,42 +17,42 @@ function ref_13d79() {
   self.parts = getEntArray(self.script_linkname, "script_linkto");
   self.parts = scripts\engine\utility::array_remove(self.parts, self);
 
-  foreach(var1 in self.parts) {
-    switch (var1.script_noteworthy) {
+  foreach(var_1 in self.parts) {
+    switch (var_1.script_noteworthy) {
       case "target_plate":
-        self.plate = var1;
+        self.plate = var_1;
         break;
       case "target_plate_dest":
-        self.plate = var1;
-        self.ref_123b5 = var1;
+        self.plate = var_1;
+        self.ref_123b5 = var_1;
         break;
       case "target_arm":
-        self.arm = var1;
+        self.arm = var_1;
         break;
       case "target_base":
-        self.base = var1;
+        self.base = var_1;
         break;
       case "target_wheels":
-        self.wheels = var1;
+        self.wheels = var_1;
         break;
       case "target_aim_assist":
-        self.aim_assist = var1;
+        self.aim_assist = var_1;
         break;
       case "target_collision":
-        self.collision = var1;
+        self.collision = var_1;
         break;
       case "target_collision_down":
-        self.collision_down = var1;
+        self.collision_down = var_1;
         break;
       case "target_collision_up":
-        self.collision_up = var1;
+        self.collision_up = var_1;
         break;
       default:
         break;
     }
 
-    var1.target = "null";
-    var1.targetname = "null";
+    var_1.target = "null";
+    var_1.targetname = "null";
   }
 
   self.plate linkTo(self);
@@ -112,40 +112,40 @@ function ref_13d79() {
 }
 
 function gettargetarray() {
-  var0 = ["standard_target", "standard_target_180", "standard_target_civilian", "lean_target", "lean_target_civilian", "moving_target", "moving_target_civilian"];
-  var1 = [];
+  var_0 = ["standard_target", "standard_target_180", "standard_target_civilian", "lean_target", "lean_target_civilian", "moving_target", "moving_target_civilian"];
+  var_1 = [];
 
-  for(var2 = 0; var2 < var0.size; var2++) {
-    var3 = scripts\engine\utility::getStructArray(var0[var2], "script_noteworthy");
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    var_3 = scripts\engine\utility::getStructArray(var_0[var_2], "script_noteworthy");
 
-    foreach(var5 in var3[var2]) {
-      var6 = spawn("script_origin", var5.origin);
-      var6.angles = var5.angles;
-      var6.script_gameobjectname = var5.script_gameobjectname;
-      var6.script_linkname = var5.script_linkname;
-      var6.script_noteworthy = var5.script_noteworthy;
-      var6.target = var5.target;
-      var6.targetname = var5.targetname;
+    foreach(var_5 in var_3[var_2]) {
+      var_6 = spawn("script_origin", var_5.origin);
+      var_6.angles = var_5.angles;
+      var_6.script_gameobjectname = var_5.script_gameobjectname;
+      var_6.script_linkname = var_5.script_linkname;
+      var_6.script_noteworthy = var_5.script_noteworthy;
+      var_6.target = var_5.target;
+      var_6.targetname = var_5.targetname;
     }
   }
 
-  for(var2 = 0; var2 < var0.size; var2++) {
-    var1 = getEntArray(var0[var2], "script_noteworthy");
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    var_1 = getEntArray(var_0[var_2], "script_noteworthy");
   }
 
-  return scripts\engine\utility::array_combine_multiple(var1);
+  return scripts\engine\utility::array_combine_multiple(var_1);
 }
 
 function ref_13d72() {
-  var0 = undefined;
+  var_0 = undefined;
 
   if(isDefined(self.ref_123b5)) {
-    var1 = "trial_sfx_target_report_clay_smash";
-    var0 = level.start_area_fx;
+    var_1 = "trial_sfx_target_report_clay_smash";
+    var_0 = level.start_area_fx;
     goto LOC_00000027;
   }
 
-  var1 = "trial_sfx_target_report_metal_light";
+  var_1 = "trial_sfx_target_report_metal_light";
 
   for(;;) {
     self.activated = 0;
@@ -154,8 +154,8 @@ function ref_13d72() {
       waitframe();
     }
 
-    self.plate waittill("damage", var2, var3, var4, var5, var6, var7, var8, var9, var10, var11);
-    self.plate playSound(var1);
+    self.plate waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
+    self.plate playSound(var_1);
 
     if(self.is_civilian == 1) {
       level.player thread _tablethide::ref_13d4b(self, 0, 1, 0);
@@ -165,7 +165,7 @@ function ref_13d72() {
 
     self.activated = 1;
 
-    if(var6 == "MOD_MELEE") {
+    if(var_6 == "MOD_MELEE") {
       level.player notify("fake_weapon_fired");
     }
 
@@ -175,12 +175,12 @@ function ref_13d72() {
       self[[level.ref_13d73]]();
     }
 
-    if(isDefined(level.ref_13d76) && self.plate tagexists("tag_head") && distance(self.plate gettagorigin("tag_head"), var5) <= 5) {
+    if(isDefined(level.ref_13d76) && self.plate tagexists("tag_head") && distance(self.plate gettagorigin("tag_head"), var_5) <= 5) {
       self[[level.ref_13d76]]();
     }
 
-    if(isDefined(var1)) {
-      playFX(var1, var5);
+    if(isDefined(var_1)) {
+      playFX(var_1, var_5);
     }
 
     if(isDefined(self.ref_123b5)) {
@@ -198,8 +198,8 @@ function ref_13d72() {
   }
 }
 
-function ref_13d74(var0) {
-  if(var0 == "up") {
+function ref_13d74(var_0) {
+  if(var_0 == "up") {
     if(isDefined(self.script_delay)) {
       wait self.script_delay;
     }
@@ -223,7 +223,7 @@ function ref_13d74(var0) {
     }
 
     self.state_up = 1;
-    var1 = 1;
+    var_1 = 1;
   } else {
     self.plate setCanDamage(0);
 
@@ -244,32 +244,32 @@ function ref_13d74(var0) {
     }
 
     self.state_up = 0;
-    var1 = -1;
+    var_1 = -1;
   }
 
-  var2 = undefined;
-  var3 = undefined;
+  var_2 = undefined;
+  var_3 = undefined;
 
   switch (self.script_noteworthy) {
     case "standard_target_civilian":
     case "moving_target_civilian":
     case "moving_target":
     case "standard_target":
-      var3 = 90;
-      var2 = 0.2;
+      var_3 = 90;
+      var_2 = 0.2;
       break;
     case "lean_target_civilian":
     case "lean_target":
-      var3 = 30;
-      var2 = 0.15;
+      var_3 = 30;
+      var_2 = 0.15;
       break;
     case "standard_target_180":
-      var3 = 180;
-      var2 = 0.4;
+      var_3 = 180;
+      var_2 = 0.4;
       break;
     default:
-      var3 = 90;
-      var2 = 0.2;
+      var_3 = 90;
+      var_2 = 0.2;
       break;
   }
 
@@ -279,19 +279,19 @@ function ref_13d74(var0) {
     waitframe();
   }
 
-  if(var1 == "up") {
+  if(var_1 == "up") {
     self playsoundonmovingent("trial_sfx_target_flipup");
   }
 
   if(self.thermitestuckpains[2] != 0) {
-    self rotateYaw(-1 * self.thermitestuckpains[2] * var3 * var1, var2);
+    self rotateYaw(-1 * self.thermitestuckpains[2] * var_3 * var_1, var_2);
   } else {
-    self rotatepitch(var3 * var1, var2);
+    self rotatepitch(var_3 * var_1, var_2);
   }
 
-  wait var2;
+  wait var_2;
 
-  if(var1 == "down") {
+  if(var_1 == "down") {
     waitframe();
     self playsoundonmovingent("trial_sfx_target_flipdown");
     self.angles = self.down_angles;
@@ -309,10 +309,10 @@ function ref_13d55() {
 
   self.mover_ends = scripts\engine\utility::getStructArray(self.mover.targetname, "target");
   self.mover_ends = sortbydistance(self.mover_ends, self.mover.origin);
-  var0 = self.mover.origin - self.origin;
-  self.mover.origin += var0;
-  self.mover_ends[0].origin += var0;
-  self.mover_ends[1].origin += var0;
+  var_0 = self.mover.origin - self.origin;
+  self.mover.origin += var_0;
+  self.mover_ends[0].origin += var_0;
+  self.mover_ends[1].origin += var_0;
   self.moveforward = 1;
   self.moving = 0;
 
@@ -369,9 +369,9 @@ function ref_13d70() {
   self.arm setCanDamage(1);
 
   for(;;) {
-    self.arm waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+    self.arm waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-    if(var4 == "MOD_EXPLOSIVE" || var4 == "MOD_GRENADE" || var4 == "MOD_GRENADE_SPLASH" && istrue(self.state_up)) {
+    if(var_4 == "MOD_EXPLOSIVE" || var_4 == "MOD_GRENADE" || var_4 == "MOD_GRENADE_SPLASH" && istrue(self.state_up)) {
       self.plate dodamage(1, self.plate.origin);
     }
   }
@@ -381,22 +381,22 @@ function ref_13d78() {
   waitframe();
 
   if(isDefined(self.targetname)) {
-    var0 = getEntArray(self.targetname, "target");
+    var_0 = getEntArray(self.targetname, "target");
     goto LOC_00000022;
   }
 
-  var0 = [];
+  var_0 = [];
 
   for(;;) {
-    var1 = 1;
+    var_1 = 1;
 
-    foreach(var3 in var0) {
-      if(var3.activated == 0) {
-        var1 = 0;
+    foreach(var_3 in var_0) {
+      if(var_3.activated == 0) {
+        var_1 = 0;
       }
     }
 
-    if(var1 == 1) {
+    if(var_1 == 1) {
       ref_13d74("up");
       level waittill("course_ended");
     }
@@ -406,7 +406,7 @@ function ref_13d78() {
 }
 
 function ref_13d82() {
-  var0 = getEntArray("end_checkpoint", "script_noteworthy");
+  var_0 = getEntArray("end_checkpoint", "script_noteworthy");
 
   for(;;) {
     self.activated = 0;
@@ -428,7 +428,7 @@ function ref_13d82() {
       for(;;) {
         self waittill("trigger");
 
-        if(break_window_glass(var0)) {
+        if(break_window_glass(var_0)) {
           break;
         }
       }
@@ -447,9 +447,9 @@ function ref_13d82() {
   }
 }
 
-function break_window_glass(var0) {
-  foreach(var2 in var0) {
-    if(!var2.activated) {
+function break_window_glass(var_0) {
+  foreach(var_2 in var_0) {
+    if(!var_2.activated) {
       return false;
     }
   }

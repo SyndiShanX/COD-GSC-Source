@@ -38,58 +38,58 @@ function init() {
   level.player thread scripts\sp\door_internal::door_watch_unresolved_collision_count();
   scripts\game\sp\door::init();
   thread scripts\sp\door_internal::door_post_load();
-  var0 = scripts\engine\utility::getStructArray("interactive_window", "targetname");
-  scripts\engine\utility::array_thread(var0, &scripts\sp\door_internal::init_window);
+  var_0 = scripts\engine\utility::getStructArray("interactive_window", "targetname");
+  scripts\engine\utility::array_thread(var_0, &scripts\sp\door_internal::init_window);
 }
 
-function get_interactive_door(var0) {
+function get_interactive_door(var_0) {
   scripts\engine\utility::flag_wait("interactive_doors_ready");
-  var1 = [];
+  var_1 = [];
 
-  foreach(var3 in level.interactive_doors.ents) {
-    if(isDefined(var3.targetname) && var3.targetname == var0) {
-      var1 = var3;
+  foreach(var_3 in level.interactive_doors.ents) {
+    if(isDefined(var_3.targetname) && var_3.targetname == var_0) {
+      var_1 = var_3;
     }
   }
 
-  if(!var1.size) {
+  if(!var_1.size) {
     return undefined;
   }
 
-  if(var1.size == 1) {
-    return var1[0];
+  if(var_1.size == 1) {
+    return var_1[0];
   }
 }
 
-function get_interactive_door_array(var0) {
+function get_interactive_door_array(var_0) {
   scripts\engine\utility::flag_wait("interactive_doors_ready");
-  var1 = [];
+  var_1 = [];
 
-  foreach(var3 in level.interactive_doors.ents) {
-    if(isDefined(var3.targetname) && var3.targetname == var0) {
-      var1 = var3;
+  foreach(var_3 in level.interactive_doors.ents) {
+    if(isDefined(var_3.targetname) && var_3.targetname == var_0) {
+      var_1 = var_3;
     }
   }
 
-  if(!var1.size) {
+  if(!var_1.size) {
     return undefined;
   }
 
-  return var1;
+  return var_1;
 }
 
-function unlock_all_doors(var0) {
+function unlock_all_doors(var_0) {
   scripts\engine\utility::flag_wait("interactive_doors_ready");
 
-  foreach(var2 in level.interactive_doors.ents) {
-    if(var2.locked) {
-      unlock_door(var2, var0);
+  foreach(var_2 in level.interactive_doors.ents) {
+    if(var_2.locked) {
+      unlock_door(var_2, var_0);
     }
   }
 }
 
-function unlock_door(var0) {
-  if(isDefined(var0) && !var0) {
+function unlock_door(var_0) {
+  if(isDefined(var_0) && !var_0) {
     return;
   }
 
@@ -107,7 +107,7 @@ function unlock_door(var0) {
   clear_navobstacle();
 
   if(isDefined(self.doubledoorother) && self.doubledoorother.locked) {
-    unlock_door(self.doubledoorother, var0);
+    unlock_door(self.doubledoorother, var_0);
     return;
   }
 }
@@ -146,62 +146,62 @@ function remove_open_ability() {
   remove_open_prompts();
 }
 
-function should_open_left(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = scripts\engine\utility::ter_op(isDefined(self.opener), self.opener, level.player);
+function should_open_left(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = scripts\engine\utility::ter_op(isDefined(self.opener), self.opener, level.player);
   }
 
-  var2 = undefined;
-  var3 = self.origin;
+  var_2 = undefined;
+  var_3 = self.origin;
 
-  if(!isDefined(var0)) {
-    var0 = vectortoangles(self.forward);
+  if(!isDefined(var_0)) {
+    var_0 = vectortoangles(self.forward);
   }
 
   if(isDefined(self.pivot_ent)) {
-    var3 = self.pivot_ent.origin;
-    var0 = self.pivot_ent.angles;
+    var_3 = self.pivot_ent.origin;
+    var_0 = self.pivot_ent.angles;
   }
 
-  var4 = anglestoright(var0);
-  var5 = vectorNormalize(var1.origin - var3);
-  var6 = vectordot(var4, var5);
+  var_4 = anglestoright(var_0);
+  var_5 = vectorNormalize(var_1.origin - var_3);
+  var_6 = vectordot(var_4, var_5);
 
-  if(var6 > 0) {
+  if(var_6 > 0) {
     return 1;
   }
 
   return 0;
 }
 
-function create_open_interact_hint(var0) {
-  var1 = var0;
+function create_open_interact_hint(var_0) {
+  var_1 = var_0;
 
-  if(!isDefined(var1)) {
-    var1 = self.custom_hint_text;
+  if(!isDefined(var_1)) {
+    var_1 = self.custom_hint_text;
 
-    if(!isDefined(var1)) {
+    if(!isDefined(var_1)) {
       if(self.door scripts\sp\door_internal::door_bashable_by_player(1)) {
-        var1 = &"SCRIPT/DOOR_HINT_USE";
+        var_1 = &"SCRIPT/DOOR_HINT_USE";
       } else {
-        var1 = &"SCRIPT/DOOR_HINT_USE_NO_BASH";
+        var_1 = &"SCRIPT/DOOR_HINT_USE_NO_BASH";
       }
     }
   }
 
   if(!istrue(self.openinteract) || !isDefined(self.cursor_hint_ent)) {
     if(!istrue(self.no_open_interact)) {
-      scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), var1, 45, 200 * level.interactive_doors.hint_dist_scale, 55 * level.interactive_doors.hint_dist_scale, 0);
+      scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), var_1, 45, 200 * level.interactive_doors.hint_dist_scale, 55 * level.interactive_doors.hint_dist_scale, 0);
       self.cursor_hint_ent setusewhenhandsoccupied(1);
       self.cursor_hint_ent.door = self.door;
       self.openinteract = 1;
     }
   } else if(!scripts\engine\sp\utility::in_realism_mode()) {
-    self.cursor_hint_ent setHintString(var1);
+    self.cursor_hint_ent setHintString(var_1);
   }
 
-  if(isDefined(var0)) {
-    self.custom_hint_text = var0;
+  if(isDefined(var_0)) {
+    self.custom_hint_text = var_0;
     return;
   }
 }
@@ -215,7 +215,7 @@ function remove_open_interact_hint() {
   self.no_open_interact = 1;
 }
 
-function door_ajar(var0) {
+function door_ajar(var_0) {
   if(isDefined(self.door_ajar_custom_func)) {
     [[self.door_ajar_custom_func]]();
   }
@@ -223,16 +223,16 @@ function door_ajar(var0) {
   self.ajar = 1;
 
   if(isDefined(self.ajar_opener)) {
-    var0 = self.ajar_opener;
-  } else if(!isDefined(var0)) {
-    var0 = level.player;
+    var_0 = self.ajar_opener;
+  } else if(!isDefined(var_0)) {
+    var_0 = level.player;
   }
 
-  if(isPlayer(var0)) {
+  if(isPlayer(var_0)) {
     scripts\sp\door_internal::stealth_broadcast(40, "window_open");
   }
 
-  self.opener = var0;
+  self.opener = var_0;
   self.open_left = should_open_left();
   scripts\sp\door_internal::set_pivot_point(self.open_left);
 
@@ -255,25 +255,25 @@ function door_ajar(var0) {
     return;
   }
 
-  var1 = 1.5;
-  var2 = 9;
+  var_1 = 1.5;
+  var_2 = 9;
 
   if(!self.open_left) {
-    var2 *= -1;
+    var_2 *= -1;
   }
 
   level.player playRumbleOnEntity("damage_heavy");
-  var3 = scripts\sp\door_internal::get_door_audio_material();
-  var4 = "scrpt_door_" + var3 + "_open_soft";
+  var_3 = scripts\sp\door_internal::get_door_audio_material();
+  var_4 = "scrpt_door_" + var_3 + "_open_soft";
 
-  if(soundexists(var4)) {
-    self playSound(var4);
+  if(soundexists(var_4)) {
+    self playSound(var_4);
   }
 
   self.pivoting = 1;
-  self.pivot_ent rotateYaw(var2, var1, var1 * 0.25, var1 * 0.75);
-  thread scripts\engine\sp\utility::notify_delay("ajar", var1);
-  wait var1;
+  self.pivot_ent rotateYaw(var_2, var_1, var_1 * 0.25, var_1 * 0.75);
+  thread scripts\engine\sp\utility::notify_delay("ajar", var_1);
+  wait var_1;
   self.pivoting = undefined;
 }
 
@@ -285,25 +285,25 @@ function get_door_angles() {
   return self.true_start_angles;
 }
 
-function angle_diff(var0, var1) {
-  var2 = angleclamp180(var0 - var1);
-  return var2;
+function angle_diff(var_0, var_1) {
+  var_2 = angleclamp180(var_0 - var_1);
+  return var_2;
 }
 
-function door_bash_open(var0) {
+function door_bash_open(var_0) {
   self endon("entitydeleted");
 
   if(istrue(self.bashed_full)) {
     return;
   }
 
-  if(!isDefined(var0)) {
-    var0 = level.player;
+  if(!isDefined(var_0)) {
+    var_0 = level.player;
   }
 
-  self.opener = var0;
+  self.opener = var_0;
 
-  if(var0 == level.player && self.locked) {
+  if(var_0 == level.player && self.locked) {
     scripts\sp\door_internal::bashed_locked_door(level.player getvelocity());
     return;
   }
@@ -316,65 +316,65 @@ function door_bash_open(var0) {
   self.open_left = should_open_left();
   scripts\sp\door_internal::set_pivot_point(self.open_left);
 
-  if(var0 == level.player) {
+  if(var_0 == level.player) {
     thread scripts\sp\door_internal::door_bash_presentation();
     level.player notify("door_bashed", self);
   } else {
     self notify("ai_opened");
   }
 
-  var1 = 1;
+  var_1 = 1;
 
   if(isDefined(self.bashscale) && self.bashscale < 1) {
-    var1 = self.bashscale;
+    var_1 = self.bashscale;
   }
 
   self.bashed = 1;
-  self notify("bashed", var0);
-  var2 = scripts\sp\door_internal::get_bash_yaw(var1);
+  self notify("bashed", var_0);
+  var_2 = scripts\sp\door_internal::get_bash_yaw(var_1);
 
-  if(var1 == 1 && !istrue(self.bashblocked)) {
+  if(var_1 == 1 && !istrue(self.bashblocked)) {
     self notify("bashed_full");
     self.bashed_full = 1;
   }
 
-  if(var1 == 1) {
-    var3 = 0.25;
-    var4 = 0.5;
+  if(var_1 == 1) {
+    var_3 = 0.25;
+    var_4 = 0.5;
   } else {
-    var3 = 0.4;
-    var4 = 0.75;
+    var_3 = 0.4;
+    var_4 = 0.75;
   }
 
-  var5 = var4 - self.true_start_angles[1];
-  var6 = scripts\engine\math::normalize_value(0, 170, abs(var5));
-  var7 = scripts\engine\math::factor_value(var3, var4, var6);
-  self.bashtime = var7;
-  var8 = get_door_angles();
-  var9 = (var8[0], var4, var8[2]);
-  var10 = scripts\sp\door_internal::get_door_audio_material();
-  var11 = "scrpt_door_" + var10 + "_bash";
+  var_5 = var_4 - self.true_start_angles[1];
+  var_6 = scripts\engine\math::normalize_value(0, 170, abs(var_5));
+  var_7 = scripts\engine\math::factor_value(var_3, var_4, var_6);
+  self.bashtime = var_7;
+  var_8 = get_door_angles();
+  var_9 = (var_8[0], var_4, var_8[2]);
+  var_10 = scripts\sp\door_internal::get_door_audio_material();
+  var_11 = "scrpt_door_" + var_10 + "_bash";
 
-  if(soundexists(var11)) {
-    playworldsound(var11, self.origin + (0, 0, 30));
+  if(soundexists(var_11)) {
+    playworldsound(var_11, self.origin + (0, 0, 30));
   }
 
   self.bash_opening = 1;
   self.pivoting = 1;
 
-  if(var3 == 1) {
-    self.pivot_ent rotateTo(var9, var7);
+  if(var_3 == 1) {
+    self.pivot_ent rotateTo(var_9, var_7);
   } else {
-    self.pivot_ent rotateTo(var9, var7, 0, var7);
+    self.pivot_ent rotateTo(var_9, var_7, 0, var_7);
   }
 
-  thread scripts\engine\sp\utility::notify_delay("open", var7);
-  wait var7;
+  thread scripts\engine\sp\utility::notify_delay("open", var_7);
+  wait var_7;
   self.opener notify("opened_door");
   thread updatenavobstacle();
   scripts\sp\door_internal::updatenodelookpeek();
 
-  if(var2 == level.player) {
+  if(var_2 == level.player) {
     if(isDefined(level.stealth)) {
       thread scripts\sp\door_internal::stealth_broadcast(450, "combat");
     } else {
@@ -382,20 +382,20 @@ function door_bash_open(var0) {
     }
   }
 
-  if(var3 == 1 && abs(var5) > 100 && !istrue(self.disable_bounceback)) {
+  if(var_3 == 1 && abs(var_5) > 100 && !istrue(self.disable_bounceback)) {
     self playSound("door_hit_wall");
     self.active = 0;
-    var12 = randomfloatrange(3, 5);
-    var13 = scripts\engine\utility::ter_op(self.open_left, -3, 3);
-    var11 = "scrpt_door_" + var10 + "_creak_lp";
+    var_12 = randomfloatrange(3, 5);
+    var_13 = scripts\engine\utility::ter_op(self.open_left, -3, 3);
+    var_11 = "scrpt_door_" + var_10 + "_creak_lp";
 
-    if(soundexists(var11)) {
-      self playLoopSound(var11);
+    if(soundexists(var_11)) {
+      self playLoopSound(var_11);
     }
 
-    self scalevolume(0, var12);
-    self.pivot_ent rotateTo(var9 + (0, var13, 0), var12, 0.5, var12 - 0.5);
-    wait var12;
+    self scalevolume(0, var_12);
+    self.pivot_ent rotateTo(var_9 + (0, var_13, 0), var_12, 0.5, var_12 - 0.5);
+    wait var_12;
     self stoploopsound();
     thread updatenavobstacle();
   } else {
@@ -412,7 +412,7 @@ function remove_open_prompts() {
   remove_open_interact_hint(self.open_struct);
 }
 
-function door_open_completely(var0, var1) {
+function door_open_completely(var_0, var_1) {
   self notify("stop_push_open");
   self notify("stop_bash_monitor");
   self notify("close_prompt");
@@ -422,88 +422,88 @@ function door_open_completely(var0, var1) {
   remove_open_prompts();
   self.open_completely = 1;
 
-  if(!scripts\engine\utility::flag("door_second_interact") && isDefined(var0) && var0 == level.player) {
+  if(!scripts\engine\utility::flag("door_second_interact") && isDefined(var_0) && var_0 == level.player) {
     scripts\engine\utility::flag_set("door_second_interact");
   }
 
-  if(isDefined(var0)) {
-    self.opener = var0;
+  if(isDefined(var_0)) {
+    self.opener = var_0;
   }
 
-  self notify("opened_completely", var0);
-  var2 = scripts\engine\utility::ter_op(isPlayer(var0), 1, 0);
+  self notify("opened_completely", var_0);
+  var_2 = scripts\engine\utility::ter_op(isPlayer(var_0), 1, 0);
 
   if(isai(self.opener)) {
     self notify("ai_opened");
   }
 
-  if(isDefined(var0) || !isDefined(self.open_left)) {
+  if(isDefined(var_0) || !isDefined(self.open_left)) {
     self.open_left = should_open_left();
   }
 
   scripts\sp\door_internal::set_pivot_point(self.open_left);
-  var3 = undefined;
+  var_3 = undefined;
 
   if(self.open_left) {
-    var3 = self.true_start_angles[1] + self.max_yaw_left;
+    var_3 = self.true_start_angles[1] + self.max_yaw_left;
   } else {
-    var3 = self.true_start_angles[1] - self.max_yaw_right;
+    var_3 = self.true_start_angles[1] - self.max_yaw_right;
   }
 
-  var4 = scripts\sp\door_internal::get_door_audio_material();
-  var1 = scripts\engine\utility::ter_op(isDefined(var1), var1, 1.5);
-  var5 = scripts\engine\utility::ter_op(isPlayer(var0), "scrpt_door_" + var4 + "_open_wide", "scrpt_door_" + var4 + "_open_wide_npc");
+  var_4 = scripts\sp\door_internal::get_door_audio_material();
+  var_1 = scripts\engine\utility::ter_op(isDefined(var_1), var_1, 1.5);
+  var_5 = scripts\engine\utility::ter_op(isPlayer(var_0), "scrpt_door_" + var_4 + "_open_wide", "scrpt_door_" + var_4 + "_open_wide_npc");
 
-  if(soundexists(var5)) {
-    self playSound(var5);
+  if(soundexists(var_5)) {
+    self playSound(var_5);
   }
 
   self.pivoting = 1;
-  var6 = 0.25;
-  var7 = 0.75;
+  var_6 = 0.25;
+  var_7 = 0.75;
 
-  if(!var2) {
-    var6 = 0;
+  if(!var_2) {
+    var_6 = 0;
   }
 
-  self.pivot_ent rotateTo((self.angles[0], var3, self.angles[2]), var1, var1 * var6, var1 * var7);
+  self.pivot_ent rotateTo((self.angles[0], var_3, self.angles[2]), var_1, var_1 * var_6, var_1 * var_7);
   self notify("stop_door_creak");
-  thread scripts\engine\sp\utility::notify_delay("open", var1);
+  thread scripts\engine\sp\utility::notify_delay("open", var_1);
 
   if(isDefined(self.opener)) {
     self.opener notify("opened_door");
   }
 
-  wait var1;
+  wait var_1;
   self.pivoting = undefined;
-  thread scripts\sp\door_internal::suspicious_door_stealth_check(var2);
+  thread scripts\sp\door_internal::suspicious_door_stealth_check(var_2);
   thread updatenavobstacle();
   scripts\sp\door_internal::updatenodelookpeek();
   self.active = 0;
 
-  if(var2) {
+  if(var_2) {
     scripts\sp\door_internal::stealth_broadcast(128, "window_open");
   }
 
   thread scripts\sp\door_internal::close_prompt();
 }
 
-function door_close(var0, var1, var2, var3) {
+function door_close(var_0, var_1, var_2, var_3) {
   self notify("door_close");
 
   if(!isDefined(self.pivot_ent)) {
     return;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 1.5;
-    var2 = var1 * 0.25;
-    var3 = var1 * 0.25;
+  if(!isDefined(var_1)) {
+    var_1 = 1.5;
+    var_2 = var_1 * 0.25;
+    var_3 = var_1 * 0.25;
   }
 
   self.pivoting = 1;
-  self.pivot_ent rotateTo((self.angles[0], self.true_start_angles[1], self.angles[2]), var1, var2, var3);
-  wait var1;
+  self.pivot_ent rotateTo((self.angles[0], self.true_start_angles[1], self.angles[2]), var_1, var_2, var_3);
+  wait var_1;
   self.pivoting = undefined;
   thread updatenavobstacle();
   scripts\sp\door_internal::updatenodelookpeek();
@@ -524,7 +524,7 @@ function reset_door() {
   self thread[[level.interactive_doors.fndoorinit]](1);
 }
 
-function updatenavobstacle(var0) {
+function updatenavobstacle(var_0) {
   if(isDefined(self.updatingnavobstacle)) {
     return;
   }
@@ -536,8 +536,8 @@ function updatenavobstacle(var0) {
     destroynavobstacle(self.navobstacle);
   }
 
-  if(istrue(self.locked) || istrue(self.bashed_full) || istrue(self.open_completely) || istrue(var0)) {
-    var1 = get_door_angles();
+  if(istrue(self.locked) || istrue(self.bashed_full) || istrue(self.open_completely) || istrue(var_0)) {
+    var_1 = get_door_angles();
 
     if(isDefined(self.clip)) {
       self.navobstacle = createnavbadplacebyent(self.clip, 14);
@@ -546,7 +546,7 @@ function updatenavobstacle(var0) {
     if(isDefined(self.navobstacle)) {}
 
     self.nav_lastupdatetime = gettime();
-    self.nav_lastupdateangle = var1[1];
+    self.nav_lastupdateangle = var_1[1];
   }
 
   self.updatingnavobstacle = undefined;
@@ -607,8 +607,8 @@ function delete_door() {
   }
 
   if(isDefined(self.linked_ents)) {
-    foreach(var1 in self.linked_ents) {
-      var1 delete();
+    foreach(var_1 in self.linked_ents) {
+      var_1 delete();
     }
 
     self.linked_ents = [];
@@ -619,69 +619,69 @@ function delete_door() {
 }
 
 function get_all_bashable_doors() {
-  var0 = [];
+  var_0 = [];
 
-  foreach(var2 in level.interactive_doors.ents) {
-    if(!var2 scripts\engine\utility::ent_flag("initialized")) {
+  foreach(var_2 in level.interactive_doors.ents) {
+    if(!var_2 scripts\engine\utility::ent_flag("initialized")) {
       continue;
     }
 
-    if(var2.bashed || var2.open_completely || var2.breached || var2 scripts\sp\door_internal::door_is_half_open()) {
+    if(var_2.bashed || var_2.open_completely || var_2.breached || var_2 scripts\sp\door_internal::door_is_half_open()) {
       continue;
     }
 
-    var0 = var2;
+    var_0 = var_2;
   }
 
-  return var0;
+  return var_0;
 }
 
 function get_all_doors_ai_should_open() {
-  var0 = [];
+  var_0 = [];
 
-  foreach(var2 in level.interactive_doors.ents) {
-    if(!var2 scripts\engine\utility::ent_flag("initialized")) {
+  foreach(var_2 in level.interactive_doors.ents) {
+    if(!var_2 scripts\engine\utility::ent_flag("initialized")) {
       continue;
     }
 
-    if(var2.bashed || var2.open_completely || var2.breached || var2 scripts\sp\door_internal::door_is_open_at_least(60)) {
+    if(var_2.bashed || var_2.open_completely || var_2.breached || var_2 scripts\sp\door_internal::door_is_open_at_least(60)) {
       continue;
     }
 
-    var0 = var2;
+    var_0 = var_2;
   }
 
-  return var0;
+  return var_0;
 }
 
 function get_all_closed_doors() {
-  var0 = [];
+  var_0 = [];
 
-  foreach(var2 in level.interactive_doors.ents) {
-    if(var2.bashed || var2.ajar || var2.open_completely || var2.breached) {
+  foreach(var_2 in level.interactive_doors.ents) {
+    if(var_2.bashed || var_2.ajar || var_2.open_completely || var_2.breached) {
       continue;
     }
 
-    var0 = var2;
+    var_0 = var_2;
   }
 
-  return var0;
+  return var_0;
 }
 
 function get_all_interactive_doors() {
   return level.interactive_doors.ents;
 }
 
-function get_all_interactive_doors_blocking_paths(var0) {
-  var1 = [];
+function get_all_interactive_doors_blocking_paths(var_0) {
+  var_1 = [];
 
-  foreach(var3 in level.interactive_doors.ents) {
-    if(isDefined(var3.navobstacleid) && !scripts\engine\utility::is_equal(var3.team, var0)) {
-      var1 = var3;
+  foreach(var_3 in level.interactive_doors.ents) {
+    if(isDefined(var_3.navobstacleid) && !scripts\engine\utility::is_equal(var_3.team, var_0)) {
+      var_1 = var_3;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
 function bash_monitor() {
@@ -704,14 +704,14 @@ function bash_monitor() {
 }
 
 function interact_door_ispushentclose() {
-  var0 = scripts\sp\door_internal::get_pushent();
-  var1 = abs(var0.origin[2] - self.origin[2]);
+  var_0 = scripts\sp\door_internal::get_pushent();
+  var_1 = abs(var_0.origin[2] - self.origin[2]);
 
-  if(var1 < 20) {
-    var2 = scripts\sp\door_internal::interact_door_get_endpoint();
-    var3 = distancesquared(var0.origin, var2);
+  if(var_1 < 20) {
+    var_2 = scripts\sp\door_internal::interact_door_get_endpoint();
+    var_3 = distancesquared(var_0.origin, var_2);
 
-    if(var3 < 1296) {
+    if(var_3 < 1296) {
       return true;
     }
   }
@@ -720,13 +720,13 @@ function interact_door_ispushentclose() {
 }
 
 function interact_door_dopusheffects() {
-  var0 = abs(level.player.origin[2] - self.origin[2]);
+  var_0 = abs(level.player.origin[2] - self.origin[2]);
 
-  if(var0 < 20) {
-    var1 = scripts\sp\door_internal::interact_door_get_endpoint();
-    var2 = distancesquared(level.player.origin, var1);
+  if(var_0 < 20) {
+    var_1 = scripts\sp\door_internal::interact_door_get_endpoint();
+    var_2 = distancesquared(level.player.origin, var_1);
 
-    if(var2 < 14400) {
+    if(var_2 < 14400) {
       return true;
     }
   }
@@ -735,12 +735,12 @@ function interact_door_dopusheffects() {
 }
 
 function interact_door_isplayerfacing() {
-  var0 = scripts\sp\door_internal::interact_door_get_endpoint();
-  var1 = pointonsegmentnearesttopoint(var0, self.origin, level.player.origin);
-  var2 = vectorNormalize(var1 - level.player.origin);
-  var3 = anglesToForward(level.player.angles);
+  var_0 = scripts\sp\door_internal::interact_door_get_endpoint();
+  var_1 = pointonsegmentnearesttopoint(var_0, self.origin, level.player.origin);
+  var_2 = vectorNormalize(var_1 - level.player.origin);
+  var_3 = anglesToForward(level.player.angles);
 
-  if(vectordot(var2, var3) > 0.7) {
+  if(vectordot(var_2, var_3) > 0.7) {
     return true;
   }
 
@@ -748,19 +748,19 @@ function interact_door_isplayerfacing() {
 }
 
 function bash_door_isplayerclose() {
-  var0 = abs(level.player.origin[2] - self.origin[2]);
+  var_0 = abs(level.player.origin[2] - self.origin[2]);
 
-  if(var0 < 20) {
-    var1 = self.doorbottomcenter;
+  if(var_0 < 20) {
+    var_1 = self.doorbottomcenter;
 
-    if(!isDefined(var1)) {
-      var1 = self.origin;
+    if(!isDefined(var_1)) {
+      var_1 = self.origin;
     }
 
-    var2 = distancesquared(level.player.origin, var1);
-    var3 = scripts\engine\utility::ter_op(self.locked == 1, 60, 60);
+    var_2 = distancesquared(level.player.origin, var_1);
+    var_3 = scripts\engine\utility::ter_op(self.locked == 1, 60, 60);
 
-    if(var2 < var3 * var3) {
+    if(var_2 < var_3 * var_3) {
       return true;
     }
   }
@@ -768,21 +768,21 @@ function bash_door_isplayerclose() {
   return false;
 }
 
-function double_doors_init_targetname(var0) {
-  var1 = get_interactive_door(var0);
-  var2 = get_interactive_door(var0 + "_right");
-  return double_doors_init(var1, var2);
+function double_doors_init_targetname(var_0) {
+  var_1 = get_interactive_door(var_0);
+  var_2 = get_interactive_door(var_0 + "_right");
+  return double_doors_init(var_1, var_2);
 }
 
-function double_doors_init(var0, var1) {
-  GscBinSkip1(0x45, 0, var0);
+function double_doors_init(var_0, var_1) {
+  GscBinSkip1(0x45, 0, var_0);
 }
 
 function ai_monitor_doors() {
   self endon("death");
 
   for(;;) {
-    var0 = scripts\engine\utility::waittill_any_return("path_has_door", "opened_door", "opening_door_done", "reset_door_check");
+    var_0 = scripts\engine\utility::waittill_any_return("path_has_door", "opened_door", "opening_door_done", "reset_door_check");
     scripts\engine\utility::flag_wait("interactive_doors_ready");
     self notify("stop_current_door");
 
@@ -791,7 +791,7 @@ function ai_monitor_doors() {
     }
 
     if(isDefined(self.waitingfordoor)) {
-      if(isDefined(var0) && var0 == "path_set" && isDefined(self.doornode) && isDefined(self.pathgoalpos) && distance2dsquared(self.pathgoalpos, self.doornode.origin) < 4) {
+      if(isDefined(var_0) && var_0 == "path_set" && isDefined(self.doornode) && isDefined(self.pathgoalpos) && distance2dsquared(self.pathgoalpos, self.doornode.origin) < 4) {
         continue;
       }
 
@@ -799,29 +799,29 @@ function ai_monitor_doors() {
     }
 
     scripts\sp\door_ai::remove_as_opener();
-    var1 = 0;
-    var2 = undefined;
-    var3 = undefined;
+    var_1 = 0;
+    var_2 = undefined;
+    var_3 = undefined;
 
     for(;;) {
-      var2 = self getmodifierlocationonpath("door");
+      var_2 = self getmodifierlocationonpath("door");
 
-      if(isDefined(var2)) {
-        var3 = scripts\sp\door_ai::get_closed_door_closest_to_nav_modifier(var2);
+      if(isDefined(var_2)) {
+        var_3 = scripts\sp\door_ai::get_closed_door_closest_to_nav_modifier(var_2);
 
-        if(isDefined(var3)) {
-          var4 = var3 scripts\sp\door_internal::get_door_bottom_center();
+        if(isDefined(var_3)) {
+          var_4 = var_3 scripts\sp\door_internal::get_door_bottom_center();
 
-          if(distancesquared(self.origin, var4) < 400) {
-            var5 = vectorNormalize(var4 - self.origin);
+          if(distancesquared(self.origin, var_4) < 400) {
+            var_5 = vectorNormalize(var_4 - self.origin);
 
-            if(vectordot(self.lookaheaddir, var5) < -0.707) {
+            if(vectordot(self.lookaheaddir, var_5) < -0.707) {
               wait 2;
               continue;
             }
           }
 
-          var1 = 1;
+          var_1 = 1;
           break;
         } else {
           wait 0.2;
@@ -831,26 +831,26 @@ function ai_monitor_doors() {
         break;
       }
 
-      if(var1) {
+      if(var_1) {
         break;
       }
 
       wait 0.05;
     }
 
-    if(!var1) {
+    if(!var_1) {
       continue;
     }
 
-    scripts\sp\door_ai::door_add_opener(var3);
-    var3 thread scripts\sp\door_ai::door_manage_openers();
+    scripts\sp\door_ai::door_add_opener(var_3);
+    var_3 thread scripts\sp\door_ai::door_manage_openers();
   }
 }
 
-function add_pushent(var0) {
+function add_pushent(var_0) {
   if(!isDefined(self.pushents)) {
     self.pushents = [];
   }
 
-  self.pushents[self.pushents.size] = var0;
+  self.pushents[self.pushents.size] = var_0;
 }

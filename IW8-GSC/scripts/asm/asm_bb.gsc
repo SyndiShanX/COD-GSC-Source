@@ -3,7 +3,7 @@
  * Script: scripts\asm\asm_bb.gsc
 ***********************************************/
 
-function bb_getprefixstring(var0) {
+function bb_getprefixstring(var_0) {
   return undefined;
 }
 
@@ -19,47 +19,47 @@ function bb_wantstostrafe() {
   return 0;
 }
 
-function bb_requeststance(var0) {
-  self._blackboard.desiredstance = var0;
+function bb_requeststance(var_0) {
+  self._blackboard.desiredstance = var_0;
 }
 
 function bb_getrequestedstance() {
   return self._blackboard.desiredstance;
 }
 
-function bb_isrequestedstance_refresh(var0, var1, var2, var3) {
-  var4 = scripts\asm\shared\utility::determinerequestedstance();
-  return var4 == var3;
+function bb_isrequestedstance_refresh(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\asm\shared\utility::determinerequestedstance();
+  return var_4 == var_3;
 }
 
-function bb_isrequestedstanceanddemeanor(var0, var1, var2, var3) {
-  return self._blackboard.desiredstance == var3[0] && scripts\asm\asm::asm_getdemeanor() == var3[1];
+function bb_isrequestedstanceanddemeanor(var_0, var_1, var_2, var_3) {
+  return self._blackboard.desiredstance == var_3[0] && scripts\asm\asm::asm_getdemeanor() == var_3[1];
 }
 
-function bb_setisincombat(var0) {
-  self.bisincombat = !isDefined(var0) || var0;
+function bb_setisincombat(var_0) {
+  self.bisincombat = !isDefined(var_0) || var_0;
 }
 
 function bb_isincombat() {
   return self.bisincombat;
 }
 
-function bb_isweaponclass(var0, var1, var2, var3) {
-  return weaponclass(self.weapon) == var3;
+function bb_isweaponclass(var_0, var_1, var_2, var_3) {
+  return weaponclass(self.weapon) == var_3;
 }
 
-function bb_shoulddroprocketlauncher(var0, var1, var2, var3) {
+function bb_shoulddroprocketlauncher(var_0, var_1, var_2, var_3) {
   if(weaponclass(self.weapon) != "rocketlauncher") {
     return false;
   }
 
-  var4 = bb_getrequestedweapon();
+  var_4 = bb_getrequestedweapon();
 
-  if(!isDefined(var4)) {
+  if(!isDefined(var_4)) {
     return false;
   }
 
-  return var4 != "rocketlauncher";
+  return var_4 != "rocketlauncher";
 }
 
 function bb_requestmove() {}
@@ -70,16 +70,16 @@ function bb_moverequested() {
   return self codemoverequested();
 }
 
-function bb_movetyperequested(var0) {
-  return self._blackboard.movetype == var0;
+function bb_movetyperequested(var_0) {
+  return self._blackboard.movetype == var_0;
 }
 
-function bb_requestmovetype(var0) {
-  self._blackboard.movetype = var0;
+function bb_requestmovetype(var_0) {
+  self._blackboard.movetype = var_0;
 }
 
-function bb_requestweapon(var0) {
-  self._blackboard.weaponrequest = var0;
+function bb_requestweapon(var_0) {
+  self._blackboard.weaponrequest = var_0;
 }
 
 function bb_clearweaponrequest() {
@@ -94,28 +94,28 @@ function bb_getrequestedweapon() {
   return self._blackboard.weaponrequest;
 }
 
-function bb_requestreload(var0) {
-  if(!isDefined(var0)) {
+function bb_requestreload(var_0) {
+  if(!isDefined(var_0)) {
     self._blackboard.breload = 1;
     return;
   }
 
-  self._blackboard.breload = var0;
+  self._blackboard.breload = var_0;
 }
 
 function bb_reloadrequested() {
   return self._blackboard.breload;
 }
 
-function bb_requestthrowgrenade(var0, var1) {
-  if(!isDefined(var0)) {
+function bb_requestthrowgrenade(var_0, var_1) {
+  if(!isDefined(var_0)) {
     self._blackboard.bthrowgrenade = 1;
   } else {
-    self._blackboard.bthrowgrenade = var0;
+    self._blackboard.bthrowgrenade = var_0;
   }
 
   if(self._blackboard.bthrowgrenade) {
-    self._blackboard.throwgrenadetarget = var1;
+    self._blackboard.throwgrenadetarget = var_1;
     return;
   }
 
@@ -134,52 +134,52 @@ function bb_getthrowgrenadetarget() {
   return self._blackboard.throwgrenadetarget;
 }
 
-function bb_requestfire(var0) {
-  if(!isDefined(var0)) {
+function bb_requestfire(var_0) {
+  if(!isDefined(var_0)) {
     self._blackboard.bfire = 1;
     return;
   }
 
-  self._blackboard.bfire = var0;
+  self._blackboard.bfire = var_0;
 }
 
 function bb_firerequested() {
   return istrue(self._blackboard.bfire);
 }
 
-function bb_newshootparams(var0, var1, var2) {
+function bb_newshootparams(var_0, var_1, var_2) {
   self._blackboard.shootparams_writeid++;
   self._blackboard.shootparams_starttime = gettime();
-  self._blackboard.shootparams_pos = var0;
-  self._blackboard.shootparams_ent = var1;
-  self._blackboard.shootparams_buseentinshootcalc = var2;
+  self._blackboard.shootparams_pos = var_0;
+  self._blackboard.shootparams_ent = var_1;
+  self._blackboard.shootparams_buseentinshootcalc = var_2;
   self._blackboard.shootparams_objective = "normal";
   self._blackboard.shootparams_valid = 1;
 }
 
-function bb_updateshootparams(var0, var1, var2) {
-  if(bb_issameshootparamsent(var1, var2)) {
-    bb_updateshootparams_posandent(var0, var1, var2);
+function bb_updateshootparams(var_0, var_1, var_2) {
+  if(bb_issameshootparamsent(var_1, var_2)) {
+    bb_updateshootparams_posandent(var_0, var_1, var_2);
     return;
   }
 
-  bb_newshootparams(var0, var1, var2);
+  bb_newshootparams(var_0, var_1, var_2);
 }
 
-function bb_claimshootparams(var0) {
-  self._blackboard.shootparams_taskid = var0;
+function bb_claimshootparams(var_0) {
+  self._blackboard.shootparams_taskid = var_0;
 }
 
-function bb_issameshootparamsent(var0, var1) {
+function bb_issameshootparamsent(var_0, var_1) {
   if(!istrue(self._blackboard.shootparams_valid)) {
     return false;
   }
 
-  if(isDefined(var0) && !isDefined(self._blackboard.shootparams_ent)) {
+  if(isDefined(var_0) && !isDefined(self._blackboard.shootparams_ent)) {
     return false;
-  } else if(!isDefined(var0) && isDefined(self._blackboard.shootparams_ent)) {
+  } else if(!isDefined(var_0) && isDefined(self._blackboard.shootparams_ent)) {
     return false;
-  } else if(isDefined(var0) && isDefined(self._blackboard.shootparams_ent) && var0 != self._blackboard.shootparams_ent) {
+  } else if(isDefined(var_0) && isDefined(self._blackboard.shootparams_ent) && var_0 != self._blackboard.shootparams_ent) {
     return false;
   }
 
@@ -210,14 +210,14 @@ function bb_shootparams_idsmatch() {
   return self._blackboard.shootparams_writeid == self._blackboard.shootparams_readid;
 }
 
-function bb_updateshootparams_pos(var0) {
-  self._blackboard.shootparams_pos = var0;
+function bb_updateshootparams_pos(var_0) {
+  self._blackboard.shootparams_pos = var_0;
 }
 
-function bb_updateshootparams_posandent(var0, var1, var2) {
-  self._blackboard.shootparams_pos = var0;
-  self._blackboard.shootparams_ent = var1;
-  self._blackboard.shootparams_buseentinshootcalc = var2;
+function bb_updateshootparams_posandent(var_0, var_1, var_2) {
+  self._blackboard.shootparams_pos = var_0;
+  self._blackboard.shootparams_ent = var_1;
+  self._blackboard.shootparams_buseentinshootcalc = var_2;
 }
 
 function bb_clearshootparams() {
@@ -225,7 +225,7 @@ function bb_clearshootparams() {
   self._blackboard.shootparams_valid = 0;
 }
 
-function bb_setshootparams(var0, var1) {}
+function bb_setshootparams(var_0, var_1) {}
 
 function bb_shootparamsvalid() {
   if(istrue(self._blackboard.shootparams_valid)) {
@@ -245,8 +245,8 @@ function bb_shootparamsvalid() {
   return 0;
 }
 
-function bb_requestcoverstate(var0) {
-  self._blackboard.coverstate = var0;
+function bb_requestcoverstate(var_0) {
+  self._blackboard.coverstate = var_0;
 }
 
 function bb_getrequestedcoverstate() {
@@ -257,24 +257,24 @@ function bb_getrequestedcoverstate() {
   return self._blackboard.coverstate;
 }
 
-function bb_requestcoverexposetype(var0) {
-  self._blackboard.coverexposetype = var0;
+function bb_requestcoverexposetype(var_0) {
+  self._blackboard.coverexposetype = var_0;
 }
 
 function bb_getrequestedcoverexposetype() {
   return self._blackboard.coverexposetype;
 }
 
-function bb_requestcoverblindfire(var0) {
-  self._blackboard.blindfire = var0;
+function bb_requestcoverblindfire(var_0) {
+  self._blackboard.blindfire = var_0;
 }
 
-function bb_setcovernode(var0) {
-  self._blackboard.covernode = var0;
-  self._blackboard.bhascovernode = isDefined(var0);
+function bb_setcovernode(var_0) {
+  self._blackboard.covernode = var_0;
+  self._blackboard.bhascovernode = isDefined(var_0);
 }
 
-function bb_hadcovernode(var0, var1, var2, var3) {
+function bb_hadcovernode(var_0, var_1, var_2, var_3) {
   return istrue(self._blackboard.bhascovernode);
 }
 
@@ -290,15 +290,15 @@ function bb_getrequestedturret() {
   return undefined;
 }
 
-function bb_requestturret(var0) {
-  self._blackboard.requestedturret = var0;
+function bb_requestturret(var_0) {
+  self._blackboard.requestedturret = var_0;
 }
 
-function bb_requestturretpose(var0) {
-  self._blackboard.requestedturretpose = var0;
+function bb_requestturretpose(var_0) {
+  self._blackboard.requestedturretpose = var_0;
 }
 
-function bb_hasshufflenode(var0, var1, var2, var3) {
+function bb_hasshufflenode(var_0, var_1, var_2, var_3) {
   return isDefined(self._blackboard.shufflenode) && isDefined(self.node) && self._blackboard.shufflenode == self.node && distancesquared(self.node.origin, self.origin) > 16;
 }
 
@@ -320,9 +320,9 @@ function bb_isanimScripted() {
   return istrue(self._blackboard.animscriptedactive);
 }
 
-function bb_requestmelee(var0) {
+function bb_requestmelee(var_0) {
   self._blackboard.meleerequested = 1;
-  self._blackboard.meleerequestedtarget = var0;
+  self._blackboard.meleerequestedtarget = var_0;
   self._blackboard.meleerequestedcomplete = 0;
 }
 
@@ -344,11 +344,11 @@ function bb_clearmeleerequestcomplete() {
   self._blackboard.meleerequestedcomplete = undefined;
 }
 
-function bb_meleeinprogress(var0, var1, var2, var3) {
+function bb_meleeinprogress(var_0, var_1, var_2, var_3) {
   return isDefined(self._blackboard.meleerequestedcomplete);
 }
 
-function bb_meleecomplete(var0, var1, var2, var3) {
+function bb_meleecomplete(var_0, var_1, var_2, var_3) {
   return isDefined(self._blackboard.meleerequestedcomplete) && self._blackboard.meleerequestedcomplete;
 }
 
@@ -356,7 +356,7 @@ function bb_meleerequested() {
   return self._blackboard.meleerequested;
 }
 
-function bb_meleerequestinvalid(var0, var1, var2, var3) {
+function bb_meleerequestinvalid(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.melee)) {
     return true;
   }
@@ -368,10 +368,10 @@ function bb_meleerequestinvalid(var0, var1, var2, var3) {
   return false;
 }
 
-function bb_requestmeleecharge(var0, var1) {
+function bb_requestmeleecharge(var_0, var_1) {
   self._blackboard.meleerequestedcharge = 1;
-  self._blackboard.meleerequestedcharge_target = var0;
-  self._blackboard.meleerequestedcharge_targetposition = var1;
+  self._blackboard.meleerequestedcharge_target = var_0;
+  self._blackboard.meleerequestedcharge_targetposition = var_1;
 }
 
 function bb_clearmeleechargerequest() {
@@ -384,7 +384,7 @@ function bb_meleechargerequested() {
   return isDefined(self._blackboard.meleerequestedcharge) && self._blackboard.meleerequestedcharge && isDefined(self.pathgoalpos);
 }
 
-function bb_meleechargeaborted(var0, var1, var2, var3) {
+function bb_meleechargeaborted(var_0, var_1, var_2, var_3) {
   if(bb_meleechargerequested()) {
     return false;
   }
@@ -404,12 +404,12 @@ function bb_getmeleechargetargetpos() {
   return self._blackboard.meleerequestedcharge_targetposition;
 }
 
-function bb_requestgrenadereturnthrow(var0) {
-  self._blackboard.bgrenadereturnthrow = var0;
+function bb_requestgrenadereturnthrow(var_0) {
+  self._blackboard.bgrenadereturnthrow = var_0;
 }
 
-function bb_requestwhizby(var0) {
-  self._blackboard.whizbyevent = var0;
+function bb_requestwhizby(var_0) {
+  self._blackboard.whizbyevent = var_0;
 }
 
 function bb_iswhizbyrequested() {
@@ -421,20 +421,20 @@ function bb_getrequestedwhizby() {
 }
 
 function bb_isfrantic() {
-  var0 = bb_getcovernode();
+  var_0 = bb_getcovernode();
 
-  if(!isDefined(var0)) {
-    var0 = self.node;
+  if(!isDefined(var_0)) {
+    var_0 = self.node;
   }
 
-  var1 = isDefined(var0) && (var0.type == "Conceal Crouch" || var0.type == "Conceal Stand");
-  return self._blackboard.movetype == "frantic" && !var1;
+  var_1 = isDefined(var_0) && (var_0.type == "Conceal Crouch" || var_0.type == "Conceal Stand");
+  return self._blackboard.movetype == "frantic" && !var_1;
 }
 
 function bb_ismissingaleg() {
-  var0 = bb_getmissingleg();
+  var_0 = bb_getmissingleg();
 
-  if(isDefined(var0)) {
+  if(isDefined(var_0)) {
     return true;
   }
 
@@ -442,92 +442,92 @@ function bb_ismissingaleg() {
 }
 
 function bb_getmissingleg() {
-  var0 = 0;
-  var1 = undefined;
+  var_0 = 0;
+  var_1 = undefined;
 
   if(!isDefined(self._blackboard.dismemberedparts)) {
-    return var1;
+    return var_1;
   }
 
   if(isDefined(self._blackboard.dismemberedparts["left_leg"])) {
-    var0++;
-    var1 = "left";
+    var_0++;
+    var_1 = "left";
   }
 
   if(isDefined(self._blackboard.dismemberedparts["right_leg"])) {
-    var0++;
-    var1 = "right";
+    var_0++;
+    var_1 = "right";
   }
 
-  if(var0 == 2) {
-    var1 = "both";
+  if(var_0 == 2) {
+    var_1 = "both";
   }
 
-  return var1;
+  return var_1;
 }
 
-function ispartdismembered(var0) {
+function ispartdismembered(var_0) {
   if(!isDefined(self._blackboard)) {
     return false;
   }
 
   if(isDefined(self._blackboard.scriptableparts)) {
-    if(!isDefined(self._blackboard.scriptableparts[var0])) {
+    if(!isDefined(self._blackboard.scriptableparts[var_0])) {
       return false;
     }
 
-    return (self._blackboard.scriptableparts[var0].state == "dismember");
+    return (self._blackboard.scriptableparts[var_0].state == "dismember");
   }
 
   if(!isDefined(self._blackboard.dismemberedparts)) {
     return false;
   }
 
-  return isDefined(self._blackboard.dismemberedparts[var0]);
+  return isDefined(self._blackboard.dismemberedparts[var_0]);
 }
 
-function bb_ispartdismembered(var0, var1, var2, var3) {
-  return ispartdismembered(var3);
+function bb_ispartdismembered(var_0, var_1, var_2, var_3) {
+  return ispartdismembered(var_3);
 }
 
-function waspartjustdismembered(var0) {
+function waspartjustdismembered(var_0) {
   if(isDefined(self._blackboard.scriptableparts)) {
-    if(!isDefined(self._blackboard.scriptableparts[var0])) {
+    if(!isDefined(self._blackboard.scriptableparts[var_0])) {
       return false;
     }
 
-    if(self._blackboard.scriptableparts[var0].state != "dismember") {
+    if(self._blackboard.scriptableparts[var_0].state != "dismember") {
       return false;
     }
 
-    return (self._blackboard.scriptableparts[var0].time == gettime());
+    return (self._blackboard.scriptableparts[var_0].time == gettime());
   }
 
   if(!isDefined(self._blackboard.dismemberedparts)) {
     return false;
   }
 
-  if(!isDefined(self._blackboard.dismemberedparts[var0])) {
+  if(!isDefined(self._blackboard.dismemberedparts[var_0])) {
     return false;
   }
 
-  return self._blackboard.dismemberedparts[var0] == gettime();
+  return self._blackboard.dismemberedparts[var_0] == gettime();
 }
 
-function bb_waspartjustdismembered(var0, var1, var2, var3) {
-  return waspartjustdismembered(var3);
+function bb_waspartjustdismembered(var_0, var_1, var_2, var_3) {
+  return waspartjustdismembered(var_3);
 }
 
-function bb_werepartsdismemberedinorder(var0, var1, var2, var3) {
-  return ispartdismembered(var3[0]) && waspartjustdismembered(var3[1]);
+function bb_werepartsdismemberedinorder(var_0, var_1, var_2, var_3) {
+  return ispartdismembered(var_3[0]) && waspartjustdismembered(var_3[1]);
 }
 
-function bb_dismemberedpart(var0) {
-  self._blackboard.dismemberedparts[var0] = gettime();
+function bb_dismemberedpart(var_0) {
+  self._blackboard.dismemberedparts[var_0] = gettime();
 }
 
-function bb_setselfdestruct(var0) {
-  self._blackboard.selfdestruct = var0;
+function bb_setselfdestruct(var_0) {
+  self._blackboard.selfdestruct = var_0;
 }
 
 function bb_isselfdestruct() {
@@ -548,8 +548,8 @@ function bb_shouldselfdestructnow() {
   return isDefined(self._blackboard.selfdestructnow);
 }
 
-function bb_setheadless(var0) {
-  self._blackboard.isheadless = var0;
+function bb_setheadless(var_0) {
+  self._blackboard.isheadless = var_0;
 }
 
 function bb_isheadless() {
@@ -560,51 +560,51 @@ function bb_isheadless() {
   return isDefined(self._blackboard.isheadless);
 }
 
-function bb_setcanrodeo(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = 1;
+function bb_setcanrodeo(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
-  var2 = "left";
+  var_2 = "left";
 
-  if(var0 == var2) {
-    var2 = "right";
+  if(var_0 == var_2) {
+    var_2 = "right";
   }
 
-  if(isDefined(self._blackboard.rodeo) && isDefined(self._blackboard.rodeo[var2])) {
-    self._blackboard.rodeo[var2] = 0;
-    self._blackboard.rodeo[var0] = 0;
+  if(isDefined(self._blackboard.rodeo) && isDefined(self._blackboard.rodeo[var_2])) {
+    self._blackboard.rodeo[var_2] = 0;
+    self._blackboard.rodeo[var_0] = 0;
     return;
   }
 
-  self._blackboard.rodeo[var0] = var1;
+  self._blackboard.rodeo[var_0] = var_1;
 }
 
-function bb_canrodeo(var0) {
+function bb_canrodeo(var_0) {
   if(!isDefined(self._blackboard.rodeo)) {
     return false;
   }
 
-  if(!isDefined(self._blackboard.rodeo[var0])) {
+  if(!isDefined(self._blackboard.rodeo[var_0])) {
     return false;
   }
 
-  if(!self._blackboard.rodeo[var0]) {
+  if(!self._blackboard.rodeo[var_0]) {
     return false;
   }
 
   return true;
 }
 
-function bb_setrodeorequest(var0) {
-  self._blackboard.rodeorequest = var0;
+function bb_setrodeorequest(var_0) {
+  self._blackboard.rodeorequest = var_0;
 }
 
-function bb_clearrodeorequest(var0) {
+function bb_clearrodeorequest(var_0) {
   self._blackboard.rodeorequested = undefined;
 }
 
-function bb_isrodeorequested(var0, var1, var2, var3) {
+function bb_isrodeorequested(var_0, var_1, var_2, var_3) {
   if(!isDefined(self._blackboard.rodeorequest)) {
     return false;
   }
@@ -612,12 +612,12 @@ function bb_isrodeorequested(var0, var1, var2, var3) {
   return true;
 }
 
-function bb_setmeleetarget(var0) {
+function bb_setmeleetarget(var_0) {
   self.melee = spawnStruct();
-  var0.melee = spawnStruct();
-  self.melee.target = var0;
-  self.melee.partner = var0;
-  var0.melee.partner = self;
+  var_0.melee = spawnStruct();
+  self.melee.target = var_0;
+  self.melee.partner = var_0;
+  var_0.melee.partner = self;
 }
 
 function bb_clearmeleetarget() {
@@ -636,16 +636,16 @@ function bb_clearmeleetarget() {
   self.melee = undefined;
 }
 
-function bb_setcrawlmelee(var0) {
-  self._blackboard.crawlmelee = var0;
+function bb_setcrawlmelee(var_0) {
+  self._blackboard.crawlmelee = var_0;
 }
 
 function bb_iscrawlmelee() {
   return isDefined(self._blackboard.crawlmelee);
 }
 
-function bb_sethaywire(var0) {
-  self._blackboard.haywire = var0;
+function bb_sethaywire(var_0) {
+  self._blackboard.haywire = var_0;
 }
 
 function bb_ishaywire() {
@@ -656,20 +656,20 @@ function bb_gethaywire() {
   return self._blackboard.haywire;
 }
 
-function bb_setisinbadcrouchspot(var0) {
-  self._blackboard.bbadcrouchspot = var0;
+function bb_setisinbadcrouchspot(var_0) {
+  self._blackboard.bbadcrouchspot = var_0;
 }
 
 function bb_isinbadcrouchspot() {
   return istrue(self._blackboard.bbadcrouchspot);
 }
 
-function bb_setcivilianstate(var0) {
-  if(isDefined(self._blackboard.civstate) && self._blackboard.civstate == var0) {
+function bb_setcivilianstate(var_0) {
+  if(isDefined(self._blackboard.civstate) && self._blackboard.civstate == var_0) {
     return;
   }
 
-  self._blackboard.civstate = var0;
+  self._blackboard.civstate = var_0;
   self._blackboard.civstatetime = gettime();
 }
 
@@ -681,24 +681,24 @@ function bb_getcivilianstatetime() {
   return self._blackboard.civstatetime;
 }
 
-function bb_civilianrequestspeed(var0) {
-  scripts\engine\utility::set_movement_speed(var0);
+function bb_civilianrequestspeed(var_0) {
+  scripts\engine\utility::set_movement_speed(var_0);
 }
 
 function bb_isshort() {
   return istrue(self._blackboard.short);
 }
 
-function bb_setshort(var0) {
-  self._blackboard.short = var0;
+function bb_setshort(var_0) {
+  self._blackboard.short = var_0;
 }
 
 function bb_smartobjectrequested() {
   return isDefined(self._blackboard.smartobject);
 }
 
-function bb_requestsmartobject(var0) {
-  self._blackboard.smartobject = var0;
+function bb_requestsmartobject(var_0) {
+  self._blackboard.smartobject = var_0;
 }
 
 function bb_getrequestedsmartobject() {
@@ -722,9 +722,9 @@ function bb_playsmartobjectrequested() {
   return istrue(self._blackboard.bplaysmartobject);
 }
 
-function bb_requestcovermultiswitch(var0, var1) {
-  self._blackboard.docovermultiswitchnode = var0;
-  self._blackboard.docovermultiswitchnodetype = var1;
+function bb_requestcovermultiswitch(var_0, var_1) {
+  self._blackboard.docovermultiswitchnode = var_0;
+  self._blackboard.docovermultiswitchnodetype = var_1;
 }
 
 function bb_getrequestedcovermultiswitchnodetype() {
@@ -740,12 +740,12 @@ function bb_iscovermultiswitchrequested() {
   return isDefined(self._blackboard.docovermultiswitchnode);
 }
 
-function bb_canplaygesture(var0, var1, var2, var3) {
+function bb_canplaygesture(var_0, var_1, var_2, var_3) {
   if(!isDefined(self._blackboard.gesturerequest)) {
     return false;
   }
 
-  if(isDefined(var3) && self._blackboard.gesturerequest.gesture != var3) {
+  if(isDefined(var_3) && self._blackboard.gesturerequest.gesture != var_3) {
     return false;
   }
 
@@ -757,20 +757,20 @@ function bb_canplaygesture(var0, var1, var2, var3) {
     return false;
   }
 
-  var4 = self._blackboard.gesturerequest.latestalias;
+  var_4 = self._blackboard.gesturerequest.latestalias;
 
-  if(!scripts\asm\asm::asm_hasalias(var2, var4)) {
+  if(!scripts\asm\asm::asm_hasalias(var_2, var_4)) {
     return false;
   }
 
   return true;
 }
 
-function bb_shouldwildfire(var0, var1, var2) {
+function bb_shouldwildfire(var_0, var_1, var_2) {
   if(!istrue(self._blackboard.isrebel)) {
     return false;
   }
 
-  var3 = 50;
-  return randomint(100) <= var3;
+  var_3 = 50;
+  return randomint(100) <= var_3;
 }

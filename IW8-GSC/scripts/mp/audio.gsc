@@ -10,26 +10,26 @@ function init_audio() {
 
   init_reverb();
   level.onplayerconnectaudioinit = &onplayerconnectaudioinit;
-  var0 = scripts\mp\utility\game::unset_relic_grounded();
-  var1 = isDefined(level.script) && (level.script == "mp_firingrange" || isstartstr(level.script, "mp_audio"));
-  var2 = var0 || var1;
+  var_0 = scripts\mp\utility\game::unset_relic_grounded();
+  var_1 = isDefined(level.script) && (level.script == "mp_firingrange" || isstartstr(level.script, "mp_audio"));
+  var_2 = var_0 || var_1;
 
-  if(istrue(var2)) {
+  if(istrue(var_2)) {
     scripts\mp\utility\sound::besttime("common_mp_s4");
     return;
   }
 }
 
 function onplayerconnectaudioinit() {
-  var0 = scripts\mp\utility\game::unset_relic_grounded();
-  var1 = level.mapname == "mp_firingrange" || isstartstr(level.mapname, "mp_audio");
-  var2 = var0 || var1;
+  var_0 = scripts\mp\utility\game::unset_relic_grounded();
+  var_1 = level.mapname == "mp_firingrange" || isstartstr(level.mapname, "mp_audio");
+  var_2 = var_0 || var_1;
 
-  if(istrue(var0)) {
+  if(istrue(var_0)) {
     self.nosuspensemusic = 1;
   }
 
-  if(istrue(var2)) {
+  if(istrue(var_2)) {
     self setsoundsubmix("mp_wz_default");
     self setclientdvar("NKSNTLKLON", "0");
   } else {
@@ -43,19 +43,19 @@ function init_reverb() {
   add_reverb("default", "generic", 0.15, 0.9, 2);
 }
 
-function add_reverb(var0, var1, var2, var3, var4) {
-  var5 = [];
-  is_roomtype_valid(var1);
-  GscBinSkip0(0x2e, "roomtype", var1);
+function add_reverb(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = [];
+  is_roomtype_valid(var_1);
+  GscBinSkip0(0x2e, "roomtype", var_1);
 }
 
-function is_roomtype_valid(var0) {}
+function is_roomtype_valid(var_0) {}
 
-function apply_reverb(var0) {
-  if(!isDefined(level.audio.reverb_settings[var0])) {
-    var1 = level.audio.reverb_settings["default"];
+function apply_reverb(var_0) {
+  if(!isDefined(level.audio.reverb_settings[var_0])) {
+    var_1 = level.audio.reverb_settings["default"];
     return;
   }
 
-  var1 = level.audio.reverb_settings[var1];
+  var_1 = level.audio.reverb_settings[var_1];
 }

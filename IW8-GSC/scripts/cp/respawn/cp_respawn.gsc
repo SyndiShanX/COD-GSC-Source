@@ -9,14 +9,14 @@ function main() {
   level._effect["c130_lights"] = loadfx("vfx/iw8_mp/killstreak/vfx_ac130_lights.vfx");
   setomnvar("ui_br_altimeter_c130_height", 6666);
   setomnvar("ui_br_altimeter_sea_height", scripts\cp_mp\parachute::getc130sealevel());
-  var0 = getEntArray("minimap_corner", "targetname");
-  var1 = level.mapcenter;
+  var_0 = getEntArray("minimap_corner", "targetname");
+  var_1 = level.mapcenter;
 
-  if(var0.size) {
-    var1 = scripts\cp\cp_globallogic::findboxcenter(var0[0].origin, var0[1].origin);
+  if(var_0.size) {
+    var_1 = scripts\cp\cp_globallogic::findboxcenter(var_0[0].origin, var_0[1].origin);
   }
 
-  level.ac130 = spawn("script_model", var1);
+  level.ac130 = spawn("script_model", var_1);
   level.ac130 setModel("tag_origin");
   level.ac130.angles = (0, 115, 0);
   thread rotate_plane();
@@ -46,12 +46,12 @@ function main() {
 function rotate_plane() {
   level.ac130_speed["move"] = 250;
   level.ac130_speed["rotate"] = 120;
-  var0 = 10;
-  var1 = level.ac130_speed["rotate"] / 360 * var0;
-  level.ac130 rotateYaw(level.ac130.angles[2] + var0, var1, var1, 0);
-  var2 = 360 / level.ac130_speed["rotate"];
-  var3 = var2 * 0.0174533;
-  level.ac130_magnitude = var3 * 9000;
+  var_0 = 10;
+  var_1 = level.ac130_speed["rotate"] / 360 * var_0;
+  level.ac130 rotateYaw(level.ac130.angles[2] + var_0, var_1, var_1, 0);
+  var_2 = 360 / level.ac130_speed["rotate"];
+  var_3 = var_2 * 0.0174533;
+  level.ac130_magnitude = var_3 * 9000;
 
   for(;;) {
     level.ac130 rotateYaw(360, level.ac130_speed["rotate"]);
@@ -125,24 +125,24 @@ function activate_respawn_flare() {
   scripts\cp\crafting_system::scriptable_autouse_funcs();
   scripts\cp\respawn\cp_ac130_respawn::start_ac130_respawn_sequence(self.origin, level.players_in_respawn_queue, self);
 
-  foreach(var1 in level.players) {
-    var1 thread scripts\cp\cp_hud_message::showsplash("cp_used_respawn", undefined, self);
-    thread toggle_respawn_functionality_after_timeout(var1);
+  foreach(var_1 in level.players) {
+    var_1 thread scripts\cp\cp_hud_message::showsplash("cp_used_respawn", undefined, self);
+    thread toggle_respawn_functionality_after_timeout(var_1);
   }
 
   level notify("respawn_used");
   level.respawn_in_progress = undefined;
 }
 
-function respawn_bleedout_func(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11) {
+function respawn_bleedout_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   scripts\cp\cp_laststand::enter_camera_zoomout();
 
-  if(istrue(var0.fauxdead) || istrue(var0.binc130)) {
-    var0.fauxdead = undefined;
-    var0 scripts\cp\cp_laststand::enter_bleed_out(var0);
-    var0 scripts\cp\cp_laststand::playslamzoomflash();
+  if(istrue(var_0.fauxdead) || istrue(var_0.binc130)) {
+    var_0.fauxdead = undefined;
+    var_0 scripts\cp\cp_laststand::enter_bleed_out(var_0);
+    var_0 scripts\cp\cp_laststand::playslamzoomflash();
   } else {
-    scripts\cp\cp_laststand::camera_zoomout(var0, var1, undefined);
+    scripts\cp\cp_laststand::camera_zoomout(var_0, var_1, undefined);
   }
 
   scripts\cp\cp_laststand::exit_camera_zoomout();
@@ -151,38 +151,38 @@ function respawn_bleedout_func(var0, var1, var2, var3, var4, var5, var6, var7, v
     level.players_in_respawn_queue = [];
   }
 
-  level.players_in_respawn_queue = scripts\engine\utility::array_add(level.players_in_respawn_queue, var0);
-  var12 = 0;
-  var13 = undefined;
+  level.players_in_respawn_queue = scripts\engine\utility::array_add(level.players_in_respawn_queue, var_0);
+  var_12 = 0;
+  var_13 = undefined;
 
-  foreach(var15 in level.players) {
-    if(var15.sessionstate == "spectator") {
-      var12++;
+  foreach(var_15 in level.players) {
+    if(var_15.sessionstate == "spectator") {
+      var_12++;
     }
   }
 
-  if(var12 == level.players.size - 1) {
-    foreach(var15 in level.players) {
-      if(var15.sessionstate == "spectator") {}
+  if(var_12 == level.players.size - 1) {
+    foreach(var_15 in level.players) {
+      if(var_15.sessionstate == "spectator") {}
     }
   }
 
-  foreach(var15 in level.players) {
+  foreach(var_15 in level.players) {
     if(!istrue(level.player_cam_disable)) {
       level.player_cam_disable = 1;
 
-      foreach(var15 in level.players) {
-        var15.respawn_active = 0;
-        var15 notify("toggle_respawn_function", 1);
+      foreach(var_15 in level.players) {
+        var_15.respawn_active = 0;
+        var_15 notify("toggle_respawn_function", 1);
       }
     }
   }
 
   for(;;) {
-    var23 = var0 scripts\engine\utility::ref_143ae("respawn_player", "auto_respawn", "forced_revive_to_regroup");
+    var_23 = var_0 scripts\engine\utility::ref_143ae("respawn_player", "auto_respawn", "forced_revive_to_regroup");
 
-    if(isDefined(var23)) {
-      if(istrue(var0.binc130)) {
+    if(isDefined(var_23)) {
+      if(istrue(var_0.binc130)) {
         continue;
       }
 
@@ -190,24 +190,24 @@ function respawn_bleedout_func(var0, var1, var2, var3, var4, var5, var6, var7, v
         continue;
       }
 
-      if(var23 == "auto_respawn") {
-        scripts\cp\respawn\cp_ac130_respawn::start_ac130_respawn_sequence(var0.origin, level.players_in_respawn_queue, var0);
+      if(var_23 == "auto_respawn") {
+        scripts\cp\respawn\cp_ac130_respawn::start_ac130_respawn_sequence(var_0.origin, level.players_in_respawn_queue, var_0);
 
-        foreach(var15 in level.players) {
-          var15 thread scripts\cp\cp_hud_message::showsplash("cp_auto_respawn");
+        foreach(var_15 in level.players) {
+          var_15 thread scripts\cp\cp_hud_message::showsplash("cp_auto_respawn");
         }
 
-        var0 setclientomnvar("ui_hide_hud", 1);
+        var_0 setclientomnvar("ui_hide_hud", 1);
         wait 2;
-        var0 setclientomnvar("ui_hide_hud", 1);
-        scripts\cp\cp_analytics::ref_119bb(var0);
-      } else if(var23 == "respawn_player") {
-        scripts\cp\cp_analytics::ref_119bd(var0);
+        var_0 setclientomnvar("ui_hide_hud", 1);
+        scripts\cp\cp_analytics::ref_119bb(var_0);
+      } else if(var_23 == "respawn_player") {
+        scripts\cp\cp_analytics::ref_119bd(var_0);
       } else {
-        var0.playerjailwaitvo = 1;
+        var_0.playerjailwaitvo = 1;
       }
 
-      level.players_in_respawn_queue = scripts\engine\utility::array_remove(level.players_in_respawn_queue, var0);
+      level.players_in_respawn_queue = scripts\engine\utility::array_remove(level.players_in_respawn_queue, var_0);
       return 1;
     }
   }
@@ -217,8 +217,8 @@ function launch_respawn_functionality_for_players() {
   level notify("launch_respawn_functionality_for_players");
   level endon("launch_respawn_functionality_for_players");
 
-  foreach(var1 in level.players) {
-    if(scripts\engine\utility::array_contains(level.players_in_respawn_queue, var1)) {
+  foreach(var_1 in level.players) {
+    if(scripts\engine\utility::array_contains(level.players_in_respawn_queue, var_1)) {
       continue;
     }
 
@@ -236,43 +236,43 @@ function respawn_dpad_func() {
   for(;;) {
     self waittill("respawn_players");
 
-    foreach(var1 in level.players_in_respawn_queue) {
-      thread do_resurrection_logic(var1);
-      level.players_in_respawn_queue = scripts\engine\utility::array_remove(level.players_in_respawn_queue, var1);
+    foreach(var_1 in level.players_in_respawn_queue) {
+      thread do_resurrection_logic(var_1);
+      level.players_in_respawn_queue = scripts\engine\utility::array_remove(level.players_in_respawn_queue, var_1);
     }
   }
 }
 
-function do_resurrection_logic(var0) {
-  scripts\cp\cp_laststand::record_revive_success(var0, self);
-  var0 notify("revive_teammate", self);
-  var1 = scripts\cp\cp_endgame::get_current_zone(var0);
-  var2 = 1;
+function do_resurrection_logic(var_0) {
+  scripts\cp\cp_laststand::record_revive_success(var_0, self);
+  var_0 notify("revive_teammate", self);
+  var_1 = scripts\cp\cp_endgame::get_current_zone(var_0);
+  var_2 = 1;
   self.last_stand_state = undefined;
 
-  if(isPlayer(var0) && istrue(var0.can_give_revive_xp)) {
-    var0.can_give_revive_xp = 0;
+  if(isPlayer(var_0) && istrue(var_0.can_give_revive_xp)) {
+    var_0.can_give_revive_xp = 0;
     return;
   }
 }
 
-function ref_13a9c(var0, var1, var2) {
-  self setweaponhudiconoverride("actionslot" + var0, var1);
+function ref_13a9c(var_0, var_1, var_2) {
+  self setweaponhudiconoverride("actionslot" + var_0, var_1);
 
-  if(isDefined(var2)) {
-    thread ref_13a9d(var0, var2);
+  if(isDefined(var_2)) {
+    thread ref_13a9d(var_0, var_2);
     return;
   }
 }
 
-function ref_13a9d(var0, var1) {
+function ref_13a9d(var_0, var_1) {
   self endon("death");
-  self endon("removeActionslot" + var0);
+  self endon("removeActionslot" + var_0);
   self notifyonplayercommand("team_revive_kbm", "killstreak4");
 
   for(;;) {
     self waittill("team_revive_kbm");
-    self thread[[var1]]();
+    self thread[[var_1]]();
   }
 }
 
@@ -281,9 +281,9 @@ function respawn_function_toggle() {
   self endon("respawn_function_toggle");
 
   for(;;) {
-    self waittill("toggle_respawn_function", var0);
+    self waittill("toggle_respawn_function", var_0);
 
-    if(istrue(var0)) {
+    if(istrue(var_0)) {
       if(!istrue(self.respawn_active)) {
         thread ref_119df();
         thread ref_12de7();
@@ -393,21 +393,21 @@ function ref_119df() {
   }
 }
 
-function toggle_respawn_functionality_after_timeout(var0, var1) {
+function toggle_respawn_functionality_after_timeout(var_0, var_1) {
   self notify("start_respawn_cooldown");
   self endon("start_respawn_cooldown");
   level.automated_respawn_available = 0;
   self notify("toggle_respawn_function", 0);
 
-  if(isDefined(var1) && isstring(var1)) {
-    level waittill(var1);
+  if(isDefined(var_1) && isstring(var_1)) {
+    level waittill(var_1);
   } else {
     level.time_till_next_respawn = level.respawn_cooldown;
     thread time_till_next_respawn_tick();
-    var2 = gettime() + var0 * 1000;
-    setomnvar("cp_team_respawn_timer", var2);
+    var_2 = gettime() + var_0 * 1000;
+    setomnvar("cp_team_respawn_timer", var_2);
 
-    for(var3 = var0; var3 >= 0; var3--) {
+    for(var_3 = var_0; var_3 >= 0; var_3--) {
       wait 1;
     }
 
@@ -426,8 +426,8 @@ function checkforactiveobjicon() {
   level endon("auto_respawn_timer");
 
   for(;;) {
-    var0 = gettime() + level.automated_respawn_delay * 1000;
-    setomnvar("cp_auto_respawn_timer", var0);
+    var_0 = gettime() + level.automated_respawn_delay * 1000;
+    setomnvar("cp_auto_respawn_timer", var_0);
     setomnvar("cp_team_respawn_display", 4);
     level.initialize_flag_role = level.automated_respawn_delay;
 
@@ -439,8 +439,8 @@ function checkforactiveobjicon() {
     setomnvar("cp_auto_respawn_timer", 0);
     setomnvar("cp_team_respawn_display", 0);
 
-    foreach(var2 in level.players) {
-      var2 notify("auto_respawn");
+    foreach(var_2 in level.players) {
+      var_2 notify("auto_respawn");
     }
 
     level.automated_respawn_delay = 60;
@@ -483,41 +483,41 @@ function give_loadout_after_entire_landing_is_done() {
     self.bspawningviaac130 = undefined;
 
     if(!istrue(self.inlaststand)) {
-      foreach(var1 in self.copy_fullweaponlist) {
-        if(!self hasweapon(var1)) {
-          self giveweapon(var1, -1, 0, -1, 1);
+      foreach(var_1 in self.copy_fullweaponlist) {
+        if(!self hasweapon(var_1)) {
+          self giveweapon(var_1, -1, 0, -1, 1);
         }
 
-        var2 = createheadicon(var1);
+        var_2 = createheadicon(var_1);
 
-        if(isDefined(self.powerprimarygrenade) && self.powerprimarygrenade == var2) {
-          self assignweaponoffhandprimary(var1);
+        if(isDefined(self.powerprimarygrenade) && self.powerprimarygrenade == var_2) {
+          self assignweaponoffhandprimary(var_1);
         }
 
-        if(isDefined(self.powersecondarygrenade) && self.powersecondarygrenade == var2) {
-          self assignweaponoffhandsecondary(var1);
+        if(isDefined(self.powersecondarygrenade) && self.powersecondarygrenade == var_2) {
+          self assignweaponoffhandsecondary(var_1);
         }
 
-        if(isDefined(self.specialoffhandgrenade) && self.specialoffhandgrenade == var2) {
-          self assignweaponoffhandspecial(var1);
+        if(isDefined(self.specialoffhandgrenade) && self.specialoffhandgrenade == var_2) {
+          self assignweaponoffhandspecial(var_1);
         }
 
-        var3 = self getweaponammoclip(var1, "left");
-        var4 = self getweaponammoclip(var1, "right");
-        self setweaponammoclip(var1, var3, "left");
-        self setweaponammoclip(var1, var4, "right");
+        var_3 = self getweaponammoclip(var_1, "left");
+        var_4 = self getweaponammoclip(var_1, "right");
+        self setweaponammoclip(var_1, var_3, "left");
+        self setweaponammoclip(var_1, var_4, "right");
 
-        if(isDefined(self.copy_weapon_ammo_stock[var2])) {
-          self setweaponammostock(var1, self.copy_weapon_ammo_stock[var2]);
+        if(isDefined(self.copy_weapon_ammo_stock[var_2])) {
+          self setweaponammostock(var_1, self.copy_weapon_ammo_stock[var_2]);
         }
       }
 
-      var6 = self.copy_weapon_current;
+      var_6 = self.copy_weapon_current;
 
-      if(getqueuedspleveltransients(var6)) {
-        foreach(var8 in self.copy_fullweaponlist) {
-          if(scripts\cp\cp_weapon::isbulletweapon(var8)) {
-            var6 = var8;
+      if(getqueuedspleveltransients(var_6)) {
+        foreach(var_8 in self.copy_fullweaponlist) {
+          if(scripts\cp\cp_weapon::isbulletweapon(var_8)) {
+            var_6 = var_8;
             break;
           }
         }
@@ -531,10 +531,10 @@ function give_loadout_after_entire_landing_is_done() {
     }
   } else {
     if(istrue(self.fly_to_end_point)) {
-      var10 = scripts\cp\loot_system::get_empty_munition_slot(self);
+      var_10 = scripts\cp\loot_system::get_empty_munition_slot(self);
 
-      if(isDefined(var10)) {
-        scripts\cp\cp_munitions::give_munition_to_slot("juggernaut", var10);
+      if(isDefined(var_10)) {
+        scripts\cp\cp_munitions::give_munition_to_slot("juggernaut", var_10);
       }
 
       self.fly_to_end_point = undefined;
@@ -564,14 +564,14 @@ function give_loadout_after_entire_landing_is_done() {
 
     if(isDefined(level.nuclear_core_carrier)) {
       if(level.nuclear_core_carrier == self) {
-        var11 = getcompleteweaponname("iw8_nukecore_mp");
-        scripts\cp\utility::_giveweapon(var11, undefined, undefined, 0);
-        self switchtoweaponimmediate(var11);
+        var_11 = getcompleteweaponname("iw8_nukecore_mp");
+        scripts\cp\utility::_giveweapon(var_11, undefined, undefined, 0);
+        self switchtoweaponimmediate(var_11);
         scripts\mp\playeractions::allowactionset("nuke_core", 0);
         self allowmountside(0);
         self allowmounttop(0);
         self allowjog(0);
-        watchnukeweaponenduse(var11, self.primaryweaponobj);
+        watchnukeweaponenduse(var_11, self.primaryweaponobj);
       } else {
         scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(self.weaponlist[0]);
       }
@@ -581,20 +581,20 @@ function give_loadout_after_entire_landing_is_done() {
 
     if(isDefined(self.weaponlist) && self.weaponlist.size > 1) {
       if(scripts\cp\cp_weapon::iscacprimaryweapon(self.weaponlist[0].basename)) {
-        var12 = 0;
+        var_12 = 0;
 
-        for(var13 = 0; var13 < self.weaponlist.size; var13++) {
-          if(istrue(self.weaponlist[var13].isalternate)) {
+        for(var_13 = 0; var_13 < self.weaponlist.size; var_13++) {
+          if(istrue(self.weaponlist[var_13].isalternate)) {
             continue;
           }
 
-          if(!var12) {
-            self.primaryweaponobj = self.weaponlist[var13];
-            var12 = 1;
+          if(!var_12) {
+            self.primaryweaponobj = self.weaponlist[var_13];
+            var_12 = 1;
             continue;
           }
 
-          self.secondaryweaponobj = self.weaponlist[var13];
+          self.secondaryweaponobj = self.weaponlist[var_13];
           break;
         }
       } else {
@@ -612,24 +612,24 @@ function give_loadout_after_entire_landing_is_done() {
     }
 
     if(isDefined(self.primaryweaponobj)) {
-      var14 = weaponclipsize(self.primaryweaponobj);
-      var15 = self getweaponammoclip(self.primaryweaponobj);
-      var16 = self getweaponammostock(self.primaryweaponobj);
+      var_14 = weaponclipsize(self.primaryweaponobj);
+      var_15 = self getweaponammoclip(self.primaryweaponobj);
+      var_16 = self getweaponammostock(self.primaryweaponobj);
 
-      if(var15 < var14) {
-        var17 = var14 - var15;
+      if(var_15 < var_14) {
+        var_17 = var_14 - var_15;
 
-        if(var17 >= var16) {
-          var15 += var16;
-          var16 = 0;
+        if(var_17 >= var_16) {
+          var_15 += var_16;
+          var_16 = 0;
         } else {
-          var15 = var14;
-          var16 -= var17;
+          var_15 = var_14;
+          var_16 -= var_17;
         }
       }
 
-      self.primaryweaponclipammo = var15;
-      self.primaryweaponstockammo = var16;
+      self.primaryweaponclipammo = var_15;
+      self.primaryweaponstockammo = var_16;
 
       if(isDefined(self.primaryweaponclipammo)) {
         self setweaponammoclip(self.primaryweaponobj, self.primaryweaponclipammo);
@@ -638,24 +638,24 @@ function give_loadout_after_entire_landing_is_done() {
     }
 
     if(isDefined(self.secondaryweaponobj)) {
-      var14 = weaponclipsize(self.secondaryweaponobj);
-      var15 = self getweaponammoclip(self.secondaryweaponobj);
-      var16 = self getweaponammostock(self.secondaryweaponobj);
+      var_14 = weaponclipsize(self.secondaryweaponobj);
+      var_15 = self getweaponammoclip(self.secondaryweaponobj);
+      var_16 = self getweaponammostock(self.secondaryweaponobj);
 
-      if(var15 < var14) {
-        var17 = var14 - var15;
+      if(var_15 < var_14) {
+        var_17 = var_14 - var_15;
 
-        if(var17 >= var16) {
-          var15 += var16;
-          var16 = 0;
+        if(var_17 >= var_16) {
+          var_15 += var_16;
+          var_16 = 0;
         } else {
-          var15 = var14;
-          var16 -= var17;
+          var_15 = var_14;
+          var_16 -= var_17;
         }
       }
 
-      self.secondaryweaponclipammo = var15;
-      self.secondaryweaponstockammo = var16;
+      self.secondaryweaponclipammo = var_15;
+      self.secondaryweaponstockammo = var_16;
 
       if(isDefined(self.secondaryweaponclipammo)) {
         self setweaponammoclip(self.secondaryweaponobj, self.secondaryweaponclipammo);
@@ -689,12 +689,12 @@ function ref_12de6() {
   self.unset_relic_oneclip = undefined;
 }
 
-function little_bird_mg_initdamage(var0) {
+function little_bird_mg_initdamage(var_0) {
   self endon("death");
   thread ref_12bfa();
   self.waitgiveammo = 1;
   scripts\common\utility::allow_usability(0);
-  wait var0;
+  wait var_0;
   self.waitgiveammo = undefined;
   scripts\common\utility::allow_usability(1);
   self notify("kill_watcher_threads_for_this");
@@ -707,16 +707,16 @@ function ref_12bfa() {
   self.waitgiveammo = undefined;
 }
 
-function watchnukeweaponenduse(var0, var1) {
+function watchnukeweaponenduse(var_0, var_1) {
   self notify("watchNukeWeaponEndUse");
   self endon("watchNukeWeaponEndUse");
   self notifyonplayercommand("manual_switch_from_core", "+weapnext");
   thread ref_13c53();
   thread ref_13367();
-  thread removenukeweapononaction("switched_from_core", var1);
-  thread removenukeweapononaction("death", var1);
-  thread removenukeweapononaction("last_stand", var1);
-  thread watchnukeweaponswitch(var0, var1);
+  thread removenukeweapononaction("switched_from_core", var_1);
+  thread removenukeweapononaction("death", var_1);
+  thread removenukeweapononaction("last_stand", var_1);
+  thread watchnukeweaponswitch(var_0, var_1);
   thread ref_1196e();
   thread ref_144af();
   self.c4_placed_bc = 1;
@@ -778,12 +778,12 @@ function ref_144af() {
     thread scripts\cp\utility::ent_deleteheadicon(self, self.headicon);
   }
 
-  var0 = level.ref_11edf.origin;
+  var_0 = level.ref_11edf.origin;
   level.nuclear_core_carrier = undefined;
-  level.nuclear_core = ref_11aa1(var0 + (0, 0, 64));
+  level.nuclear_core = ref_11aa1(var_0 + (0, 0, 64));
 }
 
-function watchnukeweaponswitch(var0, var1) {
+function watchnukeweaponswitch(var_0, var_1) {
   self endon("death");
   self endon("disconnect");
   self endon("dropped_core");
@@ -792,19 +792,19 @@ function watchnukeweaponswitch(var0, var1) {
   self endon("watchNukeWeaponSwitch");
 
   for(;;) {
-    self waittill("manual_switch_from_core", var2, var3);
+    self waittill("manual_switch_from_core", var_2, var_3);
 
-    if(istrue(var3)) {
+    if(istrue(var_3)) {
       self notify("switched_from_core");
     }
 
-    if(isDefined(var2)) {
-      self takeweapon(var1);
+    if(isDefined(var_2)) {
+      self takeweapon(var_1);
       self notify("switched_from_core");
       continue;
     }
 
-    if(self getcurrentweapon() != var0) {
+    if(self getcurrentweapon() != var_0) {
       continue;
     }
 
@@ -813,8 +813,8 @@ function watchnukeweaponswitch(var0, var1) {
   }
 }
 
-function removenukeweapononaction(var0, var1) {
-  if(!isDefined(var0)) {
+function removenukeweapononaction(var_0, var_1) {
+  if(!isDefined(var_0)) {
     return;
   }
 
@@ -822,32 +822,32 @@ function removenukeweapononaction(var0, var1) {
   self endon("dropped_core");
   level endon("game_ended");
   self endon("end_nuke_threads");
-  self notify("removeNukeWeaponOnAction" + var0);
-  self endon("removeNukeWeaponOnAction" + var0);
-  self waittill(var0, var2);
+  self notify("removeNukeWeaponOnAction" + var_0);
+  self endon("removeNukeWeaponOnAction" + var_0);
+  self waittill(var_0, var_2);
 
-  if(var0 == "death") {
+  if(var_0 == "death") {
     return;
   }
 
   level.nuclear_core_carrier = undefined;
 
-  if(isDefined(var2)) {
-    dropnukeweapon(var0, var1, var2);
+  if(isDefined(var_2)) {
+    dropnukeweapon(var_0, var_1, var_2);
   } else {
-    dropnukeweapon(var0, var1);
+    dropnukeweapon(var_0, var_1);
   }
 
   self.c4_placed_bc = undefined;
 }
 
-function dropnukeweapon(var0, var1, var2) {
+function dropnukeweapon(var_0, var_1, var_2) {
   self.mine_explosion_vfx = 1;
   self.playerstreakspeedscale = undefined;
 
   if(!istrue(self.c4_placed_bc) && istrue(self.inlaststand)) {
-    if(!isDefined(var1)) {
-      var1 = self.lastdroppableweaponobj;
+    if(!isDefined(var_1)) {
+      var_1 = self.lastdroppableweaponobj;
     }
   } else if(!isDefined(self.play_disguise_vo)) {
     scripts\mp\playeractions::allowactionset("nuke_core", 1);
@@ -870,93 +870,93 @@ function dropnukeweapon(var0, var1, var2) {
     self.headicon = undefined;
   }
 
-  var3 = self.origin;
+  var_3 = self.origin;
 
   if(scripts\cp\cp_outofbounds::isoob(self, 0)) {
-    var3 = level.ref_11edf.origin;
+    var_3 = level.ref_11edf.origin;
   }
 
   scripts\cp\utility::hint_prompt("drop_core", 0);
-  var4 = self getcurrentweapon();
+  var_4 = self getcurrentweapon();
 
-  if(!isDefined(var4) || var4.basename == "none") {
-    var4 = getcompleteweaponname("iw8_nukecore_mp");
+  if(!isDefined(var_4) || var_4.basename == "none") {
+    var_4 = getcompleteweaponname("iw8_nukecore_mp");
   }
 
-  if(var4.basename == "iw8_lm_dblmg_mp") {
+  if(var_4.basename == "iw8_lm_dblmg_mp") {
     scripts\cp_mp\utility\inventory_utility::_takeweapon(getcompleteweaponname("iw8_nukecore_mp"));
-  } else if(isDefined(var2)) {
-    if(issameweapon(var2)) {
-      scripts\cp_mp\utility\inventory_utility::_takeweapon(var1);
-    } else if(isstring(var2)) {
-      scripts\cp_mp\utility\inventory_utility::_takeweapon(var1);
+  } else if(isDefined(var_2)) {
+    if(issameweapon(var_2)) {
+      scripts\cp_mp\utility\inventory_utility::_takeweapon(var_1);
+    } else if(isstring(var_2)) {
+      scripts\cp_mp\utility\inventory_utility::_takeweapon(var_1);
     }
   } else {
-    scripts\cp_mp\utility\inventory_utility::_takeweapon(var4);
+    scripts\cp_mp\utility\inventory_utility::_takeweapon(var_4);
   }
 
-  level.nuclear_core = ref_11aa1(var3 + (0, 0, 64));
+  level.nuclear_core = ref_11aa1(var_3 + (0, 0, 64));
 
-  if(isDefined(var2)) {
-    if(issameweapon(var2)) {
-      self.lastdroppableweaponobj = var2;
-      self switchtoweaponimmediate(var2);
-    } else if(isstring(var2)) {
-      var5 = getcompleteweaponname(var2);
-      self.lastdroppableweaponobj = var5;
-      self switchtoweaponimmediate(var5);
+  if(isDefined(var_2)) {
+    if(issameweapon(var_2)) {
+      self.lastdroppableweaponobj = var_2;
+      self switchtoweaponimmediate(var_2);
+    } else if(isstring(var_2)) {
+      var_5 = getcompleteweaponname(var_2);
+      self.lastdroppableweaponobj = var_5;
+      self switchtoweaponimmediate(var_5);
     }
-  } else if(isDefined(var1)) {
-    self.lastdroppableweaponobj = var1;
-    self switchtoweaponimmediate(var1);
+  } else if(isDefined(var_1)) {
+    self.lastdroppableweaponobj = var_1;
+    self switchtoweaponimmediate(var_1);
   }
 
   self.mine_explosion_vfx = undefined;
   self notify("dropped_core");
 }
 
-function ref_11aa1(var0) {
-  var1 = spawn("script_model", var0);
-  var1 setModel("military_nuke_core_ball");
-  var1 physicslaunchserver(var1.origin, (0, 0, -1));
-  var2 = var1 physics_getbodyid(0);
-  physics_setbodycenterofmassnormal(var2, (0, 0, -1));
-  var1 physics_registerforcollisioncallback();
-  watchnukeimpact(var1);
+function ref_11aa1(var_0) {
+  var_1 = spawn("script_model", var_0);
+  var_1 setModel("military_nuke_core_ball");
+  var_1 physicslaunchserver(var_1.origin, (0, 0, -1));
+  var_2 = var_1 physics_getbodyid(0);
+  physics_setbodycenterofmassnormal(var_2, (0, 0, -1));
+  var_1 physics_registerforcollisioncallback();
+  watchnukeimpact(var_1);
 
-  if(!isDefined(var1)) {} else {
-    var1 scripts\cp\utility::createhintobject("tag_origin", "HINT_BUTTON", undefined, &"CP_FUBAR/PICKUP_CORE", undefined, "duration_short", undefined, 500, 120, 100, 120, var1);
-    var1.objid = scripts\cp\utility::nonobjective_requestobjectiveid();
-    scripts\cp\cp_objectives::minimap_objective_add(var1.objid, "current", var1.origin, "cp_tac_hud_icon_nuke");
-    scripts\cp\cp_objectives::minimap_objective_onentitywithrotation(var1.objid, var1);
-    scripts\cp\cp_objectives::minimap_objective_icon(var1.objid, "cp_tac_hud_icon_nuke");
-    objective_setzoffset(var1.objid, 32);
-    objective_setbackground(var1.objid, 1);
-    objective_setshowdistance(var1.objid, 1);
-    objective_sethot(var1.objid, 1);
-    objective_setpulsate(var1.objid, 1);
-    objective_setplayintro(var1.objid, 0);
+  if(!isDefined(var_1)) {} else {
+    var_1 scripts\cp\utility::createhintobject("tag_origin", "HINT_BUTTON", undefined, &"CP_FUBAR/PICKUP_CORE", undefined, "duration_short", undefined, 500, 120, 100, 120, var_1);
+    var_1.objid = scripts\cp\utility::nonobjective_requestobjectiveid();
+    scripts\cp\cp_objectives::minimap_objective_add(var_1.objid, "current", var_1.origin, "cp_tac_hud_icon_nuke");
+    scripts\cp\cp_objectives::minimap_objective_onentitywithrotation(var_1.objid, var_1);
+    scripts\cp\cp_objectives::minimap_objective_icon(var_1.objid, "cp_tac_hud_icon_nuke");
+    objective_setzoffset(var_1.objid, 32);
+    objective_setbackground(var_1.objid, 1);
+    objective_setshowdistance(var_1.objid, 1);
+    objective_sethot(var_1.objid, 1);
+    objective_setpulsate(var_1.objid, 1);
+    objective_setplayintro(var_1.objid, 0);
     thread give_nuclear_core();
   }
 
-  level notify("dropped_core", var1);
-  return var1;
+  level notify("dropped_core", var_1);
+  return var_1;
 }
 
 function watchnukeimpact() {
   level endon("endthis");
-  var0 = 1;
+  var_0 = 1;
 
   for(;;) {
-    self waittill("collision", var1, var2, var3, var4, var5, var6, var7, var8);
-    var9 = "airdrop_crate_impact";
-    var10 = gettime();
-    self notify("current_impact_time", var10);
+    self waittill("collision", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+    var_9 = "airdrop_crate_impact";
+    var_10 = gettime();
+    self notify("current_impact_time", var_10);
 
-    if(var7 < 100) {} else if(var7 < 200) {} else if(var7 < 300) {} else if(var7 < 400) {} else if(var7 > 400) {}
+    if(var_7 < 100) {} else if(var_7 < 200) {} else if(var_7 < 300) {} else if(var_7 < 400) {} else if(var_7 > 400) {}
 
-    if(istrue(var0)) {
-      var0 = 0;
+    if(istrue(var_0)) {
+      var_0 = 0;
     } else {
       self waittill("play_impact_fx");
     }
@@ -983,54 +983,54 @@ function watcher_for_core_pickup() {
   self endon("dropped_core");
 
   for(;;) {
-    self waittill("finish_pickup_of_weapon", var0, var1);
-    scripts\cp\utility::_giveweapon(var0);
-    self notify("switched_from_core", var0);
+    self waittill("finish_pickup_of_weapon", var_0, var_1);
+    scripts\cp\utility::_giveweapon(var_0);
+    self notify("switched_from_core", var_0);
   }
 }
 
 function watchpickup() {
   self endon("death");
-  var0 = scripts\cp\cp_weapon::getitemweaponname();
+  var_0 = scripts\cp\cp_weapon::getitemweaponname();
 
   for(;;) {
-    self waittill("trigger", var1, var2);
-    var3 = undefined;
+    self waittill("trigger", var_1, var_2);
+    var_3 = undefined;
 
-    if(isDefined(var2)) {
-      var3 = var1.lastdroppableweaponobj;
-    } else if(var1.lastweaponobj.basename == "iw8_nukecore_mp") {
-      var3 = var1.lastdroppableweaponobj;
-      forcedropweapon(var1);
-      var1 scripts\cp\utility::_giveweapon("iw8_nukecore_mp");
+    if(isDefined(var_2)) {
+      var_3 = var_1.lastdroppableweaponobj;
+    } else if(var_1.lastweaponobj.basename == "iw8_nukecore_mp") {
+      var_3 = var_1.lastdroppableweaponobj;
+      forcedropweapon(var_1);
+      var_1 scripts\cp\utility::_giveweapon("iw8_nukecore_mp");
     } else {
-      var3 = var1 getcurrentweapon();
+      var_3 = var_1 getcurrentweapon();
     }
 
-    thread watchpickupcomplete(var1, self.objweapon);
-    var1 notify("weapon_pickup", self.objweapon);
-    var4 = fixupplayerweapons(var1, var0);
+    thread watchpickupcomplete(var_1, self.objweapon);
+    var_1 notify("weapon_pickup", self.objweapon);
+    var_4 = fixupplayerweapons(var_1, var_0);
   }
 
   LOC_000000a9:
-    if(isDefined(var2)) {
-      var5 = var2 scripts\cp\cp_weapon::getitemweaponname();
-      var6 = asmdevgetallstates(var5);
+    if(isDefined(var_2)) {
+      var_5 = var_2 scripts\cp\cp_weapon::getitemweaponname();
+      var_6 = asmdevgetallstates(var_5);
 
-      if(isDefined(var1.tookweaponfrom[var5])) {
-        var2.owner = var1.tookweaponfrom[var5];
-        var1.tookweaponfrom[var5] = undefined;
+      if(isDefined(var_1.tookweaponfrom[var_5])) {
+        var_2.owner = var_1.tookweaponfrom[var_5];
+        var_1.tookweaponfrom[var_5] = undefined;
       }
 
-      var2.objweapon = var6;
-      var2.targetname = "dropped_weapon";
+      var_2.objweapon = var_6;
+      var_2.targetname = "dropped_weapon";
       thread watchpickup();
     }
 
-  var1.tookweaponfrom[var0] = self.owner;
+  var_1.tookweaponfrom[var_0] = self.owner;
 }
 
-function forcedropweapon(var0) {
+function forcedropweapon(var_0) {
   if(isDefined(level.blockweapondrops)) {
     return;
   }
@@ -1039,78 +1039,78 @@ function forcedropweapon(var0) {
     return;
   }
 
-  var1 = self.lastdroppableweaponobj;
+  var_1 = self.lastdroppableweaponobj;
 
-  if(isDefined(var0)) {
-    var1 = var0;
+  if(isDefined(var_0)) {
+    var_1 = var_0;
   }
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  if(var1.basename == "none") {
+  if(var_1.basename == "none") {
     return;
   }
 
-  if(!self hasweapon(var1)) {
+  if(!self hasweapon(var_1)) {
     return;
   }
 
-  if(isDefined(level.gamemodemaydropweapon) && !self[[level.gamemodemaydropweapon]](var1)) {
+  if(isDefined(level.gamemodemaydropweapon) && !self[[level.gamemodemaydropweapon]](var_1)) {
     return;
   }
 
-  var1 = var1 getnoaltweapon();
-  var2 = 0;
-  var3 = 0;
-  var4 = 0;
+  var_1 = var_1 getnoaltweapon();
+  var_2 = 0;
+  var_3 = 0;
+  var_4 = 0;
 
-  if(!scripts\cp_mp\parachute::isriotshield_parachute(var1.basename)) {
-    if(!self anyammoforweaponmodes(var1)) {
+  if(!scripts\cp_mp\parachute::isriotshield_parachute(var_1.basename)) {
+    if(!self anyammoforweaponmodes(var_1)) {
       return;
     }
 
-    var2 = self getweaponammoclip(var1, "right");
-    var3 = self getweaponammoclip(var1, "left");
+    var_2 = self getweaponammoclip(var_1, "right");
+    var_3 = self getweaponammoclip(var_1, "left");
 
-    if(!var2 && !var3) {
+    if(!var_2 && !var_3) {
       return;
     }
 
-    var4 = self getweaponammostock(var1);
-    var5 = weaponmaxammo(var1);
+    var_4 = self getweaponammostock(var_1);
+    var_5 = weaponmaxammo(var_1);
 
-    if(var4 > var5) {
-      var4 = var5;
+    if(var_4 > var_5) {
+      var_4 = var_5;
     }
 
-    var6 = self dropitem(var1);
+    var_6 = self dropitem(var_1);
 
-    if(!isDefined(var6)) {
+    if(!isDefined(var_6)) {
       return;
     }
 
     if(istrue(level.clearstockondrop)) {
-      var4 = 0;
+      var_4 = 0;
     }
 
-    var6 itemweaponsetammo(var2, var4, var3);
+    var_6 itemweaponsetammo(var_2, var_4, var_3);
   } else {
-    var6 = self dropitem(var2);
+    var_6 = self dropitem(var_2);
 
-    if(!isDefined(var6)) {
+    if(!isDefined(var_6)) {
       return;
     }
 
-    var6 itemweaponsetammo(1, 1, 0);
+    var_6 itemweaponsetammo(1, 1, 0);
   }
 
-  var6 sethintdisplayrange(96);
-  var6 setuserange(96);
-  var6.owner = self;
-  var6.targetname = "dropped_weapon";
-  var6.objweapon = var2;
+  var_6 sethintdisplayrange(96);
+  var_6 setuserange(96);
+  var_6.owner = self;
+  var_6.targetname = "dropped_weapon";
+  var_6.objweapon = var_2;
   thread watchpickup();
 }
 
@@ -1125,57 +1125,57 @@ function deletepickupafterawhile() {
   self delete();
 }
 
-function fixupplayerweapons(var0, var1) {
-  var2 = var0 getweaponslistprimaries();
-  var3 = 1;
-  var4 = 1;
-  var5 = undefined;
+function fixupplayerweapons(var_0, var_1) {
+  var_2 = var_0 getweaponslistprimaries();
+  var_3 = 1;
+  var_4 = 1;
+  var_5 = undefined;
 
-  if(issameweapon(var1)) {
-    var5 = createheadicon(var1);
+  if(issameweapon(var_1)) {
+    var_5 = createheadicon(var_1);
   } else {
-    var5 = var1;
+    var_5 = var_1;
   }
 
-  foreach(var7 in var2) {
-    if(isDefined(var0.primaryweaponobj) && var0.primaryweaponobj == var7) {
-      var3 = 0;
+  foreach(var_7 in var_2) {
+    if(isDefined(var_0.primaryweaponobj) && var_0.primaryweaponobj == var_7) {
+      var_3 = 0;
       continue;
     }
 
-    if(isDefined(var0.secondaryweaponobj) && var0.secondaryweaponobj == var7) {
-      var4 = 0;
+    if(isDefined(var_0.secondaryweaponobj) && var_0.secondaryweaponobj == var_7) {
+      var_4 = 0;
     }
   }
 
-  if(var3) {
-    var0.primaryweapon = var5;
-    var0.primaryweaponobj = asmdevgetallstates(var5);
-  } else if(var4) {
-    var0.secondaryweapon = var5;
-    var0.secondaryweaponobj = asmdevgetallstates(var5);
+  if(var_3) {
+    var_0.primaryweapon = var_5;
+    var_0.primaryweaponobj = asmdevgetallstates(var_5);
+  } else if(var_4) {
+    var_0.secondaryweapon = var_5;
+    var_0.secondaryweaponobj = asmdevgetallstates(var_5);
   }
 
-  return var3 || var4;
+  return var_3 || var_4;
 }
 
-function watchpickupcomplete(var0, var1, var2) {
+function watchpickupcomplete(var_0, var_1, var_2) {
   self endon("death_or_disconnect");
   self notify("watchPickupComplete()");
   self endon("watchPickupComplete()");
-  var3 = self.currentweapon;
-  var4 = 0;
-  jumpiffalse(var3 == var0) LOC_00000033;
-  var4 = 1;
+  var_3 = self.currentweapon;
+  var_4 = 0;
+  jumpiffalse(var_3 == var_0) LOC_00000033;
+  var_4 = 1;
   goto LOC_00000069;
 }
 
-function nuclearcorepickedup(var0, var1) {
+function nuclearcorepickedup(var_0, var_1) {
   scripts\mp\playeractions::allowactionset("nuke_core", 0);
   self allowmountside(0);
   self allowmounttop(0);
   self allowjog(0);
-  watchnukeweaponenduse(var0, var1);
+  watchnukeweaponenduse(var_0, var_1);
 }
 
 function give_nuclear_core() {
@@ -1184,50 +1184,50 @@ function give_nuclear_core() {
   self endon("give_nuclear_core");
 
   for(;;) {
-    self waittill("trigger", var0);
+    self waittill("trigger", var_0);
 
-    if(!isPlayer(var0)) {
+    if(!isPlayer(var_0)) {
       continue;
     }
 
-    if(var0 meleeButtonPressed()) {
+    if(var_0 meleeButtonPressed()) {
       continue;
     }
 
-    level.nuclear_core_carrier = var0;
+    level.nuclear_core_carrier = var_0;
 
-    if(var0 hasweapon("iw8_lm_dblmg_mp")) {
-      var0 thread scripts\cp\utility::hint_prompt("cant_pick_jugg", 1, 2);
+    if(var_0 hasweapon("iw8_lm_dblmg_mp")) {
+      var_0 thread scripts\cp\utility::hint_prompt("cant_pick_jugg", 1, 2);
       continue;
     }
 
-    var1 = var0 getcurrentweapon();
-    var2 = getcompleteweaponname("iw8_nukecore_mp");
-    var0 scripts\cp\utility::_giveweapon(var2);
-    var0 switchtoweapon(var2);
-    var0 scripts\mp\playeractions::allowactionset("nuke_core", 0);
-    var0 allowmountside(0);
-    var0 allowmounttop(0);
-    var0 allowjog(0);
-    watchnukeweaponenduse(var0, var2, var1);
+    var_1 = var_0 getcurrentweapon();
+    var_2 = getcompleteweaponname("iw8_nukecore_mp");
+    var_0 scripts\cp\utility::_giveweapon(var_2);
+    var_0 switchtoweapon(var_2);
+    var_0 scripts\mp\playeractions::allowactionset("nuke_core", 0);
+    var_0 allowmountside(0);
+    var_0 allowmounttop(0);
+    var_0 allowjog(0);
+    watchnukeweaponenduse(var_0, var_2, var_1);
     thread watcher_for_core_pickup();
-    var0.headicon = var0 thread scripts\cp_mp\entityheadicons::setheadicon_singleimage(level.players, "cp_tac_hud_icon_nuke", 30, 1, 29000, 29000, undefined, 1, 0, undefined, 1);
+    var_0.headicon = var_0 thread scripts\cp_mp\entityheadicons::setheadicon_singleimage(level.players, "cp_tac_hud_icon_nuke", 30, 1, 29000, 29000, undefined, 1, 0, undefined, 1);
 
-    foreach(var4 in level.players) {
-      if(istrue(var4.binc130)) {
+    foreach(var_4 in level.players) {
+      if(istrue(var_4.binc130)) {
         if(istrue(level.ref_11eda)) {
-          scripts\cp_mp\entityheadicons::ref_1315e(var0.headicon, var4);
+          scripts\cp_mp\entityheadicons::ref_1315e(var_0.headicon, var_4);
         }
 
         continue;
       }
 
       if(istrue(level.ref_11eda)) {
-        thread autofeeder(var4, 4);
+        thread autofeeder(var_4, 4);
         continue;
       }
 
-      scripts\cp_mp\entityheadicons::ref_1315e(var0.headicon, var4);
+      scripts\cp_mp\entityheadicons::ref_1315e(var_0.headicon, var_4);
       LOC_00000154:
     }
 
@@ -1236,12 +1236,12 @@ function give_nuclear_core() {
   }
 }
 
-function autofeeder(var0, var1) {
-  var0 endon("disconnect");
-  wait var1;
+function autofeeder(var_0, var_1) {
+  var_0 endon("disconnect");
+  wait var_1;
 
   if(isDefined(level.nuclear_core_carrier)) {
-    scripts\cp_mp\entityheadicons::ref_1315d(level.nuclear_core_carrier.headicon, var0);
+    scripts\cp_mp\entityheadicons::ref_1315d(level.nuclear_core_carrier.headicon, var_0);
     return;
   }
 }
@@ -1256,22 +1256,22 @@ function start_automated_respawn_func() {
 function automated_respawn_sequence() {
   level.respawn_uses++;
   level.respawn_in_progress = 1;
-  var0 = [];
+  var_0 = [];
 
-  foreach(var2 in level.players) {
-    if(scripts\cp\cp_laststand::player_in_laststand(var2)) {
+  foreach(var_2 in level.players) {
+    if(scripts\cp\cp_laststand::player_in_laststand(var_2)) {
       continue;
     }
 
-    var0 = scripts\engine\utility::array_add(var0, var2);
+    var_0 = scripts\engine\utility::array_add(var_0, var_2);
   }
 
-  var4 = scripts\engine\utility::random(var0);
-  scripts\cp\respawn\cp_ac130_respawn::start_ac130_respawn_sequence(var4.origin, level.players_in_respawn_queue, var4);
+  var_4 = scripts\engine\utility::random(var_0);
+  scripts\cp\respawn\cp_ac130_respawn::start_ac130_respawn_sequence(var_4.origin, level.players_in_respawn_queue, var_4);
 
-  foreach(var2 in level.players) {
-    var2 thread scripts\cp\cp_hud_message::showsplash("cp_used_respawn");
-    thread toggle_respawn_functionality_after_timeout(var2);
+  foreach(var_2 in level.players) {
+    var_2 thread scripts\cp\cp_hud_message::showsplash("cp_used_respawn");
+    thread toggle_respawn_functionality_after_timeout(var_2);
   }
 
   level.respawn_in_progress = undefined;
@@ -1312,9 +1312,9 @@ function hotjoin_via_ac130() {
 
   self.unset_relic_oneclip = 1;
   self notify("start_hotjoining_via_c130");
-  var0 = (0, 0, 0);
-  var1 = scripts\cp\respawn\cp_ac130_respawn::get_path_over_players(var0, undefined, 1);
-  thread scripts\cp\respawn\cp_ac130_respawn::spawnc130(var1, 1, self);
+  var_0 = (0, 0, 0);
+  var_1 = scripts\cp\respawn\cp_ac130_respawn::get_path_over_players(var_0, undefined, 1);
+  thread scripts\cp\respawn\cp_ac130_respawn::spawnc130(var_1, 1, self);
   thread scripts\cp\respawn\cp_ac130_respawn::start_black_screen(self, 1);
 }
 
@@ -1325,8 +1325,8 @@ function can_do_hotjoin_via_ac130() {
 function takeweaponsdefaultfunc() {
   if(isDefined(level.nuclear_core_carrier)) {
     if(level.nuclear_core_carrier == self) {
-      var0 = self getcurrentweapon();
-      self takeweapon(var0);
+      var_0 = self getcurrentweapon();
+      self takeweapon(var_0);
       self notify("end_nuke_threads");
       scripts\mp\playeractions::allowactionset("nuke_core", 1);
       self allowmountside(1);
@@ -1346,25 +1346,25 @@ function takeweaponsdefaultfunc() {
     self.secondaryweaponstockammo = self getweaponammostock(self.secondaryweaponobj);
   }
 
-  var1 = getcompleteweaponname("iw8_fists_mp");
-  var2 = getcompleteweaponname("none");
+  var_1 = getcompleteweaponname("iw8_fists_mp");
+  var_2 = getcompleteweaponname("none");
   self.weaponlist = self.primaryweapons;
 
-  for(var3 = 0; var3 < self.weaponlist.size; var3++) {
-    var4 = self.weaponlist[var3];
+  for(var_3 = 0; var_3 < self.weaponlist.size; var_3++) {
+    var_4 = self.weaponlist[var_3];
 
-    if(isDefined(var4) && !isnullweapon(var1, var4) && !isnullweapon(var2, var4)) {
-      self takeweapon(var4);
+    if(isDefined(var_4) && !isnullweapon(var_1, var_4) && !isnullweapon(var_2, var_4)) {
+      self takeweapon(var_4);
     }
   }
 
   self clearaccessory();
 
-  if(!self hasweapon(var1)) {
-    scripts\cp_mp\utility\inventory_utility::_giveweapon(var1, undefined, undefined, 1);
+  if(!self hasweapon(var_1)) {
+    scripts\cp_mp\utility\inventory_utility::_giveweapon(var_1, undefined, undefined, 1);
   }
 
-  scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var1, 1);
+  scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var_1, 1);
   thread ref_14468();
 }
 
@@ -1397,41 +1397,41 @@ function ref_14468() {
   }
 }
 
-function removecameraondisconnect(var0) {
+function removecameraondisconnect(var_0) {
   self endon("spawn_camera_deleted");
   self waittill("disconnect");
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
     return;
   }
 }
 
-function ref_1380a(var0, var1) {
-  var2 = vectorNormalize(var0.origin - var1.origin);
-  var3 = var0.origin + var2 * -8500 + (0, 0, 7000);
-  var4 = vectorNormalize(var0.origin - var3);
-  var5 = scripts\cp\utility::vectortoanglessafe(var4, (0, 0, 1));
-  var6 = spawnStruct();
-  var6.origin = var3;
-  var6.angles = var5;
-  var7 = var6.origin;
-  var8 = var6.angles;
-  var9 = var0.spawncameraent.origin;
-  var10 = vectorNormalize(var9 - var6.origin);
-  var11 = scripts\cp\utility::vectortoanglessafe(var10, (0, 0, 1));
-  var0.spawncameraent.angles = var11;
-  var12 = distance(var9, var7);
-  var13 = var12 / 3520;
-  var13 = clamp(var13, 1.5, 3);
-  var0.spawncameratargetpos = var7;
-  var0.spawncameratargetang = var8;
-  var0.spawncameratime = var13;
-  var0.spawncameraendtime = gettime() + var13 * 1000;
-  var0 earthquakeforplayer(0.03, 15, var7, 1000);
+function ref_1380a(var_0, var_1) {
+  var_2 = vectorNormalize(var_0.origin - var_1.origin);
+  var_3 = var_0.origin + var_2 * -8500 + (0, 0, 7000);
+  var_4 = vectorNormalize(var_0.origin - var_3);
+  var_5 = scripts\cp\utility::vectortoanglessafe(var_4, (0, 0, 1));
+  var_6 = spawnStruct();
+  var_6.origin = var_3;
+  var_6.angles = var_5;
+  var_7 = var_6.origin;
+  var_8 = var_6.angles;
+  var_9 = var_0.spawncameraent.origin;
+  var_10 = vectorNormalize(var_9 - var_6.origin);
+  var_11 = scripts\cp\utility::vectortoanglessafe(var_10, (0, 0, 1));
+  var_0.spawncameraent.angles = var_11;
+  var_12 = distance(var_9, var_7);
+  var_13 = var_12 / 3520;
+  var_13 = clamp(var_13, 1.5, 3);
+  var_0.spawncameratargetpos = var_7;
+  var_0.spawncameratargetang = var_8;
+  var_0.spawncameratime = var_13;
+  var_0.spawncameraendtime = gettime() + var_13 * 1000;
+  var_0 earthquakeforplayer(0.03, 15, var_7, 1000);
 }
 
-function startspawncamera(var0) {
+function startspawncamera(var_0) {
   self endon("disconnect");
   scripts\cp\utility::hideminimap(1);
 
@@ -1451,16 +1451,16 @@ function startspawncamera(var0) {
   thread ref_12768(0, 0.25, 0.25);
   waitframe();
   scripts\engine\utility::ref_143bf(0.1, "force_spawn");
-  var1 = self getEye();
-  var2 = self.angles;
-  self.deathspectatepos = var1;
-  self.deathspectateangles = var2;
+  var_1 = self getEye();
+  var_2 = self.angles;
+  self.deathspectatepos = var_1;
+  self.deathspectateangles = var_2;
 
   if(!isDefined(self.spawncameraent)) {
-    var3 = spawn("script_model", self.deathspectatepos);
-    var3 setModel("tag_origin");
-    var3.angles = self.deathspectateangles;
-    self.spawncameraent = var3;
+    var_3 = spawn("script_model", self.deathspectatepos);
+    var_3 setModel("tag_origin");
+    var_3.angles = self.deathspectateangles;
+    self.spawncameraent = var_3;
     self playerlinkTo(self.spawncameraent);
   } else {
     self.spawncameraent.origin = self.deathspectatepos;
@@ -1469,122 +1469,122 @@ function startspawncamera(var0) {
 
   thread removecameraondisconnect(self.spawncameraent);
   self cameralinkTo(self.spawncameraent, "tag_origin", 1, 1);
-  snaptospawncamera(var0);
+  snaptospawncamera(var_0);
 }
 
-function entitylerpovertime(var0, var1, var2, var3, var4) {
-  var0 endon("death");
+function entitylerpovertime(var_0, var_1, var_2, var_3, var_4) {
+  var_0 endon("death");
 
-  if(var3 <= 0) {
-    var3 = 1;
+  if(var_3 <= 0) {
+    var_3 = 1;
   }
 
-  var5 = 1 / var3 / 0.05;
-  var6 = 0;
-  var7 = var0.origin;
-  var8 = var0.angles;
-  jumpiffalse(var4 == 2) LOC_00000053;
+  var_5 = 1 / var_3 / 0.05;
+  var_6 = 0;
+  var_7 = var_0.origin;
+  var_8 = var_0.angles;
+  jumpiffalse(var_4 == 2) LOC_00000053;
   level.c130 notify("players_viewing_crash");
 
-  while(var6 < 1) {
-    var9 = vectorlerp(var7, var1, var6);
-    var10 = scripts\engine\math::fake_slerp(var8, var2, var6);
+  while(var_6 < 1) {
+    var_9 = vectorlerp(var_7, var_1, var_6);
+    var_10 = scripts\engine\math::fake_slerp(var_8, var_2, var_6);
 
-    if(isPlayer(var0) || isagent(var0)) {
-      var0 setOrigin(var9, 1);
-      var0 setplayerangles(var10);
+    if(isPlayer(var_0) || isagent(var_0)) {
+      var_0 setOrigin(var_9, 1);
+      var_0 setplayerangles(var_10);
     } else {
-      var0.origin = var9;
-      var0.angles = var10;
+      var_0.origin = var_9;
+      var_0.angles = var_10;
     }
 
-    var6 += var5;
+    var_6 += var_5;
     waitframe();
   }
 
-  if(isPlayer(var0) || isagent(var0)) {
-    var0 setOrigin(var1, 1);
-    var0 setplayerangles(var2);
+  if(isPlayer(var_0) || isagent(var_0)) {
+    var_0 setOrigin(var_1, 1);
+    var_0 setplayerangles(var_2);
     return;
   }
 
-  var0.origin = var1;
-  var0.angles = var2;
+  var_0.origin = var_1;
+  var_0.angles = var_2;
 }
 
-function get_lerped_origin(var0, var1, var2) {
-  return vectorlerp(var0, var1, var2);
+function get_lerped_origin(var_0, var_1, var_2) {
+  return vectorlerp(var_0, var_1, var_2);
 }
 
-function get_fake_slerped_angles(var0, var1, var2) {
-  return scripts\engine\math::fake_slerp(var0, var1, var2);
+function get_fake_slerped_angles(var_0, var_1, var_2) {
+  return scripts\engine\math::fake_slerp(var_0, var_1, var_2);
 }
 
-function ref_12768(var0, var1, var2, var3) {
-  if(!isDefined(var3)) {
-    var3 = "black";
+function ref_12768(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_3)) {
+    var_3 = "black";
   }
 
-  var4 = newclienthudelem(self);
-  var4.x = 0;
-  var4.y = 0;
-  var4.alignx = "left";
-  var4.aligny = "top";
-  var4.sort = 1;
-  var4.horzalign = "fullscreen";
-  var4.vertalign = "fullscreen";
-  var4.foreground = 1;
+  var_4 = newclienthudelem(self);
+  var_4.x = 0;
+  var_4.y = 0;
+  var_4.alignx = "left";
+  var_4.aligny = "top";
+  var_4.sort = 1;
+  var_4.horzalign = "fullscreen";
+  var_4.vertalign = "fullscreen";
+  var_4.foreground = 1;
 
-  if(isDefined(var0) && var0 > 0) {
-    var4.alpha = 0;
+  if(isDefined(var_0) && var_0 > 0) {
+    var_4.alpha = 0;
   } else {
-    var4.alpha = 1;
+    var_4.alpha = 1;
   }
 
-  var4 setshader(var3, 640, 480);
+  var_4 setshader(var_3, 640, 480);
 
-  if(isDefined(var0) && var0 > 0) {
+  if(isDefined(var_0) && var_0 > 0) {
     self notify("fadeDown_start");
-    var4 fadeovertime(var0);
-    var4.alpha = 1;
-    wait var0;
+    var_4 fadeovertime(var_0);
+    var_4.alpha = 1;
+    wait var_0;
     self notify("fadeDown_complete");
   }
 
-  if(isDefined(var1) && var1 > 0) {
-    wait var1;
+  if(isDefined(var_1) && var_1 > 0) {
+    wait var_1;
   }
 
   self notify("fadeUp_start");
 
-  if(!isDefined(var2)) {
-    var2 = 0.5;
+  if(!isDefined(var_2)) {
+    var_2 = 0.5;
   }
 
-  var4 fadeovertime(var2);
-  var4.alpha = 0;
-  wait var2;
+  var_4 fadeovertime(var_2);
+  var_4.alpha = 0;
+  wait var_2;
   self notify("fadeUp_complete");
 
-  if(isDefined(var4)) {
-    var4 destroy();
+  if(isDefined(var_4)) {
+    var_4 destroy();
     return;
   }
 }
 
-function snaptospawncamera(var0) {
+function snaptospawncamera(var_0) {
   self endon("disconnect");
   self waittill("fadeUp_start");
-  var1 = var0;
-  self.spawncameraent.origin = var1.origin;
-  self.spawncameraent.angles = var1.angles;
+  var_1 = var_0;
+  self.spawncameraent.origin = var_1.origin;
+  self.spawncameraent.angles = var_1.angles;
   self visionsetnakedforplayer("", 0);
   applythermal();
 
   if(isDefined(self) && isDefined(self.spawncameraent)) {
-    var2 = anglesToForward(self.spawncameraent.angles) * 300;
-    var2 *= (1, 1, 0);
-    self.spawncameraent moveTo(self.spawncameraent.origin + var2, 15, 1, 1);
+    var_2 = anglesToForward(self.spawncameraent.angles) * 300;
+    var_2 *= (1, 1, 0);
+    self.spawncameraent moveTo(self.spawncameraent.origin + var_2, 15, 1, 1);
     self earthquakeforplayer(0.03, 15, self.spawncameraent.origin, 1000);
   }
 
@@ -1592,11 +1592,11 @@ function snaptospawncamera(var0) {
   self notify("spawn_camera_idle");
 }
 
-function runslamzoomonspawn(var0) {
+function runslamzoomonspawn(var_0) {
   self endon("disconnect");
   thread scripts\cp\utility::drawline(self.spawncameraent.origin, self.origin, 100000, (1, 0, 0));
   self cameralinkTo(self.spawncameraent, "tag_origin", 1, 1);
-  handlemovetoblended(var0);
+  handlemovetoblended(var_0);
 }
 
 function deletespawncamera() {
@@ -1609,34 +1609,34 @@ function deletespawncamera() {
   self notify("spawn_camera_deleted");
 }
 
-function handlemovetoblended(var0) {
+function handlemovetoblended(var_0) {
   self endon("disconnect");
-  var1 = var0.origin + (0, 0, 60);
-  var2 = var0.angles;
-  var3 = angle_diff(self.spawncameraent.angles[1], var2[1]) < 45;
-  var4 = distance2dsquared(self.spawncameraent.origin, var1) > 1000000;
+  var_1 = var_0.origin + (0, 0, 60);
+  var_2 = var_0.angles;
+  var_3 = angle_diff(self.spawncameraent.angles[1], var_2[1]) < 45;
+  var_4 = distance2dsquared(self.spawncameraent.origin, var_1) > 1000000;
 
-  if(!var3 || !var4) {
+  if(!var_3 || !var_4) {
     removethermal();
     self visionsetnakedforplayer("", 0);
     wait 0.05;
-    self.spawncameraent moveTo(var1, 1, 0.1, 0.9);
-    self.spawncameraent rotateTo(var2, 1, 0.9, 0.1);
+    self.spawncameraent moveTo(var_1, 1, 0.1, 0.9);
+    self.spawncameraent rotateTo(var_2, 1, 0.9, 0.1);
     self visionsetnakedforplayer("tac_ops_slamzoom", 0.8);
     wait 0.8;
     self visionsetnakedforplayer("", 0.2);
     wait 0.2;
   } else {
-    var5 = vectorNormalize(var1 - self.spawncameraent.origin);
-    var6 = scripts\cp\utility::vectortoanglessafe(var5, (0, 0, 1));
-    self.spawncameraent rotateTo(var6, 0.7, 0.2, 0.2);
+    var_5 = vectorNormalize(var_1 - self.spawncameraent.origin);
+    var_6 = scripts\cp\utility::vectortoanglessafe(var_5, (0, 0, 1));
+    self.spawncameraent rotateTo(var_6, 0.7, 0.2, 0.2);
     removethermal();
     self visionsetnakedforplayer("", 0);
     wait 0.05;
-    self.spawncameraent moveTo(var1, 1, 0.1, 0.9);
+    self.spawncameraent moveTo(var_1, 1, 0.1, 0.9);
     self visionsetnakedforplayer("tac_ops_slamzoom", 0.8);
     wait 0.5;
-    self.spawncameraent rotateTo(var2, 0.5, 0.2, 0.1);
+    self.spawncameraent rotateTo(var_2, 0.5, 0.2, 0.1);
     wait 0.3;
     self visionsetnakedforplayer("", 0.2);
   }
@@ -1644,8 +1644,8 @@ function handlemovetoblended(var0) {
   self notify("spawn_camera_complete");
 }
 
-function angle_diff(var0, var1) {
-  return 180 - abs(abs(var0 - var1) - 180);
+function angle_diff(var_0, var_1) {
+  return 180 - abs(abs(var_0 - var_1) - 180);
 }
 
 function applythermal() {
@@ -1663,8 +1663,8 @@ function play_mhc_plane_escape_skit() {
   camera_setup_for_lerping();
   self visionsetnakedforplayer("tac_ops_slamzoom", 0.8);
 
-  for(var0 = 0; var0 < level.mhc_escape_ents_array.size; var0++) {
-    entitylerpovertime(self.spawncameraent, level.mhc_escape_ents_array[var0].origin + (0, 0, 64), level.mhc_escape_ents_array[var0].angles, 1 - var0 * 0.25, var0);
+  for(var_0 = 0; var_0 < level.mhc_escape_ents_array.size; var_0++) {
+    entitylerpovertime(self.spawncameraent, level.mhc_escape_ents_array[var_0].origin + (0, 0, 64), level.mhc_escape_ents_array[var_0].angles, 1 - var_0 * 0.25, var_0);
   }
 
   self visionsetnakedforplayer("", 1);
@@ -1679,33 +1679,33 @@ function delay_giving_controls_back() {
 }
 
 function create_mhc_path() {
-  var0 = getEnt("mhc_camera_start", "script_noteworthy");
-  var1 = [var0];
+  var_0 = getEnt("mhc_camera_start", "script_noteworthy");
+  var_1 = [var_0];
 
-  while(isDefined(var0.target)) {
-    var0 = getEnt(var0.target, "targetname");
+  while(isDefined(var_0.target)) {
+    var_0 = getEnt(var_0.target, "targetname");
 
-    if(isDefined(var0.script_linkto)) {
-      var2 = [var0];
-      var3 = var0 scripts\engine\utility::get_linked_structs();
-      var1 = scripts\engine\utility::array_combine(var2, var3);
+    if(isDefined(var_0.script_linkto)) {
+      var_2 = [var_0];
+      var_3 = var_0 scripts\engine\utility::get_linked_structs();
+      var_1 = scripts\engine\utility::array_combine(var_2, var_3);
       continue;
     }
 
-    GscBinSkip0(0x2e, var1.size, var0);
+    GscBinSkip0(0x2e, var_1.size, var_0);
   }
 
-  return var1;
+  return var_1;
 }
 
-function camera_setup_for_lerping(var0, var1) {
-  var0 endon("disconnect");
+function camera_setup_for_lerping(var_0, var_1) {
+  var_0 endon("disconnect");
 
-  if(isai(var0)) {
+  if(isai(var_0)) {
     return;
   }
 
-  if(istrue(var0.inmhccam)) {
+  if(istrue(var_0.inmhccam)) {
     return;
   }
 
@@ -1713,64 +1713,64 @@ function camera_setup_for_lerping(var0, var1) {
     return;
   }
 
-  var0.inmhccam = 1;
-  var0.deathspectatepos = var1.origin;
-  var0.deathspectateangles = var1.angles;
+  var_0.inmhccam = 1;
+  var_0.deathspectatepos = var_1.origin;
+  var_0.deathspectateangles = var_1.angles;
 
-  if(!isDefined(var0.spawncameraent)) {
-    var2 = spawn("script_model", var0.deathspectatepos);
-    var2 setModel("tag_origin");
-    var2.angles = var0.deathspectateangles;
-    var0.spawncameraent = var2;
-    var0 playerlinkTo(var0.spawncameraent);
+  if(!isDefined(var_0.spawncameraent)) {
+    var_2 = spawn("script_model", var_0.deathspectatepos);
+    var_2 setModel("tag_origin");
+    var_2.angles = var_0.deathspectateangles;
+    var_0.spawncameraent = var_2;
+    var_0 playerlinkTo(var_0.spawncameraent);
   } else {
-    var0.spawncameraent.origin = var0.deathspectatepos;
-    var0.spawncameraent.angles = var0.deathspectateangles;
+    var_0.spawncameraent.origin = var_0.deathspectatepos;
+    var_0.spawncameraent.angles = var_0.deathspectateangles;
   }
 
-  thread removecameraondisconnect(var0);
-  var0 cameralinkTo(var0.spawncameraent, "tag_origin", 1, 1);
-  thread ref_12768(var0, 0, 1, 0.25);
-  var3 = vectorNormalize(var0.origin - var1.origin);
-  var4 = var0.origin + var3 * -8500 + (0, 0, 7000);
-  var5 = vectorNormalize(var0.origin - var4);
-  var6 = scripts\cp\utility::vectortoanglessafe(var5, (0, 0, 1));
-  var7 = spawnStruct();
-  var7.origin = var4;
-  var7.angles = var6;
-  var8 = var7.origin;
-  var9 = var7.angles;
-  var10 = var0.spawncameraent.origin;
-  var11 = vectorNormalize(var10 - var7.origin);
-  var12 = scripts\cp\utility::vectortoanglessafe(var11, (0, 0, 1));
-  var0.spawncameraent.angles = var12;
-  var13 = distance(var10, var8);
-  var14 = var13 / 3520;
-  var14 = clamp(var14, 1.5, 3);
-  var0.spawncameratargetpos = var8;
-  var0.spawncameratargetang = var9;
-  var0.spawncameratime = var14;
-  var0.spawncameraendtime = gettime() + var14 * 1000;
-  var0 earthquakeforplayer(0.03, 15, var8, 1000);
-  var0.spawncameraent moveTo(var8, 1, 0.25, 0.75);
-  var0.spawncameraent rotateTo(var9, 1, 0.25, 0.75);
+  thread removecameraondisconnect(var_0);
+  var_0 cameralinkTo(var_0.spawncameraent, "tag_origin", 1, 1);
+  thread ref_12768(var_0, 0, 1, 0.25);
+  var_3 = vectorNormalize(var_0.origin - var_1.origin);
+  var_4 = var_0.origin + var_3 * -8500 + (0, 0, 7000);
+  var_5 = vectorNormalize(var_0.origin - var_4);
+  var_6 = scripts\cp\utility::vectortoanglessafe(var_5, (0, 0, 1));
+  var_7 = spawnStruct();
+  var_7.origin = var_4;
+  var_7.angles = var_6;
+  var_8 = var_7.origin;
+  var_9 = var_7.angles;
+  var_10 = var_0.spawncameraent.origin;
+  var_11 = vectorNormalize(var_10 - var_7.origin);
+  var_12 = scripts\cp\utility::vectortoanglessafe(var_11, (0, 0, 1));
+  var_0.spawncameraent.angles = var_12;
+  var_13 = distance(var_10, var_8);
+  var_14 = var_13 / 3520;
+  var_14 = clamp(var_14, 1.5, 3);
+  var_0.spawncameratargetpos = var_8;
+  var_0.spawncameratargetang = var_9;
+  var_0.spawncameratime = var_14;
+  var_0.spawncameraendtime = gettime() + var_14 * 1000;
+  var_0 earthquakeforplayer(0.03, 15, var_8, 1000);
+  var_0.spawncameraent moveTo(var_8, 1, 0.25, 0.75);
+  var_0.spawncameraent rotateTo(var_9, 1, 0.25, 0.75);
   wait 1;
-  thread ref_12768(var0, 0, 0.25);
-  applythermal(var0);
+  thread ref_12768(var_0, 0, 0.25);
+  applythermal(var_0);
   thread startoperatorsound();
 
-  if(isDefined(var0) && isDefined(var0.spawncameraent)) {
-    var15 = anglesToForward(var9) * 300;
-    var15 *= (1, 1, 0);
-    var0.spawncameraent moveTo(var1.origin + var15, 15, 1, 1);
-    var0 earthquakeforplayer(0.03, 15, var1.origin, 1000);
+  if(isDefined(var_0) && isDefined(var_0.spawncameraent)) {
+    var_15 = anglesToForward(var_9) * 300;
+    var_15 *= (1, 1, 0);
+    var_0.spawncameraent moveTo(var_1.origin + var_15, 15, 1, 1);
+    var_0 earthquakeforplayer(0.03, 15, var_1.origin, 1000);
   }
 
   wait 1;
-  removethermal(var0);
-  var0 visionsetnakedforplayer("", 0);
-  deletespawncamera(var0);
-  var0.inmhccam = undefined;
+  removethermal(var_0);
+  var_0 visionsetnakedforplayer("", 0);
+  deletespawncamera(var_0);
+  var_0.inmhccam = undefined;
 }
 
 function startoperatorsound() {
@@ -1781,22 +1781,22 @@ function startoperatorsound() {
     return;
   }
 
-  var0 = spawn("script_origin", (0, 0, 0));
-  var0 showonlytoplayer(self);
+  var_0 = spawn("script_origin", (0, 0, 0));
+  var_0 showonlytoplayer(self);
   self setsoundsubmix("iw8_mp_spawn_camera");
-  var1 = scripts\cp\cp_player_battlechatter::getteamvoiceinfix(self.team);
-  var2 = "dx_mpo_" + var1 + "op_drone_deathchatter";
+  var_1 = scripts\cp\cp_player_battlechatter::getteamvoiceinfix(self.team);
+  var_2 = "dx_mpo_" + var_1 + "op_drone_deathchatter";
 
-  if(soundexists(var2)) {
-    var0 playLoopSound(var2);
+  if(soundexists(var_2)) {
+    var_0 playLoopSound(var_2);
   } else {
-    var0 playLoopSound("dx_mpo_usop_drone_deathchatter");
+    var_0 playLoopSound("dx_mpo_usop_drone_deathchatter");
   }
 
   self.spawnselectionoperatorsound = 1;
   self waittill("spawned_player");
   self clearsoundsubmix("iw8_mp_spawn_camera");
-  var0 stoploopsound(var2);
-  var0 delete();
+  var_0 stoploopsound(var_2);
+  var_0 delete();
   self.spawnselectionoperatorsound = 0;
 }

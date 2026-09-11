@@ -3,15 +3,15 @@
  * Script: scripts\sp\maps\lab\lab_util.gsc
 ***********************************************/
 
-function setplayerviewmodel(var0, var1, var2) {
-  if(isDefined(var0)) {
-    level.player setviewmodel(var0);
+function setplayerviewmodel(var_0, var_1, var_2) {
+  if(isDefined(var_0)) {
+    level.player setviewmodel(var_0);
   }
 
-  if(isDefined(var1)) {}
+  if(isDefined(var_1)) {}
 
-  if(isDefined(var2)) {
-    level.player setshadowmodel(var2);
+  if(isDefined(var_2)) {
+    level.player setshadowmodel(var_2);
     return;
   }
 }
@@ -24,23 +24,23 @@ function rpg_on_rebels() {
   level endon("hilltop_heli_dead");
 
   for(;;) {
-    var0 = [level.rebel_1, level.rebel_2, level.rebel_3, level.rebel_4, level.rebel_5];
-    var0 = scripts\engine\utility::array_removedead_or_dying(var0);
-    var1 = [];
+    var_0 = [level.rebel_1, level.rebel_2, level.rebel_3, level.rebel_4, level.rebel_5];
+    var_0 = scripts\engine\utility::array_removedead_or_dying(var_0);
+    var_1 = [];
 
-    foreach(var3 in var0) {
-      if(has_backpack(var3)) {
-        var1 = var3;
+    foreach(var_3 in var_0) {
+      if(has_backpack(var_3)) {
+        var_1 = var_3;
       }
     }
 
-    var0 = scripts\engine\utility::array_remove_array(var0, var1);
+    var_0 = scripts\engine\utility::array_remove_array(var_0, var_1);
 
-    if(var0.size > 0) {
-      var3 = get_closest_actor(var0, level.player.origin, 0);
+    if(var_0.size > 0) {
+      var_3 = get_closest_actor(var_0, level.player.origin, 0);
 
-      if(isDefined(var3) && !isarray(var3)) {
-        GscBinSkip4(0x6e, var3, 1);
+      if(isDefined(var_3) && !isarray(var_3)) {
+        GscBinSkip4(0x6e, var_3, 1);
       }
     }
 
@@ -49,16 +49,16 @@ function rpg_on_rebels() {
 }
 
 function has_backpack() {
-  var0 = ["body_sla_rebels_lmg_2_1", "body_sla_rebels_female_5_1"];
+  var_0 = ["body_sla_rebels_lmg_2_1", "body_sla_rebels_female_5_1"];
 
-  if(scripts\engine\utility::array_contains(var0, self.model)) {
+  if(scripts\engine\utility::array_contains(var_0, self.model)) {
     return true;
   }
 
   return false;
 }
 
-function rpg_on_back(var0) {
+function rpg_on_back(var_0) {
   self endon("death");
 
   while(!scripts\engine\utility::flag("hilltop_heli_dead")) {
@@ -68,33 +68,33 @@ function rpg_on_back(var0) {
       waitframe();
     }
 
-    var1 = spawn("weapon_iw8_la_rpapa7_straight", self.origin);
-    var1 linkTo(self, "j_spineupper", (0, 6.6, 0), (17, 0, 0));
-    var1 itemweaponsetammo(1, 1);
-    thread remove_rpg_on_back(var1);
+    var_1 = spawn("weapon_iw8_la_rpapa7_straight", self.origin);
+    var_1 linkTo(self, "j_spineupper", (0, 6.6, 0), (17, 0, 0));
+    var_1 itemweaponsetammo(1, 1);
+    thread remove_rpg_on_back(var_1);
 
-    if(!isDefined(var0)) {
+    if(!isDefined(var_0)) {
       return;
     }
 
-    var1 waittill("trigger", var2, var3);
+    var_1 waittill("trigger", var_2, var_3);
 
-    if(isDefined(var3)) {
-      var3 unlink();
-      var3 physicslaunchserveritem(var3.origin, (0, 0, 15));
+    if(isDefined(var_3)) {
+      var_3 unlink();
+      var_3 physicslaunchserveritem(var_3.origin, (0, 0, 15));
     }
 
     wait 5;
   }
 }
 
-function remove_rpg_on_back(var0) {
+function remove_rpg_on_back(var_0) {
   self endon("death");
   scripts\engine\utility::flag_wait("hilltop_heli_dead");
 
-  while(isDefined(var0)) {
-    if(!scripts\engine\utility::within_fov(level.player.origin, level.player.angles, var0.origin, level.cos60)) {
-      var0 delete();
+  while(isDefined(var_0)) {
+    if(!scripts\engine\utility::within_fov(level.player.origin, level.player.angles, var_0.origin, level.cos60)) {
+      var_0 delete();
     }
 
     wait 1;
@@ -114,17 +114,17 @@ function using_bulletdrop_weapon() {
 }
 
 function check_dropped_weapon() {
-  var0 = self.weapon;
+  var_0 = self.weapon;
   self waittill("death");
-  var1 = createheadicon(var0);
-  var2 = spawn("weapon_" + var1, self.origin + (0, 0, 15), 0);
+  var_1 = createheadicon(var_0);
+  var_2 = spawn("weapon_" + var_1, self.origin + (0, 0, 15), 0);
 }
 
 function wait_for_dropped_weapon_or_timeout() {
   level endon("abort_wait_for_dropped_weapon");
   level thread scripts\engine\sp\utility::notify_delay("abort_wait_for_dropped_weapon", 0.1);
-  self waittill("weapon_dropped", var0);
-  return var0;
+  self waittill("weapon_dropped", var_0);
+  return var_0;
 }
 
 function intro_movie() {
@@ -151,8 +151,8 @@ function intro_movie() {
   setomnvar("ui_hide_weapon_info", 0);
 }
 
-function player_jugg_fight(var0) {
-  if(var0) {
+function player_jugg_fight(var_0) {
+  if(var_0) {
     level.player setthreatbiasgroup("player");
     setsaveddvar("MSOOMPMPQS", 1);
     setsaveddvar("OLMLOTTLRM", 1.8);
@@ -166,93 +166,93 @@ function player_jugg_fight(var0) {
   level.friendlyfiredisabled = 0;
 }
 
-function temp_nags(var0, var1, var2, var3) {
-  level endon(var1);
+function temp_nags(var_0, var_1, var_2, var_3) {
+  level endon(var_1);
 
-  if(!isDefined(var2)) {
-    var2 = "Rebel";
+  if(!isDefined(var_2)) {
+    var_2 = "Rebel";
   }
 
-  if(!scripts\engine\utility::flag_exist(var1)) {
-    scripts\engine\utility::flag_init(var1);
+  if(!scripts\engine\utility::flag_exist(var_1)) {
+    scripts\engine\utility::flag_init(var_1);
   }
 
-  if(!isarray(var0)) {
-    var0 = var0;
+  if(!isarray(var_0)) {
+    var_0 = var_0;
   }
 
-  jumpiffalse(isDefined(var3)) LOC_00000038;
-  wait var3;
+  jumpiffalse(isDefined(var_3)) LOC_00000038;
+  wait var_3;
 
-  while(!scripts\engine\utility::flag(var1)) {
-    foreach(var5 in var0) {
-      thread temp_dialog(var2, "green", var5);
+  while(!scripts\engine\utility::flag(var_1)) {
+    foreach(var_5 in var_0) {
+      thread temp_dialog(var_2, "green", var_5);
       wait 16;
     }
   }
 }
 
-function node_anim_reach_idle(var0, var1) {
-  var0 scripts\sp\anim::anim_reach_solo(self, var1);
-  var0 thread scripts\common\anim::anim_loop_solo(self, var1);
-  var0.guys_in_place++;
+function node_anim_reach_idle(var_0, var_1) {
+  var_0 scripts\sp\anim::anim_reach_solo(self, var_1);
+  var_0 thread scripts\common\anim::anim_loop_solo(self, var_1);
+  var_0.guys_in_place++;
 }
 
-function anim_single_and_idle(var0, var1, var2) {
-  var0 scripts\common\anim::anim_single_solo(self, var1);
-  var0 thread scripts\common\anim::anim_loop_solo(self, var2);
-  var0.guys_in_place++;
+function anim_single_and_idle(var_0, var_1, var_2) {
+  var_0 scripts\common\anim::anim_single_solo(self, var_1);
+  var_0 thread scripts\common\anim::anim_loop_solo(self, var_2);
+  var_0.guys_in_place++;
 }
 
-function anim_reach_arrive_idle(var0, var1, var2) {
-  var0 scripts\sp\anim::anim_reach_solo(self, var1);
-  var0 scripts\common\anim::anim_single_solo(self, var1);
-  var0 thread scripts\common\anim::anim_loop([self, self.animatedmask], var2);
-  var0.guys_in_place++;
+function anim_reach_arrive_idle(var_0, var_1, var_2) {
+  var_0 scripts\sp\anim::anim_reach_solo(self, var_1);
+  var_0 scripts\common\anim::anim_single_solo(self, var_1);
+  var_0 thread scripts\common\anim::anim_loop([self, self.animatedmask], var_2);
+  var_0.guys_in_place++;
 }
 
-function color_node_arrive(var0) {
+function color_node_arrive(var_0) {
   self endon("death");
   self waittill("goal");
 
-  if(isDefined(var0.script_gesture)) {
-    scripts\engine\utility::delaythread(0.7, &scripts\engine\sp\utility::gesture_simple, var0.script_gesture);
+  if(isDefined(var_0.script_gesture)) {
+    scripts\engine\utility::delaythread(0.7, &scripts\engine\sp\utility::gesture_simple, var_0.script_gesture);
   }
 
-  if(isDefined(var0.script_flag)) {
-    scripts\engine\utility::flag_set(var0.script_flag);
+  if(isDefined(var_0.script_flag)) {
+    scripts\engine\utility::flag_set(var_0.script_flag);
   }
 
-  if(isDefined(var0.script_sound)) {
-    thread scripts\engine\sp\utility::smart_dialogue(var0.script_sound);
+  if(isDefined(var_0.script_sound)) {
+    thread scripts\engine\sp\utility::smart_dialogue(var_0.script_sound);
     return;
   }
 }
 
-function teleport_when_safe(var0, var1) {
-  while(isalive(var0) && scripts\engine\utility::within_fov(level.player.origin, level.player.angles, var1.origin, cos(50))) {
+function teleport_when_safe(var_0, var_1) {
+  while(isalive(var_0) && scripts\engine\utility::within_fov(level.player.origin, level.player.angles, var_1.origin, cos(50))) {
     wait 0.15;
   }
 
-  if(!isalive(var0)) {
+  if(!isalive(var_0)) {
     return false;
   }
 
-  var0 forceteleport(var1.origin, var1.angles);
+  var_0 forceteleport(var_1.origin, var_1.angles);
   return true;
 }
 
-function player_gas_mask(var0, var1) {
+function player_gas_mask(var_0, var_1) {
   level endon("switch_to_kyle");
 
-  if(var0) {
+  if(var_0) {
     level.player allowsprint(0);
-    visor_anim(var1, "ges_visor_down");
+    visor_anim(var_1, "ges_visor_down");
     level.player allowsprint(1);
     GscBinSkip4(0x6e, level.player);
   }
 
-  visor_anim(var1, "ges_visor_up", "old");
+  visor_anim(var_1, "ges_visor_up", "old");
   wait 0.25;
 
   if(isDefined(level.gas_mask_overlay)) {
@@ -261,56 +261,56 @@ function player_gas_mask(var0, var1) {
   }
 }
 
-function visor_anim(var0, var1, var2) {
-  var3 = 0.001;
+function visor_anim(var_0, var_1, var_2) {
+  var_3 = 0.001;
 
-  if(!isDefined(var0)) {
-    var3 = 0.12;
+  if(!isDefined(var_0)) {
+    var_3 = 0.12;
   } else {
-    visor_overlay(1, var3, 10, 45);
+    visor_overlay(1, var_3, 10, 45);
     return;
   }
 
-  if(scripts\engine\utility::is_equal(var2, "old")) {
-    level.player thread scripts\engine\sp\utility::player_gesture_force(var1);
+  if(scripts\engine\utility::is_equal(var_2, "old")) {
+    level.player thread scripts\engine\sp\utility::player_gesture_force(var_1);
     wait 0.5;
-    visor_overlay(0, var3, 3.9, 30);
+    visor_overlay(0, var_3, 3.9, 30);
     return;
   }
 
-  scripts\engine\utility::delaythread(2.5, &visor_overlay, 1, var3, 10, 45);
-  var4 = mask_init();
-  var5 = var4 scripts\engine\utility::getanim("player_mask_on");
+  scripts\engine\utility::delaythread(2.5, &visor_overlay, 1, var_3, 10, 45);
+  var_4 = mask_init();
+  var_5 = var_4 scripts\engine\utility::getanim("player_mask_on");
   level.player thread scripts\engine\sp\utility::player_gesture_force("lab_vm_gasmask_ges");
-  var4 thread scripts\common\anim::anim_single_solo(var4, "player_mask_on");
+  var_4 thread scripts\common\anim::anim_single_solo(var_4, "player_mask_on");
   wait 0.4;
-  var4 dontinterpolate();
-  var4 linktoplayerview(level.player, "j_wrist_le", (0, 0, 0), (0, 0, 0), 1, "view_jostle");
+  var_4 dontinterpolate();
+  var_4 linktoplayerview(level.player, "j_wrist_le", (0, 0, 0), (0, 0, 0), 1, "view_jostle");
   scripts\engine\utility::flag_wait("player_mask_on");
-  var4 delete();
+  var_4 delete();
 }
 
-function visor_overlay(var0, var1, var2, var3) {
+function visor_overlay(var_0, var_1, var_2, var_3) {
   if(!isDefined(level.gas_mask_overlay)) {
     level.gas_mask_overlay = scripts\sp\hud_util::create_client_overlay("gasmask_overlay_delta2", 0);
     level.gas_mask_overlay.sort = -1;
     level.gas_mask_overlay.lowresbackground = 1;
   }
 
-  level.gas_mask_overlay fadeovertime(var1);
-  level.gas_mask_overlay.alpha = var0;
+  level.gas_mask_overlay fadeovertime(var_1);
+  level.gas_mask_overlay.alpha = var_0;
   level.player setdepthoffield(1, 200, 5000, 10000, 10, 0);
   level.player setviewmodeldepthoffield(4, 45, 6);
 }
 
 function mask_init() {
   scripts\engine\utility::flag_init("player_mask_on");
-  var0 = spawn("script_model", (0, 0, 0));
-  var0 setModel("prop_child_hadir_gas_mask");
-  var0 scripts\engine\sp\utility::assign_animtree("player_mask");
-  var0 notsolid();
-  var0 scripts\common\anim::anim_first_frame_solo(var0, "player_mask_on");
-  return var0;
+  var_0 = spawn("script_model", (0, 0, 0));
+  var_0 setModel("prop_child_hadir_gas_mask");
+  var_0 scripts\engine\sp\utility::assign_animtree("player_mask");
+  var_0 notsolid();
+  var_0 scripts\common\anim::anim_first_frame_solo(var_0, "player_mask_on");
+  return var_0;
 }
 
 function mask_death_function() {
@@ -340,14 +340,14 @@ function build_rebel_mask_lookup() {
   GscBinSkip1(0x45, "body_sla_rebels_female_1_1", "hat_sla_rebels_female_gasmask_1_1");
 }
 
-function ai_gas_mask(var0) {
-  var1 = build_rebel_mask_lookup();
+function ai_gas_mask(var_0) {
+  var_1 = build_rebel_mask_lookup();
 
   if(self.team == "axis") {
     return;
   }
 
-  if(var0) {
+  if(var_0) {
     if(scripts\engine\utility::is_equal(self, level.farah)) {
       self.hatmodel = "hat_hero_farah_sas_gasmask";
     } else {
@@ -356,7 +356,7 @@ function ai_gas_mask(var0) {
         self.hatmodel = undefined;
       }
 
-      self.hatmodel = var1[self.model];
+      self.hatmodel = var_1[self.model];
     }
 
     if(!isDefined(self.hatmodel)) {
@@ -377,20 +377,20 @@ function mask_in_hand() {
   self.mask = "hat_gasmask";
 }
 
-function delete_on_death_delayed(var0) {
-  var0 endon("death");
+function delete_on_death_delayed(var_0) {
+  var_0 endon("death");
   self waittill("death");
-  var0 scripts\engine\utility::delaycall(3, &delete);
+  var_0 scripts\engine\utility::delaycall(3, &delete);
 }
 
 function trigger_nearest_friendly_respawn_trigger() {
-  var0 = getEntArray("trigger_multiple_friendly_respawn", "classname");
-  sortbydistance(var0, level.player.origin)[0] notify("trigger", level.player);
+  var_0 = getEntArray("trigger_multiple_friendly_respawn", "classname");
+  sortbydistance(var_0, level.player.origin)[0] notify("trigger", level.player);
 }
 
 function spawn_farah() {
-  var0 = getspawner("hero_farah", "targetname");
-  var0.count = 5;
+  var_0 = getspawner("hero_farah", "targetname");
+  var_0.count = 5;
   level.farah = scripts\engine\sp\utility::spawn_targetname("hero_farah", 1);
   level.farah.animname = "farah";
   level.heroes[level.heroes.size] = level.farah;
@@ -398,12 +398,12 @@ function spawn_farah() {
   level.farah.goalradius = 64;
 }
 
-function allies_molotov_toggle(var0) {
+function allies_molotov_toggle(var_0) {
   if(scripts\engine\utility::is_equal(self, level.price) || scripts\engine\utility::is_equal(self, level.kyle)) {
     return;
   }
 
-  if(var0) {
+  if(var_0) {
     self.grenadeweapon = getcompleteweaponname("molotov");
   } else {
     scripts\engine\sp\utility::set_grenadeweapon("flash frag");
@@ -413,8 +413,8 @@ function allies_molotov_toggle(var0) {
   self.grenadesafedist = 400;
 }
 
-function axis_grenade_toggle(var0) {
-  if(var0) {
+function axis_grenade_toggle(var_0) {
+  if(var_0) {
     self.grenadeammo = 255;
     return;
   }
@@ -422,45 +422,45 @@ function axis_grenade_toggle(var0) {
   self.grenadeammo = 0;
 }
 
-function gasmask_on_belt(var0, var1) {
-  if(!isDefined(var0)) {
-    var0 = "TAG_STOWED_BACK2";
+function gasmask_on_belt(var_0, var_1) {
+  if(!isDefined(var_0)) {
+    var_0 = "TAG_STOWED_BACK2";
   }
 
-  if(istrue(var1)) {
-    self attach("accessory_wm_gas_mask_stow", var0);
+  if(istrue(var_1)) {
+    self attach("accessory_wm_gas_mask_stow", var_0);
     self.gas_mask = 1;
     return;
   }
 
   if(istrue(self.gas_mask)) {
-    self detach("accessory_wm_gas_mask_stow", var0);
+    self detach("accessory_wm_gas_mask_stow", var_0);
     self.gas_mask = 0;
     return;
   }
 }
 
-function spawn_price(var0) {
-  var1 = getspawner("hero_price", "targetname");
-  var1.count = 5;
+function spawn_price(var_0) {
+  var_1 = getspawner("hero_price", "targetname");
+  var_1.count = 5;
   level.price = scripts\engine\sp\utility::spawn_targetname("hero_price", 1);
   level.price.colornode_func = &color_node_arrive;
   level.price attach("misc_wm_halligan_tool", "TAG_STOWED_BACK3");
   level.price.halligan = "misc_wm_halligan_tool";
 
-  if(isDefined(var0)) {
-    ai_gas_mask(level.price, var0);
+  if(isDefined(var_0)) {
+    ai_gas_mask(level.price, var_0);
   }
 
   gasmask_on_belt(level.price, "TAG_STOWED_BACK2", 1);
   level.heroes[level.heroes.size] = level.price;
 }
 
-function spawn_alex(var0) {
+function spawn_alex(var_0) {
   level.alex = scripts\engine\sp\utility::spawn_targetname("alex", 1);
 
-  if(isDefined(var0)) {
-    ai_gas_mask(level.alex, var0);
+  if(isDefined(var_0)) {
+    ai_gas_mask(level.alex, var_0);
   }
 
   level.alex scripts\engine\sp\utility::set_force_color("p");
@@ -468,16 +468,16 @@ function spawn_alex(var0) {
   level.alex thread scripts\anim\shared::forceuseweapon(make_bulletdrop_weapon(), "primary");
 }
 
-function spawn_kyle(var0) {
-  var1 = getspawner("hero_kyle", "targetname");
-  var1.count = 5;
+function spawn_kyle(var_0) {
+  var_1 = getspawner("hero_kyle", "targetname");
+  var_1.count = 5;
   level.kyle = scripts\engine\sp\utility::spawn_targetname("hero_kyle", 1);
   level.kyle.animname = "kyle";
   level.heroes[level.heroes.size] = level.kyle;
   level.kyle.colornode_func = &color_node_arrive;
 
-  if(isDefined(var0)) {
-    ai_gas_mask(level.kyle, var0);
+  if(isDefined(var_0)) {
+    ai_gas_mask(level.kyle, var_0);
     return;
   }
 }
@@ -529,7 +529,7 @@ function spawn_team_price() {
   thread rebel_flood_spawner(getspawner("redshirt_rebel_3", "targetname"));
 }
 
-function spawn_team_farah(var0) {
+function spawn_team_farah(var_0) {
   if(!scripts\sp\starts::is_after_start("gas_chambers")) {
     spawn_farah();
 
@@ -549,7 +549,7 @@ function spawn_team_farah(var0) {
   thread rebel_flood_spawner(getspawner("redshirt_rebel_3", "targetname"), level.rebel_3);
   array_thread_safe(level.heroes, &scripts\engine\sp\utility::set_goal_radius, 32);
 
-  if(isDefined(var0)) {
+  if(isDefined(var_0)) {
     array_thread_safe(level.heroes, &ai_gas_mask, 1);
     return;
   }
@@ -559,21 +559,21 @@ function price_spawn_func() {
   thread scripts\engine\sp\utility::battlechatter_probability(0.2);
 }
 
-function rebel_flood_spawner(var0, var1) {
+function rebel_flood_spawner(var_0, var_1) {
   self endon("death");
   self endon("stop_rebel_flood");
 
   for(;;) {
-    var0 endon("entitydeleted");
-    var0 scripts\engine\utility::delaythread(0.1, &assign_spawner, self);
+    var_0 endon("entitydeleted");
+    var_0 scripts\engine\utility::delaythread(0.1, &assign_spawner, self);
 
     if(!scripts\engine\utility::flag("open_lab_door")) {
-      gasmask_on_belt(var0, "TAG_STOWED_BACK2", 1);
+      gasmask_on_belt(var_0, "TAG_STOWED_BACK2", 1);
     }
 
-    var0.my_spawner = self;
-    var0 waittill("death");
-    level.heroes = scripts\engine\utility::array_remove(level.heroes, var0);
+    var_0.my_spawner = self;
+    var_0 waittill("death");
+    level.heroes = scripts\engine\utility::array_remove(level.heroes, var_0);
     scripts\engine\utility::flag_waitopen("pause_rebel_respawning");
     rebel_flood_spawn_wait();
 
@@ -583,44 +583,44 @@ function rebel_flood_spawner(var0, var1) {
 
     self.origin = level.respawn_spawner_org;
     self.count = 10;
-    var0 = self stalingradspawn();
+    var_0 = self stalingradspawn();
 
     switch (self.script_animname) {
       case "rebel_1":
-        level.rebel_1 = var0;
+        level.rebel_1 = var_0;
         break;
       case "rebel_2":
-        level.rebel_2 = var0;
+        level.rebel_2 = var_0;
         break;
       case "rebel_3":
-        level.rebel_3 = var0;
+        level.rebel_3 = var_0;
         break;
       case "rebel_4":
-        level.rebel_4 = var0;
+        level.rebel_4 = var_0;
         break;
       case "rebel_5":
-        level.rebel_5 = var0;
+        level.rebel_5 = var_0;
         break;
       default:
         break;
     }
 
-    if(!isDefined(var1) && scripts\engine\utility::flag("lab_door_opened")) {
-      var1 = 1;
+    if(!isDefined(var_1) && scripts\engine\utility::flag("lab_door_opened")) {
+      var_1 = 1;
     }
 
-    if(isDefined(var1)) {
-      thread ai_gas_mask(var0);
+    if(isDefined(var_1)) {
+      thread ai_gas_mask(var_0);
     }
 
     rebuild_heroes_array();
-    level.heroes[level.heroes.size] = var0;
+    level.heroes[level.heroes.size] = var_0;
 
     if(isDefined(level.follow_ent)) {
-      var0 scripts\engine\utility::delaythread(0.1, &ai_movement_control, level.follow_ent);
+      var_0 scripts\engine\utility::delaythread(0.1, &ai_movement_control, level.follow_ent);
     }
 
-    if(isDefined(var0)) {}
+    if(isDefined(var_0)) {}
   }
 }
 
@@ -630,7 +630,7 @@ function rebel_flood_spawn_wait() {
   wait 10;
 }
 
-function ai_movement_control(var0, var1, var2) {
+function ai_movement_control(var_0, var_1, var_2) {
   self endon("death");
 
   if(!isDefined(self) || !isDefined(level.follow_ent) || !isai(self) || !isalive(self)) {
@@ -643,16 +643,16 @@ function ai_movement_control(var0, var1, var2) {
     return;
   }
 
-  if(!isDefined(var0)) {
-    var0 = level.player;
+  if(!isDefined(var_0)) {
+    var_0 = level.player;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 500;
+  if(!isDefined(var_1)) {
+    var_1 = 500;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 500;
+  if(!isDefined(var_2)) {
+    var_2 = 500;
   }
 
   self.og_goalheight = self.goalheight;
@@ -663,8 +663,8 @@ function ai_movement_control(var0, var1, var2) {
     self.goalheight = 100;
   }
 
-  self.goalradius = var1;
-  self.follow_ent = var0;
+  self.goalradius = var_1;
+  self.follow_ent = var_0;
   self cleargoalvolume();
 
   if(istrue(self.fixednode)) {
@@ -672,7 +672,7 @@ function ai_movement_control(var0, var1, var2) {
   }
 
   self setgoalpos(self.origin);
-  self setgoalentity(var0, var2);
+  self setgoalentity(var_0, var_2);
 }
 
 function stop_ai_movement_control() {
@@ -688,34 +688,34 @@ function stop_ai_movement_control() {
   }
 }
 
-function assign_spawner(var0) {
-  self.spawner = var0;
+function assign_spawner(var_0) {
+  self.spawner = var_0;
 }
 
-function remove_animated_door(var0) {
-  var1 = getEntArray(var0, "script_noteworthy");
+function remove_animated_door(var_0) {
+  var_1 = getEntArray(var_0, "script_noteworthy");
 
-  foreach(var3 in var1) {
-    assign_door_ents(var3);
-    var3.collision connectpaths();
+  foreach(var_3 in var_1) {
+    assign_door_ents(var_3);
+    var_3.collision connectpaths();
     waitframe();
-    var3.collision delete();
-    var3 delete();
+    var_3.collision delete();
+    var_3 delete();
   }
 }
 
-function assign_door_ents(var0) {
-  var1 = getEntArray(var0.target, "targetname");
+function assign_door_ents(var_0) {
+  var_1 = getEntArray(var_0.target, "targetname");
 
-  foreach(var3 in var1) {
-    if(var3.spawnflags & 1) {
-      var0.collision = var3;
+  foreach(var_3 in var_1) {
+    if(var_3.spawnflags & 1) {
+      var_0.collision = var_3;
     }
 
-    var3 linkTo(var0);
+    var_3 linkTo(var_0);
   }
 
-  var0.closed_pos = var0.origin;
+  var_0.closed_pos = var_0.origin;
 }
 
 function ai_laser_always_on() {
@@ -727,18 +727,18 @@ function ai_laser_always_on() {
 
 function laser_discipline() {
   self endon("death");
-  var0 = 0;
+  var_0 = 0;
   self.a.laseron = 0;
-  var1 = 0.6;
+  var_1 = 0.6;
 
   for(;;) {
     while(nullweapon(self.weapon)) {
       wait 0.25;
     }
 
-    var0 = is_aimed_at_enemy(level.cos10);
+    var_0 = is_aimed_at_enemy(level.cos10);
 
-    if(var0) {
+    if(var_0) {
       if(!self.a.laseron) {
         self.a.laseron = 1;
         self laserforceon();
@@ -749,20 +749,20 @@ function laser_discipline() {
       }
     }
 
-    wait var1;
+    wait var_1;
   }
 }
 
-function is_aimed_at_enemy(var0) {
+function is_aimed_at_enemy(var_0) {
   if(isDefined(self) && isDefined(self.enemy) && isalive(self.enemy)) {
-    var1 = ["j_mainroot", "j_spine4", "tag_eye"];
+    var_1 = ["j_mainroot", "j_spine4", "tag_eye"];
 
-    foreach(var3 in var1) {
+    foreach(var_3 in var_1) {
       if(!isDefined(self gettagangles("tag_flash"))) {
         continue;
       }
 
-      if(!nullweapon(self.weapon) && isalive(self.enemy) && scripts\engine\utility::within_fov(self.origin, self gettagangles("tag_flash"), self.enemy gettagorigin(var3), var0)) {
+      if(!nullweapon(self.weapon) && isalive(self.enemy) && scripts\engine\utility::within_fov(self.origin, self gettagangles("tag_flash"), self.enemy gettagorigin(var_3), var_0)) {
         return true;
       }
     }
@@ -771,31 +771,31 @@ function is_aimed_at_enemy(var0) {
   return false;
 }
 
-function ai_display_dmg(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
+function ai_display_dmg(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(!isDefined(self.dmgarray)) {
     self.dmgarray = [];
     thread display_avg_dmg();
   }
 
-  if(isDefined(var0)) {
-    var10 = "DMG: " + var0 + " HEALTH: " + self.health;
-    self.dmgarray[self.dmgarray.size] = var0;
+  if(isDefined(var_0)) {
+    var_10 = "DMG: " + var_0 + " HEALTH: " + self.health;
+    self.dmgarray[self.dmgarray.size] = var_0;
     return;
   }
 }
 
 function display_avg_dmg() {
   self waittill("death");
-  var0 = self.dmgarray;
-  var1 = var0.size;
-  var2 = 0;
+  var_0 = self.dmgarray;
+  var_1 = var_0.size;
+  var_2 = 0;
 
-  foreach(var4 in var0) {
-    var2 += var4;
+  foreach(var_4 in var_0) {
+    var_2 += var_4;
   }
 
-  iprintlnbold("Avg dmg per shot: " + var2 / var1);
-  iprintlnbold("Times shot: " + var1);
+  iprintlnbold("Avg dmg per shot: " + var_2 / var_1);
+  iprintlnbold("Times shot: " + var_1);
 }
 
 function display_enemy_lasknown_pos() {
@@ -803,7 +803,7 @@ function display_enemy_lasknown_pos() {
 
   for(;;) {
     if(istrue(self._blackboard.shootparams_valid) && isDefined(self._blackboard.shootparams_pos)) {
-      var0 = self._blackboard.shootparams_pos;
+      var_0 = self._blackboard.shootparams_pos;
     }
 
     waitframe();
@@ -815,120 +815,120 @@ function rebuild_heroes_array() {
   return level.heroes;
 }
 
-function temp_dialog(var0, var1, var2, var3) {
-  if(isDefined(var3)) {
-    wait var3;
+function temp_dialog(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_3)) {
+    wait var_3;
   }
 
-  iprintlnbold(var0 + ": " + var2);
+  iprintlnbold(var_0 + ": " + var_2);
 }
 
-function get_closest_actor(var0, var1, var2) {
-  if(!isDefined(var1)) {
-    var1 = level.player.origin;
+function get_closest_actor(var_0, var_1, var_2) {
+  if(!isDefined(var_1)) {
+    var_1 = level.player.origin;
   }
 
-  var3 = scripts\engine\utility::array_removeundefined(var0);
+  var_3 = scripts\engine\utility::array_removeundefined(var_0);
 
-  if(isDefined(var2)) {
-    return sortbydistance(var3, var1)[var2];
+  if(isDefined(var_2)) {
+    return sortbydistance(var_3, var_1)[var_2];
   }
 
-  return sortbydistance(var3, var1);
+  return sortbydistance(var_3, var_1);
 }
 
-function in_player_fov(var0, var1, var2) {
-  var3 = level.player getEye();
-  var4 = level.player getplayerangles();
+function in_player_fov(var_0, var_1, var_2) {
+  var_3 = level.player getEye();
+  var_4 = level.player getplayerangles();
 
-  if(!isDefined(var2)) {
-    var2 = scripts\engine\utility::array_removeundefined(level.heroes);
+  if(!isDefined(var_2)) {
+    var_2 = scripts\engine\utility::array_removeundefined(level.heroes);
   }
 
-  if(scripts\engine\utility::within_fov(var3, var4, var1, var0) && scripts\engine\trace::ray_trace_passed(var3, var1, var2)) {
+  if(scripts\engine\utility::within_fov(var_3, var_4, var_1, var_0) && scripts\engine\trace::ray_trace_passed(var_3, var_1, var_2)) {
     return 1;
   }
 
   return 0;
 }
 
-function array_thread_safe(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10) {
-  var0 = scripts\engine\utility::array_removeundefined(var0);
+function array_thread_safe(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+  var_0 = scripts\engine\utility::array_removeundefined(var_0);
 
-  if(isDefined(var10)) {
-    foreach(var13, var12 in var0) {
-      var12 thread[[var1]](var2, var3, var4, var5, var6, var7, var8, var9, var10);
+  if(isDefined(var_10)) {
+    foreach(var_13, var_12 in var_0) {
+      var_12 thread[[var_1]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     }
 
     return;
   }
 
-  if(isDefined(var12)) {
-    foreach(var15, var12 in var3) {
-      var12 thread[[var4]](var5, var6, var7, var8, var9, var10, var11, var12);
+  if(isDefined(var_12)) {
+    foreach(var_15, var_12 in var_3) {
+      var_12 thread[[var_4]](var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
     }
 
     return;
   }
 
-  if(isDefined(var14)) {
-    foreach(var17, var12 in var6) {
-      var12 thread[[var7]](var8, var9, var10, var11, var12, var13, var14);
+  if(isDefined(var_14)) {
+    foreach(var_17, var_12 in var_6) {
+      var_12 thread[[var_7]](var_8, var_9, var_10, var_11, var_12, var_13, var_14);
     }
 
     return;
   }
 
-  if(isDefined(var15)) {
-    foreach(var19, var12 in var9) {
-      var12 thread[[var10]](var11, var12, var13, var14, var12, var15);
+  if(isDefined(var_15)) {
+    foreach(var_19, var_12 in var_9) {
+      var_12 thread[[var_10]](var_11, var_12, var_13, var_14, var_12, var_15);
     }
 
     return;
   }
 
-  if(isDefined(var12)) {
-    foreach(var12 in var12) {
-      var12 thread[[var13]](var14, var12, var15, var16, var12);
+  if(isDefined(var_12)) {
+    foreach(var_12 in var_12) {
+      var_12 thread[[var_13]](var_14, var_12, var_15, var_16, var_12);
     }
 
     return;
   }
 
-  if(isDefined(var18)) {
-    foreach(var12 in var12) {
-      var12 thread[[var15]](var16, var12, var17, var18);
+  if(isDefined(var_18)) {
+    foreach(var_12 in var_12) {
+      var_12 thread[[var_15]](var_16, var_12, var_17, var_18);
     }
 
     return;
   }
 
-  if(isDefined(var19)) {
-    foreach(var12 in var12) {
-      var12 thread[[var17]](var18, var12, var19);
+  if(isDefined(var_19)) {
+    foreach(var_12 in var_12) {
+      var_12 thread[[var_17]](var_18, var_12, var_19);
     }
 
     return;
   }
 
-  if(isDefined(var12)) {
-    foreach(var12 in var12) {
-      var12 thread[[var19]](var20, var12);
+  if(isDefined(var_12)) {
+    foreach(var_12 in var_12) {
+      var_12 thread[[var_19]](var_20, var_12);
     }
 
     return;
   }
 
-  if(isDefined(var22)) {
-    foreach(var12 in var12) {
-      var12 thread[[var21]](var22);
+  if(isDefined(var_22)) {
+    foreach(var_12 in var_12) {
+      var_12 thread[[var_21]](var_22);
     }
 
     return;
   }
 
-  foreach(var12 in var12) {
-    var12 thread[[var23]]();
+  foreach(var_12 in var_12) {
+    var_12 thread[[var_23]]();
   }
 }
 
@@ -969,23 +969,23 @@ function sun_flare_off() {
   }
 }
 
-function anim_single_and_loop(var0, var1, var2, var3) {
-  scripts\common\anim::anim_single(var0, var1);
-  thread scripts\common\anim::anim_loop(var0, var2, var3);
+function anim_single_and_loop(var_0, var_1, var_2, var_3) {
+  scripts\common\anim::anim_single(var_0, var_1);
+  thread scripts\common\anim::anim_loop(var_0, var_2, var_3);
 }
 
-function anim_single_and_loop_solo(var0, var1, var2, var3) {
-  var0 endon("stop_single_loop");
-  scripts\common\anim::anim_single_solo(var0, var1);
-  var0 setgoalpos(var0.origin);
-  childthread scripts\common\anim::anim_loop_solo(var0, var2, var3);
+function anim_single_and_loop_solo(var_0, var_1, var_2, var_3) {
+  var_0 endon("stop_single_loop");
+  scripts\common\anim::anim_single_solo(var_0, var_1);
+  var_0 setgoalpos(var_0.origin);
+  childthread scripts\common\anim::anim_loop_solo(var_0, var_2, var_3);
 }
 
-function anim_reach_and_loop_solo(var0, var1, var2, var3) {
-  var0 endon("stop_reach_loop");
-  scripts\sp\anim::anim_reach_solo(var0, var1);
-  scripts\common\anim::anim_single_solo(var0, var1);
-  childthread scripts\common\anim::anim_loop_solo(var0, var2, var3);
+function anim_reach_and_loop_solo(var_0, var_1, var_2, var_3) {
+  var_0 endon("stop_reach_loop");
+  scripts\sp\anim::anim_reach_solo(var_0, var_1);
+  scripts\common\anim::anim_single_solo(var_0, var_1);
+  childthread scripts\common\anim::anim_loop_solo(var_0, var_2, var_3);
 }
 
 function toggle_ignore_all() {
@@ -995,47 +995,47 @@ function toggle_ignore_all() {
   }
 }
 
-function move_lab_allies(var0, var1, var2) {
-  var3 = getnodearray(var0, "targetname");
+function move_lab_allies(var_0, var_1, var_2) {
+  var_3 = getnodearray(var_0, "targetname");
 
-  if(!isarray(var1)) {
-    var1 = [var1];
+  if(!isarray(var_1)) {
+    var_1 = [var_1];
   }
 
-  foreach(var5 in var1) {
-    if(!isDefined(var5)) {
+  foreach(var_5 in var_1) {
+    if(!isDefined(var_5)) {
       continue;
     }
 
-    var6 = get_my_node(var5, var3);
+    var_6 = get_my_node(var_5, var_3);
 
-    if(isDefined(var6)) {
-      var5 scripts\engine\sp\utility::disable_ai_color();
-      thread move_to_lab_node(var5);
-      var3 = scripts\engine\utility::array_remove(var3, var6);
+    if(isDefined(var_6)) {
+      var_5 scripts\engine\sp\utility::disable_ai_color();
+      thread move_to_lab_node(var_5);
+      var_3 = scripts\engine\utility::array_remove(var_3, var_6);
 
-      if(isDefined(var2)) {
-        wait var2;
+      if(isDefined(var_2)) {
+        wait var_2;
       }
     }
   }
 }
 
-function get_my_node(var0) {
-  foreach(var2 in var0) {
-    if(scripts\engine\utility::is_equal(var2.script_noteworthy, self.animname)) {
-      return var2;
+function get_my_node(var_0) {
+  foreach(var_2 in var_0) {
+    if(scripts\engine\utility::is_equal(var_2.script_noteworthy, self.animname)) {
+      return var_2;
     }
   }
 }
 
-function move_to_lab_node(var0) {
+function move_to_lab_node(var_0) {
   self endon("death");
   self endon("entitydeleted");
   self clearpath();
   scripts\engine\sp\utility::anim_stopanimScripted();
   self.og_goalradius = self.goalradius;
-  scripts\sp\spawner::go_to_node(var0);
+  scripts\sp\spawner::go_to_node(var_0);
 
   if(isDefined(self)) {
     self.goalradius = self.og_goalradius;
@@ -1043,52 +1043,52 @@ function move_to_lab_node(var0) {
   }
 }
 
-function scripted_ai_rocket(var0, var1) {
-  if(!scripts\engine\utility::flag_exist(var1)) {
-    scripts\engine\utility::flag_init(var1);
+function scripted_ai_rocket(var_0, var_1) {
+  if(!scripts\engine\utility::flag_exist(var_1)) {
+    scripts\engine\utility::flag_init(var_1);
   }
 
-  scripts\engine\utility::flag_wait(var1);
-  var2 = scripts\engine\utility::getStruct(var0, "targetname");
-  var3 = havemapentseffects("actor_enemy_spetsnaz_rpg", var2.origin, var2.angles, 1);
+  scripts\engine\utility::flag_wait(var_1);
+  var_2 = scripts\engine\utility::getStruct(var_0, "targetname");
+  var_3 = havemapentseffects("actor_enemy_spetsnaz_rpg", var_2.origin, var_2.angles, 1);
 
-  if(!isDefined(var3)) {
+  if(!isDefined(var_3)) {
     return;
   }
 
-  var3 endon("death");
-  var3.ignoreall = 1;
-  var3.ignoreme = 1;
-  var3 scripts\engine\sp\utility::enable_dontevershoot();
-  var3 scripts\anim\shared::forceuseweapon("iw8_la_rpapa7_straight_ai", "primary");
-  var4 = scripts\engine\utility::getStruct(var2.target, "targetname");
-  var5 = spawn("script_origin", var2.origin);
+  var_3 endon("death");
+  var_3.ignoreall = 1;
+  var_3.ignoreme = 1;
+  var_3 scripts\engine\sp\utility::enable_dontevershoot();
+  var_3 scripts\anim\shared::forceuseweapon("iw8_la_rpapa7_straight_ai", "primary");
+  var_4 = scripts\engine\utility::getStruct(var_2.target, "targetname");
+  var_5 = spawn("script_origin", var_2.origin);
   wait 0.4;
-  magicbullet("iw8_la_rpapa7_straight", var3 gettagorigin("tag_flash"), var4.origin, var3);
+  magicbullet("iw8_la_rpapa7_straight", var_3 gettagorigin("tag_flash"), var_4.origin, var_3);
   wait 0.4;
-  var3 allowedstances("prone");
+  var_3 allowedstances("prone");
   wait 1;
-  var3 delete();
+  var_3 delete();
 }
 
-function scripted_ai_rocket_player(var0) {
+function scripted_ai_rocket_player(var_0) {
   self endon("death");
   scripts\engine\sp\utility::enable_dontevershoot();
   scripts\anim\shared::forceuseweapon("iw8_la_rpapa7_straight_ai", "primary");
-  var1 = scripts\engine\utility::getStruct("targetname", "targetname");
-  var2 = spawn("script_origin", var1.origin);
+  var_1 = scripts\engine\utility::getStruct("targetname", "targetname");
+  var_2 = spawn("script_origin", var_1.origin);
 
   for(;;) {
     waitframe();
-    var3 = level.player gettagorigin("j_head");
-    var4 = var3 + anglesToForward(level.player.angles) * 40;
+    var_3 = level.player gettagorigin("j_head");
+    var_4 = var_3 + anglesToForward(level.player.angles) * 40;
 
-    if(!scripts\engine\trace::can_see_origin(var4)) {
+    if(!scripts\engine\trace::can_see_origin(var_4)) {
       continue;
     }
 
     wait 0.4;
-    self shoot(1, var2);
+    self shoot(1, var_2);
     break;
   }
 
@@ -1096,143 +1096,143 @@ function scripted_ai_rocket_player(var0) {
   scripts\engine\sp\utility::disable_dontevershoot();
 }
 
-function cine_letterboxing_up(var0) {
+function cine_letterboxing_up(var_0) {
   level.player scripts\sp\player::focusdisable();
-  hidecinematicletterboxing(var0, 0);
+  hidecinematicletterboxing(var_0, 0);
   setomnvar("ui_hide_hud", 1);
 }
 
-function cine_letterboxing_down(var0) {
+function cine_letterboxing_down(var_0) {
   level.player scripts\sp\player::focusenable();
-  getrandomnodedestination(var0, 0);
+  getrandomnodedestination(var_0, 0);
   setomnvar("ui_hide_hud", 0);
 }
 
 function hide_hill_weapons() {
   level endon("stop_weapon_hide_stript");
-  var0 = getEntArray("hill_weapons_lower", "targetname");
-  var1 = getEntArray("hill_weapons_upper", "targetname");
-  var2 = getEntArray("hilltop_placed_rpg", "targetname");
-  var1 = scripts\engine\utility::array_combine(var2, var1);
-  var3 = scripts\engine\utility::array_combine(var0, var1);
-  hide_ent_array(var3);
+  var_0 = getEntArray("hill_weapons_lower", "targetname");
+  var_1 = getEntArray("hill_weapons_upper", "targetname");
+  var_2 = getEntArray("hilltop_placed_rpg", "targetname");
+  var_1 = scripts\engine\utility::array_combine(var_2, var_1);
+  var_3 = scripts\engine\utility::array_combine(var_0, var_1);
+  hide_ent_array(var_3);
   scripts\engine\utility::flag_wait("hill_weapons_lower");
-  GscBinSkip4(0x6e, var0, "left_bunker_weapons_volume", "left_bunker_weapons");
+  GscBinSkip4(0x6e, var_0, "left_bunker_weapons_volume", "left_bunker_weapons");
 }
 
-function monitor_weapons(var0, var1) {
-  if(isDefined(var1)) {
-    var2 = sort_weapon_array(self, var1);
+function monitor_weapons(var_0, var_1) {
+  if(isDefined(var_1)) {
+    var_2 = sort_weapon_array(self, var_1);
   } else {
-    var2 = self;
+    var_2 = self;
   }
 
-  if(var2.size < 1) {
+  if(var_2.size < 1) {
     return;
   }
 
-  var3 = getEnt(var1, "targetname");
-  var4 = 0;
-  var5 = 0;
+  var_3 = getEnt(var_1, "targetname");
+  var_4 = 0;
+  var_5 = 0;
 
   while(!scripts\engine\utility::flag("hill_finished_trig")) {
-    var5 = level.player istouching(var3);
+    var_5 = level.player istouching(var_3);
 
-    if(!var4 && var5) {
-      show_ent_array(var2);
-    } else if(var4 && !var5) {
-      hide_ent_array(var2);
+    if(!var_4 && var_5) {
+      show_ent_array(var_2);
+    } else if(var_4 && !var_5) {
+      hide_ent_array(var_2);
     }
 
-    var4 = var5;
+    var_4 = var_5;
     wait 0.5;
   }
 }
 
-function sort_weapon_array(var0, var1) {
-  var2 = [];
+function sort_weapon_array(var_0, var_1) {
+  var_2 = [];
 
-  foreach(var4 in var0) {
-    if(scripts\engine\utility::is_equal(var4.script_parameters, var1)) {
-      var2 = var4;
+  foreach(var_4 in var_0) {
+    if(scripts\engine\utility::is_equal(var_4.script_parameters, var_1)) {
+      var_2 = var_4;
     }
   }
 
-  return var2;
+  return var_2;
 }
 
-function hide_ent_array(var0) {
-  foreach(var2 in var0) {
-    if(isDefined(var2)) {
-      var2 hide();
-    }
-  }
-}
-
-function show_ent_array(var0) {
-  foreach(var2 in var0) {
-    if(isDefined(var2)) {
-      var2 show();
+function hide_ent_array(var_0) {
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2)) {
+      var_2 hide();
     }
   }
 }
 
-function notetrack_nag(var0, var1, var2) {
-  level endon(var1);
-  jumpiffalse(isDefined(var2)) LOC_00000010;
-  level endon(var2);
+function show_ent_array(var_0) {
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2)) {
+      var_2 show();
+    }
+  }
+}
+
+function notetrack_nag(var_0, var_1, var_2) {
+  level endon(var_1);
+  jumpiffalse(isDefined(var_2)) LOC_00000010;
+  level endon(var_2);
 
   for(;;) {
-    foreach(var4 in var0) {
+    foreach(var_4 in var_0) {
       level waittill("nag");
-      scripts\engine\sp\utility::smart_dialogue(var4);
+      scripts\engine\sp\utility::smart_dialogue(var_4);
     }
 
     level.player thread scripts\sp\player::focus_display_hint(undefined, 6);
   }
 }
 
-function vehicle_spawncovernodes(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
-  var4 *= -1;
-  var6 *= -1;
-  var9 = anglesToForward(var1);
-  var10 = anglestoright(var1);
-  var11 = (0, 0, 1);
-  var12 = vectortoangles(var9);
-  var13 = vectortoangles(var9 * -1);
-  var14 = vectortoangles(var10);
-  var15 = vectortoangles(var10 * -1);
-  var16 = [];
-  vehicle_addcovernodetemplate(var16, "Cover Left", var2 - 16, var6, var14);
-  vehicle_addcovernodetemplate(var16, "Cover Right", var2 + var3, var6 + 16, var13);
-  vehicle_addcovernodetemplate(var16, "Cover Left", var2 + var3, var7 - 16, var13);
-  vehicle_addcovernodetemplate(var16, "Cover Right", var2 - 16, var7, var15);
-  vehicle_addcovernodetemplate(var16, "Cover Left", var4 + 16, var7, var15);
-  vehicle_addcovernodetemplate(var16, "Cover Right", var4 - var5, var7 - 16, var12);
-  vehicle_addcovernodetemplate(var16, "Cover Left", var4 - var5, var6 + 16, var12);
-  vehicle_addcovernodetemplate(var16, "Cover Right", var4 + 16, var6, var14);
-  var17 = [];
+function vehicle_spawncovernodes(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  var_4 *= -1;
+  var_6 *= -1;
+  var_9 = anglesToForward(var_1);
+  var_10 = anglestoright(var_1);
+  var_11 = (0, 0, 1);
+  var_12 = vectortoangles(var_9);
+  var_13 = vectortoangles(var_9 * -1);
+  var_14 = vectortoangles(var_10);
+  var_15 = vectortoangles(var_10 * -1);
+  var_16 = [];
+  vehicle_addcovernodetemplate(var_16, "Cover Left", var_2 - 16, var_6, var_14);
+  vehicle_addcovernodetemplate(var_16, "Cover Right", var_2 + var_3, var_6 + 16, var_13);
+  vehicle_addcovernodetemplate(var_16, "Cover Left", var_2 + var_3, var_7 - 16, var_13);
+  vehicle_addcovernodetemplate(var_16, "Cover Right", var_2 - 16, var_7, var_15);
+  vehicle_addcovernodetemplate(var_16, "Cover Left", var_4 + 16, var_7, var_15);
+  vehicle_addcovernodetemplate(var_16, "Cover Right", var_4 - var_5, var_7 - 16, var_12);
+  vehicle_addcovernodetemplate(var_16, "Cover Left", var_4 - var_5, var_6 + 16, var_12);
+  vehicle_addcovernodetemplate(var_16, "Cover Right", var_4 + 16, var_6, var_14);
+  var_17 = [];
 
-  foreach(var19 in var16) {
-    var20 = var0 + var9 * var19.forwarddistance + var10 * var19.rightdistance + var11 * 32;
-    var20 += anglesToForward(var19.angles) * 16 * -1;
-    var21 = spawncovernode(var20, var19.angles, var19.type, 4, var8);
+  foreach(var_19 in var_16) {
+    var_20 = var_0 + var_9 * var_19.forwarddistance + var_10 * var_19.rightdistance + var_11 * 32;
+    var_20 += anglesToForward(var_19.angles) * 16 * -1;
+    var_21 = spawncovernode(var_20, var_19.angles, var_19.type, 4, var_8);
 
-    if(isDefined(var21)) {
-      var17 = scripts\engine\utility::array_add(var17, var21);
+    if(isDefined(var_21)) {
+      var_17 = scripts\engine\utility::array_add(var_17, var_21);
     }
   }
 
-  return var17;
+  return var_17;
 }
 
-function vehicle_addcovernodetemplate(var0, var1, var2, var3, var4) {
-  var5 = spawnStruct();
-  var5.type = var1;
-  var5.forwarddistance = var2;
-  var5.rightdistance = var3;
-  var5.angles = var4;
-  return scripts\engine\utility::array_add(var0, var5);
+function vehicle_addcovernodetemplate(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = spawnStruct();
+  var_5.type = var_1;
+  var_5.forwarddistance = var_2;
+  var_5.rightdistance = var_3;
+  var_5.angles = var_4;
+  return scripts\engine\utility::array_add(var_0, var_5);
 }
 
 function display_ai() {
@@ -1242,68 +1242,68 @@ function display_ai() {
     return;
   }
 
-  var0 = (1, 1, 0);
-  var1 = (0, 1, 0);
-  var2 = (1, 0, 0);
-  var3 = ["axis", "allies", "team3", "neutral", "total"];
+  var_0 = (1, 1, 0);
+  var_1 = (0, 1, 0);
+  var_2 = (1, 0, 0);
+  var_3 = ["axis", "allies", "team3", "neutral", "total"];
 
   for(;;) {
-    var4 = 30;
+    var_4 = 30;
 
-    foreach(var6 in var3) {
-      if(var6 == "total") {
-        var7 = getaiarray().size;
+    foreach(var_6 in var_3) {
+      if(var_6 == "total") {
+        var_7 = getaiarray().size;
       } else {
-        var7 = getaiarray(var6).size;
+        var_7 = getaiarray(var_6).size;
       }
 
-      if(var7 < 9) {
-        var8 = var1;
-      } else if(var7 < 25) {
-        var8 = var0;
+      if(var_7 < 9) {
+        var_8 = var_1;
+      } else if(var_7 < 25) {
+        var_8 = var_0;
       } else {
-        var8 = var2;
+        var_8 = var_2;
       }
 
-      var4 += 15;
+      var_4 += 15;
     }
 
     waitframe();
   }
 }
 
-function wind_setdirection(var0, var1, var2) {
-  var3 = (0, 0, 1);
+function wind_setdirection(var_0, var_1, var_2) {
+  var_3 = (0, 0, 1);
 
   if(isDefined(level.ballistics.windobject)) {
     scripts\common\basic_wind::stop_wind(level.ballistics.windobject);
   }
 
-  level.ballistics.windobject = scripts\common\basic_wind::init_wind(var0, 2, 0);
+  level.ballistics.windobject = scripts\common\basic_wind::init_wind(var_0, 2, 0);
 
-  if(var2) {
-    var4 = level.ballistics.wind;
-    var5 = 0;
-    var6 = gettime();
-    var7 = var6 + var2;
-    var8 = var2 * 0.001 * 20;
-    var9 = 1 / var8;
+  if(var_2) {
+    var_4 = level.ballistics.wind;
+    var_5 = 0;
+    var_6 = gettime();
+    var_7 = var_6 + var_2;
+    var_8 = var_2 * 0.001 * 20;
+    var_9 = 1 / var_8;
 
-    while(gettime() < var7) {
-      var10 = var4;
-      var11 = vectorcross(var10, var3);
-      var12 = axistoangles(var10, var11, var3);
-      var13 = var1;
-      var14 = vectorcross(var13, var3);
-      var15 = axistoangles(var13, var14, var3);
-      var16 = scripts\engine\math::fake_slerp(var12, var15, var5);
-      level.ballistics.wind = anglesToForward(var16);
-      var5 += var9;
+    while(gettime() < var_7) {
+      var_10 = var_4;
+      var_11 = vectorcross(var_10, var_3);
+      var_12 = axistoangles(var_10, var_11, var_3);
+      var_13 = var_1;
+      var_14 = vectorcross(var_13, var_3);
+      var_15 = axistoangles(var_13, var_14, var_3);
+      var_16 = scripts\engine\math::fake_slerp(var_12, var_15, var_5);
+      level.ballistics.wind = anglesToForward(var_16);
+      var_5 += var_9;
       waitframe();
     }
   }
 
-  level.ballistics.wind = var1;
+  level.ballistics.wind = var_1;
   setsaveddvar("MQPQKNPQOK", 2);
   setsaveddvar("MRNRKKOPLN", 2);
   setsaveddvar("NQTLPTNSSO", 3);
@@ -1312,15 +1312,15 @@ function wind_setdirection(var0, var1, var2) {
   setsaveddvar("NTMMTOLQMQ", level.ballistics.wind);
 }
 
-function unlink_player_from_rig_lab(var0, var1, var2, var3) {
-  var4 = level.player_rig;
-  var4 notify("unlink_player");
+function unlink_player_from_rig_lab(var_0, var_1, var_2, var_3) {
+  var_4 = level.player_rig;
+  var_4 notify("unlink_player");
 
-  if(!scripts\engine\utility::is_equal(level.player getlinkedparent(), var4)) {
+  if(!scripts\engine\utility::is_equal(level.player getlinkedparent(), var_4)) {
     return;
   }
 
-  switch (var4.stance) {
+  switch (var_4.stance) {
     case "stand":
       level.player scripts\common\utility::allow_crouch(1, "player_rig");
       level.player scripts\common\utility::allow_prone(1, "player_rig");
@@ -1335,24 +1335,24 @@ function unlink_player_from_rig_lab(var0, var1, var2, var3) {
       break;
   }
 
-  if(istrue(var0)) {
-    var1 = var4.ogstance;
+  if(istrue(var_0)) {
+    var_1 = var_4.ogstance;
   }
 
-  if(isDefined(var1)) {
-    if(istrue(var2)) {
-      level.player setstance(var1, 1, 1, 1);
-      var5 = scripts\engine\utility::drop_to_ground(level.player getEye(), 0, -60, (0, 0, 1));
-      level.player setOrigin(var5, 1);
-    } else if(var1 != var4.stance) {
-      level.player setstance(var1);
+  if(isDefined(var_1)) {
+    if(istrue(var_2)) {
+      level.player setstance(var_1, 1, 1, 1);
+      var_5 = scripts\engine\utility::drop_to_ground(level.player getEye(), 0, -60, (0, 0, 1));
+      level.player setOrigin(var_5, 1);
+    } else if(var_1 != var_4.stance) {
+      level.player setstance(var_1);
     }
   }
 
   level.player unlink();
 
-  if(!istrue(var3)) {
-    var4 delete();
+  if(!istrue(var_3)) {
+    var_4 delete();
   }
 
   scripts\sp\utility::nvidiaansel_scriptdisable(0);
@@ -1382,9 +1382,9 @@ function dragonsbreathpainfxhack() {
   thread notifydeathdelayed();
 
   for(;;) {
-    self waittill("damage", var0, var0, var0, var1, var0, var0, var0, var0, var0, var2);
+    self waittill("damage", var_0, var_0, var_0, var_1, var_0, var_0, var_0, var_0, var_0, var_2);
 
-    if(!isDefined(var2)) {
+    if(!isDefined(var_2)) {
       continue;
     }
 
@@ -1392,10 +1392,10 @@ function dragonsbreathpainfxhack() {
       continue;
     }
 
-    var3 = getweaponammopoolname(var2);
+    var_3 = getweaponammopoolname(var_2);
 
-    if(var3 == "incendiary") {
-      dodragonsbreathpainfxhack(var1);
+    if(var_3 == "incendiary") {
+      dodragonsbreathpainfxhack(var_1);
     }
   }
 }
@@ -1411,52 +1411,52 @@ function notifydeathdelayed() {
   }
 }
 
-function dodragonsbreathpainfxhack(var0) {
+function dodragonsbreathpainfxhack(var_0) {
   wait 0.05;
-  var1 = getdragonsbreathvfxpackets();
-  var2 = [];
-  var3 = 20;
+  var_1 = getdragonsbreathvfxpackets();
+  var_2 = [];
+  var_3 = 20;
 
-  foreach(var5 in var1) {
-    var6 = self gettagorigin(var5.tag);
+  foreach(var_5 in var_1) {
+    var_6 = self gettagorigin(var_5.tag);
 
-    if(distance(var6, var0) < var3) {
-      var2 = scripts\engine\utility::array_add(var2, var5);
+    if(distance(var_6, var_0) < var_3) {
+      var_2 = scripts\engine\utility::array_add(var_2, var_5);
     }
 
-    if(var2.size > 3) {
+    if(var_2.size > 3) {
       break;
     }
   }
 
-  foreach(var5 in var2) {
+  foreach(var_5 in var_2) {
     if(isDefined(self.basearchetype) && self.basearchetype == "juggernaut") {
-      killfxontag(scripts\engine\utility::getfx("dragonsbreath_jugg_limb"), self, var5.tag);
-      killfxontag(scripts\engine\utility::getfx("dragonsbreath_jugg_chest"), self, var5.tag);
+      killfxontag(scripts\engine\utility::getfx("dragonsbreath_jugg_limb"), self, var_5.tag);
+      killfxontag(scripts\engine\utility::getfx("dragonsbreath_jugg_chest"), self, var_5.tag);
       waitframe();
 
-      if(var5.tag == "j_spine4") {
-        var9 = scripts\engine\utility::getfx("dragonsbreath_jugg_chest");
-        playFXOnTag(var9, self, var5.tag);
+      if(var_5.tag == "j_spine4") {
+        var_9 = scripts\engine\utility::getfx("dragonsbreath_jugg_chest");
+        playFXOnTag(var_9, self, var_5.tag);
       } else {
-        var9 = scripts\engine\utility::getfx("dragonsbreath_jugg_limb");
-        playFXOnTag(var9, self, var6.tag);
+        var_9 = scripts\engine\utility::getfx("dragonsbreath_jugg_limb");
+        playFXOnTag(var_9, self, var_6.tag);
       }
     }
 
-    if(fx_death_check(var6)) {
-      playFXOnTag(scripts\engine\utility::getfx(var6.burnvfx + "_death"), self, var6.tag);
+    if(fx_death_check(var_6)) {
+      playFXOnTag(scripts\engine\utility::getfx(var_6.burnvfx + "_death"), self, var_6.tag);
       continue;
     }
 
-    playFXOnTag(scripts\engine\utility::getfx(var6.burnvfx), self, var6.tag);
+    playFXOnTag(scripts\engine\utility::getfx(var_6.burnvfx), self, var_6.tag);
   }
 
-  var9 = undefined;
+  var_9 = undefined;
 }
 
-function fx_death_check(var0) {
-  if(var0.tag == "j_head" || var0.tag == "j_helmet") {
+function fx_death_check(var_0) {
+  if(var_0.tag == "j_head" || var_0.tag == "j_helmet") {
     return false;
   }
 
@@ -1468,7 +1468,7 @@ function fx_death_check(var0) {
     return false;
   }
 
-  if(!isDefined(scripts\engine\utility::getfx(var0.burnvfx + "_death"))) {
+  if(!isDefined(scripts\engine\utility::getfx(var_0.burnvfx + "_death"))) {
     return false;
   }
 
@@ -1476,14 +1476,14 @@ function fx_death_check(var0) {
 }
 
 function getdragonsbreathvfxpackets() {
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, createburnvfxpacket("j_knee_ri", "dragonsbreath_pain_limb"));
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, createburnvfxpacket("j_knee_ri", "dragonsbreath_pain_limb"));
 }
 
-function createburnvfxpacket(var0, var1, var2) {
-  var3 = spawnStruct();
-  var3.tag = var0;
-  var3.burnvfx = var1;
-  var3.origin = self gettagorigin(var0);
-  return var3;
+function createburnvfxpacket(var_0, var_1, var_2) {
+  var_3 = spawnStruct();
+  var_3.tag = var_0;
+  var_3.burnvfx = var_1;
+  var_3.origin = self gettagorigin(var_0);
+  return var_3;
 }

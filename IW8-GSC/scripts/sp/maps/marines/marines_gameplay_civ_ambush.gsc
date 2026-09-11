@@ -73,11 +73,11 @@ function civ_ambush_main() {
   thread scripts\sp\maps\marines\marines_utility::spawn_corpses("mg_hall_dead_marine_spawner", "flag_wolf_snakecam_starting");
   scripts\sp\maps\marines\marines_utility::autosave();
   scripts\engine\utility::flag_wait("flag_civ_ambush_ambusher_attack_trigger");
-  var0 = level.allymarines["all"];
+  var_0 = level.allymarines["all"];
 
-  foreach(var2 in var0) {
-    if(isalive(var2) && isDefined(var2.asmname)) {
-      var2 scripts\common\utility::demeanor_override("combat");
+  foreach(var_2 in var_0) {
+    if(isalive(var_2) && isDefined(var_2.asmname)) {
+      var_2 scripts\common\utility::demeanor_override("combat");
     }
   }
 
@@ -87,20 +87,20 @@ function civ_ambush_main() {
 }
 
 function civ_ambush_stair_blocking_marine_handler() {
-  var0 = getEnt("second_floor_marine_teleport_check", "targetname");
-  var1 = getEnt("civ_ambush_blocker_clip", "targetname");
-  var2 = getspawner("civ_ambush_stair_blocker_spawner", "targetname");
-  var1 movez(9999, 0.5, 0.25, 0.25);
+  var_0 = getEnt("second_floor_marine_teleport_check", "targetname");
+  var_1 = getEnt("civ_ambush_blocker_clip", "targetname");
+  var_2 = getspawner("civ_ambush_stair_blocker_spawner", "targetname");
+  var_1 movez(9999, 0.5, 0.25, 0.25);
   scripts\engine\utility::flag_wait("flag_civ_ambush_start");
 
-  foreach(var4 in getaiarray("allies")) {
-    var4 thread scripts\sp\maps\marines\marines_gameplay_hospital_upper::marine_cowabunga_advance_to_goal();
+  foreach(var_4 in getaiarray("allies")) {
+    var_4 thread scripts\sp\maps\marines\marines_gameplay_hospital_upper::marine_cowabunga_advance_to_goal();
   }
 
-  var6 = var2 scripts\engine\sp\utility::spawn_ai();
+  var_6 = var_2 scripts\engine\sp\utility::spawn_ai();
   thread civ_ambush_stair_blocker_ai_handler();
-  var6 thread scripts\sp\maps\marines\marines_utility::marine_callsign_picker();
-  var1 movez(-9999, 0.5, 0.25, 0.25);
+  var_6 thread scripts\sp\maps\marines\marines_utility::marine_callsign_picker();
+  var_1 movez(-9999, 0.5, 0.25, 0.25);
 }
 
 function civ_ambush_stair_blocker_ai_handler() {
@@ -151,23 +151,23 @@ function civ_ambush_movement_handler() {
   scripts\engine\sp\utility::enable_ai_color();
 }
 
-function go_to_targetname(var0) {
-  var1 = getnode(var0, "targetname");
+function go_to_targetname(var_0) {
+  var_1 = getnode(var_0, "targetname");
 
-  if(!isDefined(var1)) {
-    var1 = scripts\engine\utility::getStruct(var0, "targetname");
+  if(!isDefined(var_1)) {
+    var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
   }
 
-  scripts\sp\spawner::go_to_node(var1);
+  scripts\sp\spawner::go_to_node(var_1);
 }
 
 function groundfloor_aq_alive_monitor() {
-  var0 = [];
-  var0 = scripts\engine\sp\utility::get_living_ai_array("ai_aq_groundfloor", "script_noteworthy");
+  var_0 = [];
+  var_0 = scripts\engine\sp\utility::get_living_ai_array("ai_aq_groundfloor", "script_noteworthy");
   waitframe();
 
-  while(var0.size > 0) {
-    var0 = scripts\engine\sp\utility::get_living_ai_array("ai_aq_groundfloor", "script_noteworthy");
+  while(var_0.size > 0) {
+    var_0 = scripts\engine\sp\utility::get_living_ai_array("ai_aq_groundfloor", "script_noteworthy");
     waitframe();
   }
 }
@@ -176,8 +176,8 @@ function civ_ambush_start() {
   scripts\engine\sp\utility::set_start_location("start_civ_ambush", [level.player]);
   level.griggs = scripts\sp\maps\marines\marines_utility::setup_named_ai("griggs", "Sgt. Griggs", "start_civ_ambush_griggs", undefined, undefined, undefined, "Demon 1-2");
   thread scripts\sp\maps\marines\marines_utility::setup_marine_allies("ally_marine_civ_ambush");
-  var0 = getspawnerarray("ally_marine_civ_ambush");
-  thread scripts\sp\maps\marines\marines_utility::marines_checkpoint_forcespawn_allies(var0);
+  var_0 = getspawnerarray("ally_marine_civ_ambush");
+  thread scripts\sp\maps\marines\marines_utility::marines_checkpoint_forcespawn_allies(var_0);
   thread scripts\sp\maps\marines\marines_utility::ally_equipment_backpack(level.griggs, "smoke_tall");
   thread scripts\sp\maps\marines\marines_utility::spawn_corpses("stairwell_dead_body", "flag_civ_ambush_end");
   thread scripts\sp\maps\marines\marines_utility::stairwell_corpses_cleanup();
@@ -192,28 +192,28 @@ function civ_ambush_catchup() {
 }
 
 function civ_ambush_exit_door_setup() {
-  var0 = scripts\sp\door::get_interactive_door("civ_ambush_exit_door_left");
-  var1 = scripts\sp\door::get_interactive_door("civ_ambush_exit_door_right");
-  var0 scripts\game\sp\door::remove_door_snake_cam_ability();
-  var1 scripts\game\sp\door::remove_door_snake_cam_ability();
-  var0.open_left = 1;
-  var0.hinge_side = "open_left";
-  var1.open_left = 0;
-  var1.hinge_side = "open_right";
-  var0.script_max_left_angle = 120;
-  var0.script_max_right_angle = 65;
-  var0 scripts\sp\door::init_max_yaws();
-  var1.script_max_left_angle = 120;
-  var1.script_max_right_angle = 120;
-  var1 scripts\sp\door::init_max_yaws();
-  var0.script_spawn_open_yaw = 65;
-  var0 notify("first_interact");
-  var0.open_struct scripts\sp\player\cursor_hint::remove_cursor_hint();
-  var1.script_spawn_open_yaw = -100;
-  var1 notify("first_interact");
-  var1.open_struct scripts\sp\player\cursor_hint::remove_cursor_hint();
-  var0.bashed_full = 1;
-  var1.bashed_full = 1;
+  var_0 = scripts\sp\door::get_interactive_door("civ_ambush_exit_door_left");
+  var_1 = scripts\sp\door::get_interactive_door("civ_ambush_exit_door_right");
+  var_0 scripts\game\sp\door::remove_door_snake_cam_ability();
+  var_1 scripts\game\sp\door::remove_door_snake_cam_ability();
+  var_0.open_left = 1;
+  var_0.hinge_side = "open_left";
+  var_1.open_left = 0;
+  var_1.hinge_side = "open_right";
+  var_0.script_max_left_angle = 120;
+  var_0.script_max_right_angle = 65;
+  var_0 scripts\sp\door::init_max_yaws();
+  var_1.script_max_left_angle = 120;
+  var_1.script_max_right_angle = 120;
+  var_1 scripts\sp\door::init_max_yaws();
+  var_0.script_spawn_open_yaw = 65;
+  var_0 notify("first_interact");
+  var_0.open_struct scripts\sp\player\cursor_hint::remove_cursor_hint();
+  var_1.script_spawn_open_yaw = -100;
+  var_1 notify("first_interact");
+  var_1.open_struct scripts\sp\player\cursor_hint::remove_cursor_hint();
+  var_0.bashed_full = 1;
+  var_1.bashed_full = 1;
   thread push_manager();
   thread bash_manager();
   thread push_manager();
@@ -259,52 +259,52 @@ function push_door_override() {
     return;
   }
 
-  var0 = 36;
-  var1 = 0;
-  var2 = 25;
-  var3 = scripts\sp\door_internal::interact_door_get_endpoint();
-  var4 = distance(level.player.origin, var3);
-  var5 = scripts\engine\math::normalize_value(var1, var0, var4);
-  var6 = var2 * (1 - var5);
+  var_0 = 36;
+  var_1 = 0;
+  var_2 = 25;
+  var_3 = scripts\sp\door_internal::interact_door_get_endpoint();
+  var_4 = distance(level.player.origin, var_3);
+  var_5 = scripts\engine\math::normalize_value(var_1, var_0, var_4);
+  var_6 = var_2 * (1 - var_5);
 
-  if(abs(var6) < 0.001) {
+  if(abs(var_6) < 0.001) {
     return;
   }
 
   self.prompt_moved = 1;
   self.open_left = scripts\sp\door::should_open_left(self.pivot_ent.angles);
-  var7 = scripts\sp\door::get_door_angles()[1];
-  var8 = scripts\engine\utility::ter_op(self.open_left == 1, 1, -1);
-  var9 = var7 + var6 * var8;
+  var_7 = scripts\sp\door::get_door_angles()[1];
+  var_8 = scripts\engine\utility::ter_op(self.open_left == 1, 1, -1);
+  var_9 = var_7 + var_6 * var_8;
 
   if(self.open_left) {
     if(self.hinge_side == "open_left") {
-      var10 = abs(scripts\sp\door::angle_diff(var9, self.true_start_angles[1]));
+      var_10 = abs(scripts\sp\door::angle_diff(var_9, self.true_start_angles[1]));
 
-      if(var10 > self.max_yaw_left) {
+      if(var_10 > self.max_yaw_left) {
         self.debug_activity = "Pushed to max left yaw of " + self.max_yaw_left;
         self.open_completely = 1;
         thread scripts\sp\door::updatenavobstacle();
         self notify("stop_push_open");
         return;
       }
-    } else if(var9 > self.true_start_angles[1]) {
+    } else if(var_9 > self.true_start_angles[1]) {
       self.debug_activity = "Pushed back closed, right hinge";
       thread scripts\sp\door::reset_door();
       self notify("stop_push_open");
       return;
     }
   } else if(self.hinge_side == "open_right") {
-    var10 = abs(scripts\sp\door::angle_diff(var9, self.true_start_angles[1]));
+    var_10 = abs(scripts\sp\door::angle_diff(var_9, self.true_start_angles[1]));
 
-    if(var10 > self.max_yaw_right) {
+    if(var_10 > self.max_yaw_right) {
       self.debug_activity = "Pushed to max right yaw of " + self.max_yaw_right;
       self.open_completely = 1;
       thread scripts\sp\door::updatenavobstacle();
       self notify("stop_push_open");
       return;
     }
-  } else if(var9 < self.true_start_angles[1]) {
+  } else if(var_9 < self.true_start_angles[1]) {
     self.debug_activity = "Pushed back closed, left hinge";
     thread scripts\sp\door::reset_door();
     self notify("stop_push_open");
@@ -323,7 +323,7 @@ function push_door_override() {
     scripts\sp\door_internal::set_pivot_point(1);
   }
 
-  if(var6 > 0.4) {
+  if(var_6 > 0.4) {
     thread scripts\sp\door_internal::try_push_sound();
 
     if(!scripts\engine\utility::flag("door_second_interact")) {
@@ -334,7 +334,7 @@ function push_door_override() {
     self notify("stop_door_creak");
   }
 
-  self.pivot_ent.angles = (self.pivot_ent.angles[0], var9, self.pivot_ent.angles[2]);
+  self.pivot_ent.angles = (self.pivot_ent.angles[0], var_9, self.pivot_ent.angles[2]);
   self.forward = anglesToForward(self.pivot_ent.angles);
 
   if(scripts\sp\door_internal::door_is_half_open()) {
@@ -352,96 +352,96 @@ function push_door_override() {
 }
 
 function civ_ambush_stairwell_advance() {
-  var0 = scripts\engine\utility::getStruct("stairwell_travel_path_left_a", "targetname");
-  var1 = scripts\engine\utility::getStruct("stairwell_travel_path_left_b", "targetname");
-  var2 = scripts\engine\utility::getStruct("stairwell_travel_path_left_c", "targetname");
-  var3 = scripts\engine\utility::getStruct("stairwell_travel_path_right_a", "targetname");
-  var4 = scripts\engine\utility::getStruct("stairwell_travel_path_right_b", "targetname");
-  var5 = getnode("stairwell_travel_path_right_b_arrival_node", "targetname");
-  var6 = scripts\engine\utility::getStruct("stairwell_travel_path_left_c", "targetname");
-  var7 = [];
+  var_0 = scripts\engine\utility::getStruct("stairwell_travel_path_left_a", "targetname");
+  var_1 = scripts\engine\utility::getStruct("stairwell_travel_path_left_b", "targetname");
+  var_2 = scripts\engine\utility::getStruct("stairwell_travel_path_left_c", "targetname");
+  var_3 = scripts\engine\utility::getStruct("stairwell_travel_path_right_a", "targetname");
+  var_4 = scripts\engine\utility::getStruct("stairwell_travel_path_right_b", "targetname");
+  var_5 = getnode("stairwell_travel_path_right_b_arrival_node", "targetname");
+  var_6 = scripts\engine\utility::getStruct("stairwell_travel_path_left_c", "targetname");
+  var_7 = [];
   level.stairwell_available_paths = [];
-  var8 = [];
-  var9 = [];
+  var_8 = [];
+  var_9 = [];
   level.stairwell_available_paths_index = 0;
-  var10 = [];
-  var10 = scripts\engine\sp\utility::get_living_ai_array("aq_groundfloor_stairwell_spawners", "targetname");
+  var_10 = [];
+  var_10 = scripts\engine\sp\utility::get_living_ai_array("aq_groundfloor_stairwell_spawners", "targetname");
   waitframe();
 
-  if(var10.size > 0) {
-    var11 = getaiarray("allies");
+  if(var_10.size > 0) {
+    var_11 = getaiarray("allies");
 
-    foreach(var13 in var11) {
-      if(isDefined(var13) && isalive(var13)) {
-        var13 scripts\engine\sp\utility::set_baseaccuracy(1);
+    foreach(var_13 in var_11) {
+      if(isDefined(var_13) && isalive(var_13)) {
+        var_13 scripts\engine\sp\utility::set_baseaccuracy(1);
       }
     }
   }
 
   thread scripts\engine\utility::delaythread(5, &scripts\engine\utility::flag_set, "flag_stairwell_wait_time_elapsed");
 
-  while(var10.size > 0 && !scripts\engine\utility::flag("flag_stairwell_wait_time_elapsed")) {
-    var10 = scripts\engine\sp\utility::get_living_ai_array("aq_groundfloor_stairwell_spawners", "targetname");
+  while(var_10.size > 0 && !scripts\engine\utility::flag("flag_stairwell_wait_time_elapsed")) {
+    var_10 = scripts\engine\sp\utility::get_living_ai_array("aq_groundfloor_stairwell_spawners", "targetname");
     waitframe();
   }
 
   thread scripts\sp\maps\marines\marines_vo::vo_civambush_griggs_stairwell_advance_dialogue();
-  var11 = getaiarray("allies");
+  var_11 = getaiarray("allies");
 
-  foreach(var13 in var11) {
-    if(isDefined(var13) && isalive(var13)) {
-      var13 scripts\engine\sp\utility::set_baseaccuracy(0.5);
+  foreach(var_13 in var_11) {
+    if(isDefined(var_13) && isalive(var_13)) {
+      var_13 scripts\engine\sp\utility::set_baseaccuracy(0.5);
     }
   }
 
-  level.stairwell_available_paths = scripts\engine\utility::array_add(level.stairwell_available_paths, var4);
-  level.stairwell_available_paths = scripts\engine\utility::array_add(level.stairwell_available_paths, var0);
-  level.stairwell_available_paths = scripts\engine\utility::array_add(level.stairwell_available_paths, var3);
-  level.stairwell_available_paths = scripts\engine\utility::array_add(level.stairwell_available_paths, var1);
+  level.stairwell_available_paths = scripts\engine\utility::array_add(level.stairwell_available_paths, var_4);
+  level.stairwell_available_paths = scripts\engine\utility::array_add(level.stairwell_available_paths, var_0);
+  level.stairwell_available_paths = scripts\engine\utility::array_add(level.stairwell_available_paths, var_3);
+  level.stairwell_available_paths = scripts\engine\utility::array_add(level.stairwell_available_paths, var_1);
   wait 1;
-  var7 = getaiarray("allies");
+  var_7 = getaiarray("allies");
 
-  foreach(var18 in var7) {
-    if(isalive(var18) && isDefined(var18.asmname)) {
-      var18 scripts\common\utility::demeanor_override("cqb");
+  foreach(var_18 in var_7) {
+    if(isalive(var_18) && isDefined(var_18.asmname)) {
+      var_18 scripts\common\utility::demeanor_override("cqb");
     }
   }
 
   waitframe();
 
-  if(var7.size < 4) {
-    thread marine_stairwell_respawn_monitor(var7);
+  if(var_7.size < 4) {
+    thread marine_stairwell_respawn_monitor(var_7);
   }
 
-  var20 = sortbydistance(var7, var6.origin);
-  var21 = 0;
+  var_20 = sortbydistance(var_7, var_6.origin);
+  var_21 = 0;
 
-  foreach(var18 in var20) {
-    if(isDefined(var18) && isalive(var18)) {
+  foreach(var_18 in var_20) {
+    if(isDefined(var_18) && isalive(var_18)) {
       if(level.stairwell_available_paths_index <= level.stairwell_available_paths.size) {
-        if(var21 == 4) {
+        if(var_21 == 4) {
           wait 1;
 
-          if(isDefined(var18) && isalive(var18)) {
-            if(var18 == level.griggs) {
-              var18 thread scripts\sp\maps\marines\marines_utility::marine_path_util(var2, undefined, undefined, undefined, undefined, 0);
+          if(isDefined(var_18) && isalive(var_18)) {
+            if(var_18 == level.griggs) {
+              var_18 thread scripts\sp\maps\marines\marines_utility::marine_path_util(var_2, undefined, undefined, undefined, undefined, 0);
             } else {
-              var18 thread scripts\sp\maps\marines\marines_utility::marine_path_util(var2, undefined, undefined, undefined, undefined, 1);
+              var_18 thread scripts\sp\maps\marines\marines_utility::marine_path_util(var_2, undefined, undefined, undefined, undefined, 1);
             }
 
             thread stairwell_advance_ignore_player_enable();
-            var21++;
+            var_21++;
           }
         } else {
-          if(var18 == level.griggs) {
-            var18 thread scripts\sp\maps\marines\marines_utility::marine_path_util(level.stairwell_available_paths[level.stairwell_available_paths_index], undefined, undefined, undefined, undefined, 0);
+          if(var_18 == level.griggs) {
+            var_18 thread scripts\sp\maps\marines\marines_utility::marine_path_util(level.stairwell_available_paths[level.stairwell_available_paths_index], undefined, undefined, undefined, undefined, 0);
           } else {
-            var18 thread scripts\sp\maps\marines\marines_utility::marine_path_util(level.stairwell_available_paths[level.stairwell_available_paths_index], undefined, undefined, undefined, undefined, 1);
+            var_18 thread scripts\sp\maps\marines\marines_utility::marine_path_util(level.stairwell_available_paths[level.stairwell_available_paths_index], undefined, undefined, undefined, undefined, 1);
           }
 
-          var18.script_index = level.stairwell_available_paths_index;
+          var_18.script_index = level.stairwell_available_paths_index;
           level.stairwell_available_paths_index++;
-          var21++;
+          var_21++;
           thread stairwell_advance_ignore_player_enable();
         }
       }
@@ -474,23 +474,23 @@ function stairwell_advance_ignore_player_clear() {
 }
 
 function civ_ambush_marine_color_update() {
-  var0 = level.allymarines["all"];
-  var0 = scripts\engine\utility::array_remove(var0, level.griggs);
+  var_0 = level.allymarines["all"];
+  var_0 = scripts\engine\utility::array_remove(var_0, level.griggs);
   thread stairwell_advance_ignore_player_clear();
   waitframe();
-  var1 = scripts\engine\utility::getStruct("civ_ambush_ai_advance_ref", "targetname");
-  var0 = sortbydistance(var0, var1.origin);
-  var0 = scripts\engine\utility::array_remove(var0, level.griggs);
+  var_1 = scripts\engine\utility::getStruct("civ_ambush_ai_advance_ref", "targetname");
+  var_0 = sortbydistance(var_0, var_1.origin);
+  var_0 = scripts\engine\utility::array_remove(var_0, level.griggs);
   thread griggs_stairwell_advance_demeanor();
   level.griggs thread scripts\sp\maps\marines\marines_gameplay_hospital_upper::marine_cowabunga_advance_to_goal();
-  var2 = 0;
+  var_2 = 0;
 
-  foreach(var4 in var0) {
-    thread switch_color_at_goal_thread(var4, var4.script_forcecolor);
-    var2++;
+  foreach(var_4 in var_0) {
+    thread switch_color_at_goal_thread(var_4, var_4.script_forcecolor);
+    var_2++;
   }
 
-  level.civ_ambush_marine_color_swap_waiting = var2;
+  level.civ_ambush_marine_color_swap_waiting = var_2;
 
   while(level.civ_ambush_marine_color_swap_waiting) {
     waitframe();
@@ -504,9 +504,9 @@ function civ_ambush_marine_color_update() {
 
 function griggs_stairwell_advance_demeanor() {
   self endon("death");
-  var0 = scripts\engine\utility::getStruct("civ_ambush_ai_advance_ref", "targetname");
+  var_0 = scripts\engine\utility::getStruct("civ_ambush_ai_advance_ref", "targetname");
 
-  while(distancesquared(self.origin, var0.origin) > 10000) {
+  while(distancesquared(self.origin, var_0.origin) > 10000) {
     if(isDefined(self.asmname)) {
       scripts\common\utility::demeanor_override("combat");
     }
@@ -514,7 +514,7 @@ function griggs_stairwell_advance_demeanor() {
     waitframe();
   }
 
-  while(distancesquared(self.origin, var0.origin) <= 10000) {
+  while(distancesquared(self.origin, var_0.origin) <= 10000) {
     if(isDefined(self.asmname)) {
       scripts\common\utility::demeanor_override("combat");
     }
@@ -528,12 +528,12 @@ function griggs_stairwell_advance_demeanor() {
   }
 }
 
-function switch_color_at_goal_thread(var0, var1) {
-  switch_color_at_goal(var0, var1);
+function switch_color_at_goal_thread(var_0, var_1) {
+  switch_color_at_goal(var_0, var_1);
   level.civ_ambush_marine_color_swap_waiting--;
 }
 
-function switch_color_at_goal(var0, var1) {
+function switch_color_at_goal(var_0, var_1) {
   self endon("death");
   self endon("entitydeleted");
   self waittill("goal");
@@ -542,66 +542,66 @@ function switch_color_at_goal(var0, var1) {
   thread stairwell_advance_ignore_player_clear();
   scripts\common\ai::set_gunpose("ready", 1);
   scripts\engine\utility::flag_wait("flag_griggs_enter_civ_ambush_gate");
-  thread scripts\sp\maps\marines\marines_utility::switch_marine_color(var0, var1);
+  thread scripts\sp\maps\marines\marines_utility::switch_marine_color(var_0, var_1);
 }
 
 function civ_ambush_marine_color_reset() {
-  var0 = level.allymarines["all"];
-  var0 = scripts\engine\utility::array_remove(var0, level.griggs);
-  var1 = 0;
+  var_0 = level.allymarines["all"];
+  var_0 = scripts\engine\utility::array_remove(var_0, level.griggs);
+  var_1 = 0;
 
-  foreach(var3 in var0) {
-    if(isDefined(var3) && isalive(var3)) {
-      var3 scripts\common\ai::set_gunpose("ready", 1);
+  foreach(var_3 in var_0) {
+    if(isDefined(var_3) && isalive(var_3)) {
+      var_3 scripts\common\ai::set_gunpose("ready", 1);
 
-      if(isDefined(var3.poiauto)) {
-        var3 scripts\common\ai::poi_enable(0);
+      if(isDefined(var_3.poiauto)) {
+        var_3 scripts\common\ai::poi_enable(0);
       }
 
-      if(var1 == 0) {
-        var4 = var3.script_forcecolor;
-        var3 scripts\sp\maps\marines\marines_utility::switch_marine_color(var4, "g");
-        var1++;
+      if(var_1 == 0) {
+        var_4 = var_3.script_forcecolor;
+        var_3 scripts\sp\maps\marines\marines_utility::switch_marine_color(var_4, "g");
+        var_1++;
         continue;
       }
 
-      if(var1 == 1) {
-        var4 = var3.script_forcecolor;
-        var3 scripts\sp\maps\marines\marines_utility::switch_marine_color(var4, "g");
-        var1++;
+      if(var_1 == 1) {
+        var_4 = var_3.script_forcecolor;
+        var_3 scripts\sp\maps\marines\marines_utility::switch_marine_color(var_4, "g");
+        var_1++;
         continue;
       }
 
-      if(var1 == 2) {
-        var4 = var3.script_forcecolor;
-        var3 scripts\sp\maps\marines\marines_utility::switch_marine_color(var4, "g");
-        var1++;
+      if(var_1 == 2) {
+        var_4 = var_3.script_forcecolor;
+        var_3 scripts\sp\maps\marines\marines_utility::switch_marine_color(var_4, "g");
+        var_1++;
         continue;
       }
 
-      if(var1 > 2) {
-        var4 = var3.script_forcecolor;
-        var3 scripts\sp\maps\marines\marines_utility::switch_marine_color(var4, "g");
-        var1++;
+      if(var_1 > 2) {
+        var_4 = var_3.script_forcecolor;
+        var_3 scripts\sp\maps\marines\marines_utility::switch_marine_color(var_4, "g");
+        var_1++;
       }
     }
   }
 }
 
-function marine_stairwell_respawn_monitor(var0) {
+function marine_stairwell_respawn_monitor(var_0) {
   scripts\engine\utility::flag_wait("flag_stairwell_marine_initial_pathing_done");
 
   while(level.stairwell_available_paths_index <= level.stairwell_available_paths.size) {
-    var0 = level.allymarines["all"];
+    var_0 = level.allymarines["all"];
     waitframe();
-    var0 = scripts\engine\utility::array_remove(var0, level.griggs);
+    var_0 = scripts\engine\utility::array_remove(var_0, level.griggs);
 
-    foreach(var2 in var0) {
-      if(isDefined(var2) && isalive(var2)) {
-        if(!isDefined(var2.script_index)) {
+    foreach(var_2 in var_0) {
+      if(isDefined(var_2) && isalive(var_2)) {
+        if(!isDefined(var_2.script_index)) {
           if(level.stairwell_available_paths_index <= level.stairwell_available_paths.size) {
-            var2 thread scripts\sp\maps\marines\marines_utility::marine_path_util(level.stairwell_available_paths[level.stairwell_available_paths_index], undefined, undefined, undefined, undefined, 1);
-            var2.script_index = level.stairwell_available_paths_index;
+            var_2 thread scripts\sp\maps\marines\marines_utility::marine_path_util(level.stairwell_available_paths[level.stairwell_available_paths_index], undefined, undefined, undefined, undefined, 1);
+            var_2.script_index = level.stairwell_available_paths_index;
             level.stairwell_available_paths_index++;
           }
         }
@@ -614,35 +614,35 @@ function marine_stairwell_respawn_monitor(var0) {
 
 function clean_up_first_floor_corpses() {
   scripts\engine\sp\utility::trigger_wait_targetname("hospital_first_floor_delete");
-  var0 = getcorpsearray();
-  var1 = getweaponarray();
-  var2 = getEnt("hospital_first_floor_catcher1", "targetname");
-  var3 = getEnt("hospital_first_floor_catcher2", "targetname");
-  var4 = getEnt("hospital_first_floor_catcher3", "targetname");
+  var_0 = getcorpsearray();
+  var_1 = getweaponarray();
+  var_2 = getEnt("hospital_first_floor_catcher1", "targetname");
+  var_3 = getEnt("hospital_first_floor_catcher2", "targetname");
+  var_4 = getEnt("hospital_first_floor_catcher3", "targetname");
 
-  foreach(var6 in var0) {
-    if(var6 istouching(var2) || var6 istouching(var3) || var6 istouching(var4)) {
-      var6 delete();
+  foreach(var_6 in var_0) {
+    if(var_6 istouching(var_2) || var_6 istouching(var_3) || var_6 istouching(var_4)) {
+      var_6 delete();
     }
   }
 
-  foreach(var9 in var1) {
-    if(var9 istouching(var2) || var9 istouching(var3) || var9 istouching(var4)) {
-      var9 delete();
+  foreach(var_9 in var_1) {
+    if(var_9 istouching(var_2) || var_9 istouching(var_3) || var_9 istouching(var_4)) {
+      var_9 delete();
     }
   }
 }
 
 function clean_up_first_floor_scriptables() {
   scripts\engine\sp\utility::trigger_wait_targetname("hospital_first_floor_delete");
-  var0 = getscriptablearray("deletable_hospital_first_floor", "script_noteworthy");
+  var_0 = getscriptablearray("deletable_hospital_first_floor", "script_noteworthy");
 
-  foreach(var2 in var0) {
-    if(var2.model == "" || !isDefined(var2.model)) {
+  foreach(var_2 in var_0) {
+    if(var_2.model == "" || !isDefined(var_2.model)) {
       continue;
     }
 
-    var2 hideallparts();
+    var_2 hideallparts();
   }
 }
 
@@ -652,73 +652,73 @@ function civ_trap_hint_clear() {
 
 function bed_civs_init() {
   level.flinch_civs = [];
-  var0 = getspawner("civtrap_civ_bed_1_spawner", "targetname");
-  var1 = getspawner("civtrap_civ_bed_2_spawner", "targetname");
-  var2 = getspawner("civtrap_civ_bed_3_spawner", "targetname");
-  var3 = getspawner("civtrap_civ_bed_4_spawner", "targetname");
-  var4 = getspawner("civtrap_civ_bed_5_spawner", "targetname");
-  var5 = getspawner("civtrap_civ_bed_6_spawner", "targetname");
-  var6 = getspawner("civtrap_civ_bed_7_spawner", "targetname");
-  var7 = getspawner("civtrap_civ_bed_8_spawner", "targetname");
-  var8 = getspawner("civtrap_civ_bed_9_spawner", "targetname");
-  var9 = getspawner("civtrap_civ_bed_10_spawner", "targetname");
-  var10 = getspawner("civtrap_civ_bed_11_spawner", "targetname");
-  var11 = getspawner("civtrap_civ_bed_12_spawner", "targetname");
-  var12 = scripts\engine\utility::getStruct("civtrap_civ_bed_1_struct", "targetname");
-  var13 = scripts\engine\utility::getStruct("civtrap_civ_bed_2_struct", "targetname");
-  var14 = scripts\engine\utility::getStruct("civtrap_civ_bed_3_struct", "targetname");
-  var15 = scripts\engine\utility::getStruct("civtrap_civ_bed_4_struct", "targetname");
-  var16 = scripts\engine\utility::getStruct("civtrap_civ_bed_5_struct", "targetname");
-  var17 = scripts\engine\utility::getStruct("civtrap_civ_bed_6_struct", "targetname");
-  var18 = scripts\engine\utility::getStruct("civtrap_civ_bed_7_struct", "targetname");
-  var19 = scripts\engine\utility::getStruct("civtrap_civ_bed_8_struct", "targetname");
-  var20 = scripts\engine\utility::getStruct("civtrap_civ_bed_9_struct", "targetname");
-  var21 = scripts\engine\utility::getStruct("civtrap_civ_bed_10_struct", "targetname");
-  var22 = scripts\engine\utility::getStruct("civtrap_civ_bed_11_struct", "targetname");
-  var23 = scripts\engine\utility::getStruct("civtrap_civ_bed_12_struct", "targetname");
-  var0 scripts\engine\sp\utility::add_spawn_function(&bed_civ_handsup_trigger, 1);
-  var1 scripts\engine\sp\utility::add_spawn_function(&bed_civ_handsup_trigger, 2);
-  var5 scripts\engine\sp\utility::add_spawn_function(&bed_civ_handsup_trigger, 6);
-  var4 scripts\engine\sp\utility::add_spawn_function(&bed_civ_handsup_trigger, 5);
-  var7 scripts\engine\sp\utility::add_spawn_function(&bed_civ_handsup_trigger, 8);
-  var3 scripts\engine\sp\utility::add_spawn_function(&vo_civ_ambush_wounded_aq_init);
-  thread bed_civ_init(var0, var12, 0, 0, 1, 1, "body_civ_syrkistan_male_3_1", "head_sc_m_kargorgis_civ");
-  thread bed_civ_init(var1, var13, 0, 1, 1, 0, "body_civ_syrkistan_female_10_1", "head_sc_f_toyouri_civ");
-  thread bed_civ_init(var2, var14, 0, 0, 1, 1);
-  thread bed_civ_init(var3, var15, 0, 0, 1, 1);
-  thread bed_civ_init(var4, var16, 0, 0, 1, 0);
-  thread bed_civ_init(var5, var17, 0, 0, 1, 1);
-  thread bed_civ_init(var6, var18, 1, 0, 1, 1);
-  thread bed_civ_init(var7, var19, 0, 1, 1, 1);
-  thread bed_civ_init(var8, var20, 0, 0, 1, 1);
-  thread bed_civ_init(var9, var21, 0, 1, 1, 1);
-  thread bed_civ_init(var10, var22, 0, 0, 1, 1);
-  thread bed_civ_init(var11, var23, 0, 0, 1, 1);
+  var_0 = getspawner("civtrap_civ_bed_1_spawner", "targetname");
+  var_1 = getspawner("civtrap_civ_bed_2_spawner", "targetname");
+  var_2 = getspawner("civtrap_civ_bed_3_spawner", "targetname");
+  var_3 = getspawner("civtrap_civ_bed_4_spawner", "targetname");
+  var_4 = getspawner("civtrap_civ_bed_5_spawner", "targetname");
+  var_5 = getspawner("civtrap_civ_bed_6_spawner", "targetname");
+  var_6 = getspawner("civtrap_civ_bed_7_spawner", "targetname");
+  var_7 = getspawner("civtrap_civ_bed_8_spawner", "targetname");
+  var_8 = getspawner("civtrap_civ_bed_9_spawner", "targetname");
+  var_9 = getspawner("civtrap_civ_bed_10_spawner", "targetname");
+  var_10 = getspawner("civtrap_civ_bed_11_spawner", "targetname");
+  var_11 = getspawner("civtrap_civ_bed_12_spawner", "targetname");
+  var_12 = scripts\engine\utility::getStruct("civtrap_civ_bed_1_struct", "targetname");
+  var_13 = scripts\engine\utility::getStruct("civtrap_civ_bed_2_struct", "targetname");
+  var_14 = scripts\engine\utility::getStruct("civtrap_civ_bed_3_struct", "targetname");
+  var_15 = scripts\engine\utility::getStruct("civtrap_civ_bed_4_struct", "targetname");
+  var_16 = scripts\engine\utility::getStruct("civtrap_civ_bed_5_struct", "targetname");
+  var_17 = scripts\engine\utility::getStruct("civtrap_civ_bed_6_struct", "targetname");
+  var_18 = scripts\engine\utility::getStruct("civtrap_civ_bed_7_struct", "targetname");
+  var_19 = scripts\engine\utility::getStruct("civtrap_civ_bed_8_struct", "targetname");
+  var_20 = scripts\engine\utility::getStruct("civtrap_civ_bed_9_struct", "targetname");
+  var_21 = scripts\engine\utility::getStruct("civtrap_civ_bed_10_struct", "targetname");
+  var_22 = scripts\engine\utility::getStruct("civtrap_civ_bed_11_struct", "targetname");
+  var_23 = scripts\engine\utility::getStruct("civtrap_civ_bed_12_struct", "targetname");
+  var_0 scripts\engine\sp\utility::add_spawn_function(&bed_civ_handsup_trigger, 1);
+  var_1 scripts\engine\sp\utility::add_spawn_function(&bed_civ_handsup_trigger, 2);
+  var_5 scripts\engine\sp\utility::add_spawn_function(&bed_civ_handsup_trigger, 6);
+  var_4 scripts\engine\sp\utility::add_spawn_function(&bed_civ_handsup_trigger, 5);
+  var_7 scripts\engine\sp\utility::add_spawn_function(&bed_civ_handsup_trigger, 8);
+  var_3 scripts\engine\sp\utility::add_spawn_function(&vo_civ_ambush_wounded_aq_init);
+  thread bed_civ_init(var_0, var_12, 0, 0, 1, 1, "body_civ_syrkistan_male_3_1", "head_sc_m_kargorgis_civ");
+  thread bed_civ_init(var_1, var_13, 0, 1, 1, 0, "body_civ_syrkistan_female_10_1", "head_sc_f_toyouri_civ");
+  thread bed_civ_init(var_2, var_14, 0, 0, 1, 1);
+  thread bed_civ_init(var_3, var_15, 0, 0, 1, 1);
+  thread bed_civ_init(var_4, var_16, 0, 0, 1, 0);
+  thread bed_civ_init(var_5, var_17, 0, 0, 1, 1);
+  thread bed_civ_init(var_6, var_18, 1, 0, 1, 1);
+  thread bed_civ_init(var_7, var_19, 0, 1, 1, 1);
+  thread bed_civ_init(var_8, var_20, 0, 0, 1, 1);
+  thread bed_civ_init(var_9, var_21, 0, 1, 1, 1);
+  thread bed_civ_init(var_10, var_22, 0, 0, 1, 1);
+  thread bed_civ_init(var_11, var_23, 0, 0, 1, 1);
 }
 
-function bed_civ_handsup_trigger(var0) {
+function bed_civ_handsup_trigger(var_0) {
   self endon("entitydeleted");
   wait 1;
-  var1 = getnode("civ_" + var0 + "_handsup_node", "script_noteworthy");
-  var2 = undefined;
+  var_1 = getnode("civ_" + var_0 + "_handsup_node", "script_noteworthy");
+  var_2 = undefined;
 
-  while(!isDefined(var2)) {
-    foreach(var4 in getaiarray("allies")) {
-      if(isDefined(var4.node) && var4.node == var1) {
-        var2 = var4;
+  while(!isDefined(var_2)) {
+    foreach(var_4 in getaiarray("allies")) {
+      if(isDefined(var_4.node) && var_4.node == var_1) {
+        var_2 = var_4;
       }
     }
 
     waitframe();
   }
 
-  while(isDefined(var2) && distance2dsquared(self.origin, var2.origin) > 40000) {
+  while(isDefined(var_2) && distance2dsquared(self.origin, var_2.origin) > 40000) {
     waitframe();
   }
 
-  if(isDefined(var2) && !scripts\engine\utility::flag("flag_civ_ambush_ambusher_grabbing_gun")) {
-    var6 = scripts\engine\utility::getStruct("civ_" + var0 + "_handsup_struct", "targetname");
-    var2 scripts\common\ai::poi_enable(1, var6);
+  if(isDefined(var_2) && !scripts\engine\utility::flag("flag_civ_ambush_ambusher_grabbing_gun")) {
+    var_6 = scripts\engine\utility::getStruct("civ_" + var_0 + "_handsup_struct", "targetname");
+    var_2 scripts\common\ai::poi_enable(1, var_6);
 
     if(self.responsive) {
       self notify("handsup");
@@ -726,13 +726,13 @@ function bed_civ_handsup_trigger(var0) {
 
     self.ignoreme = 0;
     self.team = "axis";
-    var2.favoriteenemy = self;
-    var2 scripts\common\ai::set_gunpose("ads");
-    var2 scripts\sp\maps\marines\marines_vo::vo_civ_ambush_friendly_hands_up_dialogue();
+    var_2.favoriteenemy = self;
+    var_2 scripts\common\ai::set_gunpose("ads");
+    var_2 scripts\sp\maps\marines\marines_vo::vo_civ_ambush_friendly_hands_up_dialogue();
     wait 2;
-    var2 scripts\common\ai::poi_enable(0);
-    var2 scripts\common\ai::set_gunpose("ready", 1);
-    var2 scripts\asm\shared\utility::toggle_poiauto(1, 10, 30, 5, 10);
+    var_2 scripts\common\ai::poi_enable(0);
+    var_2 scripts\common\ai::set_gunpose("ready", 1);
+    var_2 scripts\asm\shared\utility::toggle_poiauto(1, 10, 30, 5, 10);
     self notify("handsup_complete");
     return;
   }
@@ -744,74 +744,74 @@ function vo_civ_ambush_wounded_aq_init() {
 
 #using_animtree("generic_human");
 
-function bed_civ_init(var0, var1, var2, var3, var4, var5, var6, var7) {
+function bed_civ_init(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(!isDefined(level.civ_ambush_poi_structs)) {
     level.civ_ambush_poi_structs = [];
   }
 
-  level.civ_ambush_poi_structs = scripts\engine\utility::array_add(level.civ_ambush_poi_structs, var1);
-  var8 = var0 scripts\engine\sp\utility::spawn_ai();
-  var8.dead = var2;
-  var8.responsive = var3;
-  var8.dialogue = var4;
-  var8.sex = scripts\engine\utility::ter_op(var5, "male", "female");
-  var8.team = "neutral";
-  var8.ignoreme = 1;
-  var8.allowdeath = 1;
-  var8.noragdoll = 1;
-  var8.dontmelee = 1;
-  var8 scripts\sp\utility::context_melee_allow(0);
+  level.civ_ambush_poi_structs = scripts\engine\utility::array_add(level.civ_ambush_poi_structs, var_1);
+  var_8 = var_0 scripts\engine\sp\utility::spawn_ai();
+  var_8.dead = var_2;
+  var_8.responsive = var_3;
+  var_8.dialogue = var_4;
+  var_8.sex = scripts\engine\utility::ter_op(var_5, "male", "female");
+  var_8.team = "neutral";
+  var_8.ignoreme = 1;
+  var_8.allowdeath = 1;
+  var_8.noragdoll = 1;
+  var_8.dontmelee = 1;
+  var_8 scripts\sp\utility::context_melee_allow(0);
 
   if(getdvarint("scr_use_procedural_bones")) {
-    var8 setanim(%proc_node, 1, 0);
+    var_8 setanim(%proc_node, 1, 0);
   }
 
-  if(isDefined(var6) && isDefined(var7)) {
-    var8 scripts\sp\maps\marines\marines_gameplay_hospital_upper::setcharmodels(var6, var7, undefined);
+  if(isDefined(var_6) && isDefined(var_7)) {
+    var_8 scripts\sp\maps\marines\marines_gameplay_hospital_upper::setcharmodels(var_6, var_7, undefined);
   }
 
-  if(istrue(var8.script_fakeactor)) {
-    var8 scripts\sp\fakeactor::take_control();
+  if(istrue(var_8.script_fakeactor)) {
+    var_8 scripts\sp\fakeactor::take_control();
   }
 
   waitframe();
-  level thread scripts\sp\friendlyfire::friendly_fire_think(var8);
-  var8.struct = var1;
-  var8.health = 99999;
-  var8.noragdoll = 1;
+  level thread scripts\sp\friendlyfire::friendly_fire_think(var_8);
+  var_8.struct = var_1;
+  var_8.health = 99999;
+  var_8.noragdoll = 1;
 
-  if(istrue(var8.script_fakeactor)) {
-    var8.origin = var1.origin;
-    var8.angles = var1.angles;
+  if(istrue(var_8.script_fakeactor)) {
+    var_8.origin = var_1.origin;
+    var_8.angles = var_1.angles;
   } else {
-    var8 teleport(var1.origin, var1.angles);
+    var_8 teleport(var_1.origin, var_1.angles);
   }
 
   thread bed_civ_ads_monitor();
 
-  if(var2) {
-    var8.animname = "bed_civ_8";
-    var8.friend_kill_points = 0;
-    var8.skip_friendly_fire_check = 1;
+  if(var_2) {
+    var_8.animname = "bed_civ_8";
+    var_8.friend_kill_points = 0;
+    var_8.skip_friendly_fire_check = 1;
     thread bed_civ_cleanup_monitor();
-    var8 thread scripts\common\ai::magic_bullet_shield();
-    var8.struct thread scripts\common\anim::anim_loop_solo(var8, "bed_laying_idle", "end_laying_idle");
+    var_8 thread scripts\common\ai::magic_bullet_shield();
+    var_8.struct thread scripts\common\anim::anim_loop_solo(var_8, "bed_laying_idle", "end_laying_idle");
     return;
   }
 
-  var8 scripts\engine\utility::ent_flag_init("play_dead");
-  var8.index = var1.script_index;
-  assign_bed_civ_index(var8, get_script_index(var1));
+  var_8 scripts\engine\utility::ent_flag_init("play_dead");
+  var_8.index = var_1.script_index;
+  assign_bed_civ_index(var_8, get_script_index(var_1));
   thread bed_civ_death_monitor();
   thread bed_civ_cleanup_monitor();
   thread bed_civ_state_laying();
   thread bed_civ_flinch_monitor();
 
   if(isDefined(level.flinch_civs)) {
-    level.flinch_civs = scripts\engine\utility::array_add(level.flinch_civs, var8);
+    level.flinch_civs = scripts\engine\utility::array_add(level.flinch_civs, var_8);
   }
 
-  return var8;
+  return var_8;
 }
 
 function get_script_index() {
@@ -822,10 +822,10 @@ function get_script_index() {
   return undefined;
 }
 
-function assign_bed_civ_index(var0) {
-  if(isDefined(var0)) {
-    if(var0 >= 1 && var0 <= 7) {
-      self.animname = "bed_civ_" + var0;
+function assign_bed_civ_index(var_0) {
+  if(isDefined(var_0)) {
+    if(var_0 >= 1 && var_0 <= 7) {
+      self.animname = "bed_civ_" + var_0;
       return;
     }
 
@@ -860,10 +860,10 @@ function bed_civ_state_laying() {
 function bed_civ_state_laying_responsive() {
   self endon("damage");
   self endon("entitydeleted");
-  var0 = scripts\engine\utility::waittill_any_return("handsup", "flinch");
+  var_0 = scripts\engine\utility::waittill_any_return("handsup", "flinch");
   self.struct notify("end_laying_idle");
 
-  switch (var0) {
+  switch (var_0) {
     case "handsup":
       self.struct scripts\common\anim::anim_single_solo(self, "bed_handsup");
       thread bed_civ_state_handsup();
@@ -890,8 +890,8 @@ function bed_civ_flinch_monitor() {
 
   if(isDefined(self.struct.target)) {
     for(;;) {
-      var0 = getEnt(self.struct.target, "targetname");
-      var0 waittill("damage");
+      var_0 = getEnt(self.struct.target, "targetname");
+      var_0 waittill("damage");
       self notify("flinch");
     }
 
@@ -917,17 +917,17 @@ function bed_civ_state_laying_flinch() {
 function bed_civ_ads_monitor() {
   self endon("damage");
   self endon("entitydeleted");
-  var0 = cos(30);
-  var1 = squared(500);
-  var2 = getEnt("handsup_suppression", "targetname");
+  var_0 = cos(30);
+  var_1 = squared(500);
+  var_2 = getEnt("handsup_suppression", "targetname");
 
   for(;;) {
-    var3 = distancesquared(self.origin, level.player.origin) < var1;
-    var4 = level.player scripts\engine\sp\utility::isads() && scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), self getEye(), var0);
-    var5 = !ispointinvolume(level.player.origin, var2);
-    var6 = sighttracepassed(self getEye(), level.player getEye(), 0, level.player, 1);
+    var_3 = distancesquared(self.origin, level.player.origin) < var_1;
+    var_4 = level.player scripts\engine\sp\utility::isads() && scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), self getEye(), var_0);
+    var_5 = !ispointinvolume(level.player.origin, var_2);
+    var_6 = sighttracepassed(self getEye(), level.player getEye(), 0, level.player, 1);
 
-    if(var3 && var4 && var5 && var6) {
+    if(var_3 && var_4 && var_5 && var_6) {
       if(self.dead) {
         break;
       } else {
@@ -952,10 +952,10 @@ function bed_civ_state_handsup() {
   self endon("entitydeleted");
   self.struct thread scripts\common\anim::anim_loop_solo(self, "bed_handsup_idle", "end_handsup_idle");
   thread bed_civ_handsup_complete_monitor();
-  var0 = scripts\engine\utility::waittill_any_return("handsup_complete", "flinch");
+  var_0 = scripts\engine\utility::waittill_any_return("handsup_complete", "flinch");
   self.struct notify("end_handsup_idle");
 
-  switch (var0) {
+  switch (var_0) {
     case "handsup_complete":
       self.handsup_complete = 1;
       self.struct scripts\common\anim::anim_single_solo(self, "bed_handsup2laying");
@@ -974,9 +974,9 @@ function bed_civ_handsup_complete_monitor() {
   self endon("entitydeleted");
   self endon("flinch");
   waitframe();
-  var0 = squared(200);
+  var_0 = squared(200);
 
-  while(distance2dsquared(self.origin, level.player.origin) < var0) {
+  while(distance2dsquared(self.origin, level.player.origin) < var_0) {
     waitframe();
   }
 
@@ -998,9 +998,9 @@ function bed_civ_state_handsup_flinch() {
 
 function bed_civ_death_monitor() {
   self endon("entitydeleted");
-  self waittill("damage", var0, var1);
+  self waittill("damage", var_0, var_1);
 
-  if(var1 == level.player) {
+  if(var_1 == level.player) {
     if(isDefined(self.struct.script_noteworthy) && self.struct.script_noteworthy == "civ_ambush_civ") {
       level.friendlyfire["civilians_killed"] = level.friendlyfire["civilians_killed"] + 1;
       level thread scripts\sp\friendlyfire::missionfail(1);
@@ -1049,15 +1049,15 @@ function bed_civ_cleanup_monitor() {
 }
 
 function flinch_civs() {
-  foreach(var1 in level.flinch_civs) {
-    var1 notify("flinch");
+  foreach(var_1 in level.flinch_civs) {
+    var_1 notify("flinch");
   }
 }
 
 function civ_ambusher_init() {
-  var0 = getspawner("civtrap_civ_ambush_spawner", "script_noteworthy");
-  var1 = scripts\engine\utility::getStruct("civtrap_civ_ambush_struct", "script_noteworthy");
-  level.civ_ambusher = var0 scripts\engine\sp\utility::spawn_ai();
+  var_0 = getspawner("civtrap_civ_ambush_spawner", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStruct("civtrap_civ_ambush_struct", "script_noteworthy");
+  level.civ_ambusher = var_0 scripts\engine\sp\utility::spawn_ai();
   level.civ_ambusher.team = "neutral";
   level.civ_ambusher.ignoreme = 1;
   level.civ_ambusher.allowdeath = 1;
@@ -1072,16 +1072,16 @@ function civ_ambusher_init() {
   self.diequietly = 1;
   waitframe();
   level.civ_ambusher.animname = "bed_decoy";
-  level.civ_ambusher forceteleport(var1.origin, var1.angles);
+  level.civ_ambusher forceteleport(var_1.origin, var_1.angles);
   level.civ_ambusher.health = 9999;
   level.civ_ambusher.noragdoll = 1;
-  level.civ_ambusher.struct = var1;
-  level.civ_ambusher.index = var1.script_index;
+  level.civ_ambusher.struct = var_1;
+  level.civ_ambusher.index = var_1.script_index;
   thread civ_ambusher_death_monitor();
   thread civ_ambusher_cleanup_monitor();
   level.civ_ambusher.fake_target = scripts\engine\utility::spawn_tag_origin(level.civ_ambusher getEye(), level.civ_ambusher.angles);
   level.civ_ambusher.fake_target linktoblendtotag(level.civ_ambusher, "tag_eye");
-  var1 thread scripts\common\anim::anim_loop_solo(level.civ_ambusher, "bed_laying_idle", "end_laying_idle");
+  var_1 thread scripts\common\anim::anim_loop_solo(level.civ_ambusher, "bed_laying_idle", "end_laying_idle");
   thread civ_ambusher_ambush_manager();
   thread civ_ambusher_gun_manager();
   thread civ_ambusher_player_threat_monitor();
@@ -1091,15 +1091,15 @@ function civ_ambusher_ambush_manager() {
   level endon("civ_ambusher_dead");
   self endon("entitydeleted");
   scripts\engine\utility::flag_wait_any("flag_civ_ambush_ambusher_attack_check", "flag_civ_ambush_player_threat");
-  var0 = 0;
+  var_0 = 0;
 
   if(level.player issprinting() == 1) {
-    var0 = 1;
+    var_0 = 1;
   } else {
     scripts\engine\utility::flag_wait_any("flag_civ_ambush_ambusher_attack_trigger", "flag_civ_ambush_player_threat");
 
     if(scripts\engine\utility::flag("flag_civ_ambush_player_threat") == 1) {
-      var0 = 1;
+      var_0 = 1;
     }
   }
 
@@ -1116,22 +1116,22 @@ function civ_ambusher_ambush_manager() {
   self.struct notify("end_laying_idle");
   self actoraimassiston();
 
-  if(var0 == 1) {
-    var1 = 2;
+  if(var_0 == 1) {
+    var_1 = 2;
     scripts\engine\utility::flag_set("flag_civ_ambush_ambusher_grabbing_gun");
     self.struct thread scripts\common\anim::anim_single_solo(self, "bed_gungrab");
     waitframe();
-    var2 = getanimlength(scripts\engine\utility::getanim("bed_gungrab")) / var1;
-    self setanimrate(scripts\engine\utility::getanim("bed_gungrab"), var1);
-    self notify("waittime", var2);
-    wait var2;
+    var_2 = getanimlength(scripts\engine\utility::getanim("bed_gungrab")) / var_1;
+    self setanimrate(scripts\engine\utility::getanim("bed_gungrab"), var_1);
+    self notify("waittime", var_2);
+    wait var_2;
   } else {
     scripts\engine\utility::flag_set("flag_civ_ambush_ambusher_grabbing_gun");
     self.struct thread scripts\common\anim::anim_single_solo(self, "bed_gungrab");
     waitframe();
-    var2 = getanimlength(scripts\engine\utility::getanim("bed_gungrab"));
-    self notify("waittime", var2);
-    wait var2;
+    var_2 = getanimlength(scripts\engine\utility::getanim("bed_gungrab"));
+    self notify("waittime", var_2);
+    wait var_2;
   }
 
   level notify("civ_ambush_triggered");
@@ -1144,21 +1144,21 @@ function civ_ambusher_ambush_manager() {
 
 function death_hint_watcher_marines_civ_ambush_death() {
   level endon("civ_ambusher_dead");
-  level.player waittill("death", var0, var1, var2);
+  level.player waittill("death", var_0, var_1, var_2);
 
-  if(var0 == level.civ_ambusher) {
+  if(var_0 == level.civ_ambusher) {
     scripts\sp\player_death::set_custom_death_quote(403);
     return;
   }
 }
 
-function civ_ambusher_shooting_manager(var0) {
+function civ_ambusher_shooting_manager(var_0) {
   level endon("civ_ambusher_dead");
   self endon("entitydeleted");
-  var1 = 0;
-  var2 = getcompleteweaponname("iw8_ar_akilo47");
-  var3 = weaponclipsize(var2);
-  var4 = weaponfiretime(var2);
+  var_1 = 0;
+  var_2 = getcompleteweaponname("iw8_ar_akilo47");
+  var_3 = weaponclipsize(var_2);
+  var_4 = weaponfiretime(var_2);
   level.ambusher_can_be_shot = 0;
 
   if(level.civ_ambusher_target != level.player) {
@@ -1166,52 +1166,52 @@ function civ_ambusher_shooting_manager(var0) {
     GscBinSkip4(0x6e, self.fake_target);
   }
 
-  var5 = 1;
+  var_5 = 1;
 
-  while(var1 < var3) {
+  while(var_1 < var_3) {
     if(level.civ_ambusher_target != level.player && level.civ_ambusher scripts\engine\utility::ent_flag("civ_ambusher_target_player")) {
       level.civ_ambusher_target = level.player;
     }
 
     if(level.civ_ambusher_target == level.player) {
-      var6 = level.player;
+      var_6 = level.player;
     } else {
-      var6 = self.fake_target;
+      var_6 = self.fake_target;
     }
 
-    self setlookatentity(var6);
+    self setlookatentity(var_6);
 
-    while(var1 < var3) {
-      var7 = var0 gettagorigin("tag_flash");
+    while(var_1 < var_3) {
+      var_7 = var_0 gettagorigin("tag_flash");
 
       if(level.civ_ambusher_target == level.player) {
-        var8 = level.player getEye() - (0, 0, 10);
+        var_8 = level.player getEye() - (0, 0, 10);
       } else {
-        var8 = self.fake_target.origin;
+        var_8 = self.fake_target.origin;
       }
 
-      magicbullet("iw8_ar_akilo47_low_damage", var7, var8 + scripts\engine\utility::randomvectorrange(0.2, 2), level.civ_ambusher);
-      playFX(scripts\engine\utility::getfx("vfx_muzzle_flash_ar_no_cull"), var0 gettagorigin("tag_flash") + (0, 0, 7), var0 gettagangles("tag_flash"));
-      var1++;
+      magicbullet("iw8_ar_akilo47_low_damage", var_7, var_8 + scripts\engine\utility::randomvectorrange(0.2, 2), level.civ_ambusher);
+      playFX(scripts\engine\utility::getfx("vfx_muzzle_flash_ar_no_cull"), var_0 gettagorigin("tag_flash") + (0, 0, 7), var_0 gettagangles("tag_flash"));
+      var_1++;
       wait 0.125;
 
-      if(var5 == 1) {
+      if(var_5 == 1) {
         thread flinch_civs();
-        var5 = 0;
+        var_5 = 0;
       }
 
       thread player_runby_monitor();
 
-      if(level.ambusher_can_be_shot == 0 && var1 >= 20) {
+      if(level.ambusher_can_be_shot == 0 && var_1 >= 20) {
         self.ignoreme = 0;
         level.ambusher_can_be_shot = 1;
-        var9 = level.allymarines["all"];
+        var_9 = level.allymarines["all"];
 
-        foreach(var11 in var9) {
-          var11 clearentitytarget();
+        foreach(var_11 in var_9) {
+          var_11 clearentitytarget();
           waitframe();
-          var11.favoriteenemy = self;
-          var11 getenemyinfo(self);
+          var_11.favoriteenemy = self;
+          var_11 getenemyinfo(self);
         }
       }
     }
@@ -1221,24 +1221,24 @@ function civ_ambusher_shooting_manager(var0) {
 }
 
 function civ_ambusher_autokill() {
-  var0 = scripts\engine\utility::getStruct("civ_ambusher_autokill", "targetname").origin;
-  var1 = level.civ_ambusher gettagorigin("j_spinelower");
-  var2 = level.civ_ambusher gettagorigin("j_spineupper");
-  var3 = level.civ_ambusher gettagorigin("j_head");
-  var4 = var0 - var3;
-  var5 = var4 / 7;
-  var0 -= var5;
-  magicbullet("iw8_ar_akilo47", var0, var1);
+  var_0 = scripts\engine\utility::getStruct("civ_ambusher_autokill", "targetname").origin;
+  var_1 = level.civ_ambusher gettagorigin("j_spinelower");
+  var_2 = level.civ_ambusher gettagorigin("j_spineupper");
+  var_3 = level.civ_ambusher gettagorigin("j_head");
+  var_4 = var_0 - var_3;
+  var_5 = var_4 / 7;
+  var_0 -= var_5;
+  magicbullet("iw8_ar_akilo47", var_0, var_1);
   wait 0.1;
-  magicbullet("iw8_ar_akilo47", var0, var2);
+  magicbullet("iw8_ar_akilo47", var_0, var_2);
   wait 0.1;
-  magicbullet("iw8_ar_akilo47", var0, var3);
+  magicbullet("iw8_ar_akilo47", var_0, var_3);
 }
 
 function civ_ambusher_move_fake_target() {
   level.civ_ambusher_target waittill("death");
-  var0 = 1;
-  self moveTo(level.player getEye(), var0, 0.1, 0.1);
+  var_0 = 1;
+  self moveTo(level.player getEye(), var_0, 0.1, 0.1);
   level.civ_ambusher scripts\engine\utility::ent_flag_set("civ_ambusher_target_player");
 }
 
@@ -1250,13 +1250,13 @@ function player_runby_monitor() {
   if(level.ambusher_can_be_shot == 0) {
     self.ignoreme = 0;
     level.ambusher_can_be_shot = 1;
-    var0 = level.allymarines["all"];
+    var_0 = level.allymarines["all"];
 
-    foreach(var2 in var0) {
-      var2 clearentitytarget();
+    foreach(var_2 in var_0) {
+      var_2 clearentitytarget();
       waitframe();
-      var2.favoriteenemy = self;
-      var2 getenemyinfo(self);
+      var_2.favoriteenemy = self;
+      var_2 getenemyinfo(self);
     }
 
     return;
@@ -1264,18 +1264,18 @@ function player_runby_monitor() {
 }
 
 function civ_ambusher_gun_manager() {
-  self waittill("waittime", var0);
+  self waittill("waittime", var_0);
   self.gun = getEnt("civ_ambusher_gun", "targetname");
   self.gun linkTo(level.civ_ambusher, "j_gun");
-  wait var0 * 0.35;
+  wait var_0 * 0.35;
 
   if(isalive(self)) {
     scripts\sp\maps\marines\marines_vo::vo_civambush_griggs_shoot_dialogue();
   }
 
   self.gun hide();
-  var1 = scripts\sp\utility::make_weapon("iw8_ar_akilo47");
-  scripts\anim\shared::forceuseweapon(var1, "primary");
+  var_1 = scripts\sp\utility::make_weapon("iw8_ar_akilo47");
+  scripts\anim\shared::forceuseweapon(var_1, "primary");
   level waittill("civ_ambusher_dead");
 
   if(isDefined(self.fake_target)) {
@@ -1316,9 +1316,9 @@ function civ_ambusher_cleanup_monitor() {
 
 function civ_ambush_compliment_dialogue() {
   scripts\engine\utility::delaythread(0.5, &scripts\sp\maps\marines\marines_vo::vo_civambush_alex_shoot_dialogue);
-  var0 = level.civ_ambusher scripts\engine\utility::waittill_any_return("damage", "shoot");
+  var_0 = level.civ_ambusher scripts\engine\utility::waittill_any_return("damage", "shoot");
 
-  if(var0 == "damage") {
+  if(var_0 == "damage") {
     wait 0.5;
     thread scripts\sp\maps\marines\marines_vo::vo_civ_ambush_ambusher_killed_dialogue();
     return;
@@ -1330,9 +1330,9 @@ function civ_ambush_compliment_dialogue() {
 }
 
 function civ_ambush_allies_push_forward() {
-  var0 = getEnt("mg_hall_first_ally_positions", "targetname");
+  var_0 = getEnt("mg_hall_first_ally_positions", "targetname");
 
-  if(isDefined(var0)) {
+  if(isDefined(var_0)) {
     scripts\engine\sp\utility::activate_trigger_with_targetname("mg_hall_first_ally_positions");
     return;
   }
@@ -1348,14 +1348,14 @@ function civ_ambusher_player_threat_monitor() {
 
 function civ_ambusher_player_ads_monitor() {
   self endon("damage");
-  var0 = cos(5);
-  var1 = squared(450);
+  var_0 = cos(5);
+  var_1 = squared(450);
 
   for(;;) {
-    var2 = distancesquared(self.origin, level.player.origin) < var1;
-    var3 = level.player scripts\engine\sp\utility::isads() && scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), self getEye(), var0);
+    var_2 = distancesquared(self.origin, level.player.origin) < var_1;
+    var_3 = level.player scripts\engine\sp\utility::isads() && scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), self getEye(), var_0);
 
-    if(var2 && var3) {
+    if(var_2 && var_3) {
       scripts\engine\utility::flag_set("flag_civ_ambush_ads_trigger");
       break;
     }
@@ -1366,14 +1366,14 @@ function civ_ambusher_player_ads_monitor() {
 
 function civ_ambusher_player_whizby_monitor() {
   self endon("damage");
-  var0 = getEnt(self.struct.target, "targetname");
-  var1 = squared(450);
+  var_0 = getEnt(self.struct.target, "targetname");
+  var_1 = squared(450);
 
   for(;;) {
-    var0 waittill("damage");
-    var2 = distancesquared(self.origin, level.player.origin) < var1;
+    var_0 waittill("damage");
+    var_2 = distancesquared(self.origin, level.player.origin) < var_1;
 
-    if(var2) {
+    if(var_2) {
       scripts\engine\utility::flag_set("flag_civ_ambush_whizby_trigger");
       break;
     }
@@ -1383,65 +1383,65 @@ function civ_ambusher_player_whizby_monitor() {
 }
 
 function containment_civambush() {
-  var0 = getEnt("containment_civambush_open_left", "targetname");
-  var1 = getEnt("containment_civambush_open_left_glass", "targetname");
-  var2 = getEnt("containment_civambush_open_left_clip", "targetname");
-  var3 = scripts\engine\utility::getStruct("containment_civambush_open_left_show_ref", "targetname");
-  var4 = scripts\engine\utility::getStruct("containment_civambush_open_left_hide_ref", "targetname");
-  var5 = getEnt("containment_civambush_closed_left", "targetname");
-  var6 = getEnt("containment_civambush_closed_left_glass", "targetname");
-  var7 = getEnt("containment_civambush_closed_left_clip", "targetname");
-  var8 = scripts\engine\utility::getStruct("containment_civambush_closed_left_show_ref", "targetname");
-  var9 = scripts\engine\utility::getStruct("containment_civambush_closed_left_hide_ref", "targetname");
-  var10 = getEnt("containment_civambush_open_right", "targetname");
-  var11 = getEnt("containment_civambush_open_right_glass", "targetname");
-  var12 = getEnt("containment_civambush_open_right_clip", "targetname");
-  var13 = scripts\engine\utility::getStruct("containment_civambush_open_right_show_ref", "targetname");
-  var14 = scripts\engine\utility::getStruct("containment_civambush_open_right_hide_ref", "targetname");
-  var15 = getEnt("containment_civambush_closed_right", "targetname");
-  var16 = getEnt("containment_civambush_closed_right_glass", "targetname");
-  var17 = getEnt("containment_civambush_closed_right_clip", "targetname");
-  var18 = scripts\engine\utility::getStruct("containment_civambush_closed_right_show_ref", "targetname");
-  var19 = scripts\engine\utility::getStruct("containment_civambush_closed_right_hide_ref", "targetname");
-  var20 = getEntArray("containment_civambush_clips", "script_noteworthy");
+  var_0 = getEnt("containment_civambush_open_left", "targetname");
+  var_1 = getEnt("containment_civambush_open_left_glass", "targetname");
+  var_2 = getEnt("containment_civambush_open_left_clip", "targetname");
+  var_3 = scripts\engine\utility::getStruct("containment_civambush_open_left_show_ref", "targetname");
+  var_4 = scripts\engine\utility::getStruct("containment_civambush_open_left_hide_ref", "targetname");
+  var_5 = getEnt("containment_civambush_closed_left", "targetname");
+  var_6 = getEnt("containment_civambush_closed_left_glass", "targetname");
+  var_7 = getEnt("containment_civambush_closed_left_clip", "targetname");
+  var_8 = scripts\engine\utility::getStruct("containment_civambush_closed_left_show_ref", "targetname");
+  var_9 = scripts\engine\utility::getStruct("containment_civambush_closed_left_hide_ref", "targetname");
+  var_10 = getEnt("containment_civambush_open_right", "targetname");
+  var_11 = getEnt("containment_civambush_open_right_glass", "targetname");
+  var_12 = getEnt("containment_civambush_open_right_clip", "targetname");
+  var_13 = scripts\engine\utility::getStruct("containment_civambush_open_right_show_ref", "targetname");
+  var_14 = scripts\engine\utility::getStruct("containment_civambush_open_right_hide_ref", "targetname");
+  var_15 = getEnt("containment_civambush_closed_right", "targetname");
+  var_16 = getEnt("containment_civambush_closed_right_glass", "targetname");
+  var_17 = getEnt("containment_civambush_closed_right_clip", "targetname");
+  var_18 = scripts\engine\utility::getStruct("containment_civambush_closed_right_show_ref", "targetname");
+  var_19 = scripts\engine\utility::getStruct("containment_civambush_closed_right_hide_ref", "targetname");
+  var_20 = getEntArray("containment_civambush_clips", "script_noteworthy");
   waitframe();
-  var1 linkTo(var0);
-  var2 linkTo(var0);
-  var11 linkTo(var10);
-  var12 linkTo(var10);
-  var6 linkTo(var5);
-  var7 linkTo(var5);
-  var16 linkTo(var15);
-  var17 linkTo(var15);
+  var_1 linkTo(var_0);
+  var_2 linkTo(var_0);
+  var_11 linkTo(var_10);
+  var_12 linkTo(var_10);
+  var_6 linkTo(var_5);
+  var_7 linkTo(var_5);
+  var_16 linkTo(var_15);
+  var_17 linkTo(var_15);
   waitframe();
   scripts\engine\utility::flag_wait("flag_containment_civambush");
-  var0 moveTo(var4.origin, 0.1);
-  var10 moveTo(var14.origin, 0.1);
-  var5 moveTo(var8.origin, 0.1);
-  var15 moveTo(var18.origin, 0.1);
+  var_0 moveTo(var_4.origin, 0.1);
+  var_10 moveTo(var_14.origin, 0.1);
+  var_5 moveTo(var_8.origin, 0.1);
+  var_15 moveTo(var_18.origin, 0.1);
   wait 0.2;
 
-  foreach(var22 in var20) {
-    var22 disconnectPaths();
+  foreach(var_22 in var_20) {
+    var_22 disconnectPaths();
   }
 }
 
 function containment_civambush_teleport() {
-  var0 = getEnt("containment_civambush_teleport_volume", "targetname");
+  var_0 = getEnt("containment_civambush_teleport_volume", "targetname");
   scripts\engine\utility::flag_wait("flag_containment_civambush");
   wait 1;
-  var1 = getaiarray("allies");
-  var2 = 0;
+  var_1 = getaiarray("allies");
+  var_2 = 0;
 
-  foreach(var4 in var1) {
-    if(isDefined(var4) && isalive(var4)) {
-      if(!var4 istouching(var0)) {
-        if(var2 <= 1) {
-          var5 = scripts\engine\utility::getStruct("containment_civambush_teleport_destination_" + var2, "targetname");
+  foreach(var_4 in var_1) {
+    if(isDefined(var_4) && isalive(var_4)) {
+      if(!var_4 istouching(var_0)) {
+        if(var_2 <= 1) {
+          var_5 = scripts\engine\utility::getStruct("containment_civambush_teleport_destination_" + var_2, "targetname");
 
-          if(isDefined(var4) && isalive(var4)) {
-            var4 teleport(var5.origin);
-            var2++;
+          if(isDefined(var_4) && isalive(var_4)) {
+            var_4 teleport(var_5.origin);
+            var_2++;
           }
         }
       }

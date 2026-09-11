@@ -12,10 +12,10 @@ function onplayerspawnedweaponpassives() {
 }
 
 function applyweaponchange() {
-  var0 = self.currentweapon;
+  var_0 = self.currentweapon;
 
-  if(isDefined(var0) && var0.basename != "none") {
-    giveweaponpassives(var0);
+  if(isDefined(var_0) && var_0.basename != "none") {
+    giveweaponpassives(var_0);
     return;
   }
 }
@@ -29,28 +29,28 @@ function watchweaponchanged() {
   }
 }
 
-function giveweaponpassives(var0) {
+function giveweaponpassives(var_0) {
   clearpassives();
-  var1 = scripts\mp\loot::getpassivesforweapon(var0.basename, var0.variantid);
+  var_1 = scripts\mp\loot::getpassivesforweapon(var_0.basename, var_0.variantid);
 
-  if(isDefined(var1)) {
-    foreach(var3 in var1) {
-      giveplayerpassive(var3);
+  if(isDefined(var_1)) {
+    foreach(var_3 in var_1) {
+      giveplayerpassive(var_3);
     }
   }
 
   self notify("weapon_passives_given");
 }
 
-function giveplayerpassive(var0) {
-  scripts\mp\utility\perk::giveperk(var0);
-  self.weaponpassives[self.weaponpassives.size] = var0;
+function giveplayerpassive(var_0) {
+  scripts\mp\utility\perk::giveperk(var_0);
+  self.weaponpassives[self.weaponpassives.size] = var_0;
 }
 
 function clearpassives() {
   if(isDefined(self.weaponpassives)) {
-    foreach(var1 in self.weaponpassives) {
-      scripts\mp\utility\perk::removeperk(var1);
+    foreach(var_1 in self.weaponpassives) {
+      scripts\mp\utility\perk::removeperk(var_1);
     }
   }
 
@@ -61,149 +61,149 @@ function forgetpassives() {
   self.weaponpassives = [];
 }
 
-function definepassivevalue(var0) {
+function definepassivevalue(var_0) {
   if(!isDefined(self.passivevalues)) {
     self.passivevalues = [];
   }
 
-  if(!isDefined(self.passivevalues[var0])) {
-    self.passivevalues[var0] = 0;
+  if(!isDefined(self.passivevalues[var_0])) {
+    self.passivevalues[var_0] = 0;
     return;
   }
 }
 
-function getpassivevalue(var0) {
-  definepassivevalue(var0);
-  return self.passivevalues[var0];
+function getpassivevalue(var_0) {
+  definepassivevalue(var_0);
+  return self.passivevalues[var_0];
 }
 
-function setpassivevalue(var0, var1) {
-  definepassivevalue(var0);
-  self.passivevalues[var0] = var1;
+function setpassivevalue(var_0, var_1) {
+  definepassivevalue(var_0);
+  self.passivevalues[var_0] = var_1;
 }
 
-function teamsmatch(var0, var1) {
+function teamsmatch(var_0, var_1) {
   if(level.teambased) {
-    return (var0.team == var1.team);
+    return (var_0.team == var_1.team);
   }
 
-  return var0 == var1;
+  return var_0 == var_1;
 }
 
-function updateweaponpassivesonuse(var0, var1) {}
+function updateweaponpassivesonuse(var_0, var_1) {}
 
-function updateweaponpassivesondamage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {}
+function updateweaponpassivesondamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {}
 
-function loadoutweapongiven(var0) {}
+function loadoutweapongiven(var_0) {}
 
-function updateweaponpassivesonkill(var0, var1, var2, var3, var4, var5, var6, var7) {}
+function updateweaponpassivesonkill(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {}
 
-function testpassivemessage(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = "";
+function testpassivemessage(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = "";
   }
 
-  var2 = 0;
-  var3 = scripts\mp\passives::getpassivemessage(var0);
-  var4 = "";
+  var_2 = 0;
+  var_3 = scripts\mp\passives::getpassivemessage(var_0);
+  var_4 = "";
 
-  if(isDefined(var3)) {
-    var4 = var3 + var1;
-    var2 = scripts\mp\hud_message::testmiscmessage(var4);
+  if(isDefined(var_3)) {
+    var_4 = var_3 + var_1;
+    var_2 = scripts\mp\hud_message::testmiscmessage(var_4);
   }
 
-  if(var2) {
+  if(var_2) {
     return;
   }
 }
 
-function checkpassivemessage(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = "";
+function checkpassivemessage(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = "";
   }
 
-  var2 = scripts\mp\passives::getpassivemessage(var0);
+  var_2 = scripts\mp\passives::getpassivemessage(var_0);
 
-  if(isDefined(var2)) {
-    if(isendstr(var1, "_camo")) {
-      var3 = scripts\mp\utility\script::strip_suffix(var1, "_camo");
-      var1 = var3;
+  if(isDefined(var_2)) {
+    if(isendstr(var_1, "_camo")) {
+      var_3 = scripts\mp\utility\script::strip_suffix(var_1, "_camo");
+      var_1 = var_3;
     }
 
-    scripts\mp\hud_message::showmiscmessage(var2 + var1);
+    scripts\mp\hud_message::showmiscmessage(var_2 + var_1);
     return;
   }
 }
 
-function getpassivedeathwatching(var0, var1) {
-  if(!isDefined(var0.passivedeathwatcher)) {
+function getpassivedeathwatching(var_0, var_1) {
+  if(!isDefined(var_0.passivedeathwatcher)) {
     return false;
   }
 
-  if(!isDefined(var0.passivedeathwatcher[var1])) {
+  if(!isDefined(var_0.passivedeathwatcher[var_1])) {
     return false;
   }
 
-  if(var0.passivedeathwatcher[var1]) {
+  if(var_0.passivedeathwatcher[var_1]) {
     return true;
   }
 
   return false;
 }
 
-function setpassivedeathwatching(var0, var1, var2) {
-  if(!isDefined(var0.passivedeathwatcher)) {
-    var0.passivedeathwatcher = [];
+function setpassivedeathwatching(var_0, var_1, var_2) {
+  if(!isDefined(var_0.passivedeathwatcher)) {
+    var_0.passivedeathwatcher = [];
   }
 
-  var0.passivedeathwatcher[var1] = var2;
+  var_0.passivedeathwatcher[var_1] = var_2;
 }
 
-function clearpassivedeathwatching(var0, var1) {
-  if(!isDefined(var0.passivedeathwatcher)) {
-    var0.passivedeathwatcher = [];
+function clearpassivedeathwatching(var_0, var_1) {
+  if(!isDefined(var_0.passivedeathwatcher)) {
+    var_0.passivedeathwatcher = [];
   }
 
-  var0.passivedeathwatcher[var1] = undefined;
+  var_0.passivedeathwatcher[var_1] = undefined;
 }
 
-function setstackvalues(var0, var1, var2, var3) {
+function setstackvalues(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.stackvalues)) {
     self.stackvalues = [];
   }
 
-  if(!isDefined(self.stackvalues[var0])) {
-    var4 = spawnStruct();
-    var4.id = var0;
-    var4.stacksmax = var1;
-    var4.stackscurrent = var2;
-    var4.decaytime = var3;
-    self.stackvalues[var0] = var4;
+  if(!isDefined(self.stackvalues[var_0])) {
+    var_4 = spawnStruct();
+    var_4.id = var_0;
+    var_4.stacksmax = var_1;
+    var_4.stackscurrent = var_2;
+    var_4.decaytime = var_3;
+    self.stackvalues[var_0] = var_4;
     return;
   }
 }
 
-function getstackvalues(var0) {
+function getstackvalues(var_0) {
   if(!isDefined(self.stackvalues)) {
     return undefined;
   }
 
-  if(!isDefined(self.stackvalues[var0])) {
+  if(!isDefined(self.stackvalues[var_0])) {
     return undefined;
   }
 
-  var1 = self.stackvalues[var0];
-  return var1;
+  var_1 = self.stackvalues[var_0];
+  return var_1;
 }
 
-function getstackcount(var0) {
-  var1 = getstackvalues(var0);
+function getstackcount(var_0) {
+  var_1 = getstackvalues(var_0);
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return 0;
   }
 
-  return var1.stackscurrent;
+  return var_1.stackscurrent;
 }
 
-function addstackcount(var0, var1) {}
+function addstackcount(var_0, var_1) {}

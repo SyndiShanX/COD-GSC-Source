@@ -3,71 +3,71 @@
  * Script: scripts\cp\utility\cp_controlled_callbacks.gsc
 **********************************************************/
 
-function ref_12ec3(var0) {
-  var1 = getdvarint("scr_br_aa_turret_flak_explosion_inner_radius", 500);
-  var2 = getdvarint("scr_br_aa_turret_flak_explosion_outer_radius", 1000);
-  var3 = getdvarint("scr_br_aa_turret_flak_vehicle_damage_bonus_min", 100);
-  var4 = getdvarint("scr_br_aa_turret_flak_vehicle_damage_bonus_max", 200);
-  var5 = getdvarint("scr_br_aa_turret_flak_aircraft_damage_bonus_additive_min", 100);
-  var6 = getdvarint("scr_br_aa_turret_flak_aircraft_damage_bonus_additive_max", 200);
-  var7 = getdvarint("scr_br_aa_turret_flak_ai_agent_damage_bonus_additive_min", 25);
-  var8 = getdvarint("scr_br_aa_turret_flak_ai_agent_damage_bonus_additive_max", 50);
-  var9 = getdvarint("scr_br_aa_turret_flak_projectile_speed", 550);
-  var10 = getdvarfloat("scr_br_aa_turret_flak_projectile_lifetime", 2);
-  var11 = getdvarfloat("scr_br_aa_turret_flak_projectile_lifetime_std", 1);
-  var12 = getdvarfloat("scr_br_aa_turret_flak_projectile_speed_ballistic_scalar", 35);
-  var13 = var9 * var10 * var11 * var12;
-  var14 = var13 * 0.5;
-  var15 = getdvarfloat("scr_br_aa_turret_flak_min_damage_scalar", 0.5);
-  var16 = self;
-  var17 = var0.attacker;
-  var18 = var0.damage;
-  var19 = var0.point;
-  var20 = distance(var19, var17.origin);
-  var21 = 1;
+function ref_12ec3(var_0) {
+  var_1 = getdvarint("scr_br_aa_turret_flak_explosion_inner_radius", 500);
+  var_2 = getdvarint("scr_br_aa_turret_flak_explosion_outer_radius", 1000);
+  var_3 = getdvarint("scr_br_aa_turret_flak_vehicle_damage_bonus_min", 100);
+  var_4 = getdvarint("scr_br_aa_turret_flak_vehicle_damage_bonus_max", 200);
+  var_5 = getdvarint("scr_br_aa_turret_flak_aircraft_damage_bonus_additive_min", 100);
+  var_6 = getdvarint("scr_br_aa_turret_flak_aircraft_damage_bonus_additive_max", 200);
+  var_7 = getdvarint("scr_br_aa_turret_flak_ai_agent_damage_bonus_additive_min", 25);
+  var_8 = getdvarint("scr_br_aa_turret_flak_ai_agent_damage_bonus_additive_max", 50);
+  var_9 = getdvarint("scr_br_aa_turret_flak_projectile_speed", 550);
+  var_10 = getdvarfloat("scr_br_aa_turret_flak_projectile_lifetime", 2);
+  var_11 = getdvarfloat("scr_br_aa_turret_flak_projectile_lifetime_std", 1);
+  var_12 = getdvarfloat("scr_br_aa_turret_flak_projectile_speed_ballistic_scalar", 35);
+  var_13 = var_9 * var_10 * var_11 * var_12;
+  var_14 = var_13 * 0.5;
+  var_15 = getdvarfloat("scr_br_aa_turret_flak_min_damage_scalar", 0.5);
+  var_16 = self;
+  var_17 = var_0.attacker;
+  var_18 = var_0.damage;
+  var_19 = var_0.point;
+  var_20 = distance(var_19, var_17.origin);
+  var_21 = 1;
 
-  if(var20 > var14) {
-    var21 = var15 + (1 - var15) * (1 - (var20 - var14) / (var13 - var14));
+  if(var_20 > var_14) {
+    var_21 = var_15 + (1 - var_15) * (1 - (var_20 - var_14) / (var_13 - var_14));
   }
 
-  var22 = 0;
-  var23 = distance(var16.origin, var19);
+  var_22 = 0;
+  var_23 = distance(var_16.origin, var_19);
 
-  if(var23 <= var1) {
-    if(var16 scripts\cp_mp\vehicles\vehicle::isvehicle()) {
-      var22 = var4;
+  if(var_23 <= var_1) {
+    if(var_16 scripts\cp_mp\vehicles\vehicle::isvehicle()) {
+      var_22 = var_4;
 
-      if(isDefined(var16.vehiclename)) {
-        switch (var16.vehiclename) {
+      if(isDefined(var_16.vehiclename)) {
+        switch (var_16.vehiclename) {
           case "veh_bt":
           case "veh_a10fd":
           case "little_bird":
-            var22 += var6;
+            var_22 += var_6;
             break;
         }
       }
-    } else if(isai(var16)) {
-      var22 += var8;
+    } else if(isai(var_16)) {
+      var_22 += var_8;
     }
   } else {
-    var24 = (var23 - var1) / (var2 - var1);
-    var22 = var24 * (var4 - var3) + var3;
+    var_24 = (var_23 - var_1) / (var_2 - var_1);
+    var_22 = var_24 * (var_4 - var_3) + var_3;
 
-    if(var16 scripts\cp_mp\vehicles\vehicle::isvehicle()) {
-      if(isDefined(var16.vehiclename)) {
-        switch (var16.vehiclename) {
+    if(var_16 scripts\cp_mp\vehicles\vehicle::isvehicle()) {
+      if(isDefined(var_16.vehiclename)) {
+        switch (var_16.vehiclename) {
           case "veh_bt":
           case "veh_a10fd":
           case "little_bird":
-            var22 += var24 * (var6 - var5) + var5;
+            var_22 += var_24 * (var_6 - var_5) + var_5;
             break;
         }
       }
-    } else if(isai(var16)) {
-      var22 += var24 * (var8 - var7) + var7;
+    } else if(isai(var_16)) {
+      var_22 += var_24 * (var_8 - var_7) + var_7;
     }
   }
 
-  var22 *= var21;
-  return int(var18 + var22);
+  var_22 *= var_21;
+  return int(var_18 + var_22);
 }

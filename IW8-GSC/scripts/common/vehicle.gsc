@@ -27,19 +27,19 @@ function init_vehicles_thread() {
   scripts\common\vehicle_code::vehicle_setuplevelvariables();
   level.vehicle.helicopter_crash_locations = scripts\engine\utility::array_combine(level.vehicle.helicopter_crash_locations, scripts\engine\utility::getstructarray_delete("helicopter_crash_location", "targetname"));
   scripts\common\vehicle_code::vehicle_setupspawners();
-  var0 = scripts\common\vehicle_code::vehicle_precachescripts();
-  scripts\common\vehicle_code::setup_vehicles(var0);
+  var_0 = scripts\common\vehicle_code::vehicle_precachescripts();
+  scripts\common\vehicle_code::setup_vehicles(var_0);
   level.vehicle.has_vehicles = getEntArray("script_vehicle", "code_classname").size > 0;
   scripts\engine\utility::script_func("add_hint_string", "invulerable_frags", &"SCRIPT/INVULERABLE_FRAGS");
   scripts\engine\utility::script_func("add_hint_string", "invulerable_bullets", &"SCRIPT/INVULERABLE_BULLETS");
 }
 
-function vehicle_paths(var0, var1, var2) {
-  return scripts\common\vehicle_paths::_vehicle_paths(var0, var1, var2);
+function vehicle_paths(var_0, var_1, var_2) {
+  return scripts\common\vehicle_paths::_vehicle_paths(var_0, var_1, var_2);
 }
 
-function vehicle_spawn(var0) {
-  return scripts\common\vehicle_code::vehicle_spawn_internal(var0);
+function vehicle_spawn(var_0) {
+  return scripts\common\vehicle_code::vehicle_spawn_internal(var_0);
 }
 
 function godon() {
@@ -82,47 +82,47 @@ function vehicle_kill_rumble_forever() {
   self notify("kill_rumble_forever");
 }
 
-function spawn_vehicles_from_targetname(var0) {
-  var1 = [];
-  var2 = getEntArray(var0, "targetname");
+function spawn_vehicles_from_targetname(var_0) {
+  var_1 = [];
+  var_2 = getEntArray(var_0, "targetname");
 
-  foreach(var4 in var2) {
-    if(!isDefined(var4.code_classname) || var4.code_classname != "script_vehicle") {
+  foreach(var_4 in var_2) {
+    if(!isDefined(var_4.code_classname) || var_4.code_classname != "script_vehicle") {
       continue;
     }
 
-    if(isspawner(var4)) {
-      var5 = scripts\common\vehicle_code::vehicle_spawn_internal(var4);
-      var1 = scripts\engine\utility::array_add(var1, var5);
+    if(isspawner(var_4)) {
+      var_5 = scripts\common\vehicle_code::vehicle_spawn_internal(var_4);
+      var_1 = scripts\engine\utility::array_add(var_1, var_5);
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function spawn_vehicle_from_targetname(var0) {
-  var1 = spawn_vehicles_from_targetname(var0);
-  return var1[0];
+function spawn_vehicle_from_targetname(var_0) {
+  var_1 = spawn_vehicles_from_targetname(var_0);
+  return var_1[0];
 }
 
-function spawn_vehicle_from_targetname_and_drive(var0) {
-  var1 = spawn_vehicles_from_targetname(var0);
-  thread scripts\common\vehicle_paths::gopath(var1[0]);
-  return var1[0];
+function spawn_vehicle_from_targetname_and_drive(var_0) {
+  var_1 = spawn_vehicles_from_targetname(var_0);
+  thread scripts\common\vehicle_paths::gopath(var_1[0]);
+  return var_1[0];
 }
 
-function spawn_vehicles_from_targetname_and_drive(var0) {
-  var1 = spawn_vehicles_from_targetname(var0);
+function spawn_vehicles_from_targetname_and_drive(var_0) {
+  var_1 = spawn_vehicles_from_targetname(var_0);
 
-  foreach(var3 in var1) {
-    thread scripts\common\vehicle_paths::gopath(var3);
+  foreach(var_3 in var_1) {
+    thread scripts\common\vehicle_paths::gopath(var_3);
   }
 
-  return var1;
+  return var_1;
 }
 
-function aircraft_wash(var0) {
-  thread scripts\common\vehicle_code::aircraft_wash_thread(var0);
+function aircraft_wash(var_0) {
+  thread scripts\common\vehicle_code::aircraft_wash_thread(var_0);
 }
 
 function vehicle_wheels_forward() {
@@ -133,35 +133,35 @@ function vehicle_wheels_backward() {
   scripts\common\vehicle_code::vehicle_setwheeldirection(0);
 }
 
-function vehicle_load_ai(var0, var1, var2) {
-  if(!isarray(var0)) {
-    var0 = [var0];
+function vehicle_load_ai(var_0, var_1, var_2) {
+  if(!isarray(var_0)) {
+    var_0 = [var_0];
   }
 
-  scripts\common\vehicle_aianim::load_ai(var0, var1, var2);
+  scripts\common\vehicle_aianim::load_ai(var_0, var_1, var_2);
 
   if(getdvarint("enable_vehicle_ai_using_BT")) {
     if(!self.usedpositions[0]) {
-      var3 = self.riders;
+      var_3 = self.riders;
       vehicle_unload();
       scripts\engine\utility::ent_flag_wait("unloaded");
-      var3 = scripts\engine\utility::array_removedead(var3);
-      var3 = scripts\engine\utility::array_remove_array(var3, self.riders);
+      var_3 = scripts\engine\utility::array_removedead(var_3);
+      var_3 = scripts\engine\utility::array_remove_array(var_3, self.riders);
 
-      if(var3.size > 0) {
-        vehicle_load_ai(var3);
+      if(var_3.size > 0) {
+        vehicle_load_ai(var_3);
         return;
       }
 
       return;
     }
 
-    var4 = level.vehicle.templates.aianims[scripts\common\vehicle_code::get_vehicle_classname()];
+    var_4 = level.vehicle.templates.aianims[scripts\common\vehicle_code::get_vehicle_classname()];
 
-    if(isDefined(var4[0].death)) {
-      foreach(var6 in self.riders) {
-        if(istrue(var6.drivingvehicle)) {
-          thread scripts\common\vehicle_aianim::driverdead(var6);
+    if(isDefined(var_4[0].death)) {
+      foreach(var_6 in self.riders) {
+        if(istrue(var_6.drivingvehicle)) {
+          thread scripts\common\vehicle_aianim::driverdead(var_6);
         }
       }
 
@@ -173,68 +173,68 @@ function vehicle_load_ai(var0, var1, var2) {
 }
 
 function spawn_vehicle_and_gopath() {
-  var0 = scripts\common\utility::spawn_vehicle();
+  var_0 = scripts\common\utility::spawn_vehicle();
 
   if(isDefined(self.script_speed)) {
     if(!ishelicopter()) {
-      var0 vehicle_setspeed(self.script_speed);
+      var_0 vehicle_setspeed(self.script_speed);
     }
   }
 
-  thread scripts\common\vehicle_paths::gopath(var0);
-  return var0;
+  thread scripts\common\vehicle_paths::gopath(var_0);
+  return var_0;
 }
 
-function attach_vehicle(var0) {
-  self vehicle_teleport(var0.origin, var0.angles);
+function attach_vehicle(var_0) {
+  self vehicle_teleport(var_0.origin, var_0.angles);
 
   if(!ishelicopter()) {
     waitframe();
-    self attachpath(var0);
+    self attachpath(var_0);
   }
 
-  thread vehicle_paths(var0, 1);
+  thread vehicle_paths(var_0, 1);
 }
 
-function attach_vehicle_and_gopath(var0) {
-  self vehicle_teleport(var0.origin, var0.angles);
+function attach_vehicle_and_gopath(var_0) {
+  self vehicle_teleport(var_0.origin, var_0.angles);
   waitframe();
 
   if(!ishelicopter()) {
-    self attachpath(var0);
+    self attachpath(var_0);
   }
 
-  thread vehicle_paths(var0);
+  thread vehicle_paths(var_0);
   scripts\common\vehicle_paths::gopath(self);
 }
 
-function vehicle_get_riders_by_group(var0) {
-  var1 = [];
-  var2 = scripts\common\vehicle_code::get_vehicle_classname();
+function vehicle_get_riders_by_group(var_0) {
+  var_1 = [];
+  var_2 = scripts\common\vehicle_code::get_vehicle_classname();
 
-  if(!isDefined(level.vehicle.templates.unloadgroups[var2])) {
-    return var1;
+  if(!isDefined(level.vehicle.templates.unloadgroups[var_2])) {
+    return var_1;
   }
 
-  var3 = level.vehicle.templates.unloadgroups[var2];
+  var_3 = level.vehicle.templates.unloadgroups[var_2];
 
-  if(!isDefined(var0)) {
-    return var1;
+  if(!isDefined(var_0)) {
+    return var_1;
   }
 
-  foreach(var5 in self.riders) {
-    foreach(var7 in var3[var0]) {
-      if(var5.vehicle_position == var7) {
-        var1 = var5;
+  foreach(var_5 in self.riders) {
+    foreach(var_7 in var_3[var_0]) {
+      if(var_5.vehicle_position == var_7) {
+        var_1 = var_5;
       }
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function vehicle_unload(var0) {
-  return scripts\common\vehicle_code::_vehicle_unload(var0);
+function vehicle_unload(var_0) {
+  return scripts\common\vehicle_code::_vehicle_unload(var_0);
 }
 
 function vehicle_turret_scan_off() {
@@ -243,67 +243,67 @@ function vehicle_turret_scan_off() {
 
 function vehicle_get_path_array() {
   self endon("death");
-  var0 = [];
-  var1 = self.attachedpath;
+  var_0 = [];
+  var_1 = self.attachedpath;
 
   if(!isDefined(self.attachedpath)) {
-    return var0;
+    return var_0;
   }
 
-  var2 = var1;
-  var2.counted = 0;
+  var_2 = var_1;
+  var_2.counted = 0;
 
-  while(isDefined(var2)) {
-    if(isDefined(var2.counted) && var2.counted == 1) {
+  while(isDefined(var_2)) {
+    if(isDefined(var_2.counted) && var_2.counted == 1) {
       break;
     }
 
-    var0 = scripts\engine\utility::array_add(var0, var2);
-    var2.counted = 1;
+    var_0 = scripts\engine\utility::array_add(var_0, var_2);
+    var_2.counted = 1;
 
-    if(!isDefined(var2.target)) {
+    if(!isDefined(var_2.target)) {
       break;
     }
 
     if(!ishelicopter()) {
-      var2 = getvehiclenode(var2.target, "targetname");
+      var_2 = getvehiclenode(var_2.target, "targetname");
       continue;
     }
 
-    var2 = scripts\engine\utility::getent_or_struct(var2.target, "targetname");
+    var_2 = scripts\engine\utility::getent_or_struct(var_2.target, "targetname");
   }
 
-  return var0;
+  return var_0;
 }
 
-function vehicle_lights_on(var0, var1) {
-  if(!isDefined(var0)) {
-    var0 = "all";
+function vehicle_lights_on(var_0, var_1) {
+  if(!isDefined(var_0)) {
+    var_0 = "all";
   }
 
-  scripts\common\vehicle_lights::lights_on(var0, var1);
+  scripts\common\vehicle_lights::lights_on(var_0, var_1);
 }
 
-function vehicle_lights_off(var0, var1) {
-  if(!isDefined(var0)) {
-    var0 = "all";
+function vehicle_lights_off(var_0, var_1) {
+  if(!isDefined(var_0)) {
+    var_0 = "all";
   }
 
-  scripts\common\vehicle_lights::lights_off(var0, var1);
+  scripts\common\vehicle_lights::lights_off(var_0, var_1);
 }
 
-function vehicle_switch_paths(var0, var1) {
-  self setswitchnode(var0, var1);
-  self.attachedpath = var1;
+function vehicle_switch_paths(var_0, var_1) {
+  self setswitchnode(var_0, var_1);
+  self.attachedpath = var_1;
   thread vehicle_paths();
 }
 
-function vehicle_stop_named(var0, var1, var2) {
-  return scripts\common\vehicle_paths::_vehicle_stop_named(var0, var1, var2);
+function vehicle_stop_named(var_0, var_1, var_2) {
+  return scripts\common\vehicle_paths::_vehicle_stop_named(var_0, var_1, var_2);
 }
 
-function vehicle_resume_named(var0) {
-  return scripts\common\vehicle_paths::_vehicle_resume_named(var0);
+function vehicle_resume_named(var_0) {
+  return scripts\common\vehicle_paths::_vehicle_resume_named(var_0);
 }
 
 function ishelicopter() {

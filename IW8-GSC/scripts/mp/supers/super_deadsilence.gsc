@@ -19,7 +19,7 @@ function superdeadsilence_beginsuper() {
   return true;
 }
 
-function superdeadsilence_endsuper(var0) {
+function superdeadsilence_endsuper(var_0) {
   scripts\mp\utility\perk::removeperk("specialty_quieter");
   scripts\mp\utility\perk::removeperk("specialty_no_battle_chatter");
 
@@ -30,7 +30,7 @@ function superdeadsilence_endsuper(var0) {
   scripts\cp\vehicles\vehicle_compass_cp::ref_12032("super_deadsilence", self.deadsilencekills);
 
   if(scripts\mp\utility\game::getgametype() != "infect") {
-    scripts\mp\analyticslog::logevent_fieldupgradeexpired(self, level.superglobals.staticsuperdata["super_deadsilence"].id, self.deadsilencekills, istrue(var0));
+    scripts\mp\analyticslog::logevent_fieldupgradeexpired(self, level.superglobals.staticsuperdata["super_deadsilence"].id, self.deadsilencekills, istrue(var_0));
   }
 
   thread superdeadsilence_endhudsequence();
@@ -47,28 +47,28 @@ function superdeadsilence_onkill() {
     scripts\mp\utility\stats::incpersstat("deadSilenceKills", 1);
     scripts\mp\supers::combatrecordsuperkill("super_deadsilence");
     self.deadsilencekills++;
-    var0 = scripts\mp\supers::relic_fastbleedout_returnfunc("super_deadsilence");
+    var_0 = scripts\mp\supers::relic_fastbleedout_returnfunc("super_deadsilence");
 
-    if(self.deadsilencekills > var0) {
-      var1 = self.deadsilencekills - var0;
-      scripts\mp\supers::hide_plunderboxes("super_deadsilence", var1);
+    if(self.deadsilencekills > var_0) {
+      var_1 = self.deadsilencekills - var_0;
+      scripts\mp\supers::hide_plunderboxes("super_deadsilence", var_1);
     }
   }
 
-  var2 = scripts\mp\utility\game::unset_relic_grounded();
-  var3 = 1;
+  var_2 = scripts\mp\utility\game::unset_relic_grounded();
+  var_3 = 1;
 
-  if(var2) {
-    var4 = scripts\mp\supers::getcurrentsuper();
+  if(var_2) {
+    var_4 = scripts\mp\supers::getcurrentsuper();
 
-    if(istrue(var4.shouldcrossbowhitmarker)) {
-      var3 = 0;
+    if(istrue(var_4.shouldcrossbowhitmarker)) {
+      var_3 = 0;
     } else {
-      var4.shouldcrossbowhitmarker = 1;
+      var_4.shouldcrossbowhitmarker = 1;
     }
   }
 
-  if(var3) {
+  if(var_3) {
     self playlocalsound("deadsilence_start");
     superdeadsilence_updateuistate(1);
     scripts\mp\supers::resetsuperusepercent();
@@ -84,9 +84,9 @@ function superdeadsilence_endhudsequence() {
   superdeadsilence_updateuistate(-1);
 }
 
-function superdeadsilence_updateuistate(var0) {
-  self.deadsilenceuistate = var0;
-  self setclientomnvar("ui_deadsilence_overlay", var0);
+function superdeadsilence_updateuistate(var_0) {
+  self.deadsilenceuistate = var_0;
+  self setclientomnvar("ui_deadsilence_overlay", var_0);
 }
 
 function applyfovpresentation() {
@@ -94,9 +94,9 @@ function applyfovpresentation() {
   self notify("applyFOVPresentation");
   self endon("applyFOVPresentation");
   self lerpfovbypreset("zombiedefault");
-  var0 = self.super.staticdata.usetime;
-  var1 = var0 - 2;
-  scripts\engine\utility::ref_143bf(var1, "super_use_finished");
+  var_0 = self.super.staticdata.usetime;
+  var_1 = var_0 - 2;
+  scripts\engine\utility::ref_143bf(var_1, "super_use_finished");
   self lerpfovbypreset("default_2seconds");
   self playlocalsound("deadsilence_end");
 }

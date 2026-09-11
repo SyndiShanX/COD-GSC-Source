@@ -14,29 +14,29 @@ function main() {
   level.flare_pickup_disabled = 1;
   level.flarefastpickup = 1;
   level.player setclienttriggeraudiozone("fade_to_black_minus_music", 0.05);
-  var0 = getEnt("info_player_start", "classname");
-  var0.origin = (-14848, -536, 296);
-  var1 = undefined;
-  scripts\engine\sp\utility::add_start("intro", &intro_start, var1, &main_intro, var1, &intro_catchup);
-  scripts\engine\sp\utility::add_start("heli_infil", &lb_infil_start, var1, &main_lb_infil, var1, &lb_infil_catchup);
-  scripts\engine\sp\utility::add_start("heli_unload", &lb_unload_start, var1, &main_lb_unload, var1, &lb_unload_catchup);
-  scripts\engine\sp\utility::add_start("breached_gate", &breached_gate_start, var1, &main_breached_gate, var1, &breached_gate_catchup);
-  scripts\engine\sp\utility::add_start("1st_floor", &comp_1f_start, var1, &main_comp_1f, var1, &comp_1f_catchup);
-  scripts\engine\sp\utility::add_start("2nd_floor", &comp_2f_start, var1, &main_comp_2f, var1, &comp_2f_catchup);
-  scripts\engine\sp\utility::add_start("3rd_floor", &comp_3f_start, var1, &main_comp_3f, var1, &comp_3f_catchup);
-  scripts\engine\sp\utility::add_start("downstairs", &downstairs_start, var1, &main_downstairs, var1, &downstairs_catchup);
-  scripts\engine\sp\utility::add_start("tea_room", &tea_room_start, var1, &main_tea_room, var1, &tea_room_catchup);
-  scripts\engine\sp\utility::add_start("basement", &scripts\sp\maps\tunnels\zd30tunnels_basement::basement_start, var1, &main_basement, var1, &scripts\sp\maps\tunnels\zd30tunnels_basement::basement_catchup);
-  scripts\engine\sp\utility::add_start("basement_tunnel", &scripts\sp\maps\tunnels\zd30tunnels_basement::basement_tunnel_start, var1, &main_basement_tunnel, var1, &scripts\sp\maps\tunnels\zd30tunnels_basement::basement_tunnel_catchup);
-  scripts\engine\sp\utility::add_start("collapse", &scripts\sp\maps\tunnels\zd30tunnels_basement::collapse_start, var1, &main_collapse, var1, &scripts\sp\maps\tunnels\zd30tunnels_basement::collapse_catchup);
-  scripts\engine\sp\utility::add_start("storage", &scripts\sp\maps\tunnels\zd30tunnels_storage::storage_start, var1, &main_storage, var1, &scripts\sp\maps\tunnels\zd30tunnels_storage::storage_catchup);
-  scripts\engine\sp\utility::add_start("storage_oil", &scripts\sp\maps\tunnels\zd30tunnels_storage::storage_oil_start, var1, &main_storage_oil, var1, &scripts\sp\maps\tunnels\zd30tunnels_storage::storage_oil_catchup);
-  scripts\engine\sp\utility::add_start("storage_split", &scripts\sp\maps\tunnels\zd30tunnels_storage::storage_split_start, var1, &main_storage_split, var1, &scripts\sp\maps\tunnels\zd30tunnels_storage::storage_split_catchup);
-  scripts\engine\sp\utility::add_start("mine", &scripts\sp\maps\tunnels\zd30tunnels_mineshaft::mine_start, var1, &main_mine, var1, &scripts\sp\maps\tunnels\zd30tunnels_mineshaft::mine_catchup);
-  scripts\engine\sp\utility::add_start("shaft", &scripts\sp\maps\tunnels\zd30tunnels_mineshaft::shaft_start, var1, &main_shaft, var1, &scripts\sp\maps\tunnels\zd30tunnels_mineshaft::shaft_catchup);
-  scripts\engine\sp\utility::add_start("reunion", &scripts\sp\maps\tunnels\zd30tunnels_mineshaft::reunion_start, var1, &main_reunion, var1, &scripts\sp\maps\tunnels\zd30tunnels_mineshaft::reunion_catchup);
-  scripts\engine\sp\utility::add_start("wolf", &scripts\sp\maps\tunnels\zd30tunnels_wolf::wolf_start, var1, &main_wolf, var1, &scripts\sp\maps\tunnels\zd30tunnels_wolf::wolf_catchup);
-  scripts\engine\sp\utility::add_start("coldopen_bink", &coldopen_bink_start, "", &main_coldopen_bink, var1, &coldopen_bink_catchup);
+  var_0 = getEnt("info_player_start", "classname");
+  var_0.origin = (-14848, -536, 296);
+  var_1 = undefined;
+  scripts\engine\sp\utility::add_start("intro", &intro_start, var_1, &main_intro, var_1, &intro_catchup);
+  scripts\engine\sp\utility::add_start("heli_infil", &lb_infil_start, var_1, &main_lb_infil, var_1, &lb_infil_catchup);
+  scripts\engine\sp\utility::add_start("heli_unload", &lb_unload_start, var_1, &main_lb_unload, var_1, &lb_unload_catchup);
+  scripts\engine\sp\utility::add_start("breached_gate", &breached_gate_start, var_1, &main_breached_gate, var_1, &breached_gate_catchup);
+  scripts\engine\sp\utility::add_start("1st_floor", &comp_1f_start, var_1, &main_comp_1f, var_1, &comp_1f_catchup);
+  scripts\engine\sp\utility::add_start("2nd_floor", &comp_2f_start, var_1, &main_comp_2f, var_1, &comp_2f_catchup);
+  scripts\engine\sp\utility::add_start("3rd_floor", &comp_3f_start, var_1, &main_comp_3f, var_1, &comp_3f_catchup);
+  scripts\engine\sp\utility::add_start("downstairs", &downstairs_start, var_1, &main_downstairs, var_1, &downstairs_catchup);
+  scripts\engine\sp\utility::add_start("tea_room", &tea_room_start, var_1, &main_tea_room, var_1, &tea_room_catchup);
+  scripts\engine\sp\utility::add_start("basement", &scripts\sp\maps\tunnels\zd30tunnels_basement::basement_start, var_1, &main_basement, var_1, &scripts\sp\maps\tunnels\zd30tunnels_basement::basement_catchup);
+  scripts\engine\sp\utility::add_start("basement_tunnel", &scripts\sp\maps\tunnels\zd30tunnels_basement::basement_tunnel_start, var_1, &main_basement_tunnel, var_1, &scripts\sp\maps\tunnels\zd30tunnels_basement::basement_tunnel_catchup);
+  scripts\engine\sp\utility::add_start("collapse", &scripts\sp\maps\tunnels\zd30tunnels_basement::collapse_start, var_1, &main_collapse, var_1, &scripts\sp\maps\tunnels\zd30tunnels_basement::collapse_catchup);
+  scripts\engine\sp\utility::add_start("storage", &scripts\sp\maps\tunnels\zd30tunnels_storage::storage_start, var_1, &main_storage, var_1, &scripts\sp\maps\tunnels\zd30tunnels_storage::storage_catchup);
+  scripts\engine\sp\utility::add_start("storage_oil", &scripts\sp\maps\tunnels\zd30tunnels_storage::storage_oil_start, var_1, &main_storage_oil, var_1, &scripts\sp\maps\tunnels\zd30tunnels_storage::storage_oil_catchup);
+  scripts\engine\sp\utility::add_start("storage_split", &scripts\sp\maps\tunnels\zd30tunnels_storage::storage_split_start, var_1, &main_storage_split, var_1, &scripts\sp\maps\tunnels\zd30tunnels_storage::storage_split_catchup);
+  scripts\engine\sp\utility::add_start("mine", &scripts\sp\maps\tunnels\zd30tunnels_mineshaft::mine_start, var_1, &main_mine, var_1, &scripts\sp\maps\tunnels\zd30tunnels_mineshaft::mine_catchup);
+  scripts\engine\sp\utility::add_start("shaft", &scripts\sp\maps\tunnels\zd30tunnels_mineshaft::shaft_start, var_1, &main_shaft, var_1, &scripts\sp\maps\tunnels\zd30tunnels_mineshaft::shaft_catchup);
+  scripts\engine\sp\utility::add_start("reunion", &scripts\sp\maps\tunnels\zd30tunnels_mineshaft::reunion_start, var_1, &main_reunion, var_1, &scripts\sp\maps\tunnels\zd30tunnels_mineshaft::reunion_catchup);
+  scripts\engine\sp\utility::add_start("wolf", &scripts\sp\maps\tunnels\zd30tunnels_wolf::wolf_start, var_1, &main_wolf, var_1, &scripts\sp\maps\tunnels\zd30tunnels_wolf::wolf_catchup);
+  scripts\engine\sp\utility::add_start("coldopen_bink", &coldopen_bink_start, "", &main_coldopen_bink, var_1, &coldopen_bink_catchup);
   scripts\engine\sp\utility::set_default_start("heli_infil");
   thread intro_screen();
   scripts\sp\audio::set_audio_level_fade_time(0.1);
@@ -62,17 +62,17 @@ function intro_screen_delay() {
 }
 
 function setup_scriptable_lights_for_compile() {
-  var0 = getEntArray("light_spot", "classname");
-  var0 = scripts\engine\utility::array_combine(getEntArray("light_omni", "classname"), var0);
+  var_0 = getEntArray("light_spot", "classname");
+  var_0 = scripts\engine\utility::array_combine(getEntArray("light_omni", "classname"), var_0);
 
-  foreach(var2 in var0) {
-    if(!isDefined(var2.script_noteworthy)) {
+  foreach(var_2 in var_0) {
+    if(!isDefined(var_2.script_noteworthy)) {
       continue;
     }
 
     if(getDvar("LLQQOPKTKM") == "1") {
-      var2 setlightintensity(0);
-      var2 setlightcolor(0, 0, 0);
+      var_2 setlightintensity(0);
+      var_2 setlightcolor(0, 0, 0);
     }
   }
 }
@@ -103,8 +103,8 @@ function level_inits() {
   scripts\sp\maps\tunnels\zd30tunnels_ai::init_spawnfunctions();
   init_shootable_lanterns();
   setdvarifuninitialized("greenlight", 0);
-  var0 = scripts\sp\player_rig::get_player_rig();
-  var0 hide();
+  var_0 = scripts\sp\player_rig::get_player_rig();
+  var_0 hide();
   level.player scripts\sp\player::scale_player_death_shield_duration(0.1);
   disableaudiotrigger("mine_shaft_occluder");
 }
@@ -146,8 +146,8 @@ function init_loadout() {
   scripts\sp\nvg\nvg_player::main("nvg_tunnels");
   scripts\game\sp\door::set_snake_cam_vision("snake_cam_estate");
   level.player scripts\sp\player::remove_all_armor();
-  var0 = ["frag", "flash", "semtex", "molotov", "smoke"];
-  scripts\engine\sp\utility::offhandprecache(var0);
+  var_0 = ["frag", "flash", "semtex", "molotov", "smoke"];
+  scripts\engine\sp\utility::offhandprecache(var_0);
 
   if(scripts\sp\starts::is_after_start("tea_room")) {
     alex_loadout();
@@ -184,16 +184,16 @@ function alex_loadout_final() {
   }
 
   level.player scripts\sp\utility::take_weapon("iw8_gunless");
-  var0 = alex_weapons_config();
-  level.player.loadout_weapons = var0;
-  level.player giveweapon(var0[0]);
-  level.player giveweapon(var0[1]);
+  var_0 = alex_weapons_config();
+  level.player.loadout_weapons = var_0;
+  level.player giveweapon(var_0[0]);
+  level.player giveweapon(var_0[1]);
   level.player scripts\engine\sp\utility::give_offhand("flash");
   level.player givemaxammo("flash");
   level.player scripts\engine\sp\utility::give_offhand("semtex");
   level.player setweaponammostock("semtex", 0);
   level.player setweaponammoclip("semtex", 0);
-  level.player switchtoweapon(var0[1]);
+  level.player switchtoweapon(var_0[1]);
 }
 
 function alex_weapons_config() {
@@ -372,20 +372,20 @@ function init_postspawns() {
   scripts\engine\sp\utility::array_spawn_function_noteworthy("2f_enemies", &scripts\sp\maps\tunnels\zd30tunnels_infil::postspawn_2f_enemies);
   scripts\engine\sp\utility::add_global_spawn_function("allies", &scripts\sp\maps\tunnels\zd30tunnels_ai::friendly_nvg_setup);
   level._effect["breach_explode"] = loadfx("vfx/iw8/level/zd30/vfx_zd30_door_breach_thick.vfx");
-  var0 = getEnt("blood_smear", "script_noteworthy");
-  var0 hide();
-  var1 = getEntArray("player_movement_clip", "script_noteworthy");
-  level.cleanup = scripts\engine\utility::array_combine(level.cleanup, var1);
+  var_0 = getEnt("blood_smear", "script_noteworthy");
+  var_0 hide();
+  var_1 = getEntArray("player_movement_clip", "script_noteworthy");
+  level.cleanup = scripts\engine\utility::array_combine(level.cleanup, var_1);
 
-  foreach(var3 in var1) {
-    var3 notsolid();
+  foreach(var_3 in var_1) {
+    var_3 notsolid();
   }
 
-  var5 = getEntArray("price_bty", "targetname");
+  var_5 = getEntArray("price_bty", "targetname");
 
-  foreach(var7 in var5) {
-    var7.og_intensity = var7 getlightintensity();
-    var7 setlightintensity(0);
+  foreach(var_7 in var_5) {
+    var_7.og_intensity = var_7 getlightintensity();
+    var_7 setlightintensity(0);
   }
 }
 
@@ -419,12 +419,12 @@ function level_compound_setup() {
   setsaveddvar("NTMMTOLQMQ", (1, 0, 0));
 
   if(!scripts\sp\starts::is_after_start("2nd_floor")) {
-    var0 = getEnt("power_switch", "targetname");
-    var0.animname = "power";
-    var0 scripts\engine\sp\utility::assign_animtree();
-    var1 = scripts\engine\utility::getStruct("power_animnode", "targetname");
-    var1 thread scripts\common\anim::anim_first_frame_solo(var0, "power_interact");
-    var0 thread scripts\sp\maps\tunnels\zd30tunnels_infil::power_interact_anim(var1);
+    var_0 = getEnt("power_switch", "targetname");
+    var_0.animname = "power";
+    var_0 scripts\engine\sp\utility::assign_animtree();
+    var_1 = scripts\engine\utility::getStruct("power_animnode", "targetname");
+    var_1 thread scripts\common\anim::anim_first_frame_solo(var_0, "power_interact");
+    var_0 thread scripts\sp\maps\tunnels\zd30tunnels_infil::power_interact_anim(var_1);
   }
 
   if(getdvarint("greenlight") == 1) {
@@ -493,52 +493,52 @@ function tunnels_achievement() {
 
 function tunnels_achievement_pistol_only() {
   level endon("bomb_vest_scene_finished");
-  var0 = "tunnelrat";
-  level.tunnels_achievements[var0] = 1;
-  var1 = "iw8_pi_mike1911";
+  var_0 = "tunnelrat";
+  level.tunnels_achievements[var_0] = 1;
+  var_1 = "iw8_pi_mike1911";
   thread tunnels_achievement_pistol_only_final(level);
 
   while(!scripts\engine\utility::flag("bomb_vest_scene_finished")) {
-    var2 = level.player scripts\engine\utility::waittill_any_return("weapon_fired", "grenade_fire", "offhand_fired");
+    var_2 = level.player scripts\engine\utility::waittill_any_return("weapon_fired", "grenade_fire", "offhand_fired");
 
-    if(!isDefined(var2) || var2 == "grenade_fire" || var2 == "offhand_fired") {
-      level.tunnels_achievements[var0] = 0;
+    if(!isDefined(var_2) || var_2 == "grenade_fire" || var_2 == "offhand_fired") {
+      level.tunnels_achievements[var_0] = 0;
       return;
     }
 
-    var3 = level.player getcurrentweapon();
+    var_3 = level.player getcurrentweapon();
 
-    if(!issubstr(var3.basename, var1) || var2 != "weapon_fired") {
-      level.tunnels_achievements[var0] = 0;
+    if(!issubstr(var_3.basename, var_1) || var_2 != "weapon_fired") {
+      level.tunnels_achievements[var_0] = 0;
       return;
     }
     LOC_000000bb:
   }
 }
 
-function tunnels_achievement_pistol_only_final(var0) {
+function tunnels_achievement_pistol_only_final(var_0) {
   scripts\engine\utility::flag_wait("bomb_vest_scene_finished");
   wait 0.05;
 
-  if(level.tunnels_achievements[var0]) {
-    scripts\sp\utility::giveachievement_wrapper(var0);
+  if(level.tunnels_achievements[var_0]) {
+    scripts\sp\utility::giveachievement_wrapper(var_0);
     return;
   }
 }
 
 function player_aim_at_think() {
-  var0 = spawn("script_origin", level.player getEye());
-  var0 linkTo(level.player, "tag_eye");
-  level.player.look_at_ent = var0;
+  var_0 = spawn("script_origin", level.player getEye());
+  var_0 linkTo(level.player, "tag_eye");
+  level.player.look_at_ent = var_0;
 }
 
 function spawn_pre_placed_flares_for_tunnels() {
   level.flare_spawn_array = getEntArray("flare_shadow_casting_model", "targetname");
-  var0 = "tag_fx";
+  var_0 = "tag_fx";
 
-  foreach(var2 in level.flare_spawn_array) {
+  foreach(var_2 in level.flare_spawn_array) {
     waitframe();
-    playFXOnTag(level._effect["emergency_flare_nolight"], var2, "tag_fx");
+    playFXOnTag(level._effect["emergency_flare_nolight"], var_2, "tag_fx");
   }
 }
 
@@ -550,24 +550,24 @@ function init_shootable_lanterns_internal() {
   waitframe();
   level.scriptable_lanterns = getscriptablearray("lantern", "targetname");
   level.scriptable_lantern_lights = getEntArray("lantern_light", "script_noteworthy");
-  var0 = 48;
-  var1 = 3;
+  var_0 = 48;
+  var_1 = 3;
 
-  foreach(var3 in level.scriptable_lanterns) {
-    var4 = [];
+  foreach(var_3 in level.scriptable_lanterns) {
+    var_4 = [];
 
-    foreach(var6 in level.scriptable_lantern_lights) {
-      if(!istrue(var6.assaigned) && scripts\engine\utility::distance_2d_squared(var6.origin, var3.origin) < var0 * var0) {
-        var4 = var6;
-        var6.assigned = 1;
+    foreach(var_6 in level.scriptable_lantern_lights) {
+      if(!istrue(var_6.assaigned) && scripts\engine\utility::distance_2d_squared(var_6.origin, var_3.origin) < var_0 * var_0) {
+        var_4 = var_6;
+        var_6.assigned = 1;
       }
 
-      if(var4.size >= 3) {
+      if(var_4.size >= 3) {
         break;
       }
     }
 
-    var3.lights = var4;
+    var_3.lights = var_4;
     thread scriptable_lantern_think();
   }
 }
@@ -595,11 +595,11 @@ function zd30_autosave_condition() {
   }
 
   if(scripts\engine\utility::flag("basement_trapdoor_entered")) {
-    var0 = 130;
+    var_0 = 130;
 
     if(isDefined(level.tripwires.traps) && level.tripwires.traps.size > 0) {
-      foreach(var2 in level.tripwires.traps) {
-        if(isDefined(var2) && isDefined(var2.origin) && distancesquared(level.player.origin, var2.origin) < var0 * var0) {
+      foreach(var_2 in level.tripwires.traps) {
+        if(isDefined(var_2) && isDefined(var_2.origin) && distancesquared(level.player.origin, var_2.origin) < var_0 * var_0) {
           return false;
         }
       }
@@ -607,19 +607,19 @@ function zd30_autosave_condition() {
   }
 
   if(isDefined(level.player.lasttriptime)) {
-    var4 = 5;
-    var5 = gettime() - level.player.lasttriptime;
+    var_4 = 5;
+    var_5 = gettime() - level.player.lasttriptime;
 
-    if(var5 > 0 && var5 < var4 * 1000) {
+    if(var_5 > 0 && var_5 < var_4 * 1000) {
       return false;
     }
   }
 
   if(isDefined(level.lastoilfiretime) && !scripts\engine\utility::flag("shaft_fire_on")) {
-    var4 = 5;
-    var5 = gettime() - level.lastoilfiretime;
+    var_4 = 5;
+    var_5 = gettime() - level.lastoilfiretime;
 
-    if(var5 < var4 * 1000) {
+    if(var_5 < var_4 * 1000) {
       return false;
     }
   }
@@ -640,30 +640,30 @@ function zd30_autosave_condition() {
 
   if(scripts\engine\utility::flag("storage_final_room_entered") && !scripts\engine\utility::flag("storage_mg_passed") && !scripts\engine\utility::flag("storage_mg_crawl")) {
     if(!isDefined(level.alcove_trig)) {
-      var6 = getEntArray("turret_overheat_trig", "targetname");
-      var7 = spawn("script_model", (-4800, 2528, -496));
-      var7 setModel("tag_origin");
+      var_6 = getEntArray("turret_overheat_trig", "targetname");
+      var_7 = spawn("script_model", (-4800, 2528, -496));
+      var_7 setModel("tag_origin");
 
-      foreach(var9 in var6) {
-        if(var7 istouching(var9)) {
-          level.alcove_trig = var9;
+      foreach(var_9 in var_6) {
+        if(var_7 istouching(var_9)) {
+          level.alcove_trig = var_9;
           break;
         }
       }
 
-      var7 delete();
+      var_7 delete();
     }
 
-    var11 = 350;
+    var_11 = 350;
 
     if(level.player istouching(level.alcove_trig)) {
-      var12 = scripts\sp\maps\tunnels\zd30tunnels_ai::get_alive_enemies();
+      var_12 = scripts\sp\maps\tunnels\zd30tunnels_ai::get_alive_enemies();
 
-      if(var12.size > 0) {
-        var12 = sortbydistance(var12, level.player.origin);
-        var13 = var12[0];
+      if(var_12.size > 0) {
+        var_12 = sortbydistance(var_12, level.player.origin);
+        var_13 = var_12[0];
 
-        if(scripts\engine\utility::distance_2d_squared(var13.origin, level.player.origin) < var11 * var11) {
+        if(scripts\engine\utility::distance_2d_squared(var_13.origin, level.player.origin) < var_11 * var_11) {
           return false;
         }
       }
@@ -681,13 +681,13 @@ function zd30_autosave_condition() {
   return true;
 }
 
-function is_anim_enemy_engaging_player(var0) {
-  if(isDefined(var0) && isalive(var0)) {
-    if(var0 cansee(level.player)) {
+function is_anim_enemy_engaging_player(var_0) {
+  if(isDefined(var_0) && isalive(var_0)) {
+    if(var_0 cansee(level.player)) {
       return true;
     }
 
-    if(scripts\engine\sp\utility::player_looking_at(var0 getEye(), 0.9, 1)) {
+    if(scripts\engine\sp\utility::player_looking_at(var_0 getEye(), 0.9, 1)) {
       return true;
     }
   }
@@ -696,65 +696,65 @@ function is_anim_enemy_engaging_player(var0) {
 }
 
 function easter_egg_tv_teddy() {
-  var0 = getEnt("tv_teddy", "targetname");
+  var_0 = getEnt("tv_teddy", "targetname");
   thread easter_egg_tv_teddy_monitor();
-  return var0;
+  return var_0;
 }
 
 function easter_egg_tv_teddy_monitor() {
   self endon("entitydeleted");
   self endon("death");
   self endon("failed");
-  var0 = getEnt(self.target, "targetname");
-  var1 = getEnt(var0.target, "targetname");
-  var2 = getEnt(var1.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
+  var_2 = getEnt(var_1.target, "targetname");
   wait 2;
-  var3 = getscriptablearray("mines_tv", "targetname")[0];
+  var_3 = getscriptablearray("mines_tv", "targetname")[0];
 
-  if(!isDefined(var3)) {
+  if(!isDefined(var_3)) {
     return;
   }
 
-  var4 = getEnt("mines_tv_light", "targetname");
-  thread easter_egg_tv_light_flicker(var4);
-  thread easter_egg_tv_teddy_monitor_helper(var1);
-  var5 = var3.model;
+  var_4 = getEnt("mines_tv_light", "targetname");
+  thread easter_egg_tv_light_flicker(var_4);
+  thread easter_egg_tv_teddy_monitor_helper(var_1);
+  var_5 = var_3.model;
 
-  while(var3.model == var5) {
+  while(var_3.model == var_5) {
     wait 0.1;
   }
 
-  var4 notify("tv_light_off");
+  var_4 notify("tv_light_off");
   waitframe();
-  var4 setlightintensity(0);
-  var1 waittill("damage");
+  var_4 setlightintensity(0);
+  var_1 waittill("damage");
   self.activated = 1;
-  var2 waittill("trigger");
-  var6 = scripts\engine\utility::getStruct("mines_bats", "targetname");
-  var7 = anglesToForward(var6.angles);
-  var8 = anglestoup(var6.angles);
-  playFX(level._effect["vfx_zd30_bats"], var6.origin, var7, var8);
+  var_2 waittill("trigger");
+  var_6 = scripts\engine\utility::getStruct("mines_bats", "targetname");
+  var_7 = anglesToForward(var_6.angles);
+  var_8 = anglestoup(var_6.angles);
+  playFX(level._effect["vfx_zd30_bats"], var_6.origin, var_7, var_8);
   self hide();
 }
 
-function easter_egg_tv_light_flicker(var0) {
+function easter_egg_tv_light_flicker(var_0) {
   self endon("entitydeleted");
   self endon("death");
   self endon("failed");
-  var0 endon("tv_light_off");
-  var1 = 1;
-  var2 = 0.65;
+  var_0 endon("tv_light_off");
+  var_1 = 1;
+  var_2 = 0.65;
 
-  while(isDefined(var0)) {
-    var0 setlightintensity(var1);
+  while(isDefined(var_0)) {
+    var_0 setlightintensity(var_1);
     wait randomfloatrange(0.1, 0.5);
-    var0 setlightintensity(var2);
+    var_0 setlightintensity(var_2);
     wait randomfloatrange(0.1, 0.2);
   }
 }
 
-function easter_egg_tv_teddy_monitor_helper(var0) {
-  var0 endon("damage");
+function easter_egg_tv_teddy_monitor_helper(var_0) {
+  var_0 endon("damage");
   self waittill("damage");
   self notify("failed");
 }
@@ -773,8 +773,8 @@ function hadir() {
 function farah() {
   level.farah = scripts\engine\sp\utility::spawn_targetname("farahSpawner", 1);
   level.farah thread scripts\sp\maps\tunnels\zd30tunnels_utility::player_bump_management();
-  var0 = scripts\sp\utility::make_weapon("iw8_ar_akilo47", ["reflexstable_west01", "calsmg_akilo47_sp", "barsmg_akilo47", "stocksmg_akilo47"]);
-  level.farah scripts\anim\shared::forceuseweapon(var0, "primary");
+  var_0 = scripts\sp\utility::make_weapon("iw8_ar_akilo47", ["reflexstable_west01", "calsmg_akilo47_sp", "barsmg_akilo47", "stocksmg_akilo47"]);
+  level.farah scripts\anim\shared::forceuseweapon(var_0, "primary");
   level.farah.animname = "farah";
   level.farah.baseaccuracy = 0.75;
   level.farah scripts\common\ai::magic_bullet_shield();
@@ -792,43 +792,43 @@ function farah() {
 
 function pain_management() {
   self endon("death");
-  var0 = 0;
-  var1 = 200;
-  var2 = 5;
-  var3 = 5;
+  var_0 = 0;
+  var_1 = 200;
+  var_2 = 5;
+  var_3 = 5;
 
   for(;;) {
-    var4 = gettime();
-    self waittill("damage", var5, var6);
+    var_4 = gettime();
+    self waittill("damage", var_5, var_6);
 
-    if(!isDefined(var6)) {
+    if(!isDefined(var_6)) {
       wait 0.05;
       continue;
     }
 
-    if(gettime() - var4 > var3 * 1000) {
-      var0 = 0;
+    if(gettime() - var_4 > var_3 * 1000) {
+      var_0 = 0;
 
       if(getdvarint("zd30_debug") > 0) {}
     } else {
-      var0 += var5;
+      var_0 += var_5;
 
       if(getdvarint("zd30_debug") > 0) {}
     }
 
-    if(var0 >= var1) {
+    if(var_0 >= var_1) {
       scripts\engine\utility::disable_pain();
 
       if(getdvarint("zd30_debug") > 0) {}
 
-      wait var2;
+      wait var_2;
       scripts\engine\utility::enable_pain();
-      var0 = 0;
+      var_0 = 0;
     }
   }
 }
 
-function farah_glow_stick_attach(var0) {
+function farah_glow_stick_attach(var_0) {
   if(!isDefined(level.farah)) {
     return;
   }
@@ -848,37 +848,37 @@ function farah_glow_stick_attach(var0) {
     return;
   }
 
-  if(isDefined(var0)) {
-    wait var0;
+  if(isDefined(var_0)) {
+    wait var_0;
   }
 
   scripts\sp\maps\tunnels\zd30tunnels_utility::spawn_stowed_glowstick_on_farah();
 }
 
-function vo_via_trigger(var0, var1, var2, var3) {
+function vo_via_trigger(var_0, var_1, var_2, var_3) {
   self endon("death");
-  scripts\engine\sp\utility::trigger_wait_targetname(var0);
+  scripts\engine\sp\utility::trigger_wait_targetname(var_0);
 
-  if(isDefined(var3)) {
-    wait var3;
+  if(isDefined(var_3)) {
+    wait var_3;
   }
 
-  if(isDefined(level.trigger_hint_string) && isDefined(level.trigger_hint_string[var1])) {
-    scripts\engine\sp\utility::display_hint(var1, var2);
+  if(isDefined(level.trigger_hint_string) && isDefined(level.trigger_hint_string[var_1])) {
+    scripts\engine\sp\utility::display_hint(var_1, var_2);
     return;
   }
 }
 
-function vo_via_flag(var0, var1, var2, var3) {
+function vo_via_flag(var_0, var_1, var_2, var_3) {
   self endon("death");
-  scripts\engine\utility::flag_wait(var0);
+  scripts\engine\utility::flag_wait(var_0);
 
-  if(isDefined(var3)) {
-    wait var3;
+  if(isDefined(var_3)) {
+    wait var_3;
   }
 
-  if(isDefined(level.trigger_hint_string) && isDefined(level.trigger_hint_string[var1])) {
-    scripts\engine\sp\utility::display_hint(var1, var2);
+  if(isDefined(level.trigger_hint_string) && isDefined(level.trigger_hint_string[var_1])) {
+    scripts\engine\sp\utility::display_hint(var_1, var_2);
     return;
   }
 }
@@ -888,11 +888,11 @@ function player_fov_think() {
 }
 
 function player_tunnel_explosion_experience() {
-  var0 = getEnt("player_dmg_trig", "targetname");
-  var0.origin = level.player.origin;
-  var0 enablelinkTo();
-  var0 linkTo(level.player);
-  level.player.exp_trig = var0;
+  var_0 = getEnt("player_dmg_trig", "targetname");
+  var_0.origin = level.player.origin;
+  var_0 enablelinkTo();
+  var_0 linkTo(level.player);
+  level.player.exp_trig = var_0;
   thread player_tunnel_explosion_watch();
 }
 
@@ -900,41 +900,41 @@ function player_tunnel_explosion_watch() {
   self endon("death");
   self endon("entitydeleted");
   level.player endon("death");
-  var0 = 0.6;
-  var1 = 1;
-  var2 = 350;
+  var_0 = 0.6;
+  var_1 = 1;
+  var_2 = 350;
 
   for(;;) {
-    self waittill("damage", var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14, var15, var16);
+    self waittill("damage", var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_16);
 
-    if(isDefined(var12) && isDefined(var12.basename) && var12.basename == "flash") {
+    if(isDefined(var_12) && isDefined(var_12.basename) && var_12.basename == "flash") {
       continue;
     }
 
-    var17 = "MOD_GRENADE MOD_GRENADE_SPLASH MOD_EXPLOSIVE";
+    var_17 = "MOD_GRENADE MOD_GRENADE_SPLASH MOD_EXPLOSIVE";
 
-    if(isDefined(var7) && issubstr(var17, var7) && isDefined(var6)) {
-      if(scripts\engine\utility::distance_2d_squared(level.player.origin, var6) < 2304) {
+    if(isDefined(var_7) && issubstr(var_17, var_7) && isDefined(var_6)) {
+      if(scripts\engine\utility::distance_2d_squared(level.player.origin, var_6) < 2304) {
         continue;
       }
 
-      var18 = 0;
+      var_18 = 0;
 
-      if(scripts\engine\utility::distance_2d_squared(level.player.origin, var6) < 9216) {
-        var18 = 3;
-        var19 = var1 * 3;
+      if(scripts\engine\utility::distance_2d_squared(level.player.origin, var_6) < 9216) {
+        var_18 = 3;
+        var_19 = var_1 * 3;
         level.player playRumbleOnEntity("heavy_3s");
-        earthquake(var0, var19, var6, var2);
-      } else if(scripts\engine\utility::distance_2d_squared(level.player.origin, var7) < 16384) {
-        var19 = 2;
-        var19 = var2 * 3;
+        earthquake(var_0, var_19, var_6, var_2);
+      } else if(scripts\engine\utility::distance_2d_squared(level.player.origin, var_7) < 16384) {
+        var_19 = 2;
+        var_19 = var_2 * 3;
         level.player playRumbleOnEntity("heavy_3s");
-        earthquake(var1, var19, var7, var3);
+        earthquake(var_1, var_19, var_7, var_3);
       } else {
-        var19 = 1;
-        var19 = var3 * 2;
+        var_19 = 1;
+        var_19 = var_3 * 2;
         level.player playRumbleOnEntity("heavy_2s");
-        earthquake(var2, var19, var8, var4);
+        earthquake(var_2, var_19, var_8, var_4);
       }
     }
   }
@@ -948,27 +948,27 @@ function player_ladder_aid() {
 function player_ladder_pistol() {
   for(;;) {
     if(level.player isonladder()) {
-      var0 = undefined;
-      var1 = get_player_pistol_data()[0];
-      var2 = get_player_pistol_data()[1];
+      var_0 = undefined;
+      var_1 = get_player_pistol_data()[0];
+      var_2 = get_player_pistol_data()[1];
 
-      if(isDefined(var1)) {
-        var3 = weaponclipsize(var1);
-        level.player setweaponammoclip(var1, var3);
+      if(isDefined(var_1)) {
+        var_3 = weaponclipsize(var_1);
+        level.player setweaponammoclip(var_1, var_3);
       } else {
-        var1 = scripts\sp\utility::make_weapon("iw8_pi_mike1911");
-        level.player giveweapon(var1);
-        level.player givemaxammo(var1);
-        var3 = weaponclipsize(var1);
-        level.player setweaponammoclip(var1, var3);
+        var_1 = scripts\sp\utility::make_weapon("iw8_pi_mike1911");
+        level.player giveweapon(var_1);
+        level.player givemaxammo(var_1);
+        var_3 = weaponclipsize(var_1);
+        level.player setweaponammoclip(var_1, var_3);
       }
 
       while(level.player isonladder() || level.player ismeleeing()) {
         wait 0.05;
       }
 
-      if(isDefined(var1)) {
-        level.player takeweapon(var1);
+      if(isDefined(var_1)) {
+        level.player takeweapon(var_1);
       }
     } else {
       while(!level.player isonladder()) {
@@ -981,22 +981,22 @@ function player_ladder_pistol() {
 }
 
 function get_player_pistol_data() {
-  var0 = undefined;
-  var1 = undefined;
-  var2 = level.player getweaponslistall();
+  var_0 = undefined;
+  var_1 = undefined;
+  var_2 = level.player getweaponslistall();
 
-  if(!isDefined(var2) || var2.size == 0) {
-    var1 = undefined;
+  if(!isDefined(var_2) || var_2.size == 0) {
+    var_1 = undefined;
   } else {
-    foreach(var4 in var2) {
-      if(weaponclass(var4) == "pistol") {
-        var1 = var4;
-        var0 = level.player getweaponammoclip(var4);
+    foreach(var_4 in var_2) {
+      if(weaponclass(var_4) == "pistol") {
+        var_1 = var_4;
+        var_0 = level.player getweaponammoclip(var_4);
       }
     }
   }
 
-  return [var1, var0];
+  return [var_1, var_0];
 }
 
 function player_ladder_ease() {
@@ -1012,23 +1012,23 @@ function player_ladder_ease() {
 }
 
 function player_prone_slide_dirt_fx() {
-  var0 = 1;
-  var1 = 8;
-  var2 = 1;
-  var3 = getEntArray("no_dirt_zone", "targetname");
+  var_0 = 1;
+  var_1 = 8;
+  var_2 = 1;
+  var_3 = getEntArray("no_dirt_zone", "targetname");
 
   for(;;) {
-    var4 = level.player.origin;
-    var5 = gettime();
+    var_4 = level.player.origin;
+    var_5 = gettime();
 
     while(level.player getstance() != "prone" && !level.player issprintsliding()) {
       wait 0.05;
     }
 
-    if(isDefined(var3) && var3.size > 0) {
-      var6 = sortbydistance(var3, level.player.origin)[0];
+    if(isDefined(var_3) && var_3.size > 0) {
+      var_6 = sortbydistance(var_3, level.player.origin)[0];
 
-      if(isDefined(var6) && level.player istouching(var6)) {
+      if(isDefined(var_6) && level.player istouching(var_6)) {
         wait 0.25;
         continue;
       }
@@ -1036,41 +1036,41 @@ function player_prone_slide_dirt_fx() {
 
     while(level.player getstance() == "prone" || level.player issprintsliding()) {
       if(level.player issprintsliding()) {
-        var1 = 16;
+        var_1 = 16;
       }
 
-      var7 = var4 != level.player.origin;
-      var8 = var7 && distance2dsquared(var4, level.player.origin) > var1 * var1;
-      var9 = gettime() - var5 > var2 * 1000;
+      var_7 = var_4 != level.player.origin;
+      var_8 = var_7 && distance2dsquared(var_4, level.player.origin) > var_1 * var_1;
+      var_9 = gettime() - var_5 > var_2 * 1000;
 
-      if(var8 || var7 && var9) {
-        var4 = level.player.origin;
-        var5 = gettime();
-        var10 = level.player.origin;
-        var11 = var10 + (0, 0, 32);
-        var12 = var10 - (0, 0, 32);
-        var13 = scripts\engine\trace::_bullet_trace(var11, var12, 0, level.player);
-        var14 = 8;
-        var15 = level._effect["vfx_prone_dust"];
+      if(var_8 || var_7 && var_9) {
+        var_4 = level.player.origin;
+        var_5 = gettime();
+        var_10 = level.player.origin;
+        var_11 = var_10 + (0, 0, 32);
+        var_12 = var_10 - (0, 0, 32);
+        var_13 = scripts\engine\trace::_bullet_trace(var_11, var_12, 0, level.player);
+        var_14 = 8;
+        var_15 = level._effect["vfx_prone_dust"];
 
-        if(var13["surfacetype"] == "surftype_dirt") {
-          var14 = 8;
-          var15 = level._effect["vfx_prone_dust"];
+        if(var_13["surfacetype"] == "surftype_dirt") {
+          var_14 = 8;
+          var_15 = level._effect["vfx_prone_dust"];
         } else {
           wait 0.05;
           continue;
         }
 
         if(level.player issprintsliding()) {
-          var14 *= 4;
+          var_14 *= 4;
         }
 
-        var16 = anglesToForward(level.player.angles);
-        var17 = vectorNormalize(var16) * var14;
-        var18 = scripts\engine\utility::drop_to_ground(level.player getEye() + var17, 32, -48);
-        var19 = scripts\engine\utility::spawn_tag_origin(var18, level.player.angles);
-        playFXOnTag(var15, var19, "tag_origin");
-        thread stop_prone_slide_vfx(var0, var15, var19);
+        var_16 = anglesToForward(level.player.angles);
+        var_17 = vectorNormalize(var_16) * var_14;
+        var_18 = scripts\engine\utility::drop_to_ground(level.player getEye() + var_17, 32, -48);
+        var_19 = scripts\engine\utility::spawn_tag_origin(var_18, level.player.angles);
+        playFXOnTag(var_15, var_19, "tag_origin");
+        thread stop_prone_slide_vfx(var_0, var_15, var_19);
       }
 
       wait 0.05;
@@ -1078,40 +1078,40 @@ function player_prone_slide_dirt_fx() {
   }
 }
 
-function stop_prone_slide_vfx(var0, var1, var2) {
-  wait var0;
+function stop_prone_slide_vfx(var_0, var_1, var_2) {
+  wait var_0;
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return;
   }
 
-  stopFXOnTag(var1, var2, "tag_origin");
+  stopFXOnTag(var_1, var_2, "tag_origin");
   wait 0.1;
-  var2 delete();
+  var_2 delete();
 }
 
-function debug_fail_player_prone_dirt_fx(var0, var1) {
+function debug_fail_player_prone_dirt_fx(var_0, var_1) {
   if(getdvarint("zd30_debug") > 0) {
-    var0 = 0.25;
-    var2 = anglesToForward(level.player.angles);
-    var2 = vectorNormalize(var2) * 32;
-    var3 = anglestoleft(level.player.angles);
-    var3 = vectorNormalize(var3) * 8;
-    var4 = scripts\engine\utility::drop_to_ground(level.player getEye() + var2 + var3, 32, -48);
-    var5 = int(var0 * 20);
+    var_0 = 0.25;
+    var_2 = anglesToForward(level.player.angles);
+    var_2 = vectorNormalize(var_2) * 32;
+    var_3 = anglestoleft(level.player.angles);
+    var_3 = vectorNormalize(var_3) * 8;
+    var_4 = scripts\engine\utility::drop_to_ground(level.player getEye() + var_2 + var_3, 32, -48);
+    var_5 = int(var_0 * 20);
     return;
   }
 }
 
-function debug_pass_player_prone_dirt_fx(var0, var1, var2, var3, var4) {
+function debug_pass_player_prone_dirt_fx(var_0, var_1, var_2, var_3, var_4) {
   if(getdvarint("zd30_debug") > 0) {
-    var5 = anglestoleft(level.player.angles);
-    var5 = vectorNormalize(var5) * var4;
-    var6 = int(var0 * 20);
-    thread scripts\engine\utility::draw_circle(var2, var4, (0.7, 0.7, 0.7), 1, 0, int(var0 * 20));
-    thread scripts\engine\utility::draw_line_for_time(var2 + var5, var2 - var5, 0.7, 0.7, 0.7, var0);
-    thread scripts\engine\utility::draw_line_for_time(var2 + var3, var2 - var3, 0.7, 0.7, 0.7, var0);
-    thread scripts\engine\utility::draw_line_for_time(var2, var2 + (0, 0, 20), 0.7, 0.7, 0.7, var0);
+    var_5 = anglestoleft(level.player.angles);
+    var_5 = vectorNormalize(var_5) * var_4;
+    var_6 = int(var_0 * 20);
+    thread scripts\engine\utility::draw_circle(var_2, var_4, (0.7, 0.7, 0.7), 1, 0, int(var_0 * 20));
+    thread scripts\engine\utility::draw_line_for_time(var_2 + var_5, var_2 - var_5, 0.7, 0.7, 0.7, var_0);
+    thread scripts\engine\utility::draw_line_for_time(var_2 + var_3, var_2 - var_3, 0.7, 0.7, 0.7, var_0);
+    thread scripts\engine\utility::draw_line_for_time(var_2, var_2 + (0, 0, 20), 0.7, 0.7, 0.7, var_0);
     return;
   }
 }
@@ -1135,18 +1135,18 @@ function cinematic_hack() {
     level.player scripts\sp\utility::allow_cg_drawcrosshair(0);
     setomnvar("ui_hide_weapon_info", 1);
     setomnvar("ui_hide_hud", 1);
-    var0 = scripts\sp\hud_util::create_client_overlay("black", 1);
+    var_0 = scripts\sp\hud_util::create_client_overlay("black", 1);
     thread scripts\sp\art::dof_enable_script(0, 100, 150, 100, 3000, 50, 0);
     level.player setclienttriggeraudiozone("bink_fadeout_amb", 0.5);
     scripts\sp\endmission::level_settle_time_wait();
-    var0 destroy();
+    var_0 destroy();
     cinematicingame("sp_zd30_mbi_standalone");
-    var1 = 25000;
+    var_1 = 25000;
     level.player freezecontrols(1);
-    var2 = cinematicgettimeinmsec();
+    var_2 = cinematicgettimeinmsec();
 
-    while(var2 <= var1) {
-      var2 = cinematicgettimeinmsec();
+    while(var_2 <= var_1) {
+      var_2 = cinematicgettimeinmsec();
       wait 0.05;
     }
 
@@ -1171,8 +1171,8 @@ function main_lb_infil() {
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::heli_ride_intro_extras();
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::setup_tea_room();
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::flashbang_watcher();
-  var0 = ["3f_bedroom_light", "2f_dataroom_light", "1f_light", "compound_light", "lgt_outside"];
-  thread scripts\sp\maps\tunnels\zd30tunnels_infil::compound_lights_off(var0);
+  var_0 = ["3f_bedroom_light", "2f_dataroom_light", "1f_light", "compound_light", "lgt_outside"];
+  thread scripts\sp\maps\tunnels\zd30tunnels_infil::compound_lights_off(var_0);
   scripts\engine\sp\utility::array_spawn_targetname("infil_caged_dog");
   scripts\sp\player::player_movement_state("cqb");
   wait 0.1;
@@ -1214,18 +1214,18 @@ function lb_infil_catchup() {
 function lb_unload_start() {
   level.player clearclienttriggeraudiozone(1);
   scripts\engine\sp\utility::array_spawn_targetname("infil_caged_dog");
-  var0 = scripts\engine\sp\utility::array_spawn_noteworthy("alpha");
-  var1 = scripts\engine\sp\utility::array_spawn_noteworthy("bravo");
+  var_0 = scripts\engine\sp\utility::array_spawn_noteworthy("alpha");
+  var_1 = scripts\engine\sp\utility::array_spawn_noteworthy("bravo");
   scripts\engine\sp\utility::spawn_script_noteworthy("price");
-  var2 = scripts\engine\utility::array_combine(var0, var1, [level.price]);
+  var_2 = scripts\engine\utility::array_combine(var_0, var_1, [level.price]);
 
-  foreach(var4 in var2) {
-    var5 = scripts\engine\utility::getStruct("unload_" + var4.animname, "targetname");
-    var4 teleport(var5.origin, var5.angles);
+  foreach(var_4 in var_2) {
+    var_5 = scripts\engine\utility::getStruct("unload_" + var_4.animname, "targetname");
+    var_4 teleport(var_5.origin, var_5.angles);
   }
 
-  var7 = [level.alpha5, level.alpha6, level.price, level.bravo1, level.bravo2, level.overwatch, level.bravo4, level.bravo5, level.alpha2, level.alpha3, level.alpha4];
-  var7 thread scripts\sp\maps\tunnels\zd30tunnels_infil::allies_nvg_on(1);
+  var_7 = [level.alpha5, level.alpha6, level.price, level.bravo1, level.bravo2, level.overwatch, level.bravo4, level.bravo5, level.alpha2, level.alpha3, level.alpha4];
+  var_7 thread scripts\sp\maps\tunnels\zd30tunnels_infil::allies_nvg_on(1);
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::infil_spawn_building1_runner();
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::setup_alpha_breach_jumpto();
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::setup_alpha_sledge_team();
@@ -1234,8 +1234,8 @@ function lb_unload_start() {
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::nag_enter_b1();
   level.alpha6 attach("misc_wm_sledgehammer_scaled", "tag_accessory_right");
   level.overwatch thread scripts\sp\maps\tunnels\zd30tunnels_infil::overwatch_setup();
-  var8 = ["3f_bedroom_light", "2f_dataroom_light", "1f_light", "compound_light", "lgt_outside"];
-  thread scripts\sp\maps\tunnels\zd30tunnels_infil::compound_lights_off(var8);
+  var_8 = ["3f_bedroom_light", "2f_dataroom_light", "1f_light", "compound_light", "lgt_outside"];
+  thread scripts\sp\maps\tunnels\zd30tunnels_infil::compound_lights_off(var_8);
   scripts\engine\sp\utility::set_start_location("lb_unload", [level.player]);
   scripts\sp\maps\tunnels\zd30tunnels_infil::objective_control("clear_building");
 }
@@ -1247,16 +1247,16 @@ function main_lb_unload() {
   scripts\engine\utility::flag_wait("moveup_building1");
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::teleport_bravo_midway();
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::breach_gate_nag("breach_gate_nag_end");
-  var0 = cos(35);
+  var_0 = cos(35);
 
   for(;;) {
-    var1 = scripts\engine\utility::getStruct("breach_gate", "targetname");
-    var2 = distance(level.player.origin, var1.origin);
+    var_1 = scripts\engine\utility::getStruct("breach_gate", "targetname");
+    var_2 = distance(level.player.origin, var_1.origin);
 
-    if(var2 < 540) {
-      if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var1.origin, var0) && scripts\engine\trace::ray_trace_passed(level.player getEye(), var1.origin, [level.player])) {
+    if(var_2 < 540) {
+      if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_1.origin, var_0) && scripts\engine\trace::ray_trace_passed(level.player getEye(), var_1.origin, [level.player])) {
         break;
-      } else if(var2 < 455) {
+      } else if(var_2 < 455) {
         break;
       }
     }
@@ -1280,35 +1280,35 @@ function lb_unload_catchup() {
 function breached_gate_start() {
   level.player clearclienttriggeraudiozone(1);
   scripts\engine\sp\utility::array_spawn_targetname("infil_caged_dog");
-  var0 = scripts\engine\sp\utility::array_spawn_noteworthy("alpha");
+  var_0 = scripts\engine\sp\utility::array_spawn_noteworthy("alpha");
   scripts\engine\sp\utility::array_spawn_noteworthy("bravo");
   scripts\engine\sp\utility::spawn_script_noteworthy("price");
-  var1 = scripts\engine\utility::getStruct("unload_overwatch", "targetname");
-  level.overwatch teleport(var1.origin, var1.angles);
+  var_1 = scripts\engine\utility::getStruct("unload_overwatch", "targetname");
+  level.overwatch teleport(var_1.origin, var_1.angles);
   level.overwatch thread scripts\sp\maps\tunnels\zd30tunnels_infil::overwatch_setup();
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::teleport_bravo_midway();
 
-  foreach(var3 in var0) {
-    var1 = scripts\engine\utility::getStruct("unload_" + var3.animname, "targetname");
-    var3 teleport(var1.origin, var1.angles);
+  foreach(var_3 in var_0) {
+    var_1 = scripts\engine\utility::getStruct("unload_" + var_3.animname, "targetname");
+    var_3 teleport(var_1.origin, var_1.angles);
 
-    if(var3.animname == "alpha5") {
-      var3 setgoalnode(getnode("alpha5_b1_node", "targetname"));
+    if(var_3.animname == "alpha5") {
+      var_3 setgoalnode(getnode("alpha5_b1_node", "targetname"));
       continue;
     }
 
-    if(var3.animname == "alpha6") {
-      var3 setgoalnode(getnode("alpha6_b1_node", "targetname"));
+    if(var_3.animname == "alpha6") {
+      var_3 setgoalnode(getnode("alpha6_b1_node", "targetname"));
     }
   }
 
-  var5 = ["3f_bedroom_light", "2f_dataroom_light", "1f_light", "compound_light", "lgt_outside"];
-  thread scripts\sp\maps\tunnels\zd30tunnels_infil::compound_lights_off(var5);
+  var_5 = ["3f_bedroom_light", "2f_dataroom_light", "1f_light", "compound_light", "lgt_outside"];
+  thread scripts\sp\maps\tunnels\zd30tunnels_infil::compound_lights_off(var_5);
   scripts\engine\sp\utility::set_start_location("breached_gate", [level.player]);
-  var6 = [level.price, level.bravo1, level.bravo2, level.overwatch, level.bravo4, level.bravo5, level.alpha2, level.alpha3, level.alpha4, level.alpha6];
+  var_6 = [level.price, level.bravo1, level.bravo2, level.overwatch, level.bravo4, level.bravo5, level.alpha2, level.alpha3, level.alpha4, level.alpha6];
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::setup_alpha_breach_jumpto();
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::breach_gate();
-  var6 thread scripts\sp\maps\tunnels\zd30tunnels_infil::allies_nvg_on(1);
+  var_6 thread scripts\sp\maps\tunnels\zd30tunnels_infil::allies_nvg_on(1);
 }
 
 function main_breached_gate() {
@@ -1318,36 +1318,36 @@ function main_breached_gate() {
   level.maindoor = getscriptablearray("compound_door", "targetname");
   level.maindoor[0] thread scripts\sp\maps\tunnels\zd30tunnels_infil::maindoor_damage_watcher();
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::alpha_moveup_post_breach();
-  var0 = scripts\engine\utility::getStruct("1f_animnode", "targetname");
-  var1 = [level.alpha2, level.alpha3, level.alpha4];
+  var_0 = scripts\engine\utility::getStruct("1f_animnode", "targetname");
+  var_1 = [level.alpha2, level.alpha3, level.alpha4];
 
-  foreach(var3 in var1) {
-    var3 thread scripts\sp\maps\tunnels\zd30tunnels_infil::moveto_compound(var0);
-    var3 scripts\common\ai::poi_enable(1, scripts\engine\utility::getStruct("yard_poi_" + var3.animname, "targetname"));
+  foreach(var_3 in var_1) {
+    var_3 thread scripts\sp\maps\tunnels\zd30tunnels_infil::moveto_compound(var_0);
+    var_3 scripts\common\ai::poi_enable(1, scripts\engine\utility::getStruct("yard_poi_" + var_3.animname, "targetname"));
   }
 
   scripts\engine\utility::flag_wait_all("price_approach_finished", "bravo4_approach_finished", "bravo5_approach_finished");
   scripts\engine\utility::flag_wait("set_yard_targets");
-  var1 = [level.price, level.bravo4, level.bravo5, level.bravo1, level.bravo2];
+  var_1 = [level.price, level.bravo4, level.bravo5, level.bravo1, level.bravo2];
 
-  foreach(var3 in var1) {
-    var3 thread scripts\sp\maps\tunnels\zd30tunnels_infil::moveto_compound(var0);
+  foreach(var_3 in var_1) {
+    var_3 thread scripts\sp\maps\tunnels\zd30tunnels_infil::moveto_compound(var_0);
 
-    if(var3.animname != "bravo5") {
-      var3 scripts\common\ai::poi_enable(1, scripts\engine\utility::getStruct("yard_poi_" + var3.animname, "targetname"));
+    if(var_3.animname != "bravo5") {
+      var_3 scripts\common\ai::poi_enable(1, scripts\engine\utility::getStruct("yard_poi_" + var_3.animname, "targetname"));
     }
   }
 
-  thread scripts\sp\maps\tunnels\zd30tunnels_infil::setup_1f_main_door(var0);
-  thread scripts\sp\maps\tunnels\zd30tunnels_infil::setup_1f_side_door(var0);
+  thread scripts\sp\maps\tunnels\zd30tunnels_infil::setup_1f_main_door(var_0);
+  thread scripts\sp\maps\tunnels\zd30tunnels_infil::setup_1f_side_door(var_0);
 }
 
 function start_midway_guys() {
   scripts\engine\utility::flag_wait("breach_explosion");
-  var0 = [level.price, level.bravo4, level.bravo5];
+  var_0 = [level.price, level.bravo4, level.bravo5];
 
-  foreach(var2 in var0) {
-    var2 thread scripts\sp\maps\tunnels\zd30tunnels_infil::moveto_midway();
+  foreach(var_2 in var_0) {
+    var_2 thread scripts\sp\maps\tunnels\zd30tunnels_infil::moveto_midway();
   }
 }
 
@@ -1355,45 +1355,45 @@ function breached_gate_catchup() {}
 
 function comp_1f_start() {
   level.player clearclienttriggeraudiozone(1);
-  var0 = scripts\engine\sp\utility::array_spawn_noteworthy("alpha");
-  var1 = scripts\engine\sp\utility::array_spawn_noteworthy("bravo");
+  var_0 = scripts\engine\sp\utility::array_spawn_noteworthy("alpha");
+  var_1 = scripts\engine\sp\utility::array_spawn_noteworthy("bravo");
   scripts\engine\sp\utility::spawn_script_noteworthy("price");
-  var2 = scripts\engine\utility::array_combine(var0, var1, [level.price]);
+  var_2 = scripts\engine\utility::array_combine(var_0, var_1, [level.price]);
 
-  foreach(var4 in var2) {
-    if(var4.animname == "overwatch" || var4.animname == "alpha5" || var4.animname == "alpha6") {
-      var5 = scripts\engine\utility::getStruct("unload_" + var4.animname, "targetname");
-      var4 teleport(var5.origin, var5.angles);
+  foreach(var_4 in var_2) {
+    if(var_4.animname == "overwatch" || var_4.animname == "alpha5" || var_4.animname == "alpha6") {
+      var_5 = scripts\engine\utility::getStruct("unload_" + var_4.animname, "targetname");
+      var_4 teleport(var_5.origin, var_5.angles);
 
-      if(var4.animname == "alpha5") {
-        var4 setgoalnode(getnode("alpha5_b1_node", "targetname"));
-      } else if(var4.animname == "alpha6") {
-        var4 setgoalnode(getnode("alpha6_b1_node", "targetname"));
+      if(var_4.animname == "alpha5") {
+        var_4 setgoalnode(getnode("alpha5_b1_node", "targetname"));
+      } else if(var_4.animname == "alpha6") {
+        var_4 setgoalnode(getnode("alpha6_b1_node", "targetname"));
       }
 
       continue;
     }
 
-    if(var4.animname == "alpha3" || var4.animname == "alpha4") {
-      var5 = scripts\engine\utility::getStruct("comp_1f_" + var4.animname, "targetname");
-      var4 teleport(var5.origin, var5.angles);
-      var4 scripts\engine\sp\utility::set_goal_node_targetname(var5.target);
+    if(var_4.animname == "alpha3" || var_4.animname == "alpha4") {
+      var_5 = scripts\engine\utility::getStruct("comp_1f_" + var_4.animname, "targetname");
+      var_4 teleport(var_5.origin, var_5.angles);
+      var_4 scripts\engine\sp\utility::set_goal_node_targetname(var_5.target);
       continue;
     }
 
-    var5 = scripts\engine\utility::getStruct("comp_1f_" + var4.animname, "targetname");
-    var4 teleport(var5.origin, var5.angles);
+    var_5 = scripts\engine\utility::getStruct("comp_1f_" + var_4.animname, "targetname");
+    var_4 teleport(var_5.origin, var_5.angles);
   }
 
-  var7 = scripts\engine\utility::getStruct("1f_animnode", "targetname");
+  var_7 = scripts\engine\utility::getStruct("1f_animnode", "targetname");
   level.overwatch thread scripts\sp\maps\tunnels\zd30tunnels_infil::overwatch_setup();
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::setup_1f_side_door_arrival();
-  thread scripts\sp\maps\tunnels\zd30tunnels_infil::setup_1f_side_door(var7);
+  thread scripts\sp\maps\tunnels\zd30tunnels_infil::setup_1f_side_door(var_7);
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::setup_1f_main_door_arrival();
-  var8 = [level.price, level.bravo1, level.bravo2, level.overwatch, level.bravo4, level.bravo5, level.alpha2, level.alpha3, level.alpha4, level.alpha6];
-  var8 thread scripts\sp\maps\tunnels\zd30tunnels_infil::allies_nvg_on(1);
-  var9 = ["compound_light", "lgt_outside"];
-  thread scripts\sp\maps\tunnels\zd30tunnels_infil::compound_lights_off(var9);
+  var_8 = [level.price, level.bravo1, level.bravo2, level.overwatch, level.bravo4, level.bravo5, level.alpha2, level.alpha3, level.alpha4, level.alpha6];
+  var_8 thread scripts\sp\maps\tunnels\zd30tunnels_infil::allies_nvg_on(1);
+  var_9 = ["compound_light", "lgt_outside"];
+  thread scripts\sp\maps\tunnels\zd30tunnels_infil::compound_lights_off(var_9);
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::setup_main_door_jumpto_damage();
   scripts\engine\sp\utility::set_start_location("comp_1f", [level.player]);
   scripts\sp\maps\tunnels\zd30tunnels_infil::objective_control("reach_main_house");
@@ -1404,36 +1404,36 @@ function main_comp_1f() {
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::side_breach_1f_vo();
   scripts\engine\utility::flag_wait("player_in_1f_back_room");
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::clip_delete("1f_backtrack_safety_clip", "power_is_off");
-  var0 = scripts\engine\utility::getStruct("1f_animnode", "targetname");
+  var_0 = scripts\engine\utility::getStruct("1f_animnode", "targetname");
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::power_interact();
-  thread scripts\sp\maps\tunnels\zd30tunnels_infil::waittill_player_looks_at_hallway(var0);
+  thread scripts\sp\maps\tunnels\zd30tunnels_infil::waittill_player_looks_at_hallway(var_0);
   scripts\engine\utility::flag_wait("player_back_in_hallway");
-  thread scripts\sp\maps\tunnels\zd30tunnels_infil::moveup_1f_hallway(var0);
-  level.bravo4 scripts\sp\maps\tunnels\zd30tunnels_infil::moveto_unbreachable_door(var0);
-  var1 = ["dx_vom_b63_1st_floor_power_60", "dx_vom_b63_1st_floor_power_70"];
+  thread scripts\sp\maps\tunnels\zd30tunnels_infil::moveup_1f_hallway(var_0);
+  level.bravo4 scripts\sp\maps\tunnels\zd30tunnels_infil::moveto_unbreachable_door(var_0);
+  var_1 = ["dx_vom_b63_1st_floor_power_60", "dx_vom_b63_1st_floor_power_70"];
 
   if(!scripts\engine\utility::flag("power_is_off")) {
-    level.bravo4 thread scripts\sp\maps\tunnels\zd30tunnels_infil::notetrack_nag(var1, "power_is_off");
+    level.bravo4 thread scripts\sp\maps\tunnels\zd30tunnels_infil::notetrack_nag(var_1, "power_is_off");
   }
 
-  var0 thread scripts\common\anim::anim_loop_solo_with_nags(level.bravo4, "1f_hallway_idle", "stop_loop_hallway");
+  var_0 thread scripts\common\anim::anim_loop_solo_with_nags(level.bravo4, "1f_hallway_idle", "stop_loop_hallway");
   scripts\engine\utility::flag_wait("power_is_off");
-  var2 = [level.bravo5];
-  var2 thread scripts\sp\maps\tunnels\zd30tunnels_infil::allies_nvg_on(1);
+  var_2 = [level.bravo5];
+  var_2 thread scripts\sp\maps\tunnels\zd30tunnels_infil::allies_nvg_on(1);
   scripts\engine\utility::delaythread(1, &scripts\sp\maps\tunnels\zd30tunnels_infil::objective_control, "2f_stairs");
-  level.price scripts\sp\maps\tunnels\zd30tunnels_infil::setup_2f_price(var0);
-  var3 = scripts\sp\maps\tunnels\zd30tunnels_infil::compound_door_setup("1f_hallway_door");
-  var3[0] scripts\engine\sp\utility::assign_animtree("hallway_door");
-  var2 = [level.price, level.bravo4, level.bravo2];
-  var0 notify("stop_loop_hallway");
-  var0 notify("stop_first_frame");
-  var3[0] thread scripts\sp\maps\tunnels\zd30tunnels_infil::open_1f_hallway_door(var0);
-  var0 scripts\common\anim::anim_single(var2, "1f_hallway_open");
-  var1 = ["dx_vom_pri_2nd_floor_stairs_32", "dx_vom_pri_1st_floor_stairs_20", "dx_vom_b63_1st_floor_stairs_30"];
-  level.price thread scripts\sp\maps\tunnels\zd30tunnels_infil::notetrack_nag(var1, "stairs_2f_nag_end");
-  var0 thread scripts\common\anim::anim_loop_solo_with_nags(level.price, "1f_hallway_open_idle", "ready_2f_ascend");
-  var0 thread scripts\common\anim::anim_loop_solo(level.bravo4, "1f_hallway_open_idle", "stop_loop_1f_hallway_open");
-  var0 thread scripts\common\anim::anim_loop_solo(level.bravo2, "1f_hallway_open_idle", "stop_loop_cleanup");
+  level.price scripts\sp\maps\tunnels\zd30tunnels_infil::setup_2f_price(var_0);
+  var_3 = scripts\sp\maps\tunnels\zd30tunnels_infil::compound_door_setup("1f_hallway_door");
+  var_3[0] scripts\engine\sp\utility::assign_animtree("hallway_door");
+  var_2 = [level.price, level.bravo4, level.bravo2];
+  var_0 notify("stop_loop_hallway");
+  var_0 notify("stop_first_frame");
+  var_3[0] thread scripts\sp\maps\tunnels\zd30tunnels_infil::open_1f_hallway_door(var_0);
+  var_0 scripts\common\anim::anim_single(var_2, "1f_hallway_open");
+  var_1 = ["dx_vom_pri_2nd_floor_stairs_32", "dx_vom_pri_1st_floor_stairs_20", "dx_vom_b63_1st_floor_stairs_30"];
+  level.price thread scripts\sp\maps\tunnels\zd30tunnels_infil::notetrack_nag(var_1, "stairs_2f_nag_end");
+  var_0 thread scripts\common\anim::anim_loop_solo_with_nags(level.price, "1f_hallway_open_idle", "ready_2f_ascend");
+  var_0 thread scripts\common\anim::anim_loop_solo(level.bravo4, "1f_hallway_open_idle", "stop_loop_1f_hallway_open");
+  var_0 thread scripts\common\anim::anim_loop_solo(level.bravo2, "1f_hallway_open_idle", "stop_loop_cleanup");
   level.price thread scripts\sp\maps\tunnels\zd30tunnels_infil::stairtrain_1f();
 }
 
@@ -1452,44 +1452,44 @@ function comp_2f_start() {
   scripts\engine\sp\utility::array_spawn_noteworthy("bravo");
   scripts\engine\sp\utility::spawn_script_noteworthy("price");
   level.overwatch thread scripts\sp\maps\tunnels\zd30tunnels_infil::overwatch_setup();
-  var0 = scripts\engine\utility::getStruct("unload_" + level.overwatch.animname, "targetname");
-  level.overwatch teleport(var0.origin, var0.angles);
+  var_0 = scripts\engine\utility::getStruct("unload_" + level.overwatch.animname, "targetname");
+  level.overwatch teleport(var_0.origin, var_0.angles);
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::open_main_door();
-  var1 = scripts\sp\maps\tunnels\zd30tunnels_infil::compound_door_setup("1f_hallway_door");
-  var1[0] scripts\engine\sp\utility::assign_animtree("hallway_door");
-  var2 = scripts\engine\utility::getStruct("1f_animnode", "targetname");
-  var2 scripts\common\anim::anim_last_frame_solo(var1[0], "1f_hallway_open");
-  var3 = ["dx_vom_pri_2nd_floor_stairs_32", "dx_vom_pri_1st_floor_stairs_20", "dx_vom_b63_1st_floor_stairs_30"];
-  level.price thread scripts\sp\maps\tunnels\zd30tunnels_infil::notetrack_nag(var3, "stairs_2f_nag_end");
-  var2 thread scripts\common\anim::anim_loop_solo_with_nags(level.price, "1f_hallway_open_idle", "ready_2f_ascend");
-  var2 thread scripts\common\anim::anim_loop_solo(level.bravo4, "1f_hallway_open_idle", "stop_loop_1f_hallway_open");
-  var2 thread scripts\common\anim::anim_loop_solo(level.bravo2, "1f_hallway_open_idle", "stop_loop_cleanup");
-  var4 = [level.alpha5, level.alpha6];
+  var_1 = scripts\sp\maps\tunnels\zd30tunnels_infil::compound_door_setup("1f_hallway_door");
+  var_1[0] scripts\engine\sp\utility::assign_animtree("hallway_door");
+  var_2 = scripts\engine\utility::getStruct("1f_animnode", "targetname");
+  var_2 scripts\common\anim::anim_last_frame_solo(var_1[0], "1f_hallway_open");
+  var_3 = ["dx_vom_pri_2nd_floor_stairs_32", "dx_vom_pri_1st_floor_stairs_20", "dx_vom_b63_1st_floor_stairs_30"];
+  level.price thread scripts\sp\maps\tunnels\zd30tunnels_infil::notetrack_nag(var_3, "stairs_2f_nag_end");
+  var_2 thread scripts\common\anim::anim_loop_solo_with_nags(level.price, "1f_hallway_open_idle", "ready_2f_ascend");
+  var_2 thread scripts\common\anim::anim_loop_solo(level.bravo4, "1f_hallway_open_idle", "stop_loop_1f_hallway_open");
+  var_2 thread scripts\common\anim::anim_loop_solo(level.bravo2, "1f_hallway_open_idle", "stop_loop_cleanup");
+  var_4 = [level.alpha5, level.alpha6];
 
-  foreach(var6 in var4) {
-    var0 = scripts\engine\utility::getStruct("unload_" + var6.animname, "targetname");
-    var6 teleport(var0.origin, var0.angles);
+  foreach(var_6 in var_4) {
+    var_0 = scripts\engine\utility::getStruct("unload_" + var_6.animname, "targetname");
+    var_6 teleport(var_0.origin, var_0.angles);
 
-    if(var6.animname == "alpha5") {
-      var6 setgoalnode(getnode("alpha5_b1_node", "targetname"));
+    if(var_6.animname == "alpha5") {
+      var_6 setgoalnode(getnode("alpha5_b1_node", "targetname"));
       continue;
     }
 
-    if(var6.animname == "alpha6") {
-      var6 setgoalnode(getnode("alpha6_b1_node", "targetname"));
+    if(var_6.animname == "alpha6") {
+      var_6 setgoalnode(getnode("alpha6_b1_node", "targetname"));
     }
   }
 
-  var8 = getnode("1f_guard_civs", "targetname");
-  level.bravo5 forceteleport(var8.origin, var8.angles);
-  level.bravo5 setgoalnode(var8);
+  var_8 = getnode("1f_guard_civs", "targetname");
+  level.bravo5 forceteleport(var_8.origin, var_8.angles);
+  level.bravo5 setgoalnode(var_8);
   level.price thread scripts\sp\maps\tunnels\zd30tunnels_infil::stairtrain_1f();
-  level.bravo1 thread scripts\sp\maps\tunnels\zd30tunnels_infil::setup_2f_bravo1(var2);
+  level.bravo1 thread scripts\sp\maps\tunnels\zd30tunnels_infil::setup_2f_bravo1(var_2);
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::spawn_1f_civ_jumpto();
-  var4 = [level.price, level.bravo1, level.bravo2, level.overwatch, level.bravo4, level.bravo5, level.alpha2, level.alpha3, level.alpha4, level.alpha6];
-  var4 thread scripts\sp\maps\tunnels\zd30tunnels_infil::allies_nvg_on(1);
-  var3 = ["3f_bedroom_light", "2f_dataroom_light", "1f_light", "compound_light", "lgt_outside"];
-  thread scripts\sp\maps\tunnels\zd30tunnels_infil::compound_lights_off(var3);
+  var_4 = [level.price, level.bravo1, level.bravo2, level.overwatch, level.bravo4, level.bravo5, level.alpha2, level.alpha3, level.alpha4, level.alpha6];
+  var_4 thread scripts\sp\maps\tunnels\zd30tunnels_infil::allies_nvg_on(1);
+  var_3 = ["3f_bedroom_light", "2f_dataroom_light", "1f_light", "compound_light", "lgt_outside"];
+  thread scripts\sp\maps\tunnels\zd30tunnels_infil::compound_lights_off(var_3);
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::start_point_nvg_on_hint();
   scripts\engine\sp\utility::set_start_location("comp_2f", [level.player]);
   scripts\sp\maps\tunnels\zd30tunnels_infil::objective_control("2f_stairs");
@@ -1500,11 +1500,11 @@ function main_comp_2f() {
   level.player scripts\engine\utility::delaythread(5, &scripts\engine\sp\utility::set_player_demeanor, "normal");
   level.dataciv = scripts\engine\sp\utility::spawn_script_noteworthy("2f_data_room_civ");
   level.dataenemies = scripts\engine\sp\utility::array_spawn_noteworthy("2f_data_room");
-  var0 = scripts\engine\utility::array_add(level.dataenemies, level.dataciv);
-  var0 scripts\sp\maps\tunnels\zd30tunnels_infil::setup_2f_data_enemies();
-  var1 = scripts\sp\door::double_doors_init_targetname("2f_data_door");
-  var1[0] scripts\sp\door::remove_open_prompts();
-  var1 scripts\engine\utility::array_thread(var1, &scripts\game\sp\door::remove_door_snake_cam_ability);
+  var_0 = scripts\engine\utility::array_add(level.dataenemies, level.dataciv);
+  var_0 scripts\sp\maps\tunnels\zd30tunnels_infil::setup_2f_data_enemies();
+  var_1 = scripts\sp\door::double_doors_init_targetname("2f_data_door");
+  var_1[0] scripts\sp\door::remove_open_prompts();
+  var_1 scripts\engine\utility::array_thread(var_1, &scripts\game\sp\door::remove_door_snake_cam_ability);
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::setup_2f_stairs_vo();
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::setup_2f_bedroom();
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::spawn_2f_extras(scripts\engine\utility::getStruct("2f_animnode", "targetname"));
@@ -1513,12 +1513,12 @@ function main_comp_2f() {
   scripts\sp\maps\tunnels\zd30tunnels_infil::objective_control("locate_wolf2");
 
   if(scripts\engine\utility::flag("price_kick_in_door")) {
-    var2 = gettime() + 1200;
+    var_2 = gettime() + 1200;
 
     for(;;) {
       if(scripts\engine\utility::flag("player_in_2f_hallway")) {
         break;
-      } else if(gettime() >= var2) {
+      } else if(gettime() >= var_2) {
         break;
       }
 
@@ -1526,12 +1526,12 @@ function main_comp_2f() {
     }
   }
 
-  var3 = scripts\engine\utility::getStruct("2f_hallway_struct", "targetname");
+  var_3 = scripts\engine\utility::getStruct("2f_hallway_struct", "targetname");
 
   for(;;) {
     if(scripts\engine\utility::flag("player_midway_in_2f_hallway")) {
       break;
-    } else if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var3.origin, cos(20)) && scripts\engine\trace::ray_trace_passed(level.player getEye(), var3.origin, [level.player])) {
+    } else if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_3.origin, cos(20)) && scripts\engine\trace::ray_trace_passed(level.player getEye(), var_3.origin, [level.player])) {
       break;
     }
 
@@ -1540,8 +1540,8 @@ function main_comp_2f() {
 
   scripts\engine\sp\utility::array_spawn_noteworthy("2f_enemies");
   scripts\engine\utility::flag_wait("player_in_2f_hallway");
-  var4 = scripts\engine\utility::getStruct("1f_animnode", "targetname");
-  var4 notify("stop_loop_1f_hallway_open");
+  var_4 = scripts\engine\utility::getStruct("1f_animnode", "targetname");
+  var_4 notify("stop_loop_1f_hallway_open");
   level.bravo4 thread scripts\sp\maps\tunnels\zd30tunnels_infil::bravo4_movements();
   scripts\engine\utility::flag_wait("3f_ready");
   scripts\sp\maps\tunnels\zd30tunnels_infil::objective_control("3f_stairs");
@@ -1555,10 +1555,10 @@ function add_clip() {
 
 function comp_2f_catchup() {
   if(!scripts\sp\starts::is_after_start("basement")) {
-    var0 = scripts\engine\utility::getStruct("1f_animnode", "targetname");
-    var1 = scripts\sp\maps\tunnels\zd30tunnels_infil::compound_door_setup("1f_hallway_door");
-    var1[0] scripts\engine\sp\utility::assign_animtree("hallway_door");
-    var0 scripts\common\anim::anim_last_frame_solo(var1[0], "1f_hallway_open");
+    var_0 = scripts\engine\utility::getStruct("1f_animnode", "targetname");
+    var_1 = scripts\sp\maps\tunnels\zd30tunnels_infil::compound_door_setup("1f_hallway_door");
+    var_1[0] scripts\engine\sp\utility::assign_animtree("hallway_door");
+    var_0 scripts\common\anim::anim_last_frame_solo(var_1[0], "1f_hallway_open");
     thread scripts\sp\maps\tunnels\zd30tunnels_infil::force_open_doors("2f_data_door", "2f_hallway_door", "2f_runner_door");
     return;
   }
@@ -1570,67 +1570,67 @@ function comp_3f_start() {
   scripts\engine\sp\utility::array_spawn_noteworthy("bravo");
   scripts\engine\sp\utility::spawn_script_noteworthy("price");
   level.overwatch thread scripts\sp\maps\tunnels\zd30tunnels_infil::overwatch_setup();
-  var0 = scripts\engine\utility::getStruct("unload_" + level.overwatch.animname, "targetname");
-  level.overwatch teleport(var0.origin, var0.angles);
-  var1 = scripts\engine\utility::getStruct("1f_animnode", "targetname");
-  var1 thread scripts\common\anim::anim_loop_solo(level.bravo2, "1f_hallway_open_idle", "stop_loop_cleanup");
-  var2 = scripts\engine\utility::getStruct("2f_animnode", "targetname");
-  var2 thread scripts\common\anim::anim_loop_solo(level.price, "2f_data_scene_idle", "stop_loop_cleanup");
-  var1 = scripts\engine\utility::getStruct("temp_2f_animnode2", "targetname");
-  var1 thread scripts\common\anim::anim_loop_solo(level.bravo4, "2f_hallway_post_idle", "stop_loop_cleanup");
-  var1 = scripts\engine\utility::getStruct("3f_animnode", "targetname");
-  var1 thread scripts\common\anim::anim_loop_solo(level.bravo1, "3f_stairs_intro", "stop_3f_stairs");
-  var3 = [level.alpha5, level.alpha6];
+  var_0 = scripts\engine\utility::getStruct("unload_" + level.overwatch.animname, "targetname");
+  level.overwatch teleport(var_0.origin, var_0.angles);
+  var_1 = scripts\engine\utility::getStruct("1f_animnode", "targetname");
+  var_1 thread scripts\common\anim::anim_loop_solo(level.bravo2, "1f_hallway_open_idle", "stop_loop_cleanup");
+  var_2 = scripts\engine\utility::getStruct("2f_animnode", "targetname");
+  var_2 thread scripts\common\anim::anim_loop_solo(level.price, "2f_data_scene_idle", "stop_loop_cleanup");
+  var_1 = scripts\engine\utility::getStruct("temp_2f_animnode2", "targetname");
+  var_1 thread scripts\common\anim::anim_loop_solo(level.bravo4, "2f_hallway_post_idle", "stop_loop_cleanup");
+  var_1 = scripts\engine\utility::getStruct("3f_animnode", "targetname");
+  var_1 thread scripts\common\anim::anim_loop_solo(level.bravo1, "3f_stairs_intro", "stop_3f_stairs");
+  var_3 = [level.alpha5, level.alpha6];
 
-  foreach(var5 in var3) {
-    var0 = scripts\engine\utility::getStruct("unload_" + var5.animname, "targetname");
-    var5 teleport(var0.origin, var0.angles);
+  foreach(var_5 in var_3) {
+    var_0 = scripts\engine\utility::getStruct("unload_" + var_5.animname, "targetname");
+    var_5 teleport(var_0.origin, var_0.angles);
 
-    if(var5.animname == "alpha5") {
-      var5 setgoalnode(getnode("alpha5_b1_node", "targetname"));
+    if(var_5.animname == "alpha5") {
+      var_5 setgoalnode(getnode("alpha5_b1_node", "targetname"));
       continue;
     }
 
-    if(var5.animname == "alpha6") {
-      var5 setgoalnode(getnode("alpha6_b1_node", "targetname"));
+    if(var_5.animname == "alpha6") {
+      var_5 setgoalnode(getnode("alpha6_b1_node", "targetname"));
     }
   }
 
-  var7 = getnode("1f_guard_civs", "targetname");
-  level.bravo5 forceteleport(var7.origin, var7.angles);
-  level.bravo5 setgoalnode(var7);
+  var_7 = getnode("1f_guard_civs", "targetname");
+  level.bravo5 forceteleport(var_7.origin, var_7.angles);
+  level.bravo5 setgoalnode(var_7);
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::open_main_door();
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::spawn_2f_extras(scripts\engine\utility::getStruct("2f_animnode", "targetname"));
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::spawn_1f_civ_jumpto();
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::spawn_2f_civ_jumpto();
   level.dataenemies = scripts\engine\sp\utility::array_spawn_noteworthy("2f_data_room");
 
-  foreach(var5 in level.dataenemies) {
-    var2 scripts\common\anim::anim_last_frame_solo(var5, "2f_data_scene");
+  foreach(var_5 in level.dataenemies) {
+    var_2 scripts\common\anim::anim_last_frame_solo(var_5, "2f_data_scene");
   }
 
-  var3 = [level.price, level.bravo1, level.bravo2, level.overwatch, level.bravo4, level.bravo5, level.alpha2, level.alpha3, level.alpha4, level.alpha6];
-  var3 thread scripts\sp\maps\tunnels\zd30tunnels_infil::allies_nvg_on(1);
-  var10 = ["3f_bedroom_light", "2f_dataroom_light", "1f_light", "compound_light", "lgt_outside"];
-  thread scripts\sp\maps\tunnels\zd30tunnels_infil::compound_lights_off(var10);
+  var_3 = [level.price, level.bravo1, level.bravo2, level.overwatch, level.bravo4, level.bravo5, level.alpha2, level.alpha3, level.alpha4, level.alpha6];
+  var_3 thread scripts\sp\maps\tunnels\zd30tunnels_infil::allies_nvg_on(1);
+  var_10 = ["3f_bedroom_light", "2f_dataroom_light", "1f_light", "compound_light", "lgt_outside"];
+  thread scripts\sp\maps\tunnels\zd30tunnels_infil::compound_lights_off(var_10);
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::start_point_nvg_on_hint();
   scripts\engine\sp\utility::set_start_location("comp_3f", [level.player]);
   scripts\sp\maps\tunnels\zd30tunnels_infil::objective_control("3f_stairs");
 }
 
 function main_comp_3f() {
-  var0 = scripts\sp\maps\tunnels\zd30tunnels_infil::balcony_3f_door();
-  var1 = scripts\sp\maps\tunnels\zd30tunnels_infil::bedroom_3f_door();
+  var_0 = scripts\sp\maps\tunnels\zd30tunnels_infil::balcony_3f_door();
+  var_1 = scripts\sp\maps\tunnels\zd30tunnels_infil::bedroom_3f_door();
   scripts\engine\utility::flag_wait("player_at_3f_stairs");
-  var2 = scripts\engine\utility::getStruct("3f_animnode", "targetname");
-  thread scripts\sp\maps\tunnels\zd30tunnels_infil::setup_3f_scene(var2);
+  var_2 = scripts\engine\utility::getStruct("3f_animnode", "targetname");
+  thread scripts\sp\maps\tunnels\zd30tunnels_infil::setup_3f_scene(var_2);
   level.player scripts\engine\sp\utility::set_player_demeanor("normal");
-  level.bravo1 thread scripts\sp\maps\tunnels\zd30tunnels_infil::stairtrain_2f(var2);
+  level.bravo1 thread scripts\sp\maps\tunnels\zd30tunnels_infil::stairtrain_2f(var_2);
   scripts\engine\utility::flag_wait("player_in_3f_hallway");
   thread scripts\engine\sp\utility::autosave_now();
   scripts\engine\utility::flag_wait("3f_scene_done");
   scripts\sp\maps\tunnels\zd30tunnels_infil::objective_control("downstairs");
-  var2 notify("stop_last_frame");
+  var_2 notify("stop_last_frame");
 }
 
 function comp_3f_catchup() {
@@ -1661,8 +1661,8 @@ function downstairs_start() {
   level.dataenemies = scripts\engine\sp\utility::array_spawn_noteworthy("2f_data_room");
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::spawn_1f_civ_jumpto();
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::spawn_2f_civ_jumpto();
-  var0 = ["3f_bedroom_light", "2f_dataroom_light", "1f_light", "compound_light", "lgt_outside"];
-  thread scripts\sp\maps\tunnels\zd30tunnels_infil::compound_lights_on(var0);
+  var_0 = ["3f_bedroom_light", "2f_dataroom_light", "1f_light", "compound_light", "lgt_outside"];
+  thread scripts\sp\maps\tunnels\zd30tunnels_infil::compound_lights_on(var_0);
   scripts\engine\sp\utility::set_start_location("start_downstairs", [level.player]);
   scripts\sp\maps\tunnels\zd30tunnels_infil::objective_control("downstairs");
   level.player scripts\engine\sp\utility::set_player_demeanor("relaxed");
@@ -1673,28 +1673,28 @@ function main_downstairs() {
 }
 
 function cleanup_compound_ents() {
-  var0 = gettime();
-  var1 = 0;
+  var_0 = gettime();
+  var_1 = 0;
   waitframe();
-  var2 = scripts\engine\utility::array_combine(level.cleanup, level.civs, level.charlie);
+  var_2 = scripts\engine\utility::array_combine(level.cleanup, level.civs, level.charlie);
 
-  foreach(var4 in var2) {
-    if(!isDefined(var4)) {
+  foreach(var_4 in var_2) {
+    if(!isDefined(var_4)) {
       continue;
     }
 
-    if(isai(var4) && isalive(var4)) {
-      var4 scripts\engine\sp\utility::anim_stopanimScripted();
+    if(isai(var_4) && isalive(var_4)) {
+      var_4 scripts\engine\sp\utility::anim_stopanimScripted();
 
-      if(istrue(var4.magic_bullet_shield)) {
-        var4 scripts\common\ai::stop_magic_bullet_shield();
+      if(istrue(var_4.magic_bullet_shield)) {
+        var_4 scripts\common\ai::stop_magic_bullet_shield();
       }
 
-      var4 kill();
+      var_4 kill();
     }
 
-    var4 delete();
-    var1++;
+    var_4 delete();
+    var_1++;
   }
 
   if(isDefined(level.kyledrone)) {
@@ -1702,55 +1702,55 @@ function cleanup_compound_ents() {
   }
 
   if(isDefined(level.interactive_doors) && isDefined(level.interactive_doors.ents)) {
-    foreach(var4 in level.interactive_doors.ents) {
-      if(isDefined(var4.clip)) {
-        var1++;
-        var4.clip delete();
+    foreach(var_4 in level.interactive_doors.ents) {
+      if(isDefined(var_4.clip)) {
+        var_1++;
+        var_4.clip delete();
       }
     }
   }
 
-  var8 = getEntArray("trigger_multiple_flag_set", "classname");
-  var9 = getEntArray("trigger_multiple", "classname");
-  var10 = scripts\engine\utility::array_combine(var8, var9);
+  var_8 = getEntArray("trigger_multiple_flag_set", "classname");
+  var_9 = getEntArray("trigger_multiple", "classname");
+  var_10 = scripts\engine\utility::array_combine(var_8, var_9);
 
-  foreach(var4 in var10) {
-    if(!isDefined(var4) || !isDefined(var4.origin) || var4.origin == (0, 0, 0)) {
+  foreach(var_4 in var_10) {
+    if(!isDefined(var_4) || !isDefined(var_4.origin) || var_4.origin == (0, 0, 0)) {
       continue;
     }
 
-    if(var4.origin[0] > -800) {
-      var4 delete();
-      var1++;
+    if(var_4.origin[0] > -800) {
+      var_4 delete();
+      var_1++;
     }
   }
 
-  var13 = gettime() - var0;
-  scripts\engine\utility::delaythread(5, &scripts\sp\maps\tunnels\zd30tunnels_utility::debug_print, "^1Cleaned up " + var1 + " entities in " + var13 + "ms");
+  var_13 = gettime() - var_0;
+  scripts\engine\utility::delaythread(5, &scripts\sp\maps\tunnels\zd30tunnels_utility::debug_print, "^1Cleaned up " + var_1 + " entities in " + var_13 + "ms");
 }
 
 function downstairs_catchup() {}
 
 function tea_room_start() {
   level.player clearclienttriggeraudiozone(1);
-  var0 = scripts\engine\utility::getStruct("1f_animnode", "targetname");
+  var_0 = scripts\engine\utility::getStruct("1f_animnode", "targetname");
   scripts\engine\sp\utility::array_spawn_noteworthy("charlie");
   scripts\engine\sp\utility::spawn_script_noteworthy("price");
-  scripts\sp\maps\tunnels\zd30tunnels_infil::setup_kyledrone(var0);
+  scripts\sp\maps\tunnels\zd30tunnels_infil::setup_kyledrone(var_0);
   level.revealrope = scripts\engine\sp\utility::spawn_anim_model("reveal_rope");
-  var1 = scripts\engine\utility::array_combine([level.price, level.revealrope], level.charlie);
+  var_1 = scripts\engine\utility::array_combine([level.price, level.revealrope], level.charlie);
 
-  foreach(var3 in var1) {
-    if(isDefined(level.scr_anim[var3.animname]["landing_idle"])) {
-      var0 thread scripts\common\anim::anim_loop_solo(var3, "landing_idle", "stop_landing_charlie");
+  foreach(var_3 in var_1) {
+    if(isDefined(level.scr_anim[var_3.animname]["landing_idle"])) {
+      var_0 thread scripts\common\anim::anim_loop_solo(var_3, "landing_idle", "stop_landing_charlie");
       continue;
     }
 
-    if(isDefined(var3.magic_bullet_shield)) {
-      var3 scripts\common\ai::stop_magic_bullet_shield();
+    if(isDefined(var_3.magic_bullet_shield)) {
+      var_3 scripts\common\ai::stop_magic_bullet_shield();
     }
 
-    var3 delete();
+    var_3 delete();
   }
 
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::open_main_door();
@@ -1758,11 +1758,11 @@ function tea_room_start() {
   level.dataenemies = scripts\engine\sp\utility::array_spawn_noteworthy("2f_data_room");
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::spawn_1f_civ_jumpto();
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::spawn_2f_civ_jumpto();
-  var5 = ["3f_bedroom_light", "2f_dataroom_light", "1f_light", "compound_light", "lgt_outside"];
-  thread scripts\sp\maps\tunnels\zd30tunnels_infil::compound_lights_on(var5);
+  var_5 = ["3f_bedroom_light", "2f_dataroom_light", "1f_light", "compound_light", "lgt_outside"];
+  thread scripts\sp\maps\tunnels\zd30tunnels_infil::compound_lights_on(var_5);
   scripts\sp\maps\tunnels\zd30tunnels_infil::objective_control("lift_trap_door");
   scripts\engine\sp\utility::set_start_location("tea_room", [level.player]);
-  thread scripts\sp\maps\tunnels\zd30tunnels_infil::trap_door_plywood(var0);
+  thread scripts\sp\maps\tunnels\zd30tunnels_infil::trap_door_plywood(var_0);
 }
 
 function main_tea_room() {
@@ -1835,20 +1835,20 @@ function main_coldopen_bink() {
 }
 
 function coldopen_bink_move_scene() {
-  var0 = getEnt("1f_hallway_door", "targetname");
-  var0 delete();
-  var1 = getEnt("1f_hallway_door_clip", "targetname");
-  var1 delete();
-  var2 = getEntArray("player_movement_clip", "script_noteworthy");
+  var_0 = getEnt("1f_hallway_door", "targetname");
+  var_0 delete();
+  var_1 = getEnt("1f_hallway_door_clip", "targetname");
+  var_1 delete();
+  var_2 = getEntArray("player_movement_clip", "script_noteworthy");
 
-  foreach(var4 in var2) {
-    var4 scripts\engine\sp\utility::hide_entity();
+  foreach(var_4 in var_2) {
+    var_4 scripts\engine\sp\utility::hide_entity();
   }
 
   scripts\engine\utility::flag_wait("scriptables_ready");
   scripts\sp\maps\tunnels\zd30tunnels_infil::power_down_electronics();
-  var6 = getEnt("coldopen_bink_anim_node", "script_noteworthy");
-  level.node = var6 scripts\engine\utility::spawn_script_origin();
+  var_6 = getEnt("coldopen_bink_anim_node", "script_noteworthy");
+  level.node = var_6 scripts\engine\utility::spawn_script_origin();
   level.butcher = scripts\engine\sp\utility::spawn_targetname("butcherSpawner", 1);
   level.butcher.animname = "butcher";
   level.butcher.ignoreall = 1;
@@ -1863,12 +1863,12 @@ function coldopen_bink_move_scene() {
   level.player allowstand(1);
   level.player allowcrouch(0);
   level.player allowprone(0);
-  var7 = scripts\engine\sp\utility::spawn_anim_model("player_rig", level.node.origin, level.node.angles);
-  level.player playerlinktoabsolute(var7, "tag_player");
+  var_7 = scripts\engine\sp\utility::spawn_anim_model("player_rig", level.node.origin, level.node.angles);
+  level.player playerlinktoabsolute(var_7, "tag_player");
   level.player hideviewmodel();
-  var7 hide();
-  var6.origin = level.node.origin;
-  var6.angles = level.node.angles;
+  var_7 hide();
+  var_6.origin = level.node.origin;
+  var_6.angles = level.node.angles;
   level.player modifybasefov(35, 0.05);
   setsaveddvar("OMNONNMOTP", "0.1 400 0.5 1000");
   level.player setcinematicmotionoverride("disabled");
@@ -1887,25 +1887,25 @@ function coldopen_bink_move_scene() {
   level.wolf setModel("body_villain_wolf_desert");
   level.node thread scripts\common\anim::anim_first_frame_solo(level.wolf, "coldopen_bink");
   level.node thread scripts\common\anim::anim_first_frame_solo(level.butcher, "coldopen_bink");
-  level.node scripts\common\anim::anim_first_frame_solo(var7, "coldopen_bink");
+  level.node scripts\common\anim::anim_first_frame_solo(var_7, "coldopen_bink");
   wait 2;
   thread co_cine_dof();
-  thread wolf_scene_lights(level.node, var6);
+  thread wolf_scene_lights(level.node, var_6);
   thread co_wolf_mayhem();
   thread co_butcher_mayhem();
   level.node thread scripts\common\anim::anim_single_solo(level.wolf, "coldopen_bink");
   level.node thread scripts\common\anim::anim_single_solo(level.butcher, "coldopen_bink");
-  level.node scripts\common\anim::anim_single_solo(var7, "coldopen_bink");
+  level.node scripts\common\anim::anim_single_solo(var_7, "coldopen_bink");
   level.node thread scripts\common\anim::anim_last_frame_solo(level.wolf, "coldopen_bink");
   level.node thread scripts\common\anim::anim_last_frame_solo(level.butcher, "coldopen_bink");
-  level.node thread scripts\common\anim::anim_last_frame_solo(var7, "coldopen_bink");
+  level.node thread scripts\common\anim::anim_last_frame_solo(var_7, "coldopen_bink");
 }
 
 function co_cine_dof() {
   level.wolf scripts\engine\sp\utility::dof_enable_autofocus(2.8, 100, undefined, undefined, "tag_eye");
 }
 
-function move_scene(var0) {
+function move_scene(var_0) {
   iprintlnbold("Move the Wolf around - Hold ADS to start the scene.");
   thread stop_move_scene();
   level endon("picked_spot");
@@ -1920,31 +1920,31 @@ function move_scene(var0) {
   level.wolf scripts\common\ai::gun_remove();
   level.wolf visiblenotsolid();
   level.wolf setModel("body_villain_wolf_desert");
-  level.wolf forceteleport(var0.origin, var0.angles, 10000);
-  level.wolf linkTo(var0);
+  level.wolf forceteleport(var_0.origin, var_0.angles, 10000);
+  level.wolf linkTo(var_0);
 
   for(;;) {
-    var1 = level.player.origin + anglesToForward(level.player.angles) * 60;
-    var2 = level.player.angles + (0, 180, 0);
-    var0.origin = var1;
-    var0.angles = var2;
-    var0 scripts\common\anim::anim_first_frame_solo(level.wolf, "coldopen_bink");
+    var_1 = level.player.origin + anglesToForward(level.player.angles) * 60;
+    var_2 = level.player.angles + (0, 180, 0);
+    var_0.origin = var_1;
+    var_0.angles = var_2;
+    var_0 scripts\common\anim::anim_first_frame_solo(level.wolf, "coldopen_bink");
     waitframe();
   }
 }
 
 function stop_move_scene() {
-  var0 = 0;
+  var_0 = 0;
 
   for(;;) {
     if(level.player adsButtonPressed()) {
-      var0++;
+      var_0++;
 
-      if(var0 == 10) {
+      if(var_0 == 10) {
         break;
       }
     } else {
-      var0 = 0;
+      var_0 = 0;
     }
 
     waitframe();
@@ -1954,7 +1954,7 @@ function stop_move_scene() {
   level notify("picked_spot");
 }
 
-function wolf_scene_lights(var0, var1) {
+function wolf_scene_lights(var_0, var_1) {
   level.wolf_scene_light_key = getEnt("wolf_light_key", "script_noteworthy");
   level.wolf_scene_light_key setlightintensity(0);
   level.wolf_scene_light_rim = getEnt("wolf_light_rim", "script_noteworthy");
@@ -1996,13 +1996,13 @@ function co_butcher_mayhem() {
 }
 
 function audio_thread_lever() {
-  var0 = spawn("script_origin", (446.525, 1042.04, 192.998));
-  var1 = getEnt("main_door_trigger", "targetname");
-  var1 waittill("trigger", var2);
-  var0 playLoopSound("emt_scripted_light_hum_lp");
+  var_0 = spawn("script_origin", (446.525, 1042.04, 192.998));
+  var_1 = getEnt("main_door_trigger", "targetname");
+  var_1 waittill("trigger", var_2);
+  var_0 playLoopSound("emt_scripted_light_hum_lp");
   scripts\engine\utility::flag_wait("power_is_off");
   wait 1;
-  var0 stoploopsound();
+  var_0 stoploopsound();
   wait 0.1;
-  var0 delete();
+  var_0 delete();
 }

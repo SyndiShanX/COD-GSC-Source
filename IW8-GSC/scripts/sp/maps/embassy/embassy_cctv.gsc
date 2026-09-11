@@ -56,8 +56,8 @@ function embassy_cctv_flags() {
   scripts\engine\utility::flag_init("cctv_final_patrol_go");
 }
 
-function cctv_camera_look_speed(var0) {
-  if(var0) {
+function cctv_camera_look_speed(var_0) {
+  if(var_0) {
     if(scripts\engine\utility::is_player_gamepad_enabled()) {
       self enableslowaim(0.75, 0.4);
       self capturnrate(0, 0);
@@ -84,7 +84,7 @@ function security_cam_01_main() {
   thread dialogue_decks_init();
   camera_controller_init();
   stacy_spawn();
-  var0 = scripts\engine\sp\utility::array_spawn_targetname("patrol_03", 1);
+  var_0 = scripts\engine\sp\utility::array_spawn_targetname("patrol_03", 1);
   thread dialogue_cctv_intro();
   thread scene_opening();
   thread scene_bookcase();
@@ -98,15 +98,15 @@ function security_cam_01_main() {
   thread stacy_bad_zone_attack();
   thread stacy_run_away_watcher();
   level.cell_phone = getEnt("cellphone", "targetname");
-  var1 = getEnt("chair_start", "targetname");
+  var_1 = getEnt("chair_start", "targetname");
   level.cell_phone scripts\engine\sp\utility::assign_animtree("phone_start");
-  var1 scripts\engine\sp\utility::assign_animtree("chair_start");
+  var_1 scripts\engine\sp\utility::assign_animtree("chair_start");
   level.cell_phone notsolid();
-  var2 = [level.cell_phone, level.stacy, var1];
-  var3 = scripts\engine\utility::getStruct("drag_scene_02", "targetname");
-  var4 = spawnStruct();
-  var4.origin = var3.origin;
-  var4 scripts\common\anim::anim_first_frame(var2, "office_start");
+  var_2 = [level.cell_phone, level.stacy, var_1];
+  var_3 = scripts\engine\utility::getStruct("drag_scene_02", "targetname");
+  var_4 = spawnStruct();
+  var_4.origin = var_3.origin;
+  var_4 scripts\common\anim::anim_first_frame(var_2, "office_start");
   thread scripts\sp\maps\embassy\embassy_util::focusflag();
   thread mission_failed();
   scripts\engine\utility::trigger_off("stop_patroller_trigger", "targetname");
@@ -123,11 +123,11 @@ function security_cam_01_main() {
   cctv_camera_look_speed(level.player, 1);
   wait 9;
   thread dialogue_cctv_intro_gameplay();
-  var4 thread scripts\common\anim::anim_single(var2, "office_start");
+  var_4 thread scripts\common\anim::anim_single(var_2, "office_start");
   level.stacy waittillmatch("single anim", "end");
-  var2 = [level.stacy];
-  var4 thread scripts\common\anim::anim_loop(var2, "office_start_idle", "stop_loop");
-  var2 = [level.cell_phone, level.stacy];
+  var_2 = [level.stacy];
+  var_4 thread scripts\common\anim::anim_loop(var_2, "office_start_idle", "stop_loop");
+  var_2 = [level.cell_phone, level.stacy];
   level.cell_phone linkTo(level.stacy, "tag_accessory_right");
   level.stacy allowedstances("crouch");
   level.stacy scripts\engine\sp\utility::set_goal_radius(20);
@@ -136,14 +136,14 @@ function security_cam_01_main() {
   scripts\engine\sp\utility::autosave_now();
   ally_nodes_init();
   scripts\engine\sp\utility::display_hint("ambo_direct_hint");
-  level.stacy.animstruct = var4;
+  level.stacy.animstruct = var_4;
   level.stacy waittill("new_position");
   scripts\engine\utility::flag_set("stacy_animating");
-  var4 notify("stop_loop");
-  var2 = [level.stacy];
-  var4 thread scripts\common\anim::anim_single(var2, "office_get_card");
+  var_4 notify("stop_loop");
+  var_2 = [level.stacy];
+  var_4 thread scripts\common\anim::anim_single(var_2, "office_get_card");
   level.stacy waittillmatch("single anim", "end");
-  var4 thread scripts\common\anim::anim_loop(var2, "office_get_card_idle");
+  var_4 thread scripts\common\anim::anim_loop(var_2, "office_get_card_idle");
   scripts\engine\utility::flag_clear("stacy_animating");
   thread securitycam_slow_look();
   scripts\engine\sp\utility::display_hint("camera_change_hint");
@@ -152,21 +152,21 @@ function security_cam_01_main() {
   level.ambassador_rock = undefined;
   scripts\engine\utility::flag_set("ambo_office_open");
   level.stacy waittill("new_position");
-  var4 notify("stop_loop");
-  var2 = [level.stacy];
+  var_4 notify("stop_loop");
+  var_2 = [level.stacy];
 
   if(scripts\engine\utility::flag("stacy_animating_to_node") && !scripts\engine\utility::flag("start_office_exited")) {
-    office_exit_scene(var4);
+    office_exit_scene(var_4);
     level.stacy stopanimScripted();
   } else {
-    var4 thread scripts\common\anim::anim_single(var2, "office_exit");
+    var_4 thread scripts\common\anim::anim_single(var_2, "office_exit");
     wait 3;
   }
 
   scripts\engine\utility::flag_set("start_office_exited");
   scripts\engine\utility::flag_set("ambo_keycard_retreieved");
   level.stacy stopanimScripted();
-  var4 notify("stop_loop");
+  var_4 notify("stop_loop");
 }
 
 function stacy_run_away_watcher() {
@@ -234,22 +234,22 @@ function cctv_camera_overlay() {
 }
 
 function stacy_nav_blockers() {
-  var0 = getEntArray("stacy_nav_blockers", "targetname");
+  var_0 = getEntArray("stacy_nav_blockers", "targetname");
 
-  foreach(var2 in var0) {
-    createnavbadplacebyent(var2, "neutral", "allies");
+  foreach(var_2 in var_0) {
+    createnavbadplacebyent(var_2, "neutral", "allies");
   }
 }
 
-function office_exit_scene(var0) {
-  var1 = [level.stacy];
+function office_exit_scene(var_0) {
+  var_1 = [level.stacy];
   level endon("skip_cabinet_arrival");
-  var0 thread scripts\common\anim::anim_single(var1, "office_exit");
+  var_0 thread scripts\common\anim::anim_single(var_1, "office_exit");
   scripts\engine\utility::flag_set("start_office_exited");
   thread new_position_while_animating_watcher();
   level.stacy waittillmatch("single anim", "end");
   level notify("kill_animating_watcher");
-  var0 thread scripts\common\anim::anim_loop(var1, "office_exit_idle", "stop_loop");
+  var_0 thread scripts\common\anim::anim_loop(var_1, "office_exit_idle", "stop_loop");
   level.stacy waittill("new_position");
   level.stacy thread scripts\common\anim::anim_single_solo(level.stacy, "hallway_exit");
   wait 1;
@@ -297,9 +297,9 @@ function dialogue_cctv_intro_gameplay() {
   level.stacy waittill("new_position");
   level.player scripts\engine\sp\utility::smart_player_dialogue_interrupt("dx_vom_kyle_cctv_01_intro_190");
   wait 5.5;
-  var0 = pre_cam_change_dialogue();
+  var_0 = pre_cam_change_dialogue();
 
-  if(istrue(var0)) {
+  if(istrue(var_0)) {
     level.stacy waittill("new_position");
   }
 
@@ -337,8 +337,8 @@ function pre_cam_change_dialogue() {
   return true;
 }
 
-function check_end_bookcase_dialogue(var0) {
-  while(distance2dsquared(level.player.origin, var0.origin) < 500000) {
+function check_end_bookcase_dialogue(var_0) {
+  while(distance2dsquared(level.player.origin, var_0.origin) < 500000) {
     waitframe();
   }
 
@@ -350,45 +350,45 @@ function mus_cctv() {
   setmusicstate("mx_embassy_cctv");
 }
 
-function dialogue_bookcase_scene(var0, var1, var2) {
+function dialogue_bookcase_scene(var_0, var_1, var_2) {
   level endon("ambo_hot");
   level waittillmatch("finished_cam_switch", 3);
   level endon("end_bookcase_dialogue");
-  thread check_end_bookcase_dialogue(var0);
-  thread say_on_see_butcher(var0);
+  thread check_end_bookcase_dialogue(var_0);
+  thread say_on_see_butcher(var_0);
   wait 1;
-  var0 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_enf_cctv_post_intro_interrogation1_10");
+  var_0 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_enf_cctv_post_intro_interrogation1_10");
   wait 0.3;
-  var0 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_enf_cctv_post_intro_interrogation1_20");
+  var_0 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_enf_cctv_post_intro_interrogation1_20");
   wait 1.8;
-  var2 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_cvm1_cctv_post_intro_interrogation1_30");
+  var_2 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_cvm1_cctv_post_intro_interrogation1_30");
   wait 0.6;
-  var0 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_enf_cctv_post_intro_interrogation1_40");
-  var0 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_enf_cctv_post_intro_interrogation1_50");
+  var_0 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_enf_cctv_post_intro_interrogation1_40");
+  var_0 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_enf_cctv_post_intro_interrogation1_50");
   wait 1.15;
-  var2 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_cvm1_cctv_post_intro_interrogation1_60");
+  var_2 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_cvm1_cctv_post_intro_interrogation1_60");
   wait 0.8;
-  var2 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_cvm1_cctv_post_intro_interrogation1_70");
+  var_2 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_cvm1_cctv_post_intro_interrogation1_70");
   wait 0.6;
-  var0 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_enf_cctv_post_intro_interrogation1_80");
-  var0 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_enf_cctv_post_intro_interrogation1_90");
+  var_0 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_enf_cctv_post_intro_interrogation1_80");
+  var_0 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_enf_cctv_post_intro_interrogation1_90");
   wait 0.7;
-  var0 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_enf_cctv_post_intro_interrogation1_100");
+  var_0 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_enf_cctv_post_intro_interrogation1_100");
   wait 1.6;
-  var2 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_cvm1_cctv_post_intro_interrogation1_110");
+  var_2 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_cvm1_cctv_post_intro_interrogation1_110");
   wait 0.7;
-  var0 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_enf_cctv_post_intro_interrogation1_120");
-  var2 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_cvm1_cctv_post_intro_interrogation1_130");
+  var_0 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_enf_cctv_post_intro_interrogation1_120");
+  var_2 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_cvm1_cctv_post_intro_interrogation1_130");
   wait 1.2;
-  var0 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_enf_cctv_post_intro_interrogation1_140");
+  var_0 scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_enf_cctv_post_intro_interrogation1_140");
   level notify("reset_stacy_nag_delay");
   wait 1;
   level.stacy scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_stac_cctv_post_intro_office_80");
 }
 
-function say_on_see_butcher(var0) {
+function say_on_see_butcher(var_0) {
   level endon("cam_switch");
-  scripts\sp\maps\embassy\embassy_util::wait_lookat(var0, 300, "j_head", 0.1);
+  scripts\sp\maps\embassy\embassy_util::wait_lookat(var_0, 300, "j_head", 0.1);
   level.player scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_kyle_cctv_post_intro_interrogation1_00");
 }
 
@@ -413,10 +413,10 @@ function dialogue_decks_init() {
     level.cctv_vo = spawnStruct();
   }
 
-  var0 = ["dx_vom_kyle_cctv_02_exit_150", "dx_vom_kyle_cctv_02_exit_164"];
-  level.cctv_vo.use_distraction = scripts\engine\sp\utility::create_deck(var0);
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, "dx_vom_stac_cctv_02_wounded_40");
+  var_0 = ["dx_vom_kyle_cctv_02_exit_150", "dx_vom_kyle_cctv_02_exit_164"];
+  level.cctv_vo.use_distraction = scripts\engine\sp\utility::create_deck(var_0);
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, "dx_vom_stac_cctv_02_wounded_40");
 }
 
 function dialogue_cam_change() {
@@ -428,32 +428,32 @@ function dialogue_cam_change() {
   }
 }
 
-function dialogue_cctv_nodes(var0) {
+function dialogue_cctv_nodes(var_0) {
   if(scripts\engine\utility::flag("ambo_hot")) {
     return;
   }
 
   level endon("ambo_hot");
   level.stacy endon("death");
-  var1 = undefined;
+  var_1 = undefined;
 
   if(isDefined(level.stacy.goalnode) && isDefined(level.stacy.goalnode.script_namenumber)) {
-    var1 = strtok(level.stacy.goalnode.script_namenumber, "_");
+    var_1 = strtok(level.stacy.goalnode.script_namenumber, "_");
   }
 
-  var2 = get_line_from_landmark(var0, var1);
+  var_2 = get_line_from_landmark(var_0, var_1);
 
-  if(isDefined(var2)) {
-    if(isstring(var2)) {
-      level.cctv_vo.last_line = var2;
-    } else if(scripts\engine\sp\utility::is_deck(var2)) {
-      level.cctv_vo.last_line = var2 scripts\engine\sp\utility::deck_draw();
+  if(isDefined(var_2)) {
+    if(isstring(var_2)) {
+      level.cctv_vo.last_line = var_2;
+    } else if(scripts\engine\sp\utility::is_deck(var_2)) {
+      level.cctv_vo.last_line = var_2 scripts\engine\sp\utility::deck_draw();
     }
 
     level.player scripts\sp\maps\embassy\embassy_util::say_as_chatter(level.cctv_vo.last_line, 1, 0.5);
   }
 
-  if(!scripts\engine\utility::flag("first_cam_change") || isDefined(var1) && var1[0] == "hallway") {
+  if(!scripts\engine\utility::flag("first_cam_change") || isDefined(var_1) && var_1[0] == "hallway") {
     return;
   }
 
@@ -463,92 +463,92 @@ function dialogue_cctv_nodes(var0) {
   }
 }
 
-function get_line_from_landmark(var0, var1) {
+function get_line_from_landmark(var_0, var_1) {
   level.has_said_cam_switch = 0;
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return level.cctv_vo.commands["generic"];
   }
 
-  var2 = var0;
-  var0 = strtok(var0, "_");
-  var3 = self;
+  var_2 = var_0;
+  var_0 = strtok(var_0, "_");
+  var_3 = self;
   thread stacy_direction_nags();
 
-  if(isDefined(var0) && var0[0] == "exit") {
+  if(isDefined(var_0) && var_0[0] == "exit") {
     level.player thread scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_kyle_cctv_02_exit_180", 1);
     return;
   }
 
-  if(isDefined(var2) && var2 == "cubical_9_copier") {
+  if(isDefined(var_2) && var_2 == "cubical_9_copier") {
     return level.cctv_vo.commands["shredder"];
   }
 
-  if(isDefined(level.stacy.previous_node) && level.stacy.previous_node == var3) {
+  if(isDefined(level.stacy.previous_node) && level.stacy.previous_node == var_3) {
     return level.cctv_vo.commands["back"];
-  } else if(isDefined(var2) && var2 == "cart_door" && !istrue(level.cctv_vo.said_cart)) {
+  } else if(isDefined(var_2) && var_2 == "cart_door" && !istrue(level.cctv_vo.said_cart)) {
     level.cctv_vo.said_cart = 1;
     return "dx_vom_kyle_cctv_post_intro_office_40";
-  } else if(isDefined(var2) && var2 == "corner_1" && !istrue(level.cctv_vo.said_pillar)) {
+  } else if(isDefined(var_2) && var_2 == "corner_1" && !istrue(level.cctv_vo.said_pillar)) {
     level.cctv_vo.said_pillar = 1;
     return "dx_vom_kyle_cctv_post_intro_office_141";
-  } else if(isDefined(var2) && var2 == "shelf_1_cart" && !istrue(level.cctv_vo.said_shelf)) {
+  } else if(isDefined(var_2) && var_2 == "shelf_1_cart" && !istrue(level.cctv_vo.said_shelf)) {
     level.cctv_vo.said_shelf = 1;
     return "dx_vom_kyle_cctv_post_intro_office_140";
-  } else if(var2 == "hallway_exit" && isDefined(var1) && var1[0] == "hallway" && !istrue(level.cctv_vo.said_around_corner_hallway)) {
+  } else if(var_2 == "hallway_exit" && isDefined(var_1) && var_1[0] == "hallway" && !istrue(level.cctv_vo.said_around_corner_hallway)) {
     level.cctv_vo.said_around_corner_hallway = 1;
     return "dx_vom_kyle_cctv_post_intro_office_144";
-  } else if(var0[0] == "hallway" && isDefined(var1) && var1[0] == "hallway" && !istrue(level.cctv_vo.said_cont_hallway)) {
+  } else if(var_0[0] == "hallway" && isDefined(var_1) && var_1[0] == "hallway" && !istrue(level.cctv_vo.said_cont_hallway)) {
     level.cctv_vo.said_cont_hallway = 1;
     return "dx_vom_kyle_cctv_post_intro_office_143";
-  } else if(var2 == "hallway_corner" && isDefined(var1) && var1[0] == "hallway" && !istrue(level.cctv_vo.said_hallway_corner)) {
+  } else if(var_2 == "hallway_corner" && isDefined(var_1) && var_1[0] == "hallway" && !istrue(level.cctv_vo.said_hallway_corner)) {
     level.cctv_vo.said_hallway_corner = 1;
     return "dx_vom_kyle_cctv_post_intro_office_310";
-  } else if(isDefined(var2) && var2 == "desk_1_body" && !istrue(level.cctv_vo.said_body)) {
+  } else if(isDefined(var_2) && var_2 == "desk_1_body" && !istrue(level.cctv_vo.said_body)) {
     return "dx_vom_kyle_cctv_post_intro_office_120";
   }
 
-  if(isDefined(var2) && var2 == "cubicle_9_copier") {
+  if(isDefined(var_2) && var_2 == "cubicle_9_copier") {
     return level.cctv_vo.commands["shredder"];
   }
 
-  if(isDefined(var1) && are_part_of_same_landmark(var0, var1) && var0[0] == "desk") {
-    if(var2 == "desk_1_cart") {
+  if(isDefined(var_1) && are_part_of_same_landmark(var_0, var_1) && var_0[0] == "desk") {
+    if(var_2 == "desk_1_cart") {
       return level.cctv_vo.commands["cart"];
     }
 
-    if(var2 == "desk_1_inside") {
+    if(var_2 == "desk_1_inside") {
       return "dx_vom_kyle_cctv_post_intro_office_145";
     }
 
     return "dx_vom_kyle_cctv_post_intro_office_250";
-  } else if(var0[0] == "desk") {
+  } else if(var_0[0] == "desk") {
     return "dx_vom_kyle_cctv_post_intro_office_230";
-  } else if(isDefined(var0) && var0[0] == "hallway" && (!isDefined(var1) || var1[0] != "hallway")) {
+  } else if(isDefined(var_0) && var_0[0] == "hallway" && (!isDefined(var_1) || var_1[0] != "hallway")) {
     return "dx_vom_kyle_cctv_post_intro_office_260";
-  } else if(isDefined(var0) && var0[0] == "whiteboard" && (!isDefined(var1) || var1[0] != "whiteboard")) {
+  } else if(isDefined(var_0) && var_0[0] == "whiteboard" && (!isDefined(var_1) || var_1[0] != "whiteboard")) {
     return "dx_vom_kyle_cctv_02_exit_60";
-  } else if(isDefined(var0) && var0[0] == "chair" && (!isDefined(var1) || var1[0] != "chair")) {
+  } else if(isDefined(var_0) && var_0[0] == "chair" && (!isDefined(var_1) || var_1[0] != "chair")) {
     return "dx_vom_kyle_cctv_post_intro_office_148";
   }
 
-  if(var0[0] == "shelf" && isDefined(var1) && var1[0] == "shelf") {
-    if(are_part_of_same_landmark(var0, var1)) {
+  if(var_0[0] == "shelf" && isDefined(var_1) && var_1[0] == "shelf") {
+    if(are_part_of_same_landmark(var_0, var_1)) {
       return "dx_vom_kyle_cctv_post_intro_office_142";
     } else {
       return level.cctv_vo.commands["cubicle_other"];
     }
   }
 
-  if(var0[0] == "cubicle" && isDefined(var1) && var1[0] == "cubicle") {
-    if(are_part_of_same_landmark(var0, var1)) {
-      if(var1[2] == "inside") {
+  if(var_0[0] == "cubicle" && isDefined(var_1) && var_1[0] == "cubicle") {
+    if(are_part_of_same_landmark(var_0, var_1)) {
+      if(var_1[2] == "inside") {
         if(level.cctv_vo.commands["outside"] scripts\engine\sp\utility::deck_is_empty()) {
           level.cctv_vo.commands["outside"] scripts\sp\maps\embassy\embassy_util::array_deck_shuffle();
         }
 
         return level.cctv_vo.commands["outside"] scripts\engine\sp\utility::deck_draw();
-      } else if(var0[2] == "outside") {
+      } else if(var_0[2] == "outside") {
         return level.cctv_vo.commands["otherside"] scripts\engine\sp\utility::deck_draw();
       } else {
         if(level.cctv_vo.commands["inside"] scripts\engine\sp\utility::deck_is_empty()) {
@@ -560,23 +560,23 @@ function get_line_from_landmark(var0, var1) {
     } else {
       return level.cctv_vo.commands["cubicle_other"];
     }
-  } else if(isDefined(var1) && var0[0] == var1[0]) {
+  } else if(isDefined(var_1) && var_0[0] == var_1[0]) {
     return "dx_vom_kyle_cctv_post_intro_office_110";
   }
 
-  if(!isDefined(level.cctv_vo.commands[var0[0]])) {
+  if(!isDefined(level.cctv_vo.commands[var_0[0]])) {
     return level.cctv_vo.commands["generic"];
   }
 
-  return level.cctv_vo.commands[var0[0]];
+  return level.cctv_vo.commands[var_0[0]];
 }
 
-function are_part_of_same_landmark(var0, var1) {
-  var2 = isDefined(var0) && isDefined(var1);
-  var3 = scripts\engine\utility::is_equal(var0[0], var1[0]);
-  var4 = !isDefined(var0[1]) && !isDefined(var1[1]);
-  var4 = var4 || scripts\engine\utility::is_equal(var0[1], var1[1]);
-  return var2 && var3 && var4;
+function are_part_of_same_landmark(var_0, var_1) {
+  var_2 = isDefined(var_0) && isDefined(var_1);
+  var_3 = scripts\engine\utility::is_equal(var_0[0], var_1[0]);
+  var_4 = !isDefined(var_0[1]) && !isDefined(var_1[1]);
+  var_4 = var_4 || scripts\engine\utility::is_equal(var_0[1], var_1[1]);
+  return var_2 && var_3 && var_4;
 }
 
 function stacy_direction_nags() {
@@ -608,9 +608,9 @@ function stacy_direction_nags() {
   }
 }
 
-function wait_stacy_nag_time(var0, var1) {
+function wait_stacy_nag_time(var_0, var_1) {
   level endon("reset_stacy_nag_delay");
-  wait randomfloatrange(var0 - var1, var0 + var1);
+  wait randomfloatrange(var_0 - var_1, var_0 + var_1);
   return true;
 }
 
@@ -667,7 +667,7 @@ function dialogue_cctv_first_room_exit() {
 
 function cctv_fade_in() {
   level.player freezecontrols(1);
-  var0 = undefined;
+  var_0 = undefined;
   wait 1;
   scripts\engine\utility::flag_set("player_controls_enabled");
   level.player freezecontrols(0);
@@ -706,7 +706,7 @@ function security_cam_01_post_intro_start() {
   thread objective_manager();
   ally_nodes_init();
   camera_controller_init();
-  var0 = scripts\engine\sp\utility::array_spawn_targetname("patrol_03", 1);
+  var_0 = scripts\engine\sp\utility::array_spawn_targetname("patrol_03", 1);
   thread aq_chatter();
   thread start_point_vision_set();
   thread mission_failed();
@@ -749,7 +749,7 @@ function security_cam_02_start() {
   thread objective_manager();
   ally_nodes_init();
   camera_controller_init();
-  var0 = scripts\engine\sp\utility::array_spawn_targetname("patrol_03", 1);
+  var_0 = scripts\engine\sp\utility::array_spawn_targetname("patrol_03", 1);
   thread start_point_vision_set();
   thread audio_cctv_mix();
   thread aq_chatter();
@@ -783,9 +783,9 @@ function security_cam_02_main() {
   thread cctv_part_3_fail_trig();
   thread distraction_structs();
   thread distraction_dialogue();
-  var0 = getEnt("end_game_volume", "targetname");
+  var_0 = getEnt("end_game_volume", "targetname");
 
-  while(!level.stacy istouching(var0)) {
+  while(!level.stacy istouching(var_0)) {
     waitframe();
   }
 
@@ -802,10 +802,10 @@ function security_cam_02_main() {
   level.stacy waittill("goal");
   level.stacy.ignoreme = 1;
   scripts\engine\utility::flag_set("survivior_escapes");
-  var1 = getEnt("rescue_trigger", "targetname");
-  var2 = createnavbadplacebyent(var1, "axis");
-  var3 = getnodearray("ally_nodes", "targetname");
-  scripts\engine\utility::array_thread(var3, &ally_nodes_interact_remove);
+  var_1 = getEnt("rescue_trigger", "targetname");
+  var_2 = createnavbadplacebyent(var_1, "axis");
+  var_3 = getnodearray("ally_nodes", "targetname");
+  scripts\engine\utility::array_thread(var_3, &ally_nodes_interact_remove);
   thread camera_interacts_remover();
   level.stacy scripts\common\ai::magic_bullet_shield();
   thread escape_dialogue();
@@ -815,49 +815,49 @@ function security_cam_02_main() {
   level.stacy scripts\common\anim::anim_single_solo(level.stacy, "card_swipe");
   level.friendlies = scripts\engine\sp\utility::array_spawn_targetname("civ_rescuers", 1);
   level.stacy.swipe = 1;
-  var4 = getEnt("exit_door", "targetname");
-  var4 rotateYaw(-90, 1);
+  var_4 = getEnt("exit_door", "targetname");
+  var_4 rotateYaw(-90, 1);
   wait 0.5;
 
-  foreach(var6 in level.friendlies) {
-    var6 scripts\engine\utility::set_movement_speed(120);
-    var6 scripts\engine\sp\utility::set_ignoresuppression(1);
-    var6.ignoreme = 0;
-    var6 scripts\engine\sp\utility::set_maxfaceenemydist(2000);
-    var6.ignoreall = 0;
-    var6.attackeraccuracy = 0;
-    var6 scripts\common\ai::magic_bullet_shield();
-    var6 allowedstances("stand", "crouch");
-    var6 getenemyinfo(level.exit_guard);
-    var6 enableavoidance(0, 0);
+  foreach(var_6 in level.friendlies) {
+    var_6 scripts\engine\utility::set_movement_speed(120);
+    var_6 scripts\engine\sp\utility::set_ignoresuppression(1);
+    var_6.ignoreme = 0;
+    var_6 scripts\engine\sp\utility::set_maxfaceenemydist(2000);
+    var_6.ignoreall = 0;
+    var_6.attackeraccuracy = 0;
+    var_6 scripts\common\ai::magic_bullet_shield();
+    var_6 allowedstances("stand", "crouch");
+    var_6 getenemyinfo(level.exit_guard);
+    var_6 enableavoidance(0, 0);
 
-    if(scripts\engine\utility::is_equal(var6.model, "body_hero_farah")) {
-      var6.name = "Farah";
+    if(scripts\engine\utility::is_equal(var_6.model, "body_hero_farah")) {
+      var_6.name = "Farah";
       continue;
     }
 
-    var6.name = "Captain Price";
+    var_6.name = "Captain Price";
   }
 
-  var8 = getEnt("ambo_exit_trigger_03", "targetname");
-  var9 = getEnt("end_game_exit_volume", "targetname");
+  var_8 = getEnt("ambo_exit_trigger_03", "targetname");
+  var_9 = getEnt("end_game_exit_volume", "targetname");
   level notify("get_her_out");
   wait 2;
   level notify("holy_shit");
-  level.stacy setgoalvolumeauto(var9);
+  level.stacy setgoalvolumeauto(var_9);
   wait 4;
 
-  foreach(var6 in level.friendlies) {
-    if(scripts\engine\utility::is_equal(var6.model, "body_hero_farah")) {
-      var6 setgoalvolumeauto(var9);
+  foreach(var_6 in level.friendlies) {
+    if(scripts\engine\utility::is_equal(var_6.model, "body_hero_farah")) {
+      var_6 setgoalvolumeauto(var_9);
     }
   }
 
   wait 1;
   level notify("get back");
 
-  foreach(var6 in level.friendlies) {
-    var6 setgoalvolumeauto(var9);
+  foreach(var_6 in level.friendlies) {
+    var_6 setgoalvolumeauto(var_9);
   }
 
   wait 3;
@@ -865,25 +865,25 @@ function security_cam_02_main() {
   wait 1;
   setomnvar("ui_cctv_active", 0);
 
-  foreach(var15 in level.stacy_bad_places) {
-    destroynavobstacle(var15);
+  foreach(var_15 in level.stacy_bad_places) {
+    destroynavobstacle(var_15);
   }
 
   cctv_camera_look_speed(level.player, 0);
-  var17 = scripts\sp\hud_util::create_client_overlay("black", 0);
-  var17 fadeovertime(0.1);
-  var17.alpha = 1;
+  var_17 = scripts\sp\hud_util::create_client_overlay("black", 0);
+  var_17 fadeovertime(0.1);
+  var_17.alpha = 1;
   wait 1;
   level.player modifybasefov(65, 0.05);
-  var18 = getaiarray("axis", "allies", "neutral");
+  var_18 = getaiarray("axis", "allies", "neutral");
 
-  foreach(var6 in var18) {
-    if(isDefined(var6.magic_bullet_shield)) {
-      var6 scripts\common\ai::stop_magic_bullet_shield();
+  foreach(var_6 in var_18) {
+    if(isDefined(var_6.magic_bullet_shield)) {
+      var_6 scripts\common\ai::stop_magic_bullet_shield();
     }
   }
 
-  scripts\engine\utility::array_delete(var18);
+  scripts\engine\utility::array_delete(var_18);
   level.player lerpfovscalefactor(1, 0);
   level.player enableweapons();
   level.player showlegsandshadow();
@@ -894,48 +894,48 @@ function security_cam_02_main() {
   thread scripts\engine\sp\utility::battlechatter_on("axis");
   thread scripts\engine\sp\utility::lerp_saveddvar("MLTTMLTKOR", 0, 1);
   scripts\engine\utility::flag_set("cctv_end");
-  destroynavobstacle(var2);
+  destroynavobstacle(var_2);
 
-  foreach(var22 in level.distraction_icons) {
-    if(isDefined(var22)) {
-      setheadiconimage(var22);
+  foreach(var_22 in level.distraction_icons) {
+    if(isDefined(var_22)) {
+      setheadiconimage(var_22);
     }
   }
 
   visionsetnaked("", 0);
-  thread fade_up(var17);
+  thread fade_up(var_17);
 }
 
-function fade_up(var0) {
+function fade_up(var_0) {
   wait 0.25;
-  var0 fadeovertime(0.1);
-  var0.alpha = 0;
+  var_0 fadeovertime(0.1);
+  var_0.alpha = 0;
 }
 
 function camera_nav_obstacle() {
-  var0 = spawnStruct();
-  var0.origin = (-6011, -1797, -700);
-  var1 = createnavbadplacebybounds(var0.origin, (25, 25, 100), (0, 0, 0));
+  var_0 = spawnStruct();
+  var_0.origin = (-6011, -1797, -700);
+  var_1 = createnavbadplacebybounds(var_0.origin, (25, 25, 100), (0, 0, 0));
   scripts\engine\utility::flag_wait("cctv_end");
-  destroynavobstacle(var1);
+  destroynavobstacle(var_1);
 }
 
 function left_path_nav_obstacle() {
   level endon("cctv_end");
   level.stacy endon("death");
-  var0 = getEnt("left_path_trigger", "targetname");
-  var0.vol = var0 scripts\engine\utility::get_target_ent();
+  var_0 = getEnt("left_path_trigger", "targetname");
+  var_0.vol = var_0 scripts\engine\utility::get_target_ent();
 
   for(;;) {
     scripts\engine\sp\utility::trigger_wait_targetname("left_path_trigger");
-    var1 = createnavbadplacebyent(var0.vol, "allies", "neutral");
+    var_1 = createnavbadplacebyent(var_0.vol, "allies", "neutral");
 
-    while(level.stacy istouching(var0)) {
+    while(level.stacy istouching(var_0)) {
       waitframe();
     }
 
     wait 1;
-    destroynavobstacle(var1);
+    destroynavobstacle(var_1);
   }
 }
 
@@ -944,8 +944,8 @@ function left_path_avoidance() {}
 function cctv_part_3_fail_trig() {
   scripts\engine\sp\utility::trigger_wait_targetname("cctv_part_3_fail_trig");
   scripts\engine\utility::flag_set("ambo_hot");
-  var0 = getaiarray("axis");
-  scripts\engine\utility::array_thread(var0, &enemy_engages_ambo);
+  var_0 = getaiarray("axis");
+  scripts\engine\utility::array_thread(var_0, &enemy_engages_ambo);
 }
 
 function distraction_dialogue() {
@@ -953,8 +953,8 @@ function distraction_dialogue() {
   scripts\engine\utility::flag_wait("exit_dialogue");
   level.stacy notify("stop_nags");
   level.has_said_cam_switch = 1;
-  var0 = getnodearray("ally_nodes", "targetname");
-  scripts\engine\utility::array_thread(var0, &ally_nodes_interact_remove);
+  var_0 = getnodearray("ally_nodes", "targetname");
+  scripts\engine\utility::array_thread(var_0, &ally_nodes_interact_remove);
   level.player scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_kyle_cctv_02_exit_100", 1, 2);
   level.stacy thread scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_stac_cctv_02_exit_130", 1);
   wait 0.55;
@@ -978,38 +978,38 @@ function escape_dialogue() {
 
 function distraction_structs() {
   level.distraction_icons = [];
-  var0 = getEntArray("distraction_triggers", "targetname");
-  scripts\engine\utility::array_thread(var0, &distraction_triggers_logic);
+  var_0 = getEntArray("distraction_triggers", "targetname");
+  scripts\engine\utility::array_thread(var_0, &distraction_triggers_logic);
 }
 
 function distraction_triggers_logic() {
   self endon("walked_away");
   self.struct = scripts\engine\utility::get_target_ent();
-  var0 = scripts\engine\utility::spawn_tag_origin(self.struct.origin, self.struct.angles);
-  var1 = &"EMBASSY/CCTV_POWER";
-  var2 = 800;
-  var3 = 800;
-  var4 = "icon_electronic_interact";
+  var_0 = scripts\engine\utility::spawn_tag_origin(self.struct.origin, self.struct.angles);
+  var_1 = &"EMBASSY/CCTV_POWER";
+  var_2 = 800;
+  var_3 = 800;
+  var_4 = "icon_electronic_interact";
   self.fx_struct = scripts\engine\utility::get_target_ent();
   thread distraction_fx();
-  var5 = deleteheadicon(var0);
-  setheadiconfriendlyimage(var5, "icon_electronic_interact");
-  setheadiconzoffset(var5, 1);
-  setheadiconsnaptoedges(var5, 500);
-  setheadiconmaxdistance(var5, 1);
-  addclienttoheadiconmask(var5, -20);
-  level.distraction_icons[level.distraction_icons.size] = var5;
+  var_5 = deleteheadicon(var_0);
+  setheadiconfriendlyimage(var_5, "icon_electronic_interact");
+  setheadiconzoffset(var_5, 1);
+  setheadiconsnaptoedges(var_5, 500);
+  setheadiconmaxdistance(var_5, 1);
+  addclienttoheadiconmask(var_5, -20);
+  level.distraction_icons[level.distraction_icons.size] = var_5;
   self waittill("trigger");
-  level.distraction_icons = scripts\engine\utility::array_remove(level.distraction_icons, var5);
-  setheadiconimage(var5);
+  level.distraction_icons = scripts\engine\utility::array_remove(level.distraction_icons, var_5);
+  setheadiconimage(var_5);
   thread remove_distraction_interact();
   thread remove_distraction_interact_on_end();
-  self.struct scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, -20), var1, 70, var2, var3, 1, 0, 0, var4, "duration_none", undefined, undefined, 50);
+  self.struct scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, -20), var_1, 70, var_2, var_3, 1, 0, 0, var_4, "duration_none", undefined, undefined, 50);
   self.struct waittill("trigger");
 
   if(scripts\engine\utility::is_equal(self.struct.targetname, "shredder")) {
-    var6 = getEnt("stacy_nav_blockers_end", "targetname");
-    createnavbadplacebyent(var6, "allies", "neutral");
+    var_6 = getEnt("stacy_nav_blockers_end", "targetname");
+    createnavbadplacebyent(var_6, "allies", "neutral");
   }
 
   level notify("reset_stacy_nag_delay");
@@ -1020,30 +1020,30 @@ function distraction_triggers_logic() {
   scripts\engine\utility::flag_set("exit_distraction");
 }
 
-function icon_death_watcher(var0) {
+function icon_death_watcher(var_0) {
   level endon("cctv_end");
   level.stacy waittill("death");
   wait 0.1;
 
-  if(isDefined(var0)) {
-    setheadiconimage(var0);
+  if(isDefined(var_0)) {
+    setheadiconimage(var_0);
     return;
   }
 }
 
 function distraction_fx() {
-  var0 = scripts\engine\utility::getStruct("distraction_shredder_struct", "targetname");
-  var1 = scripts\engine\utility::getStruct("distraction_printer_struct", "targetname");
+  var_0 = scripts\engine\utility::getStruct("distraction_shredder_struct", "targetname");
+  var_1 = scripts\engine\utility::getStruct("distraction_printer_struct", "targetname");
 
   if(scripts\engine\utility::is_equal(self.fx_struct.targetname, "shredder")) {
-    self.fx_tag = scripts\engine\utility::spawn_tag_origin(var0.origin, var0.angles);
+    self.fx_tag = scripts\engine\utility::spawn_tag_origin(var_0.origin, var_0.angles);
     playFXOnTag(scripts\engine\utility::getfx("vfx_un_office_paper_shredder_01_paper"), self.fx_tag, "tag_origin");
     self.struct waittill("trigger");
     stopFXOnTag(scripts\engine\utility::getfx("vfx_un_office_paper_shredder_01_paper"), self.fx_tag, "tag_origin");
     playFXOnTag(scripts\engine\utility::getfx("vfx_un_office_paper_shredder_01_paper_shreding"), self.fx_tag, "tag_origin");
     level.player playSound("emb_cctv_shredder_activate");
   } else if(scripts\engine\utility::is_equal(self.fx_struct.targetname, "copier_01")) {
-    self.fx_tag = scripts\engine\utility::spawn_tag_origin(var1.origin, var1.angles);
+    self.fx_tag = scripts\engine\utility::spawn_tag_origin(var_1.origin, var_1.angles);
     self.struct waittill("trigger");
     playFXOnTag(scripts\engine\utility::getfx("vfx_copier_scan"), self.fx_tag, "tag_origin");
     level.player playSound("emb_cctv_copier_activate");
@@ -1159,10 +1159,10 @@ function stacy_idle_watcher() {
 
 function ambo_badplaces() {
   level.stacy_bad_places = [];
-  var0 = scripts\engine\utility::getStructArray("nav_excluser_struct", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("nav_excluser_struct", "targetname");
 
-  foreach(var2 in var0) {
-    level.stacy_bad_places[level.stacy_bad_places.size] = createnavbadplacebybounds(var2.origin, (10, 40, 20), (0, 0, 0), "allies");
+  foreach(var_2 in var_0) {
+    level.stacy_bad_places[level.stacy_bad_places.size] = createnavbadplacebybounds(var_2.origin, (10, 40, 20), (0, 0, 0), "allies");
   }
 }
 
@@ -1189,17 +1189,17 @@ function outline_ping() {
   level endon("player_pushed_focus");
   level endon("cam_switch");
   level.stacy scripts\engine\sp\utility::hudoutline_enable_new("outline_nodepth_red", "cctv");
-  var0 = 1;
-  var1 = 1;
+  var_0 = 1;
+  var_1 = 1;
   wait 2;
-  var2 = 0.05;
-  var3 = int(var1 / var2);
+  var_2 = 0.05;
+  var_3 = int(var_1 / var_2);
 
-  while(var3) {
-    setsaveddvar("NSNOLMTLLL", "1 1 1 " + scripts\engine\utility::string(var0));
-    var0 -= var2;
-    var3--;
-    wait var2;
+  while(var_3) {
+    setsaveddvar("NSNOLMTLLL", "1 1 1 " + scripts\engine\utility::string(var_0));
+    var_0 -= var_2;
+    var_3--;
+    wait var_2;
   }
 
   level.stacy scripts\engine\sp\utility::hudoutline_disable("cctv");
@@ -1233,8 +1233,8 @@ function cctv_save_points() {
   scripts\engine\utility::flag_wait_any("save_cubicles", "rescue_allowed");
 
   if(getdvarint("scr_emb_cctv_caught", 1)) {
-    var0 = getaiarray("axis");
-    scripts\engine\utility::array_thread(var0, &enemy_engages_ambo);
+    var_0 = getaiarray("axis");
+    scripts\engine\utility::array_thread(var_0, &enemy_engages_ambo);
     return;
   }
 
@@ -1252,21 +1252,21 @@ function cctv_save_points() {
 }
 
 function hudoutline_cctv_settings() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, "MKOQSSQKLL", 1.8);
 }
 
 function kitchen_enter_init() {
-  var0 = getEnt("kitchen_door", "targetname");
-  var0.clip = var0 scripts\engine\utility::get_target_ent();
-  var0.clip linkTo(var0);
-  var0.clip connectpaths();
+  var_0 = getEnt("kitchen_door", "targetname");
+  var_0.clip = var_0 scripts\engine\utility::get_target_ent();
+  var_0.clip linkTo(var_0);
+  var_0.clip connectpaths();
   thread kitchen_door_disconnect_paths();
   scripts\engine\sp\utility::trigger_wait("kitchen_door_trig", "targetname");
-  var0 rotateYaw(-90, 0.5);
+  var_0 rotateYaw(-90, 0.5);
   wait 0.5;
-  var0 rotateYaw(90, 1.5);
-  var0.clip disconnectPaths();
+  var_0 rotateYaw(90, 1.5);
+  var_0.clip disconnectPaths();
 }
 
 function kitchen_door_disconnect_paths() {
@@ -1275,48 +1275,48 @@ function kitchen_door_disconnect_paths() {
 }
 
 function ally_nodes_init() {
-  var0 = getnodearray("ally_nodes", "targetname");
-  scripts\engine\utility::array_thread(var0, &ally_nodes_interact);
+  var_0 = getnodearray("ally_nodes", "targetname");
+  scripts\engine\utility::array_thread(var_0, &ally_nodes_interact);
 }
 
 function ally_nodes_interact() {
-  var0 = 2;
-  var1 = 525;
-  var2 = 525;
-  var3 = 15;
-  var4 = 40;
-  var5 = 50;
+  var_0 = 2;
+  var_1 = 525;
+  var_2 = 525;
+  var_3 = 15;
+  var_4 = 40;
+  var_5 = 50;
 
   if(isDefined(self.script_parameters)) {
-    var3 = int(self.script_parameters);
+    var_3 = int(self.script_parameters);
   }
 
-  var6 = undefined;
-  var7 = "";
-  var8 = "+attack";
+  var_6 = undefined;
+  var_7 = "";
+  var_8 = "+attack";
 
   if(scripts\engine\utility::is_equal(self.script_namenumber, "exit")) {
-    var0 = 40;
-    var1 = 800;
-    var7 = &"EMBASSY/CCTV_DOOR";
+    var_0 = 40;
+    var_1 = 800;
+    var_7 = &"EMBASSY/CCTV_DOOR";
     level.exit_node = self;
   }
 
   if(scripts\engine\utility::is_equal(self.script_namenumber, "hallway")) {
-    var1 = 700;
+    var_1 = 700;
   }
 
   if(scripts\engine\utility::is_equal(self.script_namenumber, "door")) {
-    var1 = 400;
-    var2 = 400;
+    var_1 = 400;
+    var_2 = 400;
   }
 
   level endon("nuke_nodes");
   self endon("cctv_end");
   level.stacy endon("death");
-  var9 = scripts\engine\utility::getStruct("floor_03_struct", "targetname");
+  var_9 = scripts\engine\utility::getStruct("floor_03_struct", "targetname");
   self.struct = spawnStruct();
-  self.struct.origin = (self.origin[0], self.origin[1], var9.origin[2] + var0);
+  self.struct.origin = (self.origin[0], self.origin[1], var_9.origin[2] + var_0);
   self.struct.angles = self.angles;
   self.struct.radius = 64;
   self.alt_node = undefined;
@@ -1326,7 +1326,7 @@ function ally_nodes_interact() {
   }
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "ambo_office") {
-    var4 = 90;
+    var_4 = 90;
   }
 
   if(isDefined(self.script_namenumber) && self.script_namenumber == "corner_2") {
@@ -1338,19 +1338,19 @@ function ally_nodes_interact() {
       waitframe();
     }
 
-    var1 = 400;
-    var2 = 400;
+    var_1 = 400;
+    var_2 = 400;
   }
 
   jumpiffalse(isDefined(self.script_namenumber) && self.script_namenumber == "cubicle_4_inside") LOC_000001af;
-  var3 = 20;
+  var_3 = 20;
 
   for(;;) {
     if(scripts\engine\utility::flag("final_patrol_go_1")) {
       scripts\engine\utility::flag_waitopen("final_patrol_go_1");
     }
 
-    self.struct scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, var3), var7, var4, var2, var1, 0, 0, 0, var6, "duration_none", var8, undefined, var5);
+    self.struct scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, var_3), var_7, var_4, var_2, var_1, 0, 0, 0, var_6, "duration_none", var_8, undefined, var_5);
     self.struct waittill("trigger");
     level.player playSound("emb_cctv_ui_move_select");
     level endon("final_patrol_go_1");
@@ -1382,15 +1382,15 @@ function ally_nodes_interact() {
       scripts\engine\utility::flag_waitopen("stacy_animating");
     }
 
-    var10 = self;
+    var_10 = self;
 
     if(scripts\engine\utility::is_equal(self.script_namenumber, "kitchen")) {
-      var10 = getnode("kitchen_node", "script_noteworthy");
+      var_10 = getnode("kitchen_node", "script_noteworthy");
     }
 
-    var11 = distance(level.stacy.origin, var10.origin);
+    var_11 = distance(level.stacy.origin, var_10.origin);
 
-    if((!scripts\engine\utility::flag("ambo_hot") || scripts\engine\utility::flag("survivior_escapes")) && var11 < 1000) {
+    if((!scripts\engine\utility::flag("ambo_hot") || scripts\engine\utility::flag("survivior_escapes")) && var_11 < 1000) {
       level.stacy scripts\engine\sp\utility::set_goal_radius(5);
 
       if(scripts\engine\utility::flag("survivior_escapes")) {
@@ -1403,7 +1403,7 @@ function ally_nodes_interact() {
       }
 
       level.stacy.previous_node = level.stacy.goalnode;
-      level.stacy setgoalnode(var10);
+      level.stacy setgoalnode(var_10);
     }
 
     level.stacy.anim_struct = self.struct;
@@ -1412,11 +1412,11 @@ function ally_nodes_interact() {
       break;
     }
 
-    if(var11 < 1000) {
+    if(var_11 < 1000) {
       level.stacy waittill("new_position");
     }
 
-    if(var11 > 1000) {
+    if(var_11 > 1000) {
       wait 1;
 
       if(!isDefined(level.cctv_vo)) {
@@ -1424,8 +1424,8 @@ function ally_nodes_interact() {
       }
 
       if(!isDefined(level.cctv_vo.too_far)) {
-        var12 = ["dx_vom_stac_cctv_02_fastpass_20", "dx_vom_stac_cctv_02_fastpass_30"];
-        level.cctv_vo.too_far = scripts\engine\sp\utility::create_deck(var12);
+        var_12 = ["dx_vom_stac_cctv_02_fastpass_20", "dx_vom_stac_cctv_02_fastpass_30"];
+        level.cctv_vo.too_far = scripts\engine\sp\utility::create_deck(var_12);
       }
 
       level.stacy scripts\sp\maps\embassy\embassy_util::say_as_chatter(level.cctv_vo.too_far scripts\engine\sp\utility::deck_draw(), 1, 1);
@@ -1443,10 +1443,10 @@ function ally_nodes_interact_remove() {
 }
 
 function chair_rotate() {
-  var0 = getEnt("push_chair", "targetname");
-  var0 rotateYaw(-40, 1, 0, 0.25);
+  var_0 = getEnt("push_chair", "targetname");
+  var_0 rotateYaw(-40, 1, 0, 0.25);
   wait 1;
-  var0 rotateYaw(-20, 1, 0, 0.25);
+  var_0 rotateYaw(-20, 1, 0, 0.25);
 }
 
 function ally_nodes_interact_recall() {
@@ -1462,99 +1462,99 @@ function camera_controller_init() {
   level.player allowprone(0);
   level.player allowcrouch(0);
   level.player.ignoreme = 1;
-  var0 = spawnStruct();
-  var1 = getEnt("cam_01", "script_noteworthy");
-  var1.angles = (180, 0, 0);
-  var0.origin = (-6968, -383, -530);
-  var0.angles = (30, 51, 0);
-  var0 = scripts\engine\utility::spawn_tag_origin(var0.origin, var0.angles);
-  var1.origin = (var0.origin[0], var0.origin[1], -463);
-  var0.mod = var1;
-  var0.test = [30, 51, 0];
-  var2 = spawnStruct();
-  var3 = getEnt("cam_02", "script_noteworthy");
-  var2.origin = (-6988, -43, -530);
-  var2.angles = (35, 322, 0);
-  var2 = scripts\engine\utility::spawn_tag_origin(var2.origin, var2.angles);
-  var3.origin = (var2.origin[0], var2.origin[1], -463);
-  var3.angles = (180, var2.angles[1] + 20, 0);
-  var2.mod = var3;
-  var4 = spawnStruct();
-  var5 = getEnt("cam_03", "script_noteworthy");
-  var4.origin = (-6310, -53, -530);
-  var4.angles = (28, 186, 0);
-  var4 = scripts\engine\utility::spawn_tag_origin(var4.origin, var4.angles);
-  var5.origin = (var4.origin[0], var4.origin[1], -463);
-  var5.angles = (180, var4.angles[1], 0);
-  var4.mod = var5;
-  var4.wall_kill_reveal = 1;
-  var6 = spawnStruct();
-  var7 = getEnt("cam_04", "script_noteworthy");
-  var6.origin = (-6000, -500, -530);
-  var6.offset = (-5080, -500, -530);
-  var6.angles = (34, 134, 0);
-  var6 = scripts\engine\utility::spawn_tag_origin(var6.origin, var6.angles);
-  var7.origin = (var6.origin[0], var6.origin[1], -463);
-  var7.angles = (180, 0, 0);
-  var6.mod = var7;
-  var6.crawl_node_reveal = 1;
-  var8 = spawnStruct();
-  var9 = getEnt("cam_12", "script_noteworthy");
-  var8.origin = (-6038, -772, -530);
-  var8.angles = (36, 100, 0);
-  var8 = scripts\engine\utility::spawn_tag_origin(var8.origin, var8.angles);
-  var9.origin = (var8.origin[0], var8.origin[1], -463);
-  var9.angles = (180, 0, 0);
-  var8.mod = var9;
-  var10 = spawnStruct();
-  var11 = getEnt("cam_05", "script_noteworthy");
-  var10.origin = (-7050, -940, -530);
-  var10.angles = (31, -4, 0);
-  var10 = scripts\engine\utility::spawn_tag_origin(var10.origin, var10.angles);
-  var11.origin = (var10.origin[0], var10.origin[1], -463);
-  var11.angles = (180, 0, 0);
-  var10.mod = var11;
-  var12 = spawnStruct();
-  var12.origin = (-7058, -1490, -530);
-  var12.angles = (24, 55.8, 0);
-  var12 = scripts\engine\utility::spawn_tag_origin(var12.origin, var12.angles);
-  var13 = getEnt("cam_06", "script_noteworthy");
-  var13.origin = (var12.origin[0], var12.origin[1], -463);
-  var13.angles = (180, 0, 0);
-  var12.mod = var13;
-  var14 = spawnStruct();
-  var14.origin = (-6472, -1285, -530);
-  var14.angles = (30, -115, 0);
-  var14 = scripts\engine\utility::spawn_tag_origin(var14.origin, var14.angles);
-  var15 = getEnt("cam_08", "script_noteworthy");
-  var15.origin = (var14.origin[0], var14.origin[1], -463);
-  var15.angles = (180, 0, 0);
-  var14.mod = var15;
-  var16 = spawnStruct();
-  var16.origin = (-6002, -1320, -530);
-  var16.angles = (34, -132, 0);
-  var16 = scripts\engine\utility::spawn_tag_origin(var16.origin, var16.angles);
-  var17 = getEnt("cam_09", "script_noteworthy");
-  var17.origin = (var16.origin[0], var16.origin[1], -463);
-  var17.angles = (180, 0, 0);
-  var16.mod = var17;
-  var18 = spawnStruct();
-  var18.origin = (-6011, -1777, -530);
-  var18.angles = (30, -105, 0);
-  var18 = scripts\engine\utility::spawn_tag_origin(var18.origin, var18.angles);
-  var19 = getEnt("cam_10", "script_noteworthy");
-  var19.origin = (var18.origin[0], var18.origin[1], -463);
-  var19.angles = (180, 0, 0);
-  var18.mod = var19;
-  var20 = spawnStruct();
-  var20.origin = (-6446, -995, -530);
-  var20.angles = (30, 50, 0);
-  var20 = scripts\engine\utility::spawn_tag_origin(var20.origin, var20.angles);
-  var21 = getEnt("cam_11", "script_noteworthy");
-  var21.origin = (var20.origin[0], var20.origin[1], -463);
-  var21.angles = (180, 0, 0);
-  var20.mod = var21;
-  level.cams = [var0, var2, var4, var6, var8, var10, var12, var14, var16, var18, var20];
+  var_0 = spawnStruct();
+  var_1 = getEnt("cam_01", "script_noteworthy");
+  var_1.angles = (180, 0, 0);
+  var_0.origin = (-6968, -383, -530);
+  var_0.angles = (30, 51, 0);
+  var_0 = scripts\engine\utility::spawn_tag_origin(var_0.origin, var_0.angles);
+  var_1.origin = (var_0.origin[0], var_0.origin[1], -463);
+  var_0.mod = var_1;
+  var_0.test = [30, 51, 0];
+  var_2 = spawnStruct();
+  var_3 = getEnt("cam_02", "script_noteworthy");
+  var_2.origin = (-6988, -43, -530);
+  var_2.angles = (35, 322, 0);
+  var_2 = scripts\engine\utility::spawn_tag_origin(var_2.origin, var_2.angles);
+  var_3.origin = (var_2.origin[0], var_2.origin[1], -463);
+  var_3.angles = (180, var_2.angles[1] + 20, 0);
+  var_2.mod = var_3;
+  var_4 = spawnStruct();
+  var_5 = getEnt("cam_03", "script_noteworthy");
+  var_4.origin = (-6310, -53, -530);
+  var_4.angles = (28, 186, 0);
+  var_4 = scripts\engine\utility::spawn_tag_origin(var_4.origin, var_4.angles);
+  var_5.origin = (var_4.origin[0], var_4.origin[1], -463);
+  var_5.angles = (180, var_4.angles[1], 0);
+  var_4.mod = var_5;
+  var_4.wall_kill_reveal = 1;
+  var_6 = spawnStruct();
+  var_7 = getEnt("cam_04", "script_noteworthy");
+  var_6.origin = (-6000, -500, -530);
+  var_6.offset = (-5080, -500, -530);
+  var_6.angles = (34, 134, 0);
+  var_6 = scripts\engine\utility::spawn_tag_origin(var_6.origin, var_6.angles);
+  var_7.origin = (var_6.origin[0], var_6.origin[1], -463);
+  var_7.angles = (180, 0, 0);
+  var_6.mod = var_7;
+  var_6.crawl_node_reveal = 1;
+  var_8 = spawnStruct();
+  var_9 = getEnt("cam_12", "script_noteworthy");
+  var_8.origin = (-6038, -772, -530);
+  var_8.angles = (36, 100, 0);
+  var_8 = scripts\engine\utility::spawn_tag_origin(var_8.origin, var_8.angles);
+  var_9.origin = (var_8.origin[0], var_8.origin[1], -463);
+  var_9.angles = (180, 0, 0);
+  var_8.mod = var_9;
+  var_10 = spawnStruct();
+  var_11 = getEnt("cam_05", "script_noteworthy");
+  var_10.origin = (-7050, -940, -530);
+  var_10.angles = (31, -4, 0);
+  var_10 = scripts\engine\utility::spawn_tag_origin(var_10.origin, var_10.angles);
+  var_11.origin = (var_10.origin[0], var_10.origin[1], -463);
+  var_11.angles = (180, 0, 0);
+  var_10.mod = var_11;
+  var_12 = spawnStruct();
+  var_12.origin = (-7058, -1490, -530);
+  var_12.angles = (24, 55.8, 0);
+  var_12 = scripts\engine\utility::spawn_tag_origin(var_12.origin, var_12.angles);
+  var_13 = getEnt("cam_06", "script_noteworthy");
+  var_13.origin = (var_12.origin[0], var_12.origin[1], -463);
+  var_13.angles = (180, 0, 0);
+  var_12.mod = var_13;
+  var_14 = spawnStruct();
+  var_14.origin = (-6472, -1285, -530);
+  var_14.angles = (30, -115, 0);
+  var_14 = scripts\engine\utility::spawn_tag_origin(var_14.origin, var_14.angles);
+  var_15 = getEnt("cam_08", "script_noteworthy");
+  var_15.origin = (var_14.origin[0], var_14.origin[1], -463);
+  var_15.angles = (180, 0, 0);
+  var_14.mod = var_15;
+  var_16 = spawnStruct();
+  var_16.origin = (-6002, -1320, -530);
+  var_16.angles = (34, -132, 0);
+  var_16 = scripts\engine\utility::spawn_tag_origin(var_16.origin, var_16.angles);
+  var_17 = getEnt("cam_09", "script_noteworthy");
+  var_17.origin = (var_16.origin[0], var_16.origin[1], -463);
+  var_17.angles = (180, 0, 0);
+  var_16.mod = var_17;
+  var_18 = spawnStruct();
+  var_18.origin = (-6011, -1777, -530);
+  var_18.angles = (30, -105, 0);
+  var_18 = scripts\engine\utility::spawn_tag_origin(var_18.origin, var_18.angles);
+  var_19 = getEnt("cam_10", "script_noteworthy");
+  var_19.origin = (var_18.origin[0], var_18.origin[1], -463);
+  var_19.angles = (180, 0, 0);
+  var_18.mod = var_19;
+  var_20 = spawnStruct();
+  var_20.origin = (-6446, -995, -530);
+  var_20.angles = (30, 50, 0);
+  var_20 = scripts\engine\utility::spawn_tag_origin(var_20.origin, var_20.angles);
+  var_21 = getEnt("cam_11", "script_noteworthy");
+  var_21.origin = (var_20.origin[0], var_20.origin[1], -463);
+  var_21.angles = (180, 0, 0);
+  var_20.mod = var_21;
+  level.cams = [var_0, var_2, var_4, var_6, var_8, var_10, var_12, var_14, var_16, var_18, var_20];
   level.active_feed = level.cams;
   level.player modifybasefov(90, 0.05);
   level.previous_cam = level.cams[0];
@@ -1582,15 +1582,15 @@ function change_camera() {
   level notify("cam_switch");
   dialogue_cam_change();
   scripts\engine\utility::flag_clear("player_pushed_focus");
-  var0 = scripts\sp\hud_util::create_client_overlay("black", 0);
-  var0 fadeovertime(0.05);
-  var0.alpha = 1;
+  var_0 = scripts\sp\hud_util::create_client_overlay("black", 0);
+  var_0 fadeovertime(0.05);
+  var_0.alpha = 1;
   level.player setclientomnvar("ui_hide_hud", 1);
   wait 0.2;
 
-  foreach(var2 in level.cams) {
-    if(var2 == self) {
-      level.camera_number = var3;
+  foreach(var_2 in level.cams) {
+    if(var_2 == self) {
+      level.camera_number = var_3;
     }
   }
 
@@ -1612,16 +1612,16 @@ function change_camera() {
 
   level.player modifybasefov(90, 0.05);
   wait 0.05;
-  var0 fadeovertime(0.1);
-  var0.alpha = 0;
+  var_0 fadeovertime(0.1);
+  var_0.alpha = 0;
   waitframe();
   level.previous_cam = self;
   wait 0.1;
   level.player setclientomnvar("ui_hide_hud", 0);
 
   if(!scripts\engine\utility::flag("desk_reveal")) {
-    foreach(var2 in level.cams) {
-      if(var2 == self && scripts\engine\utility::is_equal(self.wall_kill_reveal, 1)) {
+    foreach(var_2 in level.cams) {
+      if(var_2 == self && scripts\engine\utility::is_equal(self.wall_kill_reveal, 1)) {
         scripts\engine\utility::flag_set("desk_reveal");
       }
     }
@@ -1640,19 +1640,19 @@ function player_input_watcher() {
 }
 
 function player_camera_moving_logic() {
-  var0 = level.player getnormalizedcameramovement();
-  var1 = level.player getnormalizedmovement();
-  cam_angle_change(var0);
+  var_0 = level.player getnormalizedcameramovement();
+  var_1 = level.player getnormalizedmovement();
+  cam_angle_change(var_0);
 }
 
-function cam_angle_change(var0) {
-  var1 = 0;
-  var2 = 0;
-  var3 = 0.1;
+function cam_angle_change(var_0) {
+  var_1 = 0;
+  var_2 = 0;
+  var_3 = 0.1;
 }
 
 function camera_interacts_init() {
-  var0 = getEntArray("security_cam", "targetname");
+  var_0 = getEntArray("security_cam", "targetname");
   scripts\engine\utility::array_thread(level.cams, &camera_interacts_watcher);
 }
 
@@ -1661,7 +1661,7 @@ function camera_interacts_remover() {
 }
 
 function camera_interacts_watcher() {
-  var0 = 1500;
+  var_0 = 1500;
   level endon("survivior_escapes");
   level endon("ambo_hot");
 
@@ -1681,23 +1681,23 @@ function camera_interacts_watcher() {
     }
 
     if(self == level.cams[10] || self == level.cams[9] || self == level.cams[8]) {
-      var0 = 800;
+      var_0 = 800;
     }
 
     self.icon = deleteheadicon(self.mod);
     setheadiconfriendlyimage(self.icon, "icon_camera_indicator");
     setheadiconzoffset(self.icon, 0);
-    setheadiconsnaptoedges(self.icon, var0);
+    setheadiconsnaptoedges(self.icon, var_0);
     setheadiconmaxdistance(self.icon, 300);
     addclienttoheadiconmask(self.icon, -30);
-    var1 = "+weapnext";
+    var_1 = "+weapnext";
 
     if(!level.player getlocalplayerprofiledata("gpadEnabled")) {
-      var1 = "+activate";
+      var_1 = "+activate";
     }
 
     thread mission_failed_icon_cleanup();
-    self.mod scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 30), "", 40, 200, var0, 0, 0, 0, undefined, "duration_none", var1, undefined, 30);
+    self.mod scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 30), "", 40, 200, var_0, 0, 0, 0, undefined, "duration_none", var_1, undefined, 30);
     self.mod waittill("trigger");
     level.player playSound("emb_cctv_ui_camera_select");
 
@@ -1728,45 +1728,45 @@ function mission_failed_icon_cleanup() {
   }
 }
 
-function cam_switcher(var0) {
+function cam_switcher(var_0) {
   level notify("cctv_switching_cam");
-  var1 = scripts\sp\hud_util::create_client_overlay("black", 0);
-  var2 = undefined;
-  var1 fadeovertime(0.05);
-  var1.alpha = 1;
+  var_1 = scripts\sp\hud_util::create_client_overlay("black", 0);
+  var_2 = undefined;
+  var_1 fadeovertime(0.05);
+  var_1.alpha = 1;
   wait 0.1;
 
-  if(var0 == "switch_cam_forward") {
-    var2 = level.active_cam_id + 1;
+  if(var_0 == "switch_cam_forward") {
+    var_2 = level.active_cam_id + 1;
 
-    if(var2 >= level.active_feed.size) {
-      var2 = 0;
+    if(var_2 >= level.active_feed.size) {
+      var_2 = 0;
     }
-  } else if(var0 == "switch_cam_backward") {
-    var2 = level.active_cam_id - 1;
+  } else if(var_0 == "switch_cam_backward") {
+    var_2 = level.active_cam_id - 1;
 
-    if(var2 < 0) {
-      var2 = level.active_feed.size - 1;
+    if(var_2 < 0) {
+      var_2 = level.active_feed.size - 1;
     }
   }
 
   level.active_feed[level.active_cam_id].last_angles = level.player getplayerangles();
-  level.active_cam_id = var2;
+  level.active_cam_id = var_2;
   thread change_camera();
-  var1 fadeovertime(0.1);
-  var1.alpha = 0;
+  var_1 fadeovertime(0.1);
+  var_1.alpha = 0;
 }
 
 function cam_switcher_fade_out() {
-  var0 = scripts\sp\hud_util::create_client_overlay("black", 0);
-  var1 = undefined;
-  var0 fadeovertime(0.05);
-  var0.alpha = 1;
+  var_0 = scripts\sp\hud_util::create_client_overlay("black", 0);
+  var_1 = undefined;
+  var_0 fadeovertime(0.05);
+  var_0.alpha = 1;
   wait 0.5;
   self hide();
   wait 0.1;
-  var0 fadeovertime(0.2);
-  var0.alpha = 0;
+  var_0 fadeovertime(0.2);
+  var_0.alpha = 0;
 }
 
 function active_camera() {
@@ -1818,8 +1818,8 @@ function ambo_caught_logic() {
     return;
   }
 
-  var0 = getEnt("hiding_spot_chair", "targetname");
-  var1 = getEnt("stacy_butcher_bad_zone", "targetname");
+  var_0 = getEnt("hiding_spot_chair", "targetname");
+  var_1 = getEnt("stacy_butcher_bad_zone", "targetname");
 
   while(!level.stacy_spotted && isDefined(self) && !scripts\engine\utility::flag("survivior_escapes")) {
     if(!scripts\engine\utility::flag("ambo_office_open")) {
@@ -1833,13 +1833,13 @@ function ambo_caught_logic() {
 
     if(isDefined(level.stacy)) {
       if(!level.stacy scripts\engine\utility::ent_flag("prone")) {
-        var2 = distance(self.origin, level.stacy.origin);
-        var3 = 600;
-        var4 = 200;
+        var_2 = distance(self.origin, level.stacy.origin);
+        var_3 = 600;
+        var_4 = 200;
 
         if(!scripts\engine\utility::flag("distraction_enabled")) {
-          if(!level.stacy istouching(var1) && self.temp_ignore == 0 && self cansee(level.stacy) && var2 < var3 && !scripts\engine\utility::flag("game_saving_cctv") && !level.stacy istouching(var0)) {
-            if(var2 < var4) {
+          if(!level.stacy istouching(var_1) && self.temp_ignore == 0 && self cansee(level.stacy) && var_2 < var_3 && !scripts\engine\utility::flag("game_saving_cctv") && !level.stacy istouching(var_0)) {
+            if(var_2 < var_4) {
               wait 0.25;
             } else {
               wait 0.5;
@@ -1847,19 +1847,19 @@ function ambo_caught_logic() {
           }
         }
 
-        if(level.stacy istouching(var1)) {
+        if(level.stacy istouching(var_1)) {
           level.stacy.badzone = 1;
         }
 
-        if(self.temp_ignore == 0 && self cansee(level.stacy) && var2 < var3 && !scripts\engine\utility::flag("game_saving_cctv") && !level.stacy istouching(var0)) {
+        if(self.temp_ignore == 0 && self cansee(level.stacy) && var_2 < var_3 && !scripts\engine\utility::flag("game_saving_cctv") && !level.stacy istouching(var_0)) {
           self.fovcosine = 0.001;
           level.stacy_spotted = 1;
           scripts\engine\utility::flag_set("ambo_hot");
           thread enemy_engages_ambo(1);
-          var5 = getaiarray("axis");
-          var5 = scripts\engine\utility::array_remove(var5, self);
+          var_5 = getaiarray("axis");
+          var_5 = scripts\engine\utility::array_remove(var_5, self);
           wait 1.9;
-          scripts\engine\utility::array_thread(var5, &enemy_engages_ambo);
+          scripts\engine\utility::array_thread(var_5, &enemy_engages_ambo);
         }
       }
     }
@@ -1907,179 +1907,179 @@ function end_game_logic() {
 
 function poke_out_guy_loop() {
   self endon("death");
-  var0 = scripts\engine\utility::getanim("scavenge_idle_03");
-  var1 = var0[0];
-  var2 = getanimlength(var1);
+  var_0 = scripts\engine\utility::getanim("scavenge_idle_03");
+  var_1 = var_0[0];
+  var_2 = getanimlength(var_1);
   thread scripts\common\anim::anim_loop_solo(self, "scavenge_idle_03", "stop_poke_out_loop");
   waitframe();
-  self setanimrate(var1, 0.9);
+  self setanimrate(var_1, 0.9);
 }
 
 function scene_bookcase() {
-  var0 = getEnt("butcher", "script_noteworthy");
-  var0.animname = "aq_cctv_bookcase_01";
-  var0.name = "^1The Butcher";
-  var0.team = "axis";
-  var0.callsign = "^1Jamal Rahar";
-  var0.fovcosine = 0.99619;
-  var0 setlookattext(var0.name, &"");
-  var1 = getEnt("hostage_taker", "script_noteworthy");
-  var1.animname = "aq_cctv_bookcase_02";
-  var1.fovcosine = 0.8;
-  var2 = scripts\engine\utility::getStruct("bookcase_beating", "targetname");
-  var2.angles += (0, -90, 0);
-  var3 = scripts\engine\sp\utility::spawn_targetname("bookcase_victim", 1);
-  var3.animname = "bookcase_victim";
-  var3.ignoreme = 1;
-  var4 = [var0, var3, var1];
-  thread bookcase_break_out(var3, var0);
-  var2 thread scripts\common\anim::anim_loop_solo(var3, "bookcase_beating_idle_start", "stop_loop");
-  var2 thread scripts\common\anim::anim_loop_solo(var1, "bookcase_beating_idle_start", "stop_loop");
-  var2 thread scripts\common\anim::anim_loop_solo(var0, "bookcase_beating_idle_start", "stop_loop");
+  var_0 = getEnt("butcher", "script_noteworthy");
+  var_0.animname = "aq_cctv_bookcase_01";
+  var_0.name = "^1The Butcher";
+  var_0.team = "axis";
+  var_0.callsign = "^1Jamal Rahar";
+  var_0.fovcosine = 0.99619;
+  var_0 setlookattext(var_0.name, &"");
+  var_1 = getEnt("hostage_taker", "script_noteworthy");
+  var_1.animname = "aq_cctv_bookcase_02";
+  var_1.fovcosine = 0.8;
+  var_2 = scripts\engine\utility::getStruct("bookcase_beating", "targetname");
+  var_2.angles += (0, -90, 0);
+  var_3 = scripts\engine\sp\utility::spawn_targetname("bookcase_victim", 1);
+  var_3.animname = "bookcase_victim";
+  var_3.ignoreme = 1;
+  var_4 = [var_0, var_3, var_1];
+  thread bookcase_break_out(var_3, var_0);
+  var_2 thread scripts\common\anim::anim_loop_solo(var_3, "bookcase_beating_idle_start", "stop_loop");
+  var_2 thread scripts\common\anim::anim_loop_solo(var_1, "bookcase_beating_idle_start", "stop_loop");
+  var_2 thread scripts\common\anim::anim_loop_solo(var_0, "bookcase_beating_idle_start", "stop_loop");
   scripts\engine\utility::flag_wait("first_cam_change");
   level waittill("cam_switch");
   waitframe();
   level waittill("cam_switch");
   wait 0.1;
-  var2 notify("stop_loop");
-  var2 thread scripts\common\anim::anim_loop_solo(var3, "bookcase_beating", "stop_loop");
-  var2 thread scripts\common\anim::anim_loop_solo(var1, "bookcase_beating", "stop_loop");
-  var2 thread scripts\common\anim::anim_loop_solo(var0, "bookcase_beating", "stop_loop");
+  var_2 notify("stop_loop");
+  var_2 thread scripts\common\anim::anim_loop_solo(var_3, "bookcase_beating", "stop_loop");
+  var_2 thread scripts\common\anim::anim_loop_solo(var_1, "bookcase_beating", "stop_loop");
+  var_2 thread scripts\common\anim::anim_loop_solo(var_0, "bookcase_beating", "stop_loop");
   waitframe();
-  var4 = [var3, var1, var0];
-  scripts\engine\utility::array_thread(var4, &bookcase_beating_timing);
-  thread dialogue_bookcase_scene(var0, var1, var3);
+  var_4 = [var_3, var_1, var_0];
+  scripts\engine\utility::array_thread(var_4, &bookcase_beating_timing);
+  thread dialogue_bookcase_scene(var_0, var_1, var_3);
   scripts\engine\utility::flag_wait("survivior_escapes");
-  var3 delete();
+  var_3 delete();
 }
 
-function bookcase_break_out(var0, var1) {
+function bookcase_break_out(var_0, var_1) {
   level endon("cctv_end");
   level waittill("ambo_hot");
-  var0.allowdeath = 1;
-  var0.forceragdollimmediate = 1;
-  var0 kill();
-  var1 stopanimScripted();
+  var_0.allowdeath = 1;
+  var_0.forceragdollimmediate = 1;
+  var_0 kill();
+  var_1 stopanimScripted();
 }
 
 function bookcase_beating_timing() {
-  var0 = scripts\engine\utility::getanim("bookcase_beating");
-  var1 = var0[0];
-  self setanimtime(var1, 0.55);
+  var_0 = scripts\engine\utility::getanim("bookcase_beating");
+  var_1 = var_0[0];
+  self setanimtime(var_1, 0.55);
 }
 
 function scene_glass_killer() {}
 
 function bookcase_anim_speed() {
-  var0 = scripts\engine\utility::getanim("bookcase_beating");
-  var1 = var0[0];
-  self setanimrate(var1, 1.1);
+  var_0 = scripts\engine\utility::getanim("bookcase_beating");
+  var_1 = var_0[0];
+  self setanimrate(var_1, 1.1);
 }
 
 function scene_table_beating() {
   waitframe();
-  var0 = getEnt("table_beating_enemy", "script_noteworthy");
-  var0.animname = "aq_cctv";
-  var1 = getspawner("table_beating_enemy", "script_noteworthy");
-  var2 = spawnStruct();
-  var2.origin = var1.origin;
-  var2.angles = var1.angles;
-  var0.fovcosine = 0.97;
-  var2 thread scripts\common\anim::anim_loop_solo(var0, "est_search_desk_terry_idle", "stop_loop");
+  var_0 = getEnt("table_beating_enemy", "script_noteworthy");
+  var_0.animname = "aq_cctv";
+  var_1 = getspawner("table_beating_enemy", "script_noteworthy");
+  var_2 = spawnStruct();
+  var_2.origin = var_1.origin;
+  var_2.angles = var_1.angles;
+  var_0.fovcosine = 0.97;
+  var_2 thread scripts\common\anim::anim_loop_solo(var_0, "est_search_desk_terry_idle", "stop_loop");
 }
 
 function scene_opening() {
   level endon("ambo_hot");
-  var0 = scripts\engine\utility::getStruct("drag_scene_02", "targetname");
-  var1 = spawnStruct();
-  var1.origin = var0.origin + (0, 0, 0);
-  var1.angles = var0.angles;
-  var1.angles += (0, 90, 0);
-  var2 = getEnt("alley_drag", "script_noteworthy");
-  var2.animname = "aq_cctv";
-  var3 = scripts\sp\utility::make_weapon("iw8_ar_akilo47");
-  var2 scripts\anim\shared::forceuseweapon(var3, "primary");
-  var4 = getspawner("cctv_victim_alley_drag_ambo", "targetname");
-  var5 = var4 scripts\engine\sp\utility::spawn_ai(1);
-  var5.animname = "ambo";
-  var5.team = "allies";
-  var5.name = "Ambassador Harris";
-  var5 scripts\common\ai::magic_bullet_shield();
-  var5.ignoreme = 1;
-  level.ambassador_rock = var5;
-  var6 = scripts\engine\sp\utility::bodyonlyspawn(getspawner("runner_01", "script_noteworthy"));
-  var6.animname = "runner_01";
-  var6 setModel("body_civ_embassy_office_worker_male_1_1");
-  var7 = scripts\engine\sp\utility::bodyonlyspawn(getspawner("runner_02", "script_noteworthy"));
-  var7.animname = "runner_02";
-  var7 setModel("body_civ_embassy_office_worker_female_2_1");
-  var8 = [var6, var7];
-  var1 thread scripts\common\anim::anim_first_frame(var8, "ambo_kill_scene");
-  var9 = [var2, var5, var6, var7];
-  var1 thread scripts\common\anim::anim_loop_solo(var5, "ambo_kill_scene_idle", "stop_loop");
+  var_0 = scripts\engine\utility::getStruct("drag_scene_02", "targetname");
+  var_1 = spawnStruct();
+  var_1.origin = var_0.origin + (0, 0, 0);
+  var_1.angles = var_0.angles;
+  var_1.angles += (0, 90, 0);
+  var_2 = getEnt("alley_drag", "script_noteworthy");
+  var_2.animname = "aq_cctv";
+  var_3 = scripts\sp\utility::make_weapon("iw8_ar_akilo47");
+  var_2 scripts\anim\shared::forceuseweapon(var_3, "primary");
+  var_4 = getspawner("cctv_victim_alley_drag_ambo", "targetname");
+  var_5 = var_4 scripts\engine\sp\utility::spawn_ai(1);
+  var_5.animname = "ambo";
+  var_5.team = "allies";
+  var_5.name = "Ambassador Harris";
+  var_5 scripts\common\ai::magic_bullet_shield();
+  var_5.ignoreme = 1;
+  level.ambassador_rock = var_5;
+  var_6 = scripts\engine\sp\utility::bodyonlyspawn(getspawner("runner_01", "script_noteworthy"));
+  var_6.animname = "runner_01";
+  var_6 setModel("body_civ_embassy_office_worker_male_1_1");
+  var_7 = scripts\engine\sp\utility::bodyonlyspawn(getspawner("runner_02", "script_noteworthy"));
+  var_7.animname = "runner_02";
+  var_7 setModel("body_civ_embassy_office_worker_female_2_1");
+  var_8 = [var_6, var_7];
+  var_1 thread scripts\common\anim::anim_first_frame(var_8, "ambo_kill_scene");
+  var_9 = [var_2, var_5, var_6, var_7];
+  var_1 thread scripts\common\anim::anim_loop_solo(var_5, "ambo_kill_scene_idle", "stop_loop");
   waitframe();
-  var10 = cinematicgettimeinmsec() / 1000;
-  var11 = var5 scripts\engine\utility::getanim("ambo_kill_scene_idle")[0];
-  var12 = getanimlength(var11);
-  var13 = var10 / var12;
-  var14 = var13 - int(var13);
-  var5 setanimtime(var11, var14);
+  var_10 = cinematicgettimeinmsec() / 1000;
+  var_11 = var_5 scripts\engine\utility::getanim("ambo_kill_scene_idle")[0];
+  var_12 = getanimlength(var_11);
+  var_13 = var_10 / var_12;
+  var_14 = var_13 - int(var_13);
+  var_5 setanimtime(var_11, var_14);
   scripts\engine\utility::flag_wait("player_controls_enabled");
-  var1 notify("stop_loop");
-  var2 scripts\engine\utility::delaythread(3, &scripts\engine\sp\utility::smart_dialogue_generic, "dx_vom_aq1_cctv_02_caught_50");
-  var1 thread scripts\common\anim::anim_single(var9, "ambo_kill_scene");
-  thread ambo_last_frame(var1);
-  var15 = [var2, var6, var7];
+  var_1 notify("stop_loop");
+  var_2 scripts\engine\utility::delaythread(3, &scripts\engine\sp\utility::smart_dialogue_generic, "dx_vom_aq1_cctv_02_caught_50");
+  var_1 thread scripts\common\anim::anim_single(var_9, "ambo_kill_scene");
+  thread ambo_last_frame(var_1);
+  var_15 = [var_2, var_6, var_7];
   thread break_glass();
   scripts\engine\utility::delaythread(5, &scripts\engine\utility::exploder, "cctv_blood_1");
-  scripts\engine\utility::array_thread(var15, &opening_actors_to_idle, var1);
+  scripts\engine\utility::array_thread(var_15, &opening_actors_to_idle, var_1);
   scripts\engine\utility::flag_wait("first_cam_change");
-  var16 = getEnt("hallway_killing_door", "targetname");
-  var15 = [var2, var6, var7, var16];
-  var16 scripts\engine\sp\utility::assign_animtree("cctv_hallway_door");
-  var1.origin = var0.origin + (0, 0, 0);
-  var1 thread scripts\common\anim::anim_single(var15, "hallway_kill_scene");
+  var_16 = getEnt("hallway_killing_door", "targetname");
+  var_15 = [var_2, var_6, var_7, var_16];
+  var_16 scripts\engine\sp\utility::assign_animtree("cctv_hallway_door");
+  var_1.origin = var_0.origin + (0, 0, 0);
+  var_1 thread scripts\common\anim::anim_single(var_15, "hallway_kill_scene");
   scripts\engine\utility::delaythread(4, &scripts\engine\utility::exploder, "cctv_blood_2");
   scripts\engine\utility::delaythread(18, &scripts\engine\utility::exploder, "cctv_blood_3");
   scripts\engine\utility::flag_wait("survivior_escapes");
-  var5 scripts\common\ai::stop_magic_bullet_shield();
-  scripts\engine\utility::array_delete(var9);
+  var_5 scripts\common\ai::stop_magic_bullet_shield();
+  scripts\engine\utility::array_delete(var_9);
 }
 
-function ambo_last_frame(var0) {
-  var0 waittillmatch("single anim", "end");
-  thread scripts\common\anim::anim_last_frame_solo(var0, "ambo_kill_scene");
+function ambo_last_frame(var_0) {
+  var_0 waittillmatch("single anim", "end");
+  thread scripts\common\anim::anim_last_frame_solo(var_0, "ambo_kill_scene");
   level.stacy waittill("new_position");
-  thread scripts\common\anim::anim_single_solo(var0, "office_get_card");
-  var0 waittillmatch("single anim", "end");
-  scripts\common\anim::anim_last_frame_solo(var0, "office_get_card");
+  thread scripts\common\anim::anim_single_solo(var_0, "office_get_card");
+  var_0 waittillmatch("single anim", "end");
+  scripts\common\anim::anim_last_frame_solo(var_0, "office_get_card");
 }
 
 function break_glass() {
   wait 4.2;
-  var0 = getglass("cctv_glass_window");
-  destroyglass(var0);
+  var_0 = getglass("cctv_glass_window");
+  destroyglass(var_0);
   wait 0.3;
   scripts\engine\utility::exploder("cctv_glass_break");
-  var0 = getglass("cctv_glass_door");
-  destroyglass(var0);
+  var_0 = getglass("cctv_glass_door");
+  destroyglass(var_0);
 }
 
 function cctv_opening_scene_bink() {
   level endon("ambo_hot");
-  var0 = scripts\engine\utility::getStruct("drag_scene_02", "targetname");
-  var1 = spawnStruct();
-  var1.origin = var0.origin + (0, 0, 0);
-  var1.angles = var0.angles;
-  var1.angles += (0, 90, 0);
-  var2 = scripts\engine\sp\utility::bodyonlyspawn(getspawner("cctv_victim_alley_drag_ambo", "targetname"));
-  var2 notsolid();
-  var2.animname = "ambo";
-  var3 = [var2];
-  var1 thread scripts\common\anim::anim_loop_solo(var2, "ambo_kill_scene_idle");
+  var_0 = scripts\engine\utility::getStruct("drag_scene_02", "targetname");
+  var_1 = spawnStruct();
+  var_1.origin = var_0.origin + (0, 0, 0);
+  var_1.angles = var_0.angles;
+  var_1.angles += (0, 90, 0);
+  var_2 = scripts\engine\sp\utility::bodyonlyspawn(getspawner("cctv_victim_alley_drag_ambo", "targetname"));
+  var_2 notsolid();
+  var_2.animname = "ambo";
+  var_3 = [var_2];
+  var_1 thread scripts\common\anim::anim_loop_solo(var_2, "ambo_kill_scene_idle");
 }
 
-function opening_actors_to_idle(var0) {
+function opening_actors_to_idle(var_0) {
   self waittillmatch("single anim", "end");
 
   if(scripts\engine\utility::is_equal(self.script_noteworthy, "alley_drag")) {
@@ -2087,31 +2087,31 @@ function opening_actors_to_idle(var0) {
     self setgoalpos(self.origin);
   }
 
-  var0 thread scripts\common\anim::anim_first_frame_solo(self, "hallway_kill_scene");
+  var_0 thread scripts\common\anim::anim_first_frame_solo(self, "hallway_kill_scene");
 }
 
 function scene_room_beating() {
   level endon("ambo_hot");
-  var0 = undefined;
-  var1 = getEntArray("room_beating", "script_noteworthy");
+  var_0 = undefined;
+  var_1 = getEntArray("room_beating", "script_noteworthy");
 
-  foreach(var3 in var1) {
-    if(var3.targetname == "patrol_03") {
-      var0 = var3;
+  foreach(var_3 in var_1) {
+    if(var_3.targetname == "patrol_03") {
+      var_0 = var_3;
     }
   }
 
   thread room_beating_patrol_bp();
-  var0.animname = "aq_cctv";
-  var0 endon("death");
-  var5 = scripts\engine\utility::getStruct("rummage_struct_desk_05", "targetname");
-  var6 = scripts\engine\utility::getStruct("room_beating_scene_02", "targetname");
-  var7 = scripts\engine\sp\utility::bodyonlyspawn(getspawner("cctv_victim_room_beating_civ", "targetname"));
-  var7.animname = "cctv_victim";
-  var7 notsolid();
-  var1 = [var0, var7];
-  var6 thread scripts\common\anim::anim_first_frame(var1, "room_beating_scene");
-  var0.temp_ignore = 1;
+  var_0.animname = "aq_cctv";
+  var_0 endon("death");
+  var_5 = scripts\engine\utility::getStruct("rummage_struct_desk_05", "targetname");
+  var_6 = scripts\engine\utility::getStruct("room_beating_scene_02", "targetname");
+  var_7 = scripts\engine\sp\utility::bodyonlyspawn(getspawner("cctv_victim_room_beating_civ", "targetname"));
+  var_7.animname = "cctv_victim";
+  var_7 notsolid();
+  var_1 = [var_0, var_7];
+  var_6 thread scripts\common\anim::anim_first_frame(var_1, "room_beating_scene");
+  var_0.temp_ignore = 1;
   camera_and_flag_watcher();
 
   if(scripts\engine\utility::flag("final_patrol_go_1")) {
@@ -2119,64 +2119,64 @@ function scene_room_beating() {
   }
 
   wait 0.25;
-  var6 thread scripts\common\anim::anim_single(var1, "room_beating_scene");
-  var0 waittillmatch("single anim", "end");
-  level.exit_guard = var0;
-  var0 enableavoidance(0, 0);
-  var0 scripts\engine\sp\utility::set_goal_radius(20);
-  var0 scripts\common\utility::demeanor_override("alert");
-  var8 = var0 scripts\engine\utility::get_target_ent();
-  var0 setgoalnode(var8);
-  var0.temp_ignore = 0;
+  var_6 thread scripts\common\anim::anim_single(var_1, "room_beating_scene");
+  var_0 waittillmatch("single anim", "end");
+  level.exit_guard = var_0;
+  var_0 enableavoidance(0, 0);
+  var_0 scripts\engine\sp\utility::set_goal_radius(20);
+  var_0 scripts\common\utility::demeanor_override("alert");
+  var_8 = var_0 scripts\engine\utility::get_target_ent();
+  var_0 setgoalnode(var_8);
+  var_0.temp_ignore = 0;
   scripts\engine\utility::flag_wait("patrol_to_exit");
-  var0.target = undefined;
-  var0 notify("reached_path_end");
-  var9 = getnodearray("exit_guard_node", "targetname");
-  var9 = sortbydistance(var9, var0.origin);
-  var0 thread scripts\sp\spawner::go_to_node(var9[0]);
-  var0 setgoalnode(var9[0]);
+  var_0.target = undefined;
+  var_0 notify("reached_path_end");
+  var_9 = getnodearray("exit_guard_node", "targetname");
+  var_9 = sortbydistance(var_9, var_0.origin);
+  var_0 thread scripts\sp\spawner::go_to_node(var_9[0]);
+  var_0 setgoalnode(var_9[0]);
   waitframe();
-  var0 waittill("goal");
-  var0 scripts\common\utility::demeanor_override("patrol");
+  var_0 waittill("goal");
+  var_0 scripts\common\utility::demeanor_override("patrol");
   scripts\engine\utility::flag_wait("distraction_enabled");
   wait 0.5;
-  var0.fovcosine = 0.4;
-  var0 scripts\common\utility::demeanor_override("combat");
-  var0 scripts\engine\sp\utility::set_goal_radius(10);
-  var0 scripts\engine\utility::set_movement_speed(80);
-  var0 clearpath();
-  var10 = getnodearray("investigate_node", "targetname");
-  var10 = sortbydistance(var10, level.stacy.origin);
-  var0 setgoalnode(var10[0]);
-  var0 waittill("goal");
+  var_0.fovcosine = 0.4;
+  var_0 scripts\common\utility::demeanor_override("combat");
+  var_0 scripts\engine\sp\utility::set_goal_radius(10);
+  var_0 scripts\engine\utility::set_movement_speed(80);
+  var_0 clearpath();
+  var_10 = getnodearray("investigate_node", "targetname");
+  var_10 = sortbydistance(var_10, level.stacy.origin);
+  var_0 setgoalnode(var_10[0]);
+  var_0 waittill("goal");
   thread stacy_distance_watcher();
-  var0.allowdeath = 1;
-  var0 thread scripts\common\anim::anim_single_solo(var0, "lookaround_05");
+  var_0.allowdeath = 1;
+  var_0 thread scripts\common\anim::anim_single_solo(var_0, "lookaround_05");
   thread distracted_breakout();
   wait 10;
-  var0 setgoalpos(level.stacy.origin);
+  var_0 setgoalpos(level.stacy.origin);
 }
 
 function room_beating_patrol_bp() {
   level endon("patrol_to_exit");
   scripts\engine\utility::flag_wait("final_patrol_go_1");
-  var0 = getEnt("left_path_trigger", "targetname");
-  var1 = var0 scripts\engine\utility::get_target_ent();
-  var2 = getEnt("end_game_volume", "targetname");
-  var3 = 0;
-  var4 = undefined;
+  var_0 = getEnt("left_path_trigger", "targetname");
+  var_1 = var_0 scripts\engine\utility::get_target_ent();
+  var_2 = getEnt("end_game_volume", "targetname");
+  var_3 = 0;
+  var_4 = undefined;
 
   for(;;) {
-    var5 = self.angles[1];
+    var_5 = self.angles[1];
 
-    if(self istouching(var2) && self.origin[1] > -1900 && self.angles[1] < 120 || self.angles[1] > 120 && self.origin[1] > -1600) {
-      if(!var3) {
-        var4 = createnavobstaclebyent(var1, "allies", "neutral");
-        var3 = 1;
+    if(self istouching(var_2) && self.origin[1] > -1900 && self.angles[1] < 120 || self.angles[1] > 120 && self.origin[1] > -1600) {
+      if(!var_3) {
+        var_4 = createnavobstaclebyent(var_1, "allies", "neutral");
+        var_3 = 1;
       }
-    } else if(var3) {
-      destroynavobstacle(var4);
-      var3 = 0;
+    } else if(var_3) {
+      destroynavobstacle(var_4);
+      var_3 = 0;
     }
 
     wait 0.2;
@@ -2244,61 +2244,61 @@ function scene_wounded() {
     return;
   }
 
-  var0 = scripts\engine\utility::getStruct("cctv_wounded_struct", "targetname");
-  var0.origin += (0, 0, -3);
-  var1 = getspawner("bookcase_victim", "targetname");
-  var1.count = 2;
-  var2 = undefined;
-  var3 = getaiarray("axis");
+  var_0 = scripts\engine\utility::getStruct("cctv_wounded_struct", "targetname");
+  var_0.origin += (0, 0, -3);
+  var_1 = getspawner("bookcase_victim", "targetname");
+  var_1.count = 2;
+  var_2 = undefined;
+  var_3 = getaiarray("axis");
 
-  foreach(var5 in var3) {
-    if(scripts\engine\utility::is_equal(var5.script_parameters, "patrol_end_01")) {
-      var2 = var5;
+  foreach(var_5 in var_3) {
+    if(scripts\engine\utility::is_equal(var_5.script_parameters, "patrol_end_01")) {
+      var_2 = var_5;
     }
   }
 
-  var7 = var2 scripts\engine\utility::get_target_ent();
-  var2.lastnode = var7 scripts\engine\sp\utility::get_last_ent_in_chain("pathnode");
-  var8 = scripts\sp\utility::make_weapon("iw8_ar_akilo47");
-  var2 scripts\anim\shared::forceuseweapon(var8, "primary");
-  var2 clearpath();
-  var2.animname = "aq_cctv";
-  var9 = var2 scripts\engine\utility::getanim("wounded_start");
-  var10 = getstartorigin(var0.origin, var0.angles, var9);
-  var11 = getstartangles(var0.origin, var0.angles, var9);
-  var2 forceteleport(var10, var11);
+  var_7 = var_2 scripts\engine\utility::get_target_ent();
+  var_2.lastnode = var_7 scripts\engine\sp\utility::get_last_ent_in_chain("pathnode");
+  var_8 = scripts\sp\utility::make_weapon("iw8_ar_akilo47");
+  var_2 scripts\anim\shared::forceuseweapon(var_8, "primary");
+  var_2 clearpath();
+  var_2.animname = "aq_cctv";
+  var_9 = var_2 scripts\engine\utility::getanim("wounded_start");
+  var_10 = getstartorigin(var_0.origin, var_0.angles, var_9);
+  var_11 = getstartangles(var_0.origin, var_0.angles, var_9);
+  var_2 forceteleport(var_10, var_11);
   waitframe();
-  var2 stopanimScripted();
-  var2 setgoalpos(var2.origin);
-  var12 = scripts\engine\sp\utility::bodyonlyspawn(getspawner("wounded_victim", "targetname"));
-  var12.targetname = "wounded_victim";
-  var12.animname = "wounded_victim";
-  var12.ignoreme = 1;
-  var0 thread scripts\common\anim::anim_loop_solo(var12, "wounded_start_idle", "stop_loop");
-  var13 = [var2, var12, level.stacy];
+  var_2 stopanimScripted();
+  var_2 setgoalpos(var_2.origin);
+  var_12 = scripts\engine\sp\utility::bodyonlyspawn(getspawner("wounded_victim", "targetname"));
+  var_12.targetname = "wounded_victim";
+  var_12.animname = "wounded_victim";
+  var_12.ignoreme = 1;
+  var_0 thread scripts\common\anim::anim_loop_solo(var_12, "wounded_start_idle", "stop_loop");
+  var_13 = [var_2, var_12, level.stacy];
   scripts\engine\utility::flag_wait("final_patrol_go_1");
   level.scripted_stacy_idle = 1;
   thread dialogue_wounded_scene();
-  var14 = getnodearray("ally_nodes", "targetname");
-  scripts\engine\utility::array_thread(var14, &ally_nodes_interact_remove);
-  var0 scripts\sp\anim::anim_reach_solo(level.stacy, "wounded_start");
-  var0 notify("stop_loop");
-  var0 thread scripts\common\anim::anim_single(var13, "wounded_start");
+  var_14 = getnodearray("ally_nodes", "targetname");
+  scripts\engine\utility::array_thread(var_14, &ally_nodes_interact_remove);
+  var_0 scripts\sp\anim::anim_reach_solo(level.stacy, "wounded_start");
+  var_0 notify("stop_loop");
+  var_0 thread scripts\common\anim::anim_single(var_13, "wounded_start");
   thread wounded_aq_to_patrol();
   scripts\engine\utility::delaythread(13, &scripts\engine\utility::exploder, "cctv_blood_6");
   level.stacy waittillmatch("single anim", "end");
   level.stacy scripts\engine\sp\utility::set_goal_pos(level.stacy.origin);
   level.stacy clearpath();
-  var0 thread scripts\common\anim::anim_loop_solo(level.stacy, "wounded_end_idle", "stop_loop");
+  var_0 thread scripts\common\anim::anim_loop_solo(level.stacy, "wounded_end_idle", "stop_loop");
   scripts\engine\utility::flag_clear("final_patrol_go_1");
-  var12 notsolid();
+  var_12 notsolid();
   level waittill("wounded_dialogue_auto_save");
   scripts\engine\sp\utility::autosave_by_name("wounded_complete");
   level waittill("wounded_dialogue_finished");
   thread ally_nodes_init();
   level.scripted_stacy_idle = 0;
   level.stacy waittill("new_position");
-  var0 notify("stop_loop");
+  var_0 notify("stop_loop");
   level.stacy thread scripts\common\anim::anim_single_solo(level.stacy, "wounded_exit");
   wait 1.2;
   level.stacy stopanimScripted();
@@ -2312,32 +2312,32 @@ function wounded_aq_to_patrol() {
 }
 
 function scene_wall_kill() {
-  var0 = getEnt("wall_killer", "script_noteworthy");
-  var0.animname = "aq_cctv";
-  var1 = getnode("final_patrol_node", "targetname");
-  var0 scripts\common\utility::demeanor_override("alert");
-  var0 scripts\engine\utility::set_movement_speed(150);
-  var0 forceteleport(var1.origin, var1.angles);
-  var0 setgoalpos(var0.origin);
-  var0 scripts\engine\sp\utility::set_goal_radius(50);
-  var1 = getnode("final_patrol_node", "targetname");
-  var0 scripts\sp\spawner::go_to_node(var1);
-  var0 setgoalnode(var1);
-  var0 enableavoidance(0, 0);
-  var0 scripts\engine\sp\utility::disable_surprise();
+  var_0 = getEnt("wall_killer", "script_noteworthy");
+  var_0.animname = "aq_cctv";
+  var_1 = getnode("final_patrol_node", "targetname");
+  var_0 scripts\common\utility::demeanor_override("alert");
+  var_0 scripts\engine\utility::set_movement_speed(150);
+  var_0 forceteleport(var_1.origin, var_1.angles);
+  var_0 setgoalpos(var_0.origin);
+  var_0 scripts\engine\sp\utility::set_goal_radius(50);
+  var_1 = getnode("final_patrol_node", "targetname");
+  var_0 scripts\sp\spawner::go_to_node(var_1);
+  var_0 setgoalnode(var_1);
+  var_0 enableavoidance(0, 0);
+  var_0 scripts\engine\sp\utility::disable_surprise();
 }
 
-function temporary_ignore(var0) {
-  wait var0;
+function temporary_ignore(var_0) {
+  wait var_0;
   self.temp_ignore = 1;
 }
 
 function patrol_one_go() {
-  var0 = getEnt("beatdown_trigger", "targetname");
-  var0 scripts\engine\utility::waittill_any_timeout(5, "trigger");
+  var_0 = getEnt("beatdown_trigger", "targetname");
+  var_0 scripts\engine\utility::waittill_any_timeout(5, "trigger");
 }
 
-function enemy_engages_ambo(var0) {
+function enemy_engages_ambo(var_0) {
   level.stacy endon("death");
 
   if(level.stacy.badzone) {
@@ -2369,10 +2369,10 @@ function enemy_engages_ambo(var0) {
     level notify("badzone");
   }
 
-  var1 = ["dx_vom_aq1_cctv_02_caught_20", "dx_vom_aq1_cctv_02_caught_30", "dx_vom_aq1_cctv_02_caught_40", "dx_vom_aq1_cctv_02_caught_50"];
+  var_1 = ["dx_vom_aq1_cctv_02_caught_20", "dx_vom_aq1_cctv_02_caught_30", "dx_vom_aq1_cctv_02_caught_40", "dx_vom_aq1_cctv_02_caught_50"];
 
-  if(isDefined(var0)) {
-    thread scripts\engine\sp\utility::smart_dialogue_generic(scripts\engine\utility::random(var1));
+  if(isDefined(var_0)) {
+    thread scripts\engine\sp\utility::smart_dialogue_generic(scripts\engine\utility::random(var_1));
   }
 
   level.stacy.ignoreme = 0;
@@ -2401,42 +2401,42 @@ function stacy_bad_zone_attack() {
   level waittill("badzone");
   level.stacy.ignoreme = 0;
   wait 0.1;
-  var0 = [];
-  var1 = getaiarray("axis");
+  var_0 = [];
+  var_1 = getaiarray("axis");
 
-  foreach(var3 in var1) {
-    if(scripts\engine\utility::is_equal(var3.script_noteworthy, "butcher") || scripts\engine\utility::is_equal(var3.script_noteworthy, "hostage_taker")) {
-      var0 = var3;
+  foreach(var_3 in var_1) {
+    if(scripts\engine\utility::is_equal(var_3.script_noteworthy, "butcher") || scripts\engine\utility::is_equal(var_3.script_noteworthy, "hostage_taker")) {
+      var_0 = var_3;
     }
   }
 
-  var5 = getnodearray("stacy_butcher_bad_zone_nodes", "targetname");
+  var_5 = getnodearray("stacy_butcher_bad_zone_nodes", "targetname");
 
-  foreach(var3 in var0) {
+  foreach(var_3 in var_0) {
     if(isalive(level.stacy)) {
-      var3 getenemyinfo(level.stacy);
+      var_3 getenemyinfo(level.stacy);
     }
 
-    var3 scripts\common\utility::demeanor_override("combat");
-    var3 cleargoalvolume();
-    var3.ignoreall = 0;
-    var3 clearpath();
-    var3 stopanimScripted();
-    var3.target = undefined;
+    var_3 scripts\common\utility::demeanor_override("combat");
+    var_3 cleargoalvolume();
+    var_3.ignoreall = 0;
+    var_3 clearpath();
+    var_3 stopanimScripted();
+    var_3.target = undefined;
     thread stop_seeking();
-    var3.fovcosine = 0.001;
-    var3 allowedstances("stand", "crouch");
-    var3 notify("stop_going_to_node");
+    var_3.fovcosine = 0.001;
+    var_3 allowedstances("stand", "crouch");
+    var_3 notify("stop_going_to_node");
     waitframe();
-    var3 setgoalpos(var3.origin);
-    var3 thread scripts\engine\sp\utility::set_favoriteenemy(level.stacy);
-    var3 thread scripts\engine\utility::set_movement_speed(120);
-    var3 thread scripts\engine\sp\utility::set_goal_radius(16);
-    var3.baseaccuracy = 1000;
-    var3.fovcosine = cos(89);
-    var7 = sortbydistance(var5, var3.origin)[0];
-    var3 setgoalpos(var7.origin);
-    var5 = scripts\engine\utility::array_remove(var5, var7);
+    var_3 setgoalpos(var_3.origin);
+    var_3 thread scripts\engine\sp\utility::set_favoriteenemy(level.stacy);
+    var_3 thread scripts\engine\utility::set_movement_speed(120);
+    var_3 thread scripts\engine\sp\utility::set_goal_radius(16);
+    var_3.baseaccuracy = 1000;
+    var_3.fovcosine = cos(89);
+    var_7 = sortbydistance(var_5, var_3.origin)[0];
+    var_3 setgoalpos(var_7.origin);
+    var_5 = scripts\engine\utility::array_remove(var_5, var_7);
   }
 }
 
@@ -2469,8 +2469,8 @@ function objective_manager() {
   scripts\engine\sp\objectives::objective_remove("direct_ambassador");
   scripts\engine\sp\objectives::objective_add("escort", "current", level.stacy.origin + (0, 0, 50), undefined, "Stacy");
   scripts\engine\sp\objectives::objective_set_on_entity("escort", "Stacy", level.stacy);
-  var0 = scripts\engine\sp\objectives::_objective_getindexforname("escort");
-  objective_setzoffset(var0, 72);
+  var_0 = scripts\engine\sp\objectives::_objective_getindexforname("escort");
+  objective_setzoffset(var_0, 72);
   scripts\engine\sp\objectives::objective_add("escape", "current", (-7019, -1119, -535), &"EMBASSY/OBJ_SAFETY_GUIDE");
   scripts\engine\utility::flag_wait("save_part_2_start");
   scripts\engine\sp\objectives::objective_update("escape", "current", (-6157, -2237, -530), &"EMBASSY/OBJ_SAFETY_GUIDE");
@@ -2485,30 +2485,30 @@ function cctv_outro_bink_main() {
   visionsetnaked("embassy_cctv_01", 0);
   setomnvar("ui_cctv_active", 1);
   setomnvar("ui_cctv_camera_index", 13);
-  var0 = scripts\engine\utility::getStruct("cctv_outro_bink_cam", "targetname");
-  var1 = scripts\engine\utility::spawn_tag_origin(var0.origin, var0.angles);
-  var1.origin += (0, 0, -67);
-  level.player playerlinktoabsolute(var1);
+  var_0 = scripts\engine\utility::getStruct("cctv_outro_bink_cam", "targetname");
+  var_1 = scripts\engine\utility::spawn_tag_origin(var_0.origin, var_0.angles);
+  var_1.origin += (0, 0, -67);
+  level.player playerlinktoabsolute(var_1);
   level.player disableweapons();
   level.player hidelegsandshadow();
   scripts\sp\maps\embassy\embassy_util::spawn_price();
   scripts\sp\maps\embassy\embassy_util::spawn_farah();
   scripts\sp\maps\embassy\embassy_util::spawn_stacy();
-  var2 = scripts\engine\sp\utility::spawn_anim_model("garage_enter_door");
-  var3 = scripts\engine\sp\utility::spawn_anim_model("keycard");
-  var4 = getEntArray("cctv_bink_outro_hidden_door", "targetname");
+  var_2 = scripts\engine\sp\utility::spawn_anim_model("garage_enter_door");
+  var_3 = scripts\engine\sp\utility::spawn_anim_model("keycard");
+  var_4 = getEntArray("cctv_bink_outro_hidden_door", "targetname");
 
-  foreach(var6 in var4) {
-    var6 hide();
+  foreach(var_6 in var_4) {
+    var_6 hide();
   }
 
-  var8 = [level.price, level.stacy, level.farah, var2, var3];
-  var9 = scripts\engine\utility::getStruct("ap_cctv_outro_bink", "targetname");
+  var_8 = [level.price, level.stacy, level.farah, var_2, var_3];
+  var_9 = scripts\engine\utility::getStruct("ap_cctv_outro_bink", "targetname");
 
   for(;;) {
     thread scripts\sp\maps\embassy\embassy_util::swap_card_reader("cctv_bink_outro_card_reader");
     level thread scripts\engine\sp\utility::notify_delay("card_reader_swap", 5);
-    var9 scripts\common\anim::anim_single(var8, "gar_meetup_enter");
+    var_9 scripts\common\anim::anim_single(var_8, "gar_meetup_enter");
     waitframe();
   }
 }
@@ -2517,12 +2517,12 @@ function cctv_outro_bink_catchup() {}
 
 function display_all_node_names() {
   for(;;) {
-    foreach(var1 in getallnodes()) {
-      if(!isDefined(var1)) {
+    foreach(var_1 in getallnodes()) {
+      if(!isDefined(var_1)) {
         continue;
       }
 
-      if(isDefined(var1.script_namenumber)) {}
+      if(isDefined(var_1.script_namenumber)) {}
     }
 
     waitframe();

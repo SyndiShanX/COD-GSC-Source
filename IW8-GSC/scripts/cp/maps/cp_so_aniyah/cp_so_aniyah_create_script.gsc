@@ -3,50 +3,50 @@
  * Script: scripts\cp\maps\cp_so_aniyah\cp_so_aniyah_create_script.gsc
 ***********************************************************************/
 
-function main(var0, var1) {
+function main(var_0, var_1) {
   level endon("game_ended");
-  var2 = spawnStruct();
+  var_2 = spawnStruct();
   scripts\engine\utility::flag_init("cp_so_aniyah_create_script");
-  thread cs_return_and_wait_for_flag(level, var0, var1, var2);
+  thread cs_return_and_wait_for_flag(level, var_0, var_1, var_2);
 
   if(!scripts\cp\cp_create_script_utility::cs_is_starttime()) {
-    scripts\cp\cp_create_script_utility::endcreatescript(var2);
+    scripts\cp\cp_create_script_utility::endcreatescript(var_2);
     return;
   }
 }
 
-function cs_return_and_wait_for_flag(var0, var1, var2, var3) {
-  scripts\cp\cp_create_script_utility::wait_for_cs_flag(var3);
+function cs_return_and_wait_for_flag(var_0, var_1, var_2, var_3) {
+  scripts\cp\cp_create_script_utility::wait_for_cs_flag(var_3);
 
-  if(!isDefined(var1)) {
-    var1 = "stk";
+  if(!isDefined(var_1)) {
+    var_1 = "stk";
   }
 
-  scripts\cp\cp_create_script_utility::strike_setup_arrays(var1);
-  scripts\cp\cp_create_script_utility::cs_init_flags(var2);
-  thread createstructs(level, var2, var1);
-  thread createtriggers(level, var2, var1);
-  thread createmodels(level, var2, var1);
+  scripts\cp\cp_create_script_utility::strike_setup_arrays(var_1);
+  scripts\cp\cp_create_script_utility::cs_init_flags(var_2);
+  thread createstructs(level, var_2, var_1);
+  thread createtriggers(level, var_2, var_1);
+  thread createmodels(level, var_2, var_1);
 
-  if(istrue(var0)) {
-    level thread scripts\cp\cp_create_script_utility::wait_for_flags(var2, "cp_so_aniyah_create_script");
+  if(istrue(var_0)) {
+    level thread scripts\cp\cp_create_script_utility::wait_for_flags(var_2, "cp_so_aniyah_create_script");
     return;
   }
 
-  scripts\cp\cp_create_script_utility::wait_for_flags(var2, "cp_so_aniyah_create_script");
+  scripts\cp\cp_create_script_utility::wait_for_flags(var_2, "cp_so_aniyah_create_script");
 }
 
-function createstructs(var0, var1, var2) {
-  var3 = spawnStruct();
-  var3.origin = (0, 0, 0);
-  scripts\cp\cp_create_script_utility::strike_additem(var3, var1, var2);
-  var0 scripts\engine\utility::ent_flag_set("cs_structs_complete");
+function createstructs(var_0, var_1, var_2) {
+  var_3 = spawnStruct();
+  var_3.origin = (0, 0, 0);
+  scripts\cp\cp_create_script_utility::strike_additem(var_3, var_1, var_2);
+  var_0 scripts\engine\utility::ent_flag_set("cs_structs_complete");
 }
 
-function createtriggers(var0, var1, var2) {
-  var0 scripts\engine\utility::ent_flag_set("cs_triggers_complete");
+function createtriggers(var_0, var_1, var_2) {
+  var_0 scripts\engine\utility::ent_flag_set("cs_triggers_complete");
 }
 
-function createmodels(var0, var1, var2) {
-  var0 scripts\engine\utility::ent_flag_set("cs_models_complete");
+function createmodels(var_0, var_1, var_2) {
+  var_0 scripts\engine\utility::ent_flag_set("cs_models_complete");
 }

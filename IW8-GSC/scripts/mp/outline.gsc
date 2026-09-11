@@ -13,92 +13,92 @@ function init() {
   thread outlineidswatchpending();
 }
 
-function outlineenableinternal(var0, var1, var2, var3, var4, var5, var6) {
-  if(!isDefined(var0.outlines)) {
-    var0.outlines = [];
+function outlineenableinternal(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if(!isDefined(var_0.outlines)) {
+    var_0.outlines = [];
   }
 
-  var7 = spawnStruct();
-  var7.isdisabled = 0;
-  var7.priority = var3;
-  var7.playersvisibleto = var1;
-  var7.playersvisibletopending = [];
-  var7.hudoutlineassetname = var2;
-  var7.type = var4;
-  var7.team = var5;
-  var7.squadindex = var6;
-  var8 = outlinegenerateuniqueid();
-  var0.outlines[var8] = var7;
-  outlineaddtogloballist(var0);
-  var9 = [];
+  var_7 = spawnStruct();
+  var_7.isdisabled = 0;
+  var_7.priority = var_3;
+  var_7.playersvisibleto = var_1;
+  var_7.playersvisibletopending = [];
+  var_7.hudoutlineassetname = var_2;
+  var_7.type = var_4;
+  var_7.team = var_5;
+  var_7.squadindex = var_6;
+  var_8 = outlinegenerateuniqueid();
+  var_0.outlines[var_8] = var_7;
+  outlineaddtogloballist(var_0);
+  var_9 = [];
 
-  foreach(var11 in var7.playersvisibleto) {
-    if(!canoutlineforplayer(var11)) {
-      var7.playersvisibletopending[var7.playersvisibletopending.size] = var11;
-      level.outlineidspending[var8] = var0;
+  foreach(var_11 in var_7.playersvisibleto) {
+    if(!canoutlineforplayer(var_11)) {
+      var_7.playersvisibletopending[var_7.playersvisibletopending.size] = var_11;
+      level.outlineidspending[var_8] = var_0;
       continue;
     }
 
-    var12 = outlinegethighestinfoforplayer(var0, var11);
+    var_12 = outlinegethighestinfoforplayer(var_0, var_11);
 
-    if(!isDefined(var12) || var12 == var7 || var12.priority == var7.priority) {
-      var9 = var11;
+    if(!isDefined(var_12) || var_12 == var_7 || var_12.priority == var_7.priority) {
+      var_9 = var_11;
     }
   }
 
-  if(var9.size > 0) {
-    _hudoutlineenableforclients(var0, var9, var7.hudoutlineassetname);
+  if(var_9.size > 0) {
+    _hudoutlineenableforclients(var_0, var_9, var_7.hudoutlineassetname);
   }
 
-  return var8;
+  return var_8;
 }
 
-function outlinedisableinternal(var0, var1) {
-  if(!isDefined(var1)) {
+function outlinedisableinternal(var_0, var_1) {
+  if(!isDefined(var_1)) {
     level.outlineents = scripts\engine\utility::array_removeundefined(level.outlineents);
     return;
-  } else if(!isDefined(var1.outlines)) {
-    outlineremovefromgloballist(var1);
+  } else if(!isDefined(var_1.outlines)) {
+    outlineremovefromgloballist(var_1);
     return;
   }
 
-  var2 = var1.outlines[var0];
+  var_2 = var_1.outlines[var_0];
 
-  if(!isDefined(var2) || var2.isdisabled) {
+  if(!isDefined(var_2) || var_2.isdisabled) {
     return;
   }
 
-  var2.isdisabled = 1;
+  var_2.isdisabled = 1;
 
-  foreach(var4 in var2.playersvisibleto) {
-    if(!isDefined(var4)) {
+  foreach(var_4 in var_2.playersvisibleto) {
+    if(!isDefined(var_4)) {
       continue;
     }
 
-    if(!canoutlineforplayer(var4)) {
-      var2.playersvisibletopending[var2.playersvisibletopending.size] = var4;
-      level.outlineidspending[var0] = var1;
+    if(!canoutlineforplayer(var_4)) {
+      var_2.playersvisibletopending[var_2.playersvisibletopending.size] = var_4;
+      level.outlineidspending[var_0] = var_1;
       continue;
     }
 
-    var5 = outlinegethighestinfoforplayer(var1, var4);
+    var_5 = outlinegethighestinfoforplayer(var_1, var_4);
 
-    if(isDefined(var5)) {
-      if(var5.priority <= var2.priority) {
-        _hudoutlineenableforclient(var1, var4, var5.hudoutlineassetname);
+    if(isDefined(var_5)) {
+      if(var_5.priority <= var_2.priority) {
+        _hudoutlineenableforclient(var_1, var_4, var_5.hudoutlineassetname);
       }
 
       continue;
     }
 
-    var1 hudoutlinedisableforclient(var4);
+    var_1 hudoutlinedisableforclient(var_4);
   }
 
-  if(var2.playersvisibletopending.size == 0) {
-    var1.outlines[var0] = undefined;
+  if(var_2.playersvisibletopending.size == 0) {
+    var_1.outlines[var_0] = undefined;
 
-    if(var1.outlines.size == 0) {
-      outlineremovefromgloballist(var1);
+    if(var_1.outlines.size == 0) {
+      outlineremovefromgloballist(var_1);
       return;
     }
 
@@ -106,209 +106,209 @@ function outlinedisableinternal(var0, var1) {
   }
 }
 
-function outlinerefreshinternal(var0) {
-  if(!isDefined(var0.outlines) || var0.outlines.size == 0) {
+function outlinerefreshinternal(var_0) {
+  if(!isDefined(var_0.outlines) || var_0.outlines.size == 0) {
     return;
   }
 
-  foreach(var2 in var0.outlines) {
-    if(!isDefined(var2) || var2.isdisabled) {
+  foreach(var_2 in var_0.outlines) {
+    if(!isDefined(var_2) || var_2.isdisabled) {
       continue;
     }
 
-    foreach(var4 in var2.playersvisibleto) {
-      if(!isDefined(var4)) {
+    foreach(var_4 in var_2.playersvisibleto) {
+      if(!isDefined(var_4)) {
         continue;
       }
 
-      var5 = outlinegethighestinfoforplayer(var0, var4);
+      var_5 = outlinegethighestinfoforplayer(var_0, var_4);
 
-      if(isDefined(var5)) {
-        _hudoutlineenableforclient(var0, var4, var5.hudoutlineassetname);
+      if(isDefined(var_5)) {
+        _hudoutlineenableforclient(var_0, var_4, var_5.hudoutlineassetname);
       }
     }
   }
 }
 
-function outlineonplayerdisconnect(var0) {
-  outlineremoveplayerfromvisibletoarrays(var0);
-  outlinedisableinternalall(var0);
+function outlineonplayerdisconnect(var_0) {
+  outlineremoveplayerfromvisibletoarrays(var_0);
+  outlinedisableinternalall(var_0);
 }
 
-function outlineonplayerjoinedteam(var0) {
-  if(!isDefined(var0.team) || var0.team == "spectator" || var0.team == "follower") {
+function outlineonplayerjoinedteam(var_0) {
+  if(!isDefined(var_0.team) || var_0.team == "spectator" || var_0.team == "follower") {
     return;
   }
 
-  thread outlineonplayerjoinedteam_onfirstspawn(var0);
+  thread outlineonplayerjoinedteam_onfirstspawn(var_0);
 }
 
-function outlineonplayerjoinedteam_onfirstspawn(var0) {
-  var0 notify("outlineOnPlayerJoinedTeam_onFirstSpawn");
-  var0 endon("outlineOnPlayerJoinedTeam_onFirstSpawn");
-  var0 endon("disconnect");
-  var0 waittill("spawned_player");
-  outlineremoveplayerfromvisibletoarrays(var0);
-  outlinedisableinternalall(var0);
-  outlineaddplayertoexistingallandteamoutlines(var0);
+function outlineonplayerjoinedteam_onfirstspawn(var_0) {
+  var_0 notify("outlineOnPlayerJoinedTeam_onFirstSpawn");
+  var_0 endon("outlineOnPlayerJoinedTeam_onFirstSpawn");
+  var_0 endon("disconnect");
+  var_0 waittill("spawned_player");
+  outlineremoveplayerfromvisibletoarrays(var_0);
+  outlinedisableinternalall(var_0);
+  outlineaddplayertoexistingallandteamoutlines(var_0);
 }
 
-function outlineonplayerjoinedsquad(var0) {
-  thread outlineonplayerjoinedsquad_onfirstspawn(var0);
+function outlineonplayerjoinedsquad(var_0) {
+  thread outlineonplayerjoinedsquad_onfirstspawn(var_0);
 }
 
-function outlineonplayerjoinedsquad_onfirstspawn(var0) {
-  var0 notify("outlineOnPlayerJoinedSquad_onFirstSpawn");
-  var0 endon("outlineOnPlayerJoinedSquad_onFirstSpawn");
-  var0 endon("disconnect");
-  var0 waittill("spawned_player");
-  outlineremoveplayerfromvisibletoarrays(var0, 1);
-  outlineaddplayertoexistingsquadoutlines(var0);
+function outlineonplayerjoinedsquad_onfirstspawn(var_0) {
+  var_0 notify("outlineOnPlayerJoinedSquad_onFirstSpawn");
+  var_0 endon("outlineOnPlayerJoinedSquad_onFirstSpawn");
+  var_0 endon("disconnect");
+  var_0 waittill("spawned_player");
+  outlineremoveplayerfromvisibletoarrays(var_0, 1);
+  outlineaddplayertoexistingsquadoutlines(var_0);
 }
 
-function outlineremoveplayerfromvisibletoarrays(var0, var1) {
+function outlineremoveplayerfromvisibletoarrays(var_0, var_1) {
   level.outlineents = scripts\engine\utility::array_removeundefined(level.outlineents);
 
-  foreach(var3 in level.outlineents) {
-    var4 = 0;
+  foreach(var_3 in level.outlineents) {
+    var_4 = 0;
 
-    foreach(var6 in var3.outlines) {
-      if(istrue(var1)) {
-        if(var6.type != "SQUAD") {
+    foreach(var_6 in var_3.outlines) {
+      if(istrue(var_1)) {
+        if(var_6.type != "SQUAD") {
           continue;
         }
       }
 
-      var6.playersvisibleto = scripts\engine\utility::array_removeundefined(var6.playersvisibleto);
+      var_6.playersvisibleto = scripts\engine\utility::array_removeundefined(var_6.playersvisibleto);
 
-      if(isDefined(var0) && scripts\engine\utility::array_contains(var6.playersvisibleto, var0)) {
-        var6.playersvisibleto = scripts\engine\utility::array_remove(var6.playersvisibleto, var0);
-        var4 = 1;
+      if(isDefined(var_0) && scripts\engine\utility::array_contains(var_6.playersvisibleto, var_0)) {
+        var_6.playersvisibleto = scripts\engine\utility::array_remove(var_6.playersvisibleto, var_0);
+        var_4 = 1;
       }
     }
 
-    if(var4 && isDefined(var3) && isDefined(var0)) {
-      var3 hudoutlinedisableforclient(var0);
+    if(var_4 && isDefined(var_3) && isDefined(var_0)) {
+      var_3 hudoutlinedisableforclient(var_0);
     }
   }
 }
 
-function outlineaddplayertoexistingallandteamoutlines(var0) {
-  foreach(var2 in level.outlineents) {
-    if(!isDefined(var2)) {
+function outlineaddplayertoexistingallandteamoutlines(var_0) {
+  foreach(var_2 in level.outlineents) {
+    if(!isDefined(var_2)) {
       continue;
     }
 
-    var3 = undefined;
+    var_3 = undefined;
 
-    foreach(var5 in var2.outlines) {
-      if(var5.type == "ALL" || var5.type == "TEAM" && var5.team == var0.team) {
-        if(!scripts\engine\utility::array_contains(var5.playersvisibleto, var0)) {
-          var5.playersvisibleto[var5.playersvisibleto.size] = var0;
+    foreach(var_5 in var_2.outlines) {
+      if(var_5.type == "ALL" || var_5.type == "TEAM" && var_5.team == var_0.team) {
+        if(!scripts\engine\utility::array_contains(var_5.playersvisibleto, var_0)) {
+          var_5.playersvisibleto[var_5.playersvisibleto.size] = var_0;
         }
 
-        if(!isDefined(var3) || var5.priority > var3.priority) {
-          var3 = var5;
+        if(!isDefined(var_3) || var_5.priority > var_3.priority) {
+          var_3 = var_5;
         }
       }
     }
 
-    if(isDefined(var3)) {
-      _hudoutlineenableforclient(var2, var0, var3.hudoutlineassetname);
+    if(isDefined(var_3)) {
+      _hudoutlineenableforclient(var_2, var_0, var_3.hudoutlineassetname);
     }
   }
 }
 
-function outlineaddplayertoexistingsquadoutlines(var0) {
-  if(isDefined(var0.squadindex)) {}
+function outlineaddplayertoexistingsquadoutlines(var_0) {
+  if(isDefined(var_0.squadindex)) {}
 
-  foreach(var2 in level.outlineents) {
-    if(!isDefined(var2)) {
+  foreach(var_2 in level.outlineents) {
+    if(!isDefined(var_2)) {
       continue;
     }
 
-    var3 = undefined;
+    var_3 = undefined;
 
-    foreach(var5 in var2.outlines) {
-      if(var5.type == "SQUAD" && var5.team == var0.team && isDefined(var5.squadindex) && var5.squadindex == var0.squadindex) {
-        if(!scripts\engine\utility::array_contains(var5.playersvisibleto, var0)) {
-          var5.playersvisibleto[var5.playersvisibleto.size] = var0;
+    foreach(var_5 in var_2.outlines) {
+      if(var_5.type == "SQUAD" && var_5.team == var_0.team && isDefined(var_5.squadindex) && var_5.squadindex == var_0.squadindex) {
+        if(!scripts\engine\utility::array_contains(var_5.playersvisibleto, var_0)) {
+          var_5.playersvisibleto[var_5.playersvisibleto.size] = var_0;
         }
 
-        if(!isDefined(var3) || var5.priority > var3.priority) {
-          var3 = var5;
+        if(!isDefined(var_3) || var_5.priority > var_3.priority) {
+          var_3 = var_5;
         }
       }
     }
 
-    if(isDefined(var3)) {
-      _hudoutlineenableforclient(var2, var0, var3.hudoutlineassetname);
+    if(isDefined(var_3)) {
+      _hudoutlineenableforclient(var_2, var_0, var_3.hudoutlineassetname);
     }
   }
 }
 
-function outlinedisableinternalall(var0) {
-  if(!isDefined(var0) || !isDefined(var0.outlines) || var0.outlines.size == 0) {
+function outlinedisableinternalall(var_0) {
+  if(!isDefined(var_0) || !isDefined(var_0.outlines) || var_0.outlines.size == 0) {
     return;
   }
 
-  foreach(var2 in var0.outlines) {
-    outlinedisableinternal(var3, var0);
+  foreach(var_2 in var_0.outlines) {
+    outlinedisableinternal(var_3, var_0);
   }
 }
 
-function outlineaddtogloballist(var0) {
-  if(!scripts\engine\utility::array_contains(level.outlineents, var0)) {
-    level.outlineents[level.outlineents.size] = var0;
+function outlineaddtogloballist(var_0) {
+  if(!scripts\engine\utility::array_contains(level.outlineents, var_0)) {
+    level.outlineents[level.outlineents.size] = var_0;
     return;
   }
 }
 
-function outlineremovefromgloballist(var0) {
-  level.outlineents = scripts\engine\utility::array_remove(level.outlineents, var0);
+function outlineremovefromgloballist(var_0) {
+  level.outlineents = scripts\engine\utility::array_remove(level.outlineents, var_0);
 }
 
-function outlinegethighestpriorityid(var0) {
-  var1 = -1;
+function outlinegethighestpriorityid(var_0) {
+  var_1 = -1;
 
-  if(!isDefined(var0.outlines) || var0.size == 0) {
-    return var1;
+  if(!isDefined(var_0.outlines) || var_0.size == 0) {
+    return var_1;
   }
 
-  var2 = undefined;
+  var_2 = undefined;
 
-  foreach(var4 in var0.outlines) {
-    if(!isDefined(var4) || var4.isdisabled) {
+  foreach(var_4 in var_0.outlines) {
+    if(!isDefined(var_4) || var_4.isdisabled) {
       continue;
     }
 
-    if(!isDefined(var2) || var4.priority > var2.priority) {
-      var2 = var4;
-      var1 = var5;
+    if(!isDefined(var_2) || var_4.priority > var_2.priority) {
+      var_2 = var_4;
+      var_1 = var_5;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function outlinegethighestinfoforplayer(var0, var1) {
-  var2 = undefined;
+function outlinegethighestinfoforplayer(var_0, var_1) {
+  var_2 = undefined;
 
-  if(!isDefined(var0.outlines) || var0.size == 0) {
-    return var2;
+  if(!isDefined(var_0.outlines) || var_0.size == 0) {
+    return var_2;
   }
 
-  foreach(var4 in var0.outlines) {
-    if(!isDefined(var4) || var4.isdisabled) {
+  foreach(var_4 in var_0.outlines) {
+    if(!isDefined(var_4) || var_4.isdisabled) {
       continue;
     }
 
-    if(scripts\engine\utility::array_contains(var4.playersvisibleto, var1) && (!isDefined(var2) || var4.priority > var2.priority)) {
-      var2 = var4;
+    if(scripts\engine\utility::array_contains(var_4.playersvisibleto, var_1) && (!isDefined(var_2) || var_4.priority > var_2.priority)) {
+      var_2 = var_4;
     }
   }
 
-  return var2;
+  return var_2;
 }
 
 function outlinegenerateuniqueid() {
@@ -316,65 +316,65 @@ function outlinegenerateuniqueid() {
   return level.outlineids;
 }
 
-function outlineprioritygroupmap(var0) {
-  var0 = tolower(var0);
-  var1 = undefined;
+function outlineprioritygroupmap(var_0) {
+  var_0 = tolower(var_0);
+  var_1 = undefined;
 
-  switch (var0) {
+  switch (var_0) {
     case "lowest":
-      var1 = 0;
+      var_1 = 0;
       break;
     case "level_script":
-      var1 = 1;
+      var_1 = 1;
       break;
     case "equipment":
-      var1 = 2;
+      var_1 = 2;
       break;
     case "perk":
-      var1 = 3;
+      var_1 = 3;
       break;
     case "perk_superior":
-      var1 = 4;
+      var_1 = 4;
       break;
     case "killstreak":
-      var1 = 5;
+      var_1 = 5;
       break;
     case "killstreak_personal":
-      var1 = 6;
+      var_1 = 6;
       break;
     case "laststand":
-      var1 = 7;
+      var_1 = 7;
       break;
     case "top":
-      var1 = 8;
+      var_1 = 8;
       break;
     default:
-      var1 = 0;
+      var_1 = 0;
       break;
   }
 
-  return var1;
+  return var_1;
 }
 
 function outlineiddowatch() {
-  foreach(var3, var1 in level.outlineidspending) {
-    if(!isDefined(var1)) {
+  foreach(var_3, var_1 in level.outlineidspending) {
+    if(!isDefined(var_1)) {
       continue;
     }
 
-    if(!isDefined(var1.outlines)) {
+    if(!isDefined(var_1.outlines)) {
       continue;
     }
 
-    var2 = var1.outlines[var3];
+    var_2 = var_1.outlines[var_3];
 
-    if(!isDefined(var2)) {
+    if(!isDefined(var_2)) {
       continue;
     }
 
-    if(var2.playersvisibletopending.size > 0) {
-      if(outlinerefreshpending(var1, var3)) {
-        level.outlineidspending[var3] = undefined;
+    if(var_2.playersvisibletopending.size > 0) {
+      if(outlinerefreshpending(var_1, var_3)) {
+        level.outlineidspending[var_3] = undefined;
       }
     }
   }
@@ -388,36 +388,36 @@ function outlineidswatchpending() {
   }
 }
 
-function outlinerefreshpending(var0, var1) {
-  var2 = var0.outlines[var1];
+function outlinerefreshpending(var_0, var_1) {
+  var_2 = var_0.outlines[var_1];
 
-  foreach(var4 in var2.playersvisibletopending) {
-    if(!isDefined(var4)) {
+  foreach(var_4 in var_2.playersvisibletopending) {
+    if(!isDefined(var_4)) {
       continue;
     }
 
-    if(canoutlineforplayer(var4)) {
-      var5 = outlinegethighestinfoforplayer(var0, var4);
+    if(canoutlineforplayer(var_4)) {
+      var_5 = outlinegethighestinfoforplayer(var_0, var_4);
 
-      if(isDefined(var5) && var5.hudoutlineassetname != "invisible") {
-        var0 hudoutlineenableforclient(var4, var5.hudoutlineassetname);
+      if(isDefined(var_5) && var_5.hudoutlineassetname != "invisible") {
+        var_0 hudoutlineenableforclient(var_4, var_5.hudoutlineassetname);
       } else {
-        var0 hudoutlinedisableforclient(var4);
+        var_0 hudoutlinedisableforclient(var_4);
       }
 
-      var2.playersvisibletopending[var6] = undefined;
+      var_2.playersvisibletopending[var_6] = undefined;
     }
   }
 
-  var2.playersvisibletopending = scripts\engine\utility::array_removeundefined(var2.playersvisibletopending);
+  var_2.playersvisibletopending = scripts\engine\utility::array_removeundefined(var_2.playersvisibletopending);
 
-  if(var2.playersvisibletopending.size == 0) {
-    if(var2.isdisabled) {
-      var0.outlines[var1] = undefined;
+  if(var_2.playersvisibletopending.size == 0) {
+    if(var_2.isdisabled) {
+      var_0.outlines[var_1] = undefined;
     }
 
-    if(var0.outlines.size == 0) {
-      outlineremovefromgloballist(var0);
+    if(var_0.outlines.size == 0) {
+      outlineremovefromgloballist(var_0);
     }
 
     return true;
@@ -426,24 +426,24 @@ function outlinerefreshpending(var0, var1) {
   return false;
 }
 
-function canoutlineforplayer(var0) {
-  return var0.sessionstate != "spectator";
+function canoutlineforplayer(var_0) {
+  return var_0.sessionstate != "spectator";
 }
 
-function _hudoutlineenableforclient(var0, var1) {
-  if(var1 == "invisible") {
-    self hudoutlinedisableforclient(var0);
+function _hudoutlineenableforclient(var_0, var_1) {
+  if(var_1 == "invisible") {
+    self hudoutlinedisableforclient(var_0);
     return;
   }
 
-  self hudoutlineenableforclient(var0, var1);
+  self hudoutlineenableforclient(var_0, var_1);
 }
 
-function _hudoutlineenableforclients(var0, var1) {
-  if(var1 == "invisible") {
-    self hudoutlinedisableforclients(var0);
+function _hudoutlineenableforclients(var_0, var_1) {
+  if(var_1 == "invisible") {
+    self hudoutlinedisableforclients(var_0);
     return;
   }
 
-  self hudoutlineenableforclients(var0, var1);
+  self hudoutlineenableforclients(var_0, var_1);
 }

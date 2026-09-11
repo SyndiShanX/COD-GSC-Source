@@ -4,7 +4,7 @@
 ***********************************************/
 
 function main() {
-  var0 = gettime();
+  var_0 = gettime();
   scripts\sp\load_code::delete_on_load();
   scripts\sp\load_code::init_level();
   scripts\sp\load_code::init_global_variables();
@@ -79,23 +79,23 @@ function main() {
 }
 
 function spawncorpsehider() {
-  var0 = 0;
-  var1 = 1;
-  var2 = 2;
-  var3 = 3;
-  var4 = 4;
-  var5 = "sp/hideCorpseTable.csv";
-  var6 = tolower(getDvar("mapname"));
-  var7 = tablelookupgetnumrows(var5);
+  var_0 = 0;
+  var_1 = 1;
+  var_2 = 2;
+  var_3 = 3;
+  var_4 = 4;
+  var_5 = "sp/hideCorpseTable.csv";
+  var_6 = tolower(getDvar("mapname"));
+  var_7 = tablelookupgetnumrows(var_5);
 
-  for(var8 = 0; var8 < var7; var8++) {
-    if(var6 == tolower(tablelookupbyrow(var5, var8, var1))) {
-      var9 = tablelookupbyrow(var5, var8, var2);
-      var10 = strtok(tablelookupbyrow(var5, var8, var3), "_");
-      var11 = strtok(tablelookupbyrow(var5, var8, var4), "_");
-      var12 = spawn("script_model", (float(var10[0]), float(var10[1]), float(var10[2])));
-      var12 setModel(var9);
-      var12.angles = (float(var11[0]), float(var11[1]), float(var11[2]));
+  for(var_8 = 0; var_8 < var_7; var_8++) {
+    if(var_6 == tolower(tablelookupbyrow(var_5, var_8, var_1))) {
+      var_9 = tablelookupbyrow(var_5, var_8, var_2);
+      var_10 = strtok(tablelookupbyrow(var_5, var_8, var_3), "_");
+      var_11 = strtok(tablelookupbyrow(var_5, var_8, var_4), "_");
+      var_12 = spawn("script_model", (float(var_10[0]), float(var_10[1]), float(var_10[2])));
+      var_12 setModel(var_9);
+      var_12.angles = (float(var_11[0]), float(var_11[1]), float(var_11[2]));
     }
   }
 }

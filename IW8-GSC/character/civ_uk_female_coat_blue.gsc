@@ -30,6 +30,6 @@ function main_mp() {
   self setModel("civ_london_townhouse_female_a_med");
 }
 
-function precache_mp(var0) {
-  level.agent_definition[var0]["animclass"] = "civilian_female";
+function precache_mp(var_0) {
+  level.agent_definition[var_0]["animclass"] = "civilian_female";
 }

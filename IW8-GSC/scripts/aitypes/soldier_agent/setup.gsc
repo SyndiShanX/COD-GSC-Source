@@ -3,7 +3,7 @@
  * Script: scripts\aitypes\soldier_agent\setup.gsc
 ***************************************************/
 
-function setupagent(var0) {
+function setupagent(var_0) {
   if(istrue(self.chopper_lights)) {
     return anim.success;
   }

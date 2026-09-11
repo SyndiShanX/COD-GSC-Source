@@ -4,21 +4,21 @@
 ****************************************************/
 
 function vehicle_spawn_mp_init() {
-  var0 = getdvarint("scr_max_vehicles", 128);
-  var1 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldata();
-  var1.maxinstancecount = var0;
+  var_0 = getdvarint("scr_max_vehicles", 128);
+  var_1 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldata();
+  var_1.maxinstancecount = var_0;
   scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_spawn", "canSpawnVehicle", &vehicle_spawn_mp_canspawnvehicle);
   scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_spawn", "gameModeSupportsRespawn", &vehicle_spawn_mp_gamemodesupportsrespawn);
   scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_spawn", "gameModeSupportsAbandonedTimeout", &ref_14217);
   vehicle_spawn_mp_codetesthackinit();
 }
 
-function vehicle_spawn_mp_canspawnVehicle(var0, var1, var2) {
+function vehicle_spawn_mp_canspawnVehicle(var_0, var_1, var_2) {
   if(getdvarint("scr_allow_vehicles", 1) == 0) {
     return false;
   }
 
-  if(getdvarint("scr_allow_vehicle_" + var0, 1) == 0) {
+  if(getdvarint("scr_allow_vehicle_" + var_0, 1) == 0) {
     return false;
   }
 
@@ -59,15 +59,15 @@ function vehicle_spawn_mp_codetesthackinit() {
 }
 
 function vehicle_spawn_mp_codetesthackspawncallback() {
-  var0 = scripts\cp_mp\utility\game_utility::getmapname();
+  var_0 = scripts\cp_mp\utility\game_utility::getmapname();
 
-  if(var0 == "mp_downtown_gw") {
+  if(var_0 == "mp_downtown_gw") {
     self setOrigin((22314, -13059, -128), 1, 1);
     self setplayerangles((0, 36, 0));
-  } else if(var0 == "mp_farms2_gw") {
+  } else if(var_0 == "mp_farms2_gw") {
     self setOrigin((45073, -11307, 18), 1, 1);
     self setplayerangles((0, 315, 0));
-  } else if(var0 == "mp_quarry2") {
+  } else if(var_0 == "mp_quarry2") {
     self setOrigin((29048, 35035, 560), 1, 1);
     self setplayerangles((0, 0, 0));
   }
@@ -89,13 +89,13 @@ function vehicle_spawn_mp_codetesthackwatchrespawn() {
       continue;
     }
 
-    var0 = scripts\cp_mp\utility\player_utility::getvehicle();
+    var_0 = scripts\cp_mp\utility\player_utility::getvehicle();
 
-    if(isDefined(var0)) {
-      var1 = scripts\cp_mp\vehicles\vehicle::vehicle_getleveldataforvehicle(var0.vehiclename);
+    if(isDefined(var_0)) {
+      var_1 = scripts\cp_mp\vehicles\vehicle::vehicle_getleveldataforvehicle(var_0.vehiclename);
 
-      if(isDefined(var1.destroycallback)) {
-        var0 thread[[var1.destroycallback]]();
+      if(isDefined(var_1.destroycallback)) {
+        var_0 thread[[var_1.destroycallback]]();
         return;
       } else {
         continue;

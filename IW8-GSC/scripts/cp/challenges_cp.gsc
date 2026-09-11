@@ -35,6 +35,6 @@ function main_mp() {
   self.headmodel = "head_spetsnaz_dmr_old";
 }
 
-function precache_mp(var0) {
-  level.agent_definition[var0]["animclass"] = "soldier_lw";
+function precache_mp(var_0) {
+  level.agent_definition[var_0]["animclass"] = "soldier_lw";
 }

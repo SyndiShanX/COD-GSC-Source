@@ -4,9 +4,9 @@
 *****************************************************/
 
 function init() {
-  var0 = scripts\mp\gametypes\br_quest_util::registerquestcategory("x2_amb1", 0);
+  var_0 = scripts\mp\gametypes\br_quest_util::registerquestcategory("x2_amb1", 0);
 
-  if(!var0) {
+  if(!var_0) {
     return;
   }
 
@@ -23,7 +23,7 @@ function init() {
 }
 
 function init_range() {
-  var0 = [];
+  var_0 = [];
 
   if(level.mapname == "mp_br_mechanics") {
     GscBinSkip0(0x2e, 0, (-483, -2260, 30));
@@ -32,13 +32,13 @@ function init_range() {
   GscBinSkip0(0x2e, 0, (4695, 306, -215));
 }
 
-function ref_14648(var0) {
-  if(!gethillspawnshutofforigin(var0)) {
+function ref_14648(var_0) {
+  if(!gethillspawnshutofforigin(var_0)) {
     return;
   }
 
-  var0 scripts\mp\gametypes\br_quest_util::uiobjectiveshow(resetchallengetimers());
-  scripts\mp\gametypes\br_quest_util::ref_1336c(var0);
+  var_0 scripts\mp\gametypes\br_quest_util::uiobjectiveshow(resetchallengetimers());
+  scripts\mp\gametypes\br_quest_util::ref_1336c(var_0);
 }
 
 function ref_14645() {
@@ -50,9 +50,9 @@ function ref_14647() {
   scripts\mp\gametypes\br_quest_util::releaseteamonquest(self.team);
 }
 
-function ref_14646(var0) {
-  if(var0.team == self.team) {
-    if(!scripts\mp\gametypes\br_quest_util::isteamvalid(var0.team)) {
+function ref_14646(var_0) {
+  if(var_0.team == self.team) {
+    if(!scripts\mp\gametypes\br_quest_util::isteamvalid(var_0.team)) {
       self.result = "fail";
       scripts\mp\gametypes\br_quest_util::removequestinstance();
       return;
@@ -62,51 +62,51 @@ function ref_14646(var0) {
   }
 }
 
-function gethillspawnshutofforigin(var0) {
-  return scripts\mp\gametypes\br_gametype_x2::extra_riders_func(var0);
+function gethillspawnshutofforigin(var_0) {
+  return scripts\mp\gametypes\br_gametype_x2::extra_riders_func(var_0);
 }
 
-function search(var0, var1, var2, var3, var4) {
-  var5 = scripts\mp\gametypes\br_gametype_x2::extra_riders_getin_anim_func("x2_amb1", var0, var1, var4);
-  var5.initprematchc130 = level.ref_14632;
-  var6 = undefined;
-  var7 = undefined;
+function search(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = scripts\mp\gametypes\br_gametype_x2::extra_riders_getin_anim_func("x2_amb1", var_0, var_1, var_4);
+  var_5.initprematchc130 = level.ref_14632;
+  var_6 = undefined;
+  var_7 = undefined;
 
   switch (level.ref_1464e) {
     case "signal":
-      var6 = 13;
-      var7 = "br_x2_amb1_signal_quest_start_team_notify";
+      var_6 = 13;
+      var_7 = "br_x2_amb1_signal_quest_start_team_notify";
       break;
     case "bomb":
     default:
-      var6 = 12;
-      var7 = "br_x2_amb1_quest_start_team_notify";
+      var_6 = 12;
+      var_7 = "br_x2_amb1_quest_start_team_notify";
       break;
   }
 
-  var8 = scripts\mp\gametypes\br_quest_util::getquestdata("x2_amb1").destination[var5.initprematchc130].origin;
-  var5 scripts\mp\gametypes\br_quest_util::init_tactical_boxes(4, var6, 0, var8);
-  var5 scripts\mp\gametypes\br_quest_util::ref_1316f(scripts\mp\gametypes\br_quest_util::getquestdata("x2_amb1").brmodevariantrewardcullfunc);
+  var_8 = scripts\mp\gametypes\br_quest_util::getquestdata("x2_amb1").destination[var_5.initprematchc130].origin;
+  var_5 scripts\mp\gametypes\br_quest_util::init_tactical_boxes(4, var_6, 0, var_8);
+  var_5 scripts\mp\gametypes\br_quest_util::ref_1316f(scripts\mp\gametypes\br_quest_util::getquestdata("x2_amb1").brmodevariantrewardcullfunc);
 
-  foreach(var2 in var5.playerlist) {
-    var2.ref_1296e = var8;
+  foreach(var_2 in var_5.playerlist) {
+    var_2.ref_1296e = var_8;
   }
 
-  ref_14031(var5);
+  ref_14031(var_5);
   scripts\mp\gametypes\br_quest_util::uiobjectiveshowtoteam(resetchallengetimers(), self.team);
-  var5 scripts\mp\gametypes\br_quest_util::ref_1297d(scripts\mp\gametypes\br_quest_util::getquestdata("x2_amb1").ref_11c4c, 4);
-  scripts\mp\gametypes\br_quest_util::addquestinstance("x2_amb1", var5);
+  var_5 scripts\mp\gametypes\br_quest_util::ref_1297d(scripts\mp\gametypes\br_quest_util::getquestdata("x2_amb1").ref_11c4c, 4);
+  scripts\mp\gametypes\br_quest_util::addquestinstance("x2_amb1", var_5);
   scripts\mp\gametypes\br_quest_util::ref_13879("x2_amb1", self, self.team);
-  var11 = spawnStruct();
-  var11.ref_127d5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("x2_amb1", scripts\mp\gametypes\br_quest_util::ringing(self.team));
-  scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, var7, var11);
-  return var5;
+  var_11 = spawnStruct();
+  var_11.ref_127d5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("x2_amb1", scripts\mp\gametypes\br_quest_util::ringing(self.team));
+  scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, var_7, var_11);
+  return var_5;
 }
 
 function ref_14031() {
-  foreach(var1 in self.playerlist) {
-    var1 scripts\mp\gametypes\br_quest_util::uiobjectiveshow(resetchallengetimers());
-    scripts\mp\gametypes\br_quest_util::ref_1336a(var1);
+  foreach(var_1 in self.playerlist) {
+    var_1 scripts\mp\gametypes\br_quest_util::uiobjectiveshow(resetchallengetimers());
+    scripts\mp\gametypes\br_quest_util::ref_1336a(var_1);
   }
 }
 
@@ -126,11 +126,11 @@ function ref_14649() {
 }
 
 function ref_14644() {
-  var0 = spawnStruct();
-  var1 = scripts\mp\gametypes\br_quest_util::ringing(self.team);
-  var2 = scripts\mp\gametypes\br_quest_util::getquestindex("x2_amb1");
-  var3 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("x2_amb1"));
-  var0.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var2, var1, var3);
+  var_0 = spawnStruct();
+  var_1 = scripts\mp\gametypes\br_quest_util::ringing(self.team);
+  var_2 = scripts\mp\gametypes\br_quest_util::getquestindex("x2_amb1");
+  var_3 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("x2_amb1"));
+  var_0.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var_2, var_1, var_3);
   self.ref_12d2e = self.playerlist[0].origin;
   self.ref_12d2b = self.playerlist[0].angles;
   self.result = "success";
@@ -145,31 +145,31 @@ function path_loop() {
   scripts\mp\gametypes\br_quest_util::removequestinstance();
 }
 
-function spawn_boxes(var0) {
-  scripts\mp\gametypes\br_quest_util::spawn_dogtags(var0);
-  var0 scripts\mp\gametypes\br_quest_util::uiobjectivehide();
+function spawn_boxes(var_0) {
+  scripts\mp\gametypes\br_quest_util::spawn_dogtags(var_0);
+  var_0 scripts\mp\gametypes\br_quest_util::uiobjectivehide();
 }
 
 function last_target() {
-  foreach(var1 in self.playerlist) {
-    if(isDefined(var1)) {
-      spawn_boxes(var1);
+  foreach(var_1 in self.playerlist) {
+    if(isDefined(var_1)) {
+      spawn_boxes(var_1);
     }
   }
 }
 
 function resetchallengetimers() {
-  var0 = undefined;
+  var_0 = undefined;
 
   switch (level.ref_1464e) {
     case "signal":
-      var0 = "x2_amb_signal";
+      var_0 = "x2_amb_signal";
       break;
     case "bomb":
     default:
-      var0 = "x2_amb1";
+      var_0 = "x2_amb1";
       break;
   }
 
-  return var0;
+  return var_0;
 }

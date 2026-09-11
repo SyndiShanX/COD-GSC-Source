@@ -27,22 +27,22 @@ function init() {
   level.sentientpools[level.sentientpools.size] = "Killstreak_Ground";
   level.activesentients = [];
 
-  for(var0 = 0; var0 < level.sentientpools.size; var0++) {
-    level.activesentients[level.sentientpools[var0]] = [];
+  for(var_0 = 0; var_0 < level.sentientpools.size; var_0++) {
+    level.activesentients[level.sentientpools[var_0]] = [];
   }
 }
 
-function registersentient(var0, var1, var2, var3, var4, var5) {
-  var6 = -1;
+function registersentient(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = -1;
 
-  for(var7 = 0; var7 < level.sentientpools.size; var7++) {
-    if(level.sentientpools[var7] == var0) {
-      var6 = var7;
+  for(var_7 = 0; var_7 < level.sentientpools.size; var_7++) {
+    if(level.sentientpools[var_7] == var_0) {
+      var_6 = var_7;
       break;
     }
   }
 
-  if(var6 == -1) {
+  if(var_6 == -1) {
     return;
   }
 
@@ -50,100 +50,100 @@ function registersentient(var0, var1, var2, var3, var4, var5) {
     return;
   }
 
-  var8 = getsentientlimits();
-  var9 = nvidiaanselisenabled();
+  var_8 = getsentientlimits();
+  var_9 = nvidiaanselisenabled();
 
-  if(var8["other"] + var8["expendable"] >= var9["other"]) {
-    var10 = removebestsentient(level, var6);
+  if(var_8["other"] + var_8["expendable"] >= var_9["other"]) {
+    var_10 = removebestsentient(level, var_6);
 
-    if(!var10) {
+    if(!var_10) {
       return;
     }
   }
 
-  self.sentientpool = var0;
+  self.sentientpool = var_0;
   self.sentientaddedtime = gettime();
   self.sentientpoolindex = self getentitynumber();
-  var11 = undefined;
+  var_11 = undefined;
 
-  if(isstring(var1)) {
-    var11 = var1;
-  } else if(isPlayer(var1)) {
-    var11 = var1.team;
+  if(isstring(var_1)) {
+    var_11 = var_1;
+  } else if(isPlayer(var_1)) {
+    var_11 = var_1.team;
   }
 
-  var12 = undefined;
+  var_12 = undefined;
 
-  if(isDefined(var11) && !isagent(self)) {
-    var12 = self makeentitysentient(var11, undefined, var4, var5);
+  if(isDefined(var_11) && !isagent(self)) {
+    var_12 = self makeentitysentient(var_11, undefined, var_4, var_5);
   }
 
-  if(istrue(var12)) {
-    self setthreatbiasgroup(var0);
+  if(istrue(var_12)) {
+    self setthreatbiasgroup(var_0);
 
-    if(istrue(var2)) {
+    if(istrue(var_2)) {
       self makeentitynomeleetarget();
     }
 
-    level.activesentients[var0][self.sentientpoolindex] = self;
-    thread monitorsentient(var3);
+    level.activesentients[var_0][self.sentientpoolindex] = self;
+    thread monitorsentient(var_3);
     return;
   }
 }
 
-function monitorsentient(var0) {
+function monitorsentient(var_0) {
   level endon("game_ended");
-  var1 = self.sentientpool;
-  var2 = self.sentientpoolindex;
+  var_1 = self.sentientpool;
+  var_2 = self.sentientpoolindex;
 
-  if(isDefined(var0)) {
-    scripts\engine\utility::ref_143a6("death", "remove_sentient", var0);
+  if(isDefined(var_0)) {
+    scripts\engine\utility::ref_143a6("death", "remove_sentient", var_0);
   } else {
     scripts\engine\utility::waittill_either("death", "remove_sentient");
   }
 
-  unregistersentient(var1, var2);
+  unregistersentient(var_1, var_2);
 }
 
-function removebestsentient(var0) {
-  var1 = undefined;
+function removebestsentient(var_0) {
+  var_1 = undefined;
 
-  for(var2 = 0; var2 <= var0; var2++) {
-    var1 = getbestsentientfrompool(level.sentientpools[var2]);
+  for(var_2 = 0; var_2 <= var_0; var_2++) {
+    var_1 = getbestsentientfrompool(level.sentientpools[var_2]);
 
-    if(isDefined(var1)) {
+    if(isDefined(var_1)) {
       break;
     }
   }
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return false;
   }
 
-  unregistersentient(var1, var1.sentientpool, var1.sentientpoolindex);
+  unregistersentient(var_1, var_1.sentientpool, var_1.sentientpoolindex);
   return true;
 }
 
-function getbestsentientfrompool(var0) {
-  var1 = undefined;
-  var2 = undefined;
+function getbestsentientfrompool(var_0) {
+  var_1 = undefined;
+  var_2 = undefined;
 
-  foreach(var4 in level.activesentients[var0]) {
-    if(!isDefined(var2) || var4.sentientaddedtime < var2) {
-      var2 = var4.sentientaddedtime;
-      var1 = var4;
+  foreach(var_4 in level.activesentients[var_0]) {
+    if(!isDefined(var_2) || var_4.sentientaddedtime < var_2) {
+      var_2 = var_4.sentientaddedtime;
+      var_1 = var_4;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function unregistersentient(var0, var1) {
-  if(!isDefined(var0) || !isDefined(var1)) {
+function unregistersentient(var_0, var_1) {
+  if(!isDefined(var_0) || !isDefined(var_1)) {
     return;
   }
 
-  level.activesentients[var0][var1] = undefined;
+  level.activesentients[var_0][var_1] = undefined;
 
   if(isDefined(self)) {
     self.sentientpool = undefined;

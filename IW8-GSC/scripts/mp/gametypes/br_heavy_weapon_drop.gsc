@@ -5,24 +5,24 @@
 
 function init() {
   level.shutdownattractionicontrigger = [];
-  var0 = scripts\cp_mp\killstreaks\airdrop::getleveldata("heavy_weapon_crate");
-  var0.capturestring = &"MP/GENERIC_LOOT_CRATE_CAPTURE";
-  var0.dummymodel = "military_carepackage_01_br_legendary";
-  var0.friendlymodel = undefined;
-  var0.enemymodel = undefined;
-  var0.mountmantlemodel = undefined;
-  var0.supportsownercapture = 0;
-  var0.headicon = undefined;
-  var0.minimapicon = undefined;
-  var0.usepriority = -1;
-  var0.usefov = 180;
-  var0.timeout = undefined;
-  var0.friendlyuseonly = 0;
-  var0.ownerusetime = 0.5;
-  var0.otherusetime = 0.5;
-  var0.activatecallback = &signal_nag;
-  var0.capturecallback = &signal_strength;
-  var0.destroyoncapture = 1;
+  var_0 = scripts\cp_mp\killstreaks\airdrop::getleveldata("heavy_weapon_crate");
+  var_0.capturestring = &"MP/GENERIC_LOOT_CRATE_CAPTURE";
+  var_0.dummymodel = "military_carepackage_01_br_legendary";
+  var_0.friendlymodel = undefined;
+  var_0.enemymodel = undefined;
+  var_0.mountmantlemodel = undefined;
+  var_0.supportsownercapture = 0;
+  var_0.headicon = undefined;
+  var_0.minimapicon = undefined;
+  var_0.usepriority = -1;
+  var_0.usefov = 180;
+  var_0.timeout = undefined;
+  var_0.friendlyuseonly = 0;
+  var_0.ownerusetime = 0.5;
+  var_0.otherusetime = 0.5;
+  var_0.activatecallback = &signal_nag;
+  var_0.capturecallback = &signal_strength;
+  var_0.destroyoncapture = 1;
   level.delaystreamtomovingplane = getdvarint("scr_br_pe_weapon_crate_useUltraLoot", 0) == 1;
   level.shrink_poi_into_the_bank = spawnStruct();
   level.shrink_poi_into_the_bank.besttimestate = 1;
@@ -33,8 +33,8 @@ function init() {
   level.shrink_poi_into_the_bank.weapon_xp_iw8_pi_mike1911 = [["brloot_offhand_c4", 2], ["brloot_offhand_molotov", 2], ["brloot_offhand_thermite", 2], ["brloot_offhand_frag", 2]];
 }
 
-function signal_nag(var0) {
-  if(istrue(var0)) {
+function signal_nag(var_0) {
+  if(istrue(var_0)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "registerCrateForCleanup")) {
       [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "registerCrateForCleanup")]](self);
     }
@@ -43,7 +43,7 @@ function signal_nag(var0) {
   level.shutdownattractionicontrigger[level.shutdownattractionicontrigger.size] = self;
 }
 
-function signal_strength(var0) {
+function signal_strength(var_0) {
   if(isDefined(self.ref_13428)) {
     self.ref_13428 setscriptablepartstate("smoke_signal", "off", 0);
     self.ref_13428 delete();
@@ -54,88 +54,88 @@ function signal_strength(var0) {
 }
 
 function shut_down_station() {
-  var0 = [];
-  var1 = randomint(100);
+  var_0 = [];
+  var_1 = randomint(100);
 
   if(istrue(level.delaystreamtomovingplane)) {
-    if(var1 < 5) {
-      var2 = randomint(level.shrink_poi_into_the_bank.ref_13eff.size);
-      var0 = level.shrink_poi_into_the_bank.ref_13eff[var2];
+    if(var_1 < 5) {
+      var_2 = randomint(level.shrink_poi_into_the_bank.ref_13eff.size);
+      var_0 = level.shrink_poi_into_the_bank.ref_13eff[var_2];
     } else {
-      var2 = randomint(level.shrink_poi_into_the_bank.waypoint_icon.size);
-      var1 = level.shrink_poi_into_the_bank.waypoint_icon[var2];
+      var_2 = randomint(level.shrink_poi_into_the_bank.waypoint_icon.size);
+      var_1 = level.shrink_poi_into_the_bank.waypoint_icon[var_2];
     }
 
-    var2 = randomint(level.shrink_poi_into_the_bank.waypoints.size);
-    var1 = level.shrink_poi_into_the_bank.waypoints[var2];
-    var2 = randomint(level.shrink_poi_into_the_bank.chopper_gunner.size);
-    var1 = level.shrink_poi_into_the_bank.chopper_gunner[var2];
-    var2 = randomint(level.shrink_poi_into_the_bank.weapon_xp_iw8_pi_mike1911.size);
-    var1 = level.shrink_poi_into_the_bank.weapon_xp_iw8_pi_mike1911[var2];
+    var_2 = randomint(level.shrink_poi_into_the_bank.waypoints.size);
+    var_1 = level.shrink_poi_into_the_bank.waypoints[var_2];
+    var_2 = randomint(level.shrink_poi_into_the_bank.chopper_gunner.size);
+    var_1 = level.shrink_poi_into_the_bank.chopper_gunner[var_2];
+    var_2 = randomint(level.shrink_poi_into_the_bank.weapon_xp_iw8_pi_mike1911.size);
+    var_1 = level.shrink_poi_into_the_bank.weapon_xp_iw8_pi_mike1911[var_2];
 
     if(istrue(level.shrink_poi_into_the_bank.besttimestate)) {
-      var1 = ["brloot_killstreak_uav", 0];
+      var_1 = ["brloot_killstreak_uav", 0];
     }
   } else {
-    if(var2 < 5) {
-      var2 = ["brloot_weapon_la_mike32_lege", "brloot_ammo_rocket"];
-    } else if(var2 < 10) {
-      var2 = ["brloot_weapon_lm_dblmg_lege", "brloot_ammo_762"];
+    if(var_2 < 5) {
+      var_2 = ["brloot_weapon_la_mike32_lege", "brloot_ammo_rocket"];
+    } else if(var_2 < 10) {
+      var_2 = ["brloot_weapon_lm_dblmg_lege", "brloot_ammo_762"];
     } else {
-      var2 = randomint(level.shrink_poi_into_the_bank.waypoint_icon.size);
-      var2 = level.shrink_poi_into_the_bank.waypoint_icon[var2];
+      var_2 = randomint(level.shrink_poi_into_the_bank.waypoint_icon.size);
+      var_2 = level.shrink_poi_into_the_bank.waypoint_icon[var_2];
     }
 
-    var2 = randomint(level.shrink_poi_into_the_bank.chopper_gunner.size);
-    var2 = level.shrink_poi_into_the_bank.chopper_gunner[var2];
-    var2 = randomint(level.shrink_poi_into_the_bank.waypoints.size);
-    var2 = level.shrink_poi_into_the_bank.waypoints[var2];
-    var2 = randomint(level.shrink_poi_into_the_bank.weapon_xp_iw8_pi_mike1911.size);
-    var2 = level.shrink_poi_into_the_bank.weapon_xp_iw8_pi_mike1911[var2];
+    var_2 = randomint(level.shrink_poi_into_the_bank.chopper_gunner.size);
+    var_2 = level.shrink_poi_into_the_bank.chopper_gunner[var_2];
+    var_2 = randomint(level.shrink_poi_into_the_bank.waypoints.size);
+    var_2 = level.shrink_poi_into_the_bank.waypoints[var_2];
+    var_2 = randomint(level.shrink_poi_into_the_bank.weapon_xp_iw8_pi_mike1911.size);
+    var_2 = level.shrink_poi_into_the_bank.weapon_xp_iw8_pi_mike1911[var_2];
 
     if(istrue(level.shrink_poi_into_the_bank.besttimestate)) {
-      var2 = ["brloot_killstreak_uav", 0];
+      var_2 = ["brloot_killstreak_uav", 0];
     }
   }
 
-  var3 = 0;
-  var4 = scripts\mp\gametypes\br_pickups::test_ai_anim();
+  var_3 = 0;
+  var_4 = scripts\mp\gametypes\br_pickups::test_ai_anim();
 
-  foreach(var6 in var2) {
-    var7 = var6[0];
+  foreach(var_6 in var_2) {
+    var_7 = var_6[0];
 
-    if(scripts\mp\gametypes\br_lootcache::get_bonus_targets(var7)) {
-      var8 = level.br_pickups.delay_hide_player_clip[var7];
+    if(scripts\mp\gametypes\br_lootcache::get_bonus_targets(var_7)) {
+      var_8 = level.br_pickups.delay_hide_player_clip[var_7];
 
-      if(!var3 && isDefined(var8) && var8 == 4) {
-        var9 = scripts\mp\gametypes\br_lootcache::ref_11a41(var7, var4, self.origin, self.angles, 0, 1);
-        var3 = 1;
+      if(!var_3 && isDefined(var_8) && var_8 == 4) {
+        var_9 = scripts\mp\gametypes\br_lootcache::ref_11a41(var_7, var_4, self.origin, self.angles, 0, 1);
+        var_3 = 1;
       } else {
-        var9 = scripts\mp\gametypes\br_lootcache::ref_11a41(var11, var5, self.origin, self.angles, 0, 0);
+        var_9 = scripts\mp\gametypes\br_lootcache::ref_11a41(var_11, var_5, self.origin, self.angles, 0, 0);
       }
 
-      if(isstring(var7[1])) {
-        var10 = scripts\mp\gametypes\br_lootcache::ref_11a41(var7[1], var5, self.origin, self.angles, 0, 0);
-        var10.count = level.br_pickups.maxcounts[var7[1]];
+      if(isstring(var_7[1])) {
+        var_10 = scripts\mp\gametypes\br_lootcache::ref_11a41(var_7[1], var_5, self.origin, self.angles, 0, 0);
+        var_10.count = level.br_pickups.maxcounts[var_7[1]];
       } else {
-        var9.count = var7[1];
+        var_9.count = var_7[1];
       }
     }
   }
 
-  var6 = undefined;
-  var8 = undefined;
+  var_6 = undefined;
+  var_8 = undefined;
 
   if(isDefined(level.shrink_poi_into_the_bank.beardone)) {
-    [[level.shrink_poi_into_the_bank.beardone]](var5, self.origin, self.angles);
+    [[level.shrink_poi_into_the_bank.beardone]](var_5, self.origin, self.angles);
   }
 
   if(istrue(self.ref_135b6)) {
-    var12 = spawnStruct();
-    var12.origin = self.origin;
-    var12.angles = (0, 90, 0);
-    var5 = scripts\mp\gametypes\br_pickups::test_ai_anim();
-    scripts\mp\gametypes\br_lootcache::ref_11a41("brloot_soa_pow_dogtag", var5, var12.origin, var12.angles, 0, 1);
+    var_12 = spawnStruct();
+    var_12.origin = self.origin;
+    var_12.angles = (0, 90, 0);
+    var_5 = scripts\mp\gametypes\br_pickups::test_ai_anim();
+    scripts\mp\gametypes\br_lootcache::ref_11a41("brloot_soa_pow_dogtag", var_5, var_12.origin, var_12.angles, 0, 1);
     return;
   }
 }

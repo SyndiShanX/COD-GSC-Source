@@ -5,10 +5,10 @@
 
 function tac_cover_init() {
   if(!isDefined(level.taccovercollision)) {
-    var0 = getEntArray("tactical_cover_col", "targetname");
+    var_0 = getEntArray("tactical_cover_col", "targetname");
 
-    if(isDefined(var0)) {
-      level.taccovercollision = var0[0];
+    if(isDefined(var_0)) {
+      level.taccovercollision = var_0[0];
       return;
     }
 
@@ -16,20 +16,20 @@ function tac_cover_init() {
   }
 }
 
-function tac_cover_on_give(var0, var1) {
+function tac_cover_on_give(var_0, var_1) {
   self notify("tac_cover_given");
 }
 
-function tac_cover_on_take(var0, var1, var2) {
+function tac_cover_on_take(var_0, var_1, var_2) {
   self notify("tac_cover_taken");
   self.taccoverrefund = undefined;
 }
 
-function tac_cover_used(var0) {
+function tac_cover_used(var_0) {
   waitframe();
 
-  foreach(var2 in self.offhandinventory) {
-    if(isDefined(var2.basename) && var2.basename == "tac_cover_mp") {
+  foreach(var_2 in self.offhandinventory) {
+    if(isDefined(var_2.basename) && var_2.basename == "tac_cover_mp") {
       self takeweapon("tac_cover_mp");
     }
   }
@@ -39,55 +39,55 @@ function tac_cover_used(var0) {
     self.ref_12879 = undefined;
   }
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
     return;
   }
 }
 
-function tac_cover_on_fired(var0, var1, var2, var3) {
+function tac_cover_on_fired(var_0, var_1, var_2, var_3) {
   self.taccoverrefund = 1;
-  var4 = physics_createcontents(["physicscontents_player", "physicscontents_solid", "physicscontents_playerclip", "physicscontents_water", "physicscontents_sky", "physicscontents_vehicle"]);
-  var5 = anglesToForward(self.angles);
-  var6 = self.origin + var5 * 32;
-  var7 = _calloutmarkerping_handleluinotify_brinventoryslotrequest::ref_12f67(var6, 140, 20);
-  var8 = undefined;
-  var9 = 0;
+  var_4 = physics_createcontents(["physicscontents_player", "physicscontents_solid", "physicscontents_playerclip", "physicscontents_water", "physicscontents_sky", "physicscontents_vehicle"]);
+  var_5 = anglesToForward(self.angles);
+  var_6 = self.origin + var_5 * 32;
+  var_7 = _calloutmarkerping_handleluinotify_brinventoryslotrequest::ref_12f67(var_6, 140, 20);
+  var_8 = undefined;
+  var_9 = 0;
 
-  foreach(var11 in var7) {
-    var12 = distancesquared(var11.origin, var6);
+  foreach(var_11 in var_7) {
+    var_12 = distancesquared(var_11.origin, var_6);
 
-    if(isDefined(var8) && var9 <= var12) {
+    if(isDefined(var_8) && var_9 <= var_12) {
       continue;
     }
 
-    var8 = var11;
-    var9 = var12;
+    var_8 = var_11;
+    var_9 = var_12;
   }
 
-  if(isDefined(var8)) {
-    var14 = var8 scriptabledoorangle();
-    var15 = abs(var14) > 65;
-    var16 = undefined;
+  if(isDefined(var_8)) {
+    var_14 = var_8 scriptabledoorangle();
+    var_15 = abs(var_14) > 65;
+    var_16 = undefined;
 
-    foreach(var18 in var7) {
-      if(var8 _calloutmarkerping_handleluinotify_brinventoryslotrequest::ref_12f68(var18)) {
-        var16 = var18;
+    foreach(var_18 in var_7) {
+      if(var_8 _calloutmarkerping_handleluinotify_brinventoryslotrequest::ref_12f68(var_18)) {
+        var_16 = var_18;
         break;
       }
     }
 
-    var20 = 1;
+    var_20 = 1;
 
-    if(isDefined(var16)) {
-      var21 = var16 scriptabledoorangle();
-      var20 = abs(var21) > 65;
+    if(isDefined(var_16)) {
+      var_21 = var_16 scriptabledoorangle();
+      var_20 = abs(var_21) > 65;
     }
 
-    if(var9 < 1600 && var15 && var20) {
-      var8.tutonplayerkilled = 1;
+    if(var_9 < 1600 && var_15 && var_20) {
+      var_8.tutonplayerkilled = 1;
       self.taccoverrefund = undefined;
-      thread ref_139f6(var8, var16, var3, var4);
+      thread ref_139f6(var_8, var_16, var_3, var_4);
 
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("challenges", "onFieldUpgradeEnd")) {
         self[[scripts\cp_mp\utility\script_utility::getsharedfunc("challenges", "onFieldUpgradeEnd")]]("super_tac_cover", 1);
@@ -95,141 +95,141 @@ function tac_cover_on_fired(var0, var1, var2, var3) {
 
       scripts\cp\agents\agents::incpersstat("deployableCoverUsed", 1);
       return true;
-    } else if(var9 < 6400) {
+    } else if(var_9 < 6400) {
       tac_cover_fire_failed(1);
       return false;
     }
   }
 
-  var22 = tac_cover_ignore_list(self);
-  var23 = self getplayerangles() * (0, 1, 0);
-  var24 = self.origin + (0, 0, 24);
-  var25 = anglesToForward(var23);
-  var26 = 29.5;
-  var27 = var24 + var25 * var26;
-  var28 = physics_raycast(var24, var27, var4, var22, 0, "physicsquery_closest", 1);
+  var_22 = tac_cover_ignore_list(self);
+  var_23 = self getplayerangles() * (0, 1, 0);
+  var_24 = self.origin + (0, 0, 24);
+  var_25 = anglesToForward(var_23);
+  var_26 = 29.5;
+  var_27 = var_24 + var_25 * var_26;
+  var_28 = physics_raycast(var_24, var_27, var_4, var_22, 0, "physicsquery_closest", 1);
 
-  if(isDefined(var28) && var28.size > 0) {
+  if(isDefined(var_28) && var_28.size > 0) {
     tac_cover_fire_failed();
     return false;
   }
 
-  var29 = undefined;
-  var30 = undefined;
-  var24 = var27;
-  var25 = anglestoright(var23);
-  var26 = 55.5;
-  var31 = var24 + var25 * var26;
-  var28 = physics_spherecast(var24, var31, 2.5, var4, var22, "physicsquery_closest");
+  var_29 = undefined;
+  var_30 = undefined;
+  var_24 = var_27;
+  var_25 = anglestoright(var_23);
+  var_26 = 55.5;
+  var_31 = var_24 + var_25 * var_26;
+  var_28 = physics_spherecast(var_24, var_31, 2.5, var_4, var_22, "physicsquery_closest");
 
-  if(isDefined(var28) && var28.size > 0) {
-    var32 = var28[0]["shape_position"];
-    var29 = var28[0]["fraction"];
+  if(isDefined(var_28) && var_28.size > 0) {
+    var_32 = var_28[0]["shape_position"];
+    var_29 = var_28[0]["fraction"];
   } else {
-    var29 = 1;
+    var_29 = 1;
   }
 
-  var24 = var27;
-  var25 = -1 * anglestoright(var23);
-  var26 = 55.5;
-  var31 = var24 + var25 * var26;
-  var28 = physics_spherecast(var24, var31, 2.5, var4, var22, "physicsquery_closest");
+  var_24 = var_27;
+  var_25 = -1 * anglestoright(var_23);
+  var_26 = 55.5;
+  var_31 = var_24 + var_25 * var_26;
+  var_28 = physics_spherecast(var_24, var_31, 2.5, var_4, var_22, "physicsquery_closest");
 
-  if(isDefined(var28) && var28.size > 0) {
-    var32 = var28[0]["shape_position"];
-    var30 = var28[0]["fraction"];
+  if(isDefined(var_28) && var_28.size > 0) {
+    var_32 = var_28[0]["shape_position"];
+    var_30 = var_28[0]["fraction"];
   } else {
-    var30 = 1;
+    var_30 = 1;
   }
 
-  if(var30 + var29 < 1) {
+  if(var_30 + var_29 < 1) {
     tac_cover_fire_failed();
     return false;
-  } else if(var29 < 0.5) {
-    var27 += var25 * var26 * (0.5 - var29);
-  } else if(var30 < 0.5) {
-    var27 += var25 * var26 * (0.5 - var30) * -1;
+  } else if(var_29 < 0.5) {
+    var_27 += var_25 * var_26 * (0.5 - var_29);
+  } else if(var_30 < 0.5) {
+    var_27 += var_25 * var_26 * (0.5 - var_30) * -1;
   }
 
-  var33 = var23;
-  var24 = var27;
-  var25 = (0, 0, -1);
-  var26 = 60;
-  var31 = var24 + var25 * var26;
-  var34 = combineangles(var33, (0, 0, 90));
-  var28 = physics_capsulecast(var24, var31, 2.5, 16.8, var34, var4, var22, "physicsquery_closest");
+  var_33 = var_23;
+  var_24 = var_27;
+  var_25 = (0, 0, -1);
+  var_26 = 60;
+  var_31 = var_24 + var_25 * var_26;
+  var_34 = combineangles(var_33, (0, 0, 90));
+  var_28 = physics_capsulecast(var_24, var_31, 2.5, 16.8, var_34, var_4, var_22, "physicsquery_closest");
 
-  if(!isDefined(var28) || var28.size <= 0) {
-    tac_cover_fire_failed();
-    return false;
-  }
-
-  var35 = var28[0]["entity"];
-
-  if(isDefined(var35) && !ref_139f0(var35)) {
+  if(!isDefined(var_28) || var_28.size <= 0) {
     tac_cover_fire_failed();
     return false;
   }
 
-  var36 = var28[0]["shape_position"];
-  var32 = var28[0]["position"];
-  var37 = var36 - (0, 0, 2.5);
-  var38 = 25.025;
-  var39 = pow(var38 * 0.14, 2);
-  var40 = var36;
-  var41 = distance2dsquared(var40, var32);
-  var42 = var36 + anglestoright(var23) * 14.3 * 1.75;
-  var43 = distance2dsquared(var42, var32);
-  var44 = var36 + anglestoright(var23) * 14.3 * 1.75 * -1;
-  var45 = distance2dsquared(var44, var32);
-  var46 = [];
-  var47 = 0;
+  var_35 = var_28[0]["entity"];
 
-  if(var43 <= var39 && var43 < var41 && var43 < var45) {
-    var47++;
-    var46 = [var40, var44];
-  } else if(var45 <= var39 && var45 < var41 && var45 < var43) {
-    var47++;
-    var46 = [var40, var42];
-  } else if(var41 <= var39) {
-    var47++;
-    var46 = [var44, var42];
+  if(isDefined(var_35) && !ref_139f0(var_35)) {
+    tac_cover_fire_failed();
+    return false;
+  }
+
+  var_36 = var_28[0]["shape_position"];
+  var_32 = var_28[0]["position"];
+  var_37 = var_36 - (0, 0, 2.5);
+  var_38 = 25.025;
+  var_39 = pow(var_38 * 0.14, 2);
+  var_40 = var_36;
+  var_41 = distance2dsquared(var_40, var_32);
+  var_42 = var_36 + anglestoright(var_23) * 14.3 * 1.75;
+  var_43 = distance2dsquared(var_42, var_32);
+  var_44 = var_36 + anglestoright(var_23) * 14.3 * 1.75 * -1;
+  var_45 = distance2dsquared(var_44, var_32);
+  var_46 = [];
+  var_47 = 0;
+
+  if(var_43 <= var_39 && var_43 < var_41 && var_43 < var_45) {
+    var_47++;
+    var_46 = [var_40, var_44];
+  } else if(var_45 <= var_39 && var_45 < var_41 && var_45 < var_43) {
+    var_47++;
+    var_46 = [var_40, var_42];
+  } else if(var_41 <= var_39) {
+    var_47++;
+    var_46 = [var_44, var_42];
   } else {
-    var46 = [var40, var44, var42];
+    var_46 = [var_40, var_44, var_42];
   }
 
-  var25 = (0, 0, -1);
-  var26 = 8.5;
+  var_25 = (0, 0, -1);
+  var_26 = 8.5;
 
-  foreach(var24 in var46) {
-    var31 = var24 + var25 * var26;
-    var28 = physics_raycast(var24, var31, var4, var22, 0, "physicsquery_closest", 1);
+  foreach(var_24 in var_46) {
+    var_31 = var_24 + var_25 * var_26;
+    var_28 = physics_raycast(var_24, var_31, var_4, var_22, 0, "physicsquery_closest", 1);
 
-    if(!isDefined(var28) || var28.size <= 0) {
+    if(!isDefined(var_28) || var_28.size <= 0) {
       continue;
     }
 
-    var35 = var28[0]["entity"];
+    var_35 = var_28[0]["entity"];
 
-    if(isDefined(var35) && !ref_139f0(var35)) {
+    if(isDefined(var_35) && !ref_139f0(var_35)) {
       tac_cover_fire_failed();
       return false;
     }
 
-    var47++;
+    var_47++;
 
-    if(var47 >= 2) {
+    if(var_47 >= 2) {
       break;
     }
   }
 
-  if(var47 < 2) {
+  if(var_47 < 2) {
     tac_cover_fire_failed();
     return false;
   }
 
   self.taccoverrefund = undefined;
-  thread tac_cover_spawn(var37, var33, undefined, var3, var4);
+  thread tac_cover_spawn(var_37, var_33, undefined, var_3, var_4);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("challenges", "onFieldUpgradeEnd")) {
     self[[scripts\cp_mp\utility\script_utility::getsharedfunc("challenges", "onFieldUpgradeEnd")]]("super_tac_cover", 1);
@@ -239,63 +239,63 @@ function tac_cover_on_fired(var0, var1, var2, var3) {
   return true;
 }
 
-function tac_cover_adjust_for_player_space(var0, var1, var2) {
-  var3 = tac_cover_get_free_space(1, var0, var1, var2, 32);
+function tac_cover_adjust_for_player_space(var_0, var_1, var_2) {
+  var_3 = tac_cover_get_free_space(1, var_0, var_1, var_2, 32);
 
-  if(!isDefined(var3)) {
-    return var0;
+  if(!isDefined(var_3)) {
+    return var_0;
   }
 
-  var4 = tac_cover_get_free_space(0, var0, var1, var2, 32);
+  var_4 = tac_cover_get_free_space(0, var_0, var_1, var_2, 32);
 
-  if(!isDefined(var4)) {
-    return var0;
+  if(!isDefined(var_4)) {
+    return var_0;
   }
 
-  var5 = min(var3, 15);
-  var6 = anglesToForward(var1);
-  var7 = var0 + var6 * var5;
-  return var7;
+  var_5 = min(var_3, 15);
+  var_6 = anglesToForward(var_1);
+  var_7 = var_0 + var_6 * var_5;
+  return var_7;
 }
 
-function tac_cover_get_free_space(var0, var1, var2, var3, var4) {
-  var5 = anglestoleft(var2);
-  var6 = anglesToForward(var2);
-  var7 = -1 * var6;
-  var8 = undefined;
+function tac_cover_get_free_space(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = anglestoleft(var_2);
+  var_6 = anglesToForward(var_2);
+  var_7 = -1 * var_6;
+  var_8 = undefined;
 
-  if(var0) {
-    var8 = var6 * var4;
+  if(var_0) {
+    var_8 = var_6 * var_4;
   } else {
-    var8 = var7 * var4;
+    var_8 = var_7 * var_4;
   }
 
-  var9 = var1 + (0, 0, 48);
-  var10 = var9;
-  var11 = var9 + var8;
-  var12 = 2.5;
-  var13 = 29 + var4;
-  var14 = combineangles(var2, (0, 0, 90));
-  var3 = var3;
-  var15 = [self];
-  var16 = "physicsquery_closest";
-  var17 = physics_capsulecast(var10, var11, var12, var13, var14, var3, var15, var16);
-  var18 = var17.size == 0;
+  var_9 = var_1 + (0, 0, 48);
+  var_10 = var_9;
+  var_11 = var_9 + var_8;
+  var_12 = 2.5;
+  var_13 = 29 + var_4;
+  var_14 = combineangles(var_2, (0, 0, 90));
+  var_3 = var_3;
+  var_15 = [self];
+  var_16 = "physicsquery_closest";
+  var_17 = physics_capsulecast(var_10, var_11, var_12, var_13, var_14, var_3, var_15, var_16);
+  var_18 = var_17.size == 0;
 
-  if(var18) {
+  if(var_18) {
     return undefined;
   }
 
-  var25 = var17[0]["shape_position"];
-  var26 = distance(var25, var9);
-  return var26;
+  var_25 = var_17[0]["shape_position"];
+  var_26 = distance(var_25, var_9);
+  return var_26;
 }
 
-function tac_cover_fire_failed(var0) {
-  var1 = scripts\engine\utility::ter_op(istrue(var0), "MP/TAC_COVER_PLACE_IN_DOORWAY", "MP/TAC_COVER_CANNOT_PLACE");
+function tac_cover_fire_failed(var_0) {
+  var_1 = scripts\engine\utility::ter_op(istrue(var_0), "MP/TAC_COVER_PLACE_IN_DOORWAY", "MP/TAC_COVER_CANNOT_PLACE");
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
-    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]](var1);
+    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]](var_1);
   }
 
   if(soundexists("iw8_deployable_cover_plant_fail")) {
@@ -309,10 +309,10 @@ function ref_139f3() {
     self takeweapon("tac_cover_mp");
   }
 
-  var0 = scripts\cp\loot_system::get_empty_munition_slot(self);
+  var_0 = scripts\cp\loot_system::get_empty_munition_slot(self);
 
-  if(isDefined(var0)) {
-    scripts\cp\cp_munitions::give_munition_to_slot("deployable_cover", var0);
+  if(isDefined(var_0)) {
+    scripts\cp\cp_munitions::give_munition_to_slot("deployable_cover", var_0);
     return;
   }
 }
@@ -321,160 +321,160 @@ function tac_cover_entmanagerdelete() {
   thread tac_cover_delete(0);
 }
 
-function ref_139f6(var0, var1, var2, var3) {
+function ref_139f6(var_0, var_1, var_2, var_3) {
   self endon("death_or_disconnect");
   self endon("tac_cover_taken");
   level endon("game_ended");
-  var4 = anglesToForward(self.angles);
-  var5 = var0.heli_intro + (0, 90, 0);
-  var6 = anglesToForward(var5);
-  var7 = vectordot(var4, var6);
-  var8 = var7 > 0;
-  var9 = var0 scriptabledoorangle();
-  var0 scriptabledoorfreeze(1);
+  var_4 = anglesToForward(self.angles);
+  var_5 = var_0.heli_intro + (0, 90, 0);
+  var_6 = anglesToForward(var_5);
+  var_7 = vectordot(var_4, var_6);
+  var_8 = var_7 > 0;
+  var_9 = var_0 scriptabledoorangle();
+  var_0 scriptabledoorfreeze(1);
 
-  if(isDefined(var1)) {
-    var1 scriptabledoorfreeze(1);
+  if(isDefined(var_1)) {
+    var_1 scriptabledoorfreeze(1);
   }
 
-  var10 = scripts\engine\utility::ter_op(var8, (0, 90, 0), (0, -90, 0));
-  var11 = (0, 0, -1);
-  var12 = var0.heli_intro_vo_done + var11;
-  var13 = combineangles(var0.heli_intro, var10);
-  var14 = undefined;
-  tac_cover_spawn(var12, var13, var14, var2, var3, var0, var1);
+  var_10 = scripts\engine\utility::ter_op(var_8, (0, 90, 0), (0, -90, 0));
+  var_11 = (0, 0, -1);
+  var_12 = var_0.heli_intro_vo_done + var_11;
+  var_13 = combineangles(var_0.heli_intro, var_10);
+  var_14 = undefined;
+  tac_cover_spawn(var_12, var_13, var_14, var_2, var_3, var_0, var_1);
 }
 
-function tac_cover_spawn(var0, var1, var2, var3, var4, var5, var6) {
+function tac_cover_spawn(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self endon("death_or_disconnect");
   self endon("tac_cover_taken");
   level endon("game_ended");
   wait 0.05;
-  var0 = tac_cover_adjust_for_player_space(var0, var1, var4);
+  var_0 = tac_cover_adjust_for_player_space(var_0, var_1, var_4);
   self notify("tac_cover_spawned");
-  var3 = istrue(var3);
-  var7 = spawn("script_model", var0);
-  var7.angles = var1;
-  var7.owner = self;
-  var7.team = self.team;
-  var7.slot = "primary";
-  var7.exploding = 1;
-  var7.issuper = scripts\engine\utility::ter_op(var3, 1, undefined);
-  var7 scripts\cp\utility::make_entity_sentient_cp(var7.owner.team);
-  var7 setentityowner(self);
-  var7 setotherent(self);
-  var7 setModel("offhand_wm_deployable_cover");
-  var7.equipmentref = "equip_tac_cover";
+  var_3 = istrue(var_3);
+  var_7 = spawn("script_model", var_0);
+  var_7.angles = var_1;
+  var_7.owner = self;
+  var_7.team = self.team;
+  var_7.slot = "primary";
+  var_7.exploding = 1;
+  var_7.issuper = scripts\engine\utility::ter_op(var_3, 1, undefined);
+  var_7 scripts\cp\utility::make_entity_sentient_cp(var_7.owner.team);
+  var_7 setentityowner(self);
+  var_7 setotherent(self);
+  var_7 setModel("offhand_wm_deployable_cover");
+  var_7.equipmentref = "equip_tac_cover";
 
-  if(isDefined(var2)) {
-    var7 linkTo(var2);
+  if(isDefined(var_2)) {
+    var_7 linkTo(var_2);
     thread tac_cover_destroy_on_unstuck();
   }
 
-  var8 = tac_cover_spawn_collision(var7);
-  var7 getclosestenemy(var8, level.taccovercollision);
-  var7.collision = var8;
-  var8.cover = var7;
-  var8.moverdoesnotkill = 1;
+  var_8 = tac_cover_spawn_collision(var_7);
+  var_7 getclosestenemy(var_8, level.taccovercollision);
+  var_7.collision = var_8;
+  var_8.cover = var_7;
+  var_8.moverdoesnotkill = 1;
 
-  if(isDefined(var5)) {
-    if(isDefined(var5.connected_vandalize_node)) {
-      tac_cover_destroy(var5.connected_vandalize_node);
+  if(isDefined(var_5)) {
+    if(isDefined(var_5.connected_vandalize_node)) {
+      tac_cover_destroy(var_5.connected_vandalize_node);
     }
 
-    var7.concussionused = var5;
-    var5.connected_vandalize_node = var7;
+    var_7.concussionused = var_5;
+    var_5.connected_vandalize_node = var_7;
   }
 
-  if(isDefined(var6)) {
-    var7.concusspushstart = var6;
-    var6.connected_vandalize_node = var7;
+  if(isDefined(var_6)) {
+    var_7.concusspushstart = var_6;
+    var_6.connected_vandalize_node = var_7;
   }
 
-  var7.streakinfo = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("tac_cover", var7.owner);
+  var_7.streakinfo = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("tac_cover", var_7.owner);
 
   if(isDefined(self.taccovers) && self.taccovers.size + 1 > 2) {
-    var9 = self.taccovers.size + 1 - 2;
-    var10 = self.taccovers;
+    var_9 = self.taccovers.size + 1 - 2;
+    var_10 = self.taccovers;
 
-    for(var11 = 0; var11 < var9; var11++) {
-      var12 = var10[var11];
+    for(var_11 = 0; var_11 < var_9; var_11++) {
+      var_12 = var_10[var_11];
     }
   }
 
-  thread scripts\cp\cp_weapon::monitordisownedequipment(self, var7);
-  tac_cover_add_to_list(var7, self);
+  thread scripts\cp\cp_weapon::monitordisownedequipment(self, var_7);
+  tac_cover_add_to_list(var_7, self);
 
-  if(var3) {
-    thread tac_cover_destroy_on_disowned(var7);
+  if(var_3) {
+    thread tac_cover_destroy_on_disowned(var_7);
     thread tac_cover_destroy_on_timeout();
   }
 
   thread tac_cover_destroy_on_game_end();
-  thread tac_cover_spawn_internal(var7);
+  thread tac_cover_spawn_internal(var_7);
 }
 
-function tac_cover_spawn_internal(var0) {
-  var0 endon("death");
+function tac_cover_spawn_internal(var_0) {
+  var_0 endon("death");
 
   if(1 && false) {
-    tac_cover_set_can_damage(var0, 1);
+    tac_cover_set_can_damage(var_0, 1);
   }
 
-  if(isDefined(var0.concussionused)) {
-    var0 setscriptablepartstate("effects", "plantStartDoor", 0);
+  if(isDefined(var_0.concussionused)) {
+    var_0 setscriptablepartstate("effects", "plantStartDoor", 0);
   } else {
-    var0 setscriptablepartstate("effects", "plantStart", 0);
+    var_0 setscriptablepartstate("effects", "plantStart", 0);
   }
 
   wait tac_cover_get_deploy_anim_dur();
 
   if(1 && !false) {
-    tac_cover_set_can_damage(var0, 1);
+    tac_cover_set_can_damage(var_0, 1);
   }
 
-  if(isDefined(var0.concussionused)) {
-    var0 setscriptablepartstate("effects", "plantEndDoor", 0);
+  if(isDefined(var_0.concussionused)) {
+    var_0 setscriptablepartstate("effects", "plantEndDoor", 0);
     return;
   }
 
-  var0 setscriptablepartstate("effects", "plantEnd", 0);
+  var_0 setscriptablepartstate("effects", "plantEnd", 0);
 }
 
-function tac_cover_spawn_collision(var0) {
+function tac_cover_spawn_collision(var_0) {
   if(!isDefined(level.taccovercollision)) {
     return;
   }
 
-  var1 = spawn("script_model", var0.origin);
-  var1 dontinterpolate();
-  var1.angles = var0.angles;
-  var1 clonebrushmodeltoscriptmodel(level.taccovercollision);
-  var1 linkTo(var0);
-  var1 setentityowner(self);
-  var1 disconnectPaths();
-  return var1;
+  var_1 = spawn("script_model", var_0.origin);
+  var_1 dontinterpolate();
+  var_1.angles = var_0.angles;
+  var_1 clonebrushmodeltoscriptmodel(level.taccovercollision);
+  var_1 linkTo(var_0);
+  var_1 setentityowner(self);
+  var_1 disconnectPaths();
+  return var_1;
 }
 
-function tac_cover_destroy(var0, var1) {
-  var2 = 0;
+function tac_cover_destroy(var_0, var_1) {
+  var_2 = 0;
 
-  if(!istrue(var0)) {
-    var2 = 0.2 + tac_cover_get_destroy_anim_dur();
+  if(!istrue(var_0)) {
+    var_2 = 0.2 + tac_cover_get_destroy_anim_dur();
   }
 
-  var3 = self.maxhealth;
+  var_3 = self.maxhealth;
 
   if(isDefined(self.damagetaken) && self.damagetaken < self.maxhealth) {
-    var3 = self.damagetaken;
+    var_3 = self.damagetaken;
   }
 
   self.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(self.streakinfo);
-  thread tac_cover_destroy_internal(var2);
-  thread tac_cover_delete(var2);
+  thread tac_cover_destroy_internal(var_2);
+  thread tac_cover_delete(var_2);
 }
 
-function tac_cover_destroy_internal(var0) {
+function tac_cover_destroy_internal(var_0) {
   if(isDefined(self.concussionused)) {
     self.concussionused scriptabledoorfreeze(0);
     self.concussionused.connected_vandalize_node = undefined;
@@ -485,7 +485,7 @@ function tac_cover_destroy_internal(var0) {
     self.concusspushstart.connected_vandalize_node = undefined;
   }
 
-  if(var0 > 0) {
+  if(var_0 > 0) {
     self setscriptablepartstate("effects", "destroyStart");
     wait tac_cover_get_destroy_anim_dur();
     self setscriptablepartstate("effects", "destroyEnd");
@@ -497,10 +497,10 @@ function tac_cover_destroy_internal(var0) {
   }
 }
 
-function tac_cover_delete(var0) {
+function tac_cover_delete(var_0) {
   self notify("death");
   level.mines[self getentitynumber()] = undefined;
-  var1 = self.owner;
+  var_1 = self.owner;
 
   if(true) {
     self thermaldrawdisable();
@@ -510,7 +510,7 @@ function tac_cover_delete(var0) {
     self.collision delete();
   }
 
-  wait var0;
+  wait var_0;
   self delete();
 }
 
@@ -536,13 +536,13 @@ function tac_cover_destroy_on_unstuck() {
   tac_cover_destroy(undefined, 0);
 }
 
-function tac_cover_set_can_damage(var0) {
+function tac_cover_set_can_damage(var_0) {
   if(true) {
-    if(var0) {
-      var1 = scripts\cp\utility::_hasperk("specialty_rugged_eqp");
-      var2 = scripts\engine\utility::ter_op(var1, 1250, 1000);
-      var3 = "hitequip";
-      thread scripts\cp\cp_weapon::monitordamage(var2, var3, &tac_cover_handle_fatal_damage, &tac_cover_handle_damage, 0);
+    if(var_0) {
+      var_1 = scripts\cp\utility::_hasperk("specialty_rugged_eqp");
+      var_2 = scripts\engine\utility::ter_op(var_1, 1250, 1000);
+      var_3 = "hitequip";
+      thread scripts\cp\cp_weapon::monitordamage(var_2, var_3, &tac_cover_handle_fatal_damage, &tac_cover_handle_damage, 0);
       self thermaldrawenable();
       return;
     }
@@ -552,75 +552,75 @@ function tac_cover_set_can_damage(var0) {
   }
 }
 
-function tac_cover_handle_damage(var0) {
-  var1 = var0.attacker;
-  var2 = var0.objweapon;
-  var3 = var0.meansofdeath;
-  var4 = var0.damage;
-  var5 = var0.point;
+function tac_cover_handle_damage(var_0) {
+  var_1 = var_0.attacker;
+  var_2 = var_0.objweapon;
+  var_3 = var_0.meansofdeath;
+  var_4 = var_0.damage;
+  var_5 = var_0.point;
 
-  if(!isDefined(var2)) {
-    return var4;
+  if(!isDefined(var_2)) {
+    return var_4;
   }
 
-  if(var2.basename == "thermite_av_mp") {
+  if(var_2.basename == "thermite_av_mp") {
     return 200;
   }
 
-  if(var2.basename == "throwingknife_mp") {
+  if(var_2.basename == "throwingknife_mp") {
     return 0;
   }
 
-  if(var2.basename == "iw8_sn_crossbow_mp") {
+  if(var_2.basename == "iw8_sn_crossbow_mp") {
     return 0;
   }
 
-  if(var3 == "MOD_IMPACT" && var2.classname == "grenade") {
-    return var4;
+  if(var_3 == "MOD_IMPACT" && var_2.classname == "grenade") {
+    return var_4;
   }
 
-  if(var3 == "MOD_CRUSH" && isDefined(var0.inflictor) && var0.inflictor.classname == "script_vehicle") {
-    if(isDefined(var1) && !scripts\cp\cp_damage::friendlyfirecheck(self.owner, var1)) {
-      if(isDefined(var0.inflictor.vehiclename) && ref_139ef(var0.inflictor.vehiclename)) {
-        return var4;
+  if(var_3 == "MOD_CRUSH" && isDefined(var_0.inflictor) && var_0.inflictor.classname == "script_vehicle") {
+    if(isDefined(var_1) && !scripts\cp\cp_damage::friendlyfirecheck(self.owner, var_1)) {
+      if(isDefined(var_0.inflictor.vehiclename) && ref_139ef(var_0.inflictor.vehiclename)) {
+        return var_4;
       } else {
         return 0;
       }
     }
   }
 
-  if(isexplosivedamagemod(var0.meansofdeath)) {
+  if(isexplosivedamagemod(var_0.meansofdeath)) {
     return 700;
   }
 
-  if(var3 == "MOD_MELEE" || var3 == "MOD_IMPACT") {
-    var4 = 333.333;
+  if(var_3 == "MOD_MELEE" || var_3 == "MOD_IMPACT") {
+    var_4 = 333.333;
   }
 
-  if(isDefined(var1) && isDefined(self.owner) && var1 == self.owner) {
-    var4 *= 1;
+  if(isDefined(var_1) && isDefined(self.owner) && var_1 == self.owner) {
+    var_4 *= 1;
   }
 
-  return var4;
+  return var_4;
 }
 
-function tac_cover_handle_fatal_damage(var0) {
-  var1 = var0.attacker;
+function tac_cover_handle_fatal_damage(var_0) {
+  var_1 = var_0.attacker;
 
-  if(istrue(scripts\cp_mp\utility\player_utility::playersareenemies(self.owner, var1))) {
-    if(isPlayer(var1)) {
-      var1 thread scripts\cp\agents\gametype_cp_wave_sv::giveunifiedpoints("destroyed_equipment");
-      var1 thread scripts\cp\cp_player_battlechatter::equipmentdestroyed(self);
+  if(istrue(scripts\cp_mp\utility\player_utility::playersareenemies(self.owner, var_1))) {
+    if(isPlayer(var_1)) {
+      var_1 thread scripts\cp\agents\gametype_cp_wave_sv::giveunifiedpoints("destroyed_equipment");
+      var_1 thread scripts\cp\cp_player_battlechatter::equipmentdestroyed(self);
     }
 
-    var1 notify("destroyed_equipment");
+    var_1 notify("destroyed_equipment");
   }
 
   thread tac_cover_destroy(undefined, 1);
 }
 
-function ref_139ef(var0) {
-  switch (var0) {
+function ref_139ef(var_0) {
+  switch (var_0) {
     case "light_tank":
     case "apc_russian":
       return true;
@@ -631,68 +631,68 @@ function ref_139ef(var0) {
   return false;
 }
 
-function tac_cover_ignore_list(var0) {
-  var1 = [var0];
+function tac_cover_ignore_list(var_0) {
+  var_1 = [var_0];
 
   if(isDefined(level.grenades)) {
-    foreach(var3 in level.grenades) {
-      if(isDefined(var3)) {
-        var1 = var3;
+    foreach(var_3 in level.grenades) {
+      if(isDefined(var_3)) {
+        var_1 = var_3;
       }
     }
   }
 
   if(isDefined(level.missiles)) {
-    foreach(var6 in level.missiles) {
-      if(isDefined(var6)) {
-        var1 = var6;
+    foreach(var_6 in level.missiles) {
+      if(isDefined(var_6)) {
+        var_1 = var_6;
       }
     }
   }
 
   if(isDefined(level.mines)) {
-    foreach(var9 in level.mines) {
-      if(!isDefined(var9)) {
+    foreach(var_9 in level.mines) {
+      if(!isDefined(var_9)) {
         continue;
       }
 
-      var10 = isDefined(var9.owner) && var9.owner == var0;
-      var11 = isDefined(var9.equipmentref) && var9.equipmentref == "equip_tac_cover";
-      var12 = isDefined(var9.equipmentref) && var9.equipmentref == "equip_ammo_box";
+      var_10 = isDefined(var_9.owner) && var_9.owner == var_0;
+      var_11 = isDefined(var_9.equipmentref) && var_9.equipmentref == "equip_tac_cover";
+      var_12 = isDefined(var_9.equipmentref) && var_9.equipmentref == "equip_ammo_box";
 
-      if(!var10 && (var11 || var12)) {
+      if(!var_10 && (var_11 || var_12)) {
         continue;
       }
 
-      var1 = var9;
+      var_1 = var_9;
 
-      if(isDefined(var9.collision)) {
-        var1 = var9.collision;
+      if(isDefined(var_9.collision)) {
+        var_1 = var_9.collision;
       }
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function ref_139f0(var0) {
-  if(isPlayer(var0)) {
+function ref_139f0(var_0) {
+  if(isPlayer(var_0)) {
     return false;
   }
 
-  if(var0 getnonstick()) {
+  if(var_0 getnonstick()) {
     return false;
   }
 
-  if(istrue(var0.mountmantlemodel)) {
+  if(istrue(var_0.mountmantlemodel)) {
     return false;
   }
 
-  if(var0.classname == "misc_turret") {
+  if(var_0.classname == "misc_turret") {
     return false;
   }
 
-  if(var0.classname == "script_vehicle") {
+  if(var_0.classname == "script_vehicle") {
     return false;
   }
 
@@ -717,48 +717,48 @@ function tac_cover_on_take_super() {
   tac_cover_on_take(undefined, undefined, 1);
 }
 
-function tac_cover_destroy_on_disowned(var0) {
+function tac_cover_destroy_on_disowned(var_0) {
   self endon("death");
-  var0 endon("tac_cover_taken");
-  var0 scripts\engine\utility::ref_143a5("joined_team", "disconnect");
+  var_0 endon("tac_cover_taken");
+  var_0 scripts\engine\utility::ref_143a5("joined_team", "disconnect");
   thread tac_cover_destroy(undefined, 0);
 }
 
-function tac_cover_add_to_list(var0) {
-  if(!isDefined(var0.taccovers)) {
-    var0.taccovers = [];
+function tac_cover_add_to_list(var_0) {
+  if(!isDefined(var_0.taccovers)) {
+    var_0.taccovers = [];
   }
 
-  var0.taccovers[var0.taccovers.size] = self;
+  var_0.taccovers[var_0.taccovers.size] = self;
 
   if(!isDefined(level.taccovers)) {
     level.taccovers = [];
   }
 
-  var1 = self getentitynumber();
-  level.taccovers[var1] = self;
+  var_1 = self getentitynumber();
+  level.taccovers[var_1] = self;
 }
 
-function tac_cover_remove_from_list(var0, var1) {
-  if(isDefined(var0.taccovers)) {
-    var2 = [];
+function tac_cover_remove_from_list(var_0, var_1) {
+  if(isDefined(var_0.taccovers)) {
+    var_2 = [];
 
-    foreach(var4 in var0.taccovers) {
-      if(isDefined(var4) && var4 != self) {
-        var2 = var4;
+    foreach(var_4 in var_0.taccovers) {
+      if(isDefined(var_4) && var_4 != self) {
+        var_2 = var_4;
       }
     }
 
-    var0.taccovers = var2;
+    var_0.taccovers = var_2;
   }
 
   if(isDefined(level.taccovers)) {
-    level.taccovers[var1] = undefined;
+    level.taccovers[var_1] = undefined;
     return;
   }
 }
 
-function ricochet_bullet(var0, var1, var2, var3) {
-  var4 = scripts\engine\math::vector_reflect(var0, var1);
-  magicbullet(var3, var2 + var0 * 10, var2 + var0 * 10 + var4);
+function ricochet_bullet(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\engine\math::vector_reflect(var_0, var_1);
+  magicbullet(var_3, var_2 + var_0 * 10, var_2 + var_0 * 10 + var_4);
 }

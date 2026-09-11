@@ -35,10 +35,10 @@ function waitaftershot() {
   return 0.25;
 }
 
-function shootanimtime(var0) {
-  if(!usingautomaticweapon() || isDefined(var0) && var0 == 1) {
-    var1 = 0.5 + randomfloat(1);
-    return (weaponfiretime(self.weapon) * var1);
+function shootanimtime(var_0) {
+  if(!usingautomaticweapon() || isDefined(var_0) && var_0 == 1) {
+    var_1 = 0.5 + randomfloat(1);
+    return (weaponfiretime(self.weapon) * var_1);
   }
 
   return weaponfiretime(self.weapon);
@@ -63,26 +63,26 @@ function refillclip() {
   return 1;
 }
 
-function add_weapon(var0, var1, var2, var3, var4) {
-  if(!isDefined(var2)) {
-    var2 = 3;
+function add_weapon(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_2)) {
+    var_2 = 3;
   }
 
-  if(!isDefined(var3)) {
-    var2 = 1;
+  if(!isDefined(var_3)) {
+    var_2 = 1;
   }
 
-  if(!isDefined(var4)) {
-    var4 = "rifle";
+  if(!isDefined(var_4)) {
+    var_4 = "rifle";
   }
 
-  var0 = tolower(var0);
-  anim.aiweapon[var0]["type"] = var1;
-  anim.aiweapon[var0]["time"] = var2;
-  anim.aiweapon[var0]["clipsize"] = var3;
-  anim.aiweapon[var0]["anims"] = var4;
+  var_0 = tolower(var_0);
+  anim.aiweapon[var_0]["type"] = var_1;
+  anim.aiweapon[var_0]["time"] = var_2;
+  anim.aiweapon[var_0]["clipsize"] = var_3;
+  anim.aiweapon[var_0]["anims"] = var_4;
 }
 
-function addturret(var0) {
-  anim.aiweapon[tolower(var0)]["type"] = "turret";
+function addturret(var_0) {
+  anim.aiweapon[tolower(var_0)]["type"] = "turret";
 }

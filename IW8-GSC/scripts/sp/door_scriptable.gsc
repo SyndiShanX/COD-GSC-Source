@@ -9,60 +9,60 @@ function init_destructible() {
   }
 
   self.destructible = 1;
-  var0 = scripts\engine\utility::get_linked_ents();
-  var1 = undefined;
+  var_0 = scripts\engine\utility::get_linked_ents();
+  var_1 = undefined;
 
-  foreach(var3 in var0) {
-    if(var3.code_classname == "script_brushmodel" && !var3 scripts\sp\door_internal::is_clip_nosight()) {
-      var1 = var3;
+  foreach(var_3 in var_0) {
+    if(var_3.code_classname == "script_brushmodel" && !var_3 scripts\sp\door_internal::is_clip_nosight()) {
+      var_1 = var_3;
       break;
     }
 
-    if(isDefined(var3.script_index) && var3.script_index == 0) {
-      var1 = var3;
+    if(isDefined(var_3.script_index) && var_3.script_index == 0) {
+      var_1 = var_3;
       break;
     }
   }
 
-  var5 = get_door_dependencies();
-  var1.parent = self;
-  var1 linkTo(self);
-  var1.script_index = 0;
-  var6 = var1 scripts\engine\utility::get_linked_ents();
-  GscBinSkip0(0x2e, var6.size, var1);
+  var_5 = get_door_dependencies();
+  var_1.parent = self;
+  var_1 linkTo(self);
+  var_1.script_index = 0;
+  var_6 = var_1 scripts\engine\utility::get_linked_ents();
+  GscBinSkip0(0x2e, var_6.size, var_1);
 }
 
 function get_door_dependencies() {
   if(isDefined(self.script_type)) {
-    var0 = get_model_dependencies();
+    var_0 = get_model_dependencies();
   } else {
-    var0 = get_brushmodel_dependencies();
+    var_0 = get_brushmodel_dependencies();
   }
 
-  return var0;
+  return var_0;
 }
 
 function get_model_dependencies() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 1, [0, 2, 3, 6]);
 }
 
 function get_brushmodel_dependencies() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 1, [0, 2, 3, 6]);
 }
 
 function is_heirarchy_good() {
   self.heirarchytest = 1;
 
-  foreach(var1 in self.depends) {
-    if(var1.script_index == 0) {
+  foreach(var_1 in self.depends) {
+    if(var_1.script_index == 0) {
       self notify("stop_heirarchy_line");
       return true;
     }
 
-    if(!isDefined(var1.heirarchytest) && !var1.destroyed) {
-      if(is_heirarchy_good(var1)) {
+    if(!isDefined(var_1.heirarchytest) && !var_1.destroyed) {
+      if(is_heirarchy_good(var_1)) {
         self notify("stop_heirarchy_line");
         return true;
       }
@@ -73,7 +73,7 @@ function is_heirarchy_good() {
   return false;
 }
 
-function doline(var0, var1) {
+function doline(var_0, var_1) {
   self endon("stop_heirarchy_line");
 
   for(;;) {
@@ -81,48 +81,48 @@ function doline(var0, var1) {
   }
 }
 
-function update_depends(var0) {
+function update_depends(var_0) {
   if(isDefined(self.depends)) {
     self.depends = scripts\engine\utility::array_removeundefined(self.depends);
   }
 
   self.updatedepends = scripts\engine\utility::array_removeundefined(self.updatedepends);
 
-  foreach(var2 in self.updatedepends) {
-    if(var2.destroyed) {
+  foreach(var_2 in self.updatedepends) {
+    if(var_2.destroyed) {
       continue;
     }
 
-    var2.depends = scripts\engine\utility::array_remove(var2.depends, self);
+    var_2.depends = scripts\engine\utility::array_remove(var_2.depends, self);
 
-    if(!is_heirarchy_good(var2)) {
-      self.updatedepends = scripts\engine\utility::array_remove(self.updatedepends, var2);
+    if(!is_heirarchy_good(var_2)) {
+      self.updatedepends = scripts\engine\utility::array_remove(self.updatedepends, var_2);
 
       if(isDefined(self.doordamagemod)) {
-        var2 notify("damage", 90, undefined, var0, self.doordamagepoint, self.doordamagemod);
+        var_2 notify("damage", 90, undefined, var_0, self.doordamagepoint, self.doordamagemod);
       } else {
-        var2 notify("damage", 90, undefined, var0, undefined, "scripted");
+        var_2 notify("damage", 90, undefined, var_0, undefined, "scripted");
       }
     }
 
-    foreach(var2 in self.mainpiece.allpieces) {
-      var2.heirarchytest = undefined;
+    foreach(var_2 in self.mainpiece.allpieces) {
+      var_2.heirarchytest = undefined;
     }
   }
 }
 
-function destructible_ignore_attacker(var0) {
-  if(!isDefined(var0)) {
+function destructible_ignore_attacker(var_0) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
   if(isDefined(self.mainpiece.parent.damgeignoreents)) {
-    foreach(var2 in self.mainpiece.parent.damgeignoreents) {
-      if(!isDefined(var2)) {
+    foreach(var_2 in self.mainpiece.parent.damgeignoreents) {
+      if(!isDefined(var_2)) {
         continue;
       }
 
-      if(var0 == var2) {
+      if(var_0 == var_2) {
         return true;
       }
     }
@@ -132,55 +132,55 @@ function destructible_ignore_attacker(var0) {
 }
 
 function destructible_piece_thread() {
-  var0 = undefined;
-  var1 = undefined;
-  var2 = undefined;
-  var3 = undefined;
+  var_0 = undefined;
+  var_1 = undefined;
+  var_2 = undefined;
+  var_3 = undefined;
 
   while(self.health > 0) {
-    self waittill("damage", var4, var3, var1, var0, var2, var5, var6, var7, var8, var9);
+    self waittill("damage", var_4, var_3, var_1, var_0, var_2, var_5, var_6, var_7, var_8, var_9);
 
-    if(destructible_ignore_attacker(var3) || should_ignore_mod(var2)) {
+    if(destructible_ignore_attacker(var_3) || should_ignore_mod(var_2)) {
       self.maxhealth = 0;
-      self.health += var4;
+      self.health += var_4;
       continue;
     }
 
-    var4 = door_damage_scale(var4, var9, var2);
+    var_4 = door_damage_scale(var_4, var_9, var_2);
 
-    if(isDefined(var2)) {
-      if(var2 == "MOD_GRENADE" || var2 == "MOD_GRENADE_SPLASH") {
-        self.doordamagemod = var2;
-        self.doordamagepoint = var0;
+    if(isDefined(var_2)) {
+      if(var_2 == "MOD_GRENADE" || var_2 == "MOD_GRENADE_SPLASH") {
+        self.doordamagemod = var_2;
+        self.doordamagepoint = var_0;
 
-        if(self.script_index == 0 && var4 > 100) {
+        if(self.script_index == 0 && var_4 > 100) {
           break;
         }
 
-        var1 = vectorNormalize(self.origin - var0);
+        var_1 = vectorNormalize(self.origin - var_0);
 
-        if(self.health < var4 * 3) {
+        if(self.health < var_4 * 3) {
           break;
         }
-      } else if(var2 == "MOD_MELEE") {
+      } else if(var_2 == "MOD_MELEE") {
         self.maxhealth = 0;
-        self.health += var4;
-      } else if(var2 == "scripted") {
+        self.health += var_4;
+      } else if(var_2 == "scripted") {
         break;
       }
     }
 
     if(self.script_index > 0) {
-      var10 = self.origin + var1 * -1 * 100;
+      var_10 = self.origin + var_1 * -1 * 100;
 
-      if(!isDefined(var2)) {
-        if(!isDefined(var3)) {
-          self.mainpiece scripts\sp\utility::do_damage(var4, var10);
+      if(!isDefined(var_2)) {
+        if(!isDefined(var_3)) {
+          self.mainpiece scripts\sp\utility::do_damage(var_4, var_10);
         } else {
-          self.mainpiece scripts\sp\utility::do_damage(var4, var10, var3, var3);
+          self.mainpiece scripts\sp\utility::do_damage(var_4, var_10, var_3, var_3);
         }
-      } else if(var2 != "scripted") {
-        self.mainpiece scripts\sp\utility::do_damage(var4, var10, var3, var3, var2);
+      } else if(var_2 != "scripted") {
+        self.mainpiece scripts\sp\utility::do_damage(var_4, var_10, var_3, var_3, var_2);
       }
     }
 
@@ -189,61 +189,61 @@ function destructible_piece_thread() {
   }
 
   if(isDefined(self.mainpiece)) {
-    var11 = self.mainpiece;
+    var_11 = self.mainpiece;
   } else {
-    var11 = self;
+    var_11 = self;
   }
 
-  if(isDefined(var11.parent.clip_nosight)) {
-    var11.parent.clip_nosight delete();
+  if(isDefined(var_11.parent.clip_nosight)) {
+    var_11.parent.clip_nosight delete();
   }
 
-  var11.parent notify("piece_destroyed", self);
+  var_11.parent notify("piece_destroyed", self);
   self.destroyed = 1;
-  update_depends(var2);
+  update_depends(var_2);
 
-  if(!isDefined(var1)) {
-    var1 = self.origin;
+  if(!isDefined(var_1)) {
+    var_1 = self.origin;
   }
 
-  var12 = vectortoangles(self.mainpiece.parent.forward);
-  var13 = anglestoright(var12);
-  var14 = vectorNormalize(var1 - self.origin);
-  var15 = vectordot(var13, var14);
-  var2 = var13;
+  var_12 = vectortoangles(self.mainpiece.parent.forward);
+  var_13 = anglestoright(var_12);
+  var_14 = vectorNormalize(var_1 - self.origin);
+  var_15 = vectordot(var_13, var_14);
+  var_2 = var_13;
 
-  if(var15 > 0) {
-    var2 *= -1;
+  if(var_15 > 0) {
+    var_2 *= -1;
   }
 
   self unlink();
 
-  if(isDefined(var4) && isPlayer(var4)) {
-    var2 *= -1;
+  if(isDefined(var_4) && isPlayer(var_4)) {
+    var_2 *= -1;
   }
 
   if(istrue(self.hashandle) && !istrue(self.ignore_bullets)) {
-    var16 = spawnStruct();
-    var16.origin = self.origin + var2 * 32;
-    self.mainpiece.parent.ajar_opener = var16;
+    var_16 = spawnStruct();
+    var_16.origin = self.origin + var_2 * 32;
+    self.mainpiece.parent.ajar_opener = var_16;
     self.mainpiece.parent.nohint = 1;
     self.mainpiece.parent notify("first_interact");
     self.mainpiece.parent.open_struct scripts\sp\door::remove_open_interact_hint();
   }
 
   if(self.code_classname == "script_brushmodel") {
-    var17 = randomintrange(300, 600);
-    self.origin += var2 * 3;
+    var_17 = randomintrange(300, 600);
+    self.origin += var_2 * 3;
   } else {
-    var17 = randomintrange(50, 150);
+    var_17 = randomintrange(50, 150);
   }
 
   waitframe();
 
-  if(isDefined(var4) && var4 == "explosive") {
-    self physicslaunchclient(var2, var3 * var17 * 0.5);
+  if(isDefined(var_4) && var_4 == "explosive") {
+    self physicslaunchclient(var_2, var_3 * var_17 * 0.5);
   } else {
-    self physicslaunchclient(var2, var3 * var17);
+    self physicslaunchclient(var_2, var_3 * var_17);
   }
 
   if(self.script_index == 0) {
@@ -266,21 +266,21 @@ function destructible_piece_thread() {
   self delete();
 }
 
-function door_damage_scale(var0, var1, var2) {
-  if(isDefined(var1)) {
-    if(var2 != "MOD_MELEE") {
-      if(var1.classname == "spread") {
-        var0 *= 1.36;
+function door_damage_scale(var_0, var_1, var_2) {
+  if(isDefined(var_1)) {
+    if(var_2 != "MOD_MELEE") {
+      if(var_1.classname == "spread") {
+        var_0 *= 1.36;
       }
     }
   }
 
-  return int(var0);
+  return int(var_0);
 }
 
-function should_ignore_mod(var0) {
+function should_ignore_mod(var_0) {
   if(istrue(self.ignore_bullets)) {
-    switch (var0) {
+    switch (var_0) {
       case "MOD_PISTOL_BULLET":
       case "MOD_RIFLE_BULLET":
         return true;
@@ -288,7 +288,7 @@ function should_ignore_mod(var0) {
         return false;
     }
   } else if(istrue(self.mainpiece.parent.ignore_grenades)) {
-    switch (var0) {
+    switch (var_0) {
       case "MOD_GRENADE_SPLASH":
       case "MOD_GRENADE":
       case "MOD_EXPLOSIVE":
@@ -320,11 +320,11 @@ function scriptable_init() {
 }
 
 function scriptable_inherit_parameters() {
-  var0 = scripts\engine\utility::get_linked_structs();
-  var1 = var0[0];
-  self.script_parameters = var1.script_parameters;
-  self.script_max_left_angle = var1.script_max_left_angle;
-  self.script_max_right_angle = var1.script_max_right_angle;
+  var_0 = scripts\engine\utility::get_linked_structs();
+  var_1 = var_0[0];
+  self.script_parameters = var_1.script_parameters;
+  self.script_max_left_angle = var_1.script_max_left_angle;
+  self.script_max_right_angle = var_1.script_max_right_angle;
 }
 
 function scriptable_parts_init() {
@@ -333,53 +333,53 @@ function scriptable_parts_init() {
   self.part_main.health = 2200;
   self.parts_map = get_scriptable_map();
 
-  for(var0 = 1; var0 < 31; var0++) {
-    var1 = scriptable_part_struct(var0);
+  for(var_0 = 1; var_0 < 31; var_0++) {
+    var_1 = scriptable_part_struct(var_0);
 
-    if(var0 == 1) {
-      var1.ishandle = 1;
+    if(var_0 == 1) {
+      var_1.ishandle = 1;
     }
 
-    self.parts[var1.full_partname] = var1;
+    self.parts[var_1.full_partname] = var_1;
   }
 }
 
-function scriptable_part_struct(var0, var1) {
-  var2 = spawnStruct();
+function scriptable_part_struct(var_0, var_1) {
+  var_2 = spawnStruct();
 
   if(isDefined(self.parthealth)) {
-    var2.health = self.parthealth;
+    var_2.health = self.parthealth;
   } else {
-    var2.health = 150;
+    var_2.health = 150;
   }
 
-  var2.partindex = var0;
+  var_2.partindex = var_0;
 
-  if(var0 > 0) {
-    var2.full_partname = scriptable_get_full_partname(var0);
+  if(var_0 > 0) {
+    var_2.full_partname = scriptable_get_full_partname(var_0);
   }
 
-  var2.destroyed = 0;
-  return var2;
+  var_2.destroyed = 0;
+  return var_2;
 }
 
 function scriptable_damage_thread() {
   self.ispristine = 1;
 
   for(;;) {
-    self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
-    scriptable_damage_proc(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
+    scriptable_damage_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
   }
 }
 
-function scriptable_damage_proc(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
+function scriptable_damage_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(!self.ispristine) {
-    if(is_explosive_damage(var4, var9)) {
-      scriptable_explosive_damage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+    if(is_explosive_damage(var_4, var_9)) {
+      scriptable_explosive_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
       return;
     }
 
-    thread scriptable_gun_damage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+    thread scriptable_gun_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
     return;
   }
 
@@ -387,27 +387,27 @@ function scriptable_damage_proc(var0, var1, var2, var3, var4, var5, var6, var7, 
   self setscriptablepartstate("main", "initial_dmg");
 
   if(isDefined(self.fndamage)) {
-    [[self.fndamage]](0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+    [[self.fndamage]](0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
   }
 
-  if(is_explosive_damage(var4, var9)) {
-    thread scriptable_explosive_damage_framedelay(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+  if(is_explosive_damage(var_4, var_9)) {
+    thread scriptable_explosive_damage_framedelay(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
     return;
   }
 }
 
-function is_explosive_damage(var0, var1) {
-  if(isDefined(var1)) {
-    if(var1.basename == "flash" || var1.basename == "molotov") {
+function is_explosive_damage(var_0, var_1) {
+  if(isDefined(var_1)) {
+    if(var_1.basename == "flash" || var_1.basename == "molotov") {
       return false;
     }
   }
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
-  switch (var0) {
+  switch (var_0) {
     case "MOD_GRENADE_SPLASH":
     case "MOD_GRENADE":
     case "MOD_EXPLOSIVE":
@@ -417,65 +417,65 @@ function is_explosive_damage(var0, var1) {
   return false;
 }
 
-function scriptable_explosive_damage_framedelay(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
+function scriptable_explosive_damage_framedelay(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   waitframe();
-  scriptable_explosive_damage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+  scriptable_explosive_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 }
 
-function scriptable_explosive_damage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
-  if(scriptable_ignore_attacker(var1) || scriptable_ignore_mod(var4)) {
+function scriptable_explosive_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  if(scriptable_ignore_attacker(var_1) || scriptable_ignore_mod(var_4)) {
     self.maxhealth = 0;
-    self.health += var0;
+    self.health += var_0;
     return;
   }
 
-  var10 = [];
+  var_10 = [];
 
-  foreach(var12 in self.parts) {
-    var10 = var12;
+  foreach(var_12 in self.parts) {
+    var_10 = var_12;
   }
 
-  var10 = scripts\engine\utility::array_randomize(var10);
-  var14 = var0 / 400;
-  var15 = int(var10.size * var14);
+  var_10 = scripts\engine\utility::array_randomize(var_10);
+  var_14 = var_0 / 400;
+  var_15 = int(var_10.size * var_14);
 
-  foreach(var12 in var10) {
-    if(!isDefined(var12.full_partname)) {
+  foreach(var_12 in var_10) {
+    if(!isDefined(var_12.full_partname)) {
       continue;
     }
 
-    if(var12.destroyed) {
+    if(var_12.destroyed) {
       continue;
     }
 
-    thread scriptable_gun_damage(90, undefined, var2, var3, "scripted", undefined, undefined, var12.full_partname);
-    var15--;
+    thread scriptable_gun_damage(90, undefined, var_2, var_3, "scripted", undefined, undefined, var_12.full_partname);
+    var_15--;
 
-    if(var15 == 0) {
+    if(var_15 == 0) {
       break;
     }
   }
 }
 
-function scriptable_gun_damage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
-  if(scriptable_ignore_attacker(var1) || scriptable_ignore_mod(var4)) {
+function scriptable_gun_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  if(scriptable_ignore_attacker(var_1) || scriptable_ignore_mod(var_4)) {
     self.maxhealth = 0;
-    self.health += var0;
+    self.health += var_0;
     return;
   }
 
-  var0 = door_damage_scale(var0, var9, var4);
+  var_0 = door_damage_scale(var_0, var_9, var_4);
 
   if(isDefined(self.fndamage)) {
-    [[self.fndamage]](var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+    [[self.fndamage]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
   }
 
-  if(isDefined(self.parts[var7])) {
-    var10 = self.parts[var7];
-    var10.health -= var0;
+  if(isDefined(self.parts[var_7])) {
+    var_10 = self.parts[var_7];
+    var_10.health -= var_0;
 
-    if(var10.health <= 0 || var4 == "scripted") {
-      scriptable_destroy_part(var10.partindex, var10, var4, var2, var3, var1);
+    if(var_10.health <= 0 || var_4 == "scripted") {
+      scriptable_destroy_part(var_10.partindex, var_10, var_4, var_2, var_3, var_1);
       return;
     }
 
@@ -483,18 +483,18 @@ function scriptable_gun_damage(var0, var1, var2, var3, var4, var5, var6, var7, v
   }
 }
 
-function scriptable_ignore_attacker(var0) {
-  if(!isDefined(var0)) {
+function scriptable_ignore_attacker(var_0) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
   if(isDefined(self.damgeignoreents)) {
-    foreach(var2 in self.damgeignoreents) {
-      if(!isDefined(var2)) {
+    foreach(var_2 in self.damgeignoreents) {
+      if(!isDefined(var_2)) {
         continue;
       }
 
-      if(var0 == var2) {
+      if(var_0 == var_2) {
         return true;
       }
     }
@@ -503,9 +503,9 @@ function scriptable_ignore_attacker(var0) {
   return false;
 }
 
-function scriptable_ignore_mod(var0) {
+function scriptable_ignore_mod(var_0) {
   if(istrue(self.ignore_bullets)) {
-    switch (var0) {
+    switch (var_0) {
       case "MOD_PISTOL_BULLET":
       case "MOD_RIFLE_BULLET":
         return true;
@@ -513,7 +513,7 @@ function scriptable_ignore_mod(var0) {
         return false;
     }
   } else if(istrue(self.ignore_grenades)) {
-    switch (var0) {
+    switch (var_0) {
       case "MOD_GRENADE_SPLASH":
       case "MOD_GRENADE":
       case "MOD_EXPLOSIVE":
@@ -526,49 +526,49 @@ function scriptable_ignore_mod(var0) {
   return false;
 }
 
-function get_fx_direction(var0) {
-  if(!isDefined(var0)) {
+function get_fx_direction(var_0) {
+  if(!isDefined(var_0)) {
     return 1;
   }
 
-  var1 = vectortoangles(self.forward);
-  var2 = anglestoright(var1);
-  var3 = vectorNormalize(var0 - self.origin);
-  var4 = vectordot(var2, var3);
+  var_1 = vectortoangles(self.forward);
+  var_2 = anglestoright(var_1);
+  var_3 = vectorNormalize(var_0 - self.origin);
+  var_4 = vectordot(var_2, var_3);
   self.prevplayeronright = self.playeronright;
 
-  if(var4 > 0) {
+  if(var_4 > 0) {
     return 1;
   }
 
   return 0;
 }
 
-function scriptable_destroy_part(var0, var1, var2, var3, var4, var5) {
-  var0 = "" + var0;
-  var1.destroyed = 1;
-  scriptable_update_map(var1.partindex, var0, var4);
+function scriptable_destroy_part(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_0 = "" + var_0;
+  var_1.destroyed = 1;
+  scriptable_update_map(var_1.partindex, var_0, var_4);
 
   if(isDefined(self.clip_nosight)) {
     self.clip_nosight delete();
   }
 
-  var7 = get_fx_direction(var4);
+  var_7 = get_fx_direction(var_4);
 
-  if(isPlayer(var5)) {
-    var7 = !var7;
+  if(isPlayer(var_5)) {
+    var_7 = !var_7;
   }
 
-  if(var7) {
-    self setscriptablepartstate(var0, "hide");
+  if(var_7) {
+    self setscriptablepartstate(var_0, "hide");
   } else {
-    self setscriptablepartstate(var0, "hide_minus");
+    self setscriptablepartstate(var_0, "hide_minus");
   }
 
-  if(isDefined(var1.ishandle)) {
-    var8 = spawnStruct();
-    var8.origin = self.origin + var3 * -32;
-    self.ajar_opener = var8;
+  if(isDefined(var_1.ishandle)) {
+    var_8 = spawnStruct();
+    var_8.origin = self.origin + var_3 * -32;
+    self.ajar_opener = var_8;
     self.nohint = 1;
     self notify("first_interact");
     self.open_struct scripts\sp\door::remove_open_interact_hint();
@@ -576,70 +576,70 @@ function scriptable_destroy_part(var0, var1, var2, var3, var4, var5) {
   }
 }
 
-function scriptable_update_map(var0, var1, var2) {
-  if(!isDefined(self.parts_map[var0])) {
+function scriptable_update_map(var_0, var_1, var_2) {
+  if(!isDefined(self.parts_map[var_0])) {
     return;
   }
 
-  var3 = self.parts_map[var0];
+  var_3 = self.parts_map[var_0];
 
-  foreach(var5 in var3) {
-    if(var5 == 0) {
+  foreach(var_5 in var_3) {
+    if(var_5 == 0) {
       continue;
     }
 
-    var6 = scriptable_get_part_by_index(var5);
+    var_6 = scriptable_get_part_by_index(var_5);
 
-    if(var6.destroyed) {
+    if(var_6.destroyed) {
       continue;
     }
 
-    if(!is_scriptable_heirarchy_good(var6)) {
+    if(!is_scriptable_heirarchy_good(var_6)) {
       if(isDefined(self.doordamagemod)) {
-        thread scriptable_gun_damage(90, undefined, var1, self.doordamagepoint, self.doordamagemod, undefined, undefined, var6.full_partname);
+        thread scriptable_gun_damage(90, undefined, var_1, self.doordamagepoint, self.doordamagemod, undefined, undefined, var_6.full_partname);
       } else {
-        thread scriptable_gun_damage(90, undefined, var1, var2, "scripted", undefined, undefined, var6.full_partname);
+        thread scriptable_gun_damage(90, undefined, var_1, var_2, "scripted", undefined, undefined, var_6.full_partname);
       }
     }
 
-    foreach(var8 in self.parts) {
-      var8.heirarchytest = undefined;
+    foreach(var_8 in self.parts) {
+      var_8.heirarchytest = undefined;
     }
   }
 }
 
-function scriptable_get_full_partname(var0) {
-  if(var0 < 10) {
-    var1 = "0" + var0;
+function scriptable_get_full_partname(var_0) {
+  if(var_0 < 10) {
+    var_1 = "0" + var_0;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
-  return "tag_geo_frag_a_0" + var1;
+  return "tag_geo_frag_a_0" + var_1;
 }
 
-function scriptable_get_part_by_index(var0) {
-  return self.parts[scriptable_get_full_partname(var0)];
+function scriptable_get_part_by_index(var_0) {
+  return self.parts[scriptable_get_full_partname(var_0)];
 }
 
-function is_scriptable_heirarchy_good(var0) {
-  var0.heirarchytest = 1;
+function is_scriptable_heirarchy_good(var_0) {
+  var_0.heirarchytest = 1;
 
-  if(!isDefined(self.parts_map[var0.partindex])) {
+  if(!isDefined(self.parts_map[var_0.partindex])) {
     return true;
   }
 
-  var1 = self.parts_map[var0.partindex];
+  var_1 = self.parts_map[var_0.partindex];
 
-  foreach(var3 in var1) {
-    if(var3 == 0) {
+  foreach(var_3 in var_1) {
+    if(var_3 == 0) {
       return true;
     }
 
-    var4 = scriptable_get_part_by_index(var3);
+    var_4 = scriptable_get_part_by_index(var_3);
 
-    if(!isDefined(var4.heirarchytest) && !var4.destroyed) {
-      if(is_scriptable_heirarchy_good(var4)) {
+    if(!isDefined(var_4.heirarchytest) && !var_4.destroyed) {
+      if(is_scriptable_heirarchy_good(var_4)) {
         return true;
       }
     }
@@ -649,7 +649,7 @@ function is_scriptable_heirarchy_good(var0) {
 }
 
 function get_scriptable_map() {
-  var0 = [];
+  var_0 = [];
 
   if(self.classname == "scriptable_door_wooden_hollow_rl_01") {
     return get_prototype_scriptable_map();
@@ -659,16 +659,16 @@ function get_scriptable_map() {
 }
 
 function get_prototype_scriptable_map() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 1, [0, 13, 18]);
 }
 
-function scriptable_get_part_origin(var0) {
-  if(var0.partindex == 0) {
-    var1 = "tag_origin";
+function scriptable_get_part_origin(var_0) {
+  if(var_0.partindex == 0) {
+    var_1 = "tag_origin";
   } else {
-    var1 = var1.full_partname;
+    var_1 = var_1.full_partname;
   }
 
-  return self gettagorigin(var1);
+  return self gettagorigin(var_1);
 }

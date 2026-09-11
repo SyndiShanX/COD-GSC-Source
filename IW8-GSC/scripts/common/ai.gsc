@@ -54,20 +54,20 @@ function enable_arrivals() {
   self.disablearrivals = 0;
 }
 
-function set_rebel(var0) {
-  self._blackboard.isrebel = var0;
+function set_rebel(var_0) {
+  self._blackboard.isrebel = var_0;
 }
 
-function spawn_failed(var0) {
-  if(!isalive(var0)) {
+function spawn_failed(var_0) {
+  if(!isalive(var_0)) {
     return true;
   }
 
-  if(scripts\common\utility::issp() && !isDefined(var0.finished_spawning)) {
-    var0 scripts\engine\utility::waittill_either("finished spawning", "death");
+  if(scripts\common\utility::issp() && !isDefined(var_0.finished_spawning)) {
+    var_0 scripts\engine\utility::waittill_either("finished spawning", "death");
   }
 
-  if(isalive(var0)) {
+  if(isalive(var_0)) {
     return false;
   }
 
@@ -90,8 +90,8 @@ function gun_remove() {
 
 function set_strict_ff() {
   if(isDefined(self.fake_weapon_models)) {
-    for(var0 = self.fake_weapon_models.size - 1; var0 >= 0; var0--) {
-      self detach(self.fake_weapon_models[var0]);
+    for(var_0 = self.fake_weapon_models.size - 1; var_0 >= 0; var_0--) {
+      self detach(self.fake_weapon_models[var_0]);
     }
 
     self.fake_weapon_models = undefined;
@@ -99,21 +99,21 @@ function set_strict_ff() {
   }
 }
 
-function set_start_cash(var0) {
-  foreach(var2 in var0) {
-    if(issubstr(var2, "toprail") || issubstr(var2, "railcust")) {
-      if(var0.size > 1) {
-        var0 = scripts\engine\utility::array_remove(var0, var2);
-        var0 = scripts\engine\utility::array_insert(var0, var2, 1);
+function set_start_cash(var_0) {
+  foreach(var_2 in var_0) {
+    if(issubstr(var_2, "toprail") || issubstr(var_2, "railcust")) {
+      if(var_0.size > 1) {
+        var_0 = scripts\engine\utility::array_remove(var_0, var_2);
+        var_0 = scripts\engine\utility::array_insert(var_0, var_2, 1);
       }
     }
   }
 
-  foreach(var2 in var0) {
-    self attach(var2);
+  foreach(var_2 in var_0) {
+    self attach(var_2);
   }
 
-  self.fake_weapon_models = var0;
+  self.fake_weapon_models = var_0;
 }
 
 function gun_recall() {
@@ -125,13 +125,13 @@ function gun_recall() {
   self attach(getweaponmodel(self.weapon), "tag_weapon_right");
 }
 
-function set_gunpose(var0, var1) {
-  if(var0 == "automatic") {
-    var0 = undefined;
+function set_gunpose(var_0, var_1) {
+  if(var_0 == "automatic") {
+    var_0 = undefined;
   }
 
-  self.gunposeoverride = var0;
-  self.gundiscipline = isDefined(var1) && var1;
+  self.gunposeoverride = var_0;
+  self.gundiscipline = isDefined(var_1) && var_1;
 }
 
 function reset_gunpose() {
@@ -139,8 +139,8 @@ function reset_gunpose() {
   self.gundiscipline = 1;
 }
 
-function poi_enable(var0, var1) {
-  scripts\asm\shared\utility::toggle_poi(var0, var1);
+function poi_enable(var_0, var_1) {
+  scripts\asm\shared\utility::toggle_poi(var_0, var_1);
 }
 
 function stop_use_turret() {
@@ -169,7 +169,7 @@ function stop_magic_bullet_shield() {
 
 function magic_bullet_death_detection() {}
 
-function magic_bullet_shield(var0) {
+function magic_bullet_shield(var_0) {
   if(isai(self)) {} else {
     self.health = 100000;
   }
@@ -186,10 +186,10 @@ function magic_bullet_shield(var0) {
   self.damageshield = 1;
 }
 
-function force_long_death_on_back_with_pistol(var0) {
+function force_long_death_on_back_with_pistol(var_0) {
   self.forcelongdeath = 4;
 
-  if(istrue(var0)) {
+  if(istrue(var_0)) {
     self.skipdyingbackcrawl = 1;
   }
 
@@ -204,37 +204,37 @@ function force_long_death_stumbling() {
   self.forcelongdeath = 2;
 }
 
-function find_and_teleport_to_cover(var0) {
-  var1 = 0;
-  var2 = undefined;
-  var3 = 1;
-  var4 = self findbestcovernode(var0, var1, var2, var3);
+function find_and_teleport_to_cover(var_0) {
+  var_1 = 0;
+  var_2 = undefined;
+  var_3 = 1;
+  var_4 = self findbestcovernode(var_0, var_1, var_2, var_3);
 
-  if(isDefined(var4)) {
-    var5 = var4.angles;
-    var6 = var4.origin;
+  if(isDefined(var_4)) {
+    var_5 = var_4.angles;
+    var_6 = var_4.origin;
 
-    if(!issubstr(var4.type, "Prone")) {
-      if(issubstr(var4.type, "Left")) {
-        var5 += (0, 90, 0);
-      } else if(issubstr(var4.type, "Right") || issubstr(var4.type, "Cover Crouch") || issubstr(var4.type, "Conceal") || issubstr(var4.type, "Cover Stand")) {
-        var5 -= (0, 90, 0);
+    if(!issubstr(var_4.type, "Prone")) {
+      if(issubstr(var_4.type, "Left")) {
+        var_5 += (0, 90, 0);
+      } else if(issubstr(var_4.type, "Right") || issubstr(var_4.type, "Cover Crouch") || issubstr(var_4.type, "Conceal") || issubstr(var_4.type, "Cover Stand")) {
+        var_5 -= (0, 90, 0);
       }
     }
 
-    self forceteleport(var6, var5);
-    self usecovernode(var4, 1);
-    self setgoalnode(var4);
+    self forceteleport(var_6, var_5);
+    self usecovernode(var_4, 1);
+    self setgoalnode(var_4);
     return true;
   }
 
   return false;
 }
 
-function bot_ctf_get_node_chance(var0) {
+function bot_ctf_get_node_chance(var_0) {
   if(!isDefined(self._blackboard.bot_cur_loadout_num)) {
     self._blackboard.bot_cur_loadout_num = 1;
-    self._blackboard.bot_ctf_recover_flag = var0;
+    self._blackboard.bot_ctf_recover_flag = var_0;
     return true;
   }
 
@@ -271,30 +271,30 @@ function bot_ctf_flag_is_home_of_team() {
   }
 }
 
-function bomber_spawn_origins(var0, var1) {
-  if(!isDefined(var0) || !isalive(var0)) {
+function bomber_spawn_origins(var_0, var_1) {
+  if(!isDefined(var_0) || !isalive(var_0)) {
     return;
   }
 
-  var2 = bot_ctf_get_node_chance(var0, var1);
+  var_2 = bot_ctf_get_node_chance(var_0, var_1);
 
-  if(var2) {
-    var0.ignoreall = 1;
-    var0.ignoreme = 1;
+  if(var_2) {
+    var_0.ignoreall = 1;
+    var_0.ignoreme = 1;
     return;
   }
 }
 
-function blueprintextract_createtempobjective(var0) {
-  if(!isDefined(var0) || !isalive(var0)) {
+function blueprintextract_createtempobjective(var_0) {
+  if(!isDefined(var_0) || !isalive(var_0)) {
     return;
   }
 
-  var1 = bot_ctf_enemy_team_flag_is_picked_up(var0);
+  var_1 = bot_ctf_enemy_team_flag_is_picked_up(var_0);
 
-  if(var1) {
-    var0.ignoreall = 0;
-    var0.ignoreme = 0;
+  if(var_1) {
+    var_0.ignoreall = 0;
+    var_0.ignoreme = 0;
     return;
   }
 }

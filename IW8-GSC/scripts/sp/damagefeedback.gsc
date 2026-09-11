@@ -16,47 +16,47 @@ function init() {
   level.hitmarkerpriorities["high_damage"] = 85;
 }
 
-function damagefeedback_took_damage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
+function damagefeedback_took_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(getdvarint("scr_damageFeedbackDisabled")) {
     return;
   }
 
-  if(!isDefined(var1) || !isPlayer(var1) || var1 == self || var0 <= 0) {
+  if(!isDefined(var_1) || !isPlayer(var_1) || var_1 == self || var_0 <= 0) {
     return;
   }
 
-  var10 = "standard";
-  var11 = "standard";
+  var_10 = "standard";
+  var_11 = "standard";
 
-  if(isDefined(var9)) {
-    if(var0 <= weapongetdamagemin(var9)) {
-      var11 = "low_damage";
-    } else if(var0 >= weapongetdamagemax(var9)) {
-      var11 = "high_damage";
+  if(isDefined(var_9)) {
+    if(var_0 <= weapongetdamagemin(var_9)) {
+      var_11 = "low_damage";
+    } else if(var_0 >= weapongetdamagemax(var_9)) {
+      var_11 = "high_damage";
     }
   }
 
-  var12 = 0;
-  var13 = 0;
+  var_12 = 0;
+  var_13 = 0;
 
   if(isai(self)) {
-    var12 = !isalive(self);
-    var13 = isheadshot(var7);
+    var_12 = !isalive(self);
+    var_13 = isheadshot(var_7);
   }
 
-  thread updatedamagefeedback(level.player, var10, var12, var13, var11);
+  thread updatedamagefeedback(level.player, var_10, var_12, var_13, var_11);
 }
 
-function updatedamagefeedback(var0, var1, var2, var3, var4) {
+function updatedamagefeedback(var_0, var_1, var_2, var_3, var_4) {
   if(!isPlayer(self)) {
     return;
   }
 
-  if(!isDefined(var3)) {
-    var3 = "standard";
+  if(!isDefined(var_3)) {
+    var_3 = "standard";
   }
 
-  switch (var0) {
+  switch (var_0) {
     case "hithealthshield":
     case "hitspawnprotect":
     case "hitbulletstorm":
@@ -67,57 +67,57 @@ function updatedamagefeedback(var0, var1, var2, var3, var4) {
     case "hitlightarmor":
     case "hitblastshield":
     case "thermobaric_debuff":
-      setomnvar("damage_feedback_icon", var0);
+      setomnvar("damage_feedback_icon", var_0);
       self setclientomnvar("damage_feedback_icon_notify", gettime());
-      updatehitmarker(var3, var1, var2);
+      updatehitmarker(var_3, var_1, var_2);
       break;
     case "none":
       break;
     default:
-      updatehitmarker(var3, var1, var2, var4);
+      updatehitmarker(var_3, var_1, var_2, var_4);
       break;
   }
 }
 
-function updatehitmarker(var0, var1, var2, var3) {
+function updatehitmarker(var_0, var_1, var_2, var_3) {
   if(getdvarint("scr_no_hitmarker")) {
     return;
   }
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  if(isDefined(var3) && var3.team == "allies") {
+  if(isDefined(var_3) && var_3.team == "allies") {
     return;
   }
 
-  var4 = gethitmarkerpriority(var0);
+  var_4 = gethitmarkerpriority(var_0);
 
-  if(isDefined(self.lasthitmarkertime) && self.lasthitmarkertime == gettime() && var4 <= self.lasthitmarkerpriority && !var1) {
+  if(isDefined(self.lasthitmarkertime) && self.lasthitmarkertime == gettime() && var_4 <= self.lasthitmarkerpriority && !var_1) {
     return;
   }
 
   self.lasthitmarkertime = gettime();
-  self.lasthitmarkerpriority = var4;
-  setomnvar("damage_feedback", var0);
+  self.lasthitmarkerpriority = var_4;
+  setomnvar("damage_feedback", var_0);
   self setclientomnvar("damage_feedback_notify", gettime());
 
-  if(var1) {
+  if(var_1) {
     setomnvar("damage_feedback_kill", 1);
   } else {
     setomnvar("damage_feedback_kill", 0);
   }
 
-  if(var2) {
+  if(var_2) {
     setomnvar("damage_feedback_headshot", 1);
     return;
   }
@@ -125,16 +125,16 @@ function updatehitmarker(var0, var1, var2, var3) {
   setomnvar("damage_feedback_headshot", 0);
 }
 
-function gethitmarkerpriority(var0) {
-  if(!isDefined(level.hitmarkerpriorities[var0])) {
+function gethitmarkerpriority(var_0) {
+  if(!isDefined(level.hitmarkerpriorities[var_0])) {
     return 0;
   }
 
-  return level.hitmarkerpriorities[var0];
+  return level.hitmarkerpriorities[var_0];
 }
 
-function isheadshot(var0) {
-  switch (var0) {
+function isheadshot(var_0) {
+  switch (var_0) {
     case "j_head_pv_z":
     case "j_head_pv_horizontal":
     case "j_head":

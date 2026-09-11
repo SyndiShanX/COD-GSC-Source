@@ -13,74 +13,74 @@ function init() {
   thread swaphelifordrivable("scr_br_plague_zone_locations", "", "prematch_done");
 }
 
-function targetsite(var0, var1, var2, var3, var4, var5, var6, var7) {
-  var8 = spawnStruct();
-  var8.name = var0;
-  var8.set_just_keep_moving = var1;
-  var8.testing_linked_anims = var2;
-  var8.ref_13386 = var3;
-  var8.nuke_vault_oil_puddle_watch = var4;
-  var8.onpostkillcamcallback = var5;
-  var8.play_loop_nagging_hostage_on_convoy = var6;
-  var8.ref_11da4 = var7;
-  var8.ref_13c00 = [];
-  level.deployingplayer.types[var0] = var8;
+function targetsite(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  var_8 = spawnStruct();
+  var_8.name = var_0;
+  var_8.set_just_keep_moving = var_1;
+  var_8.testing_linked_anims = var_2;
+  var_8.ref_13386 = var_3;
+  var_8.nuke_vault_oil_puddle_watch = var_4;
+  var_8.onpostkillcamcallback = var_5;
+  var_8.play_loop_nagging_hostage_on_convoy = var_6;
+  var_8.ref_11da4 = var_7;
+  var_8.ref_13c00 = [];
+  level.deployingplayer.types[var_0] = var_8;
 }
 
-function targetsshot(var0, var1, var2, var3) {
-  var4 = spawnStruct();
-  var4.color = var1;
-  var4.icon = var2;
-  var4.style = var3;
-  level.deployingplayer.types[var0].mapcircle = var4;
+function targetsshot(var_0, var_1, var_2, var_3) {
+  var_4 = spawnStruct();
+  var_4.color = var_1;
+  var_4.icon = var_2;
+  var_4.style = var_3;
+  level.deployingplayer.types[var_0].mapcircle = var_4;
 }
 
-function register_module_died_poorly_func(var0) {
-  return level.deployingplayer.zones[var0];
+function register_module_died_poorly_func(var_0) {
+  return level.deployingplayer.zones[var_0];
 }
 
-function ref_135fc(var0, var1, var2) {
-  if(!isDefined(level.deployingplayer.types[var0])) {
+function ref_135fc(var_0, var_1, var_2) {
+  if(!isDefined(level.deployingplayer.types[var_0])) {
     return;
   }
 
-  var3 = level.deployingplayer.types[var0];
-  var4 = spawnStruct();
-  var4.type = var0;
-  var4.ref_13c00 = [];
-  var4.moving = 0;
-  var5 = (var1[0], var1[1], var2);
+  var_3 = level.deployingplayer.types[var_0];
+  var_4 = spawnStruct();
+  var_4.type = var_0;
+  var_4.ref_13c00 = [];
+  var_4.moving = 0;
+  var_5 = (var_1[0], var_1[1], var_2);
 
-  if(isDefined(var3.mapcircle)) {
-    var6 = var3.mapcircle.color;
-    var7 = var3.mapcircle.icon;
-    var8 = var3.mapcircle.style;
-    var4 scripts\mp\gametypes\br_quest_util::init_tactical_boxes(var6, var7, var8, var5);
-    var4.mapcircle show();
+  if(isDefined(var_3.mapcircle)) {
+    var_6 = var_3.mapcircle.color;
+    var_7 = var_3.mapcircle.icon;
+    var_8 = var_3.mapcircle.style;
+    var_4 scripts\mp\gametypes\br_quest_util::init_tactical_boxes(var_6, var_7, var_8, var_5);
+    var_4.mapcircle show();
   } else {
-    var4 scripts\mp\gametypes\br_quest_util::init_tactical_boxes(0, 0, 0, var5);
+    var_4 scripts\mp\gametypes\br_quest_util::init_tactical_boxes(0, 0, 0, var_5);
   }
 
-  var4.id = "zone_" + level.deployingplayer.ref_11e66;
+  var_4.id = "zone_" + level.deployingplayer.ref_11e66;
   level.deployingplayer.ref_11e66++;
-  var4 thread[[var3.testing_linked_anims]]();
-  level.deployingplayer.zones[var4.id] = var4;
-  ref_135fd(var4, var1, var2);
-  return var4.id;
+  var_4 thread[[var_3.testing_linked_anims]]();
+  level.deployingplayer.zones[var_4.id] = var_4;
+  ref_135fd(var_4, var_1, var_2);
+  return var_4.id;
 }
 
-function ref_135fd(var0, var1) {
+function ref_135fd(var_0, var_1) {
   if(isDefined(self.trigger)) {
     self.trigger delete();
   }
 
-  self.trigger = spawn("trigger_radius", (var0[0], var0[1], -2000), 0, int(var1), 12000);
+  self.trigger = spawn("trigger_radius", (var_0[0], var_0[1], -2000), 0, int(var_1), 12000);
   thread ref_1471f();
 }
 
 function ref_14714() {
-  var0 = level.deployingplayer.types[self.type];
-  self thread[[var0.ref_13386]]();
+  var_0 = level.deployingplayer.types[self.type];
+  self thread[[var_0.ref_13386]]();
   self.trigger delete();
   self.mapcircle delete();
   self notify("delete");
@@ -89,141 +89,141 @@ function ref_14714() {
 
 function ref_1471f() {
   self.trigger endon("death");
-  var0 = level.deployingplayer.types[self.type];
+  var_0 = level.deployingplayer.types[self.type];
 
   for(;;) {
-    self.trigger waittill("trigger", var1);
+    self.trigger waittill("trigger", var_1);
 
-    if(!isPlayer(var1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
 
     if(self.moving) {
-      var2 = ref_14718();
-      var3 = ref_14719();
-      var3 *= var3;
+      var_2 = ref_14718();
+      var_3 = ref_14719();
+      var_3 *= var_3;
 
-      if(distance2dsquared(var1.origin, var2) > var3) {
+      if(distance2dsquared(var_1.origin, var_2) > var_3) {
         continue;
       }
     }
 
-    if(isDefined(var0.play_loop_nagging_hostage_on_convoy) && [[var0.play_loop_nagging_hostage_on_convoy]](var1)) {
+    if(isDefined(var_0.play_loop_nagging_hostage_on_convoy) && [[var_0.play_loop_nagging_hostage_on_convoy]](var_1)) {
       continue;
     }
 
-    var4 = var1.guid;
+    var_4 = var_1.guid;
 
-    if(!isDefined(self.ref_13c00[var4])) {
-      var5 = spawnStruct();
-      var5.player = var1;
-      var5.start = gettime();
-      var6 = 0;
+    if(!isDefined(self.ref_13c00[var_4])) {
+      var_5 = spawnStruct();
+      var_5.player = var_1;
+      var_5.start = gettime();
+      var_6 = 0;
 
-      if(var0.set_just_keep_moving) {
-        self.ref_13c00[var4] = spawnStruct();
+      if(var_0.set_just_keep_moving) {
+        self.ref_13c00[var_4] = spawnStruct();
 
-        if(!isDefined(var0.ref_13c00[var4])) {
-          var5.ref_12ac2 = 0;
-          var0.ref_13c00[var4] = var5;
-          var6 = 1;
+        if(!isDefined(var_0.ref_13c00[var_4])) {
+          var_5.ref_12ac2 = 0;
+          var_0.ref_13c00[var_4] = var_5;
+          var_6 = 1;
         }
 
-        var0.ref_13c00[var4].ref_12ac2++;
+        var_0.ref_13c00[var_4].ref_12ac2++;
       } else {
-        if(!isDefined(var0.ref_13c00[var4])) {
-          var0.ref_13c00[var4] = 0;
+        if(!isDefined(var_0.ref_13c00[var_4])) {
+          var_0.ref_13c00[var_4] = 0;
         }
 
-        var0.ref_13c00[var4]++;
-        self.ref_13c00[var4] = var5;
-        var6 = 1;
+        var_0.ref_13c00[var_4]++;
+        self.ref_13c00[var_4] = var_5;
+        var_6 = 1;
       }
 
-      if(var6) {
-        self thread[[var0.nuke_vault_oil_puddle_watch]](var5);
+      if(var_6) {
+        self thread[[var_0.nuke_vault_oil_puddle_watch]](var_5);
       }
     }
 
-    thread applyprematchplotarmor(var4);
+    thread applyprematchplotarmor(var_4);
   }
 }
 
-function applyprematchplotarmor(var0) {
-  var1 = self.ref_13c00[var0];
-  var1 notify("trigger_exit");
-  var1 endon("trigger_exit");
+function applyprematchplotarmor(var_0) {
+  var_1 = self.ref_13c00[var_0];
+  var_1 notify("trigger_exit");
+  var_1 endon("trigger_exit");
   waitframe();
   waittillframeend();
-  var2 = level.deployingplayer.types[self.type];
-  self.ref_13c00[var0] = undefined;
-  var3 = 0;
+  var_2 = level.deployingplayer.types[self.type];
+  self.ref_13c00[var_0] = undefined;
+  var_3 = 0;
 
-  if(var2.set_just_keep_moving) {
-    var2.ref_13c00[var0].ref_12ac2--;
+  if(var_2.set_just_keep_moving) {
+    var_2.ref_13c00[var_0].ref_12ac2--;
 
-    if(!var2.ref_13c00[var0].ref_12ac2) {
-      var1 = var2.ref_13c00[var0];
-      var2.ref_13c00[var0] = undefined;
-      var3 = 1;
+    if(!var_2.ref_13c00[var_0].ref_12ac2) {
+      var_1 = var_2.ref_13c00[var_0];
+      var_2.ref_13c00[var_0] = undefined;
+      var_3 = 1;
     }
   } else {
-    var2.ref_13c00[var0]--;
+    var_2.ref_13c00[var_0]--;
 
-    if(!var2.ref_13c00[var0]) {
-      var2.ref_13c00[var0] = undefined;
+    if(!var_2.ref_13c00[var_0]) {
+      var_2.ref_13c00[var_0] = undefined;
     }
 
-    var3 = 1;
+    var_3 = 1;
   }
 
-  if(var3) {
-    self thread[[var2.onpostkillcamcallback]](var1);
+  if(var_3) {
+    self thread[[var_2.onpostkillcamcallback]](var_1);
     return;
   }
 }
 
-function ref_1471b(var0, var1, var2) {
+function ref_1471b(var_0, var_1, var_2) {
   self notify("move");
   self endon("move");
   self endon("delete");
-  var3 = ref_14718();
+  var_3 = ref_14718();
 
-  if(!isDefined(var0)) {
-    var0 = var3;
+  if(!isDefined(var_0)) {
+    var_0 = var_3;
   }
 
-  var4 = ref_14719();
+  var_4 = ref_14719();
 
-  if(!isDefined(var1)) {
-    var1 = var4;
+  if(!isDefined(var_1)) {
+    var_1 = var_4;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  var5 = level.deployingplayer.types[self.type];
+  var_5 = level.deployingplayer.types[self.type];
 
-  if(isDefined(var5.ref_11da4)) {
-    self thread[[var5.ref_11da4]](var0, var1, var2);
+  if(isDefined(var_5.ref_11da4)) {
+    self thread[[var_5.ref_11da4]](var_0, var_1, var_2);
   }
 
-  var6 = var3 != var0 || var4 != var1;
+  var_6 = var_3 != var_0 || var_4 != var_1;
 
-  if(var6) {
-    var7 = (var0[0], var0[1], var1);
+  if(var_6) {
+    var_7 = (var_0[0], var_0[1], var_1);
 
-    if(var2 <= 0) {
-      self.mapcircle.origin = ref_135fd(var7, var0, var1);
+    if(var_2 <= 0) {
+      self.mapcircle.origin = ref_135fd(var_7, var_0, var_1);
     } else {
       self.moving = 1;
 
-      if(var4 < var1) {
-        ref_135fd(var0, var1);
+      if(var_4 < var_1) {
+        ref_135fd(var_0, var_1);
       }
 
-      self.mapcircle moveTo(var7, var2);
+      self.mapcircle moveTo(var_7, var_2);
       GscBinSkip4(0x35);
     }
   }
@@ -235,8 +235,8 @@ function applymovingcircles() {
   self.trigger endon("death");
 
   for(;;) {
-    var0 = ref_14718();
-    self.trigger.origin = (var0[0], var0[1], -2000);
+    var_0 = ref_14718();
+    self.trigger.origin = (var_0[0], var_0[1], -2000);
     waitframe();
   }
 }
@@ -249,17 +249,17 @@ function ref_14719() {
   return self.mapcircle.origin[2];
 }
 
-function offlight(var0) {
-  return var0 scripts\mp\gametypes\br_public::updateinstantclassswapallowedinternal();
+function offlight(var_0) {
+  return var_0 scripts\mp\gametypes\br_public::updateinstantclassswapallowedinternal();
 }
 
-function og_mbradial(var0) {
-  return var0 scripts\mp\gametypes\br_public::ref_125f3();
+function og_mbradial(var_0) {
+  return var_0 scripts\mp\gametypes\br_public::ref_125f3();
 }
 
 function ref_1471a() {
-  var0 = loadfx("vfx/iw8_br/gameplay/corruptzone/vfx_corruptzone_spores_10k");
-  self.ref_1239c = spawnfx(var0, ref_14718());
+  var_0 = loadfx("vfx/iw8_br/gameplay/corruptzone/vfx_corruptzone_spores_10k");
+  self.ref_1239c = spawnfx(var_0, ref_14718());
   self.ref_1239c unmarkkeyframedmover(1);
   triggerfx(self.ref_1239c);
 }
@@ -271,300 +271,300 @@ function ref_1471d() {
   }
 }
 
-function ref_14715(var0) {
-  if(!var0.player scripts\mp\gametypes\br_public::ref_125f3()) {
-    var0.player scripts\cp_mp\utility\game_utility::_visionsetnakedforplayer("mp_don3_plague", 0.5);
-    thread ref_14721(var0);
-    thread ref_14722(var0);
+function ref_14715(var_0) {
+  if(!var_0.player scripts\mp\gametypes\br_public::ref_125f3()) {
+    var_0.player scripts\cp_mp\utility\game_utility::_visionsetnakedforplayer("mp_don3_plague", 0.5);
+    thread ref_14721(var_0);
+    thread ref_14722(var_0);
   }
 
-  var0.player setscriptablepartstate("plague_zone", "enter");
+  var_0.player setscriptablepartstate("plague_zone", "enter");
 }
 
-function ref_14721(var0) {
-  var1 = getdvarint("scr_br_zones_plague_damage", 3);
-  var2 = getdvarfloat("scr_br_zones_plague_jugg_damage_scale", 7);
-  var3 = getdvarfloat("scr_br_zones_plague_damage_rate", 2);
-  var4 = getdvarint("scr_br_zones_plague_cough", 0);
-  var0 endon("end_plague_update");
-  var0.player endon("disconnect");
+function ref_14721(var_0) {
+  var_1 = getdvarint("scr_br_zones_plague_damage", 3);
+  var_2 = getdvarfloat("scr_br_zones_plague_jugg_damage_scale", 7);
+  var_3 = getdvarfloat("scr_br_zones_plague_damage_rate", 2);
+  var_4 = getdvarint("scr_br_zones_plague_cough", 0);
+  var_0 endon("end_plague_update");
+  var_0.player endon("disconnect");
 
   for(;;) {
-    var5 = var0.player;
+    var_5 = var_0.player;
 
-    if(!istrue(var5.start_death_from_above_sequence)) {
-      if(scripts\cp_mp\gasmask::hasgasmask(var5)) {
-        var5 scripts\cp_mp\gasmask::processdamage(var1);
+    if(!istrue(var_5.start_death_from_above_sequence)) {
+      if(scripts\cp_mp\gasmask::hasgasmask(var_5)) {
+        var_5 scripts\cp_mp\gasmask::processdamage(var_1);
       } else {
-        var6 = var1;
+        var_6 = var_1;
 
         if(isDefined(level.ref_11c95)) {
-          var6 = var5[[level.ref_11c95]](var6);
+          var_6 = var_5[[level.ref_11c95]](var_6);
         }
 
-        if(var5 scripts\mp\utility\killstreak::isjuggernaut()) {
-          var6 = int(var6 * var2);
+        if(var_5 scripts\mp\utility\killstreak::isjuggernaut()) {
+          var_6 = int(var_6 * var_2);
         }
 
-        var5 dodamage(var6, var5.origin, var5, undefined, "MOD_TRIGGER_HURT", "danger_circle_br");
+        var_5 dodamage(var_6, var_5.origin, var_5, undefined, "MOD_TRIGGER_HURT", "danger_circle_br");
 
-        if(var5 scripts\mp\gametypes\br_public::hasarmor()) {
-          var5 scripts\mp\gametypes\br_public::damagearmor(var6);
+        if(var_5 scripts\mp\gametypes\br_public::hasarmor()) {
+          var_5 scripts\mp\gametypes\br_public::damagearmor(var_6);
         }
 
-        if(var4) {
-          var5 scripts\mp\gametypes\br_circle::ref_13e18();
+        if(var_4) {
+          var_5 scripts\mp\gametypes\br_circle::ref_13e18();
         }
       }
     }
 
-    wait var3;
+    wait var_3;
   }
 }
 
-function ref_14722(var0) {
-  var0 endon("end_plague_update");
-  var0.player endon("disconnect");
+function ref_14722(var_0) {
+  var_0 endon("end_plague_update");
+  var_0.player endon("disconnect");
 
   for(;;) {
-    if(scripts\cp_mp\gasmask::hasgasmask(var0.player)) {
-      var0.player scripts\mp\gametypes\br_pickups::plunderrepositoryref("plague_zone");
+    if(scripts\cp_mp\gasmask::hasgasmask(var_0.player)) {
+      var_0.player scripts\mp\gametypes\br_pickups::plunderrepositoryref("plague_zone");
     }
 
     wait 1;
   }
 }
 
-function ref_14716(var0) {
-  var0 notify("end_plague_update");
+function ref_14716(var_0) {
+  var_0 notify("end_plague_update");
 
-  if(!isDefined(var0.player)) {
+  if(!isDefined(var_0.player)) {
     return;
   }
 
-  var0.player setscriptablepartstate("plague_zone", "exit");
+  var_0.player setscriptablepartstate("plague_zone", "exit");
 
-  if(!var0.player scripts\mp\gametypes\br_public::ref_125f3()) {
-    if(scripts\cp_mp\gasmask::hasgasmask(var0.player)) {
-      var0.player scripts\mp\gametypes\br_pickups::plunderrankupdate("plague_zone");
+  if(!var_0.player scripts\mp\gametypes\br_public::ref_125f3()) {
+    if(scripts\cp_mp\gasmask::hasgasmask(var_0.player)) {
+      var_0.player scripts\mp\gametypes\br_pickups::plunderrankupdate("plague_zone");
     }
 
-    var0.player scripts\cp_mp\utility\game_utility::_visionsetnakedforplayer("", 0.5);
+    var_0.player scripts\cp_mp\utility\game_utility::_visionsetnakedforplayer("", 0.5);
     return;
   }
 }
 
-function ref_1471c(var0, var1, var2) {}
+function ref_1471c(var_0, var_1, var_2) {}
 
-function swaphelifordrivable(var0, var1, var2) {
-  var3 = getDvar(var0, var1);
+function swaphelifordrivable(var_0, var_1, var_2) {
+  var_3 = getDvar(var_0, var_1);
 
-  if(var3 == "") {
+  if(var_3 == "") {
     return;
   }
 
   waittillframeend();
 
-  if(isDefined(var2)) {
-    scripts\mp\flags::gameflagwait(var2);
+  if(isDefined(var_2)) {
+    scripts\mp\flags::gameflagwait(var_2);
   }
 
-  var4 = getdvarint("scr_br_plague_zone_locations_max", -1);
-  var5 = strtok(var3, ",");
+  var_4 = getdvarint("scr_br_plague_zone_locations_max", -1);
+  var_5 = strtok(var_3, ",");
 
-  if(var4 < 0) {
-    var4 = var5.size;
+  if(var_4 < 0) {
+    var_4 = var_5.size;
   } else {
-    var4 = min(var4, var5.size);
-    var5 = scripts\engine\utility::array_randomize(var5);
+    var_4 = min(var_4, var_5.size);
+    var_5 = scripts\engine\utility::array_randomize(var_5);
   }
 
-  for(var6 = 0; var6 < var4; var6++) {
-    var7 = var5[var6];
-    swap_access_card(var7);
-    thread ref_12df0(var7);
+  for(var_6 = 0; var_6 < var_4; var_6++) {
+    var_7 = var_5[var_6];
+    swap_access_card(var_7);
+    thread ref_12df0(var_7);
   }
 }
 
-function ref_12df0(var0) {
-  var1 = level.deployingplayer.ref_11e27[var0];
+function ref_12df0(var_0) {
+  var_1 = level.deployingplayer.ref_11e27[var_0];
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  if(var1.ks_circlemoving > var1.ks_circlemovedist) {
-    var2 = randomfloatrange(var1.ks_circlemovedist, var1.ks_circlemoving);
+  if(var_1.ks_circlemoving > var_1.ks_circlemovedist) {
+    var_2 = randomfloatrange(var_1.ks_circlemovedist, var_1.ks_circlemoving);
   } else {
-    var2 = var2.ks_circlemovedist;
+    var_2 = var_2.ks_circlemovedist;
   }
 
-  wait var2;
+  wait var_2;
 
-  if(var2.set_mark_distances > 0) {
-    var3 = ref_135fc("plague", var2.origin, 50);
-    var4 = register_module_died_poorly_func(var3);
-    thread ref_1471b(var4, undefined, var2.radius);
+  if(var_2.set_mark_distances > 0) {
+    var_3 = ref_135fc("plague", var_2.origin, 50);
+    var_4 = register_module_died_poorly_func(var_3);
+    thread ref_1471b(var_4, undefined, var_2.radius);
   } else {
-    var3 = ref_135fc("plague", var2.origin, var2.radius);
+    var_3 = ref_135fc("plague", var_2.origin, var_2.radius);
   }
 
   level waittill("game_ended");
-  var4 = register_module_died_poorly_func(var3);
+  var_4 = register_module_died_poorly_func(var_3);
 
-  if(isDefined(var4)) {
-    ref_14714(var4);
+  if(isDefined(var_4)) {
+    ref_14714(var_4);
     return;
   }
 }
 
-function swap_access_card(var0, var1, var2, var3, var4, var5) {
+function swap_access_card(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(level.deployingplayer.ref_11e27)) {
     level.deployingplayer.ref_11e27 = [];
   }
 
-  if(isDefined(level.deployingplayer.ref_11e27[var0])) {
+  if(isDefined(level.deployingplayer.ref_11e27[var_0])) {
     return;
   }
 
-  if(!isDefined(var1)) {
-    var1 = (0, 0, 0);
+  if(!isDefined(var_1)) {
+    var_1 = (0, 0, 0);
   }
 
-  if(!isDefined(var2)) {
-    var2 = -1;
+  if(!isDefined(var_2)) {
+    var_2 = -1;
   }
 
-  if(!isDefined(var3)) {
-    var3 = 0;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  if(!isDefined(var4)) {
-    var4 = 0;
+  if(!isDefined(var_4)) {
+    var_4 = 0;
   }
 
-  if(!isDefined(var5)) {
-    var5 = 0;
+  if(!isDefined(var_5)) {
+    var_5 = 0;
   }
 
-  switch (var0) {
+  switch (var_0) {
     case "dam":
-      var6 = [(-21543, 47479, 0), 10000, 75, 5, 10];
-      var1 = var6[0];
-      var2 = var6[1];
-      var3 = var6[2];
-      var4 = var6[3];
-      var5 = var6[4];
-      var6 = undefined;
+      var_6 = [(-21543, 47479, 0), 10000, 75, 5, 10];
+      var_1 = var_6[0];
+      var_2 = var_6[1];
+      var_3 = var_6[2];
+      var_4 = var_6[3];
+      var_5 = var_6[4];
+      var_6 = undefined;
       break;
     case "stadium":
-      var7 = [(28696, 2288, 0), 10000, 75, 5, 10];
-      var1 = var7[0];
-      var2 = var7[1];
-      var3 = var7[2];
-      var4 = var7[3];
-      var5 = var7[4];
-      var7 = undefined;
+      var_7 = [(28696, 2288, 0), 10000, 75, 5, 10];
+      var_1 = var_7[0];
+      var_2 = var_7[1];
+      var_3 = var_7[2];
+      var_4 = var_7[3];
+      var_5 = var_7[4];
+      var_7 = undefined;
       break;
     case "hospital":
-      var8 = [(9443, -11877, 0), 10000, 75, 5, 10];
-      var1 = var8[0];
-      var2 = var8[1];
-      var3 = var8[2];
-      var4 = var8[3];
-      var5 = var8[4];
-      var8 = undefined;
+      var_8 = [(9443, -11877, 0), 10000, 75, 5, 10];
+      var_1 = var_8[0];
+      var_2 = var_8[1];
+      var_3 = var_8[2];
+      var_4 = var_8[3];
+      var_5 = var_8[4];
+      var_8 = undefined;
       break;
     case "ship":
-      var9 = [(38750, -43340, 0), 10000, 75, 5, 10];
-      var1 = var9[0];
-      var2 = var9[1];
-      var3 = var9[2];
-      var4 = var9[3];
-      var5 = var9[4];
-      var9 = undefined;
+      var_9 = [(38750, -43340, 0), 10000, 75, 5, 10];
+      var_1 = var_9[0];
+      var_2 = var_9[1];
+      var_3 = var_9[2];
+      var_4 = var_9[3];
+      var_5 = var_9[4];
+      var_9 = undefined;
       break;
     case "tv":
-      var10 = [(15258, 17988, 0), 10000, 75, 5, 10];
-      var1 = var10[0];
-      var2 = var10[1];
-      var3 = var10[2];
-      var4 = var10[3];
-      var5 = var10[4];
-      var10 = undefined;
+      var_10 = [(15258, 17988, 0), 10000, 75, 5, 10];
+      var_1 = var_10[0];
+      var_2 = var_10[1];
+      var_3 = var_10[2];
+      var_4 = var_10[3];
+      var_5 = var_10[4];
+      var_10 = undefined;
       break;
     case "super":
-      var11 = [(-13027, 9242, 0), 10000, 75, 5, 10];
-      var1 = var11[0];
-      var2 = var11[1];
-      var3 = var11[2];
-      var4 = var11[3];
-      var5 = var11[4];
-      var11 = undefined;
+      var_11 = [(-13027, 9242, 0), 10000, 75, 5, 10];
+      var_1 = var_11[0];
+      var_2 = var_11[1];
+      var_3 = var_11[2];
+      var_4 = var_11[3];
+      var_5 = var_11[4];
+      var_11 = undefined;
       break;
     case "gulag":
-      var12 = [(51158, -38213, 0), 10000, 75, 5, 10];
-      var1 = var12[0];
-      var2 = var12[1];
-      var3 = var12[2];
-      var4 = var12[3];
-      var5 = var12[4];
-      var12 = undefined;
+      var_12 = [(51158, -38213, 0), 10000, 75, 5, 10];
+      var_1 = var_12[0];
+      var_2 = var_12[1];
+      var_3 = var_12[2];
+      var_4 = var_12[3];
+      var_5 = var_12[4];
+      var_12 = undefined;
       break;
     case "quarry":
-      var13 = [(34267, 43134, 0), 10000, 75, 5, 10];
-      var1 = var13[0];
-      var2 = var13[1];
-      var3 = var13[2];
-      var4 = var13[3];
-      var5 = var13[4];
-      var13 = undefined;
+      var_13 = [(34267, 43134, 0), 10000, 75, 5, 10];
+      var_1 = var_13[0];
+      var_2 = var_13[1];
+      var_3 = var_13[2];
+      var_4 = var_13[3];
+      var_5 = var_13[4];
+      var_13 = undefined;
       break;
     case "boneyard":
-      var14 = [(-27531, -10899, 0), 10000, 75, 5, 10];
-      var1 = var14[0];
-      var2 = var14[1];
-      var3 = var14[2];
-      var4 = var14[3];
-      var5 = var14[4];
-      var14 = undefined;
+      var_14 = [(-27531, -10899, 0), 10000, 75, 5, 10];
+      var_1 = var_14[0];
+      var_2 = var_14[1];
+      var_3 = var_14[2];
+      var_4 = var_14[3];
+      var_5 = var_14[4];
+      var_14 = undefined;
       break;
     case "bank":
-      var15 = [(21767, -19846, 0), 10000, 75, 5, 10];
-      var1 = var15[0];
-      var2 = var15[1];
-      var3 = var15[2];
-      var4 = var15[3];
-      var5 = var15[4];
-      var15 = undefined;
+      var_15 = [(21767, -19846, 0), 10000, 75, 5, 10];
+      var_1 = var_15[0];
+      var_2 = var_15[1];
+      var_3 = var_15[2];
+      var_4 = var_15[3];
+      var_5 = var_15[4];
+      var_15 = undefined;
       break;
     default:
       break;
   }
 
-  var16 = spawnStruct();
-  var17 = "scr_br_plague_zone_" + var0 + "_";
-  var16.origin = getdvarvector(var17 + "origin", var1);
-  var16.radius = getdvarfloat(var17 + "radius", var2) * getdvarfloat("scr_br_plague_zone_radius_scale", 1);
-  var16.set_mark_distances = getdvarfloat(var17 + "grow_time", var3) * getdvarfloat("scr_br_plague_zone_grow_time_scale", 1);
-  var16.ks_circlemovedist = getdvarfloat(var17 + "delay", var4) * getdvarfloat("scr_br_plague_zone_delay_scale", 1);
-  var16.ks_circlemoving = getdvarfloat(var17 + "delay_max", var5) * getdvarfloat("scr_br_plague_zone_delay_max_scale", 1);
+  var_16 = spawnStruct();
+  var_17 = "scr_br_plague_zone_" + var_0 + "_";
+  var_16.origin = getdvarvector(var_17 + "origin", var_1);
+  var_16.radius = getdvarfloat(var_17 + "radius", var_2) * getdvarfloat("scr_br_plague_zone_radius_scale", 1);
+  var_16.set_mark_distances = getdvarfloat(var_17 + "grow_time", var_3) * getdvarfloat("scr_br_plague_zone_grow_time_scale", 1);
+  var_16.ks_circlemovedist = getdvarfloat(var_17 + "delay", var_4) * getdvarfloat("scr_br_plague_zone_delay_scale", 1);
+  var_16.ks_circlemoving = getdvarfloat(var_17 + "delay_max", var_5) * getdvarfloat("scr_br_plague_zone_delay_max_scale", 1);
 
-  if(var16.radius < 0) {
+  if(var_16.radius < 0) {
     return;
   }
 
-  level.deployingplayer.ref_11e27[var0] = var16;
+  level.deployingplayer.ref_11e27[var_0] = var_16;
 }
 
-function ref_1239d(var0) {
-  return offlight(var0);
+function ref_1239d(var_0) {
+  return offlight(var_0);
 }
 
-function updatelocationbesttimehud(var0, var1) {
-  if(!isDefined(level.deployingplayer) || !isDefined(level.deployingplayer.zones) || !isDefined(level.deployingplayer.types[var0])) {
+function updatelocationbesttimehud(var_0, var_1) {
+  if(!isDefined(level.deployingplayer) || !isDefined(level.deployingplayer.zones) || !isDefined(level.deployingplayer.types[var_0])) {
     return false;
   }
 
-  return isDefined(level.deployingplayer.types[var0].ref_13c00[var1.guid]);
+  return isDefined(level.deployingplayer.types[var_0].ref_13c00[var_1.guid]);
 }

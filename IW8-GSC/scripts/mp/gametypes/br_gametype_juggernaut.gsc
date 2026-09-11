@@ -55,7 +55,7 @@ function disablefeature() {
 
 function disablepersonalnuke() {}
 
-function disableteamkillrewards(var0) {
+function disableteamkillrewards(var_0) {
   self endon("disconnect");
   self waittill("spawned_player");
   wait 1;
@@ -95,34 +95,34 @@ function disableplayerrewards() {
   level waittill("br_prematchEnded");
   thread display_already_have_weapon_message();
   thread display_current_cypher_to_player();
-  var0 = 1;
+  var_0 = 1;
 
   for(;;) {
-    var1 = getdvarint("scr_br_jugg_active", 1);
+    var_1 = getdvarint("scr_br_jugg_active", 1);
 
-    if(!var1) {
+    if(!var_1) {
       waitframe();
       continue;
     }
 
-    var2 = scripts\mp\gametypes\br_jugg_common::resetafkchecks();
+    var_2 = scripts\mp\gametypes\br_jugg_common::resetafkchecks();
 
     if(level.ref_11f2c > 0) {
-      var2 -= level.ref_11f2c;
+      var_2 -= level.ref_11f2c;
     }
 
     level.vehicle_isneutraltoplayer = scripts\engine\utility::array_randomize(level.vehicle_isneutraltoplayer);
-    var3 = scripts\mp\gametypes\br_jugg_common::ref_1334b(var2, var0);
+    var_3 = scripts\mp\gametypes\br_jugg_common::ref_1334b(var_2, var_0);
 
     while(!istrue(level.ref_1385f)) {
       waitframe();
     }
 
-    var0 = 0;
-    level thread scripts\mp\gametypes\br_jugg_common::ref_1383f(var3, "gametype_juggernaut");
+    var_0 = 0;
+    level thread scripts\mp\gametypes\br_jugg_common::ref_1383f(var_3, "gametype_juggernaut");
     level waittill("continue_jugg_drops");
-    var4 = getdvarint("scr_br_jugg_delivery_interval", 20);
-    wait var4;
+    var_4 = getdvarint("scr_br_jugg_delivery_interval", 20);
+    wait var_4;
   }
 }
 
@@ -132,14 +132,14 @@ function display_already_have_weapon_message() {
   level.ref_1385f = 1;
 }
 
-function dismount_after_accum_damage_internal(var0) {
+function dismount_after_accum_damage_internal(var_0) {
   level endon("game_ended");
 
   for(;;) {
     level waittill("br_player_eliminated");
-    var1 = scripts\mp\gametypes\br::reinforcement_type();
+    var_1 = scripts\mp\gametypes\br::reinforcement_type();
 
-    if(var1.size <= var0) {
+    if(var_1.size <= var_0) {
       scripts\mp\flags::gameflagset("start_jugg_delivery");
       break;
     }
@@ -148,26 +148,26 @@ function dismount_after_accum_damage_internal(var0) {
 
 function display_current_cypher_to_player() {
   level endon("game_ended");
-  var0 = getdvarint("scr_br_jugg_time_start", 10);
-  wait var0;
+  var_0 = getdvarint("scr_br_jugg_time_start", 10);
+  wait var_0;
   scripts\mp\flags::gameflagset("start_jugg_delivery");
 }
 
-function disablespawncamera(var0) {}
+function disablespawncamera(var_0) {}
 
-function disablespawningforplayerfunc(var0) {}
+function disablespawningforplayerfunc(var_0) {}
 
-function disablespawningforplayer(var0) {
+function disablespawningforplayer(var_0) {
   level notify("continue_jugg_drops");
 }
 
-function disablelootbunkercachelocations(var0) {
+function disablelootbunkercachelocations(var_0) {
   level notify("continue_jugg_drops");
-  scripts\mp\gametypes\br_plunder::dropplunderbyrarity(100, var0);
-  var1 = getdvarint("scr_br_jugg_drop_minigun", 1);
+  scripts\mp\gametypes\br_plunder::dropplunderbyrarity(100, var_0);
+  var_1 = getdvarint("scr_br_jugg_drop_minigun", 1);
 
-  if(var1) {
-    scripts\mp\gametypes\br_pickups::ml_p1_func("brloot_weapon_lm_dblmg_lege", var0);
+  if(var_1) {
+    scripts\mp\gametypes\br_pickups::ml_p1_func("brloot_weapon_lm_dblmg_lege", var_0);
     return;
   }
 }

@@ -16,20 +16,20 @@ function init() {
   level.hitmarkerpriorities["hitheadx2break"] = 80;
 }
 
-function updatedamagefeedback(var0, var1, var2, var3, var4, var5) {
+function updatedamagefeedback(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isPlayer(self) && !scripts\mp\utility\killstreak::isplayerkillstreak(self)) {
     return;
   }
 
-  if(!isDefined(var3)) {
-    var3 = "standard";
+  if(!isDefined(var_3)) {
+    var_3 = "standard";
   }
 
-  if(!isDefined(var4)) {
-    var4 = 0;
+  if(!isDefined(var_4)) {
+    var_4 = 0;
   }
 
-  if((!isDefined(level.damagefeedbacknosound) || !level.damagefeedbacknosound) && !var4) {
+  if((!isDefined(level.damagefeedbacknosound) || !level.damagefeedbacknosound) && !var_4) {
     if(!isDefined(self.hitmarkeraudioevents)) {
       self.hitmarkeraudioevents = 0;
     }
@@ -38,7 +38,7 @@ function updatedamagefeedback(var0, var1, var2, var3, var4, var5) {
     self setclientomnvar("ui_hitmarker_audio_events", self.hitmarkeraudioevents % 16);
   }
 
-  switch (var0) {
+  switch (var_0) {
     case "none":
       break;
     case "hitadrenaline":
@@ -67,61 +67,61 @@ function updatedamagefeedback(var0, var1, var2, var3, var4, var5) {
     case "hittrophysystem":
     case "hittacresist":
     case "hitequip":
-      updatehitmarker(var3, var1, var2, var5, var0);
+      updatehitmarker(var_3, var_1, var_2, var_5, var_0);
       break;
     default:
-      updatehitmarker(var3, var1, var2, var5);
+      updatehitmarker(var_3, var_1, var_2, var_5);
       break;
   }
 }
 
-function updatehitmarker(var0, var1, var2, var3, var4) {
-  if(!isDefined(var0)) {
+function updatehitmarker(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  if(!isDefined(var3)) {
-    var3 = 0;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  var5 = gethitmarkerpriority(var0);
+  var_5 = gethitmarkerpriority(var_0);
 
-  if(isDefined(self.lasthitmarkertime) && self.lasthitmarkertime == gettime() && var5 <= self.lasthitmarkerpriority && !var1) {
+  if(isDefined(self.lasthitmarkertime) && self.lasthitmarkertime == gettime() && var_5 <= self.lasthitmarkerpriority && !var_1) {
     return;
   }
 
   self.lasthitmarkertime = gettime();
-  self.lasthitmarkerpriority = var5;
+  self.lasthitmarkerpriority = var_5;
 
-  if(isDefined(var4) && !istrue(var1)) {
-    self setclientomnvar("damage_feedback_icon", var4);
+  if(isDefined(var_4) && !istrue(var_1)) {
+    self setclientomnvar("damage_feedback_icon", var_4);
     self setclientomnvar("damage_feedback_icon_notify", gettime());
   }
 
-  self setclientomnvar("damage_feedback", var0);
+  self setclientomnvar("damage_feedback", var_0);
   self setclientomnvar("damage_feedback_notify", gettime());
 
-  if(var1) {
+  if(var_1) {
     self setclientomnvar("damage_feedback_kill", 1);
   } else {
     self setclientomnvar("damage_feedback_kill", 0);
   }
 
-  if(var2) {
+  if(var_2) {
     self setclientomnvar("damage_feedback_headshot", 1);
   } else {
     self setclientomnvar("damage_feedback_headshot", 0);
   }
 
-  if(var3) {
+  if(var_3) {
     self setclientomnvar("damage_feedback_nonplayer", 1);
     return;
   }
@@ -129,56 +129,56 @@ function updatehitmarker(var0, var1, var2, var3, var4) {
   self setclientomnvar("damage_feedback_nonplayer", 0);
 }
 
-function gethitmarkerpriority(var0) {
-  if(!isDefined(level.hitmarkerpriorities[var0])) {
+function gethitmarkerpriority(var_0) {
+  if(!isDefined(level.hitmarkerpriorities[var_0])) {
     return 0;
   }
 
-  return level.hitmarkerpriorities[var0];
+  return level.hitmarkerpriorities[var_0];
 }
 
-function hudicontype(var0) {
-  var1 = 0;
+function hudicontype(var_0) {
+  var_1 = 0;
 
   if(isDefined(level.damagefeedbacknosound) && level.damagefeedbacknosound) {
-    var1 = 1;
+    var_1 = 1;
   }
 
   if(!isPlayer(self)) {
     return;
   }
 
-  if(var0 == "axe") {
-    var0 = "throwingknife";
+  if(var_0 == "axe") {
+    var_0 = "throwingknife";
   }
 
-  switch (var0) {
+  switch (var_0) {
     case "crossbowbolt":
     case "ammobox":
     case "scavenger":
     case "throwingknife":
-      if(!var1) {
+      if(!var_1) {
         self playlocalsound("scavenger_pack_pickup");
       }
 
       if(!level.hardcoremode) {
-        self setclientomnvar("damage_feedback_other", var0);
+        self setclientomnvar("damage_feedback_other", var_0);
       }
 
       break;
     case "throwingknife_fire":
-      if(!var1) {
+      if(!var_1) {
         self playlocalsound("scavenger_pack_pickup");
       }
 
       if(!level.hardcoremode) {
-        self setclientomnvar("damage_feedback_other", var0);
+        self setclientomnvar("damage_feedback_other", var_0);
       }
 
       break;
     case "suppression":
       if(!level.hardcoremode) {
-        self setclientomnvar("damage_feedback_other", var0);
+        self setclientomnvar("damage_feedback_other", var_0);
       }
 
       break;
@@ -186,29 +186,29 @@ function hudicontype(var0) {
     case "br_armor":
     case "br_ammo":
       if(!level.hardcoremode) {
-        self setclientomnvar("damage_feedback_other", var0);
+        self setclientomnvar("damage_feedback_other", var_0);
       }
 
       break;
     case "tacinsert_destroyed":
-      if(!var1) {
+      if(!var_1) {
         self playlocalsound("iw8_tactical_insert_smash");
       }
 
       if(!level.hardcoremode) {
-        self setclientomnvar("damage_feedback_other", var0);
+        self setclientomnvar("damage_feedback_other", var_0);
       }
 
       break;
     case "intel_folder":
       if(!level.hardcoremode) {
-        self setclientomnvar("damage_feedback_other", var0);
+        self setclientomnvar("damage_feedback_other", var_0);
       }
 
       break;
     case "truckheal":
       if(!level.hardcoremode) {
-        self setclientomnvar("damage_feedback_other", var0);
+        self setclientomnvar("damage_feedback_other", var_0);
       }
 
       break;

@@ -83,53 +83,53 @@ function updategametypedvars() {
 }
 
 function getspawnpoint() {
-  var0 = self.pers["team"];
+  var_0 = self.pers["team"];
 
   if(game["switchedsides"]) {
-    var0 = scripts\mp\utility\game::getotherteam(var0)[0];
+    var_0 = scripts\mp\utility\game::getotherteam(var_0)[0];
   }
 
   if(scripts\mp\spawnlogic::shoulduseteamstartspawn()) {
-    var1 = scripts\mp\spawnlogic::getteamspawnpoints(var0);
-    var2 = undefined;
+    var_1 = scripts\mp\spawnlogic::getteamspawnpoints(var_0);
+    var_2 = undefined;
   } else {
-    var1 = scripts\mp\spawnlogic::getteamspawnpoints(var2);
-    var3 = scripts\mp\spawnlogic::getteamfallbackspawnpoints(var2);
-    var2 = undefined;
+    var_1 = scripts\mp\spawnlogic::getteamspawnpoints(var_2);
+    var_3 = scripts\mp\spawnlogic::getteamfallbackspawnpoints(var_2);
+    var_2 = undefined;
   }
 
-  return var2;
+  return var_2;
 }
 
-function onnormaldeath(var0, var1, var2, var3, var4) {
-  scripts\mp\gametypes\common::oncommonnormaldeath(var0, var1, var2, var3, var4);
+function onnormaldeath(var_0, var_1, var_2, var_3, var_4) {
+  scripts\mp\gametypes\common::oncommonnormaldeath(var_0, var_1, var_2, var_3, var_4);
 }
 
 function onspawnplayer() {
-  var0 = 0;
+  var_0 = 0;
 
   if(self.team == "allies") {
-    var0 = 1;
+    var_0 = 1;
   } else if(self.team == "axis") {
-    var0 = 2;
+    var_0 = 2;
   }
 
-  self setclientomnvar("ui_tacops_team", var0);
+  self setclientomnvar("ui_tacops_team", var_0);
 }
 
-function dogtagallyonusecb(var0) {
-  if(isPlayer(var0)) {
-    var0 scripts\mp\utility\stats::setextrascore1(var0.pers["denied"]);
-    var0 scripts\mp\gamescore::giveteamscoreforobjective(var0.pers["team"], level.scoredeny, 0);
+function dogtagallyonusecb(var_0) {
+  if(isPlayer(var_0)) {
+    var_0 scripts\mp\utility\stats::setextrascore1(var_0.pers["denied"]);
+    var_0 scripts\mp\gamescore::giveteamscoreforobjective(var_0.pers["team"], level.scoredeny, 0);
     return;
   }
 }
 
-function dogtagenemyonusecb(var0) {
-  if(isPlayer(var0)) {
-    var0 scripts\mp\utility\dialog::leaderdialogonplayer("kill_confirmed", undefined, undefined, undefined, 4);
-    var0 scripts\mp\utility\stats::setextrascore0(var0.pers["confirmed"]);
+function dogtagenemyonusecb(var_0) {
+  if(isPlayer(var_0)) {
+    var_0 scripts\mp\utility\dialog::leaderdialogonplayer("kill_confirmed", undefined, undefined, undefined, 4);
+    var_0 scripts\mp\utility\stats::setextrascore0(var_0.pers["confirmed"]);
   }
 
-  var0 scripts\mp\gamescore::giveteamscoreforobjective(var0.pers["team"], level.scoreconfirm, 0);
+  var_0 scripts\mp\gamescore::giveteamscoreforobjective(var_0.pers["team"], level.scoreconfirm, 0);
 }

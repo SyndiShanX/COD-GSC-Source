@@ -24,7 +24,7 @@ function main() {
 }
 
 function ref_121f4() {
-  var0 = spawn("script_model", (0, 0, 8));
-  var0 setModel("mp_m_king_shotblocker");
-  var0.angles = (0, 180, 0);
+  var_0 = spawn("script_model", (0, 0, 8));
+  var_0 setModel("mp_m_king_shotblocker");
+  var_0.angles = (0, 180, 0);
 }

@@ -3,7 +3,7 @@
  * Script: scripts\cp_mp\tripwire.gsc
 ***********************************************/
 
-function precache(var0, var1) {
+function precache(var_0, var_1) {
   if(!isDefined(level.tripwires)) {
     tripwiremodelprecache();
     spawntripwirelevelstruct();
@@ -24,21 +24,21 @@ function tripwiremodelprecache() {
   precachemodel("equipment_wm_tripwire_floor_after");
 }
 
-function precachetrap(var0, var1, var2) {
+function precachetrap(var_0, var_1, var_2) {
   spawntripwirelevelstruct();
 
-  if(!isDefined(level.tripwires.traptypes[var0])) {
-    level.tripwires.traptypes[var0] = spawnStruct();
-    level.tripwires.traptypes[var0].model = var1;
-    level.tripwires.traptypes[var0].triggerfunc = gettriggerfunc(var0);
-    level.tripwires.traptypes[var0].candisarm = var2;
+  if(!isDefined(level.tripwires.traptypes[var_0])) {
+    level.tripwires.traptypes[var_0] = spawnStruct();
+    level.tripwires.traptypes[var_0].model = var_1;
+    level.tripwires.traptypes[var_0].triggerfunc = gettriggerfunc(var_0);
+    level.tripwires.traptypes[var_0].candisarm = var_2;
 
-    if(var2) {
-      level.tripwires.traptypes[var0].disarmfunc = getdisarmfunc(var0);
+    if(var_2) {
+      level.tripwires.traptypes[var_0].disarmfunc = getdisarmfunc(var_0);
     }
   }
 
-  precachemodel(var1);
+  precachemodel(var_1);
 }
 
 function spawntripwirelevelstruct() {
@@ -58,66 +58,66 @@ function init() {
 
   [[scripts\cp_mp\utility\script_utility::getsharedfunc("tripwire", "init")]]();
   setdvarifuninitialized("debug_tripwire", 0);
-  var0 = scripts\engine\utility::getStructArray("tripwire_start", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("tripwire_start", "script_noteworthy");
 
-  foreach(var2 in var0) {
-    if(isDefined(var2.target)) {}
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2.target)) {}
 
-    var3 = scripts\engine\utility::getStructArray(var2.target, "targetname");
+    var_3 = scripts\engine\utility::getStructArray(var_2.target, "targetname");
 
-    if(var3.size < 1) {}
+    if(var_3.size < 1) {}
 
-    foreach(var5 in var3) {
-      buildtripwire(var2, var5);
+    foreach(var_5 in var_3) {
+      buildtripwire(var_2, var_5);
     }
   }
 }
 
-function buildtripwire(var0, var1, var2) {
-  if(!isDefined(var1.script_animname)) {
-    var1.script_animname = "wall";
+function buildtripwire(var_0, var_1, var_2) {
+  if(!isDefined(var_1.script_animname)) {
+    var_1.script_animname = "wall";
   }
 
-  var3 = spawntripwire(var0, var1);
-  inittripwireanims(var3, var1.script_animname);
-  inittripwirestaticmodel(var3, var1.script_animname);
+  var_3 = spawntripwire(var_0, var_1);
+  inittripwireanims(var_3, var_1.script_animname);
+  inittripwirestaticmodel(var_3, var_1.script_animname);
   thread tripwirethink();
-  thread triggertripwirefuncthink(var3);
+  thread triggertripwirefuncthink(var_3);
 
-  if(isDefined(var2)) {
-    var3.targets = scripts\engine\utility::array_add(var3.targets, var2);
+  if(isDefined(var_2)) {
+    var_3.targets = scripts\engine\utility::array_add(var_3.targets, var_2);
   }
 
-  processtripwiretarget(var3, var1);
-  level.tripwires.tripwires = scripts\engine\utility::array_add(level.tripwires.tripwires, var3);
-  return var3;
+  processtripwiretarget(var_3, var_1);
+  level.tripwires.tripwires = scripts\engine\utility::array_add(level.tripwires.tripwires, var_3);
+  return var_3;
 }
 
-function processtripwiretarget(var0) {
-  var1 = "script_struct_tripwire_end at location " + var0.origin + " has no target.Target the ent you want the tripwire to trigger, or another script_struct_tripwire_end to continue the tripwire chain";
+function processtripwiretarget(var_0) {
+  var_1 = "script_struct_tripwire_end at location " + var_0.origin + " has no target.Target the ent you want the tripwire to trigger, or another script_struct_tripwire_end to continue the tripwire chain";
 
-  if(!isDefined(var0.target)) {
+  if(!isDefined(var_0.target)) {
     return;
   }
 
-  var2 = scripts\engine\utility::getStructArray(var0.target, "targetname");
-  var3 = getEntArray(var0.target, "targetname");
-  var4 = scripts\engine\utility::array_combine(var2, var3);
+  var_2 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
+  var_3 = getEntArray(var_0.target, "targetname");
+  var_4 = scripts\engine\utility::array_combine(var_2, var_3);
 
-  if(var4.size == 0) {}
+  if(var_4.size == 0) {}
 
-  if(shouldfindnavmodifier(var0)) {
-    self.navmodifier = createnavmodifier(var0.target, "targetname");
+  if(shouldfindnavmodifier(var_0)) {
+    self.navmodifier = createnavmodifier(var_0.target, "targetname");
   }
 
-  foreach(var6 in var4) {
-    if(istripwirestruct(var6)) {
-      var6 = buildtripwire(var0, var6, self);
-    } else if(istripwiretrapstruct(var6)) {
-      var6 = buildtripwiretrap(var6, self);
+  foreach(var_6 in var_4) {
+    if(istripwirestruct(var_6)) {
+      var_6 = buildtripwire(var_0, var_6, self);
+    } else if(istripwiretrapstruct(var_6)) {
+      var_6 = buildtripwiretrap(var_6, self);
     }
 
-    self.targets = scripts\engine\utility::array_add(self.targets, var6);
+    self.targets = scripts\engine\utility::array_add(self.targets, var_6);
   }
 }
 
@@ -146,8 +146,8 @@ function istripwiretrapstruct() {
 }
 
 function hastripwirechild() {
-  foreach(var1 in self.targets) {
-    if(isDefined(var1.istripwire) && var1.istripwire && !isDefined(var1.triggered)) {
+  foreach(var_1 in self.targets) {
+    if(isDefined(var_1.istripwire) && var_1.istripwire && !isDefined(var_1.triggered)) {
       return true;
     }
   }
@@ -157,47 +157,47 @@ function hastripwirechild() {
 
 #using_animtree("script_model");
 
-function spawntripwire(var0, var1) {
-  var2 = var0.origin - var1.origin;
-  var3 = spawn("script_model", var1.origin);
-  var3.angles = vectortoangles(var2);
-  var3 setModel(gettripwiremodel(var1.script_animname));
-  var3 useanimtree(#animtree);
+function spawntripwire(var_0, var_1) {
+  var_2 = var_0.origin - var_1.origin;
+  var_3 = spawn("script_model", var_1.origin);
+  var_3.angles = vectortoangles(var_2);
+  var_3 setModel(gettripwiremodel(var_1.script_animname));
+  var_3 useanimtree(#animtree);
 
-  if(isDefined(var1.angles)) {
-    var4 = anglesToForward(var1.angles);
-    var5 = anglestoright(var3.angles);
-    var6 = anglestoup(var3.angles);
-    var3.finalangles = axistoangles(var4, var5, var6);
+  if(isDefined(var_1.angles)) {
+    var_4 = anglesToForward(var_1.angles);
+    var_5 = anglestoright(var_3.angles);
+    var_6 = anglestoup(var_3.angles);
+    var_3.finalangles = axistoangles(var_4, var_5, var_6);
   }
 
-  var3.targets = [];
-  var3.endpoint = var0.origin;
-  var3.length = length(var2);
-  var7 = 30;
-  var8 = var3.origin + anglesToForward(var3.angles) * 0.5 * var3.length;
-  var3.trigger = spawn("trigger_rotatable_radius", var3.origin, 0, var7, var3.length + 10);
-  var9 = -1 * anglestoup(var3.angles);
-  var10 = anglestoright(var3.angles);
-  var11 = anglesToForward(var3.angles);
-  var3.trigger.angles = axistoangles(var9, var10, var11);
-  var3.istripwire = 1;
-  var3.triggered = 0;
+  var_3.targets = [];
+  var_3.endpoint = var_0.origin;
+  var_3.length = length(var_2);
+  var_7 = 30;
+  var_8 = var_3.origin + anglesToForward(var_3.angles) * 0.5 * var_3.length;
+  var_3.trigger = spawn("trigger_rotatable_radius", var_3.origin, 0, var_7, var_3.length + 10);
+  var_9 = -1 * anglestoup(var_3.angles);
+  var_10 = anglestoright(var_3.angles);
+  var_11 = anglesToForward(var_3.angles);
+  var_3.trigger.angles = axistoangles(var_9, var_10, var_11);
+  var_3.istripwire = 1;
+  var_3.triggered = 0;
 
-  if(isDefined(var0.script_delay)) {
-    var3.delay = var0.script_delay;
+  if(isDefined(var_0.script_delay)) {
+    var_3.delay = var_0.script_delay;
   } else {
-    var3.delay = scripts\engine\math::factor_value(0.1, 0.35, getnormtripwirelength(var3));
+    var_3.delay = scripts\engine\math::factor_value(0.1, 0.35, getnormtripwirelength(var_3));
   }
 
-  return var3;
+  return var_3;
 }
 
-function inittripwireanims(var0) {
-  if(isDefined(var0)) {}
+function inittripwireanims(var_0) {
+  if(isDefined(var_0)) {}
 
-  self.triggeranim = gettripwiretriggeranim(var0);
-  self.stretchanim = gettripwirestretchanim(var0);
+  self.triggeranim = gettripwiretriggeranim(var_0);
+  self.stretchanim = gettripwirestretchanim(var_0);
   self setanim(self.triggeranim, 1, 0, 0);
   self setanim(self.stretchanim, 1, 0, 0);
 
@@ -206,14 +206,14 @@ function inittripwireanims(var0) {
   self setanimtime(self.stretchanim, getnormtripwirelength());
 }
 
-function inittripwirestaticmodel(var0) {
-  if(isDefined(var0)) {}
+function inittripwirestaticmodel(var_0) {
+  if(isDefined(var_0)) {}
 
-  self.staticmodel = gettripwirestaticmodel(var0);
+  self.staticmodel = gettripwirestaticmodel(var_0);
 }
 
-function gettripwiretriggersound(var0) {
-  if(var0) {
+function gettripwiretriggersound(var_0) {
+  if(var_0) {
     return "tripwire_pop_first";
   }
 
@@ -228,74 +228,74 @@ function tripwirethink() {
   self endon("tripwire_trigger");
 
   for(;;) {
-    self.trigger waittill("trigger", var0);
-    var1 = 1;
-    var2 = 1;
+    self.trigger waittill("trigger", var_0);
+    var_1 = 1;
+    var_2 = 1;
 
-    if(tripwireshouldtrigger(var0)) {
-      self notify("trigger", var0, var1, var2);
+    if(tripwireshouldtrigger(var_0)) {
+      self notify("trigger", var_0, var_1, var_2);
     }
   }
 }
 
-function tripwireshouldtrigger(var0) {
+function tripwireshouldtrigger(var_0) {
   if(!isDefined(self) || !isDefined(self.origin) || !isDefined(self.endpoint)) {
     return 0;
   }
 
-  if(!isDefined(var0) || var0 isragdoll()) {
+  if(!isDefined(var_0) || var_0 isragdoll()) {
     return 0;
   }
 
-  if(!isalive(var0)) {
+  if(!isalive(var_0)) {
     return 0;
   }
 
-  var1 = scripts\engine\trace::create_contents(1, 0, 0, 0, 1, 1, 0, 0, 1);
-  var2 = scripts\engine\trace::ray_trace_ents(self.origin, self.endpoint, var0, var1);
+  var_1 = scripts\engine\trace::create_contents(1, 0, 0, 0, 1, 1, 0, 0, 1);
+  var_2 = scripts\engine\trace::ray_trace_ents(self.origin, self.endpoint, var_0, var_1);
 
-  if(!isDefined(var2["fraction"])) {
+  if(!isDefined(var_2["fraction"])) {
     return 0;
   }
 
-  if(var2["fraction"] < 1) {
+  if(var_2["fraction"] < 1) {
     return 1;
   }
 
   return 0;
 }
 
-function buildtripwiretrap(var0, var1) {
-  if(!isDefined(var0.trap)) {
-    if(!isDefined(var0.angles)) {
-      var2 = (0, 0, 0);
+function buildtripwiretrap(var_0, var_1) {
+  if(!isDefined(var_0.trap)) {
+    if(!isDefined(var_0.angles)) {
+      var_2 = (0, 0, 0);
     } else {
-      var2 = var1.angles;
+      var_2 = var_1.angles;
     }
 
-    var1.trap = spawn("script_model", var1.origin);
-    var1.trap.angles = var2;
-    var1.trap setModel(level.tripwires.traptypes[var1.script_noteworthy].model);
-    thread triggertrapfuncthink(var1.trap);
+    var_1.trap = spawn("script_model", var_1.origin);
+    var_1.trap.angles = var_2;
+    var_1.trap setModel(level.tripwires.traptypes[var_1.script_noteworthy].model);
+    thread triggertrapfuncthink(var_1.trap);
     thread damagetrapfuncthink();
-    var1.trap.candisarm = level.tripwires.traptypes[var1.script_noteworthy].candisarm;
-    var1.trap.istrap = 1;
+    var_1.trap.candisarm = level.tripwires.traptypes[var_1.script_noteworthy].candisarm;
+    var_1.trap.istrap = 1;
 
-    if(isDefined(level.tripwires.traptypes[var1.script_noteworthy].disarmfunc)) {
-      thread disarmfuncthink(var1.trap, level.tripwires.traptypes[var1.script_noteworthy].disarmfunc);
+    if(isDefined(level.tripwires.traptypes[var_1.script_noteworthy].disarmfunc)) {
+      thread disarmfuncthink(var_1.trap, level.tripwires.traptypes[var_1.script_noteworthy].disarmfunc);
     }
 
-    if(isDefined(var1.script_parameters)) {
-      var3 = strtok(var1.script_parameters, " ");
-      var1.trap.grenadeweaponoverride = var3[0];
+    if(isDefined(var_1.script_parameters)) {
+      var_3 = strtok(var_1.script_parameters, " ");
+      var_1.trap.grenadeweaponoverride = var_3[0];
     }
 
-    var1.trap.parenttripwires = [];
-    level.tripwires.traps = scripts\engine\utility::array_add(level.tripwires.traps, var1.trap);
+    var_1.trap.parenttripwires = [];
+    level.tripwires.traps = scripts\engine\utility::array_add(level.tripwires.traps, var_1.trap);
   }
 
-  var1.trap.parenttripwires = scripts\engine\utility::array_add(var1.trap.parenttripwires, var2);
-  return var1.trap;
+  var_1.trap.parenttripwires = scripts\engine\utility::array_add(var_1.trap.parenttripwires, var_2);
+  return var_1.trap;
 }
 
 function getnormtripwirelength() {
@@ -303,8 +303,8 @@ function getnormtripwirelength() {
 }
 
 function tripwirehastraps() {
-  foreach(var1 in self.targets) {
-    if(isDefined(var1.istrap) && !isDefined(var1.triggered)) {
+  foreach(var_1 in self.targets) {
+    if(isDefined(var_1.istrap) && !isDefined(var_1.triggered)) {
       return true;
     }
   }
@@ -312,11 +312,11 @@ function tripwirehastraps() {
   return false;
 }
 
-function triggertripwirefuncthink(var0) {
+function triggertripwirefuncthink(var_0) {
   for(;;) {
-    self waittill("trigger", var1, var2, var3);
+    self waittill("trigger", var_1, var_2, var_3);
 
-    if(var2) {
+    if(var_2) {
       break;
     }
 
@@ -325,20 +325,20 @@ function triggertripwirefuncthink(var0) {
     }
   }
 
-  if(isDefined(var1)) {
-    var1.lasttriptime = gettime();
+  if(isDefined(var_1)) {
+    var_1.lasttriptime = gettime();
   }
 
   self notify("tripwire_trigger");
   self.triggered = 1;
-  self[[var0]](var1, var2, var3);
+  self[[var_0]](var_1, var_2, var_3);
 }
 
-function triggertrapfuncthink(var0) {
+function triggertrapfuncthink(var_0) {
   for(;;) {
-    self waittill("trigger", var1, var2);
+    self waittill("trigger", var_1, var_2);
 
-    if(var2) {
+    if(var_2) {
       break;
     }
   }
@@ -353,11 +353,11 @@ function triggertrapfuncthink(var0) {
     }
   }
 
-  self[[var0]](var1);
+  self[[var_0]](var_1);
 }
 
-function gettriggerfunc(var0) {
-  switch (var0) {
+function gettriggerfunc(var_0) {
+  switch (var_0) {
     case "tripwire_trap_c4":
       return &triggerfuncc4;
     case "tripwire_trap_semtex":
@@ -371,8 +371,8 @@ function gettriggerfunc(var0) {
 
 #using_animtree("");
 
-function gettripwiretriggeranim(var0) {
-  switch (var0) {
+function gettripwiretriggeranim(var_0) {
+  switch (var_0) {
     case "ceiling":
       return scripts\engine\utility::random([%tripwire_trigger_standard_ceiling]);
     case "floor":
@@ -398,8 +398,8 @@ function gettripwiretriggeranim(var0) {
   }
 }
 
-function gettripwirestaticmodel(var0) {
-  switch (var0) {
+function gettripwirestaticmodel(var_0) {
+  switch (var_0) {
     case "ceiling":
       return "equipment_wm_tripwire_ceiling_after";
     case "floor":
@@ -425,8 +425,8 @@ function gettripwirestaticmodel(var0) {
   }
 }
 
-function gettripwirestretchanim(var0) {
-  switch (var0) {
+function gettripwirestretchanim(var_0) {
+  switch (var_0) {
     case "ceiling":
       return % tripwire_trigger_standard_stretch;
     case "floor":
@@ -436,10 +436,10 @@ function gettripwirestretchanim(var0) {
   }
 }
 
-function gettripwiremodel(var0) {
-  if(isDefined(var0)) {}
+function gettripwiremodel(var_0) {
+  if(isDefined(var_0)) {}
 
-  switch (var0) {
+  switch (var_0) {
     case "ceiling":
       return "equipment_wm_tripwire_standard_cp";
     case "floor":
@@ -465,13 +465,13 @@ function shouldusewallsize4() {
   return self.length >= 37 && self.length < 51;
 }
 
-function triggerfunctripwire(var0, var1, var2) {
+function triggerfunctripwire(var_0, var_1, var_2) {
   self.trigger delete();
   self setanimrate(self.triggeranim, 1);
   self setanim(%tripwire_stretch_overlay, 0, 0.2, 1);
   thread swaptostaticmodel();
   self playSound("tripwire_pop_cp");
-  var3 = gettripwiretriggersound(var2);
+  var_3 = gettripwiretriggersound(var_2);
 
   if(isDefined(self.finalangles)) {
     thread rotatetofinalangles();
@@ -483,10 +483,10 @@ function triggerfunctripwire(var0, var1, var2) {
     destroynavobstacle(self.navmodifier);
   }
 
-  var2 = 0;
+  var_2 = 0;
 
-  foreach(var5 in self.targets) {
-    var5 notify("trigger", var0, var1, var2);
+  foreach(var_5 in self.targets) {
+    var_5 notify("trigger", var_0, var_1, var_2);
   }
 }
 
@@ -497,33 +497,33 @@ function rotatetofinalangles() {
 }
 
 function swaptostaticmodel() {
-  var0 = getanimlength(self.triggeranim);
-  wait var0;
+  var_0 = getanimlength(self.triggeranim);
+  wait var_0;
   self setModel(self.staticmodel);
 }
 
 function last_phone_check_fail() {
-  var0 = 1;
+  var_0 = 1;
 
-  foreach(var2 in self.parenttripwires) {
-    thread triggerfunctripwire(var2, undefined, 1);
-    var0 = 0;
+  foreach(var_2 in self.parenttripwires) {
+    thread triggerfunctripwire(var_2, undefined, 1);
+    var_0 = 0;
   }
 }
 
-function triggerfuncsemtex(var0) {
+function triggerfuncsemtex(var_0) {
   if(isDefined(self.grenadeweaponoverride)) {
-    var1 = self.grenadeweaponoverride;
+    var_1 = self.grenadeweaponoverride;
   } else {
-    var1 = "semtex_tripwire";
+    var_1 = "semtex_tripwire";
   }
 
-  var2 = magicgrenademanual(var1, self.origin, (0, 0, 0), 0.25);
-  var2.angles = self.angles;
-  var2.origin = self.origin;
-  var2 linkTo(self);
+  var_2 = magicgrenademanual(var_1, self.origin, (0, 0, 0), 0.25);
+  var_2.angles = self.angles;
+  var_2.origin = self.origin;
+  var_2 linkTo(self);
   self hide();
-  var2 waittill("explode");
+  var_2 waittill("explode");
   radiusdamage(self.origin, 384, 256, 40, undefined, "MOD_EXPLOSIVE", "semtex_mp");
   playrumbleonposition("grenade_rumble", self.origin);
   earthquake(0.45, 0.7, self.origin, 800);
@@ -532,23 +532,23 @@ function triggerfuncsemtex(var0) {
   self delete();
 }
 
-function triggerfuncfrag(var0) {
+function triggerfuncfrag(var_0) {
   if(isDefined(self.grenadeweaponoverride)) {
-    var1 = self.grenadeweaponoverride;
+    var_1 = self.grenadeweaponoverride;
   } else {
-    var1 = "frag_tripwire";
+    var_1 = "frag_tripwire";
   }
 
-  var2 = magicgrenademanual(var1, self.origin, (0, 0, 0), 0.25);
-  var2.angles = self.angles;
-  var2.origin = self.origin;
-  var2 linkTo(self);
+  var_2 = magicgrenademanual(var_1, self.origin, (0, 0, 0), 0.25);
+  var_2.angles = self.angles;
+  var_2.origin = self.origin;
+  var_2 linkTo(self);
   self hide();
-  var2 waittill("explode");
+  var_2 waittill("explode");
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("tripwire", "damageFunc")) {
-    var3 = scripts\cp_mp\utility\script_utility::getsharedfunc("tripwire", "damageFunc");
-    level thread[[var3]](self, var1);
+    var_3 = scripts\cp_mp\utility\script_utility::getsharedfunc("tripwire", "damageFunc");
+    level thread[[var_3]](self, var_1);
   } else {
     radiusdamage(self.origin, 384, 256, 40, undefined, "MOD_EXPLOSIVE", "frag_grenade_mp");
     playrumbleonposition("grenade_rumble", self.origin);
@@ -560,20 +560,20 @@ function triggerfuncfrag(var0) {
   self delete();
 }
 
-function triggerfuncc4(var0) {
+function triggerfuncc4(var_0) {
   if(isDefined(self.grenadeweaponoverride)) {
-    var1 = self.grenadeweaponoverride;
+    var_1 = self.grenadeweaponoverride;
   } else {
-    var1 = "c4_sp_tripwire";
+    var_1 = "c4_sp_tripwire";
   }
 
-  var2 = magicgrenademanual(var1, self.origin, (0, 0, 0), 0.25);
-  var2.angles = self.angles;
-  var2.origin = self.origin;
-  var2 linkTo(self);
+  var_2 = magicgrenademanual(var_1, self.origin, (0, 0, 0), 0.25);
+  var_2.angles = self.angles;
+  var_2.origin = self.origin;
+  var_2 linkTo(self);
   self hide();
-  var2 setscriptablepartstate("plant", "active", 0);
-  var2 waittill("explode");
+  var_2 setscriptablepartstate("plant", "active", 0);
+  var_2 waittill("explode");
   radiusdamage(self.origin, 384, 256, 40, undefined, "MOD_EXPLOSIVE", "c4_mp_p");
   self playSound("frag_grenade_expl_trans");
   playrumbleonposition("grenade_rumble", self.origin);
@@ -581,29 +581,29 @@ function triggerfuncc4(var0) {
   self delete();
 }
 
-function damagetrapfuncthink(var0, var1) {
+function damagetrapfuncthink(var_0, var_1) {
   self endon("trap_trigger");
   self setCanDamage(1);
   self.health = 99999;
 
   for(;;) {
-    self waittill("damage", var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14, var15);
+    self waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15);
 
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("tripwire", "blowTripWire")) {
-      self thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("tripwire", "blowTripWire")]](var3, var6);
+      self thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("tripwire", "blowTripWire")]](var_3, var_6);
     }
 
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("tripwire", "canTripTrap")) {
-      var16 = scripts\cp_mp\utility\script_utility::getsharedfunc("tripwire", "canTripTrap");
+      var_16 = scripts\cp_mp\utility\script_utility::getsharedfunc("tripwire", "canTripTrap");
 
-      if(self[[var16]](var3, var11, var6, var2, var5)) {
+      if(self[[var_16]](var_3, var_11, var_6, var_2, var_5)) {
         break;
       }
-    } else if(cantriptrap(var2, var5, var1)) {
+    } else if(cantriptrap(var_2, var_5, var_1)) {
       break;
     }
 
-    self.health += var1;
+    self.health += var_1;
   }
 
   self.triggered = 1;
@@ -615,70 +615,70 @@ function damagetrapfuncthink(var0, var1) {
     }
   }
 
-  var17 = 0;
-  var18 = 1;
+  var_17 = 0;
+  var_18 = 1;
   self makeunusable();
 
-  foreach(var20 in self.parenttripwires) {
-    var20 notify("trigger", var2, var17, var18);
+  foreach(var_20 in self.parenttripwires) {
+    var_20 notify("trigger", var_2, var_17, var_18);
   }
 
-  self notify("trigger", var2, 1);
+  self notify("trigger", var_2, 1);
 }
 
-function cantriptrap(var0, var1, var2) {
-  if(!isDefined(var0)) {
+function cantriptrap(var_0, var_1, var_2) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
-  if(var0 == level.player && (var1 == "MOD_GRENADE_SPLASH" || var1 == "MOD_PROJECTILE_SPLASH") && var2 > 150) {
+  if(var_0 == level.player && (var_1 == "MOD_GRENADE_SPLASH" || var_1 == "MOD_PROJECTILE_SPLASH") && var_2 > 150) {
     return true;
   }
 
   return false;
 }
 
-function disarmfuncthink(var0, var1) {
+function disarmfuncthink(var_0, var_1) {
   self endon("trap_trigger");
 
-  if(isDefined(var1.radius)) {
-    var2 = var1.radius;
+  if(isDefined(var_1.radius)) {
+    var_2 = var_1.radius;
   } else {
-    var2 = 128;
+    var_2 = 128;
   }
 
-  var3 = (0, 0, 0);
+  var_3 = (0, 0, 0);
   self.defusehintstruct = undefined;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("tripwire", "createHintObject")) {
-    var4 = scripts\cp_mp\utility\script_utility::getsharedfunc("tripwire", "createHintObject");
-    self.defusehintstruct = [[var4]](var2.origin, undefined, undefined, undefined, undefined, "duration_medium", "hide", 128, 35, 84, 35);
+    var_4 = scripts\cp_mp\utility\script_utility::getsharedfunc("tripwire", "createHintObject");
+    self.defusehintstruct = [[var_4]](var_2.origin, undefined, undefined, undefined, undefined, "duration_medium", "hide", 128, 35, 84, 35);
   } else {
-    self.defusehintstruct = var2 scripts\engine\utility::spawn_script_origin();
+    self.defusehintstruct = var_2 scripts\engine\utility::spawn_script_origin();
   }
 
   self.deletefunc = &last_phone_check_fail;
-  self.defusehintstruct waittill("trigger", var5);
+  self.defusehintstruct waittill("trigger", var_5);
   level.lasttripwiredefusedtime = gettime();
   self.defusehintstruct.defused = 1;
   self.triggered = 1;
-  var6 = 0;
-  var7 = 1;
+  var_6 = 0;
+  var_7 = 1;
 
   if(isent(self.defusehintstruct)) {
     self.defusehintstruct makeunusable();
     self.defusehintstruct delete();
   }
 
-  foreach(var9 in self.parenttripwires) {
-    var9 notify("trigger", var5, var6, var7);
+  foreach(var_9 in self.parenttripwires) {
+    var_9 notify("trigger", var_5, var_6, var_7);
   }
 
-  self[[var1]](var5);
+  self[[var_1]](var_5);
 }
 
-function getdisarmfunc(var0) {
-  switch (var0) {
+function getdisarmfunc(var_0) {
+  switch (var_0) {
     case "tripwire_trap_semtex":
       return &disarmfuncsemtex;
     case "tripwire_trap_frag":
@@ -688,19 +688,19 @@ function getdisarmfunc(var0) {
   }
 }
 
-function disarmfuncsemtex(var0) {
-  disarmgiveweapon(var0, "semtex", "Semtex");
+function disarmfuncsemtex(var_0) {
+  disarmgiveweapon(var_0, "semtex", "Semtex");
   self delete();
 }
 
-function disarmfuncfrag(var0) {
-  disarmgiveweapon(var0, "frag", "M67 Frag");
+function disarmfuncfrag(var_0) {
+  disarmgiveweapon(var_0, "frag", "M67 Frag");
   self delete();
 }
 
-function disarmgiveweapon(var0, var1) {
+function disarmgiveweapon(var_0, var_1) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("tripwire", "disarmGiveWeapon")) {
-    var2 = scripts\cp_mp\utility\script_utility::getsharedfunc("tripwire", "disarmGiveWeapon");
-    GscBinSkip1(0x74, var2, var0, var1, self);
+    var_2 = scripts\cp_mp\utility\script_utility::getsharedfunc("tripwire", "disarmGiveWeapon");
+    GscBinSkip1(0x74, var_2, var_0, var_1, self);
   }
 }

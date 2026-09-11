@@ -71,10 +71,10 @@ function lighting_setup_dvars() {
 }
 
 function hide_gas_shack_window_shadow_brush() {
-  var0 = getEntArray("bake_shadow_array_brush", "targetname");
+  var_0 = getEntArray("bake_shadow_array_brush", "targetname");
 
-  foreach(var2 in var0) {
-    var2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
   }
 }
 
@@ -116,26 +116,26 @@ function rack_focus_between_tile_and_mom() {
 }
 
 function fade_up_light_buried_mom() {
-  var0 = 0.3;
-  var1 = 1;
+  var_0 = 0.3;
+  var_1 = 1;
   level.light_buried_mom = getEnt("lt_buried_mom", "targetname");
   level.light_buried_mom setlightintensity(0);
-  thread lerp_value_light_buried_mom(level.light_buried_mom, 0, var0);
+  thread lerp_value_light_buried_mom(level.light_buried_mom, 0, var_0);
 }
 
-function lerp_value_light_buried_mom(var0, var1, var2) {
-  var3 = var1 - var0;
-  var4 = 0.3;
-  var5 = int(var2 / var4);
+function lerp_value_light_buried_mom(var_0, var_1, var_2) {
+  var_3 = var_1 - var_0;
+  var_4 = 0.3;
+  var_5 = int(var_2 / var_4);
 
-  if(var5 > 0) {
-    var6 = var3 / var5;
+  if(var_5 > 0) {
+    var_6 = var_3 / var_5;
 
-    while(var5) {
-      var0 += var6;
-      level.light_buried_mom setlightintensity(var0);
-      wait var4;
-      var5--;
+    while(var_5) {
+      var_0 += var_6;
+      level.light_buried_mom setlightintensity(var_0);
+      wait var_4;
+      var_5--;
     }
 
     return;
@@ -155,14 +155,14 @@ function lighting_carried_start() {
   wait 0.5;
   visionsetnaked("hometown_buried_uncovered", 0.2);
   wait 1;
-  var0 = getEnt("runtime_shadow_brush_metal", "targetname");
-  var0 hide();
+  var_0 = getEnt("runtime_shadow_brush_metal", "targetname");
+  var_0 hide();
   visionsetnaked("hometown_buried", 3);
   wait 12;
-  var1 = getEnt("lt_buried_hand", "targetname");
-  var1 setlightintensity(12);
-  var2 = getEnt("lt_whitehelmet", "targetname");
-  var2 setlightintensity(2.8);
+  var_1 = getEnt("lt_buried_hand", "targetname");
+  var_1 setlightintensity(12);
+  var_2 = getEnt("lt_whitehelmet", "targetname");
+  var_2 setlightintensity(2.8);
   scripts\engine\utility::flag_wait("lighting_unburied");
   level.player setphysicaldepthoffield(2.8, 25);
   scripts\engine\utility::flag_wait("lighting_liftout");
@@ -170,9 +170,9 @@ function lighting_carried_start() {
   level.player setphysicaldepthoffield(2.8, 15);
   wait 1;
   level.player setphysicaldepthoffield(2.8, 9, 1, 2);
-  var1 setlightintensity(0);
+  var_1 setlightintensity(0);
   wait 1.5;
-  var2 setlightintensity(0);
+  var_2 setlightintensity(0);
   wait 3;
   level thread scripts\engine\sp\utility::dof_enable_autofocus(7, 9, undefined);
   setsaveddvar("MPOKKOPMTN", "128 384 640 1024");
@@ -195,9 +195,9 @@ function lighting_buried_carried_common() {
 }
 
 function lerp_sun_and_vision() {
-  var0 = 5;
-  lerpsunangles(level.buriedsunangles, level.sunangles, var0, var0 * 0.25, var0 * 0.75);
-  visionsetnaked("hometown_eye_dim", var0);
+  var_0 = 5;
+  lerpsunangles(level.buriedsunangles, level.sunangles, var_0, var_0 * 0.25, var_0 * 0.75);
+  visionsetnaked("hometown_eye_dim", var_0);
   setsaveddvar("NPONLLLSPL", 0.15);
   setsaveddvar("LSNRQTOKRR", 2);
 }
@@ -227,10 +227,10 @@ function lighting_alley_gas_attack_start() {
   setsaveddvar("NPONLLLSPL", 0.25);
   setsaveddvar("LSNRQTOKRR", 3);
   setsaveddvar("LRLKLRNRTS", "8 0 1 0");
-  var0 = getEntArray("shadow_array_brush_house", "targetname");
+  var_0 = getEntArray("shadow_array_brush_house", "targetname");
 
-  foreach(var2 in var0) {
-    var2 hide();
+  foreach(var_2 in var_0) {
+    var_2 hide();
   }
 }
 
@@ -244,10 +244,10 @@ function lighting_house_enter_start() {
   setsaveddvar("MPOKKOPMTN", "64 128 256 512");
   setsaveddvar("TLMMOPMSK", 1);
   wait 2;
-  var0 = getEntArray("shadow_array_brush_house", "targetname");
+  var_0 = getEntArray("shadow_array_brush_house", "targetname");
 
-  foreach(var2 in var0) {
-    var2 show();
+  foreach(var_2 in var_0) {
+    var_2 show();
   }
 
   scripts\engine\utility::flag_wait("lighting_cellphone_moment");
@@ -272,45 +272,45 @@ function lighting_house_enter_start() {
 
 function lighting_house_character() {
   scripts\engine\utility::flag_wait("lighting_house_enter_progression");
-  var0 = getEnt("lt_house_1", "targetname");
+  var_0 = getEnt("lt_house_1", "targetname");
   wait 4.3;
-  var0 setlightintensity(0.09);
+  var_0 setlightintensity(0.09);
   wait 8;
-  var0 setlightintensity(0);
+  var_0 setlightintensity(0);
   scripts\engine\utility::flag_wait("lighting_cellphone_moment");
   wait 10;
-  var1 = getEnt("lt_house_2", "targetname");
-  var1 setlightintensity(0.2);
+  var_1 = getEnt("lt_house_2", "targetname");
+  var_1 setlightintensity(0.2);
   level waittill("dad_dies_start");
   wait 29;
-  var1 setlightintensity(0);
+  var_1 setlightintensity(0);
   scripts\engine\utility::flag_wait("lantern_break");
   wait 9;
-  var1 setlightintensity(0.2);
+  var_1 setlightintensity(0.2);
   scripts\engine\utility::flag_wait("objective_find_a_weapon");
-  var1 setlightintensity(0);
+  var_1 setlightintensity(0);
   wait 2;
-  var0 setlightintensity(0.08);
+  var_0 setlightintensity(0.08);
 }
 
 function lighting_house_exit_character() {
   scripts\engine\utility::flag_wait("objective_leave_the_house");
-  var0 = getEnt("lt_father_died", "targetname");
-  var0 setlightintensity(0.07);
+  var_0 = getEnt("lt_father_died", "targetname");
+  var_0 setlightintensity(0.07);
   scripts\engine\utility::flag_wait("lighting_make_on");
-  var1 = getEnt("lt_hadir_mask", "targetname");
-  var1 setlightintensity(0.2);
+  var_1 = getEnt("lt_hadir_mask", "targetname");
+  var_1 setlightintensity(0.2);
   scripts\engine\utility::flag_wait("lighting_gas_progression");
-  var0 setlightintensity(0);
-  var1 setlightintensity(0);
+  var_0 setlightintensity(0);
+  var_1 setlightintensity(0);
 }
 
 function lighting_gas_progression() {
   scripts\engine\utility::flag_wait("lighting_gas_progression");
-  var0 = getEntArray("shadow_array_brush_house", "targetname");
+  var_0 = getEntArray("shadow_array_brush_house", "targetname");
 
-  foreach(var2 in var0) {
-    var2 hide();
+  foreach(var_2 in var_0) {
+    var_2 hide();
   }
 
   setsaveddvar("NPONLLLSPL", 0.5);
@@ -330,10 +330,10 @@ function lighting_gas_start() {
   setsaveddvar("LSNRQTOKRR", 2);
   setsaveddvar("LMPKPQPRMK", 36, 0);
   scripts\engine\utility::flag_wait_any("lighting_gas_progression", "lighting_gas_start", "lighting_gas_mid_start", "lighting_gas_exit_start");
-  var0 = getEntArray("shadow_array_brush_house", "targetname");
+  var_0 = getEntArray("shadow_array_brush_house", "targetname");
 
-  foreach(var2 in var0) {
-    var2 hide();
+  foreach(var_2 in var_0) {
+    var_2 hide();
   }
 
   level thread scripts\engine\sp\utility::dof_enable_autofocus(3.2, 4, undefined, undefined, undefined, [level.player, level.alley_grab_guy_model]);

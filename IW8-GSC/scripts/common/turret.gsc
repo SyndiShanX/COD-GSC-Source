@@ -8,20 +8,20 @@ function turret_vm_playeranims_think() {
 
   for(;;) {
     self waittill("turretownerchange");
-    var0 = self getturretowner();
-    var1 = undefined;
+    var_0 = self getturretowner();
+    var_1 = undefined;
 
-    if(isDefined(var0) && isPlayer(var0) && !isbot(var0)) {
-      var0 giveweapon(self.weaponinfo);
-      var1 = var0 getcurrentweapon();
-      var0 switchtoweaponimmediate(self.weaponinfo);
+    if(isDefined(var_0) && isPlayer(var_0) && !isbot(var_0)) {
+      var_0 giveweapon(self.weaponinfo);
+      var_1 = var_0 getcurrentweapon();
+      var_0 switchtoweaponimmediate(self.weaponinfo);
     }
 
     self waittill("turretownerchange");
 
-    if(isDefined(var0) && isPlayer(var0) && !isbot(var0)) {
-      var0 switchtoweaponimmediate(var1);
-      var0 takeweapon(self.weaponinfo);
+    if(isDefined(var_0) && isPlayer(var_0) && !isbot(var_0)) {
+      var_0 switchtoweaponimmediate(var_1);
+      var_0 takeweapon(self.weaponinfo);
     }
   }
 }

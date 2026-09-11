@@ -48,8 +48,8 @@ function analytics_tracking_player_mount() {
     }
 
     self notify("start_player_mount");
-    var0 = level.player getplayerprogression("playerMountCounter");
-    level.player setplayerprogression("playerMountCounter", var0 + 1);
+    var_0 = level.player getplayerprogression("playerMountCounter");
+    level.player setplayerprogression("playerMountCounter", var_0 + 1);
 
     while(self playermount() >= 0.5) {
       wait 0.2;
@@ -72,27 +72,27 @@ function analytics_skip_start_point() {
   level.analytics.sp_skip = 1;
 }
 
-function analytics_fake_start_point(var0, var1) {
-  if(istrue(var1)) {
+function analytics_fake_start_point(var_0, var_1) {
+  if(istrue(var_1)) {
     level.analytics.sp_counter++;
-    var0 += level.analytics.sp_counter;
+    var_0 += level.analytics.sp_counter;
   }
 
-  start_point_update(var0);
+  start_point_update(var_0);
   start_point_reset();
 }
 
-function analytics_kleenex_update(var0) {
+function analytics_kleenex_update(var_0) {
   if(getdvarint("scr_analytics_upload") == 1) {
-    analytics_kleenex_upload(var0);
+    analytics_kleenex_upload(var_0);
     return;
   }
 }
 
-function analytics_kleenex_upload(var0) {
-  var1 = int((gettime() - getdvarint("scr_analytics_kleenexStartTime")) / 1000);
-  var2 = float(var1 + level.player getplayerprogression("kleenexSessionGameplayTime"));
-  getentitylessscriptablearray("dlog_event_analytics_sp_kleenex_session", ["levelname", level.script, "Section", var0, "Duration", var2]);
+function analytics_kleenex_upload(var_0) {
+  var_1 = int((gettime() - getdvarint("scr_analytics_kleenexStartTime")) / 1000);
+  var_2 = float(var_1 + level.player getplayerprogression("kleenexSessionGameplayTime"));
+  getentitylessscriptablearray("dlog_event_analytics_sp_kleenex_session", ["levelname", level.script, "Section", var_0, "Duration", var_2]);
   setDvar("scr_analytics_kleenexStartTime", gettime());
   level.player setplayerprogression("kleenexSessionGameplayTime", 0);
 }
@@ -106,9 +106,9 @@ function start_point_setup() {
   start_point_reset();
 }
 
-function start_point_check(var0) {
+function start_point_check(var_0) {
   if(!level.analytics.sp_skip) {
-    start_point_update(var0);
+    start_point_update(var_0);
     return;
   }
 }
@@ -121,101 +121,101 @@ function start_point_reset() {
   level.player setplayerprogression("focusCounter", 0);
 }
 
-function start_point_update(var0, var1) {
-  if(istrue(level.nextmission) && !isDefined(var1)) {
+function start_point_update(var_0, var_1) {
+  if(istrue(level.nextmission) && !isDefined(var_1)) {
     return;
   }
 
-  var2 = int((gettime() - getdvarint("scr_analytics_playerStartTime")) / 1000);
-  var3 = float(var2 + level.player getplayerprogression("sessionGameplayTime"));
-  var4 = level.player getplayerprogression("startPointDeaths");
-  var5 = level.player getplayerprogression("startPointFails");
-  var6 = get_gameskill_as_string();
+  var_2 = int((gettime() - getdvarint("scr_analytics_playerStartTime")) / 1000);
+  var_3 = float(var_2 + level.player getplayerprogression("sessionGameplayTime"));
+  var_4 = level.player getplayerprogression("startPointDeaths");
+  var_5 = level.player getplayerprogression("startPointFails");
+  var_6 = get_gameskill_as_string();
   level.analytics.sp_counter++;
-  getentitylessscriptablearray("dlog_event_analytics_sp_start_points", ["levelname", level.script, "Start", var0, "Duration", var3, "Deaths", var4, "Fails", var5, "difficulty", var6]);
+  getentitylessscriptablearray("dlog_event_analytics_sp_start_points", ["levelname", level.script, "Start", var_0, "Duration", var_3, "Deaths", var_4, "Fails", var_5, "difficulty", var_6]);
 
   if(getdvarint("scr_analytics_upload") == 1) {
-    var7 = level.player getplayerprogression("focusCounter");
-    analytics_event_upload(var0, var7);
+    var_7 = level.player getplayerprogression("focusCounter");
+    analytics_event_upload(var_0, var_7);
     return;
   }
 }
 
 function get_gameskill_as_string() {
-  var0 = level.player scripts\engine\sp\utility::get_player_gameskill();
+  var_0 = level.player scripts\engine\sp\utility::get_player_gameskill();
 
-  if(var0 == 0) {
+  if(var_0 == 0) {
     return "Recruit";
   }
 
-  if(var0 == 1) {
+  if(var_0 == 1) {
     return "Regular";
   }
 
-  if(var0 == 2) {
+  if(var_0 == 2) {
     return "Hardened";
   }
 
-  if(var0 == 3) {
+  if(var_0 == 3) {
     return "Veteran";
   }
 
-  if(var0 == 4) {
+  if(var_0 == 4) {
     return "Realism";
   }
 }
 
 function analytics_obj_failed() {
-  var0 = level.player getplayerprogression("startPointFails");
-  level.player setplayerprogression("startPointFails", var0 + 1);
+  var_0 = level.player getplayerprogression("startPointFails");
+  level.player setplayerprogression("startPointFails", var_0 + 1);
 }
 
 function update_focus_counter() {
-  var0 = level.player getplayerprogression("focusCounter");
-  level.player setplayerprogression("focusCounter", var0 + 1);
+  var_0 = level.player getplayerprogression("focusCounter");
+  level.player setplayerprogression("focusCounter", var_0 + 1);
 }
 
 function playerdeath() {
   updatetotalgameplaytime();
-  var0 = level.player getplayerprogression("startPointDeaths");
-  level.player setplayerprogression("startPointDeaths", var0 + 1);
+  var_0 = level.player getplayerprogression("startPointDeaths");
+  level.player setplayerprogression("startPointDeaths", var_0 + 1);
   setDvar("scr_analytics_playerJustDied", 1);
 }
 
 function updatetotalgameplaytime() {
-  var0 = level.player getplayerprogression("totalGameplayTime");
-  var1 = level.player getplayerprogression("sessionGameplayTime");
-  var2 = int((gettime() - getdvarint("scr_analytics_playerStartTime")) / 1000);
-  var3 = var1 + var2;
-  level.player setplayerprogression("sessionGameplayTime", var3);
-  var4 = level.player getplayerprogression("kleenexSessionGameplayTime");
-  var5 = int((gettime() - getdvarint("scr_analytics_kleenexStartTime")) / 1000);
-  var6 = var4 + var5;
-  level.player setplayerprogression("kleenexSessionGameplayTime", var6);
+  var_0 = level.player getplayerprogression("totalGameplayTime");
+  var_1 = level.player getplayerprogression("sessionGameplayTime");
+  var_2 = int((gettime() - getdvarint("scr_analytics_playerStartTime")) / 1000);
+  var_3 = var_1 + var_2;
+  level.player setplayerprogression("sessionGameplayTime", var_3);
+  var_4 = level.player getplayerprogression("kleenexSessionGameplayTime");
+  var_5 = int((gettime() - getdvarint("scr_analytics_kleenexStartTime")) / 1000);
+  var_6 = var_4 + var_5;
+  level.player setplayerprogression("kleenexSessionGameplayTime", var_6);
 
-  if(var2 > 0) {
-    var0 += var2;
-    level.player setplayerprogression("totalGameplayTime", var0);
+  if(var_2 > 0) {
+    var_0 += var_2;
+    level.player setplayerprogression("totalGameplayTime", var_0);
   }
 
-  return var0;
+  return var_0;
 }
 
 function getdifficultylevel() {
-  var0 = getdvarint("TTMRSTRO") + 1;
+  var_0 = getdvarint("TTMRSTRO") + 1;
 
   if(scripts\sp\utility::in_specialist_mode()) {
-    var0 = 5;
+    var_0 = 5;
   } else if(scripts\sp\utility::in_yolo_mode()) {
-    var0 = 6;
+    var_0 = 6;
   }
 
-  return var0;
+  return var_0;
 }
 
-function analytics_event_upload(var0, var1) {
+function analytics_event_upload(var_0, var_1) {
   if(getdvarint("scr_analytics_upload") == 1) {
-    getentitylessscriptablearray("dlog_event_analytics_sp_kleenex_event", ["levelname", level.script, "Event", var0, "Integer", var1]);
+    getentitylessscriptablearray("dlog_event_analytics_sp_kleenex_event", ["levelname", level.script, "Event", var_0, "Integer", var_1]);
     return;
   }
 }

@@ -32,21 +32,21 @@ function main() {
 }
 
 function player_fired_gun_monitor() {
-  var0 = getEnt("mount64", "targetname");
-  var1 = spawn("script_model", (137, 135, 247));
-  var1.angles = (0, 0, 0);
-  var1 clonebrushmodeltoscriptmodel(var0, 1);
-  var2 = getEnt("clip128x128x8", "targetname");
-  var3 = spawn("script_model", (-904, -76, 264));
-  var3.angles = (0, 270, 70);
-  var3 clonebrushmodeltoscriptmodel(var2, 1);
-  var4 = getEnt("clip128x128x8", "targetname");
-  var5 = spawn("script_model", (-904, 52, 264));
-  var5.angles = (0, 270, 70);
-  var5 clonebrushmodeltoscriptmodel(var4, 1);
-  var6 = spawn("script_model", (574, 2183, 192));
-  var6 setModel("me_construction_plank_bridge_a_11");
-  var6.angles = (270, 0, -90);
+  var_0 = getEnt("mount64", "targetname");
+  var_1 = spawn("script_model", (137, 135, 247));
+  var_1.angles = (0, 0, 0);
+  var_1 clonebrushmodeltoscriptmodel(var_0, 1);
+  var_2 = getEnt("clip128x128x8", "targetname");
+  var_3 = spawn("script_model", (-904, -76, 264));
+  var_3.angles = (0, 270, 70);
+  var_3 clonebrushmodeltoscriptmodel(var_2, 1);
+  var_4 = getEnt("clip128x128x8", "targetname");
+  var_5 = spawn("script_model", (-904, 52, 264));
+  var_5.angles = (0, 270, 70);
+  var_5 clonebrushmodeltoscriptmodel(var_4, 1);
+  var_6 = spawn("script_model", (574, 2183, 192));
+  var_6 setModel("me_construction_plank_bridge_a_11");
+  var_6.angles = (270, 0, -90);
 }
 
 function spawnstaticvan() {
@@ -61,12 +61,12 @@ function spawnstaticvan() {
   }
 
   if(!scripts\mp\flags::gameflag("infil_will_run")) {
-    foreach(var1 in [[scripts\cp_mp\utility\script_utility::getsharedfunc("infil", "get_all_infils")]]()) {
-      if(var1.script_noteworthy != "infil_van_hackney") {
+    foreach(var_1 in [[scripts\cp_mp\utility\script_utility::getsharedfunc("infil", "get_all_infils")]]()) {
+      if(var_1.script_noteworthy != "infil_van_hackney") {
         continue;
       }
 
-      if(var1.name != "alpha") {
+      if(var_1.name != "alpha") {
         continue;
       }
 
@@ -88,17 +88,17 @@ function managegate() {
   }
 
   scripts\mp\flags::gameflagwait("infil_started");
-  var0 = getEntArray("infil_barrier", "targetname");
+  var_0 = getEntArray("infil_barrier", "targetname");
 
-  foreach(var2 in var0) {
-    var2 hide();
+  foreach(var_2 in var_0) {
+    var_2 hide();
   }
 
   level waittill("prematch_countdown");
   wait 4;
 
-  foreach(var2 in var0) {
-    var2 show();
+  foreach(var_2 in var_0) {
+    var_2 show();
   }
 }
 
@@ -106,7 +106,7 @@ function watchplayerconnect() {
   level endon("game_ended");
 
   for(;;) {
-    level waittill("connected", var0);
-    var0 streamsetmaterialtouchuntilloaded("vfx_vol_weather_sandstorm_vista_2");
+    level waittill("connected", var_0);
+    var_0 streamsetmaterialtouchuntilloaded("vfx_vol_weather_sandstorm_vista_2");
   }
 }

@@ -8,7 +8,7 @@ function mayshootwhilemoving() {
     return false;
   }
 
-  var0 = weaponclass(self.weapon);
+  var_0 = weaponclass(self.weapon);
 
   if(!scripts\anim\utility_common::usingriflelikeweapon()) {
     return false;

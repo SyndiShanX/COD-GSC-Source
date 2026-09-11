@@ -26,16 +26,16 @@ function main() {
 
   self animmode("zonly_physics");
   self orientmode("face angle", self.angles[1]);
-  var0 = 0;
+  var_0 = 0;
 
   if(isDefined(self.grenade)) {
-    var0 = angleclamp180(vectortoangles(self.grenade.origin - self.origin)[1] - self.angles[1]);
+    var_0 = angleclamp180(vectortoangles(self.grenade.origin - self.origin)[1] - self.angles[1]);
   } else {
-    var0 = self.angles[1];
+    var_0 = self.angles[1];
   }
 
   if(self.currentpose == "stand") {
-    if(isDefined(self.grenade) && trydive(var0)) {
+    if(isDefined(self.grenade) && trydive(var_0)) {
       return;
     }
 
@@ -54,7 +54,7 @@ function end_script() {
   self.safetochangescript = 1;
 }
 
-function trydive(var0) {
+function trydive(var_0) {
   if(randomint(2) == 0) {
     return false;
   }
@@ -63,23 +63,23 @@ function trydive(var0) {
     return false;
   }
 
-  var1 = undefined;
+  var_1 = undefined;
 
-  if(abs(var0) > 90) {
-    var1 = scripts\anim\utility::lookupanim("grenade", "cower_dive_back");
+  if(abs(var_0) > 90) {
+    var_1 = scripts\anim\utility::lookupanim("grenade", "cower_dive_back");
   } else {
-    var1 = scripts\anim\utility::lookupanim("grenade", "cower_dive_front");
+    var_1 = scripts\anim\utility::lookupanim("grenade", "cower_dive_front");
   }
 
-  var2 = getmovedelta(var1, 0, 0.5);
-  var3 = self localtoworldcoords(var2);
+  var_2 = getmovedelta(var_1, 0, 0.5);
+  var_3 = self localtoworldcoords(var_2);
 
-  if(!self maymovetopoint(var3)) {
+  if(!self maymovetopoint(var_3)) {
     return false;
   }
 
   self.safetochangescript = 0;
-  self setflaggedanimknoballrestart("cowerstart", var1, %body, 1, 0.2);
+  self setflaggedanimknoballrestart("cowerstart", var_1, %body, 1, 0.2);
   scripts\anim\notetracks::donotetracks("cowerstart");
   self.safetochangescript = 1;
   return true;

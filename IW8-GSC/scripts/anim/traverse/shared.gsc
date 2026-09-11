@@ -3,69 +3,69 @@
  * Script: scripts\anim\traverse\shared.gsc
 ***********************************************/
 
-function teleportthread(var0) {
+function teleportthread(var_0) {
   self endon("killanimscript");
   self notify("endTeleportThread");
   self endon("endTeleportThread");
-  var1 = 5;
-  var2 = (0, 0, var0 / var1);
+  var_1 = 5;
+  var_2 = (0, 0, var_0 / var_1);
 
-  for(var3 = 0; var3 < var1; var3++) {
-    self forceteleport(self.origin + var2);
+  for(var_3 = 0; var_3 < var_1; var_3++) {
+    self forceteleport(self.origin + var_2);
     wait 0.05;
   }
 }
 
-function teleportthreadex(var0, var1, var2, var3) {
+function teleportthreadex(var_0, var_1, var_2, var_3) {
   self endon("killanimscript");
   self notify("endTeleportThread");
   self endon("endTeleportThread");
 
-  if(var0 == 0 || var2 <= 0) {
+  if(var_0 == 0 || var_2 <= 0) {
     return;
   }
 
-  if(var1 > 0) {
-    wait var1;
+  if(var_1 > 0) {
+    wait var_1;
   }
 
-  var4 = (0, 0, var0 / var2);
+  var_4 = (0, 0, var_0 / var_2);
 
-  if(isDefined(var3) && var3 < 1) {
-    self setflaggedanimknoball("traverseAnim", self.traverseanim, self.traverseanimroot, 1, 0.2, var3);
+  if(isDefined(var_3) && var_3 < 1) {
+    self setflaggedanimknoball("traverseAnim", self.traverseanim, self.traverseanimroot, 1, 0.2, var_3);
   }
 
-  for(var5 = 0; var5 < var2; var5++) {
-    self forceteleport(self.origin + var4);
+  for(var_5 = 0; var_5 < var_2; var_5++) {
+    self forceteleport(self.origin + var_4);
     wait 0.05;
   }
 
-  if(isDefined(var3) && var3 < 1) {
+  if(isDefined(var_3) && var_3 < 1) {
     self setflaggedanimknoball("traverseAnim", self.traverseanim, self.traverseanimroot, 1, 0.2, 1);
     return;
   }
 }
 
-function dotraverse(var0) {}
+function dotraverse(var_0) {}
 
-function handletraversenotetracks(var0) {
-  if(var0 == "traverse_death") {
+function handletraversenotetracks(var_0) {
+  if(var_0 == "traverse_death") {
     return handletraversedeathnotetrack();
   }
 
-  if(var0 == "traverse_align") {
+  if(var_0 == "traverse_align") {
     return handletraversealignment();
   }
 
-  if(var0 == "traverse_drop") {
+  if(var_0 == "traverse_drop") {
     return handletraversedrop();
   }
 }
 
 function handletraversedeathnotetrack() {
   if(isDefined(self.traversedeathanim)) {
-    var0 = self.traversedeathanim[self.traversedeathindex];
-    self.deathanim = var0[randomint(var0.size)];
+    var_0 = self.traversedeathanim[self.traversedeathindex];
+    self.deathanim = var_0[randomint(var_0.size)];
     self.traversedeathindex++;
     return;
   }
@@ -75,41 +75,41 @@ function handletraversealignment() {
   self animmode("noclip");
 
   if(isDefined(self.traverseheight) && isDefined(self.traversestartnode.traverse_height)) {
-    var0 = self.traversestartnode.traverse_height - self.traversestartz;
-    thread teleportthread(var0 - self.traverseheight);
+    var_0 = self.traversestartnode.traverse_height - self.traversestartz;
+    thread teleportthread(var_0 - self.traverseheight);
     return;
   }
 }
 
 function handletraversedrop() {
-  var0 = self.origin + (0, 0, 32);
-  var1 = physicstrace(var0, self.origin + (0, 0, -512));
-  var2 = distance(var0, var1);
-  var3 = var2 - 32 - 0.5;
-  var4 = self getanimtime(self.traverseanim);
-  var5 = getmovedelta(self.traverseanim, var4, 1);
-  var6 = getanimlength(self.traverseanim);
-  var7 = 0 - var5[2];
-  var8 = var7 - var3;
+  var_0 = self.origin + (0, 0, 32);
+  var_1 = physicstrace(var_0, self.origin + (0, 0, -512));
+  var_2 = distance(var_0, var_1);
+  var_3 = var_2 - 32 - 0.5;
+  var_4 = self getanimtime(self.traverseanim);
+  var_5 = getmovedelta(self.traverseanim, var_4, 1);
+  var_6 = getanimlength(self.traverseanim);
+  var_7 = 0 - var_5[2];
+  var_8 = var_7 - var_3;
 
-  if(var7 < var3) {
-    var9 = var7 / var3;
+  if(var_7 < var_3) {
+    var_9 = var_7 / var_3;
   } else {
-    var9 = 1;
+    var_9 = 1;
   }
 
-  var10 = (var7 - var5) / 3;
-  var11 = ceil(var10 * 20);
-  thread teleportthreadex(var9, 0, var11, var9);
-  thread finishtraversedrop(var2[2]);
+  var_10 = (var_7 - var_5) / 3;
+  var_11 = ceil(var_10 * 20);
+  thread teleportthreadex(var_9, 0, var_11, var_9);
+  thread finishtraversedrop(var_2[2]);
 }
 
-function finishtraversedrop(var0) {
+function finishtraversedrop(var_0) {
   self endon("killanimscript");
-  var0 += 4;
+  var_0 += 4;
 
   for(;;) {
-    if(self.origin[2] < var0) {
+    if(self.origin[2] < var_0) {
       self animmode("gravity");
       break;
     }
@@ -123,7 +123,7 @@ function donothingfunc() {
   self waittill("killanimscript");
 }
 
-function dog_jump_down(var0, var1, var2, var3) {}
+function dog_jump_down(var_0, var_1, var_2, var_3) {}
 
 function seeker_traversal() {
   self waittill("killanimscript");

@@ -55,29 +55,29 @@ function update_ai_array() {
     return;
   }
 
-  level waittill("br_circle_set", var0);
-  level waittill("br_circle_set", var0);
+  level waittill("br_circle_set", var_0);
+  level waittill("br_circle_set", var_0);
   level thread scripts\mp\gametypes\br_gametype_lep::dropbrselfrevivetoken(3, 2363, 45, 60);
-  level waittill("br_circle_set", var0);
-  level waittill("br_circle_set", var0);
-  level waittill("br_circle_set", var0);
+  level waittill("br_circle_set", var_0);
+  level waittill("br_circle_set", var_0);
+  level waittill("br_circle_set", var_0);
   waitframe();
-  level waittill("br_circle_set", var0);
+  level waittill("br_circle_set", var_0);
   waitframe();
-  level waittill("br_circle_set", var0);
+  level waittill("br_circle_set", var_0);
   level.ref_123a7 = 0;
 }
 
 function ref_145ef() {
   level endon("game_ended");
-  var0 = spawn("script_model", (0, 0, 500));
-  var0 setModel("lep_sfx");
+  var_0 = spawn("script_model", (0, 0, 500));
+  var_0 setModel("lep_sfx");
   waitframe();
-  var0 setscriptablepartstate("sfx", "attack_state_01");
-  level.weapon_xp_iw8_la_rpapa7 = var0;
-  var0 = spawn("script_model", (0, 0, 500));
-  var0 setModel("lep_sfx");
+  var_0 setscriptablepartstate("sfx", "attack_state_01");
+  level.weapon_xp_iw8_la_rpapa7 = var_0;
+  var_0 = spawn("script_model", (0, 0, 500));
+  var_0 setModel("lep_sfx");
   waitframe();
-  var0 setscriptablepartstate("sfx", "base");
-  level.weapon_xp_iw8_lm_kilo121 = var0;
+  var_0 setscriptablepartstate("sfx", "base");
+  level.weapon_xp_iw8_lm_kilo121 = var_0;
 }

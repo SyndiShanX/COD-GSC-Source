@@ -3,7 +3,7 @@
  * Script: scripts\asm\juggernaut\juggernaut.gsc
 *************************************************/
 
-function juggernaut(var0) {
+function juggernaut(var_0) {
   self endon("asm_terminated");
   self endon("death");
 
@@ -12,15 +12,15 @@ function juggernaut(var0) {
   }
 }
 
-function initanimspeedthresholds_juggernaut(var0) {
-  if(hasanimspeedthresholdstring(var0)) {
+function initanimspeedthresholds_juggernaut(var_0) {
+  if(hasanimspeedthresholdstring(var_0)) {
     return;
   }
 
   anim.juggernautspeedthreholdsinitialized = 1;
-  animspeedthresholdsexist(var0, "walk", 40);
-  animspeedthresholdsexist(var0, "jog", 113);
-  animspeedthresholdsexist(var0, "run", 170);
+  animspeedthresholdsexist(var_0, "walk", 40);
+  animspeedthresholdsexist(var_0, "jog", 113);
+  animspeedthresholdsexist(var_0, "run", 170);
 }
 
 function juggernaut_isspecialweapon() {
@@ -40,30 +40,30 @@ function juggernaut_pain() {
 
 function juggernaut_damage() {
   for(;;) {
-    self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
     if(juggernaut_isspecialweapon()) {
       continue;
     }
 
     if(self.damageweapon.basename == "iw8_pi_decho") {
-      if(var7 == "j_head" || var7 == "j_neck" || var7 == "j_helmet") {
-        var10 = 70;
+      if(var_7 == "j_head" || var_7 == "j_neck" || var_7 == "j_helmet") {
+        var_10 = 70;
       } else {
-        var10 = 40;
+        var_10 = 40;
       }
     } else {
-      var10 = 40;
+      var_10 = 40;
     }
 
-    if(var0 < var10) {
-      var10 = abs(var0 - 5);
+    if(var_0 < var_10) {
+      var_10 = abs(var_0 - 5);
     }
 
-    self.health += int(var10);
+    self.health += int(var_10);
 
     if(istrue(self.damage_parts_enabled)) {
-      apply_juggernaut_part_damage(self.damagelocation, var0);
+      apply_juggernaut_part_damage(self.damagelocation, var_0);
     }
   }
 }
@@ -81,38 +81,38 @@ function init_juggernaut_damage_states() {
   create_juggernaut_damagedata("right_arm", 100, ["right_arm_upper", "right_arm_lower", "right_hand"]);
 }
 
-function create_juggernaut_damagedata(var0, var1, var2) {
-  var3 = spawnStruct();
-  var3.health = var1;
-  var3.is_part_swapped = 0;
+function create_juggernaut_damagedata(var_0, var_1, var_2) {
+  var_3 = spawnStruct();
+  var_3.health = var_1;
+  var_3.is_part_swapped = 0;
 
   if(!isDefined(self.damagedata)) {
     self.damagedata = [];
   }
 
-  self.damagedata[var0] = var3;
+  self.damagedata[var_0] = var_3;
 
   if(!isDefined(self.damagedatalookup)) {
     self.damagedatalookup = [];
   }
 
-  foreach(var5 in var2) {
-    self.damagedatalookup[var5] = var0;
+  foreach(var_5 in var_2) {
+    self.damagedatalookup[var_5] = var_0;
   }
 }
 
-function apply_juggernaut_part_damage(var0, var1) {
-  if(!isDefined(self.damagedatalookup[var0])) {
+function apply_juggernaut_part_damage(var_0, var_1) {
+  if(!isDefined(self.damagedatalookup[var_0])) {
     return;
   }
 
-  var2 = self.damagedatalookup[var0];
-  var3 = self.damagedata[var2];
-  var3.health -= var1;
+  var_2 = self.damagedatalookup[var_0];
+  var_3 = self.damagedata[var_2];
+  var_3.health -= var_1;
 
-  if(var3.health <= 0 && !istrue(var3.is_part_swapped)) {
-    self setscriptablepartstate(var2, "dmg", 1);
-    var3.is_part_swapped = 1;
+  if(var_3.health <= 0 && !istrue(var_3.is_part_swapped)) {
+    self setscriptablepartstate(var_2, "dmg", 1);
+    var_3.is_part_swapped = 1;
     return;
   }
 }
@@ -150,23 +150,23 @@ function enable_casual_killer() {
     self.a.disablelongdeath = 1;
   }
 
-  var0 = weaponclass(self.weapon);
+  var_0 = weaponclass(self.weapon);
   initanimspeedthresholds_juggernaut("juggernaut");
   scripts\asm\shared\utility::setbasearchetype("juggernaut");
-  var1 = "casual_killer";
+  var_1 = "casual_killer";
 
-  if(var0 == "mg") {
-    var1 = "casual_killer_lmg";
+  if(var_0 == "mg") {
+    var_1 = "casual_killer_lmg";
   }
 
-  scripts\asm\shared\utility::setoverridearchetype("casual_killer", var1, 1);
+  scripts\asm\shared\utility::setoverridearchetype("casual_killer", var_1, 1);
   thread casual_killer_targeting();
 
-  if(var0 == "mg" || var0 == "rifle" || var0 == "smg") {
+  if(var_0 == "mg" || var_0 == "rifle" || var_0 == "smg") {
     thread casual_killer_sweep();
   }
 
-  if(var0 == "rifle" || var0 == "smg") {
+  if(var_0 == "rifle" || var_0 == "smg") {
     self.shootstyleoverride = "full";
   }
 
@@ -253,8 +253,8 @@ function disable_casual_killer_internal() {
   self.combatmode = "cover";
 }
 
-function casual_killer_damage_func(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
-  if(scripts\engine\utility::is_equal(var1, level.player)) {
+function casual_killer_damage_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  if(scripts\engine\utility::is_equal(var_1, level.player)) {
     self notify("ck_player_attacked_me");
     return;
   }
@@ -281,10 +281,10 @@ function casual_killer_targeting() {
   wait 1;
   self.ck_target = spawn("script_origin", self.origin);
   thread scripts\engine\utility::delete_on_death(self.ck_target);
-  var0 = undefined;
-  var1 = 0;
-  var2 = undefined;
-  var3 = undefined;
+  var_0 = undefined;
+  var_1 = 0;
+  var_2 = undefined;
+  var_3 = undefined;
 
   for(;;) {
     waitframe();
@@ -294,88 +294,88 @@ function casual_killer_targeting() {
     }
 
     self.gunposeoverride = "disable";
-    var4 = anglesToForward(self.angles);
-    var5 = scripts\asm\shared\utility::getshootfrompos();
+    var_4 = anglesToForward(self.angles);
+    var_5 = scripts\asm\shared\utility::getshootfrompos();
 
-    if(var1) {
-      if(!isalive(var0)) {
-        var2 = gettime();
+    if(var_1) {
+      if(!isalive(var_0)) {
+        var_2 = gettime();
         self setentitytarget(self.ck_target);
         self forcethreatupdate();
-        var1 = 0;
-        var3 = undefined;
+        var_1 = 0;
+        var_3 = undefined;
       } else {
-        self.ck_target.origin = var0.origin;
+        self.ck_target.origin = var_0.origin;
       }
     }
 
-    var6 = int(gettime() / 50);
+    var_6 = int(gettime() / 50);
 
-    if(self getentitynumber() % 4 != var6 % 4) {
-      if(isDefined(var2) && var2 + 3000 > gettime()) {
-        var7 = self.ck_target.origin - self.origin;
+    if(self getentitynumber() % 4 != var_6 % 4) {
+      if(isDefined(var_2) && var_2 + 3000 > gettime()) {
+        var_7 = self.ck_target.origin - self.origin;
 
-        if(length(var7) > 100) {
-          var7 = vectorNormalize(var7);
-          var8 = abs(angleclamp180(acos(clamp(vectordot(var4, var7), -1, 1))));
+        if(length(var_7) > 100) {
+          var_7 = vectorNormalize(var_7);
+          var_8 = abs(angleclamp180(acos(clamp(vectordot(var_4, var_7), -1, 1))));
 
-          if(var8 > 30 && gettime() < var2 + 1500) {
+          if(var_8 > 30 && gettime() < var_2 + 1500) {
             continue;
           }
 
-          if(var8 < 90) {
+          if(var_8 < 90) {
             continue;
           }
         }
       }
 
-      var2 = undefined;
+      var_2 = undefined;
 
-      if(!isDefined(var3) || gettime() > var3 + 3000) {
+      if(!isDefined(var_3) || gettime() > var_3 + 3000) {
         self clearentitytarget();
         self forcethreatupdate();
 
         if(isalive(self.enemy)) {
-          if(var1 && self.enemy == var0) {
-            var9 = self.enemy;
-            var10 = self.enemy.origin - self.origin;
-            var10 = vectorNormalize(var10);
-            var11 = clamp(vectordot(var4, var10), -1, 1);
-            var12 = abs(angleclamp180(acos(var11)));
+          if(var_1 && self.enemy == var_0) {
+            var_9 = self.enemy;
+            var_10 = self.enemy.origin - self.origin;
+            var_10 = vectorNormalize(var_10);
+            var_11 = clamp(vectordot(var_4, var_10), -1, 1);
+            var_12 = abs(angleclamp180(acos(var_11)));
 
-            if(var12 > 70) {
-              var13 = self getsecondarytargets();
+            if(var_12 > 70) {
+              var_13 = self getsecondarytargets();
 
-              if(isDefined(var13)) {
-                foreach(var15 in var13) {
-                  var7 = var15.origin - self.origin;
-                  var7 = vectorNormalize(var7);
-                  var8 = abs(angleclamp180(acos(clamp(vectordot(var4, var7), -1, 1))));
+              if(isDefined(var_13)) {
+                foreach(var_15 in var_13) {
+                  var_7 = var_15.origin - self.origin;
+                  var_7 = vectorNormalize(var_7);
+                  var_8 = abs(angleclamp180(acos(clamp(vectordot(var_4, var_7), -1, 1))));
 
-                  if(var8 < var12) {
-                    var12 = var8;
-                    var9 = var15;
+                  if(var_8 < var_12) {
+                    var_12 = var_8;
+                    var_9 = var_15;
                   }
                 }
 
-                if(var9 != self.enemy) {
-                  if(issentient(var9)) {
-                    self.favoriteenemy = var9;
+                if(var_9 != self.enemy) {
+                  if(issentient(var_9)) {
+                    self.favoriteenemy = var_9;
                     self forcethreatupdate();
                     self.favoriteenemy = undefined;
-                    var3 = gettime();
+                    var_3 = gettime();
                   }
                 }
               }
             }
           }
 
-          var1 = isalive(self.enemy);
+          var_1 = isalive(self.enemy);
 
-          if(var1) {
-            var0 = self.enemy;
+          if(var_1) {
+            var_0 = self.enemy;
           } else {
-            var0 = undefined;
+            var_0 = undefined;
           }
 
           continue;
@@ -384,13 +384,13 @@ function casual_killer_targeting() {
         self setentitytarget(self.ck_target);
         self forcethreatupdate();
 
-        if(isDefined(var2) && var2 + 7000 > gettime()) {
-          if(vectordot(var4, self.ck_target.origin - var5) > 0) {
+        if(isDefined(var_2) && var_2 + 7000 > gettime()) {
+          if(vectordot(var_4, self.ck_target.origin - var_5) > 0) {
             continue;
           }
         }
 
-        self.ck_target.origin = self.origin + (0, 0, 40) + var4 * 400;
+        self.ck_target.origin = self.origin + (0, 0, 40) + var_4 * 400;
       }
     }
   }
@@ -399,23 +399,23 @@ function casual_killer_targeting() {
 function casual_killer_sweep() {
   self endon("leaveCasualKiller");
   self endon("death");
-  var0 = 100;
-  var1 = 1000;
-  var2 = 20;
-  var3 = -1;
-  var4 = [40, 50, 60];
-  var5 = [20, 25, 30];
-  var6 = 0;
-  var7 = 0;
-  var8 = scripts\engine\utility::random(var4);
-  var9 = scripts\engine\utility::random(var5);
-  var10 = 0;
-  var11 = undefined;
-  var12 = undefined;
+  var_0 = 100;
+  var_1 = 1000;
+  var_2 = 20;
+  var_3 = -1;
+  var_4 = [40, 50, 60];
+  var_5 = [20, 25, 30];
+  var_6 = 0;
+  var_7 = 0;
+  var_8 = scripts\engine\utility::random(var_4);
+  var_9 = scripts\engine\utility::random(var_5);
+  var_10 = 0;
+  var_11 = undefined;
+  var_12 = undefined;
 
-  foreach(var14 in var5) {
-    if(var14 > var6) {
-      var6 = var14;
+  foreach(var_14 in var_5) {
+    if(var_14 > var_6) {
+      var_6 = var_14;
     }
   }
 
@@ -424,106 +424,106 @@ function casual_killer_sweep() {
     self.leftaimlimit = 90;
     self.rightaimlimit = -90;
     self.aimyawspeed = 180;
-    var16 = anglesToForward(self.angles);
-    var17 = scripts\asm\shared\utility::getshootfrompos();
+    var_16 = anglesToForward(self.angles);
+    var_17 = scripts\asm\shared\utility::getshootfrompos();
 
     if(isDefined(self.enemy)) {
       if(!isDefined(self.pathgoalpos) || self.lookaheaddist > self aigetdesiredspeed()) {
-        var11 = self.enemy getshootatpos();
+        var_11 = self.enemy getshootatpos();
       }
     }
 
-    var18 = scripts\asm\asm::asm_currentstatehasflag(self.asm.trackasm, "aim") || scripts\asm\asm::asm_currentstatehasflag(self.asm.trackasm, "notetrackAim");
+    var_18 = scripts\asm\asm::asm_currentstatehasflag(self.asm.trackasm, "aim") || scripts\asm\asm::asm_currentstatehasflag(self.asm.trackasm, "notetrackAim");
 
-    if(var18) {
-      var18 = isDefined(var11);
+    if(var_18) {
+      var_18 = isDefined(var_11);
     }
 
-    var19 = scripts\asm\asm::asm_getcurrentstate(self.asmname);
+    var_19 = scripts\asm\asm::asm_getcurrentstate(self.asmname);
 
-    if(var19 == "exposed_arrival" || var19 == "exposed_reload") {
-      var18 = 0;
+    if(var_19 == "exposed_arrival" || var_19 == "exposed_reload") {
+      var_18 = 0;
     }
 
-    if(var18) {
-      var20 = self getposonpath(self aigetdesiredspeed());
-      var21 = var11 - var20;
-      var21 = (var21[0], var21[1], 0);
-      var22 = vectorNormalize(var21);
-      var23 = self.leftaimlimit;
+    if(var_18) {
+      var_20 = self getposonpath(self aigetdesiredspeed());
+      var_21 = var_11 - var_20;
+      var_21 = (var_21[0], var_21[1], 0);
+      var_22 = vectorNormalize(var_21);
+      var_23 = self.leftaimlimit;
 
-      if(!istrue(var12)) {
-        var23 = max(0, self.leftaimlimit - 20);
+      if(!istrue(var_12)) {
+        var_23 = max(0, self.leftaimlimit - 20);
       }
 
-      var24 = abs(angleclamp180(acos(clamp(vectordot(var22, var16), -1, 1))));
+      var_24 = abs(angleclamp180(acos(clamp(vectordot(var_22, var_16), -1, 1))));
 
-      if(var24 >= var23) {
-        var11 = undefined;
-        var10 = 0;
-        var18 = 0;
+      if(var_24 >= var_23) {
+        var_11 = undefined;
+        var_10 = 0;
+        var_18 = 0;
       }
     }
 
-    if(!istrue(var18)) {
+    if(!istrue(var_18)) {
       scripts\common\utility::lookatentity(undefined);
-      scripts\common\utility::lookatpos(var17 + var16 * 200);
-      self.casualkillershootpos = var17 + var16 * 200;
-      var2 = 20 * var3;
-      var3 *= -1;
-      var10 = 0;
+      scripts\common\utility::lookatpos(var_17 + var_16 * 200);
+      self.casualkillershootpos = var_17 + var_16 * 200;
+      var_2 = 20 * var_3;
+      var_3 *= -1;
+      var_10 = 0;
       self.dontevershoot = 1;
-      var12 = 0;
+      var_12 = 0;
       continue;
     }
 
-    var12 = 1;
+    var_12 = 1;
     self.dontevershoot = 0;
 
-    if(isDefined(var11)) {
-      scripts\common\utility::lookatpos(var11);
+    if(isDefined(var_11)) {
+      scripts\common\utility::lookatpos(var_11);
     } else {
       scripts\common\utility::lookatentity(undefined);
       scripts\common\utility::lookatpos(undefined);
     }
 
-    var21 = var11 - var17;
-    var25 = length(var21);
-    var22 = vectorNormalize(var21);
-    var24 = abs(angleclamp180(acos(clamp(vectordot(var16, var22), -1, 1))));
-    var26 = axistoangles(var22, anglestoright(self.angles), anglestoup(self.angles));
-    var27 = var26[1];
+    var_21 = var_11 - var_17;
+    var_25 = length(var_21);
+    var_22 = vectorNormalize(var_21);
+    var_24 = abs(angleclamp180(acos(clamp(vectordot(var_16, var_22), -1, 1))));
+    var_26 = axistoangles(var_22, anglestoright(self.angles), anglestoup(self.angles));
+    var_27 = var_26[1];
 
     if(istrue(self.leavecasualkiller)) {
-      if(var2 > 0) {
-        var2 -= min(var2, var8 * level.framedurationseconds);
-        var3 = -1;
-      } else if(var2 < 0) {
-        var2 += min(var2 * -1, var8 * level.framedurationseconds);
-        var3 = 1;
+      if(var_2 > 0) {
+        var_2 -= min(var_2, var_8 * level.framedurationseconds);
+        var_3 = -1;
+      } else if(var_2 < 0) {
+        var_2 += min(var_2 * -1, var_8 * level.framedurationseconds);
+        var_3 = 1;
       }
-    } else if(var24 + var6 < abs(self.leftaimlimit) && var24 + var6 < abs(self.rightaimlimit) && var25 > var0 && (var25 < var1 || isDefined(self.enemy) && self.enemy == level.player)) {
-      if(gettime() > var7) {
-        var28 = level.framedurationseconds * var8 * var3;
-        var2 += var28;
+    } else if(var_24 + var_6 < abs(self.leftaimlimit) && var_24 + var_6 < abs(self.rightaimlimit) && var_25 > var_0 && (var_25 < var_1 || isDefined(self.enemy) && self.enemy == level.player)) {
+      if(gettime() > var_7) {
+        var_28 = level.framedurationseconds * var_8 * var_3;
+        var_2 += var_28;
 
-        if(scripts\engine\utility::sign(var2) == scripts\engine\utility::sign(var3) && abs(var2) > var9) {
-          var3 *= -1;
-          var8 = scripts\engine\utility::random(var4);
-          var9 = scripts\engine\utility::random(var5);
-          var7 = gettime() + 350;
+        if(scripts\engine\utility::sign(var_2) == scripts\engine\utility::sign(var_3) && abs(var_2) > var_9) {
+          var_3 *= -1;
+          var_8 = scripts\engine\utility::random(var_4);
+          var_9 = scripts\engine\utility::random(var_5);
+          var_7 = gettime() + 350;
         }
       }
 
-      var27 += var2;
+      var_27 += var_2;
     }
 
-    var29 = axistoangles(var22, anglestoright(self.angles), anglestoup(self.angles));
-    var29 = (var29[0], var27, var29[2]);
-    var22 = anglesToForward(var29);
-    self.casualkillershootpos = var22 * var25 + var17;
+    var_29 = axistoangles(var_22, anglestoright(self.angles), anglestoup(self.angles));
+    var_29 = (var_29[0], var_27, var_29[2]);
+    var_22 = anglesToForward(var_29);
+    self.casualkillershootpos = var_22 * var_25 + var_17;
 
-    if(istrue(self.leavecasualkiller) && var2 == 0) {
+    if(istrue(self.leavecasualkiller) && var_2 == 0) {
       return;
     }
   }

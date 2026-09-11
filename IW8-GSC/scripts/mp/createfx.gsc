@@ -29,7 +29,7 @@ function createfx() {
   level waittill("eternity");
 }
 
-function func_position_player_get(var0) {
+function func_position_player_get(var_0) {
   return level.player.origin;
 }
 
@@ -37,8 +37,8 @@ function callback_playerconnect() {
   self waittill("begin");
 
   if(!isDefined(level.player)) {
-    var0 = getEntArray("mp_global_intermission", "classname");
-    self spawn(var0[0].origin, var0[0].angles);
+    var_0 = getEntArray("mp_global_intermission", "classname");
+    self spawn(var_0[0].origin, var_0[0].angles);
     scripts\mp\utility\player::updatesessionstate("playing", "");
     self.maxhealth = 10000000;
     self.health = 10000000;
@@ -51,8 +51,8 @@ function callback_playerconnect() {
 }
 
 function func_player_speed() {
-  var0 = level._createfx.player_speed / 190;
-  level.player setmovespeedscale(var0);
+  var_0 = level._createfx.player_speed / 190;
+  level.player setmovespeedscale(var_0);
   setDvar("NSRPQNLSNK", level._createfx.player_speed);
 }
 

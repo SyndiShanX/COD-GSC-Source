@@ -67,23 +67,23 @@ function player() {
   level.scr_anim["player_rig"]["coldopen_bink"] = % co_wolf_video_camera;
 }
 
-function player_fov_change(var0) {
+function player_fov_change(var_0) {
   level.player modifybasefov(55, 0.55);
 }
 
-function show_player(var0) {
+function show_player(var_0) {
   if(isDefined(level.kyle)) {
     level.kyle delete();
   }
 
-  var0 show();
-  var0.animweapon show();
+  var_0 show();
+  var_0.animweapon show();
 }
 
-function swap_kyle(var0) {
+function swap_kyle(var_0) {
   level.kyledrone detach(level.kyledrone.hatmodel);
   level.kyledrone detach(level.kyledrone.headmodel);
-  var0 hide();
+  var_0 hide();
   level.kyledrone show();
   level.player setcinematicmotionoverride("disabled");
   hidecinematicletterboxing(2, 0);
@@ -720,37 +720,37 @@ function humans() {
   level.scr_anim["butcher"]["coldopen_bink"] = % co_wolf_video_butcher;
 }
 
-function farah_says_cut_wire_green(var0) {
-  var0 thread scripts\engine\utility::play_sound_in_space("dx_vom_far_wolf_death_81", level.farah.origin);
+function farah_says_cut_wire_green(var_0) {
+  var_0 thread scripts\engine\utility::play_sound_in_space("dx_vom_far_wolf_death_81", level.farah.origin);
 }
 
-function farah_says_cut_wire_yellow(var0) {
-  var0 thread scripts\engine\utility::play_sound_in_space("dx_vom_far_wolf_death_101", level.farah.origin);
+function farah_says_cut_wire_yellow(var_0) {
+  var_0 thread scripts\engine\utility::play_sound_in_space("dx_vom_far_wolf_death_101", level.farah.origin);
 }
 
-function farah_says_cut_wire_red(var0) {
-  var0 thread scripts\engine\utility::play_sound_in_space("dx_vom_far_wolf_death_171", level.farah.origin);
+function farah_says_cut_wire_red(var_0) {
+  var_0 thread scripts\engine\utility::play_sound_in_space("dx_vom_far_wolf_death_171", level.farah.origin);
 }
 
-function farah_nobraids_body(var0) {
+function farah_nobraids_body(var_0) {
   level.farah.original_body_model = level.farah.model;
   level.farah setModel("body_hero_farah_nobraids");
 }
 
-function farah_nobraids_body_reset(var0) {
+function farah_nobraids_body_reset(var_0) {
   if(isDefined(level.farah.original_body_model)) {
     level.farah setModel(level.farah.original_body_model);
     return;
   }
 }
 
-function start_fail_with_fade(var0) {
+function start_fail_with_fade(var_0) {
   level endon("civs_moved_to_main_house");
 
   for(;;) {
-    var0 waittill("damage", var1, var2, var3, var4, var5, var6, var7, var8, var9, var10);
+    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 
-    if(isDefined(var10) && var10.basename == "flash") {
+    if(isDefined(var_10) && var_10.basename == "flash") {
       continue;
     }
 
@@ -758,67 +758,67 @@ function start_fail_with_fade(var0) {
   }
 
   thread scripts\sp\hud_util::fade_out(0);
-  var0 stopsounds();
-  var0 kill();
-  var11 = [48, 49];
-  var12 = scripts\engine\utility::array_randomize(var11);
-  var13 = var12[0];
-  scripts\sp\player_death::set_custom_death_quote(var13);
+  var_0 stopsounds();
+  var_0 kill();
+  var_11 = [48, 49];
+  var_12 = scripts\engine\utility::array_randomize(var_11);
+  var_13 = var_12[0];
+  scripts\sp\player_death::set_custom_death_quote(var_13);
   scripts\sp\utility::missionfailedwrapper();
 }
 
-function notify_self_nag(var0) {
-  var0 notify("nag");
+function notify_self_nag(var_0) {
+  var_0 notify("nag");
 }
 
-function drop_weapon_now(var0) {
-  if(isalive(var0)) {
-    var0 dropweapon(var0.weapon, "right");
-    var0 scripts\common\ai::gun_remove();
+function drop_weapon_now(var_0) {
+  if(isalive(var_0)) {
+    var_0 dropweapon(var_0.weapon, "right");
+    var_0 scripts\common\ai::gun_remove();
     return;
   }
 }
 
-function hadir_face_kick(var0) {
-  var0 notify("face_kicking");
+function hadir_face_kick(var_0) {
+  var_0 notify("face_kicking");
 }
 
-function nvg_on_fx(var0) {
+function nvg_on_fx(var_0) {
   wait 0.4;
-  var1 = scripts\engine\utility::getfx("nvg_eyelights");
-  playFXOnTag(var1, var0, "j_nvg");
+  var_1 = scripts\engine\utility::getfx("nvg_eyelights");
+  playFXOnTag(var_1, var_0, "j_nvg");
 }
 
-function nvg_off_fx(var0) {
+function nvg_off_fx(var_0) {
   wait 0.4;
-  var1 = scripts\engine\utility::getfx("nvg_eyelights");
-  stopFXOnTag(var1, var0, "j_nvg");
+  var_1 = scripts\engine\utility::getfx("nvg_eyelights");
+  stopFXOnTag(var_1, var_0, "j_nvg");
 }
 
-function sledge_hits_door(var0) {
+function sledge_hits_door(var_0) {
   level notify("sledge_impact");
 }
 
-function sledge_put_away(var0) {
-  var0 detach("misc_wm_sledgehammer_scaled", "tag_accessory_right");
-  var0 attach("misc_wm_sledgehammer_scaled", "tag_stowed_back");
+function sledge_put_away(var_0) {
+  var_0 detach("misc_wm_sledgehammer_scaled", "tag_accessory_right");
+  var_0 attach("misc_wm_sledgehammer_scaled", "tag_stowed_back");
 }
 
-function b1_girl_in_position(var0) {
-  var0.isinposition = "yes";
+function b1_girl_in_position(var_0) {
+  var_0.isinposition = "yes";
 }
 
-function prisoner_secured(var0) {
-  var0.isinposition = "secured";
-  var0.nothreat = 1;
+function prisoner_secured(var_0) {
+  var_0.isinposition = "secured";
+  var_0.nothreat = 1;
   level notify("dataCiv_is_secured");
 }
 
-function b1_mom_swap_death(var0) {
-  var0.mydeathanime = "protect_death";
+function b1_mom_swap_death(var_0) {
+  var_0.mydeathanime = "protect_death";
 }
 
-function whimper_loop(var0) {
+function whimper_loop(var_0) {
   if(scripts\engine\utility::flag("breach_finished")) {
     return;
   }
@@ -827,158 +827,158 @@ function whimper_loop(var0) {
   wait lookupsoundlength("dx_vom_ccm1_heli_unload_guardhouse_134") / 1000;
 
   for(;;) {
-    var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_ccm1_heli_unload_guardhouse_132");
-    var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_ccm1_heli_unload_guardhouse_134");
+    var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_ccm1_heli_unload_guardhouse_132");
+    var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_ccm1_heli_unload_guardhouse_134");
     waitframe();
   }
 }
 
-function blood_pool_mom(var0) {
-  if(!var0.enemywasmeleed) {
+function blood_pool_mom(var_0) {
+  if(!var_0.enemywasmeleed) {
     scripts\engine\utility::exploder("woman_one_blood");
     return;
   }
 }
 
-function death_face(var0) {
-  var0 setfacialindex("none");
+function death_face(var_0) {
+  var_0 setfacialindex("none");
 }
 
-function breach_explosion_fx(var0) {
+function breach_explosion_fx(var_0) {
   if(isDefined(level.bomb)) {
     level.bomb delete();
   }
 
   scripts\engine\utility::flag_set("breach_explosion");
   screenshake(level.player.origin, 9, 2, 2, 0.5);
-  var1 = scripts\engine\utility::getStruct("breach_gate_damage", "targetname");
-  thread gate_breach_sfx(var1.origin);
-  radiusdamage(var1.origin, var1.radius, 5, 5);
+  var_1 = scripts\engine\utility::getStruct("breach_gate_damage", "targetname");
+  thread gate_breach_sfx(var_1.origin);
+  radiusdamage(var_1.origin, var_1.radius, 5, 5);
 }
 
-function gate_breach_sfx(var0) {
-  var1 = spawn("script_origin", var0);
-  var1 playexplosionsound("scn_zd30_gate_breach", "exp");
+function gate_breach_sfx(var_0) {
+  var_1 = spawn("script_origin", var_0);
+  var_1 playexplosionsound("scn_zd30_gate_breach", "exp");
   wait 5.3;
-  var1 delete();
+  var_1 delete();
 }
 
-function breach_bomb_detach(var0) {
-  var1 = var0 gettagorigin("tag_accessory_right");
-  var2 = var0 gettagangles("tag_accessory_right");
-  var0 detach("offhand_wm_c4_bomb_sp", "tag_accessory_right");
-  level.bomb = spawn("script_model", var1);
-  level.bomb.angles = var2;
+function breach_bomb_detach(var_0) {
+  var_1 = var_0 gettagorigin("tag_accessory_right");
+  var_2 = var_0 gettagangles("tag_accessory_right");
+  var_0 detach("offhand_wm_c4_bomb_sp", "tag_accessory_right");
+  level.bomb = spawn("script_model", var_1);
+  level.bomb.angles = var_2;
   level.bomb setModel("offhand_wm_c4_bomb_sp");
 }
 
-function clacker_attach(var0) {
-  var0 attach("offhand_vm_clacker_tactical", "tag_accessory_right");
-  var0.clackerattached = 1;
+function clacker_attach(var_0) {
+  var_0 attach("offhand_vm_clacker_tactical", "tag_accessory_right");
+  var_0.clackerattached = 1;
 }
 
-function clacker_detach(var0) {
-  var0 detach("offhand_vm_clacker_tactical", "tag_accessory_right");
+function clacker_detach(var_0) {
+  var_0 detach("offhand_vm_clacker_tactical", "tag_accessory_right");
 }
 
-function bravo2_tape(var0) {
-  var1 = scripts\engine\utility::getStruct("1f_animnode", "targetname");
-  var2 = scripts\engine\sp\utility::spawn_anim_model("side_door_tape");
-  var1 scripts\common\anim::anim_single_solo(var2, "door_arrival");
-  var1 scripts\common\anim::anim_last_frame_solo(var2, "door_arrival");
+function bravo2_tape(var_0) {
+  var_1 = scripts\engine\utility::getStruct("1f_animnode", "targetname");
+  var_2 = scripts\engine\sp\utility::spawn_anim_model("side_door_tape");
+  var_1 scripts\common\anim::anim_single_solo(var_2, "door_arrival");
+  var_1 scripts\common\anim::anim_last_frame_solo(var_2, "door_arrival");
   scripts\engine\utility::flag_wait("compound_side_door_breach");
-  var2 delete();
+  var_2 delete();
 }
 
-function kill_enemy(var0) {
-  var0.allowdeath = 1;
-  var0.disabledeathorient = 1;
-  var0 kill();
+function kill_enemy(var_0) {
+  var_0.allowdeath = 1;
+  var_0.disabledeathorient = 1;
+  var_0 kill();
 }
 
-function fire_silent_weapon(var0) {
-  var1 = [9, 16, 11, 13, 14, 15, 4, 7, 6, 5, 1];
+function fire_silent_weapon(var_0) {
+  var_1 = [9, 16, 11, 13, 14, 15, 4, 7, 6, 5, 1];
 
   if(!isDefined(level.doorfirecount)) {
     level.doorfirecount = 0;
   }
 
-  var2 = undefined;
+  var_2 = undefined;
 
-  if(var1[level.doorfirecount] >= 10) {
-    var2 = "0";
+  if(var_1[level.doorfirecount] >= 10) {
+    var_2 = "0";
   } else {
-    var2 = "00";
+    var_2 = "00";
   }
 
-  var3 = level.maindoor[0] gettagorigin("tag_geo_frag_a_" + var2 + var1[level.doorfirecount]);
-  var4 = level.maindoor[0] gettagangles("tag_geo_frag_a_" + var2 + var1[level.doorfirecount]);
-  var5 = var0 gettagorigin("tag_flash");
-  var6 = var3 + vectorNormalize(var3 - var5) * 300;
-  playFX(scripts\engine\utility::getfx("akilo_muzzle_flash"), var5);
-  bullettracer(var5, var6, "iw8_sn_alpha50", 1);
-  var7 = scripts\engine\trace::ray_trace(var5, var6, level.maindoor[0], undefined, 1, 1);
+  var_3 = level.maindoor[0] gettagorigin("tag_geo_frag_a_" + var_2 + var_1[level.doorfirecount]);
+  var_4 = level.maindoor[0] gettagangles("tag_geo_frag_a_" + var_2 + var_1[level.doorfirecount]);
+  var_5 = var_0 gettagorigin("tag_flash");
+  var_6 = var_3 + vectorNormalize(var_3 - var_5) * 300;
+  playFX(scripts\engine\utility::getfx("akilo_muzzle_flash"), var_5);
+  bullettracer(var_5, var_6, "iw8_sn_alpha50", 1);
+  var_7 = scripts\engine\trace::ray_trace(var_5, var_6, level.maindoor[0], undefined, 1, 1);
 
-  if(isDefined(var7) && isDefined(var7["entity"]) && var7["entity"] == level.player) {
-    var8 = getEnt("main_door_trigger", "targetname");
+  if(isDefined(var_7) && isDefined(var_7["entity"]) && var_7["entity"] == level.player) {
+    var_8 = getEnt("main_door_trigger", "targetname");
 
-    if(level.player istouching(var8)) {
-      level.player scripts\sp\utility::do_damage(75, var5, var0, undefined, "MOD_RIFLE_BULLET", "iw8_ar_akilo47");
+    if(level.player istouching(var_8)) {
+      level.player scripts\sp\utility::do_damage(75, var_5, var_0, undefined, "MOD_RIFLE_BULLET", "iw8_ar_akilo47");
     } else {
-      level.player scripts\sp\utility::do_damage(40, var5, var0, undefined, "MOD_RIFLE_BULLET", "iw8_ar_akilo47");
+      level.player scripts\sp\utility::do_damage(40, var_5, var_0, undefined, "MOD_RIFLE_BULLET", "iw8_ar_akilo47");
     }
   }
 
-  level.maindoor[0] setscriptablepartstate("" + var1[level.doorfirecount], "hide");
-  level.maindoorcleanup[level.maindoorcleanup.size] = "" + var1[level.doorfirecount];
+  level.maindoor[0] setscriptablepartstate("" + var_1[level.doorfirecount], "hide");
+  level.maindoorcleanup[level.maindoorcleanup.size] = "" + var_1[level.doorfirecount];
   level.doorfirecount++;
 }
 
-function fire_sfx_1f_door(var0) {
-  var0 playSound("scn_zd30_1f_door_gunfire");
+function fire_sfx_1f_door(var_0) {
+  var_0 playSound("scn_zd30_1f_door_gunfire");
   level.maindoor[0] playSound("scn_zd30_1f_door_gunfire_door");
 }
 
-function disable_light_fx(var0) {
+function disable_light_fx(var_0) {
   level notify("disable_light_fx");
 
-  foreach(var2 in level.maindoorcleanup) {
-    level.maindoor[0] setscriptablepartstate(var2, "vfx_off");
+  foreach(var_2 in level.maindoorcleanup) {
+    level.maindoor[0] setscriptablepartstate(var_2, "vfx_off");
   }
 }
 
-function shoot_gun(var0) {
-  var0 shoot();
+function shoot_gun(var_0) {
+  var_0 shoot();
 }
 
-function change_civ01_deathanim(var0) {
-  var0.deathanim = var0 scripts\engine\utility::getanim("1f_civ_death02");
+function change_civ01_deathanim(var_0) {
+  var_0.deathanim = var_0 scripts\engine\utility::getanim("1f_civ_death02");
 }
 
-function change_civ02_deathanim(var0) {
-  var0.noragdoll = 1;
-  var0.skipdeathanim = undefined;
-  var0.deathanim = var0 scripts\engine\utility::getanim("1f_civ_death02");
+function change_civ02_deathanim(var_0) {
+  var_0.noragdoll = 1;
+  var_0.skipdeathanim = undefined;
+  var_0.deathanim = var_0 scripts\engine\utility::getanim("1f_civ_death02");
 }
 
-function change_civ04_deathanima(var0) {
-  var0.mydeathanime = "1f_civ_sceneA_death";
+function change_civ04_deathanima(var_0) {
+  var_0.mydeathanime = "1f_civ_sceneA_death";
 }
 
-function change_civ04_deathanimb(var0) {
-  var0.mydeathanime = "1f_civ_sceneB_death";
+function change_civ04_deathanimb(var_0) {
+  var_0.mydeathanime = "1f_civ_sceneB_death";
 }
 
-function temp_spawn_gun(var0) {
-  var0 scripts\common\ai::gun_remove();
-  var1 = var0 gettagorigin("tag_weapon_right");
-  var2 = var0 gettagangles("tag_weapon_right");
-  level.gunbed = spawn("weapon_" + createheadicon(var0.weapon), var1);
-  level.gunbed.angles = var2;
+function temp_spawn_gun(var_0) {
+  var_0 scripts\common\ai::gun_remove();
+  var_1 = var_0 gettagorigin("tag_weapon_right");
+  var_2 = var_0 gettagangles("tag_weapon_right");
+  level.gunbed = spawn("weapon_" + createheadicon(var_0.weapon), var_1);
+  level.gunbed.angles = var_2;
 }
 
-function temp_swap_gun(var0) {
-  var0 scripts\common\ai::gun_recall();
+function temp_swap_gun(var_0) {
+  var_0 scripts\common\ai::gun_recall();
 
   if(isDefined(level.gunbed)) {
     level.gunbed delete();
@@ -986,23 +986,23 @@ function temp_swap_gun(var0) {
   }
 }
 
-function look_at_player_start(var0) {
-  var0 thread scripts\sp\maps\tunnels\zd30tunnels_infil::lookat_random_lite("tunnels_transition");
+function look_at_player_start(var_0) {
+  var_0 thread scripts\sp\maps\tunnels\zd30tunnels_infil::lookat_random_lite("tunnels_transition");
   scripts\engine\utility::flag_wait("player_at_top_2f_stairs");
-  var0.stop_lookat_random = 1;
+  var_0.stop_lookat_random = 1;
 }
 
-function temp_trim(var0) {
-  var0 scripts\engine\sp\utility::anim_stopanimScripted();
+function temp_trim(var_0) {
+  var_0 scripts\engine\sp\utility::anim_stopanimScripted();
 }
 
-function moveto_2f_vo(var0) {
+function moveto_2f_vo(var_0) {
   wait 8;
   level.bravo2 scripts\engine\sp\utility::smart_dialogue("dx_vom_b65_2nd_floor_stairs_20");
 }
 
-function turn_off_power_vo(var0) {
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_b63_1st_floor_power_40");
+function turn_off_power_vo(var_0) {
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_b63_1st_floor_power_40");
   wait 1;
 
   if(!scripts\engine\utility::flag("power_is_off")) {
@@ -1013,28 +1013,28 @@ function turn_off_power_vo(var0) {
 }
 
 function stairtrain_twitch_get() {
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, %zd30c_stair_train_twitch_01);
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, %zd30c_stair_train_twitch_01);
 }
 
-function open_2f_data_door(var0) {
-  var0 scripts\sp\maps\tunnels\zd30tunnels_infil::interactive_double_door_force_open("2f_data_door");
+function open_2f_data_door(var_0) {
+  var_0 scripts\sp\maps\tunnels\zd30tunnels_infil::interactive_double_door_force_open("2f_data_door");
   scripts\engine\utility::flag_set("price_kick_in_door");
 }
 
-function blood_smear(var0) {
-  var1 = getEnt("3f_blood_smear", "targetname");
-  var1 show();
+function blood_smear(var_0) {
+  var_1 = getEnt("3f_blood_smear", "targetname");
+  var_1 show();
 }
 
-function blood_pool(var0) {
+function blood_pool(var_0) {
   scripts\engine\utility::exploder("closet_blood");
 }
 
-function fire_at_player(var0) {
-  if(var0 cansee(level.player)) {
-    if(!isDefined(var0.enemyflashed)) {
-      var0 shoot(0.9, level.player);
+function fire_at_player(var_0) {
+  if(var_0 cansee(level.player)) {
+    if(!isDefined(var_0.enemyflashed)) {
+      var_0 shoot(0.9, level.player);
       return;
     }
 
@@ -1042,89 +1042,89 @@ function fire_at_player(var0) {
   }
 }
 
-function fire_at_player_easy(var0) {
-  var0 shoot(0.6, level.player);
+function fire_at_player_easy(var_0) {
+  var_0 shoot(0.6, level.player);
 }
 
-function start_alt_death(var0) {
-  var0.altdeath = 1;
+function start_alt_death(var_0) {
+  var_0.altdeath = 1;
 }
 
-function stop_alt_death(var0) {
-  var0.altdeath = 0;
+function stop_alt_death(var_0) {
+  var_0.altdeath = 0;
 }
 
-function bravo1_3f_return_fire(var0) {
-  var1 = scripts\engine\utility::getStruct("3f_shoot", "targetname");
-  var2 = scripts\engine\utility::getStruct(var1.target, "targetname");
-  var3 = [];
+function bravo1_3f_return_fire(var_0) {
+  var_1 = scripts\engine\utility::getStruct("3f_shoot", "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
+  var_3 = [];
   GscBinSkip0(0x2e, 0, (0, 0, 0));
 }
 
-function drop_glowstick(var0) {
-  var1 = spawn("script_model", var0 gettagorigin("tag_accessory_left"));
-  var1.origin = var0 gettagorigin("tag_accessory_left");
-  var1.angles = var0 gettagangles("tag_accessory_left");
-  var1 setModel("weapon_zd30_glowstick_wm_lit");
-  var1 linkTo(var0, "tag_accessory_left", (0, 0, 0), (0, 0, 0));
-  var1 setModel("tag_origin");
-  playFXOnTag(level._effect["vfx_zd30_glow_stick_drop"], var1, "tag_origin");
+function drop_glowstick(var_0) {
+  var_1 = spawn("script_model", var_0 gettagorigin("tag_accessory_left"));
+  var_1.origin = var_0 gettagorigin("tag_accessory_left");
+  var_1.angles = var_0 gettagangles("tag_accessory_left");
+  var_1 setModel("weapon_zd30_glowstick_wm_lit");
+  var_1 linkTo(var_0, "tag_accessory_left", (0, 0, 0), (0, 0, 0));
+  var_1 setModel("tag_origin");
+  playFXOnTag(level._effect["vfx_zd30_glow_stick_drop"], var_1, "tag_origin");
   wait 4;
-  var1 unlink();
+  var_1 unlink();
   level waittill("tunnels_transition");
-  var1 delete();
+  var_1 delete();
 }
 
-function start_tunnels_fireball(var0) {
-  var1 = scripts\engine\utility::getStructArray("tunnel_fireball_fx", "targetname");
+function start_tunnels_fireball(var_0) {
+  var_1 = scripts\engine\utility::getStructArray("tunnel_fireball_fx", "targetname");
 
-  foreach(var3 in var1) {
-    playFX(level._effect["vfx_suicide_bomber_tunnel"], var3.origin, anglesToForward(var3.angles));
+  foreach(var_3 in var_1) {
+    playFX(level._effect["vfx_suicide_bomber_tunnel"], var_3.origin, anglesToForward(var_3.angles));
   }
 
-  var0 scripts\engine\utility::delaythread(0.4, &screen_shake_stuff);
+  var_0 scripts\engine\utility::delaythread(0.4, &screen_shake_stuff);
   scripts\engine\utility::delaythread(2, &scripts\sp\hud_util::fade_out, 0.05, "black");
-  temp_sound_fx(var0, var1);
+  temp_sound_fx(var_0, var_1);
 }
 
 function screen_shake_stuff() {
-  var0 = self gettagorigin("j_head");
-  earthquake(0.3, 0.5, var0, 300);
-  screenshake(var0, 1.5, 0, 0, 0.5);
-  playrumbleonposition("grenade_rumble", var0);
+  var_0 = self gettagorigin("j_head");
+  earthquake(0.3, 0.5, var_0, 300);
+  screenshake(var_0, 1.5, 0, 0, 0.5);
+  playrumbleonposition("grenade_rumble", var_0);
 }
 
-function temp_sound_fx(var0) {
-  thread scripts\engine\utility::play_sound_in_space("scn_zd30_gas_expl_trans", var0[0].origin);
+function temp_sound_fx(var_0) {
+  thread scripts\engine\utility::play_sound_in_space("scn_zd30_gas_expl_trans", var_0[0].origin);
   wait 0.6;
-  thread scripts\engine\utility::play_sound_in_space("scn_zd30_gas_expl_fireball_front", var0[0].origin);
-  thread scripts\engine\utility::play_sound_in_space("scn_zd30_gas_expl_fireball_rear", var0[0].origin);
+  thread scripts\engine\utility::play_sound_in_space("scn_zd30_gas_expl_fireball_front", var_0[0].origin);
+  thread scripts\engine\utility::play_sound_in_space("scn_zd30_gas_expl_fireball_rear", var_0[0].origin);
   wait 1;
   level.player playSound("scn_zd30_collapse_lr_02");
 }
 
-function infil_remove_fov_scale_factor_override(var0) {
+function infil_remove_fov_scale_factor_override(var_0) {
   level.player lerpfovscalefactor(1, 0.85);
 }
 
-function entrance_add_fov_scale_factor_override(var0) {
+function entrance_add_fov_scale_factor_override(var_0) {
   level.player lerpfovscalefactor(0, 0.8);
 }
 
-function basement_intro_add_fov_scale_factor_override(var0) {
+function basement_intro_add_fov_scale_factor_override(var_0) {
   level.player lerpfovscalefactor(1, 1.5);
 }
 
-function shaft_ladder_add_fov_scale_factor_override(var0) {
+function shaft_ladder_add_fov_scale_factor_override(var_0) {
   level.player lerpfovscalefactor(0, 0.8);
 }
 
-function shaft_ladder_remove_fov_scale_factor_override(var0) {
+function shaft_ladder_remove_fov_scale_factor_override(var_0) {
   level.player lerpfovscalefactor(1, 1);
   level.player_rig scripts\engine\utility::delaycall(1, &hide);
 }
 
-function storage_split_remove_fov_scale_factor_override(var0) {
+function storage_split_remove_fov_scale_factor_override(var_0) {
   level.player lerpfovscalefactor(1, 0.6);
 }
 
@@ -1355,15 +1355,15 @@ function script_models() {
   level.scr_anim["shaft_propane_toss"]["propane_toss"] = % zd30t_shaft_propane_throw_tank;
 }
 
-function model_swap_gate(var0) {
-  var0 setModel("me_doors_zd30_gate_01_dmg_lod0");
+function model_swap_gate(var_0) {
+  var_0 setModel("me_doors_zd30_gate_01_dmg_lod0");
 
-  if(isDefined(var0.animname) && var0.animname == "gate_l") {
-    var0 playSound("scn_zd30_gate_breach_left");
+  if(isDefined(var_0.animname) && var_0.animname == "gate_l") {
+    var_0 playSound("scn_zd30_gate_breach_left");
     return;
   }
 
-  var0 playSound("scn_zd30_gate_breach_right");
+  var_0 playSound("scn_zd30_gate_breach_right");
 }
 
 function scriptables() {

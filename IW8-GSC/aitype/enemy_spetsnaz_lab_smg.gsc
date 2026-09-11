@@ -35,7 +35,7 @@ function spawner() {
   self setspawnerteam("axis");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\character_spetsnaz_cqc::precache();
   scripts\aitypes\bt_util::init();
   scripts\aitypes\assets::soldier();

@@ -13,20 +13,20 @@ function laststandheal_onset() {
 
   for(;;) {
     if(self.laststandheal_hassuperweapon && (!istrue(self.inlaststand) || istrue(self.stuckinlaststand) || istrue(scripts\mp\utility\player::registerpuzzleinteractions()))) {
-      var0 = scripts\mp\supers::getcurrentsuper().staticdata.weapon;
+      var_0 = scripts\mp\supers::getcurrentsuper().staticdata.weapon;
       self clearoffhandspecial();
 
-      if(isDefined(var0)) {
-        scripts\cp_mp\utility\inventory_utility::_takeweapon(var0);
+      if(isDefined(var_0)) {
+        scripts\cp_mp\utility\inventory_utility::_takeweapon(var_0);
       }
 
       self.laststandheal_hassuperweapon = 0;
     } else if(!self.laststandheal_hassuperweapon && istrue(self.inlaststand) && !istrue(self.stuckinlaststand) && !istrue(scripts\mp\utility\player::registerpuzzleinteractions())) {
-      var0 = scripts\mp\supers::getcurrentsuper().staticdata.weapon;
-      scripts\cp_mp\utility\inventory_utility::_giveweapon(var0);
-      var1 = scripts\engine\utility::ter_op(scripts\mp\supers::issuperready(), 1, 0);
-      self setweaponammoclip(var0, var1);
-      self assignweaponoffhandspecial(var0);
+      var_0 = scripts\mp\supers::getcurrentsuper().staticdata.weapon;
+      scripts\cp_mp\utility\inventory_utility::_giveweapon(var_0);
+      var_1 = scripts\engine\utility::ter_op(scripts\mp\supers::issuperready(), 1, 0);
+      self setweaponammoclip(var_0, var_1);
+      self assignweaponoffhandspecial(var_0);
       self.laststandheal_hassuperweapon = 1;
     }
 
@@ -51,11 +51,11 @@ function laststandheal_watchrespawn() {
 }
 
 function laststandheal_onrespawn() {
-  var0 = scripts\mp\supers::getcurrentsuper().staticdata.weapon;
+  var_0 = scripts\mp\supers::getcurrentsuper().staticdata.weapon;
   self clearoffhandspecial();
 
-  if(isDefined(var0)) {
-    scripts\cp_mp\utility\inventory_utility::_takeweapon(var0);
+  if(isDefined(var_0)) {
+    scripts\cp_mp\utility\inventory_utility::_takeweapon(var_0);
   }
 
   self.laststandheal_hassuperweapon = 0;
@@ -98,9 +98,9 @@ function laststandheal_drainsupermeter() {
 
   for(;;) {
     scripts\mp\supers::reducesuperusepercent(5, 0, 1);
-    var0 = scripts\mp\supers::getcurrentsuper();
+    var_0 = scripts\mp\supers::getcurrentsuper();
 
-    if(var0.usepercent <= 0) {
+    if(var_0.usepercent <= 0) {
       return;
     }
   }

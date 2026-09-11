@@ -30,11 +30,11 @@ function getinteractiveoutlineasset() {
 
 function _spawnpois() {
   level endon("game_ended");
-  var0 = 0.05;
-  var1 = 5;
-  var2 = 5;
-  var3 = 7;
-  var4 = 7;
+  var_0 = 0.05;
+  var_1 = 5;
+  var_2 = 5;
+  var_3 = 7;
+  var_4 = 7;
 
   if(getDvar("scr_br_gametype", "") == "dmz" || getDvar("scr_br_gametype", "") == "rat_race" || getDvar("scr_br_gametype", "") == "risk" || getDvar("scr_br_gametype", "") == "gold_war") {
     level.binoculars_checkexpirationtimer = getdvarint("scr_bmo_event_distribution_pad", 35);
@@ -43,186 +43,186 @@ function _spawnpois() {
     thread ref_1325b();
   }
 
-  level.ref_11c41 = getdvarint("br_min_plunder_extractions", var4);
-  level.ref_11b6d = getdvarint("br_max_plunder_extractions", var3);
+  level.ref_11c41 = getdvarint("br_min_plunder_extractions", var_4);
+  level.ref_11b6d = getdvarint("br_max_plunder_extractions", var_3);
 
   if(level.ref_11c41 < level.ref_11b6d) {
     level.ref_11b6d = randomintrange(level.ref_11c41, level.ref_11b6d + 1);
   }
 
-  var5 = getdvarint("br_max_armory_kiosk", 65);
-  var6 = scripts\mp\gametypes\br_armory_kiosk::registeraccesscardlocs();
+  var_5 = getdvarint("br_max_armory_kiosk", 65);
+  var_6 = scripts\mp\gametypes\br_armory_kiosk::registeraccesscardlocs();
 
-  if(isDefined(var6) && var6.size > 0) {
-    var6 = play_lz_vo(var6);
-    var6 = ai_semtex_swapp(var6, var5, level.fly_over_path);
+  if(isDefined(var_6) && var_6.size > 0) {
+    var_6 = play_lz_vo(var_6);
+    var_6 = ai_semtex_swapp(var_6, var_5, level.fly_over_path);
 
-    if(isDefined(var6) && var6.size > 0) {
-      scripts\mp\gametypes\br_armory_kiosk::ref_131c0(var6);
+    if(isDefined(var_6) && var_6.size > 0) {
+      scripts\mp\gametypes\br_armory_kiosk::ref_131c0(var_6);
     }
   }
 
-  var7 = getdvarint("br_max_armory_trader", 65);
-  var8 = scripts\mp\gametypes\br_armory_trader::registeraccesscardlocs();
+  var_7 = getdvarint("br_max_armory_trader", 65);
+  var_8 = scripts\mp\gametypes\br_armory_trader::registeraccesscardlocs();
 
-  if(isDefined(var8) && var8.size > 0) {
-    var8 = play_music_to_team(var8);
-    var8 = ai_semtex_swapp(var8, var7, level.fly_over_path);
+  if(isDefined(var_8) && var_8.size > 0) {
+    var_8 = play_music_to_team(var_8);
+    var_8 = ai_semtex_swapp(var_8, var_7, level.fly_over_path);
 
-    if(isDefined(var8) && var8.size > 0) {
-      scripts\mp\gametypes\br_armory_trader::ref_131c0(var8);
+    if(isDefined(var_8) && var_8.size > 0) {
+      scripts\mp\gametypes\br_armory_trader::ref_131c0(var_8);
     }
   }
 
-  var9 = scripts\mp\gametypes\br_plunder::register_vfx();
+  var_9 = scripts\mp\gametypes\br_plunder::register_vfx();
 
-  if(isDefined(var9) && var9.size > 0) {
-    var9 = ai_semtex_swapp(var9, level.ref_11b6d, 1);
+  if(isDefined(var_9) && var_9.size > 0) {
+    var_9 = ai_semtex_swapp(var_9, level.ref_11b6d, 1);
 
-    if(isDefined(var9) && var9.size > 0) {
-      scripts\mp\gametypes\br_plunder::ref_1314b(var9);
+    if(isDefined(var_9) && var_9.size > 0) {
+      scripts\mp\gametypes\br_plunder::ref_1314b(var_9);
     }
   }
 
-  var10 = scripts\engine\utility::getStructArray("br_respawn_station", "targetname");
+  var_10 = scripts\engine\utility::getStructArray("br_respawn_station", "targetname");
 
-  for(var11 = 0; var11 < var10.size; var11++) {
-    wait var0;
-    scripts\mp\gametypes\br_respawn::spawnambulance(var10[var11]);
+  for(var_11 = 0; var_11 < var_10.size; var_11++) {
+    wait var_0;
+    scripts\mp\gametypes\br_respawn::spawnambulance(var_10[var_11]);
   }
 
   scripts\mp\flags::gameflagset("POIs_spawned");
 }
 
-function ai_semtex_swapp(var0, var1, var2) {
-  if(var0.size == 0 || var1 == 0) {
+function ai_semtex_swapp(var_0, var_1, var_2) {
+  if(var_0.size == 0 || var_1 == 0) {
     return undefined;
   }
 
-  if(var1 > var0.size) {
-    var1 = var0.size;
+  if(var_1 > var_0.size) {
+    var_1 = var_0.size;
   }
 
   if(getDvar("scr_br_gametype", "") == "dmz" || getDvar("scr_br_gametype", "") == "risk" || getDvar("scr_br_gametype", "") == "gold_war") {
-    return scripts\mp\gametypes\br_gametype_dmz::ai_shooting_timer(var0, var1, var2);
+    return scripts\mp\gametypes\br_gametype_dmz::ai_shooting_timer(var_0, var_1, var_2);
   } else if(getDvar("scr_br_gametype", "") == "rat_race") {
-    return scripts\mp\gametypes\br_gametype_rat_race::ai_shooting_timer(var0, var1, var2);
+    return scripts\mp\gametypes\br_gametype_rat_race::ai_shooting_timer(var_0, var_1, var_2);
   } else if(!isDefined(level.br_circle) || !isDefined(level.br_level)) {
-    return ai_shooting_watch(var0, var1);
+    return ai_shooting_watch(var_0, var_1);
   }
 
-  var3 = level.br_level.default_class_chosen.size - 1;
-  var4 = int(max(1, var3 * getdvarfloat("br_poi_noise", 1)));
+  var_3 = level.br_level.default_class_chosen.size - 1;
+  var_4 = int(max(1, var_3 * getdvarfloat("br_poi_noise", 1)));
 
-  for(var5 = 0; var5 < var0.size; var5++) {
-    var6 = var0[var5];
-    var7 = randomintrange(-1 * var4, var4 + 1);
-    var6.score = scripts\mp\gametypes\br_circle::relic_amped_reset_deathshield_on_revived(var6.origin) + var7;
+  for(var_5 = 0; var_5 < var_0.size; var_5++) {
+    var_6 = var_0[var_5];
+    var_7 = randomintrange(-1 * var_4, var_4 + 1);
+    var_6.score = scripts\mp\gametypes\br_circle::relic_amped_reset_deathshield_on_revived(var_6.origin) + var_7;
   }
 
-  var8 = scripts\engine\utility::array_sort_with_func(var0, &hidequestcircletoall);
-  var9 = [];
-  var5 = 0;
+  var_8 = scripts\engine\utility::array_sort_with_func(var_0, &hidequestcircletoall);
+  var_9 = [];
+  var_5 = 0;
 
-  if(var5 < var1) {
-    GscBinSkip0(0x2e, var5, var8[var5]);
+  if(var_5 < var_1) {
+    GscBinSkip0(0x2e, var_5, var_8[var_5]);
   }
 
-  return scripts\engine\utility::array_slice(var8, 0, var1);
+  return scripts\engine\utility::array_slice(var_8, 0, var_1);
 }
 
-function hidequestcircletoall(var0, var1) {
-  return var0.score > var1.score;
+function hidequestcircletoall(var_0, var_1) {
+  return var_0.score > var_1.score;
 }
 
-function ai_shooting_watch(var0, var1) {
-  if(var0.size == 0 || var1 == 0) {
+function ai_shooting_watch(var_0, var_1) {
+  if(var_0.size == 0 || var_1 == 0) {
     return;
   }
 
-  var2 = [];
+  var_2 = [];
 
-  if(var0.size > 0) {
-    var0 = scripts\engine\utility::array_randomize(var0);
-    var3 = int(min(var1, var0.size));
+  if(var_0.size > 0) {
+    var_0 = scripts\engine\utility::array_randomize(var_0);
+    var_3 = int(min(var_1, var_0.size));
 
-    for(var4 = 0; var4 < var3; var4++) {
-      var2 = var0[var4];
+    for(var_4 = 0; var_4 < var_3; var_4++) {
+      var_2 = var_0[var_4];
     }
   }
 
-  return var2;
+  return var_2;
 }
 
-function showmiscmessagetoteam(var0, var1, var2, var3) {
-  if(isDefined(var0)) {
-    var4 = "mp/hints.csv";
-    var5 = 1;
-    var6 = 0;
-    var7 = -1;
-    var8 = tablelookuprownum(var4, var5, var1);
+function showmiscmessagetoteam(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_0)) {
+    var_4 = "mp/hints.csv";
+    var_5 = 1;
+    var_6 = 0;
+    var_7 = -1;
+    var_8 = tablelookuprownum(var_4, var_5, var_1);
 
-    if(isDefined(var8) && var8 >= 0) {
-      var7 = int(tablelookupbyrow(var4, var8, var6));
+    if(isDefined(var_8) && var_8 >= 0) {
+      var_7 = int(tablelookupbyrow(var_4, var_8, var_6));
     }
 
-    if(var7 < 0) {
+    if(var_7 < 0) {
       return;
     }
 
-    var9 = undefined;
+    var_9 = undefined;
 
-    if(isDefined(var3)) {
-      var9 = gettime() + var3;
+    if(isDefined(var_3)) {
+      var_9 = gettime() + var_3;
     }
 
-    var12 = scripts\mp\utility\teams::getteamdata(var0, "players");
+    var_12 = scripts\mp\utility\teams::getteamdata(var_0, "players");
 
-    foreach(var14 in var12) {
-      var14 scripts\mp\utility\lower_message::setlowermessageomnvar(var7, var9, var2);
+    foreach(var_14 in var_12) {
+      var_14 scripts\mp\utility\lower_message::setlowermessageomnvar(var_7, var_9, var_2);
     }
 
     return;
   }
 }
 
-function initstatemachineforpoitype(var0) {
+function initstatemachineforpoitype(var_0) {
   if(!isDefined(level.poistates)) {
     level.poistates = [];
   }
 
-  level.poistates[var0] = [];
+  level.poistates[var_0] = [];
 }
 
-function registerstatecallbacksforpoitype(var0, var1, var2, var3, var4) {
-  level.poistates[var0][var1] = spawnStruct();
-  level.poistates[var0][var1].onenter = var2;
-  level.poistates[var0][var1].onupdate = var3;
-  level.poistates[var0][var1].onexit = var4;
+function registerstatecallbacksforpoitype(var_0, var_1, var_2, var_3, var_4) {
+  level.poistates[var_0][var_1] = spawnStruct();
+  level.poistates[var_0][var_1].onenter = var_2;
+  level.poistates[var_0][var_1].onupdate = var_3;
+  level.poistates[var_0][var_1].onexit = var_4;
 }
 
-function gotopoistate(var0, var1) {
-  var2 = self;
+function gotopoistate(var_0, var_1) {
+  var_2 = self;
 
-  if(isDefined(var2.currentstate)) {
-    var3 = level.poistates[var0][var2.currentstate];
+  if(isDefined(var_2.currentstate)) {
+    var_3 = level.poistates[var_0][var_2.currentstate];
 
-    if(isDefined(var3) && isDefined(var3.onexit)) {
-      level[[var3.onexit]](var2);
+    if(isDefined(var_3) && isDefined(var_3.onexit)) {
+      level[[var_3.onexit]](var_2);
     }
   }
 
-  var2 notify("poi_state_change");
-  var2.currentstate = var1;
-  var3 = level.poistates[var0][var2.currentstate];
+  var_2 notify("poi_state_change");
+  var_2.currentstate = var_1;
+  var_3 = level.poistates[var_0][var_2.currentstate];
 
-  if(isDefined(var3)) {
-    if(isDefined(var3.onenter)) {
-      level[[var3.onenter]](var2);
+  if(isDefined(var_3)) {
+    if(isDefined(var_3.onenter)) {
+      level[[var_3.onenter]](var_2);
     }
 
-    if(isDefined(var3.onupdate)) {
-      thread _poistateupdate(var2);
+    if(isDefined(var_3.onupdate)) {
+      thread _poistateupdate(var_2);
       return;
     }
 
@@ -230,26 +230,26 @@ function gotopoistate(var0, var1) {
   }
 }
 
-function gotopoistateontimer(var0, var1, var2) {
-  var3 = self;
-  var3 endon("death");
-  var3 endon("poi_state_change");
-  wait var2;
-  thread gotopoistate(var3, var0);
+function gotopoistateontimer(var_0, var_1, var_2) {
+  var_3 = self;
+  var_3 endon("death");
+  var_3 endon("poi_state_change");
+  wait var_2;
+  thread gotopoistate(var_3, var_0);
 }
 
 function getcurrentpoistate() {
-  var0 = self;
-  return var0.currentstate;
+  var_0 = self;
+  return var_0.currentstate;
 }
 
-function _poistateupdate(var0) {
-  var1 = self;
-  var1 endon("death");
-  var2 = var1.currentstate;
+function _poistateupdate(var_0) {
+  var_1 = self;
+  var_1 endon("death");
+  var_2 = var_1.currentstate;
 
-  while(var2 == var1.currentstate) {
-    level[[var0]](var1);
+  while(var_2 == var_1.currentstate) {
+    level[[var_0]](var_1);
     waitframe();
   }
 }
@@ -259,50 +259,50 @@ function ref_1325b() {
     waitframe();
   }
 
-  var0 = level.mapcorners[0].origin[0];
-  var1 = level.mapcorners[1].origin[0];
-  var2 = (level.mapcorners[0].origin[0], level.mapcorners[0].origin[1], level.mapcorners[0].origin[2]);
-  var3 = (level.mapcorners[1].origin[0], level.mapcorners[0].origin[1], level.mapcorners[1].origin[2]);
+  var_0 = level.mapcorners[0].origin[0];
+  var_1 = level.mapcorners[1].origin[0];
+  var_2 = (level.mapcorners[0].origin[0], level.mapcorners[0].origin[1], level.mapcorners[0].origin[2]);
+  var_3 = (level.mapcorners[1].origin[0], level.mapcorners[0].origin[1], level.mapcorners[1].origin[2]);
 
-  if(var1 < var0) {
-    var2 = (level.mapcorners[1].origin[0], level.mapcorners[0].origin[1], level.mapcorners[1].origin[2]);
-    var3 = (level.mapcorners[0].origin[0], level.mapcorners[0].origin[1], level.mapcorners[0].origin[2]);
+  if(var_1 < var_0) {
+    var_2 = (level.mapcorners[1].origin[0], level.mapcorners[0].origin[1], level.mapcorners[1].origin[2]);
+    var_3 = (level.mapcorners[0].origin[0], level.mapcorners[0].origin[1], level.mapcorners[0].origin[2]);
   }
 
-  var4 = level.mapcorners[0].origin[1];
-  var5 = level.mapcorners[1].origin[1];
-  var6 = (level.mapcorners[0].origin[0], level.mapcorners[1].origin[1], level.mapcorners[0].origin[2]);
-  var7 = (level.mapcorners[1].origin[0], level.mapcorners[1].origin[1], level.mapcorners[1].origin[2]);
+  var_4 = level.mapcorners[0].origin[1];
+  var_5 = level.mapcorners[1].origin[1];
+  var_6 = (level.mapcorners[0].origin[0], level.mapcorners[1].origin[1], level.mapcorners[0].origin[2]);
+  var_7 = (level.mapcorners[1].origin[0], level.mapcorners[1].origin[1], level.mapcorners[1].origin[2]);
 
-  if(var5 < var4) {
-    var6 = (level.mapcorners[1].origin[0], level.mapcorners[1].origin[1], level.mapcorners[1].origin[2]);
-    var7 = (level.mapcorners[0].origin[0], level.mapcorners[1].origin[1], level.mapcorners[0].origin[2]);
+  if(var_5 < var_4) {
+    var_6 = (level.mapcorners[1].origin[0], level.mapcorners[1].origin[1], level.mapcorners[1].origin[2]);
+    var_7 = (level.mapcorners[0].origin[0], level.mapcorners[1].origin[1], level.mapcorners[0].origin[2]);
   }
 
-  var8 = [];
+  var_8 = [];
 
   if(scripts\cp_mp\utility\game_utility::update_ai_volumes()) {
-    level.ignorevehicleexplosivedamage = abs(distance(var7, var2));
-    var9 = level.ignorevehicleexplosivedamage / 10;
-    var2 = (var2[0] + var9, var2[1] - var9, var2[2]);
-    var3 = (var3[0] - var9, var3[1] - var9, var3[2]);
-    var6 = (var6[0] - var9, var6[1] + var9, var6[2]);
-    var7 = (var7[0] + var9, var7[1] + var9, var7[2]);
-    level.ignorevehicleexplosivedamage = abs(distance(var7, var2));
-    var10 = 1;
+    level.ignorevehicleexplosivedamage = abs(distance(var_7, var_2));
+    var_9 = level.ignorevehicleexplosivedamage / 10;
+    var_2 = (var_2[0] + var_9, var_2[1] - var_9, var_2[2]);
+    var_3 = (var_3[0] - var_9, var_3[1] - var_9, var_3[2]);
+    var_6 = (var_6[0] - var_9, var_6[1] + var_9, var_6[2]);
+    var_7 = (var_7[0] + var_9, var_7[1] + var_9, var_7[2]);
+    level.ignorevehicleexplosivedamage = abs(distance(var_7, var_2));
+    var_10 = 1;
 
-    while(var10 < 4) {
-      var11 = var10 * level.ignorevehicleexplosivedamage / 2;
-      var12 = 1;
+    while(var_10 < 4) {
+      var_11 = var_10 * level.ignorevehicleexplosivedamage / 2;
+      var_12 = 1;
 
-      while(var12 < 4) {
-        var13 = var12 * level.ignorevehicleexplosivedamage / 2;
-        var14 = (var7[0] + var11 / 2, var7[1] + var13 / 2, 0);
-        var8 = var14;
-        var12 += 2;
+      while(var_12 < 4) {
+        var_13 = var_12 * level.ignorevehicleexplosivedamage / 2;
+        var_14 = (var_7[0] + var_11 / 2, var_7[1] + var_13 / 2, 0);
+        var_8 = var_14;
+        var_12 += 2;
       }
 
-      var10 += 2;
+      var_10 += 2;
     }
   }
 
@@ -324,148 +324,148 @@ function ref_1325b() {
     level.ref_12950[level.ref_12950.size] = (37683.2, -17203.2, 0);
     level.ref_12950[level.ref_12950.size] = (-21299.2, -17203.2, 0);
   } else {
-    var15 = 0.8;
-    var16 = 0.5;
-    var17 = var15 * var16;
-    level.ref_12950[level.ref_12950.size] = (var0 * var17, var5 * var17, 0);
-    level.ref_12950[level.ref_12950.size] = (var1 * var17, var5 * var17, 0);
-    level.ref_12950[level.ref_12950.size] = (var1 * var17, var4 * var17, 0);
-    level.ref_12950[level.ref_12950.size] = (var0 * var17, var4 * var17, 0);
+    var_15 = 0.8;
+    var_16 = 0.5;
+    var_17 = var_15 * var_16;
+    level.ref_12950[level.ref_12950.size] = (var_0 * var_17, var_5 * var_17, 0);
+    level.ref_12950[level.ref_12950.size] = (var_1 * var_17, var_5 * var_17, 0);
+    level.ref_12950[level.ref_12950.size] = (var_1 * var_17, var_4 * var_17, 0);
+    level.ref_12950[level.ref_12950.size] = (var_0 * var_17, var_4 * var_17, 0);
   }
 
   level.ref_12950 = scripts\engine\utility::array_randomize(level.ref_12950);
 
   if(level.binoculars_checkexpirationtimer > 0 && scripts\cp_mp\utility\game_utility::update_ai_volumes()) {
-    var18 = randomintrange(0, 5);
-    var9 = level.ignorevehicleexplosivedamage / 10;
-    var19 = level.ignorevehicleexplosivedamage / 100 / level.binoculars_checkexpirationtimer;
+    var_18 = randomintrange(0, 5);
+    var_9 = level.ignorevehicleexplosivedamage / 10;
+    var_19 = level.ignorevehicleexplosivedamage / 100 / level.binoculars_checkexpirationtimer;
 
-    switch (var18) {
+    switch (var_18) {
       case 0:
-        var20 = (var2[0] + var9, var2[1] - var9, var2[2]);
-        var21 = (var3[0] - var19, var3[1] - var9, var3[2]);
-        var22 = (var6[0] - var19, var6[1] + var19, var6[2]);
-        var23 = (var7[0] + var9, var7[1] + var19, var7[2]);
+        var_20 = (var_2[0] + var_9, var_2[1] - var_9, var_2[2]);
+        var_21 = (var_3[0] - var_19, var_3[1] - var_9, var_3[2]);
+        var_22 = (var_6[0] - var_19, var_6[1] + var_19, var_6[2]);
+        var_23 = (var_7[0] + var_9, var_7[1] + var_19, var_7[2]);
         break;
       case 1:
-        var20 = (var6[0] + var23, var6[1] - var22, var6[2]);
-        var21 = (var7[0] - var22, var7[1] - var22, var7[2]);
-        var22 = (var9[0] - var23, var9[1] + var22, var9[2]);
-        var23 = (var19[0] + var23, var19[1] + var23, var19[2]);
+        var_20 = (var_6[0] + var_23, var_6[1] - var_22, var_6[2]);
+        var_21 = (var_7[0] - var_22, var_7[1] - var_22, var_7[2]);
+        var_22 = (var_9[0] - var_23, var_9[1] + var_22, var_9[2]);
+        var_23 = (var_19[0] + var_23, var_19[1] + var_23, var_19[2]);
         break;
       case 2:
-        var20 = (var9[0] + var23, var9[1] - var23, var9[2]);
-        var21 = (var19[0] - var22, var19[1] - var23, var19[2]);
-        var22 = (var22[0] - var22, var22[1] + var22, var22[2]);
-        var23 = (var23[0] + var23, var23[1] + var22, var23[2]);
+        var_20 = (var_9[0] + var_23, var_9[1] - var_23, var_9[2]);
+        var_21 = (var_19[0] - var_22, var_19[1] - var_23, var_19[2]);
+        var_22 = (var_22[0] - var_22, var_22[1] + var_22, var_22[2]);
+        var_23 = (var_23[0] + var_23, var_23[1] + var_22, var_23[2]);
         break;
       case 3:
-        var20 = (var22[0] + var22, var22[1] - var23, var22[2]);
-        var21 = (var23[0] - var23, var23[1] - var23, var23[2]);
-        var22 = (var22[0] - var23, var22[1] + var22, var22[2]);
-        var23 = (var23[0] + var22, var23[1] + var22, var23[2]);
+        var_20 = (var_22[0] + var_22, var_22[1] - var_23, var_22[2]);
+        var_21 = (var_23[0] - var_23, var_23[1] - var_23, var_23[2]);
+        var_22 = (var_22[0] - var_23, var_22[1] + var_22, var_22[2]);
+        var_23 = (var_23[0] + var_22, var_23[1] + var_22, var_23[2]);
         break;
       case 4:
-        var20 = (var22[0] + var23, var22[1] - var23, var22[2]);
-        var21 = (var23[0] - var23, var23[1] - var23, var23[2]);
-        var22 = (var22[0] - var23, var22[1] + var23, var22[2]);
-        var23 = (var23[0] + var23, var23[1] + var23, var23[2]);
+        var_20 = (var_22[0] + var_23, var_22[1] - var_23, var_22[2]);
+        var_21 = (var_23[0] - var_23, var_23[1] - var_23, var_23[2]);
+        var_22 = (var_22[0] - var_23, var_22[1] + var_23, var_22[2]);
+        var_23 = (var_23[0] + var_23, var_23[1] + var_23, var_23[2]);
         break;
       default:
-        var20 = (var22[0] + var23, var22[1] - var23, var22[2]);
-        var21 = (var23[0] - var23, var23[1] - var23, var23[2]);
-        var22 = (var22[0] - var23, var22[1] + var23, var22[2]);
-        var23 = (var23[0] + var23, var23[1] + var23, var23[2]);
+        var_20 = (var_22[0] + var_23, var_22[1] - var_23, var_22[2]);
+        var_21 = (var_23[0] - var_23, var_23[1] - var_23, var_23[2]);
+        var_22 = (var_22[0] - var_23, var_22[1] + var_23, var_22[2]);
+        var_23 = (var_23[0] + var_23, var_23[1] + var_23, var_23[2]);
         break;
     }
 
-    var24 = [];
+    var_24 = [];
     level.ref_121bb = [];
-    level.ref_121ba = abs(distance(var23, var20));
+    level.ref_121ba = abs(distance(var_23, var_20));
     level.ref_127de = level.ref_121ba / 2;
-    var10 = 1;
+    var_10 = 1;
 
-    while(var10 < 4) {
-      var11 = var10 * level.ref_121ba / 2;
-      var12 = 1;
+    while(var_10 < 4) {
+      var_11 = var_10 * level.ref_121ba / 2;
+      var_12 = 1;
 
-      while(var12 < 4) {
-        var13 = var12 * level.ref_121ba / 2;
-        var14 = (var23[0] + var11 / 2, var23[1] + var13 / 2, 0);
-        var24 = var14;
-        var12 += 2;
+      while(var_12 < 4) {
+        var_13 = var_12 * level.ref_121ba / 2;
+        var_14 = (var_23[0] + var_11 / 2, var_23[1] + var_13 / 2, 0);
+        var_24 = var_14;
+        var_12 += 2;
       }
 
-      var10 += 2;
+      var_10 += 2;
     }
 
     if(level.ref_12946 == 2) {
-      level.ref_121bb = scripts\engine\utility::array_randomize(var24);
+      level.ref_121bb = scripts\engine\utility::array_randomize(var_24);
       return;
     }
 
-    switch (var21) {
+    switch (var_21) {
       case 0:
         if(level.ref_12946) {
-          level.ref_121bb[level.ref_121bb.size] = var24[2];
-          level.ref_121bb[level.ref_121bb.size] = var24[3];
-          level.ref_121bb[level.ref_121bb.size] = var24[1];
-          level.ref_121bb[level.ref_121bb.size] = var24[0];
+          level.ref_121bb[level.ref_121bb.size] = var_24[2];
+          level.ref_121bb[level.ref_121bb.size] = var_24[3];
+          level.ref_121bb[level.ref_121bb.size] = var_24[1];
+          level.ref_121bb[level.ref_121bb.size] = var_24[0];
         } else {
-          level.ref_121bb[level.ref_121bb.size] = var24[1];
-          level.ref_121bb[level.ref_121bb.size] = var24[3];
-          level.ref_121bb[level.ref_121bb.size] = var24[2];
-          level.ref_121bb[level.ref_121bb.size] = var24[0];
+          level.ref_121bb[level.ref_121bb.size] = var_24[1];
+          level.ref_121bb[level.ref_121bb.size] = var_24[3];
+          level.ref_121bb[level.ref_121bb.size] = var_24[2];
+          level.ref_121bb[level.ref_121bb.size] = var_24[0];
         }
 
         break;
       case 1:
         if(level.ref_12946) {
-          level.ref_121bb[level.ref_121bb.size] = var24[0];
-          level.ref_121bb[level.ref_121bb.size] = var24[2];
-          level.ref_121bb[level.ref_121bb.size] = var24[3];
-          level.ref_121bb[level.ref_121bb.size] = var24[1];
+          level.ref_121bb[level.ref_121bb.size] = var_24[0];
+          level.ref_121bb[level.ref_121bb.size] = var_24[2];
+          level.ref_121bb[level.ref_121bb.size] = var_24[3];
+          level.ref_121bb[level.ref_121bb.size] = var_24[1];
         } else {
-          level.ref_121bb[level.ref_121bb.size] = var24[3];
-          level.ref_121bb[level.ref_121bb.size] = var24[2];
-          level.ref_121bb[level.ref_121bb.size] = var24[0];
-          level.ref_121bb[level.ref_121bb.size] = var24[1];
+          level.ref_121bb[level.ref_121bb.size] = var_24[3];
+          level.ref_121bb[level.ref_121bb.size] = var_24[2];
+          level.ref_121bb[level.ref_121bb.size] = var_24[0];
+          level.ref_121bb[level.ref_121bb.size] = var_24[1];
         }
 
         break;
       case 2:
         if(level.ref_12946) {
-          level.ref_121bb[level.ref_121bb.size] = var24[1];
-          level.ref_121bb[level.ref_121bb.size] = var24[0];
-          level.ref_121bb[level.ref_121bb.size] = var24[2];
-          level.ref_121bb[level.ref_121bb.size] = var24[3];
+          level.ref_121bb[level.ref_121bb.size] = var_24[1];
+          level.ref_121bb[level.ref_121bb.size] = var_24[0];
+          level.ref_121bb[level.ref_121bb.size] = var_24[2];
+          level.ref_121bb[level.ref_121bb.size] = var_24[3];
         } else {
-          level.ref_121bb[level.ref_121bb.size] = var24[2];
-          level.ref_121bb[level.ref_121bb.size] = var24[0];
-          level.ref_121bb[level.ref_121bb.size] = var24[1];
-          level.ref_121bb[level.ref_121bb.size] = var24[3];
+          level.ref_121bb[level.ref_121bb.size] = var_24[2];
+          level.ref_121bb[level.ref_121bb.size] = var_24[0];
+          level.ref_121bb[level.ref_121bb.size] = var_24[1];
+          level.ref_121bb[level.ref_121bb.size] = var_24[3];
         }
 
         break;
       case 3:
         if(level.ref_12946) {
-          level.ref_121bb[level.ref_121bb.size] = var24[3];
-          level.ref_121bb[level.ref_121bb.size] = var24[1];
-          level.ref_121bb[level.ref_121bb.size] = var24[0];
-          level.ref_121bb[level.ref_121bb.size] = var24[2];
+          level.ref_121bb[level.ref_121bb.size] = var_24[3];
+          level.ref_121bb[level.ref_121bb.size] = var_24[1];
+          level.ref_121bb[level.ref_121bb.size] = var_24[0];
+          level.ref_121bb[level.ref_121bb.size] = var_24[2];
         } else {
-          level.ref_121bb[level.ref_121bb.size] = var24[0];
-          level.ref_121bb[level.ref_121bb.size] = var24[1];
-          level.ref_121bb[level.ref_121bb.size] = var24[3];
-          level.ref_121bb[level.ref_121bb.size] = var24[2];
+          level.ref_121bb[level.ref_121bb.size] = var_24[0];
+          level.ref_121bb[level.ref_121bb.size] = var_24[1];
+          level.ref_121bb[level.ref_121bb.size] = var_24[3];
+          level.ref_121bb[level.ref_121bb.size] = var_24[2];
         }
 
         break;
       case 4:
-        level.ref_121bb = scripts\engine\utility::array_randomize(var24);
+        level.ref_121bb = scripts\engine\utility::array_randomize(var_24);
         break;
       default:
-        level.ref_121bb = scripts\engine\utility::array_randomize(var24);
+        level.ref_121bb = scripts\engine\utility::array_randomize(var_24);
         break;
     }
 
@@ -473,116 +473,116 @@ function ref_1325b() {
   }
 }
 
-function play_lz_vo(var0) {
+function play_lz_vo(var_0) {
   if(getdvarint("scr_br_kiosk_distribute", 1) == 0 || !scripts\cp_mp\utility\game_utility::unsetchainkillstreaks()) {
-    return var0;
+    return var_0;
   }
 
-  var1 = getdvarfloat("scr_br_kiosk_distribute_min_per", 1);
-  var2 = getdvarfloat("scr_br_kiosk_distribute_min_dist", 7000);
-  var3 = var2 * var2;
-  var4 = [];
-  var5 = [];
+  var_1 = getdvarfloat("scr_br_kiosk_distribute_min_per", 1);
+  var_2 = getdvarfloat("scr_br_kiosk_distribute_min_dist", 7000);
+  var_3 = var_2 * var_2;
+  var_4 = [];
+  var_5 = [];
   GscBinSkip0(0x2e, 0, battle_tracks_onexitvehicle((40925, -7519, 0), 49000000));
 }
 
-function play_music_to_team(var0) {
+function play_music_to_team(var_0) {
   if(getdvarint("scr_br_trader_distribute", 1) == 0 || !scripts\cp_mp\utility\game_utility::turretdisabled()) {
-    return var0;
+    return var_0;
   }
 
-  var1 = getdvarfloat("scr_br_trader_distribute_min_per", 1);
-  var2 = getdvarfloat("scr_br_trader_distribute_min_dist", 7000);
-  var3 = var2 * var2;
-  var4 = [];
+  var_1 = getdvarfloat("scr_br_trader_distribute_min_per", 1);
+  var_2 = getdvarfloat("scr_br_trader_distribute_min_dist", 7000);
+  var_3 = var_2 * var_2;
+  var_4 = [];
 
-  foreach(var6 in var0) {
-    var7 = 0;
+  foreach(var_6 in var_0) {
+    var_7 = 0;
 
-    foreach(var9 in level.calloutglobals.calloutzones) {
-      if(ispointinvolume(var6.origin, var9)) {
-        if(!isDefined(var9.ref_13c6a)) {
-          var9.ref_13c6a = [];
+    foreach(var_9 in level.calloutglobals.calloutzones) {
+      if(ispointinvolume(var_6.origin, var_9)) {
+        if(!isDefined(var_9.ref_13c6a)) {
+          var_9.ref_13c6a = [];
         }
 
-        var7 = 1;
-        var9.ref_13c6a[var9.ref_13c6a.size] = var6;
+        var_7 = 1;
+        var_9.ref_13c6a[var_9.ref_13c6a.size] = var_6;
         break;
       }
     }
 
-    if(!var7) {
-      var4 = var6;
+    if(!var_7) {
+      var_4 = var_6;
     }
   }
 
-  foreach(var9 in level.calloutglobals.calloutzones) {
-    if(!isDefined(var9.ref_13c6a) || var9.ref_13c6a.size == 0) {
-      var9.ref_13c6a = undefined;
+  foreach(var_9 in level.calloutglobals.calloutzones) {
+    if(!isDefined(var_9.ref_13c6a) || var_9.ref_13c6a.size == 0) {
+      var_9.ref_13c6a = undefined;
       continue;
     }
 
-    var13 = scripts\engine\utility::array_randomize(var9.ref_13c6a);
-    var4 = var13[0];
-    var14 = [];
-    var14 = var13[0];
-    var15 = int(ceil(var13.size / var1));
-    var16 = 1;
+    var_13 = scripts\engine\utility::array_randomize(var_9.ref_13c6a);
+    var_4 = var_13[0];
+    var_14 = [];
+    var_14 = var_13[0];
+    var_15 = int(ceil(var_13.size / var_1));
+    var_16 = 1;
 
-    for(var17 = 1; var17 < var13.size && var16 < var15; var17++) {
-      var18 = var13[var17];
-      var19 = 1;
+    for(var_17 = 1; var_17 < var_13.size && var_16 < var_15; var_17++) {
+      var_18 = var_13[var_17];
+      var_19 = 1;
 
-      foreach(var21 in var14) {
-        var22 = distance2dsquared(var18.origin, var21.origin);
+      foreach(var_21 in var_14) {
+        var_22 = distance2dsquared(var_18.origin, var_21.origin);
 
-        if(var22 < var3) {
-          var19 = 0;
+        if(var_22 < var_3) {
+          var_19 = 0;
           break;
         }
       }
 
-      if(var19) {
-        var4 = var18;
-        var14 = var18;
-        var16++;
+      if(var_19) {
+        var_4 = var_18;
+        var_14 = var_18;
+        var_16++;
       }
     }
 
-    var9.ref_13c6a = undefined;
+    var_9.ref_13c6a = undefined;
   }
 
-  return var4;
+  return var_4;
 }
 
-function battle_tracks_onexitvehicle(var0, var1) {
-  var2 = spawnStruct();
-  var2.origin = var0;
-  var2.ref_129e5 = var1;
-  var2.wait_for_computer_power = [];
-  return var2;
+function battle_tracks_onexitvehicle(var_0, var_1) {
+  var_2 = spawnStruct();
+  var_2.origin = var_0;
+  var_2.ref_129e5 = var_1;
+  var_2.wait_for_computer_power = [];
+  return var_2;
 }
 
-function player_give_intel_1_ks(var0) {
-  var1 = incrementpersistentstat(level.players, self.origin, var0);
+function player_give_intel_1_ks(var_0) {
+  var_1 = incrementpersistentstat(level.players, self.origin, var_0);
 
-  foreach(var3 in var1) {
-    if(!isDefined(var3) || !isalive(var3)) {
+  foreach(var_3 in var_1) {
+    if(!isDefined(var_3) || !isalive(var_3)) {
       continue;
     }
 
-    if(var3 getstance() != "prone") {
+    if(var_3 getstance() != "prone") {
       continue;
     }
 
-    var4 = var3 getboundshalfsize();
-    var0 = var4[0];
-    var5 = 2 * var4[2];
+    var_4 = var_3 getboundshalfsize();
+    var_0 = var_4[0];
+    var_5 = 2 * var_4[2];
 
-    if(capsuletracepassed(var3.origin, var0, var5, undefined, 0, 0)) {
+    if(capsuletracepassed(var_3.origin, var_0, var_5, undefined, 0, 0)) {
       continue;
     }
 
-    var3 setstance("crouch", 1);
+    var_3 setstance("crouch", 1);
   }
 }

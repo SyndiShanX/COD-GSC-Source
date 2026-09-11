@@ -16,23 +16,23 @@ function large_transport_cp_initlate() {
   }
 
   level.largetransports = [];
-  var0 = scripts\engine\utility::getStructArray("largetransport_spawn", "targetname");
-  thread large_transport_cp_createfromstructs(var0, 3);
+  var_0 = scripts\engine\utility::getStructArray("largetransport_spawn", "targetname");
+  thread large_transport_cp_createfromstructs(var_0, 3);
 }
 
-function large_transport_cp_createfromstructs(var0, var1) {
-  wait var1;
-  var2 = getdvarint("LLQQOPKTKM", 0) == 0;
+function large_transport_cp_createfromstructs(var_0, var_1) {
+  wait var_1;
+  var_2 = getdvarint("LLQQOPKTKM", 0) == 0;
 
-  if(var2) {
-    foreach(var4 in var0) {
-      var5 = spawnStruct();
-      var5.origin = var4.origin;
-      var5.angles = var4.angles;
-      var6 = scripts\cp_mp\vehicles\large_transport::large_transport_create(var5);
+  if(var_2) {
+    foreach(var_4 in var_0) {
+      var_5 = spawnStruct();
+      var_5.origin = var_4.origin;
+      var_5.angles = var_4.angles;
+      var_6 = scripts\cp_mp\vehicles\large_transport::large_transport_create(var_5);
 
-      if(isDefined(var6)) {
-        level.largetransports = scripts\engine\utility::array_add(level.largetransports, var6);
+      if(isDefined(var_6)) {
+        level.largetransports = scripts\engine\utility::array_add(level.largetransports, var_6);
       }
     }
 
@@ -40,23 +40,23 @@ function large_transport_cp_createfromstructs(var0, var1) {
   }
 }
 
-function large_transport_cp_create(var0) {
-  var0.maxhealth = 2000;
-  var0.health = var0.maxhealth;
+function large_transport_cp_create(var_0) {
+  var_0.maxhealth = 2000;
+  var_0.health = var_0.maxhealth;
 }
 
-function large_transport_cp_spawncallback(var0, var1) {
+function large_transport_cp_spawncallback(var_0, var_1) {
   if(true) {
     return;
   }
 
-  var2 = scripts\cp_mp\vehicles\large_transport::large_transport_create(var0, var1);
+  var_2 = scripts\cp_mp\vehicles\large_transport::large_transport_create(var_0, var_1);
 
-  if(isDefined(var2) && scripts\cp\vehicles\vehicle_spawn_cp::vehicle_spawn_cp_gamemodesupportsrespawn()) {
-    var2.ondeathrespawn = &large_transport_cp_ondeathrespawncallback;
+  if(isDefined(var_2) && scripts\cp\vehicles\vehicle_spawn_cp::vehicle_spawn_cp_gamemodesupportsrespawn()) {
+    var_2.ondeathrespawn = &large_transport_cp_ondeathrespawncallback;
   }
 
-  return var2;
+  return var_2;
 }
 
 function large_transport_cp_ondeathrespawncallback() {
@@ -64,17 +64,17 @@ function large_transport_cp_ondeathrespawncallback() {
 }
 
 function large_transport_cp_waitandspawn() {
-  var0 = spawnStruct();
-  scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(scripts\cp_mp\vehicles\vehicle_tracking::getvehiclespawndata(self), var0);
-  var1 = spawnStruct();
+  var_0 = spawnStruct();
+  scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(scripts\cp_mp\vehicles\vehicle_tracking::getvehiclespawndata(self), var_0);
+  var_1 = spawnStruct();
 
   for(;;) {
     wait 60;
 
     if(scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_canspawnVehicle("large_transport")) {
-      var2 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("large_transport", var0, var1);
+      var_2 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("large_transport", var_0, var_1);
 
-      if(!isDefined(var2)) {
+      if(!isDefined(var_2)) {
         continue;
       }
 

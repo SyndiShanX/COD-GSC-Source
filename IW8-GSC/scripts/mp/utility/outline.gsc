@@ -3,45 +3,45 @@
  * Script: scripts\mp\utility\outline.gsc
 ***********************************************/
 
-function outlineenableforall(var0, var1, var2) {
-  var3 = level.players;
-  var4 = scripts\mp\outline::outlineprioritygroupmap(var2);
-  return scripts\mp\outline::outlineenableinternal(var0, var3, var1, var4, "ALL");
+function outlineenableforall(var_0, var_1, var_2) {
+  var_3 = level.players;
+  var_4 = scripts\mp\outline::outlineprioritygroupmap(var_2);
+  return scripts\mp\outline::outlineenableinternal(var_0, var_3, var_1, var_4, "ALL");
 }
 
-function outlineenableforteam(var0, var1, var2, var3, var4) {
-  var5 = scripts\mp\utility\teams::getteamdata(var1, "players");
+function outlineenableforteam(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = scripts\mp\utility\teams::getteamdata(var_1, "players");
 
-  if(isDefined(var4) && isDefined(var4.team) && var4.team == var1) {
-    var5 = scripts\engine\utility::array_remove(var5, var4);
+  if(isDefined(var_4) && isDefined(var_4.team) && var_4.team == var_1) {
+    var_5 = scripts\engine\utility::array_remove(var_5, var_4);
   }
 
-  var6 = scripts\mp\outline::outlineprioritygroupmap(var3);
-  return scripts\mp\outline::outlineenableinternal(var0, var5, var2, var6, "TEAM", var1);
+  var_6 = scripts\mp\outline::outlineprioritygroupmap(var_3);
+  return scripts\mp\outline::outlineenableinternal(var_0, var_5, var_2, var_6, "TEAM", var_1);
 }
 
-function outlineenableforsquad(var0, var1, var2, var3, var4) {
-  var5 = level.squaddata[var1][var2].players;
-  var6 = scripts\mp\outline::outlineprioritygroupmap(var4);
-  return scripts\mp\outline::outlineenableinternal(var0, var5, var3, var6, "SQUAD", var1, var2);
+function outlineenableforsquad(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = level.squaddata[var_1][var_2].players;
+  var_6 = scripts\mp\outline::outlineprioritygroupmap(var_4);
+  return scripts\mp\outline::outlineenableinternal(var_0, var_5, var_3, var_6, "SQUAD", var_1, var_2);
 }
 
-function outlineenableforplayer(var0, var1, var2, var3) {
-  var4 = scripts\mp\outline::outlineprioritygroupmap(var3);
+function outlineenableforplayer(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\mp\outline::outlineprioritygroupmap(var_3);
 
-  if(isagent(var1)) {
+  if(isagent(var_1)) {
     return scripts\mp\outline::outlinegenerateuniqueid();
   }
 
-  return scripts\mp\outline::outlineenableinternal(var0, [var1], var2, var4, "ENTITY");
+  return scripts\mp\outline::outlineenableinternal(var_0, [var_1], var_2, var_4, "ENTITY");
 }
 
-function outlinedisable(var0, var1) {
-  scripts\mp\outline::outlinedisableinternal(var0, var1);
+function outlinedisable(var_0, var_1) {
+  scripts\mp\outline::outlinedisableinternal(var_0, var_1);
 }
 
-function outlinerefresh(var0) {
-  scripts\mp\outline::outlinerefreshinternal(var0);
+function outlinerefresh(var_0) {
+  scripts\mp\outline::outlinerefreshinternal(var_0);
 }
 
 function initoutlineoccluders() {
@@ -49,27 +49,27 @@ function initoutlineoccluders() {
   level.outlineoccludersid = 0;
 }
 
-function addoutlineoccluder(var0, var1) {
-  var2 = spawnStruct();
-  var2.position = var0;
-  var2.radius = var1;
-  var3 = level.outlineoccludersid;
-  level.outlineoccluders[var3] = var2;
+function addoutlineoccluder(var_0, var_1) {
+  var_2 = spawnStruct();
+  var_2.position = var_0;
+  var_2.radius = var_1;
+  var_3 = level.outlineoccludersid;
+  level.outlineoccluders[var_3] = var_2;
   level.outlineoccludersid++;
-  return var3;
+  return var_3;
 }
 
-function removeoutlineoccluder(var0) {
-  level.outlineoccluders[var0] = undefined;
+function removeoutlineoccluder(var_0) {
+  level.outlineoccluders[var_0] = undefined;
 }
 
-function outlineoccluded(var0, var1) {
-  foreach(var3 in level.outlineoccluders) {
-    if(!isDefined(var3) || !isDefined(var3.position) || !isDefined(var3.radius)) {
+function outlineoccluded(var_0, var_1) {
+  foreach(var_3 in level.outlineoccluders) {
+    if(!isDefined(var_3) || !isDefined(var_3.position) || !isDefined(var_3.radius)) {
       continue;
     }
 
-    if(scripts\engine\math::segmentvssphere(var0, var1, var3.position, var3.radius)) {
+    if(scripts\engine\math::segmentvssphere(var_0, var_1, var_3.position, var_3.radius)) {
       return true;
     }
   }
@@ -85,24 +85,24 @@ function _hudoutlineviewmodeldisable() {
   self hudoutlineviewmodeldisable();
 }
 
-function _hudoutlineviewmodelenable(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = 0;
+function _hudoutlineviewmodelenable(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
   if(isPlayer(self)) {}
 
-  if(!var1 && !scripts\cp_mp\utility\player_utility::_isalive()) {}
+  if(!var_1 && !scripts\cp_mp\utility\player_utility::_isalive()) {}
 
-  if(var1 && !scripts\cp_mp\utility\player_utility::_isalive()) {
-    thread hudoutlineviewmodelenableonnextspawn(var0);
+  if(var_1 && !scripts\cp_mp\utility\player_utility::_isalive()) {
+    thread hudoutlineviewmodelenableonnextspawn(var_0);
     return;
   }
 
-  self hudoutlineviewmodelenable(var0);
+  self hudoutlineviewmodelenable(var_0);
 }
 
-function hudoutlineviewmodelenableonnextspawn(var0) {
+function hudoutlineviewmodelenableonnextspawn(var_0) {
   level endon("game_ended");
   self waittill("spawned");
 
@@ -118,5 +118,5 @@ function hudoutlineviewmodelenableonnextspawn(var0) {
     return;
   }
 
-  self hudoutlineviewmodelenable(var0);
+  self hudoutlineviewmodelenable(var_0);
 }

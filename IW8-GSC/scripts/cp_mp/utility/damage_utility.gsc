@@ -3,24 +3,24 @@
  * Script: scripts\cp_mp\utility\damage_utility.gsc
 ****************************************************/
 
-function adddamagemodifier(var0, var1, var2, var3) {
-  if(!isDefined(var2)) {
-    var2 = 1;
+function adddamagemodifier(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_2)) {
+    var_2 = 1;
   }
 
-  if(var2) {
+  if(var_2) {
     if(!isDefined(self.additivedamagemodifiers)) {
       self.additivedamagemodifiers = [];
     }
 
-    self.additivedamagemodifiers[var0] = var1;
+    self.additivedamagemodifiers[var_0] = var_1;
 
-    if(isDefined(var3)) {
+    if(isDefined(var_3)) {
       if(!isDefined(self.additivedamagemodifierignorefuncs)) {
         self.additivedamagemodifierignorefuncs = [];
       }
 
-      self.additivedamagemodifierignorefuncs[var0] = var3;
+      self.additivedamagemodifierignorefuncs[var_0] = var_3;
       return;
     }
 
@@ -31,35 +31,35 @@ function adddamagemodifier(var0, var1, var2, var3) {
     self.multiplicativedamagemodifiers = [];
   }
 
-  self.multiplicativedamagemodifiers[var0] = var1;
+  self.multiplicativedamagemodifiers[var_0] = var_1;
 
-  if(isDefined(var3)) {
+  if(isDefined(var_3)) {
     if(!isDefined(self.multiplicativedamagemodifierignorefuncs)) {
       self.multiplicativedamagemodifierignorefuncs = [];
     }
 
-    self.multiplicativedamagemodifierignorefuncs[var0] = var3;
+    self.multiplicativedamagemodifierignorefuncs[var_0] = var_3;
     return;
   }
 }
 
-function removedamagemodifier(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = 1;
+function removedamagemodifier(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
-  if(var1) {
+  if(var_1) {
     if(!isDefined(self.additivedamagemodifiers)) {
       return;
     }
 
-    self.additivedamagemodifiers[var0] = undefined;
+    self.additivedamagemodifiers[var_0] = undefined;
 
     if(!isDefined(self.additivedamagemodifierignorefuncs)) {
       return;
     }
 
-    self.additivedamagemodifierignorefuncs[var0] = undefined;
+    self.additivedamagemodifierignorefuncs[var_0] = undefined;
     return;
   }
 
@@ -67,49 +67,49 @@ function removedamagemodifier(var0, var1) {
     return;
   }
 
-  self.multiplicativedamagemodifiers[var0] = undefined;
+  self.multiplicativedamagemodifiers[var_0] = undefined;
 
   if(!isDefined(self.multiplicativedamagemodifierignorefuncs)) {
     return;
   }
 
-  self.multiplicativedamagemodifierignorefuncs[var0] = undefined;
+  self.multiplicativedamagemodifierignorefuncs[var_0] = undefined;
 }
 
-function getdamagemodifiertotal(var0, var1, var2, var3, var4, var5, var6) {
-  var7 = 1;
+function getdamagemodifiertotal(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_7 = 1;
 
   if(isDefined(self.additivedamagemodifiers)) {
-    foreach(var11, var9 in self.additivedamagemodifiers) {
-      var10 = 0;
+    foreach(var_11, var_9 in self.additivedamagemodifiers) {
+      var_10 = 0;
 
-      if(isDefined(self.additivedamagemodifierignorefuncs) && isDefined(self.additivedamagemodifierignorefuncs[var11])) {
-        var10 = [[self.additivedamagemodifierignorefuncs[var11]]](var0, var1, var2, var3, var4, var5, var6);
+      if(isDefined(self.additivedamagemodifierignorefuncs) && isDefined(self.additivedamagemodifierignorefuncs[var_11])) {
+        var_10 = [[self.additivedamagemodifierignorefuncs[var_11]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6);
       }
 
-      if(!var10) {
-        var7 += var9 - 1;
+      if(!var_10) {
+        var_7 += var_9 - 1;
       }
     }
   }
 
-  var12 = 1;
+  var_12 = 1;
 
   if(isDefined(self.multiplicativedamagemodifiers)) {
-    foreach(var9 in self.multiplicativedamagemodifiers) {
-      var10 = 0;
+    foreach(var_9 in self.multiplicativedamagemodifiers) {
+      var_10 = 0;
 
-      if(isDefined(self.multiplicativedamagemodifierignorefuncs) && isDefined(self.multiplicativedamagemodifierignorefuncs[var11])) {
-        var10 = [[self.multiplicativedamagemodifierignorefuncs[var11]]](var0, var1, var2, var3, var4, var5, var6);
+      if(isDefined(self.multiplicativedamagemodifierignorefuncs) && isDefined(self.multiplicativedamagemodifierignorefuncs[var_11])) {
+        var_10 = [[self.multiplicativedamagemodifierignorefuncs[var_11]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6);
       }
 
-      if(!var10) {
-        var12 *= var9;
+      if(!var_10) {
+        var_12 *= var_9;
       }
     }
   }
 
-  return var7 * var12;
+  return var_7 * var_12;
 }
 
 function cleardamagemodifiers() {
@@ -119,40 +119,40 @@ function cleardamagemodifiers() {
   self.multiplicativedamagemodifierignorefuncs = [];
 }
 
-function packdamagedata(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12) {
-  var13 = spawnStruct();
-  var13.attacker = var0;
-  var13.victim = var1;
-  var13.damage = var2;
-  var13.objweapon = var3;
-  var13.meansofdeath = var4;
-  var13.inflictor = var5;
-  var13.point = var6;
-  var13.direction_vec = var7;
-  var13.modelname = var8;
-  var13.partname = var9;
-  var13.tagname = var10;
-  var13.idflags = var11;
-  var13.damageflags = var11;
-  var13.eventid = var12;
+function packdamagedata(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
+  var_13 = spawnStruct();
+  var_13.attacker = var_0;
+  var_13.victim = var_1;
+  var_13.damage = var_2;
+  var_13.objweapon = var_3;
+  var_13.meansofdeath = var_4;
+  var_13.inflictor = var_5;
+  var_13.point = var_6;
+  var_13.direction_vec = var_7;
+  var_13.modelname = var_8;
+  var_13.partname = var_9;
+  var_13.tagname = var_10;
+  var_13.idflags = var_11;
+  var_13.damageflags = var_11;
+  var_13.eventid = var_12;
 
-  if(isDefined(var13.attacker)) {
-    var13.attacker.assistedsuicide = 0;
+  if(isDefined(var_13.attacker)) {
+    var_13.attacker.assistedsuicide = 0;
   }
 
-  return var13;
+  return var_13;
 }
 
-function isstuckdamage(var0, var1) {
+function isstuckdamage(var_0, var_1) {
   if(istrue(self.playerplunderbankcallback)) {
     return true;
   }
 
   if(isDefined(self.stuckbygrenade)) {
-    if(isDefined(var0.inflictor) && var0.inflictor == self.stuckbygrenade) {
-      if(istrue(var1)) {
+    if(isDefined(var_0.inflictor) && var_0.inflictor == self.stuckbygrenade) {
+      if(istrue(var_1)) {
         return true;
-      } else if(isexplosivedamagemod(var0.meansofdeath) || var0.meansofdeath == "MOD_FIRE") {
+      } else if(isexplosivedamagemod(var_0.meansofdeath) || var_0.meansofdeath == "MOD_FIRE") {
         return true;
       }
     }
@@ -161,16 +161,16 @@ function isstuckdamage(var0, var1) {
   return false;
 }
 
-function isstuckdamagekill(var0) {
+function isstuckdamagekill(var_0) {
   if(istrue(self.nostuckdamagekill)) {
     return false;
   }
 
-  if(!isstuckdamage(var0, 0)) {
+  if(!isstuckdamage(var_0, 0)) {
     return false;
   }
 
-  switch (var0.objweapon.basename) {
+  switch (var_0.objweapon.basename) {
     case "thermite_ap_mp":
     case "thermite_av_mp":
     case "thermite_mp":

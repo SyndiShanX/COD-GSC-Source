@@ -61,12 +61,12 @@ function init_manual_turret_vo() {
   game["dialog"]["manual_turret_no_ammo"] = "manual_turret_no_ammo";
 }
 
-function manual_turret_equipment_wrapper(var0, var1, var2) {
-  scripts\mp\equipment::takeequipment(var1);
-  var3 = scripts\cp_mp\killstreaks\manual_turret::tryusemanualturret("manual_turret");
+function manual_turret_equipment_wrapper(var_0, var_1, var_2) {
+  scripts\mp\equipment::takeequipment(var_1);
+  var_3 = scripts\cp_mp\killstreaks\manual_turret::tryusemanualturret("manual_turret");
 
-  if(!var3) {
-    scripts\mp\equipment::giveequipment("equip_shieldturret", var1);
+  if(!var_3) {
+    scripts\mp\equipment::giveequipment("equip_shieldturret", var_1);
     return;
   }
 
@@ -78,36 +78,36 @@ function manual_turret_equipment_wrapper(var0, var1, var2) {
   scripts\cp_mp\utility\script_utility::registersharedfunc("manual_turret", "getEnemyPlayers", &manual_turret_getenemyplayers);
 }
 
-function manual_turret_gettargetmarker(var0, var1) {
-  return scripts\mp\killstreaks\target_marker::gettargetmarker(var0, var1);
+function manual_turret_gettargetmarker(var_0, var_1) {
+  return scripts\mp\killstreaks\target_marker::gettargetmarker(var_0, var_1);
 }
 
-function manual_turret_createhintobject(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10) {
-  return scripts\mp\gameobjects::createhintobject(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10);
+function manual_turret_createhintobject(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+  return scripts\mp\gameobjects::createhintobject(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 }
 
-function manual_turret_monitordamage(var0, var1, var2, var3, var4, var5, var6) {
-  scripts\mp\damage::monitordamage(var0, var1, var2, var3, var4, var5, var6);
+function manual_turret_monitordamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  scripts\mp\damage::monitordamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
 }
 
-function manual_turret_getenemyplayers(var0) {
-  return scripts\mp\utility\teams::getenemyplayers(var0);
+function manual_turret_getenemyplayers(var_0) {
+  return scripts\mp\utility\teams::getenemyplayers(var_0);
 }
 
-function ref_11ac1(var0) {
-  if(isDefined(var0.moving_platform)) {
-    var1 = spawnStruct();
-    var1.linkparent = var0.moving_platform;
-    var1.x1givelaststandoverride = var0.ref_11dbe;
-    var1.angleoffset = var0.ref_11dbd;
-    var1.endonstring = "carried";
-    var1.deathoverridecallback = &ref_11acb;
-    var0 thread scripts\mp\movers::handle_moving_platforms(var1);
+function ref_11ac1(var_0) {
+  if(isDefined(var_0.moving_platform)) {
+    var_1 = spawnStruct();
+    var_1.linkparent = var_0.moving_platform;
+    var_1.x1givelaststandoverride = var_0.ref_11dbe;
+    var_1.angleoffset = var_0.ref_11dbd;
+    var_1.endonstring = "carried";
+    var_1.deathoverridecallback = &ref_11acb;
+    var_0 thread scripts\mp\movers::handle_moving_platforms(var_1);
     return;
   }
 }
 
-function ref_11acb(var0) {
+function ref_11acb(var_0) {
   self notify("death");
 }
 

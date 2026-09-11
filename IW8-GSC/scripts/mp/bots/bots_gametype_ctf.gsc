@@ -30,16 +30,16 @@ function setup_bot_ctf() {
   level.teamflags["allies"].objectivekey = "allies";
   level.teamflags["axis"].objectivekey = "axis";
   scripts\mp\bots\bots_gametype_common::bot_cache_entrances_to_gametype_array(level.teamflags, "flag_");
-  var0 = getzonenearest(level.teamflags["allies"].curorigin);
+  var_0 = getzonenearest(level.teamflags["allies"].curorigin);
 
-  if(isDefined(var0)) {
-    botzonesetteam(var0, "allies");
+  if(isDefined(var_0)) {
+    botzonesetteam(var_0, "allies");
   }
 
-  var0 = getzonenearest(level.teamflags["axis"].curorigin);
+  var_0 = getzonenearest(level.teamflags["axis"].curorigin);
 
-  if(isDefined(var0)) {
-    botzonesetteam(var0, "axis");
+  if(isDefined(var_0)) {
+    botzonesetteam(var_0, "axis");
   }
 
   level.capzones["allies"].nearest_node = level.teamflags["allies"].trigger.nearest_node;
@@ -48,8 +48,8 @@ function setup_bot_ctf() {
   level.bot_gametype_precaching_done = 1;
 }
 
-function crate_can_use(var0) {
-  if(isagent(self) && !isDefined(var0.boxtype)) {
+function crate_can_use(var_0) {
+  if(isagent(self) && !isDefined(var_0.boxtype)) {
     return 0;
   }
 
@@ -73,8 +73,8 @@ function bot_ctf_think() {
   self.next_flag_hide_time = 0;
   self botsetflag("separation", 0);
   self botsetflag("use_obj_path_style", 1);
-  var0 = 0;
-  var1 = 0;
+  var_0 = 0;
+  var_1 = 0;
 
   for(;;) {
     wait 0.05;
@@ -87,36 +87,36 @@ function bot_ctf_think() {
       scripts\mp\bots\bots_gametype_common::damagepercent();
     }
 
-    var2 = scripts\mp\utility\game::getotherteam(self.team)[0];
+    var_2 = scripts\mp\utility\game::getotherteam(self.team)[0];
 
     if(cutscenedone(self.team)) {
-      if(isDefined(level.deactivate_laser_trap_parent) && isDefined(level.deactivate_laser_trap_parent[var2])) {
-        level.deactivate_laser_trap_parent[var2] = undefined;
+      if(isDefined(level.deactivate_laser_trap_parent) && isDefined(level.deactivate_laser_trap_parent[var_2])) {
+        level.deactivate_laser_trap_parent[var_2] = undefined;
       }
     }
 
-    var3 = 0;
+    var_3 = 0;
 
     if(self.role == "attacker") {
       if(cypher_iconid()) {
-        var3 = 1;
+        var_3 = 1;
       } else if(!customusefunc()) {
-        var3 = distancesquared(self.origin, level.teamflags[var2].curorigin) < squared(get_flag_protect_radius());
+        var_3 = distancesquared(self.origin, level.teamflags[var_2].curorigin) < squared(get_flag_protect_radius());
       }
     } else if(!cutscenedone(self.team)) {
-      var3 = !cycle_thrust_fx();
+      var_3 = !cycle_thrust_fx();
     }
 
-    self botsetflag("force_sprint", var3);
-    var1 = 0;
+    self botsetflag("force_sprint", var_3);
+    var_1 = 0;
 
     if(cypher_iconid()) {
       if(cutscenedone(self.team)) {
         clear_defend();
-        var1 = 1;
+        var_1 = 1;
 
-        if(!var0) {
-          var0 = 1;
+        if(!var_0) {
+          var_0 = 1;
           self botsetpathingstyle("scripted");
         }
 
@@ -125,16 +125,16 @@ function bot_ctf_think() {
         cypher_id_pool();
       } else if(gettime() > self.next_flag_hide_time) {
         clear_defend();
-        var4 = getnodesinradius(level.capzones[self.team].curorigin, 900, 0, 300);
-        var5 = self botnodepick(var4, var4.size * 0.15, "node_hide_anywhere");
+        var_4 = getnodesinradius(level.capzones[self.team].curorigin, 900, 0, 300);
+        var_5 = self botnodepick(var_4, var_4.size * 0.15, "node_hide_anywhere");
 
-        if(!isDefined(var5)) {
-          var5 = level.capzones[self.team].nearest_node;
+        if(!isDefined(var_5)) {
+          var_5 = level.capzones[self.team].nearest_node;
         }
 
-        var6 = self botsetscriptgoalnode(var5, "critical");
+        var_6 = self botsetscriptgoalnode(var_5, "critical");
 
-        if(var6) {
+        if(var_6) {
           self.next_flag_hide_time = gettime() + 15000;
         }
       }
@@ -143,8 +143,8 @@ function bot_ctf_think() {
         if(!scripts\mp\bots\bots_util::bot_is_bodyguarding()) {
           clear_defend();
           self botclearscriptgoal();
-          var7 = level.teamflags[var2].carrier;
-          scripts\mp\bots\bots_strategy::bot_guard_player(var7, 500);
+          var_7 = level.teamflags[var_2].carrier;
+          scripts\mp\bots\bots_strategy::bot_guard_player(var_7, 500);
         }
       } else {
         clear_defend();
@@ -153,7 +153,7 @@ function bot_ctf_think() {
           self botclearscriptgoal();
         }
 
-        self botsetscriptgoal(level.teamflags[var2].curorigin, 16, "objective", undefined, 300);
+        self botsetscriptgoal(level.teamflags[var_2].curorigin, 16, "objective", undefined, 300);
       }
     } else if(!cutscenedone(self.team)) {
       cypher_id_pool();
@@ -162,76 +162,76 @@ function bot_ctf_think() {
       GscBinSkip1(0x45, "score_flags", "strict_los");
     }
 
-    if(var0 && !var1) {
-      var0 = 0;
+    if(var_0 && !var_1) {
+      var_0 = 0;
       self botsetpathingstyle(undefined);
     }
   }
 }
 
 function cypher_id_pool() {
-  var0 = undefined;
-  var1 = level.teamflags[self.team];
-  var2 = var1.carrier;
+  var_0 = undefined;
+  var_1 = level.teamflags[self.team];
+  var_2 = var_1.carrier;
 
-  if(!isDefined(var2)) {
-    var0 = var1.curorigin;
-  } else if(self botcanseeentity(var2)) {
-    var0 = var2.origin;
+  if(!isDefined(var_2)) {
+    var_0 = var_1.curorigin;
+  } else if(self botcanseeentity(var_2)) {
+    var_0 = var_2.origin;
 
     if(self botgetdifficultysetting("strategyLevel") > 0 && !cutscenedone(self.team)) {
       if(!isDefined(level.deactivate_laser_trap_parent)) {
         level.deactivate_laser_trap_parent = [];
       }
 
-      if(!isDefined(level.deactivate_laser_trap_parent[var2.team])) {
-        level.deactivate_laser_trap_parent[var2.team] = [];
+      if(!isDefined(level.deactivate_laser_trap_parent[var_2.team])) {
+        level.deactivate_laser_trap_parent[var_2.team] = [];
       }
 
-      level.deactivate_laser_trap_parent[var2.team]["origin"] = var0;
-      level.deactivate_laser_trap_parent[var2.team]["time"] = gettime();
+      level.deactivate_laser_trap_parent[var_2.team]["origin"] = var_0;
+      level.deactivate_laser_trap_parent[var_2.team]["time"] = gettime();
     }
-  } else if(isDefined(var1.curcarrierorigin)) {
-    if(isDefined(var1.compassicons["friendly"])) {
-      if(var1.objidpingfriendly) {
-        var0 = var1.curcarrierorigin;
+  } else if(isDefined(var_1.curcarrierorigin)) {
+    if(isDefined(var_1.compassicons["friendly"])) {
+      if(var_1.objidpingfriendly) {
+        var_0 = var_1.curcarrierorigin;
       } else {
-        var0 = var2.origin;
+        var_0 = var_2.origin;
       }
     }
   } else {
-    var0 = var1.curorigin;
+    var_0 = var_1.curorigin;
   }
 
-  if(isDefined(var0)) {
+  if(isDefined(var_0)) {
     clear_defend();
-    self botsetscriptgoal(var0, 16, "critical");
+    self botsetscriptgoal(var_0, 16, "critical");
     return;
   }
 
-  var3 = undefined;
-  var4 = undefined;
+  var_3 = undefined;
+  var_4 = undefined;
 
   if(self botgetdifficultysetting("strategyLevel") > 0) {
-    if(isDefined(level.deactivate_laser_trap_parent) && isDefined(level.deactivate_laser_trap_parent[var2.team])) {
-      var4 = gettime() - level.deactivate_laser_trap_parent[var2.team]["time"];
+    if(isDefined(level.deactivate_laser_trap_parent) && isDefined(level.deactivate_laser_trap_parent[var_2.team])) {
+      var_4 = gettime() - level.deactivate_laser_trap_parent[var_2.team]["time"];
 
-      if(var4 < 10000) {
-        var3 = level.deactivate_laser_trap_parent[var2.team]["origin"];
+      if(var_4 < 10000) {
+        var_3 = level.deactivate_laser_trap_parent[var_2.team]["origin"];
       }
     }
   }
 
-  if(isDefined(var3)) {
-    if(var4 < 5000) {
+  if(isDefined(var_3)) {
+    if(var_4 < 5000) {
       clear_defend();
-      self botsetscriptgoal(var3, 16, "critical");
+      self botsetscriptgoal(var_3, 16, "critical");
       return;
     }
 
     if(!scripts\mp\bots\bots_util::bot_is_patrolling()) {
       scripts\mp\bots\bots_strategy::bot_defend_stop();
-      scripts\mp\bots\bots_strategy::bot_patrol_area(var3, 400);
+      scripts\mp\bots\bots_strategy::bot_patrol_area(var_3, 400);
       return;
     }
 
@@ -239,9 +239,9 @@ function cypher_id_pool() {
   }
 
   clear_defend();
-  var5 = self botgetscriptgoaltype();
+  var_5 = self botgetscriptgoaltype();
 
-  if(var5 == "objective" || var5 == "critical") {
+  if(var_5 == "objective" || var_5 == "critical") {
     self botclearscriptgoal();
   }
 
@@ -261,9 +261,9 @@ function is_protecting_flag() {
 
 function get_flag_protect_radius() {
   if(isalive(self) && !isDefined(level.protect_radius)) {
-    var0 = self botgetworldsize();
-    var1 = (var0[0] + var0[1]) / 2;
-    level.protect_radius = min(800, var1 / 5.5);
+    var_0 = self botgetworldsize();
+    var_1 = (var_0[0] + var_0[1]) / 2;
+    level.protect_radius = min(800, var_1 / 5.5);
   }
 
   if(!isDefined(level.protect_radius)) {
@@ -273,29 +273,29 @@ function get_flag_protect_radius() {
   return level.protect_radius;
 }
 
-function initcircledata(var0) {
-  var1 = scripts\mp\bots\bots_gametype_common::damagedisabledfeedback(var0);
+function initcircledata(var_0) {
+  var_1 = scripts\mp\bots\bots_gametype_common::damagedisabledfeedback(var_0);
 
-  if(var1 == 1) {
+  if(var_1 == 1) {
     return 1;
   }
 
-  jumpiffalse(cutscenedone(var0)) LOC_0000002c;
-  var2 = var1 * 0.67;
+  jumpiffalse(cutscenedone(var_0)) LOC_0000002c;
+  var_2 = var_1 * 0.67;
   goto LOC_0000005a;
 }
 
-function initcirclepoststarttocircleindex(var0) {
-  var1 = scripts\mp\bots\bots_gametype_common::damagedisabledfeedback(var0);
-  return var1 - initcircledata(var0);
+function initcirclepoststarttocircleindex(var_0) {
+  var_1 = scripts\mp\bots\bots_gametype_common::damagedisabledfeedback(var_0);
+  return var_1 - initcircledata(var_0);
 }
 
-function get_allied_attackers_for_team(var0) {
-  return scripts\mp\bots\bots_gametype_common::damageby(var0, level.capzones[var0].curorigin, get_flag_protect_radius());
+function get_allied_attackers_for_team(var_0) {
+  return scripts\mp\bots\bots_gametype_common::damageby(var_0, level.capzones[var_0].curorigin, get_flag_protect_radius());
 }
 
-function get_allied_defenders_for_team(var0) {
-  return scripts\mp\bots\bots_gametype_common::damageclonewatch(var0, level.capzones[var0].curorigin, get_flag_protect_radius());
+function get_allied_defenders_for_team(var_0) {
+  return scripts\mp\bots\bots_gametype_common::damageclonewatch(var_0, level.capzones[var_0].curorigin, get_flag_protect_radius());
 }
 
 function customspeed() {
@@ -305,8 +305,8 @@ function customspeed() {
   thread scripts\mp\bots\bots_gametype_common::damage_shield_reduction();
 }
 
-function cyberteamspawnsetids(var0) {
-  if(var0 == self.node_closest_to_defend_center) {
+function cyberteamspawnsetids(var_0) {
+  if(var_0 == self.node_closest_to_defend_center) {
     return 1;
   }
 
@@ -314,21 +314,21 @@ function cyberteamspawnsetids(var0) {
     return 1;
   }
 
-  var1 = var0 scripts\mp\bots\bots_util::node_is_on_path_from_labels("flag_allies", "flag_axis");
+  var_1 = var_0 scripts\mp\bots\bots_util::node_is_on_path_from_labels("flag_allies", "flag_axis");
 
-  if(var1) {
+  if(var_1) {
     return 1;
   }
 
   return 0.2;
 }
 
-function cutscenedone(var0) {
-  return level.teamflags[var0] scripts\mp\gameobjects::ishome();
+function cutscenedone(var_0) {
+  return level.teamflags[var_0] scripts\mp\gameobjects::ishome();
 }
 
-function cyber_bot_pickup_emp(var0) {
-  return isDefined(level.teamflags[var0].carrier);
+function cyber_bot_pickup_emp(var_0) {
+  return isDefined(level.teamflags[var_0].carrier);
 }
 
 function cycle_thrust_fx() {
@@ -336,8 +336,8 @@ function cycle_thrust_fx() {
 }
 
 function customusefunc() {
-  var0 = scripts\mp\utility\game::getotherteam(self.team)[0];
-  return cyber_bot_pickup_emp(var0);
+  var_0 = scripts\mp\utility\game::getotherteam(self.team)[0];
+  return cyber_bot_pickup_emp(var_0);
 }
 
 function cypher_iconid() {

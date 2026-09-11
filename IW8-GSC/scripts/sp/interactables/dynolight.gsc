@@ -20,39 +20,39 @@ function init() {
 
   level.castingdynolights = [];
 
-  foreach(var1 in level.dynolights) {
-    if(!isDefined(var1.init_count)) {
-      var1.init_count = 0;
+  foreach(var_1 in level.dynolights) {
+    if(!isDefined(var_1.init_count)) {
+      var_1.init_count = 0;
     }
 
-    var1.init_count++;
+    var_1.init_count++;
     thread dynolight_postload_state_init();
     thread dynolight_death_watcher();
 
-    if(isDefined(var1.targetname)) {
-      var2 = getEntArray(var1.targetname, "target");
+    if(isDefined(var_1.targetname)) {
+      var_2 = getEntArray(var_1.targetname, "target");
     } else {
-      var2 = [];
+      var_2 = [];
     }
 
-    foreach(var4 in var2) {
-      if(is_lightswitch(var4)) {
-        thread lightswitch_init(var4);
+    foreach(var_4 in var_2) {
+      if(is_lightswitch(var_4)) {
+        thread lightswitch_init(var_4);
       }
     }
 
-    var1.lightpos = var1.origin;
+    var_1.lightpos = var_1.origin;
   }
 
   level.dynolight_trace_contents = scripts\engine\trace::create_contents(0, 1, 0, 0, 0, 0, 0, 1, 0);
 }
 
-function add_dynolight(var0) {
+function add_dynolight(var_0) {
   if(!isDefined(level.dynolights)) {
     level.dynolights = [];
   }
 
-  level.dynolights[level.dynolights.size] = var0;
+  level.dynolights[level.dynolights.size] = var_0;
 }
 
 function dynolight_postload_state_init() {
@@ -63,16 +63,16 @@ function dynolight_postload_state_init() {
     self.circuitparents = [];
   }
 
-  var0 = strtok(self.script_noteworthy, "_");
-  var1 = 0;
+  var_0 = strtok(self.script_noteworthy, "_");
+  var_1 = 0;
 
-  foreach(var3 in var0) {
-    if(var3 == "off") {
-      var1 = 1;
+  foreach(var_3 in var_0) {
+    if(var_3 == "off") {
+      var_1 = 1;
     }
   }
 
-  if(var1) {
+  if(var_1) {
     self setscriptablepartstate("onoff", "off");
   } else {
     self setscriptablepartstate("onoff", "on");
@@ -105,10 +105,10 @@ function dynolight_postload_state_init() {
     }
   }
 
-  var5 = scripts\engine\utility::get_linked_ents();
+  var_5 = scripts\engine\utility::get_linked_ents();
 
-  if(isDefined(var5)) {
-    self.linked_ents = var5;
+  if(isDefined(var_5)) {
+    self.linked_ents = var_5;
   }
 
   self.lightpos = get_model_trace_start();
@@ -125,13 +125,13 @@ function lightswitch_postload_state_init() {
   }
 }
 
-function lightswitch_init(var0) {
-  if(!isDefined(var0.circuitparents)) {
-    var0.circuitparents = [];
+function lightswitch_init(var_0) {
+  if(!isDefined(var_0.circuitparents)) {
+    var_0.circuitparents = [];
   }
 
-  if(!scripts\engine\utility::array_contains(var0.circuitparents, self)) {
-    var0.circuitparents = scripts\engine\utility::array_add(var0.circuitparents, self);
+  if(!scripts\engine\utility::array_contains(var_0.circuitparents, self)) {
+    var_0.circuitparents = scripts\engine\utility::array_add(var_0.circuitparents, self);
   }
 
   if(!isDefined(self.lights)) {
@@ -161,37 +161,37 @@ function lightswitch_init(var0) {
     thread lightswitch_death_watcher();
 
     if(isDefined(self.targetname)) {
-      var1 = getEntArray(self.targetname, "target");
+      var_1 = getEntArray(self.targetname, "target");
     } else {
-      var1 = [];
+      var_1 = [];
     }
 
-    foreach(var3 in var1) {
-      if(isDefined(var3.classname) && var3.classname == "script_origin") {
-        thread lightswitch_init(var3);
+    foreach(var_3 in var_1) {
+      if(isDefined(var_3.classname) && var_3.classname == "script_origin") {
+        thread lightswitch_init(var_3);
       }
     }
   }
 
-  foreach(var6 in var1.circuitparents) {
-    if(!scripts\engine\utility::array_contains(self.circuitsiblings, var6)) {
-      self.circuitsiblings = scripts\engine\utility::array_add(self.circuitsiblings, var6);
+  foreach(var_6 in var_1.circuitparents) {
+    if(!scripts\engine\utility::array_contains(self.circuitsiblings, var_6)) {
+      self.circuitsiblings = scripts\engine\utility::array_add(self.circuitsiblings, var_6);
     }
 
-    if(!scripts\engine\utility::array_contains(var6.circuitsiblings, self)) {
-      var6.circuitsiblings = scripts\engine\utility::array_add(var6.circuitsiblings, self);
+    if(!scripts\engine\utility::array_contains(var_6.circuitsiblings, self)) {
+      var_6.circuitsiblings = scripts\engine\utility::array_add(var_6.circuitsiblings, self);
       LOC_00000191:
     }
     LOC_00000191:
   }
 
-  if(is_light(var1)) {
-    self.lights = scripts\engine\utility::array_add(self.lights, var1);
+  if(is_light(var_1)) {
+    self.lights = scripts\engine\utility::array_add(self.lights, var_1);
     return;
   }
 
-  if(is_lightswitch(var1)) {
-    self.circuitchildren = scripts\engine\utility::array_add(self.circuitchildren, var1);
+  if(is_lightswitch(var_1)) {
+    self.circuitchildren = scripts\engine\utility::array_add(self.circuitchildren, var_1);
     return;
   }
 }
@@ -205,24 +205,24 @@ function lightswitch_interact_manager() {
     self waittill("lightswitch_toggle");
 
     if(self.script_light_switch_state == 1) {
-      var0 = "_off";
-      var1 = 0;
+      var_0 = "_off";
+      var_1 = 0;
 
       if(isDefined(self.script_light_switch_fx)) {
         playFXOnTag(self.script_light_switch_fx, self, get_lightswitch_fx_tag());
       }
     } else {
-      var0 = "_on";
-      var1 = 1;
+      var_0 = "_on";
+      var_1 = 1;
 
       if(isDefined(self.script_light_switch_fx)) {
         killfxontag(self.script_light_switch_fx, self, get_lightswitch_fx_tag());
       }
     }
 
-    thread scripts\engine\utility::play_sound_in_space(self.script_light_switch_sfx + var0, self.origin);
-    lightswitch_onoff(var1);
-    lightswitch_update_children(var1, self);
+    thread scripts\engine\utility::play_sound_in_space(self.script_light_switch_sfx + var_0, self.origin);
+    lightswitch_onoff(var_1);
+    lightswitch_update_children(var_1, self);
     thread lightswitch_toggle_debounce();
   }
 }
@@ -235,14 +235,14 @@ function get_lightswitch_fx_tag() {
   return getpartname(self.model, 0);
 }
 
-function lightswitch_onoff(var0) {
-  if(self.script_light_switch_state == var0) {
+function lightswitch_onoff(var_0) {
+  if(self.script_light_switch_state == var_0) {
     return;
   }
 
-  self.script_light_switch_state = var0;
+  self.script_light_switch_state = var_0;
 
-  if(var0) {
+  if(var_0) {
     if(isDefined(self.script_light_idle_sfx)) {
       self scalevolume(0, 0.5);
       return;
@@ -257,14 +257,14 @@ function lightswitch_onoff(var0) {
   }
 }
 
-function lightswitch_disable(var0) {
-  if(var0 == self.disabled) {
+function lightswitch_disable(var_0) {
+  if(var_0 == self.disabled) {
     return;
   }
 
-  self.disabled = var0;
+  self.disabled = var_0;
 
-  if(var0) {
+  if(var_0) {
     lightswitch_disable_interact();
     return;
   }
@@ -278,14 +278,14 @@ function lightswitch_send_stealth_event() {
   }
 
   if(isDefined(level.stealth)) {
-    var0 = sortbydistance(self.lights, level.player.origin);
+    var_0 = sortbydistance(self.lights, level.player.origin);
 
-    foreach(var2 in var0) {
-      var3 = scripts\engine\sp\utility::get_within_range(var2.lightpos, getaiarray("axis"), 500);
-      var3 = sortbydistance(var3, var2.lightpos);
+    foreach(var_2 in var_0) {
+      var_3 = scripts\engine\sp\utility::get_within_range(var_2.lightpos, getaiarray("axis"), 500);
+      var_3 = sortbydistance(var_3, var_2.lightpos);
 
-      if(isDefined(var3[0])) {
-        var3[0] aieventlistenerevent("footstep", level.player, self.origin);
+      if(isDefined(var_3[0])) {
+        var_3[0] aieventlistenerevent("footstep", level.player, self.origin);
         return 1;
       }
     }
@@ -305,72 +305,72 @@ function lightswitch_toggle_debounce() {
   lightswitch_enable_interact();
 }
 
-function collect_circuit_children(var0) {}
+function collect_circuit_children(var_0) {}
 
-function collect_circuit_siblines(var0) {}
+function collect_circuit_siblines(var_0) {}
 
-function lightswitch_update_children(var0, var1) {
-  var2 = self.lights;
+function lightswitch_update_children(var_0, var_1) {
+  var_2 = self.lights;
 
-  foreach(var4 in self.circuitsiblings) {
-    lightswitch_onoff(var4, var0);
+  foreach(var_4 in self.circuitsiblings) {
+    lightswitch_onoff(var_4, var_0);
 
-    foreach(var6 in var4.lights) {
-      if(!scripts\engine\utility::array_contains(var2, var6)) {
-        var2 = scripts\engine\utility::array_add(var2, var6);
+    foreach(var_6 in var_4.lights) {
+      if(!scripts\engine\utility::array_contains(var_2, var_6)) {
+        var_2 = scripts\engine\utility::array_add(var_2, var_6);
       }
     }
   }
 
-  var9 = self.circuitchildren;
-  var10 = [];
+  var_9 = self.circuitchildren;
+  var_10 = [];
 
   for(;;) {
-    var11 = 0;
+    var_11 = 0;
 
-    foreach(var4 in var9) {
-      if(!scripts\engine\utility::array_contains(var10, var4)) {
-        foreach(var14 in var4.circuitchildren) {
-          if(!scripts\engine\utility::array_contains(var9, var14)) {
-            var9 = scripts\engine\utility::array_add(var9, var14);
+    foreach(var_4 in var_9) {
+      if(!scripts\engine\utility::array_contains(var_10, var_4)) {
+        foreach(var_14 in var_4.circuitchildren) {
+          if(!scripts\engine\utility::array_contains(var_9, var_14)) {
+            var_9 = scripts\engine\utility::array_add(var_9, var_14);
           }
         }
 
-        foreach(var14 in var4.circuitsiblings) {
-          if(!scripts\engine\utility::array_contains(var9, var14)) {
-            var9 = scripts\engine\utility::array_add(var9, var14);
+        foreach(var_14 in var_4.circuitsiblings) {
+          if(!scripts\engine\utility::array_contains(var_9, var_14)) {
+            var_9 = scripts\engine\utility::array_add(var_9, var_14);
           }
         }
 
-        var10 = scripts\engine\utility::array_add(var10, var4);
-        var11 = 1;
+        var_10 = scripts\engine\utility::array_add(var_10, var_4);
+        var_11 = 1;
       }
     }
 
-    if(!var11) {
+    if(!var_11) {
       break;
     }
   }
 
-  var19 = scripts\engine\utility::ter_op(var0, 0, 1);
+  var_19 = scripts\engine\utility::ter_op(var_0, 0, 1);
 
-  foreach(var4 in var9) {
-    lightswitch_onoff(var4, var0);
-    lightswitch_disable(var4, var19);
+  foreach(var_4 in var_9) {
+    lightswitch_onoff(var_4, var_0);
+    lightswitch_disable(var_4, var_19);
 
-    foreach(var6 in var4.lights) {
-      if(!scripts\engine\utility::array_contains(var2, var6)) {
-        var2 = scripts\engine\utility::array_add(var2, var6);
+    foreach(var_6 in var_4.lights) {
+      if(!scripts\engine\utility::array_contains(var_2, var_6)) {
+        var_2 = scripts\engine\utility::array_add(var_2, var_6);
       }
     }
   }
 
-  foreach(var6 in var2) {
-    if(!var6.alive) {
+  foreach(var_6 in var_2) {
+    if(!var_6.alive) {
       continue;
     }
 
-    dynolight_set_onoff_state(var6, var0);
+    dynolight_set_onoff_state(var_6, var_0);
   }
 }
 
@@ -384,37 +384,37 @@ function lightswitch_enable_interact() {
   }
 
   self.interact = 1;
-  var0 = (0, 0, 0);
+  var_0 = (0, 0, 0);
 
   if(isDefined(self.interact_offset)) {
-    var0 = self.interact_offset;
+    var_0 = self.interact_offset;
 
     if(isDefined(self.angles)) {
-      var0 = rotatevectorinverted(var0, self.angles);
+      var_0 = rotatevectorinverted(var_0, self.angles);
     }
   }
 
-  var1 = 120;
+  var_1 = 120;
 
   if(isDefined(self.show_dist_override)) {
-    var1 = self.show_dist_override;
+    var_1 = self.show_dist_override;
   }
 
-  var2 = 85;
+  var_2 = 85;
 
   if(isDefined(self.use_dist_override)) {
-    var2 = self.use_dist_override;
+    var_2 = self.use_dist_override;
   }
 
-  scripts\sp\player\cursor_hint::create_cursor_hint(undefined, var0, &"SCRIPT/LIGHTSWITCH_INTERACT", 65, var1, var2, 0, undefined, undefined, undefined, "duration_none", undefined, undefined, undefined, 90);
+  scripts\sp\player\cursor_hint::create_cursor_hint(undefined, var_0, &"SCRIPT/LIGHTSWITCH_INTERACT", 65, var_1, var_2, 0, undefined, undefined, undefined, "duration_none", undefined, undefined, undefined, 90);
   thread lightswitch_trigger_notify();
 }
 
 function lightswitch_trigger_notify() {
   self endon("death");
   self endon("disable_interact");
-  self waittill("trigger", var0);
-  self.triggering_ent = var0;
+  self waittill("trigger", var_0);
+  self.triggering_ent = var_0;
   self.interact = 0;
 
   if(isDefined(level.lightswitch_interact_func)) {
@@ -435,14 +435,14 @@ function lightswitch_toggle() {
   self notify("lightswitch_toggle");
 }
 
-function dynolight_set_onoff_state(var0) {
-  if(var0 && self getscriptablepartstate("onoff") == "off") {
+function dynolight_set_onoff_state(var_0) {
+  if(var_0 && self getscriptablepartstate("onoff") == "off") {
     dynolight_update_nvg_mode();
     self.timeoflaststatechange = gettime();
     return;
   }
 
-  if(!var0 && self getscriptablepartstate("onoff") != "off") {
+  if(!var_0 && self getscriptablepartstate("onoff") != "off") {
     self setscriptablepartstate("onoff", "off");
     self.timeoflaststatechange = gettime();
     thread stealth_event_on_light_death();
@@ -466,9 +466,9 @@ function dynolight_death_watcher() {
   self.intensity = 0;
   self.timeoflaststatechange = gettime();
 
-  foreach(var1 in self.circuitparents) {
-    var1.lights = scripts\engine\utility::array_remove(var1.lights, self);
-    check_lightswitch_cleanup(var1);
+  foreach(var_1 in self.circuitparents) {
+    var_1.lights = scripts\engine\utility::array_remove(var_1.lights, self);
+    check_lightswitch_cleanup(var_1);
   }
 
   thread stealth_event_on_light_death();
@@ -476,123 +476,123 @@ function dynolight_death_watcher() {
 
 function stealth_event_on_light_death() {
   if(isDefined(level.stealth)) {
-    var0 = scripts\engine\utility::drop_to_ground(self.lightpos, 24, -256);
-    var1 = undefined;
+    var_0 = scripts\engine\utility::drop_to_ground(self.lightpos, 24, -256);
+    var_1 = undefined;
 
     if(self getscriptablepartstate("onoff") == "death") {
-      var1 = 400;
+      var_1 = 400;
     }
 
-    scripts\stealth\event::event_broadcast_axis_by_sight("light_killed", self, self.lightpos, 800, 0, var0, var1);
+    scripts\stealth\event::event_broadcast_axis_by_sight("light_killed", self, self.lightpos, 800, 0, var_0, var_1);
     return;
   }
 }
 
 function get_model_trace_start() {
-  var0 = self gettagorigin("tag_fx_bulb", 1);
+  var_0 = self gettagorigin("tag_fx_bulb", 1);
 
-  if(isDefined(var0)) {
-    return var0;
+  if(isDefined(var_0)) {
+    return var_0;
   }
 
   switch (self.model) {
     case "light_lamp_floor_tall_01_on":
     case "pnr_light_lamp_floor_tall_01_on":
-      var0 = self.origin + (0, 0, 120);
+      var_0 = self.origin + (0, 0, 120);
       break;
     case "ch_street_wall_light_01_on":
     case "ch_street_wall_light_01_off":
-      var0 = self.origin - (0, 0, 10) + anglesToForward(self.angles) * 35;
+      var_0 = self.origin - (0, 0, 10) + anglesToForward(self.angles) * 35;
       break;
     case "ind_spotlight_generator_on":
     case "ind_spotlight_generator_stripes":
     case "ind_spotlight_generator_off":
-      var0 = self.origin + (0, 0, 131) + anglesToForward(self.angles) * 19;
+      var_0 = self.origin + (0, 0, 131) + anglesToForward(self.angles) * 19;
       break;
     case "ind_flood_light_standing_tall_dmg":
     case "ind_flood_light_standing_tall_on":
     case "ind_flood_light_standing_tall_off":
-      var0 = self.origin + (0, 0, 39);
+      var_0 = self.origin + (0, 0, 39);
       break;
     case "deco_wall_light_fn_01_on":
     case "deco_wall_light_fn_01":
-      var0 = self.origin + anglesToForward(self.angles) * 10;
+      var_0 = self.origin + anglesToForward(self.angles) * 10;
       break;
     case "clk_industrial_light_01_on":
     case "clk_industrial_light_01_on_warm":
-      var0 = self.origin - (0, 0, 64);
+      var_0 = self.origin - (0, 0, 64);
       break;
     case "cp_disco_fluorescent_light_on":
     case "cp_disco_fluorescent_light_on_blue":
-      var0 = self.origin - (0, 0, 30);
+      var_0 = self.origin - (0, 0, 30);
       break;
     case "crr_light_utility_01_on":
     case "crr_light_utility_01":
-      var0 = self.origin - (0, 0, 7) + anglesToForward(self.angles) * 5;
+      var_0 = self.origin - (0, 0, 7) + anglesToForward(self.angles) * 5;
       break;
     case "cp_disco_searchlight_swivel_on":
-      var0 = self.origin + (0, 0, 43) + anglesToForward(self.angles) * 28;
+      var_0 = self.origin + (0, 0, 43) + anglesToForward(self.angles) * 28;
       break;
     case "cs_cargoship_wall_light_off":
-      var0 = self.origin + anglesToForward(self.angles) * 15;
+      var_0 = self.origin + anglesToForward(self.angles) * 15;
       break;
     case "dam_tunnel_light_01_off":
-      var0 = self.origin - (0, 0, 23);
+      var_0 = self.origin - (0, 0, 23);
       break;
     case "com_floodlight":
     case "com_floodlight_scr":
     case "com_floodlight_on":
-      var0 = self.origin + (0, 0, 11) + anglesToForward(self.angles) * 6;
+      var_0 = self.origin + (0, 0, 11) + anglesToForward(self.angles) * 6;
       break;
     case "tent_ceiling_light_off":
-      var0 = self.origin - (0, 0, 7);
+      var_0 = self.origin - (0, 0, 7);
       break;
     case "zmb_center_portal_base_small_lights":
     case "zmb_center_portal_base_small_lights_off":
     case "zmb_center_portal_base_small_lights_blue":
-      var0 = self.origin + anglesToForward(self.angles) * 9;
+      var_0 = self.origin + anglesToForward(self.angles) * 9;
       break;
     case "p7_light_chandelier_vintage_01_on":
     case "p7_light_chandelier_vintage_01":
     case "p7_light_chandelier_vintage_01_broken":
-      var0 = self.origin - (0, 0, 44);
+      var_0 = self.origin - (0, 0, 44);
       break;
     case "light_outdoorwall01":
-      var0 = self.origin - (0, 0, 6) + anglesToForward(self.angles) * 8;
+      var_0 = self.origin - (0, 0, 6) + anglesToForward(self.angles) * 8;
       break;
     case "mp_dart_lightfluo_on":
-      var0 = self.origin - (0, 0, 8);
+      var_0 = self.origin - (0, 0, 8);
       break;
     case "light_lamp_black_01":
     case "light_lamp_black_01_ems":
     case "light_lamp_black_01_off":
-      var0 = self.origin + (0, 0, 25) + anglesToForward(self.angles) * 9;
+      var_0 = self.origin + (0, 0, 25) + anglesToForward(self.angles) * 9;
       break;
     case "bo_lights_hang_lamp_on":
-      var0 = self.origin - (0, 0, 37);
+      var_0 = self.origin - (0, 0, 37);
       break;
     case "floor01_lamp_01":
     case "floor01_lamp_01_off":
-      var0 = self.origin - (0, 0, 40);
+      var_0 = self.origin - (0, 0, 40);
       break;
     case "street_lamp_post_old_iw6_on":
     case "street_lamp_post_old_iw6":
-      var0 = self.origin + (0, 0, 240);
+      var_0 = self.origin + (0, 0, 240);
       break;
     default:
-      var0 = self.origin;
+      var_0 = self.origin;
       break;
   }
 
-  return var0;
+  return var_0;
 }
 
 function lightswitch_death_watcher() {
   self waittill("death");
 
-  foreach(var1 in self.circuitparents) {
-    var1.circuitchildren = scripts\engine\utility::array_remove(var1.circuitchildren, self);
-    check_lightswitch_cleanup(var1);
+  foreach(var_1 in self.circuitparents) {
+    var_1.circuitchildren = scripts\engine\utility::array_remove(var_1.circuitchildren, self);
+    check_lightswitch_cleanup(var_1);
   }
 }
 

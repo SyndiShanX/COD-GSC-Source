@@ -39,11 +39,11 @@ function main() {
   self.grenadeammo = 3;
 }
 
-function setup_model(var0) {
-  var1 = undefined;
-  var2 = ["character_spetsnaz_gasmask_ar_trial", "character_spetsnaz_gasmask_lmg_trial", "character_spetsnaz_gasmask_cqc_trial"];
+function setup_model(var_0) {
+  var_1 = undefined;
+  var_2 = ["character_spetsnaz_gasmask_ar_trial", "character_spetsnaz_gasmask_lmg_trial", "character_spetsnaz_gasmask_cqc_trial"];
 
-  switch (scripts\code\character::get_random_character(3, var1, var2, "actor_enemy_mp_trial_jugg_elite")) {
+  switch (scripts\code\character::get_random_character(3, var_1, var_2, "actor_enemy_mp_trial_jugg_elite")) {
     case 0:
       scripts\cp\coop_escape::main_mp();
       break;
@@ -57,29 +57,29 @@ function setup_model(var0) {
 }
 
 function precache() {
-  var0 = "actor_enemy_mp_trial_jugg_elite";
+  var_0 = "actor_enemy_mp_trial_jugg_elite";
 
   if(!isDefined(level.agent_definition)) {
     level.agent_definition = [];
   }
 
-  if(!isDefined(level.agent_definition[var0])) {
-    level.agent_definition[var0] = [];
-    level.agent_definition[var0]["species"] = "human";
-    level.agent_definition[var0]["traversal_unit_type"] = "soldier";
-    level.agent_definition[var0]["health"] = 500;
-    level.agent_definition[var0]["xp"] = 50;
-    level.agent_definition[var0]["reward"] = 50;
-    level.agent_definition[var0]["asm"] = "soldier_cp";
-    level.agent_definition[var0]["radius"] = 15;
-    level.agent_definition[var0]["height"] = 70;
-    level.agent_definition[var0]["behaviorTree"] = "soldier_agent";
-    level.agent_definition[var0]["team"] = "axis";
-    level.agent_definition[var0]["setup_func"] = &main;
-    level.agent_definition[var0]["setup_model_func"] = &setup_model;
-    scripts\cp\coop_escape::precache_mp(var0);
-    scripts\cp\cp_checkpoint::precache_mp(var0);
-    scripts\cp\cp_awards::precache_mp(var0);
+  if(!isDefined(level.agent_definition[var_0])) {
+    level.agent_definition[var_0] = [];
+    level.agent_definition[var_0]["species"] = "human";
+    level.agent_definition[var_0]["traversal_unit_type"] = "soldier";
+    level.agent_definition[var_0]["health"] = 500;
+    level.agent_definition[var_0]["xp"] = 50;
+    level.agent_definition[var_0]["reward"] = 50;
+    level.agent_definition[var_0]["asm"] = "soldier_cp";
+    level.agent_definition[var_0]["radius"] = 15;
+    level.agent_definition[var_0]["height"] = 70;
+    level.agent_definition[var_0]["behaviorTree"] = "soldier_agent";
+    level.agent_definition[var_0]["team"] = "axis";
+    level.agent_definition[var_0]["setup_func"] = &main;
+    level.agent_definition[var_0]["setup_model_func"] = &setup_model;
+    scripts\cp\coop_escape::precache_mp(var_0);
+    scripts\cp\cp_checkpoint::precache_mp(var_0);
+    scripts\cp\cp_awards::precache_mp(var_0);
   }
 
   scripts\aitypes\bt_util::init();

@@ -4,11 +4,11 @@
 ***********************************************/
 
 function init() {
-  var0 = spawnStruct();
-  var0.ref_138fd = "field_resupply";
-  var0.assault_update_hint_logic = &assault_update_hint_logic;
-  var0.isdisconnecting = &isdisconnecting;
-  _keypadscriptableused_bunkeralt::ref_12af4(var0);
+  var_0 = spawnStruct();
+  var_0.ref_138fd = "field_resupply";
+  var_0.assault_update_hint_logic = &assault_update_hint_logic;
+  var_0.isdisconnecting = &isdisconnecting;
+  _keypadscriptableused_bunkeralt::ref_12af4(var_0);
 }
 
 function assault_update_hint_logic() {
@@ -56,21 +56,21 @@ function isplayerbrsquadleader() {
   }
 }
 
-function isplacementplayerobstructed(var0, var1) {
-  var2 = "";
+function isplacementplayerobstructed(var_0, var_1) {
+  var_2 = "";
 
-  switch (var0) {
+  switch (var_0) {
     case "rmbl_give_field_resupply_powerup":
       level.player _keypadscriptableused_bunkeralt::ref_1393a("field_resupply");
       break;
     case "rmbl_spawn_field_resupply_powerup":
-      var3 = level.player.origin + anglesToForward(level.player.angles) * 300 + (0, 0, 25);
-      easepower("brloot_rumble_powerup_field_resupply", var3);
+      var_3 = level.player.origin + anglesToForward(level.player.angles) * 300 + (0, 0, 25);
+      easepower("brloot_rumble_powerup_field_resupply", var_3);
       break;
     case "rmbl_give_teammate_field_resupply_powerup":
-      var4 = scripts\mp\utility\teams::getteamdata(level.player.team, "players");
-      var4 = scripts\engine\utility::array_remove(var4, level.player);
-      var4[randomintrange(0, var4.size)] _keypadscriptableused_bunkeralt::ref_1393a("field_resupply");
+      var_4 = scripts\mp\utility\teams::getteamdata(level.player.team, "players");
+      var_4 = scripts\engine\utility::array_remove(var_4, level.player);
+      var_4[randomintrange(0, var_4.size)] _keypadscriptableused_bunkeralt::ref_1393a("field_resupply");
       break;
   }
 }

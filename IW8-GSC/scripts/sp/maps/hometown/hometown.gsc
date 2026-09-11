@@ -70,8 +70,8 @@ function main() {
   scripts\sp\nvg\nvg_player::main();
   scripts\sp\player\youngfarrah::youngfarrahsetup();
   thread scripts\sp\maps\hometown\hometown_util::register_farah_deaths();
-  var0 = ["frag"];
-  scripts\engine\sp\utility::offhandprecache(var0);
+  var_0 = ["frag"];
+  scripts\engine\sp\utility::offhandprecache(var_0);
   thread civ_cleanup_monitor();
   thread hometown_objectives();
   thread hometown_stealth();
@@ -245,35 +245,35 @@ function hometown_objectives() {
   scripts\engine\utility::flag_wait("objective_attract_help");
 
   if(isDefined(level.buried_rebar_model)) {
-    var0 = level.buried_rebar_model;
+    var_0 = level.buried_rebar_model;
   } else {
-    var0 = scripts\engine\utility::getStruct("escape_rubble_objective", "script_noteworthy");
+    var_0 = scripts\engine\utility::getStruct("escape_rubble_objective", "script_noteworthy");
   }
 
-  var1 = scripts\engine\utility::spawn_tag_origin(var0.origin, var0.angles);
-  var1.origin += (-1, 0, 0);
-  scripts\engine\sp\objectives::objective_add("hometown_objective", "current", var1.origin, &"HOMETOWN/ATTRACT_HELP", &"HOMETOWN/BRICK");
+  var_1 = scripts\engine\utility::spawn_tag_origin(var_0.origin, var_0.angles);
+  var_1.origin += (-1, 0, 0);
+  scripts\engine\sp\objectives::objective_add("hometown_objective", "current", var_1.origin, &"HOMETOWN/ATTRACT_HELP", &"HOMETOWN/BRICK");
   scripts\engine\utility::flag_wait("objective_escape_rubble_complete");
-  var2 = scripts\engine\utility::getStruct("hadir_house_objective", "script_noteworthy");
-  scripts\engine\sp\objectives::objective_update("hometown_objective", "current", var2.origin, &"HOMETOWN/GET_TO_HADIR", &"HOMETOWN/FARAHS_HOUSE");
+  var_2 = scripts\engine\utility::getStruct("hadir_house_objective", "script_noteworthy");
+  scripts\engine\sp\objectives::objective_update("hometown_objective", "current", var_2.origin, &"HOMETOWN/GET_TO_HADIR", &"HOMETOWN/FARAHS_HOUSE");
   scripts\engine\utility::flag_wait("objective_get_to_hadir");
-  var2 = scripts\engine\utility::getStruct("hadir_house_objective", "script_noteworthy");
-  scripts\engine\sp\objectives::objective_update("hometown_objective", "current", var2.origin, &"HOMETOWN/GET_TO_HADIR", &"HOMETOWN/FARAHS_HOUSE");
+  var_2 = scripts\engine\utility::getStruct("hadir_house_objective", "script_noteworthy");
+  scripts\engine\sp\objectives::objective_update("hometown_objective", "current", var_2.origin, &"HOMETOWN/GET_TO_HADIR", &"HOMETOWN/FARAHS_HOUSE");
   scripts\engine\utility::flag_wait("objective_entered_house_complete");
 
   if(!isDefined(level.farah_father_ai)) {
-    var3 = scripts\engine\utility::getStruct("hadir_house_objective", "script_noteworthy");
-    var4 = var3.origin;
+    var_3 = scripts\engine\utility::getStruct("hadir_house_objective", "script_noteworthy");
+    var_4 = var_3.origin;
   } else {
-    var4 = level.farah_father_ai;
+    var_4 = level.farah_father_ai;
   }
 
   scripts\engine\sp\objectives::objective_update("hometown_objective", "current", undefined, &"HOMETOWN/PREPARE_TO_ESCAPE", &"HOMETOWN/FATHER");
 
-  if(isvector(var4)) {
-    scripts\engine\sp\objectives::objective_set_position("hometown_objective", var4);
+  if(isvector(var_4)) {
+    scripts\engine\sp\objectives::objective_set_position("hometown_objective", var_4);
   } else {
-    scripts\engine\sp\objectives::objective_set_on_entity("hometown_objective", "dad", var4);
+    scripts\engine\sp\objectives::objective_set_on_entity("hometown_objective", "dad", var_4);
   }
 
   scripts\engine\sp\objectives::objective_set_z_offset("hometown_objective", 72);
@@ -281,10 +281,10 @@ function hometown_objectives() {
 
   if(!scripts\sp\maps\hometown\hometown_util::skipchildrenkillingscene()) {
     if(!isDefined(level.hadir_melee_weapon_pickup)) {
-      var5 = scripts\engine\utility::getStruct("hadir_house_objective", "script_noteworthy");
-      var6 = var5.origin;
+      var_5 = scripts\engine\utility::getStruct("hadir_house_objective", "script_noteworthy");
+      var_6 = var_5.origin;
     } else {
-      var6 = level.hadir_melee_weapon_pickup;
+      var_6 = level.hadir_melee_weapon_pickup;
     }
 
     scripts\engine\sp\objectives::objective_remove_all_locations("hometown_objective");
@@ -294,10 +294,10 @@ function hometown_objectives() {
     scripts\engine\utility::flag_wait("objective_kill_the_soldier");
 
     if(!isDefined(level.goliath_ai)) {
-      var7 = scripts\engine\utility::getStruct("hadir_house_objective", "script_noteworthy");
-      var8 = var7.origin;
+      var_7 = scripts\engine\utility::getStruct("hadir_house_objective", "script_noteworthy");
+      var_8 = var_7.origin;
     } else {
-      var8 = level.goliath_ai;
+      var_8 = level.goliath_ai;
     }
 
     scripts\engine\sp\objectives::objective_update("hometown_objective", "current", undefined, &"HOMETOWN/ATTACK_THE_SOLDIER");
@@ -308,40 +308,40 @@ function hometown_objectives() {
   if(scripts\sp\maps\hometown\hometown_util::skipchildrenkillingscene()) {}
 
   if(!isDefined(level.goliath_body_model)) {
-    var7 = scripts\engine\utility::getStruct("hadir_house_objective", "script_noteworthy");
-    var8 = var7.origin;
+    var_7 = scripts\engine\utility::getStruct("hadir_house_objective", "script_noteworthy");
+    var_8 = var_7.origin;
   } else {
-    var8 = level.goliath_body_model;
+    var_8 = level.goliath_body_model;
   }
 
   scripts\engine\sp\objectives::objective_update("hometown_objective", "current", undefined, &"HOMETOWN/SEARCH_BODY", &"HOMETOWN/BODY");
 
-  if(isvector(var8)) {
-    scripts\engine\sp\objectives::objective_set_position("hometown_objective", var8);
+  if(isvector(var_8)) {
+    scripts\engine\sp\objectives::objective_set_position("hometown_objective", var_8);
   } else {
-    scripts\engine\sp\objectives::objective_set_on_entity("hometown_objective", "goliath", var8);
+    scripts\engine\sp\objectives::objective_set_on_entity("hometown_objective", "goliath", var_8);
   }
 
   scripts\engine\sp\objectives::objective_set_z_offset("hometown_objective", 15);
   scripts\engine\utility::flag_wait("objective_leave_the_house");
-  var9 = scripts\engine\utility::getStruct("hadir_house_objective", "script_noteworthy");
+  var_9 = scripts\engine\utility::getStruct("hadir_house_objective", "script_noteworthy");
   scripts\engine\sp\objectives::objective_remove_all_locations("hometown_objective");
-  scripts\engine\sp\objectives::objective_update("hometown_objective", "current", var9.origin, &"HOMETOWN/GET_OUTSIDE", &"HOMETOWN/FRONT_DOOR");
+  scripts\engine\sp\objectives::objective_update("hometown_objective", "current", var_9.origin, &"HOMETOWN/GET_OUTSIDE", &"HOMETOWN/FRONT_DOOR");
   scripts\engine\utility::flag_wait("objective_escape_the_gas");
-  var10 = scripts\engine\utility::getStruct("escape_village_objective", "script_noteworthy");
-  scripts\engine\sp\objectives::objective_update("hometown_objective", "current", var10.origin, &"HOMETOWN/ESCAPE_THE_GAS", &"HOMETOWN/ESCAPE");
+  var_10 = scripts\engine\utility::getStruct("escape_village_objective", "script_noteworthy");
+  scripts\engine\sp\objectives::objective_update("hometown_objective", "current", var_10.origin, &"HOMETOWN/ESCAPE_THE_GAS", &"HOMETOWN/ESCAPE");
   scripts\engine\utility::flag_wait("objective_find_a_way_out_of_town");
-  var11 = scripts\engine\utility::getStruct("get_to_car_objective_high", "script_noteworthy");
-  scripts\engine\sp\objectives::objective_update("hometown_objective", "current", var11.origin, &"HOMETOWN/OUT_OF_TOWN", &"HOMETOWN/ROAD");
+  var_11 = scripts\engine\utility::getStruct("get_to_car_objective_high", "script_noteworthy");
+  scripts\engine\sp\objectives::objective_update("hometown_objective", "current", var_11.origin, &"HOMETOWN/OUT_OF_TOWN", &"HOMETOWN/ROAD");
   scripts\engine\utility::flag_wait("objective_get_the_pistol");
 
   if(!scripts\sp\maps\hometown\hometown_util::skipchildrenkillingscene()) {
-    var12 = getEnt("farah_pistol_pickup", "script_noteworthy");
+    var_12 = getEnt("farah_pistol_pickup", "script_noteworthy");
     scripts\engine\sp\objectives::objective_update("hometown_objective", "current", undefined, &"HOMETOWN/GET_THE_PISTOL", &"HOMETOWN/REVOLVER");
-    scripts\engine\sp\objectives::objective_add_location_entity("hometown_objective", "pistol", var12);
+    scripts\engine\sp\objectives::objective_add_location_entity("hometown_objective", "pistol", var_12);
     scripts\engine\utility::flag_wait("objective_shoot_the_soldiers");
     scripts\engine\sp\objectives::objective_remove_all_locations("hometown_objective");
-    var13 = scripts\engine\utility::getStruct("get_to_car_objective_high", "script_noteworthy");
+    var_13 = scripts\engine\utility::getStruct("get_to_car_objective_high", "script_noteworthy");
     scripts\engine\sp\objectives::objective_update("hometown_objective", "current", undefined, &"HOMETOWN/KILL_THE_SOLDIERS", &"HOMETOWN/SOLDIERS");
   }
 
@@ -349,8 +349,8 @@ function hometown_objectives() {
 
   if(scripts\sp\maps\hometown\hometown_util::skipchildrenkillingscene()) {}
 
-  var14 = scripts\engine\utility::getStruct("get_to_car_objective_high", "script_noteworthy");
-  scripts\engine\sp\objectives::objective_update("hometown_objective", "current", var14.origin, &"HOMETOWN/STEAL_THE_VEHICLE", &"HOMETOWN/ESCAPE");
+  var_14 = scripts\engine\utility::getStruct("get_to_car_objective_high", "script_noteworthy");
+  scripts\engine\sp\objectives::objective_update("hometown_objective", "current", var_14.origin, &"HOMETOWN/STEAL_THE_VEHICLE", &"HOMETOWN/ESCAPE");
   scripts\engine\utility::flag_wait("objective_return_to_base");
   scripts\engine\sp\objectives::objective_update("hometown_objective", "current", undefined, &"HOMETOWN/RETURN_TO_BASE");
   scripts\engine\sp\objectives::objective_remove_all_locations("hometown_objective");
@@ -387,23 +387,23 @@ function carried_start() {
   thread melee_setup();
   scripts\engine\sp\utility::set_start_location("buried_start", [level.player]);
   thread scripts\sp\maps\hometown\hometown_attack::sfx_intro_chaos();
-  var0 = getEnt("buried_org", "script_noteworthy");
-  var1 = getEnt("carried_org", "script_noteworthy");
-  level.rail_player_model = scripts\engine\sp\utility::spawn_anim_model("hometown_player_rig", var0.origin, var0.angles);
-  level.buried_rubble_01_model = scripts\engine\sp\utility::spawn_anim_model("buried_rubble_01", var0.origin, var0.angles);
-  level.buried_rubble_02_model = scripts\engine\sp\utility::spawn_anim_model("buried_rubble_02", var0.origin, var0.angles);
-  level.buried_rubble_03_model = scripts\engine\sp\utility::spawn_anim_model("buried_rubble_03", var0.origin, var0.angles);
-  level.buried_rubble_04_model = scripts\engine\sp\utility::spawn_anim_model("buried_rubble_04", var0.origin, var0.angles);
-  level.farah_mother_model = scripts\engine\sp\utility::spawn_anim_model("farah_mother", var0.origin, var0.angles);
+  var_0 = getEnt("buried_org", "script_noteworthy");
+  var_1 = getEnt("carried_org", "script_noteworthy");
+  level.rail_player_model = scripts\engine\sp\utility::spawn_anim_model("hometown_player_rig", var_0.origin, var_0.angles);
+  level.buried_rubble_01_model = scripts\engine\sp\utility::spawn_anim_model("buried_rubble_01", var_0.origin, var_0.angles);
+  level.buried_rubble_02_model = scripts\engine\sp\utility::spawn_anim_model("buried_rubble_02", var_0.origin, var_0.angles);
+  level.buried_rubble_03_model = scripts\engine\sp\utility::spawn_anim_model("buried_rubble_03", var_0.origin, var_0.angles);
+  level.buried_rubble_04_model = scripts\engine\sp\utility::spawn_anim_model("buried_rubble_04", var_0.origin, var_0.angles);
+  level.farah_mother_model = scripts\engine\sp\utility::spawn_anim_model("farah_mother", var_0.origin, var_0.angles);
   level.farah_mother_model setModel("body_civ_syrkistan_female_1_1");
   level.farah_mother_model attach("head_sc_f_eghbali_civ_bloody");
   level.farah_mother_model.fakeactor_face_anim = 1;
   level.farah_mother_model.animationarchetype = "soldier";
-  level.farah_sister_model = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_child("farah_sister", var0, 1);
+  level.farah_sister_model = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_child("farah_sister", var_0, 1);
   thread scripts\sp\maps\hometown\hometown_attack::buried_rubble_setup();
-  level.kargorgis_wh01_model = var1 scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("white_helmet_1", "buried", "white_helmet", undefined, undefined, undefined, "body_white_helmets_male_2", "head_sc_m_kargorgis_civ_helmet_bg_dust", "white_helemets_go");
-  level.ahmadzai_wh02_model = var1 scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("white_helmet_2", "buried", "white_helmet", undefined, undefined, undefined, "body_white_helmets_male_1", "head_sc_m_ahmadzai_civ_helmet_bg_dust", "white_helemets_go");
-  level.yurteri_wh03_model = var1 scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("white_helmet_3", "buried", "white_helmet", undefined, undefined, undefined, "body_white_helmets_male_3", "head_sc_m_yurteri_civ_helmet_bg_dust", "white_helemets_go");
+  level.kargorgis_wh01_model = var_1 scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("white_helmet_1", "buried", "white_helmet", undefined, undefined, undefined, "body_white_helmets_male_2", "head_sc_m_kargorgis_civ_helmet_bg_dust", "white_helemets_go");
+  level.ahmadzai_wh02_model = var_1 scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("white_helmet_2", "buried", "white_helmet", undefined, undefined, undefined, "body_white_helmets_male_1", "head_sc_m_ahmadzai_civ_helmet_bg_dust", "white_helemets_go");
+  level.yurteri_wh03_model = var_1 scripts\sp\maps\hometown\hometown_util::spawn_dude_play_anim_and_delete("white_helmet_3", "buried", "white_helmet", undefined, undefined, undefined, "body_white_helmets_male_3", "head_sc_m_yurteri_civ_helmet_bg_dust", "white_helemets_go");
   scripts\engine\utility::flag_set("objective_attract_help");
   scripts\engine\utility::flag_set("lighting_carried_start");
   level.player scripts\common\utility::allow_cinematic_motion(0);
@@ -421,10 +421,10 @@ function alley_start() {
   setmusicstate("mx_hometown_02_alley_lp");
   scripts\sp\maps\hometown\hometown_util::spawn_father();
   thread scripts\sp\maps\hometown\hometown_attack::audio_dist_shootings();
-  var0 = scripts\engine\utility::getStruct("alley_father_start", "script_noteworthy");
-  level.farah_father_ai forceteleport(var0.origin, var0.angles);
-  var1 = getEnt("alley_scenes_node", "script_noteworthy");
-  var1 thread scripts\sp\maps\hometown\hometown_attack::alley_looped_anims();
+  var_0 = scripts\engine\utility::getStruct("alley_father_start", "script_noteworthy");
+  level.farah_father_ai forceteleport(var_0.origin, var_0.angles);
+  var_1 = getEnt("alley_scenes_node", "script_noteworthy");
+  var_1 thread scripts\sp\maps\hometown\hometown_attack::alley_looped_anims();
   thread scripts\sp\maps\hometown\hometown_attack::alley_triggers_monitor();
   thread scripts\sp\maps\hometown\hometown_attack::gas_attack_triggers_monitor();
   scripts\engine\utility::flag_set("lighting_alley_start");
@@ -444,18 +444,18 @@ function gas_attack_start() {
   scripts\engine\sp\utility::set_start_location("gas_attack_start", [level.player]);
   thread scripts\sp\maps\hometown\hometown_util::force_ai_see_player_square();
   scripts\sp\maps\hometown\hometown_util::spawn_father();
-  var0 = scripts\engine\utility::getStruct("gas_attack_father_start", "script_noteworthy");
-  level.farah_father_ai forceteleport(var0.origin, var0.angles);
-  var1 = getEnt("alley_scenes_node", "script_noteworthy");
-  var1 thread scripts\sp\maps\hometown\hometown_attack::alley_looped_anims();
+  var_0 = scripts\engine\utility::getStruct("gas_attack_father_start", "script_noteworthy");
+  level.farah_father_ai forceteleport(var_0.origin, var_0.angles);
+  var_1 = getEnt("alley_scenes_node", "script_noteworthy");
+  var_1 thread scripts\sp\maps\hometown\hometown_attack::alley_looped_anims();
   thread scripts\sp\maps\hometown\hometown_attack::alley_triggers_monitor();
   thread scripts\sp\maps\hometown\hometown_attack::gas_attack_triggers_monitor();
   scripts\engine\utility::flag_set("lighting_gas_attack_start");
   scripts\engine\utility::flag_set("objective_attract_help");
   scripts\engine\utility::flag_set("objective_escape_rubble_complete");
   scripts\sp\maps\hometown\hometown_attack::alley_setup();
-  var2 = getnode("gas_attack_steet_mid_node", "targetname");
-  level.farah_father_ai setgoalnode(var2);
+  var_2 = getnode("gas_attack_steet_mid_node", "targetname");
+  level.farah_father_ai setgoalnode(var_2);
   level.gas_attack_left_anim_node notify("stop_loop");
   level.gas_attack_left_anim_node thread scripts\common\anim::anim_last_frame_solo(level.gasattack_ambulance_truck_model, "gasattack_intro");
   level.gas_attack_left_anim_node thread scripts\common\anim::anim_loop_solo(level.gasattack_wh01_model, "gasattack_idle");
@@ -499,10 +499,10 @@ function house_enter_start() {
   scripts\sp\maps\hometown\hometown_util::spawn_father();
   thread gas_victims_start_loops();
   level.player scripts\common\utility::allow_melee(0);
-  var0 = getEnt("pre_boss_house_gate", "script_noteworthy");
-  var0 scripts\engine\sp\utility::hide_entity();
-  var1 = getEnt("pre_boss_house_gate_clip", "script_noteworthy");
-  var1 scripts\engine\sp\utility::hide_entity();
+  var_0 = getEnt("pre_boss_house_gate", "script_noteworthy");
+  var_0 scripts\engine\sp\utility::hide_entity();
+  var_1 = getEnt("pre_boss_house_gate_clip", "script_noteworthy");
+  var_1 scripts\engine\sp\utility::hide_entity();
 }
 
 function house_enter_catchup() {
@@ -536,15 +536,15 @@ function house_boss_start() {
   level.hadir_body_model.animationarchetype = "soldier";
   level.hadir_body_model hide();
   scripts\sp\maps\hometown\hometown_util::spawn_father();
-  var0 = getEnt("pre_boss_house_gate", "script_noteworthy");
-  var0 scripts\engine\sp\utility::hide_entity();
-  var1 = getEnt("pre_boss_house_gate_clip", "script_noteworthy");
-  var1 scripts\engine\sp\utility::hide_entity();
-  var2 = scripts\engine\sp\utility::spawn_anim_model("house_intro_pack", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  var3 = scripts\engine\sp\utility::spawn_anim_model("house_intro_lantern", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(var2, "house_dad_dies");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(var3, "house_dad_dies");
-  level thread scripts\sp\maps\hometown\hometown_house::lantern_fire(var3);
+  var_0 = getEnt("pre_boss_house_gate", "script_noteworthy");
+  var_0 scripts\engine\sp\utility::hide_entity();
+  var_1 = getEnt("pre_boss_house_gate_clip", "script_noteworthy");
+  var_1 scripts\engine\sp\utility::hide_entity();
+  var_2 = scripts\engine\sp\utility::spawn_anim_model("house_intro_pack", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  var_3 = scripts\engine\sp\utility::spawn_anim_model("house_intro_lantern", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(var_2, "house_dad_dies");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(var_3, "house_dad_dies");
+  level thread scripts\sp\maps\hometown\hometown_house::lantern_fire(var_3);
   scripts\engine\utility::flag_set("lantern_break");
   scripts\engine\utility::flag_set("objective_attract_help");
   scripts\engine\utility::flag_set("objective_escape_rubble_complete");
@@ -561,14 +561,14 @@ function house_boss_start() {
   level thread scripts\sp\maps\hometown\hometown_house::goliath_player_location_monitor();
   level thread scripts\sp\maps\hometown\hometown_house::goliath_struggle();
   thread gas_victims_start_loops();
-  var4 = scripts\engine\sp\utility::spawn_anim_model("house_intro_cupboard", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  var5 = scripts\engine\sp\utility::spawn_anim_model("house_intro_cupboard_b", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  var6 = scripts\engine\sp\utility::spawn_anim_model("house_intro_dresser", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  var7 = scripts\engine\sp\utility::spawn_anim_model("house_intro_hutch", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var6, "house_dad_dies");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var7, "house_dad_dies");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var4, "house_get_mask_kitchen");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var5, "house_get_mask_kitchen");
+  var_4 = scripts\engine\sp\utility::spawn_anim_model("house_intro_cupboard", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  var_5 = scripts\engine\sp\utility::spawn_anim_model("house_intro_cupboard_b", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  var_6 = scripts\engine\sp\utility::spawn_anim_model("house_intro_dresser", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  var_7 = scripts\engine\sp\utility::spawn_anim_model("house_intro_hutch", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var_6, "house_dad_dies");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var_7, "house_dad_dies");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var_4, "house_get_mask_kitchen");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var_5, "house_get_mask_kitchen");
   level.dead_dad_blocker = getEnt("dead_dad_blocker", "script_noteworthy");
   level.dead_dad_blocker_hadir = getEnt("dead_dad_blocker_hadir", "script_noteworthy");
   level.dead_dad_blocker_hadir scripts\engine\sp\utility::hide_entity();
@@ -600,27 +600,27 @@ function house_exit_start() {
   thread melee_setup();
   scripts\engine\sp\utility::set_start_location("house_exit_start", [level.player]);
   visionsetnaked("hometown_house_int", 0);
-  var0 = getspawner("hadir_spawner", "script_noteworthy");
-  var0 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\hometown\hometown_util::hadir_spawn_func);
-  level.hadir_ai = var0 scripts\engine\sp\utility::spawn_ai(1);
+  var_0 = getspawner("hadir_spawner", "script_noteworthy");
+  var_0 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\hometown\hometown_util::hadir_spawn_func);
+  level.hadir_ai = var_0 scripts\engine\sp\utility::spawn_ai(1);
   level.gas_attack_anim_node = getEnt("gas_attack_street_node", "script_noteworthy");
   scripts\sp\maps\hometown\hometown_attack::spawn_door_model();
-  var1 = scripts\engine\utility::getStructArray("boss_struggle_loc_" + level.player scripts\sp\maps\hometown\hometown_house::get_current_house_room(), "script_noteworthy");
-  level.boss_struggle_anim_node = scripts\engine\utility::random(var1);
+  var_1 = scripts\engine\utility::getStructArray("boss_struggle_loc_" + level.player scripts\sp\maps\hometown\hometown_house::get_current_house_room(), "script_noteworthy");
+  level.boss_struggle_anim_node = scripts\engine\utility::random(var_1);
   level.boss_struggle_anim_node_safe = level.boss_struggle_anim_node;
   level.father_body_model = scripts\engine\sp\utility::spawn_anim_model("farah_father_body", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
   thread scripts\sp\maps\hometown\hometown_house::dad_procedural_bones();
   level.father_body_model attach("head_hero_farahs_father");
   level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(level.father_body_model, "house_dad_dead_frame");
-  var2 = getEnt("pre_boss_house_gate", "script_noteworthy");
-  var2 scripts\engine\sp\utility::hide_entity();
-  var3 = getEnt("pre_boss_house_gate_clip", "script_noteworthy");
-  var3 scripts\engine\sp\utility::hide_entity();
-  var4 = scripts\engine\sp\utility::spawn_anim_model("house_intro_pack", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  var5 = scripts\engine\sp\utility::spawn_anim_model("house_intro_lantern", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(var4, "house_dad_dies");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(var5, "house_dad_dies");
-  level thread scripts\sp\maps\hometown\hometown_house::lantern_fire(var5);
+  var_2 = getEnt("pre_boss_house_gate", "script_noteworthy");
+  var_2 scripts\engine\sp\utility::hide_entity();
+  var_3 = getEnt("pre_boss_house_gate_clip", "script_noteworthy");
+  var_3 scripts\engine\sp\utility::hide_entity();
+  var_4 = scripts\engine\sp\utility::spawn_anim_model("house_intro_pack", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  var_5 = scripts\engine\sp\utility::spawn_anim_model("house_intro_lantern", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(var_4, "house_dad_dies");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_last_frame_solo(var_5, "house_dad_dies");
+  level thread scripts\sp\maps\hometown\hometown_house::lantern_fire(var_5);
   scripts\engine\utility::flag_set("lantern_break");
   scripts\engine\utility::flag_set("lantern_smoke");
   scripts\engine\utility::flag_set("objective_attract_help");
@@ -638,14 +638,14 @@ function house_exit_start() {
   level.player giveweapon("iw8_gunless_farrah");
   level.player switchtoweaponimmediate("iw8_gunless_farrah");
   level.boss_kill_sling_model = scripts\engine\sp\utility::spawn_anim_model("boss_kill_sling", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  var6 = scripts\engine\sp\utility::spawn_anim_model("house_intro_cupboard", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  var7 = scripts\engine\sp\utility::spawn_anim_model("house_intro_cupboard_b", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  var8 = scripts\engine\sp\utility::spawn_anim_model("house_intro_dresser", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  var9 = scripts\engine\sp\utility::spawn_anim_model("house_intro_hutch", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
-  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var8, "house_dad_dies");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var9, "house_dad_dies");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var6, "house_get_mask_kitchen");
-  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var7, "house_get_mask_kitchen");
+  var_6 = scripts\engine\sp\utility::spawn_anim_model("house_intro_cupboard", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  var_7 = scripts\engine\sp\utility::spawn_anim_model("house_intro_cupboard_b", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  var_8 = scripts\engine\sp\utility::spawn_anim_model("house_intro_dresser", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  var_9 = scripts\engine\sp\utility::spawn_anim_model("house_intro_hutch", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
+  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var_8, "house_dad_dies");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var_9, "house_dad_dies");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var_6, "house_get_mask_kitchen");
+  level.gas_attack_anim_node thread scripts\common\anim::anim_first_frame_solo(var_7, "house_get_mask_kitchen");
   level.hadir_ai attach("hat_waist_child_hadir_gas_mask", "J_Proc_SpineLower_Swivel");
   level.hadir_ai setModel("body_hero_hadir_child_bloody");
   level.get_mask_anim_node = level.boss_struggle_anim_node;
@@ -679,17 +679,17 @@ function gas_start() {
   setaudiotriggerstate("gas_outsidehouse", "gasthrown", 1);
   thread scripts\sp\maps\hometown\hometown_util::force_ai_see_player_square();
   thread scripts\sp\maps\hometown\hometown_util::buried_kill_trigger();
-  var0 = getspawner("hadir_spawner", "script_noteworthy");
-  var0 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\hometown\hometown_util::hadir_spawn_func);
-  level.hadir_ai = var0 scripts\engine\sp\utility::spawn_ai(1);
-  var1 = scripts\engine\utility::getStruct("hadir_gas_start", "script_noteworthy");
-  level.hadir_ai forceteleport(var1.origin, var1.angles);
+  var_0 = getspawner("hadir_spawner", "script_noteworthy");
+  var_0 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\hometown\hometown_util::hadir_spawn_func);
+  level.hadir_ai = var_0 scripts\engine\sp\utility::spawn_ai(1);
+  var_1 = scripts\engine\utility::getStruct("hadir_gas_start", "script_noteworthy");
+  level.hadir_ai forceteleport(var_1.origin, var_1.angles);
   level.gas_attack_anim_node = getEnt("gas_attack_street_node", "script_noteworthy");
   thread gas_victims_start_loops();
-  var2 = getEnt("pre_boss_house_gate", "script_noteworthy");
-  var2 scripts\engine\sp\utility::hide_entity();
-  var3 = getEnt("pre_boss_house_gate_clip", "script_noteworthy");
-  var3 scripts\engine\sp\utility::hide_entity();
+  var_2 = getEnt("pre_boss_house_gate", "script_noteworthy");
+  var_2 scripts\engine\sp\utility::hide_entity();
+  var_3 = getEnt("pre_boss_house_gate_clip", "script_noteworthy");
+  var_3 scripts\engine\sp\utility::hide_entity();
   scripts\sp\maps\hometown\hometown_attack::kill_chickens();
   scripts\engine\utility::flag_set("objective_attract_help");
   scripts\engine\utility::flag_set("objective_escape_rubble_complete");
@@ -713,30 +713,30 @@ function gas_start() {
 
 function gas_victims_start_loops() {
   level.gas_attack_left_anim_node = scripts\engine\utility::getStruct("gas_attack_from_left_node", "script_noteworthy");
-  var0 = scripts\engine\sp\utility::spawn_anim_model("gasattack_ambulance_truck", level.gas_attack_left_anim_node.origin, level.gas_attack_left_anim_node.angles);
-  var1 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_wh("gasattack_wh01", level.gas_attack_left_anim_node, 1);
-  var2 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_wh("gasattack_wh02", level.gas_attack_left_anim_node, 1);
-  var3 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_wh("gasattack_wh03", level.gas_attack_left_anim_node, 1);
-  var4 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_female("gasattack_civ01", level.gas_attack_left_anim_node, 1);
-  var5 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_female("gasattack_civ02", level.gas_attack_left_anim_node, 1);
-  var6 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ("gasattack_civ03", level.gas_attack_left_anim_node, 1);
-  var7 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ("gasattack_civ04", level.gas_attack_left_anim_node, 1);
-  var8 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ("gasattack_civ05", level.gas_attack_left_anim_node, 1);
-  var9 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ("gasattack_civ06", level.gas_attack_left_anim_node, 1);
-  var10 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_female("gasattack_civ07", level.gas_attack_left_anim_node, 1);
-  var11 = scripts\engine\sp\utility::spawn_anim_model("gasattack_enemy_truck_02", level.gas_attack_left_anim_node.origin, level.gas_attack_left_anim_node.angles);
-  level.gas_attack_left_anim_node thread scripts\common\anim::anim_first_frame_solo(var0, "gasattack_intro");
-  level.gas_attack_left_anim_node thread scripts\common\anim::anim_loop_solo(var1, "gasattack_gassed");
-  level.gas_attack_left_anim_node thread scripts\common\anim::anim_loop_solo(var2, "gasattack_gassed");
-  level.gas_attack_left_anim_node thread scripts\common\anim::anim_loop_solo(var3, "gasattack_gassed");
-  level.gas_attack_left_anim_node thread scripts\common\anim::anim_loop_solo(var4, "gasattack_gassed");
-  level.gas_attack_left_anim_node thread scripts\common\anim::anim_loop_solo(var5, "gasattack_gassed");
-  level.gas_attack_left_anim_node thread scripts\common\anim::anim_loop_solo(var6, "gasattack_gassed");
-  level.gas_attack_left_anim_node thread scripts\common\anim::anim_loop_solo(var7, "gasattack_gassed");
-  level.gas_attack_left_anim_node thread scripts\common\anim::anim_loop_solo(var8, "gasattack_gassed");
-  level.gas_attack_left_anim_node thread scripts\common\anim::anim_loop_solo(var9, "gasattack_gassed");
-  level.gas_attack_left_anim_node thread scripts\common\anim::anim_loop_solo(var10, "gasattack_gassed");
-  level.gas_attack_left_anim_node thread scripts\common\anim::anim_first_frame_solo(var11, "gasattack_attack");
+  var_0 = scripts\engine\sp\utility::spawn_anim_model("gasattack_ambulance_truck", level.gas_attack_left_anim_node.origin, level.gas_attack_left_anim_node.angles);
+  var_1 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_wh("gasattack_wh01", level.gas_attack_left_anim_node, 1);
+  var_2 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_wh("gasattack_wh02", level.gas_attack_left_anim_node, 1);
+  var_3 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_wh("gasattack_wh03", level.gas_attack_left_anim_node, 1);
+  var_4 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_female("gasattack_civ01", level.gas_attack_left_anim_node, 1);
+  var_5 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_female("gasattack_civ02", level.gas_attack_left_anim_node, 1);
+  var_6 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ("gasattack_civ03", level.gas_attack_left_anim_node, 1);
+  var_7 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ("gasattack_civ04", level.gas_attack_left_anim_node, 1);
+  var_8 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ("gasattack_civ05", level.gas_attack_left_anim_node, 1);
+  var_9 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ("gasattack_civ06", level.gas_attack_left_anim_node, 1);
+  var_10 = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_female("gasattack_civ07", level.gas_attack_left_anim_node, 1);
+  var_11 = scripts\engine\sp\utility::spawn_anim_model("gasattack_enemy_truck_02", level.gas_attack_left_anim_node.origin, level.gas_attack_left_anim_node.angles);
+  level.gas_attack_left_anim_node thread scripts\common\anim::anim_first_frame_solo(var_0, "gasattack_intro");
+  level.gas_attack_left_anim_node thread scripts\common\anim::anim_loop_solo(var_1, "gasattack_gassed");
+  level.gas_attack_left_anim_node thread scripts\common\anim::anim_loop_solo(var_2, "gasattack_gassed");
+  level.gas_attack_left_anim_node thread scripts\common\anim::anim_loop_solo(var_3, "gasattack_gassed");
+  level.gas_attack_left_anim_node thread scripts\common\anim::anim_loop_solo(var_4, "gasattack_gassed");
+  level.gas_attack_left_anim_node thread scripts\common\anim::anim_loop_solo(var_5, "gasattack_gassed");
+  level.gas_attack_left_anim_node thread scripts\common\anim::anim_loop_solo(var_6, "gasattack_gassed");
+  level.gas_attack_left_anim_node thread scripts\common\anim::anim_loop_solo(var_7, "gasattack_gassed");
+  level.gas_attack_left_anim_node thread scripts\common\anim::anim_loop_solo(var_8, "gasattack_gassed");
+  level.gas_attack_left_anim_node thread scripts\common\anim::anim_loop_solo(var_9, "gasattack_gassed");
+  level.gas_attack_left_anim_node thread scripts\common\anim::anim_loop_solo(var_10, "gasattack_gassed");
+  level.gas_attack_left_anim_node thread scripts\common\anim::anim_first_frame_solo(var_11, "gasattack_attack");
 }
 
 function gas_catchup() {
@@ -759,17 +759,17 @@ function gas_mid_start() {
   level.player scripts\engine\sp\utility::allow_nvg(0, "hometown", 1);
   thread melee_setup();
   setaudiotriggerstate("gas_outsidehouse", "gasthrown", 1);
-  var0 = getspawner("hadir_spawner", "script_noteworthy");
-  var0 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\hometown\hometown_util::hadir_spawn_func);
-  level.hadir_ai = var0 scripts\engine\sp\utility::spawn_ai(1);
-  var1 = scripts\engine\utility::getStruct("hadir_gas_start", "script_noteworthy");
-  level.hadir_ai forceteleport(var1.origin, var1.angles);
+  var_0 = getspawner("hadir_spawner", "script_noteworthy");
+  var_0 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\hometown\hometown_util::hadir_spawn_func);
+  level.hadir_ai = var_0 scripts\engine\sp\utility::spawn_ai(1);
+  var_1 = scripts\engine\utility::getStruct("hadir_gas_start", "script_noteworthy");
+  level.hadir_ai forceteleport(var_1.origin, var_1.angles);
   level.gas_attack_anim_node = getEnt("gas_attack_street_node", "script_noteworthy");
   thread gas_victims_start_loops();
-  var2 = getEnt("pre_boss_house_gate", "script_noteworthy");
-  var2 scripts\engine\sp\utility::hide_entity();
-  var3 = getEnt("pre_boss_house_gate_clip", "script_noteworthy");
-  var3 scripts\engine\sp\utility::hide_entity();
+  var_2 = getEnt("pre_boss_house_gate", "script_noteworthy");
+  var_2 scripts\engine\sp\utility::hide_entity();
+  var_3 = getEnt("pre_boss_house_gate_clip", "script_noteworthy");
+  var_3 scripts\engine\sp\utility::hide_entity();
   scripts\sp\maps\hometown\hometown_attack::kill_chickens();
   scripts\engine\utility::flag_set("objective_attract_help");
   scripts\engine\utility::flag_set("objective_escape_rubble_complete");
@@ -807,17 +807,17 @@ function gas_exit_start() {
   level.player scripts\engine\sp\utility::allow_nvg(0, "hometown", 1);
   thread melee_setup();
   setaudiotriggerstate("gas_outsidehouse", "gasthrown", 1);
-  var0 = getspawner("hadir_spawner", "script_noteworthy");
-  var0 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\hometown\hometown_util::hadir_spawn_func);
-  level.hadir_ai = var0 scripts\engine\sp\utility::spawn_ai(1);
-  var1 = getnode("hadir_exit_gas_start", "script_noteworthy");
-  level.hadir_ai forceteleport(var1.origin, var1.angles);
+  var_0 = getspawner("hadir_spawner", "script_noteworthy");
+  var_0 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\hometown\hometown_util::hadir_spawn_func);
+  level.hadir_ai = var_0 scripts\engine\sp\utility::spawn_ai(1);
+  var_1 = getnode("hadir_exit_gas_start", "script_noteworthy");
+  level.hadir_ai forceteleport(var_1.origin, var_1.angles);
   level.gas_attack_anim_node = getEnt("gas_attack_street_node", "script_noteworthy");
   thread gas_victims_start_loops();
-  var2 = getEnt("pre_boss_house_gate", "script_noteworthy");
-  var2 scripts\engine\sp\utility::hide_entity();
-  var3 = getEnt("pre_boss_house_gate_clip", "script_noteworthy");
-  var3 scripts\engine\sp\utility::hide_entity();
+  var_2 = getEnt("pre_boss_house_gate", "script_noteworthy");
+  var_2 scripts\engine\sp\utility::hide_entity();
+  var_3 = getEnt("pre_boss_house_gate_clip", "script_noteworthy");
+  var_3 scripts\engine\sp\utility::hide_entity();
   scripts\sp\maps\hometown\hometown_attack::kill_chickens();
   scripts\engine\utility::stop_exploder("gas_cam_01");
   scripts\engine\utility::flag_set("objective_attract_help");
@@ -837,8 +837,8 @@ function gas_exit_start() {
   thread scripts\sp\maps\hometown\hometown_house::player_putgasmaskon();
   level.hadir_ai attach("hat_child_hadir_gas_mask");
   scripts\sp\maps\hometown\hometown_escape::gas_main_setup(1);
-  var4 = getnode("hadir_exit_gas_start", "script_noteworthy");
-  level.hadir_ai setgoalnode(var4);
+  var_4 = getnode("hadir_exit_gas_start", "script_noteworthy");
+  level.hadir_ai setgoalnode(var_4);
   wait 1;
   visionsetnaked("", 0);
   thread scripts\sp\maps\hometown\hometown_escape::hadir_move_speed_gas_exit(1);
@@ -855,12 +855,12 @@ function poppies_start() {
   level.player scripts\engine\sp\utility::allow_nvg(0, "hometown", 1);
   thread melee_setup();
   scripts\engine\sp\utility::set_start_location("poppies_start", [level.player]);
-  var0 = getspawner("hadir_spawner", "script_noteworthy");
-  var0 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\hometown\hometown_util::hadir_spawn_func);
-  level.hadir_ai = var0 scripts\engine\sp\utility::spawn_ai(1);
+  var_0 = getspawner("hadir_spawner", "script_noteworthy");
+  var_0 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\hometown\hometown_util::hadir_spawn_func);
+  level.hadir_ai = var_0 scripts\engine\sp\utility::spawn_ai(1);
   level.hadir_ai attach("hat_child_hadir_gas_mask");
-  var1 = scripts\engine\utility::getStruct("hadir_poppies_start", "script_noteworthy");
-  level.hadir_ai forceteleport(var1.origin, var1.angles);
+  var_1 = scripts\engine\utility::getStruct("hadir_poppies_start", "script_noteworthy");
+  level.hadir_ai forceteleport(var_1.origin, var_1.angles);
   thread scripts\sp\maps\hometown\hometown_house::player_putgasmaskon();
   scripts\engine\utility::flag_set("objective_attract_help");
   scripts\engine\utility::flag_set("objective_escape_rubble_complete");
@@ -901,11 +901,11 @@ function pistol_start() {
   scripts\engine\sp\utility::set_start_location("pistol_start", [level.player]);
   setaudiotriggerstate("gas_outsidehouse", "", 1);
   setmusicstate("mx_hometown_17_poppies_execution");
-  var0 = getspawner("hadir_spawner", "script_noteworthy");
-  var0 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\hometown\hometown_util::hadir_spawn_func);
-  level.hadir_ai = var0 scripts\engine\sp\utility::spawn_ai(1);
-  var1 = scripts\engine\utility::getStruct("hadir_pistol_start", "script_noteworthy");
-  level.hadir_ai forceteleport(var1.origin, var1.angles);
+  var_0 = getspawner("hadir_spawner", "script_noteworthy");
+  var_0 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\hometown\hometown_util::hadir_spawn_func);
+  level.hadir_ai = var_0 scripts\engine\sp\utility::spawn_ai(1);
+  var_1 = scripts\engine\utility::getStruct("hadir_pistol_start", "script_noteworthy");
+  level.hadir_ai forceteleport(var_1.origin, var_1.angles);
   scripts\engine\utility::flag_set("objective_attract_help");
   scripts\engine\utility::flag_set("objective_escape_rubble_complete");
   scripts\engine\utility::flag_set("objective_get_to_hadir");
@@ -935,11 +935,11 @@ function drive_start() {
   thread melee_setup();
   scripts\engine\sp\utility::set_start_location("drive_start", [level.player]);
   setaudiotriggerstate("gas_outsidehouse", "", 1);
-  var0 = getspawner("hadir_spawner", "script_noteworthy");
-  var0 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\hometown\hometown_util::hadir_spawn_func);
-  level.hadir_ai = var0 scripts\engine\sp\utility::spawn_ai(1);
-  var1 = getEnt("end_russian_truck", "script_noteworthy");
-  var1 delete();
+  var_0 = getspawner("hadir_spawner", "script_noteworthy");
+  var_0 scripts\engine\sp\utility::add_spawn_function(&scripts\sp\maps\hometown\hometown_util::hadir_spawn_func);
+  level.hadir_ai = var_0 scripts\engine\sp\utility::spawn_ai(1);
+  var_1 = getEnt("end_russian_truck", "script_noteworthy");
+  var_1 delete();
   level.pistol_intro_anim_node = scripts\engine\utility::getStruct("pistol_intro_anim_node", "script_noteworthy");
   level.phone_kid_idle_child01_model = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_child("phone_kid_idle_child01", level.pistol_intro_anim_node);
   level.phone_kid_idle_child02_model = scripts\sp\maps\hometown\hometown_util::make_script_model_civ_child("phone_kid_idle_child02", level.pistol_intro_anim_node);
@@ -1214,17 +1214,17 @@ function level_vfx() {
 
 function civ_cleanup_monitor() {
   level waittill("clean_up_civs");
-  var0 = scripts\engine\utility::array_removeundefined(level.civ_cleanup_array);
+  var_0 = scripts\engine\utility::array_removeundefined(level.civ_cleanup_array);
 
-  foreach(var2 in var0) {
-    if(isDefined(var2)) {
-      var2 delete();
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2)) {
+      var_2 delete();
     }
   }
 }
 
 function hadir_poppies_start_anim() {
-  var0 = scripts\engine\utility::getStruct("poppies_enter_anim_node", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("poppies_enter_anim_node", "script_noteworthy");
   level.hadir_ai scripts\engine\sp\utility::enable_ai_color();
-  var0 scripts\common\anim::anim_single_solo(level.hadir_ai, "Hole_exit_hadir");
+  var_0 scripts\common\anim::anim_single_solo(level.hadir_ai, "Hole_exit_hadir");
 }

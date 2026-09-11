@@ -14,28 +14,28 @@ function setup_callbacks() {
 
 function setup_bot_gun() {}
 
-function data_pickup_logic(var0, var1) {
-  if(isDefined(var0) && var0 != "none") {
-    var2 = scripts\mp\utility\weapon::getweaponrootname(var0);
-    var3 = level.bot_weap_personality[var2];
-    var4 = strtok(var3, "| ");
-    var5 = weaponclass(var0);
+function data_pickup_logic(var_0, var_1) {
+  if(isDefined(var_0) && var_0 != "none") {
+    var_2 = scripts\mp\utility\weapon::getweaponrootname(var_0);
+    var_3 = level.bot_weap_personality[var_2];
+    var_4 = strtok(var_3, "| ");
+    var_5 = weaponclass(var_0);
 
-    if(var5 == "pistol") {
-      var4 = ["cqb", "run_and_gun"];
+    if(var_5 == "pistol") {
+      var_4 = ["cqb", "run_and_gun"];
     }
 
-    if(var4.size > 0) {
-      var6 = undefined;
+    if(var_4.size > 0) {
+      var_6 = undefined;
 
-      if(scripts\engine\utility::array_contains(var4, var1)) {
-        var6 = var1;
+      if(scripts\engine\utility::array_contains(var_4, var_1)) {
+        var_6 = var_1;
       } else {
-        var6 = scripts\engine\utility::random(var4);
+        var_6 = scripts\engine\utility::random(var_4);
       }
 
-      if(self.personality != var6) {
-        scripts\mp\bots\bots_util::bot_set_personality(var6);
+      if(self.personality != var_6) {
+        scripts\mp\bots\bots_util::bot_set_personality(var_6);
         return;
       }
 
@@ -51,18 +51,18 @@ function bot_gun_think() {
   self endon("bot_gun_think");
   self endon("death_or_disconnect");
   level endon("game_ended");
-  var0 = "";
-  var1 = self.personality;
+  var_0 = "";
+  var_1 = self.personality;
   wait 0.1;
 
   for(;;) {
-    var2 = self getcurrentweapon();
+    var_2 = self getcurrentweapon();
 
-    if(var2.basename != "none" && !scripts\mp\utility\weapon::iskillstreakweapon(var2) && var2.basename != var0 && var2.basename != "iw8_knifestab_mp") {
-      var0 = var2.basename;
+    if(var_2.basename != "none" && !scripts\mp\utility\weapon::iskillstreakweapon(var_2) && var_2.basename != var_0 && var_2.basename != "iw8_knifestab_mp") {
+      var_0 = var_2.basename;
 
       if(self botgetdifficultysetting("advancedPersonality") && self botgetdifficultysetting("strategyLevel") > 0) {
-        data_pickup_logic(var2.basename, var1);
+        data_pickup_logic(var_2.basename, var_1);
       }
     }
 

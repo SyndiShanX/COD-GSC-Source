@@ -11,14 +11,14 @@ function runmprangefinder() {
 
   for(;;) {
     if(getdvarint("scr_rangeFinder", 0) == 1) {
-      var0 = createcamnode();
-      thread addmodeltoplayer(var0);
+      var_0 = createcamnode();
+      thread addmodeltoplayer(var_0);
 
       while(getdvarint("scr_rangeFinder", 0) == 1) {
         wait 0.01;
       }
 
-      var0 delete();
+      var_0 delete();
       level notify("rangeFinder_end");
     }
 
@@ -27,10 +27,10 @@ function runmprangefinder() {
 }
 
 function createcamnode() {
-  var0 = spawn("script_origin", level.players[0].origin);
+  var_0 = spawn("script_origin", level.players[0].origin);
   thread monitorplacement();
   thread managelink();
-  return var0;
+  return var_0;
 }
 
 function monitorplacement() {
@@ -79,17 +79,17 @@ function softlink() {
 
   for(;;) {
     self.angles = (0, 90 + level.players[0].angles[1], 0);
-    var0 = anglesToForward(level.players[0].angles) * 40;
-    self.origin = level.players[0].origin - var0;
+    var_0 = anglesToForward(level.players[0].angles) * 40;
+    self.origin = level.players[0].origin - var_0;
     wait 0.01;
   }
 }
 
-function addmodeltoplayer(var0) {
-  var1 = spawn("script_model", var0.origin);
-  var1.angles = var0.angles;
-  var1 setModel("mw_dist_soldier");
-  var1 linkTo(var0);
+function addmodeltoplayer(var_0) {
+  var_1 = spawn("script_model", var_0.origin);
+  var_1.angles = var_0.angles;
+  var_1 setModel("mw_dist_soldier");
+  var_1 linkTo(var_0);
   thread watchrangefinderend();
 }
 

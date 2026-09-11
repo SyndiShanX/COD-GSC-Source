@@ -8,8 +8,8 @@ function ref_1396d() {
   wait 1;
   level.can_combat_action_be_interrupted = getEntArray("gondola_start", "script_noteworthy");
 
-  foreach(var1 in level.can_combat_action_be_interrupted) {
-    ref_1396e(var1);
+  foreach(var_1 in level.can_combat_action_be_interrupted) {
+    ref_1396e(var_1);
     thread select_patrol_three_spawners();
     thread ref_140fe();
   }
@@ -20,90 +20,90 @@ function unuseweapon() {
   wait 1;
   level.can_combat_action_be_interrupted = getEntArray("gondola_start_v2", "script_noteworthy");
 
-  foreach(var1 in level.can_combat_action_be_interrupted) {
-    var1 clearwristwatchtime(1);
-    friendly_convoy_intro_decho_idle_animation(var1);
+  foreach(var_1 in level.can_combat_action_be_interrupted) {
+    var_1 clearwristwatchtime(1);
+    friendly_convoy_intro_decho_idle_animation(var_1);
     thread select_patrol_six_spawners();
     thread ref_140fe();
   }
 }
 
 function ref_1396e() {
-  var0 = self;
-  var1 = var0 scripts\engine\utility::get_linked_ents();
+  var_0 = self;
+  var_1 = var_0 scripts\engine\utility::get_linked_ents();
 
-  foreach(var3 in var1) {
-    var3 linkTo(var0);
+  foreach(var_3 in var_1) {
+    var_3 linkTo(var_0);
 
-    if(isDefined(var3.classname) && var3.classname == "script_brushmodel" && !isDefined(var3.targetname)) {
-      var0.collision = var3;
-      var3.targetname = "gondola_clipbrush";
-      var3.unresolved_collision_func = &select_players_not_in_killzone_only;
+    if(isDefined(var_3.classname) && var_3.classname == "script_brushmodel" && !isDefined(var_3.targetname)) {
+      var_0.collision = var_3;
+      var_3.targetname = "gondola_clipbrush";
+      var_3.unresolved_collision_func = &select_players_not_in_killzone_only;
     }
 
-    if(isDefined(var3.targetname) && var3.targetname == "wheeler") {
-      var0.ref_145aa = var3;
+    if(isDefined(var_3.targetname) && var_3.targetname == "wheeler") {
+      var_0.ref_145aa = var_3;
     }
   }
 
-  var5 = scripts\engine\utility::getStruct(var0.target, "targetname");
-  var6 = getEnt(var5.target, "targetname");
-  var7 = getEnt(var6.target, "targetname");
-  var8 = scripts\engine\utility::getStruct(var7.target, "targetname");
-  var9 = getEnt(var8.target, "targetname");
-  var0.ref_1376e = var0.origin;
-  var0.movelatejoinerstospectators = var5.origin;
-  var0.ref_13770 = var7.origin;
-  var0.moveleadmarkers = var8.origin;
-  var0.ref_1376f = var0.angles[1];
-  var0.ref_12384 = var6;
-  var0.ref_12385 = var9;
+  var_5 = scripts\engine\utility::getStruct(var_0.target, "targetname");
+  var_6 = getEnt(var_5.target, "targetname");
+  var_7 = getEnt(var_6.target, "targetname");
+  var_8 = scripts\engine\utility::getStruct(var_7.target, "targetname");
+  var_9 = getEnt(var_8.target, "targetname");
+  var_0.ref_1376e = var_0.origin;
+  var_0.movelatejoinerstospectators = var_5.origin;
+  var_0.ref_13770 = var_7.origin;
+  var_0.moveleadmarkers = var_8.origin;
+  var_0.ref_1376f = var_0.angles[1];
+  var_0.ref_12384 = var_6;
+  var_0.ref_12385 = var_9;
 
-  if(isDefined(var0.script_parameters) && var0.script_parameters == "up") {
-    var0.juggheli_spawner_jammer5_1 = vectortopitch(var0.origin - var0.movelatejoinerstospectators);
-  } else if(isDefined(var0.script_parameters) && var0.script_parameters == "down") {
-    var0.juggheli_spawner_jammer5_1 = vectortopitch(var0.movelatejoinerstospectators - var0.origin);
+  if(isDefined(var_0.script_parameters) && var_0.script_parameters == "up") {
+    var_0.juggheli_spawner_jammer5_1 = vectortopitch(var_0.origin - var_0.movelatejoinerstospectators);
+  } else if(isDefined(var_0.script_parameters) && var_0.script_parameters == "down") {
+    var_0.juggheli_spawner_jammer5_1 = vectortopitch(var_0.movelatejoinerstospectators - var_0.origin);
   }
 
-  if(!isDefined(var0.script_speed)) {
-    var0.script_speed = 15;
+  if(!isDefined(var_0.script_speed)) {
+    var_0.script_speed = 15;
     return;
   }
 }
 
 function friendly_convoy_intro_decho_idle_animation() {
-  var0 = self;
-  var1 = var0 scripts\engine\utility::get_linked_ents();
+  var_0 = self;
+  var_1 = var_0 scripts\engine\utility::get_linked_ents();
 
-  foreach(var3 in var1) {
-    var3 linkTo(var0);
+  foreach(var_3 in var_1) {
+    var_3 linkTo(var_0);
 
-    if(isDefined(var3.classname) && var3.classname == "script_brushmodel" && !isDefined(var3.targetname)) {
-      var0.collision = var3;
-      var3.targetname = "gondola_clipbrush";
-      var3.unresolved_collision_func = &select_players_not_in_killzone_only;
+    if(isDefined(var_3.classname) && var_3.classname == "script_brushmodel" && !isDefined(var_3.targetname)) {
+      var_0.collision = var_3;
+      var_3.targetname = "gondola_clipbrush";
+      var_3.unresolved_collision_func = &select_players_not_in_killzone_only;
     }
 
-    if(isDefined(var3.targetname) && var3.targetname == "wheeler") {
-      var0.ref_145aa = var3;
+    if(isDefined(var_3.targetname) && var_3.targetname == "wheeler") {
+      var_0.ref_145aa = var_3;
     }
   }
 
-  var5 = scripts\engine\utility::getStruct(var0.target, "targetname");
-  var0.ref_1376f = var0.angles[1];
+  var_5 = scripts\engine\utility::getStruct(var_0.target, "targetname");
+  var_0.ref_1376f = var_0.angles[1];
 
-  if(isDefined(var0.script_parameters) && var0.script_parameters == "up") {
-    var0.juggheli_spawner_jammer5_1 = 25;
-  } else if(isDefined(var0.script_parameters) && var0.script_parameters == "down") {
-    var0.juggheli_spawner_jammer5_1 = 25;
+  if(isDefined(var_0.script_parameters) && var_0.script_parameters == "up") {
+    var_0.juggheli_spawner_jammer5_1 = 25;
+  } else if(isDefined(var_0.script_parameters) && var_0.script_parameters == "down") {
+    var_0.juggheli_spawner_jammer5_1 = 25;
   }
 
-  if(!isDefined(var0.script_speed)) {
-    var0.script_speed = 1;
+  if(!isDefined(var_0.script_speed)) {
+    var_0.script_speed = 1;
   }
 
-  var6 = getdvarfloat("scr_gondola_speed_multiplier", 1.25);
-  var0.script_speed = 1 * var6;
+  var_6 = getdvarfloat("scr_gondola_speed_multiplier", 1.25);
+  var_0.script_speed = 1 * var_6;
 }
 
 function select_patrol_six_spawners() {
@@ -116,89 +116,89 @@ function select_patrol_six_spawners() {
       self.angles = (self.angles[0], self.ref_1376f, self.angles[2]);
     }
 
-    var0 = self;
-    var1 = undefined;
+    var_0 = self;
+    var_1 = undefined;
     self.ref_1385b = scripts\engine\utility::getStruct(self.target, "targetname");
 
     for(;;) {
-      var2 = scripts\engine\utility::getStruct(var0.target, "targetname");
+      var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
 
-      if(!isDefined(var2)) {
+      if(!isDefined(var_2)) {
         break;
       }
 
-      if(isstruct(var2)) {
-        var1 = var2;
-        ref_145ab(var1, var0);
-        self moveTo(var1.origin, self.script_speed, 0, 0);
+      if(isstruct(var_2)) {
+        var_1 = var_2;
+        ref_145ab(var_1, var_0);
+        self moveTo(var_1.origin, self.script_speed, 0, 0);
         wait self.script_speed;
         waitframe();
-        var0 = var2;
-        ref_13437(var0);
+        var_0 = var_2;
+        ref_13437(var_0);
       }
     }
 
-    var3 = getEnt(var0.target, "targetname");
+    var_3 = getEnt(var_0.target, "targetname");
 
-    if(isDefined(var3) && var3.script_noteworthy == "pivot_point") {
-      self linkTo(var3);
-      var3 rotateYaw(180, 4);
+    if(isDefined(var_3) && var_3.script_noteworthy == "pivot_point") {
+      self linkTo(var_3);
+      var_3 rotateYaw(180, 4);
       wait 4;
       waitframe();
       self unlink();
       waitframe();
-      var0 = scripts\engine\utility::getStruct(var3.target, "targetname");
+      var_0 = scripts\engine\utility::getStruct(var_3.target, "targetname");
     }
 
     select_patrol_two_spawners();
 
     for(;;) {
-      var2 = scripts\engine\utility::getStruct(var0.target, "targetname");
+      var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
 
-      if(!isDefined(var2)) {
+      if(!isDefined(var_2)) {
         break;
       }
 
-      if(isstruct(var2)) {
-        var1 = var2;
-        ref_145ab(var1, var0);
-        self moveTo(var1.origin, self.script_speed, 0, 0);
+      if(isstruct(var_2)) {
+        var_1 = var_2;
+        ref_145ab(var_1, var_0);
+        self moveTo(var_1.origin, self.script_speed, 0, 0);
         wait self.script_speed;
         waitframe();
-        var0 = var2;
-        ref_13437(var0);
+        var_0 = var_2;
+        ref_13437(var_0);
       }
     }
 
-    var3 = getEnt(var0.target, "targetname");
+    var_3 = getEnt(var_0.target, "targetname");
 
-    if(isDefined(var3) && var3.script_noteworthy == "pivot_point") {
-      self linkTo(var3);
-      var3 rotateYaw(180, 4);
+    if(isDefined(var_3) && var_3.script_noteworthy == "pivot_point") {
+      self linkTo(var_3);
+      var_3 rotateYaw(180, 4);
       wait 4;
       waitframe();
       self unlink();
       waitframe();
-      var0 = scripts\engine\utility::getStruct(var3.target, "targetname");
+      var_0 = scripts\engine\utility::getStruct(var_3.target, "targetname");
     }
 
     select_patrol_two_spawners();
 
-    while(scripts\engine\utility::getStruct(var0.target, "targetname") != self.ref_1385b) {
-      var2 = scripts\engine\utility::getStruct(var0.target, "targetname");
+    while(scripts\engine\utility::getStruct(var_0.target, "targetname") != self.ref_1385b) {
+      var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
 
-      if(!isDefined(var2)) {
+      if(!isDefined(var_2)) {
         break;
       }
 
-      if(isstruct(var2)) {
-        var1 = var2;
-        ref_145ab(var1, var0);
-        self moveTo(var1.origin, self.script_speed, 0, 0);
+      if(isstruct(var_2)) {
+        var_1 = var_2;
+        ref_145ab(var_1, var_0);
+        self moveTo(var_1.origin, self.script_speed, 0, 0);
         wait self.script_speed;
         waitframe();
-        var0 = var2;
-        ref_13437(var0);
+        var_0 = var_2;
+        ref_13437(var_0);
       }
     }
   }
@@ -271,63 +271,63 @@ function select_patrol_two_spawners() {
 }
 
 function select_players_in_killzone_first() {
-  var0 = self;
+  var_0 = self;
 
-  if(!isDefined(var0.juggheli_spawner_jammer5_1)) {
+  if(!isDefined(var_0.juggheli_spawner_jammer5_1)) {
     return;
   }
 
-  if(!isDefined(var0.ref_145aa)) {
+  if(!isDefined(var_0.ref_145aa)) {
     return;
   }
 
-  var0.ref_145aa.angles = (0, var0.ref_145aa.angles[1], var0.ref_145aa.angles[2]);
-  var0.ref_145aa unlink();
+  var_0.ref_145aa.angles = (0, var_0.ref_145aa.angles[1], var_0.ref_145aa.angles[2]);
+  var_0.ref_145aa unlink();
 
-  if(isDefined(var0.script_parameters) && var0.script_parameters == "up") {
-    var0.ref_145aa addpitch(var0.juggheli_spawner_jammer5_1);
-  } else if(isDefined(var0.script_parameters) && var0.script_parameters == "down") {
-    var0.ref_145aa addpitch(-1 * var0.juggheli_spawner_jammer5_1);
+  if(isDefined(var_0.script_parameters) && var_0.script_parameters == "up") {
+    var_0.ref_145aa addpitch(var_0.juggheli_spawner_jammer5_1);
+  } else if(isDefined(var_0.script_parameters) && var_0.script_parameters == "down") {
+    var_0.ref_145aa addpitch(-1 * var_0.juggheli_spawner_jammer5_1);
   }
 
-  var0.ref_145aa linkTo(var0);
+  var_0.ref_145aa linkTo(var_0);
 }
 
-function select_players_not_in_killzone_only(var0, var1) {
-  var2 = self;
-  var2.manageprematchfade = 1;
-  var2.stage1accradius = level.can_combat_action_be_interrupted;
+function select_players_not_in_killzone_only(var_0, var_1) {
+  var_2 = self;
+  var_2.manageprematchfade = 1;
+  var_2.stage1accradius = level.can_combat_action_be_interrupted;
 
-  if(isDefined(level.ref_11c87) && [[level.ref_11c87]](var0, var2)) {
+  if(isDefined(level.ref_11c87) && [[level.ref_11c87]](var_0, var_2)) {
     return;
   }
 
-  var3 = undefined;
-  var4 = var2 getlinkedparent();
-  var5 = var4.origin;
-  var6 = var5 + (0, 0, 5);
-  var7 = playerphysicstrace(var5, var6);
+  var_3 = undefined;
+  var_4 = var_2 getlinkedparent();
+  var_5 = var_4.origin;
+  var_6 = var_5 + (0, 0, 5);
+  var_7 = playerphysicstrace(var_5, var_6);
 
-  if(var7 == var6 && canspawn(var5)) {
-    var3 = var5;
+  if(var_7 == var_6 && canspawn(var_5)) {
+    var_3 = var_5;
   }
 
-  if(isDefined(var3)) {
-    var0 setOrigin(var3);
+  if(isDefined(var_3)) {
+    var_0 setOrigin(var_3);
     return;
   }
 
-  var8 = 1000;
+  var_8 = 1000;
 
-  if(isDefined(var2.unresolved_collision_damage)) {
-    var8 = var2.unresolved_collision_damage;
+  if(isDefined(var_2.unresolved_collision_damage)) {
+    var_8 = var_2.unresolved_collision_damage;
   }
 
-  var0 dodamage(var8, var2.origin, var2.owner, var2, "MOD_CRUSH");
+  var_0 dodamage(var_8, var_2.origin, var_2.owner, var_2, "MOD_CRUSH");
 }
 
-function triggereliminatedoverlay(var0) {
-  if(isDefined(var0) && isDefined(var0.targetname) && var0.targetname == "gondola_clipbrush") {
+function triggereliminatedoverlay(var_0) {
+  if(isDefined(var_0) && isDefined(var_0.targetname) && var_0.targetname == "gondola_clipbrush") {
     return true;
   }
 
@@ -339,10 +339,10 @@ function ref_140fe() {
   self endon("death");
 
   for(;;) {
-    self waittill("touch", var0);
+    self waittill("touch", var_0);
 
-    if(isDefined(var0) && nuke_vault_suicidebomber_internal(var0)) {
-      var0 dodamage(var0.health, self.origin, var0, var0, "MOD_CRUSH");
+    if(isDefined(var_0) && nuke_vault_suicidebomber_internal(var_0)) {
+      var_0 dodamage(var_0.health, self.origin, var_0, var_0, "MOD_CRUSH");
     }
   }
 }
@@ -351,42 +351,42 @@ function nuke_vault_suicidebomber_internal() {
   return isalive(self) && (scripts\common\vehicle::isvehicle() || isDefined(self.classname) && self.classname == "script_vehicle");
 }
 
-function ref_13437(var0) {
-  var1 = self;
+function ref_13437(var_0) {
+  var_1 = self;
 
-  if(!isDefined(var1) || !isDefined(var0) || !isDefined(var1.ref_145aa)) {
+  if(!isDefined(var_1) || !isDefined(var_0) || !isDefined(var_1.ref_145aa)) {
     return;
   }
 
-  if(isDefined(var0.script_noteworthy) && var0.script_noteworthy == "snd_turn") {
-    var1.ref_145aa setscriptablepartstate("sfx", "sfx_don4_gondola_TURN");
-    var1 setscriptablepartstate("sfx", "sfx_don4_gondola_arrived_TURN");
+  if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "snd_turn") {
+    var_1.ref_145aa setscriptablepartstate("sfx", "sfx_don4_gondola_TURN");
+    var_1 setscriptablepartstate("sfx", "sfx_don4_gondola_arrived_TURN");
     return;
   }
 
-  if(isDefined(var0.script_noteworthy) && var0.script_noteworthy == "snd_up") {
-    var1.ref_145aa setscriptablepartstate("sfx", "sfx_don4_gondola_up");
-    var1 setscriptablepartstate("sfx", "sfx_don4_gondola_arrived_up");
+  if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "snd_up") {
+    var_1.ref_145aa setscriptablepartstate("sfx", "sfx_don4_gondola_up");
+    var_1 setscriptablepartstate("sfx", "sfx_don4_gondola_arrived_up");
     return;
   }
 
-  if(isDefined(var0.script_noteworthy) && var0.script_noteworthy == "snd_down") {
-    var1.ref_145aa setscriptablepartstate("sfx", "sfx_don4_gondola_down");
-    var1 setscriptablepartstate("sfx", "sfx_don4_gondola_arrived_down");
+  if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "snd_down") {
+    var_1.ref_145aa setscriptablepartstate("sfx", "sfx_don4_gondola_down");
+    var_1 setscriptablepartstate("sfx", "sfx_don4_gondola_arrived_down");
     return;
   }
 }
 
-function ref_145ab(var0, var1) {
-  var2 = self;
+function ref_145ab(var_0, var_1) {
+  var_2 = self;
 
-  if(!isDefined(var2) || !isDefined(var0) || !isDefined(var1) || !isDefined(var2.ref_145aa)) {
+  if(!isDefined(var_2) || !isDefined(var_0) || !isDefined(var_1) || !isDefined(var_2.ref_145aa)) {
     return;
   }
 
-  var2.ref_145aa unlink();
-  var2.ref_145aa.angles = (0, var2.ref_145aa.angles[1], var2.ref_145aa.angles[2]);
-  var3 = vectortopitch(var1.origin - var0.origin);
-  var2.ref_145aa addpitch(var3);
-  var2.ref_145aa linkTo(var2);
+  var_2.ref_145aa unlink();
+  var_2.ref_145aa.angles = (0, var_2.ref_145aa.angles[1], var_2.ref_145aa.angles[2]);
+  var_3 = vectortopitch(var_1.origin - var_0.origin);
+  var_2.ref_145aa addpitch(var_3);
+  var_2.ref_145aa linkTo(var_2);
 }

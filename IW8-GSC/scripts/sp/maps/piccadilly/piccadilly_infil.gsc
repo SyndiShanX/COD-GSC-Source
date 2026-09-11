@@ -38,10 +38,10 @@ function infil_init() {
   scripts\engine\utility::flag_init("standoff_vo_complete");
   thread setup_level_arrays();
   thread setup_civ_groups();
-  var0 = getEntArray("player_movement_clip", "script_noteworthy");
+  var_0 = getEntArray("player_movement_clip", "script_noteworthy");
 
-  foreach(var2 in var0) {
-    var2 notsolid();
+  foreach(var_2 in var_0) {
+    var_2 notsolid();
   }
 }
 
@@ -59,12 +59,12 @@ function setup_level_arrays() {
 }
 
 function setup_civ_groups() {
-  var0 = [];
+  var_0 = [];
   level.skippable_ents = [];
   level.intro_civs = [];
-  level.intro_civs["adult"] = var0;
-  level.intro_civs["male"] = var0;
-  level.intro_civs["female"] = var0;
+  level.intro_civs["adult"] = var_0;
+  level.intro_civs["male"] = var_0;
+  level.intro_civs["female"] = var_0;
   level.intro_civs["kids"] = getspawnerarray("civilian_new_child");
   level.intro_civs["noStandoff"] = [];
   level.intro_civs["injured"] = [];
@@ -72,30 +72,30 @@ function setup_civ_groups() {
   level.intro_civs["dead"] = [];
   level.intro_civs["post"] = [];
 
-  foreach(var2 in level.intro_civs["kids"]) {
-    if(var2.script_namenumber == "male") {
-      level.intro_civs["boy"] = var2;
+  foreach(var_2 in level.intro_civs["kids"]) {
+    if(var_2.script_namenumber == "male") {
+      level.intro_civs["boy"] = var_2;
       continue;
     }
 
-    level.intro_civs["girl"] = var2;
+    level.intro_civs["girl"] = var_2;
   }
 
-  var4 = getspawnerarray("civilians_intro");
+  var_4 = getspawnerarray("civilians_intro");
 
-  foreach(var2 in var4) {
-    if(var2.script_namenumber == "random") {
-      level.intro_civs["adult"][level.intro_civs["adult"].size] = var2;
+  foreach(var_2 in var_4) {
+    if(var_2.script_namenumber == "random") {
+      level.intro_civs["adult"][level.intro_civs["adult"].size] = var_2;
       continue;
     }
 
-    if(var2.script_namenumber == "male") {
-      level.intro_civs["male"][level.intro_civs["male"].size] = var2;
+    if(var_2.script_namenumber == "male") {
+      level.intro_civs["male"][level.intro_civs["male"].size] = var_2;
       continue;
     }
 
-    if(var2.script_namenumber == "female") {
-      level.intro_civs["female"][level.intro_civs["female"].size] = var2;
+    if(var_2.script_namenumber == "female") {
+      level.intro_civs["female"][level.intro_civs["female"].size] = var_2;
     }
   }
 }
@@ -107,8 +107,8 @@ function postspawn_ally() {
   self.maxsightdistsqrd = 3610000;
   self.primaryweapon = isundefinedweapon();
   self.secondaryweapon = isundefinedweapon();
-  var0 = scripts\sp\utility::make_weapon_special("papa320_black_rain");
-  scripts\anim\shared::forceuseweapon(var0, "primary");
+  var_0 = scripts\sp\utility::make_weapon_special("papa320_black_rain");
+  scripts\anim\shared::forceuseweapon(var_0, "primary");
 
   if(scripts\sp\starts::is_after_start("post_bomb")) {
     scripts\engine\sp\utility::set_force_color("p");
@@ -219,10 +219,10 @@ function terry_damage_monitor() {
   level endon("car2_detonation");
 
   for(;;) {
-    self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7);
 
-    if(isDefined(var1) && var1 == level.player) {
-      if(isDefined(var4) && var4 == "MOD_MELEE") {
+    if(isDefined(var_1) && var_1 == level.player) {
+      if(isDefined(var_4) && var_4 == "MOD_MELEE") {
         scripts\sp\player_death::set_custom_death_quote(88);
         scripts\sp\utility::missionfailedwrapper();
       }
@@ -230,20 +230,20 @@ function terry_damage_monitor() {
   }
 }
 
-function swap_weapon_to(var0) {
+function swap_weapon_to(var_0) {
   self.primaryweapon = isundefinedweapon();
   self.secondaryweapon = isundefinedweapon();
-  var1 = scripts\sp\utility::make_weapon(var0);
-  scripts\anim\shared::forceuseweapon(var1, "primary");
+  var_1 = scripts\sp\utility::make_weapon(var_0);
+  scripts\anim\shared::forceuseweapon(var_1, "primary");
 }
 
 function notify_whizby_from_player() {
   level endon("weapons_free");
 
   for(;;) {
-    self waittill("bulletwhizby", var0);
+    self waittill("bulletwhizby", var_0);
 
-    if(scripts\engine\utility::is_equal(var0, level.player)) {
+    if(scripts\engine\utility::is_equal(var_0, level.player)) {
       scripts\engine\utility::flag_set("weapons_free");
     }
   }
@@ -274,28 +274,28 @@ function start() {
 }
 
 function main() {
-  var0 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
+  var_0 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
   setglobalsoundcontext("dusty", "yes");
-  var1 = getDvar("OMNONNMOTP");
+  var_1 = getDvar("OMNONNMOTP");
   setsaveddvar("OMNONNMOTP", "0.1 500 1.5 10000");
   thread skippable_intro();
   thread intro_london_bink();
   thread spawn_animated_intro_civs();
-  thread intro_bus(var0);
+  thread intro_bus(var_0);
   scripts\engine\utility::delaythread(0.1, &scripts\engine\sp\utility::battlechatter_off);
   thread sfx_piccadilly_intro_mix();
   thread vo_intro_walla();
   scripts\engine\sp\utility::array_spawn_targetname("intro_civs");
   level.street_friendlies = scripts\engine\sp\utility::array_spawn_targetname("sicario_street_friendly");
 
-  foreach(var3 in level.street_friendlies) {
-    if(scripts\engine\utility::is_equal(var3.script_friendname, "Sgt. Crowley")) {
-      var3 scripts\sp\maps\piccadilly\piccadilly_gap::set_friendname("Cst. Brooks", "Trojan 3-1");
+  foreach(var_3 in level.street_friendlies) {
+    if(scripts\engine\utility::is_equal(var_3.script_friendname, "Sgt. Crowley")) {
+      var_3 scripts\sp\maps\piccadilly\piccadilly_gap::set_friendname("Cst. Brooks", "Trojan 3-1");
       continue;
     }
 
-    if(scripts\engine\utility::is_equal(var3.script_friendname, "Cst. Brooks")) {
-      var3 scripts\sp\maps\piccadilly\piccadilly_gap::set_friendname("Sgt. Crowley", "Sabre 2-4");
+    if(scripts\engine\utility::is_equal(var_3.script_friendname, "Cst. Brooks")) {
+      var_3 scripts\sp\maps\piccadilly\piccadilly_gap::set_friendname("Sgt. Crowley", "Sabre 2-4");
     }
   }
 
@@ -307,8 +307,8 @@ function main() {
   level.player modifybasefov(53, 0.01);
   intro_street_player_movement();
   level.scr_model["player_rig"] = "viewhands_fullbody_kyle_sas_urban";
-  level.player_rig = scripts\engine\sp\utility::spawn_anim_model("player_rig", var0.origin, var0.angles);
-  var0 scripts\common\anim::anim_first_frame_solo(level.player_rig, "intro_slamzoom");
+  level.player_rig = scripts\engine\sp\utility::spawn_anim_model("player_rig", var_0.origin, var_0.angles);
+  var_0 scripts\common\anim::anim_first_frame_solo(level.player_rig, "intro_slamzoom");
   level.skippable_ents[level.skippable_ents.size] = level.player_rig;
   level.kyledrone = scripts\engine\sp\utility::spawn_targetname("kyle", 1);
   kyledrone_extras(level.kyledrone);
@@ -326,16 +326,16 @@ function main() {
   scripts\engine\sp\objectives::objective_add("piccadilly_objective", "current", undefined, &"PICCADILLY/OBJ_INTRO");
   setmusicstate("mx_piccadilly_truckintro_os");
   thread attach_player_to_rig(level.player_rig);
-  var5 = scripts\engine\utility::array_combine(level.street_friendlies, level.car1_terries, [level.car1_terry]);
-  scripts\engine\utility::array_thread(var5, &intro_anims_allies, var0);
-  var6 = [level.player_rig, level.kyledrone];
-  scripts\engine\utility::array_thread(var6, &intro_anims_non_ai, var0);
-  var0 notify("start_bus");
-  scripts\engine\utility::array_thread(level.car2_terries, &intro_anims_car2, var0);
-  thread intro_car(var0);
+  var_5 = scripts\engine\utility::array_combine(level.street_friendlies, level.car1_terries, [level.car1_terry]);
+  scripts\engine\utility::array_thread(var_5, &intro_anims_allies, var_0);
+  var_6 = [level.player_rig, level.kyledrone];
+  scripts\engine\utility::array_thread(var_6, &intro_anims_non_ai, var_0);
+  var_0 notify("start_bus");
+  scripts\engine\utility::array_thread(level.car2_terries, &intro_anims_car2, var_0);
+  thread intro_car(var_0);
   scripts\engine\utility::flag_wait("boots_on_the_ground");
   level notify("vo_standoff_walla");
-  setsaveddvar("OMNONNMOTP", var1);
+  setsaveddvar("OMNONNMOTP", var_1);
   scripts\engine\sp\objectives::objective_update("piccadilly_objective", "current", undefined, &"PICCADILLY/OBJ_APPROACH_VAN", &"PICCADILLY/CURSOR_TARGET");
   scripts\engine\sp\objectives::objective_set_on_entity("piccadilly_objective", "Target", level.cars_bomb["van"]);
   scripts\engine\sp\objectives::objective_set_z_offset("piccadilly_objective", 120);
@@ -350,42 +350,42 @@ function catchup() {
   scripts\engine\utility::flag_set("camera_move_done");
   scripts\engine\utility::flag_set("intro_bink_done");
   scripts\engine\utility::flag_set("sas2_ready");
-  var0 = getEnt("intro_bus", "targetname");
-  var0 delete();
+  var_0 = getEnt("intro_bus", "targetname");
+  var_0 delete();
 }
 
 function skippable_intro() {
-  var0 = ["skippable_intro_ready", "skippable_civs_ready"];
-  level scripts\engine\utility::waittill_all_in_array(var0);
-  var1 = scripts\engine\utility::array_combine(level.intro_civs["injured"], level.intro_civs["dead"], level.intro_civs["noStandoff"], level.intro_civs["oneOff"], level.intro_civs["post"]);
-  var2 = scripts\engine\utility::array_combine(level.street_friendlies, level.skippable_ents, level.car1_terries, level.car2_terries);
-  var3 = scripts\engine\utility::array_combine(level.intro_cars, level.cars_bomb, [level.truck]);
-  var4 = scripts\engine\utility::array_combine(var1, var2, var3);
+  var_0 = ["skippable_intro_ready", "skippable_civs_ready"];
+  level scripts\engine\utility::waittill_all_in_array(var_0);
+  var_1 = scripts\engine\utility::array_combine(level.intro_civs["injured"], level.intro_civs["dead"], level.intro_civs["noStandoff"], level.intro_civs["oneOff"], level.intro_civs["post"]);
+  var_2 = scripts\engine\utility::array_combine(level.street_friendlies, level.skippable_ents, level.car1_terries, level.car2_terries);
+  var_3 = scripts\engine\utility::array_combine(level.intro_cars, level.cars_bomb, [level.truck]);
+  var_4 = scripts\engine\utility::array_combine(var_1, var_2, var_3);
   wait 1.5;
-  var5 = scripts\sp\utility::userskip_wait();
+  var_5 = scripts\sp\utility::userskip_wait();
   setmusicstate("");
 
-  if(!var5) {
+  if(!var_5) {
     return;
   }
 
   scripts\sp\hud_util::fade_out(0);
-  var6 = "intro_slamzoom";
-  var7 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
+  var_6 = "intro_slamzoom";
+  var_7 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
 
-  foreach(var9 in var4) {
-    if(!isDefined(var9)) {
+  foreach(var_9 in var_4) {
+    if(!isDefined(var_9)) {
       continue;
     }
 
-    if(scripts\engine\utility::array_contains(var3, var9)) {
-      thread skip_ahead_scriptable(var9, var7);
-    } else if(isDefined(level.scr_anim[var9.animname][var6])) {
-      thread skip_ahead(var9, var6);
+    if(scripts\engine\utility::array_contains(var_3, var_9)) {
+      thread skip_ahead_scriptable(var_9, var_7);
+    } else if(isDefined(level.scr_anim[var_9.animname][var_6])) {
+      thread skip_ahead(var_9, var_6);
     }
 
-    if(isDefined(var9)) {
-      var9 stopsounds();
+    if(isDefined(var_9)) {
+      var_9 stopsounds();
     }
   }
 
@@ -428,10 +428,10 @@ function skippable_intro() {
   thread unlink_player_after_boots();
 }
 
-function skip_ahead(var0, var1) {
-  var2 = getanimlength(scripts\engine\utility::getanim(var0));
+function skip_ahead(var_0, var_1) {
+  var_2 = getanimlength(scripts\engine\utility::getanim(var_0));
 
-  if(var2 <= var1) {
+  if(var_2 <= var_1) {
     self stopsounds();
     waitframe();
     self delete();
@@ -441,27 +441,27 @@ function skip_ahead(var0, var1) {
   level waittill("all_ents_are_ready");
 
   if(self.animname == "player_rig") {
-    var1 -= 0.5;
+    var_1 -= 0.5;
   }
 
-  var3 = (var2 - var1) / var2;
-  var3 = 1 - var3;
-  self setanimtime(scripts\engine\utility::getanim(var0), var3);
+  var_3 = (var_2 - var_1) / var_2;
+  var_3 = 1 - var_3;
+  self setanimtime(scripts\engine\utility::getanim(var_0), var_3);
 }
 
-function player_speed_management_intro(var0) {
+function player_speed_management_intro(var_0) {
   scripts\sp\player::player_movement_state("creep");
-  var1 = 40;
-  var2 = 90;
-  var3 = 20;
-  var4 = 140;
+  var_1 = 40;
+  var_2 = 90;
+  var_3 = 20;
+  var_4 = 140;
 
-  while(!scripts\engine\utility::flag(var0)) {
-    var5 = sortbydistance(level.street_friendlies, level.player.origin)[0];
-    var6 = distance(var5.origin, level.player.origin);
-    var7 = scripts\engine\math::normalize_value(var3, var4, var6);
-    var8 = scripts\engine\math::factor_value(var1, var2, var7);
-    scripts\engine\sp\utility::player_speed_set(var8);
+  while(!scripts\engine\utility::flag(var_0)) {
+    var_5 = sortbydistance(level.street_friendlies, level.player.origin)[0];
+    var_6 = distance(var_5.origin, level.player.origin);
+    var_7 = scripts\engine\math::normalize_value(var_3, var_4, var_6);
+    var_8 = scripts\engine\math::factor_value(var_1, var_2, var_7);
+    scripts\engine\sp\utility::player_speed_set(var_8);
     waitframe();
   }
 
@@ -496,37 +496,37 @@ function cine_letterboxing() {
   level.player clearcinematicmotionoverride();
 }
 
-function setup_scripted_car(var0) {
-  var1 = getEnt(var0, "targetname");
-  var1.animname = var0;
-  var1 scripts\engine\sp\utility::assign_animtree();
-  return var1;
+function setup_scripted_car(var_0) {
+  var_1 = getEnt(var_0, "targetname");
+  var_1.animname = var_0;
+  var_1 scripts\engine\sp\utility::assign_animtree();
+  return var_1;
 }
 
-function setup_scriptable_car(var0) {
+function setup_scriptable_car(var_0) {
   scripts\engine\utility::flag_wait("scriptables_ready");
-  var1 = getscriptablearray(var0, "targetname");
-  var1[0].animname = var0;
-  var1[0] scripts\engine\sp\utility::assign_animtree();
+  var_1 = getscriptablearray(var_0, "targetname");
+  var_1[0].animname = var_0;
+  var_1[0] scripts\engine\sp\utility::assign_animtree();
   thread setup_script_collision();
-  var1[0] setscriptablepartstate("lights_controller", "on_nolight");
-  return var1[0];
+  var_1[0] setscriptablepartstate("lights_controller", "on_nolight");
+  return var_1[0];
 }
 
 function setup_temp_car_stuff() {
-  var0 = getEnt("truck_light", "targetname");
-  var0 linkTo(self, "tag_origin", (-20, -20, 90), (0, 0, 0));
-  self.lightback = var0;
-  var0 = getEnt("truck_light_driver", "targetname");
-  var0 linkTo(self, "tag_origin", (60, -5, 70), (0, 0, 0));
-  self.lightfront = var0;
-  var1 = [(-28, 15, 25), (0, 30, 25), (0, 0, 25)];
-  var2 = getEntArray("truck_bomb", "targetname");
+  var_0 = getEnt("truck_light", "targetname");
+  var_0 linkTo(self, "tag_origin", (-20, -20, 90), (0, 0, 0));
+  self.lightback = var_0;
+  var_0 = getEnt("truck_light_driver", "targetname");
+  var_0 linkTo(self, "tag_origin", (60, -5, 70), (0, 0, 0));
+  self.lightfront = var_0;
+  var_1 = [(-28, 15, 25), (0, 30, 25), (0, 0, 25)];
+  var_2 = getEntArray("truck_bomb", "targetname");
   self.bombs = [];
 
-  for(var3 = 0; var3 < var2.size; var3++) {
-    var2[var3] linkTo(self, "tag_origin", var1[var3], (0, 0, 0));
-    self.bombs[self.bombs.size] = var2[var3];
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
+    var_2[var_3] linkTo(self, "tag_origin", var_1[var_3], (0, 0, 0));
+    self.bombs[self.bombs.size] = var_2[var_3];
   }
 }
 
@@ -537,8 +537,8 @@ function setup_script_collision() {
       case "intro_slamzoom_car_r3":
       case "intro_slamzoom_car_r2":
       case "intro_slamzoom_car_r1":
-        var0 = sortbydistance(level.script_car_collision, self.origin)[0];
-        self.scriptcoll = var0;
+        var_0 = sortbydistance(level.script_car_collision, self.origin)[0];
+        self.scriptcoll = var_0;
         self.scriptcoll linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
         self.scriptcoll.trigger scripts\engine\utility::trigger_off();
         thread delete_my_script_collision();
@@ -567,94 +567,94 @@ function car_civs() {
 }
 
 function car_civs_intro() {
-  var0 = getscriptablearray("intro_street_civ_car", "targetname");
-  thread scripts\engine\utility::array_thread_amortized(var0, &scriptable_car_passenger, 0.1);
+  var_0 = getscriptablearray("intro_street_civ_car", "targetname");
+  thread scripts\engine\utility::array_thread_amortized(var_0, &scriptable_car_passenger, 0.1);
 }
 
 function scriptable_car_passenger() {
   self.type = get_car_type();
   self.passengers = [];
-  var0 = "rf";
-  var1 = ["male", "female"];
-  var2 = randomintrange(0, 2);
-  var3 = scripts\sp\maps\piccadilly\piccadilly_civs::spawn_civ(var1[var2], 1);
+  var_0 = "rf";
+  var_1 = ["male", "female"];
+  var_2 = randomintrange(0, 2);
+  var_3 = scripts\sp\maps\piccadilly\piccadilly_civs::spawn_civ(var_1[var_2], 1);
 
-  if(isDefined(var3)) {
-    self.passengers[self.passengers.size] = var3;
-    var3.animname = self.type + "_" + var0;
-    var3.seat = var0;
-    thread street_car_passenger(var3);
-    scripts\engine\sp\utility::add_cleanup_ent(var3, "infil_ents");
+  if(isDefined(var_3)) {
+    self.passengers[self.passengers.size] = var_3;
+    var_3.animname = self.type + "_" + var_0;
+    var_3.seat = var_0;
+    thread street_car_passenger(var_3);
+    scripts\engine\sp\utility::add_cleanup_ent(var_3, "infil_ents");
     return;
   }
 }
 
 function get_car_type() {
-  var0 = ["calfa", "ralfa", "skilo", "decho", "victor40"];
+  var_0 = ["calfa", "ralfa", "skilo", "decho", "victor40"];
 
-  foreach(var2 in var0) {
-    if(issubstr(self.classname, var2)) {
-      return var2;
+  foreach(var_2 in var_0) {
+    if(issubstr(self.classname, var_2)) {
+      return var_2;
     }
   }
 
   return undefined;
 }
 
-function street_car_passenger(var0) {
+function street_car_passenger(var_0) {
   self endon("death");
   self endon("exiting_car");
-  var1 = [];
-  var2 = cos(18);
-  self linkTo(var0);
-  var0 thread scripts\common\anim::anim_loop_solo(self, "car_idle_" + self.seat, "stop_loop_" + self.animname);
+  var_1 = [];
+  var_2 = cos(18);
+  self linkTo(var_0);
+  var_0 thread scripts\common\anim::anim_loop_solo(self, "car_idle_" + self.seat, "stop_loop_" + self.animname);
 
   if(self.seat == "rf") {
-    var1 = ["car_right_rf", "car_right_fwd_rf", "car_right_back_rf"];
+    var_1 = ["car_right_rf", "car_right_fwd_rf", "car_right_back_rf"];
   } else {
-    var1 = ["car_right_lf", "car_right_fwd_lf", "car_right_back_lf"];
+    var_1 = ["car_right_lf", "car_right_fwd_lf", "car_right_back_lf"];
   }
 
   scripts\engine\utility::flag_wait("boots_on_the_ground");
-  var3 = gettime();
-  var4 = randomintrange(6000, 8000);
+  var_3 = gettime();
+  var_4 = randomintrange(6000, 8000);
 
   for(;;) {
-    if(in_player_fov(var2)) {
-      var0 notify("stop_loop_" + self.animname);
-      var0 scripts\common\anim::anim_single_solo(self, "car_react_" + self.seat);
-      var0 thread scripts\common\anim::anim_loop_solo(self, "car_react_" + self.seat + "_idle", "stop_loop_" + self.animname);
+    if(in_player_fov(var_2)) {
+      var_0 notify("stop_loop_" + self.animname);
+      var_0 scripts\common\anim::anim_single_solo(self, "car_react_" + self.seat);
+      var_0 thread scripts\common\anim::anim_loop_solo(self, "car_react_" + self.seat + "_idle", "stop_loop_" + self.animname);
 
-      while(in_player_fov(var2)) {
+      while(in_player_fov(var_2)) {
         waitframe();
       }
 
-      var0 notify("stop_loop_" + self.animname);
-      var0 scripts\common\anim::anim_single_solo(self, "car_react_back_" + self.seat);
-      var0 thread scripts\common\anim::anim_loop_solo(self, "car_idle_" + self.seat, "stop_loop_" + self.animname);
+      var_0 notify("stop_loop_" + self.animname);
+      var_0 scripts\common\anim::anim_single_solo(self, "car_react_back_" + self.seat);
+      var_0 thread scripts\common\anim::anim_loop_solo(self, "car_idle_" + self.seat, "stop_loop_" + self.animname);
       wait randomfloatrange(1, 2.5);
-      var3 = gettime();
-    } else if(gettime() > var3 + var4) {
-      var5 = randomintrange(0, 3);
-      GscBinSkip4(0x35, var2);
+      var_3 = gettime();
+    } else if(gettime() > var_3 + var_4) {
+      var_5 = randomintrange(0, 3);
+      GscBinSkip4(0x35, var_2);
     }
 
     wait 0.5;
   }
 }
 
-function in_player_fov(var0) {
-  if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), self gettagorigin("j_head"), var0)) {
+function in_player_fov(var_0) {
+  if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), self gettagorigin("j_head"), var_0)) {
     return 1;
   }
 
   return 0;
 }
 
-function cut_anim_short(var0) {
+function cut_anim_short(var_0) {
   self endon("player_is_looking_at_me");
 
-  while(!in_player_fov(var0)) {
+  while(!in_player_fov(var_0)) {
     waitframe();
   }
 
@@ -681,9 +681,9 @@ function setup_vo_civs() {
 function spawn_animated_intro_civs() {
   setup_vo_civs();
 
-  for(var0 = 1; var0 < 36; var0++) {
-    if(var0 != 30) {
-      thread intro_civ_setup(var0);
+  for(var_0 = 1; var_0 < 36; var_0++) {
+    if(var_0 != 30) {
+      thread intro_civ_setup(var_0);
     }
   }
 
@@ -696,8 +696,8 @@ function spawn_animated_intro_civs() {
   scripts\engine\utility::delaythread(0.5, &scripts\sp\hud_util::fade_in, 0.05);
   thread intro_civ_oneoff();
 
-  for(var0 = 36; var0 < 54; var0++) {
-    thread intro_civ_post_setup(var0);
+  for(var_0 = 36; var_0 < 54; var_0++) {
+    thread intro_civ_post_setup(var_0);
   }
 
   thread intro_civ_post_anims();
@@ -706,90 +706,90 @@ function spawn_animated_intro_civs() {
 }
 
 function intro_civ_background() {
-  var0 = scripts\engine\utility::getStructArray("background_civs_idle", "targetname");
-  scripts\engine\utility::array_thread(var0, &intro_civ_background_idle);
+  var_0 = scripts\engine\utility::getStructArray("background_civs_idle", "targetname");
+  scripts\engine\utility::array_thread(var_0, &intro_civ_background_idle);
   scripts\engine\utility::flag_wait("car2_detonation");
   wait 1;
-  var0 = scripts\engine\utility::getStructArray("post_explosion_run_to", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("post_explosion_run_to", "script_noteworthy");
   level.background_civs["fake"] = scripts\engine\utility::array_removedead(level.background_civs["fake"]);
   level.background_civs["fake"] = scripts\engine\utility::array_removeundefined(level.background_civs["fake"]);
-  scripts\engine\utility::array_thread(level.background_civs["fake"], &background_scatter_fake, var0);
-  var1 = 0;
+  scripts\engine\utility::array_thread(level.background_civs["fake"], &background_scatter_fake, var_0);
+  var_1 = 0;
 
-  foreach(var3 in level.background_civs["ai"]) {
-    if(isDefined(var3)) {
-      var3 forceteleport(var3.origin, (0, 0, 0));
-      var3 setgoalpos(var3.origin);
+  foreach(var_3 in level.background_civs["ai"]) {
+    if(isDefined(var_3)) {
+      var_3 forceteleport(var_3.origin, (0, 0, 0));
+      var_3 setgoalpos(var_3.origin);
 
-      if(var1 >= var0.size) {
-        var1 = 0;
+      if(var_1 >= var_0.size) {
+        var_1 = 0;
       }
 
-      GscBinSkip4(0x6e, var3, var0[var1]);
+      GscBinSkip4(0x6e, var_3, var_0[var_1]);
     }
   }
 
-  var5 = scripts\engine\utility::getStructArray("teleport_closer", "script_noteworthy");
+  var_5 = scripts\engine\utility::getStructArray("teleport_closer", "script_noteworthy");
 
-  foreach(var3 in level.background_civs["tele"]) {
-    if(isDefined(var3)) {
-      var7 = var5[0];
-      var5 = scripts\engine\utility::array_remove(var5, var5[0]);
-      var3 forceteleport(var7.origin, (0, 0, 0));
-      var3 setgoalpos(var7.origin);
+  foreach(var_3 in level.background_civs["tele"]) {
+    if(isDefined(var_3)) {
+      var_7 = var_5[0];
+      var_5 = scripts\engine\utility::array_remove(var_5, var_5[0]);
+      var_3 forceteleport(var_7.origin, (0, 0, 0));
+      var_3 setgoalpos(var_7.origin);
 
-      if(var1 >= var0.size) {
-        var1 = 0;
+      if(var_1 >= var_0.size) {
+        var_1 = 0;
       }
 
-      GscBinSkip4(0x6e, var3, var0[var1]);
+      GscBinSkip4(0x6e, var_3, var_0[var_1]);
     }
   }
 
-  var7 = undefined;
+  var_7 = undefined;
 }
 
 function intro_civ_background_idle() {
-  var0 = randomintrange(1, 5);
-  var1 = get_random_spawner(var0);
-  var2 = scripts\engine\sp\utility::fakeactorspawn(var1);
-  var2.animname = "generic";
-  var2.animnode = self;
-  var2.current_state = "idle";
-  var3 = randomfloatrange(0, 1.5);
-  var2 scripts\engine\utility::delaythread(var3, &civ_loop, self);
-  level.background_civs["fake"][level.background_civs["fake"].size] = var2;
-  scripts\engine\sp\utility::add_cleanup_ent(var2, "infil_ents");
+  var_0 = randomintrange(1, 5);
+  var_1 = get_random_spawner(var_0);
+  var_2 = scripts\engine\sp\utility::fakeactorspawn(var_1);
+  var_2.animname = "generic";
+  var_2.animnode = self;
+  var_2.current_state = "idle";
+  var_3 = randomfloatrange(0, 1.5);
+  var_2 scripts\engine\utility::delaythread(var_3, &civ_loop, self);
+  level.background_civs["fake"][level.background_civs["fake"].size] = var_2;
+  scripts\engine\sp\utility::add_cleanup_ent(var_2, "infil_ents");
 }
 
-function civ_loop(var0) {
+function civ_loop(var_0) {
   self endon("civ_stop_background_loop");
   self endon("death");
 
   for(;;) {
-    var1 = randomintrange(1, 5);
-    var0 scripts\common\anim::anim_single_solo(self, "background_idle" + var1);
+    var_1 = randomintrange(1, 5);
+    var_0 scripts\common\anim::anim_single_solo(self, "background_idle" + var_1);
   }
 }
 
-function background_scatter_fake(var0) {
+function background_scatter_fake(var_0) {
   self endon("death");
   wait 3;
   self notify("civ_stop_background_loop");
   scripts\engine\sp\utility::anim_stopanimScripted();
   self.animnode.node_claimed = [];
   self.current_node = self.animnode;
-  var1 = scripts\engine\utility::getStruct(self.animnode.target, "targetname");
-  var2 = scripts\sp\fakeactor_node::fakeactor_node_get_path(var1, self.origin, scripts\sp\fakeactor::is_frantic(), 1);
-  self.forced_node_path = var2;
+  var_1 = scripts\engine\utility::getStruct(self.animnode.target, "targetname");
+  var_2 = scripts\sp\fakeactor_node::fakeactor_node_get_path(var_1, self.origin, scripts\sp\fakeactor::is_frantic(), 1);
+  self.forced_node_path = var_2;
 }
 
-function background_scatter_runto(var0) {
+function background_scatter_runto(var_0) {
   self endon("death");
   self notify("stop_going_to_node");
   scripts\engine\utility::set_movement_speed(scripts\sp\maps\piccadilly\piccadilly_util::get_random_civilian_speed());
   wait randomfloatrange(2.5, 4.5);
-  self setgoalpos(var0.origin);
+  self setgoalpos(var_0.origin);
   wait 0.5;
   scripts\engine\utility::waittill_any("goal", "goal_reached");
   self delete();
@@ -808,35 +808,35 @@ function setup_civ_types() {
   level.civ_type["female"] = [3, 4, 8, 9, 11, 12, 14, 16, 18, 20, 21, 22, 23, 25, 26, 27, 26, 33, 40, 41, 42, 43, 44, 45, 48, 49, 50, 52, 53];
 }
 
-function intro_civ_setup(var0) {
-  var1 = get_random_spawner(var0);
-  var2 = bodyonly_guy_setup(var1, var0);
+function intro_civ_setup(var_0) {
+  var_1 = get_random_spawner(var_0);
+  var_2 = bodyonly_guy_setup(var_1, var_0);
   thread bodyonly_guy_damage_monitor();
-  var2 thread scripts\sp\maps\piccadilly\piccadilly_util::acievement_monitor();
-  scripts\engine\sp\utility::add_cleanup_ent(var2, "infil_ents");
+  var_2 thread scripts\sp\maps\piccadilly\piccadilly_util::acievement_monitor();
+  scripts\engine\sp\utility::add_cleanup_ent(var_2, "infil_ents");
 
-  if(var0 == 22 || var0 == 31) {
-    level.intro_civs["oneOff"][level.intro_civs["oneOff"].size] = var2;
-  } else if(!isDefined(level.scr_anim["civ" + var0]["intro_standoff"])) {
-    level.intro_civs["noStandoff"][level.intro_civs["noStandoff"].size] = var2;
-  } else if(isDefined(level.scr_anim["civ" + var0]["intro_idle"])) {
-    level.intro_civs["injured"][level.intro_civs["injured"].size] = var2;
+  if(var_0 == 22 || var_0 == 31) {
+    level.intro_civs["oneOff"][level.intro_civs["oneOff"].size] = var_2;
+  } else if(!isDefined(level.scr_anim["civ" + var_0]["intro_standoff"])) {
+    level.intro_civs["noStandoff"][level.intro_civs["noStandoff"].size] = var_2;
+  } else if(isDefined(level.scr_anim["civ" + var_0]["intro_idle"])) {
+    level.intro_civs["injured"][level.intro_civs["injured"].size] = var_2;
   } else {
-    level.intro_civs["dead"][level.intro_civs["dead"].size] = var2;
+    level.intro_civs["dead"][level.intro_civs["dead"].size] = var_2;
   }
 
-  intro_civ_alterations(var2, var0);
+  intro_civ_alterations(var_2, var_0);
 
-  if(isDefined(level.intro_vo_civs[var0])) {
-    var3 = level.intro_vo_civs[var0];
-    level.intro_vo_civs[var3] = var2;
-    level.intro_vo_civs[var0] = undefined;
+  if(isDefined(level.intro_vo_civs[var_0])) {
+    var_3 = level.intro_vo_civs[var_0];
+    level.intro_vo_civs[var_3] = var_2;
+    level.intro_vo_civs[var_0] = undefined;
     return;
   }
 }
 
-function intro_civ_alterations(var0) {
-  switch (var0) {
+function intro_civ_alterations(var_0) {
+  switch (var_0) {
     case 34:
     case 19:
       thread attach_and_detach_phone();
@@ -877,10 +877,10 @@ function intro_civ_alterations(var0) {
   }
 }
 
-function civ_different_everything(var0, var1) {
-  self setModel(var0);
+function civ_different_everything(var_0, var_1) {
+  self setModel(var_0);
   self detach(self.headmodel);
-  self.headmodel = var1;
+  self.headmodel = var_1;
   self attach(self.headmodel);
 }
 
@@ -894,90 +894,90 @@ function hide_during_intro() {
   self show();
 }
 
-function intro_civ_anims(var0, var1) {
-  var2 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
-  var3 = "intro";
-  var4 = self;
+function intro_civ_anims(var_0, var_1) {
+  var_2 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
+  var_3 = "intro";
+  var_4 = self;
 
   if(level.start_point == "infil") {
-    foreach(var6 in self) {
-      var2 scripts\common\anim::anim_first_frame_solo(var6, var3 + "_slamzoom");
+    foreach(var_6 in self) {
+      var_2 scripts\common\anim::anim_first_frame_solo(var_6, var_3 + "_slamzoom");
     }
 
     scripts\engine\utility::flag_wait("intro_civs_ready");
-    var2 notify("stop_first_frame");
+    var_2 notify("stop_first_frame");
 
-    foreach(var6 in self) {
-      thread anim_single_then_loop_ent(var6, var2, var3 + "_slamzoom", var3);
+    foreach(var_6 in self) {
+      thread anim_single_then_loop_ent(var_6, var_2, var_3 + "_slamzoom", var_3);
     }
   } else if(level.start_point == "infil_car1") {
-    foreach(var6 in self) {
-      var2 thread scripts\common\anim::anim_loop_solo(var6, var3, "stop_loop_intro");
+    foreach(var_6 in self) {
+      var_2 thread scripts\common\anim::anim_loop_solo(var_6, var_3, "stop_loop_intro");
     }
   }
 
   if(level.start_point == "infil_car1" || level.start_point == "infil") {
-    if(var1) {
-      var12 = [];
+    if(var_1) {
+      var_12 = [];
       scripts\engine\utility::flag_wait("standoff_ready");
 
-      foreach(var6 in self) {
-        if(!var6.play_out_intro) {
-          var6 notify("anim_finished");
+      foreach(var_6 in self) {
+        if(!var_6.play_out_intro) {
+          var_6 notify("anim_finished");
         }
       }
 
-      foreach(var6 in self) {
-        if(isDefined(var6)) {
-          if(var6.play_out_intro) {
-            if(var6.animname == "civ20") {
-              thread anim_wait_for_ent_flag(var6, var2);
-              var4 = scripts\engine\utility::array_remove(var4, var6);
+      foreach(var_6 in self) {
+        if(isDefined(var_6)) {
+          if(var_6.play_out_intro) {
+            if(var_6.animname == "civ20") {
+              thread anim_wait_for_ent_flag(var_6, var_2);
+              var_4 = scripts\engine\utility::array_remove(var_4, var_6);
             } else {
-              thread anim_wait_for_ent_flag(var6, var2);
+              thread anim_wait_for_ent_flag(var_6, var_2);
             }
 
             continue;
           }
 
-          var12 = var6;
-          var6 scripts\engine\sp\utility::anim_stopanimScripted();
+          var_12 = var_6;
+          var_6 scripts\engine\sp\utility::anim_stopanimScripted();
         }
       }
 
-      var2 notify("stop_loop_intro");
-      var2 scripts\common\anim::anim_single(var12, var3 + "_standoff");
+      var_2 notify("stop_loop_intro");
+      var_2 scripts\common\anim::anim_single(var_12, var_3 + "_standoff");
     } else {
       scripts\engine\utility::flag_wait("force_bomb_start");
       level notify("intro_anim_finished");
-      var2 notify("stop_loop_intro");
+      var_2 notify("stop_loop_intro");
     }
   }
 
   level scripts\engine\sp\utility::notify_delay("delete_phones", 0.1);
-  var2 scripts\common\anim::anim_single(var4, var3 + "_run");
-  jumpiffalse(var0) LOC_0000026b;
-  var2 notify("stop_loop_intro");
+  var_2 scripts\common\anim::anim_single(var_4, var_3 + "_run");
+  jumpiffalse(var_0) LOC_0000026b;
+  var_2 notify("stop_loop_intro");
 
-  foreach(var6 in self) {
-    if(isDefined(var6) || isalive(var6)) {
-      var2 thread scripts\common\anim::anim_loop_solo(var6, var3 + "_idle");
+  foreach(var_6 in self) {
+    if(isDefined(var_6) || isalive(var_6)) {
+      var_2 thread scripts\common\anim::anim_loop_solo(var_6, var_3 + "_idle");
     }
   }
 
   return;
 }
 
-function anim_wait_for_ent_flag(var0, var1) {
+function anim_wait_for_ent_flag(var_0, var_1) {
   level endon("force_bomb_start");
   scripts\engine\utility::ent_flag_wait("this_anim_finished");
   self notify("anim_finished");
-  var0 scripts\common\anim::anim_single_solo(self, var1 + "_standoff");
+  var_0 scripts\common\anim::anim_single_solo(self, var_1 + "_standoff");
 }
 
 #using_animtree("generic_human");
 
-function post_bomb_civ_death(var0) {
+function post_bomb_civ_death(var_0) {
   if(!isDefined(self) || !isalive(self)) {
     return;
   }
@@ -985,7 +985,7 @@ function post_bomb_civ_death(var0) {
   self endon("death");
 
   if(isDefined(level.scr_anim[self.animname]["intro_last_frame"])) {
-    var0 scripts\common\anim::anim_first_frame_solo(self, "intro_last_frame");
+    var_0 scripts\common\anim::anim_first_frame_solo(self, "intro_last_frame");
     self notsolid();
     self clearanim(%head, 0.1);
     scripts\asm\shared\utility::setfacialindexfornonai("death");
@@ -1001,65 +1001,65 @@ function intro_civ_oneoff() {
     return;
   }
 
-  var0 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
-  var0 scripts\common\anim::anim_single(self, "intro_slamzoom");
+  var_0 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
+  var_0 scripts\common\anim::anim_single(self, "intro_slamzoom");
   scripts\engine\utility::array_call(self, &delete);
 }
 
-function get_random_spawner(var0) {
-  var1 = undefined;
+function get_random_spawner(var_0) {
+  var_1 = undefined;
 
-  if(scripts\engine\utility::array_contains(level.civ_type["girl"], var0)) {
-    var1 = level.intro_civs["girl"];
-  } else if(scripts\engine\utility::array_contains(level.civ_type["boy"], var0)) {
-    var1 = level.intro_civs["boy"];
-  } else if(scripts\engine\utility::array_contains(level.civ_type["male"], var0)) {
-    var1 = get_random_spawner_type("male");
-  } else if(scripts\engine\utility::array_contains(level.civ_type["female"], var0)) {
-    var1 = get_random_spawner_type("female");
+  if(scripts\engine\utility::array_contains(level.civ_type["girl"], var_0)) {
+    var_1 = level.intro_civs["girl"];
+  } else if(scripts\engine\utility::array_contains(level.civ_type["boy"], var_0)) {
+    var_1 = level.intro_civs["boy"];
+  } else if(scripts\engine\utility::array_contains(level.civ_type["male"], var_0)) {
+    var_1 = get_random_spawner_type("male");
+  } else if(scripts\engine\utility::array_contains(level.civ_type["female"], var_0)) {
+    var_1 = get_random_spawner_type("female");
   } else {
-    var1 = get_random_spawner_type("adult");
+    var_1 = get_random_spawner_type("adult");
   }
 
-  if(var0 == 3 || var0 == 23 || var0 == 44 || var0 == 50) {
-    var1.script_char_index = 5;
-  } else if(var0 == 9 || var0 == 49 || var0 == 52) {
-    var1.script_char_index = 6;
+  if(var_0 == 3 || var_0 == 23 || var_0 == 44 || var_0 == 50) {
+    var_1.script_char_index = 5;
+  } else if(var_0 == 9 || var_0 == 49 || var_0 == 52) {
+    var_1.script_char_index = 6;
   } else {
-    var1.script_char_index = undefined;
+    var_1.script_char_index = undefined;
   }
 
-  return var1;
+  return var_1;
 }
 
-function get_random_spawner_type(var0) {
-  var1 = level.intro_civs[var0][randomint(level.intro_civs[var0].size)];
-  return var1;
+function get_random_spawner_type(var_0) {
+  var_1 = level.intro_civs[var_0][randomint(level.intro_civs[var_0].size)];
+  return var_1;
 }
 
-function bodyonly_guy_setup(var0) {
-  var1 = scripts\engine\sp\utility::bodyonlyspawn(self);
-  var1.animname = "civ" + var0;
-  var1.spawner = self;
-  var1.animationarchetype = "civilian";
-  var1.fakeactor_face_anim = 1;
-  var1 scripts\engine\utility::ent_flag_init("this_anim_finished");
+function bodyonly_guy_setup(var_0) {
+  var_1 = scripts\engine\sp\utility::bodyonlyspawn(self);
+  var_1.animname = "civ" + var_0;
+  var_1.spawner = self;
+  var_1.animationarchetype = "civilian";
+  var_1.fakeactor_face_anim = 1;
+  var_1 scripts\engine\utility::ent_flag_init("this_anim_finished");
 
-  if(var0 == 3 || var0 == 6 || var0 == 9 || var0 == 10 || var0 == 17 || var0 == 20 || var0 == 23 || var0 == 24 || var0 == 27 || var0 == 28) {
-    var1.play_out_intro = 1;
+  if(var_0 == 3 || var_0 == 6 || var_0 == 9 || var_0 == 10 || var_0 == 17 || var_0 == 20 || var_0 == 23 || var_0 == 24 || var_0 == 27 || var_0 == 28) {
+    var_1.play_out_intro = 1;
   } else {
-    var1.play_out_intro = 0;
+    var_1.play_out_intro = 0;
   }
 
-  var1 scripts\common\ai::magic_bullet_shield(1);
-  var1.team = "allies";
-  level thread scripts\sp\friendlyfire::friendly_fire_think(var1);
+  var_1 scripts\common\ai::magic_bullet_shield(1);
+  var_1.team = "allies";
+  level thread scripts\sp\friendlyfire::friendly_fire_think(var_1);
 
-  if(!isai(var1) && !istrue(var1.script_fakeactor) && !isDefined(var1.anim_getrootfunc)) {
-    var1.anim_getrootfunc = &scripts\sp\maps\piccadilly\piccadilly::get_anim_model_root;
+  if(!isai(var_1) && !istrue(var_1.script_fakeactor) && !isDefined(var_1.anim_getrootfunc)) {
+    var_1.anim_getrootfunc = &scripts\sp\maps\piccadilly\piccadilly::get_anim_model_root;
   }
 
-  return var1;
+  return var_1;
 }
 
 function bodyonly_guy_damage_monitor() {
@@ -1067,15 +1067,15 @@ function bodyonly_guy_damage_monitor() {
   self setCanDamage(1);
 
   for(;;) {
-    self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7);
 
-    if(isDefined(var1)) {
-      self.lastattacker = var1;
+    if(isDefined(var_1)) {
+      self.lastattacker = var_1;
 
-      if(isPlayer(var1)) {
-        if(scripts\engine\utility::flag("car2_guys_dead") && isPlayer(var1)) {
+      if(isPlayer(var_1)) {
+        if(scripts\engine\utility::flag("car2_guys_dead") && isPlayer(var_1)) {
           scripts\sp\friendlyfire::missionfail(1);
-        } else if(!scripts\engine\utility::flag("gun_raised") && !scripts\engine\utility::flag("player_is_up") && isPlayer(var1)) {
+        } else if(!scripts\engine\utility::flag("gun_raised") && !scripts\engine\utility::flag("player_is_up") && isPlayer(var_1)) {
           scripts\sp\player_death::set_custom_death_quote(9);
           thread scripts\sp\utility::missionfailedwrapper();
         }
@@ -1093,80 +1093,80 @@ function bodyonly_guy_damage_monitor() {
   self notsolid();
 }
 
-function intro_civ_post_setup(var0) {
-  var1 = get_random_spawner(var0);
-  var2 = bodyonly_guy_setup(var1, var0);
+function intro_civ_post_setup(var_0) {
+  var_1 = get_random_spawner(var_0);
+  var_2 = bodyonly_guy_setup(var_1, var_0);
   thread bodyonly_guy_damage_monitor();
 
-  if(var0 == 41) {
+  if(var_0 == 41) {
     thread attach_and_detach_phone();
-  } else if(var0 == 48) {
-    var2 setModel("civ_london_female_3_2");
-  } else if(var0 == 51) {
-    var2 setModel("body_civ_western_girl_5_1");
-  } else if(var0 == 52) {
-    var2 setModel("body_civ_london_female_4_1");
+  } else if(var_0 == 48) {
+    var_2 setModel("civ_london_female_3_2");
+  } else if(var_0 == 51) {
+    var_2 setModel("body_civ_western_girl_5_1");
+  } else if(var_0 == 52) {
+    var_2 setModel("body_civ_london_female_4_1");
   }
 
-  scripts\engine\sp\utility::add_cleanup_ent(var2, "post_bomb_ents");
-  level.intro_civs["post"][level.intro_civs["post"].size] = var2;
+  scripts\engine\sp\utility::add_cleanup_ent(var_2, "post_bomb_ents");
+  level.intro_civs["post"][level.intro_civs["post"].size] = var_2;
 }
 
 function intro_civ_post_anims() {
-  var0 = scripts\engine\utility::getStruct("intro_civ_animnode", "targetname");
-  var1 = "intro";
+  var_0 = scripts\engine\utility::getStruct("intro_civ_animnode", "targetname");
+  var_1 = "intro";
 
   if(level.start_point == "infil" || level.start_point == "infil_car1") {
-    foreach(var3 in self) {
-      var0 thread scripts\common\anim::anim_loop_solo(var3, var1, "stop_loop_post_intro");
+    foreach(var_3 in self) {
+      var_0 thread scripts\common\anim::anim_loop_solo(var_3, var_1, "stop_loop_post_intro");
     }
 
     scripts\engine\utility::flag_wait_all("player_at_standoff", "intro_sas_ready");
-    var0 notify("stop_loop_post_intro");
+    var_0 notify("stop_loop_post_intro");
 
-    foreach(var3 in self) {
-      thread anim_single_then_loop(var3, var0, var1 + "_standoff", var1 + "_standoff_idle");
+    foreach(var_3 in self) {
+      thread anim_single_then_loop(var_3, var_0, var_1 + "_standoff", var_1 + "_standoff_idle");
     }
 
     scripts\engine\utility::flag_wait("start_car2");
 
-    foreach(var3 in self) {
-      var3 notify("anim_finished");
-      var3 scripts\engine\sp\utility::anim_stopanimScripted();
-      var0 notify("stop_loop_post_intro_" + var3.animname);
-      thread anim_single_then_last(var3, var0);
+    foreach(var_3 in self) {
+      var_3 notify("anim_finished");
+      var_3 scripts\engine\sp\utility::anim_stopanimScripted();
+      var_0 notify("stop_loop_post_intro_" + var_3.animname);
+      thread anim_single_then_last(var_3, var_0);
     }
 
     return;
   }
 }
 
-function anim_single_then_loop(var0, var1, var2, var3) {
+function anim_single_then_loop(var_0, var_1, var_2, var_3) {
   self endon("anim_finished");
-  var0 scripts\common\anim::anim_single_solo(self, var1);
-  var0 thread scripts\common\anim::anim_loop_solo(self, var2, var3);
+  var_0 scripts\common\anim::anim_single_solo(self, var_1);
+  var_0 thread scripts\common\anim::anim_loop_solo(self, var_2, var_3);
 }
 
-function anim_single_then_loop_ent(var0, var1, var2, var3) {
+function anim_single_then_loop_ent(var_0, var_1, var_2, var_3) {
   self endon("anim_finished");
   scripts\engine\utility::ent_flag_clear("this_anim_finished");
-  var0 scripts\common\anim::anim_single_solo(self, var1);
+  var_0 scripts\common\anim::anim_single_solo(self, var_1);
   scripts\engine\utility::ent_flag_set("this_anim_finished");
-  var0 thread scripts\common\anim::anim_loop_solo(self, var2, var3);
+  var_0 thread scripts\common\anim::anim_loop_solo(self, var_2, var_3);
 }
 
-function anim_single_then_last(var0, var1) {
-  var0 scripts\common\anim::anim_single_solo(self, var1 + "_car");
-  var0 scripts\common\anim::anim_last_frame_solo(self, var1 + "_car");
+function anim_single_then_last(var_0, var_1) {
+  var_0 scripts\common\anim::anim_single_solo(self, var_1 + "_car");
+  var_0 scripts\common\anim::anim_last_frame_solo(self, var_1 + "_car");
   scripts\engine\utility::flag_wait("car2_detonation");
-  var0 scripts\common\anim::anim_single_solo(self, var1 + "_run");
+  var_0 scripts\common\anim::anim_single_solo(self, var_1 + "_run");
 
-  if(isDefined(level.scr_anim[self.animname][var1 + "_run_idle"])) {
-    var0 thread scripts\common\anim::anim_loop_solo(self, var1 + "_run_idle");
+  if(isDefined(level.scr_anim[self.animname][var_1 + "_run_idle"])) {
+    var_0 thread scripts\common\anim::anim_loop_solo(self, var_1 + "_run_idle");
     return;
   }
 
-  thread post_bomb_civ_death(var0);
+  thread post_bomb_civ_death(var_0);
 }
 
 function intro_background_traffic() {
@@ -1178,54 +1178,54 @@ function intro_background_traffic() {
 
 function spawn_cross_street_traffic() {
   scripts\engine\utility::flag_wait_any("boots_on_the_ground", "intro_skipped");
-  var0 = scripts\common\vehicle::spawn_vehicles_from_targetname("moving_car");
+  var_0 = scripts\common\vehicle::spawn_vehicles_from_targetname("moving_car");
 
-  foreach(var2 in var0) {
-    var2 scripts\common\vehicle::vehicle_lights_on("headlights");
-    var2 scripts\common\vehicle::vehicle_lights_on("brakelights");
-    scripts\engine\sp\utility::add_cleanup_ent(var2, "cross_traffic");
+  foreach(var_2 in var_0) {
+    var_2 scripts\common\vehicle::vehicle_lights_on("headlights");
+    var_2 scripts\common\vehicle::vehicle_lights_on("brakelights");
+    scripts\engine\sp\utility::add_cleanup_ent(var_2, "cross_traffic");
   }
 
-  var4 = 0;
-  var5 = 1;
+  var_4 = 0;
+  var_5 = 1;
 
-  while(var5 < 4) {
-    var6 = getvehiclenode("moving_car_lane" + var5, "targetname");
-    thread cross_street_drive(var0, var6);
-    var5++;
-    var4 += 2;
+  while(var_5 < 4) {
+    var_6 = getvehiclenode("moving_car_lane" + var_5, "targetname");
+    thread cross_street_drive(var_0, var_6);
+    var_5++;
+    var_4 += 2;
     wait 1;
   }
 }
 
-function cross_street_drive(var0, var1) {
+function cross_street_drive(var_0, var_1) {
   level endon("car2_detonation");
 
   for(;;) {
-    var2 = randomfloatrange(0.5, 2.5);
-    wait var2;
-    self[var1] scripts\common\vehicle::attach_vehicle_and_gopath(var0);
-    var2 = randomfloatrange(4, 5.5);
-    wait var2;
-    self[var1 + 1] scripts\common\vehicle::attach_vehicle_and_gopath(var0);
-    wait var2;
+    var_2 = randomfloatrange(0.5, 2.5);
+    wait var_2;
+    self[var_1] scripts\common\vehicle::attach_vehicle_and_gopath(var_0);
+    var_2 = randomfloatrange(4, 5.5);
+    wait var_2;
+    self[var_1 + 1] scripts\common\vehicle::attach_vehicle_and_gopath(var_0);
+    wait var_2;
   }
 }
 
 function spawn_back_street_traffic() {
   scripts\engine\utility::flag_wait("boots_on_the_ground");
 
-  for(var0 = 1; var0 < 12; var0++) {
-    var1 = scripts\common\vehicle::spawn_vehicle_from_targetname("car_leaving" + var0);
-    var1 notsolid();
-    thread back_street_traffic_drive(var1);
+  for(var_0 = 1; var_0 < 12; var_0++) {
+    var_1 = scripts\common\vehicle::spawn_vehicle_from_targetname("car_leaving" + var_0);
+    var_1 notsolid();
+    thread back_street_traffic_drive(var_1);
   }
 }
 
-function back_street_traffic_drive(var0) {
-  if(var0 == 10) {
+function back_street_traffic_drive(var_0) {
+  if(var_0 == 10) {
     wait 1.8;
-  } else if(var0 == 11) {
+  } else if(var_0 == 11) {
     wait 2.2;
   }
 
@@ -1234,40 +1234,40 @@ function back_street_traffic_drive(var0) {
 }
 
 function spawn_back_street_loop() {
-  var0 = scripts\common\vehicle::spawn_vehicles_from_targetname("car_leaving_side");
+  var_0 = scripts\common\vehicle::spawn_vehicles_from_targetname("car_leaving_side");
 
-  foreach(var2 in var0) {
-    if(var2.script_noteworthy == "1") {
-      var0 = sortbydistance(var0, var2.origin);
+  foreach(var_2 in var_0) {
+    if(var_2.script_noteworthy == "1") {
+      var_0 = sortbydistance(var_0, var_2.origin);
     }
   }
 
-  var4 = scripts\common\vehicle::spawn_vehicles_from_targetname("car_leaving_main");
+  var_4 = scripts\common\vehicle::spawn_vehicles_from_targetname("car_leaving_main");
 
-  foreach(var2 in var4) {
-    if(var2.script_noteworthy == "1") {
-      var4 = sortbydistance(var4, var2.origin);
+  foreach(var_2 in var_4) {
+    if(var_2.script_noteworthy == "1") {
+      var_4 = sortbydistance(var_4, var_2.origin);
     }
   }
 
-  var7 = scripts\engine\utility::array_combine(var0, var4);
+  var_7 = scripts\engine\utility::array_combine(var_0, var_4);
 
-  foreach(var2 in var7) {
-    scripts\engine\sp\utility::add_cleanup_ent(var2, "background_cars");
-    var2 scripts\common\vehicle::vehicle_lights_on("headlights");
-    var2 scripts\common\vehicle::vehicle_lights_on("brakelights");
+  foreach(var_2 in var_7) {
+    scripts\engine\sp\utility::add_cleanup_ent(var_2, "background_cars");
+    var_2 scripts\common\vehicle::vehicle_lights_on("headlights");
+    var_2 scripts\common\vehicle::vehicle_lights_on("brakelights");
   }
 
   scripts\engine\utility::flag_wait("boots_on_the_ground");
   wait 6.7;
-  var10 = getvehiclenode("backstreet_endnode", "targetname");
+  var_10 = getvehiclenode("backstreet_endnode", "targetname");
 
-  foreach(var2 in var4) {
-    thread back_street_drive(var2);
+  foreach(var_2 in var_4) {
+    thread back_street_drive(var_2);
   }
 }
 
-function back_street_drive(var0) {
+function back_street_drive(var_0) {
   level endon("car2_detonation");
 
   if(!isDefined(self.target)) {
@@ -1275,15 +1275,15 @@ function back_street_drive(var0) {
   }
 
   thread delete_on_flag("car2_detonation");
-  var1 = getvehiclenode(self.target, "targetname");
-  thread scripts\common\vehicle::attach_vehicle_and_gopath(var1);
+  var_1 = getvehiclenode(self.target, "targetname");
+  thread scripts\common\vehicle::attach_vehicle_and_gopath(var_1);
   wait 2;
-  var2 = squared(70);
+  var_2 = squared(70);
 
   for(;;) {
-    var3 = distance2dsquared(self.origin, var0.origin);
+    var_3 = distance2dsquared(self.origin, var_0.origin);
 
-    if(var3 <= var2) {
+    if(var_3 <= var_2) {
       break;
     }
 
@@ -1291,14 +1291,14 @@ function back_street_drive(var0) {
   }
 
   while(!scripts\engine\utility::flag("car2_detonation")) {
-    var1 = getvehiclenode("m6", "targetname");
-    thread scripts\common\vehicle::attach_vehicle_and_gopath(var1);
+    var_1 = getvehiclenode("m6", "targetname");
+    thread scripts\common\vehicle::attach_vehicle_and_gopath(var_1);
     wait 2;
 
     for(;;) {
-      var3 = distance2dsquared(self.origin, var0.origin);
+      var_3 = distance2dsquared(self.origin, var_0.origin);
 
-      if(var3 <= var2) {
+      if(var_3 <= var_2) {
         break;
       }
 
@@ -1307,7 +1307,7 @@ function back_street_drive(var0) {
   }
 }
 
-function delete_on_flag(var0) {
+function delete_on_flag(var_0) {
   self endon("death");
   self endon("entitydeleted");
   scripts\engine\utility::flag_wait("car2_detonation");
@@ -1315,18 +1315,18 @@ function delete_on_flag(var0) {
 }
 
 function setup_post_bomb_crash() {
-  var0 = getscriptablearray("backend_car_crash", "targetname");
-  level.scriptable_cleanup = scripts\engine\utility::array_combine(level.scriptable_cleanup, var0);
+  var_0 = getscriptablearray("backend_car_crash", "targetname");
+  level.scriptable_cleanup = scripts\engine\utility::array_combine(level.scriptable_cleanup, var_0);
   scripts\engine\utility::flag_wait("car2_detonation");
   wait 1;
 
-  foreach(var2 in var0) {
-    var2.origin += (0, 0, 96);
+  foreach(var_2 in var_0) {
+    var_2.origin += (0, 0, 96);
   }
 
-  var0[0] setscriptablepartstate("body", "light_smoke");
-  var0[1] setscriptablepartstate("body", "light_smoke");
-  scripts\engine\utility::array_call(var0, &setscriptablepartstate, "lights_controller", "on_nolight");
+  var_0[0] setscriptablepartstate("body", "light_smoke");
+  var_0[1] setscriptablepartstate("body", "light_smoke");
+  scripts\engine\utility::array_call(var_0, &setscriptablepartstate, "lights_controller", "on_nolight");
 }
 
 function show_aftermath_geo() {
@@ -1344,97 +1344,97 @@ function show_aftermath_geo() {
 }
 
 function show_aftermath_cars() {
-  var0 = getEntArray("post_carbomb", "targetname");
-  var1 = getEnt("post_carbomb_clip", "targetname");
-  scripts\engine\utility::array_call(var0, &hide);
-  var1 notsolid();
+  var_0 = getEntArray("post_carbomb", "targetname");
+  var_1 = getEnt("post_carbomb_clip", "targetname");
+  scripts\engine\utility::array_call(var_0, &hide);
+  var_1 notsolid();
   scripts\engine\utility::flag_wait("car2_detonation");
   wait 0.1;
-  scripts\engine\utility::array_call(var0, &show);
-  var1 solid();
+  scripts\engine\utility::array_call(var_0, &show);
+  var_1 solid();
 }
 
 function show_aftermath_windows() {
-  var0 = getEnt("store_glass_break", "targetname");
-  var0 moveTo(var0.origin + (0, 0, -250), 0.01);
+  var_0 = getEnt("store_glass_break", "targetname");
+  var_0 moveTo(var_0.origin + (0, 0, -250), 0.01);
   scripts\engine\utility::flag_wait("car2_detonation");
   wait 0.8;
-  var0 moveTo(var0.origin + (0, 0, 250), 0.01);
+  var_0 moveTo(var_0.origin + (0, 0, 250), 0.01);
 }
 
 function show_aftermath_debris() {
-  var0 = getEnt("crater_debris", "targetname");
-  var1 = getEntArray("deadbody_crater", "targetname");
-  var0 moveTo(var0.origin + (0, 0, -100), 0.01);
+  var_0 = getEnt("crater_debris", "targetname");
+  var_1 = getEntArray("deadbody_crater", "targetname");
+  var_0 moveTo(var_0.origin + (0, 0, -100), 0.01);
 
-  foreach(var3 in var1) {
-    var3 moveTo(var3.origin + (0, 0, -100), 0.01);
+  foreach(var_3 in var_1) {
+    var_3 moveTo(var_3.origin + (0, 0, -100), 0.01);
   }
 
   scripts\engine\utility::flag_wait("car2_detonation");
   wait 1;
-  var0 moveTo(var0.origin + (0, 0, 100), 0.01);
+  var_0 moveTo(var_0.origin + (0, 0, 100), 0.01);
 
-  foreach(var3 in var1) {
-    var3 moveTo(var3.origin + (0, 0, 100), 0.01);
+  foreach(var_3 in var_1) {
+    var_3 moveTo(var_3.origin + (0, 0, 100), 0.01);
   }
 
-  var7 = getscriptablearray("flag_destroyed", "script_noteworthy");
-  var7[0] setscriptablepartstate("base", "dead");
+  var_7 = getscriptablearray("flag_destroyed", "script_noteworthy");
+  var_7[0] setscriptablepartstate("base", "dead");
 }
 
 function move_hole_clip() {
-  var0 = getEnt("intro_street_hole_clip", "targetname");
-  var0 delete();
+  var_0 = getEnt("intro_street_hole_clip", "targetname");
+  var_0 delete();
 }
 
 function dead_charred_bodies() {
-  var0 = scripts\engine\utility::getStructArray("intro_civ_dead_struct", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("intro_civ_dead_struct", "targetname");
 
-  foreach(var2 in var0) {
-    var3 = level.intro_civs["adult"][0];
-    var4 = scripts\engine\sp\utility::bodyonlyspawn(var3);
-    var4.animname = "male_rf";
-    var4.spawner = self;
-    thread start_anim_death(var4);
+  foreach(var_2 in var_0) {
+    var_3 = level.intro_civs["adult"][0];
+    var_4 = scripts\engine\sp\utility::bodyonlyspawn(var_3);
+    var_4.animname = "male_rf";
+    var_4.spawner = self;
+    thread start_anim_death(var_4);
   }
 }
 
-function start_anim_death(var0) {
-  var0 scripts\common\anim::anim_single_solo(self, "skilo_death");
+function start_anim_death(var_0) {
+  var_0 scripts\common\anim::anim_single_solo(self, "skilo_death");
   self setModel("burntbody_male");
-  var0 scripts\common\anim::anim_last_frame_solo(self, "skilo_death");
+  var_0 scripts\common\anim::anim_last_frame_solo(self, "skilo_death");
   self notsolid();
 }
 
 function delete_storefront_signs() {
-  var0 = getEnt("post_explosion_sign", "targetname");
-  var0 delete();
+  var_0 = getEnt("post_explosion_sign", "targetname");
+  var_0 delete();
 }
 
 function intro_lights_setup_omni() {
-  var0 = getEntArray("post_explosion", "targetname");
+  var_0 = getEntArray("post_explosion", "targetname");
 
-  foreach(var2 in var0) {
-    if(var2.classname == "light_omni" || !isDefined(var2.script_type)) {
-      var2.og_intensity = var2 getlightintensity();
-      var2 setlightintensity(0);
+  foreach(var_2 in var_0) {
+    if(var_2.classname == "light_omni" || !isDefined(var_2.script_type)) {
+      var_2.og_intensity = var_2 getlightintensity();
+      var_2 setlightintensity(0);
     }
   }
 }
 
 function intro_lights() {
   scripts\engine\utility::flag_set("post_explosion");
-  var0 = getEntArray("post_explosion", "targetname");
+  var_0 = getEntArray("post_explosion", "targetname");
 
-  foreach(var2 in var0) {
-    if(isDefined(var2.og_intensity)) {
-      var2 setlightintensity(var2.og_intensity);
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2.og_intensity)) {
+      var_2 setlightintensity(var_2.og_intensity);
     }
   }
 
-  var4 = getEntArray("pre_explosion", "targetname");
-  scripts\engine\utility::array_thread(var4, &intro_lights_cleanup);
+  var_4 = getEntArray("pre_explosion", "targetname");
+  scripts\engine\utility::array_thread(var_4, &intro_lights_cleanup);
 }
 
 function intro_lights_cleanup() {
@@ -1442,13 +1442,13 @@ function intro_lights_cleanup() {
 }
 
 function intro_street_lamps() {
-  var0 = undefined;
-  var1 = scripts\engine\utility::getStructArray("post_explosion_radius_dmg", "targetname");
+  var_0 = undefined;
+  var_1 = scripts\engine\utility::getStructArray("post_explosion_radius_dmg", "targetname");
 
-  foreach(var3 in var1) {
-    if(scripts\engine\utility::is_equal(var3.script_noteworthy, "300")) {
-      var4 = randomfloatrange(0.9, 1.4);
-      thread radius_damage(var3);
+  foreach(var_3 in var_1) {
+    if(scripts\engine\utility::is_equal(var_3.script_noteworthy, "300")) {
+      var_4 = randomfloatrange(0.9, 1.4);
+      thread radius_damage(var_3);
       continue;
     }
 
@@ -1456,33 +1456,33 @@ function intro_street_lamps() {
   }
 }
 
-function radius_damage(var0) {
-  if(isDefined(var0)) {
-    wait var0;
+function radius_damage(var_0) {
+  if(isDefined(var_0)) {
+    wait var_0;
   }
 
-  var1 = int(self.script_noteworthy);
-  radiusdamage(self.origin, self.radius, var1, var1, undefined, "MOD_EXPLOSIVE", undefined, 1, 0);
+  var_1 = int(self.script_noteworthy);
+  radiusdamage(self.origin, self.radius, var_1, var_1, undefined, "MOD_EXPLOSIVE", undefined, 1, 0);
 }
 
-function attach_player_to_rig(var0) {
+function attach_player_to_rig(var_0) {
   level endon("intro_skipped");
   level.player enableinvulnerability();
   level.player freezecontrols(1);
   level.player takeallweapons();
-  level.player playerlinktoabsolute(var0, "tag_player");
+  level.player playerlinktoabsolute(var_0, "tag_player");
   level.player disableoffhandweapons();
   level.player allowsprint(0);
   level.player allowcrouch(0);
   level.player allowprone(0);
   level waittill("fp_transition");
-  var1 = scripts\engine\utility::spawn_tag_origin(var0 gettagorigin("tag_player"), var0 gettagangles("tag_player"));
+  var_1 = scripts\engine\utility::spawn_tag_origin(var_0 gettagorigin("tag_player"), var_0 gettagangles("tag_player"));
   level.player unlink();
-  level.player playerlinktodelta(var1, "tag_origin", 1, 24, 58, 20, 30);
+  level.player playerlinktodelta(var_1, "tag_origin", 1, 24, 58, 20, 30);
   GscBinSkip4(0x35);
 }
 
-function unlink_player_after_boots(var0) {
+function unlink_player_after_boots(var_0) {
   scripts\engine\utility::flag_wait("boots_on_the_ground");
   level.player unlink();
   level.player disableinvulnerability();
@@ -1492,8 +1492,8 @@ function unlink_player_after_boots(var0) {
   level.player allowprone(1);
   self delete();
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
   }
 
   level.scr_model["player_rig"] = "viewhands_kyle_sas_urban";
@@ -1507,52 +1507,52 @@ function stop_user_skip() {
 
 function player_is_close_watcher() {
   level endon("sas2_ready");
-  var0 = getEnt("player_is_close", "targetname");
+  var_0 = getEnt("player_is_close", "targetname");
 
-  while(!level.player istouching(var0)) {
+  while(!level.player istouching(var_0)) {
     waitframe();
   }
 
   scripts\engine\utility::flag_set("player_is_behind_ally");
 }
 
-function intro_anims_car2(var0, var1) {
+function intro_anims_car2(var_0, var_1) {
   self endon("death");
-  var2 = "intro_slamzoom";
+  var_2 = "intro_slamzoom";
 
   if(self.animname == "car2_terry_driver") {
     level.truck_driver = self;
     scripts\common\ai::gun_remove();
-    var0 scripts\common\anim::anim_single_solo(self, var2);
+    var_0 scripts\common\anim::anim_single_solo(self, var_2);
     level.car2_terries = scripts\engine\utility::array_remove(level.car2_terries, self);
     self delete();
     return;
   }
 
   thread intro_anim_force_stop();
-  var0 scripts\common\anim::anim_single_solo(self, "intro_slamzoom");
+  var_0 scripts\common\anim::anim_single_solo(self, "intro_slamzoom");
   scripts\common\ai::gun_remove();
-  var0 thread scripts\common\anim::anim_loop_solo(self, var2 + "_v1_idle", "stop_terry_intro_idle");
+  var_0 thread scripts\common\anim::anim_loop_solo(self, var_2 + "_v1_idle", "stop_terry_intro_idle");
   self notify("intro_anim_done");
   scripts\engine\utility::flag_wait("intro_sas_ready");
-  thread intro_anims_standoff(var0);
+  thread intro_anims_standoff(var_0);
 }
 
-function intro_anims_allies(var0) {
+function intro_anims_allies(var_0) {
   self endon("death");
-  var1 = "intro_slamzoom";
-  var2 = undefined;
+  var_1 = "intro_slamzoom";
+  var_2 = undefined;
 
   if(self.animname == "sas2") {
-    var3 = ["dx_vom_mick_infil_car1_street_70", "dx_vom_mick_infil_car1_street_80", "dx_vom_mick_infil_car1_street_90"];
-    thread scripts\sp\maps\piccadilly\piccadilly_util::notetrack_nag(var3, "player_at_standoff");
+    var_3 = ["dx_vom_mick_infil_car1_street_70", "dx_vom_mick_infil_car1_street_80", "dx_vom_mick_infil_car1_street_90"];
+    thread scripts\sp\maps\piccadilly\piccadilly_util::notetrack_nag(var_3, "player_at_standoff");
   }
 
-  var0 scripts\common\anim::anim_single_solo(self, var1);
+  var_0 scripts\common\anim::anim_single_solo(self, var_1);
   level notify(self.animname + "_in_position");
 
   if(self.animname == "car1_terry1" || self.animname == "car1_terry2" || self.animname == "car1_terry3") {
-    var0 scripts\common\anim::anim_last_frame_solo(self, var1);
+    var_0 scripts\common\anim::anim_last_frame_solo(self, var_1);
     scripts\engine\utility::flag_wait("sas2_ready");
   }
 
@@ -1564,7 +1564,7 @@ function intro_anims_allies(var0) {
       level notify("start_intro_vo");
     }
 
-    var0 scripts\common\anim::anim_single_solo(self, var1 + "_v2");
+    var_0 scripts\common\anim::anim_single_solo(self, var_1 + "_v2");
     self notify("intro_anim_done");
 
     if(self.animname == "sas1") {
@@ -1577,30 +1577,30 @@ function intro_anims_allies(var0) {
     }
 
     if(self.animname == "car1_terry2" || self.animname == "car1_terry3") {
-      var0 thread scripts\common\anim::anim_loop_solo(self, var1 + "_v1_idle", "stop_terry_intro_idle");
+      var_0 thread scripts\common\anim::anim_loop_solo(self, var_1 + "_v1_idle", "stop_terry_intro_idle");
       scripts\engine\utility::flag_wait("standoff_ready");
     } else if(self.animname == "sas2") {
-      var2 = spawnStruct();
-      var2.origin = var0.origin;
-      var0 scripts\common\anim::anim_single_solo(self, var1 + "_v1_arrival");
-      var2 thread scripts\common\anim::anim_loop_solo_with_nags(self, var1 + "_v1_sas2_idle", self.animname + "_intro_idle");
+      var_2 = spawnStruct();
+      var_2.origin = var_0.origin;
+      var_0 scripts\common\anim::anim_single_solo(self, var_1 + "_v1_arrival");
+      var_2 thread scripts\common\anim::anim_loop_solo_with_nags(self, var_1 + "_v1_sas2_idle", self.animname + "_intro_idle");
       level notify("v1_arrival_finished");
     } else {
-      var0 scripts\common\anim::anim_single_solo(self, var1 + "_v1_arrival");
-      var0 thread scripts\common\anim::anim_loop_solo(self, var1 + "_v1_idle", self.animname + "_intro_idle");
+      var_0 scripts\common\anim::anim_single_solo(self, var_1 + "_v1_arrival");
+      var_0 thread scripts\common\anim::anim_loop_solo(self, var_1 + "_v1_idle", self.animname + "_intro_idle");
       level notify("v1_arrival_finished");
     }
 
     scripts\engine\utility::flag_wait("player_at_standoff");
-    var0 notify(self.animname + "_intro_idle");
+    var_0 notify(self.animname + "_intro_idle");
 
     if(self.animname == "sas2") {
-      var2 notify(self.animname + "_intro_idle");
+      var_2 notify(self.animname + "_intro_idle");
       level.cars_bomb["car1"] notify("start_car1_standoff_v1");
       scripts\engine\utility::flag_set("standoff_ready");
     }
 
-    var0 scripts\common\anim::anim_single_solo(self, var1 + "_v1_exit");
+    var_0 scripts\common\anim::anim_single_solo(self, var_1 + "_v1_exit");
     self notify("intro_anim_done");
 
     if(self.animname == "sas1") {
@@ -1608,7 +1608,7 @@ function intro_anims_allies(var0) {
     }
   }
 
-  thread intro_anims_standoff(var0);
+  thread intro_anims_standoff(var_0);
 }
 
 function intro_standoff_nag() {
@@ -1621,13 +1621,13 @@ function intro_anim_force_stop() {
   scripts\engine\sp\utility::anim_stopanimScripted();
 }
 
-function intro_anims_standoff(var0) {
+function intro_anims_standoff(var_0) {
   scripts\engine\utility::flag_wait("player_at_standoff");
-  var0 notify("stop_terry_intro_idle");
+  var_0 notify("stop_terry_intro_idle");
   level notify("start_standoff_scene");
   self endon("start_car2_scene");
-  thread intro_anims_car2_scene(var0);
-  var0 scripts\common\anim::anim_single_solo(self, "standoff");
+  thread intro_anims_car2_scene(var_0);
+  var_0 scripts\common\anim::anim_single_solo(self, "standoff");
 
   if(!scripts\engine\utility::flag("start_car2")) {
     scripts\engine\utility::flag_set("start_car2");
@@ -1635,38 +1635,38 @@ function intro_anims_standoff(var0) {
   }
 }
 
-function intro_anims_car2_scene(var0) {
+function intro_anims_car2_scene(var_0) {
   scripts\engine\utility::flag_wait("start_car2");
   self notify("start_car2_scene");
-  var0 notify("stop_sas2_standoff_idle");
-  var1 = undefined;
+  var_0 notify("stop_sas2_standoff_idle");
+  var_1 = undefined;
   scripts\engine\sp\utility::anim_stopanimScripted();
-  var0 scripts\common\anim::anim_single_solo(self, "car2_drives_off");
+  var_0 scripts\common\anim::anim_single_solo(self, "car2_drives_off");
 
   if(self.animname == "sas2" || self.animname == "car1_terry1") {
     if(self.animname == "sas2") {
       scripts\engine\utility::delaythread(3, &scripts\sp\maps\piccadilly\piccadilly_anim::drop_weapon_now, self);
     }
 
-    var2 = scripts\engine\utility::getStruct("golden_spot_animnode", "targetname");
-    var0 = spawn("script_origin", var2.origin);
-    thread goldenpath_moveTo(var0);
+    var_2 = scripts\engine\utility::getStruct("golden_spot_animnode", "targetname");
+    var_0 = spawn("script_origin", var_2.origin);
+    thread goldenpath_moveTo(var_0);
   } else if(self.animname == "car2_terry1" || self.animname == "car2_terry2" || self.animname == "car2_terry3" || self.animname == "car1_terry2" || self.animname == "car1_terry3") {
     self endon("death");
     self.allowdeath = 1;
   } else if(self.animname == "sas1" || self.animname == "sas3") {
     if(self.animname == "sas1") {
-      var0 notify("start_car1_extras");
+      var_0 notify("start_car1_extras");
     }
 
     thread allies_explosion_bullet_shield();
   }
 
-  var0 scripts\common\anim::anim_single_solo(self, "car_explosion");
+  var_0 scripts\common\anim::anim_single_solo(self, "car_explosion");
 
   if(scripts\engine\utility::array_contains(level.street_friendlies, self)) {
     if(self.animname == "sas2") {
-      var0 scripts\common\anim::anim_last_frame_solo(self, "car_explosion");
+      var_0 scripts\common\anim::anim_last_frame_solo(self, "car_explosion");
       level.street_friendlies = scripts\engine\utility::array_remove(level.street_friendlies, self);
       self visiblenotsolid();
       scripts\engine\utility::flag_wait("combat_start");
@@ -1677,28 +1677,28 @@ function intro_anims_car2_scene(var0) {
 
     if(self.animname == "sas1") {
       level.player thread scripts\engine\sp\utility::smart_dialogue("dx_vom_kyle_infil_car1_street_290");
-      var3 = distancesquared(level.player.origin, self.origin);
+      var_3 = distancesquared(level.player.origin, self.origin);
 
-      if(var3 > squared(150)) {
-        var4 = getanimlength(scripts\engine\utility::getanim("car_explosion_exit"));
-        var0 thread scripts\common\anim::anim_single_solo(self, "car_explosion_exit");
-        wait var4 / 1.2;
+      if(var_3 > squared(150)) {
+        var_4 = getanimlength(scripts\engine\utility::getanim("car_explosion_exit"));
+        var_0 thread scripts\common\anim::anim_single_solo(self, "car_explosion_exit");
+        wait var_4 / 1.2;
       } else {
-        var0 scripts\common\anim::anim_single_solo(self, "car_explosion_enter");
-        var0 thread scripts\common\anim::anim_loop_solo(self, "car_explosion_idle", "stop_loop_" + self.animname);
+        var_0 scripts\common\anim::anim_single_solo(self, "car_explosion_enter");
+        var_0 thread scripts\common\anim::anim_loop_solo(self, "car_explosion_idle", "stop_loop_" + self.animname);
 
         for(;;) {
-          var3 = distancesquared(level.player.origin, self.origin);
+          var_3 = distancesquared(level.player.origin, self.origin);
 
-          if(var3 > squared(150)) {
+          if(var_3 > squared(150)) {
             break;
           }
 
           waitframe();
         }
 
-        var0 notify("stop_loop_" + self.animname);
-        var0 thread scripts\common\anim::anim_single_solo(self, "car_explosion_idle_exit");
+        var_0 notify("stop_loop_" + self.animname);
+        var_0 thread scripts\common\anim::anim_single_solo(self, "car_explosion_idle_exit");
       }
     } else if(self.animname == "sas3") {
       self setgoalpos(self.origin);
@@ -1717,8 +1717,8 @@ function intro_anims_car2_scene(var0) {
     }
 
     scripts\engine\utility::flag_wait("car2_guys_dead");
-    var1 = scripts\engine\utility::getStruct("post_bomb_" + self.animname, "targetname");
-    thread start_ally_stayahead_movement(var1);
+    var_1 = scripts\engine\utility::getStruct("post_bomb_" + self.animname, "targetname");
+    thread start_ally_stayahead_movement(var_1);
     return;
   }
 
@@ -1758,46 +1758,46 @@ function allies_explosion_bullet_shield() {
   self.no_friendly_fire_fail = 0;
 }
 
-function goldenpath_moveTo(var0) {
-  self linkTo(var0);
+function goldenpath_moveTo(var_0) {
+  self linkTo(var_0);
   level waittill("move_knockback_scene");
-  scripts\engine\sp\utility::add_cleanup_ent(var0, "script_origins");
+  scripts\engine\sp\utility::add_cleanup_ent(var_0, "script_origins");
 }
 
-function kill_target(var0) {
+function kill_target(var_0) {
   self endon("death");
 
-  if(!isalive(var0)) {
+  if(!isalive(var_0)) {
     return;
   }
 
-  var0 endon("death");
-  self shoot(1, var0 gettagorigin("j_head"), 1, 1);
+  var_0 endon("death");
+  self shoot(1, var_0 gettagorigin("j_head"), 1, 1);
   wait 0.3;
-  self shoot(1, var0 gettagorigin("j_head"), 1, 1);
+  self shoot(1, var_0 gettagorigin("j_head"), 1, 1);
 
-  if(isDefined(var0.magic_bullet_shield) && var0.magic_bullet_shield == 1) {
-    var0 scripts\common\ai::stop_magic_bullet_shield();
+  if(isDefined(var_0.magic_bullet_shield) && var_0.magic_bullet_shield == 1) {
+    var_0 scripts\common\ai::stop_magic_bullet_shield();
   }
 
-  var0 kill();
+  var_0 kill();
 }
 
-function intro_anims_non_ai(var0) {
+function intro_anims_non_ai(var_0) {
   level endon("start_car2");
-  var1 = "intro_slamzoom";
+  var_1 = "intro_slamzoom";
 
   if(self.animname == "player_rig") {
     thread rain_exploder();
     thread infil_visionset();
     scripts\engine\utility::array_thread(level.street_friendlies, &scripts\engine\sp\utility::name_hide);
-    var0 scripts\common\anim::anim_single_solo(self, var1);
+    var_0 scripts\common\anim::anim_single_solo(self, var_1);
     scripts\engine\utility::flag_set("boots_on_the_ground");
     scripts\engine\utility::array_thread(level.street_friendlies, &scripts\engine\sp\utility::name_show);
     return;
   }
 
-  var0 scripts\common\anim::anim_single_solo(self, var1);
+  var_0 scripts\common\anim::anim_single_solo(self, var_1);
 
   if(isDefined(self)) {
     self delete();
@@ -1821,55 +1821,55 @@ function infil_visionset() {
   visionsetnaked("", 1);
 }
 
-function intro_bus(var0) {
+function intro_bus(var_0) {
   level endon("intro_skipped");
   level.intro_bus = setup_scripted_car("intro_bus");
   level.intro_bus endon("entitydeleted");
-  var0 scripts\common\anim::anim_first_frame_solo(level.intro_bus, "intro_slamzoom");
-  var0 waittill("start_bus");
-  var0 scripts\common\anim::anim_single_solo(level.intro_bus, "intro_slamzoom");
+  var_0 scripts\common\anim::anim_first_frame_solo(level.intro_bus, "intro_slamzoom");
+  var_0 waittill("start_bus");
+  var_0 scripts\common\anim::anim_single_solo(level.intro_bus, "intro_slamzoom");
   level.intro_bus delete();
 }
 
-function intro_car(var0) {
+function intro_car(var_0) {
   scripts\engine\utility::flag_wait("scriptables_ready");
   level.car_order = 1;
-  var1 = 1;
+  var_1 = 1;
 
   if(level.start_point != "infil") {
-    var1 = 100;
+    var_1 = 100;
   }
 
-  get_intro_cars(var0, var1);
-  thread intro_truck_anims(level.truck, var0);
-  thread intro_car2_anims(level.cars_bomb["van"], var0);
-  thread intro_car1_anims(level.cars_bomb["car1"], var0);
-  thread intro_cars_extra(level.cars_bomb["ralfa"], var0);
-  thread intro_cars_extra(level.cars_bomb["cab"], var0);
+  get_intro_cars(var_0, var_1);
+  thread intro_truck_anims(level.truck, var_0);
+  thread intro_car2_anims(level.cars_bomb["van"], var_0);
+  thread intro_car1_anims(level.cars_bomb["car1"], var_0);
+  thread intro_cars_extra(level.cars_bomb["ralfa"], var_0);
+  thread intro_cars_extra(level.cars_bomb["cab"], var_0);
   thread player_hit_watcher();
   wait 0.3;
   level notify("skippable_intro_ready");
 }
 
-function get_intro_cars(var0, var1) {
-  var2 = scripts\engine\utility::getStruct("intro_order_r1", "targetname");
-  var3 = getscriptablearray("intro_slamzoom_car_r1", "script_noteworthy");
-  var3 = sortbydistance(var3, var2.origin);
-  var2 = scripts\engine\utility::getStruct("intro_order_r2", "targetname");
-  var4 = getscriptablearray("intro_slamzoom_car_r2", "script_noteworthy");
-  var4 = sortbydistance(var4, var2.origin);
-  var2 = scripts\engine\utility::getStruct("intro_order_r3", "targetname");
-  var5 = getscriptablearray("intro_slamzoom_car_r3", "script_noteworthy");
-  var5 = sortbydistance(var5, var2.origin);
-  level.intro_cars = scripts\engine\utility::array_combine(var3, var4, var5);
+function get_intro_cars(var_0, var_1) {
+  var_2 = scripts\engine\utility::getStruct("intro_order_r1", "targetname");
+  var_3 = getscriptablearray("intro_slamzoom_car_r1", "script_noteworthy");
+  var_3 = sortbydistance(var_3, var_2.origin);
+  var_2 = scripts\engine\utility::getStruct("intro_order_r2", "targetname");
+  var_4 = getscriptablearray("intro_slamzoom_car_r2", "script_noteworthy");
+  var_4 = sortbydistance(var_4, var_2.origin);
+  var_2 = scripts\engine\utility::getStruct("intro_order_r3", "targetname");
+  var_5 = getscriptablearray("intro_slamzoom_car_r3", "script_noteworthy");
+  var_5 = sortbydistance(var_5, var_2.origin);
+  level.intro_cars = scripts\engine\utility::array_combine(var_3, var_4, var_5);
 
-  foreach(var7 in level.intro_cars) {
-    thread intro_car_anims(level.intro_cars[var8], var0, level.car_order);
+  foreach(var_7 in level.intro_cars) {
+    thread intro_car_anims(level.intro_cars[var_8], var_0, level.car_order);
     level.car_order++;
   }
 }
 
-function play_quick_reaction(var0) {
+function play_quick_reaction(var_0) {
   scripts\engine\utility::flag_wait("car2_detonation");
   self notify("exiting_car");
 
@@ -1877,31 +1877,31 @@ function play_quick_reaction(var0) {
     scripts\common\ai::magic_bullet_shield();
     wait randomfloatrange(1.25, 2.75);
     scripts\engine\sp\utility::anim_stopanimScripted();
-    var0 notify("stop_loop_" + self.animname);
-    var0 thread scripts\common\anim::anim_loop_solo(self, "car_react_rf_idle");
+    var_0 notify("stop_loop_" + self.animname);
+    var_0 thread scripts\common\anim::anim_loop_solo(self, "car_react_rf_idle");
     scripts\common\ai::stop_magic_bullet_shield();
-    thread bodyonly_guy_in_car_damage_monitor(var0);
+    thread bodyonly_guy_in_car_damage_monitor(var_0);
     return;
   }
 
   scripts\engine\sp\utility::anim_stopanimScripted();
-  var0 notify("stop_loop_" + self.animname);
-  var0 thread scripts\common\anim::anim_single_solo(self, "car_react_rf");
+  var_0 notify("stop_loop_" + self.animname);
+  var_0 thread scripts\common\anim::anim_single_solo(self, "car_react_rf");
   wait 2;
   self delete();
 }
 
-function bodyonly_guy_in_car_damage_monitor(var0) {
+function bodyonly_guy_in_car_damage_monitor(var_0) {
   self endon("death");
   self setCanDamage(1);
 
   for(;;) {
-    self waittill("damage", var1, var2, var3, var4, var5, var6, var7, var8);
+    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 
-    if(isDefined(var2)) {
-      self.lastattacker = var2;
+    if(isDefined(var_2)) {
+      self.lastattacker = var_2;
 
-      if(isPlayer(var2)) {
+      if(isPlayer(var_2)) {
         scripts\sp\friendlyfire::missionfail(1);
         break;
       }
@@ -1918,19 +1918,19 @@ function bodyonly_guy_in_car_damage_monitor(var0) {
 
 #using_animtree("scriptables");
 
-function intro_car_anims(var0, var1, var2) {
-  self.animname = "intro_car" + var1;
+function intro_car_anims(var_0, var_1, var_2) {
+  self.animname = "intro_car" + var_1;
   scripts\engine\sp\utility::assign_animtree();
 
-  if(var1 == 3 || var1 == 4) {
+  if(var_1 == 3 || var_1 == 4) {
     return;
   }
 
-  if(var1 == 8 || var1 == 9) {
+  if(var_1 == 8 || var_1 == 9) {
     level.intro_windows["back"][level.intro_windows["back"].size] = self;
-  } else if(var1 == 10) {
+  } else if(var_1 == 10) {
     level.intro_windows["front"][level.intro_windows["front"].size] = self;
-  } else if(var1 == 12) {
+  } else if(var_1 == 12) {
     level.intro_windows["special1"][level.intro_windows["special1"].size] = self;
   } else {
     level.scriptable_cleanup[level.scriptable_cleanup.size] = self;
@@ -1940,40 +1940,40 @@ function intro_car_anims(var0, var1, var2) {
   thread scripts\common\notetrack::start_notetrack_wait(self, "single anim", "intro_slamzoom", self.animname, self.intro_animation);
   thread scripts\sp\anim::animscriptdonotetracksthread(self, "single anim", "intro_slamzoom");
   setup_script_collision();
-  var3 = getstartorigin(var0.origin, var0.angles, self.intro_animation);
-  var4 = getstartangles(var0.origin, var0.angles, self.intro_animation);
-  self.origin = var3;
-  self.angles = var4;
-  self setflaggedanimknoball("single anim", self.intro_animation, %root, 1, 0, var2);
-  var5 = getanimlength(self.intro_animation);
+  var_3 = getstartorigin(var_0.origin, var_0.angles, self.intro_animation);
+  var_4 = getstartangles(var_0.origin, var_0.angles, self.intro_animation);
+  self.origin = var_3;
+  self.angles = var_4;
+  self setflaggedanimknoball("single anim", self.intro_animation, %root, 1, 0, var_2);
+  var_5 = getanimlength(self.intro_animation);
 
-  if(level.start_point == "infil" && (var1 == 1 || var1 == 2 || var1 == 11 || var1 == 12 || var1 == 13)) {
+  if(level.start_point == "infil" && (var_1 == 1 || var_1 == 2 || var_1 == 11 || var_1 == 12 || var_1 == 13)) {
     level.trailer_left_cars[level.trailer_left_cars.size] = self;
 
-    if(var1 != 13) {
+    if(var_1 != 13) {
       self.tiresounds = "veh_piccadilly_wet_car_tires_lp_0" + level.trailer_left_cars.size;
     }
 
-    var6 = getEnt("car" + var1 + "_trigger", "targetname");
-    var6 enablelinkTo();
-    var6 linkTo(self, "tag_origin", (45, 0, 20), (0, 0, 0));
+    var_6 = getEnt("car" + var_1 + "_trigger", "targetname");
+    var_6 enablelinkTo();
+    var_6 linkTo(self, "tag_origin", (45, 0, 20), (0, 0, 0));
   }
 
-  if(var1 == 5) {
+  if(var_1 == 5) {
     if(!scripts\engine\utility::flag("boots_on_the_ground")) {
-      wait var5 / 1.5;
+      wait var_5 / 1.5;
     }
 
     GscBinSkip4(0x35);
   }
 
-  if(var1 == 11 || var1 == 12) {
+  if(var_1 == 11 || var_1 == 12) {
     self setscriptablepartstate("lights_controller", "on");
   } else {
     self setscriptablepartstate("lights_controller", "on_nolight");
   }
 
-  if(var1 == 1 || var1 == 2 || var1 == 11 || var1 == 12) {
+  if(var_1 == 1 || var_1 == 2 || var_1 == 11 || var_1 == 12) {
     thread stop_loop_sound_after_anim();
   }
 
@@ -1994,9 +1994,9 @@ function stop_loop_sound_after_anim() {
 
 function hide_intro_car() {
   if(isDefined(self) && isDefined(self.passengers)) {
-    foreach(var1 in self.passengers) {
-      if(isDefined(var1) && isalive(var1)) {
-        var1 delete();
+    foreach(var_1 in self.passengers) {
+      if(isDefined(var_1) && isalive(var_1)) {
+        var_1 delete();
       }
     }
   }
@@ -2005,7 +2005,7 @@ function hide_intro_car() {
   self setscriptablepartstate("hide_car", "hide_car");
 }
 
-function debug_cars(var0) {
+function debug_cars(var_0) {
   for(;;) {
     wait 0.5;
   }
@@ -2018,57 +2018,57 @@ function player_hit_watcher() {
     waitframe();
   }
 
-  var0 = undefined;
-  var1 = getEnt("car11_trigger", "targetname");
-  var2 = getEnt("car1_trigger", "targetname");
-  var3 = getEnt("car13_trigger", "targetname");
-  var4 = getEnt("car2_trigger", "targetname");
-  var5 = [var1, var2, var3, var4];
+  var_0 = undefined;
+  var_1 = getEnt("car11_trigger", "targetname");
+  var_2 = getEnt("car1_trigger", "targetname");
+  var_3 = getEnt("car13_trigger", "targetname");
+  var_4 = getEnt("car2_trigger", "targetname");
+  var_5 = [var_1, var_2, var_3, var_4];
   level scripts\engine\utility::waittill_any("get_out_of_car", "intro_skipped");
 
-  foreach(var7 in level.trailer_left_cars) {
-    if(isDefined(var7.tiresounds)) {
-      var7 playLoopSound(var7.tiresounds);
+  foreach(var_7 in level.trailer_left_cars) {
+    if(isDefined(var_7.tiresounds)) {
+      var_7 playLoopSound(var_7.tiresounds);
     }
   }
 
   thread stop_sounds_post_bomb();
 
   for(;;) {
-    while(!level.player scripts\engine\sp\utility::is_touching_any(var5)) {
+    while(!level.player scripts\engine\sp\utility::is_touching_any(var_5)) {
       waitframe();
     }
 
-    if(level.player istouching(var1)) {
-      var0 = [level.trailer_left_cars[2], level.trailer_left_cars[0], level.trailer_left_cars[4], level.trailer_left_cars[1]];
-    } else if(level.player istouching(var2)) {
-      var0 = [level.trailer_left_cars[0], level.trailer_left_cars[4], level.trailer_left_cars[1]];
-    } else if(level.player istouching(var3)) {
-      var0 = [level.trailer_left_cars[4], level.trailer_left_cars[1]];
-    } else if(level.player istouching(var4)) {
-      var0 = [level.trailer_left_cars[1]];
+    if(level.player istouching(var_1)) {
+      var_0 = [level.trailer_left_cars[2], level.trailer_left_cars[0], level.trailer_left_cars[4], level.trailer_left_cars[1]];
+    } else if(level.player istouching(var_2)) {
+      var_0 = [level.trailer_left_cars[0], level.trailer_left_cars[4], level.trailer_left_cars[1]];
+    } else if(level.player istouching(var_3)) {
+      var_0 = [level.trailer_left_cars[4], level.trailer_left_cars[1]];
+    } else if(level.player istouching(var_4)) {
+      var_0 = [level.trailer_left_cars[1]];
     }
 
-    foreach(var7 in var0) {
-      var7 setscriptablepartstate("lights_controller", "taillights_braking");
-      var7 setanimrate(var7.intro_animation, 0);
-      var7 scalevolume(0, 0.5);
+    foreach(var_7 in var_0) {
+      var_7 setscriptablepartstate("lights_controller", "taillights_braking");
+      var_7 setanimrate(var_7.intro_animation, 0);
+      var_7 scalevolume(0, 0.5);
     }
 
-    while(level.player scripts\engine\sp\utility::is_touching_any(var5)) {
+    while(level.player scripts\engine\sp\utility::is_touching_any(var_5)) {
       waitframe();
     }
 
     wait 1;
 
-    if(level.player scripts\engine\sp\utility::is_touching_any(var5)) {
+    if(level.player scripts\engine\sp\utility::is_touching_any(var_5)) {
       return;
     }
 
-    foreach(var7 in var0) {
-      var7 setscriptablepartstate("lights_controller", "taillights_on");
-      var7 setanimrate(var7.intro_animation, 1);
-      var7 scalevolume(1, 0.5);
+    foreach(var_7 in var_0) {
+      var_7 setscriptablepartstate("lights_controller", "taillights_on");
+      var_7 setanimrate(var_7.intro_animation, 1);
+      var_7 scalevolume(1, 0.5);
     }
   }
 }
@@ -2076,25 +2076,25 @@ function player_hit_watcher() {
 function stop_sounds_post_bomb() {
   scripts\engine\utility::flag_wait("car2_detonation");
 
-  foreach(var1 in level.trailer_left_cars) {
-    if(isDefined(var1.tiresounds)) {
-      var1 stoploopsound(var1.tiresounds);
+  foreach(var_1 in level.trailer_left_cars) {
+    if(isDefined(var_1.tiresounds)) {
+      var_1 stoploopsound(var_1.tiresounds);
     }
   }
 }
 
 #using_animtree("");
 
-function intro_truck_anims(var0, var1) {
-  var2 = scripts\engine\utility::getanim("intro_slamzoom");
-  thread scripts\common\notetrack::start_notetrack_wait(self, "single anim", "intro_slamzoom", self.animname, var2);
+function intro_truck_anims(var_0, var_1) {
+  var_2 = scripts\engine\utility::getanim("intro_slamzoom");
+  thread scripts\common\notetrack::start_notetrack_wait(self, "single anim", "intro_slamzoom", self.animname, var_2);
   thread scripts\sp\anim::animscriptdonotetracksthread(self, "single anim", "intro_slamzoom");
-  var3 = getstartorigin(var0.origin, var0.angles, var2);
-  var4 = getstartangles(var0.origin, var0.angles, var2);
-  self.origin = var3;
-  self.angles = var4;
+  var_3 = getstartorigin(var_0.origin, var_0.angles, var_2);
+  var_4 = getstartangles(var_0.origin, var_0.angles, var_2);
+  self.origin = var_3;
+  self.angles = var_4;
   thread intro_truck_fx();
-  self setflaggedanimknoball("single anim", var2, %root, 1, 0, var1);
+  self setflaggedanimknoball("single anim", var_2, %root, 1, 0, var_1);
 }
 
 function intro_truck_fx() {
@@ -2103,101 +2103,101 @@ function intro_truck_fx() {
   playFXOnTag(scripts\engine\utility::getfx("vfx_pic_window_drips_rear_passenger"), self, "tag_window_back_right");
 }
 
-function play_scriptable_car_with_notetracks(var0, var1, var2) {
-  thread scripts\common\notetrack::start_notetrack_wait(self, "single anim", "intro_slamzoom", self.animname, var2);
+function play_scriptable_car_with_notetracks(var_0, var_1, var_2) {
+  thread scripts\common\notetrack::start_notetrack_wait(self, "single anim", "intro_slamzoom", self.animname, var_2);
   thread scripts\sp\anim::animscriptdonotetracksthread(self, "single anim", "intro_slamzoom");
-  var3 = getstartorigin(var0.origin, var0.angles, var2);
-  var4 = getstartangles(var0.origin, var0.angles, var2);
-  self.origin = var3;
-  self.angles = var4;
-  self setflaggedanimknoball("single anim", var2, %root, 1, 0, var1);
+  var_3 = getstartorigin(var_0.origin, var_0.angles, var_2);
+  var_4 = getstartangles(var_0.origin, var_0.angles, var_2);
+  self.origin = var_3;
+  self.angles = var_4;
+  self setflaggedanimknoball("single anim", var_2, %root, 1, 0, var_1);
 }
 
-function intro_car2_anims(var0, var1) {
-  var2 = scripts\engine\utility::getanim("intro_slamzoom");
-  play_scriptable_car_with_notetracks(var0, var1, var2);
+function intro_car2_anims(var_0, var_1) {
+  var_2 = scripts\engine\utility::getanim("intro_slamzoom");
+  play_scriptable_car_with_notetracks(var_0, var_1, var_2);
   scripts\engine\utility::flag_wait_all("intro_sas_ready", "player_at_standoff");
-  var2 = scripts\engine\utility::getanim("standoff");
-  thread scripts\common\notetrack::start_notetrack_wait(self, "car2_standoff", "standoff", self.animname, var2);
+  var_2 = scripts\engine\utility::getanim("standoff");
+  thread scripts\common\notetrack::start_notetrack_wait(self, "car2_standoff", "standoff", self.animname, var_2);
   thread scripts\sp\anim::animscriptdonotetracksthread(self, "car2_standoff", "standoff");
   self setanimknoball(scripts\engine\utility::getanim("standoff"), %root, 1, 0, 1);
   scripts\engine\utility::flag_wait("start_car2");
-  var2 = scripts\engine\utility::getanim("car2_drives_off");
-  thread car2_delete_extras(var2);
-  thread scripts\common\notetrack::start_notetrack_wait(self, "car2_drives", "car2_drives_off", self.animname, var2);
+  var_2 = scripts\engine\utility::getanim("car2_drives_off");
+  thread car2_delete_extras(var_2);
+  thread scripts\common\notetrack::start_notetrack_wait(self, "car2_drives", "car2_drives_off", self.animname, var_2);
   thread scripts\sp\anim::animscriptdonotetracksthread(self, "car2_drives", "car2_drives_off");
   thread scripts\engine\sp\utility::autosave_now();
-  self setflaggedanimknoball("car2_drives", var2, %root, 1, 0, 1);
+  self setflaggedanimknoball("car2_drives", var_2, %root, 1, 0, 1);
   scripts\engine\utility::flag_wait("car2_detonation");
   scripts\engine\utility::delaythread(0.4, &scripts\engine\sp\utility::cleanup_ents, "cross_traffic");
 }
 
-function car2_delete_extras(var0) {
-  var1 = getanimlength(var0);
-  wait var1;
+function car2_delete_extras(var_0) {
+  var_1 = getanimlength(var_0);
+  wait var_1;
   scripts\engine\utility::flag_set("force_bomb_start");
   self.lightback setlightintensity(0);
   self.lightfront setlightintensity(0);
   scripts\engine\utility::array_delete(self.bombs);
 }
 
-function intro_car1_anims(var0, var1) {
-  var2 = scripts\engine\utility::getanim("intro_slamzoom");
-  play_scriptable_car_with_notetracks(var0, var1, var2);
-  thread intro_car1_version1(var0);
-  thread intro_car1_version2(var0);
+function intro_car1_anims(var_0, var_1) {
+  var_2 = scripts\engine\utility::getanim("intro_slamzoom");
+  play_scriptable_car_with_notetracks(var_0, var_1, var_2);
+  thread intro_car1_version1(var_0);
+  thread intro_car1_version2(var_0);
 }
 
-function intro_car1_version1(var0) {
+function intro_car1_version1(var_0) {
   self endon("start_car1_standoff_v2");
-  var1 = scripts\engine\utility::getanim("intro_slamzoom_v1_exit");
-  var2 = getanimlength(var1);
-  thread scripts\common\notetrack::start_notetrack_wait(self, "car1_slamzoom_v1_exit", "intro_slamzoom_v1_exit", self.animname, var1);
+  var_1 = scripts\engine\utility::getanim("intro_slamzoom_v1_exit");
+  var_2 = getanimlength(var_1);
+  thread scripts\common\notetrack::start_notetrack_wait(self, "car1_slamzoom_v1_exit", "intro_slamzoom_v1_exit", self.animname, var_1);
   thread scripts\sp\anim::animscriptdonotetracksthread(self, "car1_slamzoom_v1_exit", "intro_slamzoom_v1_exit");
   self waittill("start_car1_standoff_v1");
-  self setanimknoball(var1, %root, 1, 0, 1);
-  var3 = scripts\engine\utility::getanim("intro_standoff");
-  thread scripts\common\notetrack::start_notetrack_wait(self, "car1_intro_standoff", "intro_standoff", self.animname, var3);
+  self setanimknoball(var_1, %root, 1, 0, 1);
+  var_3 = scripts\engine\utility::getanim("intro_standoff");
+  thread scripts\common\notetrack::start_notetrack_wait(self, "car1_intro_standoff", "intro_standoff", self.animname, var_3);
   thread scripts\sp\anim::animscriptdonotetracksthread(self, "car1_intro_standoff", "intro_standoff");
-  wait var2;
-  self setanim(var3, 1, 0, 1);
-  self clearanim(var1, 0);
-  var0 waittill("start_car1_extras");
+  wait var_2;
+  self setanim(var_3, 1, 0, 1);
+  self clearanim(var_1, 0);
+  var_0 waittill("start_car1_extras");
   thread clip_delete("car1_door_clip", "forever");
   wait 3.3;
   self setanimknoball(scripts\engine\utility::getanim("car_explosion"), %root, 1, 0, 1);
 }
 
-function intro_car1_version2(var0) {
+function intro_car1_version2(var_0) {
   self endon("start_car1_standoff_v1");
-  var1 = scripts\engine\utility::getanim("intro_slamzoom_v2");
-  var2 = getanimlength(var1);
-  thread scripts\common\notetrack::start_notetrack_wait(self, "car1_slamzoom_v2", "intro_slamzoom_v2", self.animname, var1);
+  var_1 = scripts\engine\utility::getanim("intro_slamzoom_v2");
+  var_2 = getanimlength(var_1);
+  thread scripts\common\notetrack::start_notetrack_wait(self, "car1_slamzoom_v2", "intro_slamzoom_v2", self.animname, var_1);
   thread scripts\sp\anim::animscriptdonotetracksthread(self, "car1_slamzoom_v2", "intro_slamzoom_v2");
   self waittill("start_car1_standoff_v2");
-  self setanimknoball(var1, %root, 1, 0, 1);
-  var3 = scripts\engine\utility::getanim("intro_standoff");
-  thread scripts\common\notetrack::start_notetrack_wait(self, "car1_intro_standoff", "intro_standoff", self.animname, var3);
+  self setanimknoball(var_1, %root, 1, 0, 1);
+  var_3 = scripts\engine\utility::getanim("intro_standoff");
+  thread scripts\common\notetrack::start_notetrack_wait(self, "car1_intro_standoff", "intro_standoff", self.animname, var_3);
   thread scripts\sp\anim::animscriptdonotetracksthread(self, "car1_intro_standoff", "intro_standoff");
-  wait var2;
-  self setanimknoball(var3, %root, 1, 0, 1);
-  var0 waittill("start_car1_extras");
+  wait var_2;
+  self setanimknoball(var_3, %root, 1, 0, 1);
+  var_0 waittill("start_car1_extras");
   thread clip_delete("car1_door_clip", "forever");
   wait 3.3;
   self setanimknoball(scripts\engine\utility::getanim("car_explosion"), %root, 1, 0, 1);
 }
 
-function intro_cars_extra(var0, var1) {
-  var2 = scripts\engine\utility::getanim("intro_slamzoom");
-  play_scriptable_car_with_notetracks(var0, var1, var2);
+function intro_cars_extra(var_0, var_1) {
+  var_2 = scripts\engine\utility::getanim("intro_slamzoom");
+  play_scriptable_car_with_notetracks(var_0, var_1, var_2);
   scripts\engine\utility::flag_wait("start_car2");
   self setanimknoball(scripts\engine\utility::getanim("car2_drives_off"), %root, 1, 0, 1);
   scripts\engine\utility::flag_wait("car2_detonation");
-  var3 = getscriptablearray("extra_car_eos", "targetname");
+  var_3 = getscriptablearray("extra_car_eos", "targetname");
   wait 0.12;
   self setscriptablepartstate("Piccadilly_Death", "picc_death", 1);
   wait 0.2;
-  var3[0] setscriptablepartstate("Piccadilly_Death", "picc_death", 1);
+  var_3[0] setscriptablepartstate("Piccadilly_Death", "picc_death", 1);
 }
 
 function player_roe_check() {
@@ -2218,32 +2218,32 @@ function player_fire_check() {
 }
 
 function intro_slamzoom() {
-  var0 = scripts\engine\utility::getStruct("intro_slamzoom", "targetname");
-  var1 = scripts\engine\utility::getStruct(var0.target, "targetname");
+  var_0 = scripts\engine\utility::getStruct("intro_slamzoom", "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   level.player enableinvulnerability();
   level.player playerdisabletriggers();
   level.player cleardamageindicators();
   level.player freezecontrols(1);
   level.player takeallweapons();
   level.player hidelegsandshadow();
-  var2 = var0 scripts\engine\utility::spawn_tag_origin();
-  var2.angles += (80, 0, 0);
-  level.player playersetgroundreferenceent(var2);
-  level.player playerlinktoabsolute(var2, "tag_origin");
+  var_2 = var_0 scripts\engine\utility::spawn_tag_origin();
+  var_2.angles += (80, 0, 0);
+  level.player playersetgroundreferenceent(var_2);
+  level.player playerlinktoabsolute(var_2, "tag_origin");
   wait 0.05;
   level.player playerenabletriggers();
-  var3 = 1.85;
+  var_3 = 1.85;
   level.player playSound("slomo_whoosh");
-  var2 moveTo(var1.origin, var3, var3 * 0.9, var3 * 0.1);
-  wait var3 * 0.5;
-  var2 rotateTo(var1.angles, var3 * 0.5, var3 * 0.25, var3 * 0.25);
-  wait var3 * 0.5;
+  var_2 moveTo(var_1.origin, var_3, var_3 * 0.9, var_3 * 0.1);
+  wait var_3 * 0.5;
+  var_2 rotateTo(var_1.angles, var_3 * 0.5, var_3 * 0.25, var_3 * 0.25);
+  wait var_3 * 0.5;
   level.player unlink();
   level.player playersetgroundreferenceent(undefined);
   level.player disableinvulnerability();
   level.player showlegsandshadow();
   level.player freezecontrols(0);
-  var2 delete();
+  var_2 delete();
   level thread scripts\sp\maps\piccadilly\piccadilly_util::piccadilly_weapons();
 }
 
@@ -2254,9 +2254,9 @@ function infil_car1_start() {
   level.car1_terry = scripts\engine\sp\utility::spawn_targetname("car1_terry");
   level.car1_terries = scripts\engine\sp\utility::array_spawn_targetname("car1_terries", 1);
   level.car2_terries = scripts\engine\sp\utility::array_spawn_targetname("car2_terry", 1);
-  var0 = scripts\engine\utility::array_combine(level.street_friendlies, level.car2_terries, level.car1_terries, [level.car1_terry]);
-  var1 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
-  scripts\engine\utility::array_thread(var0, &setup_intro_idles, var1);
+  var_0 = scripts\engine\utility::array_combine(level.street_friendlies, level.car2_terries, level.car1_terries, [level.car1_terry]);
+  var_1 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
+  scripts\engine\utility::array_thread(var_0, &setup_intro_idles, var_1);
   level.truck = setup_scriptable_car("sas_intro_decho");
   level.cars_bomb["van"] = setup_scriptable_car("car2_bomb");
   level.cars_bomb["car1"] = setup_scriptable_car("car1_bomb");
@@ -2271,7 +2271,7 @@ function infil_car1_start() {
   thread player_roe_check();
   thread spawn_cross_street_traffic();
   thread show_aftermath_geo();
-  thread intro_car(var1);
+  thread intro_car(var_1);
   intro_street_player_movement();
   thread player_speed_management_intro("car2_detonation");
 }
@@ -2286,8 +2286,8 @@ function infil_car1_main() {
   scripts\engine\sp\objectives::objective_remove("piccadilly_objective");
   scripts\engine\sp\objectives::objective_add("piccadilly_objective", "current", undefined, &"PICCADILLY/OBJ_MAINTAIN_ROE");
   thread intro_standoff();
-  var0 = getEnt("out_of_bounds_2", "targetname");
-  thread scripts\sp\trigger::trigger_outofbounds(var0);
+  var_0 = getEnt("out_of_bounds_2", "targetname");
+  thread scripts\sp\trigger::trigger_outofbounds(var_0);
 }
 
 function infil_car1_catchup() {
@@ -2300,32 +2300,32 @@ function infil_car1_catchup() {
     thread scripts\sp\maps\piccadilly\piccadilly_ambient::ambient_combat_popo();
   }
 
-  var0 = getEnt("out_of_bounds_2", "targetname");
-  thread scripts\sp\trigger::trigger_outofbounds(var0);
+  var_0 = getEnt("out_of_bounds_2", "targetname");
+  thread scripts\sp\trigger::trigger_outofbounds(var_0);
   thread intro_lights();
   thread delete_storefront_signs();
 }
 
-function clip_delete(var0, var1) {
-  var2 = getEnt(var0, "targetname");
-  var2 solid();
+function clip_delete(var_0, var_1) {
+  var_2 = getEnt(var_0, "targetname");
+  var_2 solid();
 
-  if(scripts\engine\utility::flag_exist(var1)) {
-    scripts\engine\utility::flag_wait(var1);
+  if(scripts\engine\utility::flag_exist(var_1)) {
+    scripts\engine\utility::flag_wait(var_1);
   } else {
-    level waittill(var1);
+    level waittill(var_1);
   }
 
-  var2 delete();
+  var_2 delete();
 }
 
-function van_anim_jumpto(var0) {
-  var0 waittill("stop_terry_intro_idle");
-  var0 scripts\common\anim::anim_single_solo(self, "standoff");
+function van_anim_jumpto(var_0) {
+  var_0 waittill("stop_terry_intro_idle");
+  var_0 scripts\common\anim::anim_single_solo(self, "standoff");
 }
 
-function setup_intro_idles(var0) {
-  var1 = undefined;
+function setup_intro_idles(var_0) {
+  var_1 = undefined;
 
   if(self.animname == "car2_terry_driver") {
     level.car2_terries = scripts\engine\utility::array_remove(level.car2_terries, self);
@@ -2334,32 +2334,32 @@ function setup_intro_idles(var0) {
   }
 
   if(self.animname == "sas2") {
-    var1 = spawnStruct();
-    var1.origin = var0.origin;
-    var2 = ["dx_vom_mick_infil_car1_street_70", "dx_vom_mick_infil_car1_street_80", "dx_vom_mick_infil_car1_street_90"];
-    thread scripts\sp\maps\piccadilly\piccadilly_util::notetrack_nag(var2, "player_at_standoff");
-    var1 thread scripts\common\anim::anim_loop_solo_with_nags(self, "intro_slamzoom_v1_sas2_idle", "stop_terry_intro_idle");
+    var_1 = spawnStruct();
+    var_1.origin = var_0.origin;
+    var_2 = ["dx_vom_mick_infil_car1_street_70", "dx_vom_mick_infil_car1_street_80", "dx_vom_mick_infil_car1_street_90"];
+    thread scripts\sp\maps\piccadilly\piccadilly_util::notetrack_nag(var_2, "player_at_standoff");
+    var_1 thread scripts\common\anim::anim_loop_solo_with_nags(self, "intro_slamzoom_v1_sas2_idle", "stop_terry_intro_idle");
   } else {
-    var0 thread scripts\common\anim::anim_loop_solo(self, "intro_slamzoom_v1_idle", "stop_terry_intro_idle");
+    var_0 thread scripts\common\anim::anim_loop_solo(self, "intro_slamzoom_v1_idle", "stop_terry_intro_idle");
   }
 
   if(self.animname == "sas1" || self.animname == "sas2" || self.animname == "sas3" || self.animname == "car1_terry1" || self.animname == "car1_terry2" || self.animname == "car1_terry3") {
     scripts\engine\utility::flag_wait("player_at_standoff");
-    var0 notify("stop_terry_intro_idle");
+    var_0 notify("stop_terry_intro_idle");
 
     if(self.animname == "sas2") {
-      var1 notify("stop_terry_intro_idle");
+      var_1 notify("stop_terry_intro_idle");
       scripts\engine\utility::flag_set("standoff_ready");
     }
 
-    var0 scripts\common\anim::anim_single_solo(self, "intro_slamzoom_v1_exit");
+    var_0 scripts\common\anim::anim_single_solo(self, "intro_slamzoom_v1_exit");
     scripts\engine\utility::flag_set("intro_sas_ready");
-    thread intro_anims_standoff(var0);
+    thread intro_anims_standoff(var_0);
     return;
   }
 
   scripts\engine\utility::flag_wait("intro_sas_ready");
-  thread intro_anims_standoff(var0);
+  thread intro_anims_standoff(var_0);
 }
 
 function standoff_terry_vo() {}
@@ -2428,15 +2428,15 @@ function intro_standoff() {
     scripts\engine\utility::flag_set("weapons_free");
   }
 
-  var0 = scripts\engine\sp\utility::get_closest_to_player_view(level.car2_terries, level.player, 1);
-  var0.ignoreme = 1;
-  var0.ignoreall = 0;
-  var0 scripts\engine\utility::delaythread(5, &scripts\engine\sp\utility::set_ignoreme, 0);
+  var_0 = scripts\engine\sp\utility::get_closest_to_player_view(level.car2_terries, level.player, 1);
+  var_0.ignoreme = 1;
+  var_0.ignoreall = 0;
+  var_0 scripts\engine\utility::delaythread(5, &scripts\engine\sp\utility::set_ignoreme, 0);
 
-  foreach(var2 in level.street_friendlies) {
-    var2.ignoreall = 0;
-    var2.ignoreme = 0;
-    var2.dontevershoot = 0;
+  foreach(var_2 in level.street_friendlies) {
+    var_2.ignoreall = 0;
+    var_2.ignoreme = 0;
+    var_2.dontevershoot = 0;
   }
 
   wait 2.6;
@@ -2445,26 +2445,26 @@ function intro_standoff() {
 
 function carbomb_shop_windows() {
   wait 0.25;
-  var0 = 1;
-  var1 = anglesToForward((0, 360, 0));
+  var_0 = 1;
+  var_1 = anglesToForward((0, 360, 0));
 
-  while(var0 < 7) {
-    var2 = getglassarray("intro_glass" + var0);
-    thread glass_management(var2);
+  while(var_0 < 7) {
+    var_2 = getglassarray("intro_glass" + var_0);
+    thread glass_management(var_2);
     wait 0.25;
-    var0++;
+    var_0++;
   }
 }
 
-function glass_management(var0) {
-  foreach(var2 in self) {
-    destroyglass(var2, var0);
+function glass_management(var_0) {
+  foreach(var_2 in self) {
+    destroyglass(var_2, var_0);
   }
 
   wait 0.3;
 
-  foreach(var2 in self) {
-    deleteglass(var2);
+  foreach(var_2 in self) {
+    deleteglass(var_2);
   }
 }
 
@@ -2479,7 +2479,7 @@ function carbomb_main() {
   }
 
   thread post_explosion_visionset();
-  var0 = scripts\engine\utility::getStructArray("civ_stunned", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("civ_stunned", "targetname");
   thread scripts\sp\maps\piccadilly\piccadilly_combat::fake_civ_stream("aftermath_fake_civs", "combat_start");
   level.street_friendlies = scripts\engine\utility::array_removedead(level.street_friendlies);
   level.street_friendlies = scripts\engine\utility::array_removeundefined(level.street_friendlies);
@@ -2503,36 +2503,36 @@ function car2_detonates() {
 function aftermath_ambience() {
   level endon("sicario_street_exit");
   level notify("vo_post_expl_walla");
-  var0 = scripts\engine\utility::getStruct("carbomb_det", "targetname");
-  thread scripts\sp\maps\piccadilly\piccadilly_util::crowd_screams(var0.origin);
+  var_0 = scripts\engine\utility::getStruct("carbomb_det", "targetname");
+  thread scripts\sp\maps\piccadilly\piccadilly_util::crowd_screams(var_0.origin);
   scripts\engine\utility::delaythread(5, &scripts\engine\utility::play_sound_in_space, "pdilly_first_explosion_car_accident", (-1371, -980, 155));
-  scripts\engine\utility::delaythread(9, &scripts\sp\maps\piccadilly\piccadilly_util::crowd_screams, var0.origin);
+  scripts\engine\utility::delaythread(9, &scripts\sp\maps\piccadilly\piccadilly_util::crowd_screams, var_0.origin);
 }
 
 function car_windows_break() {
   wait 0.25;
-  var0 = scripts\engine\utility::getStruct("carbomb_det", "targetname");
-  var1 = scripts\engine\utility::array_combine(level.intro_windows["front"], level.intro_windows["back"], level.intro_windows["special1"]);
-  var1 = sortbydistance(var1, var0.origin);
-  var2 = [0, 1, 0, 0];
-  var3 = 0;
+  var_0 = scripts\engine\utility::getStruct("carbomb_det", "targetname");
+  var_1 = scripts\engine\utility::array_combine(level.intro_windows["front"], level.intro_windows["back"], level.intro_windows["special1"]);
+  var_1 = sortbydistance(var_1, var_0.origin);
+  var_2 = [0, 1, 0, 0];
+  var_3 = 0;
 
-  foreach(var5 in var1) {
-    var5 setscriptablepartstate("Window_Blast", "destroyed", 1);
+  foreach(var_5 in var_1) {
+    var_5 setscriptablepartstate("Window_Blast", "destroyed", 1);
 
-    if(scripts\engine\utility::array_contains(level.intro_windows["front"], var5)) {
-      var5 setscriptablepartstate("Damage_Blast", "front", 1);
-    } else if(scripts\engine\utility::array_contains(level.intro_windows["special1"], var5)) {
-      var5 setscriptablepartstate("Damage_Blast", "special1", 1);
+    if(scripts\engine\utility::array_contains(level.intro_windows["front"], var_5)) {
+      var_5 setscriptablepartstate("Damage_Blast", "front", 1);
+    } else if(scripts\engine\utility::array_contains(level.intro_windows["special1"], var_5)) {
+      var_5 setscriptablepartstate("Damage_Blast", "special1", 1);
     } else {
-      var5 setscriptablepartstate("Damage_Blast", "back", 1);
+      var_5 setscriptablepartstate("Damage_Blast", "back", 1);
     }
 
-    if(!scripts\engine\utility::is_equal(var2[var3], 1)) {
+    if(!scripts\engine\utility::is_equal(var_2[var_3], 1)) {
       wait 0.5;
     }
 
-    var3++;
+    var_3++;
   }
 }
 
@@ -2540,24 +2540,24 @@ function carbomb_player_react() {
   level.scr_model["player_rig"] = "viewhands_fullbody_kyle_sas_urban";
   level.knockdownanime = ["car_explosion", "crouch"];
   level.touching = setup_player_animnode();
-  var0 = spawn("script_origin", level.player.origin);
-  var0.angles = level.player.angles;
-  scripts\engine\sp\utility::add_cleanup_ent(var0, "script_origins");
+  var_0 = spawn("script_origin", level.player.origin);
+  var_0.angles = level.player.angles;
+  scripts\engine\sp\utility::add_cleanup_ent(var_0, "script_origins");
 
   if(!level.player isonground() && level.knockdownanime[0] == "car_explosion_short") {
-    var1 = scripts\common\utility::groundpos(var0.origin);
-    var0 moveTo(var1, 0.3, 0.2);
+    var_1 = scripts\common\utility::groundpos(var_0.origin);
+    var_0 moveTo(var_1, 0.3, 0.2);
   }
 
-  var2 = var0 scripts\sp\player_rig::link_player_to_rig(level.knockdownanime[0], "stand", 1, 0.2, 1);
-  var0 thread scripts\common\anim::anim_single_solo(var2, level.knockdownanime[0]);
-  var2 show();
-  var3 = thread anim_weapon_for_player();
+  var_2 = var_0 scripts\sp\player_rig::link_player_to_rig(level.knockdownanime[0], "stand", 1, 0.2, 1);
+  var_0 thread scripts\common\anim::anim_single_solo(var_2, level.knockdownanime[0]);
+  var_2 show();
+  var_3 = thread anim_weapon_for_player();
   thread player_damage_based_on_dist();
-  var2 linkTo(var0);
+  var_2 linkTo(var_0);
 
   if(level.knockdownanime[0] != "car_explosion_short") {
-    var0 rotateTo((0, 0, 0), 0.2);
+    var_0 rotateTo((0, 0, 0), 0.2);
   }
 
   thread carbomb_player_extras();
@@ -2567,53 +2567,53 @@ function carbomb_player_react() {
     wait 1;
 
     if(isDefined(level.intro_origin)) {
-      var0.origin = level.intro_origin;
+      var_0.origin = level.intro_origin;
     } else if(isDefined(level.intro_animnode)) {
-      var0.origin = level.intro_animnode.origin;
+      var_0.origin = level.intro_animnode.origin;
     }
   }
 
-  var2 waittillmatch("single anim", "end");
+  var_2 waittillmatch("single anim", "end");
   level.player showviewmodel();
-  var3 delete();
+  var_3 delete();
   scripts\sp\player_rig::unlink_player_from_rig(0, level.knockdownanime[1], 1);
   scripts\engine\utility::flag_set("player_is_up");
-  var4 = scripts\engine\utility::getStruct("circle_objective_struct", "targetname");
+  var_4 = scripts\engine\utility::getStruct("circle_objective_struct", "targetname");
   scripts\engine\sp\objectives::objective_remove_all_locations("piccadilly_objective");
   scripts\engine\sp\objectives::objective_update("piccadilly_objective", "current", undefined, &"PICCADILLY/OBJ_INVESTIGATE");
-  scripts\engine\sp\objectives::objective_add_location_position("piccadilly_objective", "smoke_reveal", var4.origin);
+  scripts\engine\sp\objectives::objective_add_location_position("piccadilly_objective", "smoke_reveal", var_4.origin);
   thread player_speed_post_bomb();
   level.scr_model["player_rig"] = "viewhands_kyle_sas_urban";
 }
 
 function anim_weapon_for_player() {
-  var0 = spawn("script_model", level.player.origin);
-  var0 scripts\common\utility::make_weapon_model("iw8_pi_papa320", ["rec_papa320_r", "mag_papa320_r", "slide_papa320_r"]);
-  var0 linkTo(self, "tag_accessory_right", (0, 0, 0), (0, 0, 0));
-  return var0;
+  var_0 = spawn("script_model", level.player.origin);
+  var_0 scripts\common\utility::make_weapon_model("iw8_pi_papa320", ["rec_papa320_r", "mag_papa320_r", "slide_papa320_r"]);
+  var_0 linkTo(self, "tag_accessory_right", (0, 0, 0), (0, 0, 0));
+  return var_0;
 }
 
 function setup_player_animnode() {
-  var0 = getEnt("standoff_golden_spot", "targetname");
-  var1 = getEntArray("golden_spots", "targetname");
-  var2 = getEnt("golden_spot_car", "targetname");
+  var_0 = getEnt("standoff_golden_spot", "targetname");
+  var_1 = getEntArray("golden_spots", "targetname");
+  var_2 = getEnt("golden_spot_car", "targetname");
 
-  if(level.player istouching(var0)) {
-    var3 = scripts\engine\utility::getStruct("golden_spot_node_plr", "targetname");
-    var4 = scripts\engine\utility::getStruct(var3.target, "targetname");
-    level.intro_origin = pointonsegmentnearesttopoint(var3.origin, var4.origin, level.player.origin);
+  if(level.player istouching(var_0)) {
+    var_3 = scripts\engine\utility::getStruct("golden_spot_node_plr", "targetname");
+    var_4 = scripts\engine\utility::getStruct(var_3.target, "targetname");
+    level.intro_origin = pointonsegmentnearesttopoint(var_3.origin, var_4.origin, level.player.origin);
     return true;
-  } else if(level.player istouching(var4)) {
-    var3 = scripts\engine\utility::getStruct(var4.target, "targetname");
-    var4 = scripts\engine\utility::getStruct(var3.target, "targetname");
-    level.intro_origin = pointonsegmentnearesttopoint(var3.origin, var4.origin, level.player.origin);
+  } else if(level.player istouching(var_4)) {
+    var_3 = scripts\engine\utility::getStruct(var_4.target, "targetname");
+    var_4 = scripts\engine\utility::getStruct(var_3.target, "targetname");
+    level.intro_origin = pointonsegmentnearesttopoint(var_3.origin, var_4.origin, level.player.origin);
   } else {
-    foreach(var6 in var3) {
-      if(level.player istouching(var6)) {
-        var7 = scripts\engine\utility::getStructArray(var6.target, "targetname");
-        level.intro_animnode = scripts\engine\utility::getclosest(level.player.origin, var7);
+    foreach(var_6 in var_3) {
+      if(level.player istouching(var_6)) {
+        var_7 = scripts\engine\utility::getStructArray(var_6.target, "targetname");
+        level.intro_animnode = scripts\engine\utility::getclosest(level.player.origin, var_7);
 
-        if(isDefined(var6.script_noteworthy) && var6.script_noteworthy == "left") {
+        if(isDefined(var_6.script_noteworthy) && var_6.script_noteworthy == "left") {
           level.knockdownanime = ["car_explosion_left", "crouch"];
         }
 
@@ -2621,10 +2621,10 @@ function setup_player_animnode() {
       }
     }
 
-    var6 = undefined;
-    var7 = undefined;
-    var9 = scripts\engine\utility::getStructArray("golden_spot_node", "script_noteworthy");
-    level.intro_animnode = scripts\engine\utility::getclosest(level.player.origin, var9);
+    var_6 = undefined;
+    var_7 = undefined;
+    var_9 = scripts\engine\utility::getStructArray("golden_spot_node", "script_noteworthy");
+    level.intro_animnode = scripts\engine\utility::getclosest(level.player.origin, var_9);
   }
 
   level.knockdownanime = ["car_explosion_short", "stand"];
@@ -2632,12 +2632,12 @@ function setup_player_animnode() {
 }
 
 function player_damage_based_on_dist() {
-  var0 = scripts\engine\utility::getStruct("carbomb_det", "targetname");
-  var1 = distance2dsquared(level.player.origin, var0.origin);
-  var2 = squared(600);
-  var3 = squared(750);
+  var_0 = scripts\engine\utility::getStruct("carbomb_det", "targetname");
+  var_1 = distance2dsquared(level.player.origin, var_0.origin);
+  var_2 = squared(600);
+  var_3 = squared(750);
 
-  if(var1 <= var2) {
+  if(var_1 <= var_2) {
     wait 0.3;
     level.player kill();
     wait 0.4;
@@ -2645,35 +2645,35 @@ function player_damage_based_on_dist() {
     return;
   }
 
-  if(var1 <= var3) {
+  if(var_1 <= var_3) {
     wait 0.3;
-    level.player scripts\sp\utility::do_damage(80, var0.origin);
+    level.player scripts\sp\utility::do_damage(80, var_0.origin);
     return;
   }
 }
 
 function carbomb_player_extras() {
-  var0 = 3.5;
+  var_0 = 3.5;
 
   if(level.knockdownanime[0] == "car_explosion") {
     wait 0.7;
   } else if(level.knockdownanime[0] == "car_explosion_short") {
     wait 0.4;
-    var0 = 2;
+    var_0 = 2;
   } else if(level.knockdownanime[0] == "car_explosion_left") {
     wait 0.5;
-    var0 = 3;
+    var_0 = 3;
   }
 
   self playSound("plr_breath_pain_init");
   scripts\engine\utility::delaycall(2.3, &playsound, "breathing_better");
-  var1 = self gettagorigin("j_head");
-  earthquake(0.5, 0.7, var1, 200);
-  screenshake(var1, 2, 0, 0, 0.5);
-  playrumbleonposition("grenade_rumble", var1);
+  var_1 = self gettagorigin("j_head");
+  earthquake(0.5, 0.7, var_1, 200);
+  screenshake(var_1, 2, 0, 0, 0.5);
+  playrumbleonposition("grenade_rumble", var_1);
   wait 0.5;
-  self shellshock("explosion", var0);
-  scripts\engine\utility::delaycall(var0 - 1, &fadeoutshellshock);
+  self shellshock("explosion", var_0);
+  scripts\engine\utility::delaycall(var_0 - 1, &fadeoutshellshock);
 }
 
 function player_speed_post_bomb() {
@@ -2687,26 +2687,26 @@ function post_bomb_start() {
   thread vo_post_bomb_walla();
   level.street_friendlies = scripts\engine\sp\utility::array_spawn_targetname("sicario_street_friendly");
 
-  foreach(var1 in level.street_friendlies) {
-    if(var1.animname == "sas2") {
-      level.street_friendlies = scripts\engine\utility::array_remove(level.street_friendlies, var1);
-      var1 scripts\common\ai::stop_magic_bullet_shield();
-      var1 delete();
+  foreach(var_1 in level.street_friendlies) {
+    if(var_1.animname == "sas2") {
+      level.street_friendlies = scripts\engine\utility::array_remove(level.street_friendlies, var_1);
+      var_1 scripts\common\ai::stop_magic_bullet_shield();
+      var_1 delete();
       continue;
     }
 
-    var2 = scripts\engine\utility::getStruct("post_bomb_" + var1.animname, "targetname");
-    var1 forceteleport(var2.origin, var2.angles);
-    thread start_ally_stayahead_movement(var1);
+    var_2 = scripts\engine\utility::getStruct("post_bomb_" + var_1.animname, "targetname");
+    var_1 forceteleport(var_2.origin, var_2.angles);
+    thread start_ally_stayahead_movement(var_1);
   }
 
-  var4 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
+  var_4 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
   level.truck = setup_scriptable_car("sas_intro_decho");
   level.cars_bomb["van"] = setup_scriptable_car("car2_bomb");
   level.cars_bomb["car1"] = setup_scriptable_car("car1_bomb");
   level.cars_bomb["ralfa"] = setup_scriptable_car("car3_bomb");
   level.cars_bomb["cab"] = setup_scriptable_car("car4_bomb");
-  thread intro_car(var4);
+  thread intro_car(var_4);
   thread carbomb_main();
   setup_temp_car_stuff(level.cars_bomb["van"]);
   level.cars_bomb["van"].lightback setlightintensity(0);
@@ -2714,9 +2714,9 @@ function post_bomb_start() {
   scripts\engine\utility::array_delete(level.cars_bomb["van"].bombs);
   level.cars_bomb["van"] scripts\engine\utility::delaycall(1, &hide);
   thread scripts\sp\maps\piccadilly\piccadilly_combat::police_vignette();
-  var5 = scripts\engine\utility::getStruct("circle_objective_struct", "targetname");
+  var_5 = scripts\engine\utility::getStruct("circle_objective_struct", "targetname");
   scripts\engine\sp\objectives::objective_add("piccadilly_objective", "current", undefined, &"PICCADILLY/OBJ_INVESTIGATE");
-  scripts\engine\sp\objectives::objective_add_location_position("piccadilly_objective", "standoff", var5.origin);
+  scripts\engine\sp\objectives::objective_add_location_position("piccadilly_objective", "standoff", var_5.origin);
   scripts\engine\sp\utility::set_start_location("carbomb", [level.player]);
 }
 
@@ -2750,10 +2750,10 @@ function post_bomb_ambient() {
   scripts\engine\sp\utility::battlechatter_on("axis");
 }
 
-function start_ally_stayahead_movement(var0) {
+function start_ally_stayahead_movement(var_0) {
   if(!scripts\engine\utility::flag("combat_start")) {
-    var1 = scripts\engine\utility::getStruct("post_bomb_poi_" + self.animname, "targetname");
-    scripts\common\ai::poi_enable(1, var1);
+    var_1 = scripts\engine\utility::getStruct("post_bomb_poi_" + self.animname, "targetname");
+    scripts\common\ai::poi_enable(1, var_1);
 
     if(self.animname == "sas1") {
       level.infil_leader = self;
@@ -2761,16 +2761,16 @@ function start_ally_stayahead_movement(var0) {
       scripts\sp\utility::set_stayahead_values(3, 120, 25, 0.2);
       scripts\sp\utility::set_stayahead_values(4, 80, -100, 0.1);
       scripts\sp\utility::set_stayahead_wait_values(-200, 2, 1);
-      var2 = scripts\engine\utility::getStructArray("street_wait_node_" + self.animname, "targetname");
-      scripts\sp\utility::set_stayahead_wait_nodes(var2);
+      var_2 = scripts\engine\utility::getStructArray("street_wait_node_" + self.animname, "targetname");
+      scripts\sp\utility::set_stayahead_wait_nodes(var_2);
       scripts\sp\utility::enable_stayahead(level.player);
     } else {
-      var2 = scripts\engine\utility::getStructArray("street_wait_node_" + self.animname, "targetname");
-      scripts\sp\utility::set_stayahead_wait_nodes(var2, 1);
+      var_2 = scripts\engine\utility::getStructArray("street_wait_node_" + self.animname, "targetname");
+      scripts\sp\utility::set_stayahead_wait_nodes(var_2, 1);
       wait_to_create_team(level, self);
     }
 
-    thread scripts\sp\spawner::go_to_node(var1);
+    thread scripts\sp\spawner::go_to_node(var_1);
     self.ignoreall = 1;
     scripts\engine\utility::flag_wait_or_timeout("combat_start", 7);
     scripts\sp\utility::disable_stayahead(165, 1);
@@ -2787,12 +2787,12 @@ function start_ally_stayahead_movement(var0) {
   scripts\engine\sp\utility::activate_trigger_with_targetname("friendly_combat_color_start");
 }
 
-function wait_to_create_team(var0) {
+function wait_to_create_team(var_0) {
   while(!isDefined(level.infil_leader)) {
     waitframe();
   }
 
-  level.infil_leader scripts\sp\utility::stayahead_add_to_team(var0, 180, 125, 50);
+  level.infil_leader scripts\sp\utility::stayahead_add_to_team(var_0, 180, 125, 50);
 }
 
 function street_cleanup_ents() {
@@ -2822,10 +2822,10 @@ function street_cleanup_approach() {
 }
 
 function street_cleanup_combat() {
-  var0 = getEntArray("sicario_street_ents", "script_noteworthy");
+  var_0 = getEntArray("sicario_street_ents", "script_noteworthy");
 
-  if(istrue(var0.size)) {
-    scripts\engine\utility::array_delete(var0);
+  if(istrue(var_0.size)) {
+    scripts\engine\utility::array_delete(var_0);
   }
 
   wait 0.2;
@@ -2846,24 +2846,24 @@ function street_cleanup_combat() {
 
 function combat_ambience() {
   level endon("combat_start");
-  var0 = getspawnerarray("aftermath_fake_civs");
-  var1 = sortbydistance(var0, level.player.origin)[0];
-  thread scripts\sp\maps\piccadilly\piccadilly_util::crowd_screams(var1.origin);
-  var2 = scripts\engine\utility::getStruct("carbomb_det", "targetname");
-  scripts\engine\utility::delaythread(1.6, &scripts\sp\maps\piccadilly\piccadilly_util::crowd_screams, var2.origin);
-  var3 = gettime();
+  var_0 = getspawnerarray("aftermath_fake_civs");
+  var_1 = sortbydistance(var_0, level.player.origin)[0];
+  thread scripts\sp\maps\piccadilly\piccadilly_util::crowd_screams(var_1.origin);
+  var_2 = scripts\engine\utility::getStruct("carbomb_det", "targetname");
+  scripts\engine\utility::delaythread(1.6, &scripts\sp\maps\piccadilly\piccadilly_util::crowd_screams, var_2.origin);
+  var_3 = gettime();
 
   for(;;) {
-    var4 = randomintrange(10, 20);
+    var_4 = randomintrange(10, 20);
 
-    for(var5 = 0; var5 < var4; var5++) {
-      magicbullet("iw8_ar_akilo47", var1.origin + (0, 0, 70), var1.origin);
+    for(var_5 = 0; var_5 < var_4; var_5++) {
+      magicbullet("iw8_ar_akilo47", var_1.origin + (0, 0, 70), var_1.origin);
       wait randomfloatrange(0.1, 0.2);
     }
 
-    if(gettime() - var3 > 7000) {
-      thread scripts\sp\maps\piccadilly\piccadilly_util::crowd_screams(var1.origin);
-      var3 = gettime();
+    if(gettime() - var_3 > 7000) {
+      thread scripts\sp\maps\piccadilly\piccadilly_util::crowd_screams(var_1.origin);
+      var_3 = gettime();
     }
 
     wait randomfloatrange(2, 4);
@@ -2892,12 +2892,12 @@ function post_bomb_background_vo() {
 
   level.sas[0] thread scripts\sp\maps\piccadilly\piccadilly_util::say_as_chatter("dx_vom_s26_infil_car1_street_430");
   level.player scripts\sp\maps\piccadilly\piccadilly_util::say_as_chatter("dx_vom_kyle_infil_car1_street_440");
-  var0 = ["dx_vom_s26_infil_car1_street_400", "dx_vom_s26_infil_car1_street_410", "dx_vom_s26_infil_car1_street_420"];
-  var1 = scripts\engine\sp\utility::create_deck(var0);
+  var_0 = ["dx_vom_s26_infil_car1_street_400", "dx_vom_s26_infil_car1_street_410", "dx_vom_s26_infil_car1_street_420"];
+  var_1 = scripts\engine\sp\utility::create_deck(var_0);
 
   for(;;) {
     level.sas[0] thread scripts\asm\gesture::ai_request_gesture("military_point", level.carjumper);
-    level.sas[0] scripts\sp\maps\piccadilly\piccadilly_util::say_as_chatter(var1 scripts\engine\sp\utility::deck_draw());
+    level.sas[0] scripts\sp\maps\piccadilly\piccadilly_util::say_as_chatter(var_1 scripts\engine\sp\utility::deck_draw());
     wait randomfloatrange(8, 12);
   }
 }
@@ -2930,9 +2930,9 @@ function standoff_start() {
   scripts\engine\sp\utility::array_spawn_targetname("intro_civs");
   level.street_friendlies = scripts\engine\sp\utility::array_spawn_targetname("sicario_street_friendly");
   level.car2_terries = scripts\engine\sp\utility::array_spawn_targetname("car2_terry", 1);
-  var0 = scripts\engine\utility::array_combine(level.street_friendlies, level.car2_terries);
-  var1 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
-  scripts\engine\utility::array_thread(var0, &standoff_trailer_setup, var1);
+  var_0 = scripts\engine\utility::array_combine(level.street_friendlies, level.car2_terries);
+  var_1 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
+  scripts\engine\utility::array_thread(var_0, &standoff_trailer_setup, var_1);
   level.truck = setup_scriptable_car("sas_intro_decho");
   level.cars_bomb["van"] = setup_scriptable_car("car2_bomb");
   level.cars_bomb["car1"] = setup_scriptable_car("car1_bomb");
@@ -2944,7 +2944,7 @@ function standoff_start() {
   scripts\engine\sp\objectives::objective_set_on_entity("intro", "Target", level.cars_bomb["van"]);
   scripts\engine\sp\objectives::objective_set_z_offset("intro", 120);
   scripts\engine\sp\utility::set_start_location("sicario_street", [level.player]);
-  thread intro_car(var1);
+  thread intro_car(var_1);
 }
 
 function standoff_main() {
@@ -2961,88 +2961,88 @@ function standoff_main() {
   level waittill("forever");
 }
 
-function standoff_trailer_setup(var0) {
+function standoff_trailer_setup(var_0) {
   if(self.animname == "car2_terry_driver") {
     self delete();
     return;
   }
 
-  var0 scripts\common\anim::anim_first_frame_solo(self, "car_explosion");
+  var_0 scripts\common\anim::anim_first_frame_solo(self, "car_explosion");
   level waittill("start_trailer_scene");
-  var0 scripts\common\anim::anim_single_solo(self, "car_explosion");
-  var0 scripts\common\anim::anim_last_frame_solo(self, "car_explosion");
+  var_0 scripts\common\anim::anim_single_solo(self, "car_explosion");
+  var_0 scripts\common\anim::anim_last_frame_solo(self, "car_explosion");
 }
 
 function spawn_animated_trailer_civs() {
-  var0 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
+  var_0 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
 
-  for(var1 = 1; var1 < 36; var1++) {
-    if(var1 != 30) {
-      thread trailer_civ_setup(var1, var0);
+  for(var_1 = 1; var_1 < 36; var_1++) {
+    if(var_1 != 30) {
+      thread trailer_civ_setup(var_1, var_0);
     }
   }
 
-  var0 = scripts\engine\utility::getStruct("intro_civ_animnode", "targetname");
+  var_0 = scripts\engine\utility::getStruct("intro_civ_animnode", "targetname");
 
-  for(var1 = 36; var1 < 54; var1++) {
-    thread trailer_civ_setup(var1, var0);
+  for(var_1 = 36; var_1 < 54; var_1++) {
+    thread trailer_civ_setup(var_1, var_0);
   }
 
   thread intro_civ_post_anims();
 }
 
-function trailer_civ_setup(var0, var1) {
-  var2 = get_random_spawner(var0);
-  var3 = bodyonly_guy_setup(var2, var0);
+function trailer_civ_setup(var_0, var_1) {
+  var_2 = get_random_spawner(var_0);
+  var_3 = bodyonly_guy_setup(var_2, var_0);
 
-  if(!isDefined(level.scr_anim[var3.animname]["intro_run"])) {
-    var3 delete();
+  if(!isDefined(level.scr_anim[var_3.animname]["intro_run"])) {
+    var_3 delete();
     return;
   }
 
-  var1 scripts\common\anim::anim_first_frame_solo(var3, "intro_run");
+  var_1 scripts\common\anim::anim_first_frame_solo(var_3, "intro_run");
   level waittill("start_trailer_scene");
-  var1 scripts\common\anim::anim_single_solo(var3, "intro_run");
-  var1 scripts\common\anim::anim_last_frame_solo(var3, "intro_run");
+  var_1 scripts\common\anim::anim_single_solo(var_3, "intro_run");
+  var_1 scripts\common\anim::anim_last_frame_solo(var_3, "intro_run");
 }
 
 function trailer_car_drive_off() {
-  var0 = scripts\engine\utility::getanim("car2_drives_off");
-  var1 = getanimlength(var0);
-  thread car2_delete_extras(var0);
-  thread scripts\common\notetrack::start_notetrack_wait(self, "car2_drives", "car2_drives_off", self.animname, var0);
+  var_0 = scripts\engine\utility::getanim("car2_drives_off");
+  var_1 = getanimlength(var_0);
+  thread car2_delete_extras(var_0);
+  thread scripts\common\notetrack::start_notetrack_wait(self, "car2_drives", "car2_drives_off", self.animname, var_0);
   thread scripts\sp\anim::animscriptdonotetracksthread(self, "car2_drives", "car2_drives_off");
-  self setflaggedanimknoball("car2_drives", var0, %root, 1, 0, 1);
-  wait var1 / 1.1;
+  self setflaggedanimknoball("car2_drives", var_0, %root, 1, 0, 1);
+  wait var_1 / 1.1;
 }
 
-function skip_ahead_scriptable(var0, var1) {
+function skip_ahead_scriptable(var_0, var_1) {
   if(scripts\engine\utility::is_equal(self.animname, "intro_car3") || scripts\engine\utility::is_equal(self.animname, "intro_car4")) {
     return;
   }
 
   if(scripts\engine\utility::is_equal(self.animname, "intro_car5")) {
     self clearanim(%root, 0);
-    var2 = scripts\engine\utility::getanim("intro_slamzoom");
-    var3 = getstartorigin(var0.origin, var0.angles, var2);
-    var4 = getstartangles(var0.origin, var0.angles, var2);
-    self.origin = var3;
-    self.angles = var4;
-    self setflaggedanimknoballrestart("single anim", var2, %root, 1, 0, 1100);
+    var_2 = scripts\engine\utility::getanim("intro_slamzoom");
+    var_3 = getstartorigin(var_0.origin, var_0.angles, var_2);
+    var_4 = getstartangles(var_0.origin, var_0.angles, var_2);
+    self.origin = var_3;
+    self.angles = var_4;
+    self setflaggedanimknoballrestart("single anim", var_2, %root, 1, 0, 1100);
     waitframe();
     thread hide_intro_car();
     return;
   } else {
     self clearanim(%root, 0);
-    var2 = scripts\engine\utility::getanim("intro_slamzoom");
-    var3 = getstartorigin(var3.origin, var3.angles, var2);
-    var4 = getstartangles(var3.origin, var3.angles, var2);
-    self.origin = var3;
-    self.angles = var4;
+    var_2 = scripts\engine\utility::getanim("intro_slamzoom");
+    var_3 = getstartorigin(var_3.origin, var_3.angles, var_2);
+    var_4 = getstartangles(var_3.origin, var_3.angles, var_2);
+    self.origin = var_3;
+    self.angles = var_4;
     level waittill("all_ents_are_ready");
-    self setflaggedanimknoballrestart("single anim", var2, %root, 1, 0, 1050);
+    self setflaggedanimknoballrestart("single anim", var_2, %root, 1, 0, 1050);
     waitframe();
-    self setanimrate(var2, 1);
+    self setanimrate(var_2, 1);
   }
 
   self stopsounds();
@@ -3050,17 +3050,17 @@ function skip_ahead_scriptable(var0, var1) {
 
 function vo_intro_walla() {
   level waittill("vo_standoff_walla");
-  var0 = level.player.origin;
-  var1 = spawn("script_origin", (-2626, -3381, 60));
-  var2 = spawn("script_origin", (-2694, -3728, 60));
-  var1 playLoopSound("scn_piccadilly_standoff_walla_left_lp");
-  var2 playLoopSound("scn_piccadilly_standoff_walla_right_lp");
+  var_0 = level.player.origin;
+  var_1 = spawn("script_origin", (-2626, -3381, 60));
+  var_2 = spawn("script_origin", (-2694, -3728, 60));
+  var_1 playLoopSound("scn_piccadilly_standoff_walla_left_lp");
+  var_2 playLoopSound("scn_piccadilly_standoff_walla_right_lp");
   level waittill("vo_pre_expl_walla");
   thread scripts\engine\utility::play_sound_in_space("scn_piccadilly_pre_expl_walla_left", (-2626, -3381, 60));
-  var1 scripts\engine\sp\utility::sound_fade_and_delete(1.5, 1);
+  var_1 scripts\engine\sp\utility::sound_fade_and_delete(1.5, 1);
   wait 0.1;
   thread scripts\engine\utility::play_sound_in_space("scn_piccadilly_pre_expl_walla_right", (-2694, -3728, 60));
-  var2 scripts\engine\sp\utility::sound_fade_and_delete(1.5, 1);
+  var_2 scripts\engine\sp\utility::sound_fade_and_delete(1.5, 1);
   level waittill("vo_expl_walla");
   wait 0.4;
   thread scripts\engine\utility::play_sound_in_space("scn_piccadilly_expl_walla_left", (-2626, -3381, 60));

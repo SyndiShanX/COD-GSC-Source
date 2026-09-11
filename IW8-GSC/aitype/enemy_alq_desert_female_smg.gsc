@@ -28,10 +28,10 @@ function main() {
   self.usescriptedweapon = 1;
   self.scriptedweaponclassprimary = "smg";
   self.weapon = scripts\code\ai::create_weapon_in_script(["iw8_sm_uzulu", "iw8_ar_akilo47"]);
-  var0 = undefined;
-  var1 = ["alq_syrkistan_female_scarf_purple"];
+  var_0 = undefined;
+  var_1 = ["alq_syrkistan_female_scarf_purple"];
 
-  switch (scripts\code\character::get_random_character(1, var0, var1)) {
+  switch (scripts\code\character::get_random_character(1, var_0, var_1)) {
     case 0:
       character\alq_syrkistan_female_scarf_purple::main();
       break;
@@ -42,7 +42,7 @@ function spawner() {
   self setspawnerteam("axis");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\alq_syrkistan_female_scarf_purple::precache();
   scripts\aitypes\bt_util::init();
   scripts\aitypes\assets::soldier();

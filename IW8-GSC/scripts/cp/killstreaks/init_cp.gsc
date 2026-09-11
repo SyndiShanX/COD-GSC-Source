@@ -58,10 +58,10 @@ function init() {
   level.ref_11eaf = ["iw8_spotter_scope_mp"];
 }
 
-function onkillstreakfinishuse(var0) {
-  if(var0.streakname == "gunship") {
-    if(isDefined(var0.owner)) {
-      var0.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var0);
+function onkillstreakfinishuse(var_0) {
+  if(var_0.streakname == "gunship") {
+    if(isDefined(var_0.owner)) {
+      var_0.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_0);
       return;
     }
 
@@ -69,8 +69,8 @@ function onkillstreakfinishuse(var0) {
   }
 }
 
-function gastrap_dmg_trig(var0) {
-  if(scripts\engine\utility::array_contains(level.ref_11eaf, var0.basename)) {
+function gastrap_dmg_trig(var_0) {
+  if(scripts\engine\utility::array_contains(level.ref_11eaf, var_0.basename)) {
     return 0;
   }
 

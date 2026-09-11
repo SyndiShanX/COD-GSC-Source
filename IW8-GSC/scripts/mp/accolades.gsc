@@ -163,36 +163,36 @@ function init() {
   registeraccolade("timeOnPoint", ["objTime"], 0, 0, &ishardpoint, undefined, undefined);
 }
 
-function registeraccolade(var0, var1, var2, var3, var4, var5, var6) {
-  var7 = spawnStruct();
-  var7.datapoints = var1;
-  var7.priority = var2;
-  var7.intialvalueisvalid = var3;
-  var7.evaluatefunc = var6;
-  var7.winners = [];
-  var7.isactive = !isDefined(var4) || [[var4]]();
-  level.accolades[var0] = var7;
+function registeraccolade(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_7 = spawnStruct();
+  var_7.datapoints = var_1;
+  var_7.priority = var_2;
+  var_7.intialvalueisvalid = var_3;
+  var_7.evaluatefunc = var_6;
+  var_7.winners = [];
+  var_7.isactive = !isDefined(var_4) || [[var_4]]();
+  level.accolades[var_0] = var_7;
 
-  if(isDefined(var5)) {
-    level thread[[var5]]();
+  if(isDefined(var_5)) {
+    level thread[[var_5]]();
     return;
   }
 }
 
 function applyaccoladestructtoplayerpers() {
-  var0 = scripts\mp\utility\game::onlinestatsenabled();
+  var_0 = scripts\mp\utility\game::onlinestatsenabled();
 
-  foreach(var2 in level.accolades) {
-    if(var0) {
-      self setplayerdata("mp", "playerStats", "matchAccolades", var6, 0);
+  foreach(var_2 in level.accolades) {
+    if(var_0) {
+      self setplayerdata("mp", "playerStats", "matchAccolades", var_6, 0);
     }
 
-    if(!isDefined(var2.datapoints)) {
+    if(!isDefined(var_2.datapoints)) {
       continue;
     }
 
-    foreach(var4 in var2.datapoints) {
-      scripts\mp\utility\stats::initpersstat(var4);
+    foreach(var_4 in var_2.datapoints) {
+      scripts\mp\utility\stats::initpersstat(var_4);
     }
   }
 }
@@ -202,28 +202,28 @@ function obj_riverbed() {
     return;
   }
 
-  foreach(var2, var1 in level.accolades) {
-    if(!var1.isactive) {
+  foreach(var_2, var_1 in level.accolades) {
+    if(!var_1.isactive) {
       continue;
     }
 
-    evaluateaccolade(level, var2);
+    evaluateaccolade(level, var_2);
   }
 
   if(scripts\mp\utility\game::onlinestatsenabled()) {
-    foreach(var2, var1 in level.accolades) {
-      if(!var1.isactive) {
+    foreach(var_2, var_1 in level.accolades) {
+      if(!var_1.isactive) {
         continue;
       }
 
-      foreach(var5 in var1.winners) {
-        if(!isDefined(var5)) {
+      foreach(var_5 in var_1.winners) {
+        if(!isDefined(var_5)) {
           continue;
         }
 
-        var6 = var5 getplayerdata("mp", "playerStats", "accoladeStats", var2);
-        var5 setplayerdata("mp", "playerStats", "accoladeStats", var2, var6 + 1);
-        var5 setplayerdata("mp", "playerStats", "matchAccolades", var2, 1);
+        var_6 = var_5 getplayerdata("mp", "playerStats", "accoladeStats", var_2);
+        var_5 setplayerdata("mp", "playerStats", "accoladeStats", var_2, var_6 + 1);
+        var_5 setplayerdata("mp", "playerStats", "matchAccolades", var_2, 1);
       }
     }
 
@@ -231,35 +231,35 @@ function obj_riverbed() {
   }
 }
 
-function evaluateaccolade(var0) {
-  var1 = undefined;
+function evaluateaccolade(var_0) {
+  var_1 = undefined;
 
-  foreach(var3 in level.players) {
-    if(!isDefined(var3)) {
+  foreach(var_3 in level.players) {
+    if(!isDefined(var_3)) {
       continue;
     }
 
-    var4 = var3.pers[var0];
+    var_4 = var_3.pers[var_0];
 
-    if(isDefined(level.accolades[var0].evaluatefunc)) {
-      var4 = var3[[level.accolades[var0].evaluatefunc]](var0);
+    if(isDefined(level.accolades[var_0].evaluatefunc)) {
+      var_4 = var_3[[level.accolades[var_0].evaluatefunc]](var_0);
     } else {
-      var4 = var3.pers[level.accolades[var0].datapoints[0]];
+      var_4 = var_3.pers[level.accolades[var_0].datapoints[0]];
     }
 
-    if(!isDefined(var4) || !level.accolades[var0].intialvalueisvalid && var4 == 0) {
+    if(!isDefined(var_4) || !level.accolades[var_0].intialvalueisvalid && var_4 == 0) {
       continue;
     }
 
-    if(!isDefined(var1) || var4 > var1) {
-      var1 = var4;
-      level.accolades[var0].winners = [];
-      level.accolades[var0].winners[level.accolades[var0].winners.size] = var3;
+    if(!isDefined(var_1) || var_4 > var_1) {
+      var_1 = var_4;
+      level.accolades[var_0].winners = [];
+      level.accolades[var_0].winners[level.accolades[var_0].winners.size] = var_3;
       continue;
     }
 
-    if(var4 == var1) {
-      level.accolades[var0].winners[level.accolades[var0].winners.size] = var3;
+    if(var_4 == var_1) {
+      level.accolades[var_0].winners[level.accolades[var_0].winners.size] = var_3;
     }
   }
 }
@@ -367,11 +367,11 @@ function arevehiclesenabled() {
   return getdvarint("scr_allow_vehicles", 0) == 1;
 }
 
-function scoreminimum(var0) {
-  return self.pers[level.accolades[var0].datapoints[0]] * -1;
+function scoreminimum(var_0) {
+  return self.pers[level.accolades[var_0].datapoints[0]] * -1;
 }
 
-function nokillswithdeath_evaluate(var0) {
+function nokillswithdeath_evaluate(var_0) {
   if(self.pers["kills"] == 0 && self.pers["deaths"] > 0) {
     return true;
   }
@@ -379,7 +379,7 @@ function nokillswithdeath_evaluate(var0) {
   return false;
 }
 
-function nokillnodeath_evaluate(var0) {
+function nokillnodeath_evaluate(var_0) {
   if(self.pers["kills"] == 0 && self.pers["deaths"] == 0) {
     return true;
   }
@@ -387,7 +387,7 @@ function nokillnodeath_evaluate(var0) {
   return false;
 }
 
-function nokill10deaths_evaluate(var0) {
+function nokill10deaths_evaluate(var_0) {
   if(self.pers["kills"] == 0 && self.pers["deaths"] >= 10) {
     return true;
   }
@@ -395,40 +395,40 @@ function nokill10deaths_evaluate(var0) {
   return false;
 }
 
-function mostkillsleastdeaths_evaluate(var0) {
-  var1 = scripts\engine\utility::array_contains(level.accolades["mostKills"].winners, self);
-  var2 = scripts\engine\utility::array_contains(level.accolades["leastDeaths"].winners, self);
+function mostkillsleastdeaths_evaluate(var_0) {
+  var_1 = scripts\engine\utility::array_contains(level.accolades["mostKills"].winners, self);
+  var_2 = scripts\engine\utility::array_contains(level.accolades["leastDeaths"].winners, self);
 
-  if(var1 && var2) {
+  if(var_1 && var_2) {
     return true;
   }
 
   return false;
 }
 
-function mostkillsmostheadshots_evaluate(var0) {
-  var1 = scripts\engine\utility::array_contains(level.accolades["mostKills"].winners, self);
-  var2 = scripts\engine\utility::array_contains(level.accolades["headshots"].winners, self);
+function mostkillsmostheadshots_evaluate(var_0) {
+  var_1 = scripts\engine\utility::array_contains(level.accolades["mostKills"].winners, self);
+  var_2 = scripts\engine\utility::array_contains(level.accolades["headshots"].winners, self);
 
-  if(var1 && var2) {
+  if(var_1 && var_2) {
     return true;
   }
 
   return false;
 }
 
-function mostkillslongeststreak_evaluate(var0) {
-  var1 = scripts\engine\utility::array_contains(level.accolades["mostKills"].winners, self);
-  var2 = scripts\engine\utility::array_contains(level.accolades["longestStreak"].winners, self);
+function mostkillslongeststreak_evaluate(var_0) {
+  var_1 = scripts\engine\utility::array_contains(level.accolades["mostKills"].winners, self);
+  var_2 = scripts\engine\utility::array_contains(level.accolades["longestStreak"].winners, self);
 
-  if(var1 && var2) {
+  if(var_1 && var_2) {
     return true;
   }
 
   return false;
 }
 
-function kills10nodeaths_evaluate(var0) {
+function kills10nodeaths_evaluate(var_0) {
   if(self.pers["kills"] >= 10 && self.pers["deaths"] == 0) {
     return true;
   }
@@ -436,7 +436,7 @@ function kills10nodeaths_evaluate(var0) {
   return false;
 }
 
-function nodeathsfrombehind_evaluate(var0) {
+function nodeathsfrombehind_evaluate(var_0) {
   if(self.pers["deathsFromBehind"] == 10) {
     return true;
   }
@@ -444,7 +444,7 @@ function nodeathsfrombehind_evaluate(var0) {
   return false;
 }
 
-function highestavgaltitude_evaluate(var0) {
+function highestavgaltitude_evaluate(var_0) {
   if(self.pers["averageAltitudeCount"] > 0) {
     return (self.pers["averageAltitude"] / self.pers["averageAltitudeCount"]);
   }
@@ -452,7 +452,7 @@ function highestavgaltitude_evaluate(var0) {
   return 0;
 }
 
-function lowestavgaltitude_evaluate(var0) {
+function lowestavgaltitude_evaluate(var_0) {
   if(self.pers["averageAltitudeCount"] > 0) {
     return (self.pers["averageAltitude"] / self.pers["averageAltitudeCount"] * -1);
   }

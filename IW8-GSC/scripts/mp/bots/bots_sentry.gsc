@@ -3,7 +3,7 @@
  * Script: scripts\mp\bots\bots_sentry.gsc
 ***********************************************/
 
-function bot_killstreak_sentry(var0, var1, var2, var3) {
+function bot_killstreak_sentry(var_0, var_1, var_2, var_3) {
   self endon("bot_sentry_exited");
   self endon("death_or_disconnect");
   level endon("game_ended");
@@ -17,17 +17,17 @@ function bot_killstreak_sentry(var0, var1, var2, var3) {
     return true;
   }
 
-  var4 = self.origin;
+  var_4 = self.origin;
 
-  if(var3 != "hide_nonlethal") {
-    var4 = bot_sentry_choose_target(var3);
+  if(var_3 != "hide_nonlethal") {
+    var_4 = bot_sentry_choose_target(var_3);
 
-    if(!isDefined(var4)) {
+    if(!isDefined(var_4)) {
       return true;
     }
   }
 
-  bot_sentry_add_goal(var0, var4, var3, var1);
+  bot_sentry_add_goal(var_0, var_4, var_3, var_1);
 
   while(scripts\mp\bots\bots_strategy::bot_has_tactical_goal("sentry_placement")) {
     wait 0.5;
@@ -36,26 +36,26 @@ function bot_killstreak_sentry(var0, var1, var2, var3) {
   return true;
 }
 
-function bot_sentry_add_goal(var0, var1, var2, var3) {
-  var4 = bot_sentry_choose_placement(var0, var1, var2, var3);
+function bot_sentry_add_goal(var_0, var_1, var_2, var_3) {
+  var_4 = bot_sentry_choose_placement(var_0, var_1, var_2, var_3);
 
-  if(isDefined(var4)) {
+  if(isDefined(var_4)) {
     scripts\mp\bots\bots_strategy::bot_abort_tactical_goal("sentry_placement");
-    var5 = spawnStruct();
-    var5.object = var4;
-    var5.script_goal_yaw = var4.yaw;
-    var5.script_goal_radius = 10;
-    var5.start_thread = &bot_sentry_path_start;
-    var5.end_thread = &bot_sentry_cancel;
-    var5.should_abort = &bot_sentry_should_abort;
-    var5.action_thread = &bot_sentry_activate;
-    self.placingitemstreakname = var0.streakname;
-    scripts\mp\bots\bots_strategy::bot_new_tactical_goal("sentry_placement", var4.node.origin, 0, var5);
+    var_5 = spawnStruct();
+    var_5.object = var_4;
+    var_5.script_goal_yaw = var_4.yaw;
+    var_5.script_goal_radius = 10;
+    var_5.start_thread = &bot_sentry_path_start;
+    var_5.end_thread = &bot_sentry_cancel;
+    var_5.should_abort = &bot_sentry_should_abort;
+    var_5.action_thread = &bot_sentry_activate;
+    self.placingitemstreakname = var_0.streakname;
+    scripts\mp\bots\bots_strategy::bot_new_tactical_goal("sentry_placement", var_4.node.origin, 0, var_5);
     return;
   }
 }
 
-function bot_sentry_should_abort(var0) {
+function bot_sentry_should_abort(var_0) {
   self endon("death_or_disconnect");
   level endon("game_ended");
 
@@ -82,11 +82,11 @@ function bot_sentry_cancel_failsafe() {
   }
 }
 
-function bot_sentry_path_start(var0) {
-  thread bot_sentry_path_thread(var0);
+function bot_sentry_path_start(var_0) {
+  thread bot_sentry_path_thread(var_0);
 }
 
-function bot_sentry_path_thread(var0) {
+function bot_sentry_path_thread(var_0) {
   self endon("stop_tactical_goal");
   self endon("stop_goal_aborted_watch");
   self endon("bot_sentry_canceled");
@@ -94,11 +94,11 @@ function bot_sentry_path_thread(var0) {
   self endon("death_or_disconnect");
   level endon("game_ended");
 
-  while(isDefined(var0.object) && isDefined(var0.object.weapon)) {
-    if(distance2d(self.origin, var0.object.node.origin) < 400) {
+  while(isDefined(var_0.object) && isDefined(var_0.object.weapon)) {
+    if(distance2d(self.origin, var_0.object.node.origin) < 400) {
       thread scripts\mp\bots\bots_util::bot_force_stance_for_time("stand", 5);
       thread bot_sentry_cancel_failsafe();
-      scripts\mp\bots\bots_killstreaks::bot_switch_to_killstreak_weapon(var0.object.killstreak_info, var0.object.killstreaks_array, var0.object.weapon);
+      scripts\mp\bots\bots_killstreaks::bot_switch_to_killstreak_weapon(var_0.object.killstreak_info, var_0.object.killstreaks_array, var_0.object.weapon);
       return;
     }
 
@@ -106,78 +106,78 @@ function bot_sentry_path_thread(var0) {
   }
 }
 
-function bot_sentry_choose_target(var0) {
-  var1 = scripts\mp\bots\bots_util::defend_valid_center();
+function bot_sentry_choose_target(var_0) {
+  var_1 = scripts\mp\bots\bots_util::defend_valid_center();
 
-  if(isDefined(var1)) {
-    return var1;
+  if(isDefined(var_1)) {
+    return var_1;
   }
 
   if(isDefined(self.node_ambushing_from)) {
     return self.node_ambushing_from.origin;
   }
 
-  var2 = getnodesinradius(self.origin, 1000, 0, 512);
-  var3 = 5;
+  var_2 = getnodesinradius(self.origin, 1000, 0, 512);
+  var_3 = 5;
 
-  if(var0 != "turret") {
+  if(var_0 != "turret") {
     if(self botgetdifficultysetting("strategyLevel") == 1) {
-      var3 = 10;
+      var_3 = 10;
     } else if(self botgetdifficultysetting("strategyLevel") == 0) {
-      var3 = 15;
+      var_3 = 15;
     }
   }
 
-  if(var0 == "turret_air") {
-    var4 = self botnodepick(var2, var3, "node_traffic", "ignore_no_sky");
+  if(var_0 == "turret_air") {
+    var_4 = self botnodepick(var_2, var_3, "node_traffic", "ignore_no_sky");
   } else {
-    var4 = self botnodepick(var3, var4, "node_traffic");
+    var_4 = self botnodepick(var_3, var_4, "node_traffic");
   }
 
-  if(isDefined(var4)) {
-    return var4.origin;
+  if(isDefined(var_4)) {
+    return var_4.origin;
   }
 }
 
-function bot_sentry_choose_placement(var0, var1, var2, var3) {
-  var4 = undefined;
-  var5 = getnodesinradius(var1, 1000, 0, 512);
-  var6 = 5;
+function bot_sentry_choose_placement(var_0, var_1, var_2, var_3) {
+  var_4 = undefined;
+  var_5 = getnodesinradius(var_1, 1000, 0, 512);
+  var_6 = 5;
 
-  if(var2 != "turret") {
+  if(var_2 != "turret") {
     if(self botgetdifficultysetting("strategyLevel") == 1) {
-      var6 = 10;
+      var_6 = 10;
     } else if(self botgetdifficultysetting("strategyLevel") == 0) {
-      var6 = 15;
+      var_6 = 15;
     }
   }
 
-  if(var2 == "turret_air") {
-    var7 = self botnodepick(var5, var6, "node_sentry", var1, "ignore_no_sky");
-  } else if(var3 == "trap") {
-    var7 = self botnodepick(var6, var7, "node_traffic");
-  } else if(var4 == "hide_nonlethal") {
-    var7 = self botnodepick(var7, var7, "node_hide");
+  if(var_2 == "turret_air") {
+    var_7 = self botnodepick(var_5, var_6, "node_sentry", var_1, "ignore_no_sky");
+  } else if(var_3 == "trap") {
+    var_7 = self botnodepick(var_6, var_7, "node_traffic");
+  } else if(var_4 == "hide_nonlethal") {
+    var_7 = self botnodepick(var_7, var_7, "node_hide");
   } else {
-    var7 = self botnodepick(var7, var7, "node_sentry", var4);
+    var_7 = self botnodepick(var_7, var_7, "node_sentry", var_4);
   }
 
-  if(isDefined(var7)) {
-    var7 = spawnStruct();
-    var7.node = var7;
+  if(isDefined(var_7)) {
+    var_7 = spawnStruct();
+    var_7.node = var_7;
 
-    if(var4 != var7.origin && var5 != "hide_nonlethal") {
-      var7.yaw = vectortoyaw(var4 - var7.origin);
+    if(var_4 != var_7.origin && var_5 != "hide_nonlethal") {
+      var_7.yaw = vectortoyaw(var_4 - var_7.origin);
     } else {
-      var7.yaw = undefined;
+      var_7.yaw = undefined;
     }
 
-    var7.weapon = var3.weapon;
-    var7.killstreak_info = var3;
-    var7.killstreaks_array = var6;
+    var_7.weapon = var_3.weapon;
+    var_7.killstreak_info = var_3;
+    var_7.killstreaks_array = var_6;
   }
 
-  return var7;
+  return var_7;
 }
 
 function bot_sentry_carried_obj() {
@@ -194,35 +194,35 @@ function bot_sentry_carried_obj() {
   }
 }
 
-function bot_sentry_activate(var0) {
-  var1 = 0;
-  var2 = bot_sentry_carried_obj();
+function bot_sentry_activate(var_0) {
+  var_1 = 0;
+  var_2 = bot_sentry_carried_obj();
 
-  if(isDefined(var2)) {
-    var3 = 0;
+  if(isDefined(var_2)) {
+    var_3 = 0;
 
-    if(!var2.canbeplaced) {
-      var4 = 0.75;
-      var5 = gettime();
-      var6 = self.angles[1];
+    if(!var_2.canbeplaced) {
+      var_4 = 0.75;
+      var_5 = gettime();
+      var_6 = self.angles[1];
 
-      if(isDefined(var0.object.yaw)) {
-        var6 = var0.object.yaw;
+      if(isDefined(var_0.object.yaw)) {
+        var_6 = var_0.object.yaw;
       }
 
-      var7 = [];
-      GscBinSkip0(0x2e, 0, var6 + 180);
+      var_7 = [];
+      GscBinSkip0(0x2e, 0, var_6 + 180);
     }
 
-    if(isDefined(var6) && var6.canbeplaced) {
+    if(isDefined(var_6) && var_6.canbeplaced) {
       bot_send_place_notify();
-      var5 = 1;
+      var_5 = 1;
     }
   }
 
   wait 0.25;
   bot_sentry_ensure_exit();
-  return var5;
+  return var_5;
 }
 
 function bot_send_place_notify() {
@@ -240,7 +240,7 @@ function bot_send_cancel_notify() {
   self notify("cancelPlaceable");
 }
 
-function bot_sentry_cancel(var0) {
+function bot_sentry_cancel(var_0) {
   self notify("bot_sentry_canceled");
   bot_send_cancel_notify();
   bot_sentry_ensure_exit();
@@ -258,14 +258,14 @@ function bot_sentry_ensure_exit() {
   self enableweapons();
   self enableweaponswitch();
   wait 0.25;
-  var0 = 0;
+  var_0 = 0;
 
   while(isDefined(bot_sentry_carried_obj())) {
-    var0++;
+    var_0++;
     bot_send_cancel_notify();
     wait 0.25;
 
-    if(var0 > 2) {
+    if(var_0 > 2) {
       bot_sentry_force_cancel();
     }
   }

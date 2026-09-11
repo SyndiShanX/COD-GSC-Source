@@ -3,11 +3,11 @@
  * Script: scripts\opaque\58256.gsc
 ***********************************************/
 
-function postspawn_juggernaut(var0) {
+function postspawn_juggernaut(var_0) {
   waitframe();
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
     return;
   }
 }

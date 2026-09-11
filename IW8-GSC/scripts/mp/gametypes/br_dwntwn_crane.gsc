@@ -22,10 +22,10 @@ function min_z() {
   level.min_x.trigger setusefov(360);
   level.min_x.trigger sethintdisplayrange(100);
   level.min_x.trigger setuserange(100);
-  var0 = getEnt(level.min_x.spawn_maint_wave_2.target, "targetname");
-  var1 = getEnt(var0.target, "targetname");
-  level.min_x.ref_11e30 = var0;
-  level.min_x.pelletweaponvictimids = var1;
+  var_0 = getEnt(level.min_x.spawn_maint_wave_2.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
+  level.min_x.ref_11e30 = var_0;
+  level.min_x.pelletweaponvictimids = var_1;
   level.min_x.ref_11e30 linkTo(level.min_x);
   level.min_x.pelletweaponvictimids linkTo(level.min_x);
 }
@@ -41,11 +41,11 @@ function min_y() {
       level.min_x.trigger.in_use = undefined;
       level.min_x.trigger makeusable();
       level.min_x.trigger setHintString(&"MP/BR_INTERACTABLES_CRANE_PROMPT");
-      level.min_x.trigger waittill("trigger", var0);
+      level.min_x.trigger waittill("trigger", var_0);
       level.min_x.trigger.in_use = 1;
       level.min_x.trigger makeunusable();
       level.min_x.trigger setHintString("");
-      var0 playlocalsound("ammo_crate_use");
+      var_0 playlocalsound("ammo_crate_use");
     }
 
     wait 5;
@@ -62,11 +62,11 @@ function min_y() {
       level.min_x.trigger.in_use = undefined;
       level.min_x.trigger makeusable();
       level.min_x.trigger setHintString(&"MP/BR_INTERACTABLES_CRANE_PROMPT");
-      level.min_x.trigger waittill("trigger", var0);
+      level.min_x.trigger waittill("trigger", var_0);
       level.min_x.trigger.in_use = 1;
       level.min_x.trigger makeunusable();
       level.min_x.trigger setHintString("");
-      var0 playlocalsound("ammo_crate_use");
+      var_0 playlocalsound("ammo_crate_use");
     }
 
     wait 5;

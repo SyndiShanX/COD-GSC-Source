@@ -3,7 +3,7 @@
  * Script: scripts\sp\mg_penetration.gsc
 ***********************************************/
 
-function gunner_think(var0) {
+function gunner_think(var_0) {
   if(!isDefined(level.shared_portable_turrets)) {
     level.shared_portable_turrets = [];
   }
@@ -14,24 +14,24 @@ function gunner_think(var0) {
   self.can_fire_turret = 1;
   self.wants_to_fire = 0;
 
-  if(!scripts\sp\mgturret::use_the_turret(var0)) {
+  if(!scripts\sp\mgturret::use_the_turret(var_0)) {
     self notify("continue_cover_script");
     return;
   }
 
   self.last_enemy_sighting_position = undefined;
   thread record_enemy_sightings();
-  var1 = anglesToForward(var0.angles);
-  var2 = spawn("script_origin", (0, 0, 0));
-  thread target_ent_cleanup(var2);
-  var2.origin = var0.origin + var1 * 500;
+  var_1 = anglesToForward(var_0.angles);
+  var_2 = spawn("script_origin", (0, 0, 0));
+  thread target_ent_cleanup(var_2);
+  var_2.origin = var_0.origin + var_1 * 500;
 
   if(isDefined(self.last_enemy_sighting_position)) {
-    var2.origin = self.last_enemy_sighting_position;
+    var_2.origin = self.last_enemy_sighting_position;
   }
 
-  var0 settargetentity(var2);
-  var3 = undefined;
+  var_0 settargetentity(var_2);
+  var_3 = undefined;
 
   for(;;) {
     if(!isalive(self.current_enemy)) {
@@ -40,7 +40,7 @@ function gunner_think(var0) {
     }
 
     start_firing();
-    shoot_enemy_until_he_hides_then_shoot_wall(var2);
+    shoot_enemy_until_he_hides_then_shoot_wall(var_2);
 
     if(!isalive(self.current_enemy)) {
       continue;
@@ -54,55 +54,55 @@ function gunner_think(var0) {
   }
 }
 
-function target_ent_cleanup(var0) {
+function target_ent_cleanup(var_0) {
   scripts\engine\utility::waittill_either("death", "end_mg_behavior");
-  var0 delete();
+  var_0 delete();
 }
 
-function shoot_enemy_until_he_hides_then_shoot_wall(var0) {
+function shoot_enemy_until_he_hides_then_shoot_wall(var_0) {
   self endon("death");
   self endon("new_enemy");
   self.current_enemy endon("death");
-  var1 = self.current_enemy;
+  var_1 = self.current_enemy;
 
-  while(self cansee(var1)) {
-    var2 = vectortoangles(var1 getEye() - var0.origin);
-    var2 = anglesToForward(var2);
-    var0 moveTo(var0.origin + var2 * 12, 0.1);
+  while(self cansee(var_1)) {
+    var_2 = vectortoangles(var_1 getEye() - var_0.origin);
+    var_2 = anglesToForward(var_2);
+    var_0 moveTo(var_0.origin + var_2 * 12, 0.1);
     wait 0.1;
   }
 
-  if(isPlayer(var1)) {
+  if(isPlayer(var_1)) {
     self endon("saw_enemy");
-    var3 = var1 getEye();
-    var2 = vectortoangles(var3 - var0.origin);
-    var2 = anglesToForward(var2);
-    var4 = 150;
-    var5 = distance(var0.origin, self.last_enemy_sighting_position) / var4;
+    var_3 = var_1 getEye();
+    var_2 = vectortoangles(var_3 - var_0.origin);
+    var_2 = anglesToForward(var_2);
+    var_4 = 150;
+    var_5 = distance(var_0.origin, self.last_enemy_sighting_position) / var_4;
 
-    if(var5 > 0) {
-      var0 moveTo(self.last_enemy_sighting_position, var5);
-      wait var5;
+    if(var_5 > 0) {
+      var_0 moveTo(self.last_enemy_sighting_position, var_5);
+      wait var_5;
     }
 
-    var6 = var0.origin + var2 * 180;
-    var7 = get_suppress_point(self getEye(), var0.origin, var6);
+    var_6 = var_0.origin + var_2 * 180;
+    var_7 = get_suppress_point(self getEye(), var_0.origin, var_6);
 
-    if(!isDefined(var7)) {
-      var7 = var0.origin;
+    if(!isDefined(var_7)) {
+      var_7 = var_0.origin;
     }
 
-    var0 moveTo(var0.origin + var2 * 80 + (0, 0, randomfloatrange(15, 50) * -1), 3, 1, 1);
+    var_0 moveTo(var_0.origin + var_2 * 80 + (0, 0, randomfloatrange(15, 50) * -1), 3, 1, 1);
     wait 3.5;
-    var0 moveTo(var7 + var2 * -20, 3, 1, 1);
+    var_0 moveTo(var_7 + var_2 * -20, 3, 1, 1);
   }
 
   wait randomfloatrange(2.5, 4);
   stop_firing();
 }
 
-function set_firing(var0) {
-  if(var0) {
+function set_firing(var_0) {
+  if(var_0) {
     self.can_fire_turret = 1;
 
     if(self.wants_to_fire) {
@@ -140,40 +140,40 @@ function create_mg_team() {
   level.mg_gunner_team = [];
   level.mg_gunner_team[level.mg_gunner_team.size] = self;
   waittillframeend();
-  var0 = spawnStruct();
-  scripts\engine\utility::array_thread(level.mg_gunner_team, &mg_gunner_death_notify, var0);
-  var1 = level.mg_gunner_team;
+  var_0 = spawnStruct();
+  scripts\engine\utility::array_thread(level.mg_gunner_team, &mg_gunner_death_notify, var_0);
+  var_1 = level.mg_gunner_team;
   level.mg_gunner_team = undefined;
-  var0 waittill("gunner_died");
+  var_0 waittill("gunner_died");
 
-  for(var2 = 0; var2 < var1.size; var2++) {
-    if(!isalive(var1[var2])) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    if(!isalive(var_1[var_2])) {
       continue;
     }
 
-    var1[var2] notify("stop_using_built_in_burst_fire");
+    var_1[var_2] notify("stop_using_built_in_burst_fire");
     thread solo_fires();
   }
 }
 
-function mg_gunner_death_notify(var0) {
+function mg_gunner_death_notify(var_0) {
   self waittill("death");
-  var0 notify("gunner_died");
+  var_0 notify("gunner_died");
 }
 
-function solo_firing(var0) {
-  var1 = undefined;
+function solo_firing(var_0) {
+  var_1 = undefined;
 
-  for(var2 = 0; var2 < var0.size; var2++) {
-    if(!isalive(var0[var2])) {
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    if(!isalive(var_0[var_2])) {
       continue;
     }
 
-    var1 = var0[var2];
+    var_1 = var_0[var_2];
     break;
   }
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 }
@@ -189,58 +189,58 @@ function solo_fires() {
   }
 }
 
-function dual_firing(var0) {
-  for(var1 = 0; var1 < var0.size; var1++) {
-    var0[var1] endon("death");
+function dual_firing(var_0) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    var_0[var_1] endon("death");
   }
 
-  var2 = 0;
-  var3 = 1;
+  var_2 = 0;
+  var_3 = 1;
 
   for(;;) {
-    if(isalive(var0[var2])) {
-      set_firing(var0[var2], 1);
+    if(isalive(var_0[var_2])) {
+      set_firing(var_0[var_2], 1);
     }
 
-    if(isalive(var0[var3])) {
-      set_firing(var0[var3], 0);
+    if(isalive(var_0[var_3])) {
+      set_firing(var_0[var_3], 0);
     }
 
-    var4 = var2;
-    var2 = var3;
-    var3 = var4;
+    var_4 = var_2;
+    var_2 = var_3;
+    var_3 = var_4;
     wait randomfloatrange(2.3, 3.5);
   }
 }
 
-function get_suppress_point(var0, var1, var2) {
-  var3 = distance(var1, var2) * 0.05;
+function get_suppress_point(var_0, var_1, var_2) {
+  var_3 = distance(var_1, var_2) * 0.05;
 
-  if(var3 < 5) {
-    var3 = 5;
+  if(var_3 < 5) {
+    var_3 = 5;
   }
 
-  if(var3 > 20) {
-    var3 = 20;
+  if(var_3 > 20) {
+    var_3 = 20;
   }
 
-  var4 = var2 - var1;
-  var4 = (var4[0] / var3, var4[1] / var3, var4[2] / var3);
-  var5 = (0, 0, 0);
-  var6 = undefined;
+  var_4 = var_2 - var_1;
+  var_4 = (var_4[0] / var_3, var_4[1] / var_3, var_4[2] / var_3);
+  var_5 = (0, 0, 0);
+  var_6 = undefined;
 
-  for(var7 = 0; var7 < var3 + 2; var7++) {
-    var8 = scripts\engine\trace::_bullet_trace(var0, var1 + var5, 0, undefined);
+  for(var_7 = 0; var_7 < var_3 + 2; var_7++) {
+    var_8 = scripts\engine\trace::_bullet_trace(var_0, var_1 + var_5, 0, undefined);
 
-    if(var8["fraction"] < 1) {
-      var6 = var8["position"];
+    if(var_8["fraction"] < 1) {
+      var_6 = var_8["position"];
       break;
     }
 
-    var5 += var4;
+    var_5 += var_4;
   }
 
-  return var6;
+  return var_6;
 }
 
 function record_enemy_sightings() {

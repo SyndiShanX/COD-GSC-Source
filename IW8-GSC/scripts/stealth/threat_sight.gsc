@@ -3,55 +3,55 @@
  * Script: scripts\stealth\threat_sight.gsc
 ***********************************************/
 
-function threat_sight_set_enabled(var0) {
-  var1 = isDefined(level.stealth.threat_sight_enabled) && level.stealth.threat_sight_enabled;
-  level.stealth.threat_sight_enabled = var0;
-  threat_sight_set_dvar(var0);
+function threat_sight_set_enabled(var_0) {
+  var_1 = isDefined(level.stealth.threat_sight_enabled) && level.stealth.threat_sight_enabled;
+  level.stealth.threat_sight_enabled = var_0;
+  threat_sight_set_dvar(var_0);
 
-  if(!var0 && var1) {
+  if(!var_0 && var_1) {
     level notify("threat_sight_disabled");
 
-    foreach(var3 in level.players) {
-      var3.stealth.threat_thread = undefined;
+    foreach(var_3 in level.players) {
+      var_3.stealth.threat_thread = undefined;
     }
-  } else if(var0 && !var1) {
+  } else if(var_0 && !var_1) {
     level notify("threat_sight_enabled");
   }
 
-  var5 = getaiarray();
+  var_5 = getaiarray();
 
-  foreach(var7 in var5) {
-    if(isalive(var7) && isDefined(var7.stealth) && isDefined(var7.stealth.threat_sight_state)) {
-      threat_sight_set_state(var7, var7.stealth.threat_sight_state);
+  foreach(var_7 in var_5) {
+    if(isalive(var_7) && isDefined(var_7.stealth) && isDefined(var_7.stealth.threat_sight_state)) {
+      threat_sight_set_state(var_7, var_7.stealth.threat_sight_state);
     }
   }
 }
 
-function threat_sight_set_dvar(var0) {
+function threat_sight_set_dvar(var_0) {
   setdvarifuninitialized("ai_threatForcedRate", 0.4);
   setdvarifuninitialized("ai_threatForcedMax", 0.5);
 
-  if(var0 && (!isDefined(level.stealth.threat_sight_enabled) || !level.stealth.threat_sight_enabled)) {
+  if(var_0 && (!isDefined(level.stealth.threat_sight_enabled) || !level.stealth.threat_sight_enabled)) {
     return;
   }
 
-  setsaveddvar("OKQTSOMTKT", var0);
+  setsaveddvar("OKQTSOMTKT", var_0);
   thread threat_sight_set_dvar_display(level);
 }
 
-function threat_sight_set_dvar_display(var0) {
+function threat_sight_set_dvar_display(var_0) {
   self notify("threat_sight_set_dvar_display");
   self endon("threat_sight_set_dvar_display");
 
-  if(!var0) {
+  if(!var_0) {
     wait 1;
   }
 
   if(getdvarint("ai_threatUseDisplay", 0)) {
-    setsaveddvar("NPQNNOSNNL", var0);
+    setsaveddvar("NPQNNOSNNL", var_0);
   }
 
-  setDvar("scr_ai_threatsightaudio", var0);
+  setDvar("scr_ai_threatsightaudio", var_0);
 }
 
 function threat_sight_enabled() {
@@ -66,9 +66,9 @@ function threat_sight_enabled() {
   return isDefined(self.threatsight) && self.threatsight;
 }
 
-function threat_sight_set_state(var0) {
+function threat_sight_set_state(var_0) {
   if(isDefined(self.stealth)) {
-    self.stealth.threat_sight_state = var0;
+    self.stealth.threat_sight_state = var_0;
   }
 
   if(!isDefined(level.stealth.threat_sight_enabled) || !level.stealth.threat_sight_enabled) {
@@ -83,7 +83,7 @@ function threat_sight_set_state(var0) {
     self.threat_sight_immediate_thread = undefined;
   }
 
-  switch (var0) {
+  switch (var_0) {
     case "hidden":
       self.threatsight = 1;
       self.stealth.threat_sight_count = undefined;
@@ -105,15 +105,15 @@ function threat_sight_set_state(var0) {
       break;
   }
 
-  foreach(var2 in level.players) {
-    threat_sight_player_entity_state_set(var2, self, var0);
+  foreach(var_2 in level.players) {
+    threat_sight_player_entity_state_set(var_2, self, var_0);
   }
 
-  threat_sight_set_state_parameters(var0);
+  threat_sight_set_state_parameters(var_0);
 }
 
-function threat_sight_set_state_parameters(var0) {
-  self[[level.stealth.fnthreatsightsetstateparameters]](var0);
+function threat_sight_set_state_parameters(var_0) {
+  self[[level.stealth.fnthreatsightsetstateparameters]](var_0);
 }
 
 function threat_sight_immediate_thread() {
@@ -127,17 +127,17 @@ function threat_sight_immediate_thread() {
     level scripts\engine\utility::flag_waitopen("stealth_spotted");
     wait randomfloatrange(0.4, 0.6);
 
-    foreach(var1 in level.players) {
-      if(isDefined(var1.ignore_stealth_sight)) {
+    foreach(var_1 in level.players) {
+      if(isDefined(var_1.ignore_stealth_sight)) {
         continue;
       }
 
-      if(var1.ignoreme) {
+      if(var_1.ignoreme) {
         continue;
       }
 
-      if(self cansee(var1)) {
-        self aieventlistenerevent("sight", var1, var1.origin);
+      if(self cansee(var_1)) {
+        self aieventlistenerevent("sight", var_1, var_1.origin);
       }
     }
   }
@@ -162,35 +162,35 @@ function threat_sight_player_init() {
   }
 }
 
-function threat_sight_player_entity_state_set(var0, var1) {
+function threat_sight_player_entity_state_set(var_0, var_1) {
   threat_sight_player_init();
-  var2 = var0 getentitynumber();
+  var_2 = var_0 getentitynumber();
 
-  switch (var1) {
+  switch (var_1) {
     case "hidden":
-      self.stealth.threat_sighted[var2] = undefined;
+      self.stealth.threat_sighted[var_2] = undefined;
       break;
     case "combat_hunt":
-      var0 setthreatsight(self, 0);
+      var_0 setthreatsight(self, 0);
       break;
     case "investigate":
-      if(isDefined(var0.enemy) && var0.enemy == self) {
-        var0 setthreatsight(self, 1);
+      if(isDefined(var_0.enemy) && var_0.enemy == self) {
+        var_0 setthreatsight(self, 1);
       }
 
       break;
     case "death":
-      var0 setthreatsight(self, 0);
+      var_0 setthreatsight(self, 0);
       break;
   }
 
-  switch (var1) {
+  switch (var_1) {
     case "death":
-      self.stealth.threat_entities[var2] = undefined;
-      self.stealth.threat_sighted[var2] = undefined;
+      self.stealth.threat_entities[var_2] = undefined;
+      self.stealth.threat_sighted[var_2] = undefined;
       break;
     default:
-      self.stealth.threat_entities[var2] = var0;
+      self.stealth.threat_entities[var_2] = var_0;
       break;
   }
 
@@ -201,78 +201,78 @@ function threat_sight_player_entity_state_set(var0, var1) {
   }
 }
 
-function threat_sight_sighted(var0) {
+function threat_sight_sighted(var_0) {
   self endon("death");
   self endon("stealth_idle");
-  var0 endon("disconnect");
-  var0 endon("death");
-  var1 = self getentitynumber();
+  var_0 endon("disconnect");
+  var_0 endon("death");
+  var_1 = self getentitynumber();
 
   if(self[[self.fnisinstealthhunt]]()) {
-    self getenemyinfo(var0);
-    self aieventlistenerevent("combat", var0, var0.origin);
+    self getenemyinfo(var_0);
+    self aieventlistenerevent("combat", var_0, var_0.origin);
     return;
   }
 
-  var0.stealth.threat_sighted[var1] = self;
-  self aieventlistenerevent("sight", var0, var0.origin);
-  var2 = var0 getentitynumber();
+  var_0.stealth.threat_sighted[var_1] = self;
+  self aieventlistenerevent("sight", var_0, var_0.origin);
+  var_2 = var_0 getentitynumber();
 
   if(!isDefined(self.stealth.threat_sight_count)) {
     self.stealth.threat_sight_count = [];
   }
 
-  if(!isDefined(self.stealth.threat_sight_count[var2])) {
-    self.stealth.threat_sight_count[var2] = 0;
+  if(!isDefined(self.stealth.threat_sight_count[var_2])) {
+    self.stealth.threat_sight_count[var_2] = 0;
   } else {
-    self.stealth.threat_sight_count[var2]++;
+    self.stealth.threat_sight_count[var_2]++;
   }
 
-  var3 = scripts\stealth\utility::alert_delay_distance_time(var0);
-  var3 /= pow(2, self.stealth.threat_sight_count[var2]);
-  var3 *= 1000;
-  var4 = gettime();
+  var_3 = scripts\stealth\utility::alert_delay_distance_time(var_0);
+  var_3 /= pow(2, self.stealth.threat_sight_count[var_2]);
+  var_3 *= 1000;
+  var_4 = gettime();
 
   if(scripts\common\utility::issp()) {
-    self.stealth.reactendtime = var4 + var3;
+    self.stealth.reactendtime = var_4 + var_3;
   }
 
-  var5 = var4;
-  var6 = var4 + var3;
+  var_5 = var_4;
+  var_6 = var_4 + var_3;
 
-  while(gettime() < var6) {
-    if(istrue(self.stealth.blind) || !isDefined(self.stealth.threat_sight_count) || !isDefined(self.stealth.threat_sight_count[var2])) {
+  while(gettime() < var_6) {
+    if(istrue(self.stealth.blind) || !isDefined(self.stealth.threat_sight_count) || !isDefined(self.stealth.threat_sight_count[var_2])) {
       break;
     }
 
-    var3 = scripts\stealth\utility::alert_delay_distance_time(var0);
-    var3 /= pow(2, self.stealth.threat_sight_count[var2]);
-    var3 *= 1000;
+    var_3 = scripts\stealth\utility::alert_delay_distance_time(var_0);
+    var_3 /= pow(2, self.stealth.threat_sight_count[var_2]);
+    var_3 *= 1000;
 
-    if(var5 + var3 < var6) {
-      var6 = var5 + var3;
+    if(var_5 + var_3 < var_6) {
+      var_6 = var_5 + var_3;
     }
 
     waitframe();
   }
 
-  thread threat_sight_sighted_wait_lost(var0);
+  thread threat_sight_sighted_wait_lost(var_0);
 }
 
-function threat_sight_sighted_wait_lost(var0) {
-  var1 = var0 getentitynumber();
-  self notify("threat_sight_sighted_wait_lost_" + var1);
-  self endon("threat_sight_sighted_wait_lost_" + var1);
+function threat_sight_sighted_wait_lost(var_0) {
+  var_1 = var_0 getentitynumber();
+  self notify("threat_sight_sighted_wait_lost_" + var_1);
+  self endon("threat_sight_sighted_wait_lost_" + var_1);
   self endon("death");
-  var0 endon("disconnect");
-  var0 endon("death");
-  var2 = self getentitynumber();
-  var0.stealth.threat_sighted[var2] = undefined;
+  var_0 endon("disconnect");
+  var_0 endon("death");
+  var_2 = self getentitynumber();
+  var_0.stealth.threat_sighted[var_2] = undefined;
 
   for(;;) {
-    self.stealth.threat_sight_lost[var1] = self getthreatsight(var0) < 0.75;
+    self.stealth.threat_sight_lost[var_1] = self getthreatsight(var_0) < 0.75;
 
-    if(self.stealth.threat_sight_lost[var1]) {
+    if(self.stealth.threat_sight_lost[var_1]) {
       return;
     }
 
@@ -280,22 +280,22 @@ function threat_sight_sighted_wait_lost(var0) {
   }
 }
 
-function threat_sight_force_visible(var0, var1) {
-  var2 = gettime() + int(1000 * var1);
-  var3 = var0 getentitynumber();
+function threat_sight_force_visible(var_0, var_1) {
+  var_2 = gettime() + int(1000 * var_1);
+  var_3 = var_0 getentitynumber();
 
   if(!isDefined(self.stealth.force_visible)) {
     self.stealth.force_visible = [];
   }
 
-  if(isDefined(self.stealth.force_visible[var3])) {
-    self.stealth.force_visible[var3].end = max(self.stealth.force_visible[var3].end, var2);
+  if(isDefined(self.stealth.force_visible[var_3])) {
+    self.stealth.force_visible[var_3].end = max(self.stealth.force_visible[var_3].end, var_2);
   } else {
-    self.stealth.force_visible[var3] = spawnStruct();
-    self.stealth.force_visible[var3].end = var2;
+    self.stealth.force_visible[var_3] = spawnStruct();
+    self.stealth.force_visible[var_3].end = var_2;
   }
 
-  self.stealth.force_visible[var3].ent = var0;
+  self.stealth.force_visible[var_3].ent = var_0;
   thread threat_sight_force_visible_thread();
 }
 
@@ -308,45 +308,45 @@ function threat_sight_force_visible_thread() {
   self endon("threat_sight_force_visible_thread");
   self endon("death");
   self.stealth.force_visible_thread = 1;
-  var0 = 0.05;
-  var1 = 0;
+  var_0 = 0.05;
+  var_1 = 0;
 
   while(isDefined(self.stealth.force_visible) && self.stealth.force_visible.size > 0) {
-    var2 = gettime();
-    var3 = [];
-    var4 = getdvarfloat("ai_threatForcedRate") * var0;
+    var_2 = gettime();
+    var_3 = [];
+    var_4 = getdvarfloat("ai_threatForcedRate") * var_0;
 
-    foreach(var8, var6 in self.stealth.force_visible) {
-      if(var2 < var6.end && issentient(var6.ent) && !self cansee(var6.ent)) {
-        var7 = self getthreatsight(var6.ent);
+    foreach(var_8, var_6 in self.stealth.force_visible) {
+      if(var_2 < var_6.end && issentient(var_6.ent) && !self cansee(var_6.ent)) {
+        var_7 = self getthreatsight(var_6.ent);
 
-        if(isPlayer(var6.ent)) {
-          thread threat_sight_player_sight_audio(var6.ent, 1);
+        if(isPlayer(var_6.ent)) {
+          thread threat_sight_player_sight_audio(var_6.ent, 1);
         }
 
-        if(var7 + var4 < getdvarfloat("ai_threatForcedMax")) {
-          var7 += var4;
-          self setthreatsight(var6.ent, var7);
+        if(var_7 + var_4 < getdvarfloat("ai_threatForcedMax")) {
+          var_7 += var_4;
+          self setthreatsight(var_6.ent, var_7);
 
-          if(getdvarfloat("ai_threatForcedMax") >= 1 && var7 >= 1 && !var1) {
-            self aieventlistenerevent("sight", var6.ent, var6.ent.origin);
-            var1 = 1;
-          } else if(var7 < 0.75 && var1) {
-            var1 = 0;
+          if(getdvarfloat("ai_threatForcedMax") >= 1 && var_7 >= 1 && !var_1) {
+            self aieventlistenerevent("sight", var_6.ent, var_6.ent.origin);
+            var_1 = 1;
+          } else if(var_7 < 0.75 && var_1) {
+            var_1 = 0;
           }
         }
 
         continue;
       }
 
-      var3 = var8;
+      var_3 = var_8;
     }
 
-    foreach(var8 in var3) {
-      self.stealth.force_visible[var8] = undefined;
+    foreach(var_8 in var_3) {
+      self.stealth.force_visible[var_8] = undefined;
     }
 
-    wait var0;
+    wait var_0;
   }
 
   self.stealth.force_visible = undefined;
@@ -358,100 +358,100 @@ function threat_sight_player_entity_state_thread() {
   self endon("disconnect");
   self endon("death");
   level endon("threat_sight_disabled");
-  var0 = 0;
+  var_0 = 0;
 
   for(;;) {
-    var1 = 0;
-    var2 = 0;
+    var_1 = 0;
+    var_2 = 0;
     self.stealth.maxthreat = 0;
     self.stealth.maxalertlevel = -1;
-    var3 = self getEye();
-    var4 = cos(75);
+    var_3 = self getEye();
+    var_4 = cos(75);
 
-    foreach(var6 in self.stealth.threat_entities) {
-      if(!isalive(var6)) {
+    foreach(var_6 in self.stealth.threat_entities) {
+      if(!isalive(var_6)) {
         continue;
       }
 
-      var7 = var6 getentitynumber();
-      self.stealth.maxalertlevel = max(self.stealth.maxalertlevel, var6.alertlevelint);
+      var_7 = var_6 getentitynumber();
+      self.stealth.maxalertlevel = max(self.stealth.maxalertlevel, var_6.alertlevelint);
 
       if(getdvarint("OKQTSOMTKT", 1)) {
-        if(var6[[var6.fnisinstealthcombat]]()) {
+        if(var_6[[var_6.fnisinstealthcombat]]()) {
           continue;
         }
 
-        var8 = var6 getthreatsight(self);
-        var9 = var6 cansee(self);
+        var_8 = var_6 getthreatsight(self);
+        var_9 = var_6 cansee(self);
 
-        if(var9) {
-          var0 = gettime();
+        if(var_9) {
+          var_0 = gettime();
         }
 
-        if(var9 && isPlayer(self) && var8 > 0.09 && player_is_sprinting_at_me(var6)) {
-          var6 aieventlistenerevent("sight", self, self.origin);
-          var1 = 1;
-        } else if(var8 >= 1) {
-          if(!isDefined(self.stealth.threat_sighted[var7])) {
-            thread threat_sight_sighted(var6);
+        if(var_9 && isPlayer(self) && var_8 > 0.09 && player_is_sprinting_at_me(var_6)) {
+          var_6 aieventlistenerevent("sight", self, self.origin);
+          var_1 = 1;
+        } else if(var_8 >= 1) {
+          if(!isDefined(self.stealth.threat_sighted[var_7])) {
+            thread threat_sight_sighted(var_6);
           }
 
-          var1 = 1;
+          var_1 = 1;
         }
 
-        var10 = self.stealth.maxthreat;
-        self.stealth.maxthreat = max(self.stealth.maxthreat, var6 getthreatsight(self));
+        var_10 = self.stealth.maxthreat;
+        self.stealth.maxthreat = max(self.stealth.maxthreat, var_6 getthreatsight(self));
 
         if(self.stealth.maxthreat > 0.05) {
-          if(!isDefined(self.stealth.maxthreat_enemy) || self.stealth.maxthreat != var10) {
-            self.stealth.maxthreat_enemy = var6;
+          if(!isDefined(self.stealth.maxthreat_enemy) || self.stealth.maxthreat != var_10) {
+            self.stealth.maxthreat_enemy = var_6;
           }
         }
       }
 
-      if(var6.alertlevel == "combat" || !var6.threatsight) {
-        var2 = 1;
+      if(var_6.alertlevel == "combat" || !var_6.threatsight) {
+        var_2 = 1;
       }
     }
 
-    var12 = !var2 && var0 > 0 && gettime() - var0 < 250;
+    var_12 = !var_2 && var_0 > 0 && gettime() - var_0 < 250;
 
     if(getdvarfloat("LONMKRQKOM") <= 0) {
-      thread threat_sight_player_sight_audio(var12, self.stealth.maxthreat);
+      thread threat_sight_player_sight_audio(var_12, self.stealth.maxthreat);
     }
 
-    self.stealth.threat_visible = var12;
+    self.stealth.threat_visible = var_12;
     wait 0.05;
   }
 }
 
-function player_is_sprinting_at_me(var0) {
-  return self issprinting() && scripts\engine\utility::within_fov(self.origin, self.angles, var0.origin, cos(20));
+function player_is_sprinting_at_me(var_0) {
+  return self issprinting() && scripts\engine\utility::within_fov(self.origin, self.angles, var_0.origin, cos(20));
 }
 
-function threat_sight_fake(var0, var1) {
+function threat_sight_fake(var_0, var_1) {
   self notify("threat_sight_fake");
   self endon("threat_sight_fake");
-  setsaveddvar("LONMKRQKOM", var1);
-  setsaveddvar("LTQTQNSRQK", var0[0]);
-  setsaveddvar("OKOMMPSLTN", var0[1]);
-  setsaveddvar("LSLTTLKNNK", var0[2]);
+  setsaveddvar("LONMKRQKOM", var_1);
+  setsaveddvar("LTQTQNSRQK", var_0[0]);
+  setsaveddvar("OKOMMPSLTN", var_0[1]);
+  setsaveddvar("LSLTTLKNNK", var_0[2]);
 
   if(!isDefined(self.stealth.maxthreat)) {
     self.stealth.maxthreat = 0;
   }
 
-  while(var1 > 0) {
-    thread threat_sight_player_sight_audio(1, max(self.stealth.maxthreat, var1));
+  while(var_1 > 0) {
+    thread threat_sight_player_sight_audio(1, max(self.stealth.maxthreat, var_1));
     wait 0.05;
   }
 
-  thread threat_sight_player_sight_audio(0, max(self.stealth.maxthreat, var1));
+  thread threat_sight_player_sight_audio(0, max(self.stealth.maxthreat, var_1));
 }
 
-function threat_sight_player_sight_audio(var0, var1, var2) {
+function threat_sight_player_sight_audio(var_0, var_1, var_2) {
   if(isDefined(level.stealth) && isDefined(level.stealth.fnthreatsightplayersightaudio)) {
-    self thread[[level.stealth.fnthreatsightplayersightaudio]](var0, var1, var2);
+    self thread[[level.stealth.fnthreatsightplayersightaudio]](var_0, var_1, var_2);
     return;
   }
 }

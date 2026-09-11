@@ -33,12 +33,12 @@ function main() {
 
 function oscar_hack() {
   waitframe();
-  var0 = getEnt("weapon_iw8_sh_oscar12+ironsdefault_oscar12+gripside_oscar12+drums_oscar12+back_oscar12+front_oscar12+rec_oscar12", "code_classname");
-  var1 = spawn("weapon_iw8_sh_oscar12+ironsdefault_oscar12+gripside_oscar12+drums_oscar12_sp+back_oscar12+front_oscar12+rec_oscar12", var0.origin, var0.spawnflags);
-  var1.angles = var0.angles;
-  var1.targetname = var0.targetname;
-  var1 scripts\anim\shared::setscriptammo("iw8_sh_oscar12", var0, undefined);
-  var0 delete();
+  var_0 = getEnt("weapon_iw8_sh_oscar12+ironsdefault_oscar12+gripside_oscar12+drums_oscar12+back_oscar12+front_oscar12+rec_oscar12", "code_classname");
+  var_1 = spawn("weapon_iw8_sh_oscar12+ironsdefault_oscar12+gripside_oscar12+drums_oscar12_sp+back_oscar12+front_oscar12+rec_oscar12", var_0.origin, var_0.spawnflags);
+  var_1.angles = var_0.angles;
+  var_1.targetname = var_0.targetname;
+  var_1 scripts\anim\shared::setscriptammo("iw8_sh_oscar12", var_0, undefined);
+  var_0 delete();
 }
 
 function init_introscreen() {
@@ -56,10 +56,10 @@ function screens_think() {
 
   self endon("death");
   scripts\common\screens::screens_create();
-  var0 = scripts\common\screens::get_state();
+  var_0 = scripts\common\screens::get_state();
 
-  if(isDefined(var0)) {
-    scripts\common\screens::do_state(var0);
+  if(isDefined(var_0)) {
+    scripts\common\screens::do_state(var_0);
     return;
   }
 
@@ -109,12 +109,12 @@ function postload() {
 function corpse_world_pos() {
   for(;;) {
     wait 2;
-    var0 = getcorpsearray();
+    var_0 = getcorpsearray();
 
-    if(isDefined(var0) && var0.size > 0) {
-      foreach(var2 in var0) {
-        if(isDefined(var2) && isDefined(var2.origin) && (var2.origin[2] < -1500 || var2.origin[2] > 3000)) {
-          var2 delete();
+    if(isDefined(var_0) && var_0.size > 0) {
+      foreach(var_2 in var_0) {
+        if(isDefined(var_2) && isDefined(var_2.origin) && (var_2.origin[2] < -1500 || var_2.origin[2] > 3000)) {
+          var_2 delete();
         }
       }
     }
@@ -122,18 +122,18 @@ function corpse_world_pos() {
 }
 
 function corpse_weapon_pos() {
-  self waittill("weapon_dropped", var0);
+  self waittill("weapon_dropped", var_0);
   wait 2;
 
-  if(isDefined(var0) && isDefined(var0.origin) && (var0.origin[2] < -1500 || var0.origin[2] > 3000)) {
-    var0 delete();
+  if(isDefined(var_0) && isDefined(var_0.origin) && (var_0.origin[2] < -1500 || var_0.origin[2] > 3000)) {
+    var_0 delete();
     return;
   }
 }
 
 function player_loadout() {
-  var0 = ["frag", "flash", "molotov"];
-  scripts\engine\sp\utility::offhandprecache(var0);
+  var_0 = ["frag", "flash", "molotov"];
+  scripts\engine\sp\utility::offhandprecache(var_0);
 
   if(scripts\sp\starts::is_after_start("bridge")) {
     scripts\sp\utility::allow_weapon_first_raise_anims(0);
@@ -150,7 +150,7 @@ function player_loadout() {
 
   scripts\sp\maps\lab\lab_util::setplayerviewmodel("viewmodel_arms_alex_woodland", "viewhands_base_legs_iw8", "default_character_shadow");
   scripts\sp\utility::context_melee_set_arms("viewmodel_arms_alex_woodland");
-  var1 = undefined;
+  var_1 = undefined;
 
   if(level.start_point == "bridge") {
     return;
@@ -225,16 +225,16 @@ function lab_objectives() {
         waitframe();
       }
 
-      var0 = scripts\engine\utility::getStruct("lab_entrance_obj_struct", "targetname");
-      scripts\engine\sp\objectives::objective_add("bridge_intro_obj", "current", var0.origin, &"LAB/OBJ_REACH_FACILITY");
+      var_0 = scripts\engine\utility::getStruct("lab_entrance_obj_struct", "targetname");
+      scripts\engine\sp\objectives::objective_add("bridge_intro_obj", "current", var_0.origin, &"LAB/OBJ_REACH_FACILITY");
     case "hill_top":
     case "hill_mid":
     case "hill_bottom":
     case "drone_tutorial":
       scripts\engine\utility::flag_wait("hill_fallback_1");
       lab_obj_remove("bridge_intro_obj");
-      var0 = scripts\engine\utility::getStruct("lab_entrance_obj_struct", "targetname");
-      scripts\engine\sp\objectives::objective_add("lab_entrance_obj", "current", var0.origin, &"LAB/OBJ_PUSH_ENTRANCE");
+      var_0 = scripts\engine\utility::getStruct("lab_entrance_obj_struct", "targetname");
+      scripts\engine\sp\objectives::objective_add("lab_entrance_obj", "current", var_0.origin, &"LAB/OBJ_PUSH_ENTRANCE");
       scripts\engine\utility::flag_wait("hilltop_heli_spawned");
 
       while(!isDefined(level.hilltop_heli)) {
@@ -247,7 +247,7 @@ function lab_objectives() {
       scripts\engine\utility::flag_wait("hilltop_heli_dead");
       wait 3;
       lab_obj_remove("hilltop_heli");
-      scripts\engine\sp\objectives::objective_add("lab_entrance_obj", "current", var0.origin, &"LAB/OBJ_PUSH_ENTRANCE");
+      scripts\engine\sp\objectives::objective_add("lab_entrance_obj", "current", var_0.origin, &"LAB/OBJ_PUSH_ENTRANCE");
 
       if(!scripts\engine\utility::flag("inside_waiting_flag")) {
         scripts\engine\utility::flag_wait("inside_waiting_flag");
@@ -256,23 +256,23 @@ function lab_objectives() {
       lab_obj_remove("lab_entrance_obj");
     case "lab_ambush":
     case "lab_entrance":
-      var0 = scripts\engine\utility::getStruct("van_scene_start", "targetname");
-      scripts\engine\sp\objectives::objective_add("van_scene_obj", "current", var0.origin, &"LAB/OBJ_NIKOLAI_VAN");
+      var_0 = scripts\engine\utility::getStruct("van_scene_start", "targetname");
+      scripts\engine\sp\objectives::objective_add("van_scene_obj", "current", var_0.origin, &"LAB/OBJ_NIKOLAI_VAN");
     case "lab_jumpdown":
       scripts\engine\utility::flag_wait("van_scene_start");
       lab_obj_remove("van_scene_obj");
-      var0 = getEnt("van_bomb", "targetname");
-      scripts\engine\sp\objectives::objective_add("van_scene_obj", "current", var0.origin, &"LAB/OBJ_NIKOLAI_DETONATOR");
+      var_0 = getEnt("van_bomb", "targetname");
+      scripts\engine\sp\objectives::objective_add("van_scene_obj", "current", var_0.origin, &"LAB/OBJ_NIKOLAI_DETONATOR");
     case "dragons_breath":
       scripts\engine\utility::flag_wait("grab_charges");
       lab_obj_remove("van_scene_obj");
-      var0 = scripts\engine\utility::getStruct("turbine_door_scene", "targetname");
-      scripts\engine\sp\objectives::objective_add("db_obj", "current", var0.origin, &"LAB/OBJ_REACH_FURNACE");
+      var_0 = scripts\engine\utility::getStruct("turbine_door_scene", "targetname");
+      scripts\engine\sp\objectives::objective_add("db_obj", "current", var_0.origin, &"LAB/OBJ_REACH_FURNACE");
     case "juggernaut":
       scripts\engine\utility::flag_wait("ambush2_entrance_go");
       lab_obj_remove("db_obj");
-      var0 = scripts\engine\utility::getStruct("t2_end_obj_struct", "targetname");
-      scripts\engine\sp\objectives::objective_add("t2_end_obj", "current", var0.origin, &"LAB/OBJ_REACH_FURNACE");
+      var_0 = scripts\engine\utility::getStruct("t2_end_obj_struct", "targetname");
+      scripts\engine\sp\objectives::objective_add("t2_end_obj", "current", var_0.origin, &"LAB/OBJ_REACH_FURNACE");
       scripts\engine\utility::flag_wait("cp_5_juggernaut_start");
 
       while(!isDefined(level.juggernaut_1)) {
@@ -283,40 +283,40 @@ function lab_objectives() {
       scripts\engine\sp\objectives::objective_add("juggernaut", "current", undefined, &"LAB/OBJ_JUGGERNAUT");
       scripts\engine\utility::flag_wait("juggernaut_dead");
       lab_obj_remove("juggernaut");
-      var0 = scripts\engine\utility::getStruct("pre_office_obj_struct", "targetname");
-      scripts\engine\sp\objectives::objective_add("pre_office_obj", "current", var0.origin, &"LAB/OBJ_REACH_FURNACE");
+      var_0 = scripts\engine\utility::getStruct("pre_office_obj_struct", "targetname");
+      scripts\engine\sp\objectives::objective_add("pre_office_obj", "current", var_0.origin, &"LAB/OBJ_REACH_FURNACE");
       scripts\engine\utility::flag_wait("pre_office_door_flag");
       wait 0.5;
       lab_obj_remove("pre_office_obj");
     case "offices":
-      var0 = scripts\engine\utility::getStruct("office_start_obj_struct", "targetname");
-      scripts\engine\sp\objectives::objective_add("office_start_obj", "current", var0.origin, &"LAB/OBJ_REACH_FURNACE");
+      var_0 = scripts\engine\utility::getStruct("office_start_obj_struct", "targetname");
+      scripts\engine\sp\objectives::objective_add("office_start_obj", "current", var_0.origin, &"LAB/OBJ_REACH_FURNACE");
       scripts\engine\utility::flag_wait("offices_started_trig");
       lab_obj_remove("office_start_obj");
-      var0 = scripts\engine\utility::getStruct("office_end_obj_struct", "targetname");
-      scripts\engine\sp\objectives::objective_add("office_start_obj", "current", var0.origin, &"LAB/OBJ_REACH_FURNACE");
+      var_0 = scripts\engine\utility::getStruct("office_end_obj_struct", "targetname");
+      scripts\engine\sp\objectives::objective_add("office_start_obj", "current", var_0.origin, &"LAB/OBJ_REACH_FURNACE");
       scripts\engine\utility::flag_wait("reached_final_room");
       lab_obj_remove("office_start_obj");
     case "gas_chambers":
     case "kyle_player":
-      var0 = scripts\engine\utility::getStruct("lab_entrance_interact", "targetname");
-      scripts\engine\sp\objectives::objective_add("office_end_obj", "current", var0.origin, &"LAB/OBJ_REACH_FURNACE");
+      var_0 = scripts\engine\utility::getStruct("lab_entrance_interact", "targetname");
+      scripts\engine\sp\objectives::objective_add("office_end_obj", "current", var_0.origin, &"LAB/OBJ_REACH_FURNACE");
       scripts\engine\utility::flag_wait("transition_bink_done");
       lab_obj_remove("office_end_obj");
     case "pipes_outdoor":
     case "pipes_jumpdown":
-      var0 = scripts\engine\utility::getStruct("lot_A_start_obj_struct", "targetname");
-      scripts\engine\sp\objectives::objective_add("pipe_building_obj", "current", var0.origin, &"LAB/OBJ_REACH_PIPELINE", &"LAB/OBJ_CLEAR_LOT");
+      var_0 = scripts\engine\utility::getStruct("lot_A_start_obj_struct", "targetname");
+      scripts\engine\sp\objectives::objective_add("pipe_building_obj", "current", var_0.origin, &"LAB/OBJ_REACH_PIPELINE", &"LAB/OBJ_CLEAR_LOT");
       scripts\engine\utility::flag_wait("parking_lot_clear");
       lab_obj_remove("pipe_building_obj");
     case "moveto_parking_hallway":
-      var0 = scripts\engine\utility::getStruct("lot_A_start_obj_struct", "targetname");
-      scripts\engine\sp\objectives::objective_add("lot_A_start_obj", "current", var0.origin, &"LAB/OBJ_REACH_PIPELINE");
+      var_0 = scripts\engine\utility::getStruct("lot_A_start_obj_struct", "targetname");
+      scripts\engine\sp\objectives::objective_add("lot_A_start_obj", "current", var_0.origin, &"LAB/OBJ_REACH_PIPELINE");
       scripts\engine\utility::flag_wait("player_inside_hall");
       lab_obj_remove("lot_A_start_obj");
     case "final_pipes":
-      var0 = scripts\engine\utility::getStruct("lot_C_finished_obj_struct", "targetname");
-      scripts\engine\sp\objectives::objective_add("lot_c_end_obj", "current", var0.origin, &"LAB/OBJ_REACH_PIPELINE", &"LAB/OBJ_PLANT_CHARGES");
+      var_0 = scripts\engine\utility::getStruct("lot_C_finished_obj_struct", "targetname");
+      scripts\engine\sp\objectives::objective_add("lot_c_end_obj", "current", var_0.origin, &"LAB/OBJ_REACH_PIPELINE", &"LAB/OBJ_PLANT_CHARGES");
     case "finale_heli":
       scripts\engine\utility::flag_wait("finale_scene");
 
@@ -334,9 +334,9 @@ function lab_objectives() {
   }
 }
 
-function lab_obj_remove(var0) {
-  if(scripts\engine\sp\objectives::objective_exists(var0)) {
-    scripts\engine\sp\objectives::objective_remove(var0);
+function lab_obj_remove(var_0) {
+  if(scripts\engine\sp\objectives::objective_exists(var_0)) {
+    scripts\engine\sp\objectives::objective_remove(var_0);
     return;
   }
 }

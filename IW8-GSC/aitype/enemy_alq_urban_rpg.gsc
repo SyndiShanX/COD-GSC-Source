@@ -28,10 +28,10 @@ function main() {
   self.usescriptedweapon = 0;
   self.scriptedweaponclassprimary = "none";
   self.weapon = getcompleteweaponname("iw8_la_rpapa7_ai");
-  var0 = undefined;
-  var1 = ["character_iw8_al_qatala_urban_01", "character_iw8_al_qatala_urban_02", "character_iw8_al_qatala_urban_03", "character_iw8_al_qatala_urban_04", "character_iw8_al_qatala_urban_05", "character_iw8_al_qatala_urban_06", "character_iw8_al_qatala_urban_07", "character_iw8_al_qatala_urban_08_long_jacket"];
+  var_0 = undefined;
+  var_1 = ["character_iw8_al_qatala_urban_01", "character_iw8_al_qatala_urban_02", "character_iw8_al_qatala_urban_03", "character_iw8_al_qatala_urban_04", "character_iw8_al_qatala_urban_05", "character_iw8_al_qatala_urban_06", "character_iw8_al_qatala_urban_07", "character_iw8_al_qatala_urban_08_long_jacket"];
 
-  switch (scripts\code\character::get_random_character(8, var0, var1)) {
+  switch (scripts\code\character::get_random_character(8, var_0, var_1)) {
     case 0:
       character\character_iw8_al_qatala_urban_01::main();
       break;
@@ -63,7 +63,7 @@ function spawner() {
   self setspawnerteam("axis");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\character_iw8_al_qatala_urban_01::precache();
   character\character_iw8_al_qatala_urban_02::precache();
   character\character_iw8_al_qatala_urban_03::precache();

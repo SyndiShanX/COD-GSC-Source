@@ -32,57 +32,57 @@ function main() {
 }
 
 function player_exfil_struct() {
-  var0 = getEnt("clip128x128x8", "targetname");
-  var1 = spawn("script_model", (1943, -2824, 477));
-  var1.angles = (0, 0, 90);
-  var1 clonebrushmodeltoscriptmodel(var0);
-  var2 = getEnt("clip128x128x8", "targetname");
-  var3 = spawn("script_model", (2071, -2824, 477));
-  var3.angles = (0, 0, 90);
-  var3 clonebrushmodeltoscriptmodel(var2);
-  var4 = getEnt("clip128x128x8", "targetname");
-  var5 = spawn("script_model", (2199, -2824, 477));
-  var5.angles = (0, 0, 90);
-  var5 clonebrushmodeltoscriptmodel(var4);
-  var6 = getEnt("clip128x128x8", "targetname");
-  var7 = spawn("script_model", (2327, -2824, 477));
-  var7.angles = (0, 0, 90);
-  var7 clonebrushmodeltoscriptmodel(var6);
-  var8 = getEnt("clip128x128x8", "targetname");
-  var9 = spawn("script_model", (2455, -2824, 477));
-  var9.angles = (0, 0, 90);
-  var9 clonebrushmodeltoscriptmodel(var8);
+  var_0 = getEnt("clip128x128x8", "targetname");
+  var_1 = spawn("script_model", (1943, -2824, 477));
+  var_1.angles = (0, 0, 90);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = getEnt("clip128x128x8", "targetname");
+  var_3 = spawn("script_model", (2071, -2824, 477));
+  var_3.angles = (0, 0, 90);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
+  var_4 = getEnt("clip128x128x8", "targetname");
+  var_5 = spawn("script_model", (2199, -2824, 477));
+  var_5.angles = (0, 0, 90);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_6 = getEnt("clip128x128x8", "targetname");
+  var_7 = spawn("script_model", (2327, -2824, 477));
+  var_7.angles = (0, 0, 90);
+  var_7 clonebrushmodeltoscriptmodel(var_6);
+  var_8 = getEnt("clip128x128x8", "targetname");
+  var_9 = spawn("script_model", (2455, -2824, 477));
+  var_9.angles = (0, 0, 90);
+  var_9 clonebrushmodeltoscriptmodel(var_8);
 }
 
-function ref_13229(var0) {
-  var1 = getEntArray(var0, "targetname");
+function ref_13229(var_0) {
+  var_1 = getEntArray(var_0, "targetname");
 
-  foreach(var3 in var1) {
-    var3.startpos = var3.origin;
-    var3.startang = var3.angles;
-    thread boatbob(var3);
-    thread boatwobble(var3);
+  foreach(var_3 in var_1) {
+    var_3.startpos = var_3.origin;
+    var_3.startang = var_3.angles;
+    thread boatbob(var_3);
+    thread boatwobble(var_3);
   }
 }
 
-function boatbob(var0) {
+function boatbob(var_0) {
   level endon("game_ended");
 
   for(;;) {
-    var1 = randomfloatrange(4, 7);
-    var0.goalpos = var0.startpos + (randomintrange(-4, 4), randomintrange(-4, 4), randomintrange(-6, 6));
-    var0 moveTo(var0.goalpos, var1, var1 * 0.25, var1 * 0.25);
-    wait var1;
+    var_1 = randomfloatrange(4, 7);
+    var_0.goalpos = var_0.startpos + (randomintrange(-4, 4), randomintrange(-4, 4), randomintrange(-6, 6));
+    var_0 moveTo(var_0.goalpos, var_1, var_1 * 0.25, var_1 * 0.25);
+    wait var_1;
   }
 }
 
-function boatwobble(var0) {
+function boatwobble(var_0) {
   level endon("game_ended");
 
   for(;;) {
-    var1 = randomfloatrange(4, 6);
-    var0.goalang = var0.startang + (randomfloatrange(-2, 2), randomfloatrange(-2, 2), randomfloatrange(-2, 2));
-    var0 rotateTo(var0.goalang, var1, var1 * 0.25, var1 * 0.25);
-    wait var1;
+    var_1 = randomfloatrange(4, 6);
+    var_0.goalang = var_0.startang + (randomfloatrange(-2, 2), randomfloatrange(-2, 2), randomfloatrange(-2, 2));
+    var_0 rotateTo(var_0.goalang, var_1, var_1 * 0.25, var_1 * 0.25);
+    wait var_1;
   }
 }

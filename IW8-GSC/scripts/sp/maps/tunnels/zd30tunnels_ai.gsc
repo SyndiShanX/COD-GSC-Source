@@ -38,8 +38,8 @@ function tunnels_spawnfunctions() {
   scripts\engine\sp\utility::array_spawn_function_noteworthy("shaft_follower", &shaft_follower);
   scripts\engine\sp\utility::array_spawn_function_noteworthy("shaft_propane_kick_guy", &shaft_propane_kick_guy);
   scripts\engine\sp\utility::array_spawn_function_noteworthy("shaft_fall_victim", &shaft_fall_victim);
-  var0 = getEnt("basement_runner_spawner_trig", "targetname");
-  var0 scripts\engine\utility::trigger_off();
+  var_0 = getEnt("basement_runner_spawner_trig", "targetname");
+  var_0 scripts\engine\utility::trigger_off();
 }
 
 function friendly_nvg_setup() {
@@ -72,7 +72,7 @@ function tunnels_shotgun_guy_accuracy_management() {
   thread tunnels_shotgun_guy_accuracy_debug();
   thread tunnels_shotgun_guy_monitor_weapon_fire();
   wait 0.1;
-  var0 = 10;
+  var_0 = 10;
 
   for(;;) {
     self.baseaccuracy = 0.1;
@@ -91,7 +91,7 @@ function tunnels_shotgun_guy_accuracy_management() {
     scripts\sp\maps\tunnels\zd30tunnels_utility::reset_baseaccuracy();
     self.shotgun_rest = 0;
 
-    while(gettime() - self.last_weapon_fire_time < var0 * 1000) {
+    while(gettime() - self.last_weapon_fire_time < var_0 * 1000) {
       wait 0.1;
     }
   }
@@ -123,21 +123,21 @@ function enemy_death_by_fire_think() {
   self endon("death");
 
   for(;;) {
-    self waittill("trigger", var0);
-    thread enemy_death_by_fire(var0);
+    self waittill("trigger", var_0);
+    thread enemy_death_by_fire(var_0);
     wait 0.05;
   }
 }
 
-function enemy_death_by_fire(var0) {
+function enemy_death_by_fire(var_0) {
   self endon("death");
-  var1 = 256;
+  var_1 = 256;
 
-  if(istrue(var0)) {
+  if(istrue(var_0)) {
     if(isDefined(self) && isai(self) && isalive(self) && !isDefined(self._blackboard.isburning)) {
-      var2 = distance(level.player.origin, self.origin);
+      var_2 = distance(level.player.origin, self.origin);
 
-      if(var2 > var1) {
+      if(var_2 > var_1) {
         thread scripts\sp\maps\tunnels\zd30tunnels_utility::ai_burn_death_scream();
         thread scripts\sp\equipment\molotov::molotovburnenemy(self, 1, self.origin + (0, 0, 8), level.player);
         return;
@@ -160,26 +160,26 @@ function basement_player_rush_handler() {
 
 function player_rush_think() {
   self endon("entitydeleted");
-  var0 = self;
-  var1 = getEnt(self.target, "targetname");
-  var2 = getEnt(var1.target, "targetname");
-  var3 = float(self.script_noteworthy);
-  var0 waittill("trigger");
-  var4 = gettime();
-  var1 waittill("trigger");
+  var_0 = self;
+  var_1 = getEnt(self.target, "targetname");
+  var_2 = getEnt(var_1.target, "targetname");
+  var_3 = float(self.script_noteworthy);
+  var_0 waittill("trigger");
+  var_4 = gettime();
+  var_1 waittill("trigger");
 
-  if(gettime() - var4 < var3 * 1000) {
+  if(gettime() - var_4 < var_3 * 1000) {
     return;
   }
 
   scripts\engine\utility::flag_set("player_rushing_in_basement");
-  var5 = getaiarray("axis");
-  var6 = 0;
+  var_5 = getaiarray("axis");
+  var_6 = 0;
 
-  foreach(var8 in var5) {
-    if(isalive(var8) && var8 istouching(var2) && istrue(var8.reacts_to_rush)) {
+  foreach(var_8 in var_5) {
+    if(isalive(var_8) && var_8 istouching(var_2) && istrue(var_8.reacts_to_rush)) {
       thread zdt_rush_guy();
-      var6++;
+      var_6++;
     }
   }
 }
@@ -193,13 +193,13 @@ function tunnels_combat() {
   }
 
   if(isDefined(self.targetname) && self.targetname == "first_blast") {
-    var0 = 0.75;
+    var_0 = 0.75;
   } else {
-    var0 = 1.5;
+    var_0 = 1.5;
   }
 
-  self.original_baseaccuracy = var0;
-  self.baseaccuracy = var0;
+  self.original_baseaccuracy = var_0;
+  self.baseaccuracy = var_0;
 
   if(scripts\engine\utility::flag("entered_shaft")) {
     self.forcebalconydeath = 1;
@@ -211,10 +211,10 @@ function tunnels_combat() {
 
 function tunnels_baseaccuracy_when_player_on_ladder_or_in_smoke_or_above_player_in_shaft() {
   self endon("death");
-  var0 = 0.5;
-  var1 = 200;
-  var2 = 0.1;
-  var3 = 0;
+  var_0 = 0.5;
+  var_1 = 200;
+  var_2 = 0.1;
+  var_3 = 0;
 
   for(;;) {
     wait 0.25;
@@ -227,35 +227,35 @@ function tunnels_baseaccuracy_when_player_on_ladder_or_in_smoke_or_above_player_
       continue;
     }
 
-    var4 = 0;
-    var5 = self.baseaccuracy;
+    var_4 = 0;
+    var_5 = self.baseaccuracy;
 
     if(is_above_player_in_shaft()) {
-      var6 = self.origin[2] - level.player.origin[2];
+      var_6 = self.origin[2] - level.player.origin[2];
 
-      if(var6 > var1) {
-        var5 = var0;
+      if(var_6 > var_1) {
+        var_5 = var_0;
       } else {
-        var7 = clamp(1 - var6 / var1, 0, 1);
-        var8 = self.original_baseaccuracy - var0;
-        var5 = var0 + var8 * var7;
+        var_7 = clamp(1 - var_6 / var_1, 0, 1);
+        var_8 = self.original_baseaccuracy - var_0;
+        var_5 = var_0 + var_8 * var_7;
       }
 
-      var4 = 1;
+      var_4 = 1;
     }
 
     if(is_player_on_ladder_with_distance_check(120)) {
-      var5 = min(var5, var2);
-      var4 = 1;
+      var_5 = min(var_5, var_2);
+      var_4 = 1;
     }
 
     if(is_not_safe_from_smoke()) {
-      var5 = min(var5, var3);
-      var4 = 1;
+      var_5 = min(var_5, var_3);
+      var_4 = 1;
     }
 
-    if(var4) {
-      self.baseaccuracy = var5;
+    if(var_4) {
+      self.baseaccuracy = var_5;
       continue;
     }
 
@@ -264,13 +264,13 @@ function tunnels_baseaccuracy_when_player_on_ladder_or_in_smoke_or_above_player_
 }
 
 function is_above_player_in_shaft() {
-  var0 = getEnt("shaft_top_level_enemy_grabber", "targetname");
-  return self istouching(var0) && self.origin[2] > level.player.origin[2];
+  var_0 = getEnt("shaft_top_level_enemy_grabber", "targetname");
+  return self istouching(var_0) && self.origin[2] > level.player.origin[2];
 }
 
-function is_player_on_ladder_with_distance_check(var0) {
-  var1 = scripts\engine\utility::distance_2d_squared(self getEye(), level.player getEye()) > var0 * var0;
-  return level.player isonladder() && var1;
+function is_player_on_ladder_with_distance_check(var_0) {
+  var_1 = scripts\engine\utility::distance_2d_squared(self getEye(), level.player getEye()) > var_0 * var_0;
+  return level.player isonladder() && var_1;
 }
 
 function is_not_safe_from_smoke() {
@@ -278,7 +278,7 @@ function is_not_safe_from_smoke() {
 }
 
 function shutup_when_hit() {
-  var0 = scripts\engine\utility::waittill_any_return("damage", "death");
+  var_0 = scripts\engine\utility::waittill_any_return("damage", "death");
 
   if(isDefined(self)) {
     self stoploopsound();
@@ -288,20 +288,20 @@ function shutup_when_hit() {
 }
 
 function get_alive_enemies() {
-  var0 = [];
-  var1 = getaiarray("axis");
+  var_0 = [];
+  var_1 = getaiarray("axis");
 
-  if(!isDefined(var1) || var1.size == 0) {
-    return var0;
+  if(!isDefined(var_1) || var_1.size == 0) {
+    return var_0;
   }
 
-  foreach(var3 in var1) {
-    if(isDefined(var3) && isalive(var3)) {
-      var0 = var3;
+  foreach(var_3 in var_1) {
+    if(isDefined(var_3) && isalive(var_3)) {
+      var_0 = var_3;
     }
   }
 
-  return var0;
+  return var_0;
 }
 
 function battlechatter_off_spawn_func() {
@@ -346,36 +346,36 @@ function flashlight_management() {
   }
 
   scripts\sp\nvg\nvg_ai::flashlight_off();
-  var0 = cos(30);
-  var1 = 0.1;
-  var2 = 2;
+  var_0 = cos(30);
+  var_1 = 0.1;
+  var_2 = 2;
 
   for(;;) {
     while(nullweapon(self.weapon)) {
-      wait var1;
+      wait var_1;
     }
 
-    if(is_aimming_at_enemy(var0) || is_aimming_forward(var0)) {
+    if(is_aimming_at_enemy(var_0) || is_aimming_forward(var_0)) {
       if(!istrue(self.flashlight)) {
         scripts\sp\nvg\nvg_ai::flashlight_on();
-        wait var2;
+        wait var_2;
       }
     } else if(istrue(self.flashlight)) {
       scripts\sp\nvg\nvg_ai::flashlight_off();
     }
 
-    wait var1;
+    wait var_1;
   }
 }
 
-function is_aimming_at_enemy(var0) {
-  var1 = "tag_weapon_right";
+function is_aimming_at_enemy(var_0) {
+  var_1 = "tag_weapon_right";
 
   if(isDefined(self.enemy) && (isPlayer(self.enemy) || isai(self.enemy)) && isalive(self.enemy)) {
-    var2 = ["j_mainroot", "j_spine4", "tag_eye"];
+    var_2 = ["j_mainroot", "j_spine4", "tag_eye"];
 
-    foreach(var4 in var2) {
-      if(!nullweapon(self.weapon) && isalive(self.enemy) && scripts\engine\utility::within_fov(self getEye(), self gettagangles(var1), self.enemy gettagorigin(var4), var0)) {
+    foreach(var_4 in var_2) {
+      if(!nullweapon(self.weapon) && isalive(self.enemy) && scripts\engine\utility::within_fov(self getEye(), self gettagangles(var_1), self.enemy gettagorigin(var_4), var_0)) {
         return true;
       }
     }
@@ -384,15 +384,15 @@ function is_aimming_at_enemy(var0) {
   return false;
 }
 
-function is_aimming_forward(var0) {
-  var1 = "tag_weapon_right";
-  var2 = (0, self gettagangles("TAG_ORIGIN")[1], 0);
-  var3 = vectorNormalize(anglesToForward(var2)) * 32;
-  var4 = self getEye() + var3;
-  var5 = self getEye();
-  var6 = self gettagangles(var1);
+function is_aimming_forward(var_0) {
+  var_1 = "tag_weapon_right";
+  var_2 = (0, self gettagangles("TAG_ORIGIN")[1], 0);
+  var_3 = vectorNormalize(anglesToForward(var_2)) * 32;
+  var_4 = self getEye() + var_3;
+  var_5 = self getEye();
+  var_6 = self gettagangles(var_1);
 
-  if(!nullweapon(self.weapon) && scripts\engine\utility::within_fov(var5, var6, var4, var0)) {
+  if(!nullweapon(self.weapon) && scripts\engine\utility::within_fov(var_5, var_6, var_4, var_0)) {
     return true;
   }
 
@@ -428,9 +428,9 @@ function tunnels_door_guy_fire_aware() {
 
   if(isDefined(self.script_parameters) && issubstr(self.script_parameters, "opendoor")) {
     scripts\common\utility::demeanor_override("sprint");
-    var0 = strtok(self.script_parameters, "_")[1];
-    var1 = getEntArray(var0, "targetname");
-    thread scripts\sp\maps\tunnels\zd30tunnels_utility::scripted_door_open(var0, 0);
+    var_0 = strtok(self.script_parameters, "_")[1];
+    var_1 = getEntArray(var_0, "targetname");
+    thread scripts\sp\maps\tunnels\zd30tunnels_utility::scripted_door_open(var_0, 0);
     wait 6;
     scripts\common\utility::clear_demeanor_override();
     thread fire_aware();
@@ -445,10 +445,10 @@ function tunnels_shaft_molotov_giveth() {
     return;
   }
 
-  var0 = 3;
-  var1 = get_touching_goal_vol();
+  var_0 = 3;
+  var_1 = get_touching_goal_vol();
 
-  if(isDefined(var1) && isDefined(var1.targetname) && int(strtok(var1.targetname, "_")[2]) >= var0) {
+  if(isDefined(var_1) && isDefined(var_1.targetname) && int(strtok(var_1.targetname, "_")[2]) >= var_0) {
     scripts\engine\sp\utility::set_grenadeweapon("molotov");
 
     if(scripts\engine\utility::cointoss()) {
@@ -462,45 +462,45 @@ function tunnels_shaft_molotov_giveth() {
   }
 }
 
-function basement_footsteps(var0, var1, var2) {
-  wait var1;
+function basement_footsteps(var_0, var_1, var_2) {
+  wait var_1;
 
   if(!isDefined(self)) {
     return;
   }
 
-  var3 = undefined;
+  var_3 = undefined;
 
-  if(var0 == "short") {
-    var4 = [];
+  if(var_0 == "short") {
+    var_4 = [];
     GscBinSkip0(0x2e, 0, "scn_aq_fs_running_tunnels_short_01");
   }
 
-  if(var1 == "long") {
-    var5 = [];
+  if(var_1 == "long") {
+    var_5 = [];
     GscBinSkip0(0x2e, 0, "scn_aq_fs_running_tunnels_long_01");
   }
 }
 
-function stop_sound_when_slowed(var0, var1) {
+function stop_sound_when_slowed(var_0, var_1) {
   self endon("death");
   self endon("entitydeleted");
 
-  if(isDefined(var1)) {
-    self endon(var1);
+  if(isDefined(var_1)) {
+    self endon(var_1);
   }
 
-  var2 = 0.25;
-  var3 = self.origin;
-  var4 = 0;
-  var0 *= var2;
+  var_2 = 0.25;
+  var_3 = self.origin;
+  var_4 = 0;
+  var_0 *= var_2;
 
   for(;;) {
-    wait var2;
-    var4 = length2d(self.origin - var3) / var2;
-    var3 = self.origin;
+    wait var_2;
+    var_4 = length2d(self.origin - var_3) / var_2;
+    var_3 = self.origin;
 
-    if(var4 < var0) {
+    if(var_4 < var_0) {
       self stopsounds();
       return;
     }
@@ -517,8 +517,8 @@ function basement_sneak_1() {
   thread basement_footsteps("short", 0.35);
   thread basement_sneak_1_backup_spawn();
   self waittill("goal");
-  var0 = getnode("basement_sneak_node", "targetname");
-  self setgoalpos(var0.origin);
+  var_0 = getnode("basement_sneak_node", "targetname");
+  self setgoalpos(var_0.origin);
   scripts\engine\sp\utility::set_maxfaceenemydist(48);
   scripts\common\utility::clear_demeanor_override();
   thread basement_left_flank_camper();
@@ -531,28 +531,28 @@ function basement_sneak_1_animated() {
   thread scripts\sp\maps\tunnels\zd30tunnels_utility::say_sequence(["dx_vom_aq1_tunnels_hunt_62", "dx_vom_aq2_tunnels_hunt_64"], 1);
   self.animname = "basement_right_to_left_runner";
   self.allowdeath = 1;
-  var0 = scripts\engine\utility::getStruct("basement_right_to_left", "targetname");
+  var_0 = scripts\engine\utility::getStruct("basement_right_to_left", "targetname");
   thread basement_footsteps("short", 0.35);
   thread basement_sneak_1_backup_spawn();
-  var0 thread scripts\common\anim::anim_single_solo(self, "basement_run");
+  var_0 thread scripts\common\anim::anim_single_solo(self, "basement_run");
   waitframe();
-  var1 = 0.37;
-  self setanimtime(scripts\engine\utility::getanim("basement_run"), var1);
+  var_1 = 0.37;
+  self setanimtime(scripts\engine\utility::getanim("basement_run"), var_1);
   self waittillmatch("single anim", "end");
   self clearenemy();
-  var2 = getnode("basement_sneak_node", "targetname");
-  self setgoalpos(var2.origin);
+  var_2 = getnode("basement_sneak_node", "targetname");
+  self setgoalpos(var_2.origin);
   scripts\engine\sp\utility::set_maxfaceenemydist(48);
   scripts\common\utility::clear_demeanor_override();
   thread basement_left_flank_camper();
 }
 
 function basement_sneak_1_backup_spawn() {
-  var0 = scripts\engine\utility::waittill_any_return("death", "goal");
+  var_0 = scripts\engine\utility::waittill_any_return("death", "goal");
 
-  if(isDefined(var0) && var0 == "death") {
-    var1 = getEnt("basement_sneak_1_backup", "targetname");
-    var1 notify("trigger", level.player);
+  if(isDefined(var_0) && var_0 == "death") {
+    var_1 = getEnt("basement_sneak_1_backup", "targetname");
+    var_1 notify("trigger", level.player);
     return;
   }
 }
@@ -565,8 +565,8 @@ function basement_sneak_1_backup() {
   scripts\engine\sp\utility::set_maxfaceenemydist(8);
   scripts\common\utility::demeanor_override("sprint");
   scripts\engine\sp\utility::set_goal_radius(32);
-  var0 = getnode("basement_sneak_node", "targetname");
-  self setgoalpos(var0.origin);
+  var_0 = getnode("basement_sneak_node", "targetname");
+  self setgoalpos(var_0.origin);
   self waittill("goal");
   scripts\engine\sp\utility::set_maxfaceenemydist(48);
   scripts\common\utility::clear_demeanor_override();
@@ -592,8 +592,8 @@ function basement_final_guy() {
   thread ai_slice_settings();
   scripts\engine\sp\utility::set_goal_radius(32);
   scripts\engine\utility::set_movement_speed(60);
-  var0 = getclosestpointonnavmesh(level.player.origin);
-  scripts\engine\sp\utility::set_goal_pos(var0);
+  var_0 = getclosestpointonnavmesh(level.player.origin);
+  scripts\engine\sp\utility::set_goal_pos(var_0);
   scripts\engine\sp\utility::set_goal_radius(32);
   wait 5;
   scripts\common\ai::reset_gunpose();
@@ -608,33 +608,33 @@ function basement_first_cell_guy() {
   self.meleechargedistvsplayer = 80;
   scripts\engine\sp\utility::set_goal_radius(32);
   thread spawn_right_flank_run_early_on_death_and_look_at_struct();
-  var0 = 16;
-  var1 = 50;
-  thread monitor_enemy_been_seen(var1);
-  var2 = getnodearray("basement_camper_exit_to", "targetname");
-  var3 = scripts\engine\utility::getclosest(self.origin, var2, 300);
-  var4 = undefined;
+  var_0 = 16;
+  var_1 = 50;
+  thread monitor_enemy_been_seen(var_1);
+  var_2 = getnodearray("basement_camper_exit_to", "targetname");
+  var_3 = scripts\engine\utility::getclosest(self.origin, var_2, 300);
+  var_4 = undefined;
 
-  if(isDefined(var3)) {
-    var4 = getEnt(var3.target, "targetname");
-    thread basement_guy_wake_by_trigger(var4);
-    var0 = 60;
+  if(isDefined(var_3)) {
+    var_4 = getEnt(var_3.target, "targetname");
+    thread basement_guy_wake_by_trigger(var_4);
+    var_0 = 60;
   }
 
   scripts\engine\utility::set_cautious_navigation(0);
   scripts\common\utility::demeanor_override("sprint");
   thread first_cell_look_at_watch();
-  wait var1 / 1000 + 0.05;
-  scripts\engine\sp\utility::add_wait(&scripts\engine\utility::waittill_any_timeout, var0, "bullethit", "grenade danger", "damage");
-  scripts\engine\sp\utility::add_wait(&scripts\engine\utility::waittill_any_timeout, var0, "enemybeenseen", "bulletwhizby", "wakebytrigger");
+  wait var_1 / 1000 + 0.05;
+  scripts\engine\sp\utility::add_wait(&scripts\engine\utility::waittill_any_timeout, var_0, "bullethit", "grenade danger", "damage");
+  scripts\engine\sp\utility::add_wait(&scripts\engine\utility::waittill_any_timeout, var_0, "enemybeenseen", "bulletwhizby", "wakebytrigger");
   scripts\engine\sp\utility::add_wait(&scripts\engine\sp\utility::waittill_msg, "first_cell_look_at");
   scripts\engine\sp\utility::do_wait_any();
   scripts\engine\utility::ent_flag_init("blind_fire_finished");
   thread basement_first_cell_guy_canned_once();
-  var5 = 120;
+  var_5 = 120;
 
   for(;;) {
-    if(scripts\engine\utility::distance_2d_squared(level.player.origin, self.origin) < var5) {
+    if(scripts\engine\utility::distance_2d_squared(level.player.origin, self.origin) < var_5) {
       self notify("blind_fire_right_stop_all");
       break;
     }
@@ -653,8 +653,8 @@ function basement_first_cell_guy() {
   scripts\engine\sp\utility::anim_stopanimScripted();
   scripts\common\utility::clear_demeanor_override();
   scripts\engine\utility::set_cautious_navigation(1);
-  var6 = getclosestpointonnavmesh(level.player.origin);
-  scripts\engine\sp\utility::set_goal_pos(var6);
+  var_6 = getclosestpointonnavmesh(level.player.origin);
+  scripts\engine\sp\utility::set_goal_pos(var_6);
   scripts\engine\sp\utility::set_goal_radius(32);
   thread tunnels_notify_first_cell_guy_death();
   scripts\engine\utility::flag_wait("first_cell_guy_passed");
@@ -670,11 +670,11 @@ function basement_first_cell_guy() {
 
 function first_cell_look_at_watch() {
   self endon("death");
-  var0 = getEnt("first_cell_look_at_trig", "targetname");
-  var1 = scripts\engine\utility::getStruct(var0.target, "targetname").origin;
-  var0 waittill("trigger");
+  var_0 = getEnt("first_cell_look_at_trig", "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname").origin;
+  var_0 waittill("trigger");
 
-  while(!scripts\engine\sp\utility::player_looking_at(var1, 0.95)) {
+  while(!scripts\engine\sp\utility::player_looking_at(var_1, 0.95)) {
     wait 0.05;
   }
 
@@ -687,21 +687,21 @@ function basement_first_cell_guy_canned_once() {
   self endon("blind_fire_right_stop_all");
   self.allowdeath = 1;
   self.animname = "basement_firstcell";
-  var0 = scripts\engine\utility::getStruct("basement_blind_fire_right", "targetname");
+  var_0 = scripts\engine\utility::getStruct("basement_blind_fire_right", "targetname");
   thread farah_first_cell_guy_warn_vo();
-  var0 scripts\sp\anim::anim_reach_solo(self, "blind_fire_right");
+  var_0 scripts\sp\anim::anim_reach_solo(self, "blind_fire_right");
   scripts\engine\utility::delaythread(0.25, &scripts\engine\sp\utility::smart_dialogue, "dx_vom_aq2_tunnels_ambusher_20");
-  var0 scripts\common\anim::anim_single_solo(self, "blind_fire_right");
+  var_0 scripts\common\anim::anim_single_solo(self, "blind_fire_right");
   scripts\engine\utility::ent_flag_set("blind_fire_finished");
 }
 
 function farah_first_cell_guy_warn_vo() {
   level endon("left_alcove_enemy");
-  var0 = anglesToForward(level.player.angles);
-  var1 = self.origin - level.player.origin;
-  var2 = scripts\engine\math::anglebetweenvectorssigned(var0, var1, (0, 0, 1));
+  var_0 = anglesToForward(level.player.angles);
+  var_1 = self.origin - level.player.origin;
+  var_2 = scripts\engine\math::anglebetweenvectorssigned(var_0, var_1, (0, 0, 1));
 
-  if(var2 < 20 && var2 > -110) {
+  if(var_2 < 20 && var_2 > -110) {
     level.farah scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter("dx_vom_far_basement_tunnel_combat1_50", 2, 0.5);
   }
 
@@ -722,20 +722,20 @@ function farah_first_cell_guy_warn_vo() {
 }
 
 function spawn_right_flank_run_early_on_death_and_look_at_struct() {
-  var0 = getEnt("right_flank_surprise_spawner_trig", "targetname");
-  var1 = scripts\engine\utility::getStruct("right_flank_surprise_lookat_spawn", "targetname").origin;
-  var0 endon("death");
-  var0 endon("trigger");
-  var0 endon("entitydeleted");
+  var_0 = getEnt("right_flank_surprise_spawner_trig", "targetname");
+  var_1 = scripts\engine\utility::getStruct("right_flank_surprise_lookat_spawn", "targetname").origin;
+  var_0 endon("death");
+  var_0 endon("trigger");
+  var_0 endon("entitydeleted");
   self waittill("death");
   wait 1.5;
 
-  while(!scripts\engine\sp\utility::player_looking_at(var1, 0.94)) {
+  while(!scripts\engine\sp\utility::player_looking_at(var_1, 0.94)) {
     wait 0.2;
   }
 
-  if(isDefined(var0)) {
-    var0 notify("trigger");
+  if(isDefined(var_0)) {
+    var_0 notify("trigger");
     return;
   }
 }
@@ -768,10 +768,10 @@ function basement_right_flank_runner() {
   thread scripts\sp\maps\tunnels\zd30tunnels_utility::delete_when_dist_away(level.player, 220);
 }
 
-function enemy_turn_off_lantern(var0) {
-  var1 = scripts\engine\utility::getStruct("right_flank_latern_shoot_at", "targetname").origin;
-  wait var0;
-  radiusdamage(var1, 4, 100, 99, level.player, "MOD_PISTOL_BULLET");
+function enemy_turn_off_lantern(var_0) {
+  var_1 = scripts\engine\utility::getStruct("right_flank_latern_shoot_at", "targetname").origin;
+  wait var_0;
+  radiusdamage(var_1, 4, 100, 99, level.player, "MOD_PISTOL_BULLET");
 }
 
 function send_running_if_player_skipped_farah_ceiling_scene() {
@@ -828,19 +828,19 @@ function basement_runner() {
   scripts\engine\sp\utility::set_goal_pos(self.origin);
   scripts\engine\sp\utility::set_goal_radius(16);
   wait 0.5;
-  var0 = getEnt("basement_runner_trig", "targetname");
-  var1 = scripts\engine\utility::getStruct(var0.target, "targetname").origin;
+  var_0 = getEnt("basement_runner_trig", "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname").origin;
 
   for(;;) {
     if(self hasenemybeenseen(50) || self cansee(level.player)) {
       break;
     }
 
-    if(isDefined(var0) && level.player istouching(var0) && scripts\engine\sp\utility::player_looking_at(var1, 0.9)) {
+    if(isDefined(var_0) && level.player istouching(var_0) && scripts\engine\sp\utility::player_looking_at(var_1, 0.9)) {
       break;
     }
 
-    if(istrue(var0.skipped)) {
+    if(istrue(var_0.skipped)) {
       break;
     }
 
@@ -851,15 +851,15 @@ function basement_runner() {
     wait 0.05;
   }
 
-  var2 = randomfloatrange(1, 1.6);
-  thread basement_footsteps("long", var2);
+  var_2 = randomfloatrange(1, 1.6);
+  thread basement_footsteps("long", var_2);
 
   if(isDefined(level.basement_runners[0]) && level.basement_runners[0] == self) {
     thread scripts\sp\maps\tunnels\zd30tunnels_utility::ai_playSound("dx_vom_aq1_tunnels_search_112");
   }
 
-  var3 = getnode("basement_coward_node", "targetname");
-  self setgoalnode(var3);
+  var_3 = getnode("basement_coward_node", "targetname");
+  self setgoalnode(var_3);
   self.dontshootwhilemoving = 1;
   scripts\engine\sp\utility::set_maxfaceenemydist(8);
   scripts\engine\sp\utility::set_grenadeammo(0);
@@ -867,8 +867,8 @@ function basement_runner() {
   self.combatmode = "no_cover";
   self.script_combatmode = "no_cover";
   self waittill("goal");
-  var4 = 750;
-  thread scripts\sp\maps\tunnels\zd30tunnels_utility::delete_when_dist_away(level.player, var4);
+  var_4 = 750;
+  thread scripts\sp\maps\tunnels\zd30tunnels_utility::delete_when_dist_away(level.player, var_4);
 }
 
 function basement_coward() {
@@ -883,19 +883,19 @@ function basement_coward() {
   thread coward_monitor_if_player_is_close(200);
   thread coward_monitor_if_player_shot_at();
   thread coward_monitor_if_player_look_at();
-  var0 = scripts\engine\utility::waittill_any_return("bulletwhizby", "bullethit", "player_too_close", "player_shot_at", "player_look_at", "weapon_fired");
+  var_0 = scripts\engine\utility::waittill_any_return("bulletwhizby", "bullethit", "player_too_close", "player_shot_at", "player_look_at", "weapon_fired");
   thread basement_footsteps("long", 0.5, "damage");
   self.escape_now = 1;
 
   if(isDefined(level.basement_runners)) {
-    foreach(var2 in level.basement_runners) {
-      if(isDefined(var2) && isalive(var2)) {
-        var2.escape_now = 1;
+    foreach(var_2 in level.basement_runners) {
+      if(isDefined(var_2) && isalive(var_2)) {
+        var_2.escape_now = 1;
       }
     }
   }
 
-  if(isDefined(var0) && var0 == "weapon_fired") {
+  if(isDefined(var_0) && var_0 == "weapon_fired") {
     thread scripts\engine\sp\utility::set_ignoreall(1);
     scripts\engine\utility::delaythread(1, &scripts\engine\sp\utility::set_ignoreall, 0);
   }
@@ -907,81 +907,81 @@ function basement_coward() {
   scripts\engine\sp\utility::set_maxfaceenemydist(8);
   scripts\engine\sp\utility::set_grenadeammo(0);
   self waittill("goal");
-  var4 = 400;
-  thread scripts\sp\maps\tunnels\zd30tunnels_utility::delete_when_dist_away(level.player, var4);
+  var_4 = 400;
+  thread scripts\sp\maps\tunnels\zd30tunnels_utility::delete_when_dist_away(level.player, var_4);
 }
 
-function miss_player_in_the_back(var0, var1, var2) {
+function miss_player_in_the_back(var_0, var_1, var_2) {
   self endon("death");
 
-  if(isDefined(var0)) {
-    self endon(var0);
+  if(isDefined(var_0)) {
+    self endon(var_0);
   }
 
-  if(!isDefined(var2)) {
-    var2 = 99999;
+  if(!isDefined(var_2)) {
+    var_2 = 99999;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 128;
+  if(!isDefined(var_1)) {
+    var_1 = 128;
   }
 
-  while(var2 > 0) {
+  while(var_2 > 0) {
     if(scripts\engine\sp\utility::player_looking_at(self getEye(), 0.8) || self hasenemybeenseen(50)) {
       break;
     }
 
-    if(scripts\engine\utility::distance_2d_squared(self.origin, level.player.origin) < var1 * var1) {
+    if(scripts\engine\utility::distance_2d_squared(self.origin, level.player.origin) < var_1 * var_1) {
       break;
     }
 
     self.baseaccuracy = 0.2;
-    var2 -= 0.1;
+    var_2 -= 0.1;
     wait 0.1;
   }
 
   scripts\sp\maps\tunnels\zd30tunnels_utility::reset_baseaccuracy();
 }
 
-function dont_shoot_player_in_the_back(var0, var1, var2) {
+function dont_shoot_player_in_the_back(var_0, var_1, var_2) {
   self endon("death");
 
-  if(isDefined(var0)) {
-    self endon(var0);
+  if(isDefined(var_0)) {
+    self endon(var_0);
   }
 
-  if(!isDefined(var2)) {
-    var2 = 99999;
+  if(!isDefined(var_2)) {
+    var_2 = 99999;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 128;
+  if(!isDefined(var_1)) {
+    var_1 = 128;
   }
 
-  while(var2 > 0) {
+  while(var_2 > 0) {
     if(scripts\engine\sp\utility::player_looking_at(self getEye(), 0.8) || self hasenemybeenseen(50)) {
       break;
     }
 
-    if(scripts\engine\utility::distance_2d_squared(self.origin, level.player.origin) < var1 * var1) {
+    if(scripts\engine\utility::distance_2d_squared(self.origin, level.player.origin) < var_1 * var_1) {
       break;
     }
 
     thread scripts\engine\sp\utility::enable_dontevershoot();
-    var2 -= 0.1;
+    var_2 -= 0.1;
     wait 0.1;
   }
 
   thread scripts\engine\sp\utility::disable_dontevershoot();
 }
 
-function coward_monitor_if_player_is_close(var0) {
+function coward_monitor_if_player_is_close(var_0) {
   self notify("coward_monitor_if_player_is_close");
   self endon("coward_monitor_if_player_is_close");
   self endon("death");
 
   for(;;) {
-    if(distancesquared(level.player.origin, self.origin) < var0 * var0) {
+    if(distancesquared(level.player.origin, self.origin) < var_0 * var_0) {
       break;
     }
 
@@ -997,9 +997,9 @@ function coward_monitor_if_player_shot_at() {
   self endon("death");
 
   for(;;) {
-    self waittill("damage", var0, var1);
+    self waittill("damage", var_0, var_1);
 
-    if(isDefined(var1) && isPlayer(var1)) {
+    if(isDefined(var_1) && isPlayer(var_1)) {
       break;
     }
   }
@@ -1023,7 +1023,7 @@ function coward_monitor_if_player_look_at() {
   self notify("player_look_at");
 }
 
-function zdt_rush_guy(var0) {
+function zdt_rush_guy(var_0) {
   self endon("death");
   self notify("behavior_reset");
   self endon("behavior_reset");
@@ -1034,7 +1034,7 @@ function zdt_rush_guy(var0) {
   self setgoalentity(level.player, 500);
   scripts\engine\sp\utility::set_goal_radius(32);
 
-  if(!istrue(var0)) {
+  if(!istrue(var_0)) {
     self.meleechargedistvsplayer = 75;
   }
 
@@ -1042,12 +1042,12 @@ function zdt_rush_guy(var0) {
   self.script_combatmode = "no_cover";
   scripts\common\utility::demeanor_override("sprint");
   scripts\engine\sp\utility::set_grenadeammo(0);
-  var1 = 180;
+  var_1 = 180;
 
   for(;;) {
-    if(distancesquared(self.origin, level.player.origin) < var1 * var1) {
-      var2 = [];
-      GscBinSkip0(0x2e, var2.size, "dx_vom_aq1_tunnels_search_210");
+    if(distancesquared(self.origin, level.player.origin) < var_1 * var_1) {
+      var_2 = [];
+      GscBinSkip0(0x2e, var_2.size, "dx_vom_aq1_tunnels_search_210");
     }
 
     wait 0.2;
@@ -1055,18 +1055,18 @@ function zdt_rush_guy(var0) {
 }
 
 function basement_ceiling_guy() {
-  var0 = getnode("ceiling_escape_node", "targetname");
+  var_0 = getnode("ceiling_escape_node", "targetname");
   scripts\engine\sp\utility::set_favoriteenemy(level.player);
   scripts\common\utility::demeanor_override("sprint");
   level.basement_ceiling_guy = self;
-  var1 = 150;
+  var_1 = 150;
 
   if(self.script_parameters == "ceiling_guy1") {
     thread scripts\sp\maps\tunnels\zd30tunnels_utility::enemy_force_pistol();
     thread delete_basement_runner_wait_trig();
     thread basement_ceiling_ignoreme_think();
     scripts\engine\sp\utility::set_grenadeammo(2);
-    var1 = 225;
+    var_1 = 225;
   }
 
   if(self.script_parameters == "ceiling_guy3") {
@@ -1079,28 +1079,28 @@ function basement_ceiling_guy() {
   wait 0.5;
   scripts\engine\sp\utility::set_goal_pos(self.origin);
   scripts\engine\sp\utility::set_goal_radius(32);
-  thread ceiling_stance_think(var0, var1);
+  thread ceiling_stance_think(var_0, var_1);
   thread scripts\engine\sp\utility::name_hide();
   self waittill("death");
 
   if(isDefined(self) && isDefined(self.origin)) {
-    var2 = getnodesinradius(self.origin - (0, 0, 20), 48, 0, 64);
-    var3 = undefined;
+    var_2 = getnodesinradius(self.origin - (0, 0, 20), 48, 0, 64);
+    var_3 = undefined;
 
-    if(isDefined(var2) && var2.size > 0) {
-      var3 = var2[0];
+    if(isDefined(var_2) && var_2.size > 0) {
+      var_3 = var_2[0];
     }
 
-    var4 = self gettagorigin("j_chest");
+    var_4 = self gettagorigin("j_chest");
 
-    if(!isDefined(var4)) {
-      var4 = self.origin;
+    if(!isDefined(var_4)) {
+      var_4 = self.origin;
     }
 
-    var5 = 32;
+    var_5 = 32;
 
-    if(isDefined(var3) && distancesquared(var3.origin, var4) < var5 * var5) {
-      if(isnodeoccupied(var3) && isDefined(showcinematicletterboxing(var3)) && showcinematicletterboxing(var3) == self) {
+    if(isDefined(var_3) && distancesquared(var_3.origin, var_4) < var_5 * var_5) {
+      if(isnodeoccupied(var_3) && isDefined(showcinematicletterboxing(var_3)) && showcinematicletterboxing(var_3) == self) {
         self.animname = "ceiling_" + strtok(self.script_parameters, "_")[1];
         self.deathanim = level.scr_anim[self.animname]["ceiling_death"];
         self.ceiling_custom_death_success = 1;
@@ -1119,16 +1119,16 @@ function basement_ceiling_guy() {
 function ceiling_guy_warning_shots() {
   self endon("death");
   self endon("entitydeleted");
-  var0 = getEnt("ceiling_enemy_shoot_at", "targetname");
+  var_0 = getEnt("ceiling_enemy_shoot_at", "targetname");
   scripts\engine\utility::flag_wait("ceiling_warning_shots");
   wait 0.65;
-  var1 = 1;
+  var_1 = 1;
 
-  while(!self hasenemybeenseen(50) && var1 > 0) {
-    self shoot(1, var0);
-    var2 = randomfloatrange(0.15, 0.25);
-    wait var2;
-    var1 -= var2;
+  while(!self hasenemybeenseen(50) && var_1 > 0) {
+    self shoot(1, var_0);
+    var_2 = randomfloatrange(0.15, 0.25);
+    wait var_2;
+    var_1 -= var_2;
   }
 
   wait 0.3;
@@ -1145,7 +1145,7 @@ function ceiling_infinite_ammo() {
   }
 }
 
-function ceiling_guy_run_away_if_losses_player(var0) {
+function ceiling_guy_run_away_if_losses_player(var_0) {
   self endon("death");
   self endon("entitydeleted");
 
@@ -1159,10 +1159,10 @@ function ceiling_guy_run_away_if_losses_player(var0) {
       wait 0.1;
     }
 
-    var1 = gettime();
+    var_1 = gettime();
 
     while(!self cansee(level.player)) {
-      if(gettime() - var1 > var0 * 1000) {
+      if(gettime() - var_1 > var_0 * 1000) {
         self.escape_now = 1;
         return;
       }
@@ -1174,7 +1174,7 @@ function ceiling_guy_run_away_if_losses_player(var0) {
   }
 }
 
-function enemy_delay_shooting(var0) {
+function enemy_delay_shooting(var_0) {
   self endon("death");
   scripts\engine\sp\utility::enable_dontevershoot();
 
@@ -1183,10 +1183,10 @@ function enemy_delay_shooting(var0) {
   }
 
   wait 0.2;
-  var1 = cos(20);
+  var_1 = cos(20);
 
-  if(!scripts\engine\sp\utility::player_looking_at(self getEye(), var1, 1)) {
-    wait var0;
+  if(!scripts\engine\sp\utility::player_looking_at(self getEye(), var_1, 1)) {
+    wait var_0;
   }
 
   scripts\engine\sp\utility::disable_dontevershoot();
@@ -1195,10 +1195,10 @@ function enemy_delay_shooting(var0) {
 function basement_ceiling_ignoreme_think() {
   self endon("death");
   self.ignoreme = 1;
-  var0 = self.health;
+  var_0 = self.health;
 
   while(isDefined(level.farah) && isalive(level.farah)) {
-    if(self.health != var0) {
+    if(self.health != var_0) {
       break;
     }
 
@@ -1218,10 +1218,10 @@ function basement_ceiling_ignoreme_think() {
 
 function delete_basement_runner_wait_trig() {
   self waittill("death");
-  var0 = getEnt("basement_runner_trig", "targetname");
+  var_0 = getEnt("basement_runner_trig", "targetname");
 
-  if(isDefined(var0)) {
-    var0.skipped = 1;
+  if(isDefined(var_0)) {
+    var_0.skipped = 1;
     return;
   }
 }
@@ -1232,7 +1232,7 @@ function basement_ceiling_guy_flashlight() {
 }
 
 function ceiling_guy_flashlight_helper() {
-  var0 = 1;
+  var_0 = 1;
 
   for(;;) {
     waitframe();
@@ -1241,7 +1241,7 @@ function ceiling_guy_flashlight_helper() {
       continue;
     }
 
-    if(gettime() - self.last_weapon_fire_time > var0 * 1000 && istrue(self.flashlight)) {
+    if(gettime() - self.last_weapon_fire_time > var_0 * 1000 && istrue(self.flashlight)) {
       scripts\sp\nvg\nvg_ai::flashlight_off();
     }
   }
@@ -1251,10 +1251,10 @@ function ceiling_guy_corpse_tripwire() {
   self endon("ceiling_corpse_tripwire_failed");
   self waittill("ceiling_corpse_tripwire");
   wait 1.25;
-  var0 = getEnt("basement_left_flank_tripwire_setoff_trig", "script_noteworthy");
+  var_0 = getEnt("basement_left_flank_tripwire_setoff_trig", "script_noteworthy");
 
-  if(isDefined(var0)) {
-    var0 notify("trigger", level.farah);
+  if(isDefined(var_0)) {
+    var_0 notify("trigger", level.farah);
     return;
   }
 }
@@ -1264,44 +1264,44 @@ function basement_guy() {
   self.reacts_to_rush = 1;
 }
 
-function basement_left_flank_camper(var0) {
+function basement_left_flank_camper(var_0) {
   self endon("death");
   thread ai_slice_settings();
   scripts\engine\sp\utility::set_goal_radius(32);
-  var1 = 16;
-  var2 = 50;
-  thread monitor_enemy_been_seen(var2);
-  var3 = getnodearray("basement_camper_exit_to", "targetname");
-  var4 = scripts\engine\utility::getclosest(self.origin, var3, 300);
-  var5 = undefined;
+  var_1 = 16;
+  var_2 = 50;
+  thread monitor_enemy_been_seen(var_2);
+  var_3 = getnodearray("basement_camper_exit_to", "targetname");
+  var_4 = scripts\engine\utility::getclosest(self.origin, var_3, 300);
+  var_5 = undefined;
 
-  if(isDefined(var4)) {
-    var5 = getEnt(var4.target, "targetname");
-    thread basement_guy_wake_by_trigger(var5);
-    var1 = 60;
+  if(isDefined(var_4)) {
+    var_5 = getEnt(var_4.target, "targetname");
+    thread basement_guy_wake_by_trigger(var_5);
+    var_1 = 60;
   }
 
   thread basement_left_flank_camper_long_death_think();
-  wait var2 / 1000 + 0.05;
-  var6 = scripts\engine\utility::waittill_any_timeout(var1, "bullethit", "grenade danger", "damage", "enemybeenseen", "wakebytrigger");
+  wait var_2 / 1000 + 0.05;
+  var_6 = scripts\engine\utility::waittill_any_timeout(var_1, "bullethit", "grenade danger", "damage", "enemybeenseen", "wakebytrigger");
   level notify("left_alcove_enemy");
 
   if(!level.player scripts\engine\trace::can_see_origin(self getEye(), 0)) {
     level.farah scripts\engine\utility::delaythread(0.3, &scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter, "dx_vom_far_basement_tunnel_combat1_40", 1, 1);
   }
 
-  if(istrue(var0)) {
-    var7 = length(level.player getvelocity());
-    var8 = clamp(var7, 60, 120);
+  if(istrue(var_0)) {
+    var_7 = length(level.player getvelocity());
+    var_8 = clamp(var_7, 60, 120);
   } else {
-    var8 = 60;
+    var_8 = 60;
   }
 
-  scripts\engine\utility::set_movement_speed(var8);
-  var9 = getclosestpointonnavmesh(level.player.origin);
-  scripts\engine\sp\utility::set_goal_pos(var9);
+  scripts\engine\utility::set_movement_speed(var_8);
+  var_9 = getclosestpointonnavmesh(level.player.origin);
+  scripts\engine\sp\utility::set_goal_pos(var_9);
   scripts\engine\sp\utility::set_goal_radius(32);
-  wait var2;
+  wait var_2;
   scripts\common\ai::reset_gunpose();
   scripts\engine\sp\utility::set_goal_radius(256);
   scripts\engine\utility::set_movement_speed(160);
@@ -1316,34 +1316,34 @@ function basement_left_flank_camper_long_death_think() {
   scripts\engine\sp\utility::disable_long_death();
 }
 
-function basement_guy_wake_by_trigger(var0) {
+function basement_guy_wake_by_trigger(var_0) {
   self endon("death");
 
   for(;;) {
-    var0 waittill("trigger", var1);
+    var_0 waittill("trigger", var_1);
 
-    if(isDefined(var1) && isPlayer(var1)) {
+    if(isDefined(var_1) && isPlayer(var_1)) {
       break;
     }
   }
 
-  if(isDefined(var0.script_noteworthy)) {
-    thread scripts\sp\maps\tunnels\zd30tunnels_utility::ai_playSound(var0.script_noteworthy);
+  if(isDefined(var_0.script_noteworthy)) {
+    thread scripts\sp\maps\tunnels\zd30tunnels_utility::ai_playSound(var_0.script_noteworthy);
   }
 
   self notify("wakebytrigger");
 }
 
-function ceiling_stance_think(var0, var1) {
+function ceiling_stance_think(var_0, var_1) {
   self endon("death");
 
   for(;;) {
     self allowedstances("prone");
 
-    if(isDefined(level.player) && (distance2d(level.player.origin, self.origin) < var1 || istrue(self.escape_now))) {
+    if(isDefined(level.player) && (distance2d(level.player.origin, self.origin) < var_1 || istrue(self.escape_now))) {
       self allowedstances("crouch", "stand");
       scripts\common\utility::demeanor_override("sprint");
-      scripts\engine\sp\utility::set_goal_node(var0);
+      scripts\engine\sp\utility::set_goal_node(var_0);
       scripts\engine\sp\utility::set_goal_radius(16);
       self waittill("goal");
       self delete();
@@ -1356,9 +1356,9 @@ function ceiling_stance_think(var0, var1) {
 
 function player_call_out_ceiling_guy_on_damage() {
   for(;;) {
-    self waittill("damage", var0, var1, var2, var3, var4);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
-    if(!isDefined(var1) || var1 != level.player || issubstr(var4, "MOD_GRENADE")) {
+    if(!isDefined(var_1) || var_1 != level.player || issubstr(var_4, "MOD_GRENADE")) {
       wait 0.05;
       continue;
     }
@@ -1383,11 +1383,11 @@ function storage_spotter() {
   self.animname = "storage_spotter";
   self.allowdeath = 1;
   self.health = 10;
-  var0 = scripts\engine\utility::getStruct("storage_spotter", "targetname");
-  var1 = scripts\engine\utility::getStruct(var0.target, "targetname");
-  var0 thread scripts\common\anim::anim_first_frame_solo(self, "storage_spotter_run");
+  var_0 = scripts\engine\utility::getStruct("storage_spotter", "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
+  var_0 thread scripts\common\anim::anim_first_frame_solo(self, "storage_spotter_run");
 
-  while(!scripts\engine\sp\utility::player_looking_at(var1.origin, 0.9) && !self hasenemybeenseen(50)) {
+  while(!scripts\engine\sp\utility::player_looking_at(var_1.origin, 0.9) && !self hasenemybeenseen(50)) {
     if(scripts\engine\utility::flag("storage_reached")) {
       break;
     }
@@ -1395,25 +1395,25 @@ function storage_spotter() {
     wait 0.05;
   }
 
-  var2 = getEnt("storage_runner_trig", "targetname");
-  var2 thread scripts\engine\sp\utility::notify_delay("trigger", 0.85);
-  var0 thread scripts\common\anim::anim_single_solo(self, "storage_spotter_run");
+  var_2 = getEnt("storage_runner_trig", "targetname");
+  var_2 thread scripts\engine\sp\utility::notify_delay("trigger", 0.85);
+  var_0 thread scripts\common\anim::anim_single_solo(self, "storage_spotter_run");
   waitframe();
   self setanimtime(scripts\engine\utility::getanim("storage_spotter_run"), 0.1);
-  var3 = scripts\engine\utility::getStruct("teapot_whisper", "targetname");
-  var4 = var3.origin;
-  var5 = var4 + anglesToForward(var3.angles) * 160;
-  scripts\engine\utility::delaythread(1, &scripts\engine\utility::play_sound_in_space, "dx_vom_aq1_tunnels_search_112", var5);
+  var_3 = scripts\engine\utility::getStruct("teapot_whisper", "targetname");
+  var_4 = var_3.origin;
+  var_5 = var_4 + anglesToForward(var_3.angles) * 160;
+  scripts\engine\utility::delaythread(1, &scripts\engine\utility::play_sound_in_space, "dx_vom_aq1_tunnels_search_112", var_5);
   self.ignoreall = 0;
   self.ignoreme = 0;
-  var6 = gettime();
-  var7 = getanimlength(scripts\engine\utility::getanim("storage_spotter_run"));
+  var_6 = gettime();
+  var_7 = getanimlength(scripts\engine\utility::getanim("storage_spotter_run"));
   thread coward_monitor_if_player_is_close(200);
   scripts\engine\sp\utility::add_wait(&scripts\engine\utility::waittill_any, "damage", "bulletwhizby", "bullethit", "player_too_close");
   scripts\engine\sp\utility::add_wait(&scripts\engine\utility::waittillmatch_any_return, "single anim", "end");
   scripts\engine\sp\utility::do_wait_any();
 
-  if((gettime() - var6) / 1000 < var7 * 1000) {
+  if((gettime() - var_6) / 1000 < var_7 * 1000) {
     scripts\engine\sp\utility::anim_stopanimScripted();
 
     if(scripts\engine\utility::distance_2d_squared(level.player.origin, self.origin) < 40000) {
@@ -1427,14 +1427,14 @@ function storage_spotter() {
     }
   }
 
-  var8 = getnode("storage_spotter_goto", "targetname");
-  scripts\engine\sp\utility::set_goal_pos(var8.origin);
+  var_8 = getnode("storage_spotter_goto", "targetname");
+  scripts\engine\sp\utility::set_goal_pos(var_8.origin);
   scripts\engine\sp\utility::set_goal_radius(32);
   wait 0.05;
   thread storage_runner(0);
 }
 
-function storage_runner(var0) {
+function storage_runner(var_0) {
   self endon("death");
 
   if(!isDefined(level.storage_runners)) {
@@ -1449,16 +1449,16 @@ function storage_runner(var0) {
   thread coward_monitor_if_player_is_close(200);
   thread coward_monitor_if_player_shot_at();
 
-  if(!isDefined(var0) || var0) {
+  if(!isDefined(var_0) || var_0) {
     thread basement_footsteps("long", 2.35, "runner_awaken");
   }
 
-  var1 = scripts\engine\utility::waittill_any_return("goal", "bulletwhizby", "bullethit", "grenade danger", "player_too_close", "player_shot_at");
+  var_1 = scripts\engine\utility::waittill_any_return("goal", "bulletwhizby", "bullethit", "grenade danger", "player_too_close", "player_shot_at");
   self notify("runner_awaken");
   self.ignoreall = 0;
   self.ignoreme = 0;
 
-  if(!istrue(self.cleared_storage) && isDefined(var1) && (var1 == "player_shot_at" || var1 == "bullethit" || var1 == "player_too_close" || var1 == "bulletwhizby")) {
+  if(!istrue(self.cleared_storage) && isDefined(var_1) && (var_1 == "player_shot_at" || var_1 == "bullethit" || var_1 == "player_too_close" || var_1 == "bulletwhizby")) {
     scripts\common\utility::clear_demeanor_override();
     scripts\common\utility::demeanor_override("cqb");
     scripts\engine\sp\utility::set_favoriteenemy(level.player);
@@ -1509,16 +1509,16 @@ function storage_ambush_runner() {
   scripts\engine\sp\utility::set_goal_radius(16);
   self.ignoreall = 1;
   self.ignoreme = 1;
-  var0 = scripts\engine\utility::waittill_any_return("run_now", "bulletwhizby", "bullethit", "grenade danger", "damage");
+  var_0 = scripts\engine\utility::waittill_any_return("run_now", "bulletwhizby", "bullethit", "grenade danger", "damage");
 
-  if(!isDefined(var0) || var0 != "run_now") {
+  if(!isDefined(var_0) || var_0 != "run_now") {
     self.ignoreall = 0;
     self.ignoreme = 0;
   }
 
   scripts\engine\sp\utility::set_maxfaceenemydist(8);
-  var1 = getnode("storage_room_2_goto_delete_node", "targetname");
-  scripts\engine\sp\utility::set_goal_pos(var1.origin);
+  var_1 = getnode("storage_room_2_goto_delete_node", "targetname");
+  scripts\engine\sp\utility::set_goal_pos(var_1.origin);
   thread basement_footsteps("long", 0.5);
   self waittill("goal");
   self.ignoreall = 0;
@@ -1563,9 +1563,9 @@ function storage_ambusher() {
   if(scripts\engine\utility::flag("storage_room_2_entered")) {
     scripts\engine\sp\utility::set_goal_radius(200);
     wait 2;
-    var0 = getEnt("storage_flank_weapon_watch", "targetname");
+    var_0 = getEnt("storage_flank_weapon_watch", "targetname");
 
-    while(level.player istouching(var0)) {
+    while(level.player istouching(var_0)) {
       wait 0.25;
     }
 
@@ -1574,19 +1574,19 @@ function storage_ambusher() {
     return;
   }
 
-  var1 = randomintrange(8, 12);
-  scripts\engine\utility::flag_wait_or_timeout("storage_room_2_entered", var1);
+  var_1 = randomintrange(8, 12);
+  scripts\engine\utility::flag_wait_or_timeout("storage_room_2_entered", var_1);
   self setgoalentity(level.player, 50);
   scripts\engine\sp\utility::set_goal_radius(128);
 }
 
-function storage_ambusher_advance_watch(var0, var1) {
+function storage_ambusher_advance_watch(var_0, var_1) {
   self endon("death");
-  wait var0;
-  var2 = scripts\engine\utility::getStruct("storage_ambush_advance_look_at", "targetname").origin;
+  wait var_0;
+  var_2 = scripts\engine\utility::getStruct("storage_ambush_advance_look_at", "targetname").origin;
 
   for(;;) {
-    while(!scripts\engine\sp\utility::player_looking_at(var2)) {
+    while(!scripts\engine\sp\utility::player_looking_at(var_2)) {
       if(scripts\engine\utility::flag("storage_room_2_entered") || scripts\engine\utility::flag("storage_flank_weapon_fired")) {
         break;
       }
@@ -1594,17 +1594,17 @@ function storage_ambusher_advance_watch(var0, var1) {
       wait 0.05;
     }
 
-    var3 = 0;
+    var_3 = 0;
 
-    while(scripts\engine\sp\utility::player_looking_at(var2)) {
+    while(scripts\engine\sp\utility::player_looking_at(var_2)) {
       if(scripts\engine\utility::flag("storage_room_2_entered") || scripts\engine\utility::flag("storage_flank_weapon_fired")) {
         break;
       }
 
-      var3 += 0.05;
+      var_3 += 0.05;
       wait 0.05;
 
-      if(var3 >= var1) {
+      if(var_3 >= var_1) {
         scripts\engine\utility::ent_flag_set("advance");
         return;
       }
@@ -1680,39 +1680,39 @@ function storage_ambusher_blind_fire() {
     wait 8;
   }
 
-  var0 = getEnt("storage_flank_weapon_watch", "targetname");
+  var_0 = getEnt("storage_flank_weapon_watch", "targetname");
 
-  while(level.player istouching(var0)) {
+  while(level.player istouching(var_0)) {
     wait 1;
   }
 
   zdt_rush_guy();
 }
 
-function storage_ambusher_blind_fire_anim(var0, var1, var2, var3) {
+function storage_ambusher_blind_fire_anim(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("entitydeleted");
-  self endon(var1 + "_stop_all");
+  self endon(var_1 + "_stop_all");
   thread god_until_damage_by_player();
 
-  if(!isDefined(var2)) {
-    var2 = 5;
+  if(!isDefined(var_2)) {
+    var_2 = 5;
   }
 
-  if(!isDefined(var3)) {
-    var3 = 8;
+  if(!isDefined(var_3)) {
+    var_3 = 8;
   }
 
-  self.animname = var0;
-  var4 = scripts\engine\utility::getStruct(var1, "targetname");
+  self.animname = var_0;
+  var_4 = scripts\engine\utility::getStruct(var_1, "targetname");
 
   for(;;) {
-    var5 = randomfloatrange(var2, var3);
-    var4 thread scripts\common\anim::anim_loop_solo(self, var1 + "_idle", var1 + "_stop_idle");
-    wait var5;
+    var_5 = randomfloatrange(var_2, var_3);
+    var_4 thread scripts\common\anim::anim_loop_solo(self, var_1 + "_idle", var_1 + "_stop_idle");
+    wait var_5;
     scripts\engine\utility::ent_flag_wait("blind_fire_start");
-    var4 notify(var1 + "_stop_idle");
-    var4 scripts\common\anim::anim_single_solo(self, var1);
+    var_4 notify(var_1 + "_stop_idle");
+    var_4 scripts\common\anim::anim_single_solo(self, var_1);
   }
 }
 
@@ -1730,52 +1730,52 @@ function god_until_damage_by_player() {
 
 function player_shot_monitor() {
   for(;;) {
-    self waittill("damage", var0, var1);
+    self waittill("damage", var_0, var_1);
 
-    if(isDefined(var1) && isPlayer(var1)) {
+    if(isDefined(var_1) && isPlayer(var_1)) {
       self notify("shot_by_player");
       return;
     }
   }
 }
 
-function storage_ambusher_fake_shoot(var0) {
+function storage_ambusher_fake_shoot(var_0) {
   self endon("death");
   self endon("entitydeleted");
 
-  if(isDefined(var0)) {
-    self endon(var0);
+  if(isDefined(var_0)) {
+    self endon(var_0);
   }
 
-  var1 = scripts\engine\utility::random(scripts\engine\utility::getStructArray("storage_ambusher_fake_shoot_at", "targetname")).origin;
-  var2 = spawn("script_origin", var1);
-  thread shoot_at_ent_delete_on_flag(var2, var0);
+  var_1 = scripts\engine\utility::random(scripts\engine\utility::getStructArray("storage_ambusher_fake_shoot_at", "targetname")).origin;
+  var_2 = spawn("script_origin", var_1);
+  thread shoot_at_ent_delete_on_flag(var_2, var_0);
 
   for(;;) {
-    if(!storage_ambusher_fake_can_shoot(var0)) {
+    if(!storage_ambusher_fake_can_shoot(var_0)) {
       self clearentitytarget();
       scripts\engine\sp\utility::set_favoriteenemy(level.player);
       wait 0.05;
 
-      while(!storage_ambusher_fake_can_shoot(var0)) {
+      while(!storage_ambusher_fake_can_shoot(var_0)) {
         wait 0.2;
       }
     }
 
-    var2.origin = get_random_pos(var1, 0, 32);
+    var_2.origin = get_random_pos(var_1, 0, 32);
     wait 0.05;
 
-    if(!isDefined(var2)) {
+    if(!isDefined(var_2)) {
       return;
     }
 
-    self setentitytarget(var2, 1);
+    self setentitytarget(var_2, 1);
     wait randomfloatrange(0.1, 0.2);
   }
 }
 
-function shoot_at_ent_delete_on_flag(var0, var1) {
-  self waittill(var1);
+function shoot_at_ent_delete_on_flag(var_0, var_1) {
+  self waittill(var_1);
   waitframe();
 
   if(isDefined(self) && isalive(self)) {
@@ -1783,31 +1783,31 @@ function shoot_at_ent_delete_on_flag(var0, var1) {
     scripts\engine\sp\utility::set_favoriteenemy(level.player);
   }
 
-  var0 delete();
+  var_0 delete();
 }
 
-function get_random_pos(var0, var1, var2) {
-  var3 = randomintrange(var1, var2);
-  var4 = self.origin - var0;
-  var5 = anglestoleft(vectortoangles(var4)) * var3;
-  var6 = anglestoright(vectortoangles(var4)) * var3;
-  var7 = var6;
+function get_random_pos(var_0, var_1, var_2) {
+  var_3 = randomintrange(var_1, var_2);
+  var_4 = self.origin - var_0;
+  var_5 = anglestoleft(vectortoangles(var_4)) * var_3;
+  var_6 = anglestoright(vectortoangles(var_4)) * var_3;
+  var_7 = var_6;
 
   if(scripts\engine\utility::cointoss()) {
-    var7 = var5;
+    var_7 = var_5;
   }
 
-  return var0 + var7;
+  return var_0 + var_7;
 }
 
-function storage_ambusher_fake_can_shoot(var0) {
-  var1 = length2d(level.player.origin, self.origin);
+function storage_ambusher_fake_can_shoot(var_0) {
+  var_1 = length2d(level.player.origin, self.origin);
 
-  if(var1 < 128) {
-    self notify(var0);
+  if(var_1 < 128) {
+    self notify(var_0);
   }
 
-  if(!self cansee(level.player) && var1 > 128) {
+  if(!self cansee(level.player) && var_1 > 128) {
     return true;
   }
 
@@ -1816,30 +1816,30 @@ function storage_ambusher_fake_can_shoot(var0) {
 
 function storage_advancer_mg_aware() {
   self endon("death");
-  var0 = undefined;
+  var_0 = undefined;
 
   if(isDefined(self.target)) {
-    var0 = getnode(self.target, "targetname");
+    var_0 = getnode(self.target, "targetname");
   }
 
   scripts\engine\sp\utility::set_grenadeammo(0);
   scripts\engine\utility::flag_wait("storage_final_room_entered");
   scripts\engine\sp\utility::set_goal_radius(32);
 
-  if(isDefined(var0)) {
-    scripts\engine\sp\utility::set_goal_node(var0);
+  if(isDefined(var_0)) {
+    scripts\engine\sp\utility::set_goal_node(var_0);
   } else {
-    var1 = getEnt("storage_room_3", "targetname");
-    self setgoalvolume(var1);
+    var_1 = getEnt("storage_room_3", "targetname");
+    self setgoalvolume(var_1);
   }
 
   while(isDefined(level.storage_mg_guy) && isalive(level.storage_mg_guy)) {
     wait 0.2;
   }
 
-  var2 = randomintrange(128, 256);
+  var_2 = randomintrange(128, 256);
   self setgoalentity(level.player, 1000);
-  scripts\engine\sp\utility::set_goal_radius(var2);
+  scripts\engine\sp\utility::set_goal_radius(var_2);
 }
 
 function storage_advancer() {
@@ -1872,35 +1872,35 @@ function storage_advance_now() {
   self endon("death");
   self endon("entitydeleted");
   level waittill("storage_advance_now");
-  var0 = getEnt("storage_room_2c", "targetname");
-  var1 = getEnt("storage_room_3", "targetname");
+  var_0 = getEnt("storage_room_2c", "targetname");
+  var_1 = getEnt("storage_room_3", "targetname");
   wait randomint(6);
 
-  if(!level.player istouching(var1)) {
+  if(!level.player istouching(var_1)) {
     self cleargoalvolume();
-    self setgoalvolumeauto(var0);
+    self setgoalvolumeauto(var_0);
     self waittill("goal");
     wait 8;
   }
 
-  var2 = randomintrange(128, 256);
+  var_2 = randomintrange(128, 256);
   self setgoalentity(level.player, 1000);
-  scripts\engine\sp\utility::set_goal_radius(var2);
+  scripts\engine\sp\utility::set_goal_radius(var_2);
 }
 
-function flashbang_immunity(var0, var1) {
+function flashbang_immunity(var_0, var_1) {
   self endon("death");
 
-  if(!isDefined(var0)) {
-    var0 = 3.5;
+  if(!isDefined(var_0)) {
+    var_0 = 3.5;
   }
 
   self.flashbangimmunity = 1;
 
-  if(isDefined(var1)) {
-    level scripts\engine\utility::waittill_any_timeout(var0, var1);
+  if(isDefined(var_1)) {
+    level scripts\engine\utility::waittill_any_timeout(var_0, var_1);
   } else {
-    wait var0;
+    wait var_0;
   }
 
   self.flashbangimmunity = undefined;
@@ -1921,27 +1921,27 @@ function storage_lmg_guy() {
   self allowedstances("stand", "crouch");
   self getenemyinfo(level.player);
   scripts\engine\sp\utility::set_favoriteenemy(level.player);
-  var0 = getnode("lmg_node", "targetname");
-  scripts\engine\sp\utility::set_goal_node(var0);
+  var_0 = getnode("lmg_node", "targetname");
+  scripts\engine\sp\utility::set_goal_node(var_0);
   scripts\engine\utility::waittill_any_timeout(1, "damage", "goal");
   self.ignoreall = 0;
   self.ignoreme = 0;
 }
 
 function set_off_storage_propane_tanks() {
-  var0 = getEnt("storage_lmg_danger_zone", "targetname");
+  var_0 = getEnt("storage_lmg_danger_zone", "targetname");
 
-  if(level.player istouching(var0)) {
+  if(level.player istouching(var_0)) {
     return;
   }
 
   if(isDefined(level.storage_3rd_room_propanes)) {
-    foreach(var2 in level.storage_3rd_room_propanes) {
-      if(!isDefined(var2)) {
+    foreach(var_2 in level.storage_3rd_room_propanes) {
+      if(!isDefined(var_2)) {
         continue;
       }
 
-      var2 setscriptablepartstate("base", "fire");
+      var_2 setscriptablepartstate("base", "fire");
     }
 
     return;
@@ -1967,8 +1967,8 @@ function storage_lmg_camper() {
   }
 
   wait 2;
-  var0 = getnode("storage_mg_crawl_node", "targetname");
-  scripts\engine\sp\utility::set_goal_pos(var0.origin);
+  var_0 = getnode("storage_mg_crawl_node", "targetname");
+  scripts\engine\sp\utility::set_goal_pos(var_0.origin);
   wait 3;
   thread scripts\sp\maps\tunnels\zd30tunnels_utility::delete_when_dist_away(level.player, 700);
 }
@@ -1988,31 +1988,31 @@ function screams_when_seeing_enemy() {
   thread scripts\sp\maps\tunnels\zd30tunnels_utility::ai_playSound("dx_vom_aq2_tunnels_ambusher_20");
 }
 
-function monitor_enemy_been_seen(var0, var1, var2) {
+function monitor_enemy_been_seen(var_0, var_1, var_2) {
   self endon("death");
   self notify("enemybeenseen_monitoring");
   self endon("enemybeenseen_monitoring");
-  jumpiffalse(!isDefined(var1) || var1) LOC_0000002c;
+  jumpiffalse(!isDefined(var_1) || var_1) LOC_0000002c;
   thread can_player_see_any_part_of_enemy();
 
   for(;;) {
-    while(!self hasenemybeenseen(var0)) {
+    while(!self hasenemybeenseen(var_0)) {
       wait 0.05;
     }
 
-    if(isDefined(var2)) {
-      var3 = 0;
+    if(isDefined(var_2)) {
+      var_3 = 0;
 
-      while(self hasenemybeenseen(var0)) {
-        var3 += 0.05;
+      while(self hasenemybeenseen(var_0)) {
+        var_3 += 0.05;
         wait 0.05;
 
-        if(var3 > var2) {
+        if(var_3 > var_2) {
           break;
         }
       }
 
-      if(var3 < var2) {
+      if(var_3 < var_2) {
         continue;
       }
     }
@@ -2026,9 +2026,9 @@ function can_player_see_any_part_of_enemy() {
   self endon("death");
 
   for(;;) {
-    var0 = anglesToForward(level.player getplayerangles());
-    var1 = level.player getEye();
-    var2 = var1 + var0 * 1500;
+    var_0 = anglesToForward(level.player getplayerangles());
+    var_1 = level.player getEye();
+    var_2 = var_1 + var_0 * 1500;
 
     if(scripts\engine\trace::capsule_trace_passed(level.player getEye(), self gettagorigin("j_knee_le"), 2, 4)) {
       self notify("enemybeenseen");
@@ -2059,15 +2059,15 @@ function storage_mg_nest_first_guy() {
   self.ignoreme = 1;
   thread ai_slice_settings();
   scripts\engine\utility::set_movement_speed(160);
-  var0 = getclosestpointonnavmesh(level.player.origin);
-  scripts\engine\sp\utility::set_goal_pos(var0);
+  var_0 = getclosestpointonnavmesh(level.player.origin);
+  scripts\engine\sp\utility::set_goal_pos(var_0);
   scripts\engine\sp\utility::set_goal_radius(64);
 
   while(!scripts\engine\sp\utility::player_looking_at(self getEye())) {
     wait 0.05;
-    var1 = 200;
+    var_1 = 200;
 
-    if(isDefined(level.farah) && isalive(level.farah) && scripts\engine\utility::distance_2d_squared(level.farah.origin, self.origin) < var1 * var1) {
+    if(isDefined(level.farah) && isalive(level.farah) && scripts\engine\utility::distance_2d_squared(level.farah.origin, self.origin) < var_1 * var_1) {
       break;
     }
   }
@@ -2108,50 +2108,50 @@ function mine_patroller() {
     thread scripts\sp\maps\tunnels\zd30tunnels_utility::enemy_force_pistol();
   }
 
-  var0 = scripts\sp\maps\tunnels\zd30tunnels_utility::get_active_oil_fires();
+  var_0 = scripts\sp\maps\tunnels\zd30tunnels_utility::get_active_oil_fires();
 
-  if(isDefined(var0) && var0.size > 0) {
-    var1 = sortbydistance(var0, self.origin)[0];
-    thread investigate_oil_fire(var1);
+  if(isDefined(var_0) && var_0.size > 0) {
+    var_1 = sortbydistance(var_0, self.origin)[0];
+    thread investigate_oil_fire(var_1);
   }
 
   wait 0.1;
   scripts\sp\nvg\nvg_ai::flashlight_on();
 }
 
-function investigate_oil_fire(var0, var1) {
+function investigate_oil_fire(var_0, var_1) {
   self notify("investigating_oil_fire");
   self endon("investigating_oil_fire");
   self endon("death");
   self endon("stealth_combat");
-  var0 endon("oil_fire_out");
-  var2 = 35;
-  var3 = 6;
+  var_0 endon("oil_fire_out");
+  var_2 = 35;
+  var_3 = 6;
 
-  while(var2 > 0) {
-    if(isDefined(var1)) {
-      var4 = var1.origin;
+  while(var_2 > 0) {
+    if(isDefined(var_1)) {
+      var_4 = var_1.origin;
     } else {
-      var4 = scripts\sp\maps\tunnels\zd30tunnels_utility::get_investigate_point_in_oil_fire(var0);
+      var_4 = scripts\sp\maps\tunnels\zd30tunnels_utility::get_investigate_point_in_oil_fire(var_0);
     }
 
-    self aieventlistenerevent("investigate", level.player, var4);
-    wait var3;
-    var2 -= var3;
+    self aieventlistenerevent("investigate", level.player, var_4);
+    wait var_3;
+    var_2 -= var_3;
   }
 }
 
 function shaft_propane_toss_guy() {
   self endon("death");
   self endon("entitydeleted");
-  var0 = 50;
-  thread monitor_enemy_been_seen(var0);
+  var_0 = 50;
+  thread monitor_enemy_been_seen(var_0);
   thread shaft_top_ladder_escaper_wakeup();
   scripts\engine\utility::waittill_any("goal", "enemybeenseen");
-  var1 = scripts\engine\utility::waittill_any_return("bullethit", "bulletwhizby", "enemybeenseen", "wakeup");
+  var_1 = scripts\engine\utility::waittill_any_return("bullethit", "bulletwhizby", "enemybeenseen", "wakeup");
   scripts\engine\utility::flag_set("shaft_propane_toss");
-  var2 = getnode("shaft_top_ladder_escaper_node", "targetname");
-  scripts\engine\sp\utility::set_goal_node(var2);
+  var_2 = getnode("shaft_top_ladder_escaper_node", "targetname");
+  scripts\engine\sp\utility::set_goal_node(var_2);
   scripts\engine\sp\utility::set_goal_radius(48);
   wait 8;
   self setgoalentity(level.player, 50);
@@ -2159,24 +2159,24 @@ function shaft_propane_toss_guy() {
   scripts\engine\sp\utility::set_goal_radius(100);
 }
 
-function detonate_after_time(var0) {
-  wait var0;
+function detonate_after_time(var_0) {
+  wait var_0;
   radiusdamage(self.origin, 10, 100, 99);
   waitframe();
   level.player playRumbleOnEntity("light_1s");
 }
 
-function get_anim_frac_from_time(var0, var1) {
-  var2 = getanimlength(scripts\engine\utility::getanim(var0));
-  return var1 / var2;
+function get_anim_frac_from_time(var_0, var_1) {
+  var_2 = getanimlength(scripts\engine\utility::getanim(var_0));
+  return var_1 / var_2;
 }
 
-function shaft_propane_from_model_and_set_state(var0, var1) {
+function shaft_propane_from_model_and_set_state(var_0, var_1) {
   self waittillmatch("single anim", "end");
-  var2 = getscriptablearray(var0, "targetname")[0];
-  var2.origin = self.origin;
-  var2.angles = self.angles;
-  var2 setscriptablepartstate("base", "fire");
+  var_2 = getscriptablearray(var_0, "targetname")[0];
+  var_2.origin = self.origin;
+  var_2.angles = self.angles;
+  var_2 setscriptablepartstate("base", "fire");
   self delete();
 }
 
@@ -2184,8 +2184,8 @@ function shaft_propane_kick_guy() {
   self endon("death");
   self endon("entitydeleted");
   scripts\common\utility::demeanor_override("sprint");
-  var0 = getEnt("shaft_propane_kick_trig", "targetname");
-  var0 waittill("trigger");
+  var_0 = getEnt("shaft_propane_kick_trig", "targetname");
+  var_0 waittill("trigger");
 
   if(!scripts\engine\utility::flag("shaft_propane_kick_detonated")) {
     shaft_propane_kick_anim();
@@ -2197,11 +2197,11 @@ function shaft_propane_kick_guy() {
 
   scripts\engine\sp\utility::set_favoriteenemy(level.player);
   scripts\engine\sp\utility::set_goal_radius(100);
-  var1 = getnode("shaft_propane_kick_node", "script_noteworthy");
-  scripts\engine\sp\utility::set_goal_node(var1);
+  var_1 = getnode("shaft_propane_kick_node", "script_noteworthy");
+  scripts\engine\sp\utility::set_goal_node(var_1);
 
   for(;;) {
-    if(scripts\engine\utility::distance_2d_squared(self.origin, var1.origin) > 1024) {
+    if(scripts\engine\utility::distance_2d_squared(self.origin, var_1.origin) > 1024) {
       self.deathanim = undefined;
       return;
     }
@@ -2214,39 +2214,39 @@ function shaft_propane_kick_anim() {
   self endon("death");
   self endon("is_burning");
   thread shaft_propane_kick_cancel_if_burning_or_hurt();
-  var0 = 1.33;
+  var_0 = 1.33;
   self.allowdeath = 1;
   self.animname = "shaft_propane_kick_guy";
-  var1 = scripts\engine\utility::getStruct("propane_kick", "targetname");
+  var_1 = scripts\engine\utility::getStruct("propane_kick", "targetname");
   self.deathanim = level.scr_anim[self.animname]["falling_death"];
-  var2 = getscriptablearray("shaft_propane_kick_scriptable", "targetname")[0];
-  var2.animname = "shaft_propane_kick";
-  var2 scripts\engine\sp\utility::assign_animtree();
-  thread propane_reset_position(var2);
+  var_2 = getscriptablearray("shaft_propane_kick_scriptable", "targetname")[0];
+  var_2.animname = "shaft_propane_kick";
+  var_2 scripts\engine\sp\utility::assign_animtree();
+  thread propane_reset_position(var_2);
   scripts\engine\utility::flag_set("shaft_propane_kicked");
-  var1 thread scripts\common\anim::anim_single_solo(self, "propane_kick");
-  var1 thread scripts\sp\anim::anim_set_rate([self, var2], "propane_kick", var0);
+  var_1 thread scripts\common\anim::anim_single_solo(self, "propane_kick");
+  var_1 thread scripts\sp\anim::anim_set_rate([self, var_2], "propane_kick", var_0);
   level.player scripts\engine\utility::delaycall(0.6, &playrumbleonentity, "heavy_1s");
-  thread shaft_propane_state_change(var2, "shaft_propane_kick_detonated");
-  thread anim_single_solo_scriptable(var1, var2);
+  thread shaft_propane_state_change(var_2, "shaft_propane_kick_detonated");
+  thread anim_single_solo_scriptable(var_1, var_2);
   scripts\engine\sp\utility::add_wait(&scripts\engine\utility::waittillmatch_any_return, "single anim", "end");
   level scripts\engine\sp\utility::add_wait(&scripts\engine\utility::flag_wait, "shaft_propane_kick_detonated");
   scripts\engine\sp\utility::do_wait_any();
 
   if(scripts\engine\utility::flag("shaft_propane_kick_detonated")) {
-    var2 stopanimScripted();
+    var_2 stopanimScripted();
     return;
   }
 }
 
-function propane_reset_position(var0) {
+function propane_reset_position(var_0) {
   self endon("death");
   self endon("entitydeleted");
   wait 0.5;
-  var1 = getstartorigin(var0.origin, var0.angles, scripts\engine\utility::getanim("propane_kick"));
-  var2 = getstartangles(var0.origin, var0.angles, scripts\engine\utility::getanim("propane_kick"));
-  self.origin = var1;
-  self.angles = var2;
+  var_1 = getstartorigin(var_0.origin, var_0.angles, scripts\engine\utility::getanim("propane_kick"));
+  var_2 = getstartangles(var_0.origin, var_0.angles, scripts\engine\utility::getanim("propane_kick"));
+  self.origin = var_1;
+  self.angles = var_2;
 }
 
 function shaft_propane_kick_cancel_if_burning_or_hurt() {
@@ -2262,11 +2262,11 @@ function shaft_propane_kick_cancel_if_burning_or_hurt() {
   }
 }
 
-function shaft_propane_state_change(var0, var1) {
-  level endon(var0);
+function shaft_propane_state_change(var_0, var_1) {
+  level endon(var_0);
 
-  if(isDefined(var1)) {
-    wait var1;
+  if(isDefined(var_1)) {
+    wait var_1;
   }
 
   self setscriptablepartstate("base", "no_col");
@@ -2277,16 +2277,16 @@ function shaft_propane_state_change(var0, var1) {
   }
 }
 
-function anim_single_solo_scriptable(var0, var1, var2, var3) {
-  thread scripts\common\notetrack::start_notetrack_wait(var0, "single anim", var1, var0.animname, var0 scripts\engine\utility::getanim(var1));
-  thread scripts\sp\anim::animscriptdonotetracksthread(var0, "single anim", var1);
+function anim_single_solo_scriptable(var_0, var_1, var_2, var_3) {
+  thread scripts\common\notetrack::start_notetrack_wait(var_0, "single anim", var_1, var_0.animname, var_0 scripts\engine\utility::getanim(var_1));
+  thread scripts\sp\anim::animscriptdonotetracksthread(var_0, "single anim", var_1);
 
-  if(isDefined(var2) && isDefined(var3)) {
-    var0 setflaggedanim("single anim", var0 scripts\engine\utility::getanim(var1), 1, var2, var3);
+  if(isDefined(var_2) && isDefined(var_3)) {
+    var_0 setflaggedanim("single anim", var_0 scripts\engine\utility::getanim(var_1), 1, var_2, var_3);
     return;
   }
 
-  var0 setflaggedanim("single anim", var0 scripts\engine\utility::getanim(var1));
+  var_0 setflaggedanim("single anim", var_0 scripts\engine\utility::getanim(var_1));
 }
 
 function shaft_top_ladder_escaper() {
@@ -2296,24 +2296,24 @@ function shaft_top_ladder_escaper() {
   scripts\engine\sp\utility::set_ignoresuppression(1);
   scripts\common\utility::demeanor_override("sprint");
   self waittill("goal");
-  var0 = getnode("shaft_top_ladder_escaper_node", "targetname");
-  scripts\engine\sp\utility::set_goal_node(var0);
+  var_0 = getnode("shaft_top_ladder_escaper_node", "targetname");
+  scripts\engine\sp\utility::set_goal_node(var_0);
   scripts\engine\sp\utility::set_goal_radius(32);
-  var1 = 50;
-  thread monitor_enemy_been_seen(var1);
+  var_1 = 50;
+  thread monitor_enemy_been_seen(var_1);
   thread shaft_top_ladder_escaper_wakeup();
   scripts\engine\utility::waittill_any("goal", "enemybeenseen");
-  var2 = scripts\engine\utility::waittill_any_return("bullethit", "bulletwhizby", "enemybeenseen", "wakeup");
+  var_2 = scripts\engine\utility::waittill_any_return("bullethit", "bulletwhizby", "enemybeenseen", "wakeup");
 
-  if(isDefined(var2) && (var2 == "enemybeenseen" || var2 == "wakeup")) {
+  if(isDefined(var_2) && (var_2 == "enemybeenseen" || var_2 == "wakeup")) {
     self.ignoreall = 1;
   } else {
     self.ignoreall = 0;
   }
 
-  var0 = getnode("despawn_node", "script_noteworthy");
-  scripts\engine\sp\utility::set_goal_node(var0);
-  var2 = scripts\engine\utility::waittill_any_return("bullethit", "grenade danger", "bulletwhizby");
+  var_0 = getnode("despawn_node", "script_noteworthy");
+  scripts\engine\sp\utility::set_goal_node(var_0);
+  var_2 = scripts\engine\utility::waittill_any_return("bullethit", "grenade danger", "bulletwhizby");
   self.ignoreall = 0;
 }
 
@@ -2338,19 +2338,19 @@ function shaft_top_ladder_escaper_wakeup() {
 function shaft_fall_victim() {
   self endon("death");
   self endon("entitydeleted");
-  var0 = getEnt("shaft_fall_victim_touching", "targetname");
+  var_0 = getEnt("shaft_fall_victim_touching", "targetname");
   self waittill("goal");
   wait 1;
 
-  if(!self istouching(var0)) {
+  if(!self istouching(var_0)) {
     return;
   }
 
-  var1 = scripts\engine\utility::getStruct("shaft_fall_victim_propane", "targetname");
-  var2 = getclosestpointonnavmesh(var1.origin);
-  var3 = getscriptablearray("shaft_fall_victim_propane_scriptable", "targetname")[0];
+  var_1 = scripts\engine\utility::getStruct("shaft_fall_victim_propane", "targetname");
+  var_2 = getclosestpointonnavmesh(var_1.origin);
+  var_3 = getscriptablearray("shaft_fall_victim_propane_scriptable", "targetname")[0];
 
-  if(!isDefined(var3) || !isDefined(var3.model) || var3.model == "") {
+  if(!isDefined(var_3) || !isDefined(var_3.model) || var_3.model == "") {
     wait 1;
 
     while(scripts\engine\sp\utility::player_looking_at(self.origin, 0.7, 1)) {
@@ -2361,13 +2361,13 @@ function shaft_fall_victim() {
     return;
   }
 
-  var4 = var3.model;
-  var3 setscriptablepartstate("base", "script_ignite", 1);
-  scripts\engine\sp\utility::set_goal_pos(var2);
+  var_4 = var_3.model;
+  var_3 setscriptablepartstate("base", "script_ignite", 1);
+  scripts\engine\sp\utility::set_goal_pos(var_2);
   scripts\engine\sp\utility::set_goal_radius(64);
   scripts\engine\utility::waittill_any_timeout(1.75, "goal");
 
-  while(var3.model != "") {
+  while(var_3.model != "") {
     wait 0.05;
   }
 
@@ -2392,13 +2392,13 @@ function shaft_wave_1_guy_fire_aware() {
   self endon("death");
   thread scripts\sp\maps\tunnels\zd30tunnels_utility::enemy_force_ak47();
   self.spawn_time = gettime();
-  var0 = get_touching_goal_vol();
+  var_0 = get_touching_goal_vol();
 
-  if(!isDefined(var0)) {
-    var0 = level.shaft_vols[1];
+  if(!isDefined(var_0)) {
+    var_0 = level.shaft_vols[1];
   }
 
-  set_new_goal_vol(var0);
+  set_new_goal_vol(var_0);
   wait 0.05;
   scripts\sp\maps\tunnels\zd30tunnels_utility::set_original_baseaccuracy(1);
 
@@ -2418,61 +2418,61 @@ function shaft_wave_1_guys_management() {
 
   for(;;) {
     wait 0.5;
-    var0 = get_alive_wave_1_guys();
+    var_0 = get_alive_wave_1_guys();
 
-    if(var0.size == 0) {
+    if(var_0.size == 0) {
       continue;
     }
 
-    var1 = 0;
+    var_1 = 0;
 
-    foreach(var3 in var0) {
-      var4 = var3 getgoalvolume();
+    foreach(var_3 in var_0) {
+      var_4 = var_3 getgoalvolume();
 
-      if(!isDefined(var4) || var4 != level.shaft_vols[1]) {
-        var1++;
+      if(!isDefined(var_4) || var_4 != level.shaft_vols[1]) {
+        var_1++;
       }
     }
 
-    if(var1 == 0) {
-      var6 = var0[0];
-      var6 cleargoalvolume();
-      var6 setgoalentity(level.player);
-      var6 scripts\engine\sp\utility::set_goal_radius(500);
-      var6 waittill("death");
+    if(var_1 == 0) {
+      var_6 = var_0[0];
+      var_6 cleargoalvolume();
+      var_6 setgoalentity(level.player);
+      var_6 scripts\engine\sp\utility::set_goal_radius(500);
+      var_6 waittill("death");
       wait randomintrange(30, 45);
     }
   }
 }
 
 function get_alive_wave_1_guys() {
-  var0 = [];
-  var1 = getaiarray("axis");
+  var_0 = [];
+  var_1 = getaiarray("axis");
 
-  foreach(var3 in var1) {
-    if(isalive(var3) && isDefined(var3.script_noteworthy) && var3.script_noteworthy == "shaft_wave_1") {
-      var0 = var3;
+  foreach(var_3 in var_1) {
+    if(isalive(var_3) && isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "shaft_wave_1") {
+      var_0 = var_3;
     }
   }
 
-  return var0;
+  return var_0;
 }
 
-function shaft_chaser_fire_aware(var0) {
+function shaft_chaser_fire_aware(var_0) {
   self endon("death");
   wait 0.05;
   scripts\sp\maps\tunnels\zd30tunnels_utility::set_original_baseaccuracy(1);
 
-  if(isDefined(var0)) {
-    self.goalradius = var0;
+  if(isDefined(var_0)) {
+    self.goalradius = var_0;
   } else {
     self.goalradius = 64;
   }
 
   for(;;) {
     if(isDefined(level.shaft_fire_on_level) && isDefined(level.player.cur_shaft_level_index) && level.shaft_fire_on_level >= level.player.cur_shaft_level_index) {
-      var1 = int(min(level.shaft_vols.size - 1, level.shaft_fire_on_level + 1));
-      set_new_goal_vol(level.shaft_vols[var1]);
+      var_1 = int(min(level.shaft_vols.size - 1, level.shaft_fire_on_level + 1));
+      set_new_goal_vol(level.shaft_vols[var_1]);
     } else {
       self setgoalpos(level.player.origin);
     }
@@ -2486,11 +2486,11 @@ function shaft_follower() {
   thread fire_aware("go_for_player");
 
   for(;;) {
-    var0 = isDefined(self.enemy) && self.enemy == level.player;
-    var1 = self hasenemybeenseen(500);
-    var2 = scripts\engine\sp\utility::player_looking_at(self getEye(), 0.7);
+    var_0 = isDefined(self.enemy) && self.enemy == level.player;
+    var_1 = self hasenemybeenseen(500);
+    var_2 = scripts\engine\sp\utility::player_looking_at(self getEye(), 0.7);
 
-    if(var0 && var1) {
+    if(var_0 && var_1) {
       break;
     }
 
@@ -2502,17 +2502,17 @@ function shaft_follower() {
   zdt_rush_guy();
 }
 
-function fire_aware(var0) {
+function fire_aware(var_0) {
   self endon("death");
 
-  if(isDefined(var0)) {
-    self endon(var0);
+  if(isDefined(var_0)) {
+    self endon(var_0);
   }
 
-  var1 = get_touching_goal_vol();
+  var_1 = get_touching_goal_vol();
 
-  if(isDefined(var1) && !isDefined(self.target)) {
-    set_new_goal_vol(var1);
+  if(isDefined(var_1) && !isDefined(self.target)) {
+    set_new_goal_vol(var_1);
   }
 
   for(;;) {
@@ -2521,27 +2521,27 @@ function fire_aware(var0) {
   }
 
   for(;;) {
-    var2 = get_touching_goal_vol_index();
-    var1 = get_touching_goal_vol();
+    var_2 = get_touching_goal_vol_index();
+    var_1 = get_touching_goal_vol();
 
-    if(level.shaft_fire_on_level >= var2) {
-      if(isDefined(level.player.cur_shaft_level_index) && level.player.cur_shaft_level_index > var2) {
-        var3 = getnodesinradius(self.origin, 512, 0, 96);
+    if(level.shaft_fire_on_level >= var_2) {
+      if(isDefined(level.player.cur_shaft_level_index) && level.player.cur_shaft_level_index > var_2) {
+        var_3 = getnodesinradius(self.origin, 512, 0, 96);
 
-        if(isDefined(var3) && var3.size > 0) {
-          var4 = sortbydistance(var3, self.origin)[0];
-          self setgoalnode(var4);
+        if(isDefined(var_3) && var_3.size > 0) {
+          var_4 = sortbydistance(var_3, self.origin)[0];
+          self setgoalnode(var_4);
           scripts\engine\utility::waittill_any_timeout(4, "goal");
         } else {
           scripts\engine\sp\utility::set_goal_pos(self.origin);
           wait 0.5;
         }
 
-        if(isDefined(var1) && isDefined(var1.targetname)) {
-          var5 = scripts\engine\utility::getStruct(var1.targetname, "script_noteworthy");
+        if(isDefined(var_1) && isDefined(var_1.targetname)) {
+          var_5 = scripts\engine\utility::getStruct(var_1.targetname, "script_noteworthy");
 
-          if(isDefined(var5)) {
-            scripts\engine\sp\utility::set_goal_pos(var5.origin);
+          if(isDefined(var_5)) {
+            scripts\engine\sp\utility::set_goal_pos(var_5.origin);
           }
         }
 
@@ -2550,8 +2550,8 @@ function fire_aware(var0) {
         enemy_death_by_fire(0);
         return;
       } else {
-        var6 = int(min(level.shaft_vols.size - 1, level.shaft_fire_on_level + 1));
-        set_new_goal_vol(level.shaft_vols[var6]);
+        var_6 = int(min(level.shaft_vols.size - 1, level.shaft_fire_on_level + 1));
+        set_new_goal_vol(level.shaft_vols[var_6]);
       }
     }
 
@@ -2559,18 +2559,18 @@ function fire_aware(var0) {
   }
 }
 
-function set_new_goal_vol(var0) {
+function set_new_goal_vol(var_0) {
   self endon("death");
   self cleargoalvolume();
   self setgoalpos(self.origin);
   waitframe();
-  self setgoalvolumeauto(var0);
+  self setgoalvolumeauto(var_0);
 }
 
 function get_touching_goal_vol() {
-  foreach(var1 in level.shaft_vols) {
-    if(self istouching(var1)) {
-      return var1;
+  foreach(var_1 in level.shaft_vols) {
+    if(self istouching(var_1)) {
+      return var_1;
     }
   }
 
@@ -2578,23 +2578,23 @@ function get_touching_goal_vol() {
 }
 
 function get_touching_goal_vol_index() {
-  var0 = undefined;
+  var_0 = undefined;
 
-  foreach(var3, var2 in level.shaft_vols) {
-    if(self istouching(var2)) {
-      var0 = var3;
+  foreach(var_3, var_2 in level.shaft_vols) {
+    if(self istouching(var_2)) {
+      var_0 = var_3;
     }
   }
 
-  if(!isDefined(var0)) {
-    var4 = scripts\engine\utility::getclosest(self.origin, level.shaft_vols);
+  if(!isDefined(var_0)) {
+    var_4 = scripts\engine\utility::getclosest(self.origin, level.shaft_vols);
 
-    foreach(var6 in level.shaft_vols) {
-      if(isDefined(var6) && var6 == var4) {
-        var0 = var3;
+    foreach(var_6 in level.shaft_vols) {
+      if(isDefined(var_6) && var_6 == var_4) {
+        var_0 = var_3;
       }
     }
   }
 
-  return var0;
+  return var_0;
 }

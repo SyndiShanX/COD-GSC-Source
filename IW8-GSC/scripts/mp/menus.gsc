@@ -18,11 +18,11 @@ function init() {
     game["menu_changeclass_axis"] = "changeclass_opfor";
 
     if(level.multiteambased) {
-      for(var0 = 0; var0 < level.teamnamelist.size; var0++) {
-        var1 = "menu_class_" + level.teamnamelist[var0];
-        var2 = "menu_changeclass_" + level.teamnamelist[var0];
-        game[var1] = game["menu_class_allies"];
-        game[var2] = "changeclass_marines";
+      for(var_0 = 0; var_0 < level.teamnamelist.size; var_0++) {
+        var_1 = "menu_class_" + level.teamnamelist[var_0];
+        var_2 = "menu_changeclass_" + level.teamnamelist[var_0];
+        game[var_1] = game["menu_class_allies"];
+        game[var_2] = "changeclass_marines";
       }
     }
 
@@ -31,11 +31,11 @@ function init() {
 
     if(level.splitscreen) {
       if(level.multiteambased) {
-        for(var0 = 0; var0 < level.teamnamelist.size; var0++) {
-          var1 = "menu_class_" + level.teamnamelist[var0];
-          var2 = "menu_changeclass_" + level.teamnamelist[var0];
-          game[var1] += "_splitscreen";
-          game[var2] += "_splitscreen";
+        for(var_0 = 0; var_0 < level.teamnamelist.size; var_0++) {
+          var_1 = "menu_class_" + level.teamnamelist[var_0];
+          var_2 = "menu_changeclass_" + level.teamnamelist[var_0];
+          game[var_1] += "_splitscreen";
+          game[var_2] += "_splitscreen";
         }
       }
 
@@ -60,9 +60,9 @@ function init() {
   thread setintrocamnetworkmodel();
 }
 
-function onteamchangecallback(var0, var1) {
+function onteamchangecallback(var_0, var_1) {
   if(scripts\mp\utility\game::getgametype() != "br") {
-    if(var0 != "team_select") {
+    if(var_0 != "team_select") {
       return;
     }
 
@@ -70,7 +70,7 @@ function onteamchangecallback(var0, var1) {
       return;
     }
 
-    handleteamchange(var0, var1);
+    handleteamchange(var_0, var_1);
     return;
   }
 }
@@ -81,105 +81,105 @@ function setintrocamnetworkmodel() {
   setintrocameraactive(0);
 }
 
-function update_enemies_remaining(var0) {
-  return var0 >= 100;
+function update_enemies_remaining(var_0) {
+  return var_0 >= 100;
 }
 
-function getclasschoice(var0) {
-  var0++;
-  var1 = undefined;
+function getclasschoice(var_0) {
+  var_0++;
+  var_1 = undefined;
 
   if(isDefined(level.set_systems_init_flag) && level.set_systems_init_flag > 0) {
     if(scripts\mp\utility\game::matchmakinggame()) {
-      var2 = scripts\mp\rank::getrank() >= 4;
+      var_2 = scripts\mp\rank::getrank() >= 4;
     } else {
-      var2 = 1;
+      var_2 = 1;
     }
 
-    if(var1 > 100) {
-      var3 = var1 - 100;
-      var2 = "custgamemode_d" + var3;
-    } else if(!var2) {
-      var2 = "custgamemode_d1";
+    if(var_1 > 100) {
+      var_3 = var_1 - 100;
+      var_2 = "custgamemode_d" + var_3;
+    } else if(!var_2) {
+      var_2 = "custgamemode_d1";
     } else {
-      var2 = "custgamemode" + var1;
+      var_2 = "custgamemode" + var_1;
     }
-  } else if(var1 > 100) {
-    var3 = var1 - 100;
-    var2 = "default" + var3;
+  } else if(var_1 > 100) {
+    var_3 = var_1 - 100;
+    var_2 = "default" + var_3;
   } else {
-    var2 = "custom" + var1;
+    var_2 = "custom" + var_1;
   }
 
-  return var2;
+  return var_2;
 }
 
-function updateloadoutselect(var0) {
-  var1 = isai(self) || issubstr(self.name, "tcBot");
+function updateloadoutselect(var_0) {
+  var_1 = isai(self) || issubstr(self.name, "tcBot");
 
-  if(!var1) {
+  if(!var_1) {
     return;
   }
 }
 
-function executeclasschange(var0, var1) {
+function executeclasschange(var_0, var_1) {
   self endon("disconnect");
 
   if(isbot(self) || initmaxspeedforpathlengthtable(self)) {
-    self.pers["class"] = var0;
-    self.class = var0;
+    self.pers["class"] = var_0;
+    self.class = var_0;
     return;
   }
 
-  var2 = getclasschoice(var0);
+  var_2 = getclasschoice(var_0);
 
-  if(!isDefined(self.pers["class"]) || var2 != self.pers["class"] || var1) {
-    self.pers["class"] = var2;
-    self.class = var2;
-    scripts\mp\class::preloadandqueueclass(var2);
+  if(!isDefined(self.pers["class"]) || var_2 != self.pers["class"] || var_1) {
+    self.pers["class"] = var_2;
+    self.class = var_2;
+    scripts\mp\class::preloadandqueueclass(var_2);
   }
 
-  var3 = 1;
-  var4 = scripts\mp\gamelogic::generate_randomized_primary_weapon_objs(scripts\mp\utility\game::round_vehicle_logic());
+  var_3 = 1;
+  var_4 = scripts\mp\gamelogic::generate_randomized_primary_weapon_objs(scripts\mp\utility\game::round_vehicle_logic());
 
-  if(scripts\mp\utility\game::getgametype() == "br" && !var4) {
-    var3 = 0;
+  if(scripts\mp\utility\game::getgametype() == "br" && !var_4) {
+    var_3 = 0;
   }
 
-  if(scripts\mp\class::shouldallowinstantclassswap() && var3) {
+  if(scripts\mp\class::shouldallowinstantclassswap() && var_3) {
     scripts\cp_mp\utility\inventory_utility::getridofweapon("iw8_fists_mp");
     thread scripts\mp\class::swaploadout();
     return;
   }
 
-  var5 = scripts\mp\utility\game::unset_relic_grounded() && self calloutmarkerping_entityzoffset("ui_open_loadout_bag");
+  var_5 = scripts\mp\utility\game::unset_relic_grounded() && self calloutmarkerping_entityzoffset("ui_open_loadout_bag");
 
-  if(isalive(self) && !var5) {
+  if(isalive(self) && !var_5) {
     self iprintlnbold(game["strings"]["change_class"]);
   }
 
-  if(var0 < 100) {
+  if(var_0 < 100) {
     self setclientomnvar("ui_loadout_changed", scripts\mp\class::getclassindex(self.pers["class"]));
     return;
   }
 }
 
-function setnextroundclass(var0) {
-  var1 = var0;
+function setnextroundclass(var_0) {
+  var_1 = var_0;
 
   if(!isbot(self)) {
     if(isalive(self)) {
       self iprintlnbold(game["strings"]["revive_class"]);
     }
 
-    var1 = getclasschoice(var0);
+    var_1 = getclasschoice(var_0);
   }
 
-  self.pers["next_round_class"] = var1;
+  self.pers["next_round_class"] = var_1;
 }
 
-function onleavegamecallback(var0, var1) {
-  if(var0 != "end_game") {
+function onleavegamecallback(var_0, var_1) {
+  if(var_0 != "end_game") {
     return;
   }
 
@@ -191,43 +191,43 @@ function onleavegamecallback(var0, var1) {
     return;
   }
 
-  level thread scripts\mp\gamelogic::forceend(var1);
+  level thread scripts\mp\gamelogic::forceend(var_1);
 }
 
-function onclasseditcallback(var0) {
+function onclasseditcallback(var_0) {
   self endon("disconnect");
   waittillframeend();
-  handleclassedit(var0);
+  handleclassedit(var_0);
 
   if(scripts\mp\utility\game::getgametype() == "br") {
-    scripts\mp\gametypes\br_public::playerloadoutsaveselected(getclasschoice(var0));
+    scripts\mp\gametypes\br_public::playerloadoutsaveselected(getclasschoice(var_0));
     return;
   }
 }
 
-function onclasschoicecallback(var0, var1) {
+function onclasschoicecallback(var_0, var_1) {
   if(scripts\mp\utility\game::usefloorrocks()) {
-    if(var0 < 100) {
-      var0 += 100;
+    if(var_0 < 100) {
+      var_0 += 100;
     }
   }
 
-  if(scripts\mp\utility\game::getgametype() == "br" && var0 == -1 && getdvarint("scr_br_newClass_killswitch", 0) == 0) {
+  if(scripts\mp\utility\game::getgametype() == "br" && var_0 == -1 && getdvarint("scr_br_newClass_killswitch", 0) == 0) {
     return;
   }
 
-  self notify("loadout_class_selected", var0);
+  self notify("loadout_class_selected", var_0);
 
   if(level.systemlink && getdvarint("LOMTKQTRTM") && self ismlgspectator()) {
     self setclientomnvar("ui_options_menu", 0);
     return;
   }
 
-  updateloadoutselect(var0);
+  updateloadoutselect(var_0);
 
   if(istrue(self.waitingtoselectclass)) {
     if(isDefined(self.revive_chosenclass)) {
-      setnextroundclass(var0);
+      setnextroundclass(var_0);
     }
 
     self setclientomnvar("ui_options_menu", 0);
@@ -239,26 +239,26 @@ function onclasschoicecallback(var0, var1) {
   }
 
   if(isDefined(self.revive_chosenclass) && isDefined(self.instantclassswapallowed) && !scripts\mp\class::shouldallowinstantclassswap()) {
-    setnextroundclass(var0);
+    setnextroundclass(var_0);
     return;
   }
 
-  if("" + var0 != "callback") {
-    executeclasschange(var0, istrue(var1));
+  if("" + var_0 != "callback") {
+    executeclasschange(var_0, istrue(var_1));
     return;
   }
 
   menuclass("callback");
 }
 
-function handleteamchange(var0, var1) {
-  var2 = 0;
+function handleteamchange(var_0, var_1) {
+  var_2 = 0;
 
-  if(var1 >= 3) {
-    var2 = 1;
+  if(var_1 >= 3) {
+    var_2 = 1;
   }
 
-  if(var2) {
+  if(var_2) {
     self setclientomnvar("ui_spectator_selected", 1);
     self.spectating_actively = 1;
   } else {
@@ -266,28 +266,28 @@ function handleteamchange(var0, var1) {
     self.spectating_actively = 0;
   }
 
-  var3 = self ismlgspectator();
-  var4 = !var3 && isDefined(self.team) && (self.team == "spectator" || self.team == "follower");
-  var5 = var3 && var1 == 3 || var4 && (var1 == 4 || var1 == 5);
+  var_3 = self ismlgspectator();
+  var_4 = !var_3 && isDefined(self.team) && (self.team == "spectator" || self.team == "follower");
+  var_5 = var_3 && var_1 == 3 || var_4 && (var_1 == 4 || var_1 == 5);
 
-  if(var1 == 4 || var1 == 5) {
-    var1 = 3;
+  if(var_1 == 4 || var_1 == 5) {
+    var_1 = 3;
     self setmlgspectator(1);
   } else {
     self setmlgspectator(0);
   }
 
-  if(var1 == 0) {
-    var1 = "axis";
-  } else if(var1 == 1) {
-    var1 = "allies";
-  } else if(var1 == 2) {
-    var1 = "random";
+  if(var_1 == 0) {
+    var_1 = "axis";
+  } else if(var_1 == 1) {
+    var_1 = "allies";
+  } else if(var_1 == 2) {
+    var_1 = "random";
   } else {
-    var1 = "spectator";
+    var_1 = "spectator";
   }
 
-  if(!var5 && isDefined(self.pers["team"]) && var1 == self.pers["team"]) {
+  if(!var_5 && isDefined(self.pers["team"]) && var_1 == self.pers["team"]) {
     return;
   }
 
@@ -295,43 +295,43 @@ function handleteamchange(var0, var1) {
     self.operatorcustomization.rebuild = 1;
   }
 
-  thread logteamselection(var1);
+  thread logteamselection(var_1);
 
-  if(var1 != "spectator") {
+  if(var_1 != "spectator") {
     self.pers["playerChoseSpectatorTeam"] = undefined;
   } else {
     self.pers["playerChoseSpectatorTeam"] = 1;
   }
 
-  if(var1 == "axis") {
+  if(var_1 == "axis") {
     thread setteam("axis");
     return;
   }
 
-  if(var1 == "allies") {
+  if(var_1 == "allies") {
     thread setteam("allies");
     return;
   }
 
-  if(var1 == "random") {
+  if(var_1 == "random") {
     thread autoassign();
     return;
   }
 
-  if(var1 == "spectator") {
-    thread setspectator(var5);
+  if(var_1 == "spectator") {
+    thread setspectator(var_5);
     return;
   }
 }
 
-function handleclassedit(var0) {
-  var1 = getclasschoice(var0);
-  var2 = scripts\mp\class::loadout_editcachedclassstruct(var1);
-  var3 = scripts\mp\class::zombieregenratescaleoutgas();
-  var4 = var2 || var3;
+function handleclassedit(var_0) {
+  var_1 = getclasschoice(var_0);
+  var_2 = scripts\mp\class::loadout_editcachedclassstruct(var_1);
+  var_3 = scripts\mp\class::zombieregenratescaleoutgas();
+  var_4 = var_2 || var_3;
 
-  if(isDefined(self.pers["class"]) && var1 == self.pers["class"] && var4) {
-    onclasschoicecallback(var0, 1);
+  if(isDefined(self.pers["class"]) && var_1 == self.pers["class"] && var_4) {
+    onclasschoicecallback(var_0, 1);
     return;
   }
 }
@@ -364,15 +364,15 @@ function autoassign() {
 
   jumpiffalse(istrue(level.teammaxfill)) LOC_000000f5;
 
-  foreach(var1 in level.teamnamelist) {
-    if(scripts\mp\teams::ref_132e6() && var1 == "team_two_hundred") {
+  foreach(var_1 in level.teamnamelist) {
+    if(scripts\mp\teams::ref_132e6() && var_1 == "team_two_hundred") {
       continue;
     }
 
-    var2 = scripts\mp\utility\teams::getteamdata(var1, "teamCount");
+    var_2 = scripts\mp\utility\teams::getteamdata(var_1, "teamCount");
 
-    if(level.maxteamsize == 0 || var2 < level.maxteamsize) {
-      thread setteam(var1);
+    if(level.maxteamsize == 0 || var_2 < level.maxteamsize) {
+      thread setteam(var_1);
       break;
     }
   }
@@ -380,10 +380,10 @@ function autoassign() {
   return;
 }
 
-function setteam(var0) {
+function setteam(var_0) {
   self endon("disconnect");
 
-  if(!isai(self) && level.teambased && !scripts\mp\teams::getjointeampermissions(var0) && !scripts\mp\utility\game::lobbyteamselectenabled()) {
+  if(!isai(self) && level.teambased && !scripts\mp\teams::getjointeampermissions(var_0) && !scripts\mp\utility\game::lobbyteamselectenabled()) {
     return;
   }
 
@@ -394,7 +394,7 @@ function setteam(var0) {
 
   if(self.sessionstate == "playing") {
     self.switching_teams = 1;
-    self.joining_team = var0;
+    self.joining_team = var_0;
     self.leaving_team = self.pers["team"];
 
     if(scripts\mp\utility\game::getgametype() == "arena") {
@@ -403,13 +403,13 @@ function setteam(var0) {
   }
 
   if(istrue(game["isLaunchChunk"]) && isbot(self) == 0) {
-    var0 = "allies";
+    var_0 = "allies";
   }
 
-  addtoteam(var0);
+  addtoteam(var_0);
 
   if(shouldmodesetsquads()) {
-    thread setsquad(var0);
+    thread setsquad(var_0);
   }
 
   if(scripts\mp\utility\player::isragdollzerog()) {
@@ -424,8 +424,8 @@ function setteam(var0) {
 
   if(scripts\mp\utility\game::allowclasschoice() || scripts\mp\utility\game::showfakeloadout() && !isai(self)) {
     if(getdvarint("scr_force_cac_sre_callstack", 0) == 1 && scripts\mp\utility\game::getgametype() == "br" && scripts\mp\utility\game::round_vehicle_logic() != "dmz" && scripts\mp\utility\game::round_vehicle_logic() != "rat_race" && scripts\mp\utility\game::round_vehicle_logic() != "risk" && scripts\mp\utility\game::round_vehicle_logic() != "sandbox" && scripts\mp\utility\game::round_vehicle_logic() != "rumble" && scripts\mp\utility\game::round_vehicle_logic() != "gold_war") {
-      var1 = isDefined(level.allowclasschoicefunc) && istrue(self[[level.allowclasschoicefunc]]());
-      scripts\mp\utility\script::laststand_dogtags("setTeam() " + self.name + " ui_options_menu = 2, allowClassChoiceFunc = " + var1);
+      var_1 = isDefined(level.allowclasschoicefunc) && istrue(self[[level.allowclasschoicefunc]]());
+      scripts\mp\utility\script::laststand_dogtags("setTeam() " + self.name + " ui_options_menu = 2, allowClassChoiceFunc = " + var_1);
     }
 
     self setclientomnvar("ui_options_menu", 2);
@@ -477,7 +477,7 @@ function shouldmodesetsquads() {
   }
 }
 
-function setsquad(var0) {
+function setsquad(var_0) {
   if(!level.teambased) {
     return;
   }
@@ -487,57 +487,57 @@ function setsquad(var0) {
   }
 
   if(scripts\mp\utility\game::matchmakinggame()) {
-    var1 = self getsquadindex();
-    joinsquad(var0, var1);
+    var_1 = self getsquadindex();
+    joinsquad(var_0, var_1);
     return;
   }
 
-  var2 = issubstr(self.name, "tcBot") || issubstr(self.name, "_hl_");
+  var_2 = issubstr(self.name, "tcBot") || issubstr(self.name, "_hl_");
 
-  if(!isai(self) && !var2) {
-    var3 = self getlobbysquadindex();
+  if(!isai(self) && !var_2) {
+    var_3 = self getlobbysquadindex();
 
-    if(var3 != -1) {
+    if(var_3 != -1) {
       self.squadassignedfromlobby = 1;
-      joinsquad(var1, var3);
+      joinsquad(var_1, var_3);
       return;
     }
   }
 
   if(istrue(scripts\mp\utility\game::matchmakinggame())) {
-    var4 = self getfireteammembers();
+    var_4 = self getfireteammembers();
 
-    if(isDefined(var4) && var4.size > 0) {
-      var1 = undefined;
+    if(isDefined(var_4) && var_4.size > 0) {
+      var_1 = undefined;
 
-      foreach(var6 in var4) {
-        if(isDefined(var6) && isDefined(var6.squadindex)) {
-          var1 = var6.squadindex;
+      foreach(var_6 in var_4) {
+        if(isDefined(var_6) && isDefined(var_6.squadindex)) {
+          var_1 = var_6.squadindex;
           break;
         }
       }
 
-      if(isDefined(var1)) {
-        joinsquad(var1, var1);
+      if(isDefined(var_1)) {
+        joinsquad(var_1, var_1);
         return;
       } else {
-        requestnewsquad(var1, 1);
+        requestnewsquad(var_1, 1);
         return;
       }
     }
   }
 
-  if(var1 != "spectator") {
-    foreach(var9 in level.squaddata[var1]) {
-      var9.isfull = var9.players.size == level.maxsquadsize;
+  if(var_1 != "spectator") {
+    foreach(var_9 in level.squaddata[var_1]) {
+      var_9.isfull = var_9.players.size == level.maxsquadsize;
 
-      if(var9.inuse && !var9.isfireteam && !var9.isfull) {
-        joinsquad(var1, var9.index);
+      if(var_9.inuse && !var_9.isfireteam && !var_9.isfull) {
+        joinsquad(var_1, var_9.index);
         return;
       }
     }
 
-    requestnewsquad(var1, 0);
+    requestnewsquad(var_1, 0);
     return;
   }
 }
@@ -550,8 +550,8 @@ function initsquaddata() {
   level.maxsquadwait = getdvarint("scr_squad_max_wait", 15);
   level.squaddata = [];
 
-  foreach(var1 in level.teamnamelist) {
-    level.squaddata[var1] = [];
+  foreach(var_1 in level.teamnamelist) {
+    level.squaddata[var_1] = [];
   }
 
   thread monitorsquads();
@@ -562,50 +562,50 @@ function initsquaddata() {
   }
 }
 
-function createsquad(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = level.squaddata[var0].size;
+function createsquad(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = level.squaddata[var_0].size;
   }
 
-  var2 = spawnStruct();
-  var2.index = var1;
-  var2.formedtime = undefined;
-  var2.isfireteam = 0;
-  var2.isstale = 0;
-  var2.isfull = 0;
-  var2.inuse = 0;
-  var2.players = [];
-  var2.spawnpoint = undefined;
-  level.squaddata[var0][var1] = var2;
-  return var1;
+  var_2 = spawnStruct();
+  var_2.index = var_1;
+  var_2.formedtime = undefined;
+  var_2.isfireteam = 0;
+  var_2.isstale = 0;
+  var_2.isfull = 0;
+  var_2.inuse = 0;
+  var_2.players = [];
+  var_2.spawnpoint = undefined;
+  level.squaddata[var_0][var_1] = var_2;
+  return var_1;
 }
 
 function checksquads() {
-  foreach(var1 in level.teamnamelist) {
-    if(!isDefined(level.squaddata[var1])) {
+  foreach(var_1 in level.teamnamelist) {
+    if(!isDefined(level.squaddata[var_1])) {
       continue;
     }
 
-    foreach(var3 in level.squaddata[var1]) {
-      if(!var3.inuse) {
+    foreach(var_3 in level.squaddata[var_1]) {
+      if(!var_3.inuse) {
         continue;
       }
 
-      if(!var3.isstale && gettime() > var3.formedtime + level.maxsquadwait * 1000) {
-        var3.isstale = 1;
+      if(!var_3.isstale && gettime() > var_3.formedtime + level.maxsquadwait * 1000) {
+        var_3.isstale = 1;
       }
 
-      var3.isfull = var3.players.size == level.maxsquadsize;
-      var4 = 0;
+      var_3.isfull = var_3.players.size == level.maxsquadsize;
+      var_4 = 0;
 
-      foreach(var6 in var3.players) {
-        if(isDefined(var6)) {
-          var4 = 1;
+      foreach(var_6 in var_3.players) {
+        if(isDefined(var_6)) {
+          var_4 = 1;
         }
       }
 
-      if(!var4) {
-        freesquadindex(var1, var3.index);
+      if(!var_4) {
+        freesquadindex(var_1, var_3.index);
       }
     }
   }
@@ -618,51 +618,51 @@ function monitorsquads() {
   }
 }
 
-function requestnewsquad(var0, var1) {
-  var2 = getavailablesquadindex(var0);
-  var3 = level.squaddata[var0][var2];
-  var3.index = var2;
-  var3.formedtime = gettime();
-  var3.isfireteam = var1;
-  var3.isstale = 0;
-  var3.isfull = 0;
-  var3.inuse = 1;
-  var3.players = [];
-  var3.squadstartlocationkey = undefined;
-  var3.infil = undefined;
-  joinsquad(var0, var2);
+function requestnewsquad(var_0, var_1) {
+  var_2 = getavailablesquadindex(var_0);
+  var_3 = level.squaddata[var_0][var_2];
+  var_3.index = var_2;
+  var_3.formedtime = gettime();
+  var_3.isfireteam = var_1;
+  var_3.isstale = 0;
+  var_3.isfull = 0;
+  var_3.inuse = 1;
+  var_3.players = [];
+  var_3.squadstartlocationkey = undefined;
+  var_3.infil = undefined;
+  joinsquad(var_0, var_2);
 }
 
-function joinsquad(var0, var1) {
-  if(!isDefined(level.squaddata[var0][var1])) {
-    createsquad(var0, var1);
+function joinsquad(var_0, var_1) {
+  if(!isDefined(level.squaddata[var_0][var_1])) {
+    createsquad(var_0, var_1);
   }
 
-  var2 = isDefined(self.pers["squadIndex"]) && self.pers["squadIndex"] == var1;
+  var_2 = isDefined(self.pers["squadIndex"]) && self.pers["squadIndex"] == var_1;
 
   if(isDefined(self.squadindex)) {
-    var3 = 0;
+    var_3 = 0;
 
-    foreach(var5 in level.squaddata) {
-      foreach(var7 in var5) {
-        if(scripts\engine\utility::array_contains(var7.players, self)) {
-          level.squaddata[var9][var8].players = scripts\engine\utility::array_remove(var7.players, self);
-          var3 = 1;
+    foreach(var_5 in level.squaddata) {
+      foreach(var_7 in var_5) {
+        if(scripts\engine\utility::array_contains(var_7.players, self)) {
+          level.squaddata[var_9][var_8].players = scripts\engine\utility::array_remove(var_7.players, self);
+          var_3 = 1;
           break;
         }
       }
 
-      if(var3) {
+      if(var_3) {
         break;
       }
     }
   }
 
-  self.squadindex = var1;
-  self.pers["squadIndex"] = var1;
+  self.squadindex = var_1;
+  self.pers["squadIndex"] = var_1;
 
-  if(!var2 || !isDefined(self.pers["squadMemberIndex"])) {
-    self.pers["squadMemberIndex"] = level.squaddata[var0][var1].players.size;
+  if(!var_2 || !isDefined(self.pers["squadMemberIndex"])) {
+    self.pers["squadMemberIndex"] = level.squaddata[var_0][var_1].players.size;
 
     if(scripts\mp\utility\game::getgametype() == "br") {
       self.pers["squadMemberIndex"]++;
@@ -670,154 +670,154 @@ function joinsquad(var0, var1) {
   }
 
   if(!istrue(scripts\mp\utility\game::matchmakinggame())) {
-    self setsquadindex(var1);
+    self setsquadindex(var_1);
   }
 
-  level.squaddata[var0][var1].players[level.squaddata[var0][var1].players.size] = self;
+  level.squaddata[var_0][var_1].players[level.squaddata[var_0][var_1].players.size] = self;
   scripts\mp\utility\join_squad_aggregator::onplayerjoinsquad(self);
   self notify("joined_squad");
 
   if(istrue(level.usesquadleader)) {
-    choosesquadleader(var0, var1);
+    choosesquadleader(var_0, var_1);
   }
 
   if(scripts\mp\utility\game::getgametype() != "br") {
-    updatesquadomnvars(var0, var1);
+    updatesquadomnvars(var_0, var_1);
     return;
   }
 }
 
-function leavesquad(var0, var1) {
+function leavesquad(var_0, var_1) {
   if(scripts\mp\utility\game::getgametype() == "br") {
-    level.squaddata[var0][var1].players = scripts\engine\utility::array_remove(level.squaddata[var0][var1].players, self);
+    level.squaddata[var_0][var_1].players = scripts\engine\utility::array_remove(level.squaddata[var_0][var_1].players, self);
     return;
   }
 
-  if(isDefined(var0) && isDefined(var1)) {
-    thread scripts\mp\spawnselection::ref_12acb(var0, var1);
+  if(isDefined(var_0) && isDefined(var_1)) {
+    thread scripts\mp\spawnselection::ref_12acb(var_0, var_1);
   }
 
-  var2 = 0;
-  var3 = getsquadleader(var0, var1);
+  var_2 = 0;
+  var_3 = getsquadleader(var_0, var_1);
 
-  if(istrue(level.usesquadleader) && isDefined(var3) && var3 == self) {
-    level.squaddata[var0][var1].squadleaderindex = undefined;
-    var2 = 1;
+  if(istrue(level.usesquadleader) && isDefined(var_3) && var_3 == self) {
+    level.squaddata[var_0][var_1].squadleaderindex = undefined;
+    var_2 = 1;
   }
 
-  level.squaddata[var0][var1].players = scripts\engine\utility::array_remove(level.squaddata[var0][var1].players, self);
+  level.squaddata[var_0][var_1].players = scripts\engine\utility::array_remove(level.squaddata[var_0][var_1].players, self);
 
-  for(var4 = 0; var4 < level.squaddata[var0][var1].players.size; var4++) {
-    level.squaddata[var0][var1].players[var4].pers["squadMemberIndex"] = var4;
+  for(var_4 = 0; var_4 < level.squaddata[var_0][var_1].players.size; var_4++) {
+    level.squaddata[var_0][var_1].players[var_4].pers["squadMemberIndex"] = var_4;
   }
 
-  if(istrue(var2)) {
-    var5 = scripts\engine\utility::array_randomize(level.squaddata[var0][var1].players);
+  if(istrue(var_2)) {
+    var_5 = scripts\engine\utility::array_randomize(level.squaddata[var_0][var_1].players);
 
-    foreach(var7 in var5) {
-      if(isDefined(var7)) {
-        choosesquadleader(var7, var0, var1);
+    foreach(var_7 in var_5) {
+      if(isDefined(var_7)) {
+        choosesquadleader(var_7, var_0, var_1);
         break;
       }
     }
   }
 
-  updatesquadomnvars(var0, var1);
+  updatesquadomnvars(var_0, var_1);
 }
 
-function updatesquadomnvars(var0, var1) {
-  var2 = getsquadleader(var0, var1);
+function updatesquadomnvars(var_0, var_1) {
+  var_2 = getsquadleader(var_0, var_1);
 
-  foreach(var4 in level.squaddata[var0][var1].players) {
-    var5 = var1;
-    var5 += level.squaddata[var0][var1].players.size << 5;
+  foreach(var_4 in level.squaddata[var_0][var_1].players) {
+    var_5 = var_1;
+    var_5 += level.squaddata[var_0][var_1].players.size << 5;
 
-    if(isDefined(var2) && var2 == var4) {
-      var5 += 256;
+    if(isDefined(var_2) && var_2 == var_4) {
+      var_5 += 256;
     }
 
-    var4 setclientomnvar("ui_squad_data", var5);
+    var_4 setclientomnvar("ui_squad_data", var_5);
 
     if(scripts\mp\utility\game::getgametype() == "arm" || scripts\mp\utility\game::getgametype() == "arena" || scripts\mp\utility\game::getgametype() == "brtdm") {
-      var6 = var4.game_extrainfo & 65528;
-      var4.game_extrainfo = var6 | var4.pers["squadMemberIndex"] + 1;
+      var_6 = var_4.game_extrainfo & 65528;
+      var_4.game_extrainfo = var_6 | var_4.pers["squadMemberIndex"] + 1;
 
-      if(isDefined(var2) && var2 == var4) {
-        var4.game_extrainfo |= 64;
+      if(isDefined(var_2) && var_2 == var_4) {
+        var_4.game_extrainfo |= 64;
       } else {
-        var4.game_extrainfo &= ~64;
+        var_4.game_extrainfo &= ~64;
       }
 
-      var7 = var4 getentitynumber();
+      var_7 = var_4 getentitynumber();
 
-      if(isDefined(var2) && var2 == var4) {
-        var7 += 2048;
+      if(isDefined(var_2) && var_2 == var_4) {
+        var_7 += 2048;
       }
 
-      if(isalive(var4)) {
-        var7 += 4096;
+      if(isalive(var_4)) {
+        var_7 += 4096;
       }
 
-      var4 setclientomnvar("ui_arm_squadmember_0", var7);
-      var8 = scripts\engine\utility::array_remove(level.squaddata[var0][var1].players, var4);
+      var_4 setclientomnvar("ui_arm_squadmember_0", var_7);
+      var_8 = scripts\engine\utility::array_remove(level.squaddata[var_0][var_1].players, var_4);
 
-      for(var9 = 0; var9 < 3; var9++) {
-        var10 = var8[var9];
+      for(var_9 = 0; var_9 < 3; var_9++) {
+        var_10 = var_8[var_9];
 
-        if(isDefined(var10)) {
-          var7 = var10 getentitynumber();
+        if(isDefined(var_10)) {
+          var_7 = var_10 getentitynumber();
 
-          if(isDefined(var2) && var2 == var10) {
-            var7 += 2048;
+          if(isDefined(var_2) && var_2 == var_10) {
+            var_7 += 2048;
           }
 
-          if(isalive(var10)) {
-            var7 += 4096;
+          if(isalive(var_10)) {
+            var_7 += 4096;
           }
         } else {
-          var7 = -1;
+          var_7 = -1;
         }
 
-        var4 setclientomnvar("ui_arm_squadmember_" + var9 + 1, var7);
+        var_4 setclientomnvar("ui_arm_squadmember_" + var_9 + 1, var_7);
       }
     }
   }
 }
 
-function getavailablesquadindex(var0) {
-  foreach(var2 in level.squaddata[var0]) {
-    if(!var2.inuse) {
-      return var2.index;
+function getavailablesquadindex(var_0) {
+  foreach(var_2 in level.squaddata[var_0]) {
+    if(!var_2.inuse) {
+      return var_2.index;
     }
   }
 
-  return createsquad(var0);
+  return createsquad(var_0);
 }
 
-function freesquadindex(var0, var1) {
-  level.squaddata[var0][var1].formedtime = undefined;
-  level.squaddata[var0][var1].isfireteam = 0;
-  level.squaddata[var0][var1].isstale = 0;
-  level.squaddata[var0][var1].isfull = 0;
-  level.squaddata[var0][var1].inuse = 0;
-  level.squaddata[var0][var1].players = [];
-  level.squaddata[var0][var1].squadstartlocationkey = undefined;
-  level.squaddata[var0][var1].infil = undefined;
+function freesquadindex(var_0, var_1) {
+  level.squaddata[var_0][var_1].formedtime = undefined;
+  level.squaddata[var_0][var_1].isfireteam = 0;
+  level.squaddata[var_0][var_1].isstale = 0;
+  level.squaddata[var_0][var_1].isfull = 0;
+  level.squaddata[var_0][var_1].inuse = 0;
+  level.squaddata[var_0][var_1].players = [];
+  level.squaddata[var_0][var_1].squadstartlocationkey = undefined;
+  level.squaddata[var_0][var_1].infil = undefined;
 }
 
-function choosesquadleader(var0, var1) {
-  if(isDefined(getsquadleader(var0, var1))) {
+function choosesquadleader(var_0, var_1) {
+  if(isDefined(getsquadleader(var_0, var_1))) {
     return;
   }
 
   if(istrue(scripts\mp\utility\game::matchmakinggame())) {
-    var2 = self getfireteammembers();
+    var_2 = self getfireteammembers();
 
-    if(isDefined(var2) && var2.size > 0) {
+    if(isDefined(var_2) && var_2.size > 0) {
       if(self isfireteamleader()) {
-        foreach(var5, var4 in level.squaddata[self.team][self.squadindex].players) {
-          if(var4 == self) {
-            level.squaddata[var0][var1].squadleaderindex = var5;
+        foreach(var_5, var_4 in level.squaddata[self.team][self.squadindex].players) {
+          if(var_4 == self) {
+            level.squaddata[var_0][var_1].squadleaderindex = var_5;
           }
         }
       } else {
@@ -826,21 +826,21 @@ function choosesquadleader(var0, var1) {
     }
   }
 
-  foreach(var4 in level.squaddata[self.team][self.squadindex].players) {
-    if(var4 == self) {
-      level.squaddata[var0][var1].squadleaderindex = var5;
+  foreach(var_4 in level.squaddata[self.team][self.squadindex].players) {
+    if(var_4 == self) {
+      level.squaddata[var_0][var_1].squadleaderindex = var_5;
     }
   }
 }
 
-function getsquadleader(var0, var1) {
-  var2 = level.squaddata[var0][var1].squadleaderindex;
+function getsquadleader(var_0, var_1) {
+  var_2 = level.squaddata[var_0][var_1].squadleaderindex;
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return undefined;
   }
 
-  return level.squaddata[var0][var1].players[var2];
+  return level.squaddata[var_0][var_1].players[var_2];
 }
 
 function ref_13733() {
@@ -851,8 +851,8 @@ function brking_updateteamscore() {
   return getdvarint("NPSRPPOSP", 0) != 0;
 }
 
-function setspectator(var0) {
-  if((!isDefined(var0) || !var0) && isDefined(self.pers["team"]) && self.pers["team"] == "spectator") {
+function setspectator(var_0) {
+  if((!isDefined(var_0) || !var_0) && isDefined(self.pers["team"]) && self.pers["team"] == "spectator") {
     return;
   }
 
@@ -873,8 +873,8 @@ function setspectator(var0) {
   thread scripts\mp\playerlogic::spawnspectator();
 }
 
-function setfollower(var0) {
-  if((!isDefined(var0) || !var0) && isDefined(self.pers["team"]) && self.pers["team"] == "follower") {
+function setfollower(var_0) {
+  if((!isDefined(var_0) || !var_0) && isDefined(self.pers["team"]) && self.pers["team"] == "follower") {
     return;
   }
 
@@ -902,29 +902,29 @@ function waitforclassselect() {
   self setclientomnvar("ui_in_spawn_camera", 1);
 
   for(;;) {
-    var0 = scripts\mp\utility\game::getgametype() == "br" && scripts\mp\utility\game::allowclasschoice() && (!scripts\mp\flags::gameflag("prematch_done") || istrue(level.ref_133e0) || istrue(level.dmztut_endgametransition));
-    var1 = scripts\mp\utility\game::teamhasinfil(self.team) && !scripts\mp\flags::gameflag("infil_started") && !isDefined(level.bypassclasschoicefunc);
+    var_0 = scripts\mp\utility\game::getgametype() == "br" && scripts\mp\utility\game::allowclasschoice() && (!scripts\mp\flags::gameflag("prematch_done") || istrue(level.ref_133e0) || istrue(level.dmztut_endgametransition));
+    var_1 = scripts\mp\utility\game::teamhasinfil(self.team) && !scripts\mp\flags::gameflag("infil_started") && !isDefined(level.bypassclasschoicefunc);
 
-    if(var0 || var1) {
-      var2 = "class_select";
+    if(var_0 || var_1) {
+      var_2 = "class_select";
 
       if(!isai(self)) {
-        var3 = scripts\mp\rank::getrank() >= 4;
+        var_3 = scripts\mp\rank::getrank() >= 4;
 
-        if(var3 && !scripts\mp\utility\game::tv_station_intro_camera()) {
-          var4 = self getplayerdata(level.loadoutsgroup, "customizationFavorites", "favoriteLoadoutIndex");
+        if(var_3 && !scripts\mp\utility\game::tv_station_intro_camera()) {
+          var_4 = self getplayerdata(level.loadoutsgroup, "customizationFavorites", "favoriteLoadoutIndex");
         } else {
-          var4 = 100;
+          var_4 = 100;
         }
       } else {
-        var4 = "callback";
+        var_4 = "callback";
       }
     } else if(scripts\mp\utility\game::allowclasschoice() || scripts\mp\utility\game::showfakeloadout() && !isai(self)) {
       if(!self ismlgspectator() && getdvarint("debug_GLSpectate", 0) == 0 && self.team != "spectator" && scripts\mp\utility\game::getgametype() != "arm") {
         scripts\mp\utility\lower_message::setlowermessageomnvar(15);
       }
 
-      self waittill("loadout_class_selected", var4);
+      self waittill("loadout_class_selected", var_4);
     } else {
       bypassclasschoice();
       break;
@@ -934,14 +934,14 @@ function waitforclassselect() {
       continue;
     }
 
-    if("" + var4 != "callback") {
+    if("" + var_4 != "callback") {
       if(isbot(self)) {
-        self.pers["class"] = var4;
-        self.class = var4;
+        self.pers["class"] = var_4;
+        self.class = var_4;
       } else {
-        var4 = var4;
-        self.pers["class"] = getclasschoice(var4);
-        self.class = getclasschoice(var4);
+        var_4 = var_4;
+        self.pers["class"] = getclasschoice(var_4);
+        self.class = getclasschoice(var_4);
       }
 
       scripts\mp\utility\lower_message::setlowermessageomnvar(0);
@@ -955,13 +955,13 @@ function waitforclassselect() {
   }
 }
 
-function beginclasschoice(var0) {
-  var1 = self.pers["team"];
+function beginclasschoice(var_0) {
+  var_1 = self.pers["team"];
 
   if(scripts\mp\utility\game::allowclasschoice() || scripts\mp\utility\game::showfakeloadout() && !isai(self)) {
     if(getdvarint("scr_force_cac_sre_callstack", 0) == 1 && scripts\mp\utility\game::getgametype() == "br" && scripts\mp\utility\game::round_vehicle_logic() != "dmz" && scripts\mp\utility\game::round_vehicle_logic() != "rat_race" && scripts\mp\utility\game::round_vehicle_logic() != "risk" && scripts\mp\utility\game::round_vehicle_logic() != "sandbox" && scripts\mp\utility\game::round_vehicle_logic() != "rumble" && scripts\mp\utility\game::round_vehicle_logic() != "gold_war") {
-      var2 = isDefined(level.allowclasschoicefunc) && istrue(self[[level.allowclasschoicefunc]]());
-      scripts\mp\utility\script::laststand_dogtags("beginClassChoice() " + self.name + " ui_options_menu = 2, allowClassChoiceFunc = " + var2);
+      var_2 = isDefined(level.allowclasschoicefunc) && istrue(self[[level.allowclasschoicefunc]]());
+      scripts\mp\utility\script::laststand_dogtags("beginClassChoice() " + self.name + " ui_options_menu = 2, allowClassChoiceFunc = " + var_2);
     }
 
     self setclientomnvar("ui_options_menu", 2);
@@ -1009,8 +1009,8 @@ function bypassclasschoice() {
   }
 
   if(isDefined(level.bypassclasschoicefunc)) {
-    var0 = self[[level.bypassclasschoicefunc]]();
-    self.class = var0;
+    var_0 = self[[level.bypassclasschoicefunc]]();
+    self.class = var_0;
     return;
   }
 
@@ -1063,17 +1063,17 @@ function menuspectator() {
   thread scripts\mp\playerlogic::spawnspectator();
 }
 
-function menuclass(var0) {
-  var1 = self.pers["team"];
-  var2 = scripts\mp\class::getclasschoice(var0);
-  var3 = scripts\mp\class::getweaponchoice(var0);
+function menuclass(var_0) {
+  var_1 = self.pers["team"];
+  var_2 = scripts\mp\class::getclasschoice(var_0);
+  var_3 = scripts\mp\class::getweaponchoice(var_0);
 
-  if(var2 == "restricted") {
+  if(var_2 == "restricted") {
     beginclasschoice();
     return;
   }
 
-  if(isDefined(self.pers["class"]) && self.pers["class"] == var2 && isDefined(self.pers["primary"]) && self.pers["primary"] == var3) {
+  if(isDefined(self.pers["class"]) && self.pers["class"] == var_2 && isDefined(self.pers["primary"]) && self.pers["primary"] == var_3) {
     return;
   }
 
@@ -1083,9 +1083,9 @@ function menuclass(var0) {
       self.lastclass = self.pers["lastClass"];
     }
 
-    self.pers["class"] = var2;
-    self.class = var2;
-    self.pers["primary"] = var3;
+    self.pers["class"] = var_2;
+    self.class = var_2;
+    self.pers["primary"] = var_3;
 
     if(game["state"] == "postgame") {
       return;
@@ -1105,9 +1105,9 @@ function menuclass(var0) {
       self.lastclass = self.pers["lastClass"];
     }
 
-    self.pers["class"] = var2;
-    self.class = var2;
-    self.pers["primary"] = var3;
+    self.pers["class"] = var_2;
+    self.class = var_2;
+    self.pers["primary"] = var_3;
 
     if(game["state"] == "postgame") {
       return;
@@ -1121,11 +1121,11 @@ function menuclass(var0) {
   thread scripts\mp\spectating::setspectatepermissions();
 }
 
-function addtoteam(var0, var1, var2) {
+function addtoteam(var_0, var_1, var_2) {
   if(isDefined(self.team)) {
     scripts\mp\playerlogic::removefromteamcount();
 
-    if(isDefined(var2) && var2) {
+    if(isDefined(var_2) && var_2) {
       scripts\mp\playerlogic::decrementalivecount(self.team, 0, "addToTeam");
     }
 
@@ -1138,38 +1138,38 @@ function addtoteam(var0, var1, var2) {
     self.pers["last_team"] = self.pers["team"];
   }
 
-  self.changedteams = isDefined(self.pers["last_team"]) && self.pers["last_team"] != var0;
-  self.pers["team"] = var0;
-  self.team = var0;
-  var3 = isbot(self) || initmaxspeedforpathlengthtable(self);
+  self.changedteams = isDefined(self.pers["last_team"]) && self.pers["last_team"] != var_0;
+  self.pers["team"] = var_0;
+  self.team = var_0;
+  var_3 = isbot(self) || initmaxspeedforpathlengthtable(self);
 
-  if(var3) {
-    setsessionteam(var0);
+  if(var_3) {
+    setsessionteam(var_0);
   } else if(!scripts\mp\utility\game::denysystemicteamchoice()) {
     if(scripts\mp\utility\game::matchmakinggame()) {
       if(!scripts\mp\utility\game::allowteamassignment()) {
         if(scripts\mp\utility\game::getgametype() == "infect") {
-          setsessionteam(var0);
+          setsessionteam(var_0);
         } else {
-          setemptysessionteam(var0);
+          setemptysessionteam(var_0);
         }
       }
     } else if(!function_0426()) {
-      setsessionteam(var0);
+      setsessionteam(var_0);
     }
   }
 
   if(game["state"] != "postgame") {
-    scripts\mp\playerlogic::addtoteamcount(istrue(var2));
+    scripts\mp\playerlogic::addtoteamcount(istrue(var_2));
   }
 
   scripts\mp\utility\game::updateobjectivetext();
 
-  if(isDefined(var1) && var1) {
+  if(isDefined(var_1) && var_1) {
     waittillframeend();
   }
 
-  if(var0 == "spectator" || var0 == "follower") {
+  if(var_0 == "spectator" || var_0 == "follower") {
     self notify("joined_spectators");
     scripts\mp\teams::onjoinedspectators(self);
     scripts\mp\spectating::onjoinedspectators(self);
@@ -1184,22 +1184,22 @@ function addtoteam(var0, var1, var2) {
   level notify("add_to_team", self);
 }
 
-function setsessionteam(var0) {
+function setsessionteam(var_0) {
   if(level.teambased) {
-    self.sessionteam = var0;
+    self.sessionteam = var_0;
     return;
   }
 
-  setemptysessionteam(var0);
+  setemptysessionteam(var_0);
 }
 
-function setemptysessionteam(var0) {
-  if(var0 == "spectator") {
+function setemptysessionteam(var_0) {
+  if(var_0 == "spectator") {
     self.sessionteam = "spectator";
     return;
   }
 
-  if(var0 == "follower") {
+  if(var_0 == "follower") {
     self.sessionteam = "follower";
     return;
   }
@@ -1212,51 +1212,51 @@ function endrespawnnotify() {
   self notify("end_respawn");
 }
 
-function logteamselection(var0) {
+function logteamselection(var_0) {
   if(getdvarint("scr_playtest", 0) == 0) {
     return;
   }
 
-  if(var0 != "random") {
+  if(var_0 != "random") {
     iprintlnbold("" + self.name + " did not select auto-assign");
     return;
   }
 }
 
 function debugprintsquads() {
-  var0 = 25;
+  var_0 = 25;
 
   for(;;) {
     if(isDefined(level.squaddata)) {
-      var1 = 800;
-      var2 = 25;
-      var3 = 1;
+      var_1 = 800;
+      var_2 = 25;
+      var_3 = 1;
 
-      foreach(var5 in level.squaddata) {
-        var3 = 1;
-        var3++;
+      foreach(var_5 in level.squaddata) {
+        var_3 = 1;
+        var_3++;
 
-        foreach(var7 in var5) {
-          var8 = (1, 1, 1);
+        foreach(var_7 in var_5) {
+          var_8 = (1, 1, 1);
 
-          if(isDefined(var7.activemission)) {
-            var8 = (1, 1, 0);
+          if(isDefined(var_7.activemission)) {
+            var_8 = (1, 1, 0);
           }
 
-          var3++;
+          var_3++;
 
-          foreach(var10 in var7.players) {
-            var8 = (1, 1, 1);
+          foreach(var_10 in var_7.players) {
+            var_8 = (1, 1, 1);
 
-            if(istrue(var10.squadassignedfromlobby)) {
-              var8 = (0, 1, 0);
+            if(istrue(var_10.squadassignedfromlobby)) {
+              var_8 = (0, 1, 0);
             }
 
-            var3++;
+            var_3++;
           }
         }
 
-        var1 += 200;
+        var_1 += 200;
       }
     }
 

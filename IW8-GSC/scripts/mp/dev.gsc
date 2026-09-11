@@ -16,55 +16,55 @@ function gotoprevspawn() {}
 function devaliengiveplayersmoney() {}
 
 function spam_points_popup() {
-  var0 = ["headshot", "avenger", "longshot", "posthumous", "double", "triple", "multi"];
+  var_0 = ["headshot", "avenger", "longshot", "posthumous", "double", "triple", "multi"];
 
-  for(var1 = 0; var1 < var0.size; var1++) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     thread scripts\mp\rank::scorepointspopup(100);
-    thread scripts\mp\rank::scoreeventpopup(var0[var1]);
+    thread scripts\mp\rank::scoreeventpopup(var_0[var_1]);
     wait 2;
   }
 }
 
 function devlistinventory() {
-  var0 = getDvar("scr_list_inventory", "");
+  var_0 = getDvar("scr_list_inventory", "");
 
-  if(var0 != "") {
-    var1 = devfindhost();
+  if(var_0 != "") {
+    var_1 = devfindhost();
 
-    if(!isDefined(var1)) {
+    if(!isDefined(var_1)) {
       return;
     }
 
-    var2 = undefined;
-    var3 = undefined;
-    var4 = 0;
+    var_2 = undefined;
+    var_3 = undefined;
+    var_4 = 0;
 
-    if(var0 == "all") {
-      var3 = "all weapons";
-      var2 = var1 getweaponslistall();
-    } else if(var0 == "primaryCurrent") {
-      var3 = "current weapon";
-      var4 = 1;
-      var2 = [var1 getcurrentweapon()];
+    if(var_0 == "all") {
+      var_3 = "all weapons";
+      var_2 = var_1 getweaponslistall();
+    } else if(var_0 == "primaryCurrent") {
+      var_3 = "current weapon";
+      var_4 = 1;
+      var_2 = [var_1 getcurrentweapon()];
     } else {
-      var3 = var0 + " inventory";
-      var2 = var1 getweaponslist(var0);
+      var_3 = var_0 + " inventory";
+      var_2 = var_1 getweaponslist(var_0);
     }
 
-    devprintweaponlist(var1, var2, var3, var4);
+    devprintweaponlist(var_1, var_2, var_3, var_4);
     return;
   }
 }
 
-function devprintweaponlist(var0, var1, var2) {
-  if(isDefined(var0) && var0.size > 0) {
-    foreach(var4 in var0) {
-      var5 = self getweaponammoclip(var4);
-      var6 = self getweaponammostock(var4);
-      var7 = "" + createheadicon(var4) + " " + var5 + "/" + var6;
+function devprintweaponlist(var_0, var_1, var_2) {
+  if(isDefined(var_0) && var_0.size > 0) {
+    foreach(var_4 in var_0) {
+      var_5 = self getweaponammoclip(var_4);
+      var_6 = self getweaponammostock(var_4);
+      var_7 = "" + createheadicon(var_4) + " " + var_5 + "/" + var_6;
 
-      if(var2) {
-        iprintlnbold(var7);
+      if(var_2) {
+        iprintlnbold(var_7);
       }
     }
   }
@@ -72,26 +72,26 @@ function devprintweaponlist(var0, var1, var2) {
 
 function devgivesuperthink() {
   for(;;) {
-    var0 = getDvar("scr_givesuper", "");
+    var_0 = getDvar("scr_givesuper", "");
 
-    if(var0 != "") {
-      foreach(var2 in level.players) {
-        var2 scripts\mp\supers::givesuper(var0, 0, 1);
+    if(var_0 != "") {
+      foreach(var_2 in level.players) {
+        var_2 scripts\mp\supers::givesuper(var_0, 0, 1);
       }
     }
 
     if(getdvarint("scr_super_short_cooldown", 0) != 0) {
-      foreach(var2 in level.players) {
-        if(isbot(var2)) {
+      foreach(var_2 in level.players) {
+        if(isbot(var_2)) {
           continue;
         }
 
-        if(!isDefined(var2 scripts\mp\supers::getcurrentsuper())) {
+        if(!isDefined(var_2 scripts\mp\supers::getcurrentsuper())) {
           continue;
         }
 
-        if(var2 scripts\mp\supers::issupercharging()) {
-          var2 scripts\mp\supers::givesuperpoints(var2 scripts\mp\supers::getsuperpointsneeded() * 0.25);
+        if(var_2 scripts\mp\supers::issupercharging()) {
+          var_2 scripts\mp\supers::givesuperpoints(var_2 scripts\mp\supers::getsuperpointsneeded() * 0.25);
         }
       }
     }
@@ -102,11 +102,11 @@ function devgivesuperthink() {
 
 function devgivefieldupgradethink() {
   for(;;) {
-    var0 = getDvar("scr_givefieldUpgrade", "");
+    var_0 = getDvar("scr_givefieldUpgrade", "");
 
-    if(var0 != "") {
-      foreach(var2 in level.players) {
-        var2 scripts\mp\perks\perkpackage::perkpackage_givedebug(var0);
+    if(var_0 != "") {
+      foreach(var_2 in level.players) {
+        var_2 scripts\mp\perks\perkpackage::perkpackage_givedebug(var_0);
       }
     }
 
@@ -115,16 +115,16 @@ function devgivefieldupgradethink() {
 }
 
 function devfindhost() {
-  var0 = undefined;
+  var_0 = undefined;
 
-  foreach(var2 in level.players) {
-    if(var2 ishost()) {
-      var0 = var2;
+  foreach(var_2 in level.players) {
+    if(var_2 ishost()) {
+      var_0 = var_2;
       break;
     }
   }
 
-  return var0;
+  return var_0;
 }
 
 function watchlethaldelaycancel() {
@@ -158,8 +158,8 @@ function watchslowmo() {
     wait 1;
   }
 
-  var0 = getdvarfloat("scr_slowmo");
-  setslowmotion(var0, var0, 0);
+  var_0 = getdvarfloat("scr_slowmo");
+  setslowmotion(var_0, var_0, 0);
   thread watchslowmo();
 }
 

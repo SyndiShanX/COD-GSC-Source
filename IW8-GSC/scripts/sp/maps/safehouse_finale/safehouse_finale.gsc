@@ -271,14 +271,14 @@ function init_anims_generic_human() {
   level.scr_anim["rebel_8"]["outro_scene"] = % shf_050_3p_outro_rebel08;
   level.scr_anim["rebel_9"]["outro_scene"] = % shf_050_3p_outro_rebel09;
   level.scr_anim["rebel_10"]["outro_scene"] = % shf_050_3p_outro_rebel10;
-  var0 = "generic";
-  level.scr_anim[var0]["faveladoor_fastopen"] = % reb_smtobj_door_r_fastopen;
-  level.scr_anim[var0]["faveladoor_fire1"] = % shf_reb_smtobj_door_r_fire01;
-  level.scr_anim[var0]["faveladoor_fire2"] = % reb_smtobj_door_r_fire02;
-  level.scr_anim[var0]["faveladoor_fire3"] = % reb_smtobj_door_r_fire03;
-  level.scr_anim[var0]["faveladoor_idle"][0] = % reb_smtobj_door_r_loop;
-  level.scr_anim[var0]["faveladoor_kick"] = % reb_smtobj_door_r_kick01;
-  level.scr_anim[var0]["faveladoor_peak"] = % reb_smtobj_door_r_peak;
+  var_0 = "generic";
+  level.scr_anim[var_0]["faveladoor_fastopen"] = % reb_smtobj_door_r_fastopen;
+  level.scr_anim[var_0]["faveladoor_fire1"] = % shf_reb_smtobj_door_r_fire01;
+  level.scr_anim[var_0]["faveladoor_fire2"] = % reb_smtobj_door_r_fire02;
+  level.scr_anim[var_0]["faveladoor_fire3"] = % reb_smtobj_door_r_fire03;
+  level.scr_anim[var_0]["faveladoor_idle"][0] = % reb_smtobj_door_r_loop;
+  level.scr_anim[var_0]["faveladoor_kick"] = % reb_smtobj_door_r_kick01;
+  level.scr_anim[var_0]["faveladoor_peak"] = % reb_smtobj_door_r_peak;
   level.scr_anim["farah"]["gate_pull"] = % shf_035_gate_pull_farah;
   level.scr_anim["hadir"]["truck_enter"] = % shf_040_armored_truck_hadir_enter;
   level.scr_anim["body"]["truck_enter"] = % shf_040_armored_truck_body;
@@ -354,9 +354,9 @@ function init_level() {
   setsaveddvar("MKNNNONLSK", 4);
   setdvarifuninitialized("level_convoyVehiclesDebug", 0);
   setdvarifuninitialized("jump_enemyVehicleDebug", 0);
-  var0 = ["molotov", "frag", "flash"];
-  level.player.offhands_list = var0;
-  scripts\engine\sp\utility::offhandprecache(var0);
+  var_0 = ["molotov", "frag", "flash"];
+  level.player.offhands_list = var_0;
+  scripts\engine\sp\utility::offhandprecache(var_0);
   scripts\engine\utility::noself_delaycall(0.2, &visionsetmissilecam, "rc_plane", 0.5);
   scripts\sp\maps\safehouse_finale\safehouse_finale_fob::fob_spawn_funcs();
 }
@@ -367,8 +367,8 @@ function init_player() {
   scripts\sp\utility::context_melee_set_arms("viewmodel_arms_alex_desert");
   level.player setshadowmodel("default_character_shadow");
 
-  foreach(var1 in level.player.offhandinventory) {
-    level.player takeweapon(var1);
+  foreach(var_1 in level.player.offhandinventory) {
+    level.player takeweapon(var_1);
   }
 
   level.player setmovingplatformplayerturnrate(0);
@@ -384,28 +384,28 @@ function intro_start() {
 
 function intro_main() {
   thread scripts\sp\analytics::analytics_kleenex_update("Intro to Rooftops");
-  var0 = scripts\sp\hud_util::create_client_overlay("black", 1, level.player);
-  var1 = newclienthudelem(level.player);
-  var1.color = (1, 1, 1);
-  var1 settext("3 Hours Later");
-  var1.x = 0;
-  var1.y = -20;
-  var1.alignx = "center";
-  var1.aligny = "middle";
-  var1.horzalign = "center";
-  var1.vertalign = "middle";
-  var1.foreground = 1;
-  var1.alpha = 1;
-  var1.fontscale = 3;
-  var1.hidewhendead = 1;
-  var1.sort = 3;
-  var2 = 4;
-  wait var2;
-  var3 = 5;
-  var1 fadeovertime(var3 * 0.25);
-  var1.alpha = 0;
-  var0 fadeovertime(var3);
-  var0.alpha = 0;
+  var_0 = scripts\sp\hud_util::create_client_overlay("black", 1, level.player);
+  var_1 = newclienthudelem(level.player);
+  var_1.color = (1, 1, 1);
+  var_1 settext("3 Hours Later");
+  var_1.x = 0;
+  var_1.y = -20;
+  var_1.alignx = "center";
+  var_1.aligny = "middle";
+  var_1.horzalign = "center";
+  var_1.vertalign = "middle";
+  var_1.foreground = 1;
+  var_1.alpha = 1;
+  var_1.fontscale = 3;
+  var_1.hidewhendead = 1;
+  var_1.sort = 3;
+  var_2 = 4;
+  wait var_2;
+  var_3 = 5;
+  var_1 fadeovertime(var_3 * 0.25);
+  var_1.alpha = 0;
+  var_0 fadeovertime(var_3);
+  var_0.alpha = 0;
 }
 
 function fly_start() {
@@ -422,42 +422,42 @@ function fly_main() {
   thread pumpjacks();
   setmusicstate("");
   level.player.fly_start = 1;
-  var0 = getEntArray("pristine_tarmac_models", "targetname");
-  scripts\engine\utility::array_thread(var0, &tarmac_model_init);
-  var1 = getEntArray("destroyed_tarmac_models", "script_noteworthy");
-  scripts\engine\utility::array_call(var1, &hide);
+  var_0 = getEntArray("pristine_tarmac_models", "targetname");
+  scripts\engine\utility::array_thread(var_0, &tarmac_model_init);
+  var_1 = getEntArray("destroyed_tarmac_models", "script_noteworthy");
+  scripts\engine\utility::array_call(var_1, &hide);
   thread fly_tarmac_blima_01();
   thread fly_tarmac_blima_02();
   wait 0.2;
-  var2 = fly_getplayerdronestartnode();
-  var3 = var2.origin;
-  var4 = scripts\sp\maps\safehouse_finale\safehouse_finale_utility::player_usedrone(var3, var2.angles, 84, 100, 100);
-  var4.targetname = "fly_playerDrone";
+  var_2 = fly_getplayerdronestartnode();
+  var_3 = var_2.origin;
+  var_4 = scripts\sp\maps\safehouse_finale\safehouse_finale_utility::player_usedrone(var_3, var_2.angles, 84, 100, 100);
+  var_4.targetname = "fly_playerDrone";
   thread scripts\sp\maps\safehouse_finale\safehouse_finale_fob::dialogue_fly();
   level.allydrones = [];
-  var5 = fly_getallydronestartnodes();
+  var_5 = fly_getallydronestartnodes();
 
-  foreach(var7 in var5) {
-    var8 = scripts\sp\maps\safehouse_finale\safehouse_finale_utility::level_dronespawnVehicle(var7.origin, var7.angles);
-    var8.maxhealth = 30000;
-    var9 = scripts\engine\utility::is_equal(var7.script_noteworthy, "fly_allyDroneNearPlayer");
-    thread fly_allydronepathlogic(var8, var7, var9);
-    level.allydrones = scripts\engine\utility::array_add(level.allydrones, var8);
+  foreach(var_7 in var_5) {
+    var_8 = scripts\sp\maps\safehouse_finale\safehouse_finale_utility::level_dronespawnVehicle(var_7.origin, var_7.angles);
+    var_8.maxhealth = 30000;
+    var_9 = scripts\engine\utility::is_equal(var_7.script_noteworthy, "fly_allyDroneNearPlayer");
+    thread fly_allydronepathlogic(var_8, var_7, var_9);
+    level.allydrones = scripts\engine\utility::array_add(level.allydrones, var_8);
   }
 
   thread tarmac_nav_obstacles();
-  var11 = fly_spawnenemies();
-  thread fly_enemieslogic(var11, undefined, level.allydrones, var4);
+  var_11 = fly_spawnenemies();
+  thread fly_enemieslogic(var_11, undefined, level.allydrones, var_4);
   thread scripts\sp\maps\safehouse_finale\safehouse_finale_fob::tromeo_vehicle_tarmac_00();
   thread fly_hintlogic();
-  thread player_drone_damage(var4);
-  var12 = gettime();
-  level.player waittill("player_exitDrone", var13);
-  var14 = fly_getplayerdronesuccessvolume();
+  thread player_drone_damage(var_4);
+  var_12 = gettime();
+  level.player waittill("player_exitDrone", var_13);
+  var_14 = fly_getplayerdronesuccessvolume();
 
-  if(!ispointinvolume(var13, var14) && var12 + 25000 > gettime()) {
-    var15 = ["dx_vom_had_fly_missfail_10", "dx_vom_had_fly_missfail_20", "dx_vom_had_fly_missfail_30"];
-    level thread scripts\engine\sp\utility::smart_radio_dialogue_interrupt(scripts\engine\utility::random(var15));
+  if(!ispointinvolume(var_13, var_14) && var_12 + 25000 > gettime()) {
+    var_15 = ["dx_vom_had_fly_missfail_10", "dx_vom_had_fly_missfail_20", "dx_vom_had_fly_missfail_30"];
+    level thread scripts\engine\sp\utility::smart_radio_dialogue_interrupt(scripts\engine\utility::random(var_15));
     level notify("fly_crash_missed");
     setDvar("scr_shf_invert", 1);
     level.blackoverlay = scripts\sp\hud_util::create_client_overlay("black", 0);
@@ -477,34 +477,34 @@ function fly_main() {
 }
 
 function pumpjacks() {
-  var0 = getEntArray("pumpjacks", "targetname");
+  var_0 = getEntArray("pumpjacks", "targetname");
 
-  foreach(var2 in var0) {
-    var2.animname = "pumpjack";
-    var2 scripts\engine\sp\utility::assign_animtree("pumpjack");
-    var2 thread scripts\common\anim::anim_loop_solo(var2, "pumpjack_idle");
+  foreach(var_2 in var_0) {
+    var_2.animname = "pumpjack";
+    var_2 scripts\engine\sp\utility::assign_animtree("pumpjack");
+    var_2 thread scripts\common\anim::anim_loop_solo(var_2, "pumpjack_idle");
   }
 
   scripts\engine\utility::flag_wait("fly_attack_done");
-  scripts\engine\utility::array_delete(var0);
+  scripts\engine\utility::array_delete(var_0);
 }
 
 function inverted_pop_up() {
   level endon("fly_attack_done");
   wait 0.5;
-  var0 = gettime() + 2000;
+  var_0 = gettime() + 2000;
 
   if(level.player usinggamepad()) {
-    var1 = level.player getlocalplayerprofiledata("invertPitchGamepad") || level.player getlocalplayerprofiledata("invertPitchFlyingGamepad");
+    var_1 = level.player getlocalplayerprofiledata("invertPitchGamepad") || level.player getlocalplayerprofiledata("invertPitchFlyingGamepad");
   } else {
-    var1 = level.player getlocalplayerprofiledata("invertPitchKBM");
+    var_1 = level.player getlocalplayerprofiledata("invertPitchKBM");
   }
 
-  if(var1 >= 1) {
+  if(var_1 >= 1) {
     return;
   }
 
-  while(gettime() < var1) {
+  while(gettime() < var_1) {
     if(level.pitchdelta < 0.1) {
       scripts\engine\sp\utility::display_hint_forced("flight_invert", 3, undefined, level.player, "invert_pressed");
       break;
@@ -519,39 +519,39 @@ function inverted_pop_up() {
 }
 
 function fly_tarmac_blima_01() {
-  var0 = scripts\common\vehicle::spawn_vehicle_from_targetname("fly_blima_01");
-  var1 = scripts\engine\utility::getStruct("fly_blima_01_struct", "targetname");
-  var0 endon("death");
-  var0 scripts\common\vehicle::godon();
+  var_0 = scripts\common\vehicle::spawn_vehicle_from_targetname("fly_blima_01");
+  var_1 = scripts\engine\utility::getStruct("fly_blima_01_struct", "targetname");
+  var_0 endon("death");
+  var_0 scripts\common\vehicle::godon();
   thread fly_blima_god_mode_off();
   thread fly_blima_death();
-  var0.clip = getEnt("fly_blima_01_clip", "targetname");
-  var0.clip linkTo(var0);
-  var0 thread scripts\engine\utility::delete_on_death(var0.clip);
-  level.choppers[level.choppers.size] = var0;
-  var0 vehicle_setspeedimmediate(60, 10);
-  var0 vehicle_teleport(var1.origin + (0, 0, 1500), var1.angles);
-  var0 settargetyaw(var1.angles[1]);
-  var0 hidepart("TAG_MAIN_ROTOR_STATIC");
-  var0 hidepart("TAG_TAIL_ROTOR_STATIC");
-  var1 = var1 scripts\engine\utility::get_target_ent();
-  var0 setvehgoalpos(var1.origin + (0, 0, 200), 0);
+  var_0.clip = getEnt("fly_blima_01_clip", "targetname");
+  var_0.clip linkTo(var_0);
+  var_0 thread scripts\engine\utility::delete_on_death(var_0.clip);
+  level.choppers[level.choppers.size] = var_0;
+  var_0 vehicle_setspeedimmediate(60, 10);
+  var_0 vehicle_teleport(var_1.origin + (0, 0, 1500), var_1.angles);
+  var_0 settargetyaw(var_1.angles[1]);
+  var_0 hidepart("TAG_MAIN_ROTOR_STATIC");
+  var_0 hidepart("TAG_TAIL_ROTOR_STATIC");
+  var_1 = var_1 scripts\engine\utility::get_target_ent();
+  var_0 setvehgoalpos(var_1.origin + (0, 0, 200), 0);
   thread blima_clean_up();
-  var0 vehicle_turnengineoff();
+  var_0 vehicle_turnengineoff();
   thread blima_engine_sound();
-  var0 waittill("goal");
-  var1 = var1 scripts\engine\utility::get_target_ent();
-  var0 setvehgoalpos(var1.origin + (0, 0, 0), 1);
-  var0 vehicle_setspeed(10, 10, 5);
-  var0 setneargoalnotifydist(200);
-  var0 waittill("near_goal");
-  var0 vehicle_setspeed(10, 10, 5);
-  var0 setvehgoalpos(var1.origin + (0, 500, 1000), 1);
+  var_0 waittill("goal");
+  var_1 = var_1 scripts\engine\utility::get_target_ent();
+  var_0 setvehgoalpos(var_1.origin + (0, 0, 0), 1);
+  var_0 vehicle_setspeed(10, 10, 5);
+  var_0 setneargoalnotifydist(200);
+  var_0 waittill("near_goal");
+  var_0 vehicle_setspeed(10, 10, 5);
+  var_0 setvehgoalpos(var_1.origin + (0, 500, 1000), 1);
   scripts\engine\utility::flag_wait("fly_attack_done");
   wait 0.75;
-  var0 scripts\common\vehicle::godoff();
+  var_0 scripts\common\vehicle::godoff();
   thread delete_fly_choppers();
-  var0 kill();
+  var_0 kill();
 }
 
 function fly_blima_god_mode_off() {
@@ -581,9 +581,9 @@ function delete_fly_choppers() {
 }
 
 function fly_blima_death() {
-  self waittill("death", var0);
+  self waittill("death", var_0);
 
-  if(var0 != level.player) {
+  if(var_0 != level.player) {
     return;
   }
 
@@ -591,42 +591,42 @@ function fly_blima_death() {
 }
 
 function fly_tarmac_blima_02() {
-  var0 = scripts\common\vehicle::spawn_vehicle_from_targetname("fly_blima_02");
-  var1 = scripts\engine\utility::getStruct("fly_blima_02_struct", "targetname");
-  var0.clip = getEnt("fly_blima_02_clip", "targetname");
-  var0.clip linkTo(var0);
-  var0 thread scripts\engine\utility::delete_on_death(var0.clip);
-  level.choppers[level.choppers.size] = var0;
-  var0 endon("death");
-  var0 scripts\common\vehicle::godon();
+  var_0 = scripts\common\vehicle::spawn_vehicle_from_targetname("fly_blima_02");
+  var_1 = scripts\engine\utility::getStruct("fly_blima_02_struct", "targetname");
+  var_0.clip = getEnt("fly_blima_02_clip", "targetname");
+  var_0.clip linkTo(var_0);
+  var_0 thread scripts\engine\utility::delete_on_death(var_0.clip);
+  level.choppers[level.choppers.size] = var_0;
+  var_0 endon("death");
+  var_0 scripts\common\vehicle::godon();
   thread fly_blima_god_mode_off();
   thread fly_blima_death();
-  var0 vehicle_setspeedimmediate(55, 10);
-  var0 vehicle_teleport(var1.origin + (0, 0, 500), var1.angles);
-  var0 setneargoalnotifydist(500);
-  var0 hidepart("TAG_MAIN_ROTOR_STATIC");
-  var0 hidepart("TAG_TAIL_ROTOR_STATIC");
-  var1 = var1 scripts\engine\utility::get_target_ent();
-  var0 setvehgoalpos(var1.origin, 0);
+  var_0 vehicle_setspeedimmediate(55, 10);
+  var_0 vehicle_teleport(var_1.origin + (0, 0, 500), var_1.angles);
+  var_0 setneargoalnotifydist(500);
+  var_0 hidepart("TAG_MAIN_ROTOR_STATIC");
+  var_0 hidepart("TAG_TAIL_ROTOR_STATIC");
+  var_1 = var_1 scripts\engine\utility::get_target_ent();
+  var_0 setvehgoalpos(var_1.origin, 0);
   thread blima_clean_up();
-  var0 vehicle_turnengineoff();
+  var_0 vehicle_turnengineoff();
   thread blima_engine_sound();
-  var0 waittill("goal");
-  var1 = var1 scripts\engine\utility::get_target_ent();
-  var0 setvehgoalpos(var1.origin + (0, 0, 400), 0);
-  var0 settargetyaw(var1.angles[1]);
-  var0 setneargoalnotifydist(1000);
-  var0 waittill("near_goal");
-  var0 vehicle_setspeed(15, 10, 5);
-  var0 setvehgoalpos(var1.origin + (0, 0, 150), 1);
-  var0 waittill("goal");
-  var0 sethoverparams(0, 0, 0);
-  var0 vehicle_setspeed(10, 10, 5);
-  var0 setvehgoalpos(var1.origin + (0, 500, 800), 1);
+  var_0 waittill("goal");
+  var_1 = var_1 scripts\engine\utility::get_target_ent();
+  var_0 setvehgoalpos(var_1.origin + (0, 0, 400), 0);
+  var_0 settargetyaw(var_1.angles[1]);
+  var_0 setneargoalnotifydist(1000);
+  var_0 waittill("near_goal");
+  var_0 vehicle_setspeed(15, 10, 5);
+  var_0 setvehgoalpos(var_1.origin + (0, 0, 150), 1);
+  var_0 waittill("goal");
+  var_0 sethoverparams(0, 0, 0);
+  var_0 vehicle_setspeed(10, 10, 5);
+  var_0 setvehgoalpos(var_1.origin + (0, 500, 800), 1);
   scripts\engine\utility::flag_wait("fly_attack_done");
-  var0 scripts\common\vehicle::godoff();
+  var_0 scripts\common\vehicle::godoff();
   thread delete_fly_choppers();
-  var0 kill();
+  var_0 kill();
 }
 
 function blima_clean_up() {
@@ -642,10 +642,10 @@ function blima_clean_up() {
 }
 
 function blima_engine_sound() {
-  var0 = self gettagorigin("tag_origin");
-  var1 = spawn("script_model", var0);
-  var1 linkTo(self, "tag_origin");
-  var1 playLoopSound("scn_safehouse_rc_plane_heli_lp");
+  var_0 = self gettagorigin("tag_origin");
+  var_1 = spawn("script_model", var_0);
+  var_1 linkTo(self, "tag_origin");
+  var_1 playLoopSound("scn_safehouse_rc_plane_heli_lp");
   thread blima_engine_sound_death_watch();
   thread blima_engine_sound_done_watch();
   self waittill("stop_engine_sound");
@@ -654,10 +654,10 @@ function blima_engine_sound() {
     self vehicle_turnengineon();
   }
 
-  if(isDefined(var1)) {
-    var1 stopsounds();
+  if(isDefined(var_1)) {
+    var_1 stopsounds();
     waitframe();
-    var1 delete();
+    var_1 delete();
     return;
   }
 }
@@ -669,9 +669,9 @@ function blima_engine_sound_done_watch() {
 
 function blima_engine_sound_death_watch() {
   while(isDefined(self)) {
-    self waittill("damage", var0, var1);
+    self waittill("damage", var_0, var_1);
 
-    if(var1 == level.player) {
+    if(var_1 == level.player) {
       scripts\engine\sp\utility::play_sound_on_entity("scn_safehouse_rc_plane_heli_death");
       self notify("stop_engine_sound");
     }
@@ -687,7 +687,7 @@ function fly_catchup() {
   thread pumpjacks();
 }
 
-function player_drone_damage(var0) {
+function player_drone_damage(var_0) {
   self endon("death");
   wait 16;
   magicbullet("iw8_lm_pkilo", (-40741, 30946, -604), self.origin + (0, 0, 30));
@@ -697,21 +697,21 @@ function player_drone_damage(var0) {
   magicbullet("iw8_lm_pkilo", (-40741, 30946, -604), self.origin);
   thread scripts\sp\maps\safehouse_finale\safehouse_finale_utility::dronedamagevisionlogic();
   thread scripts\sp\maps\safehouse_finale\safehouse_finale_utility::dronedamageeffectslogic();
-  scripts\sp\maps\safehouse_finale\safehouse_finale_utility::dronedamagerotatelogic(var0);
+  scripts\sp\maps\safehouse_finale\safehouse_finale_utility::dronedamagerotatelogic(var_0);
 }
 
 function tarmac_nav_obstacles() {
   level.tarmac_bad_places_ids = [];
-  var0 = getEntArray("tarmac_bad_places", "targetname");
+  var_0 = getEntArray("tarmac_bad_places", "targetname");
 
-  foreach(var2 in var0) {
-    level.tarmac_bad_places_ids[level.tarmac_bad_places_ids.size] = createnavbadplacebyent(var2, "axis");
+  foreach(var_2 in var_0) {
+    level.tarmac_bad_places_ids[level.tarmac_bad_places_ids.size] = createnavbadplacebyent(var_2, "axis");
   }
 
   scripts\engine\utility::flag_wait("fly_attack_done");
 
-  foreach(var5 in level.tarmac_bad_places_ids) {
-    destroynavobstacle(var5);
+  foreach(var_5 in level.tarmac_bad_places_ids) {
+    destroynavobstacle(var_5);
   }
 }
 
@@ -743,9 +743,9 @@ function tarmac_damaged_model_swaps() {
   self.dmg_models = scripts\engine\utility::get_target_array();
 
   while(isDefined(self)) {
-    self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
 
-    if(scripts\engine\utility::is_equal(var4, "MOD_PROJECTILE")) {
+    if(scripts\engine\utility::is_equal(var_4, "MOD_PROJECTILE")) {
       break;
     }
   }
@@ -759,16 +759,16 @@ function tarmac_damaged_model_swaps() {
 }
 
 function fly_hintlogic() {
-  var0 = fly_getplayerdrone();
-  var0 endon("death");
-  var1 = anglesToForward(var0.angles);
+  var_0 = fly_getplayerdrone();
+  var_0 endon("death");
+  var_1 = anglesToForward(var_0.angles);
   scripts\engine\sp\utility::display_hint("drone_pilot", undefined, 7);
 
   for(;;) {
-    var2 = anglesToForward(var0.angles);
-    var3 = scripts\engine\math::anglebetweenvectors(var2, var1);
+    var_2 = anglesToForward(var_0.angles);
+    var_3 = scripts\engine\math::anglebetweenvectors(var_2, var_1);
 
-    if(var3) {
+    if(var_3) {
       break;
     }
 
@@ -778,25 +778,25 @@ function fly_hintlogic() {
   level.player notify("new_hint");
 }
 
-function fly_allydroneflynearplayerupdate(var0) {
-  var1 = fly_getplayerdrone();
-  var1 endon("death");
-  var2 = 100;
-  var3 = var2 + 20;
-  var4 = var2 + -20;
-  var5 = scripts\sp\maps\safehouse_finale\safehouse_finale_utility::entity_getbehindforwarddistance(var1, var0);
+function fly_allydroneflynearplayerupdate(var_0) {
+  var_1 = fly_getplayerdrone();
+  var_1 endon("death");
+  var_2 = 100;
+  var_3 = var_2 + 20;
+  var_4 = var_2 + -20;
+  var_5 = scripts\sp\maps\safehouse_finale\safehouse_finale_utility::entity_getbehindforwarddistance(var_1, var_0);
 
-  if(var5 > 600) {
-    var0 vehicle_setspeed(var4, 20, 20);
+  if(var_5 > 600) {
+    var_0 vehicle_setspeed(var_4, 20, 20);
     return;
   }
 
-  if(var5 < 400) {
-    var0 vehicle_setspeed(var3, 20, 20);
+  if(var_5 < 400) {
+    var_0 vehicle_setspeed(var_3, 20, 20);
     return;
   }
 
-  var0 vehicle_setspeed(100, 20, 20);
+  var_0 vehicle_setspeed(100, 20, 20);
 }
 
 function fly_getplayerdrone() {
@@ -815,66 +815,66 @@ function fly_getplayerdronesuccessvolume() {
   return getEnt("fly_playerDroneSuccessVolume", "targetname");
 }
 
-function fly_allydronepathlogic(var0, var1, var2, var3) {
-  var0 endon("entitydeleted");
-  var4 = fly_getplayerdrone();
+function fly_allydronepathlogic(var_0, var_1, var_2, var_3) {
+  var_0 endon("entitydeleted");
+  var_4 = fly_getplayerdrone();
 
   if(scripts\engine\utility::flag("player_has_tablet")) {
-    playFXOnTag(level._effect["vfx_safehouse_finale_drone_contrails"], var0, "tag_origin");
+    playFXOnTag(level._effect["vfx_safehouse_finale_drone_contrails"], var_0, "tag_origin");
   }
 
   waitframe();
-  playFXOnTag(level._effect["vfx_safehouse_finale_drone_heat_dist"], var0, "tag_origin");
-  playFXOnTag(level._effect["vfx_safehouse_finale_drone_wingtip_red_lit"], var0, "tag_origin");
-  var0 attachpath(var1);
-  var0 thread scripts\common\vehicle::vehicle_paths(var1);
-  scripts\common\vehicle_paths::gopath(var0);
-  var5 = var0 scripts\common\vehicle::vehicle_get_path_array();
-  var6 = var5.size - 1;
-  var7 = randomfloatrange(90.9091, 142.046);
+  playFXOnTag(level._effect["vfx_safehouse_finale_drone_heat_dist"], var_0, "tag_origin");
+  playFXOnTag(level._effect["vfx_safehouse_finale_drone_wingtip_red_lit"], var_0, "tag_origin");
+  var_0 attachpath(var_1);
+  var_0 thread scripts\common\vehicle::vehicle_paths(var_1);
+  scripts\common\vehicle_paths::gopath(var_0);
+  var_5 = var_0 scripts\common\vehicle::vehicle_get_path_array();
+  var_6 = var_5.size - 1;
+  var_7 = randomfloatrange(90.9091, 142.046);
 
   if(scripts\engine\utility::flag_exist("fob_center")) {
     if(scripts\engine\utility::flag("fob_center")) {
-      var7 /= 4;
+      var_7 /= 4;
     }
   }
 
-  var0 vehicle_setspeedimmediate(var7, 100, 100);
+  var_0 vehicle_setspeedimmediate(var_7, 100, 100);
 
-  while(isDefined(var4)) {
-    fly_allydroneflynearplayerupdate(var0);
-    var8 = getvehiclenode(var0.currentnode.target, "targetname");
+  while(isDefined(var_4)) {
+    fly_allydroneflynearplayerupdate(var_0);
+    var_8 = getvehiclenode(var_0.currentnode.target, "targetname");
 
-    if(!isDefined(var8.target)) {
-      var0.nextnode = var8;
+    if(!isDefined(var_8.target)) {
+      var_0.nextnode = var_8;
       break;
     }
 
     waitframe();
   }
 
-  var0 vehicle_setspeed(var7 * 50 * 0.0568182, 20);
-  var0 notsolid();
-  var0 scripts\engine\utility::waittill_any_timeout(8, "reached_end_node");
-  radiusdamage(var0.origin + (0, 0, 50), 250, 500, 500, level.player, "MOD_PROJECTILE", undefined, 0, 0);
-  playFX(level._effect["vfx_safehouse_ally_drone_impact"], var0.origin);
-  thread scripts\engine\utility::play_sound_in_space("scn_safehouse_rc_plane_death", var0.origin);
-  var0 delete();
+  var_0 vehicle_setspeed(var_7 * 50 * 0.0568182, 20);
+  var_0 notsolid();
+  var_0 scripts\engine\utility::waittill_any_timeout(8, "reached_end_node");
+  radiusdamage(var_0.origin + (0, 0, 50), 250, 500, 500, level.player, "MOD_PROJECTILE", undefined, 0, 0);
+  playFX(level._effect["vfx_safehouse_ally_drone_impact"], var_0.origin);
+  thread scripts\engine\utility::play_sound_in_space("scn_safehouse_rc_plane_death", var_0.origin);
+  var_0 delete();
 }
 
 function drone_destroy_catcher() {}
 
 function fly_spawnenemies() {
-  var0 = fly_getenemyspawners();
-  var1 = [];
+  var_0 = fly_getenemyspawners();
+  var_1 = [];
 
-  foreach(var3 in var0) {
-    var4 = var3 scripts\engine\sp\utility::spawn_ai(1);
-    var4 scripts\engine\sp\utility::set_maxsightdistsquared(225000000);
-    var1 = scripts\engine\utility::array_add(var1, var4);
+  foreach(var_3 in var_0) {
+    var_4 = var_3 scripts\engine\sp\utility::spawn_ai(1);
+    var_4 scripts\engine\sp\utility::set_maxsightdistsquared(225000000);
+    var_1 = scripts\engine\utility::array_add(var_1, var_4);
   }
 
-  return var1;
+  return var_1;
 }
 
 function fly_getenemyspawners() {
@@ -882,14 +882,14 @@ function fly_getenemyspawners() {
 }
 
 function fly_spawnenemyvehicles() {
-  var0 = fly_getenemyvehiclespawners();
+  var_0 = fly_getenemyvehiclespawners();
   level.enemy_vehicles = [];
 
-  foreach(var2 in var0) {
-    var3 = scripts\common\vehicle::vehicle_spawn(var2);
-    var3.vehicle_skipdeathcrash = 1;
-    var3.vehicle_skipdeathmodel = 1;
-    level.enemy_vehicles = scripts\engine\utility::array_add(level.enemy_vehicles, var3);
+  foreach(var_2 in var_0) {
+    var_3 = scripts\common\vehicle::vehicle_spawn(var_2);
+    var_3.vehicle_skipdeathcrash = 1;
+    var_3.vehicle_skipdeathmodel = 1;
+    level.enemy_vehicles = scripts\engine\utility::array_add(level.enemy_vehicles, var_3);
   }
 
   return level.enemy_vehicles;
@@ -900,141 +900,141 @@ function fly_getenemyvehiclespawners() {
 }
 
 function fly_spawnallyvehicles() {
-  var0 = fly_getallyvehiclespawners();
-  var1 = [];
+  var_0 = fly_getallyvehiclespawners();
+  var_1 = [];
 
-  foreach(var3 in var0) {
-    var4 = var3 scripts\common\vehicle::spawn_vehicle_and_gopath();
-    var4 scripts\common\vehicle::godon();
-    var4 vehicle_setspeedimmediate(70, 9999);
-    var1 = scripts\engine\utility::array_add(var1, var4);
+  foreach(var_3 in var_0) {
+    var_4 = var_3 scripts\common\vehicle::spawn_vehicle_and_gopath();
+    var_4 scripts\common\vehicle::godon();
+    var_4 vehicle_setspeedimmediate(70, 9999);
+    var_1 = scripts\engine\utility::array_add(var_1, var_4);
   }
 
-  return var1;
+  return var_1;
 }
 
 function fly_getallyvehiclespawners() {
   return scripts\common\utility::getvehiclespawnerarray("fly_allyVehicleSpawner", "targetname");
 }
 
-function fly_enemieslogic(var0, var1, var2, var3) {
-  var4 = fly_getplayerdrone();
-  var5 = fly_getenemynodes();
-  var4 endon("death");
-  var6 = (0, 0, 0);
+function fly_enemieslogic(var_0, var_1, var_2, var_3) {
+  var_4 = fly_getplayerdrone();
+  var_5 = fly_getenemynodes();
+  var_4 endon("death");
+  var_6 = (0, 0, 0);
 
-  foreach(var8 in var5) {
-    var6 += var8.origin;
+  foreach(var_8 in var_5) {
+    var_6 += var_8.origin;
   }
 
-  var6 /= var5.size;
+  var_6 /= var_5.size;
 
-  while(distancesquared(var6, var4.origin) > 100000000) {
+  while(distancesquared(var_6, var_4.origin) > 100000000) {
     waitframe();
   }
 
-  thread enemies_shoot_down_nearest(var3);
-  var3 scripts\sp\maps\safehouse_finale\safehouse_finale_utility::dronesetvehspeed(60, 62, 64, 2);
+  thread enemies_shoot_down_nearest(var_3);
+  var_3 scripts\sp\maps\safehouse_finale\safehouse_finale_utility::dronesetvehspeed(60, 62, 64, 2);
 
-  while(distancesquared(var6, var4.origin) > 169000000) {
+  while(distancesquared(var_6, var_4.origin) > 169000000) {
     waitframe();
   }
 
-  var0 = scripts\sp\maps\safehouse_finale\safehouse_finale_utility::array_removedeaddyingorundefined(var0);
+  var_0 = scripts\sp\maps\safehouse_finale\safehouse_finale_utility::array_removedeaddyingorundefined(var_0);
 
-  foreach(var11 in var0) {
-    var11 scripts\engine\utility::set_movement_speed(240);
-    var11 scripts\engine\sp\utility::set_goalRadius(256);
-    var11 scripts\engine\sp\utility::set_ignoreall(1);
+  foreach(var_11 in var_0) {
+    var_11 scripts\engine\utility::set_movement_speed(240);
+    var_11 scripts\engine\sp\utility::set_goalRadius(256);
+    var_11 scripts\engine\sp\utility::set_ignoreall(1);
   }
 
-  foreach(var11 in var0) {
-    var8 = sortbydistance(var5, var11.origin)[0];
-    var11 setgoalnode(var8);
+  foreach(var_11 in var_0) {
+    var_8 = sortbydistance(var_5, var_11.origin)[0];
+    var_11 setgoalnode(var_8);
   }
 }
 
-function enemies_shoot_down_nearest(var0) {
-  var0 endon("death");
+function enemies_shoot_down_nearest(var_0) {
+  var_0 endon("death");
   wait 4;
   level.allydrones = scripts\engine\utility::array_removeundefined(level.allydrones);
-  var1 = level.allydrones[0];
-  var2 = -9999999;
-  var3 = anglesToForward(var0.angles);
+  var_1 = level.allydrones[0];
+  var_2 = -9999999;
+  var_3 = anglesToForward(var_0.angles);
 
-  foreach(var5 in level.allydrones) {
-    var6 = vectorNormalize(var5.origin - var0.origin);
-    var7 = vectordot(var3, var6);
+  foreach(var_5 in level.allydrones) {
+    var_6 = vectorNormalize(var_5.origin - var_0.origin);
+    var_7 = vectordot(var_3, var_6);
 
-    if(var7 > var2) {
-      var2 = var7;
-      var1 = var5;
+    if(var_7 > var_2) {
+      var_2 = var_7;
+      var_1 = var_5;
     }
   }
 
-  if(isDefined(var1)) {
-    var1 kill();
+  if(isDefined(var_1)) {
+    var_1 kill();
   }
 
   wait 1;
   level.allydrones = scripts\engine\utility::array_removeundefined(level.allydrones);
-  var1 = level.allydrones[0];
-  var2 = -9999999;
-  var3 = anglesToForward(var0.angles);
+  var_1 = level.allydrones[0];
+  var_2 = -9999999;
+  var_3 = anglesToForward(var_0.angles);
 
-  foreach(var5 in level.allydrones) {
-    var6 = vectorNormalize(var5.origin - var0.origin);
-    var7 = vectordot(var3, var6);
+  foreach(var_5 in level.allydrones) {
+    var_6 = vectorNormalize(var_5.origin - var_0.origin);
+    var_7 = vectordot(var_3, var_6);
 
-    if(var7 > var2) {
-      var2 = var7;
-      var1 = var5;
+    if(var_7 > var_2) {
+      var_2 = var_7;
+      var_1 = var_5;
     }
   }
 
-  if(isDefined(var1)) {
-    var1 kill();
+  if(isDefined(var_1)) {
+    var_1 kill();
   }
 
   wait 1;
   level.allydrones = scripts\engine\utility::array_removeundefined(level.allydrones);
-  var1 = level.allydrones[0];
-  var2 = -9999999;
-  var3 = anglesToForward(var0.angles);
+  var_1 = level.allydrones[0];
+  var_2 = -9999999;
+  var_3 = anglesToForward(var_0.angles);
 
-  foreach(var5 in level.allydrones) {
-    var6 = vectorNormalize(var5.origin - var0.origin);
-    var7 = vectordot(var3, var6);
+  foreach(var_5 in level.allydrones) {
+    var_6 = vectorNormalize(var_5.origin - var_0.origin);
+    var_7 = vectordot(var_3, var_6);
 
-    if(var7 > var2) {
-      var2 = var7;
-      var1 = var5;
+    if(var_7 > var_2) {
+      var_2 = var_7;
+      var_1 = var_5;
     }
   }
 
-  if(isDefined(var1)) {
-    var1 kill();
+  if(isDefined(var_1)) {
+    var_1 kill();
     return;
   }
 }
 
-function fly_allydronesshotdownlogic(var0) {
-  var1 = 0.25;
-  var2 = 1;
+function fly_allydronesshotdownlogic(var_0) {
+  var_1 = 0.25;
+  var_2 = 1;
 
-  foreach(var4 in var0) {
-    if(!isDefined(var4)) {
+  foreach(var_4 in var_0) {
+    if(!isDefined(var_4)) {
       continue;
     }
 
-    if(istrue(var4.script_bulletshield)) {
+    if(istrue(var_4.script_bulletshield)) {
       continue;
     }
 
-    var4.vehicle_skipdeathmodel = 1;
-    var4 kill();
-    var5 = randomfloatrange(var1, var2);
-    wait var5;
+    var_4.vehicle_skipdeathmodel = 1;
+    var_4 kill();
+    var_5 = randomfloatrange(var_1, var_2);
+    wait var_5;
   }
 }
 
@@ -1058,22 +1058,22 @@ function getallyspawners() {
   return getspawnerarray("allySpawner");
 }
 
-function spawnallies(var0) {
-  var1 = getallyspawners();
-  var2 = [];
+function spawnallies(var_0) {
+  var_1 = getallyspawners();
+  var_2 = [];
 
-  foreach(var4 in var1) {
-    if(isDefined(var0) && var0 < var6 + 1) {
+  foreach(var_4 in var_1) {
+    if(isDefined(var_0) && var_0 < var_6 + 1) {
       continue;
     }
 
-    var5 = var4 scripts\engine\sp\utility::spawn_ai(1);
-    var5.targetname = "allySpawner";
-    var5 thread scripts\sp\maps\safehouse_finale\safehouse_finale_fob::fob_allies_spawn_setup();
-    var2 = scripts\engine\utility::array_add(var2, var5);
+    var_5 = var_4 scripts\engine\sp\utility::spawn_ai(1);
+    var_5.targetname = "allySpawner";
+    var_5 thread scripts\sp\maps\safehouse_finale\safehouse_finale_fob::fob_allies_spawn_setup();
+    var_2 = scripts\engine\utility::array_add(var_2, var_5);
   }
 
-  return var2;
+  return var_2;
 }
 
 function getallies() {
@@ -1081,31 +1081,31 @@ function getallies() {
 }
 
 function trench_spawnallies() {
-  var0 = trench_getallyspawners();
-  var1 = [];
+  var_0 = trench_getallyspawners();
+  var_1 = [];
 
-  foreach(var3 in var0) {
-    var4 = var3 scripts\engine\sp\utility::spawn_ai(1, 1);
-    var4.targetname = "trench_ally";
-    var4 visiblenotsolid();
-    var4 thread scripts\sp\maps\safehouse_finale\safehouse_finale_fob::fob_allies_spawn_setup();
-    var1 = scripts\engine\utility::array_add(var1, var4);
+  foreach(var_3 in var_0) {
+    var_4 = var_3 scripts\engine\sp\utility::spawn_ai(1, 1);
+    var_4.targetname = "trench_ally";
+    var_4 visiblenotsolid();
+    var_4 thread scripts\sp\maps\safehouse_finale\safehouse_finale_fob::fob_allies_spawn_setup();
+    var_1 = scripts\engine\utility::array_add(var_1, var_4);
   }
 
-  return var1;
+  return var_1;
 }
 
 function trench_getallyspawners() {
-  var0 = getspawnerarray();
-  var1 = [];
+  var_0 = getspawnerarray();
+  var_1 = [];
 
-  foreach(var3 in var0) {
-    if(scripts\engine\utility::is_equal(var3.targetname, "trench_allySpawner")) {
-      var1 = scripts\engine\utility::array_add(var1, var3);
+  foreach(var_3 in var_0) {
+    if(scripts\engine\utility::is_equal(var_3.targetname, "trench_allySpawner")) {
+      var_1 = scripts\engine\utility::array_add(var_1, var_3);
     }
   }
 
-  return var1;
+  return var_1;
 }
 
 function trench_getrocketally() {
@@ -1113,10 +1113,10 @@ function trench_getrocketally() {
 }
 
 function rocket_deletepristinetargets() {
-  var0 = rocket_getpristinetargets();
+  var_0 = rocket_getpristinetargets();
 
-  foreach(var2 in var0) {
-    var2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
   }
 }
 
@@ -1125,10 +1125,10 @@ function rocket_getpristinetargets() {
 }
 
 function rocket_setnotsolidtargets() {
-  var0 = getEntArray("not_solid", "script_noteworthy");
+  var_0 = getEntArray("not_solid", "script_noteworthy");
 
-  foreach(var2 in var0) {
-    var2 notsolid();
+  foreach(var_2 in var_0) {
+    var_2 notsolid();
   }
 }
 
@@ -1137,31 +1137,31 @@ function rocket_getdamagedtargets() {
 }
 
 function rocket_hidedamagedtargets() {
-  var0 = rocket_getdamagedtargets();
+  var_0 = rocket_getdamagedtargets();
 
-  foreach(var2 in var0) {
-    var2 hide();
+  foreach(var_2 in var_0) {
+    var_2 hide();
   }
 }
 
 function rocket_showdamagedtargets() {
-  var0 = rocket_getdamagedtargets();
+  var_0 = rocket_getdamagedtargets();
 
-  foreach(var2 in var0) {
-    var2 show();
-    var2 solid();
+  foreach(var_2 in var_0) {
+    var_2 show();
+    var_2 solid();
 
-    if(var2.spawnflags & 1) {
-      var2 connectpaths();
+    if(var_2.spawnflags & 1) {
+      var_2 connectpaths();
     }
   }
 }
 
 function player_giveprimaryweapon() {
-  var0 = player_getprimaryweaponobject();
-  level.player scripts\sp\utility::give_weapon(var0);
-  level.player givemaxammo(var0);
-  level.player switchtoweapon(var0);
+  var_0 = player_getprimaryweaponobject();
+  level.player scripts\sp\utility::give_weapon(var_0);
+  level.player givemaxammo(var_0);
+  level.player switchtoweapon(var_0);
 }
 
 function player_givemolotovweapon() {
@@ -1251,13 +1251,13 @@ function stick_forward() {
   return self getnormalizedmovement()[0] > 0.5;
 }
 
-function player_givesecondaryweapon(var0) {
-  var1 = scripts\sp\utility::make_weapon("iw8_ar_akilo47");
-  level.player scripts\sp\utility::give_weapon(var1);
-  level.player givemaxammo(var1);
+function player_givesecondaryweapon(var_0) {
+  var_1 = scripts\sp\utility::make_weapon("iw8_ar_akilo47");
+  level.player scripts\sp\utility::give_weapon(var_1);
+  level.player givemaxammo(var_1);
 
-  if(istrue(var0)) {
-    level.player switchtoweapon(var1);
+  if(istrue(var_0)) {
+    level.player switchtoweapon(var_1);
     return;
   }
 }
@@ -1274,43 +1274,43 @@ function hero_battlechattteradjustments() {
 }
 
 function level_spawnfarah() {
-  var0 = level_getfarahspawner();
-  var0.count = 1;
-  var1 = var0 scripts\engine\sp\utility::spawn_ai(1);
-  var1.animname = "farah";
-  var1.targetname = "level_farah";
-  var1.name = "Farah";
-  var1.disableplayeradsloscheck = 1;
-  var1.nodropgrenade = 1;
-  var1.grenadeweapon = getcompleteweaponname("molotov");
-  var1.grenadeammo = 255;
-  var1.grenadesafedist = 400;
-  var1.allowdeath = 1;
-  var1 pushplayer(1);
-  var1 scripts\common\ai::magic_bullet_shield();
-  var1.ignoreme = 0;
-  var1.support_equipment = 0;
-  level.farah = var1;
+  var_0 = level_getfarahspawner();
+  var_0.count = 1;
+  var_1 = var_0 scripts\engine\sp\utility::spawn_ai(1);
+  var_1.animname = "farah";
+  var_1.targetname = "level_farah";
+  var_1.name = "Farah";
+  var_1.disableplayeradsloscheck = 1;
+  var_1.nodropgrenade = 1;
+  var_1.grenadeweapon = getcompleteweaponname("molotov");
+  var_1.grenadeammo = 255;
+  var_1.grenadesafedist = 400;
+  var_1.allowdeath = 1;
+  var_1 pushplayer(1);
+  var_1 scripts\common\ai::magic_bullet_shield();
+  var_1.ignoreme = 0;
+  var_1.support_equipment = 0;
+  level.farah = var_1;
   level.player.molotov_take = create_molotov_take_deck();
-  var2 = ["dx_vom_far_bunkers_molotovgive_40", "dx_vom_far_bunkers_molotovgive_50", "dx_vom_far_bunkers_molotovgive_60"];
-  thread scripts\sp\player\ally_equipment::ally_equipment_backpack(var1, "molotov");
-  thread level_vo_equipment_backpack(var1, level.player.molotov_take);
+  var_2 = ["dx_vom_far_bunkers_molotovgive_40", "dx_vom_far_bunkers_molotovgive_50", "dx_vom_far_bunkers_molotovgive_60"];
+  thread scripts\sp\player\ally_equipment::ally_equipment_backpack(var_1, "molotov");
+  thread level_vo_equipment_backpack(var_1, level.player.molotov_take);
   thread molotov_notify();
   thread hero_battlechattteradjustments();
-  return var1;
+  return var_1;
 }
 
 function level_spawnarmen() {
-  var0 = level_getarmenspawner();
-  var0.count = 1;
-  var1 = var0 scripts\engine\sp\utility::spawn_ai(1);
-  var1.animname = "armen";
-  var1.allowdeath = 1;
-  var1.name = "Armen";
-  var1.disablebulletwhizbyreaction = 1;
-  var1 scripts\common\ai::magic_bullet_shield();
-  level.armen = var1;
-  return var1;
+  var_0 = level_getarmenspawner();
+  var_0.count = 1;
+  var_1 = var_0 scripts\engine\sp\utility::spawn_ai(1);
+  var_1.animname = "armen";
+  var_1.allowdeath = 1;
+  var_1.name = "Armen";
+  var_1.disablebulletwhizbyreaction = 1;
+  var_1 scripts\common\ai::magic_bullet_shield();
+  level.armen = var_1;
+  return var_1;
 }
 
 function create_molotov_take_deck() {
@@ -1318,8 +1318,8 @@ function create_molotov_take_deck() {
     return level.player.molotov_take;
   }
 
-  var0 = ["dx_vom_alx_bunkers_molotovtake_10", "dx_vom_alx_bunkers_molotovtake_20", "dx_vom_alx_bunkers_molotovtake_30"];
-  return scripts\engine\sp\utility::create_deck(var0);
+  var_0 = ["dx_vom_alx_bunkers_molotovtake_10", "dx_vom_alx_bunkers_molotovtake_20", "dx_vom_alx_bunkers_molotovtake_30"];
+  return scripts\engine\sp\utility::create_deck(var_0);
 }
 
 function molotov_notify() {
@@ -1346,74 +1346,74 @@ function level_getfarah() {
 }
 
 function level_spawnhadir() {
-  var0 = level_gethadirspawner();
-  var0.count = 1;
-  var1 = var0 scripts\engine\sp\utility::spawn_ai(1);
-  var1.animname = "hadir";
-  var1.targetname = "level_hadir";
-  var1.name = "Hadir";
-  var1.disableplayeradsloscheck = 1;
-  var1.dontmelee = 1;
-  var1.disablebulletwhizbyreaction = 1;
-  var1.allowdeath = 1;
-  var1.nodropgrenade = 1;
-  var1.grenadeweapon = getcompleteweaponname("molotov");
-  var1.grenadeammo = 255;
-  var1.grenadesafedist = 400;
+  var_0 = level_gethadirspawner();
+  var_0.count = 1;
+  var_1 = var_0 scripts\engine\sp\utility::spawn_ai(1);
+  var_1.animname = "hadir";
+  var_1.targetname = "level_hadir";
+  var_1.name = "Hadir";
+  var_1.disableplayeradsloscheck = 1;
+  var_1.dontmelee = 1;
+  var_1.disablebulletwhizbyreaction = 1;
+  var_1.allowdeath = 1;
+  var_1.nodropgrenade = 1;
+  var_1.grenadeweapon = getcompleteweaponname("molotov");
+  var_1.grenadeammo = 255;
+  var_1.grenadesafedist = 400;
   thread molotov_notify();
-  var1 pushplayer(1);
-  var1 scripts\common\ai::magic_bullet_shield();
-  var1.support_equipment = 0;
-  level.hadir = var1;
+  var_1 pushplayer(1);
+  var_1 scripts\common\ai::magic_bullet_shield();
+  var_1.support_equipment = 0;
+  level.hadir = var_1;
   level.player.molotov_take = create_molotov_take_deck();
-  var2 = ["dx_vom_had_bunkers_molotovgive_10", "dx_vom_had_bunkers_molotovgive_20", "dx_vom_had_bunkers_molotovgive_30"];
-  thread scripts\sp\player\ally_equipment::ally_equipment_backpack(var1, "molotov");
-  thread level_vo_equipment_backpack(var1, level.player.molotov_take);
+  var_2 = ["dx_vom_had_bunkers_molotovgive_10", "dx_vom_had_bunkers_molotovgive_20", "dx_vom_had_bunkers_molotovgive_30"];
+  thread scripts\sp\player\ally_equipment::ally_equipment_backpack(var_1, "molotov");
+  thread level_vo_equipment_backpack(var_1, level.player.molotov_take);
   thread hero_battlechattteradjustments();
-  return var1;
+  return var_1;
 }
 
-function level_vo_equipment_backpack(var0, var1) {
+function level_vo_equipment_backpack(var_0, var_1) {
   level.player endon("death");
   self endon("death");
   self endon("remove_equipment");
   self endon("stop_equipment_vo");
 
-  if(isarray(var0)) {
-    var1 = scripts\engine\sp\utility::create_deck(var0);
+  if(isarray(var_0)) {
+    var_1 = scripts\engine\sp\utility::create_deck(var_0);
   }
 
-  if(isarray(var1)) {
-    var1 = scripts\engine\sp\utility::create_deck(var1);
+  if(isarray(var_1)) {
+    var_1 = scripts\engine\sp\utility::create_deck(var_1);
   }
 
   for(;;) {
     self.icon_spot waittill("trigger");
-    level.player scripts\sp\maps\safehouse_finale\safehouse_finale_utility::say_as_chatter(var0 scripts\engine\sp\utility::deck_draw(), 0, 0.1);
-    scripts\sp\maps\safehouse_finale\safehouse_finale_utility::say_as_chatter(var1 scripts\engine\sp\utility::deck_draw(), 0, 0.15);
+    level.player scripts\sp\maps\safehouse_finale\safehouse_finale_utility::say_as_chatter(var_0 scripts\engine\sp\utility::deck_draw(), 0, 0.1);
+    scripts\sp\maps\safehouse_finale\safehouse_finale_utility::say_as_chatter(var_1 scripts\engine\sp\utility::deck_draw(), 0, 0.15);
   }
 }
 
 function level_droneambientspawnmanager() {
   wait 1;
-  var0 = scripts\engine\utility::getStruct("hc_scene_struct", "targetname");
-  var1 = 2;
-  var2 = (-31234, 31084, -250);
-  var3 = 10;
-  var4 = 775;
-  var5 = 800;
-  var6 = 0.85;
-  var7 = 1;
-  var8 = [ &scripts\sp\maps\safehouse_finale\safehouse_finale_utility::math_pointoncircle, &scripts\sp\maps\safehouse_finale\safehouse_finale_utility::math_pointonellipse, &scripts\sp\maps\safehouse_finale\safehouse_finale_utility::math_pointonlemniscate];
+  var_0 = scripts\engine\utility::getStruct("hc_scene_struct", "targetname");
+  var_1 = 2;
+  var_2 = (-31234, 31084, -250);
+  var_3 = 10;
+  var_4 = 775;
+  var_5 = 800;
+  var_6 = 0.85;
+  var_7 = 1;
+  var_8 = [ &scripts\sp\maps\safehouse_finale\safehouse_finale_utility::math_pointoncircle, &scripts\sp\maps\safehouse_finale\safehouse_finale_utility::math_pointonellipse, &scripts\sp\maps\safehouse_finale\safehouse_finale_utility::math_pointonlemniscate];
 
-  for(var9 = 0; var9 < var1; var9++) {
-    var10 = scripts\engine\utility::random(var8);
-    var11 = (0, 0, var3 * var9);
-    var12 = randomintrange(var4, var5);
-    var13 = randomfloatrange(var6, var7);
-    var14 = scripts\sp\maps\safehouse_finale\safehouse_finale_utility::level_dronespawn(var2 + var11, (0, 0, 0));
-    playFXOnTag(level._effect["vfx_safehouse_finale_drone_wingtip_red_lit"], var14, "tag_origin");
-    thread scripts\sp\maps\safehouse_finale\safehouse_finale_utility::level_droneambientmovementlogic(var14, var12, var13, var10);
+  for(var_9 = 0; var_9 < var_1; var_9++) {
+    var_10 = scripts\engine\utility::random(var_8);
+    var_11 = (0, 0, var_3 * var_9);
+    var_12 = randomintrange(var_4, var_5);
+    var_13 = randomfloatrange(var_6, var_7);
+    var_14 = scripts\sp\maps\safehouse_finale\safehouse_finale_utility::level_dronespawn(var_2 + var_11, (0, 0, 0));
+    playFXOnTag(level._effect["vfx_safehouse_finale_drone_wingtip_red_lit"], var_14, "tag_origin");
+    thread scripts\sp\maps\safehouse_finale\safehouse_finale_utility::level_droneambientmovementlogic(var_14, var_12, var_13, var_10);
   }
 }
 
@@ -1425,56 +1425,56 @@ function level_gethadir() {
   return getEnt("level_hadir", "targetname");
 }
 
-function level_hellcannonfire(var0, var1, var2) {
-  var3 = spawn("script_model", var0.origin);
-  var3.angles = var0.angles;
-  var3 setModel("misc_propane_rocket");
-  var3.sound_tag = scripts\engine\utility::spawn_tag_origin(var3.origin, var3.angles);
-  var3.sound_tag linkTo(var3);
-  thread scripts\engine\utility::play_sound_in_space("scn_safehouse_hellcannon_fire", var0.origin);
-  playFX(scripts\engine\utility::getfx("vfx_hellcannon_fire"), var0.origin, anglestoup(var0.angles));
-  playFXOnTag(scripts\engine\utility::getfx("vfx_hellcannon_trail"), var3, "tag_origin");
+function level_hellcannonfire(var_0, var_1, var_2) {
+  var_3 = spawn("script_model", var_0.origin);
+  var_3.angles = var_0.angles;
+  var_3 setModel("misc_propane_rocket");
+  var_3.sound_tag = scripts\engine\utility::spawn_tag_origin(var_3.origin, var_3.angles);
+  var_3.sound_tag linkTo(var_3);
+  thread scripts\engine\utility::play_sound_in_space("scn_safehouse_hellcannon_fire", var_0.origin);
+  playFX(scripts\engine\utility::getfx("vfx_hellcannon_fire"), var_0.origin, anglestoup(var_0.angles));
+  playFXOnTag(scripts\engine\utility::getfx("vfx_hellcannon_trail"), var_3, "tag_origin");
   playrumbleonposition("damage_light", level.player.origin);
   screenshake(level.player.origin, 4, 0, 0, 0.25);
-  var3.sound_tag scripts\engine\utility::delaythread(0.2, &scripts\engine\utility::playsoundontag, "scn_safehouse_hellcannon_inc", "tag_origin");
-  level_hellcannonmovetank(var3, var0.origin, var1.origin, var2);
-  stopFXOnTag(scripts\engine\utility::getfx("vfx_hellcannon_trail"), var3, "tag_origin");
-  level_hellcannonimpactlogic(var1.origin);
-  var3.sound_tag delete();
-  var3 delete();
+  var_3.sound_tag scripts\engine\utility::delaythread(0.2, &scripts\engine\utility::playsoundontag, "scn_safehouse_hellcannon_inc", "tag_origin");
+  level_hellcannonmovetank(var_3, var_0.origin, var_1.origin, var_2);
+  stopFXOnTag(scripts\engine\utility::getfx("vfx_hellcannon_trail"), var_3, "tag_origin");
+  level_hellcannonimpactlogic(var_1.origin);
+  var_3.sound_tag delete();
+  var_3 delete();
 }
 
-function level_hellcannonmovetank(var0, var1, var2, var3) {
-  var0 endon("impact");
-  var0.origin = var1;
-  var4 = getdvarint("NPOQPMP");
+function level_hellcannonmovetank(var_0, var_1, var_2, var_3) {
+  var_0 endon("impact");
+  var_0.origin = var_1;
+  var_4 = getdvarint("NPOQPMP");
   setsaveddvar("NPOQPMP", 500);
-  var5 = getdvarint("NPOQPMP");
-  var6 = var2 - var1;
-  var7 = 0.5 * var5 * squared(var3) * -1;
-  var8 = (var6[0] / var3, var6[1] / var3, (var6[2] - var7) / var3);
-  var0 movegravity(var8, var3);
-  var0 rotateby((0, 0, -40), var3);
-  wait var3 + 0.05;
-  var0.origin = var2;
-  setsaveddvar("NPOQPMP", var4);
+  var_5 = getdvarint("NPOQPMP");
+  var_6 = var_2 - var_1;
+  var_7 = 0.5 * var_5 * squared(var_3) * -1;
+  var_8 = (var_6[0] / var_3, var_6[1] / var_3, (var_6[2] - var_7) / var_3);
+  var_0 movegravity(var_8, var_3);
+  var_0 rotateby((0, 0, -40), var_3);
+  wait var_3 + 0.05;
+  var_0.origin = var_2;
+  setsaveddvar("NPOQPMP", var_4);
 }
 
-function level_hellcannonimpactlogic(var0) {
+function level_hellcannonimpactlogic(var_0) {
   level notify("level_hellCannonImpact");
-  thread scripts\engine\utility::play_sound_in_space("scn_safehouse_hellcannon_impact", var0 + (0, 0, 300));
-  var1 = "vfx_safehouse_finale_bunker_explosion";
+  thread scripts\engine\utility::play_sound_in_space("scn_safehouse_hellcannon_impact", var_0 + (0, 0, 300));
+  var_1 = "vfx_safehouse_finale_bunker_explosion";
 
   if(scripts\engine\utility::flag("second_cannon") && scripts\engine\utility::flag("bunker_busted")) {
-    var1 = "vfx_safehouse_finale_bunker_explosion_2";
+    var_1 = "vfx_safehouse_finale_bunker_explosion_2";
   }
 
-  playFX(scripts\engine\utility::getfx(var1), var0);
+  playFX(scripts\engine\utility::getfx(var_1), var_0);
 }
 
-function dialogue_hadirstruct(var0, var1, var2, var3, var4) {
-  var5 = spawnStruct();
-  var5.animname = "hadir";
-  var5.name = "Hadir";
-  var5 thread scripts\sp\maps\safehouse_finale\safehouse_finale_utility::dialogue(var0, var1, var2, var3, var4);
+function dialogue_hadirstruct(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = spawnStruct();
+  var_5.animname = "hadir";
+  var_5.name = "Hadir";
+  var_5 thread scripts\sp\maps\safehouse_finale\safehouse_finale_utility::dialogue(var_0, var_1, var_2, var_3, var_4);
 }

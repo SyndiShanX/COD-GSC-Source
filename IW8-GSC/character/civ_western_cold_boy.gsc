@@ -33,6 +33,6 @@ function main_mp() {
   scripts\code\character::attachhead("heads_civ_western_cold_boy", xmodelalias\heads_civ_western_cold_boy::main());
 }
 
-function precache_mp(var0) {
-  level.agent_definition[var0]["animclass"] = "civilian";
+function precache_mp(var_0) {
+  level.agent_definition[var_0]["animclass"] = "civilian";
 }

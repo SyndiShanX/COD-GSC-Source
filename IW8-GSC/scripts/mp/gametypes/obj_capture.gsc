@@ -4,94 +4,94 @@
 ************************************************/
 
 function init() {
-  var0 = spawnStruct();
-  var0.pickuptime = 0.5;
-  var0.usetextfriendly = &"MP/RETURNING_FLAG";
-  var0.usetextenemy = &"MP/GRABBING_FLAG";
-  var0.onpickupfn = &onobjectpickup;
-  var0.ondropfn = &onobjectdrop;
-  var0.onresetfn = &onobjectreset;
-  var0.ondelivered = &onobjectdelivered;
-  var0.pickupicon = "waypoint_capture_take";
-  var0.delivertime = 0.5;
-  level.objectivesettings["ctf"] = var0;
+  var_0 = spawnStruct();
+  var_0.pickuptime = 0.5;
+  var_0.usetextfriendly = &"MP/RETURNING_FLAG";
+  var_0.usetextenemy = &"MP/GRABBING_FLAG";
+  var_0.onpickupfn = &onobjectpickup;
+  var_0.ondropfn = &onobjectdrop;
+  var_0.onresetfn = &onobjectreset;
+  var_0.ondelivered = &onobjectdelivered;
+  var_0.pickupicon = "waypoint_capture_take";
+  var_0.delivertime = 0.5;
+  level.objectivesettings["ctf"] = var_0;
 }
 
-function createcaptureobjective(var0, var1, var2) {
-  if(!isDefined(var2)) {
-    var2 = level.objectivesettings["ctf"];
+function createcaptureobjective(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
+    var_2 = level.objectivesettings["ctf"];
   }
 
-  var3 = createcarryobject(var0, var1, var2);
-  var4 = creategoal(var3.visuals[0].target, var3, var1, var2);
-  var3.goal = var4;
+  var_3 = createcarryobject(var_0, var_1, var_2);
+  var_4 = creategoal(var_3.visuals[0].target, var_3, var_1, var_2);
+  var_3.goal = var_4;
 }
 
-function createcarryobject(var0, var1, var2) {
-  var3 = getEnt(var0, "targetname");
+function createcarryobject(var_0, var_1, var_2) {
+  var_3 = getEnt(var_0, "targetname");
 
-  if(!isDefined(var3)) {
-    scripts\engine\utility::error("No model named " + var0 + " found!");
+  if(!isDefined(var_3)) {
+    scripts\engine\utility::error("No model named " + var_0 + " found!");
     return;
   }
 
-  var4 = spawn("trigger_radius", var3.origin, 0, 96, 120);
-  var5 = scripts\mp\gameobjects::createcarryobject(var1, var4, [var3], (0, 0, 85));
-  var5 scripts\mp\gameobjects::setteamusetime("friendly", var2.pickuptime);
-  var5 scripts\mp\gameobjects::setteamusetime("enemy", var2.pickuptime);
-  var5 scripts\mp\gameobjects::setteamusetext("enemy", var2.usetextfriendly);
-  var5 scripts\mp\gameobjects::setteamusetext("friendly", var2.usetextenemy);
-  var5 scripts\mp\gameobjects::allowcarry("enemy");
-  var5 scripts\mp\gameobjects::setobjectivestatusicons(var2.pickupicon, var2.pickupicon);
-  var5 scripts\mp\gameobjects::setvisibleteam("enemy");
-  var5.objidpingfriendly = 1;
-  var5.allowweapons = 1;
-  var5.onpickup = var2.onpickupfn;
-  var5.onpickupfailed = var2.onpickupfailfn;
-  var5.ondrop = var2.ondropfn;
-  var5.onreset = var2.onresetfn;
-  var5.settings = var2;
+  var_4 = spawn("trigger_radius", var_3.origin, 0, 96, 120);
+  var_5 = scripts\mp\gameobjects::createcarryobject(var_1, var_4, [var_3], (0, 0, 85));
+  var_5 scripts\mp\gameobjects::setteamusetime("friendly", var_2.pickuptime);
+  var_5 scripts\mp\gameobjects::setteamusetime("enemy", var_2.pickuptime);
+  var_5 scripts\mp\gameobjects::setteamusetext("enemy", var_2.usetextfriendly);
+  var_5 scripts\mp\gameobjects::setteamusetext("friendly", var_2.usetextenemy);
+  var_5 scripts\mp\gameobjects::allowcarry("enemy");
+  var_5 scripts\mp\gameobjects::setobjectivestatusicons(var_2.pickupicon, var_2.pickupicon);
+  var_5 scripts\mp\gameobjects::setvisibleteam("enemy");
+  var_5.objidpingfriendly = 1;
+  var_5.allowweapons = 1;
+  var_5.onpickup = var_2.onpickupfn;
+  var_5.onpickupfailed = var_2.onpickupfailfn;
+  var_5.ondrop = var_2.ondropfn;
+  var_5.onreset = var_2.onresetfn;
+  var_5.settings = var_2;
 
-  if(!isDefined(var2.carrymodel)) {
-    var2.carrymodel = var3.model;
+  if(!isDefined(var_2.carrymodel)) {
+    var_2.carrymodel = var_3.model;
   }
 
-  var5 setnodeploy(1);
-  var5 setnonstick(1);
-  return var5;
+  var_5 setnodeploy(1);
+  var_5 setnonstick(1);
+  return var_5;
 }
 
-function creategoal(var0, var1, var2, var3) {
-  var4 = getEnt(var0, "targetname");
+function creategoal(var_0, var_1, var_2, var_3) {
+  var_4 = getEnt(var_0, "targetname");
 
-  if(!isDefined(var4)) {
-    scripts\engine\utility::error("No goal trigger named " + var4 + " found!");
+  if(!isDefined(var_4)) {
+    scripts\engine\utility::error("No goal trigger named " + var_4 + " found!");
     return;
   }
 
-  var5 = scripts\mp\gameobjects::createuseobject(var2, var4, [], (0, 0, 85));
-  var5 scripts\mp\gameobjects::allowuse("enemy");
-  var5 scripts\mp\gameobjects::setvisibleteam("any");
-  var5 scripts\mp\gameobjects::setobjectivestatusicons("waypoint_blitz_defend", "waypoint_blitz_goal");
-  var5 scripts\mp\gameobjects::setusetime(var3.delivertime);
-  var5 scripts\mp\gameobjects::setkeyobject(var1);
-  var5.onuse = var3.ondelivered;
-  var5.settings = var3;
-  return var5;
+  var_5 = scripts\mp\gameobjects::createuseobject(var_2, var_4, [], (0, 0, 85));
+  var_5 scripts\mp\gameobjects::allowuse("enemy");
+  var_5 scripts\mp\gameobjects::setvisibleteam("any");
+  var_5 scripts\mp\gameobjects::setobjectivestatusicons("waypoint_blitz_defend", "waypoint_blitz_goal");
+  var_5 scripts\mp\gameobjects::setusetime(var_3.delivertime);
+  var_5 scripts\mp\gameobjects::setkeyobject(var_1);
+  var_5.onuse = var_3.ondelivered;
+  var_5.settings = var_3;
+  return var_5;
 }
 
-function onobjectpickup(var0, var1, var2) {
-  if(var0.team == scripts\mp\gameobjects::getownerteam()) {
+function onobjectpickup(var_0, var_1, var_2) {
+  if(var_0.team == scripts\mp\gameobjects::getownerteam()) {
     scripts\mp\gameobjects::returnhome();
     return;
   }
 
-  attachobjecttocarrier(var0, self.settings.carrymodel);
+  attachobjecttocarrier(var_0, self.settings.carrymodel);
   scripts\mp\gameobjects::setvisibleteam("any");
   scripts\mp\gameobjects::setobjectivestatusicons("waypoint_capture_kill", "waypoint_escort");
 }
 
-function onobjectdrop(var0) {
+function onobjectdrop(var_0) {
   scripts\mp\gameobjects::allowcarry("any");
   scripts\mp\gameobjects::setvisibleteam("any");
   scripts\mp\gameobjects::setobjectivestatusicons("waypoint_capture_recover", "waypoint_capture_take");
@@ -109,16 +109,16 @@ function returnaftertime() {
 
 function onobjectreset() {}
 
-function onobjectdelivered(var0) {
+function onobjectdelivered(var_0) {
   self.keyobject scripts\mp\gameobjects::allowcarry("none");
   self.keyobject scripts\mp\gameobjects::setvisibleteam("none");
-  detachobjectifcarried(var0);
+  detachobjectifcarried(var_0);
   scripts\mp\gameobjects::deleteuseobject();
 }
 
-function attachobjecttocarrier(var0) {
-  self attach(var0, "tag_stowed_back3", 1);
-  self.carriedobject = var0;
+function attachobjecttocarrier(var_0) {
+  self attach(var_0, "tag_stowed_back3", 1);
+  self.carriedobject = var_0;
 }
 
 function detachobjectifcarried() {
@@ -129,6 +129,6 @@ function detachobjectifcarried() {
   }
 }
 
-function onplayerkilled(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
+function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   detachobjectifcarried();
 }

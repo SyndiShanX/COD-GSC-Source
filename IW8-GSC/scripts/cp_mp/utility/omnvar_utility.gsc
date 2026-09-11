@@ -3,25 +3,25 @@
  * Script: scripts\cp_mp\utility\omnvar_utility.gsc
 ****************************************************/
 
-function tr_vis_facing_dist_add_override(var0) {
+function tr_vis_facing_dist_add_override(var_0) {
   if(!isDefined(level.ref_14675)) {
     level.ref_14675 = [];
     return;
   }
 }
 
-function ref_1403e(var0) {
+function ref_1403e(var_0) {
   self endon("death_or_disconnect");
   self endon("faux_spawn");
   self endon("end_launcher");
-  var1 = safehouse_restart(var0);
+  var_1 = safehouse_restart(var_0);
 
-  if(var1 == "mag_xmike109") {
+  if(var_1 == "mag_xmike109") {
     return;
   }
 
-  var2 = safehouse_revive_and_move_players(var1);
-  thread start_chopper_boss(var0, var1, var2);
+  var_2 = safehouse_revive_and_move_players(var_1);
+  thread start_chopper_boss(var_0, var_1, var_2);
 }
 
 function handlerelicmartyrdomgas() {
@@ -30,91 +30,91 @@ function handlerelicmartyrdomgas() {
   self notify("cleanupXMike109ImpactWatcher");
 }
 
-function start_chopper_boss(var0, var1, var2) {
+function start_chopper_boss(var_0, var_1, var_2) {
   self notify("cleanupXMike109ImpactWatcher");
   self endon("disconnect");
   self endon("cleanupXMike109ImpactWatcher");
   GscBinSkip4(0x35);
 }
 
-function setup_tut_zones(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10) {
-  var11 = ref_1331f(var4, var9, var0, var1, var3, var6);
-  var12 = ref_1368b(var7, var6, var9, var5, var11, var3, var10);
+function setup_tut_zones(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+  var_11 = ref_1331f(var_4, var_9, var_0, var_1, var_3, var_6);
+  var_12 = ref_1368b(var_7, var_6, var_9, var_5, var_11, var_3, var_10);
 
-  if(ref_132f1(var0)) {
-    var12 delete();
+  if(ref_132f1(var_0)) {
+    var_12 delete();
     return;
-  } else if(ref_13309(var0, var11)) {
-    linktoent(var12, var0, var1);
+  } else if(ref_13309(var_0, var_11)) {
+    linktoent(var_12, var_0, var_1);
   }
 
-  if(isDefined(var8)) {
-    [[var8]](var12, var0, var1, var2, var4, var11);
+  if(isDefined(var_8)) {
+    [[var_8]](var_12, var_0, var_1, var_2, var_4, var_11);
     return;
   }
 }
 
-function start_bomb_vest_defusal(var0, var1, var2, var3, var4, var5) {
-  var6 = 0.1;
-  var0.grenade = magicgrenademanual("semtex_xmike109_mp", var0.origin, (0, 0, 0), var6);
-  var0.grenade.angles = var0.angles;
-  var0.grenade linkTo(var0, "tag_origin");
-  thread ref_128cc(var0, var6, var3);
+function start_bomb_vest_defusal(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = 0.1;
+  var_0.grenade = magicgrenademanual("semtex_xmike109_mp", var_0.origin, (0, 0, 0), var_6);
+  var_0.grenade.angles = var_0.angles;
+  var_0.grenade linkTo(var_0, "tag_origin");
+  thread ref_128cc(var_0, var_6, var_3);
 }
 
-function start_bomb_vest_defusal_sequence(var0, var1, var2, var3, var4, var5) {
-  thread ref_128cd(var0, var1, var2, var3, var5);
+function start_bomb_vest_defusal_sequence(var_0, var_1, var_2, var_3, var_4, var_5) {
+  thread ref_128cd(var_0, var_1, var_2, var_3, var_5);
 }
 
-function start_bomb_vest_global_timer(var0, var1, var2, var3, var4, var5) {}
+function start_bomb_vest_global_timer(var_0, var_1, var_2, var_3, var_4, var_5) {}
 
-function ref_128cc(var0, var1, var2) {
+function ref_128cc(var_0, var_1, var_2) {
   self endon("disconnect");
-  var0 endon("entitydeleted");
-  var0.grenade scripts\engine\utility::ref_143bf(var1, "explode");
-  var0 setscriptablepartstate("effects", "explode");
-  var3 = getcompleteweaponname("semtex_xmike109_mp");
-  var4 = getcompleteweaponname("semtex_xmike109_splash_mp");
-  var3.ref_121d9 = var0.weapon;
-  var4.ref_121d9 = var0.weapon;
-  glassradiusdamage(var0.origin, 150, 50, 1);
+  var_0 endon("entitydeleted");
+  var_0.grenade scripts\engine\utility::ref_143bf(var_1, "explode");
+  var_0 setscriptablepartstate("effects", "explode");
+  var_3 = getcompleteweaponname("semtex_xmike109_mp");
+  var_4 = getcompleteweaponname("semtex_xmike109_splash_mp");
+  var_3.ref_121d9 = var_0.weapon;
+  var_4.ref_121d9 = var_0.weapon;
+  glassradiusdamage(var_0.origin, 150, 50, 1);
 
-  if(isDefined(var0.stuckenemyentity) && isalive(var0.stuckenemyentity)) {
-    var0.stuckenemyentity scripts\cp_mp\utility\damage_utility::playerplunderbankcallback();
-    var0.stuckenemyentity dodamage(175, var0.origin, self, self, "MOD_EXPLOSIVE", var3, var2);
-    var0.stuckenemyentity scripts\cp_mp\utility\damage_utility::playerplunderbankdeposit();
+  if(isDefined(var_0.stuckenemyentity) && isalive(var_0.stuckenemyentity)) {
+    var_0.stuckenemyentity scripts\cp_mp\utility\damage_utility::playerplunderbankcallback();
+    var_0.stuckenemyentity dodamage(175, var_0.origin, self, self, "MOD_EXPLOSIVE", var_3, var_2);
+    var_0.stuckenemyentity scripts\cp_mp\utility\damage_utility::playerplunderbankdeposit();
   }
 
-  getplaylistname(var0.origin, 9, 35, 15, 25, 60, 14, self, "MOD_EXPLOSIVE", var4);
+  getplaylistname(var_0.origin, 9, 35, 15, 25, 60, 14, self, "MOD_EXPLOSIVE", var_4);
   wait 0.4;
 
-  if(!ref_140d4(var0)) {
+  if(!ref_140d4(var_0)) {
     return;
   }
 
-  var0 delete();
+  var_0 delete();
 }
 
-function ref_128cd(var0, var1, var2, var3, var4) {
-  if(istrue(var0.unset_relic_hideobjicons)) {
-    var0 setscriptablepartstate("effects", "reflectThermite");
-    ref_1437f(var0);
+function ref_128cd(var_0, var_1, var_2, var_3, var_4) {
+  if(istrue(var_0.unset_relic_hideobjicons)) {
+    var_0 setscriptablepartstate("effects", "reflectThermite");
+    ref_1437f(var_0);
   }
 
-  var0 setscriptablepartstate("effects", "burn");
-  thread ref_13b2b(var0);
-  thread ref_13b27(var0);
-  thread ref_13b26(var0);
+  var_0 setscriptablepartstate("effects", "burn");
+  thread ref_13b2b(var_0);
+  thread ref_13b27(var_0);
+  thread ref_13b26(var_0);
 }
 
-function ref_1437f(var0) {
-  var0 endon("stuckWaitTimeout");
+function ref_1437f(var_0) {
+  var_0 endon("stuckWaitTimeout");
   thread ref_128d1();
-  var0 waittill("missile_stuck", var1, var2);
+  var_0 waittill("missile_stuck", var_1, var_2);
 
-  if(isDefined(var1)) {
-    linktoent(var0, var1, var2);
-    var0.debug_listing_helis = 1;
+  if(isDefined(var_1)) {
+    linktoent(var_0, var_1, var_2);
+    var_0.debug_listing_helis = 1;
     return;
   }
 }
@@ -128,128 +128,128 @@ function ref_128d1() {
   }
 }
 
-function ref_13b2b(var0) {
+function ref_13b2b(var_0) {
   self endon("disconnect");
-  var0 endon("entitydeleted");
-  var1 = getcompleteweaponname("thermite_xmike109_mp");
-  var1.ref_121d9 = var0.weapon;
+  var_0 endon("entitydeleted");
+  var_1 = getcompleteweaponname("thermite_xmike109_mp");
+  var_1.ref_121d9 = var_0.weapon;
 
-  if(isDefined(var0.stuckenemyentity) && isalive(var0.stuckenemyentity)) {
-    if(var0.stuckenemyentity scripts\cp_mp\vehicles\vehicle::isvehicle() || isDefined(var0.stuckenemyentity.classname) && var0.stuckenemyentity.classname == "misc_turret") {
-      var2 = 0.95;
+  if(isDefined(var_0.stuckenemyentity) && isalive(var_0.stuckenemyentity)) {
+    if(var_0.stuckenemyentity scripts\cp_mp\vehicles\vehicle::isvehicle() || isDefined(var_0.stuckenemyentity.classname) && var_0.stuckenemyentity.classname == "misc_turret") {
+      var_2 = 0.95;
     } else {
-      var2 = 0.25;
+      var_2 = 0.25;
     }
 
-    if(istrue(var1.debug_listing_helis)) {
-      var1.stuckenemyentity dodamage(80, var1.origin, self, var1, "MOD_FIRE", var2);
+    if(istrue(var_1.debug_listing_helis)) {
+      var_1.stuckenemyentity dodamage(80, var_1.origin, self, var_1, "MOD_FIRE", var_2);
     }
 
-    var3 = int(3 / var2);
+    var_3 = int(3 / var_2);
 
-    while(isDefined(var1) && isDefined(var1.stuckenemyentity) && isalive(var1.stuckenemyentity) && var3 >= 0) {
-      var1.stuckenemyentity scripts\cp_mp\utility\damage_utility::playerplunderbankcallback();
-      var1.stuckenemyentity dodamage(3, var1.origin, self, var1, "MOD_FIRE", var2);
-      var1.stuckenemyentity scripts\cp_mp\utility\damage_utility::playerplunderbankdeposit();
-      var3--;
-      wait var2;
+    while(isDefined(var_1) && isDefined(var_1.stuckenemyentity) && isalive(var_1.stuckenemyentity) && var_3 >= 0) {
+      var_1.stuckenemyentity scripts\cp_mp\utility\damage_utility::playerplunderbankcallback();
+      var_1.stuckenemyentity dodamage(3, var_1.origin, self, var_1, "MOD_FIRE", var_2);
+      var_1.stuckenemyentity scripts\cp_mp\utility\damage_utility::playerplunderbankdeposit();
+      var_3--;
+      wait var_2;
     }
 
     return;
   }
 }
 
-function ref_13b27(var0) {
+function ref_13b27(var_0) {
   self endon("disconnect");
-  var0 endon("entitydeleted");
-  var1 = int(12);
-  var2 = getcompleteweaponname("thermite_xmike109_radius_mp");
-  var2.ref_121d9 = var0.weapon;
-  var0.ref_13b28 = var2.basename;
+  var_0 endon("entitydeleted");
+  var_1 = int(12);
+  var_2 = getcompleteweaponname("thermite_xmike109_radius_mp");
+  var_2.ref_121d9 = var_0.weapon;
+  var_0.ref_13b28 = var_2.basename;
 
-  while(var1 > 0) {
-    if(isDefined(var0.stuckenemyentity) && isalive(var0.stuckenemyentity)) {
-      var0.stuckenemyentity scripts\cp_mp\utility\damage_utility::adddamagemodifier("thermite25mmStuck", 0, 0, &ref_13b1c);
+  while(var_1 > 0) {
+    if(isDefined(var_0.stuckenemyentity) && isalive(var_0.stuckenemyentity)) {
+      var_0.stuckenemyentity scripts\cp_mp\utility\damage_utility::adddamagemodifier("thermite25mmStuck", 0, 0, &ref_13b1c);
     }
 
-    var0 radiusdamage(var0.origin, 50, 2, 2, self, "MOD_FIRE", var2);
+    var_0 radiusdamage(var_0.origin, 50, 2, 2, self, "MOD_FIRE", var_2);
 
-    if(isDefined(var0.stuckenemyentity) && isalive(var0.stuckenemyentity)) {
-      var0.stuckenemyentity scripts\cp_mp\utility\damage_utility::removedamagemodifier("thermite25mmStuck", 0);
+    if(isDefined(var_0.stuckenemyentity) && isalive(var_0.stuckenemyentity)) {
+      var_0.stuckenemyentity scripts\cp_mp\utility\damage_utility::removedamagemodifier("thermite25mmStuck", 0);
     }
 
-    var1--;
+    var_1--;
     wait 0.25;
   }
 }
 
-function ref_13b1c(var0, var1, var2, var3, var4, var5, var6) {
-  if(!isDefined(var0)) {
+function ref_13b1c(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if(!isDefined(var_0)) {
     return true;
   }
 
-  if(!isDefined(var0.ref_13b28) || var0.ref_13b28 != "thermite_xmike109_radius_mp") {
+  if(!isDefined(var_0.ref_13b28) || var_0.ref_13b28 != "thermite_xmike109_radius_mp") {
     return true;
   }
 
-  if(!isDefined(var0.stuckenemyentity) || var0.stuckenemyentity != var2) {
+  if(!isDefined(var_0.stuckenemyentity) || var_0.stuckenemyentity != var_2) {
     return true;
   }
 
   return false;
 }
 
-function ref_13b26(var0) {
-  var0 endon("entitydeleted");
+function ref_13b26(var_0) {
+  var_0 endon("entitydeleted");
   wait 3;
 
-  if(!ref_140d4(var0)) {
+  if(!ref_140d4(var_0)) {
     return;
   }
 
-  var0 setscriptablepartstate("effects", "burnout");
-  var0 setscriptablepartstate("visibility", "hide");
+  var_0 setscriptablepartstate("effects", "burnout");
+  var_0 setscriptablepartstate("visibility", "hide");
   wait randomfloatrange(0.3, 2);
 
-  if(!ref_140d4(var0)) {
+  if(!ref_140d4(var_0)) {
     return;
   }
 
   wait randomfloatrange(2, 3);
-  var0 delete();
+  var_0 delete();
 }
 
-function ref_1368b(var0, var1, var2, var3, var4, var5, var6) {
-  if(var4 && var2 == "thermal") {
-    var7 = ref_12ac9(var5, var1, var0, 1, var6);
-    var8 = var0 + var5 * 10;
-    var9 = magicgrenademanual("xmike109_grenade", var8, var7, 10);
-    var9.unset_relic_hideobjicons = 1;
-    playFX(scripts\engine\utility::getfx("xmike109ThermiteBounce"), var0, var5);
+function ref_1368b(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if(var_4 && var_2 == "thermal") {
+    var_7 = ref_12ac9(var_5, var_1, var_0, 1, var_6);
+    var_8 = var_0 + var_5 * 10;
+    var_9 = magicgrenademanual("xmike109_grenade", var_8, var_7, 10);
+    var_9.unset_relic_hideobjicons = 1;
+    playFX(scripts\engine\utility::getfx("xmike109ThermiteBounce"), var_0, var_5);
   } else {
-    var9 = spawn("script_model", var1);
-    var9 setModel("weapon_wm_sn_xmike109_projectile");
-    var9.origin = var1;
+    var_9 = spawn("script_model", var_1);
+    var_9 setModel("weapon_wm_sn_xmike109_projectile");
+    var_9.origin = var_1;
 
-    if(var5) {
-      var7 = ref_12ac9(var6, var2, var1, 0, var9);
-      var9 physicslaunchserver(var1, var7);
+    if(var_5) {
+      var_7 = ref_12ac9(var_6, var_2, var_1, 0, var_9);
+      var_9 physicslaunchserver(var_1, var_7);
     }
   }
 
-  var9.angles = vectortoangles(var2);
-  ref_13142(var9, var3);
-  var9.owner = self;
-  var9.brush = var3;
-  var9.weapon = var4;
-  var9.vehicle_collision_ignorefutureevent = 1;
+  var_9.angles = vectortoangles(var_2);
+  ref_13142(var_9, var_3);
+  var_9.owner = self;
+  var_9.brush = var_3;
+  var_9.weapon = var_4;
+  var_9.vehicle_collision_ignorefutureevent = 1;
   thread ref_128cb();
-  ref_11ab5(var9);
-  return var9;
+  ref_11ab5(var_9);
+  return var_9;
 }
 
-function ref_13142(var0) {
-  switch (var0) {
+function ref_13142(var_0) {
+  switch (var_0) {
     case "thermal":
       thread ref_13143(3.5);
       self.last_saydefuse_time = 0;
@@ -263,54 +263,54 @@ function ref_13142(var0) {
   }
 }
 
-function ref_13143(var0) {
+function ref_13143(var_0) {
   self endon("entitydeleted");
-  wait var0;
+  wait var_0;
   self.last_saydefuse_time = 1;
   ref_11ab5();
 }
 
-function ref_11ab5(var0) {
-  if(isDefined(var0)) {
-    var1 = [var0];
+function ref_11ab5(var_0) {
+  if(isDefined(var_0)) {
+    var_1 = [var_0];
   } else {
-    var1 = [];
+    var_1 = [];
   }
 
-  foreach(var3 in level.ref_14675) {
-    if(!isDefined(var3)) {
+  foreach(var_3 in level.ref_14675) {
+    if(!isDefined(var_3)) {
       continue;
     }
 
-    if(isDefined(var3)) {
-      if(var1.size >= 24 && var3.last_saydefuse_time) {
-        var3 delete();
+    if(isDefined(var_3)) {
+      if(var_1.size >= 24 && var_3.last_saydefuse_time) {
+        var_3 delete();
         continue;
       }
 
-      var1 = var3;
+      var_1 = var_3;
     }
   }
 
-  level.ref_14675 = var1;
+  level.ref_14675 = var_1;
 }
 
-function safehouse_restart(var0) {
-  var1 = "";
+function safehouse_restart(var_0) {
+  var_1 = "";
 
-  foreach(var3 in var0.attachments) {
-    if(issubstr(var3, "calcust1")) {
-      var1 = "calcust1_xmike109";
+  foreach(var_3 in var_0.attachments) {
+    if(issubstr(var_3, "calcust1")) {
+      var_1 = "calcust1_xmike109";
       break;
     }
 
-    if(issubstr(var3, "calcust2")) {
-      var1 = "calcust2_xmike109";
+    if(issubstr(var_3, "calcust2")) {
+      var_1 = "calcust2_xmike109";
       break;
     }
   }
 
-  switch (var1) {
+  switch (var_1) {
     case "calcust2_xmike109":
       return "thermal";
     case "calcust1_xmike109":
@@ -320,8 +320,8 @@ function safehouse_restart(var0) {
   }
 }
 
-function safehouse_revive_and_move_players(var0) {
-  switch (var0) {
+function safehouse_revive_and_move_players(var_0) {
+  switch (var_0) {
     case "thermal":
       return &start_bomb_vest_defusal_sequence;
     case "explosive":
@@ -331,50 +331,50 @@ function safehouse_revive_and_move_players(var0) {
   }
 }
 
-function ref_1331f(var0, var1, var2, var3, var4, var5) {
-  if(!isDefined(var0)) {
-    var0 = "";
+function ref_1331f(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(!isDefined(var_0)) {
+    var_0 = "";
   }
 
-  if(var0 == "riotshield") {
+  if(var_0 == "riotshield") {
     return 1;
   }
 
-  if(var1 != "thermal") {
+  if(var_1 != "thermal") {
     return 0;
   }
 
-  if(!isDefined(var2) && isDefined(var3)) {
+  if(!isDefined(var_2) && isDefined(var_3)) {
     return 1;
   }
 
-  if(use_trace_radius(var2) || use_struct(var2)) {
+  if(use_trace_radius(var_2) || use_struct(var_2)) {
     return 1;
   }
 
-  if(unpause_wave_hud(var2) || unpause_dmz_scoring(var2)) {
+  if(unpause_wave_hud(var_2) || unpause_dmz_scoring(var_2)) {
     return 0;
   }
 
-  if(isDefined(var2)) {
-    if(var2 scripts\cp_mp\vehicles\vehicle::isvehicle()) {
+  if(isDefined(var_2)) {
+    if(var_2 scripts\cp_mp\vehicles\vehicle::isvehicle()) {
       return 0;
     }
 
-    if(isDefined(var2.equipmentref) && var2.equipmentref == "equip_tac_cover") {
+    if(isDefined(var_2.equipmentref) && var_2.equipmentref == "equip_tac_cover") {
       return 0;
     }
   }
 
-  switch (var0) {
+  switch (var_0) {
     case "glass_solid":
     case "glass_pane":
     case "riotshield":
       return 1;
     default:
-      var6 = abs(vectordot(var5, var4));
+      var_6 = abs(vectordot(var_5, var_4));
 
-      if(var6 < 0.2) {
+      if(var_6 < 0.2) {
         return 1;
       }
 
@@ -382,56 +382,56 @@ function ref_1331f(var0, var1, var2, var3, var4, var5) {
   }
 }
 
-function ref_12ac9(var0, var1, var2, var3, var4) {
-  if(var3) {
-    var5 = 1500;
-    var6 = 500;
-    var7 = 150;
+function ref_12ac9(var_0, var_1, var_2, var_3, var_4) {
+  if(var_3) {
+    var_5 = 1500;
+    var_6 = 500;
+    var_7 = 150;
   } else {
-    var5 = 500;
-    var6 = 500;
-    var7 = 500;
+    var_5 = 500;
+    var_6 = 500;
+    var_7 = 500;
   }
 
-  if(isDefined(var7)) {
-    var8 = var4;
-    var9 = 0;
+  if(isDefined(var_7)) {
+    var_8 = var_4;
+    var_9 = 0;
   } else {
-    var8 = scripts\engine\math::vector_reflect(var6, var5);
-    var8 = vectorlerp(var8, var5, 0.2);
-    var9 = abs(vectordot(var6, var5));
+    var_8 = scripts\engine\math::vector_reflect(var_6, var_5);
+    var_8 = vectorlerp(var_8, var_5, 0.2);
+    var_9 = abs(vectordot(var_6, var_5));
   }
 
-  if(var9 < 0.2) {
-    var9 = scripts\engine\math::normalize_value(0, 0.2, var9);
-    var10 = scripts\engine\math::factor_value(var7, var8, var9);
+  if(var_9 < 0.2) {
+    var_9 = scripts\engine\math::normalize_value(0, 0.2, var_9);
+    var_10 = scripts\engine\math::factor_value(var_7, var_8, var_9);
   } else {
-    var10 = scripts\engine\math::normalize_value(0.2, 1, var10);
-    var10 = scripts\engine\math::factor_value(var9, var8, var10);
+    var_10 = scripts\engine\math::normalize_value(0.2, 1, var_10);
+    var_10 = scripts\engine\math::factor_value(var_9, var_8, var_10);
   }
 
-  var9 *= var10;
-  return var9;
+  var_9 *= var_10;
+  return var_9;
 }
 
-function ref_132f1(var0) {
-  if(!isDefined(var0)) {
+function ref_132f1(var_0) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
-  if(isagent(var0) && trytoplaydamagesound(var0) && !isalive(var0) && !isDefined(var0 getcorpseentity())) {
+  if(isagent(var_0) && trytoplaydamagesound(var_0) && !isalive(var_0) && !isDefined(var_0 getcorpseentity())) {
     return true;
   }
 
   return false;
 }
 
-function ref_13309(var0, var1) {
-  if(var1 || !isDefined(var0)) {
+function ref_13309(var_0, var_1) {
+  if(var_1 || !isDefined(var_0)) {
     return false;
   }
 
-  if(isDefined(var0.classname) && var0.classname == "weapon_scavenger_bag_mp") {
+  if(isDefined(var_0.classname) && var_0.classname == "weapon_scavenger_bag_mp") {
     return false;
   }
 
@@ -442,38 +442,38 @@ function trytoplaydamagesound() {
   return istrue(isDefined(self.unittype) && self.unittype == "suicidebomber");
 }
 
-function linktoent(var0, var1, var2) {
-  if((isPlayer(var1) || isagent(var1)) && !isalive(var1)) {
-    var3 = var1 getcorpseentity();
+function linktoent(var_0, var_1, var_2) {
+  if((isPlayer(var_1) || isagent(var_1)) && !isalive(var_1)) {
+    var_3 = var_1 getcorpseentity();
 
-    if(isDefined(var3)) {
-      var1 = var3;
+    if(isDefined(var_3)) {
+      var_1 = var_3;
     }
   }
 
-  if(isPlayer(var1)) {
-    var0 hidefromplayer(var1);
+  if(isPlayer(var_1)) {
+    var_0 hidefromplayer(var_1);
   }
 
-  if(isDefined(var2)) {
-    var0 linkTo(var1, var2);
+  if(isDefined(var_2)) {
+    var_0 linkTo(var_1, var_2);
   } else {
-    var0 linkTo(var1);
+    var_0 linkTo(var_1);
   }
 
-  if(get_center_loc_among_target_players(var1)) {
-    var0.stuckenemyentity = var1;
-    thread ref_12c28(var0);
+  if(get_center_loc_among_target_players(var_1)) {
+    var_0.stuckenemyentity = var_1;
+    thread ref_12c28(var_0);
   }
 
-  if(!istrue(var0.unset_relic_hideobjicons)) {
-    var0 notsolid();
+  if(!istrue(var_0.unset_relic_hideobjicons)) {
+    var_0 notsolid();
   }
 
-  thread ref_128d0(var0);
-  thread ref_128ca(var0, var1);
-  thread ref_128ca(var0, var1);
-  thread ref_128ca(var0, var1);
+  thread ref_128d0(var_0);
+  thread ref_128ca(var_0, var_1);
+  thread ref_128ca(var_0, var_1);
+  thread ref_128ca(var_0, var_1);
 }
 
 function ref_140d4() {
@@ -482,9 +482,9 @@ function ref_140d4() {
   }
 }
 
-function ref_12c28(var0) {
+function ref_12c28(var_0) {
   self endon("entitydeleted");
-  var0 scripts\engine\utility::ref_143a6("entitydeleted", "death", "disconnect");
+  var_0 scripts\engine\utility::ref_143a6("entitydeleted", "death", "disconnect");
 
   if(!ref_140d4()) {
     return;
@@ -492,19 +492,19 @@ function ref_12c28(var0) {
 
   self.stuckenemyentity = undefined;
 
-  if(isDefined(var0) && isDefined(var0.nocorpse)) {
+  if(isDefined(var_0) && isDefined(var_0.nocorpse)) {
     self delete();
     return;
   }
 }
 
-function ref_128d0(var0) {
+function ref_128d0(var_0) {
   self endon("entitydeleted");
 
-  if(isagent(var0)) {
-    var0 waittill("entitydeleted");
+  if(isagent(var_0)) {
+    var_0 waittill("entitydeleted");
   } else {
-    var0 scripts\engine\utility::ref_143a5("entitydeleted", "disconnect");
+    var_0 scripts\engine\utility::ref_143a5("entitydeleted", "disconnect");
   }
 
   if(!ref_140d4()) {
@@ -514,9 +514,9 @@ function ref_128d0(var0) {
   ref_128cf();
 }
 
-function ref_128cf(var0) {
-  if(!isDefined(var0)) {
-    var0 = (0, 0, 100);
+function ref_128cf(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = (0, 0, 100);
   }
 
   if(self islinked()) {
@@ -527,12 +527,12 @@ function ref_128cf(var0) {
     self solid();
   }
 
-  self physicslaunchserver(self.origin, var0);
+  self physicslaunchserver(self.origin, var_0);
 }
 
-function ref_128ca(var0, var1) {
+function ref_128ca(var_0, var_1) {
   self endon("entitydeleted");
-  var0 waittill(var1);
+  var_0 waittill(var_1);
 
   if(!ref_140d4()) {
     return;
@@ -550,82 +550,82 @@ function ref_128cb() {
   }
 }
 
-function use_trace_radius(var0) {
-  if(!isPlayer(var0)) {
+function use_trace_radius(var_0) {
+  if(!isPlayer(var_0)) {
     return 0;
   }
 
-  if(scripts\mp\utility\player::isenemy(var0)) {
+  if(scripts\mp\utility\player::isenemy(var_0)) {
     return 0;
   }
 
   return 1;
 }
 
-function unpause_wave_hud(var0) {
-  if(!isPlayer(var0)) {
+function unpause_wave_hud(var_0) {
+  if(!isPlayer(var_0)) {
     return 0;
   }
 
-  if(scripts\mp\utility\player::isenemy(var0)) {
+  if(scripts\mp\utility\player::isenemy(var_0)) {
     return 1;
   }
 
   return 0;
 }
 
-function use_struct(var0) {
-  if(!isagent(var0)) {
+function use_struct(var_0) {
+  if(!isagent(var_0)) {
     return false;
   }
 
-  if(isDefined(var0.agentteam) && self.team == var0.agentteam) {
+  if(isDefined(var_0.agentteam) && self.team == var_0.agentteam) {
     return true;
   }
 
   return false;
 }
 
-function unpause_dmz_scoring(var0) {
-  if(!isagent(var0)) {
+function unpause_dmz_scoring(var_0) {
+  if(!isagent(var_0)) {
     return false;
   }
 
-  if(isDefined(var0.agentteam) && self.team == var0.agentteam) {
+  if(isDefined(var_0.agentteam) && self.team == var_0.agentteam) {
     return false;
   }
 
   return true;
 }
 
-function get_center_loc_among_target_players(var0) {
-  var1 = 0;
+function get_center_loc_among_target_players(var_0) {
+  var_1 = 0;
 
-  if(isPlayer(var0) || isagent(var0)) {
-    var1 = 1;
+  if(isPlayer(var_0) || isagent(var_0)) {
+    var_1 = 1;
   }
 
-  if(var0 scripts\cp_mp\vehicles\vehicle::isvehicle()) {
-    var1 = 1;
+  if(var_0 scripts\cp_mp\vehicles\vehicle::isvehicle()) {
+    var_1 = 1;
   }
 
-  if(isDefined(var0.classname)) {
-    if(var0.classname == "misc_turret") {
-      var1 = 1;
+  if(isDefined(var_0.classname)) {
+    if(var_0.classname == "misc_turret") {
+      var_1 = 1;
     }
 
-    if(var0.classname == "script_model") {
-      if(isDefined(var0.streakinfo) && (var0.streakinfo.streakname == "uav" || var0.streakinfo.streakname == "gunship")) {
-        var1 = 1;
+    if(var_0.classname == "script_model") {
+      if(isDefined(var_0.streakinfo) && (var_0.streakinfo.streakname == "uav" || var_0.streakinfo.streakname == "gunship")) {
+        var_1 = 1;
       }
     }
   }
 
-  if(isDefined(var0.equipmentref)) {
-    if(var0.equipmentref == "equip_tac_cover") {
-      var1 = 1;
+  if(isDefined(var_0.equipmentref)) {
+    if(var_0.equipmentref == "equip_tac_cover") {
+      var_1 = 1;
     }
   }
 
-  return var1;
+  return var_1;
 }

@@ -10,9 +10,9 @@ function init() {
 
 function supply_crate_vo_when_used() {
   level waittill("player_spawned");
-  var0 = getentitylessscriptablearrayinradius("scriptable_morse_code_sfx", "classname");
+  var_0 = getentitylessscriptablearrayinradius("scriptable_morse_code_sfx", "classname");
 
-  foreach(var2 in var0) {
+  foreach(var_2 in var_0) {
     thread ref_11d28();
   }
 }

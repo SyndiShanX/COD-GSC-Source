@@ -33,7 +33,7 @@ function init() {
   thread ladderpistol();
 }
 
-function deathshieldfunc(var0) {}
+function deathshieldfunc(var_0) {}
 
 function main() {
   scripts\engine\sp\utility::add_hint_string("focus_hint", &"GAME/FOCUS_HINT", &focus_held_down);
@@ -85,18 +85,18 @@ function initplayerprecache() {
     precachemodel("viewmodel_body_armor");
   }
 
-  var0 = ["bottom", "left", "right"];
+  var_0 = ["bottom", "left", "right"];
 
-  foreach(var2 in var0) {
-    precacheshader("fullscreen_blood_" + var2);
-    precacheshader("fullscreen_blood_" + var2 + "_alt");
-    precacheshader("fullscreen_blood_" + var2 + "_splash");
-    precacheshader("fullscreen_dirt_" + var2);
-    precacheshader("fullscreen_dirt_" + var2 + "_splash");
+  foreach(var_2 in var_0) {
+    precacheshader("fullscreen_blood_" + var_2);
+    precacheshader("fullscreen_blood_" + var_2 + "_alt");
+    precacheshader("fullscreen_blood_" + var_2 + "_splash");
+    precacheshader("fullscreen_dirt_" + var_2);
+    precacheshader("fullscreen_dirt_" + var_2 + "_splash");
 
     if(scripts\common\utility::playerarmorenabled()) {
-      precacheshader("fullscreen_armor_" + var2);
-      precacheshader("fullscreen_armor_" + var2 + "_splash");
+      precacheshader("fullscreen_armor_" + var_2);
+      precacheshader("fullscreen_armor_" + var_2 + "_splash");
     }
   }
 
@@ -309,58 +309,58 @@ function initplayerdefaultsettings() {
   armornoui();
 }
 
-function getammonameamount(var0) {
-  var1 = 0;
+function getammonameamount(var_0) {
+  var_1 = 0;
 
-  foreach(var3 in self getweaponslistprimaries()) {
-    if(getammoname(var3) == var0) {
-      var1 = self getweaponammostock(var3);
+  foreach(var_3 in self getweaponslistprimaries()) {
+    if(getammoname(var_3) == var_0) {
+      var_1 = self getweaponammostock(var_3);
       break;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function getammonamemaxamount(var0) {
-  var1 = 0;
+function getammonamemaxamount(var_0) {
+  var_1 = 0;
 
-  foreach(var3 in self getweaponslistprimaries()) {
-    if(getammoname(var3) == var0) {
-      if(var3.maxammo > var1) {
-        var1 = var3.maxammo;
+  foreach(var_3 in self getweaponslistprimaries()) {
+    if(getammoname(var_3) == var_0) {
+      if(var_3.maxammo > var_1) {
+        var_1 = var_3.maxammo;
       }
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function setammonameamount(var0, var1) {
-  foreach(var3 in self getweaponslistprimaries()) {
-    if(getammoname(var3) == var0) {
-      self setweaponammostock(var3, var1);
+function setammonameamount(var_0, var_1) {
+  foreach(var_3 in self getweaponslistprimaries()) {
+    if(getammoname(var_3) == var_0) {
+      self setweaponammostock(var_3, var_1);
     }
   }
 }
 
-function getammoname(var0) {
-  if(!isDefined(var0)) {
+function getammoname(var_0) {
+  if(!isDefined(var_0)) {
     return undefined;
   }
 
-  if(nullweapon(var0)) {
+  if(nullweapon(var_0)) {
     return undefined;
   }
 
-  var1 = getweaponammopoolname(var0);
-  var1 = attachmentammonamehack(var1);
-  var1 = localizeammonamehack(var1);
-  return var1;
+  var_1 = getweaponammopoolname(var_0);
+  var_1 = attachmentammonamehack(var_1);
+  var_1 = localizeammonamehack(var_1);
+  return var_1;
 }
 
-function localizeammonamehack(var0) {
-  switch (var0) {
+function localizeammonamehack(var_0) {
+  switch (var_0) {
     case ".45 acp":
       return ".45 ACP";
     case "12 gauge":
@@ -373,15 +373,15 @@ function localizeammonamehack(var0) {
       return "40mm Grenade";
   }
 
-  return var0;
+  return var_0;
 }
 
-function attachmentammonamehack(var0) {
-  if(issubstr(var0, "ub_mike203") || issubstr(var0, "ub_flare") || issubstr(var0, "ub_golf25")) {
+function attachmentammonamehack(var_0) {
+  if(issubstr(var_0, "ub_mike203") || issubstr(var_0, "ub_flare") || issubstr(var_0, "ub_golf25")) {
     return "40mm grenade";
   }
 
-  return var0;
+  return var_0;
 }
 
 function playerseondaryoffhandtacaim() {
@@ -390,10 +390,10 @@ function playerseondaryoffhandtacaim() {
 
 function playerseondaryoffhandtacaimlogic() {
   self endon("death");
-  var0 = spawnStruct();
-  var0.active = 0;
-  var0.debounced = 1;
-  var0.frac = 0;
+  var_0 = spawnStruct();
+  var_0.active = 0;
+  var_0.debounced = 1;
+  var_0.frac = 0;
 
   for(;;) {
     jumpiffalse(getDvar("mount_controls_engage_button") != "Secondary Offhand Hold") LOC_00000047;
@@ -401,21 +401,21 @@ function playerseondaryoffhandtacaimlogic() {
   }
 
   for(;;) {
-    var1 = self buttonPressed("BUTTON_LSHLDR");
-    var2 = self playermount() > 0.5;
-    var3 = level.player issprinting();
-    var4 = level.player scripts\engine\sp\utility::issliding();
+    var_1 = self buttonPressed("BUTTON_LSHLDR");
+    var_2 = self playermount() > 0.5;
+    var_3 = level.player issprinting();
+    var_4 = level.player scripts\engine\sp\utility::issliding();
 
-    if(var1 && var0.debounced && !var0.active && !var2 && !var3 && !var4) {
+    if(var_1 && var_0.debounced && !var_0.active && !var_2 && !var_3 && !var_4) {
       thread tacadsactive();
     }
 
-    if((!var1 || var2 || var3 || var4) && var0.active) {
+    if((!var_1 || var_2 || var_3 || var_4) && var_0.active) {
       thread tacadsstop();
     }
 
-    if((!var1 || var2 || var3 || var4) && !var0.debounced) {
-      var0.debounced = 1;
+    if((!var_1 || var_2 || var_3 || var_4) && !var_0.debounced) {
+      var_0.debounced = 1;
     }
 
     wait 0.05;
@@ -453,14 +453,14 @@ function tacadsstop() {
   player_apply_local_weap_rotation((0, 0, 0), 0.15, "tacASD");
 }
 
-function goprohelmetprecache(var0, var1, var2) {
-  if(isDefined(var0)) {
-    precachemodel(var0);
-    level.player.goprohelmet = var0;
+function goprohelmetprecache(var_0, var_1, var_2) {
+  if(isDefined(var_0)) {
+    precachemodel(var_0);
+    level.player.goprohelmet = var_0;
   }
 
-  if(isDefined(var1)) {
-    precacheshader(var1);
+  if(isDefined(var_1)) {
+    precacheshader(var_1);
     level.player.goprooverlay = newclienthudelem(level.player);
     level.player.goprooverlay.sort = 0;
     level.player.goprooverlay.foreground = 0;
@@ -468,10 +468,10 @@ function goprohelmetprecache(var0, var1, var2) {
     level.player.goprooverlay.vertalign = "fullscreen";
     level.player.goprooverlay.alpha = 0;
     level.player.goprooverlay.enablehudlighting = 1;
-    level.player.goprooverlay setshader(var1, 640, 480);
+    level.player.goprooverlay setshader(var_1, 640, 480);
   }
 
-  level.player.goprovision = var2;
+  level.player.goprovision = var_2;
 }
 
 function goprotest() {
@@ -480,36 +480,36 @@ function goprotest() {
 
 function goproplayerthread() {
   self endon("death");
-  var0 = "dpad_right";
+  var_0 = "dpad_right";
 
   for(;;) {
-    buttondebounce(var0);
+    buttondebounce(var_0);
     thread goprohelmet();
-    buttondebounce(var0);
+    buttondebounce(var_0);
     thread gopronone();
   }
 }
 
 function goprohelmet() {
   self notify("new_Gopro");
-  var0 = undefined;
+  var_0 = undefined;
   goprocamerasettings(1);
-  var1 = (0, 0, 0);
-  var2 = (-3, -1, 5) + var1;
-  var3 = (10, 5, -10) + var1;
-  player_apply_local_view_position(var2, 0, "Gopro");
-  player_apply_local_weap_position(-1 * var2, 0, "Gopro");
+  var_1 = (0, 0, 0);
+  var_2 = (-3, -1, 5) + var_1;
+  var_3 = (10, 5, -10) + var_1;
+  player_apply_local_view_position(var_2, 0, "Gopro");
+  player_apply_local_weap_position(-1 * var_2, 0, "Gopro");
 
   if(isDefined(self.goprohelmet)) {
-    var0 = spawn("script_model", self.origin);
-    var0 setModel(self.goprohelmet);
-    var0 linktoplayerview(self, "tag_origin", var3, (-90, 90, 0), 1, "view_jostle");
+    var_0 = spawn("script_model", self.origin);
+    var_0 setModel(self.goprohelmet);
+    var_0 linktoplayerview(self, "tag_origin", var_3, (-90, 90, 0), 1, "view_jostle");
   }
 
   self waittill("new_Gopro");
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
     return;
   }
 }
@@ -521,8 +521,8 @@ function gopronone() {
   player_apply_local_weap_position((0, 0, 0), 0, "Gopro");
 }
 
-function goprocamerasettings(var0) {
-  if(var0) {
+function goprocamerasettings(var_0) {
+  if(var_0) {
     level.player modifybasefov(85, 0.05);
     setsaveddvar("QTSPTNLOL", 85);
 
@@ -579,19 +579,19 @@ function givegoproattachments() {
     return;
   }
 
-  var0 = self.currentweapon;
-  var1 = self.primaryinventory;
+  var_0 = self.currentweapon;
+  var_1 = self.primaryinventory;
 
-  foreach(var3 in var1) {
-    var4 = var3.attachments;
-    var4 = scripts\engine\utility::array_add(var4, "gopro_no_ads");
-    var4 = scripts\engine\utility::alphabetize(var4);
-    var5 = scripts\sp\utility::make_weapon(getweaponbasename(var3), var4);
-    self takeweapon(var3);
-    self giveweapon(var5);
+  foreach(var_3 in var_1) {
+    var_4 = var_3.attachments;
+    var_4 = scripts\engine\utility::array_add(var_4, "gopro_no_ads");
+    var_4 = scripts\engine\utility::alphabetize(var_4);
+    var_5 = scripts\sp\utility::make_weapon(getweaponbasename(var_3), var_4);
+    self takeweapon(var_3);
+    self giveweapon(var_5);
   }
 
-  switchtoweaponwithbasename(var0);
+  switchtoweaponwithbasename(var_0);
   self.goprohasattachments = 1;
 }
 
@@ -600,39 +600,39 @@ function takegoproattachments() {
     return;
   }
 
-  var0 = self.currentweapon;
-  var1 = self.primaryinventory;
+  var_0 = self.currentweapon;
+  var_1 = self.primaryinventory;
 
-  foreach(var3 in var1) {
-    var4 = var3.attachments;
-    var4 = scripts\engine\utility::array_remove(var4, "gopro_no_ads");
-    var4 = scripts\engine\utility::alphabetize(var4);
-    var5 = scripts\sp\utility::make_weapon(getweaponbasename(var3), var4);
-    self takeweapon(var3);
-    self giveweapon(var5);
+  foreach(var_3 in var_1) {
+    var_4 = var_3.attachments;
+    var_4 = scripts\engine\utility::array_remove(var_4, "gopro_no_ads");
+    var_4 = scripts\engine\utility::alphabetize(var_4);
+    var_5 = scripts\sp\utility::make_weapon(getweaponbasename(var_3), var_4);
+    self takeweapon(var_3);
+    self giveweapon(var_5);
   }
 
-  switchtoweaponwithbasename(var0);
+  switchtoweaponwithbasename(var_0);
   self.goprohasattachments = undefined;
 }
 
-function switchtoweaponwithbasename(var0) {
-  var1 = self.primaryinventory;
+function switchtoweaponwithbasename(var_0) {
+  var_1 = self.primaryinventory;
 
-  foreach(var3 in var1) {
-    if(getweaponbasename(var3) == getweaponbasename(var0)) {
-      self switchtoweaponimmediate(var3);
+  foreach(var_3 in var_1) {
+    if(getweaponbasename(var_3) == getweaponbasename(var_0)) {
+      self switchtoweaponimmediate(var_3);
       break;
     }
   }
 }
 
-function buttondebounce(var0) {
-  while(!level.player buttonPressed(var0)) {
+function buttondebounce(var_0) {
+  while(!level.player buttonPressed(var_0)) {
     wait 0.05;
   }
 
-  while(level.player buttonPressed(var0)) {
+  while(level.player buttonPressed(var_0)) {
     wait 0.05;
   }
 }
@@ -642,82 +642,82 @@ function ladderpistol() {
   setsaveddvar("OMSLTKKKMK", 1);
 }
 
-function managereloadammo(var0) {
-  var1 = self getweaponammoclip(var0);
-  var2 = weaponclipsize(var0);
-  var3 = self getammocount(var0) - var1;
-  var4 = var2 - var1;
-  var3 -= var4;
-  self setweaponammostock(var0, var3);
-  self setweaponammoclip(var0, var2);
+function managereloadammo(var_0) {
+  var_1 = self getweaponammoclip(var_0);
+  var_2 = weaponclipsize(var_0);
+  var_3 = self getammocount(var_0) - var_1;
+  var_4 = var_2 - var_1;
+  var_3 -= var_4;
+  self setweaponammostock(var_0, var_3);
+  self setweaponammoclip(var_0, var_2);
 }
 
-function player_apply_local_view_position(var0, var1, var2) {
-  if(!isDefined(var2)) {
-    var2 = "default";
+function player_apply_local_view_position(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
+    var_2 = "default";
   }
 
-  thread blendviewoffsetinternal(level.player, "viewPos", var2, var0);
+  thread blendviewoffsetinternal(level.player, "viewPos", var_2, var_0);
 }
 
-function player_apply_local_view_rotation(var0, var1, var2) {
-  if(!isDefined(var2)) {
-    var2 = "default";
+function player_apply_local_view_rotation(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
+    var_2 = "default";
   }
 
-  thread blendviewoffsetinternal(level.player, "viewAng", var2, var0);
+  thread blendviewoffsetinternal(level.player, "viewAng", var_2, var_0);
 }
 
-function player_apply_local_weap_position(var0, var1, var2) {
-  if(!isDefined(var2)) {
-    var2 = "default";
+function player_apply_local_weap_position(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
+    var_2 = "default";
   }
 
-  thread blendviewoffsetinternal(level.player, "weapPos", var2, var0);
+  thread blendviewoffsetinternal(level.player, "weapPos", var_2, var_0);
 }
 
-function player_apply_local_weap_rotation(var0, var1, var2) {
-  if(!isDefined(var2)) {
-    var2 = "default";
+function player_apply_local_weap_rotation(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
+    var_2 = "default";
   }
 
-  thread blendviewoffsetinternal(level.player, "weapAng", var2, var0);
+  thread blendviewoffsetinternal(level.player, "weapAng", var_2, var_0);
 }
 
-function blendviewoffsetinternal(var0, var1, var2, var3) {
-  self notify(var0 + var1);
-  self endon(var0 + var1);
+function blendviewoffsetinternal(var_0, var_1, var_2, var_3) {
+  self notify(var_0 + var_1);
+  self endon(var_0 + var_1);
 
-  if(!isDefined(self.viewblender[var0].channels[var1])) {
-    self.viewblender[var0].channels[var1] = (0, 0, 0);
+  if(!isDefined(self.viewblender[var_0].channels[var_1])) {
+    self.viewblender[var_0].channels[var_1] = (0, 0, 0);
   }
 
-  var4 = self.viewblender[var0].channels[var1];
+  var_4 = self.viewblender[var_0].channels[var_1];
 
-  if(var3 <= 0.05) {
-    setviewoffset(var0, var1, var2);
+  if(var_3 <= 0.05) {
+    setviewoffset(var_0, var_1, var_2);
     return;
   }
 
-  var5 = var2 - var4;
-  var6 = var5 * 1 / (var3 + 0.05) * 0.05;
+  var_5 = var_2 - var_4;
+  var_6 = var_5 * 1 / (var_3 + 0.05) * 0.05;
 
-  while(var3 > 0) {
-    var3 -= 0.05;
-    self.viewblender[var0].channels[var1] += var6;
+  while(var_3 > 0) {
+    var_3 -= 0.05;
+    self.viewblender[var_0].channels[var_1] += var_6;
     wait 0.05;
   }
 
-  setviewoffset(var0, var1, var2);
+  setviewoffset(var_0, var_1, var_2);
 }
 
-function setviewoffset(var0, var1, var2) {
-  if(length(var2) == 0) {
-    self.viewblender[var0].channels = scripts\engine\sp\utility::array_remove_key_array(self.viewblender[var0].channels, [var1]);
+function setviewoffset(var_0, var_1, var_2) {
+  if(length(var_2) == 0) {
+    self.viewblender[var_0].channels = scripts\engine\sp\utility::array_remove_key_array(self.viewblender[var_0].channels, [var_1]);
     return;
   }
 
-  self.viewblender[var0].channels[var1] = var2;
+  self.viewblender[var_0].channels[var_1] = var_2;
 }
 
 function initplayerviewblender() {
@@ -731,11 +731,11 @@ function initplayerviewblender() {
 }
 
 function initviewblenderstruct() {
-  var0 = spawnStruct();
-  var0.channels = [];
-  var0.val = (0, 0, 0);
-  var0.curr = (0, 0, 0);
-  return var0;
+  var_0 = spawnStruct();
+  var_0.channels = [];
+  var_0.val = (0, 0, 0);
+  var_0.curr = (0, 0, 0);
+  return var_0;
 }
 
 function viewblenderupdate() {
@@ -749,17 +749,17 @@ function viewblenderupdate() {
   }
 }
 
-function setomvarviewoffset(var0, var1) {
-  var2 = (0, 0, 0);
+function setomvarviewoffset(var_0, var_1) {
+  var_2 = (0, 0, 0);
 
-  foreach(var4 in self.viewblender[var1].channels) {
-    var2 += var4;
+  foreach(var_4 in self.viewblender[var_1].channels) {
+    var_2 += var_4;
   }
 
-  self setclientomnvar(var0 + "x", var2[0]);
-  self setclientomnvar(var0 + "y", var2[1]);
-  self setclientomnvar(var0 + "z", var2[2]);
-  self.viewblender[var1].val = var2;
+  self setclientomnvar(var_0 + "x", var_2[0]);
+  self setclientomnvar(var_0 + "y", var_2[1]);
+  self setclientomnvar(var_0 + "z", var_2[2]);
+  self.viewblender[var_1].val = var_2;
 }
 
 function playeraltweapon() {
@@ -781,42 +781,42 @@ function ondamagecallbacks() {
 
   for(;;) {
     self.hadarmor = hasarmor();
-    self waittill("damage", var0, var1, var2, var3, var4, var5, var5, var5, var5, var6, var5, var5, var5, var7);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_5, var_5, var_5, var_6, var_5, var_5, var_5, var_7);
 
     if(!isalive(self)) {
-      thread ondeathfinalhit(var1, var4, var0);
+      thread ondeathfinalhit(var_1, var_4, var_0);
       break;
     }
 
-    self.dmgtoplayer = var0;
-    self.dmgpoint = var3;
-    var8 = self[[self.damage.fndispersedamage]](var0, var1, var2, var3, var4, var6, var7);
-    ondamagecallbackthread(var0, var1, var2, var3, var4, var8, var7);
+    self.dmgtoplayer = var_0;
+    self.dmgpoint = var_3;
+    var_8 = self[[self.damage.fndispersedamage]](var_0, var_1, var_2, var_3, var_4, var_6, var_7);
+    ondamagecallbackthread(var_0, var_1, var_2, var_3, var_4, var_8, var_7);
   }
 }
 
-function ondamagecallbackthread(var0, var1, var2, var3, var4, var5, var6) {
+function ondamagecallbackthread(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self endon("death");
 
-  foreach(var8 in [[self.damage.fndamagefunctions]](var4)) {
-    self childthread[[var8]](var0, var1, var2, var3, var4, var5, var6);
+  foreach(var_8 in [[self.damage.fndamagefunctions]](var_4)) {
+    self childthread[[var_8]](var_0, var_1, var_2, var_3, var_4, var_5, var_6);
   }
 
-  foreach(var8 in self.damage_functions) {
-    self childthread[[var8]](var0, var1, var2, var3, var4, var5, var6);
+  foreach(var_8 in self.damage_functions) {
+    self childthread[[var_8]](var_0, var_1, var_2, var_3, var_4, var_5, var_6);
   }
 }
 
-function ondeathfinalhit(var0, var1, var2) {
-  if(var1 != "MOD_FIRE") {
-    thread damagebloodoverlaydirectional(var0.origin, var1, 60);
+function ondeathfinalhit(var_0, var_1, var_2) {
+  if(var_1 != "MOD_FIRE") {
+    thread damagebloodoverlaydirectional(var_0.origin, var_1, 60);
   }
 
   thread deathsdooroverlaypulsefinal();
 }
 
-function damagefunctions(var0) {
-  switch (var0) {
+function damagefunctions(var_0) {
+  switch (var_0) {
     case "MOD_FIRE":
       return [ &damagefire, &regeneratehealth];
     default:
@@ -824,82 +824,82 @@ function damagefunctions(var0) {
   }
 }
 
-function defaultdamagenotify(var0, var1, var2, var3, var4, var5, var6) {
+function defaultdamagenotify(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self notify("defaultDamage");
 }
 
-function dispersedamage(var0, var1, var2, var3, var4, var5, var6) {
-  var0 = handleexplosivedamage(var0, var4);
+function dispersedamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_0 = handleexplosivedamage(var_0, var_4);
 
-  if(hasarmor() && armorprotectsdamagetype(var4, var5)) {
-    var7 = min(getarmoramount(), getarmormaxamount());
-    var8 = 1 - getarmoramount() / getarmormaxamount();
-    var9 = scripts\engine\math::factor_value(self.gs.armordamagetohealthratiomin, self.gs.armordamagetohealthratiomax, var8);
-    var10 = min(var0, var7);
-    var11 = var10 * var9;
-    var12 = var0 - var7;
+  if(hasarmor() && armorprotectsdamagetype(var_4, var_5)) {
+    var_7 = min(getarmoramount(), getarmormaxamount());
+    var_8 = 1 - getarmoramount() / getarmormaxamount();
+    var_9 = scripts\engine\math::factor_value(self.gs.armordamagetohealthratiomin, self.gs.armordamagetohealthratiomax, var_8);
+    var_10 = min(var_0, var_7);
+    var_11 = var_10 * var_9;
+    var_12 = var_0 - var_7;
 
-    if(var12 > 0) {
-      var13 = self.gs.damagemultiplierhealth / self.gs.damagemultiplierarmor;
-      var12 *= var13;
+    if(var_12 > 0) {
+      var_13 = self.gs.damagemultiplierhealth / self.gs.damagemultiplierarmor;
+      var_12 *= var_13;
     } else {
-      var12 = 0;
+      var_12 = 0;
     }
 
-    var11 += var12;
-    var14 = clamp(var7 - var10, 0, getarmormaxamount());
-    setarmoramount(var14);
-  } else if(var5 == "MOD_FIRE") {
-    var15 = 3.5;
-    var11 = 0;
-    var16 = var1 * 1 / self.damagemultiplier;
+    var_11 += var_12;
+    var_14 = clamp(var_7 - var_10, 0, getarmormaxamount());
+    setarmoramount(var_14);
+  } else if(var_5 == "MOD_FIRE") {
+    var_15 = 3.5;
+    var_11 = 0;
+    var_16 = var_1 * 1 / self.damagemultiplier;
 
-    if(var16 < var15) {
-      var16 = var15;
+    if(var_16 < var_15) {
+      var_16 = var_15;
     }
 
-    self.damage.firedamage += var16 * getfireengulfrate();
+    self.damage.firedamage += var_16 * getfireengulfrate();
     self.damage.firedamage = min(self.damage.firedamage, 100);
-  } else if(shouldflashinvul(var6)) {
-    var11 = 0;
+  } else if(shouldflashinvul(var_6)) {
+    var_11 = 0;
   } else {
-    var11 = var3;
+    var_11 = var_3;
   }
 
-  var17 = max(var11 - self.lasthealth, 0);
-  var18 = clamp(self.lasthealth - var11, 1, self.maxhealth);
+  var_17 = max(var_11 - self.lasthealth, 0);
+  var_18 = clamp(self.lasthealth - var_11, 1, self.maxhealth);
 
-  if(var18) {
-    set_normalhealth(var18 / self.maxhealth);
+  if(var_18) {
+    set_normalhealth(var_18 / self.maxhealth);
   }
 
-  return var17;
+  return var_17;
 }
 
-function handleexplosivedamage(var0, var1) {
-  if(!isexplosivedamage(var1)) {
-    return var0;
+function handleexplosivedamage(var_0, var_1) {
+  if(!isexplosivedamage(var_1)) {
+    return var_0;
   }
 
-  return var0 * self.gs.damagemultiplierexplosive;
+  return var_0 * self.gs.damagemultiplierexplosive;
 }
 
-function shouldflashinvul(var0) {
-  var1 = ["MOD_RIFLE_BULLET", "MOD_PISTOL_BULLET"];
+function shouldflashinvul(var_0) {
+  var_1 = ["MOD_RIFLE_BULLET", "MOD_PISTOL_BULLET"];
 
-  if(isDefined(self.flashinvul) && scripts\engine\utility::array_contains(var1, var0)) {
+  if(isDefined(self.flashinvul) && scripts\engine\utility::array_contains(var_1, var_0)) {
     return true;
   }
 
   return false;
 }
 
-function damagefire(var0, var1, var2, var3, var4, var5, var6) {
+function damagefire(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self notify("damage_fire");
   self endon("damage_fire");
 
   if(!damageflag(32)) {
-    thread setplayeronfire(var1, var6);
+    thread setplayeronfire(var_1, var_6);
   }
 
   if(!damageflag(16)) {
@@ -920,38 +920,38 @@ function damagefire(var0, var1, var2, var3, var4, var5, var6) {
   }
 }
 
-function firehealth(var0, var1) {
+function firehealth(var_0, var_1) {
   self endon("death");
   self endon("damage_fire_off");
   wait 0.05;
-  var2 = 0;
-  var3 = self.damage.firehealth;
+  var_2 = 0;
+  var_3 = self.damage.firehealth;
 
   for(;;) {
-    var4 = getfireinvulseconds();
+    var_4 = getfireinvulseconds();
 
     if(self.damage.firedamage >= 100) {
-      var2 += 0.05;
+      var_2 += 0.05;
     } else {
-      var2 -= 0.05;
+      var_2 -= 0.05;
     }
 
-    var2 = clamp(var2, 0, var4);
-    var3 = (1 - var2 / var4) * 100;
-    var3 = clamp(var3, 0, 100);
-    self.damage.firehealth = scripts\engine\math::round_float(var3, 0);
+    var_2 = clamp(var_2, 0, var_4);
+    var_3 = (1 - var_2 / var_4) * 100;
+    var_3 = clamp(var_3, 0, 100);
+    self.damage.firehealth = scripts\engine\math::round_float(var_3, 0);
 
     if(self.damage.firehealth == 0) {
-      killplayer(var0, "MOD_FIRE", var1, "fire");
+      killplayer(var_0, "MOD_FIRE", var_1, "fire");
     }
 
     waitframe();
   }
 }
 
-function setplayeronfire(var0, var1) {
+function setplayeronfire(var_0, var_1) {
   setdamageflag(32, 1);
-  thread firehealth(var0, var1);
+  thread firehealth(var_0, var_1);
   thread firedamagefx();
 }
 
@@ -1087,88 +1087,88 @@ function firedamagefx() {
     initfirepainoverlay();
   }
 
-  var0 = 0;
-  var1 = 0.1;
-  var2 = 0;
+  var_0 = 0;
+  var_1 = 0.1;
+  var_2 = 0;
 
   for(;;) {
     waittillframeend();
-    var3 = firedamageratio();
-    self.damage.firepainoverlay.alpha = scripts\engine\math::factor_value(0.45, 1, var3);
+    var_3 = firedamageratio();
+    self.damage.firepainoverlay.alpha = scripts\engine\math::factor_value(0.45, 1, var_3);
 
     if(damageflag(16)) {
-      var0 = var3;
+      var_0 = var_3;
 
-      if(!var2) {
+      if(!var_2) {
         playFXOnTag(level.g_effect["player_onfire_ignite"], self.damage.firevfx, "tag_origin");
         thread scripts\engine\utility::play_sound_in_space("fire_damage_start", level.player.origin);
         earthquake(0.2, 0.4, level.player.origin, 2000);
         level.player playRumbleOnEntity("damage_light");
-        var2 = 1;
+        var_2 = 1;
       }
     } else {
-      var0 -= var1;
-      var0 = max(0, var0);
+      var_0 -= var_1;
+      var_0 = max(0, var_0);
 
-      if(var2) {
+      if(var_2) {
         playFXOnTag(level.g_effect["player_offfire_extinguish"], self.damage.firevfx, "tag_origin");
         thread scripts\engine\utility::play_sound_in_space("fire_damage_stop", level.player.origin);
         earthquake(0.1, 0.4, level.player.origin, 2000);
         level.player playRumbleOnEntity("damage_light");
-        var2 = 0;
+        var_2 = 0;
       }
     }
 
-    self.damage.firedamageoverlay.alpha = scripts\engine\math::factor_value(0.45, 1, var0);
-    self.damage.firerumble.intensity = scripts\engine\math::factor_value(0, 0.8, var0);
-    var4 = scripts\engine\math::factor_value(0.02, 0.15, var0);
-    earthquake(var4, 0.2, level.player.origin, 2000);
-    var5 = scripts\engine\math::factor_value(0, -0.01, var0);
-    var6 = scripts\engine\math::factor_value(0, 0.02, var0);
-    setsaveddvar("MLTTMLTKOR", var5);
-    setsaveddvar("LSOPQMRPNR", var6);
-    var7 = scripts\engine\math::factor_value(0, 1.1, var0 * var0);
-    var8 = scripts\engine\math::factor_value(1.7, 2, var0);
-    self.damage.firedronesfx scalevolume(var7, 0.05);
-    self.damage.firedronesfx scalepitch(var8, 0.05);
-    var9 = scripts\engine\math::factor_value(0, 1.7, var0);
-    var10 = scripts\engine\math::factor_value(0.8, 1.2, var0);
-    self.damage.firesfx scalevolume(var9, 0.05);
-    self.damage.firesfx scalepitch(var10, 0.05);
-    var11 = scripts\engine\math::factor_value(0.2, 1.1, var3);
-    var12 = scripts\engine\math::factor_value(0.7, 1.3, var3);
-    self.damage.firesmolsfx scalevolume(var11, 0.05);
-    self.damage.firesmolsfx scalepitch(var12, 0.05);
+    self.damage.firedamageoverlay.alpha = scripts\engine\math::factor_value(0.45, 1, var_0);
+    self.damage.firerumble.intensity = scripts\engine\math::factor_value(0, 0.8, var_0);
+    var_4 = scripts\engine\math::factor_value(0.02, 0.15, var_0);
+    earthquake(var_4, 0.2, level.player.origin, 2000);
+    var_5 = scripts\engine\math::factor_value(0, -0.01, var_0);
+    var_6 = scripts\engine\math::factor_value(0, 0.02, var_0);
+    setsaveddvar("MLTTMLTKOR", var_5);
+    setsaveddvar("LSOPQMRPNR", var_6);
+    var_7 = scripts\engine\math::factor_value(0, 1.1, var_0 * var_0);
+    var_8 = scripts\engine\math::factor_value(1.7, 2, var_0);
+    self.damage.firedronesfx scalevolume(var_7, 0.05);
+    self.damage.firedronesfx scalepitch(var_8, 0.05);
+    var_9 = scripts\engine\math::factor_value(0, 1.7, var_0);
+    var_10 = scripts\engine\math::factor_value(0.8, 1.2, var_0);
+    self.damage.firesfx scalevolume(var_9, 0.05);
+    self.damage.firesfx scalepitch(var_10, 0.05);
+    var_11 = scripts\engine\math::factor_value(0.2, 1.1, var_3);
+    var_12 = scripts\engine\math::factor_value(0.7, 1.3, var_3);
+    self.damage.firesmolsfx scalevolume(var_11, 0.05);
+    self.damage.firesmolsfx scalepitch(var_12, 0.05);
     waitframe();
   }
 }
 
-function firedamagevfxintensitythink(var0) {
-  var0 endon("death");
-  var1 = "";
+function firedamagevfxintensitythink(var_0) {
+  var_0 endon("death");
+  var_1 = "";
 
   for(;;) {
     waittillframeend();
 
     if(damageflag(16)) {
-      var2 = getonfirevfxnames();
+      var_2 = getonfirevfxnames();
     } else {
-      var2 = getofffirevfxnames();
+      var_2 = getofffirevfxnames();
     }
 
-    var3 = var2.size;
-    var4 = scripts\engine\math::round_float(firedamageratio() * var3, 0, 1);
-    var4 = min(var4, var3 - 1);
-    var4 = int(var4);
-    var5 = var2[var4];
+    var_3 = var_2.size;
+    var_4 = scripts\engine\math::round_float(firedamageratio() * var_3, 0, 1);
+    var_4 = min(var_4, var_3 - 1);
+    var_4 = int(var_4);
+    var_5 = var_2[var_4];
 
-    if(var1 != var5) {
-      if(var1 != "") {
-        stopFXOnTag(level.g_effect[var1], var0, "tag_origin");
+    if(var_1 != var_5) {
+      if(var_1 != "") {
+        stopFXOnTag(level.g_effect[var_1], var_0, "tag_origin");
       }
 
-      playFXOnTag(level.g_effect[var5], var0, "tag_origin");
-      var1 = var5;
+      playFXOnTag(level.g_effect[var_5], var_0, "tag_origin");
+      var_1 = var_5;
     }
 
     waitframe();
@@ -1194,39 +1194,39 @@ function firedamagefxoff() {
   thread removeradialdistortion(0.5);
 }
 
-function fadesoundanddelete(var0, var1) {
+function fadesoundanddelete(var_0, var_1) {
   self endon("damage_fire");
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var0 scalevolume(0, var1);
-  wait var1;
+  var_0 scalevolume(0, var_1);
+  wait var_1;
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var0 delete();
+  var_0 delete();
 }
 
-function fadeoverlayanddestroy(var0, var1) {
+function fadeoverlayanddestroy(var_0, var_1) {
   self endon("damage_fire");
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var0 fadeovertime(var1);
-  var0.alpha = 0;
-  wait var1;
+  var_0 fadeovertime(var_1);
+  var_0.alpha = 0;
+  wait var_1;
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var0 destroy();
+  var_0 destroy();
 }
 
 function removefiredamageimmediate() {
@@ -1246,23 +1246,23 @@ function removefiredamageimmediate() {
 
 function lerpoutfireintensity() {
   self endon("damage_fire");
-  var0 = self.damage.firedamage;
-  var1 = level.player.origin;
+  var_0 = self.damage.firedamage;
+  var_1 = level.player.origin;
 
   while(self.damage.firedamage > 0) {
-    var2 = length(var1 - level.player.origin);
-    var3 = scripts\engine\math::normalize_value(0, 10, var2);
-    var4 = scripts\engine\math::factor_value(3.5, 3.5, var3);
-    var5 = 0.05 * 100 / var4;
-    var0 -= var5;
-    var0 = clamp(var0, 0, 100);
-    self.damage.firedamage = scripts\engine\math::round_float(var0, 0);
-    var1 = level.player.origin;
+    var_2 = length(var_1 - level.player.origin);
+    var_3 = scripts\engine\math::normalize_value(0, 10, var_2);
+    var_4 = scripts\engine\math::factor_value(3.5, 3.5, var_3);
+    var_5 = 0.05 * 100 / var_4;
+    var_0 -= var_5;
+    var_0 = clamp(var_0, 0, 100);
+    self.damage.firedamage = scripts\engine\math::round_float(var_0, 0);
+    var_1 = level.player.origin;
     wait 0.05;
   }
 }
 
-function killplayer(var0, var1, var2, var3, var4) {
+function killplayer(var_0, var_1, var_2, var_3, var_4) {
   if(!scripts\common\utility::is_death_allowed()) {
     return;
   }
@@ -1270,78 +1270,78 @@ function killplayer(var0, var1, var2, var3, var4) {
   self enabledeathshield(0);
   self disableinvulnerability();
 
-  if(isDefined(var2) && isDefined(var1)) {
-    self kill(self.origin, var0, var2, var1);
+  if(isDefined(var_2) && isDefined(var_1)) {
+    self kill(self.origin, var_0, var_2, var_1);
     return;
   }
 
-  if(isDefined(var2)) {
-    self kill(self.origin, var0, var2);
+  if(isDefined(var_2)) {
+    self kill(self.origin, var_0, var_2);
     return;
   }
 
-  if(isDefined(var1)) {
-    self kill(self.origin, var0, var0, var1);
+  if(isDefined(var_1)) {
+    self kill(self.origin, var_0, var_0, var_1);
     return;
   }
 
-  self kill(self.origin, var0);
+  self kill(self.origin, var_0);
 }
 
-function armorprotectsdamagetype(var0, var1) {
-  if(var0 == "MOD_MELEE") {
+function armorprotectsdamagetype(var_0, var_1) {
+  if(var_0 == "MOD_MELEE") {
     return false;
   }
 
-  if(var0 == "MOD_FALLING") {
+  if(var_0 == "MOD_FALLING") {
     return false;
   }
 
-  if(var0 == "MOD_TRIGGER_HURT") {
+  if(var_0 == "MOD_TRIGGER_HURT") {
     return false;
   }
 
-  if(var0 == "MOD_FIRE") {
+  if(var_0 == "MOD_FIRE") {
     return false;
   }
 
   return true;
 }
 
-function shouldkillimmediatly(var0, var1, var2, var3, var4, var5, var6) {
-  if(shouldoverkill(var5, var4)) {
-    killplayer(var1, var4, var6, "Excessive Damage", var5);
+function shouldkillimmediatly(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if(shouldoverkill(var_5, var_4)) {
+    killplayer(var_1, var_4, var_6, "Excessive Damage", var_5);
   }
 
-  if(shouldkillmelee(var1, var4, var6)) {
-    killplayer(var1, var4, var6, "Melee'd while Deathsheild");
+  if(shouldkillmelee(var_1, var_4, var_6)) {
+    killplayer(var_1, var_4, var_6, "Melee'd while Deathsheild");
   }
 
-  if(shouldkillfalling(var0, var4)) {
-    killplayer(var1, var4, var6, "Fell too far", var0);
+  if(shouldkillfalling(var_0, var_4)) {
+    killplayer(var_1, var_4, var_6, "Fell too far", var_0);
     return;
   }
 }
 
-function shouldoverkill(var0, var1) {
+function shouldoverkill(var_0, var_1) {
   if(self.health != 1) {
     return false;
   }
 
-  if(isexplosivedamage(var1)) {
-    var2 = 1;
+  if(isexplosivedamage(var_1)) {
+    var_2 = 1;
   } else {
-    var2 = self.damagemultiplier;
+    var_2 = self.damagemultiplier;
   }
 
-  if(var1 < 100 * var2) {
+  if(var_1 < 100 * var_2) {
     return false;
   }
 
   return true;
 }
 
-function shouldkillmelee(var0, var1, var2) {
+function shouldkillmelee(var_0, var_1, var_2) {
   if(damageflag(1)) {
     return true;
   }
@@ -1349,22 +1349,22 @@ function shouldkillmelee(var0, var1, var2) {
   return false;
 }
 
-function shouldkillfalling(var0, var1) {
-  if(!isDefined(var1)) {
+function shouldkillfalling(var_0, var_1) {
+  if(!isDefined(var_1)) {
     return false;
   }
 
-  return var1 == "MOD_FALLING" && var0 == 100;
+  return var_1 == "MOD_FALLING" && var_0 == 100;
 }
 
-function damageinvulnerability(var0, var1, var2, var3, var4, var5, var6) {
+function damageinvulnerability(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!shoulddodamageinvulnerabilty()) {
     return;
   }
 
-  var7 = getinvultime();
+  var_7 = getinvultime();
   enabledamageinvulnerability();
-  wait var7;
+  wait var_7;
   disabledamageinvulnerability();
 }
 
@@ -1388,17 +1388,17 @@ function getinvultime() {
   return self.gs.invultime_ondamage;
 }
 
-function deathshieldinvulnerability(var0, var1, var2, var3, var4, var5, var6) {
+function deathshieldinvulnerability(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!shouldactivatedeathshield()) {
     return;
   }
 
-  var7 = getdeathsshieldduration();
-  var8 = getdeathsdoorduration();
+  var_7 = getdeathsshieldduration();
+  var_8 = getdeathsdoorduration();
   setdamageflag(1, 1);
   enabledamageinvulnerability();
   enabledeathsdoor();
-  wait var7;
+  wait var_7;
 
   if(scripts\common\utility::is_death_allowed()) {
     self enabledeathshield(0);
@@ -1406,7 +1406,7 @@ function deathshieldinvulnerability(var0, var1, var2, var3, var4, var5, var6) {
 
   setdamageflag(1, 0);
   disabledamageinvulnerability();
-  wait var8;
+  wait var_8;
   disabledeathsdoor();
   self enabledeathshield(1);
 }
@@ -1422,12 +1422,12 @@ function getdeathsshieldduration() {
 function enabledeathsdoor() {
   setdamageflag(2, 1);
   thread scripts\sp\audio::set_deathsdoor();
-  var0 = 0.5;
-  var1 = getdeathsshieldduration() + getdeathsdoorduration() + gethealthregentime() - var0;
-  thread deathsdooroverlaypulse(var1);
-  var2 = 0.5;
-  var3 = var1 - var2;
-  thread bloodoverlay(1, var3, var2);
+  var_0 = 0.5;
+  var_1 = getdeathsshieldduration() + getdeathsdoorduration() + gethealthregentime() - var_0;
+  thread deathsdooroverlaypulse(var_1);
+  var_2 = 0.5;
+  var_3 = var_1 - var_2;
+  thread bloodoverlay(1, var_3, var_2);
   updatedeathsdoorvisionset();
   self painvisionon();
 }
@@ -1445,38 +1445,38 @@ function updatedeathsdoorvisionset() {
   visionsetpain("damage_deathsdoor");
 }
 
-function disabledeathsdoor(var0) {
+function disabledeathsdoor(var_0) {
   self notify("disableDeathsDoor");
   self endon("disableDeathsDoor");
 
-  if(!isDefined(var0)) {
-    var0 = 0;
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  if(!var0) {
-    var1 = gethealthregentime();
-    thread scripts\sp\audio::restore_after_deathsdoor(var1 * 0.2);
+  if(!var_0) {
+    var_1 = gethealthregentime();
+    thread scripts\sp\audio::restore_after_deathsdoor(var_1 * 0.2);
   } else {
-    var1 = 0;
+    var_1 = 0;
   }
 
-  var2 = getvisionlerprate(var1);
-  setsaveddvar("OONLORSMO", var2);
+  var_2 = getvisionlerprate(var_1);
+  setsaveddvar("OONLORSMO", var_2);
   self painvisionoff();
   setdamageflag(2, 0);
 }
 
-function lerpdeathsdoorpulsenorm(var0) {
+function lerpdeathsdoorpulsenorm(var_0) {
   self notify("lerpDeathsDoorNorm");
   self endon("lerpDeathsDoorNorm");
   self endon("death");
-  var1 = var0;
+  var_1 = var_0;
   self.deathsdoorpulsenorm = 1;
 
-  while(var1 > 0) {
-    self.deathsdoorpulsenorm = scripts\engine\math::normalize_value(0, var0, var1);
+  while(var_1 > 0) {
+    self.deathsdoorpulsenorm = scripts\engine\math::normalize_value(0, var_0, var_1);
     self.deathsdoorpulsenorm = scripts\engine\math::normalized_float_smooth_out(self.deathsdoorpulsenorm);
-    var1 -= 0.05;
+    var_1 -= 0.05;
     waitframe();
   }
 
@@ -1510,7 +1510,7 @@ function shouldactivatedeathshield() {
   return true;
 }
 
-function regeneratehealth(var0, var1, var2, var3, var4, var5, var6) {
+function regeneratehealth(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self endon("damage");
   self endon("armorUseSuccess");
 
@@ -1518,20 +1518,20 @@ function regeneratehealth(var0, var1, var2, var3, var4, var5, var6) {
     return;
   }
 
-  var7 = gethealthregendelay();
-  wait var7;
+  var_7 = gethealthregendelay();
+  wait var_7;
 
   while(damageflag(2) || damageflag(32)) {
     waitframe();
   }
 
-  var8 = self.health;
+  var_8 = self.health;
 
   while(self.health < self.maxhealth) {
-    var9 = gethealthregenpersecond();
-    var10 = var9 * 0.05;
-    var8 = clamp(var8 + var10, 0, self.maxhealth);
-    set_normalhealth(var8 / self.maxhealth);
+    var_9 = gethealthregenpersecond();
+    var_10 = var_9 * 0.05;
+    var_8 = clamp(var_8 + var_10, 0, self.maxhealth);
+    set_normalhealth(var_8 / self.maxhealth);
     waitframe();
   }
 }
@@ -1549,9 +1549,9 @@ function getfireengulfrate() {
 }
 
 function gethealthregentime() {
-  var0 = self.maxhealth - self.health;
-  var1 = var0 / gethealthregenpersecond();
-  return var1;
+  var_0 = self.maxhealth - self.health;
+  var_1 = var_0 / gethealthregenpersecond();
+  return var_1;
 }
 
 function gethealthregendelay() {
@@ -1566,17 +1566,17 @@ function canregenhealth() {
   return true;
 }
 
-function damageeffects(var0, var1, var2, var3, var4, var5, var6) {
-  var7 = [ &damagesfx, &damagerumble, &damageradialdistortion, &damagepainvision, &damagescreenshake, &updatedamageoverlay, &damagebloodoverlay, &damageshock];
-  var8 = damageratio(var0);
+function damageeffects(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_7 = [ &damagesfx, &damagerumble, &damageradialdistortion, &damagepainvision, &damagescreenshake, &updatedamageoverlay, &damagebloodoverlay, &damageshock];
+  var_8 = damageratio(var_0);
 
-  foreach(var10 in var7) {
-    self childthread[[var10]](var1.origin, var8, var4);
+  foreach(var_10 in var_7) {
+    self childthread[[var_10]](var_1.origin, var_8, var_4);
   }
 }
 
-function firefx_hack_viewkick(var0) {
-  if(var0) {
+function firefx_hack_viewkick(var_0) {
+  if(var_0) {
     setsaveddvar("NMLNMLQKQN", 0);
     setsaveddvar("NQSQNSMOPT", 0);
     setsaveddvar("LRLOLNPOPK", 0);
@@ -1596,14 +1596,14 @@ function firefx_hack_viewkick(var0) {
   setsaveddvar("MQQTQTMNQK", 0.8);
 }
 
-function damagesfx(var0, var1, var2) {
+function damagesfx(var_0, var_1, var_2) {
   self endon("damageDefault");
-  var2 = "MOD_MELEE";
-  var3 = getimpactsfx(var2);
-  var4 = getvocalpainsfx(var2);
+  var_2 = "MOD_MELEE";
+  var_3 = getimpactsfx(var_2);
+  var_4 = getvocalpainsfx(var_2);
 
-  if(isDefined(var3)) {
-    self.damage.impactsfx playSound(var3);
+  if(isDefined(var_3)) {
+    self.damage.impactsfx playSound(var_3);
   }
 
   if(armorbroke()) {
@@ -1613,18 +1613,18 @@ function damagesfx(var0, var1, var2) {
   wait 0.25;
 
   if(!damageflag(4)) {
-    var5 = scripts\engine\math::factor_value(0.75, 1.75, var1);
-    self.damage.impactsfx scalevolume(var5);
-    self.damage.impactsfx playSound(var4);
+    var_5 = scripts\engine\math::factor_value(0.75, 1.75, var_1);
+    self.damage.impactsfx scalevolume(var_5);
+    self.damage.impactsfx playSound(var_4);
     setdamageflag(4, 1);
     scripts\engine\utility::delaythread(3, &setdamageflag, 4, 0);
     return;
   }
 }
 
-function getimpactsfx(var0) {
+function getimpactsfx(var_0) {
   if(!hasarmor()) {
-    if(var0 == "MOD_MELEE") {
+    if(var_0 == "MOD_MELEE") {
       return;
     }
 
@@ -1634,7 +1634,7 @@ function getimpactsfx(var0) {
   return "plr_proto_bullet_impact_armor";
 }
 
-function getvocalpainsfx(var0) {
+function getvocalpainsfx(var_0) {
   if(!hasarmor()) {
     return "plr_breath_pain_init";
   }
@@ -1646,16 +1646,16 @@ function stopimpactsfx() {
   self.damage.impactsfx stopsounds();
 }
 
-function damageshock(var0, var1, var2) {
-  if(isexplosivedamage(var2) && !istrue(self.disableexplosiveshellshock)) {
-    var3 = scripts\engine\math::factor_value(3, 3, var1);
+function damageshock(var_0, var_1, var_2) {
+  if(isexplosivedamage(var_2) && !istrue(self.disableexplosiveshellshock)) {
+    var_3 = scripts\engine\math::factor_value(3, 3, var_1);
     self shellshock("explosion", 3);
     return;
   }
 }
 
-function damagerumble(var0, var1, var2) {
-  if(var1 > 0.4) {
+function damagerumble(var_0, var_1, var_2) {
+  if(var_1 > 0.4) {
     self playRumbleOnEntity("damage_heavy");
     return;
   }
@@ -1663,21 +1663,21 @@ function damagerumble(var0, var1, var2) {
   self playRumbleOnEntity("damage_light");
 }
 
-function damagescreenshake(var0, var1, var2) {
-  var3 = scripts\engine\math::factor_value(0.82, 1.2, var1);
-  var4 = scripts\engine\math::factor_value(0.65, 0.8, var1);
-  var5 = scripts\engine\math::factor_value(0.68, 1.25, var1);
-  var6 = scripts\engine\math::factor_value(1.12, 1.85, var1);
-  var7 = scripts\engine\math::factor_value(0.1, 0.32, var1);
-  var8 = var6 - var7 - 0.05;
+function damagescreenshake(var_0, var_1, var_2) {
+  var_3 = scripts\engine\math::factor_value(0.82, 1.2, var_1);
+  var_4 = scripts\engine\math::factor_value(0.65, 0.8, var_1);
+  var_5 = scripts\engine\math::factor_value(0.68, 1.25, var_1);
+  var_6 = scripts\engine\math::factor_value(1.12, 1.85, var_1);
+  var_7 = scripts\engine\math::factor_value(0.1, 0.32, var_1);
+  var_8 = var_6 - var_7 - 0.05;
 
-  if(isexplosivedamage(var2)) {
-    var3 *= 5;
-    var4 *= 5;
-    var5 *= 5;
+  if(isexplosivedamage(var_2)) {
+    var_3 *= 5;
+    var_4 *= 5;
+    var_5 *= 5;
   }
 
-  screenshake(var0, var3, var4, var5, var6, var7, var8, 0, 1, 0.5, 1);
+  screenshake(var_0, var_3, var_4, var_5, var_6, var_7, var_8, 0, 1, 0.5, 1);
 
   if(armorbroke()) {
     earthquake(0.3, 0.65, self.origin, 5000);
@@ -1685,27 +1685,27 @@ function damagescreenshake(var0, var1, var2) {
   }
 }
 
-function damageradialdistortion(var0, var1, var2) {
+function damageradialdistortion(var_0, var_1, var_2) {
   self endon("stopPainOverlays");
 
   if(damageflag(32)) {
     return;
   }
 
-  var3 = scripts\engine\math::factor_value(0.045, 0.045, var1);
-  var4 = scripts\engine\math::factor_value(0.09, 0.09, var1);
-  var5 = scripts\engine\math::factor_value(0.2, 0.2, var1);
-  radial_distortion(var3, var4, var5, var0);
+  var_3 = scripts\engine\math::factor_value(0.045, 0.045, var_1);
+  var_4 = scripts\engine\math::factor_value(0.09, 0.09, var_1);
+  var_5 = scripts\engine\math::factor_value(0.2, 0.2, var_1);
+  radial_distortion(var_3, var_4, var_5, var_0);
 }
 
-function removeradialdistortion(var0) {
-  childthread scripts\engine\sp\utility::lerp_saveddvar("MLTTMLTKOR", 0, var0);
-  childthread scripts\engine\sp\utility::lerp_saveddvar("NKTRSSTMRQ", 0, var0);
-  childthread scripts\engine\sp\utility::lerp_saveddvar("LSOPQMRPNR", 0, var0);
-  childthread scripts\engine\sp\utility::lerp_saveddvar("NSSPMPLRQL", 0, var0);
+function removeradialdistortion(var_0) {
+  childthread scripts\engine\sp\utility::lerp_saveddvar("MLTTMLTKOR", 0, var_0);
+  childthread scripts\engine\sp\utility::lerp_saveddvar("NKTRSSTMRQ", 0, var_0);
+  childthread scripts\engine\sp\utility::lerp_saveddvar("LSOPQMRPNR", 0, var_0);
+  childthread scripts\engine\sp\utility::lerp_saveddvar("NSSPMPLRQL", 0, var_0);
 }
 
-function damagepainvision(var0, var1, var2) {
+function damagepainvision(var_0, var_1, var_2) {
   self endon("damageDefault");
   self endon("death");
 
@@ -1720,20 +1720,20 @@ function damagepainvision(var0, var1, var2) {
       visionsetpain("damage_severe");
     }
 
-    var3 = scripts\engine\math::factor_value(0, 0, var1);
-    var4 = scripts\engine\math::factor_value(1.9, 1.9, var1);
-    var5 = scripts\engine\math::factor_value(0.05, 0.05, var1);
+    var_3 = scripts\engine\math::factor_value(0, 0, var_1);
+    var_4 = scripts\engine\math::factor_value(1.9, 1.9, var_1);
+    var_5 = scripts\engine\math::factor_value(0.05, 0.05, var_1);
   } else {
     visionsetpain("damage_armor");
-    var3 = scripts\engine\math::factor_value(0, 0, var4);
-    var4 = scripts\engine\math::factor_value(1.9, 1.9, var4);
-    var5 = scripts\engine\math::factor_value(0.05, 0.05, var4);
+    var_3 = scripts\engine\math::factor_value(0, 0, var_4);
+    var_4 = scripts\engine\math::factor_value(1.9, 1.9, var_4);
+    var_5 = scripts\engine\math::factor_value(0.05, 0.05, var_4);
   }
 
-  setsaveddvar("MLLRKTPNRR", var3);
-  setsaveddvar("OONLORSMO", var4);
+  setsaveddvar("MLLRKTPNRR", var_3);
+  setsaveddvar("OONLORSMO", var_4);
   self painvisionon();
-  wait var5;
+  wait var_5;
   self painvisionoff();
 }
 
@@ -1749,214 +1749,214 @@ function shoulddopainvision() {
   return true;
 }
 
-function damagebloodoverlay(var0, var1, var2) {
-  damagebloodoverlaydirectional(var0, var2);
-  damagebloodoverlayfullscreen(var0, var1, var2);
+function damagebloodoverlay(var_0, var_1, var_2) {
+  damagebloodoverlaydirectional(var_0, var_2);
+  damagebloodoverlayfullscreen(var_0, var_1, var_2);
 }
 
-function damagebloodoverlaydirectional(var0, var1, var2) {
+function damagebloodoverlaydirectional(var_0, var_1, var_2) {
   if(scripts\common\utility::iswegameplatform()) {
     return;
   }
 
-  var3 = gettime();
+  var_3 = gettime();
 
-  if(var3 - self.damage.lastdiretionalbloodtime < 200) {
+  if(var_3 - self.damage.lastdiretionalbloodtime < 200) {
     return;
   } else {
-    self.damage.lastdiretionalbloodtime = var3;
+    self.damage.lastdiretionalbloodtime = var_3;
   }
 
-  var4 = ["MOD_GRENADE", "MOD_GRENADE_SPLASH"];
-  var5 = ["MOD_PROJECTILE", "MOD_PROJECTILE_SPLASH", "MOD_EXPLOSIVE"];
-  var6 = getplayersidesfromposition(var0);
-  var7 = "";
+  var_4 = ["MOD_GRENADE", "MOD_GRENADE_SPLASH"];
+  var_5 = ["MOD_PROJECTILE", "MOD_PROJECTILE_SPLASH", "MOD_EXPLOSIVE"];
+  var_6 = getplayersidesfromposition(var_0);
+  var_7 = "";
 
-  if(scripts\engine\utility::array_contains(var4, var1)) {
+  if(scripts\engine\utility::array_contains(var_4, var_1)) {
     return;
   }
 
-  if(scripts\engine\utility::array_contains(var5, var1)) {
-    var8 = "fullscreen_dirt_";
+  if(scripts\engine\utility::array_contains(var_5, var_1)) {
+    var_8 = "fullscreen_dirt_";
   } else if(!hasarmor()) {
-    var8 = "fullscreen_blood_";
+    var_8 = "fullscreen_blood_";
 
     if(self.damage.altdirectionalbloodoverlay) {
-      var8 = "_alt";
+      var_8 = "_alt";
       self.damage.altdirectionalbloodoverlay = 0;
     } else {
       self.damage.altdirectionalbloodoverlay = 1;
     }
   } else {
-    var8 = "fullscreen_armor_";
+    var_8 = "fullscreen_armor_";
   }
 
-  if(!isDefined(var4)) {
-    var4 = 2;
+  if(!isDefined(var_4)) {
+    var_4 = 2;
   }
 
-  foreach(var13, var3 in var8) {
-    var10 = var8 + var13;
-    var11 = var10 + "_splash";
-    var10 += var8;
-    var12 = createscreeneffectoffsets(randomfloatrange(0, 1), randomfloatrange(0, 1), randomfloatrange(0, 1));
-    createscreeneffectext(var13, var10, 0.15, var4, var12, 1, 1);
-    createscreeneffectext(var13, var11, 0.15, 0.15, var12, 0, 1);
+  foreach(var_13, var_3 in var_8) {
+    var_10 = var_8 + var_13;
+    var_11 = var_10 + "_splash";
+    var_10 += var_8;
+    var_12 = createscreeneffectoffsets(randomfloatrange(0, 1), randomfloatrange(0, 1), randomfloatrange(0, 1));
+    createscreeneffectext(var_13, var_10, 0.15, var_4, var_12, 1, 1);
+    createscreeneffectext(var_13, var_11, 0.15, 0.15, var_12, 0, 1);
   }
 }
 
-function damagebloodoverlayfullscreen(var0, var1, var2) {
+function damagebloodoverlayfullscreen(var_0, var_1, var_2) {
   if(damageflag(2)) {
     return;
   }
 
-  var3 = scripts\engine\math::factor_value(0.6, 0.3, healthratio());
-  var4 = gethealthregendelay();
-  var5 = gethealthregentime();
-  thread bloodoverlay(var3, var4, var5);
+  var_3 = scripts\engine\math::factor_value(0.6, 0.3, healthratio());
+  var_4 = gethealthregendelay();
+  var_5 = gethealthregentime();
+  thread bloodoverlay(var_3, var_4, var_5);
 }
 
-function isexplosivedamage(var0) {
-  var1 = ["MOD_GRENADE", "MOD_GRENADE_SPLASH", "MOD_PROJECTILE", "MOD_PROJECTILE_SPLASH", "MOD_EXPLOSIVE"];
-  return scripts\engine\utility::array_contains(var1, var0);
+function isexplosivedamage(var_0) {
+  var_1 = ["MOD_GRENADE", "MOD_GRENADE_SPLASH", "MOD_PROJECTILE", "MOD_PROJECTILE_SPLASH", "MOD_EXPLOSIVE"];
+  return scripts\engine\utility::array_contains(var_1, var_0);
 }
 
-function createscreeneffectoffsets(var0, var1, var2) {
-  var3 = [];
-  GscBinSkip0(0x2e, "x", var0);
+function createscreeneffectoffsets(var_0, var_1, var_2) {
+  var_3 = [];
+  GscBinSkip0(0x2e, "x", var_0);
 }
 
-function createscreeneffect(var0, var1, var2, var3, var4, var5) {
-  createscreeneffectext(var0, var1, var2, var3, var4, var5, 0);
+function createscreeneffect(var_0, var_1, var_2, var_3, var_4, var_5) {
+  createscreeneffectext(var_0, var_1, var_2, var_3, var_4, var_5, 0);
 }
 
-function createscreeneffectext(var0, var1, var2, var3, var4, var5, var6) {
-  var7 = newclienthudelem(self);
-  var7.sort = 13;
-  var7.foreground = 0;
-  var7.lowresbackground = var6;
-  var7.horzalign = "fullscreen";
-  var7.vertalign = "fullscreen";
-  var7.alpha = 0;
-  var7.enablehudlighting = 1;
-  var8 = 0;
-  var9 = 0;
-  var10 = 0;
-  var11 = 0;
-  var12 = scripts\engine\math::factor_value(0.9, 1.25, var4["scale"]);
+function createscreeneffectext(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_7 = newclienthudelem(self);
+  var_7.sort = 13;
+  var_7.foreground = 0;
+  var_7.lowresbackground = var_6;
+  var_7.horzalign = "fullscreen";
+  var_7.vertalign = "fullscreen";
+  var_7.alpha = 0;
+  var_7.enablehudlighting = 1;
+  var_8 = 0;
+  var_9 = 0;
+  var_10 = 0;
+  var_11 = 0;
+  var_12 = scripts\engine\math::factor_value(0.9, 1.25, var_4["scale"]);
 
-  switch (var0) {
+  switch (var_0) {
     case "left":
-      var7.aligny = "top";
-      var7.alignx = "left";
-      var8 = -640;
-      var9 = scripts\engine\math::factor_value(-30, 30, var4["y"]);
-      var11 = var9;
-      var10 = scripts\engine\math::factor_value(-55, 0, var4["x"]);
+      var_7.aligny = "top";
+      var_7.alignx = "left";
+      var_8 = -640;
+      var_9 = scripts\engine\math::factor_value(-30, 30, var_4["y"]);
+      var_11 = var_9;
+      var_10 = scripts\engine\math::factor_value(-55, 0, var_4["x"]);
       break;
     case "right":
-      var7.aligny = "top";
-      var7.alignx = "right";
-      var8 = 1280;
-      var9 = scripts\engine\math::factor_value(-30, 30, var4["y"]);
-      var11 = var9;
-      var10 = scripts\engine\math::factor_value(0, 55, var4["x"]) + 640;
+      var_7.aligny = "top";
+      var_7.alignx = "right";
+      var_8 = 1280;
+      var_9 = scripts\engine\math::factor_value(-30, 30, var_4["y"]);
+      var_11 = var_9;
+      var_10 = scripts\engine\math::factor_value(0, 55, var_4["x"]) + 640;
       break;
     case "bottom":
-      var7.aligny = "bottom";
-      var7.alignx = "left";
-      var9 = 960;
-      var8 = scripts\engine\math::factor_value(-50, 50, var4["x"]);
-      var11 = scripts\engine\math::factor_value(0, 50, var4["y"]);
-      var11 += 480;
-      var10 = var8;
+      var_7.aligny = "bottom";
+      var_7.alignx = "left";
+      var_9 = 960;
+      var_8 = scripts\engine\math::factor_value(-50, 50, var_4["x"]);
+      var_11 = scripts\engine\math::factor_value(0, 50, var_4["y"]);
+      var_11 += 480;
+      var_10 = var_8;
       break;
   }
 
-  var7.x = var8;
-  var7.y = var9;
-  var7 setshader(var1, 640, 640);
-  thread screeneffectcleanup(var7);
-  thread animatescreeneffect(var7, var2, var3, var10, var11, var12, var5);
+  var_7.x = var_8;
+  var_7.y = var_9;
+  var_7 setshader(var_1, 640, 640);
+  thread screeneffectcleanup(var_7);
+  thread animatescreeneffect(var_7, var_2, var_3, var_10, var_11, var_12, var_5);
 }
 
-function animatescreeneffect(var0, var1, var2, var3, var4, var5, var6) {
-  var0 endon("destroySreenEffectOverlay");
+function animatescreeneffect(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_0 endon("destroySreenEffectOverlay");
 
-  if(!var6) {
-    var0 scaleovertime(var1, int(640 * var5), int(480 * var5));
-    var0 moveovertime(var1);
-    var0.x = var3;
-    var0.y = var4;
-    var1 = 0.05;
-    var0.alpha = 1;
+  if(!var_6) {
+    var_0 scaleovertime(var_1, int(640 * var_5), int(480 * var_5));
+    var_0 moveovertime(var_1);
+    var_0.x = var_3;
+    var_0.y = var_4;
+    var_1 = 0.05;
+    var_0.alpha = 1;
     wait 0.05;
   } else {
-    var0 scaleovertime(var1, int(640 * var5), int(480 * var5));
-    var0.x = var3;
-    var0.y = var4;
+    var_0 scaleovertime(var_1, int(640 * var_5), int(480 * var_5));
+    var_0.x = var_3;
+    var_0.y = var_4;
     wait 0.15;
-    var0 fadeovertime(var1);
-    var0.alpha = 1;
-    wait var1;
+    var_0 fadeovertime(var_1);
+    var_0.alpha = 1;
+    wait var_1;
   }
 
-  var0 fadeovertime(var2);
-  var0.alpha = 0;
-  wait var2 + 0.05;
-  var0 notify("destroySreenEffectOverlay");
+  var_0 fadeovertime(var_2);
+  var_0.alpha = 0;
+  wait var_2 + 0.05;
+  var_0 notify("destroySreenEffectOverlay");
 }
 
-function screeneffectcleanup(var0) {
-  self.damage.activescreeneffectoverlays = scripts\engine\utility::array_add(self.damage.activescreeneffectoverlays, var0);
-  var0 waittill("destroySreenEffectOverlay");
-  self.damage.activescreeneffectoverlays = scripts\engine\utility::array_remove(self.damage.activescreeneffectoverlays, var0);
-  var0 destroy();
+function screeneffectcleanup(var_0) {
+  self.damage.activescreeneffectoverlays = scripts\engine\utility::array_add(self.damage.activescreeneffectoverlays, var_0);
+  var_0 waittill("destroySreenEffectOverlay");
+  self.damage.activescreeneffectoverlays = scripts\engine\utility::array_remove(self.damage.activescreeneffectoverlays, var_0);
+  var_0 destroy();
 }
 
-function updatedamageoverlay(var0, var1, var2) {
+function updatedamageoverlay(var_0, var_1, var_2) {
   self endon("damageDefault");
   self endon("stopPainOverlays");
-  var3 = armorbroke();
+  var_3 = armorbroke();
 
-  if(var3) {
+  if(var_3) {
     self.damage.overlay setshader("ui_player_pain_armorbreak_overlay", 640, 480);
-    var4 = 1;
+    var_4 = 1;
   } else if(!hasarmor()) {
     self.damage.overlay setshader("ui_player_pain_damage_overlay", 640, 480);
-    var4 = 0.8;
+    var_4 = 0.8;
   } else {
     self.damage.overlay setshader("ui_player_pain_damage_overlay", 640, 480);
-    var4 = 0.6;
+    var_4 = 0.6;
   }
 
   self.damage.overlay fadeovertime(0.05);
-  self.damage.overlay.alpha = max(self.damage.overlay.alpha, var4);
+  self.damage.overlay.alpha = max(self.damage.overlay.alpha, var_4);
   wait 0.05;
 
-  if(var4) {
-    var5 = 1;
+  if(var_4) {
+    var_5 = 1;
   } else {
-    var5 = scripts\engine\math::factor_value(0.2, 0.2, var4);
+    var_5 = scripts\engine\math::factor_value(0.2, 0.2, var_4);
   }
 
-  self.damage.overlay fadeovertime(var5);
+  self.damage.overlay fadeovertime(var_5);
   self.damage.overlay.alpha = 0;
 }
 
-function deathsdooroverlaypulse(var0) {
+function deathsdooroverlaypulse(var_0) {
   self notify("deathsDoorPulse");
   self endon("deathsDoorPulse");
   self endon("stopPainOverlays");
   self endon("death");
-  var1 = 1;
-  thread lerpdeathsdoorpulsenorm(var0);
+  var_1 = 1;
+  thread lerpdeathsdoorpulsenorm(var_0);
 
-  if(var1 > 0) {
-    var2 = gettime();
-    var3 = var2;
-    var4 = scripts\engine\math::factor_value(1000, 600, self.deathsdoorpulsenorm);
-    GscBinSkip4(0x35, var4);
+  if(var_1 > 0) {
+    var_2 = gettime();
+    var_3 = var_2;
+    var_4 = scripts\engine\math::factor_value(1000, 600, self.deathsdoorpulsenorm);
+    GscBinSkip4(0x35, var_4);
   }
 }
 
@@ -1968,15 +1968,15 @@ function deathsdooroverlaypulsefinal() {
   self.damage.deathsdooroverlaypulse.alpha = 0.4;
 }
 
-function bloodoverlay(var0, var1, var2) {
+function bloodoverlay(var_0, var_1, var_2) {
   if(scripts\common\utility::iswegameplatform()) {
     return;
   }
 
-  var3 = 0.5;
+  var_3 = 0.5;
 
-  if(var2 <= var3) {
-    var2 = var3;
+  if(var_2 <= var_3) {
+    var_2 = var_3;
   }
 
   self notify("deathsDoorOverlay");
@@ -1984,49 +1984,49 @@ function bloodoverlay(var0, var1, var2) {
   self endon("stopPainOverlays");
   self endon("death");
   self.damage.bloodoverlay fadeovertime(0.05);
-  self.damage.bloodoverlay.alpha = var0;
-  wait var1;
-  self.damage.bloodoverlay fadeovertime(var2);
+  self.damage.bloodoverlay.alpha = var_0;
+  wait var_1;
+  self.damage.bloodoverlay fadeovertime(var_2);
   self.damage.bloodoverlay.alpha = 0;
 }
 
-function playpulsesfx(var0) {
-  var1 = scripts\engine\math::normalized_to_growth_clamps(0, 1, self.deathsdoorpulsenorm);
-  var2 = var0 * 0.8 / 1000;
-  self.damage.pulsesfx scalevolume(var1);
-  wait var2;
+function playpulsesfx(var_0) {
+  var_1 = scripts\engine\math::normalized_to_growth_clamps(0, 1, self.deathsdoorpulsenorm);
+  var_2 = var_0 * 0.8 / 1000;
+  self.damage.pulsesfx scalevolume(var_1);
+  wait var_2;
   self.damage.pulsesfx stopsounds();
   self.damage.pulsesfx playSound("proto_heartbeat");
 }
 
-function shoulddohealthdamageeffects(var0) {
-  if(isDefined(var0) && !armorprotectsdamagetype(var0)) {
+function shoulddohealthdamageeffects(var_0) {
+  if(isDefined(var_0) && !armorprotectsdamagetype(var_0)) {
     return true;
   }
 
   return true;
 }
 
-function getplayersidesfromposition(var0) {
-  var1 = vectorNormalize(anglesToForward(self.angles));
-  var2 = vectorNormalize(anglestoright(self.angles));
-  var3 = vectorNormalize(var0 - self.origin);
-  var4 = vectordot(var3, var1);
-  var5 = vectordot(var3, var2);
-  var6 = [];
+function getplayersidesfromposition(var_0) {
+  var_1 = vectorNormalize(anglesToForward(self.angles));
+  var_2 = vectorNormalize(anglestoright(self.angles));
+  var_3 = vectorNormalize(var_0 - self.origin);
+  var_4 = vectordot(var_3, var_1);
+  var_5 = vectordot(var_3, var_2);
+  var_6 = [];
 
-  if(abs(var4) > 0.819152) {
+  if(abs(var_4) > 0.819152) {
     GscBinSkip0(0x2e, "bottom", 1);
   }
 
-  if(var5 > 0) {
+  if(var_5 > 0) {
     GscBinSkip0(0x2e, "right", 1);
   }
 
   GscBinSkip0(0x2e, "left", 1);
 }
 
-function damageui(var0, var1, var2, var3, var4, var5, var6) {
+function damageui(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   GscBinSkip4(0x35);
 }
 
@@ -2057,10 +2057,10 @@ function updatearmorui() {
   self setclientomnvar("ui_armor_warning", "no_armor");
 }
 
-function takecoverwarning(var0, var1, var2, var3, var4) {
-  var5 = gettime();
+function takecoverwarning(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = gettime();
 
-  if(shouldshowcoverwarning(var5)) {
+  if(shouldshowcoverwarning(var_5)) {
     setdamageflag(8, 1);
     self setclientomnvar("ui_gettocover_state", 1);
     wait 1;
@@ -2079,7 +2079,7 @@ function takecoverwarning(var0, var1, var2, var3, var4) {
   }
 }
 
-function shouldshowcoverwarning(var0) {
+function shouldshowcoverwarning(var_0) {
   if(self islinked()) {
     return false;
   }
@@ -2127,19 +2127,19 @@ function shouldshowcoverwarning(var0) {
   return true;
 }
 
-function setcoverwarningcount(var0) {
+function setcoverwarningcount(var_0) {
   if(self getlocalplayerprofiledata("takeCoverWarnings") <= 0) {
-    self setlocalplayerprofiledata("takeCoverWarnings", var0);
+    self setlocalplayerprofiledata("takeCoverWarnings", var_0);
     return;
   }
 }
 
 function reducetakecoverwarnings() {
-  var0 = self getlocalplayerprofiledata("takeCoverWarnings");
+  var_0 = self getlocalplayerprofiledata("takeCoverWarnings");
 
-  if(var0 > 0) {
-    var0--;
-    self setlocalplayerprofiledata("takeCoverWarnings", var0);
+  if(var_0 > 0) {
+    var_0--;
+    self setlocalplayerprofiledata("takeCoverWarnings", var_0);
     return;
   }
 }
@@ -2196,22 +2196,22 @@ function armorcancelnotifywait() {
 
 function updatearmorvestcancel() {
   self endon("armorUseSuccess");
-  var0 = self getcurrentweapon();
+  var_0 = self getcurrentweapon();
   armorcancelnotifywait();
   self notify("armorUseCancel");
   setusingarmorvest(0);
   updatearmorui();
   self stopgestureviewmodel("ges_vest_replace", 0.2);
   scripts\engine\sp\utility::blend_movespeedscale(1, 0.2, "armor");
-  armorvestcancelblendcontrols(var0);
+  armorvestcancelblendcontrols(var_0);
 }
 
-function armorvestcancelblendcontrols(var0) {
-  self takeweapon(var0);
+function armorvestcancelblendcontrols(var_0) {
+  self takeweapon(var_0);
   scripts\sp\utility::allow_weapon_first_raise_anims(0, "armor");
   waittillframeend();
-  self giveweapon(var0);
-  self switchtoweapon(var0);
+  self giveweapon(var_0);
+  self switchtoweapon(var_0);
   wait 0.2;
   scripts\common\utility::allow_ads(1, "armor");
   scripts\common\utility::allow_fire(1, "armor");
@@ -2223,26 +2223,26 @@ function updatearmorvestui() {
   self endon("armorUseCancel");
   self endon("armorUseSuccess");
   setomnvar("ui_armor_warning", "hide_armor");
-  var0 = gettime();
+  var_0 = gettime();
 
   for(;;) {
-    var1 = gettime() - var0;
-    var2 = var1 / 1850;
-    self setclientomnvar("ui_armor_progress", var2);
+    var_1 = gettime() - var_0;
+    var_2 = var_1 / 1850;
+    self setclientomnvar("ui_armor_progress", var_2);
     waitframe();
   }
 }
 
 function updatearmorvestmodel() {
-  var0 = spawn("script_model", self.origin);
-  var0 setModel("viewmodel_body_armor");
-  var0 notsolid();
-  var0 linktoplayerview(self, "tag_accessory_left", (0, 0, 0), (0, 0, 0), 1, "none");
-  var0 hide();
+  var_0 = spawn("script_model", self.origin);
+  var_0 setModel("viewmodel_body_armor");
+  var_0 notsolid();
+  var_0 linktoplayerview(self, "tag_accessory_left", (0, 0, 0), (0, 0, 0), 1, "none");
+  var_0 hide();
   thread showarmorvestmodeldelayed();
   scripts\engine\utility::waittill_any("armorUseCancel", "armorUseSuccess");
-  var0 unlinkfromplayerview(self);
-  var0 delete();
+  var_0 unlinkfromplayerview(self);
+  var_0 delete();
 }
 
 function showarmorvestmodeldelayed() {
@@ -2264,8 +2264,8 @@ function updatearmorgesturefastblendout() {
 
 function notifyarmorgesturecomplete() {
   self endon("armorGestureFastBlendout");
-  var0 = self getgestureanimlength("ges_vest_replace");
-  wait var0 - 1.85;
+  var_0 = self getgestureanimlength("ges_vest_replace");
+  wait var_0 - 1.85;
   self notify("armorGestureComplete");
 }
 
@@ -2285,8 +2285,8 @@ function hasmaxhealth() {
   return self.health == self.maxhealth;
 }
 
-function damageratio(var0) {
-  return scripts\engine\math::normalize_value(40, 160, var0 / self.damagemultiplier);
+function damageratio(var_0) {
+  return scripts\engine\math::normalize_value(40, 160, var_0 / self.damagemultiplier);
 }
 
 function belowcriticalhealththreshold() {
@@ -2297,17 +2297,17 @@ function criticalhealththreshold() {
   return self.maxhealth * 0.7;
 }
 
-function damageflag(var0) {
-  return self.damage.flags &var0;
+function damageflag(var_0) {
+  return self.damage.flags &var_0;
 }
 
-function setdamageflag(var0, var1) {
-  if(var1) {
-    self.damage.flags |= var0;
+function setdamageflag(var_0, var_1) {
+  if(var_1) {
+    self.damage.flags |= var_0;
     return;
   }
 
-  self.damage.flags &= ~var0;
+  self.damage.flags &= ~var_0;
 }
 
 function playercanusearmorvest() {
@@ -2346,12 +2346,12 @@ function getarmormaxamount() {
   return self.armor.maxamount;
 }
 
-function setarmormaxamount(var0) {
-  self.armor.maxamount = var0;
+function setarmormaxamount(var_0) {
+  self.armor.maxamount = var_0;
 }
 
-function setarmoramount(var0) {
-  self.armor.amount = clamp(var0, 0, getarmormaxamount());
+function setarmoramount(var_0) {
+  self.armor.amount = clamp(var_0, 0, getarmormaxamount());
   sethadarmor();
   updatedamagemultiplier();
   updatearmorui();
@@ -2387,8 +2387,8 @@ function getarmorvestamount() {
   return int(self.armor.vests);
 }
 
-function setarmorvestamount(var0) {
-  self.armor.vests = int(clamp(var0, 0, getarmorvestmaxamount()));
+function setarmorvestamount(var_0) {
+  self.armor.vests = int(clamp(var_0, 0, getarmorvestmaxamount()));
   sethadarmor();
   scripts\engine\sp\utility::setactionslotoverrideammo(4, self.armor.vests);
   updatearmorui();
@@ -2427,16 +2427,16 @@ function hasmaxarmorvests() {
   return getarmorvestamount() == getarmorvestmaxamount();
 }
 
-function setarmorvestmaxamount(var0) {
-  self.armor.maxvests = var0;
+function setarmorvestmaxamount(var_0) {
+  self.armor.maxvests = var_0;
 }
 
 function usingarmorvest() {
   return self.armor.usingvest;
 }
 
-function setusingarmorvest(var0) {
-  self.armor.usingvest = var0;
+function setusingarmorvest(var_0) {
+  self.armor.usingvest = var_0;
 }
 
 function updatedamageindicatortype() {
@@ -2468,8 +2468,8 @@ function updateviewkickscale() {
   setsaveddvar("NMLNMLQKQN", 0.1);
 }
 
-function set_normalhealth(var0) {
-  self setnormalhealth(var0);
+function set_normalhealth(var_0) {
+  self setnormalhealth(var_0);
   self.lasthealth = self.health;
 }
 
@@ -2478,10 +2478,10 @@ function disable_player_weapon_info() {
   setomnvar("ui_hide_weapon_info", 1);
 }
 
-function allow_player_weapon_info(var0) {
+function allow_player_weapon_info(var_0) {
   setDvar("scr_hideweaponinfo", 0);
 
-  if(isDefined(var0) && var0) {
+  if(isDefined(var_0) && var_0) {
     show_hud_listener_logic();
     return;
   }
@@ -2496,27 +2496,27 @@ function hud_think() {
 
 function show_hud_listener() {
   self endon("death");
-  var0 = ["weapon_fired", "aim", "reload_pressed", "weapon_change", "weapon_swap", "hide_hud_omnvar_changed", "frag_pressed", "smoke_pressed", "equipment_change", "current_primary_ammo", "offhand_ammo", "item_ammo", "item_loot", "show_hud_button_pressed", "ammo_pickup", "damage"];
+  var_0 = ["weapon_fired", "aim", "reload_pressed", "weapon_change", "weapon_swap", "hide_hud_omnvar_changed", "frag_pressed", "smoke_pressed", "equipment_change", "current_primary_ammo", "offhand_ammo", "item_ammo", "item_loot", "show_hud_button_pressed", "ammo_pickup", "damage"];
 
   for(;;) {
-    waittill_hud_event_notify(var0);
+    waittill_hud_event_notify(var_0);
     show_hud_listener_logic();
   }
 }
 
-function waittill_hud_event_notify(var0) {
-  foreach(var2 in var0) {
-    self endon(var2);
+function waittill_hud_event_notify(var_0) {
+  foreach(var_2 in var_0) {
+    self endon(var_2);
   }
 
   self waittill("forever");
 }
 
 function show_hud_listener_logic() {
-  var0 = scripts\engine\sp\utility::get_player_demeanor();
-  var1 = self getcurrentprimaryweapon();
+  var_0 = scripts\engine\sp\utility::get_player_demeanor();
+  var_1 = self getcurrentprimaryweapon();
 
-  if(var0 != "safe" && !getdvarint("scr_hideweaponinfo")) {
+  if(var_0 != "safe" && !getdvarint("scr_hideweaponinfo")) {
     setomnvar("ui_hide_weapon_info", 0);
   }
 
@@ -2537,10 +2537,10 @@ function hud_visibility_timer() {
 
 function hud_omnvar_change_listener() {
   self endon("death");
-  var0 = getomnvar("ui_hide_hud");
-  var1 = getomnvar("ui_hide_weapon_info");
+  var_0 = getomnvar("ui_hide_hud");
+  var_1 = getomnvar("ui_hide_weapon_info");
 
-  while(getomnvar("ui_hide_hud") == var0 && getomnvar("ui_hide_weapon_info") == var1) {
+  while(getomnvar("ui_hide_hud") == var_0 && getomnvar("ui_hide_weapon_info") == var_1) {
     waitframe();
   }
 
@@ -2582,9 +2582,9 @@ function playerfocusmain() {
 
 function focusmonitor() {
   for(;;) {
-    var0 = scripts\engine\utility::waittill_any_ents_return(self, "focus_pressed", level, "objectives_updated");
+    var_0 = scripts\engine\utility::waittill_any_ents_return(self, "focus_pressed", level, "objectives_updated");
 
-    if(var0 == "focus_pressed" && !self.focus.disabled) {
+    if(var_0 == "focus_pressed" && !self.focus.disabled) {
       self.focus.buttonhelddown = 1;
       thread scripts\sp\analytics::update_focus_counter();
 
@@ -2604,13 +2604,13 @@ function focusmonitor() {
       continue;
     }
 
-    if(var0 == "objectives_updated") {
+    if(var_0 == "objectives_updated") {
       if(focus_objectives_update_display()) {
         setsaveddvar("OLMSOMTOTO", 0.6);
         setomnvar("ui_show_objectives", 1);
         thread focustimeadjust();
 
-        for(var1 = getfocusendtime(); gettime() < var1; var1 = getfocusendtime()) {
+        for(var_1 = getfocusendtime(); gettime() < var_1; var_1 = getfocusendtime()) {
           wait 0.1;
 
           if(self.focus.timeadjust) {
@@ -2653,16 +2653,16 @@ function focustimeadjust() {
   self endon("stop_focust_time_adjust");
 
   for(;;) {
-    level waittill("objectives_updated_state", var0);
+    level waittill("objectives_updated_state", var_0);
 
-    if(var0 != "invisible") {
+    if(var_0 != "invisible") {
       self.focus.timeadjust = 1;
     }
   }
 }
 
-function forcesetamount(var0) {
-  self.focus.amount = var0;
+function forcesetamount(var_0) {
+  self.focus.amount = var_0;
 }
 
 function forceamount() {
@@ -2670,22 +2670,22 @@ function forceamount() {
 }
 
 function focusactivate() {
-  var0 = getdvarfloat("OLMSOMTOTO");
-  var1 = 1 - scripts\engine\math::normalize_value(0, 0.6, var0);
-  var2 = var1 * 0.5;
-  var3 = gettime() + var2 * 1000;
-  var4 = var2 * 20;
-  var5 = scripts\engine\math::factor_value(0.6, 0, var0);
-  var6 = var5 / var4;
+  var_0 = getdvarfloat("OLMSOMTOTO");
+  var_1 = 1 - scripts\engine\math::normalize_value(0, 0.6, var_0);
+  var_2 = var_1 * 0.5;
+  var_3 = gettime() + var_2 * 1000;
+  var_4 = var_2 * 20;
+  var_5 = scripts\engine\math::factor_value(0.6, 0, var_0);
+  var_6 = var_5 / var_4;
   focushighlightadditionalentsenable();
   setomnvar("ui_show_objectives", 1);
 
-  while(gettime() < var3) {
-    var0 = getdvarfloat("OLMSOMTOTO");
-    var7 = clamp(var0 + var6, 0, 0.6);
-    setsaveddvar("OLMSOMTOTO", var7);
-    forcesetamount(var7);
-    forcesethudoutlinealpha(var7);
+  while(gettime() < var_3) {
+    var_0 = getdvarfloat("OLMSOMTOTO");
+    var_7 = clamp(var_0 + var_6, 0, 0.6);
+    setsaveddvar("OLMSOMTOTO", var_7);
+    forcesetamount(var_7);
+    forcesethudoutlinealpha(var_7);
     waitframe();
   }
 
@@ -2699,21 +2699,21 @@ function focusdeactivate() {
     level endon("objectives_updated");
   }
 
-  var0 = getdvarfloat("OLMSOMTOTO");
-  var1 = scripts\engine\math::normalize_value(0, 0.6, var0);
-  var2 = var1 * 2.5;
-  var3 = gettime() + var2 * 1000;
-  var4 = var2 * 20;
-  var5 = scripts\engine\math::factor_value(0, 0.6, var1);
-  var6 = var5 / var4;
+  var_0 = getdvarfloat("OLMSOMTOTO");
+  var_1 = scripts\engine\math::normalize_value(0, 0.6, var_0);
+  var_2 = var_1 * 2.5;
+  var_3 = gettime() + var_2 * 1000;
+  var_4 = var_2 * 20;
+  var_5 = scripts\engine\math::factor_value(0, 0.6, var_1);
+  var_6 = var_5 / var_4;
   setomnvar("ui_show_objectives", 0);
 
-  while(gettime() < var3) {
-    var0 = getdvarfloat("OLMSOMTOTO");
-    var7 = clamp(var0 - var6, 0, 0.6);
-    setsaveddvar("OLMSOMTOTO", var7);
-    forcesetamount(var7);
-    forcesethudoutlinealpha(var7);
+  while(gettime() < var_3) {
+    var_0 = getdvarfloat("OLMSOMTOTO");
+    var_7 = clamp(var_0 - var_6, 0, 0.6);
+    setsaveddvar("OLMSOMTOTO", var_7);
+    forcesetamount(var_7);
+    forcesethudoutlinealpha(var_7);
     waitframe();
   }
 
@@ -2726,8 +2726,8 @@ function focushighlightadditionalentsenable() {
     return;
   }
 
-  foreach(var1 in self.focus.additionalents) {
-    var1 hudoutlineenable("outline_nodepth_white");
+  foreach(var_1 in self.focus.additionalents) {
+    var_1 hudoutlineenable("outline_nodepth_white");
   }
 }
 
@@ -2736,97 +2736,97 @@ function focushighlightadditionalentsdisable() {
     return;
   }
 
-  foreach(var1 in self.focus.additionalents) {
-    var1 hudoutlinedisable();
+  foreach(var_1 in self.focus.additionalents) {
+    var_1 hudoutlinedisable();
   }
 }
 
-function forcesethudoutlinealpha(var0) {
-  setsaveddvar("cg_hud_outline_colors_1", "1 1 1 " + var0);
+function forcesethudoutlinealpha(var_0) {
+  setsaveddvar("cg_hud_outline_colors_1", "1 1 1 " + var_0);
 }
 
-function getvisionlerprate(var0) {
-  var1 = 1 / max(0.01, var0);
-  return clamp(var1, 0, 30);
+function getvisionlerprate(var_0) {
+  var_1 = 1 / max(0.01, var_0);
+  return clamp(var_1, 0, 30);
 }
 
-function offhandremove(var0) {
-  var1 = 0;
+function offhandremove(var_0) {
+  var_1 = 0;
 
-  foreach(var3 in self.offhandinventory) {
-    if(var3.basename == var0.basename) {
-      self takeweapon(var3);
-      var1 = 1;
+  foreach(var_3 in self.offhandinventory) {
+    if(var_3.basename == var_0.basename) {
+      self takeweapon(var_3);
+      var_1 = 1;
     }
   }
 
-  if(var1) {
-    if(scripts\sp\equipment\offhands::getweaponoffhandtype(var0) == "primaryoffhand") {
-      var5 = &setoffhandprimaryclassfunc;
+  if(var_1) {
+    if(scripts\sp\equipment\offhands::getweaponoffhandtype(var_0) == "primaryoffhand") {
+      var_5 = &setoffhandprimaryclassfunc;
     } else {
-      var5 = &setoffhandsecondaryclassfunc;
+      var_5 = &setoffhandsecondaryclassfunc;
     }
 
-    self[[var5]]("none");
-    scripts\sp\loot::removeoffhandloot(var1);
+    self[[var_5]]("none");
+    scripts\sp\loot::removeoffhandloot(var_1);
     return;
   }
 }
 
-function offhandswap(var0, var1) {
-  if(var0 == "none") {}
+function offhandswap(var_0, var_1) {
+  if(var_0 == "none") {}
 
-  if(scripts\sp\equipment\offhands::offhandisprecached(var0)) {}
+  if(scripts\sp\equipment\offhands::offhandisprecached(var_0)) {}
 
-  if(scripts\sp\equipment\offhands::getweaponoffhandtype(var0) == "primaryoffhand") {
-    var2 = "secondaryoffhand";
-    var3 = &setoffhandprimaryclassfunc;
+  if(scripts\sp\equipment\offhands::getweaponoffhandtype(var_0) == "primaryoffhand") {
+    var_2 = "secondaryoffhand";
+    var_3 = &setoffhandprimaryclassfunc;
   } else {
-    var2 = "primaryoffhand";
-    var3 = &setoffhandsecondaryclassfunc;
+    var_2 = "primaryoffhand";
+    var_3 = &setoffhandsecondaryclassfunc;
   }
 
-  var4 = self getcurrentoffhand(var2);
+  var_4 = self getcurrentoffhand(var_2);
 
-  foreach(var6 in self.offhandinventory) {
-    if(var6.basename != var4.basename) {
-      self takeweapon(var6);
+  foreach(var_6 in self.offhandinventory) {
+    if(var_6.basename != var_4.basename) {
+      self takeweapon(var_6);
     }
   }
 
-  var8 = scripts\sp\equipment\offhands::getweaponoffhandclass(var2);
-  self[[var3]](var8);
-  self giveweapon(var2);
+  var_8 = scripts\sp\equipment\offhands::getweaponoffhandclass(var_2);
+  self[[var_3]](var_8);
+  self giveweapon(var_2);
 
-  if(isDefined(var3)) {
-    foreach(var6 in self.offhandinventory) {
-      if(var6.basename != var4.basename) {
-        self setweaponammoclip(var6, var3);
+  if(isDefined(var_3)) {
+    foreach(var_6 in self.offhandinventory) {
+      if(var_6.basename != var_4.basename) {
+        self setweaponammoclip(var_6, var_3);
       }
     }
   }
 
-  scripts\sp\loot::setoffhandloot(var2);
+  scripts\sp\loot::setoffhandloot(var_2);
 }
 
-function setoffhandsecondaryclassfunc(var0) {
-  self setoffhandsecondaryclass(var0);
+function setoffhandsecondaryclassfunc(var_0) {
+  self setoffhandsecondaryclass(var_0);
 }
 
-function setoffhandprimaryclassfunc(var0) {
-  self setoffhandprimaryclass(var0);
+function setoffhandprimaryclassfunc(var_0) {
+  self setoffhandprimaryclass(var_0);
 }
 
-function dodamagefilter(var0, var1) {
-  if(isDefined(var1) && isexplosivedamage(var1)) {
-    var0 = int(var0 * 1 / self.damagemultiplier);
+function dodamagefilter(var_0, var_1) {
+  if(isDefined(var_1) && isexplosivedamage(var_1)) {
+    var_0 = int(var_0 * 1 / self.damagemultiplier);
   }
 
-  return var0;
+  return var_0;
 }
 
-function player_cinematic_motion_override(var0) {
-  level.player.cinematicmotionoverride = var0;
+function player_cinematic_motion_override(var_0) {
+  level.player.cinematicmotionoverride = var_0;
 
   if(scripts\common\utility::is_cinematic_motion_allowed()) {
     if(isDefined(level.player.cinematicmotionoverride)) {
@@ -2839,50 +2839,50 @@ function player_cinematic_motion_override(var0) {
   }
 }
 
-function set_player_ignore_random_bullet_damage(var0) {
-  if(!isDefined(var0)) {
-    var0 = 1;
+function set_player_ignore_random_bullet_damage(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 1;
   }
 
-  level.player.scriptedignorerandombulletdamage = var0;
+  level.player.scriptedignorerandombulletdamage = var_0;
   level.player scripts\sp\gameskill::update_player_attacker_accuracy();
 }
 
-function player_movement_state(var0) {
-  if(!isDefined(var0)) {
-    var0 = "default";
+function player_movement_state(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = "default";
   }
 
-  switch (var0) {
+  switch (var_0) {
     case "creep":
-      var1 = "iw8_creep";
-      var2 = 90;
+      var_1 = "iw8_creep";
+      var_2 = 90;
       break;
     case "cqb":
-      var1 = "iw8_cqb";
-      var2 = 120;
+      var_1 = "iw8_cqb";
+      var_2 = 120;
       break;
     case "default":
-      var1 = "iw8_defaultsuit";
-      var2 = 150;
+      var_1 = "iw8_defaultsuit";
+      var_2 = 150;
       break;
     default:
-      var1 = "iw8_defaultsuit";
-      var2 = 150;
+      var_1 = "iw8_defaultsuit";
+      var_2 = 150;
       break;
   }
 
-  level.player.movementstate = var2;
-  level.player setsuit(var1);
-  scripts\engine\sp\utility::player_speed_set(var2, 0.5);
+  level.player.movementstate = var_2;
+  level.player setsuit(var_1);
+  scripts\engine\sp\utility::player_speed_set(var_2, 0.5);
 }
 
-function set_armor_vest_amount(var0) {
+function set_armor_vest_amount(var_0) {
   if(!scripts\common\utility::playerarmorenabled()) {
     return;
   }
 
-  setarmorvestamount(var0);
+  setarmorvestamount(var_0);
 }
 
 function give_player_max_armor() {
@@ -2903,24 +2903,24 @@ function remove_all_armor() {
   setarmoramount(0);
 }
 
-function set_player_max_health(var0) {
-  self.gs.scripteddamagemultiplier = self.maxhealth / var0;
+function set_player_max_health(var_0) {
+  self.gs.scripteddamagemultiplier = self.maxhealth / var_0;
   updatedamagemultiplier();
 }
 
-function scale_player_death_shield_duration(var0) {
-  if(!isDefined(var0)) {
-    var0 = 1;
+function scale_player_death_shield_duration(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 1;
   }
 
-  self.gs.scripteddeathshielddurationscale = var0;
+  self.gs.scripteddeathshielddurationscale = var_0;
 }
 
-function remove_damage_effects_instantly(var0) {
+function remove_damage_effects_instantly(var_0) {
   self notify("stopPainOverlays");
 
-  if(!isDefined(var0)) {
-    var0 = 0;
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
   self painvisionoff();
@@ -2933,9 +2933,9 @@ function remove_damage_effects_instantly(var0) {
   removeradialdistortion(0);
   stopimpactsfx();
 
-  if(!var0) {
-    foreach(var2 in self.damage.activescreeneffectoverlays) {
-      var2 notify("destroySreenEffectOverlay");
+  if(!var_0) {
+    foreach(var_2 in self.damage.activescreeneffectoverlays) {
+      var_2 notify("destroySreenEffectOverlay");
     }
   }
 
@@ -2947,53 +2947,53 @@ function remove_damage_effects_instantly(var0) {
   initdeathsdooroverlaypulse();
 }
 
-function radial_distortion(var0, var1, var2, var3) {
+function radial_distortion(var_0, var_1, var_2, var_3) {
   self notify("radialDistortion");
   self endon("radialDistortion");
-  setsaveddvar("MLTTMLTKOR", var0);
+  setsaveddvar("MLTTMLTKOR", var_0);
   setsaveddvar("NKTRSSTMRQ", -1);
-  setsaveddvar("LSOPQMRPNR", var1);
+  setsaveddvar("LSOPQMRPNR", var_1);
 
-  if(isDefined(var3)) {
+  if(isDefined(var_3)) {
     setsaveddvar("NSSPMPLRQL", 1);
-    setsaveddvar("MKRSSOQLML", var3);
+    setsaveddvar("MKRSSOQLML", var_3);
   }
 
-  if(isDefined(var2)) {
-    removeradialdistortion(var2);
+  if(isDefined(var_2)) {
+    removeradialdistortion(var_2);
     return;
   }
 }
 
-function set_focus_objectives_update_display(var0) {
-  self.focus.objectivesupdatedisplay = var0;
-  level.player setclientomnvar("ui_disable_objective_reveal_fanfare", !var0);
+function set_focus_objectives_update_display(var_0) {
+  self.focus.objectivesupdatedisplay = var_0;
+  level.player setclientomnvar("ui_disable_objective_reveal_fanfare", !var_0);
 }
 
 function focus_objectives_update_display() {
   return self.focus.objectivesupdatedisplay;
 }
 
-function set_focus_infinite_hold(var0) {
-  self.focus.infinitehold = var0;
+function set_focus_infinite_hold(var_0) {
+  self.focus.infinitehold = var_0;
 }
 
 function focus_infinite_hold() {
   return self.focus.infinitehold;
 }
 
-function focus_display_hint(var0, var1, var2, var3) {
-  scripts\engine\sp\utility::display_hint("focus_hint", var1, var0, var2, var3);
+function focus_display_hint(var_0, var_1, var_2, var_3) {
+  scripts\engine\sp\utility::display_hint("focus_hint", var_1, var_0, var_2, var_3);
 }
 
 function focus_held_down() {
   return level.player.focus.buttonhelddown;
 }
 
-function set_player_ladder_weapon(var0) {
-  if(!issameweapon(var0)) {
-    var0 = scripts\sp\utility::make_weapon(var0);
+function set_player_ladder_weapon(var_0) {
+  if(!issameweapon(var_0)) {
+    var_0 = scripts\sp\utility::make_weapon(var_0);
   }
 
-  self.ladderweapon = var0;
+  self.ladderweapon = var_0;
 }

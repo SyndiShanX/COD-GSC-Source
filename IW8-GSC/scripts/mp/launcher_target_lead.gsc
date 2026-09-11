@@ -10,9 +10,9 @@ function targetleadusageloop() {
   targetlead_init();
 
   for(;;) {
-    var0 = self getcurrentweapon();
+    var_0 = self getcurrentweapon();
 
-    if(var0.basename == "iw8_la_kgolf_mp" && targetlead_shouldtargetleadthink()) {
+    if(var_0.basename == "iw8_la_kgolf_mp" && targetlead_shouldtargetleadthink()) {
       self.targetlead.stopthinking = 0;
       thread targetlead_think();
     } else {
@@ -56,8 +56,8 @@ function targetlead_reset() {
   self.targetlead.queuedstate = undefined;
 }
 
-function targetlead_offstateenter(var0) {
-  if(isDefined(var0)) {
+function targetlead_offstateenter(var_0) {
+  if(isDefined(var_0)) {
     scripts\cp_mp\targetmarkergroups::targetmarkergroup_off(self.targetlead.targetmarkergroup);
     self.targetlead.targetmarkergroup = undefined;
     return;
@@ -73,10 +73,10 @@ function targetlead_offstateupdate() {
 
 function targetlead_offstateexit() {}
 
-function targetlead_scanningstateenter(var0) {
+function targetlead_scanningstateenter(var_0) {
   self.targetlead.adsraisedelaytimer = gettime() + 100;
 
-  if(isDefined(var0) && var0 == "off") {
+  if(isDefined(var_0) && var_0 == "off") {
     self.targetlead.targetmarkergroup = scripts\cp_mp\targetmarkergroups::targetmarkergroup_on("kgolftarget", self, undefined, self);
     return;
   }
@@ -87,16 +87,16 @@ function targetlead_scanningstateupdate() {
     return;
   }
 
-  var0 = targetlead_scanforvehicletarget();
+  var_0 = targetlead_scanforvehicletarget();
 
-  if(isDefined(var0)) {
-    self.targetlead.target = var0;
+  if(isDefined(var_0)) {
+    self.targetlead.target = var_0;
     targetlead_queuestate("hold");
     return;
   }
 }
 
-function targetlead_holdstateenter(var0) {
+function targetlead_holdstateenter(var_0) {
   self.targetlead.lockstarttime = gettime();
   self.targetlead.lostsightlinetime = 0;
   self.targetlead.leadpositionent = scripts\engine\utility::spawn_tag_origin();
@@ -110,22 +110,22 @@ function targetlead_holdstateupdate() {
     targetlead_queuestate("scanning");
     return;
   } else {
-    var0 = targetlead_getleadposition(self.targetlead.target);
+    var_0 = targetlead_getleadposition(self.targetlead.target);
 
-    if(isDefined(var0)) {
-      self.targetlead.leadpositionent moveTo(var0, 0.05);
+    if(isDefined(var_0)) {
+      self.targetlead.leadpositionent moveTo(var_0, 0.05);
     }
   }
 
-  var1 = self worldpointinreticle_circle(self.targetlead.leadpositionent.origin, 55, 40);
+  var_1 = self worldpointinreticle_circle(self.targetlead.leadpositionent.origin, 55, 40);
 
-  if(var1 && !self.targetlead.isaimingatreticle) {
+  if(var_1 && !self.targetlead.isaimingatreticle) {
     self.targetlead.isaimingatreticle = 1;
     thread targetlead_airburstholdthink();
     return;
   }
 
-  if(!var1 && self.targetlead.isaimingatreticle) {
+  if(!var_1 && self.targetlead.isaimingatreticle) {
     self.targetlead.isaimingatreticle = 0;
     self notify("stop_airburst_think");
     return;
@@ -165,100 +165,100 @@ function targetlead_onstopthink() {
   }
 }
 
-function targetlead_getleadposition(var0) {
-  var1 = (0, 0, 0);
+function targetlead_getleadposition(var_0) {
+  var_1 = (0, 0, 0);
 
-  if(var0.classname == "script_vehicle") {
-    var1 = var0 vehicle_getvelocity();
-  } else if(scripts\mp\utility\entity::isgunship(var0) || scripts\mp\utility\entity::isuav(var0)) {
-    var1 = var0.velocity;
+  if(var_0.classname == "script_vehicle") {
+    var_1 = var_0 vehicle_getvelocity();
+  } else if(scripts\mp\utility\entity::isgunship(var_0) || scripts\mp\utility\entity::isuav(var_0)) {
+    var_1 = var_0.velocity;
   }
 
-  var2 = var0.origin + targetlead_getvehicleoffset(var0);
-  var3 = self getEye();
-  var4 = 4000;
-  var5 = projectileintercept(var3, (0, 0, 0), var4, var2, var1);
+  var_2 = var_0.origin + targetlead_getvehicleoffset(var_0);
+  var_3 = self getEye();
+  var_4 = 4000;
+  var_5 = projectileintercept(var_3, (0, 0, 0), var_4, var_2, var_1);
 
-  if(isDefined(var5)) {
-    return var5;
+  if(isDefined(var_5)) {
+    return var_5;
   }
 
   return undefined;
 }
 
-function targetlead_getvehicleoffset(var0) {
-  var1 = (0, 0, 0);
+function targetlead_getvehicleoffset(var_0) {
+  var_1 = (0, 0, 0);
 
-  if(scripts\mp\utility\entity::ischoppergunner(var0)) {
-    var1 = (0, 0, -50);
-  } else if(scripts\mp\utility\entity::issupporthelo(var0)) {
-    var1 = (0, 0, -100);
-  } else if(scripts\mp\utility\entity::isgunship(var0)) {
-    var1 = (0, 0, 40);
-  } else if(scripts\mp\utility\entity::isclusterstrike(var0)) {
-    var1 = (0, 0, 40);
-  } else if(scripts\mp\utility\entity::isradardrone(var0)) {
-    var1 = (0, 0, 10);
-  } else if(scripts\mp\utility\entity::turret_op(var0)) {
-    var1 = (0, 0, 10);
-  } else if(scripts\mp\utility\entity::isscramblerdrone(var0)) {
-    var1 = (0, 0, 10);
-  } else if(scripts\mp\utility\entity::isradarhelicopter(var0)) {
-    var1 = (0, 0, 30);
+  if(scripts\mp\utility\entity::ischoppergunner(var_0)) {
+    var_1 = (0, 0, -50);
+  } else if(scripts\mp\utility\entity::issupporthelo(var_0)) {
+    var_1 = (0, 0, -100);
+  } else if(scripts\mp\utility\entity::isgunship(var_0)) {
+    var_1 = (0, 0, 40);
+  } else if(scripts\mp\utility\entity::isclusterstrike(var_0)) {
+    var_1 = (0, 0, 40);
+  } else if(scripts\mp\utility\entity::isradardrone(var_0)) {
+    var_1 = (0, 0, 10);
+  } else if(scripts\mp\utility\entity::turret_op(var_0)) {
+    var_1 = (0, 0, 10);
+  } else if(scripts\mp\utility\entity::isscramblerdrone(var_0)) {
+    var_1 = (0, 0, 10);
+  } else if(scripts\mp\utility\entity::isradarhelicopter(var_0)) {
+    var_1 = (0, 0, 30);
   }
 
-  return var1;
+  return var_1;
 }
 
-function targetlead_checktargetstillheld(var0) {
-  if(!isDefined(var0)) {
+function targetlead_checktargetstillheld(var_0) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
-  var1 = self worldpointinreticle_circle(var0.origin, 55, 240);
+  var_1 = self worldpointinreticle_circle(var_0.origin, 55, 240);
 
-  if(!var1) {
+  if(!var_1) {
     return false;
   }
 
-  if(!targetlead_softsighttest(var0)) {
+  if(!targetlead_softsighttest(var_0)) {
     return false;
   }
 
   return true;
 }
 
-function targetlead_looplocalseeksound(var0, var1) {
+function targetlead_looplocalseeksound(var_0, var_1) {
   self endon("death_or_disconnect");
   self endon("stop_lockon_sound");
 
   for(;;) {
-    self playlocalsound(var0);
-    wait var1;
+    self playlocalsound(var_0);
+    wait var_1;
   }
 }
 
-function targetlead_queuestate(var0) {
-  self.targetlead.queuedstate = var0;
+function targetlead_queuestate(var_0) {
+  self.targetlead.queuedstate = var_0;
 }
 
 function targetlead_getqueuedstate() {
   return self.targetlead.queuedstate;
 }
 
-function targetlead_enterstate(var0) {
+function targetlead_enterstate(var_0) {
   if(isDefined(self.targetlead.state)) {}
 
-  var1 = self.targetlead.state;
+  var_1 = self.targetlead.state;
 
-  if(isDefined(var1) && isDefined(self.targetlead.states[var1]["exit"])) {
-    self[[self.targetlead.states[var1]["exit"]]]();
+  if(isDefined(var_1) && isDefined(self.targetlead.states[var_1]["exit"])) {
+    self[[self.targetlead.states[var_1]["exit"]]]();
   }
 
-  self.targetlead.state = var0;
+  self.targetlead.state = var_0;
 
-  if(isDefined(self.targetlead.states[var0]["enter"])) {
-    self[[self.targetlead.states[var0]["enter"]]](var1);
+  if(isDefined(self.targetlead.states[var_0]["enter"])) {
+    self[[self.targetlead.states[var_0]["enter"]]](var_1);
   }
 
   self.targetlead.queuedstate = undefined;
@@ -286,10 +286,10 @@ function targetlead_think() {
     }
 
     targetlead_preupdate();
-    var0 = targetlead_getqueuedstate();
+    var_0 = targetlead_getqueuedstate();
 
-    if(isDefined(var0)) {
-      targetlead_enterstate(var0);
+    if(isDefined(var_0)) {
+      targetlead_enterstate(var_0);
     }
 
     self[[self.targetlead.states[self.targetlead.state]["update"]]]();
@@ -304,24 +304,24 @@ function targetlead_earlyoutthink() {
 }
 
 function targetlead_scanforvehicletarget() {
-  var0 = scripts\mp\weapons::lockonlaunchers_gettargetarray();
+  var_0 = scripts\mp\weapons::lockonlaunchers_gettargetarray();
 
-  if(var0.size != 0) {
-    var1 = [];
+  if(var_0.size != 0) {
+    var_1 = [];
 
-    foreach(var3 in var0) {
-      var4 = self worldpointinreticle_circle(var3.origin, 55, 240);
+    foreach(var_3 in var_0) {
+      var_4 = self worldpointinreticle_circle(var_3.origin, 55, 240);
 
-      if(var4) {
-        var1 = var3;
+      if(var_4) {
+        var_1 = var_3;
       }
     }
 
-    if(var1.size != 0) {
-      var6 = sortbydistance(var1, self.origin);
+    if(var_1.size != 0) {
+      var_6 = sortbydistance(var_1, self.origin);
 
-      if(targetlead_vehiclelocksighttest(var6[0])) {
-        return var6[0];
+      if(targetlead_vehiclelocksighttest(var_6[0])) {
+        return var_6[0];
       }
     }
   }
@@ -329,34 +329,34 @@ function targetlead_scanforvehicletarget() {
   return undefined;
 }
 
-function targetlead_vehiclelocksighttest(var0) {
-  var1 = self getEye();
-  var2 = var0 getpointinbounds(0, 0, 0);
-  var3 = sighttracepassed(var1, var2, 0, var0);
+function targetlead_vehiclelocksighttest(var_0) {
+  var_1 = self getEye();
+  var_2 = var_0 getpointinbounds(0, 0, 0);
+  var_3 = sighttracepassed(var_1, var_2, 0, var_0);
 
-  if(var3) {
+  if(var_3) {
     return true;
   }
 
-  var4 = var0 getpointinbounds(1, 0, 0);
-  var3 = sighttracepassed(var1, var4, 0, var0);
+  var_4 = var_0 getpointinbounds(1, 0, 0);
+  var_3 = sighttracepassed(var_1, var_4, 0, var_0);
 
-  if(var3) {
+  if(var_3) {
     return true;
   }
 
-  var5 = var0 getpointinbounds(-1, 0, 0);
-  var3 = sighttracepassed(var1, var5, 0, var0);
+  var_5 = var_0 getpointinbounds(-1, 0, 0);
+  var_3 = sighttracepassed(var_1, var_5, 0, var_0);
 
-  if(var3) {
+  if(var_3) {
     return true;
   }
 
   return false;
 }
 
-function targetlead_softsighttest(var0) {
-  if(targetlead_vehiclelocksighttest(var0)) {
+function targetlead_softsighttest(var_0) {
+  if(targetlead_vehiclelocksighttest(var_0)) {
     self.targetlead.lostsightlinetime = 0;
     return true;
   }
@@ -365,9 +365,9 @@ function targetlead_softsighttest(var0) {
     self.targetlead.lostsightlinetime = gettime();
   }
 
-  var1 = gettime() - self.targetlead.lostsightlinetime;
+  var_1 = gettime() - self.targetlead.lostsightlinetime;
 
-  if(var1 >= 500) {
+  if(var_1 >= 500) {
     return false;
   }
 
@@ -378,27 +378,27 @@ function targetlead_airburstholdthink() {
   self endon("death_or_disconnect");
   self endon("faux_spawn");
   self endon("stop_airburst_think");
-  self waittill("missile_fire", var0);
+  self waittill("missile_fire", var_0);
 
   if(isDefined(self.targetlead.target)) {
-    thread targetlead_airburstmissilethink(var0, self.targetlead.target);
+    thread targetlead_airburstmissilethink(var_0, self.targetlead.target);
     return;
   }
 }
 
-function targetlead_airburstmissilethink(var0, var1) {
+function targetlead_airburstmissilethink(var_0, var_1) {
   self endon("death");
 
   for(;;) {
-    if(!isDefined(var0)) {
+    if(!isDefined(var_0)) {
       iprintlnbold("targetEnt undefined");
       return;
     }
 
-    var2 = distance(var1.origin, var0.origin);
-    var3 = distance(var1.origin, self.origin);
+    var_2 = distance(var_1.origin, var_0.origin);
+    var_3 = distance(var_1.origin, self.origin);
 
-    if(var3 > var2) {
+    if(var_3 > var_2) {
       self detonate();
       iprintlnbold("explode");
     }

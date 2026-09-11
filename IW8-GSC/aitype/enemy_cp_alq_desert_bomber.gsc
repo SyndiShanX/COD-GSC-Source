@@ -18,32 +18,32 @@ function main() {
   self.grenadeammo = 2;
 }
 
-function setup_model(var0) {
+function setup_model(var_0) {
   character\character_spetsnaz_gasmask_ar_cp::main_mp();
 }
 
 function precache() {
-  var0 = "actor_enemy_cp_alq_desert_bomber";
+  var_0 = "actor_enemy_cp_alq_desert_bomber";
 
   if(!isDefined(level.agent_definition)) {
     level.agent_definition = [];
   }
 
-  if(!isDefined(level.agent_definition[var0])) {
-    level.agent_definition[var0] = [];
-    level.agent_definition[var0]["species"] = "human";
-    level.agent_definition[var0]["traversal_unit_type"] = "suicidebomber";
-    level.agent_definition[var0]["health"] = 180;
-    level.agent_definition[var0]["xp"] = 50;
-    level.agent_definition[var0]["reward"] = 100;
-    level.agent_definition[var0]["asm"] = "suicidebomber_cp";
-    level.agent_definition[var0]["radius"] = 15;
-    level.agent_definition[var0]["height"] = 70;
-    level.agent_definition[var0]["behaviorTree"] = "suicidebomber_agent";
-    level.agent_definition[var0]["team"] = "axis";
-    level.agent_definition[var0]["setup_func"] = &main;
-    level.agent_definition[var0]["setup_model_func"] = &setup_model;
-    character\character_spetsnaz_gasmask_ar_cp::precache_mp(var0);
+  if(!isDefined(level.agent_definition[var_0])) {
+    level.agent_definition[var_0] = [];
+    level.agent_definition[var_0]["species"] = "human";
+    level.agent_definition[var_0]["traversal_unit_type"] = "suicidebomber";
+    level.agent_definition[var_0]["health"] = 180;
+    level.agent_definition[var_0]["xp"] = 50;
+    level.agent_definition[var_0]["reward"] = 100;
+    level.agent_definition[var_0]["asm"] = "suicidebomber_cp";
+    level.agent_definition[var_0]["radius"] = 15;
+    level.agent_definition[var_0]["height"] = 70;
+    level.agent_definition[var_0]["behaviorTree"] = "suicidebomber_agent";
+    level.agent_definition[var_0]["team"] = "axis";
+    level.agent_definition[var_0]["setup_func"] = &main;
+    level.agent_definition[var_0]["setup_model_func"] = &setup_model;
+    character\character_spetsnaz_gasmask_ar_cp::precache_mp(var_0);
   }
 
   scripts\aitypes\bt_util::init();

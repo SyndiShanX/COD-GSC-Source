@@ -11,7 +11,7 @@ function farah_trapped_blend_anim_init() {
 
 #using_animtree("player");
 
-function farrah_anim_think(var0) {
+function farrah_anim_think(var_0) {
   level endon("carried_started");
   level.rail_player_model setanim(%htf_buri_010_rebar_hit_basepose, 1, 0, 1);
   level.buried_rebar_model linkTo(level.rail_player_model, "tag_accessory_right", (0, 0, 0), (0, 0, 0));
@@ -27,52 +27,52 @@ function farrah_anim_think(var0) {
 
 function linkplayertofarrah() {
   level endon("carried_started");
-  var0 = level.rail_player_model scripts\engine\utility::spawn_tag_origin();
-  var0 linkTo(level.rail_player_model, "tag_view", (0, 0, 0), (0, 0, 0));
+  var_0 = level.rail_player_model scripts\engine\utility::spawn_tag_origin();
+  var_0 linkTo(level.rail_player_model, "tag_view", (0, 0, 0), (0, 0, 0));
   level.player hideviewmodel();
   level.player hidelegsandshadow();
   wait 0.5;
-  level.player playersetgroundreferenceent(var0);
+  level.player playersetgroundreferenceent(var_0);
 }
 
 #using_animtree("");
 
-function animsdirectionalscrub(var0) {
+function animsdirectionalscrub(var_0) {
   level endon("carried_started");
   self setanim(%htf_buri_010_rebar_trans_r_to_l, 1, 0, 0);
   self setanim(%htf_buri_010_rebar_trans_u_to_d, 1, 0, 0);
-  var1 = 0.5;
-  var2 = 0.5;
-  var3 = 0.5;
-  var4 = 0.5;
-  var5 = 0.25;
-  var6 = 0.25;
-  var7 = 0.04;
+  var_1 = 0.5;
+  var_2 = 0.5;
+  var_3 = 0.5;
+  var_4 = 0.5;
+  var_5 = 0.25;
+  var_6 = 0.25;
+  var_7 = 0.04;
 
   for(;;) {
-    var8 = level.player getnormalizedcameramovement();
-    var9 = length(var8);
-    var9 = clamp(var9, 0, 1);
-    var10 = scripts\engine\math::factor_value(var5, var6, var9);
+    var_8 = level.player getnormalizedcameramovement();
+    var_9 = length(var_8);
+    var_9 = clamp(var_9, 0, 1);
+    var_10 = scripts\engine\math::factor_value(var_5, var_6, var_9);
 
-    if(var0) {
-      var8 = (-1 * var8[0], -1 * var8[1], 0);
+    if(var_0) {
+      var_8 = (-1 * var_8[0], -1 * var_8[1], 0);
     } else {
-      var8 = (var8[0], -1 * var8[1], 0);
+      var_8 = (var_8[0], -1 * var_8[1], 0);
     }
 
-    var4 += var8[0] * var7;
-    var3 += var8[1] * var7;
-    var4 = clamp(var4, 0, 1);
-    var3 = clamp(var3, 0, 1);
-    var1 = scripts\engine\math::lerp(var1, var3, var10);
-    var2 = scripts\engine\math::lerp(var2, var4, var10);
-    self setcustomnodegameparameter("rebarhit_lr_scrub1d", var1);
-    self setcustomnodegameparameter("rebarhit_ud_scrub1d", var2);
-    var11 = scripts\engine\math::factor_value(1, -1, var1);
-    var12 = scripts\engine\math::factor_value(1, -1, var2);
-    self setcustomnodegameparameter("rebarhit_lr_blendspace2d", var11);
-    self setcustomnodegameparameter("rebarhit_ud_blendspace2d", var12);
+    var_4 += var_8[0] * var_7;
+    var_3 += var_8[1] * var_7;
+    var_4 = clamp(var_4, 0, 1);
+    var_3 = clamp(var_3, 0, 1);
+    var_1 = scripts\engine\math::lerp(var_1, var_3, var_10);
+    var_2 = scripts\engine\math::lerp(var_2, var_4, var_10);
+    self setcustomnodegameparameter("rebarhit_lr_scrub1d", var_1);
+    self setcustomnodegameparameter("rebarhit_ud_scrub1d", var_2);
+    var_11 = scripts\engine\math::factor_value(1, -1, var_1);
+    var_12 = scripts\engine\math::factor_value(1, -1, var_2);
+    self setcustomnodegameparameter("rebarhit_lr_blendspace2d", var_11);
+    self setcustomnodegameparameter("rebarhit_ud_blendspace2d", var_12);
     waitframe();
   }
 }
@@ -80,8 +80,8 @@ function animsdirectionalscrub(var0) {
 function animsdirectionalhit() {
   level endon("carried_started");
   self.debounce = 0;
-  var0 = 0.2;
-  var1 = getanimlength(%htf_buri_010_rebar_hit_c_player) - var0;
+  var_0 = 0.2;
+  var_1 = getanimlength(%htf_buri_010_rebar_hit_c_player) - var_0;
   self setanim(%htf_buri_010_rebar_idle_r_player);
   self setanim(%htf_buri_010_rebar_idle_c_player);
   self setanim(%htf_buri_010_rebar_idle_u_player);
@@ -91,14 +91,14 @@ function animsdirectionalhit() {
   for(;;) {
     waitforattackbuttoninput();
     thread attackbuttondebounce();
-    self setanimknob(%add_directional_hits, 0.999, var0);
-    self setanimrestart(%htf_buri_010_rebar_hit_r_player, 1, var0);
-    self setanimrestart(%htf_buri_010_rebar_hit_c_player, 1, var0);
-    self setanimrestart(%htf_buri_010_rebar_hit_u_player, 1, var0);
-    self setanimrestart(%htf_buri_010_rebar_hit_l_player, 1, var0);
-    self setanimrestart(%htf_buri_010_rebar_hit_d_player, 1, var0);
-    wait var1;
-    self setanimknob(%add_directional_idles, 1, var0);
+    self setanimknob(%add_directional_hits, 0.999, var_0);
+    self setanimrestart(%htf_buri_010_rebar_hit_r_player, 1, var_0);
+    self setanimrestart(%htf_buri_010_rebar_hit_c_player, 1, var_0);
+    self setanimrestart(%htf_buri_010_rebar_hit_u_player, 1, var_0);
+    self setanimrestart(%htf_buri_010_rebar_hit_l_player, 1, var_0);
+    self setanimrestart(%htf_buri_010_rebar_hit_d_player, 1, var_0);
+    wait var_1;
+    self setanimknob(%add_directional_idles, 1, var_0);
     wait 0.05;
     level.rebar_hits++;
   }

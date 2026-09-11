@@ -10,14 +10,14 @@ function helper_drone_init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("helper_drone", "get_outer_reticle_targets", &get_outer_reticle_targets);
   scripts\cp_mp\utility\script_utility::registersharedfunc("supers", "superUseFinished", &scripts\cp\coop_super::superusefinished);
   scripts\cp_mp\utility\script_utility::registersharedfunc("player", "isInLastStand", &scripts\cp\cp_laststand::player_in_laststand);
-  var0 = getarraykeys(level.helperdronesettings);
+  var_0 = getarraykeys(level.helperdronesettings);
 
-  foreach(var2 in var0) {
-    var3 = level.helperdronesettings[var2].hitstokill;
+  foreach(var_2 in var_0) {
+    var_3 = level.helperdronesettings[var_2].hitstokill;
 
-    if(isDefined(var3)) {
-      scripts\cp\vehicles\damage_cp::set_vehicle_hit_damage_data(var2, var3);
-      scripts\cp\vehicles\damage_cp::set_weapon_hit_damage_data_for_vehicle("emp_grenade_mp", var3, var2);
+    if(isDefined(var_3)) {
+      scripts\cp\vehicles\damage_cp::set_vehicle_hit_damage_data(var_2, var_3);
+      scripts\cp\vehicles\damage_cp::set_weapon_hit_damage_data_for_vehicle("emp_grenade_mp", var_3, var_2);
     }
   }
 }
@@ -26,62 +26,62 @@ function get_mark_ui_duration() {
   return 30;
 }
 
-function helperdrone_markplayers_cp(var0) {
-  var1 = self.owner;
-  var1 endon("disconnect");
+function helperdrone_markplayers_cp(var_0) {
+  var_1 = self.owner;
+  var_1 endon("disconnect");
   self endon("death");
   self endon("leaving");
   self endon("explode");
   self endon("switch_modes");
 
   for(;;) {
-    var2 = get_mark_target_array();
+    var_2 = get_mark_target_array();
 
-    foreach(var4 in var2) {
-      if(!isDefined(var4)) {
+    foreach(var_4 in var_2) {
+      if(!isDefined(var_4)) {
         continue;
       }
 
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("player", "isReallyAlive")) {
-        if(![[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "isReallyAlive")]](var4)) {
+        if(![[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "isReallyAlive")]](var_4)) {
           continue;
         }
       }
 
-      if(var4 == var1) {
+      if(var_4 == var_1) {
         continue;
       }
 
-      if(level.teambased && var4.team == var1.team) {
+      if(level.teambased && var_4.team == var_1.team) {
         continue;
       }
 
-      if(scripts\cp_mp\killstreaks\helper_drone::isbeingmarked(var4)) {
+      if(scripts\cp_mp\killstreaks\helper_drone::isbeingmarked(var_4)) {
         continue;
       }
 
-      if(scripts\cp_mp\killstreaks\helper_drone::isreconmarked(var4)) {
+      if(scripts\cp_mp\killstreaks\helper_drone::isreconmarked(var_4)) {
         continue;
       }
 
-      scripts\cp_mp\killstreaks\helper_drone::ref_131c9(self.targetmarkergroup, var4, 0);
+      scripts\cp_mp\killstreaks\helper_drone::ref_131c9(self.targetmarkergroup, var_4, 0);
 
-      if(!scripts\cp_mp\killstreaks\helper_drone::isinmarkingrange(var4)) {
+      if(!scripts\cp_mp\killstreaks\helper_drone::isinmarkingrange(var_4)) {
         continue;
       }
 
-      if(!scripts\cp_mp\killstreaks\helper_drone::canseetarget(var4)) {
+      if(!scripts\cp_mp\killstreaks\helper_drone::canseetarget(var_4)) {
         continue;
       }
 
-      scripts\cp_mp\killstreaks\helper_drone::ref_131c9(self.targetmarkergroup, var4, 1);
+      scripts\cp_mp\killstreaks\helper_drone::ref_131c9(self.targetmarkergroup, var_4, 1);
 
       if(istrue(self.markingtarget)) {
         continue;
       }
 
-      if(var1 scripts\cp_mp\killstreaks\helper_drone::helperdrone_istargetinreticle(var4, 70, 40)) {
-        thread startmarkingtarget_cp(var4, "enemy", 0, 1);
+      if(var_1 scripts\cp_mp\killstreaks\helper_drone::helperdrone_istargetinreticle(var_4, 70, 40)) {
+        thread startmarkingtarget_cp(var_4, "enemy", 0, 1);
       }
     }
 
@@ -89,63 +89,63 @@ function helperdrone_markplayers_cp(var0) {
   }
 }
 
-function startmarkingtarget_cp(var0, var1, var2, var3) {
-  var4 = self.owner;
-  var4 endon("disconnect");
+function startmarkingtarget_cp(var_0, var_1, var_2, var_3) {
+  var_4 = self.owner;
+  var_4 endon("disconnect");
   level endon("game_ended");
   self endon("death");
   self endon("leaving");
   self endon("explode");
   self endon("switch_modes");
-  var5 = spawnStruct();
-  var5.target = var0;
-  var5.targetnum = var0 getentitynumber();
-  var5.markingent = self;
-  var5.ownerteam = var4.team;
-  var5.outlineid = undefined;
-  var5.headicon = undefined;
-  var5.beingmarked = undefined;
-  var5.reconmarked = undefined;
-  var5.notifytoendmark = "unmarked_" + var5.targetnum;
+  var_5 = spawnStruct();
+  var_5.target = var_0;
+  var_5.targetnum = var_0 getentitynumber();
+  var_5.markingent = self;
+  var_5.ownerteam = var_4.team;
+  var_5.outlineid = undefined;
+  var_5.headicon = undefined;
+  var_5.beingmarked = undefined;
+  var_5.reconmarked = undefined;
+  var_5.notifytoendmark = "unmarked_" + var_5.targetnum;
 
-  if(!isDefined(var5.targetnum)) {
+  if(!isDefined(var_5.targetnum)) {
     return;
   }
 
-  var6 = self.targetmarkergroup;
+  var_6 = self.targetmarkergroup;
 
-  if(!isDefined(var6)) {
+  if(!isDefined(var_6)) {
     return;
   }
 
-  var5.beingmarked = 1;
+  var_5.beingmarked = 1;
   self.markingtarget = 1;
   self.owner notify("marking_target");
   self.owner setclientomnvar("ui_rcd_controls", 2);
-  var7 = scripts\cp_mp\killstreaks\helper_drone::getmarkingdelay(var0);
+  var_7 = scripts\cp_mp\killstreaks\helper_drone::getmarkingdelay(var_0);
 
-  while(var7 > 0) {
-    if(!isDefined(var0)) {
+  while(var_7 > 0) {
+    if(!isDefined(var_0)) {
       return;
     }
 
-    if(!var4 scripts\cp_mp\killstreaks\helper_drone::helperdrone_istargetinreticle(var0, 70, 40)) {
-      var5.beingmarked = undefined;
+    if(!var_4 scripts\cp_mp\killstreaks\helper_drone::helperdrone_istargetinreticle(var_0, 70, 40)) {
+      var_5.beingmarked = undefined;
       self.markingtarget = undefined;
       self.owner setclientomnvar("ui_rcd_controls", 1);
       return;
     }
 
-    var7 -= 0.05;
+    var_7 -= 0.05;
     wait 0.05;
   }
 
-  var5.reconmarked = 1;
+  var_5.reconmarked = 1;
   self.markingtarget = undefined;
-  scripts\cp_mp\killstreaks\helper_drone::markent(var5, 30);
+  scripts\cp_mp\killstreaks\helper_drone::markent(var_5, 30);
   self.owner setclientomnvar("ui_rcd_controls", 4);
-  scripts\cp_mp\killstreaks\helper_drone::ref_131c9(var6, var0, 2);
-  scripts\cp_mp\killstreaks\helper_drone::addmarkpoints(var0, var1);
+  scripts\cp_mp\killstreaks\helper_drone::ref_131c9(var_6, var_0, 2);
+  scripts\cp_mp\killstreaks\helper_drone::addmarkpoints(var_0, var_1);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("pers", "incPersStat")) {
     self.owner[[scripts\cp_mp\utility\script_utility::getsharedfunc("pers", "incPersStat")]]("reconDroneMarks", 1);
@@ -157,47 +157,47 @@ function startmarkingtarget_cp(var0, var1, var2, var3) {
     self.ref_1406b = 0;
   }
 
-  if(isalive(var0) && isDefined(var0.ridingvehicle)) {
+  if(isalive(var_0) && isDefined(var_0.ridingvehicle)) {
     self.ref_1406b++;
   }
 
-  var8 = 35;
+  var_8 = 35;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("perk", "hasPerk")) {
     if(self.owner[[scripts\cp_mp\utility\script_utility::getsharedfunc("perk", "hasPerk")]]("specialty_improved_target_mark")) {
-      var8 += 2;
+      var_8 += 2;
     }
   }
 
-  thread ref_13f20(var5);
-  scripts\cp_mp\killstreaks\helper_drone::waituntilunmarked(var5, var8);
+  thread ref_13f20(var_5);
+  scripts\cp_mp\killstreaks\helper_drone::waituntilunmarked(var_5, var_8);
 }
 
-function ref_13f20(var0) {
-  var1 = var0.target;
-  var1 waittill("death");
-  scripts\cp_mp\killstreaks\helper_drone::unmark(var0);
+function ref_13f20(var_0) {
+  var_1 = var_0.target;
+  var_1 waittill("death");
+  scripts\cp_mp\killstreaks\helper_drone::unmark(var_0);
 }
 
 function get_mark_target_array() {
   return level.spawned_enemies;
 }
 
-function get_outer_reticle_targets(var0) {
-  var1 = 3000;
-  var2 = var1 * var1;
-  var3 = [];
-  var4 = cos(70);
+function get_outer_reticle_targets(var_0) {
+  var_1 = 3000;
+  var_2 = var_1 * var_1;
+  var_3 = [];
+  var_4 = cos(70);
 
-  foreach(var6 in level.spawned_enemies) {
-    if(distancesquared(self.origin, var6.origin) < var2) {
-      if(scripts\engine\utility::within_fov(self.origin, self.angles, var6.origin, var4)) {
-        var3 = var6;
+  foreach(var_6 in level.spawned_enemies) {
+    if(distancesquared(self.origin, var_6.origin) < var_2) {
+      if(scripts\engine\utility::within_fov(self.origin, self.angles, var_6.origin, var_4)) {
+        var_3 = var_6;
       }
     }
   }
 
-  return var3;
+  return var_3;
 }
 
-function markent_watchmarkingentstatus_cp(var0) {}
+function markent_watchmarkingentstatus_cp(var_0) {}

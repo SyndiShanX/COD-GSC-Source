@@ -3,41 +3,41 @@
  * Script: scripts\aitypes\throwgrenade.gsc
 ***********************************************/
 
-function throwgrenade_init(var0) {
+function throwgrenade_init(var_0) {
   scripts\asm\asm_bb::bb_requestthrowgrenade(1, self.enemy);
-  self.bt.instancedata[var0] = spawnStruct();
-  self.bt.instancedata[var0].timeout = gettime() + 4000;
+  self.bt.instancedata[var_0] = spawnStruct();
+  self.bt.instancedata[var_0].timeout = gettime() + 4000;
 }
 
-function throwgrenade_terminate(var0) {
+function throwgrenade_terminate(var_0) {
   scripts\asm\asm_bb::bb_requestthrowgrenade(0);
-  self.bt.instancedata[var0] = undefined;
+  self.bt.instancedata[var_0] = undefined;
 }
 
-function throwgrenade_update(var0) {
-  var1 = scripts\asm\asm_bb::bb_getthrowgrenadetarget();
+function throwgrenade_update(var_0) {
+  var_1 = scripts\asm\asm_bb::bb_getthrowgrenadetarget();
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return anim.failure;
   }
 
   if(scripts\asm\asm::asm_ephemeraleventfired("throwgrenade", "start", 0)) {
-    self.bt.instancedata[var0].started = 1;
-    self.bt.instancedata[var0].timeout += 10000;
+    self.bt.instancedata[var_0].started = 1;
+    self.bt.instancedata[var_0].timeout += 10000;
   }
 
   if(scripts\asm\asm::asm_ephemeraleventfired("throwgrenade", "end")) {
     return anim.success;
   }
 
-  if(gettime() > self.bt.instancedata[var0].timeout) {
+  if(gettime() > self.bt.instancedata[var_0].timeout) {
     return anim.failure;
   }
 
-  if(!istrue(self.bt.instancedata[var0].started)) {
-    var2 = scripts\engine\utility::getyawtospot(var1.origin);
+  if(!istrue(self.bt.instancedata[var_0].started)) {
+    var_2 = scripts\engine\utility::getyawtospot(var_1.origin);
 
-    if(abs(var2) > 90) {
+    if(abs(var_2) > 90) {
       return anim.failure;
     }
   }
@@ -45,7 +45,7 @@ function throwgrenade_update(var0) {
   return anim.running;
 }
 
-function hasgrenadetimerelapsed(var0) {
+function hasgrenadetimerelapsed(var_0) {
   if(mygrenadecooldownelapsed() && (gettime() >= 10000 || isDefined(level.ignoregrenadesafetime) && level.ignoregrenadesafetime)) {
     self.a.nextgrenadetrytime = gettime() + 500;
     return anim.success;
@@ -54,7 +54,7 @@ function hasgrenadetimerelapsed(var0) {
   return anim.failure;
 }
 
-function canthrowgrenade(var0) {
+function canthrowgrenade(var_0) {
   if(isDefined(self.pathgoalpos) || self.arriving) {
     return anim.failure;
   }
@@ -92,42 +92,42 @@ function canthrowgrenade(var0) {
   return anim.failure;
 }
 
-function grenadepossafewrapper(var0, var1) {
-  if(isDefined(self.grenadesafedist) && !self isgrenadepossafe(var0, var1, self.grenadesafedist)) {
+function grenadepossafewrapper(var_0, var_1) {
+  if(isDefined(self.grenadesafedist) && !self isgrenadepossafe(var_0, var_1, self.grenadesafedist)) {
     return false;
-  } else if(!self isgrenadepossafe(var0, var1)) {
+  } else if(!self isgrenadepossafe(var_0, var_1)) {
     return false;
   }
 
   return true;
 }
 
-function grenadethrowvaliditycheck(var0, var1) {
-  var2 = var0.origin;
+function grenadethrowvaliditycheck(var_0, var_1) {
+  var_2 = var_0.origin;
 
-  if(!self cansee(var0)) {
-    if(isDefined(self.enemy) && var0 == self.enemy && isDefined(self.shootpos)) {
-      var2 = self.shootpos;
+  if(!self cansee(var_0)) {
+    if(isDefined(self.enemy) && var_0 == self.enemy && isDefined(self.shootpos)) {
+      var_2 = self.shootpos;
     }
 
-    var1 = 100;
-  } else if(!isDefined(var1)) {
-    var1 = 100;
+    var_1 = 100;
+  } else if(!isDefined(var_1)) {
+    var_1 = 100;
   }
 
-  if(distancesquared(self.origin, var2) < var1 * var1) {
+  if(distancesquared(self.origin, var_2) < var_1 * var_1) {
     return false;
   }
 
-  setactivegrenadetimer(var0);
+  setactivegrenadetimer(var_0);
 
-  if(!grenadecooldownelapsed(var0)) {
+  if(!grenadecooldownelapsed(var_0)) {
     return false;
   }
 
-  var3 = scripts\engine\utility::getyawtospot(var2);
+  var_3 = scripts\engine\utility::getyawtospot(var_2);
 
-  if(abs(var3) > 60) {
+  if(abs(var_3) > 60) {
     return false;
   }
 
@@ -135,12 +135,12 @@ function grenadethrowvaliditycheck(var0, var1) {
     return false;
   }
 
-  if(isDefined(self.enemy) && var0 == self.enemy) {
+  if(isDefined(self.enemy) && var_0 == self.enemy) {
     if(!checkgrenadethrowdist()) {
       return false;
     }
 
-    if(!grenadepossafewrapper(var0, var0.origin)) {
+    if(!grenadepossafewrapper(var_0, var_0.origin)) {
       return false;
     }
 
@@ -161,19 +161,19 @@ function mygrenadecooldownelapsed() {
 }
 
 function checkgrenadethrowdist() {
-  var0 = self.enemy.origin - self.origin;
-  var1 = lengthsquared((var0[0], var0[1], 0));
+  var_0 = self.enemy.origin - self.origin;
+  var_1 = lengthsquared((var_0[0], var_0[1], 0));
 
   if(self.grenadeweapon.basename == "flash_grenade") {
-    return (var1 < 589824);
+    return (var_1 < 589824);
   }
 
-  return var1 >= 40000 && var1 <= 1562500;
+  return var_1 >= 40000 && var_1 <= 1562500;
 }
 
-function grenadecooldownelapsed(var0) {
+function grenadecooldownelapsed(var_0) {
   if(isDefined(self.fngrenadecooldownelapsedoverride)) {
-    return [[self.fngrenadecooldownelapsedoverride]](var0);
+    return [[self.fngrenadecooldownelapsedoverride]](var_0);
   }
 
   if(scripts\engine\utility::player_died_recently()) {
@@ -189,18 +189,18 @@ function grenadecooldownelapsed(var0) {
   }
 
   if(self.activegrenadetimer.isplayertimer && self.activegrenadetimer.timername == "fraggrenade") {
-    return maythrowdoublegrenade(var0);
+    return maythrowdoublegrenade(var_0);
   }
 
   return 0;
 }
 
-function setactivegrenadetimer(var0) {
+function setactivegrenadetimer(var_0) {
   self.activegrenadetimer = spawnStruct();
 
-  if(isPlayer(var0) && isDefined(var0.grenadetimers)) {
+  if(isPlayer(var_0) && isDefined(var_0.grenadetimers)) {
     self.activegrenadetimer.isplayertimer = 1;
-    self.activegrenadetimer.player = var0;
+    self.activegrenadetimer.player = var_0;
     self.activegrenadetimer.timername = self.grenadeweapon.basename;
     return;
   }
@@ -209,36 +209,36 @@ function setactivegrenadetimer(var0) {
   self.activegrenadetimer.timername = "AI_" + self.grenadeweapon.basename;
 }
 
-function maythrowdoublegrenade(var0) {
+function maythrowdoublegrenade(var_0) {
   if(scripts\engine\utility::player_died_recently()) {
     return false;
   }
 
-  if(!var0.gs.double_grenades_allowed) {
+  if(!var_0.gs.double_grenades_allowed) {
     return false;
   }
 
-  var1 = gettime();
+  var_1 = gettime();
 
-  if(var1 < var0.grenadetimers["double_grenade"]) {
+  if(var_1 < var_0.grenadetimers["double_grenade"]) {
     return false;
   }
 
-  if(var1 > var0.lastfraggrenadetoplayerstart + 3000) {
+  if(var_1 > var_0.lastfraggrenadetoplayerstart + 3000) {
     return false;
   }
 
-  if(var1 < var0.lastfraggrenadetoplayerstart + 500) {
+  if(var_1 < var_0.lastfraggrenadetoplayerstart + 500) {
     return false;
   }
 
-  return var0.numgrenadesinprogresstowardsplayer < 2;
+  return var_0.numgrenadesinprogresstowardsplayer < 2;
 }
 
-function getgrenadetimertime(var0) {
-  if(var0.isplayertimer) {
-    return var0.player.grenadetimers[var0.timername];
+function getgrenadetimertime(var_0) {
+  if(var_0.isplayertimer) {
+    return var_0.player.grenadetimers[var_0.timername];
   }
 
-  return anim.grenadetimers[var0.timername];
+  return anim.grenadetimers[var_0.timername];
 }

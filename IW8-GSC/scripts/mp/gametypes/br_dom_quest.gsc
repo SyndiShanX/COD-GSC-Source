@@ -4,15 +4,15 @@
 *************************************************/
 
 function init() {
-  var0 = scripts\mp\gametypes\br_quest_util::registerquestcategory("domination", 1);
+  var_0 = scripts\mp\gametypes\br_quest_util::registerquestcategory("domination", 1);
 
-  if(!var0) {
+  if(!var_0) {
     return;
   }
 
-  var0 = scripts\mp\gametypes\br_quest_util::registerquestcategory("domination_redacted", 1);
+  var_0 = scripts\mp\gametypes\br_quest_util::registerquestcategory("domination_redacted", 1);
 
-  if(var0) {
+  if(var_0) {
     scripts\mp\gametypes\br_quest_util::ref_12b2a("domination_redacted", "brloot_redacted_domination_tablet");
     scripts\mp\gametypes\br_quest_util::ref_12b3d("domination_redacted", &markplayeraseliminatedonkilled);
   }
@@ -46,8 +46,8 @@ function domquest_removequestinstance() {
 }
 
 function domlocale_removelocaleinstance() {
-  foreach(var1 in self.subscribedinstances) {
-    var1 thread scripts\mp\gametypes\br_quest_util::removequestinstance();
+  foreach(var_1 in self.subscribedinstances) {
+    var_1 thread scripts\mp\gametypes\br_quest_util::removequestinstance();
   }
 
   deletedomflaggameobject();
@@ -55,135 +55,135 @@ function domlocale_removelocaleinstance() {
 }
 
 function markplayeraseliminatedonkilled() {
-  var0 = role_edit(self);
-  var1 = scripts\mp\gametypes\br_quest_util::play_train_speaker_vo("domination", var0);
+  var_0 = role_edit(self);
+  var_1 = scripts\mp\gametypes\br_quest_util::play_train_speaker_vo("domination", var_0);
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return false;
   }
 
-  getlootspawnpointcount(var1.index);
-  self.ref_12c4a = var1;
+  getlootspawnpointcount(var_1.index);
+  self.ref_12c4a = var_1;
   return true;
 }
 
-function domlocale_createquestlocale(var0) {
+function domlocale_createquestlocale(var_0) {
   scripts\mp\gametypes\br_quest_util::getquestdata("dom_locale").nextid++;
-  var1 = scripts\mp\gametypes\br_quest_util::createlocaleinstance("dom_locale", "domination", "DomPoint:" + scripts\mp\gametypes\br_quest_util::getquestdata("dom_locale").nextid);
+  var_1 = scripts\mp\gametypes\br_quest_util::createlocaleinstance("dom_locale", "domination", "DomPoint:" + scripts\mp\gametypes\br_quest_util::getquestdata("dom_locale").nextid);
 
-  if(!isDefined(var0)) {
-    var1.curorigin = (0, 0, 0);
-    var1.enabled = 0;
-    return var1;
+  if(!isDefined(var_0)) {
+    var_1.curorigin = (0, 0, 0);
+    var_1.enabled = 0;
+    return var_1;
   }
 
-  var2 = var0.origin;
+  var_2 = var_0.origin;
 
-  if(var0.spawnflags & 7) {}
+  if(var_0.spawnflags & 7) {}
 
-  var3 = scripts\mp\gametypes\br_quest_util::ref_12971(var0);
-  var4 = spawn("trigger_radius", var2, 0, int(var3), int(level.defend_wave_3));
+  var_3 = scripts\mp\gametypes\br_quest_util::ref_12971(var_0);
+  var_4 = spawn("trigger_radius", var_2, 0, int(var_3), int(level.defend_wave_3));
   level.setdomscriptablepartstatefunc = &domflag_setdomscriptablepartstate;
-  var5 = scripts\mp\gametypes\obj_dom::setupobjective(var4, undefined, undefined, undefined, undefined, 0);
-  var5.squadindex = self.squadindex;
-  var5.onuse = &domflag_onuse;
-  var5.onbeginuse = &mark_danger_timeout;
-  var5.onuseupdate = &domflag_onuseupdate;
-  var5.onenduse = &domflag_onenduse;
-  var5.usecondition = &mark_loot;
-  var5.lockupdatingicons = 1;
-  var5.getrandompointincirclewithindistance = 1;
+  var_5 = scripts\mp\gametypes\obj_dom::setupobjective(var_4, undefined, undefined, undefined, undefined, 0);
+  var_5.squadindex = self.squadindex;
+  var_5.onuse = &domflag_onuse;
+  var_5.onbeginuse = &mark_danger_timeout;
+  var_5.onuseupdate = &domflag_onuseupdate;
+  var_5.onenduse = &domflag_onenduse;
+  var_5.usecondition = &mark_loot;
+  var_5.lockupdatingicons = 1;
+  var_5.getrandompointincirclewithindistance = 1;
 
-  if(istrue(self.tablet.ref_11ff8) && isDefined(var0.traincar)) {
+  if(istrue(self.tablet.ref_11ff8) && isDefined(var_0.traincar)) {
     if(istrue(level.ref_145f1.maphint_debugthink)) {
-      var5.flagmodel setModel("lm_domination_point_01_mover_nocol");
+      var_5.flagmodel setModel("lm_domination_point_01_mover_nocol");
     } else {
-      var5.flagmodel setModel("lm_domination_point_01_mover");
+      var_5.flagmodel setModel("lm_domination_point_01_mover");
     }
 
-    var6 = var0.traincar.maphint_keypadscriptableused;
-    var7 = var0.traincar.angles;
+    var_6 = var_0.traincar.maphint_keypadscriptableused;
+    var_7 = var_0.traincar.angles;
 
-    if(isDefined(var0.traincar.manageworldspawnedprojectiles)) {
-      var7 = var0.traincar.manageworldspawnedprojectiles;
+    if(isDefined(var_0.traincar.manageworldspawnedprojectiles)) {
+      var_7 = var_0.traincar.manageworldspawnedprojectiles;
     }
 
-    var5.flagmodel linkTo(var0.traincar.wz_tease, "tag_origin", var6, var7);
-    var4 enablelinkTo();
-    var4 linkTo(var5.flagmodel);
+    var_5.flagmodel linkTo(var_0.traincar.wz_tease, "tag_origin", var_6, var_7);
+    var_4 enablelinkTo();
+    var_4 linkTo(var_5.flagmodel);
 
-    if(isDefined(var5.visuals) && isarray(var5.visuals)) {
-      foreach(var9 in var5.visuals) {
-        var9 linkTo(var5.flagmodel);
+    if(isDefined(var_5.visuals) && isarray(var_5.visuals)) {
+      foreach(var_9 in var_5.visuals) {
+        var_9 linkTo(var_5.flagmodel);
       }
     }
 
-    var5.scriptable linkTo(var0.traincar.wz_tease);
-    var5.traincar = var0.traincar;
-    scripts\mp\objidpoolmanager::update_objective_onentity(var5.objidnum, var5.flagmodel);
+    var_5.scriptable linkTo(var_0.traincar.wz_tease);
+    var_5.traincar = var_0.traincar;
+    scripts\mp\objidpoolmanager::update_objective_onentity(var_5.objidnum, var_5.flagmodel);
   } else {
-    var5.flagmodel setModel("x2_military_old_recon_station");
-    scripts\mp\objidpoolmanager::update_objective_position(var5.objidnum, var5.curorigin + (0, 0, 60));
+    var_5.flagmodel setModel("x2_military_old_recon_station");
+    scripts\mp\objidpoolmanager::update_objective_position(var_5.objidnum, var_5.curorigin + (0, 0, 60));
   }
 
   level.flagcapturetime = getdvarfloat("scr_br_dom_quest_capture_time", 30);
-  var5 scripts\mp\gameobjects::setusetime(level.flagcapturetime);
-  var1.lastcircletick = -1;
-  var1.domflag = var5;
-  var1.curorigin = var5.curorigin;
-  var5.locale = var1;
-  var5.flagmodel.unresolved_collision_func = &ref_13f27;
-  scripts\mp\gametypes\br_quest_util::addquestinstance("dom_locale", var1);
-  return var1;
+  var_5 scripts\mp\gameobjects::setusetime(level.flagcapturetime);
+  var_1.lastcircletick = -1;
+  var_1.domflag = var_5;
+  var_1.curorigin = var_5.curorigin;
+  var_5.locale = var_1;
+  var_5.flagmodel.unresolved_collision_func = &ref_13f27;
+  scripts\mp\gametypes\br_quest_util::addquestinstance("dom_locale", var_1);
+  return var_1;
 }
 
-function domlocale_checkiflocaleisavailable(var0) {
-  var1 = getdvarfloat("scr_br_dom_quest_max_capture_percent", 0.2);
-  var2 = getdvarfloat("scr_br_dom_quest_max_teams", 4);
-  var3 = 0;
+function domlocale_checkiflocaleisavailable(var_0) {
+  var_1 = getdvarfloat("scr_br_dom_quest_max_capture_percent", 0.2);
+  var_2 = getdvarfloat("scr_br_dom_quest_max_teams", 4);
+  var_3 = 0;
 
   if(isDefined(self.domflag.curprogress)) {
-    var3 = self.domflag.curprogress / self.domflag.usetime;
+    var_3 = self.domflag.curprogress / self.domflag.usetime;
   }
 
-  if(var3 > var1) {
+  if(var_3 > var_1) {
     return false;
   }
 
-  if(self.subscribedinstances.size >= var2) {
+  if(self.subscribedinstances.size >= var_2) {
     return false;
   }
 
   return true;
 }
 
-function domlocale_circletick(var0, var1) {
+function domlocale_circletick(var_0, var_1) {
   if(!isDefined(self.domflag)) {
     return;
   }
 
-  var2 = gettime();
+  var_2 = gettime();
 
-  if(self.lastcircletick == var2) {
+  if(self.lastcircletick == var_2) {
     return;
   }
 
-  self.lastcircletick = var2;
+  self.lastcircletick = var_2;
 
   if(isDefined(self.domflag) && isDefined(self.domflag.traincar)) {
     self.curorigin = self.domflag.traincar.origin;
   }
 
-  var3 = distance2d(self.curorigin, var0);
+  var_3 = distance2d(self.curorigin, var_0);
 
-  if(var3 > var1) {
-    foreach(var5 in self.subscribedinstances) {
-      scripts\mp\gametypes\br_quest_util::displayteamsplash(var5.team, "br_domination_quest_circle_failure");
-      level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_obj_circle_fail", var5.team, 1);
-      var5.result = "circle";
+  if(var_3 > var_1) {
+    foreach(var_5 in self.subscribedinstances) {
+      scripts\mp\gametypes\br_quest_util::displayteamsplash(var_5.team, "br_domination_quest_circle_failure");
+      level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_obj_circle_fail", var_5.team, 1);
+      var_5.result = "circle";
 
-      if(isDefined(var5.tablet.trackriotshield_grenadepullbackforc4)) {
-        [[var5.tablet.trackriotshield_grenadepullbackforc4]](var5);
+      if(isDefined(var_5.tablet.trackriotshield_grenadepullbackforc4)) {
+        [[var_5.tablet.trackriotshield_grenadepullbackforc4]](var_5);
       }
     }
 
@@ -192,81 +192,81 @@ function domlocale_circletick(var0, var1) {
   }
 }
 
-function marked_for_no_death(var0) {
-  mark_danger(var0);
+function marked_for_no_death(var_0) {
+  mark_danger(var_0);
 }
 
-function markedentities_removeentsbyindex(var0) {
-  if(var0.team == self.subscribedinstances[0].team) {
-    mark_location(var0);
+function markedentities_removeentsbyindex(var_0) {
+  if(var_0.team == self.subscribedinstances[0].team) {
+    mark_location(var_0);
     return;
   }
 }
 
-function takequestitem(var0) {
-  var1 = scripts\mp\gametypes\br_quest_util::createquestinstance("domination", self.team, var0.index, var0, self.squadindex);
-  var2 = "";
+function takequestitem(var_0) {
+  var_1 = scripts\mp\gametypes\br_quest_util::createquestinstance("domination", self.team, var_0.index, var_0, self.squadindex);
+  var_2 = "";
 
-  if(var0.type == "brloot_redacted_domination_tablet") {
-    var2 = "_redacted";
+  if(var_0.type == "brloot_redacted_domination_tablet") {
+    var_2 = "_redacted";
   }
 
-  var1.modifier = var2;
-  var1 scripts\mp\gametypes\br_quest_util::registerteamonquest(self.team, self);
-  var1 scripts\mp\gametypes\br_quest_util::ref_12b15(self);
-  var1.team = self.team;
-  var1.tablet = var0;
-  var3 = getdvarint("scr_br_DOM_questTime", 240);
-  var1 scripts\mp\gametypes\br_quest_util::ref_1297d(var3, 4);
-  var4 = role_edit(var0);
-  var5 = var1 scripts\mp\gametypes\br_quest_util::requestquestlocale("dom_locale", var4, 1);
+  var_1.modifier = var_2;
+  var_1 scripts\mp\gametypes\br_quest_util::registerteamonquest(self.team, self);
+  var_1 scripts\mp\gametypes\br_quest_util::ref_12b15(self);
+  var_1.team = self.team;
+  var_1.tablet = var_0;
+  var_3 = getdvarint("scr_br_DOM_questTime", 240);
+  var_1 scripts\mp\gametypes\br_quest_util::ref_1297d(var_3, 4);
+  var_4 = role_edit(var_0);
+  var_5 = var_1 scripts\mp\gametypes\br_quest_util::requestquestlocale("dom_locale", var_4, 1);
 
-  if(!var5.enabled) {
-    var1.result = "no_locale";
+  if(!var_5.enabled) {
+    var_1.result = "no_locale";
 
-    if(isDefined(var1.tablet.trackriotshield_grenadepullbackforc4)) {
-      [[var1.tablet.trackriotshield_grenadepullbackforc4]](var1);
+    if(isDefined(var_1.tablet.trackriotshield_grenadepullbackforc4)) {
+      [[var_1.tablet.trackriotshield_grenadepullbackforc4]](var_1);
     }
 
-    var1 scripts\mp\gametypes\br_quest_util::releaseteamonquest(self.team);
+    var_1 scripts\mp\gametypes\br_quest_util::releaseteamonquest(self.team);
     return;
   }
 
-  domflagupdateicons(var5);
-  scripts\mp\gametypes\br_quest_util::uiobjectiveshowtoteam("domination" + var1.modifier, self.team);
-  scripts\mp\gametypes\br_quest_util::addquestinstance("domination", var1);
+  domflagupdateicons(var_5);
+  scripts\mp\gametypes\br_quest_util::uiobjectiveshowtoteam("domination" + var_1.modifier, self.team);
+  scripts\mp\gametypes\br_quest_util::addquestinstance("domination", var_1);
   scripts\mp\gametypes\br_quest_util::ref_13879("domination", self, self.team);
-  var6 = spawnStruct();
-  var6.excludedplayers = [];
-  var6.excludedplayers[0] = self;
-  var6.ref_127d5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("domination", scripts\mp\gametypes\br_quest_util::ringing(self.team), var1.modifier);
-  scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_domination_quest_start_team", var6);
-  scripts\mp\gametypes\br_quest_util::displayplayersplash(self, "br_domination_quest_start_tablet_finder", var6);
+  var_6 = spawnStruct();
+  var_6.excludedplayers = [];
+  var_6.excludedplayers[0] = self;
+  var_6.ref_127d5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("domination", scripts\mp\gametypes\br_quest_util::ringing(self.team), var_1.modifier);
+  scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_domination_quest_start_team", var_6);
+  scripts\mp\gametypes\br_quest_util::displayplayersplash(self, "br_domination_quest_start_tablet_finder", var_6);
   scripts\mp\gametypes\br_quest_util::searchfunc(self.team, "br_mission_pickup_tablet");
-  scripts\mp\gametypes\br_quest_util::lookforvehicles(var1.team, self, 6, scripts\mp\gametypes\br_quest_util::getquestindex("domination"));
-  level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_dom_accept", var1.team, 1);
-  return var1;
+  scripts\mp\gametypes\br_quest_util::lookforvehicles(var_1.team, self, 6, scripts\mp\gametypes\br_quest_util::getquestindex("domination"));
+  level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_dom_accept", var_1.team, 1);
+  return var_1;
 }
 
 function domflagupdateicons() {
   objective_showtoplayersinmask(self.domflag.objidnum);
   objective_removeallfrommask(self.domflag.objidnum);
 
-  foreach(var1 in self.subscribedinstances) {
-    foreach(var3 in scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var1.team, self.squadindex)) {
-      if(!var3 scripts\mp\gametypes\br_public::isplayeringulag()) {
-        objective_addclienttomask(self.domflag.objidnum, var3);
+  foreach(var_1 in self.subscribedinstances) {
+    foreach(var_3 in scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_1.team, self.squadindex)) {
+      if(!var_3 scripts\mp\gametypes\br_public::isplayeringulag()) {
+        objective_addclienttomask(self.domflag.objidnum, var_3);
       }
     }
   }
 }
 
-function mark_danger(var0) {
-  objective_removeclientfrommask(self.domflag.objidnum, var0);
+function mark_danger(var_0) {
+  objective_removeclientfrommask(self.domflag.objidnum, var_0);
 }
 
-function mark_location(var0) {
-  objective_addclienttomask(self.domflag.objidnum, var0);
+function mark_location(var_0) {
+  objective_addclienttomask(self.domflag.objidnum, var_0);
 }
 
 function mark_phone_guy_once_all_spawned() {
@@ -276,8 +276,8 @@ function mark_phone_guy_once_all_spawned() {
 }
 
 function deletedomflaggameobject() {
-  foreach(var1 in self.domflag.visuals) {
-    var1 delete();
+  foreach(var_1 in self.domflag.visuals) {
+    var_1 delete();
   }
 
   if(isDefined(self.domflag.flagmodel)) {
@@ -332,167 +332,167 @@ function ref_13239() {
   _setdomflagiconinfo("icon_waypoint_ot", "neutral", "MP_INGAME_ONLY/OBJ_OTFLAGLOC_CAPS", 0);
 }
 
-function _setdomflagiconinfo(var0, var1, var2, var3) {
-  level.waypointcolors[var0] = var1;
-  level.waypointbgtype[var0] = 1;
-  level.waypointstring[var0] = var2;
-  level.waypointshader[var0] = "ui_mp_br_mapmenu_icon_dom_objective";
-  level.waypointpulses[var0] = var3;
+function _setdomflagiconinfo(var_0, var_1, var_2, var_3) {
+  level.waypointcolors[var_0] = var_1;
+  level.waypointbgtype[var_0] = 1;
+  level.waypointstring[var_0] = var_2;
+  level.waypointshader[var_0] = "ui_mp_br_mapmenu_icon_dom_objective";
+  level.waypointpulses[var_0] = var_3;
 }
 
-function domflag_onuseupdate(var0, var1, var2, var3) {
-  if(var1 < 1 && !level.gameended) {
-    ref_12427(var1, var0);
+function domflag_onuseupdate(var_0, var_1, var_2, var_3) {
+  if(var_1 < 1 && !level.gameended) {
+    ref_12427(var_1, var_0);
   }
 
-  if(var1 > 0.05 && var2 && !istrue(self.didstatusnotify)) {
+  if(var_1 > 0.05 && var_2 && !istrue(self.didstatusnotify)) {
     self.didstatusnotify = 1;
     return;
   }
 }
 
-function mark_danger_timeout(var0) {
+function mark_danger_timeout(var_0) {
   if(!isDefined(self.ref_11f63) || !self.ref_11f63) {
     self.ref_11f63 = 1;
 
     if(isDefined(self.traincar)) {
       if(isDefined(level.ref_145f1) && istrue(level.ref_145f1.mark_armor)) {
-        var1 = self.traincar.maphint_keypadscriptableused + (200, 0, 0);
-        var2 = self.traincar.origin + rotatevector(var1, self.traincar.angles);
-        level thread scripts\mp\gametypes\br_quest_util::ref_140b1(var2, "dom", 3);
+        var_1 = self.traincar.maphint_keypadscriptableused + (200, 0, 0);
+        var_2 = self.traincar.origin + rotatevector(var_1, self.traincar.angles);
+        level thread scripts\mp\gametypes\br_quest_util::ref_140b1(var_2, "dom", 3);
       }
     } else {
       level thread scripts\mp\gametypes\br_quest_util::ref_140b1(self.curorigin, "dom");
     }
 
-    var3 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var0.team, self.squadindex);
-    var4 = scripts\mp\utility\player::getplayersinradius(self.curorigin, 7800, undefined, var3);
+    var_3 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_0.team, self.squadindex);
+    var_4 = scripts\mp\utility\player::getplayersinradius(self.curorigin, 7800, undefined, var_3);
 
-    foreach(var6 in var4) {
-      if(isDefined(var6) && isalive(var6)) {
-        var6 thread scripts\mp\hud_message::showsplash("br_domination_quest_alert");
+    foreach(var_6 in var_4) {
+      if(isDefined(var_6) && isalive(var_6)) {
+        var_6 thread scripts\mp\hud_message::showsplash("br_domination_quest_alert");
       }
     }
 
-    var8 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var0.team, self.squadindex);
+    var_8 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_0.team, self.squadindex);
 
-    foreach(var10 in var8) {
-      var10 notify("calloutmarkerping_warzoneKillQuestIcon");
+    foreach(var_10 in var_8) {
+      var_10 notify("calloutmarkerping_warzoneKillQuestIcon");
     }
 
     return;
   }
 }
 
-function domflag_onuse(var0) {
-  foreach(var2 in self.locale.subscribedinstances) {
-    if(var2.team == var0.team) {
-      var3 = spawnStruct();
-      var4 = scripts\mp\gametypes\br_quest_util::ringing(var0.team);
-      var5 = scripts\mp\gametypes\br_quest_util::getquestindex("domination" + var2.modifier);
-      var6 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("domination", var2.modifier));
-      var7 = scripts\mp\gametypes\br_alt_mode_bblitz::clear_all_remaining(var0);
-      var3.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var5, var4, var6, undefined, var7);
-      self.squadindex = var2.squadindex;
-      scripts\mp\gametypes\br_quest_util::displayteamsplash(var2.team, "br_domination_quest_complete", var3);
-      scripts\mp\gametypes\br_quest_util::lookforvehicles(var2.team, var0, 8, var5);
-      level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_dom_success", var2.team, 1, 1);
-      var2.ref_12d2e = self.flagmodel.origin;
-      var2.ref_12d2b = self.flagmodel.angles;
-      var2.result = "success";
+function domflag_onuse(var_0) {
+  foreach(var_2 in self.locale.subscribedinstances) {
+    if(var_2.team == var_0.team) {
+      var_3 = spawnStruct();
+      var_4 = scripts\mp\gametypes\br_quest_util::ringing(var_0.team);
+      var_5 = scripts\mp\gametypes\br_quest_util::getquestindex("domination" + var_2.modifier);
+      var_6 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("domination", var_2.modifier));
+      var_7 = scripts\mp\gametypes\br_alt_mode_bblitz::clear_all_remaining(var_0);
+      var_3.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var_5, var_4, var_6, undefined, var_7);
+      self.squadindex = var_2.squadindex;
+      scripts\mp\gametypes\br_quest_util::displayteamsplash(var_2.team, "br_domination_quest_complete", var_3);
+      scripts\mp\gametypes\br_quest_util::lookforvehicles(var_2.team, var_0, 8, var_5);
+      level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_dom_success", var_2.team, 1, 1);
+      var_2.ref_12d2e = self.flagmodel.origin;
+      var_2.ref_12d2b = self.flagmodel.angles;
+      var_2.result = "success";
 
-      if(isDefined(var2.tablet.trackriotshield_grenadepullbackforc4)) {
-        [[var2.tablet.trackriotshield_grenadepullbackforc4]](var2);
+      if(isDefined(var_2.tablet.trackriotshield_grenadepullbackforc4)) {
+        [[var_2.tablet.trackriotshield_grenadepullbackforc4]](var_2);
       }
 
-      if(isDefined(self.assisttouchlist[var2.team])) {
-        var8 = getarraykeys(self.assisttouchlist[var2.team]);
+      if(isDefined(self.assisttouchlist[var_2.team])) {
+        var_8 = getarraykeys(self.assisttouchlist[var_2.team]);
 
-        foreach(var10 in var8) {
-          var11 = self.assisttouchlist[var2.team][var10].player;
+        foreach(var_10 in var_8) {
+          var_11 = self.assisttouchlist[var_2.team][var_10].player;
 
-          if(isDefined(var11.owner)) {
-            var11 = var11.owner;
+          if(isDefined(var_11.owner)) {
+            var_11 = var_11.owner;
           }
 
-          if(!isPlayer(var11)) {
+          if(!isPlayer(var_11)) {
             continue;
           }
 
-          var11 scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_complete_recon_objective_for_operator_mission", 1);
-          var11 scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_complete_recon_objective_for_operator_mission_op2", 1);
-          var2 scripts\mp\gametypes\br_quest_util::ref_12b15(var11);
+          var_11 scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_complete_recon_objective_for_operator_mission", 1);
+          var_11 scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_complete_recon_objective_for_operator_mission_op2", 1);
+          var_2 scripts\mp\gametypes\br_quest_util::ref_12b15(var_11);
         }
       }
 
       continue;
     }
 
-    scripts\mp\gametypes\br_quest_util::displayteamsplash(var2.team, "br_domination_quest_failure");
-    level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_gen_fail", var2.team, 1);
-    var2.result = "fail";
+    scripts\mp\gametypes\br_quest_util::displayteamsplash(var_2.team, "br_domination_quest_failure");
+    level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_gen_fail", var_2.team, 1);
+    var_2.result = "fail";
 
-    if(isDefined(var2.tablet.trackriotshield_grenadepullbackforc4)) {
-      [[var2.tablet.trackriotshield_grenadepullbackforc4]](var2);
+    if(isDefined(var_2.tablet.trackriotshield_grenadepullbackforc4)) {
+      [[var_2.tablet.trackriotshield_grenadepullbackforc4]](var_2);
     }
   }
 
   self.locale thread scripts\mp\gametypes\br_quest_util::removequestinstance();
 }
 
-function domflag_onenduse(var0, var1, var2) {
-  scripts\mp\gametypes\obj_dom::dompoint_onuseend(var0, var1, var2);
+function domflag_onenduse(var_0, var_1, var_2) {
+  scripts\mp\gametypes\obj_dom::dompoint_onuseend(var_0, var_1, var_2);
 }
 
-function ref_12427(var0, var1) {
+function ref_12427(var_0, var_1) {
   if(!isDefined(self.lastsfxplayedtime)) {
     self.lastsfxplayedtime = gettime();
   }
 
   if(self.lastsfxplayedtime + 995 < gettime()) {
     self.lastsfxplayedtime = gettime();
-    var2 = "";
-    var0 = int(floor(var0 * 10));
-    var2 = "mp_dom_capturing_tick_0" + var0;
-    self.visuals[0] playsoundtoteam(var2, var1);
+    var_2 = "";
+    var_0 = int(floor(var_0 * 10));
+    var_2 = "mp_dom_capturing_tick_0" + var_0;
+    self.visuals[0] playsoundtoteam(var_2, var_1);
     return;
   }
 }
 
-function domflag_setdomscriptablepartstate(var0, var1, var2) {
-  switch (var1) {
+function domflag_setdomscriptablepartstate(var_0, var_1, var_2) {
+  switch (var_1) {
     case "contested":
     case "idle":
     case "off":
       return 0;
     default:
-      var1 = "using";
+      var_1 = "using";
 
-      if(isDefined(var2)) {
-        var1 += var2;
+      if(isDefined(var_2)) {
+        var_1 += var_2;
       }
 
-      self.scriptable setscriptablepartstate(var0, var1);
+      self.scriptable setscriptablepartstate(var_0, var_1);
 
-      if(var0 == "pulse") {
-        self.scriptable setscriptablepartstate("flag", var1);
+      if(var_0 == "pulse") {
+        self.scriptable setscriptablepartstate("flag", var_1);
       }
 
       return 1;
   }
 }
 
-function mark_loot(var0) {
+function mark_loot(var_0) {
   if(getdvarint("scr_br_alt_mode_gxp", 0)) {
-    if(var0 scripts\mp\gametypes\br_public::ref_125ec()) {
+    if(var_0 scripts\mp\gametypes\br_public::ref_125ec()) {
       return false;
     }
   }
 
-  var1 = var0.team;
+  var_1 = var_0.team;
 
-  foreach(var3 in self.locale.subscribedinstances) {
-    if(var3.team == var1) {
+  foreach(var_3 in self.locale.subscribedinstances) {
+    if(var_3.team == var_1) {
       return true;
     }
   }
@@ -509,71 +509,71 @@ function maphint_offerscriptableused() {
   level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_gen_fail", self.team, 1);
 }
 
-function role_edit(var0) {
-  var1 = spawnStruct();
-  var1.ref_12fa3 = "questPointsArray";
-  var1.ref_12f9f = (var0.origin[0], var0.origin[1], 0);
-  var1.ref_12fa6 = 12000;
-  var1.ref_12fa7 = 0;
-  var1.ref_12fa4 = 8000;
-  var1.ref_12fa5 = 6000;
-  var1.ref_1297f = 7;
-  var1.mintime = getdvarfloat("scr_br_dom_quest_capture_time", 30);
-  var1.ref_12fa1 = 1;
-  var1.ref_12c4a = var0.ref_12c4a;
+function role_edit(var_0) {
+  var_1 = spawnStruct();
+  var_1.ref_12fa3 = "questPointsArray";
+  var_1.ref_12f9f = (var_0.origin[0], var_0.origin[1], 0);
+  var_1.ref_12fa6 = 12000;
+  var_1.ref_12fa7 = 0;
+  var_1.ref_12fa4 = 8000;
+  var_1.ref_12fa5 = 6000;
+  var_1.ref_1297f = 7;
+  var_1.mintime = getdvarfloat("scr_br_dom_quest_capture_time", 30);
+  var_1.ref_12fa1 = 1;
+  var_1.ref_12c4a = var_0.ref_12c4a;
 
   if(playmatchendcamera()) {
-    if(var1.ref_12fa6 < level.ref_12965) {
-      var1.ref_12fa6 = level.ref_12965;
+    if(var_1.ref_12fa6 < level.ref_12965) {
+      var_1.ref_12fa6 = level.ref_12965;
     }
 
-    var1.ref_12fa4 = level.ref_12965;
-    var1.ref_12fa5 = level.ref_12966;
+    var_1.ref_12fa4 = level.ref_12965;
+    var_1.ref_12fa5 = level.ref_12966;
   }
 
-  if(istrue(var0.ref_11ff8)) {
-    var1.ref_12fa3 = "questPointsArrayWZTrain";
-    var1.ref_1407e = 1;
+  if(istrue(var_0.ref_11ff8)) {
+    var_1.ref_12fa3 = "questPointsArrayWZTrain";
+    var_1.ref_1407e = 1;
   }
 
-  var2 = getdvarint("scr_br_questDomDistMin", -1);
-  var3 = getdvarint("scr_br_questDomDistMax", -1);
+  var_2 = getdvarint("scr_br_questDomDistMin", -1);
+  var_3 = getdvarint("scr_br_questDomDistMax", -1);
 
-  if(var2 >= 0) {
-    var1.ref_12fa5 = var2;
+  if(var_2 >= 0) {
+    var_1.ref_12fa5 = var_2;
   }
 
-  if(var3 >= 0) {
-    var1.ref_12fa4 = var3;
+  if(var_3 >= 0) {
+    var_1.ref_12fa4 = var_3;
   }
 
-  return var1;
+  return var_1;
 }
 
 function playmatchendcamera() {
-  var0 = 0;
-  var1 = scripts\mp\gametypes\br_gametypes::ref_12e05("overrideQuestSearchParams", "domination");
+  var_0 = 0;
+  var_1 = scripts\mp\gametypes\br_gametypes::ref_12e05("overrideQuestSearchParams", "domination");
 
-  if(isDefined(var1)) {
-    return var1;
+  if(isDefined(var_1)) {
+    return var_1;
   }
 
-  var2 = scripts\mp\utility\game::round_vehicle_logic();
+  var_2 = scripts\mp\utility\game::round_vehicle_logic();
 
-  switch (var2) {
+  switch (var_2) {
     case "mini":
     case "gold_war":
     case "risk":
     case "rat_race":
     case "dmz":
-      var0 = 1;
+      var_0 = 1;
       break;
   }
 
-  return var0;
+  return var_0;
 }
 
-function ref_13f27(var0, var1) {
-  var0 setOrigin(var0.origin + (0, 0, 34));
-  var0 setstance("crouch");
+function ref_13f27(var_0, var_1) {
+  var_0 setOrigin(var_0.origin + (0, 0, 34));
+  var_0 setstance("crouch");
 }

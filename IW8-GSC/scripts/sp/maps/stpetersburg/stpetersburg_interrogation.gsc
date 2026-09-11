@@ -38,15 +38,15 @@ function interrogation_init() {
   scripts\engine\utility::flag_init("enforcer_dead");
   scripts\engine\utility::flag_init("wife_dead");
   scripts\engine\utility::flag_init("son_dead");
-  var0 = getEnt("revolver", "targetname");
-  var0 hidepart("tag_rail");
-  var0 attach("attachment_wm_pi_cpapa_barrel");
-  var0 hidepart("tag_laser_show");
-  var0 hide();
-  var1 = getEntArray("bullets", "targetname");
-  scripts\engine\utility::array_call(var1, &hide);
-  var2 = getEntArray("outro_gas_barrel", "targetname");
-  scripts\engine\utility::array_call(var2, &hide);
+  var_0 = getEnt("revolver", "targetname");
+  var_0 hidepart("tag_rail");
+  var_0 attach("attachment_wm_pi_cpapa_barrel");
+  var_0 hidepart("tag_laser_show");
+  var_0 hide();
+  var_1 = getEntArray("bullets", "targetname");
+  scripts\engine\utility::array_call(var_1, &hide);
+  var_2 = getEntArray("outro_gas_barrel", "targetname");
+  scripts\engine\utility::array_call(var_2, &hide);
   setDvar("stp_family_deaths", 0);
 }
 
@@ -70,10 +70,10 @@ function interrogation_main() {
     scripts\engine\utility::flag_set("lighting_interrogation_gameplay");
     level.blackoverlay fadeovertime(1);
     level.blackoverlay.alpha = 0;
-    var0 = getEntArray("interrogation_handoff_clip", "targetname");
-    scripts\engine\utility::array_delete(var0);
-    var1 = getEnt("interrogation_hallway_intro_clip", "targetname");
-    var1 delete();
+    var_0 = getEntArray("interrogation_handoff_clip", "targetname");
+    scripts\engine\utility::array_delete(var_0);
+    var_1 = getEnt("interrogation_hallway_intro_clip", "targetname");
+    var_1 delete();
     blendshape_enable(level.enforcer);
     blendshape_enable(level.price);
     level.familychair show();
@@ -114,12 +114,12 @@ function player_setup() {
 }
 
 function family_setup() {
-  var0 = getspawner("enforcer_wife", "targetname");
-  var1 = getspawner("enforcer_son", "targetname");
-  var2 = getdvarint("stp_interrogation_phase") > 1;
+  var_0 = getspawner("enforcer_wife", "targetname");
+  var_1 = getspawner("enforcer_son", "targetname");
+  var_2 = getdvarint("stp_interrogation_phase") > 1;
 
   if(!isDefined(level.enforcerwife)) {
-    level.enforcerwife = var0 scripts\engine\sp\utility::spawn_ai(1);
+    level.enforcerwife = var_0 scripts\engine\sp\utility::spawn_ai(1);
     level.enforcerwife.name = "Ousa";
     level.enforcerwife.animname = "interrogation_mother";
     level.enforcerwife.skip_friendly_fire_check = 1;
@@ -129,7 +129,7 @@ function family_setup() {
   }
 
   if(!isDefined(level.enforcerson)) {
-    level.enforcerson = var1 scripts\engine\sp\utility::spawn_ai(1);
+    level.enforcerson = var_1 scripts\engine\sp\utility::spawn_ai(1);
     level.enforcerson.name = "Amon";
     level.enforcerson.animname = "interrogation_son";
     level.enforcerson.skip_friendly_fire_check = 1;
@@ -138,7 +138,7 @@ function family_setup() {
     level.enforcerson.anim_playvo_func = &scripts\engine\utility::playsoundontag;
   }
 
-  if(var2) {
+  if(var_2) {
     level.enforcerwife.civiliannameplate = 1;
     level.enforcerson.civiliannameplate = 1;
     level.enforcerwife notify("stop_civ_stationary_ff_penalty");
@@ -182,8 +182,8 @@ function interrogation_anim_setup() {
   level.yegor scripts\common\ai::gun_remove();
   level.price.script_pushable = 0;
   level.price pushplayer(1);
-  var0 = scripts\sp\utility::make_weapon("iw8_pi_cpapa");
-  level.price scripts\anim\shared::forceuseweapon(var0, "primary");
+  var_0 = scripts\sp\utility::make_weapon("iw8_pi_cpapa");
+  level.price scripts\anim\shared::forceuseweapon(var_0, "primary");
   level.price scripts\common\ai::gun_remove();
   level.enforceranimnode = scripts\engine\utility::getStruct("enforcer_anim_node", "targetname");
   level.priceanimnode = scripts\engine\utility::getStruct("price_anim_node", "targetname");
@@ -205,13 +205,13 @@ function interrogation_door_anim_setup() {
   level.interrogationdoor scripts\sp\door::remove_open_prompts();
   level.interrogationdoor.animname = "interrogation_door";
   level.interrogationdoor useanimtree(level.scr_animtree["interrogation_door"]);
-  var0 = getEnt("interrogation_door_clip", "targetname");
-  var0 linkTo(level.interrogationdoor);
+  var_0 = getEnt("interrogation_door_clip", "targetname");
+  var_0 linkTo(level.interrogationdoor);
   level.garagedoor = getEnt("interrogation_garage_door", "targetname");
   level.garagedoor.animname = "garage_door";
   level.garagedoor useanimtree(level.scr_animtree["garage_door"]);
-  var1 = getEnt("interrogation_garage_door_clip", "targetname");
-  var1 linkTo(level.garagedoor);
+  var_1 = getEnt("interrogation_garage_door_clip", "targetname");
+  var_1 linkTo(level.garagedoor);
 }
 
 function interrogation_chair_anim_setup() {
@@ -236,30 +236,30 @@ function nikolai_van_anim_setup() {
   level.nikolaivan = getEnt("interrogation_van", "script_noteworthy");
   level.nikolaivan.animname = "van";
   level.nikolaivan useanimtree(level.scr_animtree["van"]);
-  var0 = getEnt("nikolai_van_light", "targetname");
-  var0 linkTo(level.nikolaivan);
-  var1 = getEnt("clip_van_door_rear_left", "targetname");
-  var1 linkTo(level.nikolaivan, "tag_door_rear_left");
-  var2 = getEnt("clip_van_door_rear_right", "targetname");
-  var2 linkTo(level.nikolaivan, "tag_door_rear_right");
+  var_0 = getEnt("nikolai_van_light", "targetname");
+  var_0 linkTo(level.nikolaivan);
+  var_1 = getEnt("clip_van_door_rear_left", "targetname");
+  var_1 linkTo(level.nikolaivan, "tag_door_rear_left");
+  var_2 = getEnt("clip_van_door_rear_right", "targetname");
+  var_2 linkTo(level.nikolaivan, "tag_door_rear_right");
   playFXOnTag(scripts\engine\utility::getfx("vfx_stpburg_backup_lights_utility_van"), level.nikolaivan, "tag_hood");
 }
 
 function script_lookat_setup() {
-  var0 = scripts\engine\utility::spawn_tag_origin(level.player getEye() + (0, 0, 15), level.player.angles);
-  var0 linkTo(level.player);
-  var1 = level.player getplayerangles();
-  var2 = level.player getEye() + anglestoleft(var1) * 25 + anglestoup(var1) * -15;
-  var3 = scripts\engine\utility::spawn_tag_origin(var2, level.player.angles);
-  var3 linkTo(level.player);
-  var4 = anglesToForward(level.enforcer.angles);
-  var5 = scripts\engine\utility::spawn_tag_origin(level.enforcer.origin + (0, 0, -64) + var4 * 64, level.enforcer.angles);
-  var6 = getEnt("revolver", "targetname");
-  var7 = scripts\engine\utility::spawn_tag_origin(var6.origin + (0, 0, 10), var6.angles);
-  level.player.headlookatoffset = var0;
-  level.player.escortlookatoffset = var3;
-  level.enforcer.defeatedlookat = var5;
-  level.proptablelookat = var7;
+  var_0 = scripts\engine\utility::spawn_tag_origin(level.player getEye() + (0, 0, 15), level.player.angles);
+  var_0 linkTo(level.player);
+  var_1 = level.player getplayerangles();
+  var_2 = level.player getEye() + anglestoleft(var_1) * 25 + anglestoup(var_1) * -15;
+  var_3 = scripts\engine\utility::spawn_tag_origin(var_2, level.player.angles);
+  var_3 linkTo(level.player);
+  var_4 = anglesToForward(level.enforcer.angles);
+  var_5 = scripts\engine\utility::spawn_tag_origin(level.enforcer.origin + (0, 0, -64) + var_4 * 64, level.enforcer.angles);
+  var_6 = getEnt("revolver", "targetname");
+  var_7 = scripts\engine\utility::spawn_tag_origin(var_6.origin + (0, 0, 10), var_6.angles);
+  level.player.headlookatoffset = var_0;
+  level.player.escortlookatoffset = var_3;
+  level.enforcer.defeatedlookat = var_5;
+  level.proptablelookat = var_7;
 }
 
 function intimidate_setup() {
@@ -332,8 +332,8 @@ function interrogation_intro() {
   price_content_warning();
   scripts\engine\utility::flag_wait("interrogation_escort_done");
   level.outeranimnode scripts\engine\utility::delaythread(5.7, &scripts\common\anim::anim_last_frame_solo, level.interrogationdoor, "decline_exit");
-  var0 = getEnt("interrogation_hallway_clip", "targetname");
-  var0 show();
+  var_0 = getEnt("interrogation_hallway_clip", "targetname");
+  var_0 show();
   level.interrogationdoor thread scripts\engine\sp\utility::notify_delay("create_abandon_interact", 6);
 }
 
@@ -341,10 +341,10 @@ function interrogation_intro_init() {
   scripts\engine\utility::trigger_off("escort_slowdown_trigger", "targetname");
   scripts\engine\utility::trigger_off("escort_hallway_trigger", "targetname");
   scripts\engine\utility::trigger_off("escort_handoff_trigger", "targetname");
-  var0 = getEnt("interrogation_hallway_clip", "targetname");
-  var0 hide();
-  var1 = getEnt("interrogation_nikolai_clip", "targetname");
-  var1 hide();
+  var_0 = getEnt("interrogation_hallway_clip", "targetname");
+  var_0 hide();
+  var_1 = getEnt("interrogation_nikolai_clip", "targetname");
+  var_1 hide();
   thread scripts\sp\maps\stpetersburg\stpetersburg_utility::interrogation_room_door_open("interrogation_garage_door", 0.05);
   level.nikolaivan scripts\engine\sp\utility::anim_stopanimScripted();
   level.wifeanimnode notify("stop_loop");
@@ -378,10 +378,10 @@ function door_intro_performance() {
   thread door_intro_end();
 }
 
-function delay_fade(var0, var1) {
-  wait var0;
+function delay_fade(var_0, var_1) {
+  wait var_0;
   level.blackoverlay fadeovertime(3.5);
-  level.blackoverlay.alpha = var1;
+  level.blackoverlay.alpha = var_1;
 }
 
 function interrogation_intro_camera() {
@@ -396,25 +396,25 @@ function interrogation_intro_camera() {
   scripts\engine\utility::flag_set("lighting_interrogation_intro_cinematic");
   interrogation_rig_enable("interrogation_intro", undefined, 0.1, undefined, 0);
   thread interrogation_cine_letterboxing();
-  var0 = getspawner("stakeout_fake_player", "targetname");
-  var0.count = 1;
-  var1 = var0 scripts\engine\sp\utility::spawn_ai(1);
-  var1.animname = "fake_player";
-  var1 scripts\common\ai::gun_remove();
-  var1 visiblenotsolid();
+  var_0 = getspawner("stakeout_fake_player", "targetname");
+  var_0.count = 1;
+  var_1 = var_0 scripts\engine\sp\utility::spawn_ai(1);
+  var_1.animname = "fake_player";
+  var_1 scripts\common\ai::gun_remove();
+  var_1 visiblenotsolid();
   name_hide_array([level.enforcer, level.yegor, level.price]);
   scripts\engine\utility::flag_set("flag_bink_active");
-  var2 = level.enforceranimnode;
-  var3 = getanimlength(level.player.rig scripts\engine\utility::getanim("interrogation_intro"));
-  level thread scripts\engine\sp\utility::notify_delay("stop_cine_letterboxing", var3 - 1.5);
-  level thread scripts\engine\sp\utility::notify_delay("van_intro_trigger", var3 - 3);
-  thread interrogation_dof_settings(var1);
+  var_2 = level.enforceranimnode;
+  var_3 = getanimlength(level.player.rig scripts\engine\utility::getanim("interrogation_intro"));
+  level thread scripts\engine\sp\utility::notify_delay("stop_cine_letterboxing", var_3 - 1.5);
+  level thread scripts\engine\sp\utility::notify_delay("van_intro_trigger", var_3 - 3);
+  thread interrogation_dof_settings(var_1);
   level.yegoranimnode thread scripts\common\anim::anim_single_solo(level.interrogationdoor, "interrogation_intro");
-  var4 = [level.enforcer, level.yegor, level.price, level.player.rig, var1];
-  var5 = scripts\engine\utility::array_combine(var4, [level.interrogationdoor]);
-  thread interrogation_cine_skip(var5, "interrogation_intro", 1);
+  var_4 = [level.enforcer, level.yegor, level.price, level.player.rig, var_1];
+  var_5 = scripts\engine\utility::array_combine(var_4, [level.interrogationdoor]);
+  thread interrogation_cine_skip(var_5, "interrogation_intro", 1);
   thread interrogation_rig_disable("interrogation_intro");
-  var2 scripts\common\anim::anim_single(var4, "interrogation_intro");
+  var_2 scripts\common\anim::anim_single(var_4, "interrogation_intro");
   scripts\sp\utility::userskip_stop();
   level.player showlegsandshadow();
   level.player freezecontrols(0);
@@ -422,12 +422,12 @@ function interrogation_intro_camera() {
   level.player disableinvulnerability();
   level.player scripts\common\utility::allow_cinematic_motion(1, "intro");
   setomnvar("ui_hide_hud", 0);
-  var1 delete();
+  var_1 delete();
   name_show_array([level.enforcer, level.yegor, level.price]);
   scripts\engine\utility::flag_clear("flag_bink_active");
 }
 
-function interrogation_dof_settings(var0) {
+function interrogation_dof_settings(var_0) {
   level endon("intro_skipped");
   setsaveddvar("SLSMSSTQP", ".1");
   level.player modifybasefov(65, 0.05);
@@ -436,11 +436,11 @@ function interrogation_dof_settings(var0) {
   level.price thread scripts\engine\sp\utility::dof_enable_autofocus(1.4, 1, undefined, undefined, "tag_eye", undefined, 1);
   wait 10;
   level.player modifybasefov(55, 10);
-  var0 thread scripts\engine\sp\utility::dof_enable_autofocus(1, 3, undefined, undefined, "tag_eye", undefined, 1);
+  var_0 thread scripts\engine\sp\utility::dof_enable_autofocus(1, 3, undefined, undefined, "tag_eye", undefined, 1);
   wait 10;
   level.price thread scripts\engine\sp\utility::dof_enable_autofocus(1, 2, undefined, undefined, "tag_eye", undefined, 1);
   wait 6;
-  var0 thread scripts\engine\sp\utility::dof_enable_autofocus(1.4, 2, undefined, undefined, "tag_eye", undefined, 1);
+  var_0 thread scripts\engine\sp\utility::dof_enable_autofocus(1.4, 2, undefined, undefined, "tag_eye", undefined, 1);
   wait 2;
   scripts\engine\sp\utility::dof_disable();
   setsaveddvar("SLSMSSTQP", "9");
@@ -454,35 +454,35 @@ function interrogation_cine_letterboxing() {
 
 #using_animtree("");
 
-function interrogation_cine_skip(var0, var1, var2) {
-  var3 = scripts\sp\utility::userskip_wait();
+function interrogation_cine_skip(var_0, var_1, var_2) {
+  var_3 = scripts\sp\utility::userskip_wait();
 
-  if(!var3) {
+  if(!var_3) {
     return;
   }
 
   scripts\sp\hud_util::fade_out(0);
-  var4 = 0.5;
+  var_4 = 0.5;
 
-  foreach(var6 in var0) {
-    if(!isDefined(var6)) {
+  foreach(var_6 in var_0) {
+    if(!isDefined(var_6)) {
       continue;
     }
 
-    var7 = getanimlength(var6 scripts\engine\utility::getanim(var1));
-    var8 = (var7 - var4) / var7;
-    var6 setanimtime(var6 scripts\engine\utility::getanim(var1), var8);
+    var_7 = getanimlength(var_6 scripts\engine\utility::getanim(var_1));
+    var_8 = (var_7 - var_4) / var_7;
+    var_6 setanimtime(var_6 scripts\engine\utility::getanim(var_1), var_8);
   }
 
-  if(istrue(var2)) {
+  if(istrue(var_2)) {
     level.enforcer stopsounds();
     level.price stopsounds();
     level.yegor stopsounds();
     level.price scripts\sp\anim_notetrack::mayhem_end(%stp_wh_010_intro3p_price_face);
-    var10 = scripts\engine\utility::ter_op(scripts\engine\utility::flag("intro_butcher_mayhem_b"), %stp_wh_010_intro3p_butcher_partb_face, $stp_wh_010_intro3p_butcher_parta_face);
-    level.enforcer scripts\sp\anim_notetrack::mayhem_end(var10);
-    var11 = scripts\engine\utility::ter_op(scripts\engine\utility::flag("intro_yegor_mayhem_b"), %stp_wh_010_intro3p_yegor_partb_face, %stp_wh_010_intro3p_yegor_parta_face);
-    level.yegor scripts\sp\anim_notetrack::mayhem_end(var11);
+    var_10 = scripts\engine\utility::ter_op(scripts\engine\utility::flag("intro_butcher_mayhem_b"), %stp_wh_010_intro3p_butcher_partb_face, $stp_wh_010_intro3p_butcher_parta_face);
+    level.enforcer scripts\sp\anim_notetrack::mayhem_end(var_10);
+    var_11 = scripts\engine\utility::ter_op(scripts\engine\utility::flag("intro_yegor_mayhem_b"), %stp_wh_010_intro3p_yegor_partb_face, %stp_wh_010_intro3p_yegor_parta_face);
+    level.yegor scripts\sp\anim_notetrack::mayhem_end(var_11);
     level notify("intro_skipped");
     level.blackoverlay.alpha = 0;
     level.player lerpfovscalefactor(1, 0);
@@ -512,21 +512,21 @@ function door_intro_end() {
 
 function nikolai_intro_handler() {
   level.nikolaivan endon("trigger");
-  var0 = level scripts\engine\utility::waittill_any_return("van_intro_trigger", "intro_skipped", "van_intro_trigger_startpoint");
+  var_0 = level scripts\engine\utility::waittill_any_return("van_intro_trigger", "intro_skipped", "van_intro_trigger_startpoint");
   GscBinSkip4(0x35);
 }
 
-function van_intro_anim(var0) {
-  var1 = [level.nikolaivan, level.enforcerwife, level.enforcerson];
-  level.outeranimnode thread scripts\common\anim::anim_single(var1, "acquire_intro");
+function van_intro_anim(var_0) {
+  var_1 = [level.nikolaivan, level.enforcerwife, level.enforcerson];
+  level.outeranimnode thread scripts\common\anim::anim_single(var_1, "acquire_intro");
   wait 0.1;
 
-  if(istrue(var0)) {
+  if(istrue(var_0)) {
     level.nikolaivan playSound("stp_wh_010_interrogation_van_back_in_skip_intro");
-    var2 = getanimlength(level.nikolaivan scripts\engine\utility::getanim("acquire_intro"));
+    var_2 = getanimlength(level.nikolaivan scripts\engine\utility::getanim("acquire_intro"));
 
-    foreach(var4 in var1) {
-      var4 setanimtime(var4 scripts\engine\utility::getanim("acquire_intro"), 3 / var2);
+    foreach(var_4 in var_1) {
+      var_4 setanimtime(var_4 scripts\engine\utility::getanim("acquire_intro"), 3 / var_2);
     }
   } else {
     level.nikolaivan playSound("stp_wh_010_interrogation_van_back_in_full");
@@ -540,82 +540,82 @@ function nikolai_intro_nags() {
   scripts\engine\sp\utility::trigger_wait_targetname("nikolai_package_prompt");
   scripts\engine\utility::flag_wait("nikolai_intro_vo");
   thread scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_nikolai_intro();
-  var0 = 0;
+  var_0 = 0;
 
   if(scripts\engine\utility::flag("nikolai_nag_ready")) {
     level.outeranimnode thread scripts\common\anim::anim_single_solo(level.nikolai, "acquire_intro_nag_far_1");
-    var1 = getanimlength(level.nikolai scripts\engine\utility::getanim("acquire_intro_nag_far_1"));
+    var_1 = getanimlength(level.nikolai scripts\engine\utility::getanim("acquire_intro_nag_far_1"));
     level.outeranimnode notify("stop_loop");
-    level.outeranimnode scripts\engine\sp\utility::delaychildthread(var1, &scripts\common\anim::anim_loop_solo, level.nikolai, "acquire_intro_idle");
-    var0 = var1;
+    level.outeranimnode scripts\engine\sp\utility::delaychildthread(var_1, &scripts\common\anim::anim_loop_solo, level.nikolai, "acquire_intro_idle");
+    var_0 = var_1;
   }
 
-  var2 = scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_intro_nikolai_nags();
-  var3 = ["acquire_intro_nag_near_1", "acquire_intro_nag_near_2"];
-  var4 = ["acquire_intro_nag_far_1", "acquire_intro_nag_far_2"];
-  var5 = 62500;
-  scripts\engine\sp\utility::delaychildthread(var0, &nikolai_nag_handler, var2, var3, var4, "acquire_intro_idle", var5);
+  var_2 = scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_intro_nikolai_nags();
+  var_3 = ["acquire_intro_nag_near_1", "acquire_intro_nag_near_2"];
+  var_4 = ["acquire_intro_nag_far_1", "acquire_intro_nag_far_2"];
+  var_5 = 62500;
+  scripts\engine\sp\utility::delaychildthread(var_0, &nikolai_nag_handler, var_2, var_3, var_4, "acquire_intro_idle", var_5);
 }
 
 function nikolai_car_nags() {
-  var0 = scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_acquire_nikolai_nags();
-  var1 = ["acquire_nag_near_1", "acquire_nag_near_2"];
-  var2 = ["acquire_nag_far_1", "acquire_nag_far_2"];
-  var3 = 40000;
-  nikolai_nag_handler(var0, var1, var2, "acquire_idle", var3, undefined, "van_retrieve_package");
+  var_0 = scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_acquire_nikolai_nags();
+  var_1 = ["acquire_nag_near_1", "acquire_nag_near_2"];
+  var_2 = ["acquire_nag_far_1", "acquire_nag_far_2"];
+  var_3 = 40000;
+  nikolai_nag_handler(var_0, var_1, var_2, "acquire_idle", var_3, undefined, "van_retrieve_package");
 }
 
 function nikolai_escort_nags() {
   thread scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_acquire_nikolai_remark();
-  var0 = scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_escort_nikolai_nags();
-  var1 = ["acquire_nag_near_1", "acquire_nag_near_2"];
-  var2 = ["acquire_nag_far_1", "acquire_nag_far_2"];
-  var3 = 62500;
+  var_0 = scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_escort_nikolai_nags();
+  var_1 = ["acquire_nag_near_1", "acquire_nag_near_2"];
+  var_2 = ["acquire_nag_far_1", "acquire_nag_far_2"];
+  var_3 = 62500;
   wait 4;
-  nikolai_nag_handler(var0, var1, var2, "acquire_idle", var3, "escort_slowdown", undefined, 1);
+  nikolai_nag_handler(var_0, var_1, var_2, "acquire_idle", var_3, "escort_slowdown", undefined, 1);
 }
 
-function nikolai_nag_handler(var0, var1, var2, var3, var4, var5, var6, var7) {
+function nikolai_nag_handler(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   level endon("escort_disengage");
 
-  while(var0["near"].size > 0 || var0["far"].size > 0) {
+  while(var_0["near"].size > 0 || var_0["far"].size > 0) {
     wait randomfloatrange(6, 8);
 
-    if(istrue(var7)) {
+    if(istrue(var_7)) {
       if(!scripts\engine\utility::flag("interrogation_escort_idle") && distance(level.player.origin, level.interrogationdoor.origin) < 700) {
         continue;
       }
     }
 
-    var8 = undefined;
-    var9 = undefined;
-    var10 = distancesquared(level.player.origin, level.nikolai.origin);
+    var_8 = undefined;
+    var_9 = undefined;
+    var_10 = distancesquared(level.player.origin, level.nikolai.origin);
 
-    if(var10 <= var4 && var1.size > 0) {
-      var8 = scripts\engine\utility::random(var1);
-      var9 = "near";
-    } else if(var10 > var4 && var2.size > 0) {
-      var8 = scripts\engine\utility::random(var2);
-      var9 = "far";
+    if(var_10 <= var_4 && var_1.size > 0) {
+      var_8 = scripts\engine\utility::random(var_1);
+      var_9 = "near";
+    } else if(var_10 > var_4 && var_2.size > 0) {
+      var_8 = scripts\engine\utility::random(var_2);
+      var_9 = "far";
     }
 
-    if(isDefined(var5) && scripts\engine\utility::flag_exist(var5) && scripts\engine\utility::flag(var5)) {
+    if(isDefined(var_5) && scripts\engine\utility::flag_exist(var_5) && scripts\engine\utility::flag(var_5)) {
       break;
     }
 
-    if(isDefined(var6) && scripts\engine\utility::flag_exist(var6) && !scripts\engine\utility::flag(var6)) {
+    if(isDefined(var_6) && scripts\engine\utility::flag_exist(var_6) && !scripts\engine\utility::flag(var_6)) {
       break;
     }
 
-    if(isDefined(var8)) {
-      level.outeranimnode thread scripts\common\anim::anim_single_solo(level.nikolai, var8);
+    if(isDefined(var_8)) {
+      level.outeranimnode thread scripts\common\anim::anim_single_solo(level.nikolai, var_8);
       level waittill("nik_nag_trigger");
-      thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_nikolai(var0[var9][0][0], var0[var9][0][1]);
+      thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_nikolai(var_0[var_9][0][0], var_0[var_9][0][1]);
       level.nikolai waittillmatch("single anim", "end");
       level.outeranimnode notify("stop_loop");
-      level.outeranimnode thread scripts\common\anim::anim_loop_solo(level.nikolai, var3);
-      var0 = scripts\engine\utility::array_remove_index(var0["near"], 0);
-      var0 = scripts\engine\utility::array_remove_index(var0["far"], 0);
+      level.outeranimnode thread scripts\common\anim::anim_loop_solo(level.nikolai, var_3);
+      var_0 = scripts\engine\utility::array_remove_index(var_0["near"], 0);
+      var_0 = scripts\engine\utility::array_remove_index(var_0["far"], 0);
     }
   }
 }
@@ -630,12 +630,12 @@ function van_acquire_interact() {
   interrogation_rig_enable("acquire_open", "viewhands_hero_kyle_urban", undefined, level.outeranimnode, undefined, 15, 15, 10, 0);
   level.outeranimnode notify("stop_loop");
   level.outeranimnode thread scripts\common\anim::anim_single_solo(level.nikolai, "acquire_open");
-  var0 = getanimlength(level.nikolai scripts\engine\utility::getanim("acquire_open"));
-  level.outeranimnode scripts\engine\utility::delaythread(var0, &scripts\common\anim::anim_loop_solo, level.nikolai, "acquire_idle");
-  scripts\engine\utility::delaythread(var0, &nikolai_car_nags);
-  var1 = [level.nikolaivan, level.player.rig, level.enforcerwife, level.enforcerson];
+  var_0 = getanimlength(level.nikolai scripts\engine\utility::getanim("acquire_open"));
+  level.outeranimnode scripts\engine\utility::delaythread(var_0, &scripts\common\anim::anim_loop_solo, level.nikolai, "acquire_idle");
+  scripts\engine\utility::delaythread(var_0, &nikolai_car_nags);
+  var_1 = [level.nikolaivan, level.player.rig, level.enforcerwife, level.enforcerson];
   thread interrogation_rig_disable("acquire_open");
-  level.outeranimnode scripts\common\anim::anim_single(var1, "acquire_open");
+  level.outeranimnode scripts\common\anim::anim_single(var_1, "acquire_open");
   level.outeranimnode notify("family_loop_stop");
   level.outeranimnode thread scripts\common\anim::anim_loop([level.enforcerwife, level.enforcerson], "acquire_idle", "family_loop_stop");
   wait_for_package_interact();
@@ -643,11 +643,11 @@ function van_acquire_interact() {
   scripts\engine\utility::flag_clear("van_retrieve_package");
   interrogation_rig_enable("acquire", "viewhands_hero_kyle_urban", undefined, level.outeranimnode, 1, 10, 10, 10, 10);
   thread acquire_player_anim();
-  var1 = [level.enforcerwife, level.enforcerson];
-  level.outeranimnode scripts\common\anim::anim_single(var1, "acquire");
-  var2 = getEnt("interrogation_nikolai_clip", "targetname");
-  var2 show();
-  thread delete_on_level_notify(var2);
+  var_1 = [level.enforcerwife, level.enforcerson];
+  level.outeranimnode scripts\common\anim::anim_single(var_1, "acquire");
+  var_2 = getEnt("interrogation_nikolai_clip", "targetname");
+  var_2 show();
+  thread delete_on_level_notify(var_2);
   thread nikolai_escort_nags();
 }
 
@@ -657,17 +657,17 @@ function acquire_player_anim() {
 }
 
 function wait_for_van_interact() {
-  var0 = level.nikolaivan gettagorigin("tag_door_rear_right");
-  var1 = level.nikolaivan gettagangles("tag_door_rear_right");
-  var0 += rotatevector((-2.5, 27, -4.5), var1);
-  var1 = anglestoaxis(var1);
-  GscBinSkip0(0x2e, "forward", var1["forward"] * -1);
+  var_0 = level.nikolaivan gettagorigin("tag_door_rear_right");
+  var_1 = level.nikolaivan gettagangles("tag_door_rear_right");
+  var_0 += rotatevector((-2.5, 27, -4.5), var_1);
+  var_1 = anglestoaxis(var_1);
+  GscBinSkip0(0x2e, "forward", var_1["forward"] * -1);
 }
 
 function wait_for_package_interact() {
-  var0 = level.enforcerwife gettagorigin("j_cosmetic_3");
-  var1 = anglestoaxis(level.nikolaivan.angles);
-  GscBinSkip0(0x2e, "forward", var1["forward"] * -1);
+  var_0 = level.enforcerwife gettagorigin("j_cosmetic_3");
+  var_1 = anglestoaxis(level.nikolaivan.angles);
+  GscBinSkip0(0x2e, "forward", var_1["forward"] * -1);
 }
 
 function interrogation_family_escort() {
@@ -686,18 +686,18 @@ function interrogation_family_escort() {
   scripts\sp\maps\stpetersburg\stpetersburg_interrogation_escort::set_escort_phase(1);
   scripts\engine\utility::trigger_on("escort_handoff_trigger", "targetname");
   scripts\engine\sp\utility::trigger_wait_targetname("escort_handoff_trigger");
-  var0 = getEnt("escort_handoff_trigger", "targetname");
-  var1 = 0.5;
-  var2 = getEntArray("interrogation_handoff_clip", "targetname");
+  var_0 = getEnt("escort_handoff_trigger", "targetname");
+  var_1 = 0.5;
+  var_2 = getEntArray("interrogation_handoff_clip", "targetname");
 
   for(;;) {
-    if(level.player istouching(var0)) {
+    if(level.player istouching(var_0)) {
       if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), level.yegor getEye(), cos(25)) || scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), level.familychair.origin + (0, 0, 50), cos(35))) {
-        var3 = vectorNormalize(level.familychair.origin + (0, 0, 50) - level.player getEye());
-        var4 = anglesToForward(level.player getplayerangles());
-        var5 = vectordot(var4, var3);
-        var5 = clamp(abs(var5), 0.5, 1);
-        var1 = 0.5 + 0.75 * (1 - var5) * 2;
+        var_3 = vectorNormalize(level.familychair.origin + (0, 0, 50) - level.player getEye());
+        var_4 = anglesToForward(level.player getplayerangles());
+        var_5 = vectordot(var_4, var_3);
+        var_5 = clamp(abs(var_5), 0.5, 1);
+        var_1 = 0.5 + 0.75 * (1 - var_5) * 2;
         break;
       }
     }
@@ -706,24 +706,24 @@ function interrogation_family_escort() {
   }
 
   turn_off_headtracking_solo(level.yegor);
-  thread interrogation_disengage(0, var1);
-  interrogation_rig_enable("family_handoff", "viewhands_hero_kyle_urban", var1, undefined, 1, 15, 15, 15, 10);
+  thread interrogation_disengage(0, var_1);
+  interrogation_rig_enable("family_handoff", "viewhands_hero_kyle_urban", var_1, undefined, 1, 15, 15, 15, 10);
   level.player.escortlookatoffset delete();
-  scripts\engine\utility::array_delete(var2);
+  scripts\engine\utility::array_delete(var_2);
   scripts\engine\utility::flag_wait("interrogation_escort_done");
   thread interrogation_rig_disable("family_handoff");
   level.sonanimnode scripts\common\anim::anim_single_solo(level.player.rig, "family_handoff");
   level.player lerpfovscalefactor(1, 0.5);
 }
 
-function interrogation_disengage(var0, var1) {
-  [level.enforcerwife] = scripts\sp\maps\stpetersburg\stpetersburg_interrogation_escort::trigger_escort_disengage(var0, var1);
+function interrogation_disengage(var_0, var_1) {
+  [level.enforcerwife] = scripts\sp\maps\stpetersburg\stpetersburg_interrogation_escort::trigger_escort_disengage(var_0, var_1);
   level.enforcerwife.name = "Ousa";
   level.enforcerwife.animname = "interrogation_mother";
   level.enforcerwife.civiliannameplate = 1;
   level.enforcerwife.skip_friendly_fire_check = 1;
   level.enforcerwife.allowdeath = 0;
-  level.enforcerson = var2[1];
+  level.enforcerson = var_2[1];
   level.enforcerson.name = "Amon";
   level.enforcerson.animname = "interrogation_son";
   level.enforcerson.civiliannameplate = 1;
@@ -733,10 +733,10 @@ function interrogation_disengage(var0, var1) {
 
 function price_content_warning() {
   level.interrogationdoor scripts\sp\door::remove_open_prompts();
-  var0 = getEnt("interrogation_hallway_intro_clip", "targetname");
-  var0 delete();
-  var1 = getEnt("interrogation_hallway_clip", "targetname");
-  var1 show();
+  var_0 = getEnt("interrogation_hallway_intro_clip", "targetname");
+  var_0 delete();
+  var_1 = getEnt("interrogation_hallway_clip", "targetname");
+  var_1 show();
   blendshape_disable(level.nikolai);
   blendshape_enable(level.price);
   level.price scripts\engine\utility::delaythread(2, &turn_on_headtracking_solo, level.player);
@@ -760,8 +760,8 @@ function skip_interrogation() {
   interrogation_disengage(1);
   level.wifeanimnode thread scripts\common\anim::anim_single_solo(level.player.rig, "warning_decline");
   level.sonanimnode thread scripts\common\anim::anim_single_solo(level.interrogationdoor, "warning_decline");
-  var0 = [level.price, level.enforcerwife, level.enforcerson, level.enforcer, level.yegor];
-  level.priceanimnode thread scripts\common\anim::anim_single(var0, "warning_decline");
+  var_0 = [level.price, level.enforcerwife, level.enforcerson, level.enforcer, level.yegor];
+  level.priceanimnode thread scripts\common\anim::anim_single(var_0, "warning_decline");
   level.price scripts\engine\utility::delaythread(1.5, &turn_off_headtracking_solo);
   scripts\engine\utility::delaythread(3, &interrogation_abandon_outro);
 }
@@ -775,9 +775,9 @@ function content_warning_ui() {
   setomnvar("ui_dialogue_prompts_option_d", "none");
   setomnvar("ui_dialogue_prompts_duration", 0);
   setomnvar("ui_dialogue_prompts_active", 0);
-  var0 = 0;
-  var1 = getEnt("content_warning_zone", "targetname");
-  var1 waittill("trigger");
+  var_0 = 0;
+  var_1 = getEnt("content_warning_zone", "targetname");
+  var_1 waittill("trigger");
   thread scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_price_kyle_content_warning();
   level notify("warning_nags_end");
   level.priceanimnode scripts\common\anim::anim_single_solo(level.price, "content_warning");
@@ -785,10 +785,10 @@ function content_warning_ui() {
   level.priceanimnode thread scripts\common\anim::anim_loop_solo(level.price, "content_warning_idle");
 
   for(;;) {
-    if(level.player istouching(var1) && scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), level.price getEye(), cos(35))) {
-      if(!var0) {
+    if(level.player istouching(var_1) && scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), level.price getEye(), cos(35))) {
+      if(!var_0) {
         setomnvar("ui_dialogue_prompts_active", 1);
-        var0 = 1;
+        var_0 = 1;
       }
 
       if(level.player buttonPressed("BUTTON_X") || level.player buttonPressed("1")) {
@@ -816,7 +816,7 @@ function content_warning_ui() {
       }
     } else {
       setomnvar("ui_dialogue_prompts_active", 0);
-      var0 = 0;
+      var_0 = 0;
     }
 
     waitframe();
@@ -869,29 +869,29 @@ function interrogation_phase_revolver() {
     switch_head_to_hood(level.enforcerwife, "hat_civ_female_interrogation");
     level waittill("son_hood_switch");
     switch_head_to_hood(level.enforcerson, "hat_civ_child_interrogation");
-    var0 = getEnt("revolver", "targetname");
+    var_0 = getEnt("revolver", "targetname");
     level waittill("gun_placed");
     level.price scripts\common\ai::gun_remove();
-    var0 show();
+    var_0 show();
     wait 0.75;
     scripts\engine\utility::flag_set("revolver_offered");
-    var0 scripts\sp\player\cursor_hint::create_cursor_hint("j_trigger", undefined, &"STPETERSBURG/INTERROGATION_PISTOL", 360, 150, 60, 1, undefined, 0, undefined, "duration_medium");
-    level.player scripts\sp\player::focus_display_hint(10, undefined, [var0, level], ["trigger", "interrogation_abandoned"]);
-    var0 waittill("trigger");
+    var_0 scripts\sp\player\cursor_hint::create_cursor_hint("j_trigger", undefined, &"STPETERSBURG/INTERROGATION_PISTOL", 360, 150, 60, 1, undefined, 0, undefined, "duration_medium");
+    level.player scripts\sp\player::focus_display_hint(10, undefined, [var_0, level], ["trigger", "interrogation_abandoned"]);
+    var_0 waittill("trigger");
     thread scripts\engine\sp\utility::autosave_now_silent();
   } else {
     interrogation_room_catchup();
   }
 
   scripts\engine\sp\utility::delaychildthread(3, &revolver_ads_hint);
-  var1 = getEnt("player_handoff_clip", "targetname");
-  var1 delete();
+  var_1 = getEnt("player_handoff_clip", "targetname");
+  var_1 delete();
   thread player_gun_pickup();
   target_restore_idle_anim(level.enforcerson);
   level.enforceranimnode notify("stop_loop");
   level.enforceranimnode thread scripts\common\anim::anim_single_solo(level.enforcer, "scene_gun_pickup");
-  var2 = getanimlength(level.enforcer scripts\engine\utility::getanim("scene_gun_pickup"));
-  scripts\engine\sp\utility::delaychildthread(var2, &target_restore_idle_anim, level.enforcer);
+  var_2 = getanimlength(level.enforcer scripts\engine\utility::getanim("scene_gun_pickup"));
+  scripts\engine\sp\utility::delaychildthread(var_2, &target_restore_idle_anim, level.enforcer);
   thread price_gun_pickup_anims();
   childthread scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_weapon_pickup();
   level thread scripts\engine\sp\utility::notify_delay("enable_ads_reactions_family", 3);
@@ -908,15 +908,15 @@ function price_gun_pickup_anims() {
 }
 
 function player_gun_pickup() {
-  var0 = getEnt("revolver", "targetname");
-  var1 = distance2d(var0.origin, level.player.origin);
-  var2 = 0.5 + 0.5 * (var1 - 21) * 0.042;
-  interrogation_rig_enable("gun_pickup", "viewhands_hero_kyle_urban", var2, undefined, 1, 5, 5, 5, 5);
-  var0 linkTo(level.player.rig, "tag_weapon_right");
+  var_0 = getEnt("revolver", "targetname");
+  var_1 = distance2d(var_0.origin, level.player.origin);
+  var_2 = 0.5 + 0.5 * (var_1 - 21) * 0.042;
+  interrogation_rig_enable("gun_pickup", "viewhands_hero_kyle_urban", var_2, undefined, 1, 5, 5, 5, 5);
+  var_0 linkTo(level.player.rig, "tag_weapon_right");
   thread interrogation_rig_disable("gun_pickup", 0.25);
   level.yegoranimnode scripts\common\anim::anim_single_solo(level.player.rig, "gun_pickup");
-  var0 unlink();
-  var0 delete();
+  var_0 unlink();
+  var_0 delete();
   scripts\engine\utility::flag_set("revolver_picked_up");
   level.revolver = scripts\sp\utility::make_weapon("iw8_pi_cpapa_stpetersburg", ["rec_cpapa", "front_cpapa", "backno_cpapa", "ammo_cpapa"]);
   level.player takeweapon("iw8_gunless_ik");
@@ -934,9 +934,9 @@ function interrogation_abandon_handler() {
   level.interrogationdoor.open_struct.origin = level.interrogationdoor gettagorigin("tag_door_handle");
   level.interrogationdoor.open_struct.origin -= (0, 1.5, 0);
   thread interrogation_abandon_price_nag();
-  var0 = level.interrogationdoor scripts\engine\utility::waittill_any_return("trigger", "abandon_end");
+  var_0 = level.interrogationdoor scripts\engine\utility::waittill_any_return("trigger", "abandon_end");
 
-  if(var0 == "trigger") {
+  if(var_0 == "trigger") {
     scripts\engine\utility::flag_set("interrogation_abandoned");
     scripts\sp\analytics::analytics_event_upload("Player Skipped Interrogation", 1);
     level.price stopsounds();
@@ -967,17 +967,17 @@ function interrogation_abandon_handler() {
 function interrogation_abandon_price_nag() {
   level endon("intel_revealed");
   level.interrogationdoor endon("abandon_end");
-  var0 = 0;
+  var_0 = 0;
 
   for(;;) {
     if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), level.interrogationdoor.origin + (29, 5, 35), cos(25))) {
-      var0++;
+      var_0++;
 
-      if(var0 > 2) {
+      if(var_0 > 2) {
         break;
       }
     } else {
-      var0 = 0;
+      var_0 = 0;
     }
 
     wait 0.5;
@@ -986,12 +986,12 @@ function interrogation_abandon_price_nag() {
 
 function revolver_ads_hint() {
   level.player endon("ads_pressed");
-  var0 = 0;
-  var1 = 3;
+  var_0 = 0;
+  var_1 = 3;
 
-  while(var0 < var1) {
+  while(var_0 < var_1) {
     level.player waittill("attack_pressed");
-    var0++;
+    var_0++;
   }
 }
 
@@ -1006,17 +1006,17 @@ function interrogation_room_catchup() {
 
   switch_head_to_hood(level.enforcerwife, "hat_civ_female_interrogation");
   switch_head_to_hood(level.enforcerson, "hat_civ_child_interrogation");
-  var0 = getEnt("revolver", "targetname");
+  var_0 = getEnt("revolver", "targetname");
 
-  if(isDefined(var0)) {
-    var0 show();
+  if(isDefined(var_0)) {
+    var_0 show();
     return;
   }
 }
 
-function switch_head_to_hood(var0) {
+function switch_head_to_hood(var_0) {
   self detach(self.headmodel);
-  self.headmodel = var0;
+  self.headmodel = var_0;
   self attach(self.headmodel);
 }
 
@@ -1026,12 +1026,12 @@ function pre_fire_performance() {
   level.player endon("dry_fired");
   childthread scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_room_intro();
   thread pre_fire_chair_anim();
-  var0 = getEnt("interrogation_side_door", "targetname");
-  var0.animname = "interrogation_side_door";
-  var0 useanimtree(level.scr_animtree["interrogation_side_door"]);
-  thread yegor_exit(var0);
-  var1 = [level.enforcerwife, level.enforcerson, level.price, level.enforcer];
-  level.wifeanimnode scripts\common\anim::anim_single(var1, "family_handoff");
+  var_0 = getEnt("interrogation_side_door", "targetname");
+  var_0.animname = "interrogation_side_door";
+  var_0 useanimtree(level.scr_animtree["interrogation_side_door"]);
+  thread yegor_exit(var_0);
+  var_1 = [level.enforcerwife, level.enforcerson, level.price, level.enforcer];
+  level.wifeanimnode scripts\common\anim::anim_single(var_1, "family_handoff");
   level.player notify("handoff_anims_complete");
   level.priceanimnode notify("stop_loop");
   level.priceanimnode thread scripts\common\anim::anim_loop_solo(level.price, "idle_loop");
@@ -1041,8 +1041,8 @@ function pre_fire_performance() {
   target_restore_idle_anim(level.enforcerson);
 }
 
-function yegor_exit(var0) {
-  level.yegoranimnode scripts\common\anim::anim_single([level.yegor, var0], "family_handoff");
+function yegor_exit(var_0) {
+  level.yegoranimnode scripts\common\anim::anim_single([level.yegor, var_0], "family_handoff");
 
   if(isalive(level.yegor)) {
     level.yegor delete();
@@ -1061,7 +1061,7 @@ function interrogation_phase_dry_fire() {
   scripts\engine\utility::flag_set("dry_fire_complete");
   thread scripts\engine\sp\utility::autosave_now_silent();
   level.actioncount++;
-  var0 = level.currentplayertarget;
+  var_0 = level.currentplayertarget;
   level.enforcerwife scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop_and_clear_stack();
   level.enforcerson scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop_and_clear_stack();
   level.enforcer scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop_and_clear_stack();
@@ -1080,11 +1080,11 @@ function interrogation_phase_dry_fire() {
   enforcer_play_additive_anim("dry_fire_flinch");
   wait getanimlength(level.enforcer scripts\engine\utility::getanim("dry_fire_flinch"));
 
-  if(var0 == 6) {
-    var1 = randomint(2);
-    var2 = ["scene_dry_fire_react_1", "scene_dry_fire_react_2"];
+  if(var_0 == 6) {
+    var_1 = randomint(2);
+    var_2 = ["scene_dry_fire_react_1", "scene_dry_fire_react_2"];
     thread target_play_anim(level.enforcer, "idle_interrogate", 1, 0, 1);
-    level.priceanimnode scripts\common\anim::anim_single_solo(level.price, var2[var1]);
+    level.priceanimnode scripts\common\anim::anim_single_solo(level.price, var_2[var_1]);
     level.priceanimnode notify("stop_loop");
     level.priceanimnode thread scripts\common\anim::anim_loop_solo(level.price, "idle_loop");
     thread target_play_anim(level.enforcer, "scene_dry_fire_price", 0, 1);
@@ -1097,27 +1097,27 @@ function interrogation_phase_dry_fire() {
     level.priceanimnode thread scripts\common\anim::anim_single_solo(level.price, "scene_dry_fire");
   }
 
-  thread dry_fire_bullet_anims(var0);
+  thread dry_fire_bullet_anims(var_0);
   scripts\engine\utility::flag_clear("pause_family_vo");
   scripts\engine\utility::flag_clear("pause_butcher_vo");
 }
 
-function dry_fire_bullet_anims(var0) {
-  var1 = getEntArray("bullets", "targetname");
+function dry_fire_bullet_anims(var_0) {
+  var_1 = getEntArray("bullets", "targetname");
 
-  foreach(var5, var3 in var1) {
-    var3.animname = "bullets";
-    var3 useanimtree(level.scr_animtree["bullets"]);
-    var4 = "dry_fire_bullet_" + var5 + 1;
-    level.priceanimnode thread scripts\common\anim::anim_single_solo(var3, var4);
+  foreach(var_5, var_3 in var_1) {
+    var_3.animname = "bullets";
+    var_3 useanimtree(level.scr_animtree["bullets"]);
+    var_4 = "dry_fire_bullet_" + var_5 + 1;
+    level.priceanimnode thread scripts\common\anim::anim_single_solo(var_3, var_4);
   }
 
   waitframe();
 
-  if(var0 == 6) {
-    foreach(var3 in var1) {
-      var4 = "dry_fire_bullet_" + var5 + 1;
-      var3 setanimtime(var3 scripts\engine\utility::getanim(var4), 0.0842);
+  if(var_0 == 6) {
+    foreach(var_3 in var_1) {
+      var_4 = "dry_fire_bullet_" + var_5 + 1;
+      var_3 setanimtime(var_3 scripts\engine\utility::getanim(var_4), 0.0842);
     }
 
     return;
@@ -1127,12 +1127,12 @@ function dry_fire_bullet_anims(var0) {
 function interrogation_phase_final() {
   level endon("interrogation_failed");
   scripts\engine\utility::delaythread(3, &turn_on_headtracking, level.price);
-  var0 = getEntArray("bullets", "targetname");
-  GscBinSkip4(0x35, var0);
+  var_0 = getEntArray("bullets", "targetname");
+  GscBinSkip4(0x35, var_0);
 }
 
-function post_bullet_load_setup(var0) {
-  wait var0;
+function post_bullet_load_setup(var_0) {
+  wait var_0;
   level.player allowads(1);
   level.player scripts\common\utility::allow_fire(1, "interrogation");
   thread player_demeanor_monitor();
@@ -1146,7 +1146,7 @@ function post_bullet_load_setup(var0) {
 
 function player_demeanor_monitor() {
   level endon("demeanor_monitor_end");
-  var0 = 1;
+  var_0 = 1;
 
   for(;;) {
     if(level.player getweaponammoclip(level.revolver) <= 0) {
@@ -1159,20 +1159,20 @@ function player_demeanor_monitor() {
 
     if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), level.nikolai getEye(), cos(45))) {
       level.player scripts\engine\sp\utility::set_player_demeanor("relaxed");
-      var0 = 0;
-    } else if(!var0) {
+      var_0 = 0;
+    } else if(!var_0) {
       level.player scripts\engine\sp\utility::set_player_demeanor("normal");
-      var0 = 1;
+      var_0 = 1;
     }
 
     wait 0.25;
   }
 }
 
-function price_offer_bullets(var0) {
+function price_offer_bullets(var_0) {
   level endon("final_phase");
   level waittill("bullets_placed");
-  show_bullets(var0);
+  show_bullets(var_0);
   childthread scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_final_phase();
   level.price waittillmatch("single anim", "end");
   scripts\engine\utility::flag_clear("dry_fire_react");
@@ -1184,8 +1184,8 @@ function price_offer_bullets(var0) {
   }
 }
 
-function show_bullets(var0) {
-  scripts\engine\utility::array_call(var0, &show);
+function show_bullets(var_0) {
+  scripts\engine\utility::array_call(var_0, &show);
   turn_on_headtracking_solo(level.enforcer, level.proptablelookat, "enforcer_dead");
   wait 1.5;
   turn_on_headtracking_solo(level.enforcer, level.player.headlookatoffset, "enforcer_dead");
@@ -1217,15 +1217,15 @@ function switch_family_team_on_intel() {
 
 function interrogation_abandon_outro() {
   level.player setclienttriggeraudiozone("fade_to_black_minus_scripted5_music_and_dx", 3.5);
-  var0 = scripts\sp\hud_util::create_client_overlay("black", 0);
-  var0 fadeovertime(2);
-  var0.alpha = 1;
+  var_0 = scripts\sp\hud_util::create_client_overlay("black", 0);
+  var_0 fadeovertime(2);
+  var_0.alpha = 1;
   wait 3;
 
   if(should_skip_interrogation()) {
     level.player setclienttriggeraudiozone("fade_to_black", 0.1);
     level.player freezecontrols(1);
-    var0.alpha = 0;
+    var_0.alpha = 0;
     scripts\engine\sp\utility::nextmission();
     return;
   }
@@ -1233,8 +1233,8 @@ function interrogation_abandon_outro() {
   interrogation_room_catchup();
   interrogation_rig_disable_instant();
   level.player freezecontrols(1);
-  var1 = scripts\engine\utility::getStruct("interrogation_decline_start", "targetname");
-  level.player scripts\engine\sp\utility::teleport_player(var1);
+  var_1 = scripts\engine\utility::getStruct("interrogation_decline_start", "targetname");
+  level.player scripts\engine\sp\utility::teleport_player(var_1);
 
   if(isDefined(level.revolver) && level.player hasweapon(level.revolver)) {
     player_give_gunless_loadout();
@@ -1248,15 +1248,15 @@ function interrogation_abandon_outro() {
   target_restore_idle_anim(level.enforcer);
   target_restore_idle_anim(level.enforcerson);
   level.familychair show();
-  var2 = getEnt("interrogation_hallway_clip", "targetname");
-  var2 delete();
+  var_2 = getEnt("interrogation_hallway_clip", "targetname");
+  var_2 delete();
   level.interrogationdoor scripts\sp\door::door_close(level.player, 0.05, 0, 0);
   level.interrogationdoor.locked = 1;
   level.interrogationdoor scripts\engine\utility::delaythread(9, &scripts\sp\door::reset_door);
   level.player clearclienttriggeraudiozone(4.5);
   wait 3;
-  var0 fadeovertime(3);
-  var0.alpha = 0;
+  var_0 fadeovertime(3);
+  var_0.alpha = 0;
 
   while(nullweapon(level.player getcurrentweapon())) {
     waitframe();
@@ -1267,17 +1267,17 @@ function interrogation_abandon_outro() {
   interrogation_end(1);
 }
 
-function interrogation_end(var0) {
+function interrogation_end(var_0) {
   if(scripts\engine\utility::flag("interrogation_failed")) {
     return;
   }
 
-  if(!istrue(var0)) {
-    var1 = getEnt("interrogation_room_containment", "targetname");
-    var2 = cos(20);
+  if(!istrue(var_0)) {
+    var_1 = getEnt("interrogation_room_containment", "targetname");
+    var_2 = cos(20);
 
     for(;;) {
-      if(distance2d(level.player.origin, level.price.origin) < 135 && scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), level.price getEye(), var2) || distance2d(level.player.origin, level.price.origin) < 95) {
+      if(distance2d(level.player.origin, level.price.origin) < 135 && scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), level.price getEye(), var_2) || distance2d(level.player.origin, level.price.origin) < 95) {
         break;
       }
 
@@ -1288,36 +1288,36 @@ function interrogation_end(var0) {
   thread interrogation_room_vo_pause_monitor();
   level notify("demeanor_monitor_end");
   level.player scripts\engine\sp\utility::set_player_demeanor("safe");
-  thread final_walk_scene(var0);
+  thread final_walk_scene(var_0);
   level waittill("car_unlock");
   GscBinSkip1(0x45, 0, scripts\engine\utility::spawn_script_origin(level.policecar gettagorigin("tag_seat_enter_2"), level.policecar gettagangles("tag_seat_enter_2")));
 }
 
-function interrogation_outro_blackoverlay_delay(var0) {
+function interrogation_outro_blackoverlay_delay(var_0) {
   wait 0.4;
-  var0.alpha = 0;
+  var_0.alpha = 0;
 }
 
-function interrogation_outro_dialogue(var0) {}
+function interrogation_outro_dialogue(var_0) {}
 
 function interrogation_welcome_note() {
   wait 11;
-  var0 = scripts\sp\hud_util::createfontstring("default", 1.25);
-  var0.alpha = 0;
-  var0.alignx = "center";
-  var0.aligny = "middle";
-  var0.horzalign = "center";
-  var0.vertalign = "middle";
-  var0.x = -80;
-  var0.y = 100;
-  var1 = 1;
-  var2 = 0.25;
-  var0 settext(&"STPETERSBURG/YOURE_WELCOME_NOTE");
-  var0 fadeovertime(var1);
-  var0.alpha = 1;
+  var_0 = scripts\sp\hud_util::createfontstring("default", 1.25);
+  var_0.alpha = 0;
+  var_0.alignx = "center";
+  var_0.aligny = "middle";
+  var_0.horzalign = "center";
+  var_0.vertalign = "middle";
+  var_0.x = -80;
+  var_0.y = 100;
+  var_1 = 1;
+  var_2 = 0.25;
+  var_0 settext(&"STPETERSBURG/YOURE_WELCOME_NOTE");
+  var_0 fadeovertime(var_1);
+  var_0.alpha = 1;
   wait 7;
-  var0 fadeovertime(var2);
-  var0.alpha = 0;
+  var_0 fadeovertime(var_2);
+  var_0.alpha = 0;
 }
 
 function interrogation_outro_camera() {
@@ -1330,36 +1330,36 @@ function interrogation_outro_camera() {
   setomnvar("ui_hide_hud", 1);
   scripts\engine\utility::flag_set("lighting_interrogation_outro_cinematic");
   interrogation_rig_enable("interrogation_outro", undefined, 0.1, undefined, 0);
-  var0 = scripts\engine\sp\utility::array_spawn_targetname("outro_police", 1);
+  var_0 = scripts\engine\sp\utility::array_spawn_targetname("outro_police", 1);
 
-  foreach(var2 in var0) {
-    var2.animname = "outro_police_" + var3 + 1;
-    var2.ignoreall = 1;
+  foreach(var_2 in var_0) {
+    var_2.animname = "outro_police_" + var_3 + 1;
+    var_2.ignoreall = 1;
   }
 
   thread interrogation_welcome_note();
-  var4 = getEntArray("outro_gas_barrel", "targetname");
-  scripts\engine\utility::array_call(var4, &show);
+  var_4 = getEntArray("outro_gas_barrel", "targetname");
+  scripts\engine\utility::array_call(var_4, &show);
   name_hide_array([level.enforcer, level.enforcerwife, level.enforcerson]);
   scripts\engine\utility::flag_set("flag_bink_active");
   level.interrogationdoor scripts\engine\sp\utility::anim_stopanimScripted();
-  var5 = [level.enforcerwife, level.enforcerson, level.interrogationdoor, level.player.rig];
-  var5 = scripts\engine\utility::array_combine(var5, var0);
+  var_5 = [level.enforcerwife, level.enforcerson, level.interrogationdoor, level.player.rig];
+  var_5 = scripts\engine\utility::array_combine(var_5, var_0);
 
   if(!scripts\engine\utility::flag("enforcer_dead")) {
-    var5 = scripts\engine\utility::array_add(var5, level.enforcer);
+    var_5 = scripts\engine\utility::array_add(var_5, level.enforcer);
   }
 
-  thread interrogation_outro_dof(var4);
-  thread interrogation_cine_skip(var5, "interrogation_outro", 0);
+  thread interrogation_outro_dof(var_4);
+  thread interrogation_cine_skip(var_5, "interrogation_outro", 0);
   level.enforceranimnode notify("single anim", "end");
-  level.enforceranimnode thread scripts\common\anim::anim_single(var5, "interrogation_outro");
-  var6 = getanimlength(level.player.rig scripts\engine\utility::getanim("interrogation_outro"));
-  wait var6;
+  level.enforceranimnode thread scripts\common\anim::anim_single(var_5, "interrogation_outro");
+  var_6 = getanimlength(level.player.rig scripts\engine\utility::getanim("interrogation_outro"));
+  wait var_6;
   scripts\sp\utility::userskip_stop();
 
-  foreach(var8 in var5) {
-    level.enforceranimnode thread scripts\common\anim::anim_last_frame_solo(var8, "interrogation_outro");
+  foreach(var_8 in var_5) {
+    level.enforceranimnode thread scripts\common\anim::anim_last_frame_solo(var_8, "interrogation_outro");
   }
 
   level.player showlegsandshadow();
@@ -1370,13 +1370,13 @@ function interrogation_outro_camera() {
   setomnvar("ui_hide_hud", 0);
 }
 
-function interrogation_outro_dof(var0) {
-  var1 = getEntArray("outro_gas_barrel", "targetname");
-  var2 = undefined;
+function interrogation_outro_dof(var_0) {
+  var_1 = getEntArray("outro_gas_barrel", "targetname");
+  var_2 = undefined;
 
-  foreach(var4 in var1) {
-    if(var4.model == "ee_sign_note") {
-      var2 = var4;
+  foreach(var_4 in var_1) {
+    if(var_4.model == "ee_sign_note") {
+      var_2 = var_4;
       break;
     }
   }
@@ -1385,7 +1385,7 @@ function interrogation_outro_dof(var0) {
   wait 1.5;
   level.enforcer thread scripts\engine\sp\utility::dof_enable_autofocus(1.5, 3, undefined, undefined, "tag_eye", undefined, 1);
   wait 5;
-  var2 thread scripts\engine\sp\utility::dof_enable_autofocus(2.8, 2, undefined, undefined, "tag_origin");
+  var_2 thread scripts\engine\sp\utility::dof_enable_autofocus(2.8, 2, undefined, undefined, "tag_origin");
   wait 11.5;
   thread scripts\engine\sp\utility::dof_disable();
 }
@@ -1398,28 +1398,28 @@ function show_animname() {
   }
 }
 
-function final_walk_scene(var0) {
-  var1 = getEnt("interrogation_nikolai_clip", "targetname");
+function final_walk_scene(var_0) {
+  var_1 = getEnt("interrogation_nikolai_clip", "targetname");
 
-  if(isDefined(var1)) {
-    var1 delete();
+  if(isDefined(var_1)) {
+    var_1 delete();
   }
 
-  var2 = [level.price, level.nikolai, level.nikolaivan, level.policecar];
-  var3 = scripts\engine\utility::ter_op(istrue(var0), "decline_exit", "walk_to_car");
+  var_2 = [level.price, level.nikolai, level.nikolaivan, level.policecar];
+  var_3 = scripts\engine\utility::ter_op(istrue(var_0), "decline_exit", "walk_to_car");
 
-  if(var3 == "decline_exit") {
-    level.outeranimnode thread scripts\common\anim::anim_single_solo(level.interrogationdoor, var3);
+  if(var_3 == "decline_exit") {
+    level.outeranimnode thread scripts\common\anim::anim_single_solo(level.interrogationdoor, var_3);
   }
 
   level.priceanimnode notify("stop_loop");
   level.outeranimnode notify("stop_loop");
-  level.outeranimnode scripts\common\anim::anim_single(var2, var3);
+  level.outeranimnode scripts\common\anim::anim_single(var_2, var_3);
   level.outeranimnode thread scripts\common\anim::anim_loop_solo(level.nikolai, "car_idle", "car_loop_stop");
   level.outeranimnode thread scripts\common\anim::anim_loop_solo(level.price, "car_idle");
 }
 
-function player_car_enter(var0) {
+function player_car_enter(var_0) {
   level.player setstance("stand");
   level.player lerpfovscalefactor(0, 1);
 
@@ -1428,49 +1428,49 @@ function player_car_enter(var0) {
   }
 
   setsaveddvar("MLMROTLMO", 175);
-  var1 = scripts\engine\utility::ter_op(var0 == "left", "car_interact_left", "car_interact_right");
-  interrogation_rig_enable(var1, "viewhands_hero_kyle_urban", 0.35, level.outeranimnode);
-  level.policecar setanimrestart(level.policecar scripts\engine\utility::getanim(var1));
+  var_1 = scripts\engine\utility::ter_op(var_0 == "left", "car_interact_left", "car_interact_right");
+  interrogation_rig_enable(var_1, "viewhands_hero_kyle_urban", 0.35, level.outeranimnode);
+  level.policecar setanimrestart(level.policecar scripts\engine\utility::getanim(var_1));
   wait 0.05;
-  level.outeranimnode scripts\common\anim::anim_single_solo(level.player.rig, var1);
+  level.outeranimnode scripts\common\anim::anim_single_solo(level.player.rig, var_1);
 }
 
 function interrogation_room_vo_pause_monitor() {
   level endon("interrogation_end");
-  var0 = getEnt("interrogation_room_containment", "targetname");
-  var1 = getEnt("interrogation_warehouse_containment", "targetname");
-  var2 = 0;
-  var3 = 0;
+  var_0 = getEnt("interrogation_room_containment", "targetname");
+  var_1 = getEnt("interrogation_warehouse_containment", "targetname");
+  var_2 = 0;
+  var_3 = 0;
 
   for(;;) {
-    if(!level.player istouching(var1)) {
-      if(!var3) {
+    if(!level.player istouching(var_1)) {
+      if(!var_3) {
         scripts\engine\utility::flag_set("pause_price_vo");
         scripts\engine\utility::flag_set("pause_nikolai_vo");
-        var3 = 1;
+        var_3 = 1;
         blendshape_disable(level.nikolai);
         blendshape_enable(level.enforcer);
       }
-    } else if(var3) {
+    } else if(var_3) {
       scripts\engine\utility::flag_clear("pause_price_vo");
       scripts\engine\utility::flag_clear("pause_nikolai_vo");
-      var3 = 0;
+      var_3 = 0;
       blendshape_enable(level.nikolai);
       blendshape_disable(level.enforcer);
     }
 
-    if(!level.player istouching(var0)) {
-      if(!var2) {
+    if(!level.player istouching(var_0)) {
+      if(!var_2) {
         scripts\engine\utility::flag_set("pause_butcher_vo");
         scripts\engine\utility::flag_set("pause_family_vo");
         level.enforcerwife stoploopsound();
-        var2 = 1;
+        var_2 = 1;
       }
-    } else if(var2) {
+    } else if(var_2) {
       scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_family_idle_loop(1);
       scripts\engine\utility::flag_clear("pause_butcher_vo");
       scripts\engine\utility::flag_clear("pause_family_vo");
-      var2 = 0;
+      var_2 = 0;
     }
 
     wait 0.5;
@@ -1481,9 +1481,9 @@ function dialogue_cooldown_timer() {
   level endon("missionfailed");
 
   for(;;) {
-    foreach(var2, var1 in level.dialoguecooldowns) {
-      if(var1[1] != 0) {
-        level.dialoguecooldowns[var2][1] -= 1;
+    foreach(var_2, var_1 in level.dialoguecooldowns) {
+      if(var_1[1] != 0) {
+        level.dialoguecooldowns[var_2][1] -= 1;
       }
     }
 
@@ -1491,23 +1491,23 @@ function dialogue_cooldown_timer() {
   }
 }
 
-function play_dialogue(var0, var1) {
+function play_dialogue(var_0, var_1) {
   level.alivestates = get_actor_alive_states();
 
-  if(!is_dialogue_on_cooldown(var0)) {
-    GscBinSkip1(0x74, var1);
+  if(!is_dialogue_on_cooldown(var_0)) {
+    GscBinSkip1(0x74, var_1);
   }
 
   return false;
 }
 
-function is_dialogue_on_cooldown(var0) {
-  return level.dialoguecooldowns[var0][1] != 0;
+function is_dialogue_on_cooldown(var_0) {
+  return level.dialoguecooldowns[var_0][1] != 0;
 }
 
-function set_dialogue_on_cooldown(var0, var1) {
-  var2 = scripts\engine\utility::ter_op(isDefined(var1), var1, level.dialoguecooldowns[var0][0]);
-  level.dialoguecooldowns[var0][1] = var2;
+function set_dialogue_on_cooldown(var_0, var_1) {
+  var_2 = scripts\engine\utility::ter_op(isDefined(var_1), var_1, level.dialoguecooldowns[var_0][0]);
+  level.dialoguecooldowns[var_0][1] = var_2;
 }
 
 function player_give_gunless_loadout() {
@@ -1528,29 +1528,29 @@ function player_post_escort_setup() {
 }
 
 function player_aim_target() {
-  var0 = 0;
-  var1 = 1;
-  var2 = 2;
+  var_0 = 0;
+  var_1 = 1;
+  var_2 = 2;
   level.mindistancesq = squared(50);
   level.maxdistancesq = squared(215);
   level.oneoverfactor = 1 / (log(level.maxdistancesq) - log(level.mindistancesq));
   level.currentplayertarget = 0;
 
   for(;;) {
-    var3 = quick_maffs();
-    var4 = var3[3];
+    var_3 = quick_maffs();
+    var_4 = var_3[3];
 
-    if(isDefined(var3[3]) && var4.size > 0) {
-      var5 = var4[0]["position"];
-      var6 = var4[0]["normal"];
-      var7 = var4[0]["entity"];
+    if(isDefined(var_3[3]) && var_4.size > 0) {
+      var_5 = var_4[0]["position"];
+      var_6 = var_4[0]["normal"];
+      var_7 = var_4[0]["entity"];
 
-      if(isalive(var7) && isDefined(var7.name)) {
-        switch (var7.name) {
+      if(isalive(var_7) && isDefined(var_7.name)) {
+        switch (var_7.name) {
           case "The Butcher":
-            if(var3[0][var0] < -0.065) {
+            if(var_3[0][var_0] < -0.065) {
               level.currentplayertarget = 2;
-            } else if(var3[0][var0] > 0.065) {
+            } else if(var_3[0][var_0] > 0.065) {
               level.currentplayertarget = 3;
             } else {
               level.currentplayertarget = 1;
@@ -1567,9 +1567,9 @@ function player_aim_target() {
             level.currentplayertarget = 8;
             break;
           case "Ousa":
-            if(var3[1][var0] < -0.065) {
+            if(var_3[1][var_0] < -0.065) {
               level.currentplayertarget = 10;
-            } else if(var3[1][var0] > 0.065) {
+            } else if(var_3[1][var_0] > 0.065) {
               level.currentplayertarget = 11;
             } else {
               level.currentplayertarget = 9;
@@ -1577,9 +1577,9 @@ function player_aim_target() {
 
             break;
           case "Amon":
-            if(var3[2][var0] < -0.065) {
+            if(var_3[2][var_0] < -0.065) {
               level.currentplayertarget = 13;
-            } else if(var3[2][var0] > 0.065) {
+            } else if(var_3[2][var_0] > 0.065) {
               level.currentplayertarget = 14;
             } else {
               level.currentplayertarget = 12;
@@ -1588,20 +1588,20 @@ function player_aim_target() {
             break;
         }
       }
-    } else if(!scripts\engine\utility::flag("son_dead") && !scripts\engine\utility::flag("wife_dead") && var3[1][var1] >= var3[1][var2]) {
-      if(var3[1][var0] < 0) {
+    } else if(!scripts\engine\utility::flag("son_dead") && !scripts\engine\utility::flag("wife_dead") && var_3[1][var_1] >= var_3[1][var_2]) {
+      if(var_3[1][var_0] < 0) {
         level.currentplayertarget = 15;
       } else {
         level.currentplayertarget = 16;
       }
-    } else if(!scripts\engine\utility::flag("son_dead") && !scripts\engine\utility::flag("wife_dead") && var3[2][var1] >= var3[2][var2]) {
-      if(var3[2][var0] < 0) {
+    } else if(!scripts\engine\utility::flag("son_dead") && !scripts\engine\utility::flag("wife_dead") && var_3[2][var_1] >= var_3[2][var_2]) {
+      if(var_3[2][var_0] < 0) {
         level.currentplayertarget = 15;
       } else {
         level.currentplayertarget = 16;
       }
-    } else if(!scripts\engine\utility::flag("enforcer_dead") && var3[0][var1] >= var3[0][var2]) {
-      if(var3[0][var0] < 0) {
+    } else if(!scripts\engine\utility::flag("enforcer_dead") && var_3[0][var_1] >= var_3[0][var_2]) {
+      if(var_3[0][var_0] < 0) {
         level.currentplayertarget = 4;
       } else {
         level.currentplayertarget = 5;
@@ -1615,62 +1615,62 @@ function player_aim_target() {
 }
 
 function quick_maffs() {
-  var0 = [];
-  var1 = level.player getEye();
-  var2 = anglesToForward(level.player getplayerangles());
-  var3 = var1 + var2 * 2048;
-  var4 = scripts\engine\trace::create_contents(1);
-  var5 = physics_raycast(var1, var3, var4, level.player, 1, "physicsquery_closest");
-  var0 = fov_calculation(level.enforcer, var1, var2);
-  var0 = fov_calculation(level.enforcerwife, var1, var2);
-  var0 = fov_calculation(level.enforcerson, var1, var2);
-  var0 = var5;
-  return var0;
+  var_0 = [];
+  var_1 = level.player getEye();
+  var_2 = anglesToForward(level.player getplayerangles());
+  var_3 = var_1 + var_2 * 2048;
+  var_4 = scripts\engine\trace::create_contents(1);
+  var_5 = physics_raycast(var_1, var_3, var_4, level.player, 1, "physicsquery_closest");
+  var_0 = fov_calculation(level.enforcer, var_1, var_2);
+  var_0 = fov_calculation(level.enforcerwife, var_1, var_2);
+  var_0 = fov_calculation(level.enforcerson, var_1, var_2);
+  var_0 = var_5;
+  return var_0;
 }
 
-function fov_calculation(var0, var1, var2, var3, var4, var5) {
-  if(!isalive(var0)) {
+function fov_calculation(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(!isalive(var_0)) {
     return [0, 0, 0];
   }
 
-  var6 = [];
-  var7 = var0 getorigin() + (0, 0, 25);
-  var8 = vectorNormalize(var7 - var1);
-  var9 = vectordot(var2, var8);
-  var10 = anglestoup(level.player getplayerangles());
-  var11 = vectorcross(var2, var8);
-  var12 = vectordot(var11, var10);
-  var13 = clamp(distancesquared(var1, var7), level.mindistancesq, level.maxdistancesq);
-  var14 = (log(var13) - log(level.mindistancesq)) * level.oneoverfactor;
-  var15 = 0.73 + var14 * 0.254;
-  return [var12, var9, var15];
+  var_6 = [];
+  var_7 = var_0 getorigin() + (0, 0, 25);
+  var_8 = vectorNormalize(var_7 - var_1);
+  var_9 = vectordot(var_2, var_8);
+  var_10 = anglestoup(level.player getplayerangles());
+  var_11 = vectorcross(var_2, var_8);
+  var_12 = vectordot(var_11, var_10);
+  var_13 = clamp(distancesquared(var_1, var_7), level.mindistancesq, level.maxdistancesq);
+  var_14 = (log(var_13) - log(level.mindistancesq)) * level.oneoverfactor;
+  var_15 = 0.73 + var_14 * 0.254;
+  return [var_12, var_9, var_15];
 }
 
-function interrogation_rig_enable(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
-  var3 = scripts\engine\utility::ter_op(isDefined(var3), var3, level.yegoranimnode);
-  var2 = scripts\engine\utility::ter_op(isDefined(var2), var2, 0.25);
-  var4 = scripts\engine\utility::ter_op(isDefined(var4), var4, 0);
-  var5 = scripts\engine\utility::ter_op(isDefined(var5), var5, 0);
-  var6 = scripts\engine\utility::ter_op(isDefined(var6), var6, 0);
-  var7 = scripts\engine\utility::ter_op(isDefined(var7), var7, 0);
-  var8 = scripts\engine\utility::ter_op(isDefined(var8), var8, 0);
+function interrogation_rig_enable(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  var_3 = scripts\engine\utility::ter_op(isDefined(var_3), var_3, level.yegoranimnode);
+  var_2 = scripts\engine\utility::ter_op(isDefined(var_2), var_2, 0.25);
+  var_4 = scripts\engine\utility::ter_op(isDefined(var_4), var_4, 0);
+  var_5 = scripts\engine\utility::ter_op(isDefined(var_5), var_5, 0);
+  var_6 = scripts\engine\utility::ter_op(isDefined(var_6), var_6, 0);
+  var_7 = scripts\engine\utility::ter_op(isDefined(var_7), var_7, 0);
+  var_8 = scripts\engine\utility::ter_op(isDefined(var_8), var_8, 0);
 
-  if(!var4) {
+  if(!var_4) {
     level.player disableweapons();
   }
 
-  var3 thread scripts\common\anim::anim_first_frame_solo(level.player.rig, var0);
+  var_3 thread scripts\common\anim::anim_first_frame_solo(level.player.rig, var_0);
   level.player hidelegsandshadow();
   level.player setstance("stand");
   level.player allowcrouch(0);
   level.player allowprone(0);
   scripts\sp\utility::nvidiaansel_scriptdisable(1);
-  level.player playerlinktoblend(level.player.rig, "tag_player", var2, var2 * 0.25, var2 * 0.25);
-  wait var2;
-  level.player playerlinktodelta(level.player.rig, "tag_player", 1, var5, var6, var7, var8, 1);
+  level.player playerlinktoblend(level.player.rig, "tag_player", var_2, var_2 * 0.25, var_2 * 0.25);
+  wait var_2;
+  level.player playerlinktodelta(level.player.rig, "tag_player", 1, var_5, var_6, var_7, var_8, 1);
 
-  if(isDefined(var1)) {
-    level.player.rig setModel(var1);
+  if(isDefined(var_1)) {
+    level.player.rig setModel(var_1);
     level.player.rig show();
     level.player.rig castshadows();
     return;
@@ -1679,21 +1679,21 @@ function interrogation_rig_enable(var0, var1, var2, var3, var4, var5, var6, var7
   level.player.rig hide();
 }
 
-function interrogation_rig_disable(var0, var1, var2) {
-  var1 = scripts\engine\utility::ter_op(isDefined(var1), var1, 0.25);
+function interrogation_rig_disable(var_0, var_1, var_2) {
+  var_1 = scripts\engine\utility::ter_op(isDefined(var_1), var_1, 0.25);
 
-  if(var1 != -1) {
-    var3 = getanimlength(level.player.rig scripts\engine\utility::getanim(var0));
-    var4 = level scripts\engine\utility::waittill_notify_or_timeout_return("userskipped", var3 - var1);
+  if(var_1 != -1) {
+    var_3 = getanimlength(level.player.rig scripts\engine\utility::getanim(var_0));
+    var_4 = level scripts\engine\utility::waittill_notify_or_timeout_return("userskipped", var_3 - var_1);
     level.player freezecontrols(1);
     waitframe();
     level.player playerlinktodelta(level.player.rig, "tag_player", 0, 0, 0, 0, 0, 1);
-    level.player playerlinktoblend(level.player.rig, "tag_player", var1);
+    level.player playerlinktoblend(level.player.rig, "tag_player", var_1);
 
-    if(var4 == "userskipped") {
+    if(var_4 == "userskipped") {
       level.player.rig waittillmatch("single anim", "end");
     } else {
-      wait var1 + 0.1;
+      wait var_1 + 0.1;
     }
   }
 
@@ -1702,7 +1702,7 @@ function interrogation_rig_disable(var0, var1, var2) {
   level.player showlegsandshadow();
   level.player unlink();
 
-  if(!istrue(var2)) {
+  if(!istrue(var_2)) {
     level.player allowcrouch(1);
     level.player allowprone(1);
   }
@@ -1720,54 +1720,54 @@ function damage_monitor() {
   GscBinSkip4(0x6e, level.enforcer, "enforcer_dead");
 }
 
-function target_damage_listener(var0) {
-  level endon(var0);
+function target_damage_listener(var_0) {
+  level endon(var_0);
 
   for(;;) {
-    self waittill("damage", var1, var2, var3, var4, var5, var6, var7, var8, var9, var10);
-    damage_handler(self, var2, var5, var8, var10);
+    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+    damage_handler(self, var_2, var_5, var_8, var_10);
   }
 }
 
-function damage_handler(var0, var1, var2, var3, var4) {
-  var5 = ["j_helmet", "j_head", "j_neck", "j_spine4", "j_spinelower", "j_spineupper", "j_mainroot"];
-  var6 = ["j_helmet", "j_head"];
-  var7 = ["j_shoulder", "j_elbow", "j_wrist"];
-  var8 = ["j_hip", "j_knee", "j_ankle", "j_ball"];
-  var9 = ["react_son_melee", "react_wife_melee"];
+function damage_handler(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = ["j_helmet", "j_head", "j_neck", "j_spine4", "j_spinelower", "j_spineupper", "j_mainroot"];
+  var_6 = ["j_helmet", "j_head"];
+  var_7 = ["j_shoulder", "j_elbow", "j_wrist"];
+  var_8 = ["j_hip", "j_knee", "j_ankle", "j_ball"];
+  var_9 = ["react_son_melee", "react_wife_melee"];
 
-  if(isPlayer(var1)) {
+  if(isPlayer(var_1)) {
     turn_off_headtracking();
     level.actioncount++;
 
-    if(var2 == "MOD_PISTOL_BULLET" || var2 == "MOD_RIFLE_BULLET") {
-      var10 = clamp(var0.health - 2, 2, 8);
-      var0.health = int(var10);
+    if(var_2 == "MOD_PISTOL_BULLET" || var_2 == "MOD_RIFLE_BULLET") {
+      var_10 = clamp(var_0.health - 2, 2, 8);
+      var_0.health = int(var_10);
 
-      if(isDefined(var3) && scripts\engine\utility::array_contains(var5, var3) || var0.health <= 2) {
-        var11 = scripts\engine\utility::array_contains(var6, var3);
-        thread target_death_wrapper(var0, var11);
+      if(isDefined(var_3) && scripts\engine\utility::array_contains(var_5, var_3) || var_0.health <= 2) {
+        var_11 = scripts\engine\utility::array_contains(var_6, var_3);
+        thread target_death_wrapper(var_0, var_11);
         return;
       }
 
-      if(scripts\engine\utility::is_equal(var0, level.enforcer)) {
+      if(scripts\engine\utility::is_equal(var_0, level.enforcer)) {
         play_dialogue("enforcer_shot", &scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_enforcer_shot);
       } else if(!scripts\engine\utility::flag("wife_dead") && !scripts\engine\utility::flag("son_dead")) {
-        thread target_death_wrapper(var0, 0);
+        thread target_death_wrapper(var_0, 0);
       }
 
-      var12 = getsubstr(var3, 0, var3.size - 3);
+      var_12 = getsubstr(var_3, 0, var_3.size - 3);
 
-      if(issubstr(var3, "_le")) {
-        if(scripts\engine\utility::array_contains(var7, var12)) {
+      if(issubstr(var_3, "_le")) {
+        if(scripts\engine\utility::array_contains(var_7, var_12)) {
           thread enforcer_play_additive_anim("shot_arm_left");
-        } else if(scripts\engine\utility::array_contains(var8, var12)) {
+        } else if(scripts\engine\utility::array_contains(var_8, var_12)) {
           thread enforcer_play_additive_anim("shot_leg_left");
         }
-      } else if(issubstr(var3, "_ri")) {
-        if(scripts\engine\utility::array_contains(var7, var12)) {
+      } else if(issubstr(var_3, "_ri")) {
+        if(scripts\engine\utility::array_contains(var_7, var_12)) {
           thread enforcer_play_additive_anim("shot_arm_right");
-        } else if(scripts\engine\utility::array_contains(var8, var12)) {
+        } else if(scripts\engine\utility::array_contains(var_8, var_12)) {
           thread enforcer_play_additive_anim("shot_leg_right");
         }
       }
@@ -1782,9 +1782,9 @@ function damage_handler(var0, var1, var2, var3, var4) {
       return;
     }
 
-    if(var3 == "MOD_MELEE" || var3 == "MOD_CRUSH") {
-      if(scripts\engine\utility::is_equal(var1, level.enforcer)) {
-        if(var3 != "MOD_CRUSH") {
+    if(var_3 == "MOD_MELEE" || var_3 == "MOD_CRUSH") {
+      if(scripts\engine\utility::is_equal(var_1, level.enforcer)) {
+        if(var_3 != "MOD_CRUSH") {
           return;
         }
 
@@ -1792,73 +1792,73 @@ function damage_handler(var0, var1, var2, var3, var4) {
         thread target_play_anim(level.enforcerson, "react_enforcer_melee", 0, 1);
       } else {
         play_dialogue("family_melee", &scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_family_melee);
-        thread target_play_anim(level.enforcer, var10[randomint(var10.size)], 0, 1);
-        target_play_anim(var1, "interrogate_melee", 0, 1);
+        thread target_play_anim(level.enforcer, var_10[randomint(var_10.size)], 0, 1);
+        target_play_anim(var_1, "interrogate_melee", 0, 1);
         scripts\engine\utility::flag_set("interrogation_failed");
         scripts\sp\player_death::set_custom_death_quote(91);
         thread scripts\sp\utility::missionfailedwrapper();
       }
 
-      var10 = clamp(var1.health - 2, 2, 8);
-      var1.health = int(var10);
+      var_10 = clamp(var_1.health - 2, 2, 8);
+      var_1.health = int(var_10);
 
-      if(var1.health <= 2) {
-        var11 = scripts\engine\utility::array_contains(var7, var4);
-        thread target_death_wrapper(var1, var11, 1);
+      if(var_1.health <= 2) {
+        var_11 = scripts\engine\utility::array_contains(var_7, var_4);
+        thread target_death_wrapper(var_1, var_11, 1);
         return;
       }
 
       return;
     }
 
-    if(isDefined(var6)) {
-      var6 = getweaponbasename(var6);
-      iprintlnbold("Weapon: " + var6 + ", Type: " + var4 + ", Part: " + var5);
+    if(isDefined(var_6)) {
+      var_6 = getweaponbasename(var_6);
+      iprintlnbold("Weapon: " + var_6 + ", Type: " + var_4 + ", Part: " + var_5);
       return;
     }
 
-    iprintlnbold("Tried to handle invalid damage for: " + var2.name);
+    iprintlnbold("Tried to handle invalid damage for: " + var_2.name);
     return;
   }
 }
 
-function enforcer_play_additive_anim(var0) {
-  var1 = level.enforcer scripts\engine\utility::getanim(var0);
-  var2 = getanimlength(var1);
-  level.enforcer setanimrestart(var1, 1, 0.1);
-  level.enforcer scripts\engine\utility::delaycall(var2, &clearanim, var1, 0.25);
+function enforcer_play_additive_anim(var_0) {
+  var_1 = level.enforcer scripts\engine\utility::getanim(var_0);
+  var_2 = getanimlength(var_1);
+  level.enforcer setanimrestart(var_1, 1, 0.1);
+  level.enforcer scripts\engine\utility::delaycall(var_2, &clearanim, var_1, 0.25);
 }
 
 function nearby_shot_monitor() {
   level.familyflinchanims = ["whizby_1", "whizby_2", "whizby_4", "whizby_3"];
 
   for(;;) {
-    var0 = level.enforcer.health;
-    var1 = level.enforcerwife.health;
-    var2 = level.enforcerson.health;
+    var_0 = level.enforcer.health;
+    var_1 = level.enforcerwife.health;
+    var_2 = level.enforcerson.health;
     level.player waittill("weapon_fired");
     level.actioncount++;
     thread weapon_fire_vo_cooldown();
     wait 0.1;
-    var3 = is_enforcer_target() && level.enforcer.health < var0;
+    var_3 = is_enforcer_target() && level.enforcer.health < var_0;
 
-    if(!scripts\engine\utility::flag("enforcer_dead") && !var3 && is_enforcer_threatened()) {
-      var4 = "whizby_flinch_" + randomintrange(1, 3);
-      enforcer_play_additive_anim(var4);
+    if(!scripts\engine\utility::flag("enforcer_dead") && !var_3 && is_enforcer_threatened()) {
+      var_4 = "whizby_flinch_" + randomintrange(1, 3);
+      enforcer_play_additive_anim(var_4);
     }
 
-    var5 = 1;
-    var6 = 1;
+    var_5 = 1;
+    var_6 = 1;
 
     if(!scripts\engine\utility::flag("wife_dead")) {
-      var5 = is_relative_target() && level.enforcerwife.health < var1;
+      var_5 = is_relative_target() && level.enforcerwife.health < var_1;
     }
 
     if(!scripts\engine\utility::flag("son_dead")) {
-      var6 = is_relative_target() && level.enforcerson.health < var2;
+      var_6 = is_relative_target() && level.enforcerson.health < var_2;
     }
 
-    if(!var5 && !var6) {
+    if(!var_5 && !var_6) {
       if(temp_is_performance_active()) {
         thread scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_family_scream();
         continue;
@@ -1871,7 +1871,7 @@ function nearby_shot_monitor() {
       }
 
       level.enforcerwife stoploopsound();
-      var7 = getanimlength(level.enforcerson scripts\engine\utility::getanim(level.familyflinchanims[0]));
+      var_7 = getanimlength(level.enforcerson scripts\engine\utility::getanim(level.familyflinchanims[0]));
       thread target_play_anim(level.enforcerson, level.familyflinchanims[0], 0, 1);
       level scripts\engine\utility::thread_on_notify("pause_family_vo", &scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_family_idle_loop, undefined, undefined, undefined, level.player, "weapon_fired");
       level.familyflinchanims = scripts\sp\maps\stpetersburg\stpetersburg_utility::array_rotate(level.familyflinchanims);
@@ -1882,13 +1882,13 @@ function nearby_shot_monitor() {
 function weapon_fire_vo_cooldown() {
   level notify("weapon_fire_vo_cooldown");
   level endon("weapon_fire_vo_cooldown");
-  var0 = 7;
+  var_0 = 7;
   scripts\engine\utility::flag_set("pause_butcher_vo");
   scripts\engine\utility::flag_set("pause_family_vo");
-  wait var0;
-  var1 = getEnt("interrogation_room_containment", "targetname");
+  wait var_0;
+  var_1 = getEnt("interrogation_room_containment", "targetname");
 
-  if(level.player istouching(var1)) {
+  if(level.player istouching(var_1)) {
     scripts\engine\utility::flag_clear("pause_butcher_vo");
     scripts\engine\utility::flag_clear("pause_family_vo");
     return;
@@ -1898,117 +1898,117 @@ function weapon_fire_vo_cooldown() {
 function enforcer_ads_anims() {
   level endon("missionfailed");
   level.enforcer endon("death");
-  var0 = [1, 2, 3];
-  var1 = "idle";
-  var2 = 0;
-  var3 = 0;
-  var4 = 7;
-  var5 = getEnt("interrogation_room_containment", "targetname");
-  var6 = 0;
-  var7 = 2.5;
+  var_0 = [1, 2, 3];
+  var_1 = "idle";
+  var_2 = 0;
+  var_3 = 0;
+  var_4 = 7;
+  var_5 = getEnt("interrogation_room_containment", "targetname");
+  var_6 = 0;
+  var_7 = 2.5;
   scripts\engine\utility::flag_wait("revolver_picked_up");
   level waittill("enable_ads_reactions_enforcer");
 
   for(;;) {
     waitframe();
 
-    if(scripts\engine\utility::array_contains(var0, level.currentplayertarget) && !temp_is_performance_active()) {
+    if(scripts\engine\utility::array_contains(var_0, level.currentplayertarget) && !temp_is_performance_active()) {
       level.actioncount++;
-      var8 = anglesToForward(level.player.angles);
-      var9 = anglesToForward(level.enforcer.angles);
-      var10 = vectordot(var8, var9);
+      var_8 = anglesToForward(level.player.angles);
+      var_9 = anglesToForward(level.enforcer.angles);
+      var_10 = vectordot(var_8, var_9);
 
       if(!scripts\engine\utility::flag("defeated_state_active")) {
         play_dialogue("enforcer_ads", &scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_enforcer_ads);
       }
 
       if(scripts\engine\utility::flag("defeated_state_active")) {
-        if(level.player istouching(var5) && !scripts\engine\utility::flag("enforcer_dead")) {
+        if(level.player istouching(var_5) && !scripts\engine\utility::flag("enforcer_dead")) {
           play_dialogue("enforcer_defeated", &scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_enforcer_defeated);
           break;
         }
-      } else if(!var2 && !scripts\engine\utility::flag("intel_revealed")) {
-        if(!var6) {
+      } else if(!var_2 && !scripts\engine\utility::flag("intel_revealed")) {
+        if(!var_6) {
           thread scripts\sp\maps\stpetersburg\stpetersburg_vo::mus_kyle_pointgun();
           thread scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_enforcer_ads_family_reaction();
-          var6 = 1;
+          var_6 = 1;
         }
 
         switch (level.currentplayertarget) {
           case 2:
-            var11 = scripts\engine\utility::ter_op(var10 <= 0, "ads_left", "ads_right");
+            var_11 = scripts\engine\utility::ter_op(var_10 <= 0, "ads_left", "ads_right");
 
-            if(var1 != var11) {
-              var2 = 1;
-              var12 = var11 + "_in";
-              target_play_anim(level.enforcer, var12);
+            if(var_1 != var_11) {
+              var_2 = 1;
+              var_12 = var_11 + "_in";
+              target_play_anim(level.enforcer, var_12);
 
-              if(target_play_anim(level.enforcer, var11, 1)) {
-                var1 = var11;
+              if(target_play_anim(level.enforcer, var_11, 1)) {
+                var_1 = var_11;
               }
             }
 
             break;
           case 3:
-            var11 = scripts\engine\utility::ter_op(var10 <= 0, "ads_right", "ads_left");
+            var_11 = scripts\engine\utility::ter_op(var_10 <= 0, "ads_right", "ads_left");
 
-            if(var1 != var11) {
-              var2 = 1;
-              var12 = var11 + "_in";
-              target_play_anim(level.enforcer, var12);
+            if(var_1 != var_11) {
+              var_2 = 1;
+              var_12 = var_11 + "_in";
+              target_play_anim(level.enforcer, var_12);
 
-              if(target_play_anim(level.enforcer, var11, 1)) {
-                var1 = var11;
+              if(target_play_anim(level.enforcer, var_11, 1)) {
+                var_1 = var_11;
               }
             }
 
             break;
           case 1:
-            if(var1 != "ads_center") {
-              var2 = 1;
-              var11 = "ads_center";
-              var12 = var11 + "_in";
-              target_play_anim(level.enforcer, var12);
+            if(var_1 != "ads_center") {
+              var_2 = 1;
+              var_11 = "ads_center";
+              var_12 = var_11 + "_in";
+              target_play_anim(level.enforcer, var_12);
 
-              if(target_play_anim(level.enforcer, var11, 1)) {
-                var1 = "ads_center";
+              if(target_play_anim(level.enforcer, var_11, 1)) {
+                var_1 = "ads_center";
               }
             }
 
             break;
         }
       }
-    } else if(var1 != "idle" && level.enforcer.health > 1 && !temp_is_performance_active()) {
-      var13 = var1 + "_out";
-      wait var7;
+    } else if(var_1 != "idle" && level.enforcer.health > 1 && !temp_is_performance_active()) {
+      var_13 = var_1 + "_out";
+      wait var_7;
 
-      if(!scripts\engine\utility::array_contains(var0, level.currentplayertarget) && !temp_is_performance_active()) {
-        if(target_play_anim(level.enforcer, var13, 0, 1)) {
-          var1 = "idle";
+      if(!scripts\engine\utility::array_contains(var_0, level.currentplayertarget) && !temp_is_performance_active()) {
+        if(target_play_anim(level.enforcer, var_13, 0, 1)) {
+          var_1 = "idle";
         }
       }
 
-      var2 = 0;
-      var3++;
+      var_2 = 0;
+      var_3++;
     }
 
-    if(var1 != "idle" && level.enforcer.currentanimpriority != level.animpriority["ads"] && level.enforcer.currentanimpriority != level.animpriority["react_ads"]) {
-      var2 = 0;
-      var1 = "idle";
+    if(var_1 != "idle" && level.enforcer.currentanimpriority != level.animpriority["ads"] && level.enforcer.currentanimpriority != level.animpriority["react_ads"]) {
+      var_2 = 0;
+      var_1 = "idle";
     }
   }
 }
 
 function relative_ads_anims() {
   level endon("missionfailed");
-  var0 = [9, 12, 10, 13, 11, 14];
-  var1 = "idle";
-  var2 = "aim";
-  var3 = 0;
-  var4 = level.animpriority["react_ads"];
-  var5 = 0;
-  var6 = 0;
-  var7 = 2;
+  var_0 = [9, 12, 10, 13, 11, 14];
+  var_1 = "idle";
+  var_2 = "aim";
+  var_3 = 0;
+  var_4 = level.animpriority["react_ads"];
+  var_5 = 0;
+  var_6 = 0;
+  var_7 = 2;
   level waittill("enable_ads_reactions_family");
 
   for(;;) {
@@ -2022,58 +2022,58 @@ function relative_ads_anims() {
       break;
     }
 
-    if(scripts\engine\utility::array_contains(var0, level.currentplayertarget) && !temp_is_performance_active()) {
+    if(scripts\engine\utility::array_contains(var_0, level.currentplayertarget) && !temp_is_performance_active()) {
       level.actioncount++;
       level notify("family_ads_reaction_active");
-      var8 = anglesToForward(level.player.angles);
-      var9 = anglesToForward(level.enforcerson.angles);
-      var10 = vectordot(var8, var9);
-      var11 = scripts\engine\utility::ter_op(level.player scripts\engine\sp\utility::isads(), "ads", "aim");
+      var_8 = anglesToForward(level.player.angles);
+      var_9 = anglesToForward(level.enforcerson.angles);
+      var_10 = vectordot(var_8, var_9);
+      var_11 = scripts\engine\utility::ter_op(level.player scripts\engine\sp\utility::isads(), "ads", "aim");
 
-      if(var11 != var2) {
-        var2 = var11;
-        var3 = 0;
+      if(var_11 != var_2) {
+        var_2 = var_11;
+        var_3 = 0;
       }
 
-      if(!var5) {
-        var5 = 1;
+      if(!var_5) {
+        var_5 = 1;
         thread scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_family_aim();
         thread scripts\sp\maps\stpetersburg\stpetersburg_vo::mus_kyle_pointgun();
         scripts\engine\utility::flag_set("family_spooked");
         scripts\engine\utility::delaythread(1.75, &target_play_anim, level.enforcerson, "whizby_single", 0, 1);
-      } else if(var11 == "ads") {
+      } else if(var_11 == "ads") {
         level notify("revolver_phase_family_ads");
 
-        if(!var6) {
+        if(!var_6) {
           thread scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_family_ads();
-          var6 = 1;
+          var_6 = 1;
         }
       }
 
-      if(!var3) {
+      if(!var_3) {
         turn_off_headtracking();
-        var3 = 1;
+        var_3 = 1;
 
         switch (level.currentplayertarget) {
           case 13:
           case 10:
           case 9:
-            var12 = scripts\engine\utility::ter_op(level.player scripts\engine\sp\utility::isads(), "react_ads_wife", "react_aim_wife");
+            var_12 = scripts\engine\utility::ter_op(level.player scripts\engine\sp\utility::isads(), "react_ads_wife", "react_aim_wife");
 
-            if(var1 != var12) {
-              target_play_anim(level.enforcer, var12, 1);
-              var1 = var12;
+            if(var_1 != var_12) {
+              target_play_anim(level.enforcer, var_12, 1);
+              var_1 = var_12;
             }
 
             break;
           case 14:
           case 12:
           case 11:
-            var12 = scripts\engine\utility::ter_op(level.player scripts\engine\sp\utility::isads(), "react_ads_wife", "react_ads_son");
+            var_12 = scripts\engine\utility::ter_op(level.player scripts\engine\sp\utility::isads(), "react_ads_wife", "react_ads_son");
 
-            if(var1 != var12) {
-              target_play_anim(level.enforcer, var12, 1);
-              var1 = var12;
+            if(var_1 != var_12) {
+              target_play_anim(level.enforcer, var_12, 1);
+              var_1 = var_12;
             }
 
             break;
@@ -2083,21 +2083,21 @@ function relative_ads_anims() {
       continue;
     }
 
-    if(var1 != "idle" && !scripts\engine\utility::flag("wife_dead") && !scripts\engine\utility::flag("son_dead") && !temp_is_performance_active()) {
-      var13 = var1 + "_out";
-      wait var7;
+    if(var_1 != "idle" && !scripts\engine\utility::flag("wife_dead") && !scripts\engine\utility::flag("son_dead") && !temp_is_performance_active()) {
+      var_13 = var_1 + "_out";
+      wait var_7;
 
-      if(!scripts\engine\utility::flag("enforcer_dead") && level.enforcer.currentanimpriority <= var4) {
-        if(!scripts\engine\utility::array_contains(var0, level.currentplayertarget) && !temp_is_performance_active()) {
+      if(!scripts\engine\utility::flag("enforcer_dead") && level.enforcer.currentanimpriority <= var_4) {
+        if(!scripts\engine\utility::array_contains(var_0, level.currentplayertarget) && !temp_is_performance_active()) {
           target_restore_idle_anim(level.enforcer);
         }
       }
 
       if(level.currentrelativeanimpriority == 0) {
-        var1 = "idle";
+        var_1 = "idle";
       }
 
-      var3 = 0;
+      var_3 = 0;
     }
   }
 
@@ -2106,7 +2106,7 @@ function relative_ads_anims() {
   for(;;) {
     waitframe();
 
-    if(scripts\engine\utility::array_contains(var0, level.currentplayertarget) && !temp_is_performance_active()) {
+    if(scripts\engine\utility::array_contains(var_0, level.currentplayertarget) && !temp_is_performance_active()) {
       level notify("defeated_state_family_ads");
       wait 0.5;
     }
@@ -2118,15 +2118,15 @@ function price_ads_anims() {
   level endon("intel_revealed");
   level endon("interrogation_failed");
   scripts\engine\utility::flag_wait("revolver_picked_up");
-  var0 = scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_price_ads();
+  var_0 = scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_price_ads();
 
-  while(var0.size > 0) {
+  while(var_0.size > 0) {
     if(!temp_is_performance_active() && level.player scripts\engine\sp\utility::isads() && level.currentplayertarget == 6 && !scripts\engine\utility::flag("final_phase")) {
       level.actioncount++;
       level notify("price_ads_reaction");
       wait 0.5;
-      thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_price(var0[0][0], var0[0][1]);
-      var0 = scripts\engine\utility::array_remove_index(var0, 0);
+      thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_price(var_0[0][0], var_0[0][1]);
+      var_0 = scripts\engine\utility::array_remove_index(var_0, 0);
       level.priceanimnode scripts\common\anim::anim_single_solo(level.price, "ads_price");
 
       if(!scripts\engine\utility::flag("dry_fire_react") || !temp_is_performance_active() && !scripts\engine\utility::flag("final_phase")) {
@@ -2139,60 +2139,60 @@ function price_ads_anims() {
   }
 }
 
-function target_play_anim(var0, var1, var2, var3, var4) {
-  if(!isalive(var0)) {
+function target_play_anim(var_0, var_1, var_2, var_3, var_4) {
+  if(!isalive(var_0)) {
     return 0;
   }
 
-  var5 = scripts\engine\utility::ter_op(scripts\engine\utility::is_equal(var0, level.enforcer), level.enforcer.currentanimpriority, level.currentrelativeanimpriority);
-  var6 = get_interrogate_anim_priority(var1);
+  var_5 = scripts\engine\utility::ter_op(scripts\engine\utility::is_equal(var_0, level.enforcer), level.enforcer.currentanimpriority, level.currentrelativeanimpriority);
+  var_6 = get_interrogate_anim_priority(var_1);
 
-  if(istrue(var4) || var6 >= var5 && !scripts\engine\utility::is_equal(var1, level.previousanim[var0.name])) {
-    level.previousanim[var0.name] = var1;
+  if(istrue(var_4) || var_6 >= var_5 && !scripts\engine\utility::is_equal(var_1, level.previousanim[var_0.name])) {
+    level.previousanim[var_0.name] = var_1;
 
-    if(scripts\engine\utility::is_equal(var0, level.enforcer) && !scripts\engine\utility::flag("enforcer_dead")) {
-      level.enforcer.currentanimpriority = var6;
+    if(scripts\engine\utility::is_equal(var_0, level.enforcer) && !scripts\engine\utility::flag("enforcer_dead")) {
+      level.enforcer.currentanimpriority = var_6;
 
-      if(istrue(var2)) {
+      if(istrue(var_2)) {
         level.enforceranimnode notify("stop_loop");
         level.enforceranimnode notify("enforcer_chair_loop_end");
         level.enforcerchair scripts\engine\sp\utility::anim_stopanimScripted();
-        level.enforceranimnode thread scripts\common\anim::anim_loop_solo(var0, var1);
+        level.enforceranimnode thread scripts\common\anim::anim_loop_solo(var_0, var_1);
         return 1;
       } else {
         level.enforceranimnode notify("stop_loop");
         level.enforceranimnode notify("enforcer_chair_loop_end");
         level.enforcerchair scripts\engine\sp\utility::anim_stopanimScripted();
         level.enforceranimnode notify("single anim", "end");
-        level.enforceranimnode scripts\common\anim::anim_single_solo(var0, var1);
+        level.enforceranimnode scripts\common\anim::anim_single_solo(var_0, var_1);
 
-        if(istrue(var3) && level.enforcer.currentanimpriority <= var6) {
-          return target_restore_idle_anim(var0);
+        if(istrue(var_3) && level.enforcer.currentanimpriority <= var_6) {
+          return target_restore_idle_anim(var_0);
         }
       }
-    } else if(scripts\engine\utility::is_equal(var0, level.enforcerwife) || scripts\engine\utility::is_equal(var0, level.enforcerson)) {
-      level.currentrelativeanimpriority = var6;
+    } else if(scripts\engine\utility::is_equal(var_0, level.enforcerwife) || scripts\engine\utility::is_equal(var_0, level.enforcerson)) {
+      level.currentrelativeanimpriority = var_6;
       level.wifeanimnode notify("stop_loop");
       level.sonanimnode notify("stop_loop");
       level.enforcerwife stoploopsound();
 
-      if(istrue(var2)) {
-        level.wifeanimnode thread scripts\common\anim::anim_loop_solo(level.enforcerwife, var1);
-        level.sonanimnode thread scripts\common\anim::anim_loop_solo(level.enforcerson, var1);
+      if(istrue(var_2)) {
+        level.wifeanimnode thread scripts\common\anim::anim_loop_solo(level.enforcerwife, var_1);
+        level.sonanimnode thread scripts\common\anim::anim_loop_solo(level.enforcerson, var_1);
         return 1;
       } else {
         level.wifeanimnode notify("single anim", "end");
         level.sonanimnode notify("single anim", "end");
 
-        if(var1 == "whizby_1" || var1 == "whizby_2") {
-          level.wifeanimnode thread scripts\common\anim::anim_single_solo(level.familychair, var1);
+        if(var_1 == "whizby_1" || var_1 == "whizby_2") {
+          level.wifeanimnode thread scripts\common\anim::anim_single_solo(level.familychair, var_1);
         }
 
-        level.wifeanimnode thread scripts\common\anim::anim_single_solo(level.enforcerwife, var1);
-        level.sonanimnode scripts\common\anim::anim_single_solo(level.enforcerson, var1);
+        level.wifeanimnode thread scripts\common\anim::anim_single_solo(level.enforcerwife, var_1);
+        level.sonanimnode scripts\common\anim::anim_single_solo(level.enforcerson, var_1);
 
-        if(istrue(var3) && level.currentrelativeanimpriority <= var6) {
-          return target_restore_idle_anim(var0);
+        if(istrue(var_3) && level.currentrelativeanimpriority <= var_6) {
+          return target_restore_idle_anim(var_0);
         }
       }
     }
@@ -2201,47 +2201,47 @@ function target_play_anim(var0, var1, var2, var3, var4) {
   return 0;
 }
 
-function target_restore_idle_anim(var0) {
+function target_restore_idle_anim(var_0) {
   if(scripts\engine\utility::flag("interrogation_end")) {
     return false;
   }
 
-  if(scripts\engine\utility::is_equal(var0, level.enforcer) && !scripts\engine\utility::flag("enforcer_dead")) {
+  if(scripts\engine\utility::is_equal(var_0, level.enforcer) && !scripts\engine\utility::flag("enforcer_dead")) {
     level.enforceranimnode notify("stop_loop");
     level.enforceranimnode notify("single anim", "end");
-    var1 = "idle_interrogate";
+    var_1 = "idle_interrogate";
 
     if(scripts\engine\utility::flag("final_phase")) {
-      var1 += "_high";
+      var_1 += "_high";
     } else if(scripts\engine\utility::flag("interrogation_escort_done")) {
-      var1 += "_med";
+      var_1 += "_med";
     }
 
     if(scripts\engine\utility::flag("son_dead")) {
-      var1 = "grieve_son_death";
+      var_1 = "grieve_son_death";
 
       if(scripts\engine\utility::flag("wife_dead")) {
-        var1 = "grieve_both_death";
+        var_1 = "grieve_both_death";
       }
 
       level.enforcer.currentanimpriority = 25;
     } else if(scripts\engine\utility::flag("wife_dead")) {
-      var1 = "grieve_wife_death";
+      var_1 = "grieve_wife_death";
       level.enforcer.currentanimpriority = 25;
     } else {
       level.enforcer.currentanimpriority = 0;
     }
 
-    level.enforceranimnode thread scripts\common\anim::anim_loop_solo(var0, var1);
-    level.previousanim[var0.name] = "idle_interrogate";
+    level.enforceranimnode thread scripts\common\anim::anim_loop_solo(var_0, var_1);
+    level.previousanim[var_0.name] = "idle_interrogate";
     return true;
-  } else if(level.currentrelativeanimpriority < 99 && (scripts\engine\utility::is_equal(var1, level.enforcerwife) || scripts\engine\utility::is_equal(var1, level.enforcerson))) {
+  } else if(level.currentrelativeanimpriority < 99 && (scripts\engine\utility::is_equal(var_1, level.enforcerwife) || scripts\engine\utility::is_equal(var_1, level.enforcerson))) {
     level.wifeanimnode notify("stop_loop");
     level.sonanimnode notify("stop_loop");
-    var1 = "idle_interrogate";
+    var_1 = "idle_interrogate";
 
     if(scripts\engine\utility::flag("family_spooked")) {
-      var1 += "_high";
+      var_1 += "_high";
     }
 
     level.currentrelativeanimpriority = 0;
@@ -2252,29 +2252,29 @@ function target_restore_idle_anim(var0) {
     }
 
     scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_family_idle_loop();
-    level.wifeanimnode thread scripts\common\anim::anim_loop_solo(level.enforcerwife, var1);
-    level.sonanimnode thread scripts\common\anim::anim_loop_solo(level.enforcerson, var1);
-    level.previousanim[var1.name] = "idle_interrogate";
+    level.wifeanimnode thread scripts\common\anim::anim_loop_solo(level.enforcerwife, var_1);
+    level.sonanimnode thread scripts\common\anim::anim_loop_solo(level.enforcerson, var_1);
+    level.previousanim[var_1.name] = "idle_interrogate";
     return true;
   }
 
   return false;
 }
 
-function target_death_wrapper(var0, var1, var2) {
+function target_death_wrapper(var_0, var_1, var_2) {
   if(scripts\engine\utility::flag("interrogation_failed")) {
     return;
   }
 
-  var3 = getdvarint("stp_family_deaths", 0);
+  var_3 = getdvarint("stp_family_deaths", 0);
   turn_off_headtracking();
   turn_off_headtracking_solo(level.price);
 
-  if(!scripts\engine\utility::flag("intel_revealed") || var0 != level.enforcer) {
+  if(!scripts\engine\utility::flag("intel_revealed") || var_0 != level.enforcer) {
     scripts\engine\utility::flag_set("interrogation_failed");
   }
 
-  if(var0 == level.enforcer) {
+  if(var_0 == level.enforcer) {
     scripts\engine\utility::flag_set("enforcer_dead");
     level.enforcer scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop_and_clear_stack();
     scripts\engine\utility::flag_set("pause_family_vo");
@@ -2282,7 +2282,7 @@ function target_death_wrapper(var0, var1, var2) {
 
     if(!scripts\engine\utility::flag("wife_dead") && !scripts\engine\utility::flag("son_dead")) {}
 
-    if(!istrue(var2)) {
+    if(!istrue(var_2)) {
       level.enforceranimnode notify("enforcer_chair_loop_end");
       level.enforceranimnode notify("single anim", "end");
       level.enforcerchair scripts\engine\sp\utility::anim_stopanimScripted();
@@ -2290,29 +2290,29 @@ function target_death_wrapper(var0, var1, var2) {
     }
 
     turn_on_headtracking_solo(level.enforcerwife, level.player, "wife_dead");
-  } else if(var0 == level.enforcerwife) {
+  } else if(var_0 == level.enforcerwife) {
     scripts\engine\utility::flag_set("wife_dead");
     level.enforcer scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop_and_clear_stack();
     level.enforcerwife scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop_and_clear_stack();
     level.enforcerson scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop_and_clear_stack();
     waitframe();
 
-    if(var3 < 2) {
+    if(var_3 < 2) {
       thread play_dialogue("wife_death", &scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_wife_death);
     }
 
     level.currentrelativeanimpriority = 99;
-    thread son_react_death(level.enforcerwife, var1);
+    thread son_react_death(level.enforcerwife, var_1);
     thread enforcer_react_death(level.enforcerwife);
     thread target_death_anim(level.wifeanimnode, level.enforcerwife);
-  } else if(var0 == level.enforcerson) {
+  } else if(var_0 == level.enforcerson) {
     scripts\engine\utility::flag_set("son_dead");
     level.enforcer scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop_and_clear_stack();
     level.enforcerwife scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop_and_clear_stack();
     level.enforcerson scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop_and_clear_stack();
     waitframe();
 
-    if(var3 < 2) {
+    if(var_3 < 2) {
       thread play_dialogue("son_death", &scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_son_death);
     }
 
@@ -2322,18 +2322,18 @@ function target_death_wrapper(var0, var1, var2) {
     thread target_death_anim(level.sonanimnode, level.enforcerson);
   }
 
-  if(var0 != level.enforcer || var0 == level.enforcer && !scripts\engine\utility::flag("intel_revealed")) {
+  if(var_0 != level.enforcer || var_0 == level.enforcer && !scripts\engine\utility::flag("intel_revealed")) {
     level.player freezecontrols(1);
     level.price scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop_and_clear_stack();
 
-    if(var0 != level.enforcer) {
-      var3++;
-      setDvar("stp_family_deaths", var3);
+    if(var_0 != level.enforcer) {
+      var_3++;
+      setDvar("stp_family_deaths", var_3);
 
-      if(var3 > 2) {
-        var4 = [["What are you doin, are you fuckin' mad?!", "dx_vom_pri_interrogation_revolver_killfam_20"], ["What the fuck, Sergeant, you bloody mental?!", "dx_vom_pri_interrogation_revolver_killfam_30"]];
-        var5 = scripts\engine\utility::random(var4);
-        scripts\engine\utility::delaythread(0.5, &scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_price, var5[0], var5[1]);
+      if(var_3 > 2) {
+        var_4 = [["What are you doin, are you fuckin' mad?!", "dx_vom_pri_interrogation_revolver_killfam_20"], ["What the fuck, Sergeant, you bloody mental?!", "dx_vom_pri_interrogation_revolver_killfam_30"]];
+        var_5 = scripts\engine\utility::random(var_4);
+        scripts\engine\utility::delaythread(0.5, &scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_price, var_5[0], var_5[1]);
         scripts\sp\player_death::set_custom_death_quote(435);
         level.missionfailed = 1;
         scripts\engine\utility::flag_set("missionfailed");
@@ -2358,15 +2358,15 @@ function target_death_wrapper(var0, var1, var2) {
   }
 }
 
-function enforcer_react_death(var0) {
+function enforcer_react_death(var_0) {
   if(!scripts\engine\utility::flag("enforcer_dead")) {
-    if(scripts\engine\utility::is_equal(var0, level.enforcerwife) && !scripts\engine\utility::flag("son_dead")) {
+    if(scripts\engine\utility::is_equal(var_0, level.enforcerwife) && !scripts\engine\utility::flag("son_dead")) {
       target_play_anim(level.enforcer, "react_death_wife", 0, 1);
       turn_on_headtracking_solo(level.enforcer, level.player, "enforcer_dead");
       return;
     }
 
-    if(scripts\engine\utility::is_equal(var0, level.enforcerson) && !scripts\engine\utility::flag("wife_dead")) {
+    if(scripts\engine\utility::is_equal(var_0, level.enforcerson) && !scripts\engine\utility::flag("wife_dead")) {
       target_play_anim(level.enforcer, "react_death_wife", 0, 1);
       turn_on_headtracking_solo(level.enforcer, level.player, "enforcer_dead");
       return;
@@ -2378,20 +2378,20 @@ function enforcer_react_death(var0) {
   }
 }
 
-function wife_react_death(var0) {
+function wife_react_death(var_0) {
   if(!scripts\engine\utility::flag("wife_dead")) {
-    var1 = scripts\engine\utility::ter_op(scripts\engine\utility::is_equal(var0, level.enforcer), "enforcer", "son");
-    var2 = "react_death_" + var1;
-    var3 = "grieve_" + var1 + "_death";
-    level.wifeanimnode scripts\common\anim::anim_single_solo(level.enforcerwife, var2);
+    var_1 = scripts\engine\utility::ter_op(scripts\engine\utility::is_equal(var_0, level.enforcer), "enforcer", "son");
+    var_2 = "react_death_" + var_1;
+    var_3 = "grieve_" + var_1 + "_death";
+    level.wifeanimnode scripts\common\anim::anim_single_solo(level.enforcerwife, var_2);
 
-    if(var1 == "enforcer" && scripts\engine\utility::flag("son_dead")) {
+    if(var_1 == "enforcer" && scripts\engine\utility::flag("son_dead")) {
       return;
     }
 
     if(!scripts\engine\utility::flag("wife_dead")) {
       level.wifeanimnode notify("stop_loop");
-      level.wifeanimnode thread scripts\common\anim::anim_loop_solo(level.enforcerwife, var3);
+      level.wifeanimnode thread scripts\common\anim::anim_loop_solo(level.enforcerwife, var_3);
       return;
     }
 
@@ -2399,31 +2399,31 @@ function wife_react_death(var0) {
   }
 }
 
-function son_react_death(var0, var1) {
+function son_react_death(var_0, var_1) {
   if(!scripts\engine\utility::flag("son_dead")) {
-    var2 = scripts\engine\utility::ter_op(scripts\engine\utility::is_equal(var0, level.enforcer), "enforcer", "mother");
-    var3 = "react_death_" + var2;
+    var_2 = scripts\engine\utility::ter_op(scripts\engine\utility::is_equal(var_0, level.enforcer), "enforcer", "mother");
+    var_3 = "react_death_" + var_2;
 
-    if(istrue(var1)) {
-      var3 += "_head";
+    if(istrue(var_1)) {
+      var_3 += "_head";
     }
 
-    var4 = "grieve_" + var2 + "_death";
-    level.sonanimnode scripts\common\anim::anim_single_solo(level.enforcerson, var3);
+    var_4 = "grieve_" + var_2 + "_death";
+    level.sonanimnode scripts\common\anim::anim_single_solo(level.enforcerson, var_3);
 
-    if(var2 == "enforcer" && scripts\engine\utility::flag("wife_dead")) {
+    if(var_2 == "enforcer" && scripts\engine\utility::flag("wife_dead")) {
       return;
     }
 
     if(!scripts\engine\utility::flag("son_dead")) {
       level.sonanimnode notify("stop_loop");
-      level.sonanimnode thread scripts\common\anim::anim_loop_solo(level.enforcerson, var4);
+      level.sonanimnode thread scripts\common\anim::anim_loop_solo(level.enforcerson, var_4);
     }
 
     return;
   }
 
-  if(scripts\engine\utility::is_equal(var3, level.enforcerwife)) {
+  if(scripts\engine\utility::is_equal(var_3, level.enforcerwife)) {
     level.sonanimnode notify("stop_loop");
     level.sonanimnode notify("single anim", "end");
     level.sonanimnode scripts\common\anim::anim_single_solo(level.enforcerson, "death_fall");
@@ -2432,61 +2432,61 @@ function son_react_death(var0, var1) {
   }
 }
 
-function target_death_anim(var0, var1) {
-  var1 = scripts\engine\utility::ter_op(isDefined(var1), var1, 0);
+function target_death_anim(var_0, var_1) {
+  var_1 = scripts\engine\utility::ter_op(isDefined(var_1), var_1, 0);
 
-  if(istrue(var0.magic_bullet_shield)) {
-    var0 scripts\common\ai::stop_magic_bullet_shield();
+  if(istrue(var_0.magic_bullet_shield)) {
+    var_0 scripts\common\ai::stop_magic_bullet_shield();
   }
 
-  if(scripts\engine\utility::is_equal(var0, level.enforcer)) {
+  if(scripts\engine\utility::is_equal(var_0, level.enforcer)) {
     level.enforcer.currentanimpriority = level.animpriority["death"];
   } else {
     level.currentrelativeanimpriority = level.animpriority["death"];
   }
 
-  var0.skipdeathanim = 1;
-  var0.diequietly = 1;
+  var_0.skipdeathanim = 1;
+  var_0.diequietly = 1;
   self notify("stop_loop");
-  var2 = scripts\engine\utility::ter_op(var1, "death_head", "death");
+  var_2 = scripts\engine\utility::ter_op(var_1, "death_head", "death");
 
-  if(scripts\engine\utility::is_equal(var0, level.enforcerwife)) {
-    thread scripts\common\anim::anim_single_solo(level.familychair, var2 + "_wife");
-  } else if(scripts\engine\utility::is_equal(var0, level.enforcerson)) {
-    thread scripts\common\anim::anim_single_solo(level.familychair, var2 + "_son");
+  if(scripts\engine\utility::is_equal(var_0, level.enforcerwife)) {
+    thread scripts\common\anim::anim_single_solo(level.familychair, var_2 + "_wife");
+  } else if(scripts\engine\utility::is_equal(var_0, level.enforcerson)) {
+    thread scripts\common\anim::anim_single_solo(level.familychair, var_2 + "_son");
   }
 
-  scripts\common\anim::anim_single_solo(var0, var2);
+  scripts\common\anim::anim_single_solo(var_0, var_2);
 
-  if(scripts\engine\utility::is_equal(var0, level.enforcer)) {
-    var2 += "_idle";
-    var0 scripts\engine\sp\utility::name_hide();
-    thread scripts\common\anim::anim_loop_solo(var0, var2);
+  if(scripts\engine\utility::is_equal(var_0, level.enforcer)) {
+    var_2 += "_idle";
+    var_0 scripts\engine\sp\utility::name_hide();
+    thread scripts\common\anim::anim_loop_solo(var_0, var_2);
     return;
   }
 }
 
 function idle_monitor() {
   level endon("missionfailed");
-  var0 = 0;
-  var1 = 0;
-  var2 = 0;
-  var3 = 0;
-  var4 = 0;
+  var_0 = 0;
+  var_1 = 0;
+  var_2 = 0;
+  var_3 = 0;
+  var_4 = 0;
   scripts\engine\utility::flag_wait("revolver_picked_up");
 
   while(!scripts\engine\utility::flag("final_phase")) {
     wait 1;
-    var5 = 1;
+    var_5 = 1;
 
-    foreach(var7 in level.revolvervodone) {
-      var5 = var5 && var7;
+    foreach(var_7 in level.revolvervodone) {
+      var_5 = var_5 && var_7;
     }
 
-    if(var5) {
+    if(var_5) {
       scripts\engine\utility::flag_clear("pause_inactive_vo");
 
-      if(!var4) {
+      if(!var_4) {
         play_dialogue("inactive", &scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_dry_fire_nags);
       }
 
@@ -2494,56 +2494,56 @@ function idle_monitor() {
     }
 
     if(level.actioncount <= 0) {
-      var0 += 1;
-      var1 += 1;
+      var_0 += 1;
+      var_1 += 1;
     } else {
-      if(!var5) {
+      if(!var_5) {
         scripts\engine\utility::flag_set("pause_inactive_vo");
       }
 
       level.actioncount = 0;
-      var0 = 0;
-      var1 = 0;
+      var_0 = 0;
+      var_1 = 0;
     }
 
-    if(var4 && var1 > 8) {
+    if(var_4 && var_1 > 8) {
       scripts\engine\utility::flag_clear("pause_inactive_vo");
     }
 
-    if(var0 > 10 && !temp_is_performance_active() && !var3) {
+    if(var_0 > 10 && !temp_is_performance_active() && !var_3) {
       scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_ads_no_target();
-      var0 = 0;
-      var3 = 1;
+      var_0 = 0;
+      var_3 = 1;
     }
 
-    if(var1 > 20 && !temp_is_performance_active() && !var4) {
+    if(var_1 > 20 && !temp_is_performance_active() && !var_4) {
       wait 5;
       play_dialogue("inactive", &scripts\sp\maps\stpetersburg\stpetersburg_vo::vo_interrogation_dry_fire_nags);
-      var4 = 1;
+      var_4 = 1;
     }
   }
 
   level waittill("start_hallway_idle_monitor");
-  var0 = 0;
+  var_0 = 0;
 
   while(!scripts\engine\utility::flag("interrogation_end")) {
     wait 1;
 
     if(level.actioncount <= 0) {
-      var0 += 1;
+      var_0 += 1;
     }
 
-    if(var0 > 15) {
+    if(var_0 > 15) {
       level notify("price_hallway_nags_trigger");
       break;
     }
   }
 }
 
-function delete_on_level_notify(var0) {
+function delete_on_level_notify(var_0) {
   self endon("trigger");
   self endon("death");
-  level waittill(var0);
+  level waittill(var_0);
   self delete();
 }
 
@@ -2560,54 +2560,54 @@ function temp_is_performance_active() {
 }
 
 function is_enforcer_target() {
-  var0 = [1, 2, 3];
-  return scripts\engine\utility::array_contains(var0, level.currentplayertarget);
+  var_0 = [1, 2, 3];
+  return scripts\engine\utility::array_contains(var_0, level.currentplayertarget);
 }
 
 function is_relative_target() {
-  var0 = [9, 12, 10, 13, 11, 14];
-  return scripts\engine\utility::array_contains(var0, level.currentplayertarget);
+  var_0 = [9, 12, 10, 13, 11, 14];
+  return scripts\engine\utility::array_contains(var_0, level.currentplayertarget);
 }
 
 function is_enforcer_threatened() {
-  var0 = [1, 2, 3, 4, 5, 16];
-  return scripts\engine\utility::array_contains(var0, level.currentplayertarget);
+  var_0 = [1, 2, 3, 4, 5, 16];
+  return scripts\engine\utility::array_contains(var_0, level.currentplayertarget);
 }
 
 function is_relative_threatened() {
-  var0 = [9, 12, 10, 13, 11, 14, 15, 16];
-  return scripts\engine\utility::array_contains(var0, level.currentplayertarget);
+  var_0 = [9, 12, 10, 13, 11, 14, 15, 16];
+  return scripts\engine\utility::array_contains(var_0, level.currentplayertarget);
 }
 
-function get_interrogate_anim_priority(var0) {
-  var1 = strtok(var0, "_");
-  var2 = "";
+function get_interrogate_anim_priority(var_0) {
+  var_1 = strtok(var_0, "_");
+  var_2 = "";
 
-  foreach(var4 in var1) {
-    if(var5 == 0) {
-      var2 = var4;
+  foreach(var_4 in var_1) {
+    if(var_5 == 0) {
+      var_2 = var_4;
     } else {
-      var2 = var2 + "_" + var4;
+      var_2 = var_2 + "_" + var_4;
     }
 
-    if(scripts\engine\utility::array_contains_key(level.animpriority, var2)) {
-      return level.animpriority[var2];
+    if(scripts\engine\utility::array_contains_key(level.animpriority, var_2)) {
+      return level.animpriority[var_2];
     }
   }
 
-  iprintlnbold("Nothing found for: " + var2);
+  iprintlnbold("Nothing found for: " + var_2);
   return -1;
 }
 
 function get_actor_alive_states() {
-  var0 = !scripts\engine\utility::flag("enforcer_dead");
-  var1 = !scripts\engine\utility::flag("wife_dead");
-  var2 = !scripts\engine\utility::flag("son_dead");
-  var3 = [var0, var1, var2];
-  return var3;
+  var_0 = !scripts\engine\utility::flag("enforcer_dead");
+  var_1 = !scripts\engine\utility::flag("wife_dead");
+  var_2 = !scripts\engine\utility::flag("son_dead");
+  var_3 = [var_0, var_1, var_2];
+  return var_3;
 }
 
-function turn_on_headtracking(var0, var1) {}
+function turn_on_headtracking(var_0, var_1) {}
 
 function turn_off_headtracking() {
   if(isDefined(level.enforcer) && !scripts\engine\utility::flag("enforcer_dead")) {
@@ -2627,28 +2627,28 @@ function turn_off_headtracking() {
   }
 }
 
-function turn_on_headtracking_solo(var0, var1, var2) {}
+function turn_on_headtracking_solo(var_0, var_1, var_2) {}
 
-function look_at_ent_list(var0, var1, var2) {
+function look_at_ent_list(var_0, var_1, var_2) {
   self notify("headtracking_off");
   self endon("headtracking_off");
 
-  if(isDefined(var1)) {
-    level endon(var1);
+  if(isDefined(var_1)) {
+    level endon(var_1);
   }
 
-  jumpiftrue(isDefined(var2)) LOC_00000024;
-  var2 = 10;
+  jumpiftrue(isDefined(var_2)) LOC_00000024;
+  var_2 = 10;
 
   for(;;) {
-    var3 = scripts\engine\utility::random(var0);
-    scripts\common\utility::lookatentity(var3);
-    wait randomfloatrange(var2 - 1, var2 + 1);
+    var_3 = scripts\engine\utility::random(var_0);
+    scripts\common\utility::lookatentity(var_3);
+    wait randomfloatrange(var_2 - 1, var_2 + 1);
   }
 }
 
-function turn_off_headtracking_solo(var0) {
-  if(isDefined(var0) && scripts\engine\utility::flag(var0)) {
+function turn_off_headtracking_solo(var_0) {
+  if(isDefined(var_0) && scripts\engine\utility::flag(var_0)) {
     return;
   }
 
@@ -2661,19 +2661,19 @@ function blendshape_enable() {
     return;
   }
 
-  var0 = blendshape_get_modelname(self);
+  var_0 = blendshape_get_modelname(self);
 
-  if(self.headmodel != var0) {
+  if(self.headmodel != var_0) {
     self.og_headmodel = self.headmodel;
     self detach(self.headmodel);
-    self.headmodel = var0;
+    self.headmodel = var_0;
     self attach(self.headmodel);
     return;
   }
 }
 
-function blendshape_get_modelname(var0) {
-  switch (var0.name) {
+function blendshape_get_modelname(var_0) {
+  switch (var_0.name) {
     case "Captain Price":
       return "head_hero_price_blendshape";
     case "The Butcher":
@@ -2683,7 +2683,7 @@ function blendshape_get_modelname(var0) {
     case "Ousa":
       return "head_sc_f_mahdawi_blendshape";
     default:
-      iprintlnbold("Something went wrong for: " + var0.name);
+      iprintlnbold("Something went wrong for: " + var_0.name);
       break;
   }
 }
@@ -2698,15 +2698,15 @@ function blendshape_disable() {
   self attach(self.headmodel);
 }
 
-function name_hide_array(var0) {
-  foreach(var2 in var0) {
-    var2 scripts\engine\sp\utility::name_hide();
+function name_hide_array(var_0) {
+  foreach(var_2 in var_0) {
+    var_2 scripts\engine\sp\utility::name_hide();
   }
 }
 
-function name_show_array(var0) {
-  foreach(var2 in var0) {
-    var2 scripts\engine\sp\utility::name_show();
+function name_show_array(var_0) {
+  foreach(var_2 in var_0) {
+    var_2 scripts\engine\sp\utility::name_show();
   }
 }
 

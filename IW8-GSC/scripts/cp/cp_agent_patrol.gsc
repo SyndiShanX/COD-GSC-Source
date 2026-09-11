@@ -8,16 +8,16 @@ function initpatrolpoints() {
   wait 1;
   level.bestpatrolpoint = undefined;
   level.previouspatrolpoint = undefined;
-  var0 = scripts\engine\utility::getStructArray("soldier_patrol", "script_noteworthy");
-  level.allspatrolpoints = var0;
-  var1 = 1;
+  var_0 = scripts\engine\utility::getStructArray("soldier_patrol", "script_noteworthy");
+  level.allspatrolpoints = var_0;
+  var_1 = 1;
   level.last_player_seen = 0;
 
-  foreach(var3 in var0) {
-    var3.patrolscore = 0;
-    var3.id = var1;
-    var3.personalscore = 0;
-    var1++;
+  foreach(var_3 in var_0) {
+    var_3.patrolscore = 0;
+    var_3.id = var_1;
+    var_3.personalscore = 0;
+    var_1++;
   }
 
   if(scripts\engine\utility::flag_exist("patrolPoints_initialized")) {
@@ -51,55 +51,55 @@ function set_default_patrol_values() {
   self.stealth_initialized = 1;
 }
 
-function watchfornotifies(var0) {
-  var0 endon("death");
-  var0 notify("watchForNotifies");
-  var0 endon("watchForNotifies");
-  var0.notifycounter = [];
-  var1 = ["death", "alerted", "texthandler", "set_goal_pos_requested", "goal_reached", "stalled", "patrol_path", "stop_patrol_logic", "watchForBulletWhizby", "exit_patrol_mode", "watchForSoldierKilled", "alertNearbyEnemiesAfterDelay", "watchForWeaponFire", "alertNearbyLoop", "soldier_investigate", "alerted_hunt_mode", "hunt_player", "exit_stealth", "soldier_player_listener", "patrol_values_set", "goal"];
+function watchfornotifies(var_0) {
+  var_0 endon("death");
+  var_0 notify("watchForNotifies");
+  var_0 endon("watchForNotifies");
+  var_0.notifycounter = [];
+  var_1 = ["death", "alerted", "texthandler", "set_goal_pos_requested", "goal_reached", "stalled", "patrol_path", "stop_patrol_logic", "watchForBulletWhizby", "exit_patrol_mode", "watchForSoldierKilled", "alertNearbyEnemiesAfterDelay", "watchForWeaponFire", "alertNearbyLoop", "soldier_investigate", "alerted_hunt_mode", "hunt_player", "exit_stealth", "soldier_player_listener", "patrol_values_set", "goal"];
 
-  foreach(var3 in var1) {
-    var0.notifycounter[var3] = 0;
+  foreach(var_3 in var_1) {
+    var_0.notifycounter[var_3] = 0;
   }
 
   for(;;) {
-    var5 = var0 scripts\engine\utility::waittill_any_in_array_return_no_endon_death(var1);
-    var0.notifycounter[var5]++;
+    var_5 = var_0 scripts\engine\utility::waittill_any_in_array_return_no_endon_death(var_1);
+    var_0.notifycounter[var_5]++;
   }
 }
 
-function patrol_state_text_handler(var0) {
-  var0 endon("death");
-  var0 notify("texthandler");
-  var0 endon("texthandler");
-  var1 = var0 getentitynumber();
+function patrol_state_text_handler(var_0) {
+  var_0 endon("death");
+  var_0 notify("texthandler");
+  var_0 endon("texthandler");
+  var_1 = var_0 getentitynumber();
 
   for(;;) {
     if(getDvar("stealth_show_states") == "") {
       level waittill("show_stealth_states");
     }
 
-    if(isDefined(var0.patrol_state) && isDefined(var0._blackboard.movetype)) {} else if(isDefined(var0.patrol_state)) {}
+    if(isDefined(var_0.patrol_state) && isDefined(var_0._blackboard.movetype)) {} else if(isDefined(var_0.patrol_state)) {}
 
     wait 0.05;
   }
 }
 
-function target_patrol_path(var0) {
+function target_patrol_path(var_0) {
   self endon("stop_patrol_logic");
   self endon("death");
   self endon("alerted");
-  var1 = scripts\engine\utility::getStructArray(var0.target, "targetname");
-  var2 = var1[randomint(var1.size)];
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
+  var_2 = var_1[randomint(var_1.size)];
 
   for(;;) {
-    thread setcooldown(var2, var2);
-    setgoalandtimeout(var2.origin);
-    thread unsetcooldown(var2);
+    thread setcooldown(var_2, var_2);
+    setgoalandtimeout(var_2.origin);
+    thread unsetcooldown(var_2);
 
-    if(isDefined(var2.target)) {
-      var1 = scripts\engine\utility::getStructArray(var2.target, "targetname");
-      var2 = var1[randomint(var1.size)];
+    if(isDefined(var_2.target)) {
+      var_1 = scripts\engine\utility::getStructArray(var_2.target, "targetname");
+      var_2 = var_1[randomint(var_1.size)];
       continue;
     }
 
@@ -114,30 +114,30 @@ function spatrolpointscoring() {
     return;
   }
 
-  var0 = 12;
+  var_0 = 12;
   level.excludedpatrolpoints = [];
-  var1 = level.allspatrolpoints;
-  var2 = [];
-  var3 = 9 / var0;
-  var4 = 3 / var0;
-  var5 = 5;
+  var_1 = level.allspatrolpoints;
+  var_2 = [];
+  var_3 = 9 / var_0;
+  var_4 = 3 / var_0;
+  var_5 = 5;
 
   for(;;) {
-    var6 = 0;
+    var_6 = 0;
 
-    foreach(var8 in var1) {
-      var9 = 0;
+    foreach(var_8 in var_1) {
+      var_9 = 0;
 
-      if(istrue(var8.cooldown) && isDefined(var8.startingcooldown)) {
-        var10 = var3 * 500;
-        var9 = var10 * var8.cooldown / var8.startingcooldown;
+      if(istrue(var_8.cooldown) && isDefined(var_8.startingcooldown)) {
+        var_10 = var_3 * 500;
+        var_9 = var_10 * var_8.cooldown / var_8.startingcooldown;
       }
 
-      var9 = clamp(var9, 0, 500);
-      var8.patrolscore = int(var9);
-      var6++;
+      var_9 = clamp(var_9, 0, 500);
+      var_8.patrolscore = int(var_9);
+      var_6++;
 
-      if(var6 % 10 == 0) {
+      if(var_6 % 10 == 0) {
         break;
       }
     }
@@ -153,30 +153,30 @@ function zpatrolpointscoring() {
     return;
   }
 
-  var0 = 12;
+  var_0 = 12;
   level.excludedpatrolpoints = [];
-  var1 = level.allzpatrolpoints;
-  var2 = [];
-  var3 = 9 / var0;
-  var4 = 3 / var0;
-  var5 = 5;
+  var_1 = level.allzpatrolpoints;
+  var_2 = [];
+  var_3 = 9 / var_0;
+  var_4 = 3 / var_0;
+  var_5 = 5;
 
   for(;;) {
-    var6 = 0;
+    var_6 = 0;
 
-    foreach(var8 in var1) {
-      var9 = 0;
+    foreach(var_8 in var_1) {
+      var_9 = 0;
 
-      if(istrue(var8.cooldown) && isDefined(var8.startingcooldown)) {
-        var10 = var3 * 500;
-        var9 = var10 * var8.cooldown / var8.startingcooldown;
+      if(istrue(var_8.cooldown) && isDefined(var_8.startingcooldown)) {
+        var_10 = var_3 * 500;
+        var_9 = var_10 * var_8.cooldown / var_8.startingcooldown;
       }
 
-      var9 = clamp(var9, 0, 500);
-      var8.patrolscore = int(var9);
-      var6++;
+      var_9 = clamp(var_9, 0, 500);
+      var_8.patrolscore = int(var_9);
+      var_6++;
 
-      if(var6 % 10 == 0) {
+      if(var_6 % 10 == 0) {
         break;
       }
     }
@@ -185,66 +185,66 @@ function zpatrolpointscoring() {
   }
 }
 
-function getscoredpatrolpoint2(var0, var1, var2, var3) {
-  if(!isDefined(var1)) {
-    var1 = level.allspatrolpoints;
+function getscoredpatrolpoint2(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_1)) {
+    var_1 = level.allspatrolpoints;
   }
 
-  if(!isDefined(var2)) {
-    var2 = [];
+  if(!isDefined(var_2)) {
+    var_2 = [];
   } else {
-    var2 = scripts\engine\utility::array_removeundefined(var2);
+    var_2 = scripts\engine\utility::array_removeundefined(var_2);
   }
 
-  if(!isDefined(var3)) {
-    var3 = "soldier_agent";
+  if(!isDefined(var_3)) {
+    var_3 = "soldier_agent";
   }
 
-  var4 = 25;
-  var5 = scripts\cp\cp_agent_utils::getactiveagentsoftype(var3);
-  var6 = sortbydistance(scripts\engine\utility::array_remove_array(var1, var2), var0.origin);
-  var7 = [];
-  var8 = scripts\engine\utility::get_array_of_closest(var0.origin, var5, undefined, 4, 256).size >= 3;
-  var9 = 5 / var4;
-  var10 = 20 / var4;
+  var_4 = 25;
+  var_5 = scripts\cp\cp_agent_utils::getactiveagentsoftype(var_3);
+  var_6 = sortbydistance(scripts\engine\utility::array_remove_array(var_1, var_2), var_0.origin);
+  var_7 = [];
+  var_8 = scripts\engine\utility::get_array_of_closest(var_0.origin, var_5, undefined, 4, 256).size >= 3;
+  var_9 = 5 / var_4;
+  var_10 = 20 / var_4;
 
-  foreach(var12 in var6) {
-    var13 = var12.patrolscore;
-    var12.personalscore = 0;
-    var14 = 250;
+  foreach(var_12 in var_6) {
+    var_13 = var_12.patrolscore;
+    var_12.personalscore = 0;
+    var_14 = 250;
 
-    if(var8 && distance(var0.origin, var12.origin) <= 500) {
-      var14 = 500;
+    if(var_8 && distance(var_0.origin, var_12.origin) <= 500) {
+      var_14 = 500;
     } else {
-      var15 = scripts\engine\math::get_dot(var0.origin, anglesToForward(var0.angles), var12.origin);
+      var_15 = scripts\engine\math::get_dot(var_0.origin, anglesToForward(var_0.angles), var_12.origin);
 
-      if(isDefined(var12.target)) {
-        var16 = scripts\engine\utility::getStructArray(var12.target, "targetname");
+      if(isDefined(var_12.target)) {
+        var_16 = scripts\engine\utility::getStructArray(var_12.target, "targetname");
 
-        if(var16.size > 1) {
-          var17 = var10 * 500;
-          var14 -= var17;
+        if(var_16.size > 1) {
+          var_17 = var_10 * 500;
+          var_14 -= var_17;
         }
 
-        var18 = var9 * 500;
-        var14 = var18 * var15;
+        var_18 = var_9 * 500;
+        var_14 = var_18 * var_15;
       } else {
-        var14 = 500 * var15;
+        var_14 = 500 * var_15;
       }
     }
 
-    var14 = clamp(var14, 0, 500);
-    var14 = clamp(var14 + var13, 0, 999);
-    var12.personalscore = int(var14);
-    var7 = var12;
+    var_14 = clamp(var_14, 0, 500);
+    var_14 = clamp(var_14 + var_13, 0, 999);
+    var_12.personalscore = int(var_14);
+    var_7 = var_12;
 
-    if(var14 <= 50) {
-      return var12;
+    if(var_14 <= 50) {
+      return var_12;
     }
   }
 
-  var20 = scripts\cp\utility::array_sort_by_handler(var7, &getpersonalpatrolscore)[0];
-  return var20;
+  var_20 = scripts\cp\utility::array_sort_by_handler(var_7, &getpersonalpatrolscore)[0];
+  return var_20;
 }
 
 function getpersonalpatrolscore() {
@@ -263,34 +263,34 @@ function getpatrolscore() {
   return 0;
 }
 
-function setcooldown(var0, var1) {
+function setcooldown(var_0, var_1) {
   level endon("game_ended");
-  var0 notify("setCooldown");
-  var0 endon("setCooldown");
-  var0 endon("unsetCooldown");
-  var2 = 0.5 * var1;
-  var2 = clamp(var2, 0.1, var2);
-  var3 = gettime() + var2 * 1000;
-  var4 = var1 / 20;
-  var4 = clamp(var4, 0.05, var4);
-  var5 = 0;
-  var0.patrolscore = 500;
-  var0.startingcooldown = var1;
+  var_0 notify("setCooldown");
+  var_0 endon("setCooldown");
+  var_0 endon("unsetCooldown");
+  var_2 = 0.5 * var_1;
+  var_2 = clamp(var_2, 0.1, var_2);
+  var_3 = gettime() + var_2 * 1000;
+  var_4 = var_1 / 20;
+  var_4 = clamp(var_4, 0.05, var_4);
+  var_5 = 0;
+  var_0.patrolscore = 500;
+  var_0.startingcooldown = var_1;
 
-  while(gettime() < var3) {
-    var0.cooldown = 20 - var5;
-    var5++;
-    wait var4;
+  while(gettime() < var_3) {
+    var_0.cooldown = 20 - var_5;
+    var_5++;
+    wait var_4;
   }
 }
 
-function unsetcooldown(var0) {
-  var0 notify("unsetCooldown");
-  var0.cooldown = undefined;
-  var0.startingcooldown = undefined;
+function unsetcooldown(var_0) {
+  var_0 notify("unsetCooldown");
+  var_0.cooldown = undefined;
+  var_0.startingcooldown = undefined;
 }
 
-function watchforstalledpos(var0) {
+function watchforstalledpos(var_0) {
   self notify("watchForStalledPos");
   self endon("watchForStalledPos");
   self endon("death");
@@ -298,20 +298,20 @@ function watchforstalledpos(var0) {
   self endon("goal");
   self endon("goal_reached");
 
-  if(isDefined(var0)) {
-    self endon(var0);
+  if(isDefined(var_0)) {
+    self endon(var_0);
   }
 
-  var1 = self.origin;
-  var2 = 0;
-  var3 = 10;
+  var_1 = self.origin;
+  var_2 = 0;
+  var_3 = 10;
 
   for(;;) {
-    if(self.origin == var1) {
-      var2++;
+    if(self.origin == var_1) {
+      var_2++;
     }
 
-    if(var2 >= var3) {
+    if(var_2 >= var_3) {
       break;
     }
 
@@ -321,82 +321,82 @@ function watchforstalledpos(var0) {
   self notify("stalled");
 }
 
-function setgoalandtimeout(var0, var1, var2) {
+function setgoalandtimeout(var_0, var_1, var_2) {
   self notify("setGoalAndTimeout");
   self endon("setGoalAndTimeout");
   self endon("death");
   self endon("alerted");
 
-  if(isDefined(var2)) {
-    self endon(var2);
+  if(isDefined(var_2)) {
+    self endon(var_2);
   }
 
-  if(isDefined(var0)) {
-    var3 = getclosestpointonnavmesh(var0);
-    thread watchforstalledpos(var2);
-    _setgoalpos(self, var3, var1);
+  if(isDefined(var_0)) {
+    var_3 = getclosestpointonnavmesh(var_0);
+    thread watchforstalledpos(var_2);
+    _setgoalpos(self, var_3, var_1);
     return;
   }
 
   wait 0.25;
 }
 
-function _setgoalpos(var0, var1, var2) {
-  var0 notify("set_goal_pos_requested");
-  var0 endon("set_goal_pos_requested");
-  var0 endon("death");
-  var0 endon("stalled");
+function _setgoalpos(var_0, var_1, var_2) {
+  var_0 notify("set_goal_pos_requested");
+  var_0 endon("set_goal_pos_requested");
+  var_0 endon("death");
+  var_0 endon("stalled");
 
-  if(isDefined(var2)) {
-    var0.goalradius = var2;
+  if(isDefined(var_2)) {
+    var_0.goalradius = var_2;
   } else {
-    var0.goalradius = 32;
+    var_0.goalradius = 32;
   }
 
-  var3 = 0;
+  var_3 = 0;
 
-  foreach(var5 in level.nearbyposarray) {
-    if(distance(var5, var1) <= var0.goalradius) {
-      var3 = 1;
+  foreach(var_5 in level.nearbyposarray) {
+    if(distance(var_5, var_1) <= var_0.goalradius) {
+      var_3 = 1;
       break;
     }
   }
 
-  var7 = 1;
+  var_7 = 1;
 
-  if(var3) {
-    var8 = getrandomnavpoints(var1, 50, 10, undefined, getrandomnavpoint(var1, 32), 25);
-    var9 = 0;
+  if(var_3) {
+    var_8 = getrandomnavpoints(var_1, 50, 10, undefined, getrandomnavpoint(var_1, 32), 25);
+    var_9 = 0;
 
-    foreach(var11 in var8) {
-      var7 = 0;
+    foreach(var_11 in var_8) {
+      var_7 = 0;
 
-      foreach(var5 in level.nearbyposarray) {
-        if(distance(var5, var11) <= 32) {
-          var7 = 1;
+      foreach(var_5 in level.nearbyposarray) {
+        if(distance(var_5, var_11) <= 32) {
+          var_7 = 1;
           break;
         }
       }
 
-      if(!var7) {
-        var1 = var11;
+      if(!var_7) {
+        var_1 = var_11;
         break;
       }
     }
   }
 
-  thread manageposarray(var0, var1);
-  var0 setbtgoalpos(0, var1);
-  var15 = var0 scripts\engine\utility::ref_143ad("goal", "goal_reached");
+  thread manageposarray(var_0, var_1);
+  var_0 setbtgoalpos(0, var_1);
+  var_15 = var_0 scripts\engine\utility::ref_143ad("goal", "goal_reached");
 }
 
-function manageposarray(var0, var1) {
-  if(isDefined(var1)) {
-    level.nearbyposarray[level.nearbyposarray.size] = var1;
-    var2 = var0 scripts\engine\utility::waittill_any_in_array_return(["death", "set_goal_pos_requested", "alerted", "exit_stealth", "new_goal", "alerted_by_ai"]);
+function manageposarray(var_0, var_1) {
+  if(isDefined(var_1)) {
+    level.nearbyposarray[level.nearbyposarray.size] = var_1;
+    var_2 = var_0 scripts\engine\utility::waittill_any_in_array_return(["death", "set_goal_pos_requested", "alerted", "exit_stealth", "new_goal", "alerted_by_ai"]);
 
-    if(scripts\engine\utility::array_contains(level.nearbyposarray, var1)) {
-      level.nearbyposarray = scripts\engine\utility::array_remove(level.nearbyposarray, var1);
+    if(scripts\engine\utility::array_contains(level.nearbyposarray, var_1)) {
+      level.nearbyposarray = scripts\engine\utility::array_remove(level.nearbyposarray, var_1);
       return;
     }
 
@@ -404,7 +404,7 @@ function manageposarray(var0, var1) {
   }
 }
 
-function patrol_path(var0, var1) {
+function patrol_path(var_0, var_1) {
   self notify("patrol_path");
   self endon("patrol_path");
   self endon("death");
@@ -416,46 +416,46 @@ function patrol_path(var0, var1) {
   }
 
   if(isDefined(level.allspatrolpoints) || level.allspatrolpoints.size > 1) {
-    var2 = level.allspatrolpoints;
-    var3 = scripts\engine\utility::array_combine([var0], level.excludedpatrolpoints);
-    var4 = scripts\engine\utility::get_array_of_closest(var0.origin, var2, var3, 10);
+    var_2 = level.allspatrolpoints;
+    var_3 = scripts\engine\utility::array_combine([var_0], level.excludedpatrolpoints);
+    var_4 = scripts\engine\utility::get_array_of_closest(var_0.origin, var_2, var_3, 10);
 
-    if(var4.size < 1) {
-      var2 = scripts\engine\utility::getStructArray(var0.targetname, "targetname");
-      var4 = scripts\engine\utility::get_array_of_closest(var0.origin, scripts\engine\utility::getStructArray(var0.targetname, "targetname"), var3, 5);
+    if(var_4.size < 1) {
+      var_2 = scripts\engine\utility::getStructArray(var_0.targetname, "targetname");
+      var_4 = scripts\engine\utility::get_array_of_closest(var_0.origin, scripts\engine\utility::getStructArray(var_0.targetname, "targetname"), var_3, 5);
     }
 
-    var5 = scripts\engine\utility::getclosest(var0.origin, var4, 256);
+    var_5 = scripts\engine\utility::getclosest(var_0.origin, var_4, 256);
 
-    if(isDefined(var5)) {
-      var6 = var5;
+    if(isDefined(var_5)) {
+      var_6 = var_5;
     } else {
-      var6 = getscoredpatrolpoint2(self, var5);
+      var_6 = getscoredpatrolpoint2(self, var_5);
     }
 
-    var7 = var6;
-    var4 = scripts\engine\utility::array_combine([var6, var7], level.excludedpatrolpoints);
+    var_7 = var_6;
+    var_4 = scripts\engine\utility::array_combine([var_6, var_7], level.excludedpatrolpoints);
 
     for(;;) {
-      thread setcooldown(var6, var6);
-      thread removeifalerted(self, var6);
-      setgoalandtimeout(var6.origin);
+      thread setcooldown(var_6, var_6);
+      thread removeifalerted(self, var_6);
+      setgoalandtimeout(var_6.origin);
       self.onpatrolpath = undefined;
-      unsetcooldown(var6);
+      unsetcooldown(var_6);
 
       if(scripts\engine\utility::cointoss()) {
         wait randomfloatrange(2.5, 5);
       }
 
-      var3 = level.allspatrolpoints;
+      var_3 = level.allspatrolpoints;
 
-      if(isDefined(var6)) {
-        var7 = var6;
+      if(isDefined(var_6)) {
+        var_7 = var_6;
       }
 
-      var4 = scripts\engine\utility::array_combine([var7, var6], level.excludedpatrolpoints);
-      var5 = scripts\engine\utility::get_array_of_closest(self.origin, var3, var4, 5);
-      var6 = getscoredpatrolpoint2(self, var5, var4);
+      var_4 = scripts\engine\utility::array_combine([var_7, var_6], level.excludedpatrolpoints);
+      var_5 = scripts\engine\utility::get_array_of_closest(self.origin, var_3, var_4, 5);
+      var_6 = getscoredpatrolpoint2(self, var_5, var_4);
     }
     LOC_00000179:
 
@@ -463,24 +463,24 @@ function patrol_path(var0, var1) {
   }
 }
 
-function removeifalerted(var0, var1) {
+function removeifalerted(var_0, var_1) {
   level endon("game_ended");
-  var0 endon("goal_reached");
-  var0 endon("goal");
-  var0 endon("stalled");
-  var0 endon("death");
-  var0 scripts\engine\utility::ref_143a5("death", "alerted");
-  addtopatrolexclusion(0, var1);
+  var_0 endon("goal_reached");
+  var_0 endon("goal");
+  var_0 endon("stalled");
+  var_0 endon("death");
+  var_0 scripts\engine\utility::ref_143a5("death", "alerted");
+  addtopatrolexclusion(0, var_1);
 }
 
-function addtopatrolexclusion(var0, var1) {
-  if(istrue(var0) && !scripts\engine\utility::array_contains(level.excludedpatrolpoints, var1)) {
-    level.excludedpatrolpoints = scripts\engine\utility::array_add(level.excludedpatrolpoints, var1);
+function addtopatrolexclusion(var_0, var_1) {
+  if(istrue(var_0) && !scripts\engine\utility::array_contains(level.excludedpatrolpoints, var_1)) {
+    level.excludedpatrolpoints = scripts\engine\utility::array_add(level.excludedpatrolpoints, var_1);
     return;
   }
 
-  if(scripts\engine\utility::array_contains(level.excludedpatrolpoints, var1)) {
-    level.excludedpatrolpoints = scripts\engine\utility::array_remove(level.excludedpatrolpoints, var1);
+  if(scripts\engine\utility::array_contains(level.excludedpatrolpoints, var_1)) {
+    level.excludedpatrolpoints = scripts\engine\utility::array_remove(level.excludedpatrolpoints, var_1);
     return;
   }
 }
@@ -493,11 +493,11 @@ function watchforbulletwhizby() {
   self endon("alerted");
 
   for(;;) {
-    self waittill("bulletwhizby", var0, var1, var2, var3);
+    self waittill("bulletwhizby", var_0, var_1, var_2, var_3);
 
-    if(isPlayer(var0)) {
+    if(isPlayer(var_0)) {
       self notify("stop_patrol_logic");
-      setpatrolstate("investigating_whizby", "cqb", 0, 1, 0, var2);
+      setpatrolstate("investigating_whizby", "cqb", 0, 1, 0, var_2);
       break;
     }
   }
@@ -514,14 +514,14 @@ function exit_patrol_mode() {
   thread scripts\cp\cp_trigger_spawn::soldier_player_listener();
 
   for(;;) {
-    var0 = scripts\engine\utility::waittill_any_ents_return(self, "damage", self, "explode", self, "alerted_by_soldier", level, "large_explosion");
+    var_0 = scripts\engine\utility::waittill_any_ents_return(self, "damage", self, "explode", self, "alerted_by_soldier", level, "large_explosion");
 
-    if(!isDefined(var0)) {
+    if(!isDefined(var_0)) {
       continue;
     }
 
     if(istrue(self.posted)) {
-      if(var0 != "damage") {
+      if(var_0 != "damage") {
         break;
       } else {
         continue;
@@ -533,24 +533,24 @@ function exit_patrol_mode() {
     break;
   }
 
-  var1 = 2;
-  var2 = 1;
-  var3 = 1;
-  var4 = 0;
+  var_1 = 2;
+  var_2 = 1;
+  var_3 = 1;
+  var_4 = 0;
 
-  if(isDefined(var0)) {
-    switch (var0) {
+  if(isDefined(var_0)) {
+    switch (var_0) {
       case "alerted_by_soldier":
         setpatrolstate("alerted_by_soldier", "combat", 1, 0, 0, undefined);
-        var2 = 1;
-        var3 = 0;
-        var4 = 0;
+        var_2 = 1;
+        var_3 = 0;
+        var_4 = 0;
         break;
       case "damage":
         setpatrolstate("damaged", "combat", 1, 0, 0, undefined, 1);
         self.damaged = 1;
-        var3 = 1;
-        var4 = 1;
+        var_3 = 1;
+        var_4 = 1;
         break;
     }
 
@@ -558,55 +558,55 @@ function exit_patrol_mode() {
   }
 }
 
-function watchforsoldierkilled(var0) {
-  var0 notify("watchForSoldierKilled");
-  var0 endon("watchForSoldierKilled");
-  var0 endon("death");
-  var0 endon("alerted");
+function watchforsoldierkilled(var_0) {
+  var_0 notify("watchForSoldierKilled");
+  var_0 endon("watchForSoldierKilled");
+  var_0 endon("death");
+  var_0 endon("alerted");
 
   for(;;) {
-    var1 = 0;
-    level waittill("ai_killed", var2, var3, var4, var5, var6, var7);
+    var_1 = 0;
+    level waittill("ai_killed", var_2, var_3, var_4, var_5, var_6, var_7);
 
-    if(var7 != var0.team) {
+    if(var_7 != var_0.team) {
       continue;
     }
 
-    if(istrue(var0.posted)) {
+    if(istrue(var_0.posted)) {
       continue;
     }
 
-    var1 = isPlayer(var5);
-    var8 = scripts\engine\math::get_dot(var0.origin, var0 getplayerangles(1), var2);
+    var_1 = isPlayer(var_5);
+    var_8 = scripts\engine\math::get_dot(var_0.origin, var_0 getplayerangles(1), var_2);
 
-    if(var8 >= 0.573576 && sighttracepassed(var0 getEye(), var2, 0, var0, 1)) {
-      setpatrolstate(var0, "witnessed_friendly_death", "sprint", 0, 1, 0, var2, 0);
+    if(var_8 >= 0.573576 && sighttracepassed(var_0 getEye(), var_2, 0, var_0, 1)) {
+      setpatrolstate(var_0, "witnessed_friendly_death", "sprint", 0, 1, 0, var_2, 0);
       break;
     }
   }
 }
 
-function setpatrolstate(var0, var1, var2, var3, var4, var5, var6, var7) {
-  if(isDefined(var1)) {
-    if(var1 == "cqb") {
+function setpatrolstate(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  if(isDefined(var_1)) {
+    if(var_1 == "cqb") {
       scripts\common\utility::demeanor_override("cqb");
-      var1 = "combat";
-    } else if(var1 == "combat") {
+      var_1 = "combat";
+    } else if(var_1 == "combat") {
       scripts\common\utility::demeanor_override("combat");
     }
 
-    scripts\asm\asm_bb::bb_requestmovetype(var1);
+    scripts\asm\asm_bb::bb_requestmovetype(var_1);
   }
 
-  self notify(var0);
-  self.patrol_state = var0;
-  var9 = istrue(self.behinddoors);
+  self notify(var_0);
+  self.patrol_state = var_0;
+  var_9 = istrue(self.behinddoors);
 
-  if(istrue(var6)) {
+  if(istrue(var_6)) {
     thread alertnearbyenemiesafterdelay(undefined, undefined, 1, 1);
   }
 
-  if(istrue(var7)) {
+  if(istrue(var_7)) {
     if(isDefined(self.spawnpoint.target)) {
       thread target_patrol_path(self.spawnpoint);
       return;
@@ -616,21 +616,21 @@ function setpatrolstate(var0, var1, var2, var3, var4, var5, var6, var7) {
     return;
   }
 
-  if(istrue(var4)) {
+  if(istrue(var_4)) {
     thread alerted_hunt_mode(self);
     return;
   }
 
-  if(istrue(var3)) {
-    if(isDefined(var5)) {
-      thread soldier_investigate(self, var5);
+  if(istrue(var_3)) {
+    if(isDefined(var_5)) {
+      thread soldier_investigate(self, var_5);
       return;
     }
 
-    var10 = scripts\cp\utility::get_closest_living_player();
+    var_10 = scripts\cp\utility::get_closest_living_player();
 
-    if(isDefined(var10)) {
-      thread soldier_investigate(self, var10.origin);
+    if(isDefined(var_10)) {
+      thread soldier_investigate(self, var_10.origin);
       return;
     }
 
@@ -638,23 +638,23 @@ function setpatrolstate(var0, var1, var2, var3, var4, var5, var6, var7) {
     return;
   }
 
-  if(istrue(var3)) {
+  if(istrue(var_3)) {
     thread enter_combat();
     return;
   }
 }
 
-function alertnearbyenemiesafterdelay(var0, var1, var2, var3) {
+function alertnearbyenemiesafterdelay(var_0, var_1, var_2, var_3) {
   self notify("alertNearbyEnemiesAfterDelay");
   self endon("alertNearbyEnemiesAfterDelay");
   self endon("death");
 
-  if(!isDefined(var1)) {
-    var1 = 3;
+  if(!isDefined(var_1)) {
+    var_1 = 3;
   }
 
-  wait var1;
-  thread alert_all_nearby_enemies(var0, var2, undefined, var3);
+  wait var_1;
+  thread alert_all_nearby_enemies(var_0, var_2, undefined, var_3);
 }
 
 function watchforweaponfire() {
@@ -663,72 +663,72 @@ function watchforweaponfire() {
   self endon("watchForWeaponFire");
   self endon("alerted");
   self endon("death");
-  var0 = 1500;
+  var_0 = 1500;
 
   for(;;) {
-    level waittill("weapon_fired", var1, var2, var3);
+    level waittill("weapon_fired", var_1, var_2, var_3);
 
     if(istrue(self.posted)) {
       continue;
     }
 
-    if(isagent(var3) && var3.team == self.team) {
+    if(isagent(var_3) && var_3.team == self.team) {
       continue;
     }
 
-    var0 = 1500;
+    var_0 = 1500;
 
-    if(isPlayer(var3)) {
-      var0 *= var3.perk_data["stealth_weapon_noise_scalar"];
+    if(isPlayer(var_3)) {
+      var_0 *= var_3.perk_data["stealth_weapon_noise_scalar"];
     }
 
-    var4 = 0;
+    var_4 = 0;
 
-    foreach(var6 in var2.attachments) {
-      if(issubstr(var6, "silencer")) {
-        var4 = 1;
+    foreach(var_6 in var_2.attachments) {
+      if(issubstr(var_6, "silencer")) {
+        var_4 = 1;
         break;
       }
     }
 
-    if(var4) {
+    if(var_4) {
       continue;
     }
 
     if(istrue(self.damaged)) {
-      var0 = int(var0 * 1.5);
+      var_0 = int(var_0 * 1.5);
     }
 
-    if(distance(var1, self.origin) > var0) {
+    if(distance(var_1, self.origin) > var_0) {
       continue;
     }
 
-    setpatrolstate("investigating_weapon_fire", "sprint", 0, 1, 0, var1, 0);
+    setpatrolstate("investigating_weapon_fire", "sprint", 0, 1, 0, var_1, 0);
     break;
   }
 }
 
-function canpathtotarget(var0, var1) {
-  var2 = var0 findpath(var0.origin, var1, 0, 0);
+function canpathtotarget(var_0, var_1) {
+  var_2 = var_0 findpath(var_0.origin, var_1, 0, 0);
 
-  if(var2.size >= 1 && distance(var2[var2.size - 1], var1) <= 64) {
+  if(var_2.size >= 1 && distance(var_2[var_2.size - 1], var_1) <= 64) {
     return 1;
   }
 
   return 0;
 }
 
-function alertnearbyloop(var0) {
-  var0 notify("alertNearbyLoop");
-  var0 endon("alertNearbyLoop");
-  var0 endon("death");
-  var0 endon("patrol_values_set");
+function alertnearbyloop(var_0) {
+  var_0 notify("alertNearbyLoop");
+  var_0 endon("alertNearbyLoop");
+  var_0 endon("death");
+  var_0 endon("patrol_values_set");
 
   for(;;) {
-    var1 = var0 scripts\engine\utility::ref_143ac("shooting");
+    var_1 = var_0 scripts\engine\utility::ref_143ac("shooting");
     thread alertnearbyenemiesafterdelay();
 
-    if(var1 == "shooting") {
+    if(var_1 == "shooting") {
       wait 0.5;
     }
   }
@@ -746,36 +746,36 @@ function enter_combat() {
   thread get_enemy_info_loop(5);
 }
 
-function get_enemy_info_loop(var0) {
+function get_enemy_info_loop(var_0) {
   level endon("game_ended");
   self notify("get_enemy_info_loop");
   self endon("get_enemy_info_loop");
   self endon("death");
-  var1 = get_closest_available_player();
+  var_1 = get_closest_available_player();
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     level notify("no_target_player_found");
     return;
   } else {
     self clearentitytarget();
-    self getenemyinfo(var1);
-    self.favoriteenemy = var1;
+    self getenemyinfo(var_1);
+    self.favoriteenemy = var_1;
 
-    if(!isDefined(var1.enemy_list)) {
-      var1.enemy_list = [];
+    if(!isDefined(var_1.enemy_list)) {
+      var_1.enemy_list = [];
     }
 
-    if(!isDefined(self.target_enemy) || self.target_enemy != var1) {
+    if(!isDefined(self.target_enemy) || self.target_enemy != var_1) {
       self notify("changed_target");
-      thread scripts\engine\utility::thread_on_notify_no_endon_death("changed_target", &clear_enemy_flags, var1);
-      thread scripts\engine\utility::thread_on_notify_no_endon_death("death", &clear_enemy_flags, var1);
+      thread scripts\engine\utility::thread_on_notify_no_endon_death("changed_target", &clear_enemy_flags, var_1);
+      thread scripts\engine\utility::thread_on_notify_no_endon_death("death", &clear_enemy_flags, var_1);
 
-      if(!scripts\engine\utility::array_contains(var1.enemy_list, self)) {
-        var1.enemy_list[var1.enemy_list.size] = self;
+      if(!scripts\engine\utility::array_contains(var_1.enemy_list, self)) {
+        var_1.enemy_list[var_1.enemy_list.size] = self;
       }
     }
 
-    self.target_enemy = var1;
+    self.target_enemy = var_1;
   }
 
   if(isDefined(self.script_goalvolume)) {
@@ -784,13 +784,13 @@ function get_enemy_info_loop(var0) {
   }
 }
 
-function movetocovernode(var0) {
-  self setbtgoalnode(1, var0);
+function movetocovernode(var_0) {
+  self setbtgoalnode(1, var_0);
   self setbtgoalRadius(1, self.goalradius);
   self setbtgoalheight(1, self.goalheight);
-  self setbtgoalpos(0, var0.origin);
+  self setbtgoalpos(0, var_0.origin);
   self.movetocovernodestarttime = gettime();
-  self.movetocovernode = var0;
+  self.movetocovernode = var_0;
   thread clearbtgoalonarrival();
 }
 
@@ -803,16 +803,16 @@ function clearbtgoalonarrival() {
 }
 
 function get_closest_available_player() {
-  var0 = sortbydistance(level.players, self.origin);
+  var_0 = sortbydistance(level.players, self.origin);
 
-  foreach(var2 in var0) {
-    if(var2 scripts\cp\utility::is_valid_player()) {
-      if(!isDefined(var2.hunted_count) || var2.hunted_count.size < 3) {
-        return var2;
+  foreach(var_2 in var_0) {
+    if(var_2 scripts\cp\utility::is_valid_player()) {
+      if(!isDefined(var_2.hunted_count) || var_2.hunted_count.size < 3) {
+        return var_2;
       }
 
-      if(!isDefined(var2.enemy_list) || var2.enemy_list.size < int(24 / level.players.size)) {
-        return var2;
+      if(!isDefined(var_2.enemy_list) || var_2.enemy_list.size < int(24 / level.players.size)) {
+        return var_2;
       }
     }
   }
@@ -824,99 +824,99 @@ function get_closest_available_player() {
   return undefined;
 }
 
-function clear_enemy_flags(var0) {
-  if(isDefined(var0)) {
-    var0.enemy_list = scripts\engine\utility::array_remove(var0.enemy_list, self);
+function clear_enemy_flags(var_0) {
+  if(isDefined(var_0)) {
+    var_0.enemy_list = scripts\engine\utility::array_remove(var_0.enemy_list, self);
     return;
   }
 }
 
-function clear_hunted_flags(var0) {
-  if(isDefined(var0)) {
-    var0.hunted_count = scripts\engine\utility::array_remove(var0.hunted_count, self);
+function clear_hunted_flags(var_0) {
+  if(isDefined(var_0)) {
+    var_0.hunted_count = scripts\engine\utility::array_remove(var_0.hunted_count, self);
     return;
   }
 }
 
-function clear_pos_from_hunt_pos_array(var0) {
-  if(isDefined(var0)) {
-    var0.hunted_count = scripts\engine\utility::array_remove(var0.hunted_count, self);
+function clear_pos_from_hunt_pos_array(var_0) {
+  if(isDefined(var_0)) {
+    var_0.hunted_count = scripts\engine\utility::array_remove(var_0.hunted_count, self);
     return;
   }
 }
 
 function hunt_player_delayed() {
   self endon("death");
-  var0 = randomintrange(25, 60);
-  var1 = randomintrange(10, 15);
-  hunt_player(var0, var1);
+  var_0 = randomintrange(25, 60);
+  var_1 = randomintrange(10, 15);
+  hunt_player(var_0, var_1);
 }
 
-function soldier_investigate(var0, var1) {
+function soldier_investigate(var_0, var_1) {
   level endon("game_ended");
-  var0 notify("soldier_investigate");
-  var0 endon("soldier_investigate");
-  var0 endon("alerted");
-  var0 endon("death");
-  setgoalandtimeout(var0, var1);
+  var_0 notify("soldier_investigate");
+  var_0 endon("soldier_investigate");
+  var_0 endon("alerted");
+  var_0 endon("death");
+  setgoalandtimeout(var_0, var_1);
 
-  if(var0 scripts\cp\cp_trigger_spawn::trigger_temp_stealth_meter(2.6, undefined, "investigate")) {
+  if(var_0 scripts\cp\cp_trigger_spawn::trigger_temp_stealth_meter(2.6, undefined, "investigate")) {
     wait 5;
 
-    foreach(var3 in scripts\cp\cp_agent_utils::getactiveagentsoftype("soldier_agent")) {
-      thread setalertedhuntmode(var3);
+    foreach(var_3 in scripts\cp\cp_agent_utils::getactiveagentsoftype("soldier_agent")) {
+      thread setalertedhuntmode(var_3);
     }
   }
 
   wait 5;
-  thread setalertedhuntmode(var0);
+  thread setalertedhuntmode(var_0);
 }
 
-function alerted_hunt_mode(var0) {
-  var0 notify("stop_patrol_logic");
-  var0 notify("alerted_hunt_mode");
-  var0 endon("alerted_hunt_mode");
-  var0 endon("hunt_player");
-  var0 endon("death");
-  var0 endon("patrol_values_set");
-  var0 endon("alerted");
-  var0.soldierhuntmode = undefined;
-  var0.alertedhuntmode = undefined;
-  var0.alerted_hunt_mode = 1;
-  var0.no_fallback = 1;
+function alerted_hunt_mode(var_0) {
+  var_0 notify("stop_patrol_logic");
+  var_0 notify("alerted_hunt_mode");
+  var_0 endon("alerted_hunt_mode");
+  var_0 endon("hunt_player");
+  var_0 endon("death");
+  var_0 endon("patrol_values_set");
+  var_0 endon("alerted");
+  var_0.soldierhuntmode = undefined;
+  var_0.alertedhuntmode = undefined;
+  var_0.alerted_hunt_mode = 1;
+  var_0.no_fallback = 1;
 
   for(;;) {
-    if(istrue(var0.behinddoors)) {
-      var1 = getnodesinradiussorted(var0.origin, 512, 0, 24, "Cover");
-      setgoalandtimeout(var0, var1[0].origin);
+    if(istrue(var_0.behinddoors)) {
+      var_1 = getnodesinradiussorted(var_0.origin, 512, 0, 24, "Cover");
+      setgoalandtimeout(var_0, var_1[0].origin);
       continue;
     }
 
-    var2 = scripts\engine\utility::ter_op(scripts\engine\utility::cointoss(), var0 scripts\cp\utility::get_closest_living_player(), var0);
+    var_2 = scripts\engine\utility::ter_op(scripts\engine\utility::cointoss(), var_0 scripts\cp\utility::get_closest_living_player(), var_0);
 
-    if(!isDefined(var2)) {
-      var2 = var0;
+    if(!isDefined(var_2)) {
+      var_2 = var_0;
     }
 
-    var3 = getrandomnavpoint(var2.origin, 1024);
+    var_3 = getrandomnavpoint(var_2.origin, 1024);
 
-    if(isDefined(var3)) {
-      setgoalandtimeout(var0, var3);
+    if(isDefined(var_3)) {
+      setgoalandtimeout(var_0, var_3);
     } else {
-      var3 = getrandomnavpoint(var0.origin, 256);
-      setgoalandtimeout(var0, var3);
+      var_3 = getrandomnavpoint(var_0.origin, 256);
+      setgoalandtimeout(var_0, var_3);
     }
   }
 }
 
-function hunt_player(var0, var1) {
+function hunt_player(var_0, var_1) {
   level endon("game_ended");
   self notify("hunt_player");
   self endon("hunt_player");
   self endon("death");
 
-  if(isDefined(var0)) {
-    wait var0;
+  if(isDefined(var_0)) {
+    wait var_0;
   }
 
   while(!should_hunt_player()) {
@@ -927,11 +927,11 @@ function hunt_player(var0, var1) {
   self.no_fallback = 1;
 
   for(;;) {
-    var2 = scripts\cp\utility::get_closest_living_player();
+    var_2 = scripts\cp\utility::get_closest_living_player();
 
-    if(isalive(var2)) {
-      self getenemyinfo(var2);
-      self setgoalentity(var2, 3);
+    if(isalive(var_2)) {
+      self getenemyinfo(var_2);
+      self setgoalentity(var_2, 3);
     }
 
     wait 3;
@@ -939,66 +939,66 @@ function hunt_player(var0, var1) {
 }
 
 function should_hunt_player() {
-  var0 = 0;
-  var1 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
+  var_0 = 0;
+  var_1 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
 
-  foreach(var3 in var1) {
-    if(isDefined(var3.hunting_player)) {
-      var0++;
+  foreach(var_3 in var_1) {
+    if(isDefined(var_3.hunting_player)) {
+      var_0++;
     }
   }
 
-  if(var0 > level.players.size * 2) {
+  if(var_0 > level.players.size * 2) {
     return 0;
   }
 
   return 1;
 }
 
-function reduce_goalradius_over_time(var0) {
+function reduce_goalradius_over_time(var_0) {
   self notify("reduce_goalradius_over_time");
   self endon("reduce_goalradius_over_time");
   self endon("death");
   self endon("patrol_values_set");
-  jumpiftrue(isDefined(var0)) LOC_00000028;
-  var0 = 2;
+  jumpiftrue(isDefined(var_0)) LOC_00000028;
+  var_0 = 2;
 
   for(;;) {
-    var1 = self.goalradius - 100;
+    var_1 = self.goalradius - 100;
 
     if(self.goalradius < 250) {
       self.goalradius = 250;
     } else {
-      self.goalradius = var1;
+      self.goalradius = var_1;
     }
 
-    wait var0;
+    wait var_0;
   }
 }
 
-function setweaponsfree(var0) {
-  var0 notify("setWeaponsFree");
-  var0 endon("setWeaponsFree");
-  var0 endon("death");
+function setweaponsfree(var_0) {
+  var_0 notify("setWeaponsFree");
+  var_0 endon("setWeaponsFree");
+  var_0 endon("death");
   level endon("clearWeaponsFree");
   level endon("game_ended");
 
   for(;;) {
-    var1 = var0 scripts\engine\utility::ref_143ba(5, "shooting", "spotted_player");
+    var_1 = var_0 scripts\engine\utility::ref_143ba(5, "shooting", "spotted_player");
 
-    if(isDefined(var1)) {
-      if(var1 != "timeout") {
+    if(isDefined(var_1)) {
+      if(var_1 != "timeout") {
         continue;
       }
 
-      thread setalertedhuntmode(var0);
+      thread setalertedhuntmode(var_0);
       return;
     }
   }
 }
 
-function toggleweaponsfree(var0) {
-  if(istrue(var0)) {
+function toggleweaponsfree(var_0) {
+  if(istrue(var_0)) {
     scripts\engine\utility::flag_set("weapons_free");
     return;
   }
@@ -1009,25 +1009,25 @@ function toggleweaponsfree(var0) {
 function clearweaponsfree() {
   level notify("clearWeaponsFree");
 
-  foreach(var1 in scripts\cp\cp_agent_utils::getactiveagentsoftype("soldier_agent")) {
-    thread setalertedhuntmode(var1);
+  foreach(var_1 in scripts\cp\cp_agent_utils::getactiveagentsoftype("soldier_agent")) {
+    thread setalertedhuntmode(var_1);
   }
 }
 
-function setalertedhuntmode(var0) {
-  set_default_soldier_values(var0);
+function setalertedhuntmode(var_0) {
+  set_default_soldier_values(var_0);
 
   if(getdvarint("scr_alerted_hunt_enable") == 1) {
-    setpatrolstate(var0, "alerted_hunt_mode", "cqb", 0, 0, 1, undefined, 0);
+    setpatrolstate(var_0, "alerted_hunt_mode", "cqb", 0, 0, 1, undefined, 0);
     return;
   }
 
-  setpatrolstate(var0, "spotted_player", "combat", 1, 0, 0, undefined, 1);
+  setpatrolstate(var_0, "spotted_player", "combat", 1, 0, 0, undefined, 1);
 }
 
-function _startsoldierpatrol(var0) {
-  set_default_soldier_values(var0);
-  thread patrol_path(var0, var0.spawnpoint);
+function _startsoldierpatrol(var_0) {
+  set_default_soldier_values(var_0);
+  thread patrol_path(var_0, var_0.spawnpoint);
 }
 
 function soldier_player_listener() {
@@ -1036,14 +1036,14 @@ function soldier_player_listener() {
   self endon("soldier_player_listener");
   self endon("alerted");
   self endon("death");
-  var0 = ["dx_otn_usm1_exposed", "dx_otn_usm1_exposed_breaking", "dx_otn_usm1_exposed_open", "dx_otn_usm1_exposed_movement", "dx_otn_usm1_exposed_acquired"];
+  var_0 = ["dx_otn_usm1_exposed", "dx_otn_usm1_exposed_breaking", "dx_otn_usm1_exposed_open", "dx_otn_usm1_exposed_movement", "dx_otn_usm1_exposed_acquired"];
 
   for(;;) {
-    foreach(var2 in level.players) {
-      if(isplayernearme(self, var2)) {
+    foreach(var_2 in level.players) {
+      if(isplayernearme(self, var_2)) {
         if(isDefined(level.last_player_seen) && gettime() >= level.last_player_seen + 5000) {
           level.last_player_seen = gettime();
-          scripts\cp\utility::playsoundatpos_safe(self.origin, scripts\engine\utility::random(var0));
+          scripts\cp\utility::playsoundatpos_safe(self.origin, scripts\engine\utility::random(var_0));
         }
 
         setpatrolstate("spotted_player", "combat", 1, 0, 0, undefined, 1);
@@ -1055,90 +1055,90 @@ function soldier_player_listener() {
   }
 }
 
-function isplayernearme(var0, var1) {
-  if(!isDefined(var1)) {
+function isplayernearme(var_0, var_1) {
+  if(!isDefined(var_1)) {
     return false;
   }
 
-  if(istrue(var1.ignoreme)) {
+  if(istrue(var_1.ignoreme)) {
     return false;
   }
 
-  var2 = isPlayer(var1);
-  var3 = distance(var1.origin, var0.origin);
-  var4 = istrue(var0.damaged);
+  var_2 = isPlayer(var_1);
+  var_3 = distance(var_1.origin, var_0.origin);
+  var_4 = istrue(var_0.damaged);
 
-  if(var3 < 96) {
-    if(vectordot(anglesToForward(var0.angles), vectorNormalize(var1.origin - var0.origin)) > 0) {
+  if(var_3 < 96) {
+    if(vectordot(anglesToForward(var_0.angles), vectorNormalize(var_1.origin - var_0.origin)) > 0) {
       return true;
     }
   }
 
-  var5 = 1;
-  var6 = var1 getvelocity();
-  var7 = length(var6);
+  var_5 = 1;
+  var_6 = var_1 getvelocity();
+  var_7 = length(var_6);
 
-  if(var7 < 128) {
-    var5 = 0.75;
-  } else if(var7 < 200 || var2 && var1.perk_data["stealth_velocity_override"]) {
-    var5 = 1;
+  if(var_7 < 128) {
+    var_5 = 0.75;
+  } else if(var_7 < 200 || var_2 && var_1.perk_data["stealth_velocity_override"]) {
+    var_5 = 1;
   } else {
-    var5 = 1.25;
+    var_5 = 1.25;
   }
 
-  if(var3 > 1500 * var5) {
+  if(var_3 > 1500 * var_5) {
     return false;
   }
 
-  var8 = var0 cansee(var1);
+  var_8 = var_0 cansee(var_1);
 
-  if(var8) {
-    var9 = cos(75);
-    var10 = scripts\engine\utility::within_fov(var0 getEye(), var0 getplayerangles(1), var1.origin + (0, 0, 40), var9);
+  if(var_8) {
+    var_9 = cos(75);
+    var_10 = scripts\engine\utility::within_fov(var_0 getEye(), var_0 getplayerangles(1), var_1.origin + (0, 0, 40), var_9);
 
-    if(!var10) {
+    if(!var_10) {
       return false;
     }
 
-    var11 = sighttracepassed(var0 getEye(), var1 getEye(), 0, var0, var4);
+    var_11 = sighttracepassed(var_0 getEye(), var_1 getEye(), 0, var_0, var_4);
 
-    if(!var11) {
+    if(!var_11) {
       return false;
     }
 
-    var12 = scripts\engine\trace::create_solid_ai_contents(1);
+    var_12 = scripts\engine\trace::create_solid_ai_contents(1);
 
-    if(!scripts\engine\trace::ray_trace_passed(var0 getEye(), var1 getEye(), var0, var12)) {
+    if(!scripts\engine\trace::ray_trace_passed(var_0 getEye(), var_1 getEye(), var_0, var_12)) {
       return false;
     }
 
-    var13 = scripts\engine\math::get_dot(var0.origin, anglesToForward(var0.angles), var1.origin);
-    var5 = 1;
+    var_13 = scripts\engine\math::get_dot(var_0.origin, anglesToForward(var_0.angles), var_1.origin);
+    var_5 = 1;
 
-    if(var13 >= 0.573576) {
-      var5 -= 0.34;
+    if(var_13 >= 0.573576) {
+      var_5 -= 0.34;
     }
 
-    if(var4) {
-      var5 -= 0.34;
+    if(var_4) {
+      var_5 -= 0.34;
     }
 
-    var14 = var1 getstance();
+    var_14 = var_1 getstance();
 
-    if(var3 <= int(350 / var5)) {
-      if(var14 == "prone") {
+    if(var_3 <= int(350 / var_5)) {
+      if(var_14 == "prone") {
         return false;
       }
 
       return true;
-    } else if(var3 <= int(500 / var5)) {
-      if(var14 == "prone") {
+    } else if(var_3 <= int(500 / var_5)) {
+      if(var_14 == "prone") {
         return false;
       }
 
       return true;
-    } else if(var3 <= int(950 / var5)) {
-      if(var14 == "prone" || var14 == "crouch") {
+    } else if(var_3 <= int(950 / var_5)) {
+      if(var_14 == "prone" || var_14 == "crouch") {
         return false;
       }
 
@@ -1149,40 +1149,40 @@ function isplayernearme(var0, var1) {
   return false;
 }
 
-function alert_all_nearby_enemies(var0, var1, var2, var3) {
+function alert_all_nearby_enemies(var_0, var_1, var_2, var_3) {
   if(scripts\engine\utility::flag_exist("weapons_free") && !scripts\engine\utility::flag("weapons_free")) {
     toggleweaponsfree(1);
   }
 
-  var4 = scripts\cp\cp_agent_utils::getactiveenemyagents("allies");
-  var3 = istrue(var3);
+  var_4 = scripts\cp\cp_agent_utils::getactiveenemyagents("allies");
+  var_3 = istrue(var_3);
 
-  foreach(var6 in var4) {
-    if(!isDefined(var6) || var6 == self) {
+  foreach(var_6 in var_4) {
+    if(!isDefined(var_6) || var_6 == self) {
       continue;
     }
 
-    if(!isDefined(var6.agent_type) || isDefined(var6.agent_type) && var6.agent_type != "soldier_agent") {
+    if(!isDefined(var_6.agent_type) || isDefined(var_6.agent_type) && var_6.agent_type != "soldier_agent") {
       continue;
     }
 
-    if(!var3 && isDefined(var0) && distance2dsquared(self.origin, var6.origin) > var0) {
+    if(!var_3 && isDefined(var_0) && distance2dsquared(self.origin, var_6.origin) > var_0) {
       continue;
     }
 
-    if(!istrue(var6.scripted_mode)) {
+    if(!istrue(var_6.scripted_mode)) {
       continue;
     }
 
-    if(var6.team != self.team) {
+    if(var_6.team != self.team) {
       continue;
     }
 
-    if(!istrue(var2) && istrue(var6.posted)) {
+    if(!istrue(var_2) && istrue(var_6.posted)) {
       continue;
     }
 
-    var6 notify("alerted_by_soldier");
+    var_6 notify("alerted_by_soldier");
   }
 }
 
@@ -1194,43 +1194,43 @@ function debug_patrol_point_score_loop() {
   scripts\engine\utility::flag_wait("patrolPoints_initialized");
 
   for(;;) {
-    var0 = getdvarint("scr_patrol_point_debug", 0);
-    var1 = getdvarint("scr_patrol_point_iso_debug", 0);
+    var_0 = getdvarint("scr_patrol_point_debug", 0);
+    var_1 = getdvarint("scr_patrol_point_iso_debug", 0);
 
-    if(var0 != 0 && isDefined(level.players[0])) {
-      var2 = [];
+    if(var_0 != 0 && isDefined(level.players[0])) {
+      var_2 = [];
 
-      if(var0 == 1) {
-        var2 = level.allzpatrolpoints;
-      } else if(var0 == 2) {
-        var2 = level.allspatrolpoints;
+      if(var_0 == 1) {
+        var_2 = level.allzpatrolpoints;
+      } else if(var_0 == 2) {
+        var_2 = level.allspatrolpoints;
       }
 
-      var3 = sortbydistance(var2, level.players[0].origin);
-      var4 = 0;
+      var_3 = sortbydistance(var_2, level.players[0].origin);
+      var_4 = 0;
 
-      foreach(var6 in var3) {
-        if(var1 > 0) {
-          if(var6.id != var1) {
+      foreach(var_6 in var_3) {
+        if(var_1 > 0) {
+          if(var_6.id != var_1) {
             goto LOC_0000016c;
           }
         }
 
-        if(isDefined(var6.patrolscore)) {
-          if(isDefined(var6.target)) {
-            var7 = scripts\engine\utility::getStructArray(var6.target, "targetname");
+        if(isDefined(var_6.patrolscore)) {
+          if(isDefined(var_6.target)) {
+            var_7 = scripts\engine\utility::getStructArray(var_6.target, "targetname");
 
-            if(var7.size >= 1) {
-              foreach(var9 in var7) {
-                thread scripts\engine\utility::draw_line_for_time(var6.origin, var9.origin, 1, 0, 0, 0.1);
+            if(var_7.size >= 1) {
+              foreach(var_9 in var_7) {
+                thread scripts\engine\utility::draw_line_for_time(var_6.origin, var_9.origin, 1, 0, 0, 0.1);
               }
             } else {
-              thread scripts\engine\utility::draw_line_for_time(var6.origin, var6.origin + (0, 0, 128), 1, 1, 0, 0.1);
+              thread scripts\engine\utility::draw_line_for_time(var_6.origin, var_6.origin + (0, 0, 128), 1, 1, 0, 0.1);
             }
           }
 
-          thread debug_patrol_point_score(level, var6);
-          var4++;
+          thread debug_patrol_point_score(level, var_6);
+          var_4++;
         }
       }
     }
@@ -1239,27 +1239,27 @@ function debug_patrol_point_score_loop() {
   }
 }
 
-function debug_patrol_point_score(var0, var1) {
-  var2 = 0;
-  var3 = 125;
-  var4 = 300;
-  var5 = 500;
-  var6 = var0.patrolscore;
+function debug_patrol_point_score(var_0, var_1) {
+  var_2 = 0;
+  var_3 = 125;
+  var_4 = 300;
+  var_5 = 500;
+  var_6 = var_0.patrolscore;
 
-  if(var6 <= 0) {
-    scripts\cp\utility::drawsphere(var0.origin, 20, var1, (1, 1, 1));
+  if(var_6 <= 0) {
+    scripts\cp\utility::drawsphere(var_0.origin, 20, var_1, (1, 1, 1));
     return;
   }
 
-  if(var6 <= var3) {
-    scripts\cp\utility::drawsphere(var0.origin, 20, var1, (0, 1, 0));
+  if(var_6 <= var_3) {
+    scripts\cp\utility::drawsphere(var_0.origin, 20, var_1, (0, 1, 0));
     return;
   }
 
-  if(var6 <= var4) {
-    scripts\cp\utility::drawsphere(var0.origin, 20, var1, (1, 1, 0));
+  if(var_6 <= var_4) {
+    scripts\cp\utility::drawsphere(var_0.origin, 20, var_1, (1, 1, 0));
     return;
   }
 
-  scripts\cp\utility::drawsphere(var0.origin, 20, var1, (1, 0, 0));
+  scripts\cp\utility::drawsphere(var_0.origin, 20, var_1, (1, 0, 0));
 }

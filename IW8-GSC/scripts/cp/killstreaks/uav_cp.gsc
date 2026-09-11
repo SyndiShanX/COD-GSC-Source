@@ -51,19 +51,19 @@ function init_uav_cp() {
 function scriptable_adddamagedcallback() {
   scripts\cp\utility\spawn_event_aggregator::registeronplayerspawncallback(&ref_131b6);
 
-  foreach(var1 in level.players) {
-    var1.radarmode = "normal_radar";
+  foreach(var_1 in level.players) {
+    var_1.radarmode = "normal_radar";
   }
 
-  var3 = getuavstrengthlevelneutral();
-  scripts\cp_mp\killstreaks\uav::_setteamradarstrength("allies", var3 + 1);
+  var_3 = getuavstrengthlevelneutral();
+  scripts\cp_mp\killstreaks\uav::_setteamradarstrength("allies", var_3 + 1);
   setteamradar("allies", 1);
 }
 
 function spawn_bomb() {
-  var0 = getDvar("MOLPOSLOMO");
+  var_0 = getDvar("MOLPOSLOMO");
 
-  if(var0 == "cp_survival") {
+  if(var_0 == "cp_survival") {
     scripts\cp\utility::hideminimap(1);
     return;
   }
@@ -73,162 +73,162 @@ function ref_131b6() {
   self.radarmode = "normal_radar";
 }
 
-function remoteuav_processtaggedassist(var0) {}
+function remoteuav_processtaggedassist(var_0) {}
 
-function setup_radio_tower_uavs(var0, var1, var2) {
-  var3 = var1 scripts\cp_mp\utility\killstreak_utility::createstreakinfo("uav", var1);
-  var4 = "allies";
-  var1 notify("used_uav");
+function setup_radio_tower_uavs(var_0, var_1, var_2) {
+  var_3 = var_1 scripts\cp_mp\utility\killstreak_utility::createstreakinfo("uav", var_1);
+  var_4 = "allies";
+  var_1 notify("used_uav");
 
   if(level.teambased) {
-    var5 = scripts\cp_mp\killstreaks\uav::_getradarstrength(var4);
+    var_5 = scripts\cp_mp\killstreaks\uav::_getradarstrength(var_4);
   }
 
   level notify("uav_update");
-  var6 = "uav";
-  var7 = scripts\cp_mp\killstreaks\uav::getuavrig(var6);
-  var7.origin = var0;
-  var8 = spawn("script_model", var7 gettagorigin("tag_origin") + (0, 0, 5000));
-  var9 = level.uavsettings[var6].modelbase;
+  var_6 = "uav";
+  var_7 = scripts\cp_mp\killstreaks\uav::getuavrig(var_6);
+  var_7.origin = var_0;
+  var_8 = spawn("script_model", var_7 gettagorigin("tag_origin") + (0, 0, 5000));
+  var_9 = level.uavsettings[var_6].modelbase;
 
-  if(scripts\cp_mp\utility\player_utility::getplayersuperfaction(var1) && isDefined(level.uavsettings[var6].modelbasealt)) {
-    var9 = level.uavsettings[var6].modelbasealt;
+  if(scripts\cp_mp\utility\player_utility::getplayersuperfaction(var_1) && isDefined(level.uavsettings[var_6].modelbasealt)) {
+    var_9 = level.uavsettings[var_6].modelbasealt;
   }
 
-  var8 setModel(var9);
-  var8.team = var4;
-  var8.owner = var1;
-  var8.timetoadd = 0;
-  var8.uavtype = var6;
-  var8.health = level.uavsettings[var6].health;
-  var8.maxhealth = level.uavsettings[var6].maxhealth;
-  var8.streakinfo = var3;
-  var8 setotherent(var1);
-  var8 scriptmoveroutline();
-  var8 scriptmoverthermal();
-  var8 thread scripts\cp_mp\killstreaks\uav::damagetracker();
-  var8 thread scripts\cp_mp\killstreaks\uav::handleincomingstinger();
-  var8 thread scripts\cp_mp\killstreaks\uav::perkengineer_manageminimap();
-  var8 thread scripts\cp_mp\killstreaks\uav::monitorowner();
-  var8 thread scripts\cp_mp\killstreaks\uav::restorestrengthafterhostmigration();
-  var8 thread scripts\cp_mp\killstreaks\uav::trackvelocity();
-  var8 setscriptablepartstate("lights", "on", 0);
-  var10 = randomintrange(5250, 5500);
+  var_8 setModel(var_9);
+  var_8.team = var_4;
+  var_8.owner = var_1;
+  var_8.timetoadd = 0;
+  var_8.uavtype = var_6;
+  var_8.health = level.uavsettings[var_6].health;
+  var_8.maxhealth = level.uavsettings[var_6].maxhealth;
+  var_8.streakinfo = var_3;
+  var_8 setotherent(var_1);
+  var_8 scriptmoveroutline();
+  var_8 scriptmoverthermal();
+  var_8 thread scripts\cp_mp\killstreaks\uav::damagetracker();
+  var_8 thread scripts\cp_mp\killstreaks\uav::handleincomingstinger();
+  var_8 thread scripts\cp_mp\killstreaks\uav::perkengineer_manageminimap();
+  var_8 thread scripts\cp_mp\killstreaks\uav::monitorowner();
+  var_8 thread scripts\cp_mp\killstreaks\uav::restorestrengthafterhostmigration();
+  var_8 thread scripts\cp_mp\killstreaks\uav::trackvelocity();
+  var_8 setscriptablepartstate("lights", "on", 0);
+  var_10 = randomintrange(5250, 5500);
 
   if(isDefined(level.spawnpoints)) {
-    var11 = level.spawnpoints;
+    var_11 = level.spawnpoints;
   } else {
-    var11 = level.startspawnpoints;
+    var_11 = level.startspawnpoints;
   }
 
-  if(!isDefined(var11)) {
-    var12 = spawnStruct();
-    var12.origin = (var2.origin[0], var2.origin[1], 6969);
-    var11 = [var12];
+  if(!isDefined(var_11)) {
+    var_12 = spawnStruct();
+    var_12.origin = (var_2.origin[0], var_2.origin[1], 6969);
+    var_11 = [var_12];
   }
 
-  var13 = var11[0];
+  var_13 = var_11[0];
 
-  foreach(var12 in var11) {
-    if(var12.origin[2] < var13.origin[2]) {
-      var13 = var12;
+  foreach(var_12 in var_11) {
+    if(var_12.origin[2] < var_13.origin[2]) {
+      var_13 = var_12;
     }
   }
 
-  var16 = var13.origin[2];
-  var17 = var8.origin[2];
+  var_16 = var_13.origin[2];
+  var_17 = var_8.origin[2];
 
-  if(var16 < 0) {
-    var17 += var16 * -1;
-    var16 = 0;
+  if(var_16 < 0) {
+    var_17 += var_16 * -1;
+    var_16 = 0;
   }
 
-  var18 = var17 - var16;
+  var_18 = var_17 - var_16;
 
-  if(var18 + var11 > 8100) {
-    var11 -= var18 + var11 - 8100;
+  if(var_18 + var_11 > 8100) {
+    var_11 -= var_18 + var_11 - 8100;
   }
 
-  var19 = randomint(360);
-  var20 = randomint(1000) + 4000;
-  var21 = cos(var19) * var20;
-  var22 = sin(var19) * var20;
-  var23 = vectorNormalize((var21, var22, var11));
-  var23 *= var11;
-  var9 linkTo(var8, "tag_origin", var23, (0, var19 - 90, 0));
-  var9 thread scripts\cp_mp\killstreaks\uav::updateuavmodelvisibility();
-  var9[[level.uavsettings[var7].addfunc]]();
-  var3.uav = var9;
+  var_19 = randomint(360);
+  var_20 = randomint(1000) + 4000;
+  var_21 = cos(var_19) * var_20;
+  var_22 = sin(var_19) * var_20;
+  var_23 = vectorNormalize((var_21, var_22, var_11));
+  var_23 *= var_11;
+  var_9 linkTo(var_8, "tag_origin", var_23, (0, var_19 - 90, 0));
+  var_9 thread scripts\cp_mp\killstreaks\uav::updateuavmodelvisibility();
+  var_9[[level.uavsettings[var_7].addfunc]]();
+  var_3.uav = var_9;
 
-  if(var7 == "uav" || var7 == "directional_uav") {
-    var9 scripts\cp_mp\killstreaks\uav::revealminimapforteam(1);
-    var9 thread scripts\cp_mp\killstreaks\uav::applymapenableonspawn();
+  if(var_7 == "uav" || var_7 == "directional_uav") {
+    var_9 scripts\cp_mp\killstreaks\uav::revealminimapforteam(1);
+    var_9 thread scripts\cp_mp\killstreaks\uav::applymapenableonspawn();
   }
 
-  var9 scripts\cp_mp\killstreaks\uav::adduavmodel();
+  var_9 scripts\cp_mp\killstreaks\uav::adduavmodel();
 
-  if(isDefined(level.activeuavs[var6])) {
-    foreach(var25 in level.uavmodels[var6]) {
-      if(var25 == var9) {
+  if(isDefined(level.activeuavs[var_6])) {
+    foreach(var_25 in level.uavmodels[var_6]) {
+      if(var_25 == var_9) {
         continue;
       }
 
-      if(isDefined(var25.timetoadd)) {
-        var25.timetoadd += 5;
+      if(isDefined(var_25.timetoadd)) {
+        var_25.timetoadd += 5;
       }
     }
   }
 
-  var9 thread scripts\cp_mp\killstreaks\uav::handlewiretap();
+  var_9 thread scripts\cp_mp\killstreaks\uav::handlewiretap();
   level notify("uav_update");
-  var27 = level.uavsettings["uav"].timeout;
-  var9 scripts\engine\utility::ref_143ba(var27, "death", "uav_disabled");
+  var_27 = level.uavsettings["uav"].timeout;
+  var_9 scripts\engine\utility::ref_143ba(var_27, "death", "uav_disabled");
 
-  if(var9.damagetaken < var9.maxhealth) {
-    var9 unlink();
-    var28 = var9.origin + anglesToForward(var9.angles) * 20000;
-    var9 moveTo(var28, 60);
+  if(var_9.damagetaken < var_9.maxhealth) {
+    var_9 unlink();
+    var_28 = var_9.origin + anglesToForward(var_9.angles) * 20000;
+    var_9 moveTo(var_28, 60);
 
-    if(isDefined(level.uavsettings[var7].fxid_leave) && isDefined(level.uavsettings[var7].fx_leave_tag)) {
-      playFXOnTag(level.uavsettings[var7].fxid_leave, var9, level.uavsettings[var7].fx_leave_tag);
+    if(isDefined(level.uavsettings[var_7].fxid_leave) && isDefined(level.uavsettings[var_7].fx_leave_tag)) {
+      playFXOnTag(level.uavsettings[var_7].fxid_leave, var_9, level.uavsettings[var_7].fx_leave_tag);
     }
 
-    if(var9.damagetaken < var9.maxhealth) {
-      var9 notify("leaving");
-      var9.isleaving = 1;
-      var9 moveTo(var28, 4, 4, 0);
+    if(var_9.damagetaken < var_9.maxhealth) {
+      var_9 notify("leaving");
+      var_9.isleaving = 1;
+      var_9 moveTo(var_28, 4, 4, 0);
     }
   }
 
-  var9 scripts\cp_mp\killstreaks\uav::removeuavmodel();
+  var_9 scripts\cp_mp\killstreaks\uav::removeuavmodel();
 
-  if(var7 == "uav" || var7 == "directional_uav") {
-    var9 scripts\cp_mp\killstreaks\uav::revealminimapforteam(level.minimaponbydefault);
+  if(var_7 == "uav" || var_7 == "directional_uav") {
+    var_9 scripts\cp_mp\killstreaks\uav::revealminimapforteam(level.minimaponbydefault);
   }
 
-  var9[[level.uavsettings[var7].removefunc]]();
-  var3.uav = undefined;
+  var_9[[level.uavsettings[var_7].removefunc]]();
+  var_3.uav = undefined;
 
   if(isDefined(level.killstreakfinishusefunc)) {
-    level thread[[level.killstreakfinishusefunc]](var4);
+    level thread[[level.killstreakfinishusefunc]](var_4);
   }
 
-  if(isDefined(var9.enemyobjid)) {
-    scripts\mp\objidpoolmanager::returnobjectiveid(var9.enemyobjid);
-    var9 notify("uav_deleteObjective");
+  if(isDefined(var_9.enemyobjid)) {
+    scripts\mp\objidpoolmanager::returnobjectiveid(var_9.enemyobjid);
+    var_9 notify("uav_deleteObjective");
   }
 
-  if(isDefined(var9)) {
-    var9 delete();
+  if(isDefined(var_9)) {
+    var_9 delete();
   }
 
-  if(var7 == "directional_uav") {
-    var2.radarshowenemydirection = 0;
+  if(var_7 == "directional_uav") {
+    var_2.radarshowenemydirection = 0;
 
     if(level.teambased) {
-      foreach(var30 in level.players) {
-        if(isDefined(var30) && var30.pers["team"] == var6) {
-          var30.radarshowenemydirection = 0;
+      foreach(var_30 in level.players) {
+        if(isDefined(var_30) && var_30.pers["team"] == var_6) {
+          var_30.radarshowenemydirection = 0;
         }
       }
     }

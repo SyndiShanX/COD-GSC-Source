@@ -31,7 +31,7 @@ function setupagent() {
   self setengagementmaxdist(768, 1024);
 }
 
-function setupmodel(var0, var1) {
+function setupmodel(var_0, var_1) {
   self.headmodelname = undefined;
   self setModel("body_opforce_juggernaut");
 }

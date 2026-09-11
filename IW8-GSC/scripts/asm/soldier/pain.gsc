@@ -3,7 +3,7 @@
  * Script: scripts\asm\soldier\pain.gsc
 ***********************************************/
 
-function isdamagelocation_rarm(var0, var1, var2, var3) {
+function isdamagelocation_rarm(var_0, var_1, var_2, var_3) {
   if(!self.damageshield) {
     return scripts\engine\utility::damagelocationisany("right_arm_upper", "right_arm_lower", "right_hand");
   }
@@ -11,7 +11,7 @@ function isdamagelocation_rarm(var0, var1, var2, var3) {
   return 0;
 }
 
-function isdamagelocation_rleg(var0, var1, var2, var3) {
+function isdamagelocation_rleg(var_0, var_1, var_2, var_3) {
   if(!self.damageshield) {
     return scripts\engine\utility::damagelocationisany("right_leg_upper", "right_foot", "right_leg_lower");
   }
@@ -19,7 +19,7 @@ function isdamagelocation_rleg(var0, var1, var2, var3) {
   return 0;
 }
 
-function isdamagelocation_lleg(var0, var1, var2, var3) {
+function isdamagelocation_lleg(var_0, var_1, var_2, var_3) {
   if(!self.damageshield) {
     return scripts\engine\utility::damagelocationisany("left_leg_upper", "left_foot", "left_leg_lower");
   }
@@ -27,7 +27,7 @@ function isdamagelocation_lleg(var0, var1, var2, var3) {
   return 0;
 }
 
-function isdamagelocation_larm(var0, var1, var2, var3) {
+function isdamagelocation_larm(var_0, var_1, var_2, var_3) {
   if(!self.damageshield) {
     return scripts\engine\utility::damagelocationisany("left_arm_upper", "left_arm_lower", "left_hand");
   }
@@ -35,7 +35,7 @@ function isdamagelocation_larm(var0, var1, var2, var3) {
   return 0;
 }
 
-function isdamagelocation_torso(var0, var1, var2, var3) {
+function isdamagelocation_torso(var_0, var_1, var_2, var_3) {
   if(!self.damageshield) {
     return scripts\engine\utility::damagelocationisany("torso_upper", "torso_lower");
   }
@@ -43,7 +43,7 @@ function isdamagelocation_torso(var0, var1, var2, var3) {
   return 0;
 }
 
-function isdamagelocation_head(var0, var1, var2, var3) {
+function isdamagelocation_head(var_0, var_1, var_2, var_3) {
   if(!self.damageshield) {
     return scripts\engine\utility::damagelocationisany("head", "neck", "helmet");
   }
@@ -51,11 +51,11 @@ function isdamagelocation_head(var0, var1, var2, var3) {
   return 0;
 }
 
-function isdamagelocation_larmcrouch(var0, var1, var2, var3) {
+function isdamagelocation_larmcrouch(var_0, var_1, var_2, var_3) {
   return scripts\engine\utility::damagelocationisany("left_hand", "left_arm_upper", "left_arm_lower", "left_leg_upper", "left_leg_lower", "left_foot", "torso_lower");
 }
 
-function isdamagelocation_back(var0, var1, var2, var3) {
+function isdamagelocation_back(var_0, var_1, var_2, var_3) {
   if(!self.damageshield) {
     if(scripts\asm\shared\utility::gethumandamagedirstring() == 1 && !scripts\engine\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "left_foot", "right_leg_upper", "right_leg_lower", "right_foot")) {
       return true;
@@ -65,7 +65,7 @@ function isdamagelocation_back(var0, var1, var2, var3) {
   return false;
 }
 
-function isdamagelocation_torsocovercrouch(var0, var1, var2, var3) {
+function isdamagelocation_torsocovercrouch(var_0, var_1, var_2, var_3) {
   return scripts\engine\utility::damagelocationisany("right_arm_upper", "right_arm_lower", "right_hand", "left_hand", "left_arm_upper", "left_arm_lower", "left_leg_upper", "left_leg_lower", "left_foot", "right_leg_upper", "right_leg_lower", "right_foot", "torso_upper", "torso_lower");
 }
 
@@ -78,8 +78,8 @@ function handlesecondarypainflag() {
   self.asm.secondarypainactive = 0;
 }
 
-function waitforsecondarypain(var0, var1) {
-  self endon(var1 + "_finished");
+function waitforsecondarypain(var_0, var_1) {
+  self endon(var_1 + "_finished");
 
   for(;;) {
     self waittill("damage");
@@ -88,50 +88,50 @@ function waitforsecondarypain(var0, var1) {
       break;
     }
 
-    var2 = chooseadditivepainanim_stand(var0, var1);
-    var3 = scripts\asm\asm::asm_getxanim(var1, var2);
-    self aisetanimknobrestart(var3, 1, 0.01, 1);
+    var_2 = chooseadditivepainanim_stand(var_0, var_1);
+    var_3 = scripts\asm\asm::asm_getxanim(var_1, var_2);
+    self aisetanimknobrestart(var_3, 1, 0.01, 1);
     thread handlesecondarypainflag();
     wait 0.35;
   }
 }
 
-function chooseadditivepainanim_stand(var0, var1) {
-  var2 = [];
+function chooseadditivepainanim_stand(var_0, var_1) {
+  var_2 = [];
 
   if(scripts\engine\utility::damagelocationisany("torso_upper", "torso_lower")) {
-    GscBinSkip0(0x2e, var2.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "add_torso"));
+    GscBinSkip0(0x2e, var_2.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "add_torso"));
   }
 
   if(scripts\engine\utility::damagelocationisany("head", "helmet", "neck")) {
-    GscBinSkip0(0x2e, var2.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "add_head"));
+    GscBinSkip0(0x2e, var_2.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "add_head"));
   }
 
   if(scripts\engine\utility::damagelocationisany("right_arm_upper", "right_arm_lower")) {
-    GscBinSkip0(0x2e, var2.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "add_right_arm"));
+    GscBinSkip0(0x2e, var_2.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "add_right_arm"));
   }
 
   if(scripts\engine\utility::damagelocationisany("left_arm_upper", "left_arm_lower")) {
-    GscBinSkip0(0x2e, var2.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "add_left_arm"));
+    GscBinSkip0(0x2e, var_2.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "add_left_arm"));
   }
 
   if(scripts\engine\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "left_foot")) {
-    GscBinSkip0(0x2e, var2.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "add_left_leg"));
+    GscBinSkip0(0x2e, var_2.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "add_left_leg"));
   }
 
   if(scripts\engine\utility::damagelocationisany("right_leg_upper", "right_leg_lower", "right_foot")) {
-    GscBinSkip0(0x2e, var2.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "add_right_leg"));
+    GscBinSkip0(0x2e, var_2.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "add_right_leg"));
   }
 
-  if(var2.size < 2) {
-    GscBinSkip0(0x2e, var2.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "add_default"));
+  if(var_2.size < 2) {
+    GscBinSkip0(0x2e, var_2.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "add_default"));
   }
 
-  return var2[randomint(var2.size)];
+  return var_2[randomint(var_2.size)];
 }
 
-function choosepainanimshock(var0, var1, var2) {
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, "shock_loop_" + self.currentpose);
+function choosepainanimshock(var_0, var_1, var_2) {
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, "shock_loop_" + self.currentpose);
 }
 
 function playsonicshockfx() {
@@ -142,85 +142,85 @@ function playsonicshockfx() {
   }
 }
 
-function playshockpainloop(var0, var1, var2) {
+function playshockpainloop(var_0, var_1, var_2) {
   self endon("death");
-  self endon(var1 + "_finished");
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  var4 = scripts\engine\utility::ter_op(isDefined(self.empstuntime), self.empstuntime, 3.5);
+  self endon(var_1 + "_finished");
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_4 = scripts\engine\utility::ter_op(isDefined(self.empstuntime), self.empstuntime, 3.5);
   playsonicshockfx();
   self animmode("zonly_physics", 0);
   wait randomfloat(0.3);
 
   if(self.asmname == "c6" || self.asmname == "c6_worker") {
-    thread shockpainloop_internal(self.asmname, var1, 1, 0, 1);
+    thread shockpainloop_internal(self.asmname, var_1, 1, 0, 1);
     self playSound("generic_flashbang_c6_1");
   } else {
-    thread shockpainloop_internal(self.asmname, var1, 1, 0);
+    thread shockpainloop_internal(self.asmname, var_1, 1, 0);
   }
 
-  wait var4;
+  wait var_4;
   self notify("painloop_end");
-  scripts\asm\asm::asm_fireevent(var0, "stop_loop_pain");
+  scripts\asm\asm::asm_fireevent(var_0, "stop_loop_pain");
   self.emplooptime = undefined;
-  finishpain(var0, var1, var2);
+  finishpain(var_0, var_1, var_2);
 }
 
-function shockpainloop_c6_cleanup(var0, var1, var2) {
+function shockpainloop_c6_cleanup(var_0, var_1, var_2) {
   self stopsounds();
 }
 
-function shockpainloop_internal(var0, var1, var2, var3, var4) {
-  self endon(var1 + "_finished");
+function shockpainloop_internal(var_0, var_1, var_2, var_3, var_4) {
+  self endon(var_1 + "_finished");
   self endon("painloop_end");
 
-  if(isDefined(var3) && var3) {
-    var5 = scripts\asm\asm::asm_lookupanimfromaliasifexists("knobs", "move");
+  if(isDefined(var_3) && var_3) {
+    var_5 = scripts\asm\asm::asm_lookupanimfromaliasifexists("knobs", "move");
 
-    if(isDefined(var5)) {
-      self setmoveanimknob(var5);
+    if(isDefined(var_5)) {
+      self setmoveanimknob(var_5);
     }
   }
 
-  var6 = scripts\asm\asm::asm_getbodyknob();
-  var7 = scripts\asm\asm::asm_getanim(var0, var1);
+  var_6 = scripts\asm\asm::asm_getbodyknob();
+  var_7 = scripts\asm\asm::asm_getanim(var_0, var_1);
 
   for(;;) {
-    if(isDefined(var4)) {
-      var7 = scripts\asm\asm::asm_getanim(var0, var1);
+    if(isDefined(var_4)) {
+      var_7 = scripts\asm\asm::asm_getanim(var_0, var_1);
     }
 
-    var8 = scripts\asm\asm::asm_getxanim(var1, var7);
-    self aisetanim(var1, var7, var2);
-    scripts\asm\asm::asm_playfacialanim(var0, var1, var8);
-    var6 = var7;
-    scripts\asm\asm::asm_donotetrackssingleloop(var0, var1, var8, scripts\asm\asm::asm_getnotehandler(var0, var1));
+    var_8 = scripts\asm\asm::asm_getxanim(var_1, var_7);
+    self aisetanim(var_1, var_7, var_2);
+    scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_8);
+    var_6 = var_7;
+    scripts\asm\asm::asm_donotetrackssingleloop(var_0, var_1, var_8, scripts\asm\asm::asm_getnotehandler(var_0, var_1));
   }
 }
 
-function chooseshockpainrecovery(var0, var1, var2) {
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, "shock_finish_" + self.currentpose);
+function chooseshockpainrecovery(var_0, var_1, var_2) {
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, "shock_finish_" + self.currentpose);
 }
 
-function playpainanim(var0, var1, var2) {
-  playpainaniminternal(var0, var1, var2, 0);
+function playpainanim(var_0, var_1, var_2) {
+  playpainaniminternal(var_0, var_1, var_2, 0);
 }
 
-function playpainanimwithadditives(var0, var1, var2) {
-  playpainaniminternal(var0, var1, var2, 1);
+function playpainanimwithadditives(var_0, var_1, var_2) {
+  playpainaniminternal(var_0, var_1, var_2, 1);
 }
 
-function playpainanimlmg(var0, var1, var2) {
+function playpainanimlmg(var_0, var_1, var_2) {
   self._blackboard.inlmgstate = 1;
-  playpainaniminternal(var0, var1, var2, 0);
+  playpainaniminternal(var_0, var_1, var_2, 0);
 }
 
-function pain_can_use_handler(var0, var1) {
-  if(var0 == "pain_can_end") {
+function pain_can_use_handler(var_0, var_1) {
+  if(var_0 == "pain_can_end") {
     return 1;
   }
 }
 
-function shouldpainruntostrafereverse(var0, var1, var2, var3) {
+function shouldpainruntostrafereverse(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.pathgoalpos)) {
     return false;
   }
@@ -229,36 +229,36 @@ function shouldpainruntostrafereverse(var0, var1, var2, var3) {
     return false;
   }
 
-  var4 = length(self.velocity);
+  var_4 = length(self.velocity);
 
-  if(var4 < 20) {
+  if(var_4 < 20) {
     return false;
   }
 
-  var5 = self.velocity / var4;
+  var_5 = self.velocity / var_4;
 
   if(self.lookaheaddist > 12) {
-    var6 = self.lookaheaddir;
+    var_6 = self.lookaheaddir;
   } else {
-    var6 = vectorNormalize(self getposonpath(36) - self.origin);
+    var_6 = vectorNormalize(self getposonpath(36) - self.origin);
   }
 
-  return vectordot(var6, var6) < 0.5;
+  return vectordot(var_6, var_6) < 0.5;
 }
 
-function ispainweaponsizelarge(var0, var1, var2, var3) {
-  var4 = "rifle";
-  var5 = self.damageweapon;
+function ispainweaponsizelarge(var_0, var_1, var_2, var_3) {
+  var_4 = "rifle";
+  var_5 = self.damageweapon;
 
-  if(isDefined(var5) && var5.basename != "iw8_sn_mike14") {
-    var4 = var5.classname;
+  if(isDefined(var_5) && var_5.basename != "iw8_sn_mike14") {
+    var_4 = var_5.classname;
   }
 
-  if(var4 == "spread") {
+  if(var_4 == "spread") {
     if(isDefined(self.lastattacker) && distancesquared(self.lastattacker.origin, self.origin) <= 62500) {
       return true;
     }
-  } else if(var4 == "sniper" || var4 == "mg") {
+  } else if(var_4 == "sniper" || var_4 == "mg") {
     return true;
   }
 
@@ -266,268 +266,268 @@ function ispainweaponsizelarge(var0, var1, var2, var3) {
 }
 
 function getpainweaponsize() {
-  var0 = "_md";
-  var1 = "rifle";
-  var2 = self.damageweapon;
+  var_0 = "_md";
+  var_1 = "rifle";
+  var_2 = self.damageweapon;
 
-  if(isDefined(var2) && var2.basename != "iw8_sn_mike14") {
-    var1 = var2.classname;
+  if(isDefined(var_2) && var_2.basename != "iw8_sn_mike14") {
+    var_1 = var_2.classname;
   }
 
-  if(var1 == "pistol" || var1 == "smg") {
-    var0 = "_md";
-  } else if(var1 == "spread") {
-    var0 = "_md";
+  if(var_1 == "pistol" || var_1 == "smg") {
+    var_0 = "_md";
+  } else if(var_1 == "spread") {
+    var_0 = "_md";
 
     if(isDefined(self.lastattacker) && distancesquared(self.lastattacker.origin, self.origin) <= 62500) {
-      var0 = "_lg";
+      var_0 = "_lg";
     }
-  } else if(var1 == "sniper" || var1 == "mg") {
-    var0 = "_lg";
-  } else if(var1 == "grenade" && isDefined(self.damagemod) && self.damagemod == "MOD_IMPACT") {
-    var0 = "_lg";
+  } else if(var_1 == "sniper" || var_1 == "mg") {
+    var_0 = "_lg";
+  } else if(var_1 == "grenade" && isDefined(self.damagemod) && self.damagemod == "MOD_IMPACT") {
+    var_0 = "_lg";
   }
 
   if(isDefined(level.fnasmsoldiergetpainweaponsize)) {
-    var0 = self[[level.fnasmsoldiergetpainweaponsize]](var0);
+    var_0 = self[[level.fnasmsoldiergetpainweaponsize]](var_0);
   }
 
-  return var0;
+  return var_0;
 }
 
 function getpainweaponsize_exposed() {
-  var0 = "_md";
-  var1 = "rifle";
-  var2 = self.damageweapon;
+  var_0 = "_md";
+  var_1 = "rifle";
+  var_2 = self.damageweapon;
 
-  if(isDefined(var2) && var2.basename != "iw8_sn_mike14") {
-    var1 = var2.classname;
+  if(isDefined(var_2) && var_2.basename != "iw8_sn_mike14") {
+    var_1 = var_2.classname;
   }
 
-  if(var1 == "pistol" || var1 == "smg") {
-    var0 = "_md";
-  } else if(var1 == "spread") {
-    var0 = "_md";
+  if(var_1 == "pistol" || var_1 == "smg") {
+    var_0 = "_md";
+  } else if(var_1 == "spread") {
+    var_0 = "_md";
 
     if(isDefined(self.lastattacker) && distancesquared(self.lastattacker.origin, self.origin) <= 62500) {
-      var0 = "_lg";
+      var_0 = "_lg";
     }
-  } else if(var1 == "sniper" || var1 == "mg") {
-    var0 = "_lg";
+  } else if(var_1 == "sniper" || var_1 == "mg") {
+    var_0 = "_lg";
   }
 
   if(isDefined(level.fnasmsoldiergetpainweaponsize)) {
-    var0 = self[[level.fnasmsoldiergetpainweaponsize]](var0);
+    var_0 = self[[level.fnasmsoldiergetpainweaponsize]](var_0);
   }
 
-  return var0;
+  return var_0;
 }
 
 function getpaindirectiontoactor() {
   if(isDefined(self.damageyaw) && self.damageyaw >= -45 && self.damageyaw <= 45) {
-    var0 = "_b";
-    return var0;
+    var_0 = "_b";
+    return var_0;
   }
 
   if(isDefined(self.damageyaw) && self.damageyaw < -45 && self.damageyaw > -135) {
-    var0 = "_l";
-    return var0;
+    var_0 = "_l";
+    return var_0;
   }
 
   if(isDefined(self.damageyaw) && self.damageyaw > 45 && self.damageyaw < 135) {
-    var0 = "_r";
-    return var0;
+    var_0 = "_r";
+    return var_0;
   }
 
-  var0 = "_f";
-  return var0;
+  var_0 = "_f";
+  return var_0;
 }
 
-function choosedirectionalpainanim_exposedstand(var0, var1, var2) {
-  var3 = getpainweaponsize();
-  var4 = getpaindirectiontoactor();
-  var5 = "torso";
-  var6 = "midbody";
-  var7 = [];
+function choosedirectionalpainanim_exposedstand(var_0, var_1, var_2) {
+  var_3 = getpainweaponsize();
+  var_4 = getpaindirectiontoactor();
+  var_5 = "torso";
+  var_6 = "midbody";
+  var_7 = [];
 
   if(scripts\engine\utility::damagelocationisany("head", "helmet", "neck")) {
-    var5 = "head";
-    var6 = "head";
-    GscBinSkip0(0x2e, var7.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "head" + var3 + var4));
+    var_5 = "head";
+    var_6 = "head";
+    GscBinSkip0(0x2e, var_7.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "head" + var_3 + var_4));
   }
 
   if(scripts\engine\utility::damagelocationisany("torso_upper", "torso_lower")) {
-    var5 = "torso";
-    var6 = "midbody";
-    GscBinSkip0(0x2e, var7.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "torso" + var3 + var4));
+    var_5 = "torso";
+    var_6 = "midbody";
+    GscBinSkip0(0x2e, var_7.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso" + var_3 + var_4));
   }
 
   if(scripts\engine\utility::damagelocationisany("right_arm_upper", "right_arm_lower", "right_hand")) {
-    var5 = "rarm";
-    var6 = "midbody";
-    GscBinSkip0(0x2e, var7.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "rarm" + var3 + var4));
+    var_5 = "rarm";
+    var_6 = "midbody";
+    GscBinSkip0(0x2e, var_7.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "rarm" + var_3 + var_4));
   }
 
   if(scripts\engine\utility::damagelocationisany("left_arm_upper", "left_arm_lower", "left_hand")) {
-    var5 = "larm";
-    var6 = "midbody";
-    GscBinSkip0(0x2e, var7.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "larm" + var3 + var4));
+    var_5 = "larm";
+    var_6 = "midbody";
+    GscBinSkip0(0x2e, var_7.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "larm" + var_3 + var_4));
   }
 
   if(scripts\engine\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "left_foot")) {
-    var5 = "lleg";
-    var6 = "lowerbody";
-    GscBinSkip0(0x2e, var7.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "lleg" + var3 + var4));
+    var_5 = "lleg";
+    var_6 = "lowerbody";
+    GscBinSkip0(0x2e, var_7.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "lleg" + var_3 + var_4));
   }
 
   if(scripts\engine\utility::damagelocationisany("right_leg_upper", "right_leg_lower", "right_foot")) {
-    var5 = "rleg";
-    var6 = "lowerbody";
-    GscBinSkip0(0x2e, var7.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "rleg" + var3 + var4));
+    var_5 = "rleg";
+    var_6 = "lowerbody";
+    GscBinSkip0(0x2e, var_7.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "rleg" + var_3 + var_4));
   }
 
-  var5 = "torso";
-  var6 = "midbody";
-  GscBinSkip0(0x2e, var7.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "torso" + var3 + var4));
+  var_5 = "torso";
+  var_6 = "midbody";
+  GscBinSkip0(0x2e, var_7.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso" + var_3 + var_4));
 }
 
-function choosedirectionalfullpainanim_exposedstand(var0, var1, var2) {
-  var3 = getpaindirectiontoactor();
-  var4 = "torso";
-  var5 = "midbody";
-  var6 = [];
+function choosedirectionalfullpainanim_exposedstand(var_0, var_1, var_2) {
+  var_3 = getpaindirectiontoactor();
+  var_4 = "torso";
+  var_5 = "midbody";
+  var_6 = [];
 
   if(scripts\engine\utility::damagelocationisany("head", "helmet", "neck")) {
-    var4 = "head";
-    var5 = "head";
-    GscBinSkip0(0x2e, var6.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "head" + var3));
+    var_4 = "head";
+    var_5 = "head";
+    GscBinSkip0(0x2e, var_6.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "head" + var_3));
   }
 
   if(scripts\engine\utility::damagelocationisany("torso_upper")) {
-    var4 = "torso_upper";
-    var5 = "midbody";
-    GscBinSkip0(0x2e, var6.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "torso_upper" + var3));
+    var_4 = "torso_upper";
+    var_5 = "midbody";
+    GscBinSkip0(0x2e, var_6.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_upper" + var_3));
   }
 
   if(scripts\engine\utility::damagelocationisany("torso_lower")) {
-    var4 = "torso_lower";
-    var5 = "midbody";
-    GscBinSkip0(0x2e, var6.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "torso_lower" + var3));
+    var_4 = "torso_lower";
+    var_5 = "midbody";
+    GscBinSkip0(0x2e, var_6.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_lower" + var_3));
   }
 
   if(scripts\engine\utility::damagelocationisany("right_arm_upper")) {
-    var4 = "rarm_upper";
-    var5 = "midbody";
-    GscBinSkip0(0x2e, var6.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "rarm_upper" + var3));
+    var_4 = "rarm_upper";
+    var_5 = "midbody";
+    GscBinSkip0(0x2e, var_6.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "rarm_upper" + var_3));
   }
 
   if(scripts\engine\utility::damagelocationisany("right_arm_lower", "right_hand")) {
-    var4 = "rarm_lower";
-    var5 = "midbody";
-    GscBinSkip0(0x2e, var6.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "rarm_lower" + var3));
+    var_4 = "rarm_lower";
+    var_5 = "midbody";
+    GscBinSkip0(0x2e, var_6.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "rarm_lower" + var_3));
   }
 
   if(scripts\engine\utility::damagelocationisany("left_arm_upper")) {
-    var4 = "larm_upper";
-    var5 = "midbody";
-    GscBinSkip0(0x2e, var6.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "larm_upper" + var3));
+    var_4 = "larm_upper";
+    var_5 = "midbody";
+    GscBinSkip0(0x2e, var_6.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "larm_upper" + var_3));
   }
 
   if(scripts\engine\utility::damagelocationisany("left_arm_lower", "left_hand")) {
-    var4 = "larm_lower";
-    var5 = "midbody";
-    GscBinSkip0(0x2e, var6.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "larm_lower" + var3));
+    var_4 = "larm_lower";
+    var_5 = "midbody";
+    GscBinSkip0(0x2e, var_6.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "larm_lower" + var_3));
   }
 
   if(scripts\engine\utility::damagelocationisany("left_leg_upper")) {
-    var4 = "lleg_upper";
-    var5 = "lowerbody";
-    GscBinSkip0(0x2e, var6.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "lleg_upper" + var3));
+    var_4 = "lleg_upper";
+    var_5 = "lowerbody";
+    GscBinSkip0(0x2e, var_6.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "lleg_upper" + var_3));
   }
 
   if(scripts\engine\utility::damagelocationisany("left_leg_lower", "left_foot")) {
-    var4 = "lleg_lower";
-    var5 = "lowerbody";
-    GscBinSkip0(0x2e, var6.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "lleg_lower" + var3));
+    var_4 = "lleg_lower";
+    var_5 = "lowerbody";
+    GscBinSkip0(0x2e, var_6.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "lleg_lower" + var_3));
   }
 
   if(scripts\engine\utility::damagelocationisany("right_leg_upper")) {
-    var4 = "rleg_upper";
-    var5 = "lowerbody";
-    GscBinSkip0(0x2e, var6.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "rleg_upper" + var3));
+    var_4 = "rleg_upper";
+    var_5 = "lowerbody";
+    GscBinSkip0(0x2e, var_6.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "rleg_upper" + var_3));
   }
 
   if(scripts\engine\utility::damagelocationisany("right_leg_lower", "right_foot")) {
-    var4 = "rleg_lower";
-    var5 = "lowerbody";
-    GscBinSkip0(0x2e, var6.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "rleg_lower" + var3));
+    var_4 = "rleg_lower";
+    var_5 = "lowerbody";
+    GscBinSkip0(0x2e, var_6.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "rleg_lower" + var_3));
   }
 
-  var4 = "torso_lower";
-  var5 = "midbody";
-  GscBinSkip0(0x2e, var6.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "torso_lower" + var3));
+  var_4 = "torso_lower";
+  var_5 = "midbody";
+  GscBinSkip0(0x2e, var_6.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_lower" + var_3));
 }
 
-function choosedirectionalpainanim_transition(var0, var1, var2) {
+function choosedirectionalpainanim_transition(var_0, var_1, var_2) {
   if(isDefined(self.asm.aliaspain)) {
-    var3 = self.asm.aliaspain;
-    return scripts\asm\asm::asm_lookupanimfromalias(var1, var3);
+    var_3 = self.asm.aliaspain;
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
   }
 
-  return scripts\asm\asm::asm_getrandomanim(var2);
+  return scripts\asm\asm::asm_getrandomanim(var_2);
 }
 
-function choosedirectionalpainanim_coverstand(var0, var1, var2) {
-  var3 = getpainweaponsize();
-  var4 = getpaindirectiontoactor();
-  var5 = "torso";
-  var6 = "midbody";
-  var7 = [];
+function choosedirectionalpainanim_coverstand(var_0, var_1, var_2) {
+  var_3 = getpainweaponsize();
+  var_4 = getpaindirectiontoactor();
+  var_5 = "torso";
+  var_6 = "midbody";
+  var_7 = [];
 
   if(scripts\engine\utility::damagelocationisany("head", "helmet", "neck")) {
-    var5 = "head";
-    var6 = "head";
-    GscBinSkip0(0x2e, var7.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "head" + var3 + var4));
+    var_5 = "head";
+    var_6 = "head";
+    GscBinSkip0(0x2e, var_7.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "head" + var_3 + var_4));
   }
 
   if(scripts\engine\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "left_foot", "right_leg_upper", "right_leg_lower", "right_foot")) {
-    var5 = "legs";
-    var6 = "lowerbody";
-    GscBinSkip0(0x2e, var7.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "legs" + var3 + var4));
+    var_5 = "legs";
+    var_6 = "lowerbody";
+    GscBinSkip0(0x2e, var_7.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "legs" + var_3 + var_4));
   }
 
-  var5 = "torso";
-  var6 = "midbody";
-  GscBinSkip0(0x2e, var7.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "torso" + var3 + var4));
+  var_5 = "torso";
+  var_6 = "midbody";
+  GscBinSkip0(0x2e, var_7.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso" + var_3 + var_4));
 }
 
-function choosedirectionalpainanim_covercrouch(var0, var1, var2) {
-  var3 = getpainweaponsize();
-  var4 = getpaindirectiontoactor();
-  var5 = "torso";
-  var6 = "midbody";
-  var7 = [];
+function choosedirectionalpainanim_covercrouch(var_0, var_1, var_2) {
+  var_3 = getpainweaponsize();
+  var_4 = getpaindirectiontoactor();
+  var_5 = "torso";
+  var_6 = "midbody";
+  var_7 = [];
 
   if(scripts\engine\utility::damagelocationisany("head", "helmet", "neck")) {
-    var5 = "head";
-    var6 = "head";
-    GscBinSkip0(0x2e, var7.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "head" + var3 + var4));
+    var_5 = "head";
+    var_6 = "head";
+    GscBinSkip0(0x2e, var_7.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "head" + var_3 + var_4));
   }
 
-  var5 = "torso";
-  var6 = "midbody";
-  GscBinSkip0(0x2e, var7.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "torso" + var3 + var4));
+  var_5 = "torso";
+  var_6 = "midbody";
+  GscBinSkip0(0x2e, var_7.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso" + var_3 + var_4));
 }
 
-function choosepainanim_covercrouchlean(var0, var1, var2) {
-  var3 = getpainweaponsize();
-  var4 = "pain";
-  var5 = [];
-  GscBinSkip0(0x2e, var5.size, scripts\asm\asm::asm_lookupanimfromalias(var1, var4 + var3));
+function choosepainanim_covercrouchlean(var_0, var_1, var_2) {
+  var_3 = getpainweaponsize();
+  var_4 = "pain";
+  var_5 = [];
+  GscBinSkip0(0x2e, var_5.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, var_4 + var_3));
 }
 
-function playpainaniminternal(var0, var1, var2, var3, var4, var5, var6) {
-  self endon(var1 + "_finished");
+function playpainaniminternal(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  self endon(var_1 + "_finished");
 
   if(isDefined(self.a.paintime)) {
     self.a.lastpaintime = self.a.paintime;
@@ -545,7 +545,7 @@ function playpainaniminternal(var0, var1, var2, var3, var4, var5, var6) {
 
   self animmode("gravity");
 
-  if(!istrue(var6)) {
+  if(!istrue(var_6)) {
     self orientmode("face angle", self.angles[1]);
   }
 
@@ -557,46 +557,46 @@ function playpainaniminternal(var0, var1, var2, var3, var4, var5, var6) {
     scripts\asm\soldier\death::helmetpop();
   }
 
-  var7 = var1;
+  var_7 = var_1;
 
-  if(isDefined(var5)) {
-    var7 = var5;
+  if(isDefined(var_5)) {
+    var_7 = var_5;
   }
 
-  var8 = scripts\asm\asm::asm_getanim(var0, var1, var2);
-  self aisetanim(var7, var8);
+  var_8 = scripts\asm\asm::asm_getanim(var_0, var_1, var_2);
+  self aisetanim(var_7, var_8);
 
-  if(var3 == 1) {
+  if(var_3 == 1) {
     self.asm.secondarypainactive = 0;
-    thread waitforsecondarypain(var0, var1);
+    thread waitforsecondarypain(var_0, var_1);
   }
 
-  var9 = scripts\asm\asm::asm_getxanim(var7, var8);
-  scripts\asm\asm::asm_playfacialanim(var0, var1, var9);
+  var_9 = scripts\asm\asm::asm_getxanim(var_7, var_8);
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_9);
   self.requestdifferentcover = 1;
 
-  if(animhasnotetrack(var9, "code_move")) {
-    scripts\asm\asm::asm_donotetracks(var0, var1, undefined, undefined, var7);
+  if(animhasnotetrack(var_9, "code_move")) {
+    scripts\asm\asm::asm_donotetracks(var_0, var_1, undefined, undefined, var_7);
   }
 
-  scripts\asm\asm::asm_donotetracks(var0, var1, undefined, undefined, var7);
+  scripts\asm\asm::asm_donotetracks(var_0, var_1, undefined, undefined, var_7);
 
-  if(istrue(var4)) {
-    finishpain(var0, var1, var2);
+  if(istrue(var_4)) {
+    finishpain(var_0, var_1, var_2);
     return;
   }
 
-  finishpain(var0, var1);
+  finishpain(var_0, var_1);
 }
 
-function paincanend(var0, var1) {
-  switch (var1) {
+function paincanend(var_0, var_1) {
+  switch (var_1) {
     case "pain_can_end":
       return 1;
   }
 }
 
-function coverexppainselectreturna(var0, var1, var2) {
+function coverexppainselectreturna(var_0, var_1, var_2) {
   if(isDefined(self._blackboard.coverexposetype) && self._blackboard.coverexposetype == "A") {
     return 1;
   }
@@ -604,38 +604,38 @@ function coverexppainselectreturna(var0, var1, var2) {
   return 0;
 }
 
-function finishpain(var0, var1, var2) {
+function finishpain(var_0, var_1, var_2) {
   self notify("killanimscript");
 
   if(isDefined(self.asm.secondarypainactive)) {
     self.asm.secondarypainactive = undefined;
   }
 
-  var3 = undefined;
+  var_3 = undefined;
 
-  if(isDefined(var2)) {
-    if(isarray(var2)) {
-      var3 = var2[0];
+  if(isDefined(var_2)) {
+    if(isarray(var_2)) {
+      var_3 = var_2[0];
     } else {
-      var3 = var2;
+      var_3 = var_2;
     }
   }
 
-  if(!isDefined(var3)) {
+  if(!isDefined(var_3)) {
     return;
   }
 
-  thread scripts\asm\asm::asm_setstate(var3, undefined);
+  thread scripts\asm\asm::asm_setstate(var_3, undefined);
 }
 
-function playcoverpainanimwithadditives(var0, var1, var2) {
+function playcoverpainanimwithadditives(var_0, var_1, var_2) {
   self.keepclaimednodeifvalid = 1;
-  playpainaniminternal(var0, var1, var2, 1);
+  playpainaniminternal(var_0, var_1, var_2, 1);
 }
 
-function playcoverpainanim(var0, var1, var2) {
+function playcoverpainanim(var_0, var_1, var_2) {
   self.keepclaimednodeifvalid = 1;
-  playpainanim(var0, var1, var2);
+  playpainanim(var_0, var_1, var_2);
 }
 
 function shouldusedamageshieldanim() {
@@ -658,12 +658,12 @@ function shouldusedamageshieldanim() {
   return false;
 }
 
-function shoulddamageshielddowntoground(var0, var1, var2, var3) {
+function shoulddamageshielddowntoground(var_0, var_1, var_2, var_3) {
   if(isDefined(self.damageshield) && self.damageshield && !isDefined(self.disabledamageshieldpain)) {
     if(isDefined(self.lastattacker) && isDefined(self.lastattacker.unittype) && self.lastattacker.unittype == "c8") {
-      var4 = self.damageweapon;
+      var_4 = self.damageweapon;
 
-      if(isDefined(var4) && var4.isbeam) {
+      if(isDefined(var_4) && var_4.isbeam) {
         return true;
       }
     }
@@ -672,332 +672,332 @@ function shoulddamageshielddowntoground(var0, var1, var2, var3) {
   return false;
 }
 
-function playpainanim_damageshieldtoground(var0, var1, var2) {
+function playpainanim_damageshieldtoground(var_0, var_1, var_2) {
   self.asm.binfullbodypain = 1;
-  playpainaniminternal(var0, var1, var2, 0, 1);
+  playpainaniminternal(var_0, var_1, var_2, 0, 1);
 }
 
-function playpainanim_damageshieldtoground_cleanup(var0, var1, var2) {
+function playpainanim_damageshieldtoground_cleanup(var_0, var_1, var_2) {
   self.asm.binfullbodypain = undefined;
 }
 
-function chooseanim_damageshieldtoground(var0, var1, var2) {
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, "pain");
+function chooseanim_damageshieldtoground(var_0, var_1, var_2) {
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, "pain");
 }
 
-function choosepainanim_standtorsotoexposed(var0, var1, var2) {
+function choosepainanim_standtorsotoexposed(var_0, var_1, var_2) {
   if(self.lasttorsoanim == "torso_upper") {
-    var3 = scripts\asm\asm::asm_lookupanimfromalias(var1, "torso_upper");
+    var_3 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_upper");
   } else if(self.lasttorsoanim == "torso_lower") {
-    var3 = scripts\asm\asm::asm_lookupanimfromalias(var2, "torso_lower");
+    var_3 = scripts\asm\asm::asm_lookupanimfromalias(var_2, "torso_lower");
   } else {
-    var3 = scripts\asm\asm::asm_lookupanimfromalias(var3, "default");
+    var_3 = scripts\asm\asm::asm_lookupanimfromalias(var_3, "default");
   }
 
   self.lasttorsoanim = undefined;
-  return var3;
+  return var_3;
 }
 
-function choosepainanim_standtorso(var0, var1, var2) {
+function choosepainanim_standtorso(var_0, var_1, var_2) {
   if(scripts\engine\utility::damagelocationisany("torso_upper")) {
     self.lasttorsoanim = "torso_upper";
-    return scripts\asm\asm::asm_lookupanimfromalias(var1, "torso_upper");
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_upper");
   }
 
   if(scripts\engine\utility::damagelocationisany("torso_lower")) {
     self.lasttorsoanim = "torso_lower";
-    return scripts\asm\asm::asm_lookupanimfromalias(var1, "torso_lower");
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_lower");
   }
 
   self.lasttorsoanim = "default";
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, "default");
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, "default");
 }
 
-function choosepainanim_stand(var0, var1, var2) {
+function choosepainanim_stand(var_0, var_1, var_2) {
   if(shouldusedamageshieldanim()) {
     if(self.currentpose == "crouch") {
-      return scripts\asm\asm::asm_lookupanimfromalias(var1, "damage_shield_crouch");
+      return scripts\asm\asm::asm_lookupanimfromalias(var_1, "damage_shield_crouch");
     } else if(self.currentpose == "stand") {
-      return scripts\asm\asm::asm_lookupanimfromalias(var1, "damage_shield_stand");
+      return scripts\asm\asm::asm_lookupanimfromalias(var_1, "damage_shield_stand");
     }
   }
 
   if(scripts\anim\utility_common::isusingsidearm()) {
-    return choosepainanim_pistol(var0, var1, var2);
+    return choosepainanim_pistol(var_0, var_1, var_2);
   }
 
-  var3 = [];
+  var_3 = [];
 
   if(scripts\engine\utility::damagelocationisany("torso_upper")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "torso_upper"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_upper"));
   }
 
   if(scripts\engine\utility::damagelocationisany("torso_lower")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "torso_lower"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_lower"));
   }
 
   if(scripts\engine\utility::damagelocationisany("head", "helmet", "neck")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "head"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "head"));
   }
 
   if(scripts\engine\utility::damagelocationisany("right_arm_upper", "right_arm_lower")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "right_arm"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "right_arm"));
   }
 
   if(scripts\engine\utility::damagelocationisany("left_arm_upper", "left_arm_lower")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "left_arm"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "left_arm"));
   }
 
   if(scripts\engine\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "left_foot")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "left_leg"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "left_leg"));
   }
 
   if(scripts\engine\utility::damagelocationisany("right_leg_upper", "right_leg_lower", "right_foot")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "right_leg"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "right_leg"));
   }
 
-  if(var3.size < 2) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "default"));
+  if(var_3.size < 2) {
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "default"));
   }
 
-  return var3[randomint(var3.size)];
+  return var_3[randomint(var_3.size)];
 }
 
-function choosepainanim_damageshield(var0, var1, var2) {
+function choosepainanim_damageshield(var_0, var_1, var_2) {
   if(shouldusedamageshieldanim()) {
     if(self.currentpose == "crouch") {
-      return scripts\asm\asm::asm_lookupanimfromalias(var1, "damage_shield_crouch");
+      return scripts\asm\asm::asm_lookupanimfromalias(var_1, "damage_shield_crouch");
     } else if(self.currentpose == "stand") {
-      return scripts\asm\asm::asm_lookupanimfromalias(var1, "damage_shield_stand");
+      return scripts\asm\asm::asm_lookupanimfromalias(var_1, "damage_shield_stand");
     }
   }
 
-  var3 = [];
+  var_3 = [];
 
-  if(var3.size < 2) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "default"));
+  if(var_3.size < 2) {
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "default"));
   }
 
-  return var3[randomint(var3.size)];
+  return var_3[randomint(var_3.size)];
 }
 
-function choosedynamicpainanim_expcrouchlegs(var0, var1, var2) {
-  var3 = [];
-  GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "default"));
+function choosedynamicpainanim_expcrouchlegs(var_0, var_1, var_2) {
+  var_3 = [];
+  GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "default"));
 }
 
-function choosepainanim_crouch(var0, var1, var2) {
-  var3 = [];
-  GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "default"));
+function choosepainanim_crouch(var_0, var_1, var_2) {
+  var_3 = [];
+  GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "default"));
 }
 
-function choosepainanim_pistol(var0, var1, var2) {
-  var3 = [];
+function choosepainanim_pistol(var_0, var_1, var_2) {
+  var_3 = [];
 
   if(scripts\engine\utility::damagelocationisany("torso_upper")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "pistol_torso_upper"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_torso_upper"));
   }
 
   if(scripts\engine\utility::damagelocationisany("torso_lower")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "pistol_torso_lower"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_torso_lower"));
   }
 
   if(scripts\engine\utility::damagelocationisany("neck")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "pistol_neck"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_neck"));
   }
 
   if(scripts\engine\utility::damagelocationisany("head")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "pistol_head"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_head"));
   }
 
   if(scripts\engine\utility::damagelocationisany("left_leg_upper", "right_leg_upper")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "pistol_leg"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_leg"));
   }
 
   if(scripts\engine\utility::damagelocationisany("left_arm_upper")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "pistol_left_arm_upper"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_left_arm_upper"));
   }
 
   if(scripts\engine\utility::damagelocationisany("left_arm_lower")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "pistol_left_arm_lower"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_left_arm_lower"));
   }
 
   if(scripts\engine\utility::damagelocationisany("right_arm_upper")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "pistol_right_arm_upper"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_right_arm_upper"));
   }
 
   if(scripts\engine\utility::damagelocationisany("right_arm_lower")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "pistol_right_arm_lower"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_right_arm_lower"));
   }
 
-  if(var3.size < 2) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "pistol_default"));
+  if(var_3.size < 2) {
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_default"));
   }
 
-  return var3[randomint(var3.size)];
+  return var_3[randomint(var_3.size)];
 }
 
-function choosepainanim_run(var0, var1, var2) {
-  var3 = 30;
-  var4 = 150;
-  var5 = 300;
-  var6 = [];
-  var7 = 0;
-  var8 = 0;
-  var9 = 0;
-  var10 = navtrace(self.origin, self localtoworldcoords((var5, 0, 0)), self, 1);
+function choosepainanim_run(var_0, var_1, var_2) {
+  var_3 = 30;
+  var_4 = 150;
+  var_5 = 300;
+  var_6 = [];
+  var_7 = 0;
+  var_8 = 0;
+  var_9 = 0;
+  var_10 = navtrace(self.origin, self localtoworldcoords((var_5, 0, 0)), self, 1);
 
-  if(var10["fraction"] > 0.9) {
-    var8 = 1;
+  if(var_10["fraction"] > 0.9) {
+    var_8 = 1;
   }
 
-  if(var10["fraction"] > 0.9 * var4 / var5) {
-    var7 = 1;
+  if(var_10["fraction"] > 0.9 * var_4 / var_5) {
+    var_7 = 1;
   }
 
   if(isDefined(self.a.disablelongpain)) {
-    var8 = 0;
-    var7 = 0;
+    var_8 = 0;
+    var_7 = 0;
   }
 
-  var11 = length(self.velocity);
-  var12 = scripts\asm\shared\utility::getbasearchetype();
-  var13 = getnextlowestspeedthresholdstring(var12, var11);
+  var_11 = length(self.velocity);
+  var_12 = scripts\asm\shared\utility::getbasearchetype();
+  var_13 = getnextlowestspeedthresholdstring(var_12, var_11);
 
-  if(var8) {
-    var14 = "long" + var13;
-    var6 = scripts\asm\asm::asm_lookupanimfromalias(var1, var14);
-  } else if(var7) {
-    var14 = "medium" + var13;
-    var6 = scripts\asm\asm::asm_lookupanimfromalias(var1, var14);
-  } else if(var10["fraction"] > 0.9 * var3 / var5) {
-    var14 = "short" + var13;
-    var6 = scripts\asm\asm::asm_lookupanimfromalias(var1, var14);
+  if(var_8) {
+    var_14 = "long" + var_13;
+    var_6 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_14);
+  } else if(var_7) {
+    var_14 = "medium" + var_13;
+    var_6 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_14);
+  } else if(var_10["fraction"] > 0.9 * var_3 / var_5) {
+    var_14 = "short" + var_13;
+    var_6 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_14);
   }
 
-  if(var6.size == 0) {
-    return scripts\asm\asm::asm_lookupanimfromalias(var1, "emergency_backup");
+  if(var_6.size == 0) {
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, "emergency_backup");
   }
 
-  return var6[randomint(var6.size)];
+  return var_6[randomint(var_6.size)];
 }
 
-function choosepainanim_tocoverhide_helper(var0, var1, var2, var3) {
-  return scripts\asm\asm::asm_chooseanim(var0, var1, var2);
+function choosepainanim_tocoverhide_helper(var_0, var_1, var_2, var_3) {
+  return scripts\asm\asm::asm_chooseanim(var_0, var_1, var_2);
 }
 
-function choosepainanim_tocoverhide(var0, var1, var2) {
-  return scripts\asm\soldier\cover::getstopdatafortransition(var0, var1, &choosepainanim_tocoverhide_helper);
+function choosepainanim_tocoverhide(var_0, var_1, var_2) {
+  return scripts\asm\soldier\cover::getstopdatafortransition(var_0, var_1, &choosepainanim_tocoverhide_helper);
 }
 
-function choosepainanim_covercorner_helper(var0, var1, var2, var3) {
-  if(isDefined(var2) && isDefined(var2[1])) {
-    return scripts\asm\asm::asm_lookupanimfromalias(var1, var2[1]);
+function choosepainanim_covercorner_helper(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_2) && isDefined(var_2[1])) {
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_2[1]);
   }
 
   if(self.currentpose == "crouch") {
-    return scripts\asm\asm::asm_lookupanimfromalias(var1, "crouch");
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, "crouch");
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, "stand");
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, "stand");
 }
 
-function choosepainanim_covercorner_tocoverhide(var0, var1, var2) {
-  return scripts\asm\soldier\cover::getstopdatafortransition(var0, var1, &choosepainanim_covercorner_helper);
+function choosepainanim_covercorner_tocoverhide(var_0, var_1, var_2) {
+  return scripts\asm\soldier\cover::getstopdatafortransition(var_0, var_1, &choosepainanim_covercorner_helper);
 }
 
-function choosepainanim_covercorner(var0, var1, var2) {
-  return choosepainanim_covercorner_helper(var0, var1, var2, undefined);
+function choosepainanim_covercorner(var_0, var_1, var_2) {
+  return choosepainanim_covercorner_helper(var_0, var_1, var_2, undefined);
 }
 
-function choosedynamicpainanim_back(var0, var1, var2) {
-  var3 = "back";
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, var3);
+function choosedynamicpainanim_back(var_0, var_1, var_2) {
+  var_3 = "back";
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
 }
 
-function choosepainanim_covercrouch(var0, var1, var2) {
-  var3 = "crouch";
+function choosepainanim_covercrouch(var_0, var_1, var_2) {
+  var_3 = "crouch";
 
-  if(isDefined(var2)) {
-    var3 = var3 + "_" + var2;
+  if(isDefined(var_2)) {
+    var_3 = var_3 + "_" + var_2;
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, var3);
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
 }
 
-function choosedynamicpainanim_covercrouch(var0, var1, var2) {
-  var3 = [];
+function choosedynamicpainanim_covercrouch(var_0, var_1, var_2) {
+  var_3 = [];
 
   if(scripts\engine\utility::damagelocationisany("torso_upper", "torso_lower")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "torso"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso"));
   }
 
   if(scripts\engine\utility::damagelocationisany("head", "helmet", "neck")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "head"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "head"));
   }
 
-  if(var3.size < 2) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "default"));
+  if(var_3.size < 2) {
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "default"));
   }
 
-  return var3[randomint(var3.size)];
+  return var_3[randomint(var_3.size)];
 }
 
-function choosepainanim_coverstand(var0, var1, var2) {
-  var3 = "stand";
+function choosepainanim_coverstand(var_0, var_1, var_2) {
+  var_3 = "stand";
 
-  if(isDefined(var2) && isDefined(var2)) {
-    var3 = var3 + "_" + var2;
+  if(isDefined(var_2) && isDefined(var_2)) {
+    var_3 = var_3 + "_" + var_2;
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, var3);
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
 }
 
-function choosedynamicpainanim_coverstand(var0, var1, var2) {
-  var3 = [];
+function choosedynamicpainanim_coverstand(var_0, var_1, var_2) {
+  var_3 = [];
 
   if(scripts\engine\utility::damagelocationisany("torso_upper")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "torso_upper"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_upper"));
   }
 
   if(scripts\engine\utility::damagelocationisany("torso_lower")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "torso_lower"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_lower"));
   }
 
   if(scripts\engine\utility::damagelocationisany("head", "helmet", "neck")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "head"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "head"));
   }
 
   if(scripts\engine\utility::damagelocationisany("right_arm_upper", "right_arm_lower")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "right_arm"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "right_arm"));
   }
 
   if(scripts\engine\utility::damagelocationisany("left_arm_upper", "left_arm_lower")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "left_arm"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "left_arm"));
   }
 
   if(scripts\engine\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "left_foot")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "left_leg"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "left_leg"));
   }
 
   if(scripts\engine\utility::damagelocationisany("right_leg_upper", "right_leg_lower", "right_foot")) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "right_leg"));
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "right_leg"));
   }
 
-  if(var3.size < 2) {
-    GscBinSkip0(0x2e, var3.size, scripts\asm\asm::asm_lookupanimfromalias(var1, "default"));
+  if(var_3.size < 2) {
+    GscBinSkip0(0x2e, var_3.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "default"));
   }
 
-  return var3[randomint(var3.size)];
+  return var_3[randomint(var_3.size)];
 }
 
-function choosepainanimdeafened(var0, var1, var2) {
-  var3 = 3;
-  var4 = "deaf_" + randomint(var3) + 1;
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, var4);
+function choosepainanimdeafened(var_0, var_1, var_2) {
+  var_3 = 3;
+  var_4 = "deaf_" + randomint(var_3) + 1;
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_4);
 }
 
-function cleanuppainanim(var0, var1, var2) {
+function cleanuppainanim(var_0, var_1, var_2) {
   if(isDefined(self.script) && self.script == "pain") {
     self notify("killanimscript");
   }
@@ -1019,10 +1019,10 @@ function cleanuppainanim(var0, var1, var2) {
     self.allowpain = 1;
   }
 
-  clearpainturnrate(var0, var1, var2);
+  clearpainturnrate(var_0, var_1, var_2);
 
   if(istrue(self.leavecasualkiller)) {
-    scripts\asm\soldier\script_funcs::terminate_casualkiller(var0, var1, var2);
+    scripts\asm\soldier\script_funcs::terminate_casualkiller(var_0, var_1, var_2);
   }
 
   if(!istrue(self.ignoreall)) {
@@ -1035,7 +1035,7 @@ function cleanuppainanim(var0, var1, var2) {
   }
 }
 
-function transition_flashfinished(var0, var1, var2, var3) {
+function transition_flashfinished(var_0, var_1, var_2, var_3) {
   if(!scripts\engine\utility::isflashed()) {
     return true;
   }
@@ -1044,10 +1044,10 @@ function transition_flashfinished(var0, var1, var2, var3) {
     return true;
   }
 
-  return scripts\asm\asm::asm_eventfired(var0, "end") || scripts\asm\asm::asm_eventfired(var0, "finish");
+  return scripts\asm\asm::asm_eventfired(var_0, "end") || scripts\asm\asm::asm_eventfired(var_0, "finish");
 }
 
-function iscovercrouch(var0, var1, var2, var3) {
+function iscovercrouch(var_0, var_1, var_2, var_3) {
   if(!isDefined(self._blackboard.covernode)) {
     return 0;
   }
@@ -1059,7 +1059,7 @@ function iscovercrouch(var0, var1, var2, var3) {
   return 0;
 }
 
-function iscoverstand(var0, var1, var2, var3) {
+function iscoverstand(var_0, var_1, var_2, var_3) {
   if(!isDefined(self._blackboard.covernode)) {
     return 0;
   }
@@ -1071,7 +1071,7 @@ function iscoverstand(var0, var1, var2, var3) {
   return 0;
 }
 
-function iscoverright_crouch(var0, var1, var2, var3) {
+function iscoverright_crouch(var_0, var_1, var_2, var_3) {
   if(!isDefined(self._blackboard.covernode)) {
     return 0;
   }
@@ -1083,7 +1083,7 @@ function iscoverright_crouch(var0, var1, var2, var3) {
   return 0;
 }
 
-function iscoverright_stand(var0, var1, var2, var3) {
+function iscoverright_stand(var_0, var_1, var_2, var_3) {
   if(!isDefined(self._blackboard.covernode)) {
     return 0;
   }
@@ -1095,7 +1095,7 @@ function iscoverright_stand(var0, var1, var2, var3) {
   return 0;
 }
 
-function iscoverleft_crouch(var0, var1, var2, var3) {
+function iscoverleft_crouch(var_0, var_1, var_2, var_3) {
   if(!isDefined(self._blackboard.covernode)) {
     return 0;
   }
@@ -1107,7 +1107,7 @@ function iscoverleft_crouch(var0, var1, var2, var3) {
   return 0;
 }
 
-function iscoverleft_stand(var0, var1, var2, var3) {
+function iscoverleft_stand(var_0, var_1, var_2, var_3) {
   if(!isDefined(self._blackboard.covernode)) {
     return 0;
   }
@@ -1119,7 +1119,7 @@ function iscoverleft_stand(var0, var1, var2, var3) {
   return 0;
 }
 
-function isexposed_crouch(var0, var1, var2, var3) {
+function isexposed_crouch(var_0, var_1, var_2, var_3) {
   if(!isDefined(self._blackboard.covernode)) {
     return 0;
   }
@@ -1131,7 +1131,7 @@ function isexposed_crouch(var0, var1, var2, var3) {
   return 0;
 }
 
-function isexposed_prone(var0, var1, var2, var3) {
+function isexposed_prone(var_0, var_1, var_2, var_3) {
   if(!isDefined(self._blackboard.covernode)) {
     return 0;
   }
@@ -1143,84 +1143,84 @@ function isexposed_prone(var0, var1, var2, var3) {
   return 0;
 }
 
-function playanim_flashed(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  playanim_flashed_internal(var0, var1);
-  thread playanim_monitorflashrestart(var0, var1);
-  scripts\asm\asm::asm_donotetracks(var0, var1);
+function playanim_flashed(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  playanim_flashed_internal(var_0, var_1);
+  thread playanim_monitorflashrestart(var_0, var_1);
+  scripts\asm\asm::asm_donotetracks(var_0, var_1);
 }
 
-function playanim_flashed_internal(var0, var1) {
-  var2 = scripts\asm\asm::asm_getanim(var0, var1);
-  var3 = 1;
+function playanim_flashed_internal(var_0, var_1) {
+  var_2 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_3 = 1;
 
   if(isDefined(self.flashendtime)) {
-    var4 = self.flashendtime - gettime();
-    var5 = scripts\asm\asm::asm_getxanim(var1, var2);
-    var6 = getanimlength(var5) * 1000;
+    var_4 = self.flashendtime - gettime();
+    var_5 = scripts\asm\asm::asm_getxanim(var_1, var_2);
+    var_6 = getanimlength(var_5) * 1000;
 
-    if(var4 > 0) {
-      var3 = var6 / var4;
+    if(var_4 > 0) {
+      var_3 = var_6 / var_4;
     }
 
-    var3 += randomfloatrange(-0.2, 0.2);
-    var3 = clamp(var3, 0.2, 1.65);
+    var_3 += randomfloatrange(-0.2, 0.2);
+    var_3 = clamp(var_3, 0.2, 1.65);
   }
 
-  self aisetanim(var1, var2, var3);
+  self aisetanim(var_1, var_2, var_3);
 }
 
-function playanim_monitorflashrestart(var0, var1) {
-  self endon(var1 + "_finished");
-  var2 = self.flashendtime;
+function playanim_monitorflashrestart(var_0, var_1) {
+  self endon(var_1 + "_finished");
+  var_2 = self.flashendtime;
 
   while(isDefined(self.flashendtime)) {
-    if(var2 != self.flashendtime) {
-      var2 = self.flashendtime;
-      playanim_flashed_internal(var0, var1);
+    if(var_2 != self.flashendtime) {
+      var_2 = self.flashendtime;
+      playanim_flashed_internal(var_0, var_1);
     }
 
     waitframe();
   }
 }
 
-function chooseanim_flashed(var0, var1, var2) {
-  var3 = "med";
+function chooseanim_flashed(var_0, var_1, var_2) {
+  var_3 = "med";
 
   if(isDefined(self.flashendtime)) {
-    var4 = self.flashendtime - gettime();
+    var_4 = self.flashendtime - gettime();
 
-    if(var4 <= 3750) {
-      var3 = "short";
-    } else if(var4 >= 5250) {
-      var3 = "med";
+    if(var_4 <= 3750) {
+      var_3 = "short";
+    } else if(var_4 >= 5250) {
+      var_3 = "med";
     }
   }
 
-  var5 = scripts\asm\asm::asm_lookupanimfromalias(var1, var3);
-  return scripts\asm\shared\utility::preventrecentanimindex(var1, var3, var5);
+  var_5 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
+  return scripts\asm\shared\utility::preventrecentanimindex(var_1, var_3, var_5);
 }
 
-function cleanupflashanim(var0, var1, var2) {
-  cleanuppainanim(var0, var1, var2);
+function cleanupflashanim(var_0, var_1, var_2) {
+  cleanuppainanim(var_0, var_1, var_2);
   scripts\common\utility::flashbangstop();
 }
 
-function playanim_burning(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  var3 = scripts\asm\asm::asm_getanim(var0, var1, var2);
-  var4 = randomfloatrange(0.8, 1.2);
+function playanim_burning(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1, var_2);
+  var_4 = randomfloatrange(0.8, 1.2);
   self orientmode("face angle", self.angles[1]);
-  self aisetanim(var1, var3, var4);
-  scripts\asm\asm::asm_donotetracks(var0, var1, &burn_notetrack_handler);
+  self aisetanim(var_1, var_3, var_4);
+  scripts\asm\asm::asm_donotetracks(var_0, var_1, &burn_notetrack_handler);
 }
 
-function burn_notetrack_handler(var0) {
+function burn_notetrack_handler(var_0) {
   if(isDefined(self.semtexstuckto)) {
     return;
   }
 
-  switch (var0) {
+  switch (var_0) {
     case "burn_vfx_pain_start_head":
       playFXOnTag(level.g_effect["vfx_burn_sml_head_low"], self, "j_helmet");
       break;
@@ -1239,32 +1239,32 @@ function burn_notetrack_handler(var0) {
   }
 }
 
-function chooseanim_burning(var0, var1, var2) {
-  var3 = var1;
+function chooseanim_burning(var_0, var_1, var_2) {
+  var_3 = var_1;
 
   if(self.currentpose == "prone") {
-    return scripts\asm\asm::asm_lookupanimfromalias(var1, "pain_burning_prone");
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, "pain_burning_prone");
   }
 
-  var4 = scripts\engine\utility::ter_op(randomint(2) == 1, "arm", "leg");
-  var3 = var3 + "_" + self.burningdirection + "_" + var4;
-  var5 = scripts\asm\asm::asm_lookupanimfromalias(var1, var3);
-  return scripts\asm\shared\utility::preventrecentanimindex(var1, var3, var5);
+  var_4 = scripts\engine\utility::ter_op(randomint(2) == 1, "arm", "leg");
+  var_3 = var_3 + "_" + self.burningdirection + "_" + var_4;
+  var_5 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
+  return scripts\asm\shared\utility::preventrecentanimindex(var_1, var_3, var_5);
 }
 
-function shouldpainfaceplayer(var0, var1, var2, var3) {
-  var4 = getpaindirectiontoactor();
+function shouldpainfaceplayer(var_0, var_1, var_2, var_3) {
+  var_4 = getpaindirectiontoactor();
 
-  if(var4 == "_f") {
+  if(var_4 == "_f") {
     return false;
   }
 
   self forcethreatupdate();
 
   if(isDefined(self.enemy) && isDefined(self.lastattacker) && self.enemy == self.lastattacker) {
-    var5 = vectorNormalize(self.origin - self.enemy.origin);
+    var_5 = vectorNormalize(self.origin - self.enemy.origin);
 
-    if(vectordot(var5, self.damagedir) > 0.866) {
+    if(vectordot(var_5, self.damagedir) > 0.866) {
       return true;
     }
   }
@@ -1272,26 +1272,26 @@ function shouldpainfaceplayer(var0, var1, var2, var3) {
   return false;
 }
 
-function shouldpaincoverfaceplayer(var0, var1, var2, var3) {
-  if(shouldpainfaceplayer(var0, var1, var2, var3)) {
-    var4 = 1;
+function shouldpaincoverfaceplayer(var_0, var_1, var_2, var_3) {
+  if(shouldpainfaceplayer(var_0, var_1, var_2, var_3)) {
+    var_4 = 1;
 
     if(isDefined(self.covernode) && scripts\aitypes\cover::shouldbeinlmgcover()) {
-      var4 = scripts\aitypes\cover::iscovervalidforlmg(self.covernode);
+      var_4 = scripts\aitypes\cover::iscovervalidforlmg(self.covernode);
     } else {
-      var4 = scripts\asm\shared\utility::iscovervalid();
+      var_4 = scripts\asm\shared\utility::iscovervalid();
     }
 
-    return !var4;
+    return !var_4;
   }
 
   return false;
 }
 
-function shouldpainrunfaceplayer(var0, var1, var2, var3) {
-  var4 = getpaindirectiontoactor();
+function shouldpainrunfaceplayer(var_0, var_1, var_2, var_3) {
+  var_4 = getpaindirectiontoactor();
 
-  if(var4 == "_f") {
+  if(var_4 == "_f") {
     return false;
   }
 
@@ -1308,41 +1308,41 @@ function shouldpainrunfaceplayer(var0, var1, var2, var3) {
   return false;
 }
 
-function choosepainanim_faceplayer(var0, var1, var2) {
-  var3 = getpaindirectiontoactor();
-  self.asm.aliaspain = "torso_md" + var3;
+function choosepainanim_faceplayer(var_0, var_1, var_2) {
+  var_3 = getpaindirectiontoactor();
+  self.asm.aliaspain = "torso_md" + var_3;
   self.asm.painloc = "midbody";
   self.asm.painsize = "_md";
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, self.asm.aliaspain);
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, self.asm.aliaspain);
 }
 
-function painanimfaceenemy(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  var4 = scripts\asm\asm::asm_getxanim(var1, var3);
-  var5 = getanimlength(var4);
-  var6 = var5 * 0.8;
-  var7 = var5;
-  var8 = getnotetracktimes(var4, "face_enemy")[0];
+function painanimfaceenemy(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, var_3);
+  var_5 = getanimlength(var_4);
+  var_6 = var_5 * 0.8;
+  var_7 = var_5;
+  var_8 = getnotetracktimes(var_4, "face_enemy")[0];
 
-  if(isDefined(var8)) {
-    var6 = var8 * var5;
+  if(isDefined(var_8)) {
+    var_6 = var_8 * var_5;
   } else {
-    if(scripts\asm\asm::asm_currentstatehasflag(var0, "notetrackAim")) {
-      var9 = getnotetracktimes(var4, "start_aim")[0];
+    if(scripts\asm\asm::asm_currentstatehasflag(var_0, "notetrackAim")) {
+      var_9 = getnotetracktimes(var_4, "start_aim")[0];
 
-      if(isDefined(var9)) {
-        var6 = min(var6, max(0, var9 - 0.3) * var5);
-        var7 = var9 * var5;
+      if(isDefined(var_9)) {
+        var_6 = min(var_6, max(0, var_9 - 0.3) * var_5);
+        var_7 = var_9 * var_5;
       }
     }
 
-    var6 = min(var6, max(0, var5 - 0.5));
+    var_6 = min(var_6, max(0, var_5 - 0.5));
   }
 
-  wait var6;
+  wait var_6;
 
-  if(isalive(var2)) {
+  if(isalive(var_2)) {
     self.painoldturnrate = self.turnrate;
     self.turnrate = 0.1;
     self orientmode("face enemy");
@@ -1350,44 +1350,44 @@ function painanimfaceenemy(var0, var1, var2) {
   }
 }
 
-function playpainanim_faceplayer(var0, var1, var2) {
-  self endon(var1 + "_finished");
+function playpainanim_faceplayer(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
 
   if(isalive(self.enemy) && isDefined(self.lastattacker) && self.enemy == self.lastattacker) {
-    thread painanimfaceenemy(var0, var1, self.enemy);
+    thread painanimfaceenemy(var_0, var_1, self.enemy);
   }
 
-  playpainaniminternal(var0, var1, var2, 0, 1, undefined, 1);
+  playpainaniminternal(var_0, var_1, var_2, 0, 1, undefined, 1);
 }
 
-function playpainanim_exposedstand(var0, var1, var2) {
-  self endon(var1 + "_finished");
+function playpainanim_exposedstand(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
 
   if(isalive(self.enemy) && isDefined(self.lastattacker) && self.enemy == self.lastattacker) {
-    thread painanimfaceenemy(var0, var1, self.enemy);
+    thread painanimfaceenemy(var_0, var_1, self.enemy);
   }
 
-  playpainaniminternal(var0, var1, var2, 0, 1);
+  playpainaniminternal(var_0, var_1, var_2, 0, 1);
 }
 
-function playpainanim_exposedcrouch(var0, var1, var2) {
-  self endon(var1 + "_finished");
+function playpainanim_exposedcrouch(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
   self.painattacker = self.lastattacker;
-  playpainaniminternal(var0, var1, var2, 0, 1);
+  playpainaniminternal(var_0, var_1, var_2, 0, 1);
 }
 
-function playpainanim_exposedcrouchtransition(var0, var1, var2) {
-  self endon(var1 + "_finished");
+function playpainanim_exposedcrouchtransition(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
 
   if(isalive(self.enemy) && isDefined(self.painattacker) && self.enemy == self.painattacker) {
-    thread painanimfaceenemy(var0, var1, self.enemy);
+    thread painanimfaceenemy(var_0, var_1, self.enemy);
   }
 
   self.painattacker = undefined;
-  scripts\asm\shared\utility::playanim(var0, var1, var2);
+  scripts\asm\shared\utility::playanim(var_0, var_1, var_2);
 }
 
-function clearpainturnrate(var0, var1, var2) {
+function clearpainturnrate(var_0, var_1, var_2) {
   if(isDefined(self.painoldturnrate)) {
     self.turnrate = self.painoldturnrate;
     self.painoldturnrate = undefined;

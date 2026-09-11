@@ -36,19 +36,19 @@ function setupagent() {
 
 function setupsoldieraitype() {}
 
-function setupmodel(var0, var1) {
+function setupmodel(var_0, var_1) {
   if(self.team == "axis") {
-    var2 = weaponclass(var1);
+    var_2 = weaponclass(var_1);
 
-    if(isDefined(var1) && isDefined(level.agentmodeltabledata) && isDefined(level.agentmodeltabledata[var2])) {
-      var3 = level.agentmodeltabledata[var2].bodymodel;
-      var4 = level.agentmodeltabledata[var2].headmodel;
+    if(isDefined(var_1) && isDefined(level.agentmodeltabledata) && isDefined(level.agentmodeltabledata[var_2])) {
+      var_3 = level.agentmodeltabledata[var_2].bodymodel;
+      var_4 = level.agentmodeltabledata[var_2].headmodel;
     } else {
-      var3 = "body_opforce_london_terrorist_1_2";
-      var4 = "head_male_bc_03";
+      var_3 = "body_opforce_london_terrorist_1_2";
+      var_4 = "head_male_bc_03";
     }
 
-    setcharmodels(var3, var4);
+    setcharmodels(var_3, var_4);
     return;
   }
 
@@ -58,16 +58,16 @@ function setupmodel(var0, var1) {
   }
 }
 
-function setcharmodels(var0, var1, var2) {
+function setcharmodels(var_0, var_1, var_2) {
   if(isDefined(self.headmodel)) {
     self detach(self.headmodel);
   }
 
-  self setModel(var0);
+  self setModel(var_0);
 
-  if(isDefined(var1) && var1 != "") {
-    self attach(var1, "", 1);
-    self.headmodel = var1;
+  if(isDefined(var_1) && var_1 != "") {
+    self attach(var_1, "", 1);
+    self.headmodel = var_1;
     return;
   }
 

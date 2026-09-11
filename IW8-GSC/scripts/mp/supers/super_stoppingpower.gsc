@@ -9,10 +9,10 @@ function ref_138e7() {
 }
 
 function stoppingpower_beginuse() {
-  var0 = self.lastweaponobj;
-  var1 = isundefinedweapon();
+  var_0 = self.lastweaponobj;
+  var_1 = isundefinedweapon();
 
-  if(!scripts\mp\weapons::isnormallastweapon(var0) || scripts\mp\utility\weapon::ismeleeonly(var0) || scripts\mp\utility\weapon::isgamemodeweapon(var0) || scripts\mp\utility\weapon::issinglehitweapon(var0.basename) || !ref_138ea(var0) || ref_138e8(var0)) {
+  if(!scripts\mp\weapons::isnormallastweapon(var_0) || scripts\mp\utility\weapon::ismeleeonly(var_0) || scripts\mp\utility\weapon::isgamemodeweapon(var_0) || scripts\mp\utility\weapon::issinglehitweapon(var_0.basename) || !ref_138ea(var_0) || ref_138e8(var_0)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
       self[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("MP/SUPPORT_BOX_INCOMPAT");
     }
@@ -20,70 +20,70 @@ function stoppingpower_beginuse() {
     return false;
   }
 
-  var2 = stoppingpower_cancelreload();
+  var_2 = stoppingpower_cancelreload();
 
-  if(!istrue(var2)) {
+  if(!istrue(var_2)) {
     return false;
   }
 
-  if(self isalternatemode(var0)) {
-    var1 = var0;
-    var0 = var0 getnoaltweapon();
+  if(self isalternatemode(var_0)) {
+    var_1 = var_0;
+    var_0 = var_0 getnoaltweapon();
   } else {
-    var1 = var0 getaltweapon();
+    var_1 = var_0 getaltweapon();
   }
 
-  var3 = [];
-  var4 = 0;
-  var5 = 0;
+  var_3 = [];
+  var_4 = 0;
+  var_5 = 0;
 
-  if(!nullweapon(var1)) {
-    var3 = var1;
+  if(!nullweapon(var_1)) {
+    var_3 = var_1;
   }
 
-  var3 = var0;
+  var_3 = var_0;
 
-  foreach(var7 in var3) {
-    var8 = scripts\mp\utility\weapon::turnexfiltoside(var7);
+  foreach(var_7 in var_3) {
+    var_8 = scripts\mp\utility\weapon::turnexfiltoside(var_7);
 
-    if(isnullweapon(var7, var0, 0)) {
-      var9 = scripts\mp\weapons::getammooverride(var7);
-      var10 = var9 * 1;
+    if(isnullweapon(var_7, var_0, 0)) {
+      var_9 = scripts\mp\weapons::getammooverride(var_7);
+      var_10 = var_9 * 1;
 
-      if(var8) {
-        var10 *= 2;
+      if(var_8) {
+        var_10 *= 2;
       }
 
-      thread stoppingpower_givehcr(self, var7, var10);
+      thread stoppingpower_givehcr(self, var_7, var_10);
 
       if(true) {
-        if(var8) {
-          var9 = self getweaponammoclip(var7, "left") + self getweaponammoclip(var7, "right");
-          var4 = self getweaponammostock(var7);
-          var11 = var9 + var4;
-          var12 = int(min(ref_138e4(var7, var11), var11 + var10));
-          self setweaponammostock(var7, var12);
-          self setweaponammoclip(var7, 0, "left");
-          self setweaponammoclip(var7, 0, "right");
+        if(var_8) {
+          var_9 = self getweaponammoclip(var_7, "left") + self getweaponammoclip(var_7, "right");
+          var_4 = self getweaponammostock(var_7);
+          var_11 = var_9 + var_4;
+          var_12 = int(min(ref_138e4(var_7, var_11), var_11 + var_10));
+          self setweaponammostock(var_7, var_12);
+          self setweaponammoclip(var_7, 0, "left");
+          self setweaponammoclip(var_7, 0, "right");
         } else {
-          var10 = self getweaponammoclip(var8);
-          var5 = self getweaponammostock(var8);
-          var11 = var10 + var5;
-          var13 = ref_138e4(var8, var11);
-          var14 = var11 + var11;
-          var6 = int(var14 - var13);
-          var15 = int(min(var13, var14));
+          var_10 = self getweaponammoclip(var_8);
+          var_5 = self getweaponammostock(var_8);
+          var_11 = var_10 + var_5;
+          var_13 = ref_138e4(var_8, var_11);
+          var_14 = var_11 + var_11;
+          var_6 = int(var_14 - var_13);
+          var_15 = int(min(var_13, var_14));
 
-          if(var8.basename == "iw8_lm_dblmg_mp") {
-            self setweaponammoclip(var8, var10 + var11);
+          if(var_8.basename == "iw8_lm_dblmg_mp") {
+            self setweaponammoclip(var_8, var_10 + var_11);
           } else {
-            self setweaponammoclip(var8, 0);
+            self setweaponammoclip(var_8, 0);
 
             if(scripts\mp\utility\game::getgametype() == "br") {
-              var16 = var15 - var5;
-              scripts\mp\gametypes\br_weapons::delay_camera_normal(var8, var16);
+              var_16 = var_15 - var_5;
+              scripts\mp\gametypes\br_weapons::delay_camera_normal(var_8, var_16);
             } else {
-              self setweaponammostock(var8, var15);
+              self setweaponammostock(var_8, var_15);
             }
           }
         }
@@ -91,33 +91,33 @@ function stoppingpower_beginuse() {
     }
   }
 
-  var7 = undefined;
-  var9 = undefined;
-  thread ref_138f0(var1, var5, var6);
+  var_7 = undefined;
+  var_9 = undefined;
+  thread ref_138f0(var_1, var_5, var_6);
   return true;
 }
 
-function ref_138e4(var0, var1) {
-  var2 = var0.maxammo;
+function ref_138e4(var_0, var_1) {
+  var_2 = var_0.maxammo;
 
-  if(var1 > var2) {
-    var2 = var1;
+  if(var_1 > var_2) {
+    var_2 = var_1;
   }
 
-  return var2;
+  return var_2;
 }
 
-function ref_138ea(var0) {
-  if(!self isalternatemode(var0)) {
+function ref_138ea(var_0) {
+  if(!self isalternatemode(var_0)) {
     return 1;
   }
 
-  var1 = var0.underbarrel;
-  return scripts\mp\weapons::turretoverridefunc(var1);
+  var_1 = var_0.underbarrel;
+  return scripts\mp\weapons::turretoverridefunc(var_1);
 }
 
-function ref_138e8(var0) {
-  switch (var0.basename) {
+function ref_138e8(var_0) {
+  switch (var_0.basename) {
     case "iw8_lm_dblmg_mp":
     case "iw8_me_t9ballisticknife_mp":
     case "iw8_sm_t9nailgun_mp":
@@ -128,22 +128,22 @@ function ref_138e8(var0) {
   return false;
 }
 
-function ref_138f0(var0, var1, var2) {
+function ref_138f0(var_0, var_1, var_2) {
   level endon("game_ended");
   self endon("death_or_disconnect");
 
   for(;;) {
-    if(self getcurrentprimaryweapon() != var0) {
+    if(self getcurrentprimaryweapon() != var_0) {
       break;
     }
 
-    var3 = self getweaponammoclip(var0);
+    var_3 = self getweaponammoclip(var_0);
 
-    if(var3 > 0) {
+    if(var_3 > 0) {
       thread scripts\mp\hud_message::showsplash("stopping_power_loaded");
 
-      if(var2 > 0) {
-        self setweaponammostock(var0, var1 + var2);
+      if(var_2 > 0) {
+        self setweaponammostock(var_0, var_1 + var_2);
       }
 
       break;
@@ -162,34 +162,34 @@ function ref_138f0(var0, var1, var2) {
   }
 }
 
-function stoppingpower_givehcr(var0, var1, var2) {
-  var3 = init_relic_steelballs(var0, var1, var2);
-  ref_138e6(var0, var3);
+function stoppingpower_givehcr(var_0, var_1, var_2) {
+  var_3 = init_relic_steelballs(var_0, var_1, var_2);
+  ref_138e6(var_0, var_3);
 }
 
-function init_relic_steelballs(var0, var1, var2) {
-  var3 = spawnStruct();
-  var3.player = var0;
-  var3.objweapon = var1;
-  var3.rounds = var2;
-  var3.gavehcr = 0;
-  var3.kills = 0;
-  return var3;
+function init_relic_steelballs(var_0, var_1, var_2) {
+  var_3 = spawnStruct();
+  var_3.player = var_0;
+  var_3.objweapon = var_1;
+  var_3.rounds = var_2;
+  var_3.gavehcr = 0;
+  var_3.kills = 0;
+  return var_3;
 }
 
-function ref_138e6(var0, var1) {
-  if(!isDefined(var0.hcrdata)) {
-    var0.hcrdata = [];
+function ref_138e6(var_0, var_1) {
+  if(!isDefined(var_0.hcrdata)) {
+    var_0.hcrdata = [];
   }
 
-  var2 = scripts\mp\utility\weapon::getcompleteweaponnamenoalt(var1.objweapon);
-  var3 = var0.hcrdata[var2];
+  var_2 = scripts\mp\utility\weapon::getcompleteweaponnamenoalt(var_1.objweapon);
+  var_3 = var_0.hcrdata[var_2];
 
-  if(isDefined(var3)) {
+  if(isDefined(var_3)) {
     thread stoppingpower_removehcr();
   }
 
-  var0.hcrdata[var2] = var1;
+  var_0.hcrdata[var_2] = var_1;
   thread stoppingpower_clearhcrondeath();
   thread ref_138e2();
   thread ref_138e3();
@@ -199,38 +199,38 @@ function ref_138e6(var0, var1) {
   thread stoppingpower_watchhcrweaponfire();
 }
 
-function ref_138ed(var0, var1, var2) {
-  if(!isDefined(var0) || !isDefined(var1)) {
+function ref_138ed(var_0, var_1, var_2) {
+  if(!isDefined(var_0) || !isDefined(var_1)) {
     return;
   }
 
-  var3 = ref_138e5(var1, var2);
+  var_3 = ref_138e5(var_1, var_2);
 
-  if(isDefined(var3)) {
-    var4 = init_relic_steelballs(var3.player, var3.objweapon, var3.rounds);
-    var0.hcrdata = var4;
+  if(isDefined(var_3)) {
+    var_4 = init_relic_steelballs(var_3.player, var_3.objweapon, var_3.rounds);
+    var_0.hcrdata = var_4;
     thread stoppingpower_removehcr();
     return;
   }
 }
 
-function ref_138ee(var0, var1, var2) {
-  var3 = var0.hcrdata;
+function ref_138ee(var_0, var_1, var_2) {
+  var_3 = var_0.hcrdata;
 
-  if(!isDefined(var3)) {
+  if(!isDefined(var_3)) {
     return;
   }
 
-  if(!isDefined(var3.player) || !var3.player hasweapon(var3.objweapon)) {
+  if(!isDefined(var_3.player) || !var_3.player hasweapon(var_3.objweapon)) {
     return;
   }
 
-  var3.player = var1;
-  ref_138e6(var1, var3);
+  var_3.player = var_1;
+  ref_138e6(var_1, var_3);
 }
 
-function ref_138e5(var0) {
-  if(!isDefined(var0)) {
+function ref_138e5(var_0) {
+  if(!isDefined(var_0)) {
     return undefined;
   }
 
@@ -238,8 +238,8 @@ function ref_138e5(var0) {
     return undefined;
   }
 
-  var1 = scripts\mp\utility\weapon::getcompleteweaponnamenoalt(var0);
-  return self.hcrdata[var1];
+  var_1 = scripts\mp\utility\weapon::getcompleteweaponnamenoalt(var_0);
+  return self.hcrdata[var_1];
 }
 
 function stoppingpower_cancelreload() {
@@ -275,9 +275,9 @@ function stoppingpower_watchhcrweaponfire() {
   self.player endon("disconnect");
 
   while(self.player hasweapon(self.objweapon)) {
-    self.player waittill("weapon_fired", var0);
+    self.player waittill("weapon_fired", var_0);
 
-    if(ref_138e9(var0)) {
+    if(ref_138e9(var_0)) {
       self.rounds--;
 
       if(self.rounds <= 0) {
@@ -290,16 +290,16 @@ function stoppingpower_watchhcrweaponfire() {
   thread stoppingpower_removehcr();
 }
 
-function ref_138ef(var0) {
+function ref_138ef(var_0) {
   self endon("disconnect");
 
   if(!isDefined(self)) {
     return;
   }
 
-  var1 = scripts\mp\utility\weapon::getweaponrootname(var0);
+  var_1 = scripts\mp\utility\weapon::getweaponrootname(var_0);
 
-  if(var1 != "iw8_sn_crossbow") {
+  if(var_1 != "iw8_sn_crossbow") {
     return;
   }
 
@@ -332,11 +332,11 @@ function ref_138eb() {
 
 function ref_138e1() {
   if(isDefined(self.player.hcrdata)) {
-    var0 = scripts\mp\utility\weapon::getcompleteweaponnamenoalt(self.objweapon);
-    var1 = self.player.hcrdata[var0];
+    var_0 = scripts\mp\utility\weapon::getcompleteweaponnamenoalt(self.objweapon);
+    var_1 = self.player.hcrdata[var_0];
 
-    if(var1 == self) {
-      self.player.hcrdata[var0] = undefined;
+    if(var_1 == self) {
+      self.player.hcrdata[var_0] = undefined;
     }
 
     self.player scripts\cp\vehicles\vehicle_compass_cp::ref_12032("super_support_box", self.kills);
@@ -345,16 +345,16 @@ function ref_138e1() {
   }
 }
 
-function ref_138ec(var0) {
-  if(isDefined(var0)) {
-    var1 = scripts\mp\utility\weapon::getcompleteweaponnamenoalt(var0);
-    var2 = self.hcrdata[var1];
+function ref_138ec(var_0) {
+  if(isDefined(var_0)) {
+    var_1 = scripts\mp\utility\weapon::getcompleteweaponnamenoalt(var_0);
+    var_2 = self.hcrdata[var_1];
 
-    if(isDefined(var2)) {
+    if(isDefined(var_2)) {
       scripts\mp\utility\stats::incpersstat("stoppingPowerKills", 1);
       scripts\mp\supers::combatrecordsuperkill("super_support_box");
       scripts\cp\vehicles\vehicle_compass_cp::ref_12094();
-      var2.kills++;
+      var_2.kills++;
       return;
     }
 
@@ -362,11 +362,11 @@ function ref_138ec(var0) {
   }
 }
 
-function ref_138e9(var0) {
-  var1 = self.player getammotype(self.objweapon);
-  var2 = self.player getammotype(var0);
-  var3 = var1 == var2;
-  return isnullweapon(var0, self.objweapon, 1) && var3;
+function ref_138e9(var_0) {
+  var_1 = self.player getammotype(self.objweapon);
+  var_2 = self.player getammotype(var_0);
+  var_3 = var_1 == var_2;
+  return isnullweapon(var_0, self.objweapon, 1) && var_3;
 }
 
 function stoppingpower_clearhcrondeath() {

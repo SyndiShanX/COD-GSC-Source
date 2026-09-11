@@ -3,7 +3,7 @@
  * Script: scripts\mp\playerstats_interface.gsc
 ************************************************/
 
-function setplayerstat(var0, var1, var2, var3, var4, var5) {
+function setplayerstat(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!areplayerstatsenabled()) {
     return;
   }
@@ -12,18 +12,18 @@ function setplayerstat(var0, var1, var2, var3, var4, var5) {
     return;
   }
 
-  var6 = scripts\mp\playerstats::getplayerstatpathkey(var1, var2, var3, var4, var5);
+  var_6 = scripts\mp\playerstats::getplayerstatpathkey(var_1, var_2, var_3, var_4, var_5);
 
-  if(!scripts\mp\playerstats::isstatwritable_internal(var6)) {
+  if(!scripts\mp\playerstats::isstatwritable_internal(var_6)) {
     return;
   }
 
-  scripts\mp\playerstats::setplayerstat_internal(var0, var6, var1, var2, var3, var4, var5);
-  scripts\mp\playerstats::writeplayerstat(var0, var1, var2, var3, var4, var5);
-  scripts\mp\playerstats::updateparentratiosbuffered(var6);
+  scripts\mp\playerstats::setplayerstat_internal(var_0, var_6, var_1, var_2, var_3, var_4, var_5);
+  scripts\mp\playerstats::writeplayerstat(var_0, var_1, var_2, var_3, var_4, var_5);
+  scripts\mp\playerstats::updateparentratiosbuffered(var_6);
 }
 
-function setplayerstatbuffered(var0, var1, var2, var3, var4, var5) {
+function setplayerstatbuffered(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!areplayerstatsenabled()) {
     return;
   }
@@ -32,11 +32,11 @@ function setplayerstatbuffered(var0, var1, var2, var3, var4, var5) {
     return;
   }
 
-  var6 = [var1];
-  GscBinSkip0(0x2e, var6.size, var2);
+  var_6 = [var_1];
+  GscBinSkip0(0x2e, var_6.size, var_2);
 }
 
-function addtoplayerstat(var0, var1, var2, var3, var4, var5) {
+function addtoplayerstat(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!areplayerstatsenabled()) {
     return;
   }
@@ -49,22 +49,22 @@ function addtoplayerstat(var0, var1, var2, var3, var4, var5) {
     return;
   }
 
-  if(!isDefined(var0)) {
-    var0 = 1;
+  if(!isDefined(var_0)) {
+    var_0 = 1;
   }
 
-  var6 = scripts\mp\playerstats::getplayerstatpathkey(var1, var2, var3, var4, var5);
+  var_6 = scripts\mp\playerstats::getplayerstatpathkey(var_1, var_2, var_3, var_4, var_5);
 
-  if(!scripts\mp\playerstats::isstatwritable_internal(var6)) {
+  if(!scripts\mp\playerstats::isstatwritable_internal(var_6)) {
     return;
   }
 
-  scripts\mp\playerstats::addtoplayerstat_internal(var0, var6, var1, var2, var3, var4, var5);
-  scripts\mp\playerstats::writeplayerstat(self.playerstats.values[var6], var1, var2, var3, var4, var5);
-  scripts\mp\playerstats::updateparentratios(var6);
+  scripts\mp\playerstats::addtoplayerstat_internal(var_0, var_6, var_1, var_2, var_3, var_4, var_5);
+  scripts\mp\playerstats::writeplayerstat(self.playerstats.values[var_6], var_1, var_2, var_3, var_4, var_5);
+  scripts\mp\playerstats::updateparentratios(var_6);
 }
 
-function addtoplayerstatbuffered(var0, var1, var2, var3, var4, var5) {
+function addtoplayerstatbuffered(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!areplayerstatsenabled()) {
     return;
   }
@@ -73,22 +73,22 @@ function addtoplayerstatbuffered(var0, var1, var2, var3, var4, var5) {
     return;
   }
 
-  if(!isDefined(var0)) {
-    var0 = 1;
+  if(!isDefined(var_0)) {
+    var_0 = 1;
   }
 
-  var6 = scripts\mp\playerstats::getplayerstatpathkey(var1, var2, var3, var4, var5);
+  var_6 = scripts\mp\playerstats::getplayerstatpathkey(var_1, var_2, var_3, var_4, var_5);
 
-  if(!scripts\mp\playerstats::isstatwritable_internal(var6)) {
+  if(!scripts\mp\playerstats::isstatwritable_internal(var_6)) {
     return;
   }
 
-  scripts\mp\playerstats::addtoplayerstat_internal(var0, var6, var1, var2, var3, var4, var5);
-  scripts\mp\playerstats::flagstatforbufferedwrite(var6);
-  scripts\mp\playerstats::updateparentratiosbuffered(var6);
+  scripts\mp\playerstats::addtoplayerstat_internal(var_0, var_6, var_1, var_2, var_3, var_4, var_5);
+  scripts\mp\playerstats::flagstatforbufferedwrite(var_6);
+  scripts\mp\playerstats::updateparentratiosbuffered(var_6);
 }
 
-function getplayerstat(var0, var1, var2, var3, var4) {
+function getplayerstat(var_0, var_1, var_2, var_3, var_4) {
   if(!areplayerstatsenabled()) {
     return undefined;
   }
@@ -97,13 +97,13 @@ function getplayerstat(var0, var1, var2, var3, var4) {
     return 0;
   }
 
-  var5 = scripts\mp\playerstats::getplayerstatpathkey(var0, var1, var2, var3, var4);
+  var_5 = scripts\mp\playerstats::getplayerstatpathkey(var_0, var_1, var_2, var_3, var_4);
 
-  if(!isDefined(self.playerstats.values[var5])) {
-    self.playerstats.values[var5] = scripts\mp\playerstats::readplayerstat(var0, var1, var2, var3, var4);
+  if(!isDefined(self.playerstats.values[var_5])) {
+    self.playerstats.values[var_5] = scripts\mp\playerstats::readplayerstat(var_0, var_1, var_2, var_3, var_4);
   }
 
-  return self.playerstats.values[var5];
+  return self.playerstats.values[var_5];
 }
 
 function areplayerstatsenabled() {
@@ -122,48 +122,48 @@ function makeallplayerstatswritable() {
   level.playerstats.readonly--;
 }
 
-function makeplayerstatreadonly(var0, var1, var2, var3, var4) {
-  var5 = scripts\mp\playerstats::getplayerstatpathkey(var0, var1, var2, var3, var4);
-  return scripts\mp\playerstats::modifystatwritability(var5, 0);
+function makeplayerstatreadonly(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = scripts\mp\playerstats::getplayerstatpathkey(var_0, var_1, var_2, var_3, var_4);
+  return scripts\mp\playerstats::modifystatwritability(var_5, 0);
 }
 
-function makeplayerstatwritable(var0, var1, var2, var3, var4) {
-  var5 = scripts\mp\playerstats::getplayerstatpathkey(var0, var1, var2, var3, var4);
-  return scripts\mp\playerstats::modifystatwritability(var5, 1);
+function makeplayerstatwritable(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = scripts\mp\playerstats::getplayerstatpathkey(var_0, var_1, var_2, var_3, var_4);
+  return scripts\mp\playerstats::modifystatwritability(var_5, 1);
 }
 
-function isplayerstatwritable(var0, var1, var2, var3, var4) {
-  var5 = scripts\mp\playerstats::getplayerstatpathkey(var0, var1, var2, var3, var4);
-  return scripts\mp\playerstats::isstatwritable_internal(var5);
+function isplayerstatwritable(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = scripts\mp\playerstats::getplayerstatpathkey(var_0, var_1, var_2, var_3, var_4);
+  return scripts\mp\playerstats::isstatwritable_internal(var_5);
 }
 
-function makeplayerstatgroupreadonly(var0) {
-  scripts\mp\playerstats::modifystatgroupwritability(var0, 0);
+function makeplayerstatgroupreadonly(var_0) {
+  scripts\mp\playerstats::modifystatgroupwritability(var_0, 0);
 }
 
-function makeplayerstatgroupwritable(var0) {
-  scripts\mp\playerstats::modifystatgroupwritability(var0, 1);
+function makeplayerstatgroupwritable(var_0) {
+  scripts\mp\playerstats::modifystatgroupwritability(var_0, 1);
 }
 
-function registerplayerstatratio(var0, var1, var2) {
-  var3 = level.playerstats;
-  var4 = scripts\mp\playerstats::getplayerstatpathkey(var0[0], var0[1], var0[2], var0[3], var0[4]);
-  var3.ratios[var4] = [];
-  var3.ratios[var4]["numerator"] = var1;
-  var3.ratios[var4]["denominator"] = var2;
-  var5 = scripts\mp\playerstats::getplayerstatpathkey(var1[0], var1[1], var1[2], var1[3], var1[4]);
-  var6 = scripts\mp\playerstats::getplayerstatpathkey(var2[0], var2[1], var2[2], var2[3], var2[4]);
+function registerplayerstatratio(var_0, var_1, var_2) {
+  var_3 = level.playerstats;
+  var_4 = scripts\mp\playerstats::getplayerstatpathkey(var_0[0], var_0[1], var_0[2], var_0[3], var_0[4]);
+  var_3.ratios[var_4] = [];
+  var_3.ratios[var_4]["numerator"] = var_1;
+  var_3.ratios[var_4]["denominator"] = var_2;
+  var_5 = scripts\mp\playerstats::getplayerstatpathkey(var_1[0], var_1[1], var_1[2], var_1[3], var_1[4]);
+  var_6 = scripts\mp\playerstats::getplayerstatpathkey(var_2[0], var_2[1], var_2[2], var_2[3], var_2[4]);
 
-  if(!isDefined(var3.ratiochildren[var5])) {
-    var3.ratiochildren[var5] = [var0];
+  if(!isDefined(var_3.ratiochildren[var_5])) {
+    var_3.ratiochildren[var_5] = [var_0];
   } else {
-    var3.ratiochildren[var5][var3.ratiochildren[var5].size] = var0;
+    var_3.ratiochildren[var_5][var_3.ratiochildren[var_5].size] = var_0;
   }
 
-  if(!isDefined(var3.ratiochildren[var6])) {
-    var3.ratiochildren[var6] = [var0];
+  if(!isDefined(var_3.ratiochildren[var_6])) {
+    var_3.ratiochildren[var_6] = [var_0];
     return;
   }
 
-  var3.ratiochildren[var6][var3.ratiochildren[var6].size] = var0;
+  var_3.ratiochildren[var_6][var_3.ratiochildren[var_6].size] = var_0;
 }

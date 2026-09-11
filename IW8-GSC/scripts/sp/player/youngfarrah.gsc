@@ -43,15 +43,15 @@ function youngfarrahsetup() {
   scripts\engine\sp\utility::add_hint_string("ads", &"HOMETOWN/ADS", &player_fullads);
 }
 
-function setplayerviewmodel(var0, var1, var2) {
-  if(isDefined(var0)) {
-    level.player setviewmodel(var0);
+function setplayerviewmodel(var_0, var_1, var_2) {
+  if(isDefined(var_0)) {
+    level.player setviewmodel(var_0);
   }
 
-  if(isDefined(var1)) {}
+  if(isDefined(var_1)) {}
 
-  if(isDefined(var2)) {
-    level.player setshadowmodel(var2);
+  if(isDefined(var_2)) {
+    level.player setshadowmodel(var_2);
     return;
   }
 }
@@ -80,10 +80,10 @@ function weapfireradialblur() {
   baseraidalblur(0.15);
 }
 
-function baseraidalblur(var0) {
-  thread scripts\engine\sp\utility::lerp_saveddvar("NKTRSSTMRQ", 0.75, var0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("LSOPQMRPNR", 0.002, var0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("MLTTMLTKOR", 0.01, var0);
+function baseraidalblur(var_0) {
+  thread scripts\engine\sp\utility::lerp_saveddvar("NKTRSSTMRQ", 0.75, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("LSOPQMRPNR", 0.002, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("MLTTMLTKOR", 0.01, var_0);
 }
 
 function player_fullads() {
@@ -102,9 +102,9 @@ function adsviewbobhack() {
   self endon("stopYoungFarrahPistLogic");
 
   for(;;) {
-    var0 = level.player playerads();
-    var1 = scripts\engine\math::factor_value(1.35, 1.3, var0);
-    setsaveddvar("MNPNORMOMP", var1);
+    var_0 = level.player playerads();
+    var_1 = scripts\engine\math::factor_value(1.35, 1.3, var_0);
+    setsaveddvar("MNPNORMOMP", var_1);
     wait 0.05;
   }
 }
@@ -114,9 +114,9 @@ function weapcoltfireblur() {
   self endon("stopYoungFarrahPistLogic");
 
   for(;;) {
-    self waittill("weapon_fired", var0);
+    self waittill("weapon_fired", var_0);
 
-    if(getweaponbasename(var0) == "iw8_pi_cpapa_farah_sp_a") {
+    if(getweaponbasename(var_0) == "iw8_pi_cpapa_farah_sp_a") {
       level notify("player_fired_gun");
       weapfireblureffect();
     }
@@ -130,12 +130,12 @@ function weapfireblureffect() {
 }
 
 function weaponfirepush() {
-  var0 = anglesToForward(self getplayerangles()) * -1;
-  var0 *= 22;
+  var_0 = anglesToForward(self getplayerangles()) * -1;
+  var_0 *= 22;
 
-  while(length(var0) > 0.02) {
-    self pushplayervector(var0, 0);
-    var0 *= 0.65;
+  while(length(var_0) > 0.02) {
+    self pushplayervector(var_0, 0);
+    var_0 *= 0.65;
     wait 0.05;
   }
 
@@ -144,66 +144,66 @@ function weaponfirepush() {
 }
 
 function createnoisedata() {
-  var0 = spawnStruct();
-  var0.mag = 0.35;
-  var0.lerped = (0, 0, 0);
-  var0.data = [];
-  var0.data["x"] = [];
-  var0.data["x"]["old"] = 0;
-  var0.data["x"]["period"] = 0;
-  var0.data["x"]["target"] = 0;
-  var0.data["x"]["val"] = 0;
-  var0.data["x"]["time"] = 0;
-  var0.data["y"] = [];
-  var0.data["y"]["old"] = 0;
-  var0.data["y"]["period"] = 0;
-  var0.data["y"]["target"] = 0;
-  var0.data["y"]["val"] = 0;
-  var0.data["y"]["time"] = 0;
-  return var0;
+  var_0 = spawnStruct();
+  var_0.mag = 0.35;
+  var_0.lerped = (0, 0, 0);
+  var_0.data = [];
+  var_0.data["x"] = [];
+  var_0.data["x"]["old"] = 0;
+  var_0.data["x"]["period"] = 0;
+  var_0.data["x"]["target"] = 0;
+  var_0.data["x"]["val"] = 0;
+  var_0.data["x"]["time"] = 0;
+  var_0.data["y"] = [];
+  var_0.data["y"]["old"] = 0;
+  var_0.data["y"]["period"] = 0;
+  var_0.data["y"]["target"] = 0;
+  var_0.data["y"]["val"] = 0;
+  var_0.data["y"]["time"] = 0;
+  return var_0;
 }
 
-function noise(var0, var1, var2) {
-  self.period_min = var0;
-  self.period_max = var1;
+function noise(var_0, var_1, var_2) {
+  self.period_min = var_0;
+  self.period_max = var_1;
   axisnoise("x");
   axisnoise("y");
-  self.lerped = scripts\engine\math::lerp(self.lerped, (self.data["x"]["val"], self.data["y"]["val"], 0), var2);
+  self.lerped = scripts\engine\math::lerp(self.lerped, (self.data["x"]["val"], self.data["y"]["val"], 0), var_2);
 }
 
-function axisnoise(var0) {
-  if(self.data[var0]["time"] >= self.data[var0]["period"]) {
-    self.data[var0]["period"] = randomfloatrange(self.period_min, self.period_max);
-    self.data[var0]["old"] = self.data[var0]["target"];
-    self.data[var0]["time"] = 0;
-    self.data[var0]["target"] = randomfloatrange(self.mag * -1, self.mag);
+function axisnoise(var_0) {
+  if(self.data[var_0]["time"] >= self.data[var_0]["period"]) {
+    self.data[var_0]["period"] = randomfloatrange(self.period_min, self.period_max);
+    self.data[var_0]["old"] = self.data[var_0]["target"];
+    self.data[var_0]["time"] = 0;
+    self.data[var_0]["target"] = randomfloatrange(self.mag * -1, self.mag);
   }
 
-  var1 = scripts\engine\math::normalize_value(0, self.data[var0]["period"], self.data[var0]["time"]);
-  var1 = scripts\engine\math::normalized_float_smoth_in_out(var1);
-  self.data[var0]["val"] = self.data[var0]["old"] * (1 - var1) + self.data[var0]["target"] * var1;
-  self.data[var0]["time"] = self.data[var0]["time"] + 0.05;
+  var_1 = scripts\engine\math::normalize_value(0, self.data[var_0]["period"], self.data[var_0]["time"]);
+  var_1 = scripts\engine\math::normalized_float_smoth_in_out(var_1);
+  self.data[var_0]["val"] = self.data[var_0]["old"] * (1 - var_1) + self.data[var_0]["target"] * var_1;
+  self.data[var_0]["time"] = self.data[var_0]["time"] + 0.05;
 }
 
 function youngfarrahbreathlogic() {
   thread youngfarrahfatigue();
   self enableplayerbreathsystem(0);
-  var0 = scripts\engine\utility::spawn_script_origin(level.player.origin, level.player.angles);
-  var0 linkTo(level.player);
-  var0 scalevolume(0, 0);
-  var0.current_breath_blur = 0;
-  self.breaths = var0;
-  var1 = spawnStruct();
-  var1.player_relative_offset = (0, 0, 0);
-  var1.player_relative_offset_accel = (0, 0, 0);
+  var_0 = scripts\engine\utility::spawn_script_origin(level.player.origin, level.player.angles);
+  var_0 linkTo(level.player);
+  var_0 scalevolume(0, 0);
+  var_0.current_breath_blur = 0;
+  self.breaths = var_0;
+  var_1 = spawnStruct();
+  var_1.player_relative_offset = (0, 0, 0);
+  var_1.player_relative_offset_accel = (0, 0, 0);
   thread breathviewoffsetslogic();
-  var2 = 0.7;
-  var3 = 0.1;
+  var_2 = 0.7;
+  var_3 = 0.1;
   wait 0.05;
-  var4 = 1.1;
-  var5 = 0.95;
-  var6 = [];
-  GscBinSkip0(0x2e, "sprint", [], var1);
+  var_4 = 1.1;
+  var_5 = 0.95;
+  var_6 = [];
+  GscBinSkip0(0x2e, "sprint", [], var_1);
 }
 
 function youngfarrahfatigue() {
@@ -215,191 +215,191 @@ function youngfarrahfatigue() {
       self.stamina -= 1;
       self.fatigue -= 1;
       self.stamina = max(self.stamina, 0);
-      var0 = scripts\engine\math::normalize_value(0, 200, self.stamina);
+      var_0 = scripts\engine\math::normalize_value(0, 200, self.stamina);
     } else {
-      var1 = 1;
-      self.stamina += var1 * 0.4;
+      var_1 = 1;
+      self.stamina += var_1 * 0.4;
       self.stamina = min(self.stamina, 200);
-      var0 = scripts\engine\math::normalize_value(0, 200, self.stamina);
-      var2 = scripts\engine\math::factor_value(0.0001, 0.8, var0);
-      self.fatigue += var1 * var2;
+      var_0 = scripts\engine\math::normalize_value(0, 200, self.stamina);
+      var_2 = scripts\engine\math::factor_value(0.0001, 0.8, var_0);
+      self.fatigue += var_1 * var_2;
     }
 
     self.fatigue = clamp(self.fatigue, 0, 20);
-    var3 = scripts\engine\math::normalize_value(0, 20, self.fatigue);
-    var4 = 0.5;
+    var_3 = scripts\engine\math::normalize_value(0, 20, self.fatigue);
+    var_4 = 0.5;
 
-    for(var5 = 1;; var5 = max(var5, 0)) {
-      if(var3 >= var5) {
-        var3 = var5;
+    for(var_5 = 1;; var_5 = max(var_5, 0)) {
+      if(var_3 >= var_5) {
+        var_3 = var_5;
         break;
       }
 
-      var5 -= var4;
+      var_5 -= var_4;
     }
 
-    self.stepped_stamina = var3;
+    self.stepped_stamina = var_3;
     waitframe();
   }
 }
 
 function breathviewoffsetslogic() {
-  var0 = 0.02;
-  var1 = 0.8;
-  var2 = (0, 0, 0);
-  var3 = (0, 0, 0);
-  var4 = (0, 0, 0);
+  var_0 = 0.02;
+  var_1 = 0.8;
+  var_2 = (0, 0, 0);
+  var_3 = (0, 0, 0);
+  var_4 = (0, 0, 0);
 
   for(;;) {
     self.player_relative_offset += self.player_relative_offset_accel;
-    var5 = self.player_relative_offset;
-    var6 = (0, self.player_relative_offset[1] * 0.8, self.player_relative_offset[0] * -1.3);
-    var7 = (0, 0, self.player_relative_offset[0] * -1);
-    var2 = scripts\engine\math::lerp(var2, var5, var0);
-    var3 = scripts\engine\math::lerp(var3, var6, var0);
-    var4 = scripts\engine\math::lerp(var4, var7, var1);
-    var8 = level.player playerads();
-    var9 = scripts\engine\math::factor_value(-2, -1.6, var8);
-    var10 = scripts\engine\math::factor_value(5.2, 4.64, var8);
-    var11 = scripts\engine\math::factor_value(0.6, 0.24, var8);
-    var12 = 1 - level.player playermount();
-    var9 *= var12;
-    var10 *= var12;
-    var11 *= var12;
-    level.player.viewblender["viewAng"].channels["viewBreaths"] = var2 * var9;
-    level.player.viewblender["viewPos"].channels["viewBreaths"] = var3 * var10;
-    level.player.viewblender["weapPos"].channels["viewBreaths"] = var4 * var11;
+    var_5 = self.player_relative_offset;
+    var_6 = (0, self.player_relative_offset[1] * 0.8, self.player_relative_offset[0] * -1.3);
+    var_7 = (0, 0, self.player_relative_offset[0] * -1);
+    var_2 = scripts\engine\math::lerp(var_2, var_5, var_0);
+    var_3 = scripts\engine\math::lerp(var_3, var_6, var_0);
+    var_4 = scripts\engine\math::lerp(var_4, var_7, var_1);
+    var_8 = level.player playerads();
+    var_9 = scripts\engine\math::factor_value(-2, -1.6, var_8);
+    var_10 = scripts\engine\math::factor_value(5.2, 4.64, var_8);
+    var_11 = scripts\engine\math::factor_value(0.6, 0.24, var_8);
+    var_12 = 1 - level.player playermount();
+    var_9 *= var_12;
+    var_10 *= var_12;
+    var_11 *= var_12;
+    level.player.viewblender["viewAng"].channels["viewBreaths"] = var_2 * var_9;
+    level.player.viewblender["viewPos"].channels["viewBreaths"] = var_3 * var_10;
+    level.player.viewblender["weapPos"].channels["viewBreaths"] = var_4 * var_11;
     self.player_relative_offset *= 0.8;
     wait 0.05;
   }
 }
 
-function breath_fade_delay(var0, var1, var2) {
-  wait var2;
-  self fadeovertime(var0);
-  self.alpha = var1;
+function breath_fade_delay(var_0, var_1, var_2) {
+  wait var_2;
+  self fadeovertime(var_0);
+  self.alpha = var_1;
 }
 
-function breathviewoffsets_accellcycle(var0, var1) {
+function breathviewoffsets_accellcycle(var_0, var_1) {
   self notify("new_groundref_breath_cycle");
   self endon("new_groundref_breath_cycle");
-  var2 = 2;
-  var3 = 1;
-  var4 = 1;
+  var_2 = 2;
+  var_3 = 1;
+  var_4 = 1;
 
   if(self.player_relative_offset[0] != 0) {
-    if(self.player_relative_offset[0] > 0 && var0[0] > 0 || self.player_relative_offset[0] < 0 && var0[0] < 0) {
-      var4 = get_scale_for_axis(self.player_relative_offset[0], var2);
+    if(self.player_relative_offset[0] > 0 && var_0[0] > 0 || self.player_relative_offset[0] < 0 && var_0[0] < 0) {
+      var_4 = get_scale_for_axis(self.player_relative_offset[0], var_2);
     } else {
-      var4 = get_scale_for_axis(self.player_relative_offset[0], var2, 1);
+      var_4 = get_scale_for_axis(self.player_relative_offset[0], var_2, 1);
     }
   }
 
-  var5 = scripts\engine\math::normalize_value(0, 9, abs(var0[0] - self.player_relative_offset[0]));
-  var5 = scripts\engine\math::factor_value(1, 2, var5);
-  var0 = (var0[0] * var4, var0[1], var0[2]);
-  var0 *= 0.05;
-  var6 = 1 / var1;
-  var0 *= var6;
-  breathviewoffsets_accell(var0, var1 * 0.55);
-  breathviewoffsets_accell((0, 0, 0), var1 * 0.85);
+  var_5 = scripts\engine\math::normalize_value(0, 9, abs(var_0[0] - self.player_relative_offset[0]));
+  var_5 = scripts\engine\math::factor_value(1, 2, var_5);
+  var_0 = (var_0[0] * var_4, var_0[1], var_0[2]);
+  var_0 *= 0.05;
+  var_6 = 1 / var_1;
+  var_0 *= var_6;
+  breathviewoffsets_accell(var_0, var_1 * 0.55);
+  breathviewoffsets_accell((0, 0, 0), var_1 * 0.85);
 }
 
-function get_scale_for_axis(var0, var1, var2) {
-  if(isDefined(var2) && var2) {
-    return scripts\engine\math::factor_value(1, 1.5, scripts\engine\math::normalize_value(0, var1, abs(var0)));
+function get_scale_for_axis(var_0, var_1, var_2) {
+  if(isDefined(var_2) && var_2) {
+    return scripts\engine\math::factor_value(1, 1.5, scripts\engine\math::normalize_value(0, var_1, abs(var_0)));
   }
 
-  return 1 - scripts\engine\math::normalize_value(0, var1, abs(var0));
+  return 1 - scripts\engine\math::normalize_value(0, var_1, abs(var_0));
 }
 
-function breathviewoffsets_accell(var0, var1) {
-  var2 = self.player_relative_offset_accel;
-  var3 = var0 - var2;
-  var4 = 0.05;
-  var5 = int(var1 / var4);
+function breathviewoffsets_accell(var_0, var_1) {
+  var_2 = self.player_relative_offset_accel;
+  var_3 = var_0 - var_2;
+  var_4 = 0.05;
+  var_5 = int(var_1 / var_4);
 
-  if(var5 > 0) {
-    var6 = var3 / var5;
+  if(var_5 > 0) {
+    var_6 = var_3 / var_5;
 
-    while(var5) {
-      var2 += var6;
-      self.player_relative_offset_accel = var2;
-      wait var4;
-      var5--;
+    while(var_5) {
+      var_2 += var_6;
+      self.player_relative_offset_accel = var_2;
+      wait var_4;
+      var_5--;
     }
   }
 
-  self.player_relative_offset_accel = var0;
+  self.player_relative_offset_accel = var_0;
 }
 
-function pulse_blur(var0, var1, var2) {
-  if(isDefined(var2)) {
-    wait var2;
+function pulse_blur(var_0, var_1, var_2) {
+  if(isDefined(var_2)) {
+    wait var_2;
   }
 
   self notify("new_breath_blur_lerp");
   self endon("new_breath_blur_lerp");
-  lerp_blur(0, var0, var1);
-  lerp_blur(var0, 0, var1);
+  lerp_blur(0, var_0, var_1);
+  lerp_blur(var_0, 0, var_1);
 }
 
-function lerp_blur(var0, var1, var2) {
-  var3 = var0;
-  var4 = var1 - var0;
-  var5 = 0.05;
-  var6 = int(var2 / var5);
+function lerp_blur(var_0, var_1, var_2) {
+  var_3 = var_0;
+  var_4 = var_1 - var_0;
+  var_5 = 0.05;
+  var_6 = int(var_2 / var_5);
 
-  if(var6 > 0) {
-    var7 = var4 / var6;
+  if(var_6 > 0) {
+    var_7 = var_4 / var_6;
 
-    while(var6) {
-      var3 += var7;
-      set_blur_safe(var3);
-      wait var5;
-      var6--;
+    while(var_6) {
+      var_3 += var_7;
+      set_blur_safe(var_3);
+      wait var_5;
+      var_6--;
     }
   }
 
-  set_blur_safe(var1);
+  set_blur_safe(var_1);
 }
 
-function set_blur_safe(var0) {
-  if(var0 < 0.05) {
-    var0 = 0;
+function set_blur_safe(var_0) {
+  if(var_0 < 0.05) {
+    var_0 = 0;
   }
 
-  if(var0 == 0 && self.current_breath_blur == 0) {
+  if(var_0 == 0 && self.current_breath_blur == 0) {
     return;
   }
 
-  level.player setblurforplayer(var0, 0.1);
-  self.current_breath_blur = var0;
+  level.player setblurforplayer(var_0, 0.1);
+  self.current_breath_blur = var_0;
 }
 
 function is_using_stamina() {
   return self issprinting();
 }
 
-function scale_youngfarrah_firetime(var0) {
-  level.player.fireholdtime = 0.55 * var0;
+function scale_youngfarrah_firetime(var_0) {
+  level.player.fireholdtime = 0.55 * var_0;
 }
 
-function youngfarrah_pistol_reaction(var0, var1) {
-  thread youngfarrah_pistol_reaction_proc(level.player, var0);
+function youngfarrah_pistol_reaction(var_0, var_1) {
+  thread youngfarrah_pistol_reaction_proc(level.player, var_0);
 }
 
-function youngfarrah_pistol_reaction_proc(var0, var1) {
+function youngfarrah_pistol_reaction_proc(var_0, var_1) {
   self notify("newPistolReaction");
   self endon("newPistolReaction");
   self waittill("farrahFire");
 
-  if(!isDefined(var1)) {
-    var1 = 0.1;
+  if(!isDefined(var_1)) {
+    var_1 = 0.1;
   }
 
   if(isDefined(self.effortvoice)) {
-    self.effortvoice scripts\engine\utility::delaycall(var1, &playsound, var0);
+    self.effortvoice scripts\engine\utility::delaycall(var_1, &playsound, var_0);
     return;
   }
 }

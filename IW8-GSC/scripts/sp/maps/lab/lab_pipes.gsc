@@ -23,11 +23,11 @@ function pipes_outdoor_postload() {
 }
 
 function pipes_jumpdown_lights_init() {
-  var0 = getEntArray("pipes_jumpdown_lights", "targetname");
+  var_0 = getEntArray("pipes_jumpdown_lights", "targetname");
 
-  foreach(var2 in var0) {
-    var2.og_intensity = var2 getlightintensity();
-    var2 setlightintensity(0);
+  foreach(var_2 in var_0) {
+    var_2.og_intensity = var_2 getlightintensity();
+    var_2 setlightintensity(0);
   }
 }
 
@@ -40,8 +40,8 @@ function setup_post_cinematic() {
   scripts\engine\sp\utility::add_global_spawn_function("allies", &scripts\sp\maps\lab\lab_util::allies_molotov_toggle, 1);
   scripts\sp\maps\lab\lab_util::spawn_team_price();
   thread kyle_loadout();
-  var0 = scripts\engine\utility::getStruct("pipes_jumpdown_struct", "targetname");
-  var0 scripts\sp\player_rig::link_player_to_rig("pipes_jumpdown", "crouch", 0, undefined, 1, 0, 0, 0, 0);
+  var_0 = scripts\engine\utility::getStruct("pipes_jumpdown_struct", "targetname");
+  var_0 scripts\sp\player_rig::link_player_to_rig("pipes_jumpdown", "crouch", 0, undefined, 1, 0, 0, 0, 0);
   level.kyle scripts\engine\sp\utility::name_hide();
   level.player thread scripts\sp\player::player_movement_state("default");
   level.player modifybasefov(50, 0.05);
@@ -58,8 +58,8 @@ function pipes_jumpdown_start() {
   scripts\engine\sp\utility::add_global_spawn_function("allies", &scripts\sp\maps\lab\lab_util::allies_molotov_toggle, 1);
   scripts\sp\maps\lab\lab_util::spawn_team_price();
   thread kyle_loadout();
-  var0 = scripts\engine\utility::getStruct("pipes_jumpdown_struct", "targetname");
-  var0 scripts\sp\player_rig::link_player_to_rig("pipes_jumpdown", "crouch", 0, undefined, 1, 0, 0, 0, 0);
+  var_0 = scripts\engine\utility::getStruct("pipes_jumpdown_struct", "targetname");
+  var_0 scripts\sp\player_rig::link_player_to_rig("pipes_jumpdown", "crouch", 0, undefined, 1, 0, 0, 0, 0);
   level.kyle scripts\engine\sp\utility::name_hide();
   level.player thread scripts\sp\player::player_movement_state("default");
   level.player modifybasefov(50, 0.05);
@@ -79,7 +79,7 @@ function pipes_jumpdown_main() {
   scripts\engine\utility::delaythread(0.3, &scripts\engine\sp\utility::autosave_now);
   scripts\engine\sp\utility::set_start_location("pipes_outdoor_start", [level.price, level.rebel_1, level.rebel_2, level.rebel_3]);
   scripts\engine\utility::flag_set("ambush_end");
-  var0 = scripts\engine\utility::getStruct("sniper_scene", "targetname");
+  var_0 = scripts\engine\utility::getStruct("sniper_scene", "targetname");
   thread sniper_intro(level);
   thread pipes_sniper_setup();
   scripts\engine\utility::delaythread(12, &pipes_moments_setup);
@@ -89,36 +89,36 @@ function pipes_jumpdown_main() {
 }
 
 function fix_door_clip() {
-  var0 = getEntArray("jumpdown_doors", "targetname");
-  var1 = getEnt(var0[0].target, "targetname");
-  var1 unlink();
-  var1.origin = (-1282.79, -2235.51, -50);
-  var1.angles = (0, 45, 0);
-  var2 = getEnt(var0[1].target, "targetname");
-  var2 unlink();
-  var2.origin = (-1311.79, -2207.51, -50);
-  var2.angles = (0, 45, 0);
+  var_0 = getEntArray("jumpdown_doors", "targetname");
+  var_1 = getEnt(var_0[0].target, "targetname");
+  var_1 unlink();
+  var_1.origin = (-1282.79, -2235.51, -50);
+  var_1.angles = (0, 45, 0);
+  var_2 = getEnt(var_0[1].target, "targetname");
+  var_2 unlink();
+  var_2.origin = (-1311.79, -2207.51, -50);
+  var_2.angles = (0, 45, 0);
 }
 
 function enable_pipes_jumpdown_lights() {
-  var0 = getEntArray("pipes_jumpdown_lights", "targetname");
+  var_0 = getEntArray("pipes_jumpdown_lights", "targetname");
 
-  foreach(var2 in var0) {
-    var2 setlightintensity(var2.og_intensity);
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(var_2.og_intensity);
   }
 }
 
 function remove_pipes_jumpdown_lights() {
-  var0 = getEntArray("pipes_jumpdown_lights", "targetname");
+  var_0 = getEntArray("pipes_jumpdown_lights", "targetname");
 
-  foreach(var2 in var0) {
-    var2 thread scripts\sp\lights::lerp_intensity(0, 1.5);
+  foreach(var_2 in var_0) {
+    var_2 thread scripts\sp\lights::lerp_intensity(0, 1.5);
   }
 
   wait 1.6;
 
-  foreach(var2 in var0) {
-    var2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
   }
 }
 
@@ -137,11 +137,11 @@ function pipes_moments_setup() {
   thread pipes_to_hallway();
 }
 
-function rpg_impact(var0) {
-  var0 waittill("explode", var1);
+function rpg_impact(var_0) {
+  var_0 waittill("explode", var_1);
 
-  if(isDefined(var1)) {
-    thread scripts\engine\sp\utility::earthquake_and_rumble(var1);
+  if(isDefined(var_1)) {
+    thread scripts\engine\sp\utility::earthquake_and_rumble(var_1);
     return;
   }
 }
@@ -149,44 +149,44 @@ function rpg_impact(var0) {
 #using_animtree("generic_human");
 
 function rpg_left_spawn() {
-  var0 = scripts\engine\sp\utility::spawn_targetname("rooftop_rpg_left", 1);
-  var1 = scripts\engine\utility::getStruct("pipes_rpg_left_struct", "targetname");
-  var2 = scripts\engine\utility::getStructArray("pipes_rpg_left_struct_lookat", "targetname");
-  var0 endon("death");
+  var_0 = scripts\engine\sp\utility::spawn_targetname("rooftop_rpg_left", 1);
+  var_1 = scripts\engine\utility::getStruct("pipes_rpg_left_struct", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("pipes_rpg_left_struct_lookat", "targetname");
+  var_0 endon("death");
   level.scr_anim["generic"]["rpg_reload"] = % rpg_stand_reload;
-  var0.goalradius = 4;
-  var0.dontevershoot = 1;
-  var0.fixednode = 1;
-  var0.dropweapon = 0;
-  var3 = spawn("script_origin", var1.origin);
-  var0.ignoreme = 1;
-  var0 setentitytarget(var3);
-  var3 dontinterpolate();
+  var_0.goalradius = 4;
+  var_0.dontevershoot = 1;
+  var_0.fixednode = 1;
+  var_0.dropweapon = 0;
+  var_3 = spawn("script_origin", var_1.origin);
+  var_0.ignoreme = 1;
+  var_0 setentitytarget(var_3);
+  var_3 dontinterpolate();
   scripts\engine\utility::flag_wait("jumpdown_scene_over");
-  var4 = cos(65);
+  var_4 = cos(65);
 
-  while(!rpg_left_fov_checks(var2, var4)) {
+  while(!rpg_left_fov_checks(var_2, var_4)) {
     waitframe();
   }
 
   thread rpg_left_allies();
   wait 2;
-  var5 = var0.origin + (0, 0, 45) + anglesToForward(var0.angles) * 35;
-  var6 = magicbullet("iw8_la_rpapa7_straight_slow", var5, var1.origin);
-  thread rpg_impact(var6);
+  var_5 = var_0.origin + (0, 0, 45) + anglesToForward(var_0.angles) * 35;
+  var_6 = magicbullet("iw8_la_rpapa7_straight_slow", var_5, var_1.origin);
+  thread rpg_impact(var_6);
   wait 2;
   level.price thread scripts\sp\maps\lab\lab_vo_util::say_as_chatter("dx_vom_pri_final_pipes_combat_50");
-  var0 scripts\common\anim::anim_generic(var0, "rpg_reload");
-  var0.dontevershoot = 0;
-  var0 clearentitytarget();
-  var3 delete();
+  var_0 scripts\common\anim::anim_generic(var_0, "rpg_reload");
+  var_0.dontevershoot = 0;
+  var_0 clearentitytarget();
+  var_3 delete();
   wait 3;
   level.price thread scripts\sp\maps\lab\lab_vo_util::say_as_chatter("dx_vom_pri_final_pipes_combat_40");
 }
 
-function rpg_left_fov_checks(var0) {
-  foreach(var2 in self) {
-    if(scripts\sp\maps\lab\lab_util::in_player_fov(var0, var2.origin)) {
+function rpg_left_fov_checks(var_0) {
+  foreach(var_2 in self) {
+    if(scripts\sp\maps\lab\lab_util::in_player_fov(var_0, var_2.origin)) {
       return true;
     }
   }
@@ -195,52 +195,52 @@ function rpg_left_fov_checks(var0) {
 }
 
 function rpg_left_allies() {
-  var0 = scripts\engine\sp\utility::array_spawn_targetname("pipes_rpg_left_target", 1, 1);
+  var_0 = scripts\engine\sp\utility::array_spawn_targetname("pipes_rpg_left_target", 1, 1);
 
-  foreach(var2 in var0) {
-    var2.fixednode = 1;
+  foreach(var_2 in var_0) {
+    var_2.fixednode = 1;
   }
 }
 
 #using_animtree("");
 
 function rpg_right_spawn() {
-  var0 = scripts\engine\sp\utility::spawn_targetname("rooftop_rpg_right");
-  var0 thread scripts\engine\sp\utility::flag_on_death("rpg_right_dead");
-  var0 endon("death");
-  var1 = scripts\engine\utility::getStruct("pipes_rpg_right_struct", "targetname");
-  var2 = scripts\engine\utility::getStructArray("pipes_rpg_right_struct_lookat", "targetname");
+  var_0 = scripts\engine\sp\utility::spawn_targetname("rooftop_rpg_right");
+  var_0 thread scripts\engine\sp\utility::flag_on_death("rpg_right_dead");
+  var_0 endon("death");
+  var_1 = scripts\engine\utility::getStruct("pipes_rpg_right_struct", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("pipes_rpg_right_struct_lookat", "targetname");
   level.scr_anim["generic"]["rpg_reload"] = % rpg_stand_reload;
-  var0.goalradius = 4;
-  var0.dontevershoot = 1;
-  var0.fixednode = 1;
-  var0.dropweapon = 0;
-  var3 = spawn("script_origin", var1.origin);
-  var0.ignoreme = 1;
-  var0 setentitytarget(var3);
-  var3 dontinterpolate();
+  var_0.goalradius = 4;
+  var_0.dontevershoot = 1;
+  var_0.fixednode = 1;
+  var_0.dropweapon = 0;
+  var_3 = spawn("script_origin", var_1.origin);
+  var_0.ignoreme = 1;
+  var_0 setentitytarget(var_3);
+  var_3 dontinterpolate();
   scripts\engine\utility::flag_wait("jumpdown_scene_over");
   rpg_right_allies();
-  right_rpg_fov_checks(var2, var1, var0);
+  right_rpg_fov_checks(var_2, var_1, var_0);
   scripts\engine\utility::flag_set("rpg_on_the_move");
   level notify("rpg_right_start_moving");
-  var4 = var0.origin + (0, 0, 45) + anglesToForward(var0.angles) * 35;
-  var5 = magicbullet("iw8_la_rpapa7_straight_slow", var4, var1.origin);
-  thread rpg_impact(var5);
+  var_4 = var_0.origin + (0, 0, 45) + anglesToForward(var_0.angles) * 35;
+  var_5 = magicbullet("iw8_la_rpapa7_straight_slow", var_4, var_1.origin);
+  thread rpg_impact(var_5);
   wait 0.5;
-  var0 scripts\common\anim::anim_generic(var0, "rpg_reload");
-  var0.dontevershoot = 0;
-  var0 clearentitytarget();
-  var3 delete();
+  var_0 scripts\common\anim::anim_generic(var_0, "rpg_reload");
+  var_0.dontevershoot = 0;
+  var_0 clearentitytarget();
+  var_3 delete();
 }
 
-function right_rpg_fov_checks(var0, var1) {
+function right_rpg_fov_checks(var_0, var_1) {
   level endon("rush_right_rpg");
-  var2 = squared(500);
-  var3 = cos(45);
+  var_2 = squared(500);
+  var_3 = cos(45);
 
   while(!scripts\engine\utility::flag("rush_right_rpg")) {
-    if(check_lookat(self[0], var3) || check_lookat(self[1], var3) && distancesquared(level.player.origin, var0.origin) <= var2 || check_lookat_guy(var1, var3)) {
+    if(check_lookat(self[0], var_3) || check_lookat(self[1], var_3) && distancesquared(level.player.origin, var_0.origin) <= var_2 || check_lookat_guy(var_1, var_3)) {
       break;
     }
 
@@ -248,16 +248,16 @@ function right_rpg_fov_checks(var0, var1) {
   }
 }
 
-function check_lookat(var0) {
-  if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), self.origin, var0) && scripts\engine\trace::ray_trace_passed(level.player getEye(), self.origin, [level.player])) {
+function check_lookat(var_0) {
+  if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), self.origin, var_0) && scripts\engine\trace::ray_trace_passed(level.player getEye(), self.origin, [level.player])) {
     return 1;
   }
 
   return 0;
 }
 
-function check_lookat_guy(var0) {
-  if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), self getEye(), var0) && scripts\engine\trace::ray_trace_passed(level.player getEye(), self getEye(), [level.player, self])) {
+function check_lookat_guy(var_0) {
+  if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), self getEye(), var_0) && scripts\engine\trace::ray_trace_passed(level.player getEye(), self getEye(), [level.player, self])) {
     return 1;
   }
 
@@ -265,11 +265,11 @@ function check_lookat_guy(var0) {
 }
 
 function rpg_right_allies() {
-  var0 = scripts\engine\sp\utility::array_spawn_targetname("pipes_rpg_right_target", 1, 1);
+  var_0 = scripts\engine\sp\utility::array_spawn_targetname("pipes_rpg_right_target", 1, 1);
 
-  foreach(var2 in var0) {
-    var2 scripts\common\ai::magic_bullet_shield();
-    var2.fixednode = 1;
+  foreach(var_2 in var_0) {
+    var_2 scripts\common\ai::magic_bullet_shield();
+    var_2.fixednode = 1;
     thread rpg_right_allies_post();
   }
 }
@@ -295,19 +295,19 @@ function jumpdown_cameradofsettings() {
 
 function pipes_jumpdown_scene() {
   level.player freezecontrols(1);
-  var0 = scripts\engine\utility::getStruct("pipes_jumpdown_struct", "targetname");
+  var_0 = scripts\engine\utility::getStruct("pipes_jumpdown_struct", "targetname");
   level.player scripts\common\utility::allow_cinematic_motion(0);
   level.player_rig hide();
   scripts\engine\utility::delaythread(0.8, &scripts\engine\sp\utility::activate_trigger_with_targetname, "pipes_jumpdown_trigger");
   thread scripts\engine\utility::flag_set_delayed("sniper_intro", 4.5);
   thread jumpdown_cameradofsettings();
   thread pipes_fake_sniper_fire();
-  var0 thread scripts\common\anim::anim_single_solo(level.price, "pipes_jumpdown");
-  var0 thread scripts\common\anim::anim_single_solo(level.kyle, "pipes_jumpdown");
+  var_0 thread scripts\common\anim::anim_single_solo(level.price, "pipes_jumpdown");
+  var_0 thread scripts\common\anim::anim_single_solo(level.kyle, "pipes_jumpdown");
   level.player dontinterpolate();
-  var0 scripts\common\anim::anim_single_solo(level.player_rig, "pipes_jumpdown");
-  var1 = getnode("pipes_price_node", "targetname");
-  level.price setgoalnode(var1);
+  var_0 scripts\common\anim::anim_single_solo(level.player_rig, "pipes_jumpdown");
+  var_1 = getnode("pipes_price_node", "targetname");
+  level.price setgoalnode(var_1);
   scripts\engine\utility::flag_set("jumpdown_scene_over");
   level.kyle scripts\sp\maps\lab\lab_util::disable_magic_bullet_delete();
   level.player scripts\common\utility::allow_stand(1, "player_rig");
@@ -320,8 +320,8 @@ function pipes_jumpdown_scene() {
   level.player scripts\common\utility::allow_melee(1, "player_rig");
   level.player unlink();
   level.player setstance("crouch", 1, 1, 1);
-  var2 = scripts\engine\utility::drop_to_ground(level.player getEye(), 0, -60);
-  level.player setOrigin(var2, 1);
+  var_2 = scripts\engine\utility::drop_to_ground(level.player getEye(), 0, -60);
+  level.player setOrigin(var_2, 1);
   level.player disableinvulnerability();
   level.player freezecontrols(0);
   level.player showlegsandshadow();
@@ -332,40 +332,40 @@ function pipes_jumpdown_scene() {
 }
 
 function pipes_fake_sniper_fire() {
-  var0 = scripts\engine\utility::getStruct("pipes_sniper_target", "targetname");
-  level.fakesniper.desiredaimpos = var0.origin;
+  var_0 = scripts\engine\utility::getStruct("pipes_sniper_target", "targetname");
+  level.fakesniper.desiredaimpos = var_0.origin;
   level.fakesniper.aimtarget moveTo(level.fakesniper.desiredaimpos, 0.05);
   wait 0.2;
-  var1 = scripts\engine\utility::getStruct(var0.target, "targetname");
-  var2 = scripts\engine\utility::getStruct(var1.target, "targetname");
-  var3 = scripts\engine\utility::getStruct(var2.target, "targetname");
-  var4 = scripts\engine\utility::getStruct(var3.target, "targetname");
-  level.fakesniper.desiredaimpos = var1.origin;
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
+  var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
+  var_4 = scripts\engine\utility::getStruct(var_3.target, "targetname");
+  level.fakesniper.desiredaimpos = var_1.origin;
   level.fakesniper.aimtarget moveTo(level.fakesniper.desiredaimpos, 1, 0.5, 0.1);
   level.fakesniper.laser laserforceon();
   wait 1.4;
-  magicbullet("iw8_sn_alpha50", level.fakesniper.origin, var1.origin);
+  magicbullet("iw8_sn_alpha50", level.fakesniper.origin, var_1.origin);
   level.fakesniper.laser scripts\engine\utility::delaycall(0.3, &laserforceoff);
   wait 1.4;
-  level.fakesniper.desiredaimpos = var2.origin;
+  level.fakesniper.desiredaimpos = var_2.origin;
   level.fakesniper.aimtarget moveTo(level.fakesniper.desiredaimpos, 1, 0.4, 0.3);
   level.fakesniper.laser scripts\engine\utility::delaycall(0.2, &laserforceon);
   wait 1.2;
-  magicbullet("iw8_sn_alpha50", level.fakesniper.origin, var2.origin);
+  magicbullet("iw8_sn_alpha50", level.fakesniper.origin, var_2.origin);
   level.fakesniper.laser scripts\engine\utility::delaycall(0.4, &laserforceoff);
   wait 1.5;
-  level.fakesniper.desiredaimpos = var3.origin;
+  level.fakesniper.desiredaimpos = var_3.origin;
   level.fakesniper.aimtarget moveTo(level.fakesniper.desiredaimpos, 1.5, 0.5, 0.5);
   level.fakesniper.laser scripts\engine\utility::delaycall(1.2, &laserforceon);
   wait 2;
-  magicbullet("iw8_sn_alpha50", level.fakesniper.origin, var3.origin);
+  magicbullet("iw8_sn_alpha50", level.fakesniper.origin, var_3.origin);
   level.fakesniper.laser scripts\engine\utility::delaycall(0.3, &laserforceoff);
   wait 1.4;
-  level.fakesniper.desiredaimpos = var4.origin;
+  level.fakesniper.desiredaimpos = var_4.origin;
   level.fakesniper.aimtarget moveTo(level.fakesniper.desiredaimpos, 1.5, 0.5, 0.5);
   level.fakesniper.laser scripts\engine\utility::delaycall(1.2, &laserforceon);
   wait 2;
-  magicbullet("iw8_sn_alpha50", level.fakesniper.origin, var4.origin);
+  magicbullet("iw8_sn_alpha50", level.fakesniper.origin, var_4.origin);
   level.fakesniper.laser scripts\engine\utility::delaycall(0.3, &laserforceoff);
 }
 
@@ -375,7 +375,7 @@ function pipes_outdoor_start() {
   thread kyle_loadout();
   thread pipes_sniper_setup();
   thread pipes_moments_setup();
-  var0 = scripts\engine\utility::getStruct("sniper_scene", "targetname");
+  var_0 = scripts\engine\utility::getStruct("sniper_scene", "targetname");
   thread sniper_intro(level);
   scripts\engine\sp\utility::set_start_location("pipes_outdoor_start", [level.player, level.price, level.rebel_1, level.rebel_2, level.rebel_3]);
   scripts\engine\sp\utility::activate_trigger_with_targetname("pipes_jumpdown_trigger");
@@ -395,74 +395,74 @@ function pipes_sniper_setup() {
 }
 
 function pipes_to_hallway() {
-  var0 = scripts\engine\utility::getStruct("pipes_exit_door_struct", "targetname");
-  var0 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"SCRIPT/DOOR_HINT_USE", 45, 200, 55, 0);
+  var_0 = scripts\engine\utility::getStruct("pipes_exit_door_struct", "targetname");
+  var_0 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"SCRIPT/DOOR_HINT_USE", 45, 200, 55, 0);
   scripts\engine\utility::flag_wait("reverse_breach_start");
 
   if(isDefined(level.fakesniper)) {
     level.fakesniper notify("kill_sniper");
   }
 
-  var1 = scripts\engine\utility::getStructArray("reverse_breach_struct", "targetname");
-  var2 = cos(60);
-  var3 = squared(100);
+  var_1 = scripts\engine\utility::getStructArray("reverse_breach_struct", "targetname");
+  var_2 = cos(60);
+  var_3 = squared(100);
 
   for(;;) {
-    var4 = distancesquared(level.player.origin, var1[0].origin);
-    var5 = distancesquared(level.player.origin, var1[1].origin);
+    var_4 = distancesquared(level.player.origin, var_1[0].origin);
+    var_5 = distancesquared(level.player.origin, var_1[1].origin);
 
-    if(scripts\sp\maps\lab\lab_util::in_player_fov(var2, var1[0].origin, [level.player]) || scripts\sp\maps\lab\lab_util::in_player_fov(var2, var1[1].origin, [level.player])) {
+    if(scripts\sp\maps\lab\lab_util::in_player_fov(var_2, var_1[0].origin, [level.player]) || scripts\sp\maps\lab\lab_util::in_player_fov(var_2, var_1[1].origin, [level.player])) {
       break;
-    } else if(var4 <= var3 || var5 <= var3) {
+    } else if(var_4 <= var_3 || var_5 <= var_3) {
       break;
     }
 
     waitframe();
   }
 
-  var0 scripts\sp\player\cursor_hint::remove_cursor_hint();
+  var_0 scripts\sp\player\cursor_hint::remove_cursor_hint();
   thread reverse_breach_scene();
   thread scripts\engine\sp\utility::transient_load_array(["lab_hill_main_tr", "lab_hill_bottom_tr"]);
 }
 
 function reverse_breach_scene() {
-  var0 = getEnt("pipes_exit_door_l", "targetname");
-  var0.clip = getEnt(var0.target, "targetname");
-  var0.clip linkTo(var0);
-  var1 = scripts\engine\utility::getStruct("left_door_dust", "targetname");
-  var2 = scripts\engine\utility::getStruct("left_door_push", "targetname");
-  var2.power = anglesToForward(var2.angles) * 50;
-  var3 = getEnt("pipes_exit_door_r", "targetname");
-  var3.clip = getEnt(var3.target, "targetname");
-  var3.clip linkTo(var3);
-  var4 = scripts\engine\utility::getStruct("right_door_dust", "targetname");
-  var5 = scripts\engine\utility::getStruct("right_door_push", "targetname");
-  var5.power = anglesToForward(var5.angles) * 50;
-  var0.clip connectpaths();
-  var3.clip connectpaths();
+  var_0 = getEnt("pipes_exit_door_l", "targetname");
+  var_0.clip = getEnt(var_0.target, "targetname");
+  var_0.clip linkTo(var_0);
+  var_1 = scripts\engine\utility::getStruct("left_door_dust", "targetname");
+  var_2 = scripts\engine\utility::getStruct("left_door_push", "targetname");
+  var_2.power = anglesToForward(var_2.angles) * 50;
+  var_3 = getEnt("pipes_exit_door_r", "targetname");
+  var_3.clip = getEnt(var_3.target, "targetname");
+  var_3.clip linkTo(var_3);
+  var_4 = scripts\engine\utility::getStruct("right_door_dust", "targetname");
+  var_5 = scripts\engine\utility::getStruct("right_door_push", "targetname");
+  var_5.power = anglesToForward(var_5.angles) * 50;
+  var_0.clip connectpaths();
+  var_3.clip connectpaths();
   thread spawn_reverse_breach_enemies();
-  var0 rotateYaw(-130, 0.3);
-  var0 playSound("scrpt_door_metal_heavy_bash_npc");
-  playFX(scripts\engine\utility::getfx("vfx_lab_jump_dust"), var1.origin);
+  var_0 rotateYaw(-130, 0.3);
+  var_0 playSound("scrpt_door_metal_heavy_bash_npc");
+  playFX(scripts\engine\utility::getfx("vfx_lab_jump_dust"), var_1.origin);
   wait 0.1;
-  var3 rotateYaw(130, 0.3);
-  var3 playSound("scrpt_door_metal_heavy_bash_npc");
-  playFX(scripts\engine\utility::getfx("vfx_lab_jump_dust"), var4.origin);
+  var_3 rotateYaw(130, 0.3);
+  var_3 playSound("scrpt_door_metal_heavy_bash_npc");
+  playFX(scripts\engine\utility::getfx("vfx_lab_jump_dust"), var_4.origin);
   wait 0.3;
-  var0 rotateYaw(20, 0.2);
-  physicsjolt(var2.origin, 30, 1, var2.power);
+  var_0 rotateYaw(20, 0.2);
+  physicsjolt(var_2.origin, 30, 1, var_2.power);
   wait 0.1;
-  var3 rotateYaw(-20, 0.2);
-  physicsjolt(var3.origin, 40, 1, var5.power);
+  var_3 rotateYaw(-20, 0.2);
+  physicsjolt(var_3.origin, 40, 1, var_5.power);
   wait 0.1;
-  var0 rotateYaw(-10, 0.4);
-  var3 rotateYaw(10, 0.4);
+  var_0 rotateYaw(-10, 0.4);
+  var_3 rotateYaw(10, 0.4);
 }
 
 function spawn_reverse_breach_enemies() {
-  var0 = scripts\engine\sp\utility::array_spawn_targetname("reverse_breach", 1, 1);
+  var_0 = scripts\engine\sp\utility::array_spawn_targetname("reverse_breach", 1, 1);
 
-  foreach(var2 in var0) {
+  foreach(var_2 in var_0) {
     thread reverse_breach_orders();
   }
 }
@@ -474,13 +474,13 @@ function reverse_breach_orders() {
     self.goalradius = 25;
     self.fixednode = 1;
     self.allowdeath = 1;
-    var0 = scripts\engine\utility::getanim("reverse_breach");
-    var1 = scripts\engine\utility::getStruct("animnode_rb", "targetname");
-    var1 thread scripts\common\anim::anim_single_solo(self, "reverse_breach");
-    var2 = getanimlength(var0);
-    var3 = 1.4 / var2;
+    var_0 = scripts\engine\utility::getanim("reverse_breach");
+    var_1 = scripts\engine\utility::getStruct("animnode_rb", "targetname");
+    var_1 thread scripts\common\anim::anim_single_solo(self, "reverse_breach");
+    var_2 = getanimlength(var_0);
+    var_3 = 1.4 / var_2;
     waitframe();
-    self setanimtime(var0, var3);
+    self setanimtime(var_0, var_3);
     self waittillmatch("single anim", "end");
     return;
   }
@@ -496,18 +496,18 @@ function reverse_breach_orders() {
 function vo_pipes_outdoor() {
   level waittill("fakesniper_spawned");
   level.fakesniper endon("kill_sniper");
-  var0 = ["dx_vom_pri_pipes_outdoor_callout_sniper_10", "dx_vom_pri_pipes_outdoor_callout_sniper_20", "dx_vom_pri_pipes_outdoor_callout_sniper_30"];
+  var_0 = ["dx_vom_pri_pipes_outdoor_callout_sniper_10", "dx_vom_pri_pipes_outdoor_callout_sniper_20", "dx_vom_pri_pipes_outdoor_callout_sniper_30"];
 
-  for(var1 = 0; var1 < 3; var1++) {
-    level.fakesniper waittill("new_target", var2);
+  for(var_1 = 0; var_1 < 3; var_1++) {
+    level.fakesniper waittill("new_target", var_2);
 
-    if(!isDefined(var2) || var2 != level.player) {
+    if(!isDefined(var_2) || var_2 != level.player) {
       continue;
     }
 
     wait randomfloatrange(0.5, 1);
-    var3 = gettime();
-    level.price thread scripts\sp\maps\lab\lab_vo_util::say_as_chatter(var0[var1]);
+    var_3 = gettime();
+    level.price thread scripts\sp\maps\lab\lab_vo_util::say_as_chatter(var_0[var_1]);
     wait 12;
   }
 }
@@ -517,26 +517,26 @@ function sniper_death_func() {
   scripts\common\ai::gun_remove();
   self.health += 300;
   thread running_away_watcher(level.sniper);
-  self waittill("death", var0);
+  self waittill("death", var_0);
 
   if(isDefined(level.fakesniper)) {
     level.fakesniper notify("kill_sniper");
   }
 
-  if(isDefined(var0) && var0 == level.player) {
+  if(isDefined(var_0) && var_0 == level.player) {
     scripts\sp\maps\lab\lab_vo_util::wait_combat_cooldown(0.3, 1.5);
     level.player thread scripts\sp\maps\lab\lab_vo_util::say_as_chatter("dx_vom_kyle_pipes_outdoor_callout_sniper_40");
     return;
   }
 }
 
-function running_away_watcher(var0) {
+function running_away_watcher(var_0) {
   while(!isDefined(level.fakesniper)) {
     waitframe();
   }
 
   level.fakesniper endon("kill_sniper");
-  scripts\engine\utility::flag_wait(var0);
+  scripts\engine\utility::flag_wait(var_0);
 
   if(isDefined(level.sniper)) {
     level.sniper notify("kill_sniper_death_function");
@@ -560,9 +560,9 @@ function pipes_outdoor_catchup() {
   scripts\engine\utility::flag_set("sniper_intro");
 }
 
-function sniper_intro(var0) {
-  var1 = scripts\engine\utility::getStruct("fake_sniper", "targetname");
-  level.fakesniper = scripts\engine\utility::spawn_script_origin(var1.origin, var1.angles);
+function sniper_intro(var_0) {
+  var_1 = scripts\engine\utility::getStruct("fake_sniper", "targetname");
+  level.fakesniper = scripts\engine\utility::spawn_script_origin(var_1.origin, var_1.angles);
   level.fakesniper thread scripts\sp\scriptedsniper::spawn_scripted_sniper("fake_sniper", "sniper_model", undefined, "sniper_targeting_player", "sniper_killed", "script_control");
   level.fakesniper.laser laserforceoff();
   thread fakesniper_control();
@@ -615,21 +615,21 @@ function stackup_when_clear() {
   scripts\sp\maps\lab\lab_vo_util::wait_combat_cooldown(0.8, 4);
   scripts\engine\utility::flag_wait("reverse_breach_guys_dead");
   scripts\engine\utility::flag_set("parking_lot_clear");
-  var0 = getEntArray("outdoor_pipes_color_trig", "targetname");
-  scripts\engine\utility::array_delete(var0);
+  var_0 = getEntArray("outdoor_pipes_color_trig", "targetname");
+  scripts\engine\utility::array_delete(var_0);
 }
 
 function ai_saftey_nets() {
   scripts\engine\utility::flag_wait("clear_parking_ai");
-  var0 = getaiarray("axis");
+  var_0 = getaiarray("axis");
 
   if(isDefined(level.finale_heli)) {
     if(isDefined(level.barkov)) {
-      var0 = scripts\engine\utility::array_remove(var0, level.barkov);
+      var_0 = scripts\engine\utility::array_remove(var_0, level.barkov);
     }
   }
 
-  childthread scripts\engine\sp\utility::ai_delete_when_out_of_sight(var0, 400);
+  childthread scripts\engine\sp\utility::ai_delete_when_out_of_sight(var_0, 400);
 
   if(!isDefined(level.rebel_1) || !isDefined(level.rebel_2) || !isDefined(level.rebel_3)) {
     childthread scripts\sp\maps\lab\lab_util::trigger_nearest_friendly_respawn_trigger();
@@ -638,18 +638,18 @@ function ai_saftey_nets() {
 }
 
 function watch_final_spawners() {
-  var0 = scripts\engine\utility::waittill_any_return("final_guards_a", "final_guards_b");
+  var_0 = scripts\engine\utility::waittill_any_return("final_guards_a", "final_guards_b");
 
-  switch (var0) {
+  switch (var_0) {
     case "final_guards_a":
-      var1 = getEntArray("final_guards_b", "targetname");
+      var_1 = getEntArray("final_guards_b", "targetname");
       break;
     default:
-      var1 = getEntArray("final_guards_a", "targetname");
+      var_1 = getEntArray("final_guards_a", "targetname");
       break;
   }
 
-  scripts\engine\utility::array_delete(var1);
+  scripts\engine\utility::array_delete(var_1);
 }
 
 function pipes_last_enemies() {
@@ -660,17 +660,17 @@ function pipes_last_enemies() {
     level waittill("ai_killed");
   }
 
-  var0 = getaiarray("axis");
+  var_0 = getaiarray("axis");
 
-  foreach(var2 in var0) {
-    if(scripts\engine\utility::is_equal(var2.script_noteworthy, "rooftop_sniper") || scripts\engine\utility::is_equal(var2, level.barkov) || scripts\engine\utility::is_equal(var2.script_noteworthy, "rooftop_rpg")) {
+  foreach(var_2 in var_0) {
+    if(scripts\engine\utility::is_equal(var_2.script_noteworthy, "rooftop_sniper") || scripts\engine\utility::is_equal(var_2, level.barkov) || scripts\engine\utility::is_equal(var_2.script_noteworthy, "rooftop_rpg")) {
       continue;
     }
 
-    if(isDefined(var2)) {
-      var2.goalradius = 200;
-      var2 setgoalentity(level.player);
-      var2.attackeraccuracy = 1;
+    if(isDefined(var_2)) {
+      var_2.goalradius = 200;
+      var_2 setgoalentity(level.player);
+      var_2.attackeraccuracy = 1;
     }
   }
 }
@@ -690,13 +690,13 @@ function pipes_hallway_main() {
 }
 
 function hallway_scene() {
-  var0 = getEntArray("parking_lot_color_trigs", "script_noteworthy");
-  scripts\engine\utility::array_delete(var0);
+  var_0 = getEntArray("parking_lot_color_trigs", "script_noteworthy");
+  scripts\engine\utility::array_delete(var_0);
   thread vo_hallway_scene();
-  var1 = [level.price, level.rebel_1, level.rebel_2, level.rebel_3];
-  thread scripts\sp\maps\lab\lab_util::move_lab_allies("hallway_nodes", var1, 1);
+  var_1 = [level.price, level.rebel_1, level.rebel_2, level.rebel_3];
+  thread scripts\sp\maps\lab\lab_util::move_lab_allies("hallway_nodes", var_1, 1);
   scripts\engine\utility::flag_wait("player_inside_hall");
-  thread scripts\sp\maps\lab\lab_util::move_lab_allies("pipes_nodes", var1, 1);
+  thread scripts\sp\maps\lab\lab_util::move_lab_allies("pipes_nodes", var_1, 1);
   scripts\engine\utility::flag_wait("player_at_final_pipes");
 }
 
@@ -716,8 +716,8 @@ function vo_hallway_scene() {
   level.player scripts\sp\maps\lab\lab_vo_util::say_as_chatter("dx_vom_kyle_pipes_outdoor_outro_30");
   scripts\engine\utility::waittill_any_ents(level.price, "goal", level, "player_inside_hall");
   wait 8;
-  var0 = ["dx_vom_pri_pipes_outdoor_outro_40", "dx_vom_pri_pipes_outdoor_outro_50", "dx_vom_pri_pipes_outdoor_outro_60"];
-  level.price scripts\sp\maps\lab\lab_vo_util::nagtill("player_inside_hall", var0, 12, 2, 1.2, 1.2, 35, 5);
+  var_0 = ["dx_vom_pri_pipes_outdoor_outro_40", "dx_vom_pri_pipes_outdoor_outro_50", "dx_vom_pri_pipes_outdoor_outro_60"];
+  level.price scripts\sp\maps\lab\lab_vo_util::nagtill("player_inside_hall", var_0, 12, 2, 1.2, 1.2, 35, 5);
 }
 
 function pipes_hallway_catchup() {
@@ -748,8 +748,8 @@ function pipes_dialog() {
 
   level.price scripts\sp\maps\lab\lab_vo_util::say_as_chatter("dx_vom_pri_final_pipes_charges_10");
   wait 5;
-  var0 = ["dx_vom_pri_final_pipes_charges_20", "dx_vom_pri_final_pipes_charges_30", "dx_vom_pri_final_pipes_charges_40"];
-  level.price scripts\sp\maps\lab\lab_vo_util::nagtill("bomb_planted", var0);
+  var_0 = ["dx_vom_pri_final_pipes_charges_20", "dx_vom_pri_final_pipes_charges_30", "dx_vom_pri_final_pipes_charges_40"];
+  level.price scripts\sp\maps\lab\lab_vo_util::nagtill("bomb_planted", var_0);
 }
 
 function mus_bomb_planted() {
@@ -759,25 +759,25 @@ function mus_bomb_planted() {
 
 function c4_plating_logic() {
   level.player endon("death");
-  var0 = scripts\engine\utility::getStructArray("bomb_plant", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("bomb_plant", "targetname");
 
-  foreach(var2 in var0) {
-    var2 thread scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 1, 5), &"LAB/CURSOR_PLANT_CHARGES", 100, 200, 64, 1, undefined, undefined, undefined, undefined, undefined, undefined, 65, 80);
+  foreach(var_2 in var_0) {
+    var_2 thread scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 1, 5), &"LAB/CURSOR_PLANT_CHARGES", 100, 200, 64, 1, undefined, undefined, undefined, undefined, undefined, undefined, 65, 80);
   }
 
-  waittill_and_return_ent(var0[0], "trigger", var0[1], "trigger", var0[2], "trigger", var0[3], "trigger");
+  waittill_and_return_ent(var_0[0], "trigger", var_0[1], "trigger", var_0[2], "trigger", var_0[3], "trigger");
   level notify("bomb_planted");
   thread sfx_pipes_heli_flyover();
 
-  foreach(var2 in var0) {
-    if(isDefined(var2.cursor_hint_ent)) {
-      var2 scripts\sp\player\cursor_hint::remove_cursor_hint();
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2.cursor_hint_ent)) {
+      var_2 scripts\sp\player\cursor_hint::remove_cursor_hint();
     }
   }
 
-  foreach(var7 in level.heroes) {
-    if(isDefined(var7)) {
-      var7.ignoreme = 1;
+  foreach(var_7 in level.heroes) {
+    if(isDefined(var_7)) {
+      var_7.ignoreme = 1;
     }
   }
 }
@@ -789,34 +789,34 @@ function sfx_pipes_heli_flyover() {
 
 function final_pipes_catchup() {}
 
-function waittill_and_return_ent(var0, var1, var2, var3, var4, var5, var6, var7) {
-  thread waittill_trigger_pipes(var0, var1, "ent1_used");
-  thread waittill_trigger_pipes(var2, var3, "ent2_used");
-  thread waittill_trigger_pipes(var4, var5, "ent3_used");
-  thread waittill_trigger_pipes(var6, var7, "ent4_used");
+function waittill_and_return_ent(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  thread waittill_trigger_pipes(var_0, var_1, "ent1_used");
+  thread waittill_trigger_pipes(var_2, var_3, "ent2_used");
+  thread waittill_trigger_pipes(var_4, var_5, "ent3_used");
+  thread waittill_trigger_pipes(var_6, var_7, "ent4_used");
   level.og_zplanes = getDvar("OMNONNMOTP");
-  var8 = level scripts\engine\utility::waittill_any_return("ent1_used", "ent2_used", "ent3_used", "ent4_used");
+  var_8 = level scripts\engine\utility::waittill_any_return("ent1_used", "ent2_used", "ent3_used", "ent4_used");
   scripts\engine\utility::flag_set("pipes_bomb_planted");
   setsaveddvar("OMNONNMOTP", "0.1 400 1.5 1000");
 
-  switch (var8) {
+  switch (var_8) {
     case "ent1_used":
-      level.pipes_bomb = var0;
+      level.pipes_bomb = var_0;
       break;
     case "ent2_used":
-      level.pipes_bomb = var2;
+      level.pipes_bomb = var_2;
       break;
     case "ent3_used":
-      level.pipes_bomb = var4;
+      level.pipes_bomb = var_4;
       break;
     case "ent4_used":
-      level.pipes_bomb = var6;
+      level.pipes_bomb = var_6;
       break;
   }
 }
 
-function waittill_trigger_pipes(var0, var1, var2) {
+function waittill_trigger_pipes(var_0, var_1, var_2) {
   level endon("pipes_bomb_planted");
-  var0 waittill(var1);
-  level notify(var2);
+  var_0 waittill(var_1);
+  level notify(var_2);
 }

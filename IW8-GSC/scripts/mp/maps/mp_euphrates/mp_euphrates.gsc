@@ -30,9 +30,9 @@ function main() {
   scripts\mp\compass::setupminimap("compass_map_mp_euphrates", "codcaster_compass_map_mp_euphrates");
   level.kill_border_triggers = getEntArray("kill_border_trigger", "targetname");
   thread ref_121f5();
-  var0 = scripts\mp\utility\game::getgametype();
+  var_0 = scripts\mp\utility\game::getgametype();
 
-  if(var0 == "sd" || var0 == "dd") {
+  if(var_0 == "sd" || var_0 == "dd") {
     game["defenders"] = "allies";
     game["attackers"] = "axis";
   } else {
@@ -61,13 +61,13 @@ function main() {
 }
 
 function player_exfil_struct() {
-  var0 = spawn("trigger_radius", (-4320, 2176, -160), 0, 576, 576);
-  var0.targetname = "OutOfBounds";
+  var_0 = spawn("trigger_radius", (-4320, 2176, -160), 0, 576, 576);
+  var_0.targetname = "OutOfBounds";
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
 }
 
 function ref_12f8e() {
-  var0 = [];
+  var_0 = [];
 
   switch (scripts\mp\utility\game::getgametype()) {
     case "tjugg":
@@ -79,14 +79,14 @@ function ref_12f8e() {
     case "conf":
     case "war":
     case "sr":
-      GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_tdm_spawn_secondary", (2102, -1369, -134), (0, 153, 0)));
+      GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_tdm_spawn_secondary", (2102, -1369, -134), (0, 153, 0)));
 
     case "dom":
-      GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_dom_spawn_secondary", (271, 631, 74), (0, 270, 0)));
+      GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_dom_spawn_secondary", (271, 631, 74), (0, 270, 0)));
   }
 
-  if(var0.size > 0) {
-    scripts\mp\spawnlogic::bdiedonce(var0);
+  if(var_0.size > 0) {
+    scripts\mp\spawnlogic::bdiedonce(var_0);
     return;
   }
 }
@@ -96,12 +96,12 @@ function ref_121f5() {
     level.outofboundstriggers = [];
   }
 
-  var0 = [(-72, 200, 32), (-4044, 2360, -100)];
+  var_0 = [(-72, 200, 32), (-4044, 2360, -100)];
 
-  foreach(var2 in var0) {
-    var3 = spawn("trigger_radius", var2, 0, 128, 128);
-    level.outofboundstriggers[level.outofboundstriggers.size] = var3;
-    var3 = spawn("trigger_radius", var2, 0, 96, 128);
-    level.outofboundstriggers[level.outofboundstriggers.size] = var3;
+  foreach(var_2 in var_0) {
+    var_3 = spawn("trigger_radius", var_2, 0, 128, 128);
+    level.outofboundstriggers[level.outofboundstriggers.size] = var_3;
+    var_3 = spawn("trigger_radius", var_2, 0, 96, 128);
+    level.outofboundstriggers[level.outofboundstriggers.size] = var_3;
   }
 }

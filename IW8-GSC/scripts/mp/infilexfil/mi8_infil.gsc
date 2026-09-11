@@ -3,77 +3,77 @@
  * Script: scripts\mp\infilexfil\mi8_infil.gsc
 ***********************************************/
 
-function mi8_init(var0) {
-  var1 = [];
+function mi8_init(var_0) {
+  var_1 = [];
   GscBinSkip0(0x2e, 0, [11, 10]);
 }
 
-function mi8_spawn(var0, var1, var2, var3) {
-  var4 = scripts\engine\utility::getStruct(var1, "targetname");
-  var5 = scripts\cp_mp\utility\game_utility::getmapname();
+function mi8_spawn(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\engine\utility::getStruct(var_1, "targetname");
+  var_5 = scripts\cp_mp\utility\game_utility::getmapname();
 
-  if(var5 == "mp_riverside_gw") {
-    if(var0 == "allies") {
-      if(distance2dsquared(var4.origin, (-8540.17, 31520.1, -487.5)) < 100) {
-        var2 = "bravo";
-        var3 = "bravo";
+  if(var_5 == "mp_riverside_gw") {
+    if(var_0 == "allies") {
+      if(distance2dsquared(var_4.origin, (-8540.17, 31520.1, -487.5)) < 100) {
+        var_2 = "bravo";
+        var_3 = "bravo";
       }
-    } else if(distance2dsquared(var4.origin, (7145.82, 23997.2, -34)) < 100) {
-      var2 = "bravo";
-      var3 = "bravo";
+    } else if(distance2dsquared(var_4.origin, (7145.82, 23997.2, -34)) < 100) {
+      var_2 = "bravo";
+      var_3 = "bravo";
     }
   }
 
-  initanims(var2, var0, var3);
-  ref_12802(var4, var0, var2, var3);
-  var6 = spawn("script_origin", var4.origin);
-  var6.angles = var4.angles;
-  var6.scene_node = var4;
-  var6.subtype = var2;
-  var6.ref_1214c = var3;
-  thread infilthink(var6, var0);
-  return var6;
+  initanims(var_2, var_0, var_3);
+  ref_12802(var_4, var_0, var_2, var_3);
+  var_6 = spawn("script_origin", var_4.origin);
+  var_6.angles = var_4.angles;
+  var_6.scene_node = var_4;
+  var_6.subtype = var_2;
+  var_6.ref_1214c = var_3;
+  thread infilthink(var_6, var_0);
+  return var_6;
 }
 
-function ref_12896(var0, var1, var2) {
-  var3 = var0.scene_node.origin;
-  var4 = var0.scene_node.angles;
+function ref_12896(var_0, var_1, var_2) {
+  var_3 = var_0.scene_node.origin;
+  var_4 = var_0.scene_node.angles;
 
   for(;;) {
-    thread scripts\cp_mp\utility\debug_utility::drawangles(var3, var4, level.framedurationseconds, 1);
+    thread scripts\cp_mp\utility\debug_utility::drawangles(var_3, var_4, level.framedurationseconds, 1);
     waitframe();
   }
 }
 
-function ref_12802(var0, var1, var2, var3) {
-  var4 = scripts\cp_mp\utility\game_utility::getmapname();
+function ref_12802(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\cp_mp\utility\game_utility::getmapname();
 
-  switch (var4) {
+  switch (var_4) {
     case "mp_downtown_gw":
-      switch (var3) {
+      switch (var_3) {
         case "alpha":
-          if(var1 == "axis") {
-            var0.angles += (0, 8, 0);
+          if(var_1 == "axis") {
+            var_0.angles += (0, 8, 0);
           } else {
-            var0.angles += (0, 23, 0);
-            var0.origin += anglesToForward(var0.angles) * 100;
+            var_0.angles += (0, 23, 0);
+            var_0.origin += anglesToForward(var_0.angles) * 100;
           }
 
           break;
         case "alpha1":
-          if(var1 == "axis") {
-            var0.angles += (0, -8, 0);
+          if(var_1 == "axis") {
+            var_0.angles += (0, -8, 0);
           } else {
-            var0.angles += (0, -3, 0);
+            var_0.angles += (0, -3, 0);
           }
 
           break;
         case "alpha2":
-          if(var1 == "axis") {
-            var0.angles += (0, -3, 0);
-            var0.origin += anglesToForward(var0.angles) * 200;
+          if(var_1 == "axis") {
+            var_0.angles += (0, -3, 0);
+            var_0.origin += anglesToForward(var_0.angles) * 200;
           } else {
-            var0.angles += (0, 12, 0);
+            var_0.angles += (0, 12, 0);
           }
 
           break;
@@ -81,19 +81,19 @@ function ref_12802(var0, var1, var2, var3) {
 
       break;
     case "mp_farms2_gw":
-      switch (var3) {
+      switch (var_3) {
         case "bravo":
-          if(var1 == "allies") {
-            var0.origin -= (0, 0, 86);
+          if(var_1 == "allies") {
+            var_0.origin -= (0, 0, 86);
           }
 
           break;
       }
     case "mp_promenade_gw":
-      switch (var3) {
+      switch (var_3) {
         case "alpha":
-          if(var1 == "allies") {
-            var0.angles -= (0, 30, 0);
+          if(var_1 == "allies") {
+            var_0.angles -= (0, 30, 0);
           }
 
           break;
@@ -103,85 +103,85 @@ function ref_12802(var0, var1, var2, var3) {
   }
 }
 
-function mi8_get_length(var0) {
-  var1 = getanimlength(level.scr_anim["slot_0"]["mi8_infil"]);
-  return var1;
+function mi8_get_length(var_0) {
+  var_1 = getanimlength(level.scr_anim["slot_0"]["mi8_infil"]);
+  return var_1;
 }
 
-function player_mi8_infil_think(var0, var1) {
+function player_mi8_infil_think(var_0, var_1) {
   self endon("player_free_spot");
-  thread infil_radio_idle(var0);
+  thread infil_radio_idle(var_0);
   thread player_infil_end();
-  var2 = var0.origin;
-  var3 = var0.angles;
-  thread scripts\mp\utility\infilexfil::infil_player_rig_updated("slot_" + var1, var2, var3);
+  var_2 = var_0.origin;
+  var_3 = var_0.angles;
+  thread scripts\mp\utility\infilexfil::infil_player_rig_updated("slot_" + var_1, var_2, var_3);
   self setdemeanorviewmodel("safe", "iw8_ges_demeanor_safe_heli");
   self lerpfovbypreset("80_instant");
   self lerpfovscalefactor(0, 0);
-  self.player_rig linkTo(var0);
-  var0 scripts\common\anim::anim_first_frame_solo(self.player_rig, "mi8_infil");
+  self.player_rig linkTo(var_0);
+  var_0 scripts\common\anim::anim_first_frame_solo(self.player_rig, "mi8_infil");
   thread scripts\mp\infilexfil\infilexfil::infil_scene_fade_in(0, 0.55);
   thread player_disconnect();
   scripts\mp\flags::gameflagwait("infil_started");
 
   if(isDefined(self.team) && self.team != "spectator") {
-    var4 = [];
-    GscBinSkip0(0x2e, var4.size, "mp_infil_mix_normal");
+    var_4 = [];
+    GscBinSkip0(0x2e, var_4.size, "mp_infil_mix_normal");
   }
 
   if(isDefined(self.animname) && !isai(self)) {
-    var8 = "scn_infil_mindia_plr_1";
+    var_8 = "scn_infil_mindia_plr_1";
 
     switch (self.animname) {
       case "slot_0":
-        var8 = "scn_infil_mindia_plr_1";
+        var_8 = "scn_infil_mindia_plr_1";
         break;
       case "slot_1":
-        var8 = "scn_infil_mindia_plr_2";
+        var_8 = "scn_infil_mindia_plr_2";
         break;
       case "slot_2":
-        var8 = "scn_infil_mindia_plr_3";
+        var_8 = "scn_infil_mindia_plr_3";
         break;
       case "slot_3":
-        var8 = "scn_infil_mindia_plr_4";
+        var_8 = "scn_infil_mindia_plr_4";
         break;
       case "slot_4":
-        var8 = "scn_infil_mindia_plr_5";
+        var_8 = "scn_infil_mindia_plr_5";
         break;
       case "slot_5":
-        var8 = "scn_infil_mindia_plr_6";
+        var_8 = "scn_infil_mindia_plr_6";
         break;
       case "slot_6":
-        var8 = "scn_infil_mindia_plr_1";
+        var_8 = "scn_infil_mindia_plr_1";
         break;
       case "slot_7":
-        var8 = "scn_infil_mindia_plr_2";
+        var_8 = "scn_infil_mindia_plr_2";
         break;
       case "slot_8":
-        var8 = "scn_infil_mindia_plr_3";
+        var_8 = "scn_infil_mindia_plr_3";
         break;
       case "slot_9":
-        var8 = "scn_infil_mindia_plr_4";
+        var_8 = "scn_infil_mindia_plr_4";
         break;
       case "slot_10":
-        var8 = "scn_infil_mindia_plr_5";
+        var_8 = "scn_infil_mindia_plr_5";
         break;
       case "slot_11":
-        var8 = "scn_infil_mindia_plr_6";
+        var_8 = "scn_infil_mindia_plr_6";
         break;
       default:
-        var8 = "scn_infil_mindia_plr_1";
+        var_8 = "scn_infil_mindia_plr_1";
         break;
     }
 
-    self playlocalsound(var8);
+    self playlocalsound(var_8);
     self playlocalsound("scn_infil_mindia_heli_int_lr");
   }
 
   self setcinematicmotionoverride("disabled");
   self lerpviewangleclamp(1, 0.25, 0.25, 60, 60, 30, 30);
   thread clear_infil_ambient_zone();
-  var1 scripts\mp\anim::anim_player_solo(self, self.player_rig, "mi8_infil");
+  var_1 scripts\mp\anim::anim_player_solo(self, self.player_rig, "mi8_infil");
 
   if(isDefined(self.player_rig) && self.player_rig islinked()) {
     self.player_rig unlink();
@@ -211,7 +211,7 @@ function player_infil_end() {
   scripts\mp\utility\player::setdof_default();
 }
 
-function infil_radio_idle(var0) {
+function infil_radio_idle(var_0) {
   if(isPlayer(self)) {
     self setclienttriggeraudiozonepartialwithfade("mindia_preinfil_mix", 0.05, "mix");
     wait 0.5;
@@ -221,20 +221,20 @@ function infil_radio_idle(var0) {
     }
 
     self playlocalsound("scn_infil_mindia_heli_prestart");
-    var1 = spawn("script_origin", (0, 0, 0));
-    var1 showonlytoplayer(self);
+    var_1 = spawn("script_origin", (0, 0, 0));
+    var_1 showonlytoplayer(self);
 
     if(isDefined(self.team)) {
-      var2 = scripts\mp\utility\teams::getteamvoiceinfix(self.team);
-      var3 = "dx_mpo_" + var2 + "op_drone_deathchatter";
+      var_2 = scripts\mp\utility\teams::getteamvoiceinfix(self.team);
+      var_3 = "dx_mpo_" + var_2 + "op_drone_deathchatter";
     } else {
-      var3 = "dx_mpo_usop_drone_deathchatter";
+      var_3 = "dx_mpo_usop_drone_deathchatter";
     }
 
-    if(soundexists(var3)) {
-      var3 playLoopSound(var3);
+    if(soundexists(var_3)) {
+      var_3 playLoopSound(var_3);
     } else {
-      var3 playLoopSound("dx_mpo_usop_drone_deathchatter");
+      var_3 playLoopSound("dx_mpo_usop_drone_deathchatter");
     }
 
     scripts\mp\flags::gameflagwait("infil_started");
@@ -245,8 +245,8 @@ function infil_radio_idle(var0) {
     }
 
     wait 1;
-    var3 stoploopsound(var3);
-    var3 delete();
+    var_3 stoploopsound(var_3);
+    var_3 delete();
     return;
   }
 }
@@ -265,44 +265,44 @@ function player_disconnect() {
   }
 }
 
-function spawnactors(var0, var1, var2) {
+function spawnactors(var_0, var_1, var_2) {
   if(!isDefined(self.actors)) {
     self.actors = [];
   }
 
-  var3 = getcommanderassets(var0);
-  self.actors[self.actors.size] = spawn_anim_model(self.linktoent, "commander", "tag_origin", var3.body, var3.head);
-  self.actors[self.actors.size] = spawn_anim_model(self.linktoent, "driver", "tag_origin", var3.body, var3.head);
+  var_3 = getcommanderassets(var_0);
+  self.actors[self.actors.size] = spawn_anim_model(self.linktoent, "commander", "tag_origin", var_3.body, var_3.head);
+  self.actors[self.actors.size] = spawn_anim_model(self.linktoent, "driver", "tag_origin", var_3.body, var_3.head);
 
-  foreach(var5 in self.actors) {
-    var5.infil = self;
+  foreach(var_5 in self.actors) {
+    var_5.infil = self;
   }
 
   self.actors[0].anim_playsound_func = &commander_play_sound_func;
   self.actors[1].anim_playsound_func = &driver_play_sound_func;
 }
 
-function blima_chief_play_sound_func(var0, var1, var2) {
-  foreach(var4 in self.blima.players) {
-    var4 playsoundtoplayer(var0, var4);
+function blima_chief_play_sound_func(var_0, var_1, var_2) {
+  foreach(var_4 in self.blima.players) {
+    var_4 playsoundtoplayer(var_0, var_4);
   }
 }
 
-function infilthink(var0, var1) {
-  var2 = getdvarfloat("NMORQOTSK", 0.2);
+function infilthink(var_0, var_1) {
+  var_2 = getdvarfloat("NMORQOTSK", 0.2);
 
-  foreach(var4 in getEntArray("infil_delete", "script_noteworthy")) {
-    var4 delete();
+  foreach(var_4 in getEntArray("infil_delete", "script_noteworthy")) {
+    var_4 delete();
   }
 
-  thread vehiclethink(var0, self.scene_node, var1);
+  thread vehiclethink(var_0, self.scene_node, var_1);
   scripts\mp\flags::gameflagwait("infil_started");
   setDvar("TLMMOPMSK", 1);
   setDvar("NMORQOTSK", 1);
   level notify("start_scene");
   level waittill("prematch_over");
   setDvar("TLMMOPMSK", 0);
-  setDvar("NMORQOTSK", var2);
+  setDvar("NMORQOTSK", var_2);
 
   while(isDefined(self.linktoent) || isDefined(self.actors)) {
     waitframe();
@@ -312,22 +312,22 @@ function infilthink(var0, var1) {
   self delete();
 }
 
-function vehiclethink(var0, var1, var2, var3) {
-  self.linktoent = spawninfilvehicle(var1, var0, var2);
+function vehiclethink(var_0, var_1, var_2, var_3) {
+  self.linktoent = spawninfilvehicle(var_1, var_0, var_2);
 
   if(self.ref_1214c != self.subtype && (getDvar("mapname") == "mp_downtown_gw" || getDvar("mapname") == "mp_port2_gw")) {
-    var2 = self.ref_1214c;
+    var_2 = self.ref_1214c;
   }
 
-  scripts\common\anim::anim_first_frame_solo(self.linktoent, "mi8_infil_" + var2 + "_" + var0);
+  scripts\common\anim::anim_first_frame_solo(self.linktoent, "mi8_infil_" + var_2 + "_" + var_0);
   scripts\mp\flags::gameflagwait("infil_started");
   self.linktoent setscriptablepartstate("engine", "on", 0);
   self.linktoent setscriptablepartstate("blinking_light", "red", 0);
   self.linktoent setscriptablepartstate("infil_lights", "on", 0);
   thread ref_11bf2();
-  thread scripts\common\anim::anim_single_solo(self.linktoent, "mi8_infil_" + var2 + "_" + var0);
-  var4 = getanimlength(level.scr_anim["mi8"]["mi8_infil_" + var2 + "_" + var0]);
-  wait var4;
+  thread scripts\common\anim::anim_single_solo(self.linktoent, "mi8_infil_" + var_2 + "_" + var_0);
+  var_4 = getanimlength(level.scr_anim["mi8"]["mi8_infil_" + var_2 + "_" + var_0]);
+  wait var_4;
   self.linktoent delete();
   self.linktoent = undefined;
 }
@@ -336,118 +336,118 @@ function ref_11bf2() {
   self playsoundonmovingent("scn_infil_mindia_heli_ext");
 }
 
-function van_infil_sfx_npc1(var0) {
-  var0 playsoundonmovingent("scn_infil_hackney_van_npc3");
+function van_infil_sfx_npc1(var_0) {
+  var_0 playsoundonmovingent("scn_infil_hackney_van_npc3");
 }
 
-function van_infil_sfx_npc2(var0) {
-  var0 playsoundonmovingent("scn_infil_hackney_van_npc2");
+function van_infil_sfx_npc2(var_0) {
+  var_0 playsoundonmovingent("scn_infil_hackney_van_npc2");
 }
 
-function van_infil_sfx_npc3(var0) {
-  var0 playsoundonmovingent("scn_infil_hackney_van_npc1");
+function van_infil_sfx_npc3(var_0) {
+  var_0 playsoundonmovingent("scn_infil_hackney_van_npc1");
 }
 
-function van_infil_sfx_npc4(var0) {
-  var0 playsoundonmovingent("scn_infil_hackney_van_npc6");
+function van_infil_sfx_npc4(var_0) {
+  var_0 playsoundonmovingent("scn_infil_hackney_van_npc6");
 }
 
-function van_infil_sfx_npc5(var0) {
-  var0 playsoundonmovingent("scn_infil_hackney_van_npc5");
+function van_infil_sfx_npc5(var_0) {
+  var_0 playsoundonmovingent("scn_infil_hackney_van_npc5");
 }
 
-function van_infil_sfx_npc6(var0) {
-  var0 playsoundonmovingent("scn_infil_hackney_van_npc4");
+function van_infil_sfx_npc6(var_0) {
+  var_0 playsoundonmovingent("scn_infil_hackney_van_npc4");
 }
 
-function actorthink(var0, var1, var2, var3) {
-  thread spawnactors(var0, var2, var3);
-  self.linktoent scripts\common\anim::anim_first_frame(self.actors, "mi8_infil_" + var2, "tag_origin");
+function actorthink(var_0, var_1, var_2, var_3) {
+  thread spawnactors(var_0, var_2, var_3);
+  self.linktoent scripts\common\anim::anim_first_frame(self.actors, "mi8_infil_" + var_2, "tag_origin");
   scripts\mp\flags::gameflagwait("infil_started");
-  self.linktoent thread scripts\common\anim::anim_single(self.actors, "mi8_infil_" + var2, "tag_origin");
-  self.actors[0].head scriptmodelplayanim(level.scr_anim[self.actors[0].animname]["mi8_infil_" + var2]);
-  var4 = getanimlength(level.scr_anim["commander"]["mi8_infil_" + var2]);
-  wait var4;
+  self.linktoent thread scripts\common\anim::anim_single(self.actors, "mi8_infil_" + var_2, "tag_origin");
+  self.actors[0].head scriptmodelplayanim(level.scr_anim[self.actors[0].animname]["mi8_infil_" + var_2]);
+  var_4 = getanimlength(level.scr_anim["commander"]["mi8_infil_" + var_2]);
+  wait var_4;
 
-  foreach(var6 in self.actors) {
-    var6 delete();
+  foreach(var_6 in self.actors) {
+    var_6 delete();
   }
 
   self.actors = undefined;
 }
 
-function spawn_anim_model(var0, var1, var2, var3, var4) {
-  var5 = 1;
+function spawn_anim_model(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = 1;
 
   if(scripts\engine\utility::cointoss()) {
-    var5 = 0;
+    var_5 = 0;
   }
 
-  if(var2 == "random") {
-    if(var5) {
-      var6 = randomint(3);
+  if(var_2 == "random") {
+    if(var_5) {
+      var_6 = randomint(3);
 
-      if(var6 == 0) {
-        var2 = "c_civ_pic_male_2_brown";
-      } else if(var6 == 1) {
-        var2 = "body_opforce_london_civ_1_1";
-      } else if(var6 == 2) {
-        var2 = "civ_london_male_2_5";
+      if(var_6 == 0) {
+        var_2 = "c_civ_pic_male_2_brown";
+      } else if(var_6 == 1) {
+        var_2 = "body_opforce_london_civ_1_1";
+      } else if(var_6 == 2) {
+        var_2 = "civ_london_male_2_5";
       }
     } else if(scripts\engine\utility::cointoss()) {
-      var2 = "civ_london_female_1_4";
+      var_2 = "civ_london_female_1_4";
     } else {
-      var2 = "c_civ_pic_female_5_6";
+      var_2 = "c_civ_pic_female_5_6";
     }
   }
 
-  var7 = spawn("script_model", (0, 0, 0));
-  var7 setModel(var2);
+  var_7 = spawn("script_model", (0, 0, 0));
+  var_7 setModel(var_2);
 
-  if(isDefined(var3)) {
-    if(var3 == "random") {
-      if(var5) {
+  if(isDefined(var_3)) {
+    if(var_3 == "random") {
+      if(var_5) {
         if(scripts\engine\utility::cointoss()) {
-          var3 = "head_bg_var_head_bg_male_09_head_sc_male_14";
+          var_3 = "head_bg_var_head_bg_male_09_head_sc_male_14";
         } else {
-          var3 = "head_bg_var_head_male_bc_01_head_hero_gator";
+          var_3 = "head_bg_var_head_male_bc_01_head_hero_gator";
         }
       } else if(scripts\engine\utility::cointoss()) {
-        var3 = "head_bg_var_head_female_bc_01_head_sc_female_10";
+        var_3 = "head_bg_var_head_female_bc_01_head_sc_female_10";
       } else {
-        var3 = "head_bg_var_head_sc_female_04_head_female_bc_02";
+        var_3 = "head_bg_var_head_sc_female_04_head_female_bc_02";
       }
     }
 
-    var8 = spawn("script_model", (0, 0, 0));
-    var8 setModel(var3);
-    var8 linkTo(var7, "j_spine4", (0, 0, 0), (0, 0, 0));
-    var7.head = var8;
-    var7 thread scripts\engine\utility::delete_on_death(var8);
+    var_8 = spawn("script_model", (0, 0, 0));
+    var_8 setModel(var_3);
+    var_8 linkTo(var_7, "j_spine4", (0, 0, 0), (0, 0, 0));
+    var_7.head = var_8;
+    var_7 thread scripts\engine\utility::delete_on_death(var_8);
   }
 
-  if(isDefined(var4)) {
-    var9 = spawn("script_model", (0, 0, 0));
-    var9 setModel(var4);
-    var9 linkTo(var7, "j_gun", (0, 0, 0), (0, 0, 0));
-    var7 thread scripts\engine\utility::delete_on_death(var9);
-    var7.weapon = var9;
+  if(isDefined(var_4)) {
+    var_9 = spawn("script_model", (0, 0, 0));
+    var_9 setModel(var_4);
+    var_9 linkTo(var_7, "j_gun", (0, 0, 0), (0, 0, 0));
+    var_7 thread scripts\engine\utility::delete_on_death(var_9);
+    var_7.weapon = var_9;
   }
 
-  var7.animname = var0;
-  var7 scripts\common\anim::setanimtree();
+  var_7.animname = var_0;
+  var_7 scripts\common\anim::setanimtree();
 
-  if(isDefined(var1)) {
-    thread scripts\engine\utility::delete_on_death(var7);
-    var7 linkTo(self, var1, (0, 0, 0), (0, 0, 0));
+  if(isDefined(var_1)) {
+    thread scripts\engine\utility::delete_on_death(var_7);
+    var_7 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   }
 
-  return var7;
+  return var_7;
 }
 
-function initanims(var0, var1, var2) {
-  script_model_alpha_anims(var0);
-  vehicles_alpha_anims(var0, var1, var2);
+function initanims(var_0, var_1, var_2) {
+  script_model_alpha_anims(var_0);
+  vehicles_alpha_anims(var_0, var_1, var_2);
   scripts\common\anim::addnotetrack_customfunction("slot_0", "fov_63_2", &scripts\mp\utility\infilexfil::player_fov_default_2);
   scripts\common\anim::addnotetrack_customfunction("slot_1", "fov_63_2", &scripts\mp\utility\infilexfil::player_fov_default_2);
   scripts\common\anim::addnotetrack_customfunction("slot_2", "fov_63_2", &scripts\mp\utility\infilexfil::player_fov_default_2);
@@ -524,7 +524,7 @@ function initanims(var0, var1, var2) {
 
 #using_animtree("");
 
-function script_model_alpha_anims(var0) {
+function script_model_alpha_anims(var_0) {
   level.scr_animtree["slot_0"] = #animtree;
   level.scr_anim["slot_0"]["mi8_infil"] = $mp_infil_mi8_guyl_01;
   level.scr_animname["slot_0"]["mi8_infil"] = "mp_infil_mi8_guyL_01";
@@ -575,36 +575,36 @@ function script_model_alpha_anims(var0) {
   level.scr_eventanim["slot_11"]["mi8_infil"] = "infil_mi8_right_6";
 }
 
-function vehicles_alpha_anims(var0, var1, var2) {
-  var3 = getDvar("mapname");
+function vehicles_alpha_anims(var_0, var_1, var_2) {
+  var_3 = getDvar("mapname");
 
-  if(isDefined(var2) && var0 != var2 && (var3 == "mp_downtown_gw" || var3 == "mp_port2_gw")) {
-    switch (var2) {
+  if(isDefined(var_2) && var_0 != var_2 && (var_3 == "mp_downtown_gw" || var_3 == "mp_port2_gw")) {
+    switch (var_2) {
       case "alpha1":
-        if(var1 == "axis") {
-          if(var3 == "mp_downtown_gw") {
-            level.scr_anim["mi8"]["mi8_infil_" + var2 + "_" + var1] = % mp_infil_mi8_a1_heli_downtown_east;
+        if(var_1 == "axis") {
+          if(var_3 == "mp_downtown_gw") {
+            level.scr_anim["mi8"]["mi8_infil_" + var_2 + "_" + var_1] = % mp_infil_mi8_a1_heli_downtown_east;
           }
 
-          if(var3 == "mp_port2_gw") {
-            level.scr_anim["mi8"]["mi8_infil_" + var2 + "_" + var1] = $mp_infil_mi8_a1_heli_port_east;
+          if(var_3 == "mp_port2_gw") {
+            level.scr_anim["mi8"]["mi8_infil_" + var_2 + "_" + var_1] = $mp_infil_mi8_a1_heli_port_east;
           }
         } else {
-          if(var3 == "mp_downtown_gw") {
-            level.scr_anim["mi8"]["mi8_infil_" + var2 + "_" + var1] = % mp_infil_mi8_a1_heli_downtown_west;
+          if(var_3 == "mp_downtown_gw") {
+            level.scr_anim["mi8"]["mi8_infil_" + var_2 + "_" + var_1] = % mp_infil_mi8_a1_heli_downtown_west;
           }
 
-          if(var3 == "mp_port2_gw") {
-            level.scr_anim["mi8"]["mi8_infil_" + var2 + "_" + var1] = % mp_infil_mi8_a1_heli_port_west;
+          if(var_3 == "mp_port2_gw") {
+            level.scr_anim["mi8"]["mi8_infil_" + var_2 + "_" + var_1] = % mp_infil_mi8_a1_heli_port_west;
           }
         }
 
         break;
       case "alpha2":
-        if(var1 == "axis") {
-          level.scr_anim["mi8"]["mi8_infil_" + var2 + "_" + var1] = % mp_infil_mi8_a2_heli_downtown_east;
+        if(var_1 == "axis") {
+          level.scr_anim["mi8"]["mi8_infil_" + var_2 + "_" + var_1] = % mp_infil_mi8_a2_heli_downtown_east;
         } else {
-          level.scr_anim["mi8"]["mi8_infil_" + var2 + "_" + var1] = % mp_infil_mi8_a2_heli_downtown_west;
+          level.scr_anim["mi8"]["mi8_infil_" + var_2 + "_" + var_1] = % mp_infil_mi8_a2_heli_downtown_west;
         }
 
         break;
@@ -613,46 +613,46 @@ function vehicles_alpha_anims(var0, var1, var2) {
     return;
   }
 
-  switch (var0) {
+  switch (var_0) {
     case "alpha":
       level.scr_animtree["mi8"] = #animtree;
 
       switch (getDvar("mapname")) {
         case "mp_downtown_gw":
-          if(var1 == "axis") {
-            level.scr_anim["mi8"]["mi8_infil_" + var0 + "_" + var1] = % mp_infil_mi8_a_heli_downtown_east;
+          if(var_1 == "axis") {
+            level.scr_anim["mi8"]["mi8_infil_" + var_0 + "_" + var_1] = % mp_infil_mi8_a_heli_downtown_east;
           } else {
-            level.scr_anim["mi8"]["mi8_infil_" + var0 + "_" + var1] = % mp_infil_mi8_a_heli_downtown_west;
+            level.scr_anim["mi8"]["mi8_infil_" + var_0 + "_" + var_1] = % mp_infil_mi8_a_heli_downtown_west;
           }
 
           break;
         case "mp_farms2_gw":
         case "mp_quarry2":
-          if(var1 == "axis") {
-            level.scr_anim["mi8"]["mi8_infil_" + var0 + "_" + var1] = % mp_infil_mi8_a_heli_quarry_east;
+          if(var_1 == "axis") {
+            level.scr_anim["mi8"]["mi8_infil_" + var_0 + "_" + var_1] = % mp_infil_mi8_a_heli_quarry_east;
           } else {
-            level.scr_anim["mi8"]["mi8_infil_" + var0 + "_" + var1] = % mp_infil_mi8_a_heli_quarry_east;
+            level.scr_anim["mi8"]["mi8_infil_" + var_0 + "_" + var_1] = % mp_infil_mi8_a_heli_quarry_east;
           }
 
           break;
         case "mp_port2_gw":
-          if(var1 == "axis") {
-            level.scr_anim["mi8"]["mi8_infil_" + var0 + "_" + var1] = % mp_infil_mi8_a_heli_port_east;
+          if(var_1 == "axis") {
+            level.scr_anim["mi8"]["mi8_infil_" + var_0 + "_" + var_1] = % mp_infil_mi8_a_heli_port_east;
           } else {
-            level.scr_anim["mi8"]["mi8_infil_" + var0 + "_" + var1] = % mp_infil_mi8_a_heli_port_west;
+            level.scr_anim["mi8"]["mi8_infil_" + var_0 + "_" + var_1] = % mp_infil_mi8_a_heli_port_west;
           }
 
           break;
         case "mp_riverside_gw":
-          if(var1 == "axis") {
-            level.scr_anim["mi8"]["mi8_infil_" + var0 + "_" + var1] = % mp_infil_mi8_a_heli_riverside_allegiance;
+          if(var_1 == "axis") {
+            level.scr_anim["mi8"]["mi8_infil_" + var_0 + "_" + var_1] = % mp_infil_mi8_a_heli_riverside_allegiance;
           } else {
-            level.scr_anim["mi8"]["mi8_infil_" + var0 + "_" + var1] = % mp_infil_mi8_a_heli_riverside_coalition;
+            level.scr_anim["mi8"]["mi8_infil_" + var_0 + "_" + var_1] = % mp_infil_mi8_a_heli_riverside_coalition;
           }
 
           break;
         default:
-          level.scr_anim["mi8"]["mi8_infil_" + var0 + "_" + var1] = % mp_infil_mi8_heli;
+          level.scr_anim["mi8"]["mi8_infil_" + var_0 + "_" + var_1] = % mp_infil_mi8_heli;
           break;
       }
 
@@ -663,113 +663,113 @@ function vehicles_alpha_anims(var0, var1, var2) {
       switch (getDvar("mapname")) {
         case "mp_farms2_gw":
         case "mp_quarry2":
-          if(var1 == "axis") {
-            level.scr_anim["mi8"]["mi8_infil_" + var0 + "_" + var1] = % mp_infil_mi8_b_heli_quarry_east;
+          if(var_1 == "axis") {
+            level.scr_anim["mi8"]["mi8_infil_" + var_0 + "_" + var_1] = % mp_infil_mi8_b_heli_quarry_east;
           } else {
-            level.scr_anim["mi8"]["mi8_infil_" + var0 + "_" + var1] = % mp_infil_mi8_b_heli_quarry_east;
+            level.scr_anim["mi8"]["mi8_infil_" + var_0 + "_" + var_1] = % mp_infil_mi8_b_heli_quarry_east;
           }
 
           break;
         case "mp_port2_gw":
-          if(var1 == "axis") {
-            level.scr_anim["mi8"]["mi8_infil_" + var0 + "_" + var1] = % mp_infil_mi8_b_heli_port_east;
+          if(var_1 == "axis") {
+            level.scr_anim["mi8"]["mi8_infil_" + var_0 + "_" + var_1] = % mp_infil_mi8_b_heli_port_east;
           } else {
-            level.scr_anim["mi8"]["mi8_infil_" + var0 + "_" + var1] = % mp_infil_mi8_b_heli_port_west;
+            level.scr_anim["mi8"]["mi8_infil_" + var_0 + "_" + var_1] = % mp_infil_mi8_b_heli_port_west;
           }
 
           break;
         case "mp_riverside_gw":
-          if(var1 == "axis") {
-            level.scr_anim["mi8"]["mi8_infil_" + var0 + "_" + var1] = % mp_infil_mi8_b_heli_riverside_allegiance;
+          if(var_1 == "axis") {
+            level.scr_anim["mi8"]["mi8_infil_" + var_0 + "_" + var_1] = % mp_infil_mi8_b_heli_riverside_allegiance;
           } else {
-            level.scr_anim["mi8"]["mi8_infil_" + var0 + "_" + var1] = % mp_infil_mi8_b_heli_riverside_coalition;
+            level.scr_anim["mi8"]["mi8_infil_" + var_0 + "_" + var_1] = % mp_infil_mi8_b_heli_riverside_coalition;
           }
 
           break;
         default:
-          level.scr_anim["mi8"]["mi8_infil_" + var0 + "_" + var1] = % mp_infil_mi8_heli;
+          level.scr_anim["mi8"]["mi8_infil_" + var_0 + "_" + var_1] = % mp_infil_mi8_heli;
           break;
       }
 
       break;
     default:
-      level.scr_anim["mi8"]["mi8_infil_" + var0] = % mp_infil_mi8_heli;
+      level.scr_anim["mi8"]["mi8_infil_" + var_0] = % mp_infil_mi8_heli;
       break;
   }
 }
 
-function spawninfilvehicle(var0, var1, var2) {
-  var3 = var0.origin;
-  var4 = var0.angles;
-  var5 = "veh8_mil_air_mindia8_infil_x";
+function spawninfilvehicle(var_0, var_1, var_2) {
+  var_3 = var_0.origin;
+  var_4 = var_0.angles;
+  var_5 = "veh8_mil_air_mindia8_infil_x";
 
-  if(var1 == "allies") {
-    var5 = "veh8_mil_air_mindia8_west_infil_x";
+  if(var_1 == "allies") {
+    var_5 = "veh8_mil_air_mindia8_west_infil_x";
   }
 
-  var6 = spawnVehicle(var5, var2, "mi8_infil_mp", var3, var4);
-  var6 setvehicleteam(var1);
-  var6.animname = "mi8";
-  var6 setCanDamage(0);
-  var6 notsolid();
-  var6.infil = self;
-  return var6;
+  var_6 = spawnVehicle(var_5, var_2, "mi8_infil_mp", var_3, var_4);
+  var_6 setvehicleteam(var_1);
+  var_6.animname = "mi8";
+  var_6 setCanDamage(0);
+  var_6 notsolid();
+  var_6.infil = self;
+  return var_6;
 }
 
-function commander_play_sound_func(var0, var1, var2) {
-  foreach(var4 in self.infil.players) {
-    self playsoundtoplayer(var0, var4);
-  }
-}
-
-function driver_play_sound_func(var0, var1, var2) {
-  foreach(var4 in self.infil.players) {
-    self playsoundtoplayer(var0, var4);
+function commander_play_sound_func(var_0, var_1, var_2) {
+  foreach(var_4 in self.infil.players) {
+    self playsoundtoplayer(var_0, var_4);
   }
 }
 
-function getcommanderassets(var0) {
-  var1 = spawnStruct();
-  var1.body = "body_mp_eastern_fireteam_east_sg_no_sling";
-  var1.head = "head_mp_eastern_fireteam_east_ar_4";
-  return var1;
+function driver_play_sound_func(var_0, var_1, var_2) {
+  foreach(var_4 in self.infil.players) {
+    self playsoundtoplayer(var_0, var_4);
+  }
 }
 
-function customground(var0) {
-  scripts\mp\utility\infilexfil::cam_shake_off(var0);
+function getcommanderassets(var_0) {
+  var_1 = spawnStruct();
+  var_1.body = "body_mp_eastern_fireteam_east_sg_no_sling";
+  var_1.head = "head_mp_eastern_fireteam_east_ar_4";
+  return var_1;
+}
 
-  if(!isDefined(var0)) {
+function customground(var_0) {
+  scripts\mp\utility\infilexfil::cam_shake_off(var_0);
+
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
     return;
   }
 
-  var1 = var1;
+  var_1 = var_1;
 }
 
-function ref_11c9e(var0, var1, var2) {
+function ref_11c9e(var_0, var_1, var_2) {
   switch (level.mapname) {
     case "mp_quarry2":
-      switch (var1) {
+      switch (var_1) {
         case "allies":
-          switch (var2) {
+          switch (var_2) {
             case "alpha":
               break;
             case "bravo":
-              var0.origin += anglesToForward(var0.angles) * 200;
+              var_0.origin += anglesToForward(var_0.angles) * 200;
               break;
           }
 
           break;
         case "axis":
-          switch (var2) {
+          switch (var_2) {
             case "alpha":
               break;
             case "bravo":
-              var0.origin += anglestoup(var0.angles) * 281.907;
+              var_0.origin += anglestoup(var_0.angles) * 281.907;
               break;
           }
 

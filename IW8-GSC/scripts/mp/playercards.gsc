@@ -9,12 +9,12 @@ function init() {
 
 function onplayerconnect() {
   for(;;) {
-    level waittill("connected", var0);
+    level waittill("connected", var_0);
 
-    if(!isai(var0)) {
-      var0.playercardpatch = var0 getplayerdata(level.loadoutsgroup, "squadMembers", "patch");
-      var0.playercardpatchbacking = var0 getplayerdata(level.loadoutsgroup, "squadMembers", "patchbacking");
-      var0.playercardbackground = var0 getplayerdata(level.loadoutsgroup, "squadMembers", "background");
+    if(!isai(var_0)) {
+      var_0.playercardpatch = var_0 getplayerdata(level.loadoutsgroup, "squadMembers", "patch");
+      var_0.playercardpatchbacking = var_0 getplayerdata(level.loadoutsgroup, "squadMembers", "patchbacking");
+      var_0.playercardbackground = var_0 getplayerdata(level.loadoutsgroup, "squadMembers", "background");
     }
   }
 }

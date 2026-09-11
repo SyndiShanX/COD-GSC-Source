@@ -15,25 +15,25 @@ function init() {
 
 function init_airstrike_params() {
   level.airstrikesettings = [];
-  var0 = "veh8_mil_air_alfa10";
-  var1 = "veh8_mil_air_alfa10_east";
+  var_0 = "veh8_mil_air_alfa10";
+  var_1 = "veh8_mil_air_alfa10_east";
 
   if(scripts\cp_mp\utility\game_utility::ref_140aa()) {
-    var0 = "plane_juniform87";
-    var1 = "plane_juniform87";
+    var_0 = "plane_juniform87";
+    var_1 = "plane_juniform87";
   }
 
   level.airstrikesettings["precision_airstrike"] = spawnStruct();
   level.airstrikesettings["precision_airstrike"].streakname = "precision_airstrike";
-  level.airstrikesettings["precision_airstrike"].modelbase = var0;
-  level.airstrikesettings["precision_airstrike"].modelbasealt = var1;
-  var2 = "iw8_spotter_scope_mp";
+  level.airstrikesettings["precision_airstrike"].modelbase = var_0;
+  level.airstrikesettings["precision_airstrike"].modelbasealt = var_1;
+  var_2 = "iw8_spotter_scope_mp";
 
   if(scripts\cp_mp\utility\game_utility::ref_140a9()) {
-    var2 = "iw8_spotter_scope_mp_ch3";
+    var_2 = "iw8_spotter_scope_mp_ch3";
   }
 
-  level.airstrikesettings["precision_airstrike"].deployweaponobj = getcompleteweaponname(var2, ["spotterscope"]);
+  level.airstrikesettings["precision_airstrike"].deployweaponobj = getcompleteweaponname(var_2, ["spotterscope"]);
   level.airstrikesettings["multi_airstrike"] = spawnStruct();
   level.airstrikesettings["multi_airstrike"].streakname = "multi_airstrike";
   level.airstrikesettings["multi_airstrike"].modelbase = "veh8_mil_air_alfa10";
@@ -44,14 +44,14 @@ function init_airstrike_params() {
   level.airstrikesettings["fuel_airstrike"].deployweaponobj = getcompleteweaponname(scripts\mp\killstreaks\mapselect::getmapselectweapon());
 }
 
-function airstrike_getmapselectpoint(var0, var1, var2) {
-  return scripts\mp\killstreaks\mapselect::getselectmappoint(var0, var1, var2);
+function airstrike_getmapselectpoint(var_0, var_1, var_2) {
+  return scripts\mp\killstreaks\mapselect::getselectmappoint(var_0, var_1, var_2);
 }
 
-function airstrike_startmapselectsequence(var0, var1, var2) {
-  scripts\mp\killstreaks\mapselect::startmapselectsequence(var0, var1, var2);
+function airstrike_startmapselectsequence(var_0, var_1, var_2) {
+  scripts\mp\killstreaks\mapselect::startmapselectsequence(var_0, var_1, var_2);
 }
 
-function airstrike_addspawndangerzone(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
-  scripts\mp\spawnlogic::addspawndangerzone(var0, var1, var2, var3, var4, var5, var6, var7, var8);
+function airstrike_addspawndangerzone(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  scripts\mp\spawnlogic::addspawndangerzone(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 }

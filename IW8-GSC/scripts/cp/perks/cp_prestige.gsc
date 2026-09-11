@@ -4,7 +4,7 @@
 ***********************************************/
 
 function initprestige() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, "none", &empty);
 }
 
@@ -13,36 +13,36 @@ function initplayerprestige() {
 }
 
 function init_nerf_scalar() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, "nerf_take_more_damage", 1);
 }
 
 function nerf_based_on_selection() {
-  for(var0 = 0; var0 < 10; var0++) {
-    var1 = get_selected_nerf(var0);
-    activate_nerf(var1);
+  for(var_0 = 0; var_0 < 10; var_0++) {
+    var_1 = get_selected_nerf(var_0);
+    activate_nerf(var_1);
   }
 }
 
-function activate_nerf(var0) {
-  if(is_no_nerf(var0)) {
+function activate_nerf(var_0) {
+  if(is_no_nerf(var_0)) {
     return;
   }
 
-  if(nerf_already_activated(var0)) {
+  if(nerf_already_activated(var_0)) {
     return;
   }
 
-  register_nerf_activated(var0);
-  [[level.prestige_nerf_func[var0]]]();
+  register_nerf_activated(var_0);
+  [[level.prestige_nerf_func[var_0]]]();
 }
 
-function nerf_already_activated(var0) {
-  return scripts\engine\utility::array_contains(self.activated_nerfs, var0);
+function nerf_already_activated(var_0) {
+  return scripts\engine\utility::array_contains(self.activated_nerfs, var_0);
 }
 
-function register_nerf_activated(var0) {
-  self.activated_nerfs[self.activated_nerfs.size] = var0;
+function register_nerf_activated(var_0) {
+  self.activated_nerfs[self.activated_nerfs.size] = var_0;
 }
 
 function reduce_wallet_size_and_money_earned() {
@@ -54,8 +54,8 @@ function is_relics_enabled() {
   return true;
 }
 
-function is_no_nerf(var0) {
-  return var0 == "none";
+function is_no_nerf(var_0) {
+  return var_0 == "none";
 }
 
 function get_num_nerf_selected() {
@@ -112,15 +112,15 @@ function no_deployables() {
   set_nerf_scalar("nerf_no_deployables", 1);
 }
 
-function set_nerf_scalar(var0, var1) {
-  self.nerf_scalars[var0] = var1;
+function set_nerf_scalar(var_0, var_1) {
+  self.nerf_scalars[var_0] = var_1;
 }
 
-function get_nerf_scalar(var0) {
-  return self.nerf_scalars[var0];
+function get_nerf_scalar(var_0) {
+  return self.nerf_scalars[var_0];
 }
 
-function get_selected_nerf(var0) {}
+function get_selected_nerf(var_0) {}
 
 function prestige_getdamagetakenscalar() {
   return get_nerf_scalar("nerf_take_more_damage");

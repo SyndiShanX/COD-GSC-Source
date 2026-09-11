@@ -3,7 +3,7 @@
  * Script: scripts\asm\civilian\script_funcs.gsc
 *************************************************/
 
-function civilian_init(var0, var1, var2) {
+function civilian_init(var_0, var_1, var_2) {
   self.asm.frantic = 0;
   self.asm.customdata = spawnStruct();
   self.asm.footsteps = spawnStruct();
@@ -34,141 +34,141 @@ function initscriptable() {
   self setscriptablepartstate("notetrack_handler", "active", 0);
 }
 
-function initanimspeedthresholds_civilian(var0) {
-  var1 = scripts\asm\shared\utility::getbasearchetype();
+function initanimspeedthresholds_civilian(var_0) {
+  var_1 = scripts\asm\shared\utility::getbasearchetype();
 
-  if(!isDefined(var1)) {
-    var1 = var0;
+  if(!isDefined(var_1)) {
+    var_1 = var_0;
   }
 
-  if(hasanimspeedthresholdstring(var1)) {
+  if(hasanimspeedthresholdstring(var_1)) {
     return;
   }
 
-  if(var1 == "farah_civilian") {
-    animspeedthresholdsexist(var1, "walk", 56);
-    animspeedthresholdsexist(var1, "fast", 105);
-    animspeedthresholdsexist(var1, "jog", 170);
-    animspeedthresholdsexist(var1, "run", 220);
-    animspeedthresholdsexist(var1, "sprint", 250);
+  if(var_1 == "farah_civilian") {
+    animspeedthresholdsexist(var_1, "walk", 56);
+    animspeedthresholdsexist(var_1, "fast", 105);
+    animspeedthresholdsexist(var_1, "jog", 170);
+    animspeedthresholdsexist(var_1, "run", 220);
+    animspeedthresholdsexist(var_1, "sprint", 250);
     return;
   }
 
-  if(var1 == "hadir_yth") {
-    animspeedthresholdsexist(var1, "walk", 40);
-    animspeedthresholdsexist(var1, "fast", 102);
-    animspeedthresholdsexist(var1, "jog", 103);
-    animspeedthresholdsexist(var1, "run", 163);
+  if(var_1 == "hadir_yth") {
+    animspeedthresholdsexist(var_1, "walk", 40);
+    animspeedthresholdsexist(var_1, "fast", 102);
+    animspeedthresholdsexist(var_1, "jog", 103);
+    animspeedthresholdsexist(var_1, "run", 163);
     return;
   }
 
-  animspeedthresholdsexist(var1, "walk", 56);
-  animspeedthresholdsexist(var1, "fast", 120);
-  animspeedthresholdsexist(var1, "jog", 170);
-  animspeedthresholdsexist(var1, "run", 220);
+  animspeedthresholdsexist(var_1, "walk", 56);
+  animspeedthresholdsexist(var_1, "fast", 120);
+  animspeedthresholdsexist(var_1, "jog", 170);
+  animspeedthresholdsexist(var_1, "run", 220);
 }
 
-function chooseciviliantransitiontoidleanim(var0, var1, var2) {
+function chooseciviliantransitiontoidleanim(var_0, var_1, var_2) {
   if(isDefined(self.asm.transtoidlealias)) {
-    var3 = self.asm.transtoidlealias;
+    var_3 = self.asm.transtoidlealias;
 
-    if(var1 == "trans_out_stand_idle") {
+    if(var_1 == "trans_out_stand_idle") {
       self.asm.transtoidlealias = undefined;
     }
 
-    return scripts\asm\asm::asm_lookupanimfromalias(var1, var3);
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
   }
 
-  var3 = scripts\asm\asm::asm_getrandomalias(var2);
-  self.asm.transtoidlealias = var3;
-  return scripts\asm\asm::asm_lookupanimfromalias(var2, var3);
+  var_3 = scripts\asm\asm::asm_getrandomalias(var_2);
+  self.asm.transtoidlealias = var_3;
+  return scripts\asm\asm::asm_lookupanimfromalias(var_2, var_3);
 }
 
-function choosecivilianreactidleanim(var0, var1, var2) {
+function choosecivilianreactidleanim(var_0, var_1, var_2) {
   if(isDefined(self.asm.civilianreactionalias)) {
-    var3 = self.asm.civilianreactionalias;
+    var_3 = self.asm.civilianreactionalias;
 
-    if(var1 == "trans_out_combat_react") {
+    if(var_1 == "trans_out_combat_react") {
       self.asm.civilianreactionalias = undefined;
     }
 
-    return scripts\asm\asm::asm_lookupanimfromalias(var1, var3);
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
   }
 
-  var4 = self.asm.transtoidlealias;
+  var_4 = self.asm.transtoidlealias;
 
   if(scripts\engine\utility::cointoss()) {
-    var5 = var4 + "_a";
+    var_5 = var_4 + "_a";
   } else {
-    var5 += "_b";
+    var_5 += "_b";
   }
 
-  self.asm.civilianreactionalias = var5;
-  return scripts\asm\asm::asm_lookupanimfromalias(var3, var5);
+  self.asm.civilianreactionalias = var_5;
+  return scripts\asm\asm::asm_lookupanimfromalias(var_3, var_5);
 }
 
-function civilian_playexposedloop(var0, var1, var2) {
+function civilian_playexposedloop(var_0, var_1, var_2) {
   scripts\asm\shared\utility::set_aim_and_turn_limits();
-  var3 = self asmgetstatetransitioningfrom(var0);
+  var_3 = self asmgetstatetransitioningfrom(var_0);
 
   if(isDefined(self.node)) {
     self._blackboard.lastusednode = self.node;
   }
 
-  scripts\asm\asm::asm_loopanimstate(var0, var1, 1);
+  scripts\asm\asm::asm_loopanimstate(var_0, var_1, 1);
 }
 
-function civilian_playanim_exit(var0, var1, var2) {
+function civilian_playanim_exit(var_0, var_1, var_2) {
   self.isplayingexitanim = 1;
-  scripts\asm\soldier\move::playanim_exit(var0, var1, var2);
+  scripts\asm\soldier\move::playanim_exit(var_0, var_1, var_2);
 }
 
-function civilian_exit_cleanup(var0, var1, var2) {
+function civilian_exit_cleanup(var_0, var_1, var_2) {
   self.isplayingexitanim = undefined;
   self.asm.customdata.ignoreexitwarp = undefined;
-  civilian_move_cleanup(var0, var1, var2);
+  civilian_move_cleanup(var_0, var_1, var_2);
 }
 
-function civilian_chooseanim_exit(var0, var1, var2) {
-  var3 = self aigetdesiredspeed();
-  var4 = scripts\asm\shared\utility::getbasearchetype();
-  var5 = getanimspeedbetweenthresholds(var4, var3);
+function civilian_chooseanim_exit(var_0, var_1, var_2) {
+  var_3 = self aigetdesiredspeed();
+  var_4 = scripts\asm\shared\utility::getbasearchetype();
+  var_5 = getanimspeedbetweenthresholds(var_4, var_3);
 
   if(!scripts\asm\soldier\move::checktransitionpreconditions()) {
     return undefined;
   }
 
-  var6 = undefined;
-  var7 = 0;
+  var_6 = undefined;
+  var_7 = 0;
 
-  if(isDefined(var2)) {
-    var7 = var2;
+  if(isDefined(var_2)) {
+    var_7 = var_2;
   }
 
-  var6 = scripts\asm\soldier\move::determinestartanim(var1, var7, var5);
-  return var6;
+  var_6 = scripts\asm\soldier\move::determinestartanim(var_1, var_7, var_5);
+  return var_6;
 }
 
-function civilian_playmoveloop(var0, var1, var2) {
-  thread civilian_watchspeed(var1);
-  scripts\asm\shared\utility::playmoveloop(var0, var1, var2);
+function civilian_playmoveloop(var_0, var_1, var_2) {
+  thread civilian_watchspeed(var_1);
+  scripts\asm\shared\utility::playmoveloop(var_0, var_1, var_2);
 }
 
-function civilian_playmoveloopblendspace(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  thread civilian_watchspeed(var1);
-  thread scripts\asm\shared\utility::waitforcoverapproach(var0, var1);
-  thread scripts\asm\shared\utility::waitfordooropen(var0, var1, 0);
-  var3 = scripts\asm\asm::asm_lookupanimfromalias(var1, "blank");
-  self aisetanim(var1, var3);
+function civilian_playmoveloopblendspace(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  thread civilian_watchspeed(var_1);
+  thread scripts\asm\shared\utility::waitforcoverapproach(var_0, var_1);
+  thread scripts\asm\shared\utility::waitfordooropen(var_0, var_1, 0);
+  var_3 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "blank");
+  self aisetanim(var_1, var_3);
 
   for(;;) {
-    scripts\asm\asm::asm_donotetracks(var0, var1);
+    scripts\asm\asm::asm_donotetracks(var_0, var_1);
   }
 }
 
-function civilian_watchspeed(var0) {
-  self endon(var0 + "_finished");
+function civilian_watchspeed(var_0) {
+  self endon(var_0 + "_finished");
 
   if(isDefined(self.stayahead) && istrue(self.stayahead.active)) {
     return;
@@ -187,31 +187,31 @@ function civilian_watchspeed(var0) {
   }
 }
 
-function civilian_playsharpturnanim(var0, var1, var2) {
-  scripts\asm\soldier\move::playsharpturnanim(var0, var1, var2);
+function civilian_playsharpturnanim(var_0, var_1, var_2) {
+  scripts\asm\soldier\move::playsharpturnanim(var_0, var_1, var_2);
 }
 
-function civilian_move_cleanup(var0, var1, var2) {
+function civilian_move_cleanup(var_0, var_1, var_2) {
   self motionwarpcancel();
 }
 
-function iswhizbydetected(var0, var1, var2, var3) {
+function iswhizbydetected(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_iswhizbyrequested();
 }
 
-function civilianstateis(var0, var1, var2, var3) {
-  return scripts\asm\asm_bb::bb_getcivilianstate() == var3;
+function civilianstateis(var_0, var_1, var_2, var_3) {
+  return scripts\asm\asm_bb::bb_getcivilianstate() == var_3;
 }
 
-function civilianstateisnot(var0, var1, var2, var3) {
-  return scripts\asm\asm_bb::bb_getcivilianstate() != var3;
+function civilianstateisnot(var_0, var_1, var_2, var_3) {
+  return scripts\asm\asm_bb::bb_getcivilianstate() != var_3;
 }
 
-function shoulddirectlytransition(var0, var1, var2, var3) {
+function shoulddirectlytransition(var_0, var_1, var_2, var_3) {
   if(iswhizbydetected() || scripts\asm\asm_bb::bb_getcivilianstate() == "combat") {
-    var4 = self.asm.transtoidlealias;
+    var_4 = self.asm.transtoidlealias;
 
-    if(var4 == "civ02" || var4 == "civ04" || var4 == "civ06" || var4 == "civ07") {
+    if(var_4 == "civ02" || var_4 == "civ04" || var_4 == "civ06" || var_4 == "civ07") {
       return true;
     }
   }
@@ -219,11 +219,11 @@ function shoulddirectlytransition(var0, var1, var2, var3) {
   return false;
 }
 
-function shouldcustomtransition(var0, var1, var2, var3) {
+function shouldcustomtransition(var_0, var_1, var_2, var_3) {
   if(scripts\asm\asm_bb::bb_getcivilianstate() == "noncombat") {
-    var4 = self.asm.transtoidlealias;
+    var_4 = self.asm.transtoidlealias;
 
-    if(var4 == "civ02" || var4 == "civ04" || var4 == "civ06" || var4 == "civ07") {
+    if(var_4 == "civ02" || var_4 == "civ04" || var_4 == "civ06" || var_4 == "civ07") {
       return true;
     }
   }
@@ -231,33 +231,33 @@ function shouldcustomtransition(var0, var1, var2, var3) {
   return false;
 }
 
-function cleanupcivilianreactionalias(var0, var1, var2) {
+function cleanupcivilianreactionalias(var_0, var_1, var_2) {
   self.asm.civilianreactionalias = undefined;
 }
 
-function currentsnaptonodeis(var0, var1, var2, var3) {
-  var4 = var3;
+function currentsnaptonodeis(var_0, var_1, var_2, var_3) {
+  var_4 = var_3;
 
   if(!isDefined(self.node)) {
-    return (var4 == "Exposed Crouch");
+    return (var_4 == "Exposed Crouch");
   }
 
   if(distance2dsquared(self.origin, self.node.origin) > 225) {
     if(scripts\asm\asm_bb::bb_getrequestedstance() == "stand") {
-      return (var4 == "Exposed");
+      return (var_4 == "Exposed");
     } else {
-      return (var4 == "Exposed Crouch");
+      return (var_4 == "Exposed Crouch");
     }
   }
 
   if(isDefined(self._blackboard.runpassthroughtype)) {
-    return (self._blackboard.runpassthroughtype == var3);
+    return (self._blackboard.runpassthroughtype == var_3);
   }
 
-  return scripts\asm\shared\utility::isarrivaltype(var0, var1, var2, var3);
+  return scripts\asm\shared\utility::isarrivaltype(var_0, var_1, var_2, var_3);
 }
 
-function shouldsnaptocover(var0, var1, var2, var3) {
+function shouldsnaptocover(var_0, var_1, var_2, var_3) {
   if(scripts\asm\asm_bb::bb_moverequested()) {
     return 0;
   }
@@ -274,29 +274,29 @@ function shouldsnaptocover(var0, var1, var2, var3) {
     return 0;
   }
 
-  if(!isDefined(var3)) {
+  if(!isDefined(var_3)) {
     return 1;
   }
 
-  return scripts\asm\shared\utility::isarrivaltype(var0, var1, var2, var3);
+  return scripts\asm\shared\utility::isarrivaltype(var_0, var_1, var_2, var_3);
 }
 
-function checkarrivaltypecivilian(var0, var1, var2, var3) {
-  return scripts\asm\shared\utility::isarrivaltypecivilian(var0, var3);
+function checkarrivaltypecivilian(var_0, var_1, var_2, var_3) {
+  return scripts\asm\shared\utility::isarrivaltypecivilian(var_0, var_3);
 }
 
-function enableciviliantargetfocus(var0, var1) {
-  if(!isDefined(var0)) {
+function enableciviliantargetfocus(var_0, var_1) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  self._blackboard.civilianfocustargetentity = var0;
+  self._blackboard.civilianfocustargetentity = var_0;
   self._blackboard.civilianfocusstate = 1;
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     self._blackboard.civilianfocusdirection = "";
   } else {
-    self._blackboard.civilianfocusdirection = var1;
+    self._blackboard.civilianfocusdirection = var_1;
   }
 
   self notify("civilian_focus_thread_enabled");
@@ -320,37 +320,37 @@ function civilianfocusstartthread() {
 }
 
 function civilianfocuscomputeyawtotarget() {
-  var0 = self.origin - self._blackboard.civilianfocustargetentity.origin;
-  var0 = (var0[0], var0[1], 0);
-  var1 = vectortoangles(var0);
-  return angleclamp180(var1[1] - self.angles[1]);
+  var_0 = self.origin - self._blackboard.civilianfocustargetentity.origin;
+  var_0 = (var_0[0], var_0[1], 0);
+  var_1 = vectortoangles(var_0);
+  return angleclamp180(var_1[1] - self.angles[1]);
 }
 
-function civilianfocusupdatecurrentfocus(var0) {
-  var1 = 0.5;
-  var2 = 1 / var1;
-  var3 = gettime();
-  var4 = var3 - self._blackboard.civilianfocuslasttime;
-  self._blackboard.civilianfocuslasttime = var3;
-  var5 = self._blackboard.civilianfocuscurvalue;
-  var6 = var0 - var5;
+function civilianfocusupdatecurrentfocus(var_0) {
+  var_1 = 0.5;
+  var_2 = 1 / var_1;
+  var_3 = gettime();
+  var_4 = var_3 - self._blackboard.civilianfocuslasttime;
+  self._blackboard.civilianfocuslasttime = var_3;
+  var_5 = self._blackboard.civilianfocuscurvalue;
+  var_6 = var_0 - var_5;
 
-  if(abs(var6) > 0.01) {
-    var7 = scripts\engine\utility::sign(var0 - var5);
-    var8 = self._blackboard.civilianfocuscurvalue + var4 / 1000 * var2 * var7;
-    var8 = clamp(var8, -1, 1);
-    self._blackboard.civilianfocuscurvalue = var8;
+  if(abs(var_6) > 0.01) {
+    var_7 = scripts\engine\utility::sign(var_0 - var_5);
+    var_8 = self._blackboard.civilianfocuscurvalue + var_4 / 1000 * var_2 * var_7;
+    var_8 = clamp(var_8, -1, 1);
+    self._blackboard.civilianfocuscurvalue = var_8;
     return false;
   }
 
-  self._blackboard.civilianfocuscurvalue = var2;
+  self._blackboard.civilianfocuscurvalue = var_2;
   return true;
 }
 
 function civilianfocusapproachingarrival() {
-  var0 = self aigettargetspeed();
+  var_0 = self aigettargetspeed();
 
-  if(!self codemoverequested() || self pathdisttogoal() < var0 * 1.3) {
+  if(!self codemoverequested() || self pathdisttogoal() < var_0 * 1.3) {
     return true;
   } else if(istrue(self.isplayingexitanim)) {
     return true;
@@ -359,102 +359,102 @@ function civilianfocusapproachingarrival() {
   return false;
 }
 
-function civilianfocusupdateanimparameter(var0) {
-  self setcivilianfocus(var0);
+function civilianfocusupdateanimparameter(var_0) {
+  self setcivilianfocus(var_0);
 }
 
 function civilianfocusupdatethread() {
   self endon("death");
-  var0 = -1;
-  var1 = 1;
-  var2 = 170;
-  var3 = -170;
+  var_0 = -1;
+  var_1 = 1;
+  var_2 = 170;
+  var_3 = -170;
   self._blackboard.civilianfocuslasttime = 0;
 
   for(;;) {
-    var4 = self._blackboard.civilianfocusstate;
-    var5 = self._blackboard.civilianfocusdirection;
+    var_4 = self._blackboard.civilianfocusstate;
+    var_5 = self._blackboard.civilianfocusdirection;
 
-    if(var4 == 0) {
+    if(var_4 == 0) {
       self waittill("civilian_focus_thread_enabled");
       self._blackboard.civilianfocuslasttime = gettime();
-    } else if(var4 == 1) {
-      var6 = civilianfocuscomputeyawtotarget();
-      var7 = abs(var6);
+    } else if(var_4 == 1) {
+      var_6 = civilianfocuscomputeyawtotarget();
+      var_7 = abs(var_6);
 
-      if(civilianfocusapproachingarrival() || var7 > 90) {
+      if(civilianfocusapproachingarrival() || var_7 > 90) {
         self._blackboard.civilianfocusstate = 5;
-      } else if(var5 == "left") {
+      } else if(var_5 == "left") {
         self._blackboard.civilianfocusstate = 3;
-      } else if(var5 == "right") {
+      } else if(var_5 == "right") {
         self._blackboard.civilianfocusstate = 4;
-      } else if(var6 != 0) {
+      } else if(var_6 != 0) {
         self._blackboard.civilianfocusstate = 6;
       }
-    } else if(var4 == 2) {
+    } else if(var_4 == 2) {
       self._blackboard.civilianfocusstate = 7;
-    } else if(var4 == 5) {
+    } else if(var_4 == 5) {
       civilianfocusupdatecurrentfocus(0);
 
       if(!civilianfocusapproachingarrival() && isalive(self._blackboard.civilianfocustargetentity)) {
-        var6 = civilianfocuscomputeyawtotarget();
+        var_6 = civilianfocuscomputeyawtotarget();
 
-        if(abs(var6) < 90) {
-          if(var5 == "left") {
+        if(abs(var_6) < 90) {
+          if(var_5 == "left") {
             self._blackboard.civilianfocusstate = 3;
-          } else if(var5 == "right") {
+          } else if(var_5 == "right") {
             self._blackboard.civilianfocusstate = 4;
-          } else if(var6 != 0) {
+          } else if(var_6 != 0) {
             self._blackboard.civilianfocusstate = 6;
           }
         }
       }
 
       civilianfocusupdateanimparameter(self._blackboard.civilianfocuscurvalue);
-    } else if(var4 == 6) {
-      var6 = civilianfocuscomputeyawtotarget();
-      var8 = clamp(var6, -45, 45) / 45;
-      civilianfocusupdatecurrentfocus(var8);
+    } else if(var_4 == 6) {
+      var_6 = civilianfocuscomputeyawtotarget();
+      var_8 = clamp(var_6, -45, 45) / 45;
+      civilianfocusupdatecurrentfocus(var_8);
       civilianfocusupdateanimparameter(self._blackboard.civilianfocuscurvalue);
 
       if(civilianfocusapproachingarrival()) {
         self._blackboard.civilianfocusstate = 5;
       }
-    } else if(var4 == 3) {
-      civilianfocusupdatecurrentfocus(var0);
+    } else if(var_4 == 3) {
+      civilianfocusupdatecurrentfocus(var_0);
       civilianfocusupdateanimparameter(self._blackboard.civilianfocuscurvalue);
 
       if(civilianfocusapproachingarrival()) {
         self._blackboard.civilianfocusstate = 5;
       } else {
-        var6 = civilianfocuscomputeyawtotarget();
+        var_6 = civilianfocuscomputeyawtotarget();
 
-        if(abs(var6) < 90) {
+        if(abs(var_6) < 90) {
           self._blackboard.civilianfocusstate = 5;
-        } else if(var5 == "right" || var6 > var3 && var6 < -90) {
+        } else if(var_5 == "right" || var_6 > var_3 && var_6 < -90) {
           self._blackboard.civilianfocusstate = 4;
         }
       }
-    } else if(var4 == 4) {
-      civilianfocusupdatecurrentfocus(var1);
+    } else if(var_4 == 4) {
+      civilianfocusupdatecurrentfocus(var_1);
       civilianfocusupdateanimparameter(self._blackboard.civilianfocuscurvalue);
 
       if(civilianfocusapproachingarrival()) {
         self._blackboard.civilianfocusstate = 5;
       } else {
-        var6 = civilianfocuscomputeyawtotarget();
+        var_6 = civilianfocuscomputeyawtotarget();
 
-        if(abs(var6) < 90) {
+        if(abs(var_6) < 90) {
           self._blackboard.civilianfocusstate = 5;
-        } else if(var5 == "left" || var6 > 90 && var6 < var2) {
+        } else if(var_5 == "left" || var_6 > 90 && var_6 < var_2) {
           self._blackboard.civilianfocusstate = 3;
         }
       }
-    } else if(var4 == 7) {
-      var9 = civilianfocusupdatecurrentfocus(0);
+    } else if(var_4 == 7) {
+      var_9 = civilianfocusupdatecurrentfocus(0);
       civilianfocusupdateanimparameter(self._blackboard.civilianfocuscurvalue);
 
-      if(var9) {
+      if(var_9) {
         self._blackboard.civilianfocusstate = 0;
       }
     }
@@ -463,34 +463,34 @@ function civilianfocusupdatethread() {
   }
 }
 
-function civmoverequested(var0, var1, var2, var3) {
+function civmoverequested(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_moverequested() && !istrue(self._blackboard.partialgestureplaying);
 }
 
-function civarrival_finishearly(var0, var1, var2, var3) {
-  return scripts\asm\asm::asm_eventfired(var0, "finish_early") && scripts\asm\asm_bb::bb_moverequested();
+function civarrival_finishearly(var_0, var_1, var_2, var_3) {
+  return scripts\asm\asm::asm_eventfired(var_0, "finish_early") && scripts\asm\asm_bb::bb_moverequested();
 }
 
-function civilian_chooseanim_demeanor(var0, var1, var2) {
-  if(isDefined(var2)) {
-    return scripts\asm\asm::asm_lookupanimfromalias(var1, scripts\asm\asm_bb::bb_getcivilianstate() + var2);
+function civilian_chooseanim_demeanor(var_0, var_1, var_2) {
+  if(isDefined(var_2)) {
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, scripts\asm\asm_bb::bb_getcivilianstate() + var_2);
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, scripts\asm\asm_bb::bb_getcivilianstate());
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, scripts\asm\asm_bb::bb_getcivilianstate());
 }
 
-function civilian_chooseanim_playerpushed(var0, var1, var2) {
-  var3 = scripts\asm\asm::asm_getephemeraleventdata("player_pushed", "player_pushed");
-  var4 = vectorNormalize(var3);
-  var5 = vectortoangles(var4);
-  var6 = angleclamp180(var5[1] - self.angles[1]);
-  var7 = scripts\asm\soldier\move::yawdiffto2468(var6);
-  var8 = "pushed_" + var7;
-  var9 = scripts\asm\asm::asm_lookupanimfromalias(var1, var8);
-  return var9;
+function civilian_chooseanim_playerpushed(var_0, var_1, var_2) {
+  var_3 = scripts\asm\asm::asm_getephemeraleventdata("player_pushed", "player_pushed");
+  var_4 = vectorNormalize(var_3);
+  var_5 = vectortoangles(var_4);
+  var_6 = angleclamp180(var_5[1] - self.angles[1]);
+  var_7 = scripts\asm\soldier\move::yawdiffto2468(var_6);
+  var_8 = "pushed_" + var_7;
+  var_9 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_8);
+  return var_9;
 }
 
-function civilian_loopidleanim(var0, var1, var2) {
-  childthread scripts\asm\shared\utility::setuseanimgoalweight(var1, 0.2);
-  scripts\asm\asm::asm_loopanimstate(var0, var1, 1);
+function civilian_loopidleanim(var_0, var_1, var_2) {
+  childthread scripts\asm\shared\utility::setuseanimgoalweight(var_1, 0.2);
+  scripts\asm\asm::asm_loopanimstate(var_0, var_1, 1);
 }

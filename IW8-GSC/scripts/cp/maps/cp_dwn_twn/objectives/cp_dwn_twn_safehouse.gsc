@@ -24,15 +24,15 @@ function safehouse_obj_func() {
   level thread scripts\mp\vehicles\vehicle_damage_mp::ref_12e57();
 }
 
-function debugbeatobjective(var0) {}
+function debugbeatobjective(var_0) {}
 
-function debug_safehouse_start(var0) {
+function debug_safehouse_start(var_0) {
   scripts\engine\utility::flag_wait("cp_donetsk_safehouse_downtown_cs_completed");
   scripts\cp\utility::teleportallplayersinteamtostructs("allies", "safehouse_1_playerstart");
   thread start_safehouse_objective();
 }
 
-function debug_safehouse_return_start(var0) {
+function debug_safehouse_return_start(var_0) {
   scripts\engine\utility::flag_wait("cp_donetsk_safehouse_downtown_cs_completed");
   scripts\engine\utility::flag_set("cp_dwn_twn_create_script");
   scripts\engine\utility::flag_wait("cp_dwn_twn_create_script_completed");
@@ -45,7 +45,7 @@ function debug_safehouse_return_start(var0) {
   wait 3;
 }
 
-function isprophunt(var0) {
+function isprophunt(var_0) {
   scripts\engine\utility::flag_wait("cp_donetsk_safehouse_downtown_cs_completed");
   scripts\engine\utility::flag_set("cp_dwn_twn_create_script");
   scripts\engine\utility::flag_wait("cp_dwn_twn_create_script_completed");
@@ -60,7 +60,7 @@ function start_safehouse_objective() {
   scripts\cp\cp_objectives::run_objective("safehouse", "primary");
 }
 
-function start_safehouse(var0) {
+function start_safehouse(var_0) {
   scripts\engine\utility::flag_wait("cp_donetsk_safehouse_downtown_cs_completed");
   level thread scripts\cp\intel\cp_intel::init_intel_pieces("launderer");
   scripts\mp\vehicles\vehicle_damage_mp::ref_13bc2(1);
@@ -76,10 +76,10 @@ function start_safehouse(var0) {
   }
 
   wait 3;
-  thread init_mission_select(var0);
+  thread init_mission_select(var_0);
 }
 
-function tango_infil_radio_idle(var0) {
+function tango_infil_radio_idle(var_0) {
   setDvar("scr_cp_map_part2", 1);
   scripts\engine\utility::flag_wait("cp_donetsk_safehouse_downtown_cs_completed");
   scripts\engine\utility::flag_set("ml_p3_done");
@@ -88,7 +88,7 @@ function tango_infil_radio_idle(var0) {
   level thread scripts\cp\intel\cp_intel::init_intel_pieces("launderer2");
 }
 
-function ref_137f6(var0) {
+function ref_137f6(var_0) {
   thread scripts\cp\cp_objectives::run_objective("vault_assault_retrieve_saw", "primary");
   scripts\mp\vehicles\vehicle_damage_mp::ref_13bc2(1);
   thread scripts\mp\brclientmatchdata::getnextrpgspawnmodule("strongbox", "toggle_safehouse_settings", 25);
@@ -102,7 +102,7 @@ function ref_137f6(var0) {
   open_safehouse_door();
 }
 
-function init_mission_select(var0) {
+function init_mission_select(var_0) {
   thread scripts\cp\cp_objectives::run_objective("ml_p1_intel", "primary");
   level waittill("allow_safehouse_door");
   open_safehouse_door();
@@ -128,21 +128,21 @@ function ref_12e5d() {
 
 function open_safehouse_door() {
   if(!scripts\engine\utility::flag("ml_p3_done")) {
-    var0 = scripts\engine\utility::getStruct("dwn_twn_safehouse_gate", "targetname");
-    var1 = spawn("script_model", var0.origin);
-    var1 scripts\cp\utility::sethintobject(undefined, "HINT_BUTTON", undefined, &"CP_STRIKE/DOOR_OPEN", 25, "duration_short", "show", 512, 65, 64, 65);
+    var_0 = scripts\engine\utility::getStruct("dwn_twn_safehouse_gate", "targetname");
+    var_1 = spawn("script_model", var_0.origin);
+    var_1 scripts\cp\utility::sethintobject(undefined, "HINT_BUTTON", undefined, &"CP_STRIKE/DOOR_OPEN", 25, "duration_short", "show", 512, 65, 64, 65);
 
     for(;;) {
-      var1 waittill("trigger", var2);
+      var_1 waittill("trigger", var_2);
 
-      if(!var2 scripts\cp\utility::is_valid_player()) {
+      if(!var_2 scripts\cp\utility::is_valid_player()) {
         continue;
       }
 
       break;
     }
 
-    var1 delete();
+    var_1 delete();
     scripts\mp\vehicles\vehicle_damage_mp::ref_13bc2(0);
     ref_12118();
     level notify("safehouse_door_open");
@@ -157,47 +157,47 @@ function open_safehouse_door() {
 }
 
 function ref_12118() {
-  var0 = getEnt("dwn_twn_safehouse_door", "targetname");
+  var_0 = getEnt("dwn_twn_safehouse_door", "targetname");
 
-  if(!isDefined(var0.og_angles)) {
-    var0.og_angles = var0.angles;
+  if(!isDefined(var_0.og_angles)) {
+    var_0.og_angles = var_0.angles;
   }
 
-  var0 playSound("scrpt_door_wood_single_open");
-  var1 = getEnt("dwn_twn_safehouse_clip", "targetname");
-  var0 rotateTo((0, -57, 0), 0.5);
-  var1 connectpaths();
-  var1 notsolid();
+  var_0 playSound("scrpt_door_wood_single_open");
+  var_1 = getEnt("dwn_twn_safehouse_clip", "targetname");
+  var_0 rotateTo((0, -57, 0), 0.5);
+  var_1 connectpaths();
+  var_1 notsolid();
 }
 
-function ref_1234e(var0) {
-  var1 = getEnt("gun_shop_saw", "targetname");
-  var2 = getEnt("gun_shop_saw_2", "targetname");
-  var3 = getEnt("gun_shop_saw_3", "targetname");
-  var4 = getEnt("gun_shop_saw_4", "targetname");
-  level.ref_12ebd = var1.origin;
-  level.ref_12eb9 = var1.angles;
-  level.ref_12eb4 = var2.origin;
-  level.ref_12eb3 = var2.angles;
-  level.ref_12eb6 = var3.origin;
-  level.ref_12eb5 = var3.angles;
-  level.ref_12eb8 = var4.origin;
-  level.ref_12eb7 = var4.angles;
+function ref_1234e(var_0) {
+  var_1 = getEnt("gun_shop_saw", "targetname");
+  var_2 = getEnt("gun_shop_saw_2", "targetname");
+  var_3 = getEnt("gun_shop_saw_3", "targetname");
+  var_4 = getEnt("gun_shop_saw_4", "targetname");
+  level.ref_12ebd = var_1.origin;
+  level.ref_12eb9 = var_1.angles;
+  level.ref_12eb4 = var_2.origin;
+  level.ref_12eb3 = var_2.angles;
+  level.ref_12eb6 = var_3.origin;
+  level.ref_12eb5 = var_3.angles;
+  level.ref_12eb8 = var_4.origin;
+  level.ref_12eb7 = var_4.angles;
   level.ref_12eba = [];
-  thread init_key(level, var1, 1, undefined);
-  thread init_key(level, var2, 1, undefined);
-  thread init_key(level, var3, 1, undefined);
-  thread init_key(level, var4, 1, undefined);
-  objective_setlabel(var0.objectiveindex, &"CP_DWN_TWN_OBJECTIVES/SAW");
-  objective_position(var0.objectiveindex, var1.origin + (0, 0, 70));
+  thread init_key(level, var_1, 1, undefined);
+  thread init_key(level, var_2, 1, undefined);
+  thread init_key(level, var_3, 1, undefined);
+  thread init_key(level, var_4, 1, undefined);
+  objective_setlabel(var_0.objectiveindex, &"CP_DWN_TWN_OBJECTIVES/SAW");
+  objective_position(var_0.objectiveindex, var_1.origin + (0, 0, 70));
 }
 
-function ref_120bd(var0) {
-  var1 = getEntArray(var0, "targetname");
+function ref_120bd(var_0) {
+  var_1 = getEntArray(var_0, "targetname");
 
-  foreach(var3 in var1) {
-    var3 connectpaths();
-    var3 notsolid();
+  foreach(var_3 in var_1) {
+    var_3 connectpaths();
+    var_3 notsolid();
   }
 }
 
@@ -209,31 +209,31 @@ function heli_counter() {
   wait 3;
 }
 
-function heli_convert(var0) {
-  var1 = getEntArray(var0, "targetname");
+function heli_convert(var_0) {
+  var_1 = getEntArray(var_0, "targetname");
 
-  foreach(var3 in var1) {
-    var3 disconnectPaths();
-    var3 solid();
+  foreach(var_3 in var_1) {
+    var_3 disconnectPaths();
+    var_3 solid();
   }
 }
 
-function mission_select_think(var0) {
+function mission_select_think(var_0) {
   level waittill("saw_pickedup");
-  level notify("mission_selected", var0);
+  level notify("mission_selected", var_0);
 }
 
-function show_document(var0) {
-  var1 = scripts\engine\utility::getStruct(self.target, "targetname");
-  self moveTo(var1.origin, 0.25);
+function show_document(var_0) {
+  var_1 = scripts\engine\utility::getStruct(self.target, "targetname");
+  self moveTo(var_1.origin, 0.25);
   wait 0.3;
 
-  if(isDefined(var0)) {
-    wait var0;
+  if(isDefined(var_0)) {
+    wait var_0;
   }
 
-  self moveTo(scripts\engine\utility::getStruct(var1.target, "targetname").origin, 0.25);
-  self rotateTo(scripts\engine\utility::getStruct(var1.target, "targetname").angles, 0.25);
+  self moveTo(scripts\engine\utility::getStruct(var_1.target, "targetname").origin, 0.25);
+  self rotateTo(scripts\engine\utility::getStruct(var_1.target, "targetname").angles, 0.25);
 }
 
 function return_to_safehouse_vo() {
@@ -242,36 +242,36 @@ function return_to_safehouse_vo() {
   scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_ovl_safehouse_return_safehouse_10");
 }
 
-function init_key(var0, var1, var2, var3) {
+function init_key(var_0, var_1, var_2, var_3) {
   if(scripts\engine\utility::flag("saws_have_been_used")) {
     return;
   }
 
-  if(!isDefined(var0)) {
-    var4 = getEnt("gun_shop_saw", "targetname");
+  if(!isDefined(var_0)) {
+    var_4 = getEnt("gun_shop_saw", "targetname");
   } else {
-    var4 = var1;
+    var_4 = var_1;
   }
 
-  var4.pbexploitstarttime = var4;
-  var4 scripts\cp\utility::sethintobject(undefined, "HINT_BUTTON", undefined, &"CP_DWN_TWN_OBJECTIVES/PICKUP_SAW", 25, "duration_short", "show", 4000, 65, 64, 65);
-  ref_12ebb(var4);
-  thread ref_12ebe(var4);
+  var_4.pbexploitstarttime = var_4;
+  var_4 scripts\cp\utility::sethintobject(undefined, "HINT_BUTTON", undefined, &"CP_DWN_TWN_OBJECTIVES/PICKUP_SAW", 25, "duration_short", "show", 4000, 65, 64, 65);
+  ref_12ebb(var_4);
+  thread ref_12ebe(var_4);
   thread ref_12ec0();
 }
 
-function ref_12ebb(var0) {
+function ref_12ebb(var_0) {
   if(!isDefined(level.ref_12ebc)) {
     level.ref_12ebc = [];
   }
 
-  var0.head_icon = deleteheadicon(var0);
-  setheadiconfriendlyimage(var0.head_icon, "cp_tac_waypoint_buzzsaw");
-  setheadiconsnaptoedges(var0.head_icon, 0);
-  setheadicondrawthroughgeo(var0.head_icon, 1);
-  addclienttoheadiconmask(var0.head_icon, 10);
-  objective_sethideelevation(var0.head_icon, 1);
-  level.ref_12ebc[level.ref_12ebc.size] = var0.head_icon;
+  var_0.head_icon = deleteheadicon(var_0);
+  setheadiconfriendlyimage(var_0.head_icon, "cp_tac_waypoint_buzzsaw");
+  setheadiconsnaptoedges(var_0.head_icon, 0);
+  setheadicondrawthroughgeo(var_0.head_icon, 1);
+  addclienttoheadiconmask(var_0.head_icon, 10);
+  objective_sethideelevation(var_0.head_icon, 1);
+  level.ref_12ebc[level.ref_12ebc.size] = var_0.head_icon;
 }
 
 function ref_12ebf() {
@@ -298,116 +298,116 @@ function ref_12ec0() {
   self makeunusable();
 }
 
-function ref_12ebe(var0) {
+function ref_12ebe(var_0) {
   level endon("saws_have_been_used");
 
   for(;;) {
-    self waittill("trigger", var1);
+    self waittill("trigger", var_1);
 
-    if(!var1 scripts\cp\utility::is_valid_player()) {
+    if(!var_1 scripts\cp\utility::is_valid_player()) {
       continue;
     }
 
-    if(istrue(var1.shoot_vehicle)) {
-      var1 scripts\cp\utility::setlowermessage("havesaw", &"CP_DWN_TWN_OBJECTIVES/ALREADY_HAVE_SAW", 5);
+    if(istrue(var_1.shoot_vehicle)) {
+      var_1 scripts\cp\utility::setlowermessage("havesaw", &"CP_DWN_TWN_OBJECTIVES/ALREADY_HAVE_SAW", 5);
       continue;
     }
 
-    var1 playlocalsound("cp_generic_pickup");
-    script_struct_add(var1, self);
+    var_1 playlocalsound("cp_generic_pickup");
+    script_struct_add(var_1, self);
     level notify("saw_pickedup");
     ref_12ebf();
 
-    if(istrue(var0)) {
+    if(istrue(var_0)) {
       self hide();
       return;
     }
   }
 }
 
-function script_struct_add(var0, var1) {
-  var2 = var0 gettagorigin("tag_shield_back");
-  var3 = var0 gettagangles("tag_shield_back");
-  var4 = spawn("script_model", var2);
-  var4.angles = var3;
-  var4 setModel("tool_portable_gas_cutter_01_cp");
-  var4 linkTo(var0, "tag_shield_back", (5, 10, 0), (0, 0, 90));
-  var4.pbexploitstarttime = var1.pbexploitstarttime;
-  var0.shoot_vehicle = 1;
-  var0.x1circletime = var4;
+function script_struct_add(var_0, var_1) {
+  var_2 = var_0 gettagorigin("tag_shield_back");
+  var_3 = var_0 gettagangles("tag_shield_back");
+  var_4 = spawn("script_model", var_2);
+  var_4.angles = var_3;
+  var_4 setModel("tool_portable_gas_cutter_01_cp");
+  var_4 linkTo(var_0, "tag_shield_back", (5, 10, 0), (0, 0, 90));
+  var_4.pbexploitstarttime = var_1.pbexploitstarttime;
+  var_0.shoot_vehicle = 1;
+  var_0.x1circletime = var_4;
 
-  if(isDefined(var1)) {
-    var1 makeunusable();
+  if(isDefined(var_1)) {
+    var_1 makeunusable();
   }
 
   thread minigun_model();
 }
 
 function minigun_model() {
-  var0 = scripts\engine\utility::ref_143af("death", "disconnect", "drop_saw", "last_stand");
+  var_0 = scripts\engine\utility::ref_143af("death", "disconnect", "drop_saw", "last_stand");
 
   if(!isDefined(self.x1circletime)) {
     return;
   }
 
-  var1 = self.x1circletime;
+  var_1 = self.x1circletime;
   self.shoot_vehicle = undefined;
   self.x1circletime = undefined;
-  var1 unlink();
+  var_1 unlink();
 
   if(!scripts\engine\utility::flag("saws_have_been_used")) {
-    var1 makeusable();
+    var_1 makeusable();
   }
 
   if(isDefined(self.oobendtime) || ref_1213d()) {
-    switch (var1.pbexploitstarttime) {
+    switch (var_1.pbexploitstarttime) {
       case 3:
-        var1.origin = level.ref_12eb8;
-        var1.angles = level.ref_12eb7;
+        var_1.origin = level.ref_12eb8;
+        var_1.angles = level.ref_12eb7;
         break;
       case 2:
-        var1.origin = level.ref_12eb6;
-        var1.angles = level.ref_12eb5;
+        var_1.origin = level.ref_12eb6;
+        var_1.angles = level.ref_12eb5;
         break;
       case 1:
-        var1.origin = level.ref_12eb4;
-        var1.angles = level.ref_12eb3;
+        var_1.origin = level.ref_12eb4;
+        var_1.angles = level.ref_12eb3;
         break;
       case 0:
-        var1.origin = level.ref_12ebd;
-        var1.angles = level.ref_12eb9;
+        var_1.origin = level.ref_12ebd;
+        var_1.angles = level.ref_12eb9;
         break;
       default:
         break;
     }
   } else {
-    var1 physicslaunchserver(var1.origin + (0, 0, 10), (0, 0, -10));
+    var_1 physicslaunchserver(var_1.origin + (0, 0, 10), (0, 0, -10));
   }
 
-  init_key(var1, 1, 1, var1.pbexploitstarttime);
+  init_key(var_1, 1, 1, var_1.pbexploitstarttime);
 }
 
 function ref_1213d() {
-  var0 = scripts\engine\utility::getStructArray("saw_bad_place", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("saw_bad_place", "targetname");
 
-  foreach(var2 in var0) {
-    if(isDefined(var2.radius)) {
-      var3 = var2.radius;
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2.radius)) {
+      var_3 = var_2.radius;
     } else {
-      var3 = 100;
+      var_3 = 100;
     }
 
-    var4 = var3 * var3;
+    var_4 = var_3 * var_3;
 
-    if(isDefined(var2.height)) {
-      var5 = var2.height;
+    if(isDefined(var_2.height)) {
+      var_5 = var_2.height;
     } else {
-      var5 = 100;
+      var_5 = 100;
     }
 
-    if(distance2dsquared(self.origin, var2.origin) < var4) {
-      if(self.origin[2] <= var2.origin[2] + var5) {
-        if(self.origin[2] >= var2.origin[2]) {
+    if(distance2dsquared(self.origin, var_2.origin) < var_4) {
+      if(self.origin[2] <= var_2.origin[2] + var_5) {
+        if(self.origin[2] >= var_2.origin[2]) {
           return true;
         }
       }

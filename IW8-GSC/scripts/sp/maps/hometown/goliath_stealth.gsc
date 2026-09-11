@@ -4,26 +4,26 @@
 ********************************************************/
 
 function goliath_has_lost_enemy() {
-  var0 = 10000;
-  var1 = 576;
-  var2 = 8000;
-  var3 = gettime();
-  var4 = self.enemy;
+  var_0 = 10000;
+  var_1 = 576;
+  var_2 = 8000;
+  var_3 = gettime();
+  var_4 = self.enemy;
 
-  if(isDefined(var4) && issentient(var4) && isalive(var4)) {
-    if(var4.team != "allies") {
+  if(isDefined(var_4) && issentient(var_4) && isalive(var_4)) {
+    if(var_4.team != "allies") {
       return false;
     }
 
-    var5 = self lastknowntime(var4);
+    var_5 = self lastknowntime(var_4);
 
-    if(var3 < var5 + var0) {
+    if(var_3 < var_5 + var_0) {
       return false;
     }
 
-    var6 = self lastknownpos(var4);
+    var_6 = self lastknownpos(var_4);
 
-    if(var5 > 0 && distancesquared(var4.origin, var6) < var1 && self cansee(var4) && self canshootenemy()) {
+    if(var_5 > 0 && distancesquared(var_4.origin, var_6) < var_1 && self cansee(var_4) && self canshootenemy()) {
       return false;
     }
 

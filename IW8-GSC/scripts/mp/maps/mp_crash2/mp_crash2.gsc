@@ -18,9 +18,9 @@ function main() {
   setDvar("OLSKLTPPMR", 0.5);
   setDvar("NKLMONNPNN", 512);
   setDvar("PKKMTTRQO", 3.5);
-  var0 = scripts\mp\utility\game::getgametype();
+  var_0 = scripts\mp\utility\game::getgametype();
 
-  if(var0 == "sd") {
+  if(var_0 == "sd") {
     game["defenders"] = "allies";
     game["attackers"] = "axis";
   } else {
@@ -49,22 +49,22 @@ function spawnstaticvan() {
   }
 
   if(!scripts\mp\flags::gameflag("infil_will_run")) {
-    foreach(var1 in [[scripts\cp_mp\utility\script_utility::getsharedfunc("infil", "get_all_infils")]]()) {
-      if(var1.script_noteworthy != "infil_van_hackney") {
+    foreach(var_1 in [[scripts\cp_mp\utility\script_utility::getsharedfunc("infil", "get_all_infils")]]()) {
+      if(var_1.script_noteworthy != "infil_van_hackney") {
         continue;
       }
 
-      if(var1.name != "alpha") {
+      if(var_1.name != "alpha") {
         continue;
       }
 
       game["infil"]["types"]["infil_van_hackney"]["alpha"]["vehicleOrg"] = (1250, -2338, 65);
       game["infil"]["types"]["infil_van_hackney"]["alpha"]["vehicleAng"] = (0, 270, 0);
       [[scripts\cp_mp\utility\script_utility::getsharedfunc("infil", "spawnPersistentVan")]]("infil_van_hackney", "alpha");
-      var2 = getentarrayinradius("script_brushmodel", "classname", (1250, -2150, 75), 300);
+      var_2 = getentarrayinradius("script_brushmodel", "classname", (1250, -2150, 75), 300);
 
-      if(isDefined(var2)) {
-        var2[0].origin += anglesToForward((0, 90, 0)) * -50;
+      if(isDefined(var_2)) {
+        var_2[0].origin += anglesToForward((0, 90, 0)) * -50;
       }
 
       break;
@@ -75,15 +75,15 @@ function spawnstaticvan() {
 }
 
 function ref_13664() {
-  var0 = spawn("trigger_radius", (-340, 655, 240), 0, 192, 100);
-  thread ref_144ff(var0);
+  var_0 = spawn("trigger_radius", (-340, 655, 240), 0, 192, 100);
+  thread ref_144ff(var_0);
 }
 
-function ref_144ff(var0) {
+function ref_144ff(var_0) {
   for(;;) {
-    self waittill("trigger", var1);
+    self waittill("trigger", var_1);
 
-    if(!isPlayer(var1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
 
@@ -91,63 +91,63 @@ function ref_144ff(var0) {
       self.ref_126ce = [];
     }
 
-    if(scripts\engine\utility::array_contains(self.ref_126ce, var1.guid)) {
+    if(scripts\engine\utility::array_contains(self.ref_126ce, var_1.guid)) {
       continue;
     }
 
-    self.ref_126ce = scripts\engine\utility::array_add(self.ref_126ce, var1.guid);
+    self.ref_126ce = scripts\engine\utility::array_add(self.ref_126ce, var_1.guid);
 
-    switch (var0) {
+    switch (var_0) {
       case "alley":
-        thread ref_14486(var1);
+        thread ref_14486(var_1);
         break;
     }
   }
 }
 
-function ref_14486(var0) {
+function ref_14486(var_0) {
   self endon("death_or_disconnect");
-  var1 = self.team;
-  var2 = self.guid;
-  var3 = [];
-  var4 = spawnStruct();
-  var4.origin = (-370, -320, 100);
-  var4.radius = 330;
-  var3 = var4;
-  var4 = spawnStruct();
-  var4.origin = (-370, -700, 100);
-  var4.radius = 330;
-  var3 = var4;
-  var4 = spawnStruct();
-  var4.origin = (-370, -1000, 100);
-  var4.radius = 330;
-  var3 = var4;
-  var4 = spawnStruct();
-  var4.origin = (-400, -1700, 60);
-  var4.radius = 550;
-  var3 = var4;
-  var5 = [];
+  var_1 = self.team;
+  var_2 = self.guid;
+  var_3 = [];
+  var_4 = spawnStruct();
+  var_4.origin = (-370, -320, 100);
+  var_4.radius = 330;
+  var_3 = var_4;
+  var_4 = spawnStruct();
+  var_4.origin = (-370, -700, 100);
+  var_4.radius = 330;
+  var_3 = var_4;
+  var_4 = spawnStruct();
+  var_4.origin = (-370, -1000, 100);
+  var_4.radius = 330;
+  var_3 = var_4;
+  var_4 = spawnStruct();
+  var_4.origin = (-400, -1700, 60);
+  var_4.radius = 550;
+  var_3 = var_4;
+  var_5 = [];
 
-  foreach(var7 in var3) {
-    var5 = scripts\mp\spawnlogic::addspawndangerzone(var7.origin, var7.radius, 200, var1, undefined, self, 0, self, 1);
+  foreach(var_7 in var_3) {
+    var_5 = scripts\mp\spawnlogic::addspawndangerzone(var_7.origin, var_7.radius, 200, var_1, undefined, self, 0, self, 1);
   }
 
-  while(isDefined(self) && self istouching(var0)) {
+  while(isDefined(self) && self istouching(var_0)) {
     waitframe();
   }
 
-  foreach(var10 in var5) {
-    scripts\mp\spawnlogic::removespawndangerzone(var10);
+  foreach(var_10 in var_5) {
+    scripts\mp\spawnlogic::removespawndangerzone(var_10);
   }
 
-  var0.ref_126ce = scripts\engine\utility::array_remove(var0.ref_126ce, var2);
+  var_0.ref_126ce = scripts\engine\utility::array_remove(var_0.ref_126ce, var_2);
 }
 
 function player_fired_gun_monitor() {
-  var0 = getEnt("clip256x256x256", "targetname");
-  var1 = spawn("script_model", (-912, 2072, 520));
-  var1.angles = (0, 0, 0);
-  var1 clonebrushmodeltoscriptmodel(var0);
+  var_0 = getEnt("clip256x256x256", "targetname");
+  var_1 = spawn("script_model", (-912, 2072, 520));
+  var_1.angles = (0, 0, 0);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
 }
 
 function ref_121f5() {
@@ -155,16 +155,16 @@ function ref_121f5() {
     level.outofboundstriggers = [];
   }
 
-  var0 = [(-912, 2072, 530)];
+  var_0 = [(-912, 2072, 530)];
 
-  foreach(var2 in var0) {
-    var3 = spawn("trigger_radius", var2, 0, 400, 128);
-    level.outofboundstriggers[level.outofboundstriggers.size] = var3;
+  foreach(var_2 in var_0) {
+    var_3 = spawn("trigger_radius", var_2, 0, 400, 128);
+    level.outofboundstriggers[level.outofboundstriggers.size] = var_3;
   }
 }
 
 function battle_tracks_vehicleoccupancyenter() {
-  var0 = [];
+  var_0 = [];
 
   switch (scripts\mp\utility\game::getgametype()) {
     case "tjugg":
@@ -181,7 +181,7 @@ function battle_tracks_vehicleoccupancyenter() {
       level.modifiedspawnpoints["1264 -1896"]["mp_tdm_spawn_allies_start"]["remove"] = 1;
       level.modifiedspawnpoints["1224 -1960"]["mp_tdm_spawn_allies_start"]["remove"] = 1;
       level.modifiedspawnpoints["1264 -1960"]["mp_tdm_spawn_allies_start"]["remove"] = 1;
-      GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_tdm_spawn_allies_start", (1109, -1911, 80), (0, 22, 0)));
+      GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_tdm_spawn_allies_start", (1109, -1911, 80), (0, 22, 0)));
 
     case "siege":
     case "dom":
@@ -190,7 +190,7 @@ function battle_tracks_vehicleoccupancyenter() {
       level.modifiedspawnpoints["1264 -1888"]["mp_dom_spawn_allies_start"]["remove"] = 1;
       level.modifiedspawnpoints["1222 -1952"]["mp_dom_spawn_allies_start"]["remove"] = 1;
       level.modifiedspawnpoints["1262 -1952"]["mp_dom_spawn_allies_start"]["remove"] = 1;
-      GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_dom_spawn_allies_start", (1109, -1911, 80), (0, 22, 0)));
+      GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_dom_spawn_allies_start", (1109, -1911, 80), (0, 22, 0)));
 
     case "hq":
     case "koth":
@@ -199,7 +199,7 @@ function battle_tracks_vehicleoccupancyenter() {
       level.modifiedspawnpoints["1264 -1888"]["mp_koth_spawn_allies_start"]["remove"] = 1;
       level.modifiedspawnpoints["1224 -1952"]["mp_koth_spawn_allies_start"]["remove"] = 1;
       level.modifiedspawnpoints["1264 -1952"]["mp_koth_spawn_allies_start"]["remove"] = 1;
-      GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_koth_spawn_allies_start", (1109, -1911, 80), (0, 22, 0)));
+      GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_koth_spawn_allies_start", (1109, -1911, 80), (0, 22, 0)));
 
     case "ctf":
       level.modifiedspawnpoints["1232 -1808"]["mp_ctf_spawn_allies_start"]["remove"] = 1;
@@ -207,7 +207,7 @@ function battle_tracks_vehicleoccupancyenter() {
       level.modifiedspawnpoints["1264 -1896"]["mp_ctf_spawn_allies_start"]["remove"] = 1;
       level.modifiedspawnpoints["1224 -1960"]["mp_ctf_spawn_allies_start"]["remove"] = 1;
       level.modifiedspawnpoints["1264 -1960"]["mp_ctf_spawn_allies_start"]["remove"] = 1;
-      GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_ctf_spawn_allies_start", (1109, -1911, 80), (0, 22, 0)));
+      GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_ctf_spawn_allies_start", (1109, -1911, 80), (0, 22, 0)));
 
     case "rugby":
       level.modifiedspawnpoints["1232 -1800"]["mp_rugby_spawn_allies_start"]["remove"] = 1;
@@ -215,18 +215,18 @@ function battle_tracks_vehicleoccupancyenter() {
       level.modifiedspawnpoints["1264 -1888"]["mp_rugby_spawn_allies_start"]["remove"] = 1;
       level.modifiedspawnpoints["1224 -1952"]["mp_rugby_spawn_allies_start"]["remove"] = 1;
       level.modifiedspawnpoints["1264 -1952"]["mp_rugby_spawn_allies_start"]["remove"] = 1;
-      GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_rugby_spawn_allies_start", (1109, -1911, 80), (0, 22, 0)));
+      GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_rugby_spawn_allies_start", (1109, -1911, 80), (0, 22, 0)));
 
     case "cyber":
       level.modifiedspawnpoints["1224 -1896"]["mp_cyber_spawn_allies"]["remove"] = 1;
       level.modifiedspawnpoints["1264 -1896"]["mp_cyber_spawn_allies"]["remove"] = 1;
       level.modifiedspawnpoints["1224 -1960"]["mp_cyber_spawn_allies"]["remove"] = 1;
       level.modifiedspawnpoints["1264 -1960"]["mp_cyber_spawn_allies"]["remove"] = 1;
-      GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_cyber_spawn_allies", (1109, -1911, 80), (0, 22, 0)));
+      GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_cyber_spawn_allies", (1109, -1911, 80), (0, 22, 0)));
   }
 
-  if(var0.size > 0) {
-    scripts\mp\spawnlogic::bdiedonce(var0);
+  if(var_0.size > 0) {
+    scripts\mp\spawnlogic::bdiedonce(var_0);
     return;
   }
 }

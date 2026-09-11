@@ -10,30 +10,30 @@ function initgameflags() {
   }
 }
 
-function gameflaginit(var0, var1) {
-  game["flags"][var0] = var1;
+function gameflaginit(var_0, var_1) {
+  game["flags"][var_0] = var_1;
 }
 
-function playerzombiethermalcleanup(var0) {
-  return isDefined(game["flags"][var0]);
+function playerzombiethermalcleanup(var_0) {
+  return isDefined(game["flags"][var_0]);
 }
 
-function gameflag(var0) {
-  return game["flags"][var0];
+function gameflag(var_0) {
+  return game["flags"][var_0];
 }
 
-function gameflagset(var0) {
-  game["flags"][var0] = 1;
-  level notify(var0);
+function gameflagset(var_0) {
+  game["flags"][var_0] = 1;
+  level notify(var_0);
 }
 
-function gameflagclear(var0) {
-  game["flags"][var0] = 0;
+function gameflagclear(var_0) {
+  game["flags"][var_0] = 0;
 }
 
-function gameflagwait(var0) {
-  while(!gameflag(var0)) {
-    level waittill(var0);
+function gameflagwait(var_0) {
+  while(!gameflag(var_0)) {
+    level waittill(var_0);
   }
 }
 
@@ -44,32 +44,32 @@ function initlevelflags() {
   }
 }
 
-function levelflaginit(var0, var1) {
-  level.levelflags[var0] = var1;
+function levelflaginit(var_0, var_1) {
+  level.levelflags[var_0] = var_1;
 }
 
-function levelflag(var0) {
-  return level.levelflags[var0];
+function levelflag(var_0) {
+  return level.levelflags[var_0];
 }
 
-function levelflagset(var0) {
-  level.levelflags[var0] = 1;
-  level notify(var0);
+function levelflagset(var_0) {
+  level.levelflags[var_0] = 1;
+  level notify(var_0);
 }
 
-function levelflagclear(var0) {
-  level.levelflags[var0] = 0;
-  level notify(var0);
+function levelflagclear(var_0) {
+  level.levelflags[var_0] = 0;
+  level notify(var_0);
 }
 
-function levelflagwait(var0) {
-  while(!levelflag(var0)) {
-    level waittill(var0);
+function levelflagwait(var_0) {
+  while(!levelflag(var_0)) {
+    level waittill(var_0);
   }
 }
 
-function levelflagwaitopen(var0) {
-  while(levelflag(var0)) {
-    level waittill(var0);
+function levelflagwaitopen(var_0) {
+  while(levelflag(var_0)) {
+    level waittill(var_0);
   }
 }

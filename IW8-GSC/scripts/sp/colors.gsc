@@ -13,7 +13,7 @@ function init_colors() {
 }
 
 function init_color_grouping() {
-  var0 = getallnodes();
+  var_0 = getallnodes();
   scripts\engine\utility::flag_init("player_looks_away_from_spawner");
   scripts\engine\utility::flag_init("friendly_spawner_locked");
   level.arrays_of_colorcoded_nodes = [];
@@ -22,44 +22,44 @@ function init_color_grouping() {
   level.arrays_of_colorcoded_volumes = [];
   level.arrays_of_colorcoded_volumes["axis"] = [];
   level.arrays_of_colorcoded_volumes["allies"] = [];
-  var1 = [];
-  var1 = scripts\engine\utility::array_combine(var1, getEntArray("trigger_multiple", "code_classname"));
-  var1 = scripts\engine\utility::array_combine(var1, getEntArray("trigger_radius", "code_classname"));
-  var1 = scripts\engine\utility::array_combine(var1, getEntArray("trigger_once", "code_classname"));
+  var_1 = [];
+  var_1 = scripts\engine\utility::array_combine(var_1, getEntArray("trigger_multiple", "code_classname"));
+  var_1 = scripts\engine\utility::array_combine(var_1, getEntArray("trigger_radius", "code_classname"));
+  var_1 = scripts\engine\utility::array_combine(var_1, getEntArray("trigger_once", "code_classname"));
   level.color_teams = [];
   level.color_teams["allies"] = "allies";
   level.color_teams["axis"] = "axis";
   level.color_teams["team3"] = "axis";
   level.color_teams["neutral"] = "neutral";
-  var2 = getEntArray("info_volume", "code_classname");
+  var_2 = getEntArray("info_volume", "code_classname");
 
-  foreach(var4 in var0) {
-    if(isDefined(var4.script_color_allies)) {
-      add_node_to_global_arrays(var4, var4.script_color_allies, "allies");
+  foreach(var_4 in var_0) {
+    if(isDefined(var_4.script_color_allies)) {
+      add_node_to_global_arrays(var_4, var_4.script_color_allies, "allies");
     }
 
-    if(isDefined(var4.script_color_axis)) {
-      add_node_to_global_arrays(var4, var4.script_color_axis, "axis");
-    }
-  }
-
-  foreach(var7 in var2) {
-    if(isDefined(var7.script_color_allies)) {
-      add_volume_to_global_arrays(var7, var7.script_color_allies, "allies");
-    }
-
-    if(isDefined(var7.script_color_axis)) {
-      add_volume_to_global_arrays(var7, var7.script_color_axis, "axis");
+    if(isDefined(var_4.script_color_axis)) {
+      add_node_to_global_arrays(var_4, var_4.script_color_axis, "axis");
     }
   }
 
-  foreach(var10 in var1) {
-    if(isDefined(var10.script_color_allies)) {
-      thread trigger_issues_orders(var10, var10.script_color_allies);
+  foreach(var_7 in var_2) {
+    if(isDefined(var_7.script_color_allies)) {
+      add_volume_to_global_arrays(var_7, var_7.script_color_allies, "allies");
     }
 
-    if(isDefined(var10.script_color_axis)) {
-      thread trigger_issues_orders(var10, var10.script_color_axis);
+    if(isDefined(var_7.script_color_axis)) {
+      add_volume_to_global_arrays(var_7, var_7.script_color_axis, "axis");
+    }
+  }
+
+  foreach(var_10 in var_1) {
+    if(isDefined(var_10.script_color_allies)) {
+      thread trigger_issues_orders(var_10, var_10.script_color_allies);
+    }
+
+    if(isDefined(var_10.script_color_axis)) {
+      thread trigger_issues_orders(var_10, var_10.script_color_axis);
     }
   }
 
@@ -121,19 +121,19 @@ function init_color_grouping() {
   level.lastcolorforced["allies"] = [];
   level.lastcolorforced["axis"] = [];
 
-  foreach(var13 in level.colorlist) {
-    level.arrays_of_colorforced_ai["allies"][var13] = [];
-    level.arrays_of_colorforced_ai["axis"][var13] = [];
-    level.currentcolorforced["allies"][var13] = undefined;
-    level.currentcolorforced["axis"][var13] = undefined;
+  foreach(var_13 in level.colorlist) {
+    level.arrays_of_colorforced_ai["allies"][var_13] = [];
+    level.arrays_of_colorforced_ai["axis"][var_13] = [];
+    level.currentcolorforced["allies"][var_13] = undefined;
+    level.currentcolorforced["axis"][var_13] = undefined;
   }
 
   thread player_color_node();
-  var15 = getspawnerteamarray("allies");
+  var_15 = getspawnerteamarray("allies");
   level._color_friendly_spawners = [];
 
-  foreach(var17 in var15) {
-    level._color_friendly_spawners[var17.classname] = var17;
+  foreach(var_17 in var_15) {
+    level._color_friendly_spawners[var_17.classname] = var_17;
     LOC_0000059f:
   }
 }
@@ -142,12 +142,12 @@ function convert_color_to_short_string() {
   self.script_forcecolor = level.colorchecklist[self.script_forcecolor];
 }
 
-function ai_picks_destination(var0) {
+function ai_picks_destination(var_0) {
   if(isDefined(self.script_forcecolor)) {
     convert_color_to_short_string();
-    self.currentcolorcode = var0;
-    var1 = self.script_forcecolor;
-    level.arrays_of_colorforced_ai[get_team()][var1] = scripts\engine\utility::array_add(level.arrays_of_colorforced_ai[get_team()][var1], self);
+    self.currentcolorcode = var_0;
+    var_1 = self.script_forcecolor;
+    level.arrays_of_colorforced_ai[get_team()][var_1] = scripts\engine\utility::array_add(level.arrays_of_colorforced_ai[get_team()][var_1], self);
     thread goto_current_colorindex();
     return;
   }
@@ -158,7 +158,7 @@ function goto_current_colorindex() {
     return;
   }
 
-  var0 = level.arrays_of_colorcoded_nodes[get_team()][self.currentcolorcode];
+  var_0 = level.arrays_of_colorcoded_nodes[get_team()][self.currentcolorcode];
   left_color_node();
 
   if(!isalive(self)) {
@@ -169,21 +169,21 @@ function goto_current_colorindex() {
     return;
   }
 
-  if(!isDefined(var0)) {
-    var1 = level.arrays_of_colorcoded_volumes[get_team()][self.currentcolorcode];
-    send_ai_to_colorvolume(var1, self.currentcolorcode);
+  if(!isDefined(var_0)) {
+    var_1 = level.arrays_of_colorcoded_volumes[get_team()][self.currentcolorcode];
+    send_ai_to_colorvolume(var_1, self.currentcolorcode);
     return;
   }
 
-  for(var2 = 0; var2 < var1.size; var2++) {
-    var3 = var1[var2];
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    var_3 = var_1[var_2];
 
-    if(isalive(var3.color_user) && !isPlayer(var3.color_user)) {
+    if(isalive(var_3.color_user) && !isPlayer(var_3.color_user)) {
       continue;
     }
 
-    thread ai_sets_goal_with_delay(var3);
-    thread decrementcolorusers(var3);
+    thread ai_sets_goal_with_delay(var_3);
+    thread decrementcolorusers(var_3);
     return;
   }
 
@@ -191,79 +191,79 @@ function goto_current_colorindex() {
 }
 
 function no_node_to_go_to() {
-  var0 = "AI with export " + self.export+" was told to go to color node but had no node to go to.";
+  var_0 = "AI with export " + self.export+" was told to go to color node but had no node to go to.";
 
   if(getdvarint("debug_colornodes") || getdvarint("debug_colorfriendlies")) {
-    iprintln(var0);
+    iprintln(var_0);
     return;
   }
 }
 
 function get_color_list() {
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, "r");
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, "r");
 }
 
-function array_remove_dupes(var0) {
-  var1 = [];
+function array_remove_dupes(var_0) {
+  var_1 = [];
 
-  foreach(var3 in var0) {
-    var1 = 1;
+  foreach(var_3 in var_0) {
+    var_1 = 1;
   }
 
-  var5 = [];
+  var_5 = [];
 
-  foreach(var7 in var1) {
-    var5 = var8;
+  foreach(var_7 in var_1) {
+    var_5 = var_8;
   }
 
-  return var5;
+  return var_5;
 }
 
-function get_colorcodes_from_trigger(var0, var1) {
-  return get_colorcodes(var0, var1);
+function get_colorcodes_from_trigger(var_0, var_1) {
+  return get_colorcodes(var_0, var_1);
 }
 
-function get_colorcodes(var0, var1) {
-  var2 = strtok(var0, " ");
-  var2 = array_remove_dupes(var2);
-  var3 = [];
-  var4 = [];
-  var5 = [];
-  var6 = get_color_list();
+function get_colorcodes(var_0, var_1) {
+  var_2 = strtok(var_0, " ");
+  var_2 = array_remove_dupes(var_2);
+  var_3 = [];
+  var_4 = [];
+  var_5 = [];
+  var_6 = get_color_list();
 
-  foreach(var8 in var2) {
-    var9 = undefined;
+  foreach(var_8 in var_2) {
+    var_9 = undefined;
 
-    foreach(var9 in var6) {
-      if(issubstr(var8, var9)) {
+    foreach(var_9 in var_6) {
+      if(issubstr(var_8, var_9)) {
         break;
       }
     }
 
-    if(!colorcode_is_used_in_map(var1, var8)) {
+    if(!colorcode_is_used_in_map(var_1, var_8)) {
       continue;
     }
 
-    var4 = var8;
-    var3 = var9;
-    var5 = var8;
+    var_4 = var_8;
+    var_3 = var_9;
+    var_5 = var_8;
   }
 
-  var2 = var5;
-  var13 = [];
-  GscBinSkip0(0x2e, "colorCodes", var2);
+  var_2 = var_5;
+  var_13 = [];
+  GscBinSkip0(0x2e, "colorCodes", var_2);
 }
 
-function colorcode_is_used_in_map(var0, var1) {
-  if(isDefined(level.arrays_of_colorcoded_nodes[var0][var1])) {
+function colorcode_is_used_in_map(var_0, var_1) {
+  if(isDefined(level.arrays_of_colorcoded_nodes[var_0][var_1])) {
     return true;
   }
 
-  return isDefined(level.arrays_of_colorcoded_volumes[var0][var1]);
+  return isDefined(level.arrays_of_colorcoded_volumes[var_0][var_1]);
 }
 
-function trigger_issues_orders(var0, var1) {
+function trigger_issues_orders(var_0, var_1) {
   self endon("death");
 
   for(;;) {
@@ -274,7 +274,7 @@ function trigger_issues_orders(var0, var1) {
       continue;
     }
 
-    get_colorcodes_and_activate_trigger(var0, var1);
+    get_colorcodes_and_activate_trigger(var_0, var_1);
 
     if(isDefined(self.script_oneway) && self.script_oneway) {
       thread trigger_delete_target_chain();
@@ -283,204 +283,204 @@ function trigger_issues_orders(var0, var1) {
 }
 
 function trigger_delete_target_chain() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip1(0x45, 0, self);
 }
 
-function activate_color_trigger(var0) {
-  if(var0 == "allies") {
-    thread get_colorcodes_and_activate_trigger(self.script_color_allies, var0);
+function activate_color_trigger(var_0) {
+  if(var_0 == "allies") {
+    thread get_colorcodes_and_activate_trigger(self.script_color_allies, var_0);
     return;
   }
 
-  thread get_colorcodes_and_activate_trigger(self.script_color_axis, var0);
+  thread get_colorcodes_and_activate_trigger(self.script_color_axis, var_0);
 }
 
-function get_colorcodes_and_activate_trigger(var0, var1) {
-  var2 = get_colorcodes_from_trigger(var0, var1);
-  var3 = var2["colorCodes"];
-  var4 = var2["colorCodesByColorIndex"];
-  var5 = var2["colors"];
-  activate_color_code_internal(var3, var5, var1, var4);
+function get_colorcodes_and_activate_trigger(var_0, var_1) {
+  var_2 = get_colorcodes_from_trigger(var_0, var_1);
+  var_3 = var_2["colorCodes"];
+  var_4 = var_2["colorCodesByColorIndex"];
+  var_5 = var_2["colors"];
+  activate_color_code_internal(var_3, var_5, var_1, var_4);
 }
 
-function activate_color_code_internal(var0, var1, var2, var3) {
-  for(var4 = 0; var4 < var0.size; var4++) {
-    if(!isDefined(level.arrays_of_colorcoded_spawners[var2][var0[var4]])) {
+function activate_color_code_internal(var_0, var_1, var_2, var_3) {
+  for(var_4 = 0; var_4 < var_0.size; var_4++) {
+    if(!isDefined(level.arrays_of_colorcoded_spawners[var_2][var_0[var_4]])) {
       continue;
     }
 
-    level.arrays_of_colorcoded_spawners[var2][var0[var4]] = scripts\engine\utility::array_removeundefined(level.arrays_of_colorcoded_spawners[var2][var0[var4]]);
+    level.arrays_of_colorcoded_spawners[var_2][var_0[var_4]] = scripts\engine\utility::array_removeundefined(level.arrays_of_colorcoded_spawners[var_2][var_0[var_4]]);
 
-    for(var5 = 0; var5 < level.arrays_of_colorcoded_spawners[var2][var0[var4]].size; var5++) {
-      level.arrays_of_colorcoded_spawners[var2][var0[var4]][var5].currentcolorcode = var0[var4];
+    for(var_5 = 0; var_5 < level.arrays_of_colorcoded_spawners[var_2][var_0[var_4]].size; var_5++) {
+      level.arrays_of_colorcoded_spawners[var_2][var_0[var_4]][var_5].currentcolorcode = var_0[var_4];
     }
   }
 
-  foreach(var7 in var1) {
-    level.arrays_of_colorforced_ai[var2][var7] = scripts\engine\utility::array_removedead(level.arrays_of_colorforced_ai[var2][var7]);
-    level.lastcolorforced[var2][var7] = level.currentcolorforced[var2][var7];
-    level.currentcolorforced[var2][var7] = var3[var7];
+  foreach(var_7 in var_1) {
+    level.arrays_of_colorforced_ai[var_2][var_7] = scripts\engine\utility::array_removedead(level.arrays_of_colorforced_ai[var_2][var_7]);
+    level.lastcolorforced[var_2][var_7] = level.currentcolorforced[var_2][var_7];
+    level.currentcolorforced[var_2][var_7] = var_3[var_7];
   }
 
-  var11 = [];
-  var12 = 0;
+  var_11 = [];
+  var_12 = 0;
 
-  for(var4 = 0; var4 < var0.size; var4++) {
-    if(same_color_code_as_last_time(var2, var1[var4])) {
+  for(var_4 = 0; var_4 < var_0.size; var_4++) {
+    if(same_color_code_as_last_time(var_2, var_1[var_4])) {
       continue;
     }
 
-    var13 = var0[var4];
+    var_13 = var_0[var_4];
 
-    if(!isDefined(level.arrays_of_colorcoded_ai[var2][var13])) {
+    if(!isDefined(level.arrays_of_colorcoded_ai[var_2][var_13])) {
       continue;
     }
 
-    var11 = issue_leave_node_order_to_ai_and_get_ai(var13, var1[var4], var2);
+    var_11 = issue_leave_node_order_to_ai_and_get_ai(var_13, var_1[var_4], var_2);
   }
 
-  for(var4 = 0; var4 < var0.size; var4++) {
-    var13 = var0[var4];
+  for(var_4 = 0; var_4 < var_0.size; var_4++) {
+    var_13 = var_0[var_4];
 
-    if(!isDefined(var11[var13])) {
+    if(!isDefined(var_11[var_13])) {
       continue;
     }
 
-    if(same_color_code_as_last_time(var2, var1[var4])) {
+    if(same_color_code_as_last_time(var_2, var_1[var_4])) {
       continue;
     }
 
-    if(!isDefined(level.arrays_of_colorcoded_ai[var2][var13])) {
+    if(!isDefined(level.arrays_of_colorcoded_ai[var_2][var_13])) {
       continue;
     }
 
-    var12 = 1;
-    issue_color_order_to_ai(var13, var1[var4], var2, var11[var13]);
+    var_12 = 1;
+    issue_color_order_to_ai(var_13, var_1[var_4], var_2, var_11[var_13]);
   }
 
-  if(var12) {
+  if(var_12) {
     level notify("new_color_trigger", self);
     return;
   }
 }
 
-function same_color_code_as_last_time(var0, var1) {
-  if(!isDefined(level.lastcolorforced[var0][var1])) {
+function same_color_code_as_last_time(var_0, var_1) {
+  if(!isDefined(level.lastcolorforced[var_0][var_1])) {
     return false;
   }
 
-  return level.lastcolorforced[var0][var1] == level.currentcolorforced[var0][var1];
+  return level.lastcolorforced[var_0][var_1] == level.currentcolorforced[var_0][var_1];
 }
 
-function process_cover_node_with_last_in_mind_allies(var0, var1) {
-  if(issubstr(var0.script_color_allies, var1)) {
-    self.cover_nodes_last[self.cover_nodes_last.size] = var0;
+function process_cover_node_with_last_in_mind_allies(var_0, var_1) {
+  if(issubstr(var_0.script_color_allies, var_1)) {
+    self.cover_nodes_last[self.cover_nodes_last.size] = var_0;
     return;
   }
 
-  self.cover_nodes_first[self.cover_nodes_first.size] = var0;
+  self.cover_nodes_first[self.cover_nodes_first.size] = var_0;
 }
 
-function process_cover_node_with_last_in_mind_axis(var0, var1) {
-  if(issubstr(var0.script_color_axis, var1)) {
-    self.cover_nodes_last[self.cover_nodes_last.size] = var0;
+function process_cover_node_with_last_in_mind_axis(var_0, var_1) {
+  if(issubstr(var_0.script_color_axis, var_1)) {
+    self.cover_nodes_last[self.cover_nodes_last.size] = var_0;
     return;
   }
 
-  self.cover_nodes_first[self.cover_nodes_first.size] = var0;
+  self.cover_nodes_first[self.cover_nodes_first.size] = var_0;
 }
 
-function process_cover_node(var0, var1) {
-  self.cover_nodes_first[self.cover_nodes_first.size] = var0;
+function process_cover_node(var_0, var_1) {
+  self.cover_nodes_first[self.cover_nodes_first.size] = var_0;
 }
 
-function process_path_node(var0, var1) {
-  self.path_nodes[self.path_nodes.size] = var0;
+function process_path_node(var_0, var_1) {
+  self.path_nodes[self.path_nodes.size] = var_0;
 }
 
-function prioritize_colorcoded_nodes(var0, var1, var2) {
-  var3 = level.arrays_of_colorcoded_nodes[var0][var1];
-  var4 = spawnStruct();
-  var4.path_nodes = [];
-  var4.cover_nodes_first = [];
-  var4.cover_nodes_last = [];
-  var5 = isDefined(level.lastcolorforced[var0][var2]);
+function prioritize_colorcoded_nodes(var_0, var_1, var_2) {
+  var_3 = level.arrays_of_colorcoded_nodes[var_0][var_1];
+  var_4 = spawnStruct();
+  var_4.path_nodes = [];
+  var_4.cover_nodes_first = [];
+  var_4.cover_nodes_last = [];
+  var_5 = isDefined(level.lastcolorforced[var_0][var_2]);
 
-  foreach(var7 in var3) {
-    var4[[level.color_node_type_function[var7.type][var5][var0]]](var7, level.lastcolorforced[var0][var2]);
+  foreach(var_7 in var_3) {
+    var_4[[level.color_node_type_function[var_7.type][var_5][var_0]]](var_7, level.lastcolorforced[var_0][var_2]);
   }
 
-  var4.cover_nodes_first = scripts\engine\utility::array_randomize(var4.cover_nodes_first);
-  var9 = [];
-  var3 = [];
+  var_4.cover_nodes_first = scripts\engine\utility::array_randomize(var_4.cover_nodes_first);
+  var_9 = [];
+  var_3 = [];
 
-  foreach(var7 in var4.cover_nodes_first) {
-    if(isDefined(var7.script_colorlast)) {
-      var9 = var7;
-      var3[var11] = undefined;
+  foreach(var_7 in var_4.cover_nodes_first) {
+    if(isDefined(var_7.script_colorlast)) {
+      var_9 = var_7;
+      var_3[var_11] = undefined;
       continue;
     }
 
-    var3 = var7;
+    var_3 = var_7;
   }
 
-  for(var12 = 0; var12 < var4.cover_nodes_last.size; var12++) {
-    var3 = var4.cover_nodes_last[var12];
+  for(var_12 = 0; var_12 < var_4.cover_nodes_last.size; var_12++) {
+    var_3 = var_4.cover_nodes_last[var_12];
   }
 
-  for(var12 = 0; var12 < var4.path_nodes.size; var12++) {
-    var3 = var4.path_nodes[var12];
+  for(var_12 = 0; var_12 < var_4.path_nodes.size; var_12++) {
+    var_3 = var_4.path_nodes[var_12];
   }
 
-  foreach(var7 in var9) {
-    var3 = var7;
+  foreach(var_7 in var_9) {
+    var_3 = var_7;
   }
 
-  level.arrays_of_colorcoded_nodes[var0][var1] = var3;
+  level.arrays_of_colorcoded_nodes[var_0][var_1] = var_3;
 }
 
-function get_prioritized_colorcoded_nodes(var0, var1, var2) {
-  return level.arrays_of_colorcoded_nodes[var0][var1];
+function get_prioritized_colorcoded_nodes(var_0, var_1, var_2) {
+  return level.arrays_of_colorcoded_nodes[var_0][var_1];
 }
 
-function get_colorcoded_volume(var0, var1) {
-  return level.arrays_of_colorcoded_volumes[var0][var1];
+function get_colorcoded_volume(var_0, var_1) {
+  return level.arrays_of_colorcoded_volumes[var_0][var_1];
 }
 
-function issue_leave_node_order_to_ai_and_get_ai(var0, var1, var2) {
-  level.arrays_of_colorcoded_ai[var2][var0] = scripts\engine\utility::array_removedead(level.arrays_of_colorcoded_ai[var2][var0]);
-  var3 = level.arrays_of_colorcoded_ai[var2][var0];
-  var3 = scripts\engine\utility::array_combine(var3, level.arrays_of_colorforced_ai[var2][var1]);
-  var4 = [];
+function issue_leave_node_order_to_ai_and_get_ai(var_0, var_1, var_2) {
+  level.arrays_of_colorcoded_ai[var_2][var_0] = scripts\engine\utility::array_removedead(level.arrays_of_colorcoded_ai[var_2][var_0]);
+  var_3 = level.arrays_of_colorcoded_ai[var_2][var_0];
+  var_3 = scripts\engine\utility::array_combine(var_3, level.arrays_of_colorforced_ai[var_2][var_1]);
+  var_4 = [];
 
-  foreach(var6 in var3) {
-    if(isDefined(var6.currentcolorcode) && var6.currentcolorcode == var0) {
+  foreach(var_6 in var_3) {
+    if(isDefined(var_6.currentcolorcode) && var_6.currentcolorcode == var_0) {
       continue;
     }
 
-    var4 = var6;
+    var_4 = var_6;
   }
 
-  var3 = var4;
+  var_3 = var_4;
 
-  if(!var3.size) {
+  if(!var_3.size) {
     return;
   }
 
-  scripts\engine\utility::array_thread(var3, &left_color_node);
-  return var3;
+  scripts\engine\utility::array_thread(var_3, &left_color_node);
+  return var_3;
 }
 
-function send_ai_to_colorvolume(var0, var1) {
+function send_ai_to_colorvolume(var_0, var_1) {
   self notify("stop_color_move");
-  self.currentcolorcode = var1;
+  self.currentcolorcode = var_1;
 
-  if(isDefined(var0.target)) {
-    var2 = getnode(var0.target, "targetname");
+  if(isDefined(var_0.target)) {
+    var_2 = getnode(var_0.target, "targetname");
 
-    if(isDefined(var2)) {
-      self setgoalnode(var2);
+    if(isDefined(var_2)) {
+      self setgoalnode(var_2);
     }
   }
 
@@ -489,43 +489,43 @@ function send_ai_to_colorvolume(var0, var1) {
   }
 
   self.fixednode = 0;
-  self setgoalvolumeauto(var0, var0 scripts\engine\sp\utility::get_cover_volume_forward());
+  self setgoalvolumeauto(var_0, var_0 scripts\engine\sp\utility::get_cover_volume_forward());
 }
 
-function issue_color_order_to_ai(var0, var1, var2, var3) {
-  var4 = var3;
-  var5 = isDefined(self.script_stack);
-  var6 = [];
-  var7 = undefined;
+function issue_color_order_to_ai(var_0, var_1, var_2, var_3) {
+  var_4 = var_3;
+  var_5 = isDefined(self.script_stack);
+  var_6 = [];
+  var_7 = undefined;
 
-  if(isDefined(level.arrays_of_colorcoded_nodes[var2][var0])) {
-    if(!var5) {
-      prioritize_colorcoded_nodes(var2, var0, var1);
+  if(isDefined(level.arrays_of_colorcoded_nodes[var_2][var_0])) {
+    if(!var_5) {
+      prioritize_colorcoded_nodes(var_2, var_0, var_1);
     }
 
-    var6 = get_prioritized_colorcoded_nodes(var2, var0, var1);
+    var_6 = get_prioritized_colorcoded_nodes(var_2, var_0, var_1);
 
-    if(var5) {
-      var9 = scripts\engine\utility::getStruct(self.target, "targetname");
-      var6 = sortbydistance(var6, var9.origin);
+    if(var_5) {
+      var_9 = scripts\engine\utility::getStruct(self.target, "targetname");
+      var_6 = sortbydistance(var_6, var_9.origin);
     }
 
-    var10 = 0;
-    var11 = var3.size;
+    var_10 = 0;
+    var_11 = var_3.size;
 
-    for(var12 = 0; var12 < var6.size; var12++) {
-      var13 = var6[var12];
+    for(var_12 = 0; var_12 < var_6.size; var_12++) {
+      var_13 = var_6[var_12];
 
-      if(isalive(var13.color_user)) {
+      if(isalive(var_13.color_user)) {
         continue;
       }
 
-      var14 = scripts\engine\utility::getclosest(var13.origin, var3);
-      var3 = scripts\engine\utility::array_remove(var3, var14);
-      take_color_node(var14, var13, var0, self, var10);
-      var10++;
+      var_14 = scripts\engine\utility::getclosest(var_13.origin, var_3);
+      var_3 = scripts\engine\utility::array_remove(var_3, var_14);
+      take_color_node(var_14, var_13, var_0, self, var_10);
+      var_10++;
 
-      if(!var3.size) {
+      if(!var_3.size) {
         return;
       }
     }
@@ -533,43 +533,43 @@ function issue_color_order_to_ai(var0, var1, var2, var3) {
     return;
   }
 
-  var7 = get_colorcoded_volume(var2, var0);
-  scripts\engine\utility::array_thread(var3, &send_ai_to_colorvolume, var7, var0);
+  var_7 = get_colorcoded_volume(var_2, var_0);
+  scripts\engine\utility::array_thread(var_3, &send_ai_to_colorvolume, var_7, var_0);
 }
 
-function take_color_node(var0, var1, var2, var3) {
+function take_color_node(var_0, var_1, var_2, var_3) {
   self notify("stop_color_move");
-  self.currentcolorcode = var1;
-  thread process_color_order_to_ai(var0, var2, var3);
+  self.currentcolorcode = var_1;
+  thread process_color_order_to_ai(var_0, var_2, var_3);
 }
 
 function player_color_node() {
   for(;;) {
-    var0 = undefined;
+    var_0 = undefined;
 
     if(!isDefined(level.player.node)) {
       wait 0.05;
       continue;
     }
 
-    var1 = level.player.node.color_user;
-    var0 = level.player.node;
-    var0.color_user = level.player;
+    var_1 = level.player.node.color_user;
+    var_0 = level.player.node;
+    var_0.color_user = level.player;
 
     for(;;) {
       if(!isDefined(level.player.node)) {
         break;
       }
 
-      if(level.player.node != var0) {
+      if(level.player.node != var_0) {
         break;
       }
 
       wait 0.05;
     }
 
-    var0.color_user = undefined;
-    color_node_finds_a_user(var0);
+    var_0.color_user = undefined;
+    color_node_finds_a_user(var_0);
   }
 }
 
@@ -584,70 +584,70 @@ function color_node_finds_a_user() {
   }
 }
 
-function color_node_finds_user_from_colorcodes(var0, var1) {
+function color_node_finds_user_from_colorcodes(var_0, var_1) {
   if(isDefined(self.color_user)) {
     return;
   }
 
-  var2 = strtok(var0, " ");
-  var2 = array_remove_dupes(var2);
-  scripts\engine\utility::array_levelthread(var2, &color_node_finds_user_for_colorcode, var1);
+  var_2 = strtok(var_0, " ");
+  var_2 = array_remove_dupes(var_2);
+  scripts\engine\utility::array_levelthread(var_2, &color_node_finds_user_for_colorcode, var_1);
 }
 
-function color_node_finds_user_for_colorcode(var0, var1) {
-  var2 = var0[0];
+function color_node_finds_user_for_colorcode(var_0, var_1) {
+  var_2 = var_0[0];
 
-  if(!isDefined(level.currentcolorforced[var1][var2])) {
+  if(!isDefined(level.currentcolorforced[var_1][var_2])) {
     return;
   }
 
-  if(level.currentcolorforced[var1][var2] != var0) {
+  if(level.currentcolorforced[var_1][var_2] != var_0) {
     return;
   }
 
-  var3 = scripts\engine\sp\utility::get_force_color_guys(var1, var2);
+  var_3 = scripts\engine\sp\utility::get_force_color_guys(var_1, var_2);
 
-  for(var4 = 0; var4 < var3.size; var4++) {
-    var5 = var3[var4];
+  for(var_4 = 0; var_4 < var_3.size; var_4++) {
+    var_5 = var_3[var_4];
 
-    if(occupies_colorcode(var5, var0)) {
+    if(occupies_colorcode(var_5, var_0)) {
       continue;
     }
 
-    take_color_node(var5, self, var0);
+    take_color_node(var_5, self, var_0);
     return;
   }
 }
 
-function occupies_colorcode(var0) {
+function occupies_colorcode(var_0) {
   if(!isDefined(self.currentcolorcode)) {
     return false;
   }
 
-  return self.currentcolorcode == var0;
+  return self.currentcolorcode == var_0;
 }
 
-function ai_sets_goal_with_delay(var0) {
+function ai_sets_goal_with_delay(var_0) {
   self endon("death");
   self endon("stop_color_move");
   my_current_node_delays();
-  thread ai_sets_goal(var0);
+  thread ai_sets_goal(var_0);
 }
 
-function ai_sets_goal(var0) {
+function ai_sets_goal(var_0) {
   self notify("stop_going_to_node");
-  set_goal_and_volume(var0);
-  var1 = level.arrays_of_colorcoded_volumes[get_team()][self.currentcolorcode];
+  set_goal_and_volume(var_0);
+  var_1 = level.arrays_of_colorcoded_volumes[get_team()][self.currentcolorcode];
 
   if(isDefined(self.script_careful)) {
-    thread careful_logic(var0, var1);
+    thread careful_logic(var_0, var_1);
     return;
   }
 }
 
-function set_goal_and_volume(var0) {
+function set_goal_and_volume(var_0) {
   if(isDefined(self.colornode_func)) {
-    self thread[[self.colornode_func]](var0);
+    self thread[[self.colornode_func]](var_0);
   }
 
   if(isDefined(self._colors_go_line)) {
@@ -656,15 +656,15 @@ function set_goal_and_volume(var0) {
   }
 
   if(isDefined(self.colornode_setgoal_func)) {
-    self thread[[self.colornode_setgoal_func]](var0);
+    self thread[[self.colornode_setgoal_func]](var_0);
   } else {
-    self setgoalnode(var0);
+    self setgoalnode(var_0);
   }
 
-  if(is_using_forcegoal_radius(var0)) {
-    thread forcegoal_radius(var0);
-  } else if(isDefined(var0.radius) && var0.radius > 0) {
-    self.goalradius = var0.radius;
+  if(is_using_forcegoal_radius(var_0)) {
+    thread forcegoal_radius(var_0);
+  } else if(isDefined(var_0.radius) && var_0.radius > 0) {
+    self.goalradius = var_0.radius;
   }
 
   if(isDefined(self.og_color_fixednode)) {
@@ -672,16 +672,16 @@ function set_goal_and_volume(var0) {
     self.og_color_fixednode = undefined;
   }
 
-  var1 = level.arrays_of_colorcoded_volumes[get_team()][self.currentcolorcode];
+  var_1 = level.arrays_of_colorcoded_volumes[get_team()][self.currentcolorcode];
 
-  if(isDefined(var1)) {
-    self setfixednodesafevolume(var1);
+  if(isDefined(var_1)) {
+    self setfixednodesafevolume(var_1);
   } else {
     self clearfixednodesafevolume();
   }
 
-  if(isDefined(var0.fixednodesaferadius)) {
-    self.fixednodesaferadius = var0.fixednodesaferadius;
+  if(isDefined(var_0.fixednodesaferadius)) {
+    self.fixednodesaferadius = var_0.fixednodesaferadius;
     return;
   }
 
@@ -693,7 +693,7 @@ function set_goal_and_volume(var0) {
   self.fixednodesaferadius = 64;
 }
 
-function is_using_forcegoal_radius(var0) {
+function is_using_forcegoal_radius(var_0) {
   if(!isDefined(self.script_forcegoal)) {
     return 0;
   }
@@ -702,7 +702,7 @@ function is_using_forcegoal_radius(var0) {
     return 0;
   }
 
-  if(!isDefined(var0.fixednodesaferadius)) {
+  if(!isDefined(var_0.fixednodesaferadius)) {
     return 0;
   }
 
@@ -713,54 +713,54 @@ function is_using_forcegoal_radius(var0) {
   return 1;
 }
 
-function forcegoal_radius(var0) {
+function forcegoal_radius(var_0) {
   self endon("death");
   self endon("stop_going_to_node");
-  self.goalradius = var0.fixednodesaferadius;
+  self.goalradius = var_0.fixednodesaferadius;
   scripts\engine\utility::waittill_either("goal", "damage");
 
-  if(isDefined(var0.radius) && var0.radius > 0) {
-    self.goalradius = var0.radius;
+  if(isDefined(var_0.radius) && var_0.radius > 0) {
+    self.goalradius = var_0.radius;
     return;
   }
 }
 
-function careful_logic(var0, var1) {
+function careful_logic(var_0, var_1) {
   self endon("death");
   self endon("stop_being_careful");
   self endon("stop_going_to_node");
-  thread recover_from_careful_disable(var0);
+  thread recover_from_careful_disable(var_0);
 
   for(;;) {
-    wait_until_an_enemy_is_in_safe_area(var0, var1);
-    use_big_goal_until_goal_is_safe(var0, var1);
+    wait_until_an_enemy_is_in_safe_area(var_0, var_1);
+    use_big_goal_until_goal_is_safe(var_0, var_1);
     self.fixednode = 1;
-    set_goal_and_volume(var0);
+    set_goal_and_volume(var_0);
   }
 }
 
-function recover_from_careful_disable(var0) {
+function recover_from_careful_disable(var_0) {
   self endon("death");
   self endon("stop_going_to_node");
   self waittill("stop_being_careful");
   self.fixednode = 1;
-  set_goal_and_volume(var0);
+  set_goal_and_volume(var_0);
 }
 
-function use_big_goal_until_goal_is_safe(var0, var1) {
+function use_big_goal_until_goal_is_safe(var_0, var_1) {
   self setgoalpos(self.origin);
   self.goalradius = 1024;
   self.fixednode = 0;
 
-  if(isDefined(var1)) {
+  if(isDefined(var_1)) {
     for(;;) {
       wait 1;
 
-      if(self isknownenemyinradius(var0.origin, self.fixednodesaferadius)) {
+      if(self isknownenemyinradius(var_0.origin, self.fixednodesaferadius)) {
         continue;
       }
 
-      if(self isknownenemyinvolume(var1)) {
+      if(self isknownenemyinvolume(var_1)) {
         continue;
       }
 
@@ -771,7 +771,7 @@ function use_big_goal_until_goal_is_safe(var0, var1) {
   }
 
   for(;;) {
-    if(!isknownenemyinradius_tmp(var0.origin, self.fixednodesaferadius)) {
+    if(!isknownenemyinradius_tmp(var_0.origin, self.fixednodesaferadius)) {
       return;
     }
 
@@ -779,11 +779,11 @@ function use_big_goal_until_goal_is_safe(var0, var1) {
   }
 }
 
-function isknownenemyinradius_tmp(var0, var1) {
-  var2 = getaiarray("axis");
+function isknownenemyinradius_tmp(var_0, var_1) {
+  var_2 = getaiarray("axis");
 
-  for(var3 = 0; var3 < var2.size; var3++) {
-    if(distance2d(var2[var3].origin, var0) < var1) {
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
+    if(distance2d(var_2[var_3].origin, var_0) < var_1) {
       return true;
     }
   }
@@ -791,14 +791,14 @@ function isknownenemyinradius_tmp(var0, var1) {
   return false;
 }
 
-function wait_until_an_enemy_is_in_safe_area(var0, var1) {
-  if(isDefined(var1)) {
+function wait_until_an_enemy_is_in_safe_area(var_0, var_1) {
+  if(isDefined(var_1)) {
     for(;;) {
-      if(self isknownenemyinradius(var0.origin, self.fixednodesaferadius)) {
+      if(self isknownenemyinradius(var_0.origin, self.fixednodesaferadius)) {
         return;
       }
 
-      if(self isknownenemyinvolume(var1)) {
+      if(self isknownenemyinvolume(var_1)) {
         return;
       }
 
@@ -809,7 +809,7 @@ function wait_until_an_enemy_is_in_safe_area(var0, var1) {
   }
 
   for(;;) {
-    if(isknownenemyinradius_tmp(var0.origin, self.fixednodesaferadius)) {
+    if(isknownenemyinradius_tmp(var_0.origin, self.fixednodesaferadius)) {
       return;
     }
 
@@ -822,102 +822,102 @@ function my_current_node_delays() {
     return 0;
   }
 
-  var0 = self.node;
-  var1 = 0;
+  var_0 = self.node;
+  var_1 = 0;
 
-  if(isDefined(var0.script_flag_wait)) {
-    scripts\engine\utility::flag_wait(var0.script_flag_wait);
-    var1 = 1;
+  if(isDefined(var_0.script_flag_wait)) {
+    scripts\engine\utility::flag_wait(var_0.script_flag_wait);
+    var_1 = 1;
   }
 
   if(isDefined(self.script_color_delay_override)) {
     wait self.script_color_delay_override;
-    var1 = 1;
+    var_1 = 1;
   } else {
-    var1 = var0 scripts\engine\utility::script_delay() || var1;
+    var_1 = var_0 scripts\engine\utility::script_delay() || var_1;
   }
 
-  return var1;
+  return var_1;
 }
 
-function process_color_order_to_ai(var0, var1, var2) {
-  thread decrementcolorusers(var0);
+function process_color_order_to_ai(var_0, var_1, var_2) {
+  thread decrementcolorusers(var_0);
   self endon("stop_color_move");
   self endon("death");
 
-  if(isDefined(var1)) {
-    var1 scripts\engine\utility::script_delay();
+  if(isDefined(var_1)) {
+    var_1 scripts\engine\utility::script_delay();
   }
 
   if(!my_current_node_delays()) {
-    if(isDefined(var2)) {
-      wait var2 * randomfloatrange(0.2, 0.35);
+    if(isDefined(var_2)) {
+      wait var_2 * randomfloatrange(0.2, 0.35);
     }
   }
 
-  ai_sets_goal(var0);
-  self.color_ordered_node_assignment = var0;
+  ai_sets_goal(var_0);
+  self.color_ordered_node_assignment = var_0;
 
   for(;;) {
-    self waittill("node_bad", var3, var4, var5);
+    self waittill("node_bad", var_3, var_4, var_5);
 
-    if(var3 != "taken" && var3 != "unusable" && var3 != "badplace" && var3 != "path_blocked" && var3 != "unsafe") {
+    if(var_3 != "taken" && var_3 != "unusable" && var_3 != "badplace" && var_3 != "path_blocked" && var_3 != "unsafe") {
       continue;
     }
 
-    if(var3 == "path_blocked" && isDefined(var5) && var5 < 2000) {
+    if(var_3 == "path_blocked" && isDefined(var_5) && var_5 < 2000) {
       continue;
     }
 
-    var0 = get_best_available_new_colored_node();
+    var_0 = get_best_available_new_colored_node();
 
-    if(isDefined(var0)) {
+    if(isDefined(var_0)) {
       if(isalive(self.color_node.color_user) && self.color_node.color_user == self) {
         self.color_node.color_user = undefined;
       }
 
-      self.color_node = var0;
-      var0.color_user = self;
-      ai_sets_goal(var0);
+      self.color_node = var_0;
+      var_0.color_user = self;
+      ai_sets_goal(var_0);
     }
   }
 }
 
 function get_best_available_colored_node() {
-  var0 = level.currentcolorforced[get_team()][self.script_forcecolor];
-  var1 = get_prioritized_colorcoded_nodes(get_team(), var0, self.script_forcecolor);
+  var_0 = level.currentcolorforced[get_team()][self.script_forcecolor];
+  var_1 = get_prioritized_colorcoded_nodes(get_team(), var_0, self.script_forcecolor);
 
-  foreach(var3 in var1) {
-    if(self isnodeinbadplace(var3)) {
+  foreach(var_3 in var_1) {
+    if(self isnodeinbadplace(var_3)) {
       continue;
     }
 
-    if(!isalive(var3.color_user)) {
-      return var3;
+    if(!isalive(var_3.color_user)) {
+      return var_3;
     }
   }
 }
 
 function get_best_available_new_colored_node() {
-  var0 = level.currentcolorforced[get_team()][self.script_forcecolor];
-  var1 = get_prioritized_colorcoded_nodes(get_team(), var0, self.script_forcecolor);
+  var_0 = level.currentcolorforced[get_team()][self.script_forcecolor];
+  var_1 = get_prioritized_colorcoded_nodes(get_team(), var_0, self.script_forcecolor);
 
-  foreach(var3 in var1) {
-    if(self isnodeinbadplace(var3)) {
+  foreach(var_3 in var_1) {
+    if(self isnodeinbadplace(var_3)) {
       continue;
     }
 
-    if(var3 == self.color_node) {
+    if(var_3 == self.color_node) {
       continue;
     }
 
-    if(!isalive(var3.color_user)) {
-      return var3;
+    if(!isalive(var_3.color_user)) {
+      return var_3;
     }
   }
 }
 
-function process_stop_short_of_node(var0) {
+function process_stop_short_of_node(var_0) {
   self endon("stopScript");
   self endon("death");
 
@@ -925,40 +925,40 @@ function process_stop_short_of_node(var0) {
     return;
   }
 
-  if(distance(var0.origin, self.origin) < 32) {
-    reached_node_but_could_not_claim_it(var0);
+  if(distance(var_0.origin, self.origin) < 32) {
+    reached_node_but_could_not_claim_it(var_0);
     return;
   }
 
-  var1 = gettime();
+  var_1 = gettime();
   wait_for_killanimscript_or_time(1);
-  var2 = gettime();
+  var_2 = gettime();
 
-  if(var2 - var1 >= 1000) {
-    reached_node_but_could_not_claim_it(var0);
+  if(var_2 - var_1 >= 1000) {
+    reached_node_but_could_not_claim_it(var_0);
     return;
   }
 }
 
-function wait_for_killanimscript_or_time(var0) {
+function wait_for_killanimscript_or_time(var_0) {
   self endon("killanimscript");
-  wait var0;
+  wait var_0;
 }
 
-function reached_node_but_could_not_claim_it(var0) {
-  var1 = getaiarray();
-  var2 = undefined;
+function reached_node_but_could_not_claim_it(var_0) {
+  var_1 = getaiarray();
+  var_2 = undefined;
 
-  for(var3 = 0; var3 < var1.size; var3++) {
-    if(!isDefined(var1[var3].node)) {
+  for(var_3 = 0; var_3 < var_1.size; var_3++) {
+    if(!isDefined(var_1[var_3].node)) {
       continue;
     }
 
-    if(var1[var3].node != var0) {
+    if(var_1[var_3].node != var_0) {
       continue;
     }
 
-    var1[var3] notify("eject_from_my_node");
+    var_1[var_3] notify("eject_from_my_node");
     wait 1;
     self notify("eject_from_my_node");
     return true;
@@ -967,17 +967,17 @@ function reached_node_but_could_not_claim_it(var0) {
   return false;
 }
 
-function decrementcolorusers(var0) {
-  var0.color_user = self;
-  self.color_node = var0;
+function decrementcolorusers(var_0) {
+  var_0.color_user = self;
+  self.color_node = var_0;
   self endon("stop_color_move");
   self waittill("death");
   self.color_node.color_user = undefined;
 }
 
-function colorislegit(var0) {
-  for(var1 = 0; var1 < level.colorlist.size; var1++) {
-    if(var0 == level.colorlist[var1]) {
+function colorislegit(var_0) {
+  for(var_1 = 0; var_1 < level.colorlist.size; var_1++) {
+    if(var_0 == level.colorlist[var_1]) {
       return true;
     }
   }
@@ -985,31 +985,31 @@ function colorislegit(var0) {
   return false;
 }
 
-function add_volume_to_global_arrays(var0, var1) {
-  var2 = strtok(var0, " ");
-  var2 = array_remove_dupes(var2);
+function add_volume_to_global_arrays(var_0, var_1) {
+  var_2 = strtok(var_0, " ");
+  var_2 = array_remove_dupes(var_2);
 
-  foreach(var4 in var2) {
-    level.arrays_of_colorcoded_volumes[var1][var4] = self;
-    level.arrays_of_colorcoded_ai[var1][var4] = [];
-    level.arrays_of_colorcoded_spawners[var1][var4] = [];
+  foreach(var_4 in var_2) {
+    level.arrays_of_colorcoded_volumes[var_1][var_4] = self;
+    level.arrays_of_colorcoded_ai[var_1][var_4] = [];
+    level.arrays_of_colorcoded_spawners[var_1][var_4] = [];
   }
 }
 
-function add_node_to_global_arrays(var0, var1) {
+function add_node_to_global_arrays(var_0, var_1) {
   self.color_user = undefined;
-  var2 = strtok(var0, " ");
-  var2 = array_remove_dupes(var2);
+  var_2 = strtok(var_0, " ");
+  var_2 = array_remove_dupes(var_2);
 
-  foreach(var4 in var2) {
-    if(isDefined(level.arrays_of_colorcoded_nodes[var1]) && isDefined(level.arrays_of_colorcoded_nodes[var1][var4])) {
-      level.arrays_of_colorcoded_nodes[var1][var4] = scripts\engine\utility::array_add(level.arrays_of_colorcoded_nodes[var1][var4], self);
+  foreach(var_4 in var_2) {
+    if(isDefined(level.arrays_of_colorcoded_nodes[var_1]) && isDefined(level.arrays_of_colorcoded_nodes[var_1][var_4])) {
+      level.arrays_of_colorcoded_nodes[var_1][var_4] = scripts\engine\utility::array_add(level.arrays_of_colorcoded_nodes[var_1][var_4], self);
       continue;
     }
 
-    level.arrays_of_colorcoded_nodes[var1][var4][0] = self;
-    level.arrays_of_colorcoded_ai[var1][var4] = [];
-    level.arrays_of_colorcoded_spawners[var1][var4] = [];
+    level.arrays_of_colorcoded_nodes[var_1][var_4][0] = self;
+    level.arrays_of_colorcoded_ai[var_1][var_4] = [];
+    level.arrays_of_colorcoded_spawners[var_1][var_4] = [];
   }
 }
 
@@ -1027,7 +1027,7 @@ function left_color_node() {
 }
 
 function getcolornumberarray() {
-  var0 = [];
+  var_0 = [];
 
   if(issubstr(self.classname, "axis") || issubstr(self.classname, "enemy") || issubstr(self.classname, "team3")) {
     GscBinSkip0(0x2e, "team", "axis");
@@ -1037,51 +1037,51 @@ function getcolornumberarray() {
     GscBinSkip0(0x2e, "team", "allies");
   }
 
-  if(!isDefined(var0["colorTeam"])) {
-    var0 = undefined;
+  if(!isDefined(var_0["colorTeam"])) {
+    var_0 = undefined;
   }
 
-  return var0;
+  return var_0;
 }
 
 function removespawnerfromcolornumberarray() {
-  var0 = getcolornumberarray();
+  var_0 = getcolornumberarray();
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var1 = var0["team"];
-  var2 = var0["colorTeam"];
-  var3 = strtok(var2, " ");
-  var3 = array_remove_dupes(var3);
+  var_1 = var_0["team"];
+  var_2 = var_0["colorTeam"];
+  var_3 = strtok(var_2, " ");
+  var_3 = array_remove_dupes(var_3);
 
-  for(var4 = 0; var4 < var3.size; var4++) {
-    level.arrays_of_colorcoded_spawners[var1][var3[var4]] = scripts\engine\utility::array_remove(level.arrays_of_colorcoded_spawners[var1][var3[var4]], self);
+  for(var_4 = 0; var_4 < var_3.size; var_4++) {
+    level.arrays_of_colorcoded_spawners[var_1][var_3[var_4]] = scripts\engine\utility::array_remove(level.arrays_of_colorcoded_spawners[var_1][var_3[var_4]], self);
   }
 }
 
-function add_cover_node(var0) {
-  level.color_node_type_function[var0][1]["allies"] = &process_cover_node_with_last_in_mind_allies;
-  level.color_node_type_function[var0][1]["axis"] = &process_cover_node_with_last_in_mind_axis;
-  level.color_node_type_function[var0][0]["allies"] = &process_cover_node;
-  level.color_node_type_function[var0][0]["axis"] = &process_cover_node;
+function add_cover_node(var_0) {
+  level.color_node_type_function[var_0][1]["allies"] = &process_cover_node_with_last_in_mind_allies;
+  level.color_node_type_function[var_0][1]["axis"] = &process_cover_node_with_last_in_mind_axis;
+  level.color_node_type_function[var_0][0]["allies"] = &process_cover_node;
+  level.color_node_type_function[var_0][0]["axis"] = &process_cover_node;
 }
 
-function add_path_node(var0) {
-  level.color_node_type_function[var0][1]["allies"] = &process_path_node;
-  level.color_node_type_function[var0][0]["allies"] = &process_path_node;
-  level.color_node_type_function[var0][1]["axis"] = &process_path_node;
-  level.color_node_type_function[var0][0]["axis"] = &process_path_node;
+function add_path_node(var_0) {
+  level.color_node_type_function[var_0][1]["allies"] = &process_path_node;
+  level.color_node_type_function[var_0][0]["allies"] = &process_path_node;
+  level.color_node_type_function[var_0][1]["axis"] = &process_path_node;
+  level.color_node_type_function[var_0][0]["axis"] = &process_path_node;
 }
 
-function colornode_spawn_reinforcement(var0, var1) {
+function colornode_spawn_reinforcement(var_0, var_1) {
   level endon("kill_color_replacements");
   level endon("kill_hidden_reinforcement_waiting");
-  var2 = spawn_hidden_reinforcement(var0, var1);
+  var_2 = spawn_hidden_reinforcement(var_0, var_1);
 
   if(isDefined(level.friendly_startup_thread)) {
-    var2 thread[[level.friendly_startup_thread]]();
+    var_2 thread[[level.friendly_startup_thread]]();
   }
 
   thread colornode_replace_on_death();
@@ -1096,81 +1096,81 @@ function colornode_replace_on_death() {
   }
 
   self.replace_on_death = 1;
-  var0 = self.classname;
-  var1 = self.script_forcecolor;
+  var_0 = self.classname;
+  var_1 = self.script_forcecolor;
   waittillframeend();
 
   if(isalive(self)) {
     self waittill("death");
   }
 
-  var2 = level.current_color_order;
+  var_2 = level.current_color_order;
 
   if(!isDefined(self.script_forcecolor)) {
     return;
   }
 
-  thread colornode_spawn_reinforcement(var0, self.script_forcecolor);
+  thread colornode_spawn_reinforcement(var_0, self.script_forcecolor);
 
   if(isDefined(self) && isDefined(self.script_forcecolor)) {
-    var1 = self.script_forcecolor;
+    var_1 = self.script_forcecolor;
   }
 
   jumpiffalse(isDefined(self) && isDefined(self.origin)) LOC_00000089;
-  var3 = self.origin;
+  var_3 = self.origin;
 
   for(;;) {
-    if(get_color_from_order(var1, var2) == "none") {
+    if(get_color_from_order(var_1, var_2) == "none") {
       return;
     }
 
-    var4 = scripts\engine\sp\utility::get_force_color_guys("allies", var2[var1]);
+    var_4 = scripts\engine\sp\utility::get_force_color_guys("allies", var_2[var_1]);
 
     if(!isDefined(level.color_doesnt_care_about_classname)) {
-      var4 = scripts\engine\sp\utility::remove_without_classname(var4, var0);
+      var_4 = scripts\engine\sp\utility::remove_without_classname(var_4, var_0);
     }
 
-    if(!var4.size) {
+    if(!var_4.size) {
       wait 2;
       continue;
     }
 
-    var5 = scripts\engine\utility::getclosest(level.player.origin, var4);
+    var_5 = scripts\engine\utility::getclosest(level.player.origin, var_4);
     waittillframeend();
 
-    if(!isalive(var5)) {
+    if(!isalive(var_5)) {
       continue;
     }
 
-    var5 scripts\engine\sp\utility::set_force_color(var1);
+    var_5 scripts\engine\sp\utility::set_force_color(var_1);
 
     if(isDefined(level.friendly_promotion_thread)) {
-      var5[[level.friendly_promotion_thread]](var1);
+      var_5[[level.friendly_promotion_thread]](var_1);
     }
 
-    var1 = var2[var1];
+    var_1 = var_2[var_1];
   }
 }
 
-function get_color_from_order(var0, var1) {
-  if(!isDefined(var0)) {
+function get_color_from_order(var_0, var_1) {
+  if(!isDefined(var_0)) {
     return "none";
   }
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return "none";
   }
 
-  if(!isDefined(var1[var0])) {
+  if(!isDefined(var_1[var_0])) {
     return "none";
   }
 
-  return var1[var0];
+  return var_1[var_0];
 }
 
 function friendly_spawner_vision_checker() {
   level.friendly_respawn_vision_checker_thread = 1;
-  var0 = 0;
+  var_0 = 0;
 
   for(;;) {
     for(;;) {
@@ -1187,25 +1187,25 @@ function friendly_spawner_vision_checker() {
       continue;
     }
 
-    var1 = level.player.origin - level.respawn_spawner_org;
+    var_1 = level.player.origin - level.respawn_spawner_org;
 
-    if(length(var1) < 200) {
+    if(length(var_1) < 200) {
       player_sees_spawner();
       continue;
     }
 
-    var2 = anglesToForward((0, level.player getplayerangles()[1], 0));
-    var3 = vectorNormalize(var1);
-    var4 = vectordot(var2, var3);
+    var_2 = anglesToForward((0, level.player getplayerangles()[1], 0));
+    var_3 = vectorNormalize(var_1);
+    var_4 = vectordot(var_2, var_3);
 
-    if(var4 < 0.2) {
+    if(var_4 < 0.2) {
       player_sees_spawner();
       continue;
     }
 
-    var0++;
+    var_0++;
 
-    if(var0 < 3) {
+    if(var_0 < 3) {
       continue;
     }
 
@@ -1213,64 +1213,64 @@ function friendly_spawner_vision_checker() {
   }
 }
 
-function get_color_spawner(var0, var1) {
+function get_color_spawner(var_0, var_1) {
   if(isDefined(self.color_respawn_spawner)) {
     return self.color_respawn_spawner;
   }
 
-  if(isDefined(var0)) {
-    if(!isDefined(level._color_friendly_spawners[var0])) {
-      var2 = getspawnerteamarray("allies");
+  if(isDefined(var_0)) {
+    if(!isDefined(level._color_friendly_spawners[var_0])) {
+      var_2 = getspawnerteamarray("allies");
 
-      foreach(var4 in var2) {
-        if(var4.classname != var0) {
+      foreach(var_4 in var_2) {
+        if(var_4.classname != var_0) {
           continue;
         }
 
-        if(!isDefined(var4.script_forcecolor)) {
+        if(!isDefined(var_4.script_forcecolor)) {
           continue;
         }
 
-        if(var4.script_forcecolor != var1) {
+        if(var_4.script_forcecolor != var_1) {
           continue;
         }
 
-        level._color_friendly_spawners[var0] = var4;
+        level._color_friendly_spawners[var_0] = var_4;
         break;
       }
     }
   }
 
-  if(!isDefined(var0)) {
-    var2 = [];
+  if(!isDefined(var_0)) {
+    var_2 = [];
 
-    foreach(var4 in level._color_friendly_spawners) {
-      if(var4.script_forcecolor != var1) {
+    foreach(var_4 in level._color_friendly_spawners) {
+      if(var_4.script_forcecolor != var_1) {
         continue;
       }
 
-      var2 = var4;
+      var_2 = var_4;
     }
 
-    var4 = scripts\engine\utility::random(var2);
+    var_4 = scripts\engine\utility::random(var_2);
 
-    if(!isDefined(var4)) {
-      var2 = [];
+    if(!isDefined(var_4)) {
+      var_2 = [];
 
-      foreach(var4 in level._color_friendly_spawners) {
-        if(isDefined(var4)) {
-          var2 = var4;
+      foreach(var_4 in level._color_friendly_spawners) {
+        if(isDefined(var_4)) {
+          var_2 = var_4;
         }
       }
 
-      level._color_friendly_spawners = var2;
+      level._color_friendly_spawners = var_2;
       return scripts\engine\utility::random(level._color_friendly_spawners);
     }
 
-    return var8;
+    return var_8;
   }
 
-  return level._color_friendly_spawners[var8];
+  return level._color_friendly_spawners[var_8];
 }
 
 function respawn_friendlies_without_vision_check() {
@@ -1297,10 +1297,10 @@ function wait_until_vision_check_satisfied_or_disabled() {
   }
 }
 
-function spawn_hidden_reinforcement(var0, var1) {
+function spawn_hidden_reinforcement(var_0, var_1) {
   level endon("kill_color_replacements");
   level endon("kill_hidden_reinforcement_waiting");
-  var2 = undefined;
+  var_2 = undefined;
 
   for(;;) {
     if(!respawn_friendlies_without_vision_check()) {
@@ -1320,42 +1320,42 @@ function spawn_hidden_reinforcement(var0, var1) {
       scripts\engine\utility::flag_set("friendly_spawner_locked");
     }
 
-    var3 = get_color_spawner(var0, var1);
-    var3.count = 1;
-    var4 = var3.origin;
-    var3.origin = level.respawn_spawner_org;
+    var_3 = get_color_spawner(var_0, var_1);
+    var_3.count = 1;
+    var_4 = var_3.origin;
+    var_3.origin = level.respawn_spawner_org;
     scripts\engine\utility::script_delay();
-    var2 = var3 stalingradspawn();
-    var3.origin = var4;
+    var_2 = var_3 stalingradspawn();
+    var_3.origin = var_4;
 
-    if(scripts\common\ai::spawn_failed(var2)) {
+    if(scripts\common\ai::spawn_failed(var_2)) {
       thread lock_spawner_for_awhile();
       wait 1;
       continue;
     }
 
-    level notify("reinforcement_spawned", var2);
+    level notify("reinforcement_spawned", var_2);
     break;
   }
 
   for(;;) {
-    if(!isDefined(var1)) {
+    if(!isDefined(var_1)) {
       break;
     }
 
-    if(get_color_from_order(var1, level.current_color_order) == "none") {
+    if(get_color_from_order(var_1, level.current_color_order) == "none") {
       break;
     }
 
-    var1 = level.current_color_order[var1];
+    var_1 = level.current_color_order[var_1];
   }
 
-  if(isDefined(var1)) {
-    var2 scripts\engine\sp\utility::set_force_color(var1);
+  if(isDefined(var_1)) {
+    var_2 scripts\engine\sp\utility::set_force_color(var_1);
   }
 
   thread lock_spawner_for_awhile();
-  return var2;
+  return var_2;
 }
 
 function lock_spawner_for_awhile() {
@@ -1371,25 +1371,25 @@ function lock_spawner_for_awhile() {
 }
 
 function player_sees_spawner() {
-  var0 = 0;
+  var_0 = 0;
   scripts\engine\utility::flag_clear("player_looks_away_from_spawner");
 }
 
 function kill_color_replacements() {
   scripts\engine\utility::flag_clear("friendly_spawner_locked");
   level notify("kill_color_replacements");
-  var0 = getaiarray();
-  scripts\engine\utility::array_thread(var0, &remove_replace_on_death);
+  var_0 = getaiarray();
+  scripts\engine\utility::array_thread(var_0, &remove_replace_on_death);
 }
 
 function remove_replace_on_death() {
   self.replace_on_death = undefined;
 }
 
-function get_team(var0) {
-  if(isDefined(self.team) && !isDefined(var0)) {
-    var0 = self.team;
+function get_team(var_0) {
+  if(isDefined(self.team) && !isDefined(var_0)) {
+    var_0 = self.team;
   }
 
-  return level.color_teams[var0];
+  return level.color_teams[var_0];
 }

@@ -4,19 +4,19 @@
 ****************************************************************/
 
 function init() {
-  var0 = spawnStruct();
-  var0.weight = getdvarfloat("scr_br_pe_armoredtruck_weight", 0);
-  var0.ref_140cf = &ref_140cf;
-  var0.attackerswaittime = &attackerswaittime;
-  var0.ref_14382 = &ref_14382;
-  var0.‹Á¿ ø {
+  var_0 = spawnStruct();
+  var_0.weight = getdvarfloat("scr_br_pe_armoredtruck_weight", 0);
+  var_0.ref_140cf = &ref_140cf;
+  var_0.attackerswaittime = &attackerswaittime;
+  var_0.ref_14382 = &ref_14382;
+  var_0.‹Á¿ ø {
     ÏXX;
     â # / = &postinitfunc;
-    var0.ref_11b78 = getdvarint("scr_br_pe_armoredtruck_max_times", 1);
-    var0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("armoredtruck", "20 20151510101010");
-    var0.£¼#w]
+    var_0.ref_11b78 = getdvarint("scr_br_pe_armoredtruck_max_times", 1);
+    var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("armoredtruck", "20 20151510101010");
+    var_0.£¼#w]
   j‹ ƒ½ Ï‚ UÀíÌI¸ Û« = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("armoredtruck");
-  scripts\mp\gametypes\br_publicevents::ref_12b35(11, var0);
+  scripts\mp\gametypes\br_publicevents::ref_12b35(11, var_0);
 }
 
 function postinitfunc() {
@@ -32,8 +32,8 @@ function ref_140cf() {
 function ref_14382() {
   level endon("game_ended");
   level endon("cancel_public_event");
-  var0 = forest_combat();
-  wait var0;
+  var_0 = forest_combat();
+  wait var_0;
 }
 
 function attackerswaittime() {
@@ -43,21 +43,21 @@ function attackerswaittime() {
   scripts\mp\gametypes\br_public::brleaderdialog("pe_armoredtruck_announcement");
   wait 3.5;
   scripts\mp\gametypes\br_public::brleaderdialog("pe_armoredtruck_start");
-  var0 = getdvarfloat("scr_br_pe_armoredtruck_delay", 20);
-  var1 = getdvarfloat("scr_br_pe_armoredtruck_duration", 10);
-  var2 = gettime() + var0 * 1000;
+  var_0 = getdvarfloat("scr_br_pe_armoredtruck_delay", 20);
+  var_1 = getdvarfloat("scr_br_pe_armoredtruck_duration", 10);
+  var_2 = gettime() + var_0 * 1000;
   setomnvar("ui_publicevent_timer_type", 7);
-  setomnvar("ui_publicevent_timer", var2);
-  var3 = run_post_module_actions();
-  var4 = run_spawnfuncs(var3);
-  var5 = spawn("script_origin", (0, 0, 0));
-  var5 hide();
+  setomnvar("ui_publicevent_timer", var_2);
+  var_3 = run_post_module_actions();
+  var_4 = run_spawnfuncs(var_3);
+  var_5 = spawn("script_origin", (0, 0, 0));
+  var_5 hide();
 
-  if(var0 > 5) {
-    wait var0 - 5;
+  if(var_0 > 5) {
+    wait var_0 - 5;
 
-    for(var6 = 0; var6 < 5; var6++) {
-      var5 playSound("ui_mp_fire_sale_timer");
+    for(var_6 = 0; var_6 < 5; var_6++) {
+      var_5 playSound("ui_mp_fire_sale_timer");
       wait 1;
     }
   }
@@ -66,92 +66,92 @@ function attackerswaittime() {
   scripts\mp\gametypes\br_gametype_truckwar::stoppingpower_loadoutchangeremovehcr();
   level thread scripts\mp\gametypes\br_gametype_truckwar::ref_13df8();
 
-  foreach(var8 in level.players) {
-    var8 playsoundtoplayer("ui_armored_truck_active_lr", var8);
+  foreach(var_8 in level.players) {
+    var_8 playsoundtoplayer("ui_armored_truck_active_lr", var_8);
   }
 
   setomnvar("ui_publicevent_timer_type", 0);
-  var5 delete();
+  var_5 delete();
   scripts\mp\gametypes\br_public::brleaderdialog("pe_armoredtruck_done");
   wait 1.5;
-  var4 = scripts\engine\utility::array_randomize(var4);
-  thread ref_1360c(var4);
+  var_4 = scripts\engine\utility::array_randomize(var_4);
+  thread ref_1360c(var_4);
 }
 
 function run_post_module_actions() {
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, createspawnlocation((-1424, 10054, 656), (0.0420106, 279.996, -0.133641)));
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, createspawnlocation((-1424, 10054, 656), (0.0420106, 279.996, -0.133641)));
 }
 
-function createspawnlocation(var0, var1) {
-  var2 = spawnStruct();
-  var2.origin = var0;
-  var2.angles = var1;
-  return var2;
+function createspawnlocation(var_0, var_1) {
+  var_2 = spawnStruct();
+  var_2.origin = var_0;
+  var_2.angles = var_1;
+  return var_2;
 }
 
 function forest_combat() {
-  var0 = getdvarfloat("scr_br_pe_armoredtruck_starttime_min", 90);
-  var1 = getdvarfloat("scr_br_pe_armoredtruck_starttime_max", 395);
+  var_0 = getdvarfloat("scr_br_pe_armoredtruck_starttime_min", 90);
+  var_1 = getdvarfloat("scr_br_pe_armoredtruck_starttime_max", 395);
 
-  if(var1 > var0) {
-    return randomfloatrange(var0, var1);
+  if(var_1 > var_0) {
+    return randomfloatrange(var_0, var_1);
   }
 
-  return var0;
+  return var_0;
 }
 
-function run_spawnfuncs(var0) {
-  var1 = [];
+function run_spawnfuncs(var_0) {
+  var_1 = [];
 
-  foreach(var3 in var0) {
-    var4 = spawn("script_model", var3.origin);
-    var4 setModel("ks_airdrop_crate_br");
-    var4 setscriptablepartstate("smoke_signal", "on", 0);
-    var4 scripts\mp\gametypes\br_quest_util::init_tactical_boxes(11, 17, 2, var3.origin);
-    var4 scripts\mp\gametypes\br_quest_util::ref_1316f(1150);
-    var4 scripts\mp\gametypes\br_quest_util::ref_13369();
-    var4.location = var3;
-    var1 = var4;
+  foreach(var_3 in var_0) {
+    var_4 = spawn("script_model", var_3.origin);
+    var_4 setModel("ks_airdrop_crate_br");
+    var_4 setscriptablepartstate("smoke_signal", "on", 0);
+    var_4 scripts\mp\gametypes\br_quest_util::init_tactical_boxes(11, 17, 2, var_3.origin);
+    var_4 scripts\mp\gametypes\br_quest_util::ref_1316f(1150);
+    var_4 scripts\mp\gametypes\br_quest_util::ref_13369();
+    var_4.location = var_3;
+    var_1 = var_4;
   }
 
-  return var1;
+  return var_1;
 }
 
-function ref_1360c(var0) {
-  foreach(var2 in var0) {
-    ref_1360b(var2);
+function ref_1360c(var_0) {
+  foreach(var_2 in var_0) {
+    ref_1360b(var_2);
     wait 2;
   }
 
   level notify("public_event_armoredtruck_spawned");
 }
 
-function ref_1360b(var0) {
-  var1 = spawnStruct();
-  var1.origin = var0.location.origin + (0, 0, 5000);
-  var2 = scripts\mp\gametypes\br_gametype_truckwar::ref_14263(var1);
+function ref_1360b(var_0) {
+  var_1 = spawnStruct();
+  var_1.origin = var_0.location.origin + (0, 0, 5000);
+  var_2 = scripts\mp\gametypes\br_gametype_truckwar::ref_14263(var_1);
 
-  if(isDefined(var2)) {
-    level thread scripts\mp\gametypes\br_gametype_truckwar::ref_13de4(var2, var0.location.origin, var0.location.angles, 1);
-    level.callouts[level.callouts.size] = var2;
+  if(isDefined(var_2)) {
+    level thread scripts\mp\gametypes\br_gametype_truckwar::ref_13de4(var_2, var_0.location.origin, var_0.location.angles, 1);
+    level.callouts[level.callouts.size] = var_2;
   }
 
-  thread ref_14235(var2, var0);
-  thread ref_14248(var0);
+  thread ref_14235(var_2, var_0);
+  thread ref_14248(var_0);
 }
 
-function ref_14235(var0, var1) {
-  var0 waittill("vehicle_owner_update");
-  var1 scripts\mp\gametypes\br_quest_util::spawn_double_cargo();
-  var1 setscriptablepartstate("smoke_signal", "off", 0);
-  var1 delete();
+function ref_14235(var_0, var_1) {
+  var_0 waittill("vehicle_owner_update");
+  var_1 scripts\mp\gametypes\br_quest_util::spawn_double_cargo();
+  var_1 setscriptablepartstate("smoke_signal", "off", 0);
+  var_1 delete();
 }
 
-function ref_14248(var0) {
-  while(isDefined(var0)) {
-    if(!scripts\mp\gametypes\br_circle::updateprestreamrespawn(var0.location.origin)) {
-      var0 scripts\mp\gametypes\br_quest_util::spawn_double_cargo();
+function ref_14248(var_0) {
+  while(isDefined(var_0)) {
+    if(!scripts\mp\gametypes\br_circle::updateprestreamrespawn(var_0.location.origin)) {
+      var_0 scripts\mp\gametypes\br_quest_util::spawn_double_cargo();
       break;
     }
 

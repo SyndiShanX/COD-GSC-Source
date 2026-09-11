@@ -62,7 +62,7 @@ function ref_12803() {
   thread soundbank_load();
 }
 
-function ref_1264b(var0) {
+function ref_1264b(var_0) {
   if(istrue(self.adrenalinepoweractive)) {
     return float(level.disable_super_in_turret.iscontender * level.disable_super_in_turret.iscrossbowbolt);
   }
@@ -70,8 +70,8 @@ function ref_1264b(var0) {
   return float(level.disable_super_in_turret.iscontender);
 }
 
-function ref_11c95(var0) {
-  return int(var0 * level.disable_super_in_turret.iscloseto);
+function ref_11c95(var_0) {
+  return int(var_0 * level.disable_super_in_turret.iscloseto);
 }
 
 function ref_12604() {

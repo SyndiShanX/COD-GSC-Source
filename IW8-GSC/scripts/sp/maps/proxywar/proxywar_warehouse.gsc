@@ -86,8 +86,8 @@ function warehouse_enter_start() {
   scripts\sp\maps\proxywar\proxywar_util::spawn_ally_teams(0);
   scripts\engine\sp\utility::set_start_location("start_warehouse_combat", scripts\engine\utility::array_combine([level.player], level.alpha_and_bravo_team));
 
-  foreach(var1 in level.alpha_and_bravo_team) {
-    var1 scripts\asm\shared\utility::toggle_poiauto(1);
+  foreach(var_1 in level.alpha_and_bravo_team) {
+    var_1 scripts\asm\shared\utility::toggle_poiauto(1);
   }
 }
 
@@ -106,7 +106,7 @@ function warehouse_enter_main() {
   thread bravo2_move_into_warehouse();
   thread bravo3_move_into_warehouse();
   scripts\engine\utility::flag_wait("allies_ready_to_approach_gate");
-  var0 = [level.alpha1, level.bravo1, level.bravo2];
+  var_0 = [level.alpha1, level.bravo1, level.bravo2];
   scripts\engine\utility::flag_wait("reached_warehouse_foyer");
   level thread scripts\sp\maps\proxywar\proxywar_vo::vo_we_door_approach();
   level thread scripts\sp\player::player_movement_state("cqb");
@@ -128,8 +128,8 @@ function warehouse_enter_main() {
   level.warehousegate scripts\common\anim::setanimtree();
   level.warehousegateopenref notify("end_open_idle");
 
-  foreach(var2 in level.alpha_and_bravo_team) {
-    var2 scripts\common\utility::demeanor_override("cqb");
+  foreach(var_2 in level.alpha_and_bravo_team) {
+    var_2 scripts\common\utility::demeanor_override("cqb");
   }
 
   thread gate_team_open_and_enter();
@@ -148,24 +148,24 @@ function warehouse_enter_main() {
   level thread scripts\engine\sp\utility::autosave_by_name("warehouse_combat");
   scripts\engine\utility::flag_wait("reached_warehouse_first_run");
   scripts\engine\sp\utility::activate_trigger_with_targetname("allies_move_in_warehouse_2");
-  var4 = scripts\engine\sp\utility::array_spawn_targetname("warehouse_laststand_group", 1);
-  var5 = getEnt("runner1", "script_noteworthy");
+  var_4 = scripts\engine\sp\utility::array_spawn_targetname("warehouse_laststand_group", 1);
+  var_5 = getEnt("runner1", "script_noteworthy");
   thread runner1_behavior();
-  var6 = getEnt("catwalk_defender", "script_noteworthy");
+  var_6 = getEnt("catwalk_defender", "script_noteworthy");
   thread catwalk_defender_behavior();
-  var7 = getEnt("runner2", "script_noteworthy");
+  var_7 = getEnt("runner2", "script_noteworthy");
   thread runner2_behavior();
   level.finaldefender = getEnt("final_defender", "script_noteworthy");
   thread final_defender_behavior();
   level thread scripts\sp\maps\proxywar\proxywar_vo::vo_wc_first_contact();
   level thread scripts\sp\maps\proxywar\proxywar_vo::vo_wc_first_runner();
-  level thread scripts\sp\maps\proxywar\proxywar_vo::vo_wc_kill_runner1(var5);
+  level thread scripts\sp\maps\proxywar\proxywar_vo::vo_wc_kill_runner1(var_5);
   scripts\engine\utility::flag_wait("reached_warehouse_branch");
   scripts\sp\maps\proxywar\proxywar_util::enable_allies_firing();
   scripts\engine\utility::flag_wait_either("warehouse_went_left", "warehouse_went_right");
 
-  foreach(var2 in level.alpha_and_bravo_team) {
-    var2 scripts\engine\utility::set_movement_speed(60);
+  foreach(var_2 in level.alpha_and_bravo_team) {
+    var_2 scripts\engine\utility::set_movement_speed(60);
   }
 
   level.bravo3 scripts\asm\shared\utility::toggle_poiauto(1);
@@ -209,10 +209,10 @@ function warehouse_enter_catchup() {
   scripts\engine\sp\objectives::objective_set_position("objective", scripts\engine\utility::getStruct("obj_clear_warehouse", "targetname").origin);
   scripts\sp\maps\proxywar\proxywar_util::gasmask_on(1);
 
-  foreach(var1 in level.alpha_and_bravo_team) {
-    var1 detach(var1.hatmodel);
-    var1.hatmodel += "_gasmask";
-    var1 attach(var1.hatmodel);
+  foreach(var_1 in level.alpha_and_bravo_team) {
+    var_1 detach(var_1.hatmodel);
+    var_1.hatmodel += "_gasmask";
+    var_1 attach(var_1.hatmodel);
   }
 }
 
@@ -294,18 +294,18 @@ function door_team_member_arrived() {
   }
 }
 
-function gate_team_approach_and_mask_up(var0) {
+function gate_team_approach_and_mask_up(var_0) {
   level.warehousegateopenref scripts\sp\anim::anim_reach_solo(self, "warehouse_gate_open_enter");
-  thread mask_anim(var0);
+  thread mask_anim(var_0);
   level.warehousegateopenref scripts\common\anim::anim_single_solo(self, "warehouse_gate_open_enter");
   level.warehousegateopenref thread scripts\common\anim::anim_loop_solo(self, "warehouse_gate_open_idle", "end_open_idle");
   door_team_member_at_gate();
 }
 
-function mask_anim(var0) {
-  var1 = scripts\engine\sp\utility::spawn_anim_model(var0);
-  level.warehousegateopenref scripts\common\anim::anim_single_solo(var1, "warehouse_gate_open_enter");
-  var1 delete();
+function mask_anim(var_0) {
+  var_1 = scripts\engine\sp\utility::spawn_anim_model(var_0);
+  level.warehousegateopenref scripts\common\anim::anim_single_solo(var_1, "warehouse_gate_open_enter");
+  var_1 delete();
 }
 
 function bravo3_approach_and_mask_up() {
@@ -476,14 +476,14 @@ function final_defender_behavior() {
 function check_kill_final_defender() {
   level endon("final_defender_killed");
   scripts\engine\utility::flag_wait("failsafe_kill_defender");
-  var0 = scripts\sp\utility::make_weapon("iw8_ar_mike4", ["reflex_west01", "silencer04", "taclight"]);
-  var1 = scripts\engine\utility::getStruct("mb_kill_defender_1", "targetname");
+  var_0 = scripts\sp\utility::make_weapon("iw8_ar_mike4", ["reflex_west01", "silencer04", "taclight"]);
+  var_1 = scripts\engine\utility::getStruct("mb_kill_defender_1", "targetname");
 
   if(ispointinvolume(level.player.origin, getEnt("near_defender_left", "targetname"))) {
-    var1 = scripts\engine\utility::getStruct("mb_kill_defender_2", "targetname");
+    var_1 = scripts\engine\utility::getStruct("mb_kill_defender_2", "targetname");
   }
 
-  magicbullet(var0, var1.origin, self getEye());
+  magicbullet(var_0, var_1.origin, self getEye());
   self notify("damage", 100);
 }
 
@@ -491,24 +491,24 @@ function sweep_fire_target() {
   self endon("death");
   self endon("end_sweep");
   level endon("reached_warehouse_shelf_mid");
-  var0 = scripts\engine\utility::getStruct("sweep_fire_target_start", "targetname");
-  var1 = scripts\engine\utility::getStruct("sweep_fire_mid", "targetname");
-  var2 = scripts\engine\utility::getStruct("sweep_fire_mid_2", "targetname");
-  var3 = scripts\engine\utility::getStruct("sweep_fire_end", "targetname");
-  self.sweepfiretarget.origin = var0.origin;
+  var_0 = scripts\engine\utility::getStruct("sweep_fire_target_start", "targetname");
+  var_1 = scripts\engine\utility::getStruct("sweep_fire_mid", "targetname");
+  var_2 = scripts\engine\utility::getStruct("sweep_fire_mid_2", "targetname");
+  var_3 = scripts\engine\utility::getStruct("sweep_fire_end", "targetname");
+  self.sweepfiretarget.origin = var_0.origin;
 
   for(;;) {
-    self.sweepfiretarget moveTo(var1.origin, 2);
+    self.sweepfiretarget moveTo(var_1.origin, 2);
     wait 2;
-    self.sweepfiretarget moveTo(var2.origin, 1);
+    self.sweepfiretarget moveTo(var_2.origin, 1);
     wait 1;
-    self.sweepfiretarget moveTo(var3.origin, 2);
+    self.sweepfiretarget moveTo(var_3.origin, 2);
     wait 2;
-    self.sweepfiretarget moveTo(var2.origin, 2);
+    self.sweepfiretarget moveTo(var_2.origin, 2);
     wait 2;
-    self.sweepfiretarget moveTo(var1.origin, 1);
+    self.sweepfiretarget moveTo(var_1.origin, 1);
     wait 1;
-    self.sweepfiretarget moveTo(var0.origin, 2);
+    self.sweepfiretarget moveTo(var_0.origin, 2);
     wait 2;
   }
 }
@@ -518,10 +518,10 @@ function final_defender_check_damage() {
   self.damageapplied = 0;
 
   for(;;) {
-    self waittill("damage", var0);
-    self.damageapplied += var0;
+    self waittill("damage", var_0);
+    self.damageapplied += var_0;
 
-    if(var0 >= self.health / 4) {
+    if(var_0 >= self.health / 4) {
       scripts\engine\utility::flag_set("final_defender_killed");
       thread final_defender_death_anim();
       level notify("end_check_damage");
@@ -533,9 +533,9 @@ function final_defender_death_anim() {
   self.ignoreme = 1;
   self dropweapon(self.weapon, "right", 10);
   self stopsounds();
-  var0 = scripts\engine\utility::spawn_script_origin(self.origin, (0, -90, 0));
-  var0 scripts\common\anim::anim_single_solo(self, "final_defender_death");
-  var0 thread scripts\common\anim::anim_last_frame_solo(self, "final_defender_death");
+  var_0 = scripts\engine\utility::spawn_script_origin(self.origin, (0, -90, 0));
+  var_0 scripts\common\anim::anim_single_solo(self, "final_defender_death");
+  var_0 thread scripts\common\anim::anim_last_frame_solo(self, "final_defender_death");
   scripts\common\ai::stop_magic_bullet_shield();
   scripts\engine\sp\utility::die();
   scripts\engine\utility::flag_set("final_defender_killed");
@@ -544,22 +544,22 @@ function final_defender_death_anim() {
   self delete();
 }
 
-function play_defender_death(var0) {
-  var0 scripts\common\anim::anim_last_frame_solo(self, "final_defender_death");
+function play_defender_death(var_0) {
+  var_0 scripts\common\anim::anim_last_frame_solo(self, "final_defender_death");
 }
 
 function create_dummy_defender() {
-  var0 = scripts\engine\sp\utility::spawn_anim_model("final_defender");
-  var0 attach("head_spetsnaz_cqc");
-  var0 attach("hat_spetsnaz_helmet_cloth_a_nvg");
-  var0 scriptmoverdistancefade();
-  return var0;
+  var_0 = scripts\engine\sp\utility::spawn_anim_model("final_defender");
+  var_0 attach("head_spetsnaz_cqc");
+  var_0 attach("hat_spetsnaz_helmet_cloth_a_nvg");
+  var_0 scriptmoverdistancefade();
+  return var_0;
 }
 
 function final_defender_setup_from_start() {
   level.dummydefender = create_dummy_defender();
-  var0 = scripts\engine\utility::spawn_script_origin(getspawner("final_defender", "script_noteworthy").origin, (0, -90, 0));
-  var0 thread scripts\common\anim::anim_last_frame_solo(level.dummydefender, "final_defender_death");
+  var_0 = scripts\engine\utility::spawn_script_origin(getspawner("final_defender", "script_noteworthy").origin, (0, -90, 0));
+  var_0 thread scripts\common\anim::anim_last_frame_solo(level.dummydefender, "final_defender_death");
 }
 
 function flashlight_tutorial() {
@@ -586,31 +586,31 @@ function objective_tutorial_hint_check() {
 }
 
 function turn_off_lights() {
-  var0 = getEntArray("warehouse_light", "targetname");
+  var_0 = getEntArray("warehouse_light", "targetname");
   visionsetnaked("proxywar_warehouse_dark", 0.5);
   thread sfx_lights_off();
   level.warehouselighttable = [];
 
-  foreach(var2 in var0) {
-    var3 = [var2, var2 getlightintensity()];
-    level.warehouselighttable[level.warehouselighttable.size] = var3;
+  foreach(var_2 in var_0) {
+    var_3 = [var_2, var_2 getlightintensity()];
+    level.warehouselighttable[level.warehouselighttable.size] = var_3;
   }
 
-  foreach(var2 in var0) {
-    var2 setlightintensity(0);
-    var2.active = 0;
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(0);
+    var_2.active = 0;
   }
 
-  var7 = getEntArray("warehouse_large_light", "targetname");
+  var_7 = getEntArray("warehouse_large_light", "targetname");
 
-  foreach(var9 in var7) {
-    var9 setModel("uk_industrial_light_01");
+  foreach(var_9 in var_7) {
+    var_9 setModel("uk_industrial_light_01");
   }
 
-  var11 = getEntArray("warehouse_small_light", "targetname");
+  var_11 = getEntArray("warehouse_small_light", "targetname");
 
-  foreach(var9 in var11) {
-    var9 setModel("ee_light_mounted_exterior_industrial_caged_02");
+  foreach(var_9 in var_11) {
+    var_9 setModel("ee_light_mounted_exterior_industrial_caged_02");
   }
 }
 
@@ -618,21 +618,21 @@ function turn_on_lights() {
   visionsetnaked("", 0.5);
   thread sfx_lights_on();
 
-  foreach(var1 in level.warehouselighttable) {
-    var1[0] setlightintensity(var1[1]);
-    var1[0].active = 1;
+  foreach(var_1 in level.warehouselighttable) {
+    var_1[0] setlightintensity(var_1[1]);
+    var_1[0].active = 1;
   }
 
-  var3 = getEntArray("warehouse_large_light", "targetname");
+  var_3 = getEntArray("warehouse_large_light", "targetname");
 
-  foreach(var5 in var3) {
-    var5 setModel("uk_industrial_light_01_on");
+  foreach(var_5 in var_3) {
+    var_5 setModel("uk_industrial_light_01_on");
   }
 
-  var7 = getEntArray("warehouse_small_light", "targetname");
+  var_7 = getEntArray("warehouse_small_light", "targetname");
 
-  foreach(var5 in var7) {
-    var5 setModel("ee_light_mounted_exterior_industrial_caged_02_on");
+  foreach(var_5 in var_7) {
+    var_5 setModel("ee_light_mounted_exterior_industrial_caged_02_on");
   }
 }
 
@@ -663,9 +663,9 @@ function sfx_lights_off() {
 function flashbang_tutorial() {
   level endon("clear_flashbang_tutorial");
   wait 3;
-  var0 = level.player getammocount("flash");
+  var_0 = level.player getammocount("flash");
 
-  if(var0 > 0) {
+  if(var_0 > 0) {
     thread tutorial_timeout_check();
 
     if(level.player getlocalplayerprofiledata("grenadeHold")) {
@@ -680,11 +680,11 @@ function flashbang_tutorial() {
 
 function check_aiming_flashbang() {
   level.player waittill("secondary_offhand_pressed");
-  var0 = level.player getcurrentoffhand("secondaryoffhand");
+  var_0 = level.player getcurrentoffhand("secondaryoffhand");
   scripts\engine\utility::flag_clear("threw_flashbang");
 
-  if(isDefined(var0)) {
-    if(var0.basename == "flash") {
+  if(isDefined(var_0)) {
+    if(var_0.basename == "flash") {
       scripts\engine\utility::flag_set("aimed_flashbang");
       return;
     }
@@ -733,9 +733,9 @@ function warehouse_discover_gas_start() {
   scripts\engine\utility::delaythread(0.1, &scripts\engine\sp\utility::battlechatter_off);
   thread final_defender_setup_from_start();
 
-  foreach(var1 in level.alpha_and_bravo_team) {
-    var1 scripts\engine\utility::delaythread(1, &scripts\sp\utility::enable_flashlight, 1);
-    var1 scripts\engine\utility::set_movement_speed(50);
+  foreach(var_1 in level.alpha_and_bravo_team) {
+    var_1 scripts\engine\utility::delaythread(1, &scripts\sp\utility::enable_flashlight, 1);
+    var_1 scripts\engine\utility::set_movement_speed(50);
   }
 
   scripts\engine\utility::flag_set("find_power_vo_done");
@@ -780,17 +780,17 @@ function warehouse_discover_gas_main() {
   scripts\sp\player_rig::unlink_player_from_rig();
   thread check_facing_russian_scene();
 
-  foreach(var1 in level.alpha_and_bravo_team) {
-    var1 scripts\sp\utility::enable_flashlight(0);
-    var1 scripts\asm\shared\utility::toggle_poiauto(0);
+  foreach(var_1 in level.alpha_and_bravo_team) {
+    var_1 scripts\sp\utility::enable_flashlight(0);
+    var_1 scripts\asm\shared\utility::toggle_poiauto(0);
   }
 
   scripts\engine\utility::flag_wait_or_timeout("facing_russian_scene", 4);
   scripts\engine\utility::flag_set("start_inspect_body");
   thread scripts\sp\maps\proxywar\proxywar_vo::mus_discover_russians();
-  var3 = getEnt("body_clip", "targetname");
-  var3.origin += (0, 0, 128);
-  createnavobstaclebyent(var3);
+  var_3 = getEnt("body_clip", "targetname");
+  var_3.origin += (0, 0, 128);
+  createnavobstaclebyent(var_3);
   level thread scripts\sp\maps\proxywar\proxywar_vo::vo_wdg_discover_russians_callout();
   thread inspect_dead_russians();
   level.bravo1 scripts\common\ai::set_gunpose("gun_down");
@@ -801,29 +801,29 @@ function warehouse_discover_gas_main() {
   level thread scripts\engine\sp\utility::autosave_by_name("warehouse_swab_truck");
   wait 4;
   scripts\engine\sp\objectives::objective_set_position("objective", scripts\engine\utility::getStruct("obj_chem_truck", "targetname").origin);
-  var4 = scripts\engine\utility::getStruct("swab_container_interact", "targetname");
-  var4 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"PROXYWAR/SWAB", 180, 256);
-  var4 waittill("trigger");
+  var_4 = scripts\engine\utility::getStruct("swab_container_interact", "targetname");
+  var_4 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"PROXYWAR/SWAB", 180, 256);
+  var_4 waittill("trigger");
   scripts\engine\utility::flag_set("started_swabbing");
-  var5 = scripts\engine\utility::getStruct("swab_container_ref", "targetname");
+  var_5 = scripts\engine\utility::getStruct("swab_container_ref", "targetname");
   level thread scripts\sp\maps\proxywar\proxywar_vo::vo_wdg_found_gas();
   thread warehouse_discover_gas_exit_door();
-  thread warehouse_discover_gas_teleport_allies(var5);
-  var5 thread scripts\sp\player_rig::link_player_to_rig("swab", "stand", 1, 0.5, undefined, 15, 15, 15, 15);
-  var6 = scripts\engine\sp\utility::spawn_anim_model("swab", level.player.origin, level.player.angles);
-  playFXOnTag(scripts\engine\utility::getfx("vfx_proxywar_chemical_swab"), var6, "j_swab");
+  thread warehouse_discover_gas_teleport_allies(var_5);
+  var_5 thread scripts\sp\player_rig::link_player_to_rig("swab", "stand", 1, 0.5, undefined, 15, 15, 15, 15);
+  var_6 = scripts\engine\sp\utility::spawn_anim_model("swab", level.player.origin, level.player.angles);
+  playFXOnTag(scripts\engine\utility::getfx("vfx_proxywar_chemical_swab"), var_6, "j_swab");
   level thread scripts\sp\maps\proxywar\proxywar_trucks::alpha1_wait_for_player();
   thread bravo3_head_to_convoy(level);
-  var5 scripts\common\anim::anim_single([level.player_rig, var6], "swab");
-  var6 delete();
+  var_5 scripts\common\anim::anim_single([level.player_rig, var_6], "swab");
+  var_6 delete();
   scripts\sp\player_rig::unlink_player_from_rig();
   scripts\engine\utility::flag_set("finished_swabbing");
 }
 
-function bravo3_head_to_convoy(var0) {
+function bravo3_head_to_convoy(var_0) {
   level endon("approaching_rear_exit_door");
-  var0 scripts\common\anim::anim_single_solo(level.bravo3, "swab");
-  var0 thread scripts\common\anim::anim_last_frame_solo(level.bravo3, "swab");
+  var_0 scripts\common\anim::anim_single_solo(level.bravo3, "swab");
+  var_0 thread scripts\common\anim::anim_last_frame_solo(level.bravo3, "swab");
 }
 
 function check_objective_button_pressed() {
@@ -843,21 +843,21 @@ function check_facing_russian_scene() {
 function setup_search_points() {
   level.search_points = scripts\engine\utility::getStructArray("search_point", "targetname");
 
-  foreach(var1 in level.search_points) {
-    var1.aim_search_spline = scripts\engine\utility::getStruct(var1.target, "targetname");
-    var1.target = undefined;
-    var1.radius = 50;
+  foreach(var_1 in level.search_points) {
+    var_1.aim_search_spline = scripts\engine\utility::getStruct(var_1.target, "targetname");
+    var_1.target = undefined;
+    var_1.radius = 50;
   }
 }
 
-function get_search_point(var0) {
+function get_search_point(var_0) {
   if(!isDefined(level.search_points)) {
     setup_search_points();
   }
 
-  foreach(var2 in level.search_points) {
-    if(var2.script_noteworthy == var0) {
-      return var2;
+  foreach(var_2 in level.search_points) {
+    if(var_2.script_noteworthy == var_0) {
+      return var_2;
     }
   }
 
@@ -884,10 +884,10 @@ function bravo1_gas_search() {
   scripts\asm\shared\utility::toggle_poiauto(1);
   scripts\engine\utility::set_movement_speed(50);
   self.ignoreall = 0;
-  var0 = ["search_point_bravo2_1", "search_point_bravo2_2", "search_point_bravo2_3"];
+  var_0 = ["search_point_bravo2_1", "search_point_bravo2_2", "search_point_bravo2_3"];
 
   for(;;) {
-    ally_search_array(var0);
+    ally_search_array(var_0);
     waitframe();
   }
 }
@@ -898,11 +898,11 @@ function bravo2_gas_search() {
   scripts\asm\shared\utility::toggle_poiauto(1);
   scripts\engine\utility::set_movement_speed(50);
   self.ignoreall = 0;
-  var0 = ["search_point_bravo1_1", "search_point_bravo1_2", "search_point_bravo1_3"];
-  ally_search_array(var0);
+  var_0 = ["search_point_bravo1_1", "search_point_bravo1_2", "search_point_bravo1_3"];
+  ally_search_array(var_0);
 
   for(;;) {
-    ally_search_array(var0);
+    ally_search_array(var_0);
     waitframe();
   }
 }
@@ -913,18 +913,18 @@ function bravo3_gas_search() {
   scripts\asm\shared\utility::toggle_poiauto(1);
   scripts\engine\utility::set_movement_speed(50);
   self.ignoreall = 0;
-  var0 = ["search_point_bravo3_1", "search_point_bravo3_2", "search_point_bravo3_3"];
+  var_0 = ["search_point_bravo3_1", "search_point_bravo3_2", "search_point_bravo3_3"];
 
   for(;;) {
-    ally_search_array(var0);
+    ally_search_array(var_0);
     waitframe();
   }
 }
 
-function ally_search_array(var0) {
-  for(var1 = 0; var1 < var0.size; var1++) {
-    var2 = scripts\engine\utility::getStruct(var0[var1], "targetname");
-    scripts\sp\spawner::go_to_node(var2);
+function ally_search_array(var_0) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    var_2 = scripts\engine\utility::getStruct(var_0[var_1], "targetname");
+    scripts\sp\spawner::go_to_node(var_2);
     wait randomfloatrange(2, 5);
   }
 }
@@ -934,13 +934,13 @@ function check_door_button_interact() {
   level endon("end_button_check");
   self waittill("trigger");
   level.discovergasref = scripts\engine\utility::getStruct("discover_gas_ref", "targetname");
-  var0 = getEnt("gas_door_button", "targetname");
-  var0.animname = "door_button";
-  var0 scripts\common\anim::setanimtree();
+  var_0 = getEnt("gas_door_button", "targetname");
+  var_0.animname = "door_button";
+  var_0 scripts\common\anim::setanimtree();
   level.player playSound("proxy_button_push_plr");
   level thread scripts\sp\maps\proxywar\proxywar_vo::vo_wdg_tried_door_button();
   level.discovergasref scripts\sp\player_rig::link_player_to_rig("try_door_button", undefined, undefined, undefined, undefined, 15, 15, 15, 15);
-  level.discovergasref scripts\common\anim::anim_single([level.player_rig, var0], "try_door_button");
+  level.discovergasref scripts\common\anim::anim_single([level.player_rig, var_0], "try_door_button");
   level.discovergasref scripts\sp\player_rig::unlink_player_from_rig();
 }
 
@@ -956,16 +956,16 @@ function alpha1_move_to_chem_truck() {
   level.discovergasref thread scripts\common\anim::anim_loop_solo(self, "warehouse_button_idle", "end_button_idle");
   scripts\engine\utility::flag_wait("start_inspect_body");
   level.discovergasref notify("end_button_idle");
-  var0 = getEnt("gas_door_button", "targetname");
-  var0.animname = "door_button";
-  var0 scripts\common\anim::setanimtree();
-  var1 = getEnt("truck_door", "targetname");
-  var1.animname = "warehouse_roller_door";
-  var1 scripts\common\anim::setanimtree();
-  var1.clip = getEnt("truck_door_clip", "targetname");
-  var1.clip linkTo(var1);
-  level.discovergasref thread scripts\common\anim::anim_single([var0, var1], "warehouse_discover_gas");
-  var1.clip scripts\engine\utility::delaycall(5, &connectpaths);
+  var_0 = getEnt("gas_door_button", "targetname");
+  var_0.animname = "door_button";
+  var_0 scripts\common\anim::setanimtree();
+  var_1 = getEnt("truck_door", "targetname");
+  var_1.animname = "warehouse_roller_door";
+  var_1 scripts\common\anim::setanimtree();
+  var_1.clip = getEnt("truck_door_clip", "targetname");
+  var_1.clip linkTo(var_1);
+  level.discovergasref thread scripts\common\anim::anim_single([var_0, var_1], "warehouse_discover_gas");
+  var_1.clip scripts\engine\utility::delaycall(5, &connectpaths);
   thread warehouse_audio_rolling_door_open();
   level.discovergasref scripts\common\anim::anim_single_solo(self, "warehouse_discover_gas");
   level.discovergasref thread scripts\common\anim::anim_loop_solo(self, "warehouse_discover_gas_idle", "end_discover_idle");
@@ -993,12 +993,12 @@ function warehouse_audio_rolling_door_open() {
 }
 
 function warehouse_discover_gas_exit_door() {
-  var0 = scripts\sp\door::get_interactive_door("warehouse_side_exit_door");
-  var0 notify("stop_open_ability");
-  var0 scripts\sp\door::remove_open_ability();
-  var0 scripts\game\sp\door::remove_door_snake_cam_ability();
-  var0 scripts\sp\door::door_open_completely();
-  var0 scripts\sp\door::clear_navobstacle();
+  var_0 = scripts\sp\door::get_interactive_door("warehouse_side_exit_door");
+  var_0 notify("stop_open_ability");
+  var_0 scripts\sp\door::remove_open_ability();
+  var_0 scripts\game\sp\door::remove_door_snake_cam_ability();
+  var_0 scripts\sp\door::door_open_completely();
+  var_0 scripts\sp\door::clear_navobstacle();
 }
 
 function allies_move_to_trucks() {
@@ -1009,8 +1009,8 @@ function allies_move_to_trucks() {
   wait 7.5;
   scripts\engine\utility::flag_wait("found_chemical_weapons");
 
-  foreach(var1 in level.bravo_team) {
-    var1 scripts\common\ai::set_gunpose("gun_down");
+  foreach(var_1 in level.bravo_team) {
+    var_1 scripts\common\ai::set_gunpose("gun_down");
   }
 
   level.bravo1 scripts\engine\utility::set_movement_speed(100);
@@ -1022,21 +1022,21 @@ function allies_move_to_trucks() {
   level.bravo3 scripts\common\ai::set_gunpose("disable", 1);
 }
 
-function warehouse_discover_gas_teleport_allies(var0) {
+function warehouse_discover_gas_teleport_allies(var_0) {
   wait 0.5;
 
-  foreach(var2 in level.bravo_team) {
-    var2 notify("stop_going_to_node");
+  foreach(var_2 in level.bravo_team) {
+    var_2 notify("stop_going_to_node");
   }
 
-  var4 = scripts\engine\utility::getStruct("convoy_ref", "targetname");
-  var4 thread scripts\common\anim::anim_first_frame([level.bravo1, level.bravo2], "convoy_rollout");
+  var_4 = scripts\engine\utility::getStruct("convoy_ref", "targetname");
+  var_4 thread scripts\common\anim::anim_first_frame([level.bravo1, level.bravo2], "convoy_rollout");
 }
 
 function warehouse_discover_gas_catchup() {
   scripts\engine\sp\objectives::objective_set_position("objective", scripts\engine\utility::getStruct("obj_chem_truck", "targetname").origin);
-  var0 = getEnt("truck_door", "targetname");
-  var0 moveTo(var0.origin + (0, 0, 115), 0.05, 0.001, 0.001);
+  var_0 = getEnt("truck_door", "targetname");
+  var_0 moveTo(var_0.origin + (0, 0, 115), 0.05, 0.001, 0.001);
   thread warehouse_discover_gas_exit_door();
   thread scripts\sp\maps\proxywar\proxywar_lighting::lights_on("tower_lights");
   thread scripts\sp\maps\proxywar\proxywar_lighting::lights_on("warehouse_light_gas");

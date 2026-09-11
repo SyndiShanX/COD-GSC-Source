@@ -38,181 +38,181 @@ function test_bag_pickup() {
                               level.ref_119f9.ref_119fd = [];
                             }
 
-                            function ref_11a45(var0, var1) {
+                            function ref_11a45(var_0, var_1) {
                               if(!isDefined(level.ref_119f9)) {
                                 return;
                               }
 
-                              if(!scripts\engine\utility::array_contains_key(level.ref_119f9.ref_119fd, var0)) {
-                                level.ref_119f9.ref_119fd[var0] = allow_hotjoining(var0, var1);
+                              if(!scripts\engine\utility::array_contains_key(level.ref_119f9.ref_119fd, var_0)) {
+                                level.ref_119f9.ref_119fd[var_0] = allow_hotjoining(var_0, var_1);
                                 return;
                               }
                             }
 
-                            function ref_11a47(var0, var1) {
-                              if(cargo_truck_mg_cp_spawncallback(var0)) {
+                            function ref_11a47(var_0, var_1) {
+                              if(cargo_truck_mg_cp_spawncallback(var_0)) {
                                 return;
                               }
 
-                              if(scripts\engine\utility::array_contains_key(level.ref_119f9.ref_119fd, var0)) {
-                                level.ref_119f9.ref_119fd[var0] = var1;
-                                return;
-                              }
-                            }
-
-                            function ref_11a44(var0, var1, var2) {
-                              if(cargo_truck_mg_cp_spawncallback(var0)) {
-                                return;
-                              }
-
-                              var3 = level.ref_119f9.ref_119fd[var0];
-
-                              if(!scripts\engine\utility::array_contains_key(var3, var1)) {
-                                level.ref_119f9.ref_12148[var0][var1] = var2;
-                                level.ref_119f9.ref_119fd[var0] = allow_hotjoining(var0, level.ref_119f9.ref_12148[var0]);
+                              if(scripts\engine\utility::array_contains_key(level.ref_119f9.ref_119fd, var_0)) {
+                                level.ref_119f9.ref_119fd[var_0] = var_1;
                                 return;
                               }
                             }
 
-                            function ref_11a46(var0, var1) {
-                              if(cargo_truck_mg_cp_spawncallback(var0)) {
+                            function ref_11a44(var_0, var_1, var_2) {
+                              if(cargo_truck_mg_cp_spawncallback(var_0)) {
                                 return;
                               }
 
-                              var2 = level.ref_119f9.ref_119fd[var0];
+                              var_3 = level.ref_119f9.ref_119fd[var_0];
 
-                              if(scripts\engine\utility::array_contains_key(var2, var1)) {
-                                level.ref_119f9.ref_12148[var0] = scripts\engine\utility::array_remove_key(level.ref_119f9.ref_12148[var0], var1);
-                                level.ref_119f9.ref_119fd[var0] = allow_hotjoining(var0, level.ref_119f9.ref_12148[var0]);
+                              if(!scripts\engine\utility::array_contains_key(var_3, var_1)) {
+                                level.ref_119f9.ref_12148[var_0][var_1] = var_2;
+                                level.ref_119f9.ref_119fd[var_0] = allow_hotjoining(var_0, level.ref_119f9.ref_12148[var_0]);
                                 return;
                               }
                             }
 
-                            function removepickup(var0) {
-                              if(cargo_truck_mg_cp_spawncallback(var0)) {
+                            function ref_11a46(var_0, var_1) {
+                              if(cargo_truck_mg_cp_spawncallback(var_0)) {
                                 return;
                               }
 
-                              return level.ref_119f9.ref_119fd[var0];
+                              var_2 = level.ref_119f9.ref_119fd[var_0];
+
+                              if(scripts\engine\utility::array_contains_key(var_2, var_1)) {
+                                level.ref_119f9.ref_12148[var_0] = scripts\engine\utility::array_remove_key(level.ref_119f9.ref_12148[var_0], var_1);
+                                level.ref_119f9.ref_119fd[var_0] = allow_hotjoining(var_0, level.ref_119f9.ref_12148[var_0]);
+                                return;
+                              }
                             }
 
-                            function loottableexist(var0) {
-                              return scripts\engine\utility::array_contains_key(level.ref_119f9.ref_119fd, var0);
-                            }
-
-                            function ref_13673(var0, var1, var2, var3, var4) {
-                              if(cargo_truck_mg_cp_spawncallback(var0)) {
+                            function removepickup(var_0) {
+                              if(cargo_truck_mg_cp_spawncallback(var_0)) {
                                 return;
                               }
 
-                              var5 = removepickup(var0);
-                              var6 = spawnStruct();
-                              var6.ml_p3_to_safehouse_transition = randomintrange(1, 10);
-                              var6.heightoffset = 0;
-                              var6.origin = var1;
+                              return level.ref_119f9.ref_119fd[var_0];
+                            }
 
-                              if(isstring(var3)) {} else if(var3) {
-                                playFX(scripts\engine\utility::getfx("vfx_golden_loot_explosion_flare"), var1);
+                            function loottableexist(var_0) {
+                              return scripts\engine\utility::array_contains_key(level.ref_119f9.ref_119fd, var_0);
+                            }
+
+                            function ref_13673(var_0, var_1, var_2, var_3, var_4) {
+                              if(cargo_truck_mg_cp_spawncallback(var_0)) {
+                                return;
                               }
 
-                              for(var7 = 0; var7 < var2; var7++) {
-                                var8 = randomfloat(1);
+                              var_5 = removepickup(var_0);
+                              var_6 = spawnStruct();
+                              var_6.ml_p3_to_safehouse_transition = randomintrange(1, 10);
+                              var_6.heightoffset = 0;
+                              var_6.origin = var_1;
 
-                                foreach(var15, var10 in var5) {
-                                  var11 = var10[2];
-                                  var12 = var10[3];
+                              if(isstring(var_3)) {} else if(var_3) {
+                                playFX(scripts\engine\utility::getfx("vfx_golden_loot_explosion_flare"), var_1);
+                              }
 
-                                  if(var8 >= var11 && var8 <= var12) {
-                                    switch (var15) {
+                              for(var_7 = 0; var_7 < var_2; var_7++) {
+                                var_8 = randomfloat(1);
+
+                                foreach(var_15, var_10 in var_5) {
+                                  var_11 = var_10[2];
+                                  var_12 = var_10[3];
+
+                                  if(var_8 >= var_11 && var_8 <= var_12) {
+                                    switch (var_15) {
                                       case "nothing":
                                         continue;
                                       case "brloot_ammo_killer_based":
-                                        if(!isDefined(var4)) {
+                                        if(!isDefined(var_4)) {
                                           continue;
                                         }
 
-                                        if(!isDefined(var4["eAttacker"])) {
+                                        if(!isDefined(var_4["eAttacker"])) {
                                           continue;
                                         }
 
-                                        var13 = var4["eAttacker"];
-                                        var14 = undefined;
+                                        var_13 = var_4["eAttacker"];
+                                        var_14 = undefined;
 
-                                        if(isPlayer(var13) || isbot(var13) || isagent(var13)) {
-                                          var14 = weaponclass(var4["eAttacker"] getcurrentweapon());
+                                        if(isPlayer(var_13) || isbot(var_13) || isagent(var_13)) {
+                                          var_14 = weaponclass(var_4["eAttacker"] getcurrentweapon());
                                         }
 
-                                        if(!isDefined(var14)) {
+                                        if(!isDefined(var_14)) {
                                           continue;
                                         }
 
-                                        var6.item = level.ref_119f9.ƒÓ gµo0_û {
-                                          pÐ3[var14];
+                                        var_6.item = level.ref_119f9.ƒÓ gµo0_û {
+                                          pÐ3[var_14];
 
-                                          if(!isDefined(var6.item)) {
+                                          if(!isDefined(var_6.item)) {
                                             continue;
                                           }
 
                                           break;
                                           default:
-                                          var6.item = var15;
+                                          var_6.item = var_15;
                                           break;
                                         }
 
-                                        var6.ml_p3_to_safehouse_transition += 2;
-                                        thread ref_13672(var6);
+                                        var_6.ml_p3_to_safehouse_transition += 2;
+                                        thread ref_13672(var_6);
                                         waitframe();
                                     }
                                   }
                                 }
                               }
 
-                              function cargo_truck_mg_cp_spawncallback(var0) {
-                                if(!scripts\engine\utility::array_contains_key(level.ref_119f9.ref_119fd, var0)) {
+                              function cargo_truck_mg_cp_spawncallback(var_0) {
+                                if(!scripts\engine\utility::array_contains_key(level.ref_119f9.ref_119fd, var_0)) {
                                   return true;
                                 }
 
                                 return false;
                               }
 
-                              function ref_13672(var0) {
-                                var0.legendary = issubstr(var0.item, "lege");
-                                var1 = var0.item;
-                                var2 = var0.origin + (0, 0, var0.heightoffset);
-                                var3 = (0, 0, 0);
-                                var4 = scripts\mp\gametypes\br_lootcache::ref_11a41(var1, var0, var2, var3, 0, var0.legendary, 0);
-                                var0.heightoffset += 3;
+                              function ref_13672(var_0) {
+                                var_0.legendary = issubstr(var_0.item, "lege");
+                                var_1 = var_0.item;
+                                var_2 = var_0.origin + (0, 0, var_0.heightoffset);
+                                var_3 = (0, 0, 0);
+                                var_4 = scripts\mp\gametypes\br_lootcache::ref_11a41(var_1, var_0, var_2, var_3, 0, var_0.legendary, 0);
+                                var_0.heightoffset += 3;
                               }
 
-                              function allow_hotjoining(var0, var1) {
-                                var2 = [];
-                                var3 = 0;
+                              function allow_hotjoining(var_0, var_1) {
+                                var_2 = [];
+                                var_3 = 0;
 
-                                foreach(var5 in var1) {
-                                  var3 += var5;
+                                foreach(var_5 in var_1) {
+                                  var_3 += var_5;
                                 }
 
-                                var7 = 0;
-                                var8 = getarraykeys(var1);
-                                var9 = undefined;
+                                var_7 = 0;
+                                var_8 = getarraykeys(var_1);
+                                var_9 = undefined;
 
-                                foreach(var14, var5 in var1) {
-                                  var2 = [];
-                                  var11 = var5 / var3;
+                                foreach(var_14, var_5 in var_1) {
+                                  var_2 = [];
+                                  var_11 = var_5 / var_3;
 
-                                  if(var7 == 0) {
-                                    var12 = 0;
-                                    var13 = var11;
+                                  if(var_7 == 0) {
+                                    var_12 = 0;
+                                    var_13 = var_11;
                                   } else {
-                                    var12 = var9[3];
-                                    var13 = var12 + var11;
+                                    var_12 = var_9[3];
+                                    var_13 = var_12 + var_11;
                                   }
 
-                                  var2 = [var5, var11, var12, var13];
-                                  var9 = var2[var14];
-                                  var7++;
+                                  var_2 = [var_5, var_11, var_12, var_13];
+                                  var_9 = var_2[var_14];
+                                  var_7++;
                                 }
 
-                                level.ref_119f9.ref_12148[var0] = var1;
-                                return var2;
+                                level.ref_119f9.ref_12148[var_0] = var_1;
+                                return var_2;
                               }

@@ -19,9 +19,9 @@ function main() {
 }
 
 function remove_all_intel() {
-  foreach(var1 in level.intel_items) {
-    if(!isDefined(var1.removed)) {
-      remove_intel_item(var1);
+  foreach(var_1 in level.intel_items) {
+    if(!isDefined(var_1.removed)) {
+      remove_intel_item(var_1);
     }
   }
 }
@@ -37,16 +37,16 @@ function remove_intel_item() {
 }
 
 function initialize_intel() {
-  foreach(var1 in level.intel_items) {
-    var2 = var1.origin;
-    var1.num = get_nums_from_origins(var2);
+  foreach(var_1 in level.intel_items) {
+    var_2 = var_1.origin;
+    var_1.num = get_nums_from_origins(var_2);
   }
 }
 
 function intel_think() {
-  foreach(var1 in level.intel_items) {
-    if(check_item_found(var1)) {
-      remove_intel_item(var1);
+  foreach(var_1 in level.intel_items) {
+    if(check_item_found(var_1)) {
+      remove_intel_item(var_1);
       continue;
     }
 
@@ -74,8 +74,8 @@ function poll_for_found() {
 }
 
 function check_item_found() {
-  foreach(var1 in level.players) {
-    if(!var1 getplayerintelisfound(self.num)) {
+  foreach(var_1 in level.players) {
+    if(!var_1 getplayerintelisfound(self.num)) {
       return false;
     }
   }
@@ -84,38 +84,38 @@ function check_item_found() {
 }
 
 function create_array_of_intel_items() {
-  var0 = getEntArray("intelligence_item", "targetname");
+  var_0 = getEntArray("intelligence_item", "targetname");
 
-  for(var1 = 0; var1 < var0.size; var1++) {
-    var0[var1].item = getEnt(var0[var1].target, "targetname");
-    var0[var1].found = 0;
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    var_0[var_1].item = getEnt(var_0[var_1].target, "targetname");
+    var_0[var_1].found = 0;
   }
 
-  return var0;
+  return var_0;
 }
 
 function create_array_of_origins_from_table() {
-  var0 = 20;
-  var1 = [];
+  var_0 = 20;
+  var_1 = [];
 
-  for(var2 = 1; var2 <= var0; var2++) {
-    var3 = tablelookup("sp/intel_items.csv", 0, var2, 4);
+  for(var_2 = 1; var_2 <= var_0; var_2++) {
+    var_3 = tablelookup("sp/intel_items.csv", 0, var_2, 4);
 
-    if(isDefined(var3) && var3 != "undefined") {
-      var4 = strtok(var3, ",");
+    if(isDefined(var_3) && var_3 != "undefined") {
+      var_4 = strtok(var_3, ",");
 
-      for(var5 = 0; var5 < var4.size; var5++) {
-        var4 = int(var4[var5]);
+      for(var_5 = 0; var_5 < var_4.size; var_5++) {
+        var_4 = int(var_4[var_5]);
       }
 
-      var1 = (var4[0], var4[1], var4[2]);
+      var_1 = (var_4[0], var_4[1], var_4[2]);
       continue;
     }
 
-    var1[var2] = undefined;
+    var_1[var_2] = undefined;
   }
 
-  return var1;
+  return var_1;
 }
 
 function award_intel() {
@@ -146,7 +146,7 @@ function upload_hold() {
   while(level.player.hold_count < 30 && isDefined(self)) {
     level.player.hold_count = 0;
     self stoploopsound("intelligence_pickup_loop");
-    self waittill("trigger", var0);
+    self waittill("trigger", var_0);
     self playLoopSound("intelligence_pickup_loop");
     setDvar("ui_securing", "intel");
     setDvar("ui_securing_progress", 0);
@@ -184,95 +184,95 @@ function hold_count_check() {
 
 function progress_bar() {
   self endon("stopped_pressing");
-  var0 = 30;
-  var1 = 8;
+  var_0 = 30;
+  var_1 = 8;
 
-  for(var2 = 0; var2 < var0; var2++) {
-    setDvar("ui_securing_progress", getdvarfloat("ui_securing_progress") + 1 / var0);
+  for(var_2 = 0; var_2 < var_0; var_2++) {
+    setDvar("ui_securing_progress", getdvarfloat("ui_securing_progress") + 1 / var_0);
     waitframe();
   }
 }
 
-function intel_upload_text(var0, var1) {
+function intel_upload_text(var_0, var_1) {
   self endon("stopped_pressing");
-  var2 = 30;
-  var3 = 10;
-  var4 = 0;
+  var_2 = 30;
+  var_3 = 10;
+  var_4 = 0;
 
-  for(var5 = 0; var5 < var2; var5++) {
-    if(var4 > var3) {
-      var4 = 0;
+  for(var_5 = 0; var_5 < var_2; var_5++) {
+    if(var_4 > var_3) {
+      var_4 = 0;
     }
 
-    if(var4 < var3 / 2) {
-      var0 settext(&"SCRIPT/INTELLIGENCE_UPLOADING");
+    if(var_4 < var_3 / 2) {
+      var_0 settext(&"SCRIPT/INTELLIGENCE_UPLOADING");
     } else {
-      var0 settext("");
+      var_0 settext("");
     }
 
-    var1.label = int(var5 / var2 * 100);
-    var1 settext(&"SCRIPT/INTELLIGENCE_PERCENT");
-    var4++;
+    var_1.label = int(var_5 / var_2 * 100);
+    var_1 settext(&"SCRIPT/INTELLIGENCE_PERCENT");
+    var_4++;
     waitframe();
   }
 
-  var0 settext(&"SCRIPT/INTELLIGENCE_UPLOADING");
-  var1.label = "100";
-  var1 settext(&"SCRIPT/INTELLIGENCE_PERCENT");
+  var_0 settext(&"SCRIPT/INTELLIGENCE_UPLOADING");
+  var_1.label = "100";
+  var_1 settext(&"SCRIPT/INTELLIGENCE_PERCENT");
 }
 
 function save_intel_for_all_players() {
-  foreach(var1 in level.players) {
-    if(var1 getplayerintelisfound(self.num)) {
+  foreach(var_1 in level.players) {
+    if(var_1 getplayerintelisfound(self.num)) {
       continue;
     }
 
-    var1 setplayerintelfound(self.num);
+    var_1 setplayerintelfound(self.num);
   }
 
   logstring("found intel item " + self.num);
 }
 
 function give_point() {
-  var0 = self getlocalplayerprofiledata("cheatPoints");
-  self setlocalplayerprofiledata("cheatPoints", var0 + 1);
+  var_0 = self getlocalplayerprofiledata("cheatPoints");
+  self setlocalplayerprofiledata("cheatPoints", var_0 + 1);
 }
 
-function intel_feedback(var0) {
+function intel_feedback(var_0) {
   self.item hide();
   self.item notsolid();
   playworldsound("intelligence_pickup", self.item.origin);
-  var1 = 3000;
-  var2 = 700;
-  var3 = var1 + var2 / 1000;
+  var_1 = 3000;
+  var_2 = 700;
+  var_3 = var_1 + var_2 / 1000;
 
-  foreach(var5 in level.players) {
-    if(var0 != var5 && var5 getplayerintelisfound(self.num)) {
+  foreach(var_5 in level.players) {
+    if(var_0 != var_5 && var_5 getplayerintelisfound(self.num)) {
       continue;
     }
 
-    var6 = var5 scripts\sp\hud_util::createclientfontstring("objective", 1.5);
-    var6.glowcolor = (0.7, 0.7, 0.3);
-    var6.glowalpha = 1;
-    setup_hud_elem(var6);
-    var6.y = -50;
-    var6 setpulsefx(60, var1, var2);
-    var7 = 0;
+    var_6 = var_5 scripts\sp\hud_util::createclientfontstring("objective", 1.5);
+    var_6.glowcolor = (0.7, 0.7, 0.3);
+    var_6.glowalpha = 1;
+    setup_hud_elem(var_6);
+    var_6.y = -50;
+    var_6 setpulsefx(60, var_1, var_2);
+    var_7 = 0;
 
-    if(var0 == var5 && var5 getplayerintelisfound(self.num)) {
-      var6.label = &"SCRIPT/RORKEFILE_PREV_FOUND";
+    if(var_0 == var_5 && var_5 getplayerintelisfound(self.num)) {
+      var_6.label = &"SCRIPT/RORKEFILE_PREV_FOUND";
     } else {
-      var6.label = &"SCRIPT/INTELLIGENCE_OF_EIGHTEEN";
-      give_point(var5);
-      var7 = var5 getlocalplayerprofiledata("cheatPoints");
-      var6 setvalue(var7);
+      var_6.label = &"SCRIPT/INTELLIGENCE_OF_EIGHTEEN";
+      give_point(var_5);
+      var_7 = var_5 getlocalplayerprofiledata("cheatPoints");
+      var_6 setvalue(var_7);
     }
 
-    if(var7 == 18) {
-      var5 scripts\sp\utility::player_giveachievement_wrapper("EXT_1");
+    if(var_7 == 18) {
+      var_5 scripts\sp\utility::player_giveachievement_wrapper("EXT_1");
     }
 
-    var6 scripts\engine\utility::delaycall(var3, &destroy);
+    var_6 scripts\engine\utility::delaycall(var_3, &destroy);
   }
 }
 
@@ -288,55 +288,55 @@ function setup_hud_elem() {
 }
 
 function assert_if_identical_origins() {
-  var0 = [];
+  var_0 = [];
 
-  for(var1 = 1; var1 < 65; var1++) {
-    var2 = tablelookup("sp/intel_items.csv", 0, var1, 4);
-    var3 = strtok(var2, ",");
-    var1 = 0;
+  for(var_1 = 1; var_1 < 65; var_1++) {
+    var_2 = tablelookup("sp/intel_items.csv", 0, var_1, 4);
+    var_3 = strtok(var_2, ",");
+    var_1 = 0;
 
-    if(var1 < var3.size) {
-      GscBinSkip0(0x2e, var1, int(var3[var1]));
+    if(var_1 < var_3.size) {
+      GscBinSkip0(0x2e, var_1, int(var_3[var_1]));
     }
 
-    var0 = (var3[0], var3[1], var3[2]);
+    var_0 = (var_3[0], var_3[1], var_3[2]);
   }
 
-  for(var1 = 0; var1 < var0.size; var1++) {
-    if(!isDefined(var0[var1])) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    if(!isDefined(var_0[var_1])) {
       continue;
     }
 
-    if(var0[var1] == "undefined") {
+    if(var_0[var_1] == "undefined") {
       continue;
     }
 
-    for(var4 = 0; var4 < var0.size; var4++) {
-      if(!isDefined(var0[var4])) {
+    for(var_4 = 0; var_4 < var_0.size; var_4++) {
+      if(!isDefined(var_0[var_4])) {
         continue;
       }
 
-      if(var0[var4] == "undefined") {
+      if(var_0[var_4] == "undefined") {
         continue;
       }
 
-      if(var1 == var4) {
+      if(var_1 == var_4) {
         continue;
       }
 
-      if(var0[var1] == var0[var4]) {}
+      if(var_0[var_1] == var_0[var_4]) {}
     }
   }
 }
 
-function get_nums_from_origins(var0) {
-  for(var1 = 1; var1 < level.table_origins.size + 1; var1++) {
-    if(!isDefined(level.table_origins[var1])) {
+function get_nums_from_origins(var_0) {
+  for(var_1 = 1; var_1 < level.table_origins.size + 1; var_1++) {
+    if(!isDefined(level.table_origins[var_1])) {
       continue;
     }
 
-    if(distancesquared(var0, level.table_origins[var1]) < squared(75)) {
-      return var1;
+    if(distancesquared(var_0, level.table_origins[var_1]) < squared(75)) {
+      return var_1;
     }
   }
 }

@@ -11,54 +11,54 @@ function init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("tripwire", "blowTripWire", &ref_13dd2);
 }
 
-function tripwire_createhintobject(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10) {
-  var11 = spawn("script_model", var0);
-  var11 setModel("tag_origin");
-  var11.angles = (0, 0, 0);
+function tripwire_createhintobject(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+  var_11 = spawn("script_model", var_0);
+  var_11 setModel("tag_origin");
+  var_11.angles = (0, 0, 0);
 
-  if(isDefined(var5)) {
-    var11 setuseholdduration(var5);
+  if(isDefined(var_5)) {
+    var_11 setuseholdduration(var_5);
   } else {
-    var11 setuseholdduration("duration_medium");
+    var_11 setuseholdduration("duration_medium");
   }
 
-  if(!isDefined(var5) || var5 == "duration_medium" || var5 == "duration_long") {
-    var11 sethintrequiresholding(1);
+  if(!isDefined(var_5) || var_5 == "duration_medium" || var_5 == "duration_long") {
+    var_11 sethintrequiresholding(1);
   }
 
-  if(isDefined(var6)) {
-    var11 sethintonobstruction(var6);
+  if(isDefined(var_6)) {
+    var_11 sethintonobstruction(var_6);
   } else {
-    var11 sethintonobstruction("hide");
+    var_11 sethintonobstruction("hide");
   }
 
-  if(isDefined(var7)) {
-    var11 sethintdisplayrange(var7);
+  if(isDefined(var_7)) {
+    var_11 sethintdisplayrange(var_7);
   } else {
-    var11 sethintdisplayrange(200);
+    var_11 sethintdisplayrange(200);
   }
 
-  var11 sethintdisplayfov(65);
+  var_11 sethintdisplayfov(65);
 
-  if(isDefined(var9)) {
-    var11 setuserange(var9);
+  if(isDefined(var_9)) {
+    var_11 setuserange(var_9);
   } else {
-    var11 setuserange(72);
+    var_11 setuserange(72);
   }
 
-  if(isDefined(var10)) {
-    var11 setusefov(var10);
+  if(isDefined(var_10)) {
+    var_11 setusefov(var_10);
   } else {
-    var11 setusefov(65);
+    var_11 setusefov(65);
   }
 
   thread ref_13202();
   level thread scripts\cp\cp_weapon::bankingoverlimitwillendot(self);
-  var3 = &"CP_STRIKE/DEFUSE";
-  var11 setHintString(var3);
-  var11 setCursorHint("HINT_BUTTON");
-  var11 makeusable();
-  return var11;
+  var_3 = &"CP_STRIKE/DEFUSE";
+  var_11 setHintString(var_3);
+  var_11 setCursorHint("HINT_BUTTON");
+  var_11 makeusable();
+  return var_11;
 }
 
 function ref_13202() {
@@ -71,69 +71,69 @@ function ref_13202() {
   }
 }
 
-function tripwire_cantriptrap(var0, var1, var2, var3, var4) {
-  if(!isDefined(var0)) {
+function tripwire_cantriptrap(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
-  if(isPlayer(var0) && isexplosivedamagemod(var2) && var3 > 90) {
+  if(isPlayer(var_0) && isexplosivedamagemod(var_2) && var_3 > 90) {
     return true;
   }
 
-  if(isPlayer(var0) && validchallengetimer(var2) && var3 > 10) {
+  if(isPlayer(var_0) && validchallengetimer(var_2) && var_3 > 10) {
     return true;
   }
 
-  if(isPlayer(var0) && unlockstop(var0, var1)) {
-    return true;
-  }
-
-  return false;
-}
-
-function validchallengetimer(var0) {
-  if(scripts\engine\utility::isbulletdamage(var0)) {
-    return true;
-  }
-
-  if(var0 == "MOD_FIRE") {
+  if(isPlayer(var_0) && unlockstop(var_0, var_1)) {
     return true;
   }
 
   return false;
 }
 
-function unlockstop(var0, var1) {
-  if(var1.basename == "emp_drone_player_mp") {
+function validchallengetimer(var_0) {
+  if(scripts\engine\utility::isbulletdamage(var_0)) {
     return true;
   }
 
-  if(var1.basename == "emp_drone_non_player_mp") {
-    return true;
-  }
-
-  if(var1.basename == "emp_drone_non_player_direct_mp") {
+  if(var_0 == "MOD_FIRE") {
     return true;
   }
 
   return false;
 }
 
-function tripwire_damagefunc(var0, var1) {
-  var0 disableplayermarks("equipment");
+function unlockstop(var_0, var_1) {
+  if(var_1.basename == "emp_drone_player_mp") {
+    return true;
+  }
 
-  if(isDefined(var1) && isPlayer(var1)) {
-    radiusdamage(var0.origin, 384, 256, 40, undefined, "MOD_SUICIDE", "frag_grenade_mp");
+  if(var_1.basename == "emp_drone_non_player_mp") {
+    return true;
+  }
+
+  if(var_1.basename == "emp_drone_non_player_direct_mp") {
+    return true;
+  }
+
+  return false;
+}
+
+function tripwire_damagefunc(var_0, var_1) {
+  var_0 disableplayermarks("equipment");
+
+  if(isDefined(var_1) && isPlayer(var_1)) {
+    radiusdamage(var_0.origin, 384, 256, 40, undefined, "MOD_SUICIDE", "frag_grenade_mp");
   } else {
-    radiusdamage(var0.origin, 384, 256, 40, undefined, "MOD_EXPLOSIVE", "frag_grenade_mp");
+    radiusdamage(var_0.origin, 384, 256, 40, undefined, "MOD_EXPLOSIVE", "frag_grenade_mp");
   }
 
-  playrumbleonposition("grenade_rumble", var0.origin);
-  earthquake(0.45, 0.7, var0.origin, 800);
+  playrumbleonposition("grenade_rumble", var_0.origin);
+  earthquake(0.45, 0.7, var_0.origin, 800);
 
-  if(isDefined(var1) && isPlayer(var1)) {
-    if(distancesquared(var1.origin, var0.origin) < 250000) {
-      level thread scripts\cp\cp_player_battlechatter::trysaylocalsound(var1, "flavor_negative", undefined, 1);
+  if(isDefined(var_1) && isPlayer(var_1)) {
+    if(distancesquared(var_1.origin, var_0.origin) < 250000) {
+      level thread scripts\cp\cp_player_battlechatter::trysaylocalsound(var_1, "flavor_negative", undefined, 1);
       return;
     }
 
@@ -141,72 +141,72 @@ function tripwire_damagefunc(var0, var1) {
   }
 }
 
-function tripwire_givegrenade(var0, var1) {
-  var2 = "power_frag";
+function tripwire_givegrenade(var_0, var_1) {
+  var_2 = "power_frag";
 
-  if(!isstring(var0)) {
-    var2 = createheadicon(var0);
+  if(!isstring(var_0)) {
+    var_2 = createheadicon(var_0);
   }
 
-  switch (var2) {
+  switch (var_2) {
     case "frag":
-      var3 = "power_frag";
+      var_3 = "power_frag";
       break;
     case "semtex":
-      var3 = "power_semtex";
+      var_3 = "power_semtex";
       break;
     case "c4":
-      var3 = "power_c4";
+      var_3 = "power_c4";
       break;
     default:
-      var3 = "power_frag";
+      var_3 = "power_frag";
       break;
   }
 
-  var4 = 0;
+  var_4 = 0;
 
-  if(isDefined(var3.powers[var3])) {
-    var4 = var3.powers[var3].charges;
+  if(isDefined(var_3.powers[var_3])) {
+    var_4 = var_3.powers[var_3].charges;
   }
 
-  var5 = scripts\cp\cp_loadout::get_num_of_charges_for_power(var3, "primary");
+  var_5 = scripts\cp\cp_loadout::get_num_of_charges_for_power(var_3, "primary");
 
-  if(var4 >= var5) {
-    var4 = var5 - 1;
+  if(var_4 >= var_5) {
+    var_4 = var_5 - 1;
   }
 
-  var3 scripts\cp\cp_powers::givepower(var3, "primary", undefined, undefined, undefined, 0, 1, var4 + 1);
+  var_3 scripts\cp\cp_powers::givepower(var_3, "primary", undefined, undefined, undefined, 0, 1, var_4 + 1);
 }
 
-function tripwire_disarmgiveweapon(var0, var1, var2) {
-  var3 = var0;
+function tripwire_disarmgiveweapon(var_0, var_1, var_2) {
+  var_3 = var_0;
 
-  if(isstring(var0)) {
-    var3 = asmdevgetallstates(var0);
+  if(isstring(var_0)) {
+    var_3 = asmdevgetallstates(var_0);
   }
 
-  if(hasequipmentoftype(var0, var2) || should_start_cautious_approach_koth(var2)) {
-    tripwire_givegrenade(var0, var2);
+  if(hasequipmentoftype(var_0, var_2) || should_start_cautious_approach_koth(var_2)) {
+    tripwire_givegrenade(var_0, var_2);
   }
 
   thread play_disarm_operator_vo(level);
 }
 
-function hasequipmentoftype(var0, var1) {
-  var2 = var0;
+function hasequipmentoftype(var_0, var_1) {
+  var_2 = var_0;
 
-  if(isstring(var0)) {
-    var2 = asmdevgetallstates(var0);
+  if(isstring(var_0)) {
+    var_2 = asmdevgetallstates(var_0);
   }
 
-  var3 = var1.offhandinventory;
+  var_3 = var_1.offhandinventory;
 
-  foreach(var5 in var3) {
-    if(getweaponbasename(var5) == getweaponbasename(var2)) {
+  foreach(var_5 in var_3) {
+    if(getweaponbasename(var_5) == getweaponbasename(var_2)) {
       return true;
     }
 
-    if(getweaponbasename(var2) == "frag" && getweaponbasename(var5) == "frag_grenade_mp") {
+    if(getweaponbasename(var_2) == "frag" && getweaponbasename(var_5) == "frag_grenade_mp") {
       return true;
     }
   }
@@ -214,48 +214,48 @@ function hasequipmentoftype(var0, var1) {
   return false;
 }
 
-function should_start_cautious_approach_koth(var0) {
-  var1 = 0;
-  var2 = var0.offhandinventory;
+function should_start_cautious_approach_koth(var_0) {
+  var_1 = 0;
+  var_2 = var_0.offhandinventory;
 
-  foreach(var4 in var2) {
-    var5 = scripts\cp\utility::getequipmenttype(getweaponbasename(var4));
+  foreach(var_4 in var_2) {
+    var_5 = scripts\cp\utility::getequipmenttype(getweaponbasename(var_4));
 
-    if(isDefined(var5)) {
-      if(var5 == "lethal") {
-        var1 = 1;
+    if(isDefined(var_5)) {
+      if(var_5 == "lethal") {
+        var_1 = 1;
       }
     }
   }
 
-  if(!var1) {
+  if(!var_1) {
     return true;
   }
 
   return false;
 }
 
-function issameoffhandtype(var0, var1) {
-  var2 = scripts\cp\utility::getequipmenttype(var0);
+function issameoffhandtype(var_0, var_1) {
+  var_2 = scripts\cp\utility::getequipmenttype(var_0);
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return false;
   }
 
-  if(var2 == scripts\cp\utility::getequipmenttype(var1)) {
+  if(var_2 == scripts\cp\utility::getequipmenttype(var_1)) {
     return true;
   }
 
   return false;
 }
 
-function haslethalequipment(var0) {
-  var1 = var0.offhandinventory;
+function haslethalequipment(var_0) {
+  var_1 = var_0.offhandinventory;
 
-  foreach(var3 in var1) {
-    var4 = scripts\cp\utility::getequipmenttype(getweaponbasename(var3));
+  foreach(var_3 in var_1) {
+    var_4 = scripts\cp\utility::getequipmenttype(getweaponbasename(var_3));
 
-    if(isDefined(var4) && var4 == "lethal") {
+    if(isDefined(var_4) && var_4 == "lethal") {
       return true;
     }
   }
@@ -263,17 +263,17 @@ function haslethalequipment(var0) {
   return false;
 }
 
-function play_disarm_operator_vo(var0) {
+function play_disarm_operator_vo(var_0) {
   if(!isDefined(level.vo_tripwire_next_callout_time) || gettime() > level.vo_tripwire_next_callout_time) {
     level.vo_tripwire_next_callout_time = gettime() + 30000;
-    level thread scripts\cp\cp_player_battlechatter::trysaylocalsound(var0, "ping_enemy_traps", undefined, 0.8);
+    level thread scripts\cp\cp_player_battlechatter::trysaylocalsound(var_0, "ping_enemy_traps", undefined, 0.8);
     return;
   }
 }
 
-function ref_13dd2(var0, var1) {
-  if(isPlayer(var0) && (var1 == "MOD_GRENADE_SPLASH" || var1 == "MOD_PROJECTILE_SPLASH")) {
-    var0 thread scripts\cp\cp_achievement::trapachievementboom(var0);
+function ref_13dd2(var_0, var_1) {
+  if(isPlayer(var_0) && (var_1 == "MOD_GRENADE_SPLASH" || var_1 == "MOD_PROJECTILE_SPLASH")) {
+    var_0 thread scripts\cp\cp_achievement::trapachievementboom(var_0);
     return;
   }
 }

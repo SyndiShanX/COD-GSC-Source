@@ -33,6 +33,6 @@ function main_mp() {
   scripts\code\character::attachhead("heads_sas_urban", xmodelalias\heads_sas_urban::main());
 }
 
-function precache_mp(var0) {
-  level.agent_definition[var0]["animclass"] = "soldier";
+function precache_mp(var_0) {
+  level.agent_definition[var_0]["animclass"] = "soldier";
 }

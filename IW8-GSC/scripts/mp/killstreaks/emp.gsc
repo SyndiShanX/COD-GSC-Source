@@ -8,28 +8,28 @@ function init() {
 }
 
 function tryuseemp() {
-  var0 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("emp", self);
-  return tryuseempfromstruct(var0);
+  var_0 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("emp", self);
+  return tryuseempfromstruct(var_0);
 }
 
-function tryuseempfromstruct(var0) {
+function tryuseempfromstruct(var_0) {
   level endon("game_ended");
   self endon("disconnect");
 
   if(isDefined(level.killstreaktriggeredfunc)) {
-    if(!level[[level.killstreaktriggeredfunc]](var0)) {
+    if(!level[[level.killstreaktriggeredfunc]](var_0)) {
       return false;
     }
   }
 
-  var1 = scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_dogesturedeploy(var0, getcompleteweaponname("ks_gesture_generic_mp"));
+  var_1 = scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_dogesturedeploy(var_0, getcompleteweaponname("ks_gesture_generic_mp"));
 
-  if(!istrue(var1)) {
+  if(!istrue(var_1)) {
     return false;
   }
 
   if(isDefined(level.killstreakbeginusefunc)) {
-    if(!level[[level.killstreakbeginusefunc]](var0)) {
+    if(!level[[level.killstreakbeginusefunc]](var_0)) {
       return false;
     }
   }
@@ -45,29 +45,29 @@ function tryuseempfromstruct(var0) {
 
 function startemp() {
   level endon("game_ended");
-  var0 = scripts\cp_mp\utility\killstreak_utility::removeextracthelipad();
-  var1 = 3000;
+  var_0 = scripts\cp_mp\utility\killstreak_utility::removeextracthelipad();
+  var_1 = 3000;
 
-  if(isDefined(var0)) {
-    var1 = var0.origin[2] + 500;
+  if(isDefined(var_0)) {
+    var_1 = var_0.origin[2] + 500;
   }
 
-  var2 = level.mapcenter * (1, 1, 0) + (0, 0, var1);
-  playFX(scripts\engine\utility::getfx("emp_shockwave"), var2);
+  var_2 = level.mapcenter * (1, 1, 0) + (0, 0, var_1);
+  playFX(scripts\engine\utility::getfx("emp_shockwave"), var_2);
   self playSound("jammer_drone_shockwave");
 
-  foreach(var4 in level.players) {
-    if(!scripts\mp\utility\player::isreallyalive(var4)) {
+  foreach(var_4 in level.players) {
+    if(!scripts\mp\utility\player::isreallyalive(var_4)) {
       continue;
     }
 
     thread applyempshellshock();
   }
 
-  var6 = scripts\mp\utility\teams::getenemyteams(self.owner.team);
+  var_6 = scripts\mp\utility\teams::getenemyteams(self.owner.team);
 
-  foreach(var8 in var6) {
-    destroyactiveobjects(var8, self);
+  foreach(var_8 in var_6) {
+    destroyactiveobjects(var_8, self);
   }
 }
 
@@ -88,24 +88,24 @@ function applyempshellshockvisionset() {
   visionsetnaked("", 0.5);
 }
 
-function destroyactiveobjects(var0, var1) {
-  var2 = "nuke_mp";
-  var3 = level.activekillstreaks;
-  var4 = [[level.getactiveequipmentarray]]();
-  var5 = undefined;
+function destroyactiveobjects(var_0, var_1) {
+  var_2 = "nuke_mp";
+  var_3 = level.activekillstreaks;
+  var_4 = [[level.getactiveequipmentarray]]();
+  var_5 = undefined;
 
-  if(isDefined(var3) && isDefined(var4)) {
-    var5 = scripts\engine\utility::array_combine_unique(var3, var4);
-  } else if(isDefined(var3)) {
-    var5 = var3;
-  } else if(isDefined(var4)) {
-    var5 = var4;
+  if(isDefined(var_3) && isDefined(var_4)) {
+    var_5 = scripts\engine\utility::array_combine_unique(var_3, var_4);
+  } else if(isDefined(var_3)) {
+    var_5 = var_3;
+  } else if(isDefined(var_4)) {
+    var_5 = var_4;
   }
 
-  if(isDefined(var5)) {
-    foreach(var7 in var5) {
-      if(isDefined(var7)) {
-        var7 scripts\mp\utility\killstreak::dodamagetokillstreak(10000, var1, var1, var0, var7.origin, "MOD_EXPLOSIVE", var2);
+  if(isDefined(var_5)) {
+    foreach(var_7 in var_5) {
+      if(isDefined(var_7)) {
+        var_7 scripts\mp\utility\killstreak::dodamagetokillstreak(10000, var_1, var_1, var_0, var_7.origin, "MOD_EXPLOSIVE", var_2);
       }
     }
 

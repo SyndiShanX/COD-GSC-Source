@@ -5,38 +5,38 @@
 
 function init_flavorbursts() {
   anim.flavorbursts["unitedstates"] = [];
-  var0 = 41;
+  var_0 = 41;
 
-  for(var1 = 0; var1 < var0; var1++) {
-    anim.flavorbursts["unitedstates"][var1] = scripts\engine\utility::string(var1 + 1);
+  for(var_1 = 0; var_1 < var_0; var_1++) {
+    anim.flavorbursts["unitedstates"][var_1] = scripts\engine\utility::string(var_1 + 1);
   }
 
   anim.flavorbursts["unitedstatesfemale"] = [];
-  var0 = 41;
+  var_0 = 41;
 
-  for(var1 = 0; var1 < var0; var1++) {
-    anim.flavorbursts["unitedstatesfemale"][var1] = scripts\engine\utility::string(var1 + 1);
+  for(var_1 = 0; var_1 < var_0; var_1++) {
+    anim.flavorbursts["unitedstatesfemale"][var_1] = scripts\engine\utility::string(var_1 + 1);
   }
 
   anim.flavorbursts["sas"] = [];
-  var0 = 41;
+  var_0 = 41;
 
-  for(var1 = 0; var1 < var0; var1++) {
-    anim.flavorbursts["sas"][var1] = scripts\engine\utility::string(var1 + 1);
+  for(var_1 = 0; var_1 < var_0; var_1++) {
+    anim.flavorbursts["sas"][var_1] = scripts\engine\utility::string(var_1 + 1);
   }
 
   anim.flavorbursts["fsa"] = [];
-  var0 = 41;
+  var_0 = 41;
 
-  for(var1 = 0; var1 < var0; var1++) {
-    anim.flavorbursts["fsa"][var1] = scripts\engine\utility::string(var1 + 1);
+  for(var_1 = 0; var_1 < var_0; var_1++) {
+    anim.flavorbursts["fsa"][var_1] = scripts\engine\utility::string(var_1 + 1);
   }
 
   anim.flavorbursts["fsafemale"] = [];
-  var0 = 41;
+  var_0 = 41;
 
-  for(var1 = 0; var1 < var0; var1++) {
-    anim.flavorbursts["fsafemale"][var1] = scripts\engine\utility::string(var1 + 1);
+  for(var_1 = 0; var_1 < var_0; var_1++) {
+    anim.flavorbursts["fsafemale"][var_1] = scripts\engine\utility::string(var_1 + 1);
   }
 
   anim.flavorburstsused = [];
@@ -44,37 +44,37 @@ function init_flavorbursts() {
 
 function assign_npcid() {
   if(isDefined(self.script_friendname)) {
-    var0 = tolower(self.script_friendname);
+    var_0 = tolower(self.script_friendname);
     self.battlechatter.npcid = undefined;
 
-    if(issubstr(var0, "alex")) {
+    if(issubstr(var_0, "alex")) {
       self.battlechatter.countryid = "alx";
       self.battlechatter.onlyfirendlyfire = 1;
       return;
     }
 
-    if(issubstr(var0, "farah")) {
+    if(issubstr(var_0, "farah")) {
       self.battlechatter.countryid = "far";
       return;
     }
 
-    if(issubstr(var0, "captain price")) {
+    if(issubstr(var_0, "captain price")) {
       self.battlechatter.countryid = "pri";
       return;
     }
 
-    if(issubstr(var0, "kyle")) {
+    if(issubstr(var_0, "kyle")) {
       self.battlechatter.countryid = "kyle";
       self.battlechatter.onlyfirendlyfire = 1;
       return;
     }
 
-    if(issubstr(var0, "hadir")) {
+    if(issubstr(var_0, "hadir")) {
       self.battlechatter.countryid = "had";
       return;
     }
 
-    if(issubstr(var0, "griggs")) {
+    if(issubstr(var_0, "griggs")) {
       self.battlechatter.countryid = "grg";
       return;
     }
@@ -129,8 +129,8 @@ function bcs_setup_playernameids() {
   anim.playernameids["fsafemale"] = "1";
 }
 
-function isalliedcountryid(var0) {
-  switch (var0) {
+function isalliedcountryid(var_0) {
+  switch (var_0) {
     case "FSAW":
     case "FSA":
     case "SAS":
@@ -142,8 +142,8 @@ function isalliedcountryid(var0) {
   }
 }
 
-function isalliedmilitarycountryid(var0) {
-  switch (var0) {
+function isalliedmilitarycountryid(var_0) {
+  switch (var_0) {
     case "SAS":
     case "USM":
     case "UN":
@@ -153,16 +153,16 @@ function isalliedmilitarycountryid(var0) {
   }
 }
 
-function bcisgrenade(var0) {
-  if(var0 == "offhand_wm_grenade_mike67") {
+function bcisgrenade(var_0) {
+  if(var_0 == "offhand_wm_grenade_mike67") {
     return true;
   }
 
   return false;
 }
 
-function bcisrpg(var0) {
-  if(var0 == "rocketlauncher") {
+function bcisrpg(var_0) {
+  if(var_0 == "rocketlauncher") {
     return true;
   }
 

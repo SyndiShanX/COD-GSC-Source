@@ -6,8 +6,8 @@
 function processlobbyscoreboards() {
   ref_128b0();
 
-  foreach(var1 in level.players) {
-    ref_128a8(var1);
+  foreach(var_1 in level.players) {
+    ref_128a8(var_1);
   }
 }
 
@@ -15,8 +15,8 @@ function ref_128b0() {
   if(level.multiteambased) {
     buildscoreboardtype("multiteam");
 
-    foreach(var1 in level.players) {
-      var1 setplayerdata("common", "round", "scoreboardType", "multiteam");
+    foreach(var_1 in level.players) {
+      var_1 setplayerdata("common", "round", "scoreboardType", "multiteam");
     }
 
     if(getdvarint("MTKSQRQLKN") != 0) {
@@ -31,19 +31,19 @@ function ref_128b0() {
   }
 
   if(level.teambased) {
-    var3 = getteamscore("allies");
-    var4 = getteamscore("axis");
-    var5 = 0;
-    var6 = 0;
+    var_3 = getteamscore("allies");
+    var_4 = getteamscore("axis");
+    var_5 = 0;
+    var_6 = 0;
 
-    foreach(var1 in level.players) {
-      if(isDefined(var1.pers["team"]) && var1.pers["team"] == "allies") {
-        var5 += var1.pers["kills"];
-        var6 += var1.pers["deaths"];
+    foreach(var_1 in level.players) {
+      if(isDefined(var_1.pers["team"]) && var_1.pers["team"] == "allies") {
+        var_5 += var_1.pers["kills"];
+        var_6 += var_1.pers["deaths"];
       }
     }
 
-    var9 = "tie";
+    var_9 = "tie";
 
     if(scripts\mp\utility\game::inovertime()) {
       if(scripts\mp\utility\game::istimetobeatrulegametype()) {
@@ -53,12 +53,12 @@ function ref_128b0() {
             setclientmatchdata("axisTTB", 0);
           }
 
-          var9 = "tie";
+          var_9 = "tie";
         } else {
           if("allies" == game["timeToBeatTeam"]) {
-            var3++;
+            var_3++;
           } else {
-            var4++;
+            var_4++;
           }
 
           if(getdvarint("MTKSQRQLKN") != 0) {
@@ -66,50 +66,50 @@ function ref_128b0() {
             setclientmatchdata("axisTTB", scripts\engine\utility::ter_op("axis" == game["timeToBeatTeam"], game["timeToBeat"], game["timeToBeatOld"]));
           }
 
-          var9 = game["timeToBeatTeam"];
+          var_9 = game["timeToBeatTeam"];
         }
       } else if(scripts\mp\utility\game::isscoretobeatrulegametype()) {}
-    } else if(var3 == var4) {
-      var9 = "tie";
-    } else if(var3 > var4) {
-      var9 = "allies";
+    } else if(var_3 == var_4) {
+      var_9 = "tie";
+    } else if(var_3 > var_4) {
+      var_9 = "allies";
     } else {
-      var9 = "axis";
+      var_9 = "axis";
     }
 
     if(getdvarint("MTKSQRQLKN") != 0) {
-      setclientmatchdata("alliesScore", var3);
-      setclientmatchdata("axisScore", var4);
-      setclientmatchdata("alliesKills", var5);
-      setclientmatchdata("alliesDeaths", var6);
+      setclientmatchdata("alliesScore", var_3);
+      setclientmatchdata("axisScore", var_4);
+      setclientmatchdata("alliesKills", var_5);
+      setclientmatchdata("alliesDeaths", var_6);
     }
 
-    if(var9 == "tie") {
+    if(var_9 == "tie") {
       buildscoreboardtype("allies");
       buildscoreboardtype("axis");
 
-      foreach(var1 in level.players) {
-        var11 = var1.pers["team"];
+      foreach(var_1 in level.players) {
+        var_11 = var_1.pers["team"];
 
-        if(!isDefined(var11)) {
+        if(!isDefined(var_11)) {
           continue;
         }
 
-        if(var11 == "spectator" || var11 == "follower") {
-          var1 setplayerdata("common", "round", "scoreboardType", "allies");
+        if(var_11 == "spectator" || var_11 == "follower") {
+          var_1 setplayerdata("common", "round", "scoreboardType", "allies");
           continue;
         }
 
-        var1 setplayerdata("common", "round", "scoreboardType", var11);
+        var_1 setplayerdata("common", "round", "scoreboardType", var_11);
       }
 
       return;
     }
 
-    buildscoreboardtype(var9);
+    buildscoreboardtype(var_9);
 
-    foreach(var1 in level.players) {
-      var1 setplayerdata("common", "round", "scoreboardType", var9);
+    foreach(var_1 in level.players) {
+      var_1 setplayerdata("common", "round", "scoreboardType", var_9);
     }
 
     return;
@@ -117,8 +117,8 @@ function ref_128b0() {
 
   buildscoreboardtype("neutral");
 
-  foreach(var1 in level.players) {
-    var1 setplayerdata("common", "round", "scoreboardType", "neutral");
+  foreach(var_1 in level.players) {
+    var_1 setplayerdata("common", "round", "scoreboardType", "neutral");
   }
 
   if(getdvarint("MTKSQRQLKN") != 0) {
@@ -130,15 +130,15 @@ function ref_128b0() {
   }
 }
 
-function ref_128a8(var0) {
-  if(isDefined(var0.pers["summary"])) {
-    var0 setplayerdata("common", "round", "totalXp", var0.pers["summary"]["xp"]);
-    var0 setplayerdata("common", "round", "scoreXp", var0.pers["summary"]["score"]);
-    var0 setplayerdata("common", "round", "challengeXp", var0.pers["summary"]["challenge"]);
-    var0 setplayerdata("common", "round", "matchXp", var0.pers["summary"]["match"]);
-    var0 setplayerdata("common", "round", "miscXp", var0.pers["summary"]["misc"]);
-    var0 setplayerdata("common", "round", "medalXp", var0.pers["summary"]["medal"]);
-    var0 setplayerdata("common", "common_entitlement_xp", var0.pers["summary"]["bonusXP"]);
+function ref_128a8(var_0) {
+  if(isDefined(var_0.pers["summary"])) {
+    var_0 setplayerdata("common", "round", "totalXp", var_0.pers["summary"]["xp"]);
+    var_0 setplayerdata("common", "round", "scoreXp", var_0.pers["summary"]["score"]);
+    var_0 setplayerdata("common", "round", "challengeXp", var_0.pers["summary"]["challenge"]);
+    var_0 setplayerdata("common", "round", "matchXp", var_0.pers["summary"]["match"]);
+    var_0 setplayerdata("common", "round", "miscXp", var_0.pers["summary"]["misc"]);
+    var_0 setplayerdata("common", "round", "medalXp", var_0.pers["summary"]["medal"]);
+    var_0 setplayerdata("common", "common_entitlement_xp", var_0.pers["summary"]["bonusXP"]);
     return;
   }
 }
@@ -148,219 +148,219 @@ function setplayerscoreboardinfo() {
     return;
   }
 
-  var0 = getclientmatchdata("scoreboardPlayerCount");
+  var_0 = getclientmatchdata("scoreboardPlayerCount");
 
-  if(var0 < 200) {
+  if(var_0 < 200) {
     if(isDefined(self.pers["score"])) {
       setclientmatchdata("players", self.clientmatchdataid, "score", self.pers["score"]);
     }
 
     if(isDefined(self.pers["kills"])) {
-      var1 = self.pers["kills"];
-      setclientmatchdata("players", self.clientmatchdataid, "kills", var1);
+      var_1 = self.pers["kills"];
+      setclientmatchdata("players", self.clientmatchdataid, "kills", var_1);
     }
 
     if(scripts\mp\utility\game::getgametype() == "dm" || scripts\mp\utility\game::getgametype() == "gun") {
-      var2 = self.assists;
+      var_2 = self.assists;
     } else if(isDefined(self.pers["assists"])) {
-      var2 = self.pers["assists"];
+      var_2 = self.pers["assists"];
     } else {
-      var2 = 0;
+      var_2 = 0;
     }
 
-    setclientmatchdata("players", self.clientmatchdataid, "assists", var2);
+    setclientmatchdata("players", self.clientmatchdataid, "assists", var_2);
 
     if(isDefined(self.pers["deaths"])) {
-      var3 = self.pers["deaths"];
-      setclientmatchdata("players", self.clientmatchdataid, "deaths", var3);
+      var_3 = self.pers["deaths"];
+      setclientmatchdata("players", self.clientmatchdataid, "deaths", var_3);
     }
 
     if(isDefined(self.pers["team"])) {
-      var4 = self.pers["team"];
-      setclientmatchdata("players", self.clientmatchdataid, "team", var4);
+      var_4 = self.pers["team"];
+      setclientmatchdata("players", self.clientmatchdataid, "team", var_4);
 
       if(isDefined(game[self.pers["team"]])) {
-        var5 = game[self.pers["team"]];
-        setclientmatchdata("players", self.clientmatchdataid, "faction", var5);
+        var_5 = game[self.pers["team"]];
+        setclientmatchdata("players", self.clientmatchdataid, "faction", var_5);
       }
     }
 
     if(scripts\mp\utility\game::getgametype() == "br") {
       if(isDefined(self.playercardbackground)) {
-        var6 = self.playercardbackground;
-        setclientmatchdata("players", self.clientmatchdataid, "extrascore0", var6);
+        var_6 = self.playercardbackground;
+        setclientmatchdata("players", self.clientmatchdataid, "extrascore0", var_6);
       }
     } else if(isDefined(self.pers["extrascore0"])) {
-      var7 = self.pers["extrascore0"];
-      setclientmatchdata("players", self.clientmatchdataid, "extrascore0", var7);
+      var_7 = self.pers["extrascore0"];
+      setclientmatchdata("players", self.clientmatchdataid, "extrascore0", var_7);
     }
 
     if(isDefined(self.pers["extrascore1"])) {
-      var8 = self.pers["extrascore1"];
-      setclientmatchdata("players", self.clientmatchdataid, "extrascore1", var8);
+      var_8 = self.pers["extrascore1"];
+      setclientmatchdata("players", self.clientmatchdataid, "extrascore1", var_8);
     }
 
     if(isDefined(self.timeplayed["total"])) {
-      var9 = self.timeplayed["total"];
-      setclientmatchdata("players", self.clientmatchdataid, "timeplayed", var9);
+      var_9 = self.timeplayed["total"];
+      setclientmatchdata("players", self.clientmatchdataid, "timeplayed", var_9);
     }
 
     if(isDefined(self.pers["rank"]) && isDefined(self.pers["rankxp"])) {
-      var10 = scripts\mp\rank::getrank();
-      setclientmatchdata("players", self.clientmatchdataid, "rank", var10);
+      var_10 = scripts\mp\rank::getrank();
+      setclientmatchdata("players", self.clientmatchdataid, "rank", var_10);
     }
 
     if(isDefined(self.pers["prestige"])) {
-      var11 = scripts\mp\rank::getprestigelevel();
-      setclientmatchdata("players", self.clientmatchdataid, "prestige", var11);
+      var_11 = scripts\mp\rank::getprestigelevel();
+      setclientmatchdata("players", self.clientmatchdataid, "prestige", var_11);
     }
 
     if(scripts\mp\utility\game::getgametype() == "br") {
-      var12 = scripts\mp\gametypes\br::forest_barrel_damage_watch(self);
+      var_12 = scripts\mp\gametypes\br::forest_barrel_damage_watch(self);
 
-      for(var13 = 0; var13 < var12.size; var13++) {
-        var14 = "extrascore" + var13;
-        setclientmatchdata("players", self.clientmatchdataid, var14, var12[var13]);
+      for(var_13 = 0; var_13 < var_12.size; var_13++) {
+        var_14 = "extrascore" + var_13;
+        setclientmatchdata("players", self.clientmatchdataid, var_14, var_12[var_13]);
       }
 
-      var15 = scripts\mp\utility\game::round_vehicle_logic();
+      var_15 = scripts\mp\utility\game::round_vehicle_logic();
 
-      if(var15 == "dmz" || var15 == "rat_race" || var15 == "risk" || var15 == "gold_war") {
-        var16 = scripts\mp\gamescore::run_common_functions_stealth();
-        var17 = var16[self.team];
-        setclientmatchdata("players", self.clientmatchdataid, "placement", var17);
-        var18 = scripts\mp\gametypes\br_gametype_dmz::ref_121b4();
-        setclientmatchdata("players", self.clientmatchdataid, "extrascore4", var18);
-        var19 = 0;
-
-        if(isDefined(self.ref_11a01)) {
-          var19 = self.ref_11a01;
-        }
-
-        setclientmatchdata("players", self.clientmatchdataid, "extrascore5", var19);
-      } else if(var15 == "kingslayer") {
-        var16 = scripts\mp\gamescore::run_common_functions_stealth();
-        var17 = var16[self.team];
-        setclientmatchdata("players", self.clientmatchdataid, "placement", var17);
-        var18 = scripts\mp\gametypes\br_gametype_kingslayer::ref_121b4();
-        setclientmatchdata("players", self.clientmatchdataid, "extrascore4", var18);
-        var19 = 0;
+      if(var_15 == "dmz" || var_15 == "rat_race" || var_15 == "risk" || var_15 == "gold_war") {
+        var_16 = scripts\mp\gamescore::run_common_functions_stealth();
+        var_17 = var_16[self.team];
+        setclientmatchdata("players", self.clientmatchdataid, "placement", var_17);
+        var_18 = scripts\mp\gametypes\br_gametype_dmz::ref_121b4();
+        setclientmatchdata("players", self.clientmatchdataid, "extrascore4", var_18);
+        var_19 = 0;
 
         if(isDefined(self.ref_11a01)) {
-          var19 = self.ref_11a01;
+          var_19 = self.ref_11a01;
         }
 
-        setclientmatchdata("players", self.clientmatchdataid, "extrascore5", var19);
-      } else if(var15 == "treasure_hunt") {
+        setclientmatchdata("players", self.clientmatchdataid, "extrascore5", var_19);
+      } else if(var_15 == "kingslayer") {
+        var_16 = scripts\mp\gamescore::run_common_functions_stealth();
+        var_17 = var_16[self.team];
+        setclientmatchdata("players", self.clientmatchdataid, "placement", var_17);
+        var_18 = scripts\mp\gametypes\br_gametype_kingslayer::ref_121b4();
+        setclientmatchdata("players", self.clientmatchdataid, "extrascore4", var_18);
+        var_19 = 0;
+
+        if(isDefined(self.ref_11a01)) {
+          var_19 = self.ref_11a01;
+        }
+
+        setclientmatchdata("players", self.clientmatchdataid, "extrascore5", var_19);
+      } else if(var_15 == "treasure_hunt") {
         if(isDefined(self.ref_13ab8)) {
           setclientmatchdata("players", self.clientmatchdataid, "placement", self.ref_13ab8);
         }
 
-        var18 = scripts\mp\gametypes\br_gametype_treasure_hunt::ref_121b2();
-        setclientmatchdata("players", self.clientmatchdataid, "extrascore4", var18);
-      } else if(var15 == "rebirth" || var15 == "rebirth_dbd") {
+        var_18 = scripts\mp\gametypes\br_gametype_treasure_hunt::ref_121b2();
+        setclientmatchdata("players", self.clientmatchdataid, "extrascore4", var_18);
+      } else if(var_15 == "rebirth" || var_15 == "rebirth_dbd") {
         if(isDefined(self.ref_13ab8)) {
           setclientmatchdata("players", self.clientmatchdataid, "placement", self.ref_13ab8);
         }
 
-        var18 = scripts\mp\gametypes\br_gametype_rebirth::end_health();
-        setclientmatchdata("players", self.clientmatchdataid, "extrascore4", var18);
-      } else if(var15 == "rebirth_reverse" || var15 == "rebirth_dbd_reverse") {} else if(isDefined(self.ref_13ab8)) {
+        var_18 = scripts\mp\gametypes\br_gametype_rebirth::end_health();
+        setclientmatchdata("players", self.clientmatchdataid, "extrascore4", var_18);
+      } else if(var_15 == "rebirth_reverse" || var_15 == "rebirth_dbd_reverse") {} else if(isDefined(self.ref_13ab8)) {
         setclientmatchdata("players", self.clientmatchdataid, "placement", self.ref_13ab8);
       }
     }
 
-    var2++;
-    setclientmatchdata("scoreboardPlayerCount", var2);
+    var_2++;
+    setclientmatchdata("scoreboardPlayerCount", var_2);
     return;
   }
 }
 
-function computescoreboardslot(var0, var1) {
-  if(var0 == "none") {
-    return (0 + var1);
+function computescoreboardslot(var_0, var_1) {
+  if(var_0 == "none") {
+    return (0 + var_1);
   }
 
-  if(var0 == "neutral") {
-    return (200 + var1);
+  if(var_0 == "neutral") {
+    return (200 + var_1);
   }
 
-  if(var0 == "allies") {
-    return (400 + var1);
+  if(var_0 == "allies") {
+    return (400 + var_1);
   }
 
-  if(var0 == "axis") {
-    return (600 + var1);
+  if(var_0 == "axis") {
+    return (600 + var_1);
   }
 
-  if(var0 == "multiteam") {
-    return (800 + var1);
+  if(var_0 == "multiteam") {
+    return (800 + var_1);
   }
 
   return 0;
 }
 
-function buildscoreboardtype(var0) {
+function buildscoreboardtype(var_0) {
   if(getdvarint("MTKSQRQLKN") == 0) {
     return;
   }
 
-  if(var0 == "multiteam") {
-    var1 = 0;
+  if(var_0 == "multiteam") {
+    var_1 = 0;
 
-    foreach(var3 in level.teamnamelist) {
+    foreach(var_3 in level.teamnamelist) {
       if(scripts\mp\menus::shouldmodesetsquads()) {
-        foreach(var5 in level.squaddata[var3]) {
-          if(!var5.inuse) {
+        foreach(var_5 in level.squaddata[var_3]) {
+          if(!var_5.inuse) {
             continue;
           }
 
-          var6 = undefined;
+          var_6 = undefined;
 
-          if(isDefined(level.placement) && isDefined(level.placement[var3])) {
-            var6 = level.placement[var3][var5.index];
+          if(isDefined(level.placement) && isDefined(level.placement[var_3])) {
+            var_6 = level.placement[var_3][var_5.index];
           }
 
-          if(!isDefined(var6)) {
-            var6 = var5.players;
+          if(!isDefined(var_6)) {
+            var_6 = var_5.players;
           }
 
-          foreach(var8 in var5.players) {
-            scripts\mp\gamelogic::cargo_truck_mg_explode(var8);
-            setclientmatchdata("scoreboards", computescoreboardslot("multiteam", var1), var8.clientmatchdataid);
-            var1++;
+          foreach(var_8 in var_5.players) {
+            scripts\mp\gamelogic::cargo_truck_mg_explode(var_8);
+            setclientmatchdata("scoreboards", computescoreboardslot("multiteam", var_1), var_8.clientmatchdataid);
+            var_1++;
           }
         }
 
         continue;
       }
 
-      var6 = undefined;
+      var_6 = undefined;
 
       if(isDefined(level.placement)) {
-        var6 = level.placement[var3];
+        var_6 = level.placement[var_3];
       }
 
-      if(!isDefined(var6)) {
-        var6 = scripts\mp\utility\teams::getteamdata(var3, "players");
+      if(!isDefined(var_6)) {
+        var_6 = scripts\mp\utility\teams::getteamdata(var_3, "players");
       }
 
-      foreach(var8 in var6) {
-        scripts\mp\gamelogic::cargo_truck_mg_explode(var8);
-        setclientmatchdata("scoreboards", computescoreboardslot("multiteam", var1), var8.clientmatchdataid);
-        var1++;
+      foreach(var_8 in var_6) {
+        scripts\mp\gamelogic::cargo_truck_mg_explode(var_8);
+        setclientmatchdata("scoreboards", computescoreboardslot("multiteam", var_1), var_8.clientmatchdataid);
+        var_1++;
       }
     }
 
     return;
   }
 
-  jumpiffalse(var8 == "neutral") LOC_000001e1;
-  var1 = 0;
+  jumpiffalse(var_8 == "neutral") LOC_000001e1;
+  var_1 = 0;
 
-  foreach(var8 in level.placement["all"]) {
-    setclientmatchdata("scoreboards", computescoreboardslot(var8, var1), var8.clientmatchdataid);
-    var1++;
+  foreach(var_8 in level.placement["all"]) {
+    setclientmatchdata("scoreboards", computescoreboardslot(var_8, var_1), var_8.clientmatchdataid);
+    var_1++;
   }
 
   return;

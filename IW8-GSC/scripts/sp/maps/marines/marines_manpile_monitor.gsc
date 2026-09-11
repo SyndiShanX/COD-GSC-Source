@@ -31,11 +31,11 @@ function manpile_monitor_core_loop() {
     return;
   }
 
-  var0 = getcorpsearray();
-  var1 = getweaponarray();
-  manpile_monitor_print("Corpses " + var0.size + ",Weapons " + var1.size);
+  var_0 = getcorpsearray();
+  var_1 = getweaponarray();
+  manpile_monitor_print("Corpses " + var_0.size + ",Weapons " + var_1.size);
 
-  if(var0.size < level.manpile_monitor.ideal && var0.size < level.manpile_monitor.maximum_in_fov) {
+  if(var_0.size < level.manpile_monitor.ideal && var_0.size < level.manpile_monitor.maximum_in_fov) {
     manpile_monitor_reset_fov();
     return;
   }
@@ -43,47 +43,47 @@ function manpile_monitor_core_loop() {
   if(getcorpsearray().size > level.manpile_monitor.maximum) {
     manpile_monitor_cull_urgent(getcorpsearray());
 
-    if(var0.size <= level.manpile_monitor.maximum) {
+    if(var_0.size <= level.manpile_monitor.maximum) {
       return;
     }
 
     wait level.manpile_monitor.wait_time / 2;
   }
 
-  var0 = getcorpsearray();
+  var_0 = getcorpsearray();
 
-  if(var0.size > level.manpile_monitor.ideal) {
-    manpile_monitor_cull_ideal(var0);
+  if(var_0.size > level.manpile_monitor.ideal) {
+    manpile_monitor_cull_ideal(var_0);
 
-    if(var0.size <= level.manpile_monitor.ideal) {
+    if(var_0.size <= level.manpile_monitor.ideal) {
       return;
     }
 
     wait level.manpile_monitor.wait_time / 2;
   }
 
-  var0 = getcorpsearray();
+  var_0 = getcorpsearray();
 
-  if(var1.size > level.manpile_monitor.maximum_weapons) {
-    manpile_monitor_cull_weapons(var1);
+  if(var_1.size > level.manpile_monitor.maximum_weapons) {
+    manpile_monitor_cull_weapons(var_1);
 
-    if(var1.size <= level.manpile_monitor.maximum_weapons) {
+    if(var_1.size <= level.manpile_monitor.maximum_weapons) {
       return;
     }
 
     wait level.manpile_monitor.wait_time / 2;
   }
 
-  var0 = getcorpsearray();
+  var_0 = getcorpsearray();
 
-  if(var0.size > level.manpile_monitor.maximum_in_fov) {
-    manpile_monitor_cull_fov(var0);
+  if(var_0.size > level.manpile_monitor.maximum_in_fov) {
+    manpile_monitor_cull_fov(var_0);
     wait level.manpile_monitor.wait_time / 2;
   }
 
-  var0 = getcorpsearray();
+  var_0 = getcorpsearray();
 
-  if(var0.size > level.manpile_monitor.maximum) {
+  if(var_0.size > level.manpile_monitor.maximum) {
     manpile_monitor_print("FOV too high for culling - turning it down to " + level.manpile_monitor.working_fov * 0.9);
     level.manpile_monitor.working_fov *= 0.9;
     return;
@@ -92,23 +92,23 @@ function manpile_monitor_core_loop() {
   manpile_monitor_reset_fov();
 }
 
-function manpile_monitor_cull_urgent(var0) {
-  var1 = [];
+function manpile_monitor_cull_urgent(var_0) {
+  var_1 = [];
 
-  foreach(var3 in var0) {
-    if(!isDefined(var3.script_noteworthy) || var3.script_noteworthy != "manpile_monitor_exempt") {
-      if(!level.player scripts\engine\utility::within_fov(level.player.origin, level.player.angles, var3.origin, cos(level.manpile_monitor.working_fov))) {
-        var1 = scripts\engine\utility::array_add(var1, var3);
+  foreach(var_3 in var_0) {
+    if(!isDefined(var_3.script_noteworthy) || var_3.script_noteworthy != "manpile_monitor_exempt") {
+      if(!level.player scripts\engine\utility::within_fov(level.player.origin, level.player.angles, var_3.origin, cos(level.manpile_monitor.working_fov))) {
+        var_1 = scripts\engine\utility::array_add(var_1, var_3);
       }
     }
   }
 
-  var1 = scripts\engine\utility::get_array_of_farthest(level.player.origin, var1);
+  var_1 = scripts\engine\utility::get_array_of_farthest(level.player.origin, var_1);
 
   while(getcorpsearray().size > level.manpile_monitor.maximum) {
-    if(var1.size > 0) {
-      var1[0] delete();
-      var1 = scripts\engine\utility::array_removeundefined(var1);
+    if(var_1.size > 0) {
+      var_1[0] delete();
+      var_1 = scripts\engine\utility::array_removeundefined(var_1);
       manpile_monitor_print("Bodies over maximum limit!Deleting one");
       continue;
     }
@@ -117,28 +117,28 @@ function manpile_monitor_cull_urgent(var0) {
   }
 
   if(getcorpsearray().size > level.manpile_monitor.maximum) {
-    manpile_monitor_cull_fov(var1);
+    manpile_monitor_cull_fov(var_1);
     return;
   }
 }
 
-function manpile_monitor_cull_ideal(var0) {
-  var1 = [];
+function manpile_monitor_cull_ideal(var_0) {
+  var_1 = [];
 
-  foreach(var3 in var0) {
-    if(!isDefined(var3.script_noteworthy) || var3.script_noteworthy != "manpile_monitor_exempt") {
-      if(!level.player scripts\engine\utility::within_fov(level.player.origin, level.player.angles, var3.origin, cos(level.manpile_monitor.working_fov))) {
-        var1 = scripts\engine\utility::array_add(var1, var3);
+  foreach(var_3 in var_0) {
+    if(!isDefined(var_3.script_noteworthy) || var_3.script_noteworthy != "manpile_monitor_exempt") {
+      if(!level.player scripts\engine\utility::within_fov(level.player.origin, level.player.angles, var_3.origin, cos(level.manpile_monitor.working_fov))) {
+        var_1 = scripts\engine\utility::array_add(var_1, var_3);
       }
     }
   }
 
-  var1 = scripts\engine\utility::get_array_of_farthest(level.player.origin, var1);
+  var_1 = scripts\engine\utility::get_array_of_farthest(level.player.origin, var_1);
 
-  foreach(var3 in var1) {
+  foreach(var_3 in var_1) {
     if(getcorpsearray().size > level.manpile_monitor.ideal) {
-      if(distancesquared(var3.origin, level.player.origin) > level.manpile_monitor.safe_delete_distance * level.manpile_monitor.safe_delete_distance) {
-        var3 delete();
+      if(distancesquared(var_3.origin, level.player.origin) > level.manpile_monitor.safe_delete_distance * level.manpile_monitor.safe_delete_distance) {
+        var_3 delete();
         manpile_monitor_print("Deleting a body to approach the ideal limit");
         continue;
       }
@@ -148,24 +148,24 @@ function manpile_monitor_cull_ideal(var0) {
   }
 }
 
-function manpile_monitor_cull_fov(var0) {
-  var1 = [];
+function manpile_monitor_cull_fov(var_0) {
+  var_1 = [];
 
-  foreach(var3 in var0) {
-    if(level.player scripts\engine\utility::within_fov(level.player.origin, level.player.angles, var3.origin, cos(level.manpile_monitor.fov))) {
-      if(!isDefined(var3.script_noteworthy) || var3.script_noteworthy != "manpile_monitor_exempt") {
-        var1 = scripts\engine\utility::array_add(var1, var3);
+  foreach(var_3 in var_0) {
+    if(level.player scripts\engine\utility::within_fov(level.player.origin, level.player.angles, var_3.origin, cos(level.manpile_monitor.fov))) {
+      if(!isDefined(var_3.script_noteworthy) || var_3.script_noteworthy != "manpile_monitor_exempt") {
+        var_1 = scripts\engine\utility::array_add(var_1, var_3);
       }
     }
   }
 
-  var5 = scripts\engine\utility::get_array_of_farthest(level.player.origin, var1);
+  var_5 = scripts\engine\utility::get_array_of_farthest(level.player.origin, var_1);
 
-  if(var5.size > level.manpile_monitor.maximum_in_fov) {
-    foreach(var3 in var5) {
-      if(!sighttracepassed(level.player getEye(), var3.origin, 0, level.player)) {
+  if(var_5.size > level.manpile_monitor.maximum_in_fov) {
+    foreach(var_3 in var_5) {
+      if(!sighttracepassed(level.player getEye(), var_3.origin, 0, level.player)) {
         manpile_monitor_print("Too many corpses in FOV - Deleting one");
-        var3 delete();
+        var_3 delete();
         return;
       }
     }
@@ -174,25 +174,25 @@ function manpile_monitor_cull_fov(var0) {
   }
 }
 
-function manpile_monitor_cull_weapons(var0) {
-  var1 = [];
+function manpile_monitor_cull_weapons(var_0) {
+  var_1 = [];
 
-  foreach(var3 in var0) {
-    if(!isDefined(var3)) {
+  foreach(var_3 in var_0) {
+    if(!isDefined(var_3)) {
       continue;
     }
 
-    if(!level.player scripts\engine\utility::within_fov(level.player.origin, level.player.angles, var3.origin, cos(level.manpile_monitor.working_fov))) {
-      var1 = scripts\engine\utility::array_add(var1, var3);
+    if(!level.player scripts\engine\utility::within_fov(level.player.origin, level.player.angles, var_3.origin, cos(level.manpile_monitor.working_fov))) {
+      var_1 = scripts\engine\utility::array_add(var_1, var_3);
     }
   }
 
-  var1 = scripts\engine\utility::get_array_of_farthest(level.player.origin, var1);
+  var_1 = scripts\engine\utility::get_array_of_farthest(level.player.origin, var_1);
 
   while(getweaponarray().size > level.manpile_monitor.maximum_weapons) {
-    if(var1.size > 0) {
-      var1[0] delete();
-      var1 = scripts\engine\utility::array_removeundefined(var1);
+    if(var_1.size > 0) {
+      var_1[0] delete();
+      var_1 = scripts\engine\utility::array_removeundefined(var_1);
       manpile_monitor_print("Weapons over maximum limit!Deleting one");
       continue;
     }
@@ -202,16 +202,16 @@ function manpile_monitor_cull_weapons(var0) {
 }
 
 function manpile_monitor_flush_all() {
-  var0 = getcorpsearray();
+  var_0 = getcorpsearray();
 
-  foreach(var2 in var0) {
-    var2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
   }
 
-  var4 = getweaponarray();
+  var_4 = getweaponarray();
 
-  foreach(var6 in var4) {
-    var6 delete();
+  foreach(var_6 in var_4) {
+    var_6 delete();
   }
 }
 
@@ -219,9 +219,9 @@ function manpile_monitor_reset_fov() {
   level.manpile_monitor.working_fov = level.manpile_monitor.fov;
 }
 
-function manpile_monitor_print(var0) {
+function manpile_monitor_print(var_0) {
   if(level.manpile_monitor.verbose) {
-    iprintln(var0);
+    iprintln(var_0);
     return;
   }
 }

@@ -32,9 +32,9 @@ function brking_getrandompointinmovingcircle() {
   scripts\common\utility::brjugg_oncrateuse(1);
 }
 
-function clearnvg(var0) {
+function clearnvg(var_0) {
   if(isDefined(self.nvg3rdpersonmodel)) {
-    if(var0) {
+    if(var_0) {
       self detach(self.nvg3rdpersonmodel, "j_head");
     }
 
@@ -61,76 +61,76 @@ function nvg_monitor() {
   self endon("disconnect");
   self endon("death");
 
-  for(var0 = gettime();; var0 = var3) {
-    var1 = scripts\engine\utility::ref_143ad("night_vision_on", "night_vision_off");
+  for(var_0 = gettime();; var_0 = var_3) {
+    var_1 = scripts\engine\utility::ref_143ad("night_vision_on", "night_vision_off");
 
-    if(!isDefined(var1)) {
+    if(!isDefined(var_1)) {
       continue;
     }
 
     savenvgstate();
-    var2 = var1 == "night_vision_on";
-    nvg_update3rdperson(var2);
+    var_2 = var_1 == "night_vision_on";
+    nvg_update3rdperson(var_2);
 
-    if(istrue(var2)) {
+    if(istrue(var_2)) {
       level notify("player_enabled_nvgs");
     }
 
-    var3 = gettime();
-    var4 = var3 - var0;
-    scripts\mp\analyticslog::logevent_nvgtoggled(gettime(), self.lifeid, self.origin, var2, var4, "none");
+    var_3 = gettime();
+    var_4 = var_3 - var_0;
+    scripts\mp\analyticslog::logevent_nvgtoggled(gettime(), self.lifeid, self.origin, var_2, var_4, "none");
   }
 }
 
 function nvg_get3rdpersonupmodel() {
-  var0 = undefined;
+  var_0 = undefined;
 
   if(isDefined(level.nvgheadoverrides[self.operatorcustomization.head])) {
-    var0 = level.nvgheadoverrides[self.operatorcustomization.head]["up"];
+    var_0 = level.nvgheadoverrides[self.operatorcustomization.head]["up"];
   }
 
-  if(!isDefined(var0)) {
-    var0 = "offhand_wm_nvgquad_mp_1_up";
-  } else if(var0 == "nvg_2") {
-    var0 = "offhand_wm_nvgquad_mp_2_up";
-  } else if(var0 == "nvg_3") {
-    var0 = "offhand_wm_nvgquad_mp_3_up";
-  } else if(var0 == "nvg_4") {
-    var0 = "offhand_wm_nvgquad_mp_3_up";
-  } else if(var0 == "none") {
-    var0 = undefined;
+  if(!isDefined(var_0)) {
+    var_0 = "offhand_wm_nvgquad_mp_1_up";
+  } else if(var_0 == "nvg_2") {
+    var_0 = "offhand_wm_nvgquad_mp_2_up";
+  } else if(var_0 == "nvg_3") {
+    var_0 = "offhand_wm_nvgquad_mp_3_up";
+  } else if(var_0 == "nvg_4") {
+    var_0 = "offhand_wm_nvgquad_mp_3_up";
+  } else if(var_0 == "none") {
+    var_0 = undefined;
   } else {
-    var0 = "offhand_wm_nvgquad_mp_1_up";
+    var_0 = "offhand_wm_nvgquad_mp_1_up";
   }
 
-  return var0;
+  return var_0;
 }
 
 function nvg_get3rdpersondownmodel() {
-  var0 = undefined;
+  var_0 = undefined;
 
   if(isDefined(level.nvgheadoverrides[self.operatorcustomization.head])) {
-    var0 = level.nvgheadoverrides[self.operatorcustomization.head]["down"];
+    var_0 = level.nvgheadoverrides[self.operatorcustomization.head]["down"];
   }
 
-  if(!isDefined(var0)) {
-    var0 = "offhand_wm_nvgquad_mp_1";
-  } else if(var0 == "nvg_2") {
-    var0 = "offhand_wm_nvgquad_mp_2";
-  } else if(var0 == "nvg_3") {
-    var0 = "offhand_wm_nvgquad_mp_3";
-  } else if(var0 == "nvg_4") {
-    var0 = "offhand_wm_nvgquad_mp_4";
-  } else if(var0 == "none") {
-    var0 = undefined;
+  if(!isDefined(var_0)) {
+    var_0 = "offhand_wm_nvgquad_mp_1";
+  } else if(var_0 == "nvg_2") {
+    var_0 = "offhand_wm_nvgquad_mp_2";
+  } else if(var_0 == "nvg_3") {
+    var_0 = "offhand_wm_nvgquad_mp_3";
+  } else if(var_0 == "nvg_4") {
+    var_0 = "offhand_wm_nvgquad_mp_4";
+  } else if(var_0 == "none") {
+    var_0 = undefined;
   } else {
-    var0 = "offhand_wm_nvgquad_mp_1";
+    var_0 = "offhand_wm_nvgquad_mp_1";
   }
 
-  return var0;
+  return var_0;
 }
 
-function nvg_update3rdperson(var0) {
+function nvg_update3rdperson(var_0) {
   if(istrue(self.isjuggernaut)) {
     return;
   }
@@ -144,11 +144,11 @@ function nvg_update3rdperson(var0) {
     self.nvg3rdpersonmodel = undefined;
   }
 
-  if(var0) {
-    var1 = nvg_get3rdpersondownmodel();
+  if(var_0) {
+    var_1 = nvg_get3rdpersondownmodel();
 
-    if(isDefined(var1)) {
-      self.nvg3rdpersonmodel = var1;
+    if(isDefined(var_1)) {
+      self.nvg3rdpersonmodel = var_1;
       self attach(self.nvg3rdpersonmodel, "j_head");
       return;
     }
@@ -156,10 +156,10 @@ function nvg_update3rdperson(var0) {
     return;
   }
 
-  var2 = nvg_get3rdpersonupmodel();
+  var_2 = nvg_get3rdpersonupmodel();
 
-  if(isDefined(var2)) {
-    self.nvg3rdpersonmodel = var2;
+  if(isDefined(var_2)) {
+    self.nvg3rdpersonmodel = var_2;
     self attach(self.nvg3rdpersonmodel, "j_head");
     return;
   }

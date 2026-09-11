@@ -25,140 +25,140 @@ function gauntlet_vig_start() {
 }
 
 function gauntlet_vig_civ_1() {
-  var0 = scripts\engine\utility::getStruct("gauntlet_vig_civ_1_struct", "targetname");
-  var1 = scripts\engine\sp\utility::spawn_targetname("gauntlet_vig_civ_1", 1);
+  var_0 = scripts\engine\utility::getStruct("gauntlet_vig_civ_1_struct", "targetname");
+  var_1 = scripts\engine\sp\utility::spawn_targetname("gauntlet_vig_civ_1", 1);
   thread gauntlet_civ_setup();
-  var1.animname = "generic";
-  var1 scripts\engine\sp\utility::set_allowdeath(1);
-  var1 endon("death");
-  var1 endon("entitydeleted");
+  var_1.animname = "generic";
+  var_1 scripts\engine\sp\utility::set_allowdeath(1);
+  var_1 endon("death");
+  var_1 endon("entitydeleted");
   waitframe();
-  var0 scripts\common\anim::anim_single_solo_run(var1, "lon_pic_010_civ20_standoff");
-  var1 scripts\common\anim::anim_single_solo_run(var1, "civ_casual_run_exit_2");
-  var1 scripts\asm\asm_bb::bb_setcivilianstate("panic");
-  var1 scripts\engine\sp\utility::set_goal_radius(32);
-  var2 = getnode("gauntlet_vig_civ_1_node", "targetname");
-  var1 scripts\engine\sp\utility::set_goal_node(var2);
+  var_0 scripts\common\anim::anim_single_solo_run(var_1, "lon_pic_010_civ20_standoff");
+  var_1 scripts\common\anim::anim_single_solo_run(var_1, "civ_casual_run_exit_2");
+  var_1 scripts\asm\asm_bb::bb_setcivilianstate("panic");
+  var_1 scripts\engine\sp\utility::set_goal_radius(32);
+  var_2 = getnode("gauntlet_vig_civ_1_node", "targetname");
+  var_1 scripts\engine\sp\utility::set_goal_node(var_2);
   wait 1;
   scripts\engine\utility::waittill_any_ents(level, "flag_gauntlet_complete", self, "goal");
-  var1 delete();
+  var_1 delete();
 }
 
 function gauntlet_vig_civ_2() {
-  var0 = scripts\engine\utility::getStruct("gauntlet_vig_civ_2_struct", "targetname");
-  var1 = scripts\engine\sp\utility::spawn_targetname("gauntlet_vig_civ_2", 1);
+  var_0 = scripts\engine\utility::getStruct("gauntlet_vig_civ_2_struct", "targetname");
+  var_1 = scripts\engine\sp\utility::spawn_targetname("gauntlet_vig_civ_2", 1);
   thread gauntlet_civ_setup();
-  var1.animname = "generic";
-  var1 scripts\engine\sp\utility::set_allowdeath(1);
-  var1 endon("death");
-  var1 endon("entitydeleted");
+  var_1.animname = "generic";
+  var_1 scripts\engine\sp\utility::set_allowdeath(1);
+  var_1 endon("death");
+  var_1 endon("entitydeleted");
   waitframe();
-  var0 thread scripts\common\anim::anim_loop_solo(var1, "lon_pic_010_civ36_idle", "gauntlet_civ_2_end_loop");
+  var_0 thread scripts\common\anim::anim_loop_solo(var_1, "lon_pic_010_civ36_idle", "gauntlet_civ_2_end_loop");
   scripts\engine\utility::flag_wait("flag_gauntlet_enforcer_van_hit");
-  var0 notify("gauntlet_civ_2_end_loop");
-  var0 scripts\common\anim::anim_single_solo_run(var1, "lon_pic_010_civ36_standoff");
-  var1 scripts\common\anim::anim_single_solo_run(var1, "civ_casual_run_exit_2");
-  var1 scripts\engine\sp\utility::set_goal_radius(32);
-  var2 = getnode("gauntlet_vig_civ_2_node", "targetname");
-  var1 scripts\engine\sp\utility::set_goal_node(var2);
+  var_0 notify("gauntlet_civ_2_end_loop");
+  var_0 scripts\common\anim::anim_single_solo_run(var_1, "lon_pic_010_civ36_standoff");
+  var_1 scripts\common\anim::anim_single_solo_run(var_1, "civ_casual_run_exit_2");
+  var_1 scripts\engine\sp\utility::set_goal_radius(32);
+  var_2 = getnode("gauntlet_vig_civ_2_node", "targetname");
+  var_1 scripts\engine\sp\utility::set_goal_node(var_2);
   wait 1;
   scripts\engine\utility::waittill_any_ents(level, "flag_gauntlet_complete", self, "goal");
-  var1 delete();
+  var_1 delete();
 }
 
 function gauntlet_vig_civ_3() {
-  var0 = scripts\engine\utility::getStruct("gauntlet_vig_civ_3_struct", "targetname");
-  var1 = scripts\engine\sp\utility::spawn_targetname("gauntlet_vig_civ_3", 1);
+  var_0 = scripts\engine\utility::getStruct("gauntlet_vig_civ_3_struct", "targetname");
+  var_1 = scripts\engine\sp\utility::spawn_targetname("gauntlet_vig_civ_3", 1);
   thread gauntlet_civ_setup();
-  var1.animname = "generic";
-  var1 scripts\engine\sp\utility::set_allowdeath(1);
-  var1 endon("death");
-  var1 endon("entitydeleted");
+  var_1.animname = "generic";
+  var_1 scripts\engine\sp\utility::set_allowdeath(1);
+  var_1 endon("death");
+  var_1 endon("entitydeleted");
   waitframe();
-  var0 scripts\common\anim::anim_first_frame_solo(var1, "stp_can_020_street_civs_flee_civ01");
+  var_0 scripts\common\anim::anim_first_frame_solo(var_1, "stp_can_020_street_civs_flee_civ01");
   scripts\engine\utility::flag_wait("flag_gauntlet_enforcer_hit_vig");
-  var0 scripts\common\anim::anim_single_solo_run(var1, "stp_can_020_street_civs_flee_civ01");
-  var1 scripts\engine\sp\utility::set_goal_radius(32);
-  var2 = getnode("gauntlet_vig_civ_3_node", "targetname");
-  var1 scripts\engine\sp\utility::set_goal_node(var2);
+  var_0 scripts\common\anim::anim_single_solo_run(var_1, "stp_can_020_street_civs_flee_civ01");
+  var_1 scripts\engine\sp\utility::set_goal_radius(32);
+  var_2 = getnode("gauntlet_vig_civ_3_node", "targetname");
+  var_1 scripts\engine\sp\utility::set_goal_node(var_2);
   wait 1;
   scripts\engine\utility::waittill_any_ents(level, "flag_gauntlet_complete", self, "goal");
-  var1 delete();
+  var_1 delete();
 }
 
 function gauntlet_vig_civ_4() {
-  var0 = scripts\engine\utility::getStruct("gauntlet_vig_civ_4_struct", "targetname");
-  var1 = scripts\engine\sp\utility::spawn_targetname("gauntlet_vig_civ_4", 1);
+  var_0 = scripts\engine\utility::getStruct("gauntlet_vig_civ_4_struct", "targetname");
+  var_1 = scripts\engine\sp\utility::spawn_targetname("gauntlet_vig_civ_4", 1);
   thread gauntlet_civ_setup();
-  var1.animname = "generic";
-  var1 scripts\engine\sp\utility::set_allowdeath(1);
-  var1 endon("death");
-  var1 endon("entitydeleted");
+  var_1.animname = "generic";
+  var_1 scripts\engine\sp\utility::set_allowdeath(1);
+  var_1 endon("death");
+  var_1 endon("entitydeleted");
   waitframe();
-  var0 scripts\common\anim::anim_single_solo(var1, "lon_pic_010_civ01_standoff");
-  var1 scripts\asm\asm_bb::bb_setcivilianstate("panic");
-  var1 scripts\common\anim::anim_single_solo_run(var1, "civ_casual_run_exit_2");
-  var1 scripts\engine\sp\utility::set_goal_radius(32);
-  var2 = getnode("gauntlet_vig_civ_4_node", "targetname");
-  var1 scripts\engine\sp\utility::set_goal_node(var2);
+  var_0 scripts\common\anim::anim_single_solo(var_1, "lon_pic_010_civ01_standoff");
+  var_1 scripts\asm\asm_bb::bb_setcivilianstate("panic");
+  var_1 scripts\common\anim::anim_single_solo_run(var_1, "civ_casual_run_exit_2");
+  var_1 scripts\engine\sp\utility::set_goal_radius(32);
+  var_2 = getnode("gauntlet_vig_civ_4_node", "targetname");
+  var_1 scripts\engine\sp\utility::set_goal_node(var_2);
   wait 1;
   scripts\engine\utility::waittill_any_ents(level, "flag_gauntlet_complete", self, "goal");
-  var1 delete();
+  var_1 delete();
 }
 
 function gauntlet_vig_civ_5() {
-  var0 = scripts\engine\utility::getStruct("gauntlet_vig_civ_5a_struct", "targetname");
-  var1 = scripts\engine\utility::getStruct("gauntlet_vig_civ_5b_struct", "targetname");
-  var2 = scripts\engine\sp\utility::spawn_targetname("gauntlet_vig_civ_5", 1);
+  var_0 = scripts\engine\utility::getStruct("gauntlet_vig_civ_5a_struct", "targetname");
+  var_1 = scripts\engine\utility::getStruct("gauntlet_vig_civ_5b_struct", "targetname");
+  var_2 = scripts\engine\sp\utility::spawn_targetname("gauntlet_vig_civ_5", 1);
   thread gauntlet_civ_setup();
-  var2.animname = "generic";
-  var2 scripts\engine\sp\utility::set_allowdeath(1);
-  var2 endon("death");
-  var2 endon("entitydeleted");
+  var_2.animname = "generic";
+  var_2 scripts\engine\sp\utility::set_allowdeath(1);
+  var_2 endon("death");
+  var_2 endon("entitydeleted");
   waitframe();
-  var0 thread scripts\common\anim::anim_loop_solo(var2, "sh_022_marketplace_idle_civ02", "gauntlet_civ_5_end_loop");
+  var_0 thread scripts\common\anim::anim_loop_solo(var_2, "sh_022_marketplace_idle_civ02", "gauntlet_civ_5_end_loop");
   scripts\engine\utility::flag_wait("flag_gauntlet_enforcer_hit_vig");
-  var0 notify("gauntlet_civ_5_end_loop");
-  var0 scripts\common\anim::anim_single_solo(var2, "sh_022_marketplace_react_coward_civ02");
-  var2 scripts\asm\asm_bb::bb_setcivilianstate("panic");
-  var2 scripts\common\anim::anim_single_solo_run(var2, "civ_stl_exposed_stand_fast_exit_2");
-  var1 scripts\sp\anim::anim_reach_solo(var2, "hf_grnd_red_civ_run_turn_r_6_trip");
-  var1 scripts\common\anim::anim_single_solo_run(var2, "hf_grnd_red_civ_run_turn_r_6_trip");
-  var2 scripts\engine\sp\utility::set_goal_radius(32);
-  var3 = getnode("gauntlet_vig_civ_5_node", "targetname");
-  var2 scripts\engine\sp\utility::set_goal_node(var3);
+  var_0 notify("gauntlet_civ_5_end_loop");
+  var_0 scripts\common\anim::anim_single_solo(var_2, "sh_022_marketplace_react_coward_civ02");
+  var_2 scripts\asm\asm_bb::bb_setcivilianstate("panic");
+  var_2 scripts\common\anim::anim_single_solo_run(var_2, "civ_stl_exposed_stand_fast_exit_2");
+  var_1 scripts\sp\anim::anim_reach_solo(var_2, "hf_grnd_red_civ_run_turn_r_6_trip");
+  var_1 scripts\common\anim::anim_single_solo_run(var_2, "hf_grnd_red_civ_run_turn_r_6_trip");
+  var_2 scripts\engine\sp\utility::set_goal_radius(32);
+  var_3 = getnode("gauntlet_vig_civ_5_node", "targetname");
+  var_2 scripts\engine\sp\utility::set_goal_node(var_3);
   wait 1;
   scripts\engine\utility::waittill_any_ents(level, "flag_gauntlet_complete", self, "goal");
-  var2 delete();
+  var_2 delete();
 }
 
 function gauntlet_vig_civ_6() {
-  var0 = scripts\engine\utility::getStruct("gauntlet_vig_civ_6_struct", "targetname");
-  var1 = scripts\engine\sp\utility::spawn_targetname("gauntlet_vig_civ_6", 1);
+  var_0 = scripts\engine\utility::getStruct("gauntlet_vig_civ_6_struct", "targetname");
+  var_1 = scripts\engine\sp\utility::spawn_targetname("gauntlet_vig_civ_6", 1);
   thread gauntlet_civ_setup();
-  var1.animname = "generic";
-  var1 scripts\engine\sp\utility::set_allowdeath(1);
-  var1 endon("death");
-  var1 endon("entitydeleted");
+  var_1.animname = "generic";
+  var_1 scripts\engine\sp\utility::set_allowdeath(1);
+  var_1 endon("death");
+  var_1 endon("entitydeleted");
   waitframe();
-  thread gauntlet_vig_civ_react_handler(var1, var0);
+  thread gauntlet_vig_civ_react_handler(var_1, var_0);
   thread gauntlet_vig_civ_prox_handler();
-  var1 scripts\engine\utility::waittill_any("react_done", "player_near");
-  var1 scripts\engine\sp\utility::anim_stopanimScripted();
-  var1 scripts\asm\asm_bb::bb_setcivilianstate("panic");
-  var1 scripts\common\anim::anim_single_solo_run(var1, "civ_casual_run_exit_2");
-  var1 scripts\engine\sp\utility::set_goal_radius(32);
-  var2 = getnode("gauntlet_vig_civ_6_node", "targetname");
-  var1 scripts\engine\sp\utility::set_goal_node(var2);
+  var_1 scripts\engine\utility::waittill_any("react_done", "player_near");
+  var_1 scripts\engine\sp\utility::anim_stopanimScripted();
+  var_1 scripts\asm\asm_bb::bb_setcivilianstate("panic");
+  var_1 scripts\common\anim::anim_single_solo_run(var_1, "civ_casual_run_exit_2");
+  var_1 scripts\engine\sp\utility::set_goal_radius(32);
+  var_2 = getnode("gauntlet_vig_civ_6_node", "targetname");
+  var_1 scripts\engine\sp\utility::set_goal_node(var_2);
   wait 1;
   scripts\engine\utility::waittill_any_ents(level, "flag_gauntlet_complete", self, "goal");
-  var1 delete();
+  var_1 delete();
 }
 
-function gauntlet_vig_civ_react_handler(var0, var1) {
+function gauntlet_vig_civ_react_handler(var_0, var_1) {
   self endon("death");
   self endon("entitydeleted");
-  var0 scripts\common\anim::anim_single_solo(self, var1);
+  var_0 scripts\common\anim::anim_single_solo(self, var_1);
   self notify("react_done");
 }
 
@@ -177,132 +177,132 @@ function gauntlet_vig_civ_prox_handler() {
 }
 
 function gauntlet_vig_civ_7() {
-  var0 = scripts\engine\sp\utility::spawn_targetname("gauntlet_vig_civ_7", 1);
+  var_0 = scripts\engine\sp\utility::spawn_targetname("gauntlet_vig_civ_7", 1);
   thread gauntlet_civ_setup();
-  var0.animname = "generic";
-  var0 scripts\engine\sp\utility::set_allowdeath(1);
-  var0 endon("death");
-  var0 endon("entitydeleted");
+  var_0.animname = "generic";
+  var_0 scripts\engine\sp\utility::set_allowdeath(1);
+  var_0 endon("death");
+  var_0 endon("entitydeleted");
   waitframe();
-  var0 scripts\engine\sp\utility::set_goal_radius(32);
-  var1 = getnode("gauntlet_vig_civ_7_node", "targetname");
-  var0 scripts\engine\sp\utility::set_goal_node(var1);
+  var_0 scripts\engine\sp\utility::set_goal_radius(32);
+  var_1 = getnode("gauntlet_vig_civ_7_node", "targetname");
+  var_0 scripts\engine\sp\utility::set_goal_node(var_1);
   wait 1;
   scripts\engine\utility::waittill_any_ents(level, "flag_gauntlet_complete", self, "goal");
-  var0 delete();
+  var_0 delete();
 }
 
 function gauntlet_vig_civ_8() {
-  var0 = scripts\engine\utility::getStruct("gauntlet_vig_civ_8_struct", "targetname");
-  var1 = scripts\engine\sp\utility::spawn_targetname("gauntlet_vig_civ_8", 1);
+  var_0 = scripts\engine\utility::getStruct("gauntlet_vig_civ_8_struct", "targetname");
+  var_1 = scripts\engine\sp\utility::spawn_targetname("gauntlet_vig_civ_8", 1);
   thread gauntlet_civ_setup();
-  var1.animname = "generic";
-  var1 scripts\engine\sp\utility::set_allowdeath(1);
-  var1 endon("death");
-  var1 endon("entitydeleted");
+  var_1.animname = "generic";
+  var_1 scripts\engine\sp\utility::set_allowdeath(1);
+  var_1 endon("death");
+  var_1 endon("entitydeleted");
   waitframe();
-  var0 thread scripts\common\anim::anim_loop_solo(var1, "lon_pic_010_civ08_idle", "gauntlet_civ_8_end_loop");
+  var_0 thread scripts\common\anim::anim_loop_solo(var_1, "lon_pic_010_civ08_idle", "gauntlet_civ_8_end_loop");
   scripts\engine\utility::flag_wait("flag_gauntlet_enforcer_hit_vig");
-  var0 notify("gauntlet_civ_8_end_loop");
-  var0 scripts\common\anim::anim_single_solo_run(var1, "lon_pic_010_civ08_standoff");
-  var1 scripts\common\anim::anim_single_solo_run(var1, "civ_stl_exposed_stand_fast_exit_3");
-  var1 scripts\asm\asm_bb::bb_setcivilianstate("panic");
-  var1 scripts\engine\sp\utility::set_goal_radius(32);
-  var2 = getnode("gauntlet_vig_civ_8_node", "targetname");
-  var1 scripts\engine\sp\utility::set_goal_node(var2);
+  var_0 notify("gauntlet_civ_8_end_loop");
+  var_0 scripts\common\anim::anim_single_solo_run(var_1, "lon_pic_010_civ08_standoff");
+  var_1 scripts\common\anim::anim_single_solo_run(var_1, "civ_stl_exposed_stand_fast_exit_3");
+  var_1 scripts\asm\asm_bb::bb_setcivilianstate("panic");
+  var_1 scripts\engine\sp\utility::set_goal_radius(32);
+  var_2 = getnode("gauntlet_vig_civ_8_node", "targetname");
+  var_1 scripts\engine\sp\utility::set_goal_node(var_2);
   wait 1;
   scripts\engine\utility::waittill_any_ents(level, "flag_gauntlet_complete", self, "goal");
-  var1 delete();
+  var_1 delete();
 }
 
 function walking_vig_handler() {
-  var0 = scripts\engine\utility::getStruct("civ_gauntlet_react_1_struct", "targetname");
-  var1 = scripts\engine\sp\utility::spawn_targetname("civ_gauntlet_react_1", 1);
+  var_0 = scripts\engine\utility::getStruct("civ_gauntlet_react_1_struct", "targetname");
+  var_1 = scripts\engine\sp\utility::spawn_targetname("civ_gauntlet_react_1", 1);
   thread gauntlet_civ_setup();
-  var1.animname = "generic";
-  var1 scripts\engine\sp\utility::set_allowdeath(1);
-  var1 endon("death");
-  var1 endon("entitydeleted");
-  var0 scripts\common\anim::anim_first_frame_solo(var1, "piccadilly_aftermath_civ_03");
+  var_1.animname = "generic";
+  var_1 scripts\engine\sp\utility::set_allowdeath(1);
+  var_1 endon("death");
+  var_1 endon("entitydeleted");
+  var_0 scripts\common\anim::anim_first_frame_solo(var_1, "piccadilly_aftermath_civ_03");
   scripts\engine\utility::flag_wait("flag_gauntlet_start_civs");
-  var0 thread scripts\common\anim::anim_single_solo(var1, "piccadilly_aftermath_civ_03");
+  var_0 thread scripts\common\anim::anim_single_solo(var_1, "piccadilly_aftermath_civ_03");
   scripts\engine\utility::flag_wait("flag_actual_hit");
-  var1 scripts\engine\sp\utility::anim_stopanimScripted();
+  var_1 scripts\engine\sp\utility::anim_stopanimScripted();
   wait 0.1;
-  var1 scripts\asm\asm_bb::bb_setcivilianstate("panic");
-  var1 scripts\asm\asm_bb::bb_civilianrequestspeed(180);
-  var1 scripts\engine\sp\utility::set_goal_radius(64);
-  var1 scripts\sp\spawner::go_to_node(scripts\engine\utility::getStruct("male_walker_1_path", "targetname"));
-  var2 = scripts\engine\utility::getStruct("male_walker_1_turn", "targetname");
-  var2 scripts\sp\anim::anim_reach_solo(var1, "hf_grnd_red_civ_run_turn_r_6_trip");
-  var2 scripts\common\anim::anim_single_solo_run(var1, "hf_grnd_red_civ_run_turn_r_6_trip");
-  var1 scripts\engine\sp\utility::set_goal_node(getnode("male_walker_1_goal", "targetname"));
-  thread delete_off_screen(var1);
+  var_1 scripts\asm\asm_bb::bb_setcivilianstate("panic");
+  var_1 scripts\asm\asm_bb::bb_civilianrequestspeed(180);
+  var_1 scripts\engine\sp\utility::set_goal_radius(64);
+  var_1 scripts\sp\spawner::go_to_node(scripts\engine\utility::getStruct("male_walker_1_path", "targetname"));
+  var_2 = scripts\engine\utility::getStruct("male_walker_1_turn", "targetname");
+  var_2 scripts\sp\anim::anim_reach_solo(var_1, "hf_grnd_red_civ_run_turn_r_6_trip");
+  var_2 scripts\common\anim::anim_single_solo_run(var_1, "hf_grnd_red_civ_run_turn_r_6_trip");
+  var_1 scripts\engine\sp\utility::set_goal_node(getnode("male_walker_1_goal", "targetname"));
+  thread delete_off_screen(var_1);
 }
 
 function woman_hiding_handler() {
-  var0 = scripts\engine\sp\utility::spawn_targetname("civ_gauntlet_react_2", 1);
+  var_0 = scripts\engine\sp\utility::spawn_targetname("civ_gauntlet_react_2", 1);
   thread gauntlet_civ_setup();
-  var0 scripts\engine\sp\utility::set_allowdeath(1);
-  var0 endon("death");
-  var0 endon("entitydeleted");
+  var_0 scripts\engine\sp\utility::set_allowdeath(1);
+  var_0 endon("death");
+  var_0 endon("entitydeleted");
   scripts\engine\utility::flag_wait("flag_gauntlet_start_civs");
-  var1 = getEnt("woman_stop_look_goal", "targetname");
-  var0 setgoalvolumeauto(var1);
-  var0 scripts\asm\asm_bb::bb_setcivilianstate("casual");
-  var0 scripts\asm\asm_bb::bb_civilianrequestspeed(60);
+  var_1 = getEnt("woman_stop_look_goal", "targetname");
+  var_0 setgoalvolumeauto(var_1);
+  var_0 scripts\asm\asm_bb::bb_setcivilianstate("casual");
+  var_0 scripts\asm\asm_bb::bb_civilianrequestspeed(60);
   scripts\engine\utility::flag_wait("flag_actual_hit");
-  var0 scripts\asm\asm_bb::bb_setcivilianstate("panic");
+  var_0 scripts\asm\asm_bb::bb_setcivilianstate("panic");
   scripts\engine\utility::flag_wait("flag_gauntlet_civs_scatter");
-  var1 = getEnt("final_goal_left", "targetname");
-  var0 setgoalvolumeauto(var1);
-  var0 scripts\asm\asm_bb::bb_civilianrequestspeed(175);
-  thread delete_off_screen(var0);
+  var_1 = getEnt("final_goal_left", "targetname");
+  var_0 setgoalvolumeauto(var_1);
+  var_0 scripts\asm\asm_bb::bb_civilianrequestspeed(175);
+  thread delete_off_screen(var_0);
 }
 
 function shocked_vig_handler() {
-  var0 = getspawner("civ_gauntlet_react_3", "targetname");
-  var1 = var0 scripts\engine\sp\utility::spawn_ai(1);
-  var1.animname = "generic";
-  var1 scripts\engine\sp\utility::set_allowdeath(1);
-  var1 endon("death");
-  var1 endon("entitydeleted");
+  var_0 = getspawner("civ_gauntlet_react_3", "targetname");
+  var_1 = var_0 scripts\engine\sp\utility::spawn_ai(1);
+  var_1.animname = "generic";
+  var_1 scripts\engine\sp\utility::set_allowdeath(1);
+  var_1 endon("death");
+  var_1 endon("entitydeleted");
   scripts\engine\utility::flag_wait("flag_gauntlet_start_civs");
-  var1 thread scripts\common\anim::anim_loop_solo(var1, "hf_grnd_red_civ_hide_shellshock06", "stop_loop");
+  var_1 thread scripts\common\anim::anim_loop_solo(var_1, "hf_grnd_red_civ_hide_shellshock06", "stop_loop");
   scripts\engine\utility::flag_wait("flag_gauntlet_civs_scatter");
   wait 0.5;
-  var1 notify("stop_loop");
-  var1 scripts\engine\sp\utility::anim_stopanimScripted();
-  var2 = getEnt("final_goal_right", "targetname");
-  var1 setgoalvolumeauto(var2);
-  var1 scripts\asm\asm_bb::bb_setcivilianstate("panic");
-  var1 scripts\asm\asm_bb::bb_civilianrequestspeed(190);
-  thread delete_off_screen(var1);
+  var_1 notify("stop_loop");
+  var_1 scripts\engine\sp\utility::anim_stopanimScripted();
+  var_2 = getEnt("final_goal_right", "targetname");
+  var_1 setgoalvolumeauto(var_2);
+  var_1 scripts\asm\asm_bb::bb_setcivilianstate("panic");
+  var_1 scripts\asm\asm_bb::bb_civilianrequestspeed(190);
+  thread delete_off_screen(var_1);
 }
 
 function woman_ground_handler() {
-  var0 = getspawner("civ_gauntlet_react_5", "targetname");
-  var1 = var0 scripts\engine\sp\utility::spawn_ai(1);
-  var1.animname = "generic";
-  var1 scripts\engine\sp\utility::set_allowdeath(1);
-  var1 endon("death");
-  var1 endon("entitydeleted");
+  var_0 = getspawner("civ_gauntlet_react_5", "targetname");
+  var_1 = var_0 scripts\engine\sp\utility::spawn_ai(1);
+  var_1.animname = "generic";
+  var_1 scripts\engine\sp\utility::set_allowdeath(1);
+  var_1 endon("death");
+  var_1 endon("entitydeleted");
   scripts\engine\utility::flag_wait("flag_gauntlet_start_civs");
-  var2 = scripts\engine\utility::getStruct("civ_gauntlet_react_5_struct", "targetname");
-  var2 thread scripts\common\anim::anim_loop_solo(var1, "stp_apt_hall_blockers_stand_idle_civ02", "stop_loop");
+  var_2 = scripts\engine\utility::getStruct("civ_gauntlet_react_5_struct", "targetname");
+  var_2 thread scripts\common\anim::anim_loop_solo(var_1, "stp_apt_hall_blockers_stand_idle_civ02", "stop_loop");
   scripts\engine\utility::flag_wait("flag_actual_hit");
-  var1 scripts\asm\asm_bb::bb_setcivilianstate("panic");
-  var1 scripts\asm\asm_bb::bb_civilianrequestspeed(160);
-  var2 notify("stop_loop");
-  var1 scripts\engine\sp\utility::anim_stopanimScripted();
+  var_1 scripts\asm\asm_bb::bb_setcivilianstate("panic");
+  var_1 scripts\asm\asm_bb::bb_civilianrequestspeed(160);
+  var_2 notify("stop_loop");
+  var_1 scripts\engine\sp\utility::anim_stopanimScripted();
   scripts\engine\utility::flag_wait("flag_gauntlet_civs_scatter");
   wait 1.5;
-  var3 = getEnt("male_shocked_3_goal", "targetname");
-  var1 setgoalvolumeauto(var3);
+  var_3 = getEnt("male_shocked_3_goal", "targetname");
+  var_1 setgoalvolumeauto(var_3);
   waitframe();
-  var4 = getEnt("final_goal_right", "targetname");
-  var1 setgoalvolumeauto(var4);
-  thread delete_off_screen(var1);
+  var_4 = getEnt("final_goal_right", "targetname");
+  var_1 setgoalvolumeauto(var_4);
+  thread delete_off_screen(var_1);
 }
 
 function butcher_hit_timing_handler() {
@@ -314,36 +314,36 @@ function butcher_hit_timing_handler() {
   scripts\engine\utility::flag_set("flag_gauntlet_civs_scatter");
 }
 
-function look_at_until(var0, var1) {
+function look_at_until(var_0, var_1) {
   self endon("death");
   self endon("entitydeleted");
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  self setlookatentity(var0);
+  self setlookatentity(var_0);
 
-  if(isDefined(var1)) {
-    scripts\engine\utility::flag_wait(var1);
+  if(isDefined(var_1)) {
+    scripts\engine\utility::flag_wait(var_1);
     self setlookatentity();
     return;
   }
 }
 
-function delete_off_screen(var0) {
-  if(isDefined(var0)) {
-    wait var0;
+function delete_off_screen(var_0) {
+  if(isDefined(var_0)) {
+    wait var_0;
   }
 
-  var1 = cos(60);
+  var_1 = cos(60);
 
   for(;;) {
     if(!isDefined(self)) {
       return;
     }
 
-    if(!scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), self.origin, var1)) {
+    if(!scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), self.origin, var_1)) {
       if(isDefined(self)) {
         self delete();
         return;

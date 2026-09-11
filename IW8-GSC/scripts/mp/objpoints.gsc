@@ -18,92 +18,92 @@ function init() {
   level.objpointscale = 1;
 }
 
-function createteamobjpoint(var0, var1, var2, var3, var4, var5) {
-  if(!isDefined(var3)) {
-    var3 = "objpoint_default";
+function createteamobjpoint(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(!isDefined(var_3)) {
+    var_3 = "objpoint_default";
   }
 
-  if(!isDefined(var5)) {
-    var5 = 1;
+  if(!isDefined(var_5)) {
+    var_5 = 1;
   }
 
-  var6 = undefined;
+  var_6 = undefined;
 
-  if(var2 != "all") {
-    var6 = newteamhudelem(var2);
+  if(var_2 != "all") {
+    var_6 = newteamhudelem(var_2);
   } else {
-    var6 = newhudelem();
+    var_6 = newhudelem();
   }
 
-  var6.id = var0;
-  var6.x = var1[0];
-  var6.y = var1[1];
-  var6.z = var1[2];
-  var6.team = var2;
-  var6.isflashing = 0;
-  var6.isshown = 1;
-  var6 setshader(var3, level.objpointsize, level.objpointsize);
-  var6 setwaypoint(1, 0);
+  var_6.id = var_0;
+  var_6.x = var_1[0];
+  var_6.y = var_1[1];
+  var_6.z = var_1[2];
+  var_6.team = var_2;
+  var_6.isflashing = 0;
+  var_6.isshown = 1;
+  var_6 setshader(var_3, level.objpointsize, level.objpointsize);
+  var_6 setwaypoint(1, 0);
 
-  if(isDefined(var4)) {
-    var6.alpha = var4;
+  if(isDefined(var_4)) {
+    var_6.alpha = var_4;
   } else {
-    var6.alpha = level.objpoint_alpha_default;
+    var_6.alpha = level.objpoint_alpha_default;
   }
 
-  var6.basealpha = var6.alpha;
-  return var6;
+  var_6.basealpha = var_6.alpha;
+  return var_6;
 }
 
-function deleteobjpoint(var0) {
+function deleteobjpoint(var_0) {
   if(level.objpoints.size == 1) {
     level.objpoints = [];
     level.objpointnames = [];
-    var0 destroy();
+    var_0 destroy();
     return;
   }
 
-  var1 = var0.index;
-  var2 = level.objpointnames.size - 1;
-  var3 = getobjpointbyindex(var2);
-  level.objpointnames[var1] = var3.name;
-  var3.index = var1;
-  level.objpointnames[var2] = undefined;
-  level.objpoints[var0.name] = undefined;
-  var0 destroy();
+  var_1 = var_0.index;
+  var_2 = level.objpointnames.size - 1;
+  var_3 = getobjpointbyindex(var_2);
+  level.objpointnames[var_1] = var_3.name;
+  var_3.index = var_1;
+  level.objpointnames[var_2] = undefined;
+  level.objpoints[var_0.name] = undefined;
+  var_0 destroy();
 }
 
-function updateorigin(var0) {
-  if(self.x != var0[0]) {
-    self.x = var0[0];
+function updateorigin(var_0) {
+  if(self.x != var_0[0]) {
+    self.x = var_0[0];
   }
 
-  if(self.y != var0[1]) {
-    self.y = var0[1];
+  if(self.y != var_0[1]) {
+    self.y = var_0[1];
   }
 
-  if(self.z != var0[2]) {
-    self.z = var0[2];
+  if(self.z != var_0[2]) {
+    self.z = var_0[2];
     return;
   }
 }
 
-function setoriginbyname(var0, var1) {
-  var2 = getobjpointbyname(var0);
-  updateorigin(var2, var1);
+function setoriginbyname(var_0, var_1) {
+  var_2 = getobjpointbyname(var_0);
+  updateorigin(var_2, var_1);
 }
 
-function getobjpointbyname(var0) {
-  if(isDefined(level.objpoints[var0])) {
-    return level.objpoints[var0];
+function getobjpointbyname(var_0) {
+  if(isDefined(level.objpoints[var_0])) {
+    return level.objpoints[var_0];
   }
 
   return undefined;
 }
 
-function getobjpointbyindex(var0) {
-  if(isDefined(level.objpointnames[var0])) {
-    return level.objpoints[level.objpointnames[var0]];
+function getobjpointbyindex(var_0) {
+  if(isDefined(level.objpointnames[var_0])) {
+    return level.objpoints[level.objpointnames[var_0]];
   }
 
   return undefined;

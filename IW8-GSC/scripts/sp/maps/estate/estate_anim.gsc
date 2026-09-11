@@ -69,35 +69,35 @@ function player() {
   level.scr_model["context_melee_player_rig"] = "viewmodel_arms_kyle_woodland";
 }
 
-function intro_fovlerp(var0) {
+function intro_fovlerp(var_0) {
   level.player lerpfovscalefactor(1, 1);
 }
 
-function intro_hidehead(var0) {
-  var0.body hidepart("j_head");
-  var0.body hidepart("j_helmet");
+function intro_hidehead(var_0) {
+  var_0.body hidepart("j_head");
+  var_0.body hidepart("j_helmet");
   getrandomnodedestination(0.75, 0);
   level.player scripts\engine\utility::delaythread(0.75, &scripts\common\utility::allow_cinematic_motion, 1);
 }
 
-function intro_hidebody(var0) {
-  var0.body hide();
-  var0 show();
+function intro_hidebody(var_0) {
+  var_0.body hide();
+  var_0 show();
 }
 
-function intro_dofnear(var0) {
+function intro_dofnear(var_0) {
   level scripts\engine\sp\utility::dof_enable(1.8, 100);
 }
 
-function intro_doftruck(var0) {
+function intro_doftruck(var_0) {
   level.intro_technical scripts\engine\sp\utility::dof_enable_autofocus(1.8, 2);
 }
 
-function intro_dofcar(var0) {
+function intro_dofcar(var_0) {
   level.price scripts\engine\sp\utility::dof_enable_autofocus(2, 2, undefined, undefined, "tag_eye");
 }
 
-function player_rig_standup_fov_user_scale(var0) {
+function player_rig_standup_fov_user_scale(var_0) {
   level.player lerpfovscalefactor(1, 2);
 
   if(level.player ispcplayer()) {
@@ -106,27 +106,27 @@ function player_rig_standup_fov_user_scale(var0) {
   }
 }
 
-function remove_fov_of_player_during_rappel(var0) {
+function remove_fov_of_player_during_rappel(var_0) {
   level.player lerpfovscalefactor(0, 1);
 }
 
-function restore_fov_of_player_during_rappel(var0) {
+function restore_fov_of_player_during_rappel(var_0) {
   level.player lerpfovscalefactor(1, 2);
 }
 
-function remove_fov_of_player_during_hvt_interact(var0) {
+function remove_fov_of_player_during_hvt_interact(var_0) {
   level.player lerpfovscalefactor(0, 1);
 }
 
-function restore_fov_of_player_during_hvt_interact(var0) {
+function restore_fov_of_player_during_hvt_interact(var_0) {
   level.player lerpfovscalefactor(1, 1);
 }
 
-function arrest_lerpstart(var0) {
+function arrest_lerpstart(var_0) {
   level.player lerpviewangleclamp(0.2, 0.1, 0.1, 0, 0, 0, 0);
 }
 
-function arrest_lerpend(var0) {}
+function arrest_lerpend(var_0) {}
 
 function humans() {
   level.scr_anim["price"]["intro"] = % est_li_000_infil_price;
@@ -472,36 +472,36 @@ function humans() {
   level.scr_face["price"]["dx_vom_pri_objroom_exterior_50"] = % dx_vom_pri_objroom_exterior_50_face;
 }
 
-function no_more_pain(var0) {
-  var0 scripts\engine\utility::ent_flag_set("first_pain");
+function no_more_pain(var_0) {
+  var_0 scripts\engine\utility::ent_flag_set("first_pain");
 }
 
-function throwgun(var0) {
-  var0 thread scripts\common\ai::gun_remove();
-  var1 = self gettagorigin("tag_weapon_right");
-  var2 = self gettagangles("tag_weapon_right");
-  var3 = spawn("weapon_" + createheadicon(self.weapon), var1);
-  var3.angles = var2;
-  var4 = anglesToForward(var0.angles);
-  var4 *= randomfloatrange(300, 350);
-  var5 = var4[0];
-  var6 = var4[1];
-  var7 = randomfloatrange(400, 600);
-  var3 scripts\engine\utility::delaycall(0.1, &playsound, "est_li_050_fusebox_tuto_price_gundrop_01");
-  var3 physicslaunchserveritem(var3.origin, (var5, var6, var7));
+function throwgun(var_0) {
+  var_0 thread scripts\common\ai::gun_remove();
+  var_1 = self gettagorigin("tag_weapon_right");
+  var_2 = self gettagangles("tag_weapon_right");
+  var_3 = spawn("weapon_" + createheadicon(self.weapon), var_1);
+  var_3.angles = var_2;
+  var_4 = anglesToForward(var_0.angles);
+  var_4 *= randomfloatrange(300, 350);
+  var_5 = var_4[0];
+  var_6 = var_4[1];
+  var_7 = randomfloatrange(400, 600);
+  var_3 scripts\engine\utility::delaycall(0.1, &playsound, "est_li_050_fusebox_tuto_price_gundrop_01");
+  var_3 physicslaunchserveritem(var_3.origin, (var_5, var_6, var_7));
 }
 
-function price_use_pistol(var0) {
-  var0 thread scripts\anim\notetracks::notetrackguntochest();
-  var0[[var0.fnplaceweaponon]](var0.silenced_pistol, "right");
+function price_use_pistol(var_0) {
+  var_0 thread scripts\anim\notetracks::notetrackguntochest();
+  var_0[[var_0.fnplaceweaponon]](var_0.silenced_pistol, "right");
 }
 
-function price_stop_use_pistol(var0) {
-  var0 thread scripts\anim\notetracks::notetrackpistolputaway();
-  var0 thread scripts\anim\notetracks_sp::notetrackgunhand("right");
+function price_stop_use_pistol(var_0) {
+  var_0 thread scripts\anim\notetracks::notetrackpistolputaway();
+  var_0 thread scripts\anim\notetracks_sp::notetrackgunhand("right");
 }
 
-function price_pistol_fire(var0) {
+function price_pistol_fire(var_0) {
   level.fusebox_victim.shotsfired++;
 
   if(level.fusebox_victim.shotsfired < 3) {
@@ -509,13 +509,13 @@ function price_pistol_fire(var0) {
   }
 
   playFXOnTag(scripts\engine\utility::getfx("vfx_muz_si_pis_w"), level.price, "tag_flash_silenced");
-  var0 thread scripts\anim\notetracks::notetrackfire();
+  var_0 thread scripts\anim\notetracks::notetrackfire();
 }
 
-function tunnel_open(var0) {
-  var1 = getEnt("tunnel_clip", "targetname");
-  var1 connectpaths();
-  var1 delete();
+function tunnel_open(var_0) {
+  var_1 = getEnt("tunnel_clip", "targetname");
+  var_1 connectpaths();
+  var_1 delete();
   scripts\engine\utility::flag_set("tunnel_open");
 }
 
@@ -637,7 +637,7 @@ function script_models() {
   level.scr_anim["gate_chain"]["tunnel_open"] = % est_hf_090_culvert_intro_scenea_chain;
 }
 
-function laser_on_then_delete(var0) {}
+function laser_on_then_delete(var_0) {}
 
 function vehicles() {
   level.scr_animtree["technical"] = #animtree;

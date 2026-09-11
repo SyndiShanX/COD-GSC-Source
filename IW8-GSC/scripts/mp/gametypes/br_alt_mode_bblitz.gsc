@@ -16,10 +16,10 @@ function init() {
 function impactfunc_null() {
   level endon("game_ended");
   level waittill("prematch_done");
-  var0 = getarraykeys(level.teamdata);
+  var_0 = getarraykeys(level.teamdata);
 
-  foreach(var2 in var0) {
-    level.teamdata[var2]["bblitzCounter"] = 0;
+  foreach(var_2 in var_0) {
+    level.teamdata[var_2]["bblitzCounter"] = 0;
   }
 
   jumpiftrue(getdvarint("scr_br_alt_mode_bblitz_shutdown_check", 1)) LOC_00000058;
@@ -33,14 +33,14 @@ function clear_cypher_icon() {
 
   level.clear_cypher_icon = 1;
 
-  foreach(var1 in level.teamdata) {
-    clear_bomb_vest_controller_holder(var2, -1);
+  foreach(var_1 in level.teamdata) {
+    clear_bomb_vest_controller_holder(var_2, -1);
   }
 
   scripts\mp\gametypes\br_publicevents::ref_13371("br_bblitz_shutdown");
 }
 
-function clear_all_remaining(var0) {
+function clear_all_remaining(var_0) {
   if(!getdvarint("scr_br_alt_mode_bblitz", 0)) {
     return 0;
   }
@@ -49,37 +49,37 @@ function clear_all_remaining(var0) {
     return 0;
   }
 
-  var1 = var0.team;
+  var_1 = var_0.team;
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return 0;
   }
 
-  var2 = scripts\mp\utility\teams::getteamdata(var1, "bblitzCounter") + 1;
-  clear_bomb_vest_controller_holder(var1, var2);
+  var_2 = scripts\mp\utility\teams::getteamdata(var_1, "bblitzCounter") + 1;
+  clear_bomb_vest_controller_holder(var_1, var_2);
 
-  if(var2 == level.clear_and_give_killstreak_loadout_assault) {
-    clear_bomb_vest_controller_holder(var1, 0);
+  if(var_2 == level.clear_and_give_killstreak_loadout_assault) {
+    clear_bomb_vest_controller_holder(var_1, 0);
 
-    if(getdvarint("scr_br_alt_mode_bblitz_consolation", 1) && !scripts\mp\gametypes\br_extract_quest::outofboundstriggersplanetrace(var0.origin)) {
-      thread clear_and_give_killstreak_loadout_demo(var0);
-      return var2;
+    if(getdvarint("scr_br_alt_mode_bblitz_consolation", 1) && !scripts\mp\gametypes\br_extract_quest::outofboundstriggersplanetrace(var_0.origin)) {
+      thread clear_and_give_killstreak_loadout_demo(var_0);
+      return var_2;
     }
 
-    var3 = spawnStruct();
-    var3.ml_p3_to_safehouse_transition = 0;
-    var4 = scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(var3, var0.origin, (0, 0, 0), undefined, 0, 0, 35);
-    var5 = scripts\mp\gametypes\br_pickups::spawnpickup("brloot_blueprintextract_tablet", var4, 0, 1);
+    var_3 = spawnStruct();
+    var_3.ml_p3_to_safehouse_transition = 0;
+    var_4 = scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(var_3, var_0.origin, (0, 0, 0), undefined, 0, 0, 35);
+    var_5 = scripts\mp\gametypes\br_pickups::spawnpickup("brloot_blueprintextract_tablet", var_4, 0, 1);
   }
 
-  return var2;
+  return var_2;
 }
 
-function clear_bomb_vest_controller_holder(var0, var1) {
-  scripts\mp\utility\teams::setteamdata(var0, "bblitzCounter", var1);
+function clear_bomb_vest_controller_holder(var_0, var_1) {
+  scripts\mp\utility\teams::setteamdata(var_0, "bblitzCounter", var_1);
 
-  foreach(var3 in scripts\mp\utility\teams::getteamdata(var0, "players")) {
-    var3 setclientomnvar("ui_br_bblitz", var1);
+  foreach(var_3 in scripts\mp\utility\teams::getteamdata(var_0, "players")) {
+    var_3 setclientomnvar("ui_br_bblitz", var_1);
   }
 }
 
@@ -91,18 +91,18 @@ function clear_and_give_killstreak_loadout_recon() {
   return getdvarfloat("scr_br_alt_mode_bblitz_search_min_time", 120);
 }
 
-function clear_and_give_killstreak_loadout_demo(var0) {
-  if(!isDefined(var0)) {
+function clear_and_give_killstreak_loadout_demo(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var1 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var0.team, var0.squadindex);
+  var_1 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_0.team, var_0.squadindex);
 
-  foreach(var3 in var1) {
-    var3 scripts\mp\utility\lower_message::ref_1316e("br_assassination_notargets", undefined, 5);
+  foreach(var_3 in var_1) {
+    var_3 scripts\mp\utility\lower_message::ref_1316e("br_assassination_notargets", undefined, 5);
   }
 
-  var5 = "mp/loot/br/default/lootset_cache_lege.csv";
-  var6 = [];
-  GscBinSkip0(0x2e, var6.size, registerscriptedspawnpoints("weapon", 3, 4, var5));
+  var_5 = "mp/loot/br/default/lootset_cache_lege.csv";
+  var_6 = [];
+  GscBinSkip0(0x2e, var_6.size, registerscriptedspawnpoints("weapon", 3, 4, var_5));
 }

@@ -3,71 +3,71 @@
  * Script: scripts\aitypes\common.gsc
 ***********************************************/
 
-function returnsuccessiftrue(var0, var1) {
-  if(var1 == 1) {
+function returnsuccessiftrue(var_0, var_1) {
+  if(var_1 == 1) {
     return anim.success;
   }
 
   return anim.failure;
 }
 
-function isvariabledefined(var0, var1) {
-  if(isDefined(var1)) {
+function isvariabledefined(var_0, var_1) {
+  if(isDefined(var_1)) {
     return anim.success;
   }
 
   return anim.failure;
 }
 
-function setupwait(var0) {
-  self.bt.instancedata[var0] = [];
-  self.bt.instancedata[var0]["waitStartTime"] = gettime();
+function setupwait(var_0) {
+  self.bt.instancedata[var_0] = [];
+  self.bt.instancedata[var_0]["waitStartTime"] = gettime();
 }
 
-function dowait(var0, var1) {
-  var2 = self.bt.instancedata[var0]["waitStartTime"];
+function dowait(var_0, var_1) {
+  var_2 = self.bt.instancedata[var_0]["waitStartTime"];
 
-  if(gettime() - var2 < var1) {
+  if(gettime() - var_2 < var_1) {
     return anim.running;
   }
 
   return anim.success;
 }
 
-function haslos(var0, var1) {
-  var2 = var1;
+function haslos(var_0, var_1) {
+  var_2 = var_1;
 
-  if(self cansee(var2)) {
+  if(self cansee(var_2)) {
     return anim.success;
   }
 
   return anim.failure;
 }
 
-function valuewithinrange(var0, var1) {
-  var2 = var1[0];
-  var3 = var1[1];
-  var4 = var1[2];
+function valuewithinrange(var_0, var_1) {
+  var_2 = var_1[0];
+  var_3 = var_1[1];
+  var_4 = var_1[2];
 
-  if(var3 <= var2 && var2 <= var4) {
+  if(var_3 <= var_2 && var_2 <= var_4) {
     return anim.success;
   }
 
   return anim.failure;
 }
 
-function randchance(var0, var1) {
-  var2 = var1[0];
-  var3 = var1[1];
+function randchance(var_0, var_1) {
+  var_2 = var_1[0];
+  var_3 = var_1[1];
 
-  if(randomint(var2) < var3) {
+  if(randomint(var_2) < var_3) {
     return anim.success;
   }
 
   return anim.failure;
 }
 
-function cointoss(var0) {
+function cointoss(var_0) {
   if(randomint(100) < 50) {
     return anim.success;
   }
@@ -75,17 +75,17 @@ function cointoss(var0) {
   return anim.failure;
 }
 
-function ifisalive(var0, var1) {
-  if(isDefined(var1)) {
-    var2 = var1;
+function ifisalive(var_0, var_1) {
+  if(isDefined(var_1)) {
+    var_2 = var_1;
   } else {
-    var2 = self;
+    var_2 = self;
   }
 
-  return isalive(var2);
+  return isalive(var_2);
 }
 
-function ifselfdestruct(var0) {
+function ifselfdestruct(var_0) {
   if(scripts\asm\asm_bb::bb_isselfdestruct()) {
     return anim.success;
   }
@@ -94,51 +94,51 @@ function ifselfdestruct(var0) {
 }
 
 function updateeveryframe_magicdoorchecks() {
-  var0 = 110;
+  var_0 = 110;
 
   if(self aigettargetspeed() > 90) {
-    var0 = 180;
+    var_0 = 180;
   }
 
-  var1 = self getmodifierlocationonpath("door", var0);
+  var_1 = self getmodifierlocationonpath("door", var_0);
 
-  if(isDefined(var1)) {
-    var2 = getentitylessscriptablearrayinradius(undefined, undefined, var1, 64);
+  if(isDefined(var_1)) {
+    var_2 = getentitylessscriptablearrayinradius(undefined, undefined, var_1, 64);
 
-    if(var2.size > 0) {
-      var3 = undefined;
+    if(var_2.size > 0) {
+      var_3 = undefined;
 
-      if(var2.size == 1) {
-        if(var2[0] scriptableisdoor()) {
-          var3 = var2[0];
+      if(var_2.size == 1) {
+        if(var_2[0] scriptableisdoor()) {
+          var_3 = var_2[0];
         }
       } else {
-        var4 = var2.size;
-        var5 = 9999999;
+        var_4 = var_2.size;
+        var_5 = 9999999;
 
-        for(var6 = 0; var6 < var4; var6++) {
-          if(var2[var6] scriptableisdoor()) {
-            var7 = distancesquared(var2[var6].origin, var1);
+        for(var_6 = 0; var_6 < var_4; var_6++) {
+          if(var_2[var_6] scriptableisdoor()) {
+            var_7 = distancesquared(var_2[var_6].origin, var_1);
 
-            if(var7 < var5) {
-              var5 = var7;
-              var3 = var2[var6];
+            if(var_7 < var_5) {
+              var_5 = var_7;
+              var_3 = var_2[var_6];
             }
           }
         }
       }
 
-      if(isDefined(var3)) {
-        var8 = anglesToForward(self.angles);
-        var9 = var3.origin - self.origin;
-        var9 = (var9[0], var9[1], 0);
+      if(isDefined(var_3)) {
+        var_8 = anglesToForward(self.angles);
+        var_9 = var_3.origin - self.origin;
+        var_9 = (var_9[0], var_9[1], 0);
 
-        if(vectordot(var9, var8) > 0) {
-          var10 = var3 scriptabledoorangle();
+        if(vectordot(var_9, var_8) > 0) {
+          var_10 = var_3 scriptabledoorangle();
 
-          if(abs(var10) <= 60) {
-            self._blackboard.doortoopen = var3;
-            self._blackboard.doorpos = var1;
+          if(abs(var_10) <= 60) {
+            self._blackboard.doortoopen = var_3;
+            self._blackboard.doorpos = var_1;
             return;
           }
         }

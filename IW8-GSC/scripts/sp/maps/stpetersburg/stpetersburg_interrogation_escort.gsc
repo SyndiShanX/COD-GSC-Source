@@ -28,8 +28,8 @@ function escort_drone_swap() {
   GscBinSkip1(0x45, 0, level.enforcerwife.model);
 }
 
-function escort_suit_toggle(var0) {
-  if(var0) {
+function escort_suit_toggle(var_0) {
+  if(var_0) {
     level.player setsuit("iw8_escort_sp");
     level.player capturnrate(60, 45);
     set_escort_player_pitch_bounds(10, 30);
@@ -49,46 +49,46 @@ function escort_suit_toggle(var0) {
     level.groundrefent delete();
   }
 
-  level.player scripts\common\utility::allow_jump(!var0, "escort");
-  level.player scripts\common\utility::allow_crouch(!var0, "escort");
-  level.player scripts\common\utility::allow_prone(!var0, "escort");
-  level.player scripts\common\utility::allow_slide(!var0, "escort");
-  level.player scripts\common\utility::allow_mantle(!var0, "escort");
-  level.player scripts\common\utility::allow_offhand_weapons(!var0, "escort");
-  level.player scripts\common\utility::allow_sprint(!var0, "escort");
-  level.player scripts\common\utility::allow_weapon_pickup(!var0, "escort");
-  level.player scripts\sp\utility::allow_cg_drawcrosshair(!var0, "escort");
-  level.player disableemptyclipweaponswitch(var0);
-  level.player allowmountside(!var0);
-  level.player allowmounttop(!var0);
-  level thread scripts\sp\utility::context_melee_enable(!var0);
+  level.player scripts\common\utility::allow_jump(!var_0, "escort");
+  level.player scripts\common\utility::allow_crouch(!var_0, "escort");
+  level.player scripts\common\utility::allow_prone(!var_0, "escort");
+  level.player scripts\common\utility::allow_slide(!var_0, "escort");
+  level.player scripts\common\utility::allow_mantle(!var_0, "escort");
+  level.player scripts\common\utility::allow_offhand_weapons(!var_0, "escort");
+  level.player scripts\common\utility::allow_sprint(!var_0, "escort");
+  level.player scripts\common\utility::allow_weapon_pickup(!var_0, "escort");
+  level.player scripts\sp\utility::allow_cg_drawcrosshair(!var_0, "escort");
+  level.player disableemptyclipweaponswitch(var_0);
+  level.player allowmountside(!var_0);
+  level.player allowmounttop(!var_0);
+  level thread scripts\sp\utility::context_melee_enable(!var_0);
 }
 
-function set_escort_player_pitch_bounds(var0, var1) {
-  var0 = scripts\engine\utility::ter_op(isDefined(var0), var0, 10);
-  var1 = scripts\engine\utility::ter_op(isDefined(var0), var1, 30);
-  setsaveddvar("NNSNKNRTPL", var0);
-  setsaveddvar("LOMLPPTKO", var1);
+function set_escort_player_pitch_bounds(var_0, var_1) {
+  var_0 = scripts\engine\utility::ter_op(isDefined(var_0), var_0, 10);
+  var_1 = scripts\engine\utility::ter_op(isDefined(var_0), var_1, 30);
+  setsaveddvar("NNSNKNRTPL", var_0);
+  setsaveddvar("LOMLPPTKO", var_1);
 }
 
-function set_escort_phase(var0) {
-  level.escortphase = var0;
+function set_escort_phase(var_0) {
+  level.escortphase = var_0;
 
-  if(var0 == 1) {
+  if(var_0 == 1) {
     thread efsm_request_state(level.movementmachine, "react");
     return;
   }
 }
 
-function enable_escort_gesture(var0) {
+function enable_escort_gesture(var_0) {
   level notify("escort_gesture_enabled");
   level endon("escort_gesture_enabled");
 
   if(isalive(level.player)) {
-    var1 = level.movementmachine.currentstatename == "idle";
+    var_1 = level.movementmachine.currentstatename == "idle";
 
     if(isDefined(level.groundrefent)) {
-      if(!var1) {
+      if(!var_1) {
         level.groundrefent setanimknob(level.groundrefent scripts\engine\utility::getanim("escort_sway_in"), 1, 0.1);
         wait getanimlength(level.groundrefent scripts\engine\utility::getanim("escort_sway_in"));
         level.groundrefent setanimknob(level.groundrefent scripts\engine\utility::getanim("escort_sway")[0], 1, 0.1);
@@ -99,15 +99,15 @@ function enable_escort_gesture(var0) {
       }
     }
 
-    GscBinSkip4(0x35, var1, var0);
+    GscBinSkip4(0x35, var_1, var_0);
   }
 }
 
-function escort_gesture_rumble(var0, var1) {
-  if(var0) {
-    var2 = (gettime() - level.player.previdlerumbletime) * 0.001;
+function escort_gesture_rumble(var_0, var_1) {
+  if(var_0) {
+    var_2 = (gettime() - level.player.previdlerumbletime) * 0.001;
 
-    if(var2 < 2.5) {
+    if(var_2 < 2.5) {
       return;
     }
 
@@ -115,17 +115,17 @@ function escort_gesture_rumble(var0, var1) {
     level.player playRumbleOnEntity("viewmodel_small");
   }
 
-  if(!var0) {
-    var2 = (gettime() - level.player.prevmoverumbletime) * 0.001;
+  if(!var_0) {
+    var_2 = (gettime() - level.player.prevmoverumbletime) * 0.001;
 
-    if(var2 < 0.5) {
+    if(var_2 < 0.5) {
       return;
     }
 
     level.player.prevmoverumbletime = gettime();
     level.player playRumbleOnEntity("viewmodel_small");
 
-    if(!istrue(var1)) {
+    if(!istrue(var_1)) {
       wait 0.8;
       level.player playRumbleOnEntity("viewmodel_medium");
       return;
@@ -159,35 +159,35 @@ function escort_disengage() {
 }
 
 function spawn_disengage_ai() {
-  foreach(var1 in level.escortspawners) {
-    var1.count = 1;
-    var2 = var1 scripts\engine\sp\utility::spawn_ai(1);
-    var2 scripts\common\ai::gun_remove();
-    var2 scripts\common\ai::magic_bullet_shield(1);
-    var2 scripts\sp\utility::context_melee_allow(0);
-    var2 actoraimassistoff();
-    var2.ignoreme = 1;
-    var2.ignoreall = 1;
-    var2.allowdeath = 1;
-    var2 thread scripts\sp\maps\stpetersburg\stpetersburg_utility::breath_fx_thread();
-    level.escorttargets[var3] = var2;
-    level.escortdrones[var3] delete();
+  foreach(var_1 in level.escortspawners) {
+    var_1.count = 1;
+    var_2 = var_1 scripts\engine\sp\utility::spawn_ai(1);
+    var_2 scripts\common\ai::gun_remove();
+    var_2 scripts\common\ai::magic_bullet_shield(1);
+    var_2 scripts\sp\utility::context_melee_allow(0);
+    var_2 actoraimassistoff();
+    var_2.ignoreme = 1;
+    var_2.ignoreall = 1;
+    var_2.allowdeath = 1;
+    var_2 thread scripts\sp\maps\stpetersburg\stpetersburg_utility::breath_fx_thread();
+    level.escorttargets[var_3] = var_2;
+    level.escortdrones[var_3] delete();
   }
 }
 
-function trigger_escort_disengage(var0, var1) {
-  if(!istrue(var0)) {
+function trigger_escort_disengage(var_0, var_1) {
+  if(!istrue(var_0)) {
     efsm_request_state(level.movementmachine, "disengage");
 
-    if(isDefined(var1)) {
-      wait var1;
+    if(isDefined(var_1)) {
+      wait var_1;
     }
   }
 
   level notify("escort_disengage");
   level waittill("escort_ended");
 
-  if(!istrue(var0)) {
+  if(!istrue(var_0)) {
     scripts\engine\utility::flag_set("interrogation_escort_done");
   }
 
@@ -221,9 +221,9 @@ function efsm_setup_movement_machine() {
 }
 
 function efsm_spawn_machine() {
-  var0 = spawnStruct();
-  reset_machine_state(var0);
-  return var0;
+  var_0 = spawnStruct();
+  reset_machine_state(var_0);
+  return var_0;
 }
 
 function reset_machine_state() {
@@ -234,149 +234,149 @@ function reset_machine_state() {
   self.stateenterinprogress = 0;
 }
 
-function efsm_add_machine_state(var0, var1, var2, var3) {
-  if(!isarray(var1)) {
-    var1 = [var1];
+function efsm_add_machine_state(var_0, var_1, var_2, var_3) {
+  if(!isarray(var_1)) {
+    var_1 = [var_1];
   }
 
-  self.states[var0] = var1;
-  self.states[var0][2] = scripts\engine\utility::ter_op(isDefined(var2), var2, 0);
-  self.states[var0][3] = scripts\engine\utility::ter_op(isDefined(var3), var3, 0);
+  self.states[var_0] = var_1;
+  self.states[var_0][2] = scripts\engine\utility::ter_op(isDefined(var_2), var_2, 0);
+  self.states[var_0][3] = scripts\engine\utility::ter_op(isDefined(var_3), var_3, 0);
 }
 
-function efsm_add_machine_transition(var0, var1, var2) {
-  self.transitions[var0][0] = var1;
-  self.transitions[var0][1] = var2;
+function efsm_add_machine_transition(var_0, var_1, var_2) {
+  self.transitions[var_0][0] = var_1;
+  self.transitions[var_0][1] = var_2;
 }
 
-function efsm_request_state(var0, var1) {
-  if(efsm_is_valid_transition(var0, var1) && efsm_can_interrupt(var0)) {
-    efsm_change_state(var0, var1);
+function efsm_request_state(var_0, var_1) {
+  if(efsm_is_valid_transition(var_0, var_1) && efsm_can_interrupt(var_0)) {
+    efsm_change_state(var_0, var_1);
     waitframe();
     return;
   }
 }
 
-function efsm_is_valid_transition(var0, var1) {
-  if(!scripts\engine\utility::array_contains_key(var0.states, var1)) {
+function efsm_is_valid_transition(var_0, var_1) {
+  if(!scripts\engine\utility::array_contains_key(var_0.states, var_1)) {
     return false;
   }
 
-  var2 = var0.currentstatename;
+  var_2 = var_0.currentstatename;
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return true;
   }
 
-  if(scripts\engine\utility::is_equal(var2, var1)) {
+  if(scripts\engine\utility::is_equal(var_2, var_1)) {
     return false;
   }
 
-  var3 = var0.transitions[var2][0];
-  var4 = var0.transitions[var2][1];
-  var5 = undefined;
-  var6 = undefined;
+  var_3 = var_0.transitions[var_2][0];
+  var_4 = var_0.transitions[var_2][1];
+  var_5 = undefined;
+  var_6 = undefined;
 
-  if(isDefined(var3)) {
-    if(isarray(var3)) {
-      var5 = scripts\engine\utility::array_contains(var3, var1);
-    } else if(var3 == "all") {
-      var5 = 1;
+  if(isDefined(var_3)) {
+    if(isarray(var_3)) {
+      var_5 = scripts\engine\utility::array_contains(var_3, var_1);
+    } else if(var_3 == "all") {
+      var_5 = 1;
     }
   }
 
-  if(isDefined(var4)) {
-    if(isarray(var4)) {
-      var6 = scripts\engine\utility::array_contains(var4, var1);
-    } else if(var4 == "all") {
-      var6 = 1;
+  if(isDefined(var_4)) {
+    if(isarray(var_4)) {
+      var_6 = scripts\engine\utility::array_contains(var_4, var_1);
+    } else if(var_4 == "all") {
+      var_6 = 1;
     }
   }
 
-  return istrue(var5) && !istrue(var6);
+  return istrue(var_5) && !istrue(var_6);
 }
 
-function efsm_can_interrupt(var0) {
-  var1 = isDefined(var0.currentstate) && var0.currentstate[2] && var0.stateenterinprogress;
-  return !var1;
+function efsm_can_interrupt(var_0) {
+  var_1 = isDefined(var_0.currentstate) && var_0.currentstate[2] && var_0.stateenterinprogress;
+  return !var_1;
 }
 
-function efsm_change_state(var0, var1, var2) {
+function efsm_change_state(var_0, var_1, var_2) {
   level notify("efsm_state_change");
   level endon("efsm_state_change");
   level endon("escort_disengage");
   level.player endon("death");
-  var0.previousstate = var0.currentstate;
-  var0.previousstatename = var0.currentstatename;
-  var0.currentstate = efsm_get_state(var0, var1);
-  var0.currentstatename = var1;
+  var_0.previousstate = var_0.currentstate;
+  var_0.previousstatename = var_0.currentstatename;
+  var_0.currentstate = efsm_get_state(var_0, var_1);
+  var_0.currentstatename = var_1;
 
-  if(isDefined(var0.previousstate) && isDefined(var0.previousstate[1]) && !var0.currentstate[3]) {
-    [[var0.previousstate[1]]]();
+  if(isDefined(var_0.previousstate) && isDefined(var_0.previousstate[1]) && !var_0.currentstate[3]) {
+    [[var_0.previousstate[1]]]();
   }
 
-  if(isDefined(var0.currentstate[0])) {
-    var0.stateenterinprogress = 1;
-    [[var0.currentstate[0]]]();
-    var0.stateenterinprogress = 0;
+  if(isDefined(var_0.currentstate[0])) {
+    var_0.stateenterinprogress = 1;
+    [[var_0.currentstate[0]]]();
+    var_0.stateenterinprogress = 0;
     return;
   }
 }
 
-function efsm_get_state(var0, var1) {
-  if(scripts\engine\utility::array_contains_key(var0.states, var1)) {
-    return var0.states[var1];
+function efsm_get_state(var_0, var_1) {
+  if(scripts\engine\utility::array_contains_key(var_0.states, var_1)) {
+    return var_0.states[var_1];
   }
 
   return undefined;
 }
 
 function idle_enter() {
-  var0 = get_phase_anim("idle_loop");
+  var_0 = get_phase_anim("idle_loop");
   level.escorttargetanimnode notify("escort_loop_end");
-  level.escorttargetanimnode thread scripts\common\anim::anim_loop(level.escortdrones, var0, "escort_loop_end");
+  level.escorttargetanimnode thread scripts\common\anim::anim_loop(level.escortdrones, var_0, "escort_loop_end");
   thread enable_escort_gesture();
   level.player scripts\engine\sp\utility::blend_movespeedscale(0.2, 0.2);
 }
 
 function move_forward_enter() {
-  var0 = get_phase_anim("forward_start");
-  var1 = get_phase_anim("forward_loop");
+  var_0 = get_phase_anim("forward_start");
+  var_1 = get_phase_anim("forward_loop");
 
   switch (level.escortphase) {
     case 2:
     case 1:
-      var2 = 0.4;
-      var3 = 0.2;
+      var_2 = 0.4;
+      var_3 = 0.2;
       break;
     case 0:
     default:
-      var2 = 0.75;
-      var3 = 1.5;
+      var_2 = 0.75;
+      var_3 = 1.5;
       break;
   }
 
   thread enable_escort_gesture();
-  level.player scripts\engine\utility::delaythread(0.2, &scripts\engine\sp\utility::blend_movespeedscale, var2, var3);
+  level.player scripts\engine\utility::delaythread(0.2, &scripts\engine\sp\utility::blend_movespeedscale, var_2, var_3);
 
   if(level.movementmachine.previousstatename == "idle") {
     wait 0.15;
   }
 
   level.escorttargetanimnode notify("escort_loop_end");
-  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var2);
-  level.escorttargetanimnode thread scripts\common\anim::anim_loop(level.escortdrones, var3, "escort_loop_end");
+  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var_2);
+  level.escorttargetanimnode thread scripts\common\anim::anim_loop(level.escortdrones, var_3, "escort_loop_end");
 }
 
 function move_forward_exit() {
-  var0 = get_phase_anim("forward_stop");
+  var_0 = get_phase_anim("forward_stop");
   level.escorttargetanimnode notify("escort_loop_end");
-  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var0);
+  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var_0);
 }
 
 function move_backward_enter() {
-  var0 = get_phase_anim("backward_start");
-  var1 = get_phase_anim("backward_loop");
+  var_0 = get_phase_anim("backward_start");
+  var_1 = get_phase_anim("backward_loop");
   thread enable_escort_gesture();
   level.player scripts\engine\utility::delaythread(0.2, &scripts\engine\sp\utility::blend_movespeedscale, 0.3, 0.2);
 
@@ -385,19 +385,19 @@ function move_backward_enter() {
   }
 
   level.escorttargetanimnode notify("escort_loop_end");
-  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var0);
-  level.escorttargetanimnode thread scripts\common\anim::anim_loop(level.escortdrones, var1, "escort_loop_end");
+  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var_0);
+  level.escorttargetanimnode thread scripts\common\anim::anim_loop(level.escortdrones, var_1, "escort_loop_end");
 }
 
 function move_backward_exit() {
-  var0 = get_phase_anim("backward_stop");
+  var_0 = get_phase_anim("backward_stop");
   level.escorttargetanimnode notify("escort_loop_end");
-  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var0);
+  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var_0);
 }
 
 function move_left_enter() {
-  var0 = get_phase_anim("left_start");
-  var1 = get_phase_anim("left_loop");
+  var_0 = get_phase_anim("left_start");
+  var_1 = get_phase_anim("left_loop");
   thread enable_escort_gesture();
   level.player scripts\engine\utility::delaythread(0.2, &scripts\engine\sp\utility::blend_movespeedscale, 0.6, 0.2);
 
@@ -406,19 +406,19 @@ function move_left_enter() {
   }
 
   level.escorttargetanimnode notify("escort_loop_end");
-  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var0);
-  level.escorttargetanimnode thread scripts\common\anim::anim_loop(level.escortdrones, var1, "escort_loop_end");
+  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var_0);
+  level.escorttargetanimnode thread scripts\common\anim::anim_loop(level.escortdrones, var_1, "escort_loop_end");
 }
 
 function move_left_exit() {
-  var0 = get_phase_anim("left_stop");
+  var_0 = get_phase_anim("left_stop");
   level.escorttargetanimnode notify("escort_loop_end");
-  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var0);
+  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var_0);
 }
 
 function move_right_enter() {
-  var0 = get_phase_anim("right_start");
-  var1 = get_phase_anim("right_loop");
+  var_0 = get_phase_anim("right_start");
+  var_1 = get_phase_anim("right_loop");
   thread enable_escort_gesture();
   level.player scripts\engine\utility::delaythread(0.2, &scripts\engine\sp\utility::blend_movespeedscale, 0.6, 0.2);
 
@@ -427,44 +427,44 @@ function move_right_enter() {
   }
 
   level.escorttargetanimnode notify("escort_loop_end");
-  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var0);
-  level.escorttargetanimnode thread scripts\common\anim::anim_loop(level.escortdrones, var1, "escort_loop_end");
+  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var_0);
+  level.escorttargetanimnode thread scripts\common\anim::anim_loop(level.escortdrones, var_1, "escort_loop_end");
 }
 
 function move_right_exit() {
-  var0 = get_phase_anim("right_stop");
+  var_0 = get_phase_anim("right_stop");
   level.escorttargetanimnode notify("escort_loop_end");
-  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var0);
+  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var_0);
 }
 
 function turn_left_enter() {
-  var0 = get_phase_anim("turn_left_start");
-  var1 = get_phase_anim("turn_left");
+  var_0 = get_phase_anim("turn_left_start");
+  var_1 = get_phase_anim("turn_left");
   thread enable_escort_gesture(1);
   level.escorttargetanimnode notify("escort_loop_end");
-  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var0);
-  level.escorttargetanimnode thread scripts\common\anim::anim_loop(level.escortdrones, var1, "escort_loop_end");
+  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var_0);
+  level.escorttargetanimnode thread scripts\common\anim::anim_loop(level.escortdrones, var_1, "escort_loop_end");
 }
 
 function turn_left_exit() {
-  var0 = get_phase_anim("turn_left_stop");
+  var_0 = get_phase_anim("turn_left_stop");
   level.escorttargetanimnode notify("escort_loop_end");
-  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var0);
+  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var_0);
 }
 
 function turn_right_enter() {
-  var0 = get_phase_anim("turn_right_start");
-  var1 = get_phase_anim("turn_right");
+  var_0 = get_phase_anim("turn_right_start");
+  var_1 = get_phase_anim("turn_right");
   thread enable_escort_gesture(1);
   level.escorttargetanimnode notify("escort_loop_end");
-  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var0);
-  level.escorttargetanimnode thread scripts\common\anim::anim_loop(level.escortdrones, var1, "escort_loop_end");
+  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var_0);
+  level.escorttargetanimnode thread scripts\common\anim::anim_loop(level.escortdrones, var_1, "escort_loop_end");
 }
 
 function turn_right_exit() {
-  var0 = get_phase_anim("turn_right_stop");
+  var_0 = get_phase_anim("turn_right_stop");
   level.escorttargetanimnode notify("escort_loop_end");
-  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var0);
+  level.escorttargetanimnode scripts\common\anim::anim_single(level.escortdrones, var_0);
 }
 
 function react_enter() {
@@ -474,8 +474,8 @@ function react_enter() {
   level.player playRumbleOnEntity("heavy_3s");
   level.escorttargetanimnode notify("escort_loop_end");
   level.escorttargetanimnode thread scripts\common\anim::anim_single(level.escortdrones, "react_hallway");
-  var0 = getanimlength(level.escortdrones[0] scripts\engine\utility::getanim("react_hallway"));
-  wait var0 - 0.2;
+  var_0 = getanimlength(level.escortdrones[0] scripts\engine\utility::getanim("react_hallway"));
+  wait var_0 - 0.2;
 
   if(!level.player.escortidle) {
     level.escortdrones[0] notify("single anim", "end");
@@ -508,21 +508,21 @@ function efsm_stick_input() {
   level.player.escortidle = 0;
 
   for(;;) {
-    var0 = level.player getnormalizedmovement();
-    var1 = level.player getnormalizedcameramovement();
-    var2 = 0;
-    var3 = 0;
+    var_0 = level.player getnormalizedmovement();
+    var_1 = level.player getnormalizedcameramovement();
+    var_2 = 0;
+    var_3 = 0;
 
     if(issaverecentlyloaded()) {
       level.player capturnrate(60, 45);
     }
 
-    var4 = left_stick_movement(var0);
+    var_4 = left_stick_movement(var_0);
 
     if(isDefined(level.escortdrones)) {
-      switch (var4) {
+      switch (var_4) {
         case 0:
-          var2 = 1;
+          var_2 = 1;
           break;
         case 1:
           GscBinSkip4(0x35, level.movementmachine, "forward");
@@ -537,17 +537,17 @@ function efsm_stick_input() {
           GscBinSkip4(0x35, level.movementmachine, "left");
       }
 
-      if(var4 != 0) {
+      if(var_4 != 0) {
         level.player.escortidle = 0;
         waitframe();
         continue;
       }
 
-      var5 = right_stick_movement(var1);
+      var_5 = right_stick_movement(var_1);
 
-      switch (var5) {
+      switch (var_5) {
         case 0:
-          var3 = 1;
+          var_3 = 1;
           break;
         case 6:
           GscBinSkip4(0x35, level.movementmachine, "turn_right");
@@ -556,7 +556,7 @@ function efsm_stick_input() {
           GscBinSkip4(0x35, level.movementmachine, "turn_left");
       }
 
-      if(var2 && var3) {
+      if(var_2 && var_3) {
         GscBinSkip4(0x35, level.movementmachine, "idle");
       }
 
@@ -568,57 +568,57 @@ function efsm_stick_input() {
 }
 
 function efsm_idle_check() {
-  var0 = 0;
-  var1 = 3;
+  var_0 = 0;
+  var_1 = 3;
 
   for(;;) {
     wait 1;
 
     if(level.movementmachine.currentstatename == "idle" || level.movementmachine.currentstatename == "turn_left" || level.movementmachine.currentstatename == "turn_right") {
-      var0++;
+      var_0++;
     } else {
-      var0 = 0;
+      var_0 = 0;
       scripts\engine\utility::flag_clear("interrogation_escort_idle");
     }
 
-    if(var0 >= var1) {
+    if(var_0 >= var_1) {
       scripts\engine\utility::flag_set("interrogation_escort_idle");
     }
   }
 }
 
-function left_stick_movement(var0) {
-  var1 = 0;
-  var2 = 0;
+function left_stick_movement(var_0) {
+  var_1 = 0;
+  var_2 = 0;
 
-  if(abs(var0[0]) > abs(var0[1])) {
+  if(abs(var_0[0]) > abs(var_0[1])) {
     level.timerleft = 0;
     level.timerright = 0;
 
-    if(var0[0] > 0.5) {
+    if(var_0[0] > 0.5) {
       level.timerforward += 1;
 
       if(level.timerforward > 0) {
         return 1;
       }
-    } else if(var0[0] < -0.5) {
+    } else if(var_0[0] < -0.5) {
       level.timerbackward += 1;
 
       if(level.timerbackward > 0) {
         return 2;
       }
     }
-  } else if(abs(var0[1]) > abs(var0[0])) {
+  } else if(abs(var_0[1]) > abs(var_0[0])) {
     level.timerforward = 0;
     level.timerbackward = 0;
 
-    if(var0[1] > 0.5) {
+    if(var_0[1] > 0.5) {
       level.timerright += 1;
 
       if(level.timerright > 0) {
         return 4;
       }
-    } else if(var0[1] < -0.5) {
+    } else if(var_0[1] < -0.5) {
       level.timerleft += 1;
 
       if(level.timerleft > 0) {
@@ -635,16 +635,16 @@ function left_stick_movement(var0) {
   return 0;
 }
 
-function right_stick_movement(var0) {
-  var1 = 0;
+function right_stick_movement(var_0) {
+  var_1 = 0;
 
-  if(var0[1] > 0.5) {
+  if(var_0[1] > 0.5) {
     level.timerlookright += 1;
 
     if(level.timerlookright > 0) {
       return 6;
     }
-  } else if(var0[1] < -0.5) {
+  } else if(var_0[1] < -0.5) {
     level.timerlookleft += 1;
 
     if(level.timerlookleft > 0) {
@@ -658,19 +658,19 @@ function right_stick_movement(var0) {
   return 0;
 }
 
-function get_phase_anim(var0) {
-  var1 = var0;
+function get_phase_anim(var_0) {
+  var_1 = var_0;
 
   switch (level.escortphase) {
     case 1:
-      var1 = var0 + "_hallway";
+      var_1 = var_0 + "_hallway";
       break;
     case 0:
     default:
       break;
   }
 
-  return var1;
+  return var_1;
 }
 
 function remove_wife_blendshape_in_hallway() {

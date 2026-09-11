@@ -17,16 +17,16 @@ function init() {
     return;
   }
 
-  var0 = spawnStruct();
-  level.potgglobals = var0;
-  var0.curpotgscene = undefined;
-  var0.systemfinalized = 0;
-  var0.entities = [];
-  var0.settings = [];
-  var0.settingtypes = [];
-  var0.nextsceneid = 0;
-  var0.lastarchivetime = -1;
-  var0.pendingarchiverequest = 0;
+  var_0 = spawnStruct();
+  level.potgglobals = var_0;
+  var_0.curpotgscene = undefined;
+  var_0.systemfinalized = 0;
+  var_0.entities = [];
+  var_0.settings = [];
+  var_0.settingtypes = [];
+  var_0.nextsceneid = 0;
+  var_0.lastarchivetime = -1;
+  var_0.pendingarchiverequest = 0;
   loadeventtable();
   setdvarifuninitialized("potg_action_duration_max", 8000);
   setdvarifuninitialized("potg_action_duration_min", 3000);
@@ -67,20 +67,20 @@ function getminimumscorerequirednvidiahighlights() {
 }
 
 function loadeventtable() {
-  var0 = level.potgglobals;
+  var_0 = level.potgglobals;
 
-  for(var1 = 0;; var1++) {
-    var2 = tablelookupbyrow("mp/potg_event_table.csv", var1, 0);
+  for(var_1 = 0;; var_1++) {
+    var_2 = tablelookupbyrow("mp/potg_event_table.csv", var_1, 0);
 
-    if(!isDefined(var2) || var2 == "") {
+    if(!isDefined(var_2) || var_2 == "") {
       break;
     }
 
-    var0.eventtable[var2] = [];
-    var3 = tablelookupbyrow("mp/potg_event_table.csv", var1, 1);
-    var0.eventtable[var2]["score"] = float(var3);
-    var4 = tablelookupbyrow("mp/potg_event_table.csv", var1, 2);
-    var0.eventtable[var2]["addOn"] = var4 != "";
+    var_0.eventtable[var_2] = [];
+    var_3 = tablelookupbyrow("mp/potg_event_table.csv", var_1, 1);
+    var_0.eventtable[var_2]["score"] = float(var_3);
+    var_4 = tablelookupbyrow("mp/potg_event_table.csv", var_1, 2);
+    var_0.eventtable[var_2]["addOn"] = var_4 != "";
   }
 }
 
@@ -88,8 +88,8 @@ function onplayerconnect() {
   level endon("game_ended");
 
   for(;;) {
-    level waittill("connected", var0);
-    registerpotgentity(var0);
+    level waittill("connected", var_0);
+    registerpotgentity(var_0);
     thread updateplayerrecording();
   }
 }
@@ -111,16 +111,16 @@ function updateplayerrecording() {
   }
 }
 
-function onplayerdisconnect(var0) {
-  deregisterpotgentity(var0);
+function onplayerdisconnect(var_0) {
+  deregisterpotgentity(var_0);
 }
 
-function onroundended(var0) {
+function onroundended(var_0) {
   if(!istrue(level.potgenabled)) {
     return;
   }
 
-  scripts\mp\potg_events::onroundended(var0);
+  scripts\mp\potg_events::onroundended(var_0);
   waitframe();
   thread waitforrecordingandfinalize();
 }
@@ -136,10 +136,10 @@ function waitforrecordingandfinalize() {
 }
 
 function shouldskippotg() {
-  var0 = getcurpotgscene();
+  var_0 = getcurpotgscene();
 
-  if(isDefined(var0) && isDefined(var0.primaryentity)) {
-    return (var0.score < getminimumscorerequired());
+  if(isDefined(var_0) && isDefined(var_0.primaryentity)) {
+    return (var_0.score < getminimumscorerequired());
   }
 
   return 1;
@@ -159,10 +159,10 @@ function finalizepotgsystem() {
     archivecurrentgamestate();
   }
 
-  var0 = getcurpotgscene();
+  var_0 = getcurpotgscene();
 
-  if(isDefined(var0)) {
-    finalizescene(var0);
+  if(isDefined(var_0)) {
+    finalizescene(var_0);
     return;
   }
 }
@@ -171,45 +171,45 @@ function issystemfinalized() {
   return level.potgglobals.systemfinalized;
 }
 
-function registerpotgentity(var0) {
+function registerpotgentity(var_0) {
   if(!level.potgenabled) {
     return;
   }
 
-  var1 = level.potgglobals;
-  var2 = getentityid(var0);
-  var3 = spawnStruct();
-  var3.entity = var0;
-  var3.events = [];
-  var3.recordingenabledcount = 0;
-  var3.lastrecordingstarttime = -1;
-  var3.nexteventid = 0;
-  var1.entities[var2] = var3;
+  var_1 = level.potgglobals;
+  var_2 = getentityid(var_0);
+  var_3 = spawnStruct();
+  var_3.entity = var_0;
+  var_3.events = [];
+  var_3.recordingenabledcount = 0;
+  var_3.lastrecordingstarttime = -1;
+  var_3.nexteventid = 0;
+  var_1.entities[var_2] = var_3;
 }
 
-function deregisterpotgentity(var0) {
+function deregisterpotgentity(var_0) {
   if(!level.potgenabled) {
     return;
   }
 
-  var1 = level.potgglobals;
-  var2 = getentityid(var0);
-  var1.entities[var2] = undefined;
-  var0 notify("cleanup_potg_entity");
+  var_1 = level.potgglobals;
+  var_2 = getentityid(var_0);
+  var_1.entities[var_2] = undefined;
+  var_0 notify("cleanup_potg_entity");
 }
 
-function getentitypotgdata(var0) {
-  var1 = getentityid(var0);
-  return level.potgglobals.entities[var1];
+function getentitypotgdata(var_0) {
+  var_1 = getentityid(var_0);
+  return level.potgglobals.entities[var_1];
 }
 
-function getentityid(var0) {
-  if(isDefined(var0.potgid)) {
-    return var0.potgid;
+function getentityid(var_0) {
+  if(isDefined(var_0.potgid)) {
+    return var_0.potgid;
   }
 
-  var0.potgid = var0 getentitynumber();
-  return var0.potgid;
+  var_0.potgid = var_0 getentitynumber();
+  return var_0.potgid;
 }
 
 function startrecording() {
@@ -221,17 +221,17 @@ function startrecording() {
     return;
   }
 
-  var0 = getentitypotgdata(self);
+  var_0 = getentitypotgdata(self);
 
-  if(var0.recordingenabledcount == 0) {
-    onrecordingstarted(var0);
+  if(var_0.recordingenabledcount == 0) {
+    onrecordingstarted(var_0);
   }
 
-  var0.recordingenabledcount++;
+  var_0.recordingenabledcount++;
 }
 
-function onrecordingstarted(var0) {
-  var0.lastrecordingstarttime = gettime();
+function onrecordingstarted(var_0) {
+  var_0.lastrecordingstarttime = gettime();
 }
 
 function stoprecording() {
@@ -243,28 +243,28 @@ function stoprecording() {
     return;
   }
 
-  var0 = getentitypotgdata(self);
-  var0.recordingenabledcount--;
+  var_0 = getentitypotgdata(self);
+  var_0.recordingenabledcount--;
 
-  if(var0.recordingenabledcount == 0) {
-    onrecordingstopped(var0);
+  if(var_0.recordingenabledcount == 0) {
+    onrecordingstopped(var_0);
     return;
   }
 }
 
-function forcestoprecording(var0) {
-  var0.recordingenabledcount = 0;
-  onrecordingstopped(var0.entity, var0);
+function forcestoprecording(var_0) {
+  var_0.recordingenabledcount = 0;
+  onrecordingstopped(var_0.entity, var_0);
 }
 
-function onrecordingstopped(var0) {
-  var1 = level.potgglobals;
+function onrecordingstopped(var_0) {
+  var_1 = level.potgglobals;
   scripts\mp\potg_events::onpotgrecordingstopped();
-  var0.entity notify("potg_stop_recording");
-  removeallevents(var0);
+  var_0.entity notify("potg_stop_recording");
+  removeallevents(var_0);
 }
 
-function isrecordingenabled(var0) {
+function isrecordingenabled(var_0) {
   if(!level.potgenabled) {
     return false;
   }
@@ -273,177 +273,177 @@ function isrecordingenabled(var0) {
     return false;
   }
 
-  if(!isDefined(var0)) {
-    var0 = getentitypotgdata(self);
+  if(!isDefined(var_0)) {
+    var_0 = getentitypotgdata(self);
   }
 
-  return var0.recordingenabledcount > 0;
+  return var_0.recordingenabledcount > 0;
 }
 
 function finalizeallrecordings() {
-  var0 = level.potgglobals;
+  var_0 = level.potgglobals;
 
-  foreach(var2 in var0.entities) {
-    forcestoprecording(var2);
+  foreach(var_2 in var_0.entities) {
+    forcestoprecording(var_2);
   }
 }
 
-function processevent(var0, var1, var2, var3, var4, var5) {
+function processevent(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!level.potgenabled) {
     return;
   }
 
-  if(!isDefined(var1)) {
-    var1 = gettime();
+  if(!isDefined(var_1)) {
+    var_1 = gettime();
   }
 
-  if(!isDefined(var2)) {
-    var2 = var1;
+  if(!isDefined(var_2)) {
+    var_2 = var_1;
   }
 
-  var6 = level.potgglobals;
-  var7 = getentitypotgdata(self);
-  removeoldevents(var7);
+  var_6 = level.potgglobals;
+  var_7 = getentitypotgdata(self);
+  removeoldevents(var_7);
 
-  if(!isrecordingenabled(var7)) {
+  if(!isrecordingenabled(var_7)) {
     return;
   }
 
-  var8 = int(max(getcurwindowstarttime(), var7.lastrecordingstarttime));
+  var_8 = int(max(getcurwindowstarttime(), var_7.lastrecordingstarttime));
 
-  if(var1 <= var8 || var2 <= var8) {
+  if(var_1 <= var_8 || var_2 <= var_8) {
     return;
   }
 
-  var9 = spawnStruct();
-  var10 = undefined;
+  var_9 = spawnStruct();
+  var_10 = undefined;
 
-  if(isDefined(var4)) {
-    var10 = var4;
+  if(isDefined(var_4)) {
+    var_10 = var_4;
   } else {
-    var10 = eventtable_getscore(var0);
+    var_10 = eventtable_getscore(var_0);
   }
 
-  if(isDefined(var5)) {
-    var10 *= var5;
+  if(isDefined(var_5)) {
+    var_10 *= var_5;
   }
 
-  var9.eventref = var0;
-  var9.starttime = var1;
-  var9.endtime = var2;
-  var9.score = var10;
-  var9.psoffsettime = var3;
-  var11 = var7.nexteventid;
-  var7.nexteventid++;
-  var7.events[var11] = var9;
-  datalog_newevent(var9, var11, self);
+  var_9.eventref = var_0;
+  var_9.starttime = var_1;
+  var_9.endtime = var_2;
+  var_9.score = var_10;
+  var_9.psoffsettime = var_3;
+  var_11 = var_7.nexteventid;
+  var_7.nexteventid++;
+  var_7.events[var_11] = var_9;
+  datalog_newevent(var_9, var_11, self);
 
-  if(!eventtable_isaddonevent(var0)) {
-    thread waitandnominatepotg(var7);
+  if(!eventtable_isaddonevent(var_0)) {
+    thread waitandnominatepotg(var_7);
   }
 }
 
-function waitandnominatepotg(var0) {
-  var1 = var0.entity;
-  var1 endon("disconnect");
-  var1 endon("cleanup_potg_entity");
-  var1 notify("waitAndNominatePOTG()");
-  var1 endon("waitAndNominatePOTG()");
+function waitandnominatepotg(var_0) {
+  var_1 = var_0.entity;
+  var_1 endon("disconnect");
+  var_1 endon("cleanup_potg_entity");
+  var_1 notify("waitAndNominatePOTG()");
+  var_1 endon("waitAndNominatePOTG()");
   waittillframeend();
 
-  if(!isrecordingenabled(var0)) {
+  if(!isrecordingenabled(var_0)) {
     return;
   }
 
-  var2 = calculatepotgscore(var0.events);
+  var_2 = calculatepotgscore(var_0.events);
 
-  if(var2 > getminimumscorerequirednvidiahighlights() && var1 ispcplayer()) {}
+  if(var_2 > getminimumscorerequirednvidiahighlights() && var_1 ispcplayer()) {}
 
-  if(var2 > getminimumscorerequired() && var2 > getbestpotgscore()) {
-    var3 = createscenefromnewevent(var0, var2);
-    thread waitformorerecordingtimeforscene(var1);
+  if(var_2 > getminimumscorerequired() && var_2 > getbestpotgscore()) {
+    var_3 = createscenefromnewevent(var_0, var_2);
+    thread waitformorerecordingtimeforscene(var_1);
   }
 }
 
-function removeoldevents(var0) {
-  var1 = getcurwindowstarttime();
+function removeoldevents(var_0) {
+  var_1 = getcurwindowstarttime();
 
-  foreach(var3 in var0.events) {
-    if(var3.starttime < var1) {
-      var0.events[var4] = undefined;
+  foreach(var_3 in var_0.events) {
+    if(var_3.starttime < var_1) {
+      var_0.events[var_4] = undefined;
     }
   }
 }
 
-function removeallevents(var0) {
-  var0.events = [];
+function removeallevents(var_0) {
+  var_0.events = [];
 }
 
-function createscenefromnewevent(var0, var1) {
-  var2 = spawnStruct();
-  var2.primaryentity = var0.entity;
-  var2.events = var0.events;
-  var2.score = var1;
-  var2.sceneid = level.potgglobals.nextsceneid;
+function createscenefromnewevent(var_0, var_1) {
+  var_2 = spawnStruct();
+  var_2.primaryentity = var_0.entity;
+  var_2.events = var_0.events;
+  var_2.score = var_1;
+  var_2.sceneid = level.potgglobals.nextsceneid;
   level.potgglobals.nextsceneid++;
-  var2.actionstarttime = undefined;
-  var2.actionendtime = undefined;
+  var_2.actionstarttime = undefined;
+  var_2.actionendtime = undefined;
 
-  foreach(var4 in var0.events) {
-    if(!isDefined(var2.actionstarttime) || var4.starttime < var2.actionstarttime) {
-      var2.actionstarttime = var4.starttime;
+  foreach(var_4 in var_0.events) {
+    if(!isDefined(var_2.actionstarttime) || var_4.starttime < var_2.actionstarttime) {
+      var_2.actionstarttime = var_4.starttime;
     }
 
-    if(!isDefined(var2.actionendtime) || var4.endtime > var2.actionendtime) {
-      var2.actionendtime = var4.endtime;
+    if(!isDefined(var_2.actionendtime) || var_4.endtime > var_2.actionendtime) {
+      var_2.actionendtime = var_4.endtime;
     }
   }
 
-  var2.recordingstarttime = var0.lastrecordingstarttime;
-  var2.endtime = undefined;
-  var2.playbackstarttime = undefined;
-  var2.playbackendtime = undefined;
-  return var2;
+  var_2.recordingstarttime = var_0.lastrecordingstarttime;
+  var_2.endtime = undefined;
+  var_2.playbackstarttime = undefined;
+  var_2.playbackendtime = undefined;
+  return var_2;
 }
 
-function doesscenehaveenoughtotalrecordingtime(var0) {
-  return getmaxsceneduration(var0) >= getwholescenedurationmin();
+function doesscenehaveenoughtotalrecordingtime(var_0) {
+  return getmaxsceneduration(var_0) >= getwholescenedurationmin();
 }
 
-function doesscenehaveenoughbufferrecordingtime(var0) {
-  return var0.endtime - var0.actionendtime >= getscenebufferduration();
+function doesscenehaveenoughbufferrecordingtime(var_0) {
+  return var_0.endtime - var_0.actionendtime >= getscenebufferduration();
 }
 
-function getmaxsceneduration(var0) {
-  var1 = var0.recordingstarttime;
-  return var0.endtime - var0.recordingstarttime;
+function getmaxsceneduration(var_0) {
+  var_1 = var_0.recordingstarttime;
+  return var_0.endtime - var_0.recordingstarttime;
 }
 
-function waitformorerecordingtimeforscene(var0) {
+function waitformorerecordingtimeforscene(var_0) {
   self endon("disconnect");
   self endon("cleanup_potg_entity");
-  var1 = var0.recordingstarttime + getwholescenedurationmin();
-  var2 = var0.actionendtime + getscenebufferduration();
-  var3 = var0.actionstarttime + getwholescenedurationmax();
-  var4 = int(clamp(var2, var1, var3));
-  var5 = "no_wait";
+  var_1 = var_0.recordingstarttime + getwholescenedurationmin();
+  var_2 = var_0.actionendtime + getscenebufferduration();
+  var_3 = var_0.actionstarttime + getwholescenedurationmax();
+  var_4 = int(clamp(var_2, var_1, var_3));
+  var_5 = "no_wait";
 
-  if(var4 > gettime()) {
-    thread watchpendingscenetimeout(var4);
-    var5 = scripts\engine\utility::ref_143b4("potg_pending_scene_timeout", "potg_stop_recording");
+  if(var_4 > gettime()) {
+    thread watchpendingscenetimeout(var_4);
+    var_5 = scripts\engine\utility::ref_143b4("potg_pending_scene_timeout", "potg_stop_recording");
     self notify("potg_scene_finished_pending");
   }
 
-  if(gettime() > var4) {
-    var0.endtime = var4;
+  if(gettime() > var_4) {
+    var_0.endtime = var_4;
   } else {
-    var0.endtime = gettime();
+    var_0.endtime = gettime();
   }
 
-  if(doesscenehaveenoughtotalrecordingtime(var0)) {
-    if(doesscenehaveenoughbufferrecordingtime(var0)) {
-      if(var0.score > getminimumscorerequired() && var0.score >= getbestpotgscore()) {
-        setcurpotgscene(var0);
+  if(doesscenehaveenoughtotalrecordingtime(var_0)) {
+    if(doesscenehaveenoughbufferrecordingtime(var_0)) {
+      if(var_0.score > getminimumscorerequired() && var_0.score >= getbestpotgscore()) {
+        setcurpotgscene(var_0);
         return;
       }
 
@@ -454,41 +454,41 @@ function waitformorerecordingtimeforscene(var0) {
   }
 }
 
-function watchpendingscenetimeout(var0) {
+function watchpendingscenetimeout(var_0) {
   self endon("potg_scene_finished_pending");
 
-  while(gettime() < var0) {
+  while(gettime() < var_0) {
     waitframe();
   }
 
   self notify("potg_pending_scene_timeout");
 }
 
-function calculatepotgscore(var0) {
-  var1 = 0;
-  var2 = 0;
+function calculatepotgscore(var_0) {
+  var_1 = 0;
+  var_2 = 0;
 
-  foreach(var4 in var0) {
-    var2 += var4.score;
+  foreach(var_4 in var_0) {
+    var_2 += var_4.score;
 
-    if(var4.eventref == "kill") {
-      var1++;
+    if(var_4.eventref == "kill") {
+      var_1++;
     }
   }
 
-  if(var1 > 2) {
-    var6 = eventtable_getscore("triple_kill");
-    var2 += var6;
+  if(var_1 > 2) {
+    var_6 = eventtable_getscore("triple_kill");
+    var_2 += var_6;
   }
 
-  return var2;
+  return var_2;
 }
 
-function setcurpotgscene(var0) {
-  calcsceneplaybacktimes(var0);
-  requestarchive(var0.playbackstarttime, var0.playbackendtime);
-  screenprint_newpotgchosen(var0, level.potgglobals.curpotgscene);
-  level.potgglobals.curpotgscene = var0;
+function setcurpotgscene(var_0) {
+  calcsceneplaybacktimes(var_0);
+  requestarchive(var_0.playbackstarttime, var_0.playbackendtime);
+  screenprint_newpotgchosen(var_0, level.potgglobals.curpotgscene);
+  level.potgglobals.curpotgscene = var_0;
 }
 
 function getcurpotgscene() {
@@ -504,111 +504,111 @@ function getbestpotgscore() {
     return -1;
   }
 
-  var0 = level.potgglobals;
+  var_0 = level.potgglobals;
 
-  if(!isDefined(var0.curpotgscene)) {
+  if(!isDefined(var_0.curpotgscene)) {
     return -1;
   }
 
-  return var0.curpotgscene.score;
+  return var_0.curpotgscene.score;
 }
 
 function getcurwindowstarttime() {
   return gettime() - getwholescenedurationmax();
 }
 
-function eventtable_getscore(var0) {
-  return level.potgglobals.eventtable[var0]["score"];
+function eventtable_getscore(var_0) {
+  return level.potgglobals.eventtable[var_0]["score"];
 }
 
-function eventtable_isaddonevent(var0) {
-  return level.potgglobals.eventtable[var0]["addOn"];
+function eventtable_isaddonevent(var_0) {
+  return level.potgglobals.eventtable[var_0]["addOn"];
 }
 
-function eventtable_isevent(var0) {
-  return isDefined(level.potgglobals.eventtable[var0]);
+function eventtable_isevent(var_0) {
+  return isDefined(level.potgglobals.eventtable[var_0]);
 }
 
-function finalizescene(var0) {
-  var0.finalized = 1;
-  calcscenepsoffset(var0);
+function finalizescene(var_0) {
+  var_0.finalized = 1;
+  calcscenepsoffset(var_0);
   ref_12c7c();
-  datalog_scenefinalized(var0);
+  datalog_scenefinalized(var_0);
 }
 
 function ref_12c7c() {
-  foreach(var1 in level.players) {
-    var1 setclientomnvar("ui_potg_score_event_control", -1);
-    var1 setclientomnvar("ui_score_event_list_0", -1);
-    var1 setclientomnvar("ui_score_event_list_1", -1);
-    var1 setclientomnvar("ui_score_event_list_2", -1);
-    var1 setclientomnvar("ui_score_event_list_3", -1);
-    var1 setclientomnvar("ui_score_event_list_4", -1);
+  foreach(var_1 in level.players) {
+    var_1 setclientomnvar("ui_potg_score_event_control", -1);
+    var_1 setclientomnvar("ui_score_event_list_0", -1);
+    var_1 setclientomnvar("ui_score_event_list_1", -1);
+    var_1 setclientomnvar("ui_score_event_list_2", -1);
+    var_1 setclientomnvar("ui_score_event_list_3", -1);
+    var_1 setclientomnvar("ui_score_event_list_4", -1);
   }
 }
 
-function calcsceneplaybacktimes(var0) {
-  var1 = gettime() - 13000;
-  var2 = var0.endtime - getwholescenedurationmax();
-  var3 = int(max(var2, max(var0.recordingstarttime, var1)));
-  var4 = var0.actionstarttime - getscenebufferduration();
-  var5 = int(min(var0.actionstarttime, var0.endtime - getwholescenedurationmin()));
-  var0.playbackstarttime = int(clamp(var4, var3, var5));
-  var0.playbackendtime = var0.endtime;
-  var6 = var0.playbackendtime - var0.playbackstarttime;
+function calcsceneplaybacktimes(var_0) {
+  var_1 = gettime() - 13000;
+  var_2 = var_0.endtime - getwholescenedurationmax();
+  var_3 = int(max(var_2, max(var_0.recordingstarttime, var_1)));
+  var_4 = var_0.actionstarttime - getscenebufferduration();
+  var_5 = int(min(var_0.actionstarttime, var_0.endtime - getwholescenedurationmin()));
+  var_0.playbackstarttime = int(clamp(var_4, var_3, var_5));
+  var_0.playbackendtime = var_0.endtime;
+  var_6 = var_0.playbackendtime - var_0.playbackstarttime;
 }
 
-function calcscenepsoffset(var0) {
-  var1 = [];
+function calcscenepsoffset(var_0) {
+  var_1 = [];
 
-  foreach(var3 in var0.events) {
-    if(isDefined(var3.psoffsettime) && !isDefined(var1[var3.endtime])) {
-      var1 = var3.psoffsettime;
+  foreach(var_3 in var_0.events) {
+    if(isDefined(var_3.psoffsettime) && !isDefined(var_1[var_3.endtime])) {
+      var_1 = var_3.psoffsettime;
     }
   }
 
-  if(var1.size <= 0) {
-    var0.psoffsettime = 0;
+  if(var_1.size <= 0) {
+    var_0.psoffsettime = 0;
     return;
   }
 
-  var5 = 0;
+  var_5 = 0;
 
-  foreach(var7 in var1) {
-    var5 += var7;
+  foreach(var_7 in var_1) {
+    var_5 += var_7;
   }
 
-  var9 = var5 / var1.size;
-  var0.psoffsettime = int(var9);
+  var_9 = var_5 / var_1.size;
+  var_0.psoffsettime = int(var_9);
 }
 
 function getfinalpotginfo() {
-  var0 = getcurpotgscene();
+  var_0 = getcurpotgscene();
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return undefined;
   }
 
-  var1 = spawnStruct();
-  var1.starttime = var0.playbackstarttime;
-  var1.endtime = var0.playbackendtime;
-  var1.spectateentity = var0.primaryentity;
-  var1.psoffsettime = var0.psoffsettime;
-  return var1;
+  var_1 = spawnStruct();
+  var_1.starttime = var_0.playbackstarttime;
+  var_1.endtime = var_0.playbackendtime;
+  var_1.spectateentity = var_0.primaryentity;
+  var_1.psoffsettime = var_0.psoffsettime;
+  return var_1;
 }
 
-function requestarchive(var0, var1) {
-  thread archiverequesthelper(level, var0);
+function requestarchive(var_0, var_1) {
+  thread archiverequesthelper(level, var_0);
 }
 
-function archiverequesthelper(var0, var1) {
+function archiverequesthelper(var_0, var_1) {
   level endon("potg_finalize");
   level notify("potg_archiveRequestHelper()");
   level endon("potg_archiveRequestHelper()");
   level.potgglobals.pendingarchiverequest = 1;
-  var2 = var0 + 13000 - 100;
-  var3 = var2 - gettime();
-  scripts\engine\utility::wait_time_in_ms(var3);
+  var_2 = var_0 + 13000 - 100;
+  var_3 = var_2 - gettime();
+  scripts\engine\utility::wait_time_in_ms(var_3);
   level.potgglobals.pendingarchiverequest = 0;
   archivecurrentgamestate();
 }
@@ -616,12 +616,12 @@ function archiverequesthelper(var0, var1) {
 function archivecurrentgamestate() {
   thread debug_watcharchivesize(getpotgduration(), getcurpotgscene());
   getpotgstarttime();
-  var0 = level.potgglobals.lastarchivetime;
+  var_0 = level.potgglobals.lastarchivetime;
   level.potgglobals.lastarchivetime = gettime();
-  var1 = -1;
+  var_1 = -1;
 
-  if(var0 > 0) {
-    var1 = level.potgglobals.lastarchivetime - var0;
+  if(var_0 > 0) {
+    var_1 = level.potgglobals.lastarchivetime - var_0;
     return;
   }
 }
@@ -630,40 +630,40 @@ function getrapidarchivewarningrate() {
   return 13000 - getwholescenedurationmax() - 250;
 }
 
-function doesscenefitincurrentarchive(var0) {
-  var1 = level.potgglobals.lastarchivetime;
+function doesscenefitincurrentarchive(var_0) {
+  var_1 = level.potgglobals.lastarchivetime;
 
-  if(var1 < 0) {
+  if(var_1 < 0) {
     return false;
   }
 
-  var2 = var1 - 13000;
-  return var0.playbackstarttime >= var2 && var0.playbackendtime <= var1;
+  var_2 = var_1 - 13000;
+  return var_0.playbackstarttime >= var_2 && var_0.playbackendtime <= var_1;
 }
 
-function screenprint_newpotgchosen(var0, var1) {
+function screenprint_newpotgchosen(var_0, var_1) {
   if(getdvarint("potg_screen_prints") == 0) {
     return;
   }
 
-  if(var0.score <= 250) {
+  if(var_0.score <= 250) {
     return;
   }
 
-  var2 = undefined;
+  var_2 = undefined;
 
-  if(isPlayer(var0.primaryentity)) {
-    var2 = var0.primaryentity.name;
+  if(isPlayer(var_0.primaryentity)) {
+    var_2 = var_0.primaryentity.name;
   } else {
-    var2 = "(GameObject)";
+    var_2 = "(GameObject)";
   }
 
-  if(isPlayer(var0.primaryentity)) {
-    var0.primaryentity iprintlnbold("POTG Nominee! (" + var0.score + ")");
+  if(isPlayer(var_0.primaryentity)) {
+    var_0.primaryentity iprintlnbold("POTG Nominee! (" + var_0.score + ")");
   }
 
-  if(isDefined(var1) && isPlayer(var1.primaryentity) && var1.primaryentity != var0.primaryentity) {
-    var1.primaryentity iprintlnbold("Your POTG was bested by +" + var2 + "! (" + var0.score + ")");
+  if(isDefined(var_1) && isPlayer(var_1.primaryentity) && var_1.primaryentity != var_0.primaryentity) {
+    var_1.primaryentity iprintlnbold("Your POTG was bested by +" + var_2 + "! (" + var_0.score + ")");
   }
 
   level.potgglobals.lastchosenscreenprinttime = gettime();
@@ -674,23 +674,23 @@ function screenprint_dosceneprintplayback() {
     return;
   }
 
-  var0 = getcurpotgscene();
-  var1 = gettime() - int(self.archivetime * 1000);
-  var2 = 0.15;
-  var3 = [];
+  var_0 = getcurpotgscene();
+  var_1 = gettime() - int(self.archivetime * 1000);
+  var_2 = 0.15;
+  var_3 = [];
 
   for(;;) {
-    foreach(var6, var5 in var0.events) {
-      if(var5.starttime <= var1 && !isDefined(var3[var6])) {
-        iprintlnbold(var5.eventref);
-        iprintln(var5.eventref);
-        var3 = 1;
+    foreach(var_6, var_5 in var_0.events) {
+      if(var_5.starttime <= var_1 && !isDefined(var_3[var_6])) {
+        iprintlnbold(var_5.eventref);
+        iprintln(var_5.eventref);
+        var_3 = 1;
         break;
       }
     }
 
-    wait var2;
-    var1 += int(var2 * 1000);
+    wait var_2;
+    var_1 += int(var_2 * 1000);
   }
 }
 
@@ -710,61 +710,61 @@ function datalog_isloggingenabled() {
   return getdvarint("potg_datalog") != 0;
 }
 
-function datalog_scenefinalized(var0) {
+function datalog_scenefinalized(var_0) {
   if(!datalog_isloggingenabled()) {
     return;
   }
 
-  var1 = datalog_getlogversion();
-  getentitylessscriptablearray("mpscript_potg", ["score", var0.score, "duration", var0.playbackendtime - var0.playbackstarttime, "start_time", var0.playbackstarttime, "action_start_offset", var0.actionstarttime - var0.playbackstarttime, "action_end_offset", var0.actionendtime - var0.playbackstarttime, "entity_id", getentityid(var0.primaryentity), "script_version", var1]);
+  var_1 = datalog_getlogversion();
+  getentitylessscriptablearray("mpscript_potg", ["score", var_0.score, "duration", var_0.playbackendtime - var_0.playbackstarttime, "start_time", var_0.playbackstarttime, "action_start_offset", var_0.actionstarttime - var_0.playbackstarttime, "action_end_offset", var_0.actionendtime - var_0.playbackstarttime, "entity_id", getentityid(var_0.primaryentity), "script_version", var_1]);
 
-  foreach(var3 in var0.events) {
-    getentitylessscriptablearray("mpscript_potg_final_events", ["event_ref", var3.eventref, "score", var3.score, "start_time", var3.playbackstarttime, "end_time", var3.playbackendtime, "script_version", var1]);
+  foreach(var_3 in var_0.events) {
+    getentitylessscriptablearray("mpscript_potg_final_events", ["event_ref", var_3.eventref, "score", var_3.score, "start_time", var_3.playbackstarttime, "end_time", var_3.playbackendtime, "script_version", var_1]);
   }
 }
 
-function datalog_newevent(var0, var1, var2) {
+function datalog_newevent(var_0, var_1, var_2) {
   if(!datalog_isloggingenabled()) {
     return;
   }
 
-  getentitylessscriptablearray("mpscript_potg_events", ["event_ref", var0.eventref, "score", var0.score, "start_time", var0.starttime, "end_time", var0.endtime, "event_id", var1, "entity_id", getentityid(var2), "script_version", datalog_getlogversion()]);
+  getentitylessscriptablearray("mpscript_potg_events", ["event_ref", var_0.eventref, "score", var_0.score, "start_time", var_0.starttime, "end_time", var_0.endtime, "event_id", var_1, "entity_id", getentityid(var_2), "script_version", datalog_getlogversion()]);
 }
 
-function datalog_archivesaved(var0, var1, var2, var3, var4) {
+function datalog_archivesaved(var_0, var_1, var_2, var_3, var_4) {
   if(getdvarint("potg_debug_archive", 0) == 0) {
     return;
   }
 
-  var5 = datalog_getlogversion();
-  getentitylessscriptablearray("mpscript_potg_archive", ["requestTime", var0, "archiveStartTime", var1, "archiveDuration", var2, "desiredSceneStartTime", var3, "desiredSceneEndTime", var4, "playerCount", level.players.size, "tickRate", int(1 / level.framedurationseconds), "dedi", scripts\engine\utility::ter_op(isdedicatedserver(), 1, 0), "version", 0]);
+  var_5 = datalog_getlogversion();
+  getentitylessscriptablearray("mpscript_potg_archive", ["requestTime", var_0, "archiveStartTime", var_1, "archiveDuration", var_2, "desiredSceneStartTime", var_3, "desiredSceneEndTime", var_4, "playerCount", level.players.size, "tickRate", int(1 / level.framedurationseconds), "dedi", scripts\engine\utility::ter_op(isdedicatedserver(), 1, 0), "version", 0]);
 }
 
-function debug_watcharchivesize(var0, var1) {
-  var2 = gettime();
-  thread debug_watcharchivefinished(var2, var0, var1);
-  thread debug_watcharchiveinterrupted(var2, var1);
+function debug_watcharchivesize(var_0, var_1) {
+  var_2 = gettime();
+  thread debug_watcharchivefinished(var_2, var_0, var_1);
+  thread debug_watcharchiveinterrupted(var_2, var_1);
 }
 
-function debug_watcharchivefinished(var0, var1, var2) {
+function debug_watcharchivefinished(var_0, var_1, var_2) {
   level notify("watching_potg_archive_request");
   level endon("watching_potg_archive_request");
   jumpiffalse(getdvarint("potg_debug_archive") == 0) LOC_00000022;
   return;
 }
 
-function debug_watcharchiveinterrupted(var0, var1) {
+function debug_watcharchiveinterrupted(var_0, var_1) {
   level endon("potg_archive_request_finished");
   level waittill("watching_potg_archive_request");
-  debug_logarchiveresult(0, var1, var0);
+  debug_logarchiveresult(0, var_1, var_0);
 }
 
-function debug_logarchiveresult(var0, var1, var2, var3, var4) {
-  if(var0) {
-    thread datalog_archivesaved(var2, var3, var4, var1.playbackstarttime, var1.playbackendtime);
+function debug_logarchiveresult(var_0, var_1, var_2, var_3, var_4) {
+  if(var_0) {
+    thread datalog_archivesaved(var_2, var_3, var_4, var_1.playbackstarttime, var_1.playbackendtime);
   }
 
-  if(var0) {
+  if(var_0) {
     return;
   }
 }

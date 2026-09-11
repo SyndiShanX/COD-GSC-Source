@@ -44,45 +44,45 @@ function postfx_ied_explosion() {
 }
 
 function init_flicker_and_siren_lights() {
-  var0 = getEntArray("hm_flicker_light", "targetname");
-  scripts\engine\utility::array_thread(var0, &flicker_light_setup);
-  var1 = getEntArray("hm_siren_light", "targetname");
-  scripts\engine\utility::array_thread(var1, &siren_light_setup);
+  var_0 = getEntArray("hm_flicker_light", "targetname");
+  scripts\engine\utility::array_thread(var_0, &flicker_light_setup);
+  var_1 = getEntArray("hm_siren_light", "targetname");
+  scripts\engine\utility::array_thread(var_1, &siren_light_setup);
 }
 
 function flicker_light_setup() {
-  var0 = parse_noteworthy_values();
+  var_0 = parse_noteworthy_values();
   self.frequency = 100;
   self.randomness = 0.1;
   self.max_intensity = 150;
   self.min_intensity = 5;
   self.start_flag = "hm_flicker_light_start";
 
-  if(isDefined(var0["frequency"])) {
-    self.frequency = float(var0["frequency"]);
+  if(isDefined(var_0["frequency"])) {
+    self.frequency = float(var_0["frequency"]);
   }
 
-  if(isDefined(var0["randomness"])) {
-    self.randomness = float(var0["randomness"]);
+  if(isDefined(var_0["randomness"])) {
+    self.randomness = float(var_0["randomness"]);
   }
 
-  if(isDefined(var0["max_intensity"])) {
-    self.max_intensity = float(var0["max_intensity"]);
+  if(isDefined(var_0["max_intensity"])) {
+    self.max_intensity = float(var_0["max_intensity"]);
   }
 
-  if(isDefined(var0["min_intensity"])) {
-    self.min_intensity = float(var0["min_intensity"]);
+  if(isDefined(var_0["min_intensity"])) {
+    self.min_intensity = float(var_0["min_intensity"]);
   }
 
-  if(isDefined(var0["start_flag"])) {
-    self.start_flag = var0["start_flag"];
+  if(isDefined(var_0["start_flag"])) {
+    self.start_flag = var_0["start_flag"];
   }
 
   thread flicker_light();
 }
 
 function siren_light_setup() {
-  var0 = parse_noteworthy_values();
+  var_0 = parse_noteworthy_values();
   self.heading = 0;
   self.pitch = 1;
   self.roll = 0;
@@ -91,32 +91,32 @@ function siren_light_setup() {
   self.dir = 1;
   self.start_flag = "hm_siren_light_start";
 
-  if(isDefined(var0["heading"])) {
-    self.heading = float(var0["heading"]);
+  if(isDefined(var_0["heading"])) {
+    self.heading = float(var_0["heading"]);
   }
 
-  if(isDefined(var0["pitch"])) {
-    self.pitch = float(var0["pitch"]);
+  if(isDefined(var_0["pitch"])) {
+    self.pitch = float(var_0["pitch"]);
   }
 
-  if(isDefined(var0["roll"])) {
-    self.roll = float(var0["roll"]);
+  if(isDefined(var_0["roll"])) {
+    self.roll = float(var_0["roll"]);
   }
 
-  if(isDefined(var0["frequency"])) {
-    self.frequency = float(var0["frequency"]);
+  if(isDefined(var_0["frequency"])) {
+    self.frequency = float(var_0["frequency"]);
   }
 
-  if(isDefined(var0["intensity"])) {
-    self.intensity = float(var0["intensity"]);
+  if(isDefined(var_0["intensity"])) {
+    self.intensity = float(var_0["intensity"]);
   }
 
-  if(isDefined(var0["dir"])) {
-    self.dir = float(var0["dir"]);
+  if(isDefined(var_0["dir"])) {
+    self.dir = float(var_0["dir"]);
   }
 
-  if(isDefined(var0["start_flag"])) {
-    self.start_flag = var0["start_flag"];
+  if(isDefined(var_0["start_flag"])) {
+    self.start_flag = var_0["start_flag"];
   }
 
   thread siren_light();
@@ -124,20 +124,20 @@ function siren_light_setup() {
 
 function siren_light() {
   scripts\engine\utility::flag_wait(self.start_flag);
-  var0 = self.angles;
-  var1 = 0;
+  var_0 = self.angles;
+  var_1 = 0;
   self setlightintensity(self.intensity);
 
   while(scripts\engine\utility::flag(self.start_flag)) {
-    if(var1 > 360) {
-      var1 -= 360;
+    if(var_1 > 360) {
+      var_1 -= 360;
     }
 
-    var2 = var0[0] + var1 * self.pitch * self.dir;
-    var3 = var0[1] + var1 * self.heading * self.dir;
-    var4 = var0[2] + var1 * self.roll * self.dir;
-    self rotateTo((var2, var3, var4), 0.09);
-    var1 += 360 / 1 / self.frequency / 100;
+    var_2 = var_0[0] + var_1 * self.pitch * self.dir;
+    var_3 = var_0[1] + var_1 * self.heading * self.dir;
+    var_4 = var_0[2] + var_1 * self.roll * self.dir;
+    self rotateTo((var_2, var_3, var_4), 0.09);
+    var_1 += 360 / 1 / self.frequency / 100;
     wait 0.11;
   }
 
@@ -149,8 +149,8 @@ function flicker_light() {
   scripts\engine\utility::flag_wait(self.start_flag);
 
   while(scripts\engine\utility::flag(self.start_flag)) {
-    var0 = randomfloatrange(self.min_intensity, self.max_intensity);
-    self setlightintensity(var0);
+    var_0 = randomfloatrange(self.min_intensity, self.max_intensity);
+    self setlightintensity(var_0);
     wait 1 / self.frequency;
   }
 
@@ -158,95 +158,95 @@ function flicker_light() {
 }
 
 function parse_noteworthy_values() {
-  var0 = [];
+  var_0 = [];
 
   if(isDefined(self.script_noteworthy)) {
-    var1 = strtok(self.script_noteworthy, " ");
+    var_1 = strtok(self.script_noteworthy, " ");
 
-    foreach(var3 in var1) {
-      var4 = strtok(var3, ":");
-      var0 = var4[1];
+    foreach(var_3 in var_1) {
+      var_4 = strtok(var_3, ":");
+      var_0 = var_4[1];
     }
   }
 
-  return var0;
+  return var_0;
 }
 
-function lerplightintensity(var0, var1) {
-  var2 = self getlightintensity();
-  var3 = 1 / var1 / 0.2;
-  var4 = 0;
+function lerplightintensity(var_0, var_1) {
+  var_2 = self getlightintensity();
+  var_3 = 1 / var_1 / 0.2;
+  var_4 = 0;
 
-  while(var4 <= 1) {
-    var4 += var3;
-    var5 = var2 * (1 - var4) + var0 * var4;
-    self setlightintensity(var5);
+  while(var_4 <= 1) {
+    var_4 += var_3;
+    var_5 = var_2 * (1 - var_4) + var_0 * var_4;
+    self setlightintensity(var_5);
     wait 0.2;
   }
 }
 
-function lerplightradius(var0, var1) {
-  var2 = self getlightradius();
-  var3 = 1 / var1 / 0.2;
-  var4 = 0;
+function lerplightradius(var_0, var_1) {
+  var_2 = self getlightradius();
+  var_3 = 1 / var_1 / 0.2;
+  var_4 = 0;
 
-  while(var4 <= 1) {
-    var4 += var3;
-    var5 = var2 * (1 - var4) + var0 * var4;
-    self setlightradius(var5);
+  while(var_4 <= 1) {
+    var_4 += var_3;
+    var_5 = var_2 * (1 - var_4) + var_0 * var_4;
+    self setlightradius(var_5);
     wait 0.2;
   }
 }
 
-function lerplightcolor(var0, var1) {
-  var2 = self getlightcolor();
-  var3 = 1 / var1 / 0.2;
-  var4 = 0;
+function lerplightcolor(var_0, var_1) {
+  var_2 = self getlightcolor();
+  var_3 = 1 / var_1 / 0.2;
+  var_4 = 0;
 
-  while(var4 <= 1) {
-    var4 += var3;
-    var5 = vectorlerp(var2, var0, var4);
-    self setlightcolor(var5);
+  while(var_4 <= 1) {
+    var_4 += var_3;
+    var_5 = vectorlerp(var_2, var_0, var_4);
+    self setlightcolor(var_5);
     wait 0.2;
   }
 }
 
-function flicker_light_and_fixture(var0, var1, var2, var3) {
-  scripts\engine\utility::flag_wait(var0);
-  var4 = getEntArray(var1, "targetname");
-  var5 = getEnt(var2, "targetname");
-  var6 = getEnt(var3, "targetname");
-  var7 = [];
+function flicker_light_and_fixture(var_0, var_1, var_2, var_3) {
+  scripts\engine\utility::flag_wait(var_0);
+  var_4 = getEntArray(var_1, "targetname");
+  var_5 = getEnt(var_2, "targetname");
+  var_6 = getEnt(var_3, "targetname");
+  var_7 = [];
 
-  for(var8 = 0; var8 < var4.size; var8++) {
-    var7 = var4[var8] getlightintensity();
+  for(var_8 = 0; var_8 < var_4.size; var_8++) {
+    var_7 = var_4[var_8] getlightintensity();
   }
 
-  var9 = "on";
+  var_9 = "on";
 
-  while(scripts\engine\utility::flag(var0)) {
-    if(var9 == "on") {
-      foreach(var11 in var4) {
-        var11 setlightintensity(0);
+  while(scripts\engine\utility::flag(var_0)) {
+    if(var_9 == "on") {
+      foreach(var_11 in var_4) {
+        var_11 setlightintensity(0);
       }
 
-      if(isDefined(var5) && isDefined(var6)) {
-        var5 hide();
-        var6 show();
+      if(isDefined(var_5) && isDefined(var_6)) {
+        var_5 hide();
+        var_6 show();
       }
 
-      var9 = "off";
+      var_9 = "off";
     } else {
-      for(var8 = 0; var8 < var4.size; var8++) {
-        var4[var8] setlightintensity(var7[var8]);
+      for(var_8 = 0; var_8 < var_4.size; var_8++) {
+        var_4[var_8] setlightintensity(var_7[var_8]);
       }
 
-      if(isDefined(var5) && isDefined(var6)) {
-        var5 show();
-        var6 hide();
+      if(isDefined(var_5) && isDefined(var_6)) {
+        var_5 show();
+        var_6 hide();
       }
 
-      var9 = "on";
+      var_9 = "on";
     }
 
     wait randomfloatrange(0.05, 0.3);
@@ -261,24 +261,24 @@ function clearvisionsetnaked() {
   thread clearvisionsetnaked();
 }
 
-function visionsetflag(var0, var1, var2) {
-  scripts\engine\utility::flag_wait(var2);
-  setvisionsetnaked(var0, var1);
-  scripts\engine\utility::flag_clear(var2);
-  wait var1 + 0.05;
-  thread visionsetflag(var0, var1, var2);
+function visionsetflag(var_0, var_1, var_2) {
+  scripts\engine\utility::flag_wait(var_2);
+  setvisionsetnaked(var_0, var_1);
+  scripts\engine\utility::flag_clear(var_2);
+  wait var_1 + 0.05;
+  thread visionsetflag(var_0, var_1, var_2);
 }
 
-function setvisionsetnaked(var0, var1, var2) {
-  visionsetnaked(var0, var1);
+function setvisionsetnaked(var_0, var_1, var_2) {
+  visionsetnaked(var_0, var_1);
 
-  if(!isDefined(var2)) {
-    level.current_visionset = var0;
+  if(!isDefined(var_2)) {
+    level.current_visionset = var_0;
     return;
   }
 
-  if(var2) {
-    level.current_visionset = var0;
+  if(var_2) {
+    level.current_visionset = var_0;
     return;
   }
 }
@@ -299,21 +299,21 @@ function disable_volumetrics() {
   thread disable_volumetrics();
 }
 
-function damagerumblequake(var0, var1, var2, var3, var4) {
-  var5 = randomfloatrange(var3, var4);
-  earthquake(var5, var2, level.player.origin, 800);
-  wait var2;
+function damagerumblequake(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = randomfloatrange(var_3, var_4);
+  earthquake(var_5, var_2, level.player.origin, 800);
+  wait var_2;
 
-  if(var5 > 0.2) {
+  if(var_5 > 0.2) {
     level.player playrumblelooponentity("damage_heavy");
-    wait var2 * 2;
+    wait var_2 * 2;
     level.player stoprumble("damage_heavy");
     return;
   }
 
-  if(var5 > 0.1) {
+  if(var_5 > 0.1) {
     level.player playrumblelooponentity("damage_light");
-    wait var2;
+    wait var_2;
     level.player stoprumble("damage_light");
     return;
   }
@@ -325,53 +325,53 @@ function motionblurtest() {
 
 function dynamic_dof() {
   while(scripts\engine\utility::flag("dynamic_dof_enabled")) {
-    var0 = level.player getEye();
-    var1 = anglesToForward(level.player getplayerangles());
-    var2 = physicstrace(var0, var0 + var1 * 32000);
-    var3 = distance(var2, var0);
-    var4 = var3 * 0.975;
-    var5 = var4 * 20;
-    var6 = 3;
-    var7 = 0;
-    var8 = var4 * 0.25;
-    var9 = 3;
-    var10 = 0.2;
-    thread scripts\sp\art::dof_enable_script(var7, var8, var9, var4, var5, var6, var10);
+    var_0 = level.player getEye();
+    var_1 = anglesToForward(level.player getplayerangles());
+    var_2 = physicstrace(var_0, var_0 + var_1 * 32000);
+    var_3 = distance(var_2, var_0);
+    var_4 = var_3 * 0.975;
+    var_5 = var_4 * 20;
+    var_6 = 3;
+    var_7 = 0;
+    var_8 = var_4 * 0.25;
+    var_9 = 3;
+    var_10 = 0.2;
+    thread scripts\sp\art::dof_enable_script(var_7, var_8, var_9, var_4, var_5, var_6, var_10);
     wait 0.2;
   }
 
   thread scripts\sp\art::dof_disable_script(1);
 }
 
-function dyanmic_sun_sample_size(var0, var1, var2, var3, var4, var5) {
-  scripts\engine\utility::flag_wait(var0);
+function dyanmic_sun_sample_size(var_0, var_1, var_2, var_3, var_4, var_5) {
+  scripts\engine\utility::flag_wait(var_0);
 
-  while(scripts\engine\utility::flag(var0)) {
-    var6 = anglesToForward(level.player getplayerangles());
-    var7 = vectordot(var6, var2);
-    var8 = (var7 + 1) * 0.5;
-    var9 = pow(var8, var1);
-    var10 = vectorlerp((var3, 0, 0), (var4, 0, 0), var9);
+  while(scripts\engine\utility::flag(var_0)) {
+    var_6 = anglesToForward(level.player getplayerangles());
+    var_7 = vectordot(var_6, var_2);
+    var_8 = (var_7 + 1) * 0.5;
+    var_9 = pow(var_8, var_1);
+    var_10 = vectorlerp((var_3, 0, 0), (var_4, 0, 0), var_9);
     wait 0.1;
   }
 }
 
-function playsoundatpoint(var0, var1, var2, var3, var4) {
-  var5 = spawn("script_origin", var1);
-  var5 playSound(var0, "sounddone");
+function playsoundatpoint(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = spawn("script_origin", var_1);
+  var_5 playSound(var_0, "sounddone");
 
-  if(isDefined(var2)) {
-    var5 scalepitch(var2, 0);
+  if(isDefined(var_2)) {
+    var_5 scalepitch(var_2, 0);
   }
 
-  if(isDefined(var3)) {
-    var5 scalevolume(var3, 0);
+  if(isDefined(var_3)) {
+    var_5 scalevolume(var_3, 0);
   }
 
-  if(isDefined(var4)) {
-    var5 linkTo(var4);
+  if(isDefined(var_4)) {
+    var_5 linkTo(var_4);
   }
 
-  var5 waittill("sounddone");
-  var5 delete();
+  var_5 waittill("sounddone");
+  var_5 delete();
 }

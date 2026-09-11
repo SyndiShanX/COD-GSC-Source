@@ -3,73 +3,73 @@
  * Script: scripts\mp\equipment\emp_grenade.gsc
 ************************************************/
 
-function emp_grenade_used(var0) {
+function emp_grenade_used(var_0) {
   self endon("disconnect");
-  var0 endon("explode_end");
-  var0 thread scripts\mp\utility\script::notifyafterframeend("death", "explode_end");
-  var0 waittill("explode", var1);
-  var2 = scripts\cp_mp\emp_debuff::get_emp_ents();
-  var3 = getcompleteweaponname("emp_grenade_mp");
+  var_0 endon("explode_end");
+  var_0 thread scripts\mp\utility\script::notifyafterframeend("death", "explode_end");
+  var_0 waittill("explode", var_1);
+  var_2 = scripts\cp_mp\emp_debuff::get_emp_ents();
+  var_3 = getcompleteweaponname("emp_grenade_mp");
 
-  foreach(var5 in var2) {
-    var6 = var5.owner;
+  foreach(var_5 in var_2) {
+    var_6 = var_5.owner;
 
-    if(isDefined(var6)) {
-      if(var6 != self && !scripts\cp_mp\utility\player_utility::playersareenemies(self, var6)) {
+    if(isDefined(var_6)) {
+      if(var_6 != self && !scripts\cp_mp\utility\player_utility::playersareenemies(self, var_6)) {
         continue;
       }
     }
 
-    var7 = distancesquared(var1, var5.origin);
+    var_7 = distancesquared(var_1, var_5.origin);
 
-    if(var7 > 262144) {
+    if(var_7 > 262144) {
       continue;
     }
 
-    var8 = scripts\cp_mp\utility\damage_utility::packdamagedata(self, var5, 1, var3, "MOD_EXPLOSIVE", var0, var1);
-    thread emp_grenade_apply_non_player(var8);
+    var_8 = scripts\cp_mp\utility\damage_utility::packdamagedata(self, var_5, 1, var_3, "MOD_EXPLOSIVE", var_0, var_1);
+    thread emp_grenade_apply_non_player(var_8);
   }
 
-  var10 = scripts\mp\utility\player::getplayersinradius(var1, 512);
+  var_10 = scripts\mp\utility\player::getplayersinradius(var_1, 512);
 
-  foreach(var12 in var10) {
-    if(!var12 scripts\cp_mp\emp_debuff::can_emp_player()) {
+  foreach(var_12 in var_10) {
+    if(!var_12 scripts\cp_mp\emp_debuff::can_emp_player()) {
       continue;
     }
 
-    if(var12 != self && !scripts\cp_mp\utility\player_utility::playersareenemies(self, var12)) {
+    if(var_12 != self && !scripts\cp_mp\utility\player_utility::playersareenemies(self, var_12)) {
       continue;
     }
 
-    var8 = scripts\cp_mp\utility\damage_utility::packdamagedata(self, var12, 1, var3, "MOD_EXPLOSIVE", var0, var1);
-    thread emp_grenade_apply_player(var8);
+    var_8 = scripts\cp_mp\utility\damage_utility::packdamagedata(self, var_12, 1, var_3, "MOD_EXPLOSIVE", var_0, var_1);
+    thread emp_grenade_apply_player(var_8);
   }
 }
 
-function emp_grenade_apply_non_player(var0) {
-  scripts\cp_mp\emp_debuff::apply_emp_struct(var0);
-  emp_grenade_end_early(var0, 6);
+function emp_grenade_apply_non_player(var_0) {
+  scripts\cp_mp\emp_debuff::apply_emp_struct(var_0);
+  emp_grenade_end_early(var_0, 6);
 
-  if(isDefined(var0.victim)) {
-    var0.victim scripts\cp_mp\emp_debuff::remove_emp();
+  if(isDefined(var_0.victim)) {
+    var_0.victim scripts\cp_mp\emp_debuff::remove_emp();
     return;
   }
 }
 
-function emp_grenade_apply_player(var0) {
-  scripts\cp_mp\emp_debuff::apply_emp_struct(var0);
-  var1 = scripts\engine\utility::ter_op(var0.attacker == var0.victim, 2, 6);
-  thread scripts\mp\gamescore::trackdebuffassistfortime(var0.attacker, var0.victim, var0.objweapon.basename, var1, "emp_cleared");
-  emp_grenade_end_early(var0, var1);
+function emp_grenade_apply_player(var_0) {
+  scripts\cp_mp\emp_debuff::apply_emp_struct(var_0);
+  var_1 = scripts\engine\utility::ter_op(var_0.attacker == var_0.victim, 2, 6);
+  thread scripts\mp\gamescore::trackdebuffassistfortime(var_0.attacker, var_0.victim, var_0.objweapon.basename, var_1, "emp_cleared");
+  emp_grenade_end_early(var_0, var_1);
 
-  if(isDefined(var0.victim)) {
-    var0.victim scripts\cp_mp\emp_debuff::remove_emp();
+  if(isDefined(var_0.victim)) {
+    var_0.victim scripts\cp_mp\emp_debuff::remove_emp();
     return;
   }
 }
 
-function emp_grenade_end_early(var0, var1) {
-  var0.victim endon("death_or_disconnect");
+function emp_grenade_end_early(var_0, var_1) {
+  var_0.victim endon("death_or_disconnect");
   level endon("game_ended");
-  var2 = scripts\engine\utility::waittill_notify_or_timeout_return("emp_cleared", var1);
+  var_2 = scripts\engine\utility::waittill_notify_or_timeout_return("emp_cleared", var_1);
 }

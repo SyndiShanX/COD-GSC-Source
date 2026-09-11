@@ -15,49 +15,49 @@ function tablet_enabled_check_dvar() {
   return false;
 }
 
-function getselectmappoint(var0, var1, var2) {
-  var3 = [];
-  var4 = 0;
+function getselectmappoint(var_0, var_1, var_2) {
+  var_3 = [];
+  var_4 = 0;
 
-  if(!isDefined(var1)) {
-    var1 = 1;
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
   thread watchownertimeoutdeath();
-  var3 = undefined;
-  var3 = gathermappointinfo(var1, var2);
-  return var3;
+  var_3 = undefined;
+  var_3 = gathermappointinfo(var_1, var_2);
+  return var_3;
 }
 
-function gathermappointinfo(var0, var1) {
-  var2 = 1;
+function gathermappointinfo(var_0, var_1) {
+  var_2 = 1;
 
-  if(var0 <= 1) {
+  if(var_0 <= 1) {
     self setclientomnvar("ui_map_select_uses", -1);
-    var2 = 0;
+    var_2 = 0;
   }
 
   self.mapselectpickcounter = 0;
   self.previousmapselectioninfo = undefined;
-  var3 = [];
+  var_3 = [];
   thread watchmapselectweapon();
-  jumpiffalse(istrue(var2)) LOC_0000004d;
-  self setclientomnvar("ui_map_select_uses", var0);
-  self setclientomnvar("ui_map_select_count", var0);
+  jumpiffalse(istrue(var_2)) LOC_0000004d;
+  self setclientomnvar("ui_map_select_uses", var_0);
+  self setclientomnvar("ui_map_select_count", var_0);
 
-  while(self.mapselectpickcounter < var0) {
-    var4 = waittill_confirm_or_cancel("confirm_location", "cancel_location");
+  while(self.mapselectpickcounter < var_0) {
+    var_4 = waittill_confirm_or_cancel("confirm_location", "cancel_location");
 
-    if(!isDefined(var4) || var4.string == "cancel_location") {
-      var3 = undefined;
+    if(!isDefined(var_4) || var_4.string == "cancel_location") {
+      var_3 = undefined;
       break;
     }
 
-    var3 = var4;
+    var_3 = var_4;
     self.mapselectpickcounter++;
 
-    if(istrue(var2)) {
-      self setclientomnvar("ui_map_select_uses", var0 - self.mapselectpickcounter);
+    if(istrue(var_2)) {
+      self setclientomnvar("ui_map_select_uses", var_0 - self.mapselectpickcounter);
     }
   }
 
@@ -65,20 +65,20 @@ function gathermappointinfo(var0, var1) {
   self notify("map_select_exit");
   level notify("vision_set_change_request", "", self, 0);
 
-  if(isDefined(var3)) {
+  if(isDefined(var_3)) {
     self.pers["startedMapSelect"] = 0;
   }
 
-  return var3;
+  return var_3;
 }
 
 function watchmapselectweapon() {
   self endon("map_select_exit");
 
   for(;;) {
-    var0 = self getcurrentweapon();
+    var_0 = self getcurrentweapon();
 
-    if(var0.basename != "ks_remote_map_cp") {
+    if(var_0.basename != "ks_remote_map_cp") {
       self notify("cancel_location");
       break;
     }
@@ -103,24 +103,24 @@ function watchownertimeoutdeath() {
   self notify("cancel_location");
 }
 
-function startmapselectsequence(var0, var1, var2, var3) {
-  if(!isDefined(var0)) {
-    var0 = 0;
+function startmapselectsequence(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  if(!isDefined(var3)) {
-    var3 = 0;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  self beginlocationselection(var0, var1, var2, 1, var3);
+  self beginlocationselection(var_0, var_1, var_2, 1, var_3);
 }
 
 function stopmapselectsequence() {
@@ -134,46 +134,46 @@ function stopmapselectsequence() {
   }
 }
 
-function waittill_confirm_or_cancel(var0, var1, var2) {
-  if((!isDefined(var0) || var0 != "death") && (!isDefined(var1) || var1 != "death")) {
+function waittill_confirm_or_cancel(var_0, var_1, var_2) {
+  if((!isDefined(var_0) || var_0 != "death") && (!isDefined(var_1) || var_1 != "death")) {
     self endon("death");
   }
 
-  var3 = spawnStruct();
+  var_3 = spawnStruct();
 
-  if(isDefined(var0)) {
-    GscBinSkip4(0x35, var0, var3);
+  if(isDefined(var_0)) {
+    GscBinSkip4(0x35, var_0, var_3);
   }
 
-  if(isDefined(var1)) {
-    GscBinSkip4(0x35, var1, var3);
+  if(isDefined(var_1)) {
+    GscBinSkip4(0x35, var_1, var_3);
   }
 
-  jumpiffalse(isDefined(var2)) LOC_00000058;
-  GscBinSkip4(0x35, var2, var3);
+  jumpiffalse(isDefined(var_2)) LOC_00000058;
+  GscBinSkip4(0x35, var_2, var_3);
 
-  var3 waittill("returned", var4, var5, var6);
-  var3 notify("die");
-  var7 = spawnStruct();
-  var7.location = var4;
-  var7.angles = var5;
-  var7.string = var6;
-  return var7;
+  var_3 waittill("returned", var_4, var_5, var_6);
+  var_3 notify("die");
+  var_7 = spawnStruct();
+  var_7.location = var_4;
+  var_7.angles = var_5;
+  var_7.string = var_6;
+  return var_7;
 }
 
-function waittill_return(var0, var1) {
-  if(var0 != "death") {
+function waittill_return(var_0, var_1) {
+  if(var_0 != "death") {
     self endon("death");
   }
 
-  var1 endon("die");
-  self waittill(var0, var2, var3);
-  var1 notify("returned", var2, var3, var0);
+  var_1 endon("die");
+  self waittill(var_0, var_2, var_3);
+  var_1 notify("returned", var_2, var_3, var_0);
 }
 
 function setmaplocationselection() {}
 
-function set_uav_radarstrength(var0) {
-  var1 = getuavstrengthmax();
-  var0.radarstrength = var1;
+function set_uav_radarstrength(var_0) {
+  var_1 = getuavstrengthmax();
+  var_0.radarstrength = var_1;
 }

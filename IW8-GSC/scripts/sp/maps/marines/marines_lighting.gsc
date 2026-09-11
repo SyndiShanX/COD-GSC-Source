@@ -45,39 +45,39 @@ function call_sung_lighting_setup() {
 }
 
 function scriptlights_setup() {
-  var0 = getEntArray("snakecam_light", "targetname");
-  var1 = getEntArray("wolfroom_light", "targetname");
-  var2 = getEntArray("cinematic_monitor_light", "targetname");
+  var_0 = getEntArray("snakecam_light", "targetname");
+  var_1 = getEntArray("wolfroom_light", "targetname");
+  var_2 = getEntArray("cinematic_monitor_light", "targetname");
 
-  foreach(var4 in var0) {
-    var4.tempintensity = var4 getlightintensity();
+  foreach(var_4 in var_0) {
+    var_4.tempintensity = var_4 getlightintensity();
   }
 
-  foreach(var7 in var2) {
-    var7.tempintensity = var7 getlightintensity();
+  foreach(var_7 in var_2) {
+    var_7.tempintensity = var_7 getlightintensity();
   }
 
-  foreach(var10 in var1) {
-    var10.tempintensity = var10 getlightintensity();
+  foreach(var_10 in var_1) {
+    var_10.tempintensity = var_10 getlightintensity();
   }
 }
 
-function snakecam_light_on(var0) {
-  var1 = getEntArray("snakecam_light", "targetname");
-  var2 = getEntArray("wolfroom_light", "targetname");
-  var3 = getEntArray("cinematic_monitor_light", "targetname");
-  scripts\engine\sp\utility::trigger_wait(var0, "targetname");
+function snakecam_light_on(var_0) {
+  var_1 = getEntArray("snakecam_light", "targetname");
+  var_2 = getEntArray("wolfroom_light", "targetname");
+  var_3 = getEntArray("cinematic_monitor_light", "targetname");
+  scripts\engine\sp\utility::trigger_wait(var_0, "targetname");
 
-  foreach(var5 in var2) {
-    var5 setlightintensity(0);
+  foreach(var_5 in var_2) {
+    var_5 setlightintensity(0);
   }
 
-  foreach(var8 in var3) {
-    var8 setlightintensity(var8.tempintensity);
+  foreach(var_8 in var_3) {
+    var_8 setlightintensity(var_8.tempintensity);
   }
 
-  foreach(var11 in var1) {
-    var11 setlightintensity(var11.tempintensity);
+  foreach(var_11 in var_1) {
+    var_11 setlightintensity(var_11.tempintensity);
   }
 
   waitframe();
@@ -85,24 +85,24 @@ function snakecam_light_on(var0) {
 }
 
 function wolfroom_light_on() {
-  var0 = getEnt("wolfroom_light_on_trig", "targetname");
-  var1 = getEntArray("snakecam_light", "targetname");
-  var2 = getEntArray("wolfroom_light", "targetname");
-  var3 = getEntArray("cinematic_monitor_light", "targetname");
+  var_0 = getEnt("wolfroom_light_on_trig", "targetname");
+  var_1 = getEntArray("snakecam_light", "targetname");
+  var_2 = getEntArray("wolfroom_light", "targetname");
+  var_3 = getEntArray("cinematic_monitor_light", "targetname");
   scripts\engine\sp\utility::trigger_wait("wolfroom_light_on_trig", "targetname");
   setsaveddvar("LTQMSPKRKO", 6);
   setsaveddvar("MROOOROPKL", 6);
 
-  foreach(var5 in var1) {
-    var5 setlightintensity(0);
+  foreach(var_5 in var_1) {
+    var_5 setlightintensity(0);
   }
 
-  foreach(var8 in var3) {
-    var8 setlightintensity(0);
+  foreach(var_8 in var_3) {
+    var_8 setlightintensity(0);
   }
 
-  foreach(var11 in var2) {
-    var11 setlightintensity(var11.tempintensity);
+  foreach(var_11 in var_2) {
+    var_11 setlightintensity(var_11.tempintensity);
   }
 
   waitframe();
@@ -124,20 +124,20 @@ function murderhole_dof_on() {
 }
 
 function getlighttrigger() {
-  var0 = getEntArray("light_trigger", "targetname");
+  var_0 = getEntArray("light_trigger", "targetname");
 
-  foreach(var2 in var0) {
+  foreach(var_2 in var_0) {
     thread destroylight();
   }
 }
 
 function destroylight() {
-  var0 = getEntArray(self.target, "targetname");
-  self waittill("trigger", var1);
+  var_0 = getEntArray(self.target, "targetname");
+  self waittill("trigger", var_1);
 
-  foreach(var3 in var0) {
-    var3 setlightintensity(0);
-    var3 notify("stopflicker");
+  foreach(var_3 in var_0) {
+    var_3 setlightintensity(0);
+    var_3 notify("stopflicker");
   }
 }
 
@@ -149,7 +149,7 @@ function postload() {
 function flycam_intro_start() {
   level endon("intro_skipped");
   waitframe();
-  var0 = getEntArray("hospital_intro", "targetname");
+  var_0 = getEntArray("hospital_intro", "targetname");
   level.player enablephysicaldepthoffieldscripting();
   level thread scripts\engine\sp\utility::dof_enable(1.4, 10000, 20);
   wait 4;
@@ -159,8 +159,8 @@ function flycam_intro_start() {
   wait 2;
   wait 3;
 
-  foreach(var2 in var0) {
-    var2 setlightintensity(0);
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(0);
   }
 
   level.fake_player thread scripts\engine\sp\utility::dof_enable_autofocus(1.2, 2, undefined, undefined, "tag_eye");
@@ -191,13 +191,13 @@ function lighting_setup_dvars() {
 }
 
 function turnon() {
-  var0 = getEnt("turn_on_light_trigger", "targetname");
-  var1 = getEnt("stair_light", "targetname");
-  var1.tempintensity = var1 getlightintensity();
+  var_0 = getEnt("turn_on_light_trigger", "targetname");
+  var_1 = getEnt("stair_light", "targetname");
+  var_1.tempintensity = var_1 getlightintensity();
   scripts\engine\sp\utility::trigger_wait("turn_on_light_trigger", "targetname");
 
-  while(level.player istouching(var0)) {
-    var1 setlightintensity(var1.tempintensity);
+  while(level.player istouching(var_0)) {
+    var_1 setlightintensity(var_1.tempintensity);
     wait 0.1;
   }
 
@@ -205,12 +205,12 @@ function turnon() {
 }
 
 function turnoff() {
-  var0 = getEnt("turn_off_light_trigger", "targetname");
-  var1 = getEnt("stair_light", "targetname");
+  var_0 = getEnt("turn_off_light_trigger", "targetname");
+  var_1 = getEnt("stair_light", "targetname");
   scripts\engine\sp\utility::trigger_wait("turn_off_light_trigger", "targetname");
 
-  while(level.player istouching(var0)) {
-    var1 setlightintensity(0);
+  while(level.player istouching(var_0)) {
+    var_1 setlightintensity(0);
     wait 0.1;
   }
 
@@ -219,55 +219,55 @@ function turnoff() {
 
 function sun_adjustments_murderhole_building() {}
 
-function sun_adjustments_hospital_trigger(var0, var1) {
-  var2 = getEnt(var0 + "_" + var1, "targetname");
+function sun_adjustments_hospital_trigger(var_0, var_1) {
+  var_2 = getEnt(var_0 + "_" + var_1, "targetname");
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return;
   }
 
-  scripts\engine\sp\utility::trigger_wait_targetname(var0 + "_" + var1);
-  sun_adjustments_register_trigger(var0, var1);
+  scripts\engine\sp\utility::trigger_wait_targetname(var_0 + "_" + var_1);
+  sun_adjustments_register_trigger(var_0, var_1);
 }
 
-function sun_adjustments_hospital_force(var0, var1) {
-  var2 = getEnt(var0 + "_" + var1, "targetname");
+function sun_adjustments_hospital_force(var_0, var_1) {
+  var_2 = getEnt(var_0 + "_" + var_1, "targetname");
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return;
   }
 
-  sun_adjustments_register_trigger(var0, var1);
+  sun_adjustments_register_trigger(var_0, var_1);
 }
 
-function sun_adjustments_register_trigger(var0, var1) {
+function sun_adjustments_register_trigger(var_0, var_1) {
   waitframe();
-  var2 = getEnt(var0 + "_" + var1, "targetname");
-  var3 = var2.script_sunsamplesizenear;
-  var4 = var2.script_sunshadowscale;
-  var5 = var2.script_sunenable;
+  var_2 = getEnt(var_0 + "_" + var_1, "targetname");
+  var_3 = var_2.script_sunsamplesizenear;
+  var_4 = var_2.script_sunshadowscale;
+  var_5 = var_2.script_sunenable;
 
-  if(isDefined(var3)) {}
+  if(isDefined(var_3)) {}
 
-  if(isDefined(var5) && var5 > 0) {}
+  if(isDefined(var_5) && var_5 > 0) {}
 
-  if(isDefined(var4)) {
-    setsuncolorandintensity(var4);
+  if(isDefined(var_4)) {
+    setsuncolorandintensity(var_4);
 
-    if(var4 > 0) {
+    if(var_4 > 0) {
       waitframe();
       setsaveddvar("OMKTSMSOS", 3);
     }
   }
 
-  thread sun_adjustments_hospital_trigger(var0, var1 + 1);
-  thread sun_adjustments_hospital_trigger(var0, var1 - 1);
+  thread sun_adjustments_hospital_trigger(var_0, var_1 + 1);
+  thread sun_adjustments_hospital_trigger(var_0, var_1 - 1);
 }
 
 function flickerlightmh() {
-  var0 = getEntArray("flicker_light_mh", "script_noteworthy");
+  var_0 = getEntArray("flicker_light_mh", "script_noteworthy");
 
-  foreach(var2 in var0) {
+  foreach(var_2 in var_0) {
     thread flickersinglelight();
   }
 }
@@ -276,22 +276,22 @@ function flickersinglelight() {
   self endon("stopflicker");
 
   for(;;) {
-    var0 = sin(gettime() * 123) * 0.3 + 0.3;
+    var_0 = sin(gettime() * 123) * 0.3 + 0.3;
     self setlightintensity(5);
-    wait var0;
+    wait var_0;
     self setlightintensity(15);
-    var0 = sin(gettime() * 123) * 0.3 + 0.3;
-    wait var0;
+    var_0 = sin(gettime() * 123) * 0.3 + 0.3;
+    wait var_0;
   }
 }
 
 function flickersource() {
-  var0 = getEntArray("flicker_source", "targetname");
+  var_0 = getEntArray("flicker_source", "targetname");
 
   for(;;) {
-    foreach(var2 in var0) {
-      var3 = 0.1 + randomfloat(1);
-      var2 setlightintensity(var3);
+    foreach(var_2 in var_0) {
+      var_3 = 0.1 + randomfloat(1);
+      var_2 setlightintensity(var_3);
     }
 
     wait 0.1;
@@ -301,13 +301,13 @@ function flickersource() {
 }
 
 function flickerfire() {
-  var0 = getEntArray("flicker_fire", "targetname");
+  var_0 = getEntArray("flicker_fire", "targetname");
 
   for(;;) {
-    var1 = 5 + randomfloat(5);
+    var_1 = 5 + randomfloat(5);
 
-    foreach(var3 in var0) {
-      var3 setlightintensity(var1);
+    foreach(var_3 in var_0) {
+      var_3 setlightintensity(var_1);
     }
 
     wait 0.06;

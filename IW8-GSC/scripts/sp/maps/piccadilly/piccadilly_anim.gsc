@@ -50,12 +50,12 @@ function player() {
   scripts\common\anim::addnotetrack_customfunction("player_rig", "audio_mix_fade_start", &audio_mix_fade_out_end_of_level, "end_boom");
 }
 
-function start_first_raise(var0) {
+function start_first_raise(var_0) {
   level.player hideviewmodel();
   level.player enableweapons();
 }
 
-function player_fov_change(var0) {
+function player_fov_change(var_0) {
   level.player modifybasefov(65, 1.7);
   level notify("cine_letterboxing");
   thread sfx_amb_car_int();
@@ -71,7 +71,7 @@ function sfx_amb_car_int() {
   level.player clearclienttriggeraudiozone(2.5);
 }
 
-function start_ending_cinematic(var0) {
+function start_ending_cinematic(var_0) {
   pausecinematicingame(0);
 }
 
@@ -1115,48 +1115,48 @@ function generic_human() {
   level.scr_anim["civ8"]["bus_rescued_idle"][0] = % lon_pic_ctr_030_bus_sniper_civ8_crouch_idle;
 }
 
-function civ_in_position(var0) {
-  var0 scripts\engine\utility::ent_flag_set("this_anim_finished");
+function civ_in_position(var_0) {
+  var_0 scripts\engine\utility::ent_flag_set("this_anim_finished");
 }
 
-function lilly_civ_shot(var0) {
+function lilly_civ_shot(var_0) {
   if(!isalive(level.lilly_terry)) {
     return;
   }
 
-  level.lillywhites_civs = scripts\engine\utility::array_remove(level.lillywhites_civs, var0);
-  thread squib_head(var0);
-  var0 notify("shot");
+  level.lillywhites_civs = scripts\engine\utility::array_remove(level.lillywhites_civs, var_0);
+  thread squib_head(var_0);
+  var_0 notify("shot");
   wait 1;
-  var0 startragdoll();
+  var_0 startragdoll();
 
-  if(!isai(var0)) {
-    var0 setCanDamage(0);
-    var0 freeentitysentient();
-    var0 notsolid();
+  if(!isai(var_0)) {
+    var_0 setCanDamage(0);
+    var_0 freeentitysentient();
+    var_0 notsolid();
     return;
   }
 }
 
-function notify_self_nag(var0) {
-  var0 notify("nag");
+function notify_self_nag(var_0) {
+  var_0 notify("nag");
 }
 
-function kyle_swap(var0) {
-  var0 delete();
+function kyle_swap(var_0) {
+  var_0 delete();
 }
 
-function bullettracer_hack(var0) {
-  var1 = var0 gettagorigin("tag_flash");
-  var2 = var1 + anglesToForward(var0 gettagangles("tag_flash")) * 100;
-  bullettracer(var1, var2, "iw8_ar_akilo47", 1);
+function bullettracer_hack(var_0) {
+  var_1 = var_0 gettagorigin("tag_flash");
+  var_2 = var_1 + anglesToForward(var_0 gettagangles("tag_flash")) * 100;
+  bullettracer(var_1, var_2, "iw8_ar_akilo47", 1);
 }
 
-function spec_terry_shot(var0) {
+function spec_terry_shot(var_0) {
   scripts\engine\utility::flag_set("price_intro_terry_shot");
-  level.price shoot(1, var0 getEye());
+  level.price shoot(1, var_0 getEye());
   wait 0.1;
-  level.price shoot(1, var0 getEye());
+  level.price shoot(1, var_0 getEye());
 
   if(isDefined(level.player_radio_emitter)) {
     level.player_radio_emitter notify("death");
@@ -1164,121 +1164,121 @@ function spec_terry_shot(var0) {
   }
 }
 
-function already_dead(var0) {
-  var0.allowdeath = 0;
-  drop_weapon_now(var0);
+function already_dead(var_0) {
+  var_0.allowdeath = 0;
+  drop_weapon_now(var_0);
 }
 
-function drop_weapon_now(var0) {
-  if(isalive(var0)) {
-    var0 dropweapon(var0.weapon, "right", 0);
-    var0 scripts\common\ai::gun_remove();
+function drop_weapon_now(var_0) {
+  if(isalive(var_0)) {
+    var_0 dropweapon(var_0.weapon, "right", 0);
+    var_0 scripts\common\ai::gun_remove();
     return;
   }
 }
 
-function left_underground_civ(var0) {
-  var0.shot = 1;
-  squib_head(var0);
+function left_underground_civ(var_0) {
+  var_0.shot = 1;
+  squib_head(var_0);
   wait 2;
 
-  if(isDefined(var0.magic_bullet_shield) && var0.magic_bullet_shield) {
-    var0 scripts\common\ai::stop_magic_bullet_shield();
+  if(isDefined(var_0.magic_bullet_shield) && var_0.magic_bullet_shield) {
+    var_0 scripts\common\ai::stop_magic_bullet_shield();
   }
 
-  var0.allowdeath = 1;
-  var0.skipdeathanim = 1;
-  var0 kill();
+  var_0.allowdeath = 1;
+  var_0.skipdeathanim = 1;
+  var_0 kill();
 }
 
-function headshot_death(var0) {
-  squib_head(var0);
+function headshot_death(var_0) {
+  squib_head(var_0);
   wait 0.1;
-  var0 thread scripts\anim\shared::dropallaiweapons();
+  var_0 thread scripts\anim\shared::dropallaiweapons();
   wait 1.6;
-  var0 scripts\common\ai::stop_magic_bullet_shield();
-  var0.ragdoll_immediate = 1;
-  var0.a.nodeath = 1;
-  var0.allowdeath = 1;
-  var0 scripts\engine\sp\utility::die();
+  var_0 scripts\common\ai::stop_magic_bullet_shield();
+  var_0.ragdoll_immediate = 1;
+  var_0.a.nodeath = 1;
+  var_0.allowdeath = 1;
+  var_0 scripts\engine\sp\utility::die();
 }
 
-function squib_left_leg(var0) {
-  var0 thread scripts\sp\maps\piccadilly\piccadilly_util::pain_vo();
-  thread scripts\engine\utility::play_sound_in_space("ar_whiz_near_near_in", var0 gettagorigin("j_knee_le"));
-  playFXOnTag(scripts\engine\utility::getfx("vfx_imp_flesh_lrg"), var0, "j_knee_le");
-  thread scripts\engine\utility::play_sound_in_space("npc_bullet_impact_script", var0 gettagorigin("j_knee_le"));
+function squib_left_leg(var_0) {
+  var_0 thread scripts\sp\maps\piccadilly\piccadilly_util::pain_vo();
+  thread scripts\engine\utility::play_sound_in_space("ar_whiz_near_near_in", var_0 gettagorigin("j_knee_le"));
+  playFXOnTag(scripts\engine\utility::getfx("vfx_imp_flesh_lrg"), var_0, "j_knee_le");
+  thread scripts\engine\utility::play_sound_in_space("npc_bullet_impact_script", var_0 gettagorigin("j_knee_le"));
 }
 
-function squib_back(var0) {
-  var0 thread scripts\sp\maps\piccadilly\piccadilly_util::death_vo();
-  thread scripts\engine\utility::play_sound_in_space("ar_whiz_near_near_in", var0 gettagorigin("tag_shield_back"));
-  playFXOnTag(scripts\engine\utility::getfx("vfx_imp_flesh_lrg"), var0, "tag_shield_back");
-  thread scripts\engine\utility::play_sound_in_space("npc_bullet_impact_script", var0 gettagorigin("tag_shield_back"));
+function squib_back(var_0) {
+  var_0 thread scripts\sp\maps\piccadilly\piccadilly_util::death_vo();
+  thread scripts\engine\utility::play_sound_in_space("ar_whiz_near_near_in", var_0 gettagorigin("tag_shield_back"));
+  playFXOnTag(scripts\engine\utility::getfx("vfx_imp_flesh_lrg"), var_0, "tag_shield_back");
+  thread scripts\engine\utility::play_sound_in_space("npc_bullet_impact_script", var_0 gettagorigin("tag_shield_back"));
 }
 
-function squib_chest(var0) {
-  var0 thread scripts\sp\maps\piccadilly\piccadilly_util::death_vo();
-  thread scripts\engine\utility::play_sound_in_space("ar_whiz_near_near_in", var0 gettagorigin("j_chest"));
-  playFXOnTag(scripts\engine\utility::getfx("vfx_imp_flesh_lrg"), var0, "j_chest");
-  thread scripts\engine\utility::play_sound_in_space("npc_bullet_impact_script", var0 gettagorigin("j_chest"));
+function squib_chest(var_0) {
+  var_0 thread scripts\sp\maps\piccadilly\piccadilly_util::death_vo();
+  thread scripts\engine\utility::play_sound_in_space("ar_whiz_near_near_in", var_0 gettagorigin("j_chest"));
+  playFXOnTag(scripts\engine\utility::getfx("vfx_imp_flesh_lrg"), var_0, "j_chest");
+  thread scripts\engine\utility::play_sound_in_space("npc_bullet_impact_script", var_0 gettagorigin("j_chest"));
 
-  if(isai(var0) && !istrue(var0.ignoreme)) {
-    var0.ignoreme = 1;
+  if(isai(var_0) && !istrue(var_0.ignoreme)) {
+    var_0.ignoreme = 1;
     return;
   }
 }
 
-function squib_head(var0) {
-  var0 thread scripts\sp\maps\piccadilly\piccadilly_util::death_vo();
-  thread scripts\engine\utility::play_sound_in_space("ar_whiz_near_near_in", var0 gettagorigin("tag_eye"));
-  playFXOnTag(scripts\engine\utility::getfx("vfx_imp_flesh_lrg"), var0, "tag_eye");
-  thread scripts\engine\utility::play_sound_in_space("npc_bullet_impact_script", var0 gettagorigin("tag_eye"));
+function squib_head(var_0) {
+  var_0 thread scripts\sp\maps\piccadilly\piccadilly_util::death_vo();
+  thread scripts\engine\utility::play_sound_in_space("ar_whiz_near_near_in", var_0 gettagorigin("tag_eye"));
+  playFXOnTag(scripts\engine\utility::getfx("vfx_imp_flesh_lrg"), var_0, "tag_eye");
+  thread scripts\engine\utility::play_sound_in_space("npc_bullet_impact_script", var_0 gettagorigin("tag_eye"));
 }
 
-function make_visible_notsolid(var0) {
-  var0 visiblenotsolid();
+function make_visible_notsolid(var_0) {
+  var_0 visiblenotsolid();
 }
 
-function police_die(var0) {
-  var0 scripts\anim\shared::dropallaiweapons();
-  var0.ragdoll_immediate = 1;
-  var0.allowdeath = 1;
-  var0 scripts\engine\sp\utility::die();
+function police_die(var_0) {
+  var_0 scripts\anim\shared::dropallaiweapons();
+  var_0.ragdoll_immediate = 1;
+  var_0.allowdeath = 1;
+  var_0 scripts\engine\sp\utility::die();
 }
 
-function start_countdown(var0) {
+function start_countdown(var_0) {
   setsaveddvar("MMRNLMPPLT", "0");
   setsaveddvar("RKMNLRNS", "1");
   cinematicingame("sp_piccadilly_vest_timer");
 }
 
-function start_explosion(var0) {
+function start_explosion(var_0) {
   scripts\engine\utility::flag_set("hostage_explosion");
-  var0.bomb_exploded = 1;
+  var_0.bomb_exploded = 1;
   scripts\engine\utility::exploder("suicide_bomb");
   thread sfx_bombvest_expl_finale(level.hostage.origin);
-  var1 = level.player gettagorigin("j_head");
-  earthquake(0.5, 0.7, var1, 200);
-  screenshake(var1, 2, 0, 0, 0.5);
-  playrumbleonposition("grenade_rumble", var1);
+  var_1 = level.player gettagorigin("j_head");
+  earthquake(0.5, 0.7, var_1, 200);
+  screenshake(var_1, 2, 0, 0, 0.5);
+  playrumbleonposition("grenade_rumble", var_1);
   level.player shellshock("default_nosound", 3.2);
   level.player scripts\engine\utility::delaycall(2.7, &fadeoutshellshock);
   wait 0.2;
-  var2 = scripts\sp\endmission::getlevelindex(level.script);
-  scripts\sp\endmission::setfadetime(var2, 0);
-  var3 = var2 + 1;
-  var4 = scripts\sp\endmission::getlevelbink(var3);
+  var_2 = scripts\sp\endmission::getlevelindex(level.script);
+  scripts\sp\endmission::setfadetime(var_2, 0);
+  var_3 = var_2 + 1;
+  var_4 = scripts\sp\endmission::getlevelbink(var_3);
   level.endmission_bink_skip = 1;
   setsaveddvar("LNSNKKLPLL", "0");
   setsaveddvar("MMRNLMPPLT", "0");
   setsaveddvar("RKMNLRNS", "1");
-  cinematicingame(var4, 1, 1, 1, 0, 0, 1);
+  cinematicingame(var_4, 1, 1, 1, 0, 0, 1);
 }
 
-function sfx_bombvest_expl_finale(var0) {
-  var1 = spawn("script_origin", var0);
-  var1 playexplosionsound("scn_piccadilly_bombvest_expl_finale_lr", "exp");
+function sfx_bombvest_expl_finale(var_0) {
+  var_1 = spawn("script_origin", var_0);
+  var_1 playexplosionsound("scn_piccadilly_bombvest_expl_finale_lr", "exp");
 }
 
 function script_models() {
@@ -1318,8 +1318,8 @@ function script_models() {
   level.scr_anim["volvo_police"]["police_arrive"] = % lon_pic_020_cops_arrive_veh01;
 }
 
-function stop_anim(var0) {
-  var0 scripts\engine\sp\utility::anim_stopanimScripted();
+function stop_anim(var_0) {
+  var_0 scripts\engine\sp\utility::anim_stopanimScripted();
 }
 
 function vehicles() {}
@@ -1530,207 +1530,207 @@ function scriptables() {
   level.scr_anim["car_jumper_car"]["car_jump_death"] = % pic_car_movement_a_death;
 }
 
-function car2_bomb_explosion(var0) {
-  var1 = scripts\engine\utility::getStruct("carbomb_det", "targetname");
+function car2_bomb_explosion(var_0) {
+  var_1 = scripts\engine\utility::getStruct("carbomb_det", "targetname");
   level notify("vo_expl_walla");
-  thread scripts\engine\utility::play_sound_in_space("pdilly_first_explosion", var1.origin);
-  thread player_dist_check(var1);
+  thread scripts\engine\utility::play_sound_in_space("pdilly_first_explosion", var_1.origin);
+  thread player_dist_check(var_1);
   scripts\engine\utility::exploder("taxiexplosion");
   scripts\engine\utility::stop_exploder("traffic_lights_intro");
   wait 0.1;
-  var0 setscriptablepartstate("Piccadilly_Death", "picc_death");
+  var_0 setscriptablepartstate("Piccadilly_Death", "picc_death");
   wait 0.7;
   scripts\engine\utility::exploder("aftermath");
 }
 
-function player_dist_check(var0) {
-  var1 = distancesquared(level.player.origin, var0.origin);
+function player_dist_check(var_0) {
+  var_1 = distancesquared(level.player.origin, var_0.origin);
 
-  if(var1 <= 600) {
+  if(var_1 <= 600) {
     level.player kill();
     return;
   }
 }
 
-function scriptable_braking(var0) {
-  var0 setscriptablepartstate("lights_controller", "taillights_braking");
+function scriptable_braking(var_0) {
+  var_0 setscriptablepartstate("lights_controller", "taillights_braking");
 }
 
-function scriptable_brake_reset(var0) {
-  var0 setscriptablepartstate("lights_controller", "on_nolight");
+function scriptable_brake_reset(var_0) {
+  var_0 setscriptablepartstate("lights_controller", "on_nolight");
 }
 
-function window_front_left_dead(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "window_front_left_dead", 1);
+function window_front_left_dead(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "window_front_left_dead", 1);
 }
 
-function window_front_right_dead(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "window_front_right_dead", 1);
+function window_front_right_dead(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "window_front_right_dead", 1);
 }
 
-function window_back_left_dead(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "window_back_left_dead", 1);
+function window_back_left_dead(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "window_back_left_dead", 1);
 }
 
-function window_back_right_dead(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "window_back_right_dead", 1);
+function window_back_right_dead(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "window_back_right_dead", 1);
 }
 
-function windshield_front_dead(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "windshield_front_dead", 1);
+function windshield_front_dead(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "windshield_front_dead", 1);
 }
 
-function windshield_back_dead(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "windshield_back_dead", 1);
+function windshield_back_dead(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "windshield_back_dead", 1);
 }
 
-function light_front_left_dead(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "light_front_left_dead", 1);
+function light_front_left_dead(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "light_front_left_dead", 1);
 }
 
-function light_front_right_dead(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "light_front_right_dead", 1);
+function light_front_right_dead(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "light_front_right_dead", 1);
 }
 
-function light_back_left_dead(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "light_back_left_dead", 1);
+function light_back_left_dead(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "light_back_left_dead", 1);
 }
 
-function light_back_right_dead(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "light_back_right_dead", 1);
+function light_back_right_dead(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "light_back_right_dead", 1);
 }
 
-function grill_dead(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "grill_dead", 1);
+function grill_dead(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "grill_dead", 1);
 }
 
-function mirror_left_dead(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "mirror_left_dead", 1);
+function mirror_left_dead(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "mirror_left_dead", 1);
 }
 
-function mirror_right_dead(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "mirror_right_dead", 1);
+function mirror_right_dead(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "mirror_right_dead", 1);
 }
 
-function door_front_right_dmg(var0) {
+function door_front_right_dmg(var_0) {
   earthquake(0.25, 0.5, level.player.origin, 800);
   playrumbleonposition("damage_heavy", level.player.origin);
-  var0 setscriptablepartstate("Notetrack Handler", "door_front_right_dmg", 1);
+  var_0 setscriptablepartstate("Notetrack Handler", "door_front_right_dmg", 1);
 }
 
-function door_front_left_dmg(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "door_front_left_dmg", 1);
+function door_front_left_dmg(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "door_front_left_dmg", 1);
 }
 
-function door_back_right_dmg(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "door_back_right_dmg", 1);
+function door_back_right_dmg(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "door_back_right_dmg", 1);
 }
 
-function door_back_left_dmg(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "door_back_left_dmg", 1);
+function door_back_left_dmg(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "door_back_left_dmg", 1);
 }
 
-function custom_eject_fin(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "custom_eject_fin", 1);
+function custom_eject_fin(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "custom_eject_fin", 1);
 }
 
-function custom_eject_siren(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "custom_eject_siren", 1);
+function custom_eject_siren(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "custom_eject_siren", 1);
 }
 
-function custom_eject_rack_bar(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "custom_eject_rack_bar", 1);
+function custom_eject_rack_bar(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "custom_eject_rack_bar", 1);
 }
 
-function custom_eject_spoiler(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "custom_eject_spoiler", 1);
+function custom_eject_spoiler(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "custom_eject_spoiler", 1);
 }
 
-function window_back_left_corner_dead(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "window_back_left_corner_dead", 1);
+function window_back_left_corner_dead(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "window_back_left_corner_dead", 1);
 }
 
-function window_back_right_corner_dead(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "window_back_right_corner_dead", 1);
+function window_back_right_corner_dead(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "window_back_right_corner_dead", 1);
 }
 
-function custom_impact_nose(var0) {
+function custom_impact_nose(var_0) {
   earthquake(0.25, 0.5, level.player.origin, 800);
   playrumbleonposition("damage_heavy", level.player.origin);
-  var0 setscriptablepartstate("Notetrack Handler", "custom_impact_nose", 1);
+  var_0 setscriptablepartstate("Notetrack Handler", "custom_impact_nose", 1);
 }
 
-function custom_eject_hood(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "custom_eject_hood", 1);
+function custom_eject_hood(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "custom_eject_hood", 1);
 }
 
-function custom_eject_door_front_left(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "custom_eject_door_front_left", 1);
+function custom_eject_door_front_left(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "custom_eject_door_front_left", 1);
 }
 
-function custom_eject_door_back_left(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "custom_eject_door_back_left", 1);
+function custom_eject_door_back_left(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "custom_eject_door_back_left", 1);
 }
 
-function custom_eject_trunk(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "custom_eject_trunk", 1);
+function custom_eject_trunk(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "custom_eject_trunk", 1);
 }
 
-function enable_damage(var0) {
-  var0 setscriptablepartstate("Notetrack Handler", "enable_damage", 1);
+function enable_damage(var_0) {
+  var_0 setscriptablepartstate("Notetrack Handler", "enable_damage", 1);
 }
 
-function sfx_pre_explo_mix_change_1(var0) {}
+function sfx_pre_explo_mix_change_1(var_0) {}
 
-function sfx_pre_explo_mix_change_2(var0) {
+function sfx_pre_explo_mix_change_2(var_0) {
   level.player setsoundsubmix("fade_all_except_explo");
 }
 
-function sfx_van_passby(var0) {
-  var0 playSound("scn_piccadilly_intro_car_by_van");
+function sfx_van_passby(var_0) {
+  var_0 playSound("scn_piccadilly_intro_car_by_van");
 }
 
-function sfx_taxi_passby(var0) {
-  var0 playSound("scn_piccadilly_intro_car_by_taxi");
+function sfx_taxi_passby(var_0) {
+  var_0 playSound("scn_piccadilly_intro_car_by_taxi");
 }
 
-function sfx_sedan_passby(var0) {
-  var0 playSound("scn_piccadilly_intro_car_by_gen_01");
+function sfx_sedan_passby(var_0) {
+  var_0 playSound("scn_piccadilly_intro_car_by_gen_01");
 }
 
-function sfx_car_door_open(var0) {
+function sfx_car_door_open(var_0) {
   thread scripts\engine\utility::play_sound_in_space("scn_piccadilly_enemy_car_door_open", (-2597, -3605, 40));
   level notify("vo_pre_expl_walla");
 }
 
-function sfx_car_door_slam(var0) {
+function sfx_car_door_slam(var_0) {
   thread scripts\engine\utility::play_sound_in_space("scn_piccadilly_enemy_car_door_slam", (-2597, -3605, 40));
 }
 
-function sfx_van_door_open(var0) {
+function sfx_van_door_open(var_0) {
   thread scripts\engine\utility::play_sound_in_space("scn_piccadilly_van_door_open", (-2314, -3535, 59));
   wait 2;
   thread scripts\engine\utility::play_sound_in_space("scn_piccadilly_van_fs", (-2314, -3535, 59));
 }
 
-function sfx_plr_van_getout(var0) {
+function sfx_plr_van_getout(var_0) {
   level.player playSound("scn_piccadilly_intro_03_lr");
 }
 
-function intro_remove_fov_user_scale(var0) {
+function intro_remove_fov_user_scale(var_0) {
   level.player lerpfovscalefactor(1, 1);
 }
 
-function car_explosion_add_fov_user_scale_override(var0) {
+function car_explosion_add_fov_user_scale_override(var_0) {
   level.player lerpfovscalefactor(0, 0.5);
 }
 
-function car_explosion_remove_fov_user_scale_override(var0) {
+function car_explosion_remove_fov_user_scale_override(var_0) {
   level.player lerpfovscalefactor(1, 0.5);
 }
 
-function audio_mix_bomb_explo(var0) {
+function audio_mix_bomb_explo(var_0) {
   level.player setclienttriggeraudiozone("piccadilly_end_fade_music", 6);
 }
 
-function audio_mix_fade_out_end_of_level(var0) {}
+function audio_mix_fade_out_end_of_level(var_0) {}

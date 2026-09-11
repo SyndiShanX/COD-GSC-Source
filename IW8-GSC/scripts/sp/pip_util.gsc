@@ -5,7 +5,7 @@
 
 function pip_init() {}
 
-function pip_on_ent(var0, var1, var2, var3, var4, var5) {
+function pip_on_ent(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(getdvarint("e3")) {
     return;
   }
@@ -14,7 +14,7 @@ function pip_on_ent(var0, var1, var2, var3, var4, var5) {
     wait 0.5;
   }
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
@@ -33,18 +33,18 @@ function pip_on_ent(var0, var1, var2, var3, var4, var5) {
   level.pip.aspectratio = 1;
   level.pip.origin_offset = (0, 0, 0);
   level.pip.angles_offset = (0, 0, 0);
-  level.pip.tag = var1;
-  level.pip.fov = scripts\engine\utility::ter_op(isDefined(var2), var2, 30);
+  level.pip.tag = var_1;
+  level.pip.fov = scripts\engine\utility::ter_op(isDefined(var_2), var_2, 30);
 
-  if(isDefined(var3)) {
-    level.pip.origin_offset = var3;
+  if(isDefined(var_3)) {
+    level.pip.origin_offset = var_3;
   }
 
-  if(isDefined(var4)) {
-    level.pip.angles_offset = var4;
+  if(isDefined(var_4)) {
+    level.pip.angles_offset = var_4;
   }
 
-  level.pip.entity = var0;
+  level.pip.entity = var_0;
   level.pip.enable = 1;
   level.pip.freecamera = 1;
   setomnvar("ui_pip_static", 0);
@@ -52,14 +52,14 @@ function pip_on_ent(var0, var1, var2, var3, var4, var5) {
   setomnvar("ui_pip_message_text_bottom", "script_pip_default_bottom");
   setomnvar("ui_pip_message_type", 1);
 
-  if(!isDefined(var5)) {
+  if(!isDefined(var_5)) {
     setomnvar("ui_show_pip", 1);
     setomnvar("ui_jackal_hide_follow_pip", 0);
     return;
   }
 }
 
-function bink_pip(var0) {
+function bink_pip(var_0) {
   level.player playSound("ui_pip_on_hud_right");
   setomnvar("ui_pip_message_text_top", "script_pip_default_top");
   setomnvar("ui_pip_message_text_bottom", "script_pip_default_bottom");
@@ -71,7 +71,7 @@ function bink_pip(var0) {
   setomnvar("ui_show_pip", 0);
   wait 0.05;
   setomnvar("ui_show_pip", 1);
-  cinematicingame(var0);
+  cinematicingame(var_0);
 
   while(!iscinematicplaying()) {
     wait 0.05;
@@ -88,10 +88,10 @@ function bink_pip(var0) {
   setsaveddvar("RKMNLRNS", "1");
 }
 
-function pip_visionset(var0) {
+function pip_visionset(var_0) {
   level.pip.activevisionset = "naked";
   level.pip.activevisionsetduration = 0.5;
-  level.pip.visionsetnaked = var0;
+  level.pip.visionsetnaked = var_0;
 }
 
 function pip_close() {
@@ -113,22 +113,22 @@ function pip_is_active() {
   return isDefined(level.pip) && isDefined(level.pip.enable) && level.pip.enable;
 }
 
-function pip_dialogue(var0) {
+function pip_dialogue(var_0) {
   face_pip();
-  scripts\engine\sp\utility::smart_dialogue_generic(var0);
+  scripts\engine\sp\utility::smart_dialogue_generic(var_0);
   pip_close();
 }
 
-function face_pip(var0) {
+function face_pip(var_0) {
   switch (tolower(self.unittype)) {
     case "c6i":
-      pip_on_ent(self, "tag_eye", 29, (18, 7, 1), (0, 200, 3), var0);
+      pip_on_ent(self, "tag_eye", 29, (18, 7, 1), (0, 200, 3), var_0);
       break;
     case "jackal":
-      pip_on_ent(self, "tag_barrel", 13, (150, 0, 20), (8.5, 180, 0), var0);
+      pip_on_ent(self, "tag_barrel", 13, (150, 0, 20), (8.5, 180, 0), var_0);
       break;
     default:
-      pip_on_ent(self, "tag_eye", 29, (18, 7, -1), (0, 200, 3), var0);
+      pip_on_ent(self, "tag_eye", 29, (18, 7, -1), (0, 200, 3), var_0);
       level.pip.nearz = 17;
       break;
   }

@@ -13,9 +13,9 @@ function firemanager() {
   self.offhands.lastusedoffhandtime = 0;
 
   for(;;) {
-    self waittill("missile_fire", var0, var1);
+    self waittill("missile_fire", var_0, var_1);
 
-    if(var1.basename == "iw8_la_mike32_incendiary") {
+    if(var_1.basename == "iw8_la_mike32_incendiary") {
       thread watchforimpact();
     }
   }
@@ -23,7 +23,7 @@ function firemanager() {
 
 function watchforimpact() {
   self endon("entitydeleted");
-  var0 = getmissileowner(self);
-  self waittill("explode", var1, var2, var3, var4);
-  scripts\sp\equipment\molotov::molotovexplode(var1, var2, var3, var4, var0);
+  var_0 = getmissileowner(self);
+  self waittill("explode", var_1, var_2, var_3, var_4);
+  scripts\sp\equipment\molotov::molotovexplode(var_1, var_2, var_3, var_4, var_0);
 }

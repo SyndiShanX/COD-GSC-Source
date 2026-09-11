@@ -3,46 +3,46 @@
  * Script: scripts\opaque\58226.gsc
 ***********************************************/
 
-function ref_12f67(var0, var1, var2) {
-  var3 = getentitylessscriptablearrayinradius(undefined, undefined, var0, var1, "door");
+function ref_12f67(var_0, var_1, var_2) {
+  var_3 = getentitylessscriptablearrayinradius(undefined, undefined, var_0, var_1, "door");
 
-  if(isDefined(var2)) {
-    var4 = [];
+  if(isDefined(var_2)) {
+    var_4 = [];
 
-    foreach(var6 in var3) {
-      var7 = var6.origin[2] - var0[2];
+    foreach(var_6 in var_3) {
+      var_7 = var_6.origin[2] - var_0[2];
 
-      if(var7 <= var2) {
-        var4 = var6;
+      if(var_7 <= var_2) {
+        var_4 = var_6;
       }
     }
 
-    var3 = var4;
+    var_3 = var_4;
   }
 
-  return var3;
+  return var_3;
 }
 
-function ref_12f66(var0) {
+function ref_12f66(var_0) {
   self notify("scriptable_door_freeze_open");
   self endon("scriptable_door_freeze_open");
-  var1 = undefined;
-  var2 = undefined;
+  var_1 = undefined;
+  var_2 = undefined;
 
-  if(istrue(var0)) {
-    var1 = "bash_left_90";
-    var2 = self.heli_intro + (0, 90, 0);
+  if(istrue(var_0)) {
+    var_1 = "bash_left_90";
+    var_2 = self.heli_intro + (0, 90, 0);
     goto LOC_00000058;
   }
 
-  var1 = "bash_right_90";
-  var2 = self.heli_intro + (0, -90, 0);
+  var_1 = "bash_right_90";
+  var_2 = self.heli_intro + (0, -90, 0);
 
-  while(anglesdelta(self.angles, var2) > 1) {
-    var3 = self getscriptablepartstate("door");
+  while(anglesdelta(self.angles, var_2) > 1) {
+    var_3 = self getscriptablepartstate("door");
 
-    if(var3 != var1) {
-      self setscriptablepartstate("door", var1, 0);
+    if(var_3 != var_1) {
+      self setscriptablepartstate("door", var_1, 0);
     }
 
     wait 0.05;
@@ -52,28 +52,28 @@ function ref_12f66(var0) {
   self scriptabledoorfreeze(1);
 }
 
-function ref_12f68(var0) {
-  if(self == var0) {
+function ref_12f68(var_0) {
+  if(self == var_0) {
     return false;
   }
 
-  var1 = self.heli_intro_vo_done;
-  var2 = var0.heli_intro_vo_done;
-  var3 = distancesquared(var1, var2);
+  var_1 = self.heli_intro_vo_done;
+  var_2 = var_0.heli_intro_vo_done;
+  var_3 = distancesquared(var_1, var_2);
 
-  if(var3 > 5) {
+  if(var_3 > 5) {
     return false;
   }
 
   return true;
 }
 
-function matchslopekey(var0, var1) {
-  var2 = !var0;
-  var3 = scripts\common\input_allow::allow_input_internal("door_frozen", var2, var1);
+function matchslopekey(var_0, var_1) {
+  var_2 = !var_0;
+  var_3 = scripts\common\input_allow::allow_input_internal("door_frozen", var_2, var_1);
 
-  if(isDefined(var3)) {
-    self scriptabledoorfreeze(!var3);
+  if(isDefined(var_3)) {
+    self scriptabledoorfreeze(!var_3);
     return;
   }
 }

@@ -3,60 +3,60 @@
  * Script: scripts\mp\infilexfil\lbravo_infil.gsc
 **************************************************/
 
-function lbravo_init(var0) {
-  var1 = [];
+function lbravo_init(var_0) {
+  var_1 = [];
   GscBinSkip0(0x2e, 0, [0, 1]);
 }
 
-function lbravo_spawn(var0, var1, var2, var3) {
-  initanims(var2, var0, var3);
-  var4 = scripts\engine\utility::getStruct(var1, "targetname");
-  ref_12802(var4, var0, var2, var3);
-  var5 = spawn("script_origin", var4.origin);
+function lbravo_spawn(var_0, var_1, var_2, var_3) {
+  initanims(var_2, var_0, var_3);
+  var_4 = scripts\engine\utility::getStruct(var_1, "targetname");
+  ref_12802(var_4, var_0, var_2, var_3);
+  var_5 = spawn("script_origin", var_4.origin);
 
-  if(!isDefined(var4.angles)) {
-    var4.angles = (0, 0, 0);
+  if(!isDefined(var_4.angles)) {
+    var_4.angles = (0, 0, 0);
   }
 
-  var5.angles = var4.angles;
-  var5.scene_node = var4;
-  var5.subtype = var2;
-  var5.ref_1214c = var3;
-  thread infilthink(var5, var0);
+  var_5.angles = var_4.angles;
+  var_5.scene_node = var_4;
+  var_5.subtype = var_2;
+  var_5.ref_1214c = var_3;
+  thread infilthink(var_5, var_0);
 
-  if(scripts\mp\utility\game::getgametype() == "arm" && isDefined(var4.target)) {
-    level.teamdata[var0]["captureLocation_Next"] = var4.target;
+  if(scripts\mp\utility\game::getgametype() == "arm" && isDefined(var_4.target)) {
+    level.teamdata[var_0]["captureLocation_Next"] = var_4.target;
   }
 
-  return var5;
+  return var_5;
 }
 
-function ref_12896(var0, var1, var2) {
-  var3 = var0.scene_node.origin;
-  var4 = var0.scene_node.angles;
+function ref_12896(var_0, var_1, var_2) {
+  var_3 = var_0.scene_node.origin;
+  var_4 = var_0.scene_node.angles;
 
   for(;;) {
-    thread scripts\cp_mp\utility\debug_utility::drawangles(var3, var4, level.framedurationseconds, 1);
+    thread scripts\cp_mp\utility\debug_utility::drawangles(var_3, var_4, level.framedurationseconds, 1);
     waitframe();
   }
 }
 
-function ref_12802(var0, var1, var2, var3) {
-  var4 = scripts\cp_mp\utility\game_utility::getmapname();
+function ref_12802(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\cp_mp\utility\game_utility::getmapname();
 
-  switch (var4) {
+  switch (var_4) {
     case "mp_quarry2":
-      switch (var3) {
+      switch (var_3) {
         case "alpha2":
-          if(var1 == "allies") {
-            var0.origin += anglesToForward(var0.angles) * 100;
+          if(var_1 == "allies") {
+            var_0.origin += anglesToForward(var_0.angles) * 100;
           }
 
           break;
         case "bravo2":
-          if(var1 == "allies") {
-            var0.origin += anglesToForward(var0.angles) * -50;
-            var0.origin += anglestoright(var0.angles) * -10;
+          if(var_1 == "allies") {
+            var_0.origin += anglesToForward(var_0.angles) * -50;
+            var_0.origin += anglestoright(var_0.angles) * -10;
           }
 
           break;
@@ -64,12 +64,12 @@ function ref_12802(var0, var1, var2, var3) {
 
       break;
     case "mp_aniyah":
-      if(var1 == "axis" && var2 == "bravo") {
-        var0.origin = (8296.4, 786.17, 286);
-        var0.angles = (0, 210, 0);
+      if(var_1 == "axis" && var_2 == "bravo") {
+        var_0.origin = (8296.4, 786.17, 286);
+        var_0.angles = (0, 210, 0);
       }
 
-      if(var1 == "allies") {
+      if(var_1 == "allies") {
         switch (level.gametype) {
           case "koth":
           case "hq":
@@ -78,7 +78,7 @@ function ref_12802(var0, var1, var2, var3) {
           case "cyber":
           case "sd":
           case "sr":
-            var0.angles = (var0.angles[0], 344, var0.angles[2]);
+            var_0.angles = (var_0.angles[0], 344, var_0.angles[2]);
             break;
         }
       }
@@ -87,28 +87,28 @@ function ref_12802(var0, var1, var2, var3) {
   }
 }
 
-function lbravo_get_length(var0) {
-  if(issubstr(var0, "alpha")) {
-    var0 = "alpha";
+function lbravo_get_length(var_0) {
+  if(issubstr(var_0, "alpha")) {
+    var_0 = "alpha";
   }
 
-  if(issubstr(var0, "bravo")) {
-    var0 = "bravo";
+  if(issubstr(var_0, "bravo")) {
+    var_0 = "bravo";
   }
 
   if(isDefined(self.path)) {
-    var1 = scripts\mp\infilexfil\infilexfil::parsehelipathlength();
-    var1 += getanimlength(level.scr_anim["slot_0"]["lbravo_infil_" + var0 + "_loop_exit"]);
-    var1 += getanimlength(level.scr_anim["slot_0"]["lbravo_infil_" + var0 + "_exit"]);
-    return var1;
+    var_1 = scripts\mp\infilexfil\infilexfil::parsehelipathlength();
+    var_1 += getanimlength(level.scr_anim["slot_0"]["lbravo_infil_" + var_0 + "_loop_exit"]);
+    var_1 += getanimlength(level.scr_anim["slot_0"]["lbravo_infil_" + var_0 + "_exit"]);
+    return var_1;
   }
 
-  var2 = getanimlength(level.scr_anim["slot_0"]["lbravo_infil_" + var1]);
-  var2 += getanimlength(level.scr_anim["slot_0"]["lbravo_infil_" + var1 + "_exit"]);
-  return var2;
+  var_2 = getanimlength(level.scr_anim["slot_0"]["lbravo_infil_" + var_1]);
+  var_2 += getanimlength(level.scr_anim["slot_0"]["lbravo_infil_" + var_1 + "_exit"]);
+  return var_2;
 }
 
-function player_lbravo_infil_think(var0, var1) {
+function player_lbravo_infil_think(var_0, var_1) {
   self endon("death_or_disconnect");
   self endon("player_free_spot");
   self endon("joined_team");
@@ -118,18 +118,18 @@ function player_lbravo_infil_think(var0, var1) {
   }
 
   thread lbravo_infil_radio_idle();
-  thread player_infil_end(var0);
-  var2 = var0.linktoent gettagorigin("origin_animate_jnt");
-  var3 = var0.linktoent gettagangles("origin_animate_jnt");
-  thread scripts\mp\utility\infilexfil::infil_player_rig_updated("slot_" + var1, var2, var3);
-  self.player_rig linkTo(var0.linktoent, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
+  thread player_infil_end(var_0);
+  var_2 = var_0.linktoent gettagorigin("origin_animate_jnt");
+  var_3 = var_0.linktoent gettagangles("origin_animate_jnt");
+  thread scripts\mp\utility\infilexfil::infil_player_rig_updated("slot_" + var_1, var_2, var_3);
+  self.player_rig linkTo(var_0.linktoent, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
   self lerpfovbypreset("80_instant");
   self lerpfovscalefactor(0, 0);
   self.manualoverridewindmaterial = 1;
   self setscriptablepartstate("wind", "100", 0);
-  var4 = var1 == 0 || var1 == 1;
+  var_4 = var_1 == 0 || var_1 == 1;
 
-  if(istrue(level.interactiveinfil) && !isai(self) && var4) {
+  if(istrue(level.interactiveinfil) && !isai(self) && var_4) {
     giveinteractiveinfilweapon();
   } else {
     self setdemeanorviewmodel("safe", "iw8_ges_demeanor_safe_heli");
@@ -137,7 +137,7 @@ function player_lbravo_infil_think(var0, var1) {
 
   thread scripts\mp\infilexfil\infilexfil::infil_scene_fade_in(0, 0.55);
   thread player_van_disconnect();
-  thread cinematiccameratimeline(var0);
+  thread cinematiccameratimeline(var_0);
   scripts\mp\flags::gameflagwait("infil_started");
 
   if(scripts\cp_mp\utility\game_utility::isnightmap()) {
@@ -145,79 +145,79 @@ function player_lbravo_infil_think(var0, var1) {
   }
 
   if(isDefined(self.team) && self.team != "spectator") {
-    var5 = [];
-    GscBinSkip0(0x2e, var5.size, "mp_infil_mix_musicheavy");
+    var_5 = [];
+    GscBinSkip0(0x2e, var_5.size, "mp_infil_mix_musicheavy");
   }
 
   if(isDefined(self.animname) && isPlayer(self)) {
-    var9 = "scn_infil_lbravo_heli_plr1";
+    var_9 = "scn_infil_lbravo_heli_plr1";
 
-    if(isDefined(var1.subtype)) {
-      if(var1.subtype == "alpha") {
+    if(isDefined(var_1.subtype)) {
+      if(var_1.subtype == "alpha") {
         switch (self.animname) {
           case "slot_0":
-            var9 = "scn_infil_lbravo_heli_plr1";
+            var_9 = "scn_infil_lbravo_heli_plr1";
             break;
           case "slot_1":
-            var9 = "scn_infil_lbravo_heli_plr2";
+            var_9 = "scn_infil_lbravo_heli_plr2";
             break;
           case "slot_2":
-            var9 = "scn_infil_lbravo_heli_plr3";
+            var_9 = "scn_infil_lbravo_heli_plr3";
             break;
           case "slot_3":
-            var9 = "scn_infil_lbravo_heli_plr4";
+            var_9 = "scn_infil_lbravo_heli_plr4";
             break;
           case "slot_4":
-            var9 = "scn_infil_lbravo_heli_plr5";
+            var_9 = "scn_infil_lbravo_heli_plr5";
             break;
           case "slot_5":
-            var9 = "scn_infil_lbravo_heli_plr6";
+            var_9 = "scn_infil_lbravo_heli_plr6";
             break;
           default:
-            var9 = "scn_infil_lbravo_heli_plr1";
+            var_9 = "scn_infil_lbravo_heli_plr1";
             break;
         }
       } else {
         switch (self.animname) {
           case "slot_0":
-            var9 = "scn_infil_lbravo_bravo_heli_plr1";
+            var_9 = "scn_infil_lbravo_bravo_heli_plr1";
             break;
           case "slot_1":
-            var9 = "scn_infil_lbravo_bravo_heli_plr2";
+            var_9 = "scn_infil_lbravo_bravo_heli_plr2";
             break;
           case "slot_2":
-            var9 = "scn_infil_lbravo_bravo_heli_plr3";
+            var_9 = "scn_infil_lbravo_bravo_heli_plr3";
             break;
           case "slot_3":
-            var9 = "scn_infil_lbravo_bravo_heli_plr4";
+            var_9 = "scn_infil_lbravo_bravo_heli_plr4";
             break;
           case "slot_4":
-            var9 = "scn_infil_lbravo_bravo_heli_plr5";
+            var_9 = "scn_infil_lbravo_bravo_heli_plr5";
             break;
           case "slot_5":
-            var9 = "scn_infil_lbravo_bravo_heli_plr6";
+            var_9 = "scn_infil_lbravo_bravo_heli_plr6";
             break;
           default:
-            var9 = "scn_infil_lbravo_bravo_heli_plr1";
+            var_9 = "scn_infil_lbravo_bravo_heli_plr1";
             break;
         }
       }
     }
 
     self setclienttriggeraudiozone("lbravo_infil", 2);
-    self playlocalsound(var9);
+    self playlocalsound(var_9);
   }
 
   self setcinematicmotionoverride("player_heli_ride");
 
-  if(istrue(level.interactiveinfil) && !isai(self) && var5) {
+  if(istrue(level.interactiveinfil) && !isai(self) && var_5) {
     thread allowinteractivecombat();
   }
 
-  if(isDefined(var1.path)) {
-    thread playerthinkpath(var1, var2);
+  if(isDefined(var_1.path)) {
+    thread playerthinkpath(var_1, var_2);
   } else {
-    thread playerthinkanim(var1, var2);
+    thread playerthinkanim(var_1, var_2);
   }
 
   level waittill("prematch_over");
@@ -226,66 +226,66 @@ function player_lbravo_infil_think(var0, var1) {
   self.manualoverridewindmaterial = 0;
 }
 
-function playerthinkpath(var0, var1) {
+function playerthinkpath(var_0, var_1) {
   self endon("death_or_disconnect");
   self endon("player_free_spot");
   self endon("joined_team");
 
-  if(var1 == 0) {
+  if(var_1 == 0) {
     self lerpviewangleclamp(1, 0.25, 0.25, 10, 45, 45, 45);
-  } else if(var1 == 1) {
+  } else if(var_1 == 1) {
     self lerpviewangleclamp(1, 0.25, 0.25, 45, 10, 45, 45);
   } else {
     self lerpviewangleclamp(1, 0.25, 0.25, 45, 45, 45, 45);
   }
 
-  rideloop(var0);
+  rideloop(var_0);
   self lerpviewangleclamp(1, 0.25, 0.25, 0, 0, 0, 0);
   self lerpfovbypreset("default_2seconds");
   self lerpfovscalefactor(1, 2);
   self stopanimscriptsceneevent();
-  var0.linktoent scripts\mp\anim::anim_player_solo(self, self.player_rig, "lbravo_infil_" + var0.subtype + "_loop_exit", "origin_animate_jnt");
+  var_0.linktoent scripts\mp\anim::anim_player_solo(self, self.player_rig, "lbravo_infil_" + var_0.subtype + "_loop_exit", "origin_animate_jnt");
   self setcinematicmotionoverride("iw8_playermotion_mp");
   self.player_rig unlink();
-  var0 scripts\mp\anim::anim_player_solo(self, self.player_rig, "lbravo_infil_" + var0.subtype + "_exit");
+  var_0 scripts\mp\anim::anim_player_solo(self, self.player_rig, "lbravo_infil_" + var_0.subtype + "_exit");
 }
 
-function rideloop(var0) {
+function rideloop(var_0) {
   self endon("death_or_disconnect");
   self endon("player_free_spot");
   self endon("joined_team");
-  var0.linktoent endon("unload");
+  var_0.linktoent endon("unload");
 
   for(;;) {
-    var0.linktoent scripts\mp\anim::anim_player_solo(self, self.player_rig, "lbravo_infil_" + var0.subtype + "_loop", "origin_animate_jnt");
+    var_0.linktoent scripts\mp\anim::anim_player_solo(self, self.player_rig, "lbravo_infil_" + var_0.subtype + "_loop", "origin_animate_jnt");
   }
 }
 
-function playerthinkanim(var0, var1) {
+function playerthinkanim(var_0, var_1) {
   self endon("death_or_disconnect");
   self endon("player_free_spot");
   self endon("joined_team");
-  var2 = var0.subtype;
+  var_2 = var_0.subtype;
 
   if(getDvar("mapname") == "mp_downtown_gw") {
-    if(self.team == "allies" && (var0.ref_1214c == "alpha1" || var0.ref_1214c == "alpha2")) {
-      var2 = "bravo";
+    if(self.team == "allies" && (var_0.ref_1214c == "alpha1" || var_0.ref_1214c == "alpha2")) {
+      var_2 = "bravo";
     }
 
-    if(self.team == "axis" && var0.ref_1214c == "bravo") {
-      var2 = "alpha";
+    if(self.team == "axis" && var_0.ref_1214c == "bravo") {
+      var_2 = "alpha";
     }
   }
 
-  if(var1 == 0) {
+  if(var_1 == 0) {
     self lerpviewangleclamp(1, 0.25, 0.25, 10, 45, 45, 45);
-  } else if(var1 == 1) {
+  } else if(var_1 == 1) {
     self lerpviewangleclamp(1, 0.25, 0.25, 45, 10, 45, 45);
   } else {
     self lerpviewangleclamp(1, 0.25, 0.25, 45, 45, 45, 45);
   }
 
-  var0.linktoent scripts\mp\anim::anim_player_solo(self, self.player_rig, "lbravo_infil_" + var2, "origin_animate_jnt");
+  var_0.linktoent scripts\mp\anim::anim_player_solo(self, self.player_rig, "lbravo_infil_" + var_2, "origin_animate_jnt");
 
   if(self islinked()) {
     self lerpviewangleclamp(1, 0.25, 0.25, 0, 0, 0, 0);
@@ -293,7 +293,7 @@ function playerthinkanim(var0, var1) {
 
   self.player_rig unlink();
   self lerpfovscalefactor(1, 2);
-  var0 scripts\mp\anim::anim_player_solo(self, self.player_rig, "lbravo_infil_" + var2 + "_exit");
+  var_0 scripts\mp\anim::anim_player_solo(self, self.player_rig, "lbravo_infil_" + var_2 + "_exit");
   thread scriptswitchweaponhack();
   thread clear_infil_ambient_zone();
   self visionsetnakedforplayer("", 0.75);
@@ -313,33 +313,33 @@ function clear_infil_ambient_zone() {
 
 function lbravo_infil_radio_idle() {
   if(isPlayer(self)) {
-    var0 = spawn("script_origin", (0, 0, 0));
-    var0 showonlytoplayer(self);
+    var_0 = spawn("script_origin", (0, 0, 0));
+    var_0 showonlytoplayer(self);
 
     if(isDefined(self.team)) {
-      var1 = scripts\mp\utility\teams::getteamvoiceinfix(self.team);
-      var2 = "dx_mpo_" + var1 + "op_drone_deathchatter";
+      var_1 = scripts\mp\utility\teams::getteamvoiceinfix(self.team);
+      var_2 = "dx_mpo_" + var_1 + "op_drone_deathchatter";
     } else {
-      var2 = "dx_mpo_usop_drone_deathchatter";
+      var_2 = "dx_mpo_usop_drone_deathchatter";
     }
 
-    if(soundexists(var2)) {
-      var2 playLoopSound(var2);
+    if(soundexists(var_2)) {
+      var_2 playLoopSound(var_2);
     } else {
-      var2 playLoopSound("dx_mpo_usop_drone_deathchatter");
+      var_2 playLoopSound("dx_mpo_usop_drone_deathchatter");
     }
 
     scripts\mp\flags::gameflagwait("infil_started");
     wait 2;
-    var2 stoploopsound(var2);
-    var2 delete();
+    var_2 stoploopsound(var_2);
+    var_2 delete();
     return;
   }
 }
 
-function player_infil_end(var0) {
+function player_infil_end(var_0) {
   self endon("disconnect");
-  scripts\engine\utility::waittill_any_ents(level, "prematch_over", var0, "prematch_over");
+  scripts\engine\utility::waittill_any_ents(level, "prematch_over", var_0, "prematch_over");
   self notify("remove_rig");
   self clearclienttriggeraudiozone(1);
   scripts\mp\utility\player::setdof_default();
@@ -359,23 +359,23 @@ function player_van_disconnect() {
   }
 }
 
-function infilthink(var0, var1) {
-  var2 = getdvarfloat("NMORQOTSK", 0.2);
+function infilthink(var_0, var_1) {
+  var_2 = getdvarfloat("NMORQOTSK", 0.2);
 
-  foreach(var4 in getEntArray("infil_delete", "script_noteworthy")) {
-    var4 delete();
+  foreach(var_4 in getEntArray("infil_delete", "script_noteworthy")) {
+    var_4 delete();
   }
 
-  if(issubstr(var1, "alpha")) {
-    var1 = "alpha";
+  if(issubstr(var_1, "alpha")) {
+    var_1 = "alpha";
   }
 
-  if(issubstr(var1, "bravo")) {
-    var1 = "bravo";
+  if(issubstr(var_1, "bravo")) {
+    var_1 = "bravo";
   }
 
-  thread vehiclethink(var0, self.scene_node, var1);
-  thread actorthink(var0, self.scene_node, var1);
+  thread vehiclethink(var_0, self.scene_node, var_1);
+  thread actorthink(var_0, self.scene_node, var_1);
   scripts\mp\flags::gameflagwait("infil_started");
   setDvar("TLMMOPMSK", 1);
   setDvar("NMORQOTSK", 1);
@@ -388,7 +388,7 @@ function infilthink(var0, var1) {
 
   scripts\engine\utility::waittill_any_ents(level, "prematch_over", self, "prematch_over");
   setDvar("TLMMOPMSK", 0);
-  setDvar("NMORQOTSK", var2);
+  setDvar("NMORQOTSK", var_2);
 
   while(isDefined(self.linktoent) || isDefined(self.actors)) {
     waitframe();
@@ -398,159 +398,159 @@ function infilthink(var0, var1) {
   self delete();
 }
 
-function vehiclethink(var0, var1, var2, var3) {
-  self.linktoent = spawninfilvehicle(var1, var0, var2);
+function vehiclethink(var_0, var_1, var_2, var_3) {
+  self.linktoent = spawninfilvehicle(var_1, var_0, var_2);
 
   if(isDefined(self.path)) {
-    thread vehiclethinkpath(var0, var1, var2, var3);
+    thread vehiclethinkpath(var_0, var_1, var_2, var_3);
   } else {
-    thread vehiclethinkanim(var0, var1, var2, var3);
+    thread vehiclethinkanim(var_0, var_1, var_2, var_3);
   }
 
-  thread heli_interior_sfx(var2);
+  thread heli_interior_sfx(var_2);
   level waittill("prematch_over");
   wait 3;
   self.linktoent solid();
 }
 
-function vehiclethinkanim(var0, var1, var2, var3) {
+function vehiclethinkanim(var_0, var_1, var_2, var_3) {
   if(self.ref_1214c != self.subtype && getDvar("mapname") == "mp_downtown_gw") {
-    var2 = self.ref_1214c;
+    var_2 = self.ref_1214c;
   }
 
-  if(var0 == "allies" && (self.ref_1214c == "alpha" || self.ref_1214c == "alpha2") && getDvar("mapname") == "mp_boneyard_gw") {
-    var2 = self.ref_1214c;
+  if(var_0 == "allies" && (self.ref_1214c == "alpha" || self.ref_1214c == "alpha2") && getDvar("mapname") == "mp_boneyard_gw") {
+    var_2 = self.ref_1214c;
   }
 
-  scripts\common\anim::anim_first_frame_solo(self.linktoent, "lbravo_infil_" + var2 + "_" + var0);
+  scripts\common\anim::anim_first_frame_solo(self.linktoent, "lbravo_infil_" + var_2 + "_" + var_0);
   scripts\mp\flags::gameflagwait("infil_started");
   self.linktoent setscriptablepartstate("engine", "on", 0);
   self.linktoent setscriptablepartstate("infil_lights", "on", 0);
-  thread scripts\common\anim::anim_single_solo(self.linktoent, "lbravo_infil_" + var2 + "_" + var0);
-  var4 = getanimlength(level.scr_anim[self.linktoent.animname]["lbravo_infil_" + var2 + "_" + var0]);
-  wait var4;
+  thread scripts\common\anim::anim_single_solo(self.linktoent, "lbravo_infil_" + var_2 + "_" + var_0);
+  var_4 = getanimlength(level.scr_anim[self.linktoent.animname]["lbravo_infil_" + var_2 + "_" + var_0]);
+  wait var_4;
   self.linktoent delete();
   self.linktoent = undefined;
 }
 
-function spawninfilvehicle(var0, var1, var2) {
-  var3 = var0.origin;
-  var4 = var0.angles;
+function spawninfilvehicle(var_0, var_1, var_2) {
+  var_3 = var_0.origin;
+  var_4 = var_0.angles;
 
   if(isDefined(self.path)) {
-    var3 = self.path.origin;
-    var4 = self.path.angles;
+    var_3 = self.path.origin;
+    var_4 = self.path.angles;
   }
 
-  if(var1 == "allies") {
-    var5 = "veh8_mil_air_lbravo_personnel";
+  if(var_1 == "allies") {
+    var_5 = "veh8_mil_air_lbravo_personnel";
   } else {
-    var5 = "veh8_mil_air_lbravo_personnel_east";
+    var_5 = "veh8_mil_air_lbravo_personnel_east";
   }
 
-  var6 = spawnVehicle(var5, var3, "lbravo_infil_mp", var4, var5);
-  var6 setvehicleteam(var2);
-  var6.animname = "lbravo";
-  var6 setCanDamage(0);
-  var6 notsolid();
-  var6.infil = self;
-  var7 = getEnt("lbravo_clip", "targetname");
+  var_6 = spawnVehicle(var_5, var_3, "lbravo_infil_mp", var_4, var_5);
+  var_6 setvehicleteam(var_2);
+  var_6.animname = "lbravo";
+  var_6 setCanDamage(0);
+  var_6 notsolid();
+  var_6.infil = self;
+  var_7 = getEnt("lbravo_clip", "targetname");
 
-  if(isDefined(var7)) {
-    var8 = spawn("script_model", var6.origin);
-    var8.angles = var6.angles;
-    var8 clonebrushmodeltoscriptmodel(var7);
-    var8 linkTo(var6);
+  if(isDefined(var_7)) {
+    var_8 = spawn("script_model", var_6.origin);
+    var_8.angles = var_6.angles;
+    var_8 clonebrushmodeltoscriptmodel(var_7);
+    var_8 linkTo(var_6);
   }
 
-  return var6;
+  return var_6;
 }
 
-function actorthink(var0, var1, var2, var3) {
-  self.actors = thread spawnactors(var0, var2, var3);
+function actorthink(var_0, var_1, var_2, var_3) {
+  self.actors = thread spawnactors(var_0, var_2, var_3);
   self.actors[0].anim_playsound_func = &commander_play_sound_func;
-  self.linktoent scripts\common\anim::anim_first_frame(self.actors, "lbravo_infil_" + var2, "origin_animate_jnt");
+  self.linktoent scripts\common\anim::anim_first_frame(self.actors, "lbravo_infil_" + var_2, "origin_animate_jnt");
   scripts\mp\utility\infilexfil::hideactors();
   scripts\mp\flags::gameflagwait("infil_started");
   scripts\mp\utility\infilexfil::showactors();
 
   if(isDefined(self.path)) {
-    actorthinkpath(var0, var1, var2, var3);
+    actorthinkpath(var_0, var_1, var_2, var_3);
     return;
   }
 
-  actorthinkanim(var0, var1, var2, var3);
+  actorthinkanim(var_0, var_1, var_2, var_3);
 }
 
-function actorthinkpath(var0, var1, var2, var3) {
+function actorthinkpath(var_0, var_1, var_2, var_3) {
   thread actorloopthink(self.actors[0]);
   thread actorloopthink(self.actors[1]);
 }
 
-function actorloopthink(var0) {
-  actorloop(var0);
+function actorloopthink(var_0) {
+  actorloop(var_0);
 }
 
-function actorloop(var0) {
-  var0 endon("death");
+function actorloop(var_0) {
+  var_0 endon("death");
   self.linktoent endon("reached_dynamic_path_end");
 
   for(;;) {
-    self.linktoent scripts\common\anim::anim_single_solo(var0, "lbravo_infil_" + self.subtype + "_loop", "origin_animate_jnt");
+    self.linktoent scripts\common\anim::anim_single_solo(var_0, "lbravo_infil_" + self.subtype + "_loop", "origin_animate_jnt");
   }
 }
 
-function actorthinkanim(var0, var1, var2, var3) {
-  self.linktoent thread scripts\common\anim::anim_single(self.actors, "lbravo_infil_" + var2, "origin_animate_jnt");
-  var4 = getanimlength(level.scr_anim["pilot"]["lbravo_infil_" + var2]);
-  wait var4;
+function actorthinkanim(var_0, var_1, var_2, var_3) {
+  self.linktoent thread scripts\common\anim::anim_single(self.actors, "lbravo_infil_" + var_2, "origin_animate_jnt");
+  var_4 = getanimlength(level.scr_anim["pilot"]["lbravo_infil_" + var_2]);
+  wait var_4;
 
-  foreach(var6 in self.actors) {
-    var6 delete();
+  foreach(var_6 in self.actors) {
+    var_6 delete();
   }
 
   self.actors = undefined;
 }
 
-function spawnactors(var0, var1, var2) {
-  var3 = [];
-  GscBinSkip0(0x2e, var3.size, spawn_anim_model(self.linktoent, "pilot", "origin_animate_jnt", "body_pilot_helicopter_british", "head_pilot_helicopter_british"));
+function spawnactors(var_0, var_1, var_2) {
+  var_3 = [];
+  GscBinSkip0(0x2e, var_3.size, spawn_anim_model(self.linktoent, "pilot", "origin_animate_jnt", "body_pilot_helicopter_british", "head_pilot_helicopter_british"));
 }
 
-function spawn_anim_model(var0, var1, var2, var3, var4) {
-  var5 = spawn("script_model", (0, 0, 0));
-  var5 setModel(var2);
+function spawn_anim_model(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = spawn("script_model", (0, 0, 0));
+  var_5 setModel(var_2);
 
-  if(isDefined(var3)) {
-    var6 = spawn("script_model", (0, 0, 0));
-    var6 setModel(var3);
-    var6 linkTo(var5, "j_spine4", (0, 0, 0), (0, 0, 0));
-    var5.head = var6;
-    var5 thread scripts\engine\utility::delete_on_death(var6);
+  if(isDefined(var_3)) {
+    var_6 = spawn("script_model", (0, 0, 0));
+    var_6 setModel(var_3);
+    var_6 linkTo(var_5, "j_spine4", (0, 0, 0), (0, 0, 0));
+    var_5.head = var_6;
+    var_5 thread scripts\engine\utility::delete_on_death(var_6);
   }
 
-  if(isDefined(var4)) {
-    var7 = spawn("script_model", (0, 0, 0));
-    var7 setModel(var4);
-    var7 linkTo(var5, "j_gun", (0, 0, 0), (0, 0, 0));
-    var5 thread scripts\engine\utility::delete_on_death(var7);
-    var5.weapon = var7;
+  if(isDefined(var_4)) {
+    var_7 = spawn("script_model", (0, 0, 0));
+    var_7 setModel(var_4);
+    var_7 linkTo(var_5, "j_gun", (0, 0, 0), (0, 0, 0));
+    var_5 thread scripts\engine\utility::delete_on_death(var_7);
+    var_5.weapon = var_7;
   }
 
-  var5.animname = var0;
-  var5 scripts\common\anim::setanimtree();
+  var_5.animname = var_0;
+  var_5 scripts\common\anim::setanimtree();
 
-  if(isDefined(var1)) {
-    thread scripts\engine\utility::delete_on_death(var5);
-    var5 linkTo(self, var1, (0, 0, 0), (0, 0, 0));
+  if(isDefined(var_1)) {
+    thread scripts\engine\utility::delete_on_death(var_5);
+    var_5 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   }
 
-  return var5;
+  return var_5;
 }
 
-function initanims(var0, var1, var2) {
-  script_model_alpha_anims(var0);
-  vehicles_alpha_anims(var0, var1, var2);
+function initanims(var_0, var_1, var_2) {
+  script_model_alpha_anims(var_0);
+  vehicles_alpha_anims(var_0, var_1, var_2);
   scripts\common\anim::addnotetrack_customfunction("slot_0", "free_look", &scripts\mp\utility\infilexfil::player_free_look, "lbravo_infil_alpha_exit");
   scripts\common\anim::addnotetrack_customfunction("slot_1", "free_look", &scripts\mp\utility\infilexfil::player_free_look, "lbravo_infil_alpha_exit");
   scripts\common\anim::addnotetrack_customfunction("slot_2", "free_look", &scripts\mp\utility\infilexfil::player_free_look, "lbravo_infil_alpha_exit");
@@ -615,8 +615,8 @@ function initanims(var0, var1, var2) {
 
 #using_animtree("");
 
-function script_model_alpha_anims(var0) {
-  switch (var0) {
+function script_model_alpha_anims(var_0) {
+  switch (var_0) {
     case "alpha":
       level.scr_animtree["pilot"] = #animtree;
       level.scr_anim["pilot"]["lbravo_infil_alpha"] = $mp_infil_lbravo_a_pilot;
@@ -866,38 +866,38 @@ function script_model_alpha_anims(var0) {
   }
 }
 
-function vehicles_alpha_anims(var0, var1, var2) {
-  if(isDefined(var2) && var0 != var2 && getDvar("mapname") == "mp_downtown_gw") {
-    switch (var2) {
+function vehicles_alpha_anims(var_0, var_1, var_2) {
+  if(isDefined(var_2) && var_0 != var_2 && getDvar("mapname") == "mp_downtown_gw") {
+    switch (var_2) {
       case "alpha1":
-        if(var1 == "axis") {
-          level.scr_anim["lbravo"]["lbravo_infil_" + var2 + "_" + var1] = % mp_infil_lbravo_a_heli_downtown_east;
+        if(var_1 == "axis") {
+          level.scr_anim["lbravo"]["lbravo_infil_" + var_2 + "_" + var_1] = % mp_infil_lbravo_a_heli_downtown_east;
         } else {
-          level.scr_anim["lbravo"]["lbravo_infil_" + var2 + "_" + var1] = $mp_infil_lbravo_b2_heli_downtown_west;
+          level.scr_anim["lbravo"]["lbravo_infil_" + var_2 + "_" + var_1] = $mp_infil_lbravo_b2_heli_downtown_west;
         }
 
         break;
       case "alpha2":
-        if(var1 == "axis") {
-          level.scr_anim["lbravo"]["lbravo_infil_" + var2 + "_" + var1] = % mp_infil_lbravo_a_heli_downtown_east;
+        if(var_1 == "axis") {
+          level.scr_anim["lbravo"]["lbravo_infil_" + var_2 + "_" + var_1] = % mp_infil_lbravo_a_heli_downtown_east;
         } else {
-          level.scr_anim["lbravo"]["lbravo_infil_" + var2 + "_" + var1] = % mp_infil_lbravo_b1_heli_downtown_west;
+          level.scr_anim["lbravo"]["lbravo_infil_" + var_2 + "_" + var_1] = % mp_infil_lbravo_b1_heli_downtown_west;
         }
 
         break;
       case "bravo1":
-        if(var1 == "axis") {
-          level.scr_anim["lbravo"]["lbravo_infil_" + var2 + "_" + var1] = % mp_infil_lbravo_b2_heli_downtown_east;
+        if(var_1 == "axis") {
+          level.scr_anim["lbravo"]["lbravo_infil_" + var_2 + "_" + var_1] = % mp_infil_lbravo_b2_heli_downtown_east;
         } else {
-          level.scr_anim["lbravo"]["lbravo_infil_" + var2 + "_" + var1] = % mp_infil_lbravo_b1_heli_downtown_west;
+          level.scr_anim["lbravo"]["lbravo_infil_" + var_2 + "_" + var_1] = % mp_infil_lbravo_b1_heli_downtown_west;
         }
 
         break;
       case "bravo2":
-        if(var1 == "axis") {
-          level.scr_anim["lbravo"]["lbravo_infil_" + var2 + "_" + var1] = % mp_infil_lbravo_b1_heli_downtown_east;
+        if(var_1 == "axis") {
+          level.scr_anim["lbravo"]["lbravo_infil_" + var_2 + "_" + var_1] = % mp_infil_lbravo_b1_heli_downtown_east;
         } else {
-          level.scr_anim["lbravo"]["lbravo_infil_" + var2 + "_" + var1] = % mp_infil_lbravo_b2_heli_downtown_west;
+          level.scr_anim["lbravo"]["lbravo_infil_" + var_2 + "_" + var_1] = % mp_infil_lbravo_b2_heli_downtown_west;
         }
 
         break;
@@ -906,54 +906,54 @@ function vehicles_alpha_anims(var0, var1, var2) {
     return;
   }
 
-  switch (var0) {
+  switch (var_0) {
     case "alpha":
       level.scr_animtree["lbravo"] = #animtree;
 
       switch (getDvar("mapname")) {
         case "mp_farms2_gw":
-          if(var1 == "axis") {
-            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli_farm_gw_east;
+          if(var_1 == "axis") {
+            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli_farm_gw_east;
           } else {
-            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli_farm_gw_west;
+            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli_farm_gw_west;
           }
 
           break;
         case "mp_downtown_gw":
-          if(var1 == "axis") {
-            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli_downtown_east;
+          if(var_1 == "axis") {
+            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli_downtown_east;
           } else {
-            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli_downtown_west;
+            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli_downtown_west;
           }
 
           break;
         case "mp_quarry2":
-          if(var1 == "axis") {
-            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli_quarry_east;
+          if(var_1 == "axis") {
+            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli_quarry_east;
           } else {
-            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli_quarry_west;
+            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli_quarry_west;
           }
 
           break;
         case "mp_deadzone":
-          if(var1 == "axis") {
-            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli_aniyah_gw_east;
+          if(var_1 == "axis") {
+            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli_aniyah_gw_east;
           } else {
-            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli_deadzone_west;
+            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli_deadzone_west;
           }
 
           break;
         case "mp_raid":
-          level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli_raid;
+          level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli_raid;
           break;
         case "mp_petrograd":
-          level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli_petrograd;
+          level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli_petrograd;
           break;
         case "mp_piccadilly":
-          level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli_piccadilly;
+          level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli_piccadilly;
           break;
         case "mp_aniyah":
-          if(var1 == "axis") {
+          if(var_1 == "axis") {
             switch (level.gametype) {
               case "koth":
               case "hq":
@@ -962,67 +962,67 @@ function vehicles_alpha_anims(var0, var1, var2) {
               case "cyber":
               case "sd":
               case "sr":
-                level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli;
+                level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli;
                 break;
               default:
-                level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli_aniyah_gw_east;
+                level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli_aniyah_gw_east;
                 break;
             }
           } else {
-            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli_aniyah_hq;
+            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli_aniyah_hq;
           }
 
           break;
         case "mp_aniyah_tac":
-          level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli_aniyah_tactical;
+          level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli_aniyah_tactical;
           break;
         case "mp_emporium":
-          if(var1 == "axis") {
-            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli_emporium_east;
+          if(var_1 == "axis") {
+            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli_emporium_east;
           } else {
-            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli_emporium_west;
+            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli_emporium_west;
           }
 
           break;
         case "mp_backlot2":
         case "mp_village2":
-          level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli_backlot;
+          level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli_backlot;
           break;
         case "mp_boneyard_gw":
-          if(var1 == "allies" && var2 == "alpha" || var2 == "alpha2") {
-            level.scr_anim["lbravo"]["lbravo_infil_" + var2 + "_" + var1] = % mp_infil_lbravo_a_heli_petrograd;
+          if(var_1 == "allies" && var_2 == "alpha" || var_2 == "alpha2") {
+            level.scr_anim["lbravo"]["lbravo_infil_" + var_2 + "_" + var_1] = % mp_infil_lbravo_a_heli_petrograd;
           } else {
-            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli;
+            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli;
           }
 
           break;
         case "mp_promenade_gw":
-          if(var1 == "axis" && var2 == "alpha") {
-            level.scr_anim["lbravo"]["lbravo_infil_" + var2 + "_" + var1] = % mp_infil_lbravo_a_heli_aniyah_tactical;
+          if(var_1 == "axis" && var_2 == "alpha") {
+            level.scr_anim["lbravo"]["lbravo_infil_" + var_2 + "_" + var_1] = % mp_infil_lbravo_a_heli_aniyah_tactical;
           } else {
-            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli;
+            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli;
           }
 
           break;
         case "mp_oilrig":
-          level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli_oilrig_coalition;
+          level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli_oilrig_coalition;
           break;
         case "mp_garden":
-          level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli_garden;
+          level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli_garden;
           break;
         case "mp_harbor":
-          level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli_harbor;
+          level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli_harbor;
           break;
         case "mp_riverside_gw":
-          if(var1 == "axis") {
-            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli_riverside_allegiance;
+          if(var_1 == "axis") {
+            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli_riverside_allegiance;
           } else {
-            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli_riverside_coalition;
+            level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli_riverside_coalition;
           }
 
           break;
         default:
-          level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var1] = % mp_infil_lbravo_a_heli;
+          level.scr_anim["lbravo"]["lbravo_infil_alpha_" + var_1] = % mp_infil_lbravo_a_heli;
           break;
       }
 
@@ -1032,46 +1032,46 @@ function vehicles_alpha_anims(var0, var1, var2) {
 
       switch (getDvar("mapname")) {
         case "mp_farms2_gw":
-          if(var1 == "axis") {
-            level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var1] = % mp_infil_lbravo_b_heli_farm_gw_east;
+          if(var_1 == "axis") {
+            level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var_1] = % mp_infil_lbravo_b_heli_farm_gw_east;
           } else {
-            level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var1] = % mp_infil_lbravo_b_heli_farm_gw_west;
+            level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var_1] = % mp_infil_lbravo_b_heli_farm_gw_west;
           }
 
           break;
         case "mp_downtown_gw":
-          if(var1 == "axis") {
-            level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var1] = % mp_infil_lbravo_a_heli_downtown_east;
+          if(var_1 == "axis") {
+            level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var_1] = % mp_infil_lbravo_a_heli_downtown_east;
           } else {
-            level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var1] = % mp_infil_lbravo_a_heli_downtown_west;
+            level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var_1] = % mp_infil_lbravo_a_heli_downtown_west;
           }
 
           break;
         case "mp_quarry2":
-          if(var1 == "axis") {
-            level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var1] = % mp_infil_lbravo_b_heli_quarry_east;
+          if(var_1 == "axis") {
+            level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var_1] = % mp_infil_lbravo_b_heli_quarry_east;
           } else {
-            level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var1] = % mp_infil_lbravo_b_heli_quarry_west;
+            level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var_1] = % mp_infil_lbravo_b_heli_quarry_west;
           }
 
           break;
         case "mp_deadzone":
-          if(var1 == "axis") {
-            level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var1] = % mp_infil_lbravo_b_heli_aniyah_gw_east;
+          if(var_1 == "axis") {
+            level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var_1] = % mp_infil_lbravo_b_heli_aniyah_gw_east;
           } else {
-            level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var1] = % mp_infil_lbravo_b_heli_deadzone_west;
+            level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var_1] = % mp_infil_lbravo_b_heli_deadzone_west;
           }
 
           break;
         case "mp_runner":
         case "mp_runner_pm":
-          level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var1] = % mp_infil_lbravo_b_heli_runner;
+          level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var_1] = % mp_infil_lbravo_b_heli_runner;
           break;
         case "mp_raid":
-          level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var1] = % mp_infil_lbravo_b_heli_raid;
+          level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var_1] = % mp_infil_lbravo_b_heli_raid;
           break;
         case "mp_aniyah":
-          if(var1 == "axis") {
+          if(var_1 == "axis") {
             switch (level.gametype) {
               case "koth":
               case "hq":
@@ -1080,50 +1080,50 @@ function vehicles_alpha_anims(var0, var1, var2) {
               case "cyber":
               case "sd":
               case "sr":
-                level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var1] = % mp_infil_lbravo_b_heli;
+                level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var_1] = % mp_infil_lbravo_b_heli;
                 break;
               default:
-                level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var1] = % mp_infil_lbravo_b_heli_aniyah_gw_east;
+                level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var_1] = % mp_infil_lbravo_b_heli_aniyah_gw_east;
                 break;
             }
           } else {
-            level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var1] = % mp_infil_lbravo_b_heli_aniyah_hq;
+            level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var_1] = % mp_infil_lbravo_b_heli_aniyah_hq;
           }
 
           break;
         case "mp_aniyah_tac":
-          level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var1] = % mp_infil_lbravo_a_heli_aniyah_tactical;
+          level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var_1] = % mp_infil_lbravo_a_heli_aniyah_tactical;
           break;
         case "mp_oilrig":
-          level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var1] = % mp_infil_lbravo_b_heli_oilrig_coalition;
+          level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var_1] = % mp_infil_lbravo_b_heli_oilrig_coalition;
           break;
         case "mp_riverside_gw":
-          if(var1 == "axis") {
-            level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var1] = % mp_infil_lbravo_b_heli_riverside_allegiance;
+          if(var_1 == "axis") {
+            level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var_1] = % mp_infil_lbravo_b_heli_riverside_allegiance;
           } else {
-            level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var1] = % mp_infil_lbravo_b_heli_riverside_coalition;
+            level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var_1] = % mp_infil_lbravo_b_heli_riverside_coalition;
           }
 
           break;
         default:
-          level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var1] = % mp_infil_lbravo_b_heli;
+          level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var_1] = % mp_infil_lbravo_b_heli;
           break;
       }
 
       break;
     default:
-      level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var1] = % mp_infil_lbravo_b_heli;
+      level.scr_anim["lbravo"]["lbravo_infil_bravo_" + var_1] = % mp_infil_lbravo_b_heli;
       break;
   }
 }
 
-function commander_play_sound_func(var0, var1, var2) {
-  foreach(var4 in self.infil.players) {
-    self playsoundtoplayer(var0, var4);
+function commander_play_sound_func(var_0, var_1, var_2) {
+  foreach(var_4 in self.infil.players) {
+    self playsoundtoplayer(var_0, var_4);
   }
 }
 
-function vehiclethinkpath(var0, var1, var2, var3) {
+function vehiclethinkpath(var_0, var_1, var_2, var_3) {
   scripts\mp\flags::gameflagwait("infil_started");
   self.linktoent setscriptablepartstate("engine", "on", 0);
   self.linktoent.unload_hover_offset = 116;
@@ -1135,10 +1135,10 @@ function vehiclethinkpath(var0, var1, var2, var3) {
   self.linktoent = undefined;
 }
 
-function heli_interior_sfx(var0) {
+function heli_interior_sfx(var_0) {
   scripts\mp\flags::gameflagwait("infil_started");
 
-  if(var0 == "alpha") {
+  if(var_0 == "alpha") {
     self.linktoent playsoundonmovingent("scn_infil_lbravo_heli1_lr");
     self.linktoent playsoundonmovingent("scn_infil_lbravo_heli1_feet");
   } else {
@@ -1150,24 +1150,24 @@ function heli_interior_sfx(var0) {
 }
 
 function giveinteractiveinfilweapon() {
-  var0 = getcompleteweaponname("iw8_sn_alpha50_mp", ["rec_alpha50", "front_alpha50", "back_alpha50", "mag_alpha50", "acog_alpha50_light", "mod_infil_alpha50"]);
-  scripts\cp_mp\utility\inventory_utility::_giveweapon(var0, undefined, undefined, 1);
+  var_0 = getcompleteweaponname("iw8_sn_alpha50_mp", ["rec_alpha50", "front_alpha50", "back_alpha50", "mag_alpha50", "acog_alpha50_light", "mod_infil_alpha50"]);
+  scripts\cp_mp\utility\inventory_utility::_giveweapon(var_0, undefined, undefined, 1);
   scripts\common\utility::allow_weapon_switch(1);
-  var1 = scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var0, 0);
+  var_1 = scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var_0, 0);
 
-  if(var1) {
-    self.infilweapon = var0;
+  if(var_1) {
+    self.infilweapon = var_0;
     scripts\common\utility::allow_weapon_switch(0);
     scripts\mp\utility\weapon::setrecoilscale(0, 50);
   } else {
-    scripts\cp_mp\utility\inventory_utility::_takeweapon(var0);
+    scripts\cp_mp\utility\inventory_utility::_takeweapon(var_0);
     scripts\cp_mp\utility\inventory_utility::forcevalidweapon();
   }
 
-  return var1;
+  return var_1;
 }
 
-function allowinteractivecombat(var0) {
+function allowinteractivecombat(var_0) {
   self endon("death_or_disconnect");
   self endon("player_free_spot");
   self endon("joined_team");
@@ -1195,26 +1195,26 @@ function interactivecombatmessaging() {
   self.infil waittill("event_intro");
   self iprintlnbold("Enemies spotted! LZ is hot!");
   wait 3.25;
-  var0 = getinteractiveinfilline(self.animname, level.mapname);
-  self iprintlnbold(var0);
+  var_0 = getinteractiveinfilline(self.animname, level.mapname);
+  self iprintlnbold(var_0);
   self.infil waittill("event_shootingWindow_open");
   self iprintlnbold("Targets Marked! Take them out!");
 }
 
-function getinteractiveinfilline(var0, var1) {
-  switch (var1) {
+function getinteractiveinfilline(var_0, var_1) {
+  switch (var_1) {
     case "mp_raid":
     case "mp_euphrates":
     case "mp_deadzone":
-      if(var0 == "slot_0" || var0 == "slot_1") {
+      if(var_0 == "slot_0" || var_0 == "slot_1") {
         return "On the Rooftop! I'm swinging around for a shot!";
       }
     case "mp_runner":
-      if(var0 == "slot_0" || var0 == "slot_1") {
+      if(var_0 == "slot_0" || var_0 == "slot_1") {
         return "On the Rooftop! Dead Ahead!";
       }
 
-      if(var0 == "slot_3" || var0 == "slot_5") {
+      if(var_0 == "slot_3" || var_0 == "slot_5") {
         return "In the pit! On the right!";
       }
 
@@ -1225,22 +1225,22 @@ function getinteractiveinfilline(var0, var1) {
   self iprintlnbold("Targets Marked! Take them out!");
 }
 
-function interactiveinfilthink(var0) {
+function interactiveinfilthink(var_0) {
   thread manageinteractivecombattargets(level);
 }
 
-function manageinteractivecombattargets(var0) {
+function manageinteractivecombattargets(var_0) {
   while(!isDefined(level.infiltargets)) {
     waitframe();
   }
 
-  foreach(var2 in level.infiltargets["allies"]) {
-    thread targetdamagethink(var2);
+  foreach(var_2 in level.infiltargets["allies"]) {
+    thread targetdamagethink(var_2);
     thread deleteoninfilcomplete();
   }
 }
 
-function targetdamagethink(var0) {
+function targetdamagethink(var_0) {
   level endon("prematch_over");
 
   if(istrue(self.isbonus)) {
@@ -1250,17 +1250,17 @@ function targetdamagethink(var0) {
   }
 
   wait level.interactiveinfilstart;
-  var1 = scripts\mp\utility\outline::outlineenableforteam(self, var0, scripts\engine\utility::ter_op(istrue(self.isbonus), "outline_depth_red", "outline_depth_orange"), "level_script");
+  var_1 = scripts\mp\utility\outline::outlineenableforteam(self, var_0, scripts\engine\utility::ter_op(istrue(self.isbonus), "outline_depth_red", "outline_depth_orange"), "level_script");
 
   for(;;) {
-    self waittill("damage", var2, var3, var4, var5, var6, var7, var8, var9, var10, var11);
+    self waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 
-    if(var2 >= self.health) {
-      scripts\mp\utility\outline::outlinedisable(var1, self);
+    if(var_2 >= self.health) {
+      scripts\mp\utility\outline::outlinedisable(var_1, self);
 
       if(istrue(self.isbonus)) {
-        var3 thread scripts\mp\rank::giverankxp("infil_bonus", 1000);
-        var3 thread scripts\mp\rank::scoreeventpopup("infil_bonus");
+        var_3 thread scripts\mp\rank::giverankxp("infil_bonus", 1000);
+        var_3 thread scripts\mp\rank::scoreeventpopup("infil_bonus");
       }
 
       break;
@@ -1286,7 +1286,7 @@ function deleteoninfilcomplete() {
   }
 }
 
-function cinematiccameratimeline(var0) {
+function cinematiccameratimeline(var_0) {
   self endon("death_or_disconnect");
   self endon("player_free_spot");
   self endon("joined_team");
@@ -1303,17 +1303,17 @@ function cinematiccameratimeline(var0) {
   }
 }
 
-function customground(var0) {
-  scripts\mp\utility\infilexfil::cam_shake_off(var0);
+function customground(var_0) {
+  scripts\mp\utility\infilexfil::cam_shake_off(var_0);
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var0.player)) {
-    var1 = var0.player;
+  if(isDefined(var_0.player)) {
+    var_1 = var_0.player;
     return;
   }
 
-  var1 = var1;
+  var_1 = var_1;
 }

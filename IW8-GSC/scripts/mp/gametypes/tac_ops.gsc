@@ -49,15 +49,15 @@ function commoninit() {
   initspawns();
 }
 
-function onphaseend(var0) {
-  var1 = 1;
+function onphaseend(var_0) {
+  var_1 = 1;
 
-  if(isDefined(var0)) {
-    level.lastwinner = var0;
+  if(isDefined(var_0)) {
+    level.lastwinner = var_0;
   }
 
   if(isDefined(level.lastwinner)) {
-    var1 = level.lastwinner == "allies";
+    var_1 = level.lastwinner == "allies";
   }
 
   level.modeonspawnplayer = &onspawnplayer;
@@ -66,62 +66,62 @@ function onphaseend(var0) {
   level.starttime = gettime();
   level.tacopssublevel = "tac_ops";
   level.currentmode = "tac_ops";
-  level.tacopscurrentstate = statecontroller(level.tacopscurrentstate, var1);
+  level.tacopscurrentstate = statecontroller(level.tacopscurrentstate, var_1);
   thread runnextmode();
   setomnvar("ui_tac_ops_submode", level.currentmode);
 }
 
-function playsoundforteam(var0, var1, var2) {
-  var3 = scripts\mp\utility\teams::getteamdata(var1, "players");
+function playsoundforteam(var_0, var_1, var_2) {
+  var_3 = scripts\mp\utility\teams::getteamdata(var_1, "players");
 
-  foreach(var5 in var3) {
-    if(!isbot(var5)) {
-      var5 playlocalsound(var0, var2);
+  foreach(var_5 in var_3) {
+    if(!isbot(var_5)) {
+      var_5 playlocalsound(var_0, var_2);
     }
   }
 }
 
-function teamprint(var0, var1) {
-  foreach(var3 in scripts\mp\utility\teams::getteamdata("allies", "players")) {
-    thread tutorialprint(var3, var0);
+function teamprint(var_0, var_1) {
+  foreach(var_3 in scripts\mp\utility\teams::getteamdata("allies", "players")) {
+    thread tutorialprint(var_3, var_0);
   }
 
-  foreach(var3 in scripts\mp\utility\teams::getteamdata("axis", "players")) {
-    thread tutorialprint(var3, var1);
+  foreach(var_3 in scripts\mp\utility\teams::getteamdata("axis", "players")) {
+    thread tutorialprint(var_3, var_1);
   }
 }
 
-function tutorialprint(var0, var1) {
-  self sethudtutorialmessage(var0);
-  wait var1;
+function tutorialprint(var_0, var_1) {
+  self sethudtutorialmessage(var_0);
+  wait var_1;
   self clearhudtutorialmessage();
 }
 
 function spawnsandboxa() {
-  var0 = level.sandboxobjectivesa[0][0].origin;
-  scripts\mp\tac_ops\roles_utility::createtacopskitstation(5, var0, "allies", 1);
-  var0 = level.sandboxobjectivesa[1][0].origin;
-  scripts\mp\tac_ops\roles_utility::createtacopskitstation(1, var0, "allies", 1);
-  var0 = level.sandboxobjectivesa[2][0].origin;
-  scripts\mp\tac_ops\roles_utility::createtacopskitstation(3, var0, "allies", 1);
-  var0 = level.sandboxobjectivesa[3][0].origin;
-  scripts\mp\tac_ops\roles_utility::createtacopskitstation(6, var0, "allies", 1);
-  var0 = level.sandboxobjectivesa[4][0].origin;
-  scripts\mp\tac_ops\roles_utility::createtacopskitstation(2, var0, "allies", 1);
-  var0 = level.sandboxobjectivesa[5][0].origin;
-  scripts\mp\tac_ops\roles_utility::createtacopskitstation(4, var0, "allies", 1);
-  var0 = level.sandboxobjectivesa[6][0].origin;
-  scripts\mp\tac_ops\roles_utility::createtacopskitstation(1, var0, "axis", 1);
-  var0 = level.sandboxobjectivesa[7][0].origin;
-  scripts\mp\tac_ops\roles_utility::createtacopskitstation(5, var0, "axis", 1);
-  var0 = level.sandboxobjectivesa[8][0].origin;
-  scripts\mp\tac_ops\roles_utility::createtacopskitstation(10, var0, "axis", 1);
-  var0 = level.sandboxobjectivesa[9][0].origin;
-  scripts\mp\tac_ops\roles_utility::createtacopskitstation(9, var0, "axis", 1);
-  var0 = level.sandboxobjectivesa[10][0].origin;
-  scripts\mp\tac_ops\roles_utility::createtacopskitstation(6, var0, "axis", 1);
-  var0 = level.sandboxobjectivesa[11][0].origin;
-  scripts\mp\tac_ops\roles_utility::createtacopskitstation(7, var0, "axis", 1);
+  var_0 = level.sandboxobjectivesa[0][0].origin;
+  scripts\mp\tac_ops\roles_utility::createtacopskitstation(5, var_0, "allies", 1);
+  var_0 = level.sandboxobjectivesa[1][0].origin;
+  scripts\mp\tac_ops\roles_utility::createtacopskitstation(1, var_0, "allies", 1);
+  var_0 = level.sandboxobjectivesa[2][0].origin;
+  scripts\mp\tac_ops\roles_utility::createtacopskitstation(3, var_0, "allies", 1);
+  var_0 = level.sandboxobjectivesa[3][0].origin;
+  scripts\mp\tac_ops\roles_utility::createtacopskitstation(6, var_0, "allies", 1);
+  var_0 = level.sandboxobjectivesa[4][0].origin;
+  scripts\mp\tac_ops\roles_utility::createtacopskitstation(2, var_0, "allies", 1);
+  var_0 = level.sandboxobjectivesa[5][0].origin;
+  scripts\mp\tac_ops\roles_utility::createtacopskitstation(4, var_0, "allies", 1);
+  var_0 = level.sandboxobjectivesa[6][0].origin;
+  scripts\mp\tac_ops\roles_utility::createtacopskitstation(1, var_0, "axis", 1);
+  var_0 = level.sandboxobjectivesa[7][0].origin;
+  scripts\mp\tac_ops\roles_utility::createtacopskitstation(5, var_0, "axis", 1);
+  var_0 = level.sandboxobjectivesa[8][0].origin;
+  scripts\mp\tac_ops\roles_utility::createtacopskitstation(10, var_0, "axis", 1);
+  var_0 = level.sandboxobjectivesa[9][0].origin;
+  scripts\mp\tac_ops\roles_utility::createtacopskitstation(9, var_0, "axis", 1);
+  var_0 = level.sandboxobjectivesa[10][0].origin;
+  scripts\mp\tac_ops\roles_utility::createtacopskitstation(6, var_0, "axis", 1);
+  var_0 = level.sandboxobjectivesa[11][0].origin;
+  scripts\mp\tac_ops\roles_utility::createtacopskitstation(7, var_0, "axis", 1);
 }
 
 function runnextmode() {
@@ -248,25 +248,25 @@ function onbeginnewmode() {
 }
 
 function sendwinnerresultstoclients() {
-  var0 = 0;
+  var_0 = 0;
 
-  for(var1 = 0; var1 < 3; var1++) {
-    if(isDefined(level.tacopsroundresults[var1])) {
-      if(level.tacopsroundresults[var1] == "tie" || level.tacopsroundresults[var1] == "allies") {
-        var0 += int(pow(10, var1) * 1);
+  for(var_1 = 0; var_1 < 3; var_1++) {
+    if(isDefined(level.tacopsroundresults[var_1])) {
+      if(level.tacopsroundresults[var_1] == "tie" || level.tacopsroundresults[var_1] == "allies") {
+        var_0 += int(pow(10, var_1) * 1);
         continue;
       }
 
-      var0 += int(pow(10, var1) * 2);
+      var_0 += int(pow(10, var_1) * 2);
     }
   }
 
-  setomnvarforallclients("ui_tac_ops_results", var0);
+  setomnvarforallclients("ui_tac_ops_results", var_0);
 }
 
 function roundbreaktest() {
-  foreach(var1 in level.players) {
-    var1 thread scripts\mp\utility\game::setuipostgamefade(0);
+  foreach(var_1 in level.players) {
+    var_1 thread scripts\mp\utility\game::setuipostgamefade(0);
   }
 
   scripts\mp\utility\player::_visionsetnaked("", 0);
@@ -275,82 +275,82 @@ function roundbreaktest() {
   visionsetnaked("", 0.75);
 }
 
-function statecontroller(var0, var1) {
-  switch (var0) {
+function statecontroller(var_0, var_1) {
+  switch (var_0) {
     case "START":
-      var0 = "ROUND_1";
+      var_0 = "ROUND_1";
       break;
     case "ROUND_1":
-      if(var1) {
-        var0 = "TRANSFER_1_2A";
+      if(var_1) {
+        var_0 = "TRANSFER_1_2A";
       } else {
-        var0 = "END";
+        var_0 = "END";
       }
 
       break;
     case "TRANSFER_1_2A":
-      var0 = "ROUND_2A";
+      var_0 = "ROUND_2A";
       break;
     case "TRANSFER_1_2B":
-      var0 = "END";
+      var_0 = "END";
       break;
     case "ROUND_2A":
-      if(var1) {
-        var0 = "TRANSFER_2A_3AA";
+      if(var_1) {
+        var_0 = "TRANSFER_2A_3AA";
       } else {
-        var0 = "END";
+        var_0 = "END";
       }
 
       break;
     case "ROUND_2B":
-      if(var1) {
-        var0 = "TRANSFER_2B_3BA";
+      if(var_1) {
+        var_0 = "TRANSFER_2B_3BA";
       } else {
-        var0 = "TRANSFER_2B_3BB";
+        var_0 = "TRANSFER_2B_3BB";
       }
 
       break;
     case "TRANSFER_2A_3AA":
-      var0 = "ROUND_3AA";
+      var_0 = "ROUND_3AA";
       break;
     case "TRANSFER_2A_3AB":
-      var0 = "ROUND_3AB";
+      var_0 = "ROUND_3AB";
       break;
     case "TRANSFER_2B_3BA":
-      var0 = "ROUND_3AB";
+      var_0 = "ROUND_3AB";
       break;
     case "TRANSFER_2B_3BB":
-      var0 = "ROUND_3BB";
+      var_0 = "ROUND_3BB";
       break;
     case "ROUND_3AA":
-      if(var1) {
-        var0 = "FINALE_3AAA";
+      if(var_1) {
+        var_0 = "FINALE_3AAA";
       } else {
-        var0 = "FINALE_3AAB";
+        var_0 = "FINALE_3AAB";
       }
 
       break;
     case "ROUND_3BB":
-      if(var1) {
-        var0 = "FINALE_3BBA";
+      if(var_1) {
+        var_0 = "FINALE_3BBA";
       } else {
-        var0 = "FINALE_3BBB";
+        var_0 = "FINALE_3BBB";
       }
 
       break;
     case "ROUND_3AB":
-      if(var1) {
-        var0 = "FINALE_3ABA";
+      if(var_1) {
+        var_0 = "FINALE_3ABA";
       } else {
-        var0 = "FINALE_3ABB";
+        var_0 = "FINALE_3ABB";
       }
 
       break;
     case "ROUND_3BA":
-      if(var1) {
-        var0 = "FINALE_3BAA";
+      if(var_1) {
+        var_0 = "FINALE_3BAA";
       } else {
-        var0 = "FINALE_3BAB";
+        var_0 = "FINALE_3BAB";
       }
 
       break;
@@ -362,11 +362,11 @@ function statecontroller(var0, var1) {
     case "FINALE_3ABA":
     case "FINALE_3AAB":
     case "FINALE_3AAA":
-      var0 = "END";
+      var_0 = "END";
       break;
   }
 
-  return var0;
+  return var_0;
 }
 
 function onstartgametype() {
@@ -391,39 +391,39 @@ function onstartgametype() {
 
   scripts\mp\utility\game::setobjectivehinttext("allies", &"OBJECTIVES/WAR_HINT");
   scripts\mp\utility\game::setobjectivehinttext("axis", &"OBJECTIVES/WAR_HINT");
-  var0 = scripts\mp\utility\dvars::getwatcheddvar("winlimit");
+  var_0 = scripts\mp\utility\dvars::getwatcheddvar("winlimit");
   GscBinSkip1(0x45, 0, "dd");
 }
 
 function initsandbox() {
-  var0 = "radar_drone";
-  var1 = "precision_airstrike";
+  var_0 = "radar_drone";
+  var_1 = "precision_airstrike";
   level.sandboxobjectivesa = [];
   level.sandboxrewarda = [];
   level.sandboxobjectivesa[0] = scripts\engine\utility::getStructArray("tac_advantage_a", "targetname");
-  level.sandboxrewarda[0] = var0;
+  level.sandboxrewarda[0] = var_0;
   level.sandboxobjectivesa[1] = scripts\engine\utility::getStructArray("tac_advantage_b", "targetname");
-  level.sandboxrewarda[1] = var0;
+  level.sandboxrewarda[1] = var_0;
   level.sandboxobjectivesa[2] = scripts\engine\utility::getStructArray("tac_advantage_c", "targetname");
-  level.sandboxrewarda[2] = var1;
+  level.sandboxrewarda[2] = var_1;
   level.sandboxobjectivesa[3] = scripts\engine\utility::getStructArray("tac_advantage_d", "targetname");
-  level.sandboxrewarda[3] = var1;
+  level.sandboxrewarda[3] = var_1;
   level.sandboxobjectivesa[4] = scripts\engine\utility::getStructArray("tac_advantage_e", "targetname");
-  level.sandboxrewarda[4] = var0;
+  level.sandboxrewarda[4] = var_0;
   level.sandboxobjectivesa[5] = scripts\engine\utility::getStructArray("tac_advantage_f", "targetname");
-  level.sandboxrewarda[5] = var1;
+  level.sandboxrewarda[5] = var_1;
   level.sandboxobjectivesa[6] = scripts\engine\utility::getStructArray("tac_advantage_h", "targetname");
-  level.sandboxrewarda[6] = var1;
+  level.sandboxrewarda[6] = var_1;
   level.sandboxobjectivesa[7] = scripts\engine\utility::getStructArray("tac_advantage_i", "targetname");
-  level.sandboxrewarda[7] = var0;
+  level.sandboxrewarda[7] = var_0;
   level.sandboxobjectivesa[8] = scripts\engine\utility::getStructArray("tac_advantage_j", "targetname");
-  level.sandboxrewarda[8] = var1;
+  level.sandboxrewarda[8] = var_1;
   level.sandboxobjectivesa[9] = scripts\engine\utility::getStructArray("tac_advantage_k", "targetname");
-  level.sandboxrewarda[9] = var1;
+  level.sandboxrewarda[9] = var_1;
   level.sandboxobjectivesa[10] = scripts\engine\utility::getStructArray("tac_advantage_l", "targetname");
-  level.sandboxrewarda[10] = var1;
+  level.sandboxrewarda[10] = var_1;
   level.sandboxobjectivesa[11] = scripts\engine\utility::getStructArray("tac_advantage_m", "targetname");
-  level.sandboxrewarda[11] = var1;
+  level.sandboxrewarda[11] = var_1;
 }
 
 function firstphaseend() {
@@ -442,9 +442,9 @@ function onspawnplayer() {
   self.isdefusing = 0;
 }
 
-function onplayerconnect(var0) {
-  var0 setclientomnvar("ui_hp_callout_id", 2);
-  var0.isscoring = 0;
+function onplayerconnect(var_0) {
+  var_0 setclientomnvar("ui_hp_callout_id", 2);
+  var_0.isscoring = 0;
   setomnvar("ui_tac_ops_submode", level.currentmode);
   thread monitorjointeam();
 }
@@ -463,8 +463,8 @@ function initspawns() {
   scripts\mp\spawnlogic::setactivespawnlogic("TDM");
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
-  var0 = spawnStruct();
-  level.tacopsspawns = var0;
+  var_0 = spawnStruct();
+  level.tacopsspawns = var_0;
   scripts\mp\gametypes\to_air::initspawns();
   scripts\mp\gametypes\to_bhd::initspawns();
   scripts\mp\gametypes\to_blitz::initspawns();
@@ -477,24 +477,24 @@ function initspawns() {
   scripts\mp\tac_ops_map::setupspawnareas();
 }
 
-function onsuicidedeath(var0) {}
+function onsuicidedeath(var_0) {}
 
-function onnormaldeath(var0, var1, var2, var3, var4) {
-  scripts\mp\gametypes\common::oncommonnormaldeath(var0, var1, var2, var3, var4);
+function onnormaldeath(var_0, var_1, var_2, var_3, var_4) {
+  scripts\mp\gametypes\common::oncommonnormaldeath(var_0, var_1, var_2, var_3, var_4);
 
-  if(!isDefined(var0.switching_teams)) {
-    var0 scripts\mp\playerlogic::decrementalivecount(var0.team);
+  if(!isDefined(var_0.switching_teams)) {
+    var_0 scripts\mp\playerlogic::decrementalivecount(var_0.team);
     return;
   }
 }
 
 function timelimitthread() {
   level endon("game_ended");
-  var0 = gettacopstimepassedms();
+  var_0 = gettacopstimepassedms();
 
   for(;;) {
-    thread checktacopstimelimit(var0);
-    var0 = gettacopstimepassedms();
+    thread checktacopstimelimit(var_0);
+    var_0 = gettacopstimepassedms();
 
     if(isDefined(level.starttime)) {
       if(gettacopstimeremainingms() < 3000) {
@@ -507,24 +507,24 @@ function timelimitthread() {
   }
 }
 
-function extendtacopstimelimitms(var0) {
-  level.basetacopstimelimit = gettacopstimelimitms() + var0;
+function extendtacopstimelimitms(var_0) {
+  level.basetacopstimelimit = gettacopstimelimitms() + var_0;
 }
 
-function reducetacopstimelimitms(var0) {
-  level.basetacopstimelimit = gettacopstimelimitms() - var0;
+function reducetacopstimelimitms(var_0) {
+  level.basetacopstimelimit = gettacopstimelimitms() - var_0;
 }
 
-function checktacopstimelimit(var0) {
-  var1 = gettacopstimeremainingms();
-  setgameendtime(gettime() + int(var1));
+function checktacopstimelimit(var_0) {
+  var_1 = gettacopstimeremainingms();
+  setgameendtime(gettime() + int(var_1));
 
   if(level.tacopssubmodetimeron == 0) {
     setgameendtime(0);
     return;
   }
 
-  if(var1 > 0) {
+  if(var_1 > 0) {
     return;
   }
 
@@ -594,9 +594,9 @@ function resumetacopstimer() {
   }
 }
 
-function tacopslongwaitsec(var0) {
-  var1 = gettacopstimeremainingms() / 1000 - var0;
-  wait var1;
-  var2 = gettacopstimeextensionsms() / 1000;
-  wait var2;
+function tacopslongwaitsec(var_0) {
+  var_1 = gettacopstimeremainingms() / 1000 - var_0;
+  wait var_1;
+  var_2 = gettacopstimeextensionsms() / 1000;
+  wait var_2;
 }

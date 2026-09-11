@@ -15,8 +15,8 @@ function init() {
   level.usespawnselection = 0;
   level.availablespawnlocations = [];
 
-  foreach(var1 in level.teamnamelist) {
-    level.availablespawnlocations[var1] = [];
+  foreach(var_1 in level.teamnamelist) {
+    level.availablespawnlocations[var_1] = [];
   }
 
   thread initspawns();
@@ -27,51 +27,51 @@ function init() {
 function delayspawntoc130() {}
 
 function churnareas() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, "lane01_");
 }
 
-function setspawnlocations(var0, var1) {
-  var2 = [];
+function setspawnlocations(var_0, var_1) {
+  var_2 = [];
 
-  foreach(var4 in level.availablespawnlocations[var1]) {
-    if(issubstr(var4, "dynamic") || issubstr(var4, "vehicle") || issubstr(var4, "squad")) {
-      var2 = var4;
+  foreach(var_4 in level.availablespawnlocations[var_1]) {
+    if(issubstr(var_4, "dynamic") || issubstr(var_4, "vehicle") || issubstr(var_4, "squad")) {
+      var_2 = var_4;
     }
   }
 
-  level.availablespawnlocations[var1] = [];
+  level.availablespawnlocations[var_1] = [];
 
-  foreach(var7 in var0) {
-    if(!scripts\engine\utility::array_contains(level.availablespawnlocations[var1], var7)) {
-      level.availablespawnlocations[var1][level.availablespawnlocations[var1].size] = var7;
+  foreach(var_7 in var_0) {
+    if(!scripts\engine\utility::array_contains(level.availablespawnlocations[var_1], var_7)) {
+      level.availablespawnlocations[var_1][level.availablespawnlocations[var_1].size] = var_7;
     }
   }
 
-  foreach(var7 in var2) {
-    if(!scripts\engine\utility::array_contains(level.availablespawnlocations[var1], var7)) {
-      level.availablespawnlocations[var1][level.availablespawnlocations[var1].size] = var7;
+  foreach(var_7 in var_2) {
+    if(!scripts\engine\utility::array_contains(level.availablespawnlocations[var_1], var_7)) {
+      level.availablespawnlocations[var_1][level.availablespawnlocations[var_1].size] = var_7;
     }
   }
 }
 
-function allowspawnlocation(var0, var1) {
-  if(!scripts\engine\utility::array_contains(level.availablespawnlocations[var1], var0)) {
-    level.availablespawnlocations[var1][level.availablespawnlocations[var1].size] = var0;
+function allowspawnlocation(var_0, var_1) {
+  if(!scripts\engine\utility::array_contains(level.availablespawnlocations[var_1], var_0)) {
+    level.availablespawnlocations[var_1][level.availablespawnlocations[var_1].size] = var_0;
     return;
   }
 }
 
-function removespawnlocation(var0, var1) {
-  var2 = [];
+function removespawnlocation(var_0, var_1) {
+  var_2 = [];
 
-  foreach(var4 in level.availablespawnlocations[var1]) {
-    if(var4 != var0) {
-      var2 = var4;
+  foreach(var_4 in level.availablespawnlocations[var_1]) {
+    if(var_4 != var_0) {
+      var_2 = var_4;
     }
   }
 
-  level.availablespawnlocations[var1] = var2;
+  level.availablespawnlocations[var_1] = var_2;
 }
 
 function updatespawnareas() {
@@ -96,35 +96,35 @@ function setupspawnlocations() {
 
   level.spawnselectionlocations = [];
 
-  foreach(var22, var1 in level.teamnamelist) {
-    var2 = scripts\mp\spawnlogic::getspawnpointarray(level.gamemodespawnpointnames[var1]);
-    scripts\mp\spawnlogic::registerspawnpoints(var1, var2);
+  foreach(var_22, var_1 in level.teamnamelist) {
+    var_2 = scripts\mp\spawnlogic::getspawnpointarray(level.gamemodespawnpointnames[var_1]);
+    scripts\mp\spawnlogic::registerspawnpoints(var_1, var_2);
 
-    foreach(var18, var4 in var2) {
-      if(!isDefined(var4.target) || var4.target == "") {
+    foreach(var_18, var_4 in var_2) {
+      if(!isDefined(var_4.target) || var_4.target == "") {
         continue;
       }
 
-      var5 = getEntArray(var4.target, "targetname");
+      var_5 = getEntArray(var_4.target, "targetname");
 
-      if(!isDefined(var5) || var5.size == 0) {
-        var5 = scripts\engine\utility::getStructArray(var4.target, "targetname");
+      if(!isDefined(var_5) || var_5.size == 0) {
+        var_5 = scripts\engine\utility::getStructArray(var_4.target, "targetname");
       }
 
-      if(var5.size == 0) {
+      if(var_5.size == 0) {
         continue;
       }
 
-      var6 = undefined;
+      var_6 = undefined;
 
-      if(var5.size == 1) {
-        var6 = var5[0];
+      if(var_5.size == 1) {
+        var_6 = var_5[0];
       } else {
         jumpiffalse(isDefined(scripts\cp_mp\utility\game_utility::getlocaleid())) LOC_0000013c;
 
-        foreach(var8 in var5) {
-          if(isDefined(var8.script_noteworthy) && var8.script_noteworthy == level.localeid) {
-            var6 = var8;
+        foreach(var_8 in var_5) {
+          if(isDefined(var_8.script_noteworthy) && var_8.script_noteworthy == level.localeid) {
+            var_6 = var_8;
             break;
           }
         }
@@ -132,56 +132,56 @@ function setupspawnlocations() {
         goto LOC_0000018a;
       }
 
-      if(!isDefined(var14)) {
+      if(!isDefined(var_14)) {
         continue;
       }
 
-      var15 = var14.script_label;
-      var18 = var2;
+      var_15 = var_14.script_label;
+      var_18 = var_2;
 
-      if(isDefined(var14.script_team) && scripts\mp\utility\teams::isgameplayteam(var14.script_team)) {
-        if(scripts\cp_mp\utility\game_utility::getmapname() == "mp_quarry2" && var14.targetname == "gw_fob_03_safe_axis") {
-          var18 = "axis";
+      if(isDefined(var_14.script_team) && scripts\mp\utility\teams::isgameplayteam(var_14.script_team)) {
+        if(scripts\cp_mp\utility\game_utility::getmapname() == "mp_quarry2" && var_14.targetname == "gw_fob_03_safe_axis") {
+          var_18 = "axis";
         } else {
-          var18 = var14.script_team;
+          var_18 = var_14.script_team;
         }
       }
 
-      if(isDefined(level.spawnselectionlocations[var15]) && isDefined(level.spawnselectionlocations[var15][var18])) {
-        var16 = level.spawnselectionlocations[var15][var18];
+      if(isDefined(level.spawnselectionlocations[var_15]) && isDefined(level.spawnselectionlocations[var_15][var_18])) {
+        var_16 = level.spawnselectionlocations[var_15][var_18];
 
-        if(!scripts\engine\utility::array_contains(var16.spawnpoints, var5)) {
-          var16.spawnpoints[var16.spawnpoints.size] = var5;
+        if(!scripts\engine\utility::array_contains(var_16.spawnpoints, var_5)) {
+          var_16.spawnpoints[var_16.spawnpoints.size] = var_5;
         }
 
         continue;
       }
 
-      var17 = spawnStruct();
-      var17.origin = var14.origin;
-      var17.angles = var14.angles;
-      var17.spawnpoints = [];
-      var17.spawnpoints[0] = var5;
+      var_17 = spawnStruct();
+      var_17.origin = var_14.origin;
+      var_17.angles = var_14.angles;
+      var_17.spawnpoints = [];
+      var_17.spawnpoints[0] = var_5;
 
-      if(!issubstr(var15, "safe")) {
-        initspawnarea(var18, var17, var15);
+      if(!issubstr(var_15, "safe")) {
+        initspawnarea(var_18, var_17, var_15);
       } else {
-        level.spawnselectionlocations[var15][var18] = var17;
+        level.spawnselectionlocations[var_15][var_18] = var_17;
       }
     }
 
-    var4 = undefined;
-    var19 = undefined;
+    var_4 = undefined;
+    var_19 = undefined;
 
-    foreach(var21 in level.spawnselectionlocations) {
-      if(isDefined(var21[var2])) {
-        scripts\mp\spawnlogic::registerspawnset(var22 + "_" + var2, var21[var2].spawnpoints);
+    foreach(var_21 in level.spawnselectionlocations) {
+      if(isDefined(var_21[var_2])) {
+        scripts\mp\spawnlogic::registerspawnset(var_22 + "_" + var_2, var_21[var_2].spawnpoints);
       }
     }
   }
 
-  var1 = undefined;
-  var8 = undefined;
+  var_1 = undefined;
+  var_8 = undefined;
   level.usespawnselection = getdvarint("scr_game_usespawnselection", 0) == 1 && level.spawnselectionlocations.size > 0;
 
   if(level.usespawnselection) {
@@ -190,116 +190,116 @@ function setupspawnlocations() {
   }
 }
 
-function initspawnarea(var0, var1, var2) {
-  var3 = tablelookuprownum("mp/spawnSelectionMapData.csv", 0, var2);
-  var4 = spawn("script_model", var1.origin);
-  var4 setModel("tag_origin");
-  var1.anchorentity = var4;
-  var1.typeid = var3;
-  var1.typeref = var2;
-  var1.owner = "allies";
+function initspawnarea(var_0, var_1, var_2) {
+  var_3 = tablelookuprownum("mp/spawnSelectionMapData.csv", 0, var_2);
+  var_4 = spawn("script_model", var_1.origin);
+  var_4 setModel("tag_origin");
+  var_1.anchorentity = var_4;
+  var_1.typeid = var_3;
+  var_1.typeref = var_2;
+  var_1.owner = "allies";
 
-  if(!issubstr(var2, "HQ") && !issubstr(var2, "vehicle")) {
-    var5 = getlabelid(var2 + "_" + level.localeid);
+  if(!issubstr(var_2, "HQ") && !issubstr(var_2, "vehicle")) {
+    var_5 = getlabelid(var_2 + "_" + level.localeid);
 
-    if(!isDefined(var5) || var5 == -1) {
-      var1.labelid = var3;
+    if(!isDefined(var_5) || var_5 == -1) {
+      var_1.labelid = var_3;
     } else {
-      var1.labelid = var5;
+      var_1.labelid = var_5;
     }
   } else {
-    var1.labelid = var3;
+    var_1.labelid = var_3;
   }
 
-  if(isDefined(var1.dynamicent)) {
-    var4 linkTo(var1.dynamicent);
+  if(isDefined(var_1.dynamicent)) {
+    var_4 linkTo(var_1.dynamicent);
   }
 
-  level.spawnselectionlocations[var2][var0] = var1;
+  level.spawnselectionlocations[var_2][var_0] = var_1;
 }
 
-function getlabelid(var0) {
-  var1 = tablelookuprownum("mp/spawnSelectionMapData.csv", 0, var0);
+function getlabelid(var_0) {
+  var_1 = tablelookuprownum("mp/spawnSelectionMapData.csv", 0, var_0);
 
-  if(!isDefined(var1)) {
-    var1 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  return var1;
+  return var_1;
 }
 
-function setanchorent(var0, var1, var2) {
-  level.spawnselectionlocations[var0][var1].anchorentity = var2;
+function setanchorent(var_0, var_1, var_2) {
+  level.spawnselectionlocations[var_0][var_1].anchorentity = var_2;
 }
 
 function setupspawninfluencezones() {
   level.spawninfluencezones = [];
 
-  for(var0 = 1; var0 <= 5; var0++) {
-    var1 = scripts\cp_mp\utility\game_utility::getlocaleent("gw_fob_0" + var0 + "_spawnInfluenceZone");
+  for(var_0 = 1; var_0 <= 5; var_0++) {
+    var_1 = scripts\cp_mp\utility\game_utility::getlocaleent("gw_fob_0" + var_0 + "_spawnInfluenceZone");
 
-    if(!isDefined(var1)) {
+    if(!isDefined(var_1)) {
       continue;
     }
 
-    scripts\mp\utility\trigger::makeenterexittrigger(var1, &spawninfluencezone_onusebegin, &spawninfluencezone_onuseend);
-    var1.touchlist = [];
-    level.spawninfluencezones["gw_fob_0" + var0] = var1;
+    scripts\mp\utility\trigger::makeenterexittrigger(var_1, &spawninfluencezone_onusebegin, &spawninfluencezone_onuseend);
+    var_1.touchlist = [];
+    level.spawninfluencezones["gw_fob_0" + var_0] = var_1;
   }
 }
 
-function spawninfluencezone_onusebegin(var0, var1) {
-  if(isDefined(var0.classname) && var0.classname == "script_vehicle") {
+function spawninfluencezone_onusebegin(var_0, var_1) {
+  if(isDefined(var_0.classname) && var_0.classname == "script_vehicle") {
     return;
   }
 
-  var1.touchlist = scripts\engine\utility::array_add(var1.touchlist, var0);
+  var_1.touchlist = scripts\engine\utility::array_add(var_1.touchlist, var_0);
 }
 
-function spawninfluencezone_onuseend(var0, var1) {
-  if(isDefined(var0.classname) && var0.classname == "script_vehicle") {
+function spawninfluencezone_onuseend(var_0, var_1) {
+  if(isDefined(var_0.classname) && var_0.classname == "script_vehicle") {
     return;
   }
 
-  var1.touchlist = scripts\engine\utility::array_remove(var1.touchlist, var0);
+  var_1.touchlist = scripts\engine\utility::array_remove(var_1.touchlist, var_0);
 }
 
-function isteamtouching(var0) {
-  var1 = 0;
-  var2 = [];
+function isteamtouching(var_0) {
+  var_1 = 0;
+  var_2 = [];
 
-  foreach(var4 in self.touchlist) {
-    if(!isDefined(var4)) {
+  foreach(var_4 in self.touchlist) {
+    if(!isDefined(var_4)) {
       continue;
     }
 
-    if(isDefined(var4.team) && var4.team == var0) {
-      var1 = 1;
+    if(isDefined(var_4.team) && var_4.team == var_0) {
+      var_1 = 1;
     }
 
-    var2 = var4;
+    var_2 = var_4;
   }
 
-  self.touchlist = var2;
-  return var1;
+  self.touchlist = var_2;
+  return var_1;
 }
 
 function getspawnpoint() {
   scripts\mp\spawnlogic::deactivateallspawnsets();
 
   if(isDefined(self.thrust_fx_model)) {
-    var0 = self.thrust_fx_model;
+    var_0 = self.thrust_fx_model;
     self.thrust_fx_model = undefined;
-    return var0;
+    return var_0;
   }
 
   if(scripts\mp\spawnlogic::shoulduseteamstartspawn()) {
-    var1 = scripts\mp\spawnlogic::getspawnpointarray(level.gamemodestartspawnpointnames[self.team]);
-    var0 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var1);
-    return var0;
+    var_1 = scripts\mp\spawnlogic::getspawnpointarray(level.gamemodestartspawnpointnames[self.team]);
+    var_0 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_1);
+    return var_0;
   }
 
-  var0 = undefined;
+  var_0 = undefined;
   self.ref_1443d = 0;
 
   if(!isDefined(self.selectedspawnarea)) {
@@ -312,73 +312,73 @@ function getspawnpoint() {
 
   if(isDefined(self.selectedspawnarea)) {
     if(issubstr(self.selectedspawnarea, "squad")) {
-      var2 = undefined;
+      var_2 = undefined;
 
       if(self.selectedspawnarea == "squad_leader") {
-        var2 = level.squaddata[self.team][self.squadindex].squadleaderindex;
+        var_2 = level.squaddata[self.team][self.squadindex].squadleaderindex;
       } else {
-        var2 = int(getsubstr(self.selectedspawnarea, self.selectedspawnarea.size - 1, self.selectedspawnarea.size));
+        var_2 = int(getsubstr(self.selectedspawnarea, self.selectedspawnarea.size - 1, self.selectedspawnarea.size));
       }
 
-      var3 = level.squaddata[self.team][self.squadindex].players[var2];
-      var0 = scripts\mp\spawnscoring::findteammatebuddyspawn(var3);
-      var3 thread scripts\mp\utility\points::giveunifiedpoints("squad_spawn");
+      var_3 = level.squaddata[self.team][self.squadindex].players[var_2];
+      var_0 = scripts\mp\spawnscoring::findteammatebuddyspawn(var_3);
+      var_3 thread scripts\mp\utility\points::giveunifiedpoints("squad_spawn");
       thread scripts\mp\utility\points::giveunifiedpoints("squad_spawn_self");
       self.ref_1443d = 1;
 
-      if(isDefined(var3.vehicle)) {
+      if(isDefined(var_3.vehicle)) {
         self.spawningintovehicle = 1;
-        self.ref_14268 = var3.vehicle.vehiclename;
+        self.ref_14268 = var_3.vehicle.vehiclename;
       }
 
       scripts\mp\utility\stats::incpersstat("spawnSelectSquad", 1);
-      var3 scripts\mp\utility\stats::incpersstat("timesSelectedAsSquadLeader", 1);
+      var_3 scripts\mp\utility\stats::incpersstat("timesSelectedAsSquadLeader", 1);
     } else if(issubstr(self.selectedspawnarea, "dynamic")) {
-      var0 = scripts\mp\spawnlogic::getspawnpoint(self, self.team, undefined, undefined, "bad");
+      var_0 = scripts\mp\spawnlogic::getspawnpoint(self, self.team, undefined, undefined, "bad");
       thread scripts\mp\gametypes\arm::spawnplayertoc130();
     } else if(issubstr(self.selectedspawnarea, "vehicle")) {
-      var0 = scripts\mp\spawnlogic::getspawnpoint(self, self.team, undefined, undefined, "bad");
-      var4 = level.spawnselectionlocations[self.selectedspawnarea][self.team].dynamicent;
-      var0.origin = var4.origin + anglesToForward(var4.angles) * -200 + (0, 0, 64);
-      var0.angles = (0, var4.angles[1], 0);
-      var5 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getavailablevehicleseats(var4, 1);
+      var_0 = scripts\mp\spawnlogic::getspawnpoint(self, self.team, undefined, undefined, "bad");
+      var_4 = level.spawnselectionlocations[self.selectedspawnarea][self.team].dynamicent;
+      var_0.origin = var_4.origin + anglesToForward(var_4.angles) * -200 + (0, 0, 64);
+      var_0.angles = (0, var_4.angles[1], 0);
+      var_5 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getavailablevehicleseats(var_4, 1);
 
-      if(var5.size > 0 && istrue(scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_vehiclecanbeused(var4))) {
-        var6 = spawnStruct();
-        var6.useonspawn = 1;
-        var6.enterstartwaitmsg = "spawned_player";
-        thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_enter(var4, var5[0], self, var6);
+      if(var_5.size > 0 && istrue(scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_vehiclecanbeused(var_4))) {
+        var_6 = spawnStruct();
+        var_6.useonspawn = 1;
+        var_6.enterstartwaitmsg = "spawned_player";
+        thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_enter(var_4, var_5[0], self, var_6);
       }
 
       self.spawningintovehicle = 1;
       scripts\mp\utility\stats::incpersstat("spawnSelectVehicle", 1);
     } else {
       if(isDefined(level.spawninfluencezones)) {
-        var7 = undefined;
-        var8 = getarraykeys(level.spawninfluencezones);
+        var_7 = undefined;
+        var_8 = getarraykeys(level.spawninfluencezones);
 
-        foreach(var10 in var8) {
-          if(var10 == self.selectedspawnarea) {
-            var7 = level.spawninfluencezones[var10];
+        foreach(var_10 in var_8) {
+          if(var_10 == self.selectedspawnarea) {
+            var_7 = level.spawninfluencezones[var_10];
           }
         }
 
-        if(isDefined(var7) && isteamtouching(var7, scripts\mp\utility\game::getotherteam(self.team)[0])) {
-          var12 = self.selectedspawnarea + "_safe_" + self.team;
-          var13 = level.spawnglobals.spawnsets[var12];
+        if(isDefined(var_7) && isteamtouching(var_7, scripts\mp\utility\game::getotherteam(self.team)[0])) {
+          var_12 = self.selectedspawnarea + "_safe_" + self.team;
+          var_13 = level.spawnglobals.spawnsets[var_12];
 
-          if(!isDefined(var13)) {
-            var12 = self.selectedspawnarea + "_" + self.team;
+          if(!isDefined(var_13)) {
+            var_12 = self.selectedspawnarea + "_" + self.team;
           }
         } else {
-          var12 = self.selectedspawnarea + "_" + self.team;
+          var_12 = self.selectedspawnarea + "_" + self.team;
         }
       } else {
-        var12 = self.selectedspawnarea + "_" + self.team;
+        var_12 = self.selectedspawnarea + "_" + self.team;
       }
 
-      scripts\mp\spawnlogic::activatespawnset(var12, 1);
-      var12 = scripts\mp\spawnlogic::getspawnpoint(self, self.team, undefined, undefined, "bad");
+      scripts\mp\spawnlogic::activatespawnset(var_12, 1);
+      var_12 = scripts\mp\spawnlogic::getspawnpoint(self, self.team, undefined, undefined, "bad");
 
       if(issubstr(self.selectedspawnarea, "alliesHQ") || issubstr(self.selectedspawnarea, "axisHQ")) {
         scripts\mp\utility\stats::incpersstat("spawnSelectBase", 1);
@@ -387,27 +387,27 @@ function getspawnpoint() {
       }
     }
   } else {
-    var12 = scripts\mp\spawnlogic::getspawnpoint(self, self.team, undefined, undefined, "bad");
+    var_12 = scripts\mp\spawnlogic::getspawnpoint(self, self.team, undefined, undefined, "bad");
   }
 
   if(istrue(level.usesquadspawn) && istrue(self.squadspawnconfirmed)) {
-    var14 = self getspectatingplayer();
+    var_14 = self getspectatingplayer();
 
-    if(isDefined(var14) && isDefined(self.squadindex) && self.team == var14.team && self.squadindex == var14.squadindex) {
-      var12 = scripts\mp\spawnscoring::findteammatebuddyspawn(var14);
-      var14 thread scripts\mp\utility\points::sec_sys_struct_1("squad_spawn");
+    if(isDefined(var_14) && isDefined(self.squadindex) && self.team == var_14.team && self.squadindex == var_14.squadindex) {
+      var_12 = scripts\mp\spawnscoring::findteammatebuddyspawn(var_14);
+      var_14 thread scripts\mp\utility\points::sec_sys_struct_1("squad_spawn");
       thread scripts\mp\utility\points::sec_sys_struct_1("squad_spawn_self");
       self.ref_1443d = 1;
     }
   }
 
-  return var12;
+  return var_12;
 }
 
 function refreshplayerspawnareaomnvars() {
-  for(var0 = 0; var0 < 16; var0++) {
-    self setclientomnvar("ui_tom_spawn_entity_" + var0, undefined);
-    self setclientomnvar("ui_tom_spawn_id_" + var0, -1);
+  for(var_0 = 0; var_0 < 16; var_0++) {
+    self setclientomnvar("ui_tom_spawn_entity_" + var_0, undefined);
+    self setclientomnvar("ui_tom_spawn_id_" + var_0, -1);
   }
 
   if(isDefined(self.forcedavailablespawnlocation)) {
@@ -427,185 +427,185 @@ function obj_room_fire_03() {
   self endon("end_respawn");
   self notify("evaluateFOBSpawns");
   self endon("evaluateFOBSpawns");
-  var0 = [];
+  var_0 = [];
 
   for(;;) {
-    if(var0.size > level.availablespawnlocations[self.team].size) {
+    if(var_0.size > level.availablespawnlocations[self.team].size) {
       thread refreshplayerspawnareaomnvars();
       return;
     }
 
-    var1 = 0;
+    var_1 = 0;
 
-    foreach(var3 in level.availablespawnlocations[self.team]) {
-      if(!isDefined(var0[var1])) {
+    foreach(var_3 in level.availablespawnlocations[self.team]) {
+      if(!isDefined(var_0[var_1])) {
         break;
       }
 
-      if(var0[var1].location != var3) {
+      if(var_0[var_1].location != var_3) {
         thread refreshplayerspawnareaomnvars();
         return;
       }
 
-      var1++;
+      var_1++;
     }
 
-    var1 = 0;
+    var_1 = 0;
 
-    foreach(var3 in level.availablespawnlocations[self.team]) {
-      var6 = level.spawnselectionlocations[var3][self.team];
+    foreach(var_3 in level.availablespawnlocations[self.team]) {
+      var_6 = level.spawnselectionlocations[var_3][self.team];
 
-      if(var1 == var0.size) {
-        var7 = spawnStruct();
-        var7.location = undefined;
-        var7.entity = undefined;
-        var7.id = undefined;
-        var0 = var7;
+      if(var_1 == var_0.size) {
+        var_7 = spawnStruct();
+        var_7.location = undefined;
+        var_7.entity = undefined;
+        var_7.id = undefined;
+        var_0 = var_7;
       }
 
-      if(!isDefined(var0[var1].location)) {
-        var0[var1].location = var3;
+      if(!isDefined(var_0[var_1].location)) {
+        var_0[var_1].location = var_3;
       }
 
-      if(!isDefined(var0[var1].entity)) {
-        var0[var1].entity = var6.anchorentity;
-        self setclientomnvar("ui_tom_spawn_entity_" + var1, var6.anchorentity);
+      if(!isDefined(var_0[var_1].entity)) {
+        var_0[var_1].entity = var_6.anchorentity;
+        self setclientomnvar("ui_tom_spawn_entity_" + var_1, var_6.anchorentity);
       }
 
-      var8 = 0;
-      var9 = 0;
-      var10 = 0;
+      var_8 = 0;
+      var_9 = 0;
+      var_10 = 0;
 
-      if(isDefined(var6.objectivekey)) {
-        var8 = istrue(var6.start_reach_icbm_launch);
-      } else if(issubstr(var3, "vehicle")) {
-        var11 = var6.dynamicent;
+      if(isDefined(var_6.objectivekey)) {
+        var_8 = istrue(var_6.start_reach_icbm_launch);
+      } else if(issubstr(var_3, "vehicle")) {
+        var_11 = var_6.dynamicent;
 
-        if(isDefined(var11) && !istrue(var11.isdestroyed)) {
-          var8 = istrue(var11.start_reach_icbm_launch);
-          var9 = shouldmodelognotify(var11, self);
+        if(isDefined(var_11) && !istrue(var_11.isdestroyed)) {
+          var_8 = istrue(var_11.start_reach_icbm_launch);
+          var_9 = shouldmodelognotify(var_11, self);
 
-          if(scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getavailablevehicleseats(var11).size == 0 || !istrue(scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_vehiclecanbeused(var11))) {
-            var10 = 1;
+          if(scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getavailablevehicleseats(var_11).size == 0 || !istrue(scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_vehiclecanbeused(var_11))) {
+            var_10 = 1;
           }
         }
       }
 
-      var12 = var6.labelid;
+      var_12 = var_6.labelid;
 
-      if(var8) {
-        var12 += 128;
+      if(var_8) {
+        var_12 += 128;
       }
 
-      if(istrue(var10)) {
-        var12 += 1024;
+      if(istrue(var_10)) {
+        var_12 += 1024;
       }
 
-      if(istrue(var9)) {
-        var12 += 2048;
+      if(istrue(var_9)) {
+        var_12 += 2048;
       }
 
-      if(!isDefined(var0[var1].id) || var0[var1].id != var12) {
-        var0[var1].id = var12;
-        self setclientomnvar("ui_tom_spawn_id_" + var1, var12);
+      if(!isDefined(var_0[var_1].id) || var_0[var_1].id != var_12) {
+        var_0[var_1].id = var_12;
+        self setclientomnvar("ui_tom_spawn_id_" + var_1, var_12);
       }
 
-      var1++;
+      var_1++;
     }
 
     waitframe();
   }
 }
 
-function ref_12acb(var0, var1) {
-  if(!isDefined(var0) || !isDefined(var1)) {
+function ref_12acb(var_0, var_1) {
+  if(!isDefined(var_0) || !isDefined(var_1)) {
     return;
   }
 
   waitframe();
-  var2 = level.squaddata[var0][var1].players;
+  var_2 = level.squaddata[var_0][var_1].players;
 }
 
-function isobjectiveindanger(var0, var1) {
-  return level.objectives[var0].ownerteam != var1 || level.objectives[var0].stalemate || level.objectives[var0].captureblocked || istrue(level.objectives[var0].ref_13686) || level.objectives[var0].claimteam != "none" && level.objectives[var0].claimteam != var1;
+function isobjectiveindanger(var_0, var_1) {
+  return level.objectives[var_0].ownerteam != var_1 || level.objectives[var_0].stalemate || level.objectives[var_0].captureblocked || istrue(level.objectives[var_0].ref_13686) || level.objectives[var_0].claimteam != "none" && level.objectives[var_0].claimteam != var_1;
 }
 
-function vault_gate_cut(var0) {
-  var1 = gettime();
-  var2 = isDefined(var0) && isDefined(var0.lasttimedamaged) && var0.lasttimedamaged + 5000 > var1;
-  var3 = isDefined(var0) && var0 scripts\mp\outofbounds::istouchingoobtrigger();
-  var4 = 0;
+function vault_gate_cut(var_0) {
+  var_1 = gettime();
+  var_2 = isDefined(var_0) && isDefined(var_0.lasttimedamaged) && var_0.lasttimedamaged + 5000 > var_1;
+  var_3 = isDefined(var_0) && var_0 scripts\mp\outofbounds::istouchingoobtrigger();
+  var_4 = 0;
 
-  if(isDefined(var0.team)) {
-    var5 = scripts\common\utility::playersnear(var0.origin, 384);
+  if(isDefined(var_0.team)) {
+    var_5 = scripts\common\utility::playersnear(var_0.origin, 384);
 
-    foreach(var7 in var5) {
-      if(isDefined(var7) && var7.team != var0.team && isalive(var7) && !isDefined(var7.fauxdead)) {
-        if(abs(var0.origin[2] - var7.origin[2]) < 100) {
-          var4 = 1;
+    foreach(var_7 in var_5) {
+      if(isDefined(var_7) && var_7.team != var_0.team && isalive(var_7) && !isDefined(var_7.fauxdead)) {
+        if(abs(var_0.origin[2] - var_7.origin[2]) < 100) {
+          var_4 = 1;
           break;
         }
       }
     }
   }
 
-  return var2 || var3 || var4;
+  return var_2 || var_3 || var_4;
 }
 
-function ref_1424c(var0) {
-  var0 endon("death");
-  var0.start_reach_icbm_launch = 0;
-  var1 = getdvarfloat("scr_gw_apc_ignore_damage_health_pct", 0.15);
+function ref_1424c(var_0) {
+  var_0 endon("death");
+  var_0.start_reach_icbm_launch = 0;
+  var_1 = getdvarfloat("scr_gw_apc_ignore_damage_health_pct", 0.15);
 
   for(;;) {
-    var2 = gettime();
-    var3 = istrue(var0.flarecooldown);
-    var4 = scripts\cp_mp\utility\weapon_utility::islockedonto(var0);
-    var5 = scripts\cp_mp\vehicles\vehicle_occupancy::ref_141c7(var0);
-    var6 = isDefined(var0) && isDefined(var0.lasttimedamaged) && var0.lasttimedamaged + 5000 > var2;
+    var_2 = gettime();
+    var_3 = istrue(var_0.flarecooldown);
+    var_4 = scripts\cp_mp\utility\weapon_utility::islockedonto(var_0);
+    var_5 = scripts\cp_mp\vehicles\vehicle_occupancy::ref_141c7(var_0);
+    var_6 = isDefined(var_0) && isDefined(var_0.lasttimedamaged) && var_0.lasttimedamaged + 5000 > var_2;
 
-    if(var0.vehiclename == "apc_russian") {
-      var7 = var0.health / var0.maxhealth;
+    if(var_0.vehiclename == "apc_russian") {
+      var_7 = var_0.health / var_0.maxhealth;
 
-      if(var7 > var1) {
-        var6 = 0;
+      if(var_7 > var_1) {
+        var_6 = 0;
       }
     }
 
-    var8 = isDefined(var0) && var0 scripts\mp\outofbounds::istouchingoobtrigger();
-    var9 = 0;
+    var_8 = isDefined(var_0) && var_0 scripts\mp\outofbounds::istouchingoobtrigger();
+    var_9 = 0;
 
-    if(isDefined(var0.team)) {
-      var10 = scripts\common\utility::playersnear(var0.origin, 384);
+    if(isDefined(var_0.team)) {
+      var_10 = scripts\common\utility::playersnear(var_0.origin, 384);
 
-      foreach(var12 in var10) {
-        if(isDefined(var12) && var12.team != var0.team && isalive(var12) && !isDefined(var12.fauxdead)) {
-          if(abs(var0.origin[2] - var12.origin[2]) < 100) {
-            var9 = 1;
+      foreach(var_12 in var_10) {
+        if(isDefined(var_12) && var_12.team != var_0.team && isalive(var_12) && !isDefined(var_12.fauxdead)) {
+          if(abs(var_0.origin[2] - var_12.origin[2]) < 100) {
+            var_9 = 1;
             break;
           }
         }
       }
     }
 
-    var14 = var0.start_reach_icbm_launch;
+    var_14 = var_0.start_reach_icbm_launch;
 
-    if(var6 || var8 || var9 || var3 || var4 || !var5) {
-      var0.start_reach_icbm_launch = 1;
+    if(var_6 || var_8 || var_9 || var_3 || var_4 || !var_5) {
+      var_0.start_reach_icbm_launch = 1;
     } else {
-      var0.start_reach_icbm_launch = 0;
+      var_0.start_reach_icbm_launch = 0;
     }
 
     waitframe();
   }
 }
 
-function shouldmodelognotify(var0, var1) {
-  var2 = level.squaddata[self.team][self.squadindex].players;
+function shouldmodelognotify(var_0, var_1) {
+  var_2 = level.squaddata[self.team][self.squadindex].players;
 
-  foreach(var4 in var0.occupants) {
-    foreach(var6 in var2) {
-      if(var6 == var4) {
+  foreach(var_4 in var_0.occupants) {
+    foreach(var_6 in var_2) {
+      if(var_6 == var_4) {
         return true;
       }
     }
@@ -615,137 +615,137 @@ function shouldmodelognotify(var0, var1) {
 }
 
 function setspawnselectionorder() {
-  var0 = scripts\engine\utility::getStructArray("axisLeft_alliesRight", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("axisLeft_alliesRight", "targetname");
 
   if(isDefined(scripts\cp_mp\utility\game_utility::getlocaleid())) {
-    var1 = undefined;
+    var_1 = undefined;
 
-    foreach(var3 in var0) {
-      if(var3.script_noteworthy == level.localeid) {
-        var1 = var3;
+    foreach(var_3 in var_0) {
+      if(var_3.script_noteworthy == level.localeid) {
+        var_1 = var_3;
       }
     }
   } else {
-    var1 = scripts\engine\utility::getStruct("axisLeft_alliesRight", "targetname");
+    var_1 = scripts\engine\utility::getStruct("axisLeft_alliesRight", "targetname");
   }
 
-  var5 = [];
+  var_5 = [];
 
-  foreach(var11, var7 in level.spawnselectionlocations) {
-    foreach(var9 in var7) {
-      if(var10 != self.team) {
+  foreach(var_11, var_7 in level.spawnselectionlocations) {
+    foreach(var_9 in var_7) {
+      if(var_10 != self.team) {
         continue;
       }
 
-      var5 = var9;
+      var_5 = var_9;
     }
   }
 
   if(self.team == "axis") {
-    var12 = var1 scripts\engine\utility::array_sort_with_func(var5, &sortlocationsbydistance_closestfirst);
+    var_12 = var_1 scripts\engine\utility::array_sort_with_func(var_5, &sortlocationsbydistance_closestfirst);
   } else {
-    var12 = var5 scripts\engine\utility::array_sort_with_func(var6, &sortlocationsbydistance_farthestfirst);
+    var_12 = var_5 scripts\engine\utility::array_sort_with_func(var_6, &sortlocationsbydistance_farthestfirst);
   }
 
-  foreach(var14 in var12) {
-    self setclientomnvar("ui_tom_spawn_entity_" + var11, var14.anchorentity);
-    self setclientomnvar("ui_tom_spawn_id_" + var11, var14.labelid);
+  foreach(var_14 in var_12) {
+    self setclientomnvar("ui_tom_spawn_entity_" + var_11, var_14.anchorentity);
+    self setclientomnvar("ui_tom_spawn_id_" + var_11, var_14.labelid);
   }
 }
 
-function sortlocationsbydistance_closestfirst(var0, var1) {
-  return distancesquared(var0.origin, self.origin) < distancesquared(var1.origin, self.origin);
+function sortlocationsbydistance_closestfirst(var_0, var_1) {
+  return distancesquared(var_0.origin, self.origin) < distancesquared(var_1.origin, self.origin);
 }
 
-function sortlocationsbydistance_farthestfirst(var0, var1) {
-  return distancesquared(var0.origin, self.origin) > distancesquared(var1.origin, self.origin);
+function sortlocationsbydistance_farthestfirst(var_0, var_1) {
+  return distancesquared(var_0.origin, self.origin) > distancesquared(var_1.origin, self.origin);
 }
 
-function picklane(var0) {
-  var1 = undefined;
+function picklane(var_0) {
+  var_1 = undefined;
 
-  foreach(var3 in level.availablespawnlocations[self.team]) {
-    if(issubstr(var3, var0)) {
-      var1 = var3;
+  foreach(var_3 in level.availablespawnlocations[self.team]) {
+    if(issubstr(var_3, var_0)) {
+      var_1 = var_3;
       break;
     }
   }
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  if(!isDefined(level.spawnselectionlocations[var1])) {
+  if(!isDefined(level.spawnselectionlocations[var_1])) {
     return;
   }
 
-  var5 = level.spawnselectionlocations[var1][self.team];
+  var_5 = level.spawnselectionlocations[var_1][self.team];
 
-  if(!isDefined(var5)) {
+  if(!isDefined(var_5)) {
     return;
   }
 
-  var6 = self.team == "allies";
-  var7 = 0;
+  var_6 = self.team == "allies";
+  var_7 = 0;
 
-  switch (var0) {
+  switch (var_0) {
     case "spawn_selection_a":
     case "lane03_":
     case "left":
-      var7 = scripts\engine\utility::ter_op(var6, 0, 2);
+      var_7 = scripts\engine\utility::ter_op(var_6, 0, 2);
       break;
     case "spawn_selection_b":
     case "lane02_":
     case "mid":
-      var7 = 1;
+      var_7 = 1;
       break;
     case "spawn_selection_c":
     case "lane01_":
     case "right":
-      var7 = scripts\engine\utility::ter_op(var6, 2, 0);
+      var_7 = scripts\engine\utility::ter_op(var_6, 2, 0);
       break;
   }
 
-  self setclientomnvar("ui_tom_spawn_entity_" + var7, var5.anchorentity);
-  self setclientomnvar("ui_tom_spawn_id_" + var7, var5.labelid);
+  self setclientomnvar("ui_tom_spawn_entity_" + var_7, var_5.anchorentity);
+  self setclientomnvar("ui_tom_spawn_id_" + var_7, var_5.labelid);
 }
 
 function refreshsquadspawns() {
-  var0 = 3;
+  var_0 = 3;
 
-  foreach(var2 in level.availablespawnlocations[self.team]) {
-    if(issubstr(var2, "squad_")) {
-      var3 = level.spawnselectionlocations[var2][self.team];
-      self setclientomnvar("ui_tom_spawn_entity_" + var0, var3.anchorentity);
-      self setclientomnvar("ui_tom_spawn_id_" + var0, var3.labelid);
-      var0++;
+  foreach(var_2 in level.availablespawnlocations[self.team]) {
+    if(issubstr(var_2, "squad_")) {
+      var_3 = level.spawnselectionlocations[var_2][self.team];
+      self setclientomnvar("ui_tom_spawn_entity_" + var_0, var_3.anchorentity);
+      self setclientomnvar("ui_tom_spawn_id_" + var_0, var_3.labelid);
+      var_0++;
     }
   }
 }
 
 function refreshdynamicspawns() {
-  var0 = 6;
+  var_0 = 6;
 
-  foreach(var2 in level.availablespawnlocations[self.team]) {
-    if(issubstr(var2, "dynamic_")) {
-      if(!isDefined(level.spawnselectionlocations[var2][self.team])) {
+  foreach(var_2 in level.availablespawnlocations[self.team]) {
+    if(issubstr(var_2, "dynamic_")) {
+      if(!isDefined(level.spawnselectionlocations[var_2][self.team])) {
         continue;
       }
 
-      var3 = level.spawnselectionlocations[var2][self.team];
+      var_3 = level.spawnselectionlocations[var_2][self.team];
 
-      if(!isDefined(var3)) {
+      if(!isDefined(var_3)) {
         continue;
       }
 
-      self setclientomnvar("ui_tom_spawn_entity_" + var0, var3.anchorentity);
-      self setclientomnvar("ui_tom_spawn_id_" + var0, var3.labelid);
-      var0++;
+      self setclientomnvar("ui_tom_spawn_entity_" + var_0, var_3.anchorentity);
+      self setclientomnvar("ui_tom_spawn_id_" + var_0, var_3.labelid);
+      var_0++;
     }
   }
 }
 
-function waitforspawnselection(var0, var1) {
+function waitforspawnselection(var_0, var_1) {
   if(istrue(level.gameended) || istrue(level.nukedetonated)) {
     pickrandomnonvehiclespawn();
     return;
@@ -766,8 +766,8 @@ function waitforspawnselection(var0, var1) {
     return;
   }
 
-  if(isai(self) || istrue(var1) || issubstr(self.name, "_hl_")) {
-    timeuntilspawnmessaging(var0, 9);
+  if(isai(self) || istrue(var_1) || issubstr(self.name, "_hl_")) {
+    timeuntilspawnmessaging(var_0, 9);
 
     if(scripts\mp\spawnlogic::shoulduseteamstartspawn()) {
       return;
@@ -782,42 +782,42 @@ function waitforspawnselection(var0, var1) {
   }
 
   self lerpfovscalefactor(0, 0.2);
-  spawnselectionthink(var0);
+  spawnselectionthink(var_0);
   self lerpfovscalefactor(1, 0.2);
 }
 
 function pickrandomnonvehiclespawn() {
-  var0 = scripts\engine\utility::array_randomize(level.availablespawnlocations[self.team]);
+  var_0 = scripts\engine\utility::array_randomize(level.availablespawnlocations[self.team]);
 
-  foreach(var2 in var0) {
-    if(issubstr(var2, "fob") || issubstr(var2, "HQ")) {
-      self.selectedspawnarea = var2;
+  foreach(var_2 in var_0) {
+    if(issubstr(var_2, "fob") || issubstr(var_2, "HQ")) {
+      self.selectedspawnarea = var_2;
       return;
     }
   }
 }
 
-function ref_1234c(var0) {
-  if(!isDefined(var0)) {
-    var0 = "vehicle";
+function ref_1234c(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = "vehicle";
   }
 
-  var1 = scripts\engine\utility::array_randomize(level.availablespawnlocations[self.team]);
+  var_1 = scripts\engine\utility::array_randomize(level.availablespawnlocations[self.team]);
 
-  foreach(var3 in var1) {
-    if(issubstr(var3, "vehicle")) {
-      self.selectedspawnarea = var3;
+  foreach(var_3 in var_1) {
+    if(issubstr(var_3, "vehicle")) {
+      self.selectedspawnarea = var_3;
       return;
     }
   }
 }
 
 function ref_1234b() {
-  var0 = scripts\engine\utility::array_randomize(level.availablespawnlocations[self.team]);
-  self.selectedspawnarea = var0[0];
+  var_0 = scripts\engine\utility::array_randomize(level.availablespawnlocations[self.team]);
+  self.selectedspawnarea = var_0[0];
 }
 
-function spawnselectionthink(var0) {
+function spawnselectionthink(var_0) {
   level endon("game_ended");
   self endon("disconnect");
   thread getinitialwinningteam();
@@ -838,7 +838,7 @@ function spawnselectionthink(var0) {
   thread scripts\mp\spawncamera::startspawncamera(0, 1.5, 0.5);
   self.inspawnselection = 1;
   self setclientomnvar("ui_hide_objectives", 1);
-  thread selectiondelaymessaging(var0);
+  thread selectiondelaymessaging(var_0);
 
   if(istrue(level.spawnselectionshowfriendly) || istrue(level.spawnselectionshowenemy)) {
     thread scripts\mp\flashpoint::flashpoint_spawnselectionvfx();
@@ -860,40 +860,40 @@ function spawnselectionthink(var0) {
 
   self setclientomnvar("ui_hide_objectives", 0);
   self setclientomnvar("ui_tac_ops_map_open", 1);
-  timeuntilspawnmessaging(var0, 9);
+  timeuntilspawnmessaging(var_0, 9);
   thread selectionmade();
   jumpiffalse(istrue(level.checkspawnselectionafk)) LOC_000000e8;
   thread watchforafk();
 
   for(;;) {
-    var1 = watchendconditions();
-    var2 = 1;
+    var_1 = watchendconditions();
+    var_2 = 1;
 
-    switch (var1) {
+    switch (var_1) {
       case "tac_ops_map_selection_valid":
-        var2 = 1;
+        var_2 = 1;
         break;
       case "tac_ops_map_changed":
-        var2 = 0;
+        var_2 = 0;
         refreshplayerspawnareaomnvars();
         break;
       case "tac_ops_map_cleared":
-        var2 = 1;
+        var_2 = 1;
         scripts\mp\spawncamera::deletespawncamera();
         break;
       case "spawned_player":
-        var2 = 1;
+        var_2 = 1;
         scripts\mp\spawncamera::deletespawncamera();
         break;
       case "tac_ops_map_game_ended":
-        var2 = 1;
+        var_2 = 1;
         scripts\mp\spawncamera::deletespawncamera();
         break;
       case "tac_ops_spawn_focus_changed":
-        var2 = 0;
+        var_2 = 0;
         break;
       case "tac_ops_map_nuke":
-        var2 = 0;
+        var_2 = 0;
         self setclientomnvar("ui_hide_objectives", 1);
         self setclientomnvar("ui_tac_ops_map_open", 0);
         thread spawnselectionshutdown_nuke();
@@ -902,7 +902,7 @@ function spawnselectionthink(var0) {
         break;
     }
 
-    if(var2) {
+    if(var_2) {
       self notify("stop_spawnselection_afk");
       self setclientomnvar("ui_tac_ops_map_open", 0);
       self.inspawnselection = 0;
@@ -937,7 +937,7 @@ function watchforafk() {
   kick(self getentitynumber(), "EXE/PLAYERKICKED_INACTIVE", 1);
 }
 
-function selectiondelaymessaging(var0) {
+function selectiondelaymessaging(var_0) {
   self endon("disconnect");
   self.canprocessselection = 0;
 
@@ -945,8 +945,8 @@ function selectiondelaymessaging(var0) {
     self setclientomnvar("ui_arm_respawnTimerActive", 1);
   }
 
-  if(var0 > 0) {
-    wait var0;
+  if(var_0 > 0) {
+    wait var_0;
   }
 
   if(scripts\mp\utility\game::getgametype() == "arm") {
@@ -963,8 +963,8 @@ function selectiondelaymessaging(var0) {
 }
 
 function validateselectedspawnarea() {
-  foreach(var1 in level.availablespawnlocations[self.team]) {
-    if(var1 == self.selectedspawnarea) {
+  foreach(var_1 in level.availablespawnlocations[self.team]) {
+    if(var_1 == self.selectedspawnarea) {
       self notify("tac_ops_map_selection_made");
       return;
     }
@@ -978,67 +978,67 @@ function selectionmade() {
   self endon("tac_ops_map_selection_valid");
 
   for(;;) {
-    self waittill("luinotifyserver", var0, var1);
+    self waittill("luinotifyserver", var_0, var_1);
 
-    if(var0 == "tac_ops_spawn_area_selected") {
-      var1 = ref_1400a(var1);
-      var2 = undefined;
+    if(var_0 == "tac_ops_spawn_area_selected") {
+      var_1 = ref_1400a(var_1);
+      var_2 = undefined;
 
-      foreach(var5, var4 in level.spawnselectionlocations) {
-        if(isDefined(var4[self.team]) && isDefined(var4[self.team].anchorentity) && var4[self.team].anchorentity getentitynumber() == var1) {
-          ref_1401d(var4[self.team].typeref, self, self.team);
+      foreach(var_5, var_4 in level.spawnselectionlocations) {
+        if(isDefined(var_4[self.team]) && isDefined(var_4[self.team].anchorentity) && var_4[self.team].anchorentity getentitynumber() == var_1) {
+          ref_1401d(var_4[self.team].typeref, self, self.team);
 
-          if(isDefined(var4[self.team].objectivekey) && isobjectiveindanger(var4[self.team].objectivekey, self.team)) {
+          if(isDefined(var_4[self.team].objectivekey) && isobjectiveindanger(var_4[self.team].objectivekey, self.team)) {
             break;
           }
 
-          if(isDefined(var4[self.team].typeref) && issubstr(var4[self.team].typeref, "vehicle") && istrue(var4[self.team].dynamicent.start_reach_icbm_launch)) {
+          if(isDefined(var_4[self.team].typeref) && issubstr(var_4[self.team].typeref, "vehicle") && istrue(var_4[self.team].dynamicent.start_reach_icbm_launch)) {
             break;
           }
 
-          var2 = var4[self.team].typeref;
+          var_2 = var_4[self.team].typeref;
           break;
         }
       }
 
-      if(!isDefined(var2)) {
-        var6 = round_get_vehicles(self.team, self.squadindex);
+      if(!isDefined(var_2)) {
+        var_6 = round_get_vehicles(self.team, self.squadindex);
 
-        foreach(var4 in var6) {
-          if(isDefined(var4.dynamicent) && var4.dynamicent getentitynumber() == var1) {
-            if(var4.dynamicent.team != self.team || var4.dynamicent.squadindex != self.squadindex) {
+        foreach(var_4 in var_6) {
+          if(isDefined(var_4.dynamicent) && var_4.dynamicent getentitynumber() == var_1) {
+            if(var_4.dynamicent.team != self.team || var_4.dynamicent.squadindex != self.squadindex) {
               thread refreshplayerspawnareaomnvars();
               break;
             }
 
-            if(issquadmateindanger(var4.dynamicent)) {
+            if(issquadmateindanger(var_4.dynamicent)) {
               break;
             }
 
-            var8 = var4.dynamicent.vehicle;
+            var_8 = var_4.dynamicent.vehicle;
 
-            if(isDefined(var8)) {
-              if(scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getavailablevehicleseats(var8).size == 0 || !istrue(scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_vehiclecanbeused(var8))) {
+            if(isDefined(var_8)) {
+              if(scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getavailablevehicleseats(var_8).size == 0 || !istrue(scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_vehiclecanbeused(var_8))) {
                 break;
               }
             }
 
-            var9 = spawnStruct();
-            var9 = scripts\mp\spawnscoring::get_cumulative_damage_expire_time(var9, var3.dynamicent);
+            var_9 = spawnStruct();
+            var_9 = scripts\mp\spawnscoring::get_cumulative_damage_expire_time(var_9, var_3.dynamicent);
 
-            if(!isDefined(var9.ref_1368a)) {
-              var3.dynamicent.ref_11eac = gettime();
+            if(!isDefined(var_9.ref_1368a)) {
+              var_3.dynamicent.ref_11eac = gettime();
               break;
             }
 
             <
-            error > = var1.typeref;
+            error > = var_1.typeref;
             break;
           }
         }
 
-        var4 = undefined;
-        var5 = undefined;
+        var_4 = undefined;
+        var_5 = undefined;
       }
 
       if(!isDefined( < error > )) {
@@ -1055,20 +1055,20 @@ function selectionmade() {
   }
 }
 
-function ref_1400a(var0) {
+function ref_1400a(var_0) {
   if(!isDefined(self.setaardata)) {
     self.setaardata = [];
   }
 
-  var1 = 65536;
-  var2 = 131072;
-  var3 = 262144;
-  var4 = 524288;
-  self.setaardata["rightmouseup"] = istrue(self.setaardata["rightmouseup"]) || (var0 &var1) > 0;
-  self.setaardata["leftmouseup"] = istrue(self.setaardata["leftmouseup"]) || (var0 &var2) > 0;
-  self.setaardata["activate"] = istrue(self.setaardata["activate"]) || (var0 &var3) > 0;
-  self.setaardata["gostand"] = istrue(self.setaardata["gostand"]) || (var0 &var4) > 0;
-  return var0 &~(var1 | var2 | var3 | var4);
+  var_1 = 65536;
+  var_2 = 131072;
+  var_3 = 262144;
+  var_4 = 524288;
+  self.setaardata["rightmouseup"] = istrue(self.setaardata["rightmouseup"]) || (var_0 &var_1) > 0;
+  self.setaardata["leftmouseup"] = istrue(self.setaardata["leftmouseup"]) || (var_0 &var_2) > 0;
+  self.setaardata["activate"] = istrue(self.setaardata["activate"]) || (var_0 &var_3) > 0;
+  self.setaardata["gostand"] = istrue(self.setaardata["gostand"]) || (var_0 &var_4) > 0;
+  return var_0 &~(var_1 | var_2 | var_3 | var_4);
 }
 
 function watchendconditions() {
@@ -1078,9 +1078,9 @@ function watchendconditions() {
   thread endconditionwatcher_mapcleared();
   thread endconditionwatcher_mapchanged();
   thread endconditionwatcher_nuke();
-  var0 = scripts\engine\utility::ref_143b8("tac_ops_map_selection_valid", "tac_ops_map_changed", "tac_ops_map_cleared", "spawned_player", "tac_ops_map_game_ended", "tac_ops_map_nuke");
+  var_0 = scripts\engine\utility::ref_143b8("tac_ops_map_selection_valid", "tac_ops_map_changed", "tac_ops_map_cleared", "spawned_player", "tac_ops_map_game_ended", "tac_ops_map_nuke");
   self notify("tac_ops_end_condition_met");
-  return var0;
+  return var_0;
 }
 
 function endconditionwatcher_selectionmade() {
@@ -1099,7 +1099,7 @@ function endconditionwatcher_selectionmade() {
   }
 }
 
-function endcondition_focuschanged(var0) {
+function endcondition_focuschanged(var_0) {
   if(isDefined(self.selectedspawnarea)) {
     return;
   }
@@ -1108,54 +1108,54 @@ function endcondition_focuschanged(var0) {
   self notify("endConditionWatcher_FocusChanged()");
   self endon("endConditionWatcher_FocusChanged()");
   self notify("tac_ops_spawn_focus_changed");
-  var1 = undefined;
+  var_1 = undefined;
 
-  foreach(var3 in level.spawnselectionlocations) {
-    if(isDefined(var3[self.team]) && isDefined(var3[self.team].anchorentity) && var3[self.team].anchorentity getentitynumber() == var0) {
-      thread vehicle_registerturret(var3[self.team].anchorentity.origin);
-      var1 = var3[self.team].typeref;
+  foreach(var_3 in level.spawnselectionlocations) {
+    if(isDefined(var_3[self.team]) && isDefined(var_3[self.team].anchorentity) && var_3[self.team].anchorentity getentitynumber() == var_0) {
+      thread vehicle_registerturret(var_3[self.team].anchorentity.origin);
+      var_1 = var_3[self.team].typeref;
       break;
     }
   }
 
-  if(!isDefined(var1)) {
-    var5 = round_get_vehicles(self.team, self.squadindex);
+  if(!isDefined(var_1)) {
+    var_5 = round_get_vehicles(self.team, self.squadindex);
 
-    foreach(var3 in var5) {
-      if(isDefined(var3.dynamicent) && var3.dynamicent getentitynumber() == var0) {
-        thread vehicle_registerturret(var3.dynamicent.origin);
-        var1 = var3.typeref;
+    foreach(var_3 in var_5) {
+      if(isDefined(var_3.dynamicent) && var_3.dynamicent getentitynumber() == var_0) {
+        thread vehicle_registerturret(var_3.dynamicent.origin);
+        var_1 = var_3.typeref;
         break;
       }
     }
   }
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
   self setclientomnvar("ui_tom_veh_health_percent", 0);
 
-  if(issubstr(var1, "squad")) {
-    thread managesquadcameraposition(var1);
-    var8 = tablelookuprownum("mp/spawnSelectionMapData.csv", 0, var1);
-    self setclientomnvar("ui_tom_previous_selection", var8);
+  if(issubstr(var_1, "squad")) {
+    thread managesquadcameraposition(var_1);
+    var_8 = tablelookuprownum("mp/spawnSelectionMapData.csv", 0, var_1);
+    self setclientomnvar("ui_tom_previous_selection", var_8);
     return;
   }
 
-  if(issubstr(var2, "vehicle")) {
-    thread managevehiclecameraposition(var2);
-    thread ref_11ab3(var2);
-    var8 = tablelookuprownum("mp/spawnSelectionMapData.csv", 0, var2);
-    self setclientomnvar("ui_tom_previous_selection", var8);
+  if(issubstr(var_2, "vehicle")) {
+    thread managevehiclecameraposition(var_2);
+    thread ref_11ab3(var_2);
+    var_8 = tablelookuprownum("mp/spawnSelectionMapData.csv", 0, var_2);
+    self setclientomnvar("ui_tom_previous_selection", var_8);
     return;
   }
 
-  var8 = tablelookuprownum("mp/spawnSelectionMapData.csv", 0, var3 + "_" + level.localeid);
-  self setclientomnvar("ui_tom_previous_selection", var8);
+  var_8 = tablelookuprownum("mp/spawnSelectionMapData.csv", 0, var_3 + "_" + level.localeid);
+  self setclientomnvar("ui_tom_previous_selection", var_8);
 
-  if(isDefined(level.spawncameras[var3]) && isDefined(level.spawncameras[var3][self.team])) {
-    self.forcedspawncameraref = var3;
+  if(isDefined(level.spawncameras[var_3]) && isDefined(level.spawncameras[var_3][self.team])) {
+    self.forcedspawncameraref = var_3;
 
     while(!scripts\mp\flags::gameflag("prematch_done")) {
       waitframe();
@@ -1166,7 +1166,7 @@ function endcondition_focuschanged(var0) {
   }
 }
 
-function vehicle_registerturret(var0) {
+function vehicle_registerturret(var_0) {
   self endon("disconnect");
   self endon("tac_ops_map_selection_valid");
   self endon("spawned_player");
@@ -1178,7 +1178,7 @@ function vehicle_registerturret(var0) {
   }
 
   for(;;) {
-    self predictstreampos(var0, 1);
+    self predictstreampos(var_0, 1);
     wait level.ref_145df;
   }
 }
@@ -1234,97 +1234,97 @@ function spawnselectionshutdown_nuke() {
   self visionsetnakedforplayer("flir_0_black_to_white_heavy_damage", 0.05);
 }
 
-function adddynamicspawnarea(var0, var1, var2, var3) {
-  if(isDefined(level.spawnselectionlocations[var2]) && isDefined(level.spawnselectionlocations[var2][var0])) {
-    var4 = level.spawnselectionlocations[var2][var0];
-    var4.origin = var1.origin + scripts\engine\utility::ter_op(isDefined(var3), var3, (0, 0, 0));
-    var4.angles = var1.angles;
+function adddynamicspawnarea(var_0, var_1, var_2, var_3) {
+  if(isDefined(level.spawnselectionlocations[var_2]) && isDefined(level.spawnselectionlocations[var_2][var_0])) {
+    var_4 = level.spawnselectionlocations[var_2][var_0];
+    var_4.origin = var_1.origin + scripts\engine\utility::ter_op(isDefined(var_3), var_3, (0, 0, 0));
+    var_4.angles = var_1.angles;
     return;
   }
 
-  var4 = spawnStruct();
-  var4.origin = var2.origin + scripts\engine\utility::ter_op(isDefined(var4), var4, (0, 0, 0));
-  var4.angles = var2.angles;
-  var4.dynamicent = var2;
-  var4.script_noteworthy = var3;
-  initspawnarea(var1, var4, var3);
+  var_4 = spawnStruct();
+  var_4.origin = var_2.origin + scripts\engine\utility::ter_op(isDefined(var_4), var_4, (0, 0, 0));
+  var_4.angles = var_2.angles;
+  var_4.dynamicent = var_2;
+  var_4.script_noteworthy = var_3;
+  initspawnarea(var_1, var_4, var_3);
   updatespawnareas();
 }
 
-function removedynamicspawnarea(var0, var1) {
-  if(isDefined(level.spawnselectionlocations[var1]) && isDefined(level.spawnselectionlocations[var1][var0])) {
-    level.spawnselectionlocations[var1][var0] = undefined;
+function removedynamicspawnarea(var_0, var_1) {
+  if(isDefined(level.spawnselectionlocations[var_1]) && isDefined(level.spawnselectionlocations[var_1][var_0])) {
+    level.spawnselectionlocations[var_1][var_0] = undefined;
 
-    if(level.spawnselectionlocations[var1].size == 0) {
-      level.spawnselectionlocations[var1] = undefined;
+    if(level.spawnselectionlocations[var_1].size == 0) {
+      level.spawnselectionlocations[var_1] = undefined;
     }
   }
 
   updatespawnareas();
 }
 
-function round_get_vehicles(var0, var1) {
-  var2 = [];
+function round_get_vehicles(var_0, var_1) {
+  var_2 = [];
 
-  if(isDefined(level.squadspawnselectionlocations) && isDefined(level.squadspawnselectionlocations[var0]) && isDefined(level.squadspawnselectionlocations[var0][var1])) {
-    var2 = level.squadspawnselectionlocations[var0][var1];
+  if(isDefined(level.squadspawnselectionlocations) && isDefined(level.squadspawnselectionlocations[var_0]) && isDefined(level.squadspawnselectionlocations[var_0][var_1])) {
+    var_2 = level.squadspawnselectionlocations[var_0][var_1];
   }
 
-  return var2;
+  return var_2;
 }
 
-function updatesquadspawn(var0, var1, var2, var3) {
+function updatesquadspawn(var_0, var_1, var_2, var_3) {
   if(!isDefined(level.squadspawnselectionlocations)) {
     level.squadspawnselectionlocations = [];
   }
 
-  if(!isDefined(level.squadspawnselectionlocations[var0])) {
-    level.squadspawnselectionlocations[var0] = [];
+  if(!isDefined(level.squadspawnselectionlocations[var_0])) {
+    level.squadspawnselectionlocations[var_0] = [];
   }
 
-  if(!isDefined(level.squadspawnselectionlocations[var0][var1])) {
-    level.squadspawnselectionlocations[var0][var1] = [];
+  if(!isDefined(level.squadspawnselectionlocations[var_0][var_1])) {
+    level.squadspawnselectionlocations[var_0][var_1] = [];
   }
 
-  if(isDefined(level.squadspawnselectionlocations[var0][var1][var2])) {
-    if(!isDefined(var3)) {
-      level.squadspawnselectionlocations[var0][var1][var2] = undefined;
+  if(isDefined(level.squadspawnselectionlocations[var_0][var_1][var_2])) {
+    if(!isDefined(var_3)) {
+      level.squadspawnselectionlocations[var_0][var_1][var_2] = undefined;
       return;
     }
 
-    var4 = level.squadspawnselectionlocations[var0][var1][var2];
-    var4.typeref = var2;
-    var4.origin = var3.origin;
-    var4.angles = var3.angles;
-    var4.dynamicent = var3;
+    var_4 = level.squadspawnselectionlocations[var_0][var_1][var_2];
+    var_4.typeref = var_2;
+    var_4.origin = var_3.origin;
+    var_4.angles = var_3.angles;
+    var_4.dynamicent = var_3;
     return;
   }
 
-  if(!isDefined(var4)) {
+  if(!isDefined(var_4)) {
     return;
   }
 
-  var4 = spawnStruct();
-  var4.typeref = var3;
-  var4.origin = var4.origin;
-  var4.angles = var4.angles;
-  var4.dynamicent = var4;
-  level.squadspawnselectionlocations[var1][var2][var3] = var4;
+  var_4 = spawnStruct();
+  var_4.typeref = var_3;
+  var_4.origin = var_4.origin;
+  var_4.angles = var_4.angles;
+  var_4.dynamicent = var_4;
+  level.squadspawnselectionlocations[var_1][var_2][var_3] = var_4;
 }
 
-function removespawnareaondeathdisconnect(var0, var1) {
+function removespawnareaondeathdisconnect(var_0, var_1) {
   self endon("tac_ops_end_condition_met");
-  adddynamicspawnarea(var0, self, var1);
+  adddynamicspawnarea(var_0, self, var_1);
   self waittill("death_or_disconnect");
-  thread addspawnareaonspawn(var0, var1);
+  thread addspawnareaonspawn(var_0, var_1);
 }
 
-function addspawnareaonspawn(var0, var1) {
+function addspawnareaonspawn(var_0, var_1) {
   self endon("tac_ops_end_condition_met");
-  removedynamicspawnarea(var0, var1);
+  removedynamicspawnarea(var_0, var_1);
   self endon("disconnect");
   self waittill("spawned_player");
-  thread removespawnareaondeathdisconnect(var0, var1);
+  thread removespawnareaondeathdisconnect(var_0, var_1);
 }
 
 function evaluatesquadspawn() {
@@ -1332,38 +1332,38 @@ function evaluatesquadspawn() {
   self endon("end_respawn");
   self notify("evaluateSquadSpawn");
   self endon("evaluateSquadSpawn");
-  var0 = level.availablespawnlocations[self.team].size;
-  var1 = [];
+  var_0 = level.availablespawnlocations[self.team].size;
+  var_1 = [];
   GscBinSkip0(0x2e, 0, tablelookuprownum("mp/spawnSelectionMapData.csv", 0, "squad_0"));
 }
 
-function handlerespawnselection(var0, var1) {
+function handlerespawnselection(var_0, var_1) {
   level endon("game_ended");
   self endon("disconnect");
-  var2 = undefined;
+  var_2 = undefined;
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     if(istrue(level.usec130spawnfirstonly) && istrue(level.usec130spawn) && !istrue(self.spawnedusingc130) && isDefined(level.spawnc130[self.team])) {
-      var2 = 1;
+      var_2 = 1;
     } else if(istrue(level.usesquadspawn)) {
-      var2 = 0;
+      var_2 = 0;
     } else if(istrue(level.usespawnselection)) {
-      var2 = 2;
+      var_2 = 2;
     } else if(istrue(level.usec130spawn)) {
-      var2 = 1;
+      var_2 = 1;
     } else {
-      var2 = 3;
+      var_2 = 3;
     }
   }
 
-  var3 = gettime();
-  var4 = 0;
+  var_3 = gettime();
+  var_4 = 0;
 
-  while(!var4) {
-    var5 = gettime();
-    var6 = (var3 + var1 * 1000 - var5) / 1000;
+  while(!var_4) {
+    var_5 = gettime();
+    var_6 = (var_3 + var_1 * 1000 - var_5) / 1000;
 
-    switch (var2) {
+    switch (var_2) {
       case 0:
         self.squadspawnconfirmed = 0;
         self.squadspawnaborted = 0;
@@ -1372,24 +1372,24 @@ function handlerespawnselection(var0, var1) {
           thread handlesquadspawnabort();
         }
 
-        if(!var0) {
+        if(!var_0) {
           thread scripts\mp\playerlogic::respawn_asspectator(self.origin + (0, 0, 60), self.angles);
         }
 
-        var0 = 1;
-        var7 = scripts\engine\utility::ter_op(isDefined(self.spawnselectedsquadmate), self.spawnselectedsquadmate, 0);
+        var_0 = 1;
+        var_7 = scripts\engine\utility::ter_op(isDefined(self.spawnselectedsquadmate), self.spawnselectedsquadmate, 0);
 
-        if(thread cyclevalidsquadspectate(var7, 1)) {
+        if(thread cyclevalidsquadspectate(var_7, 1)) {
           if(!isai(self)) {
-            var8 = handlesquadspawnconfirm(var6);
+            var_8 = handlesquadspawnconfirm(var_6);
 
-            if(!istrue(var8)) {
+            if(!istrue(var_8)) {
               self.squadspawnaborted = 1;
             } else {
               self.squadspawnconfirmed = 1;
             }
           } else {
-            timeuntilspawnmessaging(var1, 5);
+            timeuntilspawnmessaging(var_1, 5);
 
             if(scripts\engine\utility::cointoss()) {
               self.squadspawnconfirmed = 1;
@@ -1405,23 +1405,23 @@ function handlerespawnselection(var0, var1) {
           self.forcespectatorclient = -1;
 
           if(istrue(level.usec130spawn)) {
-            var2 = 1;
+            var_2 = 1;
           } else if(istrue(level.usespawnselection)) {
-            var2 = 2;
+            var_2 = 2;
           } else {
-            var2 = 3;
+            var_2 = 3;
           }
         } else {
-          var4 = 1;
+          var_4 = 1;
         }
 
         break;
       case 1:
         thread scripts\mp\spawncamera::startspawncamera();
-        var9 = thread scripts\mp\spawncamera::getspawncamerawaittime();
+        var_9 = thread scripts\mp\spawncamera::getspawncamerawaittime();
 
-        if(!isDefined(var9)) {
-          var9 = 0;
+        if(!isDefined(var_9)) {
+          var_9 = 0;
         }
 
         if(level.usec130spawnfirstonly) {
@@ -1429,19 +1429,19 @@ function handlerespawnselection(var0, var1) {
         }
 
         spawntoc130();
-        var4 = 1;
+        var_4 = 1;
         break;
       case 2:
-        var10 = scripts\mp\flags::gameflag("infil_will_run") && !istrue(scripts\mp\flags::gameflag("infil_started"));
+        var_10 = scripts\mp\flags::gameflag("infil_will_run") && !istrue(scripts\mp\flags::gameflag("infil_started"));
 
-        if(scripts\mp\utility\game::getgametype() == "arm" && !var10 && !scripts\mp\flags::gameflag("prematch_done")) {
-          var11 = scripts\mp\gametypes\arm::getmissedinfilcamerapositions(self.team);
-          var12 = spawn("script_model", var11.startorigin);
-          var12 setModel("tag_origin");
-          var12.angles = var11.startangles;
-          self cameralinkTo(var12, "tag_origin");
-          var12 moveTo(var11.endorigin, 18);
-          var12 rotateTo(var11.endangles, 18);
+        if(scripts\mp\utility\game::getgametype() == "arm" && !var_10 && !scripts\mp\flags::gameflag("prematch_done")) {
+          var_11 = scripts\mp\gametypes\arm::getmissedinfilcamerapositions(self.team);
+          var_12 = spawn("script_model", var_11.startorigin);
+          var_12 setModel("tag_origin");
+          var_12.angles = var_11.startangles;
+          self cameralinkTo(var_12, "tag_origin");
+          var_12 moveTo(var_11.endorigin, 18);
+          var_12 rotateTo(var_11.endangles, 18);
           scripts\mp\flags::gameflagwait("prematch_done");
           self cameraunlink();
           self.spawncameratime = 0.5;
@@ -1451,29 +1451,29 @@ function handlerespawnselection(var0, var1) {
           thread scripts\mp\spawncamera::startspawncamera(0, 0.5, 0.5);
         }
 
-        var9 = thread scripts\mp\spawncamera::getspawncamerawaittime();
+        var_9 = thread scripts\mp\spawncamera::getspawncamerawaittime();
 
-        if(!isDefined(var9)) {
-          var9 = 0;
+        if(!isDefined(var_9)) {
+          var_9 = 0;
         }
 
-        waitforspawnselection(var6 + var9);
+        waitforspawnselection(var_6 + var_9);
 
         if(isDefined(self.selectedspawnarea)) {
-          var4 = 1;
+          var_4 = 1;
         }
 
         break;
       case 3:
         thread scripts\mp\spawncamera::startspawncamera();
-        var9 = thread scripts\mp\spawncamera::getspawncamerawaittime();
+        var_9 = thread scripts\mp\spawncamera::getspawncamerawaittime();
 
-        if(!isDefined(var9)) {
-          var9 = 0;
+        if(!isDefined(var_9)) {
+          var_9 = 0;
         }
 
-        timeuntilspawnmessaging(var6 + var9, 9);
-        var4 = 1;
+        timeuntilspawnmessaging(var_6 + var_9, 9);
+        var_4 = 1;
         break;
     }
   }
@@ -1483,11 +1483,11 @@ function handlerespawnselection(var0, var1) {
       scripts\mp\utility\lower_message::setlowermessageomnvar(1);
     }
 
-    if(!var0) {
+    if(!var_0) {
       thread scripts\mp\playerlogic::respawn_asspectator(self.origin + (0, 0, 60), self.angles);
     }
 
-    var0 = 1;
+    var_0 = 1;
     waitrespawnbutton();
   }
 
@@ -1514,95 +1514,95 @@ function handlesquadspawncycle() {
   self notifyonplayercommand("cyclePos", "+gostand");
 
   for(;;) {
-    var0 = scripts\engine\utility::ref_143ad("cyclePos", "cycleNeg");
+    var_0 = scripts\engine\utility::ref_143ad("cyclePos", "cycleNeg");
 
-    if(isDefined(var0)) {
-      var1 = self getspectatingplayer();
+    if(isDefined(var_0)) {
+      var_1 = self getspectatingplayer();
 
-      if(var0 == "cyclePos") {
-        thread cyclevalidsquadspectate(var1.pers["squadMemberIndex"], 1);
-      } else if(var0 == "cycleNeg") {
-        thread cyclevalidsquadspectate(var1.pers["squadMemberIndex"], 0);
+      if(var_0 == "cyclePos") {
+        thread cyclevalidsquadspectate(var_1.pers["squadMemberIndex"], 1);
+      } else if(var_0 == "cycleNeg") {
+        thread cyclevalidsquadspectate(var_1.pers["squadMemberIndex"], 0);
       }
     }
   }
 }
 
-function handlesquadspawnconfirm(var0) {
+function handlesquadspawnconfirm(var_0) {
   self endon("disconnect");
   self endon("end_respawn");
   self endon("squad_spawn_abort");
-  timeuntilspawnmessaging(var0, 9);
+  timeuntilspawnmessaging(var_0, 9);
   scripts\mp\utility\lower_message::setlowermessageomnvar(35);
   self notifyonplayercommand("respawn_confirm", "+usereload");
   self waittill("respawn_confirm");
   return true;
 }
 
-function cyclevalidsquadspectate(var0, var1) {
+function cyclevalidsquadspectate(var_0, var_1) {
   self endon("disconnect");
   self endon("end_respawn");
   self endon("squad_spawn_abort");
   self notify("cycleValidSquadSpectate");
   self endon("cycleValidSquadSpectate");
-  var2 = level.squaddata[self.team][self.squadindex].players;
-  var3 = var0;
-  var4 = scripts\engine\utility::ter_op(var1, 1, -1);
+  var_2 = level.squaddata[self.team][self.squadindex].players;
+  var_3 = var_0;
+  var_4 = scripts\engine\utility::ter_op(var_1, 1, -1);
 
-  for(var5 = 0; var5 < var2.size; var5++) {
-    if(iscurrentspectatetarget(var2[var3]) || !issquadspawnable(var2[var3])) {
-      var3 += var4;
+  for(var_5 = 0; var_5 < var_2.size; var_5++) {
+    if(iscurrentspectatetarget(var_2[var_3]) || !issquadspawnable(var_2[var_3])) {
+      var_3 += var_4;
 
-      if(var3 == var2.size) {
-        var3 = 0;
+      if(var_3 == var_2.size) {
+        var_3 = 0;
       }
 
-      if(var3 == -1) {
-        var3 = var2.size - 1;
+      if(var_3 == -1) {
+        var_3 = var_2.size - 1;
       }
 
       continue;
     }
 
-    thread monitorsquadspectator(var2[var3]);
+    thread monitorsquadspectator(var_2[var_3]);
     return true;
   }
 
   return false;
 }
 
-function iscurrentspectatetarget(var0) {
+function iscurrentspectatetarget(var_0) {
   if(!isDefined(self.forcespectatorclient)) {
     return false;
   }
 
-  var1 = self getspectatingplayer();
+  var_1 = self getspectatingplayer();
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return false;
   }
 
-  return var0 == var1;
+  return var_0 == var_1;
 }
 
-function issquadspawnable(var0) {
-  if(!isDefined(var0)) {
+function issquadspawnable(var_0) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
-  if(!scripts\mp\utility\player::isreallyalive(var0)) {
+  if(!scripts\mp\utility\player::isreallyalive(var_0)) {
     return false;
   }
 
-  if(istrue(var0.inspawncamera)) {
+  if(istrue(var_0.inspawncamera)) {
     return false;
   }
 
-  if(var0 isskydiving()) {
+  if(var_0 isskydiving()) {
     return false;
   }
 
-  if(var0 scripts\mp\utility\player::isusingremote()) {
+  if(var_0 scripts\mp\utility\player::isusingremote()) {
     return false;
   }
 
@@ -1631,91 +1631,91 @@ function trial_patch_finished() {
   }
 }
 
-function issquadmateindanger(var0) {
-  var1 = gettime();
+function issquadmateindanger(var_0) {
+  var_1 = gettime();
 
-  if(isDefined(var0) && isDefined(var0.lastdamagetime) && var0.lastdamagetime + 5000 > var1 || isDefined(var0.lasttimedamaged) && var0.lasttimedamaged + 5000 > var1) {
+  if(isDefined(var_0) && isDefined(var_0.lastdamagetime) && var_0.lastdamagetime + 5000 > var_1 || isDefined(var_0.lasttimedamaged) && var_0.lasttimedamaged + 5000 > var_1) {
     return true;
   }
 
-  if(var0 isonladder()) {
+  if(var_0 isonladder()) {
     return true;
   }
 
-  var0 scripts\mp\battlechatter_mp::validaterecentattackers();
+  var_0 scripts\mp\battlechatter_mp::validaterecentattackers();
 
-  if(isDefined(var0.recentattackers) && var0.recentattackers.size > 0) {
+  if(isDefined(var_0.recentattackers) && var_0.recentattackers.size > 0) {
     return true;
   }
 
-  if(isDefined(var0.watch_for_players_touching_ground) && var0.watch_for_players_touching_ground + 3000 > var1) {
+  if(isDefined(var_0.watch_for_players_touching_ground) && var_0.watch_for_players_touching_ground + 3000 > var_1) {
     return true;
   }
 
-  if(isDefined(var0.watch_for_players_touching_ground) && isDefined(var0.watch_for_players_regrouping_to_plane) && var0.watch_for_players_touching_ground > var0.watch_for_players_regrouping_to_plane || isDefined(var0.watch_for_players_touching_ground) && !isDefined(var0.watch_for_players_regrouping_to_plane)) {
+  if(isDefined(var_0.watch_for_players_touching_ground) && isDefined(var_0.watch_for_players_regrouping_to_plane) && var_0.watch_for_players_touching_ground > var_0.watch_for_players_regrouping_to_plane || isDefined(var_0.watch_for_players_touching_ground) && !isDefined(var_0.watch_for_players_regrouping_to_plane)) {
     return true;
   }
 
-  var2 = var0 getspawnbucketforplayer(384, 100, 1);
+  var_2 = var_0 getspawnbucketforplayer(384, 100, 1);
 
-  if(isDefined(var2)) {
+  if(isDefined(var_2)) {
     return true;
   }
 
-  if(isDefined(var0.vehicle)) {
-    if(istrue(var0.vehicle.flarecooldown)) {
+  if(isDefined(var_0.vehicle)) {
+    if(istrue(var_0.vehicle.flarecooldown)) {
       return true;
     }
 
-    if(istrue(scripts\cp_mp\utility\weapon_utility::islockedonto(var0.vehicle))) {
+    if(istrue(scripts\cp_mp\utility\weapon_utility::islockedonto(var_0.vehicle))) {
       return true;
     }
   }
 
-  if(isDefined(var0) && var0 scripts\mp\outofbounds::istouchingoobtrigger()) {
+  if(isDefined(var_0) && var_0 scripts\mp\outofbounds::istouchingoobtrigger()) {
     return true;
   }
 
   if(getdvarint("scr_squad_spawn_bucket", 0) == 1) {
-    var3 = var0 disablereloading(1, var0.origin);
-    var3 = scripts\mp\spawnlogic::getspawnbucketfromstring(var3);
+    var_3 = var_0 disablereloading(1, var_0.origin);
+    var_3 = scripts\mp\spawnlogic::getspawnbucketfromstring(var_3);
 
-    if(var3 >= 2) {
+    if(var_3 >= 2) {
       return true;
     }
   }
 
-  if(isDefined(var0) && isDefined(var0.ref_11eac) && var0.ref_11eac + 1000 > var1) {
+  if(isDefined(var_0) && isDefined(var_0.ref_11eac) && var_0.ref_11eac + 1000 > var_1) {
     return true;
   }
 
   return false;
 }
 
-function monitorsquadspectator(var0) {
+function monitorsquadspectator(var_0) {
   self endon("disconnect");
   self endon("end_respawn");
   self endon("squad_spawn_abort");
   self notify("monitorSquadSpectator");
   self endon("monitorSquadSpectator");
-  var1 = var0.pers["squadMemberIndex"];
-  self.forcespectatorclient = var0 getentitynumber();
+  var_1 = var_0.pers["squadMemberIndex"];
+  self.forcespectatorclient = var_0 getentitynumber();
   self forcethirdpersonwhenspectating();
   thread handlesquadspawncycle();
 
-  while(issquadspawnable(var0)) {
-    if(issquadmateindanger(var0)) {
+  while(issquadspawnable(var_0)) {
+    if(issquadmateindanger(var_0)) {
       self setclientomnvar("ui_squad_spawn_combat", 1);
     } else {
       self setclientomnvar("ui_squad_spawn_combat", 0);
     }
 
-    self.squadspectatepos = var0.origin + anglesToForward(var0.angles) * -80 + (0, 0, 64);
-    self.squadspectateang = var0.angles;
+    self.squadspectatepos = var_0.origin + anglesToForward(var_0.angles) * -80 + (0, 0, 64);
+    self.squadspectateang = var_0.angles;
     waitframe();
   }
 
-  if(!thread cyclevalidsquadspectate(var1, 1)) {
+  if(!thread cyclevalidsquadspectate(var_1, 1)) {
     self.squadspawnaborted = 0;
     self notify("squad_spawn_abort");
     return;
@@ -1757,9 +1757,9 @@ function needsbuttontorespawn() {
     return false;
   }
 
-  var0 = getdvarint("scr_" + scripts\mp\utility\game::getgametype() + "_waverespawndelay") > 0;
+  var_0 = getdvarint("scr_" + scripts\mp\utility\game::getgametype() + "_waverespawndelay") > 0;
 
-  if(var0) {
+  if(var_0) {
     return false;
   }
 
@@ -1783,140 +1783,140 @@ function waitrespawnbutton() {
   }
 }
 
-function timeuntilspawnmessaging(var0, var1) {
+function timeuntilspawnmessaging(var_0, var_1) {
   self endon("disconnect");
 
-  if(var0 > 0) {
-    if(!isDefined(var1)) {
-      var1 = 9;
+  if(var_0 > 0) {
+    if(!isDefined(var_1)) {
+      var_1 = 9;
     }
 
-    scripts\mp\utility\lower_message::setlowermessageomnvar(var1, int(gettime() + var0 * 1000));
-    scripts\engine\utility::ref_143bf(var0, "force_spawn");
+    scripts\mp\utility\lower_message::setlowermessageomnvar(var_1, int(gettime() + var_0 * 1000));
+    scripts\engine\utility::ref_143bf(var_0, "force_spawn");
     return;
   }
 }
 
-function managesquadcameraposition(var0) {
+function managesquadcameraposition(var_0) {
   self endon("disconnect");
   self endon("end_respawn");
   self endon("tac_ops_spawn_focus_changed");
   self notify("manageSquadCameraPosition");
   self endon("manageSquadCameraPosition");
-  var1 = undefined;
+  var_1 = undefined;
 
-  if(var0 == "squad_leader") {
-    var1 = level.squaddata[self.team][self.squadindex].squadleaderindex;
+  if(var_0 == "squad_leader") {
+    var_1 = level.squaddata[self.team][self.squadindex].squadleaderindex;
   } else {
-    var1 = int(getsubstr(var0, var0.size - 1, var0.size));
+    var_1 = int(getsubstr(var_0, var_0.size - 1, var_0.size));
   }
 
-  var2 = undefined;
+  var_2 = undefined;
 
-  if(isDefined(level.squaddata[self.team]) && isDefined(level.squaddata[self.team][self.squadindex]) && isDefined(level.squaddata[self.team][self.squadindex].players[var1])) {
-    var2 = level.squaddata[self.team][self.squadindex].players[var1];
+  if(isDefined(level.squaddata[self.team]) && isDefined(level.squaddata[self.team][self.squadindex]) && isDefined(level.squaddata[self.team][self.squadindex].players[var_1])) {
+    var_2 = level.squaddata[self.team][self.squadindex].players[var_1];
   }
 
-  var3 = level.spawnselectionteamforward[self.team];
+  var_3 = level.spawnselectionteamforward[self.team];
 
-  while(isDefined(self.spawncameraent) && isDefined(var2)) {
-    var4 = [];
-    var5 = [];
+  while(isDefined(self.spawncameraent) && isDefined(var_2)) {
+    var_4 = [];
+    var_5 = [];
 
     if(istrue(level.usestaticspawnselectioncamera)) {
-      var6 = getstaticcameraposition(self.team);
-      var4 = var6.origin;
-      var5 = var6.angles;
+      var_6 = getstaticcameraposition(self.team);
+      var_4 = var_6.origin;
+      var_5 = var_6.angles;
     } else {
-      var4 = var2.origin + var3 * -8500 + (0, 0, 7000);
-      var7 = vectorNormalize(var2.origin - var4);
-      var5 = scripts\mp\utility\script::vectortoanglessafe(var7, (0, 0, 1));
+      var_4 = var_2.origin + var_3 * -8500 + (0, 0, 7000);
+      var_7 = vectorNormalize(var_2.origin - var_4);
+      var_5 = scripts\mp\utility\script::vectortoanglessafe(var_7, (0, 0, 1));
 
       if(istrue(level.useunifiedspawnselectioncameraheight)) {
-        var8 = getunifedspawnselectioncameraheight();
-        var4 = (var4[0], var4[1], var8);
+        var_8 = getunifedspawnselectioncameraheight();
+        var_4 = (var_4[0], var_4[1], var_8);
       }
 
-      var4 += scripts\mp\gametypes\arm::calculatecameraoffset(self.team, var2.origin);
+      var_4 += scripts\mp\gametypes\arm::calculatecameraoffset(self.team, var_2.origin);
     }
 
-    self.spawncameratargetpos = var4;
-    self.spawncameratargetang = var5;
-    self.spawncameraent moveTo(var4, 0.25, 0.05, 0.2);
-    self.spawncameraent rotateTo(var5, 0.25, 0.05, 0.2);
+    self.spawncameratargetpos = var_4;
+    self.spawncameratargetang = var_5;
+    self.spawncameraent moveTo(var_4, 0.25, 0.05, 0.2);
+    self.spawncameraent rotateTo(var_5, 0.25, 0.05, 0.2);
     waitframe();
   }
 }
 
-function managevehiclecameraposition(var0) {
+function managevehiclecameraposition(var_0) {
   self endon("disconnect");
   self endon("end_respawn");
   self endon("tac_ops_spawn_focus_changed");
   self notify("manageVehicleCameraPosition");
   self endon("manageVehicleCameraPosition");
-  var1 = int(getsubstr(var0, var0.size - 1, var0.size));
-  var2 = level.spawnselectionlocations[var0][self.team].dynamicent;
-  var3 = level.spawnselectionteamforward[self.team];
-  var4 = 0;
+  var_1 = int(getsubstr(var_0, var_0.size - 1, var_0.size));
+  var_2 = level.spawnselectionlocations[var_0][self.team].dynamicent;
+  var_3 = level.spawnselectionteamforward[self.team];
+  var_4 = 0;
 
-  while(isDefined(self.spawncameraent) && isDefined(var2) && !istrue(var2.isdestroyed)) {
-    var5 = [];
-    var6 = [];
+  while(isDefined(self.spawncameraent) && isDefined(var_2) && !istrue(var_2.isdestroyed)) {
+    var_5 = [];
+    var_6 = [];
 
     if(istrue(level.usestaticspawnselectioncamera)) {
-      var7 = getstaticcameraposition(self.team);
-      var5 = var7.origin;
-      var6 = var7.angles;
+      var_7 = getstaticcameraposition(self.team);
+      var_5 = var_7.origin;
+      var_6 = var_7.angles;
     } else {
-      var5 = var2.origin + var3 * -8500 + (0, 0, 7000);
+      var_5 = var_2.origin + var_3 * -8500 + (0, 0, 7000);
 
       if(istrue(level.useunifiedspawnselectioncameraheight)) {
-        var8 = getunifedspawnselectioncameraheight();
-        var5 = (var5[0], var5[1], var8);
+        var_8 = getunifedspawnselectioncameraheight();
+        var_5 = (var_5[0], var_5[1], var_8);
       }
 
-      var9 = level.spawnselectionlocations[var0][self.team].anchorentity.origin;
-      var10 = var9 + var3 * -8500 + (0, 0, 7000);
-      var11 = vectorNormalize(var9 - var10);
-      var6 = scripts\mp\utility\script::vectortoanglessafe(var11, (0, 0, 1));
-      var5 += scripts\mp\gametypes\arm::calculatecameraoffset(self.team, var9);
+      var_9 = level.spawnselectionlocations[var_0][self.team].anchorentity.origin;
+      var_10 = var_9 + var_3 * -8500 + (0, 0, 7000);
+      var_11 = vectorNormalize(var_9 - var_10);
+      var_6 = scripts\mp\utility\script::vectortoanglessafe(var_11, (0, 0, 1));
+      var_5 += scripts\mp\gametypes\arm::calculatecameraoffset(self.team, var_9);
     }
 
-    self.spawncameratargetpos = var5;
-    self.spawncameratargetang = var6;
+    self.spawncameratargetpos = var_5;
+    self.spawncameratargetang = var_6;
 
     if(!isDefined(self.spawncameraendtime) || gettime() > self.spawncameraendtime) {
-      self.spawncameraent moveTo(var5, 0.25, 0.05, 0.2);
-      self.spawncameraent rotateTo(var6, 0.25, 0.05, 0.2);
-    } else if(!var4) {
-      var4 = 1;
-      self.spawncameraent moveTo(var5, self.spawncameratime, self.spawncameratime * 0.3, self.spawncameratime * 0.4);
-      self.spawncameraent rotateTo(var6, self.spawncameratime, self.spawncameratime * 0.3, self.spawncameratime * 0.4);
+      self.spawncameraent moveTo(var_5, 0.25, 0.05, 0.2);
+      self.spawncameraent rotateTo(var_6, 0.25, 0.05, 0.2);
+    } else if(!var_4) {
+      var_4 = 1;
+      self.spawncameraent moveTo(var_5, self.spawncameratime, self.spawncameratime * 0.3, self.spawncameratime * 0.4);
+      self.spawncameraent rotateTo(var_6, self.spawncameratime, self.spawncameratime * 0.3, self.spawncameratime * 0.4);
     }
 
     waitframe();
   }
 }
 
-function ref_11ab3(var0) {
+function ref_11ab3(var_0) {
   self endon("disconnect");
   self endon("end_respawn");
   self endon("tac_ops_spawn_focus_changed");
   self notify("manageVehicleHealthUI");
   self endon("manageVehicleHealthUI");
-  var1 = level.spawnselectionlocations[var0][self.team].dynamicent;
+  var_1 = level.spawnselectionlocations[var_0][self.team].dynamicent;
   self setclientomnvar("ui_tom_veh_health_percent", 0);
   waitframe();
-  var2 = undefined;
+  var_2 = undefined;
 
-  while(isDefined(var1)) {
-    var3 = int(clamp(var1.health / var1.maxhealth * 100, 0, 100));
+  while(isDefined(var_1)) {
+    var_3 = int(clamp(var_1.health / var_1.maxhealth * 100, 0, 100));
 
-    if(var3 < 0) {}
+    if(var_3 < 0) {}
 
-    if(!isDefined(var2) || var2 != var3) {
-      self setclientomnvar("ui_tom_veh_health_percent", int(var3));
-      var2 = var3;
+    if(!isDefined(var_2) || var_2 != var_3) {
+      self setclientomnvar("ui_tom_veh_health_percent", int(var_3));
+      var_2 = var_3;
     }
 
     waitframe();
@@ -1924,67 +1924,67 @@ function ref_11ab3(var0) {
 }
 
 function getclosestavailablespawnlocation() {
-  var0 = undefined;
-  var1 = undefined;
+  var_0 = undefined;
+  var_1 = undefined;
 
   if(!scripts\mp\flags::gameflag("prematch_done") && scripts\mp\utility\game::getgametype() == "arm" || !isDefined(self.hasvisitedgwspawnselection)) {
     if(self.team == "axis") {
-      var1 = "gw_fob_axisHQ";
+      var_1 = "gw_fob_axisHQ";
     } else {
-      var1 = "gw_fob_alliesHQ";
+      var_1 = "gw_fob_alliesHQ";
     }
 
     self.hasvisitedgwspawnselection = 1;
   } else {
-    var2 = 0;
+    var_2 = 0;
 
-    foreach(var4 in level.availablespawnlocations[self.team]) {
-      var5 = distancesquared(self.origin, level.spawnselectionlocations[var4][self.team].anchorentity.origin);
+    foreach(var_4 in level.availablespawnlocations[self.team]) {
+      var_5 = distancesquared(self.origin, level.spawnselectionlocations[var_4][self.team].anchorentity.origin);
 
-      if(var4 == "gw_fob_" + self.team + "HQ") {
-        if(var5 < 4194304) {
-          var0 = var5;
-          var1 = var4;
+      if(var_4 == "gw_fob_" + self.team + "HQ") {
+        if(var_5 < 4194304) {
+          var_0 = var_5;
+          var_1 = var_4;
           break;
         }
       }
 
-      if(!isDefined(var0) || var5 < var0) {
-        var0 = var5;
-        var1 = var4;
+      if(!isDefined(var_0) || var_5 < var_0) {
+        var_0 = var_5;
+        var_1 = var_4;
       }
     }
 
     if(isDefined(level.squadspawnselectionlocations) && isDefined(level.squadspawnselectionlocations[self.team][self.squadindex])) {
-      var7 = round_get_vehicles(self.team, self.squadindex);
+      var_7 = round_get_vehicles(self.team, self.squadindex);
 
-      foreach(var9 in var7) {
-        if(var9.dynamicent == self) {
+      foreach(var_9 in var_7) {
+        if(var_9.dynamicent == self) {
           continue;
         }
 
-        var5 = distancesquared(self.origin, var9.dynamicent.origin);
+        var_5 = distancesquared(self.origin, var_9.dynamicent.origin);
 
-        if(var5 < var0) {
-          var0 = var5;
-          var1 = var9.typeref;
+        if(var_5 < var_0) {
+          var_0 = var_5;
+          var_1 = var_9.typeref;
         }
       }
     }
   }
 
-  if(issubstr(var1, "vehicle")) {}
+  if(issubstr(var_1, "vehicle")) {}
 
-  if(isDefined(var1)) {
-    if(!issubstr(var1, "squad") && !issubstr(var1, "vehicle") && !issubstr(var1, "HQ")) {
-      var11 = var1 + "_" + level.localeid;
+  if(isDefined(var_1)) {
+    if(!issubstr(var_1, "squad") && !issubstr(var_1, "vehicle") && !issubstr(var_1, "HQ")) {
+      var_11 = var_1 + "_" + level.localeid;
     } else {
-      var11 = var11;
+      var_11 = var_11;
     }
 
-    var12 = tablelookuprownum("mp/spawnSelectionMapData.csv", 0, var11);
-    self setclientomnvar("ui_tom_previous_selection", var12);
-    self.forcedspawncameraref = var11;
+    var_12 = tablelookuprownum("mp/spawnSelectionMapData.csv", 0, var_11);
+    self setclientomnvar("ui_tom_previous_selection", var_12);
+    self.forcedspawncameraref = var_11;
     return;
   }
 
@@ -1992,38 +1992,38 @@ function getclosestavailablespawnlocation() {
   self.forcedspawncameraref = undefined;
 }
 
-function getstaticcameraposition(var0) {
-  var1 = spawnStruct();
+function getstaticcameraposition(var_0) {
+  var_1 = spawnStruct();
 
   if(level.mapname == "mp_locale_test") {
     switch (level.localeid) {
       case "locale_6":
-        if(var0 == "axis") {
-          var1.origin = (2094, -1804, 2763);
-          var1.angles = (54, 40, 0);
+        if(var_0 == "axis") {
+          var_1.origin = (2094, -1804, 2763);
+          var_1.angles = (54, 40, 0);
         } else {
-          var1.origin = (2315, 1956, 2763);
-          var1.angles = (54, 296, 0);
+          var_1.origin = (2315, 1956, 2763);
+          var_1.angles = (54, 296, 0);
         }
 
         break;
       case "locale_7":
-        if(var0 == "axis") {
-          var1.origin = (5556, -1368, 2464);
-          var1.angles = (56, 42, 0);
+        if(var_0 == "axis") {
+          var_1.origin = (5556, -1368, 2464);
+          var_1.angles = (56, 42, 0);
         } else {
-          var1.origin = (5636, 1630, 2446);
-          var1.angles = (56, 307, 0);
+          var_1.origin = (5636, 1630, 2446);
+          var_1.angles = (56, 307, 0);
         }
 
         break;
       default:
-        if(var0 == "axis") {
-          var1.origin = (0, 0, 0);
-          var1.angles = (0, 0, 0);
+        if(var_0 == "axis") {
+          var_1.origin = (0, 0, 0);
+          var_1.angles = (0, 0, 0);
         } else {
-          var1.origin = (0, 0, 0);
-          var1.angles = (0, 0, 0);
+          var_1.origin = (0, 0, 0);
+          var_1.angles = (0, 0, 0);
         }
 
         break;
@@ -2031,49 +2031,49 @@ function getstaticcameraposition(var0) {
   } else {
     switch (level.localeid) {
       case "locale_5":
-        if(var0 == "axis") {
-          var1.origin = (30965, 28984, 12785);
-          var1.angles = (53, 82, 0);
+        if(var_0 == "axis") {
+          var_1.origin = (30965, 28984, 12785);
+          var_1.angles = (53, 82, 0);
         } else {
-          var1.origin = (35294, 53430, 12785);
-          var1.angles = (50, 260, 0);
+          var_1.origin = (35294, 53430, 12785);
+          var_1.angles = (50, 260, 0);
         }
 
         break;
       case "locale_6":
-        if(var0 == "axis") {
-          var1.origin = (35294, 53430, 12785);
-          var1.angles = (50, 260, 0);
+        if(var_0 == "axis") {
+          var_1.origin = (35294, 53430, 12785);
+          var_1.angles = (50, 260, 0);
         } else {
-          var1.origin = (30965, 28984, 12785);
-          var1.angles = (53, 82, 0);
+          var_1.origin = (30965, 28984, 12785);
+          var_1.angles = (53, 82, 0);
         }
 
         break;
       case "locale_7":
-        if(var0 == "axis") {
-          var1.origin = (0, 0, 0);
-          var1.angles = (0, 0, 0);
+        if(var_0 == "axis") {
+          var_1.origin = (0, 0, 0);
+          var_1.angles = (0, 0, 0);
         } else {
-          var1.origin = (0, 0, 0);
-          var1.angles = (0, 0, 0);
+          var_1.origin = (0, 0, 0);
+          var_1.angles = (0, 0, 0);
         }
 
         break;
       default:
-        if(var0 == "axis") {
-          var1.origin = (0, 0, 0);
-          var1.angles = (0, 0, 0);
+        if(var_0 == "axis") {
+          var_1.origin = (0, 0, 0);
+          var_1.angles = (0, 0, 0);
         } else {
-          var1.origin = (0, 0, 0);
-          var1.angles = (0, 0, 0);
+          var_1.origin = (0, 0, 0);
+          var_1.angles = (0, 0, 0);
         }
 
         break;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
 function getunifedspawnselectioncameraheight() {
@@ -2118,12 +2118,12 @@ function ref_13fd9() {
   thread ref_13fda();
 
   for(;;) {
-    foreach(var1 in level.teamnamelist) {
-      foreach(var3 in level.availablespawnlocations[var1]) {
-        var4 = level.spawnselectionlocations[var3][var1];
+    foreach(var_1 in level.teamnamelist) {
+      foreach(var_3 in level.availablespawnlocations[var_1]) {
+        var_4 = level.spawnselectionlocations[var_3][var_1];
 
-        if(isDefined(var4.objectivekey)) {
-          var4.start_reach_icbm_launch = isobjectiveindanger(var4.objectivekey, var1);
+        if(isDefined(var_4.objectivekey)) {
+          var_4.start_reach_icbm_launch = isobjectiveindanger(var_4.objectivekey, var_1);
         }
       }
     }
@@ -2134,66 +2134,66 @@ function ref_13fd9() {
 
 function ref_13fda() {
   for(;;) {
-    foreach(var1 in level.teamnamelist) {
-      var2 = scripts\mp\utility\teams::getteamdata(var1, "players")[0];
+    foreach(var_1 in level.teamnamelist) {
+      var_2 = scripts\mp\utility\teams::getteamdata(var_1, "players")[0];
 
-      foreach(var4 in level.availablespawnlocations[var1]) {
-        if(!issubstr(var4, "HQ") && issubstr(var4, "fob")) {
-          var5 = 1;
-          var6 = isDefined(level.spawnglobals.spawnsets[var4 + "_safe_" + var1]);
-          var7 = var4 + "_" + var1;
-          var8 = undefined;
+      foreach(var_4 in level.availablespawnlocations[var_1]) {
+        if(!issubstr(var_4, "HQ") && issubstr(var_4, "fob")) {
+          var_5 = 1;
+          var_6 = isDefined(level.spawnglobals.spawnsets[var_4 + "_safe_" + var_1]);
+          var_7 = var_4 + "_" + var_1;
+          var_8 = undefined;
 
-          if(var6) {
-            var8 = var4 + "_safe_" + var1;
+          if(var_6) {
+            var_8 = var_4 + "_safe_" + var_1;
           }
 
           if(isDefined(level.spawninfluencezones)) {
-            var9 = undefined;
-            var10 = getarraykeys(level.spawninfluencezones);
+            var_9 = undefined;
+            var_10 = getarraykeys(level.spawninfluencezones);
 
-            foreach(var12 in var10) {
-              if(var12 == var4) {
-                var9 = level.spawninfluencezones[var12];
+            foreach(var_12 in var_10) {
+              if(var_12 == var_4) {
+                var_9 = level.spawninfluencezones[var_12];
                 break;
               }
             }
 
-            if(isDefined(var9) && isteamtouching(var9, scripts\mp\utility\game::getotherteam(var1)[0])) {
-              var5 = 0;
+            if(isDefined(var_9) && isteamtouching(var_9, scripts\mp\utility\game::getotherteam(var_1)[0])) {
+              var_5 = 0;
             }
           }
 
-          var14 = 0;
+          var_14 = 0;
 
-          if(isDefined(var2)) {
-            var15 = undefined;
-            var16 = undefined;
+          if(isDefined(var_2)) {
+            var_15 = undefined;
+            var_16 = undefined;
 
-            if(var5) {
-              scripts\mp\spawnlogic::activatespawnset(var7, 1);
-              var15 = var2 disablereloading();
-              var15 = scripts\mp\spawnlogic::getspawnbucketfromstring(var15);
+            if(var_5) {
+              scripts\mp\spawnlogic::activatespawnset(var_7, 1);
+              var_15 = var_2 disablereloading();
+              var_15 = scripts\mp\spawnlogic::getspawnbucketfromstring(var_15);
             }
 
-            if(var6) {
-              scripts\mp\spawnlogic::activatespawnset(var8, 1);
-              var16 = var2 disablereloading();
-              var16 = scripts\mp\spawnlogic::getspawnbucketfromstring(var16);
+            if(var_6) {
+              scripts\mp\spawnlogic::activatespawnset(var_8, 1);
+              var_16 = var_2 disablereloading();
+              var_16 = scripts\mp\spawnlogic::getspawnbucketfromstring(var_16);
             }
 
-            if(var5 && var6) {
-              var14 = var15 >= 2 && var16 >= 2;
-            } else if(var5 && !var6) {
-              var14 = var15 >= 2;
-            } else if(var6) {
-              var14 = var16 >= 2;
+            if(var_5 && var_6) {
+              var_14 = var_15 >= 2 && var_16 >= 2;
+            } else if(var_5 && !var_6) {
+              var_14 = var_15 >= 2;
+            } else if(var_6) {
+              var_14 = var_16 >= 2;
             }
           }
 
-          var17 = level.spawnselectionlocations[var4][var1].objectivekey;
-          level.objectives[var17].ref_13686 = var14;
-          level.objectives[var17].ref_13687 = gettime();
+          var_17 = level.spawnselectionlocations[var_4][var_1].objectivekey;
+          level.objectives[var_17].ref_13686 = var_14;
+          level.objectives[var_17].ref_13687 = gettime();
         }
       }
     }
@@ -2202,65 +2202,65 @@ function ref_13fda() {
   }
 }
 
-function ref_1401d(var0, var1, var2) {
-  var3 = level.spawnselectionlocations[var0][var2].objectivekey;
+function ref_1401d(var_0, var_1, var_2) {
+  var_3 = level.spawnselectionlocations[var_0][var_2].objectivekey;
 
-  if(!isDefined(var3) || !isDefined(level.objectives[var3]) || !isDefined(level.objectives[var3].ref_13687) || level.objectives[var3].ref_13687 == gettime()) {
+  if(!isDefined(var_3) || !isDefined(level.objectives[var_3]) || !isDefined(level.objectives[var_3].ref_13687) || level.objectives[var_3].ref_13687 == gettime()) {
     return;
   }
 
-  var4 = 1;
-  var5 = isDefined(level.spawnglobals.spawnsets[var0 + "_safe_" + var2]);
-  var6 = var0 + "_" + var2;
-  var7 = undefined;
+  var_4 = 1;
+  var_5 = isDefined(level.spawnglobals.spawnsets[var_0 + "_safe_" + var_2]);
+  var_6 = var_0 + "_" + var_2;
+  var_7 = undefined;
 
-  if(var5) {
-    var7 = var0 + "_safe_" + var2;
+  if(var_5) {
+    var_7 = var_0 + "_safe_" + var_2;
   }
 
   if(isDefined(level.spawninfluencezones)) {
-    var8 = undefined;
-    var9 = getarraykeys(level.spawninfluencezones);
+    var_8 = undefined;
+    var_9 = getarraykeys(level.spawninfluencezones);
 
-    foreach(var11 in var9) {
-      if(var11 == var0) {
-        var8 = level.spawninfluencezones[var11];
+    foreach(var_11 in var_9) {
+      if(var_11 == var_0) {
+        var_8 = level.spawninfluencezones[var_11];
         break;
       }
     }
 
-    if(isDefined(var8) && isDefined(var8.numplayers) && var8.numplayers[scripts\mp\utility\game::getotherteam(var2)[0]] > 0) {
-      var4 = 0;
+    if(isDefined(var_8) && isDefined(var_8.numplayers) && var_8.numplayers[scripts\mp\utility\game::getotherteam(var_2)[0]] > 0) {
+      var_4 = 0;
     }
   }
 
-  var13 = 0;
+  var_13 = 0;
 
-  if(isDefined(var1)) {
-    var14 = undefined;
-    var15 = undefined;
+  if(isDefined(var_1)) {
+    var_14 = undefined;
+    var_15 = undefined;
 
-    if(var4) {
-      scripts\mp\spawnlogic::activatespawnset(var6, 1);
-      var14 = var1 disablereloading();
-      var14 = scripts\mp\spawnlogic::getspawnbucketfromstring(var14);
+    if(var_4) {
+      scripts\mp\spawnlogic::activatespawnset(var_6, 1);
+      var_14 = var_1 disablereloading();
+      var_14 = scripts\mp\spawnlogic::getspawnbucketfromstring(var_14);
     }
 
-    if(var5) {
-      scripts\mp\spawnlogic::activatespawnset(var7, 1);
-      var15 = var1 disablereloading();
-      var15 = scripts\mp\spawnlogic::getspawnbucketfromstring(var15);
+    if(var_5) {
+      scripts\mp\spawnlogic::activatespawnset(var_7, 1);
+      var_15 = var_1 disablereloading();
+      var_15 = scripts\mp\spawnlogic::getspawnbucketfromstring(var_15);
     }
 
-    if(var4 && var5) {
-      var13 = var14 >= 2 && var15 >= 2;
-    } else if(var4 && !var5) {
-      var13 = var14 >= 2;
-    } else if(var5) {
-      var13 = var15 >= 2;
+    if(var_4 && var_5) {
+      var_13 = var_14 >= 2 && var_15 >= 2;
+    } else if(var_4 && !var_5) {
+      var_13 = var_14 >= 2;
+    } else if(var_5) {
+      var_13 = var_15 >= 2;
     }
   }
 
-  level.objectives[var3].ref_13686 = var13;
-  level.objectives[var3].ref_13687 = gettime();
+  level.objectives[var_3].ref_13686 = var_13;
+  level.objectives[var_3].ref_13687 = gettime();
 }

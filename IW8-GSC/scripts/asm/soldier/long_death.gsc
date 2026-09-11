@@ -36,7 +36,7 @@ function preventpainforashorttime() {
   anim.nextcrawlingpaintimefromlegdamage = gettime() + randomintrange(7000, 13000);
 }
 
-function dyingcrawlbackaim(var0) {
+function dyingcrawlbackaim(var_0) {
   self endon("death");
   self notify("end_dying_crawl_back_aim");
   self endon("end_dying_crawl_back_aim");
@@ -45,108 +45,108 @@ function dyingcrawlbackaim(var0) {
     return;
   }
 
-  var1 = scripts\asm\asm::asm_getxanim(var0, scripts\asm\asm::asm_lookupanimfromalias(var0, "aim_4"));
-  var2 = scripts\asm\asm::asm_getxanim(var0, scripts\asm\asm::asm_lookupanimfromalias(var0, "aim_6"));
-  var3 = scripts\asm\asm::asm_getxanim(var0, scripts\asm\asm::asm_lookupanimfromalias(var0, "aim_4_knob"));
-  var4 = scripts\asm\asm::asm_getxanim(var0, scripts\asm\asm::asm_lookupanimfromalias(var0, "aim_6_knob"));
+  var_1 = scripts\asm\asm::asm_getxanim(var_0, scripts\asm\asm::asm_lookupanimfromalias(var_0, "aim_4"));
+  var_2 = scripts\asm\asm::asm_getxanim(var_0, scripts\asm\asm::asm_lookupanimfromalias(var_0, "aim_6"));
+  var_3 = scripts\asm\asm::asm_getxanim(var_0, scripts\asm\asm::asm_lookupanimfromalias(var_0, "aim_4_knob"));
+  var_4 = scripts\asm\asm::asm_getxanim(var_0, scripts\asm\asm::asm_lookupanimfromalias(var_0, "aim_6_knob"));
   wait 0.05;
-  self aisetanimlimited(var1, 1, 0);
-  self aisetanimlimited(var2, 1, 0);
-  var5 = 0;
+  self aisetanimlimited(var_1, 1, 0);
+  self aisetanimlimited(var_2, 1, 0);
+  var_5 = 0;
 
   for(;;) {
-    var6 = scripts\anim\utility_common::getyawtoenemy();
-    var7 = angleclamp180(var6 - var5);
+    var_6 = scripts\anim\utility_common::getyawtoenemy();
+    var_7 = angleclamp180(var_6 - var_5);
 
-    if(abs(var7) > 3) {
-      var7 = scripts\engine\utility::sign(var7) * 3;
+    if(abs(var_7) > 3) {
+      var_7 = scripts\engine\utility::sign(var_7) * 3;
     }
 
-    var6 = angleclamp180(var5 + var7);
+    var_6 = angleclamp180(var_5 + var_7);
 
-    if(var6 < 0) {
-      if(var6 < -45) {
-        var6 = -45;
+    if(var_6 < 0) {
+      if(var_6 < -45) {
+        var_6 = -45;
       }
 
-      var8 = var6 / -45;
-      self setanim(var3, var8, 0.05);
-      self setanim(var4, 0, 0.05);
+      var_8 = var_6 / -45;
+      self setanim(var_3, var_8, 0.05);
+      self setanim(var_4, 0, 0.05);
     } else {
-      if(var6 > 45) {
-        var6 = 45;
+      if(var_6 > 45) {
+        var_6 = 45;
       }
 
-      var8 = var6 / 45;
-      self setanim(var4, var8, 0.05);
-      self setanim(var3, 0, 0.05);
+      var_8 = var_6 / 45;
+      self setanim(var_4, var_8, 0.05);
+      self setanim(var_3, 0, 0.05);
     }
 
-    var5 = var6;
+    var_5 = var_6;
     wait 0.05;
   }
 }
 
-function setupaiming(var0) {
-  var1 = scripts\asm\asm::asm_lookupanimfromalias(var0, "clear_knob");
-  self aiclearanim(var1, 0.2);
+function setupaiming(var_0) {
+  var_1 = scripts\asm\asm::asm_lookupanimfromalias(var_0, "clear_knob");
+  self aiclearanim(var_1, 0.2);
 
   if(isDefined(self.a.bdyingbackidleandshootsetup)) {
     return;
   }
 
-  thread dyingcrawlbackaim(var0);
+  thread dyingcrawlbackaim(var_0);
   self.a.bdyingbackidleandshootsetup = 1;
 }
 
 function isaimedsomewhatatenemy() {
-  var0 = self.enemy getshootatpos();
-  var1 = self getmuzzleangle();
-  var2 = vectortoangles(var0 - self getmuzzlepos());
-  var3 = scripts\engine\utility::absangleclamp180(var1[1] - var2[1]);
+  var_0 = self.enemy getshootatpos();
+  var_1 = self getmuzzleangle();
+  var_2 = vectortoangles(var_0 - self getmuzzlepos());
+  var_3 = scripts\engine\utility::absangleclamp180(var_1[1] - var_2[1]);
 
-  if(var3 > anim.painyawdifffartolerance) {
-    if(distancesquared(self getEye(), var0) > anim.painyawdiffclosedistsq || var3 > anim.painyawdiffclosetolerance) {
+  if(var_3 > anim.painyawdifffartolerance) {
+    if(distancesquared(self getEye(), var_0) > anim.painyawdiffclosedistsq || var_3 > anim.painyawdiffclosetolerance) {
       return false;
     }
   }
 
-  return scripts\engine\utility::absangleclamp180(var1[0] - var2[0]) <= anim.painpitchdifftolerance;
+  return scripts\engine\utility::absangleclamp180(var_1[0] - var_2[0]) <= anim.painpitchdifftolerance;
 }
 
 function dodyingcrawlbloodsmear() {
   self endon("death");
-  var0 = "J_SpineLower";
-  var1 = "tag_origin";
-  var2 = 6;
-  var3 = level._effect["crawling_death_blood_smear"];
+  var_0 = "J_SpineLower";
+  var_1 = "tag_origin";
+  var_2 = 6;
+  var_3 = level._effect["crawling_death_blood_smear"];
 
   if(isDefined(self.a.crawl_fx_rate)) {
-    var2 = self.a.crawl_fx_rate;
+    var_2 = self.a.crawl_fx_rate;
   }
 
   jumpiffalse(isDefined(self.a.crawl_fx)) LOC_00000064;
-  var3 = level._effect[self.a.crawl_fx];
+  var_3 = level._effect[self.a.crawl_fx];
 
-  while(var2) {
-    var4 = self gettagorigin(var0);
-    var5 = self gettagangles(var1);
-    var6 = anglestoright(var5);
-    var7 = anglesToForward((270, 0, 0));
-    playFX(var3, var4, var7, var6);
-    wait var2;
+  while(var_2) {
+    var_4 = self gettagorigin(var_0);
+    var_5 = self gettagangles(var_1);
+    var_6 = anglestoright(var_5);
+    var_7 = anglesToForward((270, 0, 0));
+    playFX(var_3, var_4, var_7, var_6);
+    wait var_2;
   }
 }
 
-function iscrawldeltaallowed(var0) {
+function iscrawldeltaallowed(var_0) {
   if(isDefined(self.a.force_num_crawls)) {
     return 1;
   }
 
-  return isanimdeltaallowed(var0);
+  return isanimdeltaallowed(var_0);
 }
 
-function isenemyingeneraldirection(var0) {
+function isenemyingeneraldirection(var_0) {
   if(isDefined(self.forcelongdeath) && self.forcelongdeath == 4) {
     return true;
   }
@@ -155,11 +155,11 @@ function isenemyingeneraldirection(var0) {
     return false;
   }
 
-  var1 = vectorNormalize(self.enemy getshootatpos() - self getEye());
-  return vectordot(var1, var0) > 0.707;
+  var_1 = vectorNormalize(self.enemy getshootatpos() - self getEye());
+  return vectordot(var_1, var_0) > 0.707;
 }
 
-function longdeathkillme(var0, var1, var2) {
+function longdeathkillme(var_0, var_1, var_2) {
   killme();
 }
 
@@ -172,24 +172,24 @@ function killme() {
   self kill();
 }
 
-function startdyingcrawlbackaimsoon(var0) {
-  self endon(var0 + "_finished");
+function startdyingcrawlbackaimsoon(var_0) {
+  self endon(var_0 + "_finished");
   wait 0.1;
 
   if(isDefined(self.a.bdyingbackidleandshootsetup)) {
     return;
   }
 
-  thread dyingcrawlbackaim(var0);
+  thread dyingcrawlbackaim(var_0);
   self.a.bdyingbackidleandshootsetup = 1;
 }
 
-function handlebackcrawlnotetracks(var0, var1, var2) {
-  var3 = 0;
+function handlebackcrawlnotetracks(var_0, var_1, var_2) {
+  var_3 = 0;
 
-  if(!isDefined(self.bdoingbloodsmear) && issubstr(var1, "bodyfall")) {
+  if(!isDefined(self.bdoingbloodsmear) && issubstr(var_1, "bodyfall")) {
     thread dodyingcrawlbloodsmear();
-  } else if(var1 == "fire_spray") {
+  } else if(var_1 == "fire_spray") {
     if(!scripts\anim\utility_common::canseeenemy()) {
       return true;
     }
@@ -200,81 +200,81 @@ function handlebackcrawlnotetracks(var0, var1, var2) {
 
     scripts\anim\utility_common::shootenemywrapper();
     return true;
-  } else if(var1 == "pistol_pickup") {
-    thread startdyingcrawlbackaimsoon(var0);
+  } else if(var_1 == "pistol_pickup") {
+    thread startdyingcrawlbackaimsoon(var_0);
     return false;
-  } else if(var1 == "fire") {
+  } else if(var_1 == "fire") {
     scripts\anim\utility_common::shootenemywrapper();
     return true;
-  } else if(var1 == "code_move") {
+  } else if(var_1 == "code_move") {
     return true;
   }
 
   return false;
 }
 
-function choosecrawlingpaintransitionanim(var0, var1, var2) {
+function choosecrawlingpaintransitionanim(var_0, var_1, var_2) {
   if(!isDefined(self.a.crawlingpaintransanim)) {
-    var3 = self.currentpose;
+    var_3 = self.currentpose;
 
-    if(!scripts\asm\asm::asm_hasalias(var1, var3)) {
+    if(!scripts\asm\asm::asm_hasalias(var_1, var_3)) {
       self.a.crawlingpaintransanim = undefined;
       return self.a.crawlingpaintransanim;
     }
 
-    self.a.crawlingpaintransanim = scripts\asm\asm::asm_lookupanimfromalias(var1, var3);
+    self.a.crawlingpaintransanim = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
   }
 
   return self.a.crawlingpaintransanim;
 }
 
-function choosestumblingpainanim(var0, var1, var2) {
+function choosestumblingpainanim(var_0, var_1, var_2) {
   if(!isDefined(self.a.stumblingpainalias)) {
-    var3 = "leg";
-    var4 = "b";
+    var_3 = "leg";
+    var_4 = "b";
 
     if(!self.leghit) {
-      var3 = "gut";
+      var_3 = "gut";
 
       if(45 < self.damageyaw && self.damageyaw < 135) {
-        var4 = "l";
+        var_4 = "l";
       } else if(-135 < self.damageyaw && self.damageyaw < -45) {
-        var4 = "r";
+        var_4 = "r";
       } else if(-45 < self.damageyaw && self.damageyaw < 45) {}
     }
 
-    self.a.stumblingpainalias = var3 + "_" + var4;
+    self.a.stumblingpainalias = var_3 + "_" + var_4;
   }
 
-  var5 = scripts\asm\asm::asm_getallanimindicesforalias(var1, self.a.stumblingpainalias);
+  var_5 = scripts\asm\asm::asm_getallanimindicesforalias(var_1, self.a.stumblingpainalias);
 
-  if(isarray(var5)) {
+  if(isarray(var_5)) {
     if(!isDefined(self.a.stumblingpainanimindex)) {
-      self.a.stumblingpainanimindex = randomint(var5.size);
+      self.a.stumblingpainanimindex = randomint(var_5.size);
     }
 
-    var5 = var5[self.a.stumblingpainanimindex];
+    var_5 = var_5[self.a.stumblingpainanimindex];
   }
 
-  return var5;
+  return var_5;
 }
 
-function playdyingcrawl(var0, var1, var2) {
-  self endon(var1 + "_finished");
+function playdyingcrawl(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
 
   if(isDefined(self.a.force_num_crawls)) {
-    var3 = self.a.force_num_crawls;
+    var_3 = self.a.force_num_crawls;
   } else {
-    var3 = randomintrange(1, 5);
+    var_3 = randomintrange(1, 5);
   }
 
-  var4 = scripts\asm\asm::asm_getanim(var1, var2);
-  var5 = scripts\asm\asm::asm_getxanim(var2, var4);
-  self aisetanim(var2, var4);
-  scripts\asm\asm::asm_playfacialanim(var1, var2, var5);
+  var_4 = scripts\asm\asm::asm_getanim(var_1, var_2);
+  var_5 = scripts\asm\asm::asm_getxanim(var_2, var_4);
+  self aisetanim(var_2, var_4);
+  scripts\asm\asm::asm_playfacialanim(var_1, var_2, var_5);
 
-  for(var6 = 0; var6 < var3; var6++) {
-    if(!iscrawldeltaallowed(var5)) {
+  for(var_6 = 0; var_6 < var_3; var_6++) {
+    if(!iscrawldeltaallowed(var_5)) {
       break;
     }
 
@@ -283,65 +283,65 @@ function playdyingcrawl(var0, var1, var2) {
     }
 
     for(;;) {
-      var7 = scripts\asm\asm::asm_donotetracks(var1, var2, scripts\asm\asm::asm_getnotehandler(var1, var2));
+      var_7 = scripts\asm\asm::asm_donotetracks(var_1, var_2, scripts\asm\asm::asm_getnotehandler(var_1, var_2));
 
-      if(var7 == "code_move") {
+      if(var_7 == "code_move") {
         break;
       }
     }
   }
 
-  scripts\asm\asm::asm_fireevent(var1, "dying_crawl_done");
+  scripts\asm\asm::asm_fireevent(var_1, "dying_crawl_done");
 }
 
-function playdyingcrawlback(var0, var1, var2) {
-  self endon(var1 + "_finished");
+function playdyingcrawlback(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
 
   if(isDefined(self.enemy)) {
     scripts\common\utility::lookatentity(self.enemy);
   }
 
   if(isDefined(self.a.force_num_crawls)) {
-    var3 = self.a.force_num_crawls;
+    var_3 = self.a.force_num_crawls;
   } else {
-    var3 = randomintrange(1, 5);
+    var_3 = randomintrange(1, 5);
   }
 
-  setupaiming(var2);
-  var4 = scripts\asm\asm::asm_getanim(var1, var2);
-  var5 = scripts\asm\asm::asm_getxanim(var2, var4);
-  scripts\asm\asm::asm_playfacialanim(var1, var2, var5);
-  self aisetanim(var2, var4);
+  setupaiming(var_2);
+  var_4 = scripts\asm\asm::asm_getanim(var_1, var_2);
+  var_5 = scripts\asm\asm::asm_getxanim(var_2, var_4);
+  scripts\asm\asm::asm_playfacialanim(var_1, var_2, var_5);
+  self aisetanim(var_2, var_4);
 
-  for(var6 = 0; var6 < var3; var6++) {
-    if(!iscrawldeltaallowed(var5)) {
+  for(var_6 = 0; var_6 < var_3; var_6++) {
+    if(!iscrawldeltaallowed(var_5)) {
       break;
     }
 
     for(;;) {
-      var7 = scripts\asm\asm::asm_donotetrackswithinterceptor(var1, var2, &handlebackcrawlnotetracks);
+      var_7 = scripts\asm\asm::asm_donotetrackswithinterceptor(var_1, var_2, &handlebackcrawlnotetracks);
 
-      if(var7 == "end") {
+      if(var_7 == "end") {
         break;
       }
     }
   }
 
   self.desiredtimeofdeath = gettime() + randomintrange(4000, 20000);
-  scripts\asm\asm::asm_fireevent(var1, "dying_back_crawl_done");
+  scripts\asm\asm::asm_fireevent(var_1, "dying_back_crawl_done");
 }
 
-function playcrawlflipover(var0, var1, var2) {
+function playcrawlflipover(var_0, var_1, var_2) {
   scripts\common\utility::lookatentity();
-  scripts\asm\asm::asm_playanimstatewithnotetrackinterceptor(var0, var1, &handlebackcrawlnotetracks);
+  scripts\asm\asm::asm_playanimstatewithnotetrackinterceptor(var_0, var_1, &handlebackcrawlnotetracks);
 }
 
-function playcrawlingpaintransition(var0, var1, var2) {
+function playcrawlingpaintransition(var_0, var_1, var_2) {
   setearlyfinishtime();
 
   if(istrue(self.forcelongdeathskipintroanim)) {
-    if(!scripts\asm\asm::asm_eventfired(var0, "end")) {
-      scripts\asm\asm::asm_fireevent(var0, "end");
+    if(!scripts\asm\asm::asm_eventfired(var_0, "end")) {
+      scripts\asm\asm::asm_fireevent(var_0, "end");
     }
 
     return;
@@ -349,7 +349,7 @@ function playcrawlingpaintransition(var0, var1, var2) {
 
   thread preventpainforashorttime();
   scripts\common\utility::lookatentity();
-  scripts\asm\asm::asm_playanimstatewithnotetrackinterceptor(var0, var1, &handlebackcrawlnotetracks);
+  scripts\asm\asm::asm_playanimstatewithnotetrackinterceptor(var_0, var_1, &handlebackcrawlnotetracks);
 }
 
 function setearlyfinishtime() {
@@ -360,105 +360,105 @@ function setearlyfinishtime() {
   self.asm.longdeathanims.earlyfinishtime = gettime() + 2000;
 }
 
-function playdyingbackshoot(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  setupaiming(var1);
+function playdyingbackshoot(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  setupaiming(var_1);
 
   for(;;) {
-    var3 = scripts\asm\asm::asm_getanim(var0, var1);
-    var4 = scripts\asm\asm::asm_getxanim(var1, var3);
-    scripts\asm\asm::asm_playfacialanim(var0, var1, var4);
-    self aisetanim(var1, var3);
-    var5 = scripts\asm\asm::asm_donotetrackswithinterceptor(var0, var1, &handlebackcrawlnotetracks);
+    var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+    var_4 = scripts\asm\asm::asm_getxanim(var_1, var_3);
+    scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_4);
+    self aisetanim(var_1, var_3);
+    var_5 = scripts\asm\asm::asm_donotetrackswithinterceptor(var_0, var_1, &handlebackcrawlnotetracks);
 
-    if(var5 == "end") {
-      if(!scripts\asm\asm::asm_eventfired(var0, "end")) {
-        scripts\asm\asm::asm_fireevent(var0, "end");
+    if(var_5 == "end") {
+      if(!scripts\asm\asm::asm_eventfired(var_0, "end")) {
+        scripts\asm\asm::asm_fireevent(var_0, "end");
       }
     }
   }
 }
 
-function choosedyingbackidle(var0, var1, var2) {
+function choosedyingbackidle(var_0, var_1, var_2) {
   if(istrue(self.longdeathnoncombat)) {
-    return scripts\asm\asm::asm_lookupanimfromalias(var1, "noncombat");
+    return scripts\asm\asm::asm_lookupanimfromalias(var_1, "noncombat");
   }
 
-  return scripts\asm\asm::asm_chooseanim(var0, var1, var2);
+  return scripts\asm\asm::asm_chooseanim(var_0, var_1, var_2);
 }
 
-function playdyingbackidle(var0, var1, var2) {
-  self endon(var1 + "_finished");
+function playdyingbackidle(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
 
   if(!istrue(self.longdeathnoncombat)) {
     self.a.nextlongdeathshoottime = gettime() + randomintrange(500, 1000);
-    setupaiming(var1);
+    setupaiming(var_1);
   }
 
-  var3 = undefined;
+  var_3 = undefined;
 
   for(;;) {
-    var4 = scripts\asm\asm::asm_getanim(var0, var1);
-    var5 = scripts\asm\asm::asm_getxanim(var1, var4);
+    var_4 = scripts\asm\asm::asm_getanim(var_0, var_1);
+    var_5 = scripts\asm\asm::asm_getxanim(var_1, var_4);
 
-    if(!isDefined(var3) || var4 != var3) {
-      self aisetanim(var1, var4);
-      var3 = var4;
+    if(!isDefined(var_3) || var_4 != var_3) {
+      self aisetanim(var_1, var_4);
+      var_3 = var_4;
     }
 
-    scripts\asm\asm::asm_playfacialanim(var0, var1, var5);
-    var3 = var4;
-    scripts\asm\asm::asm_donotetrackssingleloop(var0, var1, var5, scripts\asm\asm::asm_getnotehandler(var0, var1));
+    scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_5);
+    var_3 = var_4;
+    scripts\asm\asm::asm_donotetrackssingleloop(var_0, var_1, var_5, scripts\asm\asm::asm_getnotehandler(var_0, var_1));
   }
 }
 
-function playstumblingpaintransition(var0, var1, var2) {
+function playstumblingpaintransition(var_0, var_1, var_2) {
   thread preventpainforashorttime();
   setearlyfinishtime();
   scripts\common\utility::lookatentity();
-  scripts\asm\asm::asm_playanimstate(var0, var1);
+  scripts\asm\asm::asm_playanimstate(var_0, var_1);
 }
 
-function playstumblingwander(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  var4 = "stumbling_pain_collapse_death";
-  var5 = scripts\asm\asm::asm_getanim(var0, var4);
-  var6 = scripts\asm\asm::asm_getxanim(var4, var5);
-  var7 = scripts\asm\asm::asm_getxanim(var1, var3);
+function playstumblingwander(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_4 = "stumbling_pain_collapse_death";
+  var_5 = scripts\asm\asm::asm_getanim(var_0, var_4);
+  var_6 = scripts\asm\asm::asm_getxanim(var_4, var_5);
+  var_7 = scripts\asm\asm::asm_getxanim(var_1, var_3);
 
-  if(!animhasnotetrack(var7, "code_move")) {
-    scripts\asm\asm::asm_fireevent(var0, "pain_wander_done");
+  if(!animhasnotetrack(var_7, "code_move")) {
+    scripts\asm\asm::asm_fireevent(var_0, "pain_wander_done");
     return;
   }
 
-  var8 = getmovedelta(var6);
-  var9 = randomintrange(1, 3);
-  self aisetanim(var1, var3);
-  scripts\asm\asm::asm_playfacialanim(var0, var1, var7);
+  var_8 = getmovedelta(var_6);
+  var_9 = randomintrange(1, 3);
+  self aisetanim(var_1, var_3);
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_7);
 
-  while(var9 > 0) {
-    var10 = self localtoworldcoords(var8);
+  while(var_9 > 0) {
+    var_10 = self localtoworldcoords(var_8);
 
-    if(!self maymovetopoint(var10)) {
+    if(!self maymovetopoint(var_10)) {
       break;
     }
 
     for(;;) {
-      var11 = scripts\asm\asm::asm_donotetracks(var0, var1, scripts\asm\asm::asm_getnotehandler(var0, var1));
+      var_11 = scripts\asm\asm::asm_donotetracks(var_0, var_1, scripts\asm\asm::asm_getnotehandler(var_0, var_1));
 
-      if(var11 == "code_move") {
+      if(var_11 == "code_move") {
         break;
       }
     }
 
-    var9--;
+    var_9--;
   }
 
-  scripts\asm\asm::asm_fireevent(var0, "pain_wander_done");
+  scripts\asm\asm::asm_fireevent(var_0, "pain_wander_done");
 }
 
-function hasbeenhitwithemp(var0, var1, var2, var3) {
+function hasbeenhitwithemp(var_0, var_1, var_2, var_3) {
   if(isDefined(self.isempd) && self.isempd) {
     return true;
   }
@@ -466,7 +466,7 @@ function hasbeenhitwithemp(var0, var1, var2, var3) {
   return false;
 }
 
-function shouldflipover(var0, var1, var2, var3) {
+function shouldflipover(var_0, var_1, var_2, var_3) {
   if(isDefined(self.isempd) && self.isempd) {
     return false;
   }
@@ -478,7 +478,7 @@ function shouldflipover(var0, var1, var2, var3) {
   return false;
 }
 
-function shouldendlongdeath(var0, var1, var2, var3) {
+function shouldendlongdeath(var_0, var_1, var_2, var_3) {
   if(shouldfinishlongdeath()) {
     return true;
   }
@@ -502,16 +502,16 @@ function shouldendlongdeath(var0, var1, var2, var3) {
   return false;
 }
 
-function shouldattemptcrawlingpain(var0, var1, var2, var3) {
-  scripts\asm\asm::asm_getanim(var0, var2);
+function shouldattemptcrawlingpain(var_0, var_1, var_2, var_3) {
+  scripts\asm\asm::asm_getanim(var_0, var_2);
 
   if(!isDefined(self.a.crawlingpaintransanim)) {
     return false;
   }
 
-  var4 = scripts\asm\asm::asm_getxanim(var2, self.a.crawlingpaintransanim);
+  var_4 = scripts\asm\asm::asm_getxanim(var_2, self.a.crawlingpaintransanim);
 
-  if(!iscrawldeltaallowed(var4)) {
+  if(!iscrawldeltaallowed(var_4)) {
     self.a.crawlingpaintransanim = undefined;
     return false;
   }
@@ -527,7 +527,7 @@ function isonornearstairs() {
   return false;
 }
 
-function shoulddoanylongdeath(var0, var1, var2, var3) {
+function shoulddoanylongdeath(var_0, var_1, var_2, var_3) {
   setdvarifuninitialized("scr_forceLongDeath", 0);
 
   if(self.a.disablelongdeath || self.diequietly || self.damageshield || isDefined(self.deathanim)) {
@@ -555,10 +555,10 @@ function shoulddoanylongdeath(var0, var1, var2, var3) {
   }
 
   self.leghit = scripts\engine\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower", "left_foot", "right_foot");
-  var4 = getdvarint("scr_forceLongDeath", 0);
+  var_4 = getdvarint("scr_forceLongDeath", 0);
 
-  if(var4 != 0) {
-    self.forcelongdeath = var4;
+  if(var_4 != 0) {
+    self.forcelongdeath = var_4;
   }
 
   if(isDefined(self.forcelongdeath) && self.forcelongdeath >= 1) {
@@ -583,8 +583,8 @@ function shoulddoanylongdeath(var0, var1, var2, var3) {
     }
   }
 
-  foreach(var6 in level.players) {
-    if(distancesquared(self.origin, var6.origin) < 30625) {
+  foreach(var_6 in level.players) {
+    if(distancesquared(self.origin, var_6.origin) < 30625) {
       return false;
     }
   }
@@ -592,17 +592,17 @@ function shoulddoanylongdeath(var0, var1, var2, var3) {
   return true;
 }
 
-function shouldattemptstumblingpain(var0) {
+function shouldattemptstumblingpain(var_0) {
   if(self.currentpose != "stand") {
     return false;
   }
 
-  var1 = 20;
+  var_1 = 20;
 
   if(isDefined(self.forcelongdeath)) {
     switch (self.forcelongdeath) {
       case 2:
-        var1 = 100;
+        var_1 = 100;
         break;
       case 4:
       case 3:
@@ -610,58 +610,58 @@ function shouldattemptstumblingpain(var0) {
     }
   }
 
-  if(randomint(100) > var1) {
+  if(randomint(100) > var_1) {
     return false;
   }
 
-  var2 = 0;
+  var_2 = 0;
 
-  if(!var0) {
-    var2 = scripts\engine\utility::damagelocationisany("torso_upper", "torso_lower");
+  if(!var_0) {
+    var_2 = scripts\engine\utility::damagelocationisany("torso_upper", "torso_lower");
 
-    if(!var2) {
+    if(!var_2) {
       return false;
     }
   }
 
-  var3 = 0;
-  var4 = "leg";
-  var5 = "b";
+  var_3 = 0;
+  var_4 = "leg";
+  var_5 = "b";
 
-  if(var0) {
-    var3 = 200;
+  if(var_0) {
+    var_3 = 200;
   } else {
-    var4 = "gut";
-    var3 = 128;
+    var_4 = "gut";
+    var_3 = 128;
 
     if(45 < self.damageyaw && self.damageyaw < 135) {
-      var5 = "l";
+      var_5 = "l";
     } else if(-135 < self.damageyaw && self.damageyaw < -45) {
-      var5 = "r";
+      var_5 = "r";
     } else if(-45 < self.damageyaw && self.damageyaw < 45) {
       return false;
     }
   }
 
-  switch (var5) {
+  switch (var_5) {
     case "b":
-      var6 = anglesToForward(self.angles);
-      var7 = self.origin - var6 * var3;
+      var_6 = anglesToForward(self.angles);
+      var_7 = self.origin - var_6 * var_3;
       break;
     case "l":
-      var8 = anglestoright(self.angles);
-      var7 = self.origin - var8 * var4;
+      var_8 = anglestoright(self.angles);
+      var_7 = self.origin - var_8 * var_4;
       break;
     case "r":
-      var8 = anglestoright(self.angles);
-      var7 = self.origin + var8 * var5;
+      var_8 = anglestoright(self.angles);
+      var_7 = self.origin + var_8 * var_5;
       break;
     default:
       return false;
   }
 
   if(!isDefined(self.forcelongdeath) || self.forcelongdeath != 2) {
-    if(!self maymovetopoint(var7)) {
+    if(!self maymovetopoint(var_7)) {
       return false;
     }
   }
@@ -669,7 +669,7 @@ function shouldattemptstumblingpain(var0) {
   return true;
 }
 
-function shoulddostumblinglongdeath(var0, var1, var2, var3) {
+function shoulddostumblinglongdeath(var_0, var_1, var_2, var_3) {
   if(isDefined(self.forcelongdeath) && self.forcelongdeath == 2) {
     return true;
   }
@@ -685,7 +685,7 @@ function shoulddostumblinglongdeath(var0, var1, var2, var3) {
   return false;
 }
 
-function shoulddocrawlingbacklongdeath(var0, var1, var2, var3) {
+function shoulddocrawlingbacklongdeath(var_0, var_1, var_2, var_3) {
   if(isDefined(self.forcelongdeath) && self.forcelongdeath == 4) {
     return true;
   }
@@ -698,14 +698,14 @@ function shoulddocrawlingbacklongdeath(var0, var1, var2, var3) {
     return false;
   }
 
-  if(shouldattemptcrawlingpain(var0, var1, var2, var3)) {
+  if(shouldattemptcrawlingpain(var_0, var_1, var_2, var_3)) {
     return true;
   }
 
   return false;
 }
 
-function shoulddocrawlingonbellylongdeath(var0, var1, var2, var3) {
+function shoulddocrawlingonbellylongdeath(var_0, var_1, var_2, var_3) {
   if(isDefined(self.forcelongdeath) && (self.forcelongdeath == 2 || self.forcelongdeath == 3)) {
     return true;
   }
@@ -728,14 +728,14 @@ function shoulddocrawlingonbellylongdeath(var0, var1, var2, var3) {
     return false;
   }
 
-  return shouldattemptcrawlingpain(var0, var1, var2, var3);
+  return shouldattemptcrawlingpain(var_0, var_1, var_2, var_3);
 }
 
-function shoulddodyingbackcrawl(var0, var1, var2, var3) {
+function shoulddodyingbackcrawl(var_0, var_1, var_2, var_3) {
   return !istrue(self.skipdyingbackcrawl);
 }
 
-function shoulddodyingcrawl(var0, var1, var2, var3) {
+function shoulddodyingcrawl(var_0, var_1, var_2, var_3) {
   if(isDefined(self.forcelongdeath) && self.forcelongdeath == 4) {
     return true;
   }
@@ -755,10 +755,10 @@ function shoulddodyingcrawl(var0, var1, var2, var3) {
   }
 
   if(self.currentpose != "prone") {
-    var4 = scripts\asm\asm::asm_getanim(var0, var2);
-    var5 = scripts\asm\asm::asm_getxanim(var2, var4);
+    var_4 = scripts\asm\asm::asm_getanim(var_0, var_2);
+    var_5 = scripts\asm\asm::asm_getxanim(var_2, var_4);
 
-    if(!iscrawldeltaallowed(var5)) {
+    if(!iscrawldeltaallowed(var_5)) {
       return false;
     }
   }
@@ -766,7 +766,7 @@ function shoulddodyingcrawl(var0, var1, var2, var3) {
   return true;
 }
 
-function longdeathshouldshoot(var0, var1, var2, var3) {
+function longdeathshouldshoot(var_0, var_1, var_2, var_3) {
   if(istrue(self.longdeathnoncombat)) {
     return false;
   }
@@ -792,18 +792,18 @@ function longdeathshouldshoot(var0, var1, var2, var3) {
   return true;
 }
 
-function doesstumblingpainstatehavealias(var0, var1, var2, var3) {
-  if(!scripts\asm\asm::asm_hasalias(var2, self.a.stumblingpainalias)) {
+function doesstumblingpainstatehavealias(var_0, var_1, var_2, var_3) {
+  if(!scripts\asm\asm::asm_hasalias(var_2, self.a.stumblingpainalias)) {
     return false;
   }
 
-  var4 = scripts\asm\asm::asm_getallanimindicesforalias(var2, self.a.stumblingpainalias);
+  var_4 = scripts\asm\asm::asm_getallanimindicesforalias(var_2, self.a.stumblingpainalias);
 
-  if(!isDefined(var4) || !isarray(var4)) {
+  if(!isDefined(var_4) || !isarray(var_4)) {
     return false;
   }
 
-  if(var4.size <= self.a.stumblingpainanimindex) {
+  if(var_4.size <= self.a.stumblingpainanimindex) {
     return false;
   }
 
@@ -921,7 +921,7 @@ function isforcingspecificlongdeath() {
   return isDefined(self.forcelongdeath) && self.forcelongdeath > 1;
 }
 
-function shoulddomercy(var0, var1, var2, var3) {
+function shoulddomercy(var_0, var_1, var_2, var_3) {
   if(!istrue(self.asm.longdeathanims.mercyenabled)) {
     return 0;
   }
@@ -930,28 +930,28 @@ function shoulddomercy(var0, var1, var2, var3) {
     return shoulddoforcedmercy();
   }
 
-  var4 = anglesToForward(self.angles);
+  var_4 = anglesToForward(self.angles);
 
-  foreach(var6 in level.players) {
-    var7 = distancesquared(self.origin, var6.origin);
+  foreach(var_6 in level.players) {
+    var_7 = distancesquared(self.origin, var_6.origin);
 
-    if(distancesquared(self.origin, var6.origin) > 90000) {
+    if(distancesquared(self.origin, var_6.origin) > 90000) {
       continue;
     }
 
-    var8 = vectorNormalize(var6.origin - self.origin);
+    var_8 = vectorNormalize(var_6.origin - self.origin);
 
     if(istrue(self.asm.longdeathanims.bellycrawl)) {
-      if(vectordot(var8, var4) > -0.707) {
+      if(vectordot(var_8, var_4) > -0.707) {
         continue;
       }
-    } else if(vectordot(var8, var4) < 0.707) {
+    } else if(vectordot(var_8, var_4) < 0.707) {
       continue;
     }
 
-    var9 = anglesToForward(var6.angles);
+    var_9 = anglesToForward(var_6.angles);
 
-    if(vectordot(var9, var8) < -0.707) {
+    if(vectordot(var_9, var_8) < -0.707) {
       return 1;
     }
   }
@@ -959,7 +959,7 @@ function shoulddomercy(var0, var1, var2, var3) {
   return 0;
 }
 
-function shoulddoshootinglongdeath(var0, var1, var2, var3) {
+function shoulddoshootinglongdeath(var_0, var_1, var_2, var_3) {
   if(istrue(self.asm.longdeathanims.shootforced)) {
     return true;
   }
@@ -975,55 +975,55 @@ function shoulddoshootinglongdeath(var0, var1, var2, var3) {
   return true;
 }
 
-function shoulddomercytransition(var0, var1, var2, var3) {
+function shoulddomercytransition(var_0, var_1, var_2, var_3) {
   return istrue(self.asm.longdeathanims.mercytransitionenabled);
 }
 
-function shoulddofinaldeath(var0, var1, var2, var3) {
+function shoulddofinaldeath(var_0, var_1, var_2, var_3) {
   return gettime() > self.asm.longdeathanims.loopendtime;
 }
 
-function longdeathfinal(var0, var1, var2) {
+function longdeathfinal(var_0, var_1, var_2) {
   self.asm.longdeathanims.alias += "_final";
   self.asm.longdeathanims.bledout = 1;
   killme();
 }
 
-function playlongdeathintro(var0, var1, var2) {
+function playlongdeathintro(var_0, var_1, var_2) {
   thread preventpainforashorttime();
 
   if(istrue(self.forcelongdeathskipintroanim)) {
-    if(!scripts\asm\asm::asm_eventfired(var0, "end")) {
-      scripts\asm\asm::asm_fireevent(var0, "end");
+    if(!scripts\asm\asm::asm_eventfired(var_0, "end")) {
+      scripts\asm\asm::asm_fireevent(var_0, "end");
     }
 
     return;
   }
 
   setearlyfinishtime();
-  playlongdeathanim(var0, var1);
+  playlongdeathanim(var_0, var_1);
 }
 
-function playlongdeathmercy(var0, var1, var2) {
-  playlongdeathanim(var0, var1);
+function playlongdeathmercy(var_0, var_1, var_2) {
+  playlongdeathanim(var_0, var_1);
 }
 
-function chooseanimlongdeath(var0, var1, var2) {
-  var3 = self.asm.longdeathanims.alias;
+function chooseanimlongdeath(var_0, var_1, var_2) {
+  var_3 = self.asm.longdeathanims.alias;
 
-  if(!scripts\asm\asm::asm_hasalias(var1, var3)) {
+  if(!scripts\asm\asm::asm_hasalias(var_1, var_3)) {
     return undefined;
   }
 
-  var4 = scripts\asm\asm::asm_lookupanimfromalias(var1, var3);
-  return var4;
+  var_4 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
+  return var_4;
 }
 
-function longdeathmercyfinal(var0, var1, var2) {
+function longdeathmercyfinal(var_0, var_1, var_2) {
   killme();
 }
 
-function playlongdeathidle(var0, var1, var2) {
+function playlongdeathidle(var_0, var_1, var_2) {
   if(istrue(self.asm.longdeathanims.grenadepullenabled)) {
     self.asm.longdeathanims.grenadepulltime = gettime() + self.asm.longdeathanims.grenadepulltimer;
   }
@@ -1032,13 +1032,13 @@ function playlongdeathidle(var0, var1, var2) {
     self.asm.longdeathanims.loopendtime = gettime() + self.asm.longdeathanims.idletimeout;
   }
 
-  var3 = [[self.asm.longdeathanims.loopfunc]](var0, var1, var2);
+  var_3 = [[self.asm.longdeathanims.loopfunc]](var_0, var_1, var_2);
 
-  if(!var3) {
+  if(!var_3) {
     self.asm.longdeathanims.loopendtime = gettime();
 
-    if(!scripts\asm\asm::asm_eventfired(var0, "end")) {
-      scripts\asm\asm::asm_fireevent(var0, "end");
+    if(!scripts\asm\asm::asm_eventfired(var_0, "end")) {
+      scripts\asm\asm::asm_fireevent(var_0, "end");
       return;
     }
 
@@ -1046,20 +1046,20 @@ function playlongdeathidle(var0, var1, var2) {
   }
 }
 
-function playshootinglongdeathidle(var0, var1, var2) {
+function playshootinglongdeathidle(var_0, var_1, var_2) {
   if(!isDefined(self.desiredtimeofdeath)) {
     self.desiredtimeofdeath = gettime() + randomintrange(4000, 20000);
   }
 
   self.a.nextlongdeathshoottime = gettime() + randomintrange(500, 1000);
-  setupaiming(var1);
-  var3 = [[self.asm.longdeathanims.loopfunc]](var0, var1, var2);
+  setupaiming(var_1);
+  var_3 = [[self.asm.longdeathanims.loopfunc]](var_0, var_1, var_2);
 
-  if(!var3) {
+  if(!var_3) {
     self.asm.longdeathanims.loopendtime = gettime();
 
-    if(!scripts\asm\asm::asm_eventfired(var0, "end")) {
-      scripts\asm\asm::asm_fireevent(var0, "end");
+    if(!scripts\asm\asm::asm_eventfired(var_0, "end")) {
+      scripts\asm\asm::asm_fireevent(var_0, "end");
       return;
     }
 
@@ -1067,11 +1067,11 @@ function playshootinglongdeathidle(var0, var1, var2) {
   }
 }
 
-function longdeathidlesingleloop(var0, var1, var2) {
-  return playlongdeathanim(var0, var1);
+function longdeathidlesingleloop(var_0, var_1, var_2) {
+  return playlongdeathanim(var_0, var_1);
 }
 
-function shoulddocrawllongdeath(var0, var1, var2, var3) {
+function shoulddocrawllongdeath(var_0, var_1, var_2, var_3) {
   if(!usingnewlongdeaths()) {
     return false;
   }
@@ -1086,11 +1086,11 @@ function shoulddocrawllongdeath(var0, var1, var2, var3) {
     return true;
   }
 
-  var4 = randomfloat(1);
-  return var4 < 0.6;
+  var_4 = randomfloat(1);
+  return var_4 < 0.6;
 }
 
-function shoulddocoverlongdeath(var0, var1, var2, var3) {
+function shoulddocoverlongdeath(var_0, var_1, var_2, var_3) {
   if(!usingnewlongdeaths()) {
     return false;
   }
@@ -1099,9 +1099,9 @@ function shoulddocoverlongdeath(var0, var1, var2, var3) {
     return (self.forcelongdeath >= 5 && self.forcelongdeath <= 16);
   }
 
-  var4 = scripts\asm\asm_bb::bb_getcovernode();
+  var_4 = scripts\asm\asm_bb::bb_getcovernode();
 
-  if(!isDefined(var4)) {
+  if(!isDefined(var_4)) {
     return false;
   }
 
@@ -1113,18 +1113,18 @@ function shoulddocoverlongdeath(var0, var1, var2, var3) {
     return false;
   }
 
-  var5 = scripts\asm\shared\utility::getnodeforwardyaw(var4);
-  var6 = self.angles[1];
-  var7 = 5;
+  var_5 = scripts\asm\shared\utility::getnodeforwardyaw(var_4);
+  var_6 = self.angles[1];
+  var_7 = 5;
 
-  if(abs(var5 - var6) > var7) {
+  if(abs(var_5 - var_6) > var_7) {
     return false;
   }
 
   return self._blackboard.covernode.type != "Cover Prone";
 }
 
-function shoulddoexposedlongdeath(var0, var1, var2, var3) {
+function shoulddoexposedlongdeath(var_0, var_1, var_2, var_3) {
   if(!usingnewlongdeaths()) {
     return false;
   }
@@ -1140,7 +1140,7 @@ function shoulddoexposedlongdeath(var0, var1, var2, var3) {
   return true;
 }
 
-function choosecrawllongdeathanims(var0, var1, var2) {
+function choosecrawllongdeathanims(var_0, var_1, var_2) {
   self.asm.longdeathanims = spawnStruct();
   self.asm.longdeathanims.mercyenabled = 1;
   self.asm.longdeathanims.alias = getcrawllongdeathalias();
@@ -1153,52 +1153,52 @@ function getcrawllongdeathalias() {
     return getforcedlongdeathalias();
   }
 
-  var0 = "exposed";
+  var_0 = "exposed";
 
   if(self.currentpose == "crouch") {
-    var0 += "_crouch";
+    var_0 += "_crouch";
   } else {
-    var0 += "_stand";
+    var_0 += "_stand";
   }
 
-  var0 += "_crawl";
-  var1 = getdamagedirection();
+  var_0 += "_crawl";
+  var_1 = getdamagedirection();
 
-  switch (var1) {
+  switch (var_1) {
     case 1:
-      var0 += "_left";
+      var_0 += "_left";
       break;
     case 0:
-      var0 += "_right";
+      var_0 += "_right";
       break;
     case 3:
-      var0 += "_back";
+      var_0 += "_back";
       break;
     default:
-      var0 = getfrontcrawldeath(var0);
+      var_0 = getfrontcrawldeath(var_0);
       break;
   }
 
-  return var0;
+  return var_0;
 }
 
-function getfrontcrawldeath(var0) {
-  var1 = randomfloat(1);
+function getfrontcrawldeath(var_0) {
+  var_1 = randomfloat(1);
 
-  if(var1 < 0.4) {
+  if(var_1 < 0.4) {
     self.asm.longdeathanims.shootenabled = 1;
     self.asm.longdeathanims.mercyenabled = 0;
-    var0 += "_shoot";
+    var_0 += "_shoot";
   } else {
     self.asm.longdeathanims.mercytransitionenabled = 1;
     self.asm.longdeathanims.bellycrawl = 1;
-    var0 += "_belly";
+    var_0 += "_belly";
   }
 
-  return var0;
+  return var_0;
 }
 
-function choosecoverlongdeathanims(var0, var1, var2) {
+function choosecoverlongdeathanims(var_0, var_1, var_2) {
   self.asm.longdeathanims = spawnStruct();
   self.asm.longdeathanims.alias = getcoverlongdeathalias();
   self.asm.longdeathanims.idletimeout = 4000;
@@ -1237,24 +1237,24 @@ function getcoverlongdeathalias() {
     return getforcedlongdeathalias();
   }
 
-  var0 = "cover";
+  var_0 = "cover";
 
   if(self._blackboard.covernode.type == "Cover Right") {
-    var0 += "_right";
+    var_0 += "_right";
   } else if(self._blackboard.covernode.type == "Cover Left") {
-    var0 += "_left";
+    var_0 += "_left";
   }
 
   if(self.currentpose == "crouch") {
-    var0 += "_crouch";
+    var_0 += "_crouch";
   } else {
-    var0 += "_stand";
+    var_0 += "_stand";
   }
 
-  return var0;
+  return var_0;
 }
 
-function chooseexposedlongdeathanims(var0, var1, var2) {
+function chooseexposedlongdeathanims(var_0, var_1, var_2) {
   self.asm.longdeathanims = spawnStruct();
   self.asm.longdeathanims.alias = getexposedlongdeathalias();
   self.asm.longdeathanims.idletimeout = 4000;
@@ -1267,11 +1267,11 @@ function chooseexposedlongdeathanims(var0, var1, var2) {
 }
 
 function getdamagedirection() {
-  var0 = abs(self.damageyaw);
+  var_0 = abs(self.damageyaw);
 
-  if(var0 > 135) {
+  if(var_0 > 135) {
     return 2;
-  } else if(var0 < 45) {
+  } else if(var_0 < 45) {
     return 3;
   } else if(self.damageyaw < 0) {
     return 0;
@@ -1282,9 +1282,9 @@ function getdamagedirection() {
 
 function getdamagedirectionsuffix() {
   if(!istrue(self.asm.longdeathanims.bledout)) {
-    var0 = getdamagedirection();
+    var_0 = getdamagedirection();
 
-    switch (var0) {
+    switch (var_0) {
       case 1:
         return "_l";
       case 0:
@@ -1304,9 +1304,9 @@ function getexposedlongdeathalias() {
     return getforcedlongdeathalias();
   }
 
-  var0 = getdamagedirection();
+  var_0 = getdamagedirection();
 
-  switch (var0) {
+  switch (var_0) {
     case 1:
       return "exposed_left";
     case 0:
@@ -1318,7 +1318,7 @@ function getexposedlongdeathalias() {
   }
 }
 
-function shouldshootduringlongdeath(var0, var1, var2, var3) {
+function shouldshootduringlongdeath(var_0, var_1, var_2, var_3) {
   if(isDefined(self.a.nextlongdeathshoottime)) {
     if(gettime() < self.a.nextlongdeathshoottime) {
       return false;
@@ -1340,7 +1340,7 @@ function shouldshootduringlongdeath(var0, var1, var2, var3) {
   return true;
 }
 
-function shoulddolongdeathgrenade(var0, var1, var2, var3) {
+function shoulddolongdeathgrenade(var_0, var_1, var_2, var_3) {
   if(isDefined(self.forcelongdeath) && self.forcelongdeath == 5) {
     return true;
   }
@@ -1349,35 +1349,35 @@ function shoulddolongdeathgrenade(var0, var1, var2, var3) {
     return false;
   }
 
-  if(!scripts\asm\asm::asm_hasalias(var2, self.asm.longdeathanims.alias)) {
+  if(!scripts\asm\asm::asm_hasalias(var_2, self.asm.longdeathanims.alias)) {
     return false;
   }
 
   return gettime() > self.asm.longdeathanims.grenadepulltime;
 }
 
-function shoulddolongdeathgrenadefinal(var0, var1, var2, var3) {
+function shoulddolongdeathgrenadefinal(var_0, var_1, var_2, var_3) {
   return gettime() > self.asm.longdeathanims.grenadedroptimer;
 }
 
-function playlongdeathgrenade(var0, var1, var2) {
+function playlongdeathgrenade(var_0, var_1, var_2) {
   self.asm.longdeathanims.grenadedroptimer = gettime() + randomfloatrange(1.5, 1.9) * 1000;
-  playlongdeathanim(var0, var1);
+  playlongdeathanim(var_0, var_1);
 }
 
-function playlongdeathgrenadepull(var0, var1, var2) {
+function playlongdeathgrenadepull(var_0, var_1, var_2) {
   self.asm.longdeathanims.onfinaldeathcallback = &onfinaldeathdropgrenade;
-  playlongdeathanim(var0, var1);
+  playlongdeathanim(var_0, var_1);
 }
 
-function playlongdeathanim(var0, var1) {
-  var2 = scripts\asm\asm::asm_getanim(var0, var1);
-  var3 = scripts\asm\asm::asm_getxanim(var1, var2);
+function playlongdeathanim(var_0, var_1) {
+  var_2 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_3 = scripts\asm\asm::asm_getxanim(var_1, var_2);
 
-  if(isDefined(self.forcelongdeath) || isanimdeltaallowed(var3)) {
-    scripts\asm\asm::asm_playfacialanim(var0, var1, var3);
-    self aisetanim(var1, var2);
-    scripts\asm\asm::asm_donotetracks(var0, var1, scripts\asm\asm::asm_getnotehandler(var0, var1));
+  if(isDefined(self.forcelongdeath) || isanimdeltaallowed(var_3)) {
+    scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_3);
+    self aisetanim(var_1, var_2);
+    scripts\asm\asm::asm_donotetracks(var_0, var_1, scripts\asm\asm::asm_getnotehandler(var_0, var_1));
   } else {
     return false;
   }
@@ -1385,16 +1385,16 @@ function playlongdeathanim(var0, var1) {
   return true;
 }
 
-function longdeathfinalgrenade(var0, var1, var2) {
+function longdeathfinalgrenade(var_0, var_1, var_2) {
   killme();
 }
 
-function chooselongdeathdeathanim(var0, var1, var2) {
+function chooselongdeathdeathanim(var_0, var_1, var_2) {
   if(isDefined(self.asm.longdeathanims.longdeathdirectionalfunc)) {
     self.asm.longdeathanims.alias += [[self.asm.longdeathanims.longdeathdirectionalfunc]]();
   }
 
-  return chooseanimlongdeath(var0, var1, var2);
+  return chooseanimlongdeath(var_0, var_1, var_2);
 }
 
 function usingnewlongdeaths() {
@@ -1402,34 +1402,34 @@ function usingnewlongdeaths() {
   return getDvar("scr_ai_new_long_deaths") != "0";
 }
 
-function isanimdeltaallowed(var0) {
+function isanimdeltaallowed(var_0) {
   if(istrue(self.asm.longdeathanims.ignoreanimdeltacheck)) {
     return 1;
   }
 
-  var1 = 30;
-  var2 = getmovedelta(var0, 0, 1);
-  var3 = length(var2);
-  var4 = vectorNormalize(var2);
-  var2 = var4 * (var3 + var1);
-  var5 = self localtoworldcoords(var2);
+  var_1 = 30;
+  var_2 = getmovedelta(var_0, 0, 1);
+  var_3 = length(var_2);
+  var_4 = vectorNormalize(var_2);
+  var_2 = var_4 * (var_3 + var_1);
+  var_5 = self localtoworldcoords(var_2);
 
-  if(!checkstairsoffsetpoint(var5)) {
+  if(!checkstairsoffsetpoint(var_5)) {
     return 0;
   }
 
-  return self maymovetopoint(var5);
+  return self maymovetopoint(var_5);
 }
 
-function checkstairsoffsetpoint(var0) {
-  return self isatvalidlongdeathspot(var0);
+function checkstairsoffsetpoint(var_0) {
+  return self isatvalidlongdeathspot(var_0);
 }
 
-function canplaychosenlongdeath(var0, var1, var2, var3) {
-  var4 = scripts\asm\asm::asm_getanim(var0, var2, var3);
-  var5 = scripts\asm\asm::asm_getxanim(var2, var4);
+function canplaychosenlongdeath(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\asm\asm::asm_getanim(var_0, var_2, var_3);
+  var_5 = scripts\asm\asm::asm_getxanim(var_2, var_4);
 
-  if(!istrue(self.forcelongdeath) && !isanimdeltaallowed(var5)) {
+  if(!istrue(self.forcelongdeath) && !isanimdeltaallowed(var_5)) {
     self.asm.longdeathanims = undefined;
     return false;
   }
@@ -1437,12 +1437,12 @@ function canplaychosenlongdeath(var0, var1, var2, var3) {
   return true;
 }
 
-function playlongdeathfinaldeath(var0, var1, var2) {
+function playlongdeathfinaldeath(var_0, var_1, var_2) {
   if(isDefined(self.asm.longdeathanims.onfinaldeathcallback)) {
     [[self.asm.longdeathanims.onfinaldeathcallback]]();
   }
 
-  scripts\asm\soldier\death::playdeathanim(var0, var1, var2);
+  scripts\asm\soldier\death::playdeathanim(var_0, var_1, var_2);
 }
 
 function onfinaldeathdropgrenade() {
@@ -1450,40 +1450,40 @@ function onfinaldeathdropgrenade() {
     return;
   }
 
-  var0 = (0, 0, 30) - anglestoright(self.angles) * 70;
+  var_0 = (0, 0, 30) - anglestoright(self.angles) * 70;
 
   if(self.asm.longdeathanims.grenadetag == "tag_accessory_left") {
-    var0 *= -1;
+    var_0 *= -1;
   }
 
-  var1 = self gettagorigin(self.asm.longdeathanims.grenadetag);
-  var2 = var1 + (0, 0, 20);
-  var3 = var1 - (0, 0, 20);
-  var4 = scripts\engine\trace::ray_trace(var2, var3, self, undefined, 1);
+  var_1 = self gettagorigin(self.asm.longdeathanims.grenadetag);
+  var_2 = var_1 + (0, 0, 20);
+  var_3 = var_1 - (0, 0, 20);
+  var_4 = scripts\engine\trace::ray_trace(var_2, var_3, self, undefined, 1);
 
-  if(var4["fraction"] < 0.5) {
-    var1 = var4["position"];
+  if(var_4["fraction"] < 0.5) {
+    var_1 = var_4["position"];
   }
 
-  var5 = "default";
+  var_5 = "default";
 
-  if(var4["surfacetype"] != "none") {
-    var5 = var4["surfacetype"];
+  if(var_4["surfacetype"] != "none") {
+    var_5 = var_4["surfacetype"];
   }
 
-  playworldsound("grenade_bounce_heavy", var1);
+  playworldsound("grenade_bounce_heavy", var_1);
   self detach(getweaponmodel("frag"), self.asm.longdeathanims.grenadetag);
-  self magicgrenademanual(var1, var0, randomfloatrange(2, 3));
+  self magicgrenademanual(var_1, var_0, randomfloatrange(2, 3));
 }
 
-function shouldfinishlongdeath(var0, var1, var2, var3) {
+function shouldfinishlongdeath(var_0, var_1, var_2, var_3) {
   if(istrue(self.burningtodeath)) {
     return true;
   }
 
   if(isDefined(self.asm.longdeathanims.earlyfinishtime) && gettime() > self.asm.longdeathanims.earlyfinishtime) {
-    foreach(var5 in level.players) {
-      if(distancesquared(self.origin, var5.origin) < 2500) {
+    foreach(var_5 in level.players) {
+      if(distancesquared(self.origin, var_5.origin) < 2500) {
         return true;
       }
     }
@@ -1496,10 +1496,10 @@ function shouldfinishlongdeath(var0, var1, var2, var3) {
   return false;
 }
 
-function longdeathgrenadepullnotetrackhandler(var0) {
-  if(var0 == "grenade_left") {
+function longdeathgrenadepullnotetrackhandler(var_0) {
+  if(var_0 == "grenade_left") {
     self.asm.longdeathanims.grenadetag = "tag_accessory_left";
-  } else if(var0 == "grenade_right") {
+  } else if(var_0 == "grenade_right") {
     self.asm.longdeathanims.grenadetag = "tag_accessory_right";
   }
 

@@ -28,10 +28,10 @@ function main() {
   self.usescriptedweapon = 0;
   self.scriptedweaponclassprimary = "none";
   self.weapon = getcompleteweaponname("iw8_la_rpapa7_ai");
-  var0 = undefined;
-  var1 = ["character_iw8_russian_army_1_safehouse_finale", "character_iw8_russian_army_2_hood_safehouse_finale"];
+  var_0 = undefined;
+  var_1 = ["character_iw8_russian_army_1_safehouse_finale", "character_iw8_russian_army_2_hood_safehouse_finale"];
 
-  switch (scripts\code\character::get_random_character(2, var0, var1)) {
+  switch (scripts\code\character::get_random_character(2, var_0, var_1)) {
     case 0:
       character\character_iw8_russian_army_1_safehouse_finale::main();
       break;
@@ -45,7 +45,7 @@ function spawner() {
   self setspawnerteam("axis");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\character_iw8_russian_army_1_safehouse_finale::precache();
   character\character_iw8_russian_army_2_hood_safehouse_finale::precache();
   scripts\aitypes\bt_util::init();

@@ -3,13 +3,13 @@
  * Script: scripts\engine\sp\utility_code.gsc
 ***********************************************/
 
-function structarray_swap(var0, var1) {
-  var2 = var0.struct_array_index;
-  var3 = var1.struct_array_index;
-  self.array[var3] = var0;
-  self.array[var2] = var1;
-  self.array[var2].struct_array_index = var2;
-  self.array[var3].struct_array_index = var3;
+function structarray_swap(var_0, var_1) {
+  var_2 = var_0.struct_array_index;
+  var_3 = var_1.struct_array_index;
+  self.array[var_3] = var_0;
+  self.array[var_2] = var_1;
+  self.array[var_2].struct_array_index = var_2;
+  self.array[var_3].struct_array_index = var_3;
 }
 
 function wait_until_done_speaking() {
@@ -21,42 +21,42 @@ function wait_until_done_speaking() {
   }
 }
 
-function wait_for_trigger_think(var0) {
+function wait_for_trigger_think(var_0) {
   self endon("death");
-  var0 endon("trigger");
+  var_0 endon("trigger");
   self waittill("trigger");
-  var0 notify("trigger");
+  var_0 notify("trigger");
 }
 
-function wait_for_trigger(var0, var1) {
-  var2 = getEntArray(var0, var1);
-  var3 = spawnStruct();
-  scripts\engine\utility::array_thread(var2, &wait_for_trigger_think, var3);
-  var3 waittill("trigger");
+function wait_for_trigger(var_0, var_1) {
+  var_2 = getEntArray(var_0, var_1);
+  var_3 = spawnStruct();
+  scripts\engine\utility::array_thread(var_2, &wait_for_trigger_think, var_3);
+  var_3 waittill("trigger");
 }
 
-function ent_waits_for_trigger(var0) {
+function ent_waits_for_trigger(var_0) {
   self endon("done");
-  var0 waittill("trigger");
+  var_0 waittill("trigger");
   self notify("done");
 }
 
 function update_debug_friendlycolor_on_death() {
   self notify("debug_color_update");
   self endon("debug_color_update");
-  var0 = self.unique_id;
+  var_0 = self.unique_id;
   self waittill("death");
-  level.debug_color_friendlies[var0] = undefined;
+  level.debug_color_friendlies[var_0] = undefined;
   level notify("updated_color_friendlies");
 }
 
-function update_debug_friendlycolor(var0) {
+function update_debug_friendlycolor(var_0) {
   thread update_debug_friendlycolor_on_death();
 
   if(isDefined(self.script_forcecolor)) {
-    level.debug_color_friendlies[var0] = self.script_forcecolor;
+    level.debug_color_friendlies[var_0] = self.script_forcecolor;
   } else {
-    level.debug_color_friendlies[var0] = undefined;
+    level.debug_color_friendlies[var_0] = undefined;
   }
 
   level notify("updated_color_friendlies");
@@ -64,7 +64,7 @@ function update_debug_friendlycolor(var0) {
 
 function insure_player_does_not_set_forcecolor_twice_in_one_frame() {}
 
-function new_color_being_set(var0) {
+function new_color_being_set(var_0) {
   self notify("new_color_being_set");
   self.new_force_color_being_set = 1;
   scripts\sp\colors::left_color_node();
@@ -87,21 +87,21 @@ function new_color_being_set(var0) {
   self notify("done_setting_new_color");
 }
 
-function waittill_either_function_internal(var0, var1, var2) {
-  var0 endon("done");
-  [[var1]](var2);
-  var0 notify("done");
+function waittill_either_function_internal(var_0, var_1, var_2) {
+  var_0 endon("done");
+  [[var_1]](var_2);
+  var_0 notify("done");
 }
 
-function hintprintbreakout(var0, var1) {
+function hintprintbreakout(var_0, var_1) {
   self endon("hint_print_timeout");
   self endon("hint_print_remove");
-  var1 endon("new_hint");
+  var_1 endon("new_hint");
 
   for(;;) {
     self.fadeout = 1;
 
-    if(isDefined(level.hint_breakfunc) && [[level.hint_breakfunc]]() || var1.current_global_hint != var0) {
+    if(isDefined(level.hint_breakfunc) && [[level.hint_breakfunc]]() || var_1.current_global_hint != var_0) {
       break;
     }
 
@@ -109,111 +109,111 @@ function hintprintbreakout(var0, var1) {
   }
 }
 
-function hint_timeout(var0) {
-  wait var0;
+function hint_timeout(var_0) {
+  wait var_0;
   self.fadeout = 1;
   self notify("hint_print_timeout");
 }
 
-function destroy_hint_on_endon(var0, var1) {
+function destroy_hint_on_endon(var_0, var_1) {
   self endon("removing_hint");
 
-  if(isarray(var0) || isarray(var1)) {
-    destroy_hint_on_endon_proc(var0, var1);
+  if(isarray(var_0) || isarray(var_1)) {
+    destroy_hint_on_endon_proc(var_0, var_1);
   } else {
-    var0[0] waittill(var1[0]);
+    var_0[0] waittill(var_1[0]);
   }
 
   self.fadeout = 1;
   self notify("hint_print_remove");
 }
 
-function destroy_hint_on_endon_proc(var0, var1) {
-  if(!isarray(var0)) {
-    var0 = [var0];
+function destroy_hint_on_endon_proc(var_0, var_1) {
+  if(!isarray(var_0)) {
+    var_0 = [var_0];
   }
 
-  if(!isarray(var1)) {
-    var1 = [var1];
+  if(!isarray(var_1)) {
+    var_1 = [var_1];
   }
 
-  foreach(var3 in var0) {
-    foreach(var5 in var1) {
-      var3 endon(var5);
+  foreach(var_3 in var_0) {
+    foreach(var_5 in var_1) {
+      var_3 endon(var_5);
     }
   }
 
   level waittill("forever");
 }
 
-function hint_stick_get_updated(var0, var1, var2, var3, var4, var5, var6) {
-  return var0 + _hint_stick_get_config_suffix(var1, var2, var3, var4, var5, var6);
+function hint_stick_get_updated(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  return var_0 + _hint_stick_get_config_suffix(var_1, var_2, var_3, var_4, var_5, var_6);
 }
 
-function _hint_stick_get_config_suffix(var0, var1, var2, var3, var4, var5) {
-  var6 = getsticksconfig();
+function _hint_stick_get_config_suffix(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = getsticksconfig();
 
   if(level.player scripts\engine\utility::is_player_gamepad_enabled()) {
     if(level.player isps4player()) {
-      if(issubstr(var6, "southpaw") || var5 && issubstr(var6, "legacy")) {
-        return var4;
+      if(issubstr(var_6, "southpaw") || var_5 && issubstr(var_6, "legacy")) {
+        return var_4;
       }
 
-      return var3;
+      return var_3;
     }
 
-    if(issubstr(var6, "southpaw") || var5 && issubstr(var6, "legacy")) {
-      return var2;
+    if(issubstr(var_6, "southpaw") || var_5 && issubstr(var_6, "legacy")) {
+      return var_2;
     }
 
-    return var1;
+    return var_1;
   }
 
-  return var0;
+  return var_0;
 }
 
-function _hint_stick_update_breakfunc(var0, var1) {
-  var2 = var1 + var0;
-  var3 = level.trigger_hint_func[var2];
-  level.hint_breakfunc = var3;
+function _hint_stick_update_breakfunc(var_0, var_1) {
+  var_2 = var_1 + var_0;
+  var_3 = level.trigger_hint_func[var_2];
+  level.hint_breakfunc = var_3;
 }
 
-function _hint_stick_update_string(var0, var1) {
-  var2 = var1 + var0;
-  var3 = level.trigger_hint_string[var2];
-  var4 = scripts\engine\sp\utility::get_player_from_self();
-  var4 sethudtutorialmessage(var3);
+function _hint_stick_update_string(var_0, var_1) {
+  var_2 = var_1 + var_0;
+  var_3 = level.trigger_hint_string[var_2];
+  var_4 = scripts\engine\sp\utility::get_player_from_self();
+  var_4 sethudtutorialmessage(var_3);
 }
 
-function hint_stick_update(var0, var1, var2, var3, var4, var5, var6) {
+function hint_stick_update(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   level notify("hint_change_config");
   level endon("hint_change_config");
-  var7 = _hint_stick_get_config_suffix(var1, var2, var3, var4, var5, var6);
+  var_7 = _hint_stick_get_config_suffix(var_1, var_2, var_3, var_4, var_5, var_6);
 
   while(isDefined(level.current_hint_active) && level.current_hint_active) {
-    var8 = _hint_stick_get_config_suffix(var1, var2, var3, var4, var5, var6);
+    var_8 = _hint_stick_get_config_suffix(var_1, var_2, var_3, var_4, var_5, var_6);
 
-    if(var8 != var7) {
-      var7 = var8;
-      _hint_stick_update_breakfunc(var7, var0);
-      _hint_stick_update_string(var7, var0);
+    if(var_8 != var_7) {
+      var_7 = var_8;
+      _hint_stick_update_breakfunc(var_7, var_0);
+      _hint_stick_update_string(var_7, var_0);
     }
 
     waitframe();
   }
 }
 
-function hintprint(var0, var1, var2, var3, var4, var5) {
+function hintprint(var_0, var_1, var_2, var_3, var_4, var_5) {
   self notify("new_hint");
 
   if(getdvarint("scr_disable_hints") > 0) {
     return;
   }
 
-  var6 = gettime();
+  var_6 = gettime();
 
-  if(!isDefined(var3)) {
-    var3 = 0;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
   if(!isalive(self)) {
@@ -223,46 +223,46 @@ function hintprint(var0, var1, var2, var3, var4, var5) {
   scripts\engine\utility::ent_flag_waitopen("global_hint_in_use");
 
   if(isDefined(self.current_global_hint)) {
-    if(self.current_global_hint == var0) {
+    if(self.current_global_hint == var_0) {
       return;
     } else {
-      self.current_global_hint = var0;
+      self.current_global_hint = var_0;
       scripts\engine\utility::ent_flag_set("global_hint_in_use");
       wait 0.05;
     }
   }
 
-  self.current_global_hint = var0;
+  self.current_global_hint = var_0;
   scripts\engine\utility::ent_flag_set("global_hint_in_use");
   level.current_hint_active = 1;
-  level.hint_breakfunc = var1;
+  level.hint_breakfunc = var_1;
   level endon("friendlyfire_mission_fail");
-  self sethudtutorialmessage(var0);
-  var7 = spawnStruct();
-  var7.fadeout = 0;
+  self sethudtutorialmessage(var_0);
+  var_7 = spawnStruct();
+  var_7.fadeout = 0;
 
-  if(isDefined(var2)) {
-    thread hint_timeout(var7);
+  if(isDefined(var_2)) {
+    thread hint_timeout(var_7);
   }
 
   thread destroy_hint_on_friendlyfire();
   thread destroy_hint_on_player_death();
 
-  if(isDefined(var4) && isDefined(var5)) {
-    thread destroy_hint_on_endon(var7, var4);
+  if(isDefined(var_4) && isDefined(var_5)) {
+    thread destroy_hint_on_endon(var_7, var_4);
   }
 
-  hintprintbreakout(var7, var0, self);
+  hintprintbreakout(var_7, var_0, self);
 
-  if(!istrue(var7.fadeout)) {
+  if(!istrue(var_7.fadeout)) {
     self clearhudtutorialmessage(1);
   }
 
-  scripts\engine\sp\utility::wait_for_buffer_time_to_pass(var6, var3);
-  var7 notify("removing_hint");
+  scripts\engine\sp\utility::wait_for_buffer_time_to_pass(var_6, var_3);
+  var_7 notify("removing_hint");
   self.current_global_hint = undefined;
 
-  if(var7.fadeout) {
+  if(var_7.fadeout) {
     self clearhudtutorialmessage();
   }
 
@@ -270,27 +270,27 @@ function hintprint(var0, var1, var2, var3, var4, var5) {
   scripts\engine\utility::ent_flag_clear("global_hint_in_use");
 }
 
-function destroy_hint_on_friendlyfire(var0) {
+function destroy_hint_on_friendlyfire(var_0) {
   self endon("removing_hint");
   level waittill("friendlyfire_mission_fail");
   self.fadeout = 1;
   self notify("hint_print_remove");
 }
 
-function destroy_hint_on_player_death(var0) {
+function destroy_hint_on_player_death(var_0) {
   self endon("removing_hint");
   level.player waittill("death");
   self.fadeout = 1;
   self notify("hint_print_remove");
 }
 
-function function_stack_wait(var0) {
+function function_stack_wait(var_0) {
   self endon("death");
-  var0 scripts\engine\utility::waittill_either("function_done", "death");
+  var_0 scripts\engine\utility::waittill_either("function_done", "death");
 }
 
-function function_stack_wait_finish(var0) {
-  function_stack_wait(var0);
+function function_stack_wait_finish(var_0) {
+  function_stack_wait(var_0);
 
   if(!isDefined(self)) {
     return false;
@@ -307,38 +307,38 @@ function function_stack_wait_finish(var0) {
   return false;
 }
 
-function function_stack_proc(var0, var1, var2, var3, var4, var5, var6) {
+function function_stack_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self endon("death");
 
-  if(!isDefined(var0.function_stack)) {
-    var0.function_stack = [];
+  if(!isDefined(var_0.function_stack)) {
+    var_0.function_stack = [];
   }
 
-  var0.function_stack[var0.function_stack.size] = self;
-  thread function_stack_self_death(var0);
-  function_stack_caller_waits_for_turn(var0);
+  var_0.function_stack[var_0.function_stack.size] = self;
+  thread function_stack_self_death(var_0);
+  function_stack_caller_waits_for_turn(var_0);
 
-  if(isDefined(var0) && isDefined(var0.function_stack)) {
+  if(isDefined(var_0) && isDefined(var_0.function_stack)) {
     self.function_stack_func_begun = 1;
     self notify("function_stack_func_begun");
 
-    if(isDefined(var6)) {
-      var0[[var1]](var2, var3, var4, var5, var6);
-    } else if(isDefined(var5)) {
-      var0[[var1]](var2, var3, var4, var5);
-    } else if(isDefined(var4)) {
-      var0[[var1]](var2, var3, var4);
-    } else if(isDefined(var3)) {
-      var0[[var1]](var2, var3);
-    } else if(isDefined(var2)) {
-      var0[[var1]](var2);
+    if(isDefined(var_6)) {
+      var_0[[var_1]](var_2, var_3, var_4, var_5, var_6);
+    } else if(isDefined(var_5)) {
+      var_0[[var_1]](var_2, var_3, var_4, var_5);
+    } else if(isDefined(var_4)) {
+      var_0[[var_1]](var_2, var_3, var_4);
+    } else if(isDefined(var_3)) {
+      var_0[[var_1]](var_2, var_3);
+    } else if(isDefined(var_2)) {
+      var_0[[var_1]](var_2);
     } else {
-      var0[[var1]]();
+      var_0[[var_1]]();
     }
 
-    if(isDefined(var0) && isDefined(var0.function_stack)) {
-      var0.function_stack = scripts\engine\utility::array_remove(var0.function_stack, self);
-      var0 notify("level_function_stack_ready");
+    if(isDefined(var_0) && isDefined(var_0.function_stack)) {
+      var_0.function_stack = scripts\engine\utility::array_remove(var_0.function_stack, self);
+      var_0 notify("level_function_stack_ready");
     }
   }
 
@@ -349,146 +349,146 @@ function function_stack_proc(var0, var1, var2, var3, var4, var5, var6) {
   }
 }
 
-function function_stack_self_death(var0) {
+function function_stack_self_death(var_0) {
   self endon("function_done");
   self waittill("death");
 
-  if(isDefined(var0)) {
-    var0.function_stack = scripts\engine\utility::array_remove(var0.function_stack, self);
-    var0 notify("level_function_stack_ready");
+  if(isDefined(var_0)) {
+    var_0.function_stack = scripts\engine\utility::array_remove(var_0.function_stack, self);
+    var_0 notify("level_function_stack_ready");
     return;
   }
 }
 
-function function_stack_caller_waits_for_turn(var0) {
-  var0 endon("death");
+function function_stack_caller_waits_for_turn(var_0) {
+  var_0 endon("death");
   self endon("death");
-  var0 endon("clear_function_stack");
+  var_0 endon("clear_function_stack");
 
-  while(var0.function_stack[0] != self) {
-    var0 waittill("level_function_stack_ready");
+  while(var_0.function_stack[0] != self) {
+    var_0 waittill("level_function_stack_ready");
   }
 }
 
-function array_waitlogic1(var0, var1, var2) {
-  array_waitlogic2(var0, var1, var2);
+function array_waitlogic1(var_0, var_1, var_2) {
+  array_waitlogic2(var_0, var_1, var_2);
   self._array_wait = 0;
   self notify("_array_wait");
 }
 
-function array_waitlogic2(var0, var1, var2) {
-  var0 endon(var1);
-  var0 endon("death");
+function array_waitlogic2(var_0, var_1, var_2) {
+  var_0 endon(var_1);
+  var_0 endon("death");
 
-  if(isDefined(var2)) {
-    wait var2;
+  if(isDefined(var_2)) {
+    wait var_2;
     return;
   }
 
-  var0 waittill(var1);
+  var_0 waittill(var_1);
 }
 
-function exec_call(var0) {
-  if(var0.parms.size == 0) {
-    var0.caller builtin[[var0.func]]();
-  } else if(var0.parms.size == 1) {
-    var0.caller builtin[[var0.func]](var0.parms[0]);
-  } else if(var0.parms.size == 2) {
-    var0.caller builtin[[var0.func]](var0.parms[0], var0.parms[1]);
-  } else if(var0.parms.size == 3) {
-    var0.caller builtin[[var0.func]](var0.parms[0], var0.parms[1], var0.parms[2]);
+function exec_call(var_0) {
+  if(var_0.parms.size == 0) {
+    var_0.caller builtin[[var_0.func]]();
+  } else if(var_0.parms.size == 1) {
+    var_0.caller builtin[[var_0.func]](var_0.parms[0]);
+  } else if(var_0.parms.size == 2) {
+    var_0.caller builtin[[var_0.func]](var_0.parms[0], var_0.parms[1]);
+  } else if(var_0.parms.size == 3) {
+    var_0.caller builtin[[var_0.func]](var_0.parms[0], var_0.parms[1], var_0.parms[2]);
   }
 
-  if(var0.parms.size == 4) {
-    var0.caller builtin[[var0.func]](var0.parms[0], var0.parms[1], var0.parms[2], var0.parms[3]);
+  if(var_0.parms.size == 4) {
+    var_0.caller builtin[[var_0.func]](var_0.parms[0], var_0.parms[1], var_0.parms[2], var_0.parms[3]);
   }
 
-  if(var0.parms.size == 5) {
-    var0.caller builtin[[var0.func]](var0.parms[0], var0.parms[1], var0.parms[2], var0.parms[3], var0.parms[4]);
-    return;
-  }
-}
-
-function exec_call_noself(var0) {
-  if(var0.parms.size == 0) {
-    builtin[[var0.func]]();
-  } else if(var0.parms.size == 1) {
-    builtin[[var0.func]](var0.parms[0]);
-  } else if(var0.parms.size == 2) {
-    builtin[[var0.func]](var0.parms[0], var0.parms[1]);
-  } else if(var0.parms.size == 3) {
-    builtin[[var0.func]](var0.parms[0], var0.parms[1], var0.parms[2]);
-  }
-
-  if(var0.parms.size == 4) {
-    builtin[[var0.func]](var0.parms[0], var0.parms[1], var0.parms[2], var0.parms[3]);
-  }
-
-  if(var0.parms.size == 5) {
-    builtin[[var0.func]](var0.parms[0], var0.parms[1], var0.parms[2], var0.parms[3], var0.parms[4]);
+  if(var_0.parms.size == 5) {
+    var_0.caller builtin[[var_0.func]](var_0.parms[0], var_0.parms[1], var_0.parms[2], var_0.parms[3], var_0.parms[4]);
     return;
   }
 }
 
-function exec_func(var0, var1) {
-  if(!isDefined(var0.caller)) {
-    return;
+function exec_call_noself(var_0) {
+  if(var_0.parms.size == 0) {
+    builtin[[var_0.func]]();
+  } else if(var_0.parms.size == 1) {
+    builtin[[var_0.func]](var_0.parms[0]);
+  } else if(var_0.parms.size == 2) {
+    builtin[[var_0.func]](var_0.parms[0], var_0.parms[1]);
+  } else if(var_0.parms.size == 3) {
+    builtin[[var_0.func]](var_0.parms[0], var_0.parms[1], var_0.parms[2]);
   }
 
-  for(var2 = 0; var2 < var1.size; var2++) {
-    var1[var2].caller endon(var1[var2].ender);
+  if(var_0.parms.size == 4) {
+    builtin[[var_0.func]](var_0.parms[0], var_0.parms[1], var_0.parms[2], var_0.parms[3]);
   }
 
-  if(var0.parms.size == 0) {
-    var0.caller[[var0.func]]();
-  } else if(var0.parms.size == 1) {
-    var0.caller[[var0.func]](var0.parms[0]);
-  } else if(var0.parms.size == 2) {
-    var0.caller[[var0.func]](var0.parms[0], var0.parms[1]);
-  } else if(var0.parms.size == 3) {
-    var0.caller[[var0.func]](var0.parms[0], var0.parms[1], var0.parms[2]);
-  }
-
-  if(var0.parms.size == 4) {
-    var0.caller[[var0.func]](var0.parms[0], var0.parms[1], var0.parms[2], var0.parms[3]);
-  }
-
-  if(var0.parms.size == 5) {
-    var0.caller[[var0.func]](var0.parms[0], var0.parms[1], var0.parms[2], var0.parms[3], var0.parms[4]);
+  if(var_0.parms.size == 5) {
+    builtin[[var_0.func]](var_0.parms[0], var_0.parms[1], var_0.parms[2], var_0.parms[3], var_0.parms[4]);
     return;
   }
 }
 
-function waittill_func_ends(var0, var1) {
+function exec_func(var_0, var_1) {
+  if(!isDefined(var_0.caller)) {
+    return;
+  }
+
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    var_1[var_2].caller endon(var_1[var_2].ender);
+  }
+
+  if(var_0.parms.size == 0) {
+    var_0.caller[[var_0.func]]();
+  } else if(var_0.parms.size == 1) {
+    var_0.caller[[var_0.func]](var_0.parms[0]);
+  } else if(var_0.parms.size == 2) {
+    var_0.caller[[var_0.func]](var_0.parms[0], var_0.parms[1]);
+  } else if(var_0.parms.size == 3) {
+    var_0.caller[[var_0.func]](var_0.parms[0], var_0.parms[1], var_0.parms[2]);
+  }
+
+  if(var_0.parms.size == 4) {
+    var_0.caller[[var_0.func]](var_0.parms[0], var_0.parms[1], var_0.parms[2], var_0.parms[3]);
+  }
+
+  if(var_0.parms.size == 5) {
+    var_0.caller[[var_0.func]](var_0.parms[0], var_0.parms[1], var_0.parms[2], var_0.parms[3], var_0.parms[4]);
+    return;
+  }
+}
+
+function waittill_func_ends(var_0, var_1) {
   self endon("all_funcs_ended");
   self endon("any_funcs_aborted");
-  exec_func(var0, var1);
+  exec_func(var_0, var_1);
   self.count--;
   self notify("func_ended");
 }
 
-function waittill_abort_func_ends(var0, var1) {
+function waittill_abort_func_ends(var_0, var_1) {
   self endon("all_funcs_ended");
   self endon("any_funcs_aborted");
-  exec_func(var0, var1);
+  exec_func(var_0, var_1);
   self.abort_count--;
   self notify("abort_func_ended");
 }
 
-function do_abort(var0) {
+function do_abort(var_0) {
   self endon("all_funcs_ended");
 
-  if(!var0.size) {
+  if(!var_0.size) {
     return;
   }
 
-  var1 = 0;
-  self.abort_count = var0.size;
-  var2 = [];
-  scripts\engine\utility::array_levelthread(var0, &waittill_abort_func_ends, var2);
+  var_1 = 0;
+  self.abort_count = var_0.size;
+  var_2 = [];
+  scripts\engine\utility::array_levelthread(var_0, &waittill_abort_func_ends, var_2);
 
   for(;;) {
-    if(self.abort_count <= var1) {
+    if(self.abort_count <= var_1) {
       break;
     }
 
@@ -498,61 +498,61 @@ function do_abort(var0) {
   self notify("any_funcs_aborted");
 }
 
-function translate_local_on_ent(var0) {
+function translate_local_on_ent(var_0) {
   if(isDefined(self.forward)) {
-    var1 = anglesToForward(var0.angles);
-    var0.origin += var1 * self.forward;
+    var_1 = anglesToForward(var_0.angles);
+    var_0.origin += var_1 * self.forward;
   }
 
   if(isDefined(self.right)) {
-    var2 = anglestoright(var0.angles);
-    var0.origin += var2 * self.right;
+    var_2 = anglestoright(var_0.angles);
+    var_0.origin += var_2 * self.right;
   }
 
   if(isDefined(self.up)) {
-    var3 = anglestoup(var0.angles);
-    var0.origin += var3 * self.up;
+    var_3 = anglestoup(var_0.angles);
+    var_0.origin += var_3 * self.up;
   }
 
   if(isDefined(self.yaw)) {
-    var0 addyaw(self.yaw);
+    var_0 addyaw(self.yaw);
   }
 
   if(isDefined(self.pitch)) {
-    var0 addpitch(self.pitch);
+    var_0 addpitch(self.pitch);
   }
 
   if(isDefined(self.roll)) {
-    var0 addroll(self.roll);
+    var_0 addroll(self.roll);
     return;
   }
 }
 
-function dynamic_run_speed_thread(var0, var1, var2, var3, var4, var5, var6) {
+function dynamic_run_speed_thread(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self endon("death");
   self endon("stop_dynamic_run_speed");
-  var7 = 1;
-  var8 = anglesToForward(self.angles);
+  var_7 = 1;
+  var_8 = anglesToForward(self.angles);
 
   for(;;) {
-    var9 = dynamic_run_speed_goalpos();
+    var_9 = dynamic_run_speed_goalpos();
 
-    if(distancesquared(var9, self.origin) > 0) {
-      var10 = scripts\engine\utility::flat_origin(var9);
-      var11 = scripts\engine\utility::flat_origin(self.origin);
+    if(distancesquared(var_9, self.origin) > 0) {
+      var_10 = scripts\engine\utility::flat_origin(var_9);
+      var_11 = scripts\engine\utility::flat_origin(self.origin);
 
-      if(distancesquared(var10, var11) > 100) {
-        var8 = vectorNormalize(var10 - var11);
+      if(distancesquared(var_10, var_11) > 100) {
+        var_8 = vectorNormalize(var_10 - var_11);
       }
 
-      var12 = self.origin + var8 * var5;
-      var13 = vectorNormalize(var0.origin - var12);
-      var14 = vectordot(var13, var8);
+      var_12 = self.origin + var_8 * var_5;
+      var_13 = vectorNormalize(var_0.origin - var_12);
+      var_14 = vectordot(var_13, var_8);
 
-      if(var14 > 0) {
-        dynamic_run_speed_set(var0, var4, var5, var8, var3, var2, 0);
+      if(var_14 > 0) {
+        dynamic_run_speed_set(var_0, var_4, var_5, var_8, var_3, var_2, 0);
       } else {
-        dynamic_run_speed_set(var0, var5, var6, var8, var2, var1, 1);
+        dynamic_run_speed_set(var_0, var_5, var_6, var_8, var_2, var_1, 1);
       }
     }
 
@@ -560,113 +560,113 @@ function dynamic_run_speed_thread(var0, var1, var2, var3, var4, var5, var6) {
   }
 }
 
-function dynamic_run_speed_set(var0, var1, var2, var3, var4, var5, var6) {
-  var7 = vectortoangles(var3);
-  var8 = anglestoright(var7);
-  var9 = self.origin + var3 * var1;
-  var10 = self.origin + var3 * var2;
-  var11 = pointonsegmentnearesttopoint(var9, var10, var0.origin);
-  var12 = distance(var9, var11);
-  var13 = var1 - var2;
-  var14 = 1 - scripts\engine\math::lerp_fraction(0, abs(var13), var12);
-  var15 = scripts\engine\math::lerp(var5, var4, var14);
-  var15 = clamp(var15, 23, 250);
-  scripts\engine\utility::set_movement_speed(var15);
+function dynamic_run_speed_set(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_7 = vectortoangles(var_3);
+  var_8 = anglestoright(var_7);
+  var_9 = self.origin + var_3 * var_1;
+  var_10 = self.origin + var_3 * var_2;
+  var_11 = pointonsegmentnearesttopoint(var_9, var_10, var_0.origin);
+  var_12 = distance(var_9, var_11);
+  var_13 = var_1 - var_2;
+  var_14 = 1 - scripts\engine\math::lerp_fraction(0, abs(var_13), var_12);
+  var_15 = scripts\engine\math::lerp(var_5, var_4, var_14);
+  var_15 = clamp(var_15, 23, 250);
+  scripts\engine\utility::set_movement_speed(var_15);
 }
 
 function dynamic_run_speed_goalpos() {
-  var0 = undefined;
+  var_0 = undefined;
 
   if(isDefined(self.follow_ent)) {
-    var0 = self.follow_ent.origin;
+    var_0 = self.follow_ent.origin;
   } else if(isDefined(self.goalnode)) {
-    var0 = self.goalnode.origin;
+    var_0 = self.goalnode.origin;
   } else {
-    var0 = self.scriptgoalpos;
+    var_0 = self.scriptgoalpos;
   }
 
-  return var0;
+  return var_0;
 }
 
-function handsignal(var0, var1, var2, var3) {
-  var4 = 1;
+function handsignal(var_0, var_1, var_2, var_3) {
+  var_4 = 1;
 
-  if(isDefined(var1)) {
-    var4 = !var1;
+  if(isDefined(var_1)) {
+    var_4 = !var_1;
   }
 
-  if(isDefined(var2)) {
-    level endon(var2);
+  if(isDefined(var_2)) {
+    level endon(var_2);
   }
 
-  if(isDefined(var3)) {
-    level waittill(var3);
+  if(isDefined(var_3)) {
+    level waittill(var_3);
   }
 
-  var5 = "signal_" + var0;
+  var_5 = "signal_" + var_0;
 
   if(self.currentpose == "crouch") {
-    var5 += "_crouch";
+    var_5 += "_crouch";
   } else if(self.script == "cover_right") {
-    var5 += "_coverR";
+    var_5 += "_coverR";
   } else if(scripts\anim\utility::iscqbwalking()) {
-    var5 += "_cqb";
+    var_5 += "_cqb";
   }
 
-  if(var4) {
-    self setanimrestart(scripts\engine\sp\utility::getgenericanim(var5), 1, 0, 1.1);
+  if(var_4) {
+    self setanimrestart(scripts\engine\sp\utility::getgenericanim(var_5), 1, 0, 1.1);
     return;
   }
 
-  scripts\common\anim::anim_generic(self, var5);
+  scripts\common\anim::anim_generic(self, var_5);
 }
 
-function g_speed_get_func(var0) {
+function g_speed_get_func(var_0) {
   return int(getDvar("NSRPQNLSNK"));
 }
 
-function g_speed_set_func(var0, var1) {
-  setsaveddvar("NSRPQNLSNK", int(var0));
+function g_speed_set_func(var_0, var_1) {
+  setsaveddvar("NSRPQNLSNK", int(var_0));
 }
 
-function g_bob_scale_get_func(var0) {
+function g_bob_scale_get_func(var_0) {
   return level.player getbobrate();
 }
 
-function g_bob_scale_set_func(var0, var1) {
-  level.player setbobrate(var0);
+function g_bob_scale_set_func(var_0, var_1) {
+  level.player setbobrate(var_0);
 }
 
-function movespeed_get_func(var0) {
-  if(!isDefined(var0)) {
-    var0 = "default";
+function movespeed_get_func(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = "default";
   }
 
-  if(!isDefined(self.movespeedscales) || !isDefined(self.movespeedscales[var0])) {
+  if(!isDefined(self.movespeedscales) || !isDefined(self.movespeedscales[var_0])) {
     return 1;
   }
 
-  return self.movespeedscales[var0];
+  return self.movespeedscales[var_0];
 }
 
-function movespeed_set_func(var0, var1) {
-  var2 = 1;
+function movespeed_set_func(var_0, var_1) {
+  var_2 = 1;
 
-  if(!isDefined(var1)) {
-    var1 = "default";
+  if(!isDefined(var_1)) {
+    var_1 = "default";
   }
 
-  self.movespeedscales[var1] = var0;
+  self.movespeedscales[var_1] = var_0;
 
-  foreach(var0 in self.movespeedscales) {
-    if(var0 == 1) {
-      self.movespeedscales = scripts\engine\utility::array_remove_key(self.movespeedscales, var4);
+  foreach(var_0 in self.movespeedscales) {
+    if(var_0 == 1) {
+      self.movespeedscales = scripts\engine\utility::array_remove_key(self.movespeedscales, var_4);
     }
 
-    var2 *= var0;
+    var_2 *= var_0;
   }
 
-  self.movespeedscale = var2;
+  self.movespeedscale = var_2;
   self setmovespeedscale(self.movespeedscale);
 }
 
@@ -696,8 +696,8 @@ function autosave_tactical_grenade_check() {
 
 function autosave_tactical_grenade_check_wait_throw() {
   self endon("autosave_grenade_throw_timeout");
-  self waittill("grenade_fire", var0);
-  thread autosave_tactical_grenade_check_dieout(var0);
+  self waittill("grenade_fire", var_0);
+  thread autosave_tactical_grenade_check_dieout(var_0);
   self notify("autosave_grenade_thrown");
 }
 
@@ -710,9 +710,9 @@ function autosave_tactical_nade_flag_clear() {
   }
 }
 
-function autosave_tactical_grenade_check_dieout(var0) {
+function autosave_tactical_grenade_check_dieout(var_0) {
   level.autosave_tactical_player_nades++;
-  var0 scripts\engine\utility::waittill_notify_or_timeout("death", 10);
+  var_0 scripts\engine\utility::waittill_notify_or_timeout("death", 10);
   level.autosave_tactical_player_nades--;
   autosave_tactical_nade_flag_clear();
 }
@@ -732,10 +732,10 @@ function autosave_tactical_proc() {
     }
   }
 
-  var0 = getaiarray("axis");
+  var_0 = getaiarray("axis");
 
-  foreach(var2 in var0) {
-    if(isDefined(var2.enemy) && isPlayer(var2.enemy)) {
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2.enemy) && isPlayer(var_2.enemy)) {
       return;
     }
   }
@@ -744,61 +744,61 @@ function autosave_tactical_proc() {
   scripts\engine\sp\utility::autosave_by_name();
 }
 
-function doslide(var0, var1, var2) {
+function doslide(var_0, var_1, var_2) {
   self endon("death");
   self endon("stop_sliding");
-  var3 = self;
-  var4 = undefined;
-  var5 = var0.origin;
-  var6 = var0.origin;
-  var7 = undefined;
+  var_3 = self;
+  var_4 = undefined;
+  var_5 = var_0.origin;
+  var_6 = var_0.origin;
+  var_7 = undefined;
 
   for(;;) {
-    var8 = var3 getnormalizedmovement();
-    var9 = anglesToForward(var3.angles);
-    var10 = anglestoright(var3.angles);
-    var8 = (var8[1] * var10[0] + var8[0] * var9[0], var8[1] * var10[1] + var8[0] * var9[1], 0);
-    var0.slidevelocity += var8 * var1;
-    var3.fx_tag.origin = var0.origin + anglesToForward(var0.gesture_target.angles) * 400;
+    var_8 = var_3 getnormalizedmovement();
+    var_9 = anglesToForward(var_3.angles);
+    var_10 = anglestoright(var_3.angles);
+    var_8 = (var_8[1] * var_10[0] + var_8[0] * var_9[0], var_8[1] * var_10[1] + var_8[0] * var_9[1], 0);
+    var_0.slidevelocity += var_8 * var_1;
+    var_3.fx_tag.origin = var_0.origin + anglesToForward(var_0.gesture_target.angles) * 400;
     wait 0.05;
-    var0.slidevelocity *= 1 - var2;
+    var_0.slidevelocity *= 1 - var_2;
   }
 }
 
-function kill_deathflag_proc(var0) {
+function kill_deathflag_proc(var_0) {
   self endon("death");
 
-  if(isDefined(var0)) {
-    wait randomfloat(var0);
+  if(isDefined(var_0)) {
+    wait randomfloat(var_0);
   }
 
   playFXOnTag(scripts\engine\utility::getfx("flesh_hit"), self, "tag_eye");
   self kill(level.player.origin);
 }
 
-function update_rumble_intensity(var0, var1) {
+function update_rumble_intensity(var_0, var_1) {
   self endon("death");
-  var2 = 0;
+  var_2 = 0;
 
   for(;;) {
     if(self.intensity > 0.0001 && gettime() > 300) {
-      if(!var2) {
-        self playrumblelooponentity(var1);
-        var2 = 1;
+      if(!var_2) {
+        self playrumblelooponentity(var_1);
+        var_2 = 1;
       }
-    } else if(var2) {
-      self stoprumble(var1);
-      var2 = 0;
+    } else if(var_2) {
+      self stoprumble(var_1);
+      var_2 = 0;
     }
 
-    var3 = 1 - self.intensity;
-    var3 *= 1000;
-    self.origin = var0 getEye() + (0, 0, var3);
+    var_3 = 1 - self.intensity;
+    var_3 *= 1000;
+    self.origin = var_0 getEye() + (0, 0, var_3);
     wait 0.05;
   }
 }
 
-function process_blend(var0, var1, var2, var3, var4) {
+function process_blend(var_0, var_1, var_2, var_3, var_4) {
   waittillframeend();
 
   if(!isDefined(self.start)) {
@@ -813,214 +813,214 @@ function process_blend(var0, var1, var2, var3, var4) {
     self.base = 0;
   }
 
-  var5 = self.time * 20;
-  var6 = self.end - self.start;
+  var_5 = self.time * 20;
+  var_6 = self.end - self.start;
   self.stop_blend = 0;
 
-  if(isDefined(var4)) {
-    for(var7 = 0; var7 <= var5 && !self.stop_blend; var7++) {
-      var8 = self.base + var7 * var6 / var5;
-      var1 thread[[var0]](var8, var2, var3, var4);
+  if(isDefined(var_4)) {
+    for(var_7 = 0; var_7 <= var_5 && !self.stop_blend; var_7++) {
+      var_8 = self.base + var_7 * var_6 / var_5;
+      var_1 thread[[var_0]](var_8, var_2, var_3, var_4);
       wait 0.05;
     }
 
     return;
   }
 
-  if(isDefined(var5)) {
-    for(var7 = 0; var7 <= var7 && !self.stop_blend; var7++) {
-      var8 = self.base + var7 * var8 / var7;
-      var3 thread[[var2]](var8, var4, var5);
+  if(isDefined(var_5)) {
+    for(var_7 = 0; var_7 <= var_7 && !self.stop_blend; var_7++) {
+      var_8 = self.base + var_7 * var_8 / var_7;
+      var_3 thread[[var_2]](var_8, var_4, var_5);
       wait 0.05;
     }
 
     return;
   }
 
-  if(isDefined(var6)) {
-    for(var7 = 0; var7 <= var7 && !self.stop_blend; var7++) {
-      var8 = self.base + var7 * var8 / var7;
-      var5 thread[[var4]](var8, var6);
+  if(isDefined(var_6)) {
+    for(var_7 = 0; var_7 <= var_7 && !self.stop_blend; var_7++) {
+      var_8 = self.base + var_7 * var_8 / var_7;
+      var_5 thread[[var_4]](var_8, var_6);
       wait 0.05;
     }
 
     return;
   }
 
-  for(var7 = 0; var7 <= var7 && !self.stop_blend; var7++) {
-    var8 = self.base + var7 * var8 / var7;
-    var7 thread[[var6]](var8);
+  for(var_7 = 0; var_7 <= var_7 && !self.stop_blend; var_7++) {
+    var_8 = self.base + var_7 * var_8 / var_7;
+    var_7 thread[[var_6]](var_8);
     wait 0.05;
   }
 }
 
 function get_color_info_from_trigger() {
-  var0 = "allies";
+  var_0 = "allies";
 
   if(isDefined(self.script_color_axis)) {
-    var0 = "axis";
+    var_0 = "axis";
   }
 
-  var0 = scripts\sp\colors::get_team(var0);
-  var1 = [];
+  var_0 = scripts\sp\colors::get_team(var_0);
+  var_1 = [];
 
-  if(var0 == "allies") {
-    var2 = scripts\sp\colors::get_colorcodes_from_trigger(self.script_color_allies, "allies");
-    var1 = var2["colorCodes"];
+  if(var_0 == "allies") {
+    var_2 = scripts\sp\colors::get_colorcodes_from_trigger(self.script_color_allies, "allies");
+    var_1 = var_2["colorCodes"];
   } else {
-    var2 = scripts\sp\colors::get_colorcodes_from_trigger(self.script_color_axis, "axis");
-    var2 = var2["colorCodes"];
+    var_2 = scripts\sp\colors::get_colorcodes_from_trigger(self.script_color_axis, "axis");
+    var_2 = var_2["colorCodes"];
   }
 
-  var3 = [];
-  GscBinSkip0(0x2e, "team", var1);
+  var_3 = [];
+  GscBinSkip0(0x2e, "team", var_1);
 }
 
-function delaychildthread_proc(var0, var1, var2, var3, var4, var5, var6, var7) {
+function delaychildthread_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self endon("death");
   self endon("stop_delay_thread");
-  wait var1;
+  wait var_1;
 
-  if(isDefined(var7)) {
-    childthread[[var0]](var2, var3, var4, var5, var6, var7);
+  if(isDefined(var_7)) {
+    childthread[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7);
     return;
   }
 
-  if(isDefined(var6)) {
-    childthread[[var0]](var2, var3, var4, var5, var6);
+  if(isDefined(var_6)) {
+    childthread[[var_0]](var_2, var_3, var_4, var_5, var_6);
     return;
   }
 
-  if(isDefined(var5)) {
-    childthread[[var0]](var2, var3, var4, var5);
+  if(isDefined(var_5)) {
+    childthread[[var_0]](var_2, var_3, var_4, var_5);
     return;
   }
 
-  if(isDefined(var4)) {
-    childthread[[var0]](var2, var3, var4);
+  if(isDefined(var_4)) {
+    childthread[[var_0]](var_2, var_3, var_4);
     return;
   }
 
-  if(isDefined(var3)) {
-    childthread[[var0]](var2, var3);
+  if(isDefined(var_3)) {
+    childthread[[var_0]](var_2, var_3);
     return;
   }
 
-  if(isDefined(var2)) {
-    childthread[[var0]](var2);
+  if(isDefined(var_2)) {
+    childthread[[var_0]](var_2);
     return;
   }
 
-  childthread[[var0]]();
+  childthread[[var_0]]();
 }
 
-function flagwaitthread_proc(var0, var1, var2, var3, var4, var5, var6) {
+function flagwaitthread_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self endon("death");
-  scripts\engine\utility::flag_wait(var1[0]);
-  scripts\engine\utility::delaythread_proc(var0, var1[1], var2, var3, var4, var5, var6);
+  scripts\engine\utility::flag_wait(var_1[0]);
+  scripts\engine\utility::delaythread_proc(var_0, var_1[1], var_2, var_3, var_4, var_5, var_6);
 }
 
-function waittillthread_proc(var0, var1, var2, var3, var4, var5, var6) {
+function waittillthread_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self endon("death");
-  self waittill(var1[0]);
-  scripts\engine\utility::delaythread_proc(var0, var1[1], var2, var3, var4, var5, var6);
+  self waittill(var_1[0]);
+  scripts\engine\utility::delaythread_proc(var_0, var_1[1], var_2, var_3, var_4, var_5, var_6);
 }
 
 function add_wait_asserter() {
   level notify("kill_add_wait_asserter");
   level endon("kill_add_wait_asserter");
 
-  for(var0 = 0; var0 < 20; var0++) {
+  for(var_0 = 0; var_0 < 20; var_0++) {
     waittillframeend();
   }
 }
 
 function update_battlechatter_hud() {}
 
-function comparesizesfx(var0, var1, var2, var3) {
-  if(!var1.size) {
+function comparesizesfx(var_0, var_1, var_2, var_3) {
+  if(!var_1.size) {
     return undefined;
   }
 
-  if(isDefined(var2)) {
-    var4 = undefined;
-    var5 = getarraykeys(var1);
+  if(isDefined(var_2)) {
+    var_4 = undefined;
+    var_5 = getarraykeys(var_1);
 
-    for(var6 = 0; var6 < var5.size; var6++) {
-      var7 = distance(var1[var5[var6]].v["origin"], var0);
+    for(var_6 = 0; var_6 < var_5.size; var_6++) {
+      var_7 = distance(var_1[var_5[var_6]].v["origin"], var_0);
 
-      if([[var3]](var7, var2)) {
+      if([[var_3]](var_7, var_2)) {
         continue;
       }
 
-      var2 = var7;
-      var4 = var1[var5[var6]];
+      var_2 = var_7;
+      var_4 = var_1[var_5[var_6]];
     }
 
-    return var4;
+    return var_4;
   }
 
-  var5 = getarraykeys(var5);
-  var4 = var5[var5[0]];
-  var6 = distance(var4.v["origin"], var4);
+  var_5 = getarraykeys(var_5);
+  var_4 = var_5[var_5[0]];
+  var_6 = distance(var_4.v["origin"], var_4);
 
-  for(var6 = 1; var6 < var5.size; var6++) {
-    var7 = distance(var5[var5[var6]].v["origin"], var4);
+  for(var_6 = 1; var_6 < var_5.size; var_6++) {
+    var_7 = distance(var_5[var_5[var_6]].v["origin"], var_4);
 
-    if([[var7]](var7, var6)) {
+    if([[var_7]](var_7, var_6)) {
       continue;
     }
 
-    var6 = var7;
-    var4 = var5[var5[var6]];
+    var_6 = var_7;
+    var_4 = var_5[var_5[var_6]];
   }
 
-  return var4;
+  return var_4;
 }
 
 function waittill_triggered_current() {
   for(;;) {
-    self waittill("trigger", var0);
+    self waittill("trigger", var_0);
     waittillframeend();
 
-    if(var0.currentnode == self) {
-      return var0;
+    if(var_0.currentnode == self) {
+      return var_0;
     }
   }
 }
 
 function add_trigger_func_thread() {
   self.trigger_functions = [];
-  self waittill("trigger", var0);
-  var1 = self.trigger_functions;
+  self waittill("trigger", var_0);
+  var_1 = self.trigger_functions;
   self.trigger_functions = undefined;
-  var2 = var1;
-  var4 = getfirstarraykey(var2);
+  var_2 = var_1;
+  var_4 = getfirstarraykey(var_2);
 
-  if(isDefined(var4)) {
-    var3 = var2[var4];
-    GscBinSkip1(0x74, var3, var0);
+  if(isDefined(var_4)) {
+    var_3 = var_2[var_4];
+    GscBinSkip1(0x74, var_3, var_0);
   }
 
-  var2 = undefined;
-  var4 = undefined;
+  var_2 = undefined;
+  var_4 = undefined;
 }
 
-function add_to_radio(var0) {
-  if(!isDefined(level.scr_radio[var0])) {
-    level.scr_radio[var0] = var0;
+function add_to_radio(var_0) {
+  if(!isDefined(level.scr_radio[var_0])) {
+    level.scr_radio[var_0] = var_0;
     return;
   }
 }
 
-function add_to_player_dialogue(var0) {
-  if(!isDefined(level.scr_plrdialogue[var0])) {
-    level.scr_plrdialogue[var0] = var0;
+function add_to_player_dialogue(var_0) {
+  if(!isDefined(level.scr_plrdialogue[var_0])) {
+    level.scr_plrdialogue[var_0] = var_0;
     return;
   }
 }
 
-function add_to_dialogue(var0) {
+function add_to_dialogue(var_0) {
   if(!isDefined(level.scr_anim[self.animname])) {
     level.scr_anim[self.animname] = [];
   }
@@ -1029,80 +1029,80 @@ function add_to_dialogue(var0) {
     level.scr_sound[self.animname] = [];
   }
 
-  if(!isDefined(level.scr_sound[self.animname][var0])) {
-    level.scr_sound[self.animname][var0] = var0;
+  if(!isDefined(level.scr_sound[self.animname][var_0])) {
+    level.scr_sound[self.animname][var_0] = var_0;
     return;
   }
 }
 
-function add_to_dialogue_generic(var0) {
+function add_to_dialogue_generic(var_0) {
   if(!isDefined(level.scr_sound["generic"])) {
     level.scr_sound["generic"] = [];
   }
 
-  if(!isDefined(level.scr_sound["generic"][var0])) {
-    level.scr_sound["generic"][var0] = var0;
+  if(!isDefined(level.scr_sound["generic"][var_0])) {
+    level.scr_sound["generic"][var_0] = var_0;
     return;
   }
 }
 
-function _flag_wait_trigger(var0, var1) {
+function _flag_wait_trigger(var_0, var_1) {
   self endon("death");
 
   for(;;) {
-    self waittill("trigger", var2);
-    scripts\engine\utility::flag_set(var0);
+    self waittill("trigger", var_2);
+    scripts\engine\utility::flag_set(var_0);
 
-    if(!var1) {
+    if(!var_1) {
       return;
     }
 
-    while(var2 istouching(self)) {
+    while(var_2 istouching(self)) {
       wait 0.05;
     }
 
-    scripts\engine\utility::flag_clear(var0);
+    scripts\engine\utility::flag_clear(var_0);
   }
 }
 
-function fx_volume_pause(var0, var1) {
-  var0.fx_paused = 1;
+function fx_volume_pause(var_0, var_1) {
+  var_0.fx_paused = 1;
 
-  if(!isDefined(var1)) {
-    var1 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  if(var1) {
-    array_thread_mod_delayed(var0.fx, &scripts\engine\utility::pauseeffect);
+  if(var_1) {
+    array_thread_mod_delayed(var_0.fx, &scripts\engine\utility::pauseeffect);
     return;
   }
 
-  scripts\engine\utility::array_thread(var0.fx, &scripts\engine\utility::pauseeffect);
+  scripts\engine\utility::array_thread(var_0.fx, &scripts\engine\utility::pauseeffect);
 }
 
-function array_thread_mod_delayed(var0, var1, var2) {
-  var3 = 0;
+function array_thread_mod_delayed(var_0, var_1, var_2) {
+  var_3 = 0;
 
-  if(!isDefined(var2)) {
-    var2 = 5;
+  if(!isDefined(var_2)) {
+    var_2 = 5;
   }
 
-  var4 = [];
+  var_4 = [];
 
-  foreach(var6 in var0) {
-    var4 = var6;
-    var3++;
-    var3 %= var2;
+  foreach(var_6 in var_0) {
+    var_4 = var_6;
+    var_3++;
+    var_3 %= var_2;
 
-    if(var2 == 0) {
-      scripts\engine\utility::array_thread(var4, var1);
+    if(var_2 == 0) {
+      scripts\engine\utility::array_thread(var_4, var_1);
       wait 0.05;
-      var4 = [];
+      var_4 = [];
     }
   }
 }
 
-function battlechatter_on_thread(var0) {
+function battlechatter_on_thread(var_0) {
   level endon("battlechatter_off_thread");
   scripts\anim\battlechatter::bcs_setup_chatter_toggle_array();
 
@@ -1112,14 +1112,14 @@ function battlechatter_on_thread(var0) {
 
   anim.bcs_enabled = 1;
   wait 1.5;
-  jumpiffalse(isDefined(var0)) LOC_00000042;
-  scripts\engine\sp\utility::set_battlechatter_variable(var0, 1);
-  var1 = getaiarray(var0);
+  jumpiffalse(isDefined(var_0)) LOC_00000042;
+  scripts\engine\sp\utility::set_battlechatter_variable(var_0, 1);
+  var_1 = getaiarray(var_0);
   goto LOC_00000077;
 }
 
-function set_flag_on_spawned(var0, var1) {
-  thread scripts\engine\sp\utility::set_flag_on_func_wait_proc(var0, var1, &scripts\engine\sp\utility::empty_func, "set_flag_on_spawned");
+function set_flag_on_spawned(var_0, var_1) {
+  thread scripts\engine\sp\utility::set_flag_on_func_wait_proc(var_0, var_1, &scripts\engine\sp\utility::empty_func, "set_flag_on_spawned");
 }
 
 function endondeath() {
@@ -1128,20 +1128,20 @@ function endondeath() {
   self notify("end_explode");
 }
 
-function waittill_dead_thread(var0) {
+function waittill_dead_thread(var_0) {
   self waittill("death");
-  var0.count--;
-  var0 notify("waittill_dead guy died");
+  var_0.count--;
+  var_0 notify("waittill_dead guy died");
 }
 
-function waittill_dead_or_dying_thread(var0) {
+function waittill_dead_or_dying_thread(var_0) {
   scripts\engine\utility::waittill_either("death", "long_death");
-  var0.count--;
-  var0 notify("waittill_dead_guy_dead_or_dying");
+  var_0.count--;
+  var_0 notify("waittill_dead_guy_dead_or_dying");
 }
 
-function waittill_dead_timeout(var0) {
-  wait var0;
+function waittill_dead_timeout(var_0) {
+  wait var_0;
   self notify("thread_timed_out");
 }
 
@@ -1150,12 +1150,12 @@ function dyndof_thread() {
   level endon("stop_dyndof");
 
   for(;;) {
-    var0 = dyndof_distance();
+    var_0 = dyndof_distance();
 
-    if(!isint(var0)) {
+    if(!isint(var_0)) {
       if(getdvarint("debug_dof_functions", 0)) {}
 
-      level.player setphysicaldepthoffield(level.dyndof.fstop, 1, level.dyndof.focusspeed, level.dyndof.aperturespeed, var0);
+      level.player setphysicaldepthoffield(level.dyndof.fstop, 1, level.dyndof.focusspeed, level.dyndof.aperturespeed, var_0);
     }
 
     waitframe();
@@ -1169,10 +1169,10 @@ function dyndof_distance() {
     GscBinSkip1(0x45, "entity", self);
   }
 
-  var2 = dyndof_getplayerorigin();
-  var8 = dyndof_getplayerangles();
+  var_2 = dyndof_getplayerorigin();
+  var_8 = dyndof_getplayerangles();
 
-  if(level.dyndof.prevorigin == var2 && level.dyndof.prevangles == var8) {
+  if(level.dyndof.prevorigin == var_2 && level.dyndof.prevangles == var_8) {
     if(!isDefined(level.dyndof.firstnomovetime)) {
       level.dyndof.firstnomovetime = gettime();
     } else if(gettime() - level.dyndof.firstnomovetime > 2000) {
@@ -1182,72 +1182,72 @@ function dyndof_distance() {
     level.dyndof.firstnomovetime = undefined;
   }
 
-  level.dyndof.prevorigin = var2;
-  level.dyndof.prevangles = var8;
-  var8 = [];
-  var9 = level.dyndof.traceangle;
-  var8 = (var9 * -1, 0, 0);
-  var8 = (0, var9, 0);
-  var8 = (0, var9 * -1, 0);
-  var8 = (0, 0, 0);
-  var10 = [];
+  level.dyndof.prevorigin = var_2;
+  level.dyndof.prevangles = var_8;
+  var_8 = [];
+  var_9 = level.dyndof.traceangle;
+  var_8 = (var_9 * -1, 0, 0);
+  var_8 = (0, var_9, 0);
+  var_8 = (0, var_9 * -1, 0);
+  var_8 = (0, 0, 0);
+  var_10 = [];
 
-  foreach(var12 in var8) {
-    var13 = dyndof_trace_internal(var12);
+  foreach(var_12 in var_8) {
+    var_13 = dyndof_trace_internal(var_12);
 
-    if(!isDefined(var13)) {
+    if(!isDefined(var_13)) {
       continue;
     }
 
-    var10 = var13[0];
+    var_10 = var_13[0];
   }
 
-  if(var10.size == 0) {
+  if(var_10.size == 0) {
     level notify("stop_dyndof_debug");
     return (dyndof_getplayerorigin() + anglesToForward(dyndof_getplayerangles()) * level.dyndof.maxfocusdist);
   }
 
-  var14 = 0;
-  var0 = var10[var14];
+  var_14 = 0;
+  var_0 = var_10[var_14];
 
-  for(var4 = 1; var4 < var10.size; var4++) {
-    if(var10[var4]["fraction"] < var0["fraction"]) {
-      var0 = var10[var4];
+  for(var_4 = 1; var_4 < var_10.size; var_4++) {
+    if(var_10[var_4]["fraction"] < var_0["fraction"]) {
+      var_0 = var_10[var_4];
     }
   }
 
-  thread dyndof_debug(level, var10);
-  return var0["position"];
+  thread dyndof_debug(level, var_10);
+  return var_0["position"];
 }
 
-function dyndof_trace_internal(var0, var1) {
-  var2 = dyndof_getplayerorigin();
-  var0 = combineangles(dyndof_getplayerangles(), var0);
+function dyndof_trace_internal(var_0, var_1) {
+  var_2 = dyndof_getplayerorigin();
+  var_0 = combineangles(dyndof_getplayerangles(), var_0);
 
-  if(!isDefined(var1)) {
-    var1 = dyndof_getplayerorigin() + anglesToForward(var0) * level.dyndof.maxfocusdist;
+  if(!isDefined(var_1)) {
+    var_1 = dyndof_getplayerorigin() + anglesToForward(var_0) * level.dyndof.maxfocusdist;
   }
 
-  return physics_raycast(var2, var1, level.dyndof.contents, level.dyndof.ignorelist, 1, "physicsquery_closest", 1);
+  return physics_raycast(var_2, var_1, level.dyndof.contents, level.dyndof.ignorelist, 1, "physicsquery_closest", 1);
 }
 
-function dyndof_trace_target(var0) {
+function dyndof_trace_target(var_0) {
   if(istrue(level.dyndof.ignorecollision)) {
     return true;
   }
 
-  var1 = dyndof_trace_internal((0, 0, 0), var0);
+  var_1 = dyndof_trace_internal((0, 0, 0), var_0);
 
-  if(isDefined(var1) && isDefined(var1[0]) && isDefined(var1[0]["position"])) {
-    if(distance(var1[0]["position"], var0) < 8) {
+  if(isDefined(var_1) && isDefined(var_1[0]) && isDefined(var_1[0]["position"])) {
+    if(distance(var_1[0]["position"], var_0) < 8) {
       if(getdvarint("debug_dof_functions", 0)) {
-        var2 = dyndof_getplayerorigin();
+        var_2 = dyndof_getplayerorigin();
       }
 
       return true;
     } else {
       if(getdvarint("debug_dof_functions", 0)) {
-        var2 = dyndof_getplayerorigin();
+        var_2 = dyndof_getplayerorigin();
       }
 
       return false;
@@ -1255,7 +1255,7 @@ function dyndof_trace_target(var0) {
   }
 
   if(getdvarint("debug_dof_functions", 0)) {
-    var2 = dyndof_getplayerorigin();
+    var_2 = dyndof_getplayerorigin();
   }
 
   return true;
@@ -1263,20 +1263,20 @@ function dyndof_trace_target(var0) {
 
 function dyndof_getplayerorigin() {
   if(level.player islinked()) {
-    var0 = level.player getlinkedparent();
+    var_0 = level.player getlinkedparent();
 
-    if(!isDefined(var0.dyndof_hastag)) {
-      var0.dyndof_hastag = 0;
+    if(!isDefined(var_0.dyndof_hastag)) {
+      var_0.dyndof_hastag = 0;
 
-      if(isDefined(var0.model)) {
-        if(scripts\engine\utility::hastag(var0.model, "tag_camera")) {
-          var0.dyndof_hastag = 1;
+      if(isDefined(var_0.model)) {
+        if(scripts\engine\utility::hastag(var_0.model, "tag_camera")) {
+          var_0.dyndof_hastag = 1;
         }
       }
     }
 
-    if(var0.dyndof_hastag) {
-      return var0 gettagorigin("tag_camera");
+    if(var_0.dyndof_hastag) {
+      return var_0 gettagorigin("tag_camera");
     }
   }
 
@@ -1284,18 +1284,18 @@ function dyndof_getplayerorigin() {
 }
 
 function dyndof_getplayerangles() {
-  var0 = level.player getplayerangles();
-  return var0;
+  var_0 = level.player getplayerangles();
+  return var_0;
 }
 
 function create_dyndof() {
-  var0 = spawnStruct();
-  var0.maxfocusdist = 50000;
-  var0.contents = get_dyndof_contents();
-  var0.traceangle = 3;
-  var0.prevangles = (0, 0, 0);
-  var0.prevorigin = (0, 0, 0);
-  return var0;
+  var_0 = spawnStruct();
+  var_0.maxfocusdist = 50000;
+  var_0.contents = get_dyndof_contents();
+  var_0.traceangle = 3;
+  var_0.prevangles = (0, 0, 0);
+  var_0.prevorigin = (0, 0, 0);
+  return var_0;
 }
 
 function destroy_dyndof() {
@@ -1303,17 +1303,17 @@ function destroy_dyndof() {
 }
 
 function get_dyndof_contents() {
-  var0 = ["physicscontents_actor", "physicscontents_ainoshoot", "physicscontents_clipshot", "physicscontents_item", "physicscontents_mantle", "physicscontents_player", "physicscontents_solid", "physicscontents_vehicle", "physicscontents_water"];
-  return physics_createcontents(var0);
+  var_0 = ["physicscontents_actor", "physicscontents_ainoshoot", "physicscontents_clipshot", "physicscontents_item", "physicscontents_mantle", "physicscontents_player", "physicscontents_solid", "physicscontents_vehicle", "physicscontents_water"];
+  return physics_createcontents(var_0);
 }
 
-function dyndof_debug(var0, var1) {
+function dyndof_debug(var_0, var_1) {
   level notify("stop_dyndof_debug");
   level endon("stop_dyndof");
   level endon("stop_dyndof_debug");
 }
 
-function scripter_note_proc(var0) {
+function scripter_note_proc(var_0) {
   if(getdvarint("scr_showScripterNote") == 0 || getdvarint("lui_footage_capture_enabled") == 1) {
     return;
   }
@@ -1330,88 +1330,88 @@ function scripter_note_proc(var0) {
   }
 
   if(level.scripternote.notes.size == 5) {
-    var1 = level.scripternote.notes[0];
+    var_1 = level.scripternote.notes[0];
     level.scripternote.notes = scripts\engine\utility::array_remove_index(level.scripternote.notes, 0);
     update_scripternote_huds();
     thread destroy_scripternote();
   }
 
   if(!isDefined(level.scripternote.bg)) {
-    var2 = newhudelem();
-    var2.destroying = 0;
+    var_2 = newhudelem();
+    var_2.destroying = 0;
     level.scripternote.intro = 1;
-    var2.alpha = 0.7;
-    var2 setshader("black", level.scripternote.width, 50);
-    var3 = newhudelem();
-    var3 settext("Note");
-    level.scripternote.bg = var2;
-    level.scripternote.title = var3;
-    var4 = [var2, var3];
+    var_2.alpha = 0.7;
+    var_2 setshader("black", level.scripternote.width, 50);
+    var_3 = newhudelem();
+    var_3 settext("Note");
+    level.scripternote.bg = var_2;
+    level.scripternote.title = var_3;
+    var_4 = [var_2, var_3];
 
-    foreach(var6 in var4) {
-      var6.alignx = "left";
-      var6.aligny = "top";
-      var6.horzalign = "fullscreen";
-      var6.vertalign = "fullscreen";
-      var6.x = -200;
-      var6.y = 120;
-      var6 moveovertime(0.2);
-      var6.x = 0;
+    foreach(var_6 in var_4) {
+      var_6.alignx = "left";
+      var_6.aligny = "top";
+      var_6.horzalign = "fullscreen";
+      var_6.vertalign = "fullscreen";
+      var_6.x = -200;
+      var_6.y = 120;
+      var_6 moveovertime(0.2);
+      var_6.x = 0;
     }
 
     wait 0.3;
     level.scripternote.intro = 0;
     level.scripternote notify("intro_done");
   } else {
-    var2 = level.scripternote.bg;
-    var2.alpha = 0.7;
-    var3 = level.scripternote.title;
-    var3.alpha = 1;
+    var_2 = level.scripternote.bg;
+    var_2.alpha = 0.7;
+    var_3 = level.scripternote.title;
+    var_3.alpha = 1;
   }
 
   if(level.scripternote.intro) {
     level.scripternote waittill("intro_done");
   }
 
-  var8 = newhudelem();
-  var9 = level.scripternote.notes.size;
-  var8.fontscale = 1;
-  var8.horzalign = "fullscreen";
-  var8.vertalign = "fullscreen";
-  var8.x = 20;
-  var8.y = 140 + var9 * 12;
-  var8.width = 0;
-  var8.text = var3;
-  var8 settext(var3);
-  level.scripternote.notes[var9] = var8;
+  var_8 = newhudelem();
+  var_9 = level.scripternote.notes.size;
+  var_8.fontscale = 1;
+  var_8.horzalign = "fullscreen";
+  var_8.vertalign = "fullscreen";
+  var_8.x = 20;
+  var_8.y = 140 + var_9 * 12;
+  var_8.width = 0;
+  var_8.text = var_3;
+  var_8 settext(var_3);
+  level.scripternote.notes[var_9] = var_8;
   update_scripternote_width();
   level.scripternote.bg scaleovertime(0.2, level.scripternote.width, 50 + (level.scripternote.notes.size - 1) * 10);
-  var8.alpha = 0;
-  var8 fadeovertime(0.2);
-  var8.alpha = 1;
-  var8 endon("death");
+  var_8.alpha = 0;
+  var_8 fadeovertime(0.2);
+  var_8.alpha = 1;
+  var_8 endon("death");
   wait 5;
   update_scripternote_huds();
   thread destroy_scripternote();
 }
 
 function update_scripternote_width() {
-  var0 = 200;
-  var1 = 0;
+  var_0 = 200;
+  var_1 = 0;
 
-  foreach(var3 in level.scripternote.notes) {
-    if(var3.text.size > var1) {
-      var1 = var3.text.size;
-      var0 = var3.text.size * 6;
+  foreach(var_3 in level.scripternote.notes) {
+    if(var_3.text.size > var_1) {
+      var_1 = var_3.text.size;
+      var_0 = var_3.text.size * 6;
     }
   }
 
-  if(var0 < 200) {
+  if(var_0 < 200) {
     level.scripternote.width = 200;
     return;
   }
 
-  level.scripternote.width = var0;
+  level.scripternote.width = var_0;
 }
 
 function destroy_scripternote() {
@@ -1434,24 +1434,24 @@ function destroy_scripternote() {
 function destroy_scripternote_bg() {
   level endon("new_scripter_note");
   level.scripternote.bg.destroying = 1;
-  var0 = [level.scripternote.bg, level.scripternote.title];
+  var_0 = [level.scripternote.bg, level.scripternote.title];
 
-  foreach(var2 in var0) {
-    var2 fadeovertime(0.2);
-    var2.alpha = 0;
+  foreach(var_2 in var_0) {
+    var_2 fadeovertime(0.2);
+    var_2.alpha = 0;
   }
 
   wait 0.2;
 
-  foreach(var2 in var0) {
-    var2 destroy();
+  foreach(var_2 in var_0) {
+    var_2 destroy();
   }
 }
 
 function update_scripternote_huds() {
-  foreach(var1 in level.scripternote.notes) {
-    var1 moveovertime(0.2);
-    var1.y = 140 + var2 * 12;
+  foreach(var_1 in level.scripternote.notes) {
+    var_1 moveovertime(0.2);
+    var_1.y = 140 + var_2 * 12;
   }
 
   update_scripternote_width();

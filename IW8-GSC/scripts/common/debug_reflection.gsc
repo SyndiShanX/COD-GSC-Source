@@ -3,7 +3,7 @@
  * Script: scripts\common\debug_reflection.gsc
 ***********************************************/
 
-function init_reflection_probe(var0) {}
+function init_reflection_probe(var_0) {}
 
 function spplayerconnect() {}
 

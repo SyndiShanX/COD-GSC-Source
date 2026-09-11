@@ -3,19 +3,19 @@
  * Script: scripts\asm\soldier\vehicle.gsc
 ***********************************************/
 
-function setvehiclearchetype(var0, var1, var2) {
+function setvehiclearchetype(var_0, var_1, var_2) {
   scripts\asm\shared\utility::setoverridearchetype("vehicle", self._blackboard.currentvehicleanimalias, 1);
 }
 
-function clearvehiclearchetype(var0, var1, var2) {
+function clearvehiclearchetype(var_0, var_1, var_2) {
   scripts\asm\shared\utility::clearoverridearchetype("vehicle", 0, 1);
 }
 
-function chooseanim_vehicle(var0, var1, var2) {
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, scripts\engine\utility::string(self._blackboard.chosenvehicleposition.vehicle_position));
+function chooseanim_vehicle(var_0, var_1, var_2) {
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, scripts\engine\utility::string(self._blackboard.chosenvehicleposition.vehicle_position));
 }
 
-function shouldentervehicle(var0, var1, var2, var3) {
+function shouldentervehicle(var_0, var_1, var_2, var_3) {
   if(isDefined(self._blackboard.currentvehicle) && istrue(self._blackboard.movedtovehicle)) {
     return true;
   }
@@ -23,38 +23,38 @@ function shouldentervehicle(var0, var1, var2, var3) {
   return false;
 }
 
-function getvehicleanimtargetoriginandangles(var0, var1, var2, var3, var4) {
-  var5 = [];
+function getvehicleanimtargetoriginandangles(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = [];
 
-  if(!isDefined(var4)) {
-    var4 = 1;
+  if(!isDefined(var_4)) {
+    var_4 = 1;
   }
 
-  if(isDefined(var2)) {
-    var6 = var0 gettagorigin(var2);
-    var7 = var0 gettagangles(var2);
-    var8 = getstartorigin(var6, var7, var1);
-    var9 = getstartangles(var6, var7, var1);
-    var10 = getmovedelta(var1, 0, var4);
-    var11 = getangledelta3d(var1, 0, var4)[1];
-    var5 = var8;
-    var5 = var9;
-    var5 = rotatevector(var10, var9) + var8;
-    var5 = (var9[0], angleclamp(var9[1] + var11), var9[2]);
+  if(isDefined(var_2)) {
+    var_6 = var_0 gettagorigin(var_2);
+    var_7 = var_0 gettagangles(var_2);
+    var_8 = getstartorigin(var_6, var_7, var_1);
+    var_9 = getstartangles(var_6, var_7, var_1);
+    var_10 = getmovedelta(var_1, 0, var_4);
+    var_11 = getangledelta3d(var_1, 0, var_4)[1];
+    var_5 = var_8;
+    var_5 = var_9;
+    var_5 = rotatevector(var_10, var_9) + var_8;
+    var_5 = (var_9[0], angleclamp(var_9[1] + var_11), var_9[2]);
   } else {
     GscBinSkip0(0x2e, "startOrigin", self.origin);
   }
 
-  return var5;
+  return var_5;
 }
 
-function linktovehicle(var0, var1, var2, var3) {
-  self forceteleport(var0, var1);
+function linktovehicle(var_0, var_1, var_2, var_3) {
+  self forceteleport(var_0, var_1);
 
-  if(istrue(var2)) {
-    self linktoblendtotag(self._blackboard.currentvehicle, var3, 0);
+  if(istrue(var_2)) {
+    self linktoblendtotag(self._blackboard.currentvehicle, var_3, 0);
   } else {
-    self linktomoveoffset(self._blackboard.currentvehicle, var3);
+    self linktomoveoffset(self._blackboard.currentvehicle, var_3);
   }
 
   if(isagent(self)) {
@@ -64,24 +64,24 @@ function linktovehicle(var0, var1, var2, var3) {
   self._blackboard.linkedtovehicle = 1;
 }
 
-function faceenemyincombat(var0, var1) {
-  self endon(var1 + "_finished");
+function faceenemyincombat(var_0, var_1) {
+  self endon(var_1 + "_finished");
 
   for(;;) {
-    var2 = istrue(self._blackboard.chosenvehicleposition.canshootinvehicle) && (!isDefined(self.canshootinvehicle) || istrue(self.canshootinvehicle));
-    var3 = isDefined(self._blackboard.currentvehicle) && !istrue(self._blackboard.currentvehicle.vehicledisableturningwhileshooting);
-    var4 = isDefined(self.enemy) && (!(isPlayer(self.enemy) || isai(self.enemy)) || isalive(self.enemy));
-    var5 = vehicleincombat(var0, var1, var1);
+    var_2 = istrue(self._blackboard.chosenvehicleposition.canshootinvehicle) && (!isDefined(self.canshootinvehicle) || istrue(self.canshootinvehicle));
+    var_3 = isDefined(self._blackboard.currentvehicle) && !istrue(self._blackboard.currentvehicle.vehicledisableturningwhileshooting);
+    var_4 = isDefined(self.enemy) && (!(isPlayer(self.enemy) || isai(self.enemy)) || isalive(self.enemy));
+    var_5 = vehicleincombat(var_0, var_1, var_1);
 
-    if(var5 && var4 && var2 && var3) {
-      var6 = anglestoaxis(self._blackboard.currentvehicle.angles);
-      var7 = var6["forward"];
-      var8 = var6["up"];
-      var9 = scripts\engine\utility::getyaw(self.enemy.origin) - self._blackboard.currentvehicle.angles[1];
-      var9 = angleclamp180(var9);
-      var10 = rotatepointaroundvector(var8, var7, var9);
-      var11 = axistoangles(var10, vectorcross(var10, var8), var8);
-      self orientmode("face angle 3d", var11);
+    if(var_5 && var_4 && var_2 && var_3) {
+      var_6 = anglestoaxis(self._blackboard.currentvehicle.angles);
+      var_7 = var_6["forward"];
+      var_8 = var_6["up"];
+      var_9 = scripts\engine\utility::getyaw(self.enemy.origin) - self._blackboard.currentvehicle.angles[1];
+      var_9 = angleclamp180(var_9);
+      var_10 = rotatepointaroundvector(var_8, var_7, var_9);
+      var_11 = axistoangles(var_10, vectorcross(var_10, var_8), var_8);
+      self orientmode("face angle 3d", var_11);
     } else {
       self orientmode("face current angles");
     }
@@ -90,29 +90,29 @@ function faceenemyincombat(var0, var1) {
   }
 }
 
-function playanim_vehicleidle(var0, var1, var2) {
-  self endon(var1 + "_finished");
+function playanim_vehicleidle(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
   self.leftaimlimit = 90;
   self.rightaimlimit = -90;
   setvehiclearchetype();
 
   if(!istrue(self._blackboard.linkedtovehicle) && isDefined(self._blackboard.currentvehicle)) {
-    var3 = scripts\asm\asm::asm_getanim(var0, "vehicle_idle");
-    var4 = scripts\asm\asm::asm_getxanim("vehicle_idle", var3);
-    self.asm.targetvalues = getvehicleanimtargetoriginandangles(self._blackboard.currentvehicle, var4, self._blackboard.chosenvehicleanimpos.sittag, self._blackboard.chosenvehicleposition);
+    var_3 = scripts\asm\asm::asm_getanim(var_0, "vehicle_idle");
+    var_4 = scripts\asm\asm::asm_getxanim("vehicle_idle", var_3);
+    self.asm.targetvalues = getvehicleanimtargetoriginandangles(self._blackboard.currentvehicle, var_4, self._blackboard.chosenvehicleanimpos.sittag, self._blackboard.chosenvehicleposition);
     linktovehicle(self.asm.targetvalues["targetOrigin"], self.asm.targetvalues["targetAngles"], self._blackboard.chosenvehicleanimpos.linktoblend, self._blackboard.chosenvehicleanimpos.sittag);
   }
 
   self animmode("nogravity");
   self orientmode("face current angles");
-  thread faceenemyincombat(var0, var1);
-  var5 = scripts\asm\asm::asm_getanim(var0, var1);
-  self aisetanim(var1, var5);
-  scripts\asm\asm::asm_donotetracks(var0, var1, scripts\asm\asm::asm_getnotehandler(var0, var1));
+  thread faceenemyincombat(var_0, var_1);
+  var_5 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  self aisetanim(var_1, var_5);
+  scripts\asm\asm::asm_donotetracks(var_0, var_1, scripts\asm\asm::asm_getnotehandler(var_0, var_1));
 }
 
-function waitforturn(var0, var1) {
-  self endon(var1 + "_finished");
+function waitforturn(var_0, var_1) {
+  self endon(var_1 + "_finished");
 
   if(isDefined(self._blackboard.chosenvehicleanimpos.sittag)) {
     self animmode("none");
@@ -126,11 +126,11 @@ function waitforturn(var0, var1) {
     wait 0.25;
   }
 
-  scripts\asm\asm::asm_fireevent(var0, "end");
+  scripts\asm\asm::asm_fireevent(var_0, "end");
 }
 
-function shouldorienttoentervehicle(var0, var1, var2, var3) {
-  if(shouldentervehicle(var0, var1, var2, var3)) {
+function shouldorienttoentervehicle(var_0, var_1, var_2, var_3) {
+  if(shouldentervehicle(var_0, var_1, var_2, var_3)) {
     if(abs(self._blackboard.chosenvehicleposition.angles[1] - self.angles[1]) > 3) {
       return true;
     }
@@ -143,21 +143,21 @@ function shouldorienttoentervehicle(var0, var1, var2, var3) {
   return false;
 }
 
-function shouldentervehicleearly(var0, var1, var2, var3) {
-  if(shouldentervehicle(var0, var1, var2, var3) && !shouldorienttoentervehicle(var0, var1, var2, var3)) {
+function shouldentervehicleearly(var_0, var_1, var_2, var_3) {
+  if(shouldentervehicle(var_0, var_1, var_2, var_3) && !shouldorienttoentervehicle(var_0, var_1, var_2, var_3)) {
     return true;
   }
 
   return false;
 }
 
-function playanim_arriveatvehicle(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  thread waitforturn(var0, var1);
-  scripts\asm\asm::asm_loopanimstate(var0, var1, 1);
+function playanim_arriveatvehicle(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  thread waitforturn(var_0, var_1);
+  scripts\asm\asm::asm_loopanimstate(var_0, var_1, 1);
 }
 
-function arriveatvehicle_terminate(var0, var1, var2) {
+function arriveatvehicle_terminate(var_0, var_1, var_2) {
   self motionwarpcancel();
 }
 
@@ -172,37 +172,37 @@ function rotatetocurrentangles() {
   }
 }
 
-function enterexitvehiclemotionwarp(var0, var1, var2, var3, var4) {
+function enterexitvehiclemotionwarp(var_0, var_1, var_2, var_3, var_4) {
   self endon("death");
   self endon("EndVehicleMotionWarp");
-  var5 = getanimlength(var1);
-  var6 = getnotetracktimes(var1, "motion_warp_begin")[0];
-  var7 = getnotetracktimes(var1, "motion_warp_end")[0];
+  var_5 = getanimlength(var_1);
+  var_6 = getnotetracktimes(var_1, "motion_warp_begin")[0];
+  var_7 = getnotetracktimes(var_1, "motion_warp_end")[0];
 
-  if(!isDefined(var6)) {
-    var6 = 0;
+  if(!isDefined(var_6)) {
+    var_6 = 0;
   }
 
-  if(!isDefined(var7)) {
-    var7 = 1;
+  if(!isDefined(var_7)) {
+    var_7 = 1;
   }
 
-  if(var3) {
+  if(var_3) {
     if(isDefined(self._blackboard.chosenvehicleanimpos.fastroperig)) {
       thread rotatetocurrentangles();
     } else {
-      if(isDefined(var4)) {
-        self.asm.targetvalues = getvehicleanimtargetoriginandangles(self._blackboard.currentvehicle, var4, var2, self._blackboard.chosenvehicleposition, var7);
+      if(isDefined(var_4)) {
+        self.asm.targetvalues = getvehicleanimtargetoriginandangles(self._blackboard.currentvehicle, var_4, var_2, self._blackboard.chosenvehicleposition, var_7);
       } else {
-        self.asm.targetvalues = getvehicleanimtargetoriginandangles(self._blackboard.currentvehicle, var1, var2, self._blackboard.chosenvehicleposition, var7);
+        self.asm.targetvalues = getvehicleanimtargetoriginandangles(self._blackboard.currentvehicle, var_1, var_2, self._blackboard.chosenvehicleposition, var_7);
       }
 
       self orientmode("face angle 3d", self.asm.targetvalues["startAngles"]);
     }
   }
 
-  var8 = var5 * var6;
-  wait var8;
+  var_8 = var_5 * var_6;
+  wait var_8;
 
   if(!isDefined(self.asm)) {
     return;
@@ -210,35 +210,35 @@ function enterexitvehiclemotionwarp(var0, var1, var2, var3, var4) {
 
   self notify("EndRotateToCurrentAngles");
 
-  if(isDefined(var4)) {
-    self.asm.targetvalues = getvehicleanimtargetoriginandangles(self._blackboard.currentvehicle, var4, var2, self._blackboard.chosenvehicleposition, var7);
+  if(isDefined(var_4)) {
+    self.asm.targetvalues = getvehicleanimtargetoriginandangles(self._blackboard.currentvehicle, var_4, var_2, self._blackboard.chosenvehicleposition, var_7);
   } else {
-    self.asm.targetvalues = getvehicleanimtargetoriginandangles(self._blackboard.currentvehicle, var1, var2, self._blackboard.chosenvehicleposition, var7);
+    self.asm.targetvalues = getvehicleanimtargetoriginandangles(self._blackboard.currentvehicle, var_1, var_2, self._blackboard.chosenvehicleposition, var_7);
   }
 
-  var9 = self.asm.targetvalues["targetOrigin"];
+  var_9 = self.asm.targetvalues["targetOrigin"];
 
-  if(var3) {
+  if(var_3) {
     self.asm.targetvalues["targetAngles"] = (0, self.asm.targetvalues["targetAngles"][1], 0);
-    var9 = getclosestpointonnavmesh(self.asm.targetvalues["targetOrigin"]);
-    var10 = scripts\engine\trace::create_solid_ai_contents(1);
-    var11 = [self, self._blackboard.currentvehicle];
-    var12 = var9 + (0, 0, 64);
-    var13 = var9 + (0, 0, -1000);
-    var14 = physics_spherecast(var12, var13, 12, var10, var11, "physicsquery_closest");
+    var_9 = getclosestpointonnavmesh(self.asm.targetvalues["targetOrigin"]);
+    var_10 = scripts\engine\trace::create_solid_ai_contents(1);
+    var_11 = [self, self._blackboard.currentvehicle];
+    var_12 = var_9 + (0, 0, 64);
+    var_13 = var_9 + (0, 0, -1000);
+    var_14 = physics_spherecast(var_12, var_13, 12, var_10, var_11, "physicsquery_closest");
 
-    if(isDefined(var14) && var14.size > 0) {
-      var9 = var14[0]["position"];
+    if(isDefined(var_14) && var_14.size > 0) {
+      var_9 = var_14[0]["position"];
     }
 
     self orientmode("face angle 3d", self.asm.targetvalues["targetAngles"]);
   }
 
-  var18 = (var7 - var6) * var5;
-  self motionwarp(var9, self.asm.targetvalues["targetAngles"], int(var18 * 1000));
+  var_18 = (var_7 - var_6) * var_5;
+  self motionwarp(var_9, self.asm.targetvalues["targetAngles"], int(var_18 * 1000));
 
-  if(var3) {
-    wait var18;
+  if(var_3) {
+    wait var_18;
 
     if(!isDefined(self._blackboard)) {
       return;
@@ -256,13 +256,13 @@ function enterexitvehiclemotionwarp(var0, var1, var2, var3, var4) {
   }
 }
 
-function playanim_entervehicle(var0, var1, var2) {
-  self endon(var1 + "_finished");
+function playanim_entervehicle(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
   setvehiclearchetype();
   self.asm.customdata.arrivalangles = undefined;
   self._blackboard.startedenteringvehicle = 1;
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  var4 = scripts\asm\asm::asm_getxanim(var1, var3);
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, var_3);
   self animmode("nogravity");
   self orientmode("face current angles");
 
@@ -271,16 +271,16 @@ function playanim_entervehicle(var0, var1, var2) {
       linktovehicle(self.origin, self.angles, self._blackboard.chosenvehicleanimpos.linktoblend, self._blackboard.chosenvehicleanimpos.sittag);
     }
 
-    var5 = scripts\asm\asm::asm_getanim(var0, "vehicle_idle");
-    var6 = scripts\asm\asm::asm_getxanim("vehicle_idle", var5);
-    thread enterexitvehiclemotionwarp(var1, var4, self._blackboard.chosenvehicleanimpos.sittag, 0, var6);
+    var_5 = scripts\asm\asm::asm_getanim(var_0, "vehicle_idle");
+    var_6 = scripts\asm\asm::asm_getxanim("vehicle_idle", var_5);
+    thread enterexitvehiclemotionwarp(var_1, var_4, self._blackboard.chosenvehicleanimpos.sittag, 0, var_6);
   }
 
-  self aisetanim(var1, var3);
-  scripts\asm\asm::asm_donotetracks(var0, var1, scripts\asm\asm::asm_getnotehandler(var0, var1));
+  self aisetanim(var_1, var_3);
+  scripts\asm\asm::asm_donotetracks(var_0, var_1, scripts\asm\asm::asm_getnotehandler(var_0, var_1));
 }
 
-function entervehicle_terminate(var0, var1, var2) {
+function entervehicle_terminate(var_0, var_1, var_2) {
   clearvehiclearchetype();
 
   if(isalive(self)) {
@@ -295,7 +295,7 @@ function entervehicle_terminate(var0, var1, var2) {
   self motionwarpcancel();
 }
 
-function shouldexitvehicle(var0, var1, var2, var3) {
+function shouldexitvehicle(var_0, var_1, var_2, var_3) {
   if(istrue(self._blackboard.exitingvehicle)) {
     return true;
   }
@@ -303,8 +303,8 @@ function shouldexitvehicle(var0, var1, var2, var3) {
   return false;
 }
 
-function exitvehiclewatchpath(var0) {
-  self endon(var0 + "_finished");
+function exitvehiclewatchpath(var_0) {
+  self endon(var_0 + "_finished");
 
   for(;;) {
     if(isDefined(self.pathgoalpos)) {
@@ -317,11 +317,11 @@ function exitvehiclewatchpath(var0) {
   }
 }
 
-function playanim_exitvehicle(var0, var1, var2) {
-  self endon(var1 + "_finished");
+function playanim_exitvehicle(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
   self setdefaultaimlimits();
   self.requestopendoor = 1;
-  self.requestopendoorparams = var2;
+  self.requestopendoorparams = var_2;
   scripts\engine\utility::set_movement_speed(60);
   self aisettargetspeed(60);
   self.exitvehicle_oldturnrate = self.turnrate;
@@ -332,28 +332,28 @@ function playanim_exitvehicle(var0, var1, var2) {
   }
 
   setvehiclearchetype();
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  var4 = scripts\asm\asm::asm_getxanim(var1, var3);
-  self._blackboard.exitvehicleanimindex = var3;
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, var_3);
+  self._blackboard.exitvehicleanimindex = var_3;
 
   if(isDefined(self._blackboard.currentvehicle)) {
     if(isDefined(self._blackboard.chosenvehicleanimpos.exittag)) {
-      thread enterexitvehiclemotionwarp(var1, var4, self._blackboard.chosenvehicleanimpos.exittag, 1, undefined);
+      thread enterexitvehiclemotionwarp(var_1, var_4, self._blackboard.chosenvehicleanimpos.exittag, 1, undefined);
     } else {
-      thread enterexitvehiclemotionwarp(var1, var4, self._blackboard.chosenvehicleanimpos.sittag, 1, undefined);
+      thread enterexitvehiclemotionwarp(var_1, var_4, self._blackboard.chosenvehicleanimpos.sittag, 1, undefined);
     }
   }
 
   self animmode("nogravity");
-  self aisetanim(var1, var3);
-  var5 = scripts\asm\asm::asm_donotetracks(var0, var1, scripts\asm\asm::asm_getnotehandler(var0, var1), undefined, undefined, 0);
+  self aisetanim(var_1, var_3);
+  var_5 = scripts\asm\asm::asm_donotetracks(var_0, var_1, scripts\asm\asm::asm_getnotehandler(var_0, var_1), undefined, undefined, 0);
 
-  if(var5 == "code_move") {
-    thread exitvehiclewatchpath(var1);
-    scripts\asm\asm::asm_donotetracks(var0, var1, scripts\asm\asm::asm_getnotehandler(var0, var1), undefined, undefined, 0);
+  if(var_5 == "code_move") {
+    thread exitvehiclewatchpath(var_1);
+    scripts\asm\asm::asm_donotetracks(var_0, var_1, scripts\asm\asm::asm_getnotehandler(var_0, var_1), undefined, undefined, 0);
   }
 
-  scripts\asm\asm::asm_fireevent(var0, "end");
+  scripts\asm\asm::asm_fireevent(var_0, "end");
 }
 
 function endvehiclemotionwarp() {
@@ -362,7 +362,7 @@ function endvehiclemotionwarp() {
   self motionwarpcancel();
 }
 
-function exitvehicle_terminate(var0, var1, var2) {
+function exitvehicle_terminate(var_0, var_1, var_2) {
   self._blackboard.invehicle = undefined;
   scripts\common\utility::clear_movement_speed();
 
@@ -372,23 +372,23 @@ function exitvehicle_terminate(var0, var1, var2) {
   }
 
   if(!isalive(self) && !istrue(self._blackboard.chosenvehicleanimpos.vehicle_death_ragdoll)) {
-    var3 = scripts\asm\asm::asm_getxanim(var1, self._blackboard.exitvehicleanimindex);
-    var4 = self aigetanimtime(var1, self._blackboard.exitvehicleanimindex);
-    var5 = getanimlength(var3);
-    var6 = getnotetracktimes(var3, "vehicle_death_wait")[0];
-    var7 = getnotetracktimes(var3, "vehicle_death_ragdoll")[0];
-    var8 = self._blackboard.currentvehicle scripts\common\vehicle::ishelicopter() && self._blackboard.currentvehicle scripts\common\vehicle::vehicle_is_crashing();
+    var_3 = scripts\asm\asm::asm_getxanim(var_1, self._blackboard.exitvehicleanimindex);
+    var_4 = self aigetanimtime(var_1, self._blackboard.exitvehicleanimindex);
+    var_5 = getanimlength(var_3);
+    var_6 = getnotetracktimes(var_3, "vehicle_death_wait")[0];
+    var_7 = getnotetracktimes(var_3, "vehicle_death_ragdoll")[0];
+    var_8 = self._blackboard.currentvehicle scripts\common\vehicle::ishelicopter() && self._blackboard.currentvehicle scripts\common\vehicle::vehicle_is_crashing();
 
-    if(isDefined(var6) && isDefined(var7)) {
-      if(var4 < var6) {
+    if(isDefined(var_6) && isDefined(var_7)) {
+      if(var_4 < var_6) {
         self._blackboard.invehicle = 1;
-      } else if(var4 < var7) {
-        if(var8) {
+      } else if(var_4 < var_7) {
+        if(var_8) {
           self._blackboard.invehicle = 1;
         } else {
-          self._blackboard.vehicledeathwait = (var7 - var4) * var5;
-          self._blackboard.vehicleexitanimtime = var4;
-          self._blackboard.vehicleexitstatename = var1;
+          self._blackboard.vehicledeathwait = (var_7 - var_4) * var_5;
+          self._blackboard.vehicleexitanimtime = var_4;
+          self._blackboard.vehicleexitstatename = var_1;
         }
       }
     }
@@ -417,14 +417,14 @@ function watchvehicledeath() {
   }
 
   if(isDefined(self._blackboard.currentvehicle)) {
-    var0 = self._blackboard.currentvehicle;
+    var_0 = self._blackboard.currentvehicle;
 
     for(;;) {
       if(!isDefined(self)) {
         return;
       }
 
-      if(!isDefined(var0) || var0 scripts\common\vehicle_code::vehicle_iscorpse()) {
+      if(!isDefined(var_0) || var_0 scripts\common\vehicle_code::vehicle_iscorpse()) {
         self startragdoll();
         self.skipdeathcleanup = 0;
         scripts\asm\soldier\death::deathcleanup();
@@ -438,7 +438,7 @@ function watchvehicledeath() {
   }
 }
 
-function playanim_vehicledeath(var0, var1, var2) {
+function playanim_vehicledeath(var_0, var_1, var_2) {
   if(!isDefined(self)) {
     return;
   }
@@ -454,9 +454,9 @@ function playanim_vehicledeath(var0, var1, var2) {
     self.burningtodeath = undefined;
 
     if(isDefined(self._blackboard.vehicledeathwait)) {
-      var3 = animsetgetallanimindicesforalias(self._blackboard.currentvehicleanimalias, self._blackboard.vehicleexitstatename, self._blackboard.exitvehicleanimindex);
+      var_3 = animsetgetallanimindicesforalias(self._blackboard.currentvehicleanimalias, self._blackboard.vehicleexitstatename, self._blackboard.exitvehicleanimindex);
       self aisetanim(self._blackboard.vehicleexitstatename, self._blackboard.exitvehicleanimindex, 1);
-      self aisetanimtime(var3, self._blackboard.vehicleexitanimtime);
+      self aisetanimtime(var_3, self._blackboard.vehicleexitanimtime);
       self animmode("noclip");
       wait self._blackboard.vehicledeathwait;
       self.ragdoll_directionscale = 0;
@@ -482,39 +482,39 @@ function playanim_vehicledeath(var0, var1, var2) {
     self orientmode("face current angles");
   }
 
-  scripts\asm\soldier\death::playdeathanim(var0, var1, var2);
+  scripts\asm\soldier\death::playdeathanim(var_0, var_1, var_2);
 }
 
-function playanim_vehicle(var0, var1, var2) {
+function playanim_vehicle(var_0, var_1, var_2) {
   setvehiclearchetype();
-  scripts\asm\asm::asm_playanimstate(var0, var1, var2);
+  scripts\asm\asm::asm_playanimstate(var_0, var_1, var_2);
 }
 
-function playanim_vehiclereload(var0, var1, var2) {
+function playanim_vehiclereload(var_0, var_1, var_2) {
   self endon("reload_terminate");
-  self endon(var1 + "_finished");
+  self endon(var_1 + "_finished");
   setvehiclearchetype();
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  self aisetanim(var1, var3);
-  var4 = scripts\asm\asm::asm_getxanim(var1, var3);
-  scripts\asm\asm::asm_playfacialanim(var0, var1, var4);
-  scripts\asm\asm::asm_donotetracks(var0, var1, undefined, undefined, undefined, 1);
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  self aisetanim(var_1, var_3);
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, var_3);
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_4);
+  scripts\asm\asm::asm_donotetracks(var_0, var_1, undefined, undefined, undefined, 1);
 }
 
-function vehiclereload_terminate(var0, var1, var2) {
-  scripts\asm\soldier\script_funcs::reload_cleanup(var0, var1, var2);
+function vehiclereload_terminate(var_0, var_1, var_2) {
+  scripts\asm\soldier\script_funcs::reload_cleanup(var_0, var_1, var_2);
   clearvehiclearchetype();
 }
 
-function isinvehicle(var0, var1, var2, var3) {
+function isinvehicle(var_0, var_1, var_2, var_3) {
   return istrue(self._blackboard.invehicle);
 }
 
-function isnotinvehicle(var0, var1, var2, var3) {
+function isnotinvehicle(var_0, var_1, var_2, var_3) {
   return !istrue(self._blackboard.invehicle);
 }
 
-function vehicleincombat(var0, var1, var2, var3) {
+function vehicleincombat(var_0, var_1, var_2, var_3) {
   if(weaponclass(self.weapon) == "rocketlauncher") {
     return false;
   }
@@ -522,46 +522,46 @@ function vehicleincombat(var0, var1, var2, var3) {
   return scripts\asm\asm::asm_getdemeanor() == "combat";
 }
 
-function vehiclecanshoot(var0, var1, var2, var3) {
-  return istrue(self._blackboard.chosenvehicleposition.canshootinvehicle) && vehiclehasalias(var0, var1, var2, var3) && (!isDefined(self.canshootinvehicle) || istrue(self.canshootinvehicle));
+function vehiclecanshoot(var_0, var_1, var_2, var_3) {
+  return istrue(self._blackboard.chosenvehicleposition.canshootinvehicle) && vehiclehasalias(var_0, var_1, var_2, var_3) && (!isDefined(self.canshootinvehicle) || istrue(self.canshootinvehicle));
 }
 
-function vehiclecanshootlmg(var0, var1, var2, var3) {
-  var4 = weaponclass(self.weapon);
+function vehiclecanshootlmg(var_0, var_1, var_2, var_3) {
+  var_4 = weaponclass(self.weapon);
 
-  if(var4 == "mg") {
-    return vehiclecanshoot(var0, var1, var2, var3);
+  if(var_4 == "mg") {
+    return vehiclecanshoot(var_0, var_1, var_2, var_3);
   }
 
   return false;
 }
 
-function vehicleshouldhide(var0, var1, var2, var3) {
+function vehicleshouldhide(var_0, var_1, var_2, var_3) {
   if(!scripts\asm\asm_bb::bb_iswhizbyrequested()) {
     return 0;
   }
 
   scripts\asm\asm_bb::bb_requestwhizby(undefined);
   self._blackboard.vehiclehidetime = gettime() + randomintrange(1000, 3000);
-  return vehiclehasalias(var0, var1, var2, var3);
+  return vehiclehasalias(var_0, var_1, var_2, var_3);
 }
 
-function vehicleshouldstophide(var0, var1, var2, var3) {
+function vehicleshouldstophide(var_0, var_1, var_2, var_3) {
   return gettime() > self._blackboard.vehiclehidetime;
 }
 
-function vehiclehasalias(var0, var1, var2, var3) {
-  var4 = self._blackboard.currentvehicleanimalias;
-  var5 = scripts\engine\utility::string(self._blackboard.chosenvehicleposition.vehicle_position);
-  var6 = archetypegetrandomalias(var4, var2, var5, scripts\asm\asm::asm_isfrantic());
-  return isDefined(var6);
+function vehiclehasalias(var_0, var_1, var_2, var_3) {
+  var_4 = self._blackboard.currentvehicleanimalias;
+  var_5 = scripts\engine\utility::string(self._blackboard.chosenvehicleposition.vehicle_position);
+  var_6 = archetypegetrandomalias(var_4, var_2, var_5, scripts\asm\asm::asm_isfrantic());
+  return isDefined(var_6);
 }
 
-function vehicleshouldrunexit(var0, var1, var2, var3) {
-  return vehiclehasalias(var0, var1, var2, var3) && istrue(self.vehiclerunexit);
+function vehicleshouldrunexit(var_0, var_1, var_2, var_3) {
+  return vehiclehasalias(var_0, var_1, var_2, var_3) && istrue(self.vehiclerunexit);
 }
 
-function vehicleshouldsetuprope(var0, var1, var2, var3) {
+function vehicleshouldsetuprope(var_0, var_1, var_2, var_3) {
   if(istrue(self._blackboard.vehiclesetuprope)) {
     self._blackboard.vehiclesetuprope = undefined;
     return true;
@@ -570,8 +570,8 @@ function vehicleshouldsetuprope(var0, var1, var2, var3) {
   return false;
 }
 
-function vehiclegetoutcodemove(var0, var1, var2, var3) {
-  if(scripts\asm\asm::asm_eventfired(var0, "code_move") && isDefined(self.pathgoalpos)) {
+function vehiclegetoutcodemove(var_0, var_1, var_2, var_3) {
+  if(scripts\asm\asm::asm_eventfired(var_0, "code_move") && isDefined(self.pathgoalpos)) {
     return true;
   }
 

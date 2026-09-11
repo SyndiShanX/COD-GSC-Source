@@ -3,7 +3,7 @@
  * Script: scripts\cp\infilexfil\infilexfil.gsc
 ************************************************/
 
-function infil_add(var0, var1, var2, var3, var4, var5, var6, var7) {
+function infil_add(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(getdvarint("scr_skip_infils", 0) == 1) {
     if(scripts\engine\utility::flag_exist("infil_complete")) {
       scripts\engine\utility::flag_set("infil_complete");
@@ -22,16 +22,16 @@ function infil_add(var0, var1, var2, var3, var4, var5, var6, var7) {
   level.requiredplayercount["axis"] = 0;
 
   if(!isDefined(game["infil"])) {
-    foreach(var9 in level.teamnamelist) {
-      game["infil"][var9] = [];
+    foreach(var_9 in level.teamnamelist) {
+      game["infil"][var_9] = [];
     }
 
     game["infil"]["types"] = [];
   }
 
-  if(isDefined(game["infil"]["types"][var0]) && isDefined(game["infil"]["types"][var0][var1])) {
-    if(isDefined(game["infil"]["types"][var0][var1]["persistentVehicle"])) {
-      self[[game["infil"]["types"][var0][var1]["persistentVehicle"]]](var0, var1);
+  if(isDefined(game["infil"]["types"][var_0]) && isDefined(game["infil"]["types"][var_0][var_1])) {
+    if(isDefined(game["infil"]["types"][var_0][var_1]["persistentVehicle"])) {
+      self[[game["infil"]["types"][var_0][var_1]["persistentVehicle"]]](var_0, var_1);
     }
 
     if(scripts\engine\utility::flag_exist("infil_complete")) {
@@ -41,17 +41,17 @@ function infil_add(var0, var1, var2, var3, var4, var5, var6, var7) {
     return;
   }
 
-  game["infil"]["types"][var0][var1] = [];
-  game["infil"]["types"][var0][var1]["spawn_func"] = var5;
-  game["infil"]["types"][var0][var1]["player_func"] = var7;
-  game["infil"]["types"][var0][var1]["get_length_func"] = var6;
-  game["infil"]["types"][var0][var1]["seats"] = var2;
-  game["infil"]["types"][var0][var1]["required_seats"] = var3;
-  game["infil"]["types"][var0][var1]["fill_order"] = var4;
-  thread infil_init(level, var0);
+  game["infil"]["types"][var_0][var_1] = [];
+  game["infil"]["types"][var_0][var_1]["spawn_func"] = var_5;
+  game["infil"]["types"][var_0][var_1]["player_func"] = var_7;
+  game["infil"]["types"][var_0][var_1]["get_length_func"] = var_6;
+  game["infil"]["types"][var_0][var_1]["seats"] = var_2;
+  game["infil"]["types"][var_0][var_1]["required_seats"] = var_3;
+  game["infil"]["types"][var_0][var_1]["fill_order"] = var_4;
+  thread infil_init(level, var_0);
 }
 
-function infil_init(var0, var1) {
+function infil_init(var_0, var_1) {
   waittillframeend();
 
   if(!isDefined(level.prematchperiod) || level.prematchperiod == 0) {
@@ -67,41 +67,41 @@ function infil_init(var0, var1) {
   }
 
   level.prematchallowfunc = &infil_player_allow_cp;
-  var2 = undefined;
-  var3 = 0;
+  var_2 = undefined;
+  var_3 = 0;
 
-  foreach(var5 in get_all_infils()) {
-    if(infil_has_map_config(var5)) {
+  foreach(var_5 in get_all_infils()) {
+    if(infil_has_map_config(var_5)) {
       infil_init_spawn_selection();
     }
 
-    var6 = var5.script_team;
+    var_6 = var_5.script_team;
 
-    if(var5 scripts\cp\cp_infilexfil::infil_is_type(var0) && var5 scripts\cp\cp_infilexfil::infil_is_subtype(var1) && isinfilgameplayteam(var5.script_team)) {
-      var7 = game["infil"]["types"][var0][var1];
-      var8 = var5[[var7["spawn_func"]]](var5.script_team, var5.target, var5.name);
-      var8.players = [];
-      var8.type = var5.script_noteworthy;
-      var8.subtype = var5.name;
-      var6 = var5.script_team;
-      game["infil"][var6]["lanes"][var0][var1] = var8;
-      register_infil_spots(var6, var8, var7["seats"], var7["required_seats"], var7["fill_order"], var7["player_func"]);
-      var9 = var8[[var7["get_length_func"]]](var1);
+    if(var_5 scripts\cp\cp_infilexfil::infil_is_type(var_0) && var_5 scripts\cp\cp_infilexfil::infil_is_subtype(var_1) && isinfilgameplayteam(var_5.script_team)) {
+      var_7 = game["infil"]["types"][var_0][var_1];
+      var_8 = var_5[[var_7["spawn_func"]]](var_5.script_team, var_5.target, var_5.name);
+      var_8.players = [];
+      var_8.type = var_5.script_noteworthy;
+      var_8.subtype = var_5.name;
+      var_6 = var_5.script_team;
+      game["infil"][var_6]["lanes"][var_0][var_1] = var_8;
+      register_infil_spots(var_6, var_8, var_7["seats"], var_7["required_seats"], var_7["fill_order"], var_7["player_func"]);
+      var_9 = var_8[[var_7["get_length_func"]]](var_1);
 
-      if(!isDefined(var2)) {
-        var9 += 1;
-        var2 = var9;
+      if(!isDefined(var_2)) {
+        var_9 += 1;
+        var_2 = var_9;
       } else {
-        var9 += 1;
+        var_9 += 1;
       }
       LOC_00000187:
     }
     LOC_00000187:
   }
 
-  if(gamehasinfil() && isDefined(var2)) {
+  if(gamehasinfil() && isDefined(var_2)) {
     level.prematchperiod = 10;
-    level.prematchperiodend = var2 + 1;
+    level.prematchperiodend = var_2 + 1;
     thread infil_setup_ui();
     thread infil_wait_for_all_players();
     return;
@@ -113,38 +113,38 @@ function onplayerspawned() {
   self endon("prematch_over");
 
   for(;;) {
-    level waittill("trying_to_join_infil", var0);
+    level waittill("trying_to_join_infil", var_0);
 
-    if(playerinfildisabled(var0)) {
+    if(playerinfildisabled(var_0)) {
       continue;
     }
 
-    var1 = scripts\cp\utility::getotherteam(var0.team);
+    var_1 = scripts\cp\utility::getotherteam(var_0.team);
 
-    if(isarray(var1)) {
-      var2 = var1[0];
+    if(isarray(var_1)) {
+      var_2 = var_1[0];
     } else {
-      var2 = var1;
+      var_2 = var_1;
     }
 
-    var3 = get_spot_from_player(var0, var2);
+    var_3 = get_spot_from_player(var_0, var_2);
 
-    if(isDefined(var3)) {
-      player_free_spot(var0, scripts\cp\utility::getotherteam(var2));
+    if(isDefined(var_3)) {
+      player_free_spot(var_0, scripts\cp\utility::getotherteam(var_2));
     }
 
     if(!scripts\cp\utility::gameflag("infil_started")) {
-      player_join_infil_cp(var0);
+      player_join_infil_cp(var_0);
     }
   }
 }
 
-function playerinfildisabled(var0) {
-  return istrue(var0.infil_disabled);
+function playerinfildisabled(var_0) {
+  return istrue(var_0.infil_disabled);
 }
 
-function disableplayerinfil(var0) {
-  var0.infil_disabled = 1;
+function disableplayerinfil(var_0) {
+  var_0.infil_disabled = 1;
 }
 
 function onjoinedteam() {
@@ -152,9 +152,9 @@ function onjoinedteam() {
   self endon("prematch_over");
 
   for(;;) {
-    level waittill("joined_team", var0);
+    level waittill("joined_team", var_0);
 
-    if(isDefined(var0.team) && var0.team == "spectator") {
+    if(isDefined(var_0.team) && var_0.team == "spectator") {
       thread infilspectatorview();
     }
   }
@@ -172,13 +172,13 @@ function infilspectatorview() {
 
 function onplayerdisconnectinfil() {
   self endon("prematch_over");
-  var0 = self.team;
+  var_0 = self.team;
   self waittill("disconnect");
-  player_free_spot(self, var0);
+  player_free_spot(self, var_0);
 }
 
-function get_all_infils(var0) {
-  if(isDefined(var0)) {
+function get_all_infils(var_0) {
+  if(isDefined(var_0)) {
     return scripts\engine\utility::getStructArray("infil_type", "script_noteworthy");
   }
 
@@ -267,231 +267,231 @@ function infil_has_map_config() {
 
 function infil_init_spawn_selection() {}
 
-function infil_player_allow_cp(var0, var1) {
+function infil_player_allow_cp(var_0, var_1) {
   if(self ishost() && getdvarint("scr_infil_spectator") == 1) {
-    scripts\common\utility::allow_weapon(var0);
+    scripts\common\utility::allow_weapon(var_0);
     return;
   }
 
-  self allowmovement(var0);
-  scripts\common\utility::allow_prone(var0);
-  scripts\common\utility::allow_crouch(var0);
-  scripts\common\utility::allow_jump(var0);
-  scripts\common\utility::allow_fire(var0);
-  scripts\common\utility::allow_ads(var0);
-  scripts\common\utility::allow_sprint(var0);
-  scripts\common\utility::allow_melee(var0);
-  scripts\common\utility::allow_reload(var0);
-  scripts\common\utility::allow_lean(var0);
-  scripts\common\utility::allow_slide(var0);
-  scripts\common\utility::allow_offhand_weapons(var0);
-  scripts\common\utility::allow_weapon_switch(var0);
-  scripts\common\utility::allow_usability(var0);
-  scripts\common\utility::allow_script_weapon_switch(var0);
+  self allowmovement(var_0);
+  scripts\common\utility::allow_prone(var_0);
+  scripts\common\utility::allow_crouch(var_0);
+  scripts\common\utility::allow_jump(var_0);
+  scripts\common\utility::allow_fire(var_0);
+  scripts\common\utility::allow_ads(var_0);
+  scripts\common\utility::allow_sprint(var_0);
+  scripts\common\utility::allow_melee(var_0);
+  scripts\common\utility::allow_reload(var_0);
+  scripts\common\utility::allow_lean(var_0);
+  scripts\common\utility::allow_slide(var_0);
+  scripts\common\utility::allow_offhand_weapons(var_0);
+  scripts\common\utility::allow_weapon_switch(var_0);
+  scripts\common\utility::allow_usability(var_0);
+  scripts\common\utility::allow_script_weapon_switch(var_0);
 }
 
-function register_infil_spots(var0, var1, var2, var3, var4, var5) {
-  if(!isDefined(game["infil"][var0]["spots"])) {
-    game["infil"][var0]["spots"] = [];
+function register_infil_spots(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(!isDefined(game["infil"][var_0]["spots"])) {
+    game["infil"][var_0]["spots"] = [];
   }
 
-  var6 = game["infil"][var0]["spots"].size;
+  var_6 = game["infil"][var_0]["spots"].size;
 
-  for(var7 = 0; var7 < var2; var7++) {
-    var8 = game["infil"][var0]["spots"].size;
+  for(var_7 = 0; var_7 < var_2; var_7++) {
+    var_8 = game["infil"][var_0]["spots"].size;
 
-    if(isDefined(var4)) {
-      var9 = 0;
+    if(isDefined(var_4)) {
+      var_9 = 0;
 
-      foreach(var11 in var4) {
-        foreach(var13 in var11) {
-          if(var13 == var8 - var6) {
-            game["infil"][var0]["spots"][var8]["priority"] = var15;
-            var9 = 1;
+      foreach(var_11 in var_4) {
+        foreach(var_13 in var_11) {
+          if(var_13 == var_8 - var_6) {
+            game["infil"][var_0]["spots"][var_8]["priority"] = var_15;
+            var_9 = 1;
             break;
           }
         }
 
-        if(var9) {
+        if(var_9) {
           break;
         }
       }
     } else {
-      game["infil"][var0]["spots"][var8]["priority"] = -1;
+      game["infil"][var_0]["spots"][var_8]["priority"] = -1;
     }
 
-    game["infil"][var0]["spots"][var8]["seat"] = var7;
-    game["infil"][var0]["spots"][var8]["infil"] = var1;
-    game["infil"][var0]["spots"][var8]["callback"] = var5;
+    game["infil"][var_0]["spots"][var_8]["seat"] = var_7;
+    game["infil"][var_0]["spots"][var_8]["infil"] = var_1;
+    game["infil"][var_0]["spots"][var_8]["callback"] = var_5;
   }
 
-  if(var3 > level.requiredplayercount[var0]) {
-    level.requiredplayercount[var0] = var3;
+  if(var_3 > level.requiredplayercount[var_0]) {
+    level.requiredplayercount[var_0] = var_3;
     return;
   }
 }
 
-function player_on_spot(var0, var1) {
-  if(isDefined(game["infil"][var0.team]["spots"])) {}
+function player_on_spot(var_0, var_1) {
+  if(isDefined(game["infil"][var_0.team]["spots"])) {}
 
-  if(isDefined(game["infil"][var0.team]["spots"][var1])) {}
+  if(isDefined(game["infil"][var_0.team]["spots"][var_1])) {}
 
-  if(isDefined(game["infil"][var0.team]["spots"][var1]["player"])) {}
+  if(isDefined(game["infil"][var_0.team]["spots"][var_1]["player"])) {}
 
-  game["infil"][var0.team]["spots"][var1]["player"] = var0;
-  return game["infil"][var0.team]["spots"][var1];
+  game["infil"][var_0.team]["spots"][var_1]["player"] = var_0;
+  return game["infil"][var_0.team]["spots"][var_1];
 }
 
-function player_free_spot(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = var0.team;
+function player_free_spot(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = var_0.team;
   }
 
-  if(isDefined(game["infil"][var1]["spots"])) {}
+  if(isDefined(game["infil"][var_1]["spots"])) {}
 
-  foreach(var3 in game["infil"][var1]["spots"]) {
-    if(is_spot_taken(var1, var4) && var3["player"] == var0) {
-      game["infil"][var1]["spots"][var4]["player"] = undefined;
-      var0 notify("player_free_spot");
+  foreach(var_3 in game["infil"][var_1]["spots"]) {
+    if(is_spot_taken(var_1, var_4) && var_3["player"] == var_0) {
+      game["infil"][var_1]["spots"][var_4]["player"] = undefined;
+      var_0 notify("player_free_spot");
       return;
     }
   }
 }
 
-function get_player_at_spot(var0, var1) {
-  return game["infil"][var0]["spots"][var1]["player"];
+function get_player_at_spot(var_0, var_1) {
+  return game["infil"][var_0]["spots"][var_1]["player"];
 }
 
-function get_spot_from_player(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = var0.team;
+function get_spot_from_player(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = var_0.team;
   }
 
-  if(!isDefined(game["infil"][var1]["spots"])) {
+  if(!isDefined(game["infil"][var_1]["spots"])) {
     return undefined;
   }
 
-  foreach(var3 in game["infil"][var1]["spots"]) {
-    if(isDefined(var3["player"]) && var3["player"] == var0) {
-      return var4;
+  foreach(var_3 in game["infil"][var_1]["spots"]) {
+    if(isDefined(var_3["player"]) && var_3["player"] == var_0) {
+      return var_4;
     }
   }
 
   return undefined;
 }
 
-function is_spot_taken(var0, var1) {
-  if(isDefined(game["infil"][var0]["spots"])) {}
+function is_spot_taken(var_0, var_1) {
+  if(isDefined(game["infil"][var_0]["spots"])) {}
 
-  if(isDefined(game["infil"][var0]["spots"][var1])) {}
+  if(isDefined(game["infil"][var_0]["spots"][var_1])) {}
 
-  return isDefined(game["infil"][var0]["spots"][var1]["player"]);
+  return isDefined(game["infil"][var_0]["spots"][var_1]["player"]);
 }
 
-function get_spot_taken_count(var0) {
-  if(isDefined(game["infil"][var0]["spots"])) {}
+function get_spot_taken_count(var_0) {
+  if(isDefined(game["infil"][var_0]["spots"])) {}
 
-  var1 = 0;
+  var_1 = 0;
 
-  foreach(var3 in game["infil"][var0]["spots"]) {
-    if(is_spot_taken(var0, var4)) {
-      var1++;
+  foreach(var_3 in game["infil"][var_0]["spots"]) {
+    if(is_spot_taken(var_0, var_4)) {
+      var_1++;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function get_spot_by_priority(var0) {
-  var1 = [];
+function get_spot_by_priority(var_0) {
+  var_1 = [];
 
-  foreach(var3 in game["infil"][var0]["spots"]) {
-    if(!is_spot_taken(var0, var4)) {
-      var1 = var4;
+  foreach(var_3 in game["infil"][var_0]["spots"]) {
+    if(!is_spot_taken(var_0, var_4)) {
+      var_1 = var_4;
     }
   }
 
-  if(var1.size == 0) {
+  if(var_1.size == 0) {
     return undefined;
   }
 
-  var5 = getdvarint("scr_infil_force_seat", -1);
+  var_5 = getdvarint("scr_infil_force_seat", -1);
 
-  if(scripts\engine\utility::array_contains(var1, var5)) {
-    return var5;
+  if(scripts\engine\utility::array_contains(var_1, var_5)) {
+    return var_5;
   }
 
-  var6 = [];
-  var7 = -1;
+  var_6 = [];
+  var_7 = -1;
 
-  foreach(var3 in var1) {
-    var9 = game["infil"][var0]["spots"][var3]["priority"];
+  foreach(var_3 in var_1) {
+    var_9 = game["infil"][var_0]["spots"][var_3]["priority"];
 
-    if(var6.size == 0 || var9 < var7) {
-      var6 = [];
-      var6 = var3;
-      var7 = var9;
+    if(var_6.size == 0 || var_9 < var_7) {
+      var_6 = [];
+      var_6 = var_3;
+      var_7 = var_9;
       continue;
     }
 
-    if(var9 == var7) {
-      var6 = var3;
+    if(var_9 == var_7) {
+      var_6 = var_3;
     }
   }
 
-  return var6[randomint(var6.size)];
+  return var_6[randomint(var_6.size)];
 }
 
-function get_random_spot(var0) {
-  var1 = [];
+function get_random_spot(var_0) {
+  var_1 = [];
 
-  foreach(var3 in game["infil"][var0]["spots"]) {
-    if(!is_spot_taken(var0, var4)) {
-      var1 = var4;
+  foreach(var_3 in game["infil"][var_0]["spots"]) {
+    if(!is_spot_taken(var_0, var_4)) {
+      var_1 = var_4;
     }
   }
 
-  if(var1.size == 0) {
+  if(var_1.size == 0) {
     return undefined;
   }
 
-  var3 = scripts\engine\utility::random(var1);
-  return var3;
+  var_3 = scripts\engine\utility::random(var_1);
+  return var_3;
 }
 
-function get_taken_spot_count(var0) {
-  if(!isDefined(game["infil"][var0]["spots"])) {
+function get_taken_spot_count(var_0) {
+  if(!isDefined(game["infil"][var_0]["spots"])) {
     return 0;
   }
 
-  var1 = 0;
+  var_1 = 0;
 
-  foreach(var3 in game["infil"][var0]["spots"]) {
-    if(is_spot_taken(var0, var4)) {
-      var1++;
+  foreach(var_3 in game["infil"][var_0]["spots"]) {
+    if(is_spot_taken(var_0, var_4)) {
+      var_1++;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function get_taken_spot_percent(var0) {
-  if(!isDefined(game["infil"][var0]["spots"])) {
+function get_taken_spot_percent(var_0) {
+  if(!isDefined(game["infil"][var_0]["spots"])) {
     return 0;
   }
 
-  var1 = 0;
-  var2 = 0;
+  var_1 = 0;
+  var_2 = 0;
 
-  foreach(var4 in game["infil"][var0]["spots"]) {
-    var1++;
+  foreach(var_4 in game["infil"][var_0]["spots"]) {
+    var_1++;
 
-    if(is_spot_taken(var0, var5)) {
-      var2++;
+    if(is_spot_taken(var_0, var_5)) {
+      var_2++;
     }
   }
 
-  return var2 / var1;
+  return var_2 / var_1;
 }
 
 function player_join_infil_cp() {
@@ -504,27 +504,27 @@ function player_join_infil_cp() {
     return;
   }
 
-  var0 = 0;
-  var1 = game["infil"][self.team]["spots"][0]["priority"] != -1;
+  var_0 = 0;
+  var_1 = game["infil"][self.team]["spots"][0]["priority"] != -1;
 
   if(level.gametype == "tac_ops" && isDefined(self.tacopsmapselectedarea.dynamicent)) {
-    var2 = scripts\cp\cp_infilexfil::get_random_spot_in_infil(self.team, self.tacopsmapselectedarea.dynamicent);
-  } else if(var1) {
-    var2 = get_spot_taken_count(self.team);
-  } else if(var2) {
-    var2 = get_spot_by_priority(self.team);
+    var_2 = scripts\cp\cp_infilexfil::get_random_spot_in_infil(self.team, self.tacopsmapselectedarea.dynamicent);
+  } else if(var_1) {
+    var_2 = get_spot_taken_count(self.team);
+  } else if(var_2) {
+    var_2 = get_spot_by_priority(self.team);
   } else {
-    var2 = get_random_spot(self.team);
+    var_2 = get_random_spot(self.team);
   }
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return;
   }
 
-  var3 = player_on_spot(self, var2);
-  var3["infil"] thread scripts\cp\cp_infilexfil::infil_player_array_handler(self);
+  var_3 = player_on_spot(self, var_2);
+  var_3["infil"] thread scripts\cp\cp_infilexfil::infil_player_array_handler(self);
   self notify("player_added_to_infil");
-  self thread[[var3["callback"]]](var3["infil"], var3["seat"]);
+  self thread[[var_3["callback"]]](var_3["infil"], var_3["seat"]);
   thread blockswaploadouts();
   thread onplayerdisconnectinfil();
   player_ai_fill();
@@ -540,39 +540,39 @@ function blockswaploadouts() {
 function player_ai_fill() {}
 
 function infil_setup_ui() {
-  foreach(var1 in level.players) {
-    var1 setclientomnvar("ui_hide_hud", 1);
+  foreach(var_1 in level.players) {
+    var_1 setclientomnvar("ui_hide_hud", 1);
   }
 
   level.bypassclasschoicefunc = &scripts\cp\cp_infilexfil::alwaysgamemodeclass;
   level.infil_in_progress_buffer = 1;
   level waittill("infil_started");
 
-  foreach(var1 in level.players) {
-    var1 setclientomnvar("ui_hide_hud", 1);
+  foreach(var_1 in level.players) {
+    var_1 setclientomnvar("ui_hide_hud", 1);
   }
 
-  var5 = getomnvar("ui_always_show_nameplates");
+  var_5 = getomnvar("ui_always_show_nameplates");
   setomnvar("ui_always_show_nameplates", 1);
   level.bypassclasschoicefunc = undefined;
   level.infil_in_progress = 1;
-  var6 = getdvarint("LOPKSRNTTS");
-  var7 = getdvarint("LROTSRRQMQ");
-  var8 = getdvarint("NKMOPQSPMO");
+  var_6 = getdvarint("LOPKSRNTTS");
+  var_7 = getdvarint("LROTSRRQMQ");
+  var_8 = getdvarint("NKMOPQSPMO");
   setDvar("LOPKSRNTTS", 0);
   setDvar("LROTSRRQMQ", 1);
   setDvar("NKMOPQSPMO", 1);
   level waittill("prematch_over");
 
-  foreach(var1 in level.players) {
-    var1 setclientomnvar("ui_hide_hud", 0);
-    var1 setclientomnvar("ui_hide_minimap", 1);
+  foreach(var_1 in level.players) {
+    var_1 setclientomnvar("ui_hide_hud", 0);
+    var_1 setclientomnvar("ui_hide_minimap", 1);
   }
 
-  setomnvar("ui_always_show_nameplates", var5);
-  setDvar("LOPKSRNTTS", var6);
-  setDvar("LROTSRRQMQ", var7);
-  setDvar("NKMOPQSPMO", var8);
+  setomnvar("ui_always_show_nameplates", var_5);
+  setDvar("LOPKSRNTTS", var_6);
+  setDvar("LROTSRRQMQ", var_7);
+  setDvar("NKMOPQSPMO", var_8);
   level.infil_in_progress = undefined;
   wait 2;
   level.infil_in_progress_buffer = undefined;
@@ -589,13 +589,13 @@ function infil_show_countdown() {
 }
 
 function infil_wait_for_all_players() {
-  level waittill("trying_to_join_infil", var0);
+  level waittill("trying_to_join_infil", var_0);
   level.num_of_player_ready_to_infil = 1;
   wait_for_all_players_or_timeout();
   scripts\cp\utility::gameflagset("infil_started");
 
   if(getdvarint("scr_infil_print_start", 0) == 1) {
-    foreach(var0 in level.players) {
+    foreach(var_0 in level.players) {
       iprintlnbold("!-!-!-!-!-INFIL BEGIN-!-!-!-!-!");
     }
 
@@ -613,7 +613,7 @@ function player_trying_to_join_infil_monitor() {
   level endon("ready_to_start_infil");
 
   for(;;) {
-    level waittill("trying_to_join_infil", var0);
+    level waittill("trying_to_join_infil", var_0);
     level.num_of_player_ready_to_infil++;
 
     if(level.num_of_player_ready_to_infil == 4) {
@@ -624,8 +624,8 @@ function player_trying_to_join_infil_monitor() {
 
 function max_wait_for_infil_to_start() {
   level endon("ready_to_start_infil");
-  var0 = 5;
-  wait var0;
+  var_0 = 5;
+  wait var_0;
   level notify("ready_to_start_infil");
 }
 
@@ -637,6 +637,6 @@ function gamehasinfil() {
   return true;
 }
 
-function isinfilgameplayteam(var0) {
-  return isDefined(var0) && scripts\engine\utility::array_contains(level.teamnamelist, var0);
+function isinfilgameplayteam(var_0) {
+  return isDefined(var_0) && scripts\engine\utility::array_contains(level.teamnamelist, var_0);
 }

@@ -18,9 +18,9 @@ function free_prisoners_start() {
   scripts\sp\maps\captive\captive_util::setup_noisemaker_pickups();
   scripts\sp\maps\captive\captive_util::enable_context_melee();
   scripts\sp\player\teenagefarah::teenage_farah_stealth_setup();
-  var0 = scripts\sp\utility::make_weapon("iw8_pi_golf21_tfarah");
-  level.player giveweapon(var0);
-  level.player switchtoweapon(var0);
+  var_0 = scripts\sp\utility::make_weapon("iw8_pi_golf21_tfarah");
+  level.player giveweapon(var_0);
+  level.player switchtoweapon(var_0);
   level.player scripts\sp\utility::take_weapon("iw8_farahspoon_sp");
   thread scripts\sp\maps\captive\captive_vo::vo_walla_guards_alert();
   scripts\sp\maps\captive\captive_lighting::lights_off("hadir_cell");
@@ -34,20 +34,20 @@ function free_prisoners_start() {
 }
 
 function free_prisoners_main() {
-  var0 = getEnt("ai_locker_idle_clip", "targetname");
-  var0 notsolid();
+  var_0 = getEnt("ai_locker_idle_clip", "targetname");
+  var_0 notsolid();
   setsaveddvar("NPONLLLSPL", 0.78);
   level.weaponslockerref = scripts\engine\utility::getStruct("weapons_locker_ref", "targetname");
   level.akproxies = [];
 
-  for(var1 = 1; var1 <= 9; var1++) {
-    var2 = scripts\engine\utility::getStruct("gun_proxy_" + var1, "targetname");
-    var3 = scripts\engine\sp\utility::spawn_anim_weapon("ak", var2.origin, var2.angles);
-    var3 hidepart("tag_rail");
-    level.akproxies[level.akproxies.size] = var3;
+  for(var_1 = 1; var_1 <= 9; var_1++) {
+    var_2 = scripts\engine\utility::getStruct("gun_proxy_" + var_1, "targetname");
+    var_3 = scripts\engine\sp\utility::spawn_anim_weapon("ak", var_2.origin, var_2.angles);
+    var_3 hidepart("tag_rail");
+    level.akproxies[level.akproxies.size] = var_3;
 
-    if(var1 != 6) {
-      level.weaponslockerref thread scripts\common\anim::anim_first_frame_solo(var3, "setpos_gun" + var1);
+    if(var_1 != 6) {
+      level.weaponslockerref thread scripts\common\anim::anim_first_frame_solo(var_3, "setpos_gun" + var_1);
     }
   }
 
@@ -61,21 +61,21 @@ function free_prisoners_main() {
   setsaveddvar("NPONLLLSPL", 0.78);
   scripts\sp\maps\captive\captive_util::spawn_prisoners();
 
-  foreach(var5 in level.allprisoners) {
-    var5 scripts\common\ai::gun_remove();
-    var5 thread scripts\sp\utility::civilianfailwrapper();
+  foreach(var_5 in level.allprisoners) {
+    var_5 scripts\common\ai::gun_remove();
+    var_5 thread scripts\sp\utility::civilianfailwrapper();
   }
 
   level.weaponslockerref thread scripts\common\anim::anim_loop(level.allprisoners, "cell_idle", "end_cell_idle");
   thread check_open_gun_locker();
   thread scripts\sp\maps\captive\captive_vo::mus_far_free_sisters();
-  var7 = scripts\engine\utility::getStruct("upper_cell_door_button_interact", "targetname");
+  var_7 = scripts\engine\utility::getStruct("upper_cell_door_button_interact", "targetname");
   thread upper_cell_door_button_check();
   scripts\engine\utility::flag_wait("approaching_prisoners");
   scripts\engine\sp\objectives::objective_update("objective", "current", scripts\engine\utility::getStruct("upper_cell_door_button_objective", "targetname").origin, &"CAPTIVE/OBJ_FREE_PRISONERS_DESC", &"CAPTIVE/OBJ_FREE_PRISONERS");
   thread women_spot_farah();
   scripts\engine\utility::flag_wait("pressed_cell_door_button");
-  var0 solid();
+  var_0 solid();
 
   if(scripts\engine\utility::flag("opened_gun_locker")) {
     scripts\engine\sp\objectives::objective_update("objective", "current", scripts\engine\utility::getStruct("setup_ambush_objective", "targetname").origin, &"CAPTIVE/OBJ_SETUP_AMBUSH_DESC", &"CAPTIVE/OBJ_SETUP_AMBUSH");
@@ -89,7 +89,7 @@ function free_prisoners_main() {
   scripts\engine\utility::flag_wait("women_have_guns");
   level thread scripts\sp\maps\captive\captive_vo::vo_ff_ambush();
   scripts\engine\sp\utility::array_notify(level.allprisoners, "stop_civilian_fail_wrapper");
-  var0 delete();
+  var_0 delete();
 
   if(scripts\engine\utility::flag("set_locker_goal")) {
     scripts\engine\sp\objectives::objective_update("objective", "current", scripts\engine\utility::getStruct("setup_ambush_objective", "targetname").origin, &"CAPTIVE/OBJ_SETUP_AMBUSH_DESC", &"CAPTIVE/OBJ_SETUP_AMBUSH");
@@ -124,13 +124,13 @@ function upper_cell_door_button_check() {
   scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"CAPTIVE/CURSOR_PRESS", 180, 256, 64);
   self waittill("trigger");
   scripts\engine\utility::flag_set("pressed_cell_door_button");
-  var0 = scripts\engine\utility::getStruct("button_push_ref", "targetname");
-  var0 scripts\sp\player_rig::link_player_to_rig("cell_open", "stand", 1, 0.3);
-  var1 = getEnt("cell_door_button_upstairs", "script_noteworthy");
-  var1.animname = "button";
-  var1 scripts\common\anim::setanimtree();
+  var_0 = scripts\engine\utility::getStruct("button_push_ref", "targetname");
+  var_0 scripts\sp\player_rig::link_player_to_rig("cell_open", "stand", 1, 0.3);
+  var_1 = getEnt("cell_door_button_upstairs", "script_noteworthy");
+  var_1.animname = "button";
+  var_1 scripts\common\anim::setanimtree();
   thread wait_upper_cell_door_button_switch();
-  var0 scripts\common\anim::anim_single_solo(level.player_rig, "cell_open");
+  var_0 scripts\common\anim::anim_single_solo(level.player_rig, "cell_open");
   scripts\sp\player_rig::unlink_player_from_rig();
 }
 
@@ -140,7 +140,7 @@ function wait_upper_cell_door_button_switch() {
   thread scripts\common\anim::anim_single_solo(self, "button_push");
   getEnt("cell_door_button_lights_upstairs", "script_noteworthy") setModel("electrical_cell_door_button_lights_green");
 
-  foreach(var1 in level.uppercelldoors) {
+  foreach(var_1 in level.uppercelldoors) {
     thread open_upper_cell_door();
   }
 }
@@ -169,22 +169,22 @@ function open_upper_cell_door() {
 }
 
 function check_open_gun_locker() {
-  var0 = getEnt("weapons_locker_door_left_clip_open", "targetname");
-  var0 notsolid();
-  var1 = getEnt("weapons_locker_door_right_clip_open", "targetname");
-  var1 notsolid();
-  var2 = scripts\engine\utility::getStruct("weapon_locker_interact", "targetname");
-  var2 thread scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"CAPTIVE/CURSOR_USE", 180, 240, 64);
-  var2 waittill("trigger");
+  var_0 = getEnt("weapons_locker_door_left_clip_open", "targetname");
+  var_0 notsolid();
+  var_1 = getEnt("weapons_locker_door_right_clip_open", "targetname");
+  var_1 notsolid();
+  var_2 = scripts\engine\utility::getStruct("weapon_locker_interact", "targetname");
+  var_2 thread scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"CAPTIVE/CURSOR_USE", 180, 240, 64);
+  var_2 waittill("trigger");
   level thread scripts\sp\player\teenagefarah::teenage_farah_combat_setup();
-  var3 = getEnt("weapons_locker_door_left_clip", "targetname");
-  var3 delete();
-  var4 = getEnt("weapon_locker_door_right_clip", "targetname");
-  var4 delete();
-  var0 solid();
-  var1 solid();
+  var_3 = getEnt("weapons_locker_door_left_clip", "targetname");
+  var_3 delete();
+  var_4 = getEnt("weapon_locker_door_right_clip", "targetname");
+  var_4 delete();
+  var_0 solid();
+  var_1 solid();
   level.weaponslockerref scripts\sp\player_rig::link_player_to_rig("weapon_locker_open", "stand", 1, 0.5, undefined, undefined, undefined, undefined, undefined, 1);
-  var5 = scripts\engine\sp\utility::spawn_anim_model("key");
+  var_5 = scripts\engine\sp\utility::spawn_anim_model("key");
   thread close_and_lock_door();
   level notify("started_open_locker");
   level notify("kill_all_anim_instructions");
@@ -196,25 +196,25 @@ function check_open_gun_locker() {
     if(scripts\engine\utility::flag("saved_azadeh")) {
       thread women_get_guns_from_locker();
       level notify("enable_clip");
-      level.weaponslockerref thread scripts\common\anim::anim_single([var5, level.weaponlocker], "weapon_locker_open");
+      level.weaponslockerref thread scripts\common\anim::anim_single([var_5, level.weaponlocker], "weapon_locker_open");
       level.weaponslockerref scripts\common\anim::anim_single_solo(level.player_rig, "weapon_locker_open");
     } else {
       thread women_get_guns_from_locker_no_azadeh();
       level notify("enable_clip");
-      level.weaponslockerref thread scripts\common\anim::anim_single([var5, level.weaponlocker], "weapon_locker_open_no_azadeh");
+      level.weaponslockerref thread scripts\common\anim::anim_single([var_5, level.weaponlocker], "weapon_locker_open_no_azadeh");
       level.weaponslockerref scripts\common\anim::anim_single_solo(level.player_rig, "weapon_locker_open_no_azadeh");
     }
   } else {
     level notify("end_clip_wait");
     level.lockersceneclip delete();
-    level.weaponslockerref thread scripts\common\anim::anim_single([var5, level.weaponlocker], "weapon_locker_open_pre_cell_open");
+    level.weaponslockerref thread scripts\common\anim::anim_single([var_5, level.weaponlocker], "weapon_locker_open_pre_cell_open");
     level.weaponslockerref scripts\common\anim::anim_single_solo(level.player_rig, "weapon_locker_open_pre_cell_open");
   }
 
-  var5 delete();
+  var_5 delete();
   scripts\sp\player_rig::unlink_player_from_rig();
   scripts\engine\utility::flag_set("opened_gun_locker");
-  var6 = scripts\engine\utility::getStruct("frag_grenades_interact", "targetname");
+  var_6 = scripts\engine\utility::getStruct("frag_grenades_interact", "targetname");
   thread check_take_frag_grenade();
   scripts\engine\sp\utility::transient_unload("captive_basement_tr");
   scripts\engine\sp\utility::transient_load("captive_exterior_tr");
@@ -222,17 +222,17 @@ function check_open_gun_locker() {
 
 function women_move_to_gun_locker() {
   level endon("started_open_locker");
-  var0 = [level.nadia, level.ghalia];
+  var_0 = [level.nadia, level.ghalia];
 
   if(scripts\engine\utility::flag("saved_azadeh")) {
-    GscBinSkip0(0x2e, var0.size, level.azadeh);
+    GscBinSkip0(0x2e, var_0.size, level.azadeh);
   }
 
   level.weaponslockerref notify("end_cell_aware_idle");
   level.weaponslockerref thread scripts\common\anim::anim_loop(level.allprisoners, "cell_aware_idle", "end_button_idle");
   wait 1;
   level.weaponslockerref notify("end_button_idle");
-  var0 thread scripts\sp\maps\captive\captive_util::play_group_single_anim_into_idle_anim(level.weaponslockerref, "cell_open", "weapon_locker_idle", "end_locker_idle");
+  var_0 thread scripts\sp\maps\captive\captive_util::play_group_single_anim_into_idle_anim(level.weaponslockerref, "cell_open", "weapon_locker_idle", "end_locker_idle");
   level.ayah thread scripts\sp\maps\captive\captive_util::play_single_anim_into_idle_anim(level.weaponslockerref, "cell_open", "weapon_locker_idle", "end_ayah_locker_idle");
   level.darine thread scripts\sp\maps\captive\captive_util::play_single_anim_into_idle_anim(level.weaponslockerref, "cell_open", "weapon_locker_idle", "end_darine_locker_idle");
   wait 15;
@@ -252,14 +252,14 @@ function women_get_guns_from_open_locker() {
   level.weaponslockerref notify("end_cell_aware_idle");
   level.weaponslockerref thread scripts\common\anim::anim_loop(level.allprisoners, "cell_aware_idle", "end_button_idle");
   wait 1.75;
-  var0 = [[level.ayah, 1, 7], [level.darine, 3, 3], [level.ghalia, 4, 2], [level.nadia, 5, 8]];
+  var_0 = [[level.ayah, 1, 7], [level.darine, 3, 3], [level.ghalia, 4, 2], [level.nadia, 5, 8]];
 
   if(scripts\engine\utility::flag("saved_azadeh")) {
-    var0 = [[level.ayah, 1, 7], [level.azadeh, 2, 9], [level.darine, 3, 3], [level.ghalia, 4, 2], [level.nadia, 5, 8]];
+    var_0 = [[level.ayah, 1, 7], [level.azadeh, 2, 9], [level.darine, 3, 3], [level.ghalia, 4, 2], [level.nadia, 5, 8]];
   }
 
-  foreach(var2 in var0) {
-    thread wait_give_gun(var2[0], var2[1]);
+  foreach(var_2 in var_0) {
+    thread wait_give_gun(var_2[0], var_2[1]);
   }
 
   level.weaponslockerref notify("end_button_idle");
@@ -268,10 +268,10 @@ function women_get_guns_from_open_locker() {
 }
 
 function women_get_guns_from_locker() {
-  var0 = [[level.ayah, 1, 3], [level.azadeh, 2, 5], [level.darine, 3, 4], [level.ghalia, 4, 2], [level.nadia, 5, 1]];
+  var_0 = [[level.ayah, 1, 3], [level.azadeh, 2, 5], [level.darine, 3, 4], [level.ghalia, 4, 2], [level.nadia, 5, 1]];
 
-  foreach(var2 in var0) {
-    thread wait_give_gun(var2[0], var2[1]);
+  foreach(var_2 in var_0) {
+    thread wait_give_gun(var_2[0], var_2[1]);
   }
 
   level.weaponslockerref scripts\common\anim::anim_single(level.allprisoners, "weapon_locker_open");
@@ -279,19 +279,19 @@ function women_get_guns_from_locker() {
 }
 
 function women_get_guns_from_locker_no_azadeh() {
-  var0 = [[level.ayah, 1, 3], [level.darine, 3, 4], [level.ghalia, 4, 2], [level.nadia, 5, 1]];
+  var_0 = [[level.ayah, 1, 3], [level.darine, 3, 4], [level.ghalia, 4, 2], [level.nadia, 5, 1]];
 
-  foreach(var2 in var0) {
-    thread wait_give_gun(var2[0], var2[1]);
+  foreach(var_2 in var_0) {
+    thread wait_give_gun(var_2[0], var_2[1]);
   }
 
   level.weaponslockerref scripts\common\anim::anim_single(level.allprisoners, "weapon_locker_open_no_azadeh");
   scripts\engine\utility::flag_set("women_have_guns");
 }
 
-function wait_give_gun(var0, var1) {
-  level waittill("unhide_weapon_ally0" + var0);
-  level.akproxies[var1 - 1] delete();
+function wait_give_gun(var_0, var_1) {
+  level waittill("unhide_weapon_ally0" + var_0);
+  level.akproxies[var_1 - 1] delete();
   scripts\common\ai::gun_recall();
 }
 
@@ -307,17 +307,17 @@ function wait_toggle_clip() {
 function check_take_frag_grenade() {
   thread scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"CAPTIVE/TAKE_FRAG_GRENADES", 180, 64, 48);
   self waittill("trigger");
-  var0 = getEntArray("frag_grenade", "targetname");
+  var_0 = getEntArray("frag_grenade", "targetname");
 
-  foreach(var2 in var0) {
-    var2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
   }
 
   level.player scripts\engine\sp\utility::give_offhand("frag_farah", 3);
 }
 
 function close_and_lock_door() {
-  var0 = scripts\sp\door::get_interactive_door("basement_door");
-  var0 scripts\sp\door::reset_door();
-  var0 scripts\sp\door::remove_open_ability();
+  var_0 = scripts\sp\door::get_interactive_door("basement_door");
+  var_0 scripts\sp\door::reset_door();
+  var_0 scripts\sp\door::remove_open_ability();
 }

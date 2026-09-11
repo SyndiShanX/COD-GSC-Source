@@ -13,30 +13,30 @@ function startdisabled() {
 }
 
 function startenemyhelis() {
-  var0 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldataforvehicle("veh_indigo", 1);
-  var0.arenavday = &scripts\cp_mp\vehicles\vehicle_spawn::ref_14211;
-  var0.areplayersnear = 60;
+  var_0 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldataforvehicle("veh_indigo", 1);
+  var_0.arenavday = &scripts\cp_mp\vehicles\vehicle_spawn::ref_14211;
+  var_0.areplayersnear = 60;
 }
 
 function started_breach_process() {
-  var0 = scripts\cp_mp\vehicles\vehicle_mines::vehicle_mines_getleveldataforvehicle("veh_indigo", 1);
-  var0.frontextents = 165;
-  var0.backextents = 168;
-  var0.leftextents = 57;
-  var0.rightextents = 57;
-  var0.bottomextents = 35;
-  var0.distancetobottom = 50;
-  var0.loscheckoffset = (0, 0, 70);
+  var_0 = scripts\cp_mp\vehicles\vehicle_mines::vehicle_mines_getleveldataforvehicle("veh_indigo", 1);
+  var_0.frontextents = 165;
+  var_0.backextents = 168;
+  var_0.leftextents = 57;
+  var_0.rightextents = 57;
+  var_0.bottomextents = 35;
+  var_0.distancetobottom = 50;
+  var_0.loscheckoffset = (0, 0, 70);
 }
 
-function startfightvo(var0, var1) {
-  var2 = _calloutmarkerping_onpingchallenge::start_silo_jump_menu(var0, var1);
+function startfightvo(var_0, var_1) {
+  var_2 = _calloutmarkerping_onpingchallenge::start_silo_jump_menu(var_0, var_1);
 
-  if(isDefined(var2) && scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_gamemodesupportsrespawn()) {
-    var2.ondeathrespawn = &startexfilchoppers;
+  if(isDefined(var_2) && scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_gamemodesupportsrespawn()) {
+    var_2.ondeathrespawn = &startexfilchoppers;
   }
 
-  return var2;
+  return var_2;
 }
 
 function startexfilchoppers() {
@@ -44,15 +44,15 @@ function startexfilchoppers() {
 }
 
 function startfontscale() {
-  var0 = scripts\cp_mp\vehicles\vehicle_tracking::getvehiclespawndata(self);
-  var1 = spawnStruct();
-  scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(var0, var1);
-  var1.ref = var0.ref;
-  var1.rallypointhealth = var0.rallypointhealth;
-  var2 = spawnStruct();
-  var3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("veh_indigo", var1, var2);
+  var_0 = scripts\cp_mp\vehicles\vehicle_tracking::getvehiclespawndata(self);
+  var_1 = spawnStruct();
+  scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(var_0, var_1);
+  var_1.ref = var_0.ref;
+  var_1.rallypointhealth = var_0.rallypointhealth;
+  var_2 = spawnStruct();
+  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("veh_indigo", var_1, var_2);
 }
 
-function startdeliveries(var0, var1, var2, var3, var4) {
-  var0 scripts\mp\gametypes\arm::ref_141ff(var3.team);
+function startdeliveries(var_0, var_1, var_2, var_3, var_4) {
+  var_0 scripts\mp\gametypes\arm::ref_141ff(var_3.team);
 }

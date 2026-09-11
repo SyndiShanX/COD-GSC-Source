@@ -80,24 +80,24 @@ function init() {
   thread hud_init();
   thread dialog_init();
   thread enemies_init();
-  var0 = getEnt("clip8x8x256", "targetname");
-  var1 = getnodearray("traverse", "targetname");
-  var2 = [];
+  var_0 = getEnt("clip8x8x256", "targetname");
+  var_1 = getnodearray("traverse", "targetname");
+  var_2 = [];
 
-  foreach(var4 in var1) {
-    var2 = getnode(var4.target, "targetname");
+  foreach(var_4 in var_1) {
+    var_2 = getnode(var_4.target, "targetname");
   }
 
-  var6 = scripts\engine\utility::array_combine(var1, var2);
+  var_6 = scripts\engine\utility::array_combine(var_1, var_2);
 
-  if(isDefined(var0)) {
-    foreach(var8 in var6) {
-      if(isDefined(var8.origin)) {
-        var9 = spawn("script_model", var8.origin);
-        var9 clonebrushmodeltoscriptmodel(var0);
-        var9 disconnectPaths();
-        var8 disconnectnode();
-        var9 notsolid();
+  if(isDefined(var_0)) {
+    foreach(var_8 in var_6) {
+      if(isDefined(var_8.origin)) {
+        var_9 = spawn("script_model", var_8.origin);
+        var_9 clonebrushmodeltoscriptmodel(var_0);
+        var_9 disconnectPaths();
+        var_8 disconnectnode();
+        var_9 notsolid();
       }
     }
   }
@@ -146,21 +146,21 @@ function trial_start_init() {
 
   thread player_monitor_death();
   thread set_ending_pack();
-  var0 = getEnt("trial_truck_door_left", "targetname");
-  var1 = getEnt("trial_truck_door_right", "targetname");
-  var2 = getEnt("trial_truck_door_coll_l", "targetname");
-  var3 = getEnt("trial_truck_door_coll_r", "targetname");
-  var0 playsoundonmovingent("trial_sfx_door_truck_left");
-  var1 playsoundonmovingent("trial_sfx_door_truck_right");
-  var2 linkTo(var0);
-  var3 linkTo(var1);
+  var_0 = getEnt("trial_truck_door_left", "targetname");
+  var_1 = getEnt("trial_truck_door_right", "targetname");
+  var_2 = getEnt("trial_truck_door_coll_l", "targetname");
+  var_3 = getEnt("trial_truck_door_coll_r", "targetname");
+  var_0 playsoundonmovingent("trial_sfx_door_truck_left");
+  var_1 playsoundonmovingent("trial_sfx_door_truck_right");
+  var_2 linkTo(var_0);
+  var_3 linkTo(var_1);
 
   if(!isDefined(level.ref_13d83)) {
     level.ref_13d83 = 150;
   }
 
-  var1 rotateYaw(level.ref_13d83, 2);
-  var0 rotateYaw(level.ref_13d83 * -1, 2);
+  var_1 rotateYaw(level.ref_13d83, 2);
+  var_0 rotateYaw(level.ref_13d83 * -1, 2);
 }
 
 function ref_1453c() {
@@ -168,43 +168,43 @@ function ref_1453c() {
     waitframe();
   }
 
-  var0 = level.trial["variant"];
+  var_0 = level.trial["variant"];
 
   if(!isDefined(level.ref_14540)) {
-    level.ref_14540 = scripts\engine\utility::getStructArray("trial_waypoint_" + var0, "targetname");
+    level.ref_14540 = scripts\engine\utility::getStructArray("trial_waypoint_" + var_0, "targetname");
   }
 
   level.ref_1453b = [];
 
-  foreach(var2 in level.ref_14540) {
-    var3 = spawn("script_model", var2.origin);
-    var3.angles = var2.angles;
-    var3.targetname = "floorislava_waypoint";
+  foreach(var_2 in level.ref_14540) {
+    var_3 = spawn("script_model", var_2.origin);
+    var_3.angles = var_2.angles;
+    var_3.targetname = "floorislava_waypoint";
 
-    if(isDefined(var2.script_index)) {
-      var3.script_index = var2.script_index;
-    } else if(isDefined(var2.script_noteworthy)) {
-      var3.script_index = var2.script_noteworthy;
+    if(isDefined(var_2.script_index)) {
+      var_3.script_index = var_2.script_index;
+    } else if(isDefined(var_2.script_noteworthy)) {
+      var_3.script_index = var_2.script_noteworthy;
     }
 
-    var3 setModel("tag_origin");
+    var_3 setModel("tag_origin");
 
-    if(isDefined(var2.script_noteworthy)) {
-      var3.script_noteworthy = var2.script_noteworthy;
+    if(isDefined(var_2.script_noteworthy)) {
+      var_3.script_noteworthy = var_2.script_noteworthy;
     }
 
-    level.ref_1453b[int(var3.script_index)] = var3;
+    level.ref_1453b[int(var_3.script_index)] = var_3;
   }
 }
 
 function ref_1453d() {
   level scripts\engine\utility::flag_wait("trial_prestart");
-  var0 = 0;
+  var_0 = 0;
 
-  foreach(var2 in level.dogtags) {
-    thread ref_13533(var2, var2, level.player);
+  foreach(var_2 in level.dogtags) {
+    thread ref_13533(var_2, var_2, level.player);
     thread ref_135a8();
-    var0++;
+    var_0++;
   }
 
   while(level.ref_1453f < level.ref_1453b.size) {
@@ -216,34 +216,34 @@ function ref_1453d() {
 
 function ref_1453e() {
   level scripts\engine\utility::flag_wait("trial_prestart");
-  var0 = ref_13563();
-  var1 = undefined;
+  var_0 = ref_13563();
+  var_1 = undefined;
   waitframe();
 
-  for(var2 = 0; var2 < level.ref_1453b.size; var2++) {
+  for(var_2 = 0; var_2 < level.ref_1453b.size; var_2++) {
     waitframe();
 
-    if(var2 + 1 == level.ref_1453b.size) {
-      var3 = spawn("script_model", level.ref_1453b[var2].origin);
-      var3.angles = (level.ref_1453b[var2].angles[0] - 90, level.ref_1453b[var2].angles[1], level.ref_1453b[var2].angles[2]);
-      var3 setModel("tag_origin");
+    if(var_2 + 1 == level.ref_1453b.size) {
+      var_3 = spawn("script_model", level.ref_1453b[var_2].origin);
+      var_3.angles = (level.ref_1453b[var_2].angles[0] - 90, level.ref_1453b[var_2].angles[1], level.ref_1453b[var_2].angles[2]);
+      var_3 setModel("tag_origin");
       waitframe();
-      playFXOnTag(level.ref_14536, var3, "TAG_ORIGIN");
+      playFXOnTag(level.ref_14536, var_3, "TAG_ORIGIN");
     }
 
-    if(isDefined(level.ref_1453b[var2 + 1])) {
-      playFXOnTag(level.ref_14538, level.ref_1453b[var2 + 1], "TAG_ORIGIN");
+    if(isDefined(level.ref_1453b[var_2 + 1])) {
+      playFXOnTag(level.ref_14538, level.ref_1453b[var_2 + 1], "TAG_ORIGIN");
     }
 
     waitframe();
-    killfxontag(level.ref_14538, level.ref_1453b[var2], "TAG_ORIGIN");
-    playFXOnTag(level.ref_14534, level.ref_1453b[var2], "TAG_ORIGIN");
+    killfxontag(level.ref_14538, level.ref_1453b[var_2], "TAG_ORIGIN");
+    playFXOnTag(level.ref_14534, level.ref_1453b[var_2], "TAG_ORIGIN");
     thread ref_135a8();
     waitframe();
-    var0 moveTo((level.ref_1453b[var2].origin[0], level.ref_1453b[var2].origin[1], level.ref_1453b[var2].origin[2] + 30), 1, 0.1, 0.3);
-    ref_14539(level.ref_1453b[var2]);
+    var_0 moveTo((level.ref_1453b[var_2].origin[0], level.ref_1453b[var_2].origin[1], level.ref_1453b[var_2].origin[2] + 30), 1, 0.1, 0.3);
+    ref_14539(level.ref_1453b[var_2]);
 
-    if(var2 == 0) {
+    if(var_2 == 0) {
       killfxontag(level.ref_14536, level.ref_1453b[0], "TAG_ORIGIN");
     }
   }
@@ -254,10 +254,10 @@ function ref_1453e() {
 
 function ref_14539() {
   for(;;) {
-    var0 = distance(self.origin, level.player.origin);
-    var1 = abs(self.origin[2] - level.player.origin[2]);
+    var_0 = distance(self.origin, level.player.origin);
+    var_1 = abs(self.origin[2] - level.player.origin[2]);
 
-    if(var0 < 80 && var1 < 24) {
+    if(var_0 < 80 && var_1 < 24) {
       break;
     }
 
@@ -278,13 +278,13 @@ function ref_14539() {
 
   self notify("reached");
   thread spawn_soldiers_in_convoy_truck();
-  var2 = isDefined(self.script_noteworthy) && self.script_noteworthy == "spawn_enemy";
-  var3 = isDefined(self.script_index);
+  var_2 = isDefined(self.script_noteworthy) && self.script_noteworthy == "spawn_enemy";
+  var_3 = isDefined(self.script_index);
 
-  if(var2 || var3) {
-    foreach(var5 in level.node_is_valid) {
-      if(int(var5.script_index) == int(self.script_index)) {
-        var5 notify("trigger");
+  if(var_2 || var_3) {
+    foreach(var_5 in level.node_is_valid) {
+      if(int(var_5.script_index) == int(self.script_index)) {
+        var_5 notify("trigger");
       }
     }
   }
@@ -293,17 +293,17 @@ function ref_14539() {
   level.player scripts\engine\utility::delaycall(0.5, &setclientomnvar, "ui_edge_glow_trials", 0);
 }
 
-function ref_13533(var0, var1, var2) {
-  var3 = 14;
-  var4 = (0, 0, 0);
-  var5 = var0.angles;
+function ref_13533(var_0, var_1, var_2) {
+  var_3 = 14;
+  var_4 = (0, 0, 0);
+  var_5 = var_0.angles;
 
-  if(var0 scripts\mp\gameobjects::touchingarbitraryuptrigger()) {
-    var5 = var0 getworldupreferenceangles();
-    var4 = anglestoup(var5);
+  if(var_0 scripts\mp\gameobjects::touchingarbitraryuptrigger()) {
+    var_5 = var_0 getworldupreferenceangles();
+    var_4 = anglestoup(var_5);
 
-    if(var4[2] < 0) {
-      var3 = -14;
+    if(var_4[2] < 0) {
+      var_3 = -14;
     }
   }
 
@@ -311,87 +311,87 @@ function ref_13533(var0, var1, var2) {
 }
 
 function ref_135a8() {
-  var0 = undefined;
+  var_0 = undefined;
 
   switch (level.trial["variant"]) {
     case "free":
-      var0 = "icon_minimap_dogtag";
+      var_0 = "icon_minimap_dogtag";
       break;
     default:
-      var0 = "icon_waypoint_marker";
+      var_0 = "icon_waypoint_marker";
       break;
   }
 
-  var1 = level.ref_11f8e;
+  var_1 = level.ref_11f8e;
   level.ref_11f8e++;
-  objective_state(var1, "active");
-  objective_position(var1, self.origin);
-  objective_setplayintro(var1, 0);
-  objective_icon(var1, var0);
-  objective_setbackground(var1, 1);
-  objective_setfadedisabled(var1, 0);
-  objective_setshowoncompass(var1, 1);
-  objective_setminimapiconsize(var1, "icon_regular");
-  objective_setshowdistance(var1, 0);
-  objective_ping(var1);
+  objective_state(var_1, "active");
+  objective_position(var_1, self.origin);
+  objective_setplayintro(var_1, 0);
+  objective_icon(var_1, var_0);
+  objective_setbackground(var_1, 1);
+  objective_setfadedisabled(var_1, 0);
+  objective_setshowoncompass(var_1, 1);
+  objective_setminimapiconsize(var_1, "icon_regular");
+  objective_setshowdistance(var_1, 0);
+  objective_ping(var_1);
   self waittill("reached");
-  objective_delete(var1);
+  objective_delete(var_1);
 }
 
 function ref_13563() {
-  var0 = spawn("script_model", (0, 0, 0));
-  var0 setModel("tag_origin");
-  level.ref_14537 = deleteheadicon(var0);
+  var_0 = spawn("script_model", (0, 0, 0));
+  var_0 setModel("tag_origin");
+  level.ref_14537 = deleteheadicon(var_0);
   setheadiconfriendlyimage(level.ref_14537, "icon_waypoint_marker");
   setheadiconzoffset(level.ref_14537, 1);
   setheadiconsnaptoedges(level.ref_14537, 0);
   setheadicondrawthroughgeo(level.ref_14537, 1);
-  return var0;
+  return var_0;
 }
 
 function set_ending_pack() {
   level scripts\engine\utility::flag_wait("trial_prestart");
   level.player endon("death");
-  var0 = spawn("script_model", level.player.origin);
-  var0 setModel("tag_origin");
-  var0 setentityowner(level.player);
-  var0 setotherent(level.player);
+  var_0 = spawn("script_model", level.player.origin);
+  var_0 setModel("tag_origin");
+  var_0 setentityowner(level.player);
+  var_0 setotherent(level.player);
   level.set_force_aitype_suicidebomber = getEntArray("trigger_on_ground", "script_noteworthy");
 
   while(!scripts\engine\utility::flag("trial_completed")) {
-    var1 = 0;
-    var2 = updatematchstatushintonhasflag();
+    var_1 = 0;
+    var_2 = updatematchstatushintonhasflag();
 
-    if(var2 == 1) {
+    if(var_2 == 1) {
       if(!scripts\engine\utility::flag("trial_in_progress")) {
         level scripts\engine\utility::flag_set("trial_in_progress");
       }
 
-      var3 = gettime();
+      var_3 = gettime();
       level.player playSound("trial_sfx_buzzer_bad_1");
       thread set_force_aitype_riotshield();
-      var4 = 0;
+      var_4 = 0;
 
-      while(var2 == 1) {
-        if(var4 == 0) {
-          level.player dodamage(22, level.player.origin, level.player, var0, "MOD_FIRE");
+      while(var_2 == 1) {
+        if(var_4 == 0) {
+          level.player dodamage(22, level.player.origin, level.player, var_0, "MOD_FIRE");
           level.player playRumbleOnEntity("damage_light");
         }
 
         wait 0.05;
-        var2 = updatematchstatushintonhasflag();
-        var4++;
+        var_2 = updatematchstatushintonhasflag();
+        var_4++;
 
-        if(var4 >= 15) {
-          var4 = 0;
+        if(var_4 >= 15) {
+          var_4 = 0;
           level.player notify("gas_warning_vo");
         }
       }
 
       level.player thread scripts\mp\equipment\gas_grenade::gas_removeblur();
-      var5 = gettime();
-      var1 = var5 - var3;
-      level.ref_13b67 += var1;
+      var_5 = gettime();
+      var_1 = var_5 - var_3;
+      level.ref_13b67 += var_1;
     }
 
     waitframe();
@@ -409,100 +409,100 @@ function set_force_aitype_riotshield() {
 }
 
 function updatematchstatushintonhasflag() {
-  var0 = 0;
+  var_0 = 0;
 
-  foreach(var2 in level.set_force_aitype_suicidebomber) {
-    if(level.player istouching(var2)) {
-      var0 = 1;
+  foreach(var_2 in level.set_force_aitype_suicidebomber) {
+    if(level.player istouching(var_2)) {
+      var_0 = 1;
     }
   }
 
-  if(var0 && level.player isonground()) {
-    var4 = 1;
+  if(var_0 && level.player isonground()) {
+    var_4 = 1;
   } else {
-    var4 = 0;
+    var_4 = 0;
   }
 
-  return var4;
+  return var_4;
 }
 
 function player_set_weapon() {
-  var0 = scripts\engine\utility::getStructArray("trial_vfx_gas_emit", "script_noteworthy");
-  var1 = scripts\engine\utility::getStructArray("trial_vfx_gas_linger", "script_noteworthy");
-  var2 = scripts\engine\utility::getStructArray("trial_vfx_gas_linger_lg", "script_noteworthy");
-  var3 = getEntArray("trial_vfx_gas_emit", "script_noteworthy");
-  var4 = getEntArray("trial_vfx_gas_linger", "script_noteworthy");
-  var5 = getEntArray("trial_vfx_gas_linger_lg", "script_noteworthy");
-  var6 = scripts\engine\utility::array_combine(var0, var3);
-  var7 = scripts\engine\utility::array_combine(var1, var4);
-  var8 = scripts\engine\utility::array_combine(var2, var5);
+  var_0 = scripts\engine\utility::getStructArray("trial_vfx_gas_emit", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("trial_vfx_gas_linger", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("trial_vfx_gas_linger_lg", "script_noteworthy");
+  var_3 = getEntArray("trial_vfx_gas_emit", "script_noteworthy");
+  var_4 = getEntArray("trial_vfx_gas_linger", "script_noteworthy");
+  var_5 = getEntArray("trial_vfx_gas_linger_lg", "script_noteworthy");
+  var_6 = scripts\engine\utility::array_combine(var_0, var_3);
+  var_7 = scripts\engine\utility::array_combine(var_1, var_4);
+  var_8 = scripts\engine\utility::array_combine(var_2, var_5);
 
-  foreach(var10 in var7) {
-    var11 = spawn("script_model", (var10.origin[0], var10.origin[1], var10.origin[2] + 8));
-    var11 setModel("tag_origin");
+  foreach(var_10 in var_7) {
+    var_11 = spawn("script_model", (var_10.origin[0], var_10.origin[1], var_10.origin[2] + 8));
+    var_11 setModel("tag_origin");
     wait 0.05;
-    thread plundercountdownupdatetime(level.plunder_removeanchoredwidgetfromrepositoryinstance, var11, "TAG_ORIGIN");
+    thread plundercountdownupdatetime(level.plunder_removeanchoredwidgetfromrepositoryinstance, var_11, "TAG_ORIGIN");
   }
 
-  foreach(var10 in var8) {
-    var11 = spawn("script_model", var10.origin);
-    var11.angles = var10.angles;
-    var11 setModel("tag_origin");
+  foreach(var_10 in var_8) {
+    var_11 = spawn("script_model", var_10.origin);
+    var_11.angles = var_10.angles;
+    var_11 setModel("tag_origin");
     wait 0.05;
-    thread plundercountdownupdatetime(level.plunder_registerrepositoryinstance, var11, "TAG_ORIGIN");
+    thread plundercountdownupdatetime(level.plunder_registerrepositoryinstance, var_11, "TAG_ORIGIN");
   }
 
-  foreach(var10 in var6) {
-    var11 = spawn("script_model", var10.origin);
-    var11.angles = var10.angles;
-    var11 setModel("tag_origin");
+  foreach(var_10 in var_6) {
+    var_11 = spawn("script_model", var_10.origin);
+    var_11.angles = var_10.angles;
+    var_11 setModel("tag_origin");
     wait 0.05;
-    scripts\engine\utility::play_loopsound_in_space("trial_sfx_gas_hiss", var11.origin);
-    thread plundercountdownupdatetime(level.plunder_initrepositories, var11, "TAG_ORIGIN");
+    scripts\engine\utility::play_loopsound_in_space("trial_sfx_gas_hiss", var_11.origin);
+    thread plundercountdownupdatetime(level.plunder_initrepositories, var_11, "TAG_ORIGIN");
   }
 }
 
-function plundercountdownupdatetime(var0, var1, var2) {
+function plundercountdownupdatetime(var_0, var_1, var_2) {
   level endon("trial_completed");
 
   for(;;) {
-    while(distance2d(var1.origin, level.player.origin) > 800) {
+    while(distance2d(var_1.origin, level.player.origin) > 800) {
       wait 0.25;
     }
 
-    playFXOnTag(var0, var1, var2);
+    playFXOnTag(var_0, var_1, var_2);
 
-    while(distance2d(var1.origin, level.player.origin) < 1000) {
+    while(distance2d(var_1.origin, level.player.origin) < 1000) {
       wait 0.25;
     }
 
-    stopFXOnTag(var0, var1, var2);
+    stopFXOnTag(var_0, var_1, var_2);
   }
 }
 
 function player_init() {
   if(istrue(level.ref_13d93)) {
-    var0 = undefined;
+    var_0 = undefined;
   } else {
     switch (level.trial["variant"]) {
       case "knife":
-        var0 = "iw8_knife";
+        var_0 = "iw8_knife";
         break;
       case "shield":
-        var0 = "iw8_me_riotshield";
+        var_0 = "iw8_me_riotshield";
         break;
       case "pistol":
-        var0 = "iw8_pi_decho";
+        var_0 = "iw8_pi_decho";
         break;
       case "free":
-        var0 = "iw8_knife";
+        var_0 = "iw8_knife";
         break;
       default:
-        var0 = undefined;
+        var_0 = undefined;
         break;
     }
 
-    level.trial_loadout["axis"]["loadoutPrimary"] = var0;
+    level.trial_loadout["axis"]["loadoutPrimary"] = var_0;
   }
 
   while(!isDefined(level.player)) {
@@ -537,11 +537,11 @@ function player_init() {
   waitframe();
 
   if(isDefined(level.ref_126a5)) {
-    var1 = spawn("script_model", level.ref_126a5.origin);
-    var1 setModel("tag_origin");
-    var1.angles = level.ref_126a5.angles;
+    var_1 = spawn("script_model", level.ref_126a5.origin);
+    var_1 setModel("tag_origin");
+    var_1.angles = level.ref_126a5.angles;
     wait 0.5;
-    level.player playerlinkTo(var1, "tag_origin", 1, 0, 0, 0, 0);
+    level.player playerlinkTo(var_1, "tag_origin", 1, 0, 0, 0, 0);
 
     if(game["trial"]["tries_remaining"] >= 3) {
       wait 8;
@@ -591,11 +591,11 @@ function player_monitor_death() {
   thread hud_fade_to_black(4, 1);
 
   if(isDefined(level.ref_126a5)) {
-    var0 = spawn("script_model", level.ref_126a5.origin);
-    var0 setModel("tag_origin");
-    var0.angles = level.ref_126a5.angles;
+    var_0 = spawn("script_model", level.ref_126a5.origin);
+    var_0 setModel("tag_origin");
+    var_0.angles = level.ref_126a5.angles;
     wait 0.5;
-    level.player playerlinkTo(var0, "tag_origin", 1, 0, 0, 0, 0);
+    level.player playerlinkTo(var_0, "tag_origin", 1, 0, 0, 0, 0);
 
     if(game["trial"]["tries_remaining"] >= 3) {
       wait 8;
@@ -615,8 +615,8 @@ function enemies_init() {
     waitframe();
   }
 
-  foreach(var1 in level.node_is_valid) {
-    var1 setModel("tag_origin");
+  foreach(var_1 in level.node_is_valid) {
+    var_1 setModel("tag_origin");
   }
 
   while(!isDefined(level.player)) {
@@ -639,9 +639,9 @@ function enemies_init() {
     scripts\engine\utility::flag_init("scriptables_ready");
   }
 
-  foreach(var4 in level.node_is_valid) {
-    if(isDefined(var4.script_noteworthy) && var4.script_noteworthy != "spawn_enemy") {
-      var4.script_index = int(var4.script_noteworthy);
+  foreach(var_4 in level.node_is_valid) {
+    if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy != "spawn_enemy") {
+      var_4.script_index = int(var_4.script_noteworthy);
     }
   }
 
@@ -651,38 +651,38 @@ function enemies_init() {
 
 function enemy_individual_spawn() {
   self waittill("trigger");
-  var0 = scripts\mp\mp_agent::spawnnewagentaitype("actor_enemy_mp_trial_fil", self.origin, self.angles);
+  var_0 = scripts\mp\mp_agent::spawnnewagentaitype("actor_enemy_mp_trial_fil", self.origin, self.angles);
 
-  while(!isDefined(var0)) {
+  while(!isDefined(var_0)) {
     wait 0.05;
   }
 
-  var0.grenadeammo = 0;
-  var0.a.disablelongdeath = 1;
-  var0 agentsetfavoriteenemy(level.player);
+  var_0.grenadeammo = 0;
+  var_0.a.disablelongdeath = 1;
+  var_0 agentsetfavoriteenemy(level.player);
   thread nextbombplanttime();
   thread enemy_monitor_death();
   thread no_enemy_weapon_drops();
   thread no_jugg_early_exit();
-  var1 = level.enemyheadmodels[randomint(level.enemyheadmodels.size)];
-  var2 = level.enemybodymodels[randomint(level.enemybodymodels.size)];
+  var_1 = level.enemyheadmodels[randomint(level.enemyheadmodels.size)];
+  var_2 = level.enemybodymodels[randomint(level.enemybodymodels.size)];
 
-  if(isDefined(var0.headmodel)) {
-    var0 detach(var0.headmodel);
+  if(isDefined(var_0.headmodel)) {
+    var_0 detach(var_0.headmodel);
   }
 
-  var0 setModel(var2);
-  var0 attach(var1, "", 1);
-  var0.headmodel = var1;
-  var0 waittill("shooting");
+  var_0 setModel(var_2);
+  var_0 attach(var_1, "", 1);
+  var_0.headmodel = var_1;
+  var_0 waittill("shooting");
   level notify("enemy_shooting");
 }
 
 function nextbombplanttime() {
   while(isalive(self)) {
     wait 0.05;
-    self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
-    scripts\engine\utility::array_contains(level.players, var1);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
+    scripts\engine\utility::array_contains(level.players, var_1);
     self kill();
     level.player thread _tablethide::ref_13d4b(self, 1, 0, 1);
   }
@@ -692,18 +692,18 @@ function enemy_monitor_death() {
   level endon("trial_completed");
 
   if(isalive(self)) {
-    self waittill("death", var0, var1, var2);
+    self waittill("death", var_0, var_1, var_2);
 
     if(isalive(level.player)) {
-      var3 = scripts\engine\utility::array_contains(level.players, var0);
+      var_3 = scripts\engine\utility::array_contains(level.players, var_0);
     } else {
-      var3 = 0;
+      var_3 = 0;
     }
   } else {
-    var3 = 0;
+    var_3 = 0;
   }
 
-  if(var3) {
+  if(var_3) {
     level.player thread _tablethide::ref_13d4b(self, 1, 0, 1);
   }
 
@@ -758,20 +758,20 @@ function no_jugg_early_exit() {
 
 function no_aerial_munitions() {
   scripts\engine\utility::flag_wait("trial_prestart");
-  var0 = getEntArray("enemy_mine", "targetname");
+  var_0 = getEntArray("enemy_mine", "targetname");
 
-  foreach(var2 in var0) {
-    var2 setModel("offhand_wm_at_mine");
-    var2 setCanDamage(1);
+  foreach(var_2 in var_0) {
+    var_2 setModel("offhand_wm_at_mine");
+    var_2 setCanDamage(1);
     thread ninetypercent_music();
     thread nexttrackindex();
   }
 
   scripts\engine\utility::flag_wait("trial_in_progress");
 
-  foreach(var2 in var0) {
-    if(isDefined(var2)) {
-      playFXOnTag(level.ref_11c15, var2, "j_bomb");
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2)) {
+      playFXOnTag(level.ref_11c15, var_2, "j_bomb");
     }
   }
 }
@@ -780,34 +780,34 @@ function ninetypercent_music() {
   self endon("mine_neutralized");
 
   for(;;) {
-    var0 = distance2d(self.origin, level.player.origin);
-    var1 = abs(self.origin[2] - level.player.origin[2]);
+    var_0 = distance2d(self.origin, level.player.origin);
+    var_1 = abs(self.origin[2] - level.player.origin[2]);
 
-    if(var0 < 140 && var1 < 50) {
+    if(var_0 < 140 && var_1 < 50) {
       break;
     }
 
     waitframe();
   }
 
-  var2 = self.origin + (0, 0, 55);
-  var3 = 1;
-  var4 = magicgrenademanual("at_mine_ap_mp", var2, (0, 0, 0), var3);
+  var_2 = self.origin + (0, 0, 55);
+  var_3 = 1;
+  var_4 = magicgrenademanual("at_mine_ap_mp", var_2, (0, 0, 0), var_3);
   killfxontag(level.ref_11c15, self, "j_bomb");
   playFXOnTag(level.ref_11c14, self, "tag_origin");
-  self moveTo(var2, var3 / 2, 0, var3 / 3);
-  self rotateby((0, 1080, 0), var3);
+  self moveTo(var_2, var_3 / 2, 0, var_3 / 3);
+  self rotateby((0, 1080, 0), var_3);
   self playsoundonmovingent("mine_betty_click");
-  wait var3;
+  wait var_3;
 
   if(level.player getstance() != "prone") {
-    var5 = 140 * level.player.maxhealth / 100;
-    var6 = 70 * level.player.maxhealth / 100;
-    var7 = 175;
-    radiusdamage(var2, var7, var5, var6, self, "MOD_GRENADE_SPLASH");
+    var_5 = 140 * level.player.maxhealth / 100;
+    var_6 = 70 * level.player.maxhealth / 100;
+    var_7 = 175;
+    radiusdamage(var_2, var_7, var_5, var_6, self, "MOD_GRENADE_SPLASH");
   }
 
-  playFX(level.ref_11c13, var2);
+  playFX(level.ref_11c13, var_2);
   level.player playRumbleOnEntity("damage_heavy");
   self notify("mine_explosion");
   self setModel("tag_origin");
@@ -817,7 +817,7 @@ function ninetypercent_music() {
 
 function nexttrackindex() {
   self endon("mine_explosion");
-  self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13);
+  self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
   level.player scripts\mp\damagefeedback::updatedamagefeedback("standard");
   killfxontag(level.ref_11c15, self, "j_bomb");
   playFX(level.ref_11c12, self.origin);
@@ -876,8 +876,8 @@ function hud_objectives() {
 
 function spawn_soldiers_in_convoy_truck() {
   _tablethide::trial_ui_set_objective_progress(level.ref_1453f, level.ref_1453b.size);
-  var0 = scripts\mp\utility\script::limitdecimalplaces(level.ref_13b67 / 1000, 1);
-  _tablethide::trial_ui_set_stat_and_bonus_time(1, "floor_time", level.ref_13b67, var0);
+  var_0 = scripts\mp\utility\script::limitdecimalplaces(level.ref_13b67 / 1000, 1);
+  _tablethide::trial_ui_set_stat_and_bonus_time(1, "floor_time", level.ref_13b67, var_0);
 }
 
 function spawn_spawners_multi() {
@@ -889,11 +889,11 @@ function hud_timer() {
   spawn_spawners_multi();
   level scripts\engine\utility::flag_wait("trial_in_progress");
   level.player playSound("trial_sfx_start");
-  var0 = gettime();
+  var_0 = gettime();
 
   while(!scripts\engine\utility::flag("trial_completed")) {
-    var1 = gettime() - var0;
-    level.timeelapsed = int(var1);
+    var_1 = gettime() - var_0;
+    level.timeelapsed = int(var_1);
     spawn_spawners_multi();
     wait 0.05;
   }
@@ -930,33 +930,33 @@ function hud_reward_tiers_tracking() {
   self endon("stop_timer");
   _tablethide::trial_ui_set_reward_tier_preview(3);
   self waittill("trial_in_progress");
-  var0 = [];
-  var0[0] = undefined;
+  var_0 = [];
+  var_0[0] = undefined;
   GscBinSkip0(0x2e, 1, level.trial["tier1"]);
 }
 
-function hud_fade_to_black(var0, var1) {
-  var2 = newhudelem();
-  var2.x = 0;
-  var2.y = 0;
-  var2 setshader("black", 640, 480);
-  var2.alignx = "left";
-  var2.aligny = "top";
-  var2.sort = 1;
-  var2.horzalign = "fullscreen";
-  var2.vertalign = "fullscreen";
-  var2.foreground = 0;
+function hud_fade_to_black(var_0, var_1) {
+  var_2 = newhudelem();
+  var_2.x = 0;
+  var_2.y = 0;
+  var_2 setshader("black", 640, 480);
+  var_2.alignx = "left";
+  var_2.aligny = "top";
+  var_2.sort = 1;
+  var_2.horzalign = "fullscreen";
+  var_2.vertalign = "fullscreen";
+  var_2.foreground = 0;
 
-  if(istrue(var1)) {
-    var2.alpha = 1;
-    var2 fadeovertime(var0);
-    var2.alpha = 0;
+  if(istrue(var_1)) {
+    var_2.alpha = 1;
+    var_2 fadeovertime(var_0);
+    var_2.alpha = 0;
     return;
   }
 
-  var2.alpha = 0;
-  var2 fadeovertime(var0);
-  var2.alpha = 1;
+  var_2.alpha = 0;
+  var_2 fadeovertime(var_0);
+  var_2.alpha = 1;
 }
 
 function hud_attempt_over() {
@@ -973,18 +973,18 @@ function hud_attempt_over() {
     waitframe();
   }
 
-  var0 = _tablethide::recentc4vehiclekillcount();
+  var_0 = _tablethide::recentc4vehiclekillcount();
 
   if(!scripts\engine\utility::flag("trial_player_death")) {
-    var1 = game["trial"]["best_reward"];
+    var_1 = game["trial"]["best_reward"];
 
-    if(var0 > var1) {
-      game["trial"]["best_reward"] = var0;
-      _tablethide::trial_ui_set_reward_tier(var0);
-      var2 = game["music"]["trials_win_high"].size;
-      var3 = randomint(var2);
+    if(var_0 > var_1) {
+      game["trial"]["best_reward"] = var_0;
+      _tablethide::trial_ui_set_reward_tier(var_0);
+      var_2 = game["music"]["trials_win_high"].size;
+      var_3 = randomint(var_2);
       level.player clearsoundsubmix("deaths_door_mp");
-      level.player setplayermusicstate(game["music"]["trials_win_high"][var3]);
+      level.player setplayermusicstate(game["music"]["trials_win_high"][var_3]);
     }
 
     setomnvar("ui_trial_failed", 0);
@@ -992,20 +992,20 @@ function hud_attempt_over() {
     _tablethide::trial_ui_set_reward_tier_preview(0);
     level.player playSound("trial_sfx_failure");
     setomnvar("ui_trial_failed", 1);
-    var2 = game["music"]["trials_loss"].size;
-    var3 = randomint(var2);
+    var_2 = game["music"]["trials_loss"].size;
+    var_3 = randomint(var_2);
     level.player clearsoundsubmix("deaths_door_mp");
-    level.player setplayermusicstate(game["music"]["trials_loss"][var3]);
-    var4 = 1.25;
-    thread hud_fade_to_black(var4);
-    wait var4;
+    level.player setplayermusicstate(game["music"]["trials_loss"][var_3]);
+    var_4 = 1.25;
+    thread hud_fade_to_black(var_4);
+    wait var_4;
   }
 
   setomnvar("allow_server_pause", 1);
   setomnvarforallclients("post_game_state", 0);
   level scripts\engine\utility::flag_wait("trial_ready_for_endscreen");
-  var5 = scripts\mp\utility\script::limitdecimalplaces(level.ref_13b67 / 1000, 1);
-  _tablethide::trial_ui_set_stat_and_bonus_time(1, "floor_time", level.ref_13b67, var5);
+  var_5 = scripts\mp\utility\script::limitdecimalplaces(level.ref_13b67 / 1000, 1);
+  _tablethide::trial_ui_set_stat_and_bonus_time(1, "floor_time", level.ref_13b67, var_5);
   _tablethide::trial_ui_set_stat_and_bonus_time(1, "floor_time", level.ref_13b67, level.ref_13b67);
   thread _tablethide::trial_ui_open_results_screen();
   level.player freezecontrols(1);
@@ -1013,9 +1013,9 @@ function hud_attempt_over() {
   _tablethide::trial_ui_waittill_retry();
   level.player freezecontrols(1);
   level.player freezelookcontrols(1);
-  var6 = game["trial"]["tries_remaining"];
+  var_6 = game["trial"]["tries_remaining"];
 
-  if(var6 > 0) {
+  if(var_6 > 0) {
     setDvar("t_clr_isretry", "true");
     level notify("game_cleanup");
     level notify("restarting");
@@ -1027,10 +1027,10 @@ function hud_attempt_over() {
 }
 
 function hud_besttime_update() {
-  var0 = game["trial"]["best_time"];
-  var1 = game["trial"]["best_reward"];
-  _tablethide::trial_ui_set_best_time(var0);
-  _tablethide::trial_ui_set_reward_tier(var1);
+  var_0 = game["trial"]["best_time"];
+  var_1 = game["trial"]["best_reward"];
+  _tablethide::trial_ui_set_best_time(var_0);
+  _tablethide::trial_ui_set_reward_tier(var_1);
 }
 
 function dialog_init() {
@@ -1060,28 +1060,28 @@ function dialog_init() {
 
 function lgsplittransients() {
   level endon("trial_completed");
-  var0 = 0;
-  var1 = 0;
+  var_0 = 0;
+  var_1 = 0;
 
   if(level.trial["variant"] == "free") {
-    var2 = 14;
+    var_2 = 14;
   } else {
-    var2 = 8;
+    var_2 = 8;
   }
 
   for(;;) {
-    if(level.ref_1453f == var2) {
-      var1++;
+    if(level.ref_1453f == var_2) {
+      var_1++;
     } else {
-      var1 = 0;
+      var_1 = 0;
     }
 
-    if(var1 > var2) {
+    if(var_1 > var_2) {
       level.player scripts\mp\utility\dialog::leaderdialogonplayer("fil_hurry_up");
-      var1 = 0;
+      var_1 = 0;
     }
 
-    var2 = level.ref_1453f;
+    var_2 = level.ref_1453f;
     wait 1;
   }
 }
@@ -1092,9 +1092,9 @@ function lgvadaptive() {
   for(;;) {
     level waittill("enemy_shooting");
     wait 0.5;
-    var0 = level.player getcurrentweapon();
+    var_0 = level.player getcurrentweapon();
 
-    if(var0.basename != "iw8_me_riotshield_mp") {
+    if(var_0.basename != "iw8_me_riotshield_mp") {
       level.player scripts\mp\utility\dialog::leaderdialogonplayer("fil_shield_raise");
     }
   }
@@ -1116,9 +1116,9 @@ function lgvmergesufix() {
 function light_switch() {
   level endon("enemy_shooting");
   wait 1.5;
-  var0 = level.player getcurrentweapon();
+  var_0 = level.player getcurrentweapon();
 
-  if(var0.basename == "iw8_me_riotshield_mp") {
+  if(var_0.basename == "iw8_me_riotshield_mp") {
     level.player scripts\mp\utility\dialog::leaderdialogonplayer("fil_shield_stow");
     return;
   }
@@ -1126,22 +1126,22 @@ function light_switch() {
 
 function lgwperifvfx_explosions() {
   level endon("trial_completed");
-  var0 = undefined;
-  var1 = level.player getweaponslistall();
+  var_0 = undefined;
+  var_1 = level.player getweaponslistall();
 
-  foreach(var3 in var1) {
-    if(var3.basename == "iw8_me_riotshield_mp") {
-      var0 = var3;
+  foreach(var_3 in var_1) {
+    if(var_3.basename == "iw8_me_riotshield_mp") {
+      var_0 = var_3;
     }
   }
 
-  if(isDefined(var0)) {
+  if(isDefined(var_0)) {
     while(!scripts\engine\utility::flag("trial_completed")) {
       level.player waittill("shield_blocked");
       wait 0.3;
-      var5 = level.player getcurrentweapon();
+      var_5 = level.player getcurrentweapon();
 
-      if(var5.basename == "iw8_me_riotshield_mp") {
+      if(var_5.basename == "iw8_me_riotshield_mp") {
         level.player scripts\mp\utility\dialog::leaderdialogonplayer("fil_wait_enemy_reload");
         wait 41;
       }
@@ -1172,9 +1172,9 @@ function build_vehicle_drop_off_list() {
 }
 
 function ref_13d36() {
-  var0 = level.trial["missionID"];
-  var1 = getomnvar("ui_trial_reward_tier");
-  var2 = getomnvar("ui_trial_best_time");
-  var3 = int(game["trial"]["analytics"]["best_floortime"]);
-  level.player dlog_recordplayerevent("dlog_event_trial_complete_lava", ["id", var0, "tier", var1, "time", var2, "floortime", var3]);
+  var_0 = level.trial["missionID"];
+  var_1 = getomnvar("ui_trial_reward_tier");
+  var_2 = getomnvar("ui_trial_best_time");
+  var_3 = int(game["trial"]["analytics"]["best_floortime"]);
+  level.player dlog_recordplayerevent("dlog_event_trial_complete_lava", ["id", var_0, "tier", var_1, "time", var_2, "floortime", var_3]);
 }

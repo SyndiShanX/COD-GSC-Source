@@ -8,12 +8,12 @@ function init_glass() {
 }
 
 function window_destroy() {
-  var0 = getglass(self.target);
+  var_0 = getglass(self.target);
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  level waittillmatch("glass_destroyed", var0);
+  level waittillmatch("glass_destroyed", var_0);
   self delete();
 }

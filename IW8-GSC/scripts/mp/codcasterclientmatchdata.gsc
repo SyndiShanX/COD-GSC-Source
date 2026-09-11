@@ -7,104 +7,104 @@ function shouldlogcodcasterclientmatchdata() {
   return level.codcasterenabled;
 }
 
-function canlogclient(var0) {
-  if(isagent(var0)) {
+function canlogclient(var_0) {
+  if(isagent(var_0)) {
     return false;
   }
 
-  return var0.clientid < level.maxlogclients;
+  return var_0.clientid < level.maxlogclients;
 }
 
-function createcodcastermatchdataforplayer(var0) {
-  var1 = [];
+function createcodcastermatchdataforplayer(var_0) {
+  var_1 = [];
 
-  foreach(var3 in level.codcastermatchdata.playerfields) {
-    var1 = var3[1];
+  foreach(var_3 in level.codcastermatchdata.playerfields) {
+    var_1 = var_3[1];
   }
 
-  return var1;
+  return var_1;
 }
 
-function removeplayerdataafterleavinggame(var0) {
+function removeplayerdataafterleavinggame(var_0) {
   level endon("game_ended");
-  var0 waittill("disconnect");
+  var_0 waittill("disconnect");
 
-  if(!isDefined(level.codcastermatchdata.players[var0.clientid])) {
+  if(!isDefined(level.codcastermatchdata.players[var_0.clientid])) {
     return;
   }
 
-  level.codcastermatchdata.players[var0.clientid] = undefined;
+  level.codcastermatchdata.players[var_0.clientid] = undefined;
 }
 
-function checkcodcasterplayerdataexists(var0) {
-  if(!isDefined(level.codcastermatchdata.players[var0.clientid])) {
-    var1 = createcodcastermatchdataforplayer(var0);
-    level.codcastermatchdata.players[var0.clientid] = var1;
-    thread removeplayerdataafterleavinggame(var0);
+function checkcodcasterplayerdataexists(var_0) {
+  if(!isDefined(level.codcastermatchdata.players[var_0.clientid])) {
+    var_1 = createcodcastermatchdataforplayer(var_0);
+    level.codcastermatchdata.players[var_0.clientid] = var_1;
+    thread removeplayerdataafterleavinggame(var_0);
     return;
   }
 }
 
 function init() {
   setcodcasterclientmatchdata("map", level.script);
-  var0 = spawnStruct();
-  var0.playerfields = [["damageDone", 0], ["longestKillstreak", 0], ["shutdowns", 0], ["gametypePoints", 0]];
-  var0.players = [];
-  level.codcastermatchdata = var0;
+  var_0 = spawnStruct();
+  var_0.playerfields = [["damageDone", 0], ["longestKillstreak", 0], ["shutdowns", 0], ["gametypePoints", 0]];
+  var_0.players = [];
+  level.codcastermatchdata = var_0;
 }
 
-function setddlfieldsforplayer(var0) {
-  foreach(var2 in level.codcastermatchdata.playerfields) {
-    setcodcasterclientmatchdata("players", var0.codcastermatchdataid, var2[0], level.codcastermatchdata.players[var0.clientid][var2[0]]);
+function setddlfieldsforplayer(var_0) {
+  foreach(var_2 in level.codcastermatchdata.playerfields) {
+    setcodcasterclientmatchdata("players", var_0.codcastermatchdataid, var_2[0], level.codcastermatchdata.players[var_0.clientid][var_2[0]]);
   }
 
-  setcodcasterclientmatchdata("players", var0.codcastermatchdataid, "username", var0.name);
+  setcodcasterclientmatchdata("players", var_0.codcastermatchdataid, "username", var_0.name);
 }
 
 function sendcodcastermatchdata() {
-  var0 = 0;
+  var_0 = 0;
 
-  foreach(var2 in level.players) {
-    checkcodcasterplayerdataexists(var2);
-    var2.codcastermatchdataid = var0;
-    setddlfieldsforplayer(var2);
-    var0++;
+  foreach(var_2 in level.players) {
+    checkcodcasterplayerdataexists(var_2);
+    var_2.codcastermatchdataid = var_0;
+    setddlfieldsforplayer(var_2);
+    var_0++;
   }
 
   sendcodcasterclientmatchdata();
 }
 
-function setcodcasterplayervalue(var0, var1, var2) {
-  if(!canlogclient(var0)) {
+function setcodcasterplayervalue(var_0, var_1, var_2) {
+  if(!canlogclient(var_0)) {
     return;
   }
 
-  checkcodcasterplayerdataexists(var0);
-  var3 = level.codcastermatchdata.players[var0.clientid];
+  checkcodcasterplayerdataexists(var_0);
+  var_3 = level.codcastermatchdata.players[var_0.clientid];
 
-  if(!isDefined(var3) || !isDefined(var3[var1])) {
+  if(!isDefined(var_3) || !isDefined(var_3[var_1])) {
     return;
   }
 
-  level.codcastermatchdata.players[var0.clientid][var1] = var2;
+  level.codcastermatchdata.players[var_0.clientid][var_1] = var_2;
 
-  if(var1 == "damageDone") {
-    var0 getplayergpadenabled(var2);
+  if(var_1 == "damageDone") {
+    var_0 getplayergpadenabled(var_2);
     return;
   }
 }
 
-function getcodcasterplayervalue(var0, var1) {
-  if(!canlogclient(var0)) {
+function getcodcasterplayervalue(var_0, var_1) {
+  if(!canlogclient(var_0)) {
     return 0;
   }
 
-  checkcodcasterplayerdataexists(var0);
-  var2 = level.codcastermatchdata.players[var0.clientid];
+  checkcodcasterplayerdataexists(var_0);
+  var_2 = level.codcastermatchdata.players[var_0.clientid];
 
-  if(!isDefined(var2) || !isDefined(var2[var1])) {
+  if(!isDefined(var_2) || !isDefined(var_2[var_1])) {
     return 0;
   }
 
-  return var2[var1];
+  return var_2[var_1];
 }

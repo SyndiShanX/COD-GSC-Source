@@ -9,314 +9,314 @@ function init() {
   level.activeheadicons = [];
 }
 
-function setheadicon_singleimage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10) {
+function setheadicon_singleimage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   level endon("game_ended");
 
-  if(isDefined(var6)) {
-    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var6);
+  if(isDefined(var_6)) {
+    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_6);
   }
 
   if(!isDefined(self)) {
     return;
   }
 
-  var11 = setheadicon_createnewicon(undefined, var9);
-  setheadiconfriendlyimage(var11, var1);
+  var_11 = setheadicon_createnewicon(undefined, var_9);
+  setheadiconfriendlyimage(var_11, var_1);
 
-  if(!isDefined(var2)) {
-    var2 = 30;
+  if(!isDefined(var_2)) {
+    var_2 = 30;
   }
 
-  addclienttoheadiconmask(var11, var2);
+  addclienttoheadiconmask(var_11, var_2);
 
-  if(!isDefined(var3)) {
-    var3 = 0;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  setheadiconzoffset(var11, var3);
+  setheadiconzoffset(var_11, var_3);
 
-  if(!isDefined(var4)) {
-    var4 = 0;
+  if(!isDefined(var_4)) {
+    var_4 = 0;
   }
 
-  setheadiconsnaptoedges(var11, var4);
+  setheadiconsnaptoedges(var_11, var_4);
 
-  if(!isDefined(var5)) {
-    var5 = 0;
+  if(!isDefined(var_5)) {
+    var_5 = 0;
   }
 
-  setheadiconmaxdistance(var11, var5);
+  setheadiconmaxdistance(var_11, var_5);
 
-  if(isarray(var0)) {
-    foreach(var13 in var0) {
-      if(isPlayer(var13)) {
-        addteamtoheadiconmask(var11, var13);
+  if(isarray(var_0)) {
+    foreach(var_13 in var_0) {
+      if(isPlayer(var_13)) {
+        addteamtoheadiconmask(var_11, var_13);
         continue;
       }
 
-      if(isDefined(var13) && isteam(var13)) {
-        removeclientfromheadiconmask(var11, var13);
+      if(isDefined(var_13) && isteam(var_13)) {
+        removeclientfromheadiconmask(var_11, var_13);
       }
     }
-  } else if(isPlayer(var0)) {
-    addteamtoheadiconmask(var11, var0);
-  } else if(isDefined(var0) && isteam(var0)) {
-    removeclientfromheadiconmask(var11, var0);
+  } else if(isPlayer(var_0)) {
+    addteamtoheadiconmask(var_11, var_0);
+  } else if(isDefined(var_0) && isteam(var_0)) {
+    removeclientfromheadiconmask(var_11, var_0);
   }
 
-  if(!istrue(var7)) {
-    thread setheadicon_watchdeath(var11);
+  if(!istrue(var_7)) {
+    thread setheadicon_watchdeath(var_11);
   }
 
-  if(istrue(var8)) {
-    setheadicondrawthroughgeo(var11, 1);
+  if(istrue(var_8)) {
+    setheadicondrawthroughgeo(var_11, 1);
   }
 
-  if(istrue(var10)) {
-    objective_sethideelevation(var11, 1);
+  if(istrue(var_10)) {
+    objective_sethideelevation(var_11, 1);
   }
 
-  return var11;
+  return var_11;
 }
 
-function setheadicon_multiimage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12) {
+function setheadicon_multiimage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
   level endon("game_ended");
 
-  if(isDefined(var8)) {
-    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var8);
+  if(isDefined(var_8)) {
+    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_8);
   }
 
   if(!isDefined(self)) {
     return;
   }
 
-  var13 = setheadicon_createnewicon(undefined, var11);
+  var_13 = setheadicon_createnewicon(undefined, var_11);
 
-  if(isDefined(var1)) {
-    setheadiconenemyimage(var13, var1);
+  if(isDefined(var_1)) {
+    setheadiconenemyimage(var_13, var_1);
   }
 
-  if(isDefined(var2)) {
-    setheadiconnaturaldistance(var13, var2);
+  if(isDefined(var_2)) {
+    setheadiconnaturaldistance(var_13, var_2);
   }
 
-  if(isDefined(var3)) {
-    setheadiconneutralimage(var13, var3);
+  if(isDefined(var_3)) {
+    setheadiconneutralimage(var_13, var_3);
   }
 
   if(!isPlayer(self)) {
     if(!isDefined(self.owner) && !isDefined(self.team)) {
-      setheadicon_deleteicon(var13);
+      setheadicon_deleteicon(var_13);
       return;
     }
 
     if(isDefined(self.owner)) {
-      createtargetmarkergroup(var13, self.owner);
+      createtargetmarkergroup(var_13, self.owner);
     }
 
     if(level.teambased && isDefined(self.team)) {
-      setheadiconowner(var13, self.team);
+      setheadiconowner(var_13, self.team);
     }
   }
 
-  if(!isDefined(var4)) {
-    var4 = 30;
+  if(!isDefined(var_4)) {
+    var_4 = 30;
   }
 
-  addclienttoheadiconmask(var13, var4);
+  addclienttoheadiconmask(var_13, var_4);
 
-  if(!isDefined(var5)) {
-    var5 = 0;
+  if(!isDefined(var_5)) {
+    var_5 = 0;
   }
 
-  setheadiconzoffset(var13, var5);
+  setheadiconzoffset(var_13, var_5);
 
-  if(!isDefined(var6)) {
-    var6 = 0;
+  if(!isDefined(var_6)) {
+    var_6 = 0;
   }
 
-  setheadiconsnaptoedges(var13, var6);
+  setheadiconsnaptoedges(var_13, var_6);
 
-  if(!isDefined(var7)) {
-    var7 = 0;
+  if(!isDefined(var_7)) {
+    var_7 = 0;
   }
 
-  setheadiconmaxdistance(var13, var7);
+  setheadiconmaxdistance(var_13, var_7);
 
-  if(isarray(var0)) {
-    foreach(var15 in var0) {
-      if(isPlayer(var15)) {
-        addteamtoheadiconmask(var13, var15);
+  if(isarray(var_0)) {
+    foreach(var_15 in var_0) {
+      if(isPlayer(var_15)) {
+        addteamtoheadiconmask(var_13, var_15);
         continue;
       }
 
-      if(isDefined(var15) && isteam(var15)) {
-        removeclientfromheadiconmask(var13, var15);
+      if(isDefined(var_15) && isteam(var_15)) {
+        removeclientfromheadiconmask(var_13, var_15);
       }
     }
-  } else if(isPlayer(var0)) {
-    addteamtoheadiconmask(var13, var0);
-  } else if(isDefined(var0) && isteam(var0)) {
-    removeclientfromheadiconmask(var13, var0);
+  } else if(isPlayer(var_0)) {
+    addteamtoheadiconmask(var_13, var_0);
+  } else if(isDefined(var_0) && isteam(var_0)) {
+    removeclientfromheadiconmask(var_13, var_0);
   }
 
-  if(!istrue(var9)) {
-    thread setheadicon_watchdeath(var13);
+  if(!istrue(var_9)) {
+    thread setheadicon_watchdeath(var_13);
   }
 
-  if(istrue(var10)) {
-    setheadicondrawthroughgeo(var13, 1);
+  if(istrue(var_10)) {
+    setheadicondrawthroughgeo(var_13, 1);
   }
 
-  if(istrue(var12)) {
-    objective_sethideelevation(var13, 1);
+  if(istrue(var_12)) {
+    objective_sethideelevation(var_13, 1);
   }
 
-  return var13;
+  return var_13;
 }
 
-function setheadicon_factionimage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
+function setheadicon_factionimage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(scripts\cp_mp\utility\game_utility::isrealismenabled()) {
     return;
   }
 
   level endon("game_ended");
 
-  if(isDefined(var5)) {
-    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var5);
+  if(isDefined(var_5)) {
+    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_5);
   }
 
   if(!isDefined(self)) {
     return;
   }
 
-  var10 = setheadicon_createnewicon(undefined, var8);
-  var11 = spawnStruct();
-  var11.icon = var10;
-  var11.entowner = self.owner;
-  var11.showtoallfactions = var0;
-  var11.ownerinvisible = var7;
+  var_10 = setheadicon_createnewicon(undefined, var_8);
+  var_11 = spawnStruct();
+  var_11.icon = var_10;
+  var_11.entowner = self.owner;
+  var_11.showtoallfactions = var_0;
+  var_11.ownerinvisible = var_7;
 
-  if(!isDefined(var1)) {
-    var1 = 30;
+  if(!isDefined(var_1)) {
+    var_1 = 30;
   }
 
-  addclienttoheadiconmask(var11.icon, var1);
+  addclienttoheadiconmask(var_11.icon, var_1);
 
-  if(!isDefined(var2)) {
-    var2 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  setheadiconzoffset(var11.icon, var2);
+  setheadiconzoffset(var_11.icon, var_2);
 
-  if(!isDefined(var3)) {
-    var3 = 768;
+  if(!isDefined(var_3)) {
+    var_3 = 768;
   }
 
-  setheadiconsnaptoedges(var11.icon, var3);
+  setheadiconsnaptoedges(var_11.icon, var_3);
 
-  if(!isDefined(var4)) {
-    var4 = 0;
+  if(!isDefined(var_4)) {
+    var_4 = 0;
   }
 
-  setheadiconmaxdistance(var11.icon, var4);
+  setheadiconmaxdistance(var_11.icon, var_4);
 
-  if(!istrue(var6)) {
-    thread setheadicon_watchdeath(var11.icon);
+  if(!istrue(var_6)) {
+    thread setheadicon_watchdeath(var_11.icon);
   }
 
-  if(istrue(var9)) {
-    objective_sethideelevation(var10, 1);
+  if(istrue(var_9)) {
+    objective_sethideelevation(var_10, 1);
   }
 
-  _updateiconowner(var11);
-  thread setheadicon_watchfornewowner(var11);
-  var12 = getdvarint("scr_headIcon_teamSwitch", 1);
+  _updateiconowner(var_11);
+  thread setheadicon_watchfornewowner(var_11);
+  var_12 = getdvarint("scr_headIcon_teamSwitch", 1);
 
-  if(var12) {
-    thread setheadicon_watchforteamswitch(var11);
+  if(var_12) {
+    thread setheadicon_watchforteamswitch(var_11);
   }
 
-  return var11.icon;
+  return var_11.icon;
 }
 
-function _updateiconowner(var0) {
+function _updateiconowner(var_0) {
   self notify("_updateIconOwner()");
 
-  if(istrue(var0.showtoallfactions)) {
-    setheadiconenemyimage(var0.icon, level.factionfriendlyheadicon);
-    setheadiconnaturaldistance(var0.icon, level.factionenemyheadicon);
-    setheadiconneutralimage(var0.icon, level.factionenemyheadicon);
+  if(istrue(var_0.showtoallfactions)) {
+    setheadiconenemyimage(var_0.icon, level.factionfriendlyheadicon);
+    setheadiconnaturaldistance(var_0.icon, level.factionenemyheadicon);
+    setheadiconneutralimage(var_0.icon, level.factionenemyheadicon);
 
     if(!isPlayer(self)) {
       if(!isDefined(self.owner) && !isDefined(self.team)) {
-        setheadicon_deleteicon(var0.icon);
+        setheadicon_deleteicon(var_0.icon);
         return;
       }
 
       if(isDefined(self.owner)) {
-        createtargetmarkergroup(var0.icon, self.owner);
+        createtargetmarkergroup(var_0.icon, self.owner);
       }
 
       if(level.teambased && isDefined(self.team)) {
-        setheadiconowner(var0.icon, self.team);
+        setheadiconowner(var_0.icon, self.team);
       }
     }
   } else {
-    var1 = level.factionfriendlyheadicon;
-    setheadiconfriendlyimage(var0.icon, var1);
+    var_1 = level.factionfriendlyheadicon;
+    setheadiconfriendlyimage(var_0.icon, var_1);
   }
 
-  foreach(var4, var3 in level.players) {
-    removeteamfromheadiconmask(var0.icon, var3);
+  foreach(var_4, var_3 in level.players) {
+    removeteamfromheadiconmask(var_0.icon, var_3);
   }
 
-  if(istrue(var0.showtoallfactions)) {
-    foreach(var3 in level.players) {
-      if(!isDefined(var3)) {
+  if(istrue(var_0.showtoallfactions)) {
+    foreach(var_3 in level.players) {
+      if(!isDefined(var_3)) {
         continue;
       }
 
-      addteamtoheadiconmask(var0.icon, var3);
+      addteamtoheadiconmask(var_0.icon, var_3);
     }
 
-    thread setheadicon_watchforlateconnect(var0.icon);
+    thread setheadicon_watchforlateconnect(var_0.icon);
     return;
   }
 
   if(!isDefined(self.owner) && !isDefined(self.team)) {
-    setheadicon_deleteicon(var0.icon);
+    setheadicon_deleteicon(var_0.icon);
     return;
   }
 
   if(isDefined(self.owner)) {
-    var7 = self.owner.team;
+    var_7 = self.owner.team;
   } else {
-    var7 = self.team;
+    var_7 = self.team;
   }
 
-  foreach(var4 in level.players) {
-    if(!isDefined(var4)) {
+  foreach(var_4 in level.players) {
+    if(!isDefined(var_4)) {
       continue;
     }
 
-    if(level.teambased && var4.team != var7) {
+    if(level.teambased && var_4.team != var_7) {
       continue;
     }
 
-    if(isDefined(self.owner) && !level.teambased && var4 != self.owner) {
+    if(isDefined(self.owner) && !level.teambased && var_4 != self.owner) {
       continue;
     }
 
-    if(isDefined(self.owner) && istrue(var2.ownerinvisible) && var4 == self.owner) {
+    if(isDefined(self.owner) && istrue(var_2.ownerinvisible) && var_4 == self.owner) {
       continue;
     }
 
-    addteamtoheadiconmask(var2.icon, var4);
+    addteamtoheadiconmask(var_2.icon, var_4);
   }
 }
 
-function setheadicon_watchforlateconnect(var0) {
+function setheadicon_watchforlateconnect(var_0) {
   self endon("death");
   self endon("_updateIconOwner()");
 
@@ -327,12 +327,12 @@ function setheadicon_watchforlateconnect(var0) {
   level endon("game_ended");
 
   for(;;) {
-    level waittill("connected", var1);
-    thread setheadicon_watchforlatespawn(var0, var1);
+    level waittill("connected", var_1);
+    thread setheadicon_watchforlatespawn(var_0, var_1);
   }
 }
 
-function setheadicon_watchforlatespawn(var0, var1) {
+function setheadicon_watchforlatespawn(var_0, var_1) {
   self endon("death");
   self endon("_updateIconOwner()");
 
@@ -343,12 +343,12 @@ function setheadicon_watchforlatespawn(var0, var1) {
   level endon("game_ended");
 
   for(;;) {
-    var1 waittill("spawned_player");
-    addteamtoheadiconmask(var0, var1);
+    var_1 waittill("spawned_player");
+    addteamtoheadiconmask(var_0, var_1);
   }
 }
 
-function setheadicon_watchfornewowner(var0) {
+function setheadicon_watchfornewowner(var_0) {
   self endon("death");
 
   if(isPlayer(self)) {
@@ -358,62 +358,62 @@ function setheadicon_watchfornewowner(var0) {
   level endon("game_ended");
 
   for(;;) {
-    if(var0.entowner != self.owner) {
-      var0.entowner = self.owner;
-      _updateiconowner(var0);
+    if(var_0.entowner != self.owner) {
+      var_0.entowner = self.owner;
+      _updateiconowner(var_0);
     }
 
     wait 0.1;
   }
 }
 
-function setheadicon_watchforteamswitch(var0) {
+function setheadicon_watchforteamswitch(var_0) {
   level endon("game_ended");
   self endon("headicon_deleted");
   self endon("death");
 
   for(;;) {
-    level waittill("add_to_team", var1);
-    removeteamfromheadiconmask(var0.icon, var1);
+    level waittill("add_to_team", var_1);
+    removeteamfromheadiconmask(var_0.icon, var_1);
 
-    if(istrue(var0.showtoallfactions)) {
-      addteamtoheadiconmask(var0.icon, var1);
+    if(istrue(var_0.showtoallfactions)) {
+      addteamtoheadiconmask(var_0.icon, var_1);
       continue;
     }
 
     if(!isDefined(self.owner) && !isDefined(self.team)) {
-      setheadicon_deleteicon(var0.icon);
+      setheadicon_deleteicon(var_0.icon);
       return;
     }
 
     if(isDefined(self.owner)) {
-      var2 = self.owner.team;
+      var_2 = self.owner.team;
     } else {
-      var2 = self.team;
+      var_2 = self.team;
     }
 
-    if(var1.team != var2) {
+    if(var_1.team != var_2) {
       continue;
     }
 
-    addteamtoheadiconmask(var0.icon, var1);
+    addteamtoheadiconmask(var_0.icon, var_1);
   }
 }
 
-function setheadicon_watchdeath(var0) {
+function setheadicon_watchdeath(var_0) {
   level endon("game_ended");
   self endon("headicon_deleted");
   self waittill("death_or_disconnect");
-  setheadicon_deleteicon(var0);
+  setheadicon_deleteicon(var_0);
 }
 
-function isteam(var0) {
-  if(var0 == "spectator" || var0 == "follower") {
+function isteam(var_0) {
+  if(var_0 == "spectator" || var_0 == "follower") {
     return true;
   }
 
-  foreach(var2 in level.teamnamelist) {
-    if(var0 == var2) {
+  foreach(var_2 in level.teamnamelist) {
+    if(var_0 == var_2) {
       return true;
     }
   }
@@ -421,46 +421,46 @@ function isteam(var0) {
   return false;
 }
 
-function setheadicon_createnewicon(var0, var1) {
-  if(!isDefined(var0)) {
-    var0 = 0;
+function setheadicon_createnewicon(var_0, var_1) {
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
   if(!setheadicon_allowiconcreation()) {
-    setheadicon_removeoldicon(var0);
+    setheadicon_removeoldicon(var_0);
   }
 
-  var2 = undefined;
+  var_2 = undefined;
 
-  if(isDefined(var1)) {
-    var2 = setheadicondrawinmap(var1);
+  if(isDefined(var_1)) {
+    var_2 = setheadicondrawinmap(var_1);
   } else {
-    var2 = deleteheadicon(self);
+    var_2 = deleteheadicon(self);
   }
 
-  if(!isDefined(var2) || var2 < 0) {
+  if(!isDefined(var_2) || var_2 < 0) {
     return;
   }
 
-  var4 = spawnStruct();
-  var4.icon = var2;
-  var4.entmarked = self;
-  var4.prioritygroup = var0;
-  var4.timecreated = gettime();
-  level.activeheadicons[var4.icon] = var4;
-  return var4.icon;
+  var_4 = spawnStruct();
+  var_4.icon = var_2;
+  var_4.entmarked = self;
+  var_4.prioritygroup = var_0;
+  var_4.timecreated = gettime();
+  level.activeheadicons[var_4.icon] = var_4;
+  return var_4.icon;
 }
 
-function setheadicon_deleteicon(var0) {
-  var1 = setheadicon_getexistingiconinfo(var0);
+function setheadicon_deleteicon(var_0) {
+  var_1 = setheadicon_getexistingiconinfo(var_0);
 
-  if(isDefined(var1)) {
-    if(isDefined(var1.entmarked)) {
-      var1.entmarked notify("headicon_deleted");
+  if(isDefined(var_1)) {
+    if(isDefined(var_1.entmarked)) {
+      var_1.entmarked notify("headicon_deleted");
     }
 
-    setheadiconimage(var1.icon);
-    level.activeheadicons[var1.icon] = undefined;
+    setheadiconimage(var_1.icon);
+    level.activeheadicons[var_1.icon] = undefined;
     return;
   }
 }
@@ -469,64 +469,64 @@ function setheadicon_allowiconcreation() {
   return level.activeheadicons.size < 1023;
 }
 
-function setheadicon_getexistingiconinfo(var0) {
-  if(!isDefined(var0)) {
+function setheadicon_getexistingiconinfo(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!isDefined(level.activeheadicons[var0])) {
+  if(!isDefined(level.activeheadicons[var_0])) {
     return;
   }
 
-  return level.activeheadicons[var0];
+  return level.activeheadicons[var_0];
 }
 
-function setheadicon_removeoldicon(var0) {
-  var1 = setheadicon_findlowestprioritygroup(var0);
-  var2 = setheadicon_findoldestcreatedicon(var1);
-  setheadicon_deleteicon(var2);
+function setheadicon_removeoldicon(var_0) {
+  var_1 = setheadicon_findlowestprioritygroup(var_0);
+  var_2 = setheadicon_findoldestcreatedicon(var_1);
+  setheadicon_deleteicon(var_2);
 }
 
-function setheadicon_findlowestprioritygroup(var0) {
-  var1 = var0;
+function setheadicon_findlowestprioritygroup(var_0) {
+  var_1 = var_0;
 
-  foreach(var3 in level.activeheadicons) {
-    if(var1 > var3.prioritygroup) {
-      var1 = var3.prioritygroup;
+  foreach(var_3 in level.activeheadicons) {
+    if(var_1 > var_3.prioritygroup) {
+      var_1 = var_3.prioritygroup;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function setheadicon_findoldestcreatedicon(var0) {
-  var1 = undefined;
-  var2 = undefined;
+function setheadicon_findoldestcreatedicon(var_0) {
+  var_1 = undefined;
+  var_2 = undefined;
 
-  foreach(var4 in level.activeheadicons) {
-    if(!isDefined(var1) && !isDefined(var2) || var1.timecreated > var4.timecreated) {
-      var1 = var4;
-      var2 = var4.icon;
+  foreach(var_4 in level.activeheadicons) {
+    if(!isDefined(var_1) && !isDefined(var_2) || var_1.timecreated > var_4.timecreated) {
+      var_1 = var_4;
+      var_2 = var_4.icon;
     }
   }
 
-  return var2;
+  return var_2;
 }
 
-function ref_1315d(var0, var1) {
-  var2 = setheadicon_getexistingiconinfo(var0);
+function ref_1315d(var_0, var_1) {
+  var_2 = setheadicon_getexistingiconinfo(var_0);
 
-  if(isDefined(var2)) {
-    addteamtoheadiconmask(var0, var1);
+  if(isDefined(var_2)) {
+    addteamtoheadiconmask(var_0, var_1);
     return;
   }
 }
 
-function ref_1315e(var0, var1) {
-  var2 = setheadicon_getexistingiconinfo(var0);
+function ref_1315e(var_0, var_1) {
+  var_2 = setheadicon_getexistingiconinfo(var_0);
 
-  if(isDefined(var2)) {
-    removeteamfromheadiconmask(var0, var1);
+  if(isDefined(var_2)) {
+    removeteamfromheadiconmask(var_0, var_1);
     return;
   }
 }

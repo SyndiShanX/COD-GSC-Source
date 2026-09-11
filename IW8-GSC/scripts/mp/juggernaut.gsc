@@ -8,31 +8,31 @@ function init() {
   level.ref_11b5f = getdvarint("scr_ks_jugg_team_max", 0);
 }
 
-function jugg_makejuggernaut(var0, var1) {
-  var2 = vehicle_damage_setweaponhitdamagedata(var0);
+function jugg_makejuggernaut(var_0, var_1) {
+  var_2 = vehicle_damage_setweaponhitdamagedata(var_0);
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     scripts\mp\hud_message::showerrormessage("KILLSTREAKS/JUGG_CANNOT_BECOME");
     return false;
   }
 
-  var3 = var2 != self getstance();
+  var_3 = var_2 != self getstance();
   self.isjuggernaut = 1;
   scripts\mp\battlechatter_mp::disablebattlechatter(self);
   scripts\mp\equipment\gas_grenade::gas_updateplayereffects();
-  var4 = spawnStruct();
-  var4.juggconfig = var0;
-  var4.prevhealth = self.health;
-  var4.prevmaxhealth = self.maxhealth;
-  var4.prevbody = self getcustomizationbody();
-  var4.prevhead = self getcustomizationhead();
-  var4.prevviewmodel = self getcustomizationviewmodel();
-  var4.prevspeedscale = self.playerstreakspeedscale;
-  var4.prevsuit = self.suit;
-  var4.prevclothtype = self.clothtype;
-  var4.maskomnvar = "ui_gas_mask_juggernaut";
-  self.maxhealth = var0.maxhealth;
-  self.health = var0.startinghealth;
+  var_4 = spawnStruct();
+  var_4.juggconfig = var_0;
+  var_4.prevhealth = self.health;
+  var_4.prevmaxhealth = self.maxhealth;
+  var_4.prevbody = self getcustomizationbody();
+  var_4.prevhead = self getcustomizationhead();
+  var_4.prevviewmodel = self getcustomizationviewmodel();
+  var_4.prevspeedscale = self.playerstreakspeedscale;
+  var_4.prevsuit = self.suit;
+  var_4.prevclothtype = self.clothtype;
+  var_4.maskomnvar = "ui_gas_mask_juggernaut";
+  self.maxhealth = var_0.maxhealth;
+  self.health = var_0.startinghealth;
   scripts\mp\weapons::savetogglescopestates();
   scripts\mp\weapons::savealtstates();
 
@@ -40,20 +40,20 @@ function jugg_makejuggernaut(var0, var1) {
     self[[level.headiconbox]]();
   }
 
-  if(isDefined(var0.classstruct)) {
-    var5 = scripts\mp\class::respawnitems_saveplayeritemstostruct();
-    var4.respawnitems = var5;
-    var4.prevclass = self.lastclass;
-    var4.prevclassstruct = self.classstruct;
-    scripts\mp\class::loadout_updateclass(var0.classstruct, "juggernaut");
-    scripts\mp\class::preloadandqueueclassstruct(var0.classstruct, 1, 1);
+  if(isDefined(var_0.classstruct)) {
+    var_5 = scripts\mp\class::respawnitems_saveplayeritemstostruct();
+    var_4.respawnitems = var_5;
+    var_4.prevclass = self.lastclass;
+    var_4.prevclassstruct = self.classstruct;
+    scripts\mp\class::loadout_updateclass(var_0.classstruct, "juggernaut");
+    scripts\mp\class::preloadandqueueclassstruct(var_0.classstruct, 1, 1);
     scripts\mp\class::giveloadout(self.team, "juggernaut", 0, 1);
   }
 
   self.lastdroppableweaponobj = undefined;
 
-  foreach(var7 in var0.perks) {
-    scripts\mp\utility\perk::giveperk(var8);
+  foreach(var_7 in var_0.perks) {
+    scripts\mp\utility\perk::giveperk(var_8);
   }
 
   if(istrue(self.ref_12346)) {
@@ -61,33 +61,33 @@ function jugg_makejuggernaut(var0, var1) {
     self.ref_12346 = undefined;
   }
 
-  jugg_toggleallows(var0.allows, 0);
+  jugg_toggleallows(var_0.allows, 0);
   self skydive_setbasejumpingstatus(0);
   scripts\cp_mp\killstreaks\white_phosphorus::enableloopingcoughaudiosupression();
   jugg_setModel();
-  self.playerstreakspeedscale = var0.movespeedscalar;
+  self.playerstreakspeedscale = var_0.movespeedscalar;
   scripts\mp\weapons::updatemovespeedscale();
-  scripts\mp\utility\player::_setsuit(var0.suit);
-  self setclothtype(var0.clothtype);
-  jugg_enableoverlay(var4);
-  self.juggcontext = var4;
+  scripts\mp\utility\player::_setsuit(var_0.suit);
+  self setclothtype(var_0.clothtype);
+  jugg_enableoverlay(var_4);
+  self.juggcontext = var_4;
 
-  if(var0.infiniteammo) {
-    thread scripts\mp\utility\weapon::infiniteammothread(var0.infiniteammoupdaterate);
+  if(var_0.infiniteammo) {
+    thread scripts\mp\utility\weapon::infiniteammothread(var_0.infiniteammoupdaterate);
   } else {
-    var9 = self getweaponslistexclusives();
+    var_9 = self getweaponslistexclusives();
 
-    foreach(var11 in var9) {
-      self setweaponammoclip(var11, weaponclipsize(var11));
+    foreach(var_11 in var_9) {
+      self setweaponammoclip(var_11, weaponclipsize(var_11));
 
       if(vehicle_damage_registervisualpercentcallback()) {
-        self givemaxammo(var11);
-        thread vehicle_damage_updatestatemaxhealthvalues(var11);
+        self givemaxammo(var_11);
+        thread vehicle_damage_updatestatemaxhealthvalues(var_11);
       }
     }
   }
 
-  self.streakinfo = var1;
+  self.streakinfo = var_1;
   self notify("juggernaut_start");
   thread scripts\mp\gameobjects::onjuggernaut();
   thread vehicle_getturretbyweapon();
@@ -107,8 +107,8 @@ function jugg_makejuggernaut(var0, var1) {
     self[[level.battle_tracks_standingonvehicletimeout]]();
   }
 
-  if(var3) {
-    self setstance(var2);
+  if(var_3) {
+    self setstance(var_2);
   }
 
   scripts\mp\healthoverlay::onexitdeathsdoor(1);
@@ -120,36 +120,36 @@ function jugg_removejuggernaut() {
   self endon("disconnect");
   level endon("game_ended");
   self notify("juggernaut_end");
-  var0 = self.juggcontext;
-  var1 = var0.juggconfig;
+  var_0 = self.juggcontext;
+  var_1 = var_0.juggconfig;
   self.musicplaying = undefined;
-  jugg_disableoverlay(var0);
-  jugg_toggleallows(var1.allows, 1);
+  jugg_disableoverlay(var_0);
+  jugg_toggleallows(var_1.allows, 1);
 
   if(scripts\mp\utility\player::isreallyalive(self)) {
-    self.maxhealth = var0.prevmaxhealth;
-    self.health = var0.prevhealth;
+    self.maxhealth = var_0.prevmaxhealth;
+    self.health = var_0.prevhealth;
     scripts\cp_mp\killstreaks\white_phosphorus::disableloopingcoughaudiosupression();
 
-    if(isDefined(var1.classstruct)) {
-      scripts\mp\class::respawnitems_assignrespawnitems(var0.respawnitems);
-      scripts\mp\class::giveloadout(self.team, var0.prevclass, 0, 1, 1);
+    if(isDefined(var_1.classstruct)) {
+      scripts\mp\class::respawnitems_assignrespawnitems(var_0.respawnitems);
+      scripts\mp\class::giveloadout(self.team, var_0.prevclass, 0, 1, 1);
     }
 
-    foreach(var3 in var1.perks) {
-      scripts\mp\utility\perk::removeperk(var4);
+    foreach(var_3 in var_1.perks) {
+      scripts\mp\utility\perk::removeperk(var_4);
     }
   }
 
-  if(var1.infiniteammo) {
+  if(var_1.infiniteammo) {
     scripts\mp\utility\weapon::stopinfiniteammothread();
   }
 
-  jugg_restoremodel(var0);
-  self.playerstreakspeedscale = var0.prevspeedscale;
+  jugg_restoremodel(var_0);
+  self.playerstreakspeedscale = var_0.prevspeedscale;
   scripts\mp\weapons::updatemovespeedscale();
-  scripts\mp\utility\player::_setsuit(var0.prevsuit);
-  self setclothtype(var0.prevclothtype);
+  scripts\mp\utility\player::_setsuit(var_0.prevsuit);
+  self setclothtype(var_0.prevclothtype);
   self setscriptablepartstate("juggernaut", "neutral", 0);
   self setscriptablepartstate("headVFX", "neutral", 0);
 
@@ -164,88 +164,88 @@ function jugg_removejuggernaut() {
   scripts\mp\battlechatter_mp::enablebattlechatter(self);
 }
 
-function jugg_createconfig(var0, var1) {
-  var2 = spawnStruct();
-  var2.maxhealth = 3000;
-  var2.startinghealth = var2.maxhealth;
-  var2.movespeedscalar = -0.2;
-  var2.ref_11b7d = 5;
+function jugg_createconfig(var_0, var_1) {
+  var_2 = spawnStruct();
+  var_2.maxhealth = 3000;
+  var_2.startinghealth = var_2.maxhealth;
+  var_2.movespeedscalar = -0.2;
+  var_2.ref_11b7d = 5;
 
   if(level.gametype == "br") {
-    var2.ref_11b7d = 3;
+    var_2.ref_11b7d = 3;
   }
 
-  var2.forcetostand = 1;
-  var3 = "iw8_juggernaut_mp";
+  var_2.forcetostand = 1;
+  var_3 = "iw8_juggernaut_mp";
 
   if(scripts\common\utility::iscp()) {
-    var3 = "iw8_juggernaut_cp";
+    var_3 = "iw8_juggernaut_cp";
   }
 
-  var2.suit = var3;
-  var2.infiniteammo = 0;
-  var2.infiniteammoupdaterate = undefined;
-  var2.classstruct = jugg_getdefaultclassstruct();
-  var2.allows = [];
-  var2.allows["stick_kill"] = 1;
-  var2.allows["health_regen"] = 1;
-  var2.allows["one_hit_melee_victim"] = 1;
-  var2.allows["flashed"] = 1;
-  var2.allows["stunned"] = 1;
-  var2.allows["prone"] = 1;
-  var2.allows["equipment"] = 1;
-  var2.allows["supers"] = 1;
-  var2.allows["killstreaks"] = 1;
-  var2.allows["slide"] = 1;
-  var2.allows["weapon_pickup"] = 1;
-  var2.allows["execution_victim"] = 1;
-  var2.allows["cough_gesture"] = 1;
-  var2.allows["offhand_throwback"] = 1;
-  var2.perks = [];
-  var2.perks["specialty_stun_resistance"] = 1;
-  var2.perks["specialty_sharp_focus"] = 1;
-  var2.perks["specialty_melee_resist"] = 1;
-  var2.perks["specialty_blastshield"] = 1;
-  var2.perks["specialty_armorpiercing"] = 1;
-  return var2;
+  var_2.suit = var_3;
+  var_2.infiniteammo = 0;
+  var_2.infiniteammoupdaterate = undefined;
+  var_2.classstruct = jugg_getdefaultclassstruct();
+  var_2.allows = [];
+  var_2.allows["stick_kill"] = 1;
+  var_2.allows["health_regen"] = 1;
+  var_2.allows["one_hit_melee_victim"] = 1;
+  var_2.allows["flashed"] = 1;
+  var_2.allows["stunned"] = 1;
+  var_2.allows["prone"] = 1;
+  var_2.allows["equipment"] = 1;
+  var_2.allows["supers"] = 1;
+  var_2.allows["killstreaks"] = 1;
+  var_2.allows["slide"] = 1;
+  var_2.allows["weapon_pickup"] = 1;
+  var_2.allows["execution_victim"] = 1;
+  var_2.allows["cough_gesture"] = 1;
+  var_2.allows["offhand_throwback"] = 1;
+  var_2.perks = [];
+  var_2.perks["specialty_stun_resistance"] = 1;
+  var_2.perks["specialty_sharp_focus"] = 1;
+  var_2.perks["specialty_melee_resist"] = 1;
+  var_2.perks["specialty_blastshield"] = 1;
+  var_2.perks["specialty_armorpiercing"] = 1;
+  return var_2;
 }
 
-function jugg_toggleallows(var0, var1) {
-  foreach(var4, var3 in var0) {
-    if(var3) {
-      var4 = tolower(var4);
-      self thread[[level.allow_funcs[var4]]](var1, "juggernaut");
+function jugg_toggleallows(var_0, var_1) {
+  foreach(var_4, var_3 in var_0) {
+    if(var_3) {
+      var_4 = tolower(var_4);
+      self thread[[level.allow_funcs[var_4]]](var_1, "juggernaut");
     }
   }
 
   if(!istrue(level.loadout_updateammo)) {
-    scripts\common\utility::allow_mount_top(var1, "juggernaut");
-    scripts\common\utility::allow_mount_side(var1, "juggernaut");
+    scripts\common\utility::allow_mount_top(var_1, "juggernaut");
+    scripts\common\utility::allow_mount_side(var_1, "juggernaut");
     return;
   }
 }
 
 function jugg_getdefaultclassstruct() {
-  var0 = scripts\mp\class::loadout_getclassstruct();
-  var0.loadoutarchetype = "archetype_assault";
-  var0.loadoutprimary = "iw8_minigunksjugg_mp";
-  var0.loadoutsecondary = "none";
-  return var0;
+  var_0 = scripts\mp\class::loadout_getclassstruct();
+  var_0.loadoutarchetype = "archetype_assault";
+  var_0.loadoutprimary = "iw8_minigunksjugg_mp";
+  var_0.loadoutsecondary = "none";
+  return var_0;
 }
 
 function vehicle_getturretbyweapon() {
   if(vehicle_damage_registerdefaultvisuals()) {
-    var0 = getdvarint("scr_jugg_event_models", 0);
+    var_0 = getdvarint("scr_jugg_event_models", 0);
 
-    if(var0) {
-      var1 = undefined;
+    if(var_0) {
+      var_1 = undefined;
 
-      if(vehicle_damage_updatestate_br(var0)) {
-        var1 = "flames";
+      if(vehicle_damage_updatestate_br(var_0)) {
+        var_1 = "flames";
       }
 
-      if(isDefined(var1)) {
-        self setscriptablepartstate("headVFX", var1, 0);
+      if(isDefined(var_1)) {
+        self setscriptablepartstate("headVFX", var_1, 0);
         return;
       }
 
@@ -260,7 +260,7 @@ function jugg_watchmusictoggle() {
   level endon("game_ended");
   self endon("disconnect");
   self endon("juggernaut_end");
-  var0 = 0;
+  var_0 = 0;
 
   if(isDefined(level.disable_super_in_turret) && isDefined(level.disable_super_in_turret.name) && getdvarint("scr_br_alt_mode_zxp", 0)) {
     return;
@@ -271,12 +271,12 @@ function jugg_watchmusictoggle() {
     self notifyonplayercommand("toggle_music", "killstreak_wheel");
   }
 
-  var1 = getcompleteweaponname("ks_gesture_jugg_music_mp");
-  var2 = weaponfiretime(var1);
+  var_1 = getcompleteweaponname("ks_gesture_jugg_music_mp");
+  var_2 = weaponfiretime(var_1);
 
   if(!isDefined(self.musicplaying)) {
-    var3 = self getjuggdefaultmusicenabled();
-    self.musicplaying = var3;
+    var_3 = self getjuggdefaultmusicenabled();
+    self.musicplaying = var_3;
   }
 
   if(!istrue(self.musicplaying)) {
@@ -293,16 +293,16 @@ function jugg_watchmusictoggle() {
       continue;
     }
 
-    self giveandfireoffhand(var1);
+    self giveandfireoffhand(var_1);
     self playsoundonmovingent("mp_jugg_mus_toggle_foley");
     self playlocalsound("mp_jugg_mus_toggle_button");
-    var4 = 0.2;
+    var_4 = 0.2;
 
     if(istrue(self.musicplaying)) {
-      var4 = 0.65;
+      var_4 = 0.65;
     }
 
-    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var4);
+    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_4);
 
     if(istrue(self.musicplaying)) {
       self.musicplaying = 0;
@@ -324,13 +324,13 @@ function jugg_watchfordeath() {
 
 function jugg_watchforgameend() {
   self endon("juggernaut_end");
-  var0 = self.juggcontext;
+  var_0 = self.juggcontext;
   level waittill("game_ended");
 
   if(isDefined(self)) {
-    self.maxhealth = var0.prevmaxhealth;
-    self.health = var0.prevhealth;
-    jugg_disableoverlay(var0);
+    self.maxhealth = var_0.prevmaxhealth;
+    self.health = var_0.prevhealth;
+    jugg_disableoverlay(var_0);
     self setscriptablepartstate("juggernaut", "neutral", 0);
     return;
   }
@@ -338,12 +338,12 @@ function jugg_watchforgameend() {
 
 function jugg_watchfordisconnect() {
   self endon("juggernaut_end");
-  var0 = self.juggcontext;
+  var_0 = self.juggcontext;
   self waittill("disconnect");
 
   if(isDefined(self)) {
-    self.maxhealth = var0.prevmaxhealth;
-    self.health = var0.prevhealth;
+    self.maxhealth = var_0.prevmaxhealth;
+    self.health = var_0.prevhealth;
     return;
   }
 }
@@ -361,177 +361,177 @@ function vehicle_interact_initdev() {
 }
 
 function vehicle_damage_registerdefaultvisuals() {
-  var0 = 0;
-  var1 = getdvarint("scr_jugg_event_access", 0);
+  var_0 = 0;
+  var_1 = getdvarint("scr_jugg_event_access", 0);
 
-  if(scripts\mp\utility\game::matchmakinggame() || var1) {
-    var0 = 1;
+  if(scripts\mp\utility\game::matchmakinggame() || var_1) {
+    var_0 = 1;
   }
 
-  return var0;
+  return var_0;
 }
 
 function jugg_getjuggmodels() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, "body", "body_opforce_juggernaut_mp_lod1");
 }
 
 function jugg_setModel() {
-  var0 = jugg_getjuggmodels();
+  var_0 = jugg_getjuggmodels();
 
   if(isDefined(self.headmodel)) {
     self detach(self.headmodel);
   }
 
-  var1 = var0["body"];
-  var2 = var0["head"];
-  var3 = var0["view"];
-  self setModel(var1);
-  self setviewmodel(var3);
-  self attach(var2, "", 1);
-  self.headmodel = var2;
+  var_1 = var_0["body"];
+  var_2 = var_0["head"];
+  var_3 = var_0["view"];
+  self setModel(var_1);
+  self setviewmodel(var_3);
+  self attach(var_2, "", 1);
+  self.headmodel = var_2;
 }
 
-function jugg_restoremodel(var0) {
+function jugg_restoremodel(var_0) {
   self.operatorcustomization = undefined;
 
   if(scripts\cp_mp\utility\player_utility::_isalive()) {
-    self setcustomization(var0.prevbody, var0.prevhead);
-    scripts\mp\teams::setcharactermodels(var0.prevbody, var0.prevhead, var0.prevviewmodel);
+    self setcustomization(var_0.prevbody, var_0.prevhead);
+    scripts\mp\teams::setcharactermodels(var_0.prevbody, var_0.prevhead, var_0.prevviewmodel);
     return;
   }
 }
 
-function vehicle_damage_setweaponhitdamagedata(var0) {
-  var1 = undefined;
-  var2 = self getstance();
+function vehicle_damage_setweaponhitdamagedata(var_0) {
+  var_1 = undefined;
+  var_2 = self getstance();
 
-  if(var2 != "stand") {
-    var3 = !istrue(var0.forcetostand) && !isDefined(var0.allows["crouch"]) || istrue(var0.allowcrouch);
-    var4 = !istrue(var0.forcetostand) && !isDefined(var0.allows["prone"]) || istrue(var0.allowprone);
-    var5 = scripts\engine\trace::create_contents(0, 1, 1, 1, 0, 0, 1, 1, 0);
+  if(var_2 != "stand") {
+    var_3 = !istrue(var_0.forcetostand) && !isDefined(var_0.allows["crouch"]) || istrue(var_0.allowcrouch);
+    var_4 = !istrue(var_0.forcetostand) && !isDefined(var_0.allows["prone"]) || istrue(var_0.allowprone);
+    var_5 = scripts\engine\trace::create_contents(0, 1, 1, 1, 0, 0, 1, 1, 0);
 
-    if(!var3 && !var4) {
-      var1 = "stand";
-    } else if(var2 == "crouch") {
-      if(!var3) {
-        var6 = scripts\engine\trace::ray_trace_passed(self.origin, scripts\mp\utility\player::round_smoke_logic("stand"), self, var5);
+    if(!var_3 && !var_4) {
+      var_1 = "stand";
+    } else if(var_2 == "crouch") {
+      if(!var_3) {
+        var_6 = scripts\engine\trace::ray_trace_passed(self.origin, scripts\mp\utility\player::round_smoke_logic("stand"), self, var_5);
 
-        if(var6) {
-          var1 = "stand";
+        if(var_6) {
+          var_1 = "stand";
         }
       } else {
-        var1 = "crouch";
+        var_1 = "crouch";
       }
-    } else if(var2 == "prone") {
-      if(!var4) {
-        if(var3) {
-          var7 = scripts\engine\trace::ray_trace_passed(self.origin, scripts\mp\utility\player::round_smoke_logic("crouch"), self, var5);
+    } else if(var_2 == "prone") {
+      if(!var_4) {
+        if(var_3) {
+          var_7 = scripts\engine\trace::ray_trace_passed(self.origin, scripts\mp\utility\player::round_smoke_logic("crouch"), self, var_5);
 
-          if(var7) {
-            var1 = "crouch";
+          if(var_7) {
+            var_1 = "crouch";
           }
         } else {
-          var6 = scripts\engine\trace::ray_trace_passed(self.origin, scripts\mp\utility\player::round_smoke_logic("stand"), self, var5);
+          var_6 = scripts\engine\trace::ray_trace_passed(self.origin, scripts\mp\utility\player::round_smoke_logic("stand"), self, var_5);
 
-          if(var6) {
-            var1 = "stand";
+          if(var_6) {
+            var_1 = "stand";
           }
         }
       } else {
-        var1 = "prone";
+        var_1 = "prone";
       }
     }
   } else {
-    var1 = "stand";
+    var_1 = "stand";
   }
 
-  return var1;
+  return var_1;
 }
 
-function jugg_enableoverlay(var0) {
+function jugg_enableoverlay(var_0) {
   scripts\cp_mp\utility\killstreak_utility::_setvisibiilityomnvarforkillstreak("juggernaut", "mask_on");
-  self setclientomnvar(var0.maskomnvar, 1);
+  self setclientomnvar(var_0.maskomnvar, 1);
   self.juggoverlaystatelabel = "mask_on";
   self.juggoverlaystate = 1;
-  thread jugg_watchoverlaydamagestates(var0);
-  thread jugg_watchforoverlayexecutiontoggle(var0);
+  thread jugg_watchoverlaydamagestates(var_0);
+  thread jugg_watchforoverlayexecutiontoggle(var_0);
 }
 
-function jugg_watchoverlaydamagestates(var0) {
+function jugg_watchoverlaydamagestates(var_0) {
   self endon("juggernaut_end");
   self endon("death_or_disconnect");
   level endon("game_ended");
-  var1 = self.health;
-  var2 = var1 - var1 * 0.1;
-  var3 = var1 - var1 * 0.35;
-  var4 = var1 - var1 * 0.6;
-  var5 = var1 - var1 * 0.85;
-  var6 = 1;
-  var7 = var6;
-  var8 = "mask_on";
+  var_1 = self.health;
+  var_2 = var_1 - var_1 * 0.1;
+  var_3 = var_1 - var_1 * 0.35;
+  var_4 = var_1 - var_1 * 0.6;
+  var_5 = var_1 - var_1 * 0.85;
+  var_6 = 1;
+  var_7 = var_6;
+  var_8 = "mask_on";
 
   for(;;) {
     scripts\engine\utility::ref_143a5("damage", "jugg_health_regen");
 
-    if(self.health <= var5) {
-      var8 = "mask_damage_critical";
-      var6 = 5;
-    } else if(self.health <= var4) {
-      var8 = "mask_damage_high";
-      var6 = 4;
-    } else if(self.health <= var3) {
-      var8 = "mask_damage_med";
-      var6 = 3;
-    } else if(self.health <= var2) {
-      var8 = "mask_damage_low";
-      var6 = 2;
+    if(self.health <= var_5) {
+      var_8 = "mask_damage_critical";
+      var_6 = 5;
+    } else if(self.health <= var_4) {
+      var_8 = "mask_damage_high";
+      var_6 = 4;
+    } else if(self.health <= var_3) {
+      var_8 = "mask_damage_med";
+      var_6 = 3;
+    } else if(self.health <= var_2) {
+      var_8 = "mask_damage_low";
+      var_6 = 2;
     } else {
-      var8 = "mask_on";
-      var6 = 1;
+      var_8 = "mask_on";
+      var_6 = 1;
     }
 
-    if(var7 != var6) {
-      scripts\cp_mp\utility\killstreak_utility::_setvisibiilityomnvarforkillstreak("juggernaut", var8);
-      self setclientomnvar(var0.maskomnvar, var6);
-      var7 = var6;
-      self.juggoverlaystatelabel = var8;
-      self.juggoverlaystate = var6;
+    if(var_7 != var_6) {
+      scripts\cp_mp\utility\killstreak_utility::_setvisibiilityomnvarforkillstreak("juggernaut", var_8);
+      self setclientomnvar(var_0.maskomnvar, var_6);
+      var_7 = var_6;
+      self.juggoverlaystatelabel = var_8;
+      self.juggoverlaystate = var_6;
     }
   }
 }
 
-function jugg_watchforoverlayexecutiontoggle(var0) {
+function jugg_watchforoverlayexecutiontoggle(var_0) {
   self endon("juggernaut_end");
   self endon("death_or_disconnect");
   level endon("game_ended");
-  var1 = 0;
+  var_1 = 0;
 
   for(;;) {
     if(!self isinexecutionattack()) {
-      if(istrue(var1)) {
+      if(istrue(var_1)) {
         scripts\cp_mp\utility\killstreak_utility::_setvisibiilityomnvarforkillstreak("juggernaut", self.juggoverlaystatelabel);
-        self setclientomnvar(var0.maskomnvar, self.juggoverlaystate);
-        var1 = 0;
+        self setclientomnvar(var_0.maskomnvar, self.juggoverlaystate);
+        var_1 = 0;
       }
 
       waitframe();
       continue;
     }
 
-    if(!istrue(var1)) {
+    if(!istrue(var_1)) {
       scripts\cp_mp\utility\killstreak_utility::_setvisibiilityomnvarforkillstreak("juggernaut", "off");
-      self setclientomnvar(var0.maskomnvar, -1);
-      var1 = 1;
+      self setclientomnvar(var_0.maskomnvar, -1);
+      var_1 = 1;
     }
 
     waitframe();
   }
 }
 
-function jugg_disableoverlay(var0) {
+function jugg_disableoverlay(var_0) {
   scripts\cp_mp\utility\killstreak_utility::_setvisibiilityomnvarforkillstreak("juggernaut", "off");
-  self setclientomnvar(var0.maskomnvar, 0);
+  self setclientomnvar(var_0.maskomnvar, 0);
   self.juggoverlaystatelabel = undefined;
   self.juggoverlaystate = undefined;
 }
@@ -552,29 +552,29 @@ function vehicle_damage_setdeathcallback() {
   return istrue(self.juggcontext.juggconfig.ref_140a7);
 }
 
-function vehicle_damage_updatestatemaxhealthvalues(var0) {
+function vehicle_damage_updatestatemaxhealthvalues(var_0) {
   self endon("juggernaut_end");
   level endon("game_ended");
-  var1 = self getweaponammostock(var0);
-  thread vehicle_isenemytoplayer(var0, var1);
-  thread vehicle_has_flare(var0, var1);
+  var_1 = self getweaponammostock(var_0);
+  thread vehicle_isenemytoplayer(var_0, var_1);
+  thread vehicle_has_flare(var_0, var_1);
 
   for(;;) {
     self waittill("minigun_restock");
-    self setweaponammostock(var0, var1);
+    self setweaponammostock(var_0, var_1);
   }
 }
 
-function vehicle_isenemytoplayer(var0, var1) {
+function vehicle_isenemytoplayer(var_0, var_1) {
   self endon("death_or_disconnect");
   self endon("juggernaut_end");
   level endon("game_ended");
 
   for(;;) {
     if(self isbnetkr15player()) {
-      var2 = self getweaponammostock(var0);
+      var_2 = self getweaponammostock(var_0);
 
-      if(var2 < var1) {
+      if(var_2 < var_1) {
         self notify("minigun_restock");
       }
     }
@@ -583,18 +583,18 @@ function vehicle_isenemytoplayer(var0, var1) {
   }
 }
 
-function vehicle_has_flare(var0, var1) {
+function vehicle_has_flare(var_0, var_1) {
   self endon("death_or_disconnect");
   self endon("juggernaut_end");
   level endon("game_ended");
 
   for(;;) {
-    var2 = self getweaponammoclip(var0);
+    var_2 = self getweaponammoclip(var_0);
 
-    if(var2 == 0) {
-      var3 = self getweaponammostock(var0);
+    if(var_2 == 0) {
+      var_3 = self getweaponammostock(var_0);
 
-      if(var3 < var1) {
+      if(var_3 < var_1) {
         self notify("minigun_restock");
       }
     }
@@ -631,28 +631,28 @@ function vehicle_is_ambient() {
   self endon("death_or_disconnect");
   self endon("juggernaut_end");
   level endon("game_ended");
-  var0 = self.juggcontext.juggconfig;
-  var0.spawn_all_unique_drones = 0;
+  var_0 = self.juggcontext.juggconfig;
+  var_0.spawn_all_unique_drones = 0;
 
   for(;;) {
     self waittill("perform_hero_drop");
 
-    if(!istrue(var0.spawn_all_unique_drones)) {
-      var0.spawn_all_unique_drones = 1;
+    if(!istrue(var_0.spawn_all_unique_drones)) {
+      var_0.spawn_all_unique_drones = 1;
       self radiusdamage(self.origin, 500, 2000, 500, self, "MOD_CRUSH");
-      thread vehicle_getturrets(var0);
+      thread vehicle_getturrets(var_0);
     }
   }
 }
 
-function vehicle_getturrets(var0) {
+function vehicle_getturrets(var_0) {
   self endon("death_or_disconnect");
   self endon("juggernaut_end");
   level endon("game_ended");
   self setscriptablepartstate("heroDiveVfx", "on", 0);
   wait 1;
   self setscriptablepartstate("heroDiveVfx", "off", 0);
-  var0.spawn_all_unique_drones = 0;
+  var_0.spawn_all_unique_drones = 0;
 }
 
 function vehicle_deletenextframe() {
@@ -664,56 +664,56 @@ function vehicle_deletenextframe() {
   return false;
 }
 
-function vehicle_deregister_on_death(var0, var1) {
-  var2 = self.maxhealth;
-  var3 = self.juggcontext.juggconfig;
-  var4 = 0.5;
-  var5 = 10;
+function vehicle_deregister_on_death(var_0, var_1) {
+  var_2 = self.maxhealth;
+  var_3 = self.juggcontext.juggconfig;
+  var_4 = 0.5;
+  var_5 = 10;
 
-  if(isDefined(var1) && isexplosivedamagemod(var1)) {
-    var4 = 7;
-    var5 = var3.ref_11b7d;
+  if(isDefined(var_1) && isexplosivedamagemod(var_1)) {
+    var_4 = 7;
+    var_5 = var_3.ref_11b7d;
   }
 
-  var6 = var0 * var4;
-  var7 = var2 / var5;
-  var8 = scripts\mp\utility\script::roundup(min(var7, var6));
-  return int(var8);
+  var_6 = var_0 * var_4;
+  var_7 = var_2 / var_5;
+  var_8 = scripts\mp\utility\script::roundup(min(var_7, var_6));
+  return int(var_8);
 }
 
-function vehicle_deletenextframelate(var0) {
-  return int(var0 / 2);
+function vehicle_deletenextframelate(var_0) {
+  return int(var_0 / 2);
 }
 
 function vehicle_damage_registerinstance() {
-  var0 = 0;
-  var1 = 0;
+  var_0 = 0;
+  var_1 = 0;
 
-  if(var1 || scripts\mp\utility\game::gametypesupportsbasejumping() && scripts\mp\utility\game::mapsupportsbasejumping()) {
-    var0 = 1;
+  if(var_1 || scripts\mp\utility\game::gametypesupportsbasejumping() && scripts\mp\utility\game::mapsupportsbasejumping()) {
+    var_0 = 1;
   }
 
-  return var0;
+  return var_0;
 }
 
-function vehicle_damage_updatestate_br(var0) {
-  return istrue(level.setplayerselfrevivingextrainfo) && var0 == 1;
+function vehicle_damage_updatestate_br(var_0) {
+  return istrue(level.setplayerselfrevivingextrainfo) && var_0 == 1;
 }
 
 function changecirclestateatlowtime() {
   if(istrue(level.ref_11b5f) && level.activejuggernauts.size > 0) {
-    var0 = 0;
-    var1 = level.activejuggernauts.size;
+    var_0 = 0;
+    var_1 = level.activejuggernauts.size;
 
-    for(var2 = 0; var2 < var1; var2++) {
-      var3 = level.activejuggernauts[var2];
+    for(var_2 = 0; var_2 < var_1; var_2++) {
+      var_3 = level.activejuggernauts[var_2];
 
-      if(isDefined(var3) && self.team == var3.team) {
-        var0++;
+      if(isDefined(var_3) && self.team == var_3.team) {
+        var_0++;
       }
     }
 
-    if(var0 >= level.ref_11b5f) {
+    if(var_0 >= level.ref_11b5f) {
       return true;
     }
   }

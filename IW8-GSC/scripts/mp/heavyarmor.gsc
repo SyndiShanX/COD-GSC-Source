@@ -3,33 +3,33 @@
  * Script: scripts\mp\heavyarmor.gsc
 ***********************************************/
 
-function addheavyarmor(var0) {
-  var1 = self.heavyarmor;
+function addheavyarmor(var_0) {
+  var_1 = self.heavyarmor;
 
   if(!isDefined(self.struct)) {
-    var1 = spawnStruct(self.heavyarmor);
-    var1.player = self;
-    var1.hp = 0;
-    self.heavyarmor = var1;
-    var1.hp += var0;
+    var_1 = spawnStruct(self.heavyarmor);
+    var_1.player = self;
+    var_1.hp = 0;
+    self.heavyarmor = var_1;
+    var_1.hp += var_0;
     self notify("heavyArmor_added");
     return;
   }
 
-  var1.hp += var0;
+  var_1.hp += var_0;
 }
 
-function subtractheavyarmor(var0) {
-  var1 = self.heavyarmor;
+function subtractheavyarmor(var_0) {
+  var_1 = self.heavyarmor;
 
-  if(istrue(var1.immunityframe)) {
+  if(istrue(var_1.immunityframe)) {
     return;
   }
 
-  if(var1.hp > 0) {
-    var1.hp = max(0, var1.hp - var0);
+  if(var_1.hp > 0) {
+    var_1.hp = max(0, var_1.hp - var_0);
 
-    if(var1.hp <= 0) {
+    if(var_1.hp <= 0) {
       thread heavyarmor_break();
       return;
     }
@@ -43,46 +43,46 @@ function removeheavyarmor() {
   self.heavyarmor = undefined;
 }
 
-function heavyarmormodifydamage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10) {
-  if(var2 <= 0 && var3 <= 0) {
-    return [0, var2, var3];
+function heavyarmormodifydamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+  if(var_2 <= 0 && var_3 <= 0) {
+    return [0, var_2, var_3];
   }
 
-  if(var4 == "MOD_SUICIDE") {
-    return [0, var2, var3];
+  if(var_4 == "MOD_SUICIDE") {
+    return [0, var_2, var_3];
   }
 
-  if(isDefined(var1) && (var1.classname == "trigger_hurt" || var1.classname == "worldspawn")) {
-    return [0, var2, var3];
+  if(isDefined(var_1) && (var_1.classname == "trigger_hurt" || var_1.classname == "worldspawn")) {
+    return [0, var_2, var_3];
   }
 
-  if(!hasheavyarmor(var0)) {
-    return [0, var2, var3];
+  if(!hasheavyarmor(var_0)) {
+    return [0, var_2, var_3];
   }
 
-  if(scripts\mp\utility\weapon::isbombsiteweapon(var5)) {
-    return [0, var2, var3];
+  if(scripts\mp\utility\weapon::isbombsiteweapon(var_5)) {
+    return [0, var_2, var_3];
   }
 
-  if(hasheavyarmorinvulnerability(var0)) {
+  if(hasheavyarmorinvulnerability(var_0)) {
     return [1, 1, 0];
   }
 
-  var11 = getheavyarmor(var0);
-  var12 = heavyarmor_getdamagemodifier(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10);
-  var13 = var2 * var12;
-  var14 = var3 * var12;
-  var15 = var13 + var14;
+  var_11 = getheavyarmor(var_0);
+  var_12 = heavyarmor_getdamagemodifier(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+  var_13 = var_2 * var_12;
+  var_14 = var_3 * var_12;
+  var_15 = var_13 + var_14;
 
-  if(!var10) {
-    subtractheavyarmor(var0, var15);
+  if(!var_10) {
+    subtractheavyarmor(var_0, var_15);
   }
 
-  if(hasheavyarmorinvulnerability(var0)) {
-    return [var11, 1, 0];
+  if(hasheavyarmorinvulnerability(var_0)) {
+    return [var_11, 1, 0];
   }
 
-  return [var2 + var3, 1, 0];
+  return [var_2 + var_3, 1, 0];
 }
 
 function getheavyarmor() {
@@ -114,32 +114,32 @@ function heavyarmor_break() {
   thread removeheavyarmor();
 }
 
-function heavyarmor_getdamagemodifier(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10) {
-  var11 = [];
+function heavyarmor_getdamagemodifier(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+  var_11 = [];
 
-  if(scripts\mp\utility\weapon::issuperweapon(var5)) {
-    GscBinSkip0(0x2e, var11.size, 1.33);
+  if(scripts\mp\utility\weapon::issuperweapon(var_5)) {
+    GscBinSkip0(0x2e, var_11.size, 1.33);
   }
 
-  if(isexplosivedamagemod(var4)) {
-    GscBinSkip0(0x2e, var11.size, 1.5);
+  if(isexplosivedamagemod(var_4)) {
+    GscBinSkip0(0x2e, var_11.size, 1.5);
   }
 
-  if(var4 == "MOD_MELEE") {
-    GscBinSkip0(0x2e, var11.size, 1.5);
+  if(var_4 == "MOD_MELEE") {
+    GscBinSkip0(0x2e, var_11.size, 1.5);
   }
 
-  if(scripts\mp\utility\damage::isheadshot(var8, var4, var1)) {
-    GscBinSkip0(0x2e, var11.size, 1.5);
+  if(scripts\mp\utility\damage::isheadshot(var_8, var_4, var_1)) {
+    GscBinSkip0(0x2e, var_11.size, 1.5);
   }
 
-  var12 = 1;
+  var_12 = 1;
 
-  foreach(var14 in var11) {
-    if(var14 > var12) {
-      var14 = var12;
+  foreach(var_14 in var_11) {
+    if(var_14 > var_12) {
+      var_14 = var_12;
     }
   }
 
-  return var12;
+  return var_12;
 }

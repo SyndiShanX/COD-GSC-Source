@@ -23,15 +23,15 @@ function set_corpse_ranges_default() {
   GscBinSkip1(0x45, "sight_dist", 600);
 }
 
-function set_corpse_ranges(var0) {
-  if(!isDefined(var0["shadow_dist"])) {
-    GscBinSkip0(0x2e, "shadow_dist", var0["found_dist"]);
+function set_corpse_ranges(var_0) {
+  if(!isDefined(var_0["shadow_dist"])) {
+    GscBinSkip0(0x2e, "shadow_dist", var_0["found_dist"]);
   }
 
-  level.stealth.corpse.shadow_distsqrd = squared(var0["shadow_dist"]);
-  level.stealth.corpse.sight_distsqrd = squared(var0["sight_dist"]);
-  level.stealth.corpse.detect_distsqrd = squared(var0["detect_dist"]);
-  level.stealth.corpse.found_distsqrd = squared(var0["found_dist"]);
+  level.stealth.corpse.shadow_distsqrd = squared(var_0["shadow_dist"]);
+  level.stealth.corpse.sight_distsqrd = squared(var_0["sight_dist"]);
+  level.stealth.corpse.detect_distsqrd = squared(var_0["detect_dist"]);
+  level.stealth.corpse.found_distsqrd = squared(var_0["found_dist"]);
 }
 
 function set_corpse_ignore() {
@@ -42,20 +42,20 @@ function set_corpse_entity() {
   level.stealth.additional_corpse[self getentitynumber()] = self;
 }
 
-function corpse_check_shadow(var0) {
-  if(!isDefined(self.in_shadow_origin) || distancesquared(self.in_shadow_origin, var0) > 1) {
+function corpse_check_shadow(var_0) {
+  if(!isDefined(self.in_shadow_origin) || distancesquared(self.in_shadow_origin, var_0) > 1) {
     self.in_shadow = undefined;
 
     if(isDefined(level.trigger_stealth_shadow)) {
-      foreach(var2 in level.trigger_stealth_shadow) {
-        if(isDefined(var2) && ispointinvolume(var0, var2)) {
+      foreach(var_2 in level.trigger_stealth_shadow) {
+        if(isDefined(var_2) && ispointinvolume(var_0, var_2)) {
           self.in_shadow = 1;
           break;
         }
       }
     }
 
-    self.in_shadow_origin = var0;
+    self.in_shadow_origin = var_0;
   }
 
   return istrue(self.in_shadow);
@@ -84,143 +84,143 @@ function corpse_sight() {
     self.stealth.corpse_nexttime = gettime() + 1000;
   }
 
-  var0 = [];
+  var_0 = [];
 
   if(isDefined(level.fngetcorpsearrayfunc)) {
-    var0 = [[level.fngetcorpsearrayfunc]]();
+    var_0 = [[level.fngetcorpsearrayfunc]]();
   }
 
-  var1 = undefined;
-  var2 = undefined;
+  var_1 = undefined;
+  var_2 = undefined;
 
-  foreach(var4 in var0) {
-    var5 = var4 getentitynumber();
+  foreach(var_4 in var_0) {
+    var_5 = var_4 getentitynumber();
 
-    if(isDefined(level.stealth.ignore_corpse) && isDefined(level.stealth.ignore_corpse[var5]) && distancesquared(level.stealth.ignore_corpse[var5], var4.origin) < squared(100)) {
-      level.stealth.ignore_corpse[var5] = undefined;
-      var4.found = 1;
+    if(isDefined(level.stealth.ignore_corpse) && isDefined(level.stealth.ignore_corpse[var_5]) && distancesquared(level.stealth.ignore_corpse[var_5], var_4.origin) < squared(100)) {
+      level.stealth.ignore_corpse[var_5] = undefined;
+      var_4.found = 1;
     }
 
-    if(isDefined(var4.found)) {
+    if(isDefined(var_4.found)) {
       continue;
     }
 
-    var6 = var4 scripts\stealth\utility::getcorpseorigin();
-    var7 = distancesquared(self.origin, var6);
-    var8 = level.stealth.corpse.found_distsqrd;
-    var9 = level.stealth.corpse.sight_distsqrd;
-    var10 = level.stealth.corpse.detect_distsqrd;
+    var_6 = var_4 scripts\stealth\utility::getcorpseorigin();
+    var_7 = distancesquared(self.origin, var_6);
+    var_8 = level.stealth.corpse.found_distsqrd;
+    var_9 = level.stealth.corpse.sight_distsqrd;
+    var_10 = level.stealth.corpse.detect_distsqrd;
 
     if(isDefined(self.stealth.override_corpse_found_dist)) {
-      var8 = self.stealth.override_corpse_found_dist * self.stealth.override_corpse_found_dist;
+      var_8 = self.stealth.override_corpse_found_dist * self.stealth.override_corpse_found_dist;
     }
 
     if(isDefined(self.stealth.override_corpse_sight_dist)) {
-      var9 = self.stealth.override_corpse_sight_dist * self.stealth.override_corpse_sight_dist;
+      var_9 = self.stealth.override_corpse_sight_dist * self.stealth.override_corpse_sight_dist;
     }
 
     if(isDefined(self.stealth.override_corpse_detect_dist)) {
-      var10 = self.stealth.override_corpse_detect_dist * self.stealth.override_corpse_detect_dist;
+      var_10 = self.stealth.override_corpse_detect_dist * self.stealth.override_corpse_detect_dist;
     }
 
-    if(corpse_check_shadow(var4, var6)) {
-      var9 = level.stealth.corpse.shadow_distsqrd;
-      var10 = level.stealth.corpse.shadow_distsqrd;
+    if(corpse_check_shadow(var_4, var_6)) {
+      var_9 = level.stealth.corpse.shadow_distsqrd;
+      var_10 = level.stealth.corpse.shadow_distsqrd;
     }
 
-    if(var7 < var8) {
-      if(abs(self.origin[2] - var6[2]) < 60) {
-        var1 = var4;
+    if(var_7 < var_8) {
+      if(abs(self.origin[2] - var_6[2]) < 60) {
+        var_1 = var_4;
         break;
       }
     }
 
     if(isDefined(self.stealth.corpse.ent)) {
-      if(self.stealth.corpse.ent == var4) {
+      if(self.stealth.corpse.ent == var_4) {
         continue;
       }
 
-      var11 = self.stealth.corpse.ent scripts\stealth\utility::getcorpseorigin();
-      var12 = distancesquared(self.origin, var11);
+      var_11 = self.stealth.corpse.ent scripts\stealth\utility::getcorpseorigin();
+      var_12 = distancesquared(self.origin, var_11);
 
-      if(var12 <= var7) {
+      if(var_12 <= var_7) {
         continue;
       }
     }
 
-    if(var7 > var9) {
+    if(var_7 > var_9) {
       continue;
     }
 
-    if(var6[2] - self.origin[2] > 128) {
+    if(var_6[2] - self.origin[2] > 128) {
       continue;
     }
 
-    if(var7 < var10) {
-      if(!isDefined(var4.seen) && self cansee(var4)) {
-        var2 = var4;
+    if(var_7 < var_10) {
+      if(!isDefined(var_4.seen) && self cansee(var_4)) {
+        var_2 = var_4;
         break;
       }
     }
 
-    var13 = anglesToForward(self gettagangles("tag_eye"));
-    var14 = vectorNormalize(var6 + (0, 0, 30) - self getEye());
+    var_13 = anglesToForward(self gettagangles("tag_eye"));
+    var_14 = vectorNormalize(var_6 + (0, 0, 30) - self getEye());
 
-    if(vectordot(var13, var14) > 0.55) {
-      if(!isDefined(var4.seen) && self cansee(var4)) {
-        var2 = var4;
+    if(vectordot(var_13, var_14) > 0.55) {
+      if(!isDefined(var_4.seen) && self cansee(var_4)) {
+        var_2 = var_4;
         break;
       }
     }
   }
 
-  if(isDefined(var1)) {
-    var1.found = 1;
+  if(isDefined(var_1)) {
+    var_1.found = 1;
 
-    if(istrue(var1.seen) && isDefined(self.stealth.corpse.ent) && self.stealth.corpse.ent == var1) {
+    if(istrue(var_1.seen) && isDefined(self.stealth.corpse.ent) && self.stealth.corpse.ent == var_1) {
       self.stealth.patrol_react_last = gettime();
     }
 
-    self aieventlistenerevent("found_corpse", var1, var1 scripts\stealth\utility::getcorpseorigin());
+    self aieventlistenerevent("found_corpse", var_1, var_1 scripts\stealth\utility::getcorpseorigin());
     return;
   }
 
-  if(isDefined(var2)) {
-    thread corpse_seen_claim(var2);
-    self aieventlistenerevent("saw_corpse", var2, var2 scripts\stealth\utility::getcorpseorigin());
+  if(isDefined(var_2)) {
+    thread corpse_seen_claim(var_2);
+    self aieventlistenerevent("saw_corpse", var_2, var_2 scripts\stealth\utility::getcorpseorigin());
     return;
   }
 }
 
-function corpse_found(var0) {
+function corpse_found(var_0) {
   self notify("corpse_found");
   self endon("corpse_found");
   self endon("death");
-  var1 = var0.entity;
-  var2 = var1 scripts\stealth\utility::getcorpseorigin();
+  var_1 = var_0.entity;
+  var_2 = var_1 scripts\stealth\utility::getcorpseorigin();
 
   if(isDefined(self.stealth.corpse.ent)) {
     self.stealth.corpse.ent.seen = undefined;
   }
 
-  self.stealth.corpse.ent = var1;
+  self.stealth.corpse.ent = var_1;
   self.stealth.bexaminerequested = 1;
 
   if(isDefined(level.fnsetcorpseremovetimerfunc)) {
-    var1[[level.fnsetcorpseremovetimerfunc]](level.stealth.corpse.reset_time);
+    var_1[[level.fnsetcorpseremovetimerfunc]](level.stealth.corpse.reset_time);
     return;
   }
 }
 
-function corpse_seen(var0) {
-  var1 = var0.entity;
-  var2 = var1 scripts\stealth\utility::getcorpseorigin();
-  self.stealth.corpse.origin = var2;
+function corpse_seen(var_0) {
+  var_1 = var_0.entity;
+  var_2 = var_1 scripts\stealth\utility::getcorpseorigin();
+  self.stealth.corpse.origin = var_2;
   self.stealth.bexaminerequested = 1;
-  thread corpse_seen_claim(var1);
+  thread corpse_seen_claim(var_1);
 }
 
-function corpse_seen_claim(var0) {
+function corpse_seen_claim(var_0) {
   self notify("corpse_seen_claim");
   self endon("corpse_seen_claim");
 
@@ -228,12 +228,12 @@ function corpse_seen_claim(var0) {
     self.stealth.corpse.ent.seen = undefined;
   }
 
-  var0.seen = 1;
-  self.stealth.corpse.ent = var0;
+  var_0.seen = 1;
+  self.stealth.corpse.ent = var_0;
   self waittill("death");
 
-  if(isDefined(var0)) {
-    var0.seen = undefined;
+  if(isDefined(var_0)) {
+    var_0.seen = undefined;
   }
 
   if(isDefined(self)) {
@@ -281,106 +281,106 @@ function suspicious_door_sighting() {
     self.stealth.suspicious_door.nexttime = gettime() + 1000;
   }
 
-  var0 = level.stealth.suspicious_door.doors;
-  var1 = undefined;
-  var2 = undefined;
-  var3 = undefined;
+  var_0 = level.stealth.suspicious_door.doors;
+  var_1 = undefined;
+  var_2 = undefined;
+  var_3 = undefined;
 
-  foreach(var3 in var0) {
-    var5 = var3 getentitynumber();
+  foreach(var_3 in var_0) {
+    var_5 = var_3 getentitynumber();
 
-    if(isDefined(var3.found)) {
+    if(isDefined(var_3.found)) {
       continue;
     }
 
-    var6 = var3.origin;
-    var7 = distancesquared(self.origin, var6);
-    var8 = level.stealth.suspicious_door.found_distsqrd;
-    var9 = level.stealth.suspicious_door.sight_distsqrd;
-    var10 = level.stealth.suspicious_door.detect_distsqrd;
+    var_6 = var_3.origin;
+    var_7 = distancesquared(self.origin, var_6);
+    var_8 = level.stealth.suspicious_door.found_distsqrd;
+    var_9 = level.stealth.suspicious_door.sight_distsqrd;
+    var_10 = level.stealth.suspicious_door.detect_distsqrd;
 
-    if(var7 < var8) {
-      if(abs(self.origin[2] - var6[2]) < 60) {
-        var1 = var3;
+    if(var_7 < var_8) {
+      if(abs(self.origin[2] - var_6[2]) < 60) {
+        var_1 = var_3;
         break;
       }
     }
 
     if(isDefined(self.stealth.suspicious_door.ent)) {
-      if(self.stealth.suspicious_door.ent == var3) {
+      if(self.stealth.suspicious_door.ent == var_3) {
         continue;
       }
 
-      var11 = self.stealth.suspicious_door.ent.origin;
-      var12 = distancesquared(self.origin, var11);
+      var_11 = self.stealth.suspicious_door.ent.origin;
+      var_12 = distancesquared(self.origin, var_11);
 
-      if(var12 <= var7) {
+      if(var_12 <= var_7) {
         continue;
       }
     }
 
-    if(var7 > var9) {
+    if(var_7 > var_9) {
       continue;
     }
 
-    if(var6[2] - self.origin[2] > 128) {
+    if(var_6[2] - self.origin[2] > 128) {
       continue;
     }
 
-    if(var7 < var10) {
-      if(!isDefined(var3.seen) && self cansee(var3) && scripts\engine\utility::can_trace_to_ai(var3.origin, self, level.stealth.cantracetoaiignoreents)) {
-        var2 = var3;
+    if(var_7 < var_10) {
+      if(!isDefined(var_3.seen) && self cansee(var_3) && scripts\engine\utility::can_trace_to_ai(var_3.origin, self, level.stealth.cantracetoaiignoreents)) {
+        var_2 = var_3;
         break;
       }
     }
 
-    var13 = anglesToForward(self gettagangles("tag_eye"));
-    var14 = vectorNormalize(var6 + (0, 0, 30) - self getEye());
+    var_13 = anglesToForward(self gettagangles("tag_eye"));
+    var_14 = vectorNormalize(var_6 + (0, 0, 30) - self getEye());
 
-    if(vectordot(var13, var14) > 0.55) {
-      if(!isDefined(var3.seen) && self cansee(var3) && scripts\engine\utility::can_trace_to_ai(var3.origin, self, level.stealth.cantracetoaiignoreents)) {
-        var2 = var3;
+    if(vectordot(var_13, var_14) > 0.55) {
+      if(!isDefined(var_3.seen) && self cansee(var_3) && scripts\engine\utility::can_trace_to_ai(var_3.origin, self, level.stealth.cantracetoaiignoreents)) {
+        var_2 = var_3;
         break;
       }
     }
   }
 
-  if(isDefined(var1)) {
-    var1.found = 1;
-    var16 = undefined;
+  if(isDefined(var_1)) {
+    var_1.found = 1;
+    var_16 = undefined;
 
-    if(istrue(var1.seen) && isDefined(self.stealth.suspicious_door.ent) && self.stealth.suspicious_door.ent == var1) {
+    if(istrue(var_1.seen) && isDefined(self.stealth.suspicious_door.ent) && self.stealth.suspicious_door.ent == var_1) {
       self.stealth.patrol_react_last = gettime();
     }
 
-    if(isDefined(var3.cam_structs)) {
-      var16 = var3.cam_structs[0].origin;
+    if(isDefined(var_3.cam_structs)) {
+      var_16 = var_3.cam_structs[0].origin;
     } else {
-      var16 = var3.origin;
+      var_16 = var_3.origin;
     }
 
-    self aieventlistenerevent("suspicious_door", var1, var16);
+    self aieventlistenerevent("suspicious_door", var_1, var_16);
     return;
   }
 }
 
-function suspicious_door_found(var0) {
-  var1 = var0.entity;
+function suspicious_door_found(var_0) {
+  var_1 = var_0.entity;
 
-  if(isDefined(var1.aiopener)) {
+  if(isDefined(var_1.aiopener)) {
     return;
   }
 
-  var1.aiopener = self;
+  var_1.aiopener = self;
 
-  if(isDefined(var1.cam_structs) && isDefined(var1.cam_structs[0])) {
-    var2 = var1.cam_structs[0].origin;
+  if(isDefined(var_1.cam_structs) && isDefined(var_1.cam_structs[0])) {
+    var_2 = var_1.cam_structs[0].origin;
   } else {
-    var2 = var2.origin;
+    var_2 = var_2.origin;
   }
 
-  var3 = getclosestpointonnavmesh(var2, self);
-  var1.origin = var2 + anglesToForward((0, randomfloatrange(0, 360), 0)) * 75;
-  var1.investigate_pos = getclosestpointonnavmesh(var1.origin, self);
-  scripts\stealth\enemy::bt_set_stealth_state("investigate", var1);
+  var_3 = getclosestpointonnavmesh(var_2, self);
+  var_1.origin = var_2 + anglesToForward((0, randomfloatrange(0, 360), 0)) * 75;
+  var_1.investigate_pos = getclosestpointonnavmesh(var_1.origin, self);
+  scripts\stealth\enemy::bt_set_stealth_state("investigate", var_1);
 }

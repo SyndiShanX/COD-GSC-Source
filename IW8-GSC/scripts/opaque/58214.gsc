@@ -17,23 +17,23 @@ function start_safehouse_return() {
   }
 
   level.startvipteamuav = [];
-  var0 = scripts\engine\utility::getStructArray("veh_a10indigo", "targetname");
-  thread start_safehouse_regroup_objective(var0, 3);
+  var_0 = scripts\engine\utility::getStructArray("veh_a10indigo", "targetname");
+  thread start_safehouse_regroup_objective(var_0, 3);
 }
 
-function start_safehouse_regroup_objective(var0, var1) {
-  wait var1;
-  var2 = getdvarint("LLQQOPKTKM", 0) == 0;
+function start_safehouse_regroup_objective(var_0, var_1) {
+  wait var_1;
+  var_2 = getdvarint("LLQQOPKTKM", 0) == 0;
 
-  if(var2) {
-    foreach(var4 in var0) {
-      var5 = spawnStruct();
-      var5.origin = var4.origin;
-      var5.angles = var4.angles;
-      var6 = _calloutmarkerping_onpingchallenge::start_silo_jump_menu(var5);
+  if(var_2) {
+    foreach(var_4 in var_0) {
+      var_5 = spawnStruct();
+      var_5.origin = var_4.origin;
+      var_5.angles = var_4.angles;
+      var_6 = _calloutmarkerping_onpingchallenge::start_silo_jump_menu(var_5);
 
-      if(isDefined(var6)) {
-        level.startvipteamuav = scripts\engine\utility::array_add(level.startvipteamuav, var6);
+      if(isDefined(var_6)) {
+        level.startvipteamuav = scripts\engine\utility::array_add(level.startvipteamuav, var_6);
       }
     }
 
@@ -41,36 +41,36 @@ function start_safehouse_regroup_objective(var0, var1) {
   }
 }
 
-function start_safehouse_regroup(var0) {
-  var0.maxhealth = 3500;
-  var0.health = var0.maxhealth;
+function start_safehouse_regroup(var_0) {
+  var_0.maxhealth = 3500;
+  var_0.health = var_0.maxhealth;
 }
 
-function ref_134f9(var0) {
-  var1 = spawnStruct();
-  var1.origin = var0.origin + (0, 0, 100);
-  var1.angles = var0.angles * (0, 1, 0);
-  var1.owner = var0;
-  var2 = _calloutmarkerping_onpingchallenge::start_silo_jump_menu(var1);
+function ref_134f9(var_0) {
+  var_1 = spawnStruct();
+  var_1.origin = var_0.origin + (0, 0, 100);
+  var_1.angles = var_0.angles * (0, 1, 0);
+  var_1.owner = var_0;
+  var_2 = _calloutmarkerping_onpingchallenge::start_silo_jump_menu(var_1);
 
-  if(isDefined(var2)) {
-    thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_enter(var2, "pilot", var0, undefined, 1);
+  if(isDefined(var_2)) {
+    thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_enter(var_2, "pilot", var_0, undefined, 1);
     return;
   }
 }
 
-function start_silo_elevator_menu(var0, var1) {
+function start_silo_elevator_menu(var_0, var_1) {
   if(true) {
     return;
   }
 
-  var2 = _calloutmarkerping_onpingchallenge::start_silo_jump_menu(var0, var1);
+  var_2 = _calloutmarkerping_onpingchallenge::start_silo_jump_menu(var_0, var_1);
 
-  if(isDefined(var2) && scripts\cp\vehicles\vehicle_spawn_cp::vehicle_spawn_cp_gamemodesupportsrespawn()) {
-    var2.ondeathrespawn = &start_silo_elevator;
+  if(isDefined(var_2) && scripts\cp\vehicles\vehicle_spawn_cp::vehicle_spawn_cp_gamemodesupportsrespawn()) {
+    var_2.ondeathrespawn = &start_silo_elevator;
   }
 
-  return var2;
+  return var_2;
 }
 
 function start_silo_elevator() {
@@ -78,17 +78,17 @@ function start_silo_elevator() {
 }
 
 function start_silo_jump() {
-  var0 = spawnStruct();
-  scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(scripts\cp_mp\vehicles\vehicle_tracking::getvehiclespawndata(self), var0);
-  var1 = spawnStruct();
+  var_0 = spawnStruct();
+  scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(scripts\cp_mp\vehicles\vehicle_tracking::getvehiclespawndata(self), var_0);
+  var_1 = spawnStruct();
 
   for(;;) {
     wait 60;
 
     if(scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_canspawnVehicle("veh_indigo")) {
-      var2 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("veh_indigo", var0, var1);
+      var_2 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("veh_indigo", var_0, var_1);
 
-      if(!isDefined(var2)) {
+      if(!isDefined(var_2)) {
         continue;
       }
 

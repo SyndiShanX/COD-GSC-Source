@@ -43,10 +43,10 @@ function onstartgametype() {
   }
 
   if(game["switchedsides"]) {
-    var0 = game["attackers"];
-    var1 = game["defenders"];
-    game["attackers"] = var1;
-    game["defenders"] = var0;
+    var_0 = game["attackers"];
+    var_1 = game["defenders"];
+    game["attackers"] = var_1;
+    game["defenders"] = var_0;
   }
 
   scripts\mp\utility\game::setobjectivetext("allies", &"OBJECTIVES/TJUGG");
@@ -101,9 +101,9 @@ function updategametypedvars() {
   level.ppkjuggonjugg = scripts\mp\utility\dvars::dvarintvalue("ppkJuggOnJugg", 10, 1, 100);
 }
 
-function onplayerconnect(var0) {
-  var0.hasbeenjugg = 0;
-  var0.jugg_allegiance = 0;
+function onplayerconnect(var_0) {
+  var_0.hasbeenjugg = 0;
+  var_0.jugg_allegiance = 0;
 }
 
 function initspawns() {
@@ -123,178 +123,178 @@ function initspawns() {
 }
 
 function getspawnpoint() {
-  var0 = self.pers["team"];
+  var_0 = self.pers["team"];
 
   if(game["switchedsides"]) {
-    var0 = scripts\mp\utility\game::getotherteam(var0)[0];
+    var_0 = scripts\mp\utility\game::getotherteam(var_0)[0];
   }
 
   if(scripts\mp\spawnlogic::shoulduseteamstartspawn()) {
-    var1 = scripts\mp\spawnlogic::getspawnpointarray("mp_tdm_spawn_" + var0 + "_start");
-    var2 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var1);
+    var_1 = scripts\mp\spawnlogic::getspawnpointarray("mp_tdm_spawn_" + var_0 + "_start");
+    var_2 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_1);
   } else {
-    var2 = scripts\mp\spawnlogic::getspawnpoint(self, var2, "normal", "fallback");
+    var_2 = scripts\mp\spawnlogic::getspawnpoint(self, var_2, "normal", "fallback");
   }
 
-  return var2;
+  return var_2;
 }
 
-function onplayerkilled(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
-  if(var3 == "MOD_SUICIDE" && var4.basename == "none" && isDefined(self.wasswitchingteamsforonplayerkilled)) {
+function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  if(var_3 == "MOD_SUICIDE" && var_4.basename == "none" && isDefined(self.wasswitchingteamsforonplayerkilled)) {
     return;
   }
 
-  var10 = self;
+  var_10 = self;
 
-  if(isDefined(var10.isjuggmodejuggernaut)) {
-    if(isDefined(var10.juggoverlay)) {
-      var10.juggoverlay destroy();
+  if(isDefined(var_10.isjuggmodejuggernaut)) {
+    if(isDefined(var_10.juggoverlay)) {
+      var_10.juggoverlay destroy();
     }
 
-    var10.playerstreakspeedscale = undefined;
-    var10.nostuckdamagekill = 0;
-    var10 scripts\mp\utility\player::_setsuit("iw8_defaultsuit_mp");
-    cleanupobjectiveiconsforjugg(var10);
+    var_10.playerstreakspeedscale = undefined;
+    var_10.nostuckdamagekill = 0;
+    var_10 scripts\mp\utility\player::_setsuit("iw8_defaultsuit_mp");
+    cleanupobjectiveiconsforjugg(var_10);
   }
 
-  if(isDefined(var1) && isPlayer(var1)) {
-    var11 = 0;
-    var12 = 0;
-    var13 = 0;
-    var14 = 0;
-    var15 = 0;
-    var16 = 0;
-    var17 = 0;
+  if(isDefined(var_1) && isPlayer(var_1)) {
+    var_11 = 0;
+    var_12 = 0;
+    var_13 = 0;
+    var_14 = 0;
+    var_15 = 0;
+    var_16 = 0;
+    var_17 = 0;
 
-    if(var1 == var10) {
-      if(isDefined(var10.isjuggmodejuggernaut)) {
-        var12 = 1;
+    if(var_1 == var_10) {
+      if(isDefined(var_10.isjuggmodejuggernaut)) {
+        var_12 = 1;
       }
-    } else if(var1.team != var10.team) {
-      if(isDefined(var10.isjuggmodejuggernaut)) {
-        var12 = 1;
+    } else if(var_1.team != var_10.team) {
+      if(isDefined(var_10.isjuggmodejuggernaut)) {
+        var_12 = 1;
 
-        if(isDefined(var1.isjuggmodejuggernaut)) {
-          var13 = 1;
+        if(isDefined(var_1.isjuggmodejuggernaut)) {
+          var_13 = 1;
         } else {
-          var14 = 1;
+          var_14 = 1;
         }
-      } else if(isDefined(var1.isjuggmodejuggernaut)) {
-        var15 = 1;
+      } else if(isDefined(var_1.isjuggmodejuggernaut)) {
+        var_15 = 1;
       }
 
-      if(level.jugg_available[var1.team]) {
-        var11 = 1;
+      if(level.jugg_available[var_1.team]) {
+        var_11 = 1;
       }
-    } else if(isDefined(var10.isjuggmodejuggernaut) && var1.team == var10.team) {
+    } else if(isDefined(var_10.isjuggmodejuggernaut) && var_1.team == var_10.team) {
       thread givejuggloadout();
       return;
     }
 
-    if(var11) {
-      resetjugg(var1);
+    if(var_11) {
+      resetjugg(var_1);
     }
 
-    if(var12) {
-      var18 = getbestteammate(var10.team, 0);
+    if(var_12) {
+      var_18 = getbestteammate(var_10.team, 0);
 
-      if(!isDefined(var18)) {
-        var18 = getbestteammate(var10.team, 1);
+      if(!isDefined(var_18)) {
+        var_18 = getbestteammate(var_10.team, 1);
       }
 
-      if(!isDefined(var18)) {
-        var18 = var10;
+      if(!isDefined(var_18)) {
+        var_18 = var_10;
       }
 
-      resetjugg(var18, var10);
+      resetjugg(var_18, var_10);
     }
 
-    if(var11 || var12) {
+    if(var_11 || var_12) {
       scripts\mp\utility\sound::playsoundonplayers("mp_enemy_obj_captured");
     }
 
-    if(var1 != var10 && var1.team != var10.team && !isDefined(var1.isjuggmodejuggernaut)) {
-      if(var1.hasbeenjugg) {
-        var1.jugg_allegiance += 25;
+    if(var_1 != var_10 && var_1.team != var_10.team && !isDefined(var_1.isjuggmodejuggernaut)) {
+      if(var_1.hasbeenjugg) {
+        var_1.jugg_allegiance += 25;
 
-        if(var14) {
-          var1.jugg_allegiance += 75;
+        if(var_14) {
+          var_1.jugg_allegiance += 75;
         }
 
-        if(isDefined(level.jugg_attackers[var1.team][var10.guid])) {
-          var16 = 1;
-          var1.jugg_allegiance += 50;
-          level.jugg_attackers[var1.team][var10.guid] = undefined;
+        if(isDefined(level.jugg_attackers[var_1.team][var_10.guid])) {
+          var_16 = 1;
+          var_1.jugg_allegiance += 50;
+          level.jugg_attackers[var_1.team][var_10.guid] = undefined;
         }
       } else {
-        var1.jugg_allegiance += 50;
+        var_1.jugg_allegiance += 50;
 
-        if(var14) {
-          var1.jugg_allegiance += 100;
+        if(var_14) {
+          var_1.jugg_allegiance += 100;
         }
 
-        if(isDefined(level.jugg_attackers[var1.team][var10.guid])) {
-          var16 = 1;
-          var1.jugg_allegiance += 100;
-          level.jugg_attackers[var1.team][var10.guid] = undefined;
+        if(isDefined(level.jugg_attackers[var_1.team][var_10.guid])) {
+          var_16 = 1;
+          var_1.jugg_allegiance += 100;
+          level.jugg_attackers[var_1.team][var_10.guid] = undefined;
         }
       }
     }
 
-    if(var14) {
-      var1 thread scripts\mp\utility\points::giveunifiedpoints("kill_juggernaut");
-      var17 = level.ppkonjugg;
-    } else if(var13) {
-      var1 thread scripts\mp\utility\points::giveunifiedpoints("jugg_on_jugg");
-      var17 = level.ppkjuggonjugg;
-    } else if(var15) {
-      var1 thread scripts\mp\utility\points::giveunifiedpoints("kill_as_juggernaut");
-      var17 = level.ppkasjugg;
+    if(var_14) {
+      var_1 thread scripts\mp\utility\points::giveunifiedpoints("kill_juggernaut");
+      var_17 = level.ppkonjugg;
+    } else if(var_13) {
+      var_1 thread scripts\mp\utility\points::giveunifiedpoints("jugg_on_jugg");
+      var_17 = level.ppkjuggonjugg;
+    } else if(var_15) {
+      var_1 thread scripts\mp\utility\points::giveunifiedpoints("kill_as_juggernaut");
+      var_17 = level.ppkasjugg;
     }
 
-    if(var17) {
-      var1 scripts\mp\gamescore::giveteamscoreforobjective(var1.pers["team"], var17);
+    if(var_17) {
+      var_1 scripts\mp\gamescore::giveteamscoreforobjective(var_1.pers["team"], var_17);
     }
 
-    if(var1.team != var10.team && game["state"] == "postgame" && game["teamScores"][var1.team] > game["teamScores"][level.otherteam[var1.team]]) {
-      var1.finalkill = 1;
+    if(var_1.team != var_10.team && game["state"] == "postgame" && game["teamScores"][var_1.team] > game["teamScores"][level.otherteam[var_1.team]]) {
+      var_1.finalkill = 1;
       return;
     }
 
     return;
   }
 
-  if(isDefined(var10.isjuggmodejuggernaut)) {
-    var18 = getbestteammate(var10.team, 0);
+  if(isDefined(var_10.isjuggmodejuggernaut)) {
+    var_18 = getbestteammate(var_10.team, 0);
 
-    if(!isDefined(var18)) {
-      var18 = getbestteammate(var10.team, 1);
+    if(!isDefined(var_18)) {
+      var_18 = getbestteammate(var_10.team, 1);
     }
 
-    if(!isDefined(var18)) {
-      var18 = var10;
+    if(!isDefined(var_18)) {
+      var_18 = var_10;
     }
 
-    resetjugg(var18, var10);
+    resetjugg(var_18, var_10);
     return;
   }
 }
 
-function resetjugg(var0, var1) {
-  if(isDefined(var1)) {
-    var1 notify("lost_juggernaut");
-    var1.isjuggmodejuggernaut = undefined;
+function resetjugg(var_0, var_1) {
+  if(isDefined(var_1)) {
+    var_1 notify("lost_juggernaut");
+    var_1.isjuggmodejuggernaut = undefined;
   } else {
-    level.jugg_available[var0.team] = 0;
+    level.jugg_available[var_0.team] = 0;
   }
 
-  level.jugg_currjugg[var0.team] = undefined;
-  level.tjugg_timerdisplay[var0.team].alpha = 0;
-  level.jugg_attackers[var0.team] = [];
+  level.jugg_currjugg[var_0.team] = undefined;
+  level.tjugg_timerdisplay[var_0.team].alpha = 0;
+  level.jugg_attackers[var_0.team] = [];
 
-  foreach(var3 in level.players) {
-    if(var3.team == var0.team) {
-      var3.jugg_allegiance = 0;
+  foreach(var_3 in level.players) {
+    if(var_3.team == var_0.team) {
+      var_3.jugg_allegiance = 0;
     }
   }
 
@@ -346,12 +346,12 @@ function givejuggloadout() {
   self.nostuckdamagekill = 1;
   scripts\mp\class::loadout_clearweapons(1);
   scripts\mp\playeractions::allowactionset("tjugg", 0);
-  var0 = scripts\mp\class::buildweapon("iw8_lm_kilo121", ["holo"], "none", "none", -1);
-  self giveweapon(var0);
-  scripts\cp_mp\utility\inventory_utility::forcevalidweapon(var0);
-  var0 = scripts\mp\class::buildweapon("iw8_la_rpapa7", [], "none", "none", -1);
-  self giveweapon(var0);
-  self givemaxammo(var0);
+  var_0 = scripts\mp\class::buildweapon("iw8_lm_kilo121", ["holo"], "none", "none", -1);
+  self giveweapon(var_0);
+  scripts\cp_mp\utility\inventory_utility::forcevalidweapon(var_0);
+  var_0 = scripts\mp\class::buildweapon("iw8_la_rpapa7", [], "none", "none", -1);
+  self giveweapon(var_0);
+  self givemaxammo(var_0);
   scripts\mp\utility\perk::giveperk("specialty_stun_resistance");
   scripts\mp\utility\perk::giveperk("specialty_sharp_focus");
   scripts\mp\utility\player::_setsuit("iw8_juggernaut_mp");
@@ -389,20 +389,20 @@ function nextjuggtimeout() {
   level.tjugg_timerdisplay[self.team].alpha = 1;
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(level.juggswitchtime);
   level.tjugg_timerdisplay[self.team].alpha = 0;
-  var0 = getbestteammate(self.team, 0);
+  var_0 = getbestteammate(self.team, 0);
 
-  if(!isDefined(var0)) {
-    var0 = getbestteammate(self.team, 1);
+  if(!isDefined(var_0)) {
+    var_0 = getbestteammate(self.team, 1);
   }
 
-  if(!isDefined(var0)) {
-    var0 = self;
+  if(!isDefined(var_0)) {
+    var_0 = self;
   }
 
   scripts\mp\utility\sound::playsoundonplayers("mp_enemy_obj_captured");
-  resetjugg(var0, self);
+  resetjugg(var_0, self);
 
-  if(var0 != self) {
+  if(var_0 != self) {
     thread respawnoldjugg();
     return;
   }
@@ -455,14 +455,14 @@ function rewardteammateproximity() {
   for(;;) {
     wait 1;
 
-    foreach(var1 in level.players) {
-      if(scripts\mp\utility\player::isreallyalive(var1) && !var1 scripts\mp\utility\player::isusingremote() && var1 != self && var1.team == self.team && distancesquared(var1.origin, self.origin) < 48400) {
-        if(var1.hasbeenjugg) {
-          var1.jugg_allegiance += 15;
+    foreach(var_1 in level.players) {
+      if(scripts\mp\utility\player::isreallyalive(var_1) && !var_1 scripts\mp\utility\player::isusingremote() && var_1 != self && var_1.team == self.team && distancesquared(var_1.origin, self.origin) < 48400) {
+        if(var_1.hasbeenjugg) {
+          var_1.jugg_allegiance += 15;
           continue;
         }
 
-        var1.jugg_allegiance += 25;
+        var_1.jugg_allegiance += 25;
       }
     }
   }
@@ -473,47 +473,47 @@ function logattackers() {
   self endon("death_or_disconnect");
 
   for(;;) {
-    self waittill("damage", var0, var1);
+    self waittill("damage", var_0, var_1);
 
-    if(isPlayer(var1) && var1.team != self.team) {
-      if(!isDefined(level.jugg_attackers[self.team][var1.guid])) {
-        level.jugg_attackers[self.team][var1.guid] = 1;
+    if(isPlayer(var_1) && var_1.team != self.team) {
+      if(!isDefined(level.jugg_attackers[self.team][var_1.guid])) {
+        level.jugg_attackers[self.team][var_1.guid] = 1;
       }
     }
   }
 }
 
-function resetjuggloadoutondisconnect(var0) {
+function resetjuggloadoutondisconnect(var_0) {
   level endon("game_ended");
 
-  if(var0) {
+  if(var_0) {
     self endon("death");
   } else {
     self endon("end_resetJuggLoadoutOnDisconnect");
   }
 
-  var1 = self.team;
+  var_1 = self.team;
   self waittill("disconnect");
-  var2 = getbestteammate(var1, 0);
+  var_2 = getbestteammate(var_1, 0);
 
-  if(!isDefined(var2)) {
-    var2 = getbestteammate(var1, 1);
+  if(!isDefined(var_2)) {
+    var_2 = getbestteammate(var_1, 1);
   }
 
-  if(isDefined(var2)) {
+  if(isDefined(var_2)) {
     scripts\mp\utility\sound::playsoundonplayers("mp_enemy_obj_captured");
-    resetjugg(var2);
+    resetjugg(var_2);
     return;
   }
 
-  level.jugg_available[var1] = 1;
-  level.jugg_currjugg[var1] = undefined;
-  level.tjugg_timerdisplay[var1].alpha = 0;
-  level.jugg_attackers[var1] = [];
+  level.jugg_available[var_1] = 1;
+  level.jugg_currjugg[var_1] = undefined;
+  level.tjugg_timerdisplay[var_1].alpha = 0;
+  level.jugg_attackers[var_1] = [];
 
-  foreach(var4 in level.players) {
-    if(var4.team == var1) {
-      var4.jugg_allegiance = 0;
+  foreach(var_4 in level.players) {
+    if(var_4.team == var_1) {
+      var_4.jugg_allegiance = 0;
     }
   }
 }
@@ -521,72 +521,72 @@ function resetjuggloadoutondisconnect(var0) {
 function resetjuggloadoutonchangeteam() {
   level endon("game_ended");
   self endon("disconnect");
-  var0 = self.team;
+  var_0 = self.team;
   scripts\engine\utility::ref_143a5("joined_team", "joined_spectators");
   self.isjuggmodejuggernaut = undefined;
-  var1 = getbestteammate(var0, 0);
+  var_1 = getbestteammate(var_0, 0);
 
-  if(!isDefined(var1)) {
-    var1 = getbestteammate(var0, 1);
+  if(!isDefined(var_1)) {
+    var_1 = getbestteammate(var_0, 1);
   }
 
-  if(isDefined(var1)) {
+  if(isDefined(var_1)) {
     scripts\mp\utility\sound::playsoundonplayers("mp_enemy_obj_captured");
-    resetjugg(var1);
+    resetjugg(var_1);
     return;
   }
 
-  level.jugg_available[var0] = 1;
-  level.jugg_currjugg[var0] = undefined;
-  level.tjugg_timerdisplay[var0].alpha = 0;
-  level.jugg_attackers[var0] = [];
+  level.jugg_available[var_0] = 1;
+  level.jugg_currjugg[var_0] = undefined;
+  level.tjugg_timerdisplay[var_0].alpha = 0;
+  level.jugg_attackers[var_0] = [];
 
-  foreach(var3 in level.players) {
-    if(var3.team == var0) {
-      var3.jugg_allegiance = 0;
+  foreach(var_3 in level.players) {
+    if(var_3.team == var_0) {
+      var_3.jugg_allegiance = 0;
     }
   }
 }
 
-function getbestteammate(var0, var1) {
-  var2 = undefined;
-  var3 = -1;
+function getbestteammate(var_0, var_1) {
+  var_2 = undefined;
+  var_3 = -1;
 
-  foreach(var5 in level.players) {
-    if((var1 || !var5 scripts\mp\utility\player::isusingremote()) && var5 != self && var5.team == var0 && var5.jugg_allegiance > var3) {
-      var2 = var5;
-      var3 = var5.jugg_allegiance;
+  foreach(var_5 in level.players) {
+    if((var_1 || !var_5 scripts\mp\utility\player::isusingremote()) && var_5 != self && var_5.team == var_0 && var_5.jugg_allegiance > var_3) {
+      var_2 = var_5;
+      var_3 = var_5.jugg_allegiance;
     }
   }
 
-  return var2;
+  return var_2;
 }
 
-function hidetimerdisplayongameend(var0) {
+function hidetimerdisplayongameend(var_0) {
   level waittill("game_ended");
-  var0.alpha = 0;
+  var_0.alpha = 0;
 }
 
-function createjuggobjectiveicon(var0) {
-  var1 = scripts\mp\objidpoolmanager::requestobjectiveid(99);
-  var0.juggobjid = var1;
-  var0.offset3d = (0, 0, 90);
-  var0.visibleteam = "any";
-  var0.ownerteam = var0.team;
-  scripts\mp\objidpoolmanager::objective_add_objective(var1, "current", var0.origin, "icon_minimap_juggernaut");
-  scripts\mp\objidpoolmanager::objective_set_play_intro(var1, 0);
-  scripts\mp\objidpoolmanager::objective_set_play_outro(var1, 0);
-  scripts\mp\objidpoolmanager::objective_playermask_showtoall(var1);
-  scripts\mp\objidpoolmanager::update_objective_onentity(var1, var0);
-  scripts\mp\objidpoolmanager::update_objective_setzoffset(var1, var0.offset3d[2]);
-  objective_setownerteam(var1, var0.team);
-  objective_setfriendlylabel(var1, "MP_INGAME_ONLY/OBJ_DEFEND_CAPS");
-  objective_setenemylabel(var1, "MP_INGAME_ONLY/OBJ_KILL_CAPS");
+function createjuggobjectiveicon(var_0) {
+  var_1 = scripts\mp\objidpoolmanager::requestobjectiveid(99);
+  var_0.juggobjid = var_1;
+  var_0.offset3d = (0, 0, 90);
+  var_0.visibleteam = "any";
+  var_0.ownerteam = var_0.team;
+  scripts\mp\objidpoolmanager::objective_add_objective(var_1, "current", var_0.origin, "icon_minimap_juggernaut");
+  scripts\mp\objidpoolmanager::objective_set_play_intro(var_1, 0);
+  scripts\mp\objidpoolmanager::objective_set_play_outro(var_1, 0);
+  scripts\mp\objidpoolmanager::objective_playermask_showtoall(var_1);
+  scripts\mp\objidpoolmanager::update_objective_onentity(var_1, var_0);
+  scripts\mp\objidpoolmanager::update_objective_setzoffset(var_1, var_0.offset3d[2]);
+  objective_setownerteam(var_1, var_0.team);
+  objective_setfriendlylabel(var_1, "MP_INGAME_ONLY/OBJ_DEFEND_CAPS");
+  objective_setenemylabel(var_1, "MP_INGAME_ONLY/OBJ_KILL_CAPS");
 }
 
-function cleanupobjectiveiconsforjugg(var0) {
-  scripts\mp\objidpoolmanager::returnobjectiveid(var0.juggobjid);
-  var0.juggobjid = undefined;
+function cleanupobjectiveiconsforjugg(var_0) {
+  scripts\mp\objidpoolmanager::returnobjectiveid(var_0.juggobjid);
+  var_0.juggobjid = undefined;
 }
 
 function updatejuggcurorigin() {
@@ -607,9 +607,9 @@ function updatejuggpingorigin() {
   self.objpingdelay = 4;
 
   for(;;) {
-    foreach(var1 in level.teamnamelist) {
-      if(!scripts\mp\gameobjects::isfriendlyteam(var1)) {
-        objective_setpingsforteam(self.juggobjid, var1);
+    foreach(var_1 in level.teamnamelist) {
+      if(!scripts\mp\gameobjects::isfriendlyteam(var_1)) {
+        objective_setpingsforteam(self.juggobjid, var_1);
         objective_ping(self.juggobjid);
       }
     }

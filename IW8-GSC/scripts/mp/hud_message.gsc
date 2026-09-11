@@ -117,96 +117,96 @@ function init() {
 
 function onplayerconnect() {
   for(;;) {
-    level waittill("connected", var0);
+    level waittill("connected", var_0);
     thread lowermessagethink();
     thread eventsplashesthink();
   }
 }
 
-function showkillstreaksplash(var0, var1, var2) {
+function showkillstreaksplash(var_0, var_1, var_2) {
   if(!isPlayer(self)) {
     return;
   }
 
-  var3 = undefined;
+  var_3 = undefined;
 
-  if(istrue(var2)) {
-    var3 = 1;
+  if(istrue(var_2)) {
+    var_3 = 1;
   }
 
-  var0 = getspecialistsplashfromkillstreak(var0);
-  showsplash(var0, var1, undefined, var3);
+  var_0 = getspecialistsplashfromkillstreak(var_0);
+  showsplash(var_0, var_1, undefined, var_3);
 
   if(scripts\cp_mp\utility\game_utility::isrealismenabled()) {
-    scripts\mp\utility\dialog::playkillstreakdialogonplayer(var0, "killstreak_earned", 1);
+    scripts\mp\utility\dialog::playkillstreakdialogonplayer(var_0, "killstreak_earned", 1);
     return;
   }
 }
 
-function getspecialistsplashfromkillstreak(var0) {
-  var1 = var0;
-  var2 = scripts\mp\perks\perks::getspecialistperkforstreak(var0);
+function getspecialistsplashfromkillstreak(var_0) {
+  var_1 = var_0;
+  var_2 = scripts\mp\perks\perks::getspecialistperkforstreak(var_0);
 
-  if(isDefined(var2)) {
-    var1 = var2;
+  if(isDefined(var_2)) {
+    var_1 = var_2;
   }
 
-  return var1;
+  return var_1;
 }
 
-function showsplashwithkillcheckhack(var0, var1, var2, var3, var4) {
+function showsplashwithkillcheckhack(var_0, var_1, var_2, var_3, var_4) {
   level endon("game_ended");
   self endon("disconnect");
   waitframe();
 
   if(isDefined(self.lastkilltime)) {
-    var5 = getdvarfloat("scr_splash_kill_buffer", 0.5) * 1000;
-    var6 = int(max(var5 - gettime() - self.lastkilltime, 0));
-    wait var6 / 1000;
+    var_5 = getdvarfloat("scr_splash_kill_buffer", 0.5) * 1000;
+    var_6 = int(max(var_5 - gettime() - self.lastkilltime, 0));
+    wait var_6 / 1000;
   }
 
-  showsplash(var0, var1, var2, var3, 1);
+  showsplash(var_0, var_1, var_2, var_3, 1);
 }
 
-function showsplash(var0, var1, var2, var3, var4) {
-  if(!istrue(var4)) {
-    thread showsplashwithkillcheckhack(var0, var1, var2, var3, var4);
+function showsplash(var_0, var_1, var_2, var_3, var_4) {
+  if(!istrue(var_4)) {
+    thread showsplashwithkillcheckhack(var_0, var_1, var_2, var_3, var_4);
     return;
   }
 
-  var5 = undefined;
+  var_5 = undefined;
 
-  if(isDefined(var2)) {
-    var5 = var2 getentitynumber();
+  if(isDefined(var_2)) {
+    var_5 = var_2 getentitynumber();
   }
 
   if(isDefined(self.recentsplashcount) && self.recentsplashcount >= 6) {
-    queuesplash(var0, var1, var2, var5, var3);
+    queuesplash(var_0, var_1, var_2, var_5, var_3);
     return;
   }
 
   if(!scripts\mp\utility\player::isreallyalive(self) && !self ismlgspectator()) {
-    queuesplash(var0, var1, var2, var5, var3);
+    queuesplash(var_0, var_1, var_2, var_5, var_3);
     return;
   }
 
-  showsplashinternal(var0, var1, var2, var5, var3);
+  showsplashinternal(var_0, var_1, var_2, var_5, var_3);
 }
 
-function showsplashinternal(var0, var1, var2, var3, var4) {
+function showsplashinternal(var_0, var_1, var_2, var_3, var_4) {
   if(!isPlayer(self)) {
     return;
   }
 
-  if(isDefined(var3)) {
-    if(!isDefined(var2)) {
+  if(isDefined(var_3)) {
+    if(!isDefined(var_2)) {
       return;
     }
   }
 
-  var5 = getsplashid(var0);
+  var_5 = getsplashid(var_0);
 
-  if(!isDefined(var5) || var5 < 0) {
+  if(!isDefined(var_5) || var_5 < 0) {
     return;
   }
 
@@ -218,31 +218,31 @@ function showsplashinternal(var0, var1, var2, var3, var4) {
     self.splashlisttoggle = 1;
   }
 
-  var6 = var5;
+  var_6 = var_5;
 
   if(self.splashlisttoggle) {
-    var6 |= 4096;
+    var_6 |= 4096;
   }
 
-  if(isDefined(var1)) {
-    self setclientomnvar("ui_player_splash_param_" + self.nextsplashlistindex, var1);
+  if(isDefined(var_1)) {
+    self setclientomnvar("ui_player_splash_param_" + self.nextsplashlistindex, var_1);
   } else {
     self setclientomnvar("ui_player_splash_param_" + self.nextsplashlistindex, -1);
   }
 
-  if(isDefined(var3)) {
-    self setclientomnvar("ui_player_splash_cardClientId_" + self.nextsplashlistindex, var3);
+  if(isDefined(var_3)) {
+    self setclientomnvar("ui_player_splash_cardClientId_" + self.nextsplashlistindex, var_3);
   } else {
     self setclientomnvar("ui_player_splash_cardClientId_" + self.nextsplashlistindex, -1);
   }
 
-  if(isDefined(var4)) {
-    self setclientomnvar("ui_player_splash_use_alt_" + self.nextsplashlistindex, var4);
+  if(isDefined(var_4)) {
+    self setclientomnvar("ui_player_splash_use_alt_" + self.nextsplashlistindex, var_4);
   } else {
     self setclientomnvar("ui_player_splash_use_alt_" + self.nextsplashlistindex, 0);
   }
 
-  self setclientomnvar("ui_player_splash_id_" + self.nextsplashlistindex, var6);
+  self setclientomnvar("ui_player_splash_id_" + self.nextsplashlistindex, var_6);
 
   if(!isDefined(self.recentsplashcount)) {
     self.recentsplashcount = 1;
@@ -260,24 +260,24 @@ function showsplashinternal(var0, var1, var2, var3, var4) {
   }
 }
 
-function queuesplash(var0, var1, var2, var3, var4) {
-  var5 = spawnStruct();
-  var5.ref = var0;
-  var5.optionalnumber = var1;
-  var5.playerforplayercard = var2;
-  var5.playernumforplayercard = var3;
-  var5.altdisplayindex = var4;
+function queuesplash(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = spawnStruct();
+  var_5.ref = var_0;
+  var_5.optionalnumber = var_1;
+  var_5.playerforplayercard = var_2;
+  var_5.playernumforplayercard = var_3;
+  var_5.altdisplayindex = var_4;
 
   if(!isDefined(self.splashqueuehead)) {
-    self.splashqueuehead = var5;
-    self.splashqueuetail = var5;
+    self.splashqueuehead = var_5;
+    self.splashqueuetail = var_5;
     thread handlesplashqueue();
     return;
   }
 
-  var6 = self.splashqueuetail;
-  var6.nextsplash = var5;
-  self.splashqueuetail = var5;
+  var_6 = self.splashqueuetail;
+  var_6.nextsplash = var_5;
+  self.splashqueuetail = var_5;
 }
 
 function handlesplashqueue() {
@@ -292,10 +292,10 @@ function handlesplashqueue() {
       scripts\engine\utility::ref_143a5("splash_list_cleared", "spawned_player");
     }
 
-    for(var0 = 0; var0 < 6; var0++) {
-      var1 = self.splashqueuehead;
-      showsplashinternal(var1.ref, var1.optionalnumber, var1.playerforplayercard, var1.playernumforplayercard, var1.altdisplayindex);
-      self.splashqueuehead = var1.nextsplash;
+    for(var_0 = 0; var_0 < 6; var_0++) {
+      var_1 = self.splashqueuehead;
+      showsplashinternal(var_1.ref, var_1.optionalnumber, var_1.playerforplayercard, var_1.playernumforplayercard, var_1.altdisplayindex);
+      self.splashqueuehead = var_1.nextsplash;
 
       if(!isDefined(self.splashqueuehead)) {
         break;
@@ -308,55 +308,55 @@ function handlesplashqueue() {
 
 function heartbeat_sensor_pick_up_monitor() {
   self notify("clearSplashQueue");
-  var0 = self.splashqueuehead;
+  var_0 = self.splashqueuehead;
 
-  while(isDefined(var0)) {
-    var1 = var0;
-    var0 = var1.nextsplash;
-    var1.nextsplash = undefined;
+  while(isDefined(var_0)) {
+    var_1 = var_0;
+    var_0 = var_1.nextsplash;
+    var_1.nextsplash = undefined;
   }
 
   self.splashqueuehead = undefined;
   self.splashqueuetail = undefined;
 }
 
-function getsplashid(var0) {
-  var1 = level.splashtablecache[var0];
+function getsplashid(var_0) {
+  var_1 = level.splashtablecache[var_0];
 
-  if(!isDefined(var1)) {
-    var1 = tablelookuprownum(getsplashtablename(), 0, var0);
-    level.splashtablecache[var0] = var1;
+  if(!isDefined(var_1)) {
+    var_1 = tablelookuprownum(getsplashtablename(), 0, var_0);
+    level.splashtablecache[var_0] = var_1;
   }
 
-  return var1;
+  return var_1;
 }
 
 function lowermessagethink() {
   self endon("disconnect");
   self.lowermessages = [];
-  var0 = "default";
+  var_0 = "default";
 
   if(isDefined(level.lowermessagefont)) {
-    var0 = level.lowermessagefont;
+    var_0 = level.lowermessagefont;
   }
 
-  var1 = level.lowertexty;
-  var2 = level.lowertextfontsize;
-  var3 = 1.25;
+  var_1 = level.lowertexty;
+  var_2 = level.lowertextfontsize;
+  var_3 = 1.25;
 
   if(level.splitscreen || self issplitscreenplayer() && !isai(self)) {
-    var1 -= 40;
-    var2 = level.lowertextfontsize * 1.3;
-    var3 *= 1.5;
+    var_1 -= 40;
+    var_2 = level.lowertextfontsize * 1.3;
+    var_3 *= 1.5;
   }
 
-  self.lowermessage = scripts\mp\hud_util::createfontstring(var0, var2);
+  self.lowermessage = scripts\mp\hud_util::createfontstring(var_0, var_2);
   self.lowermessage settext("");
   self.lowermessage.archived = 0;
   self.lowermessage.sort = 10;
   self.lowermessage.showinkillcam = 0;
-  self.lowermessage scripts\mp\hud_util::setpoint("CENTER", level.lowertextyalign, 0, var1);
-  self.lowertimer = scripts\mp\hud_util::createfontstring("default", var3);
+  self.lowermessage scripts\mp\hud_util::setpoint("CENTER", level.lowertextyalign, 0, var_1);
+  self.lowertimer = scripts\mp\hud_util::createfontstring("default", var_3);
   self.lowertimer scripts\mp\hud_util::setparent(self.lowermessage);
   self.lowertimer scripts\mp\hud_util::setpoint("TOP", "BOTTOM", 0, 0);
   self.lowertimer settext("");
@@ -369,124 +369,124 @@ function isdoingsplash() {
   return false;
 }
 
-function teamoutcomenotify(var0, var1, var2, var3, var4) {
+function teamoutcomenotify(var_0, var_1, var_2, var_3, var_4) {
   self endon("disconnect");
 
-  if(isDefined(var4)) {
-    self setclientomnvar("ui_round_end_extra_message", var4);
+  if(isDefined(var_4)) {
+    self setclientomnvar("ui_round_end_extra_message", var_4);
   }
 
-  var5 = self.pers["team"];
+  var_5 = self.pers["team"];
 
   if(self ismlgspectator()) {
-    var5 = self getmlgspectatorteam();
+    var_5 = self getmlgspectatorteam();
   }
 
-  if(!isDefined(var5) || !scripts\engine\utility::array_contains(level.teamnamelist, var5)) {
-    var5 = "allies";
+  if(!isDefined(var_5) || !scripts\engine\utility::array_contains(level.teamnamelist, var_5)) {
+    var_5 = "allies";
   }
 
-  if(var0 == "halftime") {
+  if(var_0 == "halftime") {
     self setclientomnvar("ui_round_end_title", game["round_end"]["halftime"]);
-    var0 = "allies";
-  } else if(var0 == "intermission") {
+    var_0 = "allies";
+  } else if(var_0 == "intermission") {
     self setclientomnvar("ui_round_end_title", game["round_end"]["intermission"]);
-    var0 = "allies";
-  } else if(var0 == "switching_sides") {
+    var_0 = "allies";
+  } else if(var_0 == "switching_sides") {
     self setclientomnvar("ui_round_end_title", game["round_end"]["side_switch"]);
-    var0 = "allies";
-  } else if(var0 == "roundend") {
+    var_0 = "allies";
+  } else if(var_0 == "roundend") {
     self setclientomnvar("ui_round_end_title", game["round_end"]["roundend"]);
-    var0 = "allies";
-  } else if(var0 == "overtime") {
+    var_0 = "allies";
+  } else if(var_0 == "overtime") {
     if(scripts\mp\utility\game::iswinbytworulegametype() && !scripts\mp\utility\game::allteamstied()) {
       self setclientomnvar("ui_round_end_title", game["round_end"]["match_point"]);
     } else {
       self setclientomnvar("ui_round_end_title", game["round_end"]["overtime"]);
     }
 
-    var0 = "allies";
-  } else if(var0 == "match_point") {
+    var_0 = "allies";
+  } else if(var_0 == "match_point") {
     self setclientomnvar("ui_round_end_title", game["round_end"]["match_point"]);
-    var0 = "allies";
-  } else if(var0 == "final_round") {
+    var_0 = "allies";
+  } else if(var_0 == "final_round") {
     self setclientomnvar("ui_round_end_title", game["round_end"]["final_round"]);
-    var0 = "allies";
-  } else if(var0 == "win_by_two") {
+    var_0 = "allies";
+  } else if(var_0 == "win_by_two") {
     self setclientomnvar("ui_round_end_title", game["round_end"]["win_by_two"]);
-    var0 = "allies";
-  } else if(var0 == "tie") {
-    if(var1 && !scripts\mp\utility\game::waslastround()) {
+    var_0 = "allies";
+  } else if(var_0 == "tie") {
+    if(var_1 && !scripts\mp\utility\game::waslastround()) {
       self setclientomnvar("ui_round_end_title", game["round_end"]["round_draw"]);
     } else {
       self setclientomnvar("ui_round_end_title", game["round_end"]["draw"]);
     }
 
-    var0 = "allies";
+    var_0 = "allies";
   } else if(self ismlgspectator()) {
     self setclientomnvar("ui_round_end_title", game["round_end"]["spectator"]);
-  } else if(isDefined(self.pers["team"]) && var0 == var5) {
-    if(var1 && !scripts\mp\utility\game::waslastround()) {
+  } else if(isDefined(self.pers["team"]) && var_0 == var_5) {
+    if(var_1 && !scripts\mp\utility\game::waslastround()) {
       self setclientomnvar("ui_round_end_title", game["round_end"]["round_win"]);
     } else {
       self setclientomnvar("ui_round_end_title", game["round_end"]["victory"]);
     }
-  } else if(var1 && !scripts\mp\utility\game::waslastround()) {
+  } else if(var_1 && !scripts\mp\utility\game::waslastround()) {
     self setclientomnvar("ui_round_end_title", game["round_end"]["round_loss"]);
   } else {
     self setclientomnvar("ui_round_end_title", game["round_end"]["defeat"]);
 
     if(istrue(self.joinedinprogress) && scripts\mp\utility\game::onlinestatsenabled()) {
-      var2 = game["end_reason"]["loss_stat_prevented"];
+      var_2 = game["end_reason"]["loss_stat_prevented"];
     }
   }
 
   if(scripts\mp\utility\game::getgametype() == "arena" || scripts\mp\utility\game::getgametype() == "br" || scripts\mp\utility\game::getgametype() == "arm" || scripts\mp\utility\game::getgametype() == "siege") {
-    if(isDefined(var3)) {
-      if(isDefined(self.pers["team"]) && var0 == var5) {
-        var2 = var2;
+    if(isDefined(var_3)) {
+      if(isDefined(self.pers["team"]) && var_0 == var_5) {
+        var_2 = var_2;
       } else {
-        var2 = var3;
+        var_2 = var_3;
       }
     }
   } else if(scripts\mp\utility\game::inovertime() && scripts\mp\utility\game::waslastround() && scripts\mp\utility\game::istimetobeatrulegametype()) {
     if(scripts\mp\utility\game::getgametype() == "ctf") {
-      if(isDefined(self.pers["team"]) && var0 == var5) {
-        var2 = game["end_reason"]["time_to_beat_ctf_win"];
-      } else if(isDefined(self.pers["team"]) && var0 == scripts\mp\utility\game::getotherteam(self.pers["team"])[0]) {
-        var2 = game["end_reason"]["time_to_beat_ctf_loss"];
+      if(isDefined(self.pers["team"]) && var_0 == var_5) {
+        var_2 = game["end_reason"]["time_to_beat_ctf_win"];
+      } else if(isDefined(self.pers["team"]) && var_0 == scripts\mp\utility\game::getotherteam(self.pers["team"])[0]) {
+        var_2 = game["end_reason"]["time_to_beat_ctf_loss"];
       }
     } else if(scripts\mp\utility\game::getgametype() == "ball") {
-      if(isDefined(self.pers["team"]) && var0 == var5) {
-        var2 = game["end_reason"]["time_to_beat_uplink_win"];
-      } else if(isDefined(self.pers["team"]) && var0 == scripts\mp\utility\game::getotherteam(self.pers["team"])[0]) {
-        var2 = game["end_reason"]["time_to_beat_uplink_loss"];
+      if(isDefined(self.pers["team"]) && var_0 == var_5) {
+        var_2 = game["end_reason"]["time_to_beat_uplink_win"];
+      } else if(isDefined(self.pers["team"]) && var_0 == scripts\mp\utility\game::getotherteam(self.pers["team"])[0]) {
+        var_2 = game["end_reason"]["time_to_beat_uplink_loss"];
       }
     }
-  } else if(isDefined(var3)) {
-    if(isDefined(self.pers["team"]) && var0 == var5) {
-      var2 = var2;
+  } else if(isDefined(var_3)) {
+    if(isDefined(self.pers["team"]) && var_0 == var_5) {
+      var_2 = var_2;
     } else {
-      var2 = var3;
+      var_2 = var_3;
     }
   }
 
-  if(!isDefined(var2)) {
-    var2 = 1;
+  if(!isDefined(var_2)) {
+    var_2 = 1;
   }
 
   if(self ismlgspectator()) {
-    if(isDefined(game["end_reason_mlg_mapping"][var2])) {
-      var2 = game["end_reason_mlg_mapping"][var2];
+    if(isDefined(game["end_reason_mlg_mapping"][var_2])) {
+      var_2 = game["end_reason_mlg_mapping"][var_2];
     }
   }
 
-  self setclientomnvar("ui_round_end_reason", var2);
+  self setclientomnvar("ui_round_end_reason", var_2);
 
   if(self ismlgspectator()) {
-    if(var0 == "allies") {
+    if(var_0 == "allies") {
       self setclientomnvar("ui_round_end_winner", 1);
-    } else if(var0 == "axis") {
+    } else if(var_0 == "axis") {
       self setclientomnvar("ui_round_end_winner", 2);
     } else {
       self setclientomnvar("ui_round_end_winner", 0);
@@ -494,23 +494,23 @@ function teamoutcomenotify(var0, var1, var2, var3, var4) {
   }
 
   if(!scripts\mp\utility\game::isroundbased() || !scripts\mp\utility\game::isobjectivebased() || scripts\mp\utility\game::ismoddedroundgame()) {
-    var6 = scripts\mp\gamescore::_getteamscore(var5);
+    var_6 = scripts\mp\gamescore::_getteamscore(var_5);
 
-    if(var6 > 16000) {
-      var6 = 16000;
+    if(var_6 > 16000) {
+      var_6 = 16000;
     }
 
-    var7 = scripts\mp\gamescore::_getteamscore(scripts\mp\utility\game::getotherteam(var5)[0]);
+    var_7 = scripts\mp\gamescore::_getteamscore(scripts\mp\utility\game::getotherteam(var_5)[0]);
 
-    if(var7 > 16000) {
-      var7 = 16000;
+    if(var_7 > 16000) {
+      var_7 = 16000;
     }
 
-    self setclientomnvar("ui_round_end_friendly_score", var6);
-    self setclientomnvar("ui_round_end_enemy_score", var7);
+    self setclientomnvar("ui_round_end_friendly_score", var_6);
+    self setclientomnvar("ui_round_end_enemy_score", var_7);
   } else {
-    self setclientomnvar("ui_round_end_friendly_score", game["roundsWon"][var5]);
-    self setclientomnvar("ui_round_end_enemy_score", game["roundsWon"][scripts\mp\utility\game::getotherteam(var5)[0]]);
+    self setclientomnvar("ui_round_end_friendly_score", game["roundsWon"][var_5]);
+    self setclientomnvar("ui_round_end_enemy_score", game["roundsWon"][scripts\mp\utility\game::getotherteam(var_5)[0]]);
   }
 
   if(isDefined(self.matchbonus)) {
@@ -519,30 +519,30 @@ function teamoutcomenotify(var0, var1, var2, var3, var4) {
   }
 }
 
-function outcomenotify(var0, var1, var2) {
+function outcomenotify(var_0, var_1, var_2) {
   self endon("disconnect");
-  var3 = level.placement["all"];
-  var4 = var3[0];
-  var5 = var3[1];
-  var6 = var3[2];
+  var_3 = level.placement["all"];
+  var_4 = var_3[0];
+  var_5 = var_3[1];
+  var_6 = var_3[2];
 
-  if(isstring(var0) && var0 == "tie") {
-    if(isDefined(var4) && self == var4 || isDefined(var5) && self == var5 || isDefined(var6) && self == var6) {
+  if(isstring(var_0) && var_0 == "tie") {
+    if(isDefined(var_4) && self == var_4 || isDefined(var_5) && self == var_5 || isDefined(var_6) && self == var_6) {
       self setclientomnvar("ui_round_end_title", game["round_end"]["tie"]);
-      self setclientomnvar("ui_round_end_reason", var1);
+      self setclientomnvar("ui_round_end_reason", var_1);
     } else {
       self setclientomnvar("ui_round_end_title", game["round_end"]["defeat"]);
-      self setclientomnvar("ui_round_end_reason", scripts\engine\utility::ter_op(isDefined(var2), var2, var1));
+      self setclientomnvar("ui_round_end_reason", scripts\engine\utility::ter_op(isDefined(var_2), var_2, var_1));
     }
-  } else if(isDefined(var4) && self == var4 || isDefined(var5) && self == var5 || isDefined(var6) && self == var6) {
+  } else if(isDefined(var_4) && self == var_4 || isDefined(var_5) && self == var_5 || isDefined(var_6) && self == var_6) {
     self setclientomnvar("ui_round_end_title", game["round_end"]["victory"]);
-    self setclientomnvar("ui_round_end_reason", var1);
+    self setclientomnvar("ui_round_end_reason", var_1);
   } else {
     self setclientomnvar("ui_round_end_title", game["round_end"]["defeat"]);
-    self setclientomnvar("ui_round_end_reason", scripts\engine\utility::ter_op(isDefined(var2), var2, var1));
+    self setclientomnvar("ui_round_end_reason", scripts\engine\utility::ter_op(isDefined(var_2), var_2, var_1));
 
     if(istrue(self.joinedinprogress) && scripts\mp\utility\game::onlinestatsenabled()) {
-      var1 = game["end_reason"]["loss_stat_prevented"];
+      var_1 = game["end_reason"]["loss_stat_prevented"];
     }
   }
 
@@ -574,46 +574,46 @@ function cleanuplocalplayersplashlist() {
   self notify("splash_list_cleared");
 }
 
-function splashshowncallback(var0, var1) {
-  if(var0 != "splash_shown") {
+function splashshowncallback(var_0, var_1) {
+  if(var_0 != "splash_shown") {
     return;
   }
 
-  var2 = tablelookupbyrow(getsplashtablename(), var1, 0);
-  var3 = tablelookupbyrow(getsplashtablename(), var1, 6);
+  var_2 = tablelookupbyrow(getsplashtablename(), var_1, 0);
+  var_3 = tablelookupbyrow(getsplashtablename(), var_1, 6);
 
-  switch (var3) {
+  switch (var_3) {
     case "killstreak_splash":
-      onkillstreaksplashshown(var2);
+      onkillstreaksplashshown(var_2);
       break;
   }
 }
 
-function onkillstreaksplashshown(var0) {
-  scripts\mp\utility\dialog::playkillstreakdialogonplayer(var0, "killstreak_earned", 1);
-  thread checkforspecialistbonusvo(var0);
+function onkillstreaksplashshown(var_0) {
+  scripts\mp\utility\dialog::playkillstreakdialogonplayer(var_0, "killstreak_earned", 1);
+  thread checkforspecialistbonusvo(var_0);
 }
 
-function checkforspecialistbonusvo(var0) {
-  var1 = scripts\mp\perks\perks::getspecialistperkforstreak();
+function checkforspecialistbonusvo(var_0) {
+  var_1 = scripts\mp\perks\perks::getspecialistperkforstreak();
 
-  if(var0 == "specialist_perk_bonus") {
+  if(var_0 == "specialist_perk_bonus") {
     wait 2;
     level thread scripts\mp\battlechatter_mp::trysaylocalsound(self, "flavor_positive");
     return;
   }
 }
 
-function showerrormessage(var0, var1) {
-  var2 = tablelookuprownum("mp/errorMessages.csv", 0, var0);
+function showerrormessage(var_0, var_1) {
+  var_2 = tablelookuprownum("mp/errorMessages.csv", 0, var_0);
 
-  if(isDefined(var1)) {
-    self setclientomnvar("ui_mp_error_message_param", var1);
+  if(isDefined(var_1)) {
+    self setclientomnvar("ui_mp_error_message_param", var_1);
   } else {
     self setclientomnvar("ui_mp_error_message_param", -1);
   }
 
-  self setclientomnvar("ui_mp_error_message_id", var2);
+  self setclientomnvar("ui_mp_error_message_id", var_2);
 
   if(!isDefined(self.errormessagebitflipper)) {
     self.errormessagebitflipper = 0;
@@ -623,31 +623,31 @@ function showerrormessage(var0, var1) {
   self setclientomnvar("ui_mp_error_trigger", scripts\engine\utility::ter_op(self.errormessagebitflipper, 2, 1));
 }
 
-function showerrormessagetoallplayers(var0, var1) {
-  foreach(var3 in level.players) {
-    showerrormessage(var0, var1);
+function showerrormessagetoallplayers(var_0, var_1) {
+  foreach(var_3 in level.players) {
+    showerrormessage(var_0, var_1);
   }
 }
 
-function testmiscmessage(var0) {
-  var1 = tablelookuprownum("mp/miscMessages.csv", 0, var0);
+function testmiscmessage(var_0) {
+  var_1 = tablelookuprownum("mp/miscMessages.csv", 0, var_0);
 
-  if(isDefined(var1) && var1 >= 0) {
+  if(isDefined(var_1) && var_1 >= 0) {
     return true;
   }
 
   return false;
 }
 
-function showmiscmessage(var0) {
-  var1 = tablelookuprownum("mp/miscMessages.csv", 0, var0);
-  var2 = tablelookupbyrow("mp/miscMessages.csv", var1, 3);
+function showmiscmessage(var_0) {
+  var_1 = tablelookuprownum("mp/miscMessages.csv", 0, var_0);
+  var_2 = tablelookupbyrow("mp/miscMessages.csv", var_1, 3);
 
-  if(isDefined(var2) && var2 != "") {
-    self playlocalsound(var2);
+  if(isDefined(var_2) && var_2 != "") {
+    self playlocalsound(var_2);
   }
 
-  self setclientomnvar("ui_misc_message_id", var1);
+  self setclientomnvar("ui_misc_message_id", var_1);
   self setclientomnvar("ui_misc_message_trigger", 1);
 }
 
@@ -658,16 +658,16 @@ function eventsplashesthink() {
     return;
   }
 
-  var0 = 0;
+  var_0 = 0;
 
   if(!isDefined(self.pers["hasSpawned"])) {
-    var0 = 1;
+    var_0 = 1;
   }
 
-  var1 = getdvarint("OLLOKOKKSM", 0) == 1 || !isgamebattlematch();
+  var_1 = getdvarint("OLLOKOKKSM", 0) == 1 || !isgamebattlematch();
 
-  if(!var1) {
-    var0 = 0;
+  if(!var_1) {
+    var_0 = 0;
   }
 
   if(scripts\mp\flags::gameflag("infil_will_run")) {
@@ -692,14 +692,14 @@ function eventsplashesthink() {
     return;
   }
 
-  var2 = self getprivatepartysize() > 1;
+  var_2 = self getprivatepartysize() > 1;
 
-  if(var0) {
-    if(getdvarint("LKKNORQKTP") == 2 || var2 && getdvarint("NTLKOKLKRS") == 2 || self isps4player() && getdvarfloat("MPPRMTPSLT") == 2) {
+  if(var_0) {
+    if(getdvarint("LKKNORQKTP") == 2 || var_2 && getdvarint("NTLKOKLKRS") == 2 || self isps4player() && getdvarfloat("MPPRMTPSLT") == 2) {
       showsplash("event_double_xp");
     }
 
-    if(getdvarint("PMORNPNTK") == 2 || var2 && getdvarint("LNQMMNNPSR") == 2) {
+    if(getdvarint("PMORNPNTK") == 2 || var_2 && getdvarint("LNQMMNNPSR") == 2) {
       showsplash("event_double_weapon_xp");
     }
 
@@ -711,7 +711,7 @@ function eventsplashesthink() {
       showsplash("event_double_keys");
     }
 
-    if(getdvarint("OMPLRMMKML") == 2 || var2 && getdvarint("NTPRTMORKK") == 2) {
+    if(getdvarint("OMPLRMMKML") == 2 || var_2 && getdvarint("NTPRTMORKK") == 2) {
       showsplash("event_double_xp_teams");
       return;
     }
@@ -720,59 +720,59 @@ function eventsplashesthink() {
   }
 }
 
-function notifyteam(var0, var1, var2, var3, var4, var5) {
-  var6 = scripts\mp\utility\teams::getenemyteams(var2);
+function notifyteam(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = scripts\mp\utility\teams::getenemyteams(var_2);
 
-  foreach(var8 in level.players) {
-    if(!scripts\mp\utility\player::isreallyalive(var8)) {
+  foreach(var_8 in level.players) {
+    if(!scripts\mp\utility\player::isreallyalive(var_8)) {
       continue;
     }
 
-    if(var8.team == var2) {
-      if(isDefined(var3)) {
-        if(!scripts\engine\utility::array_contains(var3, var8)) {
-          thread showsplash(var8, var0);
+    if(var_8.team == var_2) {
+      if(isDefined(var_3)) {
+        if(!scripts\engine\utility::array_contains(var_3, var_8)) {
+          thread showsplash(var_8, var_0);
         }
       } else {
-        thread showsplash(var8, var0);
+        thread showsplash(var_8, var_0);
       }
 
       continue;
     }
 
-    foreach(var10 in var6) {
-      if(var8.team == var10) {
-        if(isDefined(var3)) {
-          if(!scripts\engine\utility::array_contains(var3, var8)) {
-            thread showsplash(var8, var1);
+    foreach(var_10 in var_6) {
+      if(var_8.team == var_10) {
+        if(isDefined(var_3)) {
+          if(!scripts\engine\utility::array_contains(var_3, var_8)) {
+            thread showsplash(var_8, var_1);
           }
 
           continue;
         }
 
-        thread showsplash(var8, var1);
+        thread showsplash(var_8, var_1);
       }
     }
   }
 }
 
-function updatematchstatushintforallplayers(var0, var1, var2, var3, var4) {
+function updatematchstatushintforallplayers(var_0, var_1, var_2, var_3, var_4) {
   level notify("updateHint");
   level endon("updateHint");
 
-  foreach(var6 in level.players) {
-    if(isDefined(var0) && var6.team == var0) {
-      if(isDefined(var3) && var6 == var3) {
-        var6 setclientomnvar("ui_match_status_hint_text", var4);
+  foreach(var_6 in level.players) {
+    if(isDefined(var_0) && var_6.team == var_0) {
+      if(isDefined(var_3) && var_6 == var_3) {
+        var_6 setclientomnvar("ui_match_status_hint_text", var_4);
       } else {
-        var6 setclientomnvar("ui_match_status_hint_text", var1);
+        var_6 setclientomnvar("ui_match_status_hint_text", var_1);
       }
 
       continue;
     }
 
-    if(isDefined(var2)) {
-      var6 setclientomnvar("ui_match_status_hint_text", var2);
+    if(isDefined(var_2)) {
+      var_6 setclientomnvar("ui_match_status_hint_text", var_2);
     }
   }
 }

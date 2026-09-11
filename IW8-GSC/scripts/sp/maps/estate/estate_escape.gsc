@@ -22,8 +22,8 @@ function estate_escape_precache() {
   scripts\sp\maps\estate\estate_util::hide_ents("collapse_blocker_a");
   scripts\sp\maps\estate\estate_util::hide_ents("collapse_blocker_b");
   getEnt("stairs_destroyed_window", "script_noteworthy") hide();
-  var0 = getEntArray("heli_pos_override", "targetname");
-  scripts\engine\utility::array_thread(var0, &scripts\engine\sp\utility::add_trigger_function, &heli_pos_override_trig);
+  var_0 = getEntArray("heli_pos_override", "targetname");
+  scripts\engine\utility::array_thread(var_0, &scripts\engine\sp\utility::add_trigger_function, &heli_pos_override_trig);
 }
 
 function checksprinting() {
@@ -37,40 +37,40 @@ function checksprinting() {
 function escape_trig_logic() {
   self endon("death");
   wait 0.15;
-  var0 = undefined;
+  var_0 = undefined;
 
   if(isDefined(self.target)) {
-    var0 = scripts\engine\utility::getStructArray(self.target, "targetname");
+    var_0 = scripts\engine\utility::getStructArray(self.target, "targetname");
   }
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
   self waittill("trigger");
-  var1 = 0;
+  var_1 = 0;
 
-  foreach(var3 in var0) {
-    var3 scripts\engine\utility::script_delay();
+  foreach(var_3 in var_0) {
+    var_3 scripts\engine\utility::script_delay();
 
-    switch (var3.script_noteworthy) {
+    switch (var_3.script_noteworthy) {
       case "smoke":
         if(istrue(self.smoked)) {
           break;
         }
 
-        scripted_smoke_gren(var3);
+        scripted_smoke_gren(var_3);
         self.smoked = 1;
         break;
       default:
         break;
     }
 
-    var1++;
+    var_1++;
 
-    if(var1 >= 4) {
+    if(var_1 >= 4) {
       wait 0.05;
-      var1 = 0;
+      var_1 = 0;
     }
   }
 }
@@ -127,33 +127,33 @@ function obj_room_main() {
 }
 
 function obj_room_scene() {
-  var0 = level.animnodes["mcguffin_struct"];
+  var_0 = level.animnodes["mcguffin_struct"];
   level waittill("keypad_interact");
   level.price scripts\common\utility::lookatentity(undefined);
   level.price stopsounds();
   scripts\engine\utility::delaythread(2, &scripts\sp\maps\estate\estate_util::price_line, "dx_vom_pri_obj_room_ext_10");
   level.player scripts\common\utility::allow_death(0, "keypad");
-  var1 = var0 scripts\sp\player_rig::link_player_to_rig("door_keypad", "stand", 1, 0.5, 0, 45, 45, 30, 15, 1, undefined, 1);
-  var0 thread scripts\common\anim::anim_single_solo(var1, "door_keypad");
-  var1 thread scripts\engine\utility::waittillmatch_notify("single anim", "end", "unlink_player");
-  var1 scripts\engine\utility::thread_on_notify("unlink_player", &scripts\sp\player_rig::unlink_player_from_rig, 0);
-  var1 scripts\engine\utility::thread_on_notify("unlink_player", &scripts\common\utility::allow_death, 1, "keypad", level.player);
+  var_1 = var_0 scripts\sp\player_rig::link_player_to_rig("door_keypad", "stand", 1, 0.5, 0, 45, 45, 30, 15, 1, undefined, 1);
+  var_0 thread scripts\common\anim::anim_single_solo(var_1, "door_keypad");
+  var_1 thread scripts\engine\utility::waittillmatch_notify("single anim", "end", "unlink_player");
+  var_1 scripts\engine\utility::thread_on_notify("unlink_player", &scripts\sp\player_rig::unlink_player_from_rig, 0);
+  var_1 scripts\engine\utility::thread_on_notify("unlink_player", &scripts\common\utility::allow_death, 1, "keypad", level.player);
   scripts\engine\sp\utility::autosave_by_name("obj_room");
   scripts\engine\utility::flag_set("obj_scene_started");
   level.price.ignoreme = 1;
   level.price.ignoreall = 1;
   level.cutters hide();
   level.failonfriendlyfire = 1;
-  var2 = scripts\engine\sp\utility::spawn_anim_model("obj_plans", (0, 0, 0), (0, 0, 0));
+  var_2 = scripts\engine\sp\utility::spawn_anim_model("obj_plans", (0, 0, 0), (0, 0, 0));
 
   if(level.price isinscriptedstate()) {
     level.price notify("stop_loop_price");
     level.price scripts\engine\sp\utility::anim_stopanimScripted();
   }
 
-  var3 = [level.obj_door, level.price, level.hadir, var2];
-  var0 scripts\common\anim::anim_single(var3, "obj_scene");
-  var2 linkTo(level.price, "tag_stowed_back3");
+  var_3 = [level.obj_door, level.price, level.hadir, var_2];
+  var_0 scripts\common\anim::anim_single(var_3, "obj_scene");
+  var_2 linkTo(level.price, "tag_stowed_back3");
 }
 
 function obj_room_fov_change() {
@@ -164,19 +164,19 @@ function obj_room_fov_change() {
 }
 
 function obj_door_setup() {
-  var0 = getEnt("obj_door", "targetname");
+  var_0 = getEnt("obj_door", "targetname");
   thread obj_door_destroy();
-  var1 = scripts\engine\sp\utility::spawn_anim_model("obj_door", var0.origin, var0.angles);
-  level.animnodes["mcguffin_struct"] scripts\common\anim::anim_first_frame_solo(var1, "obj_scene");
+  var_1 = scripts\engine\sp\utility::spawn_anim_model("obj_door", var_0.origin, var_0.angles);
+  level.animnodes["mcguffin_struct"] scripts\common\anim::anim_first_frame_solo(var_1, "obj_scene");
   waittillframeend();
-  var1.clip = getEnt(var0.target, "targetname");
-  var1.clip linkTo(var0);
-  var1.script_model = var0;
-  var0 linkTo(var1);
-  var2 = var0 scripts\engine\utility::get_linked_ent();
-  var2 linkTo(var1);
+  var_1.clip = getEnt(var_0.target, "targetname");
+  var_1.clip linkTo(var_0);
+  var_1.script_model = var_0;
+  var_0 linkTo(var_1);
+  var_2 = var_0 scripts\engine\utility::get_linked_ent();
+  var_2 linkTo(var_1);
   thread keypad_unlock();
-  level.obj_door = var1;
+  level.obj_door = var_1;
 }
 
 function obj_door_destroy() {
@@ -202,9 +202,9 @@ function keypad_unlock() {
 }
 
 function keypad_interact() {
-  var0 = scripts\engine\utility::getStruct("obj_interact", "targetname");
-  var0 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, undefined, undefined, undefined, undefined, undefined, 1);
-  var0 waittill("trigger");
+  var_0 = scripts\engine\utility::getStruct("obj_interact", "targetname");
+  var_0 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  var_0 waittill("trigger");
   level notify("keypad_interact");
 
   if(scripts\engine\utility::flag("stealth_spotted")) {
@@ -223,28 +223,28 @@ function price_door_nag() {
 }
 
 function price_door_lookats() {
-  var0 = [];
+  var_0 = [];
 
-  foreach(var2 in scripts\engine\utility::getStructArray("price_lookat_struct", "targetname")) {
-    var0 = var2 scripts\engine\utility::spawn_script_origin();
+  foreach(var_2 in scripts\engine\utility::getStructArray("price_lookat_struct", "targetname")) {
+    var_0 = var_2 scripts\engine\utility::spawn_script_origin();
   }
 
-  level scripts\engine\utility::thread_on_notify("keypad_interact", &scripts\engine\utility::array_delete, var0);
-  var4 = 0;
-  var5 = level.player;
-  var6 = gettime() + 5000;
+  level scripts\engine\utility::thread_on_notify("keypad_interact", &scripts\engine\utility::array_delete, var_0);
+  var_4 = 0;
+  var_5 = level.player;
+  var_6 = gettime() + 5000;
 
   for(;;) {
-    if(gettime() >= var6 && !level.price scripts\sp\maps\estate\estate_util::can_i_see_an_enemy_or_can_enemies_see_me()) {
-      if(isPlayer(var5)) {
-        var5 = var0[scripts\sp\maps\estate\estate_util::abs_int(var4 % var0.size)];
-        var4++;
+    if(gettime() >= var_6 && !level.price scripts\sp\maps\estate\estate_util::can_i_see_an_enemy_or_can_enemies_see_me()) {
+      if(isPlayer(var_5)) {
+        var_5 = var_0[scripts\sp\maps\estate\estate_util::abs_int(var_4 % var_0.size)];
+        var_4++;
       } else {
-        var5 = level.player;
+        var_5 = level.player;
       }
 
-      level.price glanceatentity(var5, 1000, 0);
-      var6 = gettime() + 5000;
+      level.price glanceatentity(var_5, 1000, 0);
+      var_6 = gettime() + 5000;
     }
 
     waitframe();
@@ -264,9 +264,9 @@ function heli_attack_start() {
   scripts\engine\sp\utility::set_start_location("heli_attack_start", [level.player]);
   level.animnodes["mcguffin_struct"] = scripts\engine\utility::getStruct("mcguffin_struct", "targetname");
   level.animnodes["mcguffin_struct"] thread scripts\common\anim::anim_single(level.friendlies, "obj_scene");
-  var0 = 0.773026;
-  level.hadir scripts\engine\utility::delaycall(0.05, &setanimtime, level.hadir scripts\engine\utility::getanim("obj_scene"), var0);
-  level.price scripts\engine\utility::delaycall(0.05, &setanimtime, level.price scripts\engine\utility::getanim("obj_scene"), var0);
+  var_0 = 0.773026;
+  level.hadir scripts\engine\utility::delaycall(0.05, &setanimtime, level.hadir scripts\engine\utility::getanim("obj_scene"), var_0);
+  level.price scripts\engine\utility::delaycall(0.05, &setanimtime, level.price scripts\engine\utility::getanim("obj_scene"), var_0);
   thread obj_door_setup();
   level.failonfriendlyfire = 1;
   scripts\engine\utility::flag_set("lighting_heli_attack");
@@ -292,35 +292,35 @@ function heli_attack_objective() {
 
 function heli_attack_scene() {
   level.hadir waittillmatch("single anim", "end");
-  var0 = level.animnodes["mcguffin_struct"];
-  var0 thread scripts\common\anim::anim_loop(level.friendlies, "heli_idle");
+  var_0 = level.animnodes["mcguffin_struct"];
+  var_0 thread scripts\common\anim::anim_loop(level.friendlies, "heli_idle");
   level waittill("end_cover_loop");
   scripts\engine\utility::delaythread(4, &player_door_wedge);
-  var0 notify("stop_loop");
+  var_0 notify("stop_loop");
   scripts\engine\utility::array_thread(level.friendlies, &scripts\engine\sp\utility::anim_stopanimscripted);
-  var0 thread scripts\common\anim::anim_single(level.friendlies, "obj_scene_b");
+  var_0 thread scripts\common\anim::anim_single(level.friendlies, "obj_scene_b");
   thread audio_start_obj_room_fires();
   scripts\engine\utility::flag_wait("door_push_start");
-  thread friendlies_at_door(var0);
+  thread friendlies_at_door(var_0);
   level.hadir playsoundatviewheight("dx_vom_had_meet_hadir_idle");
   level.price playsoundatviewheight("dx_vom_pri_meet_hadir_idle");
   level.failonfriendlyfire = undefined;
   scripts\sp\friendlyfire::turnoff();
-  var1 = getEnt("door_push_trigger", "targetname");
-  var2 = 0;
+  var_1 = getEnt("door_push_trigger", "targetname");
+  var_2 = 0;
 
-  for(var3 = 1;; var3 = 1) {
+  for(var_3 = 1;; var_3 = 1) {
     waitframe();
 
-    if(level.player istouching(var1) && scripts\engine\math::get_dot(level.player.origin, level.player.angles, var1.origin) > 0.5) {
-      if(var3) {
+    if(level.player istouching(var_1) && scripts\engine\math::get_dot(level.player.origin, level.player.angles, var_1.origin) > 0.5) {
+      if(var_3) {
         level.player scripts\common\utility::allow_melee(0, "heli_attack");
-        var3 = 0;
+        var_3 = 0;
       }
 
-      if(!var2) {
+      if(!var_2) {
         scripts\engine\sp\utility::display_hint_forced("bash_hint", 5, 2, level, "door_pushed");
-        var2 = 1;
+        var_2 = 1;
       }
 
       if(level.player meleeButtonPressed() || level.player issprinting()) {
@@ -330,12 +330,12 @@ function heli_attack_scene() {
       continue;
     }
 
-    if(!var3) {
+    if(!var_3) {
       level.player scripts\common\utility::allow_melee(1, "heli_attack");
     }
   }
 
-  if(!var3) {
+  if(!var_3) {
     level.player scripts\common\utility::allow_melee(1, "heli_attack");
   }
 
@@ -344,13 +344,13 @@ function heli_attack_scene() {
   level notify("door_pushed");
   setup_hallway_scriptables();
   scripts\sp\player_rig::link_player_to_rig(undefined, "stand", 0, 0, 0, 0, 0, 0, 0, 1);
-  var0 thread scripts\sp\player_rig::anim_lerp_from_player_pos("door_push", 0.2, 0.2);
+  var_0 thread scripts\sp\player_rig::anim_lerp_from_player_pos("door_push", 0.2, 0.2);
   thread unlink_player_from_rig_after_anim();
   level.player scripts\engine\utility::delaycall(0.2, &lerpviewangleclamp, 1, 0.5, 0.5, 45, 45, 30, 10);
-  var0 notify("stop_loop");
+  var_0 notify("stop_loop");
   scripts\engine\utility::array_thread(level.friendlies, &scripts\engine\sp\utility::anim_stopanimscripted);
-  var4 = [level.price, level.hadir, level.obj_door];
-  var0 scripts\common\anim::anim_single(var4, "door_push");
+  var_4 = [level.price, level.hadir, level.obj_door];
+  var_0 scripts\common\anim::anim_single(var_4, "door_push");
   scripts\sp\friendlyfire::turnbackon();
   level.price.ignoreme = 0;
   level.price.ignoreall = 0;
@@ -394,16 +394,16 @@ function audio_start_obj_room_fires() {
 }
 
 function player_door_wedge() {
-  var0 = getEnt("player_door_wedge", "targetname");
-  var1 = scripts\engine\utility::getStruct(var0.target, "targetname");
-  var2 = scripts\engine\utility::getStruct(var1.target, "targetname");
-  var3 = var1 scripts\engine\utility::spawn_tag_origin();
-  var0 linkTo(var3);
-  var0 solid();
-  var3 moveTo(var2.origin, 4);
+  var_0 = getEnt("player_door_wedge", "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
+  var_3 = var_1 scripts\engine\utility::spawn_tag_origin();
+  var_0 linkTo(var_3);
+  var_0 solid();
+  var_3 moveTo(var_2.origin, 4);
   level waittill("door_pushed");
-  var3 delete();
-  var0 delete();
+  var_3 delete();
+  var_0 delete();
 }
 
 function unlink_player_from_rig_after_anim() {
@@ -411,10 +411,10 @@ function unlink_player_from_rig_after_anim() {
   scripts\sp\player_rig::unlink_player_from_rig();
 }
 
-function friendlies_at_door(var0) {
+function friendlies_at_door(var_0) {
   level endon("door_pushed");
   level.price waittillmatch("single anim", "end");
-  var0 thread scripts\common\anim::anim_loop(level.friendlies, "door_push_idle");
+  var_0 thread scripts\common\anim::anim_loop(level.friendlies, "door_push_idle");
 }
 
 function vo_heli_attack() {
@@ -429,22 +429,22 @@ function vo_heli_attack() {
   scripts\engine\utility::flag_wait("door_push_start");
   level endon("door_pushed");
   level.player endon("death");
-  var0 = ["dx_vom_pri_obj_room_plans_295", "dx_vom_pri_obj_room_plans_290"];
+  var_0 = ["dx_vom_pri_obj_room_plans_295", "dx_vom_pri_obj_room_plans_290"];
 
-  foreach(var2 in var0) {
+  foreach(var_2 in var_0) {
     wait 5;
-    scripts\sp\maps\estate\estate_util::price_line(var2);
+    scripts\sp\maps\estate\estate_util::price_line(var_2);
     wait 5;
   }
 }
 
 function turn_off_lights() {
-  foreach(var1 in level.fuseboxes) {
-    if(var1.script_light_switch_state) {
-      var1 scripts\sp\interactables\dynolight::lightswitch_toggle();
+  foreach(var_1 in level.fuseboxes) {
+    if(var_1.script_light_switch_state) {
+      var_1 scripts\sp\interactables\dynolight::lightswitch_toggle();
     }
 
-    var1 scripts\sp\interactables\dynolight::lightswitch_disable(1);
+    var_1 scripts\sp\interactables\dynolight::lightswitch_disable(1);
   }
 
   scripts\sp\maps\estate\estate_util::turn_off_floodlights();
@@ -466,62 +466,62 @@ function heli_attack_fire_progression() {
   player_die_from_smoke_inhalation("door_pushed", 30);
 }
 
-function player_die_from_smoke_inhalation(var0, var1) {
-  var2 = scripts\sp\hud_util::create_client_overlay("black", 0, level.player);
-  player_die_from_smoke_inhalation_thread(var0, var1, var2);
+function player_die_from_smoke_inhalation(var_0, var_1) {
+  var_2 = scripts\sp\hud_util::create_client_overlay("black", 0, level.player);
+  player_die_from_smoke_inhalation_thread(var_0, var_1, var_2);
 
   if(!isalive(level.player)) {
     return;
   }
 
-  var2 fadeovertime(2);
-  var2.alpha = 0;
-  var2 scripts\engine\utility::delaycall(2.5, &destroy);
+  var_2 fadeovertime(2);
+  var_2.alpha = 0;
+  var_2 scripts\engine\utility::delaycall(2.5, &destroy);
 }
 
-function player_die_from_smoke_inhalation_thread(var0, var1, var2) {
+function player_die_from_smoke_inhalation_thread(var_0, var_1, var_2) {
   level.player endon("death");
-  level endon(var0);
-  var3 = ["ges_ph_cough_a", "ges_ph_cough_c", "ges_ph_cough_a", "ges_ph_cough_b", "ges_ph_cough_c"];
-  var4 = ["gas_player_cough_1", "gas_player_cough_3", "gas_player_cough_1", "gas_player_cough_3", "gas_player_cough_1"];
-  var5 = 0;
-  var6 = var1;
-  var7 = gettime() + var1 * 1000;
+  level endon(var_0);
+  var_3 = ["ges_ph_cough_a", "ges_ph_cough_c", "ges_ph_cough_a", "ges_ph_cough_b", "ges_ph_cough_c"];
+  var_4 = ["gas_player_cough_1", "gas_player_cough_3", "gas_player_cough_1", "gas_player_cough_3", "gas_player_cough_1"];
+  var_5 = 0;
+  var_6 = var_1;
+  var_7 = gettime() + var_1 * 1000;
 
-  while(gettime() < var7) {
-    var2 fadeovertime(1);
-    var2.alpha = (1 - var6 / var1) * 0.75;
-    var6 = (var7 - gettime()) / 1000;
-    wait max(var6 * 0.25, 5);
+  while(gettime() < var_7) {
+    var_2 fadeovertime(1);
+    var_2.alpha = (1 - var_6 / var_1) * 0.75;
+    var_6 = (var_7 - gettime()) / 1000;
+    wait max(var_6 * 0.25, 5);
 
-    for(var8 = 0; !var8; var8 = level.player forceplaygestureviewmodel(var3[scripts\sp\maps\estate\estate_util::abs_int(var5 % var3.size)])) {
+    for(var_8 = 0; !var_8; var_8 = level.player forceplaygestureviewmodel(var_3[scripts\sp\maps\estate\estate_util::abs_int(var_5 % var_3.size)])) {
       waitframe();
     }
 
-    level.player scripts\sp\anim::play_sound_at_viewheight(var4[scripts\sp\maps\estate\estate_util::abs_int(var5 % var4.size)]);
-    var2 fadeovertime(1);
+    level.player scripts\sp\anim::play_sound_at_viewheight(var_4[scripts\sp\maps\estate\estate_util::abs_int(var_5 % var_4.size)]);
+    var_2 fadeovertime(1);
 
-    if(var7 - gettime() <= 1000) {
+    if(var_7 - gettime() <= 1000) {
       break;
     }
 
-    var5++;
-    var2.alpha = 0.75;
+    var_5++;
+    var_2.alpha = 0.75;
     wait 1;
   }
 
-  var2.alpha = 1;
+  var_2.alpha = 1;
   level.player kill();
 }
 
 function setup_hallway_scriptables() {
   scripts\engine\utility::flag_wait("scriptables_init_complete");
-  var0 = scripts\engine\utility::getStruct("hallway_run_dynlt_pointer", "targetname");
-  scripts\engine\utility::array_call(var0 scripts\engine\sp\utility::get_linked_scriptables(), &setscriptablepartstate, "onoff", "hidden");
+  var_0 = scripts\engine\utility::getStruct("hallway_run_dynlt_pointer", "targetname");
+  scripts\engine\utility::array_call(var_0 scripts\engine\sp\utility::get_linked_scriptables(), &setscriptablepartstate, "onoff", "hidden");
 
-  foreach(var2 in getscriptablearray("fall_chandelier", "targetname")) {
-    var2 show();
-    var2 setCanDamage(1);
+  foreach(var_2 in getscriptablearray("fall_chandelier", "targetname")) {
+    var_2 show();
+    var_2 setCanDamage(1);
   }
 }
 
@@ -536,8 +536,8 @@ function heli_attack_catchup() {
     scripts\engine\utility::exploder("stairdamage_b");
   }
 
-  var0 = getEnt("player_door_wedge", "targetname");
-  var0 delete();
+  var_0 = getEnt("player_door_wedge", "targetname");
+  var_0 delete();
 }
 
 function hallway_run_start() {
@@ -545,8 +545,8 @@ function hallway_run_start() {
   spawn_escape_heli();
   scripts\sp\maps\estate\estate_util::spawn_friendlies();
   level.hadir scripts\common\ai::gun_remove();
-  var0 = [level.price, level.player];
-  scripts\engine\sp\utility::set_start_location("hallway_run_start", var0);
+  var_0 = [level.price, level.player];
+  scripts\engine\sp\utility::set_start_location("hallway_run_start", var_0);
   level.price.goalradius = 32;
   thread hallway_run_start_post_load();
   thread setup_hallway_scriptables();
@@ -556,8 +556,8 @@ function hallway_run_start() {
 
 function hallway_run_start_post_load() {
   waitframe();
-  var0 = scripts\engine\utility::getStruct("heli_at_side_window", "targetname");
-  level.escape_heli vehicle_teleport(var0.origin + (0, 0, 500), var0.angles);
+  var_0 = scripts\engine\utility::getStruct("heli_at_side_window", "targetname");
+  level.escape_heli vehicle_teleport(var_0.origin + (0, 0, 500), var_0.angles);
 }
 
 function hallway_run_main() {
@@ -614,11 +614,11 @@ function stairs_attack_start() {
   scripts\engine\sp\utility::set_start_location("stairs_attack_start", [level.player, level.price]);
   thread hallway_run_start_post_load();
   thread scripts\sp\maps\estate\estate_infil::player_stay_behind_ai(100);
-  var0 = scripts\engine\utility::getStruct("explosion_scene", "targetname");
+  var_0 = scripts\engine\utility::getStruct("explosion_scene", "targetname");
 
-  foreach(var2 in level.friendlies) {
-    var0 thread scripts\common\anim::anim_loop_solo(var2, "explosion_idle", "stop_loop_" + var2.animname);
-    var2.in_position = 1;
+  foreach(var_2 in level.friendlies) {
+    var_0 thread scripts\common\anim::anim_loop_solo(var_2, "explosion_idle", "stop_loop_" + var_2.animname);
+    var_2.in_position = 1;
   }
 
   thread hallway_run_start_post_load();
@@ -713,22 +713,22 @@ function stairs_explosion_heli() {
   scripts\engine\sp\utility::flagwaitthread("player_in_3rdfloor_stairs", &scripts\sp\maps\estate\estate_util::show_ents, "collapse_blocker_b");
   scripts\engine\sp\utility::flagwaitthread("player_in_3rdfloor_stairs", &scripts\engine\utility::exploder, "vfxexp_stair_blocker");
   heli_spotlight_toggle(level.escape_heli, 1);
-  var0 = level.animnodes["explosion_scene"];
-  var1 = getstartorigin(var0.origin, var0.angles, level.scr_anim["hind"]["explosion_fire"]);
-  var2 = getstartangles(var0.origin, var0.angles, level.scr_anim["hind"]["explosion_fire"]);
-  nav_gotopos(level.escape_heli, var1);
-  level.escape_heli settargetyaw(var2[1]);
-  heli_spotlight_sweep(level.escape_heli, [level.player, var0]);
+  var_0 = level.animnodes["explosion_scene"];
+  var_1 = getstartorigin(var_0.origin, var_0.angles, level.scr_anim["hind"]["explosion_fire"]);
+  var_2 = getstartangles(var_0.origin, var_0.angles, level.scr_anim["hind"]["explosion_fire"]);
+  nav_gotopos(level.escape_heli, var_1);
+  level.escape_heli settargetyaw(var_2[1]);
+  heli_spotlight_sweep(level.escape_heli, [level.player, var_0]);
 }
 
 function stairs_explosion_scene() {
-  var0 = level.animnodes["explosion_scene"];
-  var1 = scripts\engine\sp\utility::spawn_anim_model("missile", var0.origin, var0.angles);
-  var2 = spawn("script_model", var0.origin);
-  var2 linkTo(var1, "tag_origin", (0, 0, 0), (0, 0, 0));
-  var2 setModel("weapon_wm_la_juliet_missile");
-  var2 hide();
-  var0 scripts\common\anim::anim_first_frame_solo(var1, "explosion_fire");
+  var_0 = level.animnodes["explosion_scene"];
+  var_1 = scripts\engine\sp\utility::spawn_anim_model("missile", var_0.origin, var_0.angles);
+  var_2 = spawn("script_model", var_0.origin);
+  var_2 linkTo(var_1, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_2 setModel("weapon_wm_la_juliet_missile");
+  var_2 hide();
+  var_0 scripts\common\anim::anim_first_frame_solo(var_1, "explosion_fire");
   scripts\engine\utility::flag_wait("explosion_scene");
   level.player scripts\common\utility::allow_mantle(0, "stairs_explosion");
   thread mus_heli_stairs();
@@ -737,37 +737,37 @@ function stairs_explosion_scene() {
   level.price stopsounds();
   thread scripts\sp\maps\estate\estate_util::price_line("dx_vom_pri_estate_helo_11");
   thread stairs_explosion_price();
-  var2 show();
-  thread stairs_scene_cowbell(var2);
+  var_2 show();
+  thread stairs_scene_cowbell(var_2);
   scripts\engine\utility::delaythread(2.55, &scripts\sp\maps\estate\estate_util::kyle_line, "dx_vom_plr_stairs_explosion_fall");
-  var0 thread scripts\common\anim::anim_single_solo(level.escape_heli, "explosion_fire");
-  var0 scripts\common\anim::anim_single_solo(var1, "explosion_fire");
-  var3 = var1.origin;
-  var1 delete();
-  var4 = [];
+  var_0 thread scripts\common\anim::anim_single_solo(level.escape_heli, "explosion_fire");
+  var_0 scripts\common\anim::anim_single_solo(var_1, "explosion_fire");
+  var_3 = var_1.origin;
+  var_1 delete();
+  var_4 = [];
 
-  for(var5 = 1; var5 <= 14; var5++) {
-    var4 = scripts\engine\sp\utility::spawn_anim_model("stairs_debris_" + var5);
+  for(var_5 = 1; var_5 <= 14; var_5++) {
+    var_4 = scripts\engine\sp\utility::spawn_anim_model("stairs_debris_" + var_5);
   }
 
-  var0 thread scripts\common\anim::anim_single(var4, "explosion_main");
-  var6 = scripts\engine\utility::getStruct("stairs_destroyed_pointer", "targetname");
-  var7 = var6 scripts\engine\sp\utility::get_linked_scriptables();
-  scripts\engine\utility::array_call(var7, &setscriptablepartstate, "onoff", "hidden");
-  scripts\engine\utility::array_call(var7, &setcandamage, 0);
+  var_0 thread scripts\common\anim::anim_single(var_4, "explosion_main");
+  var_6 = scripts\engine\utility::getStruct("stairs_destroyed_pointer", "targetname");
+  var_7 = var_6 scripts\engine\sp\utility::get_linked_scriptables();
+  scripts\engine\utility::array_call(var_7, &setscriptablepartstate, "onoff", "hidden");
+  scripts\engine\utility::array_call(var_7, &setcandamage, 0);
 
-  foreach(var9 in getscriptablearray("stairs_fall_chandelier", "targetname")) {
-    var9 show();
-    var9 setCanDamage(1);
-    var9 dodamage(100, var3, level.escape_heli, undefined, "MOD_PROJECTILE", "iw8_la_sidewinder");
+  foreach(var_9 in getscriptablearray("stairs_fall_chandelier", "targetname")) {
+    var_9 show();
+    var_9 setCanDamage(1);
+    var_9 dodamage(100, var_3, level.escape_heli, undefined, "MOD_PROJECTILE", "iw8_la_sidewinder");
   }
 
-  var0 notify("stop_loop_" + level.hadir.animname);
+  var_0 notify("stop_loop_" + level.hadir.animname);
   level.hadir scripts\engine\sp\utility::anim_stopanimScripted();
   level.hadir notify("explosion_scene_start");
 
   if(isDefined(level.hadir.in_position)) {
-    var0 thread scripts\common\anim::anim_single_solo(level.hadir, "explosion_main");
+    var_0 thread scripts\common\anim::anim_single_solo(level.hadir, "explosion_main");
   }
 
   if(distance2dsquared(level.escape_heli.origin, level.player.origin) < distance2dsquared(level.escape_heli.origin, level.price.origin)) {
@@ -777,21 +777,21 @@ function stairs_explosion_scene() {
 
   level.player scripts\common\utility::allow_death(0);
   level.player.stairs_weapon = level.player getcurrentweapon();
-  var11 = scripts\sp\player_rig::link_player_to_rig(undefined, "stand", 0, 0, 0, 0, 0, 0, 0, 1);
-  var0 scripts\sp\player_rig::anim_lerp_from_player_pos("explosion_intro");
+  var_11 = scripts\sp\player_rig::link_player_to_rig(undefined, "stand", 0, 0, 0, 0, 0, 0, 0, 1);
+  var_0 scripts\sp\player_rig::anim_lerp_from_player_pos("explosion_intro");
   stairs_explosion_player_hit(10);
   level.player lerpviewangleclamp(0.2, 0.1, 0.1, 25, 25, 15, 15);
-  var12 = getanimlength(var11 scripts\engine\utility::getanim("explosion_main"));
-  scripts\engine\utility::delaythread(var12 - 1, &stairs_explosion_player_hit, 100);
+  var_12 = getanimlength(var_11 scripts\engine\utility::getanim("explosion_main"));
+  scripts\engine\utility::delaythread(var_12 - 1, &stairs_explosion_player_hit, 100);
   level.player lerpfovscalefactor(0, 1.5);
-  var0 scripts\common\anim::anim_single_solo(var11, "explosion_main");
+  var_0 scripts\common\anim::anim_single_solo(var_11, "explosion_main");
   level.player setclienttriggeraudiozone("fade_to_black_minus_scripted5_music_and_dx", 0.3);
   setblur(100, 0);
   level.player_overlay = scripts\sp\hud_util::create_client_overlay("black", 1, level.player);
   stairs_explosion_player_hit(50);
   wait 0.2;
-  var13 = scripts\engine\utility::getStruct("escape_getup", "targetname");
-  var13 thread scripts\common\anim::anim_first_frame_solo(level.player_rig, "escape_getup");
+  var_13 = scripts\engine\utility::getStruct("escape_getup", "targetname");
+  var_13 thread scripts\common\anim::anim_first_frame_solo(level.player_rig, "escape_getup");
   level.player clearclienttriggeraudiozone(6);
 
   if(level.player ispcplayer()) {
@@ -800,8 +800,8 @@ function stairs_explosion_scene() {
 
   wait 0.05;
 
-  foreach(var15 in var4) {
-    var15 delete();
+  foreach(var_15 in var_4) {
+    var_15 delete();
   }
 
   scripts\engine\utility::array_call(getEntArray("stairs_destroyed_animated", "script_noteworthy"), &show);
@@ -812,8 +812,8 @@ function stairs_explosion_scene() {
   level.player scripts\common\utility::allow_mantle(1, "stairs_explosion");
 }
 
-function stairs_explosion_player_hit(var0) {
-  level.player scripts\sp\utility::do_damage(var0, level.player.origin - anglesToForward(level.player.angles) * 50, level.player, undefined, "MOD_IMPACT");
+function stairs_explosion_player_hit(var_0) {
+  level.player scripts\sp\utility::do_damage(var_0, level.player.origin - anglesToForward(level.player.angles) * 50, level.player, undefined, "MOD_IMPACT");
   earthquake(0.55, 0.5, level.player.origin, 400);
   playrumbleonposition("grenade_rumble", level.player.origin);
 }
@@ -863,31 +863,31 @@ function restart_rotors() {
   thread scripts\common\vehicle_code::animate_drive_idle();
 }
 
-function stairs_scene_cowbell(var0) {
+function stairs_scene_cowbell(var_0) {
   level waittill("missile_launch");
-  thread scripts\engine\utility::play_sound_in_space("weap_estate_heli_proj_launch", var0.origin);
+  thread scripts\engine\utility::play_sound_in_space("weap_estate_heli_proj_launch", var_0.origin);
   playFXOnTag(scripts\engine\utility::getfx("missile_muzzle"), level.escape_heli, "tag_origin");
   wait 0.15;
-  playFXOnTag(scripts\engine\utility::getfx("missile_trail"), var0, "tag_fx");
+  playFXOnTag(scripts\engine\utility::getfx("missile_trail"), var_0, "tag_fx");
   wait 0.04;
   scripts\engine\utility::exploder("vfxexp_win_break");
   getEnt("stairs_pristine_window", "script_noteworthy") hide();
   getEnt("stairs_destroyed_window", "script_noteworthy") show();
-  var1 = getglassarray("breakglass");
+  var_1 = getglassarray("breakglass");
 
-  foreach(var3 in var1) {
-    destroyglass(var3, anglesToForward((0, 360, 0)));
+  foreach(var_3 in var_1) {
+    destroyglass(var_3, anglesToForward((0, 360, 0)));
   }
 
-  var5 = var0 getlinkedparent();
-  var5 waittillmatch("single anim", "end");
-  stopFXOnTag(scripts\engine\utility::getfx("missile_trail"), var0, "tag_fx");
+  var_5 = var_0 getlinkedparent();
+  var_5 waittillmatch("single anim", "end");
+  stopFXOnTag(scripts\engine\utility::getfx("missile_trail"), var_0, "tag_fx");
   scripts\engine\utility::exploder("collapse");
-  thread scripts\engine\utility::play_sound_in_space("rocket_explode", var0.origin);
-  level.player scripts\sp\player::damagebloodoverlaydirectional(var0.origin, "MOD_EXPLOSIVE");
-  thread scripts\engine\sp\utility::earthquake_and_rumble(var0.origin);
-  playFX(scripts\engine\utility::getfx("missile_explode"), var0.origin);
-  var0 delete();
+  thread scripts\engine\utility::play_sound_in_space("rocket_explode", var_0.origin);
+  level.player scripts\sp\player::damagebloodoverlaydirectional(var_0.origin, "MOD_EXPLOSIVE");
+  thread scripts\engine\sp\utility::earthquake_and_rumble(var_0.origin);
+  playFX(scripts\engine\utility::getfx("missile_explode"), var_0.origin);
+  var_0 delete();
   scripts\sp\maps\estate\estate_util::show_ents("stairs_destroyed", "stairs_destroyed_animated");
   scripts\sp\maps\estate\estate_util::hide_ents("stairs_pristine");
   scripts\engine\utility::exploder("collapseafter");
@@ -911,8 +911,8 @@ function escape_intro_start() {
   level.player.stairs_weapon = level.player getweaponslistprimaries()[0];
   scripts\engine\utility::flag_set("lighting_escape");
   setsaveddvar("TLMMOPMSK", 1);
-  var0 = scripts\engine\utility::getStruct("escape_getup", "targetname");
-  var0 thread scripts\sp\player_rig::link_player_to_rig("escape_getup", "stand", 0, 0, 0, 10, 10, 5, 5, 1);
+  var_0 = scripts\engine\utility::getStruct("escape_getup", "targetname");
+  var_0 thread scripts\sp\player_rig::link_player_to_rig("escape_getup", "stand", 0, 0, 0, 10, 10, 5, 5, 1);
 }
 
 function escape_intro_main() {
@@ -947,12 +947,12 @@ function technical_cleanup() {
   }
 }
 
-function escape_cine_dof(var0) {
+function escape_cine_dof(var_0) {
   level.price scripts\engine\utility::delaythread(0.1, &scripts\engine\sp\utility::dof_enable_autofocus, 1.2, 4, undefined, undefined, "tag_eye", undefined, 1);
   level.price scripts\engine\utility::delaythread(11, &scripts\engine\sp\utility::dof_enable_autofocus, 1.2, 3, undefined, undefined, "j_ball_ri", undefined, 1);
-  var0 scripts\engine\utility::delaythread(12, &scripts\engine\sp\utility::dof_enable_autofocus, 0.7, 4, undefined, undefined, "tag_eye", undefined, 1);
+  var_0 scripts\engine\utility::delaythread(12, &scripts\engine\sp\utility::dof_enable_autofocus, 0.7, 4, undefined, undefined, "tag_eye", undefined, 1);
   level.hadir scripts\engine\utility::delaythread(13.5, &scripts\engine\sp\utility::dof_enable_autofocus, 0.7, 4, undefined, undefined, "tag_eye", undefined, 1);
-  var0 scripts\engine\utility::delaythread(15, &scripts\engine\sp\utility::dof_enable_autofocus, 0.7, 6, undefined, undefined, "tag_eye", undefined, 1);
+  var_0 scripts\engine\utility::delaythread(15, &scripts\engine\sp\utility::dof_enable_autofocus, 0.7, 6, undefined, undefined, "tag_eye", undefined, 1);
   level.price scripts\engine\utility::delaythread(17, &scripts\engine\sp\utility::dof_enable_autofocus, 1.4, 3, undefined, undefined, "tag_eye", undefined, 1);
   level.hadir scripts\engine\utility::delaythread(20, &scripts\engine\sp\utility::dof_enable_autofocus, 1.4, 3, undefined, undefined, "tag_eye", undefined, 1);
   level.price scripts\engine\utility::delaythread(23, &scripts\engine\sp\utility::dof_enable_autofocus, 1.7, 500, undefined, undefined, "tag_eye", undefined, 1);
@@ -961,9 +961,9 @@ function escape_cine_dof(var0) {
 }
 
 function escape_intro_scene() {
-  var0 = scripts\engine\utility::getStruct("escape_getup", "targetname");
-  var1 = getanimlength(level.scr_anim["player_rig"]["escape_getup"]);
-  var2 = [];
+  var_0 = scripts\engine\utility::getStruct("escape_getup", "targetname");
+  var_1 = getanimlength(level.scr_anim["player_rig"]["escape_getup"]);
+  var_2 = [];
   level.hadir.animname = "ally1";
 
   if(!isDefined(level.price.stairs_scene_finished)) {
@@ -973,51 +973,51 @@ function escape_intro_scene() {
     level.price.stairs_scene_finished = undefined;
   }
 
-  var3 = scripts\engine\sp\utility::spawn_anim_model("getup_debris", var0.origin, var0.angles);
-  var2 = var3;
-  var4 = scripts\engine\sp\utility::spawn_anim_model("getup_board", var0.origin, var0.angles);
-  var2 = var4;
-  var2 = scripts\engine\utility::array_combine([level.price, level.player_rig, level.hadir], var2);
-  var5 = "iw8_ar_asierra12";
-  var6 = ["gripvert", "laserir", "reflex_east02"];
-  var7 = var5;
+  var_3 = scripts\engine\sp\utility::spawn_anim_model("getup_debris", var_0.origin, var_0.angles);
+  var_2 = var_3;
+  var_4 = scripts\engine\sp\utility::spawn_anim_model("getup_board", var_0.origin, var_0.angles);
+  var_2 = var_4;
+  var_2 = scripts\engine\utility::array_combine([level.price, level.player_rig, level.hadir], var_2);
+  var_5 = "iw8_ar_asierra12";
+  var_6 = ["gripvert", "laserir", "reflex_east02"];
+  var_7 = var_5;
 
-  foreach(var9 in var6) {
-    var7 += "+" + var9;
+  foreach(var_9 in var_6) {
+    var_7 += "+" + var_9;
   }
 
-  var11 = scripts\engine\sp\utility::spawn_targetname("getup_enemy", 1);
-  var12 = getanimlength(var11 scripts\engine\utility::getanim("escape_getup"));
-  thread getupenemy_logic(var11);
-  var11 scripts\anim\shared::forceuseweapon(var7, "primary");
-  var11 scripts\sp\utility::context_melee_allow(0);
-  level.getupenemy = var11;
-  var11 attach("weapon_wm_me_soscar_knife", "tag_accessory_left");
-  var2 = var11;
-  var13 = scripts\engine\sp\utility::spawn_targetname("getup_aq", 1);
-  var13.animname = "aq1";
-  var2 = var13;
+  var_11 = scripts\engine\sp\utility::spawn_targetname("getup_enemy", 1);
+  var_12 = getanimlength(var_11 scripts\engine\utility::getanim("escape_getup"));
+  thread getupenemy_logic(var_11);
+  var_11 scripts\anim\shared::forceuseweapon(var_7, "primary");
+  var_11 scripts\sp\utility::context_melee_allow(0);
+  level.getupenemy = var_11;
+  var_11 attach("weapon_wm_me_soscar_knife", "tag_accessory_left");
+  var_2 = var_11;
+  var_13 = scripts\engine\sp\utility::spawn_targetname("getup_aq", 1);
+  var_13.animname = "aq1";
+  var_2 = var_13;
   level.player.ignoreme = 1;
   level.player enableinvulnerability();
   level.cutters scripts\engine\utility::delaycall(3, &hide);
-  level.cutters scripts\engine\utility::delaycall(var1, &show);
-  var3 scripts\engine\utility::delaycall(var1, &delete);
-  var4 scripts\engine\utility::delaycall(var1, &delete);
-  level.player scripts\engine\utility::delaythread(var1, &player_post_getup);
-  scripts\engine\utility::delaythread(var1, &escape_objective);
+  level.cutters scripts\engine\utility::delaycall(var_1, &show);
+  var_3 scripts\engine\utility::delaycall(var_1, &delete);
+  var_4 scripts\engine\utility::delaycall(var_1, &delete);
+  level.player scripts\engine\utility::delaythread(var_1, &player_post_getup);
+  scripts\engine\utility::delaythread(var_1, &escape_objective);
   scripts\engine\utility::delaythread(5, &smoke_lasers);
-  scripts\engine\utility::delaythread(var1 - 3, &scripts\engine\sp\utility::array_spawn_targetname, "escape_start_enemies", 1);
-  scripts\engine\utility::delaythread(var1, &ally_equipment_init);
+  scripts\engine\utility::delaythread(var_1 - 3, &scripts\engine\sp\utility::array_spawn_targetname, "escape_start_enemies", 1);
+  scripts\engine\utility::delaythread(var_1, &ally_equipment_init);
   scripts\engine\utility::delaythread(10.95, &slam_price);
-  thread escape_cine_dof(var11);
-  var0 scripts\common\anim::anim_single(var2, "escape_getup");
+  thread escape_cine_dof(var_11);
+  var_0 scripts\common\anim::anim_single(var_2, "escape_getup");
   level.hadir thread scripts\common\ai::gun_recall();
   scripts\engine\utility::flag_set("escape_begin");
-  swap_player_ar(var5, var6);
-  thread scripts\sp\maps\estate\estate_util::delete_at_distance_to_player(var13.origin, 2000, [var13]);
+  swap_player_ar(var_5, var_6);
+  thread scripts\sp\maps\estate\estate_util::delete_at_distance_to_player(var_13.origin, 2000, [var_13]);
 
-  foreach(var15 in level.player getweaponslistprimaries()) {
-    level.player scripts\engine\sp\utility::giveweaponmaxammo(var15);
+  foreach(var_15 in level.player getweaponslistprimaries()) {
+    level.player scripts\engine\sp\utility::giveweaponmaxammo(var_15);
     LOC_000002c1:
   }
 
@@ -1032,9 +1032,9 @@ function slam_price() {
   scripts\engine\utility::kill_exploder("stairdamage_b");
 }
 
-function getupenemy_logic(var0) {
+function getupenemy_logic(var_0) {
   spets_nvgs_on();
-  wait var0 - 0.05;
+  wait var_0 - 0.05;
   self.a.nodeath = 1;
   self.allowdeath = 1;
   scripts\common\ai::gun_remove();
@@ -1061,10 +1061,10 @@ function ally_equipment_init() {
   GscBinSkip4(0x6e, level.price, "flash", &secondaryoffhandbuttonpressed, &scripts\sp\maps\estate\estate_util::price_line);
 }
 
-function ally_equipment_think(var0, var1, var2) {
+function ally_equipment_think(var_0, var_1, var_2) {
   self.support_equipment = 0;
   self.next_equipment_time = 0;
-  thread scripts\sp\player\ally_equipment::ally_equipment_backpack(self, var0);
+  thread scripts\sp\player\ally_equipment::ally_equipment_backpack(self, var_0);
 
   for(;;) {
     if(istrue(self.refill_used)) {
@@ -1072,26 +1072,26 @@ function ally_equipment_think(var0, var1, var2) {
     }
 
     if(gettime() >= self.next_equipment_time) {
-      if(!level.player getweaponammoclip(var0) && !self.support_equipment) {
-        GscBinSkip4(0x35, var0);
+      if(!level.player getweaponammoclip(var_0) && !self.support_equipment) {
+        GscBinSkip4(0x35, var_0);
       }
 
-      if(level.player builtin[[var1]]() && !level.player isthrowingbackgrenade()) {
-        while(level.player builtin[[var1]]()) {
+      if(level.player builtin[[var_1]]() && !level.player isthrowingbackgrenade()) {
+        while(level.player builtin[[var_1]]()) {
           waitframe();
         }
 
-        if(level.player getweaponammoclip(var0)) {
+        if(level.player getweaponammoclip(var_0)) {
           level.player waittill("offhand_fired");
         }
 
-        if(!level.player getweaponammoclip(var0)) {
+        if(!level.player getweaponammoclip(var_0)) {
           if(!self.support_equipment) {
-            GscBinSkip4(0x35, var0);
+            GscBinSkip4(0x35, var_0);
           }
 
-          scripts\sp\maps\estate\estate_util::kyle_line(scripts\sp\maps\estate\estate_util::get_next_alias_in_group(var0 + "_request"));
-          GscBinSkip1(0x74, var2, scripts\sp\maps\estate\estate_util::get_next_alias_in_group(var0 + "_response"));
+          scripts\sp\maps\estate\estate_util::kyle_line(scripts\sp\maps\estate\estate_util::get_next_alias_in_group(var_0 + "_request"));
+          GscBinSkip1(0x74, var_2, scripts\sp\maps\estate\estate_util::get_next_alias_in_group(var_0 + "_response"));
         }
       }
     }
@@ -1101,7 +1101,7 @@ function ally_equipment_think(var0, var1, var2) {
   }
 }
 
-function give_ally_equipment(var0) {
+function give_ally_equipment(var_0) {
   self.support_equipment = 4;
 
   while(self.support_equipment) {
@@ -1118,17 +1118,17 @@ function give_ally_equipment(var0) {
   self.refill_used = 1;
 }
 
-function swap_player_ar(var0, var1) {
+function swap_player_ar(var_0, var_1) {
   level.player takeweapon(level.player.stairs_weapon);
-  var2 = scripts\sp\utility::make_weapon(var0, var1);
-  level.player giveweapon(var2, 0, 0, 0, 1);
-  level.player scripts\engine\sp\utility::giveweaponmaxammo(var2);
-  level.player switchtoweapon(var2);
+  var_2 = scripts\sp\utility::make_weapon(var_0, var_1);
+  level.player giveweapon(var_2, 0, 0, 0, 1);
+  level.player scripts\engine\sp\utility::giveweaponmaxammo(var_2);
+  level.player switchtoweapon(var_2);
 }
 
 function escape_objective() {
-  var0 = scripts\engine\utility::getStruct("tunnel_obj", "targetname");
-  scripts\engine\sp\objectives::objective_set_position("estate", var0.origin);
+  var_0 = scripts\engine\utility::getStruct("tunnel_obj", "targetname");
+  scripts\engine\sp\objectives::objective_set_position("estate", var_0.origin);
   scripts\engine\sp\objectives::objective_set_label("estate", &"ESTATE/OBJ_LBL_ESCAPE");
 }
 
@@ -1161,13 +1161,13 @@ function escape_start() {
 }
 
 function escape_main() {
-  var0 = getEntArray("trigger_delete_recursive", "targetname");
-  scripts\engine\utility::array_thread(var0, &trigger_delete_recursive);
+  var_0 = getEntArray("trigger_delete_recursive", "targetname");
+  scripts\engine\utility::array_thread(var_0, &trigger_delete_recursive);
   thread disable_exposed_nodes();
-  var1 = getEntArray("escape_trig", "script_noteworthy");
-  scripts\engine\utility::array_thread(var1, &escape_trig_logic);
-  var2 = getEntArray("escape_color_trig", "script_noteworthy");
-  scripts\engine\utility::array_thread(var2, &escape_color_trig_think);
+  var_1 = getEntArray("escape_trig", "script_noteworthy");
+  scripts\engine\utility::array_thread(var_1, &escape_trig_logic);
+  var_2 = getEntArray("escape_color_trig", "script_noteworthy");
+  scripts\engine\utility::array_thread(var_2, &escape_color_trig_think);
   scripts\engine\utility::array_thread(level.friendlies, &scripts\engine\sp\utility::set_force_color, "r");
   scripts\engine\utility::array_thread(level.friendlies, &scripts\sp\maps\estate\estate_util::indoor_monitor);
   scripts\engine\utility::array_thread(level.friendlies, &escape_demeanor_think);
@@ -1177,17 +1177,17 @@ function escape_main() {
   level.price.pushable = 1;
   level.hadir.pushable = 1;
   scripts\engine\utility::array_call(level.friendlies, &setbackupcoverfrompos, scripts\engine\utility::getStruct("tunnel_obj", "targetname").origin);
-  var3 = getEnt("escape_goal_hint", "targetname");
-  var3 scripts\engine\sp\utility::add_trigger_function(&escape_goal_hint_trigger);
+  var_3 = getEnt("escape_goal_hint", "targetname");
+  var_3 scripts\engine\sp\utility::add_trigger_function(&escape_goal_hint_trigger);
   wait 0.5;
   level.escape_heli scripts\engine\utility::ent_flag_set("ambient_attacking");
   thread heliattackwarning();
   thread unlock_all_doors_except_arena();
   thread montior_chopperkilling_player();
-  var4 = getEntArray("glass_house_heli_shield", "targetname");
-  scripts\engine\utility::array_thread(var4, &heli_destructible_ceiling_logic);
-  var5 = getscriptablearray("scriptable_rp_propane_tank_long_01", "classname");
-  scripts\engine\utility::array_thread(var5, &heli_destructible_propane_tank_logic);
+  var_4 = getEntArray("glass_house_heli_shield", "targetname");
+  scripts\engine\utility::array_thread(var_4, &heli_destructible_ceiling_logic);
+  var_5 = getscriptablearray("scriptable_rp_propane_tank_long_01", "classname");
+  scripts\engine\utility::array_thread(var_5, &heli_destructible_propane_tank_logic);
   setsaveddvar("MSOOMPMPQS", 1);
   scripts\engine\utility::flag_wait("tunnel_approach");
   setsaveddvar("MSOOMPMPQS", 0);
@@ -1202,18 +1202,18 @@ function escape_color_trig_think() {
   self endon("death");
 
   for(;;) {
-    self waittill("trigger", var0);
-    var0.escape_trig = self;
+    self waittill("trigger", var_0);
+    var_0.escape_trig = self;
 
-    while(var0 istouching(self)) {
+    while(var_0 istouching(self)) {
       waitframe();
     }
 
-    var1 = level.player.origin;
+    var_1 = level.player.origin;
     scripts\engine\utility::trigger_off();
     wait 5;
 
-    while(distancesquared(level.player.origin, var1) < 40000) {
+    while(distancesquared(level.player.origin, var_1) < 40000) {
       waitframe();
     }
 
@@ -1239,10 +1239,10 @@ function trigger_delete_recursive() {
 
 function recursive_delete_targets() {
   if(isDefined(self.target)) {
-    var0 = getEntArray(self.target, "targetname");
+    var_0 = getEntArray(self.target, "targetname");
 
-    foreach(var2 in var0) {
-      if(isai(var2)) {
+    foreach(var_2 in var_0) {
+      if(isai(var_2)) {
         continue;
       }
 
@@ -1255,40 +1255,40 @@ function recursive_delete_targets() {
 
 function disable_exposed_nodes() {
   level.exposed_nodes = [];
-  var0 = 1;
+  var_0 = 1;
 
-  foreach(var2 in getallnodes()) {
-    if(var0 % 10 == 0) {
+  foreach(var_2 in getallnodes()) {
+    if(var_0 % 10 == 0) {
       waitframe();
     }
 
-    var0++;
+    var_0++;
 
-    if(var2.type != "Exposed") {
+    if(var_2.type != "Exposed") {
       continue;
     }
 
-    var3 = 1;
+    var_3 = 1;
 
-    foreach(var5 in level.interior_volumes) {
-      if(ispointinvolume(var2.origin, var5)) {
-        var3 = 0;
+    foreach(var_5 in level.interior_volumes) {
+      if(ispointinvolume(var_2.origin, var_5)) {
+        var_3 = 0;
         break;
       }
     }
 
-    if(!var3) {
+    if(!var_3) {
       continue;
     }
 
-    var2 disconnectnode();
-    level.exposed_nodes[level.exposed_nodes.size] = var2;
+    var_2 disconnectnode();
+    level.exposed_nodes[level.exposed_nodes.size] = var_2;
   }
 
   scripts\engine\utility::flag_wait("tunnel_approach");
 
-  foreach(var2 in level.exposed_nodes) {
-    var2 connectnode();
+  foreach(var_2 in level.exposed_nodes) {
+    var_2 connectnode();
   }
 
   level.exposed_nodes = undefined;
@@ -1297,13 +1297,13 @@ function disable_exposed_nodes() {
 function unlock_all_doors_except_arena() {
   scripts\engine\utility::flag_wait("interactive_doors_ready");
 
-  foreach(var1 in level.interactive_doors.ents) {
-    if(scripts\engine\utility::is_equal(var1.targetname, "launcher_shed_door") || scripts\engine\utility::is_equal(var1.targetname, "heli_house_front")) {
+  foreach(var_1 in level.interactive_doors.ents) {
+    if(scripts\engine\utility::is_equal(var_1.targetname, "launcher_shed_door") || scripts\engine\utility::is_equal(var_1.targetname, "heli_house_front")) {
       continue;
     }
 
-    if(var1.locked) {
-      var1 scripts\sp\door::unlock_door(1);
+    if(var_1.locked) {
+      var_1 scripts\sp\door::unlock_door(1);
     }
   }
 }
@@ -1311,7 +1311,7 @@ function unlock_all_doors_except_arena() {
 function track_player_indoors() {
   level.player endon("death");
   level endon("tunnel_approach");
-  var0 = 1;
+  var_0 = 1;
   GscBinSkip4(0x35);
 }
 
@@ -1341,13 +1341,13 @@ function vo_escape_outdoors() {
 function vo_escape_indoors() {
   scripts\sp\maps\estate\estate_util::make_alias_group("escape_move", ["dx_vom_pri_tunnel_push_60", "dx_vom_pri_tunnel_push_70"]);
   scripts\sp\maps\estate\estate_util::make_alias_group("escape_move_ahead", ["dx_vom_pri_tunnel_push_10", "dx_vom_pri_tunnel_push_20", "dx_vom_pri_tunnel_push_30"]);
-  var0 = scripts\engine\utility::getStruct("tunnel_obj", "targetname").origin;
-  var1 = 1;
+  var_0 = scripts\engine\utility::getStruct("tunnel_obj", "targetname").origin;
+  var_1 = 1;
 
   for(;;) {
     level.player scripts\engine\utility::ent_flag_wait("indoors");
-    var2 = 0;
-    var3 = undefined;
+    var_2 = 0;
+    var_3 = undefined;
 
     for(;;) {
       waitframe();
@@ -1356,16 +1356,16 @@ function vo_escape_indoors() {
         break;
       }
 
-      var4 = getaiarray("axis");
+      var_4 = getaiarray("axis");
 
-      if(var4.size) {
-        var5 = 1;
+      if(var_4.size) {
+        var_5 = 1;
 
-        foreach(var7 in level.interior_volumes) {
-          if(level.player istouching(var7)) {
-            foreach(var9 in var4) {
-              if(var9 istouching(var7)) {
-                var5 = 0;
+        foreach(var_7 in level.interior_volumes) {
+          if(level.player istouching(var_7)) {
+            foreach(var_9 in var_4) {
+              if(var_9 istouching(var_7)) {
+                var_5 = 0;
                 break;
               }
             }
@@ -1374,46 +1374,46 @@ function vo_escape_indoors() {
           }
         }
 
-        if(!var5) {
-          var2 = gettime();
+        if(!var_5) {
+          var_2 = gettime();
           continue;
         }
       }
 
-      if(!scripts\engine\utility::is_equal(var3, level.player.escape_trig)) {
-        var2 = gettime();
-        var3 = level.player.escape_trig;
+      if(!scripts\engine\utility::is_equal(var_3, level.player.escape_trig)) {
+        var_2 = gettime();
+        var_3 = level.player.escape_trig;
         continue;
       }
 
-      if(scripts\engine\utility::time_has_passed(var2, 10)) {
-        var12 = distance(level.player.origin, var0);
-        var13 = undefined;
+      if(scripts\engine\utility::time_has_passed(var_2, 10)) {
+        var_12 = distance(level.player.origin, var_0);
+        var_13 = undefined;
 
-        if(var12 - distance(level.price.origin, var0) > 128 && var12 - distance(level.hadir.origin, var0) > 128) {
-          if(var1) {
+        if(var_12 - distance(level.price.origin, var_0) > 128 && var_12 - distance(level.hadir.origin, var_0) > 128) {
+          if(var_1) {
             scripts\sp\maps\estate\estate_util::hadir_line("dx_vom_had_tunnel_push_40");
-            var13 = "dx_vom_pri_tunnel_push_50";
-            var1 = 0;
+            var_13 = "dx_vom_pri_tunnel_push_50";
+            var_1 = 0;
           } else {
-            var13 = scripts\sp\maps\estate\estate_util::get_next_alias_in_group("escape_move_ahead");
+            var_13 = scripts\sp\maps\estate\estate_util::get_next_alias_in_group("escape_move_ahead");
           }
         } else {
-          var13 = scripts\sp\maps\estate\estate_util::get_next_alias_in_group("escape_move");
+          var_13 = scripts\sp\maps\estate\estate_util::get_next_alias_in_group("escape_move");
         }
 
-        scripts\sp\maps\estate\estate_util::price_line(var13);
-        var2 = gettime();
+        scripts\sp\maps\estate\estate_util::price_line(var_13);
+        var_2 = gettime();
       }
     }
   }
 }
 
-function escape_goal_hint_trigger(var0) {
+function escape_goal_hint_trigger(var_0) {
   level endon("tunnel_approach");
 
   for(;;) {
-    if(var0 istouching(self)) {
+    if(var_0 istouching(self)) {
       level.player thread scripts\sp\player::focus_display_hint(0, 7);
     }
 
@@ -1421,33 +1421,33 @@ function escape_goal_hint_trigger(var0) {
   }
 }
 
-function vo_heli_sees_player(var0) {
+function vo_heli_sees_player(var_0) {
   level.player endon("indoors");
   wait 2;
 
-  if(var0) {
-    var1 = scripts\engine\utility::random(["dx_vom_ru2_heli_callout_10", "dx_vom_ru2_heli_callout_20", "dx_vom_ru2_heli_callout_40"]);
+  if(var_0) {
+    var_1 = scripts\engine\utility::random(["dx_vom_ru2_heli_callout_10", "dx_vom_ru2_heli_callout_20", "dx_vom_ru2_heli_callout_40"]);
   } else {
-    var1 = scripts\engine\utility::random(["dx_vom_ru2_heli_callout_60", "dx_vom_ru2_heli_callout_70", "dx_vom_ru2_heli_callout_80"]);
+    var_1 = scripts\engine\utility::random(["dx_vom_ru2_heli_callout_60", "dx_vom_ru2_heli_callout_70", "dx_vom_ru2_heli_callout_80"]);
   }
 
-  level.escape_heli.pilot scripts\engine\sp\utility::smart_dialogue_generic(var1);
+  level.escape_heli.pilot scripts\engine\sp\utility::smart_dialogue_generic(var_1);
 }
 
 function montior_chopperkilling_player() {
   level endon("tunnel_approach");
-  level.player waittill("death", var0, var1, var2, var3, var4);
-  var5 = 0;
+  level.player waittill("death", var_0, var_1, var_2, var_3, var_4);
+  var_5 = 0;
 
-  if(scripts\engine\utility::is_equal(var0, level.escape_heli.minigun) || scripts\engine\utility::is_equal(var4, level.escape_heli.minigun)) {
-    var5 = 1;
+  if(scripts\engine\utility::is_equal(var_0, level.escape_heli.minigun) || scripts\engine\utility::is_equal(var_4, level.escape_heli.minigun)) {
+    var_5 = 1;
   }
 
-  if(isDefined(var0) && scripts\engine\utility::is_equal(var0.classname, "worldspawn")) {
-    var5 = 1;
+  if(isDefined(var_0) && scripts\engine\utility::is_equal(var_0.classname, "worldspawn")) {
+    var_5 = 1;
   }
 
-  if(var5) {
+  if(var_5) {
     scripts\sp\player_death::set_custom_death_quote(56);
     return;
   }
@@ -1458,34 +1458,34 @@ function smoke_lasers() {
 }
 
 function spawn_escape_weapons() {
-  var0 = undefined;
+  var_0 = undefined;
 
-  foreach(var2 in scripts\engine\utility::getStructArray("escape_weapon", "targetname")) {
-    if(scripts\engine\utility::is_equal(var2.script_noteworthy, "player")) {
-      var0 = "weapon_" + createheadicon(level.player.stairs_weapon);
+  foreach(var_2 in scripts\engine\utility::getStructArray("escape_weapon", "targetname")) {
+    if(scripts\engine\utility::is_equal(var_2.script_noteworthy, "player")) {
+      var_0 = "weapon_" + createheadicon(level.player.stairs_weapon);
     } else {
-      var0 = "weapon_iw8_ar_akilo47+back_akilo47+front_akilo47+laserir_bar+mag_akilo47+rec_akilo47";
+      var_0 = "weapon_iw8_ar_akilo47+back_akilo47+front_akilo47+laserir_bar+mag_akilo47+rec_akilo47";
     }
 
-    var3 = spawn(var0, var2.origin, 1);
-    var3.angles = var2.angles;
+    var_3 = spawn(var_0, var_2.origin, 1);
+    var_3.angles = var_2.angles;
   }
 }
 
 function display_enemy_count() {
-  var0 = (1, 1, 0);
-  var1 = (0, 1, 0);
-  var2 = (1, 0, 0);
+  var_0 = (1, 1, 0);
+  var_1 = (0, 1, 0);
+  var_2 = (1, 0, 0);
 
   for(;;) {
-    var3 = getaiarray("axis").size;
+    var_3 = getaiarray("axis").size;
 
-    if(var3 < 5) {
-      var4 = var1;
-    } else if(var3 < 15) {
-      var4 = var0;
+    if(var_3 < 5) {
+      var_4 = var_1;
+    } else if(var_3 < 15) {
+      var_4 = var_0;
     } else {
-      var4 = var2;
+      var_4 = var_2;
     }
 
     wait 0.05;
@@ -1508,8 +1508,8 @@ function escape_catchup() {
   scripts\engine\utility::flag_set("tunnel_approach");
   thread display_enemy_count();
   thread unlock_all_doors_except_arena();
-  var0 = getEntArray("trigger_delete_recursive", "targetname");
-  scripts\engine\utility::array_thread(var0, &recursive_delete_targets);
+  var_0 = getEntArray("trigger_delete_recursive", "targetname");
+  scripts\engine\utility::array_thread(var_0, &recursive_delete_targets);
 }
 
 function tunnel_start() {
@@ -1531,8 +1531,8 @@ function tunnel_main() {
   thread player_approach_tunnel();
   level waittill("player_approaching_tunnel");
   thread scripts\engine\sp\utility::ai_delete_when_out_of_sight(getaiarray("axis"), 500);
-  var0 = getEntArray("trigger_delete_recursive", "targetname");
-  scripts\engine\utility::array_thread(var0, &recursive_delete_targets);
+  var_0 = getEntArray("trigger_delete_recursive", "targetname");
+  scripts\engine\utility::array_thread(var_0, &recursive_delete_targets);
   level.price.pushable = 0;
   level.hadir.pushable = 0;
   scripts\engine\utility::array_thread(level.friendlies, &scripts\engine\sp\utility::clear_force_color);
@@ -1553,9 +1553,9 @@ function tunnel_main() {
 function vo_tunnel_callout() {
   level endon("hadir_sees_tunnel");
   level endon("start_tunnel_open");
-  var0 = spawnStruct();
-  var0.origin = (4629, 1799, 20);
-  var0 scripts\engine\sp\utility::waittill_player_lookat(0.77, 1);
+  var_0 = spawnStruct();
+  var_0.origin = (4629, 1799, 20);
+  var_0 scripts\engine\sp\utility::waittill_player_lookat(0.77, 1);
   scripts\sp\maps\estate\estate_util::kyle_line("dx_vom_kyle_tunnel_spotted_10");
 }
 
@@ -1581,15 +1581,15 @@ function tunnel_scene() {
   scripts\engine\sp\utility::autosave_by_name("tunnel");
   level.tunnel_animnode notify("stop_loop");
   level.hadir scripts\engine\sp\utility::anim_stopanimScripted();
-  var0 = getEnt("tunnel_gate", "targetname");
-  var1 = var0 scripts\engine\utility::spawn_tag_origin();
-  var1 scripts\engine\sp\utility::assign_animtree("tunnel_gate");
-  var0 linkTo(var1);
+  var_0 = getEnt("tunnel_gate", "targetname");
+  var_1 = var_0 scripts\engine\utility::spawn_tag_origin();
+  var_1 scripts\engine\sp\utility::assign_animtree("tunnel_gate");
+  var_0 linkTo(var_1);
   level.cutters unlink();
   level notify("start_tunnel_open");
   setmusicstate("mx_estate_tunnel_escape");
-  var2 = getEnt("tunnel_chain", "targetname");
-  level.tunnel_animnode scripts\common\anim::anim_single(scripts\engine\utility::array_combine(level.friendlies, [level.cutters, var1, var2]), "tunnel_open");
+  var_2 = getEnt("tunnel_chain", "targetname");
+  level.tunnel_animnode scripts\common\anim::anim_single(scripts\engine\utility::array_combine(level.friendlies, [level.cutters, var_1, var_2]), "tunnel_open");
   level.tunnel_animnode thread scripts\common\anim::anim_loop_solo_with_nags(level.price, "tunnel_open_idle");
   scripts\engine\utility::flag_wait("player_in_tunnel");
   level waittill("tunnel_collapse");
@@ -1620,12 +1620,12 @@ function hadir_tunnel_think() {
 }
 
 function vo_hadir_tunnel() {
-  var0 = getstartorigin(level.tunnel_animnode.origin, level.tunnel_animnode.angles, level.hadir scripts\engine\utility::getanim("tunnel_approach"));
-  level.hadir scripts\engine\sp\utility::waittill_in_range(var0, 128);
-  var1 = distance(level.hadir.origin, level.tunnel_struct.origin);
-  var2 = distance(level.player.origin, level.tunnel_struct.origin);
+  var_0 = getstartorigin(level.tunnel_animnode.origin, level.tunnel_animnode.angles, level.hadir scripts\engine\utility::getanim("tunnel_approach"));
+  level.hadir scripts\engine\sp\utility::waittill_in_range(var_0, 128);
+  var_1 = distance(level.hadir.origin, level.tunnel_struct.origin);
+  var_2 = distance(level.player.origin, level.tunnel_struct.origin);
 
-  if(var2 - var1 > 128) {
+  if(var_2 - var_1 > 128) {
     level notify("hadir_sees_tunnel");
     scripts\sp\maps\estate\estate_util::hadir_line("dx_vom_had_tunnel_spotted_50");
     return;
@@ -1634,10 +1634,10 @@ function vo_hadir_tunnel() {
 
 function price_tunnel_think() {
   thread try_tunnel_teleport(level.price);
-  var0 = getnode("price_tunnel_node", "targetname");
+  var_0 = getnode("price_tunnel_node", "targetname");
   level.price.goalradius = 16;
   level.price.fixednode = 1;
-  level.price setgoalnode(var0);
+  level.price setgoalnode(var_0);
   scripts\engine\utility::flag_wait("hadir_at_tunnel");
   level.price.dontavoidplayer = 1;
   level.price.disableplayeradsloscheck = 1;
@@ -1659,37 +1659,37 @@ function price_tunnel_think() {
   level.tunnel_animnode thread scripts\common\anim::anim_loop_solo_with_nags(level.price, "tunnel_enter_idle");
 }
 
-function try_tunnel_teleport(var0) {
+function try_tunnel_teleport(var_0) {
   level.player scripts\engine\sp\utility::waittill_in_range(level.tunnel_struct.origin, 800);
 
-  if(isDefined(var0)) {
-    wait var0;
+  if(isDefined(var_0)) {
+    wait var_0;
   }
 
-  var1 = distancesquared(self.origin, level.tunnel_struct.origin);
+  var_1 = distancesquared(self.origin, level.tunnel_struct.origin);
 
-  if(var1 > distancesquared(level.player.origin, level.tunnel_struct.origin)) {
+  if(var_1 > distancesquared(level.player.origin, level.tunnel_struct.origin)) {
     if(!scripts\engine\math::within_fov_2d(level.player.origin, level.player.angles, self.origin, 0)) {
-      var2 = scripts\engine\utility::getStructArray("tunnel_teleport_struct", "targetname");
-      var2 = sortbydistance(var2, level.player.origin);
-      var3 = undefined;
+      var_2 = scripts\engine\utility::getStructArray("tunnel_teleport_struct", "targetname");
+      var_2 = sortbydistance(var_2, level.player.origin);
+      var_3 = undefined;
 
-      foreach(var5 in var2) {
-        if(scripts\engine\math::within_fov_2d(level.player.origin, level.player.angles, var5.origin, 0)) {
+      foreach(var_5 in var_2) {
+        if(scripts\engine\math::within_fov_2d(level.player.origin, level.player.angles, var_5.origin, 0)) {
           continue;
         }
 
-        if(var1 <= distancesquared(var5.origin, level.tunnel_struct.origin)) {
+        if(var_1 <= distancesquared(var_5.origin, level.tunnel_struct.origin)) {
           continue;
         }
 
-        var3 = var5;
+        var_3 = var_5;
         break;
       }
 
-      if(isDefined(var3)) {
+      if(isDefined(var_3)) {
         self asmsetstate(self.asmname, "exposed_idle");
-        self forceteleport(var3.origin, var3.angles, 99999);
+        self forceteleport(var_3.origin, var_3.angles, 99999);
         return;
       }
 
@@ -1728,8 +1728,8 @@ function dont_let_player_die_in_tunnel() {
 function tunnel_collapse_think() {
   level waittill("tunnel_collapse");
   scripts\sp\maps\estate\estate_util::show_ents("tunnel_destruction");
-  var0 = scripts\engine\utility::getStruct("tunnel_collapse_missile_target", "targetname");
-  earthquake(1, 2, var0.origin, 1500);
+  var_0 = scripts\engine\utility::getStruct("tunnel_collapse_missile_target", "targetname");
+  earthquake(1, 2, var_0.origin, 1500);
 }
 
 function tunnel_catchup() {
@@ -1762,29 +1762,29 @@ function arrest_main() {
   thread skip_outro();
   wait 2;
   scripts\engine\utility::delaythread(1.4, &scripts\engine\sp\objectives::objective_set_description, "estate", &"ESTATE/OBJ_DESC_HADIR");
-  var0 = 1;
-  arrest_scene(var0);
+  var_0 = 1;
+  arrest_scene(var_0);
   scripts\engine\sp\objectives::objective_complete("estate");
-  end_level(var0);
+  end_level(var_0);
   level waittill("never");
 }
 
-function arrest_scene(var0) {
-  var1 = level.tunnel_animnode scripts\sp\player_rig::link_player_to_rig("arrest_hadir", "stand", 0, undefined, 0, 10, 10, 5, 5, 1);
+function arrest_scene(var_0) {
+  var_1 = level.tunnel_animnode scripts\sp\player_rig::link_player_to_rig("arrest_hadir", "stand", 0, undefined, 0, 10, 10, 5, 5, 1);
   level.price.name = "";
   level.hadir.name = "";
   level.hadir scripts\common\ai::gun_remove();
-  var2 = getanimlength(var1 scripts\engine\utility::getanim("arrest_hadir"));
+  var_2 = getanimlength(var_1 scripts\engine\utility::getanim("arrest_hadir"));
   level.player lerpfovscalefactor(0, 0.05);
   level.player fadeoutshellshock();
   level.player scripts\engine\utility::delaycall(3, &stopshellshock);
   level.player clearclienttriggeraudiozone(6);
   scripts\engine\utility::delaythread(0.4, &scripts\sp\hud_util::fade_in, 1, "black");
-  scripts\engine\utility::delaythread(var2 - 21.5, &outro_letterbox);
+  scripts\engine\utility::delaythread(var_2 - 21.5, &outro_letterbox);
   level.hadir scripts\engine\utility::delaycall(8.85, &playrumbleonentity, "light_1s");
   thread cine_dof();
-  level.tunnel_animnode thread scripts\common\anim::anim_single(scripts\engine\utility::array_add(level.friendlies, var1), "arrest_hadir");
-  wait var2 - var0;
+  level.tunnel_animnode thread scripts\common\anim::anim_single(scripts\engine\utility::array_add(level.friendlies, var_1), "arrest_hadir");
+  wait var_2 - var_0;
 }
 
 function outro_letterbox() {
@@ -1811,22 +1811,22 @@ function cine_dof() {
 }
 
 function skip_outro() {
-  var0 = scripts\sp\utility::userskip_wait();
+  var_0 = scripts\sp\utility::userskip_wait();
 
-  if(!var0) {
+  if(!var_0) {
     return;
   }
 
   end_level(0);
 }
 
-function end_level(var0) {
-  level.player setclienttriggeraudiozone("fade_to_black", var0 + 1);
-  thread scripts\sp\hud_util::fade_out(var0, "black");
-  levelsoundfade(0, var0);
+function end_level(var_0) {
+  level.player setclienttriggeraudiozone("fade_to_black", var_0 + 1);
+  thread scripts\sp\hud_util::fade_out(var_0, "black");
+  levelsoundfade(0, var_0);
 
-  if(var0 > 0) {
-    wait var0 + 3;
+  if(var_0 > 0) {
+    wait var_0 + 3;
   }
 
   scripts\engine\sp\utility::nextmission();
@@ -1850,19 +1850,19 @@ function spets_spawn_func() {
     return;
   }
 
-  var0 = level.interior_volumes[self.script_parameters];
+  var_0 = level.interior_volumes[self.script_parameters];
 
   for(;;) {
     self.goalradius = self.engagemaxfalloffdist;
 
-    while(level.player istouching(var0)) {
+    while(level.player istouching(var_0)) {
       self setgoalpos(level.player.origin);
       wait 5;
     }
 
-    self setgoalvolumeauto(var0);
+    self setgoalvolumeauto(var_0);
 
-    while(!level.player istouching(var0)) {
+    while(!level.player istouching(var_0)) {
       waitframe();
     }
   }
@@ -1872,33 +1872,33 @@ function spets_nvgs_on() {
   scripts\sp\maps\estate\estate_util::gesture_nvgs(1);
 }
 
-function player_is_ahead_of_me(var0) {
-  var1 = distance2d(self.origin, var0);
-  var2 = distance2d(level.player.origin, var0);
-  return var2 < var1;
+function player_is_ahead_of_me(var_0) {
+  var_1 = distance2d(self.origin, var_0);
+  var_2 = distance2d(level.player.origin, var_0);
+  return var_2 < var_1;
 }
 
-function stagger_ai_to_pos(var0, var1) {
+function stagger_ai_to_pos(var_0, var_1) {
   level notify("stagger_ai_to_pos");
   level endon("stagger_ai_to_pos");
 
-  foreach(var3 in var0) {
-    if(isalive(var3)) {
-      thread send_to_goal_open_goalRadius(var3);
+  foreach(var_3 in var_0) {
+    if(isalive(var_3)) {
+      thread send_to_goal_open_goalRadius(var_3);
       wait 1;
     }
   }
 }
 
-function send_to_goal_open_goalRadius(var0) {
+function send_to_goal_open_goalRadius(var_0) {
   self endon("death");
   self notify("new_merc_pos");
   self endon("new_merc_pos");
   waitframe();
   self cleargoalvolume();
   self.goalradius = randomintrange(700, 900);
-  var1 = getclosestpointonnavmesh(var0);
-  self setgoalpos(var1);
+  var_1 = getclosestpointonnavmesh(var_0);
+  self setgoalpos(var_1);
   self waittill("goal");
   self.goalradius = 1000;
 }
@@ -1913,44 +1913,44 @@ function escape_heli_spawn_func() {
   heli_mg_create();
   self setneargoalnotifydist(400);
   self sethoverparams(25, 15, 10);
-  var0 = 1000 + self.mg_z_offset;
-  var1 = 2000;
-  var2 = anglesToForward(level.player getplayerangles());
-  var3 = var2 * var1;
-  var4 = level.player.origin + var3;
-  var5 = (var4[0], var4[1], var4[2] + var0);
+  var_0 = 1000 + self.mg_z_offset;
+  var_1 = 2000;
+  var_2 = anglesToForward(level.player getplayerangles());
+  var_3 = var_2 * var_1;
+  var_4 = level.player.origin + var_3;
+  var_5 = (var_4[0], var_4[1], var_4[2] + var_0);
   self.move_override = 0;
   self.is_shooting = 0;
   self.noshooting = 0;
   self.shoot_override = 0;
-  level.player.target_ent = spawn("script_origin", var5);
+  level.player.target_ent = spawn("script_origin", var_5);
   level.player.target_ent linkTo(level.player);
   self.godmode = 1;
   self.curr_projectile_hits = 0;
   self.animname = "hind";
   self.script_team = "axis";
   self setvehicleteam("axis");
-  var6 = ["tag_missile_l_1", "tag_missile_l_2", "tag_missile_l_3", "tag_missile_l_4"];
-  var7 = ["tag_missile_r_1", "tag_missile_r_2", "tag_missile_r_3", "tag_missile_r_4"];
+  var_6 = ["tag_missile_l_1", "tag_missile_l_2", "tag_missile_l_3", "tag_missile_l_4"];
+  var_7 = ["tag_missile_r_1", "tag_missile_r_2", "tag_missile_r_3", "tag_missile_r_4"];
   self.missile_laser_tags["left"] = [];
   self.missile_laser_tags["right"] = [];
 
-  foreach(var9 in var6) {
-    var10 = spawn("script_model", self gettagorigin(var9));
-    var10.angles = self gettagangles(var9);
-    var10 linkTo(self);
-    var10 setModel("tag_laser");
-    var10 setmoverlaserweapon("iw8_mindia8_turret");
-    self.missile_laser_tags["left"][var9] = var10;
+  foreach(var_9 in var_6) {
+    var_10 = spawn("script_model", self gettagorigin(var_9));
+    var_10.angles = self gettagangles(var_9);
+    var_10 linkTo(self);
+    var_10 setModel("tag_laser");
+    var_10 setmoverlaserweapon("iw8_mindia8_turret");
+    self.missile_laser_tags["left"][var_9] = var_10;
   }
 
-  foreach(var9 in var7) {
-    var10 = spawn("script_model", self gettagorigin(var9));
-    var10.angles = self gettagangles(var9);
-    var10 linkTo(self);
-    var10 setModel("tag_laser");
-    var10 setmoverlaserweapon("iw8_mindia8_turret");
-    self.missile_laser_tags["right"][var9] = var10;
+  foreach(var_9 in var_7) {
+    var_10 = spawn("script_model", self gettagorigin(var_9));
+    var_10.angles = self gettagangles(var_9);
+    var_10 linkTo(self);
+    var_10 setModel("tag_laser");
+    var_10 setmoverlaserweapon("iw8_mindia8_turret");
+    self.missile_laser_tags["right"][var_9] = var_10;
   }
 
   level.escape_heli = self;
@@ -2008,12 +2008,12 @@ function heli_event_obj_room() {
   level.escape_heli scalevolume(0, 0);
   waittillframeend();
   level.escape_heli scalevolume(1, 5);
-  var0 = scripts\engine\utility::getStruct("front_light_start", "targetname");
-  var1 = scripts\engine\utility::getStruct(var0.target, "targetname");
-  level.escape_heli.spotlight.target_ent.origin = var0.origin;
+  var_0 = scripts\engine\utility::getStruct("front_light_start", "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
+  level.escape_heli.spotlight.target_ent.origin = var_0.origin;
   level.escape_heli.spotlight snaptotargetentity(level.escape_heli.spotlight.target_ent);
-  var2 = scripts\engine\utility::getStruct("heli_at_window", "targetname");
-  thread nav_gotopos(level.escape_heli, var2.origin);
+  var_2 = scripts\engine\utility::getStruct("heli_at_window", "targetname");
+  thread nav_gotopos(level.escape_heli, var_2.origin);
 
   while(!scripts\engine\utility::within_fov(level.escape_heli.origin, level.escape_heli.angles, level.player.origin, 0.5)) {
     waitframe();
@@ -2022,33 +2022,33 @@ function heli_event_obj_room() {
   setsaveddvar("TLMMOPMSK", 1);
   heli_spotlight_toggle(level.escape_heli, 1);
   level.escape_heli waittill("nav_goal");
-  level.escape_heli settargetyaw(var2.angles[1]);
+  level.escape_heli settargetyaw(var_2.angles[1]);
   level.escape_heli.minigun startbarrelspin();
   wait 2;
-  thread heli_spotlight_sweep(level.escape_heli, [var0, var1]);
+  thread heli_spotlight_sweep(level.escape_heli, [var_0, var_1]);
   wait 0.1;
   heli_shoot_obj_room(level.escape_heli);
   heli_spotlight_toggle(level.escape_heli, 0);
   scripts\engine\utility::flag_set("window_spotlight_sweep_done");
-  var2 = scripts\engine\utility::getStruct("heli_over_house", "targetname");
-  nav_gotopos(level.escape_heli, var2.origin);
+  var_2 = scripts\engine\utility::getStruct("heli_over_house", "targetname");
+  nav_gotopos(level.escape_heli, var_2.origin);
   scripts\engine\utility::flag_wait("obj_room_vo_complete");
 }
 
 function heli_shoot_obj_room() {
-  var0 = scripts\engine\utility::getStruct("front_light_start", "targetname");
-  var1 = scripts\engine\utility::getStruct(var0.target, "targetname");
-  var2 = scripts\engine\utility::spawn_script_origin(var0.origin, (0, 0, 0));
-  self.minigun.target_ent.origin = var0.origin;
+  var_0 = scripts\engine\utility::getStruct("front_light_start", "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
+  var_2 = scripts\engine\utility::spawn_script_origin(var_0.origin, (0, 0, 0));
+  self.minigun.target_ent.origin = var_0.origin;
   self.minigun snaptotargetentity(self.minigun.target_ent, (0, 0, 0));
   self.minigun settargetentity(self.minigun.target_ent);
   self.minigun.target_ent playLoopSound("scn_escape_minigun_impact_bullets_interior_lp");
   self.minigun.target_ent playLoopSound("scn_escape_minigun_impact_debris_interior_lp");
-  var3 = distance(var0.origin, var1.origin);
-  var4 = scripts\engine\sp\utility::mph_travel_time(2.5, var3);
-  level scripts\engine\utility::delaythread(var4 - 2, &scripts\engine\utility::send_notify, "end_cover_loop");
-  var2 moveTo(var1.origin, var4);
-  var5 = gettime() + var4 * 1000;
+  var_3 = distance(var_0.origin, var_1.origin);
+  var_4 = scripts\engine\sp\utility::mph_travel_time(2.5, var_3);
+  level scripts\engine\utility::delaythread(var_4 - 2, &scripts\engine\utility::send_notify, "end_cover_loop");
+  var_2 moveTo(var_1.origin, var_4);
+  var_5 = gettime() + var_4 * 1000;
   scripts\engine\utility::exploder("room_scriptables");
   scripts\engine\utility::exploder("vfxexp_room_smoke");
   scripts\engine\utility::flag_set("lighting_fire_obj_room");
@@ -2056,8 +2056,8 @@ function heli_shoot_obj_room() {
   thread heli_attack_fire_progression();
   level notify("heli_obj_room_start_shooting");
 
-  while(gettime() < var5) {
-    self.minigun.target_ent.origin = var2.origin + (0, 0, randomfloatrange(0, 20));
+  while(gettime() < var_5) {
+    self.minigun.target_ent.origin = var_2.origin + (0, 0, randomfloatrange(0, 20));
     self.minigun shootturret();
     wait 0.05;
   }
@@ -2065,25 +2065,25 @@ function heli_shoot_obj_room() {
   thread scripts\engine\utility::play_sound_in_space("scn_escape_minigun_impact_debris_interior_tail", self.minigun.target_ent.origin);
   self.minigun.target_ent stoploopsound("scn_escape_minigun_impact_bullets_interior_lp");
   self.minigun.target_ent stoploopsound("scn_escape_minigun_impact_debris_interior_lp");
-  var2 delete();
+  var_2 delete();
   self.minigun cleartargetentity(self.minigun.target_ent);
   self.noshooting = 0;
   self.minigun stopbarrelspin();
 }
 
-function obj_room_attack_cowbell(var0) {
+function obj_room_attack_cowbell(var_0) {
   wait 0.1;
-  var1 = [level._effect["vfx_book_stack_expl"], level._effect["vfx_book_shelf_expl_new_single"]];
+  var_1 = [level._effect["vfx_book_stack_expl"], level._effect["vfx_book_shelf_expl_new_single"]];
   level endon("stop_obj_room_attack");
-  level thread scripts\engine\sp\utility::notify_delay("stop_obj_room_attack", var0);
+  level thread scripts\engine\sp\utility::notify_delay("stop_obj_room_attack", var_0);
 
   for(;;) {
-    var2 = vectortoangles(self.minigun.target_ent.origin - level.player.origin);
-    var3 = level.player.origin + anglesToForward(var2) * randomintrange(40, 100);
-    playworldsound("bullet_explode", var3);
+    var_2 = vectortoangles(self.minigun.target_ent.origin - level.player.origin);
+    var_3 = level.player.origin + anglesToForward(var_2) * randomintrange(40, 100);
+    playworldsound("bullet_explode", var_3);
 
-    foreach(var5 in var1) {
-      playFX(var5, var3 + scripts\engine\utility::randomvector(20));
+    foreach(var_5 in var_1) {
+      playFX(var_5, var_3 + scripts\engine\utility::randomvector(20));
       wait 0.05;
     }
 
@@ -2092,17 +2092,17 @@ function obj_room_attack_cowbell(var0) {
 }
 
 function ambient_explosion() {
-  var0 = randomintrange(1500, 2300);
-  var1 = randomintrange(0, 1000);
-  thread scripts\engine\utility::play_sound_in_space("breach_c4_expl_trans", level.player.origin + (var0, var1, 70));
+  var_0 = randomintrange(1500, 2300);
+  var_1 = randomintrange(0, 1000);
+  thread scripts\engine\utility::play_sound_in_space("breach_c4_expl_trans", level.player.origin + (var_0, var_1, 70));
   earthquake(0.7, 1, level.player.origin, 500);
   level.player playRumbleOnEntity("heavy_1s");
 }
 
 function heli_event_hallway_run() {
-  var0 = scripts\engine\utility::getStruct("heli_at_side_window", "targetname");
-  nav_gotopos(level.escape_heli, var0.origin);
-  level.escape_heli settargetyaw(var0.angles[1]);
+  var_0 = scripts\engine\utility::getStruct("heli_at_side_window", "targetname");
+  nav_gotopos(level.escape_heli, var_0.origin);
+  level.escape_heli settargetyaw(var_0.angles[1]);
   scripts\engine\utility::flag_wait("player_in_spetsnaz_hallway");
   setmusicstate("mx_tmp_estate_hallwayrun");
 
@@ -2110,8 +2110,8 @@ function heli_event_hallway_run() {
     level.player_rig waittillmatch("single anim", "end");
   }
 
-  var0 = scripts\engine\utility::getStruct("side_light_start", "targetname");
-  level.escape_heli.spotlight.target_ent.origin = var0.origin;
+  var_0 = scripts\engine\utility::getStruct("side_light_start", "targetname");
+  level.escape_heli.spotlight.target_ent.origin = var_0.origin;
   heli_spotlight_toggle(level.escape_heli, 1);
   thread heli_shoots_hallway();
   scripts\engine\utility::flag_wait("stairs_go");
@@ -2132,8 +2132,8 @@ function heli_shoots_hallway() {
   level endon("stairs_go");
   level.escape_heli.spotlight.target_ent.origin = scripts\engine\utility::getStruct("hallway_spotlight", "targetname").origin;
   level.escape_heli.minigun startbarrelspin();
-  var0 = scripts\engine\utility::getStruct("hallway_mg_shoot_start", "targetname");
-  level.escape_heli.minigun.target_ent.origin = var0.origin;
+  var_0 = scripts\engine\utility::getStruct("hallway_mg_shoot_start", "targetname");
+  level.escape_heli.minigun.target_ent.origin = var_0.origin;
   level.escape_heli.minigun snaptotargetentity(level.escape_heli.minigun.target_ent, (0, 0, 0));
   wait 1;
   self.minigun.target_ent playLoopSound("scn_escape_minigun_impact_bullets_interior_lp");
@@ -2154,38 +2154,38 @@ function heli_murder_player_in_hallway() {
   }
 }
 
-function heli_hallway_mover(var0, var1, var2) {
+function heli_hallway_mover(var_0, var_1, var_2) {
   level endon("player_in_heli_death_zone");
-  var3 = scripts\engine\utility::spawn_script_origin(var0.origin, (0, 0, 0));
-  self.minigun.target_ent.origin = var0.origin;
+  var_3 = scripts\engine\utility::spawn_script_origin(var_0.origin, (0, 0, 0));
+  self.minigun.target_ent.origin = var_0.origin;
   self.minigun snaptotargetentity(self.minigun.target_ent, (0, 0, 0));
 
-  while(!scripts\engine\utility::flag("stairs_go") && isDefined(var0.target)) {
-    var4 = scripts\engine\utility::getStruct(var0.target, "targetname");
-    var5 = distance(var0.origin, var4.origin);
-    var6 = scripts\engine\sp\utility::mph_travel_time(var2, var5);
-    var3 moveTo(var4.origin, var6);
-    var7 = gettime() + var6 * 1000;
-    var8 = (0, 0, 0);
+  while(!scripts\engine\utility::flag("stairs_go") && isDefined(var_0.target)) {
+    var_4 = scripts\engine\utility::getStruct(var_0.target, "targetname");
+    var_5 = distance(var_0.origin, var_4.origin);
+    var_6 = scripts\engine\sp\utility::mph_travel_time(var_2, var_5);
+    var_3 moveTo(var_4.origin, var_6);
+    var_7 = gettime() + var_6 * 1000;
+    var_8 = (0, 0, 0);
 
-    while(gettime() < var7) {
-      var8 = (0, 0, randomfloatrange(0, var1));
-      self.minigun.target_ent.origin = var3.origin + var8;
+    while(gettime() < var_7) {
+      var_8 = (0, 0, randomfloatrange(0, var_1));
+      self.minigun.target_ent.origin = var_3.origin + var_8;
       waitframe();
     }
 
-    var0 = var4;
+    var_0 = var_4;
   }
 
-  var3 delete();
+  var_3 delete();
   self notify("hallway_mover_done");
 }
 
-function heli_minigun_shoot_til_notify(var0, var1) {
-  self endon(var0);
+function heli_minigun_shoot_til_notify(var_0, var_1) {
+  self endon(var_0);
 
   while(isalive(level.player)) {
-    if(istrue(var1) && isDefined(self.minigun.target_ent)) {
+    if(istrue(var_1) && isDefined(self.minigun.target_ent)) {
       magicbullet("iw8_mindia8_turret", self.minigun gettagorigin("tag_flash"), self.minigun.target_ent.origin);
     } else {
       self.minigun shootturret();
@@ -2213,7 +2213,7 @@ function heli_spotlight_escape() {
   self.spotlight endon("death");
   wait 1;
   heli_spotlight_toggle(1);
-  var0 = 0;
+  var_0 = 0;
 
   for(;;) {
     while(self.move_override) {
@@ -2222,9 +2222,9 @@ function heli_spotlight_escape() {
 
     escape_player_hidden();
 
-    if(!var0) {
+    if(!var_0) {
       thread scripts\sp\maps\estate\estate_util::price_line("dx_vom_pri_heli_light_10");
-      var0 = 1;
+      var_0 = 1;
     }
 
     escape_player_exposed();
@@ -2262,12 +2262,12 @@ function escape_player_exposed() {
 
   level.player endon("indoors");
   self.noshooting = 1;
-  var0 = 450;
-  var1 = 2;
-  var2 = level.player.origin + anglesToForward(level.player.angles) * var0;
-  self.spotlight.target_ent moveTo(var2, var1, var1 * 0.5, var1 * 0.5);
-  wait var1;
-  var3 = 0;
+  var_0 = 450;
+  var_1 = 2;
+  var_2 = level.player.origin + anglesToForward(level.player.angles) * var_0;
+  self.spotlight.target_ent moveTo(var_2, var_1, var_1 * 0.5, var_1 * 0.5);
+  wait var_1;
+  var_3 = 0;
 
   for(;;) {
     if(istrue(self.spotlight.override)) {
@@ -2275,16 +2275,16 @@ function escape_player_exposed() {
       continue;
     }
 
-    var0 -= 15;
-    var4 = vectortoangles(self.spotlight.target_ent.origin - level.player.origin);
-    var2 = level.player.origin + anglesToForward(var4) * var0;
-    self.spotlight.target_ent.origin = var2;
+    var_0 -= 15;
+    var_4 = vectortoangles(self.spotlight.target_ent.origin - level.player.origin);
+    var_2 = level.player.origin + anglesToForward(var_4) * var_0;
+    self.spotlight.target_ent.origin = var_2;
 
-    if(var0 < 50) {
-      var0 = randomintrange(30, 50);
+    if(var_0 < 50) {
+      var_0 = randomintrange(30, 50);
 
-      if(!var3) {
-        var3 = 1;
+      if(!var_3) {
+        var_3 = 1;
         self setlookatent(level.player);
         self.noshooting = 0;
       }
@@ -2297,8 +2297,8 @@ function escape_player_exposed() {
 function escape_player_attack_think() {
   self setlookatent(level.player);
   level.player scripts\engine\utility::ent_flag_wait("indoors");
-  var0 = gettime();
-  var1 = gettime();
+  var_0 = gettime();
+  var_1 = gettime();
 
   while(!scripts\engine\utility::flag("tunnel_approach")) {
     waitframe();
@@ -2331,31 +2331,31 @@ function escape_player_attack_think() {
       continue;
     }
 
-    if(gettime() - var0 > 8500) {
+    if(gettime() - var_0 > 8500) {
       thread vo_heli_threaten_player();
-      var0 = gettime();
+      var_0 = gettime();
     }
 
-    if(gettime() - var1 > 15000) {
-      var2 = get_destructible_heli_target(900);
+    if(gettime() - var_1 > 15000) {
+      var_2 = get_destructible_heli_target(900);
 
-      if(!isDefined(var2)) {
-        var2 = get_closest_car_in_front_of_player(900);
+      if(!isDefined(var_2)) {
+        var_2 = get_closest_car_in_front_of_player(900);
       }
 
-      if(isDefined(var2)) {
-        if(scripts\engine\utility::is_equal(var2.script_noteworthy, "rocket")) {
-          var3 = heli_try_rockets(var2, 0, "dx_vom_pri_estate_helo_11");
+      if(isDefined(var_2)) {
+        if(scripts\engine\utility::is_equal(var_2.script_noteworthy, "rocket")) {
+          var_3 = heli_try_rockets(var_2, 0, "dx_vom_pri_estate_helo_11");
 
-          if(!istrue(var3)) {
+          if(!istrue(var_3)) {
             continue;
           }
         } else {
-          shootambienttarget(var2);
+          shootambienttarget(var_2);
         }
 
-        var4 = gettime();
-        level.used_destructible_targets[level.used_destructible_targets.size] = var2;
+        var_4 = gettime();
+        level.used_destructible_targets[level.used_destructible_targets.size] = var_2;
         continue;
       }
     }
@@ -2369,9 +2369,9 @@ function escape_player_attack_think() {
     }
 
     if(!self.spotlight.isdead) {
-      var3 = heli_try_rockets(level.player);
+      var_3 = heli_try_rockets(level.player);
 
-      if(!istrue(var3)) {
+      if(!istrue(var_3)) {
         heli_spotlight_toggle(1);
 
         if(level.player scripts\engine\utility::ent_flag("indoors")) {
@@ -2409,14 +2409,14 @@ function heli_movement_escape() {
     }
 
     self notify("new_goal");
-    var0 = get_ideal_heli_spot();
+    var_0 = get_ideal_heli_spot();
 
     if(!level.player scripts\engine\utility::ent_flag("indoors")) {
-      var0 = adjustposforvisibility(var0);
+      var_0 = adjustposforvisibility(var_0);
     }
 
     if(!self.move_override) {
-      heli_movetopos_and_idle(var0);
+      heli_movetopos_and_idle(var_0);
     }
 
     wait 0.05;
@@ -2473,33 +2473,33 @@ function heli_return_spotlight_player_hidden() {
 
 function heli_return_spotlight_player_exposed() {
   level.player endon("indoors");
-  var0 = 800;
-  var1 = level.player.origin + anglesToForward(level.player.angles) * var0;
+  var_0 = 800;
+  var_1 = level.player.origin + anglesToForward(level.player.angles) * var_0;
 
   if(self.spotlight.active) {
-    var2 = 2;
-    self.spotlight.target_ent moveTo(var1, var2, var2 * 0.5, var2 * 0.5);
-    wait var2;
+    var_2 = 2;
+    self.spotlight.target_ent moveTo(var_1, var_2, var_2 * 0.5, var_2 * 0.5);
+    wait var_2;
   } else {
-    self.spotlight.target_ent.origin = var1;
+    self.spotlight.target_ent.origin = var_1;
     wait 0.15;
     heli_spotlight_toggle(1);
   }
 
-  var3 = 0;
+  var_3 = 0;
 
   for(;;) {
-    var4 = level.player.origin;
-    var0 -= 15;
-    var5 = vectortoangles(self.spotlight.target_ent.origin - var4);
-    var1 = var4 + anglesToForward(var5) * var0;
-    self.spotlight.target_ent.origin = var1;
+    var_4 = level.player.origin;
+    var_0 -= 15;
+    var_5 = vectortoangles(self.spotlight.target_ent.origin - var_4);
+    var_1 = var_4 + anglesToForward(var_5) * var_0;
+    self.spotlight.target_ent.origin = var_1;
 
-    if(var0 < 50) {
-      var0 = randomintrange(0, 50);
+    if(var_0 < 50) {
+      var_0 = randomintrange(0, 50);
 
-      if(!var3) {
-        var3 = 1;
+      if(!var_3) {
+        var_3 = 1;
         self setlookatent(level.player);
         self.noshooting = 0;
       }
@@ -2573,8 +2573,8 @@ function heli_attack_player_heli_return() {
 }
 
 function heli_event_tunnel() {
-  var0 = scripts\engine\utility::getStruct("heli_tunnel_struct", "targetname");
-  thread assign_heli_positions(scripts\engine\utility::getStructArray(var0.target, "targetname"));
+  var_0 = scripts\engine\utility::getStruct("heli_tunnel_struct", "targetname");
+  thread assign_heli_positions(scripts\engine\utility::getStructArray(var_0.target, "targetname"));
   thread heli_spotlight_heli_return();
   thread heli_spotlight_killed_heli_return();
   thread heli_attack_player_heli_return();
@@ -2584,9 +2584,9 @@ function heli_event_tunnel() {
   stopshooting();
   self notify("stop_trying_rockets");
   level.tunnel_struct scripts\engine\sp\utility::waittill_player_lookat(0.77, 0, 1, 2);
-  var1 = level.player.origin + vectorNormalize(level.tunnel_struct.origin - level.player.origin) * 600;
-  var2 = scripts\engine\utility::spawn_script_origin(scripts\engine\utility::drop_to_ground(var1), (0, 0, 0));
-  heli_try_rockets(var2, 1);
+  var_1 = level.player.origin + vectorNormalize(level.tunnel_struct.origin - level.player.origin) * 600;
+  var_2 = scripts\engine\utility::spawn_script_origin(scripts\engine\utility::drop_to_ground(var_1), (0, 0, 0));
+  heli_try_rockets(var_2, 1);
   self.noshooting = 0;
   self.shoot_override = 0;
   scripts\engine\utility::flag_wait("tunnel_open");
@@ -2601,19 +2601,19 @@ function heli_event_tunnel() {
   self.noshooting = 1;
   self.shoot_override = 1;
   stopshooting();
-  var2 = scripts\engine\utility::getStruct("tunnel_collapse_missile_target", "targetname");
-  thread heli_try_rockets(var2, 1, "dx_vom_pri_chopper_reattack_95", "player_entered_tunnel_gate");
-  self waittill("missile_fired", var3);
-  self waittill("missile_fired", var4);
-  var3 waittill("death");
+  var_2 = scripts\engine\utility::getStruct("tunnel_collapse_missile_target", "targetname");
+  thread heli_try_rockets(var_2, 1, "dx_vom_pri_chopper_reattack_95", "player_entered_tunnel_gate");
+  self waittill("missile_fired", var_3);
+  self waittill("missile_fired", var_4);
+  var_3 waittill("death");
   scripts\engine\utility::exploder("vfxexplotunnel");
-  var4 waittill("death");
+  var_4 waittill("death");
 
   if(!scripts\engine\utility::flag("player_in_tunnel")) {
     scripts\engine\utility::exploder("vfxexpl_tunnelfail");
 
     if(scripts\engine\utility::flag("player_reached_drain_tunnel")) {
-      level.player scripts\sp\utility::do_damage(9999, var2.origin, level.escape_heli);
+      level.player scripts\sp\utility::do_damage(9999, var_2.origin, level.escape_heli);
     } else {
       scripts\sp\player_death::set_custom_death_quote(47);
       scripts\sp\utility::missionfailedwrapper();
@@ -2623,12 +2623,12 @@ function heli_event_tunnel() {
   level notify("tunnel_collapse");
 }
 
-function waittill_player_moves_or_timeout(var0) {
-  level scripts\engine\utility::delaythread(var0, &scripts\engine\utility::send_notify, "player_move_timeout");
+function waittill_player_moves_or_timeout(var_0) {
+  level scripts\engine\utility::delaythread(var_0, &scripts\engine\utility::send_notify, "player_move_timeout");
   level endon("player_move_timeout");
-  var1 = level.player.origin;
+  var_1 = level.player.origin;
 
-  while(level.player.origin == var1) {
+  while(level.player.origin == var_1) {
     waitframe();
   }
 }
@@ -2638,9 +2638,9 @@ function heli_damage_death() {
   scripts\sp\maps\estate\estate_util::make_alias_group("heli_damage", ["dx_vom_pri_escape_helo_10", "dx_vom_pri_escape_helo_20", "dx_vom_pri_escape_helo_30"]);
 
   for(;;) {
-    self waittill("damage", var0, var1);
+    self waittill("damage", var_0, var_1);
 
-    if(scripts\engine\utility::is_equal(var1, level.player)) {
+    if(scripts\engine\utility::is_equal(var_1, level.player)) {
       if(shoulddoweaponnag()) {
         self.last_weapon_nag = gettime();
         thread scripts\sp\maps\estate\estate_util::price_line(scripts\sp\maps\estate\estate_util::get_next_alias_in_group("heli_damage"));
@@ -2688,16 +2688,16 @@ function force_save() {
   }
 
   level.isforcesaving = 1;
-  var0 = 0;
-  var1 = 10;
-  var2 = level.curautosave;
+  var_0 = 0;
+  var_1 = 10;
+  var_2 = level.curautosave;
 
   for(;;) {
-    var0++;
+    var_0++;
     scripts\engine\sp\utility::autosave_by_name_thread("forceSave");
 
-    if(level.curautosave == var2 && var0 <= var1) {
-      iprintln("autosave attempt " + var0 + " failed - trying again in 1 second!");
+    if(level.curautosave == var_2 && var_0 <= var_1) {
+      iprintln("autosave attempt " + var_0 + " failed - trying again in 1 second!");
       wait 1;
       continue;
     }
@@ -2705,16 +2705,16 @@ function force_save() {
     break;
   }
 
-  if(level.curautosave == var2) {
-    iprintln("Failed to save after " + var1 + " tries! This is bad.");
+  if(level.curautosave == var_2) {
+    iprintln("Failed to save after " + var_1 + " tries! This is bad.");
   } else {
-    iprintln("Save success after " + var0 + " attempts ");
+    iprintln("Save success after " + var_0 + " attempts ");
   }
 
   level.isforcesaving = undefined;
 }
 
-function heli_pos_override_trig(var0) {
+function heli_pos_override_trig(var_0) {
   if(!scripts\engine\utility::flag("escape_begin")) {
     return;
   }
@@ -2723,19 +2723,19 @@ function heli_pos_override_trig(var0) {
     return;
   }
 
-  if(scripts\engine\utility::is_equal(var0, level.player)) {
+  if(scripts\engine\utility::is_equal(var_0, level.player)) {
     level.escape_heli.move_override = 1;
     level notify("player_moved");
-    var1 = scripts\engine\utility::getStructArray(self.target, "targetname");
+    var_1 = scripts\engine\utility::getStructArray(self.target, "targetname");
 
-    if(var1.size > 1) {
+    if(var_1.size > 1) {
       thread assign_heli_positions(level.escape_heli);
     } else {
-      nav_gotopos(level.escape_heli, var1[0].origin);
-      level.escape_heli settargetyaw(var1[0].angles[1]);
+      nav_gotopos(level.escape_heli, var_1[0].origin);
+      level.escape_heli settargetyaw(var_1[0].angles[1]);
     }
 
-    while(var0 istouching(self)) {
+    while(var_0 istouching(self)) {
       wait 0.05;
     }
 
@@ -2744,27 +2744,27 @@ function heli_pos_override_trig(var0) {
   }
 }
 
-function assign_heli_positions(var0) {
+function assign_heli_positions(var_0) {
   self notify("new_heli_positions");
   self endon("new_heli_positions");
 
-  if(!isarray(var0)) {
-    var0 = [var0];
+  if(!isarray(var_0)) {
+    var_0 = [var_0];
   }
 
-  if(var0.size == 1) {
-    nav_gotopos(var0[0].origin, 47, 1);
+  if(var_0.size == 1) {
+    nav_gotopos(var_0[0].origin, 47, 1);
     return;
   }
 
-  var0 = scripts\engine\utility::array_randomize(var0);
+  var_0 = scripts\engine\utility::array_randomize(var_0);
 
   for(;;) {
-    foreach(var2 in var0) {
-      nav_gotopos(var2.origin, 50, 1);
+    foreach(var_2 in var_0) {
+      nav_gotopos(var_2.origin, 50, 1);
       self setlookatent(level.player);
-      var3 = randomfloatrange(3, 5);
-      scripts\engine\utility::waittill_notify_or_timeout("damage", var3);
+      var_3 = randomfloatrange(3, 5);
+      scripts\engine\utility::waittill_notify_or_timeout("damage", var_3);
       player_fired_recently_delay();
     }
   }
@@ -2778,126 +2778,126 @@ function player_fired_recently_delay() {
 }
 
 function get_ideal_heli_spot() {
-  var0 = scripts\engine\utility::getStruct("tunnel_obj", "targetname").origin;
-  var1 = vectortoangles(var0 - level.player.origin);
-  var2 = level.player.origin + anglesToForward(var1) * 2000;
-  var3 = "heli_lane";
-  var4 = scripts\engine\utility::getStructArray(var3, "targetname");
-  var5 = [];
+  var_0 = scripts\engine\utility::getStruct("tunnel_obj", "targetname").origin;
+  var_1 = vectortoangles(var_0 - level.player.origin);
+  var_2 = level.player.origin + anglesToForward(var_1) * 2000;
+  var_3 = "heli_lane";
+  var_4 = scripts\engine\utility::getStructArray(var_3, "targetname");
+  var_5 = [];
 
-  foreach(var7 in var4) {
-    var8 = scripts\engine\utility::getStruct(var7.target, "targetname");
-    var9 = spawnStruct();
-    var9.origin = pointonsegmentnearesttopoint(var7.origin, var8.origin, var2);
-    var5 = var9;
+  foreach(var_7 in var_4) {
+    var_8 = scripts\engine\utility::getStruct(var_7.target, "targetname");
+    var_9 = spawnStruct();
+    var_9.origin = pointonsegmentnearesttopoint(var_7.origin, var_8.origin, var_2);
+    var_5 = var_9;
   }
 
-  var11 = sortbydistance(var5, var2)[0];
-  return (var11.origin[0], var11.origin[1], level.player.target_ent.origin[2]);
+  var_11 = sortbydistance(var_5, var_2)[0];
+  return (var_11.origin[0], var_11.origin[1], level.player.target_ent.origin[2]);
 }
 
 function monitor_player_moves() {
   level.escape_heli endon("new_goal");
 
-  for(var0 = level.player.origin;; var0 = level.player.origin) {
+  for(var_0 = level.player.origin;; var_0 = level.player.origin) {
     wait 0.05;
-    var1 = distancesquared(level.player.origin, var0);
+    var_1 = distancesquared(level.player.origin, var_0);
 
-    if(var1 > squared(150)) {
+    if(var_1 > squared(150)) {
       level notify("player_moved");
     }
   }
 }
 
-function heli_movetopos_and_idle(var0) {
+function heli_movetopos_and_idle(var_0) {
   thread monitor_player_moves();
   level endon("player_moved");
-  nav_gotopos(var0);
+  nav_gotopos(var_0);
   wait 4;
 }
 
-function nav_gotopos(var0, var1, var2) {
-  if(!istrue(var2)) {
+function nav_gotopos(var_0, var_1, var_2) {
+  if(!istrue(var_2)) {
     self notify("new_heli_positions");
   }
 
   self notify("nav_new_path");
   self endon("nav_new_path");
-  var3 = findpath3d(self.origin, var0);
+  var_3 = findpath3d(self.origin, var_0);
 
-  if(!isDefined(var3)) {
+  if(!isDefined(var_3)) {
     iprintlnbold("No nav3d data for heli! Heli flying will be bad .");
     return;
   }
 
-  var4 = 0;
-  var1 = scripts\engine\utility::ter_op(isDefined(var1), var1, 37);
-  self vehicle_setspeed(var1, var1 * 0.5, var1 * 0.5);
+  var_4 = 0;
+  var_1 = scripts\engine\utility::ter_op(isDefined(var_1), var_1, 37);
+  self vehicle_setspeed(var_1, var_1 * 0.5, var_1 * 0.5);
 
-  foreach(var6 in var3) {
-    if(var7 == var3.size - 1) {
-      var4 = 1;
+  foreach(var_6 in var_3) {
+    if(var_7 == var_3.size - 1) {
+      var_4 = 1;
     }
 
-    self setvehgoalpos(var6, var4);
+    self setvehgoalpos(var_6, var_4);
     scripts\engine\utility::waittill_any("near_goal", "goal");
   }
 
   self notify("nav_goal");
 }
 
-function adjustposforvisibility(var0, var1) {
-  var1 = scripts\engine\utility::ter_op(isDefined(var1), var1, level.player);
+function adjustposforvisibility(var_0, var_1) {
+  var_1 = scripts\engine\utility::ter_op(isDefined(var_1), var_1, level.player);
 
-  if(var1 scripts\sp\maps\estate\estate_util::has_ceiling()) {
-    var2 = 1760;
+  if(var_1 scripts\sp\maps\estate\estate_util::has_ceiling()) {
+    var_2 = 1760;
   } else {
-    var2 = 2500;
+    var_2 = 2500;
   }
 
-  var3 = scripts\engine\utility::flatten_vector(var2.origin - var1);
-  var4 = scripts\engine\trace::create_contents(0, 1, 1, 1, 1, 1, 0, 1, 1);
+  var_3 = scripts\engine\utility::flatten_vector(var_2.origin - var_1);
+  var_4 = scripts\engine\trace::create_contents(0, 1, 1, 1, 1, 1, 0, 1, 1);
 
   for(;;) {
-    if(!scripts\engine\trace::ray_trace_passed(var1 - (0, 0, self.mg_z_offset), var2.origin + (0, 0, 18), [self, self.minigun, self.spotlight, level.player], var4)) {
-      if(var1[2] + 100 <= var2) {
-        var1 += (0, 0, 100);
-      } else if(distance2dsquared(var1 + var3 * 50, var2.origin) >= 250000) {
-        var1 += var3 * 50;
+    if(!scripts\engine\trace::ray_trace_passed(var_1 - (0, 0, self.mg_z_offset), var_2.origin + (0, 0, 18), [self, self.minigun, self.spotlight, level.player], var_4)) {
+      if(var_1[2] + 100 <= var_2) {
+        var_1 += (0, 0, 100);
+      } else if(distance2dsquared(var_1 + var_3 * 50, var_2.origin) >= 250000) {
+        var_1 += var_3 * 50;
       } else {
-        return var1;
+        return var_1;
       }
     } else {
-      return var1;
+      return var_1;
     }
 
     wait 0.05;
   }
 }
 
-function canshoottargetfrompos(var0, var1, var2) {
-  if(!istrue(var2) && self.noshooting) {
+function canshoottargetfrompos(var_0, var_1, var_2) {
+  if(!istrue(var_2) && self.noshooting) {
     return 0;
   }
 
-  if(isPlayer(var1) || isai(var1)) {
-    var3 = var1 getEye();
+  if(isPlayer(var_1) || isai(var_1)) {
+    var_3 = var_1 getEye();
   } else {
-    var3 = var2.origin;
+    var_3 = var_2.origin;
   }
 
-  var4 = sighttracepassed(var1 - (0, 0, self.mg_z_offset), var3, 0, self);
-  return var4;
+  var_4 = sighttracepassed(var_1 - (0, 0, self.mg_z_offset), var_3, 0, self);
+  return var_4;
 }
 
 function heli_spotlight_create() {
-  var0 = "tag_spotlight";
-  var1 = (0, -5, 0);
-  var2 = self gettagorigin(var0);
-  self.spotlight = spawnturret("misc_turret", var2, "fighter_spotlight");
-  self.spotlight.angles = self gettagangles(var0);
+  var_0 = "tag_spotlight";
+  var_1 = (0, -5, 0);
+  var_2 = self gettagorigin(var_0);
+  self.spotlight = spawnturret("misc_turret", var_2, "fighter_spotlight");
+  self.spotlight.angles = self gettagangles(var_0);
   self.spotlight setModel("veh8_mil_air_mindia8_spotlight");
-  self.spotlight linkTo(self, var0, var1, (0, 0, 0));
+  self.spotlight linkTo(self, var_0, var_1, (0, 0, 0));
   self.spotlight makeunusable();
   self.spotlight setmode("manual");
   self.spotlight setdefaultdroppitch(0);
@@ -2920,26 +2920,26 @@ function heli_spotlight_create() {
 
 function heli_spotlight_damage_death() {
   self endon("death");
-  var0 = self.spotlight;
+  var_0 = self.spotlight;
   wait 1;
 
   for(;;) {
-    var0 waittill("damage", var1, var2, var3, var4, var5, var6, var7, var8, var9, var10);
+    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 
-    if(scripts\engine\utility::is_equal(var2, level.player)) {
-      var11 = undefined;
+    if(scripts\engine\utility::is_equal(var_2, level.player)) {
+      var_11 = undefined;
 
-      if(isDefined(var10)) {
-        var11 = var10.classname;
+      if(isDefined(var_10)) {
+        var_11 = var_10.classname;
       }
 
-      if(!isDefined(var11)) {
+      if(!isDefined(var_11)) {
         continue;
       }
 
-      if(var11 == "grenade" || var11 == "rocketlauncher") {
+      if(var_11 == "grenade" || var_11 == "rocketlauncher") {
         if(gettime() - self.lastrocketdmgtime > 250) {
-          self notify("damage", var1, var2, var3, var4, var5, var6, var7, var8, var9, var10);
+          self notify("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
         }
       }
 
@@ -2958,13 +2958,13 @@ function heli_spotlight_damage_death() {
 }
 
 function heli_mg_create() {
-  var0 = "tag_turret";
-  var1 = (-64, 0, 0);
-  var2 = self gettagorigin(var0);
-  self.minigun = spawnturret("misc_turret", var2, "iw8_mindia8_turret");
-  self.minigun.angles = self gettagangles(var0);
+  var_0 = "tag_turret";
+  var_1 = (-64, 0, 0);
+  var_2 = self gettagorigin(var_0);
+  self.minigun = spawnturret("misc_turret", var_2, "iw8_mindia8_turret");
+  self.minigun.angles = self gettagangles(var_0);
   self.minigun setModel("veh8_mil_air_mindia8_turret");
-  self.minigun linkTo(self, var0, (0, 0, 0), (0, 0, 0));
+  self.minigun linkTo(self, var_0, (0, 0, 0), (0, 0, 0));
   self.minigun makeunusable();
   self.minigun setmode("manual");
   self.minigun setdefaultdroppitch(0);
@@ -2980,38 +2980,38 @@ function heli_mg_create() {
   thread scripts\engine\utility::delete_on_death(self.minigun.target_ent);
 }
 
-function heli_spotlight_toggle(var0) {
+function heli_spotlight_toggle(var_0) {
   if(self.spotlight.isdead) {
-    var0 = 0;
+    var_0 = 0;
   }
 
-  if(var0 && !self.spotlight.active) {
+  if(var_0 && !self.spotlight.active) {
     playFXOnTag(scripts\engine\utility::getfx("vfx_estate_chopper_enemy_spotlight_01"), self.spotlight, "tag_flash");
     self.spotlight.active = 1;
     return;
   }
 
-  if(!var0 && self.spotlight.active) {
+  if(!var_0 && self.spotlight.active) {
     stopFXOnTag(scripts\engine\utility::getfx("vfx_estate_chopper_enemy_spotlight_01"), self.spotlight, "tag_flash");
     self.spotlight.active = 0;
     return;
   }
 }
 
-function heliisfacing(var0) {
+function heliisfacing(var_0) {
   self endon("death");
   self endon("leaving");
-  var1 = 10;
-  var2 = anglesToForward(self.angles);
-  var3 = var0.origin - self.origin;
-  var2 *= (1, 1, 0);
-  var3 *= (1, 1, 0);
-  var3 = vectorNormalize(var3);
-  var2 = vectorNormalize(var2);
-  var4 = vectordot(var3, var2);
-  var5 = cos(var1);
+  var_1 = 10;
+  var_2 = anglesToForward(self.angles);
+  var_3 = var_0.origin - self.origin;
+  var_2 *= (1, 1, 0);
+  var_3 *= (1, 1, 0);
+  var_3 = vectorNormalize(var_3);
+  var_2 = vectorNormalize(var_2);
+  var_4 = vectordot(var_3, var_2);
+  var_5 = cos(var_1);
 
-  if(var4 >= var5) {
+  if(var_4 >= var_5) {
     return 1;
   }
 
@@ -3020,23 +3020,23 @@ function heliisfacing(var0) {
 
 function escape_player_attack_wait() {
   self endon("reattack");
-  var0 = gettime();
-  var1 = 5;
-  var2 = 0;
-  var3 = 20;
+  var_0 = gettime();
+  var_1 = 5;
+  var_2 = 0;
+  var_3 = 20;
 
   if(scripts\engine\utility::flag("tunnel_approach")) {
     return;
   }
 
-  while(gettime() < var0 + var1 * 1000) {
+  while(gettime() < var_0 + var_1 * 1000) {
     if(level.player sprintbuttonPressed() || level.player issprinting()) {
       wait 0.25;
       continue;
     } else {
-      var2++;
+      var_2++;
 
-      if(var2 >= var3) {
+      if(var_2 >= var_3) {
         return;
       }
     }
@@ -3045,40 +3045,40 @@ function escape_player_attack_wait() {
   }
 }
 
-function heli_spotlight_hunt(var0) {
-  var1 = undefined;
+function heli_spotlight_hunt(var_0) {
+  var_1 = undefined;
 
   if(self.spotlight.isdead) {
     return;
   }
 
-  var1 = getallyhelitarget();
+  var_1 = getallyhelitarget();
 
-  if(!isDefined(var1)) {
-    var1 = getcovernodehelitarget();
+  if(!isDefined(var_1)) {
+    var_1 = getcovernodehelitarget();
   }
 
-  if(isDefined(var1) && !self.spotlight.override) {
-    heli_spotlight_sweep([var1], var0);
+  if(isDefined(var_1) && !self.spotlight.override) {
+    heli_spotlight_sweep([var_1], var_0);
     return;
   }
 }
 
-function getcovernodehelitarget(var0, var1) {
-  if(!isDefined(var0)) {
-    var0 = 1500;
+function getcovernodehelitarget(var_0, var_1) {
+  if(!isDefined(var_0)) {
+    var_0 = 1500;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 500;
+  if(!isDefined(var_1)) {
+    var_1 = 500;
   }
 
-  var2 = getnodesinradius(level.player.origin, var0, var1);
-  var2 = scripts\engine\utility::array_randomize(var2);
+  var_2 = getnodesinradius(level.player.origin, var_0, var_1);
+  var_2 = scripts\engine\utility::array_randomize(var_2);
 
-  foreach(var4 in var2) {
-    if(scripts\engine\utility::within_fov(level.player.origin, level.player.angles, var4.origin, cos(60)) && sighttracepassed(self.origin, var4.origin, 0, self)) {
-      return var4;
+  foreach(var_4 in var_2) {
+    if(scripts\engine\utility::within_fov(level.player.origin, level.player.angles, var_4.origin, cos(60)) && sighttracepassed(self.origin, var_4.origin, 0, self)) {
+      return var_4;
     }
   }
 
@@ -3086,16 +3086,16 @@ function getcovernodehelitarget(var0, var1) {
 }
 
 function getallyhelitarget() {
-  foreach(var1 in getaiarray("allies")) {
-    if(sighttracepassed(self.origin, var1.origin, 0, self)) {
-      return var1;
+  foreach(var_1 in getaiarray("allies")) {
+    if(sighttracepassed(self.origin, var_1.origin, 0, self)) {
+      return var_1;
     }
   }
 
   return undefined;
 }
 
-function heli_spotlight_sweep(var0, var1) {
+function heli_spotlight_sweep(var_0, var_1) {
   self notify("stop_spotlight_sweep");
   self endon("stop_spotlight_sweep");
   self.spotlight endon("death");
@@ -3104,47 +3104,47 @@ function heli_spotlight_sweep(var0, var1) {
     return;
   }
 
-  if(!isarray(var0)) {
-    var0 = [var0];
+  if(!isarray(var_0)) {
+    var_0 = [var_0];
   }
 
-  if(var0.size > 1 && !isDefined(var1)) {
-    var0 = scripts\engine\utility::array_randomize(var0);
+  if(var_0.size > 1 && !isDefined(var_1)) {
+    var_0 = scripts\engine\utility::array_randomize(var_0);
   }
 
-  var2 = 1;
+  var_2 = 1;
 
-  foreach(var4 in var0) {
-    if(!isDefined(var4)) {
+  foreach(var_4 in var_0) {
+    if(!isDefined(var_4)) {
       waitframe();
       continue;
     }
 
-    if(var2 && var0.size > 1) {
-      self.spotlight.target_ent.origin = var4.origin;
-      var2 = 0;
+    if(var_2 && var_0.size > 1) {
+      self.spotlight.target_ent.origin = var_4.origin;
+      var_2 = 0;
       continue;
     }
 
-    var5 = distance(self.spotlight.target_ent.origin, var4.origin);
+    var_5 = distance(self.spotlight.target_ent.origin, var_4.origin);
 
-    if(!var5) {
+    if(!var_5) {
       continue;
     }
 
-    var6 = scripts\engine\utility::ter_op(isDefined(var1), var1, 40);
-    var7 = scripts\engine\sp\utility::mph_travel_time(var6, var5);
+    var_6 = scripts\engine\utility::ter_op(isDefined(var_1), var_1, 40);
+    var_7 = scripts\engine\sp\utility::mph_travel_time(var_6, var_5);
 
-    if(!isDefined(var1)) {
-      if(var7 <= 0) {
-        var7 = 1;
-      } else if(var7 > 1.5) {
-        var7 = 1.5;
+    if(!isDefined(var_1)) {
+      if(var_7 <= 0) {
+        var_7 = 1;
+      } else if(var_7 > 1.5) {
+        var_7 = 1.5;
       }
     }
 
-    self.spotlight.target_ent moveTo(var4.origin, var7, var7 * 0.8, var7 * 0.2);
-    wait var7 + randomfloatrange(0.8, 1.5);
+    self.spotlight.target_ent moveTo(var_4.origin, var_7, var_7 * 0.8, var_7 * 0.2);
+    wait var_7 + randomfloatrange(0.8, 1.5);
   }
 }
 
@@ -3170,9 +3170,9 @@ function stopshooting() {
   }
 }
 
-function shootambienttarget(var0) {
-  if(isalive(var0)) {
-    var0 endon("death");
+function shootambienttarget(var_0) {
+  if(isalive(var_0)) {
+    var_0 endon("death");
   }
 
   if(self.noshooting) {
@@ -3186,50 +3186,50 @@ function shootambienttarget(var0) {
   self.minigun startbarrelspin();
   wait 1.5;
 
-  if(isDefined(var0.target)) {
-    shootambient_targetspline(var0);
+  if(isDefined(var_0.target)) {
+    shootambient_targetspline(var_0);
     return;
   }
 
-  thread heli_spotlight_sweep([var0]);
+  thread heli_spotlight_sweep([var_0]);
 
-  if(isDefined(var0.angles)) {
-    var1 = 200;
-    self.minigun.target_ent.origin = var0.origin + anglesToForward(var0.angles) * var1;
+  if(isDefined(var_0.angles)) {
+    var_1 = 200;
+    self.minigun.target_ent.origin = var_0.origin + anglesToForward(var_0.angles) * var_1;
     self.minigun snaptotargetentity(self.minigun.target_ent, (0, 0, 0));
 
     for(;;) {
-      var1 -= 20;
-      self.minigun.target_ent.origin = var0.origin + anglesToForward(var0.angles) * var1;
+      var_1 -= 20;
+      self.minigun.target_ent.origin = var_0.origin + anglesToForward(var_0.angles) * var_1;
       self.minigun shootturret();
       wait 0.05;
 
-      if(distance(var0.origin, self.minigun.target_ent.origin) < 50) {
+      if(distance(var_0.origin, self.minigun.target_ent.origin) < 50) {
         break;
       }
     }
   }
 
-  if(isai(var0)) {
-    var2 = anglesToForward(var0.angles);
-    var3 = var2 * 400;
-    var4 = var3 + scripts\engine\utility::randomvector(50);
-    var5 = randomintrange(30, 45);
+  if(isai(var_0)) {
+    var_2 = anglesToForward(var_0.angles);
+    var_3 = var_2 * 400;
+    var_4 = var_3 + scripts\engine\utility::randomvector(50);
+    var_5 = randomintrange(30, 45);
     self.minigun startbarrelspin();
     wait 1.5;
 
-    for(var6 = 0; var6 < var5; var6++) {
-      var4 = var3 + scripts\engine\utility::randomvector(50);
-      self.minigun settargetentity(var0, var4);
+    for(var_6 = 0; var_6 < var_5; var_6++) {
+      var_4 = var_3 + scripts\engine\utility::randomvector(50);
+      self.minigun settargetentity(var_0, var_4);
       self.minigun shootturret();
       wait 0.05;
     }
   } else {
-    self.minigun.target_ent.origin = var6.origin;
+    self.minigun.target_ent.origin = var_6.origin;
     self.minigun snaptotargetentity(self.minigun.target_ent, (0, 0, 0));
-    var5 = randomintrange(25, 35);
+    var_5 = randomintrange(25, 35);
 
-    for(var6 = 0; var6 < var5; var6++) {
+    for(var_6 = 0; var_6 < var_5; var_6++) {
       self.minigun shootturret();
       wait 0.05;
     }
@@ -3240,25 +3240,25 @@ function shootambienttarget(var0) {
   self.spotlight.override = 0;
 }
 
-function shootambient_targetspline(var0) {
+function shootambient_targetspline(var_0) {
   self.spotlight.override = 1;
-  self.spotlight.target_ent.origin = var0.origin;
+  self.spotlight.target_ent.origin = var_0.origin;
   self.minigun cleartargetentity();
   self.minigun snaptotargetentity(self.spotlight.target_ent, (0, 0, 0));
   waittillframeend();
-  var1 = scripts\engine\utility::getStruct(var0.target, "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   thread heli_minigun_shoot_til_notify("stop_shooting_ambient_spine");
   heli_spotlight_toggle(1);
   thread scripts\engine\sp\utility::draw_line_from_ent_to_ent_for_time(self, self.spotlight.target_ent, 1, 1, 0, 5);
 
   for(;;) {
-    var2 = scripts\engine\sp\utility::mph_travel_time(10, distance(var0.origin, var1.origin));
-    self.spotlight.target_ent moveTo(var1.origin, var2);
-    wait var2;
-    var0 = var1;
+    var_2 = scripts\engine\sp\utility::mph_travel_time(10, distance(var_0.origin, var_1.origin));
+    self.spotlight.target_ent moveTo(var_1.origin, var_2);
+    wait var_2;
+    var_0 = var_1;
 
-    if(isDefined(var0.target)) {
-      var1 = scripts\engine\utility::getStruct(var0.target, "targetname");
+    if(isDefined(var_0.target)) {
+      var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
       continue;
     }
 
@@ -3281,44 +3281,44 @@ function missplayer() {
   self.is_shooting = 1;
   self.minigun startbarrelspin();
   wait 1.5;
-  var0 = 400;
-  var1 = var0 + 450;
-  self.minigun.target_ent.origin = level.player.origin + anglesToForward(level.player.angles) * var1;
+  var_0 = 400;
+  var_1 = var_0 + 450;
+  self.minigun.target_ent.origin = level.player.origin + anglesToForward(level.player.angles) * var_1;
   self.minigun snaptotargetentity(self.minigun.target_ent, (0, 0, 0));
 
   for(;;) {
-    var1 -= 20;
-    self.minigun.target_ent.origin = level.player.origin + anglesToForward(level.player.angles) * var1;
+    var_1 -= 20;
+    self.minigun.target_ent.origin = level.player.origin + anglesToForward(level.player.angles) * var_1;
 
-    if(distancesquared(level.player.origin, self.minigun.target_ent.origin) < var0 * var0) {
+    if(distancesquared(level.player.origin, self.minigun.target_ent.origin) < var_0 * var_0) {
       break;
     }
 
-    var2 = 1;
+    var_2 = 1;
 
-    foreach(var4 in level.friendlies) {
-      if(distancesquared(self.minigun.target_ent.origin, var4.origin) < 3600) {
-        var2 = 0;
+    foreach(var_4 in level.friendlies) {
+      if(distancesquared(self.minigun.target_ent.origin, var_4.origin) < 3600) {
+        var_2 = 0;
         break;
       }
     }
 
-    if(var2) {
-      var6 = scripts\engine\trace::ray_trace(self.minigun gettagorigin("tag_flash"), self.minigun.target_ent.origin, [self, self.minigun]);
+    if(var_2) {
+      var_6 = scripts\engine\trace::ray_trace(self.minigun gettagorigin("tag_flash"), self.minigun.target_ent.origin, [self, self.minigun]);
 
-      if(isDefined(var6["entity"]) && scripts\engine\utility::array_contains(level.friendlies, var6["entity"])) {
-        var2 = 0;
-      } else if(isDefined(var6["position"])) {
-        foreach(var4 in level.friendlies) {
-          if(distancesquared(var6["position"], var4.origin) < 3600) {
-            var2 = 0;
+      if(isDefined(var_6["entity"]) && scripts\engine\utility::array_contains(level.friendlies, var_6["entity"])) {
+        var_2 = 0;
+      } else if(isDefined(var_6["position"])) {
+        foreach(var_4 in level.friendlies) {
+          if(distancesquared(var_6["position"], var_4.origin) < 3600) {
+            var_2 = 0;
             break;
           }
         }
       }
     }
 
-    if(!var2) {
+    if(!var_2) {
       break;
     }
 
@@ -3326,14 +3326,14 @@ function missplayer() {
     waitframe();
   }
 
-  var9 = anglesToForward(level.player.angles);
-  var10 = var9 * var0;
-  var11 = var10 + scripts\engine\utility::randomvector(50);
-  var12 = randomintrange(20, 30);
+  var_9 = anglesToForward(level.player.angles);
+  var_10 = var_9 * var_0;
+  var_11 = var_10 + scripts\engine\utility::randomvector(50);
+  var_12 = randomintrange(20, 30);
 
-  for(var13 = 0; var13 < var12; var13++) {
-    var11 = var10 + scripts\engine\utility::randomvector(50);
-    self.minigun settargetentity(level.player, var11);
+  for(var_13 = 0; var_13 < var_12; var_13++) {
+    var_11 = var_10 + scripts\engine\utility::randomvector(50);
+    self.minigun settargetentity(level.player, var_11);
     self.minigun shootturret();
     wait 0.05;
   }
@@ -3342,16 +3342,16 @@ function missplayer() {
   self.is_shooting = 0;
 }
 
-function shoottokill(var0) {
-  heli_shoot_player(375, 20, 120, 30, 0.25, 0.1, 0, var0);
+function shoottokill(var_0) {
+  heli_shoot_player(375, 20, 120, 30, 0.25, 0.1, 0, var_0);
 }
 
 function hurtplayer() {
   heli_shoot_player(500, 20, 60, 50, 0.1, 0.01, 1);
 }
 
-function heli_shoot_player(var0, var1, var2, var3, var4, var5, var6, var7) {
-  if(!istrue(var7) && self.noshooting) {
+function heli_shoot_player(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  if(!istrue(var_7) && self.noshooting) {
     return;
   }
 
@@ -3366,7 +3366,7 @@ function heli_shoot_player(var0, var1, var2, var3, var4, var5, var6, var7) {
 
 function update_target_offset() {
   self.target_offset = (0, 0, 20);
-  var0 = 10;
+  var_0 = 10;
 
   while(self.is_shooting) {
     waitframe();
@@ -3375,36 +3375,36 @@ function update_target_offset() {
       continue;
     }
 
-    self.target_offset += (0, 0, var0);
+    self.target_offset += (0, 0, var_0);
 
-    if(self.target_offset[2] + var0 > 60 || self.target_offset[2] + var0 < 10) {
-      var0 *= -1;
+    if(self.target_offset[2] + var_0 > 60 || self.target_offset[2] + var_0 < 10) {
+      var_0 *= -1;
     }
   }
 }
 
-function safe_to_shoot_missiles(var0) {
-  if(isPlayer(var0)) {
+function safe_to_shoot_missiles(var_0) {
+  if(isPlayer(var_0)) {
     if(self vehicle_getspeed() > 25 || !scripts\engine\utility::within_fov(self.origin, self.angles, level.player getEye(), cos(90)) || !scripts\engine\utility::within_fov(level.player.origin, level.player.angles, self.origin, cos(65)) || distance2d(self.origin, level.player.origin) < 800) {
       return false;
     }
-  } else if(isai(var0)) {
-    if(!isalive(var0) || self vehicle_getspeed() > 25 || !scripts\engine\utility::within_fov(self.origin, self.angles, var0 getEye(), cos(90)) || distance2d(self.origin, var0.origin) < 800) {
+  } else if(isai(var_0)) {
+    if(!isalive(var_0) || self vehicle_getspeed() > 25 || !scripts\engine\utility::within_fov(self.origin, self.angles, var_0 getEye(), cos(90)) || distance2d(self.origin, var_0.origin) < 800) {
       return false;
     }
-  } else if(self vehicle_getspeed() > 25 || !scripts\engine\utility::within_fov(self.origin, self.angles, var0.origin, cos(90))) {
+  } else if(self vehicle_getspeed() > 25 || !scripts\engine\utility::within_fov(self.origin, self.angles, var_0.origin, cos(90))) {
     return false;
   }
 
   return true;
 }
 
-function heli_try_rockets(var0, var1, var2, var3) {
-  if(!isDefined(var1)) {
-    var1 = 0;
+function heli_try_rockets(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  if(!var1) {
+  if(!var_1) {
     if(self.noshooting) {
       return;
     }
@@ -3423,105 +3423,105 @@ function heli_try_rockets(var0, var1, var2, var3) {
   }
 
   self.trying_rockets = 1;
-  self.rockets_target = var0;
+  self.rockets_target = var_0;
   self endon("stop_trying_rockets");
   thread cleanup_heli_rockets();
 
-  if(!var1) {
-    var4 = scripts\engine\utility::ter_op(isPlayer(var0), 5, 2);
-    var5 = gettime();
-    var6 = 0;
+  if(!var_1) {
+    var_4 = scripts\engine\utility::ter_op(isPlayer(var_0), 5, 2);
+    var_5 = gettime();
+    var_6 = 0;
 
-    while(gettime() < var5 + var4 * 1000) {
-      var6 = safe_to_shoot_missiles(var0);
+    while(gettime() < var_5 + var_4 * 1000) {
+      var_6 = safe_to_shoot_missiles(var_0);
 
-      if(var6) {
+      if(var_6) {
         break;
       }
 
       wait 0.05;
     }
 
-    if(!var6) {
+    if(!var_6) {
       self notify("stop_trying_rockets");
       return;
     }
   }
 
-  var7 = scripts\engine\utility::random(["dx_vom_ru2_heli_callout_10", "dx_vom_ru2_heli_callout_20", "dx_vom_ru2_heli_callout_40"]);
-  level.escape_heli.pilot thread scripts\engine\sp\utility::smart_dialogue_generic(var7);
-  var8 = getrockettargetpos(var0);
-  var9 = 0;
+  var_7 = scripts\engine\utility::random(["dx_vom_ru2_heli_callout_10", "dx_vom_ru2_heli_callout_20", "dx_vom_ru2_heli_callout_40"]);
+  level.escape_heli.pilot thread scripts\engine\sp\utility::smart_dialogue_generic(var_7);
+  var_8 = getrockettargetpos(var_0);
+  var_9 = 0;
 
-  if(!var1) {
-    var10 = sortbydistance(getaiarray("axis"), var8);
+  if(!var_1) {
+    var_10 = sortbydistance(getaiarray("axis"), var_8);
 
-    if(isDefined(var10[0]) && distancesquared(var10[0].origin, var8) < squared(400)) {
-      var9 = 1;
+    if(isDefined(var_10[0]) && distancesquared(var_10[0].origin, var_8) < squared(400)) {
+      var_9 = 1;
     }
   }
 
-  var11 = scripts\engine\utility::array_combine(level.friendlies, [self, self.minigun, self.spotlight, level.player]);
-  var12 = [];
+  var_11 = scripts\engine\utility::array_combine(level.friendlies, [self, self.minigun, self.spotlight, level.player]);
+  var_12 = [];
 
-  foreach(var14 in self.missile_laser_tags) {
-    foreach(var17, var16 in var14) {
-      if(var1 || scripts\engine\trace::ray_trace_passed(self gettagorigin(var17), var8, var11)) {
-        var12 = var16;
+  foreach(var_14 in self.missile_laser_tags) {
+    foreach(var_17, var_16 in var_14) {
+      if(var_1 || scripts\engine\trace::ray_trace_passed(self gettagorigin(var_17), var_8, var_11)) {
+        var_12 = var_16;
         break;
       }
     }
   }
 
-  if(!var12.size || var9) {
+  if(!var_12.size || var_9) {
     self notify("stop_trying_rockets");
     return;
   }
 
-  var19 = 1.5;
-  self.badplace = createnavbadplacebybounds(var8, (200, 200, 200), (0, 0, 0));
+  var_19 = 1.5;
+  self.badplace = createnavbadplacebybounds(var_8, (200, 200, 200), (0, 0, 0));
   self.spotlight.power_override = 1;
   heli_spotlight_toggle(0);
-  scripts\engine\utility::delaythread(0.5, &vo_warn_missiles, var2);
+  scripts\engine\utility::delaythread(0.5, &vo_warn_missiles, var_2);
 
-  foreach(var17, var16 in var12) {
-    var16 laserforceon();
-    thread updatelaserangles(var16, var0, var17, var19);
+  foreach(var_17, var_16 in var_12) {
+    var_16 laserforceon();
+    thread updatelaserangles(var_16, var_0, var_17, var_19);
   }
 
-  if(isDefined(var3)) {
-    level scripts\engine\utility::waittill_notify_or_timeout(var3, var19);
+  if(isDefined(var_3)) {
+    level scripts\engine\utility::waittill_notify_or_timeout(var_3, var_19);
   } else {
-    wait var19;
+    wait var_19;
   }
 
-  foreach(var17, var16 in var12) {
-    var16 laserforceoff();
-    var16 linkTo(level.escape_heli, var17);
+  foreach(var_17, var_16 in var_12) {
+    var_16 laserforceoff();
+    var_16 linkTo(level.escape_heli, var_17);
   }
 
-  var22 = 0;
-  var23 = 0;
-  var8 = getrockettargetpos(var0);
+  var_22 = 0;
+  var_23 = 0;
+  var_8 = getrockettargetpos(var_0);
 
-  if(!var1 && self.noshooting) {
+  if(!var_1 && self.noshooting) {
     self notify("stop_trying_rockets");
     return;
   }
 
-  foreach(var14 in self.missile_laser_tags) {
-    foreach(var17, var16 in var14) {
-      if(var1 || scripts\engine\trace::ray_trace_passed(self gettagorigin(var17), var8, var11)) {
-        heli_fire_missile(var17, var8);
-        var23++;
-        var22 = 1;
+  foreach(var_14 in self.missile_laser_tags) {
+    foreach(var_17, var_16 in var_14) {
+      if(var_1 || scripts\engine\trace::ray_trace_passed(self gettagorigin(var_17), var_8, var_11)) {
+        heli_fire_missile(var_17, var_8);
+        var_23++;
+        var_22 = 1;
         break;
       }
     }
 
-    if(var22) {
+    if(var_22) {
       wait 0.3;
-      var22 = 0;
+      var_22 = 0;
     }
   }
 
@@ -3532,31 +3532,31 @@ function heli_try_rockets(var0, var1, var2, var3) {
   self.rockets_target = undefined;
   self.trying_rockets = 0;
 
-  if(var23) {
+  if(var_23) {
     self.last_rocket_time = gettime();
   }
 
   return 1;
 }
 
-function heli_fire_missile(var0, var1) {
-  playFXOnTag(scripts\engine\utility::getfx("vfx_muz_heli_missile_single"), self, var0);
-  var2 = magicbullet("iw8_la_sidewinder", self gettagorigin(var0) + anglesToForward(self.angles) * 100, var1);
-  thread scripts\engine\utility::playsoundontag("weap_estate_heli_proj_launch", var0);
+function heli_fire_missile(var_0, var_1) {
+  playFXOnTag(scripts\engine\utility::getfx("vfx_muz_heli_missile_single"), self, var_0);
+  var_2 = magicbullet("iw8_la_sidewinder", self gettagorigin(var_0) + anglesToForward(self.angles) * 100, var_1);
+  thread scripts\engine\utility::playsoundontag("weap_estate_heli_proj_launch", var_0);
   thread missile_earthquakerumble();
-  self notify("missile_fired", var2);
+  self notify("missile_fired", var_2);
 }
 
 function cleanup_heli_rockets() {
   self endon("shot_rockets");
   self waittill("stop_trying_rockets");
 
-  foreach(var1 in self.missile_laser_tags) {
-    foreach(var3 in var1) {
-      var3 laserforceoff();
+  foreach(var_1 in self.missile_laser_tags) {
+    foreach(var_3 in var_1) {
+      var_3 laserforceoff();
 
-      if(!var3 islinked()) {
-        var3 linkTo(level.escape_heli, var4);
+      if(!var_3 islinked()) {
+        var_3 linkTo(level.escape_heli, var_4);
       }
     }
   }
@@ -3570,57 +3570,57 @@ function cleanup_heli_rockets() {
   self.trying_rockets = 0;
 }
 
-function vo_warn_missiles(var0) {
-  if(!isDefined(var0)) {
+function vo_warn_missiles(var_0) {
+  if(!isDefined(var_0)) {
     if(!scripts\sp\maps\estate\estate_util::alias_group_exists("warn_missiles")) {
       scripts\sp\maps\estate\estate_util::make_alias_group("warn_missiles", ["dx_vom_pri_chopper_reattack_95", "dx_vom_pri_chopper_reattack_85", "dx_vom_pri_estate_helo_11"]);
     }
 
-    var0 = scripts\sp\maps\estate\estate_util::get_next_alias_in_group("warn_missiles");
+    var_0 = scripts\sp\maps\estate\estate_util::get_next_alias_in_group("warn_missiles");
   }
 
-  scripts\sp\maps\estate\estate_util::price_line(var0);
+  scripts\sp\maps\estate\estate_util::price_line(var_0);
 }
 
-function getrockettargetpos(var0) {
-  if(isPlayer(var0)) {
-    return (var0.origin + anglesToForward(var0.angles) * 50 + (0, 0, 18));
+function getrockettargetpos(var_0) {
+  if(isPlayer(var_0)) {
+    return (var_0.origin + anglesToForward(var_0.angles) * 50 + (0, 0, 18));
   }
 
-  return var0.origin;
+  return var_0.origin;
 }
 
-function updatelaserangles(var0, var1, var2, var3) {
-  var4 = gettime() + var2 * 1000;
+function updatelaserangles(var_0, var_1, var_2, var_3) {
+  var_4 = gettime() + var_2 * 1000;
   self unlink();
 
-  if(isalive(var0)) {
-    var0 endon("death");
+  if(isalive(var_0)) {
+    var_0 endon("death");
   }
 
-  if(isDefined(var3)) {
-    level endon(var3);
+  if(isDefined(var_3)) {
+    level endon(var_3);
   }
 
-  while(gettime() - var4) {
-    self.origin = level.escape_heli gettagorigin(var1);
-    self.angles = vectortoangles(getrockettargetpos(var0) - self.origin);
+  while(gettime() - var_4) {
+    self.origin = level.escape_heli gettagorigin(var_1);
+    self.angles = vectortoangles(getrockettargetpos(var_0) - self.origin);
     waitframe();
   }
 }
 
 function missile_earthquakerumble() {
-  var0 = self.origin;
+  var_0 = self.origin;
 
   while(isDefined(self)) {
-    var0 = self.origin;
+    var_0 = self.origin;
     wait 0.1;
   }
 
-  earthquake(0.5, 0.7, var0, 1200);
-  playrumbleonposition("heavy_2s", var0);
+  earthquake(0.5, 0.7, var_0, 1200);
+  playrumbleonposition("heavy_2s", var_0);
 
-  if(distancesquared(var0, level.player.origin) < squared(400)) {
+  if(distancesquared(var_0, level.player.origin) < squared(400)) {
     if(scripts\engine\utility::flag("tunnel_open")) {
       level.player shellshock("estate_heli_missile_alt", 5);
       return;
@@ -3631,44 +3631,44 @@ function missile_earthquakerumble() {
   }
 }
 
-function get_destructible_heli_target(var0, var1) {
-  var2 = scripts\engine\utility::getStructArray("heli_destructible_target", "targetname");
-  var2 = sortbydistance(var2, level.player.origin);
+function get_destructible_heli_target(var_0, var_1) {
+  var_2 = scripts\engine\utility::getStructArray("heli_destructible_target", "targetname");
+  var_2 = sortbydistance(var_2, level.player.origin);
 
-  foreach(var4 in var2) {
-    if(distancesquared(var4.origin, level.player.origin) > squared(var0)) {
+  foreach(var_4 in var_2) {
+    if(distancesquared(var_4.origin, level.player.origin) > squared(var_0)) {
       break;
     }
 
-    if(should_shoot_destructible_target(var4, var1)) {
-      return var4;
+    if(should_shoot_destructible_target(var_4, var_1)) {
+      return var_4;
     }
   }
 
   return undefined;
 }
 
-function get_closest_car_in_front_of_player(var0, var1) {
-  var2 = getscriptablearray();
-  var3 = [];
-  var4 = undefined;
+function get_closest_car_in_front_of_player(var_0, var_1) {
+  var_2 = getscriptablearray();
+  var_3 = [];
+  var_4 = undefined;
 
-  foreach(var6 in var2) {
-    if(isDefined(var6.model) && issubstr(var6.model, "veh8") && var6.health > -250) {
-      var3 = var6;
+  foreach(var_6 in var_2) {
+    if(isDefined(var_6.model) && issubstr(var_6.model, "veh8") && var_6.health > -250) {
+      var_3 = var_6;
     }
   }
 
-  var3 = sortbydistance(var3, level.player.origin);
+  var_3 = sortbydistance(var_3, level.player.origin);
 
-  if(var3.size) {
-    foreach(var9 in var3) {
-      if(distancesquared(var9.origin, level.player.origin) > squared(var0)) {
+  if(var_3.size) {
+    foreach(var_9 in var_3) {
+      if(distancesquared(var_9.origin, level.player.origin) > squared(var_0)) {
         break;
       }
 
-      if(should_shoot_destructible_target(var9, var1)) {
-        return var9;
+      if(should_shoot_destructible_target(var_9, var_1)) {
+        return var_9;
       }
     }
   }
@@ -3676,16 +3676,16 @@ function get_closest_car_in_front_of_player(var0, var1) {
   return undefined;
 }
 
-function should_shoot_destructible_target(var0, var1) {
-  if(scripts\engine\utility::array_contains(level.used_destructible_targets, var0)) {
+function should_shoot_destructible_target(var_0, var_1) {
+  if(scripts\engine\utility::array_contains(level.used_destructible_targets, var_0)) {
     return false;
   }
 
-  if(!scripts\engine\utility::within_fov(level.player.origin, level.player.angles, var0.origin, cos(65))) {
+  if(!scripts\engine\utility::within_fov(level.player.origin, level.player.angles, var_0.origin, cos(65))) {
     return false;
   }
 
-  if(!istrue(var1) && !canshoottargetfrompos(self.origin, var0)) {
+  if(!istrue(var_1) && !canshoottargetfrompos(self.origin, var_0)) {
     return false;
   }
 
@@ -3697,8 +3697,8 @@ function heli_destructible_ceiling_logic() {
   self.script_health = 30000;
 
   for(;;) {
-    self waittill("damage", var0, var1, var2, var2, var2, var2, var2, var3, var2, var4);
-    self.script_health -= var0;
+    self waittill("damage", var_0, var_1, var_2, var_2, var_2, var_2, var_2, var_3, var_2, var_4);
+    self.script_health -= var_0;
 
     if(self.script_health <= 0) {
       self delete();
@@ -3709,9 +3709,9 @@ function heli_destructible_ceiling_logic() {
 
 function heli_destructible_propane_tank_logic() {
   while(scripts\engine\utility::is_equal(self getscriptablepartstate("base", 1), "pristine")) {
-    self waittill("damage", var0, var1);
+    self waittill("damage", var_0, var_1);
 
-    if(var1 == level.escape_heli.minigun) {
+    if(var_1 == level.escape_heli.minigun) {
       self setscriptablepartstate("base", "explode_estate");
       return;
     }
@@ -3725,14 +3725,14 @@ function place_heli_over_player() {
 }
 
 function quietly_kill_all_axis() {
-  var0 = 0;
+  var_0 = 0;
 
-  foreach(var2 in getaiarray("axis")) {
-    var2 delete();
-    var0++;
+  foreach(var_2 in getaiarray("axis")) {
+    var_2 delete();
+    var_0++;
 
-    if(var0 == 3) {
-      var0 = 0;
+    if(var_0 == 3) {
+      var_0 = 0;
       wait 0.05;
     }
   }

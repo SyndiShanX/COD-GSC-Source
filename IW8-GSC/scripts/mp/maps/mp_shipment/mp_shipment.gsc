@@ -13,8 +13,8 @@ function main() {
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
   scripts\mp\compass::setupminimap("compass_map_mp_shipment", "codcaster_compass_map_mp_shipment");
   level.kill_border_triggers = getEntArray("kill_border_trigger", "targetname");
-  var0 = ref_132aa(level);
-  level.kill_border_triggers = scripts\engine\utility::array_combine(level.kill_border_triggers, var0);
+  var_0 = ref_132aa(level);
+  level.kill_border_triggers = scripts\engine\utility::array_combine(level.kill_border_triggers, var_0);
   scripts\cp_mp\utility\game_utility::ref_12b3b();
   setDvar("r_lightGridEnableTweaks", 1);
   setDvar("r_lightGridIntensity", 1.33);
@@ -52,7 +52,7 @@ function binoculars_addtolosqueue() {
 }
 
 function battle_tracks_vehicleoccupancyenter() {
-  var0 = [];
+  var_0 = [];
 
   switch (scripts\mp\utility\game::getgametype()) {
     case "tjugg":
@@ -97,7 +97,7 @@ function battle_tracks_vehicleoccupancyenter() {
         level.modifiedspawnpoints["136 1912"]["mp_tdm_spawn_secondary"]["remove"] = 1;
       }
 
-      GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_tdm_spawn", (-112, 2544, 40), (0, 270, 0)));
+      GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_tdm_spawn", (-112, 2544, 40), (0, 270, 0)));
 
     case "dom":
       level.modifiedspawnpoints["-112 2608"]["mp_dom_spawn"]["remove"] = 1;
@@ -117,7 +117,7 @@ function battle_tracks_vehicleoccupancyenter() {
       level.modifiedspawnpoints["-64 1352"]["mp_dom_spawn"]["remove"] = 1;
       level.modifiedspawnpoints["64 1352"]["mp_dom_spawn"]["remove"] = 1;
       level.modifiedspawnpoints["-296 1368"]["mp_dom_spawn"]["remove"] = 1;
-      GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_dom_spawn", (-112, 2544, 40), (0, 270, 0)));
+      GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_dom_spawn", (-112, 2544, 40), (0, 270, 0)));
 
     case "ctf":
       level.modifiedspawnpoints["-112 2608"]["mp_ctf_spawn"]["remove"] = 1;
@@ -137,7 +137,7 @@ function battle_tracks_vehicleoccupancyenter() {
       level.modifiedspawnpoints["-64 1352"]["mp_ctf_spawn"]["remove"] = 1;
       level.modifiedspawnpoints["64 1352"]["mp_ctf_spawn"]["remove"] = 1;
       level.modifiedspawnpoints["-296 1368"]["mp_ctf_spawn"]["remove"] = 1;
-      GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_ctf_spawn", (-112, 2544, 40), (0, 270, 0)));
+      GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_ctf_spawn", (-112, 2544, 40), (0, 270, 0)));
 
     case "koth":
     case "hq":
@@ -158,18 +158,18 @@ function battle_tracks_vehicleoccupancyenter() {
       level.modifiedspawnpoints["-64 1352"]["mp_koth_spawn"]["remove"] = 1;
       level.modifiedspawnpoints["64 1352"]["mp_koth_spawn"]["remove"] = 1;
       level.modifiedspawnpoints["-296 1368"]["mp_koth_spawn"]["remove"] = 1;
-      GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_koth_spawn", (-112, 2544, 40), (0, 270, 0)));
+      GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_koth_spawn", (-112, 2544, 40), (0, 270, 0)));
   }
 
-  if(var0.size > 0) {
-    scripts\mp\spawnlogic::bdiedonce(var0);
+  if(var_0.size > 0) {
+    scripts\mp\spawnlogic::bdiedonce(var_0);
     return;
   }
 }
 
 function ref_132aa() {
-  var0 = [];
-  var1 = spawn("trigger_radius", (5704, 1456, -176), 0, 24000, 25);
-  var0 = var1;
-  return var0;
+  var_0 = [];
+  var_1 = spawn("trigger_radius", (5704, 1456, -176), 0, 24000, 25);
+  var_0 = var_1;
+  return var_0;
 }

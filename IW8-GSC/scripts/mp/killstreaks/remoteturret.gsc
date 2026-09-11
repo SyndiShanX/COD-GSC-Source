@@ -34,4 +34,4 @@ function init() {
   level._effect["antenna_light_mp"] = loadfx("vfx/core/lights/light_detonator_blink");
 }
 
-function tryuseremotemgturret(var0, var1) {}
+function tryuseremotemgturret(var_0, var_1) {}

@@ -22,11 +22,11 @@ function main() {
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";
   game["axis_outfit"] = "woodland";
-  var0 = getEnt("infil_van_col", "targetname");
+  var_0 = getEnt("infil_van_col", "targetname");
 
-  if(isDefined(var0)) {
-    var0 hide();
-    var0 connectpaths();
+  if(isDefined(var_0)) {
+    var_0 hide();
+    var_0 connectpaths();
   }
 
   thread managegate();
@@ -57,19 +57,19 @@ function managegate() {
   level.scr_animname["gate_right"]["close"] = "mp_trainyard_gateR_close";
   level.scr_anim["gate_right"]["open"] = % mp_trainyard_gater_open;
   level.scr_animname["gate_right"]["open"] = "mp_trainyard_gateR_open";
-  var0 = getEnt("infil_door_left", "targetname");
-  var1 = getEnt("infil_door_right", "targetname");
-  var2 = getEnt("infil_door_chain", "targetname");
-  var0.animname = "gate_left";
-  var0 scripts\common\anim::setanimtree();
-  var1.animname = "gate_right";
-  var1 scripts\common\anim::setanimtree();
-  var0 thread scripts\common\anim::anim_single_solo(var0, "open");
-  var1 thread scripts\common\anim::anim_single_solo(var1, "open");
-  var2 hide();
+  var_0 = getEnt("infil_door_left", "targetname");
+  var_1 = getEnt("infil_door_right", "targetname");
+  var_2 = getEnt("infil_door_chain", "targetname");
+  var_0.animname = "gate_left";
+  var_0 scripts\common\anim::setanimtree();
+  var_1.animname = "gate_right";
+  var_1 scripts\common\anim::setanimtree();
+  var_0 thread scripts\common\anim::anim_single_solo(var_0, "open");
+  var_1 thread scripts\common\anim::anim_single_solo(var_1, "open");
+  var_2 hide();
   level waittill("prematch_countdown");
-  var0 thread scripts\common\anim::anim_single_solo(var0, "close");
-  var1 thread scripts\common\anim::anim_single_solo(var1, "close");
+  var_0 thread scripts\common\anim::anim_single_solo(var_0, "close");
+  var_1 thread scripts\common\anim::anim_single_solo(var_1, "close");
   GscBinSkip1(0x45, 0, "_left");
 }
 
@@ -85,12 +85,12 @@ function spawnstaticvan() {
   }
 
   if(!scripts\mp\flags::gameflag("infil_will_run")) {
-    foreach(var1 in [[scripts\cp_mp\utility\script_utility::getsharedfunc("infil", "get_all_infils")]]()) {
-      if(var1.script_noteworthy != "infil_van_hackney") {
+    foreach(var_1 in [[scripts\cp_mp\utility\script_utility::getsharedfunc("infil", "get_all_infils")]]()) {
+      if(var_1.script_noteworthy != "infil_van_hackney") {
         continue;
       }
 
-      if(var1.name != "alpha") {
+      if(var_1.name != "alpha") {
         continue;
       }
 
@@ -109,26 +109,26 @@ function ref_12c23() {
 }
 
 function battle_tracks_vehicleoccupancyenter() {
-  var0 = [];
+  var_0 = [];
 
   switch (scripts\mp\utility\game::getgametype()) {
     case "dm":
-      GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_dm_spawn_start", (-611, -2560, 73), (0, 60, 0)));
+      GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_dm_spawn_start", (-611, -2560, 73), (0, 60, 0)));
   }
 
-  if(var0.size > 0) {
-    scripts\mp\spawnlogic::bdiedonce(var0);
+  if(var_0.size > 0) {
+    scripts\mp\spawnlogic::bdiedonce(var_0);
     return;
   }
 }
 
 function player_exfil_struct() {
-  var0 = getEnt("clip128x128x128", "targetname");
-  var1 = spawn("script_model", (289, 529, 309));
-  var1.angles = (0, 0, 0);
-  var1 clonebrushmodeltoscriptmodel(var0);
-  var2 = getEnt("clip128x128x128", "targetname");
-  var3 = spawn("script_model", (289, 657, 309));
-  var3.angles = (0, 0, 0);
-  var3 clonebrushmodeltoscriptmodel(var2);
+  var_0 = getEnt("clip128x128x128", "targetname");
+  var_1 = spawn("script_model", (289, 529, 309));
+  var_1.angles = (0, 0, 0);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = getEnt("clip128x128x128", "targetname");
+  var_3 = spawn("script_model", (289, 657, 309));
+  var_3.angles = (0, 0, 0);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
 }

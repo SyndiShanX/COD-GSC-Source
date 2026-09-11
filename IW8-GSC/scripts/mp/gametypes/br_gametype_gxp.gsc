@@ -185,12 +185,12 @@ function directimpactkill() {
   scripts\mp\gametypes\br_public::endgamevo("safe_zone_ghost_vo", "dx_bra_gfac_ghost_safe_denied");
 }
 
-function onplayerconnect(var0) {
-  scripts\mp\gametypes\br_gxp_fear::onplayerconnect(var0);
-  scripts\mp\gametypes\br_gxp_hallucination::onplayerconnect(var0);
+function onplayerconnect(var_0) {
+  scripts\mp\gametypes\br_gxp_fear::onplayerconnect(var_0);
+  scripts\mp\gametypes\br_gxp_hallucination::onplayerconnect(var_0);
 }
 
-function onplayerspawned(var0) {
+function onplayerspawned(var_0) {
   scripts\mp\gametypes\br_gxp_fear::onplayerspawned();
   scripts\mp\gametypes\br_gxp_hallucination::onplayerspawned();
 
@@ -200,98 +200,98 @@ function onplayerspawned(var0) {
   }
 }
 
-function onplayerdamaged(var0) {
-  if(isDefined(var0.victim) && isDefined(level.disable_super_in_turret.setquestindexteamomnvar) && isDefined(var0.attacker) && level.disable_super_in_turret.setquestindexteamomnvar == var0.attacker) {
-    var0.victim.health += var0.damage;
+function onplayerdamaged(var_0) {
+  if(isDefined(var_0.victim) && isDefined(level.disable_super_in_turret.setquestindexteamomnvar) && isDefined(var_0.attacker) && level.disable_super_in_turret.setquestindexteamomnvar == var_0.attacker) {
+    var_0.victim.health += var_0.damage;
     return;
   }
 
-  scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onPlayerDamaged", var0);
+  scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onPlayerDamaged", var_0);
 }
 
-function ref_12063(var0) {
-  scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onPlayerArmorDamaged", var0);
+function ref_12063(var_0) {
+  scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onPlayerArmorDamaged", var_0);
 }
 
-function onplayerkilled(var0) {
-  scripts\mp\gametypes\br_gametype_gxp_challenges::ref_11ff1(var0);
-  scripts\mp\gametypes\br_gametype_gxp_ghost::onplayerkilled(var0);
-  var1 = var0.victim;
-  var2 = var0.attacker;
+function onplayerkilled(var_0) {
+  scripts\mp\gametypes\br_gametype_gxp_challenges::ref_11ff1(var_0);
+  scripts\mp\gametypes\br_gametype_gxp_ghost::onplayerkilled(var_0);
+  var_1 = var_0.victim;
+  var_2 = var_0.attacker;
 
-  if(isDefined(var1)) {
-    var3 = scripts\mp\gametypes\br_public::rotationrefsbyseatandweapon(var1.team, var1.squadindex);
+  if(isDefined(var_1)) {
+    var_3 = scripts\mp\gametypes\br_public::rotationrefsbyseatandweapon(var_1.team, var_1.squadindex);
 
-    foreach(var5 in var3) {
-      var5 scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onTeammateKilled", var0);
+    foreach(var_5 in var_3) {
+      var_5 scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onTeammateKilled", var_0);
     }
   }
 
-  if(isDefined(var2) && isPlayer(var2)) {
-    var2 scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onPlayerKilled", var0);
+  if(isDefined(var_2) && isPlayer(var_2)) {
+    var_2 scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onPlayerKilled", var_0);
   }
 
-  var7 = scripts\mp\utility\player::getplayersinradius(var1.origin, 1000);
+  var_7 = scripts\mp\utility\player::getplayersinradius(var_1.origin, 1000);
 
-  foreach(var5 in var7) {
-    if(var5.team == var1.team && var5.squadindex == var1.squadindex) {
+  foreach(var_5 in var_7) {
+    if(var_5.team == var_1.team && var_5.squadindex == var_1.squadindex) {
       continue;
     }
 
-    if(isDefined(var5.squadindex) && isDefined(var2) && isDefined(var2.team) && isDefined(var2.squadindex) && var5.team == var2.team && var5.squadindex == var2.squadindex) {
+    if(isDefined(var_5.squadindex) && isDefined(var_2) && isDefined(var_2.team) && isDefined(var_2.squadindex) && var_5.team == var_2.team && var_5.squadindex == var_2.squadindex) {
       continue;
     }
 
-    var5 scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onPlayerDied", var0);
+    var_5 scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onPlayerDied", var_0);
   }
 
   if(!getdvarint("scr_br_gxp_disable_hallucination_corpse_vfx", 0)) {
-    level thread scripts\mp\gametypes\br_gxp_hallucination::setreduceregendelayonkill(var1);
+    level thread scripts\mp\gametypes\br_gxp_hallucination::setreduceregendelayonkill(var_1);
     return;
   }
 }
 
-function ref_120ab(var0) {
-  scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onVehicleDamaged", var0);
+function ref_120ab(var_0) {
+  scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onVehicleDamaged", var_0);
 }
 
 function ref_1204c() {
-  var0 = scripts\mp\gametypes\br_public::rotationrefsbyseatandweapon(self.team, self.squadindex);
+  var_0 = scripts\mp\gametypes\br_public::rotationrefsbyseatandweapon(self.team, self.squadindex);
 
-  foreach(var2 in var0) {
-    var2 scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onLastStandEnter", self);
+  foreach(var_2 in var_0) {
+    var_2 scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onLastStandEnter", self);
   }
 }
 
-function ref_12050(var0) {
-  if(isDefined(var0) && var0 != self) {
-    var0 scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onLastStandRevive", self);
+function ref_12050(var_0) {
+  if(isDefined(var_0) && var_0 != self) {
+    var_0 scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onLastStandRevive", self);
     return;
   }
 }
 
-function ref_11fff(var0) {
-  scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onArmorPlate", var0);
+function ref_11fff(var_0) {
+  scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onArmorPlate", var_0);
 }
 
-function ref_12009(var0) {
-  scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onContractEnd", var0);
+function ref_12009(var_0) {
+  scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onContractEnd", var_0);
 }
 
-function ref_12049(var0) {
-  scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onKillstreakDanger", var0);
+function ref_12049(var_0) {
+  scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onKillstreakDanger", var_0);
 }
 
 function ref_12051() {
   scripts\mp\gametypes\br_gxp_fear::lethal_crate_spawn();
 }
 
-function ref_1205d(var0) {
+function ref_1205d(var_0) {
   scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onOpenLootBox");
 }
 
-function ref_13308(var0) {
-  if(isPlayer(var0.attacker) && var0.attacker scripts\mp\gametypes\br_public::ref_125ec() && var0.meansofdeath == "MOD_MELEE") {
+function ref_13308(var_0) {
+  if(isPlayer(var_0.attacker) && var_0.attacker scripts\mp\gametypes\br_public::ref_125ec() && var_0.meansofdeath == "MOD_MELEE") {
     return false;
   }
 
@@ -303,30 +303,30 @@ function delay_activate_damage_trigger() {
   scripts\mp\utility\sound::besttime("br_event_ghosts_sfx");
 }
 
-function brking_cleanupents(var0) {
-  var1 = isPlayer(var0.attacker) && var0.attacker scripts\mp\gametypes\br_public::ref_125ec();
-  return var1;
+function brking_cleanupents(var_0) {
+  var_1 = isPlayer(var_0.attacker) && var_0.attacker scripts\mp\gametypes\br_public::ref_125ec();
+  return var_1;
 }
 
-function ref_11ca1(var0) {
-  var1 = var0.damage;
-  var2 = isPlayer(var0.attacker) && var0.attacker scripts\mp\gametypes\br_public::ref_125ec();
+function ref_11ca1(var_0) {
+  var_1 = var_0.damage;
+  var_2 = isPlayer(var_0.attacker) && var_0.attacker scripts\mp\gametypes\br_public::ref_125ec();
 
-  if(var2) {
-    return (var1 * level.disable_super_in_turret.scn_infil_tango_npc_3_sfx);
+  if(var_2) {
+    return (var_1 * level.disable_super_in_turret.scn_infil_tango_npc_3_sfx);
   }
 
-  return var1;
+  return var_1;
 }
 
-function onnewequipmentpickup(var0) {
-  foreach(var2 in level.players) {
-    var2 hudoutlinedisable();
-    var2 visionsetnakedforplayer("", 0);
+function onnewequipmentpickup(var_0) {
+  foreach(var_2 in level.players) {
+    var_2 hudoutlinedisable();
+    var_2 visionsetnakedforplayer("", 0);
   }
 }
 
-function dangercircletick(var0, var1) {
-  scripts\mp\gametypes\br_gametype_gxp_ghost::dangercircletick(var0, var1);
-  scripts\mp\gametypes\br_gxp_safe_zones::dangercircletick(var0, var1);
+function dangercircletick(var_0, var_1) {
+  scripts\mp\gametypes\br_gametype_gxp_ghost::dangercircletick(var_0, var_1);
+  scripts\mp\gametypes\br_gxp_safe_zones::dangercircletick(var_0, var_1);
 }

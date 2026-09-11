@@ -3,8 +3,8 @@
  * Script: scripts\sp\equipment\signal.gsc
 ***********************************************/
 
-function precache(var0) {
-  scripts\sp\equipment\offhands::registeroffhandfirefunc(var0, &signalfiremain);
+function precache(var_0) {
+  scripts\sp\equipment\offhands::registeroffhandfirefunc(var_0, &signalfiremain);
 }
 
-function signalfiremain(var0) {}
+function signalfiremain(var_0) {}

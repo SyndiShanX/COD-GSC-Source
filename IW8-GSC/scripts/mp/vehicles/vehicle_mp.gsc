@@ -49,20 +49,20 @@ function vehicle_mp_init() {
   scripts\mp\vehicles\vehicle_oob_mp::vehicle_oob_mp_init();
 }
 
-function ref_141bf(var0, var1) {
-  var0.maxhealth = scripts\cp_mp\vehicles\vehicle_damage::ref_1414e(var0);
-  var0.health = var0.maxhealth;
-  scripts\mp\vehicles\vehicle_oob_mp::vehicle_oob_mp_registerinstance(var0);
-  var0 enableplayermarks("killstreak");
-  scripts\mp\vehicles\vehicle_occupancy_mp::vehicle_occupancy_mp_updatemarkfilter(var0);
+function ref_141bf(var_0, var_1) {
+  var_0.maxhealth = scripts\cp_mp\vehicles\vehicle_damage::ref_1414e(var_0);
+  var_0.health = var_0.maxhealth;
+  scripts\mp\vehicles\vehicle_oob_mp::vehicle_oob_mp_registerinstance(var_0);
+  var_0 enableplayermarks("killstreak");
+  scripts\mp\vehicles\vehicle_occupancy_mp::vehicle_occupancy_mp_updatemarkfilter(var_0);
 }
 
-function ref_141c0(var0, var1) {}
+function ref_141c0(var_0, var_1) {}
 
-function ref_141c1(var0) {
-  scripts\mp\vehicles\vehicle_oob_mp::vehicle_oob_mp_clearoob(var0, 1);
+function ref_141c1(var_0) {
+  scripts\mp\vehicles\vehicle_oob_mp::vehicle_oob_mp_clearoob(var_0, 1);
 }
 
-function ref_141c2(var0) {}
+function ref_141c2(var_0) {}
 
-function ref_141c3(var0) {}
+function ref_141c3(var_0) {}

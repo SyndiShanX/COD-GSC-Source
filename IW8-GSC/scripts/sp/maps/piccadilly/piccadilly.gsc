@@ -170,66 +170,66 @@ function intro_screen_wait() {
 }
 
 function hide_combat_stuff() {
-  var0 = getEntArray("show_scriptables", "script_noteworthy");
-  scripts\engine\utility::array_thread(var0, &trigger_show_scriptables);
+  var_0 = getEntArray("show_scriptables", "script_noteworthy");
+  scripts\engine\utility::array_thread(var_0, &trigger_show_scriptables);
   scripts\engine\utility::flag_wait("scriptables_ready");
-  var1 = getscriptablearray("obj_frontline_cover", "targetname");
-  thread hide_scriptables_til_flag(var1, "stop_storefront_drones");
+  var_1 = getscriptablearray("obj_frontline_cover", "targetname");
+  thread hide_scriptables_til_flag(var_1, "stop_storefront_drones");
 }
 
 function hide_clip_stuff() {
-  var0 = getEnt("temp_car_clip", "targetname");
-  var1 = getEnt("temp_car_clip2", "targetname");
-  var2 = getEnt("temp_car_clip3", "targetname");
-  var3 = getEnt("temp_car_clip4", "targetname");
-  var4 = getEnt("temp_car_clip5", "targetname");
+  var_0 = getEnt("temp_car_clip", "targetname");
+  var_1 = getEnt("temp_car_clip2", "targetname");
+  var_2 = getEnt("temp_car_clip3", "targetname");
+  var_3 = getEnt("temp_car_clip4", "targetname");
+  var_4 = getEnt("temp_car_clip5", "targetname");
 
   if(scripts\sp\starts::is_after_start("infil")) {
-    var0 delete();
-    var1 delete();
-    var2 delete();
-    var3 delete();
-    var4 delete();
+    var_0 delete();
+    var_1 delete();
+    var_2 delete();
+    var_3 delete();
+    var_4 delete();
     return;
   }
 
   scripts\engine\utility::flag_wait("boots_on_the_ground");
-  var0 scripts\engine\utility::delaycall(1.3, &delete);
-  var1 scripts\engine\utility::delaycall(2.3, &delete);
-  var2 scripts\engine\utility::delaycall(3.4, &delete);
-  var3 scripts\engine\utility::delaycall(5.6, &delete);
-  var4 scripts\engine\utility::delaycall(8.7, &delete);
+  var_0 scripts\engine\utility::delaycall(1.3, &delete);
+  var_1 scripts\engine\utility::delaycall(2.3, &delete);
+  var_2 scripts\engine\utility::delaycall(3.4, &delete);
+  var_3 scripts\engine\utility::delaycall(5.6, &delete);
+  var_4 scripts\engine\utility::delaycall(8.7, &delete);
 }
 
 function break_glass_on_traverse() {
   self endon("death");
   self waittill("traverse_begin");
-  var0 = self getnegotiationstartnode();
+  var_0 = self getnegotiationstartnode();
 
-  if(!isDefined(var0.script_noteworthy)) {
+  if(!isDefined(var_0.script_noteworthy)) {
     return;
   }
 
-  var1 = getglass(var0.script_noteworthy);
+  var_1 = getglass(var_0.script_noteworthy);
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  if(isglassdestroyed(var1)) {
+  if(isglassdestroyed(var_1)) {
     return;
   }
 
-  var2 = self getnegotiationendnode();
-  var3 = scripts\engine\trace::ray_trace(var0.origin + (0, 0, 30), var2.origin + (0, 0, 20), self, undefined, 1, 1);
-  var4 = var3["position"];
+  var_2 = self getnegotiationendnode();
+  var_3 = scripts\engine\trace::ray_trace(var_0.origin + (0, 0, 30), var_2.origin + (0, 0, 20), self, undefined, 1, 1);
+  var_4 = var_3["position"];
 
-  while(distance2dsquared(var4, self.origin) > 2500) {
+  while(distance2dsquared(var_4, self.origin) > 2500) {
     waitframe();
   }
 
-  if(!isglassdestroyed(var1)) {
-    destroyglass(var1);
+  if(!isglassdestroyed(var_1)) {
+    destroyglass(var_1);
     return;
   }
 }
@@ -240,31 +240,31 @@ function trigger_show_scriptables() {
   }
 
   scripts\engine\utility::flag_wait("scriptables_ready");
-  var0 = getscriptablearray(self.target, "targetname");
-  var1 = scripts\engine\sp\utility::get_average_origin(var0);
+  var_0 = getscriptablearray(self.target, "targetname");
+  var_1 = scripts\engine\sp\utility::get_average_origin(var_0);
 
-  foreach(var3 in var0) {
-    var3 hide();
+  foreach(var_3 in var_0) {
+    var_3 hide();
   }
 
   scripts\engine\utility::flag_wait("stop_storefront_drones");
 
-  foreach(var3 in var0) {
-    var3 show();
+  foreach(var_3 in var_0) {
+    var_3 show();
   }
 
   self delete();
 }
 
-function hide_scriptables_til_flag(var0, var1) {
-  foreach(var3 in var0) {
-    var3 hide();
+function hide_scriptables_til_flag(var_0, var_1) {
+  foreach(var_3 in var_0) {
+    var_3 hide();
   }
 
-  scripts\engine\utility::flag_wait(var1);
+  scripts\engine\utility::flag_wait(var_1);
 
-  foreach(var3 in var0) {
-    var3 show();
+  foreach(var_3 in var_0) {
+    var_3 show();
   }
 }
 
@@ -285,21 +285,21 @@ function always_on_exploders() {
 }
 
 function gameplay_asset_adjustments() {
-  var0 = getEnt("big_screen", "targetname");
+  var_0 = getEnt("big_screen", "targetname");
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
   }
 
-  var1 = getEnt("car_crash_node_clip", "targetname");
-  var1 scripts\engine\utility::delaythread(0.1, &connect_and_delete);
-  var2 = getEnt("leftside_crash_clip", "targetname");
-  var2 scripts\engine\utility::delaythread(0.1, &connect_and_delete);
-  var3 = getglassarray("sniper_glass");
+  var_1 = getEnt("car_crash_node_clip", "targetname");
+  var_1 scripts\engine\utility::delaythread(0.1, &connect_and_delete);
+  var_2 = getEnt("leftside_crash_clip", "targetname");
+  var_2 scripts\engine\utility::delaythread(0.1, &connect_and_delete);
+  var_3 = getglassarray("sniper_glass");
 
-  if(isDefined(var3)) {
-    foreach(var5 in var3) {
-      destroyglass(var5);
+  if(isDefined(var_3)) {
+    foreach(var_5 in var_3) {
+      destroyglass(var_5);
     }
 
     return;
@@ -319,12 +319,12 @@ function e3_audio_demo_start() {
   level.player setviewmodel("viewhands_kyle_sas_urban");
   scripts\sp\utility::context_melee_set_arms("viewhands_kyle_sas_urban");
 
-  foreach(var1 in getEntArray("trigger_multiple_unlock", "classname")) {
-    var1 delete();
+  foreach(var_1 in getEntArray("trigger_multiple_unlock", "classname")) {
+    var_1 delete();
   }
 
-  foreach(var1 in getEntArray("trigger_multiple_spawn", "classname")) {
-    var1 delete();
+  foreach(var_1 in getEntArray("trigger_multiple_spawn", "classname")) {
+    var_1 delete();
   }
 }
 
@@ -340,10 +340,10 @@ function infinite_ammo() {
 
   for(;;) {
     level.player givemaxammo("frag");
-    var0 = level.player getcurrentweapon();
+    var_0 = level.player getcurrentweapon();
 
-    if(!nullweapon(var0)) {
-      level.player givemaxammo(var0);
+    if(!nullweapon(var_0)) {
+      level.player givemaxammo(var_0);
     }
 
     wait 3;
@@ -362,24 +362,24 @@ function car_alarm_manager() {
   wait 1;
   thread car_lights();
 
-  foreach(var1 in level.alarmcars.cars) {
-    var1 notify("stop_alarm");
+  foreach(var_1 in level.alarmcars.cars) {
+    var_1 notify("stop_alarm");
   }
 }
 
 function car_lights() {
-  foreach(var1 in level.rockablecars.cars) {
-    if(isDefined(var1.animname)) {
+  foreach(var_1 in level.rockablecars.cars) {
+    if(isDefined(var_1.animname)) {
       continue;
     }
 
-    if(var1 getscriptableparthasstate("lights_controller", "on_nolight")) {
-      var1 setscriptablepartstate("lights_controller", "on_nolight");
+    if(var_1 getscriptableparthasstate("lights_controller", "on_nolight")) {
+      var_1 setscriptablepartstate("lights_controller", "on_nolight");
       continue;
     }
 
-    if(var1 getscriptablehaspart("lights_controller")) {
-      var1 setscriptablepartstate("lights_controller", "on");
+    if(var_1 getscriptablehaspart("lights_controller")) {
+      var_1 setscriptablepartstate("lights_controller", "on");
     }
   }
 }
@@ -400,10 +400,10 @@ function suicide_bomber_count() {
   level.spawned_suicide_bombers++;
 
   if(level.spawned_suicide_bombers == level.max_suicide_bombers) {
-    var0 = getEntArray("right_underground_bomber_trig", "script_noteworthy");
+    var_0 = getEntArray("right_underground_bomber_trig", "script_noteworthy");
 
-    if(var0.size) {
-      scripts\engine\utility::array_call(var0, &delete);
+    if(var_0.size) {
+      scripts\engine\utility::array_call(var_0, &delete);
     }
   }
 
@@ -454,8 +454,8 @@ function global_civ_spawn_func() {
     self.team = self.script_team;
   }
 
-  var0 = ["run"];
-  self.run_anim_alias = var0[randomint(var0.size)];
+  var_0 = ["run"];
+  self.run_anim_alias = var_0[randomint(var_0.size)];
   thread scripts\sp\friendlyfire::friendly_fire_think(self);
 
   if(isai(self)) {
@@ -482,51 +482,51 @@ function vo_civ_chatter() {
 
   level.vo_chatter endon("terminate_chatter");
   scripts\engine\utility::call_on_notify("damage", &stopsounds);
-  var0 = squared(300);
-  var1 = squared(400);
-  var2 = scripts\sp\maps\piccadilly\piccadilly_util::get_gender();
+  var_0 = squared(300);
+  var_1 = squared(400);
+  var_2 = scripts\sp\maps\piccadilly\piccadilly_util::get_gender();
 
   if(!isDefined(level.vo_civchatter)) {
     init_civchater_vo();
   }
 
-  var3 = 10;
-  var4 = 60;
-  jumpiffalse(var2 == "female") LOC_00000081;
-  var3 = 15;
-  var4 = 80;
+  var_3 = 10;
+  var_4 = 60;
+  jumpiffalse(var_2 == "female") LOC_00000081;
+  var_3 = 15;
+  var_4 = 80;
 
   for(;;) {
-    var5 = self.origin;
-    var6 = randomfloatrange(0.1, 0.3);
-    wait var6;
+    var_5 = self.origin;
+    var_6 = randomfloatrange(0.1, 0.3);
+    wait var_6;
 
-    if(distance2dsquared(self.origin, var5) / var6 < 1000) {
+    if(distance2dsquared(self.origin, var_5) / var_6 < 1000) {
       continue;
     }
 
-    var7 = level.vo_civchatter.wait_times.items[level.vo_civchatter.wait_times.index];
+    var_7 = level.vo_civchatter.wait_times.items[level.vo_civchatter.wait_times.index];
 
-    if(!scripts\engine\utility::time_has_passed(level.vo_civchatter.last_said, var7)) {
+    if(!scripts\engine\utility::time_has_passed(level.vo_civchatter.last_said, var_7)) {
       continue;
     }
 
-    var8 = level.player.origin + anglesToForward(level.player.angles) * 60;
-    var9 = distance2dsquared(var8, self.origin);
+    var_8 = level.player.origin + anglesToForward(level.player.angles) * 60;
+    var_9 = distance2dsquared(var_8, self.origin);
 
-    if(var9 > randomfloatrange(var0, var1)) {
+    if(var_9 > randomfloatrange(var_0, var_1)) {
       continue;
     }
 
-    var10 = int(var9 / var1 * (var4 - var3) + var3);
+    var_10 = int(var_9 / var_1 * (var_4 - var_3) + var_3);
 
-    if(randomintrange(0, var10) != 0 || istrue(self.dontchatter)) {
+    if(randomintrange(0, var_10) != 0 || istrue(self.dontchatter)) {
       continue;
     }
 
-    var11 = level.vo_civchatter.decks[var2] scripts\engine\sp\utility::deck_draw();
+    var_11 = level.vo_civchatter.decks[var_2] scripts\engine\sp\utility::deck_draw();
     scripts\engine\utility::delaythread(1.5, &vo_ally_warn_me);
-    scripts\sp\maps\piccadilly\piccadilly_util::say(var11);
+    scripts\sp\maps\piccadilly\piccadilly_util::say(var_11);
     level.vo_civchatter.last_said = gettime();
     level.vo_civchatter.wait_times scripts\engine\sp\utility::deck_draw();
     level.vo_civchatter.wait_times scripts\engine\sp\utility::refill_if_empty();
@@ -542,15 +542,15 @@ function init_help_responses() {
     return;
   }
 
-  var0 = [];
-  self.helpresponses = var0;
+  var_0 = [];
+  self.helpresponses = var_0;
 
   if(scripts\engine\utility::is_equal(self.animname, "sas1")) {
-    GscBinSkip0(0x2e, var0.size, "dx_vom_s151_combat_civs_10");
+    GscBinSkip0(0x2e, var_0.size, "dx_vom_s151_combat_civs_10");
   }
 
   if(scripts\engine\utility::is_equal(self.animname, "sas2") || scripts\engine\utility::is_equal(self.animname, "sas3")) {
-    GscBinSkip0(0x2e, var0.size, "dx_vom_s152_combat_civs_50");
+    GscBinSkip0(0x2e, var_0.size, "dx_vom_s152_combat_civs_50");
   }
 
   if(scripts\sp\maps\piccadilly\piccadilly_util::is_police()) {
@@ -568,37 +568,37 @@ function init_police_helpresponses() {
   }
 
   level.vo_chatter.police_helpresponses = [];
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, "dx_vom_uk53_combat_civs_90");
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, "dx_vom_uk53_combat_civs_90");
 }
 
 function vo_ally_warn_me() {
-  var0 = find_ally_to_respond();
+  var_0 = find_ally_to_respond();
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!isDefined(var0.helpresponses)) {
-    init_help_responses(var0);
+  if(!isDefined(var_0.helpresponses)) {
+    init_help_responses(var_0);
   }
 
-  var0 thread scripts\sp\maps\piccadilly\piccadilly_util::say_as_chatter(var0.helpresponses scripts\engine\sp\utility::deck_draw(), 0, 3);
+  var_0 thread scripts\sp\maps\piccadilly\piccadilly_util::say_as_chatter(var_0.helpresponses scripts\engine\sp\utility::deck_draw(), 0, 3);
 }
 
 function find_ally_to_respond() {
-  var0 = getaiarrayinradius(level.player.origin, 500, "allies");
+  var_0 = getaiarrayinradius(level.player.origin, 500, "allies");
 
-  if(var0.size) {
-    var0 = sortbydistance(var0, level.player.origin);
+  if(var_0.size) {
+    var_0 = sortbydistance(var_0, level.player.origin);
 
-    foreach(var2 in var0) {
-      if(var2.asmname == "civilian" || var2 isinscriptedstate()) {
+    foreach(var_2 in var_0) {
+      if(var_2.asmname == "civilian" || var_2 isinscriptedstate()) {
         continue;
       }
 
-      if(sighttracepassed(var2 getEye(), self.origin + (0, 0, 65), 0, self, var2)) {
-        return var2;
+      if(sighttracepassed(var_2 getEye(), self.origin + (0, 0, 65), 0, self, var_2)) {
+        return var_2;
       }
     }
   }
@@ -607,9 +607,9 @@ function find_ally_to_respond() {
 }
 
 function vo_civ_death() {
-  self waittill("death", var0);
+  self waittill("death", var_0);
 
-  if(!isDefined(var0) || var0 != level.player) {
+  if(!isDefined(var_0) || var_0 != level.player) {
     return;
   }
 
@@ -634,16 +634,16 @@ function vo_civ_death() {
 function init_civchater_vo() {
   level.vo_civchatter = spawnStruct();
   level.vo_civchatter.decks = [];
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, "dx_vom_cvf1_post_bomb_civ_shooters_20");
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, "dx_vom_cvf1_post_bomb_civ_shooters_20");
 }
 
 function init_civkill_vo() {
-  var0 = ["dx_vom_uk53_post_bomb_civkill_10", "dx_vom_uk52_post_bomb_civkill_50", "dx_vom_s151_post_bomb_civkill_90", "dx_vom_s152_post_bomb_civkill_140"];
-  var1 = ["dx_vom_uk53_post_bomb_civkill_20", "dx_vom_uk52_post_bomb_civkill_60", "dx_vom_s151_post_bomb_civkill_100", "dx_vom_s152_post_bomb_civkill_150"];
-  var2 = ["dx_vom_uk53_post_bomb_civkill_30", "dx_vom_uk52_post_bomb_civkill_70", "dx_vom_s151_post_bomb_civkill_110", "dx_vom_s152_post_bomb_civkill_160"];
-  var3 = ["dx_vom_uk53_post_bomb_civkill_40", "dx_vom_uk52_post_bomb_civkill_80", "dx_vom_s151_post_bomb_civkill_120", "dx_vom_s152_post_bomb_civkill_170"];
-  level.vo_civkill = scripts\engine\sp\utility::create_deck([var0, var1, var2, var3], 0);
+  var_0 = ["dx_vom_uk53_post_bomb_civkill_10", "dx_vom_uk52_post_bomb_civkill_50", "dx_vom_s151_post_bomb_civkill_90", "dx_vom_s152_post_bomb_civkill_140"];
+  var_1 = ["dx_vom_uk53_post_bomb_civkill_20", "dx_vom_uk52_post_bomb_civkill_60", "dx_vom_s151_post_bomb_civkill_100", "dx_vom_s152_post_bomb_civkill_150"];
+  var_2 = ["dx_vom_uk53_post_bomb_civkill_30", "dx_vom_uk52_post_bomb_civkill_70", "dx_vom_s151_post_bomb_civkill_110", "dx_vom_s152_post_bomb_civkill_160"];
+  var_3 = ["dx_vom_uk53_post_bomb_civkill_40", "dx_vom_uk52_post_bomb_civkill_80", "dx_vom_s151_post_bomb_civkill_120", "dx_vom_s152_post_bomb_civkill_170"];
+  level.vo_civkill = scripts\engine\sp\utility::create_deck([var_0, var_1, var_2, var_3], 0);
   level.vo_civkill.autoshuffle = 1;
 }
 
@@ -656,25 +656,25 @@ function makeallies() {
     setdvarifuninitialized("OLLLOORPLR", 170);
 
     if(self.unittype == "civilian") {
-      var0 = getdvarint("LSKTNKPTRT", 200);
-      var1 = getdvarint("MNMNLKRRQP", 240);
+      var_0 = getdvarint("LSKTNKPTRT", 200);
+      var_1 = getdvarint("MNMNLKRRQP", 240);
 
-      if(var1 <= var0) {
-        var1 = var0 + 1;
+      if(var_1 <= var_0) {
+        var_1 = var_0 + 1;
       }
 
-      scripts\engine\utility::set_movement_speed(randomintrange(var0, var1));
+      scripts\engine\utility::set_movement_speed(randomintrange(var_0, var_1));
       return;
     }
 
-    var0 = getdvarfloat("NNSQQNONNT", 0.94);
-    var1 = getdvarfloat("NNSQQNONNT", 1.11);
+    var_0 = getdvarfloat("NNSQQNONNT", 0.94);
+    var_1 = getdvarfloat("NNSQQNONNT", 1.11);
 
-    if(var1 <= var0) {
-      var1 = var0 + 0.01;
+    if(var_1 <= var_0) {
+      var_1 = var_0 + 0.01;
     }
 
-    self.speedscalemult = randomfloatrange(var0, var1);
+    self.speedscalemult = randomfloatrange(var_0, var_1);
     scripts\common\utility::clear_movement_speed();
     return;
   }
@@ -690,9 +690,9 @@ function maketerrorists() {
 
   if(isai(self)) {
     if(!istrue(self.casualkiller)) {
-      var0 = getdvarfloat("NSPNRRQRLN", 0.91);
-      var1 = getdvarfloat("NOPOKQNMR", 1.06);
-      self.speedscalemult = randomfloatrange(var0, var1);
+      var_0 = getdvarfloat("NSPNRRQRLN", 0.91);
+      var_1 = getdvarfloat("NOPOKQNMR", 1.06);
+      self.speedscalemult = randomfloatrange(var_0, var_1);
       self.allowspeedupwhencombathot = 0;
       scripts\common\ai::set_rebel(1);
       return;
@@ -706,10 +706,10 @@ function print_screen_pos_from_center() {
   self endon("death");
 
   for(;;) {
-    var0 = level.player worldpointtoscreenpos(self gettagorigin("j_spinelower"), getdvarint("MRNKTKLLKP"));
+    var_0 = level.player worldpointtoscreenpos(self gettagorigin("j_spinelower"), getdvarint("MRNKTKLLKP"));
 
-    if(isDefined(var0)) {
-      var1 = length2d(var0);
+    if(isDefined(var_0)) {
+      var_1 = length2d(var_0);
     }
 
     waitframe();
@@ -749,30 +749,30 @@ function ingame_cinematic_loop() {
 }
 
 function display_ai() {
-  var0 = (1, 1, 0);
-  var1 = (0, 1, 0);
-  var2 = (1, 0, 0);
-  var3 = ["axis", "allies", "team3", "neutral", "total"];
+  var_0 = (1, 1, 0);
+  var_1 = (0, 1, 0);
+  var_2 = (1, 0, 0);
+  var_3 = ["axis", "allies", "team3", "neutral", "total"];
 
   for(;;) {
-    var4 = 30;
+    var_4 = 30;
 
-    foreach(var6 in var3) {
-      if(var6 == "total") {
-        var7 = getaiarray().size;
+    foreach(var_6 in var_3) {
+      if(var_6 == "total") {
+        var_7 = getaiarray().size;
       } else {
-        var7 = getaiarray(var6).size;
+        var_7 = getaiarray(var_6).size;
       }
 
-      if(var7 < 9) {
-        var8 = var1;
-      } else if(var7 < 25) {
-        var8 = var0;
+      if(var_7 < 9) {
+        var_8 = var_1;
+      } else if(var_7 < 25) {
+        var_8 = var_0;
       } else {
-        var8 = var2;
+        var_8 = var_2;
       }
 
-      var4 += 15;
+      var_4 += 15;
     }
 
     waitframe();
@@ -783,11 +783,11 @@ function display_ai() {
 
 function open_bus_doors() {
   scripts\engine\utility::flag_wait("scriptables_ready");
-  var0 = getscriptablearray("combat_bus", "script_noteworthy");
+  var_0 = getscriptablearray("combat_bus", "script_noteworthy");
 
-  foreach(var2 in var0) {
-    var2 useanimtree(#animtree);
-    var2 setanim($piccadilly_london_bus_combat_doors_open);
+  foreach(var_2 in var_0) {
+    var_2 useanimtree(#animtree);
+    var_2 setanim($piccadilly_london_bus_combat_doors_open);
   }
 }
 
@@ -806,36 +806,36 @@ function montior_player_fov() {
 }
 
 function get_current_fov() {
-  var0 = level.player getcurrentweapon();
+  var_0 = level.player getcurrentweapon();
 
-  if(nullweapon(var0) || level.player playerads() < 0.5) {
+  if(nullweapon(var_0) || level.player playerads() < 0.5) {
     return getdvarint("MRNKTKLLKP");
   }
 
-  var1 = undefined;
-  var2 = 0;
+  var_1 = undefined;
+  var_2 = 0;
 
-  if(isDefined(var0.scope)) {
-    var1 = var0.scope[0];
+  if(isDefined(var_0.scope)) {
+    var_1 = var_0.scope[0];
   }
 
-  var3 = weaponclass(var0);
+  var_3 = weaponclass(var_0);
 
-  if(!isDefined(var1) || var1 == "i" || var3 == "rocketlauncher" || var3 == "grenade") {
-    var2 = 1;
+  if(!isDefined(var_1) || var_1 == "i" || var_3 == "rocketlauncher" || var_3 == "grenade") {
+    var_2 = 1;
   }
 
-  if(var2) {
-    return get_weapon_base_ads_fov(var0);
+  if(var_2) {
+    return get_weapon_base_ads_fov(var_0);
   }
 
-  return get_weapon_scope_fov(var0);
+  return get_weapon_scope_fov(var_0);
 }
 
-function get_weapon_base_ads_fov(var0) {
-  var1 = weaponclass(var0);
+function get_weapon_base_ads_fov(var_0) {
+  var_1 = weaponclass(var_0);
 
-  switch (var1) {
+  switch (var_1) {
     case "mg":
     case "rifle":
       return 50;
@@ -854,31 +854,31 @@ function get_weapon_base_ads_fov(var0) {
   }
 }
 
-function get_weapon_scope_fov(var0) {
-  var1 = var0.scope;
+function get_weapon_scope_fov(var_0) {
+  var_1 = var_0.scope;
 
-  if(weaponclass(var0) == "sniper") {
-    if(issubstr(var1, "aco")) {
+  if(weaponclass(var_0) == "sniper") {
+    if(issubstr(var_1, "aco")) {
       return 50;
-    } else if(issubstr(var1, "e_alph")) {
+    } else if(issubstr(var_1, "e_alph")) {
       return 12;
-    } else if(issubstr(var1, "e_hd") || issubstr(var1, "e_awh") || issubstr(var1, "e_ind") || issubstr(var1, "e_del")) {
+    } else if(issubstr(var_1, "e_hd") || issubstr(var_1, "e_awh") || issubstr(var_1, "e_ind") || issubstr(var_1, "e_del")) {
       return 15;
     } else {
       return 23;
     }
   }
 
-  if(issubstr(var1, "aco")) {
+  if(issubstr(var_1, "aco")) {
     return 29;
   }
 
-  if(issubstr(var1, "hal")) {
+  if(issubstr(var_1, "hal")) {
     return 40;
   }
 
-  if(issubstr(var1, "ref")) {
-    return get_weapon_base_ads_fov(var0);
+  if(issubstr(var_1, "ref")) {
+    return get_weapon_base_ads_fov(var_0);
   }
 }
 

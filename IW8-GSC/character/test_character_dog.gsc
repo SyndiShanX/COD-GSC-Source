@@ -30,6 +30,6 @@ function main_mp() {
   self setModel("fullbody_dog_c");
 }
 
-function precache_mp(var0) {
-  level.agent_definition[var0]["animclass"] = "dog";
+function precache_mp(var_0) {
+  level.agent_definition[var_0]["animclass"] = "dog";
 }

@@ -6,11 +6,11 @@
 function init_lighting() {
   scripts\engine\sp\utility::motion_blur_enable(1, 1);
   thread lighting_setup_dvars();
-  var0 = lighting_get_bunker_lights();
+  var_0 = lighting_get_bunker_lights();
 
-  foreach(var2 in var0) {
-    var2.originalintensity = var2 getlightintensity();
-    var2 setlightintensity(0);
+  foreach(var_2 in var_0) {
+    var_2.originalintensity = var_2 getlightintensity();
+    var_2 setlightintensity(0);
   }
 }
 
@@ -31,7 +31,7 @@ function lighting_setup_dvars() {
   level.spotdistcull = getdvarint("LKOLRONRNQ");
 }
 
-function ride_lighting(var0) {
+function ride_lighting(var_0) {
   lerpsunangles(level.sunangles, level.introsunangles, 0.01);
   setsaveddvar("LSNRQTOKRR", 2);
   setsaveddvar("NLOTLQMORR", 0.999);
@@ -39,19 +39,19 @@ function ride_lighting(var0) {
   level.farah_main_light setlightintensity(70);
   level.farah_main_light setlightradius(135);
   level.farah_main_light setlightfovrange(50, 35);
-  level.farah_main_light linkTo(var0, "tag_accessory_01", (0, -30, 30), (20, 130, 0));
+  level.farah_main_light linkTo(var_0, "tag_accessory_01", (0, -30, 30), (20, 130, 0));
   level.farah_kick_light = getEnt("farah_kick", "targetname");
   level.farah_kick_light setlightintensity(40);
   level.farah_kick_light setlightradius(90);
   level.farah_kick_light setlightfovrange(80, 35);
   level.farah_kick_light setlightcolor((1, 1, 0.95));
-  level.farah_kick_light linkTo(var0, "tag_accessory_02", (50, -15, 50), (10, -120, 0));
+  level.farah_kick_light linkTo(var_0, "tag_accessory_02", (50, -15, 50), (10, -120, 0));
 }
 
-function ride_dof(var0) {
+function ride_dof(var_0) {
   level scripts\engine\sp\utility::dof_enable(1, 5, 500);
   wait 0.5;
-  var0 scripts\engine\sp\utility::dof_enable_autofocus(3.5, 10, undefined, undefined, "tag_eye", undefined, 1);
+  var_0 scripts\engine\sp\utility::dof_enable_autofocus(3.5, 10, undefined, undefined, "tag_eye", undefined, 1);
   wait 23.25;
   lerpsunangles(level.introsunangles, level.sunangles, 0.01);
 }
@@ -68,10 +68,10 @@ function ride_end() {
 
 function lighting_bunker() {
   sun_disable();
-  var0 = lighting_get_bunker_lights();
+  var_0 = lighting_get_bunker_lights();
 
-  foreach(var2 in var0) {
-    var2 setlightintensity(var2.originalintensity);
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(var_2.originalintensity);
   }
 }
 
@@ -80,13 +80,13 @@ function lighting_get_bunker_lights() {
 }
 
 function lighting_dof_bunker() {
-  var0 = scripts\sp\maps\highway\highway::level_getfarah();
-  var1 = scripts\sp\maps\highway\highway::level_gethadir();
-  var0 scripts\engine\sp\utility::dof_enable_autofocus(2, 10, undefined, undefined, "tag_eye", undefined, 1);
+  var_0 = scripts\sp\maps\highway\highway::level_getfarah();
+  var_1 = scripts\sp\maps\highway\highway::level_gethadir();
+  var_0 scripts\engine\sp\utility::dof_enable_autofocus(2, 10, undefined, undefined, "tag_eye", undefined, 1);
   wait 20;
-  var1 scripts\engine\sp\utility::dof_enable_autofocus(2, 10, undefined, undefined, "tag_eye", undefined, 1);
+  var_1 scripts\engine\sp\utility::dof_enable_autofocus(2, 10, undefined, undefined, "tag_eye", undefined, 1);
   wait 22;
-  var0 scripts\engine\sp\utility::dof_enable_autofocus(2, 10, undefined, undefined, "tag_eye", undefined, 1);
+  var_0 scripts\engine\sp\utility::dof_enable_autofocus(2, 10, undefined, undefined, "tag_eye", undefined, 1);
   wait 7;
   level thread scripts\engine\sp\utility::dof_disable_autofocus();
 }

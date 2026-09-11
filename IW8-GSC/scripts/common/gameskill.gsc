@@ -3,34 +3,34 @@
  * Script: scripts\common\gameskill.gsc
 ***********************************************/
 
-function get_skill_from_index(var0) {
+function get_skill_from_index(var_0) {
   if(scripts\common\utility::issp()) {
-    var0 += 1;
+    var_0 += 1;
   }
 
-  return level.difficultytype[var0];
+  return level.difficultytype[var_0];
 }
 
-function apply_difficulty_settings_shared(var0) {
-  self.gs.misstimeconstant = get_difficultysetting_frac("missTimeConstant", var0);
-  self.gs.misstimedistancefactor = get_difficultysetting_frac("missTimeDistanceFactor", var0);
-  self.gs.double_grenades_allowed = get_difficultysetting_frac("double_grenades_allowed", var0);
+function apply_difficulty_settings_shared(var_0) {
+  self.gs.misstimeconstant = get_difficultysetting_frac("missTimeConstant", var_0);
+  self.gs.misstimedistancefactor = get_difficultysetting_frac("missTimeDistanceFactor", var_0);
+  self.gs.double_grenades_allowed = get_difficultysetting_frac("double_grenades_allowed", var_0);
 }
 
-function get_difficultysetting_frac(var0, var1) {
-  return get_difficultysetting(var0) * var1;
+function get_difficultysetting_frac(var_0, var_1) {
+  return get_difficultysetting(var_0) * var_1;
 }
 
-function get_difficultysetting(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = self.gameskill;
+function get_difficultysetting(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = self.gameskill;
   }
 
-  return level.difficultysettings[var0][get_skill_from_index(var1)];
+  return level.difficultysettings[var_0][get_skill_from_index(var_1)];
 }
 
-function get_difficultysetting_global(var0) {
-  return level.difficultysettings[var0][get_skill_from_index(level.gameskill)];
+function get_difficultysetting_global(var_0) {
+  return level.difficultysettings[var_0][get_skill_from_index(level.gameskill)];
 }
 
 function always_pain() {
@@ -62,9 +62,9 @@ function pain_protection_check() {
     return false;
   }
 
-  var0 = self.damageweapon;
+  var_0 = self.damageweapon;
 
-  if(!nullweapon(var0) && var0.isbolt) {
+  if(!nullweapon(var_0) && var_0.isbolt) {
     return false;
   }
 
@@ -117,22 +117,22 @@ function setsniperaccuracy() {
 
   if(!isDefined(self.sniperaccuracyset)) {
     self.sniperaccuracyset = 1;
-    var0 = get_skill_from_index(level.gameskill);
-    var1 = level.difficultysettings["sniperAccuDiffScale"][var0];
-    self.baseaccuracy = self.accuracy * var1;
+    var_0 = get_skill_from_index(level.gameskill);
+    var_1 = level.difficultysettings["sniperAccuDiffScale"][var_0];
+    self.baseaccuracy = self.accuracy * var_1;
   }
 
   self.snipershotcount++;
-  var2 = level.gameskill;
+  var_2 = level.gameskill;
 
   if(isPlayer(self.enemy)) {
-    var2 = self.enemy.gameskill;
+    var_2 = self.enemy.gameskill;
   }
 
   if(shouldforcesnipermissshot()) {
     self.accuracy = 0;
 
-    if(var2 > 0 || self.snipershotcount > 1) {
+    if(var_2 > 0 || self.snipershotcount > 1) {
       self.lastmissedenemy = self.enemy;
     }
 
@@ -145,7 +145,7 @@ function setsniperaccuracy() {
 
   self.sniperhitcount++;
 
-  if(var2 < 1 && self.sniperhitcount == 1) {
+  if(var_2 < 1 && self.sniperhitcount == 1) {
     self.lastmissedenemy = undefined;
     return;
   }
@@ -206,25 +206,25 @@ function resetmisstime() {
     return;
   }
 
-  var0 = distance(self.enemy.origin, self.origin);
-  setmisstime(self.enemy.gs.misstimeconstant + var0 * self.enemy.gs.misstimedistancefactor);
+  var_0 = distance(self.enemy.origin, self.origin);
+  setmisstime(self.enemy.gs.misstimeconstant + var_0 * self.enemy.gs.misstimedistancefactor);
 }
 
 function resetmissdebouncetime() {
   self.a.misstimedebounce = gettime() + 3000;
 }
 
-function setmisstime(var0) {
+function setmisstime(var_0) {
   if(self.a.misstimedebounce > gettime()) {
     return;
   }
 
-  if(var0 > 0) {
+  if(var_0 > 0) {
     self.accuracy = 0;
   }
 
-  var0 *= 1000;
-  self.a.misstime = gettime() + var0;
+  var_0 *= 1000;
+  self.a.misstime = gettime() + var_0;
   self.a.accuracygrowthmultiplier = 1;
 }
 

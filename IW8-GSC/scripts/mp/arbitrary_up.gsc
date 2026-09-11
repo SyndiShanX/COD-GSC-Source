@@ -12,69 +12,69 @@ function initarbitraryuptriggers() {
   level.arbitraryuptriggersstructs = [];
 
   if(scripts\cp_mp\utility\game_utility::getmapname() == "mp_junk") {
-    var0 = getEntArray("mag_up", "targetname");
+    var_0 = getEntArray("mag_up", "targetname");
 
-    if(!isDefined(var0) || var0.size == 0) {
+    if(!isDefined(var_0) || var_0.size == 0) {
       return;
     }
 
-    level.arbitraryuptriggers = var0;
+    level.arbitraryuptriggers = var_0;
 
-    foreach(var2 in var0) {
-      var3 = var2 getentitynumber();
-      var4 = spawnStruct();
-      var4.trigger = var2;
-      var4.base = undefined;
-      var4.entsinside = [];
+    foreach(var_2 in var_0) {
+      var_3 = var_2 getentitynumber();
+      var_4 = spawnStruct();
+      var_4.trigger = var_2;
+      var_4.base = undefined;
+      var_4.entsinside = [];
 
-      if(isDefined(var2.target)) {
-        var4.base = getEnt(var2.target, "targetname");
-        var4.blinkloc = var4.base.origin + (0, 0, -175);
+      if(isDefined(var_2.target)) {
+        var_4.base = getEnt(var_2.target, "targetname");
+        var_4.blinkloc = var_4.base.origin + (0, 0, -175);
       }
 
-      level.arbitraryuptriggersstructs[var3] = var4;
-      thread watcharbitraryuptriggerenter(var4);
-      thread watcharbitraryuptriggerexit(var4);
+      level.arbitraryuptriggersstructs[var_3] = var_4;
+      thread watcharbitraryuptriggerenter(var_4);
+      thread watcharbitraryuptriggerexit(var_4);
     }
 
     return;
   }
 }
 
-function watcharbitraryuptriggerenter(var0) {
+function watcharbitraryuptriggerenter(var_0) {
   for(;;) {
-    var0.trigger waittill("trigger", var1);
+    var_0.trigger waittill("trigger", var_1);
 
-    if(!isDefined(var1)) {
+    if(!isDefined(var_1)) {
       continue;
     }
 
-    if(!shouldaddtoarbitraryuptrigger(var0, var1)) {
+    if(!shouldaddtoarbitraryuptrigger(var_0, var_1)) {
       continue;
     }
 
-    var2 = var1 getentitynumber();
-    var0.entsinside[var2] = var1;
-    var1.arbitraryuptriggerstruct = var0;
+    var_2 = var_1 getentitynumber();
+    var_0.entsinside[var_2] = var_1;
+    var_1.arbitraryuptriggerstruct = var_0;
   }
 }
 
-function watcharbitraryuptriggerexit(var0) {
+function watcharbitraryuptriggerexit(var_0) {
   for(;;) {
-    foreach(var2 in var0.entsinside) {
-      if(!isDefined(var2)) {
+    foreach(var_2 in var_0.entsinside) {
+      if(!isDefined(var_2)) {
         continue;
       }
 
-      if(!shouldremovefromarbitraryuptrigger(var0, var2)) {
+      if(!shouldremovefromarbitraryuptrigger(var_0, var_2)) {
         continue;
       }
 
-      var3 = var2 getentitynumber();
-      var0.entsinside[var3] = undefined;
+      var_3 = var_2 getentitynumber();
+      var_0.entsinside[var_3] = undefined;
 
-      if(isDefined(var2.arbitraryuptriggerstruct) && var2.arbitraryuptriggerstruct == var0) {
-        var2.arbitraryuptriggerstruct = undefined;
+      if(isDefined(var_2.arbitraryuptriggerstruct) && var_2.arbitraryuptriggerstruct == var_0) {
+        var_2.arbitraryuptriggerstruct = undefined;
       }
     }
 
@@ -82,22 +82,22 @@ function watcharbitraryuptriggerexit(var0) {
   }
 }
 
-function shouldaddtoarbitraryuptrigger(var0, var1) {
-  if(!isPlayer(var1)) {
+function shouldaddtoarbitraryuptrigger(var_0, var_1) {
+  if(!isPlayer(var_1)) {
     return false;
   }
 
-  var2 = var1 getentitynumber();
+  var_2 = var_1 getentitynumber();
 
-  if(isDefined(var0.entsinside[var2])) {
+  if(isDefined(var_0.entsinside[var_2])) {
     return false;
   }
 
   return true;
 }
 
-function shouldremovefromarbitraryuptrigger(var0, var1) {
-  if(!var1 istouching(var0.trigger)) {
+function shouldremovefromarbitraryuptrigger(var_0, var_1) {
+  if(!var_1 istouching(var_0.trigger)) {
     return true;
   }
 

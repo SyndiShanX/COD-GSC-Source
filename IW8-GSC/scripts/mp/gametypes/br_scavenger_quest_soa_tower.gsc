@@ -5,10 +5,10 @@
 
 function init() {
   scripts\engine\scriptable::ref_12f5b("body", &ref_12ed6);
-  var0 = scripts\mp\gametypes\br_quest_util::registerquestcategory("scavenger_soa_tower", 1);
+  var_0 = scripts\mp\gametypes\br_quest_util::registerquestcategory("scavenger_soa_tower", 1);
   scripts\mp\gametypes\br_quest_util::ref_12b2a("scavenger_soa_tower", "brloot_scavenger_tablet_soa_tower");
 
-  if(!var0) {
+  if(!var_0) {
     return;
   }
 
@@ -29,7 +29,7 @@ function init() {
   scripts\mp\gametypes\br_quest_util::ref_12b30("scavenger_locale_soa_tower", &ref_1372f);
   scripts\mp\gametypes\br_quest_util::ref_1297c("scavenger_soa_tower", 1);
   scripts\mp\gametypes\br_quest_util::ref_12b31("scavenger_soa_tower", &ref_13725);
-  var1 = [];
+  var_1 = [];
   GscBinSkip0(0x2e, 0, &scripts\mp\gametypes\br_quest_util::filtercondition_isdead);
 }
 
@@ -41,25 +41,25 @@ function ref_13463() {
   ref_13465((19912, -16488, -88));
 }
 
-function ref_13465(var0) {
-  var1 = scripts\mp\gametypes\br_quest_util::ref_135df("scavenger_soa_tower", scripts\engine\utility::drop_to_ground(var0, 0, -100, (0, 0, 1)) + (0, 0, 25), 0);
-  scripts\mp\gametypes\br_pickups::ref_12b3a(var1);
+function ref_13465(var_0) {
+  var_1 = scripts\mp\gametypes\br_quest_util::ref_135df("scavenger_soa_tower", scripts\engine\utility::drop_to_ground(var_0, 0, -100, (0, 0, 1)) + (0, 0, 25), 0);
+  scripts\mp\gametypes\br_pickups::ref_12b3a(var_1);
 }
 
 function ref_1372c() {
   scripts\mp\gametypes\br_quest_util::releaseteamonquest(self.team);
 }
 
-function ref_13728(var0) {
-  if(var0.team == self.team) {
-    var1 = scripts\mp\utility\teams::getteamdata(self.team, "players");
-    scripts\mp\gametypes\br_quest_util::getquestinstancedata("scavenger_locale_soa_tower", self.team).playerlist = var1;
+function ref_13728(var_0) {
+  if(var_0.team == self.team) {
+    var_1 = scripts\mp\utility\teams::getteamdata(self.team, "players");
+    scripts\mp\gametypes\br_quest_util::getquestinstancedata("scavenger_locale_soa_tower", self.team).playerlist = var_1;
 
-    if(isDefined(self.ref_1393b) && isDefined(self.ref_1393b.force_spawn_all_dead_players) && var1.size) {
-      self.ref_1393b.force_spawn_all_dead_players setotherent(var1[0]);
+    if(isDefined(self.ref_1393b) && isDefined(self.ref_1393b.force_spawn_all_dead_players) && var_1.size) {
+      self.ref_1393b.force_spawn_all_dead_players setotherent(var_1[0]);
     }
 
-    if(!scripts\mp\gametypes\br_quest_util::isteamvalid(var0.team)) {
+    if(!scripts\mp\gametypes\br_quest_util::isteamvalid(var_0.team)) {
       self.result = "fail";
       scripts\mp\gametypes\br_quest_util::removequestinstance();
       return;
@@ -69,55 +69,55 @@ function ref_13728(var0) {
   }
 }
 
-function ref_1371f(var0) {
-  if(!gethost(var0)) {
+function ref_1371f(var_0) {
+  if(!gethost(var_0)) {
     return;
   }
 
-  var0 scripts\mp\gametypes\br_quest_util::uiobjectivehide();
-  scripts\mp\gametypes\br_quest_util::spawn_downed_friendly(var0);
+  var_0 scripts\mp\gametypes\br_quest_util::uiobjectivehide();
+  scripts\mp\gametypes\br_quest_util::spawn_downed_friendly(var_0);
 }
 
-function ref_1372f(var0) {
-  if(!gethost(var0)) {
+function ref_1372f(var_0) {
+  if(!gethost(var_0)) {
     return;
   }
 
-  var0 scripts\mp\gametypes\br_quest_util::uiobjectiveshow("scavenger_soa_tower");
-  scripts\mp\gametypes\br_quest_util::ref_1336c(var0);
+  var_0 scripts\mp\gametypes\br_quest_util::uiobjectiveshow("scavenger_soa_tower");
+  scripts\mp\gametypes\br_quest_util::ref_1336c(var_0);
 }
 
-function gethost(var0) {
-  if(var0.team == self.subscribedinstances[0].team) {
+function gethost(var_0) {
+  if(var_0.team == self.subscribedinstances[0].team) {
     return 1;
   }
 
   return 0;
 }
 
-function ref_1371c(var0) {
-  var1 = scripts\mp\gametypes\br_quest_util::createlocaleinstance("scavenger_locale_soa_tower", "scavenger_soa_tower", self.team);
+function ref_1371c(var_0) {
+  var_1 = scripts\mp\gametypes\br_quest_util::createlocaleinstance("scavenger_locale_soa_tower", "scavenger_soa_tower", self.team);
 
-  if(!isDefined(var0)) {
-    var1.curorigin = (0, 0, 0);
-    var1.enabled = 0;
-    return var1;
+  if(!isDefined(var_0)) {
+    var_1.curorigin = (0, 0, 0);
+    var_1.enabled = 0;
+    return var_1;
   }
 
-  var1 scripts\mp\gametypes\br_quest_util::init_tape_machine_animations("ui_mp_br_mapmenu_icon_vault_objective", "current");
-  var1.playerlist = scripts\mp\utility\teams::getteamdata(self.team, "players");
-  var1.ref_12320 = 0;
-  scripts\mp\gametypes\br_quest_util::addquestinstance("scavenger_locale_soa_tower", var1);
-  ref_1325a(var1, var0);
-  return var1;
+  var_1 scripts\mp\gametypes\br_quest_util::init_tape_machine_animations("ui_mp_br_mapmenu_icon_vault_objective", "current");
+  var_1.playerlist = scripts\mp\utility\teams::getteamdata(self.team, "players");
+  var_1.ref_12320 = 0;
+  scripts\mp\gametypes\br_quest_util::addquestinstance("scavenger_locale_soa_tower", var_1);
+  ref_1325a(var_1, var_0);
+  return var_1;
 }
 
-function ref_13722(var0) {
+function ref_13722(var_0) {
   self.ref_12320++;
-  var1 = ref_1325a(var0);
+  var_1 = ref_1325a(var_0);
 
-  if(var1) {
-    self.subscribedinstances[0].intelprogress = var0.origin;
+  if(var_1) {
+    self.subscribedinstances[0].intelprogress = var_0.origin;
     scripts\mp\gametypes\br_quest_util::displayteamsplash(self.subscribedinstances[0].team, "br_scavenger_soa_tower_quest_next_location");
     level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_obj_next_nptarget", self.subscribedinstances[0].team, 1);
 
@@ -131,22 +131,22 @@ function ref_13722(var0) {
   }
 }
 
-function ref_1325a(var0) {
-  if(!isDefined(var0)) {
-    var1 = self.subscribedinstances[0];
+function ref_1325a(var_0) {
+  if(!isDefined(var_0)) {
+    var_1 = self.subscribedinstances[0];
 
-    foreach(var4, var3 in scripts\mp\utility\teams::getteamdata(var1.team, "players")) {
-      var3 scripts\mp\utility\lower_message::ref_1316e("br_assassination_notargets", undefined, 5);
+    foreach(var_4, var_3 in scripts\mp\utility\teams::getteamdata(var_1.team, "players")) {
+      var_3 scripts\mp\utility\lower_message::ref_1316e("br_assassination_notargets", undefined, 5);
     }
 
-    var1.result = "no_locale";
-    var1 scripts\mp\gametypes\br_quest_util::removequestinstance();
+    var_1.result = "no_locale";
+    var_1 scripts\mp\gametypes\br_quest_util::removequestinstance();
     return false;
   }
 
-  getlootspawnpointcount(var4.index);
-  ref_13698(var4.origin, var4.angles, self);
-  self.curorigin = var4.origin + (0, 0, 50);
+  getlootspawnpointcount(var_4.index);
+  ref_13698(var_4.origin, var_4.angles, self);
+  self.curorigin = var_4.origin + (0, 0, 50);
   ref_14016();
   return true;
 }
@@ -166,12 +166,12 @@ function ref_1372a() {
   }
 }
 
-function ref_1371a(var0, var1) {
-  if(!isDefined(var0)) {
+function ref_1371a(var_0, var_1) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
@@ -183,18 +183,18 @@ function ref_1371a(var0, var1) {
     self.lastcircletick = -1;
   }
 
-  var2 = gettime();
+  var_2 = gettime();
 
-  if(self.lastcircletick == var2) {
+  if(self.lastcircletick == var_2) {
     return;
   }
 
-  self.lastcircletick = var2;
-  var3 = distance2d(self.curorigin, var0);
+  self.lastcircletick = var_2;
+  var_3 = distance2d(self.curorigin, var_0);
 
-  if(var3 > var1) {
-    foreach(var5 in self.subscribedinstances) {
-      failscavengerquest(var5);
+  if(var_3 > var_1) {
+    foreach(var_5 in self.subscribedinstances) {
+      failscavengerquest(var_5);
     }
 
     return;
@@ -205,117 +205,117 @@ function ref_13718() {
   return false;
 }
 
-function takequestitem(var0) {
-  var1 = scripts\mp\gametypes\br_quest_util::createquestinstance("scavenger_soa_tower", self.team, var0.index, var0);
-  var1 scripts\mp\gametypes\br_quest_util::registerteamonquest(self.team, self);
-  var1 scripts\mp\gametypes\br_quest_util::ref_12b15(self);
-  var1.team = self.team;
-  var1.playerlist = scripts\mp\utility\teams::getteamdata(self.team, "players");
-  var1.startlocation = self.origin;
-  var1.intelprogress = self.origin;
-  var1.ref_12c4a = var0.ref_12c4a;
-  var2 = ref_11a00(var1.startlocation, var1.ref_12c4a[0]);
-  var3 = var1 scripts\mp\gametypes\br_quest_util::requestquestlocale("scavenger_locale_soa_tower", var2, 1);
+function takequestitem(var_0) {
+  var_1 = scripts\mp\gametypes\br_quest_util::createquestinstance("scavenger_soa_tower", self.team, var_0.index, var_0);
+  var_1 scripts\mp\gametypes\br_quest_util::registerteamonquest(self.team, self);
+  var_1 scripts\mp\gametypes\br_quest_util::ref_12b15(self);
+  var_1.team = self.team;
+  var_1.playerlist = scripts\mp\utility\teams::getteamdata(self.team, "players");
+  var_1.startlocation = self.origin;
+  var_1.intelprogress = self.origin;
+  var_1.ref_12c4a = var_0.ref_12c4a;
+  var_2 = ref_11a00(var_1.startlocation, var_1.ref_12c4a[0]);
+  var_3 = var_1 scripts\mp\gametypes\br_quest_util::requestquestlocale("scavenger_locale_soa_tower", var_2, 1);
   scripts\mp\gametypes\br_quest_util::uiobjectiveshowtoteam("scavenger_soa_tower", self.team);
-  var1.totalscavengeditems = 0;
-  var1 scripts\mp\gametypes\br_quest_util::ref_1297d(scripts\mp\gametypes\br_quest_util::getquestdata("scavenger_soa_tower").ref_11c4c, 4);
-  scripts\mp\gametypes\br_quest_util::addquestinstance("scavenger_soa_tower", var1);
+  var_1.totalscavengeditems = 0;
+  var_1 scripts\mp\gametypes\br_quest_util::ref_1297d(scripts\mp\gametypes\br_quest_util::getquestdata("scavenger_soa_tower").ref_11c4c, 4);
+  scripts\mp\gametypes\br_quest_util::addquestinstance("scavenger_soa_tower", var_1);
   scripts\mp\gametypes\br_quest_util::ref_13879("scavenger_soa_tower", self, self.team);
-  var4 = spawnStruct();
-  var4.excludedplayers = [];
-  var4.excludedplayers[0] = self;
-  var4.ref_127d5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("scavenger_soa_tower", scripts\mp\gametypes\br_quest_util::ringing(self.team));
-  scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_scavenger_soa_tower_quest_start_team", var4);
-  scripts\mp\gametypes\br_quest_util::displayplayersplash(self, "br_scavenger_soa_tower_quest_start_tablet_finder", var4);
+  var_4 = spawnStruct();
+  var_4.excludedplayers = [];
+  var_4.excludedplayers[0] = self;
+  var_4.ref_127d5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("scavenger_soa_tower", scripts\mp\gametypes\br_quest_util::ringing(self.team));
+  scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_scavenger_soa_tower_quest_start_team", var_4);
+  scripts\mp\gametypes\br_quest_util::displayplayersplash(self, "br_scavenger_soa_tower_quest_start_tablet_finder", var_4);
 
   if(!scripts\mp\gametypes\br_public::validtousesticker()) {
     scripts\mp\gametypes\br_quest_util::searchfunc(self.team, "br_mission_pickup_tablet");
   }
 
-  scripts\mp\gametypes\br_quest_util::lookforvehicles(var1.team, self, 6, scripts\mp\gametypes\br_quest_util::getquestindex("scavenger_soa_tower"));
-  level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_gen_accept", var1.team, 1);
+  scripts\mp\gametypes\br_quest_util::lookforvehicles(var_1.team, self, 6, scripts\mp\gametypes\br_quest_util::getquestindex("scavenger_soa_tower"));
+  level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_gen_accept", var_1.team, 1);
 }
 
-function ref_11a00(var0, var1) {
-  var2 = spawnStruct();
-  var2.ref_12fa3 = "getUnusedLootCacheArray";
-  var2.ref_12f9f = var0;
-  var2.ref_12fa6 = 10000;
-  var2.ref_12fa7 = 0;
-  var2.ref_12fa4 = 4000;
-  var2.ref_12fa5 = 2000;
-  var2.ref_12fa1 = 1;
-  var2.ref_12c4a = var1;
-  var2.mintime = 45;
+function ref_11a00(var_0, var_1) {
+  var_2 = spawnStruct();
+  var_2.ref_12fa3 = "getUnusedLootCacheArray";
+  var_2.ref_12f9f = var_0;
+  var_2.ref_12fa6 = 10000;
+  var_2.ref_12fa7 = 0;
+  var_2.ref_12fa4 = 4000;
+  var_2.ref_12fa5 = 2000;
+  var_2.ref_12fa1 = 1;
+  var_2.ref_12c4a = var_1;
+  var_2.mintime = 45;
 
   if(playoverwatch_dialogue()) {
-    if(var2.ref_12fa6 < level.ref_12967) {
-      var2.ref_12fa6 = level.ref_12967;
+    if(var_2.ref_12fa6 < level.ref_12967) {
+      var_2.ref_12fa6 = level.ref_12967;
     }
 
-    var2.ref_12fa4 = level.ref_12967;
-    var2.ref_12fa5 = level.ref_12968;
+    var_2.ref_12fa4 = level.ref_12967;
+    var_2.ref_12fa5 = level.ref_12968;
   }
 
-  var3 = getdvarint("scr_br_questScavDistMin", -1);
-  var4 = getdvarint("scr_br_questScavDistMax", -1);
+  var_3 = getdvarint("scr_br_questScavDistMin", -1);
+  var_4 = getdvarint("scr_br_questScavDistMax", -1);
 
-  if(var3 >= 0) {
-    var2.ref_12fa5 = var3;
+  if(var_3 >= 0) {
+    var_2.ref_12fa5 = var_3;
   }
 
-  if(var4 >= 0) {
-    var2.ref_12fa4 = var4;
+  if(var_4 >= 0) {
+    var_2.ref_12fa4 = var_4;
   }
 
-  return var2;
+  return var_2;
 }
 
 function playoverwatch_dialogue() {
-  var0 = 0;
-  var1 = scripts\mp\gametypes\br_gametypes::ref_12e05("overrideQuestSearchParams", "scavenger_soa_tower");
+  var_0 = 0;
+  var_1 = scripts\mp\gametypes\br_gametypes::ref_12e05("overrideQuestSearchParams", "scavenger_soa_tower");
 
-  if(isDefined(var1)) {
-    return var1;
+  if(isDefined(var_1)) {
+    return var_1;
   }
 
-  var2 = scripts\mp\utility\game::round_vehicle_logic();
+  var_2 = scripts\mp\utility\game::round_vehicle_logic();
 
-  switch (var2) {
+  switch (var_2) {
     case "mini":
     case "risk":
     case "rat_race":
     case "dmz":
-      var0 = 1;
+      var_0 = 1;
       break;
   }
 
-  return var0;
+  return var_0;
 }
 
-function hint_target_think(var0) {
-  var1 = easepower("brloot_access_card_gold_vault_lockbox_1", var0.origin + (0, 0, 20));
-  scripts\mp\gametypes\br_pickups::ref_12b3a(var1);
-  playsoundatpos(var1.origin, "br_legendary_loot_drop");
-  var2 = spawnStruct();
-  var3 = scripts\mp\gametypes\br_quest_util::ringing(self.team);
-  var4 = scripts\mp\gametypes\br_quest_util::getquestindex("scavenger_soa_tower");
-  var5 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("scavenger_soa_tower"));
-  var2.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var4, var3, var5);
+function hint_target_think(var_0) {
+  var_1 = easepower("brloot_access_card_gold_vault_lockbox_1", var_0.origin + (0, 0, 20));
+  scripts\mp\gametypes\br_pickups::ref_12b3a(var_1);
+  playsoundatpos(var_1.origin, "br_legendary_loot_drop");
+  var_2 = spawnStruct();
+  var_3 = scripts\mp\gametypes\br_quest_util::ringing(self.team);
+  var_4 = scripts\mp\gametypes\br_quest_util::getquestindex("scavenger_soa_tower");
+  var_5 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("scavenger_soa_tower"));
+  var_2.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var_4, var_3, var_5);
 
-  foreach(var7 in self.playerlist) {
-    if(isDefined(var7) && getdvarint("MLNNMOPQOP", 0) == 6) {
-      var7 scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_complete_side_mission_for_s3_5_event_wz", 1);
+  foreach(var_7 in self.playerlist) {
+    if(isDefined(var_7) && getdvarint("MLNNMOPQOP", 0) == 6) {
+      var_7 scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_complete_side_mission_for_s3_5_event_wz", 1);
     }
   }
 
   if(!scripts\mp\gametypes\br_public::validtousesticker()) {
-    scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_scavenger_soa_tower_quest_complete", var2);
+    scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_scavenger_soa_tower_quest_complete", var_2);
     level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_misc_success", self.team, 1, 1);
   }
 
-  self.ref_12d2e = var0.origin;
-  self.ref_12d2b = var0.angles;
+  self.ref_12d2e = var_0.origin;
+  self.ref_12d2b = var_0.angles;
   self.result = "success";
   scripts\mp\gametypes\br_quest_util::removequestinstance();
 }
@@ -328,31 +328,31 @@ function failscavengerquest() {
 }
 
 function ref_14016() {
-  foreach(var1 in self.playerlist) {
-    var1 scripts\mp\gametypes\br_quest_util::uiobjectivesetparameter(self.ref_12320);
+  foreach(var_1 in self.playerlist) {
+    var_1 scripts\mp\gametypes\br_quest_util::uiobjectivesetparameter(self.ref_12320);
   }
 
-  var3 = scripts\mp\gametypes\br_quest_util::sortvalidplayersinarray(self.playerlist);
+  var_3 = scripts\mp\gametypes\br_quest_util::sortvalidplayersinarray(self.playerlist);
 
-  foreach(var1 in var3["valid"]) {
-    var1 scripts\mp\gametypes\br_quest_util::uiobjectiveshow("scavenger_soa_tower");
-    scripts\mp\gametypes\br_quest_util::ref_1336c(var1);
+  foreach(var_1 in var_3["valid"]) {
+    var_1 scripts\mp\gametypes\br_quest_util::uiobjectiveshow("scavenger_soa_tower");
+    scripts\mp\gametypes\br_quest_util::ref_1336c(var_1);
   }
 
-  foreach(var1 in var3["invalid"]) {
-    var1 scripts\mp\gametypes\br_quest_util::uiobjectivehide();
-    scripts\mp\gametypes\br_quest_util::spawn_downed_friendly(var1);
+  foreach(var_1 in var_3["invalid"]) {
+    var_1 scripts\mp\gametypes\br_quest_util::uiobjectivehide();
+    scripts\mp\gametypes\br_quest_util::spawn_downed_friendly(var_1);
   }
 }
 
-function spawn_dwn_twn_enemy_sentry(var0) {
-  scripts\mp\gametypes\br_quest_util::spawn_downed_friendly(var0);
-  var0 scripts\mp\gametypes\br_quest_util::uiobjectivehide();
+function spawn_dwn_twn_enemy_sentry(var_0) {
+  scripts\mp\gametypes\br_quest_util::spawn_downed_friendly(var_0);
+  var_0 scripts\mp\gametypes\br_quest_util::uiobjectivehide();
 }
 
 function lastdroppableweaponchanged() {
-  foreach(var1 in self.playerlist) {
-    spawn_dwn_twn_enemy_sentry(var1);
+  foreach(var_1 in self.playerlist) {
+    spawn_dwn_twn_enemy_sentry(var_1);
   }
 
   scripts\mp\gametypes\br_quest_util::lastdropedtime();
@@ -363,23 +363,23 @@ function ref_13725() {
   level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_gen_fail", self.team, 1);
 }
 
-function ref_13698(var0, var1, var2) {
-  var3 = ref_129f6();
-  var0 = var3.origin;
-  var1 = var3.angles;
-  var4 = spawn("script_model", var0);
-  var5 = var2.playerlist[0];
-  var4.angles = var1;
-  var4 setotherent(var5);
-  var4 setModel("military_loot_crate_01_br_scavenger_01_soa_tower");
-  var4 setscriptablepartstate("body", "scavenger_soa_tower_closed");
-  var4.questlocale = var2;
-  var2.force_spawn_all_dead_players = var4;
-  var2 scripts\mp\gametypes\br_quest_util::ref_11db0(var3.origin + (0, 0, 50));
+function ref_13698(var_0, var_1, var_2) {
+  var_3 = ref_129f6();
+  var_0 = var_3.origin;
+  var_1 = var_3.angles;
+  var_4 = spawn("script_model", var_0);
+  var_5 = var_2.playerlist[0];
+  var_4.angles = var_1;
+  var_4 setotherent(var_5);
+  var_4 setModel("military_loot_crate_01_br_scavenger_01_soa_tower");
+  var_4 setscriptablepartstate("body", "scavenger_soa_tower_closed");
+  var_4.questlocale = var_2;
+  var_2.force_spawn_all_dead_players = var_4;
+  var_2 scripts\mp\gametypes\br_quest_util::ref_11db0(var_3.origin + (0, 0, 50));
 
-  foreach(var7 in level.players) {
-    if(var7 != var5 && (var5.team == "none" || var7.team != var5.team)) {
-      var4 disablescriptableplayeruse(var7);
+  foreach(var_7 in level.players) {
+    if(var_7 != var_5 && (var_5.team == "none" || var_7.team != var_5.team)) {
+      var_4 disablescriptableplayeruse(var_7);
     }
   }
 }
@@ -400,65 +400,65 @@ function streakdeploy_playtabletdeploydialog() {
   level.areanygulagfightsactive[2][2] = strafereverse_cleanup(scripts\engine\utility::drop_to_ground((20500, -15233, 442), 0, -100, (0, 0, 1)), (0, 270, 0));
 }
 
-function strafereverse_cleanup(var0, var1) {
-  var2 = spawnStruct();
-  var2.origin = var0;
-  var2.angles = var1;
-  return var2;
+function strafereverse_cleanup(var_0, var_1) {
+  var_2 = spawnStruct();
+  var_2.origin = var_0;
+  var_2.angles = var_1;
+  return var_2;
 }
 
 function ref_129f6() {
-  var0 = randomint(level.areanygulagfightsactive[self.ref_12320].size);
-  var1 = level.areanygulagfightsactive[self.ref_12320][var0];
-  level.areanygulagfightsactive[self.ref_12320] = scripts\engine\utility::array_remove(level.areanygulagfightsactive[self.ref_12320], var1);
-  return var1;
+  var_0 = randomint(level.areanygulagfightsactive[self.ref_12320].size);
+  var_1 = level.areanygulagfightsactive[self.ref_12320][var_0];
+  level.areanygulagfightsactive[self.ref_12320] = scripts\engine\utility::array_remove(level.areanygulagfightsactive[self.ref_12320], var_1);
+  return var_1;
 }
 
-function ref_12ed6(var0, var1, var2, var3, var4) {
-  if(istrue(var3 scripts\mp\gametypes\br_gametypes::ref_12e05("playerSkipLootPickup", var0))) {
+function ref_12ed6(var_0, var_1, var_2, var_3, var_4) {
+  if(istrue(var_3 scripts\mp\gametypes\br_gametypes::ref_12e05("playerSkipLootPickup", var_0))) {
     return;
   }
 
-  if(var2 == "scavenger_soa_tower_closed" && isDefined(var0.entity)) {
-    var5 = var0.entity.questlocale.subscribedinstances[0];
+  if(var_2 == "scavenger_soa_tower_closed" && isDefined(var_0.entity)) {
+    var_5 = var_0.entity.questlocale.subscribedinstances[0];
 
-    if(var3.team != var5.team) {
-      var3 iprintlnbold("Chest Requires a Scavenger Mission");
+    if(var_3.team != var_5.team) {
+      var_3 iprintlnbold("Chest Requires a Scavenger Mission");
       return;
     }
 
-    var0 setscriptablepartstate("body", "scavenger_soa_tower_opening");
-    var6 = getdvarint("scr_br_scavenger_cacheDeleteDelay", 30);
-    var0.entity scripts\engine\utility::delaycallwatchself(var6, &delete);
-    var5 scripts\mp\gametypes\br_quest_util::ref_12b15(var3);
+    var_0 setscriptablepartstate("body", "scavenger_soa_tower_opening");
+    var_6 = getdvarint("scr_br_scavenger_cacheDeleteDelay", 30);
+    var_0.entity scripts\engine\utility::delaycallwatchself(var_6, &delete);
+    var_5 scripts\mp\gametypes\br_quest_util::ref_12b15(var_3);
 
-    switch (var0.entity.questlocale.ref_12320) {
+    switch (var_0.entity.questlocale.ref_12320) {
       case 0:
-        ref_13464(var0.entity);
+        ref_13464(var_0.entity);
         break;
       case 1:
-        ref_13464(var0.entity);
+        ref_13464(var_0.entity);
         break;
       case 3:
         break;
     }
 
-    if(var0.entity.questlocale.ref_12320 == 2) {
-      var5.ref_12d2e = var0.origin;
-      var5.ref_12d2b = var0.angles;
-      scripts\mp\gametypes\br_quest_util::lookforvehicles(var5.team, var3, 8, scripts\mp\gametypes\br_quest_util::getquestindex("scavenger_soa_tower"));
-      hint_target_think(var5, var0.entity);
+    if(var_0.entity.questlocale.ref_12320 == 2) {
+      var_5.ref_12d2e = var_0.origin;
+      var_5.ref_12d2b = var_0.angles;
+      scripts\mp\gametypes\br_quest_util::lookforvehicles(var_5.team, var_3, 8, scripts\mp\gametypes\br_quest_util::getquestindex("scavenger_soa_tower"));
+      hint_target_think(var_5, var_0.entity);
     } else {
-      scripts\mp\gametypes\br_quest_util::lookforvehicles(var5.team, var3, 7, scripts\mp\gametypes\br_quest_util::getquestindex("scavenger_soa_tower"));
-      var7 = ref_11a00(var0.origin, var5.ref_12c4a[var0.entity.questlocale.ref_12320 + 1]);
-      var0.entity.questlocale scripts\mp\gametypes\br_quest_util::ref_11daf("scavenger_locale_soa_tower", var7);
+      scripts\mp\gametypes\br_quest_util::lookforvehicles(var_5.team, var_3, 7, scripts\mp\gametypes\br_quest_util::getquestindex("scavenger_soa_tower"));
+      var_7 = ref_11a00(var_0.origin, var_5.ref_12c4a[var_0.entity.questlocale.ref_12320 + 1]);
+      var_0.entity.questlocale scripts\mp\gametypes\br_quest_util::ref_11daf("scavenger_locale_soa_tower", var_7);
     }
 
-    level notify("lootcache_opened_kill_callout" + var0.origin);
-    var8 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getFriendlyPlayers")]](var3.team, 0);
+    level notify("lootcache_opened_kill_callout" + var_0.origin);
+    var_8 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getFriendlyPlayers")]](var_3.team, 0);
 
-    foreach(var10 in var8) {
-      var10 notify("calloutmarkerping_warzoneKillQuestIcon");
+    foreach(var_10 in var_8) {
+      var_10 notify("calloutmarkerping_warzoneKillQuestIcon");
     }
 
     return;
@@ -466,37 +466,37 @@ function ref_12ed6(var0, var1, var2, var3, var4) {
 }
 
 function ref_13464() {
-  var0 = ["weapon", "lethal", "ammo", "plunder"];
-  var0 = scripts\engine\utility::array_randomize(var0);
-  var1 = var0.size;
-  var2 = "mp/loot/br/bodycount/lootset_root.csv";
-  var3 = scripts\mp\gametypes\br_pickups::test_ai_anim();
+  var_0 = ["weapon", "lethal", "ammo", "plunder"];
+  var_0 = scripts\engine\utility::array_randomize(var_0);
+  var_1 = var_0.size;
+  var_2 = "mp/loot/br/bodycount/lootset_root.csv";
+  var_3 = scripts\mp\gametypes\br_pickups::test_ai_anim();
 
-  for(var4 = 0; var4 < var1; var4++) {
-    var5 = registerscriptedspawnpoints(var0[var4], 0, 3, var2);
+  for(var_4 = 0; var_4 < var_1; var_4++) {
+    var_5 = registerscriptedspawnpoints(var_0[var_4], 0, 3, var_2);
 
-    if(scripts\mp\gametypes\br_lootcache::get_bonus_targets(var5)) {
-      var6 = self.angles + (0, 45, 0);
-      scripts\mp\gametypes\br_lootcache::ref_11a41(var5, var3, self.origin, var6, undefined, 0);
+    if(scripts\mp\gametypes\br_lootcache::get_bonus_targets(var_5)) {
+      var_6 = self.angles + (0, 45, 0);
+      scripts\mp\gametypes\br_lootcache::ref_11a41(var_5, var_3, self.origin, var_6, undefined, 0);
     }
   }
 }
 
 function ref_13732() {
   self.ref_12c4a = [];
-  var0 = self.origin;
+  var_0 = self.origin;
 
-  for(var1 = 0; var1 < 3; var1++) {
-    var2 = ref_11a00(var0);
-    var3 = scripts\mp\gametypes\br_quest_util::play_train_speaker_vo("scavenger_soa_tower", var2);
+  for(var_1 = 0; var_1 < 3; var_1++) {
+    var_2 = ref_11a00(var_0);
+    var_3 = scripts\mp\gametypes\br_quest_util::play_train_speaker_vo("scavenger_soa_tower", var_2);
 
-    if(!isDefined(var3)) {
+    if(!isDefined(var_3)) {
       return false;
     }
 
-    getlootspawnpointcount(var3.index);
-    var0 = var3.origin;
-    self.ref_12c4a[var1] = var3;
+    getlootspawnpointcount(var_3.index);
+    var_0 = var_3.origin;
+    self.ref_12c4a[var_1] = var_3;
   }
 
   return true;

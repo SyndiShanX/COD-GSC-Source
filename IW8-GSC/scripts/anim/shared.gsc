@@ -3,120 +3,120 @@
  * Script: scripts\anim\shared.gsc
 ***********************************************/
 
-function placeweaponon(var0, var1, var2) {
-  var3 = undefined;
-  var4 = undefined;
+function placeweaponon(var_0, var_1, var_2) {
+  var_3 = undefined;
+  var_4 = undefined;
 
-  if(issameweapon(var0)) {
-    var3 = var0;
-    var4 = createheadicon(var0);
+  if(issameweapon(var_0)) {
+    var_3 = var_0;
+    var_4 = createheadicon(var_0);
   } else {
-    var3 = asmdevgetallstates(var0);
-    var4 = var0;
+    var_3 = asmdevgetallstates(var_0);
+    var_4 = var_0;
   }
 
   self notify("weapon_position_change");
-  var5 = self.weaponinfo[var4].position;
+  var_5 = self.weaponinfo[var_4].position;
 
-  if(var1 != "none" && isDefined(self.a.weaponpos[var1]) && self.a.weaponpos[var1] == var3) {
+  if(var_1 != "none" && isDefined(self.a.weaponpos[var_1]) && self.a.weaponpos[var_1] == var_3) {
     return;
   }
 
   detachallweaponmodels();
 
-  if(var5 != "none") {
-    detachweapon(var3);
+  if(var_5 != "none") {
+    detachweapon(var_3);
   }
 
-  if(var1 == "none") {
+  if(var_1 == "none") {
     updateattachedweaponmodels();
     return;
   }
 
-  if(!getqueuedspleveltransients(self.a.weaponpos[var1])) {
-    detachweapon(self.a.weaponpos[var1]);
+  if(!getqueuedspleveltransients(self.a.weaponpos[var_1])) {
+    detachweapon(self.a.weaponpos[var_1]);
   }
 
-  if(!isDefined(var2)) {
-    var2 = 1;
+  if(!isDefined(var_2)) {
+    var_2 = 1;
   }
 
-  if(var2 && (var1 == "left" || var1 == "right")) {
-    attachweapon(var3, var1);
-    self.weapon = var3;
+  if(var_2 && (var_1 == "left" || var_1 == "right")) {
+    attachweapon(var_3, var_1);
+    self.weapon = var_3;
   } else {
-    attachweapon(var3, var1);
+    attachweapon(var_3, var_1);
   }
 
   updateattachedweaponmodels();
 }
 
-function detachweapon(var0) {
-  var1 = createheadicon(var0);
-  self.a.weaponpos[self.weaponinfo[var1].position] = undefined;
-  self.weaponinfo[var1].position = "none";
+function detachweapon(var_0) {
+  var_1 = createheadicon(var_0);
+  self.a.weaponpos[self.weaponinfo[var_1].position] = undefined;
+  self.weaponinfo[var_1].position = "none";
 }
 
-function attachweapon(var0, var1) {
-  var2 = createheadicon(var0);
-  self.weaponinfo[var2].position = var1;
-  self.a.weaponpos[var1] = var0;
+function attachweapon(var_0, var_1) {
+  var_2 = createheadicon(var_0);
+  self.weaponinfo[var_2].position = var_1;
+  self.a.weaponpos[var_1] = var_0;
 
-  if(!getqueuedspleveltransients(self.a.weaponposdropping[var1])) {
-    self notify("end_weapon_drop_" + var1);
-    self.a.weaponposdropping[var1] = undefined;
+  if(!getqueuedspleveltransients(self.a.weaponposdropping[var_1])) {
+    self notify("end_weapon_drop_" + var_1);
+    self.a.weaponposdropping[var_1] = undefined;
     return;
   }
 }
 
-function getweaponforpos(var0) {
-  var1 = self.a.weaponpos[var0];
+function getweaponforpos(var_0) {
+  var_1 = self.a.weaponpos[var_0];
 
-  if(getqueuedspleveltransients(var1)) {
-    return self.a.weaponposdropping[var0];
+  if(getqueuedspleveltransients(var_1)) {
+    return self.a.weaponposdropping[var_0];
   }
 
-  return var1;
+  return var_1;
 }
 
 function detachallweaponmodels() {
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, "right");
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, "right");
 }
 
 function updateattachedweaponmodels() {
-  var0 = [];
-  var1 = [];
-  var2 = [];
-  var0 = "right";
-  var0 = "left";
-  var0 = "chest";
-  var0 = "back";
-  var0 = "thigh";
+  var_0 = [];
+  var_1 = [];
+  var_2 = [];
+  var_0 = "right";
+  var_0 = "left";
+  var_0 = "chest";
+  var_0 = "back";
+  var_0 = "thigh";
 
-  foreach(var4 in var0) {
-    var5 = var1.size;
-    var6 = getweaponforpos(var4);
+  foreach(var_4 in var_0) {
+    var_5 = var_1.size;
+    var_6 = getweaponforpos(var_4);
 
-    if(!getqueuedspleveltransients(var6) && !nullweapon(var6)) {
-      var7 = createheadicon(var6);
+    if(!getqueuedspleveltransients(var_6) && !nullweapon(var_6)) {
+      var_7 = createheadicon(var_6);
 
-      if(self.weaponinfo[var7].useclip && !self.weaponinfo[var7].hasclip) {
-        var6 = var6 withoutattachment(var6.magazine);
+      if(self.weaponinfo[var_7].useclip && !self.weaponinfo[var_7].hasclip) {
+        var_6 = var_6 withoutattachment(var_6.magazine);
       }
     }
 
-    if(isDefined(var6)) {
-      var8 = gettagforpos(var4);
+    if(isDefined(var_6)) {
+      var_8 = gettagforpos(var_4);
 
-      if(self tagexists(var8)) {
-        var1 = var6;
-        var2 = var8;
+      if(self tagexists(var_8)) {
+        var_1 = var_6;
+        var_2 = var_8;
       }
     }
   }
 
-  self updateentitywithweapons(var1[0], var2[0], var1[1], var2[1], var1[2], var2[2], var1[3], var2[3]);
+  self updateentitywithweapons(var_1[0], var_2[0], var_1[1], var_2[1], var_1[2], var_2[2], var_1[3], var_2[3]);
   updatelaserstatus();
 }
 
@@ -150,8 +150,8 @@ function canuselaser() {
   return isalive(self);
 }
 
-function gettagforpos(var0) {
-  switch (var0) {
+function gettagforpos(var_0) {
+  switch (var_0) {
     case "chest":
       return "tag_stowed_chest";
     case "back":
@@ -169,29 +169,29 @@ function gettagforpos(var0) {
   }
 }
 
-function dropaiweaponinternal(var0) {
-  var1 = createheadicon(var0);
-  var2 = self.weaponinfo[var1].position;
+function dropaiweaponinternal(var_0) {
+  var_1 = createheadicon(var_0);
+  var_2 = self.weaponinfo[var_1].position;
 
-  if(self.dropweapon && var2 != "none") {
-    thread dropweaponwrapper(var0, var2);
+  if(self.dropweapon && var_2 != "none") {
+    thread dropweaponwrapper(var_0, var_2);
   }
 
-  detachweapon(var0);
+  detachweapon(var_0);
 
-  if(var0 == self.weapon) {
+  if(var_0 == self.weapon) {
     self.weapon = isundefinedweapon();
   }
 
-  if(var0 == self.primaryweapon) {
+  if(var_0 == self.primaryweapon) {
     self.primaryweapon = isundefinedweapon();
   }
 
-  if(var0 == self.secondaryweapon) {
+  if(var_0 == self.secondaryweapon) {
     self.secondaryweapon = isundefinedweapon();
   }
 
-  if(var0 == self.sidearm) {
+  if(var_0 == self.sidearm) {
     if(!nullweapon(self.primaryweapon)) {
       dropaiweaponinternal(self.primaryweapon);
     }
@@ -201,12 +201,12 @@ function dropaiweaponinternal(var0) {
   }
 }
 
-function dropaiweapon(var0) {
-  if(!isDefined(var0)) {
-    var0 = self.weapon;
+function dropaiweapon(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = self.weapon;
   }
 
-  if(nullweapon(var0)) {
+  if(nullweapon(var_0)) {
     return;
   }
 
@@ -215,7 +215,7 @@ function dropaiweapon(var0) {
   }
 
   detachallweaponmodels();
-  dropaiweaponinternal(var0);
+  dropaiweaponinternal(var_0);
 
   if(nullweapon(self.primaryweapon)) {
     if(!nullweapon(self.weapon)) {
@@ -243,77 +243,77 @@ function dropallaiweapons() {
     return;
   }
 
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, "left");
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, "left");
 }
 
-function dropweaponwrapper(var0, var1) {
+function dropweaponwrapper(var_0, var_1) {
   if(self isragdoll()) {
     return "none";
   }
 
-  self.a.weaponposdropping[var1] = var0;
-  var2 = var0;
-  var3 = var0.basename;
+  self.a.weaponposdropping[var_1] = var_0;
+  var_2 = var_0;
+  var_3 = var_0.basename;
 
-  if(issubstr(tolower(var3), "_ai")) {
-    var3 = getsubstr(var3, 0, var3.size - 3);
-    var2 = getcompleteweaponname(var3, var0.attachments);
+  if(issubstr(tolower(var_3), "_ai")) {
+    var_3 = getsubstr(var_3, 0, var_3.size - 3);
+    var_2 = getcompleteweaponname(var_3, var_0.attachments);
   }
 
-  thread setdroppedweaponammo(var2);
+  thread setdroppedweaponammo(var_2);
 
   if(isagent(self)) {
     if(isDefined(level.dropped_weapon_func)) {
-      self thread[[level.dropped_weapon_func]](var2, var1);
+      self thread[[level.dropped_weapon_func]](var_2, var_1);
     } else {
-      self dropweaponnovelocity(var2, var1);
+      self dropweaponnovelocity(var_2, var_1);
     }
   } else if(canaiflingweapon(self)) {
-    if(var1 == "back" || var1 == "thigh") {
-      var4 = "tag_stowed_" + var1;
+    if(var_1 == "back" || var_1 == "thigh") {
+      var_4 = "tag_stowed_" + var_1;
     } else {
-      var4 = "tag_weapon_" + var2;
+      var_4 = "tag_weapon_" + var_2;
     }
 
-    if(!scripts\engine\utility::hastag(self.model, var4)) {
-      self dropweapon(var3, var2, 0);
-      self endon("end_weapon_drop_" + var2);
+    if(!scripts\engine\utility::hastag(self.model, var_4)) {
+      self dropweapon(var_3, var_2, 0);
+      self endon("end_weapon_drop_" + var_2);
       waitframe();
       return;
     }
 
-    var5 = self gettagorigin(var4);
-    self endon("end_weapon_drop_" + var2);
+    var_5 = self gettagorigin(var_4);
+    self endon("end_weapon_drop_" + var_2);
     waitframe();
 
     if(!isDefined(self)) {
       return;
     }
 
-    var6 = self gettagorigin(var4);
-    var7 = self gettagangles(var4);
-    var8 = createheadicon(var3);
-    var9 = spawn("weapon_" + var8, var6);
-    var9.angles = var7;
-    var10 = var6 - var5;
-    var11 = vectorNormalize(var10);
-    var12 = 20;
-    var13 = 50;
-    var14 = min(length(var10) * var12, var13);
-    var15 = var11 * var14;
-    var16 = (0, 0, 950);
-    var17 = var6 + var11 * -1;
-    var18 = var15 + var16;
+    var_6 = self gettagorigin(var_4);
+    var_7 = self gettagangles(var_4);
+    var_8 = createheadicon(var_3);
+    var_9 = spawn("weapon_" + var_8, var_6);
+    var_9.angles = var_7;
+    var_10 = var_6 - var_5;
+    var_11 = vectorNormalize(var_10);
+    var_12 = 20;
+    var_13 = 50;
+    var_14 = min(length(var_10) * var_12, var_13);
+    var_15 = var_11 * var_14;
+    var_16 = (0, 0, 950);
+    var_17 = var_6 + var_11 * -1;
+    var_18 = var_15 + var_16;
 
-    if(weaponclass(var3) == "pistol") {
-      var18 *= 0.5;
+    if(weaponclass(var_3) == "pistol") {
+      var_18 *= 0.5;
     }
 
-    var9 physicslaunchserveritem(var17, var18);
+    var_9 physicslaunchserveritem(var_17, var_18);
   } else {
-    self dropweapon(var3, var2, 0);
-    self endon("end_weapon_drop_" + var2);
+    self dropweapon(var_3, var_2, 0);
+    self endon("end_weapon_drop_" + var_2);
     waitframe();
   }
 
@@ -326,11 +326,11 @@ function dropweaponwrapper(var0, var1) {
   }
 
   detachallweaponmodels();
-  self.a.weaponposdropping[var2] = undefined;
+  self.a.weaponposdropping[var_2] = undefined;
   updateattachedweaponmodels();
 }
 
-function canaiflingweapon(var0) {
+function canaiflingweapon(var_0) {
   if(!getdvarint("scr_ai_fling_gun", 0)) {
     return false;
   }
@@ -339,37 +339,37 @@ function canaiflingweapon(var0) {
     return false;
   }
 
-  if(!isDefined(var0.lastattacker)) {
+  if(!isDefined(var_0.lastattacker)) {
     return false;
   }
 
-  if(!isPlayer(var0.lastattacker)) {
+  if(!isPlayer(var_0.lastattacker)) {
     return false;
   }
 
-  if(isexplosivedamagemod(var0.damagemod)) {
+  if(isexplosivedamagemod(var_0.damagemod)) {
     return true;
   }
 
-  var1 = 300;
+  var_1 = 300;
 
-  if(distance(var0.lastattacker.origin, var0.origin) < var1) {
+  if(distance(var_0.lastattacker.origin, var_0.origin) < var_1) {
     return false;
   }
 
   return true;
 }
 
-function setdroppedweaponammo(var0) {
-  self waittill("weapon_dropped", var1);
-  var1 endon("death");
+function setdroppedweaponammo(var_0) {
+  self waittill("weapon_dropped", var_1);
+  var_1 endon("death");
 
-  if(isDefined(var0) && isvaliddroppedweapon(var0)) {
-    if(isDefined(var1)) {
-      var1 physics_registerforcollisioncallback();
-      thread weapondrop_physics_callback_monitor(var1);
-      var2 = getsubstr(var1.classname, 7, var1.classname.size);
-      setscriptammo(var1, var2, self);
+  if(isDefined(var_0) && isvaliddroppedweapon(var_0)) {
+    if(isDefined(var_1)) {
+      var_1 physics_registerforcollisioncallback();
+      thread weapondrop_physics_callback_monitor(var_1);
+      var_2 = getsubstr(var_1.classname, 7, var_1.classname.size);
+      setscriptammo(var_1, var_2, self);
       return;
     }
 
@@ -377,58 +377,58 @@ function setdroppedweaponammo(var0) {
   }
 }
 
-function isvaliddroppedweapon(var0) {
-  if(var0.ismelee) {
+function isvaliddroppedweapon(var_0) {
+  if(var_0.ismelee) {
     return false;
   }
 
   return true;
 }
 
-function weapondrop_physics_callback_monitor(var0) {
+function weapondrop_physics_callback_monitor(var_0) {
   self endon("death");
   self endon("timeout");
   thread weapondrop_physics_timeout(2);
-  self waittill("collision", var1, var2, var3, var4, var5, var6, var7, var8);
-  var9 = physics_getsurfacetypefromflags(var4);
-  var10 = getsubstr(var9["name"], 9);
+  self waittill("collision", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+  var_9 = physics_getsurfacetypefromflags(var_4);
+  var_10 = getsubstr(var_9["name"], 9);
 
-  if(var10 == "user_terrain1") {
-    var10 = "user_terrain_1";
+  if(var_10 == "user_terrain1") {
+    var_10 = "user_terrain_1";
   }
 
-  if(isDefined(var0.classname) && isDefined(self)) {
-    var11 = "weap_drop_med";
+  if(isDefined(var_0.classname) && isDefined(self)) {
+    var_11 = "weap_drop_med";
 
-    switch (var0.classname) {
+    switch (var_0.classname) {
       case "rifle":
-        var11 = "weap_drop_med";
+        var_11 = "weap_drop_med";
         break;
       case "smg":
-        var11 = "weap_drop_small";
+        var_11 = "weap_drop_small";
         break;
       case "mg":
-        var11 = "weap_drop_xlarge";
+        var_11 = "weap_drop_xlarge";
         break;
       case "spread":
-        var11 = "weap_drop_large";
+        var_11 = "weap_drop_large";
         break;
       case "sniper":
-        var11 = "weap_drop_large";
+        var_11 = "weap_drop_large";
         break;
       case "pistol":
-        var11 = "weap_drop_pistol";
+        var_11 = "weap_drop_pistol";
         break;
       case "grenade":
-        var11 = "weap_drop_launcher";
+        var_11 = "weap_drop_launcher";
         break;
       case "rocketlauncher":
-        var11 = "weap_drop_launcher";
+        var_11 = "weap_drop_launcher";
         break;
     }
 
-    if(soundexists(var11)) {
-      self playsurfacesound(var11, var10);
+    if(soundexists(var_11)) {
+      self playsurfacesound(var_11, var_10);
       return;
     }
 
@@ -436,8 +436,8 @@ function weapondrop_physics_callback_monitor(var0) {
   }
 }
 
-function weapondrop_physics_timeout(var0) {
-  wait var0;
+function weapondrop_physics_timeout(var_0) {
+  wait var_0;
   self notify("timeout");
 }
 
@@ -454,13 +454,13 @@ function getaimyawtoshootentorpos() {
 }
 
 function getaimpitchtoshootentorpos() {
-  var0 = getpitchtoshootentorpos();
+  var_0 = getpitchtoshootentorpos();
 
   if(self.script == "cover_crouch" && isDefined(self.a.covermode) && self.a.covermode == "lean") {
-    var0 -= anim.covercrouchleanpitch;
+    var_0 -= anim.covercrouchleanpitch;
   }
 
-  return var0;
+  return var_0;
 }
 
 function getpitchtoshootentorpos() {
@@ -475,29 +475,29 @@ function getpitchtoshootentorpos() {
   return scripts\anim\combat_utility::getpitchtoshootspot(self.shootent getshootatpos());
 }
 
-function ramboaim(var0) {
+function ramboaim(var_0) {
   self endon("killanimscript");
-  ramboaiminternal(var0);
+  ramboaiminternal(var_0);
 }
 
-function ramboaiminternal(var0) {}
+function ramboaiminternal(var_0) {}
 
 function decidenumshotsforburst() {
-  var0 = 0;
-  var1 = weaponburstcount(self.weapon);
+  var_0 = 0;
+  var_1 = weaponburstcount(self.weapon);
 
-  if(var1) {
-    var0 = var1;
+  if(var_1) {
+    var_0 = var_1;
   } else if(scripts\anim\weaponlist::usingsemiautoweapon()) {
-    var0 = anim.semifirenumshots[randomint(anim.semifirenumshots.size)];
+    var_0 = anim.semifirenumshots[randomint(anim.semifirenumshots.size)];
   } else if(self.fastburst) {
-    var0 = anim.fastburstfirenumshots[randomint(anim.fastburstfirenumshots.size)];
+    var_0 = anim.fastburstfirenumshots[randomint(anim.fastburstfirenumshots.size)];
   } else {
-    var0 = anim.burstfirenumshots[randomint(anim.burstfirenumshots.size)];
+    var_0 = anim.burstfirenumshots[randomint(anim.burstfirenumshots.size)];
   }
 
-  if(var0 <= self.bulletsinclip) {
-    return var0;
+  if(var_0 <= self.bulletsinclip) {
+    return var_0;
   }
 
   if(self.bulletsinclip <= 0) {
@@ -508,154 +508,154 @@ function decidenumshotsforburst() {
 }
 
 function decidenumshotsforfull() {
-  var0 = self.bulletsinclip;
+  var_0 = self.bulletsinclip;
 
   if(weaponclass(self.weapon) == "mg") {
-    var1 = randomfloat(10);
+    var_1 = randomfloat(10);
 
-    if(var1 < 3) {
-      var0 = randomintrange(2, 6);
-    } else if(var1 < 8) {
-      var0 = randomintrange(6, 12);
+    if(var_1 < 3) {
+      var_0 = randomintrange(2, 6);
+    } else if(var_1 < 8) {
+      var_0 = randomintrange(6, 12);
     } else {
-      var0 = randomintrange(12, 20);
+      var_0 = randomintrange(12, 20);
     }
   }
 
-  return var0;
+  return var_0;
 }
 
-function hideweaponmagattachment(var0) {
-  self.weaponinfo[var0].hasclip = 0;
+function hideweaponmagattachment(var_0) {
+  self.weaponinfo[var_0].hasclip = 0;
   updateattachedweaponmodels();
 }
 
-function showweaponmagattachment(var0) {
-  self.weaponinfo[var0].hasclip = 1;
+function showweaponmagattachment(var_0) {
+  self.weaponinfo[var_0].hasclip = 1;
   updateattachedweaponmodels();
 }
 
-function handledropclip(var0) {
+function handledropclip(var_0) {
   self endon("abort_reload");
-  self endon(var0 + "_finished");
-  var1 = self.weapon;
-  var2 = createheadicon(var1);
-  var3 = undefined;
+  self endon(var_0 + "_finished");
+  var_1 = self.weapon;
+  var_2 = createheadicon(var_1);
+  var_3 = undefined;
 
-  if(self.weaponinfo[var2].useclip) {
-    var3 = getweaponclipmodel(self.weapon);
+  if(self.weaponinfo[var_2].useclip) {
+    var_3 = getweaponclipmodel(self.weapon);
   }
 
-  if(self.weaponinfo[var2].hasclip) {
+  if(self.weaponinfo[var_2].hasclip) {
     if(scripts\anim\utility_common::isusingsidearm()) {
       self playSound("weap_reload_pistol_clipout_npc");
     } else {
       self playSound("weap_reload_smg_clipout_npc");
     }
 
-    if(isDefined(var3)) {
-      hideweaponmagattachment(var2);
-      thread dropclipmodel(var3, "tag_clip");
+    if(isDefined(var_3)) {
+      hideweaponmagattachment(var_2);
+      thread dropclipmodel(var_3, "tag_clip");
     }
   }
 
-  var4 = 0;
+  var_4 = 0;
 
-  while(!var4) {
-    self waittill(var0, var5);
+  while(!var_4) {
+    self waittill(var_0, var_5);
 
-    if(!isarray(var5)) {
-      var5 = [var5];
+    if(!isarray(var_5)) {
+      var_5 = [var_5];
     }
 
-    foreach(var7 in var5) {
-      switch (var7) {
+    foreach(var_7 in var_5) {
+      switch (var_7) {
         case "attach clip left":
-          if(isDefined(var3)) {
-            self attach(var3, "tag_accessory_left");
+          if(isDefined(var_3)) {
+            self attach(var_3, "tag_accessory_left");
           }
 
           scripts\anim\weaponlist::refillclip();
           break;
         case "attach clip right":
-          if(isDefined(var3)) {
-            self attach(var3, "tag_accessory_right");
+          if(isDefined(var_3)) {
+            self attach(var_3, "tag_accessory_right");
           }
 
           scripts\anim\weaponlist::refillclip();
           break;
         case "detach clip nohand":
-          if(isDefined(var3)) {
-            self detach(var3, "tag_accessory_right");
+          if(isDefined(var_3)) {
+            self detach(var_3, "tag_accessory_right");
           }
 
           break;
         case "detach clip right":
-          if(isDefined(var3)) {
-            self detach(var3, "tag_accessory_right");
+          if(isDefined(var_3)) {
+            self detach(var_3, "tag_accessory_right");
 
-            if(var1 == self.weapon) {
-              showweaponmagattachment(var2);
+            if(var_1 == self.weapon) {
+              showweaponmagattachment(var_2);
             } else {
               self.weaponinfo[createheadicon(self.weapon)].hasclip = 1;
-              self.weaponinfo[var2].hasclip = 1;
+              self.weaponinfo[var_2].hasclip = 1;
             }
 
             self notify("clip_detached");
           }
 
           self.a.needstorechamber = 0;
-          var4 = 1;
+          var_4 = 1;
           break;
         case "detach clip left":
-          if(isDefined(var3)) {
-            self detach(var3, "tag_accessory_left");
+          if(isDefined(var_3)) {
+            self detach(var_3, "tag_accessory_left");
 
-            if(var1 == self.weapon) {
-              showweaponmagattachment(var2);
+            if(var_1 == self.weapon) {
+              showweaponmagattachment(var_2);
             } else {
               self.weaponinfo[createheadicon(self.weapon)].hasclip = 1;
-              self.weaponinfo[var2].hasclip = 1;
+              self.weaponinfo[var_2].hasclip = 1;
             }
 
             self notify("clip_detached");
           }
 
           self.a.needstorechamber = 0;
-          var4 = 1;
+          var_4 = 1;
           break;
       }
     }
   }
 }
 
-function dropclipmodel(var0, var1) {}
+function dropclipmodel(var_0, var_1) {}
 
-function movetonodeovertime(var0, var1) {
+function movetonodeovertime(var_0, var_1) {
   self endon("killanimscript");
-  var2 = var0.origin;
-  var3 = distancesquared(self.origin, var2);
+  var_2 = var_0.origin;
+  var_3 = distancesquared(self.origin, var_2);
 
-  if(var3 < 1) {
-    self safeteleport(var2);
+  if(var_3 < 1) {
+    self safeteleport(var_2);
     return;
   }
 
-  if(var3 > 256 && !self maymovetopoint(var2, !scripts\engine\utility::actor_is3d())) {
+  if(var_3 > 256 && !self maymovetopoint(var_2, !scripts\engine\utility::actor_is3d())) {
     return;
   }
 
   self.keepclaimednodeifvalid = 1;
-  var4 = distance(self.origin, var2);
-  var5 = int(var1 * 20);
+  var_4 = distance(self.origin, var_2);
+  var_5 = int(var_1 * 20);
 
-  for(var6 = 0; var6 < var5; var6++) {
-    var2 = var0.origin;
-    var7 = self.origin - var2;
-    var7 = vectorNormalize(var7);
-    var8 = var2 + var7 * var4;
-    var9 = var8 + (var2 - var8) * (var6 + 1) / var5;
-    self safeteleport(var9);
+  for(var_6 = 0; var_6 < var_5; var_6++) {
+    var_2 = var_0.origin;
+    var_7 = self.origin - var_2;
+    var_7 = vectorNormalize(var_7);
+    var_8 = var_2 + var_7 * var_4;
+    var_9 = var_8 + (var_2 - var_8) * (var_6 + 1) / var_5;
+    self safeteleport(var_9);
     wait 0.05;
   }
 
@@ -668,54 +668,54 @@ function returntrue() {
 
 #using_animtree("generic_human");
 
-function playlookanimation(var0, var1, var2) {
-  if(!isDefined(var2)) {
-    var2 = &returntrue;
+function playlookanimation(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
+    var_2 = &returntrue;
   }
 
-  for(var3 = 0; var3 < var1 * 10; var3++) {
+  for(var_3 = 0; var_3 < var_1 * 10; var_3++) {
     if(isalive(self.enemy)) {
-      if(scripts\anim\utility_common::canseeenemy() && [[var2]]()) {
+      if(scripts\anim\utility_common::canseeenemy() && [[var_2]]()) {
         return;
       }
     }
 
-    if(scripts\anim\utility_common::issuppressedwrapper() && [[var2]]()) {
+    if(scripts\anim\utility_common::issuppressedwrapper() && [[var_2]]()) {
       return;
     }
 
-    self setanimknoball(var0, %body, 1, 0.1);
+    self setanimknoball(var_0, %body, 1, 0.1);
     wait 0.1;
   }
 }
 
-function throwdownweapon(var0) {
+function throwdownweapon(var_0) {
   self endon("killanimscript");
   placeweaponon(self.secondaryweapon, "right");
   scripts\common\gameskill::didsomethingotherthanshooting();
 }
 
 function rpgplayerrepulsor() {
-  var0 = rpgplayerrepulsor_getnummisses();
+  var_0 = rpgplayerrepulsor_getnummisses();
 
-  if(var0 == 0) {
+  if(var_0 == 0) {
     return;
   }
 
   self endon("death");
 
   for(;;) {
-    level waittill("an_enemy_shot", var1);
+    level waittill("an_enemy_shot", var_1);
 
-    if(var1 != self) {
+    if(var_1 != self) {
       continue;
     }
 
-    if(!isDefined(var1.enemy)) {
+    if(!isDefined(var_1.enemy)) {
       continue;
     }
 
-    if(!isPlayer(var1.enemy)) {
+    if(!isPlayer(var_1.enemy)) {
       continue;
     }
 
@@ -723,19 +723,19 @@ function rpgplayerrepulsor() {
       continue;
     }
 
-    thread rpgplayerrepulsor_create(var1.enemy);
-    var0--;
+    thread rpgplayerrepulsor_create(var_1.enemy);
+    var_0--;
 
-    if(var0 <= 0) {
+    if(var_0 <= 0) {
       return;
     }
   }
 }
 
 function rpgplayerrepulsor_getnummisses() {
-  var0 = scripts\common\utility::getdifficulty();
+  var_0 = scripts\common\utility::getdifficulty();
 
-  switch (var0) {
+  switch (var_0) {
     case "gimp":
     case "easy":
       return 2;
@@ -751,10 +751,10 @@ function rpgplayerrepulsor_getnummisses() {
   return 2;
 }
 
-function rpgplayerrepulsor_create(var0) {
-  var1 = missile_createrepulsorent(var0, 5000, 800);
+function rpgplayerrepulsor_create(var_0) {
+  var_1 = missile_createrepulsorent(var_0, 5000, 800);
   wait 4;
-  missile_deleteattractor(var1);
+  missile_deleteattractor(var_1);
 }
 
 function pickandsetforceweapon() {
@@ -766,91 +766,91 @@ function pickandsetforceweapon() {
     return;
   }
 
-  var0 = undefined;
+  var_0 = undefined;
 
   if(distancesquared(self.origin, self.enemy.origin) < self.closeweaponmaxdist * self.closeweaponmaxdist) {
-    var0 = self.forcedweaponclose;
+    var_0 = self.forcedweaponclose;
   } else {
-    var0 = self.forcedweaponfar;
+    var_0 = self.forcedweaponfar;
   }
 
-  if(var0 != self.weapon) {
-    forceuseweapon(var0, "primary");
+  if(var_0 != self.weapon) {
+    forceuseweapon(var_0, "primary");
     self.weapon_stow setModel(getweaponmodel(self.forcedweapon));
-    self.forcedweapon = var0;
+    self.forcedweapon = var_0;
     return;
   }
 }
 
-function forceuseweapon(var0, var1) {
-  var2 = undefined;
+function forceuseweapon(var_0, var_1) {
+  var_2 = undefined;
 
-  if(issameweapon(var0)) {
-    var2 = var0;
+  if(issameweapon(var_0)) {
+    var_2 = var_0;
   } else {
-    var2 = [[level.fnbuildweapon]](var0);
+    var_2 = [[level.fnbuildweapon]](var_0);
   }
 
   if(istrue(self.script_fakeactor) || istrue(self.script_drone)) {
     scripts\common\ai::gun_remove();
-    scripts\common\ai::set_start_cash(getweaponattachmentworldmodels(var2));
+    scripts\common\ai::set_start_cash(getweaponattachmentworldmodels(var_2));
     return;
   }
 
-  if(!scripts\common\utility::isweaponinitialized(var2)) {
-    scripts\common\utility::initweapon(var2);
+  if(!scripts\common\utility::isweaponinitialized(var_2)) {
+    scripts\common\utility::initweapon(var_2);
   }
 
-  var3 = !nullweapon(self.weapon);
-  var4 = scripts\anim\utility_common::isusingsidearm();
-  var5 = var1 == "sidearm";
-  var6 = var1 == "secondary";
+  var_3 = !nullweapon(self.weapon);
+  var_4 = scripts\anim\utility_common::isusingsidearm();
+  var_5 = var_1 == "sidearm";
+  var_6 = var_1 == "secondary";
 
-  if(var3 && var4 != var5) {
-    if(var4) {
-      var7 = "none";
-    } else if(var7) {
-      var7 = "back";
+  if(var_3 && var_4 != var_5) {
+    if(var_4) {
+      var_7 = "none";
+    } else if(var_7) {
+      var_7 = "back";
     } else {
-      var7 = "chest";
+      var_7 = "chest";
     }
 
-    placeweaponon(self.weapon, var7);
+    placeweaponon(self.weapon, var_7);
     self.lastweapon = self.weapon;
   } else {
-    self.lastweapon = var4;
+    self.lastweapon = var_4;
   }
 
-  placeweaponon(var4, "right");
+  placeweaponon(var_4, "right");
 
-  if(var7) {
-    self.sidearm = var4;
-  } else if(var7) {
-    self.secondaryweapon = var4;
+  if(var_7) {
+    self.sidearm = var_4;
+  } else if(var_7) {
+    self.secondaryweapon = var_4;
   } else {
-    self.primaryweapon = var4;
+    self.primaryweapon = var_4;
   }
 
-  self.weapon = var4;
+  self.weapon = var_4;
   self.bulletsinclip = weaponclipsize(self.weapon);
   self notify("weapon_switch_done");
   updateweaponarchetype(weaponclass(self.weapon));
 }
 
-function updateweaponarchetype(var0) {
+function updateweaponarchetype(var_0) {
   if(!isDefined(self._blackboard) || scripts\asm\asm_bb::bb_isanimScripted() || !isDefined(self.asm) || !isDefined(self.asm.archetype)) {
     return;
   }
 
-  var1 = scripts\asm\shared\utility::getbasearchetype();
+  var_1 = scripts\asm\shared\utility::getbasearchetype();
 
-  if(var0 == "pistol" && archetypeassetloaded(var1 + "_pistol")) {
-    scripts\asm\shared\utility::setoverridearchetype("weapon", var1 + "_pistol");
+  if(var_0 == "pistol" && archetypeassetloaded(var_1 + "_pistol")) {
+    scripts\asm\shared\utility::setoverridearchetype("weapon", var_1 + "_pistol");
     return;
   }
 
-  if(var0 == "mg" && archetypeassetloaded(var1 + "_lmg")) {
-    scripts\asm\shared\utility::setoverridearchetype("weapon", var1 + "_lmg");
+  if(var_0 == "mg" && archetypeassetloaded(var_1 + "_lmg")) {
+    scripts\asm\shared\utility::setoverridearchetype("weapon", var_1 + "_lmg");
     return;
   }
 
@@ -869,7 +869,7 @@ function everusessecondaryweapon() {
   return false;
 }
 
-function default_weaponsetup(var0) {
+function default_weaponsetup(var_0) {
   if(!isDefined(self.stowsidearmposition)) {
     if(istrue(self.bhasthighholster)) {
       self.stowsidearmposition = "thigh";
@@ -898,42 +898,42 @@ function default_weaponsetup(var0) {
   } else if(!istrue(self.usescriptedweapon) && (!isDefined(self.agent_type) || !(self.agent_type == "actor_enemy_cp_rus_desert_ar_ak_laser" || self.agent_type == "actor_enemy_cp_rus_desert_sniper_nvg"))) {
     if(!scripts\common\utility::issp()) {
       if(issameweapon(self.primaryweapon)) {
-        var1 = getweaponbasename(self.primaryweapon);
+        var_1 = getweaponbasename(self.primaryweapon);
 
         if(!scripts\common\utility::iscp()) {
-          var1 = [[level.fngetweaponrootname]](var1);
+          var_1 = [[level.fngetweaponrootname]](var_1);
         }
 
-        if(var1 != "none") {
-          self.primaryweapon = [[level.fnbuildweapon]](var1, [], "none", "none");
+        if(var_1 != "none") {
+          self.primaryweapon = [[level.fnbuildweapon]](var_1, [], "none", "none");
         }
       } else {
         self.primaryweapon = [[level.fnbuildweapon]](self.primaryweapon, [], "none", "none");
       }
 
       if(issameweapon(self.secondaryweapon)) {
-        var1 = getweaponbasename(self.secondaryweapon);
+        var_1 = getweaponbasename(self.secondaryweapon);
 
         if(!scripts\common\utility::iscp()) {
-          var1 = [[level.fngetweaponrootname]](var1);
+          var_1 = [[level.fngetweaponrootname]](var_1);
         }
 
-        if(var1 != "none") {
-          self.secondaryweapon = [[level.fnbuildweapon]](var1, [], "none", "none");
+        if(var_1 != "none") {
+          self.secondaryweapon = [[level.fnbuildweapon]](var_1, [], "none", "none");
         }
       } else {
         self.secondaryweapon = [[level.fnbuildweapon]](self.secondaryweapon, [], "none", "none");
       }
 
       if(issameweapon(self.sidearm)) {
-        var1 = getweaponbasename(self.sidearm);
+        var_1 = getweaponbasename(self.sidearm);
 
         if(!scripts\common\utility::iscp()) {
-          var1 = [[level.fngetweaponrootname]](var1);
+          var_1 = [[level.fngetweaponrootname]](var_1);
         }
 
-        if(var1 != "none") {
-          self.sidearm = [[level.fnbuildweapon]](var1, [], "none", "none");
+        if(var_1 != "none") {
+          self.sidearm = [[level.fnbuildweapon]](var_1, [], "none", "none");
         }
       } else {
         self.sidearm = [[level.fnbuildweapon]](self.sidearm, [], "none", "none");
@@ -948,20 +948,20 @@ function default_weaponsetup(var0) {
   scripts\common\utility::initweapon(self.primaryweapon);
   scripts\common\utility::initweapon(self.secondaryweapon);
   scripts\common\utility::initweapon(self.sidearm);
-  var2 = self.classname;
+  var_2 = self.classname;
 
   if(isagent(self)) {
-    var2 = self.agent_type;
+    var_2 = self.agent_type;
   }
 
   self setdefaultaimlimits();
   self.a.weaponpos = [];
   self.a.weaponposdropping = [];
   self.lastweapon = self.weapon;
-  var3 = scripts\anim\utility_common::usingrocketlauncher();
-  self.a.neverlean = var3;
+  var_3 = scripts\anim\utility_common::usingrocketlauncher();
+  self.a.neverlean = var_3;
 
-  if(var3) {
+  if(var_3) {
     thread rpgplayerrepulsor();
   }
 
@@ -1126,15 +1126,15 @@ function setuprandomtable() {
   anim.randominttablesize = 60;
   anim.randominttable = [];
 
-  for(var0 = 0; var0 < anim.randominttablesize; var0++) {
-    anim.randominttable[var0] = var0;
+  for(var_0 = 0; var_0 < anim.randominttablesize; var_0++) {
+    anim.randominttable[var_0] = var_0;
   }
 
-  for(var0 = 0; var0 < anim.randominttablesize; var0++) {
-    var1 = randomint(anim.randominttablesize);
-    var2 = anim.randominttable[var0];
-    anim.randominttable[var0] = anim.randominttable[var1];
-    anim.randominttable[var1] = var2;
+  for(var_0 = 0; var_0 < anim.randominttablesize; var_0++) {
+    var_1 = randomint(anim.randominttablesize);
+    var_2 = anim.randominttable[var_0];
+    anim.randominttable[var_0] = anim.randominttable[var_1];
+    anim.randominttable[var_1] = var_2;
   }
 }
 
@@ -1150,29 +1150,29 @@ function setupweapons() {
   default_weaponsetup();
 }
 
-function setscriptammo(var0, var1, var2) {
-  if(isDefined(var1.script_ammo_clip)) {
-    self itemweaponsetammo(var1.script_ammo_clip, var1.script_ammo_extra);
-  } else if(isDefined(var1.script_ammo_extra)) {
-    self itemweaponsetammo(var1.script_ammo_clip, var1.script_ammo_extra);
+function setscriptammo(var_0, var_1, var_2) {
+  if(isDefined(var_1.script_ammo_clip)) {
+    self itemweaponsetammo(var_1.script_ammo_clip, var_1.script_ammo_extra);
+  } else if(isDefined(var_1.script_ammo_extra)) {
+    self itemweaponsetammo(var_1.script_ammo_clip, var_1.script_ammo_extra);
   }
 
-  if(isDefined(var1.script_ammo_alt_clip)) {
-    self itemweaponsetammo(var1.script_ammo_alt_clip, var1.script_ammo_alt_extra, undefined, 1);
-  } else if(isDefined(var1.script_ammo_alt_extra)) {
-    self itemweaponsetammo(var1.script_ammo_alt_clip, var1.script_ammo_alt_extra, undefined, 1);
+  if(isDefined(var_1.script_ammo_alt_clip)) {
+    self itemweaponsetammo(var_1.script_ammo_alt_clip, var_1.script_ammo_alt_extra, undefined, 1);
+  } else if(isDefined(var_1.script_ammo_alt_extra)) {
+    self itemweaponsetammo(var_1.script_ammo_alt_clip, var_1.script_ammo_alt_extra, undefined, 1);
   }
 
-  if(isDefined(var1.script_ammo_max)) {
+  if(isDefined(var_1.script_ammo_max)) {
     self itemweaponsetammo(weaponclipsize(self), weaponmaxammo(self));
   }
 
-  if(istrue(var2)) {
+  if(istrue(var_2)) {
     self itemweaponsetammo(1, 6, 0, 1);
     return;
   }
 
-  if(issubstr(var0, "ub_golf25_sp") || issubstr(var0, "ub_mike203_sp")) {
+  if(issubstr(var_0, "ub_golf25_sp") || issubstr(var_0, "ub_mike203_sp")) {
     self itemweaponsetammo(1, 1, 0, 1);
     return;
   }

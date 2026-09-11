@@ -5,22 +5,22 @@
 
 function init() {
   level.computer_animation_off = spawnStruct();
-  var0 = getdvarint("scr_blitz_circle_delay_time_1", 0);
-  var1 = getdvarint("scr_blitz_circle_delay_time_2", 45);
-  var2 = getdvarint("scr_blitz_circle_delay_time_3", 20);
-  var3 = getdvarint("scr_blitz_circle_delay_time_4", 20);
-  var4 = getdvarint("scr_blitz_circle_delay_time_5", 15);
-  var5 = getdvarint("scr_blitz_circle_delay_time_6", 15);
-  var6 = getdvarint("scr_blitz_circle_delay_time_7", 10);
-  var7 = getdvarint("scr_blitz_circle_delay_time_8", 5);
-  var8 = getdvarint("scr_blitz_circle_close_time_1", 120);
-  var9 = getdvarint("scr_blitz_circle_close_time_2", 200);
-  var10 = getdvarint("scr_blitz_circle_close_time_3", 180);
-  var11 = getdvarint("scr_blitz_circle_close_time_4", 140);
-  var12 = getdvarint("scr_blitz_circle_close_time_5", 110);
-  var13 = getdvarint("scr_blitz_circle_close_time_6", 70);
-  var14 = getdvarint("scr_blitz_circle_close_time_7", 50);
-  var15 = getdvarint("scr_blitz_circle_close_time_8", 90);
+  var_0 = getdvarint("scr_blitz_circle_delay_time_1", 0);
+  var_1 = getdvarint("scr_blitz_circle_delay_time_2", 45);
+  var_2 = getdvarint("scr_blitz_circle_delay_time_3", 20);
+  var_3 = getdvarint("scr_blitz_circle_delay_time_4", 20);
+  var_4 = getdvarint("scr_blitz_circle_delay_time_5", 15);
+  var_5 = getdvarint("scr_blitz_circle_delay_time_6", 15);
+  var_6 = getdvarint("scr_blitz_circle_delay_time_7", 10);
+  var_7 = getdvarint("scr_blitz_circle_delay_time_8", 5);
+  var_8 = getdvarint("scr_blitz_circle_close_time_1", 120);
+  var_9 = getdvarint("scr_blitz_circle_close_time_2", 200);
+  var_10 = getdvarint("scr_blitz_circle_close_time_3", 180);
+  var_11 = getdvarint("scr_blitz_circle_close_time_4", 140);
+  var_12 = getdvarint("scr_blitz_circle_close_time_5", 110);
+  var_13 = getdvarint("scr_blitz_circle_close_time_6", 70);
+  var_14 = getdvarint("scr_blitz_circle_close_time_7", 50);
+  var_15 = getdvarint("scr_blitz_circle_close_time_8", 90);
 
   switch (getdvarint("scr_blitz_circle_speed", 1)) {
     case 0:
@@ -36,8 +36,8 @@ function init() {
       level.computer_animation_off.ground_spawners = [120, 300, 230, 190, 120, 80, 60, 90];
       break;
     case 3:
-      level.computer_animation_off.groundentity = [var0, var1, var2, var3, var4, var5, var6, var7];
-      level.computer_animation_off.ground_spawners = [var8, var9, var10, var11, var12, var13, var14, var15];
+      level.computer_animation_off.groundentity = [var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7];
+      level.computer_animation_off.ground_spawners = [var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15];
       break;
   }
 

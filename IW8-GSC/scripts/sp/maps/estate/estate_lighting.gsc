@@ -64,32 +64,32 @@ function lighting_flags() {
 }
 
 function lerp_woods_sunlight() {
-  var0 = scripts\engine\utility::getStruct("lt_woods_start", "targetname").origin;
-  var1 = scripts\engine\utility::getStruct("lt_woods_end", "targetname").origin;
-  var2 = vectortoangles(var1 - var0);
-  var3 = vectortoangles(var0 - var1);
-  var4 = distance(var0, var1);
+  var_0 = scripts\engine\utility::getStruct("lt_woods_start", "targetname").origin;
+  var_1 = scripts\engine\utility::getStruct("lt_woods_end", "targetname").origin;
+  var_2 = vectortoangles(var_1 - var_0);
+  var_3 = vectortoangles(var_0 - var_1);
+  var_4 = distance(var_0, var_1);
   level endon("rappel_start");
 
   for(;;) {
-    var5 = scripts\engine\math::get_dot(var0, var2, level.player.origin);
-    var6 = scripts\engine\math::get_dot(var1, var3, level.player.origin);
+    var_5 = scripts\engine\math::get_dot(var_0, var_2, level.player.origin);
+    var_6 = scripts\engine\math::get_dot(var_1, var_3, level.player.origin);
 
-    if(var5 <= 0) {
-      var7 = 0.01;
-    } else if(var6 <= 0) {
-      var7 = 0;
+    if(var_5 <= 0) {
+      var_7 = 0.01;
+    } else if(var_6 <= 0) {
+      var_7 = 0;
     } else {
-      var8 = vectorfromlinetopoint(var0, var1, level.player.origin);
-      var9 = level.player.origin - var8;
-      var10 = distance(var0, var9);
-      var11 = scripts\engine\math::normalize_value(0, var4, var10);
-      var7 = 0.01 + -0.01 * var11;
+      var_8 = vectorfromlinetopoint(var_0, var_1, level.player.origin);
+      var_9 = level.player.origin - var_8;
+      var_10 = distance(var_0, var_9);
+      var_11 = scripts\engine\math::normalize_value(0, var_4, var_10);
+      var_7 = 0.01 + -0.01 * var_11;
     }
 
-    setsuncolorandintensity(var7);
+    setsuncolorandintensity(var_7);
 
-    if(var7 == 0) {
+    if(var_7 == 0) {
       level notify("hide_moon");
     }
 
@@ -97,36 +97,36 @@ function lerp_woods_sunlight() {
   }
 }
 
-function init_lights(var0) {
-  var1 = getEntArray(var0, "targetname");
+function init_lights(var_0) {
+  var_1 = getEntArray(var_0, "targetname");
 
-  foreach(var3 in var1) {
-    var3.og_intensity = var3 getlightintensity();
+  foreach(var_3 in var_1) {
+    var_3.og_intensity = var_3 getlightintensity();
   }
 }
 
-function lights_off(var0) {
-  var1 = getEntArray(var0, "targetname");
+function lights_off(var_0) {
+  var_1 = getEntArray(var_0, "targetname");
 
-  foreach(var3 in var1) {
-    if(!isDefined(var3.og_intensity)) {
-      var3.og_intensity = var3 getlightintensity();
+  foreach(var_3 in var_1) {
+    if(!isDefined(var_3.og_intensity)) {
+      var_3.og_intensity = var_3 getlightintensity();
     }
 
-    var3 setlightintensity(0);
+    var_3 setlightintensity(0);
   }
 }
 
-function lights_on(var0) {
-  var1 = getEntArray(var0, "targetname");
+function lights_on(var_0) {
+  var_1 = getEntArray(var_0, "targetname");
 
-  foreach(var3 in var1) {
-    if(!isDefined(var3.og_intensity)) {
-      iprintln("light with targetname" + var0 + " has no stored intensity");
+  foreach(var_3 in var_1) {
+    if(!isDefined(var_3.og_intensity)) {
+      iprintln("light with targetname" + var_0 + " has no stored intensity");
       continue;
     }
 
-    var3 setlightintensity(var3.og_intensity);
+    var_3 setlightintensity(var_3.og_intensity);
   }
 }
 
@@ -149,8 +149,8 @@ function lighting_mansion_fire_1() {
   wait 1.5;
   lights_on("lt_mansion_fire_obj");
   scripts\engine\utility::flag_set("lighting_fire_obj_room_hero");
-  var0 = getEnt("lt_mansion_fire_obj_hero", "targetname");
-  var0 setlightintensity(0.25);
+  var_0 = getEnt("lt_mansion_fire_obj_hero", "targetname");
+  var_0 setlightintensity(0.25);
 }
 
 function lighting_mansion_fire_2() {
@@ -162,8 +162,8 @@ function lighting_mansion_fire_2() {
   visionsetnaked("estate_escape_outdoors", 1);
   lights_on("lt_mansion_fire_collapse");
   lights_on("lt_escape");
-  var0 = getEnt("lt_mansion_fire_collapse_hero", "targetname");
-  var0 setlightintensity(0.08);
+  var_0 = getEnt("lt_mansion_fire_collapse_hero", "targetname");
+  var_0 setlightintensity(0.08);
 }
 
 function lighting_escape() {

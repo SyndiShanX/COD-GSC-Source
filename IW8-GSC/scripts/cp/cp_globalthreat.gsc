@@ -34,16 +34,16 @@ function increased_threatlevel_effects() {
   }
 }
 
-function increase_threatlevel(var0, var1) {
-  if(isDefined(var0)) {
-    if(level.globalthreatlevel.value + var0 <= 1000) {
-      if(isDefined(var1) && var1 > 0) {
-        for(var2 = 0; var2 < var1; var2++) {
-          level.globalthreatlevel.value += int(var0 / var1);
-          wait var0 / var1;
+function increase_threatlevel(var_0, var_1) {
+  if(isDefined(var_0)) {
+    if(level.globalthreatlevel.value + var_0 <= 1000) {
+      if(isDefined(var_1) && var_1 > 0) {
+        for(var_2 = 0; var_2 < var_1; var_2++) {
+          level.globalthreatlevel.value += int(var_0 / var_1);
+          wait var_0 / var_1;
         }
       } else {
-        level.globalthreatlevel.value += int(var0);
+        level.globalthreatlevel.value += int(var_0);
       }
 
       increased_threatlevel_effects();
@@ -54,19 +54,19 @@ function increase_threatlevel(var0, var1) {
   }
 }
 
-function decrease_threatlevel(var0, var1) {
-  if(isDefined(var0)) {
-    if(level.globalthreatlevel.value - var0 >= 0) {
-      if(isDefined(var1) && var1 > 0) {
-        for(var2 = 0; var2 < var1; var2++) {
-          level.globalthreatlevel.value -= int(var0 / var1);
-          wait var0 / var1;
+function decrease_threatlevel(var_0, var_1) {
+  if(isDefined(var_0)) {
+    if(level.globalthreatlevel.value - var_0 >= 0) {
+      if(isDefined(var_1) && var_1 > 0) {
+        for(var_2 = 0; var_2 < var_1; var_2++) {
+          level.globalthreatlevel.value -= int(var_0 / var_1);
+          wait var_0 / var_1;
         }
 
         return;
       }
 
-      level.globalthreatlevel.value -= int(var0);
+      level.globalthreatlevel.value -= int(var_0);
       return;
     }
 

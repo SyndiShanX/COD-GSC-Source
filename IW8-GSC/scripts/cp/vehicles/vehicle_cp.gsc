@@ -43,107 +43,107 @@ function vehicle_cp_init() {
   scripts\cp\vehicles\vehicle_oob_cp::vehicle_oob_cp_init();
 }
 
-function spawn_script_model_at_pos(var0, var1, var2, var3, var4) {
-  var5 = self gettagorigin(var1);
-  var6 = self gettagangles(var1);
-  var7 = getstartorigin(var5, var6, var3);
-  var8 = getstartangles(var5, var6, var3);
-  var9 = spawn("script_model", var7);
-  var9.angles = var8;
-  var9 setModel(var4);
-  var9 linkTo(self);
+function spawn_script_model_at_pos(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = self gettagorigin(var_1);
+  var_6 = self gettagangles(var_1);
+  var_7 = getstartorigin(var_5, var_6, var_3);
+  var_8 = getstartangles(var_5, var_6, var_3);
+  var_9 = spawn("script_model", var_7);
+  var_9.angles = var_8;
+  var_9 setModel(var_4);
+  var_9 linkTo(self);
 
-  if(isDefined(var2)) {
-    var9 scriptmodelplayanim(var2);
+  if(isDefined(var_2)) {
+    var_9 scriptmodelplayanim(var_2);
   }
 
-  var9.vehicle_position = var0;
-  var9.disable_gun_recall = 1;
-  self.attachedguys[self.attachedguys.size] = var9;
-  self.usedpositions[var0] = 1;
-  self.riders[self.riders.size] = var9;
+  var_9.vehicle_position = var_0;
+  var_9.disable_gun_recall = 1;
+  self.attachedguys[self.attachedguys.size] = var_9;
+  self.usedpositions[var_0] = 1;
+  self.riders[self.riders.size] = var_9;
 
-  if(var0 == 0) {
-    self.driver = var9;
+  if(var_0 == 0) {
+    self.driver = var_9;
   }
 
-  return var9;
+  return var_9;
 }
 
-function spawn_vehicle_accessory(var0, var1, var2, var3) {
-  var4 = spawn("script_model", self.origin);
-  var4 setModel(var0);
-  var4 notsolid();
-  var4 show();
+function spawn_vehicle_accessory(var_0, var_1, var_2, var_3) {
+  var_4 = spawn("script_model", self.origin);
+  var_4 setModel(var_0);
+  var_4 notsolid();
+  var_4 show();
 
-  if(!isDefined(var2)) {
-    var2 = (0, 0, 0);
+  if(!isDefined(var_2)) {
+    var_2 = (0, 0, 0);
   }
 
-  if(!isDefined(var3)) {
-    var3 = (0, 0, 0);
+  if(!isDefined(var_3)) {
+    var_3 = (0, 0, 0);
   }
 
-  var5 = "tag_origin";
+  var_5 = "tag_origin";
 
-  if(isDefined(var1)) {
-    var5 = var1;
+  if(isDefined(var_1)) {
+    var_5 = var_1;
   }
 
-  var6 = self gettagorigin(var5);
+  var_6 = self gettagorigin(var_5);
 
-  if(isDefined(var6)) {
-    var4 linkTo(self, var5, var2, var3);
+  if(isDefined(var_6)) {
+    var_4 linkTo(self, var_5, var_2, var_3);
   } else {
-    var4 linkTo(self);
+    var_4 linkTo(self);
   }
 
-  var4.targetname = self.targetname + "_accessory";
+  var_4.targetname = self.targetname + "_accessory";
 
   if(!isDefined(self.accessories)) {
     self.accessories = [];
   }
 
-  self.accessories[self.accessories.size] = var4;
-  return var4;
+  self.accessories[self.accessories.size] = var_4;
+  return var_4;
 }
 
-function ref_14220(var0) {
-  if(!isDefined(var0.unique_id)) {
-    var0 scripts\engine\flags::assign_unique_id();
+function ref_14220(var_0) {
+  if(!isDefined(var_0.unique_id)) {
+    var_0 scripts\engine\flags::assign_unique_id();
   }
 
-  var0 thread scripts\common\vehicle_code::vehicle_ai_avoidance_logic();
+  var_0 thread scripts\common\vehicle_code::vehicle_ai_avoidance_logic();
 }
 
-function ref_14133(var0, var1) {
-  var0.bshouldoccupantsbeignored = 0;
-  var0.lastkilltime = 0;
-  var0.killedplayers = [];
-  var0.killedby = [];
-  var0.lastkilledby = undefined;
-  var0.greatestuniqueplayerkills = 0;
-  var0.damagedplayers = [];
-  var0.lastkilltime = 0;
-  var0.lastkilldogtime = 0;
-  var0.recentkillcount = 0;
-  var0.recentdefendcount = 0;
-  var0.kills = 0;
-  var0.deaths = 0;
-  var0.pers["cur_kill_streak"] = 0;
-  var0.pers["cur_death_streak"] = 0;
-  var0.pers["cur_kill_streak_for_nuke"] = 0;
-  var0.tookweaponfrom = [];
-  var0.guid = var0 getentitynumber();
-  scripts\cp\vehicles\vehicle_oob_cp::vehicle_oob_cp_registerinstance(var0);
+function ref_14133(var_0, var_1) {
+  var_0.bshouldoccupantsbeignored = 0;
+  var_0.lastkilltime = 0;
+  var_0.killedplayers = [];
+  var_0.killedby = [];
+  var_0.lastkilledby = undefined;
+  var_0.greatestuniqueplayerkills = 0;
+  var_0.damagedplayers = [];
+  var_0.lastkilltime = 0;
+  var_0.lastkilldogtime = 0;
+  var_0.recentkillcount = 0;
+  var_0.recentdefendcount = 0;
+  var_0.kills = 0;
+  var_0.deaths = 0;
+  var_0.pers["cur_kill_streak"] = 0;
+  var_0.pers["cur_death_streak"] = 0;
+  var_0.pers["cur_kill_streak_for_nuke"] = 0;
+  var_0.tookweaponfrom = [];
+  var_0.guid = var_0 getentitynumber();
+  scripts\cp\vehicles\vehicle_oob_cp::vehicle_oob_cp_registerinstance(var_0);
 }
 
-function ref_14134(var0, var1) {}
+function ref_14134(var_0, var_1) {}
 
-function ref_14135(var0) {
-  scripts\cp\vehicles\vehicle_oob_cp::vehicle_oob_cp_clearoob(var0, 1);
+function ref_14135(var_0) {
+  scripts\cp\vehicles\vehicle_oob_cp::vehicle_oob_cp_clearoob(var_0, 1);
 }
 
-function ref_14136(var0) {}
+function ref_14136(var_0) {}
 
-function ref_14137(var0) {}
+function ref_14137(var_0) {}

@@ -28,10 +28,10 @@ function main() {
   self.usescriptedweapon = 0;
   self.scriptedweaponclassprimary = "none";
   self.weapon = getcompleteweaponname("iw8_ar_akilo47");
-  var0 = undefined;
-  var1 = ["test_character_alq_embassy"];
+  var_0 = undefined;
+  var_1 = ["test_character_alq_embassy"];
 
-  switch (scripts\code\character::get_random_character(1, var0, var1)) {
+  switch (scripts\code\character::get_random_character(1, var_0, var_1)) {
     case 0:
       character\test_character_alq_embassy::main();
       break;
@@ -42,7 +42,7 @@ function spawner() {
   self setspawnerteam("axis");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\test_character_alq_embassy::precache();
   scripts\aitypes\bt_util::init();
   scripts\aitypes\assets::soldier();

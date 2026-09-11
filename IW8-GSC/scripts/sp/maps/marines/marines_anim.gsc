@@ -115,12 +115,12 @@ function generic_human_anims() {
   level.scr_anim["bed_decoy"]["bed_gungrab_idle"][0] = % mar_hos_bed_gungrab_idle_decoy01;
   level.scr_anim["bed_decoy"]["bed_death"] = % mar_hos_bed_death_decoy01;
   level.scr_anim["bed_decoy"]["bed_death_b"] = % mar_hos_bed_death_b_decoy01;
-  var0 = 0.2;
-  level.scr_goaltime["bed_decoy"]["bed_laying_idle"] = var0;
-  level.scr_goaltime["bed_decoy"]["bed_gungrab"] = var0;
-  level.scr_goaltime["bed_decoy"]["bed_gungrab_idle"] = var0;
-  level.scr_goaltime["bed_decoy"]["bed_death"] = var0;
-  level.scr_goaltime["bed_decoy"]["bed_death_b"] = var0;
+  var_0 = 0.2;
+  level.scr_goaltime["bed_decoy"]["bed_laying_idle"] = var_0;
+  level.scr_goaltime["bed_decoy"]["bed_gungrab"] = var_0;
+  level.scr_goaltime["bed_decoy"]["bed_gungrab_idle"] = var_0;
+  level.scr_goaltime["bed_decoy"]["bed_death"] = var_0;
+  level.scr_goaltime["bed_decoy"]["bed_death_b"] = var_0;
   level.scr_anim["generic"]["rpg_stand_death"] = % rpg_stand_death;
   level.scr_face["griggs"]["dx_vom_grg_hospital_regroup_10_face"] = % dx_vom_grg_hospital_regroup_10_face;
   level.scr_anim["bed_civ_1"]["bed_laying_idle"][0] = % mar_hos_bed_laying_idle_civ01;
@@ -176,10 +176,10 @@ function generic_human_anims() {
   level.scr_anim["dead_body"]["mar_hos_bed_laying_idle_civ08"] = % mar_hos_bed_laying_idle_civ08;
   level.scr_anim["generic"]["civ_stl_exposed_crouch_hide_idle03"][0] = % civ_stl_exposed_crouch_hide_idle03;
   level.scr_anim["dead_body"]["generic_dead_wall_lean_civ_03"] = % generic_dead_wall_lean_civ_03;
-  var1 = 0.1;
-  level.scr_goaltime["generic"]["mar_hos_mg_hall_crouch_exit_04_aq"] = var1;
+  var_1 = 0.1;
+  level.scr_goaltime["generic"]["mar_hos_mg_hall_crouch_exit_04_aq"] = var_1;
   level.scr_anim["generic"]["mar_hos_mg_hall_crouch_exit_04_aq"] = % mar_hos_mg_hall_crouch_exit_04_aq;
-  level.scr_goaltime["generic"]["mar_hos_mg_hall_crouch_exit_06_aq"] = var1;
+  level.scr_goaltime["generic"]["mar_hos_mg_hall_crouch_exit_06_aq"] = var_1;
   level.scr_anim["generic"]["mar_hos_mg_hall_crouch_exit_06_aq"] = % mar_hos_mg_hall_crouch_exit_06_aq;
   level.scr_anim["generic"]["mar_hos_mg_hall_crouch_idle_02_aq"][0] = % mar_hos_mg_hall_crouch_idle_02_aq;
   level.scr_anim["snakecam03"]["wolf_room_snakecam_enter"] = % mar_hos_wolf_room_snakecam_setup_ally03;
@@ -217,11 +217,11 @@ function generic_human_anims() {
   level.scr_anim["draggingMarine"]["injuredMarineDrag"] = % mar_buddy_down_c_usmc01;
   level.scr_anim["draggedMarine"]["injuredMarineDragIdle"][0] = % thd_3f_020_buddy_down_c_idle_sas02;
   level.scr_anim["draggingMarine"]["injuredMarineDragIdle"][0] = % thd_3f_020_buddy_down_c_idle_sas01;
-  var2 = 0.2;
-  level.scr_goaltime["draggedMarine"]["injuredMarineDrag"] = var2;
-  level.scr_goaltime["draggingMarine"]["injuredMarineDrag"] = var2;
-  level.scr_goaltime["draggedMarine"]["injuredMarineDragIdle"] = var2;
-  level.scr_goaltime["draggingMarine"]["injuredMarineDragIdle"] = var2;
+  var_2 = 0.2;
+  level.scr_goaltime["draggedMarine"]["injuredMarineDrag"] = var_2;
+  level.scr_goaltime["draggingMarine"]["injuredMarineDrag"] = var_2;
+  level.scr_goaltime["draggedMarine"]["injuredMarineDragIdle"] = var_2;
+  level.scr_goaltime["draggingMarine"]["injuredMarineDragIdle"] = var_2;
   level.scr_anim["shelfMarine"]["shelfPrePushIdle"][0] = % mar_breach_window_exit_shelf_idle_marine01;
   level.scr_anim["shelfMarine"]["shelfPush"] = % mar_breach_window_exit_shelf_push_marine01;
   level.scr_anim["shelfMarine"]["postPushIdle"][0] = % mar_breach_window_exit_wait_idle_marine01;
@@ -264,18 +264,18 @@ function generic_human_anims() {
   level.scr_anim["hostage01Proxy"]["preBreachMacheteSlash"] = % mar_hos_wolfroom_post_breach_death_mar_victim;
   level.scr_anim["wolfProxy"]["preBreachExecute"] = % mar_hos_wolfroom_post_breach_cutthroat_wolf;
   level.scr_anim["hostage01Proxy"]["preBreachExecute"] = % mar_hos_wolfroom_post_breach_cutthroat_mar_victim;
-  var3 = 0.2;
-  level.scr_goaltime["wolfProxy"]["preBreachIdle"] = var3;
-  level.scr_goaltime["wolfProxy"]["preBreachHostageGrab"] = var3;
-  level.scr_goaltime["wolfProxy"]["preBreachHostageGrabIdle"] = var3;
-  level.scr_goaltime["wolfProxy"]["postBreachRaiseMachete"] = var3;
-  level.scr_goaltime["wolfProxy"]["postBreachRaiseMacheteIdle"] = var3;
-  level.scr_goaltime["wolfProxy"]["postBreachMacheteSlash"] = var3;
-  level.scr_goaltime["wolfProxy"]["postBreachIdle"] = var3;
-  level.scr_goaltime["wolfProxy"]["postBreachFlinch"] = var3;
-  level.scr_goaltime["wolfProxy"]["postBreachWolfDeath"] = var3;
-  level.scr_goaltime["wolfProxy"]["preBreachRaiseMachete"] = var3;
-  level.scr_goaltime["wolfProxy"]["preBreachMacheteSlash"] = var3;
+  var_3 = 0.2;
+  level.scr_goaltime["wolfProxy"]["preBreachIdle"] = var_3;
+  level.scr_goaltime["wolfProxy"]["preBreachHostageGrab"] = var_3;
+  level.scr_goaltime["wolfProxy"]["preBreachHostageGrabIdle"] = var_3;
+  level.scr_goaltime["wolfProxy"]["postBreachRaiseMachete"] = var_3;
+  level.scr_goaltime["wolfProxy"]["postBreachRaiseMacheteIdle"] = var_3;
+  level.scr_goaltime["wolfProxy"]["postBreachMacheteSlash"] = var_3;
+  level.scr_goaltime["wolfProxy"]["postBreachIdle"] = var_3;
+  level.scr_goaltime["wolfProxy"]["postBreachFlinch"] = var_3;
+  level.scr_goaltime["wolfProxy"]["postBreachWolfDeath"] = var_3;
+  level.scr_goaltime["wolfProxy"]["preBreachRaiseMachete"] = var_3;
+  level.scr_goaltime["wolfProxy"]["preBreachMacheteSlash"] = var_3;
   level.scr_face["wolfProxy"]["dx_vom_wolf_wolf_capture_401"] = % dx_vom_wolf_wolf_capture_401_face;
   level.scr_face["wolfProxy"]["dx_vom_wolf_wolf_capture_91"] = % dx_vom_wolf_wolf_capture_91_face;
   level.scr_face["wolfProxy"]["dx_vom_wolf_wolf_capture_92"] = % dx_vom_wolf_wolf_capture_92_face;
@@ -317,20 +317,20 @@ function generic_human_anims() {
   level.scr_anim["marine01"]["takedown"] = % mar_hos_wolfroom_breach_takedown_mar_01;
   level.scr_anim["marine02"]["takedown"] = % mar_hos_wolfroom_breach_takedown_mar_02;
   level.scr_anim["griggs"]["takedown"] = % mar_hos_wolfroom_breach_takedown_mar_03;
-  level.scr_goaltime["hostage01"]["postBreachIdle"] = var3;
-  level.scr_goaltime["hostage01"]["postBreachRaiseMachete"] = var3;
-  level.scr_goaltime["hostage01"]["postBreachDeath"] = var3;
-  level.scr_goaltime["hostage01"]["postBreachMacheteIdle"] = var3;
-  level.scr_goaltime["hostage01"]["postBreachFlinch"] = var3;
-  level.scr_goaltime["hostage01"]["takedown"] = var3;
-  level.scr_goaltime["wolf"]["postBreachIdle"] = var3;
-  level.scr_goaltime["wolf"]["postBreachRaiseMachete"] = var3;
-  level.scr_goaltime["wolf"]["postBreachMacheteIdle"] = var3;
-  level.scr_goaltime["wolf"]["postBreachMacheteSlash"] = var3;
-  level.scr_goaltime["wolf"]["vig_acquire_takedown_right"] = var3;
-  level.scr_goaltime["wolf"]["hostage_knees_idle"] = var3;
-  level.scr_goaltime["wolf"]["postBreachFlinch"] = var3;
-  level.scr_goaltime["wolf"]["postBreachWolfDeath"] = var3;
+  level.scr_goaltime["hostage01"]["postBreachIdle"] = var_3;
+  level.scr_goaltime["hostage01"]["postBreachRaiseMachete"] = var_3;
+  level.scr_goaltime["hostage01"]["postBreachDeath"] = var_3;
+  level.scr_goaltime["hostage01"]["postBreachMacheteIdle"] = var_3;
+  level.scr_goaltime["hostage01"]["postBreachFlinch"] = var_3;
+  level.scr_goaltime["hostage01"]["takedown"] = var_3;
+  level.scr_goaltime["wolf"]["postBreachIdle"] = var_3;
+  level.scr_goaltime["wolf"]["postBreachRaiseMachete"] = var_3;
+  level.scr_goaltime["wolf"]["postBreachMacheteIdle"] = var_3;
+  level.scr_goaltime["wolf"]["postBreachMacheteSlash"] = var_3;
+  level.scr_goaltime["wolf"]["vig_acquire_takedown_right"] = var_3;
+  level.scr_goaltime["wolf"]["hostage_knees_idle"] = var_3;
+  level.scr_goaltime["wolf"]["postBreachFlinch"] = var_3;
+  level.scr_goaltime["wolf"]["postBreachWolfDeath"] = var_3;
   scripts\common\anim::addnotetrack_mayhemstart("wolf", "mayhem_partA_start", %mar_hos_wolfroom_breach_takedown_wolf_parta_face, "vig_acquire_takedown_right");
   scripts\common\anim::addnotetrack_mayhemend("wolf", "mayhem_partA_end", %mar_hos_wolfroom_breach_takedown_wolf_parta_face, "vig_acquire_takedown_right");
   scripts\common\anim::addnotetrack_mayhemstart("wolf", "mayhem_partB_start", %mar_hos_wolfroom_breach_takedown_wolf_partb_face, "vig_acquire_takedown_right");
@@ -348,12 +348,12 @@ function generic_human_anims() {
   level.scr_anim["civ_crutch_helper"]["crutch_runaway"] = % mar_hos_groundfloor_runaway_civ;
 }
 
-function hostage_kicked_react(var0) {
+function hostage_kicked_react(var_0) {
   scripts\engine\utility::flag_set("flag_snakecam_hostage_kicked");
 }
 
-function set_deathanim_bed_death(var0) {
-  var0 scripts\engine\sp\utility::set_deathanim("bed_death");
+function set_deathanim_bed_death(var_0) {
+  var_0 scripts\engine\sp\utility::set_deathanim("bed_death");
 }
 
 function vehicles() {
@@ -416,18 +416,18 @@ function script_models() {
   level.scr_anim["machete"]["postBreachWolfDeath"] = % mar_hos_wolfroom_post_breach_death_machete;
   level.scr_anim["machete"]["preBreachRaiseMachete"] = % mar_hos_wolfroom_post_breach_raising_machete;
   level.scr_anim["machete"]["preBreachMacheteSlash"] = % mar_hos_wolfroom_post_breach_stroke_machete;
-  var0 = 0.2;
-  level.scr_goaltime["machete"]["preBreachIdle"] = var0;
-  level.scr_goaltime["machete"]["preBreachHostageGrab"] = var0;
-  level.scr_goaltime["machete"]["preBreachHostageGrabIdle"] = var0;
-  level.scr_goaltime["machete"]["postBreachRaiseMachete"] = var0;
-  level.scr_goaltime["machete"]["postBreachRaiseMacheteIdle"] = var0;
-  level.scr_goaltime["machete"]["postBreachMacheteSlash"] = var0;
-  level.scr_goaltime["machete"]["postBreachIdle"] = var0;
-  level.scr_goaltime["machete"]["postBreachFlinch"] = var0;
-  level.scr_goaltime["machete"]["postBreachWolfDeath"] = var0;
-  level.scr_goaltime["machete"]["preBreachRaiseMachete"] = var0;
-  level.scr_goaltime["machete"]["preBreachMacheteSlash"] = var0;
+  var_0 = 0.2;
+  level.scr_goaltime["machete"]["preBreachIdle"] = var_0;
+  level.scr_goaltime["machete"]["preBreachHostageGrab"] = var_0;
+  level.scr_goaltime["machete"]["preBreachHostageGrabIdle"] = var_0;
+  level.scr_goaltime["machete"]["postBreachRaiseMachete"] = var_0;
+  level.scr_goaltime["machete"]["postBreachRaiseMacheteIdle"] = var_0;
+  level.scr_goaltime["machete"]["postBreachMacheteSlash"] = var_0;
+  level.scr_goaltime["machete"]["postBreachIdle"] = var_0;
+  level.scr_goaltime["machete"]["postBreachFlinch"] = var_0;
+  level.scr_goaltime["machete"]["postBreachWolfDeath"] = var_0;
+  level.scr_goaltime["machete"]["preBreachRaiseMachete"] = var_0;
+  level.scr_goaltime["machete"]["preBreachMacheteSlash"] = var_0;
   level.scr_animtree["crutch"] = #animtree;
   level.scr_model["crutch"] = "prop_medical_crutch_01";
   level.scr_anim["crutch"]["crutch_runaway"] = % mar_hos_groundfloor_runaway_wounded_civ_crutch;
@@ -436,42 +436,42 @@ function script_models() {
   level.scr_anim["shadowCaster"]["vig_acquire_takedown_right"] = % mar_hos_wolfroom_breach_takedown_plr_shadow;
 }
 
-function wounded_drag_shoot(var0) {
-  var1 = scripts\engine\utility::getStruct("wounded_drag_shooter", "targetname");
-  var1.groundorigin = scripts\engine\utility::drop_to_ground(var1.origin, 0, -100);
-  var2 = 100;
-  var3 = 0.5;
-  var4 = var3 * 20;
-  var5 = var4 * 0.5;
+function wounded_drag_shoot(var_0) {
+  var_1 = scripts\engine\utility::getStruct("wounded_drag_shooter", "targetname");
+  var_1.groundorigin = scripts\engine\utility::drop_to_ground(var_1.origin, 0, -100);
+  var_2 = 100;
+  var_3 = 0.5;
+  var_4 = var_3 * 20;
+  var_5 = var_4 * 0.5;
 
-  for(var6 = 0; var6 < var4; var6++) {
-    if(var6 < var5) {
-      var7 = var6 / var5;
-      var7 = 1 - var7;
-      var8 = vectorNormalize(var1.groundorigin - var0.origin);
-      var9 = var0.origin + var8 * var2 * var7;
+  for(var_6 = 0; var_6 < var_4; var_6++) {
+    if(var_6 < var_5) {
+      var_7 = var_6 / var_5;
+      var_7 = 1 - var_7;
+      var_8 = vectorNormalize(var_1.groundorigin - var_0.origin);
+      var_9 = var_0.origin + var_8 * var_2 * var_7;
     } else {
-      var7 = (var6 - var5) / var4;
-      var10 = var0.origin + (0, 0, 52);
-      var8 = vectorNormalize(var10 - var0.origin);
-      var9 = var0.origin + var8 * var2 * var7;
+      var_7 = (var_6 - var_5) / var_4;
+      var_10 = var_0.origin + (0, 0, 52);
+      var_8 = vectorNormalize(var_10 - var_0.origin);
+      var_9 = var_0.origin + var_8 * var_2 * var_7;
     }
 
-    magicbullet("iw8_ar_akilo47", var1.origin, var9);
+    magicbullet("iw8_ar_akilo47", var_1.origin, var_9);
     waitframe();
   }
 }
 
-function wounded_drag_pistol_swap(var0) {}
+function wounded_drag_pistol_swap(var_0) {}
 
-function veh01_ied(var0) {
+function veh01_ied(var_0) {
   scripts\engine\utility::flag_set("play_IED_explosion");
 }
 
-function intro_remove_fov_scale_factor_override(var0) {
+function intro_remove_fov_scale_factor_override(var_0) {
   level.player lerpfovscalefactor(1, 1.5);
 }
 
-function wolf_nag_counter(var0) {
+function wolf_nag_counter(var_0) {
   level.wolf_nag_count++;
 }

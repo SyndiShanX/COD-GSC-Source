@@ -3,65 +3,65 @@
  * Script: scripts\sp\anim_notetrack.gsc
 ***********************************************/
 
-function entity_handle_notetrack(var0, var1) {
+function entity_handle_notetrack(var_0, var_1) {
   if(isDefined(level.customnotetrackhandler)) {
-    var0[[level.customnotetrackhandler]](var1);
+    var_0[[level.customnotetrackhandler]](var_1);
   }
 
-  if(var0 scripts\anim\notetracks::notetrack_prefix_handler(var1)) {
+  if(var_0 scripts\anim\notetracks::notetrack_prefix_handler(var_1)) {
     return;
   }
 
-  general_notetrack_handler(var0, var1);
+  general_notetrack_handler(var_0, var_1);
 }
 
-function general_notetrack_handler(var0, var1) {
-  switch (var1) {
+function general_notetrack_handler(var_0, var_1) {
+  switch (var_1) {
     case "ignoreall true":
-      var0.ignoreall = 1;
+      var_0.ignoreall = 1;
       break;
     case "ignoreall false":
-      var0.ignoreall = 0;
+      var_0.ignoreall = 0;
       break;
     case "ignoreme true":
-      var0.ignoreme = 1;
+      var_0.ignoreme = 1;
       break;
     case "ignoreme false":
-      var0.ignoreme = 0;
+      var_0.ignoreme = 0;
       break;
     case "allowdeath true":
-      var0.allowdeath = 1;
+      var_0.allowdeath = 1;
       break;
     case "allowdeath false":
-      var0.allowdeath = 0;
+      var_0.allowdeath = 0;
       break;
     case "follow off":
-      var0.followoff = 1;
+      var_0.followoff = 1;
       break;
     case "follow on":
-      var0.followoff = 0;
+      var_0.followoff = 0;
       break;
     case "lookat_plr_head_on":
       break;
     case "lookat_plr_eyes_on":
-      var0 thread scripts\engine\sp\utility::gesture_follow_eyes(level.player, 4, 0.1);
+      var_0 thread scripts\engine\sp\utility::gesture_follow_eyes(level.player, 4, 0.1);
       break;
     case "lookat_plr_off":
-      var0 thread scripts\engine\sp\utility::gesture_stop(0.7);
+      var_0 thread scripts\engine\sp\utility::gesture_stop(0.7);
       break;
     case "lookat_plr_eyes_off":
-      var0 thread scripts\engine\sp\utility::gesture_eyes_stop(0.1);
+      var_0 thread scripts\engine\sp\utility::gesture_eyes_stop(0.1);
       break;
     case "lookat_plr_head_off":
       break;
     case "bc_vo_start":
-      var0 notify("bc_vochat_start");
+      var_0 notify("bc_vochat_start");
       break;
     case "blind_on":
-      var0 scripts\stealth\callbacks::stealth_call("set_blind", 1);
+      var_0 scripts\stealth\callbacks::stealth_call("set_blind", 1);
       break;
     case "blind_off":
-      var0 scripts\stealth\callbacks::stealth_call("set_blind", 0);
+      var_0 scripts\stealth\callbacks::stealth_call("set_blind", 0);
       break;
     case "start_aim":
       self.gunposeoverride_internal = undefined;
@@ -73,62 +73,62 @@ function general_notetrack_handler(var0, var1) {
   }
 }
 
-function sp_anim_handle_notetrack(var0, var1, var2, var3) {
-  scripts\common\notetrack::anim_handle_notetrack(var0, var1, var2, var3);
+function sp_anim_handle_notetrack(var_0, var_1, var_2, var_3) {
+  scripts\common\notetrack::anim_handle_notetrack(var_0, var_1, var_2, var_3);
 
-  if(isDefined(var0["flag"])) {
-    scripts\engine\utility::flag_set(var0["flag"]);
+  if(isDefined(var_0["flag"])) {
+    scripts\engine\utility::flag_set(var_0["flag"]);
   }
 
-  if(isDefined(var0["flag_clear"])) {
-    scripts\engine\utility::flag_clear(var0["flag_clear"]);
+  if(isDefined(var_0["flag_clear"])) {
+    scripts\engine\utility::flag_clear(var_0["flag_clear"]);
   }
 
-  if(isDefined(var0["attach gun left"])) {
-    gun_pickup_left(var1);
+  if(isDefined(var_0["attach gun left"])) {
+    gun_pickup_left(var_1);
     return;
   }
 
-  if(isDefined(var0["attach gun right"])) {
-    gun_pickup_right(var1);
+  if(isDefined(var_0["attach gun right"])) {
+    gun_pickup_right(var_1);
     return;
   }
 
-  if(isDefined(var0["detach gun"])) {
-    gun_leave_behind(var1, var0);
+  if(isDefined(var_0["detach gun"])) {
+    gun_leave_behind(var_1, var_0);
     return;
   }
 
-  if(isDefined(var0["mayhem_start"])) {
-    mayhem_start(var0["mayhem_start"], var0["use_hat_model"]);
+  if(isDefined(var_0["mayhem_start"])) {
+    mayhem_start(var_0["mayhem_start"], var_0["use_hat_model"]);
   }
 
-  if(isDefined(var0["mayhem_end"])) {
-    mayhem_end(var0["mayhem_end"], var0["use_hat_model"]);
+  if(isDefined(var_0["mayhem_end"])) {
+    mayhem_end(var_0["mayhem_end"], var_0["use_hat_model"]);
   }
 
-  if(isDefined(var0["sound"])) {
-    var4 = undefined;
+  if(isDefined(var_0["sound"])) {
+    var_4 = undefined;
 
-    if(!isDefined(var0["sound_stays_death"])) {
-      var4 = 1;
+    if(!isDefined(var_0["sound_stays_death"])) {
+      var_4 = 1;
     }
 
-    var5 = undefined;
+    var_5 = undefined;
 
-    if(isDefined(var0["sound_on_tag"])) {
-      var5 = var0["sound_on_tag"];
+    if(isDefined(var_0["sound_on_tag"])) {
+      var_5 = var_0["sound_on_tag"];
     }
 
-    var1 thread scripts\engine\sp\utility::play_sound_on_tag(var0["sound"], var5, var4);
+    var_1 thread scripts\engine\sp\utility::play_sound_on_tag(var_0["sound"], var_5, var_4);
   }
 
-  if(isDefined(var0["playersound"])) {
-    level.player playSound(var0["playersound"]);
+  if(isDefined(var_0["playersound"])) {
+    level.player playSound(var_0["playersound"]);
   }
 
-  if(isDefined(var0["playerdialogue"])) {
-    level.player thread scripts\engine\sp\utility::smart_player_dialogue(var0["playerdialogue"]);
+  if(isDefined(var_0["playerdialogue"])) {
+    level.player thread scripts\engine\sp\utility::smart_player_dialogue(var_0["playerdialogue"]);
     return;
   }
 }
@@ -153,41 +153,41 @@ function gun_pickup_right() {
   scripts\anim\shared::placeweaponon(self.weapon, "right");
 }
 
-function gun_leave_behind(var0) {
+function gun_leave_behind(var_0) {
   if(isDefined(self.gun_on_ground)) {
     return;
   }
 
-  var1 = undefined;
+  var_1 = undefined;
 
-  if(isDefined(var0["suspend"])) {
-    var1 = var0["suspend"];
+  if(isDefined(var_0["suspend"])) {
+    var_1 = var_0["suspend"];
   }
 
-  scripts\sp\anim::primaryweapon_leave_behind(var0["tag"], var1);
+  scripts\sp\anim::primaryweapon_leave_behind(var_0["tag"], var_1);
 }
 
-function mayhem_start(var0, var1) {
+function mayhem_start(var_0, var_1) {
   self.notetrackmayhemstarted = 1;
   self detach(self.headmodel);
 
-  if(!istrue(var1) && isDefined(self.hatmodel)) {
+  if(!istrue(var_1) && isDefined(self.hatmodel)) {
     self detach(self.hatmodel);
   }
 
-  self setanim(var0, 1, 0, 1);
+  self setanim(var_0, 1, 0, 1);
 }
 
-function mayhem_end(var0, var1) {
+function mayhem_end(var_0, var_1) {
   if(!istrue(self.notetrackmayhemstarted)) {
     return;
   }
 
   self.notetrackmayhemstarted = undefined;
-  self setanim(var0, 0, 0, 1);
+  self setanim(var_0, 0, 0, 1);
   self attach(self.headmodel);
 
-  if(!istrue(var1) && isDefined(self.hatmodel)) {
+  if(!istrue(var_1) && isDefined(self.hatmodel)) {
     self attach(self.hatmodel);
     return;
   }

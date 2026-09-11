@@ -16,20 +16,20 @@ function agent_player_dom_think() {
 }
 
 function agent_squadmember_dom_think() {
-  var0 = undefined;
+  var_0 = undefined;
 
-  foreach(var2 in self.owner.touchtriggers) {
-    if(var2.id == "domFlag") {
-      var0 = var2;
+  foreach(var_2 in self.owner.touchtriggers) {
+    if(var_2.id == "domFlag") {
+      var_0 = var_2;
     }
   }
 
-  if(isDefined(var0)) {
-    var4 = var0 scripts\mp\gametypes\dom::getflagteam();
+  if(isDefined(var_0)) {
+    var_4 = var_0 scripts\mp\gametypes\dom::getflagteam();
 
-    if(var4 != self.team) {
-      if(!scripts\mp\bots\bots_gametype_dom::bot_is_capturing_flag(var0)) {
-        scripts\mp\bots\bots_gametype_dom::capture_flag(var0, "critical", 1);
+    if(var_4 != self.team) {
+      if(!scripts\mp\bots\bots_gametype_dom::bot_is_capturing_flag(var_0)) {
+        scripts\mp\bots\bots_gametype_dom::capture_flag(var_0, "critical", 1);
       }
 
       return true;

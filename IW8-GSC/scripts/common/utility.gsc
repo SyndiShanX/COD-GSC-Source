@@ -5,14 +5,14 @@
 
 function issp() {
   if(!isDefined(level.issp)) {
-    var0 = getDvar("mapname");
-    var1 = "";
+    var_0 = getDvar("mapname");
+    var_1 = "";
 
-    for(var2 = 0; var2 < min(var0.size, 3); var2++) {
-      var1 += var0[var2];
+    for(var_2 = 0; var_2 < min(var_0.size, 3); var_2++) {
+      var_1 += var_0[var_2];
     }
 
-    level.issp = var1 != "mp_" && var1 != "cp_";
+    level.issp = var_1 != "mp_" && var_1 != "cp_";
   }
 
   return level.issp;
@@ -26,56 +26,56 @@ function ismp() {
   return scripts\engine\utility::string_starts_with(getDvar("mapname"), "mp_");
 }
 
-function make_weapon_model(var0, var1, var2, var3) {
-  if(!isDefined(var1)) {
-    var1 = [];
+function make_weapon_model(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_1)) {
+    var_1 = [];
   }
 
-  if(!isDefined(var2)) {
-    var2 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  if(isDefined(level.fnbuildweaponspecial) && isDefined([[level.fnbuildweaponspecial]](var0))) {
-    var4 = [[level.fnbuildweaponspecial]](var0);
+  if(isDefined(level.fnbuildweaponspecial) && isDefined([[level.fnbuildweaponspecial]](var_0))) {
+    var_4 = [[level.fnbuildweaponspecial]](var_0);
   } else {
-    var4 = [[level.fnbuildweapon]](var1, var2);
+    var_4 = [[level.fnbuildweapon]](var_1, var_2);
   }
 
-  if(isent(self) && !isDefined(var4)) {
-    self setModel(getweaponmodel(var4));
+  if(isent(self) && !isDefined(var_4)) {
+    self setModel(getweaponmodel(var_4));
   }
 
-  var5 = getweaponattachmentworldmodels(var4);
+  var_5 = getweaponattachmentworldmodels(var_4);
 
-  foreach(var7 in var5) {
-    if(istrue(var3)) {
-      var8 = strtok(var7, "_");
+  foreach(var_7 in var_5) {
+    if(istrue(var_3)) {
+      var_8 = strtok(var_7, "_");
 
-      foreach(var10 in var8) {
-        if(var11 == 0) {
-          var7 = var10;
+      foreach(var_10 in var_8) {
+        if(var_11 == 0) {
+          var_7 = var_10;
           continue;
         }
 
-        if(var10 == "wm") {
-          var7 += "_vm";
+        if(var_10 == "wm") {
+          var_7 += "_vm";
           continue;
         }
 
-        var7 = var7 + "_" + var10;
+        var_7 = var_7 + "_" + var_10;
       }
     }
 
-    if(istrue(var4)) {
-      precachemodel(var7);
+    if(istrue(var_4)) {
+      precachemodel(var_7);
       continue;
     }
 
-    self attach(var7);
+    self attach(var_7);
   }
 
-  if(!istrue(var4)) {
-    switch (var1) {
+  if(!istrue(var_4)) {
+    switch (var_1) {
       case "iw8_pi_cpapa":
         self hidepart("j_b_loader");
         self hidepart("j_b_loader_01");
@@ -91,23 +91,23 @@ function make_weapon_model(var0, var1, var2, var3) {
         break;
     }
 
-    foreach(var7 in var5) {
-      if(issubstr(var7, "reflex")) {
+    foreach(var_7 in var_5) {
+      if(issubstr(var_7, "reflex")) {
         self hidepart("tag_sight_on");
         continue;
       }
 
-      if(issubstr(var7, "holo")) {
+      if(issubstr(var_7, "holo")) {
         self hidepart("tag_sight_on");
         continue;
       }
 
-      if(issubstr(var7, "acog")) {
+      if(issubstr(var_7, "acog")) {
         self hidepart("tag_sight_on");
         continue;
       }
 
-      if(issubstr(var7, "snprscope")) {
+      if(issubstr(var_7, "snprscope")) {
         self hidepart("tag_sight_on");
       }
     }
@@ -116,70 +116,70 @@ function make_weapon_model(var0, var1, var2, var3) {
   }
 }
 
-function make_weapon_and_attach(var0, var1, var2, var3, var4) {
-  if(!istrue(var4)) {
-    var5 = 0;
+function make_weapon_and_attach(var_0, var_1, var_2, var_3, var_4) {
+  if(!istrue(var_4)) {
+    var_5 = 0;
 
     if(isent(self) || isai(self)) {
-      var5 = 1;
+      var_5 = 1;
     }
   }
 
-  if(!isDefined(var1)) {
-    var1 = [];
+  if(!isDefined(var_1)) {
+    var_1 = [];
   }
 
-  if(!isDefined(var3)) {
-    var3 = 0;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  if(isDefined(level.fnbuildweaponspecial) && isDefined([[level.fnbuildweaponspecial]](var0))) {
-    var6 = [[level.fnbuildweaponspecial]](var0);
+  if(isDefined(level.fnbuildweaponspecial) && isDefined([[level.fnbuildweaponspecial]](var_0))) {
+    var_6 = [[level.fnbuildweaponspecial]](var_0);
   } else {
-    var6 = [[level.fnbuildweapon]](var1, var2);
+    var_6 = [[level.fnbuildweapon]](var_1, var_2);
   }
 
-  if(!istrue(var6)) {
-    if(isDefined(var3)) {
-      self attach(getweaponmodel(var1), var3);
+  if(!istrue(var_6)) {
+    if(isDefined(var_3)) {
+      self attach(getweaponmodel(var_1), var_3);
     } else {
-      self attach(getweaponmodel(var1));
+      self attach(getweaponmodel(var_1));
     }
   }
 
-  self.attachedweaponmodels[0] = var1;
-  var7 = getweaponattachmentworldmodels(var6);
+  self.attachedweaponmodels[0] = var_1;
+  var_7 = getweaponattachmentworldmodels(var_6);
 
-  foreach(var9 in var7) {
-    if(istrue(var4)) {
-      var10 = strtok(var9, "_");
+  foreach(var_9 in var_7) {
+    if(istrue(var_4)) {
+      var_10 = strtok(var_9, "_");
 
-      foreach(var12 in var10) {
-        if(var13 == 0) {
-          var9 = var12;
+      foreach(var_12 in var_10) {
+        if(var_13 == 0) {
+          var_9 = var_12;
           continue;
         }
 
-        if(var12 == "wm") {
-          var9 += "_vm";
+        if(var_12 == "wm") {
+          var_9 += "_vm";
           continue;
         }
 
-        var9 = var9 + "_" + var12;
+        var_9 = var_9 + "_" + var_12;
       }
     }
 
-    if(istrue(var6)) {
-      precachemodel(var9);
+    if(istrue(var_6)) {
+      precachemodel(var_9);
       continue;
     }
 
-    self attach(var9);
-    self.attachedweaponmodels = scripts\engine\utility::array_add(self.attachedweaponmodels, var9);
+    self attach(var_9);
+    self.attachedweaponmodels = scripts\engine\utility::array_add(self.attachedweaponmodels, var_9);
   }
 
-  if(!istrue(var6)) {
-    switch (var1) {
+  if(!istrue(var_6)) {
+    switch (var_1) {
       case "iw8_pi_cpapa":
         self hidepart("j_b_loader");
         self hidepart("j_b_loader_01");
@@ -195,18 +195,18 @@ function make_weapon_and_attach(var0, var1, var2, var3, var4) {
         break;
     }
 
-    foreach(var9 in var7) {
-      if(issubstr(var9, "reflex")) {
+    foreach(var_9 in var_7) {
+      if(issubstr(var_9, "reflex")) {
         self hidepart("tag_sight_on");
         continue;
       }
 
-      if(issubstr(var9, "holo")) {
+      if(issubstr(var_9, "holo")) {
         self hidepart("tag_sight_on");
         continue;
       }
 
-      if(issubstr(var9, "acog")) {
+      if(issubstr(var_9, "acog")) {
         self hidepart("tag_sight_on");
       }
     }
@@ -215,141 +215,141 @@ function make_weapon_and_attach(var0, var1, var2, var3, var4) {
   }
 }
 
-function make_weapon_random(var0, var1, var2) {
-  var3 = get_random_attachments(var1, var2);
-  var4 = [[level.fnbuildweapon]](var0, var3);
-  return var4;
+function make_weapon_random(var_0, var_1, var_2) {
+  var_3 = get_random_attachments(var_1, var_2);
+  var_4 = [[level.fnbuildweapon]](var_0, var_3);
+  return var_4;
 }
 
-function get_random_attachments(var0, var1) {
-  if(isDefined(var1) && var1.size > 0) {
-    if(var0.size < 1) {
-      return var1[randomint(var1.size)];
+function get_random_attachments(var_0, var_1) {
+  if(isDefined(var_1) && var_1.size > 0) {
+    if(var_0.size < 1) {
+      return var_1[randomint(var_1.size)];
     }
 
     if(randomint(4)) {
-      return var1[randomint(var1.size)];
+      return var_1[randomint(var_1.size)];
     }
   }
 
-  var2 = [];
+  var_2 = [];
 
-  if(var0.size < 1) {
-    return var2;
+  if(var_0.size < 1) {
+    return var_2;
   }
 
-  foreach(var5, var4 in var0) {
-    if(isint(var0[var5][0])) {
-      if(randomint(100) < var0[var5][0]) {
-        var2 = scripts\engine\utility::array_add(var2, var4[randomint(var4.size - 1) + 1]);
+  foreach(var_5, var_4 in var_0) {
+    if(isint(var_0[var_5][0])) {
+      if(randomint(100) < var_0[var_5][0]) {
+        var_2 = scripts\engine\utility::array_add(var_2, var_4[randomint(var_4.size - 1) + 1]);
       }
 
       continue;
     }
 
-    return var2;
+    return var_2;
   }
 
-  var6 = undefined;
-  var7 = undefined;
+  var_6 = undefined;
+  var_7 = undefined;
 
-  foreach(var5, var9 in var2) {
-    if(issubstr(var9, "grip")) {
-      var7 = var5;
+  foreach(var_5, var_9 in var_2) {
+    if(issubstr(var_9, "grip")) {
+      var_7 = var_5;
       continue;
     }
 
-    if(issubstr(var9, "ub_")) {
-      var6 = var5;
+    if(issubstr(var_9, "ub_")) {
+      var_6 = var_5;
     }
   }
 
-  if(isDefined(var6) && isDefined(var7)) {
+  if(isDefined(var_6) && isDefined(var_7)) {
     if(randomint(3) == 0) {
-      var2 = scripts\engine\utility::array_remove_index(var2, var6);
+      var_2 = scripts\engine\utility::array_remove_index(var_2, var_6);
     } else {
-      var2 = scripts\engine\utility::array_remove_index(var2, var7);
+      var_2 = scripts\engine\utility::array_remove_index(var_2, var_7);
     }
   }
 
-  return var2;
+  return var_2;
 }
 
-function get_weapon_weighted(var0, var1) {
-  var2 = [];
-  var3 = getarraykeys(var1);
+function get_weapon_weighted(var_0, var_1) {
+  var_2 = [];
+  var_3 = getarraykeys(var_1);
 
-  foreach(var7, var5 in var0) {
-    var6 = scripts\engine\utility::array_find(var3, var5);
+  foreach(var_7, var_5 in var_0) {
+    var_6 = scripts\engine\utility::array_find(var_3, var_5);
 
-    if(isDefined(var6)) {
-      var2 = var1[var3[var6]];
+    if(isDefined(var_6)) {
+      var_2 = var_1[var_3[var_6]];
       continue;
     }
 
-    var2 = 0;
+    var_2 = 0;
   }
 
-  var8 = 0;
+  var_8 = 0;
 
-  foreach(var10 in var2) {
-    var8 += var10;
+  foreach(var_10 in var_2) {
+    var_8 += var_10;
   }
 
-  if(var8 > 100) {}
+  if(var_8 > 100) {}
 
-  if(var8 < 100) {
-    var12 = 100 - var8;
-    var13 = 0;
+  if(var_8 < 100) {
+    var_12 = 100 - var_8;
+    var_13 = 0;
 
-    foreach(var10 in var2) {
-      if(var10 == 0) {
-        var13 += 1;
+    foreach(var_10 in var_2) {
+      if(var_10 == 0) {
+        var_13 += 1;
       }
     }
 
-    if(var13 > 0) {
-      var16 = var12 / var13;
+    if(var_13 > 0) {
+      var_16 = var_12 / var_13;
 
-      foreach(var7, var10 in var2) {
-        if(var10 == 0) {
-          var2 = var16;
+      foreach(var_7, var_10 in var_2) {
+        if(var_10 == 0) {
+          var_2 = var_16;
         }
       }
     }
   }
 
-  var18 = randomint(100);
+  var_18 = randomint(100);
 
-  foreach(var7, var10 in var2) {
-    if(var7 > 0) {
-      var2 = var10 + var2[var7 - 1];
+  foreach(var_7, var_10 in var_2) {
+    if(var_7 > 0) {
+      var_2 = var_10 + var_2[var_7 - 1];
     }
 
-    if(var18 < var2[var7]) {
-      return var0[var7];
+    if(var_18 < var_2[var_7]) {
+      return var_0[var_7];
     }
   }
 
   if(getdvarint("scr_randomweapon_debug")) {
-    if(var0.size > 1) {}
+    if(var_0.size > 1) {}
   }
 
-  return var0[0];
+  return var_0[0];
 }
 
-function lookatentity(var0, var1) {
-  var2 = 1;
+function lookatentity(var_0, var_1) {
+  var_2 = 1;
 
-  if(isDefined(var1)) {
-    var2 = var1;
+  if(isDefined(var_1)) {
+    var_2 = var_1;
   }
 
-  self.entitylookingat = var0;
+  self.entitylookingat = var_0;
 
-  if(isDefined(var0)) {
+  if(isDefined(var_0)) {
     self.lookingatent = 1;
-    self setlookatentity(var0, var2);
+    self setlookatentity(var_0, var_2);
     return;
   }
 
@@ -357,43 +357,43 @@ function lookatentity(var0, var1) {
   self setlookatentity();
 }
 
-function lookatstateoverride(var0) {
-  self.lookatstateoverride = var0;
+function lookatstateoverride(var_0) {
+  self.lookatstateoverride = var_0;
 
-  if(isDefined(var0)) {
-    self setlookatstateoverride(var0);
+  if(isDefined(var_0)) {
+    self setlookatstateoverride(var_0);
     return;
   }
 
   self setlookatstateoverride();
 }
 
-function civ_glancedownpath(var0) {
+function civ_glancedownpath(var_0) {
   if(!isDefined(self.pathgoalpos)) {
     return;
   }
 
   self.internal_entitytolookat = self.entitylookingat;
   lookatentity();
-  internal_civglancedownpath(gettime(), var0);
+  internal_civglancedownpath(gettime(), var_0);
   lookatentity(self.internal_entitytolookat);
   self.internal_entitytolookat = undefined;
   self notify("glance_finished");
 }
 
-function internal_civglancedownpath(var0, var1) {
-  var2 = 2500;
-  var3 = scripts\engine\utility::ter_op(isDefined(self.lookdownpathdist), self.lookdownpathdist, 75);
+function internal_civglancedownpath(var_0, var_1) {
+  var_2 = 2500;
+  var_3 = scripts\engine\utility::ter_op(isDefined(self.lookdownpathdist), self.lookdownpathdist, 75);
 
-  while(var0 + var1 > gettime()) {
-    var4 = self getposonpath(var3);
-    var4 += (0, 0, 60);
+  while(var_0 + var_1 > gettime()) {
+    var_4 = self getposonpath(var_3);
+    var_4 += (0, 0, 60);
 
-    if(distancesquared(self.origin, var4) < var2) {
+    if(distancesquared(self.origin, var_4) < var_2) {
       break;
     }
 
-    self setlookat(var4);
+    self setlookat(var_4);
     waitframe();
   }
 
@@ -404,30 +404,30 @@ function glancestop() {
   self stoplookat();
 }
 
-function lookatpos(var0, var1) {
+function lookatpos(var_0, var_1) {
   self notify("newLookAt");
 
-  if(!isDefined(var1)) {
-    var1 = 1;
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     self stoplookat();
     return;
   }
 
-  self setlookat(var0, var1);
+  self setlookat(var_0, var_1);
 }
 
-function isweaponepic(var0) {
-  var1 = getweaponattachments(var0);
+function isweaponepic(var_0) {
+  var_1 = getweaponattachments(var_0);
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return false;
   }
 
-  foreach(var3 in var1) {
-    if(issubstr(var3, "epic")) {
+  foreach(var_3 in var_1) {
+    if(issubstr(var_3, "epic")) {
       return true;
     }
   }
@@ -435,18 +435,18 @@ function isweaponepic(var0) {
   return false;
 }
 
-function isdamageweapon(var0) {
-  var1 = self.damageweapon;
+function isdamageweapon(var_0) {
+  var_1 = self.damageweapon;
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return false;
   }
 
-  if(nullweapon(var1)) {
+  if(nullweapon(var_1)) {
     return false;
   }
 
-  if(var1.basename != getweaponbasename(var0)) {
+  if(var_1.basename != getweaponbasename(var_0)) {
     return false;
   }
 
@@ -454,10 +454,10 @@ function isdamageweapon(var0) {
 }
 
 function meleegrab_ksweapon_used() {
-  var0 = ["mars_killstreak", "iw7_jackal_support_designator"];
-  var1 = self getcurrentweapon();
+  var_0 = ["mars_killstreak", "iw7_jackal_support_designator"];
+  var_1 = self getcurrentweapon();
 
-  if(scripts\engine\utility::array_contains(var0, var1.basename)) {
+  if(scripts\engine\utility::array_contains(var_0, var_1.basename)) {
     return true;
   }
 
@@ -466,7 +466,7 @@ function meleegrab_ksweapon_used() {
   }
 
   if(self israisingweapon()) {
-    if(scripts\engine\utility::array_contains(var0, var1.basename)) {
+    if(scripts\engine\utility::array_contains(var_0, var_1.basename)) {
       return true;
     }
   }
@@ -479,17 +479,17 @@ function wasdamagedbyoffhandshield() {
     return false;
   }
 
-  var0 = self.damageweapon;
+  var_0 = self.damageweapon;
 
-  if(!isDefined(var0) || var0.type != "shield") {
+  if(!isDefined(var_0) || var_0.type != "shield") {
     return false;
   }
 
   return true;
 }
 
-function ref_132ec(var0) {
-  if(var0.basename == "molotov" || var0.basename == "molotov_mp" || istrue(var0.unlockableindex)) {
+function ref_132ec(var_0) {
+  if(var_0.basename == "molotov" || var_0.basename == "molotov_mp" || istrue(var_0.unlockableindex)) {
     return true;
   }
 
@@ -516,11 +516,11 @@ function wasdamagedbyexplosive() {
   }
 
   if(gettime() - anim.lastcarexplosiontime <= 50) {
-    var0 = anim.lastcarexplosionrange * anim.lastcarexplosionrange * 1.2 * 1.2;
+    var_0 = anim.lastcarexplosionrange * anim.lastcarexplosionrange * 1.2 * 1.2;
 
-    if(distancesquared(self.origin, anim.lastcarexplosiondamagelocation) < var0) {
-      var1 = var0 * 0.5 * 0.5;
-      self.maydoupwardsdeath = distancesquared(self.origin, anim.lastcarexplosionlocation) < var1;
+    if(distancesquared(self.origin, anim.lastcarexplosiondamagelocation) < var_0) {
+      var_1 = var_0 * 0.5 * 0.5;
+      self.maydoupwardsdeath = distancesquared(self.origin, anim.lastcarexplosionlocation) < var_1;
       return true;
     }
   }
@@ -528,14 +528,14 @@ function wasdamagedbyexplosive() {
   return false;
 }
 
-function getdamagetype(var0) {
-  if(!isDefined(var0)) {
+function getdamagetype(var_0) {
+  if(!isDefined(var_0)) {
     return "unknown";
   }
 
-  var0 = tolower(var0);
+  var_0 = tolower(var_0);
 
-  switch (var0) {
+  switch (var_0) {
     case "melee":
     case "mod_crush":
     case "mod_melee":
@@ -562,18 +562,18 @@ function getdamagetype(var0) {
   }
 }
 
-function isprotectedbyriotshield(var0) {
-  if(isDefined(var0.hasriotshield) && var0.hasriotshield) {
-    var1 = self.origin - var0.origin;
-    var2 = vectorNormalize((var1[0], var1[1], 0));
-    var3 = anglesToForward(var0.angles);
-    var4 = vectordot(var3, var1);
+function isprotectedbyriotshield(var_0) {
+  if(isDefined(var_0.hasriotshield) && var_0.hasriotshield) {
+    var_1 = self.origin - var_0.origin;
+    var_2 = vectorNormalize((var_1[0], var_1[1], 0));
+    var_3 = anglesToForward(var_0.angles);
+    var_4 = vectordot(var_3, var_1);
 
-    if(istrue(var0.hasriotshieldequipped)) {
-      if(var4 > 0.766) {
+    if(istrue(var_0.hasriotshieldequipped)) {
+      if(var_4 > 0.766) {
         return true;
       }
-    } else if(var4 < -0.766) {
+    } else if(var_4 < -0.766) {
       return true;
     }
   }
@@ -581,38 +581,38 @@ function isprotectedbyriotshield(var0) {
   return false;
 }
 
-function isprotectedbyaxeblock(var0) {
-  var1 = 0;
-  var2 = self getcurrentweapon();
-  var3 = self adsButtonPressed();
-  var4 = 0;
-  var5 = 0;
-  var6 = 0;
-  var7 = anglesToForward(self.angles);
-  var8 = vectorNormalize(var0.origin - self.origin);
-  var9 = vectordot(var8, var7);
+function isprotectedbyaxeblock(var_0) {
+  var_1 = 0;
+  var_2 = self getcurrentweapon();
+  var_3 = self adsButtonPressed();
+  var_4 = 0;
+  var_5 = 0;
+  var_6 = 0;
+  var_7 = anglesToForward(self.angles);
+  var_8 = vectorNormalize(var_0.origin - self.origin);
+  var_9 = vectordot(var_8, var_7);
 
-  if(var9 > 0.5) {
-    var4 = 1;
+  if(var_9 > 0.5) {
+    var_4 = 1;
   }
 
-  if(var2.basename == "iw6_axe_mp" || var2.basename == "iw7_axe_zm") {
-    var6 = self getcurrentweaponclipammo();
-    var5 = 1;
+  if(var_2.basename == "iw6_axe_mp" || var_2.basename == "iw7_axe_zm") {
+    var_6 = self getcurrentweaponclipammo();
+    var_5 = 1;
   }
 
-  if(var5 && var3 && var4 && var6 > 0) {
-    self setweaponammoclip(var2, var6 - 1);
+  if(var_5 && var_3 && var_4 && var_6 > 0) {
+    self setweaponammoclip(var_2, var_6 - 1);
     self playSound("crate_impact");
     earthquake(0.75, 0.5, self.origin, 100);
-    var1 = 1;
+    var_1 = 1;
   }
 
-  return var1;
+  return var_1;
 }
 
-function isairdropmarker(var0) {
-  switch (var0) {
+function isairdropmarker(var_0) {
+  switch (var_0) {
     case "airdrop_tank_marker_mp":
     case "airdrop_sentry_marker_mp":
     case "airdrop_mega_marker_mp":
@@ -625,12 +625,12 @@ function isairdropmarker(var0) {
   }
 }
 
-function isdestructibleweapon(var0) {
-  if(!isDefined(var0)) {
+function isdestructibleweapon(var_0) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
-  switch (var0) {
+  switch (var_0) {
     case "barrel_mp":
     case "destructible_toy":
     case "destructible_car":
@@ -658,12 +658,12 @@ function disable_teamflashbangimmunity() {
   self.teamflashbangimmunity = undefined;
 }
 
-function setflashbangimmunity(var0) {
-  self.flashbangimmunity = var0;
+function setflashbangimmunity(var_0) {
+  self.flashbangimmunity = var_0;
 }
 
-function getcamotablecolumnindex(var0) {
-  switch (var0) {
+function getcamotablecolumnindex(var_0) {
+  switch (var_0) {
     case "index":
       return 0;
     case "camoasset":
@@ -678,9 +678,9 @@ function getcamotablecolumnindex(var0) {
 }
 
 function getdifficulty() {
-  var0 = isDefined(level.difficultytype) && isDefined(level.difficultytype[level.gameskill]) && level.difficultytype[level.gameskill] == "mp";
+  var_0 = isDefined(level.difficultytype) && isDefined(level.difficultytype[level.gameskill]) && level.difficultytype[level.gameskill] == "mp";
 
-  if(var0) {
+  if(var_0) {
     return "mp";
   }
 
@@ -707,12 +707,12 @@ function flashbangstop() {
   self.flashendtime = undefined;
 }
 
-function enable_cqbwalk(var0) {
+function enable_cqbwalk(var_0) {
   if(self.type == "dog") {
     return;
   }
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     self.cqbenabled = 1;
   }
 
@@ -731,9 +731,9 @@ function disable_cqbwalk() {
   clear_demeanor_override();
 }
 
-function demeanor_override(var0) {
+function demeanor_override(var_0) {
   if(isDefined(self.basearchetype) && (self.basearchetype == "soldier" || self.basearchetype == "rebel")) {
-    switch (var0) {
+    switch (var_0) {
       case "casual_walk":
       case "alert":
       case "patrol":
@@ -748,7 +748,7 @@ function demeanor_override(var0) {
   }
 
   if(self.asmname == "soldier" || self.asmname == "soldier_cp") {
-    switch (var0) {
+    switch (var_0) {
       case "casual_walk":
       case "patrol":
       case "casual_killer":
@@ -765,17 +765,17 @@ function demeanor_override(var0) {
         break;
     }
 
-    switch (var0) {
+    switch (var_0) {
       case "cqb":
         scripts\engine\utility::set_movement_speed(120 * self.speedscalemult);
-        var0 = "combat";
+        var_0 = "combat";
         break;
       case "combat":
         clear_movement_speed();
         break;
       case "sprint":
         scripts\engine\utility::set_movement_speed(225 * self.speedscalemult);
-        var0 = "combat";
+        var_0 = "combat";
         break;
       case "alert":
       case "patrol":
@@ -784,7 +784,7 @@ function demeanor_override(var0) {
     }
   }
 
-  self.demeanoroverride = var0;
+  self.demeanoroverride = var_0;
 }
 
 function clear_demeanor_override() {
@@ -811,24 +811,24 @@ function clear_demeanor_override() {
   }
 }
 
-function isweaponinitialized(var0) {
-  var1 = createheadicon(var0);
-  return isDefined(self.weaponinfo[var1]);
+function isweaponinitialized(var_0) {
+  var_1 = createheadicon(var_0);
+  return isDefined(self.weaponinfo[var_1]);
 }
 
-function initweapon(var0) {
-  var1 = createheadicon(var0);
-  self.weaponinfo[var1] = spawnStruct();
-  self.weaponinfo[var1].position = "none";
-  self.weaponinfo[var1].hasclip = 1;
-  var2 = getweaponclipmodel(var0);
+function initweapon(var_0) {
+  var_1 = createheadicon(var_0);
+  self.weaponinfo[var_1] = spawnStruct();
+  self.weaponinfo[var_1].position = "none";
+  self.weaponinfo[var_1].hasclip = 1;
+  var_2 = getweaponclipmodel(var_0);
 
-  if(issp() && isDefined(var2) && var2 != "" && (issubstr(var2, "drum") || issubstr(var2, "mag"))) {
-    self.weaponinfo[var1].useclip = 1;
+  if(issp() && isDefined(var_2) && var_2 != "" && (issubstr(var_2, "drum") || issubstr(var_2, "mag"))) {
+    self.weaponinfo[var_1].useclip = 1;
     return;
   }
 
-  self.weaponinfo[var1].useclip = 0;
+  self.weaponinfo[var_1].useclip = 0;
 }
 
 function allow_init() {
@@ -874,40 +874,40 @@ function allow_init() {
   allow_add("ascender_use", &brjugg_droponplayerdeath);
 }
 
-function allow_add(var0, var1) {
-  level.allow_funcs[tolower(var0)] = var1;
+function allow_add(var_0, var_1) {
+  level.allow_funcs[tolower(var_0)] = var_1;
 }
 
-function allow_register_set(var0, var1) {
-  level.allow_sets[tolower(var0)] = var1;
+function allow_register_set(var_0, var_1) {
+  level.allow_sets[tolower(var_0)] = var_1;
 }
 
-function allow_set(var0, var1, var2) {
-  var0 = tolower(var0);
-  allow_array(level.allow_sets[var0], var1, var2);
+function allow_set(var_0, var_1, var_2) {
+  var_0 = tolower(var_0);
+  allow_array(level.allow_sets[var_0], var_1, var_2);
 }
 
-function allow_array(var0, var1, var2) {
-  foreach(var4 in var0) {
-    var4 = tolower(var4);
-    self thread[[level.allow_funcs[var4]]](var1, var2);
+function allow_array(var_0, var_1, var_2) {
+  foreach(var_4 in var_0) {
+    var_4 = tolower(var_4);
+    self thread[[level.allow_funcs[var_4]]](var_1, var_2);
   }
 }
 
-function allow_weapon_switch_clip(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("weaponSwitchClip", var0, var1);
-  self disableemptyclipweaponswitch(!istrue(var2));
+function allow_weapon_switch_clip(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("weaponSwitchClip", var_0, var_1);
+  self disableemptyclipweaponswitch(!istrue(var_2));
 }
 
 function is_weapon_switch_clip_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("weaponSwitchClip");
 }
 
-function allow_usability(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("usability", var0, var1);
+function allow_usability(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("usability", var_0, var_1);
 
-  if(isDefined(var2)) {
-    if(var2) {
+  if(isDefined(var_2)) {
+    if(var_2) {
       self enableusability();
       return;
     }
@@ -917,11 +917,11 @@ function allow_usability(var0, var1) {
   }
 }
 
-function brjugg_watchheatreduction(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("usability", var0, var1);
+function brjugg_watchheatreduction(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("usability", var_0, var_1);
 
-  if(isDefined(var2)) {
-    if(var2) {
+  if(isDefined(var_2)) {
+    if(var_2) {
       self enableusability();
       return;
     }
@@ -935,10 +935,10 @@ function is_usability_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("usability");
 }
 
-function allow_weapon(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("weapon", var0, var1);
+function allow_weapon(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("weapon", var_0, var_1);
 
-  if(isDefined(var2) && var2) {
+  if(isDefined(var_2) && var_2) {
     self enableweapons();
 
     if(isDefined(level.allow_weapon_mp)) {
@@ -949,7 +949,7 @@ function allow_weapon(var0, var1) {
     return;
   }
 
-  if(isDefined(var2) && !var2) {
+  if(isDefined(var_2) && !var_2) {
     if(isDefined(level.allow_weapon_mp)) {
       self[[level.allow_weapon_mp]](0);
     }
@@ -963,15 +963,15 @@ function is_weapon_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("weapon");
 }
 
-function allow_weapon_switch(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("weaponSwitch", var0, var1);
+function allow_weapon_switch(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("weaponSwitch", var_0, var_1);
 
-  if(isDefined(var2) && var2) {
+  if(isDefined(var_2) && var_2) {
     self enableweaponswitch();
     return;
   }
 
-  if(isDefined(var2) && !var2) {
+  if(isDefined(var_2) && !var_2) {
     self disableweaponswitch();
     return;
   }
@@ -981,23 +981,23 @@ function is_weapon_switch_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("weaponSwitch");
 }
 
-function allow_script_weapon_switch(var0, var1) {
-  scripts\common\input_allow::allow_input_internal("scriptWeaponSwitch", var0, var1);
+function allow_script_weapon_switch(var_0, var_1) {
+  scripts\common\input_allow::allow_input_internal("scriptWeaponSwitch", var_0, var_1);
 }
 
 function is_script_weapon_switch_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("scriptWeaponSwitch");
 }
 
-function allow_weapon_pickup(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("weaponPickup", var0, var1);
+function allow_weapon_pickup(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("weaponPickup", var_0, var_1);
 
-  if(isDefined(var2) && var2) {
+  if(isDefined(var_2) && var_2) {
     self enableweaponpickup();
     return;
   }
 
-  if(isDefined(var2) && !var2) {
+  if(isDefined(var_2) && !var_2) {
     self disableweaponpickup();
     return;
   }
@@ -1007,11 +1007,11 @@ function is_weapon_pickup_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("weaponPickup");
 }
 
-function allow_offhand_weapons(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("offhandWeaps", var0, var1);
+function allow_offhand_weapons(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("offhandWeaps", var_0, var_1);
 
-  if(isDefined(var2)) {
-    if(var2) {
+  if(isDefined(var_2)) {
+    if(var_2) {
       self enableoffhandweapons();
 
       if(!isDefined(level.ismp) || level.ismp == 0) {
@@ -1037,11 +1037,11 @@ function is_offhand_weapons_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("offhandWeaps");
 }
 
-function allow_offhand_primary_weapons(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("offhandPrimaryWeaps", var0, var1);
+function allow_offhand_primary_weapons(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("offhandPrimaryWeaps", var_0, var_1);
 
-  if(isDefined(var2)) {
-    if(var2) {
+  if(isDefined(var_2)) {
+    if(var_2) {
       self enableoffhandprimaryweapons();
       return;
     }
@@ -1055,11 +1055,11 @@ function is_offhand_primary_weapons_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("offhandPrimaryWeaps");
 }
 
-function allow_offhand_secondary_weapons(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("offhandSecondaryWeaps", var0, var1);
+function allow_offhand_secondary_weapons(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("offhandSecondaryWeaps", var_0, var_1);
 
-  if(isDefined(var2)) {
-    if(var2) {
+  if(isDefined(var_2)) {
+    if(var_2) {
       self enableoffhandsecondaryweapons();
       allow_offhand_shield_weapons(1, "allow_offhand_secondary_weapons");
       return;
@@ -1075,11 +1075,11 @@ function is_offhand_secondary_weapons_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("offhandSecondaryWeaps");
 }
 
-function allow_offhand_shield_weapons(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("offhandShieldWeaps", var0, var1);
+function allow_offhand_shield_weapons(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("offhandShieldWeaps", var_0, var_1);
 
-  if(isDefined(var2)) {
-    self allowoffhandshieldweapons(var2);
+  if(isDefined(var_2)) {
+    self allowoffhandshieldweapons(var_2);
     return;
   }
 }
@@ -1088,11 +1088,11 @@ function is_offhand_shield_weapons_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("offhandShieldWeaps");
 }
 
-function allow_prone(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("prone", var0, var1);
+function allow_prone(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("prone", var_0, var_1);
 
-  if(isDefined(var2)) {
-    self allowprone(var2);
+  if(isDefined(var_2)) {
+    self allowprone(var_2);
     return;
   }
 }
@@ -1101,11 +1101,11 @@ function is_prone_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("prone");
 }
 
-function allow_crouch(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("crouch", var0, var1);
+function allow_crouch(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("crouch", var_0, var_1);
 
-  if(isDefined(var2)) {
-    self allowcrouch(var2);
+  if(isDefined(var_2)) {
+    self allowcrouch(var_2);
     return;
   }
 }
@@ -1114,11 +1114,11 @@ function is_crouch_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("crouch");
 }
 
-function allow_stand(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("stand", var0, var1);
+function allow_stand(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("stand", var_0, var_1);
 
-  if(isDefined(var2)) {
-    self allowstand(var2);
+  if(isDefined(var_2)) {
+    self allowstand(var_2);
     return;
   }
 }
@@ -1127,20 +1127,20 @@ function is_stand_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("stand");
 }
 
-function allow_sprint(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("sprint", var0, var1);
+function allow_sprint(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("sprint", var_0, var_1);
 
-  if(isDefined(var2)) {
-    self allowsprint(var2);
+  if(isDefined(var_2)) {
+    self allowsprint(var_2);
     return;
   }
 }
 
-function allow_jog(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("jog", var0, var1);
+function allow_jog(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("jog", var_0, var_1);
 
-  if(isDefined(var2)) {
-    setsaveddvar("NQLPKOKTPO", var2);
+  if(isDefined(var_2)) {
+    setsaveddvar("NQLPKOKTPO", var_2);
     return;
   }
 }
@@ -1149,11 +1149,11 @@ function is_sprint_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("sprint");
 }
 
-function allow_mantle(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("mantle", var0, var1);
+function allow_mantle(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("mantle", var_0, var_1);
 
-  if(isDefined(var2)) {
-    self allowmantle(var2);
+  if(isDefined(var_2)) {
+    self allowmantle(var_2);
     return;
   }
 }
@@ -1162,11 +1162,11 @@ function is_mantle_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("mantle");
 }
 
-function allow_fire(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("fire", var0, var1);
+function allow_fire(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("fire", var_0, var_1);
 
-  if(isDefined(var2)) {
-    self allowfire(var2);
+  if(isDefined(var_2)) {
+    self allowfire(var_2);
     return;
   }
 }
@@ -1175,11 +1175,11 @@ function is_fire_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("fire");
 }
 
-function allow_ads(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("ads", var0, var1);
+function allow_ads(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("ads", var_0, var_1);
 
-  if(isDefined(var2)) {
-    self allowads(var2);
+  if(isDefined(var_2)) {
+    self allowads(var_2);
     return;
   }
 }
@@ -1188,11 +1188,11 @@ function is_ads_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("ads");
 }
 
-function allow_jump(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("jump", var0, var1);
+function allow_jump(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("jump", var_0, var_1);
 
-  if(isDefined(var2)) {
-    self allowjump(var2);
+  if(isDefined(var_2)) {
+    self allowjump(var_2);
     return;
   }
 }
@@ -1201,15 +1201,15 @@ function is_jump_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("jump");
 }
 
-function allow_wallrun(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("wallrun", var0, var1);
+function allow_wallrun(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("wallrun", var_0, var_1);
 
-  if(isDefined(var2) && var2) {
+  if(isDefined(var_2) && var_2) {
     self allowwallrun(1);
     return;
   }
 
-  if(isDefined(var2) && !var2) {
+  if(isDefined(var_2) && !var_2) {
     self allowwallrun(0);
     return;
   }
@@ -1219,11 +1219,11 @@ function is_wallrun_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("wallrun");
 }
 
-function allow_doublejump(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("doubleJump", var0, var1);
+function allow_doublejump(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("doubleJump", var_0, var_1);
 
-  if(isDefined(var2)) {
-    if(var2) {
+  if(isDefined(var_2)) {
+    if(var_2) {
       self energy_setenergy(0, self.doublejumpenergy);
       self energy_setrestorerate(0, self.doublejumpenergyrestorerate);
       self.doublejumpenergy = undefined;
@@ -1245,11 +1245,11 @@ function is_doublejump_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("doubleJump");
 }
 
-function brjugg_onplayerkilled(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("offhand_throwback", var0, var1);
+function brjugg_onplayerkilled(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("offhand_throwback", var_0, var_1);
 
-  if(isDefined(var2)) {
-    if(var2) {
+  if(isDefined(var_2)) {
+    if(var_2) {
       self enableoffhandthrowback();
       return;
     }
@@ -1259,11 +1259,11 @@ function brjugg_onplayerkilled(var0, var1) {
   }
 }
 
-function allow_melee(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("melee", var0, var1);
+function allow_melee(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("melee", var_0, var_1);
 
-  if(isDefined(var2)) {
-    self allowmelee(var2);
+  if(isDefined(var_2)) {
+    self allowmelee(var_2);
     return;
   }
 }
@@ -1272,11 +1272,11 @@ function is_melee_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("melee");
 }
 
-function allow_slide(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("slide", var0, var1);
+function allow_slide(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("slide", var_0, var_1);
 
-  if(isDefined(var2)) {
-    self allowslide(var2);
+  if(isDefined(var_2)) {
+    self allowslide(var_2);
     return;
   }
 }
@@ -1285,11 +1285,11 @@ function is_slide_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("slide");
 }
 
-function allow_execution_attack(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("execution_attack", var0, var1);
+function allow_execution_attack(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("execution_attack", var_0, var_1);
 
-  if(isDefined(var2)) {
-    if(var2) {
+  if(isDefined(var_2)) {
+    if(var_2) {
       self[[level.enableexecutionattackfunc]]();
       return;
     }
@@ -1299,11 +1299,11 @@ function allow_execution_attack(var0, var1) {
   }
 }
 
-function allow_execution_victim(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("execution_victim", var0, var1);
+function allow_execution_victim(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("execution_victim", var_0, var_1);
 
-  if(isDefined(var2)) {
-    if(var2) {
+  if(isDefined(var_2)) {
+    if(var_2) {
       self[[level.enableexecutionvictimfunc]]();
       return;
     }
@@ -1321,26 +1321,26 @@ function can_be_executed() {
   return scripts\common\input_allow::is_input_allowed_internal("execution_victim");
 }
 
-function allow_killstreaks(var0, var1) {
-  scripts\common\input_allow::allow_input_internal("killstreaks", var0, var1);
+function allow_killstreaks(var_0, var_1) {
+  scripts\common\input_allow::allow_input_internal("killstreaks", var_0, var_1);
 }
 
-function brjugg_initdroplocations(var0, var1) {
-  scripts\common\input_allow::allow_input_internal("cp_munitions", var0, var1);
+function brjugg_initdroplocations(var_0, var_1) {
+  scripts\common\input_allow::allow_input_internal("cp_munitions", var_0, var_1);
 }
 
 function is_killstreaks_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("killstreaks");
 }
 
-function allow_supers(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("supers", var0, var1);
+function allow_supers(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("supers", var_0, var_1);
 
-  if(isDefined(var2)) {
-    var3 = !var0;
+  if(isDefined(var_2)) {
+    var_3 = !var_0;
 
     if(isDefined(level.setsuperweapondisabled)) {
-      self[[level.setsuperweapondisabled]](var3);
+      self[[level.setsuperweapondisabled]](var_3);
       return;
     }
 
@@ -1352,11 +1352,11 @@ function is_supers_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("supers");
 }
 
-function allow_shellshock(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("shellshock", var0, var1);
+function allow_shellshock(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("shellshock", var_0, var_1);
 
-  if(isDefined(var2)) {
-    if(var2) {
+  if(isDefined(var_2)) {
+    if(var_2) {
       if(isDefined(level.enableshellshockfunc)) {
         self[[level.enableshellshockfunc]]();
         return;
@@ -1386,13 +1386,13 @@ function get_doublejumpenergy() {
   return self.doublejumpenergy;
 }
 
-function set_doublejumpenergy(var0) {
+function set_doublejumpenergy(var_0) {
   if(!isDefined(self.doublejumpenergy)) {
-    self energy_setenergy(0, var0);
+    self energy_setenergy(0, var_0);
     return;
   }
 
-  self.doublejumpenergy = var0;
+  self.doublejumpenergy = var_0;
 }
 
 function get_doublejumpenergyrestorerate() {
@@ -1403,20 +1403,20 @@ function get_doublejumpenergyrestorerate() {
   return self.doublejumpenergyrestorerate;
 }
 
-function set_doublejumpenergyrestorerate(var0) {
+function set_doublejumpenergyrestorerate(var_0) {
   if(!isDefined(self.doublejumpenergyrestorerate)) {
-    self energy_setrestorerate(0, var0);
+    self energy_setrestorerate(0, var_0);
     return;
   }
 
-  self.doublejumpenergyrestorerate = var0;
+  self.doublejumpenergyrestorerate = var_0;
 }
 
-function allow_lean(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("lean", var0, var1);
+function allow_lean(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("lean", var_0, var_1);
 
-  if(isDefined(var2)) {
-    self allowlean(var2);
+  if(isDefined(var_2)) {
+    self allowlean(var_2);
     return;
   }
 }
@@ -1425,11 +1425,11 @@ function is_lean_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("lean");
 }
 
-function allow_mount_top(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("mount_top", var0, var1);
+function allow_mount_top(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("mount_top", var_0, var_1);
 
-  if(isDefined(var2)) {
-    self allowmounttop(var2);
+  if(isDefined(var_2)) {
+    self allowmounttop(var_2);
     return;
   }
 }
@@ -1438,11 +1438,11 @@ function is_mount_top_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("mount_top");
 }
 
-function allow_mount_side(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("mount_side", var0, var1);
+function allow_mount_side(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("mount_side", var_0, var_1);
 
-  if(isDefined(var2)) {
-    self allowmountside(var2);
+  if(isDefined(var_2)) {
+    self allowmountside(var_2);
     return;
   }
 }
@@ -1451,11 +1451,11 @@ function is_mount_side_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("mount_side");
 }
 
-function allow_cinematic_motion(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("cinematic_motion", var0, var1);
+function allow_cinematic_motion(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("cinematic_motion", var_0, var_1);
 
-  if(isDefined(var2)) {
-    if(var2) {
+  if(isDefined(var_2)) {
+    if(var_2) {
       if(isDefined(level.player.cinematicmotionoverride)) {
         level.player setcinematicmotionoverride(level.player.cinematicmotionoverride);
         return;
@@ -1474,13 +1474,13 @@ function is_cinematic_motion_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("cinematic_motion");
 }
 
-function allow_death(var0, var1) {
+function allow_death(var_0, var_1) {
   if(isDefined(self.deathshieldfunc)) {}
 
-  var2 = scripts\common\input_allow::allow_input_internal("death", var0, var1);
+  var_2 = scripts\common\input_allow::allow_input_internal("death", var_0, var_1);
 
-  if(isDefined(var2)) {
-    if(var2) {
+  if(isDefined(var_2)) {
+    if(var_2) {
       self[[self.deathshieldfunc]](0);
       return;
     }
@@ -1496,18 +1496,18 @@ function is_death_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("death");
 }
 
-function allow_reload(var0, var1, var2) {
-  var3 = scripts\common\input_allow::allow_input_internal("reload", var0, var1);
+function allow_reload(var_0, var_1, var_2) {
+  var_3 = scripts\common\input_allow::allow_input_internal("reload", var_0, var_1);
 
-  if(isDefined(var3)) {
-    if(var3) {
+  if(isDefined(var_3)) {
+    if(var_3) {
       self allowreload(1);
       return;
     }
 
     self allowreload(0);
 
-    if(!isDefined(var2) || !var2) {
+    if(!isDefined(var_2) || !var_2) {
       self cancelreload();
       return;
     }
@@ -1520,11 +1520,11 @@ function is_reload_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("reload");
 }
 
-function allow_autoreload(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("autoreload", var0, var1);
+function allow_autoreload(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("autoreload", var_0, var_1);
 
-  if(isDefined(var2)) {
-    if(var2) {
+  if(isDefined(var_2)) {
+    if(var_2) {
       self enableautoreload();
       return;
     }
@@ -1538,21 +1538,21 @@ function is_autoreload_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("autoreload");
 }
 
-function allow_movement(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("movement", var0, var1);
+function allow_movement(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("movement", var_0, var_1);
 
-  if(isDefined(var2)) {
-    self allowmovement(var2);
+  if(isDefined(var_2)) {
+    self allowmovement(var_2);
     return;
   }
 }
 
-function allow_armor(var0, var1) {
+function allow_armor(var_0, var_1) {
   if(!playerarmorenabled()) {
     return;
   }
 
-  var2 = scripts\common\input_allow::allow_input_internal("armor", var0, var1);
+  var_2 = scripts\common\input_allow::allow_input_internal("armor", var_0, var_1);
 
   if(isDefined(self.armor) && isDefined(self.armor.toggleuifunc)) {
     self[[self.armor.toggleuifunc]]();
@@ -1568,14 +1568,14 @@ function is_armor_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("armor");
 }
 
-function brjugg_oncrateuse(var0, var1, var2) {
-  var3 = 2;
-  var4 = scripts\common\input_allow::allow_input_internal("NVG", var0, var1, var2);
+function brjugg_oncrateuse(var_0, var_1, var_2) {
+  var_3 = 2;
+  var_4 = scripts\common\input_allow::allow_input_internal("NVG", var_0, var_1, var_2);
 
-  if(isDefined(var4)) {
-    if(var4) {
+  if(isDefined(var_4)) {
+    if(var_4) {
       if(!isai(self)) {
-        self setactionslot(var3, "nightvision");
+        self setactionslot(var_3, "nightvision");
         return;
       }
 
@@ -1583,7 +1583,7 @@ function brjugg_oncrateuse(var0, var1, var2) {
     }
 
     if(!isai(self)) {
-      self setactionslot(var3, "");
+      self setactionslot(var_3, "");
       return;
     }
 
@@ -1595,19 +1595,19 @@ function is_nvg_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("NVG");
 }
 
-function allow_crate_use(var0, var1) {
-  scripts\common\input_allow::allow_input_internal("crateUse", var0, var1);
+function allow_crate_use(var_0, var_1) {
+  scripts\common\input_allow::allow_input_internal("crateUse", var_0, var_1);
 }
 
 function is_crate_use_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("crateUse");
 }
 
-function allow_vehicle_use(var0, var1) {
-  var2 = scripts\common\input_allow::allow_input_internal("vehicle_use", var0, var1);
+function allow_vehicle_use(var_0, var_1) {
+  var_2 = scripts\common\input_allow::allow_input_internal("vehicle_use", var_0, var_1);
 
-  if(isDefined(var2)) {
-    vehicle_allowplayeruse(self, var0);
+  if(isDefined(var_2)) {
+    vehicle_allowplayeruse(self, var_0);
     return;
   }
 }
@@ -1616,24 +1616,24 @@ function is_vehicle_use_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("vehicle_use");
 }
 
-function allow_cough_gesture(var0, var1) {
-  scripts\common\input_allow::allow_input_internal("cough_gesture", var0, var1);
+function allow_cough_gesture(var_0, var_1) {
+  scripts\common\input_allow::allow_input_internal("cough_gesture", var_0, var_1);
 }
 
 function is_cough_gesture_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("cough_gesture");
 }
 
-function allow_ladder_placement(var0, var1) {
-  scripts\common\input_allow::allow_input_internal("ladder_placement", var0, var1);
+function allow_ladder_placement(var_0, var_1) {
+  scripts\common\input_allow::allow_input_internal("ladder_placement", var_0, var_1);
 }
 
 function is_ladder_placement_allowed() {
   return scripts\common\input_allow::is_input_allowed_internal("ladder_placement");
 }
 
-function brjugg_droponplayerdeath(var0, var1) {
-  scripts\common\input_allow::allow_input_internal("ascenderUse", var0, var1);
+function brjugg_droponplayerdeath(var_0, var_1) {
+  scripts\common\input_allow::allow_input_internal("ascenderUse", var_0, var_1);
 }
 
 function trial_ui_retry_disabled() {
@@ -1652,8 +1652,8 @@ function spawn_vehicle() {
   return scripts\common\vehicle::vehicle_spawn(self);
 }
 
-function groundpos(var0, var1) {
-  return scripts\engine\utility::drop_to_ground(var0, 0, -100000, var1);
+function groundpos(var_0, var_1) {
+  return scripts\engine\utility::drop_to_ground(var_0, 0, -100000, var_1);
 }
 
 function vehicle_detachfrompath() {
@@ -1664,31 +1664,31 @@ function vehicle_resumepath() {
   thread scripts\common\vehicle_paths::vehicle_resumepathvehicle();
 }
 
-function vehicle_land(var0) {
-  scripts\common\vehicle_code::vehicle_landvehicle(var0);
+function vehicle_land(var_0) {
+  scripts\common\vehicle_code::vehicle_landvehicle(var_0);
 }
 
-function vehicle_liftoff(var0) {
-  scripts\common\vehicle_code::vehicle_liftoffvehicle(var0);
+function vehicle_liftoff(var_0) {
+  scripts\common\vehicle_code::vehicle_liftoffvehicle(var_0);
 }
 
-function vehicle_dynamicpath(var0, var1) {
-  scripts\common\vehicle::vehicle_paths(var0, var1);
+function vehicle_dynamicpath(var_0, var_1) {
+  scripts\common\vehicle::vehicle_paths(var_0, var_1);
 }
 
-function getvehiclespawner(var0, var1) {
-  var2 = getvehiclespawnerarray(var0, var1);
-  return var2[0];
+function getvehiclespawner(var_0, var_1) {
+  var_2 = getvehiclespawnerarray(var_0, var_1);
+  return var_2[0];
 }
 
-function getvehiclespawnerarray(var0, var1) {
-  return scripts\common\vehicle_code::_getvehiclespawnerarray(var0, var1);
+function getvehiclespawnerarray(var_0, var_1) {
+  return scripts\common\vehicle_code::_getvehiclespawnerarray(var_0, var_1);
 }
 
 function is_map_using_locales_only() {
-  var0 = getDvar("mapname");
+  var_0 = getDvar("mapname");
 
-  if(var0 == "mp_donesk" || var0 == "mp_locale_test") {
+  if(var_0 == "mp_donesk" || var_0 == "mp_locale_test") {
     return true;
   }
 
@@ -1699,108 +1699,108 @@ function iswegameplatform() {
   return getdvarint("MRSQLQKNKP", 0) == 1;
 }
 
-function playersnear(var0, var1) {
-  var2 = physics_createcontents(["physicscontents_player"]);
-  var3 = (var1, var1, var1);
-  var4 = var0 - var3;
-  var5 = var0 + var3;
-  var6 = physics_aabbbroadphasequery(var4, var5, var2, []);
-  return var6;
+function playersnear(var_0, var_1) {
+  var_2 = physics_createcontents(["physicscontents_player"]);
+  var_3 = (var_1, var_1, var_1);
+  var_4 = var_0 - var_3;
+  var_5 = var_0 + var_3;
+  var_6 = physics_aabbbroadphasequery(var_4, var_5, var_2, []);
+  return var_6;
 }
 
-function playersincylinder(var0, var1, var2, var3) {
-  var4 = physics_createcontents(["physicscontents_player"]);
-  var5 = 1000;
+function playersincylinder(var_0, var_1, var_2, var_3) {
+  var_4 = physics_createcontents(["physicscontents_player"]);
+  var_5 = 1000;
 
-  if(isDefined(var3)) {
-    var5 = var3;
+  if(isDefined(var_3)) {
+    var_5 = var_3;
   }
 
-  var6 = (var1, var1, var5);
-  var7 = var0 - var6;
-  var8 = var0 + var6;
+  var_6 = (var_1, var_1, var_5);
+  var_7 = var_0 - var_6;
+  var_8 = var_0 + var_6;
 
-  if(!isDefined(var2)) {
-    var2 = [];
+  if(!isDefined(var_2)) {
+    var_2 = [];
   }
 
-  var9 = physics_aabbbroadphasequery(var7, var8, var4, var2);
-  var10 = [];
-  var11 = var1 * var1;
+  var_9 = physics_aabbbroadphasequery(var_7, var_8, var_4, var_2);
+  var_10 = [];
+  var_11 = var_1 * var_1;
 
-  foreach(var13 in var9) {
-    var15 = distance2dsquared(var13.origin, var0);
+  foreach(var_13 in var_9) {
+    var_15 = distance2dsquared(var_13.origin, var_0);
 
-    if(var15 < var11) {
-      var10 = var13;
+    if(var_15 < var_11) {
+      var_10 = var_13;
     }
   }
 
-  return var10;
+  return var_10;
 }
 
-function playersinsphere(var0, var1) {
-  var2 = playersnear(var0, var1);
-  var3 = [];
-  var4 = var1 * var1;
+function playersinsphere(var_0, var_1) {
+  var_2 = playersnear(var_0, var_1);
+  var_3 = [];
+  var_4 = var_1 * var_1;
 
-  foreach(var6 in var2) {
-    var7 = distancesquared(var6.origin, var0);
+  foreach(var_6 in var_2) {
+    var_7 = distancesquared(var_6.origin, var_0);
 
-    if(var7 < var4) {
-      var3 = var6;
+    if(var_7 < var_4) {
+      var_3 = var_6;
     }
   }
 
-  return var3;
+  return var_3;
 }
 
-function ref_13e0a(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10) {
-  if(!isDefined(var0)) {
+function ref_13e0a(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(var10)) {
-    return [[var0]](var1, var2, var3, var4, var5, var6, var7, var8, var9, var10);
+  if(isDefined(var_10)) {
+    return [[var_0]](var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
   }
 
-  if(isDefined(var9)) {
-    return [[var0]](var1, var2, var3, var4, var5, var6, var7, var8, var9);
+  if(isDefined(var_9)) {
+    return [[var_0]](var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
   }
 
-  if(isDefined(var8)) {
-    return [[var0]](var1, var2, var3, var4, var5, var6, var7, var8);
+  if(isDefined(var_8)) {
+    return [[var_0]](var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
   }
 
-  if(isDefined(var7)) {
-    return [[var0]](var1, var2, var3, var4, var5, var6, var7);
+  if(isDefined(var_7)) {
+    return [[var_0]](var_1, var_2, var_3, var_4, var_5, var_6, var_7);
   }
 
-  if(isDefined(var6)) {
-    return [[var0]](var1, var2, var3, var4, var5, var6);
+  if(isDefined(var_6)) {
+    return [[var_0]](var_1, var_2, var_3, var_4, var_5, var_6);
   }
 
-  if(isDefined(var5)) {
-    return [[var0]](var1, var2, var3, var4, var5);
+  if(isDefined(var_5)) {
+    return [[var_0]](var_1, var_2, var_3, var_4, var_5);
   }
 
-  if(isDefined(var4)) {
-    return [[var0]](var1, var2, var3, var4);
+  if(isDefined(var_4)) {
+    return [[var_0]](var_1, var_2, var_3, var_4);
   }
 
-  if(isDefined(var3)) {
-    return [[var0]](var1, var2, var3);
+  if(isDefined(var_3)) {
+    return [[var_0]](var_1, var_2, var_3);
   }
 
-  if(isDefined(var2)) {
-    return [[var0]](var1, var2);
+  if(isDefined(var_2)) {
+    return [[var_0]](var_1, var_2);
   }
 
-  if(isDefined(var1)) {
-    return [[var0]](var1);
+  if(isDefined(var_1)) {
+    return [[var_0]](var_1);
   }
 
-  return [[var0]]();
+  return [[var_0]]();
 }
 
 function ref_13629() {
@@ -1808,30 +1808,30 @@ function ref_13629() {
     return;
   }
 
-  var0 = 0;
-  var1 = 1;
-  var2 = 2;
-  var3 = 3;
-  var4 = 4;
-  var5 = 5;
-  var6 = "sp/hideCorpseTable.csv";
-  var7 = tolower(getDvar("mapname"));
-  var8 = tablelookupgetnumrows(var6);
+  var_0 = 0;
+  var_1 = 1;
+  var_2 = 2;
+  var_3 = 3;
+  var_4 = 4;
+  var_5 = 5;
+  var_6 = "sp/hideCorpseTable.csv";
+  var_7 = tolower(getDvar("mapname"));
+  var_8 = tablelookupgetnumrows(var_6);
 
-  for(var9 = 0; var9 < var8; var9++) {
-    if(var7 == tolower(tablelookupbyrow(var6, var9, var1))) {
-      var10 = tablelookupbyrow(var6, var9, var2);
-      var11 = strtok(tablelookupbyrow(var6, var9, var3), "_");
-      var12 = strtok(tablelookupbyrow(var6, var9, var4), "_");
-      var13 = int(tablelookupbyrow(var6, var9, var5));
-      var14 = spawn("script_model", (float(var11[0]), float(var11[1]), float(var11[2])));
-      var14 setModel(var10);
-      var14.angles = (float(var12[0]), float(var12[1]), float(var12[2]));
+  for(var_9 = 0; var_9 < var_8; var_9++) {
+    if(var_7 == tolower(tablelookupbyrow(var_6, var_9, var_1))) {
+      var_10 = tablelookupbyrow(var_6, var_9, var_2);
+      var_11 = strtok(tablelookupbyrow(var_6, var_9, var_3), "_");
+      var_12 = strtok(tablelookupbyrow(var_6, var_9, var_4), "_");
+      var_13 = int(tablelookupbyrow(var_6, var_9, var_5));
+      var_14 = spawn("script_model", (float(var_11[0]), float(var_11[1]), float(var_11[2])));
+      var_14 setModel(var_10);
+      var_14.angles = (float(var_12[0]), float(var_12[1]), float(var_12[2]));
 
-      if(var13 > 0) {
-        var14 solid();
+      if(var_13 > 0) {
+        var_14 solid();
       } else {
-        var14 notsolid();
+        var_14 notsolid();
       }
     }
   }

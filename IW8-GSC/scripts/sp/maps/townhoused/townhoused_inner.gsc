@@ -12,36 +12,36 @@ function backyard_intro() {
   level.player scripts\sp\player::focusdisable();
   level.player setclienttriggeraudiozone("th_intro_bink_only_dx", 0.01);
   level.player setcinematicmotionoverride("disabled");
-  var0 = getspawner("kyle", "targetname");
-  var1 = scripts\engine\sp\utility::dronespawn_bodyonly(var0);
-  var1.animname = "kyle";
-  give_kyle_weapon(var1);
-  level.kyle = var1;
+  var_0 = getspawner("kyle", "targetname");
+  var_1 = scripts\engine\sp\utility::dronespawn_bodyonly(var_0);
+  var_1.animname = "kyle";
+  give_kyle_weapon(var_1);
+  level.kyle = var_1;
   hidecinematicletterboxing(0, 0);
   level.cutters = scripts\engine\sp\utility::spawn_anim_model("bolt_cutters");
   level.gatelock = scripts\engine\sp\utility::spawn_anim_model("gate_lock");
-  var2 = getEnt("intro_alley_gate", "targetname");
-  var2 scripts\engine\sp\utility::assign_animtree("door");
-  var3 = level.squads["bravo2"];
-  var3 = scripts\engine\utility::array_add(var3, level.price);
-  scripts\engine\utility::array_thread(var3, &scripts\engine\sp\utility::name_hide);
+  var_2 = getEnt("intro_alley_gate", "targetname");
+  var_2 scripts\engine\sp\utility::assign_animtree("door");
+  var_3 = level.squads["bravo2"];
+  var_3 = scripts\engine\utility::array_add(var_3, level.price);
+  scripts\engine\utility::array_thread(var_3, &scripts\engine\sp\utility::name_hide);
   level.player_rig.customnotetrackhandler = &camera_handle_notetracks;
-  var4 = [level.player_rig, var2, level.cutters];
-  var4 = scripts\engine\utility::array_add(var4, var1);
-  var5 = scripts\engine\utility::getStruct("backyard_door_animnode", "targetname");
+  var_4 = [level.player_rig, var_2, level.cutters];
+  var_4 = scripts\engine\utility::array_add(var_4, var_1);
+  var_5 = scripts\engine\utility::getStruct("backyard_door_animnode", "targetname");
   level.player playerlinktoabsolute(level.player_rig, "tag_player");
   scripts\sp\maps\townhoused\townhoused_code::player_cam_enable(1);
   level.player modifybasefov(32, 0.05);
   level.player lerpfovscalefactor(0, 0);
-  var5 thread scripts\common\anim::anim_first_frame_solo(level.gatelock, "backyard_intro_cut_gate");
-  scripts\engine\utility::array_call(var3, &invisiblenotsolid);
-  scripts\engine\utility::array_call(var4, &hide);
-  var5 thread scripts\common\anim::anim_first_frame(var3, "backyard_intro");
-  var5 thread scripts\common\anim::anim_first_frame(var4, "backyard_intro");
+  var_5 thread scripts\common\anim::anim_first_frame_solo(level.gatelock, "backyard_intro_cut_gate");
+  scripts\engine\utility::array_call(var_3, &invisiblenotsolid);
+  scripts\engine\utility::array_call(var_4, &hide);
+  var_5 thread scripts\common\anim::anim_first_frame(var_3, "backyard_intro");
+  var_5 thread scripts\common\anim::anim_first_frame(var_4, "backyard_intro");
   wait 0.2;
   scripts\engine\utility::flag_init("intro_sound_delay_done");
-  var6 = scripts\engine\utility::array_combine(var3, var4);
-  thread skip_intro(var6);
+  var_6 = scripts\engine\utility::array_combine(var_3, var_4);
+  thread skip_intro(var_6);
   level.player playSound("dx_vom_pri_backyard_alleyway_10");
   wait 0.5;
   level.player setclienttriggeraudiozone("th_backyard_intro_approach", 0.5);
@@ -52,30 +52,30 @@ function backyard_intro() {
     thread intro_end();
   }
 
-  var5 thread scripts\common\anim::anim_single_solo(level.gatelock, "backyard_intro_cut_gate");
-  scripts\engine\utility::array_call(var3, &visiblesolid);
+  var_5 thread scripts\common\anim::anim_single_solo(level.gatelock, "backyard_intro_cut_gate");
+  scripts\engine\utility::array_call(var_3, &visiblesolid);
 
-  foreach(var8 in var4) {
-    if(var8 == level.player_rig) {
+  foreach(var_8 in var_4) {
+    if(var_8 == level.player_rig) {
       continue;
     }
 
-    var8 show();
+    var_8 show();
     LOC_0000025e:
   }
 
   if(!scripts\engine\utility::flag("skip_intro")) {
     scripts\engine\utility::flag_set("intro_anim_started");
-    scripts\engine\utility::array_thread(var3, &backyard_intro_anim, var5);
-    var4 = scripts\engine\utility::array_removeundefined(var4);
-    var5 scripts\common\anim::anim_single(var4, "backyard_intro");
+    scripts\engine\utility::array_thread(var_3, &backyard_intro_anim, var_5);
+    var_4 = scripts\engine\utility::array_removeundefined(var_4);
+    var_5 scripts\common\anim::anim_single(var_4, "backyard_intro");
   }
 
   scripts\sp\utility::userskip_stop();
   level notify("intro_done");
 
   if(!istrue(level.demo)) {
-    scripts\engine\utility::array_thread(var3, &scripts\engine\sp\utility::name_show);
+    scripts\engine\utility::array_thread(var_3, &scripts\engine\sp\utility::name_show);
   }
 
   level.player_rig.customnotetrackhandler = undefined;
@@ -83,10 +83,10 @@ function backyard_intro() {
   scripts\sp\utility::nvidiaansel_scriptdisable(0);
 }
 
-function skip_intro(var0) {
-  var1 = scripts\sp\utility::userskip_wait();
+function skip_intro(var_0) {
+  var_1 = scripts\sp\utility::userskip_wait();
 
-  if(!var1) {
+  if(!var_1) {
     return;
   }
 
@@ -94,35 +94,35 @@ function skip_intro(var0) {
   scripts\sp\hud_util::fade_out(0);
 
   if(!scripts\engine\utility::flag("intro_anim_started")) {
-    var2 = scripts\engine\utility::getStruct("backyard_door_animnode", "targetname");
+    var_2 = scripts\engine\utility::getStruct("backyard_door_animnode", "targetname");
 
-    foreach(var4 in var0) {
-      if(isai(var4)) {
-        thread backyard_intro_anim(var4);
+    foreach(var_4 in var_0) {
+      if(isai(var_4)) {
+        thread backyard_intro_anim(var_4);
         continue;
       }
 
-      var2 thread scripts\common\anim::anim_single_solo(var4, "backyard_intro");
+      var_2 thread scripts\common\anim::anim_single_solo(var_4, "backyard_intro");
     }
 
     waitframe();
   }
 
-  var6 = "backyard_intro";
-  var7 = 1.1;
+  var_6 = "backyard_intro";
+  var_7 = 1.1;
 
-  foreach(var4 in var0) {
+  foreach(var_4 in var_0) {
     if(!scripts\engine\utility::flag("intro_sound_delay_done")) {
       level.player setclienttriggeraudiozone("th_backyard_intro_approach", 0.5);
 
-      if(isai(var4)) {
-        var4 visiblesolid();
+      if(isai(var_4)) {
+        var_4 visiblesolid();
       }
     }
 
-    var9 = getanimlength(var4 scripts\engine\utility::getanim(var6));
-    var10 = (var9 - var7) / var9;
-    var4 setanimtime(var4 scripts\engine\utility::getanim(var6), var10);
+    var_9 = getanimlength(var_4 scripts\engine\utility::getanim(var_6));
+    var_10 = (var_9 - var_7) / var_9;
+    var_4 setanimtime(var_4 scripts\engine\utility::getanim(var_6), var_10);
     LOC_00000102:
   }
 
@@ -139,43 +139,43 @@ function skip_intro(var0) {
   intro_end(1);
 }
 
-function backyard_intro_anim(var0) {
-  var0 scripts\common\anim::anim_single_solo(self, "backyard_intro");
+function backyard_intro_anim(var_0) {
+  var_0 scripts\common\anim::anim_single_solo(self, "backyard_intro");
   thread backyard_alley_move_solo();
 }
 
 function give_kyle_weapon() {
-  var0 = scripts\sp\maps\townhoused\townhoused_code::get_player_weapons();
+  var_0 = scripts\sp\maps\townhoused\townhoused_code::get_player_weapons();
 
-  foreach(var2 in self.fake_weapon_models) {
-    self detach(var2);
+  foreach(var_2 in self.fake_weapon_models) {
+    self detach(var_2);
   }
 
-  var4 = getweaponattachmentworldmodels(var0[0]);
+  var_4 = getweaponattachmentworldmodels(var_0[0]);
 
-  foreach(var2 in var4) {
-    self attach(var2);
+  foreach(var_2 in var_4) {
+    self attach(var_2);
   }
 }
 
-function camera_handle_notetracks(var0, var1, var2) {
-  var3 = 32;
-  var4 = level.scr_anim[self.animname]["backyard_intro"];
+function camera_handle_notetracks(var_0, var_1, var_2) {
+  var_3 = 32;
+  var_4 = level.scr_anim[self.animname]["backyard_intro"];
 
-  if(var0 == "fovstart") {
+  if(var_0 == "fovstart") {
     return;
   }
 
-  if(var0 == "fovlerp_begin") {
-    var5 = self getanimtime(var4);
-    var6 = getnotetracktimes(var4, "fovlerp_end");
-    var7 = getanimlength(var4);
-    var8 = var7 * (var6[0] - var5);
-    level.player modifybasefov(65, var8);
+  if(var_0 == "fovlerp_begin") {
+    var_5 = self getanimtime(var_4);
+    var_6 = getnotetracktimes(var_4, "fovlerp_end");
+    var_7 = getanimlength(var_4);
+    var_8 = var_7 * (var_6[0] - var_5);
+    level.player modifybasefov(65, var_8);
     return;
   }
 
-  if(var0 == "swap_player") {
+  if(var_0 == "swap_player") {
     level.cutters show();
     level.player_rig show();
     level.kyle delete();
@@ -184,21 +184,21 @@ function camera_handle_notetracks(var0, var1, var2) {
   }
 }
 
-function intro_end(var0) {
+function intro_end(var_0) {
   level notify("stop_intro_end");
   level endon("stop_intro_end");
-  var1 = 1;
+  var_1 = 1;
 
-  if(!istrue(var0)) {
-    var2 = getanimlength(scripts\engine\utility::getanim("backyard_intro"));
-    var3 = var2 - var1;
-    level.player scripts\engine\utility::delaycall(var3 - var1, &lerpfovscalefactor, 1, var1);
+  if(!istrue(var_0)) {
+    var_2 = getanimlength(scripts\engine\utility::getanim("backyard_intro"));
+    var_3 = var_2 - var_1;
+    level.player scripts\engine\utility::delaycall(var_3 - var_1, &lerpfovscalefactor, 1, var_1);
     thread intro_letterbox_removal(level);
-    wait var3;
+    wait var_3;
     scripts\sp\utility::userskip_stop();
   } else {
     level.player modifybasefov(65, 0.05);
-    level.player lerpfovscalefactor(1, var1);
+    level.player lerpfovscalefactor(1, var_1);
     thread intro_letterbox_removal(level);
   }
 
@@ -209,7 +209,7 @@ function intro_end(var0) {
   level.player clearcinematicmotionoverride();
   setomnvar("ui_hide_hud", 0);
   scripts\sp\maps\townhoused\townhoused_code::setup_player("backyard");
-  wait var1;
+  wait var_1;
   level.player unlink();
   level.player_rig hide();
   level.player scripts\engine\sp\utility::blend_movespeedscale(1, 1);
@@ -217,43 +217,43 @@ function intro_end(var0) {
   level.player scripts\engine\utility::delaythread(2, &scripts\sp\player::focusenable);
 }
 
-function intro_letterbox_removal(var0) {
-  var1 = 2.5;
+function intro_letterbox_removal(var_0) {
+  var_1 = 2.5;
 
-  if(var0 > 0) {
-    var2 = var0 - var1;
-    wait var2;
+  if(var_0 > 0) {
+    var_2 = var_0 - var_1;
+    wait var_2;
   }
 
-  getrandomnodedestination(var1);
+  getrandomnodedestination(var_1);
 }
 
 function player_intro_speed_lerp() {
-  var0 = 5;
-  var1 = 1;
-  var2 = var1 / var0;
-  var3 = length(level.player.intro_velocity);
-  var4 = anglesToForward(level.player.angles) * var3;
+  var_0 = 5;
+  var_1 = 1;
+  var_2 = var_1 / var_0;
+  var_3 = length(level.player.intro_velocity);
+  var_4 = anglesToForward(level.player.angles) * var_3;
   level.player.intro_velocity = undefined;
 
-  for(var5 = 0; var5 < var0; var5++) {
+  for(var_5 = 0; var_5 < var_0; var_5++) {
     waitframe();
-    var1 -= var2;
-    var1 = max(var1, 0);
-    level.player pushplayervector(var4 * var1);
+    var_1 -= var_2;
+    var_1 = max(var_1, 0);
+    level.player pushplayervector(var_4 * var_1);
   }
 
-  level.player pushplayervector(var4 * 0);
+  level.player pushplayervector(var_4 * 0);
 }
 
 function player_intro_speed() {
   level.player.intro_velocity = 0;
-  var0 = level.player_rig.origin;
+  var_0 = level.player_rig.origin;
 
   while(isDefined(level.player.intro_velocity)) {
-    var1 = level.player_rig.origin - var0;
-    level.player.intro_velocity = vectorNormalize(var1) * length(var1) * 20;
-    var0 = level.player_rig.origin;
+    var_1 = level.player_rig.origin - var_0;
+    level.player.intro_velocity = vectorNormalize(var_1) * length(var_1) * 20;
+    var_0 = level.player_rig.origin;
     waitframe();
   }
 }
@@ -265,7 +265,7 @@ function restore_player_demeanor() {
 }
 
 function backyard_player_safe_demeanor_thread() {
-  var0 = 0;
+  var_0 = 0;
   jumpiftrue(isplatformps4()) LOC_0000000b;
   return;
 }
@@ -273,13 +273,13 @@ function backyard_player_safe_demeanor_thread() {
 function postspawn_backyard_alley_extra() {
   scripts\sp\maps\townhoused\townhoused_code::postpawn_friendly_shared();
   scripts\engine\utility::flag_wait("backyard_alley_extra_move");
-  var0 = scripts\engine\utility::getStruct("backyard_door_animnode", "targetname");
+  var_0 = scripts\engine\utility::getStruct("backyard_door_animnode", "targetname");
 
   if(self.animname == "bravo2_4") {
     self.animloop_headlook = 1;
   }
 
-  var0 thread scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(self, "backyard_alley_move", undefined, "stop_loop_" + self.animname);
+  var_0 thread scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(self, "backyard_alley_move", undefined, "stop_loop_" + self.animname);
 }
 
 function backyard_alley_move_solo() {
@@ -288,9 +288,9 @@ function backyard_alley_move_solo() {
   }
 
   level.backyard_ally_counter++;
-  var0 = scripts\engine\utility::getStruct("backyard_door_animnode", "targetname");
+  var_0 = scripts\engine\utility::getStruct("backyard_door_animnode", "targetname");
   thread backyard_alley_move_thread();
-  var0 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(self, "backyard_alley_move", undefined, "stop_backyard_alley_loop");
+  var_0 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(self, "backyard_alley_move", undefined, "stop_backyard_alley_loop");
 }
 
 function backyard_alley_move_thread() {
@@ -304,67 +304,67 @@ function backyard_alley_move_thread() {
 }
 
 function backyard_door_setup() {
-  var0 = scripts\engine\utility::getStruct("backyard_door_animnode", "targetname");
-  var1 = getEnt("backyard_door", "targetname");
-  add_linkedents(var1);
+  var_0 = scripts\engine\utility::getStruct("backyard_door_animnode", "targetname");
+  var_1 = getEnt("backyard_door", "targetname");
+  add_linkedents(var_1);
 }
 
 function backyard_door_open() {
-  var0 = scripts\engine\utility::getStruct("backyard_door_animnode", "targetname");
-  var1 = getEnt("backyard_door", "targetname");
-  var1.linkedents[0] connectpaths();
+  var_0 = scripts\engine\utility::getStruct("backyard_door_animnode", "targetname");
+  var_1 = getEnt("backyard_door", "targetname");
+  var_1.linkedents[0] connectpaths();
   thread backyard_door_open_rotate();
-  var2 = scripts\engine\sp\utility::get_living_ai("bravo2_3", "animname");
-  var0 notify("stop_loop_bravo2_3");
-  var2.animloop_headlook = 1;
-  var0 thread scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(var2, "backyard_open_gate", undefined, "stop_loop_bravo2_3");
+  var_2 = scripts\engine\sp\utility::get_living_ai("bravo2_3", "animname");
+  var_0 notify("stop_loop_bravo2_3");
+  var_2.animloop_headlook = 1;
+  var_0 thread scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(var_2, "backyard_open_gate", undefined, "stop_loop_bravo2_3");
 }
 
 function backyard_door_open_rotate() {
-  var0 = scripts\engine\utility::spawn_script_origin(self.origin, self.angles);
-  self linkTo(var0);
+  var_0 = scripts\engine\utility::spawn_script_origin(self.origin, self.angles);
+  self linkTo(var_0);
   wait 2.7;
-  var1 = 0.7;
-  var0 rotateYaw(-40, var1, 0, var1 * 0.5);
-  var2 = 0.5;
-  var0 scripts\engine\utility::delaycall(var1 - 0.05, &rotateyaw, -10, var2, var2 * 0.5, var2 * 0.5);
+  var_1 = 0.7;
+  var_0 rotateYaw(-40, var_1, 0, var_1 * 0.5);
+  var_2 = 0.5;
+  var_0 scripts\engine\utility::delaycall(var_1 - 0.05, &rotateyaw, -10, var_2, var_2 * 0.5, var_2 * 0.5);
 }
 
 function backyard_move() {
   thread backyard_backup_move();
-  var0 = scripts\engine\utility::getStruct("backyard_door_animnode", "targetname");
-  var0 notify("stop_backyard_alley_loop");
-  var1 = scripts\engine\utility::array_add(level.squads["bravo2"], level.price);
-  level.backyard_move_counter = var1.size - 1;
-  scripts\engine\utility::array_thread(var1, &backyard_move_thread);
+  var_0 = scripts\engine\utility::getStruct("backyard_door_animnode", "targetname");
+  var_0 notify("stop_backyard_alley_loop");
+  var_1 = scripts\engine\utility::array_add(level.squads["bravo2"], level.price);
+  level.backyard_move_counter = var_1.size - 1;
+  scripts\engine\utility::array_thread(var_1, &backyard_move_thread);
   scripts\engine\utility::flag_wait("backyard_basement_ready");
   scripts\engine\utility::flag_wait("player_near_kitchen");
   backdoor_freeze();
 }
 
-function backyard_move_thread(var0) {
+function backyard_move_thread(var_0) {
   self endon("stop_backyard_move_thread");
-  var1 = scripts\engine\utility::getStruct("backyard_door_animnode", "targetname");
-  var2 = scripts\engine\utility::getStruct("backdoor_animnode", "targetname");
+  var_1 = scripts\engine\utility::getStruct("backyard_door_animnode", "targetname");
+  var_2 = scripts\engine\utility::getStruct("backdoor_animnode", "targetname");
   thread backyard_move_rate_thread();
-  var1 scripts\common\anim::anim_single_solo(self, "backyard_move");
+  var_1 scripts\common\anim::anim_single_solo(self, "backyard_move");
   self notify("stop_backyard_move_rate");
-  var3 = "stop_backyard_move_loop";
+  var_3 = "stop_backyard_move_loop";
 
   if(self.animname == "bravo2_2") {
-    var0 = 1;
-    var1 thread scripts\sp\maps\townhoused\townhoused_code::lookat_random_animloop_ender(self, "stop_backyard_move_loop");
+    var_0 = 1;
+    var_1 thread scripts\sp\maps\townhoused\townhoused_code::lookat_random_animloop_ender(self, "stop_backyard_move_loop");
   } else if(self.animname == "bravo2_4") {
-    var3 = "stop_backyard_move_loop_bravo2_4";
-    var1 = var2;
+    var_3 = "stop_backyard_move_loop_bravo2_4";
+    var_1 = var_2;
   } else {
-    var2 endon("stop_backyard_move_loop");
-    var1 = scripts\engine\utility::getStruct("backdoor_animnode", "targetname");
+    var_2 endon("stop_backyard_move_loop");
+    var_1 = scripts\engine\utility::getStruct("backdoor_animnode", "targetname");
   }
 
-  var1 thread scripts\common\anim::anim_loop_solo(self, "backyard_move_idle", var3);
+  var_1 thread scripts\common\anim::anim_loop_solo(self, "backyard_move_idle", var_3);
 
-  if(isDefined(var0)) {
+  if(isDefined(var_0)) {
     return;
   }
 
@@ -378,14 +378,14 @@ function backyard_move_thread(var0) {
 
 function backyard_move_rate_thread() {
   self endon("stop_backyard_move_rate");
-  var0 = scripts\engine\utility::getanim("backyard_move");
+  var_0 = scripts\engine\utility::getanim("backyard_move");
   waitframe();
   scripts\engine\utility::flag_wait("player_near_kitchen");
 
-  if(self getanimtime(var0) < 0.75) {
-    self setanimrate(var0, 1.5);
+  if(self getanimtime(var_0) < 0.75) {
+    self setanimrate(var_0, 1.5);
 
-    while(self getanimtime(var0) < 0.95) {
+    while(self getanimtime(var_0) < 0.95) {
       if(scripts\engine\utility::flag("player_deploying_kitchen_ladder")) {
         break;
       }
@@ -394,30 +394,30 @@ function backyard_move_rate_thread() {
     }
 
     if(!scripts\engine\utility::flag("player_deploying_kitchen_ladder")) {
-      self setanimrate(var0, 1);
+      self setanimrate(var_0, 1);
     }
   }
 
   if(scripts\engine\utility::flag("player_deploying_kitchen_ladder")) {
-    self setanimrate(var0, 8);
+    self setanimrate(var_0, 8);
     return;
   }
 }
 
 function backdoor_freeze() {
-  var0 = scripts\engine\sp\utility::get_living_ai("bravo2_1", "animname");
-  var1 = [level.price, var0];
-  level.backyard_freeze_counter = var1.size;
-  scripts\engine\utility::array_thread(var1, &backdoor_freeze_thread);
-  thread backdoor_entry(var1);
+  var_0 = scripts\engine\sp\utility::get_living_ai("bravo2_1", "animname");
+  var_1 = [level.price, var_0];
+  level.backyard_freeze_counter = var_1.size;
+  scripts\engine\utility::array_thread(var_1, &backdoor_freeze_thread);
+  thread backdoor_entry(var_1);
 }
 
 function backdoor_freeze_thread() {
-  var0 = scripts\engine\utility::getStruct("backdoor_animnode", "targetname");
-  var0 notify("stop_backyard_move_loop");
-  var0 endon("stop_basement_freeze_loop");
+  var_0 = scripts\engine\utility::getStruct("backdoor_animnode", "targetname");
+  var_0 notify("stop_backyard_move_loop");
+  var_0 endon("stop_basement_freeze_loop");
   thread backdoor_freeze_rate_thread();
-  var0 scripts\common\anim::anim_single_solo(self, "backdoor_freeze");
+  var_0 scripts\common\anim::anim_single_solo(self, "backdoor_freeze");
   self notify("stop_backdoor_freeze_rate");
 
   if(level.price == self) {
@@ -425,79 +425,79 @@ function backdoor_freeze_thread() {
   }
 
   if(self == level.price) {
-    var0 thread scripts\common\anim::anim_loop_solo(self, "backdoor_freeze_idle", "stop_basement_freeze_price_loop");
-    thread backdoor_freeze_nag(var0);
+    var_0 thread scripts\common\anim::anim_loop_solo(self, "backdoor_freeze_idle", "stop_basement_freeze_price_loop");
+    thread backdoor_freeze_nag(var_0);
     return;
   }
 
-  var0 thread scripts\common\anim::anim_loop_solo(self, "backdoor_freeze_idle", "stop_basement_freeze_loop");
+  var_0 thread scripts\common\anim::anim_loop_solo(self, "backdoor_freeze_idle", "stop_basement_freeze_loop");
 }
 
 function backdoor_freeze_rate_thread() {
   self endon("stop_backdoor_freeze_rate");
-  var0 = scripts\engine\utility::getanim("backdoor_freeze");
+  var_0 = scripts\engine\utility::getanim("backdoor_freeze");
   waitframe();
   scripts\engine\utility::flag_wait("player_deploying_kitchen_ladder");
-  self setanimrate(var0, 2);
+  self setanimrate(var_0, 2);
 }
 
-function backdoor_freeze_nag(var0) {
-  var0 endon("stop_basement_freeze_loop");
-  var1 = [];
-  GscBinSkip0(0x2e, var1.size, "dx_vom_pri_kitchen_window_30");
+function backdoor_freeze_nag(var_0) {
+  var_0 endon("stop_basement_freeze_loop");
+  var_1 = [];
+  GscBinSkip0(0x2e, var_1.size, "dx_vom_pri_kitchen_window_30");
 }
 
-function backdoor_entry(var0) {
+function backdoor_entry(var_0) {
   scripts\engine\utility::flag_wait("basement_freeze_ready");
   scripts\engine\utility::flag_wait("player_deploying_kitchen_ladder");
-  var1 = scripts\engine\sp\utility::get_living_ai("bravo2_4", "animname");
-  var0 = scripts\engine\utility::array_add(var0, var1);
-  scripts\engine\utility::array_thread(var0, &backdoor_entry_thread);
+  var_1 = scripts\engine\sp\utility::get_living_ai("bravo2_4", "animname");
+  var_0 = scripts\engine\utility::array_add(var_0, var_1);
+  scripts\engine\utility::array_thread(var_0, &backdoor_entry_thread);
 }
 
 function backdoor_entry_thread() {
   scripts\engine\utility::flag_set("backdoor_enter");
-  var0 = scripts\engine\utility::getStruct("backdoor_animnode", "targetname");
-  var0 notify("stop_basement_freeze_loop");
-  var0 notify("stop_basement_freeze_price_loop");
-  var0 notify("stop_loop");
-  var0 notify("stop_backyard_move_loop");
-  var0 notify("stop_backyard_move_loop_bravo2_4");
+  var_0 = scripts\engine\utility::getStruct("backdoor_animnode", "targetname");
+  var_0 notify("stop_basement_freeze_loop");
+  var_0 notify("stop_basement_freeze_price_loop");
+  var_0 notify("stop_loop");
+  var_0 notify("stop_backyard_move_loop");
+  var_0 notify("stop_backyard_move_loop_bravo2_4");
 
   if(self == level.price) {
     thread basement_door_enter();
   }
 
   if(self.animname != "bravo2_4") {
-    thread backdoor_enter_hurry(var0);
+    thread backdoor_enter_hurry(var_0);
   }
 
-  var0 scripts\common\anim::anim_single_solo(self, "backdoor_enter");
+  var_0 scripts\common\anim::anim_single_solo(self, "backdoor_enter");
 
   if(self.animname == "bravo2_4") {
     self notify("stop_backyard_move_thread");
     scripts\engine\sp\utility::anim_stopanimScripted();
-    var0 thread scripts\common\anim::anim_loop_solo(self, "backdoor_enter_idle", "stop_basement_lastguy_loop");
+    var_0 thread scripts\common\anim::anim_loop_solo(self, "backdoor_enter_idle", "stop_basement_lastguy_loop");
     thread backdoor_lastguy_nag();
     return;
   }
 
   self.goalradius = 48;
-  var1 = undefined;
+  var_1 = undefined;
 
   if(self.animname == "bravo2_1") {
-    var1 = scripts\engine\utility::getStruct("basement_entry_bravo2_1", "targetname");
+    var_1 = scripts\engine\utility::getStruct("basement_entry_bravo2_1", "targetname");
   } else if(self == level.price) {
-    var1 = scripts\engine\utility::getStruct("basement_entry_price", "targetname");
+    var_1 = scripts\engine\utility::getStruct("basement_entry_price", "targetname");
   }
 
-  if(isDefined(var1)) {
-    var2 = var1.origin;
+  if(isDefined(var_1)) {
+    var_2 = var_1.origin;
   } else {
-    var2 = self.origin;
+    var_2 = self.origin;
   }
 
-  self setgoalpos(var2);
+  self setgoalpos(var_2);
   self waittill("goal");
   backdoor_enter_done();
 }
@@ -515,22 +515,22 @@ function backdoor_enter_done() {
   }
 }
 
-function backdoor_enter_hurry(var0) {
-  var0 endon("backdoor_enter");
-  var1 = scripts\engine\utility::getanim("backdoor_enter");
-  var2 = getEnt("backdoor", "targetname");
-  var3 = var2 scripts\engine\utility::getanim("backdoor_enter");
-  var4 = 0;
+function backdoor_enter_hurry(var_0) {
+  var_0 endon("backdoor_enter");
+  var_1 = scripts\engine\utility::getanim("backdoor_enter");
+  var_2 = getEnt("backdoor", "targetname");
+  var_3 = var_2 scripts\engine\utility::getanim("backdoor_enter");
+  var_4 = 0;
 
   for(;;) {
-    if(!var4 && level.player isonladder()) {
-      var4 = 1;
-      self setanimrate(var1, 2);
-      var2 setanimrate(var3, 2);
-    } else if(var4) {
-      var4 = 0;
-      self setanimrate(var1, 1);
-      var2 setanimrate(var3, 1);
+    if(!var_4 && level.player isonladder()) {
+      var_4 = 1;
+      self setanimrate(var_1, 2);
+      var_2 setanimrate(var_3, 2);
+    } else if(var_4) {
+      var_4 = 0;
+      self setanimrate(var_1, 1);
+      var_2 setanimrate(var_3, 1);
     }
 
     waitframe();
@@ -544,70 +544,70 @@ function backdoor_lastguy_nag() {
     return;
   }
 
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, "dx_vom_a12_kitchen_window_70");
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, "dx_vom_a12_kitchen_window_70");
 }
 
 function basement_door_enter() {
-  var0 = scripts\engine\utility::getStruct("backdoor_animnode", "targetname");
-  var1 = getEnt("backdoor", "targetname");
-  var1.linkedents[0] = getEnt(var1.target, "targetname");
-  var1.linkedents[0] linkTo(var1);
-  var1 scripts\engine\sp\utility::assign_animtree("door");
-  var0 scripts\common\anim::anim_single_solo(var1, "backdoor_enter");
+  var_0 = scripts\engine\utility::getStruct("backdoor_animnode", "targetname");
+  var_1 = getEnt("backdoor", "targetname");
+  var_1.linkedents[0] = getEnt(var_1.target, "targetname");
+  var_1.linkedents[0] linkTo(var_1);
+  var_1 scripts\engine\sp\utility::assign_animtree("door");
+  var_0 scripts\common\anim::anim_single_solo(var_1, "backdoor_enter");
 }
 
 function backyard_backup_move() {
   scripts\engine\utility::flag_wait("player_in_mid_backyard");
-  var0 = scripts\engine\utility::getStruct("backyard_door_animnode", "targetname");
-  var0 notify("stop_loop_bravo2_3");
-  var0 notify("stop_loop_bravo2_4");
-  var1 = scripts\engine\sp\utility::get_living_ai("bravo2_4", "animname");
-  thread backyard_move_thread(var1);
-  var2 = scripts\engine\sp\utility::get_living_ai("bravo2_3", "animname");
+  var_0 = scripts\engine\utility::getStruct("backyard_door_animnode", "targetname");
+  var_0 notify("stop_loop_bravo2_3");
+  var_0 notify("stop_loop_bravo2_4");
+  var_1 = scripts\engine\sp\utility::get_living_ai("bravo2_4", "animname");
+  thread backyard_move_thread(var_1);
+  var_2 = scripts\engine\sp\utility::get_living_ai("bravo2_3", "animname");
   scripts\engine\utility::flag_set("backyard_playerclip");
-  var0 thread scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(var2, "backyard_move");
+  var_0 thread scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(var_2, "backyard_move");
 }
 
-function backyard_freeze_townhouse(var0) {
+function backyard_freeze_townhouse(var_0) {
   self endon("death");
   self.goalradius = 32;
   self waittill("goal");
   self.goalradius = 4;
   scripts\engine\utility::set_movement_speed(10);
   scripts\common\ai::set_gunpose("ads");
-  var1 = create_backyard_aimpath();
+  var_1 = create_backyard_aimpath();
   scripts\sp\maps\townhoused\townhoused_code::enable_laser(1);
-  var2 = var1[0][0];
-  var3 = create_aiment(var2.origin);
-  var0.rightdir = anglestoright(var0.angles);
-  var4 = 0;
+  var_2 = var_1[0][0];
+  var_3 = create_aiment(var_2.origin);
+  var_0.rightdir = anglestoright(var_0.angles);
+  var_4 = 0;
 
   for(;;) {
     wait randomfloatrange(2, 4);
-    var5 = var1[var4];
-    var5 = scripts\engine\utility::array_randomize(var5);
-    var6 = 1;
+    var_5 = var_1[var_4];
+    var_5 = scripts\engine\utility::array_randomize(var_5);
+    var_6 = 1;
 
     if(isDefined(self.script_count_min)) {
-      var6 = randomintrange(self.script_count_min, self.script_count_max);
+      var_6 = randomintrange(self.script_count_min, self.script_count_max);
     }
 
-    for(var7 = 0; var7 < var6; var7++) {
-      foreach(var9 in var5) {
-        var10 = 5;
+    for(var_7 = 0; var_7 < var_6; var_7++) {
+      foreach(var_9 in var_5) {
+        var_10 = 5;
 
         if(isDefined(self.radius)) {
-          var10 = self.radius;
+          var_10 = self.radius;
         }
 
-        var11 = var9.origin + anglestoright(var9.angles) * randomfloatrange(var10 * -1, var10);
-        var12 = randomfloatrange(0.5, 1);
-        var3 moveTo(var11, var12, var12 * 0.5, var12 * 0.5);
-        var3 waittill("movedone");
+        var_11 = var_9.origin + anglestoright(var_9.angles) * randomfloatrange(var_10 * -1, var_10);
+        var_12 = randomfloatrange(0.5, 1);
+        var_3 moveTo(var_11, var_12, var_12 * 0.5, var_12 * 0.5);
+        var_3 waittill("movedone");
 
         if(randomint(100) > 30) {
-          backyard_free_move(var0);
+          backyard_free_move(var_0);
         }
 
         wait randomfloatrange(1, 2);
@@ -615,13 +615,13 @@ function backyard_freeze_townhouse(var0) {
     }
 
     if(randomint(100) > 30) {
-      backyard_free_move(var0);
+      backyard_free_move(var_0);
     }
 
-    var4++;
+    var_4++;
 
-    if(var4 > var1.size - 2) {
-      var4 = 0;
+    if(var_4 > var_1.size - 2) {
+      var_4 = 0;
     }
 
     waitframe();
@@ -629,17 +629,17 @@ function backyard_freeze_townhouse(var0) {
 }
 
 function backyard_fail_thread() {
-  var0 = getEnt("townhouse_damage_trigger", "targetname");
+  var_0 = getEnt("townhouse_damage_trigger", "targetname");
   thread backyard_fail_damage_thread();
 
   while(!scripts\engine\utility::flag("player_in_kitchen")) {
     if(scripts\engine\utility::flag("player_is_outside")) {
-      var1 = getEntArray("grenade", "classname");
+      var_1 = getEntArray("grenade", "classname");
 
-      if(var1.size > 0) {
-        foreach(var3 in var1) {
-          if(!isDefined(var3.fail)) {
-            var3.fail = 1;
+      if(var_1.size > 0) {
+        foreach(var_3 in var_1) {
+          if(!isDefined(var_3.fail)) {
+            var_3.fail = 1;
             thread backyard_fail_onexplode();
           }
         }
@@ -649,7 +649,7 @@ function backyard_fail_thread() {
     waitframe();
   }
 
-  var0 delete();
+  var_0 delete();
 }
 
 function backyard_fail_onexplode() {
@@ -664,64 +664,64 @@ function backyard_fail_damage_thread() {
 }
 
 function backyard_force_fail() {
-  var0 = ["dx_vom_pri_backyard_misfire_10", "dx_vom_pri_backyard_misfire_20", "dx_vom_pri_backyard_misfire_30"];
-  level.price thread scripts\engine\sp\utility::smart_dialogue(scripts\engine\utility::random(var0));
+  var_0 = ["dx_vom_pri_backyard_misfire_10", "dx_vom_pri_backyard_misfire_20", "dx_vom_pri_backyard_misfire_30"];
+  level.price thread scripts\engine\sp\utility::smart_dialogue(scripts\engine\utility::random(var_0));
   scripts\sp\player_death::set_custom_death_quote(13);
   scripts\sp\utility::missionfailedwrapper();
 }
 
-function backyard_free_move(var0) {
-  var1 = 0;
-  var2 = 10;
+function backyard_free_move(var_0) {
+  var_1 = 0;
+  var_2 = 10;
 
   for(;;) {
-    var3 = randomfloatrange(-30, 30);
-    var4 = var0.origin + var0.rightdir * var3;
-    var5 = distancesquared(var4, self.origin);
+    var_3 = randomfloatrange(-30, 30);
+    var_4 = var_0.origin + var_0.rightdir * var_3;
+    var_5 = distancesquared(var_4, self.origin);
 
-    if(var5 > 10) {
+    if(var_5 > 10) {
       break;
     }
 
-    var1++;
+    var_1++;
 
-    if(var1 == 10) {
-      var1 = 0;
+    if(var_1 == 10) {
+      var_1 = 0;
       waitframe();
     }
   }
 
-  self setgoalpos(var4);
+  self setgoalpos(var_4);
 }
 
 function create_backyard_aimpath() {
-  var0 = scripts\engine\utility::getStruct("townhouse_window_aimpath", "targetname");
-  GscBinSkip1(0x45, 0, [var0]);
+  var_0 = scripts\engine\utility::getStruct("townhouse_window_aimpath", "targetname");
+  GscBinSkip1(0x45, 0, [var_0]);
 }
 
 function ambient_garage_welding() {
-  var0 = getEnt("garage_welding_light", "targetname");
-  var0.og_intensity = var0 getlightintensity();
-  var0 setlightintensity(0);
-  var1 = [];
+  var_0 = getEnt("garage_welding_light", "targetname");
+  var_0.og_intensity = var_0 getlightintensity();
+  var_0 setlightintensity(0);
+  var_1 = [];
   GscBinSkip0(0x2e, 0, add_welding_alias("emt_amb_weld_short", 0, -2));
 }
 
-function add_welding_alias(var0, var1, var2) {
-  var3 = spawnStruct();
-  var3.alias = var0;
-  var3.flickerdelay = var1;
-  var3.flickerendtime = var2;
-  return var3;
+function add_welding_alias(var_0, var_1, var_2) {
+  var_3 = spawnStruct();
+  var_3.alias = var_0;
+  var_3.flickerdelay = var_1;
+  var_3.flickerendtime = var_2;
+  return var_3;
 }
 
-function ambient_garage_welding_light(var0) {
-  wait var0.flickerdelay;
-  var1 = randomfloatrange(0.8, 1.1);
-  var2 = gettime() + lookupsoundlength(var0.alias) + var0.flickerendtime * 1000;
+function ambient_garage_welding_light(var_0) {
+  wait var_0.flickerdelay;
+  var_1 = randomfloatrange(0.8, 1.1);
+  var_2 = gettime() + lookupsoundlength(var_0.alias) + var_0.flickerendtime * 1000;
 
-  while(gettime() < var2) {
-    self setlightintensity(var1 + randomfloatrange(-0.8, 0.5));
+  while(gettime() < var_2) {
+    self setlightintensity(var_1 + randomfloatrange(-0.8, 0.5));
     wait randomfloat(0.2);
   }
 
@@ -735,10 +735,10 @@ function kitchen_sequence() {
   thread dining_dialogue_from_kitchen();
   thread lerp_playerspeed_fov_on_ladder();
   thread player_on_ladder_flag();
-  var0 = getEnt("top_backyard_ladder", "targetname");
+  var_0 = getEnt("top_backyard_ladder", "targetname");
 
   for(;;) {
-    var0 waittill("trigger");
+    var_0 waittill("trigger");
   }
 
   LOC_0000006c:
@@ -753,28 +753,28 @@ function kitchen_sequence() {
   level.price setgoalpos(level.price.origin);
   thread scripts\engine\utility::flag_set_delayed("player_exiting_kitchen", 15);
   scripts\engine\utility::flag_wait("player_exiting_kitchen");
-  var1 = scripts\engine\utility::getStruct("kitchen_animnode", "targetname");
-  var1 notify("stop_loop_price");
+  var_1 = scripts\engine\utility::getStruct("kitchen_animnode", "targetname");
+  var_1 notify("stop_loop_price");
   thread stairtrain1_setup();
 }
 
 function kitchen_player_clip() {
   scripts\engine\utility::flag_wait("kitchen_takedown_fastforward");
   wait 2;
-  var0 = getEnt("kitchen_player_clip", "targetname");
-  var0 delete();
+  var_0 = getEnt("kitchen_player_clip", "targetname");
+  var_0 delete();
 }
 
 function kitchen_player_top_of_ladder_failsafe() {
   level endon("backdoor_enter_done");
-  var0 = getEnt("top_backyard_ladder_failsafe", "targetname");
-  var0 waittill("trigger");
+  var_0 = getEnt("top_backyard_ladder_failsafe", "targetname");
+  var_0 waittill("trigger");
   scripts\engine\utility::flag_set("top_of_ladder_failsafe");
 }
 
 function kitchen_player_deployed_ladder() {
-  var0 = get_ladder_struct("kitchen_ladder", "script_noteworthy");
-  var0.hint waittill("trigger");
+  var_0 = get_ladder_struct("kitchen_ladder", "script_noteworthy");
+  var_0.hint waittill("trigger");
   scripts\engine\utility::flag_set("player_deploying_kitchen_ladder");
 }
 
@@ -801,48 +801,48 @@ function interior_price_settings() {
 }
 
 function kitchen_takedown() {
-  var0 = scripts\engine\utility::getStruct("price_bravo3_kitchen", "targetname");
-  var1 = scripts\sp\maps\townhoused\townhoused_code::get_closest_squad_guy("bravo2", var0.origin);
-  var1 forceteleport(var0.origin, var0.angles);
-  var2 = scripts\engine\utility::getStruct("kitchen_animnode", "targetname");
-  var1.animname = "bravo3";
-  var2 thread scripts\sp\anim::anim_reach_solo(var1, "kitchen_takedown");
-  var3 = 0;
-  var4 = var1.origin;
-  var5 = scripts\engine\sp\utility::spawn_targetname("hallway_girl", 1);
-  var5.team = "neutral";
-  var5 scripts\common\ai::gun_remove();
-  var5.allowdeath = 1;
-  var5.skipdeathanim = 1;
-  var5.deathfunction = &kitchen_girl_death;
-  var5.ally = var1;
-  var5.nofacialfiller = 1;
-  var5 scripts\engine\sp\utility::set_deathanim("kitchen_takedown_death_stand");
-  var1.kitchen_react = "kitchen_takedown_death_stand";
+  var_0 = scripts\engine\utility::getStruct("price_bravo3_kitchen", "targetname");
+  var_1 = scripts\sp\maps\townhoused\townhoused_code::get_closest_squad_guy("bravo2", var_0.origin);
+  var_1 forceteleport(var_0.origin, var_0.angles);
+  var_2 = scripts\engine\utility::getStruct("kitchen_animnode", "targetname");
+  var_1.animname = "bravo3";
+  var_2 thread scripts\sp\anim::anim_reach_solo(var_1, "kitchen_takedown");
+  var_3 = 0;
+  var_4 = var_1.origin;
+  var_5 = scripts\engine\sp\utility::spawn_targetname("hallway_girl", 1);
+  var_5.team = "neutral";
+  var_5 scripts\common\ai::gun_remove();
+  var_5.allowdeath = 1;
+  var_5.skipdeathanim = 1;
+  var_5.deathfunction = &kitchen_girl_death;
+  var_5.ally = var_1;
+  var_5.nofacialfiller = 1;
+  var_5 scripts\engine\sp\utility::set_deathanim("kitchen_takedown_death_stand");
+  var_1.kitchen_react = "kitchen_takedown_death_stand";
   thread kitchen_girl_death_dialogue(level);
-  thread kitchen_takedown_girl(var5);
+  thread kitchen_takedown_girl(var_5);
   level thread scripts\sp\maps\townhoused\townhoused_anim::stow_halligan(level.price);
   level.price scripts\anim\shared::placeweaponon(level.price.weapon, "right");
   thread kitchen_takedown_door();
-  thread kitchen_bravo_death_react(var1, var2);
-  var1.animloop_headlook = 1;
-  thread kitchen_bravo_combat_thread(var1);
-  var2 thread scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(var1, "kitchen_takedown", undefined, "stop_kitchen_takedown_bravo");
-  thread dining_room_animrate_adjust(level.price, var2);
-  var2 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(level.price, "kitchen_takedown", undefined, "stop_loop_price");
-  var1 setgoalpos(var1.origin);
+  thread kitchen_bravo_death_react(var_1, var_2);
+  var_1.animloop_headlook = 1;
+  thread kitchen_bravo_combat_thread(var_1);
+  var_2 thread scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(var_1, "kitchen_takedown", undefined, "stop_kitchen_takedown_bravo");
+  thread dining_room_animrate_adjust(level.price, var_2);
+  var_2 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(level.price, "kitchen_takedown", undefined, "stop_loop_price");
+  var_1 setgoalpos(var_1.origin);
   scripts\engine\utility::flag_set("kitchen_done");
   setglobalsoundcontext("climb", "", 0.5);
 }
 
-function kitchen_bravo_combat_thread(var0) {
+function kitchen_bravo_combat_thread(var_0) {
   waitframe();
   self waittill("killanimscript");
 
   for(;;) {
-    self waittill("bulletwhizby", var1);
+    self waittill("bulletwhizby", var_1);
 
-    if(isDefined(var1) && var1 == level.player) {
+    if(isDefined(var_1) && var_1 == level.player) {
       continue;
     }
 
@@ -850,57 +850,57 @@ function kitchen_bravo_combat_thread(var0) {
   }
 
   self.combatmode = "ambush";
-  var0 notify("stop_kitchen_takedown_bravo");
-  var2 = getnode("kitchen_covernode", "targetname");
-  self setgoalnode(var2);
+  var_0 notify("stop_kitchen_takedown_bravo");
+  var_2 = getnode("kitchen_covernode", "targetname");
+  self setgoalnode(var_2);
   self.goalradius = 32;
   self.usingnode = 1;
   scripts\engine\utility::set_movement_speed(60);
   scripts\engine\sp\utility::anim_stopanimScripted();
 }
 
-function kitchen_takedown_girl(var0) {
-  var0 endon("death");
-  var1 = scripts\engine\sp\utility::spawn_anim_model("cuffs");
-  var0.cuffs = var1;
-  var2 = [var1, var0];
-  var3 = scripts\engine\utility::getStruct("kitchen_animnode", "targetname");
-  var3 scripts\common\anim::anim_single(var2, "kitchen_takedown");
-  var2 = scripts\engine\utility::array_removeundefined(var2);
-  var3 thread scripts\common\anim::anim_loop(var2, "kitchen_takedown_loop", "stop_kitchen_takedown_girl");
+function kitchen_takedown_girl(var_0) {
+  var_0 endon("death");
+  var_1 = scripts\engine\sp\utility::spawn_anim_model("cuffs");
+  var_0.cuffs = var_1;
+  var_2 = [var_1, var_0];
+  var_3 = scripts\engine\utility::getStruct("kitchen_animnode", "targetname");
+  var_3 scripts\common\anim::anim_single(var_2, "kitchen_takedown");
+  var_2 = scripts\engine\utility::array_removeundefined(var_2);
+  var_3 thread scripts\common\anim::anim_loop(var_2, "kitchen_takedown_loop", "stop_kitchen_takedown_girl");
 }
 
 function kitchen_takedown_door() {
-  var0 = scripts\sp\door::get_interactive_door("kitchen_girl_door");
-  var0.open_struct scripts\sp\door::remove_open_interact_hint();
-  var1 = scripts\engine\utility::getStruct("kitchen_animnode", "targetname");
-  var1 scripts\sp\maps\townhoused\townhoused_code::anim_door(var0, "kitchen_takedown");
-  var0.open_completely = 1;
+  var_0 = scripts\sp\door::get_interactive_door("kitchen_girl_door");
+  var_0.open_struct scripts\sp\door::remove_open_interact_hint();
+  var_1 = scripts\engine\utility::getStruct("kitchen_animnode", "targetname");
+  var_1 scripts\sp\maps\townhoused\townhoused_code::anim_door(var_0, "kitchen_takedown");
+  var_0.open_completely = 1;
   scripts\engine\utility::flag_set("kitchen_girl_secured");
 }
 
-function kitchen_bravo_death_react(var0, var1) {
-  if(!isalive(var1)) {
+function kitchen_bravo_death_react(var_0, var_1) {
+  if(!isalive(var_1)) {
     return;
   }
 
-  var1 waittill("death");
-  var0 notify("stop_kitchen_takedown_girl");
+  var_1 waittill("death");
+  var_0 notify("stop_kitchen_takedown_girl");
 
   if(isDefined(self.no_react)) {
     return;
   }
 
   if(self.kitchen_react == "kitchen_takedown_death_stand") {
-    var0 notify("stop_kitchen_takedown_bravo");
-    var0 = self;
+    var_0 notify("stop_kitchen_takedown_bravo");
+    var_0 = self;
 
-    if(isDefined(var1.cuffs)) {
-      var1.cuffs delete();
+    if(isDefined(var_1.cuffs)) {
+      var_1.cuffs delete();
     }
   } else if(self.kitchen_react == "kitchen_takedown_death_hold") {
-    if(isDefined(var1.cuffs)) {
-      var1.cuffs delete();
+    if(isDefined(var_1.cuffs)) {
+      var_1.cuffs delete();
     }
   }
 
@@ -909,22 +909,22 @@ function kitchen_bravo_death_react(var0, var1) {
   }
 
   if(self.kitchen_react == "kitchen_takedown_death_laying") {
-    var0 scripts\common\anim::anim_single_solo(self, self.kitchen_react);
+    var_0 scripts\common\anim::anim_single_solo(self, self.kitchen_react);
     return;
   }
 
-  var0 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(self, self.kitchen_react);
+  var_0 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(self, self.kitchen_react);
 }
 
 function kitchen_girl_death() {
-  var0 = scripts\engine\utility::getStruct("kitchen_animnode", "targetname");
+  var_0 = scripts\engine\utility::getStruct("kitchen_animnode", "targetname");
 
   if(isDefined(self.deathanim)) {
     return 0;
   }
 
   if(self.kitchen_death_anime == "kitchen_takedown_death_stand") {
-    var0 = self;
+    var_0 = self;
   }
 
   if(self.kitchen_death_anime == "kitchen_takedown_death_laying") {
@@ -933,77 +933,77 @@ function kitchen_girl_death() {
     }
   }
 
-  scripts\sp\maps\townhoused\townhoused_code::scripted_deathanim(self.kitchen_death_anime, var0);
+  scripts\sp\maps\townhoused\townhoused_code::scripted_deathanim(self.kitchen_death_anime, var_0);
 }
 
-function kitchen_girl_death_dialogue(var0) {
-  var0 waittill("death", var1);
+function kitchen_girl_death_dialogue(var_0) {
+  var_0 waittill("death", var_1);
   scripts\engine\utility::flag_set("kitchen_girl_secured");
 
-  if(!isPlayer(var1)) {
+  if(!isPlayer(var_1)) {
     return;
   }
 
-  var2 = scripts\engine\sp\utility::get_living_ai("bravo3", "animname");
+  var_2 = scripts\engine\sp\utility::get_living_ai("bravo3", "animname");
   wait 0.2;
-  var2 scripts\engine\sp\utility::smart_dialogue("dx_vom_a11_kitchen_entry_40");
+  var_2 scripts\engine\sp\utility::smart_dialogue("dx_vom_a11_kitchen_entry_40");
   wait 0.3;
   scripts\engine\sp\utility::smart_radio_dialogue("dx_vom_pri_kitchen_entry_50");
 }
 
-function get_ladder_struct(var0, var1) {
-  var2 = scripts\engine\utility::getStructArray(var0, var1);
+function get_ladder_struct(var_0, var_1) {
+  var_2 = scripts\engine\utility::getStructArray(var_0, var_1);
 
-  foreach(var4 in var2) {
-    if(var4.targetname == "deployable_ladder") {
-      return var4;
+  foreach(var_4 in var_2) {
+    if(var_4.targetname == "deployable_ladder") {
+      return var_4;
     }
   }
 }
 
 function lerp_playerspeed_fov_on_ladder() {
-  var0 = scripts\engine\utility::getStruct("ladder_lerp", "targetname");
-  var1 = scripts\engine\utility::getStruct(var0.target, "targetname");
-  var2 = 0;
-  var3 = 0.846154;
-  var4 = 0.666;
-  var5 = 1;
-  var6 = distance(var0.origin, var1.origin);
-  var7 = 0;
+  var_0 = scripts\engine\utility::getStruct("ladder_lerp", "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
+  var_2 = 0;
+  var_3 = 0.846154;
+  var_4 = 0.666;
+  var_5 = 1;
+  var_6 = distance(var_0.origin, var_1.origin);
+  var_7 = 0;
 
   for(;;) {
-    var8 = pointonsegmentnearesttopoint(var0.origin, var1.origin, level.player.origin);
-    var9 = distance(var8, var0.origin);
-    var10 = var9 / var6;
+    var_8 = pointonsegmentnearesttopoint(var_0.origin, var_1.origin, level.player.origin);
+    var_9 = distance(var_8, var_0.origin);
+    var_10 = var_9 / var_6;
 
-    if(var10 > var7) {
-      var7 = var10;
-      var11 = scripts\engine\math::factor_value(65, 55, var10);
-      level.player modifybasefov(var11, 0.2);
+    if(var_10 > var_7) {
+      var_7 = var_10;
+      var_11 = scripts\engine\math::factor_value(65, 55, var_10);
+      level.player modifybasefov(var_11, 0.2);
     }
 
     if(level.player isonladder()) {
-      if(!var2) {
+      if(!var_2) {
         thread scripts\engine\sp\utility::lerp_saveddvar("LOMLPPTKO", 20, 3);
         scripts\sp\maps\townhoused\townhoused_lighting::player_onkitchenladder();
         level.player scripts\engine\sp\utility::player_speed_set(40, 0.5);
-        var2 = 1;
+        var_2 = 1;
       }
 
       level.player scripts\engine\sp\utility::blend_movespeedscale(1);
     } else {
-      if(var2) {
+      if(var_2) {
         setsaveddvar("LOMLPPTKO", 85);
         scripts\sp\maps\townhoused\townhoused_lighting::player_offkitchenladder();
         scripts\sp\player::player_movement_state("creep");
-        var2 = 0;
+        var_2 = 0;
       }
 
-      var12 = scripts\engine\math::factor_value(var5, var4, var10);
-      level.player scripts\engine\sp\utility::blend_movespeedscale(var12);
+      var_12 = scripts\engine\math::factor_value(var_5, var_4, var_10);
+      level.player scripts\engine\sp\utility::blend_movespeedscale(var_12);
     }
 
-    if(var10 == 1) {
+    if(var_10 == 1) {
       break;
     }
 
@@ -1017,44 +1017,44 @@ function lerp_playerspeed_fov_on_ladder() {
 }
 
 function kitchen_mantle_thread() {
-  var0 = getEnt("kitchen_mantle", "targetname");
-  var1 = scripts\engine\utility::getStruct(var0.target, "targetname");
-  var2 = scripts\engine\utility::getStruct(var1.target, "targetname");
-  var3 = "window_mantle";
-  var4 = getmovedelta(level.player_rig scripts\engine\utility::getanim(var3), 0, 1);
-  var5 = cos(45);
-  var6 = anglesToForward(var1.angles);
-  var7 = 1;
+  var_0 = getEnt("kitchen_mantle", "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
+  var_3 = "window_mantle";
+  var_4 = getmovedelta(level.player_rig scripts\engine\utility::getanim(var_3), 0, 1);
+  var_5 = cos(45);
+  var_6 = anglesToForward(var_1.angles);
+  var_7 = 1;
 
   for(;;) {
-    var0 waittill("trigger");
+    var_0 waittill("trigger");
 
-    while(level.player istouching(var0)) {
-      var8 = anglesToForward(level.player.angles);
-      var9 = vectordot(var6, var8);
-      var10 = 1;
+    while(level.player istouching(var_0)) {
+      var_8 = anglesToForward(level.player.angles);
+      var_9 = vectordot(var_6, var_8);
+      var_10 = 1;
 
-      if(var9 < var5) {
-        var10 = 0;
+      if(var_9 < var_5) {
+        var_10 = 0;
       }
 
-      if(!istrue(level.player_on_ladder_hack) && var10 && !is_player_moving_forward()) {
-        var10 = 0;
+      if(!istrue(level.player_on_ladder_hack) && var_10 && !is_player_moving_forward()) {
+        var_10 = 0;
       }
 
-      if(var10) {
-        var11 = spawnStruct();
-        var11.origin = pointonsegmentnearesttopoint(var1.origin, var2.origin, level.player.origin);
-        var11.angles = (0, level.player.angles[1], 0);
-        var11 scripts\common\anim::anim_first_frame_solo(level.player_rig, var3);
-        var12 = level.player_rig gettagorigin("tag_player");
-        var13 = level.player_rig gettagangles("tag_player");
-        level.player.groundrefent = scripts\engine\utility::spawn_tag_origin(var12, var13);
+      if(var_10) {
+        var_11 = spawnStruct();
+        var_11.origin = pointonsegmentnearesttopoint(var_1.origin, var_2.origin, level.player.origin);
+        var_11.angles = (0, level.player.angles[1], 0);
+        var_11 scripts\common\anim::anim_first_frame_solo(level.player_rig, var_3);
+        var_12 = level.player_rig gettagorigin("tag_player");
+        var_13 = level.player_rig gettagangles("tag_player");
+        level.player.groundrefent = scripts\engine\utility::spawn_tag_origin(var_12, var_13);
         level.player.groundrefent linkTo(level.player_rig, "tag_camera", (0, 0, 0), (0, 0, 0));
         level.player setstance("stand");
         level.player_rig hide();
-        var11.origin -= (0, 0, 60);
-        var11 thread scripts\common\anim::anim_single_solo(level.player_rig, var3);
+        var_11.origin -= (0, 0, 60);
+        var_11 thread scripts\common\anim::anim_single_solo(level.player_rig, var_3);
         level.player disableweapons();
         level.player lerpviewangleclamp(0, 0, 0, 180, 180, 180, 180, 1);
         level.player playerlinktoblend(level.player_rig, "tag_player", 0.4, 0.2, 0.2);
@@ -1063,14 +1063,14 @@ function kitchen_mantle_thread() {
         level.player playerlinktodelta(level.player_rig, "tag_player", 1, 0, 0, 0, 0, 1);
         level.player lerpviewangleclamp(0.2, 0, 1, 20, 20, 20, 20);
         level.player springcamenabled(0, 5, 5);
-        var11 waittill(var3);
+        var_11 waittill(var_3);
         level.player_rig hide();
         level.player enableweapons();
         level.player springcamdisabled(0);
         level.player unlink();
         level.player playersetgroundreferenceent(undefined);
         level.player.groundrefent delete();
-        var11 = undefined;
+        var_11 = undefined;
       }
 
       wait 0.05;
@@ -1079,30 +1079,30 @@ function kitchen_mantle_thread() {
 }
 
 function is_player_moving_forward() {
-  var0 = level.player getnormalizedmovement();
-  return var0[0] > 0;
+  var_0 = level.player getnormalizedmovement();
+  return var_0[0] > 0;
 }
 
 function dining_dialogue_from_kitchen() {
   scripts\engine\utility::flag_wait("player_near_kitchen");
-  var0 = scripts\engine\utility::getStruct("dining_fakesound1", "targetname");
-  var1 = scripts\engine\utility::spawn_script_origin(var0.origin);
-  var0 = scripts\engine\utility::getStruct("dining_fakesound2", "targetname");
-  var2 = scripts\engine\utility::spawn_script_origin(var0.origin);
+  var_0 = scripts\engine\utility::getStruct("dining_fakesound1", "targetname");
+  var_1 = scripts\engine\utility::spawn_script_origin(var_0.origin);
+  var_0 = scripts\engine\utility::getStruct("dining_fakesound2", "targetname");
+  var_2 = scripts\engine\utility::spawn_script_origin(var_0.origin);
   level.player setsoundsubmix("sp_th_python_scream");
   scripts\engine\utility::flag_wait("player_top_of_ladder");
-  playsound_wait(var2, "dx_vom_aq1_kitchen_aq_convo1_10");
+  playsound_wait(var_2, "dx_vom_aq1_kitchen_aq_convo1_10");
   wait 0.8;
-  playsound_wait(var1, "dx_vom_aqf1_kitchen_aq_convo1_20");
-  playsound_wait(var2, "dx_vom_aq1_kitchen_aq_convo1_30");
+  playsound_wait(var_1, "dx_vom_aqf1_kitchen_aq_convo1_20");
+  playsound_wait(var_2, "dx_vom_aq1_kitchen_aq_convo1_30");
   wait 3.2;
   scripts\engine\utility::flag_set("kitchen_intro_vo_done");
-  var1 delete();
-  var2 delete();
+  var_1 delete();
+  var_2 delete();
 }
 
-function playsound_wait(var0) {
-  self playSound(var0, "sounddone");
+function playsound_wait(var_0) {
+  self playSound(var_0, "sounddone");
   self waittill("sounddone");
 }
 
@@ -1116,21 +1116,21 @@ function postspawn_dining_enemy() {
   level.dining_enemies = scripts\engine\utility::array_add(level.dining_enemies, self);
   scripts\sp\anim::anim_react_add_to_alertgroup("dining");
   self.headlook_enabled = 0;
-  var0 = scripts\engine\utility::getStruct("dining_animnode", "targetname");
+  var_0 = scripts\engine\utility::getStruct("dining_animnode", "targetname");
   scripts\engine\sp\utility::disable_surprise();
 
   if(self.animname == "dining_enemy3") {
-    var1 = scripts\sp\utility::make_weapon("iw8_ar_akilo47", ["rec_akilo47", "mag_akilo47|1", "ironsdefault_akilo47"]);
-    scripts\anim\shared::forceuseweapon(var1, "primary");
+    var_1 = scripts\sp\utility::make_weapon("iw8_ar_akilo47", ["rec_akilo47", "mag_akilo47|1", "ironsdefault_akilo47"]);
+    scripts\anim\shared::forceuseweapon(var_1, "primary");
     scripts\engine\utility::delaythread(0.1, &scripts\sp\anim::primaryweapon_leave_behind, "tag_weapon_right", 1);
   } else {
     if(self.animname == "dining_enemy1") {
-      var1 = scripts\sp\utility::make_weapon("iw8_ar_akilo47", ["rec_akilo47", "front_akilo47", "mag_akilo47|1", "ironsdefault_akilo47", "stockno_akilo47"]);
+      var_1 = scripts\sp\utility::make_weapon("iw8_ar_akilo47", ["rec_akilo47", "front_akilo47", "mag_akilo47|1", "ironsdefault_akilo47", "stockno_akilo47"]);
     } else {
-      var1 = scripts\sp\utility::make_weapon("iw8_ar_akilo47", ["rec_akilo47", "back_akilo47", "front_akilo47", "mag_akilo47", "ironsdefault_akilo47"]);
+      var_1 = scripts\sp\utility::make_weapon("iw8_ar_akilo47", ["rec_akilo47", "back_akilo47", "front_akilo47", "mag_akilo47", "ironsdefault_akilo47"]);
     }
 
-    scripts\anim\shared::forceuseweapon(var1, "primary");
+    scripts\anim\shared::forceuseweapon(var_1, "primary");
     scripts\engine\utility::delaythread(0.1, &scripts\sp\anim::primaryweapon_leave_behind, "tag_weapon_right");
   }
 
@@ -1138,13 +1138,13 @@ function postspawn_dining_enemy() {
     dining_room_chair_init();
     self.disabledeathdirectionalorient = 1;
     self.anim_react_skip_stopanimscripted = 1;
-    thread dining_react_flagwait(var1, self, "dining");
+    thread dining_react_flagwait(var_1, self, "dining");
   } else if(self.animname == "dining_enemy2") {
-    thread dining_react_flagwait(var1, self, "dining");
+    thread dining_react_flagwait(var_1, self, "dining");
     self.disabledeathdirectionalorient = 1;
   } else {
     self attach(scripts\engine\sp\utility::getmodel("cellphone_on"), "tag_accessory_left");
-    thread dining_react_flagwait(var1, self, "dining");
+    thread dining_react_flagwait(var_1, self, "dining");
   }
 
   thread dining_death_counter(1);
@@ -1153,23 +1153,23 @@ function postspawn_dining_enemy() {
     thread dining_dialogue();
     thread dining_price_dialogue();
     thread dining_room_foyer_trigger();
-    var2 = getEnt("dining_room_damage_trigger", "targetname");
+    var_2 = getEnt("dining_room_damage_trigger", "targetname");
     thread dining_trigger_damage_thread();
-    var2 = getEnt("outer_dining_room_damage_trigger", "targetname");
-    thread dining_trigger_damage_thread(var2);
+    var_2 = getEnt("outer_dining_room_damage_trigger", "targetname");
+    thread dining_trigger_damage_thread(var_2);
     return;
   }
 }
 
 function dining_room_chair_init() {
-  var0 = getEnt("dining_room_chair", "targetname");
-  var0 scripts\engine\sp\utility::assign_animtree("chair");
+  var_0 = getEnt("dining_room_chair", "targetname");
+  var_0 scripts\engine\sp\utility::assign_animtree("chair");
   thread dining_room_chair_anim_end();
-  var0.clip = getEnt("dining_room_chair_clip", "targetname");
-  var0.clip linkTo(var0);
-  var1 = scripts\engine\utility::getStruct("dining_animnode", "targetname");
-  var1 thread scripts\common\anim::anim_first_frame_solo(var0, "dining_react_high");
-  self.animents = [var0];
+  var_0.clip = getEnt("dining_room_chair_clip", "targetname");
+  var_0.clip linkTo(var_0);
+  var_1 = scripts\engine\utility::getStruct("dining_animnode", "targetname");
+  var_1 thread scripts\common\anim::anim_first_frame_solo(var_0, "dining_react_high");
+  self.animents = [var_0];
 }
 
 function dining_room_chair_anim_end() {
@@ -1185,16 +1185,16 @@ function dining_room_chair_anim_end() {
 
 function dining_room_foyer_trigger() {
   scripts\engine\sp\utility::trigger_wait_targetname("dining_room_foyer");
-  var0 = scripts\engine\sp\utility::get_living_ai_array("dining_enemies", "script_noteworthy");
-  scripts\engine\sp\utility::array_notify(var0, "react");
+  var_0 = scripts\engine\sp\utility::get_living_ai_array("dining_enemies", "script_noteworthy");
+  scripts\engine\sp\utility::array_notify(var_0, "react");
 }
 
-function dining_room_door_damage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
+function dining_room_door_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   scripts\engine\utility::flag_set("player_exiting_kitchen");
   self.fndamage = undefined;
   waitframe();
-  var10 = scripts\engine\sp\utility::get_living_ai_array("dining_enemies", "script_noteworthy");
-  scripts\engine\sp\utility::array_notify(var10, "react");
+  var_10 = scripts\engine\sp\utility::get_living_ai_array("dining_enemies", "script_noteworthy");
+  scripts\engine\sp\utility::array_notify(var_10, "react");
 }
 
 function dining_dialogue() {
@@ -1205,76 +1205,76 @@ function dining_dialogue() {
   level endon("dining_room_react");
   scripts\engine\utility::flag_wait_all("player_in_kitchen", "kitchen_intro_vo_done");
   wait 0.85;
-  var0 = scripts\engine\sp\utility::get_living_ai("dining_enemy1", "animname");
-  var1 = scripts\engine\sp\utility::get_living_ai("dining_enemy2", "animname");
-  var2 = scripts\engine\sp\utility::get_living_ai("dining_enemy3", "animname");
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq3_dining_room_aq_convo2_10");
-  var1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq1_dining_room_aq_convo2_20");
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq3_dining_room_aq_convo2_30");
-  var2 scripts\engine\sp\utility::smart_dialogue("dx_vom_aqf2_dining_room_aq_convo2_40");
-  var1 thread scripts\engine\sp\utility::smart_dialogue("dx_vom_aq1_dining_room_aq_convo2_50");
-  var3 = lookupsoundlength("dx_vom_aq1_dining_room_aq_convo2_50") / 1000;
-  wait max(var3 - 0.8, 0);
-  var0 thread scripts\engine\sp\utility::smart_dialogue("dx_vom_aq3_dining_room_aq_convo2_60");
-  var3 = lookupsoundlength("dx_vom_aq3_dining_room_aq_convo2_60") / 1000;
-  wait max(var3 - 1, 0);
+  var_0 = scripts\engine\sp\utility::get_living_ai("dining_enemy1", "animname");
+  var_1 = scripts\engine\sp\utility::get_living_ai("dining_enemy2", "animname");
+  var_2 = scripts\engine\sp\utility::get_living_ai("dining_enemy3", "animname");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq3_dining_room_aq_convo2_10");
+  var_1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq1_dining_room_aq_convo2_20");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq3_dining_room_aq_convo2_30");
+  var_2 scripts\engine\sp\utility::smart_dialogue("dx_vom_aqf2_dining_room_aq_convo2_40");
+  var_1 thread scripts\engine\sp\utility::smart_dialogue("dx_vom_aq1_dining_room_aq_convo2_50");
+  var_3 = lookupsoundlength("dx_vom_aq1_dining_room_aq_convo2_50") / 1000;
+  wait max(var_3 - 0.8, 0);
+  var_0 thread scripts\engine\sp\utility::smart_dialogue("dx_vom_aq3_dining_room_aq_convo2_60");
+  var_3 = lookupsoundlength("dx_vom_aq3_dining_room_aq_convo2_60") / 1000;
+  wait max(var_3 - 1, 0);
   thread scripts\engine\utility::flag_set_delayed("dining_room_drop_em_ready", 1);
-  var2 scripts\engine\sp\utility::smart_dialogue("dx_vom_aqf2_dining_room_aq_convo2_70");
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq3_dining_room_aq_convo2_80");
-  var1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq1_dining_room_aq_convo2_100");
-  var1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq1_dining_room_aq_convo2_110");
-  var1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq1_dining_room_aq_convo2_120");
+  var_2 scripts\engine\sp\utility::smart_dialogue("dx_vom_aqf2_dining_room_aq_convo2_70");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq3_dining_room_aq_convo2_80");
+  var_1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq1_dining_room_aq_convo2_100");
+  var_1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq1_dining_room_aq_convo2_110");
+  var_1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq1_dining_room_aq_convo2_120");
   wait 0.5;
-  var1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq1_dining_room_aq_convo2_130");
-  var2 scripts\engine\sp\utility::smart_dialogue("dx_vom_aqf2_dining_room_aq_convo2_140");
-  var1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq1_dining_room_aq_convo2_150");
+  var_1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq1_dining_room_aq_convo2_130");
+  var_2 scripts\engine\sp\utility::smart_dialogue("dx_vom_aqf2_dining_room_aq_convo2_140");
+  var_1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq1_dining_room_aq_convo2_150");
   wait 6;
-  var1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq1_dining_room_aq_convo2_160");
+  var_1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq1_dining_room_aq_convo2_160");
   wait 4;
-  var1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq1_dining_room_aq_convo2_170");
+  var_1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq1_dining_room_aq_convo2_170");
   wait 8;
   thread dining_enemy2_investigate();
-  var1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq1_dining_room_aq_convo2_180");
+  var_1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq1_dining_room_aq_convo2_180");
   wait 1;
   scripts\engine\utility::flag_set("dining_room_dialogue_finished");
 }
 
 function dining_enemy2_investigate() {
-  var0 = scripts\engine\utility::getStruct("dining_animnode", "targetname");
-  var1 = scripts\engine\sp\utility::get_living_ai("dining_enemy2", "animname");
-  var1 notify("stop_anim_react");
-  var1 endon("death");
+  var_0 = scripts\engine\utility::getStruct("dining_animnode", "targetname");
+  var_1 = scripts\engine\sp\utility::get_living_ai("dining_enemy2", "animname");
+  var_1 notify("stop_anim_react");
+  var_1 endon("death");
 
-  if(var1 scripts\engine\utility::ent_flag_exist("anim_reacted")) {
-    var1 scripts\engine\utility::ent_flag_set("anim_reacted");
+  if(var_1 scripts\engine\utility::ent_flag_exist("anim_reacted")) {
+    var_1 scripts\engine\utility::ent_flag_set("anim_reacted");
   }
 
-  var1.a.movement = "stop";
-  var0 notify("stop_anim_loop_" + var1.animname);
-  var1 scripts\engine\sp\utility::anim_stopanimScripted();
-  var1 scripts\engine\sp\utility::place_weapon_on(var1.sidearm, "right");
-  var1.dontattackme = 0;
-  var1.fnstealthgotonode = undefined;
-  var1.goalradius = 60;
-  var2 = scripts\engine\utility::getStruct("dining_enemy_search", "targetname");
-  var1 setgoalpos(var2.origin);
+  var_1.a.movement = "stop";
+  var_0 notify("stop_anim_loop_" + var_1.animname);
+  var_1 scripts\engine\sp\utility::anim_stopanimScripted();
+  var_1 scripts\engine\sp\utility::place_weapon_on(var_1.sidearm, "right");
+  var_1.dontattackme = 0;
+  var_1.fnstealthgotonode = undefined;
+  var_1.goalradius = 60;
+  var_2 = scripts\engine\utility::getStruct("dining_enemy_search", "targetname");
+  var_1 setgoalpos(var_2.origin);
   thread dining_enemy2_investigate_react();
-  var1 waittill("goal");
-  var1.dontattackme = 0;
-  var3 = scripts\engine\sp\utility::get_living_ai("bravo3", "animname");
+  var_1 waittill("goal");
+  var_1.dontattackme = 0;
+  var_3 = scripts\engine\sp\utility::get_living_ai("bravo3", "animname");
 
-  if(!var1 cansee(level.player)) {
-    if(isDefined(var3)) {
-      var1 aieventlistenerevent("combat", var3, var3.origin);
-      var1 getenemyinfo(var3);
+  if(!var_1 cansee(level.player)) {
+    if(isDefined(var_3)) {
+      var_1 aieventlistenerevent("combat", var_3, var_3.origin);
+      var_1 getenemyinfo(var_3);
     }
   }
 
-  if(isDefined(var3)) {
-    var3 notify("bulletwhizby");
+  if(isDefined(var_3)) {
+    var_3 notify("bulletwhizby");
   }
 
-  var1.goalradius = 500;
+  var_1.goalradius = 500;
   dining_delete_clip();
 }
 
@@ -1289,7 +1289,7 @@ function dining_price_dialogue() {
     return;
   }
 
-  var0 = getEnt("dining_room_hallwayview", "targetname");
+  var_0 = getEnt("dining_room_hallwayview", "targetname");
   scripts\engine\utility::flag_wait("dining_room_player_should_engage");
 
   if(scripts\engine\utility::flag("dining_room_react")) {
@@ -1297,95 +1297,95 @@ function dining_price_dialogue() {
   }
 
   level endon("dining_room_react");
-  var1 = scripts\engine\utility::getStruct("dining_room_lookat_pos", "targetname");
-  var2 = [];
-  GscBinSkip0(0x2e, var2.size, "dx_vom_pri_dining_room_entry_20");
+  var_1 = scripts\engine\utility::getStruct("dining_room_lookat_pos", "targetname");
+  var_2 = [];
+  GscBinSkip0(0x2e, var_2.size, "dx_vom_pri_dining_room_entry_20");
 }
 
-function dining_react_flagwait(var0, var1, var2) {
-  var0 endon("death");
-  scripts\common\anim::anim_first_frame_solo(var0, var1 + "_intro");
+function dining_react_flagwait(var_0, var_1, var_2) {
+  var_0 endon("death");
+  scripts\common\anim::anim_first_frame_solo(var_0, var_1 + "_intro");
 
   if(level.start_point == "dining_room") {
-    level.scr_anim[var0.animname][var1 + "_intro"] = undefined;
+    level.scr_anim[var_0.animname][var_1 + "_intro"] = undefined;
   }
 
   scripts\engine\utility::flag_wait("player_exiting_kitchen");
-  thread scripts\sp\anim::anim_react(var0, var1, var2);
+  thread scripts\sp\anim::anim_react(var_0, var_1, var_2);
 }
 
 function dining_room_is_light_dead() {
-  var0 = isDefined(self.anim_react_event) && self.anim_react_event.typeorig == "light_killed";
+  var_0 = isDefined(self.anim_react_event) && self.anim_react_event.typeorig == "light_killed";
 
-  if(!var0) {
-    var1 = getscriptablearray("dining_light", "targetname");
-    var2 = var1[0] getscriptablepartstate("onoff");
-    var0 = var2 == "death";
+  if(!var_0) {
+    var_1 = getscriptablearray("dining_light", "targetname");
+    var_2 = var_1[0] getscriptablepartstate("onoff");
+    var_0 = var_2 == "death";
   }
 
-  return var0;
+  return var_0;
 }
 
 function dining_light_death() {
   scripts\engine\utility::flag_wait("scriptables_ready");
-  var0 = getscriptablearray("dining_light", "targetname");
-  var1 = var0[0];
+  var_0 = getscriptablearray("dining_light", "targetname");
+  var_1 = var_0[0];
 
   if(getdvarint("developer") > 0) {
     scripts\engine\sp\utility::scripter_note("turning off other lights");
   }
 
-  var1 waittill("death");
+  var_1 waittill("death");
   level.player.lastenemybulletdamagetime = gettime();
-  var2 = getEntArray("102_dinning", "script_noteworthy");
+  var_2 = getEntArray("102_dinning", "script_noteworthy");
 
-  foreach(var4 in var2) {
-    var4 setlightintensity(0);
+  foreach(var_4 in var_2) {
+    var_4 setlightintensity(0);
   }
 }
 
 function dining_delete_clip() {
-  var0 = getEnt("dining_room_conceal_clip", "targetname");
+  var_0 = getEnt("dining_room_conceal_clip", "targetname");
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
     return;
   }
 }
 
-function dining_enemy_react(var0) {
+function dining_enemy_react(var_0) {
   if(self.health == 1) {
-    var0 = "pain";
+    var_0 = "pain";
   }
 
-  if(var0 == "death") {
+  if(var_0 == "death") {
     return "death";
   }
 
   self endon("death");
   self endon("stop_dining_enemy_react");
   self.nofacialfiller = 1;
-  var1 = dining_room_is_light_dead();
+  var_1 = dining_room_is_light_dead();
 
-  if(var1) {
+  if(var_1) {
     thread dining_nolight_delay();
   } else {
     thread disable_player_sealth();
   }
 
   if(self.animname == "dining_enemy1") {
-    if(istrue(level.demo) && var1) {
+    if(istrue(level.demo) && var_1) {
       self notify("stop_dining_enemy_react_special");
       self endon("stop_dining_enemy_react_special");
 
-      if(var0 != "pain" || var0 != "death") {
-        slow_react_enemy(var0);
-        var0 = self.slow_react_type;
+      if(var_0 != "pain" || var_0 != "death") {
+        slow_react_enemy(var_0);
+        var_0 = self.slow_react_type;
         slow_react_stop_animScripted();
       }
     } else {
-      var2 = scripts\engine\utility::getStruct("dining_animnode", "targetname");
-      var2 notify("stop_anim_loop_" + self.animname);
+      var_2 = scripts\engine\utility::getStruct("dining_animnode", "targetname");
+      var_2 notify("stop_anim_loop_" + self.animname);
     }
   }
 
@@ -1393,52 +1393,52 @@ function dining_enemy_react(var0) {
   scripts\engine\utility::flag_set("dining_room_react");
   self stopsounds();
   dining_delete_clip();
-  var2 = scripts\engine\utility::getStruct("dining_animnode", "targetname");
-  var3 = "dining_react_high";
+  var_2 = scripts\engine\utility::getStruct("dining_animnode", "targetname");
+  var_3 = "dining_react_high";
 
-  if(var0 == "too_close" || is_footstep_react()) {
-    var3 = "dining_react";
+  if(var_0 == "too_close" || is_footstep_react()) {
+    var_3 = "dining_react";
   }
 
-  if(var0 == "friend_reacted") {
+  if(var_0 == "friend_reacted") {
     if(isDefined(self.anim_react_event)) {
       if(self.anim_react_event.typeorig == "bulletwhizby") {
-        var3 = "dining_react_high";
+        var_3 = "dining_react_high";
       }
     }
-  } else if(var0 == "friend_pained" || var0 == "friend_died") {
-    var3 = "dining_react_high";
-    var4 = "dx_vom_aq3_dining_room_frontroom_10";
+  } else if(var_0 == "friend_pained" || var_0 == "friend_died") {
+    var_3 = "dining_react_high";
+    var_4 = "dx_vom_aq3_dining_room_frontroom_10";
   }
 
-  if(var0 == "pain") {
+  if(var_0 == "pain") {
     if(self.health == 1) {
-      thread dining_react_death(var2);
+      thread dining_react_death(var_2);
       return "skip_reaction";
     }
 
     self notify("stop_dining_enemy_damage");
-    return var0;
+    return var_0;
   } else {
-    thread dining_react_death(var2, 1);
+    thread dining_react_death(var_2, 1);
   }
 
   thread dining_drop_phone();
-  var5 = var3;
+  var_5 = var_3;
 
-  if(var1) {
-    var5 = "dining_react_nolight";
+  if(var_1) {
+    var_5 = "dining_react_nolight";
     self notify("stop_dining_enemy_damage");
   }
 
   self.animreactpain = 1;
   thread dinnig_enemy_react_then_pain();
-  thread dining_react_dialogue(var5);
-  var2 = scripts\engine\utility::getStruct("dining_animnode", "targetname");
-  var2 scripts\sp\anim::anim_single_with_props([self], var3);
+  thread dining_react_dialogue(var_5);
+  var_2 = scripts\engine\utility::getStruct("dining_animnode", "targetname");
+  var_2 scripts\sp\anim::anim_single_with_props([self], var_3);
   self notify("stop_dining_enemy_damage");
 
-  if(var3 == "dining_react_high" && !var1) {
+  if(var_3 == "dining_react_high" && !var_1) {
     if(self.animname == "dining_enemy3") {
       thread dining_engage_enemy(64);
     } else {
@@ -1457,27 +1457,27 @@ function dining_drop_phone() {
   }
 
   wait 0.3;
-  var0 = self gettagorigin("tag_accessory_left");
-  var1 = self gettagangles("tag_accessory_left");
+  var_0 = self gettagorigin("tag_accessory_left");
+  var_1 = self gettagangles("tag_accessory_left");
   waitframe();
-  var2 = self gettagorigin("tag_accessory_left");
+  var_2 = self gettagorigin("tag_accessory_left");
   self detach(scripts\engine\sp\utility::getmodel("cellphone_on"), "tag_accessory_left");
-  var3 = var2 - var0;
-  var4 = scripts\engine\sp\utility::spawn_anim_model("cellphone_on", var0, var1);
-  var4 physicslaunchserver(var4.origin, var3);
+  var_3 = var_2 - var_0;
+  var_4 = scripts\engine\sp\utility::spawn_anim_model("cellphone_on", var_0, var_1);
+  var_4 physicslaunchserver(var_4.origin, var_3);
 }
 
-function slow_react_enemy(var0) {
+function slow_react_enemy(var_0) {
   self.slow_react_type = "pain";
   self endon("damage");
-  var1 = scripts\engine\utility::getStruct("dining_animnode", "targetname");
-  var1 notify("stop_anim_loop_" + self.animname);
+  var_1 = scripts\engine\utility::getStruct("dining_animnode", "targetname");
+  var_1 notify("stop_anim_loop_" + self.animname);
   scripts\engine\sp\utility::anim_stopanimScripted();
-  var1 thread scripts\common\anim::anim_single_solo(self, "dining_loop_once");
-  var2 = self.health;
+  var_1 thread scripts\common\anim::anim_single_solo(self, "dining_loop_once");
+  var_2 = self.health;
   self.gunposeoverride_internal = "disable";
-  var3 = [];
-  GscBinSkip0(0x2e, var3.size, scripts\engine\sp\utility::get_living_ai("dining_enemy2", "animname"));
+  var_3 = [];
+  GscBinSkip0(0x2e, var_3.size, scripts\engine\sp\utility::get_living_ai("dining_enemy2", "animname"));
 }
 
 function slow_react_stop_animScripted() {
@@ -1486,9 +1486,9 @@ function slow_react_stop_animScripted() {
 
 function spot_player_dialogue() {
   self endon("death");
-  var0 = scripts\engine\utility::waittill_any_ents_return(self, "weapon_fired", level, "player_location_called") != "player_location_called";
+  var_0 = scripts\engine\utility::waittill_any_ents_return(self, "weapon_fired", level, "player_location_called") != "player_location_called";
 
-  if(var0) {
+  if(var_0) {
     thread callout_player_location();
     return;
   }
@@ -1520,56 +1520,56 @@ function callout_player_location() {
     return;
   }
 
-  var0 = self.lastenemysightpos;
+  var_0 = self.lastenemysightpos;
   level notify("player_location_called");
   self stopsounds();
   waitframe();
 
   if(self.animname == "dining_enemy1") {
-    var1 = ["dx_vom_aq3_dining_room_frontroom_100", "dx_vom_aq3_dining_room_frontroom_110", "dx_vom_aq3_dining_room_frontroom_120"];
+    var_1 = ["dx_vom_aq3_dining_room_frontroom_100", "dx_vom_aq3_dining_room_frontroom_110", "dx_vom_aq3_dining_room_frontroom_120"];
   } else if(self.animname == "dining_enemy2") {
-    var1 = ["dx_vom_aq2_dining_room_frontroom_130", "dx_vom_aq2_dining_room_frontroom_140", "dx_vom_aq2_dining_room_frontroom_150"];
+    var_1 = ["dx_vom_aq2_dining_room_frontroom_130", "dx_vom_aq2_dining_room_frontroom_140", "dx_vom_aq2_dining_room_frontroom_150"];
   } else {
-    var1 = ["dx_vom_aqf1_dining_room_frontroom_160", "dx_vom_aqf1_dining_room_frontroom_170", "dx_vom_aqf1_dining_room_frontroom_180"];
+    var_1 = ["dx_vom_aqf1_dining_room_frontroom_160", "dx_vom_aqf1_dining_room_frontroom_170", "dx_vom_aqf1_dining_room_frontroom_180"];
   }
 
-  var2 = getEnt("hallway_trigger", "targetname");
-  var3 = getEnt("kitchen_trigger", "targetname");
-  var4 = getEnt("front_door_trigger", "targetname");
+  var_2 = getEnt("hallway_trigger", "targetname");
+  var_3 = getEnt("kitchen_trigger", "targetname");
+  var_4 = getEnt("front_door_trigger", "targetname");
 
-  if(ispointinvolume(var1, var2)) {
-    scripts\engine\sp\utility::smart_dialogue(var1[0]);
-  } else if(ispointinvolume(var1, var3)) {
-    scripts\engine\sp\utility::smart_dialogue(var1[1]);
-  } else if(ispointinvolume(var1, var4)) {
-    scripts\engine\sp\utility::smart_dialogue(var1[2]);
+  if(ispointinvolume(var_1, var_2)) {
+    scripts\engine\sp\utility::smart_dialogue(var_1[0]);
+  } else if(ispointinvolume(var_1, var_3)) {
+    scripts\engine\sp\utility::smart_dialogue(var_1[1]);
+  } else if(ispointinvolume(var_1, var_4)) {
+    scripts\engine\sp\utility::smart_dialogue(var_1[2]);
   }
 
   wait 0.35;
   level notify("finished_location_callout");
 }
 
-function dining_react_dialogue(var0) {
+function dining_react_dialogue(var_0) {
   self endon("death");
   level endon("player_location_called");
   thread spot_player_dialogue();
 
-  if(var0 == "dining_react_nolight") {
+  if(var_0 == "dining_react_nolight") {
     if(self.animname == "dining_enemy1") {
-      var1 = ["dx_vom_aq2_dining_room_aqlight_20", 2.65, "dx_vom_aq2_dining_room_aqlight_60"];
-      scripts\sp\maps\townhoused\townhoused_code::say_array(var1);
+      var_1 = ["dx_vom_aq2_dining_room_aqlight_20", 2.65, "dx_vom_aq2_dining_room_aqlight_60"];
+      scripts\sp\maps\townhoused\townhoused_code::say_array(var_1);
       return;
     }
 
     if(self.animname == "dining_enemy2") {
-      var1 = ["dx_vom_aq1_dining_room_aqlight_10", 1.5, "dx_vom_aq1_dining_room_aqlight_50", 2, "dx_vom_aq1_dining_room_aqlight_80"];
-      scripts\sp\maps\townhoused\townhoused_code::say_array(var1);
+      var_1 = ["dx_vom_aq1_dining_room_aqlight_10", 1.5, "dx_vom_aq1_dining_room_aqlight_50", 2, "dx_vom_aq1_dining_room_aqlight_80"];
+      scripts\sp\maps\townhoused\townhoused_code::say_array(var_1);
       return;
     }
 
     if(self.animname == "dining_enemy3") {
-      var1 = ["dx_vom_aqf1_dining_room_aqlight_30", "dx_vom_aqf1_dining_room_aqlight_40", 1.35, "dx_vom_aqf1_dining_room_aqlight_70"];
-      scripts\sp\maps\townhoused\townhoused_code::say_array(var1);
+      var_1 = ["dx_vom_aqf1_dining_room_aqlight_30", "dx_vom_aqf1_dining_room_aqlight_40", 1.35, "dx_vom_aqf1_dining_room_aqlight_70"];
+      scripts\sp\maps\townhoused\townhoused_code::say_array(var_1);
       return;
     }
 
@@ -1596,10 +1596,10 @@ function dining_react_dialogue(var0) {
 
 function dining_nolight_delay() {
   self endon("death");
-  var0 = undefined;
+  var_0 = undefined;
 
   if(isDefined(self.target)) {
-    var0 = getEnt(self.target, "targetname");
+    var_0 = getEnt(self.target, "targetname");
     self.target = undefined;
   }
 
@@ -1610,36 +1610,36 @@ function dining_nolight_delay() {
   }
 
   self.og_maxsightdistsqrd = self.maxsightdistsqrd;
-  var1 = 170;
-  self.maxsightdistsqrd = squared(var1);
+  var_1 = 170;
+  self.maxsightdistsqrd = squared(var_1);
   level.player.ignoreme = 1;
   self clearenemy();
   self.dontevershoot = 1;
   thread dining_nolight_dist_thread();
   dining_nolight_wait_anim();
-  var2 = 0;
+  var_2 = 0;
 
   if(self.animname == "dining_enemy3") {
     self.goalradius = 32;
     self setgoalpos(self.origin);
   } else if(isDefined(self.script_linkto)) {
-    var2 = 1;
-    var3 = scripts\engine\utility::get_linked_nodes();
+    var_2 = 1;
+    var_3 = scripts\engine\utility::get_linked_nodes();
     self.goalradius = 32;
-    self setgoalnode(var3[0]);
+    self setgoalnode(var_3[0]);
   }
 
   level.player.ignoreme = 0;
-  var4 = randomfloatrange(3, 5);
-  self.stealth.scriptedinitialinvestigatedelay = var4;
-  dining_nolight_wait_time(var4);
+  var_4 = randomfloatrange(3, 5);
+  self.stealth.scriptedinitialinvestigatedelay = var_4;
+  dining_nolight_wait_time(var_4);
   self notify("stop_scaredlook");
   scripts\common\utility::lookatpos(undefined);
   self.maxsightdistsqrd = self.og_maxsightdistsqrd;
   self.dontevershoot = 0;
 
-  if(isDefined(var0)) {
-    self setgoalvolumeauto(var0);
+  if(isDefined(var_0)) {
+    self setgoalvolumeauto(var_0);
     return;
   }
 }
@@ -1654,12 +1654,12 @@ function dining_enemy1_react_lookat() {
 function dining_nolight_scaredlook() {
   self endon("death");
   self endon("stop_scaredlook");
-  var0 = scripts\engine\utility::getStruct("dining_room_lookat_pos", "targetname");
+  var_0 = scripts\engine\utility::getStruct("dining_room_lookat_pos", "targetname");
 
   for(;;) {
-    var1 = randomfloatrange(5, 7);
-    scripts\common\utility::lookatpos(var0.origin);
-    wait var1;
+    var_1 = randomfloatrange(5, 7);
+    scripts\common\utility::lookatpos(var_0.origin);
+    wait var_1;
     scripts\common\utility::lookatpos(undefined);
     wait randomfloatrange(0.3, 0.5);
   }
@@ -1674,10 +1674,10 @@ function dining_nolight_enemy3_dialogue() {
 function dining_nolight_dist_thread() {
   self endon("death");
   level endon("stop_nolight_dist_thread");
-  var0 = squared(80);
+  var_0 = squared(80);
 
   for(;;) {
-    if(distancesquared(level.player.origin, self.origin) < var0) {
+    if(distancesquared(level.player.origin, self.origin) < var_0) {
       break;
     }
 
@@ -1698,19 +1698,19 @@ function dining_nolight_wait_anim() {
   self waittillmatch("single anim", "end");
 }
 
-function dining_nolight_wait_time(var0) {
+function dining_nolight_wait_time(var_0) {
   if(!istrue(level.demo)) {
     self endon("bulletwhizby");
   }
 
   self endon("damage");
   self endon("enemy");
-  wait var0;
+  wait var_0;
 }
 
-function disable_player_sealth(var0) {
-  if(isDefined(var0)) {
-    wait var0;
+function disable_player_sealth(var_0) {
+  if(isDefined(var_0)) {
+    wait var_0;
   }
 
   level.player scripts\engine\utility::ent_flag_clear("stealth_enabled");
@@ -1748,8 +1748,8 @@ function dining_room_late_long_death() {
   }
 
   self.allowdeath = 0;
-  var0 = scripts\engine\utility::getStruct(self.animname + "_late_long_death", "targetname");
-  var0 scripts\sp\maps\townhoused\townhoused_code::anim_long_death_relative(self, "dining_late_long_death", undefined, &dining_longdeath_counter);
+  var_0 = scripts\engine\utility::getStruct(self.animname + "_late_long_death", "targetname");
+  var_0 scripts\sp\maps\townhoused\townhoused_code::anim_long_death_relative(self, "dining_late_long_death", undefined, &dining_longdeath_counter);
 }
 
 function dinnig_enemy_react_then_pain() {
@@ -1813,43 +1813,43 @@ function dining_long_death_vo() {
   }
 }
 
-function dining_trigger_damage_thread(var0) {
+function dining_trigger_damage_thread(var_0) {
   thread dining_trigger_damage_onnotify("damage");
   thread dining_trigger_damage_onnotify("flashbang");
-  jumpiftrue(isDefined(var0)) LOC_00000020;
-  var0 = 0;
+  jumpiftrue(isDefined(var_0)) LOC_00000020;
+  var_0 = 0;
 
   for(;;) {
     self waittill("trigger");
 
-    if(!var0 && !isDefined(self.triggertype)) {
+    if(!var_0 && !isDefined(self.triggertype)) {
       continue;
     }
 
-    var1 = scripts\engine\sp\utility::get_living_ai_array("dining_enemies", "script_noteworthy");
+    var_1 = scripts\engine\sp\utility::get_living_ai_array("dining_enemies", "script_noteworthy");
 
-    if(var0) {
+    if(var_0) {
       scripts\engine\utility::flag_set("player_exiting_kitchen");
-      scripts\engine\sp\utility::array_notify(var1, "react");
+      scripts\engine\sp\utility::array_notify(var_1, "react");
       continue;
     }
 
     if(self.triggertype == "frag") {
-      foreach(var3 in var1) {
-        if(distancesquared(var3.origin, self.point) > 200 && randomint(100) < 70) {
-          var3 dodamage(var3.health * 0.7, self.point, level.player);
+      foreach(var_3 in var_1) {
+        if(distancesquared(var_3.origin, self.point) > 200 && randomint(100) < 70) {
+          var_3 dodamage(var_3.health * 0.7, self.point, level.player);
           continue;
         }
 
-        var3 kill();
+        var_3 kill();
       }
 
       continue;
     }
 
     if(self.triggertype == "flash") {
-      foreach(var3 in var1) {
-        if(!istrue(var3.flashbangimmunity)) {
+      foreach(var_3 in var_1) {
+        if(!istrue(var_3.flashbangimmunity)) {
           thread dining_enemy_flashbang();
         }
       }
@@ -1865,40 +1865,40 @@ function dining_enemy_flashbang() {
   scripts\sp\maps\townhoused\townhoused_code::force_flash();
 }
 
-function dining_trigger_damage_onnotify(var0) {
+function dining_trigger_damage_onnotify(var_0) {
   self endon("death");
 
   for(;;) {
-    self waittill(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10);
+    self waittill(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 
-    if(var0 == "flashbang") {
+    if(var_0 == "flashbang") {
       self.triggertype = "flash";
       self notify("trigger");
       continue;
     }
 
-    if(isDefined(var10) && var10.basename == "frag") {
+    if(isDefined(var_10) && var_10.basename == "frag") {
       self.triggertype = "frag";
-      self.point = var4;
+      self.point = var_4;
       self notify("trigger");
       continue;
     }
 
-    if(isDefined(var10) && var10.basename == "flash") {
+    if(isDefined(var_10) && var_10.basename == "flash") {
       self.triggertype = "flash";
       self notify("trigger");
     }
   }
 }
 
-function dining_engage_enemy(var0) {
+function dining_engage_enemy(var_0) {
   self endon("death");
   self.target = undefined;
   self.goalradius = 32;
 
   if(isDefined(self.script_linkto)) {
-    var1 = scripts\engine\utility::get_linked_nodes();
-    self setgoalnode(var1[0]);
+    var_1 = scripts\engine\utility::get_linked_nodes();
+    self setgoalnode(var_1[0]);
   } else {
     self setgoalpos(self.origin);
   }
@@ -1906,18 +1906,18 @@ function dining_engage_enemy(var0) {
   self getenemyinfo(level.player);
   wait randomfloat(2);
 
-  if(isDefined(var0)) {
-    self.goalradius = var0;
+  if(isDefined(var_0)) {
+    self.goalradius = var_0;
     return;
   }
 
   self.goalradius = 1000;
 }
 
-function dining_react_death(var0, var1) {
+function dining_react_death(var_0, var_1) {
   self endon("death");
 
-  if(istrue(var1)) {
+  if(istrue(var_1)) {
     self endon("stop_death_react_thread");
 
     while(self.health > 1) {
@@ -1926,59 +1926,59 @@ function dining_react_death(var0, var1) {
   }
 
   if(self.damagelocation == "head" || self.damagelocation == "helmet") {
-    var2 = "death";
+    var_2 = "death";
   } else {
-    var2 = "long_death";
+    var_2 = "long_death";
   }
 
   self notify("stop_anim_react_death");
 
-  if(var2 == "long_death") {
+  if(var_2 == "long_death") {
     self notify("longdeath");
-    var3 = "dining_" + var2;
+    var_3 = "dining_" + var_2;
 
-    if(dining_longdeath_count_get() < 2 && isDefined(level.scr_anim[self.animname][var3])) {
-      var4 = level.scr_anim[self.animname][var3];
+    if(dining_longdeath_count_get() < 2 && isDefined(level.scr_anim[self.animname][var_3])) {
+      var_4 = level.scr_anim[self.animname][var_3];
 
-      if(!animhasnotetrack(var4, "can_use_long_death_end")) {
+      if(!animhasnotetrack(var_4, "can_use_long_death_end")) {
         self.allowdeath = 1;
-        var5 = "dining_long_death_end";
-        var4 = level.scr_anim[self.animname][var5];
+        var_5 = "dining_long_death_end";
+        var_4 = level.scr_anim[self.animname][var_5];
 
-        if(isDefined(var4)) {
-          scripts\engine\sp\utility::set_deathanim(var5);
+        if(isDefined(var_4)) {
+          scripts\engine\sp\utility::set_deathanim(var_5);
         } else {
           self.allowdeath = 1;
         }
       }
     } else {
-      var2 = "death";
+      var_2 = "death";
     }
   } else {
     self.skipdeathanim = 1;
   }
 
-  if(var2 == "long_death") {
+  if(var_2 == "long_death") {
     self actoraimassistoff();
     dining_longdeath_counter();
   } else {
     dining_death_counter();
   }
 
-  var1 scripts\sp\anim::anim_single_with_props([self], "dining_" + var2);
-  var5 = "dining_" + var2 + "_expire";
+  var_1 scripts\sp\anim::anim_single_with_props([self], "dining_" + var_2);
+  var_5 = "dining_" + var_2 + "_expire";
 
-  if(var2 == "long_death" && scripts\engine\utility::hasanim(var5)) {
-    var1 scripts\sp\anim::anim_single_with_props([self], var5);
+  if(var_2 == "long_death" && scripts\engine\utility::hasanim(var_5)) {
+    var_1 scripts\sp\anim::anim_single_with_props([self], var_5);
     return;
   }
 }
 
-function dining_death_counter(var0) {
+function dining_death_counter(var_0) {
   self notify("stop_dining_death_counter");
   self endon("stop_dining_death_counter");
 
-  if(istrue(var0)) {
+  if(istrue(var_0)) {
     self waittill("death");
   }
 
@@ -2025,20 +2025,20 @@ function dining_enemy3_grenade() {
   self.skipdeathanim = undefined;
 }
 
-function dining_enemy3_react(var0) {
+function dining_enemy3_react(var_0) {
   dining_delete_clip();
   self notify("stop_anim_react_death");
   self notify("stop_dining_enemy_damage");
   scripts\engine\sp\utility::clear_deathanim();
 
-  if(var0 == "pain") {
-    return var0;
+  if(var_0 == "pain") {
+    return var_0;
   }
 
-  var1 = dining_room_is_light_dead();
-  var2 = scripts\engine\utility::getStruct("dining_animnode", "targetname");
+  var_1 = dining_room_is_light_dead();
+  var_2 = scripts\engine\utility::getStruct("dining_animnode", "targetname");
 
-  if(var1) {
+  if(var_1) {
     self.allowdeath = 1;
     scripts\common\anim::anim_single_solo(self, "dining_react_high");
     return "skip_reaction";
@@ -2062,14 +2062,14 @@ function dining_enemy3_react_goto_gun() {
   scripts\common\anim::anim_single_solo(self, "dining_react");
 }
 
-function price_dining_room(var0) {
+function price_dining_room(var_0) {
   level.price endon("stop_dining_lookat");
   thread scripts\engine\sp\utility::smart_radio_dialogue("dx_vom_pri_dining_room_entry_10");
-  var1 = scripts\engine\utility::getStruct("dining_room_gesture", "targetname");
-  level.price thread scripts\asm\gesture::ai_request_gesture("advance", var1);
+  var_1 = scripts\engine\utility::getStruct("dining_room_gesture", "targetname");
+  level.price thread scripts\asm\gesture::ai_request_gesture("advance", var_1);
 }
 
-function price_dining_room_end(var0) {
+function price_dining_room_end(var_0) {
   level.price notify("stop_dining_lookat");
   level.price.ignoreall = 1;
   level.price.dontevershoot = 0;
@@ -2077,54 +2077,54 @@ function price_dining_room_end(var0) {
   level.price.aiment delete();
 }
 
-function dining_room_animrate_adjust(var0, var1) {
+function dining_room_animrate_adjust(var_0, var_1) {
   waitframe();
   scripts\engine\utility::flag_wait_either("dining_room_react", "player_exiting_kitchen");
-  var2 = var1 + "_fastforward";
+  var_2 = var_1 + "_fastforward";
 
-  if(scripts\engine\utility::flag_exist(var2)) {
-    scripts\engine\utility::flag_wait(var2);
+  if(scripts\engine\utility::flag_exist(var_2)) {
+    scripts\engine\utility::flag_wait(var_2);
   }
 
   thread dining_room_teleport_price();
-  self setanimrate(scripts\engine\utility::getanim(var1), 1.6);
+  self setanimrate(scripts\engine\utility::getanim(var_1), 1.6);
 }
 
 function dining_room_teleport_price() {
   level endon("stop_dining_room_teleport");
-  var0 = scripts\engine\utility::getStruct("stairtrain1_animnode", "targetname");
-  var1 = level.price scripts\engine\utility::getanim("stairtrain1_arrive");
-  var2 = getstartorigin(var0.origin, var0.angles, var1);
-  var3 = scripts\engine\utility::getStruct("kitchen_animnode", "targetname");
-  var4 = getEnt("dining_room_teleport_price_trigger", "targetname");
-  var5 = cos(80);
-  var6 = [level.player, level.price];
+  var_0 = scripts\engine\utility::getStruct("stairtrain1_animnode", "targetname");
+  var_1 = level.price scripts\engine\utility::getanim("stairtrain1_arrive");
+  var_2 = getstartorigin(var_0.origin, var_0.angles, var_1);
+  var_3 = scripts\engine\utility::getStruct("kitchen_animnode", "targetname");
+  var_4 = getEnt("dining_room_teleport_price_trigger", "targetname");
+  var_5 = cos(80);
+  var_6 = [level.player, level.price];
 
   for(;;) {
     waitframe();
 
-    if(!level.player istouching(var4)) {
+    if(!level.player istouching(var_4)) {
       continue;
     }
 
-    var7 = 0;
+    var_7 = 0;
 
-    if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), level.price.origin + (0, 0, 60), var5)) {
+    if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), level.price.origin + (0, 0, 60), var_5)) {
       if(cansee_bounds(level.price.origin)) {
-        var7 = 1;
+        var_7 = 1;
       }
     }
 
-    var8 = 0;
+    var_8 = 0;
 
-    if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var2 + (0, 0, 60), var5)) {
-      if(cansee_bounds(var2)) {
-        var8 = 1;
+    if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_2 + (0, 0, 60), var_5)) {
+      if(cansee_bounds(var_2)) {
+        var_8 = 1;
       }
     }
 
-    if(!var7 && !var8) {
-      var3 notify("stop_loop_price");
+    if(!var_7 && !var_8) {
+      var_3 notify("stop_loop_price");
       level.price scripts\engine\sp\utility::anim_stopanimScripted();
       level.price.diningroom_skipanimreach = 1;
       level.price scripts\anim\notetracks_sp::notetrackvisorpricelower_instant();
@@ -2133,30 +2133,30 @@ function dining_room_teleport_price() {
   }
 }
 
-function cansee_bounds(var0) {
-  var1 = vectortoangles(level.player.origin - var0);
-  var2 = anglestoright(var1);
-  var3 = 16;
-  var4 = 60;
-  var5 = 2;
-  var6 = 2;
-  var7 = var4 / var5;
-  var8 = var3 / var6;
+function cansee_bounds(var_0) {
+  var_1 = vectortoangles(level.player.origin - var_0);
+  var_2 = anglestoright(var_1);
+  var_3 = 16;
+  var_4 = 60;
+  var_5 = 2;
+  var_6 = 2;
+  var_7 = var_4 / var_5;
+  var_8 = var_3 / var_6;
 
-  for(var9 = 0; var9 < var6; var9++) {
-    var10 = var9 + 1;
-    var11 = var0 + var2 * var8 * var10;
+  for(var_9 = 0; var_9 < var_6; var_9++) {
+    var_10 = var_9 + 1;
+    var_11 = var_0 + var_2 * var_8 * var_10;
 
-    if(cansee_vertical(var11, var5, var7)) {
+    if(cansee_vertical(var_11, var_5, var_7)) {
       return true;
     }
   }
 
-  for(var9 = 0; var9 < var6; var9++) {
-    var10 = var9 + 1;
-    var11 = var0 + var2 * var8 * var10 * -1;
+  for(var_9 = 0; var_9 < var_6; var_9++) {
+    var_10 = var_9 + 1;
+    var_11 = var_0 + var_2 * var_8 * var_10 * -1;
 
-    if(cansee_vertical(var11, var5, var7)) {
+    if(cansee_vertical(var_11, var_5, var_7)) {
       return true;
     }
   }
@@ -2164,18 +2164,18 @@ function cansee_bounds(var0) {
   return false;
 }
 
-function cansee_vertical(var0, var1, var2) {
-  var3 = (0, 0, 1);
+function cansee_vertical(var_0, var_1, var_2) {
+  var_3 = (0, 0, 1);
 
-  if(cansee_point(var0)) {
+  if(cansee_point(var_0)) {
     return true;
   }
 
-  for(var4 = 0; var4 < var1; var4++) {
-    var5 = var4 + 1;
-    var6 = var0 + var3 * var2 * var5;
+  for(var_4 = 0; var_4 < var_1; var_4++) {
+    var_5 = var_4 + 1;
+    var_6 = var_0 + var_3 * var_2 * var_5;
 
-    if(cansee_point(var6)) {
+    if(cansee_point(var_6)) {
       return true;
     }
   }
@@ -2183,12 +2183,12 @@ function cansee_vertical(var0, var1, var2) {
   return false;
 }
 
-function cansee_point(var0) {
-  var1 = isDefined(level.player worldpointtoscreenpos(var0, getdvarint("MRNKTKLLKP")));
+function cansee_point(var_0) {
+  var_1 = isDefined(level.player worldpointtoscreenpos(var_0, getdvarint("MRNKTKLLKP")));
 
-  if(var1) {}
+  if(var_1) {}
 
-  return var1;
+  return var_1;
 }
 
 function stairtrain1_setup() {
@@ -2196,44 +2196,44 @@ function stairtrain1_setup() {
     level.temp_stairtrain_count = 0;
   }
 
-  var0 = scripts\engine\utility::getStruct("stairtrain1_animnode", "targetname");
+  var_0 = scripts\engine\utility::getStruct("stairtrain1_animnode", "targetname");
 
   if(self == level.price) {
     if(level.start_point != "stairtrain1") {
       if(!istrue(self.diningroom_skipanimreach)) {
-        var0 scripts\sp\anim::anim_reach_solo(self, "stairtrain1_arrive");
+        var_0 scripts\sp\anim::anim_reach_solo(self, "stairtrain1_arrive");
       }
 
       level notify("stop_dining_room_teleport");
       thread stairtrain1_price_player_race();
-      var0 scripts\common\anim::anim_single_solo(self, "stairtrain1_arrive");
+      var_0 scripts\common\anim::anim_single_solo(self, "stairtrain1_arrive");
     }
 
     scripts\engine\utility::flag_set("dining_room_price_in_position");
-    var0 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(self, "stairtrain1_start", undefined, "stop_frontdoor_enter_loop");
+    var_0 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(self, "stairtrain1_start", undefined, "stop_frontdoor_enter_loop");
   }
 
   scripts\engine\utility::flag_wait("stairtrain1_go");
   thread try_nvg_enable_hint();
-  var0 notify("stop_frontdoor_enter_loop");
+  var_0 notify("stop_frontdoor_enter_loop");
   level.temp_stairtrain_count++;
 
   if(level.temp_stairtrain_count == 3) {
     level.temp_stairtrain_count = undefined;
-    var1 = scripts\engine\sp\utility::get_living_ai("bravo4_1", "animname");
-    var2 = scripts\engine\sp\utility::get_living_ai("bravo4_2", "animname");
-    var3 = [level.price, var1, var2];
-    var4 = undefined;
+    var_1 = scripts\engine\sp\utility::get_living_ai("bravo4_1", "animname");
+    var_2 = scripts\engine\sp\utility::get_living_ai("bravo4_2", "animname");
+    var_3 = [level.price, var_1, var_2];
+    var_4 = undefined;
 
-    foreach(var6 in var3) {
-      if(isDefined(var4)) {
-        var4 scripts\sp\stairtrain::set_prevguy(var6);
+    foreach(var_6 in var_3) {
+      if(isDefined(var_4)) {
+        var_4 scripts\sp\stairtrain::set_prevguy(var_6);
       }
 
-      var4 = var6;
-      var6.animnode = var0;
-      var6 scripts\engine\sp\utility::anim_stopanimScripted();
-      var6 thread scripts\asm\asm_sp::asm_animcustom(&scripts\sp\maps\townhoused\townhoused_code::stairtrain1_animcustom);
+      var_4 = var_6;
+      var_6.animnode = var_0;
+      var_6 scripts\engine\sp\utility::anim_stopanimScripted();
+      var_6 thread scripts\asm\asm_sp::asm_animcustom(&scripts\sp\maps\townhoused\townhoused_code::stairtrain1_animcustom);
     }
 
     scripts\engine\sp\utility::trigger_wait_targetname("player_base_stairtrain1");
@@ -2245,24 +2245,24 @@ function stairtrain1_setup() {
 
 function stairtrain1_price_player_race() {
   level endon("stop_price_player_race");
-  var0 = scripts\engine\utility::getStruct("first_floor_hallway_path", "targetname");
-  var1 = scripts\engine\utility::getStruct(var0.target, "targetname");
+  var_0 = scripts\engine\utility::getStruct("first_floor_hallway_path", "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   waitframe();
-  var2 = level.price scripts\engine\utility::getanim("stairtrain1_arrive");
-  var3 = 0;
+  var_2 = level.price scripts\engine\utility::getanim("stairtrain1_arrive");
+  var_3 = 0;
 
   for(;;) {
-    var4 = pointonsegmentnearesttopoint(var0.origin, var1.origin, level.player.origin);
-    var5 = pointonsegmentnearesttopoint(var0.origin, var1.origin, level.price.origin);
-    var6 = distancesquared(var0.origin, var4);
-    var7 = distancesquared(var0.origin, var5);
+    var_4 = pointonsegmentnearesttopoint(var_0.origin, var_1.origin, level.player.origin);
+    var_5 = pointonsegmentnearesttopoint(var_0.origin, var_1.origin, level.price.origin);
+    var_6 = distancesquared(var_0.origin, var_4);
+    var_7 = distancesquared(var_0.origin, var_5);
 
-    if(var6 > var7 && !var3) {
-      var3 = 1;
-      level.price setanimrate(var2, 2.5);
-    } else if(var6 < var7 && var3) {
-      var3 = 0;
-      level.price setanimrate(var2, 1);
+    if(var_6 > var_7 && !var_3) {
+      var_3 = 1;
+      level.price setanimrate(var_2, 2.5);
+    } else if(var_6 < var_7 && var_3) {
+      var_3 = 0;
+      level.price setanimrate(var_2, 1);
     }
 
     waitframe();
@@ -2299,49 +2299,49 @@ function postspawn_bravo4() {
 }
 
 function bravo4_frontdoor_enter() {
-  var0 = level.squads["bravo4"];
-  var1 = scripts\engine\utility::getStruct("stairtrain1_animnode", "targetname");
-  var1 scripts\common\anim::anim_first_frame(var0, "frontdoor_start");
+  var_0 = level.squads["bravo4"];
+  var_1 = scripts\engine\utility::getStruct("stairtrain1_animnode", "targetname");
+  var_1 scripts\common\anim::anim_first_frame(var_0, "frontdoor_start");
   scripts\engine\utility::flag_wait("player_in_dining_room");
-  var1 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop(var0, "frontdoor_start", undefined, "stop_frontdoor_start_loop");
+  var_1 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop(var_0, "frontdoor_start", undefined, "stop_frontdoor_start_loop");
   scripts\engine\utility::flag_wait("dining_room_dead");
   scripts\engine\utility::flag_wait("player_said_dining_clear");
-  var2 = gettime();
+  var_2 = gettime();
   scripts\engine\utility::flag_wait("dining_room_price_in_position");
-  wait max(1 - (gettime() - var2) * 0.001, 0);
+  wait max(1 - (gettime() - var_2) * 0.001, 0);
   scripts\engine\sp\utility::smart_radio_dialogue("dx_vom_a31_stairtrain1_rally_10");
-  var1 notify("stop_frontdoor_start_loop");
-  var3 = getEnt("frontdoor", "targetname");
-  var3 scripts\engine\sp\utility::assign_animtree("door");
-  var1 thread scripts\common\anim::anim_single_solo(var3, "frontdoor_enter");
+  var_1 notify("stop_frontdoor_start_loop");
+  var_3 = getEnt("frontdoor", "targetname");
+  var_3 scripts\engine\sp\utility::assign_animtree("door");
+  var_1 thread scripts\common\anim::anim_single_solo(var_3, "frontdoor_enter");
   thread stair_player_clip();
 
-  foreach(var5 in var0) {
-    var5 setCanDamage(1);
+  foreach(var_5 in var_0) {
+    var_5 setCanDamage(1);
 
-    if(var5.animname == "bravo4_3") {
-      var1 thread scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(var5, "frontdoor_enter", undefined, "stop_frontdoor_enter_loop_bravo4_3");
+    if(var_5.animname == "bravo4_3") {
+      var_1 thread scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(var_5, "frontdoor_enter", undefined, "stop_frontdoor_enter_loop_bravo4_3");
       continue;
     }
 
     if(level.start_point != "stairtrain1") {
-      var1 thread scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(var5, "frontdoor_enter", undefined, "stop_frontdoor_enter_loop");
+      var_1 thread scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(var_5, "frontdoor_enter", undefined, "stop_frontdoor_enter_loop");
     }
   }
 
   if(level.start_point != "stairtrain1") {
-    var7 = scripts\engine\sp\utility::get_living_ai("bravo4_1", "animname");
-    var7 waittillmatch("single anim", "end");
+    var_7 = scripts\engine\sp\utility::get_living_ai("bravo4_1", "animname");
+    var_7 waittillmatch("single anim", "end");
   }
 
   scripts\engine\utility::flag_set("delete_stair_player_pusher");
 
-  foreach(var5 in var0) {
-    if(var5.animname == "bravo4_3") {
+  foreach(var_5 in var_0) {
+    if(var_5.animname == "bravo4_3") {
       continue;
     }
 
-    if(var5.animname == "bravo4_2") {
+    if(var_5.animname == "bravo4_2") {
       thread stairtrain1_ready_thread();
     }
 
@@ -2351,12 +2351,12 @@ function bravo4_frontdoor_enter() {
 
 function stairtrain1_ready_thread() {
   self waittillmatch("single anim", "end");
-  var0 = squared(80);
+  var_0 = squared(80);
 
   for(;;) {
     waitframe();
 
-    if(distancesquared(self.origin, level.player.origin) < var0) {
+    if(distancesquared(self.origin, level.player.origin) < var_0) {
       break;
     }
   }
@@ -2366,10 +2366,10 @@ function stairtrain1_ready_thread() {
 
 function stair_player_clip() {
   wait 4;
-  var0 = getEnt("stair_player_pusher", "targetname");
-  var0 moveTo(var0.og_origin, 4, 0, 4);
+  var_0 = getEnt("stair_player_pusher", "targetname");
+  var_0 moveTo(var_0.og_origin, 4, 0, 4);
   scripts\engine\utility::flag_wait("delete_stair_player_pusher");
-  var0 delete();
+  var_0 delete();
 }
 
 function bravo4_3_door_enter() {
@@ -2384,95 +2384,95 @@ function bravo4_3_door_enter() {
   thread scripts\sp\maps\townhoused\townhoused_code::lookat_random("front_door_random_lookats");
 }
 
-function bravo_3_toggle_laser(var0) {
+function bravo_3_toggle_laser(var_0) {
   self endon("death");
-  var1 = cos(15);
-  var2 = 1;
-  var3 = 0;
+  var_1 = cos(15);
+  var_2 = 1;
+  var_3 = 0;
 
   for(;;) {
-    if(scripts\engine\utility::within_fov(self getEye(), self.angles, level.player getEye(), var1)) {
-      if(var2) {
+    if(scripts\engine\utility::within_fov(self getEye(), self.angles, level.player getEye(), var_1)) {
+      if(var_2) {
         scripts\sp\maps\townhoused\townhoused_code::enable_laser(0);
         scripts\common\ai::set_gunpose("gun_down");
-        var2 = 0;
+        var_2 = 0;
       }
-    } else if(var2) {
+    } else if(var_2) {
       if(randomint(100) > 30) {
-        var3 = gettime() + randomintrange(2000, 5000);
+        var_3 = gettime() + randomintrange(2000, 5000);
         scripts\sp\maps\townhoused\townhoused_code::enable_laser(1);
         scripts\common\ai::set_gunpose("gun_down");
-        var2 = 0;
+        var_2 = 0;
       }
-    } else if(!var2 && gettime() > var3) {
+    } else if(!var_2 && gettime() > var_3) {
       scripts\sp\maps\townhoused\townhoused_code::enable_laser(1);
       scripts\common\ai::set_gunpose("ads");
-      var2 = 1;
+      var_2 = 1;
     }
 
     waitframe();
   }
 }
 
-function create_aiment(var0) {
-  var1 = spawn("script_model", var0);
-  var1 setModel("tag_origin_only_collision");
-  var1 notsolid();
-  self.aiment = var1;
+function create_aiment(var_0) {
+  var_1 = spawn("script_model", var_0);
+  var_1 setModel("tag_origin_only_collision");
+  var_1 notsolid();
+  self.aiment = var_1;
   self.dontevershoot = 1;
-  self setentitytarget(var1);
-  self.favoriteenemy = var1;
-  return var1;
+  self setentitytarget(var_1);
+  self.favoriteenemy = var_1;
+  return var_1;
 }
 
 function delete_aiment() {
-  var0 = self;
+  var_0 = self;
 
   if(isai(self)) {
-    var0 = self.aiment;
+    var_0 = self.aiment;
   }
 
-  var0 delete();
+  var_0 delete();
 }
 
 function second_floor_movement() {
   thread second_floor_price();
-  var0 = scripts\engine\sp\utility::get_living_ai("bravo4_1", "animname");
-  var0.end_pos = (273.801, 876.154, -305.97);
-  var0.end_angles = (0, 147.443, 0);
+  var_0 = scripts\engine\sp\utility::get_living_ai("bravo4_1", "animname");
+  var_0.end_pos = (273.801, 876.154, -305.97);
+  var_0.end_angles = (0, 147.443, 0);
   thread second_floor_back_bedroom();
-  var1 = scripts\engine\sp\utility::get_living_ai("bravo4_2", "animname");
-  var1.end_pos = (339.515, 930.924, -305.844);
-  var1.end_angles = (0, 98.5017, 0);
+  var_1 = scripts\engine\sp\utility::get_living_ai("bravo4_2", "animname");
+  var_1.end_pos = (339.515, 930.924, -305.844);
+  var_1.end_angles = (0, 98.5017, 0);
   thread second_floor_bathroom();
   scripts\engine\utility::flag_wait("2nd_floor_clear");
-  var2 = scripts\engine\utility::getStructArray("2ndfloor_animnodes", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("2ndfloor_animnodes", "script_noteworthy");
 
-  foreach(var4 in var2) {
-    var4 notify("stop_second_floor_loop");
-    var4 notify("stop_loop");
+  foreach(var_4 in var_2) {
+    var_4 notify("stop_second_floor_loop");
+    var_4 notify("stop_loop");
   }
 
-  var6 = scripts\sp\door::get_interactive_door("secondfloor_door_two");
-  var6 scripts\sp\door::add_pushent(var0);
-  var6 scripts\sp\door::add_pushent(var1);
+  var_6 = scripts\sp\door::get_interactive_door("secondfloor_door_two");
+  var_6 scripts\sp\door::add_pushent(var_0);
+  var_6 scripts\sp\door::add_pushent(var_1);
   thread second_floor_stairtrain_arrive();
   thread second_floor_stairtrain_arrive();
-  var7 = getEnt("2nd_floor_door_playerclip", "targetname");
-  var7 solid();
-  var7 = getEnt("2ndfloor_bathroom_playerclip", "targetname");
-  var7 delete();
+  var_7 = getEnt("2nd_floor_door_playerclip", "targetname");
+  var_7 solid();
+  var_7 = getEnt("2ndfloor_bathroom_playerclip", "targetname");
+  var_7 delete();
   thread stairtrain2_player_near();
 }
 
 function stairtrain2_player_near() {
-  var0 = getEnt("player_near_stairtrain2", "targetname");
-  var0 waittill("trigger");
+  var_0 = getEnt("player_near_stairtrain2", "targetname");
+  var_0 waittill("trigger");
   scripts\engine\utility::flag_set("player_near_stairtrain2");
 }
 
 function second_floor_stairtrain_arrive() {
-  var0 = scripts\engine\utility::getStruct("stairtrain2_animnode", "targetname");
+  var_0 = scripts\engine\utility::getStruct("stairtrain2_animnode", "targetname");
 
   if(self != level.price) {
     if(self.animname == "bravo4_2") {
@@ -2486,20 +2486,20 @@ function second_floor_stairtrain_arrive() {
     }
 
     scripts\engine\sp\utility::anim_stopanimScripted();
-    var0 scripts\sp\anim::anim_reach_solo(self, "stairtrain2_arrive");
+    var_0 scripts\sp\anim::anim_reach_solo(self, "stairtrain2_arrive");
     scripts\engine\utility::flag_wait("move_to_stairtrain2");
   }
 
-  var0 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(self, "stairtrain2_arrive", undefined, "stop_arrive_loop");
+  var_0 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(self, "stairtrain2_arrive", undefined, "stop_arrive_loop");
   scripts\engine\utility::flag_wait("2ndfloor_bathroom_enemy_dead");
   thread stairtrain2_setup();
 }
 
 function second_floor_bravo4_1_arrive_flag() {
-  var0 = scripts\engine\utility::getStruct("stairtrain2_animnode", "targetname");
-  var1 = getstartorigin(var0.origin, var0.angles, scripts\engine\utility::getanim("stairtrain2_arrive"));
+  var_0 = scripts\engine\utility::getStruct("stairtrain2_animnode", "targetname");
+  var_1 = getstartorigin(var_0.origin, var_0.angles, scripts\engine\utility::getanim("stairtrain2_arrive"));
 
-  while(distancesquared(self.origin, var1) > 8100) {
+  while(distancesquared(self.origin, var_1) > 8100) {
     waitframe();
   }
 
@@ -2521,10 +2521,10 @@ function second_floor_price() {
     thread second_floor_reveal_stuff();
   }
 
-  var0 = spawnStruct();
-  var0.origin = self.origin;
-  var0.angles = self.angles;
-  var0 scripts\sp\maps\townhoused\townhoused_code::anim_single_then_loop_solo(self, "2ndfloor_arrive");
+  var_0 = spawnStruct();
+  var_0.origin = self.origin;
+  var_0.angles = self.angles;
+  var_0 scripts\sp\maps\townhoused\townhoused_code::anim_single_then_loop_solo(self, "2ndfloor_arrive");
   self.goalradius = 32;
   self setgoalpos(self.origin);
   scripts\engine\utility::flag_wait("2nd_floor_move");
@@ -2535,22 +2535,22 @@ function second_floor_price() {
 
   wait 0.25;
   thread targets_behind_door_callout();
-  var1 = scripts\engine\utility::getStruct("stairtrain2_animnode", "targetname");
-  var0 notify("stop_loop");
-  var1 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(self, "stairtrain2_pre_arrive", undefined, "stop_pre_arrive_loop_price");
+  var_1 = scripts\engine\utility::getStruct("stairtrain2_animnode", "targetname");
+  var_0 notify("stop_loop");
+  var_1 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(self, "stairtrain2_pre_arrive", undefined, "stop_pre_arrive_loop_price");
   scripts\engine\utility::flag_wait("2nd_floor_clear");
-  var1 notify("stop_pre_arrive_loop_price");
+  var_1 notify("stop_pre_arrive_loop_price");
   thread second_floor_stairtrain_arrive();
 }
 
 function second_floor_reveal_stuff() {
   thread scripts\sp\maps\townhoused\townhoused_code::train_go("south");
-  var0 = undefined;
+  var_0 = undefined;
 
-  foreach(var2 in level.createfxent) {
-    if(var2.v["fxid"] == "vfx_streetlight_lensflare") {
-      if(var2.v["origin"][0] == 674.48) {
-        var0 = var2;
+  foreach(var_2 in level.createfxent) {
+    if(var_2.v["fxid"] == "vfx_streetlight_lensflare") {
+      if(var_2.v["origin"][0] == 674.48) {
+        var_0 = var_2;
         break;
       }
     }
@@ -2558,8 +2558,8 @@ function second_floor_reveal_stuff() {
 
   wait 0.1;
 
-  if(isDefined(var0)) {
-    var0.looper delete();
+  if(isDefined(var_0)) {
+    var_0.looper delete();
     return;
   }
 }
@@ -2568,9 +2568,9 @@ function targets_behind_door_callout() {
   level.hostage_enemy endon("death");
   level.hostage_enemy endon("enemy");
   wait 1;
-  var0 = gettime();
+  var_0 = gettime();
 
-  while(isDefined(level.hostage_enemy) && !scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), level.hostage_enemy.origin, cos(15)) && !scripts\engine\utility::time_has_passed(var0, 6)) {
+  while(isDefined(level.hostage_enemy) && !scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), level.hostage_enemy.origin, cos(15)) && !scripts\engine\utility::time_has_passed(var_0, 6)) {
     waitframe();
   }
 
@@ -2591,28 +2591,28 @@ function second_floor_back_bedroom() {
     scripts\engine\utility::ent_flag_waitopen("stairtrain_on");
   }
 
-  var0 = scripts\engine\utility::getStruct("2ndfloor_bedroom_animnode", "targetname");
-  var1 = scripts\engine\sp\utility::get_living_ai("bedroom_enemy", "animname");
+  var_0 = scripts\engine\utility::getStruct("2ndfloor_bedroom_animnode", "targetname");
+  var_1 = scripts\engine\sp\utility::get_living_ai("bedroom_enemy", "animname");
 
   if(getdvarint("scr_reveal") > 0) {
     wait 3;
   }
 
-  var2 = "2ndfloor_bedroom_enter";
-  var0 notify("stop_loop");
-  var3 = scripts\sp\door::get_interactive_door("2ndfloor_back_bedroom_door");
-  var3 scripts\sp\door::remove_open_ability();
-  var0 thread scripts\sp\maps\townhoused\townhoused_code::anim_door(var3, var2);
+  var_2 = "2ndfloor_bedroom_enter";
+  var_0 notify("stop_loop");
+  var_3 = scripts\sp\door::get_interactive_door("2ndfloor_back_bedroom_door");
+  var_3 scripts\sp\door::remove_open_ability();
+  var_0 thread scripts\sp\maps\townhoused\townhoused_code::anim_door(var_3, var_2);
   level notify("stop_dog_sounds_front_door");
 
   if(getdvarint("scr_reveal") > 0) {
     thread reveal_firing();
   }
 
-  var1.allowdeath = 1;
-  var1.skipdeathanim = undefined;
-  var0 thread scripts\common\anim::anim_single_solo(var1, var2);
-  var0 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(self, var2, undefined, "stop_second_floor_loop");
+  var_1.allowdeath = 1;
+  var_1.skipdeathanim = undefined;
+  var_0 thread scripts\common\anim::anim_single_solo(var_1, var_2);
+  var_0 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(self, var_2, undefined, "stop_second_floor_loop");
 }
 
 function reveal_firing() {
@@ -2625,8 +2625,8 @@ function reveal_firing() {
 }
 
 function back_bedroom_enemy() {
-  var0 = scripts\engine\utility::getStruct("2ndfloor_bedroom_animnode", "targetname");
-  var0 scripts\common\anim::anim_first_frame_solo(self, "2ndfloor_bedroom_enter");
+  var_0 = scripts\engine\utility::getStruct("2ndfloor_bedroom_animnode", "targetname");
+  var_0 scripts\common\anim::anim_first_frame_solo(self, "2ndfloor_bedroom_enter");
 }
 
 function second_floor_bathroom() {
@@ -2638,12 +2638,12 @@ function second_floor_bathroom() {
     scripts\engine\utility::ent_flag_waitopen("stairtrain_on");
   }
 
-  var0 = scripts\engine\utility::getStruct("2ndfloor_bathroom_animnode", "targetname");
-  var0 notify("stop_loop");
-  var1 = scripts\sp\door::get_interactive_door("2ndfloor_bathroom_door");
-  var1 scripts\sp\door::remove_open_ability();
-  var0 thread scripts\sp\maps\townhoused\townhoused_code::anim_door(var1, "2ndfloor_bathroom_enter");
-  var0 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(self, "2ndfloor_bathroom_enter");
+  var_0 = scripts\engine\utility::getStruct("2ndfloor_bathroom_animnode", "targetname");
+  var_0 notify("stop_loop");
+  var_1 = scripts\sp\door::get_interactive_door("2ndfloor_bathroom_door");
+  var_1 scripts\sp\door::remove_open_ability();
+  var_0 thread scripts\sp\maps\townhoused\townhoused_code::anim_door(var_1, "2ndfloor_bathroom_enter");
+  var_0 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(self, "2ndfloor_bathroom_enter");
 }
 
 function postspawn_second_floor_enemy() {
@@ -2693,91 +2693,91 @@ function back_bedroom_enemy_death() {
 }
 
 function hostage_enemy_dialogue() {
-  var0 = level.hostage;
-  var1 = level.hostage_enemy;
+  var_0 = level.hostage;
+  var_1 = level.hostage_enemy;
 
-  if(!isalive(var1) || var1 scripts\engine\utility::ent_flag("engaging_enemy")) {
+  if(!isalive(var_1) || var_1 scripts\engine\utility::ent_flag("engaging_enemy")) {
     return;
   }
 
-  var1 endon("death");
-  var1 endon("engaging_enemy");
+  var_1 endon("death");
+  var_1 endon("engaging_enemy");
   wait 3;
-  var1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq5_2nd_floor_aq_convo4_10");
+  var_1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq5_2nd_floor_aq_convo4_10");
   wait 1;
-  var1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq5_2nd_floor_aq_convo4_20");
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_aqf2_2nd_floor_aq_convo4_30");
+  var_1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq5_2nd_floor_aq_convo4_20");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_aqf2_2nd_floor_aq_convo4_30");
   wait 0.5;
-  var1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq5_2nd_floor_aq_convo4_40");
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_aqf2_2nd_floor_aq_convo4_50");
+  var_1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq5_2nd_floor_aq_convo4_40");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_aqf2_2nd_floor_aq_convo4_50");
   wait 1;
-  var1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq5_2nd_floor_aq_convo4_25");
+  var_1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq5_2nd_floor_aq_convo4_25");
   wait 1;
-  var1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq5_2nd_floor_aq_convo4_60");
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_aqf2_2nd_floor_aq_convo4_70");
+  var_1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq5_2nd_floor_aq_convo4_60");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_aqf2_2nd_floor_aq_convo4_70");
 }
 
 function hostage_sequence() {
-  var0 = scripts\engine\utility::getStruct("hostage_animnode", "targetname");
-  var1 = level.hostage;
-  var2 = level.hostage_enemy;
-  var1 thread scripts\sp\maps\townhoused\townhoused_code::do_sound_on_death("dx_vom_aqf2_2nd_floor_bedroom2_51");
-  var2 thread scripts\sp\maps\townhoused\townhoused_code::do_sound_on_death("dx_vom_aq5_2nd_floor_bedroom2_81");
-  thread hostage_flank_react(var0);
+  var_0 = scripts\engine\utility::getStruct("hostage_animnode", "targetname");
+  var_1 = level.hostage;
+  var_2 = level.hostage_enemy;
+  var_1 thread scripts\sp\maps\townhoused\townhoused_code::do_sound_on_death("dx_vom_aqf2_2nd_floor_bedroom2_51");
+  var_2 thread scripts\sp\maps\townhoused\townhoused_code::do_sound_on_death("dx_vom_aq5_2nd_floor_bedroom2_81");
+  thread hostage_flank_react(var_0);
 
-  foreach(var4 in level.hostage_ai) {
-    thread hostage_damage_thread(level, var4);
+  foreach(var_4 in level.hostage_ai) {
+    thread hostage_damage_thread(level, var_4);
   }
 
-  var2 scripts\common\ai::gun_remove();
-  var2.weapon = isundefinedweapon();
-  var2 scripts\anim\shared::forceuseweapon(var2.sidearm, "sidearm");
-  var2 scripts\anim\shared::placeweaponon(var2.sidearm, "left");
+  var_2 scripts\common\ai::gun_remove();
+  var_2.weapon = isundefinedweapon();
+  var_2 scripts\anim\shared::forceuseweapon(var_2.sidearm, "sidearm");
+  var_2 scripts\anim\shared::placeweaponon(var_2.sidearm, "left");
   thread hostage_enemy_thread();
-  var0 thread scripts\common\anim::anim_loop(level.hostage_ai, "hostage_loop");
+  var_0 thread scripts\common\anim::anim_loop(level.hostage_ai, "hostage_loop");
   thread hostage_detach_weapon();
 }
 
 function hostage_detach_weapon() {
   wait 0.2;
-  var0 = self gettagorigin("tag_weapon_right");
-  var1 = self gettagangles("tag_weapon_right");
-  var2 = spawn("weapon_" + createheadicon(self.weapon), var0, 2);
+  var_0 = self gettagorigin("tag_weapon_right");
+  var_1 = self gettagangles("tag_weapon_right");
+  var_2 = spawn("weapon_" + createheadicon(self.weapon), var_0, 2);
   waitframe();
-  var2.angles = var1;
-  self.gun_on_ground = var2;
+  var_2.angles = var_1;
+  self.gun_on_ground = var_2;
   self.og_sidearm = self.sidearm;
   self.sidearm = isundefinedweapon();
   scripts\common\ai::gun_remove();
 }
 
-function hostage_damage_thread(var0, var1) {
-  var0 endon("stop_damage_thread");
-  var0.health = 10000;
-  var0.scripted_health = 150;
-  var2 = undefined;
-  var3 = undefined;
-  var4 = undefined;
-  var5 = 0;
+function hostage_damage_thread(var_0, var_1) {
+  var_0 endon("stop_damage_thread");
+  var_0.health = 10000;
+  var_0.scripted_health = 150;
+  var_2 = undefined;
+  var_3 = undefined;
+  var_4 = undefined;
+  var_5 = 0;
 
-  while(var0.scripted_health > 1) {
-    var0 waittill("damage", var6, var2, var7, var3, var4, var8, var9, var10, var11, var12);
+  while(var_0.scripted_health > 1) {
+    var_0 waittill("damage", var_6, var_2, var_7, var_3, var_4, var_8, var_9, var_10, var_11, var_12);
 
-    if(var4 == "MOD_IMPACT") {
+    if(var_4 == "MOD_IMPACT") {
       continue;
     }
 
-    var0.scripted_health -= var6;
+    var_0.scripted_health -= var_6;
 
-    if(var0.scripted_health <= 0 && scripts\sp\maps\townhoused\townhoused_code::is_explosivedamage(var4)) {
-      var1 notify("stop_loop");
-      var0.allowdeath = 1;
-      var0 kill(var3, var2, var2, var4);
+    if(var_0.scripted_health <= 0 && scripts\sp\maps\townhoused\townhoused_code::is_explosivedamage(var_4)) {
+      var_1 notify("stop_loop");
+      var_0.allowdeath = 1;
+      var_0 kill(var_3, var_2, var_2, var_4);
       return;
     }
 
-    if(scripts\sp\maps\townhoused\townhoused_code::is_flash_weapon(var12)) {
-      var5 = 1;
+    if(scripts\sp\maps\townhoused\townhoused_code::is_flash_weapon(var_12)) {
+      var_5 = 1;
       break;
     }
   }
@@ -2786,104 +2786,104 @@ function hostage_damage_thread(var0, var1) {
     scripts\engine\utility::ent_flag_set("engaging_enemy");
   }
 
-  var0 notify("stop_enemy_thread");
-  var0 notify("stop_anim_aim");
+  var_0 notify("stop_enemy_thread");
+  var_0 notify("stop_anim_aim");
 
-  if(var5) {
-    thread hostage_flashbang_thread(var0);
+  if(var_5) {
+    thread hostage_flashbang_thread(var_0);
     return;
   }
 
-  var0.health = 1;
-  var0.ignoreall = 1;
-  var0 scripts\sp\utility::context_melee_allow(0);
+  var_0.health = 1;
+  var_0.ignoreall = 1;
+  var_0 scripts\sp\utility::context_melee_allow(0);
   level notify("stop_hostage_flank_react");
 
-  foreach(var14 in level.hostage_ai) {
-    if(var14 != var0) {
-      if(var14.scripted_health > 0) {
-        var14.health = var14.scripted_health;
+  foreach(var_14 in level.hostage_ai) {
+    if(var_14 != var_0) {
+      if(var_14.scripted_health > 0) {
+        var_14.health = var_14.scripted_health;
       }
 
-      var14 notify("stop_enemy_thread");
-      var14 notify("stop_damage_thread");
+      var_14 notify("stop_enemy_thread");
+      var_14 notify("stop_damage_thread");
     }
 
-    var14 scripts\engine\sp\utility::anim_stopanimScripted();
+    var_14 scripts\engine\sp\utility::anim_stopanimScripted();
   }
 
-  var1 notify("stop_loop");
+  var_1 notify("stop_loop");
   scripts\engine\utility::flag_set("2ndfloor_execute");
-  var16 = level.hostage;
-  var17 = level.hostage_enemy;
+  var_16 = level.hostage;
+  var_17 = level.hostage_enemy;
 
-  if(var0.animname == "hostage") {
-    var17 notify("stop_anim_aim");
-    thread hostage_death_counter(var17);
-    hostage_death_counter(var16);
-    var17.skipdeathanim = 1;
-    var17.allowdeath = 1;
-    var1 scripts\common\anim::anim_single(level.hostage_ai, "enemy_live");
-    var17.skipdeathanim = undefined;
+  if(var_0.animname == "hostage") {
+    var_17 notify("stop_anim_aim");
+    thread hostage_death_counter(var_17);
+    hostage_death_counter(var_16);
+    var_17.skipdeathanim = 1;
+    var_17.allowdeath = 1;
+    var_1 scripts\common\anim::anim_single(level.hostage_ai, "enemy_live");
+    var_17.skipdeathanim = undefined;
     return;
   }
 
-  var16.skipdeathanim = 1;
-  var16.allowdeath = 1;
-  var16 stopsounds();
-  var17 stopsounds();
-  var17 actoraimassistoff();
-  var0.skipdeathanim = 1;
-  thread hostage_death_counter(var16);
-  hostage_death_counter(var17);
+  var_16.skipdeathanim = 1;
+  var_16.allowdeath = 1;
+  var_16 stopsounds();
+  var_17 stopsounds();
+  var_17 actoraimassistoff();
+  var_0.skipdeathanim = 1;
+  thread hostage_death_counter(var_16);
+  hostage_death_counter(var_17);
 
   if(istrue(level.demo)) {
-    var16 actoraimassistoff();
+    var_16 actoraimassistoff();
   }
 
-  if(var0.damagelocation == "head" || var0.damagelocation == "helmet") {
-    var0.skipdeathanim = undefined;
-    var0 scripts\engine\sp\utility::set_deathanim("hostage_headshot");
-    var0 kill(var3, var2, var2, var4);
-    var1 scripts\common\anim::anim_single_solo(var16, "hostage_live");
+  if(var_0.damagelocation == "head" || var_0.damagelocation == "helmet") {
+    var_0.skipdeathanim = undefined;
+    var_0 scripts\engine\sp\utility::set_deathanim("hostage_headshot");
+    var_0 kill(var_3, var_2, var_2, var_4);
+    var_1 scripts\common\anim::anim_single_solo(var_16, "hostage_live");
     return;
   }
 
   thread hostage_enemy_ondeath();
-  var1 scripts\common\anim::anim_single(level.hostage_ai, "hostage_live");
+  var_1 scripts\common\anim::anim_single(level.hostage_ai, "hostage_live");
 }
 
-function hostage_flank_react(var0) {
+function hostage_flank_react(var_0) {
   level endon("stop_hostage_flank_react");
   scripts\engine\utility::flag_wait("hostage_flanked");
-  var0 notify("stop_loop");
+  var_0 notify("stop_loop");
   scripts\engine\utility::flag_set("2ndfloor_execute");
 
-  foreach(var2 in level.hostage_ai) {
-    if(!isalive(var2)) {
+  foreach(var_2 in level.hostage_ai) {
+    if(!isalive(var_2)) {
       continue;
     }
 
-    var2.health = var2.scripted_health;
-    var2 notify("stop_enemy_thread");
-    var2 notify("stop_anim_aim");
-    var2 notify("stop_damage_thread");
-    var2 scripts\engine\sp\utility::anim_stopanimScripted();
+    var_2.health = var_2.scripted_health;
+    var_2 notify("stop_enemy_thread");
+    var_2 notify("stop_anim_aim");
+    var_2 notify("stop_damage_thread");
+    var_2 scripts\engine\sp\utility::anim_stopanimScripted();
 
-    if(var2.animname == "hostage" && var2.weapon != var2.og_sidearm) {
-      var2.team = "axis";
-      var3 = scripts\sp\utility::make_weapon("iw8_pi_mike1911");
-      var2 scripts\anim\shared::forceuseweapon(var3, "primary");
-      thread hostage_death_counter(var2);
+    if(var_2.animname == "hostage" && var_2.weapon != var_2.og_sidearm) {
+      var_2.team = "axis";
+      var_3 = scripts\sp\utility::make_weapon("iw8_pi_mike1911");
+      var_2 scripts\anim\shared::forceuseweapon(var_3, "primary");
+      thread hostage_death_counter(var_2);
     }
   }
 }
 
-function hostage_death_counter(var0) {
+function hostage_death_counter(var_0) {
   self notify("stop_hostage_death_counter");
   self endon("stop_hostage_death_counter");
 
-  if(istrue(var0)) {
+  if(istrue(var_0)) {
     self waittill("death");
   }
 
@@ -2919,8 +2919,8 @@ function hostage_death_with_gun() {
   return false;
 }
 
-function hostage_flashbang_thread(var0) {
-  var0 notify("stop_loop");
+function hostage_flashbang_thread(var_0) {
+  var_0 notify("stop_loop");
   scripts\engine\sp\utility::anim_stopanimScripted();
   waitframe();
   self.health = int(max(self.scripted_health, 10));
@@ -2941,18 +2941,18 @@ function hostage_enemy_thread() {
   hostage_enemy_sight();
   scripts\engine\utility::ent_flag_set("engaging_enemy");
   self stopsounds();
-  var0 = scripts\engine\utility::getStruct("hostage_animnode", "targetname");
-  var0 notify("stop_loop");
+  var_0 = scripts\engine\utility::getStruct("hostage_animnode", "targetname");
+  var_0 notify("stop_loop");
   scripts\engine\utility::array_thread(level.hostage_ai, &scripts\engine\sp\utility::anim_stopanimscripted);
   GscBinSkip1(0x45, "left", 30);
 }
 
 function hostage_enemy_sight() {
-  var0 = wait_see_player();
+  var_0 = wait_see_player();
   thread hostage_dialogue();
   thread hostage_enemy_engage_dialogue();
 
-  if(!istrue(var0)) {
+  if(!istrue(var_0)) {
     return;
   }
 
@@ -2962,7 +2962,7 @@ function hostage_enemy_sight() {
 
 function wait_see_player() {
   self endon("enemy");
-  var0 = "tag_eye";
+  var_0 = "tag_eye";
 
   for(;;) {
     if(sighttracepassed(self getEye(), level.player getEye(), 0, undefined)) {
@@ -3014,19 +3014,19 @@ function stop_sounds_on_damaged() {
 
 function bathroom_enemy() {
   self endon("death");
-  var0 = scripts\engine\utility::getStruct("bathroom_enemy_animnode", "targetname");
+  var_0 = scripts\engine\utility::getStruct("bathroom_enemy_animnode", "targetname");
 
   if(istrue(level.demo)) {
     self.health = 20;
   }
 
   self.allowdeath = 1;
-  self.animnode = var0;
+  self.animnode = var_0;
   self.deathfunction = &bathroom_enemy_death_func;
   thread bathroom_enemy_death();
   thread bathroom_trigger_think();
   thread demo_bathroom_fakeblood();
-  var0 thread scripts\common\anim::anim_loop_solo(self, "bathroom_loop");
+  var_0 thread scripts\common\anim::anim_loop_solo(self, "bathroom_loop");
   scripts\engine\utility::flag_wait("2ndfloor_execute");
   thread bathroom_enemy_audio();
 
@@ -3040,18 +3040,18 @@ function bathroom_enemy() {
   thread scripts\engine\sp\utility::smart_dialogue("dx_vom_aq6_2nd_floor_bedroom2_162");
   wait 0.3;
   thread bathroom_flash_think();
-  var0 notify("stop_loop");
+  var_0 notify("stop_loop");
   scripts\engine\sp\utility::anim_stopanimScripted();
   self.baseaccuracy = 0;
   thread bathroom_nade_think();
-  bathroom_enemy_react_anim(var0);
+  bathroom_enemy_react_anim(var_0);
 
   if(!istrue(self.scripted_flash)) {
-    var0 scripts\common\anim::anim_single_solo(self, "bathroom_crouch");
+    var_0 scripts\common\anim::anim_single_solo(self, "bathroom_crouch");
   }
 
   if(istrue(level.demo)) {
-    var0 scripts\common\anim::anim_first_frame_solo(self, "bathroom_shoot");
+    var_0 scripts\common\anim::anim_first_frame_solo(self, "bathroom_shoot");
     return;
   }
 
@@ -3070,20 +3070,20 @@ function bathroom_enemy() {
 
 function bathroom_trigger_think() {
   self endon("death");
-  var0 = getEnt("bathroom_damage_trigger", "targetname");
+  var_0 = getEnt("bathroom_damage_trigger", "targetname");
   thread bathroom_trigger_damage_ondamage();
   thread bathroom_trigger_damage_onflashbang();
 
   for(;;) {
-    var0 waittill("trigger", var1);
+    var_0 waittill("trigger", var_1);
   }
 
   LOC_00000044:
-    if(var0.triggertype == "flash") {
-      var2 = scripts\engine\sp\utility::get_living_ai("bathroom_guy", "animname");
+    if(var_0.triggertype == "flash") {
+      var_2 = scripts\engine\sp\utility::get_living_ai("bathroom_guy", "animname");
 
-      if(isalive(var2)) {
-        var2 notify("scripted_flash");
+      if(isalive(var_2)) {
+        var_2 notify("scripted_flash");
         return;
       }
 
@@ -3095,9 +3095,9 @@ function bathroom_trigger_damage_ondamage() {
   self endon("death");
 
   for(;;) {
-    self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-    if(isDefined(var9) && var9.basename == "frag" && ispointinvolume(var3, self)) {
+    if(isDefined(var_9) && var_9.basename == "frag" && ispointinvolume(var_3, self)) {
       self.triggertype = "frag";
     }
   }
@@ -3107,7 +3107,7 @@ function bathroom_trigger_damage_onflashbang() {
   self endon("death");
 
   for(;;) {
-    self waittill("flashbang", var0, var1, var2, var3);
+    self waittill("flashbang", var_0, var_1, var_2, var_3);
     self.triggertype = "flash";
     self notify("trigger");
   }
@@ -3128,81 +3128,81 @@ function bathroom_nade_think() {
   self endon("death");
   self endon("quick_getup");
   self endon("getup");
-  var0 = 2025;
-  var1 = scripts\engine\utility::getStruct("bathroom_nade_throwback", "targetname");
+  var_0 = 2025;
+  var_1 = scripts\engine\utility::getStruct("bathroom_nade_throwback", "targetname");
 
   for(;;) {
     waitframe();
-    var2 = getEntArray("grenade", "classname");
+    var_2 = getEntArray("grenade", "classname");
 
-    if(var2.size == 0) {
+    if(var_2.size == 0) {
       continue;
     }
 
-    foreach(var4 in var2) {
-      if(var4.model == "offhand_wm_grenade_flash") {
+    foreach(var_4 in var_2) {
+      if(var_4.model == "offhand_wm_grenade_flash") {
         continue;
       }
 
-      if(distancesquared(var4.origin, self.origin) < var0) {
+      if(distancesquared(var_4.origin, self.origin) < var_0) {
         wait 0.5;
 
-        if(distancesquared(var4.origin, self.origin) < var0) {
-          var5 = scripts\engine\utility::getStructArray(var1.target, "targetname");
-          var6 = undefined;
-          var7 = undefined;
+        if(distancesquared(var_4.origin, self.origin) < var_0) {
+          var_5 = scripts\engine\utility::getStructArray(var_1.target, "targetname");
+          var_6 = undefined;
+          var_7 = undefined;
 
-          foreach(var9 in var5) {
-            if(isDefined(var9.script_noteworthy) && var9.script_noteworthy == "failsafe") {
-              var6 = var6;
+          foreach(var_9 in var_5) {
+            if(isDefined(var_9.script_noteworthy) && var_9.script_noteworthy == "failsafe") {
+              var_6 = var_6;
             }
 
-            var10 = scripts\engine\trace::ray_trace(var1.origin, var9.origin);
+            var_10 = scripts\engine\trace::ray_trace(var_1.origin, var_9.origin);
 
-            if(var10["fraction"] == 1) {
-              var7 = var9;
+            if(var_10["fraction"] == 1) {
+              var_7 = var_9;
               break;
             }
           }
 
-          if(!isDefined(var7)) {
+          if(!isDefined(var_7)) {
             return;
           }
 
-          var12 = vectorNormalize(var7.origin + (0, 0, 100) - var1.origin);
-          var13 = var12 * 300;
-          var14 = magicgrenademanual("frag", var1.origin, var13, 3, var4);
-          var4 delete();
-          thread nade_line(var14);
+          var_12 = vectorNormalize(var_7.origin + (0, 0, 100) - var_1.origin);
+          var_13 = var_12 * 300;
+          var_14 = magicgrenademanual("frag", var_1.origin, var_13, 3, var_4);
+          var_4 delete();
+          thread nade_line(var_14);
           self.threwbackgrenade = 1;
           return;
         }
       }
     }
 
-    var12 = undefined;
-    var14 = undefined;
+    var_12 = undefined;
+    var_14 = undefined;
   }
 }
 
-function nade_line(var0) {
+function nade_line(var_0) {
   self endon("death");
-  var0 endon("death");
+  var_0 endon("death");
 
   for(;;) {
     waitframe();
   }
 }
 
-function bathroom_enemy_react_anim(var0) {
+function bathroom_enemy_react_anim(var_0) {
   self endon("death");
   self endon("quick_getup");
   GscBinSkip4(0x35);
 }
 
 function bathroom_inner_trigger() {
-  var0 = getEnt("2nd_floor_bathroom_inner", "targetname");
-  var0 waittill("trigger");
+  var_0 = getEnt("2nd_floor_bathroom_inner", "targetname");
+  var_0 waittill("trigger");
   self notify("quick_getup");
 }
 
@@ -3212,7 +3212,7 @@ function demo_bathroom_fakeblood() {
   }
 
   self waittill("death");
-  var0 = self.origin + (0, 0, 30);
+  var_0 = self.origin + (0, 0, 30);
   GscBinSkip1(0x45, 0, self.angles + (-125, 120, 0));
 }
 
@@ -3221,13 +3221,13 @@ function bathroom_enemy_death() {
   scripts\engine\utility::flag_set("2ndfloor_bathroom_enemy_dead");
 }
 
-function bathroom_damage_func(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
-  if(!isDefined(var1)) {
+function bathroom_damage_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  if(isai(var1)) {
-    playFX(scripts\engine\utility::getfx("door_shotgun_impact"), var3, var2);
+  if(isai(var_1)) {
+    playFX(scripts\engine\utility::getfx("door_shotgun_impact"), var_3, var_2);
     return;
   }
 }
@@ -3275,9 +3275,9 @@ function bathroom_enemy_audio() {
 function bathroom_enemy_audio_close() {
   self endon("stop_bathroom_audio");
   self endon("death");
-  var0 = squared(150);
+  var_0 = squared(150);
 
-  while(distancesquared(level.player.origin, self.origin) > var0) {
+  while(distancesquared(level.player.origin, self.origin) > var_0) {
     waitframe();
   }
 
@@ -3328,28 +3328,28 @@ function stairtrain2_setup() {
     level.temp_stairtrain_count = 0;
   }
 
-  var0 = scripts\engine\utility::getStruct("stairtrain2_animnode", "targetname");
+  var_0 = scripts\engine\utility::getStruct("stairtrain2_animnode", "targetname");
   scripts\engine\utility::flag_wait("player_near_stairtrain2");
   level.temp_stairtrain_count++;
 
   if(level.temp_stairtrain_count == 3) {
     level.temp_stairtrain_count = undefined;
-    var1 = scripts\engine\sp\utility::get_living_ai("bravo4_1", "animname");
-    var2 = scripts\engine\sp\utility::get_living_ai("bravo4_2", "animname");
-    var3 = [level.price, var1, var2];
-    var0 notify("stop_first_frame");
-    var0 notify("stop_arrive_loop");
-    var4 = undefined;
+    var_1 = scripts\engine\sp\utility::get_living_ai("bravo4_1", "animname");
+    var_2 = scripts\engine\sp\utility::get_living_ai("bravo4_2", "animname");
+    var_3 = [level.price, var_1, var_2];
+    var_0 notify("stop_first_frame");
+    var_0 notify("stop_arrive_loop");
+    var_4 = undefined;
 
-    foreach(var6 in var3) {
-      if(isDefined(var4)) {
-        var4 scripts\sp\stairtrain::set_prevguy(var6);
+    foreach(var_6 in var_3) {
+      if(isDefined(var_4)) {
+        var_4 scripts\sp\stairtrain::set_prevguy(var_6);
       }
 
-      var4 = var6;
-      var6.animnode = var0;
-      var6 scripts\engine\sp\utility::anim_stopanimScripted();
-      var6 thread scripts\asm\asm_sp::asm_animcustom(&scripts\sp\maps\townhoused\townhoused_code::stairtrain2_animcustom);
+      var_4 = var_6;
+      var_6.animnode = var_0;
+      var_6 scripts\engine\sp\utility::anim_stopanimScripted();
+      var_6 thread scripts\asm\asm_sp::asm_animcustom(&scripts\sp\maps\townhoused\townhoused_code::stairtrain2_animcustom);
     }
 
     wait 1.3;
@@ -3359,59 +3359,59 @@ function stairtrain2_setup() {
 }
 
 function third_floor_movement() {
-  var0 = scripts\engine\utility::getStruct("buddy_down_animnode", "targetname");
-  var1 = scripts\sp\door::get_interactive_door("3rdfloor_price_door");
-  var1 scripts\sp\door::remove_open_ability();
-  var1 scripts\engine\sp\utility::assign_animtree("door");
-  thread post_stairtrain_anim(level.price, var0, "buddy_down_intro");
+  var_0 = scripts\engine\utility::getStruct("buddy_down_animnode", "targetname");
+  var_1 = scripts\sp\door::get_interactive_door("3rdfloor_price_door");
+  var_1 scripts\sp\door::remove_open_ability();
+  var_1 scripts\engine\sp\utility::assign_animtree("door");
+  thread post_stairtrain_anim(level.price, var_0, "buddy_down_intro");
   thread buddy_down_price_anim();
-  var2 = scripts\engine\sp\utility::get_living_ai("bravo4_1", "animname");
-  thread post_stairtrain_anim(var2, var0);
-  var3 = scripts\engine\sp\utility::get_living_ai("bravo4_2", "animname");
-  post_stairtrain_anim(var3, var0, "buddy_down_intro");
+  var_2 = scripts\engine\sp\utility::get_living_ai("bravo4_1", "animname");
+  thread post_stairtrain_anim(var_2, var_0);
+  var_3 = scripts\engine\sp\utility::get_living_ai("bravo4_2", "animname");
+  post_stairtrain_anim(var_3, var_0, "buddy_down_intro");
   thread buddy_down_damage_thread();
   scripts\engine\utility::flag_wait("player_near_buddy_down");
-  var4 = [var2, var3];
+  var_4 = [var_2, var_3];
 
-  foreach(var6 in var4) {
-    var0 notify("stop_loop_" + var6.animname);
+  foreach(var_6 in var_4) {
+    var_0 notify("stop_loop_" + var_6.animname);
   }
 
   thread buddy_down_dialogue();
   scripts\engine\utility::flag_set("buddy_down");
-  buddy_down_skip_setup(var2);
-  buddy_down_skip_setup(var3);
-  var0 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop(var4, "buddy_down", undefined, "stop_buddy_down_loop");
+  buddy_down_skip_setup(var_2);
+  buddy_down_skip_setup(var_3);
+  var_0 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop(var_4, "buddy_down", undefined, "stop_buddy_down_loop");
   scripts\engine\utility::flag_wait("player_near_buddy_down_room");
-  var1 = scripts\sp\door::get_interactive_door("hiding_door");
+  var_1 = scripts\sp\door::get_interactive_door("hiding_door");
 
-  if(isDefined(var1)) {
-    var1.ignore_grenades = undefined;
+  if(isDefined(var_1)) {
+    var_1.ignore_grenades = undefined;
   }
 
   scripts\engine\sp\utility::spawn_targetname("hiding_door_enemy");
   scripts\engine\utility::flag_wait("3rd_floor_enemies_dead");
   scripts\engine\utility::flag_wait("3rd_floor_clear");
-  var0 notify("stop_loop_" + level.price.animname);
+  var_0 notify("stop_loop_" + level.price.animname);
   level.price scripts\engine\sp\utility::anim_stopanimScripted();
 
   if(scripts\engine\utility::flag("buddy_down_skip")) {
-    buddy_down_skip_post_clear(var0, var4);
+    buddy_down_skip_post_clear(var_0, var_4);
     thread go_to_3rd_floor_stairtain(level.price);
     return;
   }
 
-  var0 notify("stop_buddy_down_loop");
+  var_0 notify("stop_buddy_down_loop");
 
-  foreach(var6 in var4) {
-    var6 scripts\engine\sp\utility::anim_stopanimScripted();
+  foreach(var_6 in var_4) {
+    var_6 scripts\engine\sp\utility::anim_stopanimScripted();
   }
 
-  thread third_floor_buddy_down_drag(level, var0);
+  thread third_floor_buddy_down_drag(level, var_0);
   thread go_to_3rd_floor_stairtain(level.price);
 }
 
-function third_floor_death_counter(var0) {
+function third_floor_death_counter(var_0) {
   self notify("stop_third_floor_death_counter");
   self endon("stop_third_floor_death_counter");
 
@@ -3419,7 +3419,7 @@ function third_floor_death_counter(var0) {
     level.third_floor_death_counter = 0;
   }
 
-  if(istrue(var0)) {
+  if(istrue(var_0)) {
     self waittill("death");
   }
 
@@ -3444,21 +3444,21 @@ function buddy_down_dialogue() {
     scripts\engine\utility::flag_wait("player_in_buddy_down_room");
   }
 
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, "dx_vom_pri_3rd_floor_bedroom_50");
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, "dx_vom_pri_3rd_floor_bedroom_50");
 }
 
 function buddy_down_price_anim() {}
 
-function buddy_down_two_enemy_dead_thread(var0) {
-  while(any_alive(var0)) {
+function buddy_down_two_enemy_dead_thread(var_0) {
+  while(any_alive(var_0)) {
     wait 0.1;
   }
 }
 
-function any_alive(var0) {
-  foreach(var2 in var0) {
-    if(isalive(var2)) {
+function any_alive(var_0) {
+  foreach(var_2 in var_0) {
+    if(isalive(var_2)) {
       return true;
     }
   }
@@ -3466,56 +3466,56 @@ function any_alive(var0) {
   return false;
 }
 
-function get_first_living_in_array(var0) {
-  foreach(var2 in var0) {
-    if(isalive(var2)) {
-      return var2;
+function get_first_living_in_array(var_0) {
+  foreach(var_2 in var_0) {
+    if(isalive(var_2)) {
+      return var_2;
     }
   }
 }
 
-function third_floor_buddy_down_drag(var0, var1) {
-  var2 = "buddy_down_drag";
-  var3 = getEnt("3rd_floor_door_playerclip", "targetname");
-  var3 solid();
+function third_floor_buddy_down_drag(var_0, var_1) {
+  var_2 = "buddy_down_drag";
+  var_3 = getEnt("3rd_floor_door_playerclip", "targetname");
+  var_3 solid();
   scripts\engine\sp\utility::array_spawn_targetname("bravo4_reinforcements", 1);
-  var4 = scripts\engine\sp\utility::get_living_ai("bravo4_4", "animname");
-  thread go_to_3rd_floor_stairtain(var4);
-  var0 thread scripts\sp\maps\townhoused\townhoused_code::anim_then_loop(var1, var2);
-  var1 = scripts\engine\utility::array_add(var1, var4);
+  var_4 = scripts\engine\sp\utility::get_living_ai("bravo4_4", "animname");
+  thread go_to_3rd_floor_stairtain(var_4);
+  var_0 thread scripts\sp\maps\townhoused\townhoused_code::anim_then_loop(var_1, var_2);
+  var_1 = scripts\engine\utility::array_add(var_1, var_4);
 
-  foreach(var6 in var1) {
-    if(var6.animname == "bravo4_1") {
-      var7 = scripts\sp\door::get_interactive_door("buddydown_door");
-      var7 scripts\sp\door::add_pushent(var6);
+  foreach(var_6 in var_1) {
+    if(var_6.animname == "bravo4_1") {
+      var_7 = scripts\sp\door::get_interactive_door("buddydown_door");
+      var_7 scripts\sp\door::add_pushent(var_6);
     }
   }
 
   waitframe();
-  var9 = 1.7;
+  var_9 = 1.7;
 
-  foreach(var6 in var1) {
-    var11 = var9 / getanimlength(var6 scripts\engine\utility::getanim(var2));
-    var6 setanimtime(var6 scripts\engine\utility::getanim(var2), var11);
-    var6 setanimrate(var6 scripts\engine\utility::getanim("buddy_down_drag"), 0);
+  foreach(var_6 in var_1) {
+    var_11 = var_9 / getanimlength(var_6 scripts\engine\utility::getanim(var_2));
+    var_6 setanimtime(var_6 scripts\engine\utility::getanim(var_2), var_11);
+    var_6 setanimrate(var_6 scripts\engine\utility::getanim("buddy_down_drag"), 0);
   }
 
   third_floor_view_exit();
 
-  foreach(var6 in var1) {
-    var6 setanimrate(var6 scripts\engine\utility::getanim("buddy_down_drag"), 1);
+  foreach(var_6 in var_1) {
+    var_6 setanimrate(var_6 scripts\engine\utility::getanim("buddy_down_drag"), 1);
   }
 }
 
 function third_floor_view_exit() {
-  var0 = getEnt("3rdfloor_exit_failsafe", "targetname");
-  var0 endon("trigger");
-  var1 = scripts\engine\utility::getStruct("3rd_floor_view_exit", "targetname");
+  var_0 = getEnt("3rdfloor_exit_failsafe", "targetname");
+  var_0 endon("trigger");
+  var_1 = scripts\engine\utility::getStruct("3rd_floor_view_exit", "targetname");
 
   for(;;) {
-    var2 = level.player getEye();
+    var_2 = level.player getEye();
 
-    if(scripts\engine\utility::within_fov(var2, level.player getplayerangles(), var1.origin, 0.939693) && sighttracepassed(var2, var1.origin, 0, level.player)) {
+    if(scripts\engine\utility::within_fov(var_2, level.player getplayerangles(), var_1.origin, 0.939693) && sighttracepassed(var_2, var_1.origin, 0, level.player)) {
       break;
     }
 
@@ -3523,73 +3523,73 @@ function third_floor_view_exit() {
   }
 }
 
-function buddy_down_skip_post_clear(var0, var1) {
-  var2 = "buddy_down_drag";
+function buddy_down_skip_post_clear(var_0, var_1) {
+  var_2 = "buddy_down_drag";
   scripts\engine\sp\utility::array_spawn_targetname("bravo4_reinforcements", 1);
-  var3 = scripts\engine\sp\utility::get_living_ai("bravo4_4", "animname");
-  thread go_to_3rd_floor_stairtain(var3);
+  var_3 = scripts\engine\sp\utility::get_living_ai("bravo4_4", "animname");
+  thread go_to_3rd_floor_stairtain(var_3);
 
-  foreach(var5 in var1) {
-    if(var5.animname == "bravo4_1" || var5.animname == "bravo4_2") {
-      var6 = scripts\engine\utility::getStruct("temp_" + var5.animname + "_3rd_floor_teleport", "targetname");
-      var5.script_pushable = 0;
-      var7 = scripts\engine\utility::drop_to_ground(var6.origin, 10, -100);
-      var5 forceteleport(var7, var6.angles);
-      var5 setgoalpos(var7);
-      var5.uprightcqbidle = 1;
-      var5.goalradius = 4;
-      var5.fixednode = 0;
-      var5 scripts\common\ai::set_gunpose("gun_down");
+  foreach(var_5 in var_1) {
+    if(var_5.animname == "bravo4_1" || var_5.animname == "bravo4_2") {
+      var_6 = scripts\engine\utility::getStruct("temp_" + var_5.animname + "_3rd_floor_teleport", "targetname");
+      var_5.script_pushable = 0;
+      var_7 = scripts\engine\utility::drop_to_ground(var_6.origin, 10, -100);
+      var_5 forceteleport(var_7, var_6.angles);
+      var_5 setgoalpos(var_7);
+      var_5.uprightcqbidle = 1;
+      var_5.goalradius = 4;
+      var_5.fixednode = 0;
+      var_5 scripts\common\ai::set_gunpose("gun_down");
       continue;
     }
 
-    var0 thread scripts\common\anim::anim_loop_solo(var5, "buddy_down_drag_loop");
+    var_0 thread scripts\common\anim::anim_loop_solo(var_5, "buddy_down_drag_loop");
   }
 }
 
 function buddy_down_damage_thread() {
-  var0 = getEnt("buddy_down_damage_trigger", "targetname");
+  var_0 = getEnt("buddy_down_damage_trigger", "targetname");
   thread buddy_down_trigger_damage_ondamage();
   thread buddy_down_trigger_damage_onflashbang();
 
   for(;;) {
-    var0 waittill("trigger", var1);
+    var_0 waittill("trigger", var_1);
   }
 
   LOC_0000003d:
-    var2 = scripts\engine\sp\utility::get_living_ai("buddy_down_enemy", "script_noteworthy");
-  var3 = scripts\engine\sp\utility::get_living_ai("buddy_down_gunner", "script_noteworthy");
+    var_2 = scripts\engine\sp\utility::get_living_ai("buddy_down_enemy", "script_noteworthy");
+  var_3 = scripts\engine\sp\utility::get_living_ai("buddy_down_gunner", "script_noteworthy");
 
-  if(var0.triggertype == "frag") {
-    if(isalive(var2)) {
-      if(var2.damageshield) {
-        var2.damageshield = 0;
+  if(var_0.triggertype == "frag") {
+    if(isalive(var_2)) {
+      if(var_2.damageshield) {
+        var_2.damageshield = 0;
       }
 
-      var2 kill();
+      var_2 kill();
     }
 
-    if(isalive(var3)) {
-      if(var3.damageshield) {
-        var3.damageshield = 0;
+    if(isalive(var_3)) {
+      if(var_3.damageshield) {
+        var_3.damageshield = 0;
       }
 
-      var3 kill();
+      var_3 kill();
     }
-  } else if(var0.triggertype == "flash") {
-    if(isalive(var2)) {
-      var2 scripts\sp\maps\townhoused\townhoused_code::force_flash();
+  } else if(var_0.triggertype == "flash") {
+    if(isalive(var_2)) {
+      var_2 scripts\sp\maps\townhoused\townhoused_code::force_flash();
     }
 
-    if(isalive(var3)) {
-      var3 scripts\sp\maps\townhoused\townhoused_code::force_flash();
+    if(isalive(var_3)) {
+      var_3 scripts\sp\maps\townhoused\townhoused_code::force_flash();
     }
   }
 
-  var0 delete();
+  var_0 delete();
 }
 
-function buddy_down_door_damage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
+function buddy_down_door_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(scripts\engine\utility::flag("buddy_down_skip")) {
     return;
   }
@@ -3598,11 +3598,11 @@ function buddy_down_door_damage(var0, var1, var2, var3, var4, var5, var6, var7, 
     return;
   }
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  if(var1 == level.player) {
+  if(var_1 == level.player) {
     thread buddy_down_player_engaging_early();
     return;
   }
@@ -3614,23 +3614,23 @@ function buddy_down_player_engaging_early() {
   }
 
   scripts\engine\utility::flag_set("buddy_down_player_engaging_early");
-  var0 = scripts\engine\sp\utility::get_living_ai("bravo4_1", "animname");
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_a11_stairtrain2_rally_60");
+  var_0 = scripts\engine\sp\utility::get_living_ai("bravo4_1", "animname");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_a11_stairtrain2_rally_60");
   wait 1;
-  var1 = scripts\engine\sp\utility::get_living_ai("bravo4_2", "animname");
-  var1 scripts\engine\sp\utility::smart_dialogue("dx_vom_a12_stairtrain2_rally_70");
+  var_1 = scripts\engine\sp\utility::get_living_ai("bravo4_2", "animname");
+  var_1 scripts\engine\sp\utility::smart_dialogue("dx_vom_a12_stairtrain2_rally_70");
 }
 
 function buddy_down_trigger_damage_ondamage() {
   self endon("death");
 
   for(;;) {
-    self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-    if(isDefined(var9) && var9.basename == "frag" && ispointinvolume(var3, self)) {
+    if(isDefined(var_9) && var_9.basename == "frag" && ispointinvolume(var_3, self)) {
       self.triggertype = "frag";
-      var10 = scripts\sp\door::get_interactive_door("buddydown_door");
-      var10 scripts\sp\door_scriptable::scriptable_damage_proc(200, var1, var2, level.player.origin, var4);
+      var_10 = scripts\sp\door::get_interactive_door("buddydown_door");
+      var_10 scripts\sp\door_scriptable::scriptable_damage_proc(200, var_1, var_2, level.player.origin, var_4);
     }
   }
 }
@@ -3639,37 +3639,37 @@ function buddy_down_trigger_damage_onflashbang() {
   self endon("death");
 
   for(;;) {
-    self waittill("flashbang", var0, var1, var2, var3);
+    self waittill("flashbang", var_0, var_1, var_2, var_3);
     self.triggertype = "flash";
     self notify("trigger");
   }
 }
 
-function post_stairtrain_anim(var0, var1, var2) {
+function post_stairtrain_anim(var_0, var_1, var_2) {
   if(scripts\engine\utility::ent_flag_exist("stairtrain_on")) {
     if(scripts\engine\utility::ent_flag("stairtrain_on")) {
       scripts\engine\utility::ent_flag_waitopen("stairtrain_on");
     }
   }
 
-  if(isDefined(var2)) {
-    var0 thread scripts\sp\maps\townhoused\townhoused_code::anim_door(var2, var1);
+  if(isDefined(var_2)) {
+    var_0 thread scripts\sp\maps\townhoused\townhoused_code::anim_door(var_2, var_1);
   }
 
-  var0 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(self, var1, undefined, "stop_loop_" + self.animname);
+  var_0 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(self, var_1, undefined, "stop_loop_" + self.animname);
 }
 
-function go_to_3rd_floor_stairtain(var0) {
-  var1 = scripts\engine\utility::getStruct("buddy_down_animnode", "targetname");
+function go_to_3rd_floor_stairtain(var_0) {
+  var_1 = scripts\engine\utility::getStruct("buddy_down_animnode", "targetname");
 
   if(scripts\engine\utility::flag("buddy_down_skip")) {
-    var1 thread scripts\common\anim::anim_loop_solo(self, var0 + "_loop", "stop_arrive_3rd_floor_stairtrain");
+    var_1 thread scripts\common\anim::anim_loop_solo(self, var_0 + "_loop", "stop_arrive_3rd_floor_stairtrain");
   } else {
-    var1 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(self, var0, undefined, "stop_arrive_3rd_floor_stairtrain");
+    var_1 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(self, var_0, undefined, "stop_arrive_3rd_floor_stairtrain");
   }
 
   scripts\engine\utility::flag_wait("player_near_stairtrain3");
-  var1 notify("stop_arrive_3rd_floor_stairtrain");
+  var_1 notify("stop_arrive_3rd_floor_stairtrain");
   thread stairtrain3_setup();
 }
 
@@ -3727,11 +3727,11 @@ function postspawn_buddy_down_gunner() {
   thread enemy_shoot_buddy_down_door(level);
 }
 
-function buddy_down_enemydead_interrupt(var0) {
+function buddy_down_enemydead_interrupt(var_0) {
   level endon("shoot_buddy_down");
   scripts\engine\utility::flag_wait("buddy_down_enemy_dead");
 
-  if(isalive(var0) && var0.health > 1) {
+  if(isalive(var_0) && var_0.health > 1) {
     return;
   }
 
@@ -3746,40 +3746,40 @@ function buddy_down_skip_setup() {
 }
 
 function buddy_down_skip_move() {
-  var0 = scripts\engine\utility::getStruct("buddy_down_animnode", "targetname");
-  var0 notify("stop_buddy_down_loop");
+  var_0 = scripts\engine\utility::getStruct("buddy_down_animnode", "targetname");
+  var_0 notify("stop_buddy_down_loop");
   self setgoalpos(self.origin);
   wait 0.5;
-  var1 = getnode("3rdfloor_stairs_" + self.animname, "targetname");
+  var_1 = getnode("3rdfloor_stairs_" + self.animname, "targetname");
   self.goalradius = 32;
-  self setgoalnode(var1);
+  self setgoalnode(var_1);
 }
 
 #using_animtree("");
 
 function blend_to_ai() {
-  var0 = self.codescripted["anim"];
-  var1 = [%add_idle, $aim_graft_node, %gun_down_stand];
-  var2 = [%sdr_com_exposed_twitch01, %sdr_com_exposed_aim_4, %sdr_com_exposed_stand_gun_down];
+  var_0 = self.codescripted["anim"];
+  var_1 = [%add_idle, $aim_graft_node, %gun_down_stand];
+  var_2 = [%sdr_com_exposed_twitch01, %sdr_com_exposed_aim_4, %sdr_com_exposed_stand_gun_down];
   scripts\engine\utility::flag_wait(self.blendtoai["flag"]);
-  var3 = self.blendtoai["blendTime"];
-  var4 = scripts\asm\asm::asm_lookupanimfromalias("exposed_idle", "rifle_aim_5");
-  var5 = scripts\asm\asm::asm_getxanim("exposed_idle", var4);
-  self setflaggedanim("whatever", var5, 1, var3);
+  var_3 = self.blendtoai["blendTime"];
+  var_4 = scripts\asm\asm::asm_lookupanimfromalias("exposed_idle", "rifle_aim_5");
+  var_5 = scripts\asm\asm::asm_getxanim("exposed_idle", var_4);
+  self setflaggedanim("whatever", var_5, 1, var_3);
   self.gunposeoverride = "disable";
 
-  foreach(var7 in var1) {
-    self setanimknob(var7, 1, var3);
+  foreach(var_7 in var_1) {
+    self setanimknob(var_7, 1, var_3);
   }
 
-  foreach(var10 in var2) {
-    self setanimlimited(var10, 1, 0);
+  foreach(var_10 in var_2) {
+    self setanimlimited(var_10, 1, 0);
   }
 
-  self clearanim(%scripted, var3);
-  self setanimrate(var0, 0);
+  self clearanim(%scripted, var_3);
+  self setanimrate(var_0, 0);
   scripts\anim\notetracks_sp::notetrackvisorlower_instant();
-  wait var3;
+  wait var_3;
 
   if(isDefined(self.blendtoai["endfunc"])) {
     self thread[[self.blendtoai["endfunc"]]]();
@@ -3797,11 +3797,11 @@ function fake_animScripted() {
 }
 
 function buddy_down_gunner_damage_thread() {
-  var0 = self.health;
+  var_0 = self.health;
 
-  while(var0 > 0) {
-    self waittill("damage", var1);
-    var0 -= var1;
+  while(var_0 > 0) {
+    self waittill("damage", var_1);
+    var_0 -= var_1;
   }
 
   if(!isalive(self)) {
@@ -3818,18 +3818,18 @@ function buddy_down_gunner_damage_thread() {
 }
 
 function buddy_down_gunner_death() {
-  var0 = get_buddy_down_gunner_animnode();
+  var_0 = get_buddy_down_gunner_animnode();
 
   if(isDefined(self.flashed_animnode)) {
     self.flashed_animnode notify("stop_loop");
-    var0 = self.flashed_animnode;
+    var_0 = self.flashed_animnode;
   }
 
-  if(isDefined(var0)) {
+  if(isDefined(var_0)) {
     self.animname = "generic";
-    var1 = getstartangles(var0.origin, var0.angles, scripts\engine\utility::getanim("gunner_couch_death"));
+    var_1 = getstartangles(var_0.origin, var_0.angles, scripts\engine\utility::getanim("gunner_couch_death"));
 
-    if(abs(self.angles[1] - var1[1]) > 15) {
+    if(abs(self.angles[1] - var_1[1]) > 15) {
       return false;
     }
 
@@ -3840,13 +3840,13 @@ function buddy_down_gunner_death() {
     thread scripts\engine\sp\utility::smart_dialogue("dx_vom_aq2_3rd_floor_bedroom_92");
     self actoraimassistoff();
     third_floor_death_counter();
-    var2 = getstartorigin(var0.origin, var0.angles, scripts\engine\utility::getanim("gunner_couch_death"));
-    var3 = var0.origin - var2;
-    var4 = scripts\engine\utility::spawn_script_origin(self.origin + var3, var0.angles);
-    self linkTo(var4);
-    var4 moveTo(var0.origin, 1);
-    var4 scripts\common\anim::anim_single_solo(self, "gunner_couch_death");
-    var4 delete();
+    var_2 = getstartorigin(var_0.origin, var_0.angles, scripts\engine\utility::getanim("gunner_couch_death"));
+    var_3 = var_0.origin - var_2;
+    var_4 = scripts\engine\utility::spawn_script_origin(self.origin + var_3, var_0.angles);
+    self linkTo(var_4);
+    var_4 moveTo(var_0.origin, 1);
+    var_4 scripts\common\anim::anim_single_solo(self, "gunner_couch_death");
+    var_4 delete();
 
     if(isalive(self)) {
       self kill();
@@ -3859,79 +3859,79 @@ function buddy_down_gunner_death() {
 }
 
 function get_buddy_down_gunner_animnode() {
-  var0 = 12;
-  var1 = scripts\engine\utility::getStruct("buddy_down_gunner_animnode", "targetname");
-  var2 = scripts\engine\utility::getStruct(var1.target, "targetname");
-  var3 = [var1.origin, var2.origin];
-  var4 = [];
-  GscBinSkip0(0x2e, var4.size, var3);
+  var_0 = 12;
+  var_1 = scripts\engine\utility::getStruct("buddy_down_gunner_animnode", "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
+  var_3 = [var_1.origin, var_2.origin];
+  var_4 = [];
+  GscBinSkip0(0x2e, var_4.size, var_3);
 }
 
 function buddy_down_gunner_flashed_thread() {
   self endon("death");
   self endon("stop_fake_flash");
   self waittill("flashed");
-  var0 = get_buddy_down_gunner_animnode();
-  self.flashed_animnode = var0;
-  var0 scripts\common\anim::anim_generic(self, "fake_flash");
-  var0 thread scripts\common\anim::anim_generic_loop(self, "fake_flash_idle");
+  var_0 = get_buddy_down_gunner_animnode();
+  self.flashed_animnode = var_0;
+  var_0 scripts\common\anim::anim_generic(self, "fake_flash");
+  var_0 thread scripts\common\anim::anim_generic_loop(self, "fake_flash_idle");
   player_cansee_buddy_down_flashed();
-  var0 notify("stop_loop");
+  var_0 notify("stop_loop");
   thread scripts\engine\sp\utility::smart_dialogue("dx_vom_aq1_enemy_wait_10");
-  var0 scripts\common\anim::anim_generic(self, "fake_flash_react");
+  var_0 scripts\common\anim::anim_generic(self, "fake_flash_react");
 }
 
 function player_cansee_buddy_down_flashed() {
   self endon("stop_animmode");
-  var0 = gettime() + 3000;
+  var_0 = gettime() + 3000;
 
-  while(gettime() < var0) {
+  while(gettime() < var_0) {
     waitframe();
-    var1 = self gettagorigin("tag_eye");
-    var2 = level.player getEye();
+    var_1 = self gettagorigin("tag_eye");
+    var_2 = level.player getEye();
 
-    if(scripts\engine\utility::within_fov(var2, level.player getplayerangles(), var1, 0.939693) && sighttracepassed(level.player getEye(), var1, 0, level.player)) {
+    if(scripts\engine\utility::within_fov(var_2, level.player getplayerangles(), var_1, 0.939693) && sighttracepassed(level.player getEye(), var_1, 0, level.player)) {
       break;
     }
   }
 }
 
-function enemy_shoot_buddy_down_door(var0) {
+function enemy_shoot_buddy_down_door(var_0) {
   level endon("buddy_down_grenade_explode");
-  var0 endon("death");
-  var1 = scripts\engine\utility::getStruct("enemy_buddy_shoot_door", "targetname");
-  var2 = spawn("script_origin", var1.origin);
-  var0.dontevershoot = 1;
-  var0 setentitytarget(var2);
-  thread third_floor_frame_pulse(var0);
+  var_0 endon("death");
+  var_1 = scripts\engine\utility::getStruct("enemy_buddy_shoot_door", "targetname");
+  var_2 = spawn("script_origin", var_1.origin);
+  var_0.dontevershoot = 1;
+  var_0 setentitytarget(var_2);
+  thread third_floor_frame_pulse(var_0);
   level.player setsoundsubmix("sp_th_buddy_down_npc_guns_down");
   thread sfx_buddy_down_fire_volley();
   thread sfx_buddy_down_debris();
 
   for(;;) {
-    var3 = var0 gettagorigin("tag_flash");
-    magicbullet(var0.primaryweapon, var3, var1.origin, var0);
-    magicbullet(var0.primaryweapon, var3, var1.origin, var0);
-    var4 = vectorNormalize(var1.origin - var3);
-    var5 = var1.origin + var4 * 3;
-    var6 = var3 + var4 * 200;
-    magicbullet(var0.primaryweapon, var5, var6, var0);
+    var_3 = var_0 gettagorigin("tag_flash");
+    magicbullet(var_0.primaryweapon, var_3, var_1.origin, var_0);
+    magicbullet(var_0.primaryweapon, var_3, var_1.origin, var_0);
+    var_4 = vectorNormalize(var_1.origin - var_3);
+    var_5 = var_1.origin + var_4 * 3;
+    var_6 = var_3 + var_4 * 200;
+    magicbullet(var_0.primaryweapon, var_5, var_6, var_0);
     wait randomfloatrange(0.05, 0.15);
-    var1 = scripts\engine\utility::getStruct(var1.target, "targetname");
-    var2.origin = var1.origin;
+    var_1 = scripts\engine\utility::getStruct(var_1.target, "targetname");
+    var_2.origin = var_1.origin;
   }
 
   LOC_00000118:
-    var0 clearentitytarget();
+    var_0 clearentitytarget();
   wait 1;
-  var0.dontevershoot = 0;
-  var1 = scripts\engine\utility::getStruct("enemy_buddy_shoot_door_post", "targetname");
-  var2.origin = var1.origin;
-  var2 makeentitysentient("allies");
-  var2 setthreatbiasgroup("allies");
-  var0.favoriteenemy = var2;
+  var_0.dontevershoot = 0;
+  var_1 = scripts\engine\utility::getStruct("enemy_buddy_shoot_door_post", "targetname");
+  var_2.origin = var_1.origin;
+  var_2 makeentitysentient("allies");
+  var_2 setthreatbiasgroup("allies");
+  var_0.favoriteenemy = var_2;
   wait 2;
-  var2 delete();
+  var_2 delete();
 }
 
 function sfx_buddy_down_fire_volley() {
@@ -3944,39 +3944,39 @@ function sfx_buddy_down_debris() {
   thread scripts\engine\utility::play_sound_in_space("scn_buddy_down_door_debris", (215, 1010, -153));
 }
 
-function third_floor_frame_pulse(var0) {
-  var0 endon("death");
+function third_floor_frame_pulse(var_0) {
+  var_0 endon("death");
   wait 0.5;
-  var1 = getEnt("buddy_down_picture", "targetname");
-  var2 = anglesToForward(var1.angles) * 1;
-  var1 physicslaunchserver(var1.origin + (0, 0, randomfloatrange(-5, 5)), var2);
+  var_1 = getEnt("buddy_down_picture", "targetname");
+  var_2 = anglesToForward(var_1.angles) * 1;
+  var_1 physicslaunchserver(var_1.origin + (0, 0, randomfloatrange(-5, 5)), var_2);
   wait 0.25;
-  var1 = getEnt(var1.target, "targetname");
-  var2 = anglesToForward(var1.angles) * 1;
-  var1 physicslaunchserver(var1.origin + (0, 0, randomfloatrange(-5, 5)), var2);
+  var_1 = getEnt(var_1.target, "targetname");
+  var_2 = anglesToForward(var_1.angles) * 1;
+  var_1 physicslaunchserver(var_1.origin + (0, 0, randomfloatrange(-5, 5)), var_2);
 }
 
 function postspawn_hiding_door_enemy() {
   self endon("death");
-  var0 = scripts\engine\utility::getStruct("hiding_door_animnode", "targetname");
+  var_0 = scripts\engine\utility::getStruct("hiding_door_animnode", "targetname");
   self.animname = "generic";
   self.primaryweapon = isundefinedweapon();
   scripts\anim\shared::forceuseweapon(self.sidearm, "secondary");
-  var1 = scripts\sp\door::get_interactive_door("hiding_door");
-  var1 scripts\sp\door::remove_open_ability();
-  var1.tagent = scripts\engine\utility::spawn_tag_origin(var1.origin, var1.angles);
-  var1.tagent scripts\engine\sp\utility::assign_animtree("door");
-  var0 scripts\common\anim::anim_first_frame_solo(self, "python_enter");
-  var0 scripts\common\anim::anim_first_frame_solo(var1.tagent, "python_enter");
+  var_1 = scripts\sp\door::get_interactive_door("hiding_door");
+  var_1 scripts\sp\door::remove_open_ability();
+  var_1.tagent = scripts\engine\utility::spawn_tag_origin(var_1.origin, var_1.angles);
+  var_1.tagent scripts\engine\sp\utility::assign_animtree("door");
+  var_0 scripts\common\anim::anim_first_frame_solo(self, "python_enter");
+  var_0 scripts\common\anim::anim_first_frame_solo(var_1.tagent, "python_enter");
   wait 0.1;
-  var1.startyaw = var1.angles[1];
-  var1 linkTo(var1.tagent);
-  thread hiding_door_model(var1);
+  var_1.startyaw = var_1.angles[1];
+  var_1 linkTo(var_1.tagent);
+  thread hiding_door_model(var_1);
   thread hiding_door_enemy_dead_dialogue();
-  python_enter(var0, var1);
+  python_enter(var_0, var_1);
 }
 
-function python_enter(var0, var1) {
+function python_enter(var_0, var_1) {
   self.nofacialfiller = 1;
   thread third_floor_death_counter(1);
   favela_door_trigger();
@@ -3991,8 +3991,8 @@ function python_enter(var0, var1) {
   thread hiding_door_enemy_death_dialogue();
   self.diequietly = 1;
   thread hiding_door_anim_thread();
-  var0 thread scripts\sp\maps\townhoused\townhoused_code::anim_long_death(self, "python_enter", 1, &python_longdeath_callback);
-  var0 scripts\common\anim::anim_single([self, var1.tagent], "python_enter");
+  var_0 thread scripts\sp\maps\townhoused\townhoused_code::anim_long_death(self, "python_enter", 1, &python_longdeath_callback);
+  var_0 scripts\common\anim::anim_single([self, var_1.tagent], "python_enter");
 }
 
 function hiding_door_anim_thread() {
@@ -4008,16 +4008,16 @@ function hiding_door_anim_thread() {
 
 function python_longdeath_callback() {
   third_floor_death_counter();
-  var0 = 0;
+  var_0 = 0;
 
   if(isDefined(self.damageweapon) && weaponclass(self.damageweapon) == "spread") {
-    var1 = ["torso_upper", "head", "helmet", "neck", "left_arm_upper", "torso_lower"];
+    var_1 = ["torso_upper", "head", "helmet", "neck", "left_arm_upper", "torso_lower"];
   } else {
-    var1 = ["torso_upper", "head", "helmet", "neck", "left_arm_upper"];
+    var_1 = ["torso_upper", "head", "helmet", "neck", "left_arm_upper"];
   }
 
-  foreach(var3 in var1) {
-    if(self.damagelocation == var3) {
+  foreach(var_3 in var_1) {
+    if(self.damagelocation == var_3) {
       return true;
     }
   }
@@ -4025,13 +4025,13 @@ function python_longdeath_callback() {
   self.skipdeathanim = undefined;
   self.allowdeath = 1;
   self kill();
-  var5 = level.player;
+  var_5 = level.player;
 
   if(isDefined(self.lastattacker)) {
-    var5 = self.lastattacker;
+    var_5 = self.lastattacker;
   }
 
-  self dodamage(10, var5.origin, var5, var5, self.damagemod, self.damageweapon);
+  self dodamage(10, var_5.origin, var_5, var_5, self.damagemod, self.damageweapon);
   return false;
 }
 
@@ -4053,55 +4053,55 @@ function favela_door_trigger() {
   level endon("buddy_down_favela_guy_too_close");
   level.player setsoundsubmix("sp_th_python_scream");
   scripts\engine\utility::flag_wait_or_timeout("buddy_down_favela_guy", 7);
-  var0 = scripts\engine\utility::getStruct("favela_door_lookat", "targetname");
-  var1 = cos(20);
+  var_0 = scripts\engine\utility::getStruct("favela_door_lookat", "targetname");
+  var_1 = cos(20);
 
-  while(!scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var0.origin, var1)) {
+  while(!scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_0.origin, var_1)) {
     waitframe();
   }
 }
 
-function favela_door(var0, var1) {
-  var2 = ["peak", "fire3"];
-  var3 = 0;
+function favela_door(var_0, var_1) {
+  var_2 = ["peak", "fire3"];
+  var_3 = 0;
   favela_door_trigger();
 
   for(;;) {
-    var0 thread scripts\common\anim::anim_loop_solo(self, "faveladoor_idle");
+    var_0 thread scripts\common\anim::anim_loop_solo(self, "faveladoor_idle");
 
-    if(!var3 == 0) {
+    if(!var_3 == 0) {
       wait 0.1;
     } else {
       wait randomfloatrange(0.3, 4);
     }
 
-    var4 = "peak";
+    var_4 = "peak";
 
-    if(var3 < 2) {
-      var4 = var2[var3];
-      var3++;
+    if(var_3 < 2) {
+      var_4 = var_2[var_3];
+      var_3++;
     } else if(randomint(100) > 40) {
-      var5 = randomintrange(1, 3);
-      var4 = "fire" + var5;
+      var_5 = randomintrange(1, 3);
+      var_4 = "fire" + var_5;
     } else if(randomint(100) > 40) {
-      var4 = "idle";
+      var_4 = "idle";
     }
 
-    var0 notify("stop_loop");
+    var_0 notify("stop_loop");
     self stopanimScripted();
 
-    if(var4 != "idle") {
-      var0 scripts\common\anim::anim_single([self, var1.tagent], "faveladoor_" + var4);
-      var6 = 1;
+    if(var_4 != "idle") {
+      var_0 scripts\common\anim::anim_single([self, var_1.tagent], "faveladoor_" + var_4);
+      var_6 = 1;
     }
 
     waitframe();
   }
 }
 
-function hiding_door_model(var0) {
+function hiding_door_model(var_0) {
   self endon("stop_open_door_on_death");
-  var0 waittill("death");
+  var_0 waittill("death");
   self unlink();
 
   if(isDefined(self.tagent)) {
@@ -4112,12 +4112,12 @@ function hiding_door_model(var0) {
 }
 
 function hide_door_rotate() {
-  var0 = angleclamp(self.startyaw + 115);
-  var1 = abs(var0 - angleclamp(self.angles[1]));
-  var2 = var1 / 60;
-  var3 = self.pivots["open_left"].origin - self.og_origin;
-  var4 = rotatevector(var3, self.angles - self.true_start_angles);
-  scripts\sp\maps\townhoused\townhoused_code::temp_scriptablerotateTo((0, var0, 0), var2, 0, var2, var3);
+  var_0 = angleclamp(self.startyaw + 115);
+  var_1 = abs(var_0 - angleclamp(self.angles[1]));
+  var_2 = var_1 / 60;
+  var_3 = self.pivots["open_left"].origin - self.og_origin;
+  var_4 = rotatevector(var_3, self.angles - self.true_start_angles);
+  scripts\sp\maps\townhoused\townhoused_code::temp_scriptablerotateTo((0, var_0, 0), var_2, 0, var_2, var_3);
   thread hiding_door_make_pushable();
 }
 
@@ -4127,9 +4127,9 @@ function hiding_door_make_pushable() {
   }
 
   self.scripted_ispushable = 1;
-  var0 = self.pivots["open_left"].origin - self.og_origin;
-  var1 = rotatevector(var0, self.angles - self.true_start_angles);
-  self.pivot_ent = scripts\engine\utility::spawn_script_origin(self.origin + var1, self.angles);
+  var_0 = self.pivots["open_left"].origin - self.og_origin;
+  var_1 = rotatevector(var_0, self.angles - self.true_start_angles);
+  self.pivot_ent = scripts\engine\utility::spawn_script_origin(self.origin + var_1, self.angles);
   self linkTo(self.pivot_ent);
   self.hinge_side = "open_left";
   self.forward = anglesToForward(self.pivot_ent.angles);
@@ -4150,25 +4150,25 @@ function stairtrain3_setup() {
     level.temp_stairtrain_count = 0;
   }
 
-  var0 = scripts\engine\utility::getStruct("stairtrain3_animnode", "targetname");
+  var_0 = scripts\engine\utility::getStruct("stairtrain3_animnode", "targetname");
   level.temp_stairtrain_count++;
 
   if(level.temp_stairtrain_count == 2) {
     level.temp_stairtrain_count = undefined;
-    var1 = scripts\engine\sp\utility::get_living_ai("bravo4_4", "animname");
-    var2 = [level.price, var1];
-    var0 notify("stop_first_frame");
-    var3 = undefined;
+    var_1 = scripts\engine\sp\utility::get_living_ai("bravo4_4", "animname");
+    var_2 = [level.price, var_1];
+    var_0 notify("stop_first_frame");
+    var_3 = undefined;
 
-    foreach(var5 in var2) {
-      if(isDefined(var3)) {
-        var3 scripts\sp\stairtrain::set_prevguy(var5);
+    foreach(var_5 in var_2) {
+      if(isDefined(var_3)) {
+        var_3 scripts\sp\stairtrain::set_prevguy(var_5);
       }
 
-      var3 = var5;
-      var5.animnode = var0;
-      var5 scripts\engine\sp\utility::anim_stopanimScripted();
-      var5 thread scripts\asm\asm_sp::asm_animcustom(&scripts\sp\maps\townhoused\townhoused_code::stairtrain3_animcustom);
+      var_3 = var_5;
+      var_5.animnode = var_0;
+      var_5 scripts\engine\sp\utility::anim_stopanimScripted();
+      var_5 thread scripts\asm\asm_sp::asm_animcustom(&scripts\sp\maps\townhoused\townhoused_code::stairtrain3_animcustom);
     }
 
     wait 2.1;
@@ -4178,48 +4178,48 @@ function stairtrain3_setup() {
 }
 
 function fourth_floor_movement() {
-  var0 = scripts\engine\utility::getStruct("baby_mom_door_animnode", "targetname");
-  thread post_stairtrain_anim(level.price, var0);
+  var_0 = scripts\engine\utility::getStruct("baby_mom_door_animnode", "targetname");
+  thread post_stairtrain_anim(level.price, var_0);
   thread fourth_floor_price_anim();
   thread fourth_floor_price_movement();
-  var1 = scripts\engine\sp\utility::get_living_ai("bravo4_4", "animname");
-  var2 = scripts\sp\door::get_interactive_door("4thfloor_bathroom_door");
-  var2 scripts\engine\sp\utility::assign_animtree("door");
-  var0 = scripts\engine\utility::getStruct("4thfloor_bathroom_animnode", "targetname");
-  post_stairtrain_anim(var1, var0, "baby_mom_arrive", var2);
+  var_1 = scripts\engine\sp\utility::get_living_ai("bravo4_4", "animname");
+  var_2 = scripts\sp\door::get_interactive_door("4thfloor_bathroom_door");
+  var_2 scripts\engine\sp\utility::assign_animtree("door");
+  var_0 = scripts\engine\utility::getStruct("4thfloor_bathroom_animnode", "targetname");
+  post_stairtrain_anim(var_1, var_0, "baby_mom_arrive", var_2);
   scripts\engine\utility::flag_set("fourth_floor_bravo4_4_ready");
 }
 
 function fourth_floor_price_anim() {
   level.price waittillmatch("single anim", "end");
-  var0 = scripts\engine\utility::getStruct("baby_mom_door_animnode", "targetname");
-  var0 notify("stop_loop_" + level.price.animname);
+  var_0 = scripts\engine\utility::getStruct("baby_mom_door_animnode", "targetname");
+  var_0 notify("stop_loop_" + level.price.animname);
 
   if(!scripts\engine\utility::flag("baby_mom_go") && scripts\sp\maps\townhoused\townhoused_code::isscriptedalive(level.baby_mom)) {
     level.price thread scripts\engine\sp\utility::smart_dialogue("dx_vom_pri_4th_floor_bedroom_20");
   }
 
-  var0 scripts\common\anim::anim_single_solo(level.price, "baby_mom_breakdown");
-  var1 = "baby_mom_breakdown_idle";
-  var2 = "baby_mom_breakdown_nag";
-  var3 = [];
-  GscBinSkip0(0x2e, var3.size, "dx_vom_pri_4th_floor_bedroom_40");
+  var_0 scripts\common\anim::anim_single_solo(level.price, "baby_mom_breakdown");
+  var_1 = "baby_mom_breakdown_idle";
+  var_2 = "baby_mom_breakdown_nag";
+  var_3 = [];
+  GscBinSkip0(0x2e, var_3.size, "dx_vom_pri_4th_floor_bedroom_40");
 }
 
 function fourth_floor_door() {
-  var0 = scripts\sp\door::get_interactive_door("baby_room_door");
-  var0.fndamage = &baby_door_ondamage;
-  var1 = angleclamp180(var0.angles[1]);
+  var_0 = scripts\sp\door::get_interactive_door("baby_room_door");
+  var_0.fndamage = &baby_door_ondamage;
+  var_1 = angleclamp180(var_0.angles[1]);
 
   for(;;) {
-    if(var0 scripts\sp\maps\townhoused\townhoused_code::door_angle_check(var1, 20)) {
+    if(var_0 scripts\sp\maps\townhoused\townhoused_code::door_angle_check(var_1, 20)) {
       break;
     }
 
     if(scripts\sp\maps\townhoused\townhoused_code::isscriptedalive(level.baby_mom)) {
-      var2 = level.baby_mom gettagorigin("tag_eye");
+      var_2 = level.baby_mom gettagorigin("tag_eye");
 
-      if(sighttracepassed(level.player getEye(), var2, 0, level.player)) {
+      if(sighttracepassed(level.player getEye(), var_2, 0, level.player)) {
         break;
       }
     }
@@ -4231,8 +4231,8 @@ function fourth_floor_door() {
   level.player clearallsoundsubmixes();
 }
 
-function baby_door_ondamage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
-  if(var0 == 0) {
+function baby_door_ondamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  if(var_0 == 0) {
     return;
   }
 
@@ -4241,14 +4241,14 @@ function baby_door_ondamage(var0, var1, var2, var3, var4, var5, var6, var7, var8
 }
 
 function fourth_floor_clear_nag() {
-  var0 = scripts\sp\door::get_interactive_door("baby_room_exit");
+  var_0 = scripts\sp\door::get_interactive_door("baby_room_exit");
 
-  if(var0.ajar || var0.bashed) {
+  if(var_0.ajar || var_0.bashed) {
     return;
   }
 
-  var0 endon("ajar");
-  var0 endon("bashed");
+  var_0 endon("ajar");
+  var_0 endon("bashed");
 
   if(scripts\sp\maps\townhoused\townhoused_code::isscriptedalive(level.baby_mom)) {
     scripts\engine\utility::waittill_any_ents(level.baby_mom, "death", level, "finished_baby_mom_vo");
@@ -4256,46 +4256,46 @@ function fourth_floor_clear_nag() {
     wait 5;
   }
 
-  var1 = ["dx_vom_pri_3rd_floor_bedroom_110", "dx_vom_pri_3rd_floor_bedroom_120", "dx_vom_pri_3rd_floor_bedroom_130"];
-  level.price scripts\sp\maps\townhoused\townhoused_code::radio_nag(var1, undefined, 12, 15);
+  var_1 = ["dx_vom_pri_3rd_floor_bedroom_110", "dx_vom_pri_3rd_floor_bedroom_120", "dx_vom_pri_3rd_floor_bedroom_130"];
+  level.price scripts\sp\maps\townhoused\townhoused_code::radio_nag(var_1, undefined, 12, 15);
 }
 
 function baby_cry() {
   scripts\engine\utility::flag_wait("start_baby_cry");
   level.player setsoundsubmix("sp_th_baby_cry");
-  var0 = getEnt("baby", "targetname");
-  var0 playLoopSound("scn_townhouse_baby_cry_lp");
-  var0 endon("damage");
-  var1 = var0.origin[2];
-  var2 = 84;
-  var3 = 0.05;
-  var4 = 0;
-  var5 = 0;
+  var_0 = getEnt("baby", "targetname");
+  var_0 playLoopSound("scn_townhouse_baby_cry_lp");
+  var_0 endon("damage");
+  var_1 = var_0.origin[2];
+  var_2 = 84;
+  var_3 = 0.05;
+  var_4 = 0;
+  var_5 = 0;
 
   for(;;) {
-    wait var3;
-    var6 = level.player.origin[2] - var1;
-    var6 = scripts\engine\math::round_float(var6, 4);
+    wait var_3;
+    var_6 = level.player.origin[2] - var_1;
+    var_6 = scripts\engine\math::round_float(var_6, 4);
 
-    if(var6 < 0) {
+    if(var_6 < 0) {
       continue;
     }
 
-    if(var4 == var6) {
+    if(var_4 == var_6) {
       continue;
     }
 
-    var4 = var6;
-    var7 = var6 / var2;
-    var7 = min(var7, 1);
+    var_4 = var_6;
+    var_7 = var_6 / var_2;
+    var_7 = min(var_7, 1);
 
-    if(var5 == var7) {
+    if(var_5 == var_7) {
       continue;
     }
 
-    var5 = var7;
-    var8 = scripts\engine\math::factor_value(1, 0.01, var7);
-    var0 scalevolume(var8, var3);
+    var_5 = var_7;
+    var_8 = scripts\engine\math::factor_value(1, 0.01, var_7);
+    var_0 scalevolume(var_8, var_3);
   }
 }
 
@@ -4311,10 +4311,10 @@ function baby_death() {
   self.health = 100;
 
   for(;;) {
-    self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-    if(isPlayer(var1)) {
-      if(var9.basename == "flash" && distancesquared(var3, self.origin) > 300) {
+    if(isPlayer(var_1)) {
+      if(var_9.basename == "flash" && distancesquared(var_3, self.origin) > 300) {
         continue;
       }
 
@@ -4328,17 +4328,17 @@ function baby_death() {
 
   self.health = 1;
   self stoploopsound();
-  var10 = getdvarint("townhoused_baby_deaths", 0);
-  var10++;
-  setDvar("townhoused_baby_deaths", var10);
-  var11 = 0;
+  var_10 = getdvarint("townhoused_baby_deaths", 0);
+  var_10++;
+  setDvar("townhoused_baby_deaths", var_10);
+  var_11 = 0;
 
   if(isalive(self.mom)) {
-    var11 = 1;
+    var_11 = 1;
     self notify("damage", 100, level.player);
   }
 
-  if(var10 > 2) {
+  if(var_10 > 2) {
     scripts\sp\player_death::set_custom_death_quote(21);
     scripts\sp\analytics::analytics_obj_failed();
     level.missionfailed = 1;
@@ -4372,14 +4372,14 @@ function postspawn_baby_mom() {
   thread baby_mom_death_cleanup();
   thread scripts\sp\maps\townhoused\townhoused_code::do_sound_on_death("dx_vom_aqf3_4th_floor_bedroom_98");
   level.baby_mom = self;
-  var0 = getEnt("baby", "targetname");
-  var0 scripts\engine\sp\utility::assign_animtree("baby");
-  self.baby = var0;
-  var0.mom = self;
+  var_0 = getEnt("baby", "targetname");
+  var_0 scripts\engine\sp\utility::assign_animtree("baby");
+  self.baby = var_0;
+  var_0.mom = self;
   thread baby_death();
   thread baby_mom_ondamage();
-  var1 = scripts\engine\utility::getStruct("baby_room_animnode", "targetname");
-  var1 scripts\common\anim::anim_first_frame([self, self.baby], "grab_baby");
+  var_1 = scripts\engine\utility::getStruct("baby_room_animnode", "targetname");
+  var_1 scripts\common\anim::anim_first_frame([self, self.baby], "grab_baby");
   scripts\engine\utility::flag_wait("baby_mom_go");
   thread baby_mom_add_collision_head();
   thread scripts\sp\maps\townhoused\townhoused_code::train_go("south");
@@ -4395,21 +4395,21 @@ function baby_mom_ondamage() {
   self.damageshield = 1;
 
   while(self.damageshield) {
-    self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-    if(isDefined(var9) && var9.basename == "flash") {
+    if(isDefined(var_9) && var_9.basename == "flash") {
       if(self.health > 0) {
-        self.health += var0;
+        self.health += var_0;
       }
 
       continue;
     }
 
-    if(isDefined(var4) && var4 == "MOD_MELEE") {
+    if(isDefined(var_4) && var_4 == "MOD_MELEE") {
       continue;
     }
 
-    if(var1 != level.player) {
+    if(var_1 != level.player) {
       continue;
     }
 
@@ -4419,39 +4419,39 @@ function baby_mom_ondamage() {
     }
 
     self.damageshield = 0;
-    self dodamage(var0, var1 getEye(), var1, undefined, var4, var9);
+    self dodamage(var_0, var_1 getEye(), var_1, undefined, var_4, var_9);
   }
 }
 
 function baby_mom_playdeath() {
   self.scriptedisalive = 0;
   self notify("scripted_death");
-  var0 = scripts\engine\utility::getStruct("baby_room_animnode", "targetname");
+  var_0 = scripts\engine\utility::getStruct("baby_room_animnode", "targetname");
 
   if(scripts\engine\utility::ent_flag("can_fastforward")) {
-    var1 = scripts\engine\utility::getanim("grab_baby");
-    var2 = self.baby scripts\engine\utility::getanim("grab_baby");
-    var3 = self getanimtime(var1);
-    var4 = getnotetracktimes(var1, "can_die");
-    var5 = var4[0];
+    var_1 = scripts\engine\utility::getanim("grab_baby");
+    var_2 = self.baby scripts\engine\utility::getanim("grab_baby");
+    var_3 = self getanimtime(var_1);
+    var_4 = getnotetracktimes(var_1, "can_die");
+    var_5 = var_4[0];
 
-    if(var3 < var5) {
-      self setanimrate(var1, 2.5);
-      self.baby setanimrate(var2, 2.5);
+    if(var_3 < var_5) {
+      self setanimrate(var_1, 2.5);
+      self.baby setanimrate(var_2, 2.5);
       self waittillmatch("single anim", "can_die");
     }
   }
 
   self.baby scripts\engine\sp\utility::anim_stopanimScripted();
-  var0 thread scripts\common\anim::anim_single_solo(self.baby, self.deathanime);
+  var_0 thread scripts\common\anim::anim_single_solo(self.baby, self.deathanime);
   self.skipdeathanim = 1;
-  var0 scripts\common\anim::anim_single_solo(self, self.deathanime);
+  var_0 scripts\common\anim::anim_single_solo(self, self.deathanime);
   self.diequietly = 1;
-  var6 = scripts\engine\sp\utility::get_living_ai("bravo4_4", "animname");
+  var_6 = scripts\engine\sp\utility::get_living_ai("bravo4_4", "animname");
 
   if(self.deathanime == "grab_baby_stand_death") {
-    if(isDefined(var6.momdeathreact_anime)) {
-      if(var6.momdeathreact_anime == "grab_baby_death_interrupt") {
+    if(isDefined(var_6.momdeathreact_anime)) {
+      if(var_6.momdeathreact_anime == "grab_baby_death_interrupt") {
         thread baby_idle_relative(self.baby);
         self.diequietly = 1;
         scripts\sp\maps\townhoused\townhoused_anim::kill_me_no_anim(self);
@@ -4459,18 +4459,18 @@ function baby_mom_playdeath() {
       }
     }
 
-    var7 = "grab_baby_pickup_early";
-    self.baby thread scripts\sp\maps\townhoused\townhoused_anim::baby_pickup_by_allyanim(var0, var7);
-    var0 thread scripts\common\anim::anim_single_solo(self, var7);
-    var6 = scripts\engine\sp\utility::get_living_ai("bravo4_4", "animname");
-    var3 = var6 getanimtime(var6 scripts\engine\utility::getanim(var7));
+    var_7 = "grab_baby_pickup_early";
+    self.baby thread scripts\sp\maps\townhoused\townhoused_anim::baby_pickup_by_allyanim(var_0, var_7);
+    var_0 thread scripts\common\anim::anim_single_solo(self, var_7);
+    var_6 = scripts\engine\sp\utility::get_living_ai("bravo4_4", "animname");
+    var_3 = var_6 getanimtime(var_6 scripts\engine\utility::getanim(var_7));
 
-    if(var3 > 0) {
+    if(var_3 > 0) {
       waitframe();
-      self setanimtime(scripts\engine\utility::getanim(var7), var3);
-      var8 = getanimlength(var6 scripts\engine\utility::getanim(var7)) * var3;
-      var9 = var8 / getanimlength(self.baby scripts\engine\utility::getanim(var7));
-      self.baby setanimtime(self.baby scripts\engine\utility::getanim(var7), var9);
+      self setanimtime(scripts\engine\utility::getanim(var_7), var_3);
+      var_8 = getanimlength(var_6 scripts\engine\utility::getanim(var_7)) * var_3;
+      var_9 = var_8 / getanimlength(self.baby scripts\engine\utility::getanim(var_7));
+      self.baby setanimtime(self.baby scripts\engine\utility::getanim(var_7), var_9);
       return;
     }
 
@@ -4486,39 +4486,39 @@ function baby_mom_add_collision_head() {
 
 function baby_mom_prior_dialog() {
   level endon("baby_mom_go");
-  var0 = scripts\engine\utility::getStruct("fake_bed_guy_vo", "targetname");
-  var1 = scripts\engine\utility::spawn_script_origin(var0.origin);
-  var1.animname = "tempEnt_guy";
-  var0 = scripts\engine\utility::getStruct("fake_baby_mom_vo", "targetname");
-  var2 = scripts\engine\utility::spawn_script_origin(var0.origin);
-  var2.animname = "tempEnt_girl";
+  var_0 = scripts\engine\utility::getStruct("fake_bed_guy_vo", "targetname");
+  var_1 = scripts\engine\utility::spawn_script_origin(var_0.origin);
+  var_1.animname = "tempEnt_guy";
+  var_0 = scripts\engine\utility::getStruct("fake_baby_mom_vo", "targetname");
+  var_2 = scripts\engine\utility::spawn_script_origin(var_0.origin);
+  var_2.animname = "tempEnt_girl";
   scripts\engine\utility::flag_wait("half_up_3f_stairs");
-  thread stopsounds_on_notify(var2);
-  baby_mom_prior_dialog_internal(var1, var2);
+  thread stopsounds_on_notify(var_2);
+  baby_mom_prior_dialog_internal(var_1, var_2);
   scripts\engine\utility::flag_wait("stairtrain3_done");
   wait 1;
-  var1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq4_4th_floor_aq_convo5_50");
-  var2 playSound("dx_vom_aqf3_4th_floor_aq_convo5_60");
+  var_1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq4_4th_floor_aq_convo5_50");
+  var_2 playSound("dx_vom_aqf3_4th_floor_aq_convo5_60");
 }
 
-function stopsounds_on_notify(var0) {
-  scripts\engine\utility::waittill_any_ents(self, var0, level, var0);
+function stopsounds_on_notify(var_0) {
+  scripts\engine\utility::waittill_any_ents(self, var_0, level, var_0);
   self stopsounds();
 }
 
-function baby_mom_prior_dialog_internal(var0, var1) {
+function baby_mom_prior_dialog_internal(var_0, var_1) {
   if(scripts\engine\utility::flag("stairtrain3_done")) {
     return;
   }
 
   level endon("stairtrain3_done");
-  var1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aqf3_4th_floor_aq_convo5_10");
+  var_1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aqf3_4th_floor_aq_convo5_10");
   wait 0.5;
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq4_4th_floor_aq_convo5_20");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq4_4th_floor_aq_convo5_20");
   wait 0.2;
-  var1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aqf3_4th_floor_aq_convo5_30");
+  var_1 scripts\engine\sp\utility::smart_dialogue("dx_vom_aqf3_4th_floor_aq_convo5_30");
   wait 0.6;
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq4_4th_floor_aq_convo5_40");
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_aq4_4th_floor_aq_convo5_40");
 }
 
 function baby_mom_death_cleanup() {
@@ -4531,146 +4531,146 @@ function baby_mom_death_cleanup() {
   if(isDefined(self.linkedents)) {
     self.linkedents = scripts\engine\utility::array_removeundefined(self.linkedents);
 
-    foreach(var1 in self.linkedents) {
-      var1 delete();
+    foreach(var_1 in self.linkedents) {
+      var_1 delete();
     }
 
     return;
   }
 }
 
-function baby_idle_relative(var0) {
+function baby_idle_relative(var_0) {
   self endon("death");
   self clearanim(scripts\engine\utility::getanim("root"), 0.2);
   scripts\engine\sp\utility::anim_stopanimScripted();
 
-  if(!isDefined(var0)) {
-    var0 = "baby_idle";
+  if(!isDefined(var_0)) {
+    var_0 = "baby_idle";
   }
 
-  var1 = scripts\engine\utility::getanim(var0);
-  var2 = getanimlength(var1);
+  var_1 = scripts\engine\utility::getanim(var_0);
+  var_2 = getanimlength(var_1);
 
   if(isDefined(level.babycry_hard_start)) {
-    var3 = 0;
-    var4 = (gettime() - level.babycry_hard_start) * 0.001;
-    var4 %= var2;
-    var5 = var4 / var2;
-    self setflaggedanim("baby_idle_anim", var1, 0.1);
-    self setanimtime(var1, var5);
+    var_3 = 0;
+    var_4 = (gettime() - level.babycry_hard_start) * 0.001;
+    var_4 %= var_2;
+    var_5 = var_4 / var_2;
+    self setflaggedanim("baby_idle_anim", var_1, 0.1);
+    self setanimtime(var_1, var_5);
   }
 
-  thread baby_blend_idle(var1);
+  thread baby_blend_idle(var_1);
 }
 
-function baby_blend_idle(var0) {
-  var1 = 40;
-  var2 = 0.05;
-  var3 = 0;
+function baby_blend_idle(var_0) {
+  var_1 = 40;
+  var_2 = 0.05;
+  var_3 = 0;
 
-  for(var4 = 0; var4 < var1; var4++) {
+  for(var_4 = 0; var_4 < var_1; var_4++) {
     waitframe();
-    var3 = var4 * var2;
-    self setanim(var0, var3);
+    var_3 = var_4 * var_2;
+    self setanim(var_0, var_3);
   }
 
-  self setanim(var0, 1);
+  self setanim(var_0, 1);
 }
 
 function print_notetrack() {
   for(;;) {
-    self waittill("baby_idle_anim", var0);
+    self waittill("baby_idle_anim", var_0);
   }
 }
 
 function baby_mobile_stay_active() {
-  var0 = getEnt("baby", "targetname");
-  var1 = var0.origin + (0, 0, 30);
+  var_0 = getEnt("baby", "targetname");
+  var_1 = var_0.origin + (0, 0, 30);
 
   for(;;) {
     wait 2;
-    radiusdamage(var1, 25, 1, 0, undefined, "MOD_RIFLE_BULLET", undefined, 1);
+    radiusdamage(var_1, 25, 1, 0, undefined, "MOD_RIFLE_BULLET", undefined, 1);
   }
 }
 
 function baby_mom_anim() {
   self endon("death");
   self endon("scripted_death");
-  var0 = scripts\sp\maps\townhoused\townhoused_anim::baby_mom_anim_random();
-  var1 = scripts\engine\utility::getStruct("baby_room_animnode", "targetname");
-  var2 = undefined;
+  var_0 = scripts\sp\maps\townhoused\townhoused_anim::baby_mom_anim_random();
+  var_1 = scripts\engine\utility::getStruct("baby_room_animnode", "targetname");
+  var_2 = undefined;
 
-  if(var0 == "grab_baby") {
-    var2 = scripts\engine\sp\utility::get_living_ai("bravo4_4", "animname");
-    var2 scripts\engine\utility::ent_flag_waitopen("stairtrain_on");
+  if(var_0 == "grab_baby") {
+    var_2 = scripts\engine\sp\utility::get_living_ai("bravo4_4", "animname");
+    var_2 scripts\engine\utility::ent_flag_waitopen("stairtrain_on");
 
     if(!scripts\engine\utility::flag("fourth_floor_bravo4_4_ready")) {
       waitframe();
-      var3 = scripts\sp\door::get_interactive_door("4thfloor_bathroom_door");
-      var4 = 5;
-      var3 setanimrate(var3 scripts\engine\utility::getanim("baby_mom_arrive"), var4);
-      var2 setanimrate(var2 scripts\engine\utility::getanim("baby_mom_arrive"), var4);
+      var_3 = scripts\sp\door::get_interactive_door("4thfloor_bathroom_door");
+      var_4 = 5;
+      var_3 setanimrate(var_3 scripts\engine\utility::getanim("baby_mom_arrive"), var_4);
+      var_2 setanimrate(var_2 scripts\engine\utility::getanim("baby_mom_arrive"), var_4);
     }
 
     scripts\engine\utility::flag_wait("fourth_floor_bravo4_4_ready");
-    var5 = scripts\engine\utility::getStruct("4thfloor_bathroom_animnode", "targetname");
-    var5 notify("stop_loop_" + var2.animname);
-    var2.linkedents["head"] = scripts\sp\maps\townhoused\townhoused_code::quick_spawn_model("collision_head");
-    var2.linkedents["head"] linkTo(var2, "j_head", (0, 0, 0), (0, 0, 0));
-    var2 scripts\engine\sp\utility::anim_stopanimScripted();
-    var2.uprightcqbidle = 1;
-    thread baby_mom_death_react(var2);
-    var2 = scripts\engine\sp\utility::get_living_ai("bravo4_4", "animname");
-    var6 = [var2, self];
+    var_5 = scripts\engine\utility::getStruct("4thfloor_bathroom_animnode", "targetname");
+    var_5 notify("stop_loop_" + var_2.animname);
+    var_2.linkedents["head"] = scripts\sp\maps\townhoused\townhoused_code::quick_spawn_model("collision_head");
+    var_2.linkedents["head"] linkTo(var_2, "j_head", (0, 0, 0), (0, 0, 0));
+    var_2 scripts\engine\sp\utility::anim_stopanimScripted();
+    var_2.uprightcqbidle = 1;
+    thread baby_mom_death_react(var_2);
+    var_2 = scripts\engine\sp\utility::get_living_ai("bravo4_4", "animname");
+    var_6 = [var_2, self];
     thread baby_mom_dialog(level, self);
   } else {
-    var6 = [self];
+    var_6 = [self];
   }
 
-  var7 = scripts\sp\maps\townhoused\townhoused_anim::baby_mom_anim_get(var1);
+  var_7 = scripts\sp\maps\townhoused\townhoused_anim::baby_mom_anim_get(var_1);
   scripts\engine\utility::flag_set("baby_mom_playerclip");
-  var8 = var6;
-  var8 = scripts\engine\utility::array_add(var6, self.baby);
+  var_8 = var_6;
+  var_8 = scripts\engine\utility::array_add(var_6, self.baby);
   self.baby.state = "intro";
-  var2 thread scripts\common\anim::anim_single(var8, var7.startanime);
-  var9 = var7.idleanime;
-  var10 = undefined;
+  var_2 thread scripts\common\anim::anim_single(var_8, var_7.startanime);
+  var_9 = var_7.idleanime;
+  var_10 = undefined;
 
-  if(isDefined(var7.fnanimbranch)) {
+  if(isDefined(var_7.fnanimbranch)) {
     self.team = "axis";
 
-    if(![[var7.fnanimbranch]]()) {
-      var10 = var7.startanime_a;
+    if(![[var_7.fnanimbranch]]()) {
+      var_10 = var_7.startanime_a;
     } else {
-      var10 = var7.startanime_b;
-      var9 = var7.idleanime_b;
+      var_10 = var_7.startanime_b;
+      var_9 = var_7.idleanime_b;
     }
   }
 
-  var2 waittill(var7.startanime);
+  var_2 waittill(var_7.startanime);
   scripts\engine\utility::ent_flag_clear("can_fastforward");
 
-  if(isDefined(var10)) {
-    var2 scripts\common\anim::anim_single(var8, var10);
+  if(isDefined(var_10)) {
+    var_2 scripts\common\anim::anim_single(var_8, var_10);
   }
 
-  thread baby_mom_idle_react(var2, var7);
+  thread baby_mom_idle_react(var_2, var_7);
   self.baby.state = "idle";
-  var8 = [self, self.baby];
-  var2 thread scripts\common\anim::anim_loop(var8, var7.idleanime, "stop_baby_mom_idle");
-  var2 thread scripts\common\anim::anim_loop_solo(var6, var7.idleanime, "stop_loop_bravo4_4");
+  var_8 = [self, self.baby];
+  var_2 thread scripts\common\anim::anim_loop(var_8, var_7.idleanime, "stop_baby_mom_idle");
+  var_2 thread scripts\common\anim::anim_loop_solo(var_6, var_7.idleanime, "stop_loop_bravo4_4");
 }
 
-function highlight_all_ents(var0) {
+function highlight_all_ents(var_0) {
   for(;;) {
-    if(isDefined(var0)) {
-      var1 = var0;
+    if(isDefined(var_0)) {
+      var_1 = var_0;
     } else {
-      var1 = getEntArray();
+      var_1 = getEntArray();
     }
 
-    foreach(var3 in var1) {
-      if(!isDefined(var3) || !isDefined(var3.targetname)) {}
+    foreach(var_3 in var_1) {
+      if(!isDefined(var_3) || !isDefined(var_3.targetname)) {}
     }
 
     waitframe();
@@ -4683,39 +4683,39 @@ function stop_sounds_on_death() {
   self stopsounds();
 }
 
-function baby_mom_dialog(var0, var1) {
+function baby_mom_dialog(var_0, var_1) {
   level.player endon("death");
-  var0 endon("death");
-  var0 endon("scripted_death");
+  var_0 endon("death");
+  var_0 endon("scripted_death");
   thread stop_sounds_on_death();
   wait 0.6;
   level.player thread scripts\engine\sp\utility::smart_player_dialogue("dx_vom_kyle_4th_floor_bedroom_73");
   wait 4.6;
-  var1 thread scripts\engine\sp\utility::smart_dialogue("dx_vom_a12_4th_floor_bedroom_72");
+  var_1 thread scripts\engine\sp\utility::smart_dialogue("dx_vom_a12_4th_floor_bedroom_72");
   wait 0.4;
-  var2 = getEnt("baby", "targetname");
-  var3 = distance2dsquared(level.player.origin, var2.origin) < 30000;
-  var4 = scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var2.origin, cos(15));
+  var_2 = getEnt("baby", "targetname");
+  var_3 = distance2dsquared(level.player.origin, var_2.origin) < 30000;
+  var_4 = scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_2.origin, cos(15));
 
-  if(var3 && var4) {
-    level.player thread scripts\engine\sp\utility::player_gesture_combat("ges_baby_handsup", var2);
+  if(var_3 && var_4) {
+    level.player thread scripts\engine\sp\utility::player_gesture_combat("ges_baby_handsup", var_2);
   }
 
   wait 1.4;
-  var5 = scripts\sp\door::get_interactive_door("baby_room_exit");
+  var_5 = scripts\sp\door::get_interactive_door("baby_room_exit");
 
-  if(var5.ajar || var5.bashed) {
+  if(var_5.ajar || var_5.bashed) {
     level notify("finished_baby_mom_vo");
     return;
   }
 
-  var5 endon("ajar");
-  var5 endon("bashed");
+  var_5 endon("ajar");
+  var_5 endon("bashed");
   thread scripts\engine\sp\utility::smart_player_dialogue("dx_vom_kyle_4th_floor_bedroom_80");
   wait 0.8;
-  var6 = gettime();
+  var_6 = gettime();
 
-  while(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var2.origin, cos(15)) && !scripts\engine\utility::time_has_passed(var6, 2)) {
+  while(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_2.origin, cos(15)) && !scripts\engine\utility::time_has_passed(var_6, 2)) {
     waitframe();
   }
 
@@ -4724,17 +4724,17 @@ function baby_mom_dialog(var0, var1) {
   level notify("finished_baby_mom_vo");
 }
 
-function baby_mom_idle_react(var0, var1) {
+function baby_mom_idle_react(var_0, var_1) {
   self endon("death");
   self endon("scripted_death");
-  var2 = [];
-  GscBinSkip0(0x2e, var2.size, "dx_vom_aqf3_4th_floor_bedroom_94");
+  var_2 = [];
+  GscBinSkip0(0x2e, var_2.size, "dx_vom_aqf3_4th_floor_bedroom_94");
 }
 
-function baby_mom_death_react(var0) {
-  self.mom = var0;
-  var0 scripts\engine\utility::waittill_either("death", "scripted_death");
-  var0.baby setlookattext("", &"");
+function baby_mom_death_react(var_0) {
+  self.mom = var_0;
+  var_0 scripts\engine\utility::waittill_either("death", "scripted_death");
+  var_0.baby setlookattext("", &"");
   thread baby_cry_hard();
   thread baby_mom_death_dialogue();
 
@@ -4742,22 +4742,22 @@ function baby_mom_death_react(var0) {
     return;
   }
 
-  var1 = scripts\engine\utility::getStruct("baby_room_animnode", "targetname");
-  var1 notify("stop_baby_mom_idle");
-  var1 notify("stop_loop_bravo4_4");
+  var_1 = scripts\engine\utility::getStruct("baby_room_animnode", "targetname");
+  var_1 notify("stop_baby_mom_idle");
+  var_1 notify("stop_loop_bravo4_4");
   scripts\engine\sp\utility::anim_stopanimScripted();
 
   if(self.momdeathreact_anime == "grab_baby_death_interrupt") {
-    var2 = spawnStruct();
-    var2.origin = self.origin;
-    var2.angles = self.angles + (0, 30, 0);
-    var2 scripts\common\anim::anim_single_solo(self, self.momdeathreact_anime);
+    var_2 = spawnStruct();
+    var_2.origin = self.origin;
+    var_2.angles = self.angles + (0, 30, 0);
+    var_2 scripts\common\anim::anim_single_solo(self, self.momdeathreact_anime);
     scripts\common\anim::anim_loop_solo(self, "grab_baby_stand_death_idle");
   } else if(self.momdeathreact_anime == "grab_baby_stand_death") {
-    var1 scripts\common\anim::anim_single_solo(self, self.momdeathreact_anime);
+    var_1 scripts\common\anim::anim_single_solo(self, self.momdeathreact_anime);
     scripts\common\anim::anim_loop_solo(self, "grab_baby_stand_death_idle");
   } else {
-    var1 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(self, self.momdeathreact_anime);
+    var_1 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(self, self.momdeathreact_anime);
   }
 
   self setgoalpos(self.origin);
@@ -4772,114 +4772,114 @@ function baby_mom_death_dialogue() {
 
 function postspawn_bed_guy() {
   self endon("death");
-  var0 = scripts\sp\utility::make_weapon("iw8_sm_mpapa7");
-  scripts\anim\shared::forceuseweapon(var0, "primary");
+  var_0 = scripts\sp\utility::make_weapon("iw8_sm_mpapa7");
+  scripts\anim\shared::forceuseweapon(var_0, "primary");
   thread bed_guy_sight_thread(level);
   self.nofacialfiller = 1;
   self.allowdeath = 1;
   self.animname = "bed_guy";
-  var1 = scripts\engine\utility::getStruct("bed_guy_animnode", "targetname");
-  var1 thread scripts\common\anim::anim_loop_solo(self, "corner_idle");
+  var_1 = scripts\engine\utility::getStruct("bed_guy_animnode", "targetname");
+  var_1 thread scripts\common\anim::anim_loop_solo(self, "corner_idle");
   scripts\engine\utility::flag_wait("bed_guy_go");
   thread scripts\engine\sp\utility::smart_dialogue("dx_vom_aq1_4th_floor_bedroom_97");
-  var1 notify("stop_loop");
-  var2 = "hide_under_bed";
-  var1 scripts\common\anim::anim_single_solo(self, var2);
+  var_1 notify("stop_loop");
+  var_2 = "hide_under_bed";
+  var_1 scripts\common\anim::anim_single_solo(self, var_2);
   self.useeyetoshoot = 1;
   GscBinSkip1(0x45, "left", 25, self);
 }
 
 function bed_guy_flash() {
   self endon("death");
-  var0 = scripts\engine\utility::getanim("under_bed_flash_knob");
-  var1 = scripts\engine\utility::getanim("under_bed_flash");
+  var_0 = scripts\engine\utility::getanim("under_bed_flash_knob");
+  var_1 = scripts\engine\utility::getanim("under_bed_flash");
 
   for(;;) {
     self waittill("flashbang");
     self.scriptedflashed = 1;
-    self aisetanimlimited(var0, 1, 0.2);
-    self setflaggedanimknoblimitedrestart("flash_anim", var1, 1, 0.2);
+    self aisetanimlimited(var_0, 1, 0.2);
+    self setflaggedanimknoblimitedrestart("flash_anim", var_1, 1, 0.2);
     self waittillmatch("flash_anim", "end");
     self.scriptedflashed = 0;
-    self aisetanimlimited(var0, 0, 0.2);
+    self aisetanimlimited(var_0, 0, 0.2);
   }
 }
 
 function demo_trigger_damage() {
   self endon("death");
-  var0 = getEnt("bedguy_damage_trigger", "targetname");
+  var_0 = getEnt("bedguy_damage_trigger", "targetname");
 
-  for(var1 = 0; var1 < 2; var1++) {
-    var0 waittill("damage");
+  for(var_1 = 0; var_1 < 2; var_1++) {
+    var_0 waittill("damage");
   }
 
   self kill();
 }
 
-function testing_weapon_collision(var0) {
+function testing_weapon_collision(var_0) {
   setDvar("scr_drop_bedguy_weapon", 0);
 
   for(;;) {
     if(getdvarint("scr_drop_bedguy_weapon") > 0) {
       setDvar("scr_drop_bedguy_weapon", 0);
-      var1 = level.player getplayerangles();
-      var2 = anglesToForward(var1);
-      var3 = level.player getEye() + var2 * 30;
-      var4 = spawn("weapon_" + createheadicon(var0), var3);
-      var4.angles = var1;
+      var_1 = level.player getplayerangles();
+      var_2 = anglesToForward(var_1);
+      var_3 = level.player getEye() + var_2 * 30;
+      var_4 = spawn("weapon_" + createheadicon(var_0), var_3);
+      var_4.angles = var_1;
     }
 
     waitframe();
   }
 }
 
-function bed_guy_target(var0) {
-  var0 endon("death");
+function bed_guy_target(var_0) {
+  var_0 endon("death");
 
   if(istrue(level.demo)) {
-    var0.dontevershoot = 1;
-    var0 scripts\engine\utility::delaythread(1, &scripts\engine\sp\utility::disable_dontevershoot);
+    var_0.dontevershoot = 1;
+    var_0 scripts\engine\utility::delaythread(1, &scripts\engine\sp\utility::disable_dontevershoot);
   }
 
-  var1 = 32;
-  var2 = 10;
-  var3 = spawn("script_origin", level.player.origin);
-  var3 makeentitysentient("allies");
-  var0.favoriteenemy = var3;
-  var3.health = 100;
+  var_1 = 32;
+  var_2 = 10;
+  var_3 = spawn("script_origin", level.player.origin);
+  var_3 makeentitysentient("allies");
+  var_0.favoriteenemy = var_3;
+  var_3.health = 100;
 
-  while(isalive(var0)) {
-    var4 = vectorNormalize(scripts\engine\utility::flat_origin(var0 getEye()) - scripts\engine\utility::flat_origin(level.player.origin));
-    var3.origin = level.player.origin + var4 * var1 + (0, 0, var2);
+  while(isalive(var_0)) {
+    var_4 = vectorNormalize(scripts\engine\utility::flat_origin(var_0 getEye()) - scripts\engine\utility::flat_origin(level.player.origin));
+    var_3.origin = level.player.origin + var_4 * var_1 + (0, 0, var_2);
     waitframe();
   }
 
-  var3 delete();
+  var_3 delete();
 }
 
 function fourth_floor_price_movement() {
   scripts\engine\utility::flag_wait("bed_guy_go");
-  var0 = scripts\engine\utility::getStruct("baby_mom_door_animnode", "targetname");
-  var0 notify("stop_loop_" + level.price.animname);
+  var_0 = scripts\engine\utility::getStruct("baby_mom_door_animnode", "targetname");
+  var_0 notify("stop_loop_" + level.price.animname);
   thread fourth_floor_price_open_door();
   level.price scripts\engine\sp\utility::anim_stopanimScripted();
-  var1 = getnode("price_4th_floor", "targetname");
-  level.price scripts\sp\maps\townhoused\townhoused_code::scripted_movement(var1, 1);
+  var_1 = getnode("price_4th_floor", "targetname");
+  level.price scripts\sp\maps\townhoused\townhoused_code::scripted_movement(var_1, 1);
   level.price notify("stop_fourth_floor_price_open_door");
-  var2 = scripts\engine\sp\utility::get_living_ai("bed_guy", "animname");
+  var_2 = scripts\engine\sp\utility::get_living_ai("bed_guy", "animname");
 
-  if(isalive(var2)) {
+  if(isalive(var_2)) {
     level.price.ignoreall = 0;
     level.price.dontevershoot = 0;
-    var3 = var2 gettagorigin("tag_eye");
-    var4 = vectorNormalize(level.price getEye() - var3);
-    var3 = var3 + var4 * 30 + (0, 0, -5);
-    var5 = spawn("script_origin", var3);
-    var5 makeentitysentient("axis");
-    level.price.favoriteenemy = var5;
-    var2 waittill("death");
+    var_3 = var_2 gettagorigin("tag_eye");
+    var_4 = vectorNormalize(level.price getEye() - var_3);
+    var_3 = var_3 + var_4 * 30 + (0, 0, -5);
+    var_5 = spawn("script_origin", var_3);
+    var_5 makeentitysentient("axis");
+    level.price.favoriteenemy = var_5;
+    var_2 waittill("death");
     wait 0.2;
-    var5 delete();
+    var_5 delete();
     level.price.dontevershoot = 1;
     return;
   }
@@ -4887,14 +4887,14 @@ function fourth_floor_price_movement() {
 
 function fourth_floor_price_open_door() {
   level.price endon("stop_fourth_floor_price_open_door");
-  var0 = scripts\sp\door::get_interactive_door("baby_room_exit");
-  var0 scripts\sp\door::add_pushent(self);
+  var_0 = scripts\sp\door::get_interactive_door("baby_room_exit");
+  var_0 scripts\sp\door::add_pushent(self);
 
   for(;;) {
     if(isDefined(self._blackboard.doortoopen) && self._blackboard.doortoopen.targetname == "baby_room_exit") {
-      var0 = self._blackboard.doortoopen;
+      var_0 = self._blackboard.doortoopen;
       self._blackboard.doortoopen = undefined;
-      scripts\sp\maps\townhoused\townhoused_code::ai_try_open_door(var0);
+      scripts\sp\maps\townhoused\townhoused_code::ai_try_open_door(var_0);
       return;
     }
 
@@ -4902,15 +4902,15 @@ function fourth_floor_price_open_door() {
   }
 }
 
-function bed_guy_sight_thread(var0) {
-  var0 endon("death");
+function bed_guy_sight_thread(var_0) {
+  var_0 endon("death");
 
   for(;;) {
     waitframe();
-    var1 = var0 gettagorigin("tag_eye");
-    var2 = level.player getEye();
+    var_1 = var_0 gettagorigin("tag_eye");
+    var_2 = level.player getEye();
 
-    if(scripts\engine\utility::within_fov(var2, level.player getplayerangles(), var1, 0.939693) && sighttracepassed(level.player getEye(), var1, 0, level.player)) {
+    if(scripts\engine\utility::within_fov(var_2, level.player getplayerangles(), var_1, 0.939693) && sighttracepassed(level.player getEye(), var_1, 0, level.player)) {
       break;
     }
   }
@@ -4923,24 +4923,24 @@ function attic_room() {
   thread setup_ending();
   attic_price_stairtrain();
   scripts\engine\sp\utility::autosave_by_name("attic");
-  var0 = scripts\engine\utility::getStruct("attic_animnode", "targetname");
+  var_0 = scripts\engine\utility::getStruct("attic_animnode", "targetname");
   scripts\engine\sp\utility::spawn_script_noteworthy("attic_enemy", 1);
   thread attic_enemy_death_vo();
   thread attic_open_door();
-  var0 notify("stop_attic_arrival_loop");
-  var0 thread scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(level.price, "attic_door_open", undefined, "stop_attic_door_open_loop");
+  var_0 notify("stop_attic_arrival_loop");
+  var_0 thread scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(level.price, "attic_door_open", undefined, "stop_attic_door_open_loop");
   level.attic_enemy scripts\engine\sp\utility::smart_dialogue("dx_vom_aqf4_attic_standoff_02");
-  var1 = ["dx_vom_pri_attic_breach_20", "dx_vom_pri_attic_breach_30", "dx_vom_pri_attic_breach_40"];
-  level.price thread scripts\sp\maps\townhoused\townhoused_code::nag(var1, "saw_attic_enemy", 12, 15);
+  var_1 = ["dx_vom_pri_attic_breach_20", "dx_vom_pri_attic_breach_30", "dx_vom_pri_attic_breach_40"];
+  level.price thread scripts\sp\maps\townhoused\townhoused_code::nag(var_1, "saw_attic_enemy", 12, 15);
   level.attic_enemy.anim_smartdialog_func = &attic_enemy_smartdialog;
   level.attic_enemy thread scripts\sp\maps\townhoused\townhoused_code::flash_react_thread(["woman_flashbang_friendly_3", "woman_flashbang_friendly_4"]);
   thread attic_trigger_damage_thread();
-  var0 thread scripts\common\anim::anim_loop_solo(level.attic_enemy, "start_idle", "stop_attic_loop");
+  var_0 thread scripts\common\anim::anim_loop_solo(level.attic_enemy, "start_idle", "stop_attic_loop");
   level.attic_enemy.allowdeath = 1;
   attic_player_sees_enemy();
   level notify("saw_attic_enemy");
   setmusicstate("mx_townhouse_suicide_os");
-  var0 notify("stop_attic_door_open_loop");
+  var_0 notify("stop_attic_door_open_loop");
   level.price scripts\engine\sp\utility::anim_stopanimScripted();
 
   if(istrue(level.price.halliganinhand)) {
@@ -4958,21 +4958,21 @@ function attic_room() {
     level waittill("finished_attic_clear_vo");
   }
 
-  var0 notify("stop_attic_entry_loop");
+  var_0 notify("stop_attic_entry_loop");
   level.price scripts\engine\sp\utility::anim_stopanimScripted();
-  var0 thread scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(level.price, "attic_enemy_death", undefined, "stop_attic_price");
+  var_0 thread scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(level.price, "attic_enemy_death", undefined, "stop_attic_price");
   thread attic_death_dialogue();
 
   if(!level.player scripts\engine\utility::ent_flag("no_gold_achievement")) {
     scripts\sp\utility::giveachievement_wrapper("goldenpath");
   }
 
-  var2 = &"TOWNHOUSED/HINT_PICKUP";
-  var3 = 45;
-  var4 = 100;
-  var5 = 60;
-  var6 = 1;
-  level.clacker scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), var2, var3, var4, var5, var6);
+  var_2 = &"TOWNHOUSED/HINT_PICKUP";
+  var_3 = 45;
+  var_4 = 100;
+  var_5 = 60;
+  var_6 = 1;
+  level.clacker scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), var_2, var_3, var_4, var_5, var_6);
   thread clacker_unusable_thread();
   level.clacker waittill("trigger");
   level.player lerpfovscalefactor(0, 1);
@@ -4994,36 +4994,36 @@ function attic_room() {
 
   level.clacker linkTo(level.player_rig, "tag_accessory_right", (0, 0, 0), (0, 0, 0));
   level.player_rig.customnotetrackhandler = &attic_fov_notetrack;
-  var0 thread scripts\common\anim::anim_single_solo(level.player_rig, "ending");
+  var_0 thread scripts\common\anim::anim_single_solo(level.player_rig, "ending");
   thread ending_bink_init();
-  var7 = "tag_accessory_right";
-  level.price.laptop = scripts\engine\sp\utility::spawn_anim_model("laptop", level.price gettagorigin(var7), level.price gettagangles(var7));
-  level.price.laptop linkTo(level.price, var7, (0, 0, 0), (0, 0, 0));
+  var_7 = "tag_accessory_right";
+  level.price.laptop = scripts\engine\sp\utility::spawn_anim_model("laptop", level.price gettagorigin(var_7), level.price gettagangles(var_7));
+  level.price.laptop linkTo(level.price, var_7, (0, 0, 0), (0, 0, 0));
   thread attic_bink_start();
-  var0 notify("stop_attic_price");
-  var0 thread scripts\common\anim::anim_single_solo(level.price, "ending");
-  var8 = distance2d(level.player.origin, level.clacker.origin);
-  var9 = var5 / 1;
-  var10 = var8 / var9;
-  level.player playerlinktoblend(level.player_rig, "tag_player", var10, 0.2, 0.2);
-  thread lerp_attic_player_viewangle(var10);
-  wait var10;
+  var_0 notify("stop_attic_price");
+  var_0 thread scripts\common\anim::anim_single_solo(level.price, "ending");
+  var_8 = distance2d(level.player.origin, level.clacker.origin);
+  var_9 = var_5 / 1;
+  var_10 = var_8 / var_9;
+  level.player playerlinktoblend(level.player_rig, "tag_player", var_10, 0.2, 0.2);
+  thread lerp_attic_player_viewangle(var_10);
+  wait var_10;
   level.player_rig show();
   level.price waittillmatch("single anim", "end");
-  var0 thread scripts\common\anim::anim_last_frame_solo(level.price, "ending");
+  var_0 thread scripts\common\anim::anim_last_frame_solo(level.price, "ending");
 }
 
 function attic_trigger_damage_thread() {
-  var0 = getEnt("attic_damage_trigger", "targetname");
+  var_0 = getEnt("attic_damage_trigger", "targetname");
   thread trigger_damage_ondamage();
 
   for(;;) {
-    var0 waittill("trigger");
+    var_0 waittill("trigger");
 
-    if(isDefined(var0.triggertype)) {
-      if(var0.triggertype == "frag") {
+    if(isDefined(var_0.triggertype)) {
+      if(var_0.triggertype == "frag") {
         if(isalive(level.attic_enemy)) {
-          level.attic_enemy kill(var0.damagepos, var0.damageattacker, var0.damageattacker, var0.damagemod);
+          level.attic_enemy kill(var_0.damagepos, var_0.damageattacker, var_0.damageattacker, var_0.damagemod);
         }
       }
 
@@ -5039,55 +5039,55 @@ function trigger_damage_ondamage() {
   self endon("death");
 
   for(;;) {
-    self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-    if(isDefined(var9) && var9.basename == "frag" && ispointinvolume(var3, self)) {
-      self.damagepos = var3;
-      self.damagemod = var4;
-      self.damageattacker = var1;
+    if(isDefined(var_9) && var_9.basename == "frag" && ispointinvolume(var_3, self)) {
+      self.damagepos = var_3;
+      self.damagemod = var_4;
+      self.damageattacker = var_1;
       self.triggertype = "frag";
       self notify("trigger");
     }
   }
 }
 
-function lerp_attic_player_viewangle(var0) {
-  wait var0 + 1;
+function lerp_attic_player_viewangle(var_0) {
+  wait var_0 + 1;
   level.player playerlinktodelta(level.player_rig, "tag_player", 1, 0, 0, 0, 0, 1);
   level.player lerpviewangleclamp(2, 0, 0, 10, 20, 20, 10);
 }
 
 function clacker_unusable_thread() {
   self endon("trigger");
-  var0 = 1;
-  var1 = self.origin;
-  var2 = self.origin[2] - 40;
+  var_0 = 1;
+  var_1 = self.origin;
+  var_2 = self.origin[2] - 40;
 
   for(;;) {
-    var3 = 0;
+    var_3 = 0;
 
     if(level.player isgestureplaying()) {
-      var3++;
+      var_3++;
     }
 
     if(!isalive(level.player)) {
-      var3++;
+      var_3++;
     }
 
-    if(level.player.origin[2] < var2) {
-      var3++;
+    if(level.player.origin[2] < var_2) {
+      var_3++;
     }
 
-    if(var3 == 0 && scripts\sp\maps\townhoused\townhoused_code::is_grenade_near_cursor_hint()) {
-      var3++;
+    if(var_3 == 0 && scripts\sp\maps\townhoused\townhoused_code::is_grenade_near_cursor_hint()) {
+      var_3++;
     }
 
-    if(var0 && var3) {
+    if(var_0 && var_3) {
       self.cursor_hint_ent makeunusable();
-      var0 = 0;
-    } else if(!var0 && !var3) {
+      var_0 = 0;
+    } else if(!var_0 && !var_3) {
       self.cursor_hint_ent makeusable();
-      var0 = 1;
+      var_0 = 1;
     }
 
     waitframe();
@@ -5107,15 +5107,15 @@ function attic_death_dialogue() {
   wait 0.2;
   scripts\engine\sp\utility::smart_radio_dialogue("dx_vom_a21_attic_secure_30");
   wait 2.3;
-  var0 = ["dx_vom_pri_attic_secure_50", "dx_vom_pri_attic_secure_60", "dx_vom_pri_attic_secure_70"];
-  level.price scripts\engine\utility::delaythread(5, &scripts\sp\maps\townhoused\townhoused_code::nag, var0, "player_picked_up_clacker", 12, 15);
+  var_0 = ["dx_vom_pri_attic_secure_50", "dx_vom_pri_attic_secure_60", "dx_vom_pri_attic_secure_70"];
+  level.price scripts\engine\utility::delaythread(5, &scripts\sp\maps\townhoused\townhoused_code::nag, var_0, "player_picked_up_clacker", 12, 15);
 }
 
 function attic_bink_start() {
-  var0 = level.price scripts\engine\utility::getanim("ending");
-  var1 = getanimlength(var0);
-  var1 -= 4;
-  wait var1;
+  var_0 = level.price scripts\engine\utility::getanim("ending");
+  var_1 = getanimlength(var_0);
+  var_1 -= 4;
+  wait var_1;
   level.player setclienttriggeraudiozone("fade_to_black", 1.6);
   pausecinematicingame(0);
   wait 1.4;
@@ -5124,41 +5124,41 @@ function attic_bink_start() {
 }
 
 function ending_bink_init() {
-  var0 = scripts\sp\endmission::getlevelindex(level.script);
-  scripts\sp\endmission::setfadetime(var0, 0);
-  var1 = var0 + 1;
-  var2 = scripts\sp\endmission::getlevelbink(var1);
+  var_0 = scripts\sp\endmission::getlevelindex(level.script);
+  scripts\sp\endmission::setfadetime(var_0, 0);
+  var_1 = var_0 + 1;
+  var_2 = scripts\sp\endmission::getlevelbink(var_1);
   level.endmission_bink_skip = 1;
   setsaveddvar("LNSNKKLPLL", "0");
   setsaveddvar("MMRNLMPPLT", "0");
   setsaveddvar("RKMNLRNS", "1");
-  cinematicingame(var2, 1, 1, 1, 0, 0, 1);
+  cinematicingame(var_2, 1, 1, 1, 0, 0, 1);
 }
 
-function attic_fov_notetrack(var0, var1, var2) {}
+function attic_fov_notetrack(var_0, var_1, var_2) {}
 
 function setup_ending() {
-  var0 = scripts\engine\utility::getStruct("attic_animnode", "targetname");
-  var0 scripts\common\anim::anim_first_frame_solo(level.player_rig, "ending");
+  var_0 = scripts\engine\utility::getStruct("attic_animnode", "targetname");
+  var_0 scripts\common\anim::anim_first_frame_solo(level.player_rig, "ending");
   waitframe();
-  var1 = level.player_rig gettagorigin("tag_accessory_right");
-  var2 = level.player_rig gettagangles("tag_accessory_right");
-  level.clacker = scripts\engine\sp\utility::spawn_anim_model("clacker", var1, var2);
+  var_1 = level.player_rig gettagorigin("tag_accessory_right");
+  var_2 = level.player_rig gettagangles("tag_accessory_right");
+  level.clacker = scripts\engine\sp\utility::spawn_anim_model("clacker", var_1, var_2);
 }
 
 function attic_price_anim() {
-  var0 = scripts\sp\door::get_interactive_door("attic_door");
-  level.price scripts\engine\utility::delaythread(1.2, &scripts\sp\maps\townhoused\townhoused_code::force_open_door, var0);
+  var_0 = scripts\sp\door::get_interactive_door("attic_door");
+  level.price scripts\engine\utility::delaythread(1.2, &scripts\sp\maps\townhoused\townhoused_code::force_open_door, var_0);
   scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(level.price, "attic_entry", undefined, "stop_attic_entry_loop");
   level.price scripts\engine\utility::ent_flag_set("attic_enter_anim_done");
 }
 
-function attic_enemy_smartdialog(var0) {
+function attic_enemy_smartdialog(var_0) {
   if(istrue(self.scriptedflashed)) {
     return;
   }
 
-  scripts\engine\sp\utility::smart_dialogue(var0);
+  scripts\engine\sp\utility::smart_dialogue(var_0);
 }
 
 function attic_enemy_anim() {
@@ -5168,10 +5168,10 @@ function attic_enemy_anim() {
   }
 
   if(!isalive(level.attic_enemy) && !level.price scripts\engine\utility::ent_flag("attic_enter_anim_done")) {
-    var0 = level.price scripts\engine\utility::getanim("attic_entry");
+    var_0 = level.price scripts\engine\utility::getanim("attic_entry");
 
-    if(level.price getanimtime(var0) < 0.9) {
-      level.price setanimrate(var0, 2);
+    if(level.price getanimtime(var_0) < 0.9) {
+      level.price setanimrate(var_0, 2);
     }
 
     level.price waittillmatch("single anim", "end");
@@ -5189,12 +5189,12 @@ function attic_enemy_anim() {
 }
 
 function attic_enemy_death_vo() {
-  var0 = spawnStruct();
-  wait_attic_enemy_death(var0);
+  var_0 = spawnStruct();
+  wait_attic_enemy_death(var_0);
   wait 0.8;
   scripts\sp\maps\townhoused\townhoused_code::wait_weapon_fire_cooldown(0.4, 2);
 
-  if(scripts\engine\utility::is_equal(var0.attacker, level.player)) {
+  if(scripts\engine\utility::is_equal(var_0.attacker, level.player)) {
     level.player scripts\engine\sp\utility::smart_player_dialogue("dx_vom_kyle_attic_standoff_40");
   } else {
     level.price scripts\engine\sp\utility::smart_dialogue("dx_vom_pri_attic_standoff_50");
@@ -5204,52 +5204,52 @@ function attic_enemy_death_vo() {
   level notify("finished_attic_clear_vo");
 }
 
-function wait_attic_enemy_death(var0) {
+function wait_attic_enemy_death(var_0) {
   level endon("start_enemy_death");
 
   while(self.health > 0) {
-    self waittill("damage", var1, var2, var3, var4, var5, var6, var7, var8);
+    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 
-    if(!isDefined(var0.attacker) || var0.attacker != level.player) {
-      var0.attacker = var2;
+    if(!isDefined(var_0.attacker) || var_0.attacker != level.player) {
+      var_0.attacker = var_2;
     }
   }
 }
 
 function attic_enemy_early_death() {
-  var0 = level.attic_enemy;
-  var0 endon("death");
-  var0 endon("stop_early_death");
+  var_0 = level.attic_enemy;
+  var_0 endon("death");
+  var_0 endon("stop_early_death");
   level endon("start_enemy_death");
-  var1 = scripts\engine\utility::getStruct("attic_animnode", "targetname");
+  var_1 = scripts\engine\utility::getStruct("attic_animnode", "targetname");
 
-  while(var0.health > 1) {
-    var0 waittill("damage");
+  while(var_0.health > 1) {
+    var_0 waittill("damage");
   }
 
-  var0 stopsounds();
+  var_0 stopsounds();
   setmusicstate("");
 
-  if(var0.damagelocation == "head" || var0.damagelocation == "helmet") {
-    var0 scripts\engine\sp\utility::set_deathanim("attic_enemy_headshot_death");
-    var0 scripts\engine\sp\utility::anim_stopanimScripted();
-    var0 kill(var0.origin, level.player, level.player, var0.damagemod);
+  if(var_0.damagelocation == "head" || var_0.damagelocation == "helmet") {
+    var_0 scripts\engine\sp\utility::set_deathanim("attic_enemy_headshot_death");
+    var_0 scripts\engine\sp\utility::anim_stopanimScripted();
+    var_0 kill(var_0.origin, level.player, level.player, var_0.damagemod);
     return;
   }
 
-  var0 scripts\engine\utility::delaythread(0.05, &scripts\engine\sp\utility::smart_dialogue, "dx_vom_aqf4_attic_standoff_42");
-  var0.early_death = 1;
-  var2 = "attic_enemy_early_long_death";
-  var0 thread scripts\sp\maps\townhoused\townhoused_code::delay_allowdeath(0.4);
-  var0.skipdeathanim = 1;
-  var0 actoraimassistoff();
-  var0 scripts\common\anim::anim_single_solo(var0, "attic_enemy_early_long_death");
+  var_0 scripts\engine\utility::delaythread(0.05, &scripts\engine\sp\utility::smart_dialogue, "dx_vom_aqf4_attic_standoff_42");
+  var_0.early_death = 1;
+  var_2 = "attic_enemy_early_long_death";
+  var_0 thread scripts\sp\maps\townhoused\townhoused_code::delay_allowdeath(0.4);
+  var_0.skipdeathanim = 1;
+  var_0 actoraimassistoff();
+  var_0 scripts\common\anim::anim_single_solo(var_0, "attic_enemy_early_long_death");
 }
 
 function attic_door_triggered() {
-  var0 = scripts\sp\door::get_interactive_door("attic_door");
-  var0 waittill("trigger");
-  var0 notify("stop_open_ability");
+  var_0 = scripts\sp\door::get_interactive_door("attic_door");
+  var_0 waittill("trigger");
+  var_0 notify("stop_open_ability");
   scripts\engine\utility::flag_set("attic_door_used");
   wait 0.4;
   scripts\engine\sp\utility::smart_player_dialogue("dx_vom_kyle_attic_breach_02");
@@ -5263,11 +5263,11 @@ function attic_door_triggered() {
 }
 
 function attic_price_stairtrain() {
-  var0 = scripts\engine\utility::getStruct("attic_animnode", "targetname");
-  var0 scripts\sp\anim::anim_reach_solo(level.price, "attic_stairtrain_arrival");
-  var0 scripts\common\anim::anim_single_solo(level.price, "attic_stairtrain_arrival");
+  var_0 = scripts\engine\utility::getStruct("attic_animnode", "targetname");
+  var_0 scripts\sp\anim::anim_reach_solo(level.price, "attic_stairtrain_arrival");
+  var_0 scripts\common\anim::anim_single_solo(level.price, "attic_stairtrain_arrival");
   level.stairtrain_rearguy = level.price;
-  level.price.animnode = var0;
+  level.price.animnode = var_0;
   level.price scripts\asm\asm_sp::asm_animcustom(&scripts\sp\maps\townhoused\townhoused_code::stairtrain_attic_animcustom);
   waitframe();
 
@@ -5275,27 +5275,27 @@ function attic_price_stairtrain() {
     level.price scripts\engine\utility::ent_flag_waitopen("stairtrain_on");
   }
 
-  var0 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(level.price, "attic_door_arrive", undefined, "stop_attic_arrival_loop");
+  var_0 scripts\sp\maps\townhoused\townhoused_code::anim_then_loop_solo(level.price, "attic_door_arrive", undefined, "stop_attic_arrival_loop");
   level.price_at_attic_door = 1;
-  var1 = ["dx_vom_pri_attic_breach_20", "dx_vom_pri_attic_breach_30", "dx_vom_pri_attic_breach_40"];
-  level.price thread scripts\sp\maps\townhoused\townhoused_code::nag(var1, "attic_door_used", 12, 15);
+  var_1 = ["dx_vom_pri_attic_breach_20", "dx_vom_pri_attic_breach_30", "dx_vom_pri_attic_breach_40"];
+  level.price thread scripts\sp\maps\townhoused\townhoused_code::nag(var_1, "attic_door_used", 12, 15);
   scripts\engine\utility::flag_wait("attic_door_used");
 }
 
 function attic_player_sees_enemy() {
-  var0 = ["tag_eye", "j_ankle_ri", "j_mainroot"];
+  var_0 = ["tag_eye", "j_ankle_ri", "j_mainroot"];
 
   for(;;) {
     if(!isalive(level.attic_enemy)) {
       break;
     }
 
-    var1 = 0;
+    var_1 = 0;
 
-    foreach(var3 in var0) {
-      var4 = level.attic_enemy gettagorigin(var3);
+    foreach(var_3 in var_0) {
+      var_4 = level.attic_enemy gettagorigin(var_3);
 
-      if(sighttracepassed(level.player getEye(), var4, 0, level.player)) {
+      if(sighttracepassed(level.player getEye(), var_4, 0, level.player)) {
         return;
       }
     }
@@ -5305,55 +5305,55 @@ function attic_player_sees_enemy() {
 }
 
 function get_shelfs() {
-  var0 = getEntArray("attic_shelf", "targetname");
+  var_0 = getEntArray("attic_shelf", "targetname");
 
-  foreach(var2 in var0) {
-    var2 notsolid();
-    var2 scripts\engine\sp\utility::assign_animtree(var2.script_animname);
-    add_linkedents(var2);
+  foreach(var_2 in var_0) {
+    var_2 notsolid();
+    var_2 scripts\engine\sp\utility::assign_animtree(var_2.script_animname);
+    add_linkedents(var_2);
 
-    foreach(var4 in var2.linkedents) {
+    foreach(var_4 in var_2.linkedents) {
       thread shelf_movement();
     }
   }
 
-  return var0;
+  return var_0;
 }
 
 function shelf_movement() {
   wait 0.5;
-  var0 = self.origin;
-  var1 = squared(2);
+  var_0 = self.origin;
+  var_1 = squared(2);
 
   for(;;) {
-    var2 = distancesquared(var0, self.origin);
+    var_2 = distancesquared(var_0, self.origin);
 
-    if(var2 > var1) {
-      var3 = sqrt(var2);
-      var4 = vectorNormalize(var0 - self.origin) * var3;
+    if(var_2 > var_1) {
+      var_3 = sqrt(var_2);
+      var_4 = vectorNormalize(var_0 - self.origin) * var_3;
       self unlink();
-      self physicslaunchclient(self.origin, var4);
+      self physicslaunchclient(self.origin, var_4);
       break;
     }
 
-    var0 = self.origin;
+    var_0 = self.origin;
     waitframe();
   }
 }
 
 function add_linkedents() {
-  var0 = getEntArray(self.target, "targetname");
+  var_0 = getEntArray(self.target, "targetname");
 
-  foreach(var2 in var0) {
+  foreach(var_2 in var_0) {
     if(!isDefined(self.linkedents)) {
       self.linkedents = [];
     }
 
-    self.linkedents[self.linkedents.size] = var2;
-    var2 linkTo(self);
+    self.linkedents[self.linkedents.size] = var_2;
+    var_2 linkTo(self);
 
-    if(isDefined(var2.target)) {
-      add_linkedents(var2);
+    if(isDefined(var_2.target)) {
+      add_linkedents(var_2);
     }
   }
 }
@@ -5368,14 +5368,14 @@ function kill_everyone_ending() {
 }
 
 function attic_open_door() {
-  var0 = scripts\engine\utility::getStruct("attic_animnode", "targetname");
-  var1 = scripts\sp\door::get_interactive_door("attic_door");
-  thread prime_attic_door_states(var1.origin + (0, 0, 200));
-  var0 scripts\sp\maps\townhoused\townhoused_code::anim_door(var1, "attic_door_open", undefined, 1);
-  var1 scripts\sp\door_internal::set_pivot_point(1);
-  var1 thread scripts\sp\door_internal::monitor_door_push(0);
-  var1 scripts\sp\door_internal::waittill_second_interact_or_bash();
-  var1 scripts\sp\door::remove_open_ability();
+  var_0 = scripts\engine\utility::getStruct("attic_animnode", "targetname");
+  var_1 = scripts\sp\door::get_interactive_door("attic_door");
+  thread prime_attic_door_states(var_1.origin + (0, 0, 200));
+  var_0 scripts\sp\maps\townhoused\townhoused_code::anim_door(var_1, "attic_door_open", undefined, 1);
+  var_1 scripts\sp\door_internal::set_pivot_point(1);
+  var_1 thread scripts\sp\door_internal::monitor_door_push(0);
+  var_1 scripts\sp\door_internal::waittill_second_interact_or_bash();
+  var_1 scripts\sp\door::remove_open_ability();
   thread remove_prime_ents();
 }
 
@@ -5390,10 +5390,10 @@ function temp_attic_dialogue() {
   level.price thread scripts\engine\sp\utility::smart_dialogue("dx_vom_pri_attic_interior_90");
 }
 
-function prime_attic_door_states(var0) {
+function prime_attic_door_states(var_0) {
   level.primedents = [];
-  level.primedents[level.primedents.size] = scripts\sp\maps\townhoused\townhoused_code::quick_spawn_model("attic_door_damaged", var0);
-  level.primedents[level.primedents.size] = scripts\sp\maps\townhoused\townhoused_code::quick_spawn_model("attic_door_damaged2", var0);
+  level.primedents[level.primedents.size] = scripts\sp\maps\townhoused\townhoused_code::quick_spawn_model("attic_door_damaged", var_0);
+  level.primedents[level.primedents.size] = scripts\sp\maps\townhoused\townhoused_code::quick_spawn_model("attic_door_damaged2", var_0);
 }
 
 function remove_prime_ents() {
@@ -5416,8 +5416,8 @@ function hint_nvg_disable_check() {
 }
 
 function postspawn_attic_enemy() {
-  var0 = scripts\engine\utility::getStruct("attic_animnode", "targetname");
-  var0 scripts\common\anim::anim_first_frame_solo(self, "attic_entry");
+  var_0 = scripts\engine\utility::getStruct("attic_animnode", "targetname");
+  var_0 scripts\common\anim::anim_first_frame_solo(self, "attic_entry");
   self.og_headmodel = self.headmodel;
   self detach(self.headmodel);
   self attach(scripts\engine\sp\utility::getmodel(self.animname + "_head"));
@@ -5434,19 +5434,19 @@ function postspawn_attic_enemy() {
 function nvg_death_hint() {
   scripts\engine\utility::flag_init("player_used_nvgs");
   level.player.nvg.on_func = &player_nvgon;
-  var0 = "townhouse_nvgs_used";
+  var_0 = "townhouse_nvgs_used";
   level.player waittill("death");
 
   if(isDefined(level.custom_death_quote)) {
     return;
   }
 
-  if(getdvarint(var0) > 0) {
+  if(getdvarint(var_0) > 0) {
     return;
   }
 
   if(scripts\engine\utility::flag("player_used_nvgs")) {
-    setDvar(var0, 1);
+    setDvar(var_0, 1);
     scripts\sp\player_death::set_custom_death_quote(15);
     return;
   }

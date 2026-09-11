@@ -3,116 +3,116 @@
  * Script: scripts\mp\utility\print.gsc
 ***********************************************/
 
-function printonteam(var0, var1) {
-  foreach(var3 in level.players) {
-    if(var3.team != var1) {
+function printonteam(var_0, var_1) {
+  foreach(var_3 in level.players) {
+    if(var_3.team != var_1) {
       continue;
     }
 
-    var3 iprintln(var0);
+    var_3 iprintln(var_0);
   }
 }
 
-function printboldonteam(var0, var1) {
-  for(var2 = 0; var2 < level.players.size; var2++) {
-    var3 = level.players[var2];
+function printboldonteam(var_0, var_1) {
+  for(var_2 = 0; var_2 < level.players.size; var_2++) {
+    var_3 = level.players[var_2];
 
-    if(isDefined(var3.pers["team"]) && var3.pers["team"] == var1) {
-      var3 iprintlnbold(var0);
+    if(isDefined(var_3.pers["team"]) && var_3.pers["team"] == var_1) {
+      var_3 iprintlnbold(var_0);
     }
   }
 }
 
-function printboldonteamarg(var0, var1, var2) {
-  for(var3 = 0; var3 < level.players.size; var3++) {
-    var4 = level.players[var3];
+function printboldonteamarg(var_0, var_1, var_2) {
+  for(var_3 = 0; var_3 < level.players.size; var_3++) {
+    var_4 = level.players[var_3];
 
-    if(isDefined(var4.pers["team"]) && var4.pers["team"] == var1) {
-      var4 iprintlnbold(var0, var2);
+    if(isDefined(var_4.pers["team"]) && var_4.pers["team"] == var_1) {
+      var_4 iprintlnbold(var_0, var_2);
     }
   }
 }
 
-function printonteamarg(var0, var1, var2) {
-  for(var3 = 0; var3 < level.players.size; var3++) {
-    var4 = level.players[var3];
+function printonteamarg(var_0, var_1, var_2) {
+  for(var_3 = 0; var_3 < level.players.size; var_3++) {
+    var_4 = level.players[var_3];
 
-    if(isDefined(var4.pers["team"]) && var4.pers["team"] == var1) {
-      var4 iprintln(var0, var2);
+    if(isDefined(var_4.pers["team"]) && var_4.pers["team"] == var_1) {
+      var_4 iprintln(var_0, var_2);
     }
   }
 }
 
-function printonplayers(var0, var1) {
-  var2 = level.players;
+function printonplayers(var_0, var_1) {
+  var_2 = level.players;
 
-  for(var3 = 0; var3 < var2.size; var3++) {
-    if(isDefined(var1)) {
-      if(isDefined(var2[var3].pers["team"]) && var2[var3].pers["team"] == var1) {
-        var2[var3] iprintln(var0);
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
+    if(isDefined(var_1)) {
+      if(isDefined(var_2[var_3].pers["team"]) && var_2[var_3].pers["team"] == var_1) {
+        var_2[var_3] iprintln(var_0);
       }
 
       continue;
     }
 
-    var2[var3] iprintln(var0);
+    var_2[var_3] iprintln(var_0);
   }
 }
 
-function printandsoundoneveryone(var0, var1, var2, var3, var4, var5, var6) {
-  var7 = isDefined(var4);
-  var8 = 0;
+function printandsoundoneveryone(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_7 = isDefined(var_4);
+  var_8 = 0;
 
-  if(isDefined(var5)) {
-    var8 = 1;
+  if(isDefined(var_5)) {
+    var_8 = 1;
   }
 
-  if(level.splitscreen || !var7) {
-    for(var9 = 0; var9 < level.players.size; var9++) {
-      var10 = level.players[var9];
-      var11 = var10.team;
+  if(level.splitscreen || !var_7) {
+    for(var_9 = 0; var_9 < level.players.size; var_9++) {
+      var_10 = level.players[var_9];
+      var_11 = var_10.team;
 
-      if(isDefined(var11)) {
-        if(var11 == var0 && isDefined(var2)) {
-          var10 iprintln(var2, var6);
+      if(isDefined(var_11)) {
+        if(var_11 == var_0 && isDefined(var_2)) {
+          var_10 iprintln(var_2, var_6);
           continue;
         }
 
-        if(var11 == var1 && isDefined(var3)) {
-          var10 iprintln(var3, var6);
+        if(var_11 == var_1 && isDefined(var_3)) {
+          var_10 iprintln(var_3, var_6);
         }
       }
     }
 
-    if(var7) {
-      level.players[0] playlocalsound(var4);
+    if(var_7) {
+      level.players[0] playlocalsound(var_4);
       return;
     }
 
     return;
   }
 
-  if(var11) {
-    for(var9 = 0; var9 < level.players.size; var9++) {
-      var10 = level.players[var9];
-      var11 = var10.team;
+  if(var_11) {
+    for(var_9 = 0; var_9 < level.players.size; var_9++) {
+      var_10 = level.players[var_9];
+      var_11 = var_10.team;
 
-      if(isDefined(var11)) {
-        if(var11 == var3) {
-          if(isDefined(var5)) {
-            var10 iprintln(var5, var9);
+      if(isDefined(var_11)) {
+        if(var_11 == var_3) {
+          if(isDefined(var_5)) {
+            var_10 iprintln(var_5, var_9);
           }
 
-          var10 playlocalsound(var7);
+          var_10 playlocalsound(var_7);
           continue;
         }
 
-        if(var11 == var4) {
-          if(isDefined(var6)) {
-            var10 iprintln(var6, var9);
+        if(var_11 == var_4) {
+          if(isDefined(var_6)) {
+            var_10 iprintln(var_6, var_9);
           }
 
-          var10 playlocalsound(var8);
+          var_10 playlocalsound(var_8);
         }
       }
     }
@@ -120,118 +120,118 @@ function printandsoundoneveryone(var0, var1, var2, var3, var4, var5, var6) {
     return;
   }
 
-  for(var9 = 0; var9 < level.players.size; var9++) {
-    var10 = level.players[var9];
-    var11 = var10.team;
+  for(var_9 = 0; var_9 < level.players.size; var_9++) {
+    var_10 = level.players[var_9];
+    var_11 = var_10.team;
 
-    if(isDefined(var11)) {
-      if(var11 == var6) {
-        if(isDefined(var8)) {
-          var10 iprintln(var8, var9);
+    if(isDefined(var_11)) {
+      if(var_11 == var_6) {
+        if(isDefined(var_8)) {
+          var_10 iprintln(var_8, var_9);
         }
 
-        var10 playlocalsound(var10);
+        var_10 playlocalsound(var_10);
         continue;
       }
 
-      if(var11 == var7) {
-        if(isDefined(var9)) {
-          var10 iprintln(var9, var9);
+      if(var_11 == var_7) {
+        if(isDefined(var_9)) {
+          var_10 iprintln(var_9, var_9);
         }
       }
     }
   }
 }
 
-function printandsoundonteam(var0, var1, var2) {
-  foreach(var4 in level.players) {
-    if(var4.team != var0) {
+function printandsoundonteam(var_0, var_1, var_2) {
+  foreach(var_4 in level.players) {
+    if(var_4.team != var_0) {
       continue;
     }
 
-    printandsoundonplayer(var4, var1, var2);
+    printandsoundonplayer(var_4, var_1, var_2);
   }
 }
 
-function printandsoundonplayer(var0, var1) {
-  self iprintln(var0);
-  self playlocalsound(var1);
+function printandsoundonplayer(var_0, var_1) {
+  self iprintln(var_0);
+  self playlocalsound(var_1);
 }
 
-function printgameaction(var0, var1) {
+function printgameaction(var_0, var_1) {
   if(getdvarint("scr_suppress_game_actions", 0) == 1) {
     return;
   }
 
-  var2 = "";
+  var_2 = "";
 
-  if(isDefined(var1)) {
-    var2 = "[" + var1 getentitynumber() + ":" + var1.name + "] ";
+  if(isDefined(var_1)) {
+    var_2 = "[" + var_1 getentitynumber() + ":" + var_1.name + "] ";
   }
 }
 
-function teamhudtutorialmessage(var0, var1, var2) {
-  if(!scripts\mp\utility\teams::getteamdata(var1, "teamCount")) {
+function teamhudtutorialmessage(var_0, var_1, var_2) {
+  if(!scripts\mp\utility\teams::getteamdata(var_1, "teamCount")) {
     return;
   }
 
-  foreach(var4 in scripts\mp\utility\teams::getteamdata(var1, "players")) {
-    thread tutorialprint(var4, var0);
+  foreach(var_4 in scripts\mp\utility\teams::getteamdata(var_1, "players")) {
+    thread tutorialprint(var_4, var_0);
   }
 }
 
-function tutorialprint(var0, var1) {
+function tutorialprint(var_0, var_1) {
   level endon("game_ended");
   self endon("disconnect");
-  self sethudtutorialmessage(var0);
-  wait var1;
+  self sethudtutorialmessage(var_0);
+  wait var_1;
   self clearhudtutorialmessage();
 }
 
 function getformattedtimestamp() {
-  var0 = gettime();
-  var1 = int(var0 * 2.77778e-07);
-  var0 -= var1 * 3600000;
-  var2 = int(var0 * 1.66667e-05);
-  var0 -= var2 * 60000;
-  var3 = int(var0 * 0.001);
-  var0 -= var3 * 1000;
-  var4 = undefined;
+  var_0 = gettime();
+  var_1 = int(var_0 * 2.77778e-07);
+  var_0 -= var_1 * 3600000;
+  var_2 = int(var_0 * 1.66667e-05);
+  var_0 -= var_2 * 60000;
+  var_3 = int(var_0 * 0.001);
+  var_0 -= var_3 * 1000;
+  var_4 = undefined;
 
-  if(var1 < 10) {
-    var4 = "00" + var1;
-  } else if(var1 < 100) {
-    var4 = "0" + var1;
+  if(var_1 < 10) {
+    var_4 = "00" + var_1;
+  } else if(var_1 < 100) {
+    var_4 = "0" + var_1;
   } else {
-    var4 = "" + var1;
+    var_4 = "" + var_1;
   }
 
-  var5 = scripts\engine\utility::ter_op(var2 < 10, "0" + var2, "" + var2);
-  var6 = scripts\engine\utility::ter_op(var3 < 10, "0" + var3, "" + var3);
-  var7 = undefined;
+  var_5 = scripts\engine\utility::ter_op(var_2 < 10, "0" + var_2, "" + var_2);
+  var_6 = scripts\engine\utility::ter_op(var_3 < 10, "0" + var_3, "" + var_3);
+  var_7 = undefined;
 
-  if(var0 < 10) {
-    var7 = "00" + var0;
-  } else if(var0 < 100) {
-    var7 = "0" + var0;
+  if(var_0 < 10) {
+    var_7 = "00" + var_0;
+  } else if(var_0 < 100) {
+    var_7 = "0" + var_0;
   } else {
-    var7 = "" + var0;
+    var_7 = "" + var_0;
   }
 
-  return var4 + ":" + var5 + ":" + var6 + ":" + var7;
+  return var_4 + ":" + var_5 + ":" + var_6 + ":" + var_7;
 }
 
-function datalogprint(var0, var1) {
+function datalogprint(var_0, var_1) {
   if(!drawentitybounds()) {
     return;
   }
 
-  var2 = "";
+  var_2 = "";
 
-  if(isDefined(var1)) {
-    var2 += "<" + var1 + "> ";
+  if(isDefined(var_1)) {
+    var_2 += "<" + var_1 + "> ";
   }
 
-  var2 += var0 + "\n";
-  analyticsstreamerlogfiletagplayer(var2);
+  var_2 += var_0 + "\n";
+  analyticsstreamerlogfiletagplayer(var_2);
 }

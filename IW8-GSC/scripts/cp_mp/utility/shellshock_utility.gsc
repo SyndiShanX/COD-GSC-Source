@@ -3,54 +3,54 @@
  * Script: scripts\cp_mp\utility\shellshock_utility.gsc
 ********************************************************/
 
-function _shellshock(var0, var1, var2, var3, var4) {
-  if(!isDefined(var4)) {
-    var4 = [[level.shockinterruptdelayfuncs[var1]]](var0, var2);
+function _shellshock(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_4)) {
+    var_4 = [[level.shockinterruptdelayfuncs[var_1]]](var_0, var_2);
   }
 
-  var5 = gettime() + var4;
+  var_5 = gettime() + var_4;
 
-  if(var1 != "top") {
+  if(var_1 != "top") {
     if(!scripts\common\utility::is_shellshock_allowed()) {
       return 0;
     }
   }
 
   if(isDefined(self.shockcategory)) {
-    var6 = level.shockpriorities[self.shockcategory];
-    var7 = level.shockpriorities[var1];
+    var_6 = level.shockpriorities[self.shockcategory];
+    var_7 = level.shockpriorities[var_1];
 
-    if(var7 > var6) {
+    if(var_7 > var_6) {
       if(gettime() < self.shockinterrupttime) {
         return 0;
       }
-    } else if(var7 == var6) {
-      if(var5 < self.shockinterrupttime) {
+    } else if(var_7 == var_6) {
+      if(var_5 < self.shockinterrupttime) {
         return 0;
       }
-    } else if(var7 < var6) {
+    } else if(var_7 < var_6) {
       return 0;
     }
   }
 
-  self.shockname = var0;
-  self.shockcategory = var1;
-  self.shockinterrupttime = var5;
+  self.shockname = var_0;
+  self.shockcategory = var_1;
+  self.shockinterrupttime = var_5;
 
-  if(isDefined(var3)) {
-    self shellshock(var0, var2, var3);
+  if(isDefined(var_3)) {
+    self shellshock(var_0, var_2, var_3);
   } else {
-    self shellshock(var0, var2);
+    self shellshock(var_0, var_2);
   }
 
   self notify("_shellshock_cleanup");
-  thread shellshock_cleanup(var2);
+  thread shellshock_cleanup(var_2);
 }
 
-function _stopshellshock(var0) {
+function _stopshellshock(var_0) {
   self notify("_stopShellShock");
 
-  if(!istrue(var0)) {
+  if(!istrue(var_0)) {
     self stopshellshock();
   }
 
@@ -65,48 +65,48 @@ function disableshellshockfunc() {
   _stopshellshock(scripts\cp_mp\utility\player_utility::_isalive());
 }
 
-function shellshock_artilleryearthquake(var0, var1, var2, var3, var4) {
-  playrumbleonposition("artillery_rumble", var0);
+function shellshock_artilleryearthquake(var_0, var_1, var_2, var_3, var_4) {
+  playrumbleonposition("artillery_rumble", var_0);
 
-  if(!isDefined(var1)) {
-    var1 = 0.7;
+  if(!isDefined(var_1)) {
+    var_1 = 0.7;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 0.5;
+  if(!isDefined(var_2)) {
+    var_2 = 0.5;
   }
 
-  if(!isDefined(var3)) {
-    var3 = 800;
+  if(!isDefined(var_3)) {
+    var_3 = 800;
   }
 
-  earthquake(var1, var2, var0, var3);
-  shellshock_screenshakeonposition(var0, var3, var4);
+  earthquake(var_1, var_2, var_0, var_3);
+  shellshock_screenshakeonposition(var_0, var_3, var_4);
 }
 
-function shellshock_screenshakeonposition(var0, var1, var2) {
-  var3 = scripts\common\utility::playersinsphere(var0, var1);
+function shellshock_screenshakeonposition(var_0, var_1, var_2) {
+  var_3 = scripts\common\utility::playersinsphere(var_0, var_1);
 
-  foreach(var5 in var3) {
-    if(!isDefined(var5)) {
+  foreach(var_5 in var_3) {
+    if(!isDefined(var_5)) {
       continue;
     }
 
-    if(isDefined(var2)) {
-      if(isarray(var2)) {
-        if(scripts\engine\utility::array_contains(var2, var5)) {
+    if(isDefined(var_2)) {
+      if(isarray(var_2)) {
+        if(scripts\engine\utility::array_contains(var_2, var_5)) {
           continue;
         }
-      } else if(var5 == var2) {
+      } else if(var_5 == var_2) {
         continue;
       }
     }
 
-    if(var5 scripts\cp_mp\utility\player_utility::isusingremote()) {
+    if(var_5 scripts\cp_mp\utility\player_utility::isusingremote()) {
       continue;
     }
 
-    var5 setclientomnvar("ui_hud_shake", 1);
+    var_5 setclientomnvar("ui_hud_shake", 1);
   }
 }
 
@@ -130,33 +130,33 @@ function shellshock_utility_init() {
   level.shockinterruptdelayfuncs["bottom"] = &shellshock_nointerruptdelayfunc;
 }
 
-function shellshock_cleanup(var0) {
+function shellshock_cleanup(var_0) {
   self endon("disconnect");
   self endon("_stopShellShock");
   self endon("_shellshock_cleanup");
-  wait var0;
+  wait var_0;
   self.shockname = undefined;
   self.shockcategory = undefined;
   self.shockinterrupttime = undefined;
 }
 
-function shellshock_interruptdelayfunc(var0, var1) {
+function shellshock_interruptdelayfunc(var_0, var_1) {
   return 250;
 }
 
-function shellshock_flashinterruptdelayfunc(var0, var1) {
-  var2 = undefined;
+function shellshock_flashinterruptdelayfunc(var_0, var_1) {
+  var_2 = undefined;
 
-  switch (var0) {
+  switch (var_0) {
     case "flash_grenade_mp":
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("shellshock", "flashInterruptDelayFunc")) {
-        var2 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("shellshock", "flashInterruptDelayFunc")]](var1);
+        var_2 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("shellshock", "flashInterruptDelayFunc")]](var_1);
       }
 
       break;
     case "flash_grenade_mp_x2":
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("shellshock", "flashInterruptDelayFunc")) {
-        var2 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("shellshock", "flashInterruptDelayFunc")]](var1);
+        var_2 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("shellshock", "flashInterruptDelayFunc")]](var_1);
       }
 
       break;
@@ -164,16 +164,16 @@ function shellshock_flashinterruptdelayfunc(var0, var1) {
       break;
   }
 
-  return var2;
+  return var_2;
 }
 
-function shellshock_stuninterruptdelayfunc(var0, var1) {
-  var2 = undefined;
+function shellshock_stuninterruptdelayfunc(var_0, var_1) {
+  var_2 = undefined;
 
-  switch (var0) {
+  switch (var_0) {
     case "concussion_grenade_mp":
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("shellshock", "concussionInterruptDelayFunc")) {
-        var2 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("shellshock", "concussionInterruptDelayFunc")]](var1);
+        var_2 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("shellshock", "concussionInterruptDelayFunc")]](var_1);
       }
 
       break;
@@ -181,46 +181,46 @@ function shellshock_stuninterruptdelayfunc(var0, var1) {
       break;
   }
 
-  return var2;
+  return var_2;
 }
 
-function shellshock_gasinterruptdelayfunc(var0, var1) {
-  var2 = undefined;
+function shellshock_gasinterruptdelayfunc(var_0, var_1) {
+  var_2 = undefined;
 
-  switch (var0) {
+  switch (var_0) {
     case "gas_grenade_light_mp":
     case "gas_grenade_heavy_mp":
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("shellshock", "gasInterruptDelayFunc")) {
-        var2 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("shellshock", "gasInterruptDelayFunc")]](var1);
+        var_2 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("shellshock", "gasInterruptDelayFunc")]](var_1);
       }
 
       break;
     default:
-      var2 = shellshock_interruptdelayfunc(var1);
+      var_2 = shellshock_interruptdelayfunc(var_1);
       break;
   }
 
-  return var2;
+  return var_2;
 }
 
-function shellshock_damageinterruptdelayfunc(var0, var1) {
-  var2 = undefined;
+function shellshock_damageinterruptdelayfunc(var_0, var_1) {
+  var_2 = undefined;
 
-  switch (var0) {
+  switch (var_0) {
     case "last_stand_mp":
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("shellshock", "lastStandInterruptDelayFunc")) {
-        var2 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("shellshock", "lastStandInterruptDelayFunc")]](var1);
+        var_2 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("shellshock", "lastStandInterruptDelayFunc")]](var_1);
       }
 
       break;
     default:
-      var2 = shellshock_interruptdelayfunc(var1);
+      var_2 = shellshock_interruptdelayfunc(var_1);
       break;
   }
 
-  return var2;
+  return var_2;
 }
 
-function shellshock_nointerruptdelayfunc(var0, var1) {
+function shellshock_nointerruptdelayfunc(var_0, var_1) {
   return false;
 }

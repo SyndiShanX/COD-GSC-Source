@@ -14,7 +14,7 @@ function damagepartshandlerpart() {
   self endon("terminate_ai_threads");
 
   while(isalive(self)) {
-    self waittill("damage_part_died", var0);
+    self waittill("damage_part_died", var_0);
     scripts\anim\utility_common::repeater_headshot_ammo_passive(self.damageweapon, self.lastattacker, self);
 
     if(self isragdoll()) {
@@ -22,8 +22,8 @@ function damagepartshandlerpart() {
     }
 
     if(isDefined(self.fndismembermenthandler)) {
-      foreach(var2 in var0) {
-        self[[self.fndismembermenthandler]](var2);
+      foreach(var_2 in var_0) {
+        self[[self.fndismembermenthandler]](var_2);
       }
     }
   }
@@ -33,15 +33,15 @@ function damagepartshandlersubpart() {
   self endon("terminate_ai_threads");
 
   while(isalive(self)) {
-    self waittill("damage_subpart_died", var0);
+    self waittill("damage_subpart_died", var_0);
 
     if(self isragdoll()) {
       return;
     }
 
     if(isDefined(self.fndamagesubparthandler)) {
-      foreach(var2 in var0) {
-        self[[self.fndamagesubparthandler]](var2);
+      foreach(var_2 in var_0) {
+        self[[self.fndamagesubparthandler]](var_2);
       }
     }
   }
@@ -54,7 +54,7 @@ function damagepartshandler() {
   thread damagepartshandlerpart();
 }
 
-function isselfdestruct(var0) {
+function isselfdestruct(var_0) {
   if(scripts\asm\asm_bb::bb_isselfdestruct()) {
     return anim.success;
   }
@@ -62,7 +62,7 @@ function isselfdestruct(var0) {
   return anim.failure;
 }
 
-function isheadless(var0) {
+function isheadless(var_0) {
   if(scripts\asm\asm_bb::bb_isheadless()) {
     return anim.success;
   }

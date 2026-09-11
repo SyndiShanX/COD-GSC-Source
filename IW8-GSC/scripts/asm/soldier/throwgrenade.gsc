@@ -3,51 +3,51 @@
  * Script: scripts\asm\soldier\throwgrenade.gsc
 ************************************************/
 
-function shouldthrowgrenade(var0, var1, var2, var3) {
+function shouldthrowgrenade(var_0, var_1, var_2, var_3) {
   if(!scripts\asm\asm_bb::bb_throwgrenaderequested()) {
     return false;
   }
 
-  if(isDefined(var3) && isDefined(self.node) && isDefined(self.node.type) && self.node.type != var3) {
+  if(isDefined(var_3) && isDefined(self.node) && isDefined(self.node.type) && self.node.type != var_3) {
     return false;
   }
 
-  var4 = scripts\asm\asm_bb::bb_getthrowgrenadetarget();
+  var_4 = scripts\asm\asm_bb::bb_getthrowgrenadetarget();
 
-  if(!isDefined(var4) || !isDefined(self.enemy) || var4 != self.enemy) {
+  if(!isDefined(var_4) || !isDefined(self.enemy) || var_4 != self.enemy) {
     scripts\asm\asm::asm_fireephemeralevent("throwgrenade", "end");
     return false;
   }
 
-  if(scripts\aitypes\throwgrenade::grenadecooldownelapsed(var4)) {
-    var5 = scripts\asm\asm::asm_getanim(var0, var2);
+  if(scripts\aitypes\throwgrenade::grenadecooldownelapsed(var_4)) {
+    var_5 = scripts\asm\asm::asm_getanim(var_0, var_2);
 
-    if(isDefined(var5)) {
-      var6 = getgrenadethrowoffset(var2, var5);
-      var7 = self.randomgrenaderange;
-      var8 = distance(var4.origin, self.origin);
+    if(isDefined(var_5)) {
+      var_6 = getgrenadethrowoffset(var_2, var_5);
+      var_7 = self.randomgrenaderange;
+      var_8 = distance(var_4.origin, self.origin);
 
-      if(var8 < 800) {
-        if(var8 < 256) {
-          var7 = 0;
+      if(var_8 < 800) {
+        if(var_8 < 256) {
+          var_7 = 0;
         } else {
-          var7 *= (var8 - 256) / 544;
+          var_7 *= (var_8 - 256) / 544;
         }
       }
 
-      var9 = self checkgrenadethrow(var6, var7, "min energy", "min time", "max time");
+      var_9 = self checkgrenadethrow(var_6, var_7, "min energy", "min time", "max time");
       self.a.nextgrenadetrytime = gettime() + randomintrange(1000, 2000);
 
-      if(isDefined(var9)) {
-        var10 = spawnStruct();
-        var10.xanim = var5;
-        var10.vel = var9;
-        var10.target = var4;
-        var10.handoffset = var6;
-        var10.fastthrow = 0;
-        var10.withbounce = shouldbounce(self.grenadeweapon);
-        var10.time = gettime();
-        self._blackboard.throwdata = var10;
+      if(isDefined(var_9)) {
+        var_10 = spawnStruct();
+        var_10.xanim = var_5;
+        var_10.vel = var_9;
+        var_10.target = var_4;
+        var_10.handoffset = var_6;
+        var_10.fastthrow = 0;
+        var_10.withbounce = shouldbounce(self.grenadeweapon);
+        var_10.time = gettime();
+        self._blackboard.throwdata = var_10;
         return true;
       }
     }
@@ -57,69 +57,69 @@ function shouldthrowgrenade(var0, var1, var2, var3) {
   return false;
 }
 
-function chooseanim_throwgrenade(var0, var1, var2) {
-  var3 = undefined;
-  var4 = scripts\asm\asm::asm_getallanimindicesforalias(var1, "exposed_grenade");
+function chooseanim_throwgrenade(var_0, var_1, var_2) {
+  var_3 = undefined;
+  var_4 = scripts\asm\asm::asm_getallanimindicesforalias(var_1, "exposed_grenade");
 
-  if(isarray(var4)) {
-    var5 = [];
+  if(isarray(var_4)) {
+    var_5 = [];
 
-    foreach(var7 in var4) {
-      var8 = scripts\asm\asm::asm_getxanim(var1, var7);
-      var9 = getnotetracktimes(var8, "grenade_throw");
+    foreach(var_7 in var_4) {
+      var_8 = scripts\asm\asm::asm_getxanim(var_1, var_7);
+      var_9 = getnotetracktimes(var_8, "grenade_throw");
 
-      if(var9.size > 0) {
-        var10 = getmovedelta(var8, 0, var9[0]);
+      if(var_9.size > 0) {
+        var_10 = getmovedelta(var_8, 0, var_9[0]);
       } else {
-        var10 = getmovedelta(var8);
+        var_10 = getmovedelta(var_8);
       }
 
-      var10 = self localtoworldcoords(var10);
+      var_10 = self localtoworldcoords(var_10);
 
-      if(self maymovefrompointtopoint(self.origin, var10)) {
-        var5 = var7;
+      if(self maymovefrompointtopoint(self.origin, var_10)) {
+        var_5 = var_7;
       }
     }
 
-    if(var5.size > 0) {
-      var3 = var5[randomint(var5.size)];
+    if(var_5.size > 0) {
+      var_3 = var_5[randomint(var_5.size)];
     } else {
       return undefined;
     }
   } else {
-    var3 = var4;
+    var_3 = var_4;
   }
 
-  return var3;
+  return var_3;
 }
 
-function playanim_throwgrenade(var0, var1, var2) {
-  var3 = self._blackboard.throwdata;
+function playanim_throwgrenade(var_0, var_1, var_2) {
+  var_3 = self._blackboard.throwdata;
   self.ispreppinggrenade = 1;
-  var4 = trygrenadethrow(var0, var1, var3);
+  var_4 = trygrenadethrow(var_0, var_1, var_3);
 
-  if(!var4) {
-    self endon(var1 + "_finished");
+  if(!var_4) {
+    self endon(var_1 + "_finished");
     wait 0.2;
-    scripts\asm\asm::asm_fireevent(var0, "end");
+    scripts\asm\asm::asm_fireevent(var_0, "end");
     return;
   }
 }
 
-function playcoveranim_throwgrenade(var0, var1, var2) {
+function playcoveranim_throwgrenade(var_0, var_1, var_2) {
   if(isDefined(self.node)) {
     self.keepclaimednodeifvalid = 1;
   }
 
-  playanim_throwgrenade(var0, var1, var2);
+  playanim_throwgrenade(var_0, var_1, var_2);
 }
 
-function playcoveranim_throwgrenade_cleanup(var0, var1, var2) {
-  scripts\asm\soldier\cover::clearcoveranim(var0, var1, var2);
-  playanim_throwgrenade_cleanup(var0, var1, var2);
+function playcoveranim_throwgrenade_cleanup(var_0, var_1, var_2) {
+  scripts\asm\soldier\cover::clearcoveranim(var_0, var_1, var_2);
+  playanim_throwgrenade_cleanup(var_0, var_1, var_2);
 }
 
-function playanim_throwgrenade_cleanup(var0, var1, var2) {
+function playanim_throwgrenade_cleanup(var_0, var_1, var_2) {
   self._blackboard.throwdata = undefined;
   scripts\asm\asm::asm_fireephemeralevent("throwgrenade", "end");
 
@@ -131,63 +131,63 @@ function playanim_throwgrenade_cleanup(var0, var1, var2) {
   self.ispreppinggrenade = undefined;
 }
 
-function shouldbounce(var0) {
-  var1 = var0.basename;
-  return var1 != "antigrav" && var1 != "emp" && var1 != "c8_grenade";
+function shouldbounce(var_0) {
+  var_1 = var_0.basename;
+  return var_1 != "antigrav" && var_1 != "emp" && var_1 != "c8_grenade";
 }
 
-function trygrenadethrow(var0, var1, var2, var3) {
-  var4 = var2.destination;
-  var5 = var2.target;
-  var6 = var2.withbounce;
+function trygrenadethrow(var_0, var_1, var_2, var_3) {
+  var_4 = var_2.destination;
+  var_5 = var_2.target;
+  var_6 = var_2.withbounce;
 
-  if(!isDefined(var6)) {
-    var6 = 1;
+  if(!isDefined(var_6)) {
+    var_6 = 1;
   }
 
-  if(isDefined(var4)) {
-    var7 = getgrenadethrowoffset(var1, var2.xanim);
+  if(isDefined(var_4)) {
+    var_7 = getgrenadethrowoffset(var_1, var_2.xanim);
 
-    if(!isDefined(var2.fastthrow)) {
-      var8 = self checkgrenadethrowpos(var7, var4, var6, "min energy", "min time", "max time");
+    if(!isDefined(var_2.fastthrow)) {
+      var_8 = self checkgrenadethrowpos(var_7, var_4, var_6, "min energy", "min time", "max time");
     } else {
-      var8 = self checkgrenadethrowpos(var7, var4, var6, "min time", "min energy");
+      var_8 = self checkgrenadethrowpos(var_7, var_4, var_6, "min time", "min energy");
     }
   } else {
-    var8 = var3.vel;
+    var_8 = var_3.vel;
   }
 
-  var6 = var3.target;
+  var_6 = var_3.target;
 
-  if(isDefined(var8)) {
+  if(isDefined(var_8)) {
     if(!isDefined(self.oldgrenawareness)) {
       self.oldgrenawareness = self.grenadeawareness;
     }
 
     self.grenadeawareness = 0;
-    var9 = getdesiredgrenadetimervalue();
-    setgrenadetimer(self.activegrenadetimer, min(gettime() + 3000, var9));
-    var10 = 0;
+    var_9 = getdesiredgrenadetimervalue();
+    setgrenadetimer(self.activegrenadetimer, min(gettime() + 3000, var_9));
+    var_10 = 0;
 
     if(usingplayergrenadetimer()) {
-      var6.numgrenadesinprogresstowardsplayer++;
-      thread reducegiptponkillanimscript(var2, var6);
+      var_6.numgrenadesinprogresstowardsplayer++;
+      thread reducegiptponkillanimscript(var_2, var_6);
 
-      if(var6.numgrenadesinprogresstowardsplayer > 1) {
-        var10 = 1;
+      if(var_6.numgrenadesinprogresstowardsplayer > 1) {
+        var_10 = 1;
       }
 
       if(self.activegrenadetimer.timername == "fraggrenade") {
-        if(var6.numgrenadesinprogresstowardsplayer <= 1) {
-          var6.lastfraggrenadetoplayerstart = gettime();
+        if(var_6.numgrenadesinprogresstowardsplayer <= 1) {
+          var_6.lastfraggrenadetoplayerstart = gettime();
         }
       }
     }
 
-    if(isDefined(var4)) {
-      thread dogrenadethrow(var1, var2, var3.xanim, var8, var9, var10);
+    if(isDefined(var_4)) {
+      thread dogrenadethrow(var_1, var_2, var_3.xanim, var_8, var_9, var_10);
     } else {
-      dogrenadethrow(var1, var2, var3.xanim, var8, var9, var10);
+      dogrenadethrow(var_1, var_2, var_3.xanim, var_8, var_9, var_10);
     }
 
     return true;
@@ -196,28 +196,28 @@ function trygrenadethrow(var0, var1, var2, var3) {
   return false;
 }
 
-function getgrenadethrowoffset(var0, var1) {
-  var2 = (0, 0, 64);
-  var3 = scripts\asm\shared\utility::getbasearchetype();
-  var4 = 0;
+function getgrenadethrowoffset(var_0, var_1) {
+  var_2 = (0, 0, 64);
+  var_3 = scripts\asm\shared\utility::getbasearchetype();
+  var_4 = 0;
 
   if(isDefined(anim.grenadethrowanims)) {
-    if(!isDefined(anim.grenadethrowanims[var3])) {
-      var3 = "soldier";
+    if(!isDefined(anim.grenadethrowanims[var_3])) {
+      var_3 = "soldier";
     }
 
-    if(isDefined(anim.grenadethrowanims[var3])) {
-      if(isDefined(anim.grenadethrowanims[var3][var0])) {
-        foreach(var6 in anim.grenadethrowanims[var3][var0]) {
-          for(var7 = 0; var7 < var6.size; var7++) {
-            if(var6[var7] == var1) {
-              var2 = anim.grenadethrowoffsets[var3][var0][var8][var7];
-              var4 = 1;
+    if(isDefined(anim.grenadethrowanims[var_3])) {
+      if(isDefined(anim.grenadethrowanims[var_3][var_0])) {
+        foreach(var_6 in anim.grenadethrowanims[var_3][var_0]) {
+          for(var_7 = 0; var_7 < var_6.size; var_7++) {
+            if(var_6[var_7] == var_1) {
+              var_2 = anim.grenadethrowoffsets[var_3][var_0][var_8][var_7];
+              var_4 = 1;
               break;
             }
           }
 
-          if(var4) {
+          if(var_4) {
             break;
           }
         }
@@ -225,75 +225,75 @@ function getgrenadethrowoffset(var0, var1) {
     }
   }
 
-  return var2;
+  return var_2;
 }
 
 function getdesiredgrenadetimervalue() {
-  var0 = undefined;
+  var_0 = undefined;
 
   if(usingplayergrenadetimer()) {
-    var1 = self.activegrenadetimer.player;
-    var0 = gettime() + var1.gs.playergrenadebasetime + randomint(var1.gs.playergrenaderangetime);
+    var_1 = self.activegrenadetimer.player;
+    var_0 = gettime() + var_1.gs.playergrenadebasetime + randomint(var_1.gs.playergrenaderangetime);
   } else {
-    var0 = gettime() + 30000 + randomint(30000);
+    var_0 = gettime() + 30000 + randomint(30000);
   }
 
-  return var0;
+  return var_0;
 }
 
 function usingplayergrenadetimer() {
   return self.activegrenadetimer.isplayertimer;
 }
 
-function reducegiptponkillanimscript(var0, var1) {
+function reducegiptponkillanimscript(var_0, var_1) {
   self endon("dont_reduce_giptp_on_killanimscript");
-  self waittill(var0 + "_finished");
-  var1.numgrenadesinprogresstowardsplayer--;
+  self waittill(var_0 + "_finished");
+  var_1.numgrenadesinprogresstowardsplayer--;
 }
 
-function dogrenadethrow(var0, var1, var2, var3, var4, var5) {
+function dogrenadethrow(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon("killanimscript");
-  self endon(var1 + "_finished");
+  self endon(var_1 + "_finished");
   scripts\asm\asm::asm_fireephemeralevent("throwgrenade", "start");
-  var6 = scripts\asm\asm_bb::bb_getcovernode();
+  var_6 = scripts\asm\asm_bb::bb_getcovernode();
 
-  if(!isDefined(var6) || var6.type == "Exposed" || var6.type == "Path") {
-    self orientmode("face direction", var3);
+  if(!isDefined(var_6) || var_6.type == "Exposed" || var_6.type == "Path") {
+    self orientmode("face direction", var_3);
   }
 
-  var7 = scripts\asm\asm::asm_getbodyknob();
-  var8 = scripts\asm\asm::asm_getxanim(var1, var2);
+  var_7 = scripts\asm\asm::asm_getbodyknob();
+  var_8 = scripts\asm\asm::asm_getxanim(var_1, var_2);
   scripts\anim\battlechatter_wrapper::evaluateattackevent(self.grenadeweapon.basename);
-  scripts\asm\asm::asm_playfacialanim(var0, var1, var8);
-  self aisetanim(var1, var2, fasteranimspeed());
-  thread scripts\asm\asm::asm_donotetracks(var0, var1);
-  var9 = scripts\anim\utility_common::getgrenademodel();
-  var10 = "none";
-  var11 = 0;
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_8);
+  self aisetanim(var_1, var_2, fasteranimspeed());
+  thread scripts\asm\asm::asm_donotetracks(var_0, var_1);
+  var_9 = scripts\anim\utility_common::getgrenademodel();
+  var_10 = "none";
+  var_11 = 0;
 
-  while(!var11) {
-    self waittill(var1, var12);
+  while(!var_11) {
+    self waittill(var_1, var_12);
 
-    if(!isarray(var12)) {
-      var12 = [var12];
+    if(!isarray(var_12)) {
+      var_12 = [var_12];
     }
 
-    foreach(var14 in var12) {
-      if(var14 == "grenade_left" || var14 == "grenade_right") {
-        var10 = attachgrenademodel(var1, var9, "tag_accessory_right");
+    foreach(var_14 in var_12) {
+      if(var_14 == "grenade_left" || var_14 == "grenade_right") {
+        var_10 = attachgrenademodel(var_1, var_9, "tag_accessory_right");
         self.isholdinggrenade = 1;
       }
 
-      if(var14 == "grenade_throw" || var14 == "grenade throw") {
+      if(var_14 == "grenade_throw" || var_14 == "grenade throw") {
         if(isDefined(self.animtree) && self.animtree == "c6") {
           self playSound("c6_grenade_launch");
         }
 
-        var11 = 1;
+        var_11 = 1;
         continue;
       }
 
-      if(var14 == "end") {
+      if(var_14 == "end") {
         self.activegrenadetimer.player.numgrenadesinprogresstowardsplayer--;
         self notify("dont_reduce_giptp_on_killanimscript");
         return 0;
@@ -304,27 +304,27 @@ function dogrenadethrow(var0, var1, var2, var3, var4, var5) {
   self notify("dont_reduce_giptp_on_killanimscript");
 
   if(usingplayergrenadetimer()) {
-    thread watchgrenadetowardsplayer(var1, self.activegrenadetimer.player, var4);
+    thread watchgrenadetowardsplayer(var_1, self.activegrenadetimer.player, var_4);
   }
 
-  var22 = self throwgrenade();
+  var_22 = self throwgrenade();
 
   if(!usingplayergrenadetimer()) {
-    setgrenadetimer(self.activegrenadetimer, var4);
+    setgrenadetimer(self.activegrenadetimer, var_4);
   }
 
-  if(var5 && self.activegrenadetimer.isplayertimer) {
-    var23 = self.activegrenadetimer.player;
+  if(var_5 && self.activegrenadetimer.isplayertimer) {
+    var_23 = self.activegrenadetimer.player;
 
-    if(var23.numgrenadesinprogresstowardsplayer > 1 || gettime() - var23.lastgrenadelandednearplayertime < 2000) {
-      var23.grenadetimers["double_grenade"] = gettime() + min(5000, var23.gs.playerdoublegrenadetime);
+    if(var_23.numgrenadesinprogresstowardsplayer > 1 || gettime() - var_23.lastgrenadelandednearplayertime < 2000) {
+      var_23.grenadetimers["double_grenade"] = gettime() + min(5000, var_23.gs.playerdoublegrenadetime);
     }
   }
 
   self notify("stop grenade check");
 
-  if(var10 != "none") {
-    self detach(var9, var10);
+  if(var_10 != "none") {
+    self detach(var_9, var_10);
   }
 
   self.isholdinggrenade = undefined;
@@ -333,22 +333,22 @@ function dogrenadethrow(var0, var1, var2, var3, var4, var5) {
   self.oldgrenawareness = undefined;
   self.throwgrenadeatenemyasap = undefined;
 
-  if(isDefined(var22) && self.team == "axis") {
-    level notify("enemy_grenade_fire", var22);
+  if(isDefined(var_22) && self.team == "axis") {
+    level notify("enemy_grenade_fire", var_22);
   }
 
-  self waittillmatch(var1, "end");
+  self waittillmatch(var_1, "end");
   self notify("done_grenade_throw");
   self notify("weapon_switch_done");
 }
 
-function throwgrenade_shouldabort(var0, var1, var2, var3) {
+function throwgrenade_shouldabort(var_0, var_1, var_2, var_3) {
   if(!scripts\asm\asm_bb::bb_throwgrenaderequested()) {
-    if(scripts\asm\asm::asm_eventfired(var0, "grenade_throw") || scripts\asm\asm::asm_eventfired(var0, "grenade throw")) {
+    if(scripts\asm\asm::asm_eventfired(var_0, "grenade_throw") || scripts\asm\asm::asm_eventfired(var_0, "grenade throw")) {
       return false;
     }
 
-    if(scripts\asm\asm::asm_eventfired(var0, "grenade_right") || scripts\asm\asm::asm_eventfired(var0, "grenade_left")) {
+    if(scripts\asm\asm::asm_eventfired(var_0, "grenade_right") || scripts\asm\asm::asm_eventfired(var_0, "grenade_left")) {
       return false;
     }
 
@@ -362,20 +362,20 @@ function fasteranimspeed() {
   return 1.5;
 }
 
-function attachgrenademodel(var0, var1, var2) {
-  self attach(var1, var2);
-  thread detachgrenadeonscriptchange(var0, var1, var2);
-  return var2;
+function attachgrenademodel(var_0, var_1, var_2) {
+  self attach(var_1, var_2);
+  thread detachgrenadeonscriptchange(var_0, var_1, var_2);
+  return var_2;
 }
 
-function waittillscriptchange(var0) {
-  self endon(var0 + "_finished");
+function waittillscriptchange(var_0) {
+  self endon(var_0 + "_finished");
   self waittill("killanimscript");
 }
 
-function detachgrenadeonscriptchange(var0, var1, var2) {
+function detachgrenadeonscriptchange(var_0, var_1, var_2) {
   self endon("stop grenade check");
-  waittillscriptchange(var0);
+  waittillscriptchange(var_0);
 
   if(!isDefined(self)) {
     return;
@@ -386,121 +386,121 @@ function detachgrenadeonscriptchange(var0, var1, var2) {
     self.oldgrenawareness = undefined;
   }
 
-  self detach(var1, var2);
+  self detach(var_1, var_2);
 }
 
-function watchgrenadetowardsplayer(var0, var1, var2) {
-  var1 endon("death");
-  watchgrenadetowardsplayerinternal(var0, var2);
-  var1.numgrenadesinprogresstowardsplayer--;
+function watchgrenadetowardsplayer(var_0, var_1, var_2) {
+  var_1 endon("death");
+  watchgrenadetowardsplayerinternal(var_0, var_2);
+  var_1.numgrenadesinprogresstowardsplayer--;
 }
 
-function watchgrenadetowardsplayerinternal(var0, var1) {
-  var2 = self.activegrenadetimer;
-  var3 = spawnStruct();
-  thread watchgrenadetowardsplayertimeout(var3);
-  var3 endon("watchGrenadeTowardsPlayerTimeout");
-  var4 = self.grenadeweapon.basename;
-  var5 = getgrenadeithrew(var0);
+function watchgrenadetowardsplayerinternal(var_0, var_1) {
+  var_2 = self.activegrenadetimer;
+  var_3 = spawnStruct();
+  thread watchgrenadetowardsplayertimeout(var_3);
+  var_3 endon("watchGrenadeTowardsPlayerTimeout");
+  var_4 = self.grenadeweapon.basename;
+  var_5 = getgrenadeithrew(var_0);
 
-  if(!isDefined(var5)) {
+  if(!isDefined(var_5)) {
     return;
   }
 
-  setgrenadetimer(var2, min(gettime() + 5000, var1));
-  var6 = 62500;
-  var7 = 160000;
+  setgrenadetimer(var_2, min(gettime() + 5000, var_1));
+  var_6 = 62500;
+  var_7 = 160000;
 
-  if(var4 == "flash_grenade") {
-    var6 = 810000;
-    var7 = 1690000;
+  if(var_4 == "flash_grenade") {
+    var_6 = 810000;
+    var_7 = 1690000;
   }
 
-  var8 = level.players;
-  var9 = var5.origin;
+  var_8 = level.players;
+  var_9 = var_5.origin;
 
   for(;;) {
     wait 0.1;
 
-    if(distancesquared(var5.origin, var9) < 400) {
-      var10 = [];
+    if(distancesquared(var_5.origin, var_9) < 400) {
+      var_10 = [];
 
-      for(var11 = 0; var11 < var8.size; var11++) {
-        var12 = var8[var11];
-        var13 = distancesquared(var5.origin, var12.origin);
+      for(var_11 = 0; var_11 < var_8.size; var_11++) {
+        var_12 = var_8[var_11];
+        var_13 = distancesquared(var_5.origin, var_12.origin);
 
-        if(var13 < var6) {
-          grenadelandednearplayer(var12, var2, var1);
+        if(var_13 < var_6) {
+          grenadelandednearplayer(var_12, var_2, var_1);
           continue;
         }
 
-        if(var13 < var7) {
-          var10 = var12;
+        if(var_13 < var_7) {
+          var_10 = var_12;
         }
       }
 
-      var8 = var10;
+      var_8 = var_10;
 
-      if(var8.size == 0) {
+      if(var_8.size == 0) {
         break;
       }
     }
 
-    var5 = var1.origin;
+    var_5 = var_1.origin;
   }
 }
 
-function grenadelandednearplayer(var0, var1) {
-  var2 = self;
+function grenadelandednearplayer(var_0, var_1) {
+  var_2 = self;
   anim.throwgrenadeatplayerasap = undefined;
 
-  if(gettime() - var2.lastgrenadelandednearplayertime < 3000) {
-    var2.grenadetimers["double_grenade"] = gettime() + var2.gs.playerdoublegrenadetime;
+  if(gettime() - var_2.lastgrenadelandednearplayertime < 3000) {
+    var_2.grenadetimers["double_grenade"] = gettime() + var_2.gs.playerdoublegrenadetime;
   }
 
-  var2.lastgrenadelandednearplayertime = gettime();
-  var3 = var2.grenadetimers[var0.timername];
-  var2.grenadetimers[var0.timername] = max(var1, var3);
+  var_2.lastgrenadelandednearplayertime = gettime();
+  var_3 = var_2.grenadetimers[var_0.timername];
+  var_2.grenadetimers[var_0.timername] = max(var_1, var_3);
 }
 
-function setgrenadetimer(var0, var1) {
-  if(var0.isplayertimer) {
-    var2 = var0.player;
-    var3 = var2.grenadetimers[var0.timername];
-    var2.grenadetimers[var0.timername] = max(var1, var3);
+function setgrenadetimer(var_0, var_1) {
+  if(var_0.isplayertimer) {
+    var_2 = var_0.player;
+    var_3 = var_2.grenadetimers[var_0.timername];
+    var_2.grenadetimers[var_0.timername] = max(var_1, var_3);
     return;
   }
 
-  var3 = anim.grenadetimers[var1.timername];
-  anim.grenadetimers[var1.timername] = max(var3, var3);
+  var_3 = anim.grenadetimers[var_1.timername];
+  anim.grenadetimers[var_1.timername] = max(var_3, var_3);
 }
 
-function getgrenadeithrew(var0) {
+function getgrenadeithrew(var_0) {
   self endon("killanimscript");
-  self endon(var0 + "_finished");
-  self waittill("grenade_fire", var1);
-  return var1;
+  self endon(var_0 + "_finished");
+  self waittill("grenade_fire", var_1);
+  return var_1;
 }
 
-function watchgrenadetowardsplayertimeout(var0) {
-  wait var0;
+function watchgrenadetowardsplayertimeout(var_0) {
+  wait var_0;
   self notify("watchGrenadeTowardsPlayerTimeout");
 }
 
-function getgrenadetimertime(var0) {
-  if(var0.isplayertimer) {
-    return var0.player.grenadetimers[var0.timername];
+function getgrenadetimertime(var_0) {
+  if(var_0.isplayertimer) {
+    return var_0.player.grenadetimers[var_0.timername];
   }
 
-  return anim.grenadetimers[var0.timername];
+  return anim.grenadetimers[var_0.timername];
 }
 
-function offsettoorigin(var0) {
-  var1 = anglesToForward(self.angles);
-  var2 = anglestoright(self.angles);
-  var3 = anglestoup(self.angles);
-  var1 *= var0[0];
-  var2 *= var0[1];
-  var3 *= var0[2];
-  return var1 + var2 + var3;
+function offsettoorigin(var_0) {
+  var_1 = anglesToForward(self.angles);
+  var_2 = anglestoright(self.angles);
+  var_3 = anglestoup(self.angles);
+  var_1 *= var_0[0];
+  var_2 *= var_0[1];
+  var_3 *= var_0[2];
+  return var_1 + var_2 + var_3;
 }

@@ -35,27 +35,27 @@ function setup_lighting() {
   lights_off("post_explosion");
 }
 
-function init_lights(var0) {
-  var1 = getEntArray(var0, "targetname");
+function init_lights(var_0) {
+  var_1 = getEntArray(var_0, "targetname");
 
-  foreach(var3 in var1) {
-    var3.og_intensity = var3 getlightintensity();
+  foreach(var_3 in var_1) {
+    var_3.og_intensity = var_3 getlightintensity();
   }
 }
 
-function lights_off(var0) {
-  var1 = getEntArray(var0, "targetname");
+function lights_off(var_0) {
+  var_1 = getEntArray(var_0, "targetname");
 
-  foreach(var3 in var1) {
-    var3 setlightintensity(0);
+  foreach(var_3 in var_1) {
+    var_3 setlightintensity(0);
   }
 }
 
-function lights_on(var0) {
-  var1 = getEntArray(var0, "targetname");
+function lights_on(var_0) {
+  var_1 = getEntArray(var_0, "targetname");
 
-  foreach(var3 in var1) {
-    var3 setlightintensity(var3.og_intensity);
+  foreach(var_3 in var_1) {
+    var_3 setlightintensity(var_3.og_intensity);
   }
 }
 
@@ -73,8 +73,8 @@ function shackle_dof() {
   level.player_rig thread scripts\engine\sp\utility::dof_enable_autofocus(6, 16, undefined, undefined, "j_thumb_ri_3", undefined, 1);
 }
 
-function button_dof(var0) {
-  var0 thread scripts\engine\sp\utility::dof_enable_autofocus(2.8, 8, undefined, undefined, "push_button", undefined, 1);
+function button_dof(var_0) {
+  var_0 thread scripts\engine\sp\utility::dof_enable_autofocus(2.8, 8, undefined, undefined, "push_button", undefined, 1);
 }
 
 function hadir_dof() {

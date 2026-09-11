@@ -3,8 +3,8 @@
  * Script: scripts\common\interactive.gsc
 ***********************************************/
 
-function entity_used(var0, var1) {
-  if(!isDefined(var0.interactive_used_func_id)) {
+function entity_used(var_0, var_1) {
+  if(!isDefined(var_0.interactive_used_func_id)) {
     return;
   }
 
@@ -12,34 +12,34 @@ function entity_used(var0, var1) {
     return;
   }
 
-  if(!isDefined(level.interactive_used_funcs[var0.interactive_used_func_id])) {
+  if(!isDefined(level.interactive_used_funcs[var_0.interactive_used_func_id])) {
     return;
   }
 
-  GscBinSkip1(0x74, level.interactive_used_funcs[var0.interactive_used_func_id], var0, var1);
+  GscBinSkip1(0x74, level.interactive_used_funcs[var_0.interactive_used_func_id], var_0, var_1);
 }
 
-function interactive_addusedcallback(var0, var1) {
+function interactive_addusedcallback(var_0, var_1) {
   if(!isDefined(level.interactive_used_funcs)) {
     level.interactive_used_funcs = [];
     level.interactive_used_funcs_unique_id = 0;
   }
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     while(isDefined(level.interactive_used_funcs[level.interactive_used_funcs_unique_id])) {
       level.interactive_used_funcs_unique_id++;
     }
 
-    var1 = level.interactive_used_funcs_unique_id;
+    var_1 = level.interactive_used_funcs_unique_id;
     level.interactive_used_funcs_unique_id++;
   }
 
-  level.interactive_used_funcs[var1] = var0;
-  return var1;
+  level.interactive_used_funcs[var_1] = var_0;
+  return var_1;
 }
 
-function interactive_addusedcallbacktoentity(var0) {
-  self.interactive_used_func_id = var0;
+function interactive_addusedcallbacktoentity(var_0) {
+  self.interactive_used_func_id = var_0;
 }
 
 function interactive_removeusedcallbackfromentity() {

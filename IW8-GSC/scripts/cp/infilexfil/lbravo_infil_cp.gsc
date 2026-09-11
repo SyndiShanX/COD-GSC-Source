@@ -3,41 +3,41 @@
  * Script: scripts\cp\infilexfil\lbravo_infil_cp.gsc
 *****************************************************/
 
-function lbravo_init(var0) {
-  initanims(var0);
-  var1 = [];
+function lbravo_init(var_0) {
+  initanims(var_0);
+  var_1 = [];
   GscBinSkip0(0x2e, 0, [0, 1]);
 }
 
-function lbravo_spawn(var0, var1, var2) {
-  var3 = scripts\engine\utility::getStruct(var1, "targetname");
-  var4 = spawn("script_origin", var3.origin);
-  var4.angles = var3.angles;
-  var4.scene_node = var3;
+function lbravo_spawn(var_0, var_1, var_2) {
+  var_3 = scripts\engine\utility::getStruct(var_1, "targetname");
+  var_4 = spawn("script_origin", var_3.origin);
+  var_4.angles = var_3.angles;
+  var_4.scene_node = var_3;
 
-  if(isDefined(var3.target)) {
-    var4.path = scripts\engine\utility::getStruct("lbravoAlphaAdvancedPath", "targetname");
+  if(isDefined(var_3.target)) {
+    var_4.path = scripts\engine\utility::getStruct("lbravoAlphaAdvancedPath", "targetname");
   }
 
-  thread infilthink(var4, var0);
-  level.infil_struct = var4;
-  return var4;
+  thread infilthink(var_4, var_0);
+  level.infil_struct = var_4;
+  return var_4;
 }
 
-function lbravo_get_length(var0) {
+function lbravo_get_length(var_0) {
   if(isDefined(self.path)) {
-    var1 = parsepathlength();
-    var1 += getanimlength(level.scr_anim["slot_0"]["lbravo_infil_" + var0 + "_loop_exit"]);
-    var1 += getanimlength(level.scr_anim["slot_0"]["lbravo_infil_" + var0 + "_exit"]);
-    return var1;
+    var_1 = parsepathlength();
+    var_1 += getanimlength(level.scr_anim["slot_0"]["lbravo_infil_" + var_0 + "_loop_exit"]);
+    var_1 += getanimlength(level.scr_anim["slot_0"]["lbravo_infil_" + var_0 + "_exit"]);
+    return var_1;
   }
 
-  var2 = getanimlength(level.scr_anim["slot_0"]["lbravo_infil_" + var1]);
-  var2 += getanimlength(level.scr_anim["slot_0"]["lbravo_infil_" + var1 + "_exit"]);
-  return var2;
+  var_2 = getanimlength(level.scr_anim["slot_0"]["lbravo_infil_" + var_1]);
+  var_2 += getanimlength(level.scr_anim["slot_0"]["lbravo_infil_" + var_1 + "_exit"]);
+  return var_2;
 }
 
-function player_lbravo_infil_think(var0, var1) {
+function player_lbravo_infil_think(var_0, var_1) {
   level endon("game_ended");
   self endon("death");
   self endon("disconnect");
@@ -49,16 +49,16 @@ function player_lbravo_infil_think(var0, var1) {
     self setclienttriggeraudiozone("lbravo_infil_intro", 1);
   }
 
-  thread player_infil_end(var0);
-  thread scripts\cp\cp_infilexfil::infil_player_rig("slot_" + var1, "viewhands_base_iw8");
+  thread player_infil_end(var_0);
+  thread scripts\cp\cp_infilexfil::infil_player_rig("slot_" + var_1, "viewhands_base_iw8");
   self.player_rig.weapon_state_func = &scripts\cp\cp_infilexfil::handleweaponstatenotetrackcp;
-  self.player_rig linkTo(var0.linktoent, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
-  self predictstreampos(var0.linktoent.origin);
+  self.player_rig linkTo(var_0.linktoent, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
+  self predictstreampos(var_0.linktoent.origin);
   self lerpfovbypreset("80_instant");
   self setdemeanorviewmodel("safe", "iw8_ges_demeanor_safe_heli");
   thread scripts\cp\cp_infilexfil::infil_scene_fade_in(0, 0.55, "fade_up");
   thread player_van_disconnect();
-  scripts\engine\utility::waittill_any_ents(level, "start_scene", var0, "start_scene");
+  scripts\engine\utility::waittill_any_ents(level, "start_scene", var_0, "start_scene");
 
   if(isDefined(self.team) && self.team != "spectator") {
     self setsoundsubmix("iw8_cp_intro_outro");
@@ -70,31 +70,31 @@ function player_lbravo_infil_think(var0, var1) {
   self notify("fade_up");
   self setcinematicmotionoverride("disabled");
 
-  if(isDefined(var0.path)) {
-    thread playerthinkpath(var0, var1);
+  if(isDefined(var_0.path)) {
+    thread playerthinkpath(var_0, var_1);
   } else {
-    thread playerthinkanim(var0, var1);
+    thread playerthinkanim(var_0, var_1);
   }
 
   self lerpfovbypreset("default");
 }
 
-function playerthinkpath(var0, var1) {
+function playerthinkpath(var_0, var_1) {
   level endon("game_ended");
   self endon("death");
   self endon("disconnect");
   self endon("player_free_spot");
   self endon("joined_team");
 
-  if(var1 == 0) {
+  if(var_1 == 0) {
     self lerpviewangleclamp(1, 0.25, 0.25, 10, 45, 45, 30);
-  } else if(var1 == 1) {
+  } else if(var_1 == 1) {
     self lerpviewangleclamp(1, 0.25, 0.25, 45, 10, 45, 30);
   } else {
     self lerpviewangleclamp(1, 0.25, 0.25, 45, 45, 45, 30);
   }
 
-  rideloop(var0);
+  rideloop(var_0);
   self lerpviewangleclamp(1, 0.25, 0.25, 0, 0, 0, 0);
   self lerpfovbypreset("default_2seconds");
   self lerpfovscalefactor(1, 2);
@@ -108,39 +108,39 @@ function playerthinkpath(var0, var1) {
   self stopviewmodelanim();
   scripts\cp\cp_infilexfil::takegunlesscp();
   self clearsoundsubmix("iw8_cp_intro_outro");
-  var0 notify("prematch_over");
+  var_0 notify("prematch_over");
   level notify("prematch_over");
 }
 
-function rideloop(var0) {
+function rideloop(var_0) {
   level endon("game_ended");
   self endon("death");
   self endon("disconnect");
   self endon("player_free_spot");
   self endon("joined_team");
-  var0.linktoent endon("unload");
+  var_0.linktoent endon("unload");
 
   for(;;) {
-    var0.linktoent thread scripts\cp\cp_anim::anim_player_solo(self, self.player_rig, "lbravo_infil_" + var0.subtype + "_loop", "origin_animate_jnt");
+    var_0.linktoent thread scripts\cp\cp_anim::anim_player_solo(self, self.player_rig, "lbravo_infil_" + var_0.subtype + "_loop", "origin_animate_jnt");
     wait 10;
   }
 }
 
-function playerthinkanim(var0, var1) {
+function playerthinkanim(var_0, var_1) {
   level endon("game_ended");
   self endon("death");
   self endon("disconnect");
   self endon("player_free_spot");
   self endon("joined_team");
   self lerpviewangleclamp(1, 0.25, 0.25, 30, 30, 30, 30);
-  var0.linktoent scripts\cp\cp_anim::anim_player_solo(self, self.player_rig, "lbravo_infil_" + var0.subtype, "origin_animate_jnt");
+  var_0.linktoent scripts\cp\cp_anim::anim_player_solo(self, self.player_rig, "lbravo_infil_" + var_0.subtype, "origin_animate_jnt");
   self lerpviewangleclamp(1, 0.25, 0.25, 0, 0, 0, 0);
   self.player_rig unlink();
   self setdemeanorviewmodel("normal");
   self stopviewmodelanim();
   scripts\cp\cp_infilexfil::takegunlesscp();
   self clearsoundsubmix("iw8_cp_intro_outro");
-  var0 notify("prematch_over");
+  var_0 notify("prematch_over");
   level notify("prematch_over");
   thread scriptswitchweaponhack();
   thread clear_infil_ambient_zone();
@@ -159,9 +159,9 @@ function clear_infil_ambient_zone() {
   self clearclienttriggeraudiozone(2);
 }
 
-function player_infil_end(var0) {
+function player_infil_end(var_0) {
   self endon("disconnect");
-  scripts\engine\utility::waittill_any_ents(level, "prematch_over", var0, "prematch_over");
+  scripts\engine\utility::waittill_any_ents(level, "prematch_over", var_0, "prematch_over");
   self notify("remove_rig");
   self clearclienttriggeraudiozone(1);
   scripts\mp\utility\player::setdof_default();
@@ -181,21 +181,21 @@ function player_van_disconnect() {
   }
 }
 
-function infilthink(var0, var1) {
+function infilthink(var_0, var_1) {
   level endon("game_ended");
 
-  foreach(var3 in getEntArray("infil_delete", "script_noteworthy")) {
-    var3 delete();
+  foreach(var_3 in getEntArray("infil_delete", "script_noteworthy")) {
+    var_3 delete();
   }
 
-  thread vehiclethink(var0, self.scene_node, var1);
-  thread actorthink(var0, self.scene_node, var1);
+  thread vehiclethink(var_0, self.scene_node, var_1);
+  thread actorthink(var_0, self.scene_node, var_1);
   scripts\engine\utility::waittill_any_ents(level, "infil_started", self, "infil_started");
   setDvar("TLMMOPMSK", 1);
   level notify("start_scene");
   self notify("start_scene");
-  var5 = lbravo_get_length(var1);
-  wait var5;
+  var_5 = lbravo_get_length(var_1);
+  wait var_5;
   scripts\engine\utility::waittill_any_ents(level, "prematch_over", self, "prematch_over");
   setDvar("TLMMOPMSK", 0);
 
@@ -206,69 +206,69 @@ function infilthink(var0, var1) {
   self delete();
 }
 
-function vehiclethink(var0, var1, var2, var3) {
+function vehiclethink(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
-  self.linktoent = spawninfilvehicle(var1, var0, var2);
+  self.linktoent = spawninfilvehicle(var_1, var_0, var_2);
 
   if(isDefined(self.path)) {
-    thread vehiclethinkpath(var0, var1, var2, var3);
+    thread vehiclethinkpath(var_0, var_1, var_2, var_3);
     return;
   }
 
-  thread vehiclethinkanim(var0, var1, var2, var3);
+  thread vehiclethinkanim(var_0, var_1, var_2, var_3);
 }
 
-function vehiclethinkanim(var0, var1, var2, var3) {
-  scripts\common\anim::anim_first_frame_solo(self.linktoent, "lbravo_infil_" + var2);
+function vehiclethinkanim(var_0, var_1, var_2, var_3) {
+  scripts\common\anim::anim_first_frame_solo(self.linktoent, "lbravo_infil_" + var_2);
   scripts\engine\utility::waittill_any_ents(level, "infil_started", self, "infil_started");
-  thread scripts\common\anim::anim_single_solo(self.linktoent, "lbravo_infil_" + var2);
-  var4 = getanimlength(level.scr_anim[self.linktoent.animname]["lbravo_infil_" + var2]);
-  wait var4;
+  thread scripts\common\anim::anim_single_solo(self.linktoent, "lbravo_infil_" + var_2);
+  var_4 = getanimlength(level.scr_anim[self.linktoent.animname]["lbravo_infil_" + var_2]);
+  wait var_4;
   self.linktoent delete();
   self.linktoent = undefined;
 }
 
-function spawninfilvehicle(var0, var1, var2) {
-  var3 = var0.origin;
-  var4 = var0.angles;
+function spawninfilvehicle(var_0, var_1, var_2) {
+  var_3 = var_0.origin;
+  var_4 = var_0.angles;
 
   if(isDefined(self.path)) {
-    var3 = self.path.origin;
-    var4 = self.path.angles;
+    var_3 = self.path.origin;
+    var_4 = self.path.angles;
   }
 
-  var5 = spawnVehicle("veh8_mil_air_lbravo_personnel_cp", var2, "lbravo_infil_cp", var3, var4);
-  var5 setvehicleteam(var1);
-  var5.animname = "lbravo";
-  var5 setCanDamage(0);
-  var5 setscriptablepartstate("engine", "on", 0);
-  var5.infil = self;
+  var_5 = spawnVehicle("veh8_mil_air_lbravo_personnel_cp", var_2, "lbravo_infil_cp", var_3, var_4);
+  var_5 setvehicleteam(var_1);
+  var_5.animname = "lbravo";
+  var_5 setCanDamage(0);
+  var_5 setscriptablepartstate("engine", "on", 0);
+  var_5.infil = self;
 
   if(isDefined(level.ref_1356f)) {
-    level thread[[level.ref_1356f]](var5);
+    level thread[[level.ref_1356f]](var_5);
   }
 
-  return var5;
+  return var_5;
 }
 
-function actorthink(var0, var1, var2, var3) {
+function actorthink(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
-  self.actors = thread spawnactors(var0, var2, var3);
+  self.actors = thread spawnactors(var_0, var_2, var_3);
   self.actors[0].anim_playsound_func = &commander_play_sound_func;
-  self.linktoent scripts\common\anim::anim_first_frame(self.actors, "lbravo_infil_" + var2, "origin_animate_jnt");
+  self.linktoent scripts\common\anim::anim_first_frame(self.actors, "lbravo_infil_" + var_2, "origin_animate_jnt");
   scripts\mp\utility\infilexfil::hideactors();
   scripts\engine\utility::waittill_any_ents(level, "infil_started", self, "infil_started");
   scripts\mp\utility\infilexfil::showactors();
 
   if(isDefined(self.path)) {
-    actorthinkpath(var0, var1, var2, var3);
+    actorthinkpath(var_0, var_1, var_2, var_3);
     return;
   }
 
-  actorthinkanim(var0, var1, var2, var3);
+  actorthinkanim(var_0, var_1, var_2, var_3);
 }
 
-function actorthinkpath(var0, var1, var2, var3) {
+function actorthinkpath(var_0, var_1, var_2, var_3) {
   if(isDefined(level.watchfraggrenadeexplode)) {
     level thread[[level.watchfraggrenadeexplode]](self);
     return;
@@ -277,75 +277,75 @@ function actorthinkpath(var0, var1, var2, var3) {
   autoassignfirstquest(self);
 }
 
-function autoassignfirstquest(var0) {
-  thread actorloopthink(var0);
-  thread actorloopthink(var0);
+function autoassignfirstquest(var_0) {
+  thread actorloopthink(var_0);
+  thread actorloopthink(var_0);
 }
 
-function actorloopthink(var0) {
-  actorloop(var0);
-  self.linktoent scripts\common\anim::anim_single_solo(var0, "lbravo_infil_" + self.subtype + "_loop_exit", "origin_animate_jnt");
+function actorloopthink(var_0) {
+  actorloop(var_0);
+  self.linktoent scripts\common\anim::anim_single_solo(var_0, "lbravo_infil_" + self.subtype + "_loop_exit", "origin_animate_jnt");
 }
 
-function actorloop(var0) {
+function actorloop(var_0) {
   self.linktoent endon("unload");
 
   for(;;) {
-    self.linktoent scripts\common\anim::anim_single_solo(var0, "lbravo_infil_" + self.subtype + "_loop", "origin_animate_jnt");
+    self.linktoent scripts\common\anim::anim_single_solo(var_0, "lbravo_infil_" + self.subtype + "_loop", "origin_animate_jnt");
   }
 }
 
-function actorthinkanim(var0, var1, var2, var3) {
-  self.linktoent thread scripts\common\anim::anim_single(self.actors, "lbravo_infil_" + var2, "origin_animate_jnt");
-  var4 = getanimlength(level.scr_anim["pilot"]["lbravo_infil_" + var2]);
-  wait var4;
+function actorthinkanim(var_0, var_1, var_2, var_3) {
+  self.linktoent thread scripts\common\anim::anim_single(self.actors, "lbravo_infil_" + var_2, "origin_animate_jnt");
+  var_4 = getanimlength(level.scr_anim["pilot"]["lbravo_infil_" + var_2]);
+  wait var_4;
 
-  foreach(var6 in self.actors) {
-    var6 delete();
+  foreach(var_6 in self.actors) {
+    var_6 delete();
   }
 
   self.actors = undefined;
 }
 
-function spawnactors(var0, var1, var2) {
-  var3 = [];
-  GscBinSkip0(0x2e, var3.size, spawn_anim_model(self.linktoent, "pilot", "origin_animate_jnt", "allied_pilot_fullbody_1"));
+function spawnactors(var_0, var_1, var_2) {
+  var_3 = [];
+  GscBinSkip0(0x2e, var_3.size, spawn_anim_model(self.linktoent, "pilot", "origin_animate_jnt", "allied_pilot_fullbody_1"));
 }
 
-function spawn_anim_model(var0, var1, var2, var3, var4) {
-  var5 = spawn("script_model", (0, 0, 0));
-  var5 setModel(var2);
+function spawn_anim_model(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = spawn("script_model", (0, 0, 0));
+  var_5 setModel(var_2);
 
-  if(isDefined(var3)) {
-    var6 = spawn("script_model", (0, 0, 0));
-    var6 setModel(var3);
-    var6 linkTo(var5, "j_spine4", (0, 0, 0), (0, 0, 0));
-    var5.head = var6;
-    var5 thread scripts\engine\utility::delete_on_death(var6);
+  if(isDefined(var_3)) {
+    var_6 = spawn("script_model", (0, 0, 0));
+    var_6 setModel(var_3);
+    var_6 linkTo(var_5, "j_spine4", (0, 0, 0), (0, 0, 0));
+    var_5.head = var_6;
+    var_5 thread scripts\engine\utility::delete_on_death(var_6);
   }
 
-  if(isDefined(var4)) {
-    var7 = spawn("script_model", (0, 0, 0));
-    var7 setModel(var4);
-    var7 linkTo(var5, "j_gun", (0, 0, 0), (0, 0, 0));
-    var5 thread scripts\engine\utility::delete_on_death(var7);
-    var5.weapon = var7;
+  if(isDefined(var_4)) {
+    var_7 = spawn("script_model", (0, 0, 0));
+    var_7 setModel(var_4);
+    var_7 linkTo(var_5, "j_gun", (0, 0, 0), (0, 0, 0));
+    var_5 thread scripts\engine\utility::delete_on_death(var_7);
+    var_5.weapon = var_7;
   }
 
-  var5.animname = var0;
-  var5 scripts\common\anim::setanimtree();
+  var_5.animname = var_0;
+  var_5 scripts\common\anim::setanimtree();
 
-  if(isDefined(var1)) {
-    thread scripts\engine\utility::delete_on_death(var5);
-    var5 linkTo(self, var1, (0, 0, 0), (0, 0, 0));
+  if(isDefined(var_1)) {
+    thread scripts\engine\utility::delete_on_death(var_5);
+    var_5 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   }
 
-  return var5;
+  return var_5;
 }
 
-function initanims(var0) {
-  script_model_alpha_anims(var0);
-  vehicles_alpha_anims(var0);
+function initanims(var_0) {
+  script_model_alpha_anims(var_0);
+  vehicles_alpha_anims(var_0);
   scripts\common\anim::addnotetrack_customfunction("slot_0", "free_look", &scripts\mp\utility\infilexfil::player_free_look, "lbravo_infil_alpha_exit");
   scripts\common\anim::addnotetrack_customfunction("slot_1", "free_look", &scripts\mp\utility\infilexfil::player_free_look, "lbravo_infil_alpha_exit");
   scripts\common\anim::addnotetrack_customfunction("slot_2", "free_look", &scripts\mp\utility\infilexfil::player_free_look, "lbravo_infil_alpha_exit");
@@ -398,8 +398,8 @@ function initanims(var0) {
 
 #using_animtree("");
 
-function script_model_alpha_anims(var0) {
-  switch (var0) {
+function script_model_alpha_anims(var_0) {
+  switch (var_0) {
     case "alpha":
       level.scr_animtree["pilot"] = #animtree;
       level.scr_anim["pilot"]["lbravo_infil_alpha"] = $mp_infil_lbravo_a_pilot;
@@ -551,8 +551,8 @@ function script_model_alpha_anims(var0) {
   }
 }
 
-function vehicles_alpha_anims(var0) {
-  switch (var0) {
+function vehicles_alpha_anims(var_0) {
+  switch (var_0) {
     case "alpha":
       level.scr_animtree["lbravo"] = #animtree;
       level.scr_anim["lbravo"]["lbravo_infil_alpha"] = $mp_infil_lbravo_a_heli;
@@ -573,13 +573,13 @@ function vehicles_alpha_anims(var0) {
   }
 }
 
-function commander_play_sound_func(var0, var1, var2) {
-  foreach(var4 in self.infil.players) {
-    self playsoundtoplayer(var0, var4);
+function commander_play_sound_func(var_0, var_1, var_2) {
+  foreach(var_4 in self.infil.players) {
+    self playsoundtoplayer(var_0, var_4);
   }
 }
 
-function vehiclethinkpath(var0, var1, var2, var3) {
+function vehiclethinkpath(var_0, var_1, var_2, var_3) {
   level waittill("infil_started");
   self.linktoent endon("death");
   self.linktoent.unload_hover_offset = 116;
@@ -588,103 +588,103 @@ function vehiclethinkpath(var0, var1, var2, var3) {
   thread gopath(self.linktoent);
 }
 
-function vehiclefollowpath(var0) {
+function vehiclefollowpath(var_0) {
   self endon("death");
   self endon("stop_follow_path");
-  self startpath(var0);
+  self startpath(var_0);
 
-  for(var1 = scripts\engine\utility::getStruct(var0.target, "targetname"); isDefined(var1); var1 = scripts\engine\utility::getStruct(var1.target, "targetname")) {
-    var1 waittill("trigger");
+  for(var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname"); isDefined(var_1); var_1 = scripts\engine\utility::getStruct(var_1.target, "targetname")) {
+    var_1 waittill("trigger");
 
-    if(!isDefined(var1.target)) {
+    if(!isDefined(var_1.target)) {
       break;
     }
   }
 
   self vehicle_setspeedimmediate(0, 30, 30);
 
-  for(var2 = self vehicle_getspeed(); var2 > 1; var2 = self vehicle_getspeed()) {
+  for(var_2 = self vehicle_getspeed(); var_2 > 1; var_2 = self vehicle_getspeed()) {
     wait 0.1;
   }
 }
 
-function gopath(var0) {
-  if(!isDefined(var0)) {
-    var0 = self;
+function gopath(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = self;
   }
 
-  var0 endon("death");
+  var_0 endon("death");
 
-  if(isDefined(var0.hasstarted)) {
+  if(isDefined(var_0.hasstarted)) {
     return;
   } else {
-    var0.hasstarted = 1;
+    var_0.hasstarted = 1;
   }
 
-  var0 scripts\engine\utility::script_delay();
-  var0 notify("start_vehiclepath");
-  var0 notify("start_dynamicpath");
+  var_0 scripts\engine\utility::script_delay();
+  var_0 notify("start_vehiclepath");
+  var_0 notify("start_dynamicpath");
 }
 
-function vehicle_paths_helicopter(var0, var1, var2) {
+function vehicle_paths_helicopter(var_0, var_1, var_2) {
   self notify("newpath");
   self endon("newpath");
   self endon("death");
 
-  if(!isDefined(var1)) {
-    var1 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  if(isDefined(var0)) {
-    self.attachedpath = var0;
+  if(isDefined(var_0)) {
+    self.attachedpath = var_0;
   }
 
-  var3 = self.attachedpath;
+  var_3 = self.attachedpath;
   self.currentnode = self.attachedpath;
 
-  if(!isDefined(var3)) {
+  if(!isDefined(var_3)) {
     return;
   }
 
-  var4 = var3;
+  var_4 = var_3;
 
-  if(var1) {
+  if(var_1) {
     self waittill("start_dynamicpath");
   }
 
-  if(isDefined(var2)) {
-    var5 = spawnStruct();
-    var5.origin = (self.origin[0], self.origin[1], self.origin[2] + var2);
-    heli_wait_node(var5, undefined);
+  if(isDefined(var_2)) {
+    var_5 = spawnStruct();
+    var_5.origin = (self.origin[0], self.origin[1], self.origin[2] + var_2);
+    heli_wait_node(var_5, undefined);
   }
 
-  var6 = undefined;
-  var7 = var3;
-  var8 = get_path_getfunc(var3);
+  var_6 = undefined;
+  var_7 = var_3;
+  var_8 = get_path_getfunc(var_3);
 
-  while(isDefined(var7)) {
-    if(isDefined(var7.script_linkto)) {
-      set_lookat_from_dest(var7);
+  while(isDefined(var_7)) {
+    if(isDefined(var_7.script_linkto)) {
+      set_lookat_from_dest(var_7);
     }
 
-    heli_wait_node(var7, var6, var2);
+    heli_wait_node(var_7, var_6, var_2);
 
     if(!isDefined(self)) {
       return;
     }
 
-    self.currentnode = var7;
-    var7 notify("trigger", self);
+    self.currentnode = var_7;
+    var_7 notify("trigger", self);
 
-    if(isDefined(var7.script_delete)) {
+    if(isDefined(var_7.script_delete)) {
       self delete();
       return;
     }
 
-    if(isDefined(var7.script_helimove)) {
-      self setyawspeedbyname(var7.script_helimove);
+    if(isDefined(var_7.script_helimove)) {
+      self setyawspeedbyname(var_7.script_helimove);
 
-      if(var7.script_helimove == "faster") {
+      if(var_7.script_helimove == "faster") {
         self setmaxpitchroll(25, 50);
       }
     }
@@ -693,27 +693,27 @@ function vehicle_paths_helicopter(var0, var1, var2) {
       return;
     }
 
-    if(isDefined(var7.script_team)) {
-      self.script_team = var7.script_team;
+    if(isDefined(var_7.script_team)) {
+      self.script_team = var_7.script_team;
     }
 
-    if(isDefined(var7.script_unload)) {
+    if(isDefined(var_7.script_unload)) {
       self notify("unload");
       scripts\engine\utility::waittill_notify_or_timeout("unloaded", self.unload_time);
       level notify("players_unloaded_from_infil");
     }
 
     if(self vehicle_isphysveh()) {
-      if(isDefined(var7.script_pathtype)) {
-        self.veh_pathtype = var7.script_pathtype;
+      if(isDefined(var_7.script_pathtype)) {
+        self.veh_pathtype = var_7.script_pathtype;
       }
     }
 
-    if(isDefined(var7.script_flag_wait)) {
-      scripts\engine\utility::flag_wait(var7.script_flag_wait);
+    if(isDefined(var_7.script_flag_wait)) {
+      scripts\engine\utility::flag_wait(var_7.script_flag_wait);
 
-      if(isDefined(var7.script_delay_post)) {
-        wait var7.script_delay_post;
+      if(isDefined(var_7.script_delay_post)) {
+        wait var_7.script_delay_post;
       }
 
       self notify("delay_passed");
@@ -724,16 +724,16 @@ function vehicle_paths_helicopter(var0, var1, var2) {
       self clearlookatent();
     }
 
-    var6 = var7;
+    var_6 = var_7;
 
-    if(!isDefined(var7.target)) {
+    if(!isDefined(var_7.target)) {
       break;
     }
 
-    var7 = [[var8]](var7.target);
+    var_7 = [[var_8]](var_7.target);
 
-    if(!isDefined(var7)) {
-      var7 = var6;
+    if(!isDefined(var_7)) {
+      var_7 = var_6;
       break;
     }
   }
@@ -746,154 +746,154 @@ function vehicle_paths_helicopter(var0, var1, var2) {
   }
 }
 
-function heli_wait_node(var0, var1, var2) {
+function heli_wait_node(var_0, var_1, var_2) {
   self endon("newpath");
 
-  if(isDefined(var0.script_unload) || isDefined(var0.script_land)) {
-    var3 = 0;
+  if(isDefined(var_0.script_unload) || isDefined(var_0.script_land)) {
+    var_3 = 0;
 
-    if(isDefined(var0.script_land)) {
+    if(isDefined(var_0.script_land)) {
       scripts\engine\utility::ent_flag_set("landed");
 
       if(isDefined(self.unload_land_offset)) {
-        var3 = self.unload_land_offset;
+        var_3 = self.unload_land_offset;
       }
-    } else if(isDefined(var0.script_unload) && isDefined(self.unload_hover_offset)) {
-      var3 = self.unload_hover_offset;
-    } else if(isDefined(var0.script_unload) && isDefined(self.unload_hover_offset_max)) {
-      var4 = scripts\common\utility::groundpos(var0.origin);
-      var3 = var0.origin[2] - var4[2];
+    } else if(isDefined(var_0.script_unload) && isDefined(self.unload_hover_offset)) {
+      var_3 = self.unload_hover_offset;
+    } else if(isDefined(var_0.script_unload) && isDefined(self.unload_hover_offset_max)) {
+      var_4 = scripts\common\utility::groundpos(var_0.origin);
+      var_3 = var_0.origin[2] - var_4[2];
 
-      if(var3 >= self.unload_hover_offset_max) {
-        var3 = self.unload_hover_offset_max;
-      } else if(isDefined(self.unload_hover_land_height) && var3 < self.unload_hover_land_height) {
-        var3 = self.unload_hover_land_height;
+      if(var_3 >= self.unload_hover_offset_max) {
+        var_3 = self.unload_hover_offset_max;
+      } else if(isDefined(self.unload_hover_land_height) && var_3 < self.unload_hover_land_height) {
+        var_3 = self.unload_hover_land_height;
       }
     }
 
-    var0.radius = 2;
+    var_0.radius = 2;
 
-    if(isDefined(var0.ground_pos)) {
-      var0.origin = var0.ground_pos + (0, 0, var3);
+    if(isDefined(var_0.ground_pos)) {
+      var_0.origin = var_0.ground_pos + (0, 0, var_3);
     } else {
-      var5 = scripts\common\utility::groundpos(var0.origin) + (0, 0, var3);
+      var_5 = scripts\common\utility::groundpos(var_0.origin) + (0, 0, var_3);
 
-      if(var5[2] > var0.origin[2] - 2000) {
-        var0.origin = scripts\common\utility::groundpos(var0.origin) + (0, 0, var3);
+      if(var_5[2] > var_0.origin[2] - 2000) {
+        var_0.origin = scripts\common\utility::groundpos(var_0.origin) + (0, 0, var_3);
       }
     }
 
     self sethoverparams(0, 0, 0);
   }
 
-  if(isDefined(var1)) {
-    var6 = var1.script_airresistance;
-    var7 = var1.speed;
-    var8 = var1.script_accel;
-    var9 = var1.script_decel;
+  if(isDefined(var_1)) {
+    var_6 = var_1.script_airresistance;
+    var_7 = var_1.speed;
+    var_8 = var_1.script_accel;
+    var_9 = var_1.script_decel;
   } else {
-    var6 = undefined;
-    var7 = undefined;
-    var8 = undefined;
-    var9 = undefined;
+    var_6 = undefined;
+    var_7 = undefined;
+    var_8 = undefined;
+    var_9 = undefined;
   }
 
-  var10 = isDefined(var7.script_stopnode) && var7.script_stopnode;
-  var11 = isDefined(var7.script_unload);
-  var12 = isDefined(var7.script_flag_wait) && !scripts\engine\utility::flag(var7.script_flag_wait);
-  var13 = !isDefined(var7.target);
-  var14 = isDefined(var7.script_delay);
+  var_10 = isDefined(var_7.script_stopnode) && var_7.script_stopnode;
+  var_11 = isDefined(var_7.script_unload);
+  var_12 = isDefined(var_7.script_flag_wait) && !scripts\engine\utility::flag(var_7.script_flag_wait);
+  var_13 = !isDefined(var_7.target);
+  var_14 = isDefined(var_7.script_delay);
 
-  if(isDefined(var7.angles)) {
-    var15 = var7.angles[1];
+  if(isDefined(var_7.angles)) {
+    var_15 = var_7.angles[1];
   } else {
-    var15 = 0;
+    var_15 = 0;
   }
 
   if(self.health <= 0) {
     return;
   }
 
-  var16 = var8.origin;
+  var_16 = var_8.origin;
 
-  if(isDefined(var6)) {
-    var16 = (var16[0], var16[1], var16[2] + var6);
+  if(isDefined(var_6)) {
+    var_16 = (var_16[0], var_16[1], var_16[2] + var_6);
   }
 
   if(isDefined(self.heliheightoverride)) {
-    var16 = (var16[0], var16[1], self.heliheightoverride);
+    var_16 = (var_16[0], var_16[1], self.heliheightoverride);
   }
 
-  self vehicle_helisetai(var16, var8, var9, var10, var8.script_goalyaw, var8.script_anglevehicle, var15, var7, var15, var11, var12, var13, var14);
+  self vehicle_helisetai(var_16, var_8, var_9, var_10, var_8.script_goalyaw, var_8.script_anglevehicle, var_15, var_7, var_15, var_11, var_12, var_13, var_14);
 
-  if(isDefined(var8.radius)) {
-    self setneargoalnotifydist(var8.radius);
+  if(isDefined(var_8.radius)) {
+    self setneargoalnotifydist(var_8.radius);
     scripts\engine\utility::ref_143a5("near_goal", "goal");
   } else {
     self waittill("goal");
   }
 
-  if(isDefined(var8.script_flag_set)) {
-    level notify(var8.script_flag_set);
+  if(isDefined(var_8.script_flag_set)) {
+    level notify(var_8.script_flag_set);
   }
 
-  if(isDefined(var8.script_firelink)) {
+  if(isDefined(var_8.script_firelink)) {
     if(isDefined(level.helicopter_firelinkfunk)) {}
 
-    GscBinSkip1(0x74, level.helicopter_firelinkfunk, var8);
+    GscBinSkip1(0x74, level.helicopter_firelinkfunk, var_8);
   }
 
-  var8 scripts\engine\utility::script_delay();
+  var_8 scripts\engine\utility::script_delay();
 
   if(isDefined(self.path_gobbler)) {
-    scripts\engine\utility::deletestruct_ref(var8);
+    scripts\engine\utility::deletestruct_ref(var_8);
   }
 
   self notify("continuepath");
 }
 
-function get_path_getfunc(var0) {
-  var1 = &get_from_vehicle_node;
+function get_path_getfunc(var_0) {
+  var_1 = &get_from_vehicle_node;
 
-  if(isDefined(var0.target)) {
-    if(isDefined(get_from_entity(var0.target))) {
-      var1 = &get_from_entity;
+  if(isDefined(var_0.target)) {
+    if(isDefined(get_from_entity(var_0.target))) {
+      var_1 = &get_from_entity;
     }
 
-    if(isDefined(get_from_spawnStruct(var0.target))) {
-      var1 = &get_from_spawnstruct;
+    if(isDefined(get_from_spawnStruct(var_0.target))) {
+      var_1 = &get_from_spawnstruct;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function get_from_vehicle_node(var0) {
-  return getvehiclenode(var0, "targetname");
+function get_from_vehicle_node(var_0) {
+  return getvehiclenode(var_0, "targetname");
 }
 
-function get_from_spawnStruct(var0) {
-  return scripts\engine\utility::getStruct(var0, "targetname");
+function get_from_spawnStruct(var_0) {
+  return scripts\engine\utility::getStruct(var_0, "targetname");
 }
 
-function get_from_entity(var0) {
-  var1 = getEntArray(var0, "targetname");
+function get_from_entity(var_0) {
+  var_1 = getEntArray(var_0, "targetname");
 
-  if(isDefined(var1) && var1.size > 0) {
-    return var1[randomint(var1.size)];
+  if(isDefined(var_1) && var_1.size > 0) {
+    return var_1[randomint(var_1.size)];
   }
 
   return undefined;
 }
 
-function set_lookat_from_dest(var0) {
-  var1 = getEnt(var0.script_linkto, "script_linkname");
+function set_lookat_from_dest(var_0) {
+  var_1 = getEnt(var_0.script_linkto, "script_linkname");
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  self setlookatent(var1);
+  self setlookatent(var_1);
   self.set_lookat_point = 1;
 }
 
@@ -907,33 +907,33 @@ function parsepathlength() {
   }
 
   self.pathduration = 0;
-  var0 = self.path;
-  var1 = var0.speed;
+  var_0 = self.path;
+  var_1 = var_0.speed;
 
   for(;;) {
-    if(isDefined(var0.script_unload)) {
+    if(isDefined(var_0.script_unload)) {
       break;
     }
 
-    if(!isDefined(var0.target)) {
+    if(!isDefined(var_0.target)) {
       break;
     }
 
-    var2 = scripts\engine\utility::getStruct(var0.target, "targetname");
+    var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
 
-    if(!isDefined(var2)) {
+    if(!isDefined(var_2)) {
       break;
     }
 
-    var3 = distance(var0.origin, var2.origin);
+    var_3 = distance(var_0.origin, var_2.origin);
 
-    if(isDefined(var0.speed)) {
-      var1 = var0.speed;
+    if(isDefined(var_0.speed)) {
+      var_1 = var_0.speed;
     }
 
-    var4 = 17.6;
-    self.pathduration += var3 * 1.8 / var1 * var4;
-    var0 = var2;
+    var_4 = 17.6;
+    self.pathduration += var_3 * 1.8 / var_1 * var_4;
+    var_0 = var_2;
   }
 
   return self.pathduration;

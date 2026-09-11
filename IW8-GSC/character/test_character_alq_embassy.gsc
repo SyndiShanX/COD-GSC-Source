@@ -33,6 +33,6 @@ function main_mp() {
   scripts\code\character::attachhead("civilian_syrkistan_male_head", xmodelalias\civilian_syrkistan_male_head::main());
 }
 
-function precache_mp(var0) {
-  level.agent_definition[var0]["animclass"] = "rebel";
+function precache_mp(var_0) {
+  level.agent_definition[var_0]["animclass"] = "rebel";
 }

@@ -52,80 +52,80 @@ function debug_bunkerpuzzledebugdraw() {
   }
 
   self botsetflag("separation", 0);
-  var0 = undefined;
-  var1 = undefined;
+  var_0 = undefined;
+  var_1 = undefined;
 
   for(;;) {
     wait 0.05;
 
     if(!isDefined(self.role)) {
       thirdpersonheightoffset();
-      var0 = undefined;
+      var_0 = undefined;
     }
 
     if(scripts\mp\bots\bots_strategy::bot_has_tactical_goal()) {
-      var0 = undefined;
+      var_0 = undefined;
       continue;
     }
 
     if(self.role != "carrier" && isDefined(self.carryobject)) {
-      var0 = undefined;
+      var_0 = undefined;
       player_has_minigun("carrier");
     }
 
     if(self.role == "carrier") {
       if(isDefined(self.carryobject)) {
-        var2 = 0;
+        var_2 = 0;
 
         if(isDefined(self.enemy)) {
-          var2 = distancesquared(self.enemy.origin, self.origin);
+          var_2 = distancesquared(self.enemy.origin, self.origin);
         }
 
-        if(isDefined(self.enemy) && var2 < 9216) {}
+        if(isDefined(self.enemy) && var_2 < 9216) {}
 
         self botclearscriptgoal();
 
-        if(!isDefined(var1)) {
-          var1 = gettime() + randomintrange(500, 1000);
+        if(!isDefined(var_1)) {
+          var_1 = gettime() + randomintrange(500, 1000);
         }
 
-        if(gettime() > var1) {
-          var1 = gettime() + randomintrange(500, 1000);
+        if(gettime() > var_1) {
+          var_1 = gettime() + randomintrange(500, 1000);
         }
       } else {
-        var3 = dangernotifyplayer();
+        var_3 = dangernotifyplayer();
 
-        if(!isDefined(var3)) {
-          var4 = damageskipburndownhigh();
+        if(!isDefined(var_3)) {
+          var_4 = damageskipburndownhigh();
 
-          if(isDefined(var4) && var4 != self) {
+          if(isDefined(var_4) && var_4 != self) {
             thirdpersonheightoffset();
           }
         } else {
-          self botsetscriptgoal(var4.curorigin, 16, "objective");
+          self botsetscriptgoal(var_4.curorigin, 16, "objective");
           continue;
         }
       }
     } else {
-      var0 = undefined;
+      var_0 = undefined;
     }
 
     if(self.role == "attacker") {
-      var3 = dangernotifyplayer();
+      var_3 = dangernotifyplayer();
 
-      if(!isDefined(var3)) {
-        var4 = damageskipburndownhigh();
+      if(!isDefined(var_3)) {
+        var_4 = damageskipburndownhigh();
 
-        if(isDefined(var4)) {
-          if(!scripts\mp\bots\bots_util::bot_is_guarding_player(var4)) {
-            scripts\mp\bots\bots_strategy::bot_guard_player(var4, level.bodyguard_radius);
+        if(isDefined(var_4)) {
+          if(!scripts\mp\bots\bots_util::bot_is_guarding_player(var_4)) {
+            scripts\mp\bots\bots_strategy::bot_guard_player(var_4, level.bodyguard_radius);
           }
         }
-      } else if(!istrue(var3.isresetting) && !istrue(var3.in_goal)) {
-        var5 = getclosestpointonnavmesh(var3.curorigin);
+      } else if(!istrue(var_3.isresetting) && !istrue(var_3.in_goal)) {
+        var_5 = getclosestpointonnavmesh(var_3.curorigin);
 
-        if(!scripts\mp\bots\bots_util::bot_is_defending_point(var5)) {
-          scripts\mp\bots\bots_strategy::bot_protect_point(var5, level.protect_radius);
+        if(!scripts\mp\bots\bots_util::bot_is_defending_point(var_5)) {
+          scripts\mp\bots\bots_strategy::bot_protect_point(var_5, level.protect_radius);
         }
       }
 
@@ -133,36 +133,36 @@ function debug_bunkerpuzzledebugdraw() {
     }
 
     if(self.role == "defender") {
-      var6 = level.keeprightdooropen.carrier;
-      var7 = var6.origin;
+      var_6 = level.keeprightdooropen.carrier;
+      var_7 = var_6.origin;
 
-      if(!scripts\mp\bots\bots_util::bot_is_defending_point(var7)) {
-        scripts\mp\bots\bots_strategy::bot_protect_point(var7, level.protect_radius);
+      if(!scripts\mp\bots\bots_util::bot_is_defending_point(var_7)) {
+        scripts\mp\bots\bots_strategy::bot_protect_point(var_7, level.protect_radius);
       }
     }
   }
 }
 
 function thirdpersonheightoffset() {
-  var0 = get_allied_attackers_for_team(self.team);
-  var1 = get_allied_defenders_for_team(self.team);
-  var2 = player_grenade_fire_monitor(self.team);
-  var3 = player_gun_game_next_weapon_think(self.team);
-  var4 = level.bot_personality_type[self.personality];
+  var_0 = get_allied_attackers_for_team(self.team);
+  var_1 = get_allied_defenders_for_team(self.team);
+  var_2 = player_grenade_fire_monitor(self.team);
+  var_3 = player_gun_game_next_weapon_think(self.team);
+  var_4 = level.bot_personality_type[self.personality];
 
-  if(var4 == "active") {
-    if(var0.size >= var2) {
-      var5 = 0;
+  if(var_4 == "active") {
+    if(var_0.size >= var_2) {
+      var_5 = 0;
 
-      foreach(var7 in var0) {
-        if(isai(var7) && level.bot_personality_type[var7.personality] == "stationary") {
-          var7.role = undefined;
-          var5 = 1;
+      foreach(var_7 in var_0) {
+        if(isai(var_7) && level.bot_personality_type[var_7.personality] == "stationary") {
+          var_7.role = undefined;
+          var_5 = 1;
           break;
         }
       }
 
-      if(var5) {
+      if(var_5) {
         player_has_minigun("attacker");
         return;
       }
@@ -175,19 +175,19 @@ function thirdpersonheightoffset() {
     return;
   }
 
-  if(var4 == "stationary") {
-    if(var1.size >= var3) {
-      var5 = 0;
+  if(var_4 == "stationary") {
+    if(var_1.size >= var_3) {
+      var_5 = 0;
 
-      foreach(var10 in var1) {
-        if(isai(var10) && level.bot_personality_type[var10.personality] == "active") {
-          var10.role = undefined;
-          var5 = 1;
+      foreach(var_10 in var_1) {
+        if(isai(var_10) && level.bot_personality_type[var_10.personality] == "active") {
+          var_10.role = undefined;
+          var_5 = 1;
           break;
         }
       }
 
-      if(var5) {
+      if(var_5) {
         player_has_minigun("defender");
         return;
       }
@@ -208,116 +208,116 @@ function damage_per_second() {
   GscBinSkip1(0x45, 0, "allies");
 }
 
-function player_grenade_fire_monitor(var0) {
-  var1 = player_gun_game_randomize_weapon_list_think(var0);
-  return var1;
+function player_grenade_fire_monitor(var_0) {
+  var_1 = player_gun_game_randomize_weapon_list_think(var_0);
+  return var_1;
 }
 
-function player_gun_game_next_weapon_think(var0) {
+function player_gun_game_next_weapon_think(var_0) {
   return false;
 }
 
-function player_gun_game_randomize_weapon_list_think(var0) {
-  var1 = 0;
+function player_gun_game_randomize_weapon_list_think(var_0) {
+  var_1 = 0;
 
-  foreach(var3 in level.participants) {
-    if(scripts\mp\utility\entity::isteamparticipant(var3) && isDefined(var3.team) && var3.team == var0) {
-      var1++;
+  foreach(var_3 in level.participants) {
+    if(scripts\mp\utility\entity::isteamparticipant(var_3) && isDefined(var_3.team) && var_3.team == var_0) {
+      var_1++;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function ref_12335(var0, var1) {
-  var2 = undefined;
-  var3 = undefined;
+function ref_12335(var_0, var_1) {
+  var_2 = undefined;
+  var_3 = undefined;
 
-  foreach(var5 in level.participants) {
-    if(!isDefined(var5.team)) {
+  foreach(var_5 in level.participants) {
+    if(!isDefined(var_5.team)) {
       continue;
     }
 
-    if(var5.team != var0) {
+    if(var_5.team != var_0) {
       continue;
     }
 
-    if(!isalive(var5)) {
+    if(!isalive(var_5)) {
       continue;
     }
 
-    if(!isai(var5)) {
+    if(!isai(var_5)) {
       continue;
     }
 
-    if(isDefined(var5.role) && var5.role == "defender") {
+    if(isDefined(var_5.role) && var_5.role == "defender") {
       continue;
     }
 
-    var6 = distancesquared(var5.origin, var1.curorigin);
+    var_6 = distancesquared(var_5.origin, var_1.curorigin);
 
-    if(!isDefined(var3) || var6 < var3) {
-      var3 = var6;
-      var2 = var5;
+    if(!isDefined(var_3) || var_6 < var_3) {
+      var_3 = var_6;
+      var_2 = var_5;
     }
   }
 
-  if(isDefined(var2)) {
-    return var2;
+  if(isDefined(var_2)) {
+    return var_2;
   }
 
   return undefined;
 }
 
-function get_allied_attackers_for_team(var0) {
-  var1 = get_players_by_role("attacker", var0);
-  return var1;
+function get_allied_attackers_for_team(var_0) {
+  var_1 = get_players_by_role("attacker", var_0);
+  return var_1;
 }
 
-function get_allied_defenders_for_team(var0) {
-  var1 = get_players_by_role("defender", var0);
-  return var1;
+function get_allied_defenders_for_team(var_0) {
+  var_1 = get_players_by_role("defender", var_0);
+  return var_1;
 }
 
-function player_has_minigun(var0) {
-  self.role = var0;
+function player_has_minigun(var_0) {
+  self.role = var_0;
   self botclearscriptgoal();
   scripts\mp\bots\bots_strategy::bot_defend_stop();
 }
 
-function get_players_by_role(var0, var1) {
-  var2 = [];
+function get_players_by_role(var_0, var_1) {
+  var_2 = [];
 
-  foreach(var4 in level.participants) {
-    if(!isDefined(var4.team)) {
+  foreach(var_4 in level.participants) {
+    if(!isDefined(var_4.team)) {
       continue;
     }
 
-    if(isalive(var4) && scripts\mp\utility\entity::isteamparticipant(var4) && var4.team == var1 && isDefined(var4.role) && var4.role == var0) {
-      var2 = var4;
+    if(isalive(var_4) && scripts\mp\utility\entity::isteamparticipant(var_4) && var_4.team == var_1 && isDefined(var_4.role) && var_4.role == var_0) {
+      var_2 = var_4;
     }
   }
 
-  return var2;
+  return var_2;
 }
 
 function ref_11cdd() {
   level endon("game_ended");
-  var0 = undefined;
+  var_0 = undefined;
 
   for(;;) {
-    var1 = damageskipburndownhigh();
+    var_1 = damageskipburndownhigh();
 
-    if(!isDefined(var0) || !isDefined(var1) || var1 != var0) {
-      if(isDefined(var0) && var0.threatbias == 505) {
-        var0.threatbias = 0;
+    if(!isDefined(var_0) || !isDefined(var_1) || var_1 != var_0) {
+      if(isDefined(var_0) && var_0.threatbias == 505) {
+        var_0.threatbias = 0;
       }
 
-      var0 = var1;
+      var_0 = var_1;
     }
 
-    if(isDefined(var1) && var1.threatbias == 0) {
-      var1.threatbias = 505;
+    if(isDefined(var_1) && var_1.threatbias == 0) {
+      var_1.threatbias = 505;
     }
 
     wait 0.05;

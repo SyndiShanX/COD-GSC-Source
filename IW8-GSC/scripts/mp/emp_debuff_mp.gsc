@@ -14,8 +14,8 @@ function getplayerempimmune() {
   return scripts\mp\utility\perk::_hasperk("specialty_empimmune");
 }
 
-function setplayerempimmune(var0) {
-  if(var0) {
+function setplayerempimmune(var_0) {
+  if(var_0) {
     scripts\mp\utility\perk::giveperk("specialty_empimmune");
     return;
   }
@@ -23,20 +23,20 @@ function setplayerempimmune(var0) {
   scripts\mp\utility\perk::removeperk("specialty_empimmune");
 }
 
-function onplayeremped(var0) {
-  var1 = var0.attacker;
+function onplayeremped(var_0) {
+  var_1 = var_0.attacker;
 
-  if(istrue(scripts\cp_mp\utility\player_utility::playersareenemies(self, var1))) {
-    var1 thread scripts\mp\killstreaks\killstreaks::givescoreforempedplayer();
+  if(istrue(scripts\cp_mp\utility\player_utility::playersareenemies(self, var_1))) {
+    var_1 thread scripts\mp\killstreaks\killstreaks::givescoreforempedplayer();
     return;
   }
 }
 
-function onvehicleemped(var0) {
-  var1 = var0.attacker;
+function onvehicleemped(var_0) {
+  var_1 = var_0.attacker;
 
-  if(istrue(scripts\cp_mp\utility\player_utility::playersareenemies(self.owner, var1))) {
-    var1 scripts\mp\killstreaks\killstreaks::givescoreforempedvehicle();
+  if(istrue(scripts\cp_mp\utility\player_utility::playersareenemies(self.owner, var_1))) {
+    var_1 scripts\mp\killstreaks\killstreaks::givescoreforempedvehicle();
     return;
   }
 }

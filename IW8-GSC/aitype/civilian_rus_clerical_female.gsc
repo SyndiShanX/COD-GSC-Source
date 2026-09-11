@@ -35,7 +35,7 @@ function spawner() {
   self setspawnerteam("neutral");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\test_character_civ_female_rus_clerical::precache();
   scripts\aitypes\bt_util::init();
   scripts\aitypes\assets::civilian();

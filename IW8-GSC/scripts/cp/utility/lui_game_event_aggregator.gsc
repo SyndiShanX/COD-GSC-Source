@@ -11,13 +11,13 @@ function onplayerconnect() {
   level.onluieventcallbacks = [];
 
   for(;;) {
-    level waittill("connected", var0);
+    level waittill("connected", var_0);
     thread onplayerconnected();
   }
 }
 
-function registeronluieventcallback(var0) {
-  level.onluieventcallbacks[level.onluieventcallbacks.size] = var0;
+function registeronluieventcallback(var_0) {
+  level.onluieventcallbacks[level.onluieventcallbacks.size] = var_0;
 }
 
 function onplayerconnected() {
@@ -25,10 +25,10 @@ function onplayerconnected() {
   level endon("game_ended");
 
   for(;;) {
-    self waittill("luinotifyserver", var0, var1);
+    self waittill("luinotifyserver", var_0, var_1);
 
-    foreach(var3 in level.onluieventcallbacks) {
-      self[[var3]](var0, var1);
+    foreach(var_3 in level.onluieventcallbacks) {
+      self[[var_3]](var_0, var_1);
     }
   }
 }

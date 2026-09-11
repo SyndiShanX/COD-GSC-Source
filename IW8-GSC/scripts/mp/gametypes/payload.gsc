@@ -18,13 +18,13 @@ function initializematchrules() {
   setdynamicdvar("scr_payload_waverespawndelay", 5);
 }
 
-function onstartgametype(var0) {
-  var1 = scripts\mp\utility\game::istimetobeatvalid();
+function onstartgametype(var_0) {
+  var_1 = scripts\mp\utility\game::istimetobeatvalid();
 
   if(game["roundsPlayed"] == 0) {
     setomnvar("ui_round_hint_override_attackers", 1);
     setomnvar("ui_round_hint_override_defenders", 1);
-  } else if(var1) {
+  } else if(var_1) {
     setomnvar("ui_round_hint_override_attackers", scripts\engine\utility::ter_op(game["timeToBeatTeam"] == game["attackers"], 2, 3));
     setomnvar("ui_round_hint_override_defenders", scripts\engine\utility::ter_op(game["timeToBeatTeam"] == game["defenders"], 2, 3));
   } else {
@@ -37,22 +37,22 @@ function onstartgametype(var0) {
   }
 
   if(game["switchedsides"]) {
-    var2 = game["attackers"];
-    var3 = game["defenders"];
-    game["attackers"] = var3;
-    game["defenders"] = var2;
+    var_2 = game["attackers"];
+    var_3 = game["defenders"];
+    game["attackers"] = var_3;
+    game["defenders"] = var_2;
   }
 
-  foreach(var5 in level.teamnamelist) {
-    scripts\mp\utility\game::setobjectivetext(var5, &"OBJECTIVES/KOTH");
+  foreach(var_5 in level.teamnamelist) {
+    scripts\mp\utility\game::setobjectivetext(var_5, &"OBJECTIVES/KOTH");
 
     if(level.splitscreen) {
-      scripts\mp\utility\game::setobjectivescoretext(var5, &"OBJECTIVES/KOTH");
+      scripts\mp\utility\game::setobjectivescoretext(var_5, &"OBJECTIVES/KOTH");
     } else {
-      scripts\mp\utility\game::setobjectivescoretext(var5, &"OBJECTIVES/KOTH_SCORE");
+      scripts\mp\utility\game::setobjectivescoretext(var_5, &"OBJECTIVES/KOTH_SCORE");
     }
 
-    scripts\mp\utility\game::setobjectivehinttext(var5, &"OBJECTIVES/KOTH_HINT");
+    scripts\mp\utility\game::setobjectivehinttext(var_5, &"OBJECTIVES/KOTH_HINT");
   }
 
   setclientnamemode("auto_change");
@@ -79,20 +79,20 @@ function initspawns() {
 }
 
 function getspawnpoint() {
-  var0 = self.pers["team"];
+  var_0 = self.pers["team"];
 
   if(game["switchedsides"]) {
-    var0 = scripts\mp\utility\game::getotherteam(var0)[0];
+    var_0 = scripts\mp\utility\game::getotherteam(var_0)[0];
   }
 
   if(scripts\mp\spawnlogic::shoulduseteamstartspawn()) {
-    var1 = scripts\mp\spawnlogic::getspawnpointarray("mp_payload_spawn_" + var0 + "_start");
-    var2 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var1);
+    var_1 = scripts\mp\spawnlogic::getspawnpointarray("mp_payload_spawn_" + var_0 + "_start");
+    var_2 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_1);
   } else {
-    var2 = scripts\mp\spawnscoring::getspawnpoint(self, var2, level.payloadspawnsets[var2]);
+    var_2 = scripts\mp\spawnscoring::getspawnpoint(self, var_2, level.payloadspawnsets[var_2]);
   }
 
-  return var2;
+  return var_2;
 }
 
 function updategametypedvars() {
@@ -104,114 +104,114 @@ function ontimelimit() {
   thread scripts\mp\gamelogic::endgame(scripts\mp\utility\game::getotherteam(level.tank.team)[0], game["end_reason"]["time_limit_reached"]);
 }
 
-function onnormaldeath(var0, var1, var2, var3, var4, var5) {
-  scripts\mp\gametypes\common::oncommonnormaldeath(var0, var1, var2, var3, var4, var5);
+function onnormaldeath(var_0, var_1, var_2, var_3, var_4, var_5) {
+  scripts\mp\gametypes\common::oncommonnormaldeath(var_0, var_1, var_2, var_3, var_4, var_5);
 }
 
 function onspawnplayer() {}
 
 function spawnbradleypayload() {
-  var0 = level.players[0];
-  var1 = game["attackers"];
-  var2 = spawn("script_model", level.tankmovetopath.origin);
-  var2.angles = level.tankmovetopath.angles;
-  var2.team = var1;
-  var2 setModel("veh8_mil_lnd_bromeo_allies_mp_to");
-  var2 setentityowner(var0);
-  var2 setotherent(var0);
-  var3 = undefined;
+  var_0 = level.players[0];
+  var_1 = game["attackers"];
+  var_2 = spawn("script_model", level.tankmovetopath.origin);
+  var_2.angles = level.tankmovetopath.angles;
+  var_2.team = var_1;
+  var_2 setModel("veh8_mil_lnd_bromeo_allies_mp_to");
+  var_2 setentityowner(var_0);
+  var_2 setotherent(var_0);
+  var_3 = undefined;
 
-  if(isDefined(var0)) {
-    var3 = var0 getentitynumber();
+  if(isDefined(var_0)) {
+    var_3 = var_0 getentitynumber();
   }
 
-  var4 = (-532.957, -3351.52, 312.255);
-  var5 = (0, 90, 0);
-  var2.owner = var0;
-  var2.ownerid = var3;
-  var2.team = var1;
-  var2 setCanDamage(0);
-  var6 = var2 gettagorigin("tag_turret");
-  var7 = spawnturret("misc_turret", var6, "tur_bradley_mp", 0);
-  var7 linkTo(var2, "tag_turret", (0, 0, 0), (0, 0, 0));
-  var7 setModel("veh8_mil_lnd_bromeo_turret_allies_mp");
-  var7.owner = var0;
-  var7.team = var1;
-  var7 setmode("sentry_offline");
-  var7 setsentryowner(undefined);
-  var7 makeunusable();
-  var7 setdefaultdroppitch(0);
-  var7 setCanDamage(0);
-  var7 setturretmodechangewait(1);
-  var2.turret = var7;
-  var2.isbradley = 1;
-  var7.vehicle = var2;
-  var7.damageshakeexplosivenum = 0;
-  var7.damageshakebulletnum = 0;
-  var8 = [];
-  var9 = spawn("trigger_radius", var2.origin, 0, 300, 192);
-  var9 enablelinkTo();
-  var9 linkTo(var2);
-  var10 = scripts\mp\gameobjects::createuseobject(var1, var9, var8, (0, 0, 90));
-  var10 scripts\mp\gameobjects::allowuse("friendly");
-  var10 scripts\mp\gameobjects::setusetime(0);
-  var10 scripts\mp\gameobjects::cancontestclaim(1);
-  var10 scripts\mp\gameobjects::mustmaintainclaim(1);
-  var10.onuse = &tank_onuse;
-  var10.onunoccupied = &tank_onunoccupied;
-  var10.oncontested = &tank_oncontested;
-  var10.onuncontested = &tank_onuncontested;
-  var2.useobj = var10;
-  var2.damaged = 0;
-  var2.trackedobject = var2 scripts\mp\gameobjects::createtrackedobject(var2, (0, 0, 64));
-  var2.trackedobject.objidpingfriendly = 0;
-  var2.trackedobject.objidpingenemy = 1;
-  var2.trackedobject.objpingdelay = 0.05;
-  var2.trackedobject.visibleteam = "any";
-  var2.invulnerable = 1;
-  var2.trackedobject scripts\mp\gameobjects::setobjectivestatusicons(level.icontarget, level.icontarget);
-  level.tank = var2;
+  var_4 = (-532.957, -3351.52, 312.255);
+  var_5 = (0, 90, 0);
+  var_2.owner = var_0;
+  var_2.ownerid = var_3;
+  var_2.team = var_1;
+  var_2 setCanDamage(0);
+  var_6 = var_2 gettagorigin("tag_turret");
+  var_7 = spawnturret("misc_turret", var_6, "tur_bradley_mp", 0);
+  var_7 linkTo(var_2, "tag_turret", (0, 0, 0), (0, 0, 0));
+  var_7 setModel("veh8_mil_lnd_bromeo_turret_allies_mp");
+  var_7.owner = var_0;
+  var_7.team = var_1;
+  var_7 setmode("sentry_offline");
+  var_7 setsentryowner(undefined);
+  var_7 makeunusable();
+  var_7 setdefaultdroppitch(0);
+  var_7 setCanDamage(0);
+  var_7 setturretmodechangewait(1);
+  var_2.turret = var_7;
+  var_2.isbradley = 1;
+  var_7.vehicle = var_2;
+  var_7.damageshakeexplosivenum = 0;
+  var_7.damageshakebulletnum = 0;
+  var_8 = [];
+  var_9 = spawn("trigger_radius", var_2.origin, 0, 300, 192);
+  var_9 enablelinkTo();
+  var_9 linkTo(var_2);
+  var_10 = scripts\mp\gameobjects::createuseobject(var_1, var_9, var_8, (0, 0, 90));
+  var_10 scripts\mp\gameobjects::allowuse("friendly");
+  var_10 scripts\mp\gameobjects::setusetime(0);
+  var_10 scripts\mp\gameobjects::cancontestclaim(1);
+  var_10 scripts\mp\gameobjects::mustmaintainclaim(1);
+  var_10.onuse = &tank_onuse;
+  var_10.onunoccupied = &tank_onunoccupied;
+  var_10.oncontested = &tank_oncontested;
+  var_10.onuncontested = &tank_onuncontested;
+  var_2.useobj = var_10;
+  var_2.damaged = 0;
+  var_2.trackedobject = var_2 scripts\mp\gameobjects::createtrackedobject(var_2, (0, 0, 64));
+  var_2.trackedobject.objidpingfriendly = 0;
+  var_2.trackedobject.objidpingenemy = 1;
+  var_2.trackedobject.objpingdelay = 0.05;
+  var_2.trackedobject.visibleteam = "any";
+  var_2.invulnerable = 1;
+  var_2.trackedobject scripts\mp\gameobjects::setobjectivestatusicons(level.icontarget, level.icontarget);
+  level.tank = var_2;
 }
 
-function bradley_handletacopsdamage(var0) {
-  var1 = var0.attacker;
-  var2 = var0.objweapon;
-  var3 = var0.meansofdeath;
-  var4 = var0.damage;
-  var5 = var0.idflags;
+function bradley_handletacopsdamage(var_0) {
+  var_1 = var_0.attacker;
+  var_2 = var_0.objweapon;
+  var_3 = var_0.meansofdeath;
+  var_4 = var_0.damage;
+  var_5 = var_0.idflags;
 
-  if(var3 == "MOD_MELEE") {
+  if(var_3 == "MOD_MELEE") {
     return 0;
   }
 
-  var4 = scripts\mp\utility\killstreak::getmodifiedantikillstreakdamage(var1, var2, var3, var4, 3000, 8, 12, 16);
-  return var4;
+  var_4 = scripts\mp\utility\killstreak::getmodifiedantikillstreakdamage(var_1, var_2, var_3, var_4, 3000, 8, 12, 16);
+  return var_4;
 }
 
-function bradley_handlefataltacopsdamage(var0) {
-  var1 = var0.attacker;
-  var2 = var0.objweapon;
-  var3 = var0.meansofdeath;
-  var4 = var0.damage;
-  var5 = var0.idflags;
+function bradley_handlefataltacopsdamage(var_0) {
+  var_1 = var_0.attacker;
+  var_2 = var_0.objweapon;
+  var_3 = var_0.meansofdeath;
+  var_4 = var_0.damage;
+  var_5 = var_0.idflags;
 
   if(level.teambased) {
-    var6 = "";
+    var_6 = "";
 
-    if(isDefined(var1) && isDefined(var1.team)) {
-      var6 = var1.team;
+    if(isDefined(var_1) && isDefined(var_1.team)) {
+      var_6 = var_1.team;
     }
 
-    if(var6 != self.team) {}
-  } else if(isDefined(var1) && (!isDefined(self.owner) || self.owner != var1)) {}
+    if(var_6 != self.team) {}
+  } else if(isDefined(var_1) && (!isDefined(self.owner) || self.owner != var_1)) {}
 
-  thread bradley_vehicledestroy(var1, var2, var3, 0);
+  thread bradley_vehicledestroy(var_1, var_2, var_3, 0);
 }
 
-function bradley_vehicledestroy(var0, var1, var2, var3) {
+function bradley_vehicledestroy(var_0, var_1, var_2, var_3) {
   self.damaged = 1;
   self notify("bradley_disabled");
-  var3 = istrue(var3);
+  var_3 = istrue(var_3);
   self.isdestroyed = 1;
   self setCanDamage(0);
   self.turret setCanDamage(0);
@@ -224,7 +224,7 @@ function watchdamagecycle() {
   self endon("bradley_disabled");
 
   for(;;) {
-    self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
 
     if(istrue(self.isrepairing)) {
       continue;
@@ -249,22 +249,22 @@ function bradley_restorehealth() {
   if(!istrue(self.damaged)) {
     self endon("damage");
     self.allowpartialrepairs = 0;
-    var0 = 0;
-    var1 = 0.2;
-    var2 = 10;
+    var_0 = 0;
+    var_1 = 0.2;
+    var_2 = 10;
   } else {
     self.isrepairing = 1;
-    var0 = 10;
-    var1 = 0.1;
-    var2 = 100;
+    var_0 = 10;
+    var_1 = 0.1;
+    var_2 = 100;
   }
 
-  wait var0;
+  wait var_0;
   scripts\mp\utility\print::printboldonteam("Repairing Bradley", "allies");
 
   while(self.damagetaken != 0) {
-    self.damagetaken = max(self.damagetaken - var2, 0);
-    wait var1;
+    self.damagetaken = max(self.damagetaken - var_2, 0);
+    wait var_1;
   }
 
   scripts\mp\utility\print::printboldonteam("Bradley Repaired", "allies");
@@ -277,11 +277,11 @@ function bradley_restorehealth() {
   self.movementdisabled = 0;
 }
 
-function tank_onuse(var0) {
-  var1 = var0.team;
-  var2 = scripts\mp\gameobjects::getownerteam();
-  var3 = scripts\mp\utility\game::getotherteam(var1)[0];
-  var4 = gettime();
+function tank_onuse(var_0) {
+  var_1 = var_0.team;
+  var_2 = scripts\mp\gameobjects::getownerteam();
+  var_3 = scripts\mp\utility\game::getotherteam(var_1)[0];
+  var_4 = gettime();
 
   if(istrue(self.allowpartialrepairs)) {
     thread bradley_restorehealth();
@@ -289,36 +289,36 @@ function tank_onuse(var0) {
 
   thread startmove(level);
   level.usestartspawns = 0;
-  var5 = 0;
+  var_5 = 0;
   level.tank.trackedobject scripts\mp\gameobjects::setobjectivestatusicons(level.icondefend, level.iconcapture);
 
-  if(!isDefined(level.lastcaptureteam) || level.lastcaptureteam != var1) {
-    var6 = [];
-    var7 = getarraykeys(self.touchlist[var1]);
+  if(!isDefined(level.lastcaptureteam) || level.lastcaptureteam != var_1) {
+    var_6 = [];
+    var_7 = getarraykeys(self.touchlist[var_1]);
 
-    for(var8 = 0; var8 < var7.size; var8++) {
-      var6 = self.touchlist[var1][var7[var8]];
+    for(var_8 = 0; var_8 < var_7.size; var_8++) {
+      var_6 = self.touchlist[var_1][var_7[var_8]];
     }
   }
 
-  level.hpcapteam = var1;
-  scripts\mp\gameobjects::setownerteam(var1);
-  level.lastcaptureteam = var1;
+  level.hpcapteam = var_1;
+  scripts\mp\gameobjects::setownerteam(var_1);
+  level.lastcaptureteam = var_1;
 }
 
 function tank_onunoccupied() {
   level notify("zone_destroyed");
   level.hpcapteam = "neutral";
-  var0 = 1;
+  var_0 = 1;
 
-  foreach(var2 in level.teamnamelist) {
-    if(self.numtouching[var2] > 0) {
-      var0 = 0;
+  foreach(var_2 in level.teamnamelist) {
+    if(self.numtouching[var_2] > 0) {
+      var_0 = 0;
       break;
     }
   }
 
-  if(var0) {
+  if(var_0) {
     level.tank.useobj.wasleftunoccupied = 1;
     level.tank.trackedobject scripts\mp\gameobjects::setobjectivestatusicons(level.icontarget);
   }
@@ -329,23 +329,23 @@ function tank_onunoccupied() {
 }
 
 function tank_oncontested() {
-  var0 = level.tank.useobj scripts\mp\gameobjects::getownerteam();
+  var_0 = level.tank.useobj scripts\mp\gameobjects::getownerteam();
   level.tank.trackedobject scripts\mp\gameobjects::setobjectivestatusicons(level.iconcontested);
 
-  if(var0 == "neutral") {
-    var1 = self.claimteam;
+  if(var_0 == "neutral") {
+    var_1 = self.claimteam;
   } else {
-    var1 = var1;
+    var_1 = var_1;
   }
 
   self notify("payload_stopped");
   level.tank moveTo(level.tank.origin, 0.05, 0, 0);
 }
 
-function tank_onuncontested(var0) {
-  var1 = level.tank.useobj scripts\mp\gameobjects::getownerteam();
+function tank_onuncontested(var_0) {
+  var_1 = level.tank.useobj scripts\mp\gameobjects::getownerteam();
 
-  if(var0 == "none" || var1 == "neutral") {
+  if(var_0 == "none" || var_1 == "neutral") {
     level.tank.trackedobject scripts\mp\gameobjects::setobjectivestatusicons(level.icontarget);
     return;
   }
@@ -353,9 +353,9 @@ function tank_onuncontested(var0) {
   level.tank.trackedobject scripts\mp\gameobjects::setobjectivestatusicons(level.icondefend, level.iconcapture);
 }
 
-function startmove(var0) {
+function startmove(var_0) {
   level endon("game_ended");
-  moveonpath(var0, level.tankmovetopath);
+  moveonpath(var_0, level.tankmovetopath);
 }
 
 function createpatharray() {
@@ -363,16 +363,16 @@ function createpatharray() {
   thread spawnbradleypayload();
 }
 
-function getpathstart(var0, var1) {
-  var2 = 100;
-  var3 = 150;
-  var4 = (0, var1, 0);
-  var5 = var0 + anglesToForward(var4) * -1 * var3;
-  var5 += ((randomfloat(2) - 1) * var2, (randomfloat(2) - 1) * var2, 0);
-  return var5;
+function getpathstart(var_0, var_1) {
+  var_2 = 100;
+  var_3 = 150;
+  var_4 = (0, var_1, 0);
+  var_5 = var_0 + anglesToForward(var_4) * -1 * var_3;
+  var_5 += ((randomfloat(2) - 1) * var_2, (randomfloat(2) - 1) * var_2, 0);
+  return var_5;
 }
 
-function moveonpath(var0) {
+function moveonpath(var_0) {
   level endon("game_ended");
   level endon("hostage_phase_ended");
   self endon("hostage_scored");
@@ -387,11 +387,11 @@ function moveonpath(var0) {
     return;
   }
 
-  var1 = level.tankmovetopath.origin;
-  var2 = getphysicspointaboutnavmesh(var1);
-  var3 = distance(self.origin, var2);
+  var_1 = level.tankmovetopath.origin;
+  var_2 = getphysicspointaboutnavmesh(var_1);
+  var_3 = distance(self.origin, var_2);
 
-  if(var3 < 10 && !level.gameended) {
+  if(var_3 < 10 && !level.gameended) {
     if(isDefined(level.tankmovetopath.target)) {
       level scripts\mp\gamescore::giveteamscoreforobjective(level.tank.team, 1, 0);
       level.tankmovetopath = scripts\engine\utility::getStruct(level.tankmovetopath.target, "targetname");
@@ -404,23 +404,23 @@ function moveonpath(var0) {
     return;
   }
 
-  var4 = var3 / self.speed;
-  self moveTo(var2, var4, 0, 0);
+  var_4 = var_3 / self.speed;
+  self moveTo(var_2, var_4, 0, 0);
   self rotateTo((level.tankmovetopath.angles[0], level.tankmovetopath.angles[1], self.angles[2]), 1);
-  wait var4;
+  wait var_4;
 }
 
-function getphysicspointaboutnavmesh(var0) {
-  var1 = scripts\engine\trace::create_contents(undefined, 1, 1, undefined, undefined, undefined, undefined);
-  var2 = physics_raycast(var0 + (0, 0, 48), var0 - (0, 0, 48), var1, undefined, 0, "physicsquery_closest");
-  var3 = isDefined(var2) && var2.size > 0;
+function getphysicspointaboutnavmesh(var_0) {
+  var_1 = scripts\engine\trace::create_contents(undefined, 1, 1, undefined, undefined, undefined, undefined);
+  var_2 = physics_raycast(var_0 + (0, 0, 48), var_0 - (0, 0, 48), var_1, undefined, 0, "physicsquery_closest");
+  var_3 = isDefined(var_2) && var_2.size > 0;
 
-  if(var3) {
-    var4 = var2[0]["position"];
-    return var4;
+  if(var_3) {
+    var_4 = var_2[0]["position"];
+    return var_4;
   }
 
-  return var1;
+  return var_1;
 }
 
 function seticonnames() {

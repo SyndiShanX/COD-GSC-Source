@@ -3,192 +3,192 @@
  * Script: scripts\models\interactive_utility.gsc
 **************************************************/
 
-function array_sortbyarray(var0, var1) {
-  var2 = [];
-  GscBinSkip0(0x2e, 0, var0[0]);
+function array_sortbyarray(var_0, var_1) {
+  var_2 = [];
+  GscBinSkip0(0x2e, 0, var_0[0]);
 }
 
-function array_sortbysorter(var0) {
-  var1 = [];
-  GscBinSkip0(0x2e, 0, var0[0]);
+function array_sortbysorter(var_0) {
+  var_1 = [];
+  GscBinSkip0(0x2e, 0, var_0[0]);
 }
 
-function wait_then_fn(var0, var1, var2, var3, var4, var5, var6) {
+function wait_then_fn(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self endon("death");
 
-  if(isDefined(var1)) {
-    if(isarray(var1)) {
-      foreach(var8 in var1) {
-        self endon(var8);
+  if(isDefined(var_1)) {
+    if(isarray(var_1)) {
+      foreach(var_8 in var_1) {
+        self endon(var_8);
       }
     } else {
-      self endon(var1);
+      self endon(var_1);
     }
   }
 
-  if(isstring(var0)) {
-    self waittill(var0);
+  if(isstring(var_0)) {
+    self waittill(var_0);
   } else {
-    wait var0;
+    wait var_0;
   }
 
-  if(isDefined(var6)) {
-    self[[var2]](var3, var4, var5, var6);
+  if(isDefined(var_6)) {
+    self[[var_2]](var_3, var_4, var_5, var_6);
     return;
   }
 
-  if(isDefined(var5)) {
-    self[[var2]](var3, var4, var5);
+  if(isDefined(var_5)) {
+    self[[var_2]](var_3, var_4, var_5);
     return;
   }
 
-  if(isDefined(var4)) {
-    self[[var2]](var3, var4);
+  if(isDefined(var_4)) {
+    self[[var_2]](var_3, var_4);
     return;
   }
 
-  if(isDefined(var3)) {
-    self[[var2]](var3);
+  if(isDefined(var_3)) {
+    self[[var_2]](var_3);
     return;
   }
 
-  self[[var2]]();
+  self[[var_2]]();
 }
 
-function waittill_notify(var0, var1, var2, var3, var4) {
-  if(!isDefined(var4)) {
-    var4 = 0;
+function waittill_notify(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_4)) {
+    var_4 = 0;
   }
 
-  for(var5 = 1; var5; var5 = var4) {
+  for(var_5 = 1; var_5; var_5 = var_4) {
     self endon("death");
 
-    if(isDefined(var3)) {
-      self endon(var3);
+    if(isDefined(var_3)) {
+      self endon(var_3);
     }
 
-    self waittill(var0);
-    var1 notify(var2);
+    self waittill(var_0);
+    var_1 notify(var_2);
   }
 }
 
-function loop_anim(var0, var1, var2, var3) {
+function loop_anim(var_0, var_1, var_2, var_3) {
   self endon("death");
-  jumpiffalse(isDefined(var2)) LOC_00000015;
-  self endon(var2);
+  jumpiffalse(isDefined(var_2)) LOC_00000015;
+  self endon(var_2);
 
   for(;;) {
-    var4 = single_anim(var0, var1, "loop_anim", 0, var3);
+    var_4 = single_anim(var_0, var_1, "loop_anim", 0, var_3);
 
     if(scripts\common\utility::issp()) {
       self waittillmatch("loop_anim", "end");
       continue;
     }
 
-    wait getanimlength(var4);
+    wait getanimlength(var_4);
   }
 }
 
-function single_anim(var0, var1, var2, var3, var4) {
-  if(!isDefined(var2)) {
-    var2 = "single_anim";
+function single_anim(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_2)) {
+    var_2 = "single_anim";
   }
 
-  if(!isDefined(var4)) {
-    var4 = 1;
+  if(!isDefined(var_4)) {
+    var_4 = 1;
   }
 
-  if(isarray(var0[var1])) {
-    jumpiftrue(isDefined(var0[var1 + "weight"])) LOC_00000076;
-    var0 = [];
-    var5 = getarraykeys(var0[var1]);
+  if(isarray(var_0[var_1])) {
+    jumpiftrue(isDefined(var_0[var_1 + "weight"])) LOC_00000076;
+    var_0 = [];
+    var_5 = getarraykeys(var_0[var_1]);
 
-    foreach(var7 in var5) {
-      var0[var7] = 1;
+    foreach(var_7 in var_5) {
+      var_0[var_7] = 1;
     }
 
-    var9 = var0[var1].size;
-    var10 = 0;
+    var_9 = var_0[var_1].size;
+    var_10 = 0;
 
-    for(var11 = 0; var11 < var9; var11++) {
-      var10 += var0[var1 + "weight"][var11];
+    for(var_11 = 0; var_11 < var_9; var_11++) {
+      var_10 += var_0[var_1 + "weight"][var_11];
     }
 
-    var12 = randomfloat(var10);
-    var13 = 0;
-    var14 = -1;
+    var_12 = randomfloat(var_10);
+    var_13 = 0;
+    var_14 = -1;
 
-    while(var13 <= var12) {
-      var14++;
-      var13 += var0[var1 + "weight"][var14];
+    while(var_13 <= var_12) {
+      var_14++;
+      var_13 += var_0[var_1 + "weight"][var_14];
     }
 
-    var15 = var0[var1][var14];
+    var_15 = var_0[var_1][var_14];
 
-    if(isDefined(var0[var1 + "mp"])) {
-      var16 = var0[var1 + "mp"][var14];
+    if(isDefined(var_0[var_1 + "mp"])) {
+      var_16 = var_0[var_1 + "mp"][var_14];
     } else {
-      var16 = undefined;
+      var_16 = undefined;
     }
   } else {
-    var15 = var2[var3];
-    var16 = var2[var3 + "mp"];
+    var_15 = var_2[var_3];
+    var_16 = var_2[var_3 + "mp"];
   }
 
   if(scripts\common\utility::issp()) {
-    if(isDefined(var15) && var15) {
-      self builtin[[level.func["setflaggedanimknobrestart"]]](var4, var15, 1, 0.1, var16);
+    if(isDefined(var_15) && var_15) {
+      self builtin[[level.func["setflaggedanimknobrestart"]]](var_4, var_15, 1, 0.1, var_16);
     } else {
-      self builtin[[level.func["setflaggedanimknob"]]](var4, var15, 1, 0.1, var16);
+      self builtin[[level.func["setflaggedanimknob"]]](var_4, var_15, 1, 0.1, var_16);
     }
   } else {
-    self builtin[[level.func["scriptModelPlayAnim"]]](var16);
+    self builtin[[level.func["scriptModelPlayAnim"]]](var_16);
   }
 
-  return var15;
+  return var_15;
 }
 
-function blendanimsbyspeed(var0, var1, var2, var3, var4) {
-  if(!isDefined(var4)) {
-    var4 = 0.1;
+function blendanimsbyspeed(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_4)) {
+    var_4 = 0.1;
   }
 
-  var0 = clamp(var0, var2[0], var2[var2.size - 1]);
+  var_0 = clamp(var_0, var_2[0], var_2[var_2.size - 1]);
 
-  for(var5 = 0; var0 > var2[var5 + 1]; var5++) {}
+  for(var_5 = 0; var_0 > var_2[var_5 + 1]; var_5++) {}
 
-  var6 = var0 - var2[var5];
-  var6 /= var2[var5 + 1] - var2[var5];
+  var_6 = var_0 - var_2[var_5];
+  var_6 /= var_2[var_5 + 1] - var_2[var_5];
 
   if(scripts\common\utility::issp()) {
-    var6 = clamp(var6, 0.01, 0.99);
-    var7 = var3[var5 + 1] / var3[var5];
-    var8 = var6 + (1 - var6) * var7;
-    self builtin[[level.func["setanimlimited"]]](var1[var5], 1 - var6, var4, var8 / var7);
-    self builtin[[level.func["setanimlimited"]]](var1[var5 + 1], var6, var4, var8);
+    var_6 = clamp(var_6, 0.01, 0.99);
+    var_7 = var_3[var_5 + 1] / var_3[var_5];
+    var_8 = var_6 + (1 - var_6) * var_7;
+    self builtin[[level.func["setanimlimited"]]](var_1[var_5], 1 - var_6, var_4, var_8 / var_7);
+    self builtin[[level.func["setanimlimited"]]](var_1[var_5 + 1], var_6, var_4, var_8);
 
-    for(var9 = 0; var9 < var5; var9++) {
-      var7 = var3[var5 + 1] / var3[var9];
-      self builtin[[level.func["setanimlimited"]]](var1[var9], 0.01, var4, var8 / var7);
+    for(var_9 = 0; var_9 < var_5; var_9++) {
+      var_7 = var_3[var_5 + 1] / var_3[var_9];
+      self builtin[[level.func["setanimlimited"]]](var_1[var_9], 0.01, var_4, var_8 / var_7);
     }
 
-    for(var9 = var5 + 2; var9 < var2.size; var9++) {
-      var7 = var3[var5 + 1] / var3[var9];
-      self builtin[[level.func["setanimlimited"]]](var1[var9], 0.01, var4, var8 / var7);
+    for(var_9 = var_5 + 2; var_9 < var_2.size; var_9++) {
+      var_7 = var_3[var_5 + 1] / var_3[var_9];
+      self builtin[[level.func["setanimlimited"]]](var_1[var_9], 0.01, var_4, var_8 / var_7);
     }
 
     return;
   }
 
-  if(var6 > 0.5) {
-    self builtin[[level.func["scriptModelPlayAnim"]]](var1[var5 + 1]);
+  if(var_6 > 0.5) {
+    self builtin[[level.func["scriptModelPlayAnim"]]](var_1[var_5 + 1]);
     return;
   }
 
-  self builtin[[level.func["scriptModelPlayAnim"]]](var1[var5]);
+  self builtin[[level.func["scriptModelPlayAnim"]]](var_1[var_5]);
 }
 
-function detect_events(var0) {
+function detect_events(var_0) {
   if(scripts\common\utility::issp()) {
     self endon("death");
     self endon("damage");
@@ -200,7 +200,7 @@ function detect_events(var0) {
 
     for(;;) {
       self waittill("ai_events");
-      self notify(var0);
+      self notify(var_0);
       self.interrupted = 1;
       waittillframeend();
       self.interrupted = 0;
@@ -210,53 +210,53 @@ function detect_events(var0) {
   }
 }
 
-function detect_people(var0, var1, var2) {
-  if(!isarray(var2)) {
-    var3 = var2;
-    var2 = [];
-    var2 = var3;
+function detect_people(var_0, var_1, var_2) {
+  if(!isarray(var_2)) {
+    var_3 = var_2;
+    var_2 = [];
+    var_2 = var_3;
   }
 
-  foreach(var5 in var2) {
-    self endon(var5);
+  foreach(var_5 in var_2) {
+    self endon(var_5);
   }
 
-  self.detect_people_trigger[var1] = spawn("trigger_radius", self.origin, 23, var0, var0);
+  self.detect_people_trigger[var_1] = spawn("trigger_radius", self.origin, 23, var_0, var_0);
 
-  for(var7 = var2.size; var7 < 3; var7++) {
-    var2[var7] = undefined;
+  for(var_7 = var_2.size; var_7 < 3; var_7++) {
+    var_2[var_7] = undefined;
   }
 
-  thread scripts\engine\utility::delete_on_notify(self.detect_people_trigger[var1], var2[0], var2[1], var2[2]);
+  thread scripts\engine\utility::delete_on_notify(self.detect_people_trigger[var_1], var_2[0], var_2[1], var_2[2]);
 
   for(;;) {
-    self.detect_people_trigger[var1] waittill("trigger", var8);
-    self.interruptedent = var8;
-    self notify(var1);
+    self.detect_people_trigger[var_1] waittill("trigger", var_8);
+    self.interruptedent = var_8;
+    self notify(var_1);
     self.interrupted = 1;
     waittillframeend();
     self.interrupted = 0;
   }
 }
 
-function detect_player_event(var0, var1, var2, var3) {
-  if(!isarray(var2)) {
-    var4 = var2;
-    var2 = [];
-    var2 = var4;
+function detect_player_event(var_0, var_1, var_2, var_3) {
+  if(!isarray(var_2)) {
+    var_4 = var_2;
+    var_2 = [];
+    var_2 = var_4;
   }
 
-  foreach(var6 in var2) {
-    self endon(var6);
+  foreach(var_6 in var_2) {
+    self endon(var_6);
   }
 
   for(;;) {
-    level.player waittill(var3);
+    level.player waittill(var_3);
 
-    if(distancesquared(level.player.origin, self.origin) < var0 * var0) {
-      self notify(var1);
+    if(distancesquared(level.player.origin, self.origin) < var_0 * var_0) {
+      self notify(var_1);
       self.interruptedent = level.player;
-      self notify(var1);
+      self notify(var_1);
       self.interrupted = 1;
       waittillframeend();
       self.interrupted = 0;
@@ -264,63 +264,63 @@ function detect_player_event(var0, var1, var2, var3) {
   }
 }
 
-function wrap(var0, var1) {
-  var2 = int(var0 / var1);
-  var3 = var0 - var1 * var2;
+function wrap(var_0, var_1) {
+  var_2 = int(var_0 / var_1);
+  var_3 = var_0 - var_1 * var_2;
 
-  if(var0 < 0) {
-    var3 += var1;
+  if(var_0 < 0) {
+    var_3 += var_1;
   }
 
-  if(var3 == var1) {
-    var3 = 0;
+  if(var_3 == var_1) {
+    var_3 = 0;
   }
 
-  return var3;
+  return var_3;
 }
 
-function interactives_drawdebuglinefortime(var0, var1, var2, var3, var4, var5) {}
+function interactives_drawdebuglinefortime(var_0, var_1, var_2, var_3, var_4, var_5) {}
 
-function drawcross(var0, var1, var2, var3) {
-  thread scripts\engine\utility::draw_line_for_time(var0 - (var1, 0, 0), var0 + (var1, 0, 0), var2[0], var2[1], var2[2], var3);
-  thread scripts\engine\utility::draw_line_for_time(var0 - (0, var1, 0), var0 + (0, var1, 0), var2[0], var2[1], var2[2], var3);
-  thread scripts\engine\utility::draw_line_for_time(var0 - (0, 0, var1), var0 + (0, 0, var1), var2[0], var2[1], var2[2], var3);
+function drawcross(var_0, var_1, var_2, var_3) {
+  thread scripts\engine\utility::draw_line_for_time(var_0 - (var_1, 0, 0), var_0 + (var_1, 0, 0), var_2[0], var_2[1], var_2[2], var_3);
+  thread scripts\engine\utility::draw_line_for_time(var_0 - (0, var_1, 0), var_0 + (0, var_1, 0), var_2[0], var_2[1], var_2[2], var_3);
+  thread scripts\engine\utility::draw_line_for_time(var_0 - (0, 0, var_1), var_0 + (0, 0, var_1), var_2[0], var_2[1], var_2[2], var_3);
 }
 
-function drawcircle(var0, var1, var2, var3) {
-  var4 = 16;
-  var5 = 0;
+function drawcircle(var_0, var_1, var_2, var_3) {
+  var_4 = 16;
+  var_5 = 0;
 
-  while(var5 < 360) {
-    var6 = var5 + 360 / var4;
-    thread scripts\engine\utility::draw_line_for_time(var0 + (var1 * cos(var5), var1 * sin(var5), 0), var0 + (var1 * cos(var6), var1 * sin(var6), 0), var2[0], var2[1], var2[2], var3);
-    var5 += 360 / var4;
+  while(var_5 < 360) {
+    var_6 = var_5 + 360 / var_4;
+    thread scripts\engine\utility::draw_line_for_time(var_0 + (var_1 * cos(var_5), var_1 * sin(var_5), 0), var_0 + (var_1 * cos(var_6), var_1 * sin(var_6), 0), var_2[0], var_2[1], var_2[2], var_3);
+    var_5 += 360 / var_4;
   }
 }
 
-function drawcirculararrow(var0, var1, var2, var3, var4) {
-  if(var4 == 0) {
+function drawcirculararrow(var_0, var_1, var_2, var_3, var_4) {
+  if(var_4 == 0) {
     return;
   }
 
-  var5 = 16;
-  var6 = int(1 + var5 * abs(var4) / 360);
+  var_5 = 16;
+  var_6 = int(1 + var_5 * abs(var_4) / 360);
 
-  for(var7 = 0; var7 < var6; var7++) {
-    var8 = var7 * var4 / var6;
-    var9 = var8 + var4 / var6;
-    thread scripts\engine\utility::draw_line_for_time(var0 + (var1 * cos(var8), var1 * sin(var8), 0), var0 + (var1 * cos(var9), var1 * sin(var9), 0), var2[0], var2[1], var2[2], var3);
+  for(var_7 = 0; var_7 < var_6; var_7++) {
+    var_8 = var_7 * var_4 / var_6;
+    var_9 = var_8 + var_4 / var_6;
+    thread scripts\engine\utility::draw_line_for_time(var_0 + (var_1 * cos(var_8), var_1 * sin(var_8), 0), var_0 + (var_1 * cos(var_9), var_1 * sin(var_9), 0), var_2[0], var_2[1], var_2[2], var_3);
   }
 
-  var8 = var4;
-  var9 = var4 - scripts\engine\utility::sign(var4) * 20;
-  thread scripts\engine\utility::draw_line_for_time(var0 + (var1 * cos(var8), var1 * sin(var8), 0), var0 + (var1 * 0.8 * cos(var9), var1 * 0.8 * sin(var9), 0), var2[0], var2[1], var2[2], var3);
-  thread scripts\engine\utility::draw_line_for_time(var0 + (var1 * cos(var8), var1 * sin(var8), 0), var0 + (var1 * 1.2 * cos(var9), var1 * 1.2 * sin(var9), 0), var2[0], var2[1], var2[2], var3);
+  var_8 = var_4;
+  var_9 = var_4 - scripts\engine\utility::sign(var_4) * 20;
+  thread scripts\engine\utility::draw_line_for_time(var_0 + (var_1 * cos(var_8), var_1 * sin(var_8), 0), var_0 + (var_1 * 0.8 * cos(var_9), var_1 * 0.8 * sin(var_9), 0), var_2[0], var_2[1], var_2[2], var_3);
+  thread scripts\engine\utility::draw_line_for_time(var_0 + (var_1 * cos(var_8), var_1 * sin(var_8), 0), var_0 + (var_1 * 1.2 * cos(var_9), var_1 * 1.2 * sin(var_9), 0), var_2[0], var_2[1], var_2[2], var_3);
 }
 
-function isinarray(var0, var1) {
-  foreach(var3 in var1) {
-    if(var0 == var3) {
+function isinarray(var_0, var_1) {
+  foreach(var_3 in var_1) {
+    if(var_0 == var_3) {
       return true;
     }
   }
@@ -328,125 +328,125 @@ function isinarray(var0, var1) {
   return false;
 }
 
-function newtonsmethod(var0, var1, var2, var3, var4, var5, var6) {
-  var7 = 5;
-  var8 = (var0 + var1) / 2;
-  var9 = var6 + 1;
+function newtonsmethod(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_7 = 5;
+  var_8 = (var_0 + var_1) / 2;
+  var_9 = var_6 + 1;
 
-  while(abs(var9) > var6 && var7 > 0) {
-    var10 = var2 * var8 * var8 * var8 + var3 * var8 * var8 + var4 * var8 + var5;
-    var11 = 3 * var2 * var8 * var8 + 2 * var3 * var8 + var4;
-    var9 = -1 * var10 / var11;
-    var12 = var8;
-    var8 += var9;
+  while(abs(var_9) > var_6 && var_7 > 0) {
+    var_10 = var_2 * var_8 * var_8 * var_8 + var_3 * var_8 * var_8 + var_4 * var_8 + var_5;
+    var_11 = 3 * var_2 * var_8 * var_8 + 2 * var_3 * var_8 + var_4;
+    var_9 = -1 * var_10 / var_11;
+    var_12 = var_8;
+    var_8 += var_9;
 
-    if(var8 > var1) {
-      var8 = (var12 + 3 * var1) / 4;
-    } else if(var8 < var0) {
-      var8 = (var12 + 3 * var0) / 4;
+    if(var_8 > var_1) {
+      var_8 = (var_12 + 3 * var_1) / 4;
+    } else if(var_8 < var_0) {
+      var_8 = (var_12 + 3 * var_0) / 4;
     }
 
-    var7--;
+    var_7--;
   }
 
-  return var8;
+  return var_8;
 }
 
-function rootsofcubic(var0, var1, var2, var3) {
-  if(var0 == 0) {
-    return rootsofquadratic(var1, var2, var3);
+function rootsofcubic(var_0, var_1, var_2, var_3) {
+  if(var_0 == 0) {
+    return rootsofquadratic(var_1, var_2, var_3);
   }
 
-  var4 = 2 * var1 * var1 * var1 - 9 * var0 * var1 * var2 + 27 * var0 * var0 * var3;
-  var5 = var1 * var1 - 3 * var0 * var2;
+  var_4 = 2 * var_1 * var_1 * var_1 - 9 * var_0 * var_1 * var_2 + 27 * var_0 * var_0 * var_3;
+  var_5 = var_1 * var_1 - 3 * var_0 * var_2;
 
-  if(var5 == 0) {}
+  if(var_5 == 0) {}
 
-  if(var4 == 0 && var5 == 0) {
-    GscBinSkip1(0x45, 0, -1 * var1 / 3 * var0);
+  if(var_4 == 0 && var_5 == 0) {
+    GscBinSkip1(0x45, 0, -1 * var_1 / 3 * var_0);
   }
 
-  if(var4 == 0 && var5 != 0) {
-    GscBinSkip1(0x45, 0, (9 * var0 * var0 * var3 - 4 * var0 * var1 * var2 + var1 * var1 * var1) / var0 * (3 * var0 * var2 - var1 * var1));
+  if(var_4 == 0 && var_5 != 0) {
+    GscBinSkip1(0x45, 0, (9 * var_0 * var_0 * var_3 - 4 * var_0 * var_1 * var_2 + var_1 * var_1 * var_1) / var_0 * (3 * var_0 * var_2 - var_1 * var_1));
   }
 }
 
-function rootsofquadratic(var0, var1, var2) {
-  while(abs(var0) > 65536 || abs(var1) > 65536 || abs(var2) > 65536) {
-    var0 /= 10;
-    var1 /= 10;
-    var2 /= 10;
+function rootsofquadratic(var_0, var_1, var_2) {
+  while(abs(var_0) > 65536 || abs(var_1) > 65536 || abs(var_2) > 65536) {
+    var_0 /= 10;
+    var_1 /= 10;
+    var_2 /= 10;
   }
 
-  var3 = [];
+  var_3 = [];
 
-  if(var0 == 0) {
-    if(var1 != 0) {
-      GscBinSkip0(0x2e, 0, -1 * var2 / var1);
+  if(var_0 == 0) {
+    if(var_1 != 0) {
+      GscBinSkip0(0x2e, 0, -1 * var_2 / var_1);
     }
   } else {
-    var4 = var1 * var1 - 4 * var0 * var2;
+    var_4 = var_1 * var_1 - 4 * var_0 * var_2;
 
-    if(var4 > 0) {
-      var3 = (-1 * var1 - sqrt(var4)) / 2 * var0;
-      var3 = (-1 * var1 + sqrt(var4)) / 2 * var0;
-    } else if(var4 == 0) {
-      var3 = -1 * var1 / 2 * var0;
+    if(var_4 > 0) {
+      var_3 = (-1 * var_1 - sqrt(var_4)) / 2 * var_0;
+      var_3 = (-1 * var_1 + sqrt(var_4)) / 2 * var_0;
+    } else if(var_4 == 0) {
+      var_3 = -1 * var_1 / 2 * var_0;
     }
   }
 
-  return var3;
+  return var_3;
 }
 
-function nonvectorlength(var0, var1) {
-  var2 = 0;
+function nonvectorlength(var_0, var_1) {
+  var_2 = 0;
 
-  for(var3 = 0; var3 < var0.size; var3++) {
-    var4 = var0[var3];
+  for(var_3 = 0; var_3 < var_0.size; var_3++) {
+    var_4 = var_0[var_3];
 
-    if(isDefined(var1)) {
-      var4 -= var1[var3];
+    if(isDefined(var_1)) {
+      var_4 -= var_1[var_3];
     }
 
-    var2 += var4 * var4;
+    var_2 += var_4 * var_4;
   }
 
-  return sqrt(var2);
+  return sqrt(var_2);
 }
 
-function clampandnormalize(var0, var1, var2) {
-  if(var1 < var2) {
-    var0 = clamp(var0, var1, var2);
+function clampandnormalize(var_0, var_1, var_2) {
+  if(var_1 < var_2) {
+    var_0 = clamp(var_0, var_1, var_2);
   } else {
-    var0 = clamp(var0, var2, var1);
+    var_0 = clamp(var_0, var_2, var_1);
   }
 
-  return (var0 - var1) / (var2 - var1);
+  return (var_0 - var_1) / (var_2 - var_1);
 }
 
-function pointoncircle(var0, var1, var2) {
-  var3 = cos(var2);
-  var3 *= var1;
-  var3 += var0[0];
-  var4 = sin(var2);
-  var4 *= var1;
-  var4 += var0[1];
-  var5 = var0[2];
-  return (var3, var4, var5);
+function pointoncircle(var_0, var_1, var_2) {
+  var_3 = cos(var_2);
+  var_3 *= var_1;
+  var_3 += var_0[0];
+  var_4 = sin(var_2);
+  var_4 *= var_1;
+  var_4 += var_0[1];
+  var_5 = var_0[2];
+  return (var_3, var_4, var_5);
 }
 
-function zerocomponent(var0, var1) {
-  return (var0[0] * (var1 != 0), var0[1] * (var1 != 1), var0[2] * (var1 != 2));
+function zerocomponent(var_0, var_1) {
+  return (var_0[0] * (var_1 != 0), var_0[1] * (var_1 != 1), var_0[2] * (var_1 != 2));
 }
 
-function rotate90aroundaxis(var0, var1) {
-  if(var1 == 0) {
-    return (var0[0], var0[2], -1 * var0[1]);
+function rotate90aroundaxis(var_0, var_1) {
+  if(var_1 == 0) {
+    return (var_0[0], var_0[2], -1 * var_0[1]);
   }
 
-  if(var1 == 1) {
-    return (-1 * var0[2], var0[1], var0[0]);
+  if(var_1 == 1) {
+    return (-1 * var_0[2], var_0[1], var_0[0]);
   }
 
-  return (var0[1], -1 * var0[0], var0[2]);
+  return (var_0[1], -1 * var_0[0], var_0[2]);
 }

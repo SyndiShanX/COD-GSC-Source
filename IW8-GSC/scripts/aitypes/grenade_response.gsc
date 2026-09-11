@@ -3,7 +3,7 @@
  * Script: scripts\aitypes\grenade_response.gsc
 ************************************************/
 
-function grenadereturnthrow(var0) {
+function grenadereturnthrow(var_0) {
   if(scripts\asm\asm::asm_ephemeraleventfired("grenade_response", "return throw complete")) {
     return anim.success;
   }
@@ -12,11 +12,11 @@ function grenadereturnthrow(var0) {
   return anim.running;
 }
 
-function grenadereturnthrow_terminate(var0) {
+function grenadereturnthrow_terminate(var_0) {
   scripts\asm\asm_bb::bb_requestgrenadereturnthrow(0);
 }
 
-function shouldgrenadeavoid(var0) {
+function shouldgrenadeavoid(var_0) {
   if(isDefined(self.grenade) && distancesquared(self.grenade.origin, self.origin) < 90000) {
     return anim.success;
   }
@@ -24,7 +24,7 @@ function shouldgrenadeavoid(var0) {
   return anim.failure;
 }
 
-function cangrenaderespond(var0) {
+function cangrenaderespond(var_0) {
   if(istrue(self.disablegrenaderesponse)) {
     return anim.failure;
   }

@@ -84,30 +84,30 @@ function asm_register() {
   anim.asmfuncs["civilian"][68] = &autogenfunc_6;
 }
 
-function autogenfunc_0(var0, var1, var2, var3) {
+function autogenfunc_0(var_0, var_1, var_2, var_3) {
   return isDefined(self.pathgoalpos);
 }
 
-function autogenfunc_1(var0, var1, var2, var3) {
+function autogenfunc_1(var_0, var_1, var_2, var_3) {
   return isDefined(self.disableexits) && self.disableexits;
 }
 
-function autogenfunc_2(var0, var1, var2, var3) {
+function autogenfunc_2(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_iswhizbyrequested();
 }
 
-function autogenfunc_3(var0, var1, var2, var3) {
+function autogenfunc_3(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_getcivilianstate() != "combat" && scripts\asm\asm_bb::bb_getcivilianstate() != "noncombat";
 }
 
-function autogenfunc_4(var0, var1, var2, var3) {
+function autogenfunc_4(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_getcivilianstate() != "stealth" && scripts\asm\asm_bb::bb_getcivilianstate() != "panic" && scripts\asm\asm_bb::bb_getcivilianstate() != "cctv" && scripts\asm\asm_bb::bb_getcivilianstate() != "casual";
 }
 
-function autogenfunc_5(var0, var1, var2, var3) {
+function autogenfunc_5(var_0, var_1, var_2, var_3) {
   return istrue(self.disableexits);
 }
 
-function autogenfunc_6(var0) {
-  scripts\asm\gesture::gesture(var0);
+function autogenfunc_6(var_0) {
+  scripts\asm\gesture::gesture(var_0);
 }

@@ -3,126 +3,126 @@
  * Script: scripts\mp\gametypes\obj_zonecapture.gsc
 ****************************************************/
 
-function setupobjective(var0, var1, var2, var3) {
-  var4 = var0;
+function setupobjective(var_0, var_1, var_2, var_3) {
+  var_4 = var_0;
 
-  if(!isDefined(var1)) {
-    var1 = [];
-    var1 = var4;
+  if(!isDefined(var_1)) {
+    var_1 = [];
+    var_1 = var_4;
   }
 
-  var4 = postshipmodifiedkothzones(var4);
+  var_4 = postshipmodifiedkothzones(var_4);
 
-  if(istrue(var2)) {
-    var5 = 0;
+  if(istrue(var_2)) {
+    var_5 = 0;
   } else {
-    var5 = undefined;
+    var_5 = undefined;
   }
 
-  var5 = scripts\mp\gameobjects::createuseobject("neutral", var5, var2, (0, 0, 0), var5, var4);
-  var5 scripts\mp\gameobjects::disableobject();
+  var_5 = scripts\mp\gameobjects::createuseobject("neutral", var_5, var_2, (0, 0, 0), var_5, var_4);
+  var_5 scripts\mp\gameobjects::disableobject();
 
   if(scripts\mp\utility\game::getgametype() == "koth") {
-    for(var6 = 0; var6 < var5.visuals.size; var6++) {
-      var5.visuals[var6] hide();
+    for(var_6 = 0; var_6 < var_5.visuals.size; var_6++) {
+      var_5.visuals[var_6] hide();
     }
   } else {
-    var5.visuals[0] scriptmodelplayanim("iw8_mp_military_hq_crate_close");
+    var_5.visuals[0] scriptmodelplayanim("iw8_mp_military_hq_crate_close");
   }
 
-  var5 scripts\mp\gameobjects::cancontestclaim(1);
-  var5.claimgracetime = level.zonecapturetime * 1000;
-  var5 scripts\mp\gameobjects::pinobjiconontriggertouch();
+  var_5 scripts\mp\gameobjects::cancontestclaim(1);
+  var_5.claimgracetime = level.zonecapturetime * 1000;
+  var_5 scripts\mp\gameobjects::pinobjiconontriggertouch();
 
-  if(isDefined(var1.objectivekey)) {
-    var5.objectivekey = var1.objectivekey;
+  if(isDefined(var_1.objectivekey)) {
+    var_5.objectivekey = var_1.objectivekey;
   } else {
-    var5.objectivekey = var5 scripts\mp\gameobjects::getlabel();
+    var_5.objectivekey = var_5 scripts\mp\gameobjects::getlabel();
   }
 
   if(level.usehqrules && !level.usehprules) {
-    var5 scripts\mp\gameobjects::mustmaintainclaim(0);
+    var_5 scripts\mp\gameobjects::mustmaintainclaim(0);
   } else {
-    var5 scripts\mp\gameobjects::mustmaintainclaim(1);
+    var_5 scripts\mp\gameobjects::mustmaintainclaim(1);
   }
 
-  var5.id = "hardpoint";
+  var_5.id = "hardpoint";
 
-  if(isDefined(var5.trigger.target) && scripts\mp\utility\game::getgametype() == "koth") {
-    thread assignchevrons(var5, var5.trigger.target);
+  if(isDefined(var_5.trigger.target) && scripts\mp\utility\game::getgametype() == "koth") {
+    thread assignchevrons(var_5, var_5.trigger.target);
   }
 
   if(istrue(level.setplayerselfrevivingextrainfo)) {
     if(scripts\mp\utility\game::getgametype() == "hq") {
-      thread ref_14396(var5);
+      thread ref_14396(var_5);
     } else if(scripts\mp\utility\game::getgametype() == "grnd") {
-      thread ref_14395(var5);
+      thread ref_14395(var_5);
     }
   }
 
-  return var5;
+  return var_5;
 }
 
-function ref_14396(var0) {
+function ref_14396(var_0) {
   scripts\mp\flags::gameflagwait("prematch_done");
-  var1 = anglesToForward(var0.visuals[0].angles);
-  var2 = var1 * 5;
-  var3 = var0.visuals[0] gettagorigin("j_laptop_tray");
-  playFX(level.spawnoffsettacinsertmax["ghostcat_hw"], var3 + var2);
+  var_1 = anglesToForward(var_0.visuals[0].angles);
+  var_2 = var_1 * 5;
+  var_3 = var_0.visuals[0] gettagorigin("j_laptop_tray");
+  playFX(level.spawnoffsettacinsertmax["ghostcat_hw"], var_3 + var_2);
 }
 
-function ref_14395(var0) {
+function ref_14395(var_0) {
   scripts\mp\flags::gameflagwait("prematch_done");
-  playFX(level.spawnoffsettacinsertmax["blood_floor_hw"], getgroundposition(var0.trigger.origin, 4) + (0, 0, 2));
+  playFX(level.spawnoffsettacinsertmax["blood_floor_hw"], getgroundposition(var_0.trigger.origin, 4) + (0, 0, 2));
 }
 
-function postshipmodifiedkothzones(var0) {
+function postshipmodifiedkothzones(var_0) {
   if(level.mapname == "mp_malyshev") {
-    if(var0.script_label == "1") {
-      var0.origin -= (0, 0, 5);
+    if(var_0.script_label == "1") {
+      var_0.origin -= (0, 0, 5);
     }
   } else if(level.mapname == "mp_herat") {
-    if(var0.script_label == "1") {
-      var0.origin += (0, 3, 0);
+    if(var_0.script_label == "1") {
+      var_0.origin += (0, 3, 0);
     }
   }
 
-  return var0;
+  return var_0;
 }
 
-function assignchevrons(var0, var1) {
+function assignchevrons(var_0, var_1) {
   wait 1;
-  var2 = getentitylessscriptablearrayinradius(var0, "targetname");
-  var2 = ref_12bff(var2, var1);
-  var2 = ref_12806(var2, var1);
-  var3 = [];
+  var_2 = getentitylessscriptablearrayinradius(var_0, "targetname");
+  var_2 = ref_12bff(var_2, var_1);
+  var_2 = ref_12806(var_2, var_1);
+  var_3 = [];
 
-  foreach(var5 in var2) {
-    var6 = var3.size;
-    var3 = var5;
-    var3[var6].numchevrons = 1;
+  foreach(var_5 in var_2) {
+    var_6 = var_3.size;
+    var_3 = var_5;
+    var_3[var_6].numchevrons = 1;
 
-    if(isDefined(var5.script_noteworthy)) {
-      if(var5.script_noteworthy == "2") {
-        var3[var6].numchevrons = 2;
+    if(isDefined(var_5.script_noteworthy)) {
+      if(var_5.script_noteworthy == "2") {
+        var_3[var_6].numchevrons = 2;
         continue;
       }
 
-      if(var5.script_noteworthy == "3") {
-        var3[var6].numchevrons = 3;
+      if(var_5.script_noteworthy == "3") {
+        var_3[var_6].numchevrons = 3;
         continue;
       }
 
-      if(var5.script_noteworthy == "4") {
-        var3[var6].numchevrons = 4;
+      if(var_5.script_noteworthy == "4") {
+        var_3[var_6].numchevrons = 4;
       }
     }
   }
 
-  self.chevrons = var3;
+  self.chevrons = var_3;
 }
 
-function updatechevrons(var0) {
+function updatechevrons(var_0) {
   if(scripts\mp\utility\game::getgametype() != "koth") {
     return;
   }
@@ -134,9 +134,9 @@ function updatechevrons(var0) {
     waitframe();
   }
 
-  foreach(var2 in self.chevrons) {
-    for(var3 = 0; var3 < var2.numchevrons; var3++) {
-      var2 setscriptablepartstate("chevron_" + var3, var0);
+  foreach(var_2 in self.chevrons) {
+    for(var_3 = 0; var_3 < var_2.numchevrons; var_3++) {
+      var_2 setscriptablepartstate("chevron_" + var_3, var_0);
     }
   }
 }
@@ -154,20 +154,20 @@ function activatezone() {
   self.onunpinnedstate = &zone_onunpinnedstate;
   self.didstatusnotify = 0;
   scripts\mp\gameobjects::requestid(1, 1, 0, 1, 0);
-  var0 = self.curorigin;
+  var_0 = self.curorigin;
 
   if(isDefined(level.remove_last_used_node)) {
-    var0 = [[level.remove_last_used_node]]();
+    var_0 = [[level.remove_last_used_node]]();
   }
 
-  var1 = 1024;
+  var_1 = 1024;
 
   if(isDefined(level.remove_launcher_xmags)) {
-    var1 = [[level.remove_launcher_xmags]]();
+    var_1 = [[level.remove_launcher_xmags]]();
   }
 
-  var2 = [];
-  GscBinSkip0(0x2e, var2.size, scripts\mp\spawnlogic::addspawndangerzone(var0 - (0, 0, 2048), var1, 4096, "allies", undefined, undefined, undefined, undefined, undefined, 1));
+  var_2 = [];
+  GscBinSkip0(0x2e, var_2.size, scripts\mp\spawnlogic::addspawndangerzone(var_0 - (0, 0, 2048), var_1, 4096, "allies", undefined, undefined, undefined, undefined, undefined, 1));
 }
 
 function deactivatezone() {
@@ -182,14 +182,14 @@ function deactivatezone() {
   self.didstatusnotify = 0;
   thread updatechevrons("off");
 
-  foreach(var1 in self.isburstweapon) {
-    scripts\mp\spawnlogic::removespawndangerzone(var1);
+  foreach(var_1 in self.isburstweapon) {
+    scripts\mp\spawnlogic::removespawndangerzone(var_1);
   }
 
   self.isburstweapon = undefined;
 
-  foreach(var4 in level.players) {
-    scripts\mp\objidpoolmanager::objective_unpin_player(self.objidnum, var4);
+  foreach(var_4 in level.players) {
+    scripts\mp\objidpoolmanager::objective_unpin_player(self.objidnum, var_4);
   }
 
   self.trigger scripts\engine\utility::trigger_off();
@@ -209,7 +209,7 @@ function deactivatezone() {
 function zonetimerwait() {
   level endon("game_ended");
   level endon("dev_force_zone");
-  var0 = int(level.zonemovetime * 1000 + gettime());
+  var_0 = int(level.zonemovetime * 1000 + gettime());
 
   if(!isDefined(level.zoneselectiondelay) || level.zoneselectiondelay < 10) {
     thread hp_move_soon(level.zonemovetime);
@@ -219,54 +219,54 @@ function zonetimerwait() {
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(level.zonemovetime);
 }
 
-function hp_move_soon(var0) {
+function hp_move_soon(var_0) {
   level endon("game_ended");
 
   if(scripts\mp\utility\game::getgametype() == "hq") {
     level endon("zone_destroyed");
   }
 
-  if(int(var0) > 12) {
-    var1 = var0 - 12;
-    scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var1);
+  if(int(var_0) > 12) {
+    var_1 = var_0 - 12;
+    scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_1);
 
-    foreach(var3 in level.teamnamelist) {
-      level scripts\mp\utility\dialog::statusdialog("hp_move_soon", var3);
+    foreach(var_3 in level.teamnamelist) {
+      level scripts\mp\utility\dialog::statusdialog("hp_move_soon", var_3);
     }
 
     return;
   }
 }
 
-function handlehostmigration(var0) {
+function handlehostmigration(var_0) {
   level endon("game_ended");
   level endon("bomb_defused");
   level endon("disconnect");
   level endon("zone_captured");
   level waittill("host_migration_begin");
   setomnvar("ui_objective_timer_stopped", 1);
-  var1 = scripts\mp\hostmigration::waittillhostmigrationdone();
+  var_1 = scripts\mp\hostmigration::waittillhostmigrationdone();
   setomnvar("ui_objective_timer_stopped", 0);
 
-  if(var1 > 0) {
-    setomnvar("ui_hardpoint_timer", level.zoneendtime + var1);
+  if(var_1 > 0) {
+    setomnvar("ui_hardpoint_timer", level.zoneendtime + var_1);
     return;
   }
 
   setomnvar("ui_hardpoint_timer", level.zoneendtime);
 }
 
-function ref_1199e(var0, var1) {
+function ref_1199e(var_0, var_1) {
   level endon("game_ended");
-  var2 = level.framedurationseconds;
-  var3 = var2 * 1000;
-  var4 = var0 * 1000;
-  var5 = var4 - var3;
+  var_2 = level.framedurationseconds;
+  var_3 = var_2 * 1000;
+  var_4 = var_0 * 1000;
+  var_5 = var_4 - var_3;
   self.radialtimeobjid = scripts\mp\objidpoolmanager::requestobjectiveid(99);
 
   if(self.radialtimeobjid != -1) {
-    var6 = "invisible";
-    scripts\mp\objidpoolmanager::objective_add_objective(self.radialtimeobjid, var6, var1);
+    var_6 = "invisible";
+    scripts\mp\objidpoolmanager::objective_add_objective(self.radialtimeobjid, var_6, var_1);
     scripts\mp\objidpoolmanager::objective_set_play_intro(self.radialtimeobjid, 0);
     scripts\mp\objidpoolmanager::objective_set_play_outro(self.radialtimeobjid, 0);
     scripts\mp\objidpoolmanager::objective_playermask_showtoall(self.radialtimeobjid);
@@ -274,13 +274,13 @@ function ref_1199e(var0, var1) {
   }
 
   scripts\mp\gameobjects::setobjectivestatusicons(level.icontarget, level.icontarget, self.radialtimeobjid);
-  var7 = gettime() + var4;
+  var_7 = gettime() + var_4;
 
-  while(gettime() < var7) {
-    var8 = var5 / var4;
+  while(gettime() < var_7) {
+    var_8 = var_5 / var_4;
     scripts\mp\objidpoolmanager::objective_show_progress(self.radialtimeobjid, 1);
-    scripts\mp\objidpoolmanager::objective_set_progress(self.radialtimeobjid, var8);
-    var5 = max(var5 - var3, 1);
+    scripts\mp\objidpoolmanager::objective_set_progress(self.radialtimeobjid, var_8);
+    var_5 = max(var_5 - var_3, 1);
     waitframe();
   }
 
@@ -301,13 +301,13 @@ function trackgametypevips() {
   level endon("zone_moved");
 
   for(;;) {
-    foreach(var1 in level.players) {
-      if(var1 istouching(level.zone.trigger)) {
-        var1 setgametypevip(1);
+    foreach(var_1 in level.players) {
+      if(var_1 istouching(level.zone.trigger)) {
+        var_1 setgametypevip(1);
         continue;
       }
 
-      var1 setgametypevip(0);
+      var_1 setgametypevip(0);
     }
 
     wait 0.5;
@@ -317,71 +317,71 @@ function trackgametypevips() {
 function cleanupgametypevips() {
   level scripts\engine\utility::ref_143a5("game_ended", "zone_moved");
 
-  foreach(var1 in level.players) {
-    var1 setgametypevip(0);
+  foreach(var_1 in level.players) {
+    var_1 setgametypevip(0);
   }
 }
 
-function zone_onuse(var0) {
+function zone_onuse(var_0) {
   scripts\mp\objidpoolmanager::objective_set_progress(self.objidnum, 0);
   scripts\mp\objidpoolmanager::objective_show_progress(self.objidnum, 0);
-  var1 = var0.team;
-  var2 = gettime();
-  var3 = [];
-  var4 = getarraykeys(self.touchlist[var1]);
+  var_1 = var_0.team;
+  var_2 = gettime();
+  var_3 = [];
+  var_4 = getarraykeys(self.touchlist[var_1]);
 
-  for(var5 = 0; var5 < var4.size; var5++) {
-    var3 = self.touchlist[var1][var4[var5]];
+  for(var_5 = 0; var_5 < var_4.size; var_5++) {
+    var_3 = self.touchlist[var_1][var_4[var_5]];
   }
 
   if(level.usehqrules && !level.usehprules && self.ownerteam != "neutral") {
     setomnvar("ui_hq_ownerteam", 0);
     level notify("zone_destroyed");
 
-    foreach(var7 in level.players) {
-      scripts\mp\objidpoolmanager::objective_unpin_player(self.objidnum, var7);
+    foreach(var_7 in level.players) {
+      scripts\mp\objidpoolmanager::objective_unpin_player(self.objidnum, var_7);
     }
 
     thread ref_1439d();
     level scripts\mp\gametypes\koth::updateservericons("zone_shift", 0);
 
-    if(isDefined(var3)) {
-      var9 = getarraykeys(var3);
+    if(isDefined(var_3)) {
+      var_9 = getarraykeys(var_3);
 
-      foreach(var11 in var9) {
-        var7 = self.assisttouchlist[var1][var11].player;
+      foreach(var_11 in var_9) {
+        var_7 = self.assisttouchlist[var_1][var_11].player;
 
-        if(isDefined(var7.owner)) {
-          var7 = var7.owner;
+        if(isDefined(var_7.owner)) {
+          var_7 = var_7.owner;
         }
 
-        var7 scripts\cp\vehicles\vehicle_compass_cp::ref_12003();
+        var_7 scripts\cp\vehicles\vehicle_compass_cp::ref_12003();
         LOC_0000012c:
       }
     }
 
-    level thread scripts\mp\gametypes\hq::give_capture_credit(var3, var2, var1, undefined, var0, self);
+    level thread scripts\mp\gametypes\hq::give_capture_credit(var_3, var_2, var_1, undefined, var_0, self);
 
     if(scripts\mp\utility\game::getgametype() == "hq") {
-      level scripts\mp\utility\dialog::statusdialog("hp_captured_friendly", var0.team);
+      level scripts\mp\utility\dialog::statusdialog("hp_captured_friendly", var_0.team);
       level scripts\mp\utility\dialog::statusdialog("hp_owned_lost", self.ownerteam);
     } else {
-      level scripts\mp\utility\dialog::statusdialog("hp_captured_friendly", var0.team);
+      level scripts\mp\utility\dialog::statusdialog("hp_captured_friendly", var_0.team);
       level scripts\mp\utility\dialog::statusdialog("hp_captured_enemy", self.ownerteam);
     }
   } else {
     if(scripts\mp\utility\game::getgametype() == "hq") {
-      var13 = scripts\mp\utility\teams::getteamdata(var1, "players");
+      var_13 = scripts\mp\utility\teams::getteamdata(var_1, "players");
 
-      foreach(var7 in var13) {
-        var7 scripts\cp\vehicles\vehicle_compass_cp::ref_12003();
-        var7.skipspawncamera = 1;
+      foreach(var_7 in var_13) {
+        var_7 scripts\cp\vehicles\vehicle_compass_cp::ref_12003();
+        var_7.skipspawncamera = 1;
       }
     }
 
-    var16 = scripts\mp\gameobjects::getownerteam();
-    var17 = scripts\mp\utility\game::getotherteam(var1)[0];
-    scripts\mp\gameobjects::setownerteam(var1);
+    var_16 = scripts\mp\gameobjects::getownerteam();
+    var_17 = scripts\mp\utility\game::getotherteam(var_1)[0];
+    scripts\mp\gameobjects::setownerteam(var_1);
 
     if(level.usehqrules && !level.usehprules) {
       setomnvar("ui_hq_ownerteam", scripts\mp\gametypes\hq::gethqownerteamvalue(self.ownerteam));
@@ -390,29 +390,29 @@ function zone_onuse(var0) {
 
     if(scripts\mp\utility\game::getgametype() == "hq" && !level.usehprules) {
       level thread scripts\mp\gametypes\hq::awardcapturepoints();
-      var18 = scripts\mp\gamescore::_getteamscore(var1);
-      var19 = scripts\mp\gamescore::_getteamscore(var17);
+      var_18 = scripts\mp\gamescore::_getteamscore(var_1);
+      var_19 = scripts\mp\gamescore::_getteamscore(var_17);
 
-      if(var18 > var19) {
+      if(var_18 > var_19) {
         level.ref_12f0e = 1;
       }
 
-      binoculars_clearexpirationtimer(var1);
+      binoculars_clearexpirationtimer(var_1);
     } else if(level.ref_1221a) {
       level scripts\mp\gamelogic::pausetimer();
     }
 
     level.usestartspawns = 0;
-    var20 = 0;
+    var_20 = 0;
     level.zone scripts\mp\gameobjects::setobjectivestatusicons(level.icondefend, level.iconcapture);
-    level scripts\mp\gametypes\koth::updateservericons(var1, 0);
+    level scripts\mp\gametypes\koth::updateservericons(var_1, 0);
 
     if(scripts\mp\utility\game::getgametype() == "hq" && !level.usehprules) {
-      thread scripts\mp\utility\print::printandsoundoneveryone(var1, var17, undefined, undefined, "mp_dom_flag_captured", undefined, var0);
+      thread scripts\mp\utility\print::printandsoundoneveryone(var_1, var_17, undefined, undefined, "mp_dom_flag_captured", undefined, var_0);
       thread scripts\mp\music_and_dialog::headquarters_captured_music();
     }
 
-    if(!isDefined(level.lastcaptureteam) || level.lastcaptureteam != var1) {
+    if(!isDefined(level.lastcaptureteam) || level.lastcaptureteam != var_1) {
       if(scripts\mp\utility\game::getgametype() == "hq" && !level.usehprules) {
         if(isDefined(level.kothhillrotation && level.kothhillrotation == 0)) {
           level.delayleadtakendialog = 4;
@@ -420,23 +420,23 @@ function zone_onuse(var0) {
           level.delayleadtakendialog = undefined;
         }
 
-        thread delaydialogstatustoavoidcaptureoverlap(level, var1);
+        thread delaydialogstatustoavoidcaptureoverlap(level, var_1);
       } else {
-        level scripts\mp\utility\dialog::statusdialog("hp_captured_friendly", var1);
-        level scripts\mp\utility\dialog::statusdialog("hp_captured_enemy", var17);
+        level scripts\mp\utility\dialog::statusdialog("hp_captured_friendly", var_1);
+        level scripts\mp\utility\dialog::statusdialog("hp_captured_enemy", var_17);
       }
 
       if(scripts\mp\utility\game::getgametype() == "koth") {
-        level thread scripts\mp\gametypes\koth::give_capture_credit(var3, var2, var1, level.lastcaptureteam, var0, self);
+        level thread scripts\mp\gametypes\koth::give_capture_credit(var_3, var_2, var_1, level.lastcaptureteam, var_0, self);
       } else if(scripts\mp\utility\game::getgametype() == "grnd") {
-        level thread scripts\mp\gametypes\grnd::give_capture_credit(var3, var2, var1, level.lastcaptureteam, var0, self);
+        level thread scripts\mp\gametypes\grnd::give_capture_credit(var_3, var_2, var_1, level.lastcaptureteam, var_0, self);
       } else {
-        level thread scripts\mp\gametypes\hq::give_capture_credit(var3, var2, var1, level.lastcaptureteam, var0, self);
+        level thread scripts\mp\gametypes\hq::give_capture_credit(var_3, var_2, var_1, level.lastcaptureteam, var_0, self);
       }
     }
 
-    foreach(var22 in level.players) {
-      showcapturedhardpointeffecttoplayer(var1, var22);
+    foreach(var_22 in level.players) {
+      showcapturedhardpointeffecttoplayer(var_1, var_22);
     }
 
     thread updatechevrons(level.zone);
@@ -446,19 +446,19 @@ function zone_onuse(var0) {
       level.zone.visuals[0] scriptmodelplayanim("iw8_mp_military_hq_crate_open_idle");
 
       if(!level.usehprules) {
-        var24 = scripts\mp\utility\teams::getteamdata(var1, "players");
+        var_24 = scripts\mp\utility\teams::getteamdata(var_1, "players");
 
-        foreach(var7 in var24) {
-          var7 thread scripts\mp\gametypes\hq::showrespawnwarningmessage();
+        foreach(var_7 in var_24) {
+          var_7 thread scripts\mp\gametypes\hq::showrespawnwarningmessage();
         }
       }
     }
 
-    level.hpcapteam = var1;
+    level.hpcapteam = var_1;
     self.capturecount++;
-    level.lastcaptureteam = var1;
+    level.lastcaptureteam = var_1;
     level notify("zone_captured");
-    level notify("zone_captured" + var1);
+    level notify("zone_captured" + var_1);
   }
 
   if(istrue(level.setplayerselfrevivingextrainfo)) {
@@ -472,22 +472,22 @@ function ref_1439d() {
   scripts\mp\gameobjects::setvisibleteam("none");
 }
 
-function zone_onusebegin(var0) {
+function zone_onusebegin(var_0) {
   if(scripts\mp\utility\game::getgametype() == "hq" && !level.usehprules) {
-    var1 = scripts\mp\gameobjects::getownerteam();
+    var_1 = scripts\mp\gameobjects::getownerteam();
 
-    if(var1 != "neutral" && self.claimteam != var1) {
-      binoculars_clearexpirationtimer(var1, 1);
+    if(var_1 != "neutral" && self.claimteam != var_1) {
+      binoculars_clearexpirationtimer(var_1, 1);
     }
 
-    if(!istrue(var0.ui_dom_securing) || !istrue(self.stalemate)) {
-      if(var1 == "neutral") {
-        var0 setclientomnvar("ui_objective_state", 1);
+    if(!istrue(var_0.ui_dom_securing) || !istrue(self.stalemate)) {
+      if(var_1 == "neutral") {
+        var_0 setclientomnvar("ui_objective_state", 1);
       } else {
-        var0 setclientomnvar("ui_objective_state", 2);
+        var_0 setclientomnvar("ui_objective_state", 2);
       }
 
-      var0.ui_dom_securing = 1;
+      var_0.ui_dom_securing = 1;
     }
   }
 
@@ -503,40 +503,40 @@ function zone_onusebegin(var0) {
   scripts\mp\gameobjects::setusetime(level.zonecapturetime);
 
   if(level.zonecapturetime > 0) {
-    self.prevownerteam = scripts\mp\utility\game::getotherteam(var0.team)[0];
+    self.prevownerteam = scripts\mp\utility\game::getotherteam(var_0.team)[0];
     scripts\mp\gameobjects::setobjectivestatusicons(level.iconlosing, level.icontaking);
     return;
   }
 }
 
-function zone_onuseupdate(var0, var1, var2, var3) {
-  var4 = scripts\mp\gameobjects::getownerteam();
+function zone_onuseupdate(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\mp\gameobjects::getownerteam();
 
-  if(var4 == "neutral" && self.claimteam != var4) {
+  if(var_4 == "neutral" && self.claimteam != var_4) {
     binoculars_clearexpirationtimer(self.claimteam);
-  } else if(var4 != "neutral" && self.claimteam != var4) {
-    binoculars_clearexpirationtimer(var4, 1);
+  } else if(var_4 != "neutral" && self.claimteam != var_4) {
+    binoculars_clearexpirationtimer(var_4, 1);
   } else if(level.ref_1221a) {
     level scripts\mp\gamelogic::pausetimer();
   }
 
-  if((scripts\mp\utility\game::getgametype() == "hq" || scripts\mp\utility\game::getgametype() == "arm") && var1 < 1 && !level.usehprules && !level.gameended) {
-    playcapturesound(var1, var0);
+  if((scripts\mp\utility\game::getgametype() == "hq" || scripts\mp\utility\game::getgametype() == "arm") && var_1 < 1 && !level.usehprules && !level.gameended) {
+    playcapturesound(var_1, var_0);
   }
 
-  var4 = scripts\mp\gameobjects::getownerteam();
-  var5 = scripts\mp\utility\game::getotherteam(var0)[0];
+  var_4 = scripts\mp\gameobjects::getownerteam();
+  var_5 = scripts\mp\utility\game::getotherteam(var_0)[0];
 
-  if(var1 > 0.05 && var2 && !self.didstatusnotify) {
-    if(var4 == "neutral") {
-      scripts\mp\utility\dialog::statusdialog("hp_capturing_friendly", var0);
-      scripts\mp\utility\dialog::statusdialog("hp_capturing_enemy", var5);
+  if(var_1 > 0.05 && var_2 && !self.didstatusnotify) {
+    if(var_4 == "neutral") {
+      scripts\mp\utility\dialog::statusdialog("hp_capturing_friendly", var_0);
+      scripts\mp\utility\dialog::statusdialog("hp_capturing_enemy", var_5);
     } else if(scripts\mp\utility\game::getgametype() == "hq") {
-      scripts\mp\utility\dialog::statusdialog("hp_disabling_friendly", var4);
-      scripts\mp\utility\dialog::statusdialog("hp_disabling_enemy", var0);
+      scripts\mp\utility\dialog::statusdialog("hp_disabling_friendly", var_4);
+      scripts\mp\utility\dialog::statusdialog("hp_disabling_enemy", var_0);
     } else {
-      scripts\mp\utility\dialog::statusdialog("hp_capturing_enemy", var4);
-      scripts\mp\utility\dialog::statusdialog("hp_capturing_friendly", var0);
+      scripts\mp\utility\dialog::statusdialog("hp_capturing_enemy", var_4);
+      scripts\mp\utility\dialog::statusdialog("hp_capturing_friendly", var_0);
     }
 
     self.didstatusnotify = 1;
@@ -544,55 +544,55 @@ function zone_onuseupdate(var0, var1, var2, var3) {
   }
 }
 
-function delaydialogstatustoavoidcaptureoverlap(var0, var1) {
+function delaydialogstatustoavoidcaptureoverlap(var_0, var_1) {
   wait 0.5;
-  level scripts\mp\utility\dialog::statusdialog("hp_secured_friendly", var0);
-  level scripts\mp\utility\dialog::statusdialog("hp_captured_enemy", var1);
+  level scripts\mp\utility\dialog::statusdialog("hp_secured_friendly", var_0);
+  level scripts\mp\utility\dialog::statusdialog("hp_captured_enemy", var_1);
 }
 
-function playcapturesound(var0, var1) {
+function playcapturesound(var_0, var_1) {
   if(!isDefined(self.lastsfxplayedtime)) {
     self.lastsfxplayedtime = gettime();
   }
 
   if(self.lastsfxplayedtime + 995 < gettime()) {
     self.lastsfxplayedtime = gettime();
-    var2 = "";
-    var0 = int(floor(var0 * 10));
-    var2 = "mp_dom_capturing_tick_0" + var0;
-    self.visuals[0] playsoundtoteam(var2, var1);
+    var_2 = "";
+    var_0 = int(floor(var_0 * 10));
+    var_2 = "mp_dom_capturing_tick_0" + var_0;
+    self.visuals[0] playsoundtoteam(var_2, var_1);
     return;
   }
 }
 
-function zone_onuseend(var0, var1, var2) {
-  var3 = level.zone scripts\mp\gameobjects::getownerteam();
+function zone_onuseend(var_0, var_1, var_2) {
+  var_3 = level.zone scripts\mp\gameobjects::getownerteam();
 
-  if(!var2) {
+  if(!var_2) {
     if(scripts\mp\utility\game::getgametype() == "hq") {
       if(level.usehprules) {
         if(level.ref_1221a) {
           level scripts\mp\gamelogic::resumetimer();
         }
-      } else if(var3 != "neutral") {
-        binoculars_clearexpirationtimer(var3);
+      } else if(var_3 != "neutral") {
+        binoculars_clearexpirationtimer(var_3);
       }
     } else if(level.ref_1221a) {
       level scripts\mp\gamelogic::resumetimer();
     }
   }
 
-  if(isPlayer(var1)) {
-    var1 setclientomnvar("ui_objective_state", 0);
-    var1.ui_dom_securing = undefined;
+  if(isPlayer(var_1)) {
+    var_1 setclientomnvar("ui_objective_state", 0);
+    var_1.ui_dom_securing = undefined;
   }
 
-  if(var3 == "neutral") {
+  if(var_3 == "neutral") {
     level.zone scripts\mp\gameobjects::setobjectivestatusicons(level.iconneutral);
 
     if(istrue(level.usehpzonebrushes)) {
-      foreach(var1 in level.players) {
-        showzoneneutralbrush(level.zone, var1);
+      foreach(var_1 in level.players) {
+        showzoneneutralbrush(level.zone, var_1);
       }
 
       return;
@@ -603,8 +603,8 @@ function zone_onuseend(var0, var1, var2) {
 
   level.zone scripts\mp\gameobjects::setobjectivestatusicons(level.icondefend, level.iconcapture);
 
-  foreach(var3 in level.players) {
-    showcapturedhardpointeffecttoplayer(level.zone, var5, var3);
+  foreach(var_3 in level.players) {
+    showcapturedhardpointeffecttoplayer(level.zone, var_5, var_3);
   }
 }
 
@@ -622,16 +622,16 @@ function zone_onunoccupied() {
     level scripts\mp\gamelogic::resumetimer();
   }
 
-  var0 = 1;
+  var_0 = 1;
 
-  foreach(var2 in level.teamnamelist) {
-    if(self.numtouching[var2] > 0) {
-      var0 = 0;
+  foreach(var_2 in level.teamnamelist) {
+    if(self.numtouching[var_2] > 0) {
+      var_0 = 0;
       break;
     }
   }
 
-  if(var0) {
+  if(var_0) {
     level.zone.wasleftunoccupied = 1;
     level scripts\mp\gametypes\koth::updateservericons("neutral", 0);
     level.zone scripts\mp\gameobjects::setobjectivestatusicons(level.iconneutral);
@@ -647,119 +647,119 @@ function zone_oncontested() {
   }
 
   self.hostvictimoverride = gettime();
-  var0 = level.zone scripts\mp\gameobjects::getownerteam();
+  var_0 = level.zone scripts\mp\gameobjects::getownerteam();
   level.zone scripts\mp\gameobjects::setobjectivestatusicons(level.iconcontested);
-  level scripts\mp\gametypes\koth::updateservericons(var0, 1);
+  level scripts\mp\gametypes\koth::updateservericons(var_0, 1);
   thread updatechevrons(level.zone);
 
-  foreach(var2 in level.teamnamelist) {
-    if(self.touchlist[var2].size) {
-      var3 = self.touchlist[var2];
-      var4 = getarraykeys(var3);
+  foreach(var_2 in level.teamnamelist) {
+    if(self.touchlist[var_2].size) {
+      var_3 = self.touchlist[var_2];
+      var_4 = getarraykeys(var_3);
 
-      for(var5 = 0; var5 < var4.size; var5++) {
-        var6 = var3[var4[var5]].player;
-        var6 setclientomnvar("ui_objective_state", 3);
+      for(var_5 = 0; var_5 < var_4.size; var_5++) {
+        var_6 = var_3[var_4[var_5]].player;
+        var_6 setclientomnvar("ui_objective_state", 3);
       }
     }
   }
 
-  foreach(var6 in level.players) {
-    showcapturedhardpointeffecttoplayer(level.zone, var0, var6);
+  foreach(var_6 in level.players) {
+    showcapturedhardpointeffecttoplayer(level.zone, var_0, var_6);
   }
 
-  if(var0 == "neutral") {
-    var10 = self.claimteam;
+  if(var_0 == "neutral") {
+    var_10 = self.claimteam;
   } else {
-    var10 = var1;
+    var_10 = var_1;
   }
 
-  foreach(var12 in level.teamnamelist) {
-    scripts\mp\utility\dialog::statusdialog("hp_contested", var12);
+  foreach(var_12 in level.teamnamelist) {
+    scripts\mp\utility\dialog::statusdialog("hp_contested", var_12);
   }
 
   level.zone thread scripts\common\utility::ref_13e0a(level.ref_11b29, "hill_contested", level.zone.trigger.origin);
   self.didstatusnotify = 1;
 }
 
-function zone_onuncontested(var0) {
+function zone_onuncontested(var_0) {
   if(level.ref_1221a) {
     level scripts\mp\gamelogic::pausetimer();
   }
 
-  var1 = level.zone scripts\mp\gameobjects::getownerteam();
+  var_1 = level.zone scripts\mp\gameobjects::getownerteam();
 
-  if(var0 == "none" || var1 == "neutral") {
+  if(var_0 == "none" || var_1 == "neutral") {
     level.zone scripts\mp\gameobjects::setobjectivestatusicons(level.iconneutral);
 
     if(istrue(level.usehpzonebrushes)) {
-      foreach(var3 in level.players) {
-        showzoneneutralbrush(level.zone, var3);
+      foreach(var_3 in level.players) {
+        showzoneneutralbrush(level.zone, var_3);
       }
     }
 
     level.zone thread scripts\common\utility::ref_13e0a(level.ref_11b29, "hill_empty", level.zone.trigger.origin);
   } else {
     if(scripts\mp\utility\game::getgametype() == "koth") {
-      scripts\mp\utility\sound::playsoundonplayers("mp_hardpoint_captured_positive", var1);
-      scripts\mp\utility\sound::playsoundonplayers("mp_hardpoint_captured_negative", scripts\mp\utility\game::getotherteam(var1)[0]);
+      scripts\mp\utility\sound::playsoundonplayers("mp_hardpoint_captured_positive", var_1);
+      scripts\mp\utility\sound::playsoundonplayers("mp_hardpoint_captured_negative", scripts\mp\utility\game::getotherteam(var_1)[0]);
     } else if(scripts\mp\utility\game::getgametype() == "grnd") {
-      scripts\mp\utility\sound::playsoundonplayers("mp_dropzone_captured_positive", var1);
-      scripts\mp\utility\sound::playsoundonplayers("mp_dropzone_captured_negative", scripts\mp\utility\game::getotherteam(var1)[0]);
+      scripts\mp\utility\sound::playsoundonplayers("mp_dropzone_captured_positive", var_1);
+      scripts\mp\utility\sound::playsoundonplayers("mp_dropzone_captured_negative", scripts\mp\utility\game::getotherteam(var_1)[0]);
     }
 
     level.zone scripts\mp\gameobjects::setobjectivestatusicons(level.icondefend, level.iconcapture);
 
-    foreach(var3 in level.players) {
-      showcapturedhardpointeffecttoplayer(level.zone, var1, var3);
+    foreach(var_3 in level.players) {
+      showcapturedhardpointeffecttoplayer(level.zone, var_1, var_3);
     }
 
     level.zone thread scripts\common\utility::ref_13e0a(level.ref_11b29, "hill_uncontested", level.zone.trigger.origin);
   }
 
-  var7 = (gettime() - self.hostvictimoverride) * 0.001;
-  scripts\mp\utility\game::ref_119ac(undefined, undefined, "Zone Contested", level.zone.trigger.origin, var7 + " seconds");
+  var_7 = (gettime() - self.hostvictimoverride) * 0.001;
+  scripts\mp\utility\game::ref_119ac(undefined, undefined, "Zone Contested", level.zone.trigger.origin, var_7 + " seconds");
   self.hostvictimoverride = undefined;
-  var8 = scripts\engine\utility::ter_op(var1 == "neutral", "idle", var1);
+  var_8 = scripts\engine\utility::ter_op(var_1 == "neutral", "idle", var_1);
   thread updatechevrons(level.zone);
-  level scripts\mp\gametypes\koth::updateservericons(var1, 0);
+  level scripts\mp\gametypes\koth::updateservericons(var_1, 0);
   self.didstatusnotify = 0;
 }
 
-function ref_1471e(var0) {
-  binoculars_clearexpirationtimer(var0);
+function ref_1471e(var_0) {
+  binoculars_clearexpirationtimer(var_0);
 }
 
-function zone_stompprogressreward(var0) {
-  var0 thread scripts\mp\rank::scoreeventpopup("defend");
-  var0 thread scripts\mp\awards::givemidmatchaward("mode_x_defend");
+function zone_stompprogressreward(var_0) {
+  var_0 thread scripts\mp\rank::scoreeventpopup("defend");
+  var_0 thread scripts\mp\awards::givemidmatchaward("mode_x_defend");
   scripts\mp\gameobjects::setobjectivestatusicons(level.icondefending, level.iconcapture);
 }
 
-function zone_onpinnedstate(var0) {
+function zone_onpinnedstate(var_0) {
   if(self.ownerteam != "neutral" && self.numtouching[self.ownerteam] && !self.stalemate) {
     scripts\mp\gameobjects::setobjectivestatusicons(level.icondefending, level.iconcapture);
     return;
   }
 }
 
-function zone_onunpinnedstate(var0) {
+function zone_onunpinnedstate(var_0) {
   if(self.ownerteam != "neutral" && !self.numtouching[self.ownerteam] && !self.stalemate) {
     scripts\mp\gameobjects::setobjectivestatusicons(level.icondefend, level.iconcapture);
     return;
   }
 }
 
-function binoculars_clearexpirationtimer(var0, var1) {
+function binoculars_clearexpirationtimer(var_0, var_1) {
   if(!level.ref_1221a) {
     return;
   }
 
-  var2 = scripts\mp\gamescore::_getteamscore(var0);
-  var3 = scripts\mp\gamescore::_getteamscore(scripts\mp\utility\game::getotherteam(var0)[0]);
+  var_2 = scripts\mp\gamescore::_getteamscore(var_0);
+  var_3 = scripts\mp\gamescore::_getteamscore(scripts\mp\utility\game::getotherteam(var_0)[0]);
 
-  if(istrue(var1)) {
-    if(var3 > var2) {
+  if(istrue(var_1)) {
+    if(var_3 > var_2) {
       level scripts\mp\gamelogic::resumetimer();
       return;
     }
@@ -768,7 +768,7 @@ function binoculars_clearexpirationtimer(var0, var1) {
     return;
   }
 
-  if(var2 > var3) {
+  if(var_2 > var_3) {
     level scripts\mp\gamelogic::resumetimer();
     return;
   }
@@ -776,96 +776,96 @@ function binoculars_clearexpirationtimer(var0, var1) {
   level scripts\mp\gamelogic::pausetimer();
 }
 
-function setcrankedtimerzonecap(var0) {
-  if(isDefined(level.supportcranked) && level.supportcranked && isDefined(var0.cranked) && var0.cranked) {
-    var0 scripts\mp\cranked::setcrankedplayerbombtimer("assist");
+function setcrankedtimerzonecap(var_0) {
+  if(isDefined(level.supportcranked) && level.supportcranked && isDefined(var_0.cranked) && var_0.cranked) {
+    var_0 scripts\mp\cranked::setcrankedplayerbombtimer("assist");
     return;
   }
 }
 
 function playhardpointneutralfx() {
   if(istrue(level.usehpzonebrushes)) {
-    foreach(var1 in level.players) {
-      showzoneneutralbrush(var1);
+    foreach(var_1 in level.players) {
+      showzoneneutralbrush(var_1);
     }
 
     return;
   }
 }
 
-function showcapturedhardpointeffecttoplayer(var0, var1) {
-  var2 = var1.team;
-  var3 = var1 ismlgspectator();
+function showcapturedhardpointeffecttoplayer(var_0, var_1) {
+  var_2 = var_1.team;
+  var_3 = var_1 ismlgspectator();
 
-  if(var3) {
-    if(var1 enablereloading() || var1 useinvisibleplayerduringspawnselection()) {
-      var2 = "allies";
+  if(var_3) {
+    if(var_1 enablereloading() || var_1 useinvisibleplayerduringspawnselection()) {
+      var_2 = "allies";
     } else {
-      var2 = var1 getmlgspectatorteam();
+      var_2 = var_1 getmlgspectatorteam();
     }
   }
 
   if(istrue(level.usehpzonebrushes)) {
     if(level.zone.stalemate) {
-      showzonecontestedbrush(var1);
+      showzonecontestedbrush(var_1);
       return;
     }
 
-    if(var2 == var0) {
-      showzonefriendlybrush(var1);
+    if(var_2 == var_0) {
+      showzonefriendlybrush(var_1);
       return;
     }
 
-    showzoneenemybrush(var1);
+    showzoneenemybrush(var_1);
     return;
   }
 }
 
-function showzoneneutralbrush(var0) {
-  level.zone.friendlybrush hidefromplayer(var0);
-  level.zone.enemybrush hidefromplayer(var0);
-  level.zone.contestedbrush hidefromplayer(var0);
-  level.zone.neutralbrush showtoplayer(var0);
+function showzoneneutralbrush(var_0) {
+  level.zone.friendlybrush hidefromplayer(var_0);
+  level.zone.enemybrush hidefromplayer(var_0);
+  level.zone.contestedbrush hidefromplayer(var_0);
+  level.zone.neutralbrush showtoplayer(var_0);
 }
 
-function showzonefriendlybrush(var0) {
-  level.zone.friendlybrush showtoplayer(var0);
-  level.zone.enemybrush hidefromplayer(var0);
-  level.zone.contestedbrush hidefromplayer(var0);
-  level.zone.neutralbrush hidefromplayer(var0);
+function showzonefriendlybrush(var_0) {
+  level.zone.friendlybrush showtoplayer(var_0);
+  level.zone.enemybrush hidefromplayer(var_0);
+  level.zone.contestedbrush hidefromplayer(var_0);
+  level.zone.neutralbrush hidefromplayer(var_0);
 }
 
-function showzoneenemybrush(var0) {
-  level.zone.friendlybrush hidefromplayer(var0);
-  level.zone.enemybrush showtoplayer(var0);
-  level.zone.contestedbrush hidefromplayer(var0);
-  level.zone.neutralbrush hidefromplayer(var0);
+function showzoneenemybrush(var_0) {
+  level.zone.friendlybrush hidefromplayer(var_0);
+  level.zone.enemybrush showtoplayer(var_0);
+  level.zone.contestedbrush hidefromplayer(var_0);
+  level.zone.neutralbrush hidefromplayer(var_0);
 }
 
-function showzonecontestedbrush(var0) {
-  level.zone.friendlybrush hidefromplayer(var0);
-  level.zone.enemybrush hidefromplayer(var0);
-  level.zone.contestedbrush showtoplayer(var0);
-  level.zone.neutralbrush hidefromplayer(var0);
+function showzonecontestedbrush(var_0) {
+  level.zone.friendlybrush hidefromplayer(var_0);
+  level.zone.enemybrush hidefromplayer(var_0);
+  level.zone.contestedbrush showtoplayer(var_0);
+  level.zone.neutralbrush hidefromplayer(var_0);
 }
 
-function hideplayerspecificbrushes(var0) {
-  self.friendlybrush hidefromplayer(var0);
-  self.enemybrush hidefromplayer(var0);
-  self.neutralbrush hidefromplayer(var0);
-  self.contestedbrush hidefromplayer(var0);
+function hideplayerspecificbrushes(var_0) {
+  self.friendlybrush hidefromplayer(var_0);
+  self.enemybrush hidefromplayer(var_0);
+  self.neutralbrush hidefromplayer(var_0);
+  self.contestedbrush hidefromplayer(var_0);
 }
 
-function onplayerjoinedteam(var0) {
-  if(var0.team != "spectator" && level.zone.ownerteam != "neutral") {
-    showcapturedhardpointeffecttoplayer(level.zone, level.zone.ownerteam, var0);
+function onplayerjoinedteam(var_0) {
+  if(var_0.team != "spectator" && level.zone.ownerteam != "neutral") {
+    showcapturedhardpointeffecttoplayer(level.zone, level.zone.ownerteam, var_0);
     return;
   }
 }
 
-function ref_12bff(var0, var1) {
-  var2 = [];
-  var3 = [];
+function ref_12bff(var_0, var_1) {
+  var_2 = [];
+  var_3 = [];
 
   switch (level.mapname) {
     case "mp_m_speed":
@@ -885,126 +885,126 @@ function ref_12bff(var0, var1) {
       break;
   }
 
-  if(isDefined(var3[var1])) {
-    foreach(var5 in var0) {
-      foreach(var7 in var3[var1]) {
-        if(distance(var5.origin, var7) < 10) {
-          var2 = var5;
+  if(isDefined(var_3[var_1])) {
+    foreach(var_5 in var_0) {
+      foreach(var_7 in var_3[var_1]) {
+        if(distance(var_5.origin, var_7) < 10) {
+          var_2 = var_5;
           break;
         }
       }
     }
   }
 
-  var0 = scripts\engine\utility::array_remove_array(var0, var2);
-  return var0;
+  var_0 = scripts\engine\utility::array_remove_array(var_0, var_2);
+  return var_0;
 }
 
-function ref_12806(var0, var1) {
-  var2 = [];
-  var3 = [];
+function ref_12806(var_0, var_1) {
+  var_2 = [];
+  var_3 = [];
 
   switch (level.mapname) {
     case "mp_m_speed":
-      var2 = [];
-      var2[0] = [(-564, 1880, 24), (0, 180, 0)];
-      var2[1] = [(-564, 1976, 24), (0, 180, 0)];
-      var2[2] = [(-564, 2072, 24), (0, 180, 0)];
-      var2 = [];
-      var2[0] = [(-1314, 472, 24), (0, 180, 0)];
-      var2[1] = [(-1314, 568, 24), (0, 180, 0)];
-      var2[2] = [(-1474, 816, 24), (0, 270, 0)];
-      var2[3] = [(-1378, 816, 24), (0, 270, 0)];
-      var2 = [];
-      var2[0] = [(-1298, 1992, 24), (0, 180, 0)];
-      var2[1] = [(-1400, 2262, 24), (0, 270, 0)];
-      var2[2] = [(-1690, 2264, 24), (0, 270, 0)];
+      var_2 = [];
+      var_2[0] = [(-564, 1880, 24), (0, 180, 0)];
+      var_2[1] = [(-564, 1976, 24), (0, 180, 0)];
+      var_2[2] = [(-564, 2072, 24), (0, 180, 0)];
+      var_2 = [];
+      var_2[0] = [(-1314, 472, 24), (0, 180, 0)];
+      var_2[1] = [(-1314, 568, 24), (0, 180, 0)];
+      var_2[2] = [(-1474, 816, 24), (0, 270, 0)];
+      var_2[3] = [(-1378, 816, 24), (0, 270, 0)];
+      var_2 = [];
+      var_2[0] = [(-1298, 1992, 24), (0, 180, 0)];
+      var_2[1] = [(-1400, 2262, 24), (0, 270, 0)];
+      var_2[2] = [(-1690, 2264, 24), (0, 270, 0)];
       break;
     case "mp_deadzone":
-      var2 = [];
-      var2[0] = [(436, 3435, 207.694), (0, 360, 0)];
-      var2[1] = [(436, 3188, 247.694), (0, 360, 0)];
-      var2[2] = [(436, 3098, 258.694), (0, 360, 0)];
-      var2[3] = [(1051, 2796, 304), (0, 117.509, 0)];
-      var2[4] = [(931, 2680, 304), (0, 147.509, 0)];
-      var2[5] = [(515, 3522, 215), (0, 276, 0)];
-      var2 = [];
-      var2[0] = [(-400, 651, 436), (0, 180, 0)];
-      var2[1] = [(-400, 557, 439), (0, 180, 0)];
-      var2[2] = [(-400, 461, 446), (0, 180, 0)];
-      var2[3] = [(-410, -65, 446), (0, 180, 0)];
-      var2[4] = [(-408, 31, 448), (0, 180, 0)];
+      var_2 = [];
+      var_2[0] = [(436, 3435, 207.694), (0, 360, 0)];
+      var_2[1] = [(436, 3188, 247.694), (0, 360, 0)];
+      var_2[2] = [(436, 3098, 258.694), (0, 360, 0)];
+      var_2[3] = [(1051, 2796, 304), (0, 117.509, 0)];
+      var_2[4] = [(931, 2680, 304), (0, 147.509, 0)];
+      var_2[5] = [(515, 3522, 215), (0, 276, 0)];
+      var_2 = [];
+      var_2[0] = [(-400, 651, 436), (0, 180, 0)];
+      var_2[1] = [(-400, 557, 439), (0, 180, 0)];
+      var_2[2] = [(-400, 461, 446), (0, 180, 0)];
+      var_2[3] = [(-410, -65, 446), (0, 180, 0)];
+      var_2[4] = [(-408, 31, 448), (0, 180, 0)];
       break;
     case "mp_raid":
-      var2 = [];
-      var2[0] = [(-3118.59, 230.46, 292), (0, 0, 0)];
-      var2 = [];
-      var2[0] = [(688, 256, 295), (0, 270, 0)];
-      var2[1] = [(749, 248, 295), (0, 270, 0)];
-      var2 = [];
-      var2[0] = [(-1490.62, -972.979, 422), (0, 90, 0)];
-      var2 = [];
-      var2[0] = [(-1695.67, 3211.7, 310), (0, 270, 0)];
-      var2[1] = [(-1804.59, 3219.27, 284), (0, 270, 0)];
-      var2 = [];
-      var2[0] = [(260, 1416, 338), (0, 90, 0)];
+      var_2 = [];
+      var_2[0] = [(-3118.59, 230.46, 292), (0, 0, 0)];
+      var_2 = [];
+      var_2[0] = [(688, 256, 295), (0, 270, 0)];
+      var_2[1] = [(749, 248, 295), (0, 270, 0)];
+      var_2 = [];
+      var_2[0] = [(-1490.62, -972.979, 422), (0, 90, 0)];
+      var_2 = [];
+      var_2[0] = [(-1695.67, 3211.7, 310), (0, 270, 0)];
+      var_2[1] = [(-1804.59, 3219.27, 284), (0, 270, 0)];
+      var_2 = [];
+      var_2[0] = [(260, 1416, 338), (0, 90, 0)];
       break;
     case "mp_cave":
     case "mp_cave_am":
-      var2 = [];
-      var2[0] = [(-514, 1328, 32), (0, 100, 0)];
-      var2[1] = [(-692, 1828, 42), (0, 260, 0)];
-      var2[2] = [(-564, 1804, 44), (0, 260, 0)];
-      var2[3] = [(-500, 1788, 54), (0, 260, 0)];
-      var2[4] = [(-312, 1528, 78), (0, 145, 0)];
+      var_2 = [];
+      var_2[0] = [(-514, 1328, 32), (0, 100, 0)];
+      var_2[1] = [(-692, 1828, 42), (0, 260, 0)];
+      var_2[2] = [(-564, 1804, 44), (0, 260, 0)];
+      var_2[3] = [(-500, 1788, 54), (0, 260, 0)];
+      var_2[4] = [(-312, 1528, 78), (0, 145, 0)];
       break;
     case "mp_hackney_yard":
     case "mp_hackney_am":
-      var2 = [];
-      var2[0] = [(994.552, 1760.12, 44), (0, 270, 0)];
-      var2 = [];
-      var2[0] = [(1322, -407.18, 29.184), (0, 90, 0)];
+      var_2 = [];
+      var_2[0] = [(994.552, 1760.12, 44), (0, 270, 0)];
+      var_2 = [];
+      var_2[0] = [(1322, -407.18, 29.184), (0, 90, 0)];
       break;
     case "mp_aniyah":
-      var2 = [];
-      var2[0] = [(1995.79, 394.828, 424), (0, 270, 0)];
+      var_2 = [];
+      var_2[0] = [(1995.79, 394.828, 424), (0, 270, 0)];
       break;
     case "mp_herat":
-      var2 = [];
-      var2[0] = [(-1231.9, -132.317, 183.246), (0, 90, 0)];
+      var_2 = [];
+      var_2[0] = [(-1231.9, -132.317, 183.246), (0, 90, 0)];
       break;
     default:
       break;
   }
 
-  if(isDefined(var2[var1])) {
-    foreach(var5 in var2[var1]) {
-      var6 = var5[0];
-      var7 = var5[1];
-      var8 = easepower("hardpoint_chevron", var6, var7);
-      var3 = var8;
+  if(isDefined(var_2[var_1])) {
+    foreach(var_5 in var_2[var_1]) {
+      var_6 = var_5[0];
+      var_7 = var_5[1];
+      var_8 = easepower("hardpoint_chevron", var_6, var_7);
+      var_3 = var_8;
     }
   }
 
-  var0 = scripts\engine\utility::array_combine(var0, var3);
-  return var0;
+  var_0 = scripts\engine\utility::array_combine(var_0, var_3);
+  return var_0;
 }
 
-function init_vo_arrays(var0, var1, var2) {
-  var0.origin = var1;
-  var0.angles = var2;
-  return var0;
+function init_vo_arrays(var_0, var_1, var_2) {
+  var_0.origin = var_1;
+  var_0.angles = var_2;
+  return var_0;
 }
 
 function ref_144da() {
   level endon("game_ended");
   level endon("stop_watching_trigger");
-  var0 = self.entnum;
+  var_0 = self.entnum;
   self.trigger scripts\engine\utility::trigger_on();
 
-  foreach(var2 in level.teamnamelist) {
-    self.playerzombiedelayturnonfx[var2] = 0;
-    self.playerzombiedestroyhud[var2] = [];
+  foreach(var_2 in level.teamnamelist) {
+    self.playerzombiedelayturnonfx[var_2] = 0;
+    self.playerzombiedestroyhud[var_2] = [];
   }
 
   self.playerzombiedelayturnonfx["neutral"] = 0;
@@ -1013,61 +1013,61 @@ function ref_144da() {
   self.getinventoryslotvo = 1;
 
   for(;;) {
-    self.trigger waittill("trigger", var4);
+    self.trigger waittill("trigger", var_4);
 
-    if(!scripts\mp\utility\player::isreallyalive(var4)) {
+    if(!scripts\mp\utility\player::isreallyalive(var_4)) {
       continue;
     }
 
-    if(isagent(var4)) {
+    if(isagent(var_4)) {
       continue;
     }
 
-    if(!scripts\mp\utility\entity::isgameparticipant(var4)) {
+    if(!scripts\mp\utility\entity::isgameparticipant(var_4)) {
       continue;
     }
 
-    if(istrue(var4.inlaststand)) {
+    if(istrue(var_4.inlaststand)) {
       continue;
     }
 
-    if(isDefined(var4.classname) && var4.classname == "script_vehicle") {
+    if(isDefined(var_4.classname) && var_4.classname == "script_vehicle") {
       continue;
     }
 
-    if(!isDefined(var4.initialized_gameobject_vars)) {
+    if(!isDefined(var_4.initialized_gameobject_vars)) {
       continue;
     }
 
-    var5 = scripts\mp\gameobjects::getrelativeteam(var4.pers["team"]);
+    var_5 = scripts\mp\gameobjects::getrelativeteam(var_4.pers["team"]);
 
-    if(isDefined(self.teamusetimes[var5]) && self.teamusetimes[var5] < 0) {
+    if(isDefined(self.teamusetimes[var_5]) && self.teamusetimes[var_5] < 0) {
       continue;
     }
 
-    if(scripts\mp\utility\player::isreallyalive(var4) && !isDefined(var4.touchtriggers[var0])) {
-      var2 = var4.pers["team"];
-      self.playerzombiedelayturnonfx[var2]++;
-      var6 = var4.guid;
-      var7 = spawnStruct();
-      var7.player = var4;
-      var7.starttime = gettime();
-      self.playerzombiedestroyhud[var2][var6] = var7;
-      var4.spawn_sentry_at_pos = 0;
+    if(scripts\mp\utility\player::isreallyalive(var_4) && !isDefined(var_4.touchtriggers[var_0])) {
+      var_2 = var_4.pers["team"];
+      self.playerzombiedelayturnonfx[var_2]++;
+      var_6 = var_4.guid;
+      var_7 = spawnStruct();
+      var_7.player = var_4;
+      var_7.starttime = gettime();
+      self.playerzombiedestroyhud[var_2][var_6] = var_7;
+      var_4.spawn_sentry_at_pos = 0;
     }
 
-    if(scripts\mp\utility\player::isreallyalive(var4) && !isDefined(var4.touchtriggers[var0])) {
-      thread playerzombiedovehicledamageimmunity(var4);
+    if(scripts\mp\utility\player::isreallyalive(var_4) && !isDefined(var_4.touchtriggers[var_0])) {
+      thread playerzombiedovehicledamageimmunity(var_4);
     }
   }
 }
 
-function playerzombiedovehicledamageimmunity(var0) {
+function playerzombiedovehicledamageimmunity(var_0) {
   level endon("stop_watching_trigger");
-  var1 = self.pers["team"];
+  var_1 = self.pers["team"];
 
-  while(scripts\mp\utility\player::isreallyalive(self) && isDefined(var0.trigger) && self istouching(var0.trigger) && !level.gameended) {
-    if(isDefined(var0.checkinteractteam) && var0.team != var1) {
+  while(scripts\mp\utility\player::isreallyalive(self) && isDefined(var_0.trigger) && self istouching(var_0.trigger) && !level.gameended) {
+    if(isDefined(var_0.checkinteractteam) && var_0.team != var_1) {
       break;
     }
 
@@ -1075,7 +1075,7 @@ function playerzombiedovehicledamageimmunity(var0) {
       break;
     }
 
-    if(isDefined(var0.interactsquads) && !isDefined(var0.interactsquads[self.team]) || isDefined(var0.interactsquads) && !scripts\engine\utility::array_contains(var0.interactsquads[self.team], self.squadindex)) {
+    if(isDefined(var_0.interactsquads) && !isDefined(var_0.interactsquads[self.team]) || isDefined(var_0.interactsquads) && !scripts\engine\utility::array_contains(var_0.interactsquads[self.team], self.squadindex)) {
       break;
     }
 
@@ -1087,21 +1087,21 @@ function playerzombiedovehicledamageimmunity(var0) {
   }
 
   if(isDefined(self)) {
-    var0.playerzombiedestroyhud[var1][self.guid] = undefined;
+    var_0.playerzombiedestroyhud[var_1][self.guid] = undefined;
     self.spawn_sentry_at_pos = 0;
   } else {
-    var2 = [];
+    var_2 = [];
 
-    foreach(var5, var4 in var0.playerzombiedestroyhud[var1]) {
-      if(!isDefined(var4.player)) {
-        var2 = var5;
+    foreach(var_5, var_4 in var_0.playerzombiedestroyhud[var_1]) {
+      if(!isDefined(var_4.player)) {
+        var_2 = var_5;
       }
     }
 
-    foreach(var5 in var2) {
-      var0.playerzombiedestroyhud[var1][var5] = undefined;
+    foreach(var_5 in var_2) {
+      var_0.playerzombiedestroyhud[var_1][var_5] = undefined;
     }
   }
 
-  var0.playerzombiedelayturnonfx[var1]--;
+  var_0.playerzombiedelayturnonfx[var_1]--;
 }

@@ -123,58 +123,58 @@ function tr_vis_radius_override_lod1() {
 }
 
 function battle_tracks_settogglestate() {
-  var0 = (1, 0, 0);
-  var1 = (1, 1, 0);
-  var2 = (0, 1, 0);
-  var3 = getdvarfloat("scr_hallucination_trigger_3", 0.75);
-  var4 = getdvarfloat("scr_fear_tier3_tas", 25);
-  var5 = getdvarfloat("scr_fear_tier3_tae", 15);
-  var6 = getdvarfloat("scr_fear_tier3_tv", 5);
-  var7 = getdvarfloat("scr_fear_tier3_ns", 0);
-  var8 = getdvarfloat("scr_fear_tier3_ne", 0);
-  var9 = getdvarfloat("scr_fear_tier3_mins", 0);
-  var10 = getdvarfloat("scr_fear_tier3_mine", 0);
-  var11 = getdvarfloat("scr_fear_tier3_meds", 0.1);
-  var12 = getdvarfloat("scr_fear_tier3_mede", 0.1);
-  var13 = getdvarfloat("scr_fear_tier3_majs", 0.9);
-  var14 = getdvarfloat("scr_fear_tier3_maje", 0.9);
-  ref_1324a(var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14, var0);
-  var3 = getdvarfloat("scr_hallucination_trigger_2", 0.5);
-  var4 = getdvarfloat("scr_fear_tier2_tas", 30);
-  var5 = getdvarfloat("scr_fear_tier2_tae", 20);
-  var6 = getdvarfloat("scr_fear_tier2_tv", 5);
-  var7 = getdvarfloat("scr_fear_tier2_ns", 0.2);
-  var8 = getdvarfloat("scr_fear_tier2_ne", 0.2);
-  var9 = getdvarfloat("scr_fear_tier2_mins", 0.2);
-  var10 = getdvarfloat("scr_fear_tier2_mine", 0.2);
-  var11 = getdvarfloat("scr_fear_tier2_meds", 0.6);
-  var12 = getdvarfloat("scr_fear_tier2_mede", 0.6);
-  var13 = getdvarfloat("scr_fear_tier2_majs", 0.2);
-  var14 = getdvarfloat("scr_fear_tier2_maje", 0.2);
-  ref_1324a(var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14, var0);
-  var3 = getdvarfloat("scr_hallucination_trigger_1", 0);
-  var4 = getdvarfloat("scr_fear_tier1_tas", 40);
-  var5 = getdvarfloat("scr_fear_tier1_tae", 30);
-  var6 = getdvarfloat("scr_fear_tier1_tv", 10);
-  var7 = getdvarfloat("scr_fear_tier1_ns", 0.4);
-  var8 = getdvarfloat("scr_fear_tier1_ne", 0.4);
-  var9 = getdvarfloat("scr_fear_tier1_mins", 0.8);
-  var10 = getdvarfloat("scr_fear_tier1_mine", 0.8);
-  var11 = getdvarfloat("scr_fear_tier1_meds", 0.2);
-  var12 = getdvarfloat("scr_fear_tier1_mede", 0.2);
-  var13 = getdvarfloat("scr_fear_tier1_majs", 0);
-  var14 = getdvarfloat("scr_fear_tier1_maje", 0);
-  ref_1324a(var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14, var0);
+  var_0 = (1, 0, 0);
+  var_1 = (1, 1, 0);
+  var_2 = (0, 1, 0);
+  var_3 = getdvarfloat("scr_hallucination_trigger_3", 0.75);
+  var_4 = getdvarfloat("scr_fear_tier3_tas", 25);
+  var_5 = getdvarfloat("scr_fear_tier3_tae", 15);
+  var_6 = getdvarfloat("scr_fear_tier3_tv", 5);
+  var_7 = getdvarfloat("scr_fear_tier3_ns", 0);
+  var_8 = getdvarfloat("scr_fear_tier3_ne", 0);
+  var_9 = getdvarfloat("scr_fear_tier3_mins", 0);
+  var_10 = getdvarfloat("scr_fear_tier3_mine", 0);
+  var_11 = getdvarfloat("scr_fear_tier3_meds", 0.1);
+  var_12 = getdvarfloat("scr_fear_tier3_mede", 0.1);
+  var_13 = getdvarfloat("scr_fear_tier3_majs", 0.9);
+  var_14 = getdvarfloat("scr_fear_tier3_maje", 0.9);
+  ref_1324a(var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_0);
+  var_3 = getdvarfloat("scr_hallucination_trigger_2", 0.5);
+  var_4 = getdvarfloat("scr_fear_tier2_tas", 30);
+  var_5 = getdvarfloat("scr_fear_tier2_tae", 20);
+  var_6 = getdvarfloat("scr_fear_tier2_tv", 5);
+  var_7 = getdvarfloat("scr_fear_tier2_ns", 0.2);
+  var_8 = getdvarfloat("scr_fear_tier2_ne", 0.2);
+  var_9 = getdvarfloat("scr_fear_tier2_mins", 0.2);
+  var_10 = getdvarfloat("scr_fear_tier2_mine", 0.2);
+  var_11 = getdvarfloat("scr_fear_tier2_meds", 0.6);
+  var_12 = getdvarfloat("scr_fear_tier2_mede", 0.6);
+  var_13 = getdvarfloat("scr_fear_tier2_majs", 0.2);
+  var_14 = getdvarfloat("scr_fear_tier2_maje", 0.2);
+  ref_1324a(var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_0);
+  var_3 = getdvarfloat("scr_hallucination_trigger_1", 0);
+  var_4 = getdvarfloat("scr_fear_tier1_tas", 40);
+  var_5 = getdvarfloat("scr_fear_tier1_tae", 30);
+  var_6 = getdvarfloat("scr_fear_tier1_tv", 10);
+  var_7 = getdvarfloat("scr_fear_tier1_ns", 0.4);
+  var_8 = getdvarfloat("scr_fear_tier1_ne", 0.4);
+  var_9 = getdvarfloat("scr_fear_tier1_mins", 0.8);
+  var_10 = getdvarfloat("scr_fear_tier1_mine", 0.8);
+  var_11 = getdvarfloat("scr_fear_tier1_meds", 0.2);
+  var_12 = getdvarfloat("scr_fear_tier1_mede", 0.2);
+  var_13 = getdvarfloat("scr_fear_tier1_majs", 0);
+  var_14 = getdvarfloat("scr_fear_tier1_maje", 0);
+  ref_1324a(var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_0);
 }
 
 function team_revive_kbm_override() {}
 
-function onplayerconnect(var0) {
-  var0.sales_discount_items = [];
+function onplayerconnect(var_0) {
+  var_0.sales_discount_items = [];
 
-  foreach(var2 in level.disable_super_in_turret.setspecialistbonus) {
-    if(var2.size) {
-      var0.sales_discount_items[var3] = randomint(var2.size);
+  foreach(var_2 in level.disable_super_in_turret.setspecialistbonus) {
+    if(var_2.size) {
+      var_0.sales_discount_items[var_3] = randomint(var_2.size);
     }
   }
 }
@@ -187,32 +187,32 @@ function onplayerspawned() {
   has_target_player();
 }
 
-function ref_1324a(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12) {
-  var13 = spawnStruct();
-  var13.ref_13db4 = var0;
-  var13.time = (var1, var2, var3);
-  var13.initlootvaultkeypad = 0;
-  var14 = 1 - var4;
-  var15 = 1 - var5;
-  var13.setpostgamestate = [];
-  var13.setpostgamestate[0] = (var4, var5, 0);
-  var13.setpostgamestate[1] = (var6 * var14, var7 * var15, 0);
-  var13.setpostgamestate[2] = (var8 * var14, var9 * var15, 0);
-  var13.setpostgamestate[3] = (var10 * var14, var11 * var15, 0);
-  var13.left_control = var12;
-  level.disable_super_in_turret.setsuperisinuse[level.disable_super_in_turret.setsuperisinuse.size] = var13;
+function ref_1324a(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
+  var_13 = spawnStruct();
+  var_13.ref_13db4 = var_0;
+  var_13.time = (var_1, var_2, var_3);
+  var_13.initlootvaultkeypad = 0;
+  var_14 = 1 - var_4;
+  var_15 = 1 - var_5;
+  var_13.setpostgamestate = [];
+  var_13.setpostgamestate[0] = (var_4, var_5, 0);
+  var_13.setpostgamestate[1] = (var_6 * var_14, var_7 * var_15, 0);
+  var_13.setpostgamestate[2] = (var_8 * var_14, var_9 * var_15, 0);
+  var_13.setpostgamestate[3] = (var_10 * var_14, var_11 * var_15, 0);
+  var_13.left_control = var_12;
+  level.disable_super_in_turret.setsuperisinuse[level.disable_super_in_turret.setsuperisinuse.size] = var_13;
 }
 
 function freight_lift_attacker_internal() {
-  foreach(var1 in level.disable_super_in_turret.setsuperisinuse) {
-    var1.initlootvaultkeypad = randomfloatrange(-1 * var1.time[2], var1.time[2]);
+  foreach(var_1 in level.disable_super_in_turret.setsuperisinuse) {
+    var_1.initlootvaultkeypad = randomfloatrange(-1 * var_1.time[2], var_1.time[2]);
   }
 }
 
-function remove_fake_guy_from_list(var0) {
-  foreach(var2 in level.disable_super_in_turret.setsuperisinuse) {
-    if(var2.ref_13db4 <= var0) {
-      return var3;
+function remove_fake_guy_from_list(var_0) {
+  foreach(var_2 in level.disable_super_in_turret.setsuperisinuse) {
+    if(var_2.ref_13db4 <= var_0) {
+      return var_3;
     }
   }
 
@@ -220,94 +220,94 @@ function remove_fake_guy_from_list(var0) {
 }
 
 function run_hotjoin_loadout_thread() {
-  var0 = level.disable_super_in_turret.setsuperisinuse[self.setchainkillstreaks].ref_13db4;
-  var1 = 1;
+  var_0 = level.disable_super_in_turret.setsuperisinuse[self.setchainkillstreaks].ref_13db4;
+  var_1 = 1;
 
   if(self.setchainkillstreaks > 0) {
-    var1 = level.disable_super_in_turret.setsuperisinuse[self.setchainkillstreaks - 1].ref_13db4;
+    var_1 = level.disable_super_in_turret.setsuperisinuse[self.setchainkillstreaks - 1].ref_13db4;
   }
 
-  var2 = (self.setcachedclientomnvar - var0) / (var1 - var0);
-  return var2;
+  var_2 = (self.setcachedclientomnvar - var_0) / (var_1 - var_0);
+  return var_2;
 }
 
-function ref_13233(var0, var1, var2, var3, var4) {
-  var5 = spawnStruct();
-  var5.length = var2;
-  var5.cinematic = var1;
-  var5.moveeffect = var3;
-  var5.index = var0;
-  var5.ref_1276e = var4;
-  return var5;
+function ref_13233(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = spawnStruct();
+  var_5.length = var_2;
+  var_5.cinematic = var_1;
+  var_5.moveeffect = var_3;
+  var_5.index = var_0;
+  var_5.ref_1276e = var_4;
+  return var_5;
 }
 
-function ref_1327e(var0, var1, var2) {
-  var3 = spawnStruct();
-  var3.fx = var0;
-  var3.ref_1276e = var1;
-  var3.length = var2;
-  return var3;
+function ref_1327e(var_0, var_1, var_2) {
+  var_3 = spawnStruct();
+  var_3.fx = var_0;
+  var_3.ref_1276e = var_1;
+  var_3.length = var_2;
+  return var_3;
 }
 
-function ref_13244(var0, var1, var2) {
-  var3 = spawnStruct();
-  var3.watchspawnwallplayerexit = var0;
-  var3.length = var1;
-  var3.type = var2;
-  return var3;
+function ref_13244(var_0, var_1, var_2) {
+  var_3 = spawnStruct();
+  var_3.watchspawnwallplayerexit = var_0;
+  var_3.length = var_1;
+  var_3.type = var_2;
+  return var_3;
 }
 
-function battle_tracks_setmusicstate(var0, var1, var2, var3, var4, var5, var6) {
-  if(getdvarint(var5, 0)) {
+function battle_tracks_setmusicstate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if(getdvarint(var_5, 0)) {
     return;
   }
 
-  var7 = spawnStruct();
-  var7.pity_timer_end_time = var1;
-  var7.function = var2;
-  var7.ref_119ab = var4;
-  var7.data = var3;
-  var7.playerplunderlosecallback = var6;
-  level.disable_super_in_turret.setspecialistbonus[var0][level.disable_super_in_turret.setspecialistbonus[var0].size] = var7;
+  var_7 = spawnStruct();
+  var_7.pity_timer_end_time = var_1;
+  var_7.function = var_2;
+  var_7.ref_119ab = var_4;
+  var_7.data = var_3;
+  var_7.playerplunderlosecallback = var_6;
+  level.disable_super_in_turret.setspecialistbonus[var_0][level.disable_super_in_turret.setspecialistbonus[var_0].size] = var_7;
 }
 
 function ref_13381() {
-  foreach(var1 in level.disable_super_in_turret.setspecialistbonus) {
-    level.disable_super_in_turret.setspecialistbonus[var2] = scripts\engine\utility::array_randomize(var1);
+  foreach(var_1 in level.disable_super_in_turret.setspecialistbonus) {
+    level.disable_super_in_turret.setspecialistbonus[var_2] = scripts\engine\utility::array_randomize(var_1);
   }
 }
 
-function ref_12348(var0) {
-  var1 = level.disable_super_in_turret.setsuperisinuse[self.setchainkillstreaks];
-  var2 = randomfloat(1);
-  var3 = 0;
-  var4 = 0;
+function ref_12348(var_0) {
+  var_1 = level.disable_super_in_turret.setsuperisinuse[self.setchainkillstreaks];
+  var_2 = randomfloat(1);
+  var_3 = 0;
+  var_4 = 0;
 
-  for(var5 = 0; var5 < 4; var5++) {
-    if(var5 > 0 && level.disable_super_in_turret.setspecialistbonus[var5].size) {
-      var4 = var5;
+  for(var_5 = 0; var_5 < 4; var_5++) {
+    if(var_5 > 0 && level.disable_super_in_turret.setspecialistbonus[var_5].size) {
+      var_4 = var_5;
     }
 
-    var3 += scripts\engine\math::lerp(var1.setpostgamestate[var5][0], var1.setpostgamestate[var5][1], var0);
+    var_3 += scripts\engine\math::lerp(var_1.setpostgamestate[var_5][0], var_1.setpostgamestate[var_5][1], var_0);
 
-    if(var3 >= var2) {
-      return var4;
+    if(var_3 >= var_2) {
+      return var_4;
     }
   }
 }
 
-function ref_12347(var0) {
-  var1 = undefined;
+function ref_12347(var_0) {
+  var_1 = undefined;
 
-  if(isDefined(self.sales_discount_items[var0])) {
-    var1 = self.sales_discount_items[var0] % level.disable_super_in_turret.setspecialistbonus[var0].size;
-    self.sales_discount_items[var0]++;
+  if(isDefined(self.sales_discount_items[var_0])) {
+    var_1 = self.sales_discount_items[var_0] % level.disable_super_in_turret.setspecialistbonus[var_0].size;
+    self.sales_discount_items[var_0]++;
   }
 
-  return var1;
+  return var_1;
 }
 
-function update(var0) {
+function update(var_0) {
   self endon("death");
   self endon("disconnect");
 
@@ -315,24 +315,24 @@ function update(var0) {
     return;
   }
 
-  self.setcachedclientomnvar = var0;
-  self.setchainkillstreaks = remove_fake_guy_from_list(var0);
-  var1 = level.disable_super_in_turret.setsuperisinuse[self.setchainkillstreaks];
-  var2 = run_hotjoin_loadout_thread();
-  var3 = (scripts\engine\math::lerp(var1.time[0], var1.time[1], var2) + var1.initlootvaultkeypad) * 1000;
+  self.setcachedclientomnvar = var_0;
+  self.setchainkillstreaks = remove_fake_guy_from_list(var_0);
+  var_1 = level.disable_super_in_turret.setsuperisinuse[self.setchainkillstreaks];
+  var_2 = run_hotjoin_loadout_thread();
+  var_3 = (scripts\engine\math::lerp(var_1.time[0], var_1.time[1], var_2) + var_1.initlootvaultkeypad) * 1000;
 
-  if(self.setcachedgameomnvar + var3 < gettime()) {
-    var4 = ref_12348(var2);
+  if(self.setcachedgameomnvar + var_3 < gettime()) {
+    var_4 = ref_12348(var_2);
 
-    if(var4 != 0) {
+    if(var_4 != 0) {
       self.setbuybackpingmessage = 1;
-      var5 = ref_12347(var4);
+      var_5 = ref_12347(var_4);
 
-      if(isDefined(var5)) {
-        var0 = level.disable_super_in_turret.setspecialistbonus[var4][var5];
-        ref_13fdb(var0.playerplunderlosecallback);
-        [[var0.function]](var0.data);
-        scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onPlayerHallucinate", var0);
+      if(isDefined(var_5)) {
+        var_0 = level.disable_super_in_turret.setspecialistbonus[var_4][var_5];
+        ref_13fdb(var_0.playerplunderlosecallback);
+        [[var_0.function]](var_0.data);
+        scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onPlayerHallucinate", var_0);
       }
     }
 
@@ -343,28 +343,28 @@ function update(var0) {
   }
 }
 
-function ref_13fdb(var0) {
+function ref_13fdb(var_0) {
   if(getdvarint("scr_disable_hallucination_fov_shift", 0)) {
     return;
   }
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
   self lerpfovbypreset("hallucination");
 
-  if(var0.type == "fov_low") {
+  if(var_0.type == "fov_low") {
     self visionsetnakedforplayer("mp_gxp_fov_low", 1);
   } else {
     self visionsetnakedforplayer("mp_gxp_fov_medium", 1);
   }
 
-  thread mp_runner_patch(var0.length);
+  thread mp_runner_patch(var_0.length);
   thread has_access_card();
 
-  if(isDefined(var0.watchspawnwallplayerexit) && var0.watchspawnwallplayerexit > 0) {
-    wait var0.watchspawnwallplayerexit;
+  if(isDefined(var_0.watchspawnwallplayerexit) && var_0.watchspawnwallplayerexit > 0) {
+    wait var_0.watchspawnwallplayerexit;
     return;
   }
 }
@@ -376,54 +376,54 @@ function has_target_player() {
   self.setbuybackpingmessage = 0;
 }
 
-function setsoundsubmixfadetoblackamb(var0) {
-  self playsoundtoplayer(var0, self, self);
+function setsoundsubmixfadetoblackamb(var_0) {
+  self playsoundtoplayer(var_0, self, self);
   wait 3;
 }
 
-function setquestrewardtierteamomnvar(var0) {
-  level thread scripts\mp\gametypes\br_public::dmztut_endgamewithreward(var0, self, 1);
+function setquestrewardtierteamomnvar(var_0) {
+  level thread scripts\mp\gametypes\br_public::dmztut_endgamewithreward(var_0, self, 1);
   wait 3;
 }
 
-function setroundwinstreakspecialcamos(var0) {
-  self setplayermusicstate(var0);
+function setroundwinstreakspecialcamos(var_0) {
+  self setplayermusicstate(var_0);
   wait 3;
 }
 
-function setradarparamsonlatejoiner(var0) {
+function setradarparamsonlatejoiner(var_0) {
   self endon("disconnect");
 
-  if(istrue(var0.ref_1276e)) {
+  if(istrue(var_0.ref_1276e)) {
     ref_12739();
   }
 
-  self setclientomnvar("ui_halloween_event", var0.index);
-  var1 = 3;
-  wait var0.length;
+  self setclientomnvar("ui_halloween_event", var_0.index);
+  var_1 = 3;
+  wait var_0.length;
 }
 
-function setspawninstances(var0) {
+function setspawninstances(var_0) {
   self endon("death");
 
-  if(istrue(var0.ref_1276e)) {
+  if(istrue(var_0.ref_1276e)) {
     ref_12739();
   }
 
-  playfxontagforclients(scripts\engine\utility::getfx(var0.fx), self, "tag_eye", self);
-  wait var0.length;
+  playfxontagforclients(scripts\engine\utility::getfx(var_0.fx), self, "tag_eye", self);
+  wait var_0.length;
 }
 
-function setsuperexpended(var0) {
+function setsuperexpended(var_0) {
   scripts\cp_mp\emp_debuff::play_emp_scramble(5);
   thread has_module_met_max_vehicles();
-  never_kill_off_old(var0);
+  never_kill_off_old(var_0);
 }
 
-function never_kill_off_old(var0) {
+function never_kill_off_old(var_0) {
   self endon("death");
   self endon("disconnect");
-  wait var0;
+  wait var_0;
   self notify("end_scramble_hud");
   scripts\cp_mp\emp_debuff::stop_emp_scramble(5);
 }
@@ -435,83 +435,83 @@ function has_module_met_max_vehicles() {
   scripts\cp_mp\emp_debuff::stop_emp_scramble(5);
 }
 
-function setreduceregendelayonkill(var0) {
-  var1 = rungwperif_largeexplosions(var0);
+function setreduceregendelayonkill(var_0) {
+  var_1 = rungwperif_largeexplosions(var_0);
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  var2 = relic_healthpacks_globalfunc(var1.origin);
+  var_2 = relic_healthpacks_globalfunc(var_1.origin);
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return;
   }
 
-  playfxontagforclients(level._effect["vfx_ghost_death_3p"], var1, "j_spineupper", var2);
-  ref_119c2(var2, "vfx_ghost_death_3p", "corpsevfx");
+  playfxontagforclients(level._effect["vfx_ghost_death_3p"], var_1, "j_spineupper", var_2);
+  ref_119c2(var_2, "vfx_ghost_death_3p", "corpsevfx");
 }
 
-function rungwperif_largeexplosions(var0) {
-  var1 = gettime();
-  var2 = var1 + 250;
-  var3 = undefined;
+function rungwperif_largeexplosions(var_0) {
+  var_1 = gettime();
+  var_2 = var_1 + 250;
+  var_3 = undefined;
 
-  while(isDefined(var0) && var1 < var2) {
-    var3 = var0 getcorpseentity();
+  while(isDefined(var_0) && var_1 < var_2) {
+    var_3 = var_0 getcorpseentity();
 
-    if(isDefined(var3)) {
-      return var3;
+    if(isDefined(var_3)) {
+      return var_3;
     }
 
     waitframe();
-    var1 = gettime();
+    var_1 = gettime();
   }
 
   return undefined;
 }
 
-function relic_healthpacks_globalfunc(var0) {
-  var1 = level.disable_super_in_turret.setpreviewuicircle;
+function relic_healthpacks_globalfunc(var_0) {
+  var_1 = level.disable_super_in_turret.setpreviewuicircle;
 
-  if(isDefined(var1) && var1 scripts\mp\gametypes\br_gxp_fear::get_ai_hearing_bomb_plant_sound() && level.disable_super_in_turret.setquestindexomnvar < gettime()) {
-    if(distance2dsquared(var0, var1.origin) > level.disable_super_in_turret.play_3p_anim_non_animscene.immediatecleanup * level.disable_super_in_turret.play_3p_anim_non_animscene.immediatecleanup) {
+  if(isDefined(var_1) && var_1 scripts\mp\gametypes\br_gxp_fear::get_ai_hearing_bomb_plant_sound() && level.disable_super_in_turret.setquestindexomnvar < gettime()) {
+    if(distance2dsquared(var_0, var_1.origin) > level.disable_super_in_turret.play_3p_anim_non_animscene.immediatecleanup * level.disable_super_in_turret.play_3p_anim_non_animscene.immediatecleanup) {
       return undefined;
     }
 
-    var2 = anglesToForward(var1.angles);
-    var3 = vectorNormalize(var0 - var1.origin);
+    var_2 = anglesToForward(var_1.angles);
+    var_3 = vectorNormalize(var_0 - var_1.origin);
 
-    if(vectordot(var2, var3) <= 0) {
+    if(vectordot(var_2, var_3) <= 0) {
       return undefined;
     }
 
-    return var1;
+    return var_1;
   }
 
-  var4 = undefined;
+  var_4 = undefined;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("player", "getPlayersInRadius")) {
-    var4 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "getPlayersInRadius")]](var2, level.disable_super_in_turret.play_3p_anim_non_animscene.immediatecleanup);
+    var_4 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "getPlayersInRadius")]](var_2, level.disable_super_in_turret.play_3p_anim_non_animscene.immediatecleanup);
   }
 
-  var4 = scripts\engine\utility::array_randomize(var4);
+  var_4 = scripts\engine\utility::array_randomize(var_4);
 
-  foreach(var3 in var4) {
-    if(!isalive(var3) || var3 scripts\mp\gametypes\br_public::ref_125ec() || !var3 scripts\mp\gametypes\br_gxp_fear::get_ai_hearing_bomb_plant_sound()) {
+  foreach(var_3 in var_4) {
+    if(!isalive(var_3) || var_3 scripts\mp\gametypes\br_public::ref_125ec() || !var_3 scripts\mp\gametypes\br_gxp_fear::get_ai_hearing_bomb_plant_sound()) {
       continue;
     }
 
-    var2 = anglesToForward(var3.angles);
-    var3 = vectorNormalize(var2 - var3.origin);
+    var_2 = anglesToForward(var_3.angles);
+    var_3 = vectorNormalize(var_2 - var_3.origin);
 
-    if(vectordot(var2, var3) <= 0) {
+    if(vectordot(var_2, var_3) <= 0) {
       continue;
     }
 
-    level.disable_super_in_turret.setpreviewuicircle = var3;
+    level.disable_super_in_turret.setpreviewuicircle = var_3;
     level.disable_super_in_turret.setquestindexomnvar = gettime() + level.disable_super_in_turret.play_3p_anim_non_animscene.illumination_flare_init;
-    return var3;
+    return var_3;
   }
 
   return undefined;
@@ -519,23 +519,23 @@ function relic_healthpacks_globalfunc(var0) {
 
 function ref_11e33() {
   for(;;) {
-    var0 = scripts\engine\utility::array_randomize(level.players);
+    var_0 = scripts\engine\utility::array_randomize(level.players);
 
-    foreach(var2 in var0) {
-      if(!isDefined(var2) || !isalive(var2) || var2 scripts\mp\gametypes\br_public::ref_125ec() || !var2 scripts\mp\gametypes\br_gxp_fear::get_ai_hearing_bomb_plant_sound()) {
+    foreach(var_2 in var_0) {
+      if(!isDefined(var_2) || !isalive(var_2) || var_2 scripts\mp\gametypes\br_public::ref_125ec() || !var_2 scripts\mp\gametypes\br_gxp_fear::get_ai_hearing_bomb_plant_sound()) {
         continue;
       }
 
-      if(isDefined(var2.setreduceregendelayonkills) && var2.setreduceregendelayonkills > gettime()) {
+      if(isDefined(var_2.setreduceregendelayonkills) && var_2.setreduceregendelayonkills > gettime()) {
         continue;
       }
 
-      var3 = reset_current_step_count(var2, level.disable_super_in_turret.play_3p_anim_non_animscene.ref_126e5);
+      var_3 = reset_current_step_count(var_2, level.disable_super_in_turret.play_3p_anim_non_animscene.ref_126e5);
 
-      if(isDefined(var3)) {
-        playfxontagforclients(level._effect["vfx_gxp_chest_bluefire_death"], var3, "j_spineupper", var2);
-        var2.setreduceregendelayonkills = gettime() + randomintrange(level.disable_super_in_turret.play_3p_anim_non_animscene.ref_126e4, level.disable_super_in_turret.play_3p_anim_non_animscene.ref_126e3);
-        ref_119c2(var2, "vfx_gxp_chest_bluefire_death", "nearbyplayervfx");
+      if(isDefined(var_3)) {
+        playfxontagforclients(level._effect["vfx_gxp_chest_bluefire_death"], var_3, "j_spineupper", var_2);
+        var_2.setreduceregendelayonkills = gettime() + randomintrange(level.disable_super_in_turret.play_3p_anim_non_animscene.ref_126e4, level.disable_super_in_turret.play_3p_anim_non_animscene.ref_126e3);
+        ref_119c2(var_2, "vfx_gxp_chest_bluefire_death", "nearbyplayervfx");
       }
 
       waitframe();
@@ -545,80 +545,80 @@ function ref_11e33() {
   }
 }
 
-function setquestrewardtier(var0) {
+function setquestrewardtier(var_0) {
   self endon("death");
-  var1 = gettime() + var0.module_set_goal_height * 1000;
-  var2 = randomfloat(360);
-  var3 = 3000;
+  var_1 = gettime() + var_0.module_set_goal_height * 1000;
+  var_2 = randomfloat(360);
+  var_3 = 3000;
 
-  while(var1 > gettime()) {
-    if(randomfloat(1) < var0.ref_145be) {
+  while(var_1 > gettime()) {
+    if(randomfloat(1) < var_0.ref_145be) {
       self playsoundtoplayer("", self);
     } else {
-      var4 = angleclamp(var2 + randomfloat(var0.building_magic_grenades));
-      var5 = cos(var4);
-      var6 = sin(var4);
-      var7 = (var5, var6, 0);
-      var8 = self getEye();
-      var9 = var8 + var7 * var3;
+      var_4 = angleclamp(var_2 + randomfloat(var_0.building_magic_grenades));
+      var_5 = cos(var_4);
+      var_6 = sin(var_4);
+      var_7 = (var_5, var_6, 0);
+      var_8 = self getEye();
+      var_9 = var_8 + var_7 * var_3;
       self playsoundtoplayer("bullet_small_flesh_torso_plr", self);
       self.donotmodifydamage = 1;
-      self dodamage(1, var9, level.disable_super_in_turret.setquestindexteamomnvar);
+      self dodamage(1, var_9, level.disable_super_in_turret.setquestindexteamomnvar);
       self.donotmodifydamage = undefined;
     }
 
-    wait randomfloatrange(var0.trial_race_lap_total_override, var0.trial_target_requisites);
+    wait randomfloatrange(var_0.trial_race_lap_total_override, var_0.trial_target_requisites);
   }
 }
 
-function pavelow_boss_hit_by_emp(var0, var1, var2, var3, var4) {
-  var5 = spawnStruct();
-  var5.module_set_goal_height = var0;
-  var5.trial_race_lap_total_override = var1;
-  var5.trial_target_requisites = var2;
-  var5.building_magic_grenades = var3;
-  var5.ref_145be = var4;
-  return var5;
+function pavelow_boss_hit_by_emp(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = spawnStruct();
+  var_5.module_set_goal_height = var_0;
+  var_5.trial_race_lap_total_override = var_1;
+  var_5.trial_target_requisites = var_2;
+  var_5.building_magic_grenades = var_3;
+  var_5.ref_145be = var_4;
+  return var_5;
 }
 
-function reset_current_step_count(var0, var1) {
-  var2 = anglesToForward(var0.angles);
-  var3 = undefined;
+function reset_current_step_count(var_0, var_1) {
+  var_2 = anglesToForward(var_0.angles);
+  var_3 = undefined;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("player", "getPlayersInRadius")) {
-    var3 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "getPlayersInRadius")]](var0.origin, var1);
+    var_3 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "getPlayersInRadius")]](var_0.origin, var_1);
   }
 
-  var3 = scripts\engine\utility::array_randomize(var3);
+  var_3 = scripts\engine\utility::array_randomize(var_3);
 
-  foreach(var5 in var3) {
-    if(var5 == var0 || var5 scripts\mp\gametypes\br_public::ref_125ec() || !isalive(var5)) {
+  foreach(var_5 in var_3) {
+    if(var_5 == var_0 || var_5 scripts\mp\gametypes\br_public::ref_125ec() || !isalive(var_5)) {
       continue;
     }
 
-    var6 = vectorNormalize(var5.origin - var0.origin);
+    var_6 = vectorNormalize(var_5.origin - var_0.origin);
 
-    if(vectordot(var2, var6) <= 0) {
+    if(vectordot(var_2, var_6) <= 0) {
       continue;
     }
 
-    return var5;
+    return var_5;
   }
 
   return undefined;
 }
 
-function setquestrewardtieromnvar(var0) {
+function setquestrewardtieromnvar(var_0) {
   self lerpfovbypreset("hallucination");
   self visionsetnakedforplayer("mp_gxp_fov_shift", 1);
   thread has_access_card();
-  mp_runner_patch(var0);
+  mp_runner_patch(var_0);
 }
 
-function mp_runner_patch(var0) {
+function mp_runner_patch(var_0) {
   self endon("death");
   self endon("disconnect");
-  wait var0;
+  wait var_0;
   self notify("end_fov_hud");
   self lerpfovbypreset("default_fast");
   self visionsetnakedforplayer("", 2);
@@ -637,41 +637,41 @@ function ref_12739() {
   wait 0.1;
 }
 
-function ref_119c2(var0, var1) {
-  var2 = [];
-  GscBinSkip0(0x2e, var2.size, "time_msfrommatchstart");
+function ref_119c2(var_0, var_1) {
+  var_2 = [];
+  GscBinSkip0(0x2e, var_2.size, "time_msfrommatchstart");
 }
 
-function ref_119c3(var0) {
-  ref_119c2(var0, "announcer");
+function ref_119c3(var_0) {
+  ref_119c2(var_0, "announcer");
 }
 
-function ref_119c9(var0) {
-  ref_119c2(var0, "sound");
+function ref_119c9(var_0) {
+  ref_119c2(var_0, "sound");
 }
 
-function ref_119c7(var0) {
-  ref_119c2(var0, "music");
+function ref_119c7(var_0) {
+  ref_119c2(var_0, "music");
 }
 
-function ref_119c4(var0) {
-  ref_119c2(var0.cinematic, "cinematic");
+function ref_119c4(var_0) {
+  ref_119c2(var_0.cinematic, "cinematic");
 }
 
-function ref_119ca(var0) {
-  ref_119c2(var0, "vfx");
+function ref_119ca(var_0) {
+  ref_119c2(var_0, "vfx");
 }
 
-function ref_119c8(var0) {
-  ref_119c2(var0, "scramblehud");
+function ref_119c8(var_0) {
+  ref_119c2(var_0, "scramblehud");
 }
 
-function ref_119c5(var0) {
-  ref_119c2(var0.module_set_goal_height, "fakedamage");
+function ref_119c5(var_0) {
+  ref_119c2(var_0.module_set_goal_height, "fakedamage");
 }
 
-function ref_119c6(var0) {
-  ref_119c2(var0, "fov");
+function ref_119c6(var_0) {
+  ref_119c2(var_0, "fov");
 }
 
 function level_ammo_crate_spawn() {

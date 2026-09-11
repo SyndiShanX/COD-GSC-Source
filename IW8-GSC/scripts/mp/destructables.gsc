@@ -4,38 +4,38 @@
 ***********************************************/
 
 function init() {
-  var0 = getEntArray("destructable", "targetname");
+  var_0 = getEntArray("destructable", "targetname");
 
   if(getDvar("scr_destructables") == "0") {
-    for(var1 = 0; var1 < var0.size; var1++) {
-      var0[var1] delete();
+    for(var_1 = 0; var_1 < var_0.size; var_1++) {
+      var_0[var_1] delete();
     }
 
     return;
   }
 
-  for(var1 = 0; var1 < var1.size; var1++) {
+  for(var_1 = 0; var_1 < var_1.size; var_1++) {
     thread destructable_think();
   }
 }
 
 function destructable_think() {
-  var0 = 40;
-  var1 = 0;
+  var_0 = 40;
+  var_1 = 0;
 
   if(isDefined(self.script_accumulate)) {
-    var0 = self.script_accumulate;
+    var_0 = self.script_accumulate;
   }
 
   if(isDefined(self.script_threshold)) {
-    var1 = self.script_threshold;
+    var_1 = self.script_threshold;
   }
 
   if(isDefined(self.script_destructable_area)) {
-    var2 = strtok(self.script_destructable_area, " ");
+    var_2 = strtok(self.script_destructable_area, " ");
 
-    for(var3 = 0; var3 < var2.size; var3++) {
-      blockarea(var2[var3]);
+    for(var_3 = 0; var_3 < var_2.size; var_3++) {
+      blockarea(var_2[var_3]);
     }
   }
 
@@ -43,16 +43,16 @@ function destructable_think() {
     self.fx = loadfx(self.script_fxid);
   }
 
-  var4 = 0;
+  var_4 = 0;
   self setCanDamage(1);
 
   for(;;) {
-    self waittill("damage", var5, var6);
+    self waittill("damage", var_5, var_6);
 
-    if(var5 >= var1) {
-      var4 += var5;
+    if(var_5 >= var_1) {
+      var_4 += var_5;
 
-      if(var4 >= var0) {
+      if(var_4 >= var_0) {
         thread destructable_destruct();
         return;
       }
@@ -61,27 +61,27 @@ function destructable_think() {
 }
 
 function destructable_destruct() {
-  var0 = self;
+  var_0 = self;
 
   if(isDefined(self.script_destructable_area)) {
-    var1 = strtok(self.script_destructable_area, " ");
+    var_1 = strtok(self.script_destructable_area, " ");
 
-    for(var2 = 0; var2 < var1.size; var2++) {
-      unblockarea(var1[var2]);
+    for(var_2 = 0; var_2 < var_1.size; var_2++) {
+      unblockarea(var_1[var_2]);
     }
   }
 
-  if(isDefined(var0.fx)) {
-    playFX(var0.fx, var0.origin + (0, 0, 6));
+  if(isDefined(var_0.fx)) {
+    playFX(var_0.fx, var_0.origin + (0, 0, 6));
   }
 
-  var0 delete();
+  var_0 delete();
 }
 
-function blockarea(var0) {}
+function blockarea(var_0) {}
 
-function blockentsinarea(var0, var1) {}
+function blockentsinarea(var_0, var_1) {}
 
-function unblockarea(var0) {}
+function unblockarea(var_0) {}
 
-function unblockentsinarea(var0, var1) {}
+function unblockentsinarea(var_0, var_1) {}

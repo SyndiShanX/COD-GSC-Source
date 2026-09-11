@@ -33,7 +33,7 @@ function register_ml_p3_objectives() {
   thread register_spawn_functions();
 }
 
-function debugbeatobjective(var0) {}
+function debugbeatobjective(var_0) {}
 
 function init_cs_ents() {
   if(!scripts\engine\utility::flag_exist("cp_dwn_twn_ml_p3_create_script_completed")) {
@@ -89,39 +89,39 @@ function register_spawn_functions() {
   scripts\engine\utility::flag_set("ml_p3_spawn_functions_registered");
 }
 
-function questcomplete(var0) {
+function questcomplete(var_0) {
   if(scripts\engine\utility::flag("ml_p3_hack_done")) {
     return undefined;
   }
 
-  for(var1 = getaiarray("axis").size; var1 > 24 - var0.max_size + 3; var1 = getaiarray("axis").size) {
+  for(var_1 = getaiarray("axis").size; var_1 > 24 - var_0.max_size + 3; var_1 = getaiarray("axis").size) {
     wait 1;
   }
 
-  return var0.group_name;
+  return var_0.group_name;
 }
 
-function spawn_in_cover(var0) {
-  var1 = self getnearestnode();
+function spawn_in_cover(var_0) {
+  var_1 = self getnearestnode();
 
-  if(isDefined(var1)) {
-    var2 = var1.angles;
-    var3 = var1.origin;
+  if(isDefined(var_1)) {
+    var_2 = var_1.angles;
+    var_3 = var_1.origin;
 
-    if(!issubstr(var1.type, "Prone")) {
-      if(issubstr(var1.type, "Left")) {
-        var2 += (0, 90, 0);
-      } else if(issubstr(var1.type, "Right") || issubstr(var1.type, "Cover Crouch") || issubstr(var1.type, "Conceal") || issubstr(var1.type, "Cover Stand")) {
-        var2 -= (0, 90, 0);
+    if(!issubstr(var_1.type, "Prone")) {
+      if(issubstr(var_1.type, "Left")) {
+        var_2 += (0, 90, 0);
+      } else if(issubstr(var_1.type, "Right") || issubstr(var_1.type, "Cover Crouch") || issubstr(var_1.type, "Conceal") || issubstr(var_1.type, "Cover Stand")) {
+        var_2 -= (0, 90, 0);
       }
     }
 
-    self forceteleport(var3, var2);
-    self usecovernode(var1, 1);
-    self setgoalnode(var1);
+    self forceteleport(var_3, var_2);
+    self usecovernode(var_1, 1);
+    self setgoalnode(var_1);
     self.goalradius = 8;
     self.script_radius = 8;
-    self.script_origin_other = var3;
+    self.script_origin_other = var_3;
     self.sniperaccuracyset = 1;
     self.baseaccuracy = 1;
     self.aggressivemode = 1;
@@ -132,31 +132,31 @@ function spawn_in_cover(var0) {
   }
 }
 
-function break_cover_after_breached(var0) {
+function break_cover_after_breached(var_0) {
   level waittill("ml_p3_building_breach");
   self.goalradius = 1024;
   self.fixednode = 0;
 }
 
 function notify_building_breach() {
-  var0 = scripts\engine\utility::getStruct("building_center", "targetname");
-  var1 = var0.radius;
-  var2 = var1 * var1;
-  var3 = 0;
-  var4 = 1;
+  var_0 = scripts\engine\utility::getStruct("building_center", "targetname");
+  var_1 = var_0.radius;
+  var_2 = var_1 * var_1;
+  var_3 = 0;
+  var_4 = 1;
 
-  while(!var3) {
-    foreach(var6 in level.players) {
-      if(istrue(var4)) {
-        if(distance2dsquared(var6.origin, var0.origin) < var2) {
-          var3 = 1;
+  while(!var_3) {
+    foreach(var_6 in level.players) {
+      if(istrue(var_4)) {
+        if(distance2dsquared(var_6.origin, var_0.origin) < var_2) {
+          var_3 = 1;
         }
 
         continue;
       }
 
-      if(distancesquared(var6.origin, var0.origin) < var2) {
-        var3 = 1;
+      if(distancesquared(var_6.origin, var_0.origin) < var_2) {
+        var_3 = 1;
       }
     }
 
@@ -166,34 +166,34 @@ function notify_building_breach() {
   level notify("ml_p3_building_breach");
 }
 
-function spawn_wave(var0, var1, var2, var3) {
-  return scripts\cp\cp_modular_spawning::wave_reinforce(var0, var1, var2, var3);
+function spawn_wave(var_0, var_1, var_2, var_3) {
+  return scripts\cp\cp_modular_spawning::wave_reinforce(var_0, var_1, var_2, var_3);
 }
 
-function spawn_per_player(var0, var1, var2, var3) {
-  var4 = max(var1, var2 * level.players.size);
+function spawn_per_player(var_0, var_1, var_2, var_3) {
+  var_4 = max(var_1, var_2 * level.players.size);
 
-  if(isDefined(var3)) {
-    var4 = min(var4, var3);
+  if(isDefined(var_3)) {
+    var_4 = min(var_4, var_3);
   } else {
-    var4 = min(var4, 24);
+    var_4 = min(var_4, 24);
   }
 
-  return var4;
+  return var_4;
 }
 
-function debug_m1_p3_obj_start(var0) {
-  debug_trigger_objective_events(var0);
+function debug_m1_p3_obj_start(var_0) {
+  debug_trigger_objective_events(var_0);
   thread safehouse_debug_func();
   scripts\cp\utility::teleportallplayersinteamtostructs("allies", "ml_p3_debug_start");
 }
 
-function debug_trigger_objective_events(var0) {
+function debug_trigger_objective_events(var_0) {
   scripts\engine\utility::flag_set("cp_dwn_twn_ml_p3_create_script");
   scripts\engine\utility::flag_wait("cp_dwn_twn_ml_p3_create_script_completed");
   scripts\engine\utility::flag_wait("objectives_registered");
 
-  switch (var0.ref) {
+  switch (var_0.ref) {
     case "ml_p3_intel":
       break;
     case "ml_p3_intel_2":
@@ -203,7 +203,7 @@ function debug_trigger_objective_events(var0) {
   }
 }
 
-function safehouse_debug_func(var0) {
+function safehouse_debug_func(var_0) {
   while(!scripts\engine\utility::flag_exist("ml_p3_router_picked_up")) {
     wait 1;
   }
@@ -215,9 +215,9 @@ function safehouse_debug_func(var0) {
 
 function vfx_smoke() {
   level endon("game_ended");
-  var0 = (25571, -12073.5, -180.25);
+  var_0 = (25571, -12073.5, -180.25);
 
-  while(!scripts\cp\utility::any_player_nearby(var0, squared(1500))) {
+  while(!scripts\cp\utility::any_player_nearby(var_0, squared(1500))) {
     wait 1;
   }
 
@@ -225,10 +225,10 @@ function vfx_smoke() {
 }
 
 function ref_11c5d() {
-  var0 = getEntArray("mlp1_safehouse_intel", "targetname");
+  var_0 = getEntArray("mlp1_safehouse_intel", "targetname");
 
-  foreach(var2 in var0) {
-    var2 show();
+  foreach(var_2 in var_0) {
+    var_2 show();
   }
 
   thread scripts\cp\cp_objectives::run_objective("safehouse_return", "primary");
@@ -236,7 +236,7 @@ function ref_11c5d() {
   thread scripts\cp\cp_hud_message::teamhudtutorialmessage(&"CP_DWN_TWN_OBJECTIVES/GOTO_SAFEHOUSE", "allies", 5);
 }
 
-function init_ml_p3_intel(var0, var1) {
+function init_ml_p3_intel(var_0, var_1) {
   scripts\engine\utility::flag_set("cp_dwn_twn_ml_p3_create_script");
   scripts\engine\utility::flag_wait("cp_dwn_twn_ml_p3_create_script_completed");
   scripts\engine\utility::flag_wait("ml_p3_spawn_functions_registered");
@@ -251,8 +251,8 @@ function init_ml_p3_intel(var0, var1) {
   scripts\cp\utility::objective_update("ml_p3_intel", undefined, undefined, undefined, undefined, 0);
   level.final_hack_locations = scripts\engine\utility::getStructArray("comp_interact", "targetname");
 
-  for(var2 = 0; var2 < level.final_hack_locations.size; var2++) {
-    level.final_hack_locations[var2] = create_final_hack_spot_interaction(level.final_hack_locations[var2], var2);
+  for(var_2 = 0; var_2 < level.final_hack_locations.size; var_2++) {
+    level.final_hack_locations[var_2] = create_final_hack_spot_interaction(level.final_hack_locations[var_2], var_2);
   }
 
   level.final_hack_location = level.final_hack_locations[0];
@@ -264,19 +264,19 @@ function init_ml_p3_intel(var0, var1) {
 }
 
 function autorespawnwaittime() {
-  var0 = scripts\engine\utility::getStructArray("hack_fake_collision", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("hack_fake_collision", "targetname");
 
-  foreach(var2 in var0) {
-    var3 = getEnt("clip32x32x32", "targetname");
-    var4 = spawn("script_model", var2.origin);
-    var4.angles = var2.angles;
-    var4 clonebrushmodeltoscriptmodel(var3);
+  foreach(var_2 in var_0) {
+    var_3 = getEnt("clip32x32x32", "targetname");
+    var_4 = spawn("script_model", var_2.origin);
+    var_4.angles = var_2.angles;
+    var_4 clonebrushmodeltoscriptmodel(var_3);
   }
 }
 
 function keep_players_from_using_ascender() {
-  foreach(var1 in level.players) {
-    var1.usingascender = 1;
+  foreach(var_1 in level.players) {
+    var_1.usingascender = 1;
   }
 }
 
@@ -289,15 +289,15 @@ function stop_intel_spawning_and_start_p3() {
   scripts\cp\cp_modular_spawning::run_spawn_module("ml_p3_init_transition");
 }
 
-function start_ml_p3_intel(var0, var1) {
+function start_ml_p3_intel(var_0, var_1) {
   scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_lass_ml_p3_multihack_brief_10");
   wait 0.5;
   level thread scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123cb("ping_response_affirm");
-  var2 = scripts\engine\utility::getStruct("ml_p3_obj", "targetname");
-  var3 = var2;
-  objective_icon(var0.objectiveindex, "icon_waypoint_objective_general");
-  objective_position(var0.objectiveindex, var3.origin);
-  objective_state(var0.objectiveindex, "current");
+  var_2 = scripts\engine\utility::getStruct("ml_p3_obj", "targetname");
+  var_3 = var_2;
+  objective_icon(var_0.objectiveindex, "icon_waypoint_objective_general");
+  objective_position(var_0.objectiveindex, var_3.origin);
+  objective_state(var_0.objectiveindex, "current");
 
   if(isDefined(level.final_hack_location)) {
     level.final_hack = level.final_hack_location;
@@ -310,7 +310,7 @@ function start_ml_p3_intel(var0, var1) {
     wait 0.25;
   }
 
-  update_objective_marker_when_close(level, var0, var2);
+  update_objective_marker_when_close(level, var_0, var_2);
   scripts\engine\utility::flag_set("hack_init");
 
   while(istrue(level.dialogue_playing)) {
@@ -320,17 +320,17 @@ function start_ml_p3_intel(var0, var1) {
   scripts\engine\utility::flag_wait("hacking_intro_vo_done");
 }
 
-function end_ml_p3_intel(var0, var1) {
+function end_ml_p3_intel(var_0, var_1) {
   scripts\cp\cp_modular_spawning::stop_module_by_groupname("ml_p3_init");
   scripts\cp\cp_modular_spawning::stop_module_by_groupname("ml_p3_cover_init");
-  scripts\cp\cp_objectives::overridenextstep(var0, "ml_p3_intel_2");
+  scripts\cp\cp_objectives::overridenextstep(var_0, "ml_p3_intel_2");
 }
 
-function update_objective_marker_when_close(var0, var1) {
-  ref_14359(var1, 1200, 1);
-  objective_state(var0.objectiveindex, "done");
+function update_objective_marker_when_close(var_0, var_1) {
+  ref_14359(var_1, 1200, 1);
+  objective_state(var_0.objectiveindex, "done");
 
-  for(var2 = 0; var2 < level.final_hack_locations.size; var2++) {
+  for(var_2 = 0; var_2 < level.final_hack_locations.size; var_2++) {
     thread ref_13f8c(level);
     thread ref_13083(level);
   }
@@ -341,52 +341,52 @@ function update_objective_marker_when_close(var0, var1) {
   scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123cb("ping_response_affirm");
 }
 
-function ref_13083(var0) {
-  play_vo_when_near("obj_visual", var0, 300, undefined, 1);
+function ref_13083(var_0) {
+  play_vo_when_near("obj_visual", var_0, 300, undefined, 1);
   scripts\engine\utility::flag_set("ml_p3_hack_visual");
 }
 
-function ref_13f8c(var0) {
-  var1 = scripts\cp\cp_objectives::requestworldid("hack_marker_" + var0);
-  var2 = level.final_hack_locations[var0];
-  objective_setplayintro(var1, 1);
-  objective_setplayoutro(var1, 0);
-  objective_setbackground(var1, 1);
-  objective_state(var1, "current");
-  objective_icon(var1, "icon_waypoint_objective_general");
-  objective_position(var1, var2.origin);
-  level waittill("delete_hack_marker_" + var0);
-  objective_state(var1, "done");
-  scripts\cp\cp_objectives::freeworldid("hack_marker_" + var0);
+function ref_13f8c(var_0) {
+  var_1 = scripts\cp\cp_objectives::requestworldid("hack_marker_" + var_0);
+  var_2 = level.final_hack_locations[var_0];
+  objective_setplayintro(var_1, 1);
+  objective_setplayoutro(var_1, 0);
+  objective_setbackground(var_1, 1);
+  objective_state(var_1, "current");
+  objective_icon(var_1, "icon_waypoint_objective_general");
+  objective_position(var_1, var_2.origin);
+  level waittill("delete_hack_marker_" + var_0);
+  objective_state(var_1, "done");
+  scripts\cp\cp_objectives::freeworldid("hack_marker_" + var_0);
 }
 
-function play_vo_when_near(var0, var1, var2, var3, var4) {
-  ref_14359(var1, var2, var3);
+function play_vo_when_near(var_0, var_1, var_2, var_3, var_4) {
+  ref_14359(var_1, var_2, var_3);
 
-  if(istrue(var4)) {
-    scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123cb(var0);
+  if(istrue(var_4)) {
+    scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123cb(var_0);
     return;
   }
 
-  scripts\cp\cp_dialogue::play_vo_to_all(var0);
+  scripts\cp\cp_dialogue::play_vo_to_all(var_0);
 }
 
-function ref_14359(var0, var1, var2) {
-  var3 = var1 * var1;
-  var4 = 0;
+function ref_14359(var_0, var_1, var_2) {
+  var_3 = var_1 * var_1;
+  var_4 = 0;
 
-  while(!var4) {
-    foreach(var6 in level.players) {
-      if(istrue(var2)) {
-        if(distance2dsquared(var6.origin, var0.origin) < var3) {
-          var4 = 1;
+  while(!var_4) {
+    foreach(var_6 in level.players) {
+      if(istrue(var_2)) {
+        if(distance2dsquared(var_6.origin, var_0.origin) < var_3) {
+          var_4 = 1;
         }
 
         continue;
       }
 
-      if(distancesquared(var6.origin, var0.origin) < var3) {
-        var4 = 1;
+      if(distancesquared(var_6.origin, var_0.origin) < var_3) {
+        var_4 = 1;
       }
     }
 
@@ -394,9 +394,9 @@ function ref_14359(var0, var1, var2) {
   }
 }
 
-function init_ml_p3_intel_2(var0, var1) {}
+function init_ml_p3_intel_2(var_0, var_1) {}
 
-function start_ml_p3_intel_2(var0, var1) {
+function start_ml_p3_intel_2(var_0, var_1) {
   scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_lass_bank_enemy_reinforcements_10");
   wait 0.5;
   scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123cb("ping_response_copy");
@@ -419,18 +419,18 @@ function start_ml_p3_intel_2(var0, var1) {
   level notify("spawn_module_spawn_download_defenders_completed");
 }
 
-function end_ml_p3_intel_2(var0, var1) {
+function end_ml_p3_intel_2(var_0, var_1) {
   if(isDefined(level.final_hack.model.boxiconid)) {
     thread scripts\cp\utility::ent_deleteheadicon(level.final_hack.model, level.final_hack.model.boxiconid);
   }
 
-  scripts\cp\cp_objectives::overridenextstep(var0, "ml_p3_intel_3");
+  scripts\cp\cp_objectives::overridenextstep(var_0, "ml_p3_intel_3");
 }
 
 function ref_11cf1() {
   level endon("game_ended");
   level endon("cpu_hacking_done");
-  var0 = 0.33;
+  var_0 = 0.33;
 
   while(!isDefined(level.hack_progress)) {
     wait 0.1;
@@ -471,12 +471,12 @@ function ref_11cf1() {
   thread ref_13504();
 }
 
-function hacking_sfx(var0) {
-  var1 = spawn("script_origin", var0.origin);
+function hacking_sfx(var_0) {
+  var_1 = spawn("script_origin", var_0.origin);
   wait 0.05;
-  var1 playLoopSound("cp_hacking_struct_lp");
+  var_1 playLoopSound("cp_hacking_struct_lp");
   level scripts\engine\utility::ref_143a5("cpu_hacking_done", "hacking_paused");
-  var1 stoploopsound("cp_hacking_struct_lp");
+  var_1 stoploopsound("cp_hacking_struct_lp");
 }
 
 function setobjectivetypesomvarbit() {
@@ -509,44 +509,44 @@ function setobjectivetypesomvarbit() {
   is_ambient(3);
 }
 
-function gettimetogulagclosed(var0) {
-  var1 = scripts\engine\utility::random(var0);
-  scripts\cp\cp_dialogue::play_vo_to_all(var1);
+function gettimetogulagclosed(var_0) {
+  var_1 = scripts\engine\utility::random(var_0);
+  scripts\cp\cp_dialogue::play_vo_to_all(var_1);
 }
 
 function is_any_player_in_region() {
   wait 1;
-  var0 = ["dx_cps_cyph_cypher_hack_intro_10", "dx_cps_cyph_cypher_hack_intro_20", "dx_cps_cyph_cypher_hack_intro_30"];
-  gettimetogulagclosed(var0);
+  var_0 = ["dx_cps_cyph_cypher_hack_intro_10", "dx_cps_cyph_cypher_hack_intro_20", "dx_cps_cyph_cypher_hack_intro_30"];
+  gettimetogulagclosed(var_0);
   wait 1;
-  var0 = ["dx_cps_cyph_cypher_connection_good_10", "dx_cps_cyph_cypher_connection_good_20", "dx_cps_cyph_cypher_connection_good_30"];
-  gettimetogulagclosed(var0);
+  var_0 = ["dx_cps_cyph_cypher_connection_good_10", "dx_cps_cyph_cypher_connection_good_20", "dx_cps_cyph_cypher_connection_good_30"];
+  gettimetogulagclosed(var_0);
   scripts\engine\utility::flag_set("hacking_intro_vo_done");
 }
 
-function is_ambient(var0) {
+function is_ambient(var_0) {
   while(istrue(level.dialogue_playing)) {
     wait 0.1;
   }
 
-  switch (var0) {
+  switch (var_0) {
     case 1:
-      var1 = "dx_cps_cyph_cypher_connection_stable_10";
-      scripts\cp\cp_dialogue::play_vo_to_all(var1);
+      var_1 = "dx_cps_cyph_cypher_connection_stable_10";
+      scripts\cp\cp_dialogue::play_vo_to_all(var_1);
       break;
     case 2:
-      var1 = "dx_cps_cyph_cypher_connection_stable_20";
-      scripts\cp\cp_dialogue::play_vo_to_all(var1);
+      var_1 = "dx_cps_cyph_cypher_connection_stable_20";
+      scripts\cp\cp_dialogue::play_vo_to_all(var_1);
       wait 0.5;
-      var1 = "dx_cps_kama_cypher_connection_stable_30";
-      scripts\cp\cp_dialogue::play_vo_to_all(var1);
+      var_1 = "dx_cps_kama_cypher_connection_stable_30";
+      scripts\cp\cp_dialogue::play_vo_to_all(var_1);
       break;
     case 3:
-      var1 = "dx_cps_cyph_cypher_connection_stable_40";
-      scripts\cp\cp_dialogue::play_vo_to_all(var1);
+      var_1 = "dx_cps_cyph_cypher_connection_stable_40";
+      scripts\cp\cp_dialogue::play_vo_to_all(var_1);
       wait 0.5;
-      var1 = "dx_cps_lass_cypher_connection_stable_50";
-      scripts\cp\cp_dialogue::play_vo_to_all(var1);
+      var_1 = "dx_cps_lass_cypher_connection_stable_50";
+      scripts\cp\cp_dialogue::play_vo_to_all(var_1);
       break;
     default:
       break;
@@ -555,66 +555,66 @@ function is_ambient(var0) {
 
 function is_ai_in_stealth() {
   scripts\cp\utility::ref_123fe("");
-  var0 = ["dx_cps_cyph_cypher_connection_complete_shut_out_10", "dx_cps_cyph_cypher_connection_complete_shut_out_20", "dx_cps_cyph_cypher_connection_complete_shut_out_30"];
-  gettimetogulagclosed(var0);
+  var_0 = ["dx_cps_cyph_cypher_connection_complete_shut_out_10", "dx_cps_cyph_cypher_connection_complete_shut_out_20", "dx_cps_cyph_cypher_connection_complete_shut_out_30"];
+  gettimetogulagclosed(var_0);
   wait 5;
-  var0 = ["dx_cps_cyph_cypher_connection_complete_intel_10", "dx_cps_cyph_cypher_connection_complete_intel_20", "dx_cps_cyph_cypher_connection_complete_intel_30"];
-  gettimetogulagclosed(var0);
+  var_0 = ["dx_cps_cyph_cypher_connection_complete_intel_10", "dx_cps_cyph_cypher_connection_complete_intel_20", "dx_cps_cyph_cypher_connection_complete_intel_30"];
+  gettimetogulagclosed(var_0);
   wait 5;
-  var1 = "dx_cps_cyph_ml_p3_multihack_transfer_complete_10";
-  scripts\cp\cp_dialogue::play_vo_to_all(var1);
+  var_1 = "dx_cps_cyph_ml_p3_multihack_transfer_complete_10";
+  scripts\cp\cp_dialogue::play_vo_to_all(var_1);
   wait 1;
-  var1 = "dx_cps_lass_ml_p3_multihack_transfer_complete_20";
-  scripts\cp\cp_dialogue::play_vo_to_all(var1);
+  var_1 = "dx_cps_lass_ml_p3_multihack_transfer_complete_20";
+  scripts\cp\cp_dialogue::play_vo_to_all(var_1);
 }
 
-function is_ai_facing_point(var0) {
-  switch (var0) {
+function is_ai_facing_point(var_0) {
+  switch (var_0) {
     case 0:
-      var1 = ["dx_cps_cyph_cypher_connection_lost_10", "dx_cps_cyph_cypher_connection_lost_20", "dx_cps_cyph_cypher_connection_lost_30"];
-      gettimetogulagclosed(var1);
+      var_1 = ["dx_cps_cyph_cypher_connection_lost_10", "dx_cps_cyph_cypher_connection_lost_20", "dx_cps_cyph_cypher_connection_lost_30"];
+      gettimetogulagclosed(var_1);
     case 1:
-      var2 = "dx_cps_cyph_cypher_connection_1p_10";
-      scripts\cp\cp_dialogue::play_vo_to_all(var2);
+      var_2 = "dx_cps_cyph_cypher_connection_1p_10";
+      scripts\cp\cp_dialogue::play_vo_to_all(var_2);
       break;
     case 2:
-      var2 = "dx_cps_cyph_cypher_connection_2p_10";
-      scripts\cp\cp_dialogue::play_vo_to_all(var2);
+      var_2 = "dx_cps_cyph_cypher_connection_2p_10";
+      scripts\cp\cp_dialogue::play_vo_to_all(var_2);
       break;
     case 3:
-      var2 = "dx_cps_cyph_cypher_connection_3p_10";
-      scripts\cp\cp_dialogue::play_vo_to_all(var2);
+      var_2 = "dx_cps_cyph_cypher_connection_3p_10";
+      scripts\cp\cp_dialogue::play_vo_to_all(var_2);
       break;
     case 4:
-      var2 = "dx_cps_cyph_cypher_connection_4p_10";
-      scripts\cp\cp_dialogue::play_vo_to_all(var2);
+      var_2 = "dx_cps_cyph_cypher_connection_4p_10";
+      scripts\cp\cp_dialogue::play_vo_to_all(var_2);
       break;
     default:
       break;
   }
 }
 
-function init_ml_p3_intel_3(var0, var1) {}
+function init_ml_p3_intel_3(var_0, var_1) {}
 
-function start_ml_p3_intel_3(var0, var1) {
-  var2 = level.final_hack_location.model;
-  objective_icon(var0.objectiveindex, "icon_waypoint_objective_general");
-  objective_position(var0.objectiveindex, var2.origin);
+function start_ml_p3_intel_3(var_0, var_1) {
+  var_2 = level.final_hack_location.model;
+  objective_icon(var_0.objectiveindex, "icon_waypoint_objective_general");
+  objective_position(var_0.objectiveindex, var_2.origin);
   scripts\engine\utility::flag_wait("ml_p3_router_picked_up");
   level notify("update_hack_objective");
-  var3 = scripts\cp\cp_modular_spawning::get_module_structs_by_groupname("wave_spawning");
+  var_3 = scripts\cp\cp_modular_spawning::get_module_structs_by_groupname("wave_spawning");
 
-  foreach(var5 in var3) {
-    var5 scripts\cp\cp_modular_spawning::clear_wave_ref_override();
+  foreach(var_5 in var_3) {
+    var_5 scripts\cp\cp_modular_spawning::clear_wave_ref_override();
   }
 
   scripts\engine\utility::flag_set("ml_p3_vo_finished");
   scripts\engine\utility::flag_set("ml_p3_done");
 }
 
-function end_ml_p3_intel_3(var0, var1) {
+function end_ml_p3_intel_3(var_0, var_1) {
   level.max_agents_override = undefined;
-  scripts\cp\cp_objectives::overridenextstep(var0, "ml_p3_exfil");
+  scripts\cp\cp_objectives::overridenextstep(var_0, "ml_p3_exfil");
 }
 
 function lootleadermarksize() {
@@ -630,37 +630,37 @@ function computer_test() {
   scripts\engine\utility::flag_wait("introscreen_over");
   scripts\engine\utility::flag_wait("infil_complete");
   scripts\engine\utility::flag_wait("interactions_initialized");
-  var0 = tablelookupgetnumrows("cp/computer_screen_search_results.csv");
-  level.cpu_manifest1_idx = randomintrange(1, var0 + 1);
+  var_0 = tablelookupgetnumrows("cp/computer_screen_search_results.csv");
+  level.cpu_manifest1_idx = randomintrange(1, var_0 + 1);
   setomnvar("cpu_manifest1_idx", level.cpu_manifest1_idx);
   level thread scripts\cp\cp_hacking::hacking_init();
   thread setup_test_computer("ml_p3_comp");
 }
 
-function setup_test_computer(var0) {
-  var1 = getEnt(var0, "targetname");
-  var1 delete();
+function setup_test_computer(var_0) {
+  var_1 = getEnt(var_0, "targetname");
+  var_1 delete();
 }
 
 function fake_world_structs_defend_download() {
   level.fake_structs = [];
-  var0 = [(19487, -9593, 552)];
+  var_0 = [(19487, -9593, 552)];
 
-  foreach(var2 in var0) {
-    var3 = spawnStruct();
-    var3.origin = var2;
-    var3.angles = (0, 0, 0);
-    var3.script_noteworthy = "hack_defend_struct";
-    level.fake_structs[level.fake_structs.size] = var3;
+  foreach(var_2 in var_0) {
+    var_3 = spawnStruct();
+    var_3.origin = var_2;
+    var_3.angles = (0, 0, 0);
+    var_3.script_noteworthy = "hack_defend_struct";
+    level.fake_structs[level.fake_structs.size] = var_3;
   }
 }
 
-function pause_hacking(var0) {
+function pause_hacking(var_0) {
   level notify("mlp3_hack_pause");
   level endon("mlp3_hack_pause");
   level.hacking_paused = 1;
   level notify("hacking_paused");
-  wait var0;
+  wait var_0;
   level.hacking_paused = 0;
   thread hacking_sfx(level);
 }
@@ -670,40 +670,40 @@ function remove_from_list_on_death() {
   remove_from_hack_attackers_list(self);
 }
 
-function remove_from_hack_attackers_list(var0) {
-  level.hack_attackers = scripts\engine\utility::array_remove(level.hack_attackers, var0);
+function remove_from_hack_attackers_list(var_0) {
+  level.hack_attackers = scripts\engine\utility::array_remove(level.hack_attackers, var_0);
 }
 
 function listen_to_hack_damage() {
-  var0 = 0;
+  var_0 = 0;
   self.hack_damage = 0;
-  var1 = 100;
+  var_1 = 100;
 
-  while(!var0) {
-    self waittill("damage", var2, var3, var4, var5, var6, var7, var8, var9, var10, var11);
+  while(!var_0) {
+    self waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 
-    if(!isDefined(var3)) {
+    if(!isDefined(var_3)) {
       continue;
     }
 
-    if(!isDefined(var3.team)) {
+    if(!isDefined(var_3.team)) {
       continue;
     }
 
-    if(var3.team != "axis") {
+    if(var_3.team != "axis") {
       continue;
     }
 
-    self.hack_damage += var2;
+    self.hack_damage += var_2;
 
-    if(self.hack_damage > var1) {
-      var0 = 1;
+    if(self.hack_damage > var_1) {
+      var_0 = 1;
     }
   }
 }
 
-function setup_headicon_on_jammer(var0, var1) {
-  self.boxiconid = thread scripts\cp\utility::ent_createheadicon(self, var1, "allies", var0);
+function setup_headicon_on_jammer(var_0, var_1) {
+  self.boxiconid = thread scripts\cp\utility::ent_createheadicon(self, var_1, "allies", var_0);
   setheadiconzoffset(self.boxiconid, 1);
   setheadiconsnaptoedges(self.boxiconid, 0);
 }
@@ -711,66 +711,66 @@ function setup_headicon_on_jammer(var0, var1) {
 function get_enemies_to_advance_on_players() {
   level endon("ml_p3_hack_done");
   level endon("game_ended");
-  var0 = 1200;
-  var1 = var0 * var0;
-  var2 = scripts\engine\utility::getStruct("ml_p3_obj", "targetname");
+  var_0 = 1200;
+  var_1 = var_0 * var_0;
+  var_2 = scripts\engine\utility::getStruct("ml_p3_obj", "targetname");
 
   for(;;) {
-    var3 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
+    var_3 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
 
-    foreach(var5 in var3) {
-      if(var5.origin[2] > 0) {
+    foreach(var_5 in var_3) {
+      if(var_5.origin[2] > 0) {
         continue;
       }
 
-      if(distancesquared(var5.origin, var2.origin) > var1) {
+      if(distancesquared(var_5.origin, var_2.origin) > var_1) {
         continue;
       }
 
-      var5.combatmode = "no_cover";
-      var5.goalradius = 32;
+      var_5.combatmode = "no_cover";
+      var_5.goalradius = 32;
     }
 
     wait 30;
   }
 }
 
-function create_final_hack_spot_interaction(var0, var1) {
-  var2 = spawnStruct();
-  var2.origin = var0.origin;
-  var2.targetname = "interaction";
-  var2.script_noteworthy = "final_hack_spot";
-  var2.requires_power = 0;
-  var2.spend_type = "null";
-  var2.setnewabilitycount = var1;
-  var3 = scripts\engine\utility::getStructArray("router_spot", "targetname");
-  var4 = scripts\engine\utility::getclosest(var2.origin, var3, 1000);
-  var2.model = spawn("script_model", var4.origin);
-  var2.model setModel("tag_origin");
+function create_final_hack_spot_interaction(var_0, var_1) {
+  var_2 = spawnStruct();
+  var_2.origin = var_0.origin;
+  var_2.targetname = "interaction";
+  var_2.script_noteworthy = "final_hack_spot";
+  var_2.requires_power = 0;
+  var_2.spend_type = "null";
+  var_2.setnewabilitycount = var_1;
+  var_3 = scripts\engine\utility::getStructArray("router_spot", "targetname");
+  var_4 = scripts\engine\utility::getclosest(var_2.origin, var_3, 1000);
+  var_2.model = spawn("script_model", var_4.origin);
+  var_2.model setModel("tag_origin");
 
-  if(!isDefined(var4.angles)) {
-    var5 = (0, 0, 0);
+  if(!isDefined(var_4.angles)) {
+    var_5 = (0, 0, 0);
   } else {
-    var5 = var5.angles;
+    var_5 = var_5.angles;
   }
 
-  var3.model.angles = var5;
-  var3.cost = 0;
-  scripts\cp\cp_interaction::add_to_current_interaction_list(var3);
-  return var3;
+  var_3.model.angles = var_5;
+  var_3.cost = 0;
+  scripts\cp\cp_interaction::add_to_current_interaction_list(var_3);
+  return var_3;
 }
 
 function register_hack_spot_interaction() {
   scripts\cp\cp_interaction::register_interaction("final_hack_spot", "null", undefined, &final_hack_spot_hint, &final_hack_spot_activate, 0, 0, undefined);
 }
 
-function final_hack_spot_hint(var0, var1) {
+function final_hack_spot_hint(var_0, var_1) {
   if(!scripts\engine\utility::flag("hack_init")) {
     return "";
   }
 
   if(scripts\engine\utility::flag("ml_p3_hack_visual")) {
-    if(!istrue(var0.setnexthistorydestination)) {
+    if(!istrue(var_0.setnexthistorydestination)) {
       return &"CP_DWN_TWN_OBJECTIVES/ML_P3_COMP";
     }
   }
@@ -782,20 +782,20 @@ function final_hack_spot_hint(var0, var1) {
   return "";
 }
 
-function final_hack_spot_activate(var0, var1) {
-  var1 endon("disconnect");
+function final_hack_spot_activate(var_0, var_1) {
+  var_1 endon("disconnect");
 
   if(!scripts\engine\utility::flag("hack_init")) {
     return;
   }
 
   if(scripts\engine\utility::flag("ml_p3_hack_visual")) {
-    if(!istrue(var0.setnexthistorydestination)) {
-      var0.setnexthistorydestination = 1;
+    if(!istrue(var_0.setnexthistorydestination)) {
+      var_0.setnexthistorydestination = 1;
       level.setovertimeomnvarprogress++;
       thread ref_135c2(level);
       scripts\cp\utility::objective_update("ml_p3_intel", undefined, undefined, undefined, undefined, level.setovertimeomnvarprogress);
-      level notify("delete_hack_marker_" + var0.setnewabilitycount);
+      level notify("delete_hack_marker_" + var_0.setnewabilitycount);
 
       if(level.setovertimeomnvarprogress >= level.setovertimeomnvarenabled) {
         scripts\engine\utility::flag_set("ml_p3_hack_started");
@@ -805,15 +805,15 @@ function final_hack_spot_activate(var0, var1) {
   }
 
   if(scripts\engine\utility::flag("ml_p3_hack_done") && !scripts\engine\utility::flag("ml_p3_router_picked_up")) {
-    if(!istrue(var0.ref_12dbc)) {
-      var0.ref_12dbc = 1;
+    if(!istrue(var_0.ref_12dbc)) {
+      var_0.ref_12dbc = 1;
       level.ref_12dc0++;
       scripts\cp\utility::objective_update("ml_p3_intel_3", undefined, undefined, undefined, undefined, level.ref_12dc0);
-      var0.model delete();
+      var_0.model delete();
 
       if(level.ref_12dc0 >= level.ref_12dbf) {
         scripts\engine\utility::flag_set("ml_p3_router_picked_up");
-        scripts\cp\cp_player_battlechatter::trysaylocalsound(var1, "obj_device_pickup");
+        scripts\cp\cp_player_battlechatter::trysaylocalsound(var_1, "obj_device_pickup");
         return;
       }
 
@@ -829,9 +829,9 @@ function lootleadermarkweaksize() {
   ref_137bc();
 }
 
-function ref_135c2(var0) {
-  var0.model setModel("equipment_router_flat");
-  setup_headicon_on_jammer(var0.model, "icon_waypoint_cyber_bombsite", 20);
+function ref_135c2(var_0) {
+  var_0.model setModel("equipment_router_flat");
+  setup_headicon_on_jammer(var_0.model, "icon_waypoint_cyber_bombsite", 20);
 }
 
 function ref_123f7() {
@@ -854,43 +854,43 @@ function ref_11ce1() {
   level endon("game_ended");
   level endon("ml_p3_hack_done");
   level endon("cpu_hacking_done");
-  var0 = 250;
-  var1 = var0 * var0;
-  var2 = level.final_hack_locations;
-  var3 = gettime() + 15000;
+  var_0 = 250;
+  var_1 = var_0 * var_0;
+  var_2 = level.final_hack_locations;
+  var_3 = gettime() + 15000;
 
   for(;;) {
-    var4 = 0;
+    var_4 = 0;
 
-    foreach(var6 in var2) {
-      var6.ref_11f20 = 0;
+    foreach(var_6 in var_2) {
+      var_6.ref_11f20 = 0;
 
-      foreach(var8 in level.players) {
-        if(distancesquared(var8.origin, var6.origin) < var1) {
-          var4++;
-          var6.ref_11f20++;
+      foreach(var_8 in level.players) {
+        if(distancesquared(var_8.origin, var_6.origin) < var_1) {
+          var_4++;
+          var_6.ref_11f20++;
         }
       }
     }
 
-    var11 = 0;
+    var_11 = 0;
 
-    foreach(var6 in var2) {
-      if(var6.ref_11f20 == 0) {
-        var11 = 1;
+    foreach(var_6 in var_2) {
+      if(var_6.ref_11f20 == 0) {
+        var_11 = 1;
         break;
       }
     }
 
-    setomnvar("cpu_hacking_signal", var4);
-    level.hacking_paused = var11;
-    level.hack_multiplier = 1 + var4 * 0.25;
+    setomnvar("cpu_hacking_signal", var_4);
+    level.hacking_paused = var_11;
+    level.hack_multiplier = 1 + var_4 * 0.25;
 
-    if(gettime() > var3) {
-      var3 += 15000;
-      var15 = int(max(0, var4 - 1));
+    if(gettime() > var_3) {
+      var_3 += 15000;
+      var_15 = int(max(0, var_4 - 1));
 
-      if(var4 == 0) {
+      if(var_4 == 0) {
         thread is_ai_facing_point(level);
       }
     }
@@ -900,43 +900,43 @@ function ref_11ce1() {
 }
 
 function claymore_test() {
-  var0 = scripts\engine\utility::getStructArray("claymore_test", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("claymore_test", "targetname");
 
-  foreach(var2 in var0) {
-    spawn_claymore(var2);
+  foreach(var_2 in var_0) {
+    spawn_claymore(var_2);
     wait 0.1;
   }
 }
 
 function spawn_claymore() {
-  var0 = magicgrenademanual("claymore_mp", self.origin + (0, 0, 100), (0, 0, 10));
-  var0.owner = var0;
-  var0.team = "axis";
-  var0 thread scripts\cp\cp_claymore::claymore_plant();
+  var_0 = magicgrenademanual("claymore_mp", self.origin + (0, 0, 100), (0, 0, 10));
+  var_0.owner = var_0;
+  var_0.team = "axis";
+  var_0 thread scripts\cp\cp_claymore::claymore_plant();
 }
 
 function at_mine_test() {
-  var0 = scripts\engine\utility::getStructArray("at_mine_test", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("at_mine_test", "targetname");
 
-  foreach(var2 in var0) {
-    spawn_at_mine(var2);
+  foreach(var_2 in var_0) {
+    spawn_at_mine(var_2);
     wait 0.1;
   }
 }
 
 function spawn_at_mine() {
-  var0 = magicgrenademanual("at_mine_mp", self.origin + (0, 0, 100), (0, 0, 10));
-  var0.owner = var0;
-  var0.team = "axis";
-  thread scripts\cp\equipment\cp_at_mine::at_mine_plant(var0);
+  var_0 = magicgrenademanual("at_mine_mp", self.origin + (0, 0, 100), (0, 0, 10));
+  var_0.owner = var_0;
+  var_0.team = "axis";
+  thread scripts\cp\equipment\cp_at_mine::at_mine_plant(var_0);
 }
 
 function get_rid_of_guys_blocking_path() {
   level endon("ml_p3_router_picked_up");
 
   for(;;) {
-    foreach(var1 in level.spawned_enemies) {
-      if(!isDefined(var1.listening_for_blocked_path)) {
+    foreach(var_1 in level.spawned_enemies) {
+      if(!isDefined(var_1.listening_for_blocked_path)) {
         thread listen_for_blocked_path();
       }
     }
@@ -948,214 +948,214 @@ function get_rid_of_guys_blocking_path() {
 function listen_for_blocked_path() {
   self endon("death");
   self.listening_for_blocked_path = 1;
-  var0 = self getentitynumber();
+  var_0 = self getentitynumber();
 
   for(;;) {
-    self waittill("node_bad", var1, var2, var3);
+    self waittill("node_bad", var_1, var_2, var_3);
 
-    if(var1 != "path_blocked") {
+    if(var_1 != "path_blocked") {
       continue;
     }
 
-    if(isDefined(var3) && var3 < 2000) {
+    if(isDefined(var_3) && var_3 < 2000) {
       continue;
     }
 
-    var4 = var2 getentitynumber();
+    var_4 = var_2 getentitynumber();
 
-    if(isalive(var2)) {
-      if(isDefined(var2.enemy)) {
-        thread send_guy_to_org(var2);
+    if(isalive(var_2)) {
+      if(isDefined(var_2.enemy)) {
+        thread send_guy_to_org(var_2);
         continue;
       }
 
-      foreach(var6 in level.players) {
-        if(isDefined(var6) && isalive(var6)) {
-          thread send_guy_to_org(var2);
+      foreach(var_6 in level.players) {
+        if(isDefined(var_6) && isalive(var_6)) {
+          thread send_guy_to_org(var_2);
         }
       }
     }
   }
 }
 
-function send_guy_to_org(var0) {
+function send_guy_to_org(var_0) {
   self endon("death");
-  self setgoalpos(var0);
+  self setgoalpos(var_0);
   self.goalradius = 16;
   thread stop_ignoring_after_timer(5);
-  var1 = scripts\engine\utility::ref_143ad("goal_reached", "goal");
+  var_1 = scripts\engine\utility::ref_143ad("goal_reached", "goal");
   self.goalradius = 512;
 }
 
-function stop_ignoring_after_timer(var0) {
+function stop_ignoring_after_timer(var_0) {
   self.ignoreall = 1;
-  wait var0;
+  wait var_0;
   self.ignoreall = 0;
 }
 
 function ref_13504() {
   level endon("game_ended");
-  var0 = scripts\engine\utility::getStruct("ml_p3_heli_spawn", "targetname");
-  var1 = scripts\engine\utility::getStruct("ml_p3_heli_stop1", "targetname");
-  var2 = scripts\engine\utility::getStruct("ml_p3_heli_left", "targetname");
-  var3 = scripts\engine\utility::getStruct("ml_p3_heli_center", "targetname");
-  var4 = scripts\engine\utility::getStruct("ml_p3_heli_right", "targetname");
-  var5 = spawn("script_model", level.final_hack_location.origin);
-  var5 setModel("tag_origin");
-  var6 = scripts\common\vehicle::vehicle_spawn(var0);
-  var6.death_fx_on_self = 1;
-  var6.circle_radius = 2500;
-  var6 scripts\cp\helicopter\cp_helicopter::heli_mg_create("veh8_mil_air_ahotel64_turret_wm", "apache_turret_cp", "tag_turret");
-  var6.isheli = 1;
-  var6.health = 25000;
-  var6.maxhealth = 25000;
-  var6.team = "axis";
-  var6 setvehicleteam("axis");
-  var6 setmaxpitchroll(15, 15);
-  var6.health_remaining = 25000;
-  var6 sethoverparams(25, 15, 10);
-  var6 setlookatent(var5);
-  var6 vehicle_setspeed(90, 30);
-  var6 setvehgoalpos(var1.origin, 1);
-  var6 waittill("goal");
-  var6 setvehgoalpos(var3.origin, 1);
-  var6 waittill("goal");
-  var6.instantbleedoutsquadwipe = "center";
-  var6 vehicle_setspeed(15, 10);
-  var6.ref_11e98 = 1;
-  thread skip_navmesh_check(var6);
-  thread skipburndownforvehicle(var6);
+  var_0 = scripts\engine\utility::getStruct("ml_p3_heli_spawn", "targetname");
+  var_1 = scripts\engine\utility::getStruct("ml_p3_heli_stop1", "targetname");
+  var_2 = scripts\engine\utility::getStruct("ml_p3_heli_left", "targetname");
+  var_3 = scripts\engine\utility::getStruct("ml_p3_heli_center", "targetname");
+  var_4 = scripts\engine\utility::getStruct("ml_p3_heli_right", "targetname");
+  var_5 = spawn("script_model", level.final_hack_location.origin);
+  var_5 setModel("tag_origin");
+  var_6 = scripts\common\vehicle::vehicle_spawn(var_0);
+  var_6.death_fx_on_self = 1;
+  var_6.circle_radius = 2500;
+  var_6 scripts\cp\helicopter\cp_helicopter::heli_mg_create("veh8_mil_air_ahotel64_turret_wm", "apache_turret_cp", "tag_turret");
+  var_6.isheli = 1;
+  var_6.health = 25000;
+  var_6.maxhealth = 25000;
+  var_6.team = "axis";
+  var_6 setvehicleteam("axis");
+  var_6 setmaxpitchroll(15, 15);
+  var_6.health_remaining = 25000;
+  var_6 sethoverparams(25, 15, 10);
+  var_6 setlookatent(var_5);
+  var_6 vehicle_setspeed(90, 30);
+  var_6 setvehgoalpos(var_1.origin, 1);
+  var_6 waittill("goal");
+  var_6 setvehgoalpos(var_3.origin, 1);
+  var_6 waittill("goal");
+  var_6.instantbleedoutsquadwipe = "center";
+  var_6 vehicle_setspeed(15, 10);
+  var_6.ref_11e98 = 1;
+  thread skip_navmesh_check(var_6);
+  thread skipburndownforvehicle(var_6);
   thread ref_14454(level);
 
   if(!isDefined(level.vo_paratroopers)) {
     level.vo_paratroopers = [];
   }
 
-  level.vo_paratroopers = scripts\engine\utility::array_add(level.vo_paratroopers, var6);
-  scripts\cp\cp_weapon::add_to_special_lockon_target_list(var6);
+  level.vo_paratroopers = scripts\engine\utility::array_add(level.vo_paratroopers, var_6);
+  scripts\cp\cp_weapon::add_to_special_lockon_target_list(var_6);
   level waittill("ml_p3_delete_heli");
 }
 
-function skipburndownforvehicle(var0) {
+function skipburndownforvehicle(var_0) {
   level endon("game_ended");
-  var0 endon("death");
-  var0 vehicle_setspeed(50, 30);
-  var1 = scripts\engine\utility::getStruct("ml_p3_heli_left", "targetname");
-  var2 = scripts\engine\utility::getStruct("ml_p3_heli_center", "targetname");
-  var3 = scripts\engine\utility::getStruct("ml_p3_heli_right", "targetname");
-  var4 = scripts\engine\utility::getStruct("ml_p3_heli_front", "targetname");
-  var5 = [var1, var2, var3, var4];
+  var_0 endon("death");
+  var_0 vehicle_setspeed(50, 30);
+  var_1 = scripts\engine\utility::getStruct("ml_p3_heli_left", "targetname");
+  var_2 = scripts\engine\utility::getStruct("ml_p3_heli_center", "targetname");
+  var_3 = scripts\engine\utility::getStruct("ml_p3_heli_right", "targetname");
+  var_4 = scripts\engine\utility::getStruct("ml_p3_heli_front", "targetname");
+  var_5 = [var_1, var_2, var_3, var_4];
 
   for(;;) {
-    var5 = [var1, var2, var3, var4];
-    var6 = var5;
+    var_5 = [var_1, var_2, var_3, var_4];
+    var_6 = var_5;
 
-    switch (var0.instantbleedoutsquadwipe) {
+    switch (var_0.instantbleedoutsquadwipe) {
       case "center":
       default:
-        var6 = scripts\engine\utility::array_remove(var5, var2);
-        var7 = scripts\engine\utility::random(var6);
+        var_6 = scripts\engine\utility::array_remove(var_5, var_2);
+        var_7 = scripts\engine\utility::random(var_6);
         break;
       case "left":
-        var6 = scripts\engine\utility::array_remove(var5, var1);
-        var7 = scripts\engine\utility::random(var6);
+        var_6 = scripts\engine\utility::array_remove(var_5, var_1);
+        var_7 = scripts\engine\utility::random(var_6);
         break;
       case "right":
-        var6 = scripts\engine\utility::array_remove(var5, var3);
-        var7 = scripts\engine\utility::random(var6);
+        var_6 = scripts\engine\utility::array_remove(var_5, var_3);
+        var_7 = scripts\engine\utility::random(var_6);
         break;
       case "front":
-        var6 = scripts\engine\utility::array_remove(var5, var4);
-        var7 = scripts\engine\utility::random(var6);
+        var_6 = scripts\engine\utility::array_remove(var_5, var_4);
+        var_7 = scripts\engine\utility::random(var_6);
         break;
     }
 
-    var0 setvehgoalpos(var7.origin, 1);
-    var0 waittill("goal");
-    var0.instantbleedoutsquadwipe = var7.script_noteworthy;
+    var_0 setvehgoalpos(var_7.origin, 1);
+    var_0 waittill("goal");
+    var_0.instantbleedoutsquadwipe = var_7.script_noteworthy;
     wait 2;
   }
 }
 
-function skip_navmesh_check(var0) {
-  var0 endon("death");
+function skip_navmesh_check(var_0) {
+  var_0 endon("death");
   level notify("starting_cleanup");
-  var0.minigun setturretteam("axis");
-  var0.minigun setmode("manual");
-  var1 = gettime();
-  var2 = 0;
+  var_0.minigun setturretteam("axis");
+  var_0.minigun setmode("manual");
+  var_1 = gettime();
+  var_2 = 0;
 
   for(;;) {
-    var3 = scripts\engine\utility::getStruct("tv_station_level", "targetname");
-    var4 = quarry_wave_spawn_scoring(var0, var3.origin);
+    var_3 = scripts\engine\utility::getStruct("tv_station_level", "targetname");
+    var_4 = quarry_wave_spawn_scoring(var_0, var_3.origin);
 
-    if(!isDefined(var4)) {
-      var0.minigun cleartargetentity();
+    if(!isDefined(var_4)) {
+      var_0.minigun cleartargetentity();
       wait 0.2;
       continue;
     }
 
-    var0.minigun settargetentity(var4);
-    var5 = var0.minigun scripts\engine\utility::waittill_notify_or_timeout_return("turret_on_target", 3);
+    var_0.minigun settargetentity(var_4);
+    var_5 = var_0.minigun scripts\engine\utility::waittill_notify_or_timeout_return("turret_on_target", 3);
 
-    if(var5 == "timeout") {
-      var0.minigun cleartargetentity();
+    if(var_5 == "timeout") {
+      var_0.minigun cleartargetentity();
       continue;
     }
 
-    if(gettime() > var1) {
-      for(var6 = 0; var6 < 35; var6++) {
-        var0.minigun shootturret();
+    if(gettime() > var_1) {
+      for(var_6 = 0; var_6 < 35; var_6++) {
+        var_0.minigun shootturret();
         wait 0.1;
       }
 
-      var1 = gettime() + 1000;
+      var_1 = gettime() + 1000;
     }
   }
 }
 
-function quarry_wave_spawn_scoring(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = 25000000;
+function quarry_wave_spawn_scoring(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 25000000;
   }
 
-  var2 = level.players;
-  var2 = sortbydistance(var2, self.origin);
+  var_2 = level.players;
+  var_2 = sortbydistance(var_2, self.origin);
 
-  foreach(var4 in var2) {
-    if(!isalive(var4)) {
+  foreach(var_4 in var_2) {
+    if(!isalive(var_4)) {
       continue;
     }
 
-    if(distancesquared(var4.origin, var0) < var1 && scripts\engine\trace::ray_trace_passed(self.origin + (0, 0, -250), var4.origin + (0, 0, 100), var2)) {
-      return var4;
+    if(distancesquared(var_4.origin, var_0) < var_1 && scripts\engine\trace::ray_trace_passed(self.origin + (0, 0, -250), var_4.origin + (0, 0, 100), var_2)) {
+      return var_4;
     }
   }
 
   return undefined;
 }
 
-function ref_14454(var0) {
+function ref_14454(var_0) {
   level endon("game_ended");
-  var0 waittill("death");
-  playFX(level._effect["helidown_rpghit"], var0.origin);
+  var_0 waittill("death");
+  playFX(level._effect["helidown_rpghit"], var_0.origin);
 
-  if(isDefined(var0.minigun)) {
-    var0.minigun makeunusable();
-    var0.minigun maketurretinoperable();
-    var0.minigun delete();
+  if(isDefined(var_0.minigun)) {
+    var_0.minigun makeunusable();
+    var_0.minigun maketurretinoperable();
+    var_0.minigun delete();
   }
 
-  level.vo_paratroopers = scripts\engine\utility::array_remove(level.vo_paratroopers, var0);
+  level.vo_paratroopers = scripts\engine\utility::array_remove(level.vo_paratroopers, var_0);
   wait 1;
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
     return;
   }
 }
 
-function ref_137d4(var0) {
+function ref_137d4(var_0) {
   thread ref_13547();
   thread lootleadermarksize();
   thread scripts\cp\cp_hud_message::teamhudtutorialmessage(&"CP_DWN_TWN_OBJECTIVES/EXFIL_HEADER", "allies", 5);
@@ -1163,61 +1163,61 @@ function ref_137d4(var0) {
   wait 4;
 }
 
-function movingplatforment(var0) {
+function movingplatforment(var_0) {
   wait 2;
   thread scripts\cp\cp_objectives::screenent_c("major_objective");
   thread mp_shipment_patch();
   wait 3;
 
-  foreach(var2 in level.players) {
+  foreach(var_2 in level.players) {
     if(scripts\cp\cp_relics::calldropbag()) {
       if(scripts\cp\cp_gameskill::get_gameskill() != 3) {
-        var2 thread scripts\cp_mp\xmike109::scriptable_callback("justreward_mod");
+        var_2 thread scripts\cp_mp\xmike109::scriptable_callback("justreward_mod");
       } else {
-        var2 thread scripts\cp_mp\xmike109::scriptable_callback("justreward_mod_vet");
+        var_2 thread scripts\cp_mp\xmike109::scriptable_callback("justreward_mod_vet");
       }
     }
 
-    var2 scripts\cp_mp\xmike109::scriptable_callback("downtown_4");
+    var_2 scripts\cp_mp\xmike109::scriptable_callback("downtown_4");
   }
 
   level thread[[level.endgame]]("allies", level.end_game_string_index["win"]);
 }
 
 function mp_shipment_patch() {
-  foreach(var1 in level.players) {
-    var1 thread scripts\mp\vehicles\vehicle_damage_mp::ref_1340d(2, 1, 1);
+  foreach(var_1 in level.players) {
+    var_1 thread scripts\mp\vehicles\vehicle_damage_mp::ref_1340d(2, 1, 1);
   }
 
   wait 2;
 
-  foreach(var1 in level.players) {
-    if(!istrue(var1.try_to_punish_with_jugg)) {
-      var1.invulnerable = 1;
-      var1 allowmovement(0);
+  foreach(var_1 in level.players) {
+    if(!istrue(var_1.try_to_punish_with_jugg)) {
+      var_1.invulnerable = 1;
+      var_1 allowmovement(0);
     }
 
-    var4 = scripts\engine\utility::getStruct("mlp3_camera_ending", "targetname");
-    var5 = var4.origin;
-    var6 = scripts\engine\utility::getStruct(var4.target, "targetname");
-    var7 = spawn("script_model", var5);
-    var7 setModel("tag_origin");
-    var7.angles = var4.angles;
-    var7 moveTo(var6.origin, 20, 1, 1);
-    var1 playerhide();
-    var1 allowfire(0);
-    var1 disableoffhandweapons();
-    var1 disableusability();
-    var1 allowmovement(0);
-    var1 setclientomnvar("ui_hide_hud", 1);
-    spawn_endgame_camera(var1, var7);
-    var1 lerpfovscalefactor(0, 0);
+    var_4 = scripts\engine\utility::getStruct("mlp3_camera_ending", "targetname");
+    var_5 = var_4.origin;
+    var_6 = scripts\engine\utility::getStruct(var_4.target, "targetname");
+    var_7 = spawn("script_model", var_5);
+    var_7 setModel("tag_origin");
+    var_7.angles = var_4.angles;
+    var_7 moveTo(var_6.origin, 20, 1, 1);
+    var_1 playerhide();
+    var_1 allowfire(0);
+    var_1 disableoffhandweapons();
+    var_1 disableusability();
+    var_1 allowmovement(0);
+    var_1 setclientomnvar("ui_hide_hud", 1);
+    spawn_endgame_camera(var_1, var_7);
+    var_1 lerpfovscalefactor(0, 0);
   }
 }
 
-function spawn_endgame_camera(var0) {
+function spawn_endgame_camera(var_0) {
   self.ignoreme = 1;
-  self cameralinkTo(var0, "tag_origin", 1);
+  self cameralinkTo(var_0, "tag_origin", 1);
   self setclientdvar("LQKPQMPRQN", 1);
   self setdepthoffield(0, 128, 512, 4000, 6, 1.8);
 
@@ -1227,49 +1227,49 @@ function spawn_endgame_camera(var0) {
   }
 }
 
-function screen_fade_to_black(var0) {
-  if(!isDefined(var0.kidnap_black_screen)) {
-    var0.kidnap_black_screen = newclienthudelem(var0);
-    var0.kidnap_black_screen.x = 0;
-    var0.kidnap_black_screen.y = 0;
-    var0.kidnap_black_screen setshader("black", 640, 480);
-    var0.kidnap_black_screen.alignx = "left";
-    var0.kidnap_black_screen.aligny = "top";
-    var0.kidnap_black_screen.sort = 1;
-    var0.kidnap_black_screen.horzalign = "fullscreen";
-    var0.kidnap_black_screen.vertalign = "fullscreen";
-    var0.kidnap_black_screen.foreground = 1;
+function screen_fade_to_black(var_0) {
+  if(!isDefined(var_0.kidnap_black_screen)) {
+    var_0.kidnap_black_screen = newclienthudelem(var_0);
+    var_0.kidnap_black_screen.x = 0;
+    var_0.kidnap_black_screen.y = 0;
+    var_0.kidnap_black_screen setshader("black", 640, 480);
+    var_0.kidnap_black_screen.alignx = "left";
+    var_0.kidnap_black_screen.aligny = "top";
+    var_0.kidnap_black_screen.sort = 1;
+    var_0.kidnap_black_screen.horzalign = "fullscreen";
+    var_0.kidnap_black_screen.vertalign = "fullscreen";
+    var_0.kidnap_black_screen.foreground = 1;
   }
 
-  var0.kidnap_black_screen.alpha = 0;
-  var0.kidnap_black_screen fadeovertime(2);
-  var0.kidnap_black_screen.alpha = 1;
+  var_0.kidnap_black_screen.alpha = 0;
+  var_0.kidnap_black_screen fadeovertime(2);
+  var_0.kidnap_black_screen.alpha = 1;
 }
 
 function ref_13547() {
   level endon("game_ended");
-  var0 = scripts\engine\utility::getStruct("ml_p3_exfil_heli_spawn", "targetname");
-  var1 = scripts\engine\utility::getStruct("ml_p3_exfil_heli_lz", "targetname");
-  var2 = scripts\engine\utility::getStruct("ml_p2_heli_trip_start", "targetname");
-  var0.vehicletype = "blima_cp";
-  thread scripts\cp\vehicles\cp_heli_trip::start_heli_trip_sequence(var0, var1, var2, 0);
+  var_0 = scripts\engine\utility::getStruct("ml_p3_exfil_heli_spawn", "targetname");
+  var_1 = scripts\engine\utility::getStruct("ml_p3_exfil_heli_lz", "targetname");
+  var_2 = scripts\engine\utility::getStruct("ml_p2_heli_trip_start", "targetname");
+  var_0.vehicletype = "blima_cp";
+  thread scripts\cp\vehicles\cp_heli_trip::start_heli_trip_sequence(var_0, var_1, var_2, 0);
   wait 3;
 
   if(!isDefined(level.heli_trip_vehicle)) {
     return;
   }
 
-  var3 = level.heli_trip_vehicle;
-  var4 = scripts\cp\cp_objectives::requestworldid("ml_p3_exfil");
-  objective_state(var4, "current");
-  objective_position(var4, var1.origin);
-  objective_icon(var4, "icon_waypoint_objective_general");
-  objective_setlabel(var4, &"CP_DWN_TWN_OBJECTIVES/EXFIL_HEADER");
-  objective_setshowoncompass(var4, 1);
-  objective_setminimapiconsize(var4, "icon_regular");
-  var3 waittill("started_boarding");
-  scripts\cp\cp_objectives::ref_11f80(var4);
-  var3 waittill("heli_taking_off");
-  objective_delete(var4);
+  var_3 = level.heli_trip_vehicle;
+  var_4 = scripts\cp\cp_objectives::requestworldid("ml_p3_exfil");
+  objective_state(var_4, "current");
+  objective_position(var_4, var_1.origin);
+  objective_icon(var_4, "icon_waypoint_objective_general");
+  objective_setlabel(var_4, &"CP_DWN_TWN_OBJECTIVES/EXFIL_HEADER");
+  objective_setshowoncompass(var_4, 1);
+  objective_setminimapiconsize(var_4, "icon_regular");
+  var_3 waittill("started_boarding");
+  scripts\cp\cp_objectives::ref_11f80(var_4);
+  var_3 waittill("heli_taking_off");
+  objective_delete(var_4);
   scripts\cp\cp_objectives::freeworldid("ml_p3_exfil");
 }

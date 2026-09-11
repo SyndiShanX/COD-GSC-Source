@@ -46,16 +46,16 @@ function onprecachegametype() {
 function onstartgametype() {
   setclientnamemode("auto_change");
 
-  foreach(var1 in level.teamnamelist) {
-    scripts\mp\utility\game::setobjectivetext(var1, &"OBJECTIVES/MUGGER");
+  foreach(var_1 in level.teamnamelist) {
+    scripts\mp\utility\game::setobjectivetext(var_1, &"OBJECTIVES/MUGGER");
 
     if(level.splitscreen) {
-      scripts\mp\utility\game::setobjectivescoretext(var1, &"OBJECTIVES/MUGGER");
+      scripts\mp\utility\game::setobjectivescoretext(var_1, &"OBJECTIVES/MUGGER");
     } else {
-      scripts\mp\utility\game::setobjectivescoretext(var1, &"OBJECTIVES/MUGGER_SCORE");
+      scripts\mp\utility\game::setobjectivescoretext(var_1, &"OBJECTIVES/MUGGER_SCORE");
     }
 
-    scripts\mp\utility\game::setobjectivehinttext(var1, &"OBJECTIVES/MUGGER_HINT");
+    scripts\mp\utility\game::setobjectivehinttext(var_1, &"OBJECTIVES/MUGGER_HINT");
   }
 
   scripts\mp\spawnlogic::setactivespawnlogic("FreeForAll", "Crit_Default");
@@ -98,32 +98,32 @@ function onstartgametype() {
   thread mugger_jackpot_watch();
 }
 
-function onplayerconnect(var0) {
-  var0.tags_carried = 0;
-  var0.total_tags_banked = 0;
-  var0.assists = var0.total_tags_banked;
-  var0.pers["assists"] = var0.total_tags_banked;
-  var0.game_extrainfo = var0.tags_carried;
-  var0.muggings = [];
+function onplayerconnect(var_0) {
+  var_0.tags_carried = 0;
+  var_0.total_tags_banked = 0;
+  var_0.assists = var_0.total_tags_banked;
+  var_0.pers["assists"] = var_0.total_tags_banked;
+  var_0.game_extrainfo = var_0.tags_carried;
+  var_0.muggings = [];
 
-  if(isPlayer(var0) && !isbot(var0)) {
-    var0.dogtagsicon = var0 scripts\mp\hud_util::createicon("hud_tagcount", 48, 48);
-    var0.dogtagsicon scripts\mp\hud_util::setpoint("TOP LEFT", "TOP LEFT", 200, 0);
-    var0.dogtagsicon.alpha = 1;
-    var0.dogtagsicon.hidewheninmenu = 1;
-    var0.dogtagsicon.archived = 1;
+  if(isPlayer(var_0) && !isbot(var_0)) {
+    var_0.dogtagsicon = var_0 scripts\mp\hud_util::createicon("hud_tagcount", 48, 48);
+    var_0.dogtagsicon scripts\mp\hud_util::setpoint("TOP LEFT", "TOP LEFT", 200, 0);
+    var_0.dogtagsicon.alpha = 1;
+    var_0.dogtagsicon.hidewheninmenu = 1;
+    var_0.dogtagsicon.archived = 1;
     thread hidehudelementongameend(level);
-    var0.dogtagstext = var0 scripts\mp\hud_util::createfontstring("bigfixed", 1);
-    var0.dogtagstext scripts\mp\hud_util::setparent(var0.dogtagsicon);
-    var0.dogtagstext scripts\mp\hud_util::setpoint("CENTER", "CENTER", -24);
-    var0.dogtagstext setvalue(var0.tags_carried);
-    var0.dogtagstext.alpha = 1;
-    var0.dogtagstext.color = (1, 1, 0.5);
-    var0.dogtagstext.glowalpha = 1;
-    var0.dogtagstext.sort = 1;
-    var0.dogtagstext.hidewheninmenu = 1;
-    var0.dogtagstext.archived = 1;
-    var0.dogtagstext scripts\mp\hud::fontpulseinit(3);
+    var_0.dogtagstext = var_0 scripts\mp\hud_util::createfontstring("bigfixed", 1);
+    var_0.dogtagstext scripts\mp\hud_util::setparent(var_0.dogtagsicon);
+    var_0.dogtagstext scripts\mp\hud_util::setpoint("CENTER", "CENTER", -24);
+    var_0.dogtagstext setvalue(var_0.tags_carried);
+    var_0.dogtagstext.alpha = 1;
+    var_0.dogtagstext.color = (1, 1, 0.5);
+    var_0.dogtagstext.glowalpha = 1;
+    var_0.dogtagstext.sort = 1;
+    var_0.dogtagstext.hidewheninmenu = 1;
+    var_0.dogtagstext.archived = 1;
+    var_0.dogtagstext scripts\mp\hud::fontpulseinit(3);
     thread hidehudelementongameend(level);
     return;
   }
@@ -138,25 +138,25 @@ function onspawnplayer() {
   }
 }
 
-function hidehudelementongameend(var0) {
+function hidehudelementongameend(var_0) {
   level waittill("game_ended");
 
-  if(isDefined(var0)) {
-    var0.alpha = 0;
+  if(isDefined(var_0)) {
+    var_0.alpha = 0;
     return;
   }
 }
 
 function getspawnpoint() {
-  var0 = scripts\mp\spawnlogic::getspawnpoint(self, "none", "normal", "fallback");
-  return var0;
+  var_0 = scripts\mp\spawnlogic::getspawnpoint(self, "none", "normal", "fallback");
+  return var_0;
 }
 
-function onxpevent(var0) {}
+function onxpevent(var_0) {}
 
-function onnormaldeath(var0, var1, var2, var3, var4, var5) {
-  scripts\mp\gametypes\common::onnormaldeath(var0, var1, var2, var3, var4, var5);
-  thread spawndogtags(level, var0);
+function onnormaldeath(var_0, var_1, var_2, var_3, var_4, var_5) {
+  scripts\mp\gametypes\common::onnormaldeath(var_0, var_1, var_2, var_3, var_4, var_5);
+  thread spawndogtags(level, var_0);
 }
 
 function mugger_init_tags() {
@@ -164,61 +164,61 @@ function mugger_init_tags() {
   level.mugger_extra_tags = [];
 }
 
-function spawndogtags(var0, var1) {
-  if(isagent(var1)) {
-    var1 = var1.owner;
+function spawndogtags(var_0, var_1) {
+  if(isagent(var_1)) {
+    var_1 = var_1.owner;
   }
 
-  var2 = 0;
-  var3 = 0;
+  var_2 = 0;
+  var_3 = 0;
 
-  if(isDefined(var1)) {
-    if(var0 == var1) {
-      if(var0.tags_carried > 0) {
-        var2 = var0.tags_carried;
-        var0.tags_carried = 0;
-        var0.game_extrainfo = 0;
+  if(isDefined(var_1)) {
+    if(var_0 == var_1) {
+      if(var_0.tags_carried > 0) {
+        var_2 = var_0.tags_carried;
+        var_0.tags_carried = 0;
+        var_0.game_extrainfo = 0;
 
-        if(isPlayer(var0) && !isbot(var0)) {
-          var0.dogtagstext setvalue(var0.tags_carried);
-          var0.dogtagstext thread scripts\mp\hud::fontpulse(var0);
-          var0 thread scripts\mp\hud_message::showsplash("mugger_suicide", var2);
+        if(isPlayer(var_0) && !isbot(var_0)) {
+          var_0.dogtagstext setvalue(var_0.tags_carried);
+          var_0.dogtagstext thread scripts\mp\hud::fontpulse(var_0);
+          var_0 thread scripts\mp\hud_message::showsplash("mugger_suicide", var_2);
         }
       }
-    } else if(isDefined(var0.attackerdata) && var0.attackerdata.size > 0) {
-      if(isPlayer(var1) && isDefined(var0.attackerdata) && isDefined(var1.guid) && isDefined(var0.attackerdata[var1.guid])) {
-        var4 = var0.attackerdata[var1.guid];
+    } else if(isDefined(var_0.attackerdata) && var_0.attackerdata.size > 0) {
+      if(isPlayer(var_1) && isDefined(var_0.attackerdata) && isDefined(var_1.guid) && isDefined(var_0.attackerdata[var_1.guid])) {
+        var_4 = var_0.attackerdata[var_1.guid];
 
-        if(isDefined(var4) && isDefined(var4.attackerent) && var4.attackerent == var1) {
-          if(isDefined(var4.smeansofdeath) && (var4.smeansofdeath == "MOD_MELEE" || var4.weapon == "throwingknife_mp" && level.mugger_throwing_knife_mug_frac > 0)) {
-            var3 = 1;
+        if(isDefined(var_4) && isDefined(var_4.attackerent) && var_4.attackerent == var_1) {
+          if(isDefined(var_4.smeansofdeath) && (var_4.smeansofdeath == "MOD_MELEE" || var_4.weapon == "throwingknife_mp" && level.mugger_throwing_knife_mug_frac > 0)) {
+            var_3 = 1;
 
-            if(var0.tags_carried > 0) {
-              var2 = var0.tags_carried;
+            if(var_0.tags_carried > 0) {
+              var_2 = var_0.tags_carried;
 
-              if(var4.weapon == "throwingknife_mp" && level.mugger_throwing_knife_mug_frac < 1) {
-                var2 = int(ceil(var0.tags_carried * level.mugger_throwing_knife_mug_frac));
+              if(var_4.weapon == "throwingknife_mp" && level.mugger_throwing_knife_mug_frac < 1) {
+                var_2 = int(ceil(var_0.tags_carried * level.mugger_throwing_knife_mug_frac));
               }
 
-              var0.tags_carried -= var2;
-              var0.game_extrainfo = var0.tags_carried;
+              var_0.tags_carried -= var_2;
+              var_0.game_extrainfo = var_0.tags_carried;
 
-              if(isPlayer(var0) && !isbot(var0)) {
-                var0.dogtagstext setvalue(var0.tags_carried);
-                var0.dogtagstext thread scripts\mp\hud::fontpulse(var0);
-                var0 thread scripts\mp\hud_message::showsplash("callout_mugged", var2);
-                var0 playlocalsound("mugger_got_mugged");
+              if(isPlayer(var_0) && !isbot(var_0)) {
+                var_0.dogtagstext setvalue(var_0.tags_carried);
+                var_0.dogtagstext thread scripts\mp\hud::fontpulse(var_0);
+                var_0 thread scripts\mp\hud_message::showsplash("callout_mugged", var_2);
+                var_0 playlocalsound("mugger_got_mugged");
               }
 
-              playsoundatpos(var0.origin, "mugger_mugging");
-              var1 thread scripts\mp\hud_message::showsplash("callout_mugger", var2);
+              playsoundatpos(var_0.origin, "mugger_mugging");
+              var_1 thread scripts\mp\hud_message::showsplash("callout_mugger", var_2);
 
-              if(var4.weapon == "throwingknife_mp") {
-                var1 playlocalsound("mugger_you_mugged");
+              if(var_4.weapon == "throwingknife_mp") {
+                var_1 playlocalsound("mugger_you_mugged");
               }
             }
 
-            var1.muggings[var1.muggings.size] = gettime();
+            var_1.muggings[var_1.muggings.size] = gettime();
             thread mugger_check_muggernaut();
           }
         }
@@ -226,67 +226,67 @@ function spawndogtags(var0, var1) {
     }
   }
 
-  if(isagent(var0)) {
-    var5 = var0.origin + (0, 0, 14);
-    playsoundatpos(var5, "mp_killconfirm_tags_drop");
+  if(isagent(var_0)) {
+    var_5 = var_0.origin + (0, 0, 14);
+    playsoundatpos(var_5, "mp_killconfirm_tags_drop");
     level notify("mugger_jackpot_increment");
-    var6 = mugger_tag_temp_spawn(var0.origin, 40, 160);
-    var6.victim = var0.owner;
+    var_6 = mugger_tag_temp_spawn(var_0.origin, 40, 160);
+    var_6.victim = var_0.owner;
 
-    if(isDefined(var1) && var0 != var1) {
-      var6.attacker = var1;
+    if(isDefined(var_1) && var_0 != var_1) {
+      var_6.attacker = var_1;
       return;
     }
 
-    var6.attacker = undefined;
+    var_6.attacker = undefined;
     return;
-  } else if(isDefined(level.dogtags[var2.guid])) {
-    playFX(level.mugger_fx["vanish"], level.dogtags[var2.guid].curorigin);
-    level.dogtags[var2.guid] notify("reset");
+  } else if(isDefined(level.dogtags[var_2.guid])) {
+    playFX(level.mugger_fx["vanish"], level.dogtags[var_2.guid].curorigin);
+    level.dogtags[var_2.guid] notify("reset");
   } else {
-    GscBinSkip1(0x45, 0, spawn("script_model", (0, 0, 0)), var1);
+    GscBinSkip1(0x45, 0, spawn("script_model", (0, 0, 0)), var_1);
   }
 
-  var5 = var2.origin + (0, 0, 14);
-  level.dogtags[var2.guid].curorigin = var5;
-  level.dogtags[var2.guid].trigger.origin = var5;
-  level.dogtags[var2.guid].visuals[0].origin = var5;
-  level.dogtags[var2.guid] scripts\mp\gameobjects::initializetagpathvariables();
-  level.dogtags[var2.guid] scripts\mp\gameobjects::allowuse("any");
-  level.dogtags[var2.guid].visuals[0] show();
+  var_5 = var_2.origin + (0, 0, 14);
+  level.dogtags[var_2.guid].curorigin = var_5;
+  level.dogtags[var_2.guid].trigger.origin = var_5;
+  level.dogtags[var_2.guid].visuals[0].origin = var_5;
+  level.dogtags[var_2.guid] scripts\mp\gameobjects::initializetagpathvariables();
+  level.dogtags[var_2.guid] scripts\mp\gameobjects::allowuse("any");
+  level.dogtags[var_2.guid].visuals[0] show();
 
-  if(isDefined(var3) && var2 != var3) {
-    level.dogtags[var2.guid].attacker = var3;
+  if(isDefined(var_3) && var_2 != var_3) {
+    level.dogtags[var_2.guid].attacker = var_3;
   } else {
-    level.dogtags[var2.guid].attacker = undefined;
+    level.dogtags[var_2.guid].attacker = undefined;
   }
 
   thread timeout();
 
-  if(var5 < 5) {
-    scripts\mp\objidpoolmanager::update_objective_position(level.dogtags[var2.guid].objid, var5);
-    scripts\mp\objidpoolmanager::update_objective_state(level.dogtags[var2.guid].objid, "active");
+  if(var_5 < 5) {
+    scripts\mp\objidpoolmanager::update_objective_position(level.dogtags[var_2.guid].objid, var_5);
+    scripts\mp\objidpoolmanager::update_objective_state(level.dogtags[var_2.guid].objid, "active");
   } else {
-    mugger_tag_pile_notify(var5, "mugger_megadrop", var5, var2, var3);
+    mugger_tag_pile_notify(var_5, "mugger_megadrop", var_5, var_2, var_3);
   }
 
-  playsoundatpos(var5, "mp_killconfirm_tags_drop");
-  level.dogtags[var2.guid].temp_tag = 0;
+  playsoundatpos(var_5, "mp_killconfirm_tags_drop");
+  level.dogtags[var_2.guid].temp_tag = 0;
 
-  if(var5 == 0) {
+  if(var_5 == 0) {
     level notify("mugger_jackpot_increment");
   }
 
-  for(var9 = 0; var9 < var5; var9++) {
-    var6 = mugger_tag_temp_spawn(var2.origin, 40, 160);
-    var6.victim = var2;
+  for(var_9 = 0; var_9 < var_5; var_9++) {
+    var_6 = mugger_tag_temp_spawn(var_2.origin, 40, 160);
+    var_6.victim = var_2;
 
-    if(isDefined(var3) && var2 != var3) {
-      var6.attacker = var3;
+    if(isDefined(var_3) && var_2 != var_3) {
+      var_6.attacker = var_3;
       continue;
     }
 
-    var6.attacker = undefined;
+    var_6.attacker = undefined;
   }
 }
 
@@ -297,127 +297,127 @@ function mugger_tag_pickup_wait() {
   self endon("deleted");
 
   for(;;) {
-    self.trigger waittill("trigger", var0);
+    self.trigger waittill("trigger", var_0);
 
-    if(!scripts\mp\utility\player::isreallyalive(var0)) {
+    if(!scripts\mp\utility\player::isreallyalive(var_0)) {
       continue;
     }
 
-    if(var0 scripts\mp\utility\player::isusingremote() || isDefined(var0.spawningafterremotedeath)) {
+    if(var_0 scripts\mp\utility\player::isusingremote() || isDefined(var_0.spawningafterremotedeath)) {
       continue;
     }
 
-    if(isDefined(var0.classname) && var0.classname == "script_vehicle") {
+    if(isDefined(var_0.classname) && var_0.classname == "script_vehicle") {
       continue;
     }
 
-    thread onuse(var0);
+    thread onuse(var_0);
     return;
   }
 }
 
-function mugger_add_extra_tag(var0) {
+function mugger_add_extra_tag(var_0) {
   GscBinSkip1(0x45, 0, spawn("script_model", (0, 0, 0)));
 }
 
 function mugger_first_unused_or_oldest_extra_tag() {
-  var0 = undefined;
-  var1 = -1;
+  var_0 = undefined;
+  var_1 = -1;
 
-  foreach(var3 in level.mugger_extra_tags) {
-    if(var3.interactteam == "none") {
-      var3.last_used_time = gettime();
-      var3.visuals[0] show();
-      return var3;
+  foreach(var_3 in level.mugger_extra_tags) {
+    if(var_3.interactteam == "none") {
+      var_3.last_used_time = gettime();
+      var_3.visuals[0] show();
+      return var_3;
     }
 
-    if(!isDefined(var0) || var3.last_used_time < var1) {
-      var1 = var3.last_used_time;
-      var0 = var3;
+    if(!isDefined(var_0) || var_3.last_used_time < var_1) {
+      var_1 = var_3.last_used_time;
+      var_0 = var_3;
     }
   }
 
   if(level.mugger_extra_tags.size < level.mugger_max_extra_tags) {
-    var5 = mugger_add_extra_tag(level.mugger_extra_tags.size);
+    var_5 = mugger_add_extra_tag(level.mugger_extra_tags.size);
 
-    if(isDefined(var5)) {
-      var5.last_used_time = gettime();
-      return var5;
+    if(isDefined(var_5)) {
+      var_5.last_used_time = gettime();
+      return var_5;
     }
   }
 
-  var0.last_used_time = gettime();
-  var0 notify("reused");
-  playFX(level.mugger_fx["vanish"], var0.curorigin);
-  return var0;
+  var_0.last_used_time = gettime();
+  var_0 notify("reused");
+  playFX(level.mugger_fx["vanish"], var_0.curorigin);
+  return var_0;
 }
 
-function mugger_tag_temp_spawn(var0, var1, var2) {
-  var3 = mugger_first_unused_or_oldest_extra_tag();
-  var4 = var0 + (0, 0, 14);
-  var5 = (0, randomfloat(360), 0);
-  var6 = anglesToForward(var5);
-  var7 = randomfloatrange(40, 160);
-  var8 = var4 + var7 * var6;
-  var8 += (0, 0, 40);
-  var9 = playerphysicstrace(var4, var8);
-  var4 = var9;
-  var8 = var4 + (0, 0, -100);
-  var9 = playerphysicstrace(var4, var8);
+function mugger_tag_temp_spawn(var_0, var_1, var_2) {
+  var_3 = mugger_first_unused_or_oldest_extra_tag();
+  var_4 = var_0 + (0, 0, 14);
+  var_5 = (0, randomfloat(360), 0);
+  var_6 = anglesToForward(var_5);
+  var_7 = randomfloatrange(40, 160);
+  var_8 = var_4 + var_7 * var_6;
+  var_8 += (0, 0, 40);
+  var_9 = playerphysicstrace(var_4, var_8);
+  var_4 = var_9;
+  var_8 = var_4 + (0, 0, -100);
+  var_9 = playerphysicstrace(var_4, var_8);
 
-  if(var9[2] != var8[2]) {
-    var9 += (0, 0, 14);
+  if(var_9[2] != var_8[2]) {
+    var_9 += (0, 0, 14);
   }
 
-  var3.curorigin = var9;
-  var3.trigger.origin = var9;
-  var3.visuals[0].origin = var9;
-  var3 scripts\mp\gameobjects::initializetagpathvariables();
-  var3 scripts\mp\gameobjects::allowuse("any");
+  var_3.curorigin = var_9;
+  var_3.trigger.origin = var_9;
+  var_3.visuals[0].origin = var_9;
+  var_3 scripts\mp\gameobjects::initializetagpathvariables();
+  var_3 scripts\mp\gameobjects::allowuse("any");
   thread mugger_tag_pickup_wait();
   thread timeout();
-  return var3;
+  return var_3;
 }
 
-function mugger_tag_pile_notify(var0, var1, var2, var3, var4) {
-  level notify("mugger_tag_pile", var0);
-  var5 = scripts\mp\objidpoolmanager::requestobjectiveid(99);
+function mugger_tag_pile_notify(var_0, var_1, var_2, var_3, var_4) {
+  level notify("mugger_tag_pile", var_0);
+  var_5 = scripts\mp\objidpoolmanager::requestobjectiveid(99);
 
-  if(var5 != -1) {
-    scripts\mp\objidpoolmanager::objective_add_objective(var5, "active", var0);
-    scripts\mp\objidpoolmanager::update_objective_icon(var5, "waypoint_dogtag_pile");
+  if(var_5 != -1) {
+    scripts\mp\objidpoolmanager::objective_add_objective(var_5, "active", var_0);
+    scripts\mp\objidpoolmanager::update_objective_icon(var_5, "waypoint_dogtag_pile");
   }
 
-  level scripts\engine\utility::delaythread(5, &mugger_pile_icon_remove, var5);
+  level scripts\engine\utility::delaythread(5, &mugger_pile_icon_remove, var_5);
 
-  if(var2 >= 10) {
+  if(var_2 >= 10) {
     level.mugger_last_mega_drop = gettime();
     level.mugger_jackpot_num_tags = 0;
 
-    foreach(var7 in level.players) {
-      var7 playsoundtoplayer("mp_defcon_one", var7);
+    foreach(var_7 in level.players) {
+      var_7 playsoundtoplayer("mp_defcon_one", var_7);
 
-      if(isDefined(var3) && var7 == var3) {
+      if(isDefined(var_3) && var_7 == var_3) {
         continue;
       }
 
-      if(isDefined(var4) && var7 == var4) {
+      if(isDefined(var_4) && var_7 == var_4) {
         continue;
       }
 
-      var7 thread scripts\mp\hud_message::showsplash(var1, var2);
+      var_7 thread scripts\mp\hud_message::showsplash(var_1, var_2);
     }
 
-    var9 = newhudelem();
-    var9 setshader("waypoint_dogtag_pile", 10, 10);
-    var9 setwaypoint(0, 1, 0, 0);
-    var9.x = var0[0];
-    var9.y = var0[1];
-    var9.z = var0[2] + 32;
-    var9.alpha = 1;
-    var9 fadeovertime(5);
-    var9.alpha = 0;
-    var9 scripts\engine\utility::delaythread(5, &hudelemdestroy);
+    var_9 = newhudelem();
+    var_9 setshader("waypoint_dogtag_pile", 10, 10);
+    var_9 setwaypoint(0, 1, 0, 0);
+    var_9.x = var_0[0];
+    var_9.y = var_0[1];
+    var_9.z = var_0[2] + 32;
+    var_9.alpha = 1;
+    var_9 fadeovertime(5);
+    var_9.alpha = 0;
+    var_9 scripts\engine\utility::delaythread(5, &hudelemdestroy);
     return;
   }
 }
@@ -433,18 +433,18 @@ function mugger_monitor_tank_pickups() {
   level endon("game_ended");
 
   for(;;) {
-    var0 = getEntArray("remote_tank", "targetname");
-    var1 = getEntArray("trigger_dogtag", "targetname");
+    var_0 = getEntArray("remote_tank", "targetname");
+    var_1 = getEntArray("trigger_dogtag", "targetname");
 
-    foreach(var3 in level.players) {
-      if(isDefined(var3.using_remote_tank) && var3.using_remote_tank == 1) {
-        foreach(var5 in var0) {
-          if(isDefined(var5) && isDefined(var5.owner) && var5.owner == var3) {
-            foreach(var7 in var1) {
-              if(isDefined(var7) && isDefined(var7.dogtag)) {
-                if(isDefined(var7.dogtag.interactteam) && var7.dogtag.interactteam != "none") {
-                  if(var5 istouching(var7)) {
-                    onuse(var7.dogtag, var5.owner);
+    foreach(var_3 in level.players) {
+      if(isDefined(var_3.using_remote_tank) && var_3.using_remote_tank == 1) {
+        foreach(var_5 in var_0) {
+          if(isDefined(var_5) && isDefined(var_5.owner) && var_5.owner == var_3) {
+            foreach(var_7 in var_1) {
+              if(isDefined(var_7) && isDefined(var_7.dogtag)) {
+                if(isDefined(var_7.dogtag.interactteam) && var_7.dogtag.interactteam != "none") {
+                  if(var_5 istouching(var_7)) {
+                    onuse(var_7.dogtag, var_5.owner);
                   }
                 }
               }
@@ -462,15 +462,15 @@ function mugger_monitor_remote_uav_pickups() {
   level endon("game_ended");
 
   for(;;) {
-    var0 = getEntArray("trigger_dogtag", "targetname");
+    var_0 = getEntArray("trigger_dogtag", "targetname");
 
-    foreach(var2 in level.players) {
-      if(isDefined(var2) && isDefined(var2.remoteuav)) {
-        foreach(var4 in var0) {
-          if(isDefined(var4) && isDefined(var4.dogtag)) {
-            if(isDefined(var4.dogtag.interactteam) && var4.dogtag.interactteam != "none") {
-              if(var2.remoteuav istouching(var4)) {
-                onuse(var4.dogtag, var2);
+    foreach(var_2 in level.players) {
+      if(isDefined(var_2) && isDefined(var_2.remoteuav)) {
+        foreach(var_4 in var_0) {
+          if(isDefined(var_4) && isDefined(var_4.dogtag)) {
+            if(isDefined(var_4.dogtag.interactteam) && var_4.dogtag.interactteam != "none") {
+              if(var_2.remoteuav istouching(var_4)) {
+                onuse(var_4.dogtag, var_2);
               }
             }
           }
@@ -493,62 +493,62 @@ function mugger_check_muggernaut() {
     return;
   }
 
-  var0 = self.muggings[self.muggings.size - 1];
-  var1 = var0 - level.mugger_muggernaut_window;
-  var2 = [];
+  var_0 = self.muggings[self.muggings.size - 1];
+  var_1 = var_0 - level.mugger_muggernaut_window;
+  var_2 = [];
 
-  foreach(var4 in self.muggings) {
-    if(var4 >= var1) {
-      var2 = var4;
+  foreach(var_4 in self.muggings) {
+    if(var_4 >= var_1) {
+      var_2 = var_4;
     }
   }
 
-  if(var2.size >= level.mugger_muggernaut_muggings_needed) {
+  if(var_2.size >= level.mugger_muggernaut_muggings_needed) {
     thread scripts\mp\utility\points::giveunifiedpoints("muggernaut");
     mugger_bank_tags(1, 1);
     self.muggings = [];
     return;
   }
 
-  self.muggings = var2;
+  self.muggings = var_2;
 }
 
-function mugger_pile_icon_remove(var0) {
-  scripts\mp\objidpoolmanager::returnobjectiveid(var0);
+function mugger_pile_icon_remove(var_0) {
+  scripts\mp\objidpoolmanager::returnobjectiveid(var_0);
 }
 
-function _hidefromplayer(var0) {
+function _hidefromplayer(var_0) {
   self hide();
 
-  foreach(var2 in level.players) {
-    if(var2 != var0) {
-      self showtoplayer(var2);
+  foreach(var_2 in level.players) {
+    if(var_2 != var_0) {
+      self showtoplayer(var_2);
     }
   }
 }
 
-function onuse(var0) {
-  if(isDefined(var0.owner)) {
-    var0 = var0.owner;
+function onuse(var_0) {
+  if(isDefined(var_0.owner)) {
+    var_0 = var_0.owner;
   }
 
   if(self.temp_tag) {
     self.trigger playSound("mp_killconfirm_tags_deny");
-  } else if(isDefined(self.attacker) && var0 == self.attacker) {
+  } else if(isDefined(self.attacker) && var_0 == self.attacker) {
     self.trigger playSound("mp_killconfirm_tags_pickup");
-    var0 scripts\mp\utility\stats::incpersstat("confirmed", 1);
-    var0 scripts\mp\persistence::statsetchild("round", "confirmed", var0.pers["confirmed"]);
+    var_0 scripts\mp\utility\stats::incpersstat("confirmed", 1);
+    var_0 scripts\mp\persistence::statsetchild("round", "confirmed", var_0.pers["confirmed"]);
   } else {
     self.trigger playSound("mp_killconfirm_tags_deny");
-    var0 scripts\mp\utility\stats::incpersstat("denied", 1);
-    var0 scripts\mp\persistence::statsetchild("round", "denied", var0.pers["denied"]);
+    var_0 scripts\mp\utility\stats::incpersstat("denied", 1);
+    var_0 scripts\mp\persistence::statsetchild("round", "denied", var_0.pers["denied"]);
   }
 
   thread onpickup();
   resettags(1);
 }
 
-function onpickup(var0, var1, var2) {
+function onpickup(var_0, var_1, var_2) {
   level endon("game_ended");
   self endon("disconnect");
 
@@ -572,31 +572,31 @@ function mugger_delayed_banking() {
   }
 
   wait 1.5;
-  var0 = level.mugger_bank_limit - self.tags_carried;
+  var_0 = level.mugger_bank_limit - self.tags_carried;
 
-  if(var0 > 0 && var0 <= 5) {
-    var1 = undefined;
+  if(var_0 > 0 && var_0 <= 5) {
+    var_1 = undefined;
 
-    switch (var0) {
+    switch (var_0) {
       case 1:
-        var1 = "mugger_1more";
+        var_1 = "mugger_1more";
         break;
       case 2:
-        var1 = "mugger_2more";
+        var_1 = "mugger_2more";
         break;
       case 3:
-        var1 = "mugger_3more";
+        var_1 = "mugger_3more";
         break;
       case 4:
-        var1 = "mugger_4more";
+        var_1 = "mugger_4more";
         break;
       case 5:
-        var1 = "mugger_5more";
+        var_1 = "mugger_5more";
         break;
     }
 
-    if(isDefined(var1)) {
-      self playsoundtoplayer(var1, self);
+    if(isDefined(var_1)) {
+      self playsoundtoplayer(var_1, self);
     }
   }
 
@@ -604,26 +604,26 @@ function mugger_delayed_banking() {
   mugger_bank_tags(0);
 }
 
-function mugger_bank_tags(var0, var1) {
-  var2 = 0;
+function mugger_bank_tags(var_0, var_1) {
+  var_2 = 0;
 
-  if(var0 == 1) {
-    var2 = self.tags_carried;
+  if(var_0 == 1) {
+    var_2 = self.tags_carried;
   } else {
-    var3 = self.tags_carried % level.mugger_bank_limit;
-    var2 = self.tags_carried - var3;
+    var_3 = self.tags_carried % level.mugger_bank_limit;
+    var_2 = self.tags_carried - var_3;
   }
 
-  if(var2 > 0) {
-    self.tags_to_bank = var2;
+  if(var_2 > 0) {
+    self.tags_to_bank = var_2;
 
-    if(!isDefined(var1)) {
-      thread scripts\mp\hud_message::showsplash("callout_tags_banked", var2);
+    if(!isDefined(var_1)) {
+      thread scripts\mp\hud_message::showsplash("callout_tags_banked", var_2);
     }
 
     thread scripts\mp\utility\points::giveunifiedpoints("tags_banked", undefined, self.tags_to_bank * scripts\mp\rank::getscoreinfovalue("kill_confirmed"));
-    self.total_tags_banked += var2;
-    self.tags_carried -= var2;
+    self.total_tags_banked += var_2;
+    self.tags_carried -= var_2;
     self.game_extrainfo = self.tags_carried;
 
     if(isPlayer(self) && !isbot(self)) {
@@ -637,18 +637,18 @@ function mugger_bank_tags(var0, var1) {
   }
 }
 
-function onplayerscore(var0, var1) {
-  if(var0 == "tags_banked" && isDefined(var1) && isDefined(var1.tags_to_bank) && var1.tags_to_bank > 0) {
-    var2 = var1.tags_to_bank * scripts\mp\rank::getscoreinfovalue("kill_confirmed");
-    var1.tags_to_bank = 0;
-    return var2;
+function onplayerscore(var_0, var_1) {
+  if(var_0 == "tags_banked" && isDefined(var_1) && isDefined(var_1.tags_to_bank) && var_1.tags_to_bank > 0) {
+    var_2 = var_1.tags_to_bank * scripts\mp\rank::getscoreinfovalue("kill_confirmed");
+    var_1.tags_to_bank = 0;
+    return var_2;
   }
 
   return 0;
 }
 
-function resettags(var0) {
-  if(!var0) {
+function resettags(var_0) {
+  if(!var_0) {
     level notify("mugger_jackpot_increment");
   }
 
@@ -679,41 +679,41 @@ function timeout() {
   self notify("timeout_start");
   self endon("timeout_start");
   level scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(27);
-  var0 = 3;
+  var_0 = 3;
 
-  while(var0 > 0) {
+  while(var_0 > 0) {
     self.visuals[0] hide();
     wait 0.25;
     self.visuals[0] show();
     wait 0.25;
-    var0 -= 0.5;
+    var_0 -= 0.5;
   }
 
   playFX(level.mugger_fx["vanish"], self.curorigin);
   thread resettags(0);
 }
 
-function clearonvictimdisconnect(var0) {
+function clearonvictimdisconnect(var_0) {
   level endon("game_ended");
-  var1 = var0.guid;
-  var0 waittill("disconnect");
+  var_1 = var_0.guid;
+  var_0 waittill("disconnect");
 
-  if(isDefined(level.dogtags[var1])) {
-    level.dogtags[var1] scripts\mp\gameobjects::allowuse("none");
-    playFX(level.mugger_fx["vanish"], level.dogtags[var1].curorigin);
-    level.dogtags[var1] notify("reset");
+  if(isDefined(level.dogtags[var_1])) {
+    level.dogtags[var_1] scripts\mp\gameobjects::allowuse("none");
+    playFX(level.mugger_fx["vanish"], level.dogtags[var_1].curorigin);
+    level.dogtags[var_1] notify("reset");
     waitframe();
 
-    if(isDefined(level.dogtags[var1])) {
-      scripts\mp\objidpoolmanager::returnobjectiveid(level.dogtags[var1].objid);
-      level.dogtags[var1].trigger delete();
+    if(isDefined(level.dogtags[var_1])) {
+      scripts\mp\objidpoolmanager::returnobjectiveid(level.dogtags[var_1].objid);
+      level.dogtags[var_1].trigger delete();
 
-      for(var2 = 0; var2 < level.dogtags[var1].visuals.size; var2++) {
-        level.dogtags[var1].visuals[var2] delete();
+      for(var_2 = 0; var_2 < level.dogtags[var_1].visuals.size; var_2++) {
+        level.dogtags[var_1].visuals[var_2] delete();
       }
 
-      level.dogtags[var1] notify("deleted");
-      level.dogtags[var1] = undefined;
+      level.dogtags[var_1] notify("deleted");
+      level.dogtags[var_1] = undefined;
       return;
     }
 
@@ -724,8 +724,8 @@ function clearonvictimdisconnect(var0) {
 function ontimelimit() {
   level notify("banking_all");
 
-  foreach(var1 in level.players) {
-    mugger_bank_tags(var1, 1);
+  foreach(var_1 in level.players) {
+    mugger_bank_tags(var_1, 1);
   }
 
   wait 0.1;
@@ -747,11 +747,11 @@ function mugger_jackpot_watch() {
 
   for(;;) {
     level waittill("mugger_jackpot_increment");
-    var0 = 1;
+    var_0 = 1;
 
-    if(var0) {
+    if(var_0) {
       level.mugger_jackpot_num_tags++;
-      var1 = clamp(float(level.mugger_jackpot_num_tags / level.mugger_jackpot_limit), 0, 1);
+      var_1 = clamp(float(level.mugger_jackpot_num_tags / level.mugger_jackpot_limit), 0, 1);
 
       if(level.mugger_jackpot_num_tags >= level.mugger_jackpot_limit) {
         if(isDefined(level.mugger_jackpot_text)) {
@@ -781,16 +781,16 @@ function mugger_jackpot_drop() {
   level endon("game_ended");
   level notify("reset_airdrop");
   level endon("reset_airdrop");
-  var0 = level.mugger_dropzones[level.script][randomint(level.mugger_dropzones[level.script].size)];
-  var0 += (randomintrange(-50, 50), randomintrange(-50, 50), 0);
+  var_0 = level.mugger_dropzones[level.script][randomint(level.mugger_dropzones[level.script].size)];
+  var_0 += (randomintrange(-50, 50), randomintrange(-50, 50), 0);
 
   for(;;) {
-    var1 = level.players[0];
-    var2 = 1;
+    var_1 = level.players[0];
+    var_2 = 1;
 
-    if(isDefined(var1) && scripts\mp\utility\killstreak::currentactivevehiclecount() < scripts\mp\utility\killstreak::maxvehiclesallowed() && level.fauxvehiclecount + var2 < scripts\mp\utility\killstreak::maxvehiclesallowed() && scripts\cp_mp\killstreaks\airdrop::getnumdroppedcrates() < 8) {
-      foreach(var4 in level.players) {
-        var4 thread scripts\mp\hud_message::showsplash("mugger_jackpot_incoming");
+    if(isDefined(var_1) && scripts\mp\utility\killstreak::currentactivevehiclecount() < scripts\mp\utility\killstreak::maxvehiclesallowed() && level.fauxvehiclecount + var_2 < scripts\mp\utility\killstreak::maxvehiclesallowed() && scripts\cp_mp\killstreaks\airdrop::getnumdroppedcrates() < 8) {
+      foreach(var_4 in level.players) {
+        var_4 thread scripts\mp\hud_message::showsplash("mugger_jackpot_incoming");
       }
 
       break;
@@ -803,21 +803,21 @@ function mugger_jackpot_drop() {
   thread mugger_jackpot_run(level);
 }
 
-function mugger_jackpot_pile_notify(var0, var1, var2) {
+function mugger_jackpot_pile_notify(var_0, var_1, var_2) {
   if(!isDefined(level.jackpotpileobjid)) {
     level.jackpotpileobjid = scripts\mp\objidpoolmanager::requestobjectiveid(99);
 
     if(level.jackpotpileobjid != -1) {
-      scripts\mp\objidpoolmanager::objective_add_objective(level.jackpotpileobjid, "active", var0);
+      scripts\mp\objidpoolmanager::objective_add_objective(level.jackpotpileobjid, "active", var_0);
       scripts\mp\objidpoolmanager::update_objective_icon(level.jackpotpileobjid, "waypoint_jackpot");
     }
   } else if(level.jackpotpileobjid != -1) {
-    scripts\mp\objidpoolmanager::update_objective_position(level.jackpotpileobjid, var0);
+    scripts\mp\objidpoolmanager::update_objective_position(level.jackpotpileobjid, var_0);
   }
 
-  if(var2 >= 10) {
-    foreach(var4 in level.players) {
-      var4 playlocalsound(game["music"]["victory_" + var4.pers["team"]]);
+  if(var_2 >= 10) {
+    foreach(var_4 in level.players) {
+      var_4 playlocalsound(game["music"]["victory_" + var_4.pers["team"]]);
     }
 
     if(!isDefined(level.jackpotpileicon)) {
@@ -826,9 +826,9 @@ function mugger_jackpot_pile_notify(var0, var1, var2) {
       level.jackpotpileicon setwaypoint(0, 1, 0, 0);
     }
 
-    level.jackpotpileicon.x = var0[0];
-    level.jackpotpileicon.y = var0[1];
-    level.jackpotpileicon.z = var0[2] + 12;
+    level.jackpotpileicon.x = var_0[0];
+    level.jackpotpileicon.y = var_0[1];
+    level.jackpotpileicon.z = var_0[2] + 12;
     level.jackpotpileicon.alpha = 0.75;
     return;
   }
@@ -844,22 +844,22 @@ function mugger_jackpot_pile_notify_cleanup() {
   level.jackpotpileicon scripts\engine\utility::delaythread(2, &hudelemdestroy);
 }
 
-function mugger_jackpot_fx(var0) {
+function mugger_jackpot_fx(var_0) {
   mugger_jackpot_fx_cleanup();
-  var1 = var0 + (0, 0, 30);
-  var2 = var0 + (0, 0, -1000);
-  var3 = scripts\engine\trace::ray_trace(var1, var2, undefined, scripts\engine\trace::create_default_contents(1));
-  level.jackpot_zone.origin = var3["position"] + (0, 0, 1);
+  var_1 = var_0 + (0, 0, 30);
+  var_2 = var_0 + (0, 0, -1000);
+  var_3 = scripts\engine\trace::ray_trace(var_1, var_2, undefined, scripts\engine\trace::create_default_contents(1));
+  level.jackpot_zone.origin = var_3["position"] + (0, 0, 1);
   level.jackpot_zone show();
-  var4 = vectortoangles(var3["normal"]);
-  var5 = anglesToForward(var4);
-  var6 = anglestoright(var4);
-  thread spawnfxdelay(var3["position"], var5, var6, 0.5);
+  var_4 = vectortoangles(var_3["normal"]);
+  var_5 = anglesToForward(var_4);
+  var_6 = anglestoright(var_4);
+  thread spawnfxdelay(var_3["position"], var_5, var_6, 0.5);
   wait 0.1;
   playFXOnTag(level.mugger_fx["smoke"], level.jackpot_zone, "tag_fx");
 
-  foreach(var8 in level.players) {
-    var8.mugger_fx_playing = 1;
+  foreach(var_8 in level.players) {
+    var_8.mugger_fx_playing = 1;
   }
 
   level.jackpot_zone.mugger_fx_playing = 1;
@@ -881,13 +881,13 @@ function mugger_jackpot_fx_cleanup() {
   }
 }
 
-function spawnfxdelay(var0, var1, var2, var3) {
+function spawnfxdelay(var_0, var_1, var_2, var_3) {
   if(isDefined(level.jackpot_targetfx)) {
     level.jackpot_targetfx delete();
   }
 
-  wait var3;
-  level.jackpot_targetfx = spawnfx(level.mugger_targetfxid, var0, var1, var2);
+  wait var_3;
+  level.jackpot_targetfx = spawnfx(level.mugger_targetfxid, var_0, var_1, var_2);
   triggerfx(level.jackpot_targetfx);
 }
 
@@ -904,26 +904,26 @@ function waitreplaysmokefxfornewplayer() {
   }
 }
 
-function mugger_jackpot_run(var0) {
+function mugger_jackpot_run(var_0) {
   level endon("game_ended");
   level endon("jackpot_timeout");
   level notify("jackpot_stop");
-  mugger_jackpot_pile_notify(var0, "mugger_jackpot", level.mugger_jackpot_tags_unspawned);
+  mugger_jackpot_pile_notify(var_0, "mugger_jackpot", level.mugger_jackpot_tags_unspawned);
   thread mugger_jackpot_fx(level);
   thread mugger_jackpot_abort_after_time(level);
-  level waittill("airdrop_jackpot_landed", var0);
+  level waittill("airdrop_jackpot_landed", var_0);
 
   if(level.jackpotpileobjid != -1) {
-    scripts\mp\objidpoolmanager::update_objective_position(level.jackpotpileobjid, var0);
+    scripts\mp\objidpoolmanager::update_objective_position(level.jackpotpileobjid, var_0);
   }
 
-  level.jackpotpileicon.x = var0[0];
-  level.jackpotpileicon.y = var0[1];
-  level.jackpotpileicon.z = var0[2] + 32;
+  level.jackpotpileicon.x = var_0[0];
+  level.jackpotpileicon.y = var_0[1];
+  level.jackpotpileicon.z = var_0[2] + 32;
 
-  foreach(var2 in level.players) {
-    var2 playsoundtoplayer("mp_defcon_one", var2);
-    var2 thread scripts\mp\hud_message::showsplash("mugger_jackpot", level.mugger_jackpot_tags_unspawned);
+  foreach(var_2 in level.players) {
+    var_2 playsoundtoplayer("mp_defcon_one", var_2);
+    var_2 thread scripts\mp\hud_message::showsplash("mugger_jackpot", level.mugger_jackpot_tags_unspawned);
   }
 
   level.mugger_jackpot_tags_spawned = 0;
@@ -931,8 +931,8 @@ function mugger_jackpot_run(var0) {
   while(level.mugger_jackpot_tags_unspawned > 0) {
     if(level.mugger_jackpot_tags_spawned < 10) {
       level.mugger_jackpot_tags_unspawned--;
-      var4 = mugger_tag_temp_spawn(var0, 0, 400);
-      var4.jackpot_tag = 1;
+      var_4 = mugger_tag_temp_spawn(var_0, 0, 400);
+      var_4.jackpot_tag = 1;
       level.mugger_jackpot_tags_spawned++;
       thread mugger_jackpot_abort_after_time(level);
       wait 0.1;
@@ -958,15 +958,15 @@ function mugger_jackpot_cleanup() {
   thread mugger_jackpot_watch();
 }
 
-function mugger_jackpot_abort_after_time(var0) {
+function mugger_jackpot_abort_after_time(var_0) {
   level endon("jackpot_cleanup");
   level notify("jackpot_abort_after_time");
   level endon("jackpot_abort_after_time");
-  wait var0;
+  wait var_0;
   level notify("jackpot_timeout");
 }
 
-function muggercratethink(var0) {
+function muggercratethink(var_0) {
   self endon("death");
   level notify("airdrop_jackpot_landed", self.origin);
   wait 0.5;
@@ -975,14 +975,14 @@ function muggercratethink(var0) {
 
 function createdropzones() {
   level.mugger_dropzones = [];
-  var0 = undefined;
+  var_0 = undefined;
 
-  if(isDefined(var0) && var0.size) {
-    var1 = 0;
+  if(isDefined(var_0) && var_0.size) {
+    var_1 = 0;
 
-    foreach(var3 in var0) {
-      level.mugger_dropzones[level.script][var1] = var3.origin;
-      var1++;
+    foreach(var_3 in var_0) {
+      level.mugger_dropzones[level.script][var_1] = var_3.origin;
+      var_1++;
     }
 
     return;
@@ -1083,7 +1083,7 @@ function createdropzones() {
   level.mugger_dropzones["mp_bravo"][4] = (1438, 842, 1272);
 }
 
-function onsuicidedeath(var0) {
-  thread spawndogtags(level, var0);
-  scripts\mp\gametypes\common::oncommonsuicidedeath(var0);
+function onsuicidedeath(var_0) {
+  thread spawndogtags(level, var_0);
+  scripts\mp\gametypes\common::oncommonsuicidedeath(var_0);
 }

@@ -9,36 +9,36 @@ function class_progression_init() {
   }
 }
 
-function get_player_class(var0) {
-  if(!isDefined(var0)) {
-    var0 = self;
+function get_player_class(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = self;
   }
 
-  var1 = var0 scripts\cp\utility::getplayerdataloadoutgroup();
-  var2 = var0 getplayerdata(level.loadoutsgroup, "squadMembers", "cpFieldUpgrade");
+  var_1 = var_0 scripts\cp\utility::getplayerdataloadoutgroup();
+  var_2 = var_0 getplayerdata(level.loadoutsgroup, "squadMembers", "cpFieldUpgrade");
 }
 
-function give_player_class(var0) {
+function give_player_class(var_0) {
   self notify("giving_class");
   scripts\cp\perks\cp_perks::init_each_perk();
-  var1 = scripts\cp\utility::getplayerdataloadoutgroup();
-  var2 = scripts\cp\cp_loadout::cac_getloadoutselectedidx();
-  var3 = "none";
+  var_1 = scripts\cp\utility::getplayerdataloadoutgroup();
+  var_2 = scripts\cp\cp_loadout::cac_getloadoutselectedidx();
+  var_3 = "none";
 
   if(!scripts\cp\utility::tryingtoleave()) {
     self setviewkickscale(0.5);
 
-    for(var4 = 0; var4 < 3; var4++) {
-      var5 = var4;
+    for(var_4 = 0; var_4 < 3; var_4++) {
+      var_5 = var_4;
 
-      if(isDefined(var0)) {
-        var6 = scripts\cp\cp_loadout::table_getperk(level.classtablename, var0, var4);
+      if(isDefined(var_0)) {
+        var_6 = scripts\cp\cp_loadout::table_getperk(level.classtablename, var_0, var_4);
       } else {
-        var6 = self getplayerdata(level.loadoutsgroup, "squadMembers", "loadouts", var2, "loadoutPerks", var5);
+        var_6 = self getplayerdata(level.loadoutsgroup, "squadMembers", "loadouts", var_2, "loadoutPerks", var_5);
       }
 
-      if(isDefined(var6)) {
-        scripts\cp\utility::giveperk(var6);
+      if(isDefined(var_6)) {
+        scripts\cp\utility::giveperk(var_6);
       }
     }
   }
@@ -62,9 +62,9 @@ function give_crusader_class() {
 
 function ref_12bc8() {}
 
-function wait_and_give_perk(var0, var1) {
-  wait var1;
-  scripts\cp\utility::giveperk(var0);
+function wait_and_give_perk(var_0, var_1) {
+  wait var_1;
+  scripts\cp\utility::giveperk(var_0);
 }
 
 function give_tank_class() {
@@ -73,23 +73,23 @@ function give_tank_class() {
 }
 
 function screenent() {
-  var0 = self getcurrentweapon();
+  var_0 = self getcurrentweapon();
 
-  if(scripts\cp\cp_weapon::is_launcher(var0) && !scripts\cp\cp_weapon::is_killstreak_weapon(var0)) {
-    var0 = scripts\cp\cp_weapon::add_launcher_xmags(var0);
+  if(scripts\cp\cp_weapon::is_launcher(var_0) && !scripts\cp\cp_weapon::is_killstreak_weapon(var_0)) {
+    var_0 = scripts\cp\cp_weapon::add_launcher_xmags(var_0);
     return;
   }
 }
 
 function ref_12bf8() {
-  var0 = self getcurrentweapon();
+  var_0 = self getcurrentweapon();
 
-  if(scripts\cp\cp_weapon::is_launcher(var0) && !scripts\cp\cp_weapon::is_killstreak_weapon(var0)) {
-    var1 = self getweaponammoclip(var0);
-    var2 = self getweaponammostock(var0);
-    var0 = scripts\cp\cp_weapon::ref_12bda(var0);
-    self setweaponammoclip(var0, var1);
-    self setweaponammostock(var0, var2);
+  if(scripts\cp\cp_weapon::is_launcher(var_0) && !scripts\cp\cp_weapon::is_killstreak_weapon(var_0)) {
+    var_1 = self getweaponammoclip(var_0);
+    var_2 = self getweaponammostock(var_0);
+    var_0 = scripts\cp\cp_weapon::ref_12bda(var_0);
+    self setweaponammoclip(var_0, var_1);
+    self setweaponammostock(var_0, var_2);
     return;
   }
 }
@@ -116,9 +116,9 @@ function give_engineer_class() {
 function ref_12bca() {}
 
 function give_default_class() {
-  var0 = scripts\engine\utility::random(["medic", "tank", "crusader", "assault", "hunter", "engineer"]);
+  var_0 = scripts\engine\utility::random(["medic", "tank", "crusader", "assault", "hunter", "engineer"]);
 
-  switch (var0) {
+  switch (var_0) {
     case "medic":
       give_medic_class();
       break;
@@ -140,78 +140,78 @@ function give_default_class() {
 }
 
 function init_player_sessiondata() {
-  var0 = self;
-  var0 setplayerdata("cp", "CPSession", "skill_level", 1, 0);
-  var0 setplayerdata("cp", "CPSession", "skill_level", 2, 0);
-  var0 setplayerdata("cp", "CPSession", "skill_level", 3, 0);
-  var0 setplayerdata("cp", "CPSession", "skill_level", 4, 0);
-  var0 setplayerdata("cp", "CPSession", "skill_points", 0);
+  var_0 = self;
+  var_0 setplayerdata("cp", "CPSession", "skill_level", 1, 0);
+  var_0 setplayerdata("cp", "CPSession", "skill_level", 2, 0);
+  var_0 setplayerdata("cp", "CPSession", "skill_level", 3, 0);
+  var_0 setplayerdata("cp", "CPSession", "skill_level", 4, 0);
+  var_0 setplayerdata("cp", "CPSession", "skill_points", 0);
 }
 
 function randomize_player_sessiondata() {
-  foreach(var1 in level.players) {
-    var1 setplayerdata("cp", "CPSession", "skill_level", 1, randomint(5));
-    var1 setplayerdata("cp", "CPSession", "skill_level", 2, randomint(5));
-    var1 setplayerdata("cp", "CPSession", "skill_level", 3, randomint(5));
-    var1 setplayerdata("cp", "CPSession", "skill_level", 4, randomint(5));
+  foreach(var_1 in level.players) {
+    var_1 setplayerdata("cp", "CPSession", "skill_level", 1, randomint(5));
+    var_1 setplayerdata("cp", "CPSession", "skill_level", 2, randomint(5));
+    var_1 setplayerdata("cp", "CPSession", "skill_level", 3, randomint(5));
+    var_1 setplayerdata("cp", "CPSession", "skill_level", 4, randomint(5));
   }
 }
 
-function give_skill_points(var0) {
-  var1 = self getplayerdata("cp", "CPSession", "skill_points");
-  self setplayerdata("cp", "CPSession", "skill_points", var1 + var0);
+function give_skill_points(var_0) {
+  var_1 = self getplayerdata("cp", "CPSession", "skill_points");
+  self setplayerdata("cp", "CPSession", "skill_points", var_1 + var_0);
 }
 
-function take_skill_points(var0) {
-  var1 = self getplayerdata("cp", "CPSession", "skill_points");
-  self setplayerdata("cp", "CPSession", "skill_points", var1 - var0);
+function take_skill_points(var_0) {
+  var_1 = self getplayerdata("cp", "CPSession", "skill_points");
+  self setplayerdata("cp", "CPSession", "skill_points", var_1 - var_0);
 }
 
-function giveskillpointsthruluinotify(var0) {
-  var1 = self getplayerdata("cp", "CPSession", "skill_level", var0);
-  var2 = self.skill_names[var0 - 1];
-  add_skill_point_to_skill(var2, 1);
+function giveskillpointsthruluinotify(var_0) {
+  var_1 = self getplayerdata("cp", "CPSession", "skill_level", var_0);
+  var_2 = self.skill_names[var_0 - 1];
+  add_skill_point_to_skill(var_2, 1);
 }
 
-function set_class_playerdata(var0) {
-  switch (var0) {
+function set_class_playerdata(var_0) {
+  switch (var_0) {
     case "assault":
-      var1 = 1;
+      var_1 = 1;
       break;
     case "tank":
-      var1 = 2;
+      var_1 = 2;
       break;
     case "medic":
-      var1 = 3;
+      var_1 = 3;
       break;
     case "hunter":
-      var1 = 4;
+      var_1 = 4;
       break;
     default:
-      var1 = 0;
+      var_1 = 0;
       break;
   }
 }
 
 function reload_on_kill() {}
 
-function add_skill_point_to_skill(var0, var1) {}
+function add_skill_point_to_skill(var_0, var_1) {}
 
-function debug_give_class(var0) {
-  give_player_class(var0);
+function debug_give_class(var_0) {
+  give_player_class(var_0);
 }
 
-function return_wbk_version_of_weapon(var0, var1, var2) {
+function return_wbk_version_of_weapon(var_0, var_1, var_2) {
   level endon("game_ended");
-  var0 endon("disconnect");
+  var_0 endon("disconnect");
 
-  if(!istrue(var0.weaponkitinitialized)) {
-    var0 waittill("player_weapon_build_kit_initialized");
+  if(!istrue(var_0.weaponkitinitialized)) {
+    var_0 waittill("player_weapon_build_kit_initialized");
   }
 
-  if(isDefined(var0.weapon_build_models[var1])) {
-    return asmdevgetallstates(var0.weapon_build_models[var1]);
+  if(isDefined(var_0.weapon_build_models[var_1])) {
+    return asmdevgetallstates(var_0.weapon_build_models[var_1]);
   }
 
-  return var2;
+  return var_2;
 }

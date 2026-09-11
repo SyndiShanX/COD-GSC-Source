@@ -16,55 +16,55 @@ function init() {
 
 function setupchallengelocales() {
   level.localetriggers = [];
-  var0 = getEntArray("locale_area_trigger", "targetname");
+  var_0 = getEntArray("locale_area_trigger", "targetname");
 
-  if(isDefined(var0) && var0.size > 0) {
-    foreach(var2 in var0) {
-      if(!isDefined(var2.script_noteworthy)) {
+  if(isDefined(var_0) && var_0.size > 0) {
+    foreach(var_2 in var_0) {
+      if(!isDefined(var_2.script_noteworthy)) {
         continue;
       }
 
-      switch (var2.script_noteworthy) {
+      switch (var_2.script_noteworthy) {
         case "downtown":
-          var2.localeid = 0;
+          var_2.localeid = 0;
           break;
         case "stadium":
-          var2.localeid = 1;
+          var_2.localeid = 1;
           break;
         case "tvstation":
-          var2.localeid = 2;
+          var_2.localeid = 2;
           break;
         case "hospital":
-          var2.localeid = 3;
+          var_2.localeid = 3;
           break;
         case "airport":
-          var2.localeid = 4;
+          var_2.localeid = 4;
           break;
         case "dam":
-          var2.localeid = 5;
+          var_2.localeid = 5;
           break;
         case "scrapyard":
-          var2.localeid = 6;
+          var_2.localeid = 6;
           break;
         case "trainstation":
-          var2.localeid = 7;
+          var_2.localeid = 7;
           break;
         case "quarry":
-          var2.localeid = 8;
+          var_2.localeid = 8;
           break;
         case "lumbermill":
-          var2.localeid = 9;
+          var_2.localeid = 9;
           break;
         case "port":
-          var2.localeid = 10;
+          var_2.localeid = 10;
           break;
         case "gulag":
-          var2.localeid = 11;
+          var_2.localeid = 11;
           break;
       }
     }
 
-    level.localetriggers = var0;
+    level.localetriggers = var_0;
     return;
   }
 }
@@ -89,145 +89,145 @@ function challengesenabledforplayer() {
   return true;
 }
 
-function onplayerkilled(var0, var1, var2, var3, var4, var5, var6, var7) {
-  if(!challengesenabledforplayer(var1)) {
+function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  if(!challengesenabledforplayer(var_1)) {
     return;
   }
 
-  var8 = self;
+  var_8 = self;
 
-  if(!isPlayer(var1)) {
-    if(isDefined(var0) && isPlayer(var0)) {
-      var1 = var0;
+  if(!isPlayer(var_1)) {
+    if(isDefined(var_0) && isPlayer(var_0)) {
+      var_1 = var_0;
     } else {
       return;
     }
   }
 
-  if(!scripts\cp\utility\player::isfriendly(var1.team, var8)) {
-    var9 = scripts\cp\cp_equipment::getequipmentreffromweapon(var5);
+  if(!scripts\cp\utility\player::isfriendly(var_1.team, var_8)) {
+    var_9 = scripts\cp\cp_equipment::getequipmentreffromweapon(var_5);
 
-    if(!isDefined(var9)) {
-      var9 = scripts\cp\utility::relic_nuketimer_globalthread(var5.basename);
+    if(!isDefined(var_9)) {
+      var_9 = scripts\cp\utility::relic_nuketimer_globalthread(var_5.basename);
     }
 
-    switch (var9) {
+    switch (var_9) {
       case "iw8_health_marker_cp":
       case "iw8_adrenaline_marker_cp":
       case "iw8_armor_marker_cp":
       case "iw8_ammo_marker_cp":
-        var9 = "support_box_mp";
+        var_9 = "support_box_mp";
         break;
       default:
         break;
     }
 
-    var10 = "";
+    var_10 = "";
 
-    if(isDefined(var1.secondaryweaponobj)) {
-      if(var5 == var1.primaryweaponobj) {
-        var10 = scripts\cp\utility::relic_nuketimer_globalthread(var1.secondaryweaponobj.basename);
-      } else if(var5 == var1.secondaryweaponobj) {
-        var10 = scripts\cp\utility::relic_nuketimer_globalthread(var1.primaryweaponobj.basename);
+    if(isDefined(var_1.secondaryweaponobj)) {
+      if(var_5 == var_1.primaryweaponobj) {
+        var_10 = scripts\cp\utility::relic_nuketimer_globalthread(var_1.secondaryweaponobj.basename);
+      } else if(var_5 == var_1.secondaryweaponobj) {
+        var_10 = scripts\cp\utility::relic_nuketimer_globalthread(var_1.primaryweaponobj.basename);
       }
     }
 
-    var11 = [var9, var10];
-    var12 = 0;
-    var13 = 0;
+    var_11 = [var_9, var_10];
+    var_12 = 0;
+    var_13 = 0;
 
-    if(isDefined(var7)) {
-      var12 = var7["mask"];
-      var13 = var7["mask2"];
+    if(isDefined(var_7)) {
+      var_12 = var_7["mask"];
+      var_13 = var_7["mask2"];
     }
 
-    var14 = [var1 scripts\cp\survival\survival_loadout::lookupcurrentoperator(var1.team), var1 scripts\cp\survival\survival_loadout::lookupotheroperator(var1.team)];
-    var15 = scripts\cp\utility::getgametype();
+    var_14 = [var_1 scripts\cp\survival\survival_loadout::lookupcurrentoperator(var_1.team), var_1 scripts\cp\survival\survival_loadout::lookupotheroperator(var_1.team)];
+    var_15 = scripts\cp\utility::getgametype();
 
-    if(!isDefined(var15)) {
-      var15 = getDvar("NKTMKRMSKR");
+    if(!isDefined(var_15)) {
+      var_15 = getDvar("NKTMKRMSKR");
     }
 
-    var16 = level.getallselectableattachments.game_type_col[var15];
-    var17 = "";
-    var18 = 1;
+    var_16 = level.getallselectableattachments.game_type_col[var_15];
+    var_17 = "";
+    var_18 = 1;
 
-    if(isDefined(var5.attachments)) {
-      var19 = 0;
+    if(isDefined(var_5.attachments)) {
+      var_19 = 0;
 
-      foreach(var21 in var5.attachments) {
-        var22 = scripts\cp\utility::attachmentmap_tobase(var21);
+      foreach(var_21 in var_5.attachments) {
+        var_22 = scripts\cp\utility::attachmentmap_tobase(var_21);
 
-        if(var22 == "scope") {
-          var19 = 1;
+        if(var_22 == "scope") {
+          var_19 = 1;
         }
 
-        if(scripts\cp\cp_weapon::carriedpunchcard(var5, var22)) {
-          if(!var18) {
-            var17 += "|";
+        if(scripts\cp\cp_weapon::carriedpunchcard(var_5, var_22)) {
+          if(!var_18) {
+            var_17 += "|";
           }
 
-          var22 = scripts\cp\cp_weapon::ref_12bbb(var22);
-          var17 += var22;
-          var18 = 0;
+          var_22 = scripts\cp\cp_weapon::ref_12bbb(var_22);
+          var_17 += var_22;
+          var_18 = 0;
         }
       }
 
-      if(var19) {
-        if(!var18) {
-          var17 += "|";
+      if(var_19) {
+        if(!var_18) {
+          var_17 += "|";
         }
 
-        var17 += "default_sniper_scope";
+        var_17 += "default_sniper_scope";
       }
     }
 
-    var24 = "";
-    var25 = 1;
+    var_24 = "";
+    var_25 = 1;
 
-    if(isDefined(var1.classstruct) && isDefined(var1.classstruct.loadoutperks)) {
-      foreach(var27 in var1.classstruct.loadoutperks) {
-        if(!var25) {
-          var24 += "|";
+    if(isDefined(var_1.classstruct) && isDefined(var_1.classstruct.loadoutperks)) {
+      foreach(var_27 in var_1.classstruct.loadoutperks) {
+        if(!var_25) {
+          var_24 += "|";
         }
 
-        var24 += var27;
-        var25 = 0;
+        var_24 += var_27;
+        var_25 = 0;
       }
     }
 
-    var29 = [var2, 0];
-    var30 = 0;
+    var_29 = [var_2, 0];
+    var_30 = 0;
 
-    if(isPlayer(var8)) {
-      var30 |= 1;
-    } else if(isagent(var8)) {
-      var30 = ref_12ce0(var30, var8);
+    if(isPlayer(var_8)) {
+      var_30 |= 1;
+    } else if(isagent(var_8)) {
+      var_30 = ref_12ce0(var_30, var_8);
     }
 
-    var31 = 0;
-    var32 = 0;
-    var33 = 0;
-    var34 = 0;
+    var_31 = 0;
+    var_32 = 0;
+    var_33 = 0;
+    var_34 = 0;
 
-    if(isDefined(var6)) {
-      if(scripts\cp\utility::isheadshot(var5, var6, var4, var1)) {
-        var4 = "MOD_HEAD_SHOT";
+    if(isDefined(var_6)) {
+      if(scripts\cp\utility::isheadshot(var_5, var_6, var_4, var_1)) {
+        var_4 = "MOD_HEAD_SHOT";
       }
     }
 
-    if(isDefined(var8.streakinfo)) {
-      var30 |= 2;
-      var35 = var8.streakinfo.streakname;
-      var34 = unsetreduceregendelayonkill(var35);
+    if(isDefined(var_8.streakinfo)) {
+      var_30 |= 2;
+      var_35 = var_8.streakinfo.streakname;
+      var_34 = unsetreduceregendelayonkill(var_35);
 
-      switch (var35) {
+      switch (var_35) {
         case "sentry_gun":
         case "pac_sentry":
         case "manual_turret":
         case "bradley":
         case "juggernaut":
-          var31 = 1;
+          var_31 = 1;
           break;
         case "nuke":
         case "white_phosphorus":
@@ -238,109 +238,109 @@ function onplayerkilled(var0, var1, var2, var3, var4, var5, var6, var7) {
         case "cruise_predator":
         case "chopper_support":
         case "chopper_gunner":
-          var32 = 1;
+          var_32 = 1;
           break;
         case "scrambler_drone_guard":
         case "directional_uav":
         case "uav":
         case "radar_drone_overwatch":
-          var32 = 1;
-          var33 = 1;
+          var_32 = 1;
+          var_33 = 1;
           break;
         case "airdrop_multiple":
         case "airdrop":
-          var33 = 1;
+          var_33 = 1;
           break;
       }
 
-      if(var31) {
-        var30 |= 8;
+      if(var_31) {
+        var_30 |= 8;
       }
 
-      if(var32) {
-        var30 |= 4;
+      if(var_32) {
+        var_30 |= 4;
       }
 
-      if(var33) {
-        var30 |= 16;
-      }
-    }
-
-    if(isDefined(var8.vehiclename) || var34) {
-      var30 |= 32;
-
-      if(!var31 && isDefined(var8.vehiclename) && !istrue(var8 scripts\cp_mp\vehicles\vehicle::vehiclecanfly())) {
-        var30 |= 8;
+      if(var_33) {
+        var_30 |= 16;
       }
     }
 
-    if(isDefined(var8.equipmentref)) {
-      var30 |= 64;
+    if(isDefined(var_8.vehiclename) || var_34) {
+      var_30 |= 32;
+
+      if(!var_31 && isDefined(var_8.vehiclename) && !istrue(var_8 scripts\cp_mp\vehicles\vehicle::vehiclecanfly())) {
+        var_30 |= 8;
+      }
     }
 
-    var36 = "";
-    var37 = 65535;
-    var38 = 65535;
+    if(isDefined(var_8.equipmentref)) {
+      var_30 |= 64;
+    }
 
-    if(var30 == 512) {
-      vehicle_occupancy_canspawninto(var1, var8, var29, var11, var12, var13, var14, var16, var17, var24, var30, var36, var4, var37, var38);
+    var_36 = "";
+    var_37 = 65535;
+    var_38 = 65535;
+
+    if(var_30 == 512) {
+      vehicle_occupancy_canspawninto(var_1, var_8, var_29, var_11, var_12, var_13, var_14, var_16, var_17, var_24, var_30, var_36, var_4, var_37, var_38);
       return;
     }
 
-    var39 = level.players.size;
+    var_39 = level.players.size;
 
     if(istrue(level.matchmakingmatch)) {
-      var40 = var1 getfireteammembers();
-      var39 = var40.size;
+      var_40 = var_1 getfireteammembers();
+      var_39 = var_40.size;
     }
 
-    var1 reportchallengeuserevent("kill", var29, var11, var12, var13, var14, var16, var17, var24, var30, var36, gettouchinglocaletriggers(var1, var8), var4, var37, var38, var39);
+    var_1 reportchallengeuserevent("kill", var_29, var_11, var_12, var_13, var_14, var_16, var_17, var_24, var_30, var_36, gettouchinglocaletriggers(var_1, var_8), var_4, var_37, var_38, var_39);
     return;
   }
 }
 
-function ref_12ce0(var0, var1) {
-  var2 = var1.aitype;
+function ref_12ce0(var_0, var_1) {
+  var_2 = var_1.aitype;
 
-  if(!isDefined(var1.aitype)) {
-    if(isDefined(var1.unittype)) {
-      var2 = var1.unittype;
+  if(!isDefined(var_1.aitype)) {
+    if(isDefined(var_1.unittype)) {
+      var_2 = var_1.unittype;
     }
   }
 
-  switch (var2) {
+  switch (var_2) {
     case "soldier":
-      var0 |= 128;
+      var_0 |= 128;
       break;
     case "juggernaut":
-      var0 |= 512;
+      var_0 |= 512;
       break;
     case "suicidebomber":
-      var0 |= 1024;
+      var_0 |= 1024;
       break;
     case "riotshield":
-      var0 |= 256;
+      var_0 |= 256;
       break;
     default:
-      var0 |= 128;
+      var_0 |= 128;
       break;
   }
 
-  return var0;
+  return var_0;
 }
 
-function vehicle_occupancy_canspawninto(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14) {
-  if(var10 != 512) {
+function vehicle_occupancy_canspawninto(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14) {
+  if(var_10 != 512) {
     return false;
   }
 
-  if(isDefined(var1.attackers)) {
-    foreach(var16 in var1.attackers) {
-      if(!isDefined(scripts\cp\cp_agent_damage::_validateattacker(var16))) {
+  if(isDefined(var_1.attackers)) {
+    foreach(var_16 in var_1.attackers) {
+      if(!isDefined(scripts\cp\cp_agent_damage::_validateattacker(var_16))) {
         continue;
       }
 
-      if(var1 == var16) {
+      if(var_1 == var_16) {
         continue;
       }
 
@@ -348,35 +348,35 @@ function vehicle_occupancy_canspawninto(var0, var1, var2, var3, var4, var5, var6
         continue;
       }
 
-      var17 = undefined;
+      var_17 = undefined;
 
-      if(isDefined(var1.attackerdata)) {
-        var18 = var1.attackerdata[var16.guid];
+      if(isDefined(var_1.attackerdata)) {
+        var_18 = var_1.attackerdata[var_16.guid];
 
-        if(isDefined(var18)) {
-          var17 = var18.objweapon;
+        if(isDefined(var_18)) {
+          var_17 = var_18.objweapon;
         }
       }
 
-      var19 = 0;
+      var_19 = 0;
 
-      if(self.attackerdata[var16.guid].damage >= var1.maxhealth * 0.1) {
-        var19 = 1;
+      if(self.attackerdata[var_16.guid].damage >= var_1.maxhealth * 0.1) {
+        var_19 = 1;
       }
 
-      if(self.attackerdata[var16.guid].damage >= var1.maxhealth * 0.2) {
-        var19 = 2;
+      if(self.attackerdata[var_16.guid].damage >= var_1.maxhealth * 0.2) {
+        var_19 = 2;
       }
 
-      if(var19 >= 1) {
-        var20 = level.players.size;
+      if(var_19 >= 1) {
+        var_20 = level.players.size;
 
         if(istrue(level.matchmakingmatch)) {
-          var21 = var0 getfireteammembers();
-          var20 = var21.size;
+          var_21 = var_0 getfireteammembers();
+          var_20 = var_21.size;
         }
 
-        var16 reportchallengeuserevent("kill", var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, gettouchinglocaletriggers(var0, var1), var12, var13, var14, var20);
+        var_16 reportchallengeuserevent("kill", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, gettouchinglocaletriggers(var_0, var_1), var_12, var_13, var_14, var_20);
       }
     }
 
@@ -386,7 +386,7 @@ function vehicle_occupancy_canspawninto(var0, var1, var2, var3, var4, var5, var6
   return false;
 }
 
-function ondeath(var0, var1, var2, var3, var4, var5, var6, var7) {
+function ondeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(!challengesenabledforplayer()) {
     return;
   }
@@ -394,65 +394,65 @@ function ondeath(var0, var1, var2, var3, var4, var5, var6, var7) {
   self reportchallengeuserevent("death", 0);
 }
 
-function onplayerkillassist(var0) {
-  var1 = self;
+function onplayerkillassist(var_0) {
+  var_1 = self;
 
-  if(!challengesenabledforplayer(var1)) {
+  if(!challengesenabledforplayer(var_1)) {
     return;
   }
 
-  if(!scripts\cp\utility\player::isfriendly(var1.team, var0)) {
-    var2 = "";
+  if(!scripts\cp\utility\player::isfriendly(var_1.team, var_0)) {
+    var_2 = "";
 
-    if(isDefined(var1.primaryweaponobj)) {
-      var2 = scripts\cp\utility::relic_nuketimer_globalthread(var1.primaryweaponobj.basename);
+    if(isDefined(var_1.primaryweaponobj)) {
+      var_2 = scripts\cp\utility::relic_nuketimer_globalthread(var_1.primaryweaponobj.basename);
     }
 
-    var3 = "";
+    var_3 = "";
 
-    if(isDefined(var1.secondaryweaponobj)) {
-      var3 = scripts\cp\utility::relic_nuketimer_globalthread(var1.secondaryweaponobj.basename);
+    if(isDefined(var_1.secondaryweaponobj)) {
+      var_3 = scripts\cp\utility::relic_nuketimer_globalthread(var_1.secondaryweaponobj.basename);
     }
 
-    var4 = [var2, var3];
-    var5 = [0, 0];
-    var6 = 0;
+    var_4 = [var_2, var_3];
+    var_5 = [0, 0];
+    var_6 = 0;
 
-    if(isPlayer(var0)) {
-      var6 |= 1;
-    } else if(isagent(var0)) {
-      var6 = ref_12ce0(var6, var0);
+    if(isPlayer(var_0)) {
+      var_6 |= 1;
+    } else if(isagent(var_0)) {
+      var_6 = ref_12ce0(var_6, var_0);
     }
 
-    var7 = resetstuckthermite(var1);
-    var1 reportchallengeuserevent("assist", var5, var4, var7);
+    var_7 = resetstuckthermite(var_1);
+    var_1 reportchallengeuserevent("assist", var_5, var_4, var_7);
     return;
   }
 }
 
-function ref_1204a(var0, var1, var2, var3, var4, var5, var6) {
+function ref_1204a(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!challengesenabledforplayer()) {
     return;
   }
 
-  var7 = var0;
-  var8 = var1;
-  var9 = var2;
-  var10 = var3;
-  var11 = var4;
-  var12 = var5;
-  var13 = var6;
-  var14 = scripts\cp\vehicles\vehicle_compass_cp::resetstuckthermite();
+  var_7 = var_0;
+  var_8 = var_1;
+  var_9 = var_2;
+  var_10 = var_3;
+  var_11 = var_4;
+  var_12 = var_5;
+  var_13 = var_6;
+  var_14 = scripts\cp\vehicles\vehicle_compass_cp::resetstuckthermite();
 
-  switch (var7) {
+  switch (var_7) {
     case "cp_used_adrenaline":
     case "cp_used_grenade_crate":
     case "cp_used_armor":
     case "cp_used_ammo_crate":
-      var7 = "support_box_mp";
+      var_7 = "support_box_mp";
 
-      if(var10 == 0) {
-        var10++;
+      if(var_10 == 0) {
+        var_10++;
       }
 
       break;
@@ -460,311 +460,311 @@ function ref_1204a(var0, var1, var2, var3, var4, var5, var6) {
       break;
   }
 
-  var15 = scripts\cp\vehicles\vehicle_compass_cp::relic_amped_is_there_valid_new_victim();
-  self reportchallengeuserevent("killstreak_end", var7, var8, var9, var10, var11, var12, var13, var14, var15);
+  var_15 = scripts\cp\vehicles\vehicle_compass_cp::relic_amped_is_there_valid_new_victim();
+  self reportchallengeuserevent("killstreak_end", var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15);
 }
 
-function ref_12033(var0, var1) {
-  var2 = var0;
+function ref_12033(var_0, var_1) {
+  var_2 = var_0;
 
-  if(var0 == "super_recon_drone" && isDefined(self.recondronesuper)) {
+  if(var_0 == "super_recon_drone" && isDefined(self.recondronesuper)) {
     if(isDefined(self.recondronesuper.ref_1406b)) {
-      var1 = self.recondronesuper.ref_1406b;
+      var_1 = self.recondronesuper.ref_1406b;
     }
   }
 
-  scripts\cp\vehicles\vehicle_compass_cp::ref_12032(var0, var1);
+  scripts\cp\vehicles\vehicle_compass_cp::ref_12032(var_0, var_1);
 }
 
-function ref_12032(var0, var1) {
+function ref_12032(var_0, var_1) {
   if(!challengesenabledforplayer()) {
     return;
   }
 
-  var2 = var0;
-  var3 = var1;
-  self reportchallengeuserevent("field_end", var2, var3);
+  var_2 = var_0;
+  var_3 = var_1;
+  self reportchallengeuserevent("field_end", var_2, var_3);
 }
 
-function ref_12003(var0) {
+function ref_12003(var_0) {
   if(!challengesenabledforplayer()) {
     return;
   }
 
-  var1 = 0;
-  var2 = 0;
+  var_1 = 0;
+  var_2 = 0;
 
-  if(isDefined(var0)) {
-    var1 = var0["mask"];
-    var2 = var0["mask2"];
+  if(isDefined(var_0)) {
+    var_1 = var_0["mask"];
+    var_2 = var_0["mask2"];
   }
 
-  var3 = scripts\cp\utility::getgametype();
+  var_3 = scripts\cp\utility::getgametype();
 
-  if(!isDefined(var3)) {
-    var3 = getDvar("NKTMKRMSKR");
+  if(!isDefined(var_3)) {
+    var_3 = getDvar("NKTMKRMSKR");
   }
 
-  var4 = level.getallselectableattachments.game_type_col[var3];
-  self reportchallengeuserevent("capture", var4, var1, var2);
+  var_4 = level.getallselectableattachments.game_type_col[var_3];
+  self reportchallengeuserevent("capture", var_4, var_1, var_2);
 }
 
-function ref_1201f(var0) {
+function ref_1201f(var_0) {
   if(!challengesenabledforplayer()) {
     return;
   }
 
-  var1 = 0;
-  var2 = 0;
+  var_1 = 0;
+  var_2 = 0;
 
-  if(isDefined(var0)) {
-    var1 = var0["mask"];
-    var2 = var0["mask2"];
+  if(isDefined(var_0)) {
+    var_1 = var_0["mask"];
+    var_2 = var_0["mask2"];
   }
 
-  var3 = scripts\cp\utility::getgametype();
+  var_3 = scripts\cp\utility::getgametype();
 
-  if(!isDefined(var3)) {
-    var3 = getDvar("NKTMKRMSKR");
+  if(!isDefined(var_3)) {
+    var_3 = getDvar("NKTMKRMSKR");
   }
 
-  var4 = level.getallselectableattachments.game_type_col[var3];
-  self reportchallengeuserevent("defuse", var4, var1, var2);
+  var_4 = level.getallselectableattachments.game_type_col[var_3];
+  self reportchallengeuserevent("defuse", var_4, var_1, var_2);
 }
 
-function ref_12062(var0) {
+function ref_12062(var_0) {
   if(!challengesenabledforplayer()) {
     return;
   }
 
-  var1 = 0;
-  var2 = 0;
+  var_1 = 0;
+  var_2 = 0;
 
-  if(isDefined(var0)) {
-    var1 = var0["mask"];
-    var2 = var0["mask2"];
+  if(isDefined(var_0)) {
+    var_1 = var_0["mask"];
+    var_2 = var_0["mask2"];
   }
 
-  var3 = scripts\cp\vehicles\vehicle_compass_cp::relic_amped_is_there_valid_new_victim();
-  var4 = resetstuckthermite();
-  self reportchallengeuserevent("defuse", var3, var1, var2, var4);
+  var_3 = scripts\cp\vehicles\vehicle_compass_cp::relic_amped_is_there_valid_new_victim();
+  var_4 = resetstuckthermite();
+  self reportchallengeuserevent("defuse", var_3, var_1, var_2, var_4);
 }
 
-function ref_12096(var0) {
+function ref_12096(var_0) {
   if(!challengesenabledforplayer()) {
     return;
   }
 
-  self reportchallengeuserevent("stun", var0);
+  self reportchallengeuserevent("stun", var_0);
 }
 
-function ref_12092(var0) {
+function ref_12092(var_0) {
   if(!challengesenabledforplayer()) {
     return;
   }
 
-  self reportchallengeuserevent("stim", var0);
+  self reportchallengeuserevent("stim", var_0);
 }
 
-function ref_1203d(var0) {
+function ref_1203d(var_0) {
   if(!challengesenabledforplayer()) {
     return;
   }
 
-  var1 = "";
-  var2 = 1;
+  var_1 = "";
+  var_2 = 1;
 
   if(isDefined(self.classstruct) && isDefined(self.classstruct.loadoutperks)) {
-    foreach(var4 in self.classstruct.loadoutperks) {
-      if(!var2) {
-        var1 += "|";
+    foreach(var_4 in self.classstruct.loadoutperks) {
+      if(!var_2) {
+        var_1 += "|";
       }
 
-      var1 += var4;
-      var2 = 0;
+      var_1 += var_4;
+      var_2 = 0;
     }
   }
 
-  self reportchallengeuserevent("hack", var0, var1);
+  self reportchallengeuserevent("hack", var_0, var_1);
 }
 
-function gettouchinglocaletriggers(var0, var1) {
-  var2 = "";
+function gettouchinglocaletriggers(var_0, var_1) {
+  var_2 = "";
 
   if(!isDefined(level.localetriggers)) {
-    return var2;
+    return var_2;
   }
 
-  var3 = 0;
+  var_3 = 0;
 
-  foreach(var5 in level.localetriggers) {
-    if(var0 istouching(var5) || var1 istouching(var5)) {
-      if(isDefined(var5.localeid)) {
-        if(var3) {
-          var2 += "|";
+  foreach(var_5 in level.localetriggers) {
+    if(var_0 istouching(var_5) || var_1 istouching(var_5)) {
+      if(isDefined(var_5.localeid)) {
+        if(var_3) {
+          var_2 += "|";
         }
 
-        var2 += var5.localeid;
-        var3 = 1;
+        var_2 += var_5.localeid;
+        var_3 = 1;
       }
     }
   }
 
-  return var2;
+  return var_2;
 }
 
-function onplayerteamrevive(var0, var1) {}
+function onplayerteamrevive(var_0, var_1) {}
 
-function onsuccessfulhit(var0) {}
+function onsuccessfulhit(var_0) {}
 
 function onspawn() {}
 
-function updatesuperweaponkills(var0, var1) {}
+function updatesuperweaponkills(var_0, var_1) {}
 
-function updatesuperkills(var0, var1, var2) {}
+function updatesuperkills(var_0, var_1, var_2) {}
 
-function resistedstun(var0) {}
+function resistedstun(var_0) {}
 
 function triggereddelayedexplosion() {}
 
-function minedestroyed(var0, var1, var2) {}
+function minedestroyed(var_0, var_1, var_2) {}
 
 function roundbegin() {}
 
-function roundend(var0) {}
+function roundend(var_0) {}
 
-function playerdamaged(var0, var1, var2, var3, var4, var5) {}
+function playerdamaged(var_0, var_1, var_2, var_3, var_4, var_5) {}
 
-function processuavassist(var0, var1) {}
+function processuavassist(var_0, var_1) {}
 
-function killstreakdamaged(var0, var1, var2, var3, var4) {}
+function killstreakdamaged(var_0, var_1, var_2, var_3, var_4) {}
 
-function killstreakkilled(var0, var1, var2, var3, var4, var5, var6, var7) {
-  if(!challengesenabledforplayer(var3)) {
+function killstreakkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  if(!challengesenabledforplayer(var_3)) {
     return;
   }
 
-  var8 = self;
+  var_8 = self;
 
-  if(!isPlayer(var3)) {
+  if(!isPlayer(var_3)) {
     return;
   }
 
-  if(!isDefined(var8.owner)) {
+  if(!isDefined(var_8.owner)) {
     return;
   }
 
-  if(!scripts\cp\utility\player::isfriendly(var3.team, var8.owner)) {
-    var9 = scripts\cp\cp_equipment::getequipmentreffromweapon(var6);
+  if(!scripts\cp\utility\player::isfriendly(var_3.team, var_8.owner)) {
+    var_9 = scripts\cp\cp_equipment::getequipmentreffromweapon(var_6);
 
-    if(!isDefined(var9)) {
-      var9 = scripts\cp\utility::relic_nuketimer_globalthread(var6.basename);
+    if(!isDefined(var_9)) {
+      var_9 = scripts\cp\utility::relic_nuketimer_globalthread(var_6.basename);
     }
 
-    var10 = "";
+    var_10 = "";
 
-    if(isDefined(var3.secondaryweaponobj)) {
-      if(var6 == var3.primaryweaponobj) {
-        var10 = scripts\cp\utility::relic_nuketimer_globalthread(var3.secondaryweaponobj.basename);
-      } else if(var6 == var3.secondaryweaponobj) {
-        var10 = scripts\cp\utility::relic_nuketimer_globalthread(var3.primaryweaponobj.basename);
+    if(isDefined(var_3.secondaryweaponobj)) {
+      if(var_6 == var_3.primaryweaponobj) {
+        var_10 = scripts\cp\utility::relic_nuketimer_globalthread(var_3.secondaryweaponobj.basename);
+      } else if(var_6 == var_3.secondaryweaponobj) {
+        var_10 = scripts\cp\utility::relic_nuketimer_globalthread(var_3.primaryweaponobj.basename);
       }
     }
 
-    var11 = [var9, var10];
-    var12 = 0;
-    var13 = 0;
+    var_11 = [var_9, var_10];
+    var_12 = 0;
+    var_13 = 0;
 
-    if(isDefined(var3.modifiers)) {
-      var12 = var3.modifiers["mask"];
-      var13 = var3.modifiers["mask2"];
+    if(isDefined(var_3.modifiers)) {
+      var_12 = var_3.modifiers["mask"];
+      var_13 = var_3.modifiers["mask2"];
     }
 
-    var14 = [var3 scripts\cp\survival\survival_loadout::lookupcurrentoperator(var3.team), var3 scripts\cp\survival\survival_loadout::lookupotheroperator(var3.team)];
-    var15 = scripts\cp\utility::getgametype();
+    var_14 = [var_3 scripts\cp\survival\survival_loadout::lookupcurrentoperator(var_3.team), var_3 scripts\cp\survival\survival_loadout::lookupotheroperator(var_3.team)];
+    var_15 = scripts\cp\utility::getgametype();
 
-    if(!isDefined(var15)) {
-      var15 = getDvar("NKTMKRMSKR");
+    if(!isDefined(var_15)) {
+      var_15 = getDvar("NKTMKRMSKR");
     }
 
-    var16 = level.getallselectableattachments.game_type_col[var15];
-    var17 = "";
-    var18 = 1;
+    var_16 = level.getallselectableattachments.game_type_col[var_15];
+    var_17 = "";
+    var_18 = 1;
 
-    if(isDefined(var6.attachments)) {
-      var19 = 0;
+    if(isDefined(var_6.attachments)) {
+      var_19 = 0;
 
-      foreach(var21 in var6.attachments) {
-        var22 = scripts\cp\utility::attachmentmap_tobase(var21);
+      foreach(var_21 in var_6.attachments) {
+        var_22 = scripts\cp\utility::attachmentmap_tobase(var_21);
 
-        if(var22 == "scope") {
-          var19 = 1;
+        if(var_22 == "scope") {
+          var_19 = 1;
         }
 
-        if(scripts\cp\cp_weapon::carriedpunchcard(var6, var22)) {
-          if(var22 == "scope") {
-            var22 = "default_sniper_scope";
+        if(scripts\cp\cp_weapon::carriedpunchcard(var_6, var_22)) {
+          if(var_22 == "scope") {
+            var_22 = "default_sniper_scope";
           }
 
-          if(!var18) {
-            var17 += "|";
+          if(!var_18) {
+            var_17 += "|";
           }
 
-          var22 = scripts\cp\cp_weapon::ref_12bbb(var22);
-          var17 += var22;
-          var18 = 0;
+          var_22 = scripts\cp\cp_weapon::ref_12bbb(var_22);
+          var_17 += var_22;
+          var_18 = 0;
         }
       }
 
-      if(var19) {
-        if(!var18) {
-          var17 += "|";
+      if(var_19) {
+        if(!var_18) {
+          var_17 += "|";
         }
 
-        var17 += "default_sniper_scope";
+        var_17 += "default_sniper_scope";
       }
     }
 
-    var24 = "";
-    var25 = 1;
+    var_24 = "";
+    var_25 = 1;
 
-    if(isDefined(var3.classstruct) && isDefined(var3.classstruct.loadoutperks)) {
-      foreach(var27 in var3.classstruct.loadoutperks) {
-        if(!var25) {
-          var24 += "|";
+    if(isDefined(var_3.classstruct) && isDefined(var_3.classstruct.loadoutperks)) {
+      foreach(var_27 in var_3.classstruct.loadoutperks) {
+        if(!var_25) {
+          var_24 += "|";
         }
 
-        var24 += var27;
-        var25 = 0;
+        var_24 += var_27;
+        var_25 = 0;
       }
     }
 
-    var29 = [var4, 0];
-    var30 = 0;
+    var_29 = [var_4, 0];
+    var_30 = 0;
 
-    if(isPlayer(var8)) {
-      var30 |= 1;
-    } else if(isagent(var8)) {
-      var30 = ref_12ce0(var30, var8);
+    if(isPlayer(var_8)) {
+      var_30 |= 1;
+    } else if(isagent(var_8)) {
+      var_30 = ref_12ce0(var_30, var_8);
     }
 
-    var31 = 0;
-    var32 = 0;
-    var33 = 0;
-    var34 = 0;
+    var_31 = 0;
+    var_32 = 0;
+    var_33 = 0;
+    var_34 = 0;
 
-    if(isDefined(var8.streakinfo)) {
-      var30 |= 2;
-      var0 = var8.streakinfo.streakname;
-      var34 = unsetreduceregendelayonkill(var0);
+    if(isDefined(var_8.streakinfo)) {
+      var_30 |= 2;
+      var_0 = var_8.streakinfo.streakname;
+      var_34 = unsetreduceregendelayonkill(var_0);
 
-      switch (var0) {
+      switch (var_0) {
         case "sentry_gun":
         case "pac_sentry":
         case "manual_turret":
         case "bradley":
         case "juggernaut":
-          var31 = 1;
+          var_31 = 1;
           break;
         case "nuke":
         case "white_phosphorus":
@@ -775,54 +775,54 @@ function killstreakkilled(var0, var1, var2, var3, var4, var5, var6, var7) {
         case "cruise_predator":
         case "chopper_support":
         case "chopper_gunner":
-          var32 = 1;
+          var_32 = 1;
           break;
         case "scrambler_drone_guard":
         case "directional_uav":
         case "uav":
         case "radar_drone_overwatch":
-          var32 = 1;
-          var33 = 1;
+          var_32 = 1;
+          var_33 = 1;
           break;
         case "airdrop_multiple":
         case "airdrop":
-          var33 = 1;
+          var_33 = 1;
           break;
       }
 
-      if(var31) {
-        var30 |= 8;
+      if(var_31) {
+        var_30 |= 8;
       }
 
-      if(var32) {
-        var30 |= 4;
+      if(var_32) {
+        var_30 |= 4;
       }
 
-      if(var33) {
-        var30 |= 16;
-      }
-    }
-
-    if(isDefined(var8.vehiclename) || var34) {
-      var30 |= 32;
-
-      if(!var31 && isDefined(var8.vehiclename) && !istrue(var8 scripts\cp_mp\vehicles\vehicle::vehiclecanfly())) {
-        var30 |= 8;
+      if(var_33) {
+        var_30 |= 16;
       }
     }
 
-    if(isDefined(var8.equipmentref)) {
-      var30 |= 64;
+    if(isDefined(var_8.vehiclename) || var_34) {
+      var_30 |= 32;
+
+      if(!var_31 && isDefined(var_8.vehiclename) && !istrue(var_8 scripts\cp_mp\vehicles\vehicle::vehiclecanfly())) {
+        var_30 |= 8;
+      }
     }
 
-    var35 = "";
-    var3 reportchallengeuserevent("kill", var29, var11, var12, var13, var14, var16, var17, var24, var30, var35, gettouchinglocaletriggers(var3, var8));
+    if(isDefined(var_8.equipmentref)) {
+      var_30 |= 64;
+    }
+
+    var_35 = "";
+    var_3 reportchallengeuserevent("kill", var_29, var_11, var_12, var_13, var_14, var_16, var_17, var_24, var_30, var_35, gettouchinglocaletriggers(var_3, var_8));
     return;
   }
 }
 
-function unsetreduceregendelayonkill(var0) {
-  switch (var0) {
+function unsetreduceregendelayonkill(var_0) {
+  switch (var_0) {
     case "sentry_gun":
     case "manual_turret":
     case "cruise_predator":
@@ -833,130 +833,130 @@ function unsetreduceregendelayonkill(var0) {
   return true;
 }
 
-function equipmentdestroyed(var0, var1, var2, var3, var4, var5, var6, var7) {
-  if(!challengesenabledforplayer(var1)) {
+function equipmentdestroyed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  if(!challengesenabledforplayer(var_1)) {
     return;
   }
 
-  var8 = self;
+  var_8 = self;
 
-  if(!isPlayer(var1)) {
-    if(isDefined(var0) && isPlayer(var0)) {
-      var1 = var0;
+  if(!isPlayer(var_1)) {
+    if(isDefined(var_0) && isPlayer(var_0)) {
+      var_1 = var_0;
     } else {
       return;
     }
   }
 
-  if(!isDefined(var8.owner)) {
+  if(!isDefined(var_8.owner)) {
     return;
   }
 
-  if(!scripts\cp\utility\player::isfriendly(var1.team, var8.owner)) {
-    var9 = scripts\cp\cp_equipment::getequipmentreffromweapon(var5);
+  if(!scripts\cp\utility\player::isfriendly(var_1.team, var_8.owner)) {
+    var_9 = scripts\cp\cp_equipment::getequipmentreffromweapon(var_5);
 
-    if(!isDefined(var9)) {
-      var9 = scripts\cp\utility::relic_nuketimer_globalthread(var5.basename);
+    if(!isDefined(var_9)) {
+      var_9 = scripts\cp\utility::relic_nuketimer_globalthread(var_5.basename);
     }
 
-    var10 = "";
+    var_10 = "";
 
-    if(var5 == var1.primaryweaponobj) {
-      var10 = scripts\cp\utility::relic_nuketimer_globalthread(var1.secondaryweaponobj.basename);
-    } else if(var5 == var1.secondaryweaponobj) {
-      var10 = scripts\cp\utility::relic_nuketimer_globalthread(var1.primaryweaponobj.basename);
+    if(var_5 == var_1.primaryweaponobj) {
+      var_10 = scripts\cp\utility::relic_nuketimer_globalthread(var_1.secondaryweaponobj.basename);
+    } else if(var_5 == var_1.secondaryweaponobj) {
+      var_10 = scripts\cp\utility::relic_nuketimer_globalthread(var_1.primaryweaponobj.basename);
     }
 
-    var11 = [var9, var10];
-    var12 = 0;
-    var13 = 0;
+    var_11 = [var_9, var_10];
+    var_12 = 0;
+    var_13 = 0;
 
-    if(isDefined(var7)) {
-      var12 = var7["mask"];
-      var13 = var7["mask2"];
+    if(isDefined(var_7)) {
+      var_12 = var_7["mask"];
+      var_13 = var_7["mask2"];
     }
 
-    var14 = [var1 scripts\cp\survival\survival_loadout::lookupcurrentoperator(var1.team), var1 scripts\cp\survival\survival_loadout::lookupotheroperator(var1.team)];
-    var15 = scripts\cp\utility::getgametype();
+    var_14 = [var_1 scripts\cp\survival\survival_loadout::lookupcurrentoperator(var_1.team), var_1 scripts\cp\survival\survival_loadout::lookupotheroperator(var_1.team)];
+    var_15 = scripts\cp\utility::getgametype();
 
-    if(!isDefined(var15)) {
-      var15 = getDvar("NKTMKRMSKR");
+    if(!isDefined(var_15)) {
+      var_15 = getDvar("NKTMKRMSKR");
     }
 
-    var16 = level.getallselectableattachments.game_type_col[var15];
-    var17 = "";
-    var18 = 1;
+    var_16 = level.getallselectableattachments.game_type_col[var_15];
+    var_17 = "";
+    var_18 = 1;
 
-    if(isDefined(var5.attachments)) {
-      var19 = 0;
+    if(isDefined(var_5.attachments)) {
+      var_19 = 0;
 
-      foreach(var21 in var5.attachments) {
-        var22 = scripts\cp\utility::attachmentmap_tobase(var21);
+      foreach(var_21 in var_5.attachments) {
+        var_22 = scripts\cp\utility::attachmentmap_tobase(var_21);
 
-        if(var22 == "scope") {
-          var19 = 1;
+        if(var_22 == "scope") {
+          var_19 = 1;
         }
 
-        if(scripts\cp\cp_weapon::carriedpunchcard(var5, var22)) {
-          if(!var18) {
-            var17 += "|";
+        if(scripts\cp\cp_weapon::carriedpunchcard(var_5, var_22)) {
+          if(!var_18) {
+            var_17 += "|";
           }
 
-          var22 = scripts\cp\cp_weapon::ref_12bbb(var22);
-          var17 += var22;
-          var18 = 0;
+          var_22 = scripts\cp\cp_weapon::ref_12bbb(var_22);
+          var_17 += var_22;
+          var_18 = 0;
         }
       }
 
-      if(var19) {
-        if(!var18) {
-          var17 += "|";
+      if(var_19) {
+        if(!var_18) {
+          var_17 += "|";
         }
 
-        var17 += "default_sniper_scope";
+        var_17 += "default_sniper_scope";
       }
     }
 
-    var24 = "";
-    var25 = 1;
+    var_24 = "";
+    var_25 = 1;
 
-    if(isDefined(var1.classstruct) && isDefined(var1.classstruct.loadoutperks)) {
-      foreach(var27 in var1.classstruct.loadoutperks) {
-        if(!var25) {
-          var24 += "|";
+    if(isDefined(var_1.classstruct) && isDefined(var_1.classstruct.loadoutperks)) {
+      foreach(var_27 in var_1.classstruct.loadoutperks) {
+        if(!var_25) {
+          var_24 += "|";
         }
 
-        var24 += var27;
-        var25 = 0;
+        var_24 += var_27;
+        var_25 = 0;
       }
     }
 
-    var29 = [var2, 0];
-    var30 = 0;
+    var_29 = [var_2, 0];
+    var_30 = 0;
 
-    if(isPlayer(var8)) {
-      var30 |= 1;
-    } else if(isagent(var8)) {
-      var30 = ref_12ce0(var30, var8);
+    if(isPlayer(var_8)) {
+      var_30 |= 1;
+    } else if(isagent(var_8)) {
+      var_30 = ref_12ce0(var_30, var_8);
     }
 
-    var31 = 0;
-    var32 = 0;
-    var33 = 0;
-    var34 = 0;
+    var_31 = 0;
+    var_32 = 0;
+    var_33 = 0;
+    var_34 = 0;
 
-    if(isDefined(var8.streakinfo)) {
-      var30 |= 2;
-      var35 = var8.streakinfo.streakname;
-      var34 = unsetreduceregendelayonkill(var35);
+    if(isDefined(var_8.streakinfo)) {
+      var_30 |= 2;
+      var_35 = var_8.streakinfo.streakname;
+      var_34 = unsetreduceregendelayonkill(var_35);
 
-      switch (var35) {
+      switch (var_35) {
         case "sentry_gun":
         case "pac_sentry":
         case "manual_turret":
         case "bradley":
         case "juggernaut":
-          var31 = 1;
+          var_31 = 1;
           break;
         case "nuke":
         case "white_phosphorus":
@@ -967,166 +967,166 @@ function equipmentdestroyed(var0, var1, var2, var3, var4, var5, var6, var7) {
         case "cruise_predator":
         case "chopper_support":
         case "chopper_gunner":
-          var32 = 1;
+          var_32 = 1;
           break;
         case "scrambler_drone_guard":
         case "directional_uav":
         case "uav":
         case "radar_drone_overwatch":
-          var32 = 1;
-          var33 = 1;
+          var_32 = 1;
+          var_33 = 1;
           break;
         case "airdrop_multiple":
         case "airdrop":
-          var33 = 1;
+          var_33 = 1;
           break;
       }
 
-      if(var31) {
-        var30 |= 8;
+      if(var_31) {
+        var_30 |= 8;
       }
 
-      if(var32) {
-        var30 |= 4;
+      if(var_32) {
+        var_30 |= 4;
       }
 
-      if(var33) {
-        var30 |= 16;
-      }
-    }
-
-    if(isDefined(var8.vehiclename) || var34) {
-      var30 |= 32;
-
-      if(!var31 && isDefined(var8.vehiclename) && !istrue(var8 scripts\cp_mp\vehicles\vehicle::vehiclecanfly())) {
-        var30 |= 8;
+      if(var_33) {
+        var_30 |= 16;
       }
     }
 
-    if(isDefined(var8.equipmentref)) {
-      var30 |= 64;
+    if(isDefined(var_8.vehiclename) || var_34) {
+      var_30 |= 32;
+
+      if(!var_31 && isDefined(var_8.vehiclename) && !istrue(var_8 scripts\cp_mp\vehicles\vehicle::vehiclecanfly())) {
+        var_30 |= 8;
+      }
     }
 
-    var36 = "";
-    var1 reportchallengeuserevent("kill", var29, var11, var12, var13, var14, var16, var17, var24, var30, var36, gettouchinglocaletriggers(var1, var8));
+    if(isDefined(var_8.equipmentref)) {
+      var_30 |= 64;
+    }
+
+    var_36 = "";
+    var_1 reportchallengeuserevent("kill", var_29, var_11, var_12, var_13, var_14, var_16, var_17, var_24, var_30, var_36, gettouchinglocaletriggers(var_1, var_8));
     return;
   }
 }
 
-function vehiclekilled(var0, var1, var2, var3) {
-  if(!challengesenabledforplayer(var1)) {
+function vehiclekilled(var_0, var_1, var_2, var_3) {
+  if(!challengesenabledforplayer(var_1)) {
     return;
   }
 
-  var4 = var0;
-  var5 = scripts\cp\cp_equipment::getequipmentreffromweapon(var3);
+  var_4 = var_0;
+  var_5 = scripts\cp\cp_equipment::getequipmentreffromweapon(var_3);
 
-  if(!isDefined(var5)) {
-    var5 = scripts\cp\utility::relic_nuketimer_globalthread(var3.basename);
+  if(!isDefined(var_5)) {
+    var_5 = scripts\cp\utility::relic_nuketimer_globalthread(var_3.basename);
   }
 
-  var6 = "";
+  var_6 = "";
 
-  if(var3 == var1.primaryweaponobj) {
-    var6 = scripts\cp\utility::relic_nuketimer_globalthread(var1.secondaryweaponobj.basename);
-  } else if(var3 == var1.secondaryweaponobj) {
-    var6 = scripts\cp\utility::relic_nuketimer_globalthread(var1.primaryweaponobj.basename);
+  if(var_3 == var_1.primaryweaponobj) {
+    var_6 = scripts\cp\utility::relic_nuketimer_globalthread(var_1.secondaryweaponobj.basename);
+  } else if(var_3 == var_1.secondaryweaponobj) {
+    var_6 = scripts\cp\utility::relic_nuketimer_globalthread(var_1.primaryweaponobj.basename);
   }
 
-  var7 = [var5, var6];
-  var8 = 0;
-  var9 = 0;
+  var_7 = [var_5, var_6];
+  var_8 = 0;
+  var_9 = 0;
 
-  if(isDefined(var1.modifiers)) {
-    var8 = var1.modifiers["mask"];
-    var9 = var1.modifiers["mask2"];
+  if(isDefined(var_1.modifiers)) {
+    var_8 = var_1.modifiers["mask"];
+    var_9 = var_1.modifiers["mask2"];
   }
 
-  var10 = [var1 scripts\cp\survival\survival_loadout::lookupcurrentoperator(var1.team), var1 scripts\cp\survival\survival_loadout::lookupotheroperator(var1.team)];
-  var11 = scripts\cp\utility::getgametype();
+  var_10 = [var_1 scripts\cp\survival\survival_loadout::lookupcurrentoperator(var_1.team), var_1 scripts\cp\survival\survival_loadout::lookupotheroperator(var_1.team)];
+  var_11 = scripts\cp\utility::getgametype();
 
-  if(!isDefined(var11)) {
-    var11 = getDvar("NKTMKRMSKR");
+  if(!isDefined(var_11)) {
+    var_11 = getDvar("NKTMKRMSKR");
   }
 
-  var12 = level.getallselectableattachments.game_type_col[var11];
-  var13 = "";
-  var14 = 1;
+  var_12 = level.getallselectableattachments.game_type_col[var_11];
+  var_13 = "";
+  var_14 = 1;
 
-  if(isDefined(var3.attachments)) {
-    var15 = 0;
+  if(isDefined(var_3.attachments)) {
+    var_15 = 0;
 
-    foreach(var17 in var3.attachments) {
-      var18 = scripts\cp\utility::attachmentmap_tobase(var17);
+    foreach(var_17 in var_3.attachments) {
+      var_18 = scripts\cp\utility::attachmentmap_tobase(var_17);
 
-      if(var18 == "scope") {
-        var15 = 1;
+      if(var_18 == "scope") {
+        var_15 = 1;
       }
 
-      if(scripts\cp\cp_weapon::carriedpunchcard(var3, var18)) {
-        if(var18 == "scope") {
-          var18 = "default_sniper_scope";
+      if(scripts\cp\cp_weapon::carriedpunchcard(var_3, var_18)) {
+        if(var_18 == "scope") {
+          var_18 = "default_sniper_scope";
         }
 
-        if(!var14) {
-          var13 += "|";
+        if(!var_14) {
+          var_13 += "|";
         }
 
-        var18 = scripts\cp\cp_weapon::ref_12bbb(var18);
-        var13 += var18;
-        var14 = 0;
+        var_18 = scripts\cp\cp_weapon::ref_12bbb(var_18);
+        var_13 += var_18;
+        var_14 = 0;
       }
     }
 
-    if(var15) {
-      if(!var14) {
-        var13 += "|";
+    if(var_15) {
+      if(!var_14) {
+        var_13 += "|";
       }
 
-      var13 += "default_sniper_scope";
+      var_13 += "default_sniper_scope";
     }
   }
 
-  var20 = "";
-  var21 = 1;
+  var_20 = "";
+  var_21 = 1;
 
-  if(isDefined(var1.classstruct) && isDefined(var1.classstruct.loadoutperks)) {
-    foreach(var23 in var1.classstruct.loadoutperks) {
-      if(!var21) {
-        var20 += "|";
+  if(isDefined(var_1.classstruct) && isDefined(var_1.classstruct.loadoutperks)) {
+    foreach(var_23 in var_1.classstruct.loadoutperks) {
+      if(!var_21) {
+        var_20 += "|";
       }
 
-      var20 += var23;
-      var21 = 0;
+      var_20 += var_23;
+      var_21 = 0;
     }
   }
 
-  var25 = [var2, 0];
-  var26 = 0;
+  var_25 = [var_2, 0];
+  var_26 = 0;
 
-  if(isPlayer(var4)) {
-    var26 |= 1;
-  } else if(isagent(var4)) {
-    var26 = ref_12ce0(var26, var4);
+  if(isPlayer(var_4)) {
+    var_26 |= 1;
+  } else if(isagent(var_4)) {
+    var_26 = ref_12ce0(var_26, var_4);
   }
 
-  var27 = 0;
-  var28 = 0;
-  var29 = 0;
-  var30 = 0;
+  var_27 = 0;
+  var_28 = 0;
+  var_29 = 0;
+  var_30 = 0;
 
-  if(isDefined(var4.streakinfo)) {
-    var26 |= 2;
-    var31 = var4.streakinfo.streakname;
-    var30 = unsetreduceregendelayonkill(var31);
+  if(isDefined(var_4.streakinfo)) {
+    var_26 |= 2;
+    var_31 = var_4.streakinfo.streakname;
+    var_30 = unsetreduceregendelayonkill(var_31);
 
-    switch (var31) {
+    switch (var_31) {
       case "sentry_gun":
       case "pac_sentry":
       case "manual_turret":
       case "bradley":
       case "juggernaut":
-        var27 = 1;
+        var_27 = 1;
         break;
       case "nuke":
       case "white_phosphorus":
@@ -1137,181 +1137,181 @@ function vehiclekilled(var0, var1, var2, var3) {
       case "cruise_predator":
       case "chopper_support":
       case "chopper_gunner":
-        var28 = 1;
+        var_28 = 1;
         break;
       case "scrambler_drone_guard":
       case "directional_uav":
       case "uav":
       case "radar_drone_overwatch":
-        var28 = 1;
-        var29 = 1;
+        var_28 = 1;
+        var_29 = 1;
         break;
       case "airdrop_multiple":
       case "airdrop":
-        var29 = 1;
+        var_29 = 1;
         break;
     }
 
-    if(var27) {
-      var26 |= 8;
+    if(var_27) {
+      var_26 |= 8;
     }
 
-    if(var28) {
-      var26 |= 4;
+    if(var_28) {
+      var_26 |= 4;
     }
 
-    if(var29) {
-      var26 |= 16;
-    }
-  }
-
-  if(isDefined(var4.vehiclename) || var30) {
-    var26 |= 32;
-
-    if(!var27 && isDefined(var4.vehiclename) && !istrue(var4 scripts\cp_mp\vehicles\vehicle::vehiclecanfly())) {
-      var26 |= 8;
+    if(var_29) {
+      var_26 |= 16;
     }
   }
 
-  if(isDefined(var4.equipmentref)) {
-    var26 |= 64;
+  if(isDefined(var_4.vehiclename) || var_30) {
+    var_26 |= 32;
+
+    if(!var_27 && isDefined(var_4.vehiclename) && !istrue(var_4 scripts\cp_mp\vehicles\vehicle::vehiclecanfly())) {
+      var_26 |= 8;
+    }
   }
 
-  var32 = "";
-  var1 reportchallengeuserevent("kill", var25, var7, var8, var9, var10, var12, var13, var20, var26, var32, gettouchinglocaletriggers(var1, var4));
+  if(isDefined(var_4.equipmentref)) {
+    var_26 |= 64;
+  }
+
+  var_32 = "";
+  var_1 reportchallengeuserevent("kill", var_25, var_7, var_8, var_9, var_10, var_12, var_13, var_20, var_26, var_32, gettouchinglocaletriggers(var_1, var_4));
 }
 
-function processfinalkillchallenges(var0, var1) {}
+function processfinalkillchallenges(var_0, var_1) {}
 
-function usedkillstreak(var0) {}
+function usedkillstreak(var_0) {}
 
 function resetstuckthermite() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, scripts\cp\survival\survival_loadout::lookupcurrentoperator(self.team));
 }
 
-function ref_12071(var0, var1, var2, var3, var4, var5, var6, var7) {
-  if(!challengesenabledforplayer(var1)) {
+function ref_12071(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  if(!challengesenabledforplayer(var_1)) {
     return;
   }
 
-  var8 = self;
+  var_8 = self;
 
-  if(!isPlayer(var1)) {
-    if(isDefined(var0) && isPlayer(var0)) {
-      var1 = var0;
+  if(!isPlayer(var_1)) {
+    if(isDefined(var_0) && isPlayer(var_0)) {
+      var_1 = var_0;
     } else {
       return;
     }
   }
 
-  if(!scripts\cp\utility\player::isfriendly(var1.team, var8)) {
-    var9 = scripts\cp\cp_equipment::getequipmentreffromweapon(var5);
+  if(!scripts\cp\utility\player::isfriendly(var_1.team, var_8)) {
+    var_9 = scripts\cp\cp_equipment::getequipmentreffromweapon(var_5);
 
-    if(!isDefined(var9)) {
-      var9 = scripts\cp\utility::relic_nuketimer_globalthread(var5.basename);
+    if(!isDefined(var_9)) {
+      var_9 = scripts\cp\utility::relic_nuketimer_globalthread(var_5.basename);
     }
 
-    var10 = "";
+    var_10 = "";
 
-    if(isDefined(var1.secondaryweaponobj)) {
-      if(var5 == var1.primaryweaponobj) {
-        var10 = scripts\cp\utility::relic_nuketimer_globalthread(var1.secondaryweaponobj.basename);
-      } else if(var5 == var1.secondaryweaponobj) {
-        var10 = scripts\cp\utility::relic_nuketimer_globalthread(var1.primaryweaponobj.basename);
+    if(isDefined(var_1.secondaryweaponobj)) {
+      if(var_5 == var_1.primaryweaponobj) {
+        var_10 = scripts\cp\utility::relic_nuketimer_globalthread(var_1.secondaryweaponobj.basename);
+      } else if(var_5 == var_1.secondaryweaponobj) {
+        var_10 = scripts\cp\utility::relic_nuketimer_globalthread(var_1.primaryweaponobj.basename);
       }
     }
 
-    var11 = [var9, var10];
-    var12 = 0;
-    var13 = 0;
+    var_11 = [var_9, var_10];
+    var_12 = 0;
+    var_13 = 0;
 
-    if(isDefined(var7)) {
-      var12 = var7["mask"];
-      var13 = var7["mask2"];
+    if(isDefined(var_7)) {
+      var_12 = var_7["mask"];
+      var_13 = var_7["mask2"];
     }
 
-    var14 = [var1 scripts\cp\survival\survival_loadout::lookupcurrentoperator(var1.team), var1 scripts\cp\survival\survival_loadout::lookupotheroperator(var1.team)];
-    var15 = scripts\cp\utility::getgametype();
+    var_14 = [var_1 scripts\cp\survival\survival_loadout::lookupcurrentoperator(var_1.team), var_1 scripts\cp\survival\survival_loadout::lookupotheroperator(var_1.team)];
+    var_15 = scripts\cp\utility::getgametype();
 
-    if(!isDefined(var15)) {
-      var15 = getDvar("NKTMKRMSKR");
+    if(!isDefined(var_15)) {
+      var_15 = getDvar("NKTMKRMSKR");
     }
 
-    var16 = level.getallselectableattachments.game_type_col[var15];
-    var17 = "";
-    var18 = 1;
+    var_16 = level.getallselectableattachments.game_type_col[var_15];
+    var_17 = "";
+    var_18 = 1;
 
-    if(isDefined(var5.attachments)) {
-      var19 = 0;
+    if(isDefined(var_5.attachments)) {
+      var_19 = 0;
 
-      foreach(var21 in var5.attachments) {
-        var22 = scripts\cp\utility::attachmentmap_tobase(var21);
+      foreach(var_21 in var_5.attachments) {
+        var_22 = scripts\cp\utility::attachmentmap_tobase(var_21);
 
-        if(var22 == "scope") {
-          var19 = 1;
+        if(var_22 == "scope") {
+          var_19 = 1;
         }
 
-        if(scripts\cp\cp_weapon::carriedpunchcard(var5, var22)) {
-          if(!var18) {
-            var17 += "|";
+        if(scripts\cp\cp_weapon::carriedpunchcard(var_5, var_22)) {
+          if(!var_18) {
+            var_17 += "|";
           }
 
-          var22 = scripts\cp\cp_weapon::ref_12bbb(var22);
-          var17 += var22;
-          var18 = 0;
+          var_22 = scripts\cp\cp_weapon::ref_12bbb(var_22);
+          var_17 += var_22;
+          var_18 = 0;
         }
       }
 
-      if(var19) {
-        if(!var18) {
-          var17 += "|";
+      if(var_19) {
+        if(!var_18) {
+          var_17 += "|";
         }
 
-        var17 += "default_sniper_scope";
+        var_17 += "default_sniper_scope";
       }
     }
 
-    var24 = "";
-    var25 = 1;
+    var_24 = "";
+    var_25 = 1;
 
-    if(isDefined(var1.classstruct) && isDefined(var1.classstruct.loadoutperks)) {
-      foreach(var27 in var1.classstruct.loadoutperks) {
-        if(!var25) {
-          var24 += "|";
+    if(isDefined(var_1.classstruct) && isDefined(var_1.classstruct.loadoutperks)) {
+      foreach(var_27 in var_1.classstruct.loadoutperks) {
+        if(!var_25) {
+          var_24 += "|";
         }
 
-        var24 += var27;
-        var25 = 0;
+        var_24 += var_27;
+        var_25 = 0;
       }
     }
 
-    var29 = [var2, 0];
-    var30 = 0;
+    var_29 = [var_2, 0];
+    var_30 = 0;
 
-    if(isPlayer(var8)) {
-      var30 |= 1;
-    } else if(isagent(var8)) {
-      var30 = ref_12ce0(var30, var8);
+    if(isPlayer(var_8)) {
+      var_30 |= 1;
+    } else if(isagent(var_8)) {
+      var_30 = ref_12ce0(var_30, var_8);
     }
 
-    var31 = 0;
-    var32 = 0;
-    var33 = 0;
-    var34 = 0;
+    var_31 = 0;
+    var_32 = 0;
+    var_33 = 0;
+    var_34 = 0;
 
-    if(isDefined(var8.streakinfo)) {
-      var30 |= 2;
-      var35 = var8.streakinfo.streakname;
-      var34 = unsetreduceregendelayonkill(var35);
+    if(isDefined(var_8.streakinfo)) {
+      var_30 |= 2;
+      var_35 = var_8.streakinfo.streakname;
+      var_34 = unsetreduceregendelayonkill(var_35);
 
-      switch (var35) {
+      switch (var_35) {
         case "sentry_gun":
         case "pac_sentry":
         case "manual_turret":
         case "bradley":
         case "juggernaut":
-          var31 = 1;
+          var_31 = 1;
           break;
         case "nuke":
         case "white_phosphorus":
@@ -1322,48 +1322,48 @@ function ref_12071(var0, var1, var2, var3, var4, var5, var6, var7) {
         case "cruise_predator":
         case "chopper_support":
         case "chopper_gunner":
-          var32 = 1;
+          var_32 = 1;
           break;
         case "scrambler_drone_guard":
         case "directional_uav":
         case "uav":
         case "radar_drone_overwatch":
-          var32 = 1;
-          var33 = 1;
+          var_32 = 1;
+          var_33 = 1;
           break;
         case "airdrop_multiple":
         case "airdrop":
-          var33 = 1;
+          var_33 = 1;
           break;
       }
 
-      if(var31) {
-        var30 |= 8;
+      if(var_31) {
+        var_30 |= 8;
       }
 
-      if(var32) {
-        var30 |= 4;
+      if(var_32) {
+        var_30 |= 4;
       }
 
-      if(var33) {
-        var30 |= 16;
-      }
-    }
-
-    if(isDefined(var8.vehiclename) || var34) {
-      var30 |= 32;
-
-      if(!var31 && isDefined(var8.vehiclename) && !istrue(var8 scripts\cp_mp\vehicles\vehicle::vehiclecanfly())) {
-        var30 |= 8;
+      if(var_33) {
+        var_30 |= 16;
       }
     }
 
-    if(isDefined(var8.equipmentref)) {
-      var30 |= 64;
+    if(isDefined(var_8.vehiclename) || var_34) {
+      var_30 |= 32;
+
+      if(!var_31 && isDefined(var_8.vehiclename) && !istrue(var_8 scripts\cp_mp\vehicles\vehicle::vehiclecanfly())) {
+        var_30 |= 8;
+      }
     }
 
-    var36 = "";
-    var1 reportchallengeuserevent("kill", var29, var11, var12, var13, var14, var16, var17, var24, var30, var36, gettouchinglocaletriggers(var1, var8));
+    if(isDefined(var_8.equipmentref)) {
+      var_30 |= 64;
+    }
+
+    var_36 = "";
+    var_1 reportchallengeuserevent("kill", var_29, var_11, var_12, var_13, var_14, var_16, var_17, var_24, var_30, var_36, gettouchinglocaletriggers(var_1, var_8));
     return;
   }
 }

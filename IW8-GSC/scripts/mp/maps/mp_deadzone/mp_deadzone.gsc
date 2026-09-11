@@ -33,28 +33,28 @@ function main() {
     brinit();
   }
 
-  var0 = getnodesinradius((-130, 1850, 400), 200, 0, 200);
+  var_0 = getnodesinradius((-130, 1850, 400), 200, 0, 200);
 
-  foreach(var2 in var0) {
-    if(isDefined(var2.animscript) && (var2.animscript == "jump_up_80" || var2.animscript == "jump_down_80")) {
-      destroynavlink(var2);
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2.animscript) && (var_2.animscript == "jump_up_80" || var_2.animscript == "jump_down_80")) {
+      destroynavlink(var_2);
     }
   }
 }
 
 function incorrectswitch() {
-  var0 = spawn("script_model", (-73.0545, -2981.88, 410.847));
-  var0.angles = (0, 0, 0);
-  var0 setModel("roof_shingles_01_deadzone_coverup");
-  var1 = spawn("script_model", (-73.0545, -2981.88, 410.847));
-  var1.angles = (0, 0, 0);
-  var1 setModel("roof_shingles_01_deadzone_coverup_b");
+  var_0 = spawn("script_model", (-73.0545, -2981.88, 410.847));
+  var_0.angles = (0, 0, 0);
+  var_0 setModel("roof_shingles_01_deadzone_coverup");
+  var_1 = spawn("script_model", (-73.0545, -2981.88, 410.847));
+  var_1.angles = (0, 0, 0);
+  var_1 setModel("roof_shingles_01_deadzone_coverup_b");
 }
 
 function windmilllinkcol() {
-  var0 = getEnt("wind", "script_noteworthy");
-  var1 = getEnt("windcoll", "targetname");
-  var1 linkTo(var0);
+  var_0 = getEnt("wind", "script_noteworthy");
+  var_1 = getEnt("windcoll", "targetname");
+  var_1 linkTo(var_0);
 }
 
 function brinit() {
@@ -74,70 +74,70 @@ function brinit() {
 }
 
 function player_exfil_struct() {
-  var0 = getEnt("clip128x128x256", "targetname");
-  var1 = spawn("script_model", (54, 1702, 353));
-  var1.angles = (276, 90, 90);
-  var1 clonebrushmodeltoscriptmodel(var0);
-  var2 = getEnt("clip64x64x256", "targetname");
-  var3 = spawn("script_model", (1828, 1564, 432));
-  var3.angles = (0, 315, 0);
-  var3 clonebrushmodeltoscriptmodel(var2);
-  var4 = getEnt("nosight128x128x8", "targetname");
-  var5 = spawn("script_model", (-636, 266, 442));
-  var5.angles = (0, 270, 90);
-  var5 clonebrushmodeltoscriptmodel(var4);
-  var6 = getEnt("nosight128x128x8", "targetname");
-  var7 = spawn("script_model", (-618, 276, 442));
-  var7.angles = (0, 270, 90);
-  var7 clonebrushmodeltoscriptmodel(var6);
-  var8 = getEnt("nosight128x128x8", "targetname");
-  var9 = spawn("script_model", (-618, 248, 442));
-  var9.angles = (0, 0, 90);
-  var9 clonebrushmodeltoscriptmodel(var8);
-  var10 = getEnt("nosight128x128x8", "targetname");
-  var11 = spawn("script_model", (-608, 266, 442));
-  var11.angles = (0, 0, 90);
-  var11 clonebrushmodeltoscriptmodel(var10);
-  var12 = getEnt("nosight128x128x8", "targetname");
-  var13 = spawn("script_model", (1920, -1367, 524));
-  var13.angles = (330.796, 277.762, 89.9931);
-  var13 clonebrushmodeltoscriptmodel(var12);
-  var14 = getEnt("nosight128x128x8", "targetname");
-  var15 = spawn("script_model", (1926, -1412, 524));
-  var15.angles = (299.999, 277.769, 89.9912);
-  var15 clonebrushmodeltoscriptmodel(var14);
-  var16 = getEnt("nosight128x128x8", "targetname");
-  var17 = spawn("script_model", (1551.5, -1029, 396));
-  var17.angles = (360, 7.99995, -90.0002);
-  var17 clonebrushmodeltoscriptmodel(var16);
-  var18 = getEnt("nosight128x128x8", "targetname");
-  var19 = spawn("script_model", (-1720, -232, 592));
-  var19.angles = (360, 3.00002, -89.9997);
-  var19 clonebrushmodeltoscriptmodel(var18);
-  var20 = getEnt("nosight128x128x8", "targetname");
-  var21 = spawn("script_model", (-1770, 270, 592));
-  var21.angles = (360, 4.2995, 89.9997);
-  var21 clonebrushmodeltoscriptmodel(var20);
-  var22 = getEnt("nosight128x128x8", "targetname");
-  var23 = spawn("script_model", (1479, -1039, 396));
-  var23.angles = (360, 7.99995, -90.0002);
-  var23 clonebrushmodeltoscriptmodel(var22);
-  var24 = getEnt("nosight128x128x8", "targetname");
-  var25 = spawn("script_model", (1551.5, -1029, 489));
-  var25.angles = (360, 7.99995, -90.0002);
-  var25 clonebrushmodeltoscriptmodel(var24);
-  var26 = getEnt("nosight128x128x8", "targetname");
-  var27 = spawn("script_model", (1479, -1039, 489));
-  var27.angles = (360, 7.99995, -90.0002);
-  var27 clonebrushmodeltoscriptmodel(var26);
-  var28 = getEnt("clip64x64x256", "targetname");
-  var29 = spawn("script_model", (-1476.5, 2738.5, 632));
-  var29.angles = (0, 0, 0);
-  var29 clonebrushmodeltoscriptmodel(var28);
+  var_0 = getEnt("clip128x128x256", "targetname");
+  var_1 = spawn("script_model", (54, 1702, 353));
+  var_1.angles = (276, 90, 90);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = getEnt("clip64x64x256", "targetname");
+  var_3 = spawn("script_model", (1828, 1564, 432));
+  var_3.angles = (0, 315, 0);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
+  var_4 = getEnt("nosight128x128x8", "targetname");
+  var_5 = spawn("script_model", (-636, 266, 442));
+  var_5.angles = (0, 270, 90);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_6 = getEnt("nosight128x128x8", "targetname");
+  var_7 = spawn("script_model", (-618, 276, 442));
+  var_7.angles = (0, 270, 90);
+  var_7 clonebrushmodeltoscriptmodel(var_6);
+  var_8 = getEnt("nosight128x128x8", "targetname");
+  var_9 = spawn("script_model", (-618, 248, 442));
+  var_9.angles = (0, 0, 90);
+  var_9 clonebrushmodeltoscriptmodel(var_8);
+  var_10 = getEnt("nosight128x128x8", "targetname");
+  var_11 = spawn("script_model", (-608, 266, 442));
+  var_11.angles = (0, 0, 90);
+  var_11 clonebrushmodeltoscriptmodel(var_10);
+  var_12 = getEnt("nosight128x128x8", "targetname");
+  var_13 = spawn("script_model", (1920, -1367, 524));
+  var_13.angles = (330.796, 277.762, 89.9931);
+  var_13 clonebrushmodeltoscriptmodel(var_12);
+  var_14 = getEnt("nosight128x128x8", "targetname");
+  var_15 = spawn("script_model", (1926, -1412, 524));
+  var_15.angles = (299.999, 277.769, 89.9912);
+  var_15 clonebrushmodeltoscriptmodel(var_14);
+  var_16 = getEnt("nosight128x128x8", "targetname");
+  var_17 = spawn("script_model", (1551.5, -1029, 396));
+  var_17.angles = (360, 7.99995, -90.0002);
+  var_17 clonebrushmodeltoscriptmodel(var_16);
+  var_18 = getEnt("nosight128x128x8", "targetname");
+  var_19 = spawn("script_model", (-1720, -232, 592));
+  var_19.angles = (360, 3.00002, -89.9997);
+  var_19 clonebrushmodeltoscriptmodel(var_18);
+  var_20 = getEnt("nosight128x128x8", "targetname");
+  var_21 = spawn("script_model", (-1770, 270, 592));
+  var_21.angles = (360, 4.2995, 89.9997);
+  var_21 clonebrushmodeltoscriptmodel(var_20);
+  var_22 = getEnt("nosight128x128x8", "targetname");
+  var_23 = spawn("script_model", (1479, -1039, 396));
+  var_23.angles = (360, 7.99995, -90.0002);
+  var_23 clonebrushmodeltoscriptmodel(var_22);
+  var_24 = getEnt("nosight128x128x8", "targetname");
+  var_25 = spawn("script_model", (1551.5, -1029, 489));
+  var_25.angles = (360, 7.99995, -90.0002);
+  var_25 clonebrushmodeltoscriptmodel(var_24);
+  var_26 = getEnt("nosight128x128x8", "targetname");
+  var_27 = spawn("script_model", (1479, -1039, 489));
+  var_27.angles = (360, 7.99995, -90.0002);
+  var_27 clonebrushmodeltoscriptmodel(var_26);
+  var_28 = getEnt("clip64x64x256", "targetname");
+  var_29 = spawn("script_model", (-1476.5, 2738.5, 632));
+  var_29.angles = (0, 0, 0);
+  var_29 clonebrushmodeltoscriptmodel(var_28);
 }
 
 function battle_tracks_vehicleoccupancyenter() {
-  var0 = [];
+  var_0 = [];
 
   switch (scripts\mp\utility\game::getgametype()) {
     case "tjugg":
@@ -149,14 +149,14 @@ function battle_tracks_vehicleoccupancyenter() {
     case "conf":
     case "war":
     case "sr":
-      GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_tdm_spawn_secondary", (-2424, 1568, 458.505), (0, 300, 0)));
+      GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_tdm_spawn_secondary", (-2424, 1568, 458.505), (0, 300, 0)));
 
     case "dom":
-      GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_dom_spawn_secondary", (-2424, 1568, 458.505), (0, 300, 0)));
+      GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_dom_spawn_secondary", (-2424, 1568, 458.505), (0, 300, 0)));
   }
 
-  if(var0.size > 0) {
-    scripts\mp\spawnlogic::bdiedonce(var0);
+  if(var_0.size > 0) {
+    scripts\mp\spawnlogic::bdiedonce(var_0);
     return;
   }
 }

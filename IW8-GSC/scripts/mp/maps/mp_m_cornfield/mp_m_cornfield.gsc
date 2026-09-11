@@ -25,12 +25,12 @@ function main() {
   thread monitor();
 }
 
-function ref_12d7c(var0) {
-  var0 setCanDamage(1);
+function ref_12d7c(var_0) {
+  var_0 setCanDamage(1);
 
   for(;;) {
-    var0 waittill("damage", var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14);
-    var0 rotateTo((0, randomint(360), 0), 1, 0, 0.5);
+    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14);
+    var_0 rotateTo((0, randomint(360), 0), 1, 0, 0.5);
     waitframe();
   }
 }
@@ -44,21 +44,21 @@ function clear_player_class_and_super() {
   level.isgrenade = 0;
   level.clear_padding_disables = getEntArray("bears", "script_noteworthy");
 
-  foreach(var1 in level.clear_padding_disables) {
-    if(var1.targetname == "bearRed") {
-      var1 hide();
+  foreach(var_1 in level.clear_padding_disables) {
+    if(var_1.targetname == "bearRed") {
+      var_1 hide();
       continue;
     }
 
-    thread clear_players_from_door_way(var1);
+    thread clear_players_from_door_way(var_1);
   }
 }
 
 function monitor() {
-  var0 = getEntArray("weatherVane", "targetname");
+  var_0 = getEntArray("weatherVane", "targetname");
 
-  foreach(var2 in var0) {
-    thread ref_12d7c(var2);
+  foreach(var_2 in var_0) {
+    thread ref_12d7c(var_2);
   }
 
   level.ref_12d40 = scripts\engine\utility::spawn_tag_origin();
@@ -67,50 +67,50 @@ function monitor() {
   level.ref_12d40 show();
   level.ref_12d47 = getEntArray("candleRing", "targetname");
 
-  foreach(var5 in level.ref_12d47) {
-    var5.fx = scripts\engine\utility::spawn_tag_origin();
-    var5.fx.origin = var5.origin;
-    var5.fx.angles = var5.angles;
-    var5.fx show();
-    var5 hide();
+  foreach(var_5 in level.ref_12d47) {
+    var_5.fx = scripts\engine\utility::spawn_tag_origin();
+    var_5.fx.origin = var_5.origin;
+    var_5.fx.angles = var_5.angles;
+    var_5.fx show();
+    var_5 hide();
   }
 
   level.gesture_checker = getEntArray("candle", "targetname");
   level.gesture_checker = scripts\engine\utility::array_randomize(level.gesture_checker);
 
-  foreach(var8 in level.gesture_checker) {
-    var8.fx = scripts\engine\utility::spawn_tag_origin();
-    var8.fx.origin = var8.origin;
-    var8.fx.angles = var8.angles;
-    var8.fx show();
-    var8 hide();
+  foreach(var_8 in level.gesture_checker) {
+    var_8.fx = scripts\engine\utility::spawn_tag_origin();
+    var_8.fx.origin = var_8.origin;
+    var_8.fx.angles = var_8.angles;
+    var_8.fx show();
+    var_8 hide();
   }
 
   level.mon_clip = getEntArray("egg", "targetname");
 
-  foreach(var11 in level.mon_clip) {
-    var11.comparescriptindexsmalltolarge = getEntArray(var11.target, "targetname");
+  foreach(var_11 in level.mon_clip) {
+    var_11.comparescriptindexsmalltolarge = getEntArray(var_11.target, "targetname");
 
-    foreach(var13 in var11.comparescriptindexsmalltolarge) {
-      var13 linkTo(var11);
-      var13 hide();
+    foreach(var_13 in var_11.comparescriptindexsmalltolarge) {
+      var_13 linkTo(var_11);
+      var_13 hide();
     }
 
-    var11.fx = scripts\engine\utility::spawn_tag_origin();
-    var11.fx.origin = var11.origin;
-    var11.fx.angles = var11.angles;
-    var11.fx show();
-    var11.fx linkTo(var11);
-    var11 hide();
+    var_11.fx = scripts\engine\utility::spawn_tag_origin();
+    var_11.fx.origin = var_11.origin;
+    var_11.fx.angles = var_11.angles;
+    var_11.fx show();
+    var_11.fx linkTo(var_11);
+    var_11 hide();
   }
 }
 
-function clear_players_from_door_way(var0) {
-  var0 setCanDamage(1);
-  var0 waittill("damage", var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14);
-  var0 hide();
+function clear_players_from_door_way(var_0) {
+  var_0 setCanDamage(1);
+  var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14);
+  var_0 hide();
 
-  switch (var0.targetname) {
+  switch (var_0.targetname) {
     case "bearRed":
       level.isgroundwarcoremode++;
       getquestweaponxprewardinstance();
@@ -189,9 +189,9 @@ function getlootname() {
   if(level.isgrenade == 4) {
     level.clear_players_breadcrumbs_to_safe_house = getEntArray("bearRed", "targetname");
 
-    foreach(var1 in level.clear_players_breadcrumbs_to_safe_house) {
-      var1 show();
-      thread clear_players_from_door_way(var1);
+    foreach(var_1 in level.clear_players_breadcrumbs_to_safe_house) {
+      var_1 show();
+      thread clear_players_from_door_way(var_1);
     }
 
     return;
@@ -202,9 +202,9 @@ function molotov_watch_cleanup_pool() {
   wait 5;
   level.clear_players_breadcrumbs_to_safe_house = getEntArray("bearRed", "targetname");
 
-  foreach(var1 in level.clear_players_breadcrumbs_to_safe_house) {
-    var1 show();
-    thread clear_players_from_door_way(var1);
+  foreach(var_1 in level.clear_players_breadcrumbs_to_safe_house) {
+    var_1 show();
+    thread clear_players_from_door_way(var_1);
   }
 }
 
@@ -213,110 +213,110 @@ function ref_13dc1() {
   thread scripts\engine\utility::play_sound_in_space("mp_cornfield_goats_lr", (-666, -666, 60));
   thread scripts\engine\utility::play_sound_in_space("mp_cornfield_goats_lsrs", (-300, -666, 60));
 
-  foreach(var1 in level.players) {
-    var1 visionsetnakedforplayer("mp_m_cornfield_egg", 15);
-    var1 playlocalsound("mp_cornfield_goat_stinger");
+  foreach(var_1 in level.players) {
+    var_1 visionsetnakedforplayer("mp_m_cornfield_egg", 15);
+    var_1 playlocalsound("mp_cornfield_goat_stinger");
   }
 
-  foreach(var4 in level.ref_12d47) {
-    var4 show();
+  foreach(var_4 in level.ref_12d47) {
+    var_4 show();
     waittillframeend();
-    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_candle_poof"), var4.fx, "tag_origin");
-    thread scripts\engine\utility::play_sound_in_space("mp_cornfield_goat_candle", var4.origin);
+    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_candle_poof"), var_4.fx, "tag_origin");
+    thread scripts\engine\utility::play_sound_in_space("mp_cornfield_goat_candle", var_4.origin);
   }
 
   wait 2;
 
-  foreach(var4 in level.gesture_checker) {
-    var4 show();
+  foreach(var_4 in level.gesture_checker) {
+    var_4 show();
     waittillframeend();
-    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_candle_poof"), var4.fx, "tag_origin");
-    thread scripts\engine\utility::play_sound_in_space("mp_cornfield_goat_candle", var4.origin);
+    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_candle_poof"), var_4.fx, "tag_origin");
+    thread scripts\engine\utility::play_sound_in_space("mp_cornfield_goat_candle", var_4.origin);
     wait 0.1;
   }
 
   wait 1;
-  var8 = (0, 0, -386.09);
-  var9 = (0, 0, 100);
-  physics_setgravity(var9);
+  var_8 = (0, 0, -386.09);
+  var_9 = (0, 0, 100);
+  physics_setgravity(var_9);
 
-  foreach(var11 in level.mon_clip) {
-    var11 show();
-    playFXOnTag(scripts\engine\utility::getfx("vfx_goat_eyes"), var11.fx, "tag_origin");
+  foreach(var_11 in level.mon_clip) {
+    var_11 show();
+    playFXOnTag(scripts\engine\utility::getfx("vfx_goat_eyes"), var_11.fx, "tag_origin");
 
-    foreach(var13 in var11.comparescriptindexsmalltolarge) {
-      var13 show();
+    foreach(var_13 in var_11.comparescriptindexsmalltolarge) {
+      var_13 show();
     }
   }
 
   wait 3;
 
-  foreach(var11 in level.mon_clip) {
-    var17 = scripts\engine\utility::getStruct(var11.target, "targetname");
+  foreach(var_11 in level.mon_clip) {
+    var_17 = scripts\engine\utility::getStruct(var_11.target, "targetname");
 
-    if(isDefined(var17)) {
-      var11.origin = var17.origin;
-      var11.angles = var17.angles;
-      var11.ref_11e73 = var17.target;
+    if(isDefined(var_17)) {
+      var_11.origin = var_17.origin;
+      var_11.angles = var_17.angles;
+      var_11.ref_11e73 = var_17.target;
     }
   }
 
   wait 2;
 
-  foreach(var11 in level.mon_clip) {
-    var17 = scripts\engine\utility::getStruct(var11.ref_11e73, "targetname");
+  foreach(var_11 in level.mon_clip) {
+    var_17 = scripts\engine\utility::getStruct(var_11.ref_11e73, "targetname");
 
-    if(isDefined(var17)) {
+    if(isDefined(var_17)) {
       waittillframeend();
-      var11.origin = var17.origin;
-      var11.angles = var17.angles;
-      var11.ref_11e73 = var17.target;
+      var_11.origin = var_17.origin;
+      var_11.angles = var_17.angles;
+      var_11.ref_11e73 = var_17.target;
     }
   }
 
   wait 2;
 
-  foreach(var11 in level.mon_clip) {
-    var17 = scripts\engine\utility::getStruct(var11.ref_11e73, "targetname");
+  foreach(var_11 in level.mon_clip) {
+    var_17 = scripts\engine\utility::getStruct(var_11.ref_11e73, "targetname");
 
-    if(isDefined(var17)) {
+    if(isDefined(var_17)) {
       waittillframeend();
-      var11.origin = var17.origin;
-      var11.angles = var17.angles;
+      var_11.origin = var_17.origin;
+      var_11.angles = var_17.angles;
     }
   }
 
   wait 1.5;
 
-  foreach(var1 in level.players) {
-    var1 visionsetnakedforplayer("mp_m_cornfield_egg2", 0.25);
+  foreach(var_1 in level.players) {
+    var_1 visionsetnakedforplayer("mp_m_cornfield_egg2", 0.25);
   }
 
   wait 1;
 
-  foreach(var11 in level.mon_clip) {
-    killfxontag(scripts\engine\utility::getfx("vfx_goat_eyes"), var11.fx, "tag_origin");
-    killfxontag(scripts\engine\utility::getfx("vfx_goat_eyes"), var11.fx, "tag_origin");
-    var11 hide();
+  foreach(var_11 in level.mon_clip) {
+    killfxontag(scripts\engine\utility::getfx("vfx_goat_eyes"), var_11.fx, "tag_origin");
+    killfxontag(scripts\engine\utility::getfx("vfx_goat_eyes"), var_11.fx, "tag_origin");
+    var_11 hide();
 
-    foreach(var13 in var11.comparescriptindexsmalltolarge) {
-      var13 hide();
+    foreach(var_13 in var_11.comparescriptindexsmalltolarge) {
+      var_13 hide();
     }
   }
 
-  physics_setgravity(var8);
+  physics_setgravity(var_8);
 
-  foreach(var1 in level.players) {
+  foreach(var_1 in level.players) {
     thread viewmodel_demeanor();
   }
 
-  foreach(var4 in level.ref_12d47) {
-    killfxontag(scripts\engine\utility::getfx("vfx_garden_candle_poof"), var4.fx, "tag_origin");
+  foreach(var_4 in level.ref_12d47) {
+    killfxontag(scripts\engine\utility::getfx("vfx_garden_candle_poof"), var_4.fx, "tag_origin");
   }
 
-  foreach(var4 in level.gesture_checker) {
-    var4 hide();
-    killfxontag(scripts\engine\utility::getfx("vfx_garden_candle_poof"), var4.fx, "tag_origin");
+  foreach(var_4 in level.gesture_checker) {
+    var_4 hide();
+    killfxontag(scripts\engine\utility::getfx("vfx_garden_candle_poof"), var_4.fx, "tag_origin");
   }
 }
 

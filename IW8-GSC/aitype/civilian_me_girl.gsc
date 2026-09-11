@@ -28,10 +28,10 @@ function main() {
   self.usescriptedweapon = 0;
   self.scriptedweaponclassprimary = "none";
   self.weapon = isundefinedweapon();
-  var0 = undefined;
-  var1 = ["civ_syrkistan_girl_1_1", "civ_syrkistan_girl_2_1", "civ_syrkistan_girl_3_1", "civ_syrkistan_girl_4_1", "civ_syrkistan_girl_5_1", "civ_syrkistan_girl_6_1", "civ_syrkistan_girl_7_1"];
+  var_0 = undefined;
+  var_1 = ["civ_syrkistan_girl_1_1", "civ_syrkistan_girl_2_1", "civ_syrkistan_girl_3_1", "civ_syrkistan_girl_4_1", "civ_syrkistan_girl_5_1", "civ_syrkistan_girl_6_1", "civ_syrkistan_girl_7_1"];
 
-  switch (scripts\code\character::get_random_character(7, var0, var1)) {
+  switch (scripts\code\character::get_random_character(7, var_0, var_1)) {
     case 0:
       character\civ_syrkistan_girl_1_1::main();
       break;
@@ -60,7 +60,7 @@ function spawner() {
   self setspawnerteam("neutral");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\civ_syrkistan_girl_1_1::precache();
   character\civ_syrkistan_girl_2_1::precache();
   character\civ_syrkistan_girl_3_1::precache();

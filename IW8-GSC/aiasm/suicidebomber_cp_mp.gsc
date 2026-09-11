@@ -482,46 +482,46 @@ function asm_register() {
   anim.asmfuncs["soldier_cp"][463] = &autogenfunc_10;
 }
 
-function autogenfunc_0(var0, var1, var2, var3) {
+function autogenfunc_0(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_isanimScripted() && isDefined(self.asm.customdata.idlestate);
 }
 
-function autogenfunc_1(var0, var1, var2, var3) {
+function autogenfunc_1(var_0, var_1, var_2, var_3) {
   return !scripts\asm\asm_bb::bb_isanimScripted() && isDefined(self.asm.customdata.exitstate);
 }
 
-function autogenfunc_2(var0, var1, var2, var3) {
+function autogenfunc_2(var_0, var_1, var_2, var_3) {
   return scripts\asm\soldier\move::shouldwalkandtalk();
 }
 
-function autogenfunc_3(var0, var1, var2, var3) {
+function autogenfunc_3(var_0, var_1, var_2, var_3) {
   return !scripts\asm\soldier\move::shouldwalkandtalk();
 }
 
-function autogenfunc_4(var0, var1, var2, var3) {
+function autogenfunc_4(var_0, var_1, var_2, var_3) {
   return self codemoverequested() && isDefined(self.grenade);
 }
 
-function autogenfunc_5(var0, var1, var2, var3) {
+function autogenfunc_5(var_0, var_1, var_2, var_3) {
   return self aigetdesiredspeed() < 60;
 }
 
-function autogenfunc_6(var0, var1, var2, var3) {
+function autogenfunc_6(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm_bb::bb_iswhizbyrequested();
 }
 
-function autogenfunc_7(var0, var1, var2, var3) {
+function autogenfunc_7(var_0, var_1, var_2, var_3) {
   return !isDefined(scripts\asm\asm_bb::bb_getmeleetarget());
 }
 
-function autogenfunc_8(var0) {
-  scripts\asm\track::track(var0);
+function autogenfunc_8(var_0) {
+  scripts\asm\track::track(var_0);
 }
 
-function autogenfunc_9(var0) {
-  scripts\asm\juggernaut\juggernaut::juggernaut(var0);
+function autogenfunc_9(var_0) {
+  scripts\asm\juggernaut\juggernaut::juggernaut(var_0);
 }
 
-function autogenfunc_10(var0) {
-  scripts\asm\gesture::gesture(var0);
+function autogenfunc_10(var_0) {
+  scripts\asm\gesture::gesture(var_0);
 }

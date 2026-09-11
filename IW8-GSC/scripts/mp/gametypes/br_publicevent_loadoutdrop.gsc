@@ -4,19 +4,19 @@
 ***************************************************************/
 
 function init() {
-  var0 = spawnStruct();
-  var0.attackerswaittime = &ascendermodelview;
-  var0.isfeaturedisabled = &deactivate;
-  var0.ref_14382 = &ref_14382;
-  var0.‹Á¿ ø {
+  var_0 = spawnStruct();
+  var_0.attackerswaittime = &ascendermodelview;
+  var_0.isfeaturedisabled = &deactivate;
+  var_0.ref_14382 = &ref_14382;
+  var_0.‹Á¿ ø {
     ÏXX;
     â # / = &postinitfunc;
-    var0.weight = getdvarfloat("scr_br_pe_loadoutdrop_weight", 0);
-    var0.ref_11b78 = getdvarint("scr_br_pe_loadoutdrop_max_times", 2);
-    var0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("loadoutdrop", "01010100000000 10102025");
-    var0.£¼#w]
+    var_0.weight = getdvarfloat("scr_br_pe_loadoutdrop_weight", 0);
+    var_0.ref_11b78 = getdvarint("scr_br_pe_loadoutdrop_max_times", 2);
+    var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("loadoutdrop", "01010100000000 10102025");
+    var_0.£¼#w]
   j‹ ƒ½ Ï‚ UÀíÌI¸ Û« = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("loadoutdrop");
-  scripts\mp\gametypes\br_publicevents::ref_12b35(8, var0);
+  scripts\mp\gametypes\br_publicevents::ref_12b35(8, var_0);
 }
 
 function postinitfunc() {
@@ -44,10 +44,10 @@ function ascendermodelview() {
 
   thread scripts\mp\gametypes\br_rewards::initdropbagsystem();
   thread scripts\mp\gametypes\br::cleanupdropbagsoncircle();
-  var0 = 0;
-  thread scripts\mp\gametypes\br_rewards::ref_1284d(var0);
-  var1 = "supply_drop";
-  scripts\mp\gametypes\br_armory_kiosk::ref_13169(var1, 0);
+  var_0 = 0;
+  thread scripts\mp\gametypes\br_rewards::ref_1284d(var_0);
+  var_1 = "supply_drop";
+  scripts\mp\gametypes\br_armory_kiosk::ref_13169(var_1, 0);
 }
 
 function deactivate() {}

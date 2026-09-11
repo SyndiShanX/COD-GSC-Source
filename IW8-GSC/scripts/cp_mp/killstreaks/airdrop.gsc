@@ -33,11 +33,11 @@ function initheli() {
 }
 
 function initcratedata() {
-  var0 = spawnStruct();
-  var0.configs = [];
-  var0.crates = [];
-  var0.usablecrates = [];
-  level.cratedata = var0;
+  var_0 = spawnStruct();
+  var_0.configs = [];
+  var_0.crates = [];
+  var_0.usablecrates = [];
+  level.cratedata = var_0;
   level.cratedata.ref_13f28 = pow(getdvarfloat("scr_crateUnresolvedCollisionToleranceSqr", 2), 2);
   level.mpplayerallowcrateuse = &scripts\common\utility::allow_crate_use;
   level.cratedata.mountmantlemodel = getEnt("care_package_col", "targetname");
@@ -46,13 +46,13 @@ function initcratedata() {
     [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "registerActionSet")]]();
   }
 
-  var2 = "mp";
+  var_2 = "mp";
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "getGameType")) {
-    var2 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getGameType")]]();
+    var_2 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getGameType")]]();
   }
 
-  switch (var2) {
+  switch (var_2) {
     case "cp_survival":
     case "cp_wave_sv":
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "getGameModeSpecificCrateData")) {
@@ -68,12 +68,12 @@ function initcratedata() {
       teamplacement();
 
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "brGetGameModeSpecificCrateData")) {
-        var3 = spawnStruct();
-        var3.model = relic_landlocked_do_explosion();
-        var3.ref_140a1 = 0.5;
-        var3.ref_1409f = 3;
-        var3.usefov = 180;
-        [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "brGetGameModeSpecificCrateData")]](var3);
+        var_3 = spawnStruct();
+        var_3.model = relic_landlocked_do_explosion();
+        var_3.ref_140a1 = 0.5;
+        var_3.ref_1409f = 3;
+        var_3.usefov = 180;
+        [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "brGetGameModeSpecificCrateData")]](var_3);
       }
     case "arm":
       initarmcratedata();
@@ -97,207 +97,207 @@ function initcratedata() {
   thread watchallcrateusability();
 }
 
-function getleveldata(var0) {
-  var1 = level.cratedata.configs[var0];
+function getleveldata(var_0) {
+  var_1 = level.cratedata.configs[var_0];
 
-  if(!isDefined(var1)) {
-    var1 = getemptyleveldata();
-    level.cratedata.configs[var0] = var1;
+  if(!isDefined(var_1)) {
+    var_1 = getemptyleveldata();
+    level.cratedata.configs[var_0] = var_1;
   }
 
-  return var1;
+  return var_1;
 }
 
 function getemptyleveldata() {
-  var0 = spawnStruct();
-  var0.friendlymodel = "military_carepackage_01_friendly";
-  var0.enemymodel = "military_carepackage_01_enemy";
-  var0.dummymodel = "military_carepackage_01_dummy";
-  var0.setplayerbeingrevivedextrainfo = 27.5;
-  var0.mountmantlemodel = getdefaultmountmantlemodel();
-  var0.objweapon = isundefinedweapon();
-  var0.timeout = 90;
-  var0.headiconoffset = 0;
-  var0.headicondrawrange = 10000;
-  var0.headiconnaturalrange = 400;
-  var0.minimapicon = "icon_minimap_carepackage";
-  var0.usetag = "tag_use";
-  var0.userange = 128;
-  var0.breakuserangesqr = 30625;
-  var0.usefov = 360;
-  var0.usepriority = 0;
-  var0.ownerusetime = 0.5;
-  var0.otherusetime = 3;
-  var0.friendlyuseonly = 0;
-  var0.navobstaclebounds = (30, 10, 64);
-  var0.navobstacleupdatedistsqr = 64;
-  var0.dangerzoneheight = 1000;
-  var0.dangerzoneradius = 128;
-  var0.activatecallback = undefined;
-  var0.deactivatecallback = undefined;
-  var0.capturecallback = undefined;
-  var0.rerollcallback = undefined;
-  var0.destroycallback = undefined;
-  var0.destroyoncapture = 1;
-  var0.onecaptureperplayer = 0;
-  var0.destroyvisualscallback = getdefaultdestroyvisualscallback();
-  var0.destroyvisualsdeletiondelay = getdefaultdestroyvisualsdeletiondelay();
-  var0.capturevisualscallback = getdefaultcapturevisualscallback();
-  var0.capturevisualsdeletiondelay = getdefaultcapturevisualsdeletiondelay();
-  var0.capturestring = &"KILLSTREAKS_HINTS/CRATE_PICKUP";
-  var0.rerollstring = &"KILLSTREAKS_HINTS/UAV_REROLL";
-  var0.headicon = "hud_icon_head_killstreak_carepackage";
-  var0.supportsreroll = 0;
-  var0.supportsownercapture = 1;
-  var0.supportsothercapture = 1;
-  return var0;
+  var_0 = spawnStruct();
+  var_0.friendlymodel = "military_carepackage_01_friendly";
+  var_0.enemymodel = "military_carepackage_01_enemy";
+  var_0.dummymodel = "military_carepackage_01_dummy";
+  var_0.setplayerbeingrevivedextrainfo = 27.5;
+  var_0.mountmantlemodel = getdefaultmountmantlemodel();
+  var_0.objweapon = isundefinedweapon();
+  var_0.timeout = 90;
+  var_0.headiconoffset = 0;
+  var_0.headicondrawrange = 10000;
+  var_0.headiconnaturalrange = 400;
+  var_0.minimapicon = "icon_minimap_carepackage";
+  var_0.usetag = "tag_use";
+  var_0.userange = 128;
+  var_0.breakuserangesqr = 30625;
+  var_0.usefov = 360;
+  var_0.usepriority = 0;
+  var_0.ownerusetime = 0.5;
+  var_0.otherusetime = 3;
+  var_0.friendlyuseonly = 0;
+  var_0.navobstaclebounds = (30, 10, 64);
+  var_0.navobstacleupdatedistsqr = 64;
+  var_0.dangerzoneheight = 1000;
+  var_0.dangerzoneradius = 128;
+  var_0.activatecallback = undefined;
+  var_0.deactivatecallback = undefined;
+  var_0.capturecallback = undefined;
+  var_0.rerollcallback = undefined;
+  var_0.destroycallback = undefined;
+  var_0.destroyoncapture = 1;
+  var_0.onecaptureperplayer = 0;
+  var_0.destroyvisualscallback = getdefaultdestroyvisualscallback();
+  var_0.destroyvisualsdeletiondelay = getdefaultdestroyvisualsdeletiondelay();
+  var_0.capturevisualscallback = getdefaultcapturevisualscallback();
+  var_0.capturevisualsdeletiondelay = getdefaultcapturevisualsdeletiondelay();
+  var_0.capturestring = &"KILLSTREAKS_HINTS/CRATE_PICKUP";
+  var_0.rerollstring = &"KILLSTREAKS_HINTS/UAV_REROLL";
+  var_0.headicon = "hud_icon_head_killstreak_carepackage";
+  var_0.supportsreroll = 0;
+  var_0.supportsownercapture = 1;
+  var_0.supportsothercapture = 1;
+  return var_0;
 }
 
-function hasleveldata(var0) {
-  return isDefined(level.cratedata.configs[var0]);
+function hasleveldata(var_0) {
+  return isDefined(level.cratedata.configs[var_0]);
 }
 
-function createcrate(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
-  var10 = getleveldata(var2);
+function createcrate(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  var_10 = getleveldata(var_2);
 
-  if(var10.supportsownercapture) {}
+  if(var_10.supportsownercapture) {}
 
-  if(var10.supportsreroll) {}
+  if(var_10.supportsreroll) {}
 
-  var11 = spawn("script_model", var3);
-  var11.angles = var4;
+  var_11 = spawn("script_model", var_3);
+  var_11.angles = var_4;
 
-  if(!istrue(var7) && var2 != "battle_royale_c130_loot" || var2 != "battle_royale_loadout") {
+  if(!istrue(var_7) && var_2 != "battle_royale_c130_loot" || var_2 != "battle_royale_loadout") {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("entity", "touchingBadTrigger")) {
-      if(var11[[scripts\cp_mp\utility\script_utility::getsharedfunc("entity", "touchingBadTrigger")]]()) {
-        var11 delete();
+      if(var_11[[scripts\cp_mp\utility\script_utility::getsharedfunc("entity", "touchingBadTrigger")]]()) {
+        var_11 delete();
         return undefined;
       }
     }
   }
 
-  var11.owner = var0;
-  var11.team = var1;
-  var11.objweapon = var10.objweapon;
-  var11.cratetype = var2;
-  var11.useobject = undefined;
-  var11.navobstacle = undefined;
-  var11.headiconid = undefined;
-  var11.minimapid = undefined;
-  var11.dangerzoneid = undefined;
-  var11.navobstacleid = undefined;
-  var11.destination = var5;
-  var11.headiconactive = 0;
-  var11.minimapiconactive = 0;
-  var11.hasnophysics = istrue(var6);
-  var11.physicsactivated = 0;
-  var11.isdestroyed = 0;
-  var11.data = var8;
-  var11.skipminimapicon = var9;
-  var11.headicon = var10.headicon;
-  var11.minimapicon = var10.minimapicon;
-  var11.capturestring = var10.capturestring;
-  var11.rerollstring = var10.rerollstring;
-  var11.supportsreroll = var10.supportsreroll;
+  var_11.owner = var_0;
+  var_11.team = var_1;
+  var_11.objweapon = var_10.objweapon;
+  var_11.cratetype = var_2;
+  var_11.useobject = undefined;
+  var_11.navobstacle = undefined;
+  var_11.headiconid = undefined;
+  var_11.minimapid = undefined;
+  var_11.dangerzoneid = undefined;
+  var_11.navobstacleid = undefined;
+  var_11.destination = var_5;
+  var_11.headiconactive = 0;
+  var_11.minimapiconactive = 0;
+  var_11.hasnophysics = istrue(var_6);
+  var_11.physicsactivated = 0;
+  var_11.isdestroyed = 0;
+  var_11.data = var_8;
+  var_11.skipminimapicon = var_9;
+  var_11.headicon = var_10.headicon;
+  var_11.minimapicon = var_10.minimapicon;
+  var_11.capturestring = var_10.capturestring;
+  var_11.rerollstring = var_10.rerollstring;
+  var_11.supportsreroll = var_10.supportsreroll;
 
   if(level.gametype == "infect") {
-    var11.validate_station = 1;
+    var_11.validate_station = 1;
   }
 
-  var11 setModel(var10.dummymodel);
-  var11 setnodeploy(1);
-  var11 setCanDamage(0);
-  var11 makeunusable();
-  var11 enableplayermarks("killstreak");
+  var_11 setModel(var_10.dummymodel);
+  var_11 setnodeploy(1);
+  var_11 setCanDamage(0);
+  var_11 makeunusable();
+  var_11 enableplayermarks("killstreak");
 
   if(level.teambased) {
-    var11 filteroutplayermarks(var11.team);
+    var_11 filteroutplayermarks(var_11.team);
   } else {
-    var11 filteroutplayermarks(var11.owner);
+    var_11 filteroutplayermarks(var_11.owner);
   }
 
-  var12 = undefined;
+  var_12 = undefined;
 
-  if(isDefined(var10.friendlymodel)) {
-    var12 = spawn("script_model", var3);
-    var12.angles = var4;
-    var12.crate = var11;
-    var12 setModel(var10.friendlymodel);
-    var12 linkTo(var11);
-    var11.childoutlineents = [var12];
+  if(isDefined(var_10.friendlymodel)) {
+    var_12 = spawn("script_model", var_3);
+    var_12.angles = var_4;
+    var_12.crate = var_11;
+    var_12 setModel(var_10.friendlymodel);
+    var_12 linkTo(var_11);
+    var_11.childoutlineents = [var_12];
   } else {
-    var12 = var11;
+    var_12 = var_11;
   }
 
-  var11.friendlymodel = var12;
-  var13 = undefined;
+  var_11.friendlymodel = var_12;
+  var_13 = undefined;
 
-  if(isDefined(var10.enemymodel)) {
+  if(isDefined(var_10.enemymodel)) {
     if(level.teambased) {}
 
-    var13 = spawn("script_model", var3);
-    var13.angles = var4;
-    var13.cratedata = var11;
-    var13 setModel(var10.enemymodel);
-    var13 linkTo(var11);
+    var_13 = spawn("script_model", var_3);
+    var_13.angles = var_4;
+    var_13.cratedata = var_11;
+    var_13 setModel(var_10.enemymodel);
+    var_13 linkTo(var_11);
   }
 
-  var11.enemymodel = var13;
+  var_11.enemymodel = var_13;
 
-  if(isDefined(var11.enemymodel)) {
+  if(isDefined(var_11.enemymodel)) {
     thread watchvisibility();
   }
 
-  var14 = undefined;
+  var_14 = undefined;
 
-  if(!var11.hasnophysics) {
+  if(!var_11.hasnophysics) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "getGameType")) {
       if([[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getGameType")]]() != "br") {
-        var14 = spawn("script_model", var3 + (0, 0, 300));
-        var14 setscriptmoverkillcam("explosive");
+        var_14 = spawn("script_model", var_3 + (0, 0, 300));
+        var_14 setscriptmoverkillcam("explosive");
 
         if(isDefined(self.scenenode)) {
-          if(var7) {
-            thread looselinkTo(var14, var11);
+          if(var_7) {
+            thread looselinkTo(var_14, var_11);
           } else {
-            var14 linkTo(var11);
+            var_14 linkTo(var_11);
           }
         }
       }
     }
   }
 
-  if(isDefined(var11.owner)) {
-    var11.owner.unset_relic_ammo_drain = 1;
+  if(isDefined(var_11.owner)) {
+    var_11.owner.unset_relic_ammo_drain = 1;
   }
 
-  var11.killcament = var14;
-  var15 = createmountmantlemodel(var11);
+  var_11.killcament = var_14;
+  var_15 = createmountmantlemodel(var_11);
 
-  if(!var15) {
-    var11.unresolved_collision_func = &crateunresolvedcollisioncallback;
+  if(!var_15) {
+    var_11.unresolved_collision_func = &crateunresolvedcollisioncallback;
   }
 
-  addtolists(var11);
+  addtolists(var_11);
 
   if(!scripts\engine\utility::is_equal(level.script, "mp_bm_tut")) {
     thread watchcratedestroyearly();
   }
 
-  if(var11.hasnophysics) {
-    activatecratefirsttime(var11);
-  } else if(var7) {
-    infinite_chopper(var11);
+  if(var_11.hasnophysics) {
+    activatecratefirsttime(var_11);
+  } else if(var_7) {
+    infinite_chopper(var_11);
   }
 
-  return var11;
+  return var_11;
 }
 
 function activatecratefirsttime() {
   activatecrate(1);
 }
 
-function activatecrate(var0) {
+function activatecrate(var_0) {
   self notify("activateCrate");
   self.unset_relic_amped = undefined;
 
@@ -313,77 +313,77 @@ function activatecrate(var0) {
     self waittill("objective_activate");
   }
 
-  if(istrue(var0) && self.cratetype != "battle_royale_loadout" && !istrue(self.skipminimapicon)) {
+  if(istrue(var_0) && self.cratetype != "battle_royale_loadout" && !istrue(self.skipminimapicon)) {
     createminimapicon();
   }
 
   _createheadicon();
   makecrateusable();
-  var1 = getleveldata(self.cratetype);
+  var_1 = getleveldata(self.cratetype);
 
-  if(isDefined(var1.activatecallback)) {
-    self thread[[var1.activatecallback]](var0);
+  if(isDefined(var_1.activatecallback)) {
+    self thread[[var_1.activatecallback]](var_0);
     return;
   }
 }
 
-function deactivatecrate(var0) {
-  if(istrue(var0)) {
+function deactivatecrate(var_0) {
+  if(istrue(var_0)) {
     destroyminimapicon();
   }
 
   _destroyheadicon();
   makecrateunusable();
-  var1 = getleveldata(self.cratetype);
+  var_1 = getleveldata(self.cratetype);
 
-  if(isDefined(var1.deactivatecallback)) {
-    self thread[[var1.deactivatecallback]](var0);
+  if(isDefined(var_1.deactivatecallback)) {
+    self thread[[var_1.deactivatecallback]](var_0);
     return;
   }
 }
 
-function capturecrate(var0) {
-  var1 = getleveldata(self.cratetype);
+function capturecrate(var_0) {
+  var_1 = getleveldata(self.cratetype);
 
   if(isDefined(self.owner) && istrue(self.owner.unset_relic_ammo_drain)) {
     self.owner.unset_relic_ammo_drain = 0;
   }
 
-  if(isDefined(var1.capturecallback)) {
-    self thread[[var1.capturecallback]](var0);
+  if(isDefined(var_1.capturecallback)) {
+    self thread[[var_1.capturecallback]](var_0);
   }
 
-  if(var1.destroyoncapture) {
-    var2 = 0;
+  if(var_1.destroyoncapture) {
+    var_2 = 0;
 
-    if(isDefined(var1.capturevisualscallback)) {
-      self thread[[var1.capturevisualscallback]](self.friendlymodel);
+    if(isDefined(var_1.capturevisualscallback)) {
+      self thread[[var_1.capturevisualscallback]](self.friendlymodel);
 
       if(isDefined(self.enemymodel)) {
-        self thread[[var1.capturevisualscallback]](self.enemymodel);
+        self thread[[var_1.capturevisualscallback]](self.enemymodel);
       }
 
-      var2 = var1.capturevisualsdeletiondelay;
+      var_2 = var_1.capturevisualsdeletiondelay;
     }
 
-    thread deletecrate(var2);
+    thread deletecrate(var_2);
     return;
   }
 }
 
-function destroycrate(var0) {
+function destroycrate(var_0) {
   if(istrue(self.isdestroyed)) {
     return;
   }
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     if(isDefined(self.scenenode)) {
       if(isDefined(self.animdroptime)) {
         if(gettime() >= self.animdroptime) {
           self.destroyonactivate = 1;
           return;
         } else {
-          var0 = 1;
+          var_0 = 1;
         }
       }
     } else if(istrue(self.physicsactivated)) {
@@ -395,47 +395,47 @@ function destroycrate(var0) {
   }
 
   self.destroyonactivate = undefined;
-  var1 = getleveldata(self.cratetype);
+  var_1 = getleveldata(self.cratetype);
 
   if(isDefined(self.owner) && istrue(self.owner.unset_relic_ammo_drain)) {
     self.owner.unset_relic_ammo_drain = 0;
   }
 
-  if(isDefined(var1.destroycallback)) {
-    self thread[[var1.destroycallback]](var0);
+  if(isDefined(var_1.destroycallback)) {
+    self thread[[var_1.destroycallback]](var_0);
   }
 
-  if(!istrue(var0)) {
-    var2 = undefined;
+  if(!istrue(var_0)) {
+    var_2 = undefined;
 
     if(!istrue(self.physicsactivated) || !istrue(self.ref_12332)) {
-      if(isDefined(var1.destroyvisualscallback)) {
-        self thread[[var1.destroyvisualscallback]](self.friendlymodel);
+      if(isDefined(var_1.destroyvisualscallback)) {
+        self thread[[var_1.destroyvisualscallback]](self.friendlymodel);
 
         if(isDefined(self.enemymodel)) {
-          self thread[[var1.destroyvisualscallback]](self.enemymodel);
+          self thread[[var_1.destroyvisualscallback]](self.enemymodel);
         }
 
-        var2 = var1.destroyvisualsdeletiondelay;
+        var_2 = var_1.destroyvisualsdeletiondelay;
       }
-    } else if(isDefined(var1.capturevisualscallback)) {
-      self thread[[var1.capturevisualscallback]](self.friendlymodel);
+    } else if(isDefined(var_1.capturevisualscallback)) {
+      self thread[[var_1.capturevisualscallback]](self.friendlymodel);
 
       if(isDefined(self.enemymodel)) {
-        self thread[[var1.capturevisualscallback]](self.enemymodel);
+        self thread[[var_1.capturevisualscallback]](self.enemymodel);
       }
 
-      var2 = var1.capturevisualsdeletiondelay;
+      var_2 = var_1.capturevisualsdeletiondelay;
     }
 
-    thread deletecrate(var2);
+    thread deletecrate(var_2);
     return;
   }
 
   thread lastactivateinstruct();
 }
 
-function deletecrate(var0) {
+function deletecrate(var_0) {
   if(istrue(self.isdestroyed)) {
     return;
   }
@@ -443,7 +443,7 @@ function deletecrate(var0) {
   self notify("death");
   self.isdestroyed = 1;
   level notify("lootcache_opened_kill_callout" + self.origin);
-  var1 = isDefined(self.friendlymodel) && self.friendlymodel != self;
+  var_1 = isDefined(self.friendlymodel) && self.friendlymodel != self;
 
   if(isDefined(self.scenenode)) {
     if(isDefined(self.scenenode.crates)) {
@@ -462,7 +462,7 @@ function deletecrate(var0) {
   self setCanDamage(0);
   self setnonstick(1);
 
-  if(var1) {
+  if(var_1) {
     self hide();
   }
 
@@ -484,14 +484,14 @@ function deletecrate(var0) {
   }
 
   if(level.script == "mp_don4" && getdvarint("scr_br_x2_hype", 0)) {
-    var2 = spawnfx(level._effect["airdrop_hype_paper_exp"], self.origin);
-    triggerfx(var2);
+    var_2 = spawnfx(level._effect["airdrop_hype_paper_exp"], self.origin);
+    triggerfx(var_2);
     self setscriptablepartstate("model", "hide_both");
   }
 
-  wait var0;
+  wait var_0;
 
-  if(var1) {
+  if(var_1) {
     self.friendlymodel delete();
   }
 
@@ -503,22 +503,22 @@ function deletecrate(var0) {
 }
 
 function lastactivateinstruct() {
-  var0 = level.framedurationseconds;
+  var_0 = level.framedurationseconds;
 
   if(isDefined(self getlinkedscriptableinstance()) && self getscriptablehaspart("visibility")) {
     self setscriptablepartstate("visibility", "hide", 1);
   }
 
-  deletecrate(var0);
+  deletecrate(var_0);
 }
 
 function watchcratedestroyearly() {
   self endon("death");
-  var0 = getleveldata(self.cratetype);
+  var_0 = getleveldata(self.cratetype);
 
-  if(isDefined(var0.timeout)) {}
+  if(isDefined(var_0.timeout)) {}
 
-  watchcratedestroyearlyinternal(var0.timeout);
+  watchcratedestroyearlyinternal(var_0.timeout);
 
   if(istrue(self.nevertimeout)) {
     return;
@@ -527,7 +527,7 @@ function watchcratedestroyearly() {
   thread destroycrate();
 }
 
-function watchcratedestroyearlyinternal(var0) {
+function watchcratedestroyearlyinternal(var_0) {
   if(isDefined(self.owner)) {
     self.owner endon("disconnect");
     self.owner endon("joined_team");
@@ -536,8 +536,8 @@ function watchcratedestroyearlyinternal(var0) {
 
   level endon("game_ended");
 
-  if(isDefined(var0)) {
-    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var0);
+  if(isDefined(var_0)) {
+    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_0);
     return;
   }
 
@@ -556,22 +556,22 @@ function lb_mg_dmg_factor_tail_rotor() {
 }
 
 function initcratedropdata() {
-  var0 = spawnStruct();
-  var0.helis = [];
-  var1 = scripts\cp_mp\utility\killstreak_utility::removeextracthelipad();
+  var_0 = spawnStruct();
+  var_0.helis = [];
+  var_1 = scripts\cp_mp\utility\killstreak_utility::removeextracthelipad();
 
-  if(isDefined(var1)) {
-    var0.heliheight = var1.origin[2] - 750;
+  if(isDefined(var_1)) {
+    var_0.heliheight = var_1.origin[2] - 750;
 
     if(issubstr(level.mapname, "aniyah")) {
-      var0.heliheight = var1.origin[2] + 500;
+      var_0.heliheight = var_1.origin[2] + 500;
     }
   } else {
-    var0.heliheight = 850;
+    var_0.heliheight = 850;
   }
 
-  var0.heliheightoffset = 128;
-  level.cratedropdata = var0;
+  var_0.heliheightoffset = 128;
+  level.cratedropdata = var_0;
   initscriptedhelidropdata();
 }
 
@@ -612,65 +612,65 @@ function teamplunderexfilvipuav() {
   level.scr_animname["care_package_chute"]["brc130_drop_low"] = "mp_carepackage_parachute_flyin_3000";
 }
 
-function placecrate(var0, var1, var2, var3, var4, var5, var6) {
-  return createcrate(var0, var1, var2, var3, var4, undefined, 1, 0, var5, var6);
+function placecrate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  return createcrate(var_0, var_1, var_2, var_3, var_4, undefined, 1, 0, var_5, var_6);
 }
 
-function dropcrate(var0, var1, var2, var3, var4, var5, var6, var7) {
-  if(!isDefined(var5)) {
-    var8 = getcratedropcaststart(var3, 0);
-    var5 = getcratedropdestination(var8, getcratedropcastend(var8, 0));
+function dropcrate(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  if(!isDefined(var_5)) {
+    var_8 = getcratedropcaststart(var_3, 0);
+    var_5 = getcratedropdestination(var_8, getcratedropcastend(var_8, 0));
   }
 
-  return createcrate(var0, var1, var2, var3, var4, var5, undefined, 1, var6, var7);
+  return createcrate(var_0, var_1, var_2, var_3, var_4, var_5, undefined, 1, var_6, var_7);
 }
 
-function dropcratefrommanualheli(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
-  var3 = getcratedropcaststart(var3, 1);
-  var9 = var3[2];
+function dropcratefrommanualheli(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  var_3 = getcratedropcaststart(var_3, 1);
+  var_9 = var_3[2];
 
-  if(!isDefined(var7)) {
-    var7 = getcratedropdestination(var3, getcratedropcastend(var3, 1));
+  if(!isDefined(var_7)) {
+    var_7 = getcratedropdestination(var_3, getcratedropcastend(var_3, 1));
 
-    if(!isDefined(var7)) {
+    if(!isDefined(var_7)) {
       return undefined;
     }
   }
 
-  var10 = spawnStruct();
-  var10.owner = var0;
-  var10.team = var1;
-  var10.hasowner = isDefined(var0);
-  var4 *= (0, 1, 0);
-  var11 = var3 + -1 * anglesToForward(var4) * var5;
-  var10.dropposition = var3;
-  var10.exitposition = var3 + anglesToForward(var4) * var6;
-  var12 = undefined;
+  var_10 = spawnStruct();
+  var_10.owner = var_0;
+  var_10.team = var_1;
+  var_10.hasowner = isDefined(var_0);
+  var_4 *= (0, 1, 0);
+  var_11 = var_3 + -1 * anglesToForward(var_4) * var_5;
+  var_10.dropposition = var_3;
+  var_10.exitposition = var_3 + anglesToForward(var_4) * var_6;
+  var_12 = undefined;
 
-  if(isDefined(var8)) {
-    var12 = var8.vehicleisreserved;
+  if(isDefined(var_8)) {
+    var_12 = var_8.vehicleisreserved;
   }
 
-  var13 = createheli(var0, var1, var11, var4, var12);
-  var13.dropstruct = var10;
+  var_13 = createheli(var_0, var_1, var_11, var_4, var_12);
+  var_13.dropstruct = var_10;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "getGameType")) {
     if([[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getGameType")]]() == "br") {
-      var13 vehicle_setspeed(100, 60);
+      var_13 vehicle_setspeed(100, 60);
     } else {
-      var13 vehicle_setspeed(200, 100);
+      var_13 vehicle_setspeed(200, 100);
     }
   }
 
-  var13 setmaxpitchroll(15, 15);
-  var13 setscriptablepartstate("lights", "active", 1);
-  var10.heli = var13;
-  var14 = createcrate(var0, var1, var2, var11, var13.angles, var7, undefined, 0, var8);
-  var14.dropstruct = var10;
-  var14 linkTo(var13, "tag_origin", (16, 0, -156), (0, 0, 0));
-  var10.crate = var14;
+  var_13 setmaxpitchroll(15, 15);
+  var_13 setscriptablepartstate("lights", "active", 1);
+  var_10.heli = var_13;
+  var_14 = createcrate(var_0, var_1, var_2, var_11, var_13.angles, var_7, undefined, 0, var_8);
+  var_14.dropstruct = var_10;
+  var_14 linkTo(var_13, "tag_origin", (16, 0, -156), (0, 0, 0));
+  var_10.crate = var_14;
   thread watchdropcratefrommanualheli();
-  return var10;
+  return var_10;
 }
 
 function watchdropcratefrommanualheli() {
@@ -748,66 +748,66 @@ function watchdropcratefrommanualheliinternal() {
 }
 
 function docratedropfrommanualheli() {
-  var0 = self.crate;
+  var_0 = self.crate;
   self.crate.dropstruct = undefined;
   self.crate = undefined;
-  infinite_chopper(var0);
+  infinite_chopper(var_0);
 }
 
-function createcrateforscripteddrop(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10) {
-  var11 = createcrate(var0, var1, var2, var8.origin, var8.angles, var3, var4, var5, var6);
+function createcrateforscripteddrop(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+  var_11 = createcrate(var_0, var_1, var_2, var_8.origin, var_8.angles, var_3, var_4, var_5, var_6);
 
-  if(!isDefined(var11)) {
+  if(!isDefined(var_11)) {
     return undefined;
   }
 
-  var11.scenenode = var8;
-  var11.streakinfo = var7;
+  var_11.scenenode = var_8;
+  var_11.streakinfo = var_7;
 
-  if(!isDefined(var8.crates)) {
-    var8.crates = [];
+  if(!isDefined(var_8.crates)) {
+    var_8.crates = [];
   }
 
-  var8.crates[var11 getentitynumber()] = var11;
-  var11.friendlymodel setscriptablepartstate("visibility", "hide", 0);
+  var_8.crates[var_11 getentitynumber()] = var_11;
+  var_11.friendlymodel setscriptablepartstate("visibility", "hide", 0);
 
-  if(isDefined(var11.enemymodel)) {
-    var11.enemymodel setscriptablepartstate("visibility", "hide", 0);
+  if(isDefined(var_11.enemymodel)) {
+    var_11.enemymodel setscriptablepartstate("visibility", "hide", 0);
   }
 
-  var11.animname = var9;
-  var11 scripts\common\anim::setanimtree();
-  var12 = level.scr_anim[var9][var10];
-  var13 = getanimlength(var12) * 1000;
-  var11.animdroptime = gettime() + getnotetracktimes(var12, "carepackage_drop")[0] * var13;
-  var11.animstoptrailtime = gettime() + getnotetracktimes(var12, "carepackage_trail_end")[0] * var13;
-  var11.animendtime = gettime() + var13;
-  var8.latestanimendtime = scripts\engine\utility::ter_op(var11.animendtime > var8.latestanimendtime, var11.animendtime, var8.latestanimendtime);
-  return var11;
+  var_11.animname = var_9;
+  var_11 scripts\common\anim::setanimtree();
+  var_12 = level.scr_anim[var_9][var_10];
+  var_13 = getanimlength(var_12) * 1000;
+  var_11.animdroptime = gettime() + getnotetracktimes(var_12, "carepackage_drop")[0] * var_13;
+  var_11.animstoptrailtime = gettime() + getnotetracktimes(var_12, "carepackage_trail_end")[0] * var_13;
+  var_11.animendtime = gettime() + var_13;
+  var_8.latestanimendtime = scripts\engine\utility::ter_op(var_11.animendtime > var_8.latestanimendtime, var_11.animendtime, var_8.latestanimendtime);
+  return var_11;
 }
 
-function createchuteforscripteddrop(var0, var1, var2, var3) {
-  if(!isDefined(var0.chutes)) {
-    var0.chutes = [];
+function createchuteforscripteddrop(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_0.chutes)) {
+    var_0.chutes = [];
   }
 
-  var4 = spawn("script_model", var0.origin);
-  var4.angles = var0.origin;
-  var4.scenenode = var0;
-  var4.crate = var1;
-  var4.crateanimdroptime = var1.animdroptime;
-  var0.chutes[var4 getentitynumber()] = var4;
-  var4 setModel("veh8_mil_lnd_carepackage_parachute");
-  var4 setscriptablepartstate("visibility", "hide", 0);
-  var4.animname = var2;
-  var4 scripts\common\anim::setanimtree();
-  var5 = level.scr_anim[var2][var3];
-  var6 = getanimlength(var5) * 1000;
-  var4.animendtime = gettime() + getanimlength(level.scr_anim[var2][var3]) * 1000;
-  var4.animunhidetime = gettime() + getnotetracktimes(var5, "chute_unhide")[0] * var6;
-  var4.animendtime = gettime() + var6;
-  var0.latestanimendtime = scripts\engine\utility::ter_op(var4.animendtime > var0.latestanimendtime, var4.animendtime, var0.latestanimendtime);
-  return var4;
+  var_4 = spawn("script_model", var_0.origin);
+  var_4.angles = var_0.origin;
+  var_4.scenenode = var_0;
+  var_4.crate = var_1;
+  var_4.crateanimdroptime = var_1.animdroptime;
+  var_0.chutes[var_4 getentitynumber()] = var_4;
+  var_4 setModel("veh8_mil_lnd_carepackage_parachute");
+  var_4 setscriptablepartstate("visibility", "hide", 0);
+  var_4.animname = var_2;
+  var_4 scripts\common\anim::setanimtree();
+  var_5 = level.scr_anim[var_2][var_3];
+  var_6 = getanimlength(var_5) * 1000;
+  var_4.animendtime = gettime() + getanimlength(level.scr_anim[var_2][var_3]) * 1000;
+  var_4.animunhidetime = gettime() + getnotetracktimes(var_5, "chute_unhide")[0] * var_6;
+  var_4.animendtime = gettime() + var_6;
+  var_0.latestanimendtime = scripts\engine\utility::ter_op(var_4.animendtime > var_0.latestanimendtime, var_4.animendtime, var_0.latestanimendtime);
+  return var_4;
 }
 
 function destroychute() {
@@ -818,76 +818,76 @@ function destroychute() {
   self delete();
 }
 
-function dropcratefromscriptedheli(var0, var1, var2, var3, var4, var5, var6, var7) {
+function dropcratefromscriptedheli(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "currentActiveVehicleCount") && scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "maxVehiclesAllowed")) {
     if([[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "currentActiveVehicleCount")]]() >= [[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "maxVehiclesAllowed")]]()) {
       return undefined;
     }
   }
 
-  var8 = getcratedropcaststart(var3, 1);
-  var9 = var4 * (0, 1, 0);
+  var_8 = getcratedropcaststart(var_3, 1);
+  var_9 = var_4 * (0, 1, 0);
 
-  if(!isDefined(var5)) {
-    var5 = getcratedropdestination(var8, getcratedropcastend(var8, 1));
+  if(!isDefined(var_5)) {
+    var_5 = getcratedropdestination(var_8, getcratedropcastend(var_8, 1));
 
-    if(!isDefined(var5)) {
+    if(!isDefined(var_5)) {
       return undefined;
     }
   }
 
-  var10 = spawn("script_model", var8);
-  var10.angles = var9;
-  var10 setModel("tag_origin");
-  var10.owner = var0;
-  var10.team = var1;
-  var10.hasowner = isDefined(var0);
-  var11 = undefined;
+  var_10 = spawn("script_model", var_8);
+  var_10.angles = var_9;
+  var_10 setModel("tag_origin");
+  var_10.owner = var_0;
+  var_10.team = var_1;
+  var_10.hasowner = isDefined(var_0);
+  var_11 = undefined;
 
-  if(isDefined(var6)) {
-    var11 = var6.vehicleisreserved;
+  if(isDefined(var_6)) {
+    var_11 = var_6.vehicleisreserved;
   }
 
-  var12 = createheli(var0, var1, var8, var9, var11, var7);
+  var_12 = createheli(var_0, var_1, var_8, var_9, var_11, var_7);
 
-  if(!isDefined(var12)) {
-    var10 delete();
+  if(!isDefined(var_12)) {
+    var_10 delete();
     return undefined;
   }
 
-  var12.scenenode = var12;
-  var12 setscriptablepartstate("visibility", "hide", 0);
-  var12.animname = "care_package_heli";
-  var10.heli = var12;
-  var10.heliendtime = gettime() + getanimlength(level.scr_anim["care_package_heli"]["care_package_drop"]) * 1000;
-  var10.latestanimendtime = var10.heliendtime;
-  var13 = createcrateforscripteddrop(var0, var1, var2, var5, undefined, 0, var6, var7, var10, "care_package", "care_package_drop");
+  var_12.scenenode = var_12;
+  var_12 setscriptablepartstate("visibility", "hide", 0);
+  var_12.animname = "care_package_heli";
+  var_10.heli = var_12;
+  var_10.heliendtime = gettime() + getanimlength(level.scr_anim["care_package_heli"]["care_package_drop"]) * 1000;
+  var_10.latestanimendtime = var_10.heliendtime;
+  var_13 = createcrateforscripteddrop(var_0, var_1, var_2, var_5, undefined, 0, var_6, var_7, var_10, "care_package", "care_package_drop");
 
-  if(!isDefined(var13)) {
+  if(!isDefined(var_13)) {
     return undefined;
   }
 
-  var14 = createchuteforscripteddrop(var10, var13, "care_package_chute", "care_package_drop");
+  var_14 = createchuteforscripteddrop(var_10, var_13, "care_package_chute", "care_package_drop");
 
-  if(!isDefined(var14)) {
+  if(!isDefined(var_14)) {
     return undefined;
   }
 
-  var14 setscriptablepartstate("visibility", "hide", 0);
+  var_14 setscriptablepartstate("visibility", "hide", 0);
   thread watchdropcratefromscriptedheli();
-  return var10;
+  return var_10;
 }
 
 function watchdropcratefromscriptedheli() {
   self endon("death");
   scripts\common\anim::anim_first_frame_solo(self.heli, "care_package_drop");
 
-  foreach(var1 in self.crates) {
-    scripts\common\anim::anim_first_frame_solo(var1, "care_package_drop");
+  foreach(var_1 in self.crates) {
+    scripts\common\anim::anim_first_frame_solo(var_1, "care_package_drop");
   }
 
-  foreach(var4 in self.chutes) {
-    scripts\common\anim::anim_first_frame_solo(var4, "care_package_drop");
+  foreach(var_4 in self.chutes) {
+    scripts\common\anim::anim_first_frame_solo(var_4, "care_package_drop");
   }
 
   watchdropcratefromscriptedheliinternal();
@@ -896,14 +896,14 @@ function watchdropcratefromscriptedheli() {
     thread destroyheli();
   }
 
-  foreach(var1 in self.crates) {
-    if(isDefined(var1)) {
+  foreach(var_1 in self.crates) {
+    if(isDefined(var_1)) {
       thread destroycrate();
     }
   }
 
-  foreach(var4 in self.chutes) {
-    if(isDefined(var4)) {
+  foreach(var_4 in self.chutes) {
+    if(isDefined(var_4)) {
       thread destroychute();
     }
   }
@@ -912,7 +912,7 @@ function watchdropcratefromscriptedheli() {
 }
 
 function watchdropcratefromscriptedheliinternal() {
-  var0 = undefined;
+  var_0 = undefined;
 
   while(gettime() <= self.latestanimendtime) {
     if(self.hasowner) {
@@ -929,34 +929,34 @@ function watchdropcratefromscriptedheliinternal() {
       }
     }
 
-    if(!isDefined(var0)) {
-      var0 = 1;
+    if(!isDefined(var_0)) {
+      var_0 = 1;
     } else {
-      jumpiffalse(var0) LOC_0000015a;
+      jumpiffalse(var_0) LOC_0000015a;
       jumpiffalse(isDefined(self.heli)) LOC_000000ad;
       self.heli setscriptablepartstate("visibility", "show", 0);
       self.heli setscriptablepartstate("lights", "active", 1);
       thread scripts\common\anim::anim_single_solo(self.heli, "care_package_drop");
 
-      foreach(var2 in self.crates) {
-        if(isDefined(var2)) {
-          var2.friendlymodel setscriptablepartstate("visibility", "show", 0);
+      foreach(var_2 in self.crates) {
+        if(isDefined(var_2)) {
+          var_2.friendlymodel setscriptablepartstate("visibility", "show", 0);
 
-          if(isDefined(var2.enemymodel)) {
-            var2.enemymodel setscriptablepartstate("visibility", "show", 0);
+          if(isDefined(var_2.enemymodel)) {
+            var_2.enemymodel setscriptablepartstate("visibility", "show", 0);
           }
 
-          thread scripts\common\anim::anim_single_solo(var2, "care_package_drop");
+          thread scripts\common\anim::anim_single_solo(var_2, "care_package_drop");
         }
       }
 
-      foreach(var5 in self.chutes) {
-        if(isDefined(var5)) {
-          thread scripts\common\anim::anim_single_solo(var5, "care_package_drop");
+      foreach(var_5 in self.chutes) {
+        if(isDefined(var_5)) {
+          thread scripts\common\anim::anim_single_solo(var_5, "care_package_drop");
         }
       }
 
-      var0 = 0;
+      var_0 = 0;
       goto LOC_00000353;
     }
 
@@ -964,45 +964,45 @@ function watchdropcratefromscriptedheliinternal() {
   }
 }
 
-function docratedropfromscripted(var0) {
-  var0.scenenode = undefined;
-  self.crates[var0 getentitynumber()] = undefined;
-  var0.animname = undefined;
-  var0.animendtime = undefined;
-  var0.animdroptime = undefined;
-  var0.animstoptrailtime = undefined;
-  var0 notify("anim_finished");
-  var0 stopanimScripted();
-  infinite_chopper(var0);
+function docratedropfromscripted(var_0) {
+  var_0.scenenode = undefined;
+  self.crates[var_0 getentitynumber()] = undefined;
+  var_0.animname = undefined;
+  var_0.animendtime = undefined;
+  var_0.animdroptime = undefined;
+  var_0.animstoptrailtime = undefined;
+  var_0 notify("anim_finished");
+  var_0 stopanimScripted();
+  infinite_chopper(var_0);
 }
 
-function getcratedropcaststart(var0, var1) {
-  var2 = undefined;
+function getcratedropcaststart(var_0, var_1) {
+  var_2 = undefined;
 
-  if(istrue(var1)) {
-    var2 = var0 * (1, 1, 0) + (0, 0, getscriptedhelidropheight());
+  if(istrue(var_1)) {
+    var_2 = var_0 * (1, 1, 0) + (0, 0, getscriptedhelidropheight());
   } else {
-    var2 = var0 + (0, 0, 25);
+    var_2 = var_0 + (0, 0, 25);
   }
 
-  return var2;
+  return var_2;
 }
 
-function getcratedropcastend(var0, var1) {
-  return var0 + (0, 0, -1 * scripts\engine\utility::ter_op(istrue(var1), 8000, 8000));
+function getcratedropcastend(var_0, var_1) {
+  return var_0 + (0, 0, -1 * scripts\engine\utility::ter_op(istrue(var_1), 8000, 8000));
 }
 
-function getcratedropdestination(var0, var1) {
-  var2 = undefined;
-  var3 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_sky", "physicscontents_item"]);
-  var4 = getcratedropignorelist();
-  var5 = physics_raycast(var0, var1, var3, var4, 0, "physicsquery_closest", 1);
+function getcratedropdestination(var_0, var_1) {
+  var_2 = undefined;
+  var_3 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_sky", "physicscontents_item"]);
+  var_4 = getcratedropignorelist();
+  var_5 = physics_raycast(var_0, var_1, var_3, var_4, 0, "physicsquery_closest", 1);
 
-  if(isDefined(var5) && var5.size > 0) {
-    var2 = var5[0]["position"];
+  if(isDefined(var_5) && var_5.size > 0) {
+    var_2 = var_5[0]["position"];
   }
 
-  return var2;
+  return var_2;
 }
 
 function getcratedropignorelist() {
@@ -1013,83 +1013,83 @@ function getcratedropignorelist() {
   return scripts\engine\utility::array_combine_multiple([level.cratedropdata.helis, level.cratedata.crates]);
 }
 
-function createheli(var0, var1, var2, var3, var4, var5) {
-  var6 = undefined;
-  var7 = "veh8_mil_air_lbravo_mp";
+function createheli(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = undefined;
+  var_7 = "veh8_mil_air_lbravo_mp";
 
-  if(isDefined(var0) && scripts\cp_mp\utility\player_utility::getplayersuperfaction(var0)) {
-    var7 = "veh8_mil_air_lbravo_east_mp";
+  if(isDefined(var_0) && scripts\cp_mp\utility\player_utility::getplayersuperfaction(var_0)) {
+    var_7 = "veh8_mil_air_lbravo_east_mp";
   }
 
-  if(istrue(var4)) {
+  if(istrue(var_4)) {
     scripts\cp_mp\vehicles\vehicle_tracking::clearvehiclereservation();
   }
 
-  if(isDefined(var0)) {
-    var6 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnhelicopter(var0, var2, var3, "veh_airdrop_mp", var7);
+  if(isDefined(var_0)) {
+    var_6 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnhelicopter(var_0, var_2, var_3, "veh_airdrop_mp", var_7);
   } else {
-    var6 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnhelicopter(level.players[randomint(level.players.size)], var2, var3, "veh_airdrop_mp", var7);
+    var_6 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnhelicopter(level.players[randomint(level.players.size)], var_2, var_3, "veh_airdrop_mp", var_7);
   }
 
-  if(!isDefined(var6)) {
+  if(!isDefined(var_6)) {
     return undefined;
   }
 
-  if(!isDefined(var1)) {
-    var1 = "neutral";
+  if(!isDefined(var_1)) {
+    var_1 = "neutral";
   }
 
-  if(var1 != "neutral") {
-    var6 setvehicleteam(var1);
+  if(var_1 != "neutral") {
+    var_6 setvehicleteam(var_1);
   }
 
-  var6.owner = var0;
-  var6.team = var1;
-  var8 = undefined;
-  var9 = undefined;
-  var10 = undefined;
+  var_6.owner = var_0;
+  var_6.team = var_1;
+  var_8 = undefined;
+  var_9 = undefined;
+  var_10 = undefined;
 
   if(isDefined(level.heliconfigs)) {
-    var11 = level.heliconfigs["airdrop"];
-    var6.health = var11.maxhealth;
-    var8 = var11.callout;
-    var9 = var11.vodestroyed;
-    var10 = var11.scorepopup;
+    var_11 = level.heliconfigs["airdrop"];
+    var_6.health = var_11.maxhealth;
+    var_8 = var_11.callout;
+    var_9 = var_11.vodestroyed;
+    var_10 = var_11.scorepopup;
   } else {
-    var6.health = 999999;
+    var_6.health = 999999;
   }
 
-  var6.helitype = "airdrop";
+  var_6.helitype = "airdrop";
 
-  if(isDefined(var0)) {
+  if(isDefined(var_0)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "addToActiveKillstreakList")) {
-      var6[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "addToActiveKillstreakList")]]("airdrop", "Killstreak_Air", var0, 0, 0);
+      var_6[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "addToActiveKillstreakList")]]("airdrop", "Killstreak_Air", var_0, 0, 0);
     }
 
-    if(var1 != "neutral") {
-      var6 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Air", var0);
+    if(var_1 != "neutral") {
+      var_6 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Air", var_0);
     }
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "killstreakMakeVehicle")) {
-    var6[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakMakeVehicle")]]("veh_airdrop_mp", var10, var9, undefined, var8);
+    var_6[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakMakeVehicle")]]("veh_airdrop_mp", var_10, var_9, undefined, var_8);
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "killstreakSetPreModDamageCallback")) {
-    var6[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetPreModDamageCallback")]]("veh_airdrop_mp");
+    var_6[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetPreModDamageCallback")]]("veh_airdrop_mp");
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "killstreakSetPostModDamageCallback")) {
-    var6[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetPostModDamageCallback")]]("veh_airdrop_mp");
+    var_6[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetPostModDamageCallback")]]("veh_airdrop_mp");
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "killstreakSetDeathCallback")) {
-    var6[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetDeathCallback")]]("veh_airdrop_mp", &destroyhelicallback);
+    var_6[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetDeathCallback")]]("veh_airdrop_mp", &destroyhelicallback);
   }
 
-  var6 setCanDamage(0);
+  var_6 setCanDamage(0);
   thread watchhelidestroyearly();
-  return var6;
+  return var_6;
 }
 
 function watchhelidestroyearly() {
@@ -1115,7 +1115,7 @@ function destroyheli() {
   thread deleteheli(0);
 }
 
-function deleteheli(var0) {
+function deleteheli(var_0) {
   self notify("death");
   self.isdestroyed = 1;
 
@@ -1125,11 +1125,11 @@ function deleteheli(var0) {
   }
 
   removehelidroppingcratefromlist(self getentitynumber());
-  wait var0;
+  wait var_0;
   scripts\cp_mp\vehicles\vehicle_tracking::_deletevehicle(self);
 }
 
-function destroyhelicallback(var0) {
+function destroyhelicallback(var_0) {
   destroyheli();
 }
 
@@ -1141,42 +1141,42 @@ function getscriptedhelidropheight() {
   return getscriptedhelidropheightbase() + level.cratedropdata.helis.size * level.cratedropdata.heliheightoffset;
 }
 
-function addhelidroppingcratetolist(var0) {
-  var1 = var0 getentitynumber();
-  level.cratedropdata.helis[var1] = var0;
+function addhelidroppingcratetolist(var_0) {
+  var_1 = var_0 getentitynumber();
+  level.cratedropdata.helis[var_1] = var_0;
 }
 
-function removehelidroppingcratefromlist(var0) {
-  level.cratedropdata.helis[var0] = undefined;
+function removehelidroppingcratefromlist(var_0) {
+  level.cratedropdata.helis[var_0] = undefined;
 }
 
 function makecrateusable() {
-  var0 = getleveldata(self.cratetype);
+  var_0 = getleveldata(self.cratetype);
 
-  if(istrue(var0.hasnointeraction)) {
+  if(istrue(var_0.hasnointeraction)) {
     return;
   }
 
   level.cratedata.usablecrates[self getentitynumber()] = self;
   self.isusable = 1;
 
-  if(var0.supportsownercapture && var0.supportsothercapture) {
+  if(var_0.supportsownercapture && var_0.supportsothercapture) {
     thread watchcrateuse(1);
-    var1 = self.useobject;
+    var_1 = self.useobject;
 
-    if(!isDefined(var1)) {
-      var1 = spawn("script_model", self gettagorigin(var0.usetag));
-      var1 setModel("tag_origin");
-      var1 linkTo(self);
-      var1 makeunusable();
-      self.useobject = var1;
+    if(!isDefined(var_1)) {
+      var_1 = spawn("script_model", self gettagorigin(var_0.usetag));
+      var_1 setModel("tag_origin");
+      var_1 linkTo(self);
+      var_1 makeunusable();
+      self.useobject = var_1;
     }
 
-    thread watchcrateuse(2, var1);
+    thread watchcrateuse(2, var_1);
     return;
   }
 
-  if(var0.supportsownercapture) {
+  if(var_0.supportsownercapture) {
     thread watchcrateuse(1);
     return;
   }
@@ -1184,63 +1184,63 @@ function makecrateusable() {
   thread watchcrateuse(2);
 }
 
-function watchcrateuse(var0, var1) {
+function watchcrateuse(var_0, var_1) {
   self endon("death");
   self endon("makeCrateUnusable");
 
-  if(isDefined(var1)) {
-    var1 endon("death");
+  if(isDefined(var_1)) {
+    var_1 endon("death");
   }
 
-  if(var0 == 1) {
+  if(var_0 == 1) {
     self.owner endon("disconnect");
     self.owner endon("joined_team");
     self.owner endon("joined_spectators");
     self.owner.unset_relic_ammo_drain = 1;
   }
 
-  var2 = getleveldata(self.cratetype);
-  var3 = gettriggerobject(var1);
-  var3.usetype = var0;
-  var3 setCursorHint("HINT_NOICON");
-  var3 sethintonobstruction("show");
-  var3 sethinttag(var2.usetag);
-  var3 sethintdisplayrange(var2.userange);
-  var3 sethintdisplayfov(var2.usefov);
-  var3 setuserange(var2.userange);
-  var3 setusefov(var2.usefov);
-  var3 setusepriority(var2.usepriority);
-  var3 setuseholdduration("duration_none");
+  var_2 = getleveldata(self.cratetype);
+  var_3 = gettriggerobject(var_1);
+  var_3.usetype = var_0;
+  var_3 setCursorHint("HINT_NOICON");
+  var_3 sethintonobstruction("show");
+  var_3 sethinttag(var_2.usetag);
+  var_3 sethintdisplayrange(var_2.userange);
+  var_3 sethintdisplayfov(var_2.usefov);
+  var_3 setuserange(var_2.userange);
+  var_3 setusefov(var_2.usefov);
+  var_3 setusepriority(var_2.usepriority);
+  var_3 setuseholdduration("duration_none");
 
-  if(var3.usetype == 1 && self.supportsreroll) {
-    var3 setHintString(self.rerollstring);
+  if(var_3.usetype == 1 && self.supportsreroll) {
+    var_3 setHintString(self.rerollstring);
   } else {
-    var3 setHintString(self.capturestring);
+    var_3 setHintString(self.capturestring);
   }
 
-  var3.userate = 1;
-  var3.curprogress = 0;
+  var_3.userate = 1;
+  var_3.curprogress = 0;
 
-  if(isDefined(var3.ref_140a0)) {
-    var3.usetime = var3.ref_140a0;
+  if(isDefined(var_3.ref_140a0)) {
+    var_3.usetime = var_3.ref_140a0;
   } else if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "getGameType")) {
-    var3.usetime = scripts\engine\utility::ter_op(var0 == 1, var2.ownerusetime, var2.otherusetime);
+    var_3.usetime = scripts\engine\utility::ter_op(var_0 == 1, var_2.ownerusetime, var_2.otherusetime);
   }
 
-  var3.inuse = 0;
-  var3.playerusing = undefined;
+  var_3.inuse = 0;
+  var_3.playerusing = undefined;
 
   for(;;) {
-    var3 waittill("trigger", var4);
+    var_3 waittill("trigger", var_4);
 
     if(level.gametype == "br") {
       if(self.cratetype == "battle_royale_juggernaut") {
         if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "teamJuggMaxReached")) {
-          var5 = var4[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "teamJuggMaxReached")]]();
+          var_5 = var_4[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "teamJuggMaxReached")]]();
 
-          if(var5) {
+          if(var_5) {
             if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
-              var4[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/JUGG_TEAM_MAX_REACHED");
+              var_4[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/JUGG_TEAM_MAX_REACHED");
             }
 
             continue;
@@ -1248,77 +1248,77 @@ function watchcrateuse(var0, var1) {
         }
       }
 
-      if(istrue(var4.isjuggernaut) && !vehicle_isfriendlytoplayer(var4, self.cratetype)) {
+      if(istrue(var_4.isjuggernaut) && !vehicle_isfriendlytoplayer(var_4, self.cratetype)) {
         if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
-          var4[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/JUGG_CANNOT_BE_USED");
+          var_4[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/JUGG_CANNOT_BE_USED");
         }
 
         continue;
       }
     }
 
-    if(canstartusingcrate(var4, var1)) {
-      startusingcrate(var4, var1);
-      var4.unset_relic_ammo_drain = 1;
-      var3.playerusing = var4;
-      var6 = watchcrateuseinternal(var4, var1);
+    if(canstartusingcrate(var_4, var_1)) {
+      startusingcrate(var_4, var_1);
+      var_4.unset_relic_ammo_drain = 1;
+      var_3.playerusing = var_4;
+      var_6 = watchcrateuseinternal(var_4, var_1);
 
-      if(isDefined(var4)) {
-        stopusingcrate(var4, var1);
+      if(isDefined(var_4)) {
+        stopusingcrate(var_4, var_1);
       }
 
-      var3.playerusing = undefined;
+      var_3.playerusing = undefined;
 
-      if(istrue(var6)) {
-        if(isDefined(var4)) {
-          var4.unset_relic_ammo_drain = 0;
+      if(istrue(var_6)) {
+        if(isDefined(var_4)) {
+          var_4.unset_relic_ammo_drain = 0;
         }
 
-        if(var2.onecaptureperplayer && self.cratetype != "battle_royale_loadout") {
+        if(var_2.onecaptureperplayer && self.cratetype != "battle_royale_loadout") {
           if(!isDefined(self.playerscaptured)) {
             self.playerscaptured = [];
           }
 
-          self.playerscaptured[var4 getentitynumber()] = var4;
+          self.playerscaptured[var_4 getentitynumber()] = var_4;
         }
 
         if(!isDefined(self.targetname) || self.targetname != "btm_flag_primary_inside") {
-          thread capturecrate(var4);
+          thread capturecrate(var_4);
         }
       }
     }
   }
 }
 
-function watchcrateuseinternal(var0, var1) {
-  var2 = gettriggerobject(var1);
+function watchcrateuseinternal(var_0, var_1) {
+  var_2 = gettriggerobject(var_1);
 
-  if(var2.usetype != 1) {
-    var0 endon("disconnect");
-    var0 endon("joined_team");
-    var0 endon("joined_spectators");
+  if(var_2.usetype != 1) {
+    var_0 endon("disconnect");
+    var_0 endon("joined_team");
+    var_0 endon("joined_spectators");
   }
 
-  var2.id = "care_package";
-  var2.userate = scripts\engine\utility::ter_op(isDefined(var0.objectivescaler), var0.objectivescaler, 1);
-  playusesound(var0, var1);
+  var_2.id = "care_package";
+  var_2.userate = scripts\engine\utility::ter_op(isDefined(var_0.objectivescaler), var_0.objectivescaler, 1);
+  playusesound(var_0, var_1);
 
-  while(isDefined(var0) && var0 scripts\cp_mp\utility\player_utility::_isalive() && cankeepusingcrate(var0, var1) && var0 useButtonPressed()) {
-    var2.curprogress += level.framedurationseconds * var2.userate;
+  while(isDefined(var_0) && var_0 scripts\cp_mp\utility\player_utility::_isalive() && cankeepusingcrate(var_0, var_1) && var_0 useButtonPressed()) {
+    var_2.curprogress += level.framedurationseconds * var_2.userate;
 
-    if(var2.curprogress >= var2.usetime) {
-      var2.curprogress = 0;
+    if(var_2.curprogress >= var_2.usetime) {
+      var_2.curprogress = 0;
       return true;
     }
 
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "updateUIProgress")) {
-      var0[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "updateUIProgress")]](var2, 1);
+      var_0[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "updateUIProgress")]](var_2, 1);
     }
 
     waitframe();
   }
 
-  var2.curprogress = 0;
+  var_2.curprogress = 0;
   return false;
 }
 
@@ -1344,28 +1344,28 @@ function makecrateunusable() {
   }
 }
 
-function startusingcrate(var0, var1) {
-  var2 = gettriggerobject(var1);
-  var3 = getleveldata(self.cratetype);
+function startusingcrate(var_0, var_1) {
+  var_2 = gettriggerobject(var_1);
+  var_3 = getleveldata(self.cratetype);
 
-  if(istrue(var0.isjuggernaut)) {
+  if(istrue(var_0.isjuggernaut)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "allowActionSet")) {
-      var0[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "allowActionSet")]]("juggCrateUse", 0);
+      var_0[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "allowActionSet")]]("juggCrateUse", 0);
     }
   } else {
-    var4 = getdvarint("scr_airDrop_use_weapon", 1);
+    var_4 = getdvarint("scr_airDrop_use_weapon", 1);
 
-    if(var4) {
+    if(var_4) {
       thread br_bunker_alt();
     }
 
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "allowActionSet")) {
-      var0[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "allowActionSet")]]("crateUse", 0);
+      var_0[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "allowActionSet")]]("crateUse", 0);
     }
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "updateUIProgress")) {
-    var0[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "updateUIProgress")]](var2, 0);
+    var_0[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "updateUIProgress")]](var_2, 0);
     return;
   }
 }
@@ -1374,96 +1374,96 @@ function br_bunker_alt() {
   self endon("disconnect");
   level endon("game_ended");
   scripts\cp_mp\utility\weapon_utility::ref_12eb2();
-  var0 = getcompleteweaponname("ks_use_crate_mp");
-  scripts\cp_mp\utility\inventory_utility::_giveweapon(var0);
-  thread br_checkforlaststandfinish(var0);
-  self switchtoweapon(var0);
+  var_0 = getcompleteweaponname("ks_use_crate_mp");
+  scripts\cp_mp\utility\inventory_utility::_giveweapon(var_0);
+  thread br_checkforlaststandfinish(var_0);
+  self switchtoweapon(var_0);
 }
 
-function br_checkforlaststandfinish(var0) {
+function br_checkforlaststandfinish(var_0) {
   self endon("disconnect");
   level endon("game_ended");
   self waittill("crate_use_end");
 
-  if(scripts\cp_mp\utility\inventory_utility::isswitchingtoweaponwithmonitoring(var0)) {
-    scripts\cp_mp\utility\inventory_utility::abortmonitoredweaponswitch(var0);
+  if(scripts\cp_mp\utility\inventory_utility::isswitchingtoweaponwithmonitoring(var_0)) {
+    scripts\cp_mp\utility\inventory_utility::abortmonitoredweaponswitch(var_0);
     return;
   }
 
-  scripts\cp_mp\utility\inventory_utility::_takeweapon(var0);
+  scripts\cp_mp\utility\inventory_utility::_takeweapon(var_0);
 
   if(isDefined(self.lastdroppableweaponobj)) {
-    var1 = scripts\cp_mp\utility\weapon_utility::ref_12cc7(self.lastdroppableweaponobj);
-    self switchtoweapon(var1);
-    thread scripts\cp_mp\utility\inventory_utility::forcevalidweapon(var1);
+    var_1 = scripts\cp_mp\utility\weapon_utility::ref_12cc7(self.lastdroppableweaponobj);
+    self switchtoweapon(var_1);
+    thread scripts\cp_mp\utility\inventory_utility::forcevalidweapon(var_1);
     return;
   }
 }
 
-function stopusingcrate(var0, var1) {
-  var2 = gettriggerobject(var1);
-  var3 = getleveldata(self.cratetype);
+function stopusingcrate(var_0, var_1) {
+  var_2 = gettriggerobject(var_1);
+  var_3 = getleveldata(self.cratetype);
 
-  if(istrue(var0.isjuggernaut)) {
+  if(istrue(var_0.isjuggernaut)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "allowActionSet")) {
-      var0[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "allowActionSet")]]("juggCrateUse", 1);
+      var_0[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "allowActionSet")]]("juggCrateUse", 1);
     }
   } else if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "allowActionSet")) {
-    var0[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "allowActionSet")]]("crateUse", 1);
+    var_0[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "allowActionSet")]]("crateUse", 1);
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "updateUIProgress")) {
-    var0[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "updateUIProgress")]](var2, 0);
+    var_0[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "updateUIProgress")]](var_2, 0);
   }
 
-  stopusesound(var0, var1);
-  var0 notify("crate_use_end");
+  stopusesound(var_0, var_1);
+  var_0 notify("crate_use_end");
 }
 
-function canstartusingcrate(var0, var1, var2) {
+function canstartusingcrate(var_0, var_1, var_2) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "specialCase_canUseCrate")) {
-    if(!var0[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "specialCase_canUseCrate")]]()) {
+    if(!var_0[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "specialCase_canUseCrate")]]()) {
       return 0;
     }
   }
 
-  if(!var0 scripts\common\utility::is_crate_use_allowed()) {
+  if(!var_0 scripts\common\utility::is_crate_use_allowed()) {
     return 0;
   }
 
-  if(!var0 scripts\cp_mp\utility\player_utility::_isalive()) {
+  if(!var_0 scripts\cp_mp\utility\player_utility::_isalive()) {
     return 0;
   }
 
-  if(var0 isonladder()) {
+  if(var_0 isonladder()) {
     return 0;
   }
 
-  if(isDefined(self.playerscaptured) && isDefined(self.playerscaptured[var0 getentitynumber()])) {
+  if(isDefined(self.playerscaptured) && isDefined(self.playerscaptured[var_0 getentitynumber()])) {
     return 0;
   }
 
   if(istrue(self.issquadonlycrate)) {
-    if(isDefined(self.playersused) && scripts\engine\utility::array_contains(self.playersused, var0)) {
+    if(isDefined(self.playersused) && scripts\engine\utility::array_contains(self.playersused, var_0)) {
       return 0;
     }
 
-    if(var0.squadindex != self.squadindex || var0.team != self.team) {
+    if(var_0.squadindex != self.squadindex || var_0.team != self.team) {
       return 0;
     }
   }
 
   if(istrue(self.validate_station)) {
-    if(isDefined(self.playersused) && scripts\engine\utility::array_contains(self.playersused, var0)) {
+    if(isDefined(self.playersused) && scripts\engine\utility::array_contains(self.playersused, var_0)) {
       return 0;
     }
 
-    if(var0.team != self.team) {
+    if(var_0.team != self.team) {
       return 0;
     }
   }
 
-  if(isbot(var0)) {
+  if(isbot(var_0)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "botIsKillstreakSupported")) {
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "getGameType")) {
         if([[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getGameType")]]() != "grnd" && ![[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "botIsKillstreakSupported")]](self.cratetype)) {
@@ -1483,44 +1483,44 @@ function canstartusingcrate(var0, var1, var2) {
     return 0;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 1;
+  if(!isDefined(var_2)) {
+    var_2 = 1;
   }
 
-  if(var2) {
-    return canstartusingcratetriggerobject(var0, var1);
+  if(var_2) {
+    return canstartusingcratetriggerobject(var_0, var_1);
   }
 
-  if(level.gametype == "br" && var0 isskydiving()) {
+  if(level.gametype == "br" && var_0 isskydiving()) {
     return 0;
   }
 
-  if(istrue(var0.inlaststand)) {
+  if(istrue(var_0.inlaststand)) {
     return 0;
   }
 
   return 1;
 }
 
-function canstartusingcratetriggerobject(var0, var1) {
-  var2 = gettriggerobject(var1);
+function canstartusingcratetriggerobject(var_0, var_1) {
+  var_2 = gettriggerobject(var_1);
 
-  if(isDefined(var2.playerusing) && var2.playerusing != var0) {
+  if(isDefined(var_2.playerusing) && var_2.playerusing != var_0) {
     return false;
   }
 
-  if(var2.usetype == 1 && (!isDefined(self.owner) || var0 != self.owner)) {
+  if(var_2.usetype == 1 && (!isDefined(self.owner) || var_0 != self.owner)) {
     return false;
   }
 
-  if(var2.usetype == 2 && isDefined(self.owner) && var0 == self.owner) {
+  if(var_2.usetype == 2 && isDefined(self.owner) && var_0 == self.owner) {
     return false;
   }
 
   if(level.teambased && isDefined(self.team) && self.team != "neutral") {
-    var3 = getleveldata(self.cratetype);
+    var_3 = getleveldata(self.cratetype);
 
-    if(var3.friendlyuseonly && var0.team != self.team) {
+    if(var_3.friendlyuseonly && var_0.team != self.team) {
       return false;
     }
   }
@@ -1528,30 +1528,30 @@ function canstartusingcratetriggerobject(var0, var1) {
   return true;
 }
 
-function cankeepusingcrate(var0, var1) {
+function cankeepusingcrate(var_0, var_1) {
   if(!scripts\common\utility::is_crate_use_allowed()) {
     return false;
   }
 
-  if(!var0 scripts\cp_mp\utility\player_utility::_isalive()) {
+  if(!var_0 scripts\cp_mp\utility\player_utility::_isalive()) {
     return false;
   }
 
-  if(var0 meleeButtonPressed()) {
+  if(var_0 meleeButtonPressed()) {
     return false;
   }
 
-  if(var0 isinexecutionvictim()) {
+  if(var_0 isinexecutionvictim()) {
     return false;
   }
 
-  if(istrue(var0.inlaststand)) {
+  if(istrue(var_0.inlaststand)) {
     return false;
   }
 
-  var2 = getleveldata(self.cratetype);
+  var_2 = getleveldata(self.cratetype);
 
-  if(isDefined(var2.breakuserangesqr) && distancesquared(var0.origin, gettriggerobject(var1).origin) >= var2.breakuserangesqr) {
+  if(isDefined(var_2.breakuserangesqr) && distancesquared(var_0.origin, gettriggerobject(var_1).origin) >= var_2.breakuserangesqr) {
     return false;
   }
 
@@ -1562,31 +1562,31 @@ function cankeepusingcrate(var0, var1) {
   return true;
 }
 
-function ref_11a9c(var0, var1) {
-  var0 enableplayeruse(var1);
+function ref_11a9c(var_0, var_1) {
+  var_0 enableplayeruse(var_1);
 
-  if(isDefined(var0.useobject)) {
-    var0.useobject enableplayeruse(var1);
+  if(isDefined(var_0.useobject)) {
+    var_0.useobject enableplayeruse(var_1);
   }
 
-  if(!canstartusingcrate(var0, var1, var0.useobject, 0)) {
-    var0 disableplayeruse(var1);
+  if(!canstartusingcrate(var_0, var_1, var_0.useobject, 0)) {
+    var_0 disableplayeruse(var_1);
 
-    if(isDefined(var0.useobject)) {
-      var0.useobject disableplayeruse(var1);
+    if(isDefined(var_0.useobject)) {
+      var_0.useobject disableplayeruse(var_1);
       return;
     }
 
     return;
   }
 
-  if(!canstartusingcratetriggerobject(var0, var1, undefined)) {
-    var0 disableplayeruse(var1);
+  if(!canstartusingcratetriggerobject(var_0, var_1, undefined)) {
+    var_0 disableplayeruse(var_1);
   }
 
-  if(isDefined(var0.useobject)) {
-    if(!canstartusingcratetriggerobject(var0, var1, var0.useobject)) {
-      var0.useobject disableplayeruse(var1);
+  if(isDefined(var_0.useobject)) {
+    if(!canstartusingcratetriggerobject(var_0, var_1, var_0.useobject)) {
+      var_0.useobject disableplayeruse(var_1);
       return;
     }
 
@@ -1596,35 +1596,35 @@ function ref_11a9c(var0, var1) {
 
 function ref_14485() {
   for(;;) {
-    foreach(var1 in level.cratedata.usablecrates) {
-      if(!isDefined(var1)) {
+    foreach(var_1 in level.cratedata.usablecrates) {
+      if(!isDefined(var_1)) {
         thread scripts\engine\utility::error("airdrop crate was deleted incorrectly.");
         continue;
       }
 
-      var1 makeusable();
-      var1 istacmapactive();
+      var_1 makeusable();
+      var_1 istacmapactive();
 
-      if(isDefined(var1.useobject)) {
-        var1.useobject makeusable();
-        var1.useobject istacmapactive();
+      if(isDefined(var_1.useobject)) {
+        var_1.useobject makeusable();
+        var_1.useobject istacmapactive();
       }
 
-      var2 = level.players;
+      var_2 = level.players;
 
-      if(level.teambased && isDefined(var1.team) && var1.team != "neutral") {
-        var3 = getleveldata(var1.cratetype);
+      if(level.teambased && isDefined(var_1.team) && var_1.team != "neutral") {
+        var_3 = getleveldata(var_1.cratetype);
 
-        if(var3.friendlyuseonly) {
-          var2 = level.teamdata[var1.team]["alivePlayers"];
+        if(var_3.friendlyuseonly) {
+          var_2 = level.teamdata[var_1.team]["alivePlayers"];
         }
       }
 
-      foreach(var5 in var2) {
-        var6 = distancesquared(var1.origin, var5.origin) < 57600;
+      foreach(var_5 in var_2) {
+        var_6 = distancesquared(var_1.origin, var_5.origin) < 57600;
 
-        if(var6) {
-          ref_11a9c(var1, var5);
+        if(var_6) {
+          ref_11a9c(var_1, var_5);
         }
       }
     }
@@ -1639,55 +1639,55 @@ function watchallcrateusability() {
   return;
 }
 
-function playusesound(var0, var1) {
-  var2 = gettriggerobject(var1);
+function playusesound(var_0, var_1) {
+  var_2 = gettriggerobject(var_1);
 
-  if(var2.usetype == 1) {
-    var0 playLoopSound("mp_care_package_owner_cap");
+  if(var_2.usetype == 1) {
+    var_0 playLoopSound("mp_care_package_owner_cap");
     return;
   }
 
-  var0 playLoopSound("mp_care_package_non_owner_cap");
+  var_0 playLoopSound("mp_care_package_non_owner_cap");
 }
 
-function stopusesound(var0, var1) {
-  var2 = gettriggerobject(var1);
+function stopusesound(var_0, var_1) {
+  var_2 = gettriggerobject(var_1);
 
-  if(var2.usetype == 1) {
-    var0 stoploopsound("mp_care_package_owner_cap");
+  if(var_2.usetype == 1) {
+    var_0 stoploopsound("mp_care_package_owner_cap");
   } else {
-    var0 stoploopsound("mp_care_package_non_owner_cap");
+    var_0 stoploopsound("mp_care_package_non_owner_cap");
   }
 
-  if(var0 scripts\cp_mp\utility\player_utility::_isalive()) {
-    var0 playsoundonmovingent("mp_care_package_cap_tail");
+  if(var_0 scripts\cp_mp\utility\player_utility::_isalive()) {
+    var_0 playsoundonmovingent("mp_care_package_cap_tail");
     return;
   }
 }
 
-function gettriggerobject(var0) {
-  return scripts\engine\utility::ter_op(isDefined(var0), var0, self);
+function gettriggerobject(var_0) {
+  return scripts\engine\utility::ter_op(isDefined(var_0), var_0, self);
 }
 
-function infinite_chopper(var0, var1) {
-  var2 = getleveldata(self.cratetype);
+function infinite_chopper(var_0, var_1) {
+  var_2 = getleveldata(self.cratetype);
 
-  if(isDefined(var2.ingame)) {
-    self thread[[var2.ingame]]();
+  if(isDefined(var_2.ingame)) {
+    self thread[[var_2.ingame]]();
   }
 
-  if(!isDefined(var0)) {
-    var0 = (0, 0, 0);
+  if(!isDefined(var_0)) {
+    var_0 = (0, 0, 0);
   }
 
-  if(!isDefined(var1)) {
-    var1 = (0, 0, 0);
+  if(!isDefined(var_1)) {
+    var_1 = (0, 0, 0);
   }
 
   self unlink();
-  self physicslaunchserver(var0, var1);
-  var3 = self physics_getbodyid(0);
-  physics_setbodycenterofmassnormal(var3, (0, 0, -1));
+  self physicslaunchserver(var_0, var_1);
+  var_3 = self physics_getbodyid(0);
+  physics_setbodycenterofmassnormal(var_3, (0, 0, -1));
   self.physicsactivated = 1;
   createdangerzone();
   thread ref_11cfe();
@@ -1713,31 +1713,31 @@ function ref_11cfe() {
   self endon("death");
   self notify("monitorAverageVelocityAndUpdate");
   self endon("monitorAverageVelocityAndUpdate");
-  var0 = 0.1;
-  thread ref_11cfd(var0, 8);
-  var1 = 0;
-  var2 = 0;
+  var_0 = 0.1;
+  thread ref_11cfd(var_0, 8);
+  var_1 = 0;
+  var_2 = 0;
   self.unset_relic_amped = 1;
-  var3 = undefined;
-  var4 = undefined;
+  var_3 = undefined;
+  var_4 = undefined;
   jumpiffalse(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "lpcFeatureGated")) LOC_0000005c;
-  var4 = scripts\cp_mp\utility\script_utility::getsharedfunc("game", "lpcFeatureGated");
+  var_4 = scripts\cp_mp\utility\script_utility::getsharedfunc("game", "lpcFeatureGated");
 
   for(;;) {
-    var5 = registeronplayerjointeamnospectatorcallback();
-    var6 = registeronplayerdisconnect();
+    var_5 = registeronplayerjointeamnospectatorcallback();
+    var_6 = registeronplayerdisconnect();
 
-    if(isDefined(var5) && isDefined(var6)) {
-      if(var5 <= 5 && var6 <= 1) {
-        var1++;
-        var2 = 0;
+    if(isDefined(var_5) && isDefined(var_6)) {
+      if(var_5 <= 5 && var_6 <= 1) {
+        var_1++;
+        var_2 = 0;
 
-        if(var1 == 6) {
+        if(var_1 == 6) {
           self.ref_12332 = 1;
-          var3 = self.origin;
+          var_3 = self.origin;
           thread activatecrate(self.unset_relic_amped);
 
-          if(isDefined(var4) && [[var4]]()) {
+          if(isDefined(var_4) && [[var_4]]()) {
             ref_11d0c();
 
             if(isDefined(self.killcament)) {
@@ -1745,30 +1745,30 @@ function ref_11cfe() {
             }
           }
 
-          var0 = 0.1;
-          thread ref_11cfd(var0, 3, 3);
+          var_0 = 0.1;
+          thread ref_11cfd(var_0, 3, 3);
           lb_mg_dmg_factor_tail_rotor();
         }
       } else {
-        if(isDefined(var3)) {
-          if(distancesquared(self.origin, var3) <= 2500) {
-            wait var0;
+        if(isDefined(var_3)) {
+          if(distancesquared(self.origin, var_3) <= 2500) {
+            wait var_0;
             continue;
           }
         }
 
-        var2++;
-        var1 = 0;
+        var_2++;
+        var_1 = 0;
 
-        if(var2 == 1) {
+        if(var_2 == 1) {
           self.ref_12332 = undefined;
           thread deactivatecrate();
-          var0 = 0.1;
-          thread ref_11cfd(var0, 8);
+          var_0 = 0.1;
+          thread ref_11cfd(var_0, 8);
         }
       }
 
-      wait var0;
+      wait var_0;
       continue;
     }
 
@@ -1776,7 +1776,7 @@ function ref_11cfe() {
   }
 }
 
-function ref_11cfd(var0, var1, var2) {
+function ref_11cfd(var_0, var_1, var_2) {
   headicon_z_offset();
   self endon("death");
   self endon("clear_average_velocities");
@@ -1784,39 +1784,39 @@ function ref_11cfd(var0, var1, var2) {
   self.buildrespawnlist = [];
   self.ref_1428a = 0;
   self.ref_14285 = 0;
-  self.ref_14287 = var1;
-  jumpiffalse(isDefined(var2)) LOC_0000007a;
-  var2 = int(clamp(var2, 0, var1));
-  jumpiffalse(var2 > 0) LOC_0000007a;
+  self.ref_14287 = var_1;
+  jumpiffalse(isDefined(var_2)) LOC_0000007a;
+  var_2 = int(clamp(var_2, 0, var_1));
+  jumpiffalse(var_2 > 0) LOC_0000007a;
 
-  for(var3 = 0; var3 < var2; var3++) {
-    self.x1ops2[self.ref_1428a + var3] = 0;
-    self.buildrespawnlist[self.ref_1428a + var3] = 0;
+  for(var_3 = 0; var_3 < var_2; var_3++) {
+    self.x1ops2[self.ref_1428a + var_3] = 0;
+    self.buildrespawnlist[self.ref_1428a + var_3] = 0;
   }
 
   for(;;) {
-    var4 = self physics_getbodyid(0);
-    var5 = physics_getbodylinvel(var4);
-    var6 = physics_getbodyangvel(var4);
-    self.x1ops2[self.ref_14285] = length(var5);
-    self.buildrespawnlist[self.ref_14285] = length(var6);
+    var_4 = self physics_getbodyid(0);
+    var_5 = physics_getbodylinvel(var_4);
+    var_6 = physics_getbodyangvel(var_4);
+    self.x1ops2[self.ref_14285] = length(var_5);
+    self.buildrespawnlist[self.ref_14285] = length(var_6);
     self.ref_14285++;
-    var7 = self.ref_14285 - self.ref_1428a;
+    var_7 = self.ref_14285 - self.ref_1428a;
 
-    if(var7 > var1) {
-      var8 = scripts\engine\utility::mod(var7, var1);
+    if(var_7 > var_1) {
+      var_8 = scripts\engine\utility::mod(var_7, var_1);
 
-      for(var3 = 0; var3 < var8; var3++) {
-        self.x1ops2[self.ref_1428a + var3] = undefined;
-        self.buildrespawnlist[self.ref_1428a + var3] = undefined;
+      for(var_3 = 0; var_3 < var_8; var_3++) {
+        self.x1ops2[self.ref_1428a + var_3] = undefined;
+        self.buildrespawnlist[self.ref_1428a + var_3] = undefined;
       }
 
-      self.ref_1428a += var8;
+      self.ref_1428a += var_8;
     }
 
     self.checkrequiredteamstreamcount = undefined;
     self.checkreload = undefined;
-    wait var0;
+    wait var_0;
   }
 }
 
@@ -1855,16 +1855,16 @@ function registeronplayerdisconnect() {
 }
 
 function forcestuckdamageclear() {
-  var0 = 0;
-  var1 = 0;
+  var_0 = 0;
+  var_1 = 0;
 
-  for(var2 = self.ref_1428a; var2 < self.ref_14285; var2++) {
-    var0 += self.x1ops2[var2];
-    var1 += self.buildrespawnlist[var2];
+  for(var_2 = self.ref_1428a; var_2 < self.ref_14285; var_2++) {
+    var_0 += self.x1ops2[var_2];
+    var_1 += self.buildrespawnlist[var_2];
   }
 
-  self.checkrequiredteamstreamcount = var0 / self.ref_14287;
-  self.checkreload = var1 / self.ref_14287;
+  self.checkrequiredteamstreamcount = var_0 / self.ref_14287;
+  self.checkreload = var_1 / self.ref_14287;
 }
 
 function headicon_z_offset() {
@@ -1878,13 +1878,13 @@ function headicon_z_offset() {
   self.checkreload = undefined;
 }
 
-function ref_11d0b(var0) {
+function ref_11d0b(var_0) {
   ref_11d0c();
   self endon("monitorImpactEnd");
   self.ref_11d0e = 1;
   self playLoopSound("mp_care_package_drop_lp");
   self physics_registerforcollisioncallback();
-  ref_11d0d(var0);
+  ref_11d0d(var_0);
 
   if(isDefined(self)) {
     thread ref_11d0c();
@@ -1892,108 +1892,108 @@ function ref_11d0b(var0) {
   }
 }
 
-function ref_11d0d(var0) {
+function ref_11d0d(var_0) {
   self endon("death");
 
-  if(isDefined(var0)) {
-    wait var0;
+  if(isDefined(var_0)) {
+    wait var_0;
   }
 
-  var1 = 0;
+  var_1 = 0;
 
   for(;;) {
-    self waittill("collision", var2, var3, var4, var5, var6, var7, var8, var9);
+    self waittill("collision", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-    if(isDefined(var9)) {
-      if(isDefined(var9.classname) && var9.classname == "scriptable_iw8_chicken_01") {
-        thread br_badcircleareas(var9);
+    if(isDefined(var_9)) {
+      if(isDefined(var_9.classname) && var_9.classname == "scriptable_iw8_chicken_01") {
+        thread br_badcircleareas(var_9);
       }
 
-      getkioskyawoffsetoverride(var9);
+      getkioskyawoffsetoverride(var_9);
     }
 
-    if(isDefined(var9) && start_chants_on_movement(var9)) {
-      if(var9 scripts\cp_mp\killstreaks\helper_drone::unset_relic_noks()) {
-        var9 thread scripts\cp_mp\killstreaks\helper_drone::helperdronedestroyed();
+    if(isDefined(var_9) && start_chants_on_movement(var_9)) {
+      if(var_9 scripts\cp_mp\killstreaks\helper_drone::unset_relic_noks()) {
+        var_9 thread scripts\cp_mp\killstreaks\helper_drone::helperdronedestroyed();
       }
     }
 
-    if(gettime() - var1 >= 200) {
-      var1 = gettime();
-      var10 = physics_getsurfacetypefromflags(var5);
-      var11 = getsubstr(var10["name"], 9);
+    if(gettime() - var_1 >= 200) {
+      var_1 = gettime();
+      var_10 = physics_getsurfacetypefromflags(var_5);
+      var_11 = getsubstr(var_10["name"], 9);
 
-      if(var11 == "user_terrain1") {
-        var11 = "user_terrain_1";
+      if(var_11 == "user_terrain1") {
+        var_11 = "user_terrain_1";
       }
 
-      if(var11 == "user_terrain5") {
-        var11 = "user_terrain_5";
+      if(var_11 == "user_terrain5") {
+        var_11 = "user_terrain_5";
       }
 
-      ref_1273b(var6, var7, var8, var11);
+      ref_1273b(var_6, var_7, var_8, var_11);
     }
   }
 }
 
-function getkioskyawoffsetoverride(var0) {
-  if(isDefined(var0.script_noteworthy) && isstartstr(var0.script_noteworthy, "train_") && !isDefined(self getlinkedparent())) {
+function getkioskyawoffsetoverride(var_0) {
+  if(isDefined(var_0.script_noteworthy) && isstartstr(var_0.script_noteworthy, "train_") && !isDefined(self getlinkedparent())) {
     if(isDefined(self.ref_13cc8)) {
-      if(self.ref_13cc8 == var0) {
+      if(self.ref_13cc8 == var_0) {
         return;
       } else {
         generatecodestoshow();
       }
     }
 
-    self.ref_13cc8 = var0;
+    self.ref_13cc8 = var_0;
     self.ref_13cc7 = 4;
-    thread getknivesoutsetting(var0);
+    thread getknivesoutsetting(var_0);
     return;
   }
 }
 
-function getknivesoutsetting(var0) {
+function getknivesoutsetting(var_0) {
   self endon("death");
   self endon("cancel_link_to_train");
-  var0 endon("death");
-  var1 = getleveldata(self.cratetype);
-  var2 = scripts\engine\trace::create_contents(0, 1, 0, 0, 0, 1, 1, 0, 0);
-  var3 = [self];
+  var_0 endon("death");
+  var_1 = getleveldata(self.cratetype);
+  var_2 = scripts\engine\trace::create_contents(0, 1, 0, 0, 0, 1, 1, 0, 0);
+  var_3 = [self];
 
-  foreach(var5 in self getlinkedchildren(1)) {
-    var3 = var5;
+  foreach(var_5 in self getlinkedchildren(1)) {
+    var_3 = var_5;
   }
 
   self.ref_13cce = 0;
   self.ref_13cd0 = 0;
 
   while(self.ref_13cce < 5) {
-    var7 = self.origin + anglestoup(self.angles) * var1.setplayerbeingrevivedextrainfo;
-    var8 = var7 + (0, 0, -200);
-    var9 = scripts\engine\trace::ray_trace(var7, var8, var3, var2);
+    var_7 = self.origin + anglestoup(self.angles) * var_1.setplayerbeingrevivedextrainfo;
+    var_8 = var_7 + (0, 0, -200);
+    var_9 = scripts\engine\trace::ray_trace(var_7, var_8, var_3, var_2);
 
-    if(var9.size > 0 && isDefined(var9["entity"]) && var9["entity"] == self.ref_13cc8) {
-      var10 = combineangles(invertangles(var0.angles), var0.origin - var9["position"]);
+    if(var_9.size > 0 && isDefined(var_9["entity"]) && var_9["entity"] == self.ref_13cc8) {
+      var_10 = combineangles(invertangles(var_0.angles), var_0.origin - var_9["position"]);
 
-      if(!isDefined(self.ref_13ccf)) {} else if(distancesquared(var10, self.ref_13ccf) > 25) {
+      if(!isDefined(self.ref_13ccf)) {} else if(distancesquared(var_10, self.ref_13ccf) > 25) {
         self.ref_13cce++;
         self.ref_13cd0 = 0;
-      } else if(vectordot(var10, self.ref_13ccf) < 0.997) {
+      } else if(vectordot(var_10, self.ref_13ccf) < 0.997) {
         self.ref_13cce++;
         self.ref_13cd0 = 0;
       } else {
         self.ref_13cd0++;
 
         if(self.ref_13cd0 >= 4) {
-          self linkTo(var0);
+          self linkTo(var_0);
           activatecrate(self.unset_relic_amped);
           thread infilweaponraise();
           break;
         }
       }
 
-      self.ref_13ccf = var10;
+      self.ref_13ccf = var_10;
     } else {
       break;
     }
@@ -2012,12 +2012,12 @@ function generatecodestoshow() {
   self.ref_13cd0 = undefined;
 }
 
-function br_badcircleareas(var0) {
+function br_badcircleareas(var_0) {
   self endon("death");
-  var1 = gettime();
+  var_1 = gettime();
 
-  while(gettime() - var1 < 3000) {
-    var0 dodamage(100, var0.origin, self, self, "MOD_CRUSH");
+  while(gettime() - var_1 < 3000) {
+    var_0 dodamage(100, var_0.origin, self, self, "MOD_CRUSH");
     wait 0.5;
   }
 }
@@ -2033,16 +2033,16 @@ function ref_11d0c() {
   self physics_unregisterforcollisioncallback();
 }
 
-function start_chants_on_movement(var0) {
+function start_chants_on_movement(var_0) {
   if(!istrue(self.ref_12332)) {
-    if(isDefined(var0.classname)) {
-      if(var0.classname == "worldSpawn") {
+    if(isDefined(var_0.classname)) {
+      if(var_0.classname == "worldSpawn") {
         return false;
-      } else if(var0.classname == "script_vehicle") {
-        if(var0 scripts\cp_mp\killstreaks\helper_drone::unset_relic_noks()) {
-          var1 = getleveldata(self.cratetype);
-          var2 = self.origin + anglestoup(self.angles) * var1.setplayerbeingrevivedextrainfo;
-          return (var0.origin[2] <= var2[2]);
+      } else if(var_0.classname == "script_vehicle") {
+        if(var_0 scripts\cp_mp\killstreaks\helper_drone::unset_relic_noks()) {
+          var_1 = getleveldata(self.cratetype);
+          var_2 = self.origin + anglestoup(self.angles) * var_1.setplayerbeingrevivedextrainfo;
+          return (var_0.origin[2] <= var_2[2]);
         }
       }
     }
@@ -2055,36 +2055,36 @@ function ref_11d17() {
   ref_11d18();
   self endon("death");
   self endon("monitorPlayerImpactEnd");
-  var0 = self;
+  var_0 = self;
 
   if(isDefined(self.mountmantlemodel)) {
-    var0 = self.mountmantlemodel;
+    var_0 = self.mountmantlemodel;
   }
 
-  var1 = undefined;
+  var_1 = undefined;
   jumpiffalse(isDefined(self.owner)) LOC_00000038;
-  var1 = self.owner;
+  var_1 = self.owner;
 
-  while(isDefined(var0)) {
-    var0 waittill("player_pushed", var2, var3);
+  while(isDefined(var_0)) {
+    var_0 waittill("player_pushed", var_2, var_3);
 
-    if(isDefined(var2) && (isPlayer(var2) || isagent(var2)) && var2 scripts\cp_mp\utility\player_utility::_isalive()) {
-      var4 = var3[2] <= -8;
-      var5 = 0;
-      var6 = undefined;
+    if(isDefined(var_2) && (isPlayer(var_2) || isagent(var_2)) && var_2 scripts\cp_mp\utility\player_utility::_isalive()) {
+      var_4 = var_3[2] <= -8;
+      var_5 = 0;
+      var_6 = undefined;
 
-      if(var2 tagexists("j_mainroot")) {
-        var6 = var2 gettagorigin("j_mainroot");
-        var7 = getleveldata(self.cratetype);
-        var8 = self.origin + anglestoup(self.angles) * var7.setplayerbeingrevivedextrainfo;
-        var5 = var6[2] <= var8[2];
+      if(var_2 tagexists("j_mainroot")) {
+        var_6 = var_2 gettagorigin("j_mainroot");
+        var_7 = getleveldata(self.cratetype);
+        var_8 = self.origin + anglestoup(self.angles) * var_7.setplayerbeingrevivedextrainfo;
+        var_5 = var_6[2] <= var_8[2];
       }
 
-      if(var4 && var5) {
-        var9 = var1;
+      if(var_4 && var_5) {
+        var_9 = var_1;
 
-        if(!isDefined(var9)) {
-          var9 = var2;
+        if(!isDefined(var_9)) {
+          var_9 = var_2;
         }
       }
     }
@@ -2095,15 +2095,15 @@ function ref_11d18() {
   self notify("monitorPlayerImpactEnd");
 }
 
-function ref_1273b(var0, var1, var2, var3) {
-  playFX(scripts\engine\utility::getfx("airdrop_crate_impact"), var0, var1);
+function ref_1273b(var_0, var_1, var_2, var_3) {
+  playFX(scripts\engine\utility::getfx("airdrop_crate_impact"), var_0, var_1);
 
-  if(var2 < 150) {
-    self playsurfacesound("mp_care_package_low_impact", var3);
-  } else if(var2 < 300) {
-    self playsurfacesound("mp_care_package_med_impact", var3);
+  if(var_2 < 150) {
+    self playsurfacesound("mp_care_package_low_impact", var_3);
+  } else if(var_2 < 300) {
+    self playsurfacesound("mp_care_package_med_impact", var_3);
   } else {
-    self playsurfacesound("mp_care_package_high_impact", var3);
+    self playsurfacesound("mp_care_package_high_impact", var_3);
   }
 
   self stoploopsound("mp_care_package_drop_lp");
@@ -2119,35 +2119,35 @@ function createdangerzone() {
   }
 
   destroydangerzone();
-  var0 = getleveldata(self.cratetype);
-  var1 = undefined;
+  var_0 = getleveldata(self.cratetype);
+  var_1 = undefined;
 
   if(isDefined(self.owner) && isDefined(self.team)) {
-    var1 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("spawn", "addSpawnDangerZone")]](self.destination, var0.dangerzoneradius, var0.dangerzoneheight, self.team, 30, self.owner, 1);
+    var_1 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("spawn", "addSpawnDangerZone")]](self.destination, var_0.dangerzoneradius, var_0.dangerzoneheight, self.team, 30, self.owner, 1);
   } else if(isDefined(self.team)) {
-    var1 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("spawn", "addSpawnDangerZone")]](self.destination, var0.dangerzoneradius, var0.dangerzoneheight, self.team, 30);
+    var_1 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("spawn", "addSpawnDangerZone")]](self.destination, var_0.dangerzoneradius, var_0.dangerzoneheight, self.team, 30);
   } else {
-    var1 = spawnuniversaldangerzone(self.destination, var0.dangerzoneradius, var0.dangerzoneheight, 30);
+    var_1 = spawnuniversaldangerzone(self.destination, var_0.dangerzoneradius, var_0.dangerzoneheight, 30);
   }
 
-  self.dangerzoneid = var1;
-  return var1;
+  self.dangerzoneid = var_1;
+  return var_1;
 }
 
-function spawnuniversaldangerzone(var0, var1, var2, var3) {
+function spawnuniversaldangerzone(var_0, var_1, var_2, var_3) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("spawn", "addSpawnDangerZone")) {
-    var4 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("spawn", "addSpawnDangerZone")]](var0, var1, var2, undefined, var3, level.players[randomint(level.players.size)], 1);
-    self.dangerzoneid = var4;
-    return var4;
+    var_4 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("spawn", "addSpawnDangerZone")]](var_0, var_1, var_2, undefined, var_3, level.players[randomint(level.players.size)], 1);
+    self.dangerzoneid = var_4;
+    return var_4;
   }
 }
 
 function destroydangerzone() {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("spawn", "isSpawnDangerZoneAlive") && scripts\cp_mp\utility\script_utility::issharedfuncdefined("spawn", "removeSpawnDangerZone")) {
-    var0 = self.dangerzoneid;
+    var_0 = self.dangerzoneid;
 
-    if(isDefined(var0) && [[scripts\cp_mp\utility\script_utility::getsharedfunc("spawn", "isSpawnDangerZoneAlive")]](var0)) {
-      [[scripts\cp_mp\utility\script_utility::getsharedfunc("spawn", "removeSpawnDangerZone")]](var0);
+    if(isDefined(var_0) && [[scripts\cp_mp\utility\script_utility::getsharedfunc("spawn", "isSpawnDangerZoneAlive")]](var_0)) {
+      [[scripts\cp_mp\utility\script_utility::getsharedfunc("spawn", "removeSpawnDangerZone")]](var_0);
     }
 
     self.dangerzoneid = undefined;
@@ -2163,16 +2163,16 @@ function _createnavobstacle() {
     destroynavobstacle(self.navobstacleid);
   }
 
-  var0 = getleveldata(self.cratetype);
-  var1 = createnavobstaclebybounds(self.origin, var0.navobstaclebounds, self.angles);
-  self.navobstacleid = var1;
-  GscBinSkip4(0x35, var1, self.origin, var0.navobstacleupdatedistsqr);
+  var_0 = getleveldata(self.cratetype);
+  var_1 = createnavobstaclebybounds(self.origin, var_0.navobstaclebounds, self.angles);
+  self.navobstacleid = var_1;
+  GscBinSkip4(0x35, var_1, self.origin, var_0.navobstacleupdatedistsqr);
 }
 
-function _watchnavobstacle(var0, var1, var2) {
+function _watchnavobstacle(var_0, var_1, var_2) {
   self endon("death");
 
-  while(distancesquared(var1, self.origin) < var2) {
+  while(distancesquared(var_1, self.origin) < var_2) {
     wait 0.5;
   }
 
@@ -2190,24 +2190,24 @@ function _destroynavobstacle() {
 }
 
 function createmountmantlemodel() {
-  var0 = getleveldata(self.cratetype);
+  var_0 = getleveldata(self.cratetype);
 
-  if(isDefined(var0.mountmantlemodel)) {
+  if(isDefined(var_0.mountmantlemodel)) {
     if(isDefined(self.mountmantlemodel)) {
       self.mountmantlemodel delete();
     }
 
-    var1 = spawn("script_model", self.origin);
-    var1 dontinterpolate();
-    var1.angles = self.angles;
-    var1.owner = self.owner;
-    var1.unresolved_collision_func = &crateunresolvedcollisioncallback;
-    var1.killcament = self.killcament;
-    var1.mountmantlemodel = 1;
-    var1 clonebrushmodeltoscriptmodel(level.cratedata.mountmantlemodel);
-    var1 linkTo(self);
-    self.mountmantlemodel = var1;
-    var1.crate = self;
+    var_1 = spawn("script_model", self.origin);
+    var_1 dontinterpolate();
+    var_1.angles = self.angles;
+    var_1.owner = self.owner;
+    var_1.unresolved_collision_func = &crateunresolvedcollisioncallback;
+    var_1.killcament = self.killcament;
+    var_1.mountmantlemodel = 1;
+    var_1 clonebrushmodeltoscriptmodel(level.cratedata.mountmantlemodel);
+    var_1 linkTo(self);
+    self.mountmantlemodel = var_1;
+    var_1.crate = self;
     return true;
   }
 
@@ -2222,26 +2222,26 @@ function destroymountmantlemodel() {
   self.mountmantlemodel = undefined;
 }
 
-function crateunresolvedcollisioncallback(var0, var1) {
+function crateunresolvedcollisioncallback(var_0, var_1) {
   if(level.cratedata.ref_13f28 > 0) {
-    if(lengthsquared(var1) <= level.cratedata.ref_13f28) {
+    if(lengthsquared(var_1) <= level.cratedata.ref_13f28) {
       return;
     }
   }
 
-  var2 = self.objweapon;
+  var_2 = self.objweapon;
 
   if(isDefined(self.init_airdrop_anims)) {
-    var2 = self.crate.objweapon;
+    var_2 = self.crate.objweapon;
   }
 
-  var0 dodamage(1000, var0.origin, self.owner, self, "MOD_CRUSH", var2);
+  var_0 dodamage(1000, var_0.origin, self.owner, self, "MOD_CRUSH", var_2);
   self endon("death");
-  var0 endon("death_or_disconnect");
+  var_0 endon("death_or_disconnect");
 
-  if(isPlayer(var0) && var0 scripts\cp_mp\utility\player_utility::_isalive()) {
+  if(isPlayer(var_0) && var_0 scripts\cp_mp\utility\player_utility::_isalive()) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "unresolvedCollisionNearestNode")) {
-      [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "unresolvedCollisionNearestNode")]](var0, undefined, self);
+      [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "unresolvedCollisionNearestNode")]](var_0, undefined, self);
       return;
     }
 
@@ -2255,42 +2255,42 @@ function _createheadicon() {
   }
 
   scripts\cp_mp\entityheadicons::setheadicon_deleteicon(self.headiconid);
-  var0 = getleveldata(self.cratetype);
-  var1 = undefined;
+  var_0 = getleveldata(self.cratetype);
+  var_1 = undefined;
 
   if(isDefined(self.headicon)) {
     if(level.teambased && isDefined(self.team)) {
       if(!scripts\cp_mp\utility\game_utility::isrealismenabled()) {
-        var1 = scripts\cp_mp\entityheadicons::setheadicon_singleimage(self.team, self.headicon, var0.headiconoffset, 1, var0.headicondrawrange, var0.headiconnaturalrange, undefined, 1);
+        var_1 = scripts\cp_mp\entityheadicons::setheadicon_singleimage(self.team, self.headicon, var_0.headiconoffset, 1, var_0.headicondrawrange, var_0.headiconnaturalrange, undefined, 1);
       }
 
-      if(isDefined(var1)) {
+      if(isDefined(var_1)) {
         if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "isMLGMatch")) {
           if([[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "isMLGMatch")]]()) {
-            removeclientfromheadiconmask(var1, "spectator");
+            removeclientfromheadiconmask(var_1, "spectator");
           }
         }
       }
     } else if(isDefined(self.owner)) {
       if(!scripts\cp_mp\utility\game_utility::isrealismenabled()) {
-        var1 = scripts\cp_mp\entityheadicons::setheadicon_singleimage(self.owner, self.headicon, var0.headiconoffset, 1, var0.headicondrawrange, var0.headiconnaturalrange, undefined, 1);
+        var_1 = scripts\cp_mp\entityheadicons::setheadicon_singleimage(self.owner, self.headicon, var_0.headiconoffset, 1, var_0.headicondrawrange, var_0.headiconnaturalrange, undefined, 1);
       }
 
-      if(isDefined(var1)) {
+      if(isDefined(var_1)) {
         if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "isMLGMatch")) {
           if([[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "isMLGMatch")]]()) {
-            removeclientfromheadiconmask(var1, "spectator");
+            removeclientfromheadiconmask(var_1, "spectator");
           }
         }
       }
     } else if(!scripts\cp_mp\utility\game_utility::isrealismenabled()) {
-      scripts\cp_mp\entityheadicons::setheadicon_singleimage(level.teamnamelist, self.headicon, var0.headiconoffset, 1, var0.headicondrawrange, var0.headiconnaturalrange);
+      scripts\cp_mp\entityheadicons::setheadicon_singleimage(level.teamnamelist, self.headicon, var_0.headiconoffset, 1, var_0.headicondrawrange, var_0.headiconnaturalrange);
     }
   }
 
-  self.headiconid = var1;
+  self.headiconid = var_1;
   self.headiconactive = 1;
-  return var1;
+  return var_1;
 }
 
 function _destroyheadicon() {
@@ -2301,30 +2301,30 @@ function _destroyheadicon() {
 
 function createminimapicon() {
   destroyminimapicon();
-  var0 = getleveldata(self.cratetype);
-  var1 = undefined;
+  var_0 = getleveldata(self.cratetype);
+  var_1 = undefined;
 
   if(isDefined(self.minimapicon) && !istrue(self.visibilitymanuallycontrolled)) {
-    var2 = undefined;
+    var_2 = undefined;
 
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "createObjective")) {
-      var2 = scripts\cp_mp\utility\script_utility::getsharedfunc("game", "createObjective");
+      var_2 = scripts\cp_mp\utility\script_utility::getsharedfunc("game", "createObjective");
     }
 
-    if(isDefined(var2)) {
+    if(isDefined(var_2)) {
       if(level.teambased && isDefined(self.team)) {
-        var1 = self[[var2]](self.minimapicon, self.team, 1, 1, 0);
+        var_1 = self[[var_2]](self.minimapicon, self.team, 1, 1, 0);
       } else if(isDefined(self.owner)) {
-        var1 = self[[var2]](self.minimapicon, undefined, 1, 1, 0);
+        var_1 = self[[var_2]](self.minimapicon, undefined, 1, 1, 0);
       } else {
-        var1 = self[[var2]](self.minimapicon, undefined, 0, 1, 0);
+        var_1 = self[[var_2]](self.minimapicon, undefined, 0, 1, 0);
       }
     }
   }
 
-  self.minimapid = var1;
+  self.minimapid = var_1;
   self.minimapiconactive = 1;
-  return var1;
+  return var_1;
 }
 
 function destroyminimapicon() {
@@ -2341,8 +2341,8 @@ function destroyminimapicon() {
 function watchvisibility() {
   self endon("death");
 
-  foreach(var1 in level.players) {
-    updatevisibilityforplayer(var1);
+  foreach(var_1 in level.players) {
+    updatevisibilityforplayer(var_1);
   }
 
   waitframe();
@@ -2351,117 +2351,117 @@ function watchvisibility() {
 
 function watchvisibilityinternal() {
   for(;;) {
-    level waittill("joined_team", var0);
-    updatevisibilityforplayer(var0);
+    level waittill("joined_team", var_0);
+    updatevisibilityforplayer(var_0);
   }
 }
 
-function updatevisibilityforplayer(var0) {
-  self.friendlymodel hidefromplayer(var0);
-  self.enemymodel hidefromplayer(var0);
+function updatevisibilityforplayer(var_0) {
+  self.friendlymodel hidefromplayer(var_0);
+  self.enemymodel hidefromplayer(var_0);
 
-  if(var0.team == "spectator") {
-    self.friendlymodel showtoplayer(var0);
+  if(var_0.team == "spectator") {
+    self.friendlymodel showtoplayer(var_0);
     return;
   }
 
   if(level.teambased && isDefined(self.team)) {
-    if(var0.team == self.team) {
-      self.friendlymodel showtoplayer(var0);
+    if(var_0.team == self.team) {
+      self.friendlymodel showtoplayer(var_0);
       return;
     }
 
-    self.enemymodel showtoplayer(var0);
+    self.enemymodel showtoplayer(var_0);
     return;
   }
 
   if(!level.teambased && isDefined(self.owner)) {
-    if(var0 == self.owner) {
-      self.friendlymodel showtoplayer(var0);
+    if(var_0 == self.owner) {
+      self.friendlymodel showtoplayer(var_0);
       return;
     }
 
-    self.enemymodel showtoplayer(var0);
+    self.enemymodel showtoplayer(var_0);
     return;
   }
 }
 
-function looselinkTo(var0, var1, var2) {
+function looselinkTo(var_0, var_1, var_2) {
   self endon("death");
-  var0 endon("death");
+  var_0 endon("death");
   self notify("looseLinkTo");
   self endon("looseLinkToEnd");
 
   while(istrue(self.physicsactivated)) {
-    self.origin = var0.origin + var1;
+    self.origin = var_0.origin + var_1;
     waitframe();
   }
 
-  self linkTo(var0);
+  self linkTo(var_0);
 }
 
 function addtolists() {
   level.cratedata.crates[self getentitynumber()] = self;
 }
 
-function removefromlists(var0) {
+function removefromlists(var_0) {
   if(!isDefined(level.cratedata)) {
     return;
   }
 
-  level.cratedata.crates[var0] = undefined;
+  level.cratedata.crates[var_0] = undefined;
 }
 
-function getrandomkeyfromweightsarray(var0, var1) {
-  if(isDefined(var1)) {
-    if(!isarray(var1)) {
-      var1 = [var1];
+function getrandomkeyfromweightsarray(var_0, var_1) {
+  if(isDefined(var_1)) {
+    if(!isarray(var_1)) {
+      var_1 = [var_1];
     }
   }
 
-  var2 = [];
-  var3 = [];
-  var4 = 0;
+  var_2 = [];
+  var_3 = [];
+  var_4 = 0;
 
-  foreach(var11, var6 in var0) {
-    if(var6 > 0) {
-      var7 = 0;
+  foreach(var_11, var_6 in var_0) {
+    if(var_6 > 0) {
+      var_7 = 0;
 
-      if(isDefined(var1)) {
-        if(var1.size > 0) {
-          foreach(var9 in var1) {
-            if(var9 == var11) {
-              var1[var10] = undefined;
-              var7 = 1;
+      if(isDefined(var_1)) {
+        if(var_1.size > 0) {
+          foreach(var_9 in var_1) {
+            if(var_9 == var_11) {
+              var_1[var_10] = undefined;
+              var_7 = 1;
               break;
             }
           }
         } else {
-          var1 = undefined;
+          var_1 = undefined;
         }
       }
 
-      if(!var7) {
-        var4 += var6;
-        var2 = var11;
-        var3 = var4;
+      if(!var_7) {
+        var_4 += var_6;
+        var_2 = var_11;
+        var_3 = var_4;
       }
     }
   }
 
-  var12 = randomint(var4);
-  var11 = undefined;
+  var_12 = randomint(var_4);
+  var_11 = undefined;
 
-  for(var13 = 0; var13 < var2.size; var13++) {
-    var4 = var3[var13];
+  for(var_13 = 0; var_13 < var_2.size; var_13++) {
+    var_4 = var_3[var_13];
 
-    if(var12 < var4) {
-      var11 = var2[var13];
+    if(var_12 < var_4) {
+      var_11 = var_2[var_13];
       break;
     }
   }
 
-  return var11;
+  return var_11;
 }
 
 function getdefaultcapturevisualscallback() {
@@ -2476,7 +2476,7 @@ function getdefaultcapturevisualsdeletiondelay() {
 
 #using_animtree("");
 
-function defaultcapturevisualscallback(var0) {
+function defaultcapturevisualscallback(var_0) {
   if(!isDefined(self)) {
     return;
   }
@@ -2485,22 +2485,22 @@ function defaultcapturevisualscallback(var0) {
     return;
   }
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var1 = getanimlength(%mp_military_carepackage_straps_falling);
+  var_1 = getanimlength(%mp_military_carepackage_straps_falling);
 
-  if(isDefined(var1)) {
-    var1 = max(0, var1 - 0.05);
+  if(isDefined(var_1)) {
+    var_1 = max(0, var_1 - 0.05);
   }
 
-  var0 setscriptablepartstate("anims", "capture", 0);
-  var0 setscriptablepartstate("capture", "start", 0);
-  var0 notsolid();
+  var_0 setscriptablepartstate("anims", "capture", 0);
+  var_0 setscriptablepartstate("capture", "start", 0);
+  var_0 notsolid();
 
-  if(isDefined(var1)) {
-    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var1);
+  if(isDefined(var_1)) {
+    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_1);
   }
 
   playFX(scripts\engine\utility::getfx("airdrop_crate_capture"), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
@@ -2514,7 +2514,7 @@ function getdefaultdestroyvisualscallback() {
   return &defaultdestroyvisualscallback;
 }
 
-function defaultdestroyvisualscallback(var0) {}
+function defaultdestroyvisualscallback(var_0) {}
 
 function getdefaultmountmantlemodel() {
   return level.cratedata.mountmantlemodel;
@@ -2531,11 +2531,11 @@ function getnumdroppedcrates() {
 function ref_13c46() {
   if(!isDefined(self.numactivejuggdrops)) {
     if(self ismantling()) {
-      var0 = self getmovingplatformparent();
+      var_0 = self getmovingplatformparent();
 
-      if(isDefined(var0) && isDefined(var0.crate)) {
-        self.num_shot_taken_to_next_damage_state = var0;
-        self.num_times_stealth_broken_tv_station_interior = var0.crate;
+      if(isDefined(var_0) && isDefined(var_0.crate)) {
+        self.num_shot_taken_to_next_damage_state = var_0;
+        self.num_times_stealth_broken_tv_station_interior = var_0.crate;
       }
 
       self.numactivejuggdrops = gettime() + 1000;
@@ -2552,12 +2552,12 @@ function ref_13c46() {
     return;
   }
 
-  foreach(var2 in level.cratedata.crates) {
-    if(isDefined(var2) && istrue(var2.physicsactivated) && !istrue(var2.ref_12332)) {
+  foreach(var_2 in level.cratedata.crates) {
+    if(isDefined(var_2) && istrue(var_2.physicsactivated) && !istrue(var_2.ref_12332)) {
       if(isDefined(self.num_shot_taken_to_next_damage_state)) {
-        if(isDefined(var2.mountmantlemodel)) {
-          if(self.num_shot_taken_to_next_damage_state != var2.mountmantlemodel) {
-            if(self istouching(var2.mountmantlemodel)) {
+        if(isDefined(var_2.mountmantlemodel)) {
+          if(self.num_shot_taken_to_next_damage_state != var_2.mountmantlemodel) {
+            if(self istouching(var_2.mountmantlemodel)) {
               self.num_shot_taken_to_next_damage_state = undefined;
               self.num_times_stealth_broken_tv_station_interior = undefined;
               self.numactivejuggdrops = undefined;
@@ -2573,8 +2573,8 @@ function ref_13c46() {
           }
         }
 
-        if(self.num_times_stealth_broken_tv_station_interior != var2) {
-          if(self istouching(var2)) {
+        if(self.num_times_stealth_broken_tv_station_interior != var_2) {
+          if(self istouching(var_2)) {
             self.num_shot_taken_to_next_damage_state = undefined;
             self.num_times_stealth_broken_tv_station_interior = undefined;
             self.numactivejuggdrops = undefined;
@@ -2592,7 +2592,7 @@ function ref_13c46() {
         continue;
       }
 
-      if(self istouching(var2) || isDefined(var2.mountmantlemodel) && self istouching(var2.mountmantlemodel)) {
+      if(self istouching(var_2) || isDefined(var_2.mountmantlemodel) && self istouching(var_2.mountmantlemodel)) {
         self.num_shot_taken_to_next_damage_state = undefined;
         self.num_times_stealth_broken_tv_station_interior = undefined;
         self.numactivejuggdrops = undefined;
@@ -2609,64 +2609,64 @@ function ref_13c46() {
   }
 }
 
-function overridecapturestring(var0) {
-  if(isDefined(self.capturestring) && self.capturestring == var0) {
+function overridecapturestring(var_0) {
+  if(isDefined(self.capturestring) && self.capturestring == var_0) {
     return;
   }
 
-  self.capturestring = var0;
-  var1 = [self];
+  self.capturestring = var_0;
+  var_1 = [self];
 
   if(isDefined(self.useobject)) {
-    GscBinSkip0(0x2e, var1.size, self.useobject);
+    GscBinSkip0(0x2e, var_1.size, self.useobject);
   }
 
-  foreach(var3 in var1) {
-    if(!self.supportsreroll || var3.usetype == 2) {
-      var3 setHintString(self.capturestring);
+  foreach(var_3 in var_1) {
+    if(!self.supportsreroll || var_3.usetype == 2) {
+      var_3 setHintString(self.capturestring);
     }
   }
 }
 
-function overridererollstring(var0) {
-  if(isDefined(self.rerollstring) && self.rerollstring == var0) {
+function overridererollstring(var_0) {
+  if(isDefined(self.rerollstring) && self.rerollstring == var_0) {
     return;
   }
 
-  self.rerollstring = var0;
-  var1 = [self];
+  self.rerollstring = var_0;
+  var_1 = [self];
 
   if(isDefined(self.useobject)) {
-    GscBinSkip0(0x2e, var1.size, self.useobject);
+    GscBinSkip0(0x2e, var_1.size, self.useobject);
   }
 
-  foreach(var3 in var1) {
-    if(self.supportsreroll && var3.usetype == 1) {
-      var3 setHintString(self.rerollstring);
+  foreach(var_3 in var_1) {
+    if(self.supportsreroll && var_3.usetype == 1) {
+      var_3 setHintString(self.rerollstring);
     }
   }
 }
 
-function overrideheadicon(var0) {
-  if(!isDefined(self.headicon) && !isDefined(var0)) {
+function overrideheadicon(var_0) {
+  if(!isDefined(self.headicon) && !isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(self.headicon) && isDefined(var0) && self.headicon == var0) {
+  if(isDefined(self.headicon) && isDefined(var_0) && self.headicon == var_0) {
     return;
   }
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     self.headicon = undefined;
     _destroyheadicon();
     return;
   }
 
-  self.headicon = var0;
+  self.headicon = var_0;
 
   if(self.headiconactive) {
     if(isDefined(self.headiconid)) {
-      setheadiconfriendlyimage(self.headiconid, var0);
+      setheadiconfriendlyimage(self.headiconid, var_0);
       return;
     }
 
@@ -2675,26 +2675,26 @@ function overrideheadicon(var0) {
   }
 }
 
-function overrideminimapicon(var0) {
-  if(!isDefined(self.minimapicon) && !isDefined(var0)) {
+function overrideminimapicon(var_0) {
+  if(!isDefined(self.minimapicon) && !isDefined(var_0)) {
     return;
   }
 
-  if(isDefined(self.minimapicon) && isDefined(var0) && self.minimapicon == var0) {
+  if(isDefined(self.minimapicon) && isDefined(var_0) && self.minimapicon == var_0) {
     return;
   }
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     self.minimapicon = undefined;
     destroyminimapicon();
     return;
   }
 
-  self.minimapicon = var0;
+  self.minimapicon = var_0;
 
   if(self.minimapiconactive) {
     if(isDefined(self.minimapid)) {
-      scripts\mp\objidpoolmanager::update_objective_icon(self.minimapid, var0);
+      scripts\mp\objidpoolmanager::update_objective_icon(self.minimapid, var_0);
       return;
     }
 
@@ -2703,23 +2703,23 @@ function overrideminimapicon(var0) {
   }
 }
 
-function overridesupportsreroll(var0) {
-  if(self.supportsreroll == var0) {
+function overridesupportsreroll(var_0) {
+  if(self.supportsreroll == var_0) {
     return;
   }
 
-  self.supportsreroll = var0;
+  self.supportsreroll = var_0;
 
   if(self.supportsreroll) {
-    var1 = [self];
+    var_1 = [self];
 
     if(isDefined(self.useobject)) {
-      GscBinSkip0(0x2e, var1.size, self.useobject);
+      GscBinSkip0(0x2e, var_1.size, self.useobject);
     }
 
-    foreach(var3 in var1) {
-      if(var3.usetype == 1) {
-        var3 setHintString(self.rerollstring);
+    foreach(var_3 in var_1) {
+      if(var_3.usetype == 1) {
+        var_3 setHintString(self.rerollstring);
       }
     }
 
@@ -2731,16 +2731,16 @@ function initkillstreakcratedata() {
   level.cratedata.ksweights = [];
   level.cratedata.kscapturestrings = [];
   level.cratedata.ksrerollstrings = [];
-  var0 = &killstreakcrateactivatecallback;
-  var1 = &killstreakcratecapturecallback;
-  var2 = getleveldata("killstreak");
-  var2.activatecallback = var0;
-  var2.capturecallback = var1;
-  var2 = getleveldata("killstreak_no_owner");
-  var2.activatecallback = var0;
-  var2.capturecallback = var1;
-  var2.supportsownercapture = 0;
-  var2.enemymodel = undefined;
+  var_0 = &killstreakcrateactivatecallback;
+  var_1 = &killstreakcratecapturecallback;
+  var_2 = getleveldata("killstreak");
+  var_2.activatecallback = var_0;
+  var_2.capturecallback = var_1;
+  var_2 = getleveldata("killstreak_no_owner");
+  var_2.activatecallback = var_0;
+  var_2.capturecallback = var_1;
+  var_2.supportsownercapture = 0;
+  var_2.enemymodel = undefined;
   addkillstreakcratedata("radar_drone_overwatch", undefined, undefined, 120);
   addkillstreakcratedata("manual_turret", undefined, undefined, 120);
   addkillstreakcratedata("scrambler_drone_guard", undefined, undefined, 120);
@@ -2758,25 +2758,25 @@ function initkillstreakcratedata() {
   addkillstreakcratedata("hover_jet", undefined, undefined, 10);
   addkillstreakcratedata("white_phosphorus", undefined, undefined, 10);
   addkillstreakcratedata("juggernaut", undefined, undefined, 5);
-  var3 = 50;
-  thread initkillstreakcratedatalate(var3);
+  var_3 = 50;
+  thread initkillstreakcratedatalate(var_3);
 }
 
 function initdropzonekillstreakcratedata() {
   level.cratedata.ksweights = [];
   level.cratedata.kscapturestrings = [];
   level.cratedata.ksrerollstrings = [];
-  var0 = &killstreakcrateactivatecallback;
-  var1 = &killstreakcratecapturecallback;
-  var2 = getleveldata("killstreak");
-  var2.activatecallback = var0;
-  var2.capturecallback = var1;
-  var2 = getleveldata("killstreak_no_owner");
-  var2.activatecallback = var0;
-  var2.capturecallback = var1;
-  var2.supportsownercapture = 0;
-  var2.enemymodel = undefined;
-  var3 = 0;
+  var_0 = &killstreakcrateactivatecallback;
+  var_1 = &killstreakcratecapturecallback;
+  var_2 = getleveldata("killstreak");
+  var_2.activatecallback = var_0;
+  var_2.capturecallback = var_1;
+  var_2 = getleveldata("killstreak_no_owner");
+  var_2.activatecallback = var_0;
+  var_2.capturecallback = var_1;
+  var_2.supportsownercapture = 0;
+  var_2.enemymodel = undefined;
+  var_3 = 0;
   addkillstreakcratedata("radar_drone_overwatch", undefined, undefined, 100);
   addkillstreakcratedata("manual_turret", undefined, undefined, 100);
   addkillstreakcratedata("uav", undefined, undefined, 100);
@@ -2796,105 +2796,105 @@ function initdropzonekillstreakcratedata() {
   if(level.gametype != "infect") {
     addkillstreakcratedata("scrambler_drone_guard", undefined, undefined, 100);
     addkillstreakcratedata("bradley", undefined, undefined, 35);
-    var3 = 25;
-    thread initkillstreakcratedatalate(var3);
+    var_3 = 25;
+    thread initkillstreakcratedatalate(var_3);
     return;
   }
 }
 
-function initkillstreakcratedatalate(var0) {
+function initkillstreakcratedatalate(var_0) {
   waittillframeend();
-  var1 = scripts\engine\utility::ter_op(scripts\cp_mp\vehicles\light_tank::light_tank_supported(), var0, 0);
-  addkillstreakcratedata("bradley", undefined, undefined, var1);
+  var_1 = scripts\engine\utility::ter_op(scripts\cp_mp\vehicles\light_tank::light_tank_supported(), var_0, 0);
+  addkillstreakcratedata("bradley", undefined, undefined, var_1);
 }
 
-function addkillstreakcratedata(var0, var1, var2, var3) {
-  level.cratedata.kscapturestrings[var0] = var1;
-  level.cratedata.ksrerollstrings[var0] = var2;
-  level.cratedata.ksweights[var0] = var3;
+function addkillstreakcratedata(var_0, var_1, var_2, var_3) {
+  level.cratedata.kscapturestrings[var_0] = var_1;
+  level.cratedata.ksrerollstrings[var_0] = var_2;
+  level.cratedata.ksweights[var_0] = var_3;
 }
 
-function getkillstreakcratedatabystreakname(var0, var1) {
-  var2 = spawnStruct();
-  var2.streakname = var0;
-  var2.supportsreroll = var1;
-  return var2;
+function getkillstreakcratedatabystreakname(var_0, var_1) {
+  var_2 = spawnStruct();
+  var_2.streakname = var_0;
+  var_2.supportsreroll = var_1;
+  return var_2;
 }
 
-function overridekillstreakcrateweight(var0, var1) {
-  level.cratedata.ksweights[var0] = var1;
+function overridekillstreakcrateweight(var_0, var_1) {
+  level.cratedata.ksweights[var_0] = var_1;
 }
 
-function killstreakcrateactivatecallback(var0) {
-  var1 = self.data;
-  var2 = level.cratedata.kscapturestrings[var1.streakname];
+function killstreakcrateactivatecallback(var_0) {
+  var_1 = self.data;
+  var_2 = level.cratedata.kscapturestrings[var_1.streakname];
 
-  if(isDefined(var2)) {
-    overridecapturestring(var2);
+  if(isDefined(var_2)) {
+    overridecapturestring(var_2);
   }
 
-  var3 = level.cratedata.ksrerollstrings[var1.streakname];
+  var_3 = level.cratedata.ksrerollstrings[var_1.streakname];
 
-  if(isDefined(var3)) {
-    overridererollstring(var3);
+  if(isDefined(var_3)) {
+    overridererollstring(var_3);
   }
 
-  var4 = var1.supportsreroll;
+  var_4 = var_1.supportsreroll;
 
-  if(isDefined(var4)) {
-    overridesupportsreroll(var4);
+  if(isDefined(var_4)) {
+    overridesupportsreroll(var_4);
     return;
   }
 }
 
-function killstreakcratecapturecallback(var0) {
-  var1 = self.data.streakname;
-  var2 = 0;
+function killstreakcratecapturecallback(var_0) {
+  var_1 = self.data.streakname;
+  var_2 = 0;
 
-  switch (var1) {
+  switch (var_1) {
     case "bradley":
       if(!scripts\cp_mp\vehicles\light_tank::light_tank_supported()) {
-        var1 = "pac_sentry";
+        var_1 = "pac_sentry";
       }
 
       break;
     case "juggernaut":
-      if(!istrue(var0.isjuggernaut)) {
-        var2 = 1;
+      if(!istrue(var_0.isjuggernaut)) {
+        var_2 = 1;
 
         if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "applyImmediateJuggernaut")) {
-          var0[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "applyImmediateJuggernaut")]](var2);
+          var_0[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "applyImmediateJuggernaut")]](var_2);
         } else {
-          var0 scripts\cp_mp\killstreaks\juggernaut::tryusejuggernaut(var2);
+          var_0 scripts\cp_mp\killstreaks\juggernaut::tryusejuggernaut(var_2);
         }
       }
 
       break;
   }
 
-  if(!istrue(var2)) {
+  if(!istrue(var_2)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "awardKillstreak")) {
-      var0 thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "awardKillstreak")]](var1, self.owner, self);
+      var_0 thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "awardKillstreak")]](var_1, self.owner, self);
     }
 
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "showKillstreakSplash")) {
-      var0[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "showKillstreakSplash")]](var1, undefined, 1);
+      var_0[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "showKillstreakSplash")]](var_1, undefined, 1);
     }
   }
 
-  if(isDefined(self.owner) && var0 == self.owner) {
+  if(isDefined(self.owner) && var_0 == self.owner) {
     return;
   }
 
   if(isDefined(self.team)) {
-    if(var0.team != self.team) {
+    if(var_0.team != self.team) {
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("player", "giveUnifiedPoints")) {
-        var0[[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "giveUnifiedPoints")]]("hijacker");
+        var_0[[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "giveUnifiedPoints")]]("hijacker");
       }
 
       if(isDefined(self.owner)) {
         if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showSplash")) {
-          self.owner[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showSplash")]]("hijacked_airdrop", undefined, var0);
+          self.owner[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showSplash")]]("hijacked_airdrop", undefined, var_0);
           return;
         }
 
@@ -2908,83 +2908,83 @@ function killstreakcratecapturecallback(var0) {
   }
 }
 
-function getrandomkillstreak(var0) {
-  var1 = getrandomkeyfromweightsarray(level.cratedata.ksweights, var0);
-  return var1;
+function getrandomkillstreak(var_0) {
+  var_1 = getrandomkeyfromweightsarray(level.cratedata.ksweights, var_0);
+  return var_1;
 }
 
-function placekillstreakcrate(var0, var1, var2, var3, var4) {
-  if(!isDefined(var2) || var2 == "random") {
-    var2 = getrandomkillstreak();
+function placekillstreakcrate(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_2) || var_2 == "random") {
+    var_2 = getrandomkillstreak();
   }
 
-  var5 = scripts\engine\utility::ter_op(isDefined(var0), "killstreak", "killstreak_no_owner");
-  var6 = getkillstreakcratedatabystreakname(var2, 0);
-  var7 = placecrate(var0, var1, var5, var3, var4, var6);
+  var_5 = scripts\engine\utility::ter_op(isDefined(var_0), "killstreak", "killstreak_no_owner");
+  var_6 = getkillstreakcratedatabystreakname(var_2, 0);
+  var_7 = placecrate(var_0, var_1, var_5, var_3, var_4, var_6);
 
-  if(!isDefined(var7)) {
+  if(!isDefined(var_7)) {
     return undefined;
   }
 
-  if(isDefined(var0)) {
+  if(isDefined(var_0)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "teamPlayerCardSplash")) {
-      level thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "teamPlayerCardSplash")]]("used_airdrop", var0);
+      level thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "teamPlayerCardSplash")]]("used_airdrop", var_0);
     }
   }
 
-  return var7;
+  return var_7;
 }
 
-function dropkillstreakcrate(var0, var1, var2, var3, var4, var5) {
-  if(!isDefined(var2) || var2 == "random") {
-    var2 = getrandomkillstreak();
+function dropkillstreakcrate(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(!isDefined(var_2) || var_2 == "random") {
+    var_2 = getrandomkillstreak();
   }
 
-  var6 = scripts\engine\utility::ter_op(isDefined(var0), "killstreak", "killstreak_no_owner");
-  var7 = getkillstreakcratedatabystreakname(var2, 0);
-  var8 = dropcrate(var0, var1, var6, var3, var4, var5, var7);
+  var_6 = scripts\engine\utility::ter_op(isDefined(var_0), "killstreak", "killstreak_no_owner");
+  var_7 = getkillstreakcratedatabystreakname(var_2, 0);
+  var_8 = dropcrate(var_0, var_1, var_6, var_3, var_4, var_5, var_7);
 
-  if(!isDefined(var8)) {
+  if(!isDefined(var_8)) {
     return undefined;
   }
 
-  if(isDefined(var0)) {
+  if(isDefined(var_0)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "teamPlayerCardSplash")) {
-      level thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "teamPlayerCardSplash")]]("used_airdrop", var0);
+      level thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "teamPlayerCardSplash")]]("used_airdrop", var_0);
     }
   }
 
-  return var8;
+  return var_8;
 }
 
-function dropkillstreakcratefromscriptedheli(var0, var1, var2, var3, var4, var5, var6, var7) {
-  if(!isDefined(var2) || var2 == "random") {
-    var2 = getrandomkillstreak();
+function dropkillstreakcratefromscriptedheli(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  if(!isDefined(var_2) || var_2 == "random") {
+    var_2 = getrandomkillstreak();
   }
 
-  var8 = scripts\engine\utility::ter_op(isDefined(var0), "killstreak", "killstreak_no_owner");
-  var9 = getkillstreakcratedatabystreakname(var2, 0);
-  var9.vehicleisreserved = var6;
-  var10 = dropcratefromscriptedheli(var0, var1, var8, var3, var4, var5, var9, var7);
+  var_8 = scripts\engine\utility::ter_op(isDefined(var_0), "killstreak", "killstreak_no_owner");
+  var_9 = getkillstreakcratedatabystreakname(var_2, 0);
+  var_9.vehicleisreserved = var_6;
+  var_10 = dropcratefromscriptedheli(var_0, var_1, var_8, var_3, var_4, var_5, var_9, var_7);
 
-  if(!isDefined(var10)) {
+  if(!isDefined(var_10)) {
     return undefined;
-  } else if(!isDefined(var10.crates) || !isDefined(scripts\engine\utility::array_get_first_item(var10.crates))) {
+  } else if(!isDefined(var_10.crates) || !isDefined(scripts\engine\utility::array_get_first_item(var_10.crates))) {
     return undefined;
   }
 
-  if(isDefined(var0)) {
-    thread br_c130spawndone(var0);
+  if(isDefined(var_0)) {
+    thread br_c130spawndone(var_0);
 
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "teamPlayerCardSplash")) {
-      level thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "teamPlayerCardSplash")]]("used_airdrop", var0);
+      level thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "teamPlayerCardSplash")]]("used_airdrop", var_0);
     }
   }
 
-  return var10;
+  return var_10;
 }
 
-function br_c130spawndone(var0, var1) {
+function br_c130spawndone(var_0, var_1) {
   self endon("death_or_disconnect");
   level endon("game_ended");
 
@@ -2992,73 +2992,73 @@ function br_c130spawndone(var0, var1) {
     return;
   }
 
-  var2 = undefined;
+  var_2 = undefined;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("sound", "playKillstreakDeployDialog")) {
     scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(0.75);
-    [[scripts\cp_mp\utility\script_utility::getsharedfunc("sound", "playKillstreakDeployDialog")]](self, var0.streakname);
-    var2 = 1.5;
+    [[scripts\cp_mp\utility\script_utility::getsharedfunc("sound", "playKillstreakDeployDialog")]](self, var_0.streakname);
+    var_2 = 1.5;
   }
 
-  var3 = var0.streakname;
+  var_3 = var_0.streakname;
 
-  if(isDefined(var1)) {
-    var3 = var1;
+  if(isDefined(var_1)) {
+    var_3 = var_1;
   }
 
-  thread scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("use_" + var3, 1, var2);
+  thread scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("use_" + var_3, 1, var_2);
 }
 
-function dropkillstreakcratefrommanualheli(var0, var1, var2, var3, var4, var5, var6) {
-  if(!isDefined(var2) || var2 == "random") {
-    var2 = getrandomkillstreak();
+function dropkillstreakcratefrommanualheli(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if(!isDefined(var_2) || var_2 == "random") {
+    var_2 = getrandomkillstreak();
   }
 
-  var7 = scripts\engine\utility::ter_op(isDefined(var0), "killstreak", "killstreak_no_owner");
-  var8 = getkillstreakcratedatabystreakname(var2, 0);
-  var8.vehicleisreserved = var6;
-  var9 = dropcratefrommanualheli(var0, var1, var7, var3, var4, 30000, 30000, var5, var8);
+  var_7 = scripts\engine\utility::ter_op(isDefined(var_0), "killstreak", "killstreak_no_owner");
+  var_8 = getkillstreakcratedatabystreakname(var_2, 0);
+  var_8.vehicleisreserved = var_6;
+  var_9 = dropcratefrommanualheli(var_0, var_1, var_7, var_3, var_4, 30000, 30000, var_5, var_8);
 
-  if(!isDefined(var9)) {
+  if(!isDefined(var_9)) {
     return undefined;
-  } else if(!isDefined(var9.crate)) {
+  } else if(!isDefined(var_9.crate)) {
     return undefined;
   }
 
-  if(isDefined(var0)) {
+  if(isDefined(var_0)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "teamPlayerCardSplash")) {
-      level thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "teamPlayerCardSplash")]]("used_airdrop", var0);
+      level thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "teamPlayerCardSplash")]]("used_airdrop", var_0);
     }
   }
 
-  return var9.crate;
+  return var_9.crate;
 }
 
-function tryairdroptriggered(var0) {
-  var1 = var0.streakname;
-  var2 = var1;
-  var3 = undefined;
+function tryairdroptriggered(var_0) {
+  var_1 = var_0.streakname;
+  var_2 = var_1;
+  var_3 = undefined;
 
-  if(!isDefined(var2)) {
-    var2 = "airdrop";
+  if(!isDefined(var_2)) {
+    var_2 = "airdrop";
   }
 
-  var4 = 4;
+  var_4 = 4;
 
   if(scripts\cp_mp\utility\game_utility::islargemap()) {
-    var4 = 10;
+    var_4 = 10;
   }
 
-  var5 = 1;
+  var_5 = 1;
 
-  if((level.littlebirds.size >= var4 || level.fauxvehiclecount >= var4) && var2 != "airdrop_mega") {
+  if((level.littlebirds.size >= var_4 || level.fauxvehiclecount >= var_4) && var_2 != "airdrop_mega") {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
       self[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/MAX_AIRDROPS");
     }
 
     return false;
   } else if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "currentActiveVehicleCount") && scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "maxVehiclesAllowed")) {
-    if([[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "currentActiveVehicleCount")]]() >= [[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "maxVehiclesAllowed")]]() || level.fauxvehiclecount + var5 >= [[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "maxVehiclesAllowed")]]()) {
+    if([[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "currentActiveVehicleCount")]]() >= [[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "maxVehiclesAllowed")]]() || level.fauxvehiclecount + var_5 >= [[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "maxVehiclesAllowed")]]()) {
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
         self[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/TOO_MANY_VEHICLES");
       }
@@ -3067,51 +3067,51 @@ function tryairdroptriggered(var0) {
     }
   }
 
-  var6 = getdvarint("scr_airDrop_sticky", 0);
+  var_6 = getdvarint("scr_airDrop_sticky", 0);
 
-  if(var2 == "airdrop" && var6) {
-    var0.deployweaponobj = getcompleteweaponname("deploy_airdrop_mp_sticky");
+  if(var_2 == "airdrop" && var_6) {
+    var_0.deployweaponobj = getcompleteweaponname("deploy_airdrop_mp_sticky");
   }
 
   return true;
 }
 
-function airdropmarkerswitchended(var0, var1) {
-  if(istrue(var1)) {
-    thread airdrop_watchplayerweapon(var0);
+function airdropmarkerswitchended(var_0, var_1) {
+  if(istrue(var_1)) {
+    thread airdrop_watchplayerweapon(var_0);
     return;
   }
 }
 
-function airdrop_watchplayerweapon(var0) {
+function airdrop_watchplayerweapon(var_0) {
   self endon("disconnect");
   self notifyonplayercommand("cancel_deploy", "+actionslot 3");
   self notifyonplayercommand("cancel_deploy", "+actionslot 4");
   self notifyonplayercommand("cancel_deploy", "+actionslot 5");
   self notifyonplayercommand("cancel_deploy", "+actionslot 6");
-  var1 = scripts\engine\utility::ref_143ad("cancel_deploy", "weapon_switch_started");
+  var_1 = scripts\engine\utility::ref_143ad("cancel_deploy", "weapon_switch_started");
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  var0 notify("killstreak_finished_with_deploy_weapon");
+  var_0 notify("killstreak_finished_with_deploy_weapon");
 }
 
-function airdropvisualmarkerfired(var0) {
-  var0.airdroptype = var0.streakname;
+function airdropvisualmarkerfired(var_0) {
+  var_0.airdroptype = var_0.streakname;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("vehicle", "incrementFauxVehicleCount")) {
     [[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle", "incrementFauxVehicleCount")]]();
   }
 
-  var1 = undefined;
+  var_1 = undefined;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "getTargetMarker")) {
-    var1 = self[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "getTargetMarker")]](var0);
+    var_1 = self[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "getTargetMarker")]](var_0);
   }
 
-  if(!isDefined(var1.location)) {
+  if(!isDefined(var_1.location)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("vehicle", "decrementFauxVehicleCount")) {
       [[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle", "decrementFauxVehicleCount")]]();
     }
@@ -3120,49 +3120,49 @@ function airdropvisualmarkerfired(var0) {
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "logKillstreakEvent")) {
-    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "logKillstreakEvent")]](var0.airdroptype, self.origin);
+    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "logKillstreakEvent")]](var_0.airdroptype, self.origin);
   }
 
-  airdropvisualmarkeractivate(var1, var0.airdroptype, var0);
+  airdropvisualmarkeractivate(var_1, var_0.airdroptype, var_0);
   return true;
 }
 
-function airdropvisualmarkeractivate(var0, var1, var2) {
-  var3 = scripts\engine\utility::drop_to_ground(var0.location, 50, -200, (0, 0, 1));
-  var3 += (0, 0, 1);
-  var4 = spawn("script_model", var3);
-  var4 setModel("offhand_wm_grenade_smoke");
-  var4.angles = (0, 90, 90);
-  var5 = spawn("script_model", var3);
-  var5 setModel("ks_crate_marker_mp");
-  var5 setscriptablepartstate("smoke", "on", 0);
+function airdropvisualmarkeractivate(var_0, var_1, var_2) {
+  var_3 = scripts\engine\utility::drop_to_ground(var_0.location, 50, -200, (0, 0, 1));
+  var_3 += (0, 0, 1);
+  var_4 = spawn("script_model", var_3);
+  var_4 setModel("offhand_wm_grenade_smoke");
+  var_4.angles = (0, 90, 90);
+  var_5 = spawn("script_model", var_3);
+  var_5 setModel("ks_crate_marker_mp");
+  var_5 setscriptablepartstate("smoke", "on", 0);
 
-  if(isDefined(var0.visual)) {
-    var0.visual delete();
+  if(isDefined(var_0.visual)) {
+    var_0.visual delete();
   }
 }
 
 function tryuseairdropmarker() {
-  var0 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("airdrop", self);
-  return tryuseairdropmarkerfromstruct(var0);
+  var_0 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("airdrop", self);
+  return tryuseairdropmarkerfromstruct(var_0);
 }
 
-function tryuseairdropmarkerfromstruct(var0) {
+function tryuseairdropmarkerfromstruct(var_0) {
   level endon("game_ended");
   self endon("disconnect");
-  var0.deployweaponobj = getcompleteweaponname("deploy_airdrop_mp");
-  var1 = undefined;
+  var_0.deployweaponobj = getcompleteweaponname("deploy_airdrop_mp");
+  var_1 = undefined;
 
-  switch (var0.streakname) {
+  switch (var_0.streakname) {
     case "airdrop":
-      var1 = 1;
+      var_1 = 1;
       break;
     default:
-      var1 = 0;
+      var_1 = 0;
       break;
   }
 
-  if(var1) {
+  if(var_1) {
     if(!scripts\cp_mp\vehicles\vehicle_tracking::reservevehicle()) {
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
         self[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/AIR_SPACE_TOO_CROWDED");
@@ -3172,8 +3172,8 @@ function tryuseairdropmarkerfromstruct(var0) {
     }
   }
 
-  if(!tryairdroptriggered(var0)) {
-    if(var1) {
+  if(!tryairdroptriggered(var_0)) {
+    if(var_1) {
       scripts\cp_mp\vehicles\vehicle_tracking::clearvehiclereservation();
     }
 
@@ -3181,8 +3181,8 @@ function tryuseairdropmarkerfromstruct(var0) {
   }
 
   if(isDefined(level.killstreaktriggeredfunc)) {
-    if(!level[[level.killstreaktriggeredfunc]](var0)) {
-      if(var1) {
+    if(!level[[level.killstreaktriggeredfunc]](var_0)) {
+      if(var_1) {
         scripts\cp_mp\vehicles\vehicle_tracking::clearvehiclereservation();
       }
 
@@ -3194,10 +3194,10 @@ function tryuseairdropmarkerfromstruct(var0) {
     }
   }
 
-  var2 = scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_doweaponfireddeploy(var0, var0.deployweaponobj, "grenade_fire", undefined, &airdropmarkerswitchended, &airdropmarkerfired, undefined, &airdropmarkertaken);
+  var_2 = scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_doweaponfireddeploy(var_0, var_0.deployweaponobj, "grenade_fire", undefined, &airdropmarkerswitchended, &airdropmarkerfired, undefined, &airdropmarkertaken);
 
-  if(!istrue(var2)) {
-    if(var1) {
+  if(!istrue(var_2)) {
+    if(var_1) {
       scripts\cp_mp\vehicles\vehicle_tracking::clearvehiclereservation();
     }
 
@@ -3205,7 +3205,7 @@ function tryuseairdropmarkerfromstruct(var0) {
   }
 
   if(isDefined(level.killstreakbeginusefunc)) {
-    if(!level[[level.killstreakbeginusefunc]](var0)) {
+    if(!level[[level.killstreakbeginusefunc]](var_0)) {
       return false;
     }
   }
@@ -3213,32 +3213,32 @@ function tryuseairdropmarkerfromstruct(var0) {
   return true;
 }
 
-function airdropmarkerfired(var0, var1, var2) {
-  var0.airdroptype = var0.streakname;
+function airdropmarkerfired(var_0, var_1, var_2) {
+  var_0.airdroptype = var_0.streakname;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "incrementFauxVehicleCount")) {
     [[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "incrementFauxVehicleCount")]]();
   }
 
-  var2.owner = self;
-  thread airdropmarkeractivate(var2, var0.airdroptype, undefined);
+  var_2.owner = self;
+  thread airdropmarkeractivate(var_2, var_0.airdroptype, undefined);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "logKillstreakEvent")) {
-    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "logKillstreakEvent")]](var0.airdroptype, self.origin);
+    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "logKillstreakEvent")]](var_0.airdroptype, self.origin);
   }
 
-  var0.airdropmarkerfired = 1;
-  var0 notify("killstreak_finished_with_deploy_weapon");
+  var_0.airdropmarkerfired = 1;
+  var_0 notify("killstreak_finished_with_deploy_weapon");
   return "success";
 }
 
-function airdropmarkeractivate(var0, var1, var2) {
+function airdropmarkeractivate(var_0, var_1, var_2) {
   level endon("game_ended");
-  var3 = self.owner.angles;
-  self waittill("explode", var4);
-  var5 = self.owner;
+  var_3 = self.owner.angles;
+  self waittill("explode", var_4);
+  var_5 = self.owner;
 
-  if(!isDefined(var5)) {
+  if(!isDefined(var_5)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("vehicle", "decrementFauxVehicleCount")) {
       [[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle", "decrementFauxVehicleCount")]]();
     }
@@ -3253,39 +3253,39 @@ function airdropmarkeractivate(var0, var1, var2) {
     [[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle", "decrementFauxVehicleCount")]]();
   }
 
-  var7 = undefined;
+  var_7 = undefined;
 
-  if(var0 == "airdrop") {
-    var7 = dropkillstreakcratefromscriptedheli(var5, var5.team, undefined, var4, var3 + (0, 180, 0), var4, 1, var2);
-  } else if(var0 == "airdrop_multiple") {
+  if(var_0 == "airdrop") {
+    var_7 = dropkillstreakcratefromscriptedheli(var_5, var_5.team, undefined, var_4, var_3 + (0, 180, 0), var_4, 1, var_2);
+  } else if(var_0 == "airdrop_multiple") {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "airdropMultipleDropCrates")) {
-      var7 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "airdropMultipleDropCrates")]](var5, var5.team, var4, var3 + (0, 180, 0), var4, var2);
+      var_7 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "airdropMultipleDropCrates")]](var_5, var_5.team, var_4, var_3 + (0, 180, 0), var_4, var_2);
     }
   }
 
-  if(!isDefined(var7)) {
+  if(!isDefined(var_7)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
-      var5[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/VEHICLE_REFUND_KILLSTREAK");
+      var_5[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/VEHICLE_REFUND_KILLSTREAK");
     }
 
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "awardKillstreakFromStruct")) {
-      var5[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "awardKillstreakFromStruct")]](var2.mpstreaksysteminfo, "other");
+      var_5[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "awardKillstreakFromStruct")]](var_2.mpstreaksysteminfo, "other");
     }
 
     return;
   }
 
-  var5 scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var2);
+  var_5 scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_2);
 }
 
-function airdropmarkertaken(var0) {
-  if(istrue(var0.airdropmarkerfired)) {
+function airdropmarkertaken(var_0) {
+  if(istrue(var_0.airdropmarkerfired)) {
     if(isDefined(level.killstreakfinishusefunc)) {
-      level thread[[level.killstreakfinishusefunc]](var0);
+      level thread[[level.killstreakfinishusefunc]](var_0);
     }
   }
 
-  if(isDefined(var0.airdroptype) && !istrue(var0.airdropmarkerfired)) {
+  if(isDefined(var_0.airdroptype) && !istrue(var_0.airdropmarkerfired)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("vehicle", "decrementFauxVehicleCount")) {
       [[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle", "decrementFauxVehicleCount")]]();
       return;
@@ -3296,26 +3296,26 @@ function airdropmarkertaken(var0) {
 }
 
 function initbattleroyalecratedata() {
-  var0 = getleveldata("battle_royale");
-  var0.capturestring = &"MP/BR_CRATE";
-  var0.enemymodel = undefined;
-  var0.supportsownercapture = 0;
-  var0.headicon = undefined;
-  var0.usepriority = -1;
-  var0.usefov = 180;
-  var0.timeout = undefined;
-  var0.activatecallback = &brcrateactivatecallback;
-  var0.capturecallback = &brcratecapturecallback;
+  var_0 = getleveldata("battle_royale");
+  var_0.capturestring = &"MP/BR_CRATE";
+  var_0.enemymodel = undefined;
+  var_0.supportsownercapture = 0;
+  var_0.headicon = undefined;
+  var_0.usepriority = -1;
+  var_0.usefov = 180;
+  var_0.timeout = undefined;
+  var_0.activatecallback = &brcrateactivatecallback;
+  var_0.capturecallback = &brcratecapturecallback;
 }
 
-function getbrcratedatabytype(var0) {
-  var1 = spawnStruct();
-  var1.type = var0;
-  return var1;
+function getbrcratedatabytype(var_0) {
+  var_1 = spawnStruct();
+  var_1.type = var_0;
+  return var_1;
 }
 
-function brcrateactivatecallback(var0) {
-  if(istrue(var0)) {
+function brcrateactivatecallback(var_0) {
+  if(istrue(var_0)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "registerCrateForCleanup")) {
       [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "registerCrateForCleanup")]](self);
       return;
@@ -3325,84 +3325,84 @@ function brcrateactivatecallback(var0) {
   }
 }
 
-function brcratecapturecallback(var0) {
+function brcratecapturecallback(var_0) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "makeItemsFromCrate")) {
-    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "makeItemsFromCrate")]](var0);
+    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "makeItemsFromCrate")]](var_0);
     return;
   }
 }
 
-function dropbrcratefromscriptedheli(var0) {
-  var1 = scripts\engine\utility::ter_op(scripts\engine\utility::cointoss(), "weapon", "attachment");
-  var2 = dropcratefromscriptedheli(undefined, undefined, "battle_royale", var0, (0, randomfloat(360), 0), var0, getbrcratedatabytype(var1));
+function dropbrcratefromscriptedheli(var_0) {
+  var_1 = scripts\engine\utility::ter_op(scripts\engine\utility::cointoss(), "weapon", "attachment");
+  var_2 = dropcratefromscriptedheli(undefined, undefined, "battle_royale", var_0, (0, randomfloat(360), 0), var_0, getbrcratedatabytype(var_1));
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return undefined;
-  } else if(!isDefined(var2.crates) || !isDefined(scripts\engine\utility::array_get_first_item(var2.crates))) {
+  } else if(!isDefined(var_2.crates) || !isDefined(scripts\engine\utility::array_get_first_item(var_2.crates))) {
     return undefined;
   }
 
-  return var2.crate;
+  return var_2.crate;
 }
 
-function dropbrcratefrommanualheli(var0) {
-  var1 = scripts\engine\utility::ter_op(scripts\engine\utility::cointoss(), "weapon", "attachment");
-  var2 = dropcratefrommanualheli(undefined, undefined, "battle_royale", var0, (0, randomfloat(360), 0), 30000, 30000, var0, getbrcratedatabytype(var1));
+function dropbrcratefrommanualheli(var_0) {
+  var_1 = scripts\engine\utility::ter_op(scripts\engine\utility::cointoss(), "weapon", "attachment");
+  var_2 = dropcratefrommanualheli(undefined, undefined, "battle_royale", var_0, (0, randomfloat(360), 0), 30000, 30000, var_0, getbrcratedatabytype(var_1));
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return undefined;
-  } else if(!isDefined(var2.crate)) {
+  } else if(!isDefined(var_2.crate)) {
     return undefined;
   }
 
-  return var2.crate;
+  return var_2.crate;
 }
 
 function teamplacement() {
-  var0 = getleveldata("battle_royale_kiosk_drop");
-  var0.dummymodel = relic_landlocked_do_explosion("kiosk_drop");
-  var0.friendlymodel = undefined;
-  var0.enemymodel = undefined;
-  var0.mountmantlemodel = undefined;
-  var0.supportsownercapture = 0;
-  var0.headicon = undefined;
-  var0.usepriority = -1;
-  var0.usefov = 180;
-  var0.timeout = undefined;
-  var0.friendlyuseonly = 0;
-  var0.ownerusetime = 0.5;
-  var0.otherusetime = 0.5;
-  var0.destroyoncapture = 0;
+  var_0 = getleveldata("battle_royale_kiosk_drop");
+  var_0.dummymodel = relic_landlocked_do_explosion("kiosk_drop");
+  var_0.friendlymodel = undefined;
+  var_0.enemymodel = undefined;
+  var_0.mountmantlemodel = undefined;
+  var_0.supportsownercapture = 0;
+  var_0.headicon = undefined;
+  var_0.usepriority = -1;
+  var_0.usefov = 180;
+  var_0.timeout = undefined;
+  var_0.friendlyuseonly = 0;
+  var_0.ownerusetime = 0.5;
+  var_0.otherusetime = 0.5;
+  var_0.destroyoncapture = 0;
 }
 
-function missionbasetimer(var0, var1, var2) {
-  return dropcrate(undefined, var0, "battle_royale_kiosk_drop", var1, (0, randomfloat(360), 0), var2);
+function missionbasetimer(var_0, var_1, var_2) {
+  return dropcrate(undefined, var_0, "battle_royale_kiosk_drop", var_1, (0, randomfloat(360), 0), var_2);
 }
 
 function initbattleroyaleloadoutcratedata() {
-  var0 = getleveldata("battle_royale_loadout");
-  var0.capturestring = &"MP/BR_CRATE_LOADOUT";
-  var0.dummymodel = relic_landlocked_do_explosion();
-  var0.friendlymodel = undefined;
-  var0.enemymodel = undefined;
-  var0.mountmantlemodel = undefined;
-  var0.supportsownercapture = 0;
-  var0.headicon = undefined;
-  var0.usepriority = -1;
-  var0.usefov = 180;
-  var0.timeout = undefined;
-  var0.friendlyuseonly = 1;
-  var0.ownerusetime = 0.5;
-  var0.otherusetime = 0.5;
-  var0.activatecallback = &brloadoutcrateactivatecallback;
-  var0.capturecallback = &brloadoutcratecapturecallback;
-  var0.destroycallback = &dropradius;
-  var0.destroyoncapture = 0;
-  var0.onecaptureperplayer = 1;
+  var_0 = getleveldata("battle_royale_loadout");
+  var_0.capturestring = &"MP/BR_CRATE_LOADOUT";
+  var_0.dummymodel = relic_landlocked_do_explosion();
+  var_0.friendlymodel = undefined;
+  var_0.enemymodel = undefined;
+  var_0.mountmantlemodel = undefined;
+  var_0.supportsownercapture = 0;
+  var_0.headicon = undefined;
+  var_0.usepriority = -1;
+  var_0.usefov = 180;
+  var_0.timeout = undefined;
+  var_0.friendlyuseonly = 1;
+  var_0.ownerusetime = 0.5;
+  var_0.otherusetime = 0.5;
+  var_0.activatecallback = &brloadoutcrateactivatecallback;
+  var_0.capturecallback = &brloadoutcratecapturecallback;
+  var_0.destroycallback = &dropradius;
+  var_0.destroyoncapture = 0;
+  var_0.onecaptureperplayer = 1;
 }
 
-function brloadoutcrateactivatecallback(var0) {
-  if(istrue(var0)) {
+function brloadoutcrateactivatecallback(var_0) {
+  if(istrue(var_0)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "registerCrateForCleanup")) {
       [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "registerCrateForCleanup")]](self);
     }
@@ -3416,11 +3416,11 @@ function brloadoutcrateactivatecallback(var0) {
   }
 }
 
-function brloadoutcratecapturecallback(var0) {
-  giveweaponsfromdropbag(var0);
+function brloadoutcratecapturecallback(var_0) {
+  giveweaponsfromdropbag(var_0);
 }
 
-function dropspecialistbonus(var0) {
+function dropspecialistbonus(var_0) {
   if(!isDefined(self.numuses)) {
     self.numuses = 0;
   }
@@ -3433,30 +3433,30 @@ function dropspecialistbonus(var0) {
     self.playerscaptured = [];
   }
 
-  self.playerscaptured[var0 getentitynumber()] = var0;
-  self.playersused[self.playersused.size] = var0;
+  self.playerscaptured[var_0 getentitynumber()] = var_0;
+  self.playersused[self.playersused.size] = var_0;
   self.numuses++;
 
   if(isDefined(self.playeroutlines)) {
-    foreach(var2 in self.playeroutlines) {
-      if(isDefined(self.outlines) && isDefined(self.outlines[var2]) && isDefined(self.outlines[var2].playersvisibleto)) {
-        if(self.outlines[var2].playersvisibleto.size == 1 && self.outlines[var2].playersvisibleto[0] == var0) {
+    foreach(var_2 in self.playeroutlines) {
+      if(isDefined(self.outlines) && isDefined(self.outlines[var_2]) && isDefined(self.outlines[var_2].playersvisibleto)) {
+        if(self.outlines[var_2].playersvisibleto.size == 1 && self.outlines[var_2].playersvisibleto[0] == var_0) {
           if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "outlineDisable")) {
-            [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "outlineDisable")]](var2, self);
+            [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "outlineDisable")]](var_2, self);
           }
 
-          self.playeroutlines = scripts\engine\utility::array_remove(self.playeroutlines, var2);
+          self.playeroutlines = scripts\engine\utility::array_remove(self.playeroutlines, var_2);
           break;
         }
       }
     }
   }
 
-  if(self.numuses >= level.teamdata[var0.team]["teamCount"]) {
+  if(self.numuses >= level.teamdata[var_0.team]["teamCount"]) {
     if(isDefined(self.playeroutlines)) {
-      foreach(var5 in self.playeroutlines) {
+      foreach(var_5 in self.playeroutlines) {
         if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "outlineDisable")) {
-          [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "outlineDisable")]](var5, self);
+          [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "outlineDisable")]](var_5, self);
         }
       }
     }
@@ -3470,63 +3470,63 @@ function dropspecialistbonus(var0) {
   }
 }
 
-function dropradius(var0) {
+function dropradius(var_0) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "brOnLoadoutCrateDestroyed")) {
-    [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "brOnLoadoutCrateDestroyed")]](var0);
+    [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "brOnLoadoutCrateDestroyed")]](var_0);
     return;
   }
 }
 
-function giveweaponsfromdropbag(var0) {
+function giveweaponsfromdropbag(var_0) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "br_giveDropBagLoadout")) {
-    [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "br_giveDropBagLoadout")]](var0);
+    [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "br_giveDropBagLoadout")]](var_0);
     return;
   }
 }
 
-function dropbrloadoutcrate(var0, var1, var2) {
-  return dropcrate(undefined, var0, "battle_royale_loadout", var1, (0, randomfloat(360), 0), var2);
+function dropbrloadoutcrate(var_0, var_1, var_2) {
+  return dropcrate(undefined, var_0, "battle_royale_loadout", var_1, (0, randomfloat(360), 0), var_2);
 }
 
 function teammateoutlineids() {
-  var0 = getleveldata("battle_royale_c130_loot");
+  var_0 = getleveldata("battle_royale_c130_loot");
 
   if(getDvar("scr_br_gametype", "") == "dmz" || getDvar("scr_br_gametype", "") == "rat_race" || getDvar("scr_br_gametype", "") == "gold_war") {
-    var0.capturestring = &"MP/DMZ_LOOT_CRATE_CAPTURE";
+    var_0.capturestring = &"MP/DMZ_LOOT_CRATE_CAPTURE";
   } else {
-    var0.capturestring = &"MP/GENERIC_LOOT_CRATE_CAPTURE";
+    var_0.capturestring = &"MP/GENERIC_LOOT_CRATE_CAPTURE";
   }
 
-  var0.dummymodel = relic_landlocked_do_explosion();
-  var0.friendlymodel = undefined;
-  var0.enemymodel = undefined;
-  var0.mountmantlemodel = undefined;
-  var0.supportsownercapture = 0;
-  var0.headicon = undefined;
-  var0.usepriority = -1;
-  var0.usefov = 180;
-  var0.timeout = 600;
-  var0.friendlyuseonly = 1;
-  var0.ownerusetime = 0.5;
-  var0.otherusetime = 0.5;
-  var0.activatecallback = &dialog_wait_think;
-  var0.capturecallback = &dialog_wait_think_civ;
-  var0.destroycallback = &dialogqueue;
-  var0.ingame = &dialogueindex;
-  var0.destroyoncapture = 1;
+  var_0.dummymodel = relic_landlocked_do_explosion();
+  var_0.friendlymodel = undefined;
+  var_0.enemymodel = undefined;
+  var_0.mountmantlemodel = undefined;
+  var_0.supportsownercapture = 0;
+  var_0.headicon = undefined;
+  var_0.usepriority = -1;
+  var_0.usefov = 180;
+  var_0.timeout = 600;
+  var_0.friendlyuseonly = 1;
+  var_0.ownerusetime = 0.5;
+  var_0.otherusetime = 0.5;
+  var_0.activatecallback = &dialog_wait_think;
+  var_0.capturecallback = &dialog_wait_think_civ;
+  var_0.destroycallback = &dialogqueue;
+  var_0.ingame = &dialogueindex;
+  var_0.destroyoncapture = 1;
 }
 
-function dialog_wait_think(var0) {}
+function dialog_wait_think(var_0) {}
 
-function dialog_wait_think_civ(var0) {
+function dialog_wait_think_civ(var_0) {
   self setscriptablepartstate("objective_map", "inactive", 0);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("br_c130Airdrop", "c130Airdrop_onCrateUse")) {
-    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("br_c130Airdrop", "c130Airdrop_onCrateUse")]](var0);
+    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("br_c130Airdrop", "c130Airdrop_onCrateUse")]](var_0);
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("br_c130Airdrop", "dmzTut_crateUsed")) {
-    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("br_c130Airdrop", "dmzTut_crateUsed")]](var0);
+    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("br_c130Airdrop", "dmzTut_crateUsed")]](var_0);
   }
 
   if(isDefined(self.ref_13428)) {
@@ -3540,7 +3540,7 @@ function dialog_wait_think_civ(var0) {
   }
 }
 
-function dialogqueue(var0) {
+function dialogqueue(var_0) {
   self setscriptablepartstate("objective_map", "inactive", 0);
 
   if(isDefined(self.ref_13428)) {
@@ -3558,96 +3558,96 @@ function dialogueindex() {
   self setscriptablepartstate("crate_audio", "detach", 0);
 }
 
-function minshotstostage3acc(var0, var1, var2, var3, var4, var5, var6) {
-  var7 = 250;
-  var8 = level.fnhidefoundintel;
-  var9 = 1000;
-  var10 = 10500;
-  var11 = 7500;
-  var12 = 3000;
-  var13 = var1 + (0, 0, var9);
-  var14 = "battle_royale_c130_loot";
+function minshotstostage3acc(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_7 = 250;
+  var_8 = level.fnhidefoundintel;
+  var_9 = 1000;
+  var_10 = 10500;
+  var_11 = 7500;
+  var_12 = 3000;
+  var_13 = var_1 + (0, 0, var_9);
+  var_14 = "battle_royale_c130_loot";
 
-  if(isDefined(var3)) {
-    var14 = var3;
+  if(isDefined(var_3)) {
+    var_14 = var_3;
   }
 
-  if(!isDefined(var5)) {
-    var5 = 0;
+  if(!isDefined(var_5)) {
+    var_5 = 0;
   }
 
-  var15 = createcrate(undefined, undefined, var14, var0, (0, 0, 0), var1, undefined, 0);
+  var_15 = createcrate(undefined, undefined, var_14, var_0, (0, 0, 0), var_1, undefined, 0);
 
-  if(isDefined(var15)) {
-    var15.skipminimapicon = 1;
+  if(isDefined(var_15)) {
+    var_15.skipminimapicon = 1;
 
-    if(!var5 && var13[2] < var0[2]) {
-      var16 = undefined;
-      var17 = distance(var0, var13);
+    if(!var_5 && var_13[2] < var_0[2]) {
+      var_16 = undefined;
+      var_17 = distance(var_0, var_13);
 
-      if(var17 >= var10) {
-        var16 = "brc130_drop_high";
-      } else if(var17 >= var11) {
-        var16 = "brc130_drop_med";
-      } else if(var17 >= var12) {
-        var16 = "brc130_drop_low";
+      if(var_17 >= var_10) {
+        var_16 = "brc130_drop_high";
+      } else if(var_17 >= var_11) {
+        var_16 = "brc130_drop_med";
+      } else if(var_17 >= var_12) {
+        var_16 = "brc130_drop_low";
       }
 
-      if(isDefined(var16)) {
-        var18 = 1000;
-        var19 = spawn("script_model", var13 + (0, 0, var18));
-        var19.angles = var2;
-        var19 setModel("tag_origin");
-        var15.animname = "care_package";
-        var15.dropanim = level.scr_anim[var15.animname][var16];
-        var15.animlength = getanimlength(var15.dropanim);
-        var15 scripts\common\anim::setanimtree();
-        var20 = spawn("script_model", var15.origin);
-        var20.angles = var15.angles;
-        var20.animname = "care_package_chute";
-        var20.dropanim = level.scr_anim[var20.animname][var16];
-        var20.animlength = getanimlength(var20.dropanim);
-        var20 setModel("veh8_mil_lnd_carepackage_parachute_br");
-        var20 scripts\common\anim::setanimtree();
-        var19 thread scripts\common\anim::anim_single_solo(var15, var16);
-        var19 thread scripts\common\anim::anim_single_solo(var20, var16);
+      if(isDefined(var_16)) {
+        var_18 = 1000;
+        var_19 = spawn("script_model", var_13 + (0, 0, var_18));
+        var_19.angles = var_2;
+        var_19 setModel("tag_origin");
+        var_15.animname = "care_package";
+        var_15.dropanim = level.scr_anim[var_15.animname][var_16];
+        var_15.animlength = getanimlength(var_15.dropanim);
+        var_15 scripts\common\anim::setanimtree();
+        var_20 = spawn("script_model", var_15.origin);
+        var_20.angles = var_15.angles;
+        var_20.animname = "care_package_chute";
+        var_20.dropanim = level.scr_anim[var_20.animname][var_16];
+        var_20.animlength = getanimlength(var_20.dropanim);
+        var_20 setModel("veh8_mil_lnd_carepackage_parachute_br");
+        var_20 scripts\common\anim::setanimtree();
+        var_19 thread scripts\common\anim::anim_single_solo(var_15, var_16);
+        var_19 thread scripts\common\anim::anim_single_solo(var_20, var_16);
         thread ref_14492();
-        thread ref_14493(var20);
+        thread ref_14493(var_20);
       } else {
-        infinite_chopper(var15);
+        infinite_chopper(var_15);
       }
     } else {
-      infinite_chopper(var15);
+      infinite_chopper(var_15);
     }
 
-    var21 = "cashdrop_common";
-    var22 = getdvarint("scr_dmz_airdrop_ingame_obj", 1);
+    var_21 = "cashdrop_common";
+    var_22 = getdvarint("scr_dmz_airdrop_ingame_obj", 1);
 
-    if(var22) {
-      var21 = "cashdrop_common_world";
+    if(var_22) {
+      var_21 = "cashdrop_common_world";
     }
 
-    if(isDefined(var4)) {
-      var21 = var4;
+    if(isDefined(var_4)) {
+      var_21 = var_4;
     }
 
-    var15 setscriptablepartstate("objective_map", var21, 0);
-    var15 setscriptablepartstate("crate_audio", "parachuting", 0);
-    var15.ref_13428 = spawn("script_model", var1);
-    var15.ref_13428 setModel("ks_airdrop_crate_br");
+    var_15 setscriptablepartstate("objective_map", var_21, 0);
+    var_15 setscriptablepartstate("crate_audio", "parachuting", 0);
+    var_15.ref_13428 = spawn("script_model", var_1);
+    var_15.ref_13428 setModel("ks_airdrop_crate_br");
 
-    if(!istrue(var6)) {
-      var15.ref_13428 setscriptablepartstate("smoke_signal", "on", 0);
+    if(!istrue(var_6)) {
+      var_15.ref_13428 setscriptablepartstate("smoke_signal", "on", 0);
     }
 
-    var23 = getleveldata(var14);
+    var_23 = getleveldata(var_14);
 
-    if(isDefined(var23.ref_127fd)) {
-      var15 thread[[var23.ref_127fd]]();
+    if(isDefined(var_23.ref_127fd)) {
+      var_15 thread[[var_23.ref_127fd]]();
     }
   }
 
-  return var15;
+  return var_15;
 }
 
 function ref_14492() {
@@ -3661,7 +3661,7 @@ function ref_14492() {
   }
 }
 
-function ref_14493(var0) {
+function ref_14493(var_0) {
   self endon("death");
   wait self.animlength;
 
@@ -3669,40 +3669,40 @@ function ref_14493(var0) {
     self delete();
   }
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
     return;
   }
 }
 
 function teamplunderexfil() {
-  var0 = getleveldata("battle_royale_chopper_loot");
-  var0.capturestring = &"MP/DMZ_PLUNDER_CRATE_CAPTURE";
-  var0.dummymodel = relic_landlocked_do_explosion();
-  var0.friendlymodel = undefined;
-  var0.enemymodel = undefined;
-  var0.mountmantlemodel = undefined;
-  var0.supportsownercapture = 0;
-  var0.headicon = undefined;
-  var0.usepriority = -1;
-  var0.usefov = 180;
-  var0.timeout = 600;
-  var0.friendlyuseonly = 1;
-  var0.ownerusetime = 0.5;
-  var0.otherusetime = 0.5;
-  var0.activatecallback = &dummy_model;
-  var0.capturecallback = &dvarlocations;
-  var0.destroycallback = &dwell_aggro;
-  var0.destroyoncapture = 1;
+  var_0 = getleveldata("battle_royale_chopper_loot");
+  var_0.capturestring = &"MP/DMZ_PLUNDER_CRATE_CAPTURE";
+  var_0.dummymodel = relic_landlocked_do_explosion();
+  var_0.friendlymodel = undefined;
+  var_0.enemymodel = undefined;
+  var_0.mountmantlemodel = undefined;
+  var_0.supportsownercapture = 0;
+  var_0.headicon = undefined;
+  var_0.usepriority = -1;
+  var_0.usefov = 180;
+  var_0.timeout = 600;
+  var_0.friendlyuseonly = 1;
+  var_0.ownerusetime = 0.5;
+  var_0.otherusetime = 0.5;
+  var_0.activatecallback = &dummy_model;
+  var_0.capturecallback = &dvarlocations;
+  var_0.destroycallback = &dwell_aggro;
+  var_0.destroyoncapture = 1;
 }
 
-function dummy_model(var0) {}
+function dummy_model(var_0) {}
 
-function dvarlocations(var0) {
+function dvarlocations(var_0) {
   self setscriptablepartstate("objective_map", "inactive", 0);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("br_lootchopper", "lootChopper_onCrateUse")) {
-    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("br_lootchopper", "lootChopper_onCrateUse")]](var0);
+    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("br_lootchopper", "lootChopper_onCrateUse")]](var_0);
   }
 
   if(isDefined(self.ref_13428)) {
@@ -3712,7 +3712,7 @@ function dvarlocations(var0) {
   }
 }
 
-function dwell_aggro(var0) {
+function dwell_aggro(var_0) {
   self setscriptablepartstate("objective_map", "inactive", 0);
 
   if(isDefined(self.ref_13428)) {
@@ -3722,89 +3722,89 @@ function dwell_aggro(var0) {
   }
 }
 
-function missionbonustimer(var0, var1) {
-  var2 = dropcrate(undefined, undefined, "battle_royale_chopper_loot", var0, (0, randomfloat(360), 0), var1);
+function missionbonustimer(var_0, var_1) {
+  var_2 = dropcrate(undefined, undefined, "battle_royale_chopper_loot", var_0, (0, randomfloat(360), 0), var_1);
 
-  if(isDefined(var2)) {
-    var2.skipminimapicon = 1;
-    var3 = "cashdrop_common";
-    var4 = getdvarint("scr_dmz_airdrop_ingame_obj", 1);
+  if(isDefined(var_2)) {
+    var_2.skipminimapicon = 1;
+    var_3 = "cashdrop_common";
+    var_4 = getdvarint("scr_dmz_airdrop_ingame_obj", 1);
 
-    if(var4) {
-      var3 = "cashdrop_common_world";
+    if(var_4) {
+      var_3 = "cashdrop_common_world";
     }
 
-    var2 setscriptablepartstate("objective_map", var3, 0);
-    var2.ref_13428 = spawn("script_model", var1);
-    var2.ref_13428 setModel("ks_airdrop_crate_br");
-    var2.ref_13428 setscriptablepartstate("smoke_signal", "on", 0);
+    var_2 setscriptablepartstate("objective_map", var_3, 0);
+    var_2.ref_13428 = spawn("script_model", var_1);
+    var_2.ref_13428 setModel("ks_airdrop_crate_br");
+    var_2.ref_13428 setscriptablepartstate("smoke_signal", "on", 0);
   }
 
-  return var2;
+  return var_2;
 }
 
-function missionid(var0, var1) {
-  var2 = dropcrate(undefined, undefined, "battle_royale_chopper_loot", var0, (0, randomfloat(360), 0), var1);
+function missionid(var_0, var_1) {
+  var_2 = dropcrate(undefined, undefined, "battle_royale_chopper_loot", var_0, (0, randomfloat(360), 0), var_1);
 
-  if(isDefined(var2)) {
-    var2.skipminimapicon = 1;
-    var2 setscriptablepartstate("objective_map", "pe_chopper_crate", 0);
-    var2.ref_13428 = spawn("script_model", var1);
-    var2.ref_13428 setModel("ks_airdrop_crate_br");
-    var2.ref_13428 setscriptablepartstate("smoke_signal", "pe_chopper_on", 0);
+  if(isDefined(var_2)) {
+    var_2.skipminimapicon = 1;
+    var_2 setscriptablepartstate("objective_map", "pe_chopper_crate", 0);
+    var_2.ref_13428 = spawn("script_model", var_1);
+    var_2.ref_13428 setModel("ks_airdrop_crate_br");
+    var_2.ref_13428 setscriptablepartstate("smoke_signal", "pe_chopper_on", 0);
   }
 
-  return var2;
+  return var_2;
 }
 
 function initplundercratedata() {
-  var0 = getleveldata("esc_cache");
-  var0.capturestring = &"MP/ESC_CACHE_USE_HINT";
-  var0.usetag = "tag_origin";
-  var0.userange = 200;
-  var0.usefov = 160;
-  var0.usepriority = 0;
-  var0.friendlymodel = "military_crate_large_stackable_01";
-  var0.enemymodel = undefined;
-  var0.mountmantlemodel = undefined;
-  var0.supportsownercapture = 0;
-  var0.headicon = undefined;
-  var0.usepriority = -10000;
-  var0.headicon = undefined;
-  var0.minimapicon = undefined;
+  var_0 = getleveldata("esc_cache");
+  var_0.capturestring = &"MP/ESC_CACHE_USE_HINT";
+  var_0.usetag = "tag_origin";
+  var_0.userange = 200;
+  var_0.usefov = 160;
+  var_0.usepriority = 0;
+  var_0.friendlymodel = "military_crate_large_stackable_01";
+  var_0.enemymodel = undefined;
+  var_0.mountmantlemodel = undefined;
+  var_0.supportsownercapture = 0;
+  var_0.headicon = undefined;
+  var_0.usepriority = -10000;
+  var_0.headicon = undefined;
+  var_0.minimapicon = undefined;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "captureLootCacheCallback")) {
-    var0.capturecallback = [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "captureLootCacheCallback")]]();
+    var_0.capturecallback = [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "captureLootCacheCallback")]]();
   }
 
-  var0.destroyoncapture = 0;
-  var0.onecaptureperplayer = 1;
-  var0.capturevisualscallback = undefined;
-  var0.destroyvisualscallback = undefined;
-  var0.timeout = undefined;
+  var_0.destroyoncapture = 0;
+  var_0.onecaptureperplayer = 1;
+  var_0.capturevisualscallback = undefined;
+  var_0.destroyvisualscallback = undefined;
+  var_0.timeout = undefined;
 }
 
-function getplcratedata(var0) {
-  var1 = spawnStruct();
-  var1.contents = var0;
-  return var1;
+function getplcratedata(var_0) {
+  var_1 = spawnStruct();
+  var_1.contents = var_0;
+  return var_1;
 }
 
-function placeplcrate(var0, var1, var2) {
-  var3 = placecrate(undefined, undefined, "esc_cache", var1, var2, getplcratedata(var0));
-  return var3;
+function placeplcrate(var_0, var_1, var_2) {
+  var_3 = placecrate(undefined, undefined, "esc_cache", var_1, var_2, getplcratedata(var_0));
+  return var_3;
 }
 
 function initarmcratedata() {
   level.cratedata.armweights = [];
   level.cratedata.armcapturestrings = [];
-  var0 = getleveldata("arm_no_owner");
-  var0.activatecallback = &armcrateactivatecallback;
-  var0.capturecallback = &armcratecapturecallback;
-  var0.supportsownercapture = 0;
-  var0.enemymodel = undefined;
-  var0.headicondrawrange = 5000;
-  var0.timeout = 180;
+  var_0 = getleveldata("arm_no_owner");
+  var_0.activatecallback = &armcrateactivatecallback;
+  var_0.capturecallback = &armcratecapturecallback;
+  var_0.supportsownercapture = 0;
+  var_0.enemymodel = undefined;
+  var_0.headicondrawrange = 5000;
+  var_0.timeout = 180;
   addarmcratedata("uav", undefined, 5, 10);
   addarmcratedata("manual_turret", undefined, 5, 5);
   addarmcratedata("cruise_predator", undefined, 4, 40);
@@ -3819,116 +3819,116 @@ function initarmcratedata() {
 
 function initarmcratedatalate() {
   waittillframeend();
-  var0 = scripts\engine\utility::ter_op(scripts\cp_mp\vehicles\light_tank::light_tank_supported(), 50, 0);
-  addarmcratedata("bradley", undefined, 4, var0);
+  var_0 = scripts\engine\utility::ter_op(scripts\cp_mp\vehicles\light_tank::light_tank_supported(), 50, 0);
+  addarmcratedata("bradley", undefined, 4, var_0);
 }
 
-function addarmcratedata(var0, var1, var2, var3) {
-  level.cratedata.armdefconlevels[var0] = var2;
-  level.cratedata.armweights[var0] = var3;
-  level.cratedata.armcapturestrings[var0] = var1;
+function addarmcratedata(var_0, var_1, var_2, var_3) {
+  level.cratedata.armdefconlevels[var_0] = var_2;
+  level.cratedata.armweights[var_0] = var_3;
+  level.cratedata.armcapturestrings[var_0] = var_1;
 }
 
-function getarmcratedatabystreakname(var0) {
-  var1 = spawnStruct();
-  var1.streakname = var0;
-  return var1;
+function getarmcratedatabystreakname(var_0) {
+  var_1 = spawnStruct();
+  var_1.streakname = var_0;
+  return var_1;
 }
 
-function armcrateactivatecallback(var0) {
-  var1 = self.data;
-  var2 = level.cratedata.armcapturestrings[var1.streakname];
+function armcrateactivatecallback(var_0) {
+  var_1 = self.data;
+  var_2 = level.cratedata.armcapturestrings[var_1.streakname];
 
-  if(isDefined(var2)) {
-    overridecapturestring(var2);
+  if(isDefined(var_2)) {
+    overridecapturestring(var_2);
     return;
   }
 }
 
-function armcratecapturecallback(var0) {
+function armcratecapturecallback(var_0) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "giveKillstreak")) {
-    var0 thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "giveKillstreak")]](self.data.streakname, 0, 0, self.owner);
+    var_0 thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "giveKillstreak")]](self.data.streakname, 0, 0, self.owner);
     return;
   }
 }
 
-function getrandomarmkillstreak(var0) {
-  var1 = getarmkillsteakstoexcludebyteamdefconlevel(var0);
-  var2 = getrandomkeyfromweightsarray(level.cratedata.armweights, var1);
-  return var2;
+function getrandomarmkillstreak(var_0) {
+  var_1 = getarmkillsteakstoexcludebyteamdefconlevel(var_0);
+  var_2 = getrandomkeyfromweightsarray(level.cratedata.armweights, var_1);
+  return var_2;
 }
 
-function getarmkillsteakstoexcludebyteamdefconlevel(var0) {
-  var1 = level.defconlevel;
-  var2 = undefined;
+function getarmkillsteakstoexcludebyteamdefconlevel(var_0) {
+  var_1 = level.defconlevel;
+  var_2 = undefined;
 
-  if(var1 > 1) {
-    var2 = [];
+  if(var_1 > 1) {
+    var_2 = [];
 
-    foreach(var4 in level.cratedata.armdefconlevels) {
-      if(var1 > var4) {
-        var2 = var5;
+    foreach(var_4 in level.cratedata.armdefconlevels) {
+      if(var_1 > var_4) {
+        var_2 = var_5;
       }
     }
   }
 
-  return var2;
+  return var_2;
 }
 
-function droparmcratefromscriptedheli(var0, var1, var2, var3, var4) {
-  if(!isDefined(var1) || var1 == "random") {
-    var1 = getrandomarmkillstreak(var0);
+function droparmcratefromscriptedheli(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_1) || var_1 == "random") {
+    var_1 = getrandomarmkillstreak(var_0);
   }
 
-  var5 = getarmcratedatabystreakname(var1);
-  var6 = dropcratefromscriptedheli(undefined, var0, "arm_no_owner", var2, var3, var4, var5);
+  var_5 = getarmcratedatabystreakname(var_1);
+  var_6 = dropcratefromscriptedheli(undefined, var_0, "arm_no_owner", var_2, var_3, var_4, var_5);
 
-  if(!isDefined(var6)) {
+  if(!isDefined(var_6)) {
     return undefined;
-  } else if(!isDefined(var6.crates) || !isDefined(scripts\engine\utility::array_get_first_item(var6.crates))) {
+  } else if(!isDefined(var_6.crates) || !isDefined(scripts\engine\utility::array_get_first_item(var_6.crates))) {
     return undefined;
   }
 
-  foreach(var8 in var6.crates) {
-    return var8;
+  foreach(var_8 in var_6.crates) {
+    return var_8;
   }
 
-  var8 = undefined;
+  var_8 = undefined;
 }
 
 function teammatereviveweaponwaitputaway() {
-  var0 = getleveldata("battle_royale_juggernaut");
-  var0.capturestring = &"KILLSTREAKS_HINTS/JUGG_CRATE_PICKUP";
-  var0.dummymodel = relic_landlocked_do_explosion("battle_royale_juggernaut");
-  var0.friendlymodel = undefined;
-  var0.enemymodel = undefined;
-  var0.mountmantlemodel = undefined;
-  var0.supportsownercapture = 0;
-  var0.headicon = undefined;
-  var0.usepriority = -1;
-  var0.usefov = 180;
-  var0.timeout = undefined;
-  var0.friendlyuseonly = 1;
-  var0.ownerusetime = 0.5;
-  var0.otherusetime = 0.5;
-  var0.capturecallback = &display_dont_have_weapon_message;
-  var0.destroycallback = &display_fx_names_after_plane_spawns;
-  var0.activatecallback = &display_cypher_updated;
-  var0.ingame = &display_headicon_to_players;
-  var0.ref_127fd = &display_hint_for_all;
-  var0.destroyoncapture = 1;
+  var_0 = getleveldata("battle_royale_juggernaut");
+  var_0.capturestring = &"KILLSTREAKS_HINTS/JUGG_CRATE_PICKUP";
+  var_0.dummymodel = relic_landlocked_do_explosion("battle_royale_juggernaut");
+  var_0.friendlymodel = undefined;
+  var_0.enemymodel = undefined;
+  var_0.mountmantlemodel = undefined;
+  var_0.supportsownercapture = 0;
+  var_0.headicon = undefined;
+  var_0.usepriority = -1;
+  var_0.usefov = 180;
+  var_0.timeout = undefined;
+  var_0.friendlyuseonly = 1;
+  var_0.ownerusetime = 0.5;
+  var_0.otherusetime = 0.5;
+  var_0.capturecallback = &display_dont_have_weapon_message;
+  var_0.destroycallback = &display_fx_names_after_plane_spawns;
+  var_0.activatecallback = &display_cypher_updated;
+  var_0.ingame = &display_headicon_to_players;
+  var_0.ref_127fd = &display_hint_for_all;
+  var_0.destroyoncapture = 1;
 }
 
-function display_cypher_updated(var0) {
-  scripts\cp_mp\killstreaks\juggernaut::oncrateactivated(var0);
+function display_cypher_updated(var_0) {
+  scripts\cp_mp\killstreaks\juggernaut::oncrateactivated(var_0);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("br_juggernaut", "onCrateActivate")) {
-    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("br_juggernaut", "onCrateActivate")]](var0);
+    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("br_juggernaut", "onCrateActivate")]](var_0);
     return;
   }
 }
 
-function display_dont_have_weapon_message(var0) {
+function display_dont_have_weapon_message(var_0) {
   self setscriptablepartstate("objective_map", "inactive", 0);
 
   if(isDefined(self.ref_13428)) {
@@ -3937,13 +3937,13 @@ function display_dont_have_weapon_message(var0) {
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("br_juggernaut", "onCrateUse")) {
-    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("br_juggernaut", "onCrateUse")]](var0);
+    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("br_juggernaut", "onCrateUse")]](var_0);
   }
 
-  scripts\cp_mp\killstreaks\juggernaut::oncratecaptured(var0);
+  scripts\cp_mp\killstreaks\juggernaut::oncratecaptured(var_0);
 }
 
-function display_fx_names_after_plane_spawns(var0) {
+function display_fx_names_after_plane_spawns(var_0) {
   self setscriptablepartstate("objective_map", "inactive", 0);
 
   if(isDefined(self.ref_13428)) {
@@ -3952,12 +3952,12 @@ function display_fx_names_after_plane_spawns(var0) {
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("br_juggernaut", "onCrateDestroy")) {
-    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("br_juggernaut", "onCrateDestroy")]](var0);
+    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("br_juggernaut", "onCrateDestroy")]](var_0);
     return;
   }
 }
 
-function display_headicon_to_players(var0, var1) {
+function display_headicon_to_players(var_0, var_1) {
   self setscriptablepartstate("crate_audio", "detach", 0);
 }
 
@@ -3965,82 +3965,82 @@ function display_hint_for_all() {
   self setscriptablepartstate("model", "friendly", 0);
 }
 
-function modeallowmeleevehicledamage(var0, var1, var2) {
-  var3 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("juggernaut", self);
-  return dropcrate(undefined, var0, "battle_royale_juggernaut", var1, (0, randomfloat(360), 0), var2, var3, 1);
+function modeallowmeleevehicledamage(var_0, var_1, var_2) {
+  var_3 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("juggernaut", self);
+  return dropcrate(undefined, var_0, "battle_royale_juggernaut", var_1, (0, randomfloat(360), 0), var_2, var_3, 1);
 }
 
-function ref_13669(var0, var1) {
-  var2 = 4096;
+function ref_13669(var_0, var_1) {
+  var_2 = 4096;
 
   if(istrue(self.umbra)) {
-    var2 = 10000;
+    var_2 = 10000;
   }
 
-  var3 = modeallowmeleevehicledamage(self.team, var0 + (0, 0, var2), var0 + (0, 0, 512));
-  var3 endon("death");
-  move_payload_to_back_of_super(var3);
-  give_deployable_crate(var3);
-  var4 = [];
+  var_3 = modeallowmeleevehicledamage(self.team, var_0 + (0, 0, var_2), var_0 + (0, 0, 512));
+  var_3 endon("death");
+  move_payload_to_back_of_super(var_3);
+  give_deployable_crate(var_3);
+  var_4 = [];
 
-  foreach(var6 in level.teamdata[self.team]["alivePlayers"]) {}
+  foreach(var_6 in level.teamdata[self.team]["alivePlayers"]) {}
 }
 
-function move_payload_to_back_of_super(var0) {
-  var0 setotherent(self);
-  var0 setscriptablepartstate("objective_map", "jugg_world");
+function move_payload_to_back_of_super(var_0) {
+  var_0 setotherent(self);
+  var_0 setscriptablepartstate("objective_map", "jugg_world");
 }
 
-function give_deployable_crate(var0) {
-  var0 setotherent(self);
-  var0 setscriptablepartstate("model", "friendly");
+function give_deployable_crate(var_0) {
+  var_0 setotherent(self);
+  var_0 setscriptablepartstate("model", "friendly");
 }
 
-function vehicle_isfriendlytoplayer(var0) {
-  var1 = 1;
+function vehicle_isfriendlytoplayer(var_0) {
+  var_1 = 1;
 
-  switch (var0) {
+  switch (var_0) {
     case "battle_royale_juggernaut":
-      var1 = 0;
+      var_1 = 0;
       break;
     case "battle_royale_loadout":
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("juggernaut", "canUseWeaponPickups")) {
-        var2 = self[[scripts\cp_mp\utility\script_utility::getsharedfunc("juggernaut", "canUseWeaponPickups")]]();
+        var_2 = self[[scripts\cp_mp\utility\script_utility::getsharedfunc("juggernaut", "canUseWeaponPickups")]]();
 
-        if(!istrue(var2)) {
-          var1 = 0;
+        if(!istrue(var_2)) {
+          var_1 = 0;
         }
       }
 
       break;
   }
 
-  return var1;
+  return var_1;
 }
 
 function teamplunderexfilshowviponly() {
-  var0 = getleveldata("battle_royale_tactical_device");
-  var0.capturestring = &"BR_REVEAL_2/R2_TACTICAL_DEVICE";
-  var0.dummymodel = "military_carepackage_01_br_device";
-  var0.friendlymodel = undefined;
-  var0.enemymodel = undefined;
-  var0.mountmantlemodel = undefined;
-  var0.supportsownercapture = 0;
-  var0.headicon = undefined;
-  var0.usepriority = -1;
-  var0.usefov = 180;
-  var0.timeout = undefined;
-  var0.friendlyuseonly = 1;
-  var0.ownerusetime = 0.5;
-  var0.otherusetime = 0.5;
-  var0.capturecallback = &endoperatorsfxondisconnect;
-  var0.activatecallback = &endofmatchdatasent;
-  var0.destroycallback = &endprematchskydiving;
-  var0.ingame = &endptui;
-  var0.destroyoncapture = 1;
+  var_0 = getleveldata("battle_royale_tactical_device");
+  var_0.capturestring = &"BR_REVEAL_2/R2_TACTICAL_DEVICE";
+  var_0.dummymodel = "military_carepackage_01_br_device";
+  var_0.friendlymodel = undefined;
+  var_0.enemymodel = undefined;
+  var_0.mountmantlemodel = undefined;
+  var_0.supportsownercapture = 0;
+  var_0.headicon = undefined;
+  var_0.usepriority = -1;
+  var_0.usefov = 180;
+  var_0.timeout = undefined;
+  var_0.friendlyuseonly = 1;
+  var_0.ownerusetime = 0.5;
+  var_0.otherusetime = 0.5;
+  var_0.capturecallback = &endoperatorsfxondisconnect;
+  var_0.activatecallback = &endofmatchdatasent;
+  var_0.destroycallback = &endprematchskydiving;
+  var_0.ingame = &endptui;
+  var_0.destroyoncapture = 1;
 }
 
-function endoperatorsfxondisconnect(var0) {
+function endoperatorsfxondisconnect(var_0) {
   self setscriptablepartstate("objective_map", "inactive", 0);
 
   if(isDefined(self.ref_13428)) {
@@ -4049,30 +4049,30 @@ function endoperatorsfxondisconnect(var0) {
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("br_tactical_device", "onCrateUse")) {
-    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("br_tactical_device", "onCrateUse")]](var0);
+    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("br_tactical_device", "onCrateUse")]](var_0);
     return;
   }
 }
 
-function modifydestructibledamage(var0) {
-  var1 = 4096;
-  var2 = var0 + (0, 0, var1);
-  var3 = var0 + (0, 0, 512);
+function modifydestructibledamage(var_0) {
+  var_1 = 4096;
+  var_2 = var_0 + (0, 0, var_1);
+  var_3 = var_0 + (0, 0, 512);
   level.ref_12ce8.plundereventtime = spawnfx(level._effect["smoke_tactical_device"], level.ref_12ce8.level_carepackage_give_player_killstreak_incendiary_launcher - (0, 0, 60));
   triggerfx(level.ref_12ce8.plundereventtime);
-  var4 = dropcrate(undefined, undefined, "battle_royale_tactical_device", var2, (0, randomfloat(360), 0), var3);
-  var4.skipminimapicon = 1;
-  endround_timescalefactor(var4);
+  var_4 = dropcrate(undefined, undefined, "battle_royale_tactical_device", var_2, (0, randomfloat(360), 0), var_3);
+  var_4.skipminimapicon = 1;
+  endround_timescalefactor(var_4);
 }
 
-function endofmatchdatasent(var0) {
+function endofmatchdatasent(var_0) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("br_tactical_device", "onCrateActivate")) {
-    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("br_tactical_device", "onCrateActivate")]](var0);
+    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("br_tactical_device", "onCrateActivate")]](var_0);
     return;
   }
 }
 
-function endprematchskydiving(var0) {
+function endprematchskydiving(var_0) {
   self setscriptablepartstate("objective_map", "inactive", 0);
 
   if(isDefined(self.ref_13428)) {
@@ -4081,34 +4081,34 @@ function endprematchskydiving(var0) {
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("br_tactical_device", "onCrateDestroy")) {
-    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("br_tactical_device", "onCrateDestroy")]](var0);
+    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("br_tactical_device", "onCrateDestroy")]](var_0);
     return;
   }
 }
 
-function endptui(var0, var1) {
+function endptui(var_0, var_1) {
   self setscriptablepartstate("crate_audio", "detach", 0);
 }
 
-function endround_timescalefactor(var0) {
-  var0 setscriptablepartstate("objective_map", "tactical_device_world");
-  var0 setscriptablepartstate("smoke_trail", "on");
-  var0 setscriptablepartstate("jugg_drop_beacon", "on");
+function endround_timescalefactor(var_0) {
+  var_0 setscriptablepartstate("objective_map", "tactical_device_world");
+  var_0 setscriptablepartstate("smoke_trail", "on");
+  var_0 setscriptablepartstate("jugg_drop_beacon", "on");
 }
 
-function relic_landlocked_do_explosion(var0) {
-  var1 = level.script == "mp_don4" && getdvarint("scr_br_x2_hype", 0);
-  var2 = "";
+function relic_landlocked_do_explosion(var_0) {
+  var_1 = level.script == "mp_don4" && getdvarint("scr_br_x2_hype", 0);
+  var_2 = "";
 
-  if(var1) {
-    var2 = "x2_military_carepackage_01_br";
-  } else if(isDefined(var0) && var0 == "battle_royale_juggernaut" && istrue(level.ref_12184)) {
-    var2 = "military_carepackage_01_br_jugg";
-  } else if(isDefined(var0) && var0 == "kiosk_drop") {
-    var2 = "lm_buy_station_crate_wood_01_ww2";
+  if(var_1) {
+    var_2 = "x2_military_carepackage_01_br";
+  } else if(isDefined(var_0) && var_0 == "battle_royale_juggernaut" && istrue(level.ref_12184)) {
+    var_2 = "military_carepackage_01_br_jugg";
+  } else if(isDefined(var_0) && var_0 == "kiosk_drop") {
+    var_2 = "lm_buy_station_crate_wood_01_ww2";
   } else {
-    var2 = "military_carepackage_02_br";
+    var_2 = "military_carepackage_02_br";
   }
 
-  return var2;
+  return var_2;
 }

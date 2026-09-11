@@ -60,35 +60,35 @@ function script_model_anims() {
 
 function motiondetectors() {
   wait 5;
-  var0 = getEntArray("md_volume", "script_noteworthy");
+  var_0 = getEntArray("md_volume", "script_noteworthy");
 
-  foreach(var2 in var0) {
-    var3 = var2 scripts\engine\utility::get_target_array();
-    thread motiondetectionproc(var2);
+  foreach(var_2 in var_0) {
+    var_3 = var_2 scripts\engine\utility::get_target_array();
+    thread motiondetectionproc(var_2);
   }
 }
 
-function lightonroutine(var0, var1) {
-  wait var0;
+function lightonroutine(var_0, var_1) {
+  wait var_0;
 
   if(self.code_classname == "light") {
     if(!isDefined(self.savedintensity)) {
-      var2 = 50;
+      var_2 = 50;
     } else {
-      var2 = self.savedintensity;
+      var_2 = self.savedintensity;
     }
 
-    self setlightintensity(var2 * 0.7);
+    self setlightintensity(var_2 * 0.7);
     thread scripts\engine\utility::play_sound_in_space("mp_lights_int_on", self.origin);
     wait 0.1;
     thread scripts\engine\utility::play_loop_sound_on_entity("mp_lights_int_on_loop");
-    self setlightintensity(var2 * 0.1);
+    self setlightintensity(var_2 * 0.1);
     wait 0.05;
-    self setlightintensity(var2 * 0.4);
+    self setlightintensity(var_2 * 0.4);
     wait 0.1;
-    self setlightintensity(var2 * 0.2);
+    self setlightintensity(var_2 * 0.2);
     wait 0.15;
-    self setlightintensity(var2);
+    self setlightintensity(var_2);
     return;
   }
 
@@ -98,81 +98,81 @@ function lightonroutine(var0, var1) {
   }
 }
 
-function lightoffroutine(var0, var1) {
-  foreach(var3 in var0) {
-    if(var3.code_classname == "light") {
-      var3 setlightintensity(0);
-      var3 thread scripts\engine\utility::play_sound_in_space("mp_lights_int_off", var3.origin);
-      var3 notify("stop soundmp_lights_int_on_loop");
+function lightoffroutine(var_0, var_1) {
+  foreach(var_3 in var_0) {
+    if(var_3.code_classname == "light") {
+      var_3 setlightintensity(0);
+      var_3 thread scripts\engine\utility::play_sound_in_space("mp_lights_int_off", var_3.origin);
+      var_3 notify("stop soundmp_lights_int_on_loop");
       continue;
     }
 
-    if(var3.code_classname == "scriptable") {
-      var3 setscriptablepartstate("light", "power_off");
+    if(var_3.code_classname == "scriptable") {
+      var_3 setscriptablepartstate("light", "power_off");
     }
   }
 }
 
-function motiondetectionproc(var0) {
+function motiondetectionproc(var_0) {
   level endon("game_ended");
-  var1 = spawnStruct();
-  var1.active = undefined;
-  var1.masterswitches = [];
-  var1.lights = [];
-  var1.models = [];
-  var1.nvglights = [];
-  var1.switchstatus = "motion";
-  var1.lightson = 0;
-  var1.detection = 0;
-  var1.triggerblind = undefined;
+  var_1 = spawnStruct();
+  var_1.active = undefined;
+  var_1.masterswitches = [];
+  var_1.lights = [];
+  var_1.models = [];
+  var_1.nvglights = [];
+  var_1.switchstatus = "motion";
+  var_1.lightson = 0;
+  var_1.detection = 0;
+  var_1.triggerblind = undefined;
 
-  foreach(var3 in var0) {
-    if(var3.code_classname == "light") {
-      var1.lights[var1.lights.size] = var3;
+  foreach(var_3 in var_0) {
+    if(var_3.code_classname == "light") {
+      var_1.lights[var_1.lights.size] = var_3;
       continue;
     }
 
-    if(isDefined(var3.script_noteworthy) && var3.script_noteworthy == "masterSwitch") {
-      var1.masterswitches[var1.masterswitches.size] = var3;
+    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "masterSwitch") {
+      var_1.masterswitches[var_1.masterswitches.size] = var_3;
       continue;
     }
 
-    if(var3.code_classname == "script_model" && !isDefined(var3.script_parameters)) {
-      var1.models[var1.models.size] = var3;
+    if(var_3.code_classname == "script_model" && !isDefined(var_3.script_parameters)) {
+      var_1.models[var_1.models.size] = var_3;
       continue;
     }
 
-    if(var3.code_classname == "script_origin") {
-      var1.nvglights[var1.nvglights.size] = var3;
+    if(var_3.code_classname == "script_origin") {
+      var_1.nvglights[var_1.nvglights.size] = var_3;
       continue;
     }
 
-    if(isDefined(var3.script_label) && var3.script_label == "blinding_volume") {
-      var1.triggerblind = var3;
+    if(isDefined(var_3.script_label) && var_3.script_label == "blinding_volume") {
+      var_1.triggerblind = var_3;
     }
   }
 
-  var5 = getscriptablearray(self.target, "targetname");
-  var1.lights = scripts\engine\utility::array_combine(var1.lights, var5);
+  var_5 = getscriptablearray(self.target, "targetname");
+  var_1.lights = scripts\engine\utility::array_combine(var_1.lights, var_5);
 
-  foreach(var7 in var1.lights) {
-    if(var7.code_classname == "light") {
-      var7.savedintensity = var7 getlightintensity();
-      var7 setlightintensity(0);
+  foreach(var_7 in var_1.lights) {
+    if(var_7.code_classname == "light") {
+      var_7.savedintensity = var_7 getlightintensity();
+      var_7 setlightintensity(0);
       continue;
     }
 
-    if(var7.code_classname == "scriptable") {
-      var7 setscriptablepartstate("light", "power_off");
+    if(var_7.code_classname == "scriptable") {
+      var_7 setscriptablepartstate("light", "power_off");
     }
   }
 
-  foreach(var10 in var1.masterswitches) {
-    thread runlightswitch(var10, self);
+  foreach(var_10 in var_1.masterswitches) {
+    thread runlightswitch(var_10, self);
   }
 
-  foreach(var13 in var1.models) {
-    var13.modelname = var13.model;
+  foreach(var_13 in var_1.models) {
+    var_13.modelname = var_13.model;
   }
 
   if(scripts\mp\utility\game::getgametype() == "cyber") {
@@ -180,51 +180,51 @@ function motiondetectionproc(var0) {
       level.emplights = [];
     }
 
-    level.emplights = scripts\engine\utility::array_add(level.emplights, var1);
+    level.emplights = scripts\engine\utility::array_add(level.emplights, var_1);
 
     if(isDefined(level.emplightsoff)) {
       level thread[[level.emplightsoff]]();
     }
   }
 
-  thread onoffmodelswap(var1.models, "off");
-  thread motiondetectionstatus(var1);
+  thread onoffmodelswap(var_1.models, "off");
+  thread motiondetectionstatus(var_1);
 
   for(;;) {
-    if(var1.switchstatus == "on") {
+    if(var_1.switchstatus == "on") {
       self notify("masterSwitch_on");
 
-      if(!var1.lightson) {
-        thread blindplayers(var1);
+      if(!var_1.lightson) {
+        thread blindplayers(var_1);
 
-        foreach(var7 in var1.lights) {
-          thread lightonroutine(var7, randomfloat(0.2));
+        foreach(var_7 in var_1.lights) {
+          thread lightonroutine(var_7, randomfloat(0.2));
         }
 
-        thread onoffmodelswap(var1.models, "on");
-        var1.lightson = 1;
+        thread onoffmodelswap(var_1.models, "on");
+        var_1.lightson = 1;
       }
-    } else if(var1.switchstatus == "motion") {
-      if(var1.detection && !var1.lightson) {
-        thread blindplayers(var1);
+    } else if(var_1.switchstatus == "motion") {
+      if(var_1.detection && !var_1.lightson) {
+        thread blindplayers(var_1);
 
-        foreach(var7 in var1.lights) {
-          thread lightonroutine(var7, randomfloat(0.2));
-          var1.lightson = 1;
+        foreach(var_7 in var_1.lights) {
+          thread lightonroutine(var_7, randomfloat(0.2));
+          var_1.lightson = 1;
         }
 
-        thread onoffmodelswap(var1.models, "on");
-        thread motiondetectioncooldown(var1);
+        thread onoffmodelswap(var_1.models, "on");
+        thread motiondetectioncooldown(var_1);
       }
-    } else if(var1.switchstatus == "off") {
-      if(var1.lightson) {
-        lightoffroutine(level, var1.lights, var1.nvglights);
-        thread onoffmodelswap(var1.models, "off");
-        var1.lightson = 0;
+    } else if(var_1.switchstatus == "off") {
+      if(var_1.lightson) {
+        lightoffroutine(level, var_1.lights, var_1.nvglights);
+        thread onoffmodelswap(var_1.models, "off");
+        var_1.lightson = 0;
       }
 
       if(isDefined(self.script_parameters) && self.script_parameters == "motion") {
-        var1.switchstatus = "motion";
+        var_1.switchstatus = "motion";
       }
 
       self notify("lights_off");
@@ -234,33 +234,33 @@ function motiondetectionproc(var0) {
   }
 }
 
-function blindplayers(var0) {
-  if(isDefined(var0.triggerblind)) {
+function blindplayers(var_0) {
+  if(isDefined(var_0.triggerblind)) {
     wait 0.4;
 
-    foreach(var2 in level.players) {
-      if(!isDefined(var2) || !scripts\mp\utility\player::isreallyalive(var2)) {
+    foreach(var_2 in level.players) {
+      if(!isDefined(var_2) || !scripts\mp\utility\player::isreallyalive(var_2)) {
         continue;
       }
 
-      if(var2 istouching(var0.triggerblind)) {
-        var2 activatenightvisionblind();
+      if(var_2 istouching(var_0.triggerblind)) {
+        var_2 activatenightvisionblind();
         continue;
       }
 
-      foreach(var4 in var0.lights) {
-        if(distancesquared(var4.origin, var2.origin) > 230400) {
+      foreach(var_4 in var_0.lights) {
+        if(distancesquared(var_4.origin, var_2.origin) > 230400) {
           continue;
         }
 
-        if(!scripts\engine\utility::within_fov(var2 getEye(), var2 getplayerangles(), var4.origin, 0.707106)) {
+        if(!scripts\engine\utility::within_fov(var_2 getEye(), var_2 getplayerangles(), var_4.origin, 0.707106)) {
           continue;
         }
 
-        var5 = scripts\engine\trace::ray_trace(var2 getEye(), var4.origin, undefined, scripts\engine\trace::create_default_contents(1));
+        var_5 = scripts\engine\trace::ray_trace(var_2 getEye(), var_4.origin, undefined, scripts\engine\trace::create_default_contents(1));
 
-        if(distancesquared(var5["position"], var4.origin) <= 324) {
-          var2 activatenightvisionblind();
+        if(distancesquared(var_5["position"], var_4.origin) <= 324) {
+          var_2 activatenightvisionblind();
           break;
         }
       }
@@ -270,14 +270,14 @@ function blindplayers(var0) {
   }
 }
 
-function nameplatemanagement(var0) {
+function nameplatemanagement(var_0) {
   level endon("game_ended");
 
   for(;;) {
-    if(var0.lightson == 0) {
-      foreach(var2 in level.players) {
-        if(var2 istouching(self)) {
-          thread manageplayerindarkvolume(var2, self);
+    if(var_0.lightson == 0) {
+      foreach(var_2 in level.players) {
+        if(var_2 istouching(self)) {
+          thread manageplayerindarkvolume(var_2, self);
         }
       }
     }
@@ -286,7 +286,7 @@ function nameplatemanagement(var0) {
   }
 }
 
-function manageplayerindarkvolume(var0, var1) {
+function manageplayerindarkvolume(var_0, var_1) {
   level endon("game_ended");
   self endon("death_or_disconnect");
 
@@ -297,7 +297,7 @@ function manageplayerindarkvolume(var0, var1) {
   scripts\mp\utility\perk::giveperk("specialty_spygame");
   self.indarkvolume = 1;
 
-  while(self istouching(var0) && var1.lightson == 0) {
+  while(self istouching(var_0) && var_1.lightson == 0) {
     wait 0.1;
   }
 
@@ -305,21 +305,21 @@ function manageplayerindarkvolume(var0, var1) {
   self.indarkvolume = undefined;
 }
 
-function motiondetectionstatus(var0) {
+function motiondetectionstatus(var_0) {
   level endon("game_ended");
 
   for(;;) {
-    var0.detection = 0;
+    var_0.detection = 0;
 
-    foreach(var2 in level.players) {
-      if(var2 istouching(self)) {
-        if(var2 getstance() == "stand" && length2d(var2 getvelocity()) > 40) {
-          var0.detection = 1;
-          var0.cooldown = 4;
+    foreach(var_2 in level.players) {
+      if(var_2 istouching(self)) {
+        if(var_2 getstance() == "stand" && length2d(var_2 getvelocity()) > 40) {
+          var_0.detection = 1;
+          var_0.cooldown = 4;
         }
 
-        if(var0.lightson) {
-          var2.inmotionlight = 1;
+        if(var_0.lightson) {
+          var_2.inmotionlight = 1;
         }
       }
     }
@@ -328,138 +328,138 @@ function motiondetectionstatus(var0) {
   }
 }
 
-function motiondetectioncooldown(var0) {
+function motiondetectioncooldown(var_0) {
   level endon("game_ended");
   self endon("lights_off");
   self endon("masterSwitch_on");
 
   if(isDefined(self.script_parameters) && self.script_parameters == "motion") {
-    while(var0.cooldown > 0) {
+    while(var_0.cooldown > 0) {
       wait 0.1;
-      var0.cooldown -= 0.1;
+      var_0.cooldown -= 0.1;
     }
   }
 
-  var0.switchstatus = "off";
+  var_0.switchstatus = "off";
 }
 
-function runlightswitch(var0, var1) {
+function runlightswitch(var_0, var_1) {
   level endon("game_ended");
-  var2 = createlightswitchtrigger(var0, var1);
+  var_2 = createlightswitchtrigger(var_0, var_1);
 
-  if(isDefined(var2)) {
-    thread watchlightswitchuse(var2);
+  if(isDefined(var_2)) {
+    thread watchlightswitchuse(var_2);
     return;
   }
 }
 
-function createlightswitchtrigger(var0, var1) {
-  var2 = spawn("script_model", self.origin, 40, 0, 60);
-  var2 setModel("uk_electrical_box_medium_02_animated");
-  var2.angles = self.angles;
+function createlightswitchtrigger(var_0, var_1) {
+  var_2 = spawn("script_model", self.origin, 40, 0, 60);
+  var_2 setModel("uk_electrical_box_medium_02_animated");
+  var_2.angles = self.angles;
 
   if(self.script_parameters == "motion") {
     return;
   }
 
-  var3 = scripts\engine\utility::get_target_array();
+  var_3 = scripts\engine\utility::get_target_array();
 
-  foreach(var5 in var3) {
-    if(var5.code_classname == "script_origin") {
-      if(isDefined(var5.script_noteworthy) && var5.script_noteworthy == "sceneNode") {
-        var2.scenenode = var5;
+  foreach(var_5 in var_3) {
+    if(var_5.code_classname == "script_origin") {
+      if(isDefined(var_5.script_noteworthy) && var_5.script_noteworthy == "sceneNode") {
+        var_2.scenenode = var_5;
       } else {
-        var2.hintlightmodel = spawn("script_model", var5.origin);
-        var2.hintlightmodel.angles = var5.angles;
-        var2.hintlightmodel setModel(var5.script_noteworthy);
-        var2.hintlightmodel.modelname = var5.script_noteworthy;
+        var_2.hintlightmodel = spawn("script_model", var_5.origin);
+        var_2.hintlightmodel.angles = var_5.angles;
+        var_2.hintlightmodel setModel(var_5.script_noteworthy);
+        var_2.hintlightmodel.modelname = var_5.script_noteworthy;
       }
 
       continue;
     }
 
-    if(var5.code_classname == "light") {
-      var2.hintlight = var5;
+    if(var_5.code_classname == "light") {
+      var_2.hintlight = var_5;
     }
   }
 
-  var2 setuserange(80);
-  var2 sethintdisplayrange(200);
-  var2 setusefov(120);
-  var2 sethintdisplayfov(120);
-  var2 setCursorHint("HINT_BUTTON");
+  var_2 setuserange(80);
+  var_2 sethintdisplayrange(200);
+  var_2 setusefov(120);
+  var_2 sethintdisplayfov(120);
+  var_2 setCursorHint("HINT_BUTTON");
 
   if(!scripts\cp_mp\utility\game_utility::isrealismenabled()) {
-    var2 setHintString(&"MP/LIGHT_SWITCH");
-    var2 sethinticon("icon_electrical_box");
+    var_2 setHintString(&"MP/LIGHT_SWITCH");
+    var_2 sethinticon("icon_electrical_box");
   }
 
   if(scripts\cp_mp\utility\game_utility::isnightmap()) {
-    var2 setusepriority(0);
-    var2 makeusable();
+    var_2 setusepriority(0);
+    var_2 makeusable();
   }
 
-  if(isDefined(var0.script_parameters) && var0.script_parameters == "motion") {
-    var1.switchstatus = "motion";
+  if(isDefined(var_0.script_parameters) && var_0.script_parameters == "motion") {
+    var_1.switchstatus = "motion";
   } else {
-    var1.switchstatus = "off";
+    var_1.switchstatus = "off";
   }
 
-  foreach(var8 in level.players) {
-    var2 enableplayeruse(var8);
+  foreach(var_8 in level.players) {
+    var_2 enableplayeruse(var_8);
   }
 
-  if(isDefined(var2.hintlightmodel) && isDefined(var2.hintlight)) {
-    var2.hintlightcolor = var2.hintlight getlightintensity();
-    thread manageswitchhintlight(var2);
+  if(isDefined(var_2.hintlightmodel) && isDefined(var_2.hintlight)) {
+    var_2.hintlightcolor = var_2.hintlight getlightintensity();
+    thread manageswitchhintlight(var_2);
   }
 
-  return var2;
+  return var_2;
 }
 
-function watchlightswitchuse(var0) {
+function watchlightswitchuse(var_0) {
   level endon("game_ended");
 
   for(;;) {
-    self waittill("trigger", var1);
+    self waittill("trigger", var_1);
 
-    if(!isPlayer(var1)) {
+    if(!isPlayer(var_1)) {
       continue;
     }
 
-    if(isDefined(var0.switchstatus) && var0.switchstatus == "on") {
+    if(isDefined(var_0.switchstatus) && var_0.switchstatus == "on") {
       playsoundatpos(self.origin, "mp_fusebox_lever_off_npc");
     } else {
       playsoundatpos(self.origin, "mp_fusebox_lever_on_npc");
     }
 
-    thread swapswitchstatus(getanimlength(level.scr_anim["lightswitch"]["interact"]) - 0.15, var0);
-    var2 = lightswitchinteraction(var1, var0);
+    thread swapswitchstatus(getanimlength(level.scr_anim["lightswitch"]["interact"]) - 0.15, var_0);
+    var_2 = lightswitchinteraction(var_1, var_0);
 
-    if(!var2) {
+    if(!var_2) {
       self notify("interactionCancelled");
     }
   }
 }
 
-function swapswitchstatus(var0, var1) {
+function swapswitchstatus(var_0, var_1) {
   self endon("interactionCancelled");
-  wait var0;
+  wait var_0;
 
-  if(var1.switchstatus == "motion" || var1.switchstatus == "off") {
-    var1.switchstatus = "on";
+  if(var_1.switchstatus == "motion" || var_1.switchstatus == "off") {
+    var_1.switchstatus = "on";
     self notify("masterSwitch_on");
     return;
   }
 
-  var1.switchstatus = "off";
+  var_1.switchstatus = "off";
 }
 
-function manageswitchhintlight(var0) {
+function manageswitchhintlight(var_0) {
   level endon("game_ended");
 
   for(;;) {
-    if(var0.switchstatus == "on") {
+    if(var_0.switchstatus == "on") {
       self.hintlight setlightintensity(0);
       self.hintlightmodel setModel(self.hintlightmodel.modelname);
     } else {
@@ -471,9 +471,9 @@ function manageswitchhintlight(var0) {
   }
 }
 
-function getlightswitchstatus(var0) {
-  foreach(var2 in var0) {
-    if(isDefined(var2.switchstatus) && var2.switchstatus == "on") {
+function getlightswitchstatus(var_0) {
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2.switchstatus) && var_2.switchstatus == "on") {
       return "on";
     }
   }
@@ -481,41 +481,41 @@ function getlightswitchstatus(var0) {
   return "motion";
 }
 
-function onoffmodelswap(var0, var1) {
-  foreach(var3 in var0) {
-    if(var1 == "on") {
-      var3 setModel(var3.modelname + "_on");
+function onoffmodelswap(var_0, var_1) {
+  foreach(var_3 in var_0) {
+    if(var_1 == "on") {
+      var_3 setModel(var_3.modelname + "_on");
       continue;
     }
 
-    var3 setModel(var3.modelname);
+    var_3 setModel(var_3.modelname);
 
-    if(isDefined(var3.flare)) {
-      var3.flare delete();
+    if(isDefined(var_3.flare)) {
+      var_3.flare delete();
     }
   }
 }
 
-function lightswitchinteraction(var0, var1) {
-  var2 = scripts\engine\utility::ter_op(var1.switchstatus == "on", "interact", "interact_on");
-  var3 = scripts\engine\utility::ter_op(var1.switchstatus == "on", "lights_on", "lights_off");
-  level thread scripts\mp\battlechatter_mp::trysaylocalsound(var0, var3);
+function lightswitchinteraction(var_0, var_1) {
+  var_2 = scripts\engine\utility::ter_op(var_1.switchstatus == "on", "interact", "interact_on");
+  var_3 = scripts\engine\utility::ter_op(var_1.switchstatus == "on", "lights_on", "lights_off");
+  level thread scripts\mp\battlechatter_mp::trysaylocalsound(var_0, var_3);
   self.animname = "switch";
   self useanimtree(#animtree);
-  self.scenenode thread scripts\common\anim::anim_single_solo(self, var2);
-  var4 = getanimlength(level.scr_anim["lightswitch"][var2]);
-  wait var4;
+  self.scenenode thread scripts\common\anim::anim_single_solo(self, var_2);
+  var_4 = getanimlength(level.scr_anim["lightswitch"][var_2]);
+  wait var_4;
   setDvar("NMLOKNMRSK", 0);
   self notify("interaction_complete");
   return true;
 }
 
-function watchplayerdeath(var0) {
+function watchplayerdeath(var_0) {
   self endon("interaction_complete");
   self.cancelinteraction = 0;
 
   for(;;) {
-    if(!isDefined(var0) || !scripts\mp\utility\player::isreallyalive(var0)) {
+    if(!isDefined(var_0) || !scripts\mp\utility\player::isreallyalive(var_0)) {
       self.cancelinteraction = 1;
       break;
     }
@@ -524,45 +524,45 @@ function watchplayerdeath(var0) {
   }
 }
 
-function create_player_rig(var0, var1, var2) {
-  if(!isDefined(var0) || isDefined(var0.player_rig)) {
+function create_player_rig(var_0, var_1, var_2) {
+  if(!isDefined(var_0) || isDefined(var_0.player_rig)) {
     return;
   }
 
-  var0.animname = var1;
+  var_0.animname = var_1;
 
-  if(!isDefined(var2)) {
-    var2 = "viewhands_base_iw8";
+  if(!isDefined(var_2)) {
+    var_2 = "viewhands_base_iw8";
   }
 
-  var0.player_rig = spawn("script_model", var0.origin);
-  var0.player_rig setModel(var2);
-  var0.player_rig hide();
-  var0.player_rig.animname = var1;
-  var0.player_rig useanimtree(#animtree);
-  var0 playerlinktodelta(var0.player_rig, "tag_player", 1, 0, 0, 0, 0, 0, 0);
-  watch_remove_rig(var0);
-  remove_player_rig(var0);
+  var_0.player_rig = spawn("script_model", var_0.origin);
+  var_0.player_rig setModel(var_2);
+  var_0.player_rig hide();
+  var_0.player_rig.animname = var_1;
+  var_0.player_rig useanimtree(#animtree);
+  var_0 playerlinktodelta(var_0.player_rig, "tag_player", 1, 0, 0, 0, 0, 0, 0);
+  watch_remove_rig(var_0);
+  remove_player_rig(var_0);
 }
 
-function remove_player_rig(var0) {
-  if(!isDefined(var0) || !isDefined(var0.player_rig)) {
+function remove_player_rig(var_0) {
+  if(!isDefined(var_0) || !isDefined(var_0.player_rig)) {
     return;
   }
 
-  var0 unlink();
-  var1 = var0 getdroptofloorposition(var0.origin);
+  var_0 unlink();
+  var_1 = var_0 getdroptofloorposition(var_0.origin);
 
-  if(isDefined(var1)) {
-    var0 setOrigin(var1);
+  if(isDefined(var_1)) {
+    var_0 setOrigin(var_1);
   } else {
-    var0 setOrigin(var0.origin + (0, 0, 100));
+    var_0 setOrigin(var_0.origin + (0, 0, 100));
   }
 
-  var0.player_rig delete();
-  var0.player_rig = undefined;
+  var_0.player_rig delete();
+  var_0.player_rig = undefined;
 }
 
-function watch_remove_rig(var0) {
+function watch_remove_rig(var_0) {
   scripts\engine\utility::ref_143a5("remove_rig", "death_or_disconnect");
 }

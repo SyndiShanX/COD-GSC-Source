@@ -8,9 +8,9 @@ function main() {
 }
 
 function hide_brush() {
-  var0 = getEntArray("DoorShadowBl", "targetname");
+  var_0 = getEntArray("DoorShadowBl", "targetname");
 
-  foreach(var2 in var0) {
-    var2 hide();
+  foreach(var_2 in var_0) {
+    var_2 hide();
   }
 }

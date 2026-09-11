@@ -3,19 +3,19 @@
  * Script: scripts\cp\cp_spawn_factor.gsc
 ***********************************************/
 
-function critical_factor(var0, var1) {
-  var2 = [[var0]](var1);
-  var2 = clamp(var2, 0, 1000);
-  return var2;
+function critical_factor(var_0, var_1) {
+  var_2 = [[var_0]](var_1);
+  var_2 = clamp(var_2, 0, 1000);
+  return var_2;
 }
 
-function avoidgrenades(var0) {
-  foreach(var2 in level.grenades) {
-    if(!isDefined(var2) || !isexplosivedangeroustoplayer(var2, self)) {
+function avoidgrenades(var_0) {
+  foreach(var_2 in level.grenades) {
+    if(!isDefined(var_2) || !isexplosivedangeroustoplayer(var_2, self)) {
       continue;
     }
 
-    if(distancesquared(var0.origin, var2.origin) < 122500) {
+    if(distancesquared(var_0.origin, var_2.origin) < 122500) {
       return 0;
     }
   }
@@ -23,19 +23,19 @@ function avoidgrenades(var0) {
   return 1000;
 }
 
-function avoidmines(var0) {
-  var1 = level.mines;
+function avoidmines(var_0) {
+  var_1 = level.mines;
 
   if(isDefined(level.placed_crafted_traps)) {
-    var1 = scripts\engine\utility::array_combine(level.mines, level.placed_crafted_traps);
+    var_1 = scripts\engine\utility::array_combine(level.mines, level.placed_crafted_traps);
   }
 
-  foreach(var3 in var1) {
-    if(!isDefined(var3) || !isexplosivedangeroustoplayer(var3, self)) {
+  foreach(var_3 in var_1) {
+    if(!isDefined(var_3) || !isexplosivedangeroustoplayer(var_3, self)) {
       continue;
     }
 
-    if(distancesquared(var0.origin, var3.origin) < 122500) {
+    if(distancesquared(var_0.origin, var_3.origin) < 122500) {
       return 0;
     }
   }
@@ -43,46 +43,46 @@ function avoidmines(var0) {
   return 1000;
 }
 
-function isexplosivedangeroustoplayer(var0) {
-  if(!level.teambased || level.friendlyfire || !isDefined(var0.team)) {
+function isexplosivedangeroustoplayer(var_0) {
+  if(!level.teambased || level.friendlyfire || !isDefined(var_0.team)) {
     return 1;
   }
 
-  var1 = undefined;
+  var_1 = undefined;
 
   if(isDefined(self.owner)) {
-    if(var0 == self.owner) {
+    if(var_0 == self.owner) {
       return 1;
     }
 
-    var1 = self.owner.team;
+    var_1 = self.owner.team;
   }
 
-  if(isDefined(var1)) {
-    return (var1 != var0.team);
+  if(isDefined(var_1)) {
+    return (var_1 != var_0.team);
   }
 
   return 1;
 }
 
-function avoidtelefrag(var0) {
+function avoidtelefrag(var_0) {
   if(isDefined(self.allowtelefrag)) {
     return 1000;
   }
 
-  if(isDefined(var0.allowtelefrag)) {
+  if(isDefined(var_0.allowtelefrag)) {
     return 1000;
   }
 
-  if(positionwouldtelefrag(var0.origin)) {
+  if(positionwouldtelefrag(var_0.origin)) {
     return 0;
   }
 
   return 1000;
 }
 
-function spawn_point_too_far(var0) {
-  if(distancesquared(scripts\cp\utility::get_center_point_of_array(level.players), var0.origin) >= 16777216) {
+function spawn_point_too_far(var_0) {
+  if(distancesquared(scripts\cp\utility::get_center_point_of_array(level.players), var_0.origin) >= 16777216) {
     return 0;
   }
 

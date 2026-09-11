@@ -3,11 +3,11 @@
  * Script: scripts\mp\equipment\hb_sensor.gsc
 ***********************************************/
 
-function hb_sensor_used(var0) {
+function hb_sensor_used(var_0) {
   waitframe();
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
     return;
   }
 }

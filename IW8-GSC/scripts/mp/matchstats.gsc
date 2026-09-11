@@ -17,33 +17,33 @@ function init() {
 }
 
 function loadgamemodestatmap() {
-  var0 = tablelookuprownum("mp/gameModeMatchStats.csv", 0, level.gametype);
-  var1 = level.matchstats;
+  var_0 = tablelookuprownum("mp/gameModeMatchStats.csv", 0, level.gametype);
+  var_1 = level.matchstats;
 
-  if(!isDefined(var0) || var0 < 0) {
-    var1.modestatsenabled = 0;
+  if(!isDefined(var_0) || var_0 < 0) {
+    var_1.modestatsenabled = 0;
     return;
   }
 
-  var1.modestatsenabled = 1;
-  var1.modestatmap = [];
+  var_1.modestatsenabled = 1;
+  var_1.modestatmap = [];
 
-  for(var2 = 1; var2 < 7; var2++) {
-    var3 = tablelookupbyrow("mp/gameModeMatchStats.csv", var0, var2);
+  for(var_2 = 1; var_2 < 7; var_2++) {
+    var_3 = tablelookupbyrow("mp/gameModeMatchStats.csv", var_0, var_2);
 
-    if(!isDefined(var3) || var3 == "") {
+    if(!isDefined(var_3) || var_3 == "") {
       continue;
     }
 
-    var1.modestatmap[var3] = var2 - 1;
+    var_1.modestatmap[var_3] = var_2 - 1;
   }
 }
 
 function watchplayerconnect() {
   for(;;) {
-    level waittill("connected", var0);
+    level waittill("connected", var_0);
 
-    if(isai(var0)) {
+    if(isai(var_0)) {
       continue;
     }
 
@@ -58,21 +58,21 @@ function initplayer() {
   }
 
   self.matchstats = spawnStruct();
-  var0 = self.matchstats;
+  var_0 = self.matchstats;
   self.matchstats.values = [];
   self.matchstats.paths = [];
 }
 
 function watchgameend() {
   scripts\mp\flags::levelflagwait("game_over");
-  var0 = level.players;
+  var_0 = level.players;
 
-  foreach(var2 in var0) {
-    if(!isDefined(var2)) {
+  foreach(var_2 in var_0) {
+    if(!isDefined(var_2)) {
       continue;
     }
 
-    writeplayerinfo(var2);
+    writeplayerinfo(var_2);
     waitframe();
   }
 
@@ -80,178 +80,178 @@ function watchgameend() {
 }
 
 function writeplayerinfo() {
-  var0 = self.matchstats;
+  var_0 = self.matchstats;
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  foreach(var2 in var0.values) {
-    var3 = var0.paths[var4];
+  foreach(var_2 in var_0.values) {
+    var_3 = var_0.paths[var_4];
 
-    switch (var3.size) {
+    switch (var_3.size) {
       case 1:
-        self setplayerdata("mp", "matchStats", var3[0], var2);
+        self setplayerdata("mp", "matchStats", var_3[0], var_2);
         break;
       case 2:
-        self setplayerdata("mp", "matchStats", var3[0], var3[1], var2);
+        self setplayerdata("mp", "matchStats", var_3[0], var_3[1], var_2);
         break;
       case 3:
-        self setplayerdata("mp", "matchStats", var3[0], var3[1], var3[2], var2);
+        self setplayerdata("mp", "matchStats", var_3[0], var_3[1], var_3[2], var_2);
         break;
       case 4:
-        self setplayerdata("mp", "matchStats", var3[0], var3[1], var3[2], var3[3], var2);
+        self setplayerdata("mp", "matchStats", var_3[0], var_3[1], var_3[2], var_3[3], var_2);
         break;
       case 5:
-        self setplayerdata("mp", "matchStats", var3[0], var3[1], var3[2], var3[3], var3[4], var2);
+        self setplayerdata("mp", "matchStats", var_3[0], var_3[1], var_3[2], var_3[3], var_3[4], var_2);
         break;
     }
   }
 }
 
-function getmatchstatpathkey(var0) {
-  var1 = "";
+function getmatchstatpathkey(var_0) {
+  var_1 = "";
 
-  for(var2 = 0; var2 < var0.size; var2++) {
-    if(isDefined(var0[var2])) {
-      var1 += var0[var2] + ".";
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    if(isDefined(var_0[var_2])) {
+      var_1 += var_0[var_2] + ".";
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function setmatchstat(var0, var1, var2, var3, var4, var5) {
+function setmatchstat(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!arematchstatsenabled()) {
     return;
   }
 
-  var6 = [var1];
+  var_6 = [var_1];
 
-  if(isDefined(var2)) {
-    GscBinSkip0(0x2e, var6.size, var2);
+  if(isDefined(var_2)) {
+    GscBinSkip0(0x2e, var_6.size, var_2);
   }
 
-  if(isDefined(var3)) {
-    GscBinSkip0(0x2e, var6.size, var3);
+  if(isDefined(var_3)) {
+    GscBinSkip0(0x2e, var_6.size, var_3);
   }
 
-  if(isDefined(var4)) {
-    GscBinSkip0(0x2e, var6.size, var4);
+  if(isDefined(var_4)) {
+    GscBinSkip0(0x2e, var_6.size, var_4);
   }
 
-  if(isDefined(var5)) {
-    GscBinSkip0(0x2e, var6.size, var5);
+  if(isDefined(var_5)) {
+    GscBinSkip0(0x2e, var_6.size, var_5);
   }
 
-  var7 = getmatchstatpathkey(var6);
-  self.matchstats.values[var7] = var0;
-  self.matchstats.paths[var7] = var6;
+  var_7 = getmatchstatpathkey(var_6);
+  self.matchstats.values[var_7] = var_0;
+  self.matchstats.paths[var_7] = var_6;
 }
 
-function addtomatchstat(var0, var1, var2, var3, var4, var5) {
+function addtomatchstat(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!arematchstatsenabled()) {
     return;
   }
 
-  if(!isDefined(var0)) {
-    var0 = 1;
+  if(!isDefined(var_0)) {
+    var_0 = 1;
   }
 
-  var6 = [var1];
+  var_6 = [var_1];
 
-  if(isDefined(var2)) {
-    GscBinSkip0(0x2e, var6.size, var2);
+  if(isDefined(var_2)) {
+    GscBinSkip0(0x2e, var_6.size, var_2);
   }
 
-  if(isDefined(var3)) {
-    GscBinSkip0(0x2e, var6.size, var3);
+  if(isDefined(var_3)) {
+    GscBinSkip0(0x2e, var_6.size, var_3);
   }
 
-  if(isDefined(var4)) {
-    GscBinSkip0(0x2e, var6.size, var4);
+  if(isDefined(var_4)) {
+    GscBinSkip0(0x2e, var_6.size, var_4);
   }
 
-  if(isDefined(var5)) {
-    GscBinSkip0(0x2e, var6.size, var5);
+  if(isDefined(var_5)) {
+    GscBinSkip0(0x2e, var_6.size, var_5);
   }
 
-  var7 = getmatchstatpathkey(var6);
+  var_7 = getmatchstatpathkey(var_6);
 
-  if(!isDefined(self.matchstats.paths[var7])) {
-    self.matchstats.values[var7] = var0;
-    self.matchstats.paths[var7] = var6;
+  if(!isDefined(self.matchstats.paths[var_7])) {
+    self.matchstats.values[var_7] = var_0;
+    self.matchstats.paths[var_7] = var_6;
     return;
   }
 
-  self.matchstats.values[var7] += var0;
+  self.matchstats.values[var_7] += var_0;
 }
 
-function getmatchstat(var0, var1, var2, var3, var4) {
+function getmatchstat(var_0, var_1, var_2, var_3, var_4) {
   if(!arematchstatsenabled()) {
     return undefined;
   }
 
-  var5 = [var0, var1, var2, var3, var4];
-  var6 = getmatchstatpathkey(var5);
+  var_5 = [var_0, var_1, var_2, var_3, var_4];
+  var_6 = getmatchstatpathkey(var_5);
 
-  if(!isDefined(self.matchstats.values[var6])) {
+  if(!isDefined(self.matchstats.values[var_6])) {
     return 0;
   }
 
-  return self.matchstats.values[var6];
+  return self.matchstats.values[var_6];
 }
 
-function getmodestatindex(var0) {
-  var1 = level.matchstats;
+function getmodestatindex(var_0) {
+  var_1 = level.matchstats;
 
-  if(!isDefined(var1.modestatsenabled)) {
+  if(!isDefined(var_1.modestatsenabled)) {
     return undefined;
   }
 
-  return var1.modestatmap[var0];
+  return var_1.modestatmap[var_0];
 }
 
-function setgamemodestat(var0, var1) {
+function setgamemodestat(var_0, var_1) {
   if(!arematchstatsenabled()) {
     return;
   }
 
-  var2 = getmodestatindex(var0);
+  var_2 = getmodestatindex(var_0);
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return;
   }
 
-  setmatchstat(var1, "modeStats", var2);
+  setmatchstat(var_1, "modeStats", var_2);
 }
 
-function addtogamemodestat(var0, var1) {
+function addtogamemodestat(var_0, var_1) {
   if(!arematchstatsenabled()) {
     return;
   }
 
-  var2 = getmodestatindex(var0);
+  var_2 = getmodestatindex(var_0);
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return;
   }
 
-  addtomatchstat(var1, "modeStats", var2);
+  addtomatchstat(var_1, "modeStats", var_2);
 }
 
-function getgamemodestat(var0) {
+function getgamemodestat(var_0) {
   if(!arematchstatsenabled()) {
     return;
   }
 
-  var1 = getmodestatindex(var0);
+  var_1 = getmodestatindex(var_0);
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  return getmatchstat("modeStats", var1);
+  return getmatchstat("modeStats", var_1);
 }
 
 function arematchstatsenabled() {

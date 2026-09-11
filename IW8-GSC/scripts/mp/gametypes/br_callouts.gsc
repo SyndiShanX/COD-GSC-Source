@@ -11,77 +11,77 @@ function init() {
     return;
   }
 
-  var0 = level.mapcorners[0].origin[0];
-  var1 = level.mapcorners[1].origin[0];
-  var2 = var1 - var0;
-  var3 = level.mapcorners[0].origin[1];
-  var4 = level.mapcorners[1].origin[1];
-  var5 = var4 - var3;
+  var_0 = level.mapcorners[0].origin[0];
+  var_1 = level.mapcorners[1].origin[0];
+  var_2 = var_1 - var_0;
+  var_3 = level.mapcorners[0].origin[1];
+  var_4 = level.mapcorners[1].origin[1];
+  var_5 = var_4 - var_3;
 
-  for(var6 = 0;; var6++) {
-    var7 = tablelookupbyrow(level.calloutglobals.callouttable, var6, 5);
+  for(var_6 = 0;; var_6++) {
+    var_7 = tablelookupbyrow(level.calloutglobals.callouttable, var_6, 5);
 
-    if(!isDefined(var7) || var7 == "") {
+    if(!isDefined(var_7) || var_7 == "") {
       break;
     }
 
-    if(var7 != "1") {
+    if(var_7 != "1") {
       continue;
     }
 
-    var8 = tablelookupbyrow(level.calloutglobals.callouttable, var6, 6);
-    var8 = float(var8);
-    var8 = var8 * var2 + var0;
-    var9 = tablelookupbyrow(level.calloutglobals.callouttable, var6, 7);
-    var9 = float(var9);
-    var9 = var9 * var5 + var3;
-    var10 = tablelookupbyrow(level.calloutglobals.callouttable, var6, 8);
-    var10 = float(var10);
-    var11 = tablelookupbyrow(level.calloutglobals.callouttable, var6, 1);
-    var12 = spawnStruct();
-    var12.origin = (var8, var9, 0);
-    var12.radius = var10;
-    level.calloutglobals.ref_11e29[var11] = var12;
+    var_8 = tablelookupbyrow(level.calloutglobals.callouttable, var_6, 6);
+    var_8 = float(var_8);
+    var_8 = var_8 * var_2 + var_0;
+    var_9 = tablelookupbyrow(level.calloutglobals.callouttable, var_6, 7);
+    var_9 = float(var_9);
+    var_9 = var_9 * var_5 + var_3;
+    var_10 = tablelookupbyrow(level.calloutglobals.callouttable, var_6, 8);
+    var_10 = float(var_10);
+    var_11 = tablelookupbyrow(level.calloutglobals.callouttable, var_6, 1);
+    var_12 = spawnStruct();
+    var_12.origin = (var_8, var_9, 0);
+    var_12.radius = var_10;
+    level.calloutglobals.ref_11e29[var_11] = var_12;
   }
 }
 
-function removeminigunrestrictions(var0) {
-  var1 = "";
+function removeminigunrestrictions(var_0) {
+  var_1 = "";
 
-  foreach(var3 in level.calloutglobals.ref_11e29) {
-    if(distance2dsquared(var0, var3.origin) <= var3.radius * var3.radius) {
-      var1 = var4;
+  foreach(var_3 in level.calloutglobals.ref_11e29) {
+    if(distance2dsquared(var_0, var_3.origin) <= var_3.radius * var_3.radius) {
+      var_1 = var_4;
       break;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function removematchingents_bymodel(var0) {
-  var1 = "none";
-  var2 = -1;
-  var3 = 144000000;
+function removematchingents_bymodel(var_0) {
+  var_1 = "none";
+  var_2 = -1;
+  var_3 = 144000000;
 
-  if(!isDefined(var0.calloutarea) || var0.calloutarea == var1) {
-    return var2;
+  if(!isDefined(var_0.calloutarea) || var_0.calloutarea == var_1) {
+    return var_2;
   }
 
-  var4 = var0.origin;
-  var5 = 0;
-  var6 = var2;
-  var7 = var3;
+  var_4 = var_0.origin;
+  var_5 = 0;
+  var_6 = var_2;
+  var_7 = var_3;
 
-  foreach(var9 in level.calloutglobals.ref_11e29) {
-    var10 = distance2dsquared(var4, var9.origin);
+  foreach(var_9 in level.calloutglobals.ref_11e29) {
+    var_10 = distance2dsquared(var_4, var_9.origin);
 
-    if(var10 <= var7) {
-      var7 = var10;
-      var6 = var5;
+    if(var_10 <= var_7) {
+      var_7 = var_10;
+      var_6 = var_5;
     }
 
-    var5++;
+    var_5++;
   }
 
-  return var6;
+  return var_6;
 }

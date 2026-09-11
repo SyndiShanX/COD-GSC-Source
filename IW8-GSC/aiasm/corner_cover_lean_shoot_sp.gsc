@@ -18,6 +18,6 @@ function asm_register() {
   anim.asmfuncs["corner_cover_lean_shoot"][2] = &autogenfunc_0;
 }
 
-function autogenfunc_0(var0, var1, var2, var3) {
+function autogenfunc_0(var_0, var_1, var_2, var_3) {
   return isDefined(self.node) && self.node.type == "Cover Left";
 }

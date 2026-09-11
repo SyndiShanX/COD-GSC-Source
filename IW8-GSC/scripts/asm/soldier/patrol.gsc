@@ -3,18 +3,18 @@
  * Script: scripts\asm\soldier\patrol.gsc
 ***********************************************/
 
-function patrol_reactendswithmove(var0, var1, var2, var3) {
+function patrol_reactendswithmove(var_0, var_1, var_2, var_3) {
   return length(self.velocity) > 1;
 }
 
-function patrol_shouldreact(var0, var1, var2, var3) {
+function patrol_shouldreact(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.stealth) || !isDefined(self.stealth.patrol_react_magnitude) || !isDefined(self.stealth.patrol_react_time)) {
     return false;
   }
 
-  var4 = 200;
+  var_4 = 200;
 
-  if(gettime() > self.stealth.patrol_react_time + var4) {
+  if(gettime() > self.stealth.patrol_react_time + var_4) {
     return false;
   }
 
@@ -25,7 +25,7 @@ function patrol_shouldreact(var0, var1, var2, var3) {
   return true;
 }
 
-function patrol_shouldcombatrereact(var0, var1, var2, var3) {
+function patrol_shouldcombatrereact(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.stealth) || !isDefined(self.enemy)) {
     return false;
   }
@@ -40,12 +40,12 @@ function patrol_shouldcombatrereact(var0, var1, var2, var3) {
   return false;
 }
 
-function playanim_patrolreact(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  playanim_patrolreact_internal(var0, var1, var1);
+function playanim_patrolreact(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  playanim_patrolreact_internal(var_0, var_1, var_1);
 }
 
-function playanim_patrolreact_internal(var0, var1, var2) {
+function playanim_patrolreact_internal(var_0, var_1, var_2) {
   self.stealth.breacting = self.stealth.patrol_react_magnitude;
 
   if(shouldpatrolreactaim()) {
@@ -54,165 +54,165 @@ function playanim_patrolreact_internal(var0, var1, var2) {
     }
   }
 
-  var3 = self asmgetanim(var0, var1);
-  var4 = scripts\asm\asm::asm_getxanim(var2, var3);
-  var5 = 1;
+  var_3 = self asmgetanim(var_0, var_1);
+  var_4 = scripts\asm\asm::asm_getxanim(var_2, var_3);
+  var_5 = 1;
 
   if(isDefined(self.stealth.reactendtime)) {
-    var6 = 1;
-    var7 = getnotetracktimes(var4, "code_move");
+    var_6 = 1;
+    var_7 = getnotetracktimes(var_4, "code_move");
 
-    if(var7.size > 0) {
-      var6 = var7[0];
+    if(var_7.size > 0) {
+      var_6 = var_7[0];
     }
 
-    var8 = getanimlength(var4) * var6;
-    var9 = 0.05 + (self.stealth.reactendtime - gettime()) / 1000;
+    var_8 = getanimlength(var_4) * var_6;
+    var_9 = 0.05 + (self.stealth.reactendtime - gettime()) / 1000;
 
-    if(var9 < 0.2) {
-      var9 = 0.2;
+    if(var_9 < 0.2) {
+      var_9 = 0.2;
     }
 
-    var5 = clamp(var8 / var9, 0.8, 1.3);
+    var_5 = clamp(var_8 / var_9, 0.8, 1.3);
     self.stealth.reactendtime = undefined;
   }
 
-  self aisetanim(var2, var3, var5);
+  self aisetanim(var_2, var_3, var_5);
   self.stealth.patrol_react_magnitude = undefined;
   self.stealth.patrol_react_time = undefined;
-  scripts\asm\asm::asm_donotetrackswithinterceptor(var0, var1, &flashlightreactionnotehandler, undefined, var2);
+  scripts\asm\asm::asm_donotetrackswithinterceptor(var_0, var_1, &flashlightreactionnotehandler, undefined, var_2);
 }
 
-function shouldpatrolreactaim(var0, var1, var2, var3) {
+function shouldpatrolreactaim(var_0, var_1, var_2, var_3) {
   return self.stealth.patrol_react_magnitude == "large" || self.stealth.patrol_react_magnitude == "med" || self.stealth.patrol_react_magnitude == "smed";
 }
 
-function shouldpatrolreactlookaround(var0, var1, var2, var3) {
+function shouldpatrolreactlookaround(var_0, var_1, var_2, var_3) {
   return scripts\asm\asm::asm_getdemeanor() == "combat" && !isDefined(self.enemy) && self[[self.fnisinstealthcombat]]();
 }
 
-function shouldpatrolreactlookaroundabort(var0, var1, var2, var3) {
+function shouldpatrolreactlookaroundabort(var_0, var_1, var_2, var_3) {
   return isDefined(self.enemy);
 }
 
-function chooseanim_patrolreactlookaround(var0, var1, var2) {
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, scripts\engine\utility::string(getpatrolreactdirindex()));
+function chooseanim_patrolreactlookaround(var_0, var_1, var_2) {
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, scripts\engine\utility::string(getpatrolreactdirindex()));
 }
 
-function chooseanim_patrolreactlookaround_checkflashlight(var0, var1, var2) {
-  var3 = scripts\engine\utility::string(getpatrolreactdirindex());
-  return chooseanim_patrol_checkflashlight(var0, var1, var3);
+function chooseanim_patrolreactlookaround_checkflashlight(var_0, var_1, var_2) {
+  var_3 = scripts\engine\utility::string(getpatrolreactdirindex());
+  return chooseanim_patrol_checkflashlight(var_0, var_1, var_3);
 }
 
 function getpatrolreactdirindex() {
-  var0 = 0;
+  var_0 = 0;
 
   if(isDefined(self.stealth.patrol_react_pos)) {
-    var1 = self.stealth.patrol_react_pos - self.origin;
+    var_1 = self.stealth.patrol_react_pos - self.origin;
 
-    if(length2dsquared(var1) < 36) {
-      var0 = 0;
+    if(length2dsquared(var_1) < 36) {
+      var_0 = 0;
     } else {
-      var2 = vectortoyaw(var1);
-      var0 = self.angles[1] - var2;
+      var_2 = vectortoyaw(var_1);
+      var_0 = self.angles[1] - var_2;
     }
   }
 
-  return getreactangleindex(var0);
+  return getreactangleindex(var_0);
 }
 
 function getpatrolreactalias() {
-  var0 = getpatrolreactdirindex();
-  var1 = self.stealth.patrol_react_magnitude + "_" + var0;
-  return var1;
+  var_0 = getpatrolreactdirindex();
+  var_1 = self.stealth.patrol_react_magnitude + "_" + var_0;
+  return var_1;
 }
 
-function chooseanim_patrolreact(var0, var1, var2) {
-  var3 = getpatrolreactalias();
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, var3);
+function chooseanim_patrolreact(var_0, var_1, var_2) {
+  var_3 = getpatrolreactalias();
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
 }
 
-function chooseanim_patrolreact_checkflashlight(var0, var1, var2) {
-  var3 = getpatrolreactalias();
-  return chooseanim_patrol_checkflashlight(var0, var1, var3);
+function chooseanim_patrolreact_checkflashlight(var_0, var_1, var_2) {
+  var_3 = getpatrolreactalias();
+  return chooseanim_patrol_checkflashlight(var_0, var_1, var_3);
 }
 
-function patrolreact_terminate(var0, var1, var2) {
+function patrolreact_terminate(var_0, var_1, var_2) {
   self.stealth.breacting = undefined;
   self stoplookat();
 }
 
-function getreactangleindex(var0) {
-  var0 = angleclamp180(var0);
+function getreactangleindex(var_0) {
+  var_0 = angleclamp180(var_0);
 
-  if(var0 > 135 || var0 < -135) {
-    var1 = 2;
-  } else if(var1 < -45) {
-    var1 = 4;
-  } else if(var1 > 45) {
-    var1 = 6;
+  if(var_0 > 135 || var_0 < -135) {
+    var_1 = 2;
+  } else if(var_1 < -45) {
+    var_1 = 4;
+  } else if(var_1 > 45) {
+    var_1 = 6;
   } else {
-    var1 = 8;
+    var_1 = 8;
   }
 
-  return var1;
+  return var_1;
 }
 
-function handlefacegoalnotetrack(var0, var1, var2) {
-  if(var1 == "face_goal" && isDefined(self.stealth.patrol_react_pos)) {
-    var3 = self.stealth.patrol_react_pos - self.origin;
-    var4 = vectortoyaw(var3);
-    thread facegoalthread(var0, var4);
+function handlefacegoalnotetrack(var_0, var_1, var_2) {
+  if(var_1 == "face_goal" && isDefined(self.stealth.patrol_react_pos)) {
+    var_3 = self.stealth.patrol_react_pos - self.origin;
+    var_4 = vectortoyaw(var_3);
+    thread facegoalthread(var_0, var_4);
     return true;
   }
 
   return false;
 }
 
-function facegoalthread(var0, var1) {
+function facegoalthread(var_0, var_1) {
   self notify("FaceGoalThread");
   self endon("FaceGoalThread");
   self endon("death");
-  self endon(var0 + "_finished");
+  self endon(var_0 + "_finished");
 
   for(;;) {
-    var2 = 1;
-    var3 = self.enemy;
+    var_2 = 1;
+    var_3 = self.enemy;
 
-    if(!isDefined(var3)) {
+    if(!isDefined(var_3)) {
       if(isDefined(self.stealth.investgate_entity) && isPlayer(self.stealth.investigate_entity)) {
-        var3 = self.stealth.investigate_entity;
+        var_3 = self.stealth.investigate_entity;
       }
     }
 
-    if(isDefined(var3) && isPlayer(var3) && distance(self.origin, var3.origin) <= 200) {
-      var2 = 0;
+    if(isDefined(var_3) && isPlayer(var_3) && distance(self.origin, var_3.origin) <= 200) {
+      var_2 = 0;
     }
 
-    var4 = 0.25;
+    var_4 = 0.25;
 
-    if(isDefined(var3) && issentient(var3)) {
-      if(!var2 || var2 && self cansee(var3)) {
-        var5 = var3.origin - self.origin;
-        var1 = vectortoyaw(var5);
-        var4 = 0.5;
+    if(isDefined(var_3) && issentient(var_3)) {
+      if(!var_2 || var_2 && self cansee(var_3)) {
+        var_5 = var_3.origin - self.origin;
+        var_1 = vectortoyaw(var_5);
+        var_4 = 0.5;
       }
     }
 
-    var6 = angleclamp180(var1 - self.angles[1]);
-    self orientmode("face angle", self.angles[1] + var6 * var4);
+    var_6 = angleclamp180(var_1 - self.angles[1]);
+    self orientmode("face angle", self.angles[1] + var_6 * var_4);
     waitframe();
   }
 }
 
-function patrol_playanim_randomrate(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  thread scripts\asm\shared\utility::waitfordooropen(var0, var1, 1);
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  var4 = randomfloatrange(0.8, 1.2);
-  self aisetanim(var1, var3, var4);
-  scripts\asm\asm::asm_playfacialanim(var0, var1, scripts\asm\asm::asm_getxanim(var1, var3));
-  scripts\asm\asm::asm_donotetracks(var0, var1, scripts\asm\asm::asm_getnotehandler(var0, var1));
+function patrol_playanim_randomrate(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  thread scripts\asm\shared\utility::waitfordooropen(var_0, var_1, 1);
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_4 = randomfloatrange(0.8, 1.2);
+  self aisetanim(var_1, var_3, var_4);
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, scripts\asm\asm::asm_getxanim(var_1, var_3));
+  scripts\asm\asm::asm_donotetracks(var_0, var_1, scripts\asm\asm::asm_getnotehandler(var_0, var_1));
 }
 
 function patrol_getstationaryturnangle() {
@@ -221,96 +221,96 @@ function patrol_getstationaryturnangle() {
   } else if(isDefined(self.patrol_custom_face_angle)) {
     return angleclamp180(self.patrol_custom_face_angle - self.angles[1]);
   } else if(isDefined(self._blackboard.bfacesomedecentdirectionwhenidle)) {
-    var0 = makeweapon(self.origin, 256, 96);
+    var_0 = makeweapon(self.origin, 256, 96);
 
-    if(isDefined(var0)) {
-      var1 = angleclamp180(vectortoyaw(var0) - self.angles[1]);
-      return var1;
+    if(isDefined(var_0)) {
+      var_1 = angleclamp180(vectortoyaw(var_0) - self.angles[1]);
+      return var_1;
     }
   }
 
   return undefined;
 }
 
-function patrol_shoulddostationaryturn(var0, var1, var2, var3) {
-  var4 = patrol_getstationaryturnangle();
-  var5 = isDefined(var4) && abs(var4) > 10;
-  self.desiredturnyaw = var4;
-  return var5;
+function patrol_shoulddostationaryturn(var_0, var_1, var_2, var_3) {
+  var_4 = patrol_getstationaryturnangle();
+  var_5 = isDefined(var_4) && abs(var_4) > 10;
+  self.desiredturnyaw = var_4;
+  return var_5;
 }
 
-function patrol_choosestationaryturnanim(var0, var1, var2) {
-  var3 = undefined;
+function patrol_choosestationaryturnanim(var_0, var_1, var_2) {
+  var_3 = undefined;
 
   if(isDefined(self.desiredturnyaw)) {
-    var3 = self.desiredturnyaw;
+    var_3 = self.desiredturnyaw;
   }
 
-  if(!isDefined(var3)) {
-    var4 = "8";
-  } else if(var4 < -135) {
-    var4 = "2r";
-  } else if(var4 > 135) {
-    var4 = "2l";
-  } else if(var4 < -45) {
-    var4 = "6";
-  } else if(var4 > 45) {
-    var4 = "4";
+  if(!isDefined(var_3)) {
+    var_4 = "8";
+  } else if(var_4 < -135) {
+    var_4 = "2r";
+  } else if(var_4 > 135) {
+    var_4 = "2l";
+  } else if(var_4 < -45) {
+    var_4 = "6";
+  } else if(var_4 > 45) {
+    var_4 = "4";
   } else {
-    var4 = "8";
+    var_4 = "8";
   }
 
-  var5 = scripts\asm\asm::asm_lookupanimfromalias(var4, var4);
-  return var5;
+  var_5 = scripts\asm\asm::asm_lookupanimfromalias(var_4, var_4);
+  return var_5;
 }
 
-function patrol_playanim_idle(var0, var1, var2) {
-  scripts\asm\asm::asm_loopanimstate(var0, var1, 1);
+function patrol_playanim_idle(var_0, var_1, var_2) {
+  scripts\asm\asm::asm_loopanimstate(var_0, var_1, 1);
 }
 
-function handlestationaryturnfacegoalnotetrack(var0, var1) {
-  if(var0 == "face_goal" && isDefined(self.desiredturnyaw) && isDefined(var1.statename)) {
-    var2 = getnotetracktimes(var1.xanim, "face_goal_end");
-    var3 = undefined;
+function handlestationaryturnfacegoalnotetrack(var_0, var_1) {
+  if(var_0 == "face_goal" && isDefined(self.desiredturnyaw) && isDefined(var_1.statename)) {
+    var_2 = getnotetracktimes(var_1.xanim, "face_goal_end");
+    var_3 = undefined;
 
-    if(!isDefined(var2)) {
+    if(!isDefined(var_2)) {
       return undefined;
     }
 
-    var4 = getanimlength(var1.xanim);
-    var5 = self getanimtime(var1.xanim);
-    var3 = var2[0] - var5;
-    var6 = getangledelta(var1.xanim, 0, 1);
-    var7 = angleclamp180(self.desiredturnyaw - var6);
-    var3 *= var4;
-    thread patrol_stationaryturnfixupthread(var1.statename, var7, var3);
-  } else if(var0 == "end") {
+    var_4 = getanimlength(var_1.xanim);
+    var_5 = self getanimtime(var_1.xanim);
+    var_3 = var_2[0] - var_5;
+    var_6 = getangledelta(var_1.xanim, 0, 1);
+    var_7 = angleclamp180(self.desiredturnyaw - var_6);
+    var_3 *= var_4;
+    thread patrol_stationaryturnfixupthread(var_1.statename, var_7, var_3);
+  } else if(var_0 == "end") {
     return 0;
   }
 
   return undefined;
 }
 
-function patrol_stationaryturnfixupthread(var0, var1, var2) {
+function patrol_stationaryturnfixupthread(var_0, var_1, var_2) {
   self notify("FaceYawThread");
   self endon("FaceYawThread");
   self endon("death");
-  self endon(var0 + "_finished");
-  var3 = var2 * 1000 / level.frameduration;
-  var4 = var1 / var3;
+  self endon(var_0 + "_finished");
+  var_3 = var_2 * 1000 / level.frameduration;
+  var_4 = var_1 / var_3;
 
-  while(var3 >= 0) {
-    self orientmode("face angle", angleclamp(self.angles[1] + var4));
-    var3 -= 1;
+  while(var_3 >= 0) {
+    self orientmode("face angle", angleclamp(self.angles[1] + var_4));
+    var_3 -= 1;
     waitframe();
   }
 }
 
-function patrol_playanim_idlestationaryturn(var0, var1, var2) {
-  self endon(var1 + "_finished");
+function patrol_playanim_idlestationaryturn(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
   scripts\common\gameskill::didsomethingotherthanshooting();
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  var4 = scripts\asm\asm::asm_getxanim(var1, var3);
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, var_3);
 
   if(scripts\engine\utility::actor_is3d() && isDefined(self.enemy)) {
     self orientmode("face enemy");
@@ -324,18 +324,18 @@ function patrol_playanim_idlestationaryturn(var0, var1, var2) {
     self animmode("zonly_physics");
   }
 
-  scripts\asm\asm::asm_playfacialanim(var0, var1, var4);
-  self.stepoutyaw = angleclamp180(getangledelta(var4, 0, 1) + self.angles[1]);
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_4);
+  self.stepoutyaw = angleclamp180(getangledelta(var_4, 0, 1) + self.angles[1]);
   self.useanimgoalweight = 1;
-  var5 = 1;
-  self aisetanim(var1, var3, var5);
-  var6 = spawnStruct();
-  var6.xanim = var4;
-  var6.statename = var1;
-  scripts\asm\asm::asm_donotetracks(var0, var1, &handlestationaryturnfacegoalnotetrack, var6);
+  var_5 = 1;
+  self aisetanim(var_1, var_3, var_5);
+  var_6 = spawnStruct();
+  var_6.xanim = var_4;
+  var_6.statename = var_1;
+  scripts\asm\asm::asm_donotetracks(var_0, var_1, &handlestationaryturnfacegoalnotetrack, var_6);
 }
 
-function patrol_shouldarrival_examine(var0, var1, var2, var3) {
+function patrol_shouldarrival_examine(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.stealth)) {
     return false;
   }
@@ -349,85 +349,85 @@ function patrol_shouldarrival_examine(var0, var1, var2, var3) {
   }
 
   if(!isDefined(self.stealth.corpse.investigatealias)) {
-    var4 = archetypegetaliases(self.asm.archetype, var2);
-    self.stealth.corpse.investigatealias = var4[randomint(var4.size)];
+    var_4 = archetypegetaliases(self.asm.archetype, var_2);
+    self.stealth.corpse.investigatealias = var_4[randomint(var_4.size)];
   }
 
-  var5 = scripts\asm\asm::asm_lookupanimfromalias(var2, self.stealth.corpse.investigatealias);
-  var6 = scripts\asm\asm::asm_getxanim(var2, var5);
-  var7 = getmovedelta(var6);
-  var8 = length(var7);
-  var9 = 12;
-  var10 = 12;
-  var11 = self.lookaheaddist;
+  var_5 = scripts\asm\asm::asm_lookupanimfromalias(var_2, self.stealth.corpse.investigatealias);
+  var_6 = scripts\asm\asm::asm_getxanim(var_2, var_5);
+  var_7 = getmovedelta(var_6);
+  var_8 = length(var_7);
+  var_9 = 12;
+  var_10 = 12;
+  var_11 = self.lookaheaddist;
 
-  if(var11 < var8 - var10) {
+  if(var_11 < var_8 - var_10) {
     return false;
   }
 
-  var12 = self pathdisttogoal();
+  var_12 = self pathdisttogoal();
 
-  if(var12 > var8 + var9) {
+  if(var_12 > var_8 + var_9) {
     return false;
   }
 
-  if(var12 < var8 - var10) {
+  if(var_12 < var_8 - var_10) {
     return false;
   }
 
-  var13 = self.pathgoalpos - self.origin;
-  var14 = spawnStruct();
-  var14.angledelta = 0;
-  var14.finalangles = vectortoangles(var13);
-  var14.stopanim = var5;
-  var14.movedelta = var7;
-  var14.startpos = self.pathgoalpos - rotatevector(var7, var14.finalangles);
-  self.asm.stopdata = var14;
+  var_13 = self.pathgoalpos - self.origin;
+  var_14 = spawnStruct();
+  var_14.angledelta = 0;
+  var_14.finalangles = vectortoangles(var_13);
+  var_14.stopanim = var_5;
+  var_14.movedelta = var_7;
+  var_14.startpos = self.pathgoalpos - rotatevector(var_7, var_14.finalangles);
+  self.asm.stopdata = var_14;
   return true;
 }
 
-function patrol_finisharrival(var0, var1, var2) {
+function patrol_finisharrival(var_0, var_1, var_2) {
   if(isDefined(self.stealth) && isDefined(self.stealth.corpse)) {
     self.stealth.corpse.investigatealias = undefined;
   }
 
   self.stealth.bexaminerequested = undefined;
-  scripts\asm\soldier\arrival::finisharrival(var0, var1, var2);
+  scripts\asm\soldier\arrival::finisharrival(var_0, var_1, var_2);
 }
 
-function patrol_isidlecurious(var0, var1, var2, var3) {
+function patrol_isidlecurious(var_0, var_1, var_2, var_3) {
   return isDefined(self.stealth) && isDefined(self.stealth.bidlecurious) && self.stealth.bidlecurious;
 }
 
-function patrol_isnotidlecurious(var0, var1, var2, var3) {
-  return !patrol_isidlecurious(var0, var1, var2, var3);
+function patrol_isnotidlecurious(var_0, var_1, var_2, var_3) {
+  return !patrol_isidlecurious(var_0, var_1, var_2, var_3);
 }
 
-function patrol_playanim_idlecurious(var0, var1, var2) {
-  thread patrol_playanim_idlecurious_facelastknownhelper(var1, self.stealth.idlecurioustarget);
-  scripts\asm\asm::asm_playanimstate(var0, var1);
+function patrol_playanim_idlecurious(var_0, var_1, var_2) {
+  thread patrol_playanim_idlecurious_facelastknownhelper(var_1, self.stealth.idlecurioustarget);
+  scripts\asm\asm::asm_playanimstate(var_0, var_1);
 }
 
-function patrol_playanim_idlecurious_facelastknownhelper(var0, var1) {
-  self endon(var0 + "_finished");
+function patrol_playanim_idlecurious_facelastknownhelper(var_0, var_1) {
+  self endon(var_0 + "_finished");
 
-  while(isDefined(var1) && isalive(var1)) {
-    var2 = self lastknownpos(var1);
-    var3 = var2 - self.origin;
-    self orientmode("face angle", vectortoyaw(var3));
+  while(isDefined(var_1) && isalive(var_1)) {
+    var_2 = self lastknownpos(var_1);
+    var_3 = var_2 - self.origin;
+    self orientmode("face angle", vectortoyaw(var_3));
     waitframe();
   }
 }
 
-function patrol_shouldinvestigatelookaround(var0, var1, var2, var3) {
+function patrol_shouldinvestigatelookaround(var_0, var_1, var_2, var_3) {
   return isDefined(self.stealth) && isDefined(self.stealth.binvestigatelookaround) && self.stealth.binvestigatelookaround;
 }
 
-function patrol_notshouldinvestigatelookaround(var0, var1, var2, var3) {
-  return !patrol_shouldinvestigatelookaround(var0, var1, var2, var3);
+function patrol_notshouldinvestigatelookaround(var_0, var_1, var_2, var_3) {
+  return !patrol_shouldinvestigatelookaround(var_0, var_1, var_2, var_3);
 }
 
-function patrol_shouldpulloutflashlight(var0, var1, var2, var3) {
+function patrol_shouldpulloutflashlight(var_0, var_1, var_2, var_3) {
   if(!isDefined(self._blackboard.bflashlight) || !self._blackboard.bflashlight) {
     return false;
   }
@@ -435,7 +435,7 @@ function patrol_shouldpulloutflashlight(var0, var1, var2, var3) {
   return !isDefined(self.asm.flashlight) || !self.asm.flashlight;
 }
 
-function patrol_shouldputawayflashlight(var0, var1, var2, var3) {
+function patrol_shouldputawayflashlight(var_0, var_1, var_2, var_3) {
   if(isDefined(self._blackboard.bflashlight) && self._blackboard.bflashlight) {
     return false;
   }
@@ -443,7 +443,7 @@ function patrol_shouldputawayflashlight(var0, var1, var2, var3) {
   return isDefined(self.asm.flashlight) && self.asm.flashlight;
 }
 
-function patrol_magicflashlightdetach(var0, var1, var2) {
+function patrol_magicflashlightdetach(var_0, var_1, var_2) {
   if(isDefined(self.asm.flashlight) && self.asm.flashlight) {
     detachflashlight();
   }
@@ -454,67 +454,67 @@ function patrol_magicflashlightdetach(var0, var1, var2) {
   }
 }
 
-function patrol_magicflashlighton(var0, var1, var2) {
+function patrol_magicflashlighton(var_0, var_1, var_2) {
   if(istrue(self._blackboard.bflashlight)) {
     self[[self.fnstealthflashlighton]]();
     return;
   }
 }
 
-function chooseanim_patrol_checkflashlight(var0, var1, var2) {
-  var3 = var2;
+function chooseanim_patrol_checkflashlight(var_0, var_1, var_2) {
+  var_3 = var_2;
 
   if(isDefined(self.asm.flashlight) && self.asm.flashlight) {
-    var3 = "fl_" + var3;
+    var_3 = "fl_" + var_3;
   }
 
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, var3);
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
 }
 
-function patrol_hasflashlightout(var0, var1, var2, var3) {
+function patrol_hasflashlightout(var_0, var_1, var_2, var_3) {
   return isDefined(self.asm.flashlight) && self.asm.flashlight;
 }
 
-function patrol_nothasflashlightout(var0, var1, var2, var3) {
-  return !patrol_hasflashlightout(var0, var1, var2, var3);
+function patrol_nothasflashlightout(var_0, var_1, var_2, var_3) {
+  return !patrol_hasflashlightout(var_0, var_1, var_2, var_3);
 }
 
-function patrol_playanim_pulloutflashlight(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  thread scripts\asm\shared\utility::waitfordooropen(var0, var1, 1);
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  self.stealth.flashlightxanim = scripts\asm\asm::asm_getxanim(var1, var3);
-  var4 = self.moveplaybackrate;
+function patrol_playanim_pulloutflashlight(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  thread scripts\asm\shared\utility::waitfordooropen(var_0, var_1, 1);
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  self.stealth.flashlightxanim = scripts\asm\asm::asm_getxanim(var_1, var_3);
+  var_4 = self.moveplaybackrate;
 
   if(length(self.velocity) < 1) {
-    var4 = randomfloatrange(0.8, 1.2);
+    var_4 = randomfloatrange(0.8, 1.2);
   }
 
-  self aisetanim(var1, var3, var4);
-  self aisetanimrate(var1, var3, var4);
-  scripts\asm\asm::asm_playfacialanim(var0, var1, scripts\asm\asm::asm_getxanim(var1, var3));
-  var5 = scripts\asm\asm::asm_donotetracks(var0, var1, scripts\asm\asm::asm_getnotehandler(var0, var1));
+  self aisetanim(var_1, var_3, var_4);
+  self aisetanimrate(var_1, var_3, var_4);
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, scripts\asm\asm::asm_getxanim(var_1, var_3));
+  var_5 = scripts\asm\asm::asm_donotetracks(var_0, var_1, scripts\asm\asm::asm_getnotehandler(var_0, var_1));
 
-  if(var5 == "code_move") {
-    var5 = scripts\asm\asm::asm_donotetracks(var0, var1, scripts\asm\asm::asm_getnotehandler(var0, var1));
+  if(var_5 == "code_move") {
+    var_5 = scripts\asm\asm::asm_donotetracks(var_0, var_1, scripts\asm\asm::asm_getnotehandler(var_0, var_1));
     return;
   }
 }
 
-function flashlightnotehandler(var0) {
-  if(var0 == "attach") {
-    var1 = 1;
+function flashlightnotehandler(var_0) {
+  if(var_0 == "attach") {
+    var_1 = 1;
 
     if(isDefined(self.stealth.flashlightxanim) && self getanimweight(self.stealth.flashlightxanim) > 0) {
-      var1 = !animhasnotetrack(self.stealth.flashlightxanim, "flashlight_on");
+      var_1 = !animhasnotetrack(self.stealth.flashlightxanim, "flashlight_on");
       self.stealth.flashlightxanim = undefined;
     }
 
-    attachflashlight(var1);
+    attachflashlight(var_1);
     return;
   }
 
-  if(var0 == "detach") {
+  if(var_0 == "detach") {
     detachflashlight();
 
     if(scripts\asm\asm::asm_getdemeanor() != "patrol" && isDefined(self._blackboard.bflashlight) && self._blackboard.bflashlight) {
@@ -525,23 +525,23 @@ function flashlightnotehandler(var0) {
     return;
   }
 
-  if(var0 == "flashlight_on") {
+  if(var_0 == "flashlight_on") {
     self[[self.fnstealthflashlighton]]();
     return;
   }
 
-  if(var0 == "flashlight_off") {
+  if(var_0 == "flashlight_off") {
     self[[self.fnstealthflashlightoff]](0);
     return;
   }
 }
 
-function setflashlightmodel(var0) {
+function setflashlightmodel(var_0) {
   if(isai(self)) {
     detachflashlight();
   }
 
-  self.flashlightmodeloverride = var0;
+  self.flashlightmodeloverride = var_0;
 
   if(isai(self) && istrue(self.asm.flashlight)) {
     attachflashlight(1);
@@ -550,26 +550,26 @@ function setflashlightmodel(var0) {
 }
 
 function getflashlightmodel() {
-  var0 = "attachment_wm_tac_light_held";
+  var_0 = "attachment_wm_tac_light_held";
 
   if(isDefined(self.flashlightmodeloverride)) {
-    var0 = self.flashlightmodeloverride;
+    var_0 = self.flashlightmodeloverride;
   } else if(isDefined(level.flashlightmodeloverride)) {
-    var0 = level.flashlightmodeloverride;
+    var_0 = level.flashlightmodeloverride;
   }
 
-  return var0;
+  return var_0;
 }
 
-function attachflashlight(var0) {
+function attachflashlight(var_0) {
   self[[self.fnstealthflashlightoff]](0);
-  var1 = getflashlightmodel();
-  self attach(var1, "tag_accessory_left", 1);
-  self.flashlightmodel = var1;
+  var_1 = getflashlightmodel();
+  self attach(var_1, "tag_accessory_left", 1);
+  self.flashlightmodel = var_1;
   self.asm.flashlight = 1;
   self.flashlightfxoverridetag = "tag_light";
 
-  if(var0) {
+  if(var_0) {
     self[[self.fnstealthflashlighton]]();
     return;
   }
@@ -591,12 +591,12 @@ function detachflashlight() {
   self.flashlightfxoverridetag = undefined;
 }
 
-function flashlightreactionnotehandler(var0, var1, var2) {
-  flashlightnotehandler(var1);
-  return handlefacegoalnotetrack(var0, var1);
+function flashlightreactionnotehandler(var_0, var_1, var_2) {
+  flashlightnotehandler(var_1);
+  return handlefacegoalnotetrack(var_0, var_1);
 }
 
-function patrol_idle_setupreaction(var0, var1, var2) {
+function patrol_idle_setupreaction(var_0, var_1, var_2) {
   if(isDefined(self.stealth.investigateevent)) {
     scripts\common\utility::demeanor_override("alert");
     self.stealth.patrol_react_magnitude = "small";
@@ -606,21 +606,21 @@ function patrol_idle_setupreaction(var0, var1, var2) {
   }
 }
 
-function patrol_movetransition_check(var0, var1, var2, var3) {
+function patrol_movetransition_check(var_0, var_1, var_2, var_3) {
   if(isDefined(self.asm.footsteps.foot) && self.asm.footsteps.foot == "right") {
     return false;
   }
 
-  var4 = self pathdisttogoal();
+  var_4 = self pathdisttogoal();
 
-  if(var4 < 96) {
+  if(var_4 < 96) {
     return false;
   }
 
   return true;
 }
 
-function patrol_shouldusehuntexit(var0, var1, var2, var3) {
+function patrol_shouldusehuntexit(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.stealth)) {
     return false;
   }
@@ -628,7 +628,7 @@ function patrol_shouldusehuntexit(var0, var1, var2, var3) {
   return self[[self.fnisinstealthhunt]]() || self[[self.fnisinstealthinvestigate]]();
 }
 
-function patrol_needtoturntohuntlookaround(var0, var1, var2, var3) {
+function patrol_needtoturntohuntlookaround(var_0, var_1, var_2, var_3) {
   if(isDefined(scripts\asm\asm_bb::bb_getrequestedsmartobject())) {
     return false;
   }
@@ -637,34 +637,34 @@ function patrol_needtoturntohuntlookaround(var0, var1, var2, var3) {
     return false;
   }
 
-  var4 = undefined;
+  var_4 = undefined;
 
   if(isDefined(self.asm.customdata.arrivalangles)) {
-    var4 = self.asm.customdata.arrivalangles[1];
+    var_4 = self.asm.customdata.arrivalangles[1];
   } else {
-    var5 = makeweapon(self.origin, 256, 96);
+    var_5 = makeweapon(self.origin, 256, 96);
 
-    if(isDefined(var5)) {
-      var4 = vectortoyaw(var5);
+    if(isDefined(var_5)) {
+      var_4 = vectortoyaw(var_5);
     }
   }
 
-  if(!isDefined(var4)) {
+  if(!isDefined(var_4)) {
     return false;
   }
 
-  var6 = angleclamp180(var4 - self.angles[1]);
+  var_6 = angleclamp180(var_4 - self.angles[1]);
 
-  if(abs(var6) < 25) {
+  if(abs(var_6) < 25) {
     return false;
   }
 
-  self.desiredturnyaw = var6;
+  self.desiredturnyaw = var_6;
   return true;
 }
 
-function patrol_needtostopforpath(var0, var1, var2, var3) {
-  if(scripts\asm\asm::asm_eventfiredrecently(var0, "sharp_turn")) {
+function patrol_needtostopforpath(var_0, var_1, var_2, var_3) {
+  if(scripts\asm\asm::asm_eventfiredrecently(var_0, "sharp_turn")) {
     return false;
   }
 
@@ -672,42 +672,42 @@ function patrol_needtostopforpath(var0, var1, var2, var3) {
     return false;
   }
 
-  var4 = anglesToForward(self.angles);
-  var5 = vectordot(self.lookaheaddir, var4);
-  var6 = 0;
+  var_4 = anglesToForward(self.angles);
+  var_5 = vectordot(self.lookaheaddir, var_4);
+  var_6 = 0;
 
   if(self pathdisttogoal() > 100) {
-    var6 = -0.707;
+    var_6 = -0.707;
   }
 
-  if(vectordot(self.lookaheaddir, var4) > var6) {
+  if(vectordot(self.lookaheaddir, var_4) > var_6) {
     return false;
   }
 
-  var7 = "left";
+  var_7 = "left";
 
-  if(scripts\asm\asm::asm_eventfiredrecently(var0, "pass_left")) {
-    var7 = "left";
-  } else if(scripts\asm\asm::asm_eventfiredrecently(var0, "pass_right")) {
-    var7 = "right";
+  if(scripts\asm\asm::asm_eventfiredrecently(var_0, "pass_left")) {
+    var_7 = "left";
+  } else if(scripts\asm\asm::asm_eventfiredrecently(var_0, "pass_right")) {
+    var_7 = "right";
   } else if(self.asm.footsteps.foot == "right") {
-    var7 = "right";
+    var_7 = "right";
   }
 
-  var8 = spawnStruct();
-  var8.angleindex = 4;
-  var8.angledelta = 0;
-  var8.stopanim = scripts\asm\asm::asm_lookupanimfromalias(var2, var7 + "2");
-  var9 = scripts\asm\asm::asm_getxanim(var2, var8.stopanim);
-  var8.movedelta = getmovedelta(var9);
-  var10 = rotatevector(var8.movedelta, self.angles);
-  var11 = self.origin + var10;
-  var12 = navtrace(self.origin, var11, self, 1);
-  var13 = var12["position"];
-  var8.startpos = var13 - var10;
-  var8.finalangles = self.angles;
-  var8.bskipstartcoverarrival = 1;
-  var8.customtargetpos = var13;
-  self.asm.stopdata = var8;
+  var_8 = spawnStruct();
+  var_8.angleindex = 4;
+  var_8.angledelta = 0;
+  var_8.stopanim = scripts\asm\asm::asm_lookupanimfromalias(var_2, var_7 + "2");
+  var_9 = scripts\asm\asm::asm_getxanim(var_2, var_8.stopanim);
+  var_8.movedelta = getmovedelta(var_9);
+  var_10 = rotatevector(var_8.movedelta, self.angles);
+  var_11 = self.origin + var_10;
+  var_12 = navtrace(self.origin, var_11, self, 1);
+  var_13 = var_12["position"];
+  var_8.startpos = var_13 - var_10;
+  var_8.finalangles = self.angles;
+  var_8.bskipstartcoverarrival = 1;
+  var_8.customtargetpos = var_13;
+  self.asm.stopdata = var_8;
   return true;
 }

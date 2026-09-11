@@ -32,28 +32,28 @@ function monitor() {
   level.molotov_trigger_timeout = getEnt("EggBox", "targetname");
   level.molotovrecentlyused = getEntArray("EggRolls", "targetname");
 
-  foreach(var1 in level.molotovrecentlyused) {
-    var1 hide();
+  foreach(var_1 in level.molotovrecentlyused) {
+    var_1 hide();
   }
 
   level.clear_padding_disables = getEntArray("EggBear", "script_noteworthy");
 
-  foreach(var4 in level.clear_padding_disables) {
-    var4 hide();
+  foreach(var_4 in level.clear_padding_disables) {
+    var_4 hide();
   }
 
   thread molotov_store_branch_ents("EggBear1");
 }
 
-function molotov_store_branch_ents(var0) {
-  var1 = getEnt(var0, "targetname");
-  var1 show();
-  var1 setCanDamage(1);
-  var1 waittill("damage", var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14, var15);
-  var1 hide();
+function molotov_store_branch_ents(var_0) {
+  var_1 = getEnt(var_0, "targetname");
+  var_1 show();
+  var_1 setCanDamage(1);
+  var_1 waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15);
+  var_1 hide();
 
-  if(isDefined(var1.target)) {
-    molotov_store_branch_ents(var1.target);
+  if(isDefined(var_1.target)) {
+    molotov_store_branch_ents(var_1.target);
     return;
   }
 
@@ -64,8 +64,8 @@ function monitor_enemy_death() {
   scripts\engine\utility::exploder("last_roll");
   thread ref_13295();
 
-  foreach(var1 in level.molotovrecentlyused) {
-    var1 show();
+  foreach(var_1 in level.molotovrecentlyused) {
+    var_1 show();
   }
 
   level.molotov_trigger_timeout hide();

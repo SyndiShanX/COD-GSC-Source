@@ -20,23 +20,23 @@ function vo_stakeout_choose_weapon() {
   GscBinSkip1(0x45, 0, ["nikolai", "stakeout_kitchen_idle_twitch02"]);
 }
 
-function vo_stakeout_price_gun_nag(var0) {
-  var1 = scripts\engine\utility::getStruct("stakeout_apt_scene_org", "targetname");
-  var1 notify("end_price_kitchen_idle");
+function vo_stakeout_price_gun_nag(var_0) {
+  var_1 = scripts\engine\utility::getStruct("stakeout_apt_scene_org", "targetname");
+  var_1 notify("end_price_kitchen_idle");
   level.price scripts\engine\sp\utility::anim_stopanimScripted();
   scripts\engine\utility::flag_clear("flag_stakeout_price_kitchen_ready");
-  var1 scripts\common\anim::anim_single_solo(level.price, var0);
-  var1 thread scripts\common\anim::anim_loop_solo(level.price, "stakeout_kitchen_idle", "end_price_kitchen_idle");
+  var_1 scripts\common\anim::anim_single_solo(level.price, var_0);
+  var_1 thread scripts\common\anim::anim_loop_solo(level.price, "stakeout_kitchen_idle", "end_price_kitchen_idle");
   scripts\engine\utility::flag_set("flag_stakeout_price_kitchen_ready");
 }
 
-function vo_stakeout_nikolai_gun_nag(var0) {
-  var1 = scripts\engine\utility::getStruct("stakeout_apt_scene_org", "targetname");
-  var1 notify("end_nikolai_kitchen_idle");
+function vo_stakeout_nikolai_gun_nag(var_0) {
+  var_1 = scripts\engine\utility::getStruct("stakeout_apt_scene_org", "targetname");
+  var_1 notify("end_nikolai_kitchen_idle");
   level.nikolai scripts\engine\sp\utility::anim_stopanimScripted();
   scripts\engine\utility::flag_clear("flag_stakeout_nikolai_kitchen_ready");
-  var1 scripts\common\anim::anim_single_solo(level.nikolai, var0);
-  var1 thread scripts\common\anim::anim_loop_solo(level.nikolai, "stakeout_kitchen_idle", "end_nikolai_kitchen_idle");
+  var_1 scripts\common\anim::anim_single_solo(level.nikolai, var_0);
+  var_1 thread scripts\common\anim::anim_loop_solo(level.nikolai, "stakeout_kitchen_idle", "end_nikolai_kitchen_idle");
   scripts\engine\utility::flag_set("flag_stakeout_nikolai_kitchen_ready");
 }
 
@@ -44,12 +44,12 @@ function vo_stakeout_price_in_here() {
   level.player endon("death");
   level endon("missionfailed");
   level endon("flag_stakeout_player_in_kitchen");
-  var0 = [];
-  var1 = [];
-  var0 = "dx_vom_pri_stakeout_exit_50";
-  var0 = "dx_vom_pri_stakeout_exit_70";
-  var0 = "dx_vom_pri_acquire_street_90";
-  var0 = "dx_vom_pri_evade_defend_10";
+  var_0 = [];
+  var_1 = [];
+  var_0 = "dx_vom_pri_stakeout_exit_50";
+  var_0 = "dx_vom_pri_stakeout_exit_70";
+  var_0 = "dx_vom_pri_acquire_street_90";
+  var_0 = "dx_vom_pri_evade_defend_10";
   GscBinSkip0(0x2e, 0, "Waitin' on you, Garrick.");
 }
 
@@ -73,23 +73,23 @@ function vo_stakeout_exit_apartment() {
   GscBinSkip1(0x45, 0, ["nikolai", "stakeout_kitchen_idle02_twitch01"]);
 }
 
-function vo_stakeout_price_stairs_nag(var0) {
-  var1 = scripts\engine\utility::getStruct("stakeout_apt_scene_org", "targetname");
-  var1 notify("end_stairs_idle");
+function vo_stakeout_price_stairs_nag(var_0) {
+  var_1 = scripts\engine\utility::getStruct("stakeout_apt_scene_org", "targetname");
+  var_1 notify("end_stairs_idle");
   level.price scripts\engine\sp\utility::anim_stopanimScripted();
   scripts\engine\utility::flag_clear("flag_stakeout_price_stairs_ready");
-  var1 scripts\common\anim::anim_single_solo(level.price, var0);
-  var1 thread scripts\common\anim::anim_loop_solo(level.price, "stakeout_idle_stairs", "end_stairs_idle");
+  var_1 scripts\common\anim::anim_single_solo(level.price, var_0);
+  var_1 thread scripts\common\anim::anim_loop_solo(level.price, "stakeout_idle_stairs", "end_stairs_idle");
   scripts\engine\utility::flag_set("flag_stakeout_price_stairs_ready");
 }
 
-function vo_stakeout_nikolai_stairs_nag(var0) {
-  var1 = scripts\engine\utility::getStruct("stakeout_apt_scene_org", "targetname");
-  var1 notify("end_nikolai_kitchen_idle02");
+function vo_stakeout_nikolai_stairs_nag(var_0) {
+  var_1 = scripts\engine\utility::getStruct("stakeout_apt_scene_org", "targetname");
+  var_1 notify("end_nikolai_kitchen_idle02");
   level.nikolai scripts\engine\sp\utility::anim_stopanimScripted();
   scripts\engine\utility::flag_clear("flag_stakeout_nikolai_stairs_ready");
-  var1 scripts\common\anim::anim_single_solo(level.nikolai, var0);
-  var1 thread scripts\common\anim::anim_loop_solo(level.nikolai, "stakeout_kitchen_idle02", "end_nikolai_kitchen_idle02");
+  var_1 scripts\common\anim::anim_single_solo(level.nikolai, var_0);
+  var_1 thread scripts\common\anim::anim_loop_solo(level.nikolai, "stakeout_kitchen_idle02", "end_nikolai_kitchen_idle02");
   scripts\engine\utility::flag_set("flag_stakeout_nikolai_stairs_ready");
 }
 
@@ -106,12 +106,12 @@ function vo_stakeout_fire_weapon_indoors() {
   level.player endon("death");
   level endon("missionfailed");
   level endon("flag_alley_stealth_price_opening_door");
-  var0 = [];
-  var1 = [];
-  var0 = "dx_vom_pri_stakeout_exit_41";
-  var0 = "dx_vom_pri_stakeout_exit_42";
-  var0 = "dx_vom_pri_stakeout_exit_43";
-  var0 = "dx_vom_pri_stakeout_exit_44";
+  var_0 = [];
+  var_1 = [];
+  var_0 = "dx_vom_pri_stakeout_exit_41";
+  var_0 = "dx_vom_pri_stakeout_exit_42";
+  var_0 = "dx_vom_pri_stakeout_exit_43";
+  var_0 = "dx_vom_pri_stakeout_exit_44";
   GscBinSkip0(0x2e, 0, "What the hell, Garrick?!");
 }
 
@@ -122,9 +122,9 @@ function vo_stakeout_civ_on_stairs_casual() {
   self endon("civ_alerted");
   scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_civilian("<Russian> Hello.", "dx_vom_rcm1_stakeout_exit_120");
   scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_price("<Russian> Hello.", "dx_vom_pri_stakeout_exit_130", 0.25);
-  var0 = getEnt("intro_stakeout_player_greet_vol", "targetname");
+  var_0 = getEnt("intro_stakeout_player_greet_vol", "targetname");
 
-  if(level.player istouching(var0)) {
+  if(level.player istouching(var_0)) {
     scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_kyle("<Russian> Good Morning.", "dx_vom_kyle_stakeout_exit_140", 0.5);
     thread vo_stakeout_pri_not_bad();
     return;
@@ -175,7 +175,7 @@ function vo_stealth_again_holster_weapon_nag() {
   level.player endon("death");
   level endon("missionfailed");
   level endon("weapon_holstered");
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, "dx_vom_pri_stakeout_exit_200");
 }
 
@@ -187,8 +187,8 @@ function vo_alley_stealth_price_conversation() {
   setmusicstate("mx_stpete_tmp_street_kill");
   wait 3;
   thread vo_alley_stealth_price_ambush();
-  var0 = scripts\engine\sp\utility::get_living_ai("alley_stealth_aq01", "targetname");
-  var0 endon("death");
+  var_0 = scripts\engine\sp\utility::get_living_ai("alley_stealth_aq01", "targetname");
+  var_0 endon("death");
 }
 
 function vo_alley_stealth_price_ambush() {
@@ -197,10 +197,10 @@ function vo_alley_stealth_price_ambush() {
   level endon("flag_alley_stealth_cover_blown");
   level endon("flag_alley_stealth_aq_dead");
   scripts\engine\utility::flag_wait("flag_alley_stealth_price_ambush_begin");
-  var0 = scripts\engine\sp\utility::get_living_ai("alley_stealth_aq01", "targetname");
+  var_0 = scripts\engine\sp\utility::get_living_ai("alley_stealth_aq01", "targetname");
 
-  if(isDefined(var0)) {
-    var0 scripts\engine\utility::delaythread(1, &scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop);
+  if(isDefined(var_0)) {
+    var_0 scripts\engine\utility::delaythread(1, &scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop);
   }
 
   level.price scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop();
@@ -218,34 +218,34 @@ function vo_alley_stealth_cover_blown() {
   thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_price("Kyle, take 'em out before they alert the others.", "dx_vom_pri_alley_stealth_permits_75");
 }
 
-function vo_alley_stealth_enemies_alerted(var0) {
+function vo_alley_stealth_enemies_alerted(var_0) {
   level.player endon("death");
   level endon("missionfailed");
-  var1 = scripts\engine\sp\utility::get_living_ai_array("alley_stealth_aq", "script_noteworthy");
+  var_1 = scripts\engine\sp\utility::get_living_ai_array("alley_stealth_aq", "script_noteworthy");
 
-  if(var0) {
-    var2 = scripts\engine\sp\utility::get_living_ai("alley_stealth_aq01", "targetname");
+  if(var_0) {
+    var_2 = scripts\engine\sp\utility::get_living_ai("alley_stealth_aq01", "targetname");
 
-    if(isDefined(var2)) {
-      var1 = scripts\engine\utility::array_remove(var1, var2);
+    if(isDefined(var_2)) {
+      var_1 = scripts\engine\utility::array_remove(var_1, var_2);
     }
   }
 
-  if(var1.size > 0) {
-    var1[0] scripts\engine\sp\utility::set_battlechatter(1);
-    var1[0] thread scripts\engine\sp\utility::smart_dialogue_generic("dx_cbc_aq1_reaction_hostile_burst");
+  if(var_1.size > 0) {
+    var_1[0] scripts\engine\sp\utility::set_battlechatter(1);
+    var_1[0] thread scripts\engine\sp\utility::smart_dialogue_generic("dx_cbc_aq1_reaction_hostile_burst");
     wait randomfloatrange(0.5, 1.5);
 
-    if(isDefined(var1[1])) {
-      var1[1] scripts\engine\sp\utility::set_battlechatter(1);
-      var1[1] thread scripts\engine\sp\utility::smart_dialogue_generic("dx_cbc_aq2_reaction_hostile_burst");
+    if(isDefined(var_1[1])) {
+      var_1[1] scripts\engine\sp\utility::set_battlechatter(1);
+      var_1[1] thread scripts\engine\sp\utility::smart_dialogue_generic("dx_cbc_aq2_reaction_hostile_burst");
     }
 
     wait randomfloatrange(0.5, 1.5);
 
-    if(isDefined(var1[2])) {
-      var1[2] scripts\engine\sp\utility::set_battlechatter(1);
-      var1[2] thread scripts\engine\sp\utility::smart_dialogue_generic("dx_cbc_aq3_reaction_hostile_burst");
+    if(isDefined(var_1[2])) {
+      var_1[2] scripts\engine\sp\utility::set_battlechatter(1);
+      var_1[2] thread scripts\engine\sp\utility::smart_dialogue_generic("dx_cbc_aq3_reaction_hostile_burst");
       return;
     }
 
@@ -254,10 +254,10 @@ function vo_alley_stealth_enemies_alerted(var0) {
 }
 
 function vo_alley_stealth_butcher_alerted_fail() {
-  var0 = scripts\engine\sp\utility::get_living_ai_array("alley_stealth_aq", "script_noteworthy");
+  var_0 = scripts\engine\sp\utility::get_living_ai_array("alley_stealth_aq", "script_noteworthy");
 
-  if(var0.size > 0) {
-    var0[0] thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_aq_soldier("Boss! Enemies in the alley!", "dx_vom_aq1_alley_stealth_permits_77");
+  if(var_0.size > 0) {
+    var_0[0] thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_aq_soldier("Boss! Enemies in the alley!", "dx_vom_aq1_alley_stealth_permits_77");
   }
 
   wait 1;
@@ -300,7 +300,7 @@ function vo_alley_stealth_move_to_bar_door_nag() {
   level.player endon("death");
   level endon("missionfailed");
   level endon("flag_bar_alley_entrance_door_opened");
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, "dx_vom_pri_alley_stealth_permits_120");
 }
 
@@ -333,12 +333,12 @@ function vo_back_room_butcher_conversation() {
   level endon("flag_backroom_butcher_convo_over");
   level endon("flag_backroom_player_seen_standing");
   level endon("flag_player_jumps_in_backroom");
-  var0 = scripts\engine\sp\utility::get_living_ai("enemy_bomb_room_left", "script_noteworthy");
-  var1 = scripts\engine\sp\utility::get_living_ai("enemy_bomb_room_right", "script_noteworthy");
-  var2 = scripts\engine\sp\utility::get_living_ai("backroom_front_enemies", "script_noteworthy");
-  var0 endon("death");
-  var1 endon("death");
-  var2 endon("death");
+  var_0 = scripts\engine\sp\utility::get_living_ai("enemy_bomb_room_left", "script_noteworthy");
+  var_1 = scripts\engine\sp\utility::get_living_ai("enemy_bomb_room_right", "script_noteworthy");
+  var_2 = scripts\engine\sp\utility::get_living_ai("backroom_front_enemies", "script_noteworthy");
+  var_0 endon("death");
+  var_1 endon("death");
+  var_2 endon("death");
   scripts\engine\utility::flag_set("flag_vo_stp_no_step_hadir_line");
   thread scripts\sp\maps\stpetersburg\stpetersburg_gameplay_club::optional_stealth_handler();
   scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher("Good. This is retaliation... Today, the pain and suffering is not ours, but theirs.", "dx_vom_bch_bar_backroom_meeting_50");
@@ -347,9 +347,9 @@ function vo_back_room_butcher_conversation() {
   wait 3.5;
   thread vo_back_room_butcher_conversation_commentary();
   scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher("If the Wolf is alive, he will be proud of you... and if he is gone, we deliver his truth to those who intervene where they are not invited.", "dx_vom_bch_bar_backroom_meeting_122");
-  var0 thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_aq_soldier("Glory to Al-Qatala.", "dx_vom_aq1_bar_backroom_meeting_60");
-  var1 thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_aq_soldier("Glory to Al-Qatala.", "dx_vom_aq2_bar_backroom_meeting_70");
-  var2 thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_aq_soldier("Glory to Al-Qatala.", "dx_vom_aq3_bar_backroom_meeting_80");
+  var_0 thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_aq_soldier("Glory to Al-Qatala.", "dx_vom_aq1_bar_backroom_meeting_60");
+  var_1 thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_aq_soldier("Glory to Al-Qatala.", "dx_vom_aq2_bar_backroom_meeting_70");
+  var_2 thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_aq_soldier("Glory to Al-Qatala.", "dx_vom_aq3_bar_backroom_meeting_80");
   scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher("Glory to Al Qatala.", "dx_vom_bch_bar_backroom_meeting_90");
   scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher("Tonight, we send our message to the world. Get your teams are in place and we'll reconvene at sundown.", "dx_vom_bch_bar_backroom_meeting_130");
   wait 1;
@@ -369,7 +369,7 @@ function vo_back_room_butcher_conversation_commentary() {
   scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_price("Hadir.", "dx_vom_pri_bar_backroom_meeting_110");
   scripts\engine\utility::flag_set("flag_vo_stp_no_step_hadir_line");
   wait 5;
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, "dx_vom_pri_bar_backroom_meeting_150");
 }
 
@@ -380,10 +380,10 @@ function vo_back_room_player_rushed_door() {
 function vo_back_room_player_blew_cover() {
   level endon("flag_bomb_room_enemies_dead");
   level endon("flag_bomb_room_price_advance");
-  var0 = scripts\sp\maps\stpetersburg\stpetersburg_utility::get_closest_living_ai(level.player.origin, "axis", [level.enforcer]);
+  var_0 = scripts\sp\maps\stpetersburg\stpetersburg_utility::get_closest_living_ai(level.player.origin, "axis", [level.enforcer]);
 
-  if(isDefined(var0)) {
-    var0 scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_aq_soldier("Who's there...?", "dx_vom_aq1_bar_shootout_ambush_10");
+  if(isDefined(var_0)) {
+    var_0 scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_aq_soldier("Who's there...?", "dx_vom_aq1_bar_shootout_ambush_10");
     return;
   }
 }
@@ -399,10 +399,10 @@ function vo_back_room_enemy_engaged() {
   }
 
   setmusicstate("mx_stpete_tmp_chase");
-  var0 = scripts\engine\sp\utility::get_living_ai("enemy_bomb_room_left", "script_noteworthy");
+  var_0 = scripts\engine\sp\utility::get_living_ai("enemy_bomb_room_left", "script_noteworthy");
 
-  if(isDefined(var0)) {
-    var0 scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop();
+  if(isDefined(var_0)) {
+    var_0 scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop();
   }
 
   wait 1;
@@ -410,32 +410,32 @@ function vo_back_room_enemy_engaged() {
   wait 0.5;
   thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_price("Butcher is running!", "dx_vom_pri_bar_shootout_ambush_31");
   wait 0.5;
-  var1 = scripts\engine\sp\utility::get_living_ai_array("spawner_bomb_room", "targetname");
-  var0 = scripts\engine\sp\utility::get_living_ai("enemy_bomb_room_left", "script_noteworthy");
-  var2 = undefined;
+  var_1 = scripts\engine\sp\utility::get_living_ai_array("spawner_bomb_room", "targetname");
+  var_0 = scripts\engine\sp\utility::get_living_ai("enemy_bomb_room_left", "script_noteworthy");
+  var_2 = undefined;
 
-  if(isDefined(var0)) {
-    var2 = var0;
-  } else if(var1.size > 0) {
-    var2 = var1[0];
+  if(isDefined(var_0)) {
+    var_2 = var_0;
+  } else if(var_1.size > 0) {
+    var_2 = var_1[0];
   }
 
-  if(isDefined(var2)) {
-    var2 scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_aq_soldier("How many are there?!", "dx_vom_aq2_bar_shootout_ambush_40");
+  if(isDefined(var_2)) {
+    var_2 scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_aq_soldier("How many are there?!", "dx_vom_aq2_bar_shootout_ambush_40");
   }
 
-  var2 = undefined;
-  var1 = scripts\engine\utility::array_removedead_or_dying(var1);
-  var3 = scripts\engine\sp\utility::get_living_ai("enemy_bomb_room_right", "script_noteworthy");
+  var_2 = undefined;
+  var_1 = scripts\engine\utility::array_removedead_or_dying(var_1);
+  var_3 = scripts\engine\sp\utility::get_living_ai("enemy_bomb_room_right", "script_noteworthy");
 
-  if(isDefined(var3)) {
-    var2 = var3;
-  } else if(var1.size > 0) {
-    var2 = var1[0];
+  if(isDefined(var_3)) {
+    var_2 = var_3;
+  } else if(var_1.size > 0) {
+    var_2 = var_1[0];
   }
 
-  if(isDefined(var2)) {
-    var2 scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_aq_soldier("I don't know!", "dx_vom_aq3_bar_shootout_ambush_50");
+  if(isDefined(var_2)) {
+    var_2 scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_aq_soldier("I don't know!", "dx_vom_aq3_bar_shootout_ambush_50");
     return;
   }
 }
@@ -487,11 +487,11 @@ function vo_bar_shootout_approaching_kitchen() {
   wait 1;
   scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_price("Take him!", "dx_vom_pri_bar_shootout_mainroom_40");
   wait 1;
-  var0 = scripts\engine\sp\utility::get_living_ai("aq_ambusher", "script_noteworthy");
+  var_0 = scripts\engine\sp\utility::get_living_ai("aq_ambusher", "script_noteworthy");
 
-  if(isDefined(var0)) {
-    var0 scripts\engine\sp\utility::set_battlechatter(1);
-    var0 scripts\engine\sp\utility::smart_dialogue_generic("dx_cbc_aq1_reaction_hostile_burst");
+  if(isDefined(var_0)) {
+    var_0 scripts\engine\sp\utility::set_battlechatter(1);
+    var_0 scripts\engine\sp\utility::smart_dialogue_generic("dx_cbc_aq1_reaction_hostile_burst");
     return;
   }
 }
@@ -531,17 +531,17 @@ function vo_bar_street_civilians() {
   level endon("missionfailed");
   scripts\engine\utility::flag_wait("flag_enforcer_run_into_alley");
   wait randomfloatrange(0.5, 1.5);
-  var0 = scripts\engine\sp\utility::get_living_ai_array("streetciv_male", "script_noteworthy");
+  var_0 = scripts\engine\sp\utility::get_living_ai_array("streetciv_male", "script_noteworthy");
 
-  if(var0.size > 0) {
-    var0[0] thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_civilian("<Russian> Run! He's got a gun!", "dx_vom_rcm1_bar_street_alley_31");
+  if(var_0.size > 0) {
+    var_0[0] thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_civilian("<Russian> Run! He's got a gun!", "dx_vom_rcm1_bar_street_alley_31");
   }
 
   wait randomfloatrange(1, 2);
-  var0 = scripts\engine\utility::array_removedead_or_dying(var0);
+  var_0 = scripts\engine\utility::array_removedead_or_dying(var_0);
 
-  if(var0.size > 0 && scripts\engine\utility::cointoss()) {
-    var0[0] thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_civilian("<Russian> Out of the way!", "dx_vom_rcm2_bar_street_alley_32");
+  if(var_0.size > 0 && scripts\engine\utility::cointoss()) {
+    var_0[0] thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_civilian("<Russian> Out of the way!", "dx_vom_rcm2_bar_street_alley_32");
     return;
   }
 }
@@ -549,11 +549,11 @@ function vo_bar_street_civilians() {
 function vo_bar_street_enforcer_flee() {
   scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher("Stop them, brothers! STOP THEM!!", "dx_vom_bch_bar_street_alley_70");
   wait 1;
-  var0 = scripts\engine\sp\utility::get_living_ai_array("bar_street_aq", "targetname");
+  var_0 = scripts\engine\sp\utility::get_living_ai_array("bar_street_aq", "targetname");
 
-  if(var0.size > 0) {
-    var0[0] scripts\engine\sp\utility::set_battlechatter(1);
-    var0[0] scripts\engine\sp\utility::smart_dialogue_generic("dx_cbc_aq4_order_suppress");
+  if(var_0.size > 0) {
+    var_0[0] scripts\engine\sp\utility::set_battlechatter(1);
+    var_0[0] scripts\engine\sp\utility::smart_dialogue_generic("dx_cbc_aq4_order_suppress");
     return;
   }
 }
@@ -632,9 +632,9 @@ function vo_apartment_civ_shocked() {
   self endon("entitydeleted");
 
   for(;;) {
-    var0 = scripts\engine\sp\utility::players_within_distance(256, self.origin);
+    var_0 = scripts\engine\sp\utility::players_within_distance(256, self.origin);
 
-    if(var0 == 1) {
+    if(var_0 == 1) {
       scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_civilian("<Russian> Don't shoot!", "dx_vom_rcm2_apartment_hunt_10");
       return;
     }
@@ -682,11 +682,11 @@ function vo_canal_aq_inbound() {
   level endon("missionfailed");
   scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_price("Contact, vehicle, up ahead!", "dx_vom_pri_canal_chase_100");
   wait 1;
-  var0 = scripts\engine\sp\utility::get_living_ai_array("canal_aq", "script_noteworthy");
+  var_0 = scripts\engine\sp\utility::get_living_ai_array("canal_aq", "script_noteworthy");
 
-  if(var0.size > 0) {
-    var0[0] scripts\engine\sp\utility::set_battlechatter(1);
-    var0[0] scripts\engine\sp\utility::smart_dialogue_generic("dx_cbc_aq2_reaction_hostile_burst");
+  if(var_0.size > 0) {
+    var_0[0] scripts\engine\sp\utility::set_battlechatter(1);
+    var_0[0] scripts\engine\sp\utility::smart_dialogue_generic("dx_cbc_aq2_reaction_hostile_burst");
     return;
   }
 }
@@ -720,7 +720,7 @@ function vo_canal_price_rpg_nag() {
   level endon("missionfailed");
   level endon("flag_canal_end");
   level endon("flag_canal_rpg_dead");
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, "dx_vom_pri_canal_chase_102");
 }
 
@@ -728,13 +728,13 @@ function vo_canal_price_into_alley() {
   level.enforcer endon("death");
   level.player endon("death");
   level endon("missionfailed");
-  var0 = scripts\engine\utility::flag_wait_any_return("flag_canal_end", "flag_canal_rpg_dead");
+  var_0 = scripts\engine\utility::flag_wait_any_return("flag_canal_end", "flag_canal_rpg_dead");
 
-  if(var0 == "flag_canal_rpg_dead") {
+  if(var_0 == "flag_canal_rpg_dead") {
     scripts\engine\utility::flag_wait("flag_canal_player_done_speaking");
-    var1 = scripts\engine\utility::flag_wait_any_return("flag_canal_end", "flag_canal_enemies_dead");
+    var_1 = scripts\engine\utility::flag_wait_any_return("flag_canal_end", "flag_canal_enemies_dead");
 
-    if(var1 == "flag_canal_enemies_dead") {
+    if(var_1 == "flag_canal_enemies_dead") {
       wait 1;
       scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_price("Clear... Butcher\x92s runnin\x92 for it! Get him!", "dx_vom_pri_canal_chase_90");
       return;
@@ -748,10 +748,10 @@ function vo_canal_price_into_alley() {
 }
 
 function vo_canal_civilian_driveby_warning() {
-  var0 = scripts\sp\maps\stpetersburg\stpetersburg_utility::get_closest_living_ai(level.player.origin, "neutral");
+  var_0 = scripts\sp\maps\stpetersburg\stpetersburg_utility::get_closest_living_ai(level.player.origin, "neutral");
 
-  if(isDefined(var0) && scripts\engine\utility::cointoss()) {
-    var0 scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_civilian("<Russian> Watch out!", "dx_vom_rcm1_apartment_chase_00");
+  if(isDefined(var_0) && scripts\engine\utility::cointoss()) {
+    var_0 scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_civilian("<Russian> Watch out!", "dx_vom_rcm1_apartment_chase_00");
     return;
   }
 }
@@ -772,11 +772,11 @@ function vo_acquire_price_beyond_the_fence() {
   wait 1;
   scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_price("There! Just beyond the fence!", "dx_vom_pri_canal_chase_111");
   wait 1;
-  var0 = scripts\engine\sp\utility::get_living_ai("acquire_alley_ar", "targetname");
+  var_0 = scripts\engine\sp\utility::get_living_ai("acquire_alley_ar", "targetname");
 
-  if(isDefined(var0)) {
-    var0 scripts\engine\sp\utility::set_battlechatter(1);
-    var0 scripts\engine\sp\utility::smart_dialogue_generic("dx_cbc_aq3_reaction_hostile_burst");
+  if(isDefined(var_0)) {
+    var_0 scripts\engine\sp\utility::set_battlechatter(1);
+    var_0 scripts\engine\sp\utility::smart_dialogue_generic("dx_cbc_aq3_reaction_hostile_burst");
     return;
   }
 }
@@ -817,16 +817,16 @@ function vo_evade_aq_runby() {
 function vo_evade_aq_runby_taunt() {
   level.player endon("death");
   level endon("missionfailed");
-  var0 = scripts\engine\sp\utility::get_living_ai_array("evade_police", "script_noteworthy");
+  var_0 = scripts\engine\sp\utility::get_living_ai_array("evade_police", "script_noteworthy");
 
-  if(var0.size > 0) {
-    var0[0] scripts\engine\sp\utility::set_battlechatter(1);
-    var0[0] scripts\engine\sp\utility::smart_dialogue_generic("dx_cbc_aq4_exposed_acquired");
+  if(var_0.size > 0) {
+    var_0[0] scripts\engine\sp\utility::set_battlechatter(1);
+    var_0[0] scripts\engine\sp\utility::smart_dialogue_generic("dx_cbc_aq4_exposed_acquired");
   }
 
-  if(isDefined(var0[1])) {
-    var0[1] scripts\engine\sp\utility::set_battlechatter(1);
-    var0[1] scripts\engine\sp\utility::smart_dialogue_generic("dx_cbc_aq4_response_threat_affirm");
+  if(isDefined(var_0[1])) {
+    var_0[1] scripts\engine\sp\utility::set_battlechatter(1);
+    var_0[1] scripts\engine\sp\utility::smart_dialogue_generic("dx_cbc_aq4_response_threat_affirm");
     return;
   }
 }
@@ -845,18 +845,18 @@ function vo_evade_police_deploy_flashbangs() {
 function vo_evade_aq_molotov_taunt() {
   level.player endon("death");
   level endon("missionfailed");
-  var0 = scripts\engine\sp\utility::get_living_ai_array("evade_police", "script_noteworthy");
+  var_0 = scripts\engine\sp\utility::get_living_ai_array("evade_police", "script_noteworthy");
 
-  if(var0.size > 0) {
-    var0[0] scripts\engine\sp\utility::set_battlechatter(1);
-    var0[0] scripts\engine\sp\utility::smart_dialogue_generic("dx_cbc_aq4_inform_molotov");
+  if(var_0.size > 0) {
+    var_0[0] scripts\engine\sp\utility::set_battlechatter(1);
+    var_0[0] scripts\engine\sp\utility::smart_dialogue_generic("dx_cbc_aq4_inform_molotov");
   }
 
   wait 1;
 
-  if(isDefined(var0[1])) {
-    var0[1] scripts\engine\sp\utility::set_battlechatter(1);
-    var0[1] scripts\engine\sp\utility::smart_dialogue_generic("dx_cbc_aq4_order_move_combat");
+  if(isDefined(var_0[1])) {
+    var_0[1] scripts\engine\sp\utility::set_battlechatter(1);
+    var_0[1] scripts\engine\sp\utility::smart_dialogue_generic("dx_cbc_aq4_order_move_combat");
     return;
   }
 }
@@ -911,7 +911,7 @@ function vo_gauntlet_price_get_in_van() {
 
   scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_price("Get in, Sergeant!", "dx_vom_pri_acquire_street_80");
   wait 4;
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, "dx_vom_pri_acquire_street_90");
 }
 
@@ -980,43 +980,43 @@ function vo_gauntlet_van_damage_warning() {
 
   if(level.van_damage_nag.size > 0 && !scripts\engine\utility::flag("flag_gauntlet_van_damage_warning_playing")) {
     scripts\engine\utility::flag_set("flag_gauntlet_van_damage_warning_playing");
-    var0 = randomint(level.van_damage_nag.size - 1);
-    var1 = level.van_damage_nag[var0];
+    var_0 = randomint(level.van_damage_nag.size - 1);
+    var_1 = level.van_damage_nag[var_0];
 
-    if(var1[0] == "Price") {
-      scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_price(var1[1], var1[2]);
+    if(var_1[0] == "Price") {
+      scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_price(var_1[1], var_1[2]);
     } else {
-      scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_nikolai(var1[1], var1[2]);
+      scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_nikolai(var_1[1], var_1[2]);
     }
 
-    level.van_damage_nag = scripts\engine\utility::array_remove_index(level.van_damage_nag, var0);
+    level.van_damage_nag = scripts\engine\utility::array_remove_index(level.van_damage_nag, var_0);
     scripts\engine\utility::flag_clear("flag_gauntlet_van_damage_warning_playing");
     return;
   }
 }
 
 function vo_pursuit_target_escaping_nag() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, "dx_vom_pri_canal_chase_41");
 }
 
 function vo_pursuit_target_escaped_fail() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, "dx_vom_pri_canal_fail_10");
 }
 
 function vo_pursuit_target_hurt_nag() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, "dx_vom_pri_bar_street_chase_90");
 }
 
 function vo_pursuit_target_killed_fail() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, "dx_vom_pri_bar_street_chase_110");
 }
 
 function vo_player_wander_nag() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, "dx_vom_pri_bar_street_chase_130");
 }
 
@@ -1037,12 +1037,12 @@ function vo_price_kyle_content_warning() {
 function vo_price_content_warning_nags() {
   level.player endon("death");
   level endon("warning_nags_end");
-  var0 = ["content_warning_nag_1", "content_warning_nag_2", "content_warning_nag_3"];
+  var_0 = ["content_warning_nag_1", "content_warning_nag_2", "content_warning_nag_3"];
   wait 8;
 
-  while(var0.size > 0) {
-    level.priceanimnode scripts\common\anim::anim_single_solo(level.price, var0[0]);
-    var0 = scripts\engine\utility::array_remove_index(var0, 0);
+  while(var_0.size > 0) {
+    level.priceanimnode scripts\common\anim::anim_single_solo(level.price, var_0[0]);
+    var_0 = scripts\engine\utility::array_remove_index(var_0, 0);
     level.priceanimnode notify("stop_loop");
     level.priceanimnode thread scripts\common\anim::anim_loop_solo(level.price, "content_warning_idle");
     wait randomfloatrange(5.5, 7.5);
@@ -1071,10 +1071,10 @@ function vo_interrogation_nikolai_intro() {
 
 function vo_interrogation_door_intro_linger() {
   wait 11;
-  var0 = 250;
-  var1 = distance2d(level.player.origin, level.enforcer.origin);
+  var_0 = 250;
+  var_1 = distance2d(level.player.origin, level.enforcer.origin);
 
-  if(var1 <= var0) {
+  if(var_1 <= var_0) {
     scripts\engine\utility::delaythread(0.75, &scripts\engine\utility::play_sound_in_space, "melee_thru_door", level.enforcer.origin);
     scripts\engine\utility::delaythread(1.75, &scripts\engine\utility::play_sound_in_space, "melee_thru_door", level.enforcer.origin);
     scripts\engine\utility::delaythread(2.75, &scripts\engine\utility::play_sound_in_space, "melee_thru_door", level.enforcer.origin);
@@ -1083,9 +1083,9 @@ function vo_interrogation_door_intro_linger() {
   }
 
   wait 3.5;
-  var1 = distance2d(level.player.origin, level.enforcer.origin);
+  var_1 = distance2d(level.player.origin, level.enforcer.origin);
 
-  if(var1 <= var0) {
+  if(var_1 <= var_0) {
     scripts\engine\utility::delaythread(0.99, &scripts\engine\utility::play_sound_in_space, "melee_thru_door", level.enforcer.origin);
     scripts\engine\utility::delaythread(2, &scripts\engine\utility::play_sound_in_space, "melee_thru_door", level.enforcer.origin);
     thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_yegor("<punches/strikes>", "dx_vom_ygr_interrogation_intro_intro_30");
@@ -1198,11 +1198,11 @@ function vo_interrogation_room_enter() {
   thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher_wife("They won't let us go, what have you done...?!", "dx_vom_ousa_interrogation_room_interrogate_100");
 }
 
-function vo_interrogation_family_idle_loop(var0) {
-  var1 = scripts\engine\utility::ter_op(scripts\engine\utility::flag("final_phase"), "dx_stpburg_wifechild_idlehigh_loop", "dx_stpburg_wifechild_idle_loop");
+function vo_interrogation_family_idle_loop(var_0) {
+  var_1 = scripts\engine\utility::ter_op(scripts\engine\utility::flag("final_phase"), "dx_stpburg_wifechild_idlehigh_loop", "dx_stpburg_wifechild_idle_loop");
 
-  if(istrue(var0) || !scripts\engine\utility::flag("pause_family_vo") && !scripts\engine\utility::flag("interrogation_abandoned")) {
-    level.enforcerwife playLoopSound(var1);
+  if(istrue(var_0) || !scripts\engine\utility::flag("pause_family_vo") && !scripts\engine\utility::flag("interrogation_abandoned")) {
+    level.enforcerwife playLoopSound(var_1);
     return;
   }
 }
@@ -1232,11 +1232,11 @@ function vo_interrogation_family_aim() {
   level.player endon("weapon_fired");
   level endon("revolver_phase_family_ads");
   level endon("interrogation_abandoned");
-  var0 = 1.5;
-  level.enforcerwife scripts\engine\utility::delaythread(var0, &scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop_and_clear_stack);
-  level.enforcerson scripts\engine\utility::delaythread(var0, &scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop_and_clear_stack);
-  scripts\engine\utility::delaythread(var0 + 0.05, &scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher_wife, "<frightened breaths/murmurs>", "dx_vom_ousa_interrogation_revolver_aim_90");
-  scripts\engine\utility::delaythread(var0 + 0.05, &scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher_son, "<frightened breaths/murmurs>", "dx_vom_amon_interrogation_revolver_aim_100");
+  var_0 = 1.5;
+  level.enforcerwife scripts\engine\utility::delaythread(var_0, &scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop_and_clear_stack);
+  level.enforcerson scripts\engine\utility::delaythread(var_0, &scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop_and_clear_stack);
+  scripts\engine\utility::delaythread(var_0 + 0.05, &scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher_wife, "<frightened breaths/murmurs>", "dx_vom_ousa_interrogation_revolver_aim_90");
+  scripts\engine\utility::delaythread(var_0 + 0.05, &scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher_son, "<frightened breaths/murmurs>", "dx_vom_amon_interrogation_revolver_aim_100");
   level.enforcer scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop_and_clear_stack();
   waitframe();
   scripts\engine\utility::flag_set("pause_butcher_vo");
@@ -1259,11 +1259,11 @@ function vo_interrogation_family_ads() {
   level.player endon("dry_fired");
   level.player endon("weapon_fired");
   level endon("interrogation_abandoned");
-  var0 = 3;
-  level.enforcerwife scripts\engine\utility::delaythread(var0, &scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop_and_clear_stack);
-  level.enforcerson scripts\engine\utility::delaythread(var0, &scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop_and_clear_stack);
-  scripts\engine\utility::delaythread(var0 + 0.05, &scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher_wife, "<frightened breaths/murmurs>", "dx_vom_ousa_interrogation_revolver_aim_90");
-  scripts\engine\utility::delaythread(var0 + 0.05, &scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher_son, "<frightened breaths/murmurs>", "dx_vom_amon_interrogation_room_interrogate_110");
+  var_0 = 3;
+  level.enforcerwife scripts\engine\utility::delaythread(var_0, &scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop_and_clear_stack);
+  level.enforcerson scripts\engine\utility::delaythread(var_0, &scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop_and_clear_stack);
+  scripts\engine\utility::delaythread(var_0 + 0.05, &scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher_wife, "<frightened breaths/murmurs>", "dx_vom_ousa_interrogation_revolver_aim_90");
+  scripts\engine\utility::delaythread(var_0 + 0.05, &scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher_son, "<frightened breaths/murmurs>", "dx_vom_amon_interrogation_room_interrogate_110");
   level.enforcer scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop_and_clear_stack();
   waitframe();
   scripts\engine\utility::flag_set("pause_butcher_vo");
@@ -1353,8 +1353,8 @@ function mus_kyle_leave() {
 }
 
 function vo_interrogation_price_ads() {
-  var0 = [["Watch yourself there, Sergeant.", "dx_vom_pri_interrogation_revolver_ads_price_10"], ["Let's not fuck about now, Sergeant.", "dx_vom_pri_interrogation_revolver_ads_price_20"], ["Keep your head there, Sergeant.", "dx_vom_pri_interrogation_revolver_ads_price_30"]];
-  return var0;
+  var_0 = [["Watch yourself there, Sergeant.", "dx_vom_pri_interrogation_revolver_ads_price_10"], ["Let's not fuck about now, Sergeant.", "dx_vom_pri_interrogation_revolver_ads_price_20"], ["Keep your head there, Sergeant.", "dx_vom_pri_interrogation_revolver_ads_price_30"]];
+  return var_0;
 }
 
 function vo_interrogation_dry_fire() {
@@ -1397,12 +1397,12 @@ function vo_interrogation_exit_nags() {
   level.outeranimnode thread scripts\common\anim::anim_loop_solo(level.price, "car_idle");
 }
 
-function vo_interrogation_exit_player(var0) {
+function vo_interrogation_exit_player(var_0) {
   level endon("interrogation_end");
   thread vo_interrogation_exit_killed_butcher();
   scripts\engine\utility::flag_wait("police_car_nag_spoken");
-  var1 = scripts\engine\utility::ter_op(istrue(var0), "dx_vom_kyle_evade_capture_190", "dx_vom_kyle_evade_capture_200");
-  scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_kyle("Rog.", var1);
+  var_1 = scripts\engine\utility::ter_op(istrue(var_0), "dx_vom_kyle_evade_capture_190", "dx_vom_kyle_evade_capture_200");
+  scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_kyle("Rog.", var_1);
 }
 
 function vo_interrogation_exit_killed_butcher() {
@@ -1506,7 +1506,7 @@ function vo_interrogation_linger_idle() {
   level endon("demeanor_monitor_end");
   level endon("interrogation_end");
   jumpiffalse(scripts\engine\utility::flag("enforcer_dead")) LOC_00000025;
-  var0 = 5;
+  var_0 = 5;
   goto LOC_00000051;
 }
 
@@ -1553,42 +1553,42 @@ function vo_interrogation_lines_setup() {
   level.voicelines["ads_defeated"][0] = ["Do what you want.", "I have nothing more to say.", "..."];
 }
 
-function play_line_and_rotate(var0, var1) {
-  if(level.alivestates[var1]) {
-    switch (var1) {
+function play_line_and_rotate(var_0, var_1) {
+  if(level.alivestates[var_1]) {
+    switch (var_1) {
       case 0:
-        thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher(level.voicelines[var0][var1][0]);
+        thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher(level.voicelines[var_0][var_1][0]);
         break;
       case 1:
-        thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher_wife(level.voicelines[var0][var1][0]);
+        thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher_wife(level.voicelines[var_0][var_1][0]);
         break;
       case 2:
-        thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher_son(level.voicelines[var0][var1][0]);
+        thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher_son(level.voicelines[var_0][var_1][0]);
         break;
     }
 
-    level.voicelines[var0][var1] = scripts\sp\maps\stpetersburg\stpetersburg_utility::array_rotate(level.voicelines[var0][var1]);
+    level.voicelines[var_0][var_1] = scripts\sp\maps\stpetersburg\stpetersburg_utility::array_rotate(level.voicelines[var_0][var_1]);
     return 1;
   }
 
   return 0;
 }
 
-function play_line_no_rotate(var0, var1) {
-  if(level.alivestates[var1] && level.voicelines[var0][var1].size > 0) {
-    switch (var1) {
+function play_line_no_rotate(var_0, var_1) {
+  if(level.alivestates[var_1] && level.voicelines[var_0][var_1].size > 0) {
+    switch (var_1) {
       case 0:
-        thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher(level.voicelines[var0][var1][0]);
+        thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher(level.voicelines[var_0][var_1][0]);
         break;
       case 1:
-        thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher_wife(level.voicelines[var0][var1][0]);
+        thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher_wife(level.voicelines[var_0][var_1][0]);
         break;
       case 2:
-        thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher_son(level.voicelines[var0][var1][0]);
+        thread scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher_son(level.voicelines[var_0][var_1][0]);
         break;
     }
 
-    level.voicelines[var0][var1] = scripts\engine\utility::array_remove_index(level.voicelines[var0][var1], 0);
+    level.voicelines[var_0][var_1] = scripts\engine\utility::array_remove_index(level.voicelines[var_0][var_1], 0);
     return 1;
   }
 
@@ -1647,16 +1647,16 @@ function vo_interrogation_enforcer_shot() {
   level notify("butcher_shot_vo");
   level endon("butcher_shot_vo");
   level endon("enforcer_dead");
-  var0 = ["dx_vom_enf_interrogation_revolver_linger_kill_20", "dx_vom_enf_interrogation_revolver_linger_kill_21", "dx_vom_enf_interrogation_revolver_linger_kill_22", "dx_vom_enf_interrogation_revolver_linger_kill_23", "dx_vom_enf_interrogation_revolver_linger_kill_24", "dx_vom_enf_interrogation_revolver_linger_kill_25"];
-  var1 = ["dx_vom_enf_interrogation_revolver_linger_kill_30", "dx_vom_enf_interrogation_revolver_linger_kill_31", "dx_vom_enf_interrogation_revolver_linger_kill_32", "dx_vom_enf_interrogation_revolver_linger_kill_33", "dx_vom_enf_interrogation_revolver_linger_kill_34", "dx_vom_enf_interrogation_revolver_linger_kill_35"];
+  var_0 = ["dx_vom_enf_interrogation_revolver_linger_kill_20", "dx_vom_enf_interrogation_revolver_linger_kill_21", "dx_vom_enf_interrogation_revolver_linger_kill_22", "dx_vom_enf_interrogation_revolver_linger_kill_23", "dx_vom_enf_interrogation_revolver_linger_kill_24", "dx_vom_enf_interrogation_revolver_linger_kill_25"];
+  var_1 = ["dx_vom_enf_interrogation_revolver_linger_kill_30", "dx_vom_enf_interrogation_revolver_linger_kill_31", "dx_vom_enf_interrogation_revolver_linger_kill_32", "dx_vom_enf_interrogation_revolver_linger_kill_33", "dx_vom_enf_interrogation_revolver_linger_kill_34", "dx_vom_enf_interrogation_revolver_linger_kill_35"];
   level.enforcer scripts\sp\maps\stpetersburg\stpetersburg_utility::dialogue_stop_and_clear_stack();
   wait 0.1;
-  var2 = randomint(6);
-  scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher(undefined, var0[var2], undefined, undefined, undefined, undefined, 1);
-  var0 = scripts\engine\utility::array_remove_index(var0, var2);
+  var_2 = randomint(6);
+  scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher(undefined, var_0[var_2], undefined, undefined, undefined, undefined, 1);
+  var_0 = scripts\engine\utility::array_remove_index(var_0, var_2);
   wait 0.5;
-  scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher(undefined, var1[var2], undefined, undefined, undefined, undefined, 1);
-  var1 = scripts\engine\utility::array_remove_index(var1, var2);
+  scripts\sp\maps\stpetersburg\stpetersburg_utility::add_dialogue_line_butcher(undefined, var_1[var_2], undefined, undefined, undefined, undefined, 1);
+  var_1 = scripts\engine\utility::array_remove_index(var_1, var_2);
 }
 
 function vo_interrogation_family_scream() {

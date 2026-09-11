@@ -34,24 +34,24 @@ function main() {
 }
 
 function player_fired_gun_monitor() {
-  var0 = getEnt("clip256x256x256", "targetname");
-  var1 = spawn("script_model", (-552, 3480, 296));
-  var1.angles = (0, 29.9999, 0);
-  var1 clonebrushmodeltoscriptmodel(var0);
-  var2 = getEnt("clip128x128x128", "targetname");
-  var3 = spawn("script_model", (984, 3872, 312));
-  var3.angles = (0, 0, 0);
-  var3 clonebrushmodeltoscriptmodel(var2);
-  var4 = getEnt("clip256x256x256", "targetname");
-  var5 = spawn("script_model", (1176, 3768, 224));
-  var5.angles = (0, 0, 0);
-  var5 clonebrushmodeltoscriptmodel(var4);
-  var6 = getEnt("clip256x256x256", "targetname");
-  var7 = spawn("script_model", (1176, 3848, 184));
-  var7.angles = (0, 0, 0);
-  var7 clonebrushmodeltoscriptmodel(var6);
-  var8 = getEnt("player512x512x8", "targetname");
-  var9 = spawn("script_model", (1328, -1568, 888));
-  var9.angles = (270, 222.604, -177.604);
-  var9 clonebrushmodeltoscriptmodel(var8);
+  var_0 = getEnt("clip256x256x256", "targetname");
+  var_1 = spawn("script_model", (-552, 3480, 296));
+  var_1.angles = (0, 29.9999, 0);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = getEnt("clip128x128x128", "targetname");
+  var_3 = spawn("script_model", (984, 3872, 312));
+  var_3.angles = (0, 0, 0);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
+  var_4 = getEnt("clip256x256x256", "targetname");
+  var_5 = spawn("script_model", (1176, 3768, 224));
+  var_5.angles = (0, 0, 0);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_6 = getEnt("clip256x256x256", "targetname");
+  var_7 = spawn("script_model", (1176, 3848, 184));
+  var_7.angles = (0, 0, 0);
+  var_7 clonebrushmodeltoscriptmodel(var_6);
+  var_8 = getEnt("player512x512x8", "targetname");
+  var_9 = spawn("script_model", (1328, -1568, 888));
+  var_9.angles = (270, 222.604, -177.604);
+  var_9 clonebrushmodeltoscriptmodel(var_8);
 }

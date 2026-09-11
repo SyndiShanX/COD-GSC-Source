@@ -11,16 +11,16 @@ function getactiveequipmentarray() {
   return scripts\engine\utility::array_remove_duplicates(level.mines);
 }
 
-function special_weapon_logic(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11) {
-  var12 = var5.basename;
+function special_weapon_logic(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  var_12 = var_5.basename;
 
-  if(!isDefined(var12)) {
+  if(!isDefined(var_12)) {
     return;
   }
 
-  if(self.health - var2 < 1) {
+  if(self.health - var_2 < 1) {
     if(isDefined(level.lethaldamage_func)) {
-      [[level.lethaldamage_func]](var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11);
+      [[level.lethaldamage_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
       return;
     }
 
@@ -28,24 +28,24 @@ function special_weapon_logic(var0, var1, var2, var3, var4, var5, var6, var7, va
   }
 }
 
-function kill_me_after_timeout(var0, var1) {
-  if(isDefined(var1)) {
-    self endon(var1);
+function kill_me_after_timeout(var_0, var_1) {
+  if(isDefined(var_1)) {
+    self endon(var_1);
   }
 
-  wait var0;
+  wait var_0;
   self suicide();
 }
 
-function should_take_players_current_weapon(var0) {
-  var1 = 3;
+function should_take_players_current_weapon(var_0) {
+  var_1 = 3;
 
-  if(var0 scripts\cp\utility::has_zombie_perk("perk_machine_more")) {
-    var1 = 4;
+  if(var_0 scripts\cp\utility::has_zombie_perk("perk_machine_more")) {
+    var_1 = 4;
   }
 
-  var2 = var0 getweaponslist("primary");
-  return var2.size >= var1;
+  var_2 = var_0 getweaponslist("primary");
+  return var_2.size >= var_1;
 }
 
 function showonscreenbloodeffects() {
@@ -63,61 +63,61 @@ function weapon_watch_hint() {
   self.axe_hint_display = 0;
   self.nx1_hint_display = 0;
   self.forgefreeze_hint_display = 0;
-  var0 = self getcurrentprimaryweapon();
-  var1 = var0 getbaseweapon();
-  var2 = self getcurrentweapon();
-  var3 = undefined;
+  var_0 = self getcurrentprimaryweapon();
+  var_1 = var_0 getbaseweapon();
+  var_2 = self getcurrentweapon();
+  var_3 = undefined;
 
   for(;;) {
-    if(isDefined(var1) && var1.basename == "iw7_axe_zm" && self.axe_hint_display < 3) {
+    if(isDefined(var_1) && var_1.basename == "iw7_axe_zm" && self.axe_hint_display < 3) {
       scripts\cp\utility::setlowermessage("msg_axe_hint", &"CP_ZOMBIE/AXE_HINT", 4);
       self.axe_hint_display += 1;
-    } else if(isDefined(var1) && var1.basename == "iw7_forgefreeze_zm" && self.forgefreeze_hint_display < 5) {
+    } else if(isDefined(var_1) && var_1.basename == "iw7_forgefreeze_zm" && self.forgefreeze_hint_display < 5) {
       scripts\cp\utility::setlowermessage("msg_axe_hint", &"CP_ZOMBIE/FORGEFREEZE_HINT", 4);
       self.forgefreeze_hint_display += 1;
     }
 
-    updatecamoscripts(var2, var3);
-    var3 = var2;
+    updatecamoscripts(var_2, var_3);
+    var_3 = var_2;
     self waittill("weapon_change");
     wait 0.5;
-    var0 = self getcurrentprimaryweapon();
-    var1 = var0 getbaseweapon();
-    var2 = self getcurrentweapon();
+    var_0 = self getcurrentprimaryweapon();
+    var_1 = var_0 getbaseweapon();
+    var_2 = self getcurrentweapon();
   }
 }
 
-function updatecamoscripts(var0, var1) {
-  if(isDefined(var0)) {
-    var2 = getweaponcamoname(var0);
+function updatecamoscripts(var_0, var_1) {
+  if(isDefined(var_0)) {
+    var_2 = getweaponcamoname(var_0);
   } else {
-    var2 = undefined;
+    var_2 = undefined;
   }
 
-  if(isDefined(var2)) {
-    var3 = getweaponcamoname(var2);
+  if(isDefined(var_2)) {
+    var_3 = getweaponcamoname(var_2);
   } else {
-    var3 = undefined;
+    var_3 = undefined;
   }
 
-  if(!isDefined(var3)) {
-    var3 = "none";
+  if(!isDefined(var_3)) {
+    var_3 = "none";
   }
 
-  if(!isDefined(var3)) {
-    var3 = "none";
+  if(!isDefined(var_3)) {
+    var_3 = "none";
   }
 
-  clearcamoscripts(var2, var3);
-  runcamoscripts(var2, var3);
+  clearcamoscripts(var_2, var_3);
+  runcamoscripts(var_2, var_3);
 }
 
-function runcamoscripts(var0, var1) {
-  if(!isDefined(var1)) {
+function runcamoscripts(var_0, var_1) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  switch (var1) {
+  switch (var_1) {
     case "camo211":
       self setscriptablepartstate("camo_211", "reset");
       break;
@@ -139,12 +139,12 @@ function runcamoscripts(var0, var1) {
   }
 }
 
-function clearcamoscripts(var0, var1) {
-  if(!isDefined(var1)) {
+function clearcamoscripts(var_0, var_1) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  switch (var1) {
+  switch (var_1) {
     case "camo204":
       self setscriptablepartstate("camo_204", "neutral");
       break;
@@ -169,18 +169,18 @@ function blood_camo_84() {
     self.bloodcamokillcount = 0;
   }
 
-  for(var0 = 1;; var0++) {
+  for(var_0 = 1;; var_0++) {
     self waittill("zombie_killed");
     self.bloodcamokillcount += 1;
 
-    if(self.bloodcamokillcount / 5 == var0) {
-      var1 = int(self.bloodcamokillcount / 5);
+    if(self.bloodcamokillcount / 5 == var_0) {
+      var_1 = int(self.bloodcamokillcount / 5);
 
-      if(var1 > 14) {
+      if(var_1 > 14) {
         break;
       }
 
-      self setscriptablepartstate("camo_84", var1 + "_kills");
+      self setscriptablepartstate("camo_84", var_1 + "_kills");
     }
   }
 }
@@ -192,18 +192,18 @@ function blood_camo_222() {
   self.katanacamokillcount = 0;
   self setscriptablepartstate("camo_222", "null_state");
 
-  for(var0 = 1;; var0++) {
+  for(var_0 = 1;; var_0++) {
     self waittill("zombie_killed");
     self.katanacamokillcount += 1;
 
-    if(self.katanacamokillcount / 5 == var0) {
-      var1 = int(self.katanacamokillcount / 5);
+    if(self.katanacamokillcount / 5 == var_0) {
+      var_1 = int(self.katanacamokillcount / 5);
 
-      if(var1 > 10) {
+      if(var_1 > 10) {
         break;
       }
 
-      self setscriptablepartstate("camo_222", var1 + "_kills");
+      self setscriptablepartstate("camo_222", var_1 + "_kills");
     }
   }
 }
@@ -214,46 +214,46 @@ function axe_damage_cone() {
   self endon("death");
 
   for(;;) {
-    self waittill("axe_melee_hit", var0, var1, var2);
-    var3 = var0.basename;
-    var4 = scripts\cp\cp_weapon::get_weapon_level(var3);
-    var5 = get_melee_weapon_fov(var3, var4);
-    var6 = get_melee_weapon_hit_distance(var3, var4);
-    var7 = get_melee_weapon_max_enemies(var3, var4);
-    var8 = checkenemiesinfov(var5, var6, var7);
+    self waittill("axe_melee_hit", var_0, var_1, var_2);
+    var_3 = var_0.basename;
+    var_4 = scripts\cp\cp_weapon::get_weapon_level(var_3);
+    var_5 = get_melee_weapon_fov(var_3, var_4);
+    var_6 = get_melee_weapon_hit_distance(var_3, var_4);
+    var_7 = get_melee_weapon_max_enemies(var_3, var_4);
+    var_8 = checkenemiesinfov(var_5, var_6, var_7);
 
-    foreach(var10 in var8) {
-      if(var10 == var1) {
+    foreach(var_10 in var_8) {
+      if(var_10 == var_1) {
         continue;
       }
 
-      thread axe_damage(var10, var10, self, var2, var10.origin, self.origin, var0);
+      thread axe_damage(var_10, var_10, self, var_2, var_10.origin, self.origin, var_0);
     }
   }
 }
 
-function setaxeidlescriptablestate(var0) {
-  var0 setscriptablepartstate("axe - idle", "neutral");
+function setaxeidlescriptablestate(var_0) {
+  var_0 setscriptablepartstate("axe - idle", "neutral");
   wait 0.5;
-  var0 setscriptablepartstate("axe - idle", "level 1");
+  var_0 setscriptablepartstate("axe - idle", "level 1");
 }
 
-function setaxescriptablestate(var0) {
-  var0 notify("setaxeblooddrip");
-  var0 endon("setaxeblooddrip");
-  var0 setscriptablepartstate("axe", "neutral");
+function setaxescriptablestate(var_0) {
+  var_0 notify("setaxeblooddrip");
+  var_0 endon("setaxeblooddrip");
+  var_0 setscriptablepartstate("axe", "neutral");
   wait 0.5;
-  var0 setscriptablepartstate("axe", "blood on");
+  var_0 setscriptablepartstate("axe", "blood on");
   wait 5;
-  var0 setscriptablepartstate("axe", "neutral");
+  var_0 setscriptablepartstate("axe", "neutral");
 }
 
-function get_melee_weapon_fov(var0, var1) {
-  if(!isDefined(var0) && !isDefined(var1)) {
+function get_melee_weapon_fov(var_0, var_1) {
+  if(!isDefined(var_0) && !isDefined(var_1)) {
     return 45;
   }
 
-  switch (var1) {
+  switch (var_1) {
     case 2:
       return 52;
     case 3:
@@ -263,12 +263,12 @@ function get_melee_weapon_fov(var0, var1) {
   }
 }
 
-function get_melee_weapon_hit_distance(var0, var1) {
-  if(!isDefined(var0) && !isDefined(var1)) {
+function get_melee_weapon_hit_distance(var_0, var_1) {
+  if(!isDefined(var_0) && !isDefined(var_1)) {
     return 125;
   }
 
-  switch (var1) {
+  switch (var_1) {
     case 2:
       return 150;
     case 3:
@@ -278,12 +278,12 @@ function get_melee_weapon_hit_distance(var0, var1) {
   }
 }
 
-function get_melee_weapon_max_enemies(var0, var1) {
-  if(!isDefined(var0) && !isDefined(var1)) {
+function get_melee_weapon_max_enemies(var_0, var_1) {
+  if(!isDefined(var_0) && !isDefined(var_1)) {
     return 1;
   }
 
-  switch (var1) {
+  switch (var_1) {
     case 2:
       return 8;
     case 3:
@@ -293,12 +293,12 @@ function get_melee_weapon_max_enemies(var0, var1) {
   }
 }
 
-function get_melee_weapon_melee_damage(var0, var1) {
-  if(!isDefined(var0) && !isDefined(var1)) {
+function get_melee_weapon_melee_damage(var_0, var_1) {
+  if(!isDefined(var_0) && !isDefined(var_1)) {
     return 1100;
   }
 
-  switch (var1) {
+  switch (var_1) {
     case 2:
       return 1500;
     case 3:
@@ -308,116 +308,116 @@ function get_melee_weapon_melee_damage(var0, var1) {
   }
 }
 
-function checkenemiesinfov(var0, var1, var2) {
-  if(!isDefined(var2)) {
-    var2 = 6;
+function checkenemiesinfov(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
+    var_2 = 6;
   }
 
-  var3 = cos(var0);
-  var4 = [];
-  var5 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-  var6 = scripts\engine\utility::get_array_of_closest(self.origin, var5, undefined, 24, var1, 1);
+  var_3 = cos(var_0);
+  var_4 = [];
+  var_5 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
+  var_6 = scripts\engine\utility::get_array_of_closest(self.origin, var_5, undefined, 24, var_1, 1);
 
-  foreach(var8 in var6) {
-    var9 = anglesToForward(self.angles);
-    var10 = vectorNormalize(var9) * -25;
-    var11 = 0;
-    var12 = var8.origin;
-    var13 = scripts\engine\utility::within_fov(self getEye() + var10, self.angles, var12 + (0, 0, 30), var3);
+  foreach(var_8 in var_6) {
+    var_9 = anglesToForward(self.angles);
+    var_10 = vectorNormalize(var_9) * -25;
+    var_11 = 0;
+    var_12 = var_8.origin;
+    var_13 = scripts\engine\utility::within_fov(self getEye() + var_10, self.angles, var_12 + (0, 0, 30), var_3);
 
-    if(var13) {
-      if(isDefined(var1)) {
-        var14 = distance2d(self.origin, var12);
+    if(var_13) {
+      if(isDefined(var_1)) {
+        var_14 = distance2d(self.origin, var_12);
 
-        if(var14 < var1) {
-          var11 = 1;
+        if(var_14 < var_1) {
+          var_11 = 1;
         }
       } else {
-        var11 = 1;
+        var_11 = 1;
       }
     }
 
-    if(var11 && var4.size < var2) {
-      var4 = var8;
+    if(var_11 && var_4.size < var_2) {
+      var_4 = var_8;
     }
   }
 
-  return var4;
+  return var_4;
 }
 
-function axe_damage(var0, var1, var2, var3, var4, var5, var6) {
-  var0 endon("death");
-  var0.allowpain = 1;
-  var0 dodamage(var2, var3, var1, var1, "MOD_MELEE", var5);
-  wait var6;
+function axe_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_0 endon("death");
+  var_0.allowpain = 1;
+  var_0 dodamage(var_2, var_3, var_1, var_1, "MOD_MELEE", var_5);
+  wait var_6;
 
-  if(istrue(var0.allowpain)) {
-    var0.allowpain = 0;
+  if(istrue(var_0.allowpain)) {
+    var_0.allowpain = 0;
     return;
   }
 }
 
-function _switchtoweapon(var0) {
-  self switchtoweapon(var0);
+function _switchtoweapon(var_0) {
+  self switchtoweapon(var_0);
 }
 
-function _switchtoweaponimmediate(var0) {
-  self switchtoweaponimmediate(var0);
+function _switchtoweaponimmediate(var_0) {
+  self switchtoweaponimmediate(var_0);
 }
 
-function _takeweapon(var0) {
-  var1 = 0;
+function _takeweapon(var_0) {
+  var_1 = 0;
 
-  if(issameweapon(var0)) {
-    var1 = self gethighpriorityweapon() == var0;
+  if(issameweapon(var_0)) {
+    var_1 = self gethighpriorityweapon() == var_0;
   } else {
-    var1 = createheadicon(self gethighpriorityweapon()) == var0;
+    var_1 = createheadicon(self gethighpriorityweapon()) == var_0;
   }
 
-  if(var1) {
-    self clearhighpriorityweapon(var0);
+  if(var_1) {
+    self clearhighpriorityweapon(var_0);
   }
 
-  self takeweapon(var0);
+  self takeweapon(var_0);
 }
 
-function takeweaponwhensafe(var0) {
+function takeweaponwhensafe(var_0) {
   self endon("death");
   self endon("disconnect");
 
   for(;;) {
-    if(!iscurrentweapon(var0)) {
+    if(!iscurrentweapon(var_0)) {
       break;
     }
 
     waitframe();
   }
 
-  _takeweapon(var0);
+  _takeweapon(var_0);
 }
 
 function getcurrentreliableweaponswitchweapon() {
   validatehighpriorityflag();
-  var0 = self gethighpriorityweapon();
+  var_0 = self gethighpriorityweapon();
 
-  if(nullweapon(var0)) {
+  if(nullweapon(var_0)) {
     return undefined;
   }
 
-  return var0;
+  return var_0;
 }
 
 function isanyreliableweaponswitchinprogress() {
   return isDefined(getcurrentreliableweaponswitchweapon());
 }
 
-function isreliablyswitchingtoweapon(var0) {
-  var1 = getcurrentreliableweaponswitchweapon();
-  return isDefined(var1) && var1 == var0 && !iscurrentweapon(var0);
+function isreliablyswitchingtoweapon(var_0) {
+  var_1 = getcurrentreliableweaponswitchweapon();
+  return isDefined(var_1) && var_1 == var_0 && !iscurrentweapon(var_0);
 }
 
-function canswitchtoweaponreliably(var0) {
-  if(!self hasweapon(var0)) {
+function canswitchtoweaponreliably(var_0) {
+  if(!self hasweapon(var_0)) {
     return false;
   }
 
@@ -429,43 +429,43 @@ function canswitchtoweaponreliably(var0) {
     return false;
   }
 
-  var1 = getcurrentreliableweaponswitchweapon();
+  var_1 = getcurrentreliableweaponswitchweapon();
 
-  if(isDefined(var1)) {
-    var2 = getweaponbasename(var0);
-    var3 = 0;
+  if(isDefined(var_1)) {
+    var_2 = getweaponbasename(var_0);
+    var_3 = 0;
 
-    if(var2 == "ks_remote_map_cp" || var2 == "briefcase_bomb_mp" || var2 == "briefcase_bomb_defuse_mp" || var2 == "iw7_uplinkball_mp" || var2 == "iw7_tdefball_mp") {
-      var3 = 1;
-    } else if(weaponinventorytype(var1) == "primary") {
-      var3 = 1;
+    if(var_2 == "ks_remote_map_cp" || var_2 == "briefcase_bomb_mp" || var_2 == "briefcase_bomb_defuse_mp" || var_2 == "iw7_uplinkball_mp" || var_2 == "iw7_tdefball_mp") {
+      var_3 = 1;
+    } else if(weaponinventorytype(var_1) == "primary") {
+      var_3 = 1;
     }
 
-    if(!var3) {
+    if(!var_3) {
       return false;
     }
   }
 
-  if(iscurrentweapon(var0)) {
+  if(iscurrentweapon(var_0)) {
     return false;
   }
 
   return true;
 }
 
-function abortreliableweaponswitch(var0) {
-  if(self gethighpriorityweapon() == var0) {
-    self clearhighpriorityweapon(var0);
+function abortreliableweaponswitch(var_0) {
+  if(self gethighpriorityweapon() == var_0) {
+    self clearhighpriorityweapon(var_0);
   }
 
-  _takeweapon(var0);
+  _takeweapon(var_0);
 }
 
-function switchtoweaponreliable(var0, var1) {
+function switchtoweaponreliable(var_0, var_1) {
   self endon("disconnect");
   self endon("death");
 
-  if(!canswitchtoweaponreliably(var0)) {
+  if(!canswitchtoweaponreliably(var_0)) {
     return 0;
   }
 
@@ -473,24 +473,24 @@ function switchtoweaponreliable(var0, var1) {
     self clearhighpriorityweapon(getcurrentreliableweaponswitchweapon());
   }
 
-  self sethighpriorityweapon(var0);
+  self sethighpriorityweapon(var_0);
 
-  if(istrue(var1)) {
-    _switchtoweaponimmediate(var0);
+  if(istrue(var_1)) {
+    _switchtoweaponimmediate(var_0);
   }
 
   for(;;) {
-    if(iscurrentweapon(var0)) {
+    if(iscurrentweapon(var_0)) {
       validatehighpriorityflag();
       return 1;
     }
 
-    if(!self ishighpriorityweapon(var0) || !self hasweapon(var0)) {
+    if(!self ishighpriorityweapon(var_0) || !self hasweapon(var_0)) {
       return 0;
     }
 
     if(!scripts\common\utility::is_weapon_allowed() || !scripts\common\utility::is_weapon_switch_allowed()) {
-      self clearhighpriorityweapon(var0);
+      self clearhighpriorityweapon(var_0);
       return 0;
     }
 
@@ -499,24 +499,24 @@ function switchtoweaponreliable(var0, var1) {
 }
 
 function validatehighpriorityflag() {
-  var0 = self getcurrentweapon();
+  var_0 = self getcurrentweapon();
 
-  if(self ishighpriorityweapon(var0)) {
-    self clearhighpriorityweapon(var0);
+  if(self ishighpriorityweapon(var_0)) {
+    self clearhighpriorityweapon(var_0);
     return;
   }
 }
 
-function getridofweapon(var0, var1) {
+function getridofweapon(var_0, var_1) {
   self endon("death");
   self endon("disconnect");
 
-  if(!self hasweapon(var0)) {
+  if(!self hasweapon(var_0)) {
     return;
   }
 
-  if(!iscurrentweapon(var0)) {
-    _takeweapon(var0);
+  if(!iscurrentweapon(var_0)) {
+    _takeweapon(var_0);
     return;
   }
 
@@ -524,26 +524,26 @@ function getridofweapon(var0, var1) {
     waitframe();
   }
 
-  if(!iscurrentweapon(var0)) {
-    _takeweapon(var0);
+  if(!iscurrentweapon(var_0)) {
+    _takeweapon(var_0);
     return;
   }
 
   if(isbot(self)) {
-    var1 = 1;
+    var_1 = 1;
   }
 
-  var2 = switchtoweaponreliable(self.lastdroppableweaponobj, var1);
-  _takeweapon(var0);
+  var_2 = switchtoweaponreliable(self.lastdroppableweaponobj, var_1);
+  _takeweapon(var_0);
   self notify("bomb_allow_offhands");
 
-  if(!var2) {
+  if(!var_2) {
     forcevalidweapon();
     return;
   }
 }
 
-function forcevalidweapon(var0) {
+function forcevalidweapon(var_0) {
   self endon("death");
   self endon("disconnect");
 
@@ -553,91 +553,91 @@ function forcevalidweapon(var0) {
       continue;
     }
 
-    var1 = var0;
+    var_1 = var_0;
 
-    if(!isDefined(var1) || !self hasweapon(var1)) {
+    if(!isDefined(var_1) || !self hasweapon(var_1)) {
       if(!isDefined(self.lastdroppableweaponobj) || self.lastdroppableweaponobj.basename == "none") {
         break;
       }
 
-      var1 = self.lastdroppableweaponobj;
+      var_1 = self.lastdroppableweaponobj;
     }
 
-    var2 = getcurrentprimaryweaponsminusalt();
+    var_2 = getcurrentprimaryweaponsminusalt();
 
-    if(isDefined(var1) && getweaponbasename(var1) == "iw7_axe_mp" && self getweaponammoclip(var1) == 0 && var2.size == 1) {
-      var1.basename = "iw8_fists_mp";
+    if(isDefined(var_1) && getweaponbasename(var_1) == "iw7_axe_mp" && self getweaponammoclip(var_1) == 0 && var_2.size == 1) {
+      var_1.basename = "iw8_fists_mp";
     }
 
-    switchtoweaponreliable(var1);
+    switchtoweaponreliable(var_1);
     waitframe();
   }
 }
 
-function iscurrentweapon(var0) {
-  if(isstring(var0)) {
-    var0 = asmdevgetallstates(var0);
+function iscurrentweapon(var_0) {
+  if(isstring(var_0)) {
+    var_0 = asmdevgetallstates(var_0);
   }
 
-  return isnullweapon(self getcurrentweapon(), var0, 1);
+  return isnullweapon(self getcurrentweapon(), var_0, 1);
 }
 
-function debugweaponchangeprint(var0) {}
+function debugweaponchangeprint(var_0) {}
 
 function getcurrentprimaryweaponsminusalt() {
-  var0 = [];
-  var1 = self getweaponslistprimaries();
+  var_0 = [];
+  var_1 = self getweaponslistprimaries();
 
-  foreach(var3 in var1) {
-    if(!var3.isalternate) {
-      var0 = var3;
+  foreach(var_3 in var_1) {
+    if(!var_3.isalternate) {
+      var_0 = var_3;
     }
   }
 
-  return var0;
+  return var_0;
 }
 
 function switchtolastweapon() {
   if(!isai(self)) {
-    var0 = scripts\cp\utility::getlastweapon();
+    var_0 = scripts\cp\utility::getlastweapon();
 
-    if(!self hasweapon(var0)) {
-      var0 = scripts\cp\utility::getfirstprimaryweapon();
+    if(!self hasweapon(var_0)) {
+      var_0 = scripts\cp\utility::getfirstprimaryweapon();
     }
 
-    _switchtoweapon(var0);
+    _switchtoweapon(var_0);
     return;
   }
 
   _switchtoweapon("none");
 }
 
-function watchformanualweaponend(var0) {
+function watchformanualweaponend(var_0) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  self waittill("finished_with_manual_weapon_" + var0);
+  self waittill("finished_with_manual_weapon_" + var_0);
 
-  if(self hasweapon(var0)) {
-    getridofweapon(var0);
-    self takeweapon(var0);
+  if(self hasweapon(var_0)) {
+    getridofweapon(var_0);
+    self takeweapon(var_0);
     return;
   }
 }
 
-function startfadetransition(var0) {
+function startfadetransition(var_0) {
   self endon("disconnect");
-  var1 = scripts\engine\utility::ref_143b9(var0, "cancel_remote_sequence");
+  var_1 = scripts\engine\utility::ref_143b9(var_0, "cancel_remote_sequence");
 
-  if(!isDefined(var1) || var1 == "cancel_remote_sequence") {
+  if(!isDefined(var_1) || var_1 == "cancel_remote_sequence") {
     return;
   }
 
   self playlocalsound("mp_killstreak_transition_whoosh");
   self visionsetfadetoblackforplayer("bw", 0.5);
-  var1 = scripts\engine\utility::ref_143b9(0.5, "death");
+  var_1 = scripts\engine\utility::ref_143b9(0.5, "death");
 
-  if(!isDefined(var1) || var1 == "death") {
+  if(!isDefined(var_1) || var_1 == "death") {
     self stoplocalsound("mp_killstreak_transition_whoosh");
   }
 
@@ -663,17 +663,17 @@ function checkgesturethread() {
   }
 }
 
-function enableburnfx(var0, var1) {
+function enableburnfx(var_0, var_1) {
   if(!isDefined(self.burnfxenabled)) {
     self.burnfxenabled = 0;
   }
 
   if(self.burnfxenabled == 0) {
-    if(!istrue(var0)) {
+    if(!istrue(var_0)) {
       thread enableburnsfx();
     }
 
-    thread startburnfx(var1);
+    thread startburnfx(var_1);
   }
 
   self.burnfxenabled++;
@@ -698,19 +698,19 @@ function enableburnsfx() {
   }
 }
 
-function enableburnfxfortime(var0) {
+function enableburnfxfortime(var_0) {
   self endon("disconnect");
   self endon("clearBurnFX");
   thread enableburnfx();
-  wait var0;
+  wait var_0;
   thread disableburnfx();
 }
 
-function disableburnfx(var0) {
+function disableburnfx(var_0) {
   if(self.burnfxenabled == 1) {
     thread stopburnfx();
 
-    if(!istrue(var0)) {
+    if(!istrue(var_0)) {
       thread disable_burnsfx();
     }
   }
@@ -743,12 +743,12 @@ function disable_burnsfx() {
   }
 }
 
-function supressburnfx(var0) {
+function supressburnfx(var_0) {
   if(!isDefined(self.burnfxsuppressed)) {
     self.burnfxsupressed = 0;
   }
 
-  if(var0) {
+  if(var_0) {
     self.burnfxsuppressed++;
     return;
   }
@@ -763,22 +763,22 @@ function clearburnfx() {
   self.burnfxplaying = undefined;
 }
 
-function startburnfx(var0) {
+function startburnfx(var_0) {
   self endon("disconnect");
   self endon("stopBurnFX");
-  var1 = "active";
-  jumpiffalse(isDefined(var0)) LOC_0000001f;
-  var1 = var0;
+  var_1 = "active";
+  jumpiffalse(isDefined(var_0)) LOC_0000001f;
+  var_1 = var_0;
 
   for(;;) {
-    var2 = isDefined(self.burnfxsuppressed) && self.burnfxsuppressed > 0;
-    var3 = istrue(self.burnfxplaying);
+    var_2 = isDefined(self.burnfxsuppressed) && self.burnfxsuppressed > 0;
+    var_3 = istrue(self.burnfxplaying);
 
-    if(var2 && var3) {
+    if(var_2 && var_3) {
       self setscriptablepartstate("burning", "neutral");
       self.burnfxplaying = undefined;
-    } else if(!var2 && !var3) {
-      self setscriptablepartstate("burning", var1);
+    } else if(!var_2 && !var_3) {
+      self setscriptablepartstate("burning", var_1);
       self.burnfxplaying = 1;
     }
 
@@ -796,110 +796,110 @@ function stopburnfx() {
   }
 }
 
-function burnfxcorpstablefunc(var0) {
-  var0 setscriptablepartstate("burning", "flareUp", 0);
+function burnfxcorpstablefunc(var_0) {
+  var_0 setscriptablepartstate("burning", "flareUp", 0);
 }
 
-function islauncherdirectimpactdamage(var0, var1, var2) {
-  if(var0.type != "projectile") {
+function islauncherdirectimpactdamage(var_0, var_1, var_2) {
+  if(var_0.type != "projectile") {
     return false;
   }
 
-  if(istrue(var2) && var0.isalternate && isDefined(var0.underbarrel)) {
+  if(istrue(var_2) && var_0.isalternate && isDefined(var_0.underbarrel)) {
     return false;
   }
 
-  return var1 == "MOD_IMPACT" || var1 == "MOD_PROJECTILE" || var1 == "MOD_GRENADE";
+  return var_1 == "MOD_IMPACT" || var_1 == "MOD_PROJECTILE" || var_1 == "MOD_GRENADE";
 }
 
-function isthrowingknife(var0) {
-  var1 = undefined;
+function isthrowingknife(var_0) {
+  var_1 = undefined;
 
-  if(issameweapon(var0)) {
-    if(nullweapon(var0)) {
+  if(issameweapon(var_0)) {
+    if(nullweapon(var_0)) {
       return 0;
     }
 
-    var1 = var0.basename;
+    var_1 = var_0.basename;
   } else {
-    if(var0 == "none") {
+    if(var_0 == "none") {
       return 0;
     }
 
-    var1 = var0;
+    var_1 = var_0;
   }
 
-  return issubstr(var1, "throwingknife");
+  return issubstr(var_1, "throwingknife");
 }
 
 function minigun_track_target_think() {
-  var0 = self getcurrentweapon();
+  var_0 = self getcurrentweapon();
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(var0.basename == "none") {
+  if(var_0.basename == "none") {
     return;
   }
 
-  if(!self hasweapon(var0)) {
+  if(!self hasweapon(var_0)) {
     return;
   }
 
-  var0 = var0 getnoaltweapon();
-  var1 = 0;
-  var2 = 0;
-  var3 = 0;
+  var_0 = var_0 getnoaltweapon();
+  var_1 = 0;
+  var_2 = 0;
+  var_3 = 0;
 
-  if(!scripts\cp\utility::isriotshield(var0.basename)) {
-    if(!self anyammoforweaponmodes(var0)) {
+  if(!scripts\cp\utility::isriotshield(var_0.basename)) {
+    if(!self anyammoforweaponmodes(var_0)) {
       return;
     }
 
-    var1 = self getweaponammoclip(var0, "right");
-    var2 = self getweaponammoclip(var0, "left");
+    var_1 = self getweaponammoclip(var_0, "right");
+    var_2 = self getweaponammoclip(var_0, "left");
 
-    if(!var1 && !var2) {
+    if(!var_1 && !var_2) {
       return;
     }
 
-    var3 = self getweaponammostock(var0);
-    var4 = weaponmaxammo(var0);
+    var_3 = self getweaponammostock(var_0);
+    var_4 = weaponmaxammo(var_0);
 
-    if(var3 > var4) {
-      var3 = var4;
+    if(var_3 > var_4) {
+      var_3 = var_4;
     }
 
-    var5 = self dropitem(var0);
+    var_5 = self dropitem(var_0);
 
-    if(!isDefined(var5)) {
+    if(!isDefined(var_5)) {
       return;
     }
 
     if(istrue(level.clearstockondrop)) {
-      var3 = 0;
+      var_3 = 0;
     }
 
-    var5 itemweaponsetammo(var1, var3, var2);
+    var_5 itemweaponsetammo(var_1, var_3, var_2);
   } else {
-    var5 = self dropitem(var1);
+    var_5 = self dropitem(var_1);
 
-    if(!isDefined(var5)) {
+    if(!isDefined(var_5)) {
       return;
     }
 
-    var5 itemweaponsetammo(1, 1, 0);
+    var_5 itemweaponsetammo(1, 1, 0);
   }
 
-  var5.owner = self;
-  var5.targetname = "dropped_weapon";
-  var5.objweapon = var1;
-  var5 sethintdisplayrange(96);
-  var5 setuserange(96);
-  var5 thread scripts\cp\cp_weapon::watchweaponpickup();
+  var_5.owner = self;
+  var_5.targetname = "dropped_weapon";
+  var_5.objweapon = var_1;
+  var_5 sethintdisplayrange(96);
+  var_5 setuserange(96);
+  var_5 thread scripts\cp\cp_weapon::watchweaponpickup();
   thread lap();
-  return var5;
+  return var_5;
 }
 
 function lap() {
@@ -913,45 +913,45 @@ function lap() {
   self delete();
 }
 
-function ref_13a3a(var0) {
-  var1 = undefined;
-  var2 = undefined;
-  var3 = undefined;
-  var4 = var0 getweaponslistprimaries();
+function ref_13a3a(var_0) {
+  var_1 = undefined;
+  var_2 = undefined;
+  var_3 = undefined;
+  var_4 = var_0 getweaponslistprimaries();
 
-  foreach(var6 in var4) {
-    if(nullweapon(var6)) {
+  foreach(var_6 in var_4) {
+    if(nullweapon(var_6)) {
       continue;
     }
 
-    if(scripts\cp\utility::isriotshield(var6)) {
-      var1 = var6;
+    if(scripts\cp\utility::isriotshield(var_6)) {
+      var_1 = var_6;
 
-      if(isnullweapon(var1, var0 getcurrentprimaryweapon())) {
-        var2 = 1;
+      if(isnullweapon(var_1, var_0 getcurrentprimaryweapon())) {
+        var_2 = 1;
       }
 
       continue;
     }
 
-    if(!isDefined(var3)) {
-      var7 = var6 getnoaltweapon();
+    if(!isDefined(var_3)) {
+      var_7 = var_6 getnoaltweapon();
 
-      if(var7.inventorytype != "primary") {
+      if(var_7.inventorytype != "primary") {
         continue;
       }
 
-      var3 = var6;
+      var_3 = var_6;
     }
   }
 
-  if(isDefined(var1)) {
-    _takeweapon(var0, var1);
-    var0.ref_12d53 = var1;
-    var0.ref_12d4f = var2;
-    var0 scripts\cp\cp_weapon::riotshieldonweaponchange(var3);
-    var0 notify("modified_riot_shield_thread");
-    var0 endon("modified_riot_shield_thread");
-    GscBinSkip4(0x6e, var0, var3);
+  if(isDefined(var_1)) {
+    _takeweapon(var_0, var_1);
+    var_0.ref_12d53 = var_1;
+    var_0.ref_12d4f = var_2;
+    var_0 scripts\cp\cp_weapon::riotshieldonweaponchange(var_3);
+    var_0 notify("modified_riot_shield_thread");
+    var_0 endon("modified_riot_shield_thread");
+    GscBinSkip4(0x6e, var_0, var_3);
   }
 }

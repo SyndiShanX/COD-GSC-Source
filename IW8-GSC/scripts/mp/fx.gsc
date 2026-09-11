@@ -10,9 +10,9 @@ function script_print_fx() {
   }
 
   if(isDefined(self.target)) {
-    var0 = getEnt(self.target).origin;
+    var_0 = getEnt(self.target).origin;
   } else {
-    var0 = "undefined";
+    var_0 = "undefined";
   }
 
   if(self.script_fxcommand == "OneShotfx") {}
@@ -24,66 +24,66 @@ function script_print_fx() {
   }
 }
 
-function grenadeexplosionfx(var0) {
-  playFX(level._effect["mechanical explosion"], var0);
-  earthquake(0.15, 0.5, var0, 250);
+function grenadeexplosionfx(var_0) {
+  playFX(level._effect["mechanical explosion"], var_0);
+  earthquake(0.15, 0.5, var_0, 250);
 }
 
-function soundfx(var0, var1, var2) {
-  var3 = spawn("script_origin", (0, 0, 0));
-  var3.origin = var1;
-  var3 playLoopSound(var0);
+function soundfx(var_0, var_1, var_2) {
+  var_3 = spawn("script_origin", (0, 0, 0));
+  var_3.origin = var_1;
+  var_3 playLoopSound(var_0);
 
-  if(isDefined(var2)) {
-    thread soundfxdelete(var3);
+  if(isDefined(var_2)) {
+    thread soundfxdelete(var_3);
     return;
   }
 }
 
-function soundfxdelete(var0) {
-  level waittill(var0);
+function soundfxdelete(var_0) {
+  level waittill(var_0);
   self delete();
 }
 
 function func_glass_handler() {
-  var0 = [];
-  var1 = [];
-  var2 = getEntArray("vfx_custom_glass", "targetname");
+  var_0 = [];
+  var_1 = [];
+  var_2 = getEntArray("vfx_custom_glass", "targetname");
 
-  foreach(var4 in var2) {
-    if(isDefined(var4.script_noteworthy)) {
-      var5 = getglass(var4.script_noteworthy);
+  foreach(var_4 in var_2) {
+    if(isDefined(var_4.script_noteworthy)) {
+      var_5 = getglass(var_4.script_noteworthy);
 
-      if(isDefined(var5)) {
-        var1 = var4;
-        var0 = var5;
+      if(isDefined(var_5)) {
+        var_1 = var_4;
+        var_0 = var_5;
       }
     }
   }
 
-  var7 = var0.size;
-  var8 = var0.size;
-  var9 = 5;
-  var10 = 0;
+  var_7 = var_0.size;
+  var_8 = var_0.size;
+  var_9 = 5;
+  var_10 = 0;
 
-  while(var7 != 0) {
-    var11 = var10 + var9 - 1;
+  while(var_7 != 0) {
+    var_11 = var_10 + var_9 - 1;
 
-    if(var11 > var8) {
-      var11 = var8;
+    if(var_11 > var_8) {
+      var_11 = var_8;
     }
 
-    if(var10 == var8) {}
+    if(var_10 == var_8) {}
 
-    for(var10 = 0; var10 < var11; var10++) {
-      var12 = var0[var10];
-      var4 = var1[var12];
+    for(var_10 = 0; var_10 < var_11; var_10++) {
+      var_12 = var_0[var_10];
+      var_4 = var_1[var_12];
 
-      if(isDefined(var4)) {
-        if(isglassdestroyed(var12)) {
-          var4 delete();
-          var7--;
-          var1[var12] = undefined;
+      if(isDefined(var_4)) {
+        if(isglassdestroyed(var_12)) {
+          var_4 delete();
+          var_7--;
+          var_1[var_12] = undefined;
         }
       }
     }
@@ -92,7 +92,7 @@ function func_glass_handler() {
   }
 }
 
-function blenddelete(var0) {
+function blenddelete(var_0) {
   self waittill("death");
-  var0 delete();
+  var_0 delete();
 }

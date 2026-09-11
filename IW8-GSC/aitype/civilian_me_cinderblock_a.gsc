@@ -35,7 +35,7 @@ function spawner() {
   self setspawnerteam("neutral");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\character_civilian_me_male_cinderblock_a::precache();
   scripts\aitypes\bt_util::init();
   scripts\aitypes\assets::civilian();

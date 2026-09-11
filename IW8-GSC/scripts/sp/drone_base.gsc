@@ -37,20 +37,20 @@ function thermaldrawenabledrone() {
     level.dronesthermalteamselect = "all";
   }
 
-  var0 = 0;
+  var_0 = 0;
 
   switch (level.dronesthermalteamselect) {
     case "all":
-      var0 = 1;
+      var_0 = 1;
       break;
     case "axis":
-      var0 = self.team == "axis";
+      var_0 = self.team == "axis";
       break;
     default:
       break;
   }
 
-  if(var0) {
+  if(var_0) {
     self thermaldrawenable();
     return;
   }
@@ -66,109 +66,109 @@ function drone_init_path() {
   }
 
   level.drone_paths[self.target] = 1;
-  var0 = self.target;
-  var1 = scripts\engine\utility::getStruct(var0, "targetname");
+  var_0 = self.target;
+  var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  var2 = [];
-  var3 = [];
-  var4 = var1;
+  var_2 = [];
+  var_3 = [];
+  var_4 = var_1;
 
   for(;;) {
-    var1 = var4;
+    var_1 = var_4;
 
-    for(var5 = 0;; var5 = 1) {
-      if(!isDefined(var1.target)) {
+    for(var_5 = 0;; var_5 = 1) {
+      if(!isDefined(var_1.target)) {
         break;
       }
 
-      var6 = scripts\engine\utility::getStructArray(var1.target, "targetname");
+      var_6 = scripts\engine\utility::getStructArray(var_1.target, "targetname");
 
-      if(var6.size) {
+      if(var_6.size) {
         break;
       }
 
-      var7 = undefined;
+      var_7 = undefined;
 
-      foreach(var9 in var6) {
-        if(isDefined(var3[var9.origin + ""])) {
+      foreach(var_9 in var_6) {
+        if(isDefined(var_3[var_9.origin + ""])) {
           continue;
         }
 
-        var7 = var9;
+        var_7 = var_9;
         break;
       }
 
-      if(!isDefined(var7)) {
+      if(!isDefined(var_7)) {
         break;
       }
 
-      var3 = 1;
-      var2 = var7.origin - var1.origin;
-      var1.angles = vectortoangles(var2[var1.targetname]);
-      var1 = var7;
+      var_3 = 1;
+      var_2 = var_7.origin - var_1.origin;
+      var_1.angles = vectortoangles(var_2[var_1.targetname]);
+      var_1 = var_7;
     }
 
-    if(!var5) {
+    if(!var_5) {
       break;
     }
   }
 
-  var0 = self.target;
-  var1 = scripts\engine\utility::getStruct(var0, "targetname");
-  var11 = var1;
-  var3 = [];
+  var_0 = self.target;
+  var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
+  var_11 = var_1;
+  var_3 = [];
 
   for(;;) {
-    var1 = var4;
-    var5 = 0;
+    var_1 = var_4;
+    var_5 = 0;
 
     for(;;) {
-      if(!isDefined(var1.target)) {
+      if(!isDefined(var_1.target)) {
         return;
       }
 
-      if(!isDefined(var2[var1.targetname])) {
+      if(!isDefined(var_2[var_1.targetname])) {
         return;
       }
 
-      var6 = scripts\engine\utility::getStructArray(var1.target, "targetname");
+      var_6 = scripts\engine\utility::getStructArray(var_1.target, "targetname");
 
-      if(var6.size) {
+      if(var_6.size) {
         break;
       }
 
-      var7 = undefined;
+      var_7 = undefined;
 
-      foreach(var9 in var6) {
-        if(isDefined(var3[var9.origin + ""])) {
+      foreach(var_9 in var_6) {
+        if(isDefined(var_3[var_9.origin + ""])) {
           continue;
         }
 
-        var7 = var9;
+        var_7 = var_9;
         break;
       }
 
-      if(!isDefined(var7)) {
+      if(!isDefined(var_7)) {
         break;
       }
 
-      if(isDefined(var1.radius)) {
-        var14 = var2[var11.targetname];
-        var15 = var2[var1.targetname];
-        var16 = (var14 + var15) * 0.5;
-        var1.angles = vectortoangles(var16);
+      if(isDefined(var_1.radius)) {
+        var_14 = var_2[var_11.targetname];
+        var_15 = var_2[var_1.targetname];
+        var_16 = (var_14 + var_15) * 0.5;
+        var_1.angles = vectortoangles(var_16);
       }
 
-      var5 = 1;
-      var11 = var1;
-      var1 = var7;
+      var_5 = 1;
+      var_11 = var_1;
+      var_1 = var_7;
     }
 
-    if(!var5) {
+    if(!var_5) {
       break;
     }
   }

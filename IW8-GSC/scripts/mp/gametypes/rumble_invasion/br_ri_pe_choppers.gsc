@@ -8,31 +8,31 @@ function init() {
   level.ref_12073 = &infilsactive;
 }
 
-function infilsactive(var0, var1, var2, var3) {
-  if(var2 != "br_loot_chopper_box_open") {
+function infilsactive(var_0, var_1, var_2, var_3) {
+  if(var_2 != "br_loot_chopper_box_open") {
     return;
   }
 
-  if(!isDefined(var0) || !isDefined(var0.team)) {
+  if(!isDefined(var_0) || !isDefined(var_0.team)) {
     return;
   }
 
-  if(!isalive(var0)) {
+  if(!isalive(var_0)) {
     return;
   }
 
-  if(var1 <= 0) {
+  if(var_1 <= 0) {
     return;
   }
 
-  level scripts\mp\gamescore::giveteamscoreforobjective(var0.team, var1, 0);
+  level scripts\mp\gamescore::giveteamscoreforobjective(var_0.team, var_1, 0);
 }
 
 function ref_1229e() {
-  var0 = getdvarint("scr_br_pe_choppers_score", 2);
+  var_0 = getdvarint("scr_br_pe_choppers_score", 2);
 
-  if(isDefined(self.viphud_hidefromplayer) && isPlayer(self.viphud_hidefromplayer) && var0) {
-    level scripts\mp\gamescore::giveteamscoreforobjective(self.viphud_hidefromplayer.team, var0, 0);
+  if(isDefined(self.viphud_hidefromplayer) && isPlayer(self.viphud_hidefromplayer) && var_0) {
+    level scripts\mp\gamescore::giveteamscoreforobjective(self.viphud_hidefromplayer.team, var_0, 0);
   }
 
   scripts\mp\gametypes\br_publicevent_choppers::dropcrate();

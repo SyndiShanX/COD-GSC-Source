@@ -3,18 +3,18 @@
  * Script: scripts\cp\cp_objective_mechanics.gsc
 *************************************************/
 
-function starthackingdefensewithnoobjstruct(var0, var1, var2, var3) {
-  var4 = scripts\engine\utility::ter_op(isDefined(var1), var1, 60);
-  var5 = gettime() + var4 * 1000;
-  var6 = 0;
-  var7 = 0.05;
-  level.hack_duration = var4;
-  var8 = undefined;
+function starthackingdefensewithnoobjstruct(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\engine\utility::ter_op(isDefined(var_1), var_1, 60);
+  var_5 = gettime() + var_4 * 1000;
+  var_6 = 0;
+  var_7 = 0.05;
+  level.hack_duration = var_4;
+  var_8 = undefined;
 
-  if(isDefined(var3)) {
-    var8 = scripts\cp\utility::getplayersinteam(var3);
+  if(isDefined(var_3)) {
+    var_8 = scripts\cp\utility::getplayersinteam(var_3);
   } else {
-    var8 = level.players;
+    var_8 = level.players;
   }
 
   if(!isDefined(level.independent_hack_defenses)) {
@@ -23,105 +23,105 @@ function starthackingdefensewithnoobjstruct(var0, var1, var2, var3) {
     level.independent_hack_defenses++;
   }
 
-  var9 = scripts\cp\cp_objectives::requestworldid("independent_hack_" + level.independent_hack_defenses);
-  var10 = spawnStruct();
-  var10.currentteam = scripts\engine\utility::ter_op(isDefined(var3), var3, "allies");
-  var11 = 1;
+  var_9 = scripts\cp\cp_objectives::requestworldid("independent_hack_" + level.independent_hack_defenses);
+  var_10 = spawnStruct();
+  var_10.currentteam = scripts\engine\utility::ter_op(isDefined(var_3), var_3, "allies");
+  var_11 = 1;
 
-  if(istrue(var10.no_lua)) {
-    var11 = 0;
+  if(istrue(var_10.no_lua)) {
+    var_11 = 0;
   }
 
-  var12 = 0;
+  var_12 = 0;
 
-  if(istrue(var10.use_old_label)) {
-    var12 = 1;
+  if(istrue(var_10.use_old_label)) {
+    var_12 = 1;
   }
 
-  hacking_labels_init(var10, var12);
+  hacking_labels_init(var_10, var_12);
   hacking_ui();
-  objective_setplayintro(var9, 0);
-  objective_setplayoutro(var9, 0);
-  objective_state(var9, "current");
-  objective_icon(var9, "icon_waypoint_objective_general");
-  objective_setbackground(var9, 1);
-  objective_position(var9, var0);
-  objective_setshowprogress(var9, 1);
-  objective_setprogress(var9, 0);
-  objective_setownerteam(var9, undefined);
-  objective_setprogressteam(var9, undefined);
-  updatehackdefenselabel(var10, 0, var9);
-  var13 = 1;
-  var14 = var0;
-  var15 = (0, 0, 90);
+  objective_setplayintro(var_9, 0);
+  objective_setplayoutro(var_9, 0);
+  objective_state(var_9, "current");
+  objective_icon(var_9, "icon_waypoint_objective_general");
+  objective_setbackground(var_9, 1);
+  objective_position(var_9, var_0);
+  objective_setshowprogress(var_9, 1);
+  objective_setprogress(var_9, 0);
+  objective_setownerteam(var_9, undefined);
+  objective_setprogressteam(var_9, undefined);
+  updatehackdefenselabel(var_10, 0, var_9);
+  var_13 = 1;
+  var_14 = var_0;
+  var_15 = (0, 0, 90);
 
   for(;;) {
-    wait var7;
-    var16 = 0;
-    var17 = 0;
-    var18 = [];
+    wait var_7;
+    var_16 = 0;
+    var_17 = 0;
+    var_18 = [];
 
-    foreach(var20 in var8) {
-      if(!var20 scripts\cp\utility::is_valid_player()) {
-        if(isDefined(var20.inhackring)) {
-          var20.inhackring = undefined;
+    foreach(var_20 in var_8) {
+      if(!var_20 scripts\cp\utility::is_valid_player()) {
+        if(isDefined(var_20.inhackring)) {
+          var_20.inhackring = undefined;
         }
 
         continue;
       }
 
-      if(distancesquared(var20.origin, var14) > 14400) {
-        if(isDefined(var20.inhackring)) {
-          var20.inhackring = undefined;
+      if(distancesquared(var_20.origin, var_14) > 14400) {
+        if(isDefined(var_20.inhackring)) {
+          var_20.inhackring = undefined;
         }
 
         continue;
       }
 
-      if(isDefined(var20.perk_data["hack_speed_boost"])) {
-        var17 += var20.perk_data["hack_speed_boost"];
+      if(isDefined(var_20.perk_data["hack_speed_boost"])) {
+        var_17 += var_20.perk_data["hack_speed_boost"];
       }
 
-      var16++;
+      var_16++;
 
-      if(!scripts\engine\utility::array_contains(var18, var20)) {
-        var18 = var20;
-        var20.inhackring = 1;
+      if(!scripts\engine\utility::array_contains(var_18, var_20)) {
+        var_18 = var_20;
+        var_20.inhackring = 1;
       }
     }
 
-    if(var13 || scripts\cp\utility::roundup(var6) % 1 == 0) {
-      updatehackdefenselabel(var10, var16, var9);
-      var13 = 0;
+    if(var_13 || scripts\cp\utility::roundup(var_6) % 1 == 0) {
+      updatehackdefenselabel(var_10, var_16, var_9);
+      var_13 = 0;
     }
 
-    if(var16 < 1) {
+    if(var_16 < 1) {
       continue;
     }
 
-    var22 = 1;
-    var23 = 1;
+    var_22 = 1;
+    var_23 = 1;
 
-    switch (var16) {
+    switch (var_16) {
       case 2:
-        var23 = 1 + 1 * var22;
+        var_23 = 1 + 1 * var_22;
         break;
       case 3:
-        var23 = 1 + 3 * var22;
+        var_23 = 1 + 3 * var_22;
         break;
       case 4:
-        var23 = 1 + 5 * var22;
+        var_23 = 1 + 5 * var_22;
         break;
     }
 
-    if(var17 > 0) {
-      var23 += var17;
+    if(var_17 > 0) {
+      var_23 += var_17;
     }
 
-    level.hack_multiplier = var23;
-    var6 += var7 * var23;
+    level.hack_multiplier = var_23;
+    var_6 += var_7 * var_23;
 
-    if(var6 >= var4) {
+    if(var_6 >= var_4) {
       break;
     }
 
@@ -129,168 +129,168 @@ function starthackingdefensewithnoobjstruct(var0, var1, var2, var3) {
       break;
     }
 
-    var24 = var6 / var4;
+    var_24 = var_6 / var_4;
 
     if(isDefined(level.hack_progress)) {
-      var24 = level.hack_progress;
+      var_24 = level.hack_progress;
     }
 
-    objective_setprogress(var9, var24);
+    objective_setprogress(var_9, var_24);
   }
 
-  objective_setlabel(var9, "");
-  objective_sethot(var9, 0);
-  objective_setpulsate(var9, 0);
-  objective_setprogress(var9, 0);
-  objective_setshowprogress(var9, 0);
-  objective_delete(var9);
+  objective_setlabel(var_9, "");
+  objective_sethot(var_9, 0);
+  objective_setpulsate(var_9, 0);
+  objective_setprogress(var_9, 0);
+  objective_setshowprogress(var_9, 0);
+  objective_delete(var_9);
   level.hack_duration = undefined;
   scripts\cp\cp_objectives::freeworldid("independent_hack_" + level.independent_hack_defenses);
 
-  if(isDefined(var2)) {
-    level notify(var2);
+  if(isDefined(var_2)) {
+    level notify(var_2);
     return;
   }
 
   level notify("defense_hack_ended");
 }
 
-function starthackingdefense(var0, var1, var2, var3, var4) {
-  var5 = scripts\engine\utility::ter_op(isDefined(var2), var2, 60);
-  var6 = gettime() + var5 * 1000;
-  var7 = 0;
-  var8 = 0.05;
+function starthackingdefense(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = scripts\engine\utility::ter_op(isDefined(var_2), var_2, 60);
+  var_6 = gettime() + var_5 * 1000;
+  var_7 = 0;
+  var_8 = 0.05;
 
-  if(!isDefined(var4)) {
-    var4 = 120;
+  if(!isDefined(var_4)) {
+    var_4 = 120;
   }
 
-  level.hack_duration = var5;
-  objective_setownerteam(var0.objectiveindex, undefined);
-  objective_setprogressteam(var0.objectiveindex, undefined);
-  var9 = spawnStruct();
-  var9.currentteam = var0.currentteam;
-  var10 = 1;
+  level.hack_duration = var_5;
+  objective_setownerteam(var_0.objectiveindex, undefined);
+  objective_setprogressteam(var_0.objectiveindex, undefined);
+  var_9 = spawnStruct();
+  var_9.currentteam = var_0.currentteam;
+  var_10 = 1;
 
-  if(istrue(var0.no_lua)) {
-    var10 = 0;
+  if(istrue(var_0.no_lua)) {
+    var_10 = 0;
   }
 
-  var11 = 0;
+  var_11 = 0;
 
-  if(istrue(var0.use_old_label)) {
-    var11 = 1;
+  if(istrue(var_0.use_old_label)) {
+    var_11 = 1;
   }
 
-  hacking_labels_init(var9, var11);
+  hacking_labels_init(var_9, var_11);
   hacking_ui();
-  updatehackdefenselabel(var9, 0, var0.objectiveindex);
-  var12 = 1;
-  var13 = var1;
-  var14 = spawn("script_origin", var13);
-  var15 = 0;
-  var16 = (0, 0, 90);
+  updatehackdefenselabel(var_9, 0, var_0.objectiveindex);
+  var_12 = 1;
+  var_13 = var_1;
+  var_14 = spawn("script_origin", var_13);
+  var_15 = 0;
+  var_16 = (0, 0, 90);
 
   for(;;) {
-    wait var8;
-    var17 = 0;
-    var18 = 0;
-    var19 = [];
+    wait var_8;
+    var_17 = 0;
+    var_18 = 0;
+    var_19 = [];
 
-    foreach(var21 in scripts\cp\utility::getplayersinteam(var0.currentteam)) {
-      if(!var21 scripts\cp\utility::is_valid_player()) {
-        if(isDefined(var21.inhackring)) {
-          var21.inhackring = undefined;
+    foreach(var_21 in scripts\cp\utility::getplayersinteam(var_0.currentteam)) {
+      if(!var_21 scripts\cp\utility::is_valid_player()) {
+        if(isDefined(var_21.inhackring)) {
+          var_21.inhackring = undefined;
         }
 
         continue;
       }
 
-      if(distancesquared(var21.origin, var13) > var4 * var4) {
-        if(isDefined(var21.inhackring)) {
-          var21.inhackring = undefined;
+      if(distancesquared(var_21.origin, var_13) > var_4 * var_4) {
+        if(isDefined(var_21.inhackring)) {
+          var_21.inhackring = undefined;
 
           if(scripts\cp\cp_relics::try_start_fake_infil_chopper("relic_landlocked")) {
-            var21 thread scripts\cp\cp_relics::ref_12b7e(var21);
+            var_21 thread scripts\cp\cp_relics::ref_12b7e(var_21);
           }
         }
 
         continue;
       }
 
-      if(istrue(var0.ref_1405d)) {
-        var22 = scripts\engine\trace::create_contents(0, 1, 1, 0, 0, 0);
+      if(istrue(var_0.ref_1405d)) {
+        var_22 = scripts\engine\trace::create_contents(0, 1, 1, 0, 0, 0);
 
-        if(!scripts\engine\trace::ray_trace_passed(var21 getEye(), var13, [var21], var22)) {
-          if(isDefined(var21.inhackring)) {
-            var21.inhackring = undefined;
+        if(!scripts\engine\trace::ray_trace_passed(var_21 getEye(), var_13, [var_21], var_22)) {
+          if(isDefined(var_21.inhackring)) {
+            var_21.inhackring = undefined;
           }
 
           continue;
         }
       }
 
-      if(isDefined(var21.perk_data["hack_speed_boost"])) {
-        var18 += var21.perk_data["hack_speed_boost"];
+      if(isDefined(var_21.perk_data["hack_speed_boost"])) {
+        var_18 += var_21.perk_data["hack_speed_boost"];
       }
 
-      var17++;
+      var_17++;
 
-      if(!scripts\engine\utility::array_contains(var19, var21)) {
-        var19 = var21;
-        var21.inhackring = 1;
+      if(!scripts\engine\utility::array_contains(var_19, var_21)) {
+        var_19 = var_21;
+        var_21.inhackring = 1;
 
-        if(var15 == 0) {
-          var14 playSound("cp_hacking_start");
-          var14 playLoopSound("cp_hacking_lp");
-          var15 = 1;
+        if(var_15 == 0) {
+          var_14 playSound("cp_hacking_start");
+          var_14 playLoopSound("cp_hacking_lp");
+          var_15 = 1;
         }
       }
     }
 
-    if(var12 || scripts\cp\utility::roundup(var7) % 1 == 0) {
-      updatehackdefenselabel(var9, var17, var0.objectiveindex);
-      var12 = 0;
+    if(var_12 || scripts\cp\utility::roundup(var_7) % 1 == 0) {
+      updatehackdefenselabel(var_9, var_17, var_0.objectiveindex);
+      var_12 = 0;
     }
 
-    if(var17 < 1) {
-      if(var15 > 0) {
-        var14 playSound("cp_hacking_stop");
-        var14 stoploopsound("cp_hacking_lp");
-        var15 = 0;
+    if(var_17 < 1) {
+      if(var_15 > 0) {
+        var_14 playSound("cp_hacking_stop");
+        var_14 stoploopsound("cp_hacking_lp");
+        var_15 = 0;
       }
 
       continue;
     }
 
-    var24 = 1;
+    var_24 = 1;
 
-    if(isDefined(var0.hack_modifier)) {
-      var24 = var0.hack_modifier;
+    if(isDefined(var_0.hack_modifier)) {
+      var_24 = var_0.hack_modifier;
     }
 
-    var25 = 1;
+    var_25 = 1;
 
-    switch (var17) {
+    switch (var_17) {
       case 2:
-        var25 = 1 + 1 * var24;
+        var_25 = 1 + 1 * var_24;
         break;
       case 3:
-        var25 = 1 + 3 * var24;
+        var_25 = 1 + 3 * var_24;
         break;
       case 4:
-        var25 = 1 + 5 * var24;
+        var_25 = 1 + 5 * var_24;
         break;
     }
 
-    if(var18 > 0) {
-      var25 += var18;
+    if(var_18 > 0) {
+      var_25 += var_18;
     }
 
-    level.hack_multiplier = var25;
-    var7 += var8 * var25;
+    level.hack_multiplier = var_25;
+    var_7 += var_8 * var_25;
 
-    if(var7 >= var5) {
+    if(var_7 >= var_5) {
       break;
     }
 
@@ -298,38 +298,38 @@ function starthackingdefense(var0, var1, var2, var3, var4) {
       break;
     }
 
-    var26 = var7 / var5;
+    var_26 = var_7 / var_5;
 
     if(isDefined(level.hack_progress)) {
-      var26 = level.hack_progress;
+      var_26 = level.hack_progress;
     }
 
-    if(var7 <= 0) {
+    if(var_7 <= 0) {
       break;
     }
   }
 
-  var14 playSound("cp_hacking_stop");
-  var14 stoploopsound("cp_hacking_lp");
-  objective_setlabel(var0.objectiveindex, "");
-  objective_sethot(var0.objectiveindex, 0);
-  objective_setpulsate(var0.objectiveindex, 0);
+  var_14 playSound("cp_hacking_stop");
+  var_14 stoploopsound("cp_hacking_lp");
+  objective_setlabel(var_0.objectiveindex, "");
+  objective_sethot(var_0.objectiveindex, 0);
+  objective_setpulsate(var_0.objectiveindex, 0);
   level.hack_duration = undefined;
 
-  if(isDefined(var3)) {
-    var0 notify(var3);
+  if(isDefined(var_3)) {
+    var_0 notify(var_3);
   } else {
-    var0 notify("defense_hack_ended");
+    var_0 notify("defense_hack_ended");
   }
 
-  var14 delete();
+  var_14 delete();
 }
 
-function updatehackdefenselabel(var0, var1, var2) {
-  if(!isDefined(var0.players_in_range)) {
-    var0.players_in_range = var1;
-  } else if(var0.players_in_range == var1) {
-    if(!var1) {
+function updatehackdefenselabel(var_0, var_1, var_2) {
+  if(!isDefined(var_0.players_in_range)) {
+    var_0.players_in_range = var_1;
+  } else if(var_0.players_in_range == var_1) {
+    if(!var_1) {
       if(!isDefined(level.rooftop_hack_paused)) {
         level.rooftop_hack_paused = gettime() + randomintrange(15, 25) * 1000;
       }
@@ -342,77 +342,77 @@ function updatehackdefenselabel(var0, var1, var2) {
     return;
   }
 
-  if(!var1) {
-    objective_setlabel(var2, var0.label_settings.paused);
-    objective_sethot(var2, 1);
-    objective_setpulsate(var2, 1);
+  if(!var_1) {
+    objective_setlabel(var_2, var_0.label_settings.paused);
+    objective_sethot(var_2, 1);
+    objective_setpulsate(var_2, 1);
     level.hacking_paused = 1;
     setomnvar("cpu_hacking_signal", 0);
   } else {
     level.hacking_paused = undefined;
     level.rooftop_hack_paused = undefined;
 
-    switch (var1) {
+    switch (var_1) {
       case 1:
-        objective_setlabel(var2, var0.label_settings.mult_1);
+        objective_setlabel(var_2, var_0.label_settings.mult_1);
         break;
       case 2:
-        objective_setlabel(var2, var0.label_settings.mult_2);
+        objective_setlabel(var_2, var_0.label_settings.mult_2);
         break;
       case 3:
-        objective_setlabel(var2, var0.label_settings.mult_3);
+        objective_setlabel(var_2, var_0.label_settings.mult_3);
         break;
       case 4:
-        objective_setlabel(var2, var0.label_settings.mult_4);
+        objective_setlabel(var_2, var_0.label_settings.mult_4);
         break;
     }
 
-    setomnvar("cpu_hacking_signal", var1);
-    objective_sethot(var2, 0);
-    objective_setpulsate(var2, 0);
+    setomnvar("cpu_hacking_signal", var_1);
+    objective_sethot(var_2, 0);
+    objective_setpulsate(var_2, 0);
   }
 
-  var0.players_in_range = var1;
+  var_0.players_in_range = var_1;
 
   if(!isDefined(level.next_hack_update_time)) {
     level.next_hack_update_time = gettime();
   }
 
-  foreach(var4 in scripts\cp\utility::getplayersinteam(var0.currentteam)) {
+  foreach(var_4 in scripts\cp\utility::getplayersinteam(var_0.currentteam)) {
     if(soundexists("iw8_new_objective_sfx")) {
-      var4 playlocalsound("iw8_new_objective_sfx");
+      var_4 playlocalsound("iw8_new_objective_sfx");
     }
   }
 }
 
-function hacking_labels_init(var0, var1) {
-  var2 = spawnStruct();
+function hacking_labels_init(var_0, var_1) {
+  var_2 = spawnStruct();
 
-  if(!istrue(var1)) {
-    var2.paused = &"CP_BR_SYRK_OBJECTIVES/PANHACKING_PAUSED";
-    var2.mult_1 = &"CP_BR_SYRK_OBJECTIVES/PANHACK_IN_PROGRESS_1";
-    var2.mult_2 = &"CP_BR_SYRK_OBJECTIVES/PANHACK_IN_PROGRESS_2";
-    var2.mult_3 = &"CP_BR_SYRK_OBJECTIVES/PANHACK_IN_PROGRESS_3";
-    var2.mult_4 = &"CP_BR_SYRK_OBJECTIVES/PANHACK_IN_PROGRESS_4";
+  if(!istrue(var_1)) {
+    var_2.paused = &"CP_BR_SYRK_OBJECTIVES/PANHACKING_PAUSED";
+    var_2.mult_1 = &"CP_BR_SYRK_OBJECTIVES/PANHACK_IN_PROGRESS_1";
+    var_2.mult_2 = &"CP_BR_SYRK_OBJECTIVES/PANHACK_IN_PROGRESS_2";
+    var_2.mult_3 = &"CP_BR_SYRK_OBJECTIVES/PANHACK_IN_PROGRESS_3";
+    var_2.mult_4 = &"CP_BR_SYRK_OBJECTIVES/PANHACK_IN_PROGRESS_4";
   } else {
-    var2.paused = &"CP_BR_SYRK_OBJECTIVES/HACKING_PAUSED";
-    var2.mult_1 = &"CP_BR_SYRK_OBJECTIVES/HACK_IN_PROGRESS_1";
-    var2.mult_2 = &"CP_BR_SYRK_OBJECTIVES/HACK_IN_PROGRESS_2";
-    var2.mult_3 = &"CP_BR_SYRK_OBJECTIVES/HACK_IN_PROGRESS_3";
-    var2.mult_4 = &"CP_BR_SYRK_OBJECTIVES/HACK_IN_PROGRESS_4";
+    var_2.paused = &"CP_BR_SYRK_OBJECTIVES/HACKING_PAUSED";
+    var_2.mult_1 = &"CP_BR_SYRK_OBJECTIVES/HACK_IN_PROGRESS_1";
+    var_2.mult_2 = &"CP_BR_SYRK_OBJECTIVES/HACK_IN_PROGRESS_2";
+    var_2.mult_3 = &"CP_BR_SYRK_OBJECTIVES/HACK_IN_PROGRESS_3";
+    var_2.mult_4 = &"CP_BR_SYRK_OBJECTIVES/HACK_IN_PROGRESS_4";
   }
 
-  var0.label_settings = var2;
+  var_0.label_settings = var_2;
 }
 
 function hacking_ui() {
   level thread scripts\cp\cp_hacking::hacking_objective_time();
 }
 
-function smoke_canister_spawn(var0, var1) {
-  var2 = scripts\engine\utility::drop_to_ground(var0, 50, -200, (0, 0, 1));
-  var2 += (0, 0, 1);
-  magicgrenademanual("deploy_airdrop_mp", var2, (0, randomint(360), 0), 0.01);
+function smoke_canister_spawn(var_0, var_1) {
+  var_2 = scripts\engine\utility::drop_to_ground(var_0, 50, -200, (0, 0, 1));
+  var_2 += (0, 0, 1);
+  magicgrenademanual("deploy_airdrop_mp", var_2, (0, randomint(360), 0), 0.01);
 }
 
-function smoke_canister_end(var0) {}
+function smoke_canister_end(var_0) {}

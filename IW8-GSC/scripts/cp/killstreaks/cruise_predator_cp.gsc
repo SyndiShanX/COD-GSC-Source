@@ -13,18 +13,18 @@ function init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("cruise_predator", "assignTargetMarkers", &initbattleroyalec130airdropcratedata);
 }
 
-function cruisepredator_directionoverride(var0) {
+function cruisepredator_directionoverride(var_0) {
   if(isDefined(self.drone_strike_dir_override)) {
-    var0 = anglesToForward(self.drone_strike_dir_override.angles);
-    var0 = vectorNormalize(var0);
-    var0 *= (1, 1, 0);
+    var_0 = anglesToForward(self.drone_strike_dir_override.angles);
+    var_0 = vectorNormalize(var_0);
+    var_0 *= (1, 1, 0);
   }
 
-  return var0;
+  return var_0;
 }
 
-function cruisepredator_aicharacterchecks(var0) {
-  if(isai(var0) || isPlayer(var0)) {
+function cruisepredator_aicharacterchecks(var_0) {
+  if(isai(var_0) || isPlayer(var_0)) {
     return 1;
   }
 
@@ -32,96 +32,96 @@ function cruisepredator_aicharacterchecks(var0) {
 }
 
 function cruisepredator_createbackupheight() {
-  var0 = spawn("script_origin", level.mapcenter + (0, 0, 2576));
-  var0.angles = (0, 0, 0);
-  var0.targetname = "drone_strike_height";
-  level.vdronestrikeheight = var0;
+  var_0 = spawn("script_origin", level.mapcenter + (0, 0, 2576));
+  var_0.angles = (0, 0, 0);
+  var_0.targetname = "drone_strike_height";
+  level.vdronestrikeheight = var_0;
 }
 
-function initbattleroyalec130airdropcratedata(var0) {
-  var1 = [];
-  var2 = [];
-  var3 = level.characters;
-  var4 = [];
-  var5 = level.players;
-  var6 = spawnStruct();
+function initbattleroyalec130airdropcratedata(var_0) {
+  var_1 = [];
+  var_2 = [];
+  var_3 = level.characters;
+  var_4 = [];
+  var_5 = level.players;
+  var_6 = spawnStruct();
 
   if(isDefined(level.remote_tanks)) {
-    foreach(var8 in level.remote_tanks) {
-      if(isDefined(var8)) {
-        var4 = scripts\engine\utility::array_add(var4, var8);
+    foreach(var_8 in level.remote_tanks) {
+      if(isDefined(var_8)) {
+        var_4 = scripts\engine\utility::array_add(var_4, var_8);
       }
     }
   }
 
   if(isDefined(level.mark_heli) && isDefined(level.heli)) {
-    var4 = scripts\engine\utility::array_add(var4, level.heli);
+    var_4 = scripts\engine\utility::array_add(var_4, level.heli);
   }
 
   if(isDefined(level.vo_paratroopers)) {
-    foreach(var11 in level.vo_paratroopers) {
-      var4 = scripts\engine\utility::array_add(var4, var11);
+    foreach(var_11 in level.vo_paratroopers) {
+      var_4 = scripts\engine\utility::array_add(var_4, var_11);
     }
   }
 
-  foreach(var14 in var3) {
-    if(level.teambased && var14.team == var0.team || var14 == var0) {
-      var2 = var14;
+  foreach(var_14 in var_3) {
+    if(level.teambased && var_14.team == var_0.team || var_14 == var_0) {
+      var_2 = var_14;
       continue;
     }
 
-    if(cruisepredator_aicharacterchecks(var14)) {
-      var1 = var14;
+    if(cruisepredator_aicharacterchecks(var_14)) {
+      var_1 = var_14;
     }
   }
 
-  var16 = scripts\engine\utility::array_combine(var4, var1);
+  var_16 = scripts\engine\utility::array_combine(var_4, var_1);
 
-  foreach(var14 in var5) {
-    if(level.teambased && var14.team != var0.team) {
+  foreach(var_14 in var_5) {
+    if(level.teambased && var_14.team != var_0.team) {
       continue;
     }
 
-    var2 = var14;
+    var_2 = var_14;
   }
 
-  var6.enemytargetmarkergroup = var16;
-  var6.friendlytargetmarkergroup = var2;
-  return var6;
+  var_6.enemytargetmarkergroup = var_16;
+  var_6.friendlytargetmarkergroup = var_2;
+  return var_6;
 }
 
-function cruisepredator_cpmarkenemies(var0) {
-  var0.enemy_list = [];
+function cruisepredator_cpmarkenemies(var_0) {
+  var_0.enemy_list = [];
 
   if(isDefined(level.spawned_enemies)) {
-    for(var1 = 0; var1 < level.spawned_enemies.size; var1++) {
-      level.spawned_enemies[var1] hudoutlineenableforclient(var0, "outlinefill_depth_red");
-      var0.enemy_list[var0.enemy_list.size] = level.spawned_enemies[var1];
+    for(var_1 = 0; var_1 < level.spawned_enemies.size; var_1++) {
+      level.spawned_enemies[var_1] hudoutlineenableforclient(var_0, "outlinefill_depth_red");
+      var_0.enemy_list[var_0.enemy_list.size] = level.spawned_enemies[var_1];
     }
   }
 
   if(isDefined(level.remote_tanks)) {
-    foreach(var3 in level.remote_tanks) {
-      if(isDefined(var3)) {
-        var3 hudoutlineenableforclient(var0, "outlinefill_depth_red");
-        var0.enemy_list[var0.enemy_list.size] = var3;
+    foreach(var_3 in level.remote_tanks) {
+      if(isDefined(var_3)) {
+        var_3 hudoutlineenableforclient(var_0, "outlinefill_depth_red");
+        var_0.enemy_list[var_0.enemy_list.size] = var_3;
       }
     }
   }
 
   if(isDefined(level.mark_heli) && isDefined(level.heli)) {
-    level.heli hudoutlineenableforclient(var0, "outlinefill_depth_red");
-    var0.enemy_list[var0.enemy_list.size] = level.heli;
+    level.heli hudoutlineenableforclient(var_0, "outlinefill_depth_red");
+    var_0.enemy_list[var_0.enemy_list.size] = level.heli;
   }
 
-  return var0.enemy_list;
+  return var_0.enemy_list;
 }
 
-function cruisepredator_cpunmarkenemies(var0) {
-  if(isDefined(var0.enemy_list)) {
-    foreach(var2 in var0.enemy_list) {
-      if(isDefined(var2)) {
-        var2 hudoutlinedisableforclient(var0);
+function cruisepredator_cpunmarkenemies(var_0) {
+  if(isDefined(var_0.enemy_list)) {
+    foreach(var_2 in var_0.enemy_list) {
+      if(isDefined(var_2)) {
+        var_2 hudoutlinedisableforclient(var_0);
       }
     }
 
@@ -129,6 +129,6 @@ function cruisepredator_cpunmarkenemies(var0) {
   }
 }
 
-function cruisepredator_removeitemfromslot(var0) {
-  var0 scripts\cp\crafting_system::remove_crafted_item_from_slot(scripts\cp\crafting_system::getitemslot("drone_strike"));
+function cruisepredator_removeitemfromslot(var_0) {
+  var_0 scripts\cp\crafting_system::remove_crafted_item_from_slot(scripts\cp\crafting_system::getitemslot("drone_strike"));
 }

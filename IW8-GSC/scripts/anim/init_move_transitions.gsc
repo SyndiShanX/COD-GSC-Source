@@ -50,43 +50,43 @@ function init_move_transition_arrays() {
 
 function initmovestartstoptransitions() {
   init_move_transition_arrays();
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, "left");
 }
 
-function getsplittimes(var0) {
-  getsplittimesside(var0, 7, 8, 0, anim.splitarrivalsleft, anim.splitexitsleft);
-  getsplittimesside(var0, 8, 9, 1, anim.splitarrivalsright, anim.splitexitsright);
+function getsplittimes(var_0) {
+  getsplittimesside(var_0, 7, 8, 0, anim.splitarrivalsleft, anim.splitexitsleft);
+  getsplittimesside(var_0, 8, 9, 1, anim.splitarrivalsright, anim.splitexitsright);
 }
 
-function getsplittimesside(var0, var1, var2, var3, var4, var5) {
-  var6 = 0;
+function getsplittimesside(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = 0;
 
-  for(var7 = var1; var7 <= var2; var7++) {
-    if(!var6) {
-      foreach(var10, var9 in var4) {
-        if(isDefined(anim.archetypes[var0]["cover_trans"]) && isDefined(anim.archetypes[var0]["cover_trans"][var10]) && isDefined(anim.archetypes[var0]["cover_trans"][var10][var7])) {
-          anim.archetypes[var0]["cover_trans_predist"][var10][var7] = getmovedelta(anim.archetypes[var0]["cover_trans"][var10][var7], 0, gettranssplittime(var0, var10, var7));
-          anim.archetypes[var0]["cover_trans_dist"][var10][var7] = getmovedelta(anim.archetypes[var0]["cover_trans"][var10][var7], 0, 1) - anim.archetypes[var0]["cover_trans_predist"][var10][var7];
-          anim.archetypes[var0]["cover_trans_angles"][var10][var7] = getangledelta(anim.archetypes[var0]["cover_trans"][var10][var7], 0, 1);
+  for(var_7 = var_1; var_7 <= var_2; var_7++) {
+    if(!var_6) {
+      foreach(var_10, var_9 in var_4) {
+        if(isDefined(anim.archetypes[var_0]["cover_trans"]) && isDefined(anim.archetypes[var_0]["cover_trans"][var_10]) && isDefined(anim.archetypes[var_0]["cover_trans"][var_10][var_7])) {
+          anim.archetypes[var_0]["cover_trans_predist"][var_10][var_7] = getmovedelta(anim.archetypes[var_0]["cover_trans"][var_10][var_7], 0, gettranssplittime(var_0, var_10, var_7));
+          anim.archetypes[var_0]["cover_trans_dist"][var_10][var_7] = getmovedelta(anim.archetypes[var_0]["cover_trans"][var_10][var_7], 0, 1) - anim.archetypes[var_0]["cover_trans_predist"][var_10][var_7];
+          anim.archetypes[var_0]["cover_trans_angles"][var_10][var_7] = getangledelta(anim.archetypes[var_0]["cover_trans"][var_10][var_7], 0, 1);
         }
       }
 
-      foreach(var10, var9 in var5) {
-        if(isDefined(anim.archetypes[var0]["cover_exit"]) && isDefined(anim.archetypes[var0]["cover_exit"][var10]) && isDefined(anim.archetypes[var0]["cover_exit"][var10][var7])) {
-          anim.archetypes[var0]["cover_exit_dist"][var10][var7] = getmovedelta(anim.archetypes[var0]["cover_exit"][var10][var7], 0, getexitsplittime(var0, var10, var7));
-          anim.archetypes[var0]["cover_exit_postdist"][var10][var7] = getmovedelta(anim.archetypes[var0]["cover_exit"][var10][var7], 0, 1) - anim.archetypes[var0]["cover_exit_dist"][var10][var7];
-          anim.archetypes[var0]["cover_exit_angles"][var10][var7] = getangledelta(anim.archetypes[var0]["cover_exit"][var10][var7], 0, 1);
+      foreach(var_10, var_9 in var_5) {
+        if(isDefined(anim.archetypes[var_0]["cover_exit"]) && isDefined(anim.archetypes[var_0]["cover_exit"][var_10]) && isDefined(anim.archetypes[var_0]["cover_exit"][var_10][var_7])) {
+          anim.archetypes[var_0]["cover_exit_dist"][var_10][var_7] = getmovedelta(anim.archetypes[var_0]["cover_exit"][var_10][var_7], 0, getexitsplittime(var_0, var_10, var_7));
+          anim.archetypes[var_0]["cover_exit_postdist"][var_10][var_7] = getmovedelta(anim.archetypes[var_0]["cover_exit"][var_10][var_7], 0, 1) - anim.archetypes[var_0]["cover_exit_dist"][var_10][var_7];
+          anim.archetypes[var_0]["cover_exit_angles"][var_10][var_7] = getangledelta(anim.archetypes[var_0]["cover_exit"][var_10][var_7], 0, 1);
         }
       }
     }
   }
 }
 
-function getexitsplittime(var0, var1, var2) {
-  return anim.archetypes[var0]["cover_exit_split"][var1][var2];
+function getexitsplittime(var_0, var_1, var_2) {
+  return anim.archetypes[var_0]["cover_exit_split"][var_1][var_2];
 }
 
-function gettranssplittime(var0, var1, var2) {
-  return anim.archetypes[var0]["cover_trans_split"][var1][var2];
+function gettranssplittime(var_0, var_1, var_2) {
+  return anim.archetypes[var_0]["cover_trans_split"][var_1][var_2];
 }

@@ -4,19 +4,19 @@
 ************************************************************/
 
 function init() {
-  var0 = spawnStruct();
-  var0.ref_140cf = &ref_140cf;
-  var0.weight = getdvarfloat("scr_br_pe_firesale_weight", 1);
-  var0.attackerswaittime = &attackerswaittime;
-  var0.ref_14382 = &ref_14382;
-  var0.‹Á¿ ø {
+  var_0 = spawnStruct();
+  var_0.ref_140cf = &ref_140cf;
+  var_0.weight = getdvarfloat("scr_br_pe_firesale_weight", 1);
+  var_0.attackerswaittime = &attackerswaittime;
+  var_0.ref_14382 = &ref_14382;
+  var_0.‹Á¿ ø {
     ÏXX;
     â # / = &postinitfunc;
-    var0.ref_11b78 = getdvarint("scr_br_pe_firesale_max_times", 1);
-    var0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("firesale", "05 101010101010");
-    var0.£¼#w]
+    var_0.ref_11b78 = getdvarint("scr_br_pe_firesale_max_times", 1);
+    var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("firesale", "05 101010101010");
+    var_0.£¼#w]
   j‹ ƒ½ Ï‚ UÀíÌI¸ Û« = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("firesale");
-  scripts\mp\gametypes\br_publicevents::ref_12b35(2, var0);
+  scripts\mp\gametypes\br_publicevents::ref_12b35(2, var_0);
 }
 
 function postinitfunc() {
@@ -33,35 +33,35 @@ function ref_140cf() {
     return true;
   }
 
-  var0 = scripts\mp\gametypes\br_armory_kiosk::resetarenaomnvardata();
-  return var0 >= 1;
+  var_0 = scripts\mp\gametypes\br_armory_kiosk::resetarenaomnvardata();
+  return var_0 >= 1;
 }
 
 function ref_14382() {
   level endon("game_ended");
   level endon("cancel_public_event");
-  var0 = forest_combat();
-  wait var0;
+  var_0 = forest_combat();
+  wait var_0;
 }
 
 function relic_squadlink_add_visionset() {
-  var0 = getdvarfloat("scr_br_pe_firesale_duration", 90);
-  var1 = isDefined(level.br_circle) && isDefined(level.br_circle.circleindex) && level.br_circle.circleindex != -1;
-  var2 = getdvarint("scr_br_pe_firesale_bound_under_circleduration", 1) == 1;
+  var_0 = getdvarfloat("scr_br_pe_firesale_duration", 90);
+  var_1 = isDefined(level.br_circle) && isDefined(level.br_circle.circleindex) && level.br_circle.circleindex != -1;
+  var_2 = getdvarint("scr_br_pe_firesale_bound_under_circleduration", 1) == 1;
 
-  if(var2 && var1) {
-    var0 = min(var0, scripts\mp\gametypes\br_circle::inithelirepository());
+  if(var_2 && var_1) {
+    var_0 = min(var_0, scripts\mp\gametypes\br_circle::inithelirepository());
   }
 
-  var3 = getdvarint("scr_br_pe_firesale_override_with_circleduration", 0) == 1;
+  var_3 = getdvarint("scr_br_pe_firesale_override_with_circleduration", 0) == 1;
 
-  if(var3 && var1) {
-    var0 = scripts\mp\gametypes\br_circle::inithelirepository();
+  if(var_3 && var_1) {
+    var_0 = scripts\mp\gametypes\br_circle::inithelirepository();
   }
 
-  var4 = getdvarint("scr_br_pe_firesale_minDuration", 15);
-  var0 = max(var0, var4);
-  return var0;
+  var_4 = getdvarint("scr_br_pe_firesale_minDuration", 15);
+  var_0 = max(var_0, var_4);
+  return var_0;
 }
 
 function attackerswaittime() {
@@ -71,21 +71,21 @@ function attackerswaittime() {
   scripts\mp\gametypes\br_public::brleaderdialog("public_events_firesale_start");
   setomnvar("ui_publicevent_minimap_pulse", 1);
   setomnvar("ui_publicevent_timer_type", 1);
-  var0 = relic_squadlink_add_visionset();
-  var1 = gettime() + var0 * 1000;
-  setomnvar("ui_publicevent_timer", var1);
-  var2 = spawn("script_origin", (0, 0, 0));
-  var2 hide();
-  var3 = 5;
+  var_0 = relic_squadlink_add_visionset();
+  var_1 = gettime() + var_0 * 1000;
+  setomnvar("ui_publicevent_timer", var_1);
+  var_2 = spawn("script_origin", (0, 0, 0));
+  var_2 hide();
+  var_3 = 5;
 
-  if(var0 > var3) {
-    wait var0 - var3;
+  if(var_0 > var_3) {
+    wait var_0 - var_3;
   } else {
-    var3 = int(var0);
+    var_3 = int(var_0);
   }
 
-  for(var4 = 0; var4 < var3; var4++) {
-    var2 playSound("ui_mp_fire_sale_timer");
+  for(var_4 = 0; var_4 < var_3; var_4++) {
+    var_2 playSound("ui_mp_fire_sale_timer");
     wait 1;
   }
 
@@ -95,16 +95,16 @@ function attackerswaittime() {
   scripts\mp\gametypes\br_public::brleaderdialog("public_events_firesale_end");
   setomnvar("ui_publicevent_minimap_pulse", 0);
   setomnvar("ui_publicevent_timer_type", 0);
-  var2 delete();
+  var_2 delete();
 }
 
 function forest_combat() {
-  var0 = getdvarfloat("scr_br_pe_firesale_starttime_min", 795);
-  var1 = getdvarfloat("scr_br_pe_firesale_starttime_max", 1110);
+  var_0 = getdvarfloat("scr_br_pe_firesale_starttime_min", 795);
+  var_1 = getdvarfloat("scr_br_pe_firesale_starttime_max", 1110);
 
-  if(var1 > var0) {
-    return randomfloatrange(var0, var1);
+  if(var_1 > var_0) {
+    return randomfloatrange(var_0, var_1);
   }
 
-  return var0;
+  return var_0;
 }

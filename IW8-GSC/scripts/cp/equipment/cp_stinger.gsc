@@ -42,10 +42,10 @@ function watchlauncherusage() {
   self endon("death_or_disconnect");
 
   for(;;) {
-    var0 = self getcurrentweapon();
-    runlauncherlogic(var0.basename);
+    var_0 = self getcurrentweapon();
+    runlauncherlogic(var_0.basename);
 
-    switch (var0.basename) {
+    switch (var_0.basename) {
       case "iw8_la_kgolf_mp":
       case "iw8_la_gromeo_mp":
         thread initstingerusage();
@@ -56,10 +56,10 @@ function watchlauncherusage() {
   }
 }
 
-function runlauncherlogic(var0) {
+function runlauncherlogic(var_0) {
   self endon("death_or_disconnect");
 
-  switch (var0) {
+  switch (var_0) {
     case "iw8_la_kgolf_mp":
     case "iw8_la_gromeo_mp":
       thread stingerusageloop();
@@ -109,10 +109,10 @@ function loopstingerlockedfeedback() {
   }
 }
 
-function softsighttest(var0) {
-  var1 = 500;
+function softsighttest(var_0) {
+  var_1 = 500;
 
-  if(stingtargstruct_isinlos(var0)) {
+  if(stingtargstruct_isinlos(var_0)) {
     self.stingerlostsightlinetime = 0;
     return true;
   }
@@ -121,9 +121,9 @@ function softsighttest(var0) {
     self.stingerlostsightlinetime = gettime();
   }
 
-  var2 = gettime() - self.stingerlostsightlinetime;
+  var_2 = gettime() - self.stingerlostsightlinetime;
 
-  if(var2 >= var1) {
+  if(var_2 >= var_1) {
     resetstingerlocking();
     return false;
   }
@@ -144,44 +144,44 @@ function stingerusage() {
   }
 
   if(self.stingerstage == 0) {
-    var0 = lockonlaunchers_gettargetarray(0);
+    var_0 = lockonlaunchers_gettargetarray(0);
 
-    if(var0.size == 0) {
+    if(var_0.size == 0) {
       return;
     }
 
-    var1 = self.origin;
-    var0 = sortbydistance(var0, var1);
-    var2 = undefined;
-    var3 = 0;
+    var_1 = self.origin;
+    var_0 = sortbydistance(var_0, var_1);
+    var_2 = undefined;
+    var_3 = 0;
 
-    foreach(var5 in var0) {
-      if(!isDefined(var5)) {
+    foreach(var_5 in var_0) {
+      if(!isDefined(var_5)) {
         continue;
       }
 
-      var2 = stingtargstruct_create(self, var5);
-      stingtargstruct_getoffsets(var2);
-      stingtargstruct_getorigins(var2);
-      stingtargstruct_getinreticle(var2);
+      var_2 = stingtargstruct_create(self, var_5);
+      stingtargstruct_getoffsets(var_2);
+      stingtargstruct_getorigins(var_2);
+      stingtargstruct_getinreticle(var_2);
 
-      if(stingtargstruct_isinreticle(var2)) {
-        var3 = 1;
+      if(stingtargstruct_isinreticle(var_2)) {
+        var_3 = 1;
         break;
       }
     }
 
-    if(!var3) {
+    if(!var_3) {
       return;
     }
 
-    stingtargstruct_getinlos(var2);
+    stingtargstruct_getinlos(var_2);
 
-    if(!stingtargstruct_isinlos(var2)) {
+    if(!stingtargstruct_isinlos(var_2)) {
       return;
     }
 
-    self.stingertarget = var2.target;
+    self.stingertarget = var_2.target;
     self.stingerlockstarttime = gettime();
     self.stingerstage = 1;
     self.stingerlostsightlinetime = 0;
@@ -195,32 +195,32 @@ function stingerusage() {
       return;
     }
 
-    var2 = stingtargstruct_create(self, self.stingertarget);
-    stingtargstruct_getoffsets(var2);
-    stingtargstruct_getorigins(var2);
-    stingtargstruct_getinreticle(var2);
+    var_2 = stingtargstruct_create(self, self.stingertarget);
+    stingtargstruct_getoffsets(var_2);
+    stingtargstruct_getorigins(var_2);
+    stingtargstruct_getinreticle(var_2);
 
-    if(!stingtargstruct_isinreticle(var2)) {
+    if(!stingtargstruct_isinreticle(var_2)) {
       resetstingerlocking();
       return;
     }
 
-    stingtargstruct_getinlos(var2);
+    stingtargstruct_getinlos(var_2);
 
-    if(!softsighttest(var2)) {
+    if(!softsighttest(var_2)) {
       return;
     }
 
-    var7 = gettime() - self.stingerlockstarttime;
+    var_7 = gettime() - self.stingerlockstarttime;
 
-    if(var7 < 500) {
+    if(var_7 < 500) {
       return;
     }
 
     self notify("stop_javelin_locking_feedback");
     thread loopstingerlockedfeedback();
-    var8 = undefined;
-    stinger_finalizelock(var2);
+    var_8 = undefined;
+    stinger_finalizelock(var_2);
 
     if(isDefined(level.activekillstreaks)) {}
 
@@ -233,19 +233,19 @@ function stingerusage() {
       return;
     }
 
-    var2 = stingtargstruct_create(self, self.stingertarget);
-    stingtargstruct_getoffsets(var2);
-    stingtargstruct_getorigins(var2);
-    stingtargstruct_getinreticle(var2);
-    stingtargstruct_getinlos(var2);
+    var_2 = stingtargstruct_create(self, self.stingertarget);
+    stingtargstruct_getoffsets(var_2);
+    stingtargstruct_getorigins(var_2);
+    stingtargstruct_getinreticle(var_2);
+    stingtargstruct_getinlos(var_2);
 
-    if(!softsighttest(var2)) {
+    if(!softsighttest(var_2)) {
       return;
     } else {
-      stinger_finalizelock(var2);
+      stinger_finalizelock(var_2);
     }
 
-    if(!stingtargstruct_isinreticle(var2)) {
+    if(!stingtargstruct_isinreticle(var_2)) {
       resetstingerlocking();
       return;
     }
@@ -254,172 +254,172 @@ function stingerusage() {
   }
 }
 
-function lockonlaunchers_gettargetarray(var0) {
-  var1 = [];
-  var2 = 0;
+function lockonlaunchers_gettargetarray(var_0) {
+  var_1 = [];
+  var_2 = 0;
 
   if(level.teambased) {
-    if(isDefined(var0) && var0 == 1) {
-      foreach(var4 in level.characters) {
-        if(isDefined(var4) && isalive(var4) && (var4.team != self.team || var2)) {
-          var1 = var4;
+    if(isDefined(var_0) && var_0 == 1) {
+      foreach(var_4 in level.characters) {
+        if(isDefined(var_4) && isalive(var_4) && (var_4.team != self.team || var_2)) {
+          var_1 = var_4;
         }
       }
     }
 
     if(isDefined(level.activekillstreaks)) {
-      foreach(var7 in level.activekillstreaks) {
-        if(isDefined(var7.affectedbylockon) && (var7.team != self.team || var2)) {
-          var1 = var7;
+      foreach(var_7 in level.activekillstreaks) {
+        if(isDefined(var_7.affectedbylockon) && (var_7.team != self.team || var_2)) {
+          var_1 = var_7;
         }
       }
     }
 
     if(isDefined(level.all_spawned_vehicles)) {
-      foreach(var7 in level.all_spawned_vehicles) {
-        var1 = var7;
+      foreach(var_7 in level.all_spawned_vehicles) {
+        var_1 = var_7;
       }
     }
 
     if(isDefined(level.remote_tanks)) {
-      foreach(var7 in level.remote_tanks) {
-        var1 = var7;
+      foreach(var_7 in level.remote_tanks) {
+        var_1 = var_7;
       }
     }
 
-    var13 = scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances("light_tank");
+    var_13 = scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances("light_tank");
 
-    foreach(var15 in var13) {
-      if(var15.team != self.team || var2) {
-        var1 = var15;
+    foreach(var_15 in var_13) {
+      if(var_15.team != self.team || var_2) {
+        var_1 = var_15;
       }
     }
 
-    var17 = scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances("technical");
+    var_17 = scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances("technical");
 
-    foreach(var19 in var17) {
-      if(isDefined(var19.team) && var19.team != self.team || var2) {
-        var1 = var19;
+    foreach(var_19 in var_17) {
+      if(isDefined(var_19.team) && var_19.team != self.team || var_2) {
+        var_1 = var_19;
       }
     }
 
-    var21 = scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances("little_bird");
+    var_21 = scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances("little_bird");
 
-    foreach(var23 in var21) {
-      if(var23.team != self.team || var2) {
-        var1 = var23;
+    foreach(var_23 in var_21) {
+      if(var_23.team != self.team || var_2) {
+        var_1 = var_23;
       }
     }
 
-    var25 = scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances("tac_rover");
+    var_25 = scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances("tac_rover");
 
-    foreach(var27 in var25) {
-      if(var27.team != self.team || var2) {
-        var1 = var27;
+    foreach(var_27 in var_25) {
+      if(var_27.team != self.team || var_2) {
+        var_1 = var_27;
       }
     }
 
     if(isDefined(level.cratedropdata)) {
       if(isDefined(level.cratedropdata.ac130s)) {
-        foreach(var30 in level.cratedropdata.ac130s) {
-          if(var30.team != self.team || var2) {
-            var1 = var30;
+        foreach(var_30 in level.cratedropdata.ac130s) {
+          if(var_30.team != self.team || var_2) {
+            var_1 = var_30;
           }
         }
       }
     }
   } else {
-    if(isDefined(var23) && var23 == 1) {
-      foreach(var4 in level.characters) {
-        if((!isDefined(var4) || !isalive(var4)) && !var27) {
+    if(isDefined(var_23) && var_23 == 1) {
+      foreach(var_4 in level.characters) {
+        if((!isDefined(var_4) || !isalive(var_4)) && !var_27) {
           continue;
         }
 
-        var25 = var4;
+        var_25 = var_4;
       }
     }
 
     if(isDefined(level.activekillstreaks)) {
-      foreach(var7 in level.activekillstreaks) {
-        if(isDefined(var7.affectedbylockon) && (isDefined(var7.owner) && var7.owner != self || var27)) {
-          var25 = var7;
+      foreach(var_7 in level.activekillstreaks) {
+        if(isDefined(var_7.affectedbylockon) && (isDefined(var_7.owner) && var_7.owner != self || var_27)) {
+          var_25 = var_7;
         }
       }
     }
 
     if(isDefined(level.all_spawned_vehicles)) {
-      foreach(var7 in level.all_spawned_vehicles) {
-        var25 = var7;
+      foreach(var_7 in level.all_spawned_vehicles) {
+        var_25 = var_7;
       }
     }
 
     if(isDefined(level.remote_tanks)) {
-      foreach(var7 in level.remote_tanks) {
-        var25 = var7;
+      foreach(var_7 in level.remote_tanks) {
+        var_25 = var_7;
       }
     }
 
     if(isDefined(level.technicals)) {
-      foreach(var19 in level.technicals) {
-        if(isDefined(var19.owner) && var19.owner != self || var27) {
-          var25 = var19;
+      foreach(var_19 in level.technicals) {
+        if(isDefined(var_19.owner) && var_19.owner != self || var_27) {
+          var_25 = var_19;
         }
       }
     }
 
-    var13 = scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances("light_tank");
+    var_13 = scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances("light_tank");
 
-    foreach(var15 in var13) {
-      if(var15.owner != self || var27) {
-        var25 = var15;
+    foreach(var_15 in var_13) {
+      if(var_15.owner != self || var_27) {
+        var_25 = var_15;
       }
     }
 
-    var17 = scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances("technical");
+    var_17 = scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances("technical");
 
-    foreach(var19 in var17) {
-      if(var19.owner != self || var27) {
-        var25 = var19;
+    foreach(var_19 in var_17) {
+      if(var_19.owner != self || var_27) {
+        var_25 = var_19;
       }
     }
 
-    var21 = scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances("little_bird");
+    var_21 = scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances("little_bird");
 
-    foreach(var23 in var21) {
-      if(var23.owner != self || var27) {
-        var25 = var23;
+    foreach(var_23 in var_21) {
+      if(var_23.owner != self || var_27) {
+        var_25 = var_23;
       }
     }
 
-    var25 = scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances("tac_rover");
+    var_25 = scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances("tac_rover");
 
-    foreach(var27 in var25) {
-      if(var27.owner != self || var27) {
-        var25 = var27;
+    foreach(var_27 in var_25) {
+      if(var_27.owner != self || var_27) {
+        var_25 = var_27;
       }
     }
 
     if(isDefined(level.cratedropdata)) {
       if(isDefined(level.cratedropdata.ac130s)) {
-        foreach(var30 in level.cratedropdata.ac130s) {
-          if(var30.owner != self || var27) {
-            var25 = var30;
+        foreach(var_30 in level.cratedropdata.ac130s) {
+          if(var_30.owner != self || var_27) {
+            var_25 = var_30;
           }
         }
       }
     }
   }
 
-  var52 = [];
+  var_52 = [];
 
-  foreach(var54 in var25) {
-    if(isDefined(var54)) {
-      var52 = var54;
+  foreach(var_54 in var_25) {
+    if(isDefined(var_54)) {
+      var_52 = var_54;
     }
   }
 
-  var25 = var52;
-  return var25;
+  var_25 = var_52;
+  return var_25;
 }
 
 function stingerusageloop() {
@@ -438,81 +438,81 @@ function stingerusageloop() {
   }
 }
 
-function stinger_finalizelock(var0) {
-  var1 = undefined;
+function stinger_finalizelock(var_0) {
+  var_1 = undefined;
 
-  if(isDefined(var0.inlosid)) {
-    var1 = var0.offsets[var0.inlosid];
-    var1 = (var1[1], -1 * var1[0], var1[2]);
+  if(isDefined(var_0.inlosid)) {
+    var_1 = var_0.offsets[var_0.inlosid];
+    var_1 = (var_1[1], -1 * var_1[0], var_1[2]);
   } else {
-    var1 = (0, 0, 0);
+    var_1 = (0, 0, 0);
   }
 
-  self weaponlockfinalize(self.stingertarget, var1);
+  self weaponlockfinalize(self.stingertarget, var_1);
 }
 
-function addhudincoming_attacker(var0) {
-  if(!isDefined(var0)) {
+function addhudincoming_attacker(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var1 = var0;
+  var_1 = var_0;
 
-  if(isDefined(var0.owner) && !isplayerkillstreak(var0)) {
-    var1 = var0.owner;
+  if(isDefined(var_0.owner) && !isplayerkillstreak(var_0)) {
+    var_1 = var_0.owner;
   }
 
-  if(!isDefined(var1) || !isPlayer(var1)) {
+  if(!isDefined(var_1) || !isPlayer(var_1)) {
     return;
   }
 
-  var1 setclientomnvar("ui_killstreak_missile_warn", 1);
+  var_1 setclientomnvar("ui_killstreak_missile_warn", 1);
 }
 
-function removehudincoming_attacker(var0) {
-  if(!isDefined(var0)) {
+function removehudincoming_attacker(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var1 = var0;
+  var_1 = var_0;
 
-  if(!isplayerkillstreak(var0)) {
-    if(!isDefined(var0.owner)) {
+  if(!isplayerkillstreak(var_0)) {
+    if(!isDefined(var_0.owner)) {
       return;
     }
 
-    var1 = var0.owner;
+    var_1 = var_0.owner;
   }
 
-  if(!isDefined(var1) || !isPlayer(var1)) {
+  if(!isDefined(var_1) || !isPlayer(var_1)) {
     return;
   }
 
-  var1 setclientomnvar("ui_killstreak_missile_warn", 0);
+  var_1 setclientomnvar("ui_killstreak_missile_warn", 0);
 }
 
-function isplayerkillstreak(var0) {
-  if(!isDefined(var0.activeplayerstreak)) {
+function isplayerkillstreak(var_0) {
+  if(!isDefined(var_0.activeplayerstreak)) {
     return 0;
   }
 
-  switch (var0.activeplayerstreak) {
+  switch (var_0.activeplayerstreak) {
     default:
       return 0;
   }
 }
 
-function stingtargstruct_create(var0, var1) {
-  var2 = spawnStruct();
-  var2.player = var0;
-  var2.target = var1;
-  var2.offsets = [];
-  var2.origins = [];
-  var2.inreticledistssqr = [];
-  var2.inreticlesortedids = [];
-  var2.inlosid = undefined;
-  var2.useoldlosverification = 1;
-  return var2;
+function stingtargstruct_create(var_0, var_1) {
+  var_2 = spawnStruct();
+  var_2.player = var_0;
+  var_2.target = var_1;
+  var_2.offsets = [];
+  var_2.origins = [];
+  var_2.inreticledistssqr = [];
+  var_2.inreticlesortedids = [];
+  var_2.inlosid = undefined;
+  var_2.useoldlosverification = 1;
+  return var_2;
 }
 
 function stingtargstruct_getoffsets() {
@@ -570,146 +570,146 @@ function stingtargstruct_getoffsets() {
   self.offsets[self.offsets.size] = (0, 0, 0);
 }
 
-function isapache(var0) {
-  if(!isDefined(var0.streakinfo)) {
+function isapache(var_0) {
+  if(!isDefined(var_0.streakinfo)) {
     return false;
   }
 
-  if(!isDefined(var0.streakinfo.streakname)) {
+  if(!isDefined(var_0.streakinfo.streakname)) {
     return false;
   }
 
-  var1 = var0.streakinfo.streakname == "chopper_gunner";
-  var2 = var0.streakinfo.streakname == "jackal";
-  return var1 || var2;
+  var_1 = var_0.streakinfo.streakname == "chopper_gunner";
+  var_2 = var_0.streakinfo.streakname == "jackal";
+  return var_1 || var_2;
 }
 
-function isclusterstrike(var0) {
-  if(!isDefined(var0.streakinfo)) {
+function isclusterstrike(var_0) {
+  if(!isDefined(var_0.streakinfo)) {
     return 0;
   }
 
-  if(!isDefined(var0.streakinfo.streakname)) {
+  if(!isDefined(var_0.streakinfo.streakname)) {
     return 0;
   }
 
-  var1 = var0.streakinfo.streakname == "toma_strike";
-  return var1;
+  var_1 = var_0.streakinfo.streakname == "toma_strike";
+  return var_1;
 }
 
-function isuav(var0) {
-  if(!isDefined(var0.streakinfo)) {
+function isuav(var_0) {
+  if(!isDefined(var_0.streakinfo)) {
     return false;
   }
 
-  if(!isDefined(var0.streakinfo.streakname)) {
+  if(!isDefined(var_0.streakinfo.streakname)) {
     return false;
   }
 
-  if(var0.streakinfo.streakname == "uav" || var0.streakinfo.streakname == "counter_uav" || var0.streakinfo.streakname == "directional_uav") {
+  if(var_0.streakinfo.streakname == "uav" || var_0.streakinfo.streakname == "counter_uav" || var_0.streakinfo.streakname == "directional_uav") {
     return true;
   }
 
   return false;
 }
 
-function isac130(var0) {
-  if(!isDefined(var0.streakinfo)) {
+function isac130(var_0) {
+  if(!isDefined(var_0.streakinfo)) {
     return 0;
   }
 
-  if(!isDefined(var0.streakinfo.streakname)) {
+  if(!isDefined(var_0.streakinfo.streakname)) {
     return 0;
   }
 
-  var1 = var0.streakinfo.streakname == "ac130";
-  return var1;
+  var_1 = var_0.streakinfo.streakname == "ac130";
+  return var_1;
 }
 
-function isradardrone(var0) {
-  if(!isDefined(var0.streakinfo)) {
+function isradardrone(var_0) {
+  if(!isDefined(var_0.streakinfo)) {
     return 0;
   }
 
-  if(!isDefined(var0.streakinfo.streakname)) {
+  if(!isDefined(var_0.streakinfo.streakname)) {
     return 0;
   }
 
-  var1 = var0.streakinfo.streakname == "radar_drone_escort" || var0.streakinfo.streakname == "radar_drone_recon";
-  return var1;
+  var_1 = var_0.streakinfo.streakname == "radar_drone_escort" || var_0.streakinfo.streakname == "radar_drone_recon";
+  return var_1;
 }
 
-function isscramblerdrone(var0) {
-  if(!isDefined(var0.streakinfo)) {
+function isscramblerdrone(var_0) {
+  if(!isDefined(var_0.streakinfo)) {
     return 0;
   }
 
-  if(!isDefined(var0.streakinfo.streakname)) {
+  if(!isDefined(var_0.streakinfo.streakname)) {
     return 0;
   }
 
-  var1 = var0.streakinfo.streakname == "scrambler_drone_guard";
-  return var1;
+  var_1 = var_0.streakinfo.streakname == "scrambler_drone_guard";
+  return var_1;
 }
 
-function isradarhelicopter(var0) {
-  if(!isDefined(var0.streakinfo)) {
+function isradarhelicopter(var_0) {
+  if(!isDefined(var_0.streakinfo)) {
     return 0;
   }
 
-  if(!isDefined(var0.streakinfo.streakname)) {
+  if(!isDefined(var_0.streakinfo.streakname)) {
     return 0;
   }
 
-  var1 = var0.streakinfo.streakname == "radar_drone_overwatch";
-  return var1;
+  var_1 = var_0.streakinfo.streakname == "radar_drone_overwatch";
+  return var_1;
 }
 
-function isturret(var0) {
-  return isDefined(var0.classname) && var0.classname == "misc_turret";
+function isturret(var_0) {
+  return isDefined(var_0.classname) && var_0.classname == "misc_turret";
 }
 
 function stingtargstruct_getorigins() {
-  var0 = self.target.origin;
-  var1 = self.target.angles;
-  var2 = anglesToForward(var1);
-  var3 = anglestoright(var1);
-  var4 = anglestoup(var1);
+  var_0 = self.target.origin;
+  var_1 = self.target.angles;
+  var_2 = anglesToForward(var_1);
+  var_3 = anglestoright(var_1);
+  var_4 = anglestoup(var_1);
 
-  for(var5 = 0; var5 < self.offsets.size; var5++) {
-    var6 = self.offsets[var5];
-    self.origins[var5] = var0 + var3 * var6[0] + var2 * var6[1] + var4 * var6[2];
+  for(var_5 = 0; var_5 < self.offsets.size; var_5++) {
+    var_6 = self.offsets[var_5];
+    self.origins[var_5] = var_0 + var_3 * var_6[0] + var_2 * var_6[1] + var_4 * var_6[2];
   }
 }
 
 function stingtargstruct_getinreticle() {
-  foreach(var1 in self.origins) {
-    for(var2 = 0; var2 < self.origins.size; var2++) {
-      var3 = self.player worldpointtoscreenpos(self.origins[var2], 65);
+  foreach(var_1 in self.origins) {
+    for(var_2 = 0; var_2 < self.origins.size; var_2++) {
+      var_3 = self.player worldpointtoscreenpos(self.origins[var_2], 65);
 
-      if(isDefined(var3)) {
-        var4 = length2dsquared(var3);
+      if(isDefined(var_3)) {
+        var_4 = length2dsquared(var_3);
 
-        if(var4 <= 7225) {
-          self.inreticlesortedids[self.inreticlesortedids.size] = var2;
-          self.inreticledistssqr[var2] = var4;
+        if(var_4 <= 7225) {
+          self.inreticlesortedids[self.inreticlesortedids.size] = var_2;
+          self.inreticledistssqr[var_2] = var_4;
         }
       }
     }
   }
 
   if(self.inreticlesortedids.size > 1) {
-    for(var2 = 0; var2 < self.inreticlesortedids.size; var2++) {
-      for(var6 = var2 + 1; var6 < self.inreticlesortedids.size; var6++) {
-        var7 = self.inreticlesortedids[var2];
-        var8 = self.inreticlesortedids[var6];
-        var9 = self.inreticledistssqr[var7];
-        var10 = self.inreticledistssqr[var8];
+    for(var_2 = 0; var_2 < self.inreticlesortedids.size; var_2++) {
+      for(var_6 = var_2 + 1; var_6 < self.inreticlesortedids.size; var_6++) {
+        var_7 = self.inreticlesortedids[var_2];
+        var_8 = self.inreticlesortedids[var_6];
+        var_9 = self.inreticledistssqr[var_7];
+        var_10 = self.inreticledistssqr[var_8];
 
-        if(var10 < var9) {
-          var11 = var7;
-          self.inreticlesortedids[var2] = var8;
-          self.inreticlesortedids[var6] = var11;
+        if(var_10 < var_9) {
+          var_11 = var_7;
+          self.inreticlesortedids[var_2] = var_8;
+          self.inreticlesortedids[var_6] = var_11;
         }
       }
     }
@@ -719,23 +719,23 @@ function stingtargstruct_getinreticle() {
 }
 
 function stingtargstruct_getinlos() {
-  var0 = self.player getEye();
-  var1 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_sky", "physicscontents_water", "physicscontents_vehicle", "physicscontents_item"]);
-  var2 = [self.player, self.target];
-  var3 = self.target getlinkedchildren();
+  var_0 = self.player getEye();
+  var_1 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_sky", "physicscontents_water", "physicscontents_vehicle", "physicscontents_item"]);
+  var_2 = [self.player, self.target];
+  var_3 = self.target getlinkedchildren();
 
-  if(isDefined(var3) && var3.size > 0) {
-    var2 = scripts\engine\utility::array_combine(var2, var3);
+  if(isDefined(var_3) && var_3.size > 0) {
+    var_2 = scripts\engine\utility::array_combine(var_2, var_3);
   }
 
   if(!self.useoldlosverification) {
-    for(var4 = 0; var4 < self.inreticlesortedids.size; var4++) {
-      var5 = self.inreticlesortedids[var4];
-      var6 = self.origins[var5];
-      var7 = physics_raycast(var0, var6, var1, var2, 0, "physicsquery_closest", 1);
+    for(var_4 = 0; var_4 < self.inreticlesortedids.size; var_4++) {
+      var_5 = self.inreticlesortedids[var_4];
+      var_6 = self.origins[var_5];
+      var_7 = physics_raycast(var_0, var_6, var_1, var_2, 0, "physicsquery_closest", 1);
 
-      if(!isDefined(var7) || var7.size == 0) {
-        self.inlosid = var5;
+      if(!isDefined(var_7) || var_7.size == 0) {
+        self.inlosid = var_5;
         return;
       }
     }
@@ -743,25 +743,25 @@ function stingtargstruct_getinlos() {
     return;
   }
 
-  var8 = scripts\engine\trace::ray_trace(var0, self.origins[0], var2, var1, 0);
+  var_8 = scripts\engine\trace::ray_trace(var_0, self.origins[0], var_2, var_1, 0);
 
-  if(var8["fraction"] == 1) {
+  if(var_8["fraction"] == 1) {
     self.inlosid = 0;
     return;
   }
 
-  var9 = self.target getpointinbounds(1, 0, 0);
-  var8 = scripts\engine\trace::ray_trace(var0, var9, var2, var1, 0);
+  var_9 = self.target getpointinbounds(1, 0, 0);
+  var_8 = scripts\engine\trace::ray_trace(var_0, var_9, var_2, var_1, 0);
 
-  if(var8["fraction"] == 1) {
+  if(var_8["fraction"] == 1) {
     self.inlosid = 0;
     return;
   }
 
-  var10 = self.target getpointinbounds(-1, 0, 0);
-  var8 = scripts\engine\trace::ray_trace(var0, var10, var2, var1, 0);
+  var_10 = self.target getpointinbounds(-1, 0, 0);
+  var_8 = scripts\engine\trace::ray_trace(var_0, var_10, var_2, var_1, 0);
 
-  if(var8["fraction"] == 1) {
+  if(var_8["fraction"] == 1) {
     self.inlosid = 0;
     return;
   }

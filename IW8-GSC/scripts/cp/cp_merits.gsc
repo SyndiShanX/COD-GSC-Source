@@ -21,10 +21,10 @@ function mayprocessmerits() {
 
 function onplayerconnect() {
   for(;;) {
-    level waittill("connected", var0);
+    level waittill("connected", var_0);
 
-    if(!isDefined(var0.pers["postGameMerits"])) {
-      var0.pers["postGameMerits"] = 0;
+    if(!isDefined(var_0.pers["postGameMerits"])) {
+      var_0.pers["postGameMerits"] = 0;
     }
 
     thread initmeritdata();
@@ -39,64 +39,64 @@ function initmeritdata() {
   self.explosiveinfo = [];
 }
 
-function registermeritcallback(var0, var1) {
-  if(!isDefined(level.meritcallbacks[var0])) {
-    level.meritcallbacks[var0] = [];
+function registermeritcallback(var_0, var_1) {
+  if(!isDefined(level.meritcallbacks[var_0])) {
+    level.meritcallbacks[var_0] = [];
   }
 
-  level.meritcallbacks[var0][level.meritcallbacks[var0].size] = var1;
+  level.meritcallbacks[var_0][level.meritcallbacks[var_0].size] = var_1;
 }
 
-function getmeritstatus(var0) {
-  if(isDefined(self.meritdata[var0])) {
-    return self.meritdata[var0];
+function getmeritstatus(var_0) {
+  if(isDefined(self.meritdata[var_0])) {
+    return self.meritdata[var_0];
   }
 
   return 0;
 }
 
-function mt_kills(var0, var1) {
-  var2 = var0.attacker;
-  var3 = var0.victim;
+function mt_kills(var_0, var_1) {
+  var_2 = var_0.attacker;
+  var_3 = var_0.victim;
 
-  if(!isDefined(var2) || !isPlayer(var2)) {
+  if(!isDefined(var_2) || !isPlayer(var_2)) {
     return;
   }
 
-  processmerit(var2, "mt_kills");
+  processmerit(var_2, "mt_kills");
 }
 
-function enemykilled(var0, var1, var2, var3, var4, var5, var6, var7) {
+function enemykilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self endon("disconnect");
-  var8 = spawnStruct();
-  var8.victim = self;
-  var8.einflictor = var0;
-  var8.attacker = var1;
-  var8.idamage = var2;
-  var8.smeansofdeath = var3;
-  var8.sweapon = var4;
-  var8.sprimaryweapon = var5;
-  var8.shitloc = var6;
-  var8.time = gettime();
-  var8.modifiers = var7;
-  var8.victimonground = var8.victim isonground();
-  domeritcallback("enemyKilled", var8);
-  var8.attacker notify("playerKilledMeritsProcessed");
+  var_8 = spawnStruct();
+  var_8.victim = self;
+  var_8.einflictor = var_0;
+  var_8.attacker = var_1;
+  var_8.idamage = var_2;
+  var_8.smeansofdeath = var_3;
+  var_8.sweapon = var_4;
+  var_8.sprimaryweapon = var_5;
+  var_8.shitloc = var_6;
+  var_8.time = gettime();
+  var_8.modifiers = var_7;
+  var_8.victimonground = var_8.victim isonground();
+  domeritcallback("enemyKilled", var_8);
+  var_8.attacker notify("playerKilledMeritsProcessed");
 }
 
-function domeritcallback(var0, var1) {
+function domeritcallback(var_0, var_1) {
   if(!mayprocessmerits()) {
     return;
   }
 
-  if(isDefined(var1)) {
-    var2 = var1.player;
+  if(isDefined(var_1)) {
+    var_2 = var_1.player;
 
-    if(!isDefined(var2)) {
-      var2 = var1.attacker;
+    if(!isDefined(var_2)) {
+      var_2 = var_1.attacker;
     }
 
-    if(isDefined(var2) && isai(var2)) {
+    if(isDefined(var_2) && isai(var_2)) {
       return;
     }
   }
@@ -105,121 +105,121 @@ function domeritcallback(var0, var1) {
     return;
   }
 
-  if(!isDefined(level.meritcallbacks[var0])) {
+  if(!isDefined(level.meritcallbacks[var_0])) {
     return;
   }
 
-  if(isDefined(var1)) {
-    var3 = 0;
+  if(isDefined(var_1)) {
+    var_3 = 0;
 
-    if(var3 < level.meritcallbacks[var0].size) {
-      GscBinSkip1(0x74, level.meritcallbacks[var0][var3], var1);
+    if(var_3 < level.meritcallbacks[var_0].size) {
+      GscBinSkip1(0x74, level.meritcallbacks[var_0][var_3], var_1);
     }
 
     return;
   }
 
-  var3 = 0;
+  var_3 = 0;
 
-  if(var3 < level.meritcallbacks[var1].size) {
-    GscBinSkip1(0x74, level.meritcallbacks[var1][var3]);
+  if(var_3 < level.meritcallbacks[var_1].size) {
+    GscBinSkip1(0x74, level.meritcallbacks[var_1][var_3]);
   }
 }
 
-function process_agent_on_killed_merits(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
-  if(!isDefined(var1)) {
+function process_agent_on_killed_merits(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  if(!isPlayer(var1)) {
-    if(isDefined(var1.owner) && isPlayer(var1.owner)) {
-      var1 = var1.owner;
+  if(!isPlayer(var_1)) {
+    if(isDefined(var_1.owner) && isPlayer(var_1.owner)) {
+      var_1 = var_1.owner;
     } else {
       return;
     }
   }
 
-  var9 = scripts\cp\utility::getweaponclass(var4);
-  var10 = istrue(var1.inlaststand);
-  var11 = scripts\engine\utility::isbulletdamage(var3);
-  var12 = var1 getstance();
-  var13 = self.species;
-  var14 = var12 == "crouch";
-  var15 = var12 == "prone" && !var10;
-  var16 = isexplosivedamagemod(var3);
-  var17 = var3 == "MOD_MELEE";
-  var18 = (istrue(self.is_burning) || istrue(self.is_chem_burning)) && (!var11 || var4.basename == "incendiary_ammo_mp");
-  var19 = istrue(self.dismember_crawl);
-  var20 = istrue(self.shockmelee);
-  var21 = var1 issprintsliding();
-  var22 = istrue(self.faf_burned_out);
+  var_9 = scripts\cp\utility::getweaponclass(var_4);
+  var_10 = istrue(var_1.inlaststand);
+  var_11 = scripts\engine\utility::isbulletdamage(var_3);
+  var_12 = var_1 getstance();
+  var_13 = self.species;
+  var_14 = var_12 == "crouch";
+  var_15 = var_12 == "prone" && !var_10;
+  var_16 = isexplosivedamagemod(var_3);
+  var_17 = var_3 == "MOD_MELEE";
+  var_18 = (istrue(self.is_burning) || istrue(self.is_chem_burning)) && (!var_11 || var_4.basename == "incendiary_ammo_mp");
+  var_19 = istrue(self.dismember_crawl);
+  var_20 = istrue(self.shockmelee);
+  var_21 = var_1 issprintsliding();
+  var_22 = istrue(self.faf_burned_out);
 
-  if(isDefined(var0.owner)) {
-    var23 = var1 scripts\cp\utility::is_trap(var0, var4) && var0.owner == var1;
+  if(isDefined(var_0.owner)) {
+    var_23 = var_1 scripts\cp\utility::is_trap(var_0, var_4) && var_0.owner == var_1;
   } else {
-    var23 = var2 scripts\cp\utility::is_trap(var1, var5);
+    var_23 = var_2 scripts\cp\utility::is_trap(var_1, var_5);
   }
 
-  var24 = 0;
+  var_24 = 0;
 
   if(isDefined(level.all_magic_weapons)) {
-    foreach(var26 in getarraykeys(level.all_magic_weapons)) {
-      if(scripts\cp\utility::getrawbaseweaponname(var5) == var26) {
-        var24 = 1;
+    foreach(var_26 in getarraykeys(level.all_magic_weapons)) {
+      if(scripts\cp\utility::getrawbaseweaponname(var_5) == var_26) {
+        var_24 = 1;
         break;
       }
     }
   }
 
-  var28 = isDefined(var5) && (var5.basename == "iw7_dischorddummy_zm" || var5.basename == "iw7_facemelterdummy_zm" || var5.basename == "iw7_headcutterdummy_zm" || var5.basename == "iw7_shredderdummy_zm");
-  var29 = undefined;
+  var_28 = isDefined(var_5) && (var_5.basename == "iw7_dischorddummy_zm" || var_5.basename == "iw7_facemelterdummy_zm" || var_5.basename == "iw7_headcutterdummy_zm" || var_5.basename == "iw7_shredderdummy_zm");
+  var_29 = undefined;
 
-  if(isDefined(var5)) {
-    var29 = scripts\cp\utility::getrawbaseweaponname(var5);
+  if(isDefined(var_5)) {
+    var_29 = scripts\cp\utility::getrawbaseweaponname(var_5);
   }
 
-  var30 = isDefined(var29) && (var29 == "harpoon1" || var29 == "harpoon2" || var29 == "harpoon3" || var29 == "harpoon4");
+  var_30 = isDefined(var_29) && (var_29 == "harpoon1" || var_29 == "harpoon2" || var_29 == "harpoon3" || var_29 == "harpoon4");
 
-  if(var24) {
-    if(issubstr(var5.basename, "g18_")) {
-      var24 = isDefined(var2.has_replaced_starting_pistol);
+  if(var_24) {
+    if(issubstr(var_5.basename, "g18_")) {
+      var_24 = isDefined(var_2.has_replaced_starting_pistol);
     }
   }
 
-  if(var17) {
-    if(issubstr(var5.basename, "shuriken")) {
-      var17 = 0;
-    } else if(istrue(var2.kung_fu_mode)) {
-      var17 = 0;
+  if(var_17) {
+    if(issubstr(var_5.basename, "shuriken")) {
+      var_17 = 0;
+    } else if(istrue(var_2.kung_fu_mode)) {
+      var_17 = 0;
     }
   }
 
-  var31 = var5.classname == "weapon_sniper" && var12;
-  var32 = var12 && scripts\cp\utility::isheadshot(var5, var7, var4, var2);
+  var_31 = var_5.classname == "weapon_sniper" && var_12;
+  var_32 = var_12 && scripts\cp\utility::isheadshot(var_5, var_7, var_4, var_2);
 
-  if(!var18) {
-    switch (var10) {
+  if(!var_18) {
+    switch (var_10) {
       case "weapon_assault":
-        processmerit(var2, "mt_ar_kills");
+        processmerit(var_2, "mt_ar_kills");
         break;
       case "weapon_smg":
-        processmerit(var2, "mt_smg_kills");
+        processmerit(var_2, "mt_smg_kills");
         break;
       case "weapon_lmg":
-        processmerit(var2, "mt_lmg_kills");
+        processmerit(var_2, "mt_lmg_kills");
         break;
       case "weapon_shotgun":
-        processmerit(var2, "mt_shotgun_kills");
+        processmerit(var_2, "mt_shotgun_kills");
         break;
       case "weapon_sniper":
-        processmerit(var2, "mt_sniper_kills");
+        processmerit(var_2, "mt_sniper_kills");
         break;
       case "weapon_pistol":
-        processmerit(var2, "mt_pistol_kills");
+        processmerit(var_2, "mt_pistol_kills");
         break;
       case "other":
-        if(var28) {
-          processmerit(var2, "mt_pistol_kills");
+        if(var_28) {
+          processmerit(var_2, "mt_pistol_kills");
         }
 
         break;
@@ -228,124 +228,124 @@ function process_agent_on_killed_merits(var0, var1, var2, var3, var4, var5, var6
     }
   }
 
-  switch (var14) {
+  switch (var_14) {
     case "zombie":
-      processmerit(var2, "mt_zombie_kills");
+      processmerit(var_2, "mt_zombie_kills");
       break;
     default:
       break;
   }
 
-  if(var17) {
-    processmerit(var2, "mt_explosive_kills");
+  if(var_17) {
+    processmerit(var_2, "mt_explosive_kills");
   }
 
-  if(var18) {
-    processmerit(var2, "mt_melee_kills");
+  if(var_18) {
+    processmerit(var_2, "mt_melee_kills");
   }
 
-  if(var19) {
-    processmerit(var2, "mt_fire_kills");
+  if(var_19) {
+    processmerit(var_2, "mt_fire_kills");
   }
 
-  if(var23) {
-    processmerit(var2, "mt_trap_kills");
+  if(var_23) {
+    processmerit(var_2, "mt_trap_kills");
   }
 
-  if(var24) {
-    processmerit(var2, "mt_magic_weapon_kills");
+  if(var_24) {
+    processmerit(var_2, "mt_magic_weapon_kills");
   }
 
-  if(var32) {
-    processmerit(var2, "mt_headshot_kills");
+  if(var_32) {
+    processmerit(var_2, "mt_headshot_kills");
   }
 
-  if(var20) {
-    processmerit(var2, "mt_crawler_kills");
+  if(var_20) {
+    processmerit(var_2, "mt_crawler_kills");
   }
 
-  if(var21) {
-    processmerit(var2, "mt_faf_shock_melee_kills");
+  if(var_21) {
+    processmerit(var_2, "mt_faf_shock_melee_kills");
   }
 
-  if(var22) {
-    processmerit(var2, "mt_sliding_kills");
+  if(var_22) {
+    processmerit(var_2, "mt_sliding_kills");
   }
 
-  if(var28 || var30) {
-    processmerit(var2, "mt_quest_weapon_kills");
+  if(var_28 || var_30) {
+    processmerit(var_2, "mt_quest_weapon_kills");
   }
 
-  if(var23 && var19) {
-    processmerit(var2, "mt_faf_burned_out_kills");
+  if(var_23 && var_19) {
+    processmerit(var_2, "mt_faf_burned_out_kills");
   }
 
-  var33 = var5.basename;
+  var_33 = var_5.basename;
 
   if(getDvar("NSQLTTMRMP") == "cp_rave") {
     if(isDefined(self.agent_type) && self.agent_type == "zombie_sasquatch") {
-      processmerit(var2, "mt_dlc1_sasquatch_kills");
+      processmerit(var_2, "mt_dlc1_sasquatch_kills");
     }
 
-    if(var18) {
-      if(var33 == "iw7_golf_club_mp" || var33 == "iw7_golf_club_mp_pap1" || var33 == "iw7_golf_club_mp_pap2") {
-        processmerit(var2, "mt_dlc1_golf_kills");
-      } else if(var33 == "iw7_spiked_bat_mp" || var33 == "iw7_spiked_bat_mp_pap1" || var33 == "iw7_spiked_bat_mp_pap2") {
-        processmerit(var2, "mt_dlc1_bat_kills");
-      } else if(var33 == "iw7_machete_mp" || var33 == "iw7_machete_mp_pap1" || var33 == "iw7_machete_mp_pap2") {
-        processmerit(var2, "mt_dlc1_machete_kills");
-      } else if(var33 == "iw7_two_headed_axe_mp" || var33 == "iw7_two_headed_axe_mp_pap1" || var33 == "iw7_two_headed_axe_mp_pap2") {
-        processmerit(var2, "mt_dlc1_axe_kills");
-      } else if(var33 == "iw7_lawnmower_zm") {
-        processmerit(var2, "mt_dlc1_lawnmower_kills");
+    if(var_18) {
+      if(var_33 == "iw7_golf_club_mp" || var_33 == "iw7_golf_club_mp_pap1" || var_33 == "iw7_golf_club_mp_pap2") {
+        processmerit(var_2, "mt_dlc1_golf_kills");
+      } else if(var_33 == "iw7_spiked_bat_mp" || var_33 == "iw7_spiked_bat_mp_pap1" || var_33 == "iw7_spiked_bat_mp_pap2") {
+        processmerit(var_2, "mt_dlc1_bat_kills");
+      } else if(var_33 == "iw7_machete_mp" || var_33 == "iw7_machete_mp_pap1" || var_33 == "iw7_machete_mp_pap2") {
+        processmerit(var_2, "mt_dlc1_machete_kills");
+      } else if(var_33 == "iw7_two_headed_axe_mp" || var_33 == "iw7_two_headed_axe_mp_pap1" || var_33 == "iw7_two_headed_axe_mp_pap2") {
+        processmerit(var_2, "mt_dlc1_axe_kills");
+      } else if(var_33 == "iw7_lawnmower_zm") {
+        processmerit(var_2, "mt_dlc1_lawnmower_kills");
       }
     }
 
-    if(issubstr(var33, "harpoon")) {
-      processmerit(var2, "mt_dlc1_harpoon_kills");
+    if(issubstr(var_33, "harpoon")) {
+      processmerit(var_2, "mt_dlc1_harpoon_kills");
     }
 
-    if(istrue(var2.rave_mode)) {
-      processmerit(var2, "mt_dlc1_kills_in_rave");
+    if(istrue(var_2.rave_mode)) {
+      processmerit(var_2, "mt_dlc1_kills_in_rave");
     }
   }
 
   if(getDvar("NSQLTTMRMP") == "cp_disco") {
-    if(var33 == "iw7_katana_zm_pap2+camo222" || var33 == "iw7_katana_windforce_zm") {
-      processmerit(var2, "mt_dlc2_pap2_katana");
-    } else if(var33 == "iw7_nunchucks_zm_pap2+camo222") {
-      processmerit(var2, "mt_dlc2_pap2_nunchucks");
-    } else if(var33 == "heart_cp") {
-      processmerit(var2, "mt_dlc2_heart_kills");
+    if(var_33 == "iw7_katana_zm_pap2+camo222" || var_33 == "iw7_katana_windforce_zm") {
+      processmerit(var_2, "mt_dlc2_pap2_katana");
+    } else if(var_33 == "iw7_nunchucks_zm_pap2+camo222") {
+      processmerit(var_2, "mt_dlc2_pap2_nunchucks");
+    } else if(var_33 == "heart_cp") {
+      processmerit(var_2, "mt_dlc2_heart_kills");
     }
 
     if(isDefined(self.agent_type) && self.agent_type == "skater") {
-      processmerit(var2, "mt_dlc2_roller_skaters");
+      processmerit(var_2, "mt_dlc2_roller_skaters");
     }
 
-    if(var23) {
-      processmerit(var2, "mt_dlc2_trap_kills");
+    if(var_23) {
+      processmerit(var_2, "mt_dlc2_trap_kills");
       return;
     }
 
-    if(istrue(var2.kung_fu_mode) && !is_crafted_trap_damage(var33)) {
-      if(var2.kungfu_style == "dragon") {
-        processmerit(var2, "mt_dlc2_dragon_kills");
+    if(istrue(var_2.kung_fu_mode) && !is_crafted_trap_damage(var_33)) {
+      if(var_2.kungfu_style == "dragon") {
+        processmerit(var_2, "mt_dlc2_dragon_kills");
         return;
       }
 
-      if(var2.kungfu_style == "crane") {
-        processmerit(var2, "mt_dlc2_crane_kills");
+      if(var_2.kungfu_style == "crane") {
+        processmerit(var_2, "mt_dlc2_crane_kills");
         return;
       }
 
-      if(var2.kungfu_style == "snake") {
-        processmerit(var2, "mt_dlc2_snake_kills");
+      if(var_2.kungfu_style == "snake") {
+        processmerit(var_2, "mt_dlc2_snake_kills");
         return;
       }
 
-      if(var2.kungfu_style == "tiger") {
-        processmerit(var2, "mt_dlc2_tiger_kills");
+      if(var_2.kungfu_style == "tiger") {
+        processmerit(var_2, "mt_dlc2_tiger_kills");
         return;
       }
 
@@ -356,12 +356,12 @@ function process_agent_on_killed_merits(var0, var1, var2, var3, var4, var5, var6
   }
 }
 
-function is_crafted_trap_damage(var0) {
-  if(!isDefined(var0)) {
+function is_crafted_trap_damage(var_0) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
-  switch (var0) {
+  switch (var_0) {
     case "alien_sentry_minigun_4_mp":
     case "iw7_robotzap_zm":
     case "zmb_robotprojectile_mp":
@@ -373,7 +373,7 @@ function is_crafted_trap_damage(var0) {
   return false;
 }
 
-function processmerit(var0, var1, var2) {
+function processmerit(var_0, var_1, var_2) {
   if(!mayprocessmerits()) {
     return;
   }
@@ -382,71 +382,71 @@ function processmerit(var0, var1, var2) {
     return;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 1;
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
-  if(!havedataformerit(var0)) {
+  if(!havedataformerit(var_0)) {
     return;
   }
 
-  var3 = getmeritstatus(var0);
+  var_3 = getmeritstatus(var_0);
 
-  if(var3 == 5) {
+  if(var_3 == 5) {
     return;
   }
 
-  var4 = isDefined(level.meritinfo[var0]["operation"]);
+  var_4 = isDefined(level.meritinfo[var_0]["operation"]);
 
-  if(var3 > level.meritinfo[var0]["targetval"].size) {
-    var5 = var3 == level.meritinfo[var0]["targetval"].size + 1;
-    var6 = isDefined(self.operationsmaxed) && isDefined(self.operationsmaxed[var0]);
+  if(var_3 > level.meritinfo[var_0]["targetval"].size) {
+    var_5 = var_3 == level.meritinfo[var_0]["targetval"].size + 1;
+    var_6 = isDefined(self.operationsmaxed) && isDefined(self.operationsmaxed[var_0]);
 
-    if(var5 && !var6) {
-      var3 = level.meritinfo[var0]["targetval"].size;
+    if(var_5 && !var_6) {
+      var_3 = level.meritinfo[var_0]["targetval"].size;
     } else {
       return;
     }
   }
 
-  var7 = scripts\cp\cp_hud_util::mt_getprogress(var0);
-  var8 = level.meritinfo[var0]["targetval"][var3];
+  var_7 = scripts\cp\cp_hud_util::mt_getprogress(var_0);
+  var_8 = level.meritinfo[var_0]["targetval"][var_3];
 
-  if(!isDefined(var8)) {
+  if(!isDefined(var_8)) {
     return;
   }
 
-  if(isDefined(var2) && var2) {
-    var9 = var1;
+  if(isDefined(var_2) && var_2) {
+    var_9 = var_1;
   } else {
-    var9 = var8 + var2;
+    var_9 = var_8 + var_2;
   }
 
-  var10 = 0;
+  var_10 = 0;
 
-  if(var9 >= var9) {
-    var11 = 1;
-    var10 = var9 - var9;
-    var9 = var9;
+  if(var_9 >= var_9) {
+    var_11 = 1;
+    var_10 = var_9 - var_9;
+    var_9 = var_9;
   } else {
-    var11 = 0;
+    var_11 = 0;
   }
 
-  if(var9 < var10) {
-    scripts\cp\cp_hud_util::mt_setprogress(var2, var10);
+  if(var_9 < var_10) {
+    scripts\cp\cp_hud_util::mt_setprogress(var_2, var_10);
   }
 
-  if(var11) {
-    thread giverankxpafterwait(var2, var7);
-    storecompletedmerit(var2);
-    givemeritscore(level.meritinfo[var2]["score"][var7]);
-    var7++;
-    scripts\cp\cp_hud_util::mt_setstate(var2, var7);
-    self.meritdata[var2] = var7;
-    thread scripts\cp\cp_hud_message::showchallengesplash(var2);
+  if(var_11) {
+    thread giverankxpafterwait(var_2, var_7);
+    storecompletedmerit(var_2);
+    givemeritscore(level.meritinfo[var_2]["score"][var_7]);
+    var_7++;
+    scripts\cp\cp_hud_util::mt_setstate(var_2, var_7);
+    self.meritdata[var_2] = var_7;
+    thread scripts\cp\cp_hud_message::showchallengesplash(var_2);
 
-    if(areallmerittierscomplete(var2)) {
-      processmastermerit(var2);
+    if(areallmerittierscomplete(var_2)) {
+      processmastermerit(var_2);
       return;
     }
 
@@ -454,8 +454,8 @@ function processmerit(var0, var1, var2) {
   }
 }
 
-function areallmerittierscomplete(var0) {
-  if(self.meritdata[var0] >= level.meritinfo[var0]["targetval"].size) {
+function areallmerittierscomplete(var_0) {
+  if(self.meritdata[var_0] >= level.meritinfo[var_0]["targetval"].size) {
     return true;
   }
 
@@ -466,57 +466,57 @@ function get_table_name() {
   return "mp/splashtable.csv";
 }
 
-function storecompletedmerit(var0) {
+function storecompletedmerit(var_0) {
   if(!isDefined(self.meritscompleted)) {
     self.meritscompleted = [];
   }
 
-  var1 = 0;
+  var_1 = 0;
 
-  foreach(var3 in self.meritscompleted) {
-    if(var3 == var0) {
-      var1 = 1;
+  foreach(var_3 in self.meritscompleted) {
+    if(var_3 == var_0) {
+      var_1 = 1;
     }
   }
 
-  if(!var1) {
-    self.meritscompleted[self.meritscompleted.size] = var0;
+  if(!var_1) {
+    self.meritscompleted[self.meritscompleted.size] = var_0;
     return;
   }
 }
 
-function storecompletedoperation(var0) {
+function storecompletedoperation(var_0) {
   if(!isDefined(self.operationscompleted)) {
     self.operationscompleted = [];
   }
 
-  var1 = 0;
+  var_1 = 0;
 
-  foreach(var3 in self.operationscompleted) {
-    if(var3 == var0) {
-      var1 = 1;
+  foreach(var_3 in self.operationscompleted) {
+    if(var_3 == var_0) {
+      var_1 = 1;
       break;
     }
   }
 
-  if(!var1) {
-    self.operationscompleted[self.operationscompleted.size] = var0;
+  if(!var_1) {
+    self.operationscompleted[self.operationscompleted.size] = var_0;
     return;
   }
 }
 
-function giverankxpafterwait(var0, var1) {
+function giverankxpafterwait(var_0, var_1) {
   self endon("disconnect");
   wait 0.25;
-  scripts\cp\cp_persistence::give_player_xp(int(level.meritinfo[var0]["reward"][var1]));
-  scripts\cp\drone\emp_drone::giverankxp(var0, level.meritinfo[var0]["reward"][var1], undefined);
+  scripts\cp\cp_persistence::give_player_xp(int(level.meritinfo[var_0]["reward"][var_1]));
+  scripts\cp\drone\emp_drone::giverankxp(var_0, level.meritinfo[var_0]["reward"][var_1], undefined);
 }
 
-function givemeritscore(var0) {
-  var1 = self getplayerdata("cp", "challengeScore");
+function givemeritscore(var_0) {
+  var_1 = self getplayerdata("cp", "challengeScore");
 
-  if(isDefined(var1)) {
-    self setplayerdata("cp", "challengeScore", var1 + var0);
+  if(isDefined(var_1)) {
+    self setplayerdata("cp", "challengeScore", var_1 + var_0);
     return;
   }
 }
@@ -529,169 +529,169 @@ function updatemerits() {
     return;
   }
 
-  var0 = 0;
+  var_0 = 0;
 
-  foreach(var5, var2 in level.meritinfo) {
-    var0++;
+  foreach(var_5, var_2 in level.meritinfo) {
+    var_0++;
 
-    if(var0 % 20 == 0) {
+    if(var_0 % 20 == 0) {
       wait 0.05;
     }
 
-    self.meritdata[var5] = 0;
-    var3 = var2["index"];
-    var4 = scripts\cp\cp_hud_util::mt_getstate(var5);
-    self.meritdata[var5] = var4;
+    self.meritdata[var_5] = 0;
+    var_3 = var_2["index"];
+    var_4 = scripts\cp\cp_hud_util::mt_getstate(var_5);
+    self.meritdata[var_5] = var_4;
   }
 }
 
-function getmeritfilter(var0) {
-  return tablelookup("cp/allMeritsTable.csv", 0, var0, 5);
+function getmeritfilter(var_0) {
+  return tablelookup("cp/allMeritsTable.csv", 0, var_0, 5);
 }
 
-function isweaponmerit(var0) {
-  if(!isDefined(var0)) {
+function isweaponmerit(var_0) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
-  var1 = getmeritfilter(var0);
+  var_1 = getmeritfilter(var_0);
 
-  if(isDefined(var1)) {
+  if(isDefined(var_1)) {
     return true;
   }
 
   return false;
 }
 
-function getweaponfrommerit(var0) {
-  return getmeritfilter(var0);
+function getweaponfrommerit(var_0) {
+  return getmeritfilter(var_0);
 }
 
-function isoperationmerit(var0) {
-  if(!isDefined(var0)) {
+function isoperationmerit(var_0) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
-  var1 = getmeritfilter(var0);
+  var_1 = getmeritfilter(var_0);
 
-  if(isDefined(var1)) {
-    if(var1 == "perk_slot_0" || var1 == "perk_slot_1" || var1 == "perk_slot_2" || var1 == "proficiency" || var1 == "equipment" || var1 == "special_equipment" || var1 == "attachment" || var1 == "prestige" || var1 == "final_killcam" || var1 == "basic" || var1 == "humiliation" || var1 == "precision" || var1 == "revenge" || var1 == "elite" || var1 == "intimidation" || var1 == "operations" || scripts\cp\utility::isstrstart(var1, "killstreaks_")) {
+  if(isDefined(var_1)) {
+    if(var_1 == "perk_slot_0" || var_1 == "perk_slot_1" || var_1 == "perk_slot_2" || var_1 == "proficiency" || var_1 == "equipment" || var_1 == "special_equipment" || var_1 == "attachment" || var_1 == "prestige" || var_1 == "final_killcam" || var_1 == "basic" || var_1 == "humiliation" || var_1 == "precision" || var_1 == "revenge" || var_1 == "elite" || var_1 == "intimidation" || var_1 == "operations" || scripts\cp\utility::isstrstart(var_1, "killstreaks_")) {
       return true;
     }
   }
 
-  if(isweaponmerit(var0)) {
+  if(isweaponmerit(var_0)) {
     return true;
   }
 
   return false;
 }
 
-function merit_targetval(var0, var1, var2) {
-  var3 = tablelookup(var0, 0, var1, 10 + var2 * 3);
-  return int(var3);
+function merit_targetval(var_0, var_1, var_2) {
+  var_3 = tablelookup(var_0, 0, var_1, 10 + var_2 * 3);
+  return int(var_3);
 }
 
-function merit_rewardval(var0, var1, var2) {
-  var3 = tablelookup(var0, 0, var1, 11 + var2 * 3);
-  return int(var3);
+function merit_rewardval(var_0, var_1, var_2) {
+  var_3 = tablelookup(var_0, 0, var_1, 11 + var_2 * 3);
+  return int(var_3);
 }
 
-function merit_scoreval(var0, var1, var2) {
-  var3 = tablelookup(var0, 0, var1, 12 + var2 * 3);
-  return int(var3);
+function merit_scoreval(var_0, var_1, var_2) {
+  var_3 = tablelookup(var_0, 0, var_1, 12 + var_2 * 3);
+  return int(var_3);
 }
 
-function buildmerittableinfo(var0, var1) {
-  var2 = 0;
-  var3 = 0;
+function buildmerittableinfo(var_0, var_1) {
+  var_2 = 0;
+  var_3 = 0;
 
-  for(var2 = 0;; var2++) {
-    var4 = tablelookupbyrow(var0, var2, 0);
+  for(var_2 = 0;; var_2++) {
+    var_4 = tablelookupbyrow(var_0, var_2, 0);
 
-    if(var4 == "") {
+    if(var_4 == "") {
       break;
     }
 
-    var5 = getmeritmasterchallenge(var4);
-    level.meritinfo[var4] = [];
-    level.meritinfo[var4]["index"] = var2;
-    level.meritinfo[var4]["type"] = var1;
-    level.meritinfo[var4]["targetval"] = [];
-    level.meritinfo[var4]["reward"] = [];
-    level.meritinfo[var4]["score"] = [];
-    level.meritinfo[var4]["filter"] = getmeritfilter(var4);
-    level.meritinfo[var4]["master"] = var5;
+    var_5 = getmeritmasterchallenge(var_4);
+    level.meritinfo[var_4] = [];
+    level.meritinfo[var_4]["index"] = var_2;
+    level.meritinfo[var_4]["type"] = var_1;
+    level.meritinfo[var_4]["targetval"] = [];
+    level.meritinfo[var_4]["reward"] = [];
+    level.meritinfo[var_4]["score"] = [];
+    level.meritinfo[var_4]["filter"] = getmeritfilter(var_4);
+    level.meritinfo[var_4]["master"] = var_5;
 
-    if(isoperationmerit(var4)) {
-      level.meritinfo[var4]["operation"] = 1;
-      level.meritinfo[var4]["spReward"] = [];
+    if(isoperationmerit(var_4)) {
+      level.meritinfo[var_4]["operation"] = 1;
+      level.meritinfo[var_4]["spReward"] = [];
 
-      if(isweaponmerit(var4)) {
-        var6 = getweaponfrommerit(var4);
+      if(isweaponmerit(var_4)) {
+        var_6 = getweaponfrommerit(var_4);
 
-        if(isDefined(var6)) {
-          level.meritinfo[var4]["weapon"] = var6;
+        if(isDefined(var_6)) {
+          level.meritinfo[var_4]["weapon"] = var_6;
         }
       }
     }
 
-    for(var7 = 0; var7 < 5; var7++) {
-      var8 = merit_targetval(var0, var4, var7);
-      var9 = merit_rewardval(var0, var4, var7);
-      var10 = merit_scoreval(var0, var4, var7);
+    for(var_7 = 0; var_7 < 5; var_7++) {
+      var_8 = merit_targetval(var_0, var_4, var_7);
+      var_9 = merit_rewardval(var_0, var_4, var_7);
+      var_10 = merit_scoreval(var_0, var_4, var_7);
 
-      if(var8 == 0) {
+      if(var_8 == 0) {
         break;
       }
 
-      level.meritinfo[var4]["targetval"][var7] = var8;
-      level.meritinfo[var4]["reward"][var7] = var9;
-      level.meritinfo[var4]["score"][var7] = var10;
-      var3 += var9;
+      level.meritinfo[var_4]["targetval"][var_7] = var_8;
+      level.meritinfo[var_4]["reward"][var_7] = var_9;
+      level.meritinfo[var_4]["score"][var_7] = var_10;
+      var_3 += var_9;
     }
 
-    var4 = tablelookupbyrow(var0, var2, 0);
+    var_4 = tablelookupbyrow(var_0, var_2, 0);
   }
 
-  return int(var3);
+  return int(var_3);
 }
 
 function buildmeritinfo() {
   level.meritinfo = [];
-  var0 = 0;
-  var0 += buildmerittableinfo("cp/allMeritsTable.csv", 0);
+  var_0 = 0;
+  var_0 += buildmerittableinfo("cp/allMeritsTable.csv", 0);
 }
 
-function ismeritunlocked(var0) {
-  var1 = level.meritinfo[var0]["filter"];
+function ismeritunlocked(var_0) {
+  var_1 = level.meritinfo[var_0]["filter"];
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return 1;
   }
 
-  return self isitemunlocked(var1, "challenge");
+  return self isitemunlocked(var_1, "challenge");
 }
 
-function havedataformerit(var0) {
-  return isDefined(level.meritinfo) && isDefined(level.meritinfo[var0]);
+function havedataformerit(var_0) {
+  return isDefined(level.meritinfo) && isDefined(level.meritinfo[var_0]);
 }
 
-function getmeritmasterchallenge(var0) {
-  var1 = tablelookup("cp/allMeritsTable.csv", 0, var0, 7);
+function getmeritmasterchallenge(var_0) {
+  var_1 = tablelookup("cp/allMeritsTable.csv", 0, var_0, 7);
 
-  if(isDefined(var1) && var1 == "") {
+  if(isDefined(var_1) && var_1 == "") {
     return undefined;
   }
 
-  return var1;
+  return var_1;
 }
 
-function processmastermerit(var0) {
-  var1 = level.meritinfo[var0]["master"];
+function processmastermerit(var_0) {
+  var_1 = level.meritinfo[var_0]["master"];
 
-  if(isDefined(var1)) {
-    thread processmerit(var1);
+  if(isDefined(var_1)) {
+    thread processmerit(var_1);
     return;
   }
 }

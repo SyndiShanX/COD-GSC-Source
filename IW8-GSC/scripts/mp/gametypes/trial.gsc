@@ -36,11 +36,11 @@ function main() {
   setDvar("scr_game_matchstarttime", 0);
   setDvar("scr_game_roundstarttime", 0);
   setDvar("scr_trial_timelimit", 0);
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, level.gametype);
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, level.gametype);
 }
 
-function ref_13d98(var0, var1) {
+function ref_13d98(var_0, var_1) {
   level notify("exitLevel_called");
   processlobbydata();
 
@@ -63,31 +63,31 @@ function ref_13d98(var0, var1) {
 }
 
 function trial_mission_data_init() {
-  var0 = _tablethide::ref_13d42();
-  var1 = getdvarint("LTTRKNNKTQ", 0);
+  var_0 = _tablethide::ref_13d42();
+  var_1 = getdvarint("LTTRKNNKTQ", 0);
 
-  if(var1 == 0) {
-    var2 = tablelookup(var0, 2, getDvar("mapname"), 0);
+  if(var_1 == 0) {
+    var_2 = tablelookup(var_0, 2, getDvar("mapname"), 0);
 
-    if(var2 != "") {
-      var1 = var2;
+    if(var_2 != "") {
+      var_1 = var_2;
     } else {
       return;
     }
   }
 
-  level.trial["missionID"] = int(var1);
-  level.trial["zone"] = tablelookup(var0, 0, level.trial["missionID"], 2);
-  level.trial["missionScript"] = tablelookup(var0, 0, level.trial["missionID"], 3);
-  level.trial["variant"] = tablelookup(var0, 0, level.trial["missionID"], 4);
-  level.trial["team"] = tablelookup(var0, 0, level.trial["missionID"], 5);
-  level.trial["scoreType"] = tablelookup(var0, 0, level.trial["missionID"], 6);
-  level.trial["tier1"] = int(tablelookup(var0, 0, level.trial["missionID"], 8));
-  level.trial["tier2"] = int(tablelookup(var0, 0, level.trial["missionID"], 9));
-  level.trial["tier3"] = int(tablelookup(var0, 0, level.trial["missionID"], 10));
-  level.trial["attempts"] = int(tablelookup(var0, 0, level.trial["missionID"], 11));
-  level.trial["compassMaterialOverride"] = tablelookup(var0, 0, level.trial["missionID"], 18);
-  level.trial["playerDataId"] = int(tablelookup(var0, 0, level.trial["missionID"], 20));
+  level.trial["missionID"] = int(var_1);
+  level.trial["zone"] = tablelookup(var_0, 0, level.trial["missionID"], 2);
+  level.trial["missionScript"] = tablelookup(var_0, 0, level.trial["missionID"], 3);
+  level.trial["variant"] = tablelookup(var_0, 0, level.trial["missionID"], 4);
+  level.trial["team"] = tablelookup(var_0, 0, level.trial["missionID"], 5);
+  level.trial["scoreType"] = tablelookup(var_0, 0, level.trial["missionID"], 6);
+  level.trial["tier1"] = int(tablelookup(var_0, 0, level.trial["missionID"], 8));
+  level.trial["tier2"] = int(tablelookup(var_0, 0, level.trial["missionID"], 9));
+  level.trial["tier3"] = int(tablelookup(var_0, 0, level.trial["missionID"], 10));
+  level.trial["attempts"] = int(tablelookup(var_0, 0, level.trial["missionID"], 11));
+  level.trial["compassMaterialOverride"] = tablelookup(var_0, 0, level.trial["missionID"], 18);
+  level.trial["playerDataId"] = int(tablelookup(var_0, 0, level.trial["missionID"], 20));
 
   if(level.trial["zone"] != getDvar("mapname")) {}
 
@@ -104,41 +104,41 @@ function getspawnpoint() {
     waitframe();
   }
 
-  var0 = "mp_trial_spawn";
-  var1 = scripts\mp\spawnlogic::getspawnpointarray(var0);
-  var2 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var1);
+  var_0 = "mp_trial_spawn";
+  var_1 = scripts\mp\spawnlogic::getspawnpointarray(var_0);
+  var_2 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_1);
 
   if(isDefined(level.ref_13d69)) {
-    var3 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getavailablevehicleseats(level.ref_13d69, 1);
-    var4 = spawnStruct();
-    var4.useonspawn = 1;
-    var4.enterstartwaitmsg = "spawned_player";
-    thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_enter(level.ref_13d69, var3[0], self, var4);
+    var_3 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getavailablevehicleseats(level.ref_13d69, 1);
+    var_4 = spawnStruct();
+    var_4.useonspawn = 1;
+    var_4.enterstartwaitmsg = "spawned_player";
+    thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_enter(level.ref_13d69, var_3[0], self, var_4);
     self.spawningintovehicle = 1;
   }
 
-  return var2;
+  return var_2;
 }
 
 function alwaysgamemodeclass() {
   return "gamemode";
 }
 
-function onplayerconnect(var0) {
-  var0 thread scripts\mp\menus::addtoteam(level.trial["team"]);
+function onplayerconnect(var_0) {
+  var_0 thread scripts\mp\menus::addtoteam(level.trial["team"]);
   level.teamdata["allies"]["soundInfix"] = "uk";
   level.teamdata["axis"]["soundInfix"] = "ru";
-  var0 setclientomnvar("ui_skip_loadout", 1);
-  var0 setclientomnvar("ui_total_fade", 1);
-  var0.pers["class"] = "gamemode";
-  var0.pers["lastClass"] = "";
-  var0.class = var0.pers["class"];
-  var0.lastclass = var0.pers["lastClass"];
+  var_0 setclientomnvar("ui_skip_loadout", 1);
+  var_0 setclientomnvar("ui_total_fade", 1);
+  var_0.pers["class"] = "gamemode";
+  var_0.pers["lastClass"] = "";
+  var_0.class = var_0.pers["class"];
+  var_0.lastclass = var_0.pers["lastClass"];
 
   if(isDefined(level.trial_map_loadout)) {
-    var0.pers["gamemodeLoadout"] = level.trial_map_loadout;
+    var_0.pers["gamemodeLoadout"] = level.trial_map_loadout;
   } else {
-    var0.pers["gamemodeLoadout"] = level.trial_loadout["axis"];
+    var_0.pers["gamemodeLoadout"] = level.trial_loadout["axis"];
   }
 
   if(istrue(level.trial_infinite_reserve_ammo)) {
@@ -154,14 +154,14 @@ function onplayerconnect(var0) {
 
   level.player scripts\mp\gametypes\br::ref_1254d();
   wait 1;
-  thread scripts\cp_mp\utility\game_utility::fadetoblackforplayer(var0, 0, 0.5);
+  thread scripts\cp_mp\utility\game_utility::fadetoblackforplayer(var_0, 0, 0.5);
 
   if(game["trial"]["tries_remaining"] < level.trial["attempts"]) {
-    var0 scripts\mp\utility\dialog::leaderdialogonplayer("trial_retry");
+    var_0 scripts\mp\utility\dialog::leaderdialogonplayer("trial_retry");
   } else if(getDvar("mapname") == getDvar("old_mapname", "")) {
-    var0 scripts\mp\utility\dialog::leaderdialogonplayer("trial_intro_short");
+    var_0 scripts\mp\utility\dialog::leaderdialogonplayer("trial_intro_short");
   } else {
-    var0 scripts\mp\utility\dialog::leaderdialogonplayer("trial_intro");
+    var_0 scripts\mp\utility\dialog::leaderdialogonplayer("trial_intro");
   }
 
   setDvar("old_mapname", getDvar("mapname"));
@@ -187,40 +187,40 @@ function setspecialloadout() {
   level.trial_loadout["axis"]["loadoutKillstreak3"] = "none";
   level.trial_loadout["axis"]["loadoutPerks"] = [];
   level.trial_loadout["axis"]["loadoutGesture"] = "playerData";
-  var0 = getEnt("trial_starting_weapon", "script_noteworthy");
-  var1 = getEnt("trial_starting_weapon_2", "script_noteworthy");
+  var_0 = getEnt("trial_starting_weapon", "script_noteworthy");
+  var_1 = getEnt("trial_starting_weapon_2", "script_noteworthy");
 
-  if(isDefined(var0)) {
-    var2 = strtok(var0.script_parameters, "+");
-    var3 = var2[0];
-    var4 = scripts\engine\utility::array_remove(var2, var3);
-    level.trial_loadout["axis"]["loadoutPrimary"] = var3;
+  if(isDefined(var_0)) {
+    var_2 = strtok(var_0.script_parameters, "+");
+    var_3 = var_2[0];
+    var_4 = scripts\engine\utility::array_remove(var_2, var_3);
+    level.trial_loadout["axis"]["loadoutPrimary"] = var_3;
 
-    foreach(var8, var6 in var4) {
-      if(!var8) {
-        level.trial_loadout["axis"]["loadoutPrimaryAttachment"] = var6;
+    foreach(var_8, var_6 in var_4) {
+      if(!var_8) {
+        level.trial_loadout["axis"]["loadoutPrimaryAttachment"] = var_6;
         continue;
       }
 
-      var7 = "loadoutPrimaryAttachment" + var8 + 1;
-      level.trial_loadout["axis"][var7] = var6;
+      var_7 = "loadoutPrimaryAttachment" + var_8 + 1;
+      level.trial_loadout["axis"][var_7] = var_6;
     }
   }
 
-  if(isDefined(var1)) {
-    var2 = strtok(var1.script_parameters, "+");
-    var3 = var2[0];
-    var4 = scripts\engine\utility::array_remove(var2, var3);
-    level.trial_loadout["axis"]["loadoutSecondary"] = var3;
+  if(isDefined(var_1)) {
+    var_2 = strtok(var_1.script_parameters, "+");
+    var_3 = var_2[0];
+    var_4 = scripts\engine\utility::array_remove(var_2, var_3);
+    level.trial_loadout["axis"]["loadoutSecondary"] = var_3;
 
-    foreach(var6 in var4) {
-      if(!var8) {
-        level.trial_loadout["axis"]["loadoutSecondaryAttachment"] = var6;
+    foreach(var_6 in var_4) {
+      if(!var_8) {
+        level.trial_loadout["axis"]["loadoutSecondaryAttachment"] = var_6;
         continue;
       }
 
-      var7 = "loadoutSecondaryAttachment" + var8 + 1;
-      level.trial_loadout["axis"][var7] = var6;
+      var_7 = "loadoutSecondaryAttachment" + var_8 + 1;
+      level.trial_loadout["axis"][var_7] = var_6;
     }
   }
 
@@ -247,39 +247,39 @@ function trial_weapon_spawn() {
 
   waitframe();
 
-  foreach(var1 in level.trial_weapons) {
+  foreach(var_1 in level.trial_weapons) {
     thread weapon_think();
   }
 }
 
 function weapon_think() {
   level.player endon("death");
-  [var1] = strtok(self.script_parameters, "+");
-  var2 = scripts\engine\utility::array_remove(var0, var1);
-  var3 = scripts\cp_mp\utility\game_utility::isnightmap();
-  var4 = scripts\mp\utility\weapon::weaponassetnamemap(var1);
-  var5 = getcompleteweaponname(var4);
-  var6 = [];
-  var7 = 0;
+  [var_1] = strtok(self.script_parameters, "+");
+  var_2 = scripts\engine\utility::array_remove(var_0, var_1);
+  var_3 = scripts\cp_mp\utility\game_utility::isnightmap();
+  var_4 = scripts\mp\utility\weapon::weaponassetnamemap(var_1);
+  var_5 = getcompleteweaponname(var_4);
+  var_6 = [];
+  var_7 = 0;
 
-  foreach(var9 in var2) {
-    var10 = scripts\mp\utility\weapon::attachmentmap_tounique(var9, var4);
+  foreach(var_9 in var_2) {
+    var_10 = scripts\mp\utility\weapon::attachmentmap_tounique(var_9, var_4);
 
-    if(var5 canuseattachment(var10)) {
-      if(var9 == "akimbo") {
-        var7 = 1;
+    if(var_5 canuseattachment(var_10)) {
+      if(var_9 == "akimbo") {
+        var_7 = 1;
       }
 
-      var6 = var9;
+      var_6 = var_9;
     }
   }
 
-  var2 = var6;
-  var12 = scripts\mp\class::buildweapon(var1, var2, "none", "none", -1, undefined, undefined, undefined, var3);
-  var13 = createheadicon(var12);
+  var_2 = var_6;
+  var_12 = scripts\mp\class::buildweapon(var_1, var_2, "none", "none", -1, undefined, undefined, undefined, var_3);
+  var_13 = createheadicon(var_12);
 
-  if(var7) {
-    thread weapon_akimbo_prop_think(var13);
+  if(var_7) {
+    thread weapon_akimbo_prop_think(var_13);
   }
 
   for(;;) {
@@ -288,55 +288,55 @@ function weapon_think() {
   }
 
   for(;;) {
-    var14 = 0;
-    var15 = 0;
+    var_14 = 0;
+    var_15 = 0;
 
     if(isDefined(level.player.primaryinventory[0])) {
-      var14 = var13 == createheadicon(level.player.primaryinventory[0]);
+      var_14 = var_13 == createheadicon(level.player.primaryinventory[0]);
     }
 
     if(isDefined(level.player.primaryinventory[1])) {
-      var15 = var13 == createheadicon(level.player.primaryinventory[1]);
+      var_15 = var_13 == createheadicon(level.player.primaryinventory[1]);
     }
 
-    if(!isDefined(self.spawned_weapon) && !var14 && !var15) {
-      self.spawned_weapon = spawn("weapon_" + var13, self.origin, 17);
+    if(!isDefined(self.spawned_weapon) && !var_14 && !var_15) {
+      self.spawned_weapon = spawn("weapon_" + var_13, self.origin, 17);
       self.spawned_weapon.angles = self.angles;
-      var16 = weaponclipsize(var12);
-      var17 = weaponmaxammo(var12);
+      var_16 = weaponclipsize(var_12);
+      var_17 = weaponmaxammo(var_12);
 
       if(isDefined(self.script_noteworthy)) {
         if(self.script_noteworthy == "outline") {
           scripts\mp\utility\outline::outlineenableforplayer(self.spawned_weapon, level.player, "outline_trial_item", "level_script");
         } else if(self.script_noteworthy == "osp") {
           scripts\mp\utility\outline::outlineenableforplayer(self.spawned_weapon, level.player, "outlinefill_nodepth_cyan", "level_script");
-          var17 = 0;
+          var_17 = 0;
         }
       }
 
-      if(var7) {
-        var16 = 0;
+      if(var_7) {
+        var_16 = 0;
       }
 
       if(istrue(level.ref_124c9)) {
-        var17 = level.enemiestotal - var16;
+        var_17 = level.enemiestotal - var_16;
       }
 
-      self.spawned_weapon itemweaponsetammo(var16, var17);
+      self.spawned_weapon itemweaponsetammo(var_16, var_17);
     }
 
-    level.player waittill("weapon_dropped", var18, var19);
+    level.player waittill("weapon_dropped", var_18, var_19);
 
-    if(createheadicon(var19) == var13) {
-      var18 delete();
+    if(createheadicon(var_19) == var_13) {
+      var_18 delete();
     }
   }
 }
 
-function weapon_akimbo_prop_think(var0) {
-  foreach(var2 in level.trial_akimbo_props) {
-    if(var2.script_parameters == self.script_parameters) {
-      self.akimbo_prop = var2;
+function weapon_akimbo_prop_think(var_0) {
+  foreach(var_2 in level.trial_akimbo_props) {
+    if(var_2.script_parameters == self.script_parameters) {
+      self.akimbo_prop = var_2;
     }
   }
 
@@ -345,7 +345,7 @@ function weapon_akimbo_prop_think(var0) {
       waitframe();
     }
 
-    self.akimbo_prop.spawned_prop = spawn("weapon_" + var0, self.akimbo_prop.origin, 17);
+    self.akimbo_prop.spawned_prop = spawn("weapon_" + var_0, self.akimbo_prop.origin, 17);
     self.akimbo_prop.spawned_prop.angles = self.akimbo_prop.angles;
     self.akimbo_prop.spawned_prop sethintinoperable(1);
 
@@ -360,36 +360,36 @@ function weapon_akimbo_prop_think(var0) {
 }
 
 function trial_end_score_dialogue() {
-  var0 = undefined;
-  var1 = undefined;
-  var2 = undefined;
-  var3 = getomnvar("ui_trial_main_score");
-  var4 = getomnvar("ui_trial_main_time");
+  var_0 = undefined;
+  var_1 = undefined;
+  var_2 = undefined;
+  var_3 = getomnvar("ui_trial_main_score");
+  var_4 = getomnvar("ui_trial_main_time");
 
-  if(var3 != -1) {
-    var0 = var3 >= getomnvar("ui_trial_tier_1_requirement");
-    var1 = var3 >= getomnvar("ui_trial_tier_2_requirement");
-    var2 = var3 >= getomnvar("ui_trial_tier_3_requirement");
-  } else if(var4 != -1) {
-    var0 = var4 <= getomnvar("ui_trial_tier_1_requirement");
-    var1 = var4 <= getomnvar("ui_trial_tier_2_requirement");
-    var2 = var4 <= getomnvar("ui_trial_tier_3_requirement");
+  if(var_3 != -1) {
+    var_0 = var_3 >= getomnvar("ui_trial_tier_1_requirement");
+    var_1 = var_3 >= getomnvar("ui_trial_tier_2_requirement");
+    var_2 = var_3 >= getomnvar("ui_trial_tier_3_requirement");
+  } else if(var_4 != -1) {
+    var_0 = var_4 <= getomnvar("ui_trial_tier_1_requirement");
+    var_1 = var_4 <= getomnvar("ui_trial_tier_2_requirement");
+    var_2 = var_4 <= getomnvar("ui_trial_tier_3_requirement");
   }
 
   if(istrue(level.trial_fail_alt)) {
     level.trial_fail_alt = 0;
-    var5 = "trial_end_tier_0_alt";
-  } else if(var3) {
-    var5 = "trial_end_tier_3";
-  } else if(var3) {
-    var5 = "trial_end_tier_2";
-  } else if(var3) {
-    var5 = "trial_end_tier_1";
+    var_5 = "trial_end_tier_0_alt";
+  } else if(var_3) {
+    var_5 = "trial_end_tier_3";
+  } else if(var_3) {
+    var_5 = "trial_end_tier_2";
+  } else if(var_3) {
+    var_5 = "trial_end_tier_1";
   } else {
-    var5 = "trial_end_tier_0";
+    var_5 = "trial_end_tier_0";
   }
 
-  level.player scripts\mp\utility\dialog::leaderdialogonplayer(var5);
+  level.player scripts\mp\utility\dialog::leaderdialogonplayer(var_5);
   _tablethide::trial_ui_waittill_retry();
 
   if(!istrue(level.ref_13d60)) {
@@ -422,9 +422,9 @@ function ref_13d61() {
 
 function ref_13d5f() {
   for(;;) {
-    level.player waittill("luinotifyserver", var0);
+    level.player waittill("luinotifyserver", var_0);
 
-    if(var0 == "trial_restart") {
+    if(var_0 == "trial_restart") {
       if(!isDefined(level.unset_stay_at_spawn_flag_on_entering_combat) || !level.unset_stay_at_spawn_flag_on_entering_combat) {
         _tablethide::ref_13d5e();
       }
@@ -444,35 +444,35 @@ function processlobbydata() {
   sendclientmatchdata();
 }
 
-function ref_128af(var0) {
-  if(istrue(var0.ref_128af)) {
+function ref_128af(var_0) {
+  if(istrue(var_0.ref_128af)) {
     return;
   }
 
-  var0.ref_128af = 1;
+  var_0.ref_128af = 1;
 
-  if(isDefined(var0) && !isDefined(var0.clientmatchdataid)) {
-    var0.clientmatchdataid = level.initship;
+  if(isDefined(var_0) && !isDefined(var_0.clientmatchdataid)) {
+    var_0.clientmatchdataid = level.initship;
     level.initship++;
   }
 
-  var1 = var0.name;
-  setclientmatchdata("players", var0.clientmatchdataid, "clanTag", var0 getclantag());
-  setclientmatchdata("players", var0.clientmatchdataid, "xuidHigh", var0 getxuidhigh());
-  setclientmatchdata("players", var0.clientmatchdataid, "xuidLow", var0 getxuidlow());
-  setclientmatchdata("players", var0.clientmatchdataid, "isBot", isbot(var0));
-  setclientmatchdata("players", var0.clientmatchdataid, "uniqueClientId", var0.clientid);
-  setclientmatchdata("players", var0.clientmatchdataid, "username", var1);
+  var_1 = var_0.name;
+  setclientmatchdata("players", var_0.clientmatchdataid, "clanTag", var_0 getclantag());
+  setclientmatchdata("players", var_0.clientmatchdataid, "xuidHigh", var_0 getxuidhigh());
+  setclientmatchdata("players", var_0.clientmatchdataid, "xuidLow", var_0 getxuidlow());
+  setclientmatchdata("players", var_0.clientmatchdataid, "isBot", isbot(var_0));
+  setclientmatchdata("players", var_0.clientmatchdataid, "uniqueClientId", var_0.clientid);
+  setclientmatchdata("players", var_0.clientmatchdataid, "username", var_1);
 
-  if(var0 isps4player()) {
-    setclientmatchdata("players", var0.clientmatchdataid, "platform", "ps4");
-  } else if(var0 isxb3player()) {
-    setclientmatchdata("players", var0.clientmatchdataid, "platform", "xb3");
-  } else if(var0 ispcplayer()) {
-    setclientmatchdata("players", var0.clientmatchdataid, "platform", "bnet");
+  if(var_0 isps4player()) {
+    setclientmatchdata("players", var_0.clientmatchdataid, "platform", "ps4");
+  } else if(var_0 isxb3player()) {
+    setclientmatchdata("players", var_0.clientmatchdataid, "platform", "xb3");
+  } else if(var_0 ispcplayer()) {
+    setclientmatchdata("players", var_0.clientmatchdataid, "platform", "bnet");
   } else {
-    setclientmatchdata("players", var0.clientmatchdataid, "platform", "none");
+    setclientmatchdata("players", var_0.clientmatchdataid, "platform", "none");
   }
 
-  var0 setplayerdata("common", "round", "clientMatchIndex", var0.clientmatchdataid);
+  var_0 setplayerdata("common", "round", "clientMatchIndex", var_0.clientmatchdataid);
 }

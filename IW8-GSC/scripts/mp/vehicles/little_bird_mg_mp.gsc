@@ -3,120 +3,120 @@
  * Script: scripts\mp\vehicles\little_bird_mg_mp.gsc
 *****************************************************/
 
-function blockade_gate_explode_sequence(var0, var1) {
+function blockade_gate_explode_sequence(var_0, var_1) {
   self endon("death");
-  bomb_sites_spawn(var1);
-  var2 = "ascender_" + var0 + "_in";
-  var3 = "ascender_" + var0 + "_loop";
-  var4 = "ascender_" + var0 + "_out";
-  var5 = "wm_eq_ascender_" + var0 + "_get_on_ascender";
-  var6 = "wm_eq_ascender_" + var0 + "_loop_ascender";
-  var7 = "wm_eq_ascender_" + var0 + "_get_off_ascender";
-  thread ref_12b4e(var1);
-  var8 = blockade_barbwires(var2, var1);
-  var8.mp_backlot2_patch = scripts\engine\utility::getStruct(var1.target, "targetname");
-  ref_13baa(1, var8);
-  thread blinking_light_thread(var2, var4, var3, var5, var7, var6, var8, var1, var0);
-  var1.inuse = 0;
+  bomb_sites_spawn(var_1);
+  var_2 = "ascender_" + var_0 + "_in";
+  var_3 = "ascender_" + var_0 + "_loop";
+  var_4 = "ascender_" + var_0 + "_out";
+  var_5 = "wm_eq_ascender_" + var_0 + "_get_on_ascender";
+  var_6 = "wm_eq_ascender_" + var_0 + "_loop_ascender";
+  var_7 = "wm_eq_ascender_" + var_0 + "_get_off_ascender";
+  thread ref_12b4e(var_1);
+  var_8 = blockade_barbwires(var_2, var_1);
+  var_8.mp_backlot2_patch = scripts\engine\utility::getStruct(var_1.target, "targetname");
+  ref_13baa(1, var_8);
+  thread blinking_light_thread(var_2, var_4, var_3, var_5, var_7, var_6, var_8, var_1, var_0);
+  var_1.inuse = 0;
   scripts\engine\utility::ref_143a5("ascended", "death");
 }
 
-function bomb_sites_spawn(var0) {
+function bomb_sites_spawn(var_0) {
   self.ignoreall = 1;
   self.goalradius = 96;
-  self setgoalpos(self getclosestreachablepointonnavmesh(var0.origin));
+  self setgoalpos(self getclosestreachablepointonnavmesh(var_0.origin));
 
-  while(istrue(var0.inuse)) {
+  while(istrue(var_0.inuse)) {
     wait 0.1;
   }
 
-  var0.inuse = 1;
+  var_0.inuse = 1;
 }
 
-function ref_12b4e(var0) {
+function ref_12b4e(var_0) {
   self endon("ascended");
   self waittill("death");
-  var0.inuse = 0;
+  var_0.inuse = 0;
 }
 
-function blinking_light_thread(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
+function blinking_light_thread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self endon("death");
-  var9 = scripts\asm\asm::asm_lookupanimfromalias("animscripted2", var0);
-  var10 = scripts\asm\asm::asm_getxanim("animscripted2", var9);
-  var11 = scripts\asm\asm::asm_lookupanimfromalias("animscripted2", var1);
-  var12 = scripts\asm\asm::asm_getxanim("animscripted2", var11);
-  var13 = scripts\asm\asm::asm_lookupanimfromalias("animscripted2", var2);
-  var14 = scripts\asm\asm::asm_getxanim("animscripted2", var13);
-  self setplayerangles(var6.angles);
+  var_9 = scripts\asm\asm::asm_lookupanimfromalias("animscripted2", var_0);
+  var_10 = scripts\asm\asm::asm_getxanim("animscripted2", var_9);
+  var_11 = scripts\asm\asm::asm_lookupanimfromalias("animscripted2", var_1);
+  var_12 = scripts\asm\asm::asm_getxanim("animscripted2", var_11);
+  var_13 = scripts\asm\asm::asm_lookupanimfromalias("animscripted2", var_2);
+  var_14 = scripts\asm\asm::asm_getxanim("animscripted2", var_13);
+  self setplayerangles(var_6.angles);
 
-  if(var8 == "up") {
-    self forceteleport(var6.origin + anglestoleft(var6.angles) * -4 + anglesToForward(var6.angles) * 10, var6.angles);
+  if(var_8 == "up") {
+    self forceteleport(var_6.origin + anglestoleft(var_6.angles) * -4 + anglesToForward(var_6.angles) * 10, var_6.angles);
   } else {
-    self forceteleport(var6.origin + anglestoleft(var6.angles) * 4, var6.angles);
+    self forceteleport(var_6.origin + anglestoleft(var_6.angles) * 4, var_6.angles);
   }
 
-  blockade_barrier_clip(var7);
+  blockade_barrier_clip(var_7);
   thread canplaycircleopendialog();
-  blink_train_test(var3, var7, var9, var6, var10);
-  blink_wheelson_chosen_spawn(var14, var6);
-  blinkblackoverlay(var4, var11, var12);
+  blink_train_test(var_3, var_7, var_9, var_6, var_10);
+  blink_wheelson_chosen_spawn(var_14, var_6);
+  blinkblackoverlay(var_4, var_11, var_12);
   blockade_gate();
   ref_13baa(0);
   self notify("ascended");
 }
 
-function blink_train_test(var0, var1, var2, var3, var4) {
-  self.ascender scriptmodelplayanimdeltamotionfrompos(var0, var1.origin, var1.angles);
+function blink_train_test(var_0, var_1, var_2, var_3, var_4) {
+  self.ascender scriptmodelplayanimdeltamotionfrompos(var_0, var_1.origin, var_1.angles);
   self animmode("noclip");
-  self aisetanim("animscripted2", var2);
-  self orientmode("face angle", var3.angles[1]);
+  self aisetanim("animscripted2", var_2);
+  self orientmode("face angle", var_3.angles[1]);
   waitframe();
   self.ascender show();
-  wait getanimlength(var4);
+  wait getanimlength(var_4);
 }
 
-function blink_wheelson_chosen_spawn(var0, var1) {
+function blink_wheelson_chosen_spawn(var_0, var_1) {
   self.anchor = spawn("script_origin", self.origin);
   self.anchor.angles = self.angles;
   self linkTo(self.anchor);
   self.ascender linkTo(self.anchor);
-  var2 = getanimlength(var0);
-  self.anchor moveTo(var1.mp_backlot2_patch.origin, var2 * 3);
+  var_2 = getanimlength(var_0);
+  self.anchor moveTo(var_1.mp_backlot2_patch.origin, var_2 * 3);
   self.anchor waittill("movedone");
 }
 
-function blinkblackoverlay(var0, var1, var2) {
+function blinkblackoverlay(var_0, var_1, var_2) {
   self unlink();
   self.ascender scriptmodelclearanim();
-  self.ascender scriptmodelplayanimdeltamotionfrompos(var0, self.ascender.origin, self.ascender.angles);
-  self aisetanim("animscripted2", var1);
-  wait getanimlength(var2);
+  self.ascender scriptmodelplayanimdeltamotionfrompos(var_0, self.ascender.origin, self.ascender.angles);
+  self aisetanim("animscripted2", var_1);
+  wait getanimlength(var_2);
   self.anchor delete();
   self.ascender delete();
 }
 
-function blockade_barbwires(var0, var1) {
-  var2 = scripts\asm\asm::asm_lookupanimfromalias("animscripted2", var0);
-  var3 = scripts\asm\asm::asm_getxanim("animscripted2", var2);
-  var4 = spawnStruct();
+function blockade_barbwires(var_0, var_1) {
+  var_2 = scripts\asm\asm::asm_lookupanimfromalias("animscripted2", var_0);
+  var_3 = scripts\asm\asm::asm_getxanim("animscripted2", var_2);
+  var_4 = spawnStruct();
 
-  if(!isDefined(var1.angles)) {
-    var1.angles = (0, 0, 0);
+  if(!isDefined(var_1.angles)) {
+    var_1.angles = (0, 0, 0);
   }
 
-  var4.origin = getstartorigin(var1.origin, var1.angles, var3);
-  var4.angles = getstartangles(var1.origin, var1.angles, var3);
-  return var4;
+  var_4.origin = getstartorigin(var_1.origin, var_1.angles, var_3);
+  var_4.angles = getstartangles(var_1.origin, var_1.angles, var_3);
+  return var_4;
 }
 
-function blockade_barrier_clip(var0) {
+function blockade_barrier_clip(var_0) {
   self.old_weapon = self.weapon;
   self.canseecantshoottime = scripts\cp\cp_weapon::buildweapon("iw8_fists_mp", [], "none", "none", -1);
   self giveweapon(self.canseecantshoottime);
   self takeweapon(self.old_weapon);
   self setspawnweapon(self.canseecantshoottime);
-  self.ascender = spawn("script_model", var0.origin);
-  self.ascender.angles = var0.angles;
+  self.ascender = spawn("script_model", var_0.origin);
+  self.ascender.angles = var_0.angles;
   self.ascender setModel("misc_wm_ascender");
   self.ascender hide();
 }
@@ -127,33 +127,33 @@ function blockade_gate() {
   self setspawnweapon(self.old_weapon);
 }
 
-function bloadinghvt(var0) {
-  var1 = scripts\engine\utility::getStructArray("ascend_begin", "script_noteworthy");
-  var2 = scripts\engine\utility::getclosest(var0, var1);
-  return var2;
+function bloadinghvt(var_0) {
+  var_1 = scripts\engine\utility::getStructArray("ascend_begin", "script_noteworthy");
+  var_2 = scripts\engine\utility::getclosest(var_0, var_1);
+  return var_2;
 }
 
-function blockachievementstimestamp(var0) {
-  var1 = scripts\engine\utility::getStructArray("descend_begin", "script_noteworthy");
-  var2 = scripts\engine\utility::getclosest(var0, var1);
-  return var2;
+function blockachievementstimestamp(var_0) {
+  var_1 = scripts\engine\utility::getStructArray("descend_begin", "script_noteworthy");
+  var_2 = scripts\engine\utility::getclosest(var_0, var_1);
+  return var_2;
 }
 
 function canplaycircleopendialog() {
   self endon("ascended");
-  var0 = self.ascender;
+  var_0 = self.ascender;
   self.do_immediate_ragdoll = 1;
   self waittill("death");
-  var0 delete();
+  var_0 delete();
 }
 
-function ref_13baa(var0, var1) {
-  if(var0) {
+function ref_13baa(var_0, var_1) {
+  if(var_0) {
     self.ignoreall = 1;
 
-    if(isDefined(var1)) {
+    if(isDefined(var_1)) {
       self.goalradius = 8;
-      self setgoalpos(self getclosestreachablepointonnavmesh(var1.origin));
+      self setgoalpos(self getclosestreachablepointonnavmesh(var_1.origin));
       self waittill("goal");
       wait 1;
     }

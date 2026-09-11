@@ -11,29 +11,29 @@ function hoopty_truck_mp_init() {
 }
 
 function hoopty_truck_mp_initspawning() {
-  var0 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldataforvehicle("hoopty_truck", 1);
-  var0.arenavday = &scripts\cp_mp\vehicles\vehicle_spawn::ref_14211;
+  var_0 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldataforvehicle("hoopty_truck", 1);
+  var_0.arenavday = &scripts\cp_mp\vehicles\vehicle_spawn::ref_14211;
 }
 
 function hoopty_truck_mp_initmines() {
-  var0 = scripts\cp_mp\vehicles\vehicle_mines::vehicle_mines_getleveldataforvehicle("hoopty_truck", 1);
-  var0.frontextents = 69;
-  var0.backextents = 102;
-  var0.leftextents = 30;
-  var0.rightextents = 30;
-  var0.bottomextents = 22;
-  var0.distancetobottom = 37;
-  var0.loscheckoffset = (0, 0, 55);
+  var_0 = scripts\cp_mp\vehicles\vehicle_mines::vehicle_mines_getleveldataforvehicle("hoopty_truck", 1);
+  var_0.frontextents = 69;
+  var_0.backextents = 102;
+  var_0.leftextents = 30;
+  var_0.rightextents = 30;
+  var_0.bottomextents = 22;
+  var_0.distancetobottom = 37;
+  var_0.loscheckoffset = (0, 0, 55);
 }
 
-function hoopty_truck_mp_spawncallback(var0, var1) {
-  var2 = scripts\cp_mp\vehicles\hoopty_truck::hoopty_truck_create(var0, var1);
+function hoopty_truck_mp_spawncallback(var_0, var_1) {
+  var_2 = scripts\cp_mp\vehicles\hoopty_truck::hoopty_truck_create(var_0, var_1);
 
-  if(isDefined(var2) && scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_gamemodesupportsrespawn()) {
-    var2.ondeathrespawn = &hoopty_truck_mp_ondeathrespawncallback;
+  if(isDefined(var_2) && scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_gamemodesupportsrespawn()) {
+    var_2.ondeathrespawn = &hoopty_truck_mp_ondeathrespawncallback;
   }
 
-  return var2;
+  return var_2;
 }
 
 function hoopty_truck_mp_ondeathrespawncallback() {
@@ -41,9 +41,9 @@ function hoopty_truck_mp_ondeathrespawncallback() {
 }
 
 function hoopty_truck_mp_waitandspawn() {
-  var0 = scripts\cp_mp\vehicles\vehicle_tracking::getvehiclespawndata(self);
-  var1 = spawnStruct();
-  scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(var0, var1);
-  var2 = spawnStruct();
-  var3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("hoopty_truck", var1, var2);
+  var_0 = scripts\cp_mp\vehicles\vehicle_tracking::getvehiclespawndata(self);
+  var_1 = spawnStruct();
+  scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(var_0, var_1);
+  var_2 = spawnStruct();
+  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("hoopty_truck", var_1, var_2);
 }

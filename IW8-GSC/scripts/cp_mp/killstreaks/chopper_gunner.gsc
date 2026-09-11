@@ -99,16 +99,16 @@ function choppergunner_vehicleanims() {
   level.scr_anim["ks_chopper_gunner_vehicle_camera"]["vehicle_crash"] = % mp_ahotel64_crash_01;
 }
 
-function weapongivenchoppergunner(var0) {
+function weapongivenchoppergunner(var_0) {
   return true;
 }
 
 function tryusechoppergunner() {
-  var0 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("chopper_gunner", self);
-  return tryusechoppergunnerfromstruct(var0);
+  var_0 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("chopper_gunner", self);
+  return tryusechoppergunnerfromstruct(var_0);
 }
 
-function tryusechoppergunnerfromstruct(var0) {
+function tryusechoppergunnerfromstruct(var_0) {
   self endon("disconnect");
   level endon("game_ended");
 
@@ -117,7 +117,7 @@ function tryusechoppergunnerfromstruct(var0) {
   }
 
   if(isDefined(level.killstreaktriggeredfunc)) {
-    if(!level[[level.killstreaktriggeredfunc]](var0)) {
+    if(!level[[level.killstreaktriggeredfunc]](var_0)) {
       scripts\cp_mp\vehicles\vehicle_tracking::clearvehiclereservation();
       return false;
     }
@@ -127,59 +127,59 @@ function tryusechoppergunnerfromstruct(var0) {
     level thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("sound", "trySayLocalSound")]](self, "use_killstreak_choppergunner");
   }
 
-  var1 = getcompleteweaponname("ks_remote_device_mp");
-  var2 = scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_doweapontabletdeploy(var0, &weapongivenchoppergunner);
+  var_1 = getcompleteweaponname("ks_remote_device_mp");
+  var_2 = scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_doweapontabletdeploy(var_0, &weapongivenchoppergunner);
 
-  if(!istrue(var2)) {
+  if(!istrue(var_2)) {
     scripts\cp_mp\vehicles\vehicle_tracking::clearvehiclereservation();
     return false;
   }
 
   if(isDefined(level.killstreakbeginusefunc)) {
-    if(!level[[level.killstreakbeginusefunc]](var0)) {
-      var0 notify("killstreak_finished_with_deploy_weapon");
+    if(!level[[level.killstreakbeginusefunc]](var_0)) {
+      var_0 notify("killstreak_finished_with_deploy_weapon");
       scripts\cp_mp\vehicles\vehicle_tracking::clearvehiclereservation();
       return false;
     }
   }
 
-  var3 = 1;
+  var_3 = 1;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "currentActiveVehicleCount") && scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "maxVehiclesAllowed")) {
-    if([[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "currentActiveVehicleCount")]]() >= [[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "maxVehiclesAllowed")]]() || level.fauxvehiclecount + var3 >= [[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "maxVehiclesAllowed")]]()) {
+    if([[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "currentActiveVehicleCount")]]() >= [[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "maxVehiclesAllowed")]]() || level.fauxvehiclecount + var_3 >= [[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "maxVehiclesAllowed")]]()) {
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
         [[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/TOO_MANY_VEHICLES");
       }
 
-      var0 notify("killstreak_finished_with_deploy_weapon");
+      var_0 notify("killstreak_finished_with_deploy_weapon");
       scripts\cp_mp\vehicles\vehicle_tracking::clearvehiclereservation();
       return false;
     }
   }
 
   level.incomingallchoppergunners++;
-  var4 = 1;
+  var_4 = 1;
 
   if(scripts\cp_mp\utility\game_utility::islargemap()) {
-    var4 = 2;
+    var_4 = 2;
   }
 
-  if(level.choppergunners.size >= var4 || level.choppergunners.size + level.incomingallchoppergunners > var4) {
+  if(level.choppergunners.size >= var_4 || level.choppergunners.size + level.incomingallchoppergunners > var_4) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
       [[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/AIR_SPACE_TOO_CROWDED");
     }
 
     level.incomingallchoppergunners--;
     scripts\cp_mp\vehicles\vehicle_tracking::clearvehiclereservation();
-    var0 notify("killstreak_finished_with_deploy_weapon");
+    var_0 notify("killstreak_finished_with_deploy_weapon");
     return false;
   }
 
   if(scripts\cp_mp\utility\game_utility::islargemap() && level.teambased) {
-    var5 = 1;
+    var_5 = 1;
     level.incomingchoppergunners[self.team]++;
 
-    if(scripts\cp_mp\utility\killstreak_utility::getnumactivekillstreakperteam(self.team, level.choppergunners) + level.incomingchoppergunners[self.team] > var5) {
+    if(scripts\cp_mp\utility\killstreak_utility::getnumactivekillstreakperteam(self.team, level.choppergunners) + level.incomingchoppergunners[self.team] > var_5) {
       level.incomingallchoppergunners--;
       level.incomingchoppergunners[self.team]--;
 
@@ -187,36 +187,36 @@ function tryusechoppergunnerfromstruct(var0) {
         [[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/MAX_FRIENDLY_CHOPPER_GUNNER");
       }
 
-      var0 notify("killstreak_finished_with_deploy_weapon");
+      var_0 notify("killstreak_finished_with_deploy_weapon");
       scripts\cp_mp\vehicles\vehicle_tracking::clearvehiclereservation();
       return false;
     }
   }
 
   if(level.gameended) {
-    var0 notify("killstreak_finished_with_deploy_weapon");
+    var_0 notify("killstreak_finished_with_deploy_weapon");
     return false;
   }
 
-  var6 = 0;
+  var_6 = 0;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("vehicle", "incrementFauxVehicleCount")) {
     [[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle", "incrementFauxVehicleCount")]]();
   }
 
-  var7 = startchoppergunnerintro(self, var0, var6);
+  var_7 = startchoppergunnerintro(self, var_0, var_6);
   level.incomingallchoppergunners--;
 
   if(scripts\cp_mp\utility\game_utility::islargemap() && level.teambased) {
     level.incomingchoppergunners[self.team]--;
   }
 
-  if(!isDefined(var7)) {
+  if(!isDefined(var_7)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("vehicle", "decrementFauxVehicleCount")) {
       [[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle", "decrementFauxVehicleCount")]]();
     }
 
-    var0 notify("killstreak_finished_with_deploy_weapon");
+    var_0 notify("killstreak_finished_with_deploy_weapon");
     return false;
   }
 
@@ -228,212 +228,212 @@ function tryusechoppergunnerfromstruct(var0) {
     self thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "teamPlayerCardSplash")]]("used_chopper_gunner", self);
   }
 
-  thread choppergunner_startremotecontrol(var7);
+  thread choppergunner_startremotecontrol(var_7);
   return true;
 }
 
-function startchoppergunnerintro(var0, var1, var2) {
-  var0 disablephysicaldepthoffieldscripting();
-  var3 = scripts\cp_mp\utility\killstreak_utility::removeextracthelipad();
-  var4 = (0, 0, 0);
+function startchoppergunnerintro(var_0, var_1, var_2) {
+  var_0 disablephysicaldepthoffieldscripting();
+  var_3 = scripts\cp_mp\utility\killstreak_utility::removeextracthelipad();
+  var_4 = (0, 0, 0);
 
-  if(isDefined(var3)) {
-    var4 = (0, 0, var3.origin[2] - 1000);
+  if(isDefined(var_3)) {
+    var_4 = (0, 0, var_3.origin[2] - 1000);
   } else {
-    var4 = (0, 0, 1500);
+    var_4 = (0, 0, 1500);
   }
 
-  var6 = 9000;
+  var_6 = 9000;
 
   if(level.mapname == "mp_port2_gw") {
-    var6 = 7000;
+    var_6 = 7000;
   }
 
-  var7 = var0.origin - anglesToForward(var0.angles) * var6 + var4;
-  var8 = var0.origin + anglesToForward(var0.angles) * 2000 + var4;
-  var9 = var0.angles;
+  var_7 = var_0.origin - anglesToForward(var_0.angles) * var_6 + var_4;
+  var_8 = var_0.origin + anglesToForward(var_0.angles) * 2000 + var_4;
+  var_9 = var_0.angles;
 
   if(isDefined(level.heli_structs_entrances) && level.heli_structs_entrances.size > 0) {
-    var10 = randomint(level.heli_structs_entrances.size);
-    var11 = level.heli_structs_entrances[var10];
+    var_10 = randomint(level.heli_structs_entrances.size);
+    var_11 = level.heli_structs_entrances[var_10];
 
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("chopper_gunner", "findTargetStruct")) {
-      var12 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("chopper_gunner", "findTargetStruct")]](var11.script_linkto, level.heli_structs_goals);
+      var_12 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("chopper_gunner", "findTargetStruct")]](var_11.script_linkto, level.heli_structs_goals);
 
-      if(isDefined(var12)) {
-        var4 = (0, 0, var12.origin[2] + 200);
-        var13 = var11.origin * (1, 1, 0) + var4;
-        var14 = var12.origin * (1, 1, 0) + var4;
-        var15 = vectorNormalize(var14 - var13);
-        var16 = 9000;
+      if(isDefined(var_12)) {
+        var_4 = (0, 0, var_12.origin[2] + 200);
+        var_13 = var_11.origin * (1, 1, 0) + var_4;
+        var_14 = var_12.origin * (1, 1, 0) + var_4;
+        var_15 = vectorNormalize(var_14 - var_13);
+        var_16 = 9000;
 
         if(level.mapname == "mp_shipment") {
-          var16 = 8000;
+          var_16 = 8000;
         }
 
-        var7 = var14 - var15 * var16;
-        var8 = var14 + var15 * 1000;
-        var9 = vectortoangles(var15);
+        var_7 = var_14 - var_15 * var_16;
+        var_8 = var_14 + var_15 * 1000;
+        var_9 = vectortoangles(var_15);
       }
     }
-  } else if(istrue(var0.stopcirclesatgameend) && level.script == "cp_so_aniyah") {
+  } else if(istrue(var_0.stopcirclesatgameend) && level.script == "cp_so_aniyah") {
     if(level.players.size > 1) {
-      var17 = scripts\engine\utility::array_remove(level.players, var0);
+      var_17 = scripts\engine\utility::array_remove(level.players, var_0);
     } else {
-      var17 = level.players;
+      var_17 = level.players;
     }
 
-    var18 = scripts\engine\utility::random(var17);
-    var19 = (var18.origin[0], var18.origin[1], 1750);
+    var_18 = scripts\engine\utility::random(var_17);
+    var_19 = (var_18.origin[0], var_18.origin[1], 1750);
 
     while(level.ref_11f7e.size == 0) {
       waitframe();
     }
 
-    var20 = scripts\engine\utility::getclosest(var19, level.ref_11f7e);
-    var21 = (var20.origin[0], var20.origin[1], 1750);
-    var22 = vectorNormalize(var19 - var21);
-    var8 = var21 - var22 * 11000;
-    var9 = var21 - var22 * 1000;
-    var17 = vectortoangles(var22);
+    var_20 = scripts\engine\utility::getclosest(var_19, level.ref_11f7e);
+    var_21 = (var_20.origin[0], var_20.origin[1], 1750);
+    var_22 = vectorNormalize(var_19 - var_21);
+    var_8 = var_21 - var_22 * 11000;
+    var_9 = var_21 - var_22 * 1000;
+    var_17 = vectortoangles(var_22);
   } else {
-    var1 iprintlnbold("Level is missing heli structs, please set them up!");
+    var_1 iprintlnbold("Level is missing heli structs, please set them up!");
   }
 
-  var23 = "veh8_mil_air_ahotel64_ks_mp";
+  var_23 = "veh8_mil_air_ahotel64_ks_mp";
 
-  if(scripts\cp_mp\utility\player_utility::getplayersuperfaction(var1)) {
-    var23 = "veh8_mil_air_ahotel64_ks_east_mp";
+  if(scripts\cp_mp\utility\player_utility::getplayersuperfaction(var_1)) {
+    var_23 = "veh8_mil_air_ahotel64_ks_east_mp";
   }
 
   scripts\cp_mp\vehicles\vehicle_tracking::clearvehiclereservation();
 
-  if(istrue(var1.stopcirclesatgameend) && level.script == "cp_so_aniyah") {
-    var24 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnhelicopter(var1, var8, var17, "veh_apache_cp_so_aniyah", var23);
+  if(istrue(var_1.stopcirclesatgameend) && level.script == "cp_so_aniyah") {
+    var_24 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnhelicopter(var_1, var_8, var_17, "veh_apache_cp_so_aniyah", var_23);
   } else {
-    var24 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnhelicopter(var2, var9, var23, "veh_apache_mp", var24);
+    var_24 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnhelicopter(var_2, var_9, var_23, "veh_apache_mp", var_24);
   }
 
-  if(!isDefined(var24)) {
+  if(!isDefined(var_24)) {
     return;
   }
 
-  var25 = 45;
-  var24.speed = 100;
-  var24.accel = 50;
-  var24.lifetime = var25;
-  var24.team = var2.team;
-  var24.owner = var2;
-  var24.angles = var23;
-  var24.streakinfo = var3;
-  var24.streakname = var3.streakname;
-  var24.flaresreservecount = 1;
-  var24.currentdamagestate = 0;
-  var24.pathstart = var9;
-  var24.pathgoal = var17;
-  var24.missilesleft = 8;
-  var24.animname = "ks_chopper_gunner_vehicle_camera";
-  var24.stopcirclesatgameend = istrue(var2.stopcirclesatgameend);
-  var24 setvehicleteam(var24.team);
-  thread goal_shotgun(var24, "disconnect");
-  thread goal_shotgun(var24, "joined_team");
-  thread goal_shotgun(var24, "joined_spectator");
-  var27 = 2000;
+  var_25 = 45;
+  var_24.speed = 100;
+  var_24.accel = 50;
+  var_24.lifetime = var_25;
+  var_24.team = var_2.team;
+  var_24.owner = var_2;
+  var_24.angles = var_23;
+  var_24.streakinfo = var_3;
+  var_24.streakname = var_3.streakname;
+  var_24.flaresreservecount = 1;
+  var_24.currentdamagestate = 0;
+  var_24.pathstart = var_9;
+  var_24.pathgoal = var_17;
+  var_24.missilesleft = 8;
+  var_24.animname = "ks_chopper_gunner_vehicle_camera";
+  var_24.stopcirclesatgameend = istrue(var_2.stopcirclesatgameend);
+  var_24 setvehicleteam(var_24.team);
+  thread goal_shotgun(var_24, "disconnect");
+  thread goal_shotgun(var_24, "joined_team");
+  thread goal_shotgun(var_24, "joined_spectator");
+  var_27 = 2000;
 
   if(istrue(level.istacops)) {
-    var27 = 1000;
+    var_27 = 1000;
   }
 
-  var24.health = var27;
-  var24.maxhealth = var27;
-  var24 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Air", var2);
+  var_24.health = var_27;
+  var_24.maxhealth = var_27;
+  var_24 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Air", var_2);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "killstreakMakeVehicle")) {
-    var24[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakMakeVehicle")]](var3.streakname, "destroyed_chopper_gunner", undefined, "timeout_chopper_gunner", "callout_destroyed_chopper_gunner");
+    var_24[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakMakeVehicle")]](var_3.streakname, "destroyed_chopper_gunner", undefined, "timeout_chopper_gunner", "callout_destroyed_chopper_gunner");
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "killstreakSetPreModDamageCallback")) {
-    var24[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetPreModDamageCallback")]](var3.streakname);
+    var_24[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetPreModDamageCallback")]](var_3.streakname);
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "killstreakSetPostModDamageCallback")) {
-    var24[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetPostModDamageCallback")]](var3.streakname, &choppergunner_modifydamage);
+    var_24[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetPostModDamageCallback")]](var_3.streakname, &choppergunner_modifydamage);
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "killstreakSetDeathCallback")) {
-    var24[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetDeathCallback")]](var3.streakname, &choppergunner_handledeathdamage);
+    var_24[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetDeathCallback")]](var_3.streakname, &choppergunner_handledeathdamage);
   }
 
-  level.choppergunners[level.choppergunners.size] = var24;
+  level.choppergunners[level.choppergunners.size] = var_24;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "addToActiveKillstreakList")) {
-    var24[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "addToActiveKillstreakList")]](var3.streakname, "Killstreak_Air", var2, 0, 1, 100);
+    var_24[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "addToActiveKillstreakList")]](var_3.streakname, "Killstreak_Air", var_2, 0, 1, 100);
   }
 
-  var24 setmaxpitchroll(15, 15);
-  var24 vehicle_setspeed(var24.speed, var24.accel);
-  var24 sethoverparams(50, 5, 2.5);
-  var24 setturningability(1);
-  var24 setyawspeed(500, 100, 25, 0.5);
-  var24 setotherent(var2);
-  var24 setCanDamage(1);
-  var24 setneargoalnotifydist(5000);
-  var24 scripts\cp_mp\emp_debuff::set_start_emp_callback(&choppergunner_empstarted);
-  var24 scripts\cp_mp\emp_debuff::set_clear_emp_callback(&choppergunner_empcleared);
-  var24 setscriptablepartstate("blinking_lights", "on", 0);
-  var24 setscriptablepartstate("interior_light", "on", 0);
-  var24 setscriptablepartstate("engine", "on", 0);
-  var28 = "veh8_mil_air_ahotel64_turret_wm";
+  var_24 setmaxpitchroll(15, 15);
+  var_24 vehicle_setspeed(var_24.speed, var_24.accel);
+  var_24 sethoverparams(50, 5, 2.5);
+  var_24 setturningability(1);
+  var_24 setyawspeed(500, 100, 25, 0.5);
+  var_24 setotherent(var_2);
+  var_24 setCanDamage(1);
+  var_24 setneargoalnotifydist(5000);
+  var_24 scripts\cp_mp\emp_debuff::set_start_emp_callback(&choppergunner_empstarted);
+  var_24 scripts\cp_mp\emp_debuff::set_clear_emp_callback(&choppergunner_empcleared);
+  var_24 setscriptablepartstate("blinking_lights", "on", 0);
+  var_24 setscriptablepartstate("interior_light", "on", 0);
+  var_24 setscriptablepartstate("engine", "on", 0);
+  var_28 = "veh8_mil_air_ahotel64_turret_wm";
 
-  if(scripts\cp_mp\utility\player_utility::getplayersuperfaction(var2)) {
-    var28 = "veh8_mil_air_ahotel64_turret_wm_east";
+  if(scripts\cp_mp\utility\player_utility::getplayersuperfaction(var_2)) {
+    var_28 = "veh8_mil_air_ahotel64_turret_wm_east";
   }
 
-  var24.turret = spawnturret("misc_turret", var24 gettagorigin("tag_turret"), "apache_turret_mp");
-  var24.turret setModel(var28);
-  var24.turret.owner = var2;
-  var24.turret.team = var2.team;
-  var24.turret.angles = var24.angles;
-  var24.turret.streakinfo = var3;
-  var24.turret linkTo(var24, "tag_turret");
-  var24.turret setturretteam(var2.team);
-  var24.turret setturretmodechangewait(0);
-  var24.turret setmode("manual");
-  var24.turret setotherent(var2);
-  var24.turret setdefaultdroppitch(45);
-  var24.mpod1 = spawn("script_model", var24 gettagorigin("tag_gun_l"));
-  var24.mpod1 setModel("ks_apache_turret_mp");
-  var24.mpod1.angles = var24.angles;
-  var24.mpod1.owner = var24.owner;
-  var24.mpod1.team = var24.team;
-  var24.mpod1 linkTo(var24, "tag_gun_l");
-  var24.mpod1 setentityowner(var2);
-  var24.mpod1 setotherent(var2);
-  var24.mpod2 = spawn("script_model", var24 gettagorigin("tag_gun_r"));
-  var24.mpod2 setModel("ks_apache_turret_mp");
-  var24.mpod2.angles = var24.angles;
-  var24.mpod2.owner = var24.owner;
-  var24.mpod2.team = var24.team;
-  var24.mpod2 linkTo(var24, "tag_gun_r");
-  var24.mpod2 setentityowner(var2);
-  var24.mpod2 setotherent(var2);
-  var24.turretfx = spawn("script_model", var24.turret.origin);
-  var24.turretfx setModel("ks_apache_turret_mp");
-  var24.turretfx.angles = var24.angles;
-  var24.turretfx linkTo(var24.turret, "tag_player");
-  var24.turretfx setotherent(var2);
-  var24.pilot = spawn("script_model", var24 gettagorigin("tag_origin"));
-  var24.pilot setModel("pilot_viewmodel_arms");
-  var24.pilot.angles = var24.angles;
-  var24.pilot linkTo(var24, "tag_origin");
-  var24.pilot.animname = "ks_chopper_gunner_pilot";
-  var24.pilot scripts\common\anim::setanimtree();
-  level notify("matchrecording_chopper", var24);
+  var_24.turret = spawnturret("misc_turret", var_24 gettagorigin("tag_turret"), "apache_turret_mp");
+  var_24.turret setModel(var_28);
+  var_24.turret.owner = var_2;
+  var_24.turret.team = var_2.team;
+  var_24.turret.angles = var_24.angles;
+  var_24.turret.streakinfo = var_3;
+  var_24.turret linkTo(var_24, "tag_turret");
+  var_24.turret setturretteam(var_2.team);
+  var_24.turret setturretmodechangewait(0);
+  var_24.turret setmode("manual");
+  var_24.turret setotherent(var_2);
+  var_24.turret setdefaultdroppitch(45);
+  var_24.mpod1 = spawn("script_model", var_24 gettagorigin("tag_gun_l"));
+  var_24.mpod1 setModel("ks_apache_turret_mp");
+  var_24.mpod1.angles = var_24.angles;
+  var_24.mpod1.owner = var_24.owner;
+  var_24.mpod1.team = var_24.team;
+  var_24.mpod1 linkTo(var_24, "tag_gun_l");
+  var_24.mpod1 setentityowner(var_2);
+  var_24.mpod1 setotherent(var_2);
+  var_24.mpod2 = spawn("script_model", var_24 gettagorigin("tag_gun_r"));
+  var_24.mpod2 setModel("ks_apache_turret_mp");
+  var_24.mpod2.angles = var_24.angles;
+  var_24.mpod2.owner = var_24.owner;
+  var_24.mpod2.team = var_24.team;
+  var_24.mpod2 linkTo(var_24, "tag_gun_r");
+  var_24.mpod2 setentityowner(var_2);
+  var_24.mpod2 setotherent(var_2);
+  var_24.turretfx = spawn("script_model", var_24.turret.origin);
+  var_24.turretfx setModel("ks_apache_turret_mp");
+  var_24.turretfx.angles = var_24.angles;
+  var_24.turretfx linkTo(var_24.turret, "tag_player");
+  var_24.turretfx setotherent(var_2);
+  var_24.pilot = spawn("script_model", var_24 gettagorigin("tag_origin"));
+  var_24.pilot setModel("pilot_viewmodel_arms");
+  var_24.pilot.angles = var_24.angles;
+  var_24.pilot linkTo(var_24, "tag_origin");
+  var_24.pilot.animname = "ks_chopper_gunner_pilot";
+  var_24.pilot scripts\common\anim::setanimtree();
+  level notify("matchrecording_chopper", var_24);
   self notify("chopper_gunner_used");
-  thread choppergunner_updateflyingspeed(var24);
+  thread choppergunner_updateflyingspeed(var_24);
 
-  if(!istrue(var4)) {
-    var24 setvehgoalpos(var24.pathgoal, 0);
+  if(!istrue(var_4)) {
+    var_24 setvehgoalpos(var_24.pathgoal, 0);
     scripts\cp_mp\utility\shellshock_utility::_stopshellshock();
     self.restoreangles = self getplayerangles();
     scripts\common\utility::allow_fire(0);
@@ -441,41 +441,41 @@ function startchoppergunnerintro(var0, var1, var2) {
     scripts\common\utility::allow_weapon_switch(0);
     scripts\common\utility::allow_usability(0);
     scripts\common\utility::allow_shellshock(0);
-    thread choppergunner_camerashake(var24);
+    thread choppergunner_camerashake(var_24);
     self setclientomnvar("ui_apache_screens_state", 1);
-    self playerlinkweaponviewtodelta(var24, "tag_player", 1, 0, 0, 0, 0, 1);
+    self playerlinkweaponviewtodelta(var_24, "tag_player", 1, 0, 0, 0, 0, 1);
     self playerlinkedsetviewznear(0);
     self painvisionoff();
     scripts\cp_mp\utility\killstreak_utility::killstreak_savenvgstate();
-    var24 playsoundtoplayer("mp_killstreak_apache_transition_lr", self);
+    var_24 playsoundtoplayer("mp_killstreak_apache_transition_lr", self);
   } else {
-    var24 setvehgoalpos(var24.pathgoal, 1);
+    var_24 setvehgoalpos(var_24.pathgoal, 1);
   }
 
-  scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("use_" + var3.streakname, 1);
+  scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("use_" + var_3.streakname, 1);
   thread choppergunner_playdofintroeffects();
-  var24 thread scripts\common\anim::anim_single_solo(var24, "vehicle_intro");
-  var24 thread scripts\common\anim::anim_single_solo(var24.pilot, "pilot_intro", "body_animate_jnt");
-  thread choppergunner_startfadetransition(var24);
-  var29 = goal_ar(var24, 4.25);
+  var_24 thread scripts\common\anim::anim_single_solo(var_24, "vehicle_intro");
+  var_24 thread scripts\common\anim::anim_single_solo(var_24.pilot, "pilot_intro", "body_animate_jnt");
+  thread choppergunner_startfadetransition(var_24);
+  var_29 = goal_ar(var_24, 4.25);
 
-  if(!istrue(var29)) {
+  if(!istrue(var_29)) {
     return;
   }
 
-  var24 notify("start_chopper_use");
-  return var24;
+  var_24 notify("start_chopper_use");
+  return var_24;
 }
 
-function goal_shotgun(var0, var1) {
-  var2 = self.owner;
+function goal_shotgun(var_0, var_1) {
+  var_2 = self.owner;
   self endon("death");
   self endon("exit_chopper_intro");
   self endon("start_chopper_use");
   level endon("game_ended");
-  var2 waittill(var0);
+  var_2 waittill(var_0);
 
-  if(var0 == "disconnect") {
+  if(var_0 == "disconnect") {
     level.incomingallchoppergunners--;
 
     if(scripts\cp_mp\utility\game_utility::islargemap() && level.teambased) {
@@ -483,31 +483,31 @@ function goal_shotgun(var0, var1) {
     }
   }
 
-  if(isDefined(var2)) {
-    var2 unlink();
-    var2 disablephysicaldepthoffieldscripting();
-    var2 scripts\common\utility::allow_fire(1);
-    var2 scripts\common\utility::allow_melee(1);
-    var2 scripts\common\utility::allow_weapon_switch(1);
-    var2 scripts\common\utility::allow_usability(1);
-    var2 scripts\common\utility::allow_shellshock(1);
-    var2 scripts\cp_mp\utility\killstreak_utility::_setvisibiilityomnvarforkillstreak(var1.streakname, "off");
-    var2 setclientomnvar("ui_apache_screens_state", 0);
-    var2 painvisionon();
-    var2 scripts\cp_mp\utility\killstreak_utility::killstreak_restorenvgstate();
-    var2 visionsetkillstreakforplayer("");
-    level thread scripts\cp_mp\utility\game_utility::fadetoblackforplayer(var2, 0);
+  if(isDefined(var_2)) {
+    var_2 unlink();
+    var_2 disablephysicaldepthoffieldscripting();
+    var_2 scripts\common\utility::allow_fire(1);
+    var_2 scripts\common\utility::allow_melee(1);
+    var_2 scripts\common\utility::allow_weapon_switch(1);
+    var_2 scripts\common\utility::allow_usability(1);
+    var_2 scripts\common\utility::allow_shellshock(1);
+    var_2 scripts\cp_mp\utility\killstreak_utility::_setvisibiilityomnvarforkillstreak(var_1.streakname, "off");
+    var_2 setclientomnvar("ui_apache_screens_state", 0);
+    var_2 painvisionon();
+    var_2 scripts\cp_mp\utility\killstreak_utility::killstreak_restorenvgstate();
+    var_2 visionsetkillstreakforplayer("");
+    level thread scripts\cp_mp\utility\game_utility::fadetoblackforplayer(var_2, 0);
   }
 
   thread choppergunner_explode();
   self notify("exit_chopper_intro");
 }
 
-function goal_ar(var0) {
+function goal_ar(var_0) {
   self endon("death");
   self endon("exit_chopper_intro");
   level endon("game_ended");
-  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var0);
+  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_0);
   return true;
 }
 
@@ -523,95 +523,95 @@ function choppergunner_playdofintroeffects() {
   self.owner setphysicaldepthoffield(4, 1, 3, 10);
 }
 
-function choppergunner_playercameratransition(var0, var1, var2, var3, var4) {
+function choppergunner_playercameratransition(var_0, var_1, var_2, var_3, var_4) {
   level endon("game_ended");
-  var5 = self getEye();
-  var6 = self.angles;
+  var_5 = self getEye();
+  var_6 = self.angles;
 
-  if(isDefined(var1)) {
-    var5 = var1;
+  if(isDefined(var_1)) {
+    var_5 = var_1;
   }
 
-  if(isDefined(var2)) {
-    var5 = var2;
+  if(isDefined(var_2)) {
+    var_5 = var_2;
   }
 
-  var7 = spawn("script_model", var5);
-  var7 setModel("tag_player");
-  var7.owner = self;
-  var7.angles = var6;
-  var8 = undefined;
-  var9 = undefined;
+  var_7 = spawn("script_model", var_5);
+  var_7 setModel("tag_player");
+  var_7.owner = self;
+  var_7.angles = var_6;
+  var_8 = undefined;
+  var_9 = undefined;
 
-  if(isDefined(var0)) {
-    var8 = var0.origin;
-    var9 = var0.angles;
+  if(isDefined(var_0)) {
+    var_8 = var_0.origin;
+    var_9 = var_0.angles;
   }
 
-  if(isDefined(var3)) {
-    var8 = var3;
+  if(isDefined(var_3)) {
+    var_8 = var_3;
   }
 
-  if(isDefined(var4)) {
-    var9 = var4;
+  if(isDefined(var_4)) {
+    var_9 = var_4;
   }
 
-  if(isDefined(var0)) {
+  if(isDefined(var_0)) {
     choppergunner_startfadetransition();
   } else {
     thread choppergunner_startfadetransition();
   }
 
-  self playerlinkweaponviewtodelta(var7, "tag_player", 1, 0, 0, 0, 0, 1);
+  self playerlinkweaponviewtodelta(var_7, "tag_player", 1, 0, 0, 0, 0, 1);
   self playerlinkedsetviewznear(0);
   self visionsetkillstreakforplayer("tac_ops_slamzoom", 0.2);
-  var7 moveTo(var8, 0.5);
-  var7 rotateTo(var9, 0.5);
+  var_7 moveTo(var_8, 0.5);
+  var_7 rotateTo(var_9, 0.5);
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(0.5);
   self visionsetkillstreakforplayer("", 0.2);
   self unlink();
-  self setplayerangles(var9);
+  self setplayerangles(var_9);
 
-  if(isDefined(var0)) {
-    self playerlinkweaponviewtodelta(var0, "tag_player", 1, 0, 0, 0, 0, 1);
+  if(isDefined(var_0)) {
+    self playerlinkweaponviewtodelta(var_0, "tag_player", 1, 0, 0, 0, 0, 1);
     self playerlinkedsetviewznear(0);
     scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(3);
-    var0 vehicleplayanim(%mp_ahotel64_intro_01);
-    var0.pilot scriptmodelplayanim("mp_player_ahotel64_intro_01");
+    var_0 vehicleplayanim(%mp_ahotel64_intro_01);
+    var_0.pilot scriptmodelplayanim("mp_player_ahotel64_intro_01");
   }
 
-  var7 delete();
+  var_7 delete();
 }
 
-function choppergunner_updateflyingspeed(var0) {
-  var0 endon("death");
-  var0 endon("near_goal");
+function choppergunner_updateflyingspeed(var_0) {
+  var_0 endon("death");
+  var_0 endon("near_goal");
   level endon("game_ended");
-  var1 = var0.speed;
-  var2 = 0.25;
+  var_1 = var_0.speed;
+  var_2 = 0.25;
 
   for(;;) {
-    var1 += var2;
-    var0 vehicle_setspeed(var1, var0.accel);
+    var_1 += var_2;
+    var_0 vehicle_setspeed(var_1, var_0.accel);
     wait 0.05;
   }
 }
 
-function choppergunner_camerashake(var0) {
-  var0 endon("death");
-  var0 endon("explode");
-  var0 endon("leaving");
-  var0 endon("crashing");
+function choppergunner_camerashake(var_0) {
+  var_0 endon("death");
+  var_0 endon("explode");
+  var_0 endon("leaving");
+  var_0 endon("crashing");
   self endon("disconnect");
   level endon("game_ended");
 
   for(;;) {
-    self earthquakeforplayer(0.07, 0.1, var0 gettagorigin("tag_origin"), 700);
+    self earthquakeforplayer(0.07, 0.1, var_0 gettagorigin("tag_origin"), 700);
     wait 0.1;
   }
 }
 
-function choppergunner_startremotecontrol(var0) {
+function choppergunner_startremotecontrol(var_0) {
   self endon("death");
   self endon("explode");
   self endon("leaving");
@@ -622,17 +622,17 @@ function choppergunner_startremotecontrol(var0) {
     [[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle", "decrementFauxVehicleCount")]]();
   }
 
-  var1 = self.owner;
-  var1 disablephysicaldepthoffieldscripting();
+  var_1 = self.owner;
+  var_1 disablephysicaldepthoffieldscripting();
 
-  if(!istrue(var0)) {
-    var1.usingchoppergunner = 1;
-    var1 scripts\common\utility::allow_fire(1);
-    var1 scripts\common\utility::allow_ads(1);
-    var1 unlink();
-    var1 remotecontrolvehicle(self);
-    var1 remotecontrolturret(self.turret);
-    var1 scripts\cp_mp\utility\shellshock_utility::_shellshock("killstreak_veh_camera_mp", "top", self.lifetime, 0);
+  if(!istrue(var_0)) {
+    var_1.usingchoppergunner = 1;
+    var_1 scripts\common\utility::allow_fire(1);
+    var_1 scripts\common\utility::allow_ads(1);
+    var_1 unlink();
+    var_1 remotecontrolvehicle(self);
+    var_1 remotecontrolturret(self.turret);
+    var_1 scripts\cp_mp\utility\shellshock_utility::_shellshock("killstreak_veh_camera_mp", "top", self.lifetime, 0);
     choppergunner_updatetargetmarkergroups();
   }
 
@@ -644,22 +644,22 @@ function choppergunner_startremotecontrol(var0) {
   scripts\cp_mp\utility\weapon_utility::setlockedoncallback(self, &choppergunner_lockedoncallback);
   scripts\cp_mp\utility\weapon_utility::setlockedonremovedcallback(self, &choppergunner_lockedonremovedcallback);
   self setCanDamage(1);
-  thread choppergunner_handlethermalswitch(var0);
-  thread choppergunner_handlemissilefire(var0);
-  thread choppergunner_watchturretfire(var0);
-  thread choppergunner_watchgameendleave(var0);
+  thread choppergunner_handlethermalswitch(var_0);
+  thread choppergunner_handlemissilefire(var_0);
+  thread choppergunner_watchturretfire(var_0);
+  thread choppergunner_watchgameendleave(var_0);
   thread goal_smg("disconnect");
   thread goal_smg("joined_team");
   thread goal_smg("joined_spectator");
   thread goal_smg("team_kill_punish");
   thread choppergunner_watchkills();
-  thread choppergunner_handledestroyed(var0);
+  thread choppergunner_handledestroyed(var_0);
   thread choppergunner_notifyonkillstreakover();
 
   if(!self.stopcirclesatgameend) {
     thread choppergunner_removetargetmarkergroupsonkillstreakover();
-    thread choppergunner_watchearlyexit(var0);
-    thread choppergunner_watchlifetime(var0);
+    thread choppergunner_watchearlyexit(var_0);
+    thread choppergunner_watchlifetime(var_0);
     self.owner setclientomnvar("ui_killstreak_countdown", gettime() + int(self.lifetime * 1000));
   }
 
@@ -667,14 +667,14 @@ function choppergunner_startremotecontrol(var0) {
     self thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("flares", "handleIncomingStinger")]](&choppergunner_handlemissiledetection);
   }
 
-  if(!istrue(var0)) {
-    var1 scripts\cp_mp\utility\killstreak_utility::_setvisibiilityomnvarforkillstreak(self.streakinfo.streakname, "on");
-    var1 setclientomnvar("ui_apache_screens_state", 0);
-    var1 setclientomnvar("ui_apache_controls", 1);
-    var1 setclientomnvar("ui_killstreak_weapon_1_ammo", self.missilesleft);
-    var1 setclientomnvar("ui_killstreak_health", self.health / self.maxhealth);
+  if(!istrue(var_0)) {
+    var_1 scripts\cp_mp\utility\killstreak_utility::_setvisibiilityomnvarforkillstreak(self.streakinfo.streakname, "on");
+    var_1 setclientomnvar("ui_apache_screens_state", 0);
+    var_1 setclientomnvar("ui_apache_controls", 1);
+    var_1 setclientomnvar("ui_killstreak_weapon_1_ammo", self.missilesleft);
+    var_1 setclientomnvar("ui_killstreak_health", self.health / self.maxhealth);
     self.playersfx playLoopSound("veh_apache_killstreak_amb_lr");
-    var1 setclienttriggeraudiozonepartialwithfade("apache_killstreak", 1.5, "mix", "filter");
+    var_1 setclienttriggeraudiozonepartialwithfade("apache_killstreak", 1.5, "mix", "filter");
   }
 
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(3);
@@ -700,7 +700,7 @@ function choppergunner_removetargetmarkergroupsonkillstreakover() {
   choppergunner_updatetargetmarkergroups(1);
 }
 
-function choppergunner_updatetargetmarkergroups(var0) {
+function choppergunner_updatetargetmarkergroups(var_0) {
   if(self.stopcirclesatgameend) {
     return;
   }
@@ -709,10 +709,10 @@ function choppergunner_updatetargetmarkergroups(var0) {
     return;
   }
 
-  var1 = isDefined(self.enemytargetmarkergroup);
-  var2 = !scripts\cp_mp\emp_debuff::is_empd() && !istrue(var0);
+  var_1 = isDefined(self.enemytargetmarkergroup);
+  var_2 = !scripts\cp_mp\emp_debuff::is_empd() && !istrue(var_0);
 
-  if(var2 && !var1) {
+  if(var_2 && !var_1) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("chopper_gunner", "assignTargetMarkers")) {
       self[[scripts\cp_mp\utility\script_utility::getsharedfunc("chopper_gunner", "assignTargetMarkers")]]();
       return;
@@ -721,7 +721,7 @@ function choppergunner_updatetargetmarkergroups(var0) {
     return;
   }
 
-  if(!var2 && var1) {
+  if(!var_2 && var_1) {
     scripts\cp_mp\targetmarkergroups::targetmarkergroup_off(self.enemytargetmarkergroup);
     scripts\cp_mp\targetmarkergroups::targetmarkergroup_off(self.friendlytargetmarkergroup);
     self.enemytargetmarkergroup = undefined;
@@ -741,56 +741,56 @@ function choppergunner_notifyonkillstreakover() {
   }
 }
 
-function choppergunner_watchendstrobefx(var0) {
+function choppergunner_watchendstrobefx(var_0) {
   self endon("death");
   level endon("game_ended");
-  var0 scripts\engine\utility::ref_143a5("death", "leaving");
+  var_0 scripts\engine\utility::ref_143a5("death", "leaving");
   self delete();
 }
 
-function choppergunner_startfadetransition(var0, var1) {
+function choppergunner_startfadetransition(var_0, var_1) {
   self endon("death");
   self endon("exit_chopper_intro");
-  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var0);
-  var2 = 0.5;
+  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_0);
+  var_2 = 0.5;
 
-  if(istrue(var1)) {
-    var2 = 0;
+  if(istrue(var_1)) {
+    var_2 = 0;
   }
 
-  level thread scripts\cp_mp\utility\game_utility::fadetoblackforplayer(self.owner, 1, var2);
-  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var2);
-  level thread scripts\cp_mp\utility\game_utility::fadetoblackforplayer(self.owner, 0, var2);
+  level thread scripts\cp_mp\utility\game_utility::fadetoblackforplayer(self.owner, 1, var_2);
+  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_2);
+  level thread scripts\cp_mp\utility\game_utility::fadetoblackforplayer(self.owner, 0, var_2);
 }
 
-function go_to_exit_spots(var0) {
+function go_to_exit_spots(var_0) {
   self endon("leaving");
   self endon("crashing");
   self endon("death");
   level endon("game_ended");
-  var1 = undefined;
-  var2 = self.origin;
-  var3 = 750;
-  var4 = 2000;
-  var5 = self.team;
-  var6 = self.lifetime;
-  var7 = self.owner;
-  var8 = 1;
-  var9 = self;
-  var10 = 1;
+  var_1 = undefined;
+  var_2 = self.origin;
+  var_3 = 750;
+  var_4 = 2000;
+  var_5 = self.team;
+  var_6 = self.lifetime;
+  var_7 = self.owner;
+  var_8 = 1;
+  var_9 = self;
+  var_10 = 1;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("spawn", "addSpawnDangerZone")) {
-    var1 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("spawn", "addSpawnDangerZone")]](var2, var3, var4, var5, var6, var7, var8, var9, var10);
+    var_1 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("spawn", "addSpawnDangerZone")]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
   }
 
-  if(isDefined(var1) && scripts\cp_mp\utility\script_utility::issharedfuncdefined("spawn", "getCodeHandleFromScriptHandle")) {
-    var11 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("spawn", "getCodeHandleFromScriptHandle")]](var1);
+  if(isDefined(var_1) && scripts\cp_mp\utility\script_utility::issharedfuncdefined("spawn", "getCodeHandleFromScriptHandle")) {
+    var_11 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("spawn", "getCodeHandleFromScriptHandle")]](var_1);
 
     for(;;) {
-      var12 = scripts\engine\trace::ray_trace(self.origin, self.origin - (0, 0, 20000), self);
+      var_12 = scripts\engine\trace::ray_trace(self.origin, self.origin - (0, 0, 20000), self);
 
-      if(var12["hittype"] != "hittype_none") {
-        dlog_recordevent(var11, var12["position"]);
+      if(var_12["hittype"] != "hittype_none") {
+        dlog_recordevent(var_11, var_12["position"]);
       }
 
       scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(0.25);
@@ -800,14 +800,14 @@ function go_to_exit_spots(var0) {
   }
 }
 
-function choppergunner_handlethermalswitch(var0) {
-  if(!istrue(var0)) {
-    var1 = self.owner;
-    var1 thread scripts\cp_mp\utility\player_utility::watchthermalinputchange();
+function choppergunner_handlethermalswitch(var_0) {
+  if(!istrue(var_0)) {
+    var_1 = self.owner;
+    var_1 thread scripts\cp_mp\utility\player_utility::watchthermalinputchange();
     choppergunner_handlethermalswitchinternal();
 
-    if(isDefined(var1)) {
-      var1 scripts\cp_mp\utility\player_utility::stopwatchingthermalinputchange();
+    if(isDefined(var_1)) {
+      var_1 scripts\cp_mp\utility\player_utility::stopwatchingthermalinputchange();
       return;
     }
 
@@ -815,108 +815,108 @@ function choppergunner_handlethermalswitch(var0) {
   }
 }
 
-function choppergunner_handlethermalswitchinternal(var0, var1) {
+function choppergunner_handlethermalswitchinternal(var_0, var_1) {
   self endon("death");
   self endon("leaving");
   self endon("crashing");
-  var2 = self.owner;
-  var0 = 0;
-  var1 = ["chopper_color", "flir_0_black_to_white", "flir_1_white_to_black", "flir_2_color_gradient", "flir_3_color_gradient"];
+  var_2 = self.owner;
+  var_0 = 0;
+  var_1 = ["chopper_color", "flir_0_black_to_white", "flir_1_white_to_black", "flir_2_color_gradient", "flir_3_color_gradient"];
   self.currentvisionset = "chopper_color";
-  var2 visionsetkillstreakforplayer(self.currentvisionset);
+  var_2 visionsetkillstreakforplayer(self.currentvisionset);
 
   if(scripts\cp_mp\utility\game_utility::isnightmap()) {
-    var0 = 1;
-    var2 scripts\cp_mp\utility\player_utility::setthermalvision(1, 12, 1000);
-    self.currentvisionset = var1[var0];
-    var2 scripts\cp_mp\utility\shellshock_utility::_shellshock("killstreak_veh_camera_flir_mp", "top", self.lifetime, 0);
+    var_0 = 1;
+    var_2 scripts\cp_mp\utility\player_utility::setthermalvision(1, 12, 1000);
+    self.currentvisionset = var_1[var_0];
+    var_2 scripts\cp_mp\utility\shellshock_utility::_shellshock("killstreak_veh_camera_flir_mp", "top", self.lifetime, 0);
   }
 
-  var3 = 1;
+  var_3 = 1;
 
   for(;;) {
-    var2 setclientomnvar("ui_killstreak_thermal_mode", var0);
-    var2 visionsetthermalforplayer(var1[var0]);
-    var2 waittill("switch_thermal_mode");
-    var0++;
+    var_2 setclientomnvar("ui_killstreak_thermal_mode", var_0);
+    var_2 visionsetthermalforplayer(var_1[var_0]);
+    var_2 waittill("switch_thermal_mode");
+    var_0++;
 
-    if(var0 == 1) {
-      var2 scripts\cp_mp\utility\player_utility::setthermalvision(1, 12, 1000);
-      self.currentvisionset = var1[var0];
-      var2 scripts\cp_mp\utility\shellshock_utility::_shellshock("killstreak_veh_camera_flir_mp", "top", self.lifetime, 0);
+    if(var_0 == 1) {
+      var_2 scripts\cp_mp\utility\player_utility::setthermalvision(1, 12, 1000);
+      self.currentvisionset = var_1[var_0];
+      var_2 scripts\cp_mp\utility\shellshock_utility::_shellshock("killstreak_veh_camera_flir_mp", "top", self.lifetime, 0);
       continue;
     }
 
-    if(var0 > var3) {
-      var0 = 0;
-      var2 scripts\cp_mp\utility\player_utility::setthermalvision(0);
+    if(var_0 > var_3) {
+      var_0 = 0;
+      var_2 scripts\cp_mp\utility\player_utility::setthermalvision(0);
       self.currentvisionset = "chopper_color";
-      var2 scripts\cp_mp\utility\shellshock_utility::_shellshock("killstreak_veh_camera_mp", "top", self.lifetime, 0);
+      var_2 scripts\cp_mp\utility\shellshock_utility::_shellshock("killstreak_veh_camera_mp", "top", self.lifetime, 0);
     }
   }
 }
 
-function choppergunner_handlemissilefire(var0) {
+function choppergunner_handlemissilefire(var_0) {
   self endon("death");
   self endon("leaving");
   self endon("crashing");
   level endon("game_ended");
-  var1 = self.owner;
-  var1 notifyonplayercommand("shoot_missile", "+frag");
+  var_1 = self.owner;
+  var_1 notifyonplayercommand("shoot_missile", "+frag");
   self.missilefireside = undefined;
-  var2 = 0;
-  var3 = 4;
+  var_2 = 0;
+  var_3 = 4;
 
   for(;;) {
-    var1 waittill("shoot_missile", var4);
+    var_1 waittill("shoot_missile", var_4);
 
     if(self.stopcirclesatgameend && self.missilesleft == 8) {
       GscBinSkip4(0x35);
     }
 
-    var2++;
+    var_2++;
     self.streakinfo.shots_fired++;
 
-    if(var2 > var3) {
-      var2 = 1;
+    if(var_2 > var_3) {
+      var_2 = 1;
     }
 
     self.owner earthquakeforplayer(0.25, 0.4, self.turret.origin, 150);
     self.owner playRumbleOnEntity("damage_heavy");
-    var5 = self.mpod1;
+    var_5 = self.mpod1;
 
     if(!isDefined(self.missilefireside) || self.missilefireside == "right") {
       self.missilefireside = "left";
       thread choppergunner_firemissilefx(self.mpod1);
-      var5 = self.mpod1;
+      var_5 = self.mpod1;
     } else {
       self.missilefireside = "right";
       thread choppergunner_firemissilefx(self.mpod2);
-      var5 = self.mpod2;
+      var_5 = self.mpod2;
     }
 
-    var6 = self.turret gettagorigin("tag_pivot");
-    var7 = anglesToForward(self.turret gettagangles("tag_player"));
-    var8 = var5.origin * (1, 1, 0) + (0, 0, var6[2]);
-    var9 = var8 + var7 * 100;
-    var10 = var8 + var7 * 1000;
-    var11 = self.owner getvieworigin();
-    var12 = anglesToForward(self.owner getplayerangles());
-    var13 = var11 + var12 * 50000;
-    var14 = [self, self.turret, var5];
-    var15 = scripts\engine\trace::ray_trace(var11, var13, var14, scripts\engine\trace::create_contents(1, 1, 0, 1, 0, 1, 0, 1, 1));
-    var16 = var15["position"];
+    var_6 = self.turret gettagorigin("tag_pivot");
+    var_7 = anglesToForward(self.turret gettagangles("tag_player"));
+    var_8 = var_5.origin * (1, 1, 0) + (0, 0, var_6[2]);
+    var_9 = var_8 + var_7 * 100;
+    var_10 = var_8 + var_7 * 1000;
+    var_11 = self.owner getvieworigin();
+    var_12 = anglesToForward(self.owner getplayerangles());
+    var_13 = var_11 + var_12 * 50000;
+    var_14 = [self, self.turret, var_5];
+    var_15 = scripts\engine\trace::ray_trace(var_11, var_13, var_14, scripts\engine\trace::create_contents(1, 1, 0, 1, 0, 1, 0, 1, 1));
+    var_16 = var_15["position"];
 
-    if(isDefined(var4)) {
-      var16 = var4;
+    if(isDefined(var_4)) {
+      var_16 = var_4;
     }
 
-    var17 = scripts\cp_mp\utility\weapon_utility::_magicbullet(getcompleteweaponname("apache_proj_mp"), var9, var10, var1);
-    thread choppergunner_watchmissilestate(var17);
-    thread goal_default(var17, self.owner, 2, 300);
-    var17.streakinfo = self.streakinfo;
+    var_17 = scripts\cp_mp\utility\weapon_utility::_magicbullet(getcompleteweaponname("apache_proj_mp"), var_9, var_10, var_1);
+    thread choppergunner_watchmissilestate(var_17);
+    thread goal_default(var_17, self.owner, 2, 300);
+    var_17.streakinfo = self.streakinfo;
     self.missilesleft--;
-    var1 setclientomnvar("ui_killstreak_weapon_1_ammo", self.missilesleft);
+    var_1 setclientomnvar("ui_killstreak_weapon_1_ammo", self.missilesleft);
 
     if(self.missilesleft == 0) {
       if(self.stopcirclesatgameend) {
@@ -937,52 +937,52 @@ function go_to_node_callback() {
   self notify("missiles_refilled");
 }
 
-function choppergunner_watchturretfire(var0) {
+function choppergunner_watchturretfire(var_0) {
   self endon("death");
   self endon("leaving");
   self endon("crashing");
   level endon("game_ended");
 
   for(;;) {
-    self.turret waittill("missile_fire", var1);
+    self.turret waittill("missile_fire", var_1);
     self.owner earthquakeforplayer(0.15, 0.1, self.turret.origin, 150);
-    var1.streakinfo = self.streakinfo;
+    var_1.streakinfo = self.streakinfo;
     self.streakinfo.shots_fired++;
-    thread goal_default(var1, self.owner, 0.5, 256);
+    thread goal_default(var_1, self.owner, 0.5, 256);
   }
 }
 
-function choppergunner_firemissilefx(var0) {
+function choppergunner_firemissilefx(var_0) {
   self endon("death");
   level endon("game_ended");
-  self setscriptablepartstate("fire_missile_" + var0, "on", 0);
+  self setscriptablepartstate("fire_missile_" + var_0, "on", 0);
   wait 1;
-  self setscriptablepartstate("fire_missile_" + var0, "off", 0);
+  self setscriptablepartstate("fire_missile_" + var_0, "off", 0);
 }
 
-function choppergunner_watchmissilestate(var0) {
+function choppergunner_watchmissilestate(var_0) {
   level endon("game_ended");
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(0.05);
 
   if(isDefined(self)) {
-    self missile_settargetpos(var0);
+    self missile_settargetpos(var_0);
     return;
   }
 }
 
-function choppergunner_watchlifetime(var0) {
+function choppergunner_watchlifetime(var_0) {
   self endon("death");
   self endon("explode");
   self endon("leaving");
   self endon("crashing");
   level endon("game_ended");
-  var1 = self.lifetime;
-  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var1);
+  var_1 = self.lifetime;
+  scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_1);
   scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("timeout_chopper_gunner", 1);
-  thread choppergunner_leave(var0);
+  thread choppergunner_leave(var_0);
 }
 
-function choppergunner_watchgameendleave(var0) {
+function choppergunner_watchgameendleave(var_0) {
   self.owner endon("disconnect");
   self endon("death");
   self endon("explode");
@@ -991,16 +991,16 @@ function choppergunner_watchgameendleave(var0) {
   level waittill("game_ended");
   self.ref_12aa4 = 1;
   self.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(self.streakinfo);
-  thread choppergunner_leave(var0);
+  thread choppergunner_leave(var_0);
 }
 
-function goal_smg(var0) {
+function goal_smg(var_0) {
   self endon("death");
   self endon("explode");
   self endon("leaving");
   self endon("crashing");
   level endon("game_ended");
-  self.owner waittill(var0);
+  self.owner waittill(var_0);
   thread choppergunner_returnplayer(0, 0);
   thread choppergunner_explode();
 }
@@ -1013,40 +1013,40 @@ function choppergunner_watchtargets() {
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(5);
 
   for(;;) {
-    var0 = [];
+    var_0 = [];
 
-    foreach(var2 in level.players) {
-      if(self.owner worldpointinreticle_circle(var2.origin, 80, 100)) {
-        if(level.teambased && var2.team == self.team) {
+    foreach(var_2 in level.players) {
+      if(self.owner worldpointinreticle_circle(var_2.origin, 80, 100)) {
+        if(level.teambased && var_2.team == self.team) {
           continue;
         }
 
-        if(var2 == self.owner) {
+        if(var_2 == self.owner) {
           continue;
         }
 
-        var3 = [self, self.turret];
+        var_3 = [self, self.turret];
 
-        if(!scripts\cp_mp\utility\killstreak_utility::streakcanseetarget(self.turret gettagorigin("tag_flash"), var2 gettagorigin("j_head"), var3)) {
+        if(!scripts\cp_mp\utility\killstreak_utility::streakcanseetarget(self.turret gettagorigin("tag_flash"), var_2 gettagorigin("j_head"), var_3)) {
           continue;
         }
 
         if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("perk", "hasPerk")) {
-          if(var2[[scripts\cp_mp\utility\script_utility::getsharedfunc("perk", "hasPerk")]]("specialty_noscopeoutline")) {
+          if(var_2[[scripts\cp_mp\utility\script_utility::getsharedfunc("perk", "hasPerk")]]("specialty_noscopeoutline")) {
             continue;
           }
         }
 
-        var0 = choppergunner_getnearbytargets(var2);
+        var_0 = choppergunner_getnearbytargets(var_2);
         break;
       }
 
       wait 0.05;
     }
 
-    if(var0.size > 0 && var0.size < 2) {
+    if(var_0.size > 0 && var_0.size < 2) {
       scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("chopper_gunner_attack_single");
-    } else if(var0.size >= 2) {
+    } else if(var_0.size >= 2) {
       scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("chopper_gunner_attack_multi");
     }
 
@@ -1054,23 +1054,23 @@ function choppergunner_watchtargets() {
   }
 }
 
-function choppergunner_getnearbytargets(var0) {
-  var1 = scripts\common\utility::playersincylinder(var0.origin, 300);
-  var2 = [];
+function choppergunner_getnearbytargets(var_0) {
+  var_1 = scripts\common\utility::playersincylinder(var_0.origin, 300);
+  var_2 = [];
 
-  foreach(var4 in var1) {
-    if(level.teambased && var4.team != var0.team) {
+  foreach(var_4 in var_1) {
+    if(level.teambased && var_4.team != var_0.team) {
       continue;
     }
 
-    if(!level.teambased && var4 == self.owner) {
+    if(!level.teambased && var_4 == self.owner) {
       continue;
     }
 
-    var2 = var4;
+    var_2 = var_4;
   }
 
-  return var2;
+  return var_2;
 }
 
 function choppergunner_watchkills() {
@@ -1081,11 +1081,11 @@ function choppergunner_watchkills() {
   self.owner endon("disconnect");
 
   for(;;) {
-    self.owner waittill("update_rapid_kill_buffered", var0, var1);
+    self.owner waittill("update_rapid_kill_buffered", var_0, var_1);
     wait 1;
 
     if(isDefined(self.owner.recentkillcount)) {
-      if(self.owner.recentkillcount >= 1 && var1 == "apache_proj_mp") {
+      if(self.owner.recentkillcount >= 1 && var_1 == "apache_proj_mp") {
         scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("chopper_gunner_killconf_missile");
         continue;
       }
@@ -1102,65 +1102,65 @@ function choppergunner_watchkills() {
   }
 }
 
-function choppergunner_leave(var0) {
+function choppergunner_leave(var_0) {
   self endon("death");
   self endon("crashing");
   self setmaxpitchroll(0, 0);
   self notify("leaving");
-  thread choppergunner_returnplayer(0, var0);
+  thread choppergunner_returnplayer(0, var_0);
   self vehicle_setspeed(50, 25);
-  var1 = self.origin + anglesToForward((0, randomint(360), 0)) * 500;
-  var1 += (0, 0, 1000);
-  self setvehgoalpos(var1, 1);
+  var_1 = self.origin + anglesToForward((0, randomint(360), 0)) * 500;
+  var_1 += (0, 0, 1000);
+  self setvehgoalpos(var_1, 1);
   self setneargoalnotifydist(100);
   self waittill("near_goal");
-  var2 = choppergunner_getpathend();
+  var_2 = choppergunner_getpathend();
   self setmaxpitchroll(15, 15);
   self vehicle_setspeed(150, 50);
-  self setvehgoalpos(var2, 1);
+  self setvehgoalpos(var_2, 1);
   self waittill("goal");
   self notify("gone");
   thread choppergunner_delete(0);
 }
 
 function choppergunner_getpathend() {
-  var0 = 150;
-  var1 = 15000;
-  var2 = self.angles[1];
-  var3 = (0, var2, 0);
-  var4 = self.origin + anglesToForward(var3) * var1;
-  return var4;
+  var_0 = 150;
+  var_1 = 15000;
+  var_2 = self.angles[1];
+  var_3 = (0, var_2, 0);
+  var_4 = self.origin + anglesToForward(var_3) * var_1;
+  return var_4;
 }
 
 function choppergunner_handledamage() {
   self setCanDamage(1);
 }
 
-function choppergunner_modifydamage(var0) {
-  var1 = var0.attacker;
-  var2 = var0.objweapon;
-  var3 = var0.meansofdeath;
-  var4 = var0.damage;
-  var5 = var0.idflags;
+function choppergunner_modifydamage(var_0) {
+  var_1 = var_0.attacker;
+  var_2 = var_0.objweapon;
+  var_3 = var_0.meansofdeath;
+  var_4 = var_0.damage;
+  var_5 = var_0.idflags;
 
   if(isDefined(self.owner) && isusingchoppergunner(self.owner)) {
-    var6 = "light";
+    var_6 = "light";
 
-    if(isexplosivedamagemod(var3)) {
-      if(ceil(var4 / self.maxhealth) >= 0.33) {
+    if(isexplosivedamagemod(var_3)) {
+      if(ceil(var_4 / self.maxhealth) >= 0.33) {
         self.owner earthquakeforplayer(0.25, 0.2, self.turret.origin, 150);
         self.owner playRumbleOnEntity("damage_heavy");
-        var6 = "heavy";
+        var_6 = "heavy";
       } else {
         self.owner earthquakeforplayer(0.15, 0.15, self.turret.origin, 150);
         self.owner playRumbleOnEntity("damage_light");
       }
     }
 
-    thread choppergunner_screeninterference(0.2, var6);
+    thread choppergunner_screeninterference(0.2, var_6);
   }
 
-  self.currenthealth = self.health - var4;
+  self.currenthealth = self.health - var_4;
 
   if(self.currenthealth <= 1500 && self.currentdamagestate == 0) {
     self.currentdamagestate = 1;
@@ -1189,12 +1189,12 @@ function choppergunner_modifydamage(var0) {
   return true;
 }
 
-function choppergunner_handledeathdamage(var0) {
-  self.killedbyweapon = var0.objweapon;
+function choppergunner_handledeathdamage(var_0) {
+  self.killedbyweapon = var_0.objweapon;
   return true;
 }
 
-function choppergunner_handledestroyed(var0) {
+function choppergunner_handledestroyed(var_0) {
   self endon("gone");
   self waittill("death");
 
@@ -1203,7 +1203,7 @@ function choppergunner_handledestroyed(var0) {
   }
 
   if(isDefined(self.owner) && isusingchoppergunner(self.owner)) {
-    thread choppergunner_returnplayer(1, var0);
+    thread choppergunner_returnplayer(1, var_0);
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "isKillstreakWeapon")) {
@@ -1215,102 +1215,102 @@ function choppergunner_handledestroyed(var0) {
   thread choppergunner_explode();
 }
 
-function choppergunner_crash(var0, var1) {
+function choppergunner_crash(var_0, var_1) {
   self endon("explode");
   self clearlookatent();
   self notify("crashing");
   self playsoundonmovingent("veh_apache_explode_mp");
   self setmaxpitchroll(10, 50);
-  self vehicle_setspeed(var0, 20, 20);
+  self vehicle_setspeed(var_0, 20, 20);
   self setneargoalnotifydist(100);
-  var2 = choppergunner_findcrashposition(1250);
+  var_2 = choppergunner_findcrashposition(1250);
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return;
   }
 
   scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("chopper_gunner_crash", 1);
-  self setvehgoalpos(var2, 0);
-  thread choppergunner_spinout(var0);
+  self setvehgoalpos(var_2, 0);
+  thread choppergunner_spinout(var_0);
   thread scripts\common\anim::anim_single_solo(self, "vehicle_crash");
   scripts\common\anim::anim_single_solo(self.pilot, "pilot_crash", "body_animate_jnt");
   scripts\cp_mp\utility\dialog_utility::playoperatorstaticinterrupt();
 }
 
-function choppergunner_spinout(var0) {
+function choppergunner_spinout(var_0) {
   self endon("death");
-  self setyawspeed(var0, 50, 50, 0.5);
+  self setyawspeed(var_0, 50, 50, 0.5);
 
   while(isDefined(self)) {
-    self settargetyaw(self.angles[1] + var0 * 0.6);
+    self settargetyaw(self.angles[1] + var_0 * 0.6);
     wait 0.5;
   }
 }
 
-function choppergunner_findcrashposition(var0) {
-  var1 = self.origin;
-  var2 = 1000;
-  var3 = undefined;
-  var4 = anglesToForward(self.angles);
-  var5 = anglestoright(self.angles);
-  var6 = var1 + var4 * var0 - (0, 0, var2);
+function choppergunner_findcrashposition(var_0) {
+  var_1 = self.origin;
+  var_2 = 1000;
+  var_3 = undefined;
+  var_4 = anglesToForward(self.angles);
+  var_5 = anglestoright(self.angles);
+  var_6 = var_1 + var_4 * var_0 - (0, 0, var_2);
 
-  if(scripts\engine\trace::ray_trace_passed(var1, var6, self)) {
-    var3 = var6;
-    return var3;
+  if(scripts\engine\trace::ray_trace_passed(var_1, var_6, self)) {
+    var_3 = var_6;
+    return var_3;
   }
 
-  var6 = var1 - var4 * var0 - (0, 0, var2);
+  var_6 = var_1 - var_4 * var_0 - (0, 0, var_2);
 
-  if(scripts\engine\trace::ray_trace_passed(var1, var6, self)) {
-    var3 = var6;
-    return var3;
+  if(scripts\engine\trace::ray_trace_passed(var_1, var_6, self)) {
+    var_3 = var_6;
+    return var_3;
   }
 
-  var6 = var1 + var5 * var0 - (0, 0, var2);
+  var_6 = var_1 + var_5 * var_0 - (0, 0, var_2);
 
-  if(scripts\engine\trace::ray_trace_passed(var1, var6, self)) {
-    var3 = var6;
-    return var3;
+  if(scripts\engine\trace::ray_trace_passed(var_1, var_6, self)) {
+    var_3 = var_6;
+    return var_3;
   }
 
-  var6 = var1 - var5 * var0 - (0, 0, var2);
+  var_6 = var_1 - var_5 * var_0 - (0, 0, var_2);
 
-  if(scripts\engine\trace::ray_trace_passed(var1, var6, self)) {
-    var3 = var6;
-    return var3;
+  if(scripts\engine\trace::ray_trace_passed(var_1, var_6, self)) {
+    var_3 = var_6;
+    return var_3;
   }
 
-  var6 = var1 + 0.707 * var0 * (var4 + var5) - (0, 0, var2);
+  var_6 = var_1 + 0.707 * var_0 * (var_4 + var_5) - (0, 0, var_2);
 
-  if(scripts\engine\trace::ray_trace_passed(var1, var6, self)) {
-    var3 = var6;
-    return var3;
+  if(scripts\engine\trace::ray_trace_passed(var_1, var_6, self)) {
+    var_3 = var_6;
+    return var_3;
   }
 
-  var6 = var1 + 0.707 * var0 * (var4 - var5) - (0, 0, var2);
+  var_6 = var_1 + 0.707 * var_0 * (var_4 - var_5) - (0, 0, var_2);
 
-  if(scripts\engine\trace::ray_trace_passed(var1, var6, self)) {
-    var3 = var6;
-    return var3;
+  if(scripts\engine\trace::ray_trace_passed(var_1, var_6, self)) {
+    var_3 = var_6;
+    return var_3;
   }
 
-  var6 = var1 + 0.707 * var0 * (var5 - var4) - (0, 0, var2);
-  var7 = scripts\engine\trace::ray_trace(var1, var6, self);
+  var_6 = var_1 + 0.707 * var_0 * (var_5 - var_4) - (0, 0, var_2);
+  var_7 = scripts\engine\trace::ray_trace(var_1, var_6, self);
 
-  if(scripts\engine\trace::ray_trace_passed(var1, var6, self)) {
-    var3 = var6;
-    return var3;
+  if(scripts\engine\trace::ray_trace_passed(var_1, var_6, self)) {
+    var_3 = var_6;
+    return var_3;
   }
 
-  var6 = var1 + 0.707 * var0 * (-1 * var4 - var5) - (0, 0, var2);
+  var_6 = var_1 + 0.707 * var_0 * (-1 * var_4 - var_5) - (0, 0, var_2);
 
-  if(scripts\engine\trace::ray_trace_passed(var1, var6, self)) {
-    var3 = var6;
-    return var3;
+  if(scripts\engine\trace::ray_trace_passed(var_1, var_6, self)) {
+    var_3 = var_6;
+    return var_3;
   }
 
-  return var3;
+  return var_3;
 }
 
 function choppergunner_explode() {
@@ -1325,12 +1325,12 @@ function choppergunner_explode() {
   thread choppergunner_delete(1);
 }
 
-function choppergunner_delete(var0) {
+function choppergunner_delete(var_0) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("player", "printGameAction")) {
     [[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "printGameAction")]]("killstreak ended - chopperGunner", self.owner);
   }
 
-  self.streakinfo.onspray = istrue(var0);
+  self.streakinfo.onspray = istrue(var_0);
 
   if(!istrue(self.ref_12aa4)) {
     self.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(self.streakinfo);
@@ -1373,9 +1373,9 @@ function choppergunner_delete(var0) {
   scripts\cp_mp\vehicles\vehicle_tracking::_deletevehicle(self);
 }
 
-function choppergunner_returnplayer(var0, var1) {
-  var2 = self.owner;
-  var2 endon("disconnect");
+function choppergunner_returnplayer(var_0, var_1) {
+  var_2 = self.owner;
+  var_2 endon("disconnect");
   self.turretfx setscriptablepartstate("camera_damage_light", "off");
   self.turretfx setscriptablepartstate("camera_damage_medium", "off");
   self.turretfx setscriptablepartstate("camera_damage_heavy", "off");
@@ -1390,50 +1390,50 @@ function choppergunner_returnplayer(var0, var1) {
   }
 
   choppergunner_lockedonremovedcallback();
-  var2 clearclienttriggeraudiozone(0.5);
+  var_2 clearclienttriggeraudiozone(0.5);
 
   if(isDefined(level.killstreakfinishusefunc)) {
     level thread[[level.killstreakfinishusefunc]](self.streakinfo);
   }
 
-  if(isDefined(var2)) {
-    if(!istrue(var1)) {
-      var2 visionsetthermalforplayer("");
-      var2 scripts\cp_mp\utility\player_utility::setthermalvision(0);
-      var2 scripts\cp_mp\utility\killstreak_utility::_setvisibiilityomnvarforkillstreak(self.streakinfo.streakname, "off");
-      var2 setclientomnvar("ui_apache_controls", 0);
-      var2 remotecontrolvehicleoff();
-      var2 remotecontrolturretoff(self.turret);
-      var2 visionsetkillstreakforplayer("");
-      var2 scripts\cp_mp\utility\shellshock_utility::_stopshellshock();
-      var2 scripts\common\utility::allow_melee(1);
-      var2 scripts\common\utility::allow_weapon_switch(1);
-      var2 scripts\common\utility::allow_usability(1);
-      var2 scripts\common\utility::allow_ads(0);
-      var2 scripts\common\utility::allow_shellshock(1);
+  if(isDefined(var_2)) {
+    if(!istrue(var_1)) {
+      var_2 visionsetthermalforplayer("");
+      var_2 scripts\cp_mp\utility\player_utility::setthermalvision(0);
+      var_2 scripts\cp_mp\utility\killstreak_utility::_setvisibiilityomnvarforkillstreak(self.streakinfo.streakname, "off");
+      var_2 setclientomnvar("ui_apache_controls", 0);
+      var_2 remotecontrolvehicleoff();
+      var_2 remotecontrolturretoff(self.turret);
+      var_2 visionsetkillstreakforplayer("");
+      var_2 scripts\cp_mp\utility\shellshock_utility::_stopshellshock();
+      var_2 scripts\common\utility::allow_melee(1);
+      var_2 scripts\common\utility::allow_weapon_switch(1);
+      var_2 scripts\common\utility::allow_usability(1);
+      var_2 scripts\common\utility::allow_ads(0);
+      var_2 scripts\common\utility::allow_shellshock(1);
 
-      if(istrue(var0)) {
-        var2 setclientomnvar("ui_apache_screens_state", 2);
-        var2 setplayerangles(self.angles);
-        var2 playerlinkweaponviewtodelta(self, "tag_player", 1, 0, 0, 0, 0, 1);
-        var2 playerlinkedsetviewznear(0);
-        var2 playlocalsound("mp_killstreak_apache_death_plr");
+      if(istrue(var_0)) {
+        var_2 setclientomnvar("ui_apache_screens_state", 2);
+        var_2 setplayerangles(self.angles);
+        var_2 playerlinkweaponviewtodelta(self, "tag_player", 1, 0, 0, 0, 0, 1);
+        var_2 playerlinkedsetviewznear(0);
+        var_2 playlocalsound("mp_killstreak_apache_death_plr");
         self waittill("explode");
-        var2 unlink();
+        var_2 unlink();
       }
 
-      level thread scripts\cp_mp\utility\killstreak_utility::ref_12cc6(var2);
-      var2 setclientomnvar("ui_apache_screens_state", 0);
-      var2 painvisionon();
-      var2 scripts\cp_mp\utility\killstreak_utility::killstreak_restorenvgstate();
-      var2.usingchoppergunner = undefined;
+      level thread scripts\cp_mp\utility\killstreak_utility::ref_12cc6(var_2);
+      var_2 setclientomnvar("ui_apache_screens_state", 0);
+      var_2 painvisionon();
+      var_2 scripts\cp_mp\utility\killstreak_utility::killstreak_restorenvgstate();
+      var_2.usingchoppergunner = undefined;
     }
   }
 
   self.streakinfo notify("killstreak_finished_with_deploy_weapon");
 }
 
-function choppergunner_watchearlyexit(var0) {
+function choppergunner_watchearlyexit(var_0) {
   self endon("death");
   self endon("leaving");
   self endon("crashing");
@@ -1443,41 +1443,41 @@ function choppergunner_watchearlyexit(var0) {
   }
 
   self waittill("killstreakExit");
-  thread choppergunner_leave(var0);
+  thread choppergunner_leave(var_0);
 }
 
-function choppergunner_handlemissiledetection(var0, var1, var2, var3) {
+function choppergunner_handlemissiledetection(var_0, var_1, var_2, var_3) {
   self endon("death");
 
   for(;;) {
-    if(!isDefined(var2)) {
+    if(!isDefined(var_2)) {
       break;
     }
 
-    var4 = var2 getpointinbounds(0, 0, 0);
-    var5 = distance(self.origin, var4);
+    var_4 = var_2 getpointinbounds(0, 0, 0);
+    var_5 = distance(self.origin, var_4);
 
-    if(var5 < 4000 && var2.flaresreservecount > 0) {
+    if(var_5 < 4000 && var_2.flaresreservecount > 0) {
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("flares", "reduceReserves")) {
-        [[scripts\cp_mp\utility\script_utility::getsharedfunc("flares", "reduceReserves")]](var2);
+        [[scripts\cp_mp\utility\script_utility::getsharedfunc("flares", "reduceReserves")]](var_2);
       }
 
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("flares", "playFx")) {
-        var2 thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("flares", "playFx")]](undefined, var3);
+        var_2 thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("flares", "playFx")]](undefined, var_3);
       }
 
-      var2 scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("chopper_gunner_flares");
-      var6 = undefined;
+      var_2 scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("chopper_gunner_flares");
+      var_6 = undefined;
 
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("flares", "deploy")) {
-        var6 = var2[[scripts\cp_mp\utility\script_utility::getsharedfunc("flares", "deploy")]]();
+        var_6 = var_2[[scripts\cp_mp\utility\script_utility::getsharedfunc("flares", "deploy")]]();
       }
 
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "updateScrapAssistDataForceCredit")) {
-        var2[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "updateScrapAssistDataForceCredit")]](var0);
+        var_2[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "updateScrapAssistDataForceCredit")]](var_0);
       }
 
-      self missile_settargetEnt(var6);
+      self missile_settargetEnt(var_6);
       self notify("missile_pairedWithFlare");
       return;
     }
@@ -1490,32 +1490,32 @@ function isusingchoppergunner() {
   return isDefined(self.usingchoppergunner);
 }
 
-function choppergunner_screeninterference(var0, var1) {
-  var2 = self.owner;
-  var2 endon("disconnect");
+function choppergunner_screeninterference(var_0, var_1) {
+  var_2 = self.owner;
+  var_2 endon("disconnect");
   self endon("death");
   self endon("explode");
   self endon("leaving");
 
-  if(isDefined(var2)) {
-    var3 = choppergunner_getvisionsetformat(self.currentvisionset);
-    var4 = choppergunner_getvisionsetbystrength(var3, var1);
+  if(isDefined(var_2)) {
+    var_3 = choppergunner_getvisionsetformat(self.currentvisionset);
+    var_4 = choppergunner_getvisionsetbystrength(var_3, var_1);
 
-    if(var3 == "flir") {
-      var2 visionsetthermalforplayer(var4);
+    if(var_3 == "flir") {
+      var_2 visionsetthermalforplayer(var_4);
     } else {
-      var2 visionsetkillstreakforplayer(var4);
+      var_2 visionsetkillstreakforplayer(var_4);
     }
 
-    if(isDefined(var0) && isDefined(self.currentvisionset)) {
-      scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var0);
+    if(isDefined(var_0) && isDefined(self.currentvisionset)) {
+      scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_0);
 
-      if(var3 == "flir") {
-        var2 visionsetthermalforplayer(self.currentvisionset);
+      if(var_3 == "flir") {
+        var_2 visionsetthermalforplayer(self.currentvisionset);
         return;
       }
 
-      var2 visionsetkillstreakforplayer(self.currentvisionset);
+      var_2 visionsetkillstreakforplayer(self.currentvisionset);
       return;
     }
 
@@ -1523,37 +1523,37 @@ function choppergunner_screeninterference(var0, var1) {
   }
 }
 
-function choppergunner_getvisionsetformat(var0) {
-  return scripts\engine\utility::ter_op(issubstr(var0, "flir"), "flir", "color");
+function choppergunner_getvisionsetformat(var_0) {
+  return scripts\engine\utility::ter_op(issubstr(var_0, "flir"), "flir", "color");
 }
 
-function choppergunner_getvisionsetbystrength(var0, var1) {
-  var2 = undefined;
+function choppergunner_getvisionsetbystrength(var_0, var_1) {
+  var_2 = undefined;
 
-  if(var0 == "flir") {
-    var2 = var0 + "_0_black_to_white_" + var1 + "_damage";
+  if(var_0 == "flir") {
+    var_2 = var_0 + "_0_black_to_white_" + var_1 + "_damage";
   } else {
-    var2 = "chopper_color_" + var1 + "_damage";
+    var_2 = "chopper_color_" + var_1 + "_damage";
   }
 
-  return var2;
+  return var_2;
 }
 
-function choppergunner_empstarted(var0) {
+function choppergunner_empstarted(var_0) {
   thread scripts\cp_mp\emp_debuff::ref_1241a(self.owner, 5);
   choppergunner_updatetargetmarkergroups();
 }
 
-function choppergunner_empcleared(var0) {
+function choppergunner_empcleared(var_0) {
   choppergunner_updatetargetmarkergroups();
 }
 
-function goal_default(var0, var1, var2, var3) {
+function goal_default(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
-  self waittill("explode", var4);
+  self waittill("explode", var_4);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("spawn", "addSpawnDangerZone")) {
-    [[scripts\cp_mp\utility\script_utility::getsharedfunc("spawn", "addSpawnDangerZone")]](var4, var2, var3, var0.team, var1, var0, 1);
+    [[scripts\cp_mp\utility\script_utility::getsharedfunc("spawn", "addSpawnDangerZone")]](var_4, var_2, var_3, var_0.team, var_1, var_0, 1);
     return;
   }
 }

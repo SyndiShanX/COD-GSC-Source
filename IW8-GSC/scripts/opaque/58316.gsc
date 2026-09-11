@@ -3,336 +3,336 @@
  * Script: scripts\opaque\58316.gsc
 ***********************************************/
 
-function infectednightmode(var0, var1) {
-  var2 = getEnt("e_" + var0 + "_crane_arm", "targetname");
-  var2.molotov_crate_spawn = getEnt("e_" + var0 + "_crane_hook", "targetname");
-  var2.molotov_delete_oldest_scriptable = getEnt("e_" + var0 + "_crane_platform", "targetname");
-  var2.parachute_deploy = 0;
-  var2.parachute_skydive = 0;
-  var2.parachutecancutparachute = 0;
-  var3 = var2 scripts\engine\utility::get_linked_ents();
+function infectednightmode(var_0, var_1) {
+  var_2 = getEnt("e_" + var_0 + "_crane_arm", "targetname");
+  var_2.molotov_crate_spawn = getEnt("e_" + var_0 + "_crane_hook", "targetname");
+  var_2.molotov_delete_oldest_scriptable = getEnt("e_" + var_0 + "_crane_platform", "targetname");
+  var_2.parachute_deploy = 0;
+  var_2.parachute_skydive = 0;
+  var_2.parachutecancutparachute = 0;
+  var_3 = var_2 scripts\engine\utility::get_linked_ents();
 
-  foreach(var5 in var3) {
-    var5 linkTo(var2);
+  foreach(var_5 in var_3) {
+    var_5 linkTo(var_2);
   }
 
-  var7 = var2.molotov_delete_oldest_scriptable scripts\engine\utility::get_linked_ents();
+  var_7 = var_2.molotov_delete_oldest_scriptable scripts\engine\utility::get_linked_ents();
 
-  foreach(var5 in var7) {
-    var5 linkTo(var2.molotov_delete_oldest_scriptable);
+  foreach(var_5 in var_7) {
+    var_5 linkTo(var_2.molotov_delete_oldest_scriptable);
   }
 
-  if(isDefined(var1)) {
-    infectjugg_setconfig(var2, var1, undefined, 1);
+  if(isDefined(var_1)) {
+    infectjugg_setconfig(var_2, var_1, undefined, 1);
   }
 
-  return var2;
+  return var_2;
 }
 
-function infectedsupertwo(var0) {
-  if(isarray(var0)) {
-    for(var1 = 0; var1 < var0.size; var1++) {
-      var2 = undefined;
+function infectedsupertwo(var_0) {
+  if(isarray(var_0)) {
+    for(var_1 = 0; var_1 < var_0.size; var_1++) {
+      var_2 = undefined;
 
-      if(var1 < var0.size - 1) {
-        var2 = var0[var1 + 1];
+      if(var_1 < var_0.size - 1) {
+        var_2 = var_0[var_1 + 1];
       }
 
-      infectjugg_setconfig(var0[var1], var2, 0);
+      infectjugg_setconfig(var_0[var_1], var_2, 0);
     }
 
     return;
   }
 
-  infectjugg_setconfig(var0, undefined, 0);
+  infectjugg_setconfig(var_0, undefined, 0);
 }
 
-function infectjugg_setconfig(var0, var1, var2) {
-  var3 = 494;
-  var4 = 0.3;
-  var5 = 3;
-  var6 = 3;
-  var7 = 40;
-  var8 = var4 / var7;
-  var9 = var5 / var7;
-  var10 = var6 / var7;
-  var11 = 0;
-  var12 = 0;
-  var13 = 0;
+function infectjugg_setconfig(var_0, var_1, var_2) {
+  var_3 = 494;
+  var_4 = 0.3;
+  var_5 = 3;
+  var_6 = 3;
+  var_7 = 40;
+  var_8 = var_4 / var_7;
+  var_9 = var_5 / var_7;
+  var_10 = var_6 / var_7;
+  var_11 = 0;
+  var_12 = 0;
+  var_13 = 0;
 
-  if(var2) {
-    var4 = 90;
-    var5 = 10000;
-    var6 = 10000;
+  if(var_2) {
+    var_4 = 90;
+    var_5 = 10000;
+    var_6 = 10000;
     self.parachute_deploy = 90;
     self.parachute_skydive = 10000;
     self.parachutecancutparachute = 10000;
   }
 
-  if(!isvector(var0)) {
-    var0 = var0.origin;
+  if(!isvector(var_0)) {
+    var_0 = var_0.origin;
   }
 
-  var0 = (var0[0], var0[1], var0[2] + var3);
+  var_0 = (var_0[0], var_0[1], var_0[2] + var_3);
 
-  if(isDefined(var1)) {
-    if(!isvector(var1)) {
-      var1 = var1.origin;
+  if(isDefined(var_1)) {
+    if(!isvector(var_1)) {
+      var_1 = var_1.origin;
     }
 
-    var1 = (var1[0], var1[1], var1[2] + var3);
+    var_1 = (var_1[0], var_1[1], var_1[2] + var_3);
   }
 
-  var14 = vectortoangles(self.origin - var0);
-  var15 = var14[1];
-  var15 += 90;
+  var_14 = vectortoangles(self.origin - var_0);
+  var_15 = var_14[1];
+  var_15 += 90;
 
-  if(var15 >= 360) {
-    var15 -= 360;
+  if(var_15 >= 360) {
+    var_15 -= 360;
   }
 
-  if(self.angles[1] < var15) {
-    if(abs(self.angles[1] - var15) > 180) {
-      var4 *= -1;
-      var8 *= -1;
+  if(self.angles[1] < var_15) {
+    if(abs(self.angles[1] - var_15) > 180) {
+      var_4 *= -1;
+      var_8 *= -1;
     }
-  } else if(abs(self.angles[1] - var15) < 180) {
-    var4 *= -1;
-    var8 *= -1;
+  } else if(abs(self.angles[1] - var_15) < 180) {
+    var_4 *= -1;
+    var_8 *= -1;
   }
 
-  var16 = distance2d(self.origin, self.molotov_crate_spawn.origin);
-  var17 = distance2d(self.origin, var0);
-  var18 = self.molotov_crate_spawn.origin[2] - self.origin[2];
+  var_16 = distance2d(self.origin, self.molotov_crate_spawn.origin);
+  var_17 = distance2d(self.origin, var_0);
+  var_18 = self.molotov_crate_spawn.origin[2] - self.origin[2];
 
-  if(var17 < var16) {
-    var5 *= -1;
-    var9 *= -1;
+  if(var_17 < var_16) {
+    var_5 *= -1;
+    var_9 *= -1;
   }
 
-  var19 = var0[2] - self.molotov_delete_oldest_scriptable.origin[2];
+  var_19 = var_0[2] - self.molotov_delete_oldest_scriptable.origin[2];
 
-  if(var19 < 0) {
-    var6 *= -1;
-    var10 *= -1;
+  if(var_19 < 0) {
+    var_6 *= -1;
+    var_10 *= -1;
   }
 
-  var20 = 0;
-  var21 = 0;
-  var22 = 0;
-  var23 = scripts\mp\utility\player::getplayersinradius(self.molotov_delete_oldest_scriptable.origin, 300);
+  var_20 = 0;
+  var_21 = 0;
+  var_22 = 0;
+  var_23 = scripts\mp\utility\player::getplayersinradius(self.molotov_delete_oldest_scriptable.origin, 300);
 
-  foreach(var25 in var23) {
-    var26 = var25.origin - self.molotov_delete_oldest_scriptable.origin;
-    var27 = vectortoangles(var26);
-    var27 = (var27[0], var27[1] + 40, var27[2]);
-    var28 = distance2d(var25.origin, self.molotov_delete_oldest_scriptable.origin);
-    var29 = self.molotov_delete_oldest_scriptable.origin + var27 * var28;
-    var30 = self.molotov_delete_oldest_scriptable.origin + anglesToForward(self.molotov_delete_oldest_scriptable.angles) * 160;
-    var31 = self.molotov_delete_oldest_scriptable.origin + anglesToForward(self.molotov_delete_oldest_scriptable.angles) * -160;
-    var32 = self.molotov_delete_oldest_scriptable.origin + anglestoright(self.molotov_delete_oldest_scriptable.angles) * 115;
-    var33 = self.molotov_delete_oldest_scriptable.origin + anglestoright(self.molotov_delete_oldest_scriptable.angles) * -115;
+  foreach(var_25 in var_23) {
+    var_26 = var_25.origin - self.molotov_delete_oldest_scriptable.origin;
+    var_27 = vectortoangles(var_26);
+    var_27 = (var_27[0], var_27[1] + 40, var_27[2]);
+    var_28 = distance2d(var_25.origin, self.molotov_delete_oldest_scriptable.origin);
+    var_29 = self.molotov_delete_oldest_scriptable.origin + var_27 * var_28;
+    var_30 = self.molotov_delete_oldest_scriptable.origin + anglesToForward(self.molotov_delete_oldest_scriptable.angles) * 160;
+    var_31 = self.molotov_delete_oldest_scriptable.origin + anglesToForward(self.molotov_delete_oldest_scriptable.angles) * -160;
+    var_32 = self.molotov_delete_oldest_scriptable.origin + anglestoright(self.molotov_delete_oldest_scriptable.angles) * 115;
+    var_33 = self.molotov_delete_oldest_scriptable.origin + anglestoright(self.molotov_delete_oldest_scriptable.angles) * -115;
 
-    if(var31[0] < var25.origin[0] && var25.origin[0] < var30[0] && var32[1] < var25.origin[1] && var25.origin[1] < var33[1] && self.molotov_delete_oldest_scriptable.origin[2] < var25.origin[2] && var25 isonground()) {
-      var25 earthquakeforplayer(0.1, 2, var25.origin, 100);
-      var25 playrumbleonpositionforclient("damage_light", var25.origin);
+    if(var_31[0] < var_25.origin[0] && var_25.origin[0] < var_30[0] && var_32[1] < var_25.origin[1] && var_25.origin[1] < var_33[1] && self.molotov_delete_oldest_scriptable.origin[2] < var_25.origin[2] && var_25 isonground()) {
+      var_25 earthquakeforplayer(0.1, 2, var_25.origin, 100);
+      var_25 playrumbleonpositionforclient("damage_light", var_25.origin);
     }
   }
 
   for(;;) {
-    var35 = var15 - self.angles[1];
+    var_35 = var_15 - self.angles[1];
 
-    if(!var20 && !var35) {
-      var20 = 1;
+    if(!var_20 && !var_35) {
+      var_20 = 1;
     }
 
-    if(var35) {
-      var36 = 0;
+    if(var_35) {
+      var_36 = 0;
 
-      if(isDefined(var1) && var21 && var22) {
-        var37 = vectortoangles(self.origin - var1);
-        var38 = var37[1];
-        var38 += 90;
+      if(isDefined(var_1) && var_21 && var_22) {
+        var_37 = vectortoangles(self.origin - var_1);
+        var_38 = var_37[1];
+        var_38 += 90;
 
-        if(var38 >= 360) {
-          var38 -= 360;
+        if(var_38 >= 360) {
+          var_38 -= 360;
         }
 
-        if(var15 != var38) {
-          if(abs(self.parachute_deploy) < abs(var4)) {
-            self.parachute_deploy += var8;
+        if(var_15 != var_38) {
+          if(abs(self.parachute_deploy) < abs(var_4)) {
+            self.parachute_deploy += var_8;
           }
-        } else if(abs(var35) < var7 / 2 * abs(var4)) {
-          self.parachute_deploy = var4 * abs(var35) / var7 / 2 * abs(var4);
+        } else if(abs(var_35) < var_7 / 2 * abs(var_4)) {
+          self.parachute_deploy = var_4 * abs(var_35) / var_7 / 2 * abs(var_4);
 
-          if(abs(self.parachute_deploy) < 0.05 * abs(var4)) {
-            self.parachute_deploy = 0.05 * var4;
+          if(abs(self.parachute_deploy) < 0.05 * abs(var_4)) {
+            self.parachute_deploy = 0.05 * var_4;
           }
 
-          if(abs(var35) < 0.05 * abs(var4)) {
-            self.parachute_deploy = var35;
-            var36 = 1;
+          if(abs(var_35) < 0.05 * abs(var_4)) {
+            self.parachute_deploy = var_35;
+            var_36 = 1;
           }
-        } else if(abs(self.parachute_deploy) < abs(var4)) {
-          self.parachute_deploy += var8;
+        } else if(abs(self.parachute_deploy) < abs(var_4)) {
+          self.parachute_deploy += var_8;
         }
 
-        if(abs(var35) <= abs(var4)) {
-          var20 = 1;
+        if(abs(var_35) <= abs(var_4)) {
+          var_20 = 1;
         }
-      } else if(abs(var35) < var7 / 2 * abs(var4)) {
-        self.parachute_deploy = var4 * abs(var35) / var7 / 2 * abs(var4);
+      } else if(abs(var_35) < var_7 / 2 * abs(var_4)) {
+        self.parachute_deploy = var_4 * abs(var_35) / var_7 / 2 * abs(var_4);
 
-        if(abs(self.parachute_deploy) < 0.05 * abs(var4)) {
-          self.parachute_deploy = 0.05 * var4;
+        if(abs(self.parachute_deploy) < 0.05 * abs(var_4)) {
+          self.parachute_deploy = 0.05 * var_4;
         }
 
-        if(abs(var35) < 0.05 * abs(var4)) {
-          self.parachute_deploy = var35;
-          var36 = 1;
+        if(abs(var_35) < 0.05 * abs(var_4)) {
+          self.parachute_deploy = var_35;
+          var_36 = 1;
         }
-      } else if(abs(self.parachute_deploy) < abs(var4)) {
-        self.parachute_deploy += var8;
+      } else if(abs(self.parachute_deploy) < abs(var_4)) {
+        self.parachute_deploy += var_8;
       }
 
-      if(var35) {
+      if(var_35) {
         self rotateYaw(self.parachute_deploy, 0.05);
         self.molotov_crate_spawn rotateYaw(self.parachute_deploy, 0.05);
         self.molotov_delete_oldest_scriptable rotateYaw(self.parachute_deploy, 0.05);
 
-        if(var36) {
+        if(var_36) {
           self.parachute_deploy = 0;
         }
       }
     }
 
-    var39 = undefined;
-    var16 = distance2d(self.origin, self.molotov_crate_spawn.origin);
-    var40 = var17 - var16;
+    var_39 = undefined;
+    var_16 = distance2d(self.origin, self.molotov_crate_spawn.origin);
+    var_40 = var_17 - var_16;
 
-    if(!var21 && abs(var40) < 0.005) {
-      var21 = 1;
+    if(!var_21 && abs(var_40) < 0.005) {
+      var_21 = 1;
     }
 
-    if(var35 || var40) {
-      var41 = (0, self.angles[1] + self.parachute_deploy, 0);
-      var42 = vectorNormalize(-1 * anglestoright(var41));
-      var36 = 0;
+    if(var_35 || var_40) {
+      var_41 = (0, self.angles[1] + self.parachute_deploy, 0);
+      var_42 = vectorNormalize(-1 * anglestoright(var_41));
+      var_36 = 0;
 
-      if(isDefined(var1) && var20 && var22) {
-        var43 = distance2d(self.origin, var1);
+      if(isDefined(var_1) && var_20 && var_22) {
+        var_43 = distance2d(self.origin, var_1);
 
-        if(var17 != var43) {
-          if(abs(self.parachute_skydive) < abs(var5)) {
-            self.parachute_skydive += var9;
+        if(var_17 != var_43) {
+          if(abs(self.parachute_skydive) < abs(var_5)) {
+            self.parachute_skydive += var_9;
           }
-        } else if(abs(var40) < var7 / 2 * abs(var5)) {
-          self.parachute_skydive = var5 * abs(var40) / var7 / 2 * abs(var5);
+        } else if(abs(var_40) < var_7 / 2 * abs(var_5)) {
+          self.parachute_skydive = var_5 * abs(var_40) / var_7 / 2 * abs(var_5);
 
-          if(abs(self.parachute_skydive) < 0.05 * abs(var5)) {
-            self.parachute_skydive = 0.05 * var5;
+          if(abs(self.parachute_skydive) < 0.05 * abs(var_5)) {
+            self.parachute_skydive = 0.05 * var_5;
           }
 
-          if(abs(var40) < 0.05 * abs(var5)) {
-            self.parachute_skydive = var40;
-            var36 = 1;
+          if(abs(var_40) < 0.05 * abs(var_5)) {
+            self.parachute_skydive = var_40;
+            var_36 = 1;
           }
-        } else if(abs(self.parachute_skydive) < abs(var5)) {
-          self.parachute_skydive += var9;
+        } else if(abs(self.parachute_skydive) < abs(var_5)) {
+          self.parachute_skydive += var_9;
         }
 
-        if(abs(var40) <= abs(var5)) {
-          var21 = 1;
+        if(abs(var_40) <= abs(var_5)) {
+          var_21 = 1;
         }
-      } else if(abs(var40) < var7 / 2 * abs(var5)) {
-        self.parachute_skydive = var5 * abs(var40) / var7 / 2 * abs(var5);
+      } else if(abs(var_40) < var_7 / 2 * abs(var_5)) {
+        self.parachute_skydive = var_5 * abs(var_40) / var_7 / 2 * abs(var_5);
 
-        if(abs(self.parachute_skydive) < 0.05 * abs(var5)) {
-          self.parachute_skydive = 0.05 * var5;
+        if(abs(self.parachute_skydive) < 0.05 * abs(var_5)) {
+          self.parachute_skydive = 0.05 * var_5;
         }
 
-        if(abs(var40) < 0.05 * abs(var5)) {
-          self.parachute_skydive = var40;
-          var36 = 1;
+        if(abs(var_40) < 0.05 * abs(var_5)) {
+          self.parachute_skydive = var_40;
+          var_36 = 1;
         }
-      } else if(abs(self.parachute_skydive) < abs(var5)) {
-        self.parachute_skydive += var9;
+      } else if(abs(self.parachute_skydive) < abs(var_5)) {
+        self.parachute_skydive += var_9;
       }
 
-      if(var35 || var40) {
-        var44 = var16 + self.parachute_skydive;
-        var39 = self.origin + var42 * var44 + (0, 0, var18);
-        self.molotov_crate_spawn moveTo(var39, 0.05);
+      if(var_35 || var_40) {
+        var_44 = var_16 + self.parachute_skydive;
+        var_39 = self.origin + var_42 * var_44 + (0, 0, var_18);
+        self.molotov_crate_spawn moveTo(var_39, 0.05);
 
-        if(var36) {
+        if(var_36) {
           self.parachute_skydive = 0;
         }
       }
     }
 
-    var45 = var0[2] - self.molotov_delete_oldest_scriptable.origin[2];
+    var_45 = var_0[2] - self.molotov_delete_oldest_scriptable.origin[2];
 
-    if(!var22 && !var45) {
-      var22 = 1;
+    if(!var_22 && !var_45) {
+      var_22 = 1;
     }
 
-    if(var35 || var40 || var45) {
-      var36 = 0;
+    if(var_35 || var_40 || var_45) {
+      var_36 = 0;
 
-      if(isDefined(var1) && var20 && var21) {
-        var46 = var1[2] - self.molotov_delete_oldest_scriptable.origin[2];
+      if(isDefined(var_1) && var_20 && var_21) {
+        var_46 = var_1[2] - self.molotov_delete_oldest_scriptable.origin[2];
 
-        if(var19 != var46) {
-          if(abs(self.parachutecancutparachute) < abs(var6)) {
-            self.parachutecancutparachute += var10;
+        if(var_19 != var_46) {
+          if(abs(self.parachutecancutparachute) < abs(var_6)) {
+            self.parachutecancutparachute += var_10;
           }
-        } else if(abs(var45) < abs(var7 / 2) * abs(var6)) {
-          self.parachutecancutparachute = var6 * abs(var45) / abs(var7 / 2) * abs(var6);
+        } else if(abs(var_45) < abs(var_7 / 2) * abs(var_6)) {
+          self.parachutecancutparachute = var_6 * abs(var_45) / abs(var_7 / 2) * abs(var_6);
 
-          if(abs(self.parachutecancutparachute) < 0.05 * abs(var6)) {
-            self.parachutecancutparachute = 0.05 * var6;
+          if(abs(self.parachutecancutparachute) < 0.05 * abs(var_6)) {
+            self.parachutecancutparachute = 0.05 * var_6;
           }
 
-          if(abs(var45) < 0.05 * abs(var6)) {
-            self.parachutecancutparachute = var45;
-            var36 = 1;
+          if(abs(var_45) < 0.05 * abs(var_6)) {
+            self.parachutecancutparachute = var_45;
+            var_36 = 1;
           }
-        } else if(abs(self.parachutecancutparachute) < abs(var6)) {
-          self.parachutecancutparachute += var10;
+        } else if(abs(self.parachutecancutparachute) < abs(var_6)) {
+          self.parachutecancutparachute += var_10;
         }
 
-        if(abs(var45) <= abs(var6)) {
-          var22 = 1;
+        if(abs(var_45) <= abs(var_6)) {
+          var_22 = 1;
         }
-      } else if(abs(var45) < abs(var7 / 2) * abs(var6)) {
-        self.parachutecancutparachute = var6 * abs(var45) / abs(var7 / 2) * abs(var6);
+      } else if(abs(var_45) < abs(var_7 / 2) * abs(var_6)) {
+        self.parachutecancutparachute = var_6 * abs(var_45) / abs(var_7 / 2) * abs(var_6);
 
-        if(abs(self.parachutecancutparachute) < 0.05 * abs(var6)) {
-          self.parachutecancutparachute = 0.05 * var6;
+        if(abs(self.parachutecancutparachute) < 0.05 * abs(var_6)) {
+          self.parachutecancutparachute = 0.05 * var_6;
         }
 
-        if(abs(var45) < 0.05 * abs(var6)) {
-          self.parachutecancutparachute = var45;
-          var36 = 1;
+        if(abs(var_45) < 0.05 * abs(var_6)) {
+          self.parachutecancutparachute = var_45;
+          var_36 = 1;
         }
-      } else if(abs(self.parachutecancutparachute) < abs(var6)) {
-        self.parachutecancutparachute += var10;
+      } else if(abs(self.parachutecancutparachute) < abs(var_6)) {
+        self.parachutecancutparachute += var_10;
       }
 
-      if(isDefined(var39)) {
-        var47 = (var39[0], var39[1], self.molotov_delete_oldest_scriptable.origin[2] + self.parachutecancutparachute);
+      if(isDefined(var_39)) {
+        var_47 = (var_39[0], var_39[1], self.molotov_delete_oldest_scriptable.origin[2] + self.parachutecancutparachute);
       } else {
-        var47 = (self.molotov_delete_oldest_scriptable.origin[0], self.molotov_delete_oldest_scriptable.origin[1], self.molotov_delete_oldest_scriptable.origin[2] + self.parachutecancutparachute);
+        var_47 = (self.molotov_delete_oldest_scriptable.origin[0], self.molotov_delete_oldest_scriptable.origin[1], self.molotov_delete_oldest_scriptable.origin[2] + self.parachutecancutparachute);
       }
 
-      self.molotov_delete_oldest_scriptable moveTo(var47, 0.05);
+      self.molotov_delete_oldest_scriptable moveTo(var_47, 0.05);
 
-      if(var47) {
+      if(var_47) {
         self.parachutecancutparachute = 0;
       }
     }
 
-    if(var21 && var22 && var23) {
+    if(var_21 && var_22 && var_23) {
       break;
     }
 
@@ -343,87 +343,87 @@ function infectjugg_setconfig(var0, var1, var2) {
 function activate_seq_button() {}
 
 function ref_125fc() {
-  var0 = spawnStruct();
-  var0.ref_12889 = [];
-  var0.brtdm_config = [];
-  var0.brtruck_cleanupents = [];
-  var0.brtruck_ontimelimit = [];
-  var0.offhands = [];
-  var0.nvidiaansel_overridecollisionradius = [];
-  var0.should_use_velo_forward = self.should_use_velo_forward;
-  var0.callprecisionairstrikeonlocation = scripts\mp\equipment::getequipmentslotammo("health");
-  var1 = [];
-  var2 = self getweaponslistprimaries();
+  var_0 = spawnStruct();
+  var_0.ref_12889 = [];
+  var_0.brtdm_config = [];
+  var_0.brtruck_cleanupents = [];
+  var_0.brtruck_ontimelimit = [];
+  var_0.offhands = [];
+  var_0.nvidiaansel_overridecollisionradius = [];
+  var_0.should_use_velo_forward = self.should_use_velo_forward;
+  var_0.callprecisionairstrikeonlocation = scripts\mp\equipment::getequipmentslotammo("health");
+  var_1 = [];
+  var_2 = self getweaponslistprimaries();
 
-  foreach(var4 in var2) {
-    if(!scripts\mp\utility\weapon::update_health_bar_to_player(var4) && !issubstr(var4.basename, "iw8_fists_mp") && !scripts\mp\utility\weapon::unset_relic_mythic(var4.basename)) {
-      var1 = var4;
+  foreach(var_4 in var_2) {
+    if(!scripts\mp\utility\weapon::update_health_bar_to_player(var_4) && !issubstr(var_4.basename, "iw8_fists_mp") && !scripts\mp\utility\weapon::unset_relic_mythic(var_4.basename)) {
+      var_1 = var_4;
     }
   }
 
-  foreach(var7 in var1) {
-    var8 = createheadicon(var7);
+  foreach(var_7 in var_1) {
+    var_8 = createheadicon(var_7);
 
-    if(var7.basename == "iw8_lm_dblmg_mp" || var7.basename == "iw8_la_mike32_mp") {
-      var0.brtdm_config[var8] = self getweaponammoclip(var7);
-      var0.brtruck_ontimelimit[var8] = self getweaponammostock(var7);
+    if(var_7.basename == "iw8_lm_dblmg_mp" || var_7.basename == "iw8_la_mike32_mp") {
+      var_0.brtdm_config[var_8] = self getweaponammoclip(var_7);
+      var_0.brtruck_ontimelimit[var_8] = self getweaponammostock(var_7);
     } else {
-      var0.brtdm_config[var8] = weaponclipsize(var7);
-      var0.brtruck_ontimelimit[var8] = int(max(self getweaponammostock(var7), weaponclipsize(var7)));
+      var_0.brtdm_config[var_8] = weaponclipsize(var_7);
+      var_0.brtruck_ontimelimit[var_8] = int(max(self getweaponammostock(var_7), weaponclipsize(var_7)));
     }
 
-    if(scripts\mp\utility\weapon::turnexfiltoside(var7)) {
-      var0.brtruck_cleanupents[var8] = weaponclipsize(var7);
+    if(scripts\mp\utility\weapon::turnexfiltoside(var_7)) {
+      var_0.brtruck_cleanupents[var_8] = weaponclipsize(var_7);
     }
 
-    if(getsubstr(var8, 0, 4) == "alt_") {
+    if(getsubstr(var_8, 0, 4) == "alt_") {
       continue;
     }
 
-    var0.ref_12889[var0.ref_12889.size] = var7;
+    var_0.ref_12889[var_0.ref_12889.size] = var_7;
   }
 
-  var10 = self getweaponslistoffhands();
+  var_10 = self getweaponslistoffhands();
 
-  foreach(var12 in var10) {
-    if(var12.basename == "bandage_br") {
+  foreach(var_12 in var_10) {
+    if(var_12.basename == "bandage_br") {
       continue;
     }
 
-    var13 = self getweaponammoclip(var12);
+    var_13 = self getweaponammoclip(var_12);
 
-    if(var13 <= 0) {
+    if(var_13 <= 0) {
       continue;
     }
 
-    var0.offhands[var0.offhands.size] = var12;
-    var14 = createheadicon(var12);
-    var0.brtdm_config[var14] = var13;
+    var_0.offhands[var_0.offhands.size] = var_12;
+    var_14 = createheadicon(var_12);
+    var_0.brtdm_config[var_14] = var_13;
   }
 
-  foreach(var17 in self.equipment) {
-    var0.nvidiaansel_overridecollisionradius[var17] = var18;
+  foreach(var_17 in self.equipment) {
+    var_0.nvidiaansel_overridecollisionradius[var_17] = var_18;
   }
 
   if(getdvarint("scr_restore_loadout_super", 1)) {
-    var0.super = undefined;
+    var_0.super = undefined;
 
     if(isDefined(self.super) && !self.super.usepercent) {
-      var0.super = self.equipment["super"];
+      var_0.super = self.equipment["super"];
     }
   }
 
   if(isDefined(self.streakdata.streaks[1]) && getdvarint("scr_restore_loadout_killstreak", 1)) {
-    var0.vo_one_remain = self.streakdata.streaks[1].streakname;
+    var_0.vo_one_remain = self.streakdata.streaks[1].streakname;
   }
 
   if(scripts\cp_mp\gasmask::hasgasmask(self) && getdvarint("scr_restore_loadout_gas_mask", 1)) {
-    var0.gasmaskhealth = self.gasmaskhealth;
-    var0.plunderpads = self.plunderpads;
-    var0.plundersilentcountdownendtime = self.plundersilentcountdownendtime;
+    var_0.gasmaskhealth = self.gasmaskhealth;
+    var_0.plunderpads = self.plunderpads;
+    var_0.plundersilentcountdownendtime = self.plundersilentcountdownendtime;
   }
 
-  self.ref_12eb0 = var0;
+  self.ref_12eb0 = var_0;
 }
 
 function ref_125fb() {
@@ -433,71 +433,71 @@ function ref_125fb() {
   self.equipment["secondary"] = undefined;
   self.equipment["health"] = undefined;
   self.equipment["super"] = undefined;
-  var0 = 0;
+  var_0 = 0;
 
-  foreach(var2 in self.ref_12eb0.ref_12889) {
-    var3 = createheadicon(var2);
+  foreach(var_2 in self.ref_12eb0.ref_12889) {
+    var_3 = createheadicon(var_2);
 
-    if(var3 == "iw8_lm_dblmg_mp") {
+    if(var_3 == "iw8_lm_dblmg_mp") {
       scripts\mp\gametypes\br_weapons::br_forcegiveweapon("brloot_weapon_lm_dblmg_lege", self);
     } else {
-      scripts\cp_mp\utility\inventory_utility::_giveweapon(var2);
+      scripts\cp_mp\utility\inventory_utility::_giveweapon(var_2);
     }
 
-    if(!var0) {
-      self assignweaponprimaryslot(var3);
-      scripts\cp_mp\utility\inventory_utility::_switchtoweapon(var2);
-      var0 = 1;
+    if(!var_0) {
+      self assignweaponprimaryslot(var_3);
+      scripts\cp_mp\utility\inventory_utility::_switchtoweapon(var_2);
+      var_0 = 1;
     }
 
-    scripts\mp\weapons::fixupplayerweapons(self, var3);
+    scripts\mp\weapons::fixupplayerweapons(self, var_3);
   }
 
   if(self.ref_12eb0.ref_12889.size < 2) {
-    var5 = getcompleteweaponname("iw8_fists_mp");
-    self giveweapon(var5);
+    var_5 = getcompleteweaponname("iw8_fists_mp");
+    self giveweapon(var_5);
   }
 
-  foreach(var7 in self.ref_12eb0.offhands) {
-    var8 = scripts\mp\equipment::getequipmentreffromweapon(var7);
+  foreach(var_7 in self.ref_12eb0.offhands) {
+    var_8 = scripts\mp\equipment::getequipmentreffromweapon(var_7);
 
-    if(!isDefined(var8)) {
+    if(!isDefined(var_8)) {
       continue;
     }
 
-    var9 = self.ref_12eb0.nvidiaansel_overridecollisionradius[var8];
+    var_9 = self.ref_12eb0.nvidiaansel_overridecollisionradius[var_8];
 
-    if(!isDefined(var9)) {
+    if(!isDefined(var_9)) {
       continue;
     }
 
-    scripts\mp\equipment::giveequipment(var8, var9);
+    scripts\mp\equipment::giveequipment(var_8, var_9);
   }
 
-  foreach(var3, var12 in self.ref_12eb0.brtruck_ontimelimit) {
-    self setweaponammostock(var3, var12);
-    var2 = getcompleteweaponname(getweaponbasename(var3));
-    var13 = scripts\mp\gametypes\br_weapons::br_ammo_type_for_weapon(var2);
+  foreach(var_3, var_12 in self.ref_12eb0.brtruck_ontimelimit) {
+    self setweaponammostock(var_3, var_12);
+    var_2 = getcompleteweaponname(getweaponbasename(var_3));
+    var_13 = scripts\mp\gametypes\br_weapons::br_ammo_type_for_weapon(var_2);
 
-    if(isDefined(var13)) {
-      self.br_ammo[var13] = var12;
-      scripts\mp\gametypes\br_weapons::br_ammo_player_hud_update_ammotype(var13);
+    if(isDefined(var_13)) {
+      self.br_ammo[var_13] = var_12;
+      scripts\mp\gametypes\br_weapons::br_ammo_player_hud_update_ammotype(var_13);
     }
   }
 
-  foreach(var3, var12 in self.ref_12eb0.brtdm_config) {
-    self setweaponammoclip(var3, var12);
+  foreach(var_3, var_12 in self.ref_12eb0.brtdm_config) {
+    self setweaponammoclip(var_3, var_12);
   }
 
-  foreach(var3, var12 in self.ref_12eb0.brtruck_cleanupents) {
-    self setweaponammoclip(var3, var12, "left");
+  foreach(var_3, var_12 in self.ref_12eb0.brtruck_cleanupents) {
+    self setweaponammoclip(var_3, var_12, "left");
   }
 
   waitframe();
 
   if(isDefined(self.ref_12eb0.super) && getdvarint("scr_restore_loadout_super", 1)) {
-    var16 = level.br_pickups.br_superreference[level.br_pickups.br_equipnametoscriptable[self.ref_12eb0.super]];
-    scripts\mp\gametypes\br_pickups::forcegivesuper(var16, 0);
+    var_16 = level.br_pickups.br_superreference[level.br_pickups.br_equipnametoscriptable[self.ref_12eb0.super]];
+    scripts\mp\gametypes\br_pickups::forcegivesuper(var_16, 0);
   }
 
   if(isDefined(self.ref_12eb0.vo_one_remain) && getdvarint("scr_restore_loadout_killstreak", 1)) {

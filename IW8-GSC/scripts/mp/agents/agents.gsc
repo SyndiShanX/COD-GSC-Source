@@ -40,21 +40,21 @@ function wait_till_agent_funcs_defined() {
   }
 }
 
-function add_humanoid_agent(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13) {
-  var14 = scripts\mp\agents\agent_common::connectnewagent(var0, var1, var2);
+function add_humanoid_agent(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
+  var_14 = scripts\mp\agents\agent_common::connectnewagent(var_0, var_1, var_2);
 
-  if(isDefined(var9)) {
-    var14.classcallback = var9;
+  if(isDefined(var_9)) {
+    var_14.classcallback = var_9;
   }
 
-  if(isDefined(var14)) {
-    var14 thread[[var14 scripts\mp\agents\agent_utility::agentfunc("spawn")]](var3, var4, var5, var6, var7, var8, var10, var11, var12, var13);
+  if(isDefined(var_14)) {
+    var_14 thread[[var_14 scripts\mp\agents\agent_utility::agentfunc("spawn")]](var_3, var_4, var_5, var_6, var_7, var_8, var_10, var_11, var_12, var_13);
   }
 
-  return var14;
+  return var_14;
 }
 
-function spawn_agent_player(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
+function spawn_agent_player(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   self endon("disconnect");
 
   while(!isDefined(level.getspawnpoint)) {
@@ -66,22 +66,22 @@ function spawn_agent_player(var0, var1, var2, var3, var4, var5, var6, var7, var8
   }
 
   scripts\mp\agents\agent_utility::initplayerscriptvariables(1);
-  jumpiffalse(isDefined(var0) && isDefined(var1)) LOC_00000074;
-  var10 = var0;
-  var11 = var1;
+  jumpiffalse(isDefined(var_0) && isDefined(var_1)) LOC_00000074;
+  var_10 = var_0;
+  var_11 = var_1;
   self.lastspawnpoint = spawnStruct();
-  self.lastspawnpoint.origin = var10;
-  self.lastspawnpoint.angles = var11;
+  self.lastspawnpoint.origin = var_10;
+  self.lastspawnpoint.angles = var_11;
   goto LOC_0000009c;
 }
 
-function destroyonownerdisconnect(var0) {
+function destroyonownerdisconnect(var_0) {
   self endon("death");
-  GscBinSkip4(0x35, "disconnect", var0);
+  GscBinSkip4(0x35, "disconnect", var_0);
 }
 
-function watchownerstatus(var0, var1) {
-  var1 waittill(var0);
+function watchownerstatus(var_0, var_1) {
+  var_1 waittill(var_0);
   self notify("owner_disconnect");
 
   if(scripts\mp\hostmigration::waittillhostmigrationdone()) {
@@ -91,35 +91,35 @@ function watchownerstatus(var0, var1) {
   self suicide();
 }
 
-function agent_damage_finished(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11) {
+function agent_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(isalive(self)) {
-    if(isDefined(var0) || isDefined(var1)) {
-      if(!isDefined(var0)) {
-        var0 = var1;
+    if(isDefined(var_0) || isDefined(var_1)) {
+      if(!isDefined(var_0)) {
+        var_0 = var_1;
       }
 
       if(isDefined(self.allowvehicledamage) && !self.allowvehicledamage) {
-        if(isDefined(var0.classname) && var0.classname == "script_vehicle") {
+        if(isDefined(var_0.classname) && var_0.classname == "script_vehicle") {
           return 0;
         }
       }
 
-      if(isDefined(var0.classname) && var0.classname == "auto_turret") {
-        var1 = var0;
+      if(isDefined(var_0.classname) && var_0.classname == "auto_turret") {
+        var_1 = var_0;
       }
 
-      if(isDefined(var1) && var4 != "MOD_FALLING" && var4 != "MOD_SUICIDE") {
+      if(isDefined(var_1) && var_4 != "MOD_FALLING" && var_4 != "MOD_SUICIDE") {
         if(level.teambased) {
-          if(isDefined(var1.team) && var1.team != self.team) {
-            self setagentattacker(var1);
+          if(isDefined(var_1.team) && var_1.team != self.team) {
+            self setagentattacker(var_1);
           }
         } else {
-          self setagentattacker(var1);
+          self setagentattacker(var_1);
         }
       }
     }
 
-    self finishagentdamage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, 0, var10, var11);
+    self finishagentdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_10, var_11);
 
     if(!isDefined(self.isactive)) {
       self.waitingtodeactivate = 1;
@@ -129,21 +129,21 @@ function agent_damage_finished(var0, var1, var2, var3, var4, var5, var6, var7, v
   }
 }
 
-function on_agent_generic_damaged(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11) {
-  var12 = isDefined(var1) && isDefined(self.owner) && self.owner == var1;
-  var13 = scripts\mp\utility\damage::attackerishittingteam(self.owner, var1) || var12;
+function on_agent_generic_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  var_12 = isDefined(var_1) && isDefined(self.owner) && self.owner == var_1;
+  var_13 = scripts\mp\utility\damage::attackerishittingteam(self.owner, var_1) || var_12;
 
-  if(!(var12 && self.agent_type == "playerProxy")) {
-    if(level.teambased && var13 && !level.friendlyfire) {
+  if(!(var_12 && self.agent_type == "playerProxy")) {
+    if(level.teambased && var_13 && !level.friendlyfire) {
       return 0;
     }
 
-    if(!level.teambased && var12) {
+    if(!level.teambased && var_12) {
       return 0;
     }
   }
 
-  if(isDefined(var4) && var4 == "MOD_CRUSH" && isDefined(var0) && isDefined(var0.classname) && var0.classname == "script_vehicle") {
+  if(isDefined(var_4) && var_4 == "MOD_CRUSH" && isDefined(var_0) && isDefined(var_0.classname) && var_0.classname == "script_vehicle") {
     return 0;
   }
 
@@ -151,73 +151,73 @@ function on_agent_generic_damaged(var0, var1, var2, var3, var4, var5, var6, var7
     return 0;
   }
 
-  if(isDefined(var1) && var1.classname == "script_origin" && isDefined(var1.type) && var1.type == "soft_landing") {
+  if(isDefined(var_1) && var_1.classname == "script_origin" && isDefined(var_1.type) && var_1.type == "soft_landing") {
     return 0;
   }
 
-  if(var5 == "killstreak_emp_mp") {
+  if(var_5 == "killstreak_emp_mp") {
     return 0;
   }
 
-  if(issubstr(var5, "throwingknife") && var4 == "MOD_IMPACT") {
-    var2 = self.health + 1;
+  if(issubstr(var_5, "throwingknife") && var_4 == "MOD_IMPACT") {
+    var_2 = self.health + 1;
   }
 
-  if(isDefined(var0) && isDefined(var0.stuckenemyentity) && var0.stuckenemyentity == self) {
-    var2 = self.health + 1;
+  if(isDefined(var_0) && isDefined(var_0.stuckenemyentity) && var_0.stuckenemyentity == self) {
+    var_2 = self.health + 1;
   }
 
-  if(var2 <= 0) {
+  if(var_2 <= 0) {
     return 0;
   }
 
-  if(isDefined(var1) && var1 != self && var2 > 0 && (!isDefined(var8) || var8 != "shield")) {
-    if(var3 &level.idflags_stun) {
-      var14 = "stun";
+  if(isDefined(var_1) && var_1 != self && var_2 > 0 && (!isDefined(var_8) || var_8 != "shield")) {
+    if(var_3 &level.idflags_stun) {
+      var_14 = "stun";
     } else {
-      var14 = "standard";
+      var_14 = "standard";
     }
 
-    var2 thread scripts\mp\damagefeedback::updatedamagefeedback(var14, var3 >= self.health);
+    var_2 thread scripts\mp\damagefeedback::updatedamagefeedback(var_14, var_3 >= self.health);
   }
 
   if(isDefined(level.modifyplayerdamage)) {
-    var3 = [[level.modifyplayerdamage]](var1, self, var2, var3, var5, var6, var7, var8, var9);
+    var_3 = [[level.modifyplayerdamage]](var_1, self, var_2, var_3, var_5, var_6, var_7, var_8, var_9);
   }
 
-  return self[[scripts\mp\agents\agent_utility::agentfunc("on_damaged_finished")]](var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12);
+  return self[[scripts\mp\agents\agent_utility::agentfunc("on_damaged_finished")]](var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
 }
 
-function on_agent_player_damaged(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12) {
-  var13 = isDefined(var1) && isDefined(self.owner) && self.owner == var1;
+function on_agent_player_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
+  var_13 = isDefined(var_1) && isDefined(self.owner) && self.owner == var_1;
 
-  if(!level.teambased && var13) {
+  if(!level.teambased && var_13) {
     return 0;
   }
 
-  if(issameweapon(var5)) {
-    var14 = createheadicon(var5);
+  if(issameweapon(var_5)) {
+    var_14 = createheadicon(var_5);
   } else {
-    var14 = var6;
+    var_14 = var_6;
   }
 
-  var13 = asmdevgetallstates(var14);
+  var_13 = asmdevgetallstates(var_14);
 
   if(isDefined(level.weaponmapfunc)) {
-    [[level.weaponmapfunc]](var13, var1);
+    [[level.weaponmapfunc]](var_13, var_1);
   }
 
-  scripts\mp\damage::callback_playerdamage(var1, var2, var3, var4, var5, var13, var7, var8, var9, var10, var11, var12);
+  scripts\mp\damage::callback_playerdamage(var_1, var_2, var_3, var_4, var_5, var_13, var_7, var_8, var_9, var_10, var_11, var_12);
 }
 
-function on_agent_player_killed(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
-  on_humanoid_agent_killed_common(var0, var1, var2, var3, var4, var5, var6, var7, var8, 1);
+function on_agent_player_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  on_humanoid_agent_killed_common(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 1);
 
-  if(isPlayer(var1) && (!isDefined(self.owner) || var1 != self.owner)) {
-    scripts\mp\damage::onkillstreakkilled("squad_mate", var1, var4, var3, var2, "destroyed_squad_mate");
+  if(isPlayer(var_1) && (!isDefined(self.owner) || var_1 != self.owner)) {
+    scripts\mp\damage::onkillstreakkilled("squad_mate", var_1, var_4, var_3, var_2, "destroyed_squad_mate");
   }
 
-  thread scripts\mp\weapons::dropscavengerfordeath(var1);
+  thread scripts\mp\weapons::dropscavengerfordeath(var_1);
 
   if(self.isactive) {
     self.hasdied = 1;
@@ -232,24 +232,24 @@ function on_agent_player_killed(var0, var1, var2, var3, var4, var5, var6, var7, 
   }
 }
 
-function on_humanoid_agent_killed_common(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
+function on_humanoid_agent_killed_common(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(isDefined(self.hasriotshieldequipped) && self.hasriotshieldequipped) {
-    scripts\mp\damage::launchshield(var2, var3);
+    scripts\mp\damage::launchshield(var_2, var_3);
 
-    if(!var9) {
-      var10 = self dropitem(self getcurrentweapon());
+    if(!var_9) {
+      var_10 = self dropitem(self getcurrentweapon());
 
-      if(isDefined(var10)) {
-        var10 thread scripts\mp\weapons::deletepickupafterawhile();
-        var10.owner = self;
-        var10.ownersattacker = var1;
-        var10 makeunusable();
+      if(isDefined(var_10)) {
+        var_10 thread scripts\mp\weapons::deletepickupafterawhile();
+        var_10.owner = self;
+        var_10.ownersattacker = var_1;
+        var_10 makeunusable();
       }
     }
   }
 
-  if(var9) {
-    self[[level.weapondropfunction]](var1, var3, undefined, var2);
+  if(var_9) {
+    self[[level.weapondropfunction]](var_1, var_3, undefined, var_2);
   }
 
   scripts\mp\riotshield::riotshield_clear();
@@ -258,8 +258,8 @@ function on_humanoid_agent_killed_common(var0, var1, var2, var3, var4, var5, var
     return;
   }
 
-  self.body = self cloneagent(var8);
-  thread scripts\mp\damage::_startragdoll(self.body, var3, var0);
+  self.body = self cloneagent(var_8);
+  thread scripts\mp\damage::_startragdoll(self.body, var_3, var_0);
 }
 
 function initplayerclass() {

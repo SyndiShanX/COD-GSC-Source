@@ -145,8 +145,8 @@ function vo_is_playing() {
   } else if(istrue(level.player_vo_playing)) {
     return true;
   } else {
-    foreach(var1 in level.players) {
-      if(istrue(var1.vo_system_playing_vo)) {
+    foreach(var_1 in level.players) {
+      if(istrue(var_1.vo_system_playing_vo)) {
         return true;
       }
     }
@@ -155,37 +155,37 @@ function vo_is_playing() {
   return false;
 }
 
-function getlengthofconversation(var0) {
-  var1 = 0;
+function getlengthofconversation(var_0) {
+  var_1 = 0;
 
-  for(var2 = 0; var2 < var0.size; var2++) {
-    var3 = level.vo_dialogue_prefix[var0[var2]];
-    var1 += scripts\cp\cp_vo::get_sound_length(var3 + var0[var2]);
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    var_3 = level.vo_dialogue_prefix[var_0[var_2]];
+    var_1 += scripts\cp\cp_vo::get_sound_length(var_3 + var_0[var_2]);
   }
 
-  return var1;
+  return var_1;
 }
 
-function getarrayofdialoguealiases(var0, var1) {
-  var2 = [var0];
-  var3 = var0;
+function getarrayofdialoguealiases(var_0, var_1) {
+  var_2 = [var_0];
+  var_3 = var_0;
 
   for(;;) {
-    if(var1 && isDefined(level.vo_alias_data[var3].nextdialogue)) {
-      var2 = level.vo_alias_data[var3].nextdialogue;
-      var3 = level.vo_alias_data[var3].nextdialogue;
+    if(var_1 && isDefined(level.vo_alias_data[var_3].nextdialogue)) {
+      var_2 = level.vo_alias_data[var_3].nextdialogue;
+      var_3 = level.vo_alias_data[var_3].nextdialogue;
       continue;
     }
 
     break;
   }
 
-  return var2;
+  return var_2;
 }
 
 function onplayerconnect() {
   for(;;) {
-    level waittill("connected", var0);
+    level waittill("connected", var_0);
     thread onplayerspawned();
   }
 }
@@ -199,9 +199,9 @@ function onplayerspawned() {
       level.playedstartingmusic = 1;
     }
 
-    var0 = game["music"]["spawn_player"].size;
-    var1 = randomint(var0);
-    self setplayermusicstate(game["music"]["spawn_player"][var1]);
+    var_0 = game["music"]["spawn_player"].size;
+    var_1 = randomint(var_0);
+    self setplayermusicstate(game["music"]["spawn_player"][var_1]);
   }
 
   if(!scripts\engine\utility::flag("vo_system_setup_done")) {
@@ -210,44 +210,44 @@ function onplayerspawned() {
   }
 }
 
-function playvofordowned(var0, var1) {
+function playvofordowned(var_0, var_1) {
   if(scripts\cp\utility::isplayingsolo() || level.only_one_player) {
     return;
   }
 
-  var2 = var0.vo_prefix + "laststand";
-  var0 thread scripts\cp\cp_vo::play_vo_on_player(var2);
+  var_2 = var_0.vo_prefix + "laststand";
+  var_0 thread scripts\cp\cp_vo::play_vo_on_player(var_2);
 }
 
-function playvoforrevived(var0, var1) {
-  var2 = var0.vo_prefix + "reviving";
-  var0 thread scripts\cp\cp_vo::play_vo_on_player(var2);
+function playvoforrevived(var_0, var_1) {
+  var_2 = var_0.vo_prefix + "reviving";
+  var_0 thread scripts\cp\cp_vo::play_vo_on_player(var_2);
 }
 
-function playvoforscriptable(var0) {
-  var1 = 45000;
-  var2 = gettime();
+function playvoforscriptable(var_0) {
+  var_1 = 45000;
+  var_2 = gettime();
 
-  if(!isDefined(level.next_scriptable_vo_time) || level.next_scriptable_vo_time < var2) {
+  if(!isDefined(level.next_scriptable_vo_time) || level.next_scriptable_vo_time < var_2) {
     if(isDefined(level.next_scriptable_vo_time)) {
       if(randomint(100) < 60) {
         return;
       }
     }
 
-    level.next_scriptable_vo_time = var2 + randomintrange(var1, var1 + 5000);
-    var3 = scripts\cp\utility::get_array_of_valid_players();
-    var4 = scripts\engine\utility::random(var3);
+    level.next_scriptable_vo_time = var_2 + randomintrange(var_1, var_1 + 5000);
+    var_3 = scripts\cp\utility::get_array_of_valid_players();
+    var_4 = scripts\engine\utility::random(var_3);
 
-    if(!isDefined(var4)) {
+    if(!isDefined(var_4)) {
       return;
     }
 
-    switch (var0) {
+    switch (var_0) {
       case "scriptable_alien_lynx_jump":
       case "scriptable_alien_tatra_t815_jump":
-        var5 = var4.vo_prefix + "alien_approach_truck";
-        var4 scripts\cp\cp_vo::play_vo_on_player(var5);
+        var_5 = var_4.vo_prefix + "alien_approach_truck";
+        var_4 scripts\cp\cp_vo::play_vo_on_player(var_5);
         break;
     }
 
@@ -260,88 +260,88 @@ function scriptable_vo_handler() {
   level.scriptable_vo_played = [];
 
   for(;;) {
-    level waittill("scriptable", var0);
+    level waittill("scriptable", var_0);
     thread playvoforscriptable(level);
   }
 }
 
-function play_solo_vo(var0, var1, var2, var3, var4, var5) {
-  var6 = var0 + "_solo";
+function play_solo_vo(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = var_0 + "_solo";
 
-  if(soundexists(var6)) {
-    scripts\cp\cp_vo::play_vo_on_player(var6);
+  if(soundexists(var_6)) {
+    scripts\cp\cp_vo::play_vo_on_player(var_6);
     return;
   }
 }
 
-function playsoundonplayers(var0, var1, var2) {
+function playsoundonplayers(var_0, var_1, var_2) {
   if(level.splitscreen) {
     if(isDefined(level.players[0])) {
-      level.players[0] playlocalsound(var0);
+      level.players[0] playlocalsound(var_0);
       return;
     }
 
     return;
   }
 
-  if(isDefined(var1)) {
-    if(isDefined(var2)) {
-      for(var3 = 0; var3 < level.players.size; var3++) {
-        var4 = level.players[var3];
+  if(isDefined(var_1)) {
+    if(isDefined(var_2)) {
+      for(var_3 = 0; var_3 < level.players.size; var_3++) {
+        var_4 = level.players[var_3];
 
-        if(var4 issplitscreenplayer() && !var4 issplitscreenplayerprimary()) {
+        if(var_4 issplitscreenplayer() && !var_4 issplitscreenplayerprimary()) {
           continue;
         }
 
-        if(isDefined(var4.pers["team"]) && var4.pers["team"] == var1 && !isexcluded(var4, var2)) {
-          var4 playlocalsound(var0);
+        if(isDefined(var_4.pers["team"]) && var_4.pers["team"] == var_1 && !isexcluded(var_4, var_2)) {
+          var_4 playlocalsound(var_0);
         }
       }
 
       return;
     }
 
-    for(var3 = 0; var3 < level.players.size; var3++) {
-      var4 = level.players[var3];
+    for(var_3 = 0; var_3 < level.players.size; var_3++) {
+      var_4 = level.players[var_3];
 
-      if(var4 issplitscreenplayer() && !var4 issplitscreenplayerprimary()) {
+      if(var_4 issplitscreenplayer() && !var_4 issplitscreenplayerprimary()) {
         continue;
       }
 
-      if(isDefined(var4.pers["team"]) && var4.pers["team"] == var3) {
-        var4 playlocalsound(var2);
+      if(isDefined(var_4.pers["team"]) && var_4.pers["team"] == var_3) {
+        var_4 playlocalsound(var_2);
       }
     }
 
     return;
   }
 
-  if(isDefined(var3)) {
-    for(var3 = 0; var3 < level.players.size; var3++) {
-      if(level.players[var3] issplitscreenplayer() && !level.players[var3] issplitscreenplayerprimary()) {
+  if(isDefined(var_3)) {
+    for(var_3 = 0; var_3 < level.players.size; var_3++) {
+      if(level.players[var_3] issplitscreenplayer() && !level.players[var_3] issplitscreenplayerprimary()) {
         continue;
       }
 
-      if(!isexcluded(level.players[var3], var3)) {
-        level.players[var3] playlocalsound(var3);
+      if(!isexcluded(level.players[var_3], var_3)) {
+        level.players[var_3] playlocalsound(var_3);
       }
     }
 
     return;
   }
 
-  for(var3 = 0; var3 < level.players.size; var3++) {
-    if(level.players[var3] issplitscreenplayer() && !level.players[var3] issplitscreenplayerprimary()) {
+  for(var_3 = 0; var_3 < level.players.size; var_3++) {
+    if(level.players[var_3] issplitscreenplayer() && !level.players[var_3] issplitscreenplayerprimary()) {
       continue;
     }
 
-    level.players[var3] playlocalsound(var4);
+    level.players[var_3] playlocalsound(var_4);
   }
 }
 
-function isexcluded(var0, var1) {
-  for(var2 = 0; var2 < var1.size; var2++) {
-    if(var0 == var1[var2]) {
+function isexcluded(var_0, var_1) {
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    if(var_0 == var_1[var_2]) {
       return true;
     }
   }
@@ -349,52 +349,52 @@ function isexcluded(var0, var1) {
   return false;
 }
 
-function playeventvo(var0, var1, var2, var3, var4, var5, var6) {
-  var7 = scripts\cp\utility::get_array_of_valid_players();
+function playeventvo(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_7 = scripts\cp\utility::get_array_of_valid_players();
 
-  if(var7.size < 1) {
+  if(var_7.size < 1) {
     return;
   }
 
-  var8 = scripts\engine\utility::random(var7);
-  var9 = var8.vo_prefix + var0;
-  var8 scripts\cp\cp_vo::play_vo_on_player(var9);
+  var_8 = scripts\engine\utility::random(var_7);
+  var_9 = var_8.vo_prefix + var_0;
+  var_8 scripts\cp\cp_vo::play_vo_on_player(var_9);
 }
 
-function play_vo_for_trap_kills(var0, var1) {
-  var2 = var0.vo_prefix + var1;
-  var0 thread scripts\cp\cp_vo::play_vo_on_player(var2, undefined, 2);
+function play_vo_for_trap_kills(var_0, var_1) {
+  var_2 = var_0.vo_prefix + var_1;
+  var_0 thread scripts\cp\cp_vo::play_vo_on_player(var_2, undefined, 2);
 }
 
-function playvoforlaststand(var0, var1) {
+function playvoforlaststand(var_0, var_1) {
   if(scripts\cp\utility::isplayingsolo() || level.only_one_player) {
     return;
   }
 
-  var2 = var0.vo_prefix + "last_stand";
-  var0 thread scripts\cp\cp_vo::play_vo_on_player(var2, undefined, 1);
+  var_2 = var_0.vo_prefix + "last_stand";
+  var_0 thread scripts\cp\cp_vo::play_vo_on_player(var_2, undefined, 1);
 }
 
-function player_casualty_vo(var0, var1, var2, var3, var4, var5, var6) {
+function player_casualty_vo(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isPlayer(self)) {
     return;
   }
 
-  var7 = scripts\cp\utility::get_array_of_valid_players();
-  var7 = scripts\engine\utility::array_remove(var7, self);
+  var_7 = scripts\cp\utility::get_array_of_valid_players();
+  var_7 = scripts\engine\utility::array_remove(var_7, self);
 
-  if(var7.size < 1) {
+  if(var_7.size < 1) {
     return;
   }
 
-  var8 = var7[0];
-  var9 = var8.vo_prefix + "reaction_casualty_generic";
-  var8 scripts\cp\cp_vo::play_vo_on_player(var9, undefined, 1);
+  var_8 = var_7[0];
+  var_9 = var_8.vo_prefix + "reaction_casualty_generic";
+  var_8 scripts\cp\cp_vo::play_vo_on_player(var_9, undefined, 1);
 }
 
-function is_in_array(var0, var1) {
-  for(var2 = 0; var2 < var0.size; var2++) {
-    if(var0[var2] == var1) {
+function is_in_array(var_0, var_1) {
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    if(var_0[var_2] == var_1) {
       return true;
     }
   }
@@ -407,10 +407,10 @@ function debug_change_vo_prefix_watcher() {
   level endon("game_ended");
 
   for(;;) {
-    var0 = getdvarint("scr_player_vo_prefix", 0);
+    var_0 = getdvarint("scr_player_vo_prefix", 0);
 
-    if(var0 != 0) {
-      switch (var0) {
+    if(var_0 != 0) {
+      switch (var_0) {
         case 1:
           self.vo_prefix = "p1_";
           break;
@@ -434,26 +434,26 @@ function debug_change_vo_prefix_watcher() {
   }
 }
 
-function add_to_ambient_sound_queue(var0, var1, var2, var3, var4, var5, var6) {
+function add_to_ambient_sound_queue(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isDefined(level.ambient_sound_queue)) {
     level.ambient_sound_queue = [];
     thread ambient_sound_queue();
   }
 
-  var7 = spawnStruct();
-  var7.alias = var0;
-  var7.play_origin = var1;
-  var7.min_delay = var2;
-  var7.max_delay = var3;
-  var7.next_play_time = 0;
-  var7.chance_to_play = var5;
-  var7.max_player_distance = var4;
+  var_7 = spawnStruct();
+  var_7.alias = var_0;
+  var_7.play_origin = var_1;
+  var_7.min_delay = var_2;
+  var_7.max_delay = var_3;
+  var_7.next_play_time = 0;
+  var_7.chance_to_play = var_5;
+  var_7.max_player_distance = var_4;
 
-  if(isDefined(var6)) {
-    var7.next_play_time = gettime() + var6 * 1000;
+  if(isDefined(var_6)) {
+    var_7.next_play_time = gettime() + var_6 * 1000;
   }
 
-  level.ambient_sound_queue = scripts\engine\utility::array_add_safe(level.ambient_sound_queue, var7);
+  level.ambient_sound_queue = scripts\engine\utility::array_add_safe(level.ambient_sound_queue, var_7);
 }
 
 function ambient_sound_queue() {
@@ -462,39 +462,39 @@ function ambient_sound_queue() {
       wait 1;
     }
 
-    var0 = scripts\engine\utility::array_randomize(level.ambient_sound_queue);
+    var_0 = scripts\engine\utility::array_randomize(level.ambient_sound_queue);
 
-    foreach(var2 in var0) {
-      if(gettime() < var2.next_play_time) {
+    foreach(var_2 in var_0) {
+      if(gettime() < var_2.next_play_time) {
         continue;
       }
 
-      var3 = randomintrange(var2.min_delay, var2.max_delay + 1);
-      var4 = var2.chance_to_play;
+      var_3 = randomintrange(var_2.min_delay, var_2.max_delay + 1);
+      var_4 = var_2.chance_to_play;
 
-      if(scripts\cp\utility::any_player_nearby(var2.play_origin, 4096)) {
+      if(scripts\cp\utility::any_player_nearby(var_2.play_origin, 4096)) {
         wait 1;
         continue;
       }
 
-      var5 = scripts\cp\utility::any_player_nearby(var2.play_origin, var2.max_player_distance);
+      var_5 = scripts\cp\utility::any_player_nearby(var_2.play_origin, var_2.max_player_distance);
 
-      if(!var5 || randomint(100) > var4) {
+      if(!var_5 || randomint(100) > var_4) {
         wait 1;
         continue;
       }
 
-      var6 = var2.alias;
+      var_6 = var_2.alias;
 
-      if(isarray(var2.alias)) {
-        var6 = scripts\engine\utility::random(var2.alias);
+      if(isarray(var_2.alias)) {
+        var_6 = scripts\engine\utility::random(var_2.alias);
       }
 
-      if(soundexists(var6)) {
-        playsoundatpos(var2.play_origin, var6);
+      if(soundexists(var_6)) {
+        playsoundatpos(var_2.play_origin, var_6);
       }
 
-      var2.next_play_time = gettime() + var3 * 1000;
+      var_2.next_play_time = gettime() + var_3 * 1000;
       wait 1;
     }
 

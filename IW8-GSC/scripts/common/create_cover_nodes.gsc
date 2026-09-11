@@ -10,138 +10,138 @@ function create_cover_node_init() {
 }
 
 function initialize_path_node_placement() {
-  var0 = spawnStruct();
-  var0.trace_contents = scripts\engine\trace::create_solid_ai_contents(1);
-  var0.all_node_positions = [];
-  var0.map_ent_index = 1;
-  level.path_node_debug_info = var0;
+  var_0 = spawnStruct();
+  var_0.trace_contents = scripts\engine\trace::create_solid_ai_contents(1);
+  var_0.all_node_positions = [];
+  var_0.map_ent_index = 1;
+  level.path_node_debug_info = var_0;
   reset_path_node_placement();
   return level.path_node_debug_info;
 }
 
 function reset_path_node_placement_for_radius() {
-  var0 = reset_path_node_placement();
-  var0.x_magnitude = 32;
-  var0.y_magnitude = 32;
-  var0.max_x = 20;
-  var0.max_y = 20;
-  level.path_node_debug_info = var0;
+  var_0 = reset_path_node_placement();
+  var_0.x_magnitude = 32;
+  var_0.y_magnitude = 32;
+  var_0.max_x = 20;
+  var_0.max_y = 20;
+  level.path_node_debug_info = var_0;
   return level.path_node_debug_info;
 }
 
 function reset_path_node_placement_for_lookat() {
-  var0 = reset_path_node_placement();
-  var0.debug_boxes = 1;
-  var0.node_creation_traces = 32;
-  var0.delayed_creation_calls = 0;
-  var0.create_node_throttle = 500;
-  level.path_node_debug_info = var0;
+  var_0 = reset_path_node_placement();
+  var_0.debug_boxes = 1;
+  var_0.node_creation_traces = 32;
+  var_0.delayed_creation_calls = 0;
+  var_0.create_node_throttle = 500;
+  level.path_node_debug_info = var_0;
   return level.path_node_debug_info;
 }
 
 function reset_path_node_placement_for_box_creation() {
-  var0 = reset_path_node_placement();
-  var0.debug_boxes = 1;
-  var0.debug_boxes_max_count = 50;
-  var0.debug_boxes_count = 0;
-  var0.valid_forward_dist = 64;
-  var0.x_magnitude = 256;
-  var0.y_magnitude = 256;
-  var0.z_magnitude = 128;
-  var0.max_nav_offset = 4096;
-  var0.create_node_throttle = 5000;
-  var0.max_x = undefined;
-  var0.max_y = undefined;
-  var0.max_z = undefined;
-  level.path_node_debug_info = var0;
+  var_0 = reset_path_node_placement();
+  var_0.debug_boxes = 1;
+  var_0.debug_boxes_max_count = 50;
+  var_0.debug_boxes_count = 0;
+  var_0.valid_forward_dist = 64;
+  var_0.x_magnitude = 256;
+  var_0.y_magnitude = 256;
+  var_0.z_magnitude = 128;
+  var_0.max_nav_offset = 4096;
+  var_0.create_node_throttle = 5000;
+  var_0.max_x = undefined;
+  var_0.max_y = undefined;
+  var_0.max_z = undefined;
+  level.path_node_debug_info = var_0;
   return level.path_node_debug_info;
 }
 
 function reset_path_node_placement() {
-  var0 = level.path_node_debug_info;
-  var0.total_grid_points = 0;
-  var0.start_time = gettime();
-  var0.end_time = gettime();
-  var0.total_time = gettime();
-  var0.box_x = 1024;
-  var0.box_y = 1024;
-  var0.box_z = 512;
-  var0.box_x_min = 512;
-  var0.box_y_min = 512;
-  var0.box_z_min = 128;
-  var0.increase_x = 1;
-  var0.increase_y = 1;
-  var0.increase_z = 1;
-  var0.box_center = (0, 0, 0);
-  var0.box_angles = (0, 0, 0);
-  var0.freeze_location = 0;
-  var0.box_disabled = 0;
-  var0.x_done = 0;
-  var0.y_done = 0;
-  var0.z_done = 0;
-  var0.auto_write_to_map = 1;
-  var0.use_bsp_nodes = getdvarint("scr_use_bsp_nodes", 1);
-  var0.debug_boxes = getdvarint("scr_draw_nodes", 0);
-  var0.edge_placement = 1;
-  var0.file_path = level.script + "_script_paths.map";
-  var0.node_creation_traces = 16;
-  var0.node_creation_trace_index = 0;
-  var0.node_creation_trace_dist = 365;
-  var0.node_creation_angle_frac = 360 / var0.node_creation_traces;
-  var0.aa_status = "waiting";
-  var0.create_node_throttle = 5000;
-  var0.throttle_counter = 0;
-  var0.traces_count = 0;
-  var0.x_magnitude = 256;
-  var0.y_magnitude = 256;
-  var0.z_magnitude = 64;
-  var0.max_nav_offset = 16384;
-  var0.valid_forward_dist = 64;
-  var0.current_forward_dist = undefined;
-  var0.x = 1;
-  var0.y = 1;
-  var0.z = 1;
-  var0.max_x = undefined;
-  var0.max_y = undefined;
-  var0.last_x = 1;
-  var0.last_y = 1;
-  var0.x_dir_fails = 0;
-  var0.y_dir_fails = 0;
-  var0.dir_fails = 0;
-  var0.max_dir_fails = 500;
-  var0.total_z_planes = 5;
-  var0.origin_counter = 0;
-  var0.origin_max_dirs = 8;
-  var0.dir_valid[0] = 1;
-  var0.dir_valid[1] = 1;
-  var0.dir_valid[2] = 1;
-  var0.dir_valid[3] = 1;
-  var0.dir_valid[4] = 1;
-  var0.dir_valid[5] = 1;
-  var0.dir_valid[6] = 1;
-  var0.dir_valid[7] = 1;
-  var0.grid_points_found = 1;
-  var0.wall_units = 0;
-  var0.wall_units_required = 32;
-  var0.found_left_edge = 0;
-  var0.found_right_edge = 0;
-  var0.found_up_edge = 0;
-  var0.found_exposed_pos = 0;
-  var0.use_trace_data = getdvarint("scr_save_trace_data", 0);
-  var0.save_trace_data = 0;
-  var0.temp_trace_data = [];
-  var0.temp_trace_data_colors = [];
-  var0.trace_data = [];
-  var0.trace_data_colors = [];
-  var0.grid_origin = (0, 0, 0);
-  var0.density_radius = 64;
-  var0.density_cap = 4;
-  var0.density_cap_count = 0;
-  var0.found_valid_node_pos = 0;
-  var0.create_exposed_node = getdvarint("scr_create_exposed_nodes", 0);
-  var0.should_create_exposed_node = 1;
-  level.path_node_debug_info = var0;
-  level.increase_y = var0;
+  var_0 = level.path_node_debug_info;
+  var_0.total_grid_points = 0;
+  var_0.start_time = gettime();
+  var_0.end_time = gettime();
+  var_0.total_time = gettime();
+  var_0.box_x = 1024;
+  var_0.box_y = 1024;
+  var_0.box_z = 512;
+  var_0.box_x_min = 512;
+  var_0.box_y_min = 512;
+  var_0.box_z_min = 128;
+  var_0.increase_x = 1;
+  var_0.increase_y = 1;
+  var_0.increase_z = 1;
+  var_0.box_center = (0, 0, 0);
+  var_0.box_angles = (0, 0, 0);
+  var_0.freeze_location = 0;
+  var_0.box_disabled = 0;
+  var_0.x_done = 0;
+  var_0.y_done = 0;
+  var_0.z_done = 0;
+  var_0.auto_write_to_map = 1;
+  var_0.use_bsp_nodes = getdvarint("scr_use_bsp_nodes", 1);
+  var_0.debug_boxes = getdvarint("scr_draw_nodes", 0);
+  var_0.edge_placement = 1;
+  var_0.file_path = level.script + "_script_paths.map";
+  var_0.node_creation_traces = 16;
+  var_0.node_creation_trace_index = 0;
+  var_0.node_creation_trace_dist = 365;
+  var_0.node_creation_angle_frac = 360 / var_0.node_creation_traces;
+  var_0.aa_status = "waiting";
+  var_0.create_node_throttle = 5000;
+  var_0.throttle_counter = 0;
+  var_0.traces_count = 0;
+  var_0.x_magnitude = 256;
+  var_0.y_magnitude = 256;
+  var_0.z_magnitude = 64;
+  var_0.max_nav_offset = 16384;
+  var_0.valid_forward_dist = 64;
+  var_0.current_forward_dist = undefined;
+  var_0.x = 1;
+  var_0.y = 1;
+  var_0.z = 1;
+  var_0.max_x = undefined;
+  var_0.max_y = undefined;
+  var_0.last_x = 1;
+  var_0.last_y = 1;
+  var_0.x_dir_fails = 0;
+  var_0.y_dir_fails = 0;
+  var_0.dir_fails = 0;
+  var_0.max_dir_fails = 500;
+  var_0.total_z_planes = 5;
+  var_0.origin_counter = 0;
+  var_0.origin_max_dirs = 8;
+  var_0.dir_valid[0] = 1;
+  var_0.dir_valid[1] = 1;
+  var_0.dir_valid[2] = 1;
+  var_0.dir_valid[3] = 1;
+  var_0.dir_valid[4] = 1;
+  var_0.dir_valid[5] = 1;
+  var_0.dir_valid[6] = 1;
+  var_0.dir_valid[7] = 1;
+  var_0.grid_points_found = 1;
+  var_0.wall_units = 0;
+  var_0.wall_units_required = 32;
+  var_0.found_left_edge = 0;
+  var_0.found_right_edge = 0;
+  var_0.found_up_edge = 0;
+  var_0.found_exposed_pos = 0;
+  var_0.use_trace_data = getdvarint("scr_save_trace_data", 0);
+  var_0.save_trace_data = 0;
+  var_0.temp_trace_data = [];
+  var_0.temp_trace_data_colors = [];
+  var_0.trace_data = [];
+  var_0.trace_data_colors = [];
+  var_0.grid_origin = (0, 0, 0);
+  var_0.density_radius = 64;
+  var_0.density_cap = 4;
+  var_0.density_cap_count = 0;
+  var_0.found_valid_node_pos = 0;
+  var_0.create_exposed_node = getdvarint("scr_create_exposed_nodes", 0);
+  var_0.should_create_exposed_node = 1;
+  level.path_node_debug_info = var_0;
+  level.increase_y = var_0;
   level.num_fails = 0;
   return level.path_node_debug_info;
 }
@@ -150,63 +150,63 @@ function debugdata() {
   return level.path_node_debug_info;
 }
 
-function run_single_grid_point_test(var0) {
+function run_single_grid_point_test(var_0) {
   level notify("place_path_nodes");
   level endon("place_path_nodes");
   level endon("game_ended");
-  var0 endon("disconnect");
+  var_0 endon("disconnect");
   level endon("stop_creating_nodes");
   reset_path_node_placement_for_box_creation();
-  var1 = debugdata();
-  var1.player = var0;
+  var_1 = debugdata();
+  var_1.player = var_0;
   open_and_write_to_paths_map();
-  var0 notifyonplayercommand("use", "+usereload");
-  var0 notifyonplayercommand("use", "+activate");
+  var_0 notifyonplayercommand("use", "+usereload");
+  var_0 notifyonplayercommand("use", "+activate");
 
   for(;;) {
-    var0 waittill("use");
+    var_0 waittill("use");
     thread delay_node_creation_from_single_point();
   }
 }
 
-function place_path_node_from_lookat(var0) {
+function place_path_node_from_lookat(var_0) {
   level notify("place_path_nodes");
   level endon("place_path_nodes");
   level endon("game_ended");
-  var0 endon("disconnect");
+  var_0 endon("disconnect");
   level endon("stop_creating_nodes");
   reset_path_node_placement_for_lookat();
-  var1 = debugdata();
-  var1.player = var0;
+  var_1 = debugdata();
+  var_1.player = var_0;
   open_and_write_to_paths_map();
-  var0 notifyonplayercommand("use", "+usereload");
-  var0 notifyonplayercommand("use", "+activate");
-  var0 waittill("use");
-  GscBinSkip4(0x6e, var1);
+  var_0 notifyonplayercommand("use", "+usereload");
+  var_0 notifyonplayercommand("use", "+activate");
+  var_0 waittill("use");
+  GscBinSkip4(0x6e, var_1);
 }
 
 function delay_node_creation_from_single_point() {
-  var0 = debugdata();
-  var1 = var0.player;
+  var_0 = debugdata();
+  var_1 = var_0.player;
   open_and_write_to_paths_map();
-  var0.starting_pos = var1.origin;
-  var2 = anglesToForward(var1 getplayerangles());
-  var3 = create_node_trace(var0.player getEye(), var0.player getEye() + var2 * 10000);
+  var_0.starting_pos = var_1.origin;
+  var_2 = anglesToForward(var_1 getplayerangles());
+  var_3 = create_node_trace(var_0.player getEye(), var_0.player getEye() + var_2 * 10000);
 
-  if(isDefined(var3["position"]) && isDefined(var3["fraction"]) && var3["fraction"] < 1) {
-    var4 = scripts\engine\utility::drop_to_ground(var3["position"] + -1 * var2 * 32, 96, -300) + (0, 0, 16);
-    var0.x = var4[0];
-    var0.y = var4[1];
-    var0.z = var4[2];
-    var0.origin = var4;
-    var0.grid_origin = var4;
+  if(isDefined(var_3["position"]) && isDefined(var_3["fraction"]) && var_3["fraction"] < 1) {
+    var_4 = scripts\engine\utility::drop_to_ground(var_3["position"] + -1 * var_2 * 32, 96, -300) + (0, 0, 16);
+    var_0.x = var_4[0];
+    var_0.y = var_4[1];
+    var_0.z = var_4[2];
+    var_0.origin = var_4;
+    var_0.grid_origin = var_4;
 
     if(validate_grid_pos()) {
-      var0.node_type = "script_struct";
-      var0.total_grid_points++;
-      var0.angles = (0, 0, 0);
+      var_0.node_type = "script_struct";
+      var_0.total_grid_points++;
+      var_0.angles = (0, 0, 0);
       write_struct_to_map();
-      var0.classname = "node_exposed";
+      var_0.classname = "node_exposed";
       create_and_validate_node_from_single_grid_point();
       return;
     }
@@ -216,24 +216,24 @@ function delay_node_creation_from_single_point() {
 }
 
 function delay_node_creation_from_look_at() {
-  var0 = debugdata();
-  var1 = var0.player;
+  var_0 = debugdata();
+  var_1 = var_0.player;
   open_and_write_to_paths_map();
-  var0.starting_pos = var1.origin;
-  var2 = anglesToForward(var1 getplayerangles());
-  var3 = create_node_trace(var0.player getEye(), var0.player getEye() + var2 * 10000);
+  var_0.starting_pos = var_1.origin;
+  var_2 = anglesToForward(var_1 getplayerangles());
+  var_3 = create_node_trace(var_0.player getEye(), var_0.player getEye() + var_2 * 10000);
 
-  if(isDefined(var3["position"]) && isDefined(var3["fraction"]) && var3["fraction"] < 1) {
-    var4 = scripts\engine\utility::drop_to_ground(var3["position"] + -1 * var2 * 32, 24, -300) + (0, 0, 16);
-    var0.x = var4[0];
-    var0.y = var4[1];
-    var0.z = var4[2];
-    var0.origin = var4;
-    var0.grid_origin = var4;
+  if(isDefined(var_3["position"]) && isDefined(var_3["fraction"]) && var_3["fraction"] < 1) {
+    var_4 = scripts\engine\utility::drop_to_ground(var_3["position"] + -1 * var_2 * 32, 24, -300) + (0, 0, 16);
+    var_0.x = var_4[0];
+    var_0.y = var_4[1];
+    var_0.z = var_4[2];
+    var_0.origin = var_4;
+    var_0.grid_origin = var_4;
 
     if(validate_grid_pos()) {
-      var0.angles = (0, 0, 0);
-      var0.classname = "node_exposed";
+      var_0.angles = (0, 0, 0);
+      var_0.classname = "node_exposed";
       create_cover_nodes_from_grid_point();
       return;
     }
@@ -242,188 +242,188 @@ function delay_node_creation_from_look_at() {
   }
 }
 
-function place_path_nodes_within_box(var0) {
+function place_path_nodes_within_box(var_0) {
   level notify("place_path_nodes");
   level endon("place_path_nodes");
   level endon("game_ended");
-  var0 endon("disconnect");
+  var_0 endon("disconnect");
   level endon("stop_creating_nodes");
-  var1 = debugdata();
-  var1.player = var0;
-  var0 notifyonplayercommand("use", "+usereload");
-  var0 notifyonplayercommand("use", "+activate");
+  var_1 = debugdata();
+  var_1.player = var_0;
+  var_0 notifyonplayercommand("use", "+usereload");
+  var_0 notifyonplayercommand("use", "+activate");
   reset_path_node_placement_for_box_creation();
-  GscBinSkip4(0x6e, var1);
+  GscBinSkip4(0x6e, var_1);
 }
 
 function create_and_update_box() {
-  var0 = debugdata();
-  var0.player notifyonplayercommand("up", "+actionslot 1");
-  var0.player notifyonplayercommand("down", "+actionslot 2");
-  var0.player notifyonplayercommand("right", "+actionslot 4");
-  var0.player notifyonplayercommand("rb", "+frag");
-  var0.player notifyonplayercommand("lb", "+smoke");
-  var0.player notifyonplayercommand("a", "+gostand");
-  var0.player notifyonplayercommand("left", "+actionslot 3");
-  var0.player notifyonplayercommand("dpad_left_release", "-actionslot 3");
-  var0.player notifyonplayercommand("dpad_left_press", "+actionslot 3");
-  GscBinSkip4(0x6e, var0);
+  var_0 = debugdata();
+  var_0.player notifyonplayercommand("up", "+actionslot 1");
+  var_0.player notifyonplayercommand("down", "+actionslot 2");
+  var_0.player notifyonplayercommand("right", "+actionslot 4");
+  var_0.player notifyonplayercommand("rb", "+frag");
+  var_0.player notifyonplayercommand("lb", "+smoke");
+  var_0.player notifyonplayercommand("a", "+gostand");
+  var_0.player notifyonplayercommand("left", "+actionslot 3");
+  var_0.player notifyonplayercommand("dpad_left_release", "-actionslot 3");
+  var_0.player notifyonplayercommand("dpad_left_press", "+actionslot 3");
+  GscBinSkip4(0x6e, var_0);
 }
 
 function show_running_tool_message() {
   self endon("stop_showing_message");
-  var0 = 0;
+  var_0 = 0;
 
   for(;;) {
-    var1 = 500;
-    var2 = "Creating Nodes | Time Elapsed: " + var0;
+    var_1 = 500;
+    var_2 = "Creating Nodes | Time Elapsed: " + var_0;
     waitframe();
-    var0 += 0.05;
+    var_0 += 0.05;
   }
 }
 
 function create_box() {
-  var0 = debugdata();
-  var1 = var0.player;
-  var2 = var1.origin + anglesToForward(var1.angles) * 500;
-  var3 = var1.angles;
-  var4 = var2;
-  var5 = var3;
+  var_0 = debugdata();
+  var_1 = var_0.player;
+  var_2 = var_1.origin + anglesToForward(var_1.angles) * 500;
+  var_3 = var_1.angles;
+  var_4 = var_2;
+  var_5 = var_3;
 
   for(;;) {
-    if(var0.box_disabled) {
+    if(var_0.box_disabled) {
       wait 1;
       continue;
     }
 
-    var6 = 150;
+    var_6 = 150;
 
     if(getdvarint("scr_cs_box_x", 0) != 0) {
-      var0.box_x = getdvarint("scr_cs_box_x", 0);
-      var7 = "X: " + var0.box_x;
+      var_0.box_x = getdvarint("scr_cs_box_x", 0);
+      var_7 = "X: " + var_0.box_x;
     } else {
-      var7 = "X: " + var0.box_x;
+      var_7 = "X: " + var_0.box_x;
     }
 
-    var6 += 25;
+    var_6 += 25;
 
     if(getdvarint("scr_cs_box_y", 0) != 0) {
-      var0.box_x = getdvarint("scr_cs_box_y", 0);
-      var7 = "Y: " + var0.box_y;
+      var_0.box_x = getdvarint("scr_cs_box_y", 0);
+      var_7 = "Y: " + var_0.box_y;
     } else {
-      var7 = "Y: " + var0.box_y;
+      var_7 = "Y: " + var_0.box_y;
     }
 
-    var6 += 25;
+    var_6 += 25;
 
     if(getdvarint("scr_cs_box_z", 0) != 0) {
-      var0.box_x = getdvarint("scr_cs_box_z", 0);
-      var7 = "Z: " + var0.box_z;
+      var_0.box_x = getdvarint("scr_cs_box_z", 0);
+      var_7 = "Z: " + var_0.box_z;
     } else {
-      var7 = "Z: " + var0.box_z;
+      var_7 = "Z: " + var_0.box_z;
     }
 
-    var6 += 25;
-    var7 = "Location Locked: " + var0.freeze_location;
-    var6 += 25;
+    var_6 += 25;
+    var_7 = "Location Locked: " + var_0.freeze_location;
+    var_6 += 25;
 
-    if(var0.freeze_location) {
-      var2 = var4;
-      var3 = var5;
+    if(var_0.freeze_location) {
+      var_2 = var_4;
+      var_3 = var_5;
     } else {
-      var2 = var1.origin + anglesToForward(var1.angles) * 500;
-      var3 = var1.angles;
+      var_2 = var_1.origin + anglesToForward(var_1.angles) * 500;
+      var_3 = var_1.angles;
     }
 
-    var4 = var2;
-    var5 = var3;
-    var0.box_center = var2;
-    var0.box_angles = var3;
+    var_4 = var_2;
+    var_5 = var_3;
+    var_0.box_center = var_2;
+    var_0.box_angles = var_3;
     waitframe();
   }
 }
 
-function place_path_nodes_within_radius(var0) {
+function place_path_nodes_within_radius(var_0) {
   level notify("place_path_nodes");
   level endon("place_path_nodes");
   level endon("game_ended");
-  var0 endon("disconnect");
+  var_0 endon("disconnect");
   level endon("stop_creating_nodes");
-  var1 = debugdata();
-  var1.player = var0;
-  var0 notifyonplayercommand("use", "+usereload");
-  var0 notifyonplayercommand("use", "+activate");
+  var_1 = debugdata();
+  var_1.player = var_0;
+  var_0 notifyonplayercommand("use", "+usereload");
+  var_0 notifyonplayercommand("use", "+activate");
 
   for(;;) {
     reset_path_node_placement_for_radius();
-    var0 waittill("use");
+    var_0 waittill("use");
     open_and_write_to_paths_map();
-    var1.starting_pos = var0.origin;
+    var_1.starting_pos = var_0.origin;
     create_cover_nodes_from_grid_points();
   }
 }
 
-function place_path_nodes(var0) {
+function place_path_nodes(var_0) {
   level notify("place_path_nodes");
   level endon("place_path_nodes");
   level endon("game_ended");
-  var0 endon("disconnect");
-  var1 = debugdata();
-  var1.player = var0;
-  var1.starting_pos = var0.origin;
+  var_0 endon("disconnect");
+  var_1 = debugdata();
+  var_1.player = var_0;
+  var_1.starting_pos = var_0.origin;
   reset_path_node_placement();
   open_and_write_to_paths_map();
-  var1.aa_status = "starting";
-  GscBinSkip4(0x6e, var1);
+  var_1.aa_status = "starting";
+  GscBinSkip4(0x6e, var_1);
 }
 
 function clean_up_nodes() {
   level endon("game_ended");
   level endon("stop_creating_nodes");
-  var0 = debugdata();
+  var_0 = debugdata();
   reset_path_node_placement();
   open_and_write_to_paths_map();
-  var0.aa_status = "starting";
-  var0.use_bsp_nodes = 0;
-  var0.file_path = level.script + "_script_paths_clean.map";
-  GscBinSkip4(0x6e, var0);
+  var_0.aa_status = "starting";
+  var_0.use_bsp_nodes = 0;
+  var_0.file_path = level.script + "_script_paths_clean.map";
+  GscBinSkip4(0x6e, var_0);
 }
 
-function translate_position_with_offset_data(var0, var1) {
-  if(isDefined(var1)) {
-    var2 = var1;
+function translate_position_with_offset_data(var_0, var_1) {
+  if(isDefined(var_1)) {
+    var_2 = var_1;
   } else {
-    var2 = (0, 0, 0);
+    var_2 = (0, 0, 0);
   }
 
   if(isDefined(self.angles)) {
-    var3 = self.angles;
+    var_3 = self.angles;
   } else {
-    var3 = (0, 0, 0);
+    var_3 = (0, 0, 0);
   }
 
-  var4 = self.origin;
-  var5 = anglesToForward(var3);
-  self.origin = var2 + rotatevector(var4, var3);
-  var6 = vectortoangles(rotatevector(var5, var3));
-  self.angles = var6;
+  var_4 = self.origin;
+  var_5 = anglesToForward(var_3);
+  self.origin = var_2 + rotatevector(var_4, var_3);
+  var_6 = vectortoangles(rotatevector(var_5, var_3));
+  self.angles = var_6;
 }
 
-function node_passes_nav_and_geo_validation(var0) {
-  var1 = debugdata();
+function node_passes_nav_and_geo_validation(var_0) {
+  var_1 = debugdata();
 
-  if(distancesquared(getclosestpointonnavmesh(var1.origin), var1.origin) >= 1024) {
+  if(distancesquared(getclosestpointonnavmesh(var_1.origin), var_1.origin) >= 1024) {
     return 0;
   }
 
-  if(!can_spawn_capsule_trace(var1.origin)) {
+  if(!can_spawn_capsule_trace(var_1.origin)) {
     return 0;
   }
 
-  if(!istrue(var0)) {
-    var2 = getnodesinradius(var1.origin, 16, 0, 64);
+  if(!istrue(var_0)) {
+    var_2 = getnodesinradius(var_1.origin, 16, 0, 64);
 
-    if(var2.size < 1) {
+    if(var_2.size < 1) {
       return 1;
     }
 
@@ -433,69 +433,69 @@ function node_passes_nav_and_geo_validation(var0) {
   return 1;
 }
 
-function remove_similar_nodes(var0) {
+function remove_similar_nodes(var_0) {
   level notify("place_path_nodes");
   level endon("place_path_nodes");
   level endon("game_ended");
-  var0 endon("disconnect");
+  var_0 endon("disconnect");
   level endon("stop_creating_nodes");
-  var1 = 100;
-  var2 = getdvarint("scr_cover_node_clean_radius");
+  var_1 = 100;
+  var_2 = getdvarint("scr_cover_node_clean_radius");
 
-  if(var2 != 0) {
-    var1 = var2;
+  if(var_2 != 0) {
+    var_1 = var_2;
   }
 
-  var3 = var1 * var1;
-  var4 = debugdata();
-  var4.player = var0;
+  var_3 = var_1 * var_1;
+  var_4 = debugdata();
+  var_4.player = var_0;
   reset_path_node_placement();
   open_and_write_to_paths_map();
-  var4.aa_status = "starting";
-  var5 = getallnodes();
+  var_4.aa_status = "starting";
+  var_5 = getallnodes();
 
-  for(var6 = 0; var6 < var5.size; var6++) {
-    var7 = var5[var6];
+  for(var_6 = 0; var_6 < var_5.size; var_6++) {
+    var_7 = var_5[var_6];
 
-    if(isDefined(var7)) {
-      var8 = 0;
+    if(isDefined(var_7)) {
+      var_8 = 0;
 
-      for(var9 = 0; var9 < var5.size; var9++) {
-        var10 = var5[var9];
+      for(var_9 = 0; var_9 < var_5.size; var_9++) {
+        var_10 = var_5[var_9];
 
-        if(!isDefined(var10)) {
+        if(!isDefined(var_10)) {
           continue;
         }
 
-        if(var10.origin == var7.origin) {
+        if(var_10.origin == var_7.origin) {
           continue;
         }
 
-        var11 = var7.origin;
-        var12 = distancesquared(var11, var10.origin);
+        var_11 = var_7.origin;
+        var_12 = distancesquared(var_11, var_10.origin);
 
-        if(var12 <= var3) {
-          if(var7.type == var10.type) {
-            if(var7.angles == var10.angles) {
-              var8 = 1;
+        if(var_12 <= var_3) {
+          if(var_7.type == var_10.type) {
+            if(var_7.angles == var_10.angles) {
+              var_8 = 1;
               break;
             }
           }
         }
       }
 
-      if(!var8) {
-        var4.node_type = get_node_type_from_type(var7);
+      if(!var_8) {
+        var_4.node_type = get_node_type_from_type(var_7);
 
-        if(isDefined(var4.node_type)) {
-          var4.origin = var7.origin;
-          var4.angles = var7.angles;
+        if(isDefined(var_4.node_type)) {
+          var_4.origin = var_7.origin;
+          var_4.angles = var_7.angles;
           write_struct_to_map();
         } else {
-          var5[var6] = undefined;
+          var_5[var_6] = undefined;
         }
       } else {
-        var5[var6] = undefined;
+        var_5[var_6] = undefined;
       }
     }
   }
@@ -504,25 +504,25 @@ function remove_similar_nodes(var0) {
 }
 
 function similar_nodes_nearby() {
-  var0 = debugdata();
-  var1 = 100;
-  var2 = var1 * var1;
+  var_0 = debugdata();
+  var_1 = 100;
+  var_2 = var_1 * var_1;
 
-  if(var0.use_bsp_nodes) {
-    var3 = getallnodes();
+  if(var_0.use_bsp_nodes) {
+    var_3 = getallnodes();
 
-    for(var4 = 0; var4 < var3.size; var4++) {
-      var5 = var3[var4];
+    for(var_4 = 0; var_4 < var_3.size; var_4++) {
+      var_5 = var_3[var_4];
 
-      if(isDefined(var5)) {
-        if(var0.origin == var5.origin) {
+      if(isDefined(var_5)) {
+        if(var_0.origin == var_5.origin) {
           return false;
         }
 
-        var6 = distancesquared(var5.origin, var0.origin);
+        var_6 = distancesquared(var_5.origin, var_0.origin);
 
-        if(var6 <= var2) {
-          if(var5.angles == var0.angles) {
+        if(var_6 <= var_2) {
+          if(var_5.angles == var_0.angles) {
             return false;
           }
         }
@@ -530,20 +530,20 @@ function similar_nodes_nearby() {
     }
   }
 
-  var3 = level.path_node_debug_info.all_node_positions;
+  var_3 = level.path_node_debug_info.all_node_positions;
 
-  for(var4 = 0; var4 < var3.size; var4++) {
-    var5 = var3[var4];
+  for(var_4 = 0; var_4 < var_3.size; var_4++) {
+    var_5 = var_3[var_4];
 
-    if(isDefined(var5)) {
-      if(var0.origin == var5.origin) {
+    if(isDefined(var_5)) {
+      if(var_0.origin == var_5.origin) {
         return false;
       }
 
-      var6 = distancesquared(var0.origin, var5.origin);
+      var_6 = distancesquared(var_0.origin, var_5.origin);
 
-      if(var6 <= var2) {
-        if(var5.angles == var0.angles) {
+      if(var_6 <= var_2) {
+        if(var_5.angles == var_0.angles) {
           return false;
         }
       }
@@ -553,8 +553,8 @@ function similar_nodes_nearby() {
   return true;
 }
 
-function get_node_type_from_type(var0) {
-  switch (var0.type) {
+function get_node_type_from_type(var_0) {
+  switch (var_0.type) {
     case "Cover Crouch":
       return "node_cover_crouch";
     case "Cover Left":
@@ -579,16 +579,16 @@ function get_gamemode_subdir() {
 }
 
 function close_map_write() {
-  var0 = debugdata();
+  var_0 = debugdata();
 
   if(scripts\engine\utility::flag("file_opened")) {
     scripts\engine\utility::flag_clear("file_opened");
-    var1 = var0.file_path;
-    var2 = get_raw_or_devraw_subdir();
-    var3 = get_gamemode_subdir();
-    var4 = "/map_source/" + var1;
-    var5 = 1;
-    scripts\engine\utility:: fileprint_launcher_end_file( var4, var5 );
+    var_1 = var_0.file_path;
+    var_2 = get_raw_or_devraw_subdir();
+    var_3 = get_gamemode_subdir();
+    var_4 = "/map_source/" + var_1;
+    var_5 = 1;
+    scripts\engine\utility:: fileprint_launcher_end_file( var_4, var_5 );
       level notify("stop_creating_nodes");
   }
 
@@ -600,23 +600,23 @@ function close_map_write() {
 
 function create_cover_nodes_within_volume() {
   level endon("game_ended");
-  var0 = debugdata();
-  var0.aa_status = "creating_cover_node_positions";
-  var0.grid_points_found = 1;
-  var0.increase_y = 1;
+  var_0 = debugdata();
+  var_0.aa_status = "creating_cover_node_positions";
+  var_0.grid_points_found = 1;
+  var_0.increase_y = 1;
 
-  while(var0.grid_points_found) {
-    var0.num_fails = 0;
+  while(var_0.grid_points_found) {
+    var_0.num_fails = 0;
 
-    for(var1 = 0; var1 < var0.origin_max_dirs; var1++) {
-      var0.origin_counter = var1;
+    for(var_1 = 0; var_1 < var_0.origin_max_dirs; var_1++) {
+      var_0.origin_counter = var_1;
       get_next_volume_origin();
 
       if(vol_validate_grid_pos()) {
-        var0.angles = (0, 0, 0);
-        var0.node_type = "script_struct";
-        var0.origin = var0.grid_origin;
-        var0.classname = "node_exposed";
+        var_0.angles = (0, 0, 0);
+        var_0.node_type = "script_struct";
+        var_0.origin = var_0.grid_origin;
+        var_0.classname = "node_exposed";
         vol_create_cover_nodes_from_grid_point();
       }
     }
@@ -624,30 +624,30 @@ function create_cover_nodes_within_volume() {
     create_grid_point_in_volume();
   }
 
-  iprintlnbold("Create Node Completed " + var0.all_node_positions.size + " Created.");
+  iprintlnbold("Create Node Completed " + var_0.all_node_positions.size + " Created.");
 }
 
 function vol_create_cover_nodes_from_grid_point() {
-  var0 = debugdata();
-  var0.should_create_exposed_node = 1;
+  var_0 = debugdata();
+  var_0.should_create_exposed_node = 1;
 
-  for(var1 = 0; var1 <= var0.node_creation_traces; var1++) {
-    var0.node_creation_trace_index = var1;
+  for(var_1 = 0; var_1 <= var_0.node_creation_traces; var_1++) {
+    var_0.node_creation_trace_index = var_1;
     vol_create_and_validate_node();
   }
 
-  if(istrue(var0.create_exposed_node) && istrue(var0.should_create_exposed_node)) {
-    var2 = scripts\engine\utility::drop_to_ground(var0.grid_origin, 16, -300) + (0, 0, 16);
-    var0.origin = var2;
+  if(istrue(var_0.create_exposed_node) && istrue(var_0.should_create_exposed_node)) {
+    var_2 = scripts\engine\utility::drop_to_ground(var_0.grid_origin, 16, -300) + (0, 0, 16);
+    var_0.origin = var_2;
 
-    if(can_spawn_capsule_trace(var2) && !trace_for_stairs()) {
-      var0.angles = (0, 0, 0);
+    if(can_spawn_capsule_trace(var_2) && !trace_for_stairs()) {
+      var_0.angles = (0, 0, 0);
 
       if(!similar_nodes_nearby()) {
         return;
       }
 
-      var0.node_type = "node_exposed";
+      var_0.node_type = "node_exposed";
       run_path_node_removal();
       return;
     }
@@ -659,164 +659,164 @@ function vol_create_cover_nodes_from_grid_point() {
 function create_cover_nodes_from_grid_points() {
   level endon("game_ended");
   level endon("end_grid_creation");
-  var0 = debugdata();
-  var0.aa_status = "creating_cover_node_positions";
-  var0.grid_points_found = 1;
-  var0.increase_y = 1;
+  var_0 = debugdata();
+  var_0.aa_status = "creating_cover_node_positions";
+  var_0.grid_points_found = 1;
+  var_0.increase_y = 1;
 
-  while(var0.grid_points_found) {
-    var0.num_fails = 0;
+  while(var_0.grid_points_found) {
+    var_0.num_fails = 0;
     create_grid_point();
 
-    for(var1 = 0; var1 < var0.origin_max_dirs; var1++) {
-      var0.origin_counter = var1;
+    for(var_1 = 0; var_1 < var_0.origin_max_dirs; var_1++) {
+      var_0.origin_counter = var_1;
 
-      for(var2 = 0; var2 < var0.total_z_planes; var2++) {
-        var0.z = var2;
+      for(var_2 = 0; var_2 < var_0.total_z_planes; var_2++) {
+        var_0.z = var_2;
         get_next_origin();
 
         if(validate_grid_pos()) {
-          var0.angles = (0, 0, 0);
-          var0.classname = "node_exposed";
+          var_0.angles = (0, 0, 0);
+          var_0.classname = "node_exposed";
           create_cover_nodes_from_grid_point();
         }
       }
     }
   }
 
-  iprintlnbold("Create Node Completed " + var0.all_node_positions.size + " Created.");
+  iprintlnbold("Create Node Completed " + var_0.all_node_positions.size + " Created.");
 }
 
 function create_grid_point_in_volume() {
-  var0 = debugdata();
+  var_0 = debugdata();
 
-  if(var0.increase_x) {
+  if(var_0.increase_x) {
     vol_increase_x_coordinate();
-  } else if(var0.increase_y) {
-    var0.increase_x = 1;
-    var0.x = 0;
+  } else if(var_0.increase_y) {
+    var_0.increase_x = 1;
+    var_0.x = 0;
     vol_increase_y_coordinate();
   } else {
-    var0.increase_x = 1;
-    var0.increase_y = 1;
-    var0.x = 0;
-    var0.y = 0;
+    var_0.increase_x = 1;
+    var_0.increase_y = 1;
+    var_0.x = 0;
+    var_0.y = 0;
     vol_increase_z_coordinate();
   }
 
-  if(var0.x_done && var0.y_done && var0.z_done) {
-    var0.grid_points_found = 0;
+  if(var_0.x_done && var_0.y_done && var_0.z_done) {
+    var_0.grid_points_found = 0;
     level notify("end_grid_creation");
     return;
   }
 }
 
 function create_grid_point() {
-  var0 = debugdata();
-  var1 = 0;
+  var_0 = debugdata();
+  var_1 = 0;
 
   if(!increase_y_coordinate()) {
-    var1++;
+    var_1++;
 
     if(increase_x_coordinate()) {
-      var0.y = 1;
+      var_0.y = 1;
     } else {
-      var1++;
+      var_1++;
     }
   }
 
-  if(var1 >= 2) {
-    var0.grid_points_found = 0;
+  if(var_1 >= 2) {
+    var_0.grid_points_found = 0;
     level notify("end_grid_creation");
     return;
   }
 }
 
 function create_grid_point_new() {
-  var0 = debugdata();
+  var_0 = debugdata();
 
-  if(var0.dir_fails >= var0.max_dir_fails) {
-    var0.grid_points_found = 0;
+  if(var_0.dir_fails >= var_0.max_dir_fails) {
+    var_0.grid_points_found = 0;
     level notify("end_grid_creation");
     return;
   }
 
-  var1 = 0;
+  var_1 = 0;
 
-  if(isDefined(var0.max_y)) {
-    if(var0.y > var0.max_y) {
-      var1++;
+  if(isDefined(var_0.max_y)) {
+    if(var_0.y > var_0.max_y) {
+      var_1++;
     }
   }
 
-  if(isDefined(var0.max_x)) {
-    if(var0.x > var0.max_x) {
-      var1++;
+  if(isDefined(var_0.max_x)) {
+    if(var_0.x > var_0.max_x) {
+      var_1++;
     }
   }
 
-  if(var1 >= 2) {
-    var0.grid_points_found = 0;
+  if(var_1 >= 2) {
+    var_0.grid_points_found = 0;
     level notify("end_grid_creation");
     return;
   }
 
-  if(var0.increase_y) {
+  if(var_0.increase_y) {
     increase_y_coordinate_new();
-    var0.increase_y = 0;
+    var_0.increase_y = 0;
     return;
   }
 
   increase_x_coordinate_new();
-  var0.increase_y = 1;
+  var_0.increase_y = 1;
 }
 
 function increase_y_coordinate_new() {
-  var0 = debugdata();
+  var_0 = debugdata();
 
-  if(isDefined(var0.max_y)) {
-    if(var0.y < var0.max_y) {
-      var0.y++;
+  if(isDefined(var_0.max_y)) {
+    if(var_0.y < var_0.max_y) {
+      var_0.y++;
       return 1;
     }
 
     return 0;
   }
 
-  var0.y++;
+  var_0.y++;
   return 1;
 }
 
 function increase_x_coordinate_new() {
-  var0 = debugdata();
+  var_0 = debugdata();
 
-  if(isDefined(var0.max_x)) {
-    if(var0.x < var0.max_x) {
-      var0.x++;
+  if(isDefined(var_0.max_x)) {
+    if(var_0.x < var_0.max_x) {
+      var_0.x++;
       return 1;
     }
 
     return 0;
   }
 
-  var0.x++;
+  var_0.x++;
   return 1;
 }
 
 function increase_x_coordinate() {
-  var0 = debugdata();
+  var_0 = debugdata();
 
-  if(var0.x_dir_fails <= var0.max_dir_fails) {
-    if(isDefined(var0.max_x)) {
-      if(var0.x < var0.max_x) {
-        var0.x++;
+  if(var_0.x_dir_fails <= var_0.max_dir_fails) {
+    if(isDefined(var_0.max_x)) {
+      if(var_0.x < var_0.max_x) {
+        var_0.x++;
         return 1;
       }
 
       return 0;
     }
 
-    var0.x++;
+    var_0.x++;
     return 1;
   }
 
@@ -824,37 +824,37 @@ function increase_x_coordinate() {
 }
 
 function vol_increase_x_coordinate() {
-  var0 = debugdata();
+  var_0 = debugdata();
 
-  if(isDefined(var0.max_x)) {
-    if(var0.x < var0.max_x) {
-      var0.x++;
+  if(isDefined(var_0.max_x)) {
+    if(var_0.x < var_0.max_x) {
+      var_0.x++;
       return 1;
     }
 
-    var0.increase_x = 0;
-    var0.x_done = 1;
+    var_0.increase_x = 0;
+    var_0.x_done = 1;
     return 0;
   }
 
-  var0.x++;
+  var_0.x++;
   return 1;
 }
 
 function increase_y_coordinate() {
-  var0 = debugdata();
+  var_0 = debugdata();
 
-  if(var0.y_dir_fails <= var0.max_dir_fails) {
-    if(isDefined(var0.max_y)) {
-      if(var0.y < var0.max_y) {
-        var0.y++;
+  if(var_0.y_dir_fails <= var_0.max_dir_fails) {
+    if(isDefined(var_0.max_y)) {
+      if(var_0.y < var_0.max_y) {
+        var_0.y++;
         return 1;
       }
 
       return 0;
     }
 
-    var0.y++;
+    var_0.y++;
     return 1;
   }
 
@@ -862,72 +862,72 @@ function increase_y_coordinate() {
 }
 
 function vol_increase_y_coordinate() {
-  var0 = debugdata();
+  var_0 = debugdata();
 
-  if(isDefined(var0.max_y)) {
-    if(var0.y < var0.max_y) {
-      var0.y++;
+  if(isDefined(var_0.max_y)) {
+    if(var_0.y < var_0.max_y) {
+      var_0.y++;
       return 1;
     }
 
-    var0.increase_y = 0;
-    var0.y_done = 1;
+    var_0.increase_y = 0;
+    var_0.y_done = 1;
     return 0;
   }
 
-  var0.y++;
+  var_0.y++;
   return 1;
 }
 
 function vol_increase_z_coordinate() {
-  var0 = debugdata();
+  var_0 = debugdata();
 
-  if(isDefined(var0.max_z)) {
-    if(var0.z < var0.max_z) {
-      var0.z++;
+  if(isDefined(var_0.max_z)) {
+    if(var_0.z < var_0.max_z) {
+      var_0.z++;
       return 1;
     }
 
-    var0.z_done = 1;
+    var_0.z_done = 1;
     return 0;
   }
 
-  var0.z++;
+  var_0.z++;
   return 1;
 }
 
 function get_next_origin() {
-  var0 = debugdata();
-  var1 = var0.starting_pos;
-  var2 = var0.x;
-  var3 = var0.y;
-  var4 = var0.z;
+  var_0 = debugdata();
+  var_1 = var_0.starting_pos;
+  var_2 = var_0.x;
+  var_3 = var_0.y;
+  var_4 = var_0.z;
 
-  if(var0.dir_valid[var0.origin_counter]) {
-    switch (var0.origin_counter) {
+  if(var_0.dir_valid[var_0.origin_counter]) {
+    switch (var_0.origin_counter) {
       case 0:
-        var0.grid_origin = var1 + (var2 * var0.x_magnitude, var3 * var0.y_magnitude, var4 * var0.z_magnitude);
+        var_0.grid_origin = var_1 + (var_2 * var_0.x_magnitude, var_3 * var_0.y_magnitude, var_4 * var_0.z_magnitude);
         break;
       case 1:
-        var0.grid_origin = var1 + (-1 * var2 * var0.x_magnitude, var3 * var0.y_magnitude, var4 * var0.z_magnitude);
+        var_0.grid_origin = var_1 + (-1 * var_2 * var_0.x_magnitude, var_3 * var_0.y_magnitude, var_4 * var_0.z_magnitude);
         break;
       case 2:
-        var0.grid_origin = var1 + (-1 * var2 * var0.x_magnitude, -1 * var3 * var0.y_magnitude, var4 * var0.z_magnitude);
+        var_0.grid_origin = var_1 + (-1 * var_2 * var_0.x_magnitude, -1 * var_3 * var_0.y_magnitude, var_4 * var_0.z_magnitude);
         break;
       case 3:
-        var0.grid_origin = var1 + (-1 * var2 * var0.x_magnitude, var3 * var0.y_magnitude, -1 * var4 * var0.z_magnitude);
+        var_0.grid_origin = var_1 + (-1 * var_2 * var_0.x_magnitude, var_3 * var_0.y_magnitude, -1 * var_4 * var_0.z_magnitude);
         break;
       case 4:
-        var0.grid_origin = var1 + (-1 * var2 * var0.x_magnitude, -1 * var3 * var0.y_magnitude, -1 * var4 * var0.z_magnitude);
+        var_0.grid_origin = var_1 + (-1 * var_2 * var_0.x_magnitude, -1 * var_3 * var_0.y_magnitude, -1 * var_4 * var_0.z_magnitude);
         break;
       case 5:
-        var0.grid_origin = var1 + (var2 * var0.x_magnitude, -1 * var3 * var0.y_magnitude, var4 * var0.z_magnitude);
+        var_0.grid_origin = var_1 + (var_2 * var_0.x_magnitude, -1 * var_3 * var_0.y_magnitude, var_4 * var_0.z_magnitude);
         break;
       case 6:
-        var0.grid_origin = var1 + (var2 * var0.x_magnitude, -1 * var3 * var0.y_magnitude, -1 * var4 * var0.z_magnitude);
+        var_0.grid_origin = var_1 + (var_2 * var_0.x_magnitude, -1 * var_3 * var_0.y_magnitude, -1 * var_4 * var_0.z_magnitude);
         break;
       case 7:
-        var0.grid_origin = var1 + (var2 * var0.x_magnitude, var3 * var0.y_magnitude, -1 * var4 * var0.z_magnitude);
+        var_0.grid_origin = var_1 + (var_2 * var_0.x_magnitude, var_3 * var_0.y_magnitude, -1 * var_4 * var_0.z_magnitude);
         break;
     }
 
@@ -936,56 +936,56 @@ function get_next_origin() {
 }
 
 function get_next_volume_origin() {
-  var0 = debugdata();
-  var1 = var0.starting_pos;
-  var2 = var0.x;
-  var3 = var0.y;
-  var4 = var0.z;
-  var5 = var0.box_angles;
-  var6 = anglesToForward(var5);
-  var7 = anglestoright(var5);
-  var8 = anglestoup(var5);
-  var9 = var6 * var2 * var0.x_magnitude;
-  var10 = var7 * var3 * var0.y_magnitude;
-  var11 = var8 * var4 * var0.z_magnitude;
+  var_0 = debugdata();
+  var_1 = var_0.starting_pos;
+  var_2 = var_0.x;
+  var_3 = var_0.y;
+  var_4 = var_0.z;
+  var_5 = var_0.box_angles;
+  var_6 = anglesToForward(var_5);
+  var_7 = anglestoright(var_5);
+  var_8 = anglestoup(var_5);
+  var_9 = var_6 * var_2 * var_0.x_magnitude;
+  var_10 = var_7 * var_3 * var_0.y_magnitude;
+  var_11 = var_8 * var_4 * var_0.z_magnitude;
 
-  switch (var0.origin_counter) {
+  switch (var_0.origin_counter) {
     case 0:
-      var0.grid_origin = var1 + var9 + var10 + var11;
+      var_0.grid_origin = var_1 + var_9 + var_10 + var_11;
       break;
     case 1:
-      var0.grid_origin = var1 + -1 * var9 + var10 + var11;
+      var_0.grid_origin = var_1 + -1 * var_9 + var_10 + var_11;
       break;
     case 2:
-      var0.grid_origin = var1 + -1 * var9 + -1 * var10 + var11;
+      var_0.grid_origin = var_1 + -1 * var_9 + -1 * var_10 + var_11;
       break;
     case 3:
-      var0.grid_origin = var1 + -1 * var9 + var10 + -1 * var11;
+      var_0.grid_origin = var_1 + -1 * var_9 + var_10 + -1 * var_11;
       break;
     case 4:
-      var0.grid_origin = var1 + -1 * var9 + -1 * var10 + -1 * var11;
+      var_0.grid_origin = var_1 + -1 * var_9 + -1 * var_10 + -1 * var_11;
       break;
     case 5:
-      var0.grid_origin = var1 + var9 + -1 * var10 + var11;
+      var_0.grid_origin = var_1 + var_9 + -1 * var_10 + var_11;
       break;
     case 6:
-      var0.grid_origin = var1 + var9 + -1 * var10 + -1 * var11;
+      var_0.grid_origin = var_1 + var_9 + -1 * var_10 + -1 * var_11;
       break;
     case 7:
-      var0.grid_origin = var1 + var9 + var10 + -1 * var11;
+      var_0.grid_origin = var_1 + var_9 + var_10 + -1 * var_11;
       break;
   }
 }
 
 function vol_validate_grid_pos() {
-  var0 = debugdata();
-  var1 = getclosestpointonnavmesh(var0.grid_origin);
+  var_0 = debugdata();
+  var_1 = getclosestpointonnavmesh(var_0.grid_origin);
 
-  if(distancesquared(var1, var0.grid_origin) <= var0.max_nav_offset) {
-    var0.grid_origin = scripts\engine\utility::drop_to_ground(var1, 96, -300);
-    var0.origin = var0.grid_origin + (0, 0, 16);
-    var0.last_x = var0.x;
-    var0.last_y = var0.y;
+  if(distancesquared(var_1, var_0.grid_origin) <= var_0.max_nav_offset) {
+    var_0.grid_origin = scripts\engine\utility::drop_to_ground(var_1, 96, -300);
+    var_0.origin = var_0.grid_origin + (0, 0, 16);
+    var_0.last_x = var_0.x;
+    var_0.last_y = var_0.y;
     return 1;
   }
 
@@ -993,63 +993,63 @@ function vol_validate_grid_pos() {
 }
 
 function validate_grid_pos() {
-  var0 = debugdata();
-  var1 = getclosestpointonnavmesh(var0.grid_origin);
+  var_0 = debugdata();
+  var_1 = getclosestpointonnavmesh(var_0.grid_origin);
 
-  if(distancesquared(var1, var0.grid_origin) <= var0.max_nav_offset) {
-    var0.grid_origin = scripts\engine\utility::drop_to_ground(var1, 96, -300) + (0, 0, 16);
-    var0.origin = var0.grid_origin;
-    var0.last_x = var0.x;
-    var0.last_y = var0.y;
-    var0.x_dir_fails = 0;
-    var0.y_dir_fails = 0;
+  if(distancesquared(var_1, var_0.grid_origin) <= var_0.max_nav_offset) {
+    var_0.grid_origin = scripts\engine\utility::drop_to_ground(var_1, 96, -300) + (0, 0, 16);
+    var_0.origin = var_0.grid_origin;
+    var_0.last_x = var_0.x;
+    var_0.last_y = var_0.y;
+    var_0.x_dir_fails = 0;
+    var_0.y_dir_fails = 0;
     return 1;
   }
 
-  var0.dir_fails++;
+  var_0.dir_fails++;
 
-  if(var0.last_x != var0.x) {
-    var0.x_dir_fails++;
+  if(var_0.last_x != var_0.x) {
+    var_0.x_dir_fails++;
   }
 
-  if(var0.last_y != var0.y) {
-    var0.y_dir_fails++;
+  if(var_0.last_y != var_0.y) {
+    var_0.y_dir_fails++;
   }
 
   return 0;
 }
 
 function create_cover_nodes_from_single_grid_point() {
-  var0 = debugdata();
-  var0.should_create_exposed_node = 1;
+  var_0 = debugdata();
+  var_0.should_create_exposed_node = 1;
 
-  for(var1 = 0; var1 <= var0.node_creation_traces; var1++) {
-    var0.node_creation_trace_index = var1;
+  for(var_1 = 0; var_1 <= var_0.node_creation_traces; var_1++) {
+    var_0.node_creation_trace_index = var_1;
     create_and_validate_node_from_single_grid_point();
   }
 }
 
 function create_cover_nodes_from_grid_point() {
-  var0 = debugdata();
-  var0.should_create_exposed_node = 1;
+  var_0 = debugdata();
+  var_0.should_create_exposed_node = 1;
 
-  for(var1 = 0; var1 <= var0.node_creation_traces; var1++) {
-    var0.node_creation_trace_index = var1;
+  for(var_1 = 0; var_1 <= var_0.node_creation_traces; var_1++) {
+    var_0.node_creation_trace_index = var_1;
     create_and_validate_node();
   }
 
-  if(istrue(var0.create_exposed_node) && istrue(var0.should_create_exposed_node)) {
-    var2 = scripts\engine\utility::drop_to_ground(var0.grid_origin, 16, -300) + (0, 0, 16);
-    var0.origin = var2;
+  if(istrue(var_0.create_exposed_node) && istrue(var_0.should_create_exposed_node)) {
+    var_2 = scripts\engine\utility::drop_to_ground(var_0.grid_origin, 16, -300) + (0, 0, 16);
+    var_0.origin = var_2;
 
-    if(can_spawn_capsule_trace(var2) && !trace_for_stairs()) {
-      var0.angles = (0, 0, 0);
+    if(can_spawn_capsule_trace(var_2) && !trace_for_stairs()) {
+      var_0.angles = (0, 0, 0);
 
       if(!similar_nodes_nearby()) {
         return;
       }
 
-      var0.node_type = "node_exposed";
+      var_0.node_type = "node_exposed";
       run_path_node_removal();
       return;
     }
@@ -1059,36 +1059,36 @@ function create_cover_nodes_from_grid_point() {
 }
 
 function vol_create_and_validate_node() {
-  var0 = debugdata();
-  var1 = var0.grid_origin;
-  var2 = var0.node_creation_angle_frac * var0.node_creation_trace_index;
-  var3 = cos(var2) * var0.node_creation_trace_dist;
-  var4 = sin(var2) * var0.node_creation_trace_dist;
-  var5 = var1[0] + var3;
-  var6 = var1[1] + var4;
-  var7 = var1[2];
-  var8 = (var5, var6, var7);
-  var9 = create_node_trace(var1, var8);
+  var_0 = debugdata();
+  var_1 = var_0.grid_origin;
+  var_2 = var_0.node_creation_angle_frac * var_0.node_creation_trace_index;
+  var_3 = cos(var_2) * var_0.node_creation_trace_dist;
+  var_4 = sin(var_2) * var_0.node_creation_trace_dist;
+  var_5 = var_1[0] + var_3;
+  var_6 = var_1[1] + var_4;
+  var_7 = var_1[2];
+  var_8 = (var_5, var_6, var_7);
+  var_9 = create_node_trace(var_1, var_8);
 
-  if(isDefined(var9["position"]) && isDefined(var9["fraction"]) && var9["fraction"] < 1) {
-    var0.should_create_exposed_node = 0;
+  if(isDefined(var_9["position"]) && isDefined(var_9["fraction"]) && var_9["fraction"] < 1) {
+    var_0.should_create_exposed_node = 0;
 
-    if(isDefined(var9["normal"])) {
-      var10 = vectordot(var9["normal"], (0, 0, 1));
-      var0.origin = var9["position"];
-      var0.angles = (0, scripts\engine\math::wrap(0, 359, 180 + vectortoangles(var9["normal"])[1]), 0);
+    if(isDefined(var_9["normal"])) {
+      var_10 = vectordot(var_9["normal"], (0, 0, 1));
+      var_0.origin = var_9["position"];
+      var_0.angles = (0, scripts\engine\math::wrap(0, 359, 180 + vectortoangles(var_9["normal"])[1]), 0);
 
-      if(-0.1 > var10 || var10 > 0.1) {
+      if(-0.1 > var_10 || var_10 > 0.1) {
         return;
       }
     }
 
-    var11 = getclosestpointonnavmesh(var9["position"]);
+    var_11 = getclosestpointonnavmesh(var_9["position"]);
 
-    if(distancesquared(var9["position"], var11) <= var0.max_nav_offset) {
-      var0.should_create_exposed_node = 0;
-      var0.origin = scripts\engine\utility::drop_to_ground(var11, 96, -300) + (0, 0, 16);
-      var0.angles = (0, scripts\engine\math::wrap(0, 359, 180 + vectortoangles(var9["normal"])[1]), 0);
+    if(distancesquared(var_9["position"], var_11) <= var_0.max_nav_offset) {
+      var_0.should_create_exposed_node = 0;
+      var_0.origin = scripts\engine\utility::drop_to_ground(var_11, 96, -300) + (0, 0, 16);
+      var_0.angles = (0, scripts\engine\math::wrap(0, 359, 180 + vectortoangles(var_9["normal"])[1]), 0);
       reposition_cover_node();
       return;
     }
@@ -1098,72 +1098,72 @@ function vol_create_and_validate_node() {
 }
 
 function create_and_validate_node_from_single_grid_point() {
-  var0 = debugdata();
-  var1 = var0.grid_origin;
-  var2 = var0.node_creation_angle_frac * var0.node_creation_trace_index;
-  var3 = cos(var2) * var0.node_creation_trace_dist;
-  var4 = sin(var2) * var0.node_creation_trace_dist;
-  var5 = var1[0] + var3;
-  var6 = var1[1] + var4;
-  var7 = var1[2];
-  var8 = (var5, var6, var7);
-  var9 = create_node_trace(var1, var8);
+  var_0 = debugdata();
+  var_1 = var_0.grid_origin;
+  var_2 = var_0.node_creation_angle_frac * var_0.node_creation_trace_index;
+  var_3 = cos(var_2) * var_0.node_creation_trace_dist;
+  var_4 = sin(var_2) * var_0.node_creation_trace_dist;
+  var_5 = var_1[0] + var_3;
+  var_6 = var_1[1] + var_4;
+  var_7 = var_1[2];
+  var_8 = (var_5, var_6, var_7);
+  var_9 = create_node_trace(var_1, var_8);
 
-  if(isDefined(var9["normal"])) {
-    var10 = vectordot(var9["normal"], (0, 0, 1));
+  if(isDefined(var_9["normal"])) {
+    var_10 = vectordot(var_9["normal"], (0, 0, 1));
 
-    if(-0.1 > var10 || var10 > 0.1) {
+    if(-0.1 > var_10 || var_10 > 0.1) {
       return;
     }
   }
 
-  var11 = getclosestpointonnavmesh(var9["position"]);
+  var_11 = getclosestpointonnavmesh(var_9["position"]);
 
-  if(distancesquared(var9["position"], var11) <= var0.max_nav_offset) {
-    var0.should_create_exposed_node = 0;
-    var0.node_type = "script_struct";
-    var0.origin = scripts\engine\utility::drop_to_ground(var11, 12, -300) + (0, 0, 16);
-    var0.angles = (0, scripts\engine\math::wrap(0, 359, 180 + vectortoangles(var9["normal"])[1]), 0);
+  if(distancesquared(var_9["position"], var_11) <= var_0.max_nav_offset) {
+    var_0.should_create_exposed_node = 0;
+    var_0.node_type = "script_struct";
+    var_0.origin = scripts\engine\utility::drop_to_ground(var_11, 12, -300) + (0, 0, 16);
+    var_0.angles = (0, scripts\engine\math::wrap(0, 359, 180 + vectortoangles(var_9["normal"])[1]), 0);
     write_struct_to_map();
-    var0.total_grid_points++;
+    var_0.total_grid_points++;
     reposition_cover_node();
     return;
   }
 
-  var0.node_type = "script_struct";
-  var0.angles = (0, 0, 0);
-  var0.origin = var9["position"];
+  var_0.node_type = "script_struct";
+  var_0.angles = (0, 0, 0);
+  var_0.origin = var_9["position"];
   write_struct_to_map();
 }
 
 function create_and_validate_node() {
-  var0 = debugdata();
-  var1 = var0.grid_origin;
-  var2 = var0.node_creation_angle_frac * var0.node_creation_trace_index;
-  var3 = cos(var2) * var0.node_creation_trace_dist;
-  var4 = sin(var2) * var0.node_creation_trace_dist;
-  var5 = var1[0] + var3;
-  var6 = var1[1] + var4;
-  var7 = var1[2];
-  var8 = (var5, var6, var7);
-  var9 = create_node_trace(var1, var8);
+  var_0 = debugdata();
+  var_1 = var_0.grid_origin;
+  var_2 = var_0.node_creation_angle_frac * var_0.node_creation_trace_index;
+  var_3 = cos(var_2) * var_0.node_creation_trace_dist;
+  var_4 = sin(var_2) * var_0.node_creation_trace_dist;
+  var_5 = var_1[0] + var_3;
+  var_6 = var_1[1] + var_4;
+  var_7 = var_1[2];
+  var_8 = (var_5, var_6, var_7);
+  var_9 = create_node_trace(var_1, var_8);
 
-  if(isDefined(var9["position"]) && isDefined(var9["fraction"]) && var9["fraction"] < 1) {
-    var0.should_create_exposed_node = 0;
+  if(isDefined(var_9["position"]) && isDefined(var_9["fraction"]) && var_9["fraction"] < 1) {
+    var_0.should_create_exposed_node = 0;
 
-    if(isDefined(var9["normal"])) {
-      var10 = vectordot(var9["normal"], (0, 0, 1));
+    if(isDefined(var_9["normal"])) {
+      var_10 = vectordot(var_9["normal"], (0, 0, 1));
 
-      if(-0.1 > var10 || var10 > 0.1) {
+      if(-0.1 > var_10 || var_10 > 0.1) {
         return;
       }
     }
 
-    var11 = getclosestpointonnavmesh(var9["position"]);
+    var_11 = getclosestpointonnavmesh(var_9["position"]);
 
-    if(distancesquared(var9["position"], var11) <= var0.max_nav_offset) {
-      var0.origin = scripts\engine\utility::drop_to_ground(var11, 12, -300) + (0, 0, 16);
-      var0.angles = (0, scripts\engine\math::wrap(0, 359, 180 + vectortoangles(var9["normal"])[1]), 0);
+    if(distancesquared(var_9["position"], var_11) <= var_0.max_nav_offset) {
+      var_0.origin = scripts\engine\utility::drop_to_ground(var_11, 12, -300) + (0, 0, 16);
+      var_0.angles = (0, scripts\engine\math::wrap(0, 359, 180 + vectortoangles(var_9["normal"])[1]), 0);
       reposition_cover_node();
       return;
     }
@@ -1172,44 +1172,44 @@ function create_and_validate_node() {
   }
 }
 
-function create_node_trace(var0, var1, var2) {
-  var3 = debugdata();
+function create_node_trace(var_0, var_1, var_2) {
+  var_3 = debugdata();
   attempt_throttle();
-  var3.traces_count++;
-  var4 = scripts\engine\trace::ray_trace(var0, var1, level.players, var3.trace_contents);
+  var_3.traces_count++;
+  var_4 = scripts\engine\trace::ray_trace(var_0, var_1, level.players, var_3.trace_contents);
 
-  if(var3.save_trace_data) {
-    if(isDefined(var4["position"])) {
-      if(!isDefined(var2)) {
-        var2 = (1, 1, 1);
+  if(var_3.save_trace_data) {
+    if(isDefined(var_4["position"])) {
+      if(!isDefined(var_2)) {
+        var_2 = (1, 1, 1);
       }
 
-      var3.temp_trace_data[var3.temp_trace_data.size] = var4["position"];
-      var3.temp_trace_data_colors[var3.temp_trace_data_colors.size] = var2;
-      var3.temp_trace_data[var3.temp_trace_data.size] = var1;
-      var3.temp_trace_data_colors[var3.temp_trace_data_colors.size] = (0, 0, 0);
+      var_3.temp_trace_data[var_3.temp_trace_data.size] = var_4["position"];
+      var_3.temp_trace_data_colors[var_3.temp_trace_data_colors.size] = var_2;
+      var_3.temp_trace_data[var_3.temp_trace_data.size] = var_1;
+      var_3.temp_trace_data_colors[var_3.temp_trace_data_colors.size] = (0, 0, 0);
     }
   }
 
-  return scripts\engine\trace::ray_trace(var0, var1, level.players, var3.trace_contents);
+  return scripts\engine\trace::ray_trace(var_0, var_1, level.players, var_3.trace_contents);
 }
 
-function debug_node_array(var0) {
+function debug_node_array(var_0) {
   level notify("debug_node_array");
   level endon("debug_node_array");
-  var1 = debugdata();
+  var_1 = debugdata();
 
   for(;;) {
     level waittill("start_array_debug");
 
-    if(isDefined(var1.trace_data[getdvarint("debug_script_node", 0)])) {
-      var2 = var1.trace_data[getdvarint("debug_script_node", 0)];
+    if(isDefined(var_1.trace_data[getdvarint("debug_script_node", 0)])) {
+      var_2 = var_1.trace_data[getdvarint("debug_script_node", 0)];
 
-      foreach(var4 in var2) {
-        var5 = var1.trace_data_colors[getdvarint("debug_script_node", 0)][var6];
-        thread draw_line_until_endons(level, var4, var5[0], var5[1], var5[2]);
+      foreach(var_4 in var_2) {
+        var_5 = var_1.trace_data_colors[getdvarint("debug_script_node", 0)][var_6];
+        thread draw_line_until_endons(level, var_4, var_5[0], var_5[1], var_5[2]);
 
-        if(var6 % 100) {
+        if(var_6 % 100) {
           waitframe();
         }
       }
@@ -1225,82 +1225,82 @@ function reposition_cover_node() {
   }
 
   level notify("reposition_cover_node");
-  var0 = debugdata();
-  var1 = var0.origin;
-  var2 = var0.angles;
-  var3 = anglestoright(var2);
-  var4 = anglestoleft(var2);
-  var5 = anglesToForward(var2);
-  var6 = -1 * anglesToForward(var2);
-  var7 = anglestoup(var2);
-  var8 = [var4, var3];
-  var9 = undefined;
-  var10 = undefined;
-  var11 = undefined;
-  var0.found_left_edge = 0;
-  var0.found_right_edge = 0;
-  var0.found_up_edge = 0;
-  var0.found_exposed_pos = 0;
-  var0.wall_units = 0;
-  var0.temp_trace_data = [];
-  var0.found_valid_node_pos = 0;
-  var0.temp_trace_data_colors = [];
+  var_0 = debugdata();
+  var_1 = var_0.origin;
+  var_2 = var_0.angles;
+  var_3 = anglestoright(var_2);
+  var_4 = anglestoleft(var_2);
+  var_5 = anglesToForward(var_2);
+  var_6 = -1 * anglesToForward(var_2);
+  var_7 = anglestoup(var_2);
+  var_8 = [var_4, var_3];
+  var_9 = undefined;
+  var_10 = undefined;
+  var_11 = undefined;
+  var_0.found_left_edge = 0;
+  var_0.found_right_edge = 0;
+  var_0.found_up_edge = 0;
+  var_0.found_exposed_pos = 0;
+  var_0.wall_units = 0;
+  var_0.temp_trace_data = [];
+  var_0.found_valid_node_pos = 0;
+  var_0.temp_trace_data_colors = [];
 
   if(getdvarint("scr_save_trace_data", 0)) {
-    var0.save_trace_data = 1;
-    var0.temp_trace_data[var0.temp_trace_data.size] = var1;
-    var0.temp_trace_data_colors[var0.temp_trace_data_colors.size] = (1, 1, 1);
+    var_0.save_trace_data = 1;
+    var_0.temp_trace_data[var_0.temp_trace_data.size] = var_1;
+    var_0.temp_trace_data_colors[var_0.temp_trace_data_colors.size] = (1, 1, 1);
   }
 
-  var12 = var0.valid_forward_dist;
+  var_12 = var_0.valid_forward_dist;
 
-  for(var13 = 0; var13 < 4; var13++) {
-    if(var8.size < 1) {
+  for(var_13 = 0; var_13 < 4; var_13++) {
+    if(var_8.size < 1) {
       break;
     }
 
-    for(var14 = 0; var14 < var8.size; var14++) {
-      var15 = var8[var14];
-      var16 = var1 + var15 * var13 * 32;
+    for(var_14 = 0; var_14 < var_8.size; var_14++) {
+      var_15 = var_8[var_14];
+      var_16 = var_1 + var_15 * var_13 * 32;
 
-      if(!can_spawn_capsule_trace(var16)) {
-        var8 = scripts\engine\utility::array_remove(var8, var15);
+      if(!can_spawn_capsule_trace(var_16)) {
+        var_8 = scripts\engine\utility::array_remove(var_8, var_15);
         continue;
       }
 
-      var17 = create_node_trace(var16, var16 + var5 * var12, (0, 1, 1));
+      var_17 = create_node_trace(var_16, var_16 + var_5 * var_12, (0, 1, 1));
 
-      if(!trace_result_hits_surface(var17)) {
-        var0.found_valid_node_pos = 0;
+      if(!trace_result_hits_surface(var_17)) {
+        var_0.found_valid_node_pos = 0;
 
-        for(var18 = 1; var18 < 32; var18++) {
-          var19 = var16 + -1 * var15 * var18;
+        for(var_18 = 1; var_18 < 32; var_18++) {
+          var_19 = var_16 + -1 * var_15 * var_18;
 
-          if(!can_spawn_capsule_trace(var19)) {
-            var8 = scripts\engine\utility::array_remove(var8, var15);
+          if(!can_spawn_capsule_trace(var_19)) {
+            var_8 = scripts\engine\utility::array_remove(var_8, var_15);
             continue;
           }
 
-          var20 = create_node_trace(var19, var19 + var5 * 24, (0, 1, 1));
+          var_20 = create_node_trace(var_19, var_19 + var_5 * 24, (0, 1, 1));
 
-          if(trace_result_hits_surface(var20)) {
-            var0.found_valid_node_pos = 1;
-            var0.should_create_exposed_node = 0;
+          if(trace_result_hits_surface(var_20)) {
+            var_0.found_valid_node_pos = 1;
+            var_0.should_create_exposed_node = 0;
 
-            if(position_near_other_nodes(var20["position"])) {
-              var8 = scripts\engine\utility::array_remove(var8, var15);
+            if(position_near_other_nodes(var_20["position"])) {
+              var_8 = scripts\engine\utility::array_remove(var_8, var_15);
               break;
             }
 
-            if(var15 == var4) {
-              if(!var0.found_left_edge && var0.edge_placement) {
-                if(edge_point_valid(var19, var15, var5)) {
-                  var0.found_left_edge = 1;
-                  var9 = scripts\engine\utility::drop_to_ground(var20["position"], 12, -300);
-                  var8 = scripts\engine\utility::array_remove(var8, var15);
+            if(var_15 == var_4) {
+              if(!var_0.found_left_edge && var_0.edge_placement) {
+                if(edge_point_valid(var_19, var_15, var_5)) {
+                  var_0.found_left_edge = 1;
+                  var_9 = scripts\engine\utility::drop_to_ground(var_20["position"], 12, -300);
+                  var_8 = scripts\engine\utility::array_remove(var_8, var_15);
                   break;
                 } else {
-                  var8 = scripts\engine\utility::array_remove(var8, var15);
+                  var_8 = scripts\engine\utility::array_remove(var_8, var_15);
                   break;
                 }
               }
@@ -1308,15 +1308,15 @@ function reposition_cover_node() {
               continue;
             }
 
-            if(!var0.found_right_edge && var0.edge_placement) {
-              if(edge_point_valid(var19, var15, var5)) {
-                var0.found_right_edge = 1;
-                var10 = scripts\engine\utility::drop_to_ground(var20["position"], 12, -300);
-                var8 = scripts\engine\utility::array_remove(var8, var15);
+            if(!var_0.found_right_edge && var_0.edge_placement) {
+              if(edge_point_valid(var_19, var_15, var_5)) {
+                var_0.found_right_edge = 1;
+                var_10 = scripts\engine\utility::drop_to_ground(var_20["position"], 12, -300);
+                var_8 = scripts\engine\utility::array_remove(var_8, var_15);
                 continue;
               }
 
-              var8 = scripts\engine\utility::array_remove(var8, var15);
+              var_8 = scripts\engine\utility::array_remove(var_8, var_15);
               break;
             }
           }
@@ -1325,65 +1325,65 @@ function reposition_cover_node() {
         continue;
       }
 
-      var21 = create_node_trace(var17["position"] + var7 * 28, var17["position"] + var5 * var0.valid_forward_dist + var7 * 28, (1, 0, 1));
+      var_21 = create_node_trace(var_17["position"] + var_7 * 28, var_17["position"] + var_5 * var_0.valid_forward_dist + var_7 * 28, (1, 0, 1));
 
-      if(!var0.found_up_edge && !trace_result_hits_surface(var21) && !position_near_other_nodes(var21["position"]) && up_point_valid(var17["position"] + -1 * var5, [var4, var3], var5, var7)) {
-        var0.found_up_edge = 1;
-        var0.should_create_exposed_node = 0;
-        var11 = scripts\engine\utility::drop_to_ground(var17["position"], 12, -300);
+      if(!var_0.found_up_edge && !trace_result_hits_surface(var_21) && !position_near_other_nodes(var_21["position"]) && up_point_valid(var_17["position"] + -1 * var_5, [var_4, var_3], var_5, var_7)) {
+        var_0.found_up_edge = 1;
+        var_0.should_create_exposed_node = 0;
+        var_11 = scripts\engine\utility::drop_to_ground(var_17["position"], 12, -300);
       }
     }
   }
 
   level notify("finished_reposition_node");
 
-  if(isDefined(var9) && var0.found_left_edge) {
-    var22 = scripts\engine\utility::drop_to_ground(var9 + var6 * 17 + -1 * var4 * 16, 16, -300) + (0, 0, 16);
+  if(isDefined(var_9) && var_0.found_left_edge) {
+    var_22 = scripts\engine\utility::drop_to_ground(var_9 + var_6 * 17 + -1 * var_4 * 16, 16, -300) + (0, 0, 16);
 
-    if(can_spawn_capsule_trace(var22) && !trace_for_stairs()) {
-      var0.origin = var22;
-      var16 = var22 + var7 * 24;
-      var20 = create_node_trace(var16, var16 + var5 * var0.valid_forward_dist, (1, 1, 0));
+    if(can_spawn_capsule_trace(var_22) && !trace_for_stairs()) {
+      var_0.origin = var_22;
+      var_16 = var_22 + var_7 * 24;
+      var_20 = create_node_trace(var_16, var_16 + var_5 * var_0.valid_forward_dist, (1, 1, 0));
 
-      if(trace_result_hits_surface(var20)) {
-        var0.node_type = "node_cover_left";
+      if(trace_result_hits_surface(var_20)) {
+        var_0.node_type = "node_cover_left";
       } else {
-        var0.node_type = "node_cover_crouch";
+        var_0.node_type = "node_cover_crouch";
       }
 
       run_path_node_removal();
     }
   }
 
-  if(isDefined(var10) && var0.found_right_edge) {
-    var22 = scripts\engine\utility::drop_to_ground(var10 + var6 * 17 + -1 * var3 * 16, 16, -300) + (0, 0, 16);
+  if(isDefined(var_10) && var_0.found_right_edge) {
+    var_22 = scripts\engine\utility::drop_to_ground(var_10 + var_6 * 17 + -1 * var_3 * 16, 16, -300) + (0, 0, 16);
 
-    if(can_spawn_capsule_trace(var22) && !trace_for_stairs()) {
-      var0.origin = var22;
-      var16 = var22 + var7 * 24;
-      var20 = create_node_trace(var16, var16 + var5 * 64, (1, 1, 0));
+    if(can_spawn_capsule_trace(var_22) && !trace_for_stairs()) {
+      var_0.origin = var_22;
+      var_16 = var_22 + var_7 * 24;
+      var_20 = create_node_trace(var_16, var_16 + var_5 * 64, (1, 1, 0));
 
-      if(trace_result_hits_surface(var20)) {
-        var0.node_type = "node_cover_right";
+      if(trace_result_hits_surface(var_20)) {
+        var_0.node_type = "node_cover_right";
       } else {
-        var0.node_type = "node_cover_crouch";
+        var_0.node_type = "node_cover_crouch";
       }
 
       run_path_node_removal();
     }
   }
 
-  if(isDefined(var11) && var0.found_up_edge && !var0.found_right_edge && !var0.found_left_edge) {
-    var22 = scripts\engine\utility::drop_to_ground(var11 + var6 * 17, 16, -300) + (0, 0, 16);
+  if(isDefined(var_11) && var_0.found_up_edge && !var_0.found_right_edge && !var_0.found_left_edge) {
+    var_22 = scripts\engine\utility::drop_to_ground(var_11 + var_6 * 17, 16, -300) + (0, 0, 16);
 
-    if(can_spawn_capsule_trace(var22) && !trace_for_stairs()) {
-      var0.origin = var22;
-      var0.node_type = "node_cover_crouch";
+    if(can_spawn_capsule_trace(var_22) && !trace_for_stairs()) {
+      var_0.origin = var_22;
+      var_0.node_type = "node_cover_crouch";
       run_path_node_removal();
     }
   }
 
-  var0.save_trace_data = 0;
+  var_0.save_trace_data = 0;
 }
 
 function simple_reposition_node() {
@@ -1392,76 +1392,76 @@ function simple_reposition_node() {
   }
 
   level notify("reposition_cover_node");
-  var0 = debugdata();
-  var1 = var0.origin;
-  var2 = var0.angles;
-  var3 = anglestoright(var2);
-  var4 = anglestoleft(var2);
-  var5 = anglesToForward(var2);
-  var6 = -1 * anglesToForward(var2);
-  var7 = anglestoup(var2);
+  var_0 = debugdata();
+  var_1 = var_0.origin;
+  var_2 = var_0.angles;
+  var_3 = anglestoright(var_2);
+  var_4 = anglestoleft(var_2);
+  var_5 = anglesToForward(var_2);
+  var_6 = -1 * anglesToForward(var_2);
+  var_7 = anglestoup(var_2);
 
-  if(scripts\engine\utility::is_equal(var0.node_type, "node_cover_left")) {
-    var8 = [var4];
+  if(scripts\engine\utility::is_equal(var_0.node_type, "node_cover_left")) {
+    var_8 = [var_4];
   } else {
-    var8 = [var4];
+    var_8 = [var_4];
   }
 
-  var9 = undefined;
-  var10 = undefined;
-  var11 = undefined;
-  var1.found_left_edge = 0;
-  var1.found_right_edge = 0;
-  var1.found_up_edge = 0;
-  var1.found_exposed_pos = 0;
-  var1.wall_units = 0;
-  var1.temp_trace_data = [];
-  var1.found_valid_node_pos = 0;
-  var1.temp_trace_data_colors = [];
-  var12 = var1.valid_forward_dist;
+  var_9 = undefined;
+  var_10 = undefined;
+  var_11 = undefined;
+  var_1.found_left_edge = 0;
+  var_1.found_right_edge = 0;
+  var_1.found_up_edge = 0;
+  var_1.found_exposed_pos = 0;
+  var_1.wall_units = 0;
+  var_1.temp_trace_data = [];
+  var_1.found_valid_node_pos = 0;
+  var_1.temp_trace_data_colors = [];
+  var_12 = var_1.valid_forward_dist;
 
-  for(var13 = 0; var13 < 4; var13++) {
-    if(var8.size < 1) {
+  for(var_13 = 0; var_13 < 4; var_13++) {
+    if(var_8.size < 1) {
       break;
     }
 
-    for(var14 = 0; var14 < var8.size; var14++) {
-      var15 = var8[var14];
-      var16 = var2 + var15 * var13 * 32;
+    for(var_14 = 0; var_14 < var_8.size; var_14++) {
+      var_15 = var_8[var_14];
+      var_16 = var_2 + var_15 * var_13 * 32;
 
-      if(!can_spawn_capsule_trace(var16)) {
-        var8 = scripts\engine\utility::array_remove(var8, var15);
+      if(!can_spawn_capsule_trace(var_16)) {
+        var_8 = scripts\engine\utility::array_remove(var_8, var_15);
         continue;
       }
 
-      var17 = create_node_trace(var16, var16 + var6 * var12, (0, 1, 1));
+      var_17 = create_node_trace(var_16, var_16 + var_6 * var_12, (0, 1, 1));
 
-      if(!trace_result_hits_surface(var17)) {
-        var1.found_valid_node_pos = 0;
+      if(!trace_result_hits_surface(var_17)) {
+        var_1.found_valid_node_pos = 0;
 
-        for(var18 = 1; var18 < 32; var18++) {
-          var19 = var16 + -1 * var15 * var18;
+        for(var_18 = 1; var_18 < 32; var_18++) {
+          var_19 = var_16 + -1 * var_15 * var_18;
 
-          if(!can_spawn_capsule_trace(var19)) {
-            var8 = scripts\engine\utility::array_remove(var8, var15);
+          if(!can_spawn_capsule_trace(var_19)) {
+            var_8 = scripts\engine\utility::array_remove(var_8, var_15);
             continue;
           }
 
-          var20 = create_node_trace(var19, var19 + var6 * 24, (0, 1, 1));
+          var_20 = create_node_trace(var_19, var_19 + var_6 * 24, (0, 1, 1));
 
-          if(trace_result_hits_surface(var20)) {
-            var1.found_valid_node_pos = 1;
-            var1.should_create_exposed_node = 0;
+          if(trace_result_hits_surface(var_20)) {
+            var_1.found_valid_node_pos = 1;
+            var_1.should_create_exposed_node = 0;
 
-            if(var15 == var5) {
-              if(!var1.found_left_edge && var1.edge_placement) {
-                if(edge_point_valid(var19, var15, var6)) {
-                  var1.found_left_edge = 1;
-                  var9 = scripts\engine\utility::drop_to_ground(var20["position"], 12, -300);
-                  var8 = scripts\engine\utility::array_remove(var8, var15);
+            if(var_15 == var_5) {
+              if(!var_1.found_left_edge && var_1.edge_placement) {
+                if(edge_point_valid(var_19, var_15, var_6)) {
+                  var_1.found_left_edge = 1;
+                  var_9 = scripts\engine\utility::drop_to_ground(var_20["position"], 12, -300);
+                  var_8 = scripts\engine\utility::array_remove(var_8, var_15);
                   break;
                 } else {
-                  var8 = scripts\engine\utility::array_remove(var8, var15);
+                  var_8 = scripts\engine\utility::array_remove(var_8, var_15);
                   break;
                 }
               }
@@ -1469,15 +1469,15 @@ function simple_reposition_node() {
               continue;
             }
 
-            if(!var1.found_right_edge && var1.edge_placement) {
-              if(edge_point_valid(var19, var15, var6)) {
-                var1.found_right_edge = 1;
-                var10 = scripts\engine\utility::drop_to_ground(var20["position"], 12, -300);
-                var8 = scripts\engine\utility::array_remove(var8, var15);
+            if(!var_1.found_right_edge && var_1.edge_placement) {
+              if(edge_point_valid(var_19, var_15, var_6)) {
+                var_1.found_right_edge = 1;
+                var_10 = scripts\engine\utility::drop_to_ground(var_20["position"], 12, -300);
+                var_8 = scripts\engine\utility::array_remove(var_8, var_15);
                 continue;
               }
 
-              var8 = scripts\engine\utility::array_remove(var8, var15);
+              var_8 = scripts\engine\utility::array_remove(var_8, var_15);
               break;
             }
           }
@@ -1486,101 +1486,101 @@ function simple_reposition_node() {
         continue;
       }
 
-      var21 = create_node_trace(var17["position"] + var8 * 28, var17["position"] + var6 * var1.valid_forward_dist + var8 * 28, (1, 0, 1));
+      var_21 = create_node_trace(var_17["position"] + var_8 * 28, var_17["position"] + var_6 * var_1.valid_forward_dist + var_8 * 28, (1, 0, 1));
 
-      if(!var1.found_up_edge && !trace_result_hits_surface(var21) && up_point_valid(var17["position"] + -1 * var6, [var5, var4], var6, var8)) {
-        var1.found_up_edge = 1;
-        var1.should_create_exposed_node = 0;
-        var11 = scripts\engine\utility::drop_to_ground(var17["position"], 12, -300);
+      if(!var_1.found_up_edge && !trace_result_hits_surface(var_21) && up_point_valid(var_17["position"] + -1 * var_6, [var_5, var_4], var_6, var_8)) {
+        var_1.found_up_edge = 1;
+        var_1.should_create_exposed_node = 0;
+        var_11 = scripts\engine\utility::drop_to_ground(var_17["position"], 12, -300);
       }
     }
   }
 
   level notify("finished_reposition_node");
 
-  if(isDefined(var9) && var1.found_left_edge) {
-    var22 = scripts\engine\utility::drop_to_ground(var9 + var7 * 17 + -1 * var5 * 16, 16, -300) + (0, 0, 16);
+  if(isDefined(var_9) && var_1.found_left_edge) {
+    var_22 = scripts\engine\utility::drop_to_ground(var_9 + var_7 * 17 + -1 * var_5 * 16, 16, -300) + (0, 0, 16);
 
-    if(can_spawn_capsule_trace(var22) && !trace_for_stairs()) {
-      var1.origin = var22;
-      var16 = var22 + var8 * 24;
-      var20 = create_node_trace(var16, var16 + var6 * var1.valid_forward_dist, (1, 1, 0));
+    if(can_spawn_capsule_trace(var_22) && !trace_for_stairs()) {
+      var_1.origin = var_22;
+      var_16 = var_22 + var_8 * 24;
+      var_20 = create_node_trace(var_16, var_16 + var_6 * var_1.valid_forward_dist, (1, 1, 0));
 
-      if(trace_result_hits_surface(var20)) {
-        var1.node_type = "node_cover_left";
+      if(trace_result_hits_surface(var_20)) {
+        var_1.node_type = "node_cover_left";
       } else {
-        var1.node_type = "node_cover_crouch";
+        var_1.node_type = "node_cover_crouch";
       }
 
       run_path_node_removal();
     }
   }
 
-  if(isDefined(var10) && var1.found_right_edge) {
-    var22 = scripts\engine\utility::drop_to_ground(var10 + var7 * 17 + -1 * var4 * 16, 16, -300) + (0, 0, 16);
+  if(isDefined(var_10) && var_1.found_right_edge) {
+    var_22 = scripts\engine\utility::drop_to_ground(var_10 + var_7 * 17 + -1 * var_4 * 16, 16, -300) + (0, 0, 16);
 
-    if(can_spawn_capsule_trace(var22) && !trace_for_stairs()) {
-      var1.origin = var22;
-      var16 = var22 + var8 * 24;
-      var20 = create_node_trace(var16, var16 + var6 * 64, (1, 1, 0));
+    if(can_spawn_capsule_trace(var_22) && !trace_for_stairs()) {
+      var_1.origin = var_22;
+      var_16 = var_22 + var_8 * 24;
+      var_20 = create_node_trace(var_16, var_16 + var_6 * 64, (1, 1, 0));
 
-      if(trace_result_hits_surface(var20)) {
-        var1.node_type = "node_cover_right";
+      if(trace_result_hits_surface(var_20)) {
+        var_1.node_type = "node_cover_right";
       } else {
-        var1.node_type = "node_cover_crouch";
+        var_1.node_type = "node_cover_crouch";
       }
 
       run_path_node_removal();
     }
   }
 
-  if(isDefined(var11) && var1.found_up_edge && !var1.found_right_edge && !var1.found_left_edge) {
-    var22 = scripts\engine\utility::drop_to_ground(var11 + var7 * 17, 16, -300) + (0, 0, 16);
+  if(isDefined(var_11) && var_1.found_up_edge && !var_1.found_right_edge && !var_1.found_left_edge) {
+    var_22 = scripts\engine\utility::drop_to_ground(var_11 + var_7 * 17, 16, -300) + (0, 0, 16);
 
-    if(can_spawn_capsule_trace(var22) && !trace_for_stairs()) {
-      var1.origin = var22;
-      var1.node_type = "node_cover_crouch";
+    if(can_spawn_capsule_trace(var_22) && !trace_for_stairs()) {
+      var_1.origin = var_22;
+      var_1.node_type = "node_cover_crouch";
       run_path_node_removal();
     }
   }
 
-  var1.save_trace_data = 0;
+  var_1.save_trace_data = 0;
 }
 
-function find_final_position(var0) {}
+function find_final_position(var_0) {}
 
 function trace_for_stairs() {
   return false;
 }
 
-function edge_point_valid(var0, var1, var2) {
-  var3 = debugdata();
+function edge_point_valid(var_0, var_1, var_2) {
+  var_3 = debugdata();
 
-  for(var4 = 32; var4 > 0; var4--) {
-    var5 = var0 + -1 * var1 * var4;
+  for(var_4 = 32; var_4 > 0; var_4--) {
+    var_5 = var_0 + -1 * var_1 * var_4;
 
-    if(!can_spawn_capsule_trace(var5)) {
+    if(!can_spawn_capsule_trace(var_5)) {
       break;
     }
 
-    var6 = create_node_trace(var5, var5 + var2 * 24, (0, 1, 0));
+    var_6 = create_node_trace(var_5, var_5 + var_2 * 24, (0, 1, 0));
 
-    if(trace_result_hits_surface(var6)) {
-      var3.wall_units++;
+    if(trace_result_hits_surface(var_6)) {
+      var_3.wall_units++;
     }
   }
 
-  if(var3.wall_units >= var3.wall_units_required) {
-    for(var7 = 32; var7 > 0; var7--) {
-      var5 = var0 + var1 * var7;
+  if(var_3.wall_units >= var_3.wall_units_required) {
+    for(var_7 = 32; var_7 > 0; var_7--) {
+      var_5 = var_0 + var_1 * var_7;
 
-      if(!can_spawn_capsule_trace(var5)) {
+      if(!can_spawn_capsule_trace(var_5)) {
         return 0;
       }
 
-      var6 = create_node_trace(var5, var5 + var2 * var3.valid_forward_dist, (0, 1, 0));
+      var_6 = create_node_trace(var_5, var_5 + var_2 * var_3.valid_forward_dist, (0, 1, 0));
 
-      if(trace_result_hits_surface(var6)) {
+      if(trace_result_hits_surface(var_6)) {
         return 0;
       }
     }
@@ -1591,20 +1591,20 @@ function edge_point_valid(var0, var1, var2) {
   return 0;
 }
 
-function up_point_valid(var0, var1, var2, var3) {
-  var4 = debugdata();
-  var5 = var1;
+function up_point_valid(var_0, var_1, var_2, var_3) {
+  var_4 = debugdata();
+  var_5 = var_1;
 
-  for(var6 = 32; var6 > 0; var6--) {
-    for(var7 = 0; var7 < var5.size; var7++) {
-      var8 = var5[var7];
-      var9 = var0 + -1 * var8 * var6;
-      var10 = create_node_trace(var9, var9 + var2 * 24, (0, 1, 0));
+  for(var_6 = 32; var_6 > 0; var_6--) {
+    for(var_7 = 0; var_7 < var_5.size; var_7++) {
+      var_8 = var_5[var_7];
+      var_9 = var_0 + -1 * var_8 * var_6;
+      var_10 = create_node_trace(var_9, var_9 + var_2 * 24, (0, 1, 0));
 
-      if(!trace_result_hits_surface(var10)) {
-        var4.wall_units++;
+      if(!trace_result_hits_surface(var_10)) {
+        var_4.wall_units++;
 
-        if(var4.wall_units >= var4.wall_units_required) {
+        if(var_4.wall_units >= var_4.wall_units_required) {
           break;
         }
 
@@ -1613,24 +1613,24 @@ function up_point_valid(var0, var1, var2, var3) {
     }
   }
 
-  var5 = var1;
-  var4.wall_units = 0;
+  var_5 = var_1;
+  var_4.wall_units = 0;
 
-  for(var7 = 32; var7 > 0; var7--) {
-    for(var6 = 0; var6 < var5.size; var6++) {
-      var8 = var5[var6];
-      var9 = var0 + var8 * var7 + var3 * 28;
-      var10 = create_node_trace(var9, var9 + var2 * var4.valid_forward_dist, (0, 1, 0));
+  for(var_7 = 32; var_7 > 0; var_7--) {
+    for(var_6 = 0; var_6 < var_5.size; var_6++) {
+      var_8 = var_5[var_6];
+      var_9 = var_0 + var_8 * var_7 + var_3 * 28;
+      var_10 = create_node_trace(var_9, var_9 + var_2 * var_4.valid_forward_dist, (0, 1, 0));
 
-      if(trace_result_hits_surface(var10)) {
+      if(trace_result_hits_surface(var_10)) {
         continue;
       }
 
-      var4.wall_units++;
+      var_4.wall_units++;
     }
   }
 
-  if(var4.wall_units >= var4.wall_units_required) {
+  if(var_4.wall_units >= var_4.wall_units_required) {
     return 1;
   }
 
@@ -1638,23 +1638,23 @@ function up_point_valid(var0, var1, var2, var3) {
 }
 
 function attempt_throttle() {
-  var0 = debugdata();
-  var0.throttle_counter++;
+  var_0 = debugdata();
+  var_0.throttle_counter++;
 
-  if(var0.throttle_counter >= var0.create_node_throttle) {
-    var0.throttle_counter = 0;
+  if(var_0.throttle_counter >= var_0.create_node_throttle) {
+    var_0.throttle_counter = 0;
     waitframe();
     return;
   }
 }
 
-function trace_result_hits_surface(var0, var1) {
-  var2 = debugdata();
+function trace_result_hits_surface(var_0, var_1) {
+  var_2 = debugdata();
 
-  if(isDefined(var0["position"]) && isDefined(var0["fraction"]) && var0["fraction"] < 1 && var0["fraction"] > 0) {
-    if(isDefined(var1)) {
-      if(isDefined(var0["normal"])) {
-        if(var1 == var0["normal"]) {
+  if(isDefined(var_0["position"]) && isDefined(var_0["fraction"]) && var_0["fraction"] < 1 && var_0["fraction"] > 0) {
+    if(isDefined(var_1)) {
+      if(isDefined(var_0["normal"])) {
+        if(var_1 == var_0["normal"]) {
           return 1;
         }
 
@@ -1671,36 +1671,36 @@ function trace_result_hits_surface(var0, var1) {
 }
 
 function open_and_write_to_paths_map() {
-  var0 = debugdata();
+  var_0 = debugdata();
 
   if(!scripts\engine\utility::flag("file_opened")) {
     scripts\engine\utility::flag_set("file_opened");
-    var0.aa_status = "adding_nodes_to_map";
+    var_0.aa_status = "adding_nodes_to_map";
     scripts\engine\utility:: fileprint_launcher_start_file();
-      var1 = "\t";
-    var2 = 0;
+      var_1 = "\t";
+    var_2 = 0;
     scripts\engine\utility:: fileprint_launcher( "iwmap 11" );
-      scripts\engine\utility:: fileprint_launcher( var1 + "entity " + var2 );
+      scripts\engine\utility:: fileprint_launcher( var_1 + "entity " + var_2 );
       scripts\engine\utility:: fileprint_launcher( "{" );
-      scripts\engine\utility:: fileprint_launcher( var1 + "\"classname\" \"worldspawn\"" );
+      scripts\engine\utility:: fileprint_launcher( var_1 + "\"classname\" \"worldspawn\"" );
       scripts\engine\utility:: fileprint_launcher( "}" );
       return;
   }
 }
 
-function draw_closest_wall_points(var0, var1) {
+function draw_closest_wall_points(var_0, var_1) {
   level endon("game_ended");
   level notify("draw_closest_wall_points");
   level endon("draw_closest_wall_points");
-  var0 endon("use");
-  var0 endon("disconnect");
-  var2 = debugdata();
+  var_0 endon("use");
+  var_0 endon("disconnect");
+  var_2 = debugdata();
 
   for(;;) {
-    var0 notify("reset_wall_lines");
-    var3 = scripts\engine\utility::get_array_of_closest(var0.origin, var1, undefined, 50);
+    var_0 notify("reset_wall_lines");
+    var_3 = scripts\engine\utility::get_array_of_closest(var_0.origin, var_1, undefined, 50);
 
-    foreach(var5 in var3) {}
+    foreach(var_5 in var_3) {}
 
     wait 1;
   }
@@ -1709,23 +1709,23 @@ function draw_closest_wall_points(var0, var1) {
 function run_path_node_removal() {
   level endon("game_ended");
   level endon("get_nav_start_points");
-  var0 = debugdata();
+  var_0 = debugdata();
 
-  if(!position_near_other_nodes(var0.origin)) {
-    var1 = spawnStruct();
-    var1.angles = var0.angles;
-    var1.origin = var0.origin;
-    var0.all_node_positions[var0.all_node_positions.size] = var1;
+  if(!position_near_other_nodes(var_0.origin)) {
+    var_1 = spawnStruct();
+    var_1.angles = var_0.angles;
+    var_1.origin = var_0.origin;
+    var_0.all_node_positions[var_0.all_node_positions.size] = var_1;
 
     if(getdvarint("scr_save_trace_data", 0)) {
-      var0.trace_data[var0.map_ent_index] = var0.temp_trace_data;
-      var0.trace_data_colors[var0.map_ent_index] = var0.temp_trace_data_colors;
+      var_0.trace_data[var_0.map_ent_index] = var_0.temp_trace_data;
+      var_0.trace_data_colors[var_0.map_ent_index] = var_0.temp_trace_data_colors;
     }
 
-    var0.should_create_exposed_node = 0;
+    var_0.should_create_exposed_node = 0;
     write_struct_to_map();
 
-    if(istrue(var0.debug_boxes)) {
+    if(istrue(var_0.debug_boxes)) {
       return;
     }
 
@@ -1733,47 +1733,47 @@ function run_path_node_removal() {
   }
 }
 
-function position_near_other_nodes(var0) {
-  var1 = debugdata();
-  var1.density_cap_count = 0;
+function position_near_other_nodes(var_0) {
+  var_1 = debugdata();
+  var_1.density_cap_count = 0;
 
-  if(var1.use_bsp_nodes) {
-    var2 = getallnodes();
+  if(var_1.use_bsp_nodes) {
+    var_2 = getallnodes();
 
-    for(var3 = 0; var3 < var2.size; var3++) {
-      var4 = var2[var3];
+    for(var_3 = 0; var_3 < var_2.size; var_3++) {
+      var_4 = var_2[var_3];
 
-      if(var4.origin == var0) {
+      if(var_4.origin == var_0) {
         return true;
       }
 
-      var5 = distancesquared(var0, var4.origin);
+      var_5 = distancesquared(var_0, var_4.origin);
 
-      if(var5 <= 576) {
+      if(var_5 <= 576) {
         return true;
       }
     }
   }
 
-  var6 = var1.all_node_positions;
+  var_6 = var_1.all_node_positions;
 
-  for(var3 = 0; var3 < var6.size; var3++) {
-    var7 = var6[var3];
+  for(var_3 = 0; var_3 < var_6.size; var_3++) {
+    var_7 = var_6[var_3];
 
-    if(var7.origin == var0) {
+    if(var_7.origin == var_0) {
       return true;
     }
 
-    var5 = distancesquared(var0, var7.origin);
+    var_5 = distancesquared(var_0, var_7.origin);
 
-    if(var5 <= 256) {
+    if(var_5 <= 256) {
       return true;
     }
 
-    if(var5 <= var1.density_radius) {
-      var1.density_cap_count++;
+    if(var_5 <= var_1.density_radius) {
+      var_1.density_cap_count++;
 
-      if(var1.density_cap_count >= var1.density_cap) {
+      if(var_1.density_cap_count >= var_1.density_cap) {
         return true;
       }
     }
@@ -1783,40 +1783,40 @@ function position_near_other_nodes(var0) {
 }
 
 function write_struct_to_map() {
-  var0 = debugdata();
-  var1 = "\t";
-  scripts\engine\utility:: fileprint_launcher( "entity " + var0.map_ent_index );
+  var_0 = debugdata();
+  var_1 = "\t";
+  scripts\engine\utility:: fileprint_launcher( "entity " + var_0.map_ent_index );
     scripts\engine\utility:: fileprint_launcher( "{" );
-    scripts\engine\utility:: fileprint_launcher( var1 + "\"origin\" \"" + var0.origin[ 0 ] + " " + var0.origin[ 1 ] + " " + var0.origin[ 2 ] + "\"" );
+    scripts\engine\utility:: fileprint_launcher( var_1 + "\"origin\" \"" + var_0.origin[ 0 ] + " " + var_0.origin[ 1 ] + " " + var_0.origin[ 2 ] + "\"" );
 
-    if(isDefined(var0.node_type)) {
-      scripts\engine\utility:: fileprint_launcher( var1 + "\"classname\" \"" + var0.node_type + "\"" );
+    if(isDefined(var_0.node_type)) {
+      scripts\engine\utility:: fileprint_launcher( var_1 + "\"classname\" \"" + var_0.node_type + "\"" );
     }
   else {
-    scripts\engine\utility:: fileprint_launcher( var1 + "\"classname\" \"node_cover_left\"" );
+    scripts\engine\utility:: fileprint_launcher( var_1 + "\"classname\" \"node_cover_left\"" );
   }
 
-  if(isDefined(var0.angles)) {
-    scripts\engine\utility:: fileprint_launcher( var1 + "\"angles\" \"" + var0.angles[ 0 ] + " " + var0.angles[ 1 ] + " " + var0.angles[ 2 ] + "\"" );
+  if(isDefined(var_0.angles)) {
+    scripts\engine\utility:: fileprint_launcher( var_1 + "\"angles\" \"" + var_0.angles[ 0 ] + " " + var_0.angles[ 1 ] + " " + var_0.angles[ 2 ] + "\"" );
   } else {
-    scripts\engine\utility:: fileprint_launcher( var1 + "\"angles\" \"0 0 0\"" );
+    scripts\engine\utility:: fileprint_launcher( var_1 + "\"angles\" \"0 0 0\"" );
   }
 
   scripts\engine\utility:: fileprint_launcher( "}" );
-    var0.map_ent_index++;
+    var_0.map_ent_index++;
 }
 
-function draw_line_until_endons(var0, var1, var2, var3, var4) {
+function draw_line_until_endons(var_0, var_1, var_2, var_3, var_4) {
   self endon("death");
-  var5 = debugdata();
+  var_5 = debugdata();
 
-  if(isDefined(var4)) {
-    if(isarray(var4)) {
-      foreach(var7 in var4) {
-        self endon(var7);
+  if(isDefined(var_4)) {
+    if(isarray(var_4)) {
+      foreach(var_7 in var_4) {
+        self endon(var_7);
       }
     } else {
-      self endon(var4);
+      self endon(var_4);
     }
   }
 
@@ -1825,41 +1825,41 @@ function draw_line_until_endons(var0, var1, var2, var3, var4) {
   }
 }
 
-function addentrytodevgui(var0) {
+function addentrytodevgui(var_0) {
   thread addentrytodevgui_internal(level);
 }
 
-function addentrytodevgui_internal(var0) {
+function addentrytodevgui_internal(var_0) {
   level endon("game_ended");
   wait 5;
-  var1 = "";
-  var2 = strtok(var0, "/");
-  var3 = " ";
-  var4 = 0;
+  var_1 = "";
+  var_2 = strtok(var_0, "/");
+  var_3 = " ";
+  var_4 = 0;
 
-  foreach(var6 in var2) {
-    var7 = strtok(var6, " ");
-    var8 = 1;
-    var9 = var7.size;
+  foreach(var_6 in var_2) {
+    var_7 = strtok(var_6, " ");
+    var_8 = 1;
+    var_9 = var_7.size;
 
-    foreach(var11 in var7) {
-      if(var8 < var9) {
-        var1 = var1 + var11 + var3;
+    foreach(var_11 in var_7) {
+      if(var_8 < var_9) {
+        var_1 = var_1 + var_11 + var_3;
       } else {
-        var1 += var11;
+        var_1 += var_11;
       }
 
-      var8++;
+      var_8++;
     }
 
-    var4++;
+    var_4++;
 
-    if(var4 < var2.size) {
-      var1 += "/";
+    if(var_4 < var_2.size) {
+      var_1 += "/";
     }
   }
 }
 
-function can_spawn_capsule_trace(var0) {
-  return scripts\engine\trace::capsule_trace_passed(var0 + (0, 0, 32), var0, 16, 32);
+function can_spawn_capsule_trace(var_0) {
+  return scripts\engine\trace::capsule_trace_passed(var_0 + (0, 0, 32), var_0, 16, 32);
 }

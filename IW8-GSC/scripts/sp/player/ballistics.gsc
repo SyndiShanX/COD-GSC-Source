@@ -19,42 +19,42 @@ function init_ballistics() {
 }
 
 function ballistics_rotateflags() {
-  var0 = getEntArray("flag", "targetname");
-  var1 = level.ballistics.wind;
+  var_0 = getEntArray("flag", "targetname");
+  var_1 = level.ballistics.wind;
 
   for(;;) {
-    if(level.ballistics.wind != var1) {
-      foreach(var3 in var0) {
-        var3.angles = vectortoangles(level.ballistics.wind);
+    if(level.ballistics.wind != var_1) {
+      foreach(var_3 in var_0) {
+        var_3.angles = vectortoangles(level.ballistics.wind);
       }
     }
 
-    var1 = level.ballistics.wind;
+    var_1 = level.ballistics.wind;
     waitframe();
   }
 }
 
 function ballistics_weaponswitchmonitor() {
-  var0 = 0;
+  var_0 = 0;
 
   for(;;) {
     level.player waittill("weapon_change");
 
-    if(ballistics_playerholdingballisticsweapon() && !var0) {
-      var0 = 1;
-      ballistsglobalsettings(var0);
+    if(ballistics_playerholdingballisticsweapon() && !var_0) {
+      var_0 = 1;
+      ballistsglobalsettings(var_0);
       continue;
     }
 
-    if(!ballistics_playerholdingballisticsweapon() && var0) {
-      var0 = 0;
-      ballistsglobalsettings(var0);
+    if(!ballistics_playerholdingballisticsweapon() && var_0) {
+      var_0 = 0;
+      ballistsglobalsettings(var_0);
     }
   }
 }
 
-function ballistsglobalsettings(var0) {
-  if(var0) {
+function ballistsglobalsettings(var_0) {
+  if(var_0) {
     setsaveddvar("MPPNTMTPTS", 0);
     return;
   }
@@ -66,289 +66,289 @@ function ballistics_bulletfiremonitor() {
   level.player endon("death");
 
   for(;;) {
-    level.player waittill("weapon_fired", var0, var1, var2);
+    level.player waittill("weapon_fired", var_0, var_1, var_2);
 
     if(!ballistics_playerholdingballisticsweapon()) {
       continue;
     }
 
-    firebullet(level.player, var1, var2);
+    firebullet(level.player, var_1, var_2);
   }
 }
 
-function firebullet(var0, var1) {
-  var2 = (0, 0, 1);
-  var3 = anglesToForward(var1) * getdvarint("ballistics_muzzleSpeed");
-  var4 = (0, 0, -300) + level.ballistics.wind;
-  var5 = 0.657895;
-  var6 = 0;
-  var7 = var0;
-  var8 = ballistics_createbullet(var0, var1);
-  var9 = [];
-  var10 = 0;
-  var11 = 0.1;
-  var12 = anglesToForward(var1) * -5 + anglestoup(var1) * -2;
-  var13 = undefined;
+function firebullet(var_0, var_1) {
+  var_2 = (0, 0, 1);
+  var_3 = anglesToForward(var_1) * getdvarint("ballistics_muzzleSpeed");
+  var_4 = (0, 0, -300) + level.ballistics.wind;
+  var_5 = 0.657895;
+  var_6 = 0;
+  var_7 = var_0;
+  var_8 = ballistics_createbullet(var_0, var_1);
+  var_9 = [];
+  var_10 = 0;
+  var_11 = 0.1;
+  var_12 = anglesToForward(var_1) * -5 + anglestoup(var_1) * -2;
+  var_13 = undefined;
 
-  while(var6 < var5) {
-    var14 = var7;
-    var7 = var0 + var3 * var6 + 0.5 * var4 * squared(var6);
-    var15 = vectorNormalize(var7 - var14);
-    var16 = distance(var7, var14);
-    var8.origin = var7 + var12;
-    var12 *= 0.2;
+  while(var_6 < var_5) {
+    var_14 = var_7;
+    var_7 = var_0 + var_3 * var_6 + 0.5 * var_4 * squared(var_6);
+    var_15 = vectorNormalize(var_7 - var_14);
+    var_16 = distance(var_7, var_14);
+    var_8.origin = var_7 + var_12;
+    var_12 *= 0.2;
 
-    if(var10) {
-      var17 = scripts\engine\trace::create_contents(1);
+    if(var_10) {
+      var_17 = scripts\engine\trace::create_contents(1);
     } else {
-      var17 = scripts\engine\trace::create_contents(1, 1, 1, 1, 1, 1);
+      var_17 = scripts\engine\trace::create_contents(1, 1, 1, 1, 1, 1);
     }
 
-    var18 = scripts\engine\sp\utility::array_merge(level.ballistics.ignoreentities, var9);
-    var19 = scripts\engine\trace::ray_trace_detail(var14, var7, var18, var17, 1, 1);
-    var20 = [var19];
+    var_18 = scripts\engine\sp\utility::array_merge(level.ballistics.ignoreentities, var_9);
+    var_19 = scripts\engine\trace::ray_trace_detail(var_14, var_7, var_18, var_17, 1, 1);
+    var_20 = [var_19];
 
     if(getdvarint("debug_ballistics")) {
-      var21 = scripts\engine\utility::ter_op(var10, (1, 1, 0), (1, 0, 0));
+      var_21 = scripts\engine\utility::ter_op(var_10, (1, 1, 0), (1, 0, 0));
     }
 
-    var22 = var6 >= var11;
+    var_22 = var_6 >= var_11;
 
-    if(var22) {
-      var23 = vectorcross(var15, var2);
-      var24 = vectorcross(var15, var23);
-      var25 = var24 * -1;
-      var26 = var23 * -1;
-      var27 = [var23, var24, var25, var26];
+    if(var_22) {
+      var_23 = vectorcross(var_15, var_2);
+      var_24 = vectorcross(var_15, var_23);
+      var_25 = var_24 * -1;
+      var_26 = var_23 * -1;
+      var_27 = [var_23, var_24, var_25, var_26];
 
-      foreach(var29 in var27) {
-        var30 = var14 + var29 * 3.5;
-        var31 = var30 + var15 * var16;
-        var32 = scripts\engine\trace::ray_trace_detail(var30, var31, var18, var17, 1, 1);
-        var20 = scripts\engine\utility::array_add(var20, var32);
+      foreach(var_29 in var_27) {
+        var_30 = var_14 + var_29 * 3.5;
+        var_31 = var_30 + var_15 * var_16;
+        var_32 = scripts\engine\trace::ray_trace_detail(var_30, var_31, var_18, var_17, 1, 1);
+        var_20 = scripts\engine\utility::array_add(var_20, var_32);
 
         if(getdvarint("debug_ballistics")) {
-          var21 = scripts\engine\utility::ter_op(var10, (1, 1, 0), (1, 0, 0));
+          var_21 = scripts\engine\utility::ter_op(var_10, (1, 1, 0), (1, 0, 0));
 
-          if(isDefined(var13)) {}
+          if(isDefined(var_13)) {}
 
-          var13 = var8.origin;
+          var_13 = var_8.origin;
         }
       }
     }
 
-    var34 = undefined;
-    var35 = undefined;
-    var36 = undefined;
-    var37 = undefined;
+    var_34 = undefined;
+    var_35 = undefined;
+    var_36 = undefined;
+    var_37 = undefined;
 
-    foreach(var32 in var20) {
-      if(var32["fraction"] < 1) {
-        if(isDefined(var32["entity"])) {
-          var18 = scripts\engine\utility::array_add(var18, var32["entity"]);
+    foreach(var_32 in var_20) {
+      if(var_32["fraction"] < 1) {
+        if(isDefined(var_32["entity"])) {
+          var_18 = scripts\engine\utility::array_add(var_18, var_32["entity"]);
         }
 
-        var34 = var32["position"];
-        var35 = var32["normal"];
-        var36 = var32["entity"];
-        var37 = var32["surfacetype"];
+        var_34 = var_32["position"];
+        var_35 = var_32["normal"];
+        var_36 = var_32["entity"];
+        var_37 = var_32["surfacetype"];
         break;
       }
     }
 
-    if(isDefined(var34)) {
-      if(!var10) {
-        level notify("ballistics_impact", var34);
-        var7 = var14;
-        var10 = 1;
+    if(isDefined(var_34)) {
+      if(!var_10) {
+        level notify("ballistics_impact", var_34);
+        var_7 = var_14;
+        var_10 = 1;
       }
 
-      glassradiusdamage(var34, 30, 99999, 9999);
-      var40 = var34 + var15 * -15;
-      var41 = var34 + var15 * 50;
-      magicbullet("iw8_sn_hdromeo_ballistics_impact", var40, var41);
+      glassradiusdamage(var_34, 30, 99999, 9999);
+      var_40 = var_34 + var_15 * -15;
+      var_41 = var_34 + var_15 * 50;
+      magicbullet("iw8_sn_hdromeo_ballistics_impact", var_40, var_41);
 
       if(getdvarint("debug_ballistics")) {}
 
-      if(isDefined(var36)) {
-        var36 notify("ballistics_bulletDamage", var34);
+      if(isDefined(var_36)) {
+        var_36 notify("ballistics_bulletDamage", var_34);
 
-        if(isai(var36)) {
-          if(!ballistics_shoulddamageai(var36)) {
-            playFX(level.g_effect["vfx_gib_explode"], var34);
-          } else if(ballistics_shouldkillai(var36)) {
-            if(scripts\sp\gibbing::gibbing_shouldgibai(var36)) {
-              level.player thread scripts\sp\gibbing::gibbing_gibai(var36, var34, "MOD_RIFLE_BULLET");
+        if(isai(var_36)) {
+          if(!ballistics_shoulddamageai(var_36)) {
+            playFX(level.g_effect["vfx_gib_explode"], var_34);
+          } else if(ballistics_shouldkillai(var_36)) {
+            if(scripts\sp\gibbing::gibbing_shouldgibai(var_36)) {
+              level.player thread scripts\sp\gibbing::gibbing_gibai(var_36, var_34, "MOD_RIFLE_BULLET");
             } else {
-              thread ballistics_killai(level.player, var36);
+              thread ballistics_killai(level.player, var_36);
             }
           } else {
-            var36 scripts\sp\utility::do_damage(450, var34, self, undefined, "MOD_RIFLE_BULLET");
+            var_36 scripts\sp\utility::do_damage(450, var_34, self, undefined, "MOD_RIFLE_BULLET");
 
-            if(!scripts\engine\utility::is_equal(var36.unittype, "juggernaut")) {
-              playFX(level.g_effect["vfx_gib_explode"], var34);
+            if(!scripts\engine\utility::is_equal(var_36.unittype, "juggernaut")) {
+              playFX(level.g_effect["vfx_gib_explode"], var_34);
             }
           }
         } else {
-          var42 = isDefined(level.phys_barrels) && scripts\engine\utility::array_contains(level.phys_barrels, var36);
+          var_42 = isDefined(level.phys_barrels) && scripts\engine\utility::array_contains(level.phys_barrels, var_36);
 
-          if(var42) {
-            var36 notify("barrel_death", level.player);
+          if(var_42) {
+            var_36 notify("barrel_death", level.player);
           } else {
-            if(var36 isscriptable()) {
-              radiusdamage(var36.origin, 50, 200, 200, level.player, "MOD_RIFLE_BULLET");
+            if(var_36 isscriptable()) {
+              radiusdamage(var_36.origin, 50, 200, 200, level.player, "MOD_RIFLE_BULLET");
             }
 
-            thread ballistics_impactvfxentitylogic(var36, var34, var35);
+            thread ballistics_impactvfxentitylogic(var_36, var_34, var_35);
           }
         }
 
-        if(istrue(var36.ballisticdontpenetrate)) {
+        if(istrue(var_36.ballisticdontpenetrate)) {
           break;
         }
       } else {
-        playFX(level.g_effect["vfx_ballistics_bullet_impact"], var20 + var22 * 0.75, var22);
-        physicsexplosionsphere(var20, 128, 128, 75);
+        playFX(level.g_effect["vfx_ballistics_bullet_impact"], var_20 + var_22 * 0.75, var_22);
+        physicsexplosionsphere(var_20, 128, 128, 75);
       }
     }
 
-    var4 += 0.05;
+    var_4 += 0.05;
     waitframe();
   }
 
-  scripts\engine\utility::delaythread(0.05, &ballistics_deletebullet, var6);
+  scripts\engine\utility::delaythread(0.05, &ballistics_deletebullet, var_6);
 }
 
-function ballistics_impactvfxentitylogic(var0, var1, var2) {
-  physicsexplosionsphere(var1, 128, 128, 75);
-  var3 = var2;
-  var1 += var3 * 0.75;
-  var4 = (0, 0, 1);
-  var5 = vectorcross(var3, var4);
-  var6 = vectorcross(var3, var5);
-  var7 = var6 * -1;
-  var8 = axistoangles(var3, var5, var7);
-  var9 = scripts\engine\utility::spawn_tag_origin(var1, var8);
-  playFXOnTag(level.g_effect["vfx_ballistics_bullet_impact"], var9, "tag_origin");
-  thread ballistics_impactvfxentityparentlogic(var0, var9);
-  var0 endon("death");
-  var0 endon("entitydeleted");
+function ballistics_impactvfxentitylogic(var_0, var_1, var_2) {
+  physicsexplosionsphere(var_1, 128, 128, 75);
+  var_3 = var_2;
+  var_1 += var_3 * 0.75;
+  var_4 = (0, 0, 1);
+  var_5 = vectorcross(var_3, var_4);
+  var_6 = vectorcross(var_3, var_5);
+  var_7 = var_6 * -1;
+  var_8 = axistoangles(var_3, var_5, var_7);
+  var_9 = scripts\engine\utility::spawn_tag_origin(var_1, var_8);
+  playFXOnTag(level.g_effect["vfx_ballistics_bullet_impact"], var_9, "tag_origin");
+  thread ballistics_impactvfxentityparentlogic(var_0, var_9);
+  var_0 endon("death");
+  var_0 endon("entitydeleted");
   wait 5;
-  killfxontag(level.g_effect["vfx_ballistics_bullet_impact"], var9, "tag_origin");
-  var9 delete();
+  killfxontag(level.g_effect["vfx_ballistics_bullet_impact"], var_9, "tag_origin");
+  var_9 delete();
 }
 
-function ballistics_impactvfxentityparentlogic(var0, var1) {
-  var1 endon("death");
-  var1 endon("entitydeleted");
+function ballistics_impactvfxentityparentlogic(var_0, var_1) {
+  var_1 endon("death");
+  var_1 endon("entitydeleted");
 
-  if(issubstr(tolower(var0.code_classname), "script")) {
-    var1 linkTo(var0);
+  if(issubstr(tolower(var_0.code_classname), "script")) {
+    var_1 linkTo(var_0);
   }
 
-  var0 scripts\engine\utility::waittill_any("death", "entitydeleted");
-  killfxontag(level.g_effect["vfx_ballistics_bullet_impact"], var1, "tag_origin");
-  var1 delete();
+  var_0 scripts\engine\utility::waittill_any("death", "entitydeleted");
+  killfxontag(level.g_effect["vfx_ballistics_bullet_impact"], var_1, "tag_origin");
+  var_1 delete();
 }
 
-function ballistics_createbullet(var0, var1) {
-  var2 = spawn("script_model", var0);
-  var2 setModel("ui_bullet_armor_piercing");
-  var2.angles = var1;
-  var2 hide();
-  var2.vfxtag = scripts\engine\utility::spawn_tag_origin(var2.origin, var2.angles);
-  var2.vfxtag linkTo(var2);
-  thread ballistics_delaybulletvfx(var2);
-  thread ballistics_delaybulletshow(var2);
-  return var2;
+function ballistics_createbullet(var_0, var_1) {
+  var_2 = spawn("script_model", var_0);
+  var_2 setModel("ui_bullet_armor_piercing");
+  var_2.angles = var_1;
+  var_2 hide();
+  var_2.vfxtag = scripts\engine\utility::spawn_tag_origin(var_2.origin, var_2.angles);
+  var_2.vfxtag linkTo(var_2);
+  thread ballistics_delaybulletvfx(var_2);
+  thread ballistics_delaybulletshow(var_2);
+  return var_2;
 }
 
-function ballistics_delaybulletvfx(var0) {
-  var0 endon("entitydeleted");
-  var0.vfxtag endon("entitydeleted");
+function ballistics_delaybulletvfx(var_0) {
+  var_0 endon("entitydeleted");
+  var_0.vfxtag endon("entitydeleted");
 
   if(istrue(0)) {
     wait 0;
   }
 
-  playFXOnTag(level.g_effect["vfx_ballistics_bullet_trail"], var0.vfxtag, "tag_origin");
+  playFXOnTag(level.g_effect["vfx_ballistics_bullet_trail"], var_0.vfxtag, "tag_origin");
 }
 
-function ballistics_delaybulletshow(var0) {
-  var0 endon("entitydeleted");
+function ballistics_delaybulletshow(var_0) {
+  var_0 endon("entitydeleted");
 
   if(istrue(0.075)) {
     wait 0.075;
   }
 
-  var0 show();
+  var_0 show();
 }
 
-function ballistics_deletebullet(var0) {
-  var0.vfxtag delete();
-  var0 delete();
+function ballistics_deletebullet(var_0) {
+  var_0.vfxtag delete();
+  var_0 delete();
 }
 
-function ballistics_killai(var0, var1) {
-  var0 stopanimScripted();
-  var0 notify("stop_loop");
-  playFX(level.g_effect["vfx_gib_explode"], var1);
-  var0 scripts\sp\utility::do_damage(var0.health + 9999, var1, self, undefined, "MOD_RIFLE_BULLET");
+function ballistics_killai(var_0, var_1) {
+  var_0 stopanimScripted();
+  var_0 notify("stop_loop");
+  playFX(level.g_effect["vfx_gib_explode"], var_1);
+  var_0 scripts\sp\utility::do_damage(var_0.health + 9999, var_1, self, undefined, "MOD_RIFLE_BULLET");
 
-  if(isPlayer(self) && istrue(var0.magic_bullet_shield) && scripts\engine\utility::is_equal(self.team, var0.team)) {
+  if(isPlayer(self) && istrue(var_0.magic_bullet_shield) && scripts\engine\utility::is_equal(self.team, var_0.team)) {
     scripts\sp\friendlyfire::missionfail(0);
     return;
   }
 }
 
-function ballistics_shoulddamageai(var0) {
-  return !scripts\engine\utility::is_equal(var0.script_parameters, "ballistics_doNotDamage");
+function ballistics_shoulddamageai(var_0) {
+  return !scripts\engine\utility::is_equal(var_0.script_parameters, "ballistics_doNotDamage");
 }
 
-function ballistics_shouldkillai(var0) {
-  if(scripts\engine\utility::is_equal(var0.unittype, "juggernaut")) {
+function ballistics_shouldkillai(var_0) {
+  if(scripts\engine\utility::is_equal(var_0.unittype, "juggernaut")) {
     return false;
   }
 
   return true;
 }
 
-function ballistics_doesbullettrajectoryhitentity(var0, var1, var2, var3) {
-  var4 = anglesToForward(var1) * 38000;
-  var5 = (0, 0, -300);
+function ballistics_doesbullettrajectoryhitentity(var_0, var_1, var_2, var_3) {
+  var_4 = anglesToForward(var_1) * 38000;
+  var_5 = (0, 0, -300);
 
-  if(istrue(var3)) {
-    var5 += level.ballistics.wind;
+  if(istrue(var_3)) {
+    var_5 += level.ballistics.wind;
   }
 
-  var6 = 0.657895;
-  var7 = 0;
-  var8 = var0;
-  var9 = [level.player];
-  var7 = 0;
+  var_6 = 0.657895;
+  var_7 = 0;
+  var_8 = var_0;
+  var_9 = [level.player];
+  var_7 = 0;
 
-  while(var7 < var6) {
-    var10 = var8;
-    var8 = var0 + var4 * var7 + 0.5 * var5 * squared(var7);
-    var11 = scripts\engine\trace::create_contents(1, 1, 1, 1, 1, 0, 0, 0);
-    var12 = scripts\engine\trace::ray_trace_detail(var10, var8, var9, var11, 0, 1);
-    var13 = var12["fraction"];
-    var14 = var12["entity"];
+  while(var_7 < var_6) {
+    var_10 = var_8;
+    var_8 = var_0 + var_4 * var_7 + 0.5 * var_5 * squared(var_7);
+    var_11 = scripts\engine\trace::create_contents(1, 1, 1, 1, 1, 0, 0, 0);
+    var_12 = scripts\engine\trace::ray_trace_detail(var_10, var_8, var_9, var_11, 0, 1);
+    var_13 = var_12["fraction"];
+    var_14 = var_12["entity"];
 
-    if(var13 != 1 && scripts\engine\utility::is_equal(var14, var2)) {
+    if(var_13 != 1 && scripts\engine\utility::is_equal(var_14, var_2)) {
       return true;
     }
 
-    var7 += 0.05;
-    var7 += 0.05;
+    var_7 += 0.05;
+    var_7 += 0.05;
   }
 
   return false;
 }
 
 function ballistics_playerholdingballisticsweapon() {
-  var0 = level.player getcurrentprimaryweapon();
-  return issubstr(var0.basename, "ballistics");
+  var_0 = level.player getcurrentprimaryweapon();
+  return issubstr(var_0.basename, "ballistics");
 }
 
 function ballistics_aiignoreballisticsweaponpain() {
@@ -356,8 +356,8 @@ function ballistics_aiignoreballisticsweaponpain() {
 }
 
 function ballistics_wasaidamagedbyplayerballisticsweapon() {
-  var0 = scripts\engine\utility::is_equal(self.lastattacker, level.player) && ballistics_playerholdingballisticsweapon();
-  return var0;
+  var_0 = scripts\engine\utility::is_equal(self.lastattacker, level.player) && ballistics_playerholdingballisticsweapon();
+  return var_0;
 }
 
 function ballistics_wasainotdamagedbyplayerballisticsweapon() {

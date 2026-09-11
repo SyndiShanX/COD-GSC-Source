@@ -3,20 +3,20 @@
  * Script: scripts\sp\nvg\nvg_player.gsc
 ***********************************************/
 
-function main(var0) {
-  nvg_init(level.player, var0);
+function main(var_0) {
+  nvg_init(level.player, var_0);
   thread player_nvg_watcher();
 }
 
-function nvg_init(var0) {
-  if(!isDefined(var0)) {
-    var0 = "nvg_base_sp";
+function nvg_init(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = "nvg_base_sp";
   }
 
   self.nvg = spawnStruct();
   self.nvg.lightmeter = 1;
   self.nvg.flir = 0;
-  self.nvg.defaultnvgvision = var0;
+  self.nvg.defaultnvgvision = var_0;
   self.nvg.light_model = spawn("script_model", (0, 0, 0));
   self.nvg.light_model setModel("tag_origin");
   self.nvg.light_model linktoplayerview(self, "tag_origin", (0, 0, 0), (0, 0, 0), 1);
@@ -66,21 +66,21 @@ function is_nvg_off() {
   return !level.player isnightvisionon();
 }
 
-function nvg_on_hint(var0, var1, var2, var3) {
-  scripts\engine\sp\utility::display_hint_forced("nvg_on", var0, var1, var2, var3);
+function nvg_on_hint(var_0, var_1, var_2, var_3) {
+  scripts\engine\sp\utility::display_hint_forced("nvg_on", var_0, var_1, var_2, var_3);
 }
 
-function nvg_off_hint(var0, var1, var2, var3) {
-  scripts\engine\sp\utility::display_hint_forced("nvg_off", var0, var1, var2, var3);
+function nvg_off_hint(var_0, var_1, var_2, var_3) {
+  scripts\engine\sp\utility::display_hint_forced("nvg_off", var_0, var_1, var_2, var_3);
 }
 
-function disable_nvg_proc(var0, var1) {
+function disable_nvg_proc(var_0, var_1) {
   self notify("kill_nvg_after_gesture");
   self endon("kill_nvg_after_gesture");
 
-  if(var0) {
+  if(var_0) {
     if(self isnightvisionon()) {
-      if(var1) {
+      if(var_1) {
         self nightvisiongogglesforceoff();
       } else {
         self nightvisionviewoff();
@@ -93,7 +93,7 @@ function disable_nvg_proc(var0, var1) {
     self setactionslot(2, "nightvision");
   }
 
-  if(!var0) {
+  if(!var_0) {
     return;
   }
 
@@ -103,23 +103,23 @@ function disable_nvg_proc(var0, var1) {
     self stopgestureviewmodel("ges_equip_nvg_puton", 0.1);
   }
 
-  var2 = 1.5;
+  var_2 = 1.5;
 
   for(;;) {
     if(self isnightvisionon()) {
       break;
     } else {
       wait 0.05;
-      var2 -= 0.05;
+      var_2 -= 0.05;
     }
 
-    if(var2 <= 0) {
+    if(var_2 <= 0) {
       return;
     }
   }
 
-  if(var1) {
-    if(var1) {
+  if(var_1) {
+    if(var_1) {
       self nightvisiongogglesforceoff();
       return;
     }
@@ -129,19 +129,19 @@ function disable_nvg_proc(var0, var1) {
   }
 }
 
-function set_nvg_flir_proc(var0) {
-  if(!isDefined(var0)) {
-    var0 = 1;
+function set_nvg_flir_proc(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 1;
   }
 
-  if(self.nvg.flir == var0) {
+  if(self.nvg.flir == var_0) {
     return;
   }
 
-  self.nvg.flir = var0;
+  self.nvg.flir = var_0;
   self.nvg.origviewmodel = self getviewmodel();
 
-  if(var0) {
+  if(var_0) {
     anim.flirfootprinteffects = 1;
   } else {
     anim.flirfootprinteffects = 0;
@@ -151,17 +151,17 @@ function set_nvg_flir_proc(var0) {
     anim.flirfootprints = [];
   }
 
-  setomnvar("ui_nvg_flir", var0);
+  setomnvar("ui_nvg_flir", var_0);
   update_visionsetnight_for_nvg_type();
 }
 
-function set_nvg_light_proc(var0) {
-  self.nvg.lightoverride = var0;
+function set_nvg_light_proc(var_0) {
+  self.nvg.lightoverride = var_0;
   update_nvg_light();
 }
 
-function set_nvg_vision_proc(var0) {
-  self.nvg.visionoverride = var0;
+function set_nvg_vision_proc(var_0) {
+  self.nvg.visionoverride = var_0;
   update_visionsetnight_for_nvg_type();
 }
 
@@ -174,20 +174,20 @@ function remove_exotic_nvg_types() {
 
 function update_nvg_light() {
   if(isDefined(self.nvg.lightoverride)) {
-    var0 = self.nvg.lightoverride;
+    var_0 = self.nvg.lightoverride;
   } else {
-    var0 = "player_nvg_light";
+    var_0 = "player_nvg_light";
   }
 
   if(level.player isnightvisionon()) {
-    if(isDefined(self.nvg.currentlight) && self.nvg.currentlight != var0) {
+    if(isDefined(self.nvg.currentlight) && self.nvg.currentlight != var_0) {
       killfxontag(level._effect[self.nvg.currentlight], self.nvg.light_model, "tag_origin");
       self.nvg.currentlight = undefined;
     }
 
     if(!isDefined(self.nvg.currentlight)) {
-      playFXOnTag(level._effect[var0], self.nvg.light_model, "tag_origin");
-      self.nvg.currentlight = var0;
+      playFXOnTag(level._effect[var_0], self.nvg.light_model, "tag_origin");
+      self.nvg.currentlight = var_0;
       return;
     }
 
@@ -203,14 +203,14 @@ function update_nvg_light() {
 
 function update_visionsetnight_for_nvg_type() {
   if(isDefined(self.nvg.visionoverride)) {
-    var0 = self.nvg.visionoverride;
+    var_0 = self.nvg.visionoverride;
   } else if(self.nvg.flir) {
-    var0 = "nvg_flir";
+    var_0 = "nvg_flir";
   } else {
-    var0 = self.nvg.defaultnvgvision;
+    var_0 = self.nvg.defaultnvgvision;
   }
 
-  visionsetnight(var0, 0.1);
+  visionsetnight(var_0, 0.1);
 }
 
 function get_nvg_bar_level() {
@@ -265,7 +265,7 @@ function player_nvg_off() {
   level.player disablephysicaldepthoffieldscripting();
 }
 
-function nvg_mb_on(var0) {
+function nvg_mb_on(var_0) {
   if(self.nvg.flir) {
     return;
   }
@@ -274,19 +274,19 @@ function nvg_mb_on(var0) {
     return;
   }
 
-  thread scripts\engine\sp\utility::lerp_saveddvar("OMRQKMSSPP", 10.5, var0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("MLTTMLTKOR", 0.025, var0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("NKTRSSTMRQ", 0.8, var0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("LSOPQMRPNR", 0.006, var0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("OMRQKMSSPP", 10.5, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("MLTTMLTKOR", 0.025, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("NKTRSSTMRQ", 0.8, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("LSOPQMRPNR", 0.006, var_0);
   level.player setlensprofiledistort("compact portable", 0, 0, 0.9, 0.93);
 }
 
 function nvg_mb_off() {
-  var0 = 0.1;
-  thread scripts\engine\sp\utility::lerp_saveddvar("OMRQKMSSPP", 0, var0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("MLTTMLTKOR", 0, var0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("NKTRSSTMRQ", 0, var0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("LSOPQMRPNR", 0, var0);
+  var_0 = 0.1;
+  thread scripts\engine\sp\utility::lerp_saveddvar("OMRQKMSSPP", 0, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("MLTTMLTKOR", 0, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("NKTRSSTMRQ", 0, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("LSOPQMRPNR", 0, var_0);
   level.player setlensprofiledistort("none");
 }
 
@@ -296,15 +296,15 @@ function nvg_flir_on() {
   }
 
   if(!isDefined(self.nvg.ogsunintensity)) {
-    var0 = getmapsuncolorandintensity();
-    self.nvg.ogsunintensity = var0[3];
+    var_0 = getmapsuncolorandintensity();
+    self.nvg.ogsunintensity = var_0[3];
   }
 
   scripts\sp\nvg\nvg_ai::do_flir_footsteps();
   self setviewmodel("viewmodel_base_viewhands_iw7_flir");
 
-  foreach(var2 in anim.flirfootprints) {
-    var2 scripts\anim\notetracks_sp::play_flir_footstep_fx();
+  foreach(var_2 in anim.flirfootprints) {
+    var_2 scripts\anim\notetracks_sp::play_flir_footstep_fx();
   }
 
   lerp_sunintensity(self.nvg.ogsunintensity, 0, 0.2);
@@ -318,36 +318,36 @@ function nvg_flir_off() {
   self setviewmodel(self.nvg.origviewmodel);
   scripts\sp\nvg\nvg_ai::dont_do_flir_footsteps();
 
-  foreach(var1 in anim.flirfootprints) {
-    var1 scripts\anim\notetracks_sp::kill_flir_footstep_fx();
+  foreach(var_1 in anim.flirfootprints) {
+    var_1 scripts\anim\notetracks_sp::kill_flir_footstep_fx();
   }
 
   lerp_sunintensity(0, self.nvg.ogsunintensity, 0.2);
 }
 
-function lerp_sunintensity(var0, var1, var2) {
-  thread lerp_sunintensity_internal(var0, var1, var2);
+function lerp_sunintensity(var_0, var_1, var_2) {
+  thread lerp_sunintensity_internal(var_0, var_1, var_2);
 }
 
-function lerp_sunintensity_internal(var0, var1, var2) {
+function lerp_sunintensity_internal(var_0, var_1, var_2) {
   level notify("lerp_sunintensity");
   level endon("lerp_sunintensity");
-  var3 = var1 - var0;
-  var4 = 0.05;
-  var5 = int(var2 / var4);
+  var_3 = var_1 - var_0;
+  var_4 = 0.05;
+  var_5 = int(var_2 / var_4);
 
-  if(var5 > 0) {
-    var6 = var3 / var5;
+  if(var_5 > 0) {
+    var_6 = var_3 / var_5;
 
-    while(var5) {
-      var0 += var6;
-      setsuncolorandintensity(var0);
-      wait var4;
-      var5--;
+    while(var_5) {
+      var_0 += var_6;
+      setsuncolorandintensity(var_0);
+      wait var_4;
+      var_5--;
     }
   }
 
-  setsuncolorandintensity(var1);
+  setsuncolorandintensity(var_1);
 }
 
 function track_player_light_meter() {
@@ -359,58 +359,58 @@ function track_player_light_meter() {
 
   self.nvg.prevlightmeter = 1;
   self.nvg.lightmeter = 1;
-  var0 = 1;
-  var1 = 0;
+  var_0 = 1;
+  var_1 = 0;
   thread light_meter_hud();
-  var2 = 0;
-  var3 = (0, 0, 0);
-  var4 = 0.45;
+  var_2 = 0;
+  var_3 = (0, 0, 0);
+  var_4 = 0.45;
 
   for(;;) {
-    var4 = 0.1;
-    var0 = self getplayerlightlevel();
-    lightmeter_lerp_lightmeter(var0, var4);
+    var_4 = 0.1;
+    var_0 = self getplayerlightlevel();
+    lightmeter_lerp_lightmeter(var_0, var_4);
 
-    if(self.nvg.lightmeter < 0.5 && !var1) {
+    if(self.nvg.lightmeter < 0.5 && !var_1) {
       scripts\engine\utility::ent_flag_set("in_the_dark");
-      var1 = 1;
+      var_1 = 1;
       continue;
     }
 
-    if(self.nvg.lightmeter >= 0.5 && var1) {
+    if(self.nvg.lightmeter >= 0.5 && var_1) {
       scripts\engine\utility::ent_flag_clear("in_the_dark");
-      var1 = 0;
+      var_1 = 0;
     }
   }
 }
 
 function light_meter_hud() {
-  var0 = spawnStruct();
-  var0.mag = 0.02;
-  var0.period_min = 0.05;
-  var0.period_max = 0.15;
-  var0.data = [];
-  var0.data["old"] = 0;
-  var0.data["period"] = 0;
-  var0.data["target"] = 0;
-  var0.data["val"] = 0;
-  var0.data["time"] = 0;
+  var_0 = spawnStruct();
+  var_0.mag = 0.02;
+  var_0.period_min = 0.05;
+  var_0.period_max = 0.15;
+  var_0.data = [];
+  var_0.data["old"] = 0;
+  var_0.data["period"] = 0;
+  var_0.data["target"] = 0;
+  var_0.data["val"] = 0;
+  var_0.data["time"] = 0;
 
-  for(var1 = 0;; var1 = 0) {
+  for(var_1 = 0;; var_1 = 0) {
     self.nvg waittill("update_nvg_hud");
-    needle_noise(var0);
-    var2 = self.nvg.lightmeter;
-    var2 = clamp(var2, var0.mag, 1 - var0.mag);
-    var2 += var0.data["val"];
-    setomnvar("ui_nvg_light_meter_needle", var2);
+    needle_noise(var_0);
+    var_2 = self.nvg.lightmeter;
+    var_2 = clamp(var_2, var_0.mag, 1 - var_0.mag);
+    var_2 += var_0.data["val"];
+    setomnvar("ui_nvg_light_meter_needle", var_2);
 
-    if(var2 >= 0.9 && is_nvg_on() && !var1) {
+    if(var_2 >= 0.9 && is_nvg_on() && !var_1) {
       self playSound("item_nightvision_lightmeter_warning");
-      var1 = 1;
+      var_1 = 1;
       continue;
     }
 
-    if(var2 < 0.9 && is_nvg_on() && var1) {}
+    if(var_2 < 0.9 && is_nvg_on() && var_1) {}
   }
 }
 
@@ -422,27 +422,27 @@ function needle_noise() {
     self.data["target"] = randomfloatrange(self.mag * -1, self.mag);
   }
 
-  var0 = scripts\engine\math::normalize_value(0, self.data["period"], self.data["time"]);
-  var0 = scripts\engine\math::normalized_float_smoth_in_out(var0);
-  self.data["val"] = self.data["old"] * (1 - var0) + self.data["target"] * var0;
+  var_0 = scripts\engine\math::normalize_value(0, self.data["period"], self.data["time"]);
+  var_0 = scripts\engine\math::normalized_float_smoth_in_out(var_0);
+  self.data["val"] = self.data["old"] * (1 - var_0) + self.data["target"] * var_0;
   self.data["time"] = self.data["time"] + 0.05;
 }
 
-function lightmeter_lerp_lightmeter(var0, var1) {
-  var2 = self.nvg.lightmeter;
-  var3 = var0 - var2;
-  var4 = 0.05;
-  var5 = int(var1 / var4);
-  var6 = var3 / var5;
+function lightmeter_lerp_lightmeter(var_0, var_1) {
+  var_2 = self.nvg.lightmeter;
+  var_3 = var_0 - var_2;
+  var_4 = 0.05;
+  var_5 = int(var_1 / var_4);
+  var_6 = var_3 / var_5;
 
-  while(var5) {
+  while(var_5) {
     self.nvg.prevlightmeter = self.nvg.lightmeter;
-    self.nvg.lightmeter += var6;
+    self.nvg.lightmeter += var_6;
     self.nvg notify("update_nvg_hud");
-    wait var4;
-    var5--;
+    wait var_4;
+    var_5--;
   }
 
   self.nvg.prevlightmeter = self.nvg.lightmeter;
-  self.nvg.lightmeter = var0;
+  self.nvg.lightmeter = var_0;
 }

@@ -3,93 +3,93 @@
  * Script: scripts\engine\scriptable_door.gsc
 ***********************************************/
 
-function scriptable_door_timer_elapsed(var0, var1) {
-  if(!isDefined(var0)) {
+function scriptable_door_timer_elapsed(var_0, var_1) {
+  if(!isDefined(var_0)) {
     return true;
   }
 
-  if(gettime() - var0 > var1) {
+  if(gettime() - var_0 > var_1) {
     return true;
   }
 
   return false;
 }
 
-function scriptable_door_side_flip(var0) {
-  if(var0 == "left") {
+function scriptable_door_side_flip(var_0) {
+  if(var_0 == "left") {
     return "right";
   }
 
   return "left";
 }
 
-function scriptable_door_side_get_for_state(var0) {
-  if(issubstr(var0, "left")) {
+function scriptable_door_side_get_for_state(var_0) {
+  if(issubstr(var_0, "left")) {
     return "left";
   }
 
-  if(issubstr(var0, "right")) {
+  if(issubstr(var_0, "right")) {
     return "right";
   }
 
   return "none";
 }
 
-function scriptable_door_state_name_make(var0, var1) {
-  return var0 + "_" + var1;
+function scriptable_door_state_name_make(var_0, var_1) {
+  return var_0 + "_" + var_1;
 }
 
 function scriptable_door_get_angle_delta() {
-  var0 = angleclamp180(self.angles[1]);
+  var_0 = angleclamp180(self.angles[1]);
 
-  if(self.baseangle < 0 && var0 > 0) {
-    var0 -= 360;
+  if(self.baseangle < 0 && var_0 > 0) {
+    var_0 -= 360;
   }
 
-  if(self.baseangle > 0 && var0 < 0) {
-    var0 += 360;
+  if(self.baseangle > 0 && var_0 < 0) {
+    var_0 += 360;
   }
 
-  var1 = var0 - self.baseangle;
-  return abs(var1);
+  var_1 = var_0 - self.baseangle;
+  return abs(var_1);
 }
 
-function scriptable_door_get_angle_step_begin(var0) {
-  var1 = int(var0 / float(10)) * 10;
-  var1 += 10;
+function scriptable_door_get_angle_step_begin(var_0) {
+  var_1 = int(var_0 / float(10)) * 10;
+  var_1 += 10;
 
-  if(var1 < 20) {
-    var1 = 20;
+  if(var_1 < 20) {
+    var_1 = 20;
   }
 
-  if(var1 >= 90) {
-    var1 = 90;
+  if(var_1 >= 90) {
+    var_1 = 90;
   }
 
-  return var1;
+  return var_1;
 }
 
-function scriptable_door_get_closest_state(var0, var1, var2) {
-  var3 = scriptable_door_get_angle_step_begin(var2);
-  var4 = var3;
+function scriptable_door_get_closest_state(var_0, var_1, var_2) {
+  var_3 = scriptable_door_get_angle_step_begin(var_2);
+  var_4 = var_3;
 
-  while(var4 <= 90) {
-    var5 = scriptable_door_state_name_make(var1, var4);
+  while(var_4 <= 90) {
+    var_5 = scriptable_door_state_name_make(var_1, var_4);
 
-    if(self getscriptableparthasstate(var0, var5)) {
-      return var5;
+    if(self getscriptableparthasstate(var_0, var_5)) {
+      return var_5;
     }
 
-    var4 += 10;
+    var_4 += 10;
   }
 
-  var5 = scriptable_door_state_name_make(var1, 90);
-  return var5;
+  var_5 = scriptable_door_state_name_make(var_1, 90);
+  return var_5;
 }
 
 function scriptable_door_init() {
-  var0 = self getscriptablepartstateeventfield("door", "setup", "scriptable_event_model", "radius");
-  self.panelwidth = var0 * 0.5;
+  var_0 = self getscriptablepartstateeventfield("door", "setup", "scriptable_event_model", "radius");
+  self.panelwidth = var_0 * 0.5;
   self.baseangle = angleclamp180(self.angles[1]);
 }
 
@@ -105,22 +105,22 @@ function scriptable_door_unclaim_think() {
       return;
     }
 
-    var0 = scripts\engine\math::vector_project_endpoint(self.origin, self.angles, self.panelwidth * 0.5);
+    var_0 = scripts\engine\math::vector_project_endpoint(self.origin, self.angles, self.panelwidth * 0.5);
 
-    if(distancesquared(self.owner.origin, var0) > squared(self.panelwidth)) {
+    if(distancesquared(self.owner.origin, var_0) > squared(self.panelwidth)) {
       scriptable_door_unclaim();
       return;
     }
   }
 }
 
-function scriptable_door_claim(var0) {
-  self.owner = var0;
+function scriptable_door_claim(var_0) {
+  self.owner = var_0;
   thread scriptable_door_unclaim_think();
 }
 
-function scriptable_door_claim_update_on_state_change(var0, var1) {
-  if(var1 == "closed") {
+function scriptable_door_claim_update_on_state_change(var_0, var_1) {
+  if(var_1 == "closed") {
     if(isDefined(self.owner)) {
       scriptable_door_unclaim();
       return;
@@ -130,16 +130,16 @@ function scriptable_door_claim_update_on_state_change(var0, var1) {
   }
 
   if(!isDefined(self.owner)) {
-    scriptable_door_claim(var0);
+    scriptable_door_claim(var_0);
     return;
   }
 }
 
-function bashopen(var0) {
-  if(isDefined(var0) && isPlayer(var0)) {
-    if(!isai(var0)) {
-      var0 playRumbleOnEntity("grenade_rumble");
-      var0 earthquakeforplayer(0.35, 0.5, var0.origin, 200);
+function bashopen(var_0) {
+  if(isDefined(var_0) && isPlayer(var_0)) {
+    if(!isai(var_0)) {
+      var_0 playRumbleOnEntity("grenade_rumble");
+      var_0 earthquakeforplayer(0.35, 0.5, var_0.origin, 200);
       return;
     }
 
@@ -147,24 +147,24 @@ function bashopen(var0) {
   }
 }
 
-function shouldbashopen(var0) {
-  if(!isalive(var0) || isDefined(var0.fauxdead)) {
+function shouldbashopen(var_0) {
+  if(!isalive(var_0) || isDefined(var_0.fauxdead)) {
     return false;
   }
 
-  var1 = anglesToForward(var0.angles);
-  var2 = scripts\engine\math::vector_project_endpoint(self.origin, self.angles, self.panelwidth * 0.5);
-  var2 += (0, 0, self.panelwidth);
+  var_1 = anglesToForward(var_0.angles);
+  var_2 = scripts\engine\math::vector_project_endpoint(self.origin, self.angles, self.panelwidth * 0.5);
+  var_2 += (0, 0, self.panelwidth);
 
-  if(scripts\engine\utility::within_fov(var0.origin + var1 * -45, var0.angles, var2, cos(43))) {
-    var3 = anglestoright(self.angles);
-    var4 = vectorNormalize(var2 - var0 getEye());
-    var5 = vectordot(var1, var4);
-    var6 = vectordot(var1, var3);
-    var7 = var0 getvelocity();
-    var8 = vectordot(vectorNormalize(var7), (0, 0, 1));
+  if(scripts\engine\utility::within_fov(var_0.origin + var_1 * -45, var_0.angles, var_2, cos(43))) {
+    var_3 = anglestoright(self.angles);
+    var_4 = vectorNormalize(var_2 - var_0 getEye());
+    var_5 = vectordot(var_1, var_4);
+    var_6 = vectordot(var_1, var_3);
+    var_7 = var_0 getvelocity();
+    var_8 = vectordot(vectorNormalize(var_7), (0, 0, 1));
 
-    if(length(var7) >= 200 && abs(var8) < 0.5 && abs(var6) > 0.75 && var5 > 0.75) {
+    if(length(var_7) >= 200 && abs(var_8) < 0.5 && abs(var_6) > 0.75 && var_5 > 0.75) {
       return true;
     }
   }
@@ -172,10 +172,10 @@ function shouldbashopen(var0) {
   return false;
 }
 
-function scriptable_door_hinge_progression(var0, var1) {
-  var2 = "door";
+function scriptable_door_hinge_progression(var_0, var_1) {
+  var_2 = "door";
 
-  if(isDefined(self.owner) && var0 != self.owner) {
+  if(isDefined(self.owner) && var_0 != self.owner) {
     return;
   }
 
@@ -183,14 +183,14 @@ function scriptable_door_hinge_progression(var0, var1) {
     scriptable_door_init();
   }
 
-  var3 = self getscriptablepartstate(var2);
-  var4 = var3 == "closed" || var3 == "setup";
-  var5 = 0;
+  var_3 = self getscriptablepartstate(var_2);
+  var_4 = var_3 == "closed" || var_3 == "setup";
+  var_5 = 0;
 
-  if(var4) {
-    if(var1 == "touch") {
-      if(shouldbashopen(var0)) {
-        var5 = 1;
+  if(var_4) {
+    if(var_1 == "touch") {
+      if(shouldbashopen(var_0)) {
+        var_5 = 1;
       } else {
         return;
       }
@@ -199,56 +199,56 @@ function scriptable_door_hinge_progression(var0, var1) {
     }
   }
 
-  var6 = scripts\engine\math::vector_project_endpoint(self.origin, self.angles, self.panelwidth);
-  var7 = scripts\engine\math::point_side_of_line2d(var0.origin, self.origin, var6);
-  var8 = scriptable_door_side_flip(var7);
-  var9 = scriptable_door_side_get_for_state(var3);
-  var10 = scriptable_door_state_name_make(var8, 90);
-  var11 = "none";
+  var_6 = scripts\engine\math::vector_project_endpoint(self.origin, self.angles, self.panelwidth);
+  var_7 = scripts\engine\math::point_side_of_line2d(var_0.origin, self.origin, var_6);
+  var_8 = scriptable_door_side_flip(var_7);
+  var_9 = scriptable_door_side_get_for_state(var_3);
+  var_10 = scriptable_door_state_name_make(var_8, 90);
+  var_11 = "none";
 
-  if(var4) {
-    var11 = var10;
+  if(var_4) {
+    var_11 = var_10;
 
-    if(!self getscriptableparthasstate(var2, var11)) {
-      var11 = scriptable_door_state_name_make(var7, 90);
+    if(!self getscriptableparthasstate(var_2, var_11)) {
+      var_11 = scriptable_door_state_name_make(var_7, 90);
     }
-  } else if(var8 != var9) {
-    var11 = "closed";
-  } else if(var1 == "touch") {
-    var11 = var10;
+  } else if(var_8 != var_9) {
+    var_11 = "closed";
+  } else if(var_1 == "touch") {
+    var_11 = var_10;
   } else if(!scriptable_door_timer_elapsed(self.lasthingechange, 700)) {
-    var12 = scriptable_door_get_angle_delta();
-    var11 = scriptable_door_get_closest_state(var2, var8, var12);
+    var_12 = scriptable_door_get_angle_delta();
+    var_11 = scriptable_door_get_closest_state(var_2, var_8, var_12);
   } else {
-    var11 = "closed";
+    var_11 = "closed";
   }
 
-  if(var11 == var3) {
+  if(var_11 == var_3) {
     return;
   }
 
-  if(!self getscriptableparthasstate(var2, var11)) {
+  if(!self getscriptableparthasstate(var_2, var_11)) {
     return;
   }
 
-  if(var11 == "closed") {
+  if(var_11 == "closed") {
     self setscriptableuselargerbounds(1);
   } else {
     self setscriptableuselargerbounds(0);
 
-    if(var5) {
-      thread bashopen(var0);
+    if(var_5) {
+      thread bashopen(var_0);
     }
   }
 
-  scriptable_door_claim_update_on_state_change(var0, var11);
-  thread scriptable_door_auto_close(var2, var11);
-  self setscriptablepartstate(var2, var11);
+  scriptable_door_claim_update_on_state_change(var_0, var_11);
+  thread scriptable_door_auto_close(var_2, var_11);
+  self setscriptablepartstate(var_2, var_11);
   self.lasthingechange = gettime();
-  var0 notify("use_scriptable_door", self, var0, var2, var11);
+  var_0 notify("use_scriptable_door", self, var_0, var_2, var_11);
 }
 
-function scriptable_door_auto_close(var0, var1) {
+function scriptable_door_auto_close(var_0, var_1) {
   if(!isDefined(level.scriptable_door_autoclose_delay)) {
     return;
   }
@@ -260,55 +260,55 @@ function scriptable_door_auto_close(var0, var1) {
     level.scriptable_doors_opened = [];
   }
 
-  if(var1 == "closed") {
+  if(var_1 == "closed") {
     level.scriptable_doors_opened[self.index] = undefined;
     return;
   }
 
   level.scriptable_doors_opened[self.index] = self;
   scripts\engine\utility::waittill_notify_or_timeout("scriptable_door_auto_close", level.scriptable_door_autoclose_delay);
-  var2 = self getscriptablepartstate(var0);
+  var_2 = self getscriptablepartstate(var_0);
 
-  if(var2 == "closed") {
+  if(var_2 == "closed") {
     return;
   }
 
   self setscriptableuselargerbounds(1);
-  self setscriptablepartstate(var0, "closed");
+  self setscriptablepartstate(var_0, "closed");
   self.lasthingechange = gettime();
   level.scriptable_doors_opened[self.index] = undefined;
 }
 
-function scriptable_door_scriptable_used_callback(var0, var1, var2, var3, var4) {
-  thread scriptable_door_hinge_progression(var0, var3);
+function scriptable_door_scriptable_used_callback(var_0, var_1, var_2, var_3, var_4) {
+  thread scriptable_door_hinge_progression(var_0, var_3);
 
-  if(isDefined(var0.target)) {
-    var5 = getentitylessscriptablearrayinradius(var0.target, "targetname");
+  if(isDefined(var_0.target)) {
+    var_5 = getentitylessscriptablearrayinradius(var_0.target, "targetname");
 
-    foreach(var7 in var5) {
-      if(var7 getscriptablehaspart("door")) {
-        thread scriptable_door_hinge_progression(var7, var3);
+    foreach(var_7 in var_5) {
+      if(var_7 getscriptablehaspart("door")) {
+        thread scriptable_door_hinge_progression(var_7, var_3);
       }
     }
   }
 }
 
-function scriptable_door_scriptable_touched_callback(var0, var1, var2, var3) {
-  if(var1 == "door") {
-    thread scriptable_door_hinge_progression(var0, var3);
+function scriptable_door_scriptable_touched_callback(var_0, var_1, var_2, var_3) {
+  if(var_1 == "door") {
+    thread scriptable_door_hinge_progression(var_0, var_3);
     return;
   }
 }
 
 function scriptable_door_postinit() {
-  var0 = getentitylessscriptablearrayinradius(undefined, undefined, undefined, undefined, "door");
+  var_0 = getentitylessscriptablearrayinradius(undefined, undefined, undefined, undefined, "door");
 
-  foreach(var2 in var0) {
-    var2 setscriptableuselargerbounds(1);
-    var3 = anglesToForward(var2.angles);
-    var4 = var2.origin + var3 * 54 * 0.5;
-    var2.heli_intro_vo_done = var4;
-    var2.heli_intro = var2.angles;
+  foreach(var_2 in var_0) {
+    var_2 setscriptableuselargerbounds(1);
+    var_3 = anglesToForward(var_2.angles);
+    var_4 = var_2.origin + var_3 * 54 * 0.5;
+    var_2.heli_intro_vo_done = var_4;
+    var_2.heli_intro = var_2.angles;
   }
 }
 
@@ -323,12 +323,12 @@ function system_init() {
   level.scriptable_door_initialized = 1;
 }
 
-function scriptable_door_enable_autoclose(var0) {
-  if(!isDefined(var0)) {
-    var0 = 20;
+function scriptable_door_enable_autoclose(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 20;
   }
 
-  level.scriptable_door_autoclose_delay = var0;
+  level.scriptable_door_autoclose_delay = var_0;
 }
 
 function scriptable_door_disable_autoclose() {
@@ -342,8 +342,8 @@ function scriptable_door_disable_autoclose() {
     return;
   }
 
-  foreach(var1 in level.scriptable_doors_opened) {
-    var1 notify("door_wait_auto_close");
+  foreach(var_1 in level.scriptable_doors_opened) {
+    var_1 notify("door_wait_auto_close");
   }
 
   level.scriptable_doors_opened = [];
@@ -354,14 +354,14 @@ function scriptable_door_close_all_doors() {
     return;
   }
 
-  var0 = 0;
+  var_0 = 0;
 
-  foreach(var2 in level.scriptable_doors_opened) {
-    var2 notify("scriptable_door_auto_close");
-    var0++;
+  foreach(var_2 in level.scriptable_doors_opened) {
+    var_2 notify("scriptable_door_auto_close");
+    var_0++;
 
-    if(var0 % 20 == 0) {
-      var0 = 0;
+    if(var_0 % 20 == 0) {
+      var_0 = 0;
       waitframe();
     }
   }

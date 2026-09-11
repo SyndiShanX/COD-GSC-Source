@@ -3,4 +3,4 @@
  * Script: scripts\anim\shoot_behavior.gsc
 ***********************************************/
 
-function decidewhatandhowtoshoot(var0) {}
+function decidewhatandhowtoshoot(var_0) {}

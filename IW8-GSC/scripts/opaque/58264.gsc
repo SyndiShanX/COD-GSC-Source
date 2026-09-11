@@ -12,23 +12,23 @@ function init_fx() {
   level._effect["vfx_explosive_bow_explosion"] = loadfx("vfx/iw8/weap/_explo/vfx_explo_explosive_bow.vfx");
 }
 
-function ref_13e28(var0) {
-  var1 = self;
-  var2 = ref_13e29(var1, var0);
+function ref_13e28(var_0) {
+  var_1 = self;
+  var_2 = ref_13e29(var_1, var_0);
 
-  if(!var2) {
+  if(!var_2) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
       self[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/CANNOT_BE_USED");
     }
   }
 
-  return var2;
+  return var_2;
 }
 
 function ref_13e0f() {
-  var0 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("explosive_bow", self);
-  var0.ref_133ce = 1;
-  return ref_13e29(var0, 1);
+  var_0 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("explosive_bow", self);
+  var_0.ref_133ce = 1;
+  return ref_13e29(var_0, 1);
 }
 
 function get_actor_stance() {
@@ -59,7 +59,7 @@ function get_actor_stance() {
   return true;
 }
 
-function ref_13e29(var0, var1) {
+function ref_13e29(var_0, var_1) {
   self endon("disconnect");
   level endon("game_ended");
 
@@ -68,29 +68,29 @@ function ref_13e29(var0, var1) {
   }
 
   if(isDefined(level.killstreaktriggeredfunc)) {
-    if(!level[[level.killstreaktriggeredfunc]](var0)) {
+    if(!level[[level.killstreaktriggeredfunc]](var_0)) {
       return 0;
     }
   }
 
   if(isDefined(level.killstreakbeginusefunc)) {
-    if(!level[[level.killstreakbeginusefunc]](var0)) {
+    if(!level[[level.killstreakbeginusefunc]](var_0)) {
       return 0;
     }
   }
 
-  var2 = laststandrevivedecayscale();
+  var_2 = laststandrevivedecayscale();
 
-  if(!istrue(var2)) {
-    return var2;
+  if(!istrue(var_2)) {
+    return var_2;
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "logKillstreakEvent")) {
-    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "logKillstreakEvent")]](var0.streakname, self.origin);
+    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "logKillstreakEvent")]](var_0.streakname, self.origin);
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "teamPlayerCardSplash")) {
-    self thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "teamPlayerCardSplash")]]("used_" + var0.streakname, self);
+    self thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "teamPlayerCardSplash")]]("used_" + var_0.streakname, self);
   }
 
   return 1;
@@ -99,35 +99,35 @@ function ref_13e29(var0, var1) {
 function laststandrevivedecayscale() {
   scripts\common\utility::brjugg_droponplayerdeath(0, "explosive_bow");
   thread move_arena_startspawns();
-  var0 = scripts\mp\utility\weapon::getweaponrootname("iw8_sn_t9explosivebow_mp");
-  var1 = scripts\mp\class::fixcollision(var0, undefined, undefined, -1, undefined, undefined, 0);
+  var_0 = scripts\mp\utility\weapon::getweaponrootname("iw8_sn_t9explosivebow_mp");
+  var_1 = scripts\mp\class::fixcollision(var_0, undefined, undefined, -1, undefined, undefined, 0);
   self.chopper_boss_combat = 1;
 
-  if(self hasweapon(var1)) {
-    scripts\cp_mp\utility\inventory_utility::_takeweapon(var1);
+  if(self hasweapon(var_1)) {
+    scripts\cp_mp\utility\inventory_utility::_takeweapon(var_1);
   }
 
-  self giveweapon(var1);
+  self giveweapon(var_1);
 
   if(isDefined(self.spawnx1stashlootcache) && self.spawnx1stashlootcache) {
-    self setweaponammoclip(var1, 1);
-    self setweaponammostock(var1, self.spawnx1stashlootcache - 1);
+    self setweaponammoclip(var_1, 1);
+    self setweaponammostock(var_1, self.spawnx1stashlootcache - 1);
     self.spawnx1stashlootcache = undefined;
   } else {
-    self setweaponammoclip(var1, weaponclipsize(var1));
-    self setweaponammostock(var1, weaponstartammo(var1, 0));
+    self setweaponammoclip(var_1, weaponclipsize(var_1));
+    self setweaponammostock(var_1, weaponstartammo(var_1, 0));
   }
 
-  scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate(var1);
-  scripts\mp\weapons::fixupplayerweapons(self, var0);
-  self.spawnx1stashlootcache = self getammocount(var1);
+  scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate(var_1);
+  scripts\mp\weapons::fixupplayerweapons(self, var_0);
+  self.spawnx1stashlootcache = self getammocount(var_1);
   self notify("explosive_bow_equipped");
-  thread ref_144f9(var1, "weapon_taken");
-  thread ref_144f9(var1, "weapon_dropped");
-  thread ref_14495(var1);
-  thread ref_144fb(var1);
-  thread ref_144f2(var1);
-  thread ref_14490(var1);
+  thread ref_144f9(var_1, "weapon_taken");
+  thread ref_144f9(var_1, "weapon_dropped");
+  thread ref_14495(var_1);
+  thread ref_144fb(var_1);
+  thread ref_144f2(var_1);
+  thread ref_14490(var_1);
   return true;
 }
 
@@ -141,75 +141,75 @@ function move_arena_startspawns() {
   }
 }
 
-function ref_144f9(var0, var1) {
+function ref_144f9(var_0, var_1) {
   self endon("disconnect");
   self endon("exit_bow");
 
   for(;;) {
-    self waittill(var1, var2);
+    self waittill(var_1, var_2);
 
-    if(var2 == var0) {
-      ref_138fb(var0);
+    if(var_2 == var_0) {
+      ref_138fb(var_0);
     }
 
     waitframe();
   }
 }
 
-function ref_14495(var0) {
+function ref_14495(var_0) {
   self endon("disconnect");
   self endon("stop_explosive_bow_cancel_watcher");
   self waittill("cancel_all_killstreak_deployments");
   self notify("exit_bow");
   thread handletrex();
-  scripts\cp_mp\utility\inventory_utility::getridofweapon(var0);
+  scripts\cp_mp\utility\inventory_utility::getridofweapon(var_0);
   thread mlgpoint();
 }
 
-function ref_144fb(var0) {
+function ref_144fb(var_0) {
   self endon("disconnect");
   self endon("exit_bow");
 
   for(;;) {
-    self waittill("weapon_change", var1);
+    self waittill("weapon_change", var_1);
 
-    if(self hasweapon(var0) && var1 != var0) {
-      if(var1.basename == "armor_plate_deploy_mp") {
+    if(self hasweapon(var_0) && var_1 != var_0) {
+      if(var_1.basename == "armor_plate_deploy_mp") {
         self.debug_printcode = self.lastdroppableweaponobj;
-        scripts\mp\weapons::ref_1316b(var0);
-      } else if(!self isonladder() && !(var1.ismelee && self ismeleeing())) {
-        ref_138fb(var0);
+        scripts\mp\weapons::ref_1316b(var_0);
+      } else if(!self isonladder() && !(var_1.ismelee && self ismeleeing())) {
+        ref_138fb(var_0);
       }
 
       continue;
     }
 
-    if(var1 == var0 && isDefined(self.debug_printcode)) {
+    if(var_1 == var_0 && isDefined(self.debug_printcode)) {
       scripts\mp\weapons::ref_1316b(self.debug_printcode);
       self.debug_printcode = undefined;
     }
   }
 }
 
-function ref_144f2(var0) {
+function ref_144f2(var_0) {
   self endon("disconnect");
   self endon("exit_bow");
 
   for(;;) {
     self waittill("weapon_fired");
 
-    if(!self hasweapon(var0)) {
+    if(!self hasweapon(var_0)) {
       self notify("stop_explosive_bow_cancel_watcher");
       thread handletrex();
       return;
     }
 
-    self.spawnx1stashlootcache = self getammocount(var0);
+    self.spawnx1stashlootcache = self getammocount(var_0);
 
     if(self.spawnx1stashlootcache == 0) {
       self.spawnx1stashlootcache = undefined;
       thread handletrex();
-      thread ref_144ee(var0);
+      thread ref_144ee(var_0);
       self notify("stop_explosive_bow_cancel_watcher");
       self notify("exit_bow");
     }
@@ -218,30 +218,30 @@ function ref_144f2(var0) {
   }
 }
 
-function ref_144ee(var0) {
+function ref_144ee(var_0) {
   self endon("disconnect");
-  self waittill("weapon_change", var1);
-  self takeweapon(var0);
+  self waittill("weapon_change", var_1);
+  self takeweapon(var_0);
 }
 
-function ref_14490(var0) {
+function ref_14490(var_0) {
   self endon("disconnect");
   self endon("cleanup_explosive_bow");
 
   for(;;) {
-    self waittill("bullet_first_impact", var1, var2, var3, var4, var5, var6, var7, var8, var9);
+    self waittill("bullet_first_impact", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-    if(var5 == var0) {
-      var10 = vectortoangles(var3);
-      var11 = anglesToForward(var10);
-      var12 = anglestoright(var10);
-      var13 = anglestoup(var10);
-      var14 = playFX(scripts\engine\utility::getfx("vfx_explosive_bow_explosion"), var7, var11, var13);
-      var14 unmarkkeyframedmover(1);
-      playsoundatpos(var7, "frag_grenade_expl_trans");
-      earthquake(0.45, 0.7, var7, 800);
-      playrumbleonposition("grenade_rumble", var7);
-      physicsexplosionsphere(var7, 800, 0, 1);
+    if(var_5 == var_0) {
+      var_10 = vectortoangles(var_3);
+      var_11 = anglesToForward(var_10);
+      var_12 = anglestoright(var_10);
+      var_13 = anglestoup(var_10);
+      var_14 = playFX(scripts\engine\utility::getfx("vfx_explosive_bow_explosion"), var_7, var_11, var_13);
+      var_14 unmarkkeyframedmover(1);
+      playsoundatpos(var_7, "frag_grenade_expl_trans");
+      earthquake(0.45, 0.7, var_7, 800);
+      playrumbleonposition("grenade_rumble", var_7);
+      physicsexplosionsphere(var_7, 800, 0, 1);
     }
   }
 }
@@ -255,8 +255,8 @@ function handletrex() {
   self notify("cleanup_explosive_bow");
 }
 
-function ref_138fb(var0) {
-  self takeweapon(var0);
+function ref_138fb(var_0) {
+  self takeweapon(var_0);
 
   if(isDefined(self.spawnx1stashlootcache) && self.spawnx1stashlootcache != 0) {
     self notify("stop_explosive_bow_cancel_watcher");
@@ -268,15 +268,15 @@ function ref_138fb(var0) {
 }
 
 function mlgpoint() {
-  var0 = scripts\mp\gametypes\br_pickups::test_ai_anim();
-  var1 = scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(var0, self.origin, self.angles, self);
-  scripts\mp\gametypes\br_pickups::spawnpickup("brloot_killstreak_explosive_bow", var1);
+  var_0 = scripts\mp\gametypes\br_pickups::test_ai_anim();
+  var_1 = scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(var_0, self.origin, self.angles, self);
+  scripts\mp\gametypes\br_pickups::spawnpickup("brloot_killstreak_explosive_bow", var_1);
 }
 
 function playerorigin() {
-  var0 = level.gametype == "br";
+  var_0 = level.gametype == "br";
 
-  if(var0) {
+  if(var_0) {
     scripts\mp\gametypes\br_pickups::playerpackdataintogulagomnvar("explosive_bow", 1, 0);
     return;
   }

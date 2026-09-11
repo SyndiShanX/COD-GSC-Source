@@ -11,11 +11,11 @@ function setupcqbpointsofinterest() {
 
 function gatherdynamiccqbstructs() {
   waittillframeend();
-  var0 = "poi";
-  var1 = scripts\engine\utility::getStructArray(var0, "targetname");
+  var_0 = "poi";
+  var_1 = scripts\engine\utility::getStructArray(var_0, "targetname");
 
-  foreach(var3 in var1) {
-    level.cqbpointsofinterest[level.cqbpointsofinterest.size] = var3;
+  foreach(var_3 in var_1) {
+    level.cqbpointsofinterest[level.cqbpointsofinterest.size] = var_3;
   }
 }
 
@@ -28,61 +28,61 @@ function findcqbpointsofinterest() {
   waitframe();
 
   for(;;) {
-    var0 = level.poi_activeai;
+    var_0 = level.poi_activeai;
 
-    if(!isDefined(var0)) {
+    if(!isDefined(var_0)) {
       waitframe();
       continue;
     }
 
-    var1 = [];
-    var2 = 0;
+    var_1 = [];
+    var_2 = 0;
 
-    foreach(var4 in var0) {
-      if(isalive(var4)) {
-        var4.cqb_point_of_interest = findbestpoi(var4);
+    foreach(var_4 in var_0) {
+      if(isalive(var_4)) {
+        var_4.cqb_point_of_interest = findbestpoi(var_4);
         wait 0.05;
-        var2 = 1;
+        var_2 = 1;
         continue;
       }
 
-      var1 = var4;
+      var_1 = var_4;
     }
 
-    foreach(var4 in var1) {
-      level.poi_activeai = scripts\engine\utility::array_remove(level.poi_activeai, var4);
+    foreach(var_4 in var_1) {
+      level.poi_activeai = scripts\engine\utility::array_remove(level.poi_activeai, var_4);
     }
 
-    if(!var2) {
+    if(!var_2) {
       wait 0.25;
     }
   }
 }
 
 function findbestpoi() {
-  var0 = 5000;
-  var1 = isDefined(self.pathgoalpos);
-  var2 = isDefined(self.currentpoi);
+  var_0 = 5000;
+  var_1 = isDefined(self.pathgoalpos);
+  var_2 = isDefined(self.currentpoi);
 
-  if(!var2 && isDefined(self.poi_firstpoint)) {
+  if(!var_2 && isDefined(self.poi_firstpoint)) {
     return findfirstpoiinlink();
   }
 
-  if(var2 && isDefined(self.currentpoi.target) || isDefined(self.nextpoi)) {
-    return findnextpoiinlink(var2);
+  if(var_2 && isDefined(self.currentpoi.target) || isDefined(self.nextpoi)) {
+    return findnextpoiinlink(var_2);
   }
 }
 
 function findfirstpoiinlink() {
   if(sighttracepassed(self getEye(), self.poi_firstpoint.origin, 0, undefined)) {
-    var0 = self.poi_firstpoint;
+    var_0 = self.poi_firstpoint;
 
-    if(isDefined(var0.target)) {
-      self.nextpoi = scripts\engine\utility::getStruct(var0.target, "targetname");
+    if(isDefined(var_0.target)) {
+      self.nextpoi = scripts\engine\utility::getStruct(var_0.target, "targetname");
     }
 
-    if(iswithinfov(var0)) {
-      return var0;
+    if(iswithinfov(var_0)) {
+      return var_0;
     }
 
     return undefined;
@@ -91,10 +91,10 @@ function findfirstpoiinlink() {
   return undefined;
 }
 
-function findnextpoiinlink(var0) {
-  var1 = undefined;
+function findnextpoiinlink(var_0) {
+  var_1 = undefined;
 
-  if(var0) {
+  if(var_0) {
     if(isDefined(self.currentpoi.target)) {
       self.nextpoi = scripts\engine\utility::getStruct(self.currentpoi.target, "targetname");
     } else {
@@ -106,14 +106,14 @@ function findnextpoiinlink(var0) {
     self.poi_firstpoint = undefined;
   }
 
-  if(var0 && isDefined(self.currentpoi.script_time_min)) {
-    var1 = self.currentpoi.script_time_min * 1000;
+  if(var_0 && isDefined(self.currentpoi.script_time_min)) {
+    var_1 = self.currentpoi.script_time_min * 1000;
   } else {
-    var1 = 1200;
+    var_1 = 1200;
   }
 
   if(!isDefined(self.nextpoi)) {
-    if(gettime() < self.poi_starttime + var1 && iswithinfov(self.currentpoi)) {
+    if(gettime() < self.poi_starttime + var_1 && iswithinfov(self.currentpoi)) {
       return self.currentpoi;
     } else {
       scripts\common\ai::poi_enable(0);
@@ -121,7 +121,7 @@ function findnextpoiinlink(var0) {
     }
   }
 
-  if(var0 && gettime() < self.poi_starttime + var1 && iswithinfov(self.currentpoi)) {
+  if(var_0 && gettime() < self.poi_starttime + var_1 && iswithinfov(self.currentpoi)) {
     return self.currentpoi;
   }
 
@@ -142,12 +142,12 @@ function findnextpoiinlink(var0) {
   return self.nextpoi;
 }
 
-function iswithinfov(var0) {
+function iswithinfov(var_0) {
   if(istrue(self.poi_disablefov)) {
     return true;
   }
 
-  var1 = anglesToForward(self.angles);
-  var2 = acos(vectordot(var1, vectorNormalize(var0.origin - self getEye())));
-  return var2 < scripts\engine\utility::ter_op(isDefined(self.poi_fovlimit), self.poi_fovlimit, 90);
+  var_1 = anglesToForward(self.angles);
+  var_2 = acos(vectordot(var_1, vectorNormalize(var_0.origin - self getEye())));
+  return var_2 < scripts\engine\utility::ter_op(isDefined(self.poi_fovlimit), self.poi_fovlimit, 90);
 }

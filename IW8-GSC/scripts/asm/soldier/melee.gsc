@@ -3,23 +3,23 @@
  * Script: scripts\asm\soldier\melee.gsc
 ***********************************************/
 
-function ischargetoreadycomplete(var0, var1, var2, var3) {
+function ischargetoreadycomplete(var_0, var_1, var_2, var_3) {
   return isDefined(self.melee) && isDefined(self.melee.breadycomplete);
 }
 
-function playmeleeanim_chargetoready_distcheck(var0) {
-  self endon(var0 + "_finished");
-  var1 = 4900;
-  var2 = scripts\asm\asm_bb::bb_getmeleetarget();
+function playmeleeanim_chargetoready_distcheck(var_0) {
+  self endon(var_0 + "_finished");
+  var_1 = 4900;
+  var_2 = scripts\asm\asm_bb::bb_getmeleetarget();
 
   for(;;) {
-    if(!isDefined(var2)) {
+    if(!isDefined(var_2)) {
       break;
     }
 
-    var3 = distancesquared(self.origin, var2.origin);
+    var_3 = distancesquared(self.origin, var_2.origin);
 
-    if(var3 <= var1) {
+    if(var_3 <= var_1) {
       if(isDefined(self.melee)) {
         self.melee.breadycomplete = 1;
       }
@@ -31,125 +31,125 @@ function playmeleeanim_chargetoready_distcheck(var0) {
   }
 }
 
-function donotetracks_vsplayer(var0, var1, var2) {
+function donotetracks_vsplayer(var_0, var_1, var_2) {
   for(;;) {
-    self waittill(var1, var3);
+    self waittill(var_1, var_3);
 
-    if(!isarray(var3)) {
-      var3 = [var3];
+    if(!isarray(var_3)) {
+      var_3 = [var_3];
     }
 
-    foreach(var5 in var3) {
-      var6 = handlenotetrack_vsplayer(var0, var1, var5);
+    foreach(var_5 in var_3) {
+      var_6 = handlenotetrack_vsplayer(var_0, var_1, var_5);
 
-      if(istrue(var6)) {
+      if(istrue(var_6)) {
         return;
       }
 
-      if(isDefined(var2)) {
-        self[[var2]](var5, var1);
+      if(isDefined(var_2)) {
+        self[[var_2]](var_5, var_1);
       }
     }
   }
 }
 
-function handlenotetrack_vsplayer(var0, var1, var2) {
-  switch (var2) {
+function handlenotetrack_vsplayer(var_0, var_1, var_2) {
+  switch (var_2) {
     case "end":
       return 1;
     case "stop":
-      var3 = scripts\asm\asm_bb::bb_getmeleetarget();
+      var_3 = scripts\asm\asm_bb::bb_getmeleetarget();
 
-      if(!isDefined(var3)) {
+      if(!isDefined(var_3)) {
         return 1;
       }
 
-      if(!isalive(var3)) {
+      if(!isalive(var_3)) {
         return 1;
       }
 
-      if(!isDefined(self.enemy) || self.enemy != var3) {
+      if(!isDefined(self.enemy) || self.enemy != var_3) {
         return 1;
       }
 
-      var4 = distancesquared(var3.origin, self.origin);
-      var5 = 4096;
+      var_4 = distancesquared(var_3.origin, self.origin);
+      var_5 = 4096;
 
       if(isDefined(self.meleestopattackdistsq)) {
-        var5 = self.meleestopattackdistsq;
+        var_5 = self.meleestopattackdistsq;
       }
 
-      if(var4 > var5) {
+      if(var_4 > var_5) {
         return 1;
       }
 
       break;
     case "fire":
-      var3 = scripts\asm\asm_bb::bb_getmeleetarget();
+      var_3 = scripts\asm\asm_bb::bb_getmeleetarget();
 
-      if(!isDefined(var3)) {
+      if(!isDefined(var_3)) {
         return 1;
       }
 
-      if(isalive(var3)) {
-        if(isPlayer(var3)) {
+      if(isalive(var_3)) {
+        if(isPlayer(var_3)) {
           if(isDefined(self.meleeignorefinalzdiff)) {
-            var6 = distance2dsquared(var3.origin, self.origin);
+            var_6 = distance2dsquared(var_3.origin, self.origin);
           } else {
-            var6 = distancesquared(var6.origin, self.origin);
+            var_6 = distancesquared(var_6.origin, self.origin);
           }
 
-          var7 = 4096;
+          var_7 = 4096;
 
           if(isDefined(self.meleebashmaxdistsq)) {
-            var7 = self.meleebashmaxdistsq;
+            var_7 = self.meleebashmaxdistsq;
           }
 
-          if(var6 <= var7) {
-            var8 = self.meleedamageoverride;
-            var9 = undefined;
-            var10 = undefined;
-            var11 = 20;
-            var12 = 0.45;
-            var13 = 0.35;
-            var14 = isDefined(var6.offhandshield) && var6.offhandshield.active;
+          if(var_6 <= var_7) {
+            var_8 = self.meleedamageoverride;
+            var_9 = undefined;
+            var_10 = undefined;
+            var_11 = 20;
+            var_12 = 0.45;
+            var_13 = 0.35;
+            var_14 = isDefined(var_6.offhandshield) && var_6.offhandshield.active;
 
             if(nullweapon(self.weapon)) {
-              var8 = self.unarmedmeleedamageoverride;
+              var_8 = self.unarmedmeleedamageoverride;
             }
 
-            if(var14) {
-              var11 = 10;
-              var12 = 0.7;
-              var13 = 0.5;
+            if(var_14) {
+              var_11 = 10;
+              var_12 = 0.7;
+              var_13 = 0.5;
               setsaveddvar("MSRSPQNQKP", 0.05);
             }
 
-            var15 = self melee(undefined, var8, sqrt(var7), var9, var10);
+            var_15 = self melee(undefined, var_8, sqrt(var_7), var_9, var_10);
 
-            if(isDefined(var15)) {
-              if(var14 && (self.unittype == "soldier" || self.unittype == "juggernaut")) {
+            if(isDefined(var_15)) {
+              if(var_14 && (self.unittype == "soldier" || self.unittype == "juggernaut")) {
                 self playSound("ai_melee_vs_shield");
               }
 
-              player_impulse_from_origin(var6, self.origin, var11);
-              earthquake(0.45, 0.35, var6.origin, 1000);
-              var6 playRumbleOnEntity("damage_heavy");
+              player_impulse_from_origin(var_6, self.origin, var_11);
+              earthquake(0.45, 0.35, var_6.origin, 1000);
+              var_6 playRumbleOnEntity("damage_heavy");
 
-              if(!var14) {
-                var6 viewkick(30, self.origin);
+              if(!var_14) {
+                var_6 viewkick(30, self.origin);
               }
             } else {
               self.nextmeleechecktime = gettime() + randomintrange(3000, 5000);
-              self.lastfailedmeleechargetarget = var6;
+              self.lastfailedmeleechargetarget = var_6;
             }
 
-            if(var14) {
+            if(var_14) {
               setsaveddvar("MSRSPQNQKP", level.playermeleedamagemultiplier_dvar);
             }
           } else {
             self.nextmeleechecktime = gettime() + randomintrange(3000, 5000);
-            self.lastfailedmeleechargetarget = var6;
+            self.lastfailedmeleechargetarget = var_6;
           }
         } else {
           self melee();
@@ -158,68 +158,68 @@ function handlenotetrack_vsplayer(var0, var1, var2) {
 
       break;
     default:
-      scripts\anim\notetracks::handlenotetrack(var3, var2);
+      scripts\anim\notetracks::handlenotetrack(var_3, var_2);
       break;
   }
 }
 
-function player_impulse_from_origin(var0, var1) {
+function player_impulse_from_origin(var_0, var_1) {
   if(!self isonground()) {
-    var1 *= 0.1;
+    var_1 *= 0.1;
   }
 
-  var2 = vectorNormalize(self.origin + (0, 0, 45) - var0);
-  var3 = var2 * var1 * 10;
-  self setvelocity(var3);
+  var_2 = vectorNormalize(self.origin + (0, 0, 45) - var_0);
+  var_3 = var_2 * var_1 * 10;
+  self setvelocity(var_3);
 }
 
 function melee_decide_winner() {
-  var0 = self.melee.target;
+  var_0 = self.melee.target;
 
   if(isDefined(self.meleealwayswin)) {
     self.melee.winner = 1;
-    var0.melee.winner = 0;
+    var_0.melee.winner = 0;
     return;
-  } else if(isDefined(var0.meleealwayswin)) {
+  } else if(isDefined(var_0.meleealwayswin)) {
     self.melee.winner = 0;
-    var0.melee.winner = 1;
+    var_0.melee.winner = 1;
     return;
   }
 
   if(isDefined(self.magic_bullet_shield)) {
     self.melee.winner = 1;
-    var0.melee.winner = 0;
+    var_0.melee.winner = 0;
     return;
   }
 
-  if(isDefined(var0.magic_bullet_shield)) {
+  if(isDefined(var_0.magic_bullet_shield)) {
     self.melee.winner = 0;
-    var0.melee.winner = 1;
+    var_0.melee.winner = 1;
     return;
   }
 
   self.melee.winner = scripts\engine\utility::cointoss();
-  var0.melee.winner = !self.melee.winner;
+  var_0.melee.winner = !self.melee.winner;
 }
 
 function melee_calcsyncdirection() {
-  var0 = self.melee.target;
-  var1 = self.origin - var0.origin;
-  var2 = vectortoyaw(var1);
-  var3 = angleclamp180(var2 - var0.angles[1]);
+  var_0 = self.melee.target;
+  var_1 = self.origin - var_0.origin;
+  var_2 = vectortoyaw(var_1);
+  var_3 = angleclamp180(var_2 - var_0.angles[1]);
 
-  if(-45 < var3 && var3 < 45) {
+  if(-45 < var_3 && var_3 < 45) {
     return "8";
-  } else if(var3 > 135 || var3 < -135) {
+  } else if(var_3 > 135 || var_3 < -135) {
     return "2";
-  } else if(var3 > 45) {
+  } else if(var_3 > 45) {
     return "4";
   }
 
   return "6";
 }
 
-function melee_shouldabortcharge(var0, var1, var2, var3) {
+function melee_shouldabortcharge(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.melee)) {
     return true;
   }
@@ -243,7 +243,7 @@ function melee_shouldabortcharge(var0, var1, var2, var3) {
   return false;
 }
 
-function melee_shouldabort(var0, var1, var2, var3) {
+function melee_shouldabort(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.melee)) {
     return 1;
   }
@@ -251,18 +251,18 @@ function melee_shouldabort(var0, var1, var2, var3) {
   if(isDefined(self.melee.babort)) {
     if(isDefined(self.melee.bwaituntilstop)) {
       if(self.melee.bwaituntilstop) {
-        var4 = scripts\asm\asm::asm_eventfired(var0, "melee_stop");
+        var_4 = scripts\asm\asm::asm_eventfired(var_0, "melee_stop");
 
-        if(var4) {
+        if(var_4) {
           self.melee.bshouldstop = 1;
         }
 
-        return var4;
+        return var_4;
       }
     } else if(isDefined(self.melee.stoptimes)) {
-      var5 = scripts\asm\asm::asm_eventfired(var1, "melee_stop");
+      var_5 = scripts\asm\asm::asm_eventfired(var_1, "melee_stop");
 
-      if(!var5) {
+      if(!var_5) {
         self.melee.bwaituntilstop = 1;
         return 0;
       }
@@ -274,14 +274,14 @@ function melee_shouldabort(var0, var1, var2, var3) {
   return 0;
 }
 
-function melee_requestcharge(var0, var1, var2) {
+function melee_requestcharge(var_0, var_1, var_2) {
   self.melee.bcharge = 1;
-  self.melee.meleeanim = var0;
-  self.melee.arrivaldistsq = var1;
-  self.melee.bcorner = var2;
+  self.melee.meleeanim = var_0;
+  self.melee.arrivaldistsq = var_1;
+  self.melee.bcorner = var_2;
 }
 
-function melee_chargerequested(var0, var1, var2, var3) {
+function melee_chargerequested(var_0, var_1, var_2, var_3) {
   return isDefined(self.melee.bcharge) && self.melee.bcharge;
 }
 
@@ -289,111 +289,111 @@ function melee_chargecomplete() {
   self.melee.bcharge = undefined;
 }
 
-function melee_ischargecomplete(var0, var1, var2, var3) {
-  if(self.melee.winner != var3) {
+function melee_ischargecomplete(var_0, var_1, var_2, var_3) {
+  if(self.melee.winner != var_3) {
     return false;
   }
 
   return !melee_chargerequested();
 }
 
-function candocovermelee_anim(var0, var1, var2, var3) {}
+function candocovermelee_anim(var_0, var_1, var_2, var_3) {}
 
-function chooseanim_syncmelee(var0, var1, var2) {
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, self.meleeanimalias);
+function chooseanim_syncmelee(var_0, var_1, var_2) {
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, self.meleeanimalias);
 }
 
-function evaluatesyncedmeleebyxanim(var0, var1) {
-  var2 = self.melee.target;
-  var3 = var2.angles;
-  var4 = var2.origin - self.origin;
-  var5 = vectortoyaw(var4);
-  var6 = 30;
-  var7 = angleclamp180(var5 - self.angles[1]);
+function evaluatesyncedmeleebyxanim(var_0, var_1) {
+  var_2 = self.melee.target;
+  var_3 = var_2.angles;
+  var_4 = var_2.origin - self.origin;
+  var_5 = vectortoyaw(var_4);
+  var_6 = 30;
+  var_7 = angleclamp180(var_5 - self.angles[1]);
 
-  if(abs(var7) > var6) {
+  if(abs(var_7) > var_6) {
     return false;
   }
 
-  if(var1) {
-    var3 = var2.angles - (0, var7 * 0.5, 0);
-    var8 = getstartorigin(var2.origin, var3, var0);
+  if(var_1) {
+    var_3 = var_2.angles - (0, var_7 * 0.5, 0);
+    var_8 = getstartorigin(var_2.origin, var_3, var_0);
   } else {
-    var4 = var3.angles - (0, var8, 0);
-    var8 = getstartorigin(var3.origin, var4, var1);
+    var_4 = var_3.angles - (0, var_8, 0);
+    var_8 = getstartorigin(var_3.origin, var_4, var_1);
   }
 
-  var9 = self.origin - var8;
-  var10 = vectorNormalize(var3.origin - var8);
-  var11 = vectordot(var10, var9);
+  var_9 = self.origin - var_8;
+  var_10 = vectorNormalize(var_3.origin - var_8);
+  var_11 = vectordot(var_10, var_9);
 
-  if(var11 > 12 || var11 < -12) {
+  if(var_11 > 12 || var_11 < -12) {
     return false;
   }
 
-  if(var2) {
-    self.melee.startangles = self.angles + (0, var8 * 0.5, 0);
-    self.melee.startpos = var8;
-    var3.melee.startyaw = var4[1];
+  if(var_2) {
+    self.melee.startangles = self.angles + (0, var_8 * 0.5, 0);
+    self.melee.startpos = var_8;
+    var_3.melee.startyaw = var_4[1];
   } else {
-    self.melee.startpos = var8;
-    self.melee.startangles = getstartangles(var3.origin, var4, var1);
-    var3.melee.startyaw = var4[1];
+    self.melee.startpos = var_8;
+    self.melee.startangles = getstartangles(var_3.origin, var_4, var_1);
+    var_3.melee.startyaw = var_4[1];
   }
 
-  var3.melee.bvictimlinkstoattacker = 1;
+  var_3.melee.bvictimlinkstoattacker = 1;
   return true;
 }
 
-function evaluatesyncedmelee(var0, var1, var2, var3) {
-  var4 = self.melee.target;
+function evaluatesyncedmelee(var_0, var_1, var_2, var_3) {
+  var_4 = self.melee.target;
 
-  if(isPlayer(var4)) {
+  if(isPlayer(var_4)) {
     return false;
   }
 
-  if(istrue(self.dontsyncmelee) || istrue(var4.dontsyncmelee)) {
+  if(istrue(self.dontsyncmelee) || istrue(var_4.dontsyncmelee)) {
     return false;
   }
 
-  if(weaponclass(self.weapon) == "pistol" || weaponclass(var4.weapon) == "pistol") {
+  if(weaponclass(self.weapon) == "pistol" || weaponclass(var_4.weapon) == "pistol") {
     return false;
   }
 
-  if(!isDefined(self.melee.winner) || !isDefined(var4.melee.winner)) {
+  if(!isDefined(self.melee.winner) || !isDefined(var_4.melee.winner)) {
     melee_decide_winner();
   }
 
-  var5 = var3[0];
+  var_5 = var_3[0];
 
-  if(self.melee.winner != var5) {
+  if(self.melee.winner != var_5) {
     return false;
   }
 
-  var6 = var3[1];
-  var7 = melee_calcsyncdirection();
-  var8 = ["a"];
+  var_6 = var_3[1];
+  var_7 = melee_calcsyncdirection();
+  var_8 = ["a"];
 
-  if(var7 == "8") {
-    var8 = ["a", "b", "c"];
-    var9 = 3;
-    var10 = randomint(var9);
-    var11 = randomint(var9);
-    var12 = var8[var10];
-    var8 = var8[var11];
-    var8 = var12;
+  if(var_7 == "8") {
+    var_8 = ["a", "b", "c"];
+    var_9 = 3;
+    var_10 = randomint(var_9);
+    var_11 = randomint(var_9);
+    var_12 = var_8[var_10];
+    var_8 = var_8[var_11];
+    var_8 = var_12;
   }
 
-  var9 = var8.size;
+  var_9 = var_8.size;
 
-  for(var13 = 0; var13 < var9; var13++) {
-    var14 = var7 + var8[var13];
-    var15 = scripts\asm\asm::asm_lookupanimfromalias(var2, var14);
-    var16 = scripts\asm\asm::asm_getxanim(var2, var15);
+  for(var_13 = 0; var_13 < var_9; var_13++) {
+    var_14 = var_7 + var_8[var_13];
+    var_15 = scripts\asm\asm::asm_lookupanimfromalias(var_2, var_14);
+    var_16 = scripts\asm\asm::asm_getxanim(var_2, var_15);
 
-    if(evaluatesyncedmeleebyxanim(var16, var6)) {
-      self.meleeanimalias = var14;
-      var4.meleeanimalias = var14;
+    if(evaluatesyncedmeleebyxanim(var_16, var_6)) {
+      self.meleeanimalias = var_14;
+      var_4.meleeanimalias = var_14;
       return true;
     }
   }
@@ -401,62 +401,62 @@ function evaluatesyncedmelee(var0, var1, var2, var3) {
   return false;
 }
 
-function candomeleeflip_angles(var0, var1, var2, var3) {}
+function candomeleeflip_angles(var_0, var_1, var_2, var_3) {}
 
-function candomeleeflip_anim(var0, var1, var2, var3) {}
+function candomeleeflip_anim(var_0, var_1, var_2, var_3) {}
 
-function candomeleewrestle_angles(var0, var1, var2, var3) {}
+function candomeleewrestle_angles(var_0, var_1, var_2, var_3) {}
 
-function candomeleewrestle_anim(var0, var1, var2, var3) {}
+function candomeleewrestle_anim(var_0, var_1, var_2, var_3) {}
 
-function candomeleebehind_angles(var0, var1, var2, var3) {}
+function candomeleebehind_angles(var_0, var_1, var_2, var_3) {}
 
-function candomeleebehind_anim(var0, var1, var2, var3) {}
+function candomeleebehind_anim(var_0, var_1, var_2, var_3) {}
 
-function candomeleeanim_internal(var0) {
-  var1 = self.melee.target;
-  var2 = var1.origin;
-  var3 = self.origin - var2;
-  var4 = vectortoangles(var3);
-  var5 = getstartorigin(var2, var4, var0);
-  self.melee.startpos = var5;
-  self.melee.startangles = getstartangles(var2, var4, var0);
-  var1.melee.startyaw = var4[1];
+function candomeleeanim_internal(var_0) {
+  var_1 = self.melee.target;
+  var_2 = var_1.origin;
+  var_3 = self.origin - var_2;
+  var_4 = vectortoangles(var_3);
+  var_5 = getstartorigin(var_2, var_4, var_0);
+  self.melee.startpos = var_5;
+  self.melee.startangles = getstartangles(var_2, var_4, var_0);
+  var_1.melee.startyaw = var_4[1];
   return true;
 }
 
-function candomeleeanim(var0) {}
+function candomeleeanim(var_0) {}
 
-function melee_validatepoints(var0, var1, var2) {}
+function melee_validatepoints(var_0, var_1, var_2) {}
 
-function waitforpartnerdelete(var0, var1) {
-  if(!isDefined(var1)) {
+function waitforpartnerdelete(var_0, var_1) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  var1 waittill("entitydeleted");
+  var_1 waittill("entitydeleted");
   self notify("melee_exit");
 }
 
-function playmeleeanim_synced_waitforpartnerexit(var0, var1) {
-  self endon(var1 + "_finished");
-  GscBinSkip4(0x35, var1, self.melee.partner);
+function playmeleeanim_synced_waitforpartnerexit(var_0, var_1) {
+  self endon(var_1 + "_finished");
+  GscBinSkip4(0x35, var_1, self.melee.partner);
 }
 
-function melee_shouldlosersurvive(var0, var1, var2, var3) {
+function melee_shouldlosersurvive(var_0, var_1, var_2, var_3) {
   return isDefined(self.melee.survive);
 }
 
-function melee_shouldstop(var0, var1, var2, var3) {
+function melee_shouldstop(var_0, var_1, var_2, var_3) {
   return isDefined(self.melee.bshouldstop);
 }
 
-function melee_waitfordroppedweapon(var0) {
-  self endon(var0 + "_finished");
-  self waittill("weapon_dropped", var1);
+function melee_waitfordroppedweapon(var_0) {
+  self endon(var_0 + "_finished");
+  self waittill("weapon_dropped", var_1);
 
-  if(isDefined(var1)) {
-    self.melee.droppedweaponent = var1;
+  if(isDefined(var_1)) {
+    self.melee.droppedweaponent = var_1;
     return;
   }
 }
@@ -471,14 +471,14 @@ function melee_finalcleanup() {
   self.syncedmeleetarget = undefined;
 }
 
-function melee_handlenotetracks(var0) {
-  if(issubstr(var0, "ps_")) {
-    var1 = getsubstr(var0, 3);
-    self playSound(var1);
+function melee_handlenotetracks(var_0) {
+  if(issubstr(var_0, "ps_")) {
+    var_1 = getsubstr(var_0, 3);
+    self playSound(var_1);
     return;
   }
 
-  switch (var1) {
+  switch (var_1) {
     case "sync":
       if(!isDefined(self.melee.babort)) {
         if(isDefined(self.melee.target)) {
@@ -505,7 +505,7 @@ function melee_handlenotetracks(var0) {
       self.melee.surviveanimallowed = 1;
       break;
     case "melee_death":
-      return var1;
+      return var_1;
     case "attach_knife":
       self attach("weapon_vm_me_soscar_knife", "TAG_INHAND", 1);
       self.melee.hasknife = 1;
@@ -523,16 +523,16 @@ function melee_handlenotetracks(var0) {
   }
 }
 
-function playmeleeanim_synced_survive(var0, var1, var2) {
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  var4 = scripts\asm\asm::asm_getxanim(var1, var3);
-  self aisetanim(var1, var3);
-  scripts\asm\asm::asm_playfacialanim(var0, var1, var4);
+function playmeleeanim_synced_survive(var_0, var_1, var_2) {
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, var_3);
+  self aisetanim(var_1, var_3);
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_4);
   self.meleeanimalias = undefined;
-  scripts\asm\asm::asm_donotetracks(var0, var1, &melee_handlenotetracks);
+  scripts\asm\asm::asm_donotetracks(var_0, var_1, &melee_handlenotetracks);
 }
 
-function playmeleeanim_synced_cleanup(var0, var1, var2) {
+function playmeleeanim_synced_cleanup(var_0, var_1, var_2) {
   if(isDefined(self.melee) && isDefined(self.melee.partner)) {
     self.melee.partner notify("melee_exit");
   }
@@ -569,8 +569,8 @@ function melee_droppedweaponrestore() {
   }
 }
 
-function playmeleeanim_synced_victim(var0, var1, var2) {
-  self endon(var1 + "_finished");
+function playmeleeanim_synced_victim(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
   self.melee.bstarted = 1;
   self animmode("zonly_physics");
 
@@ -582,34 +582,34 @@ function playmeleeanim_synced_victim(var0, var1, var2) {
     self orientmode("face current");
   }
 
-  melee_synced_setup(var1, 0);
-  thread melee_waitfordroppedweapon(var1);
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  var4 = scripts\asm\asm::asm_getxanim(var1, var3);
-  self aisetanim(var1, var3);
-  scripts\asm\asm::asm_playfacialanim(var0, var1, var4);
-  var5 = getnotetracktimes(var4, "melee_stop");
+  melee_synced_setup(var_1, 0);
+  thread melee_waitfordroppedweapon(var_1);
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, var_3);
+  self aisetanim(var_1, var_3);
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_4);
+  var_5 = getnotetracktimes(var_4, "melee_stop");
 
-  if(var5.size > 0) {
-    self.melee.stoptimes = var5;
+  if(var_5.size > 0) {
+    self.melee.stoptimes = var_5;
   }
 
-  var6 = getnotetracktimes(var4, "melee_interact");
+  var_6 = getnotetracktimes(var_4, "melee_interact");
 
-  if(var6.size > 0) {
-    self.melee.interacttimes = var6;
+  if(var_6.size > 0) {
+    self.melee.interacttimes = var_6;
   }
 
-  var7 = getnotetracktimes(var4, "drop");
+  var_7 = getnotetracktimes(var_4, "drop");
 
-  if(var7.size > 0) {
-    self.melee.interactendtimes = var7;
+  if(var_7.size > 0) {
+    self.melee.interactendtimes = var_7;
   }
 
-  thread playmeleeanim_synced_waitforpartnerexit(var0, var1);
-  var8 = scripts\asm\asm::asm_donotetracks(var0, var1, &melee_handlenotetracks);
+  thread playmeleeanim_synced_waitforpartnerexit(var_0, var_1);
+  var_8 = scripts\asm\asm::asm_donotetracks(var_0, var_1, &melee_handlenotetracks);
 
-  if((var8 == "melee_death" || !self.melee.winner) && !isDefined(self.melee.survive)) {
+  if((var_8 == "melee_death" || !self.melee.winner) && !isDefined(self.melee.survive)) {
     self.a.nodeath = 0;
 
     if(isDefined(self.melee.partner) && isDefined(self.melee.partner.melee)) {
@@ -621,14 +621,14 @@ function playmeleeanim_synced_victim(var0, var1, var2) {
   }
 }
 
-function melee_synced_setup(var0, var1) {
-  self.meleestatename = var0;
+function melee_synced_setup(var_0, var_1) {
+  self.meleestatename = var_0;
   self.melee.inprogress = 1;
   self.melee.weapon = self.weapon;
   self.melee.weaponslot = scripts\anim\utility::getcurrentweaponslotname();
   self.melee.fnunlink = &melee_unlink;
 
-  if(var1) {
+  if(var_1) {
     scripts\aitypes\melee::melee_setmeleetimer(self.unittype);
     self.syncedmeleetarget = self.melee.target;
   } else {
@@ -654,39 +654,39 @@ function melee_unlink() {
   self orientmode("face angle", self.angles[1]);
 }
 
-function playmeleeanim_chargetoready(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  var4 = scripts\asm\asm::asm_getxanim(var1, var3);
-  self aisetanim(var1, var3);
-  scripts\asm\asm::asm_playfacialanim(var0, var1, var4);
-  thread playmeleeanim_chargetoready_distcheck(var1);
-  scripts\asm\asm::asm_donotetracks(var0, var1);
+function playmeleeanim_chargetoready(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, var_3);
+  self aisetanim(var_1, var_3);
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_4);
+  thread playmeleeanim_chargetoready_distcheck(var_1);
+  scripts\asm\asm::asm_donotetracks(var_0, var_1);
 }
 
-function playmeleeanim_vsplayer(var0, var1, var2) {
+function playmeleeanim_vsplayer(var_0, var_1, var_2) {
   playmeleeattacksound();
-  var3 = scripts\asm\asm_bb::bb_getmeleetarget();
+  var_3 = scripts\asm\asm_bb::bb_getmeleetarget();
 
-  if(!isDefined(var3)) {
+  if(!isDefined(var_3)) {
     self orientmode("face current");
-  } else if(var3 == self.enemy) {
+  } else if(var_3 == self.enemy) {
     self orientmode("face enemy");
   } else {
-    self orientmode("face point", var3.origin);
+    self orientmode("face point", var_3.origin);
   }
 
-  var4 = scripts\asm\asm::asm_getanim(var0, var1);
+  var_4 = scripts\asm\asm::asm_getanim(var_0, var_1);
   scripts\asm\asm::asm_fireephemeralevent("melee_attack", "begin");
 
-  if(isDefined(var2)) {
-    self playSound(var2);
+  if(isDefined(var_2)) {
+    self playSound(var_2);
   }
 
-  self aisetanim(var1, var4);
-  self endon(var1 + "_finished");
-  donotetracks_vsplayer(var0, var1, scripts\asm\asm::asm_getnotehandler(var0, var1));
-  scripts\asm\asm::asm_fireevent(var0, "end");
+  self aisetanim(var_1, var_4);
+  self endon(var_1 + "_finished");
+  donotetracks_vsplayer(var_0, var_1, scripts\asm\asm::asm_getnotehandler(var_0, var_1));
+  scripts\asm\asm::asm_fireevent(var_0, "end");
 }
 
 function playmeleeattacksound() {
@@ -721,42 +721,42 @@ function playmeleechargesound() {
   }
 }
 
-function playmeleechargeanim(var0, var1, var2) {
+function playmeleechargeanim(var_0, var_1, var_2) {
   playmeleechargesound();
-  thread scripts\asm\shared\utility::waitfordooropen(var0, var1, 1);
-  scripts\asm\asm::asm_loopanimstate(var0, var1, self.moveplaybackrate);
+  thread scripts\asm\shared\utility::waitfordooropen(var_0, var_1, 1);
+  scripts\asm\asm::asm_loopanimstate(var_0, var_1, self.moveplaybackrate);
 }
 
-function playmeleeanim_synced(var0, var1, var2) {
+function playmeleeanim_synced(var_0, var_1, var_2) {
   self.melee.bstarted = 1;
-  var3 = self.melee.target;
-  var4 = scripts\asm\asm::asm_getanim(var0, var1);
-  var5 = scripts\asm\asm::asm_getxanim(var1, var4);
+  var_3 = self.melee.target;
+  var_4 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_5 = scripts\asm\asm::asm_getxanim(var_1, var_4);
   scripts\asm\asm::asm_fireephemeralevent("melee_attack", "begin");
-  melee_synced_setup(var1, 1);
-  var6 = getnotetracktimes(var5, "melee_stop");
+  melee_synced_setup(var_1, 1);
+  var_6 = getnotetracktimes(var_5, "melee_stop");
 
-  if(var6.size > 0) {
-    self.melee.stoptimes = var6;
+  if(var_6.size > 0) {
+    self.melee.stoptimes = var_6;
   }
 
-  var7 = getnotetracktimes(var5, "melee_interact");
+  var_7 = getnotetracktimes(var_5, "melee_interact");
 
-  if(var7.size > 0) {
-    self.melee.interacttimes = var7;
+  if(var_7.size > 0) {
+    self.melee.interacttimes = var_7;
   }
 
-  thread melee_waitfordroppedweapon(var1);
-  var3 scripts\asm\asm::asm_setstate(var1 + "_victim");
+  thread melee_waitfordroppedweapon(var_1);
+  var_3 scripts\asm\asm::asm_setstate(var_1 + "_victim");
   self animmode("zonly_physics");
   self orientmode("face angle", self.melee.startangles[1]);
-  self aisetanim(var1, var4);
-  scripts\asm\asm::asm_playfacialanim(var0, var1, var5);
-  thread playmeleeanim_synced_waitforpartnerexit(var0, var1);
-  self endon(var1 + "_finished");
-  var8 = scripts\asm\asm::asm_donotetracks(var0, var1, &melee_handlenotetracks);
+  self aisetanim(var_1, var_4);
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_5);
+  thread playmeleeanim_synced_waitforpartnerexit(var_0, var_1);
+  self endon(var_1 + "_finished");
+  var_8 = scripts\asm\asm::asm_donotetracks(var_0, var_1, &melee_handlenotetracks);
 
-  if((var8 == "melee_death" || !self.melee.winner) && !istrue(self.melee.survive)) {
+  if((var_8 == "melee_death" || !self.melee.winner) && !istrue(self.melee.survive)) {
     self.a.nodeath = 0;
 
     if(isDefined(self.melee.target) && isDefined(self.melee.target.melee)) {

@@ -35,7 +35,7 @@ function spawner() {
   self setspawnerteam("allies");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\character_hero_kyle_undercover::precache();
   scripts\aitypes\bt_util::init();
   scripts\aitypes\assets::soldier();

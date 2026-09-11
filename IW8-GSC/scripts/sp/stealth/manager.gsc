@@ -18,122 +18,122 @@ function main() {
   scripts\anim\battlechatter_table::bctable_setfiles("stealth", "sp/stealth_chatter_base.csv", "sp/stealth_chatter_ambient.csv");
 }
 
-function set_stealth_mode_sp(var0, var1, var2) {
-  jumpiffalse(var0) LOC_00000038;
+function set_stealth_mode_sp(var_0, var_1, var_2) {
+  jumpiffalse(var_0) LOC_00000038;
 
-  foreach(var4 in level.players) {
-    var4 thread scripts\sp\stealth\player::ambient_player_thread();
+  foreach(var_4 in level.players) {
+    var_4 thread scripts\sp\stealth\player::ambient_player_thread();
   }
 
   return;
 }
 
-function threat_sight_set_state_parameters(var0) {
-  var1 = 1;
-  var2 = 1;
+function threat_sight_set_state_parameters(var_0) {
+  var_1 = 1;
+  var_2 = 1;
 
-  if(!isDefined(var0)) {
-    var0 = self.stealth.threat_sight_state;
+  if(!isDefined(var_0)) {
+    var_0 = self.stealth.threat_sight_state;
   }
 
   if(isDefined(self.stealth.threatsightratescale)) {
-    var1 *= self.stealth.threatsightratescale;
+    var_1 *= self.stealth.threatsightratescale;
   }
 
   if(isDefined(self.stealth.threatsightdistscale)) {
-    var2 *= self.stealth.threatsightdistscale;
+    var_2 *= self.stealth.threatsightdistscale;
   }
 
   if(isDefined(level.stealth.threatsightratescale)) {
-    var1 *= level.stealth.threatsightratescale;
+    var_1 *= level.stealth.threatsightratescale;
   }
 
   if(isDefined(level.stealth.threatsightdistscale)) {
-    var2 *= level.stealth.threatsightdistscale;
+    var_2 *= level.stealth.threatsightdistscale;
   }
 
-  switch (var0) {
+  switch (var_0) {
     case "flashlight_in_dark":
     case "investigate":
-      self.threatsightdistmin = 256 * var2;
-      self.threatsightdistmax = 1024 * var2;
-      self.threatsightratemin = 1.333 * var1;
-      self.threatsightratemax = 0.8 * var1;
+      self.threatsightdistmin = 256 * var_2;
+      self.threatsightdistmax = 1024 * var_2;
+      self.threatsightratemin = 1.333 * var_1;
+      self.threatsightratemax = 0.8 * var_1;
       break;
     case "combat_hunt":
-      self.threatsightdistmin = 64 * var2;
-      self.threatsightdistmax = 128 * var2;
-      self.threatsightratemin = 2.5 * var1;
-      self.threatsightratemax = 2 * var1;
+      self.threatsightdistmin = 64 * var_2;
+      self.threatsightdistmax = 128 * var_2;
+      self.threatsightratemin = 2.5 * var_1;
+      self.threatsightratemax = 2 * var_1;
       break;
     default:
-      self.threatsightdistmin = 256 * var2;
-      self.threatsightdistmax = 1024 * var2;
-      self.threatsightratemin = 1 * var1;
-      self.threatsightratemax = 0.4 * var1;
+      self.threatsightdistmin = 256 * var_2;
+      self.threatsightdistmax = 1024 * var_2;
+      self.threatsightratemin = 1 * var_1;
+      self.threatsightratemax = 0.4 * var_1;
       break;
   }
 }
 
-function threat_sight_player_sight_audio(var0, var1, var2) {
-  var3 = 180;
-  var4 = 0.01;
-  var5 = 0.05;
-  var6 = 0.125;
+function threat_sight_player_sight_audio(var_0, var_1, var_2) {
+  var_3 = 180;
+  var_4 = 0.01;
+  var_5 = 0.05;
+  var_6 = 0.125;
   self endon("disconnect");
   self endon("death");
   self notify("threat_sight_player_sight_audio");
   self endon("threat_sight_player_sight_audio");
-  var7 = ["ui_stealth_threat_low_lp", "ui_stealth_threat_med_lp", "ui_stealth_threat_high_lp"];
+  var_7 = ["ui_stealth_threat_low_lp", "ui_stealth_threat_med_lp", "ui_stealth_threat_high_lp"];
 
   if(!getdvarint("scr_ai_threatsightaudio", 0)) {
-    var1 = 0;
+    var_1 = 0;
   }
 
-  if(!isDefined(self.stealth.threat_sight_snd_ent) && var0 && var1 > 0) {
+  if(!isDefined(self.stealth.threat_sight_snd_ent) && var_0 && var_1 > 0) {
     self.stealth.threat_sight_snd_ent = [];
     self.stealth.threat_sight_snd_vol = 0;
     self.stealth.threat_sight_snd_threat = 0;
 
-    foreach(var11, var9 in var7) {
-      var10 = spawn("script_origin", self.origin);
+    foreach(var_11, var_9 in var_7) {
+      var_10 = spawn("script_origin", self.origin);
 
       if(!isPlayer(self)) {
-        thread scripts\engine\utility::delete_on_death(var10);
+        thread scripts\engine\utility::delete_on_death(var_10);
       }
 
-      var10 linkTo(self);
-      var10 scalevolume(0, 0);
-      var10.isplaying = 0;
-      self.stealth.threat_sight_snd_ent[var9] = var10;
+      var_10 linkTo(self);
+      var_10 scalevolume(0, 0);
+      var_10.isplaying = 0;
+      self.stealth.threat_sight_snd_ent[var_9] = var_10;
     }
   }
 
   jumpiffalse(isDefined(self.stealth.threat_sight_snd_ent)) LOC_00000199;
-  self.stealth.threat_sight_snd_threat -= self.stealth.threat_sight_snd_threat * var6;
-  self.stealth.threat_sight_snd_threat += var1 * var6;
+  self.stealth.threat_sight_snd_threat -= self.stealth.threat_sight_snd_threat * var_6;
+  self.stealth.threat_sight_snd_threat += var_1 * var_6;
 
   if(self.stealth.threat_sight_snd_threat < 0.0001) {
     self.stealth.threat_sight_snd_threat = 0;
   }
 
-  var1 = self.stealth.threat_sight_snd_threat;
+  var_1 = self.stealth.threat_sight_snd_threat;
 
   while(isDefined(self.stealth.threat_sight_snd_ent)) {
-    var11 = 0;
-    var12 = 0;
+    var_11 = 0;
+    var_12 = 0;
 
-    if(var1 > 0) {
+    if(var_1 > 0) {
       if(isDefined(self.stealth.maxthreat_enemy)) {
         self.stealth.maxthreat_enemy thread scripts\stealth\utility::addeventplaybcs("stealth", "announce3", "sighted_warning" + randomintrange(1, 5));
       }
 
-      if(var1 < var5) {
-        var13 = clamp(var1, 0, var5);
-        var14 = var13 / var5;
-        var15 = 1 - var4;
-        var16 = var4 + var15 * var14;
-        self.stealth.threat_sight_snd_vol = var16;
+      if(var_1 < var_5) {
+        var_13 = clamp(var_1, 0, var_5);
+        var_14 = var_13 / var_5;
+        var_15 = 1 - var_4;
+        var_16 = var_4 + var_15 * var_14;
+        self.stealth.threat_sight_snd_vol = var_16;
       } else {
         self.stealth.threat_sight_snd_vol = 1;
       }
@@ -144,65 +144,65 @@ function threat_sight_player_sight_audio(var0, var1, var2) {
 
     self.stealth.threat_sight_snd_vol = clamp(self.stealth.threat_sight_snd_vol, 0, 1);
 
-    foreach(var9, var10 in self.stealth.threat_sight_snd_ent) {
-      var18 = 1;
+    foreach(var_9, var_10 in self.stealth.threat_sight_snd_ent) {
+      var_18 = 1;
 
-      switch (var11) {
+      switch (var_11) {
         case 0:
-          if(var1 < 0.75) {
-            var18 = cos(var3 * var1 * 0.666);
+          if(var_1 < 0.75) {
+            var_18 = cos(var_3 * var_1 * 0.666);
           } else {
-            var18 = 0;
+            var_18 = 0;
           }
 
           break;
         case 1:
-          if(var1 < 0.75) {
-            var18 = sin(var3 * var1 * 0.666);
-          } else if(var1 < 1) {
-            var18 = sin(var3 * (1 - var1) * 2);
+          if(var_1 < 0.75) {
+            var_18 = sin(var_3 * var_1 * 0.666);
+          } else if(var_1 < 1) {
+            var_18 = sin(var_3 * (1 - var_1) * 2);
           } else {
-            var18 = 0;
+            var_18 = 0;
           }
 
           break;
         case 2:
-          if(var1 < 0.75) {
-            var18 = 0;
+          if(var_1 < 0.75) {
+            var_18 = 0;
           } else {
-            var18 = cos(var3 * (1 - var1) * 2);
+            var_18 = cos(var_3 * (1 - var_1) * 2);
           }
 
           break;
       }
 
-      var19 = clamp(self.stealth.threat_sight_snd_vol * var18, 0, 1);
+      var_19 = clamp(self.stealth.threat_sight_snd_vol * var_18, 0, 1);
 
-      if(var19 > 0) {
-        var12 = 1;
+      if(var_19 > 0) {
+        var_12 = 1;
 
-        if(var10.isplaying == 0) {
-          var10 scalevolume(0, 0);
-          var10 scripts\engine\utility::delaycall(0.05, &playloopsound, var9);
-          var10.isplaying = 1;
+        if(var_10.isplaying == 0) {
+          var_10 scalevolume(0, 0);
+          var_10 scripts\engine\utility::delaycall(0.05, &playloopsound, var_9);
+          var_10.isplaying = 1;
         }
 
-        var10 scalevolume(var19, 0.05);
-        var10 scripts\engine\utility::delaycall(0, &scalevolume, var19, 0.05);
-      } else if(var10.isplaying == 1) {
-        var10 scalevolume(0, 0.05);
-        var10 scripts\engine\utility::delaycall(0.05, &stoploopsound);
-        var10.isplaying = 0;
+        var_10 scalevolume(var_19, 0.05);
+        var_10 scripts\engine\utility::delaycall(0, &scalevolume, var_19, 0.05);
+      } else if(var_10.isplaying == 1) {
+        var_10 scalevolume(0, 0.05);
+        var_10 scripts\engine\utility::delaycall(0.05, &stoploopsound);
+        var_10.isplaying = 0;
       }
 
-      var11++;
+      var_11++;
     }
 
-    if(!var12) {
-      foreach(var9, var10 in self.stealth.threat_sight_snd_ent) {
-        var10 scalevolume(0, 0.05);
-        var10 stoploopsound();
-        var10 scripts\engine\utility::delaycall(0.05, &delete);
+    if(!var_12) {
+      foreach(var_9, var_10 in self.stealth.threat_sight_snd_ent) {
+        var_10 scalevolume(0, 0.05);
+        var_10 stoploopsound();
+        var_10 scripts\engine\utility::delaycall(0.05, &delete);
       }
 
       self.stealth.threat_sight_snd_ent = undefined;

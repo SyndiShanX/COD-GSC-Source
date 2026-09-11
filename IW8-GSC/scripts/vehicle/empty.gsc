@@ -3,4 +3,4 @@
  * Script: scripts\vehicle\empty.gsc
 ***********************************************/
 
-function main(var0, var1) {}
+function main(var_0, var_1) {}

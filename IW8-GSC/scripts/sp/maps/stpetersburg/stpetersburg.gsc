@@ -46,12 +46,12 @@ function main() {
 }
 
 function kilo121_hack() {
-  var0 = getEnt("weapon_iw8_lm_kilo121+rec_kilo121+front_kilo121+back_kilo121+reflex_west01+box_kilo121", "code_classname");
-  var1 = spawn("weapon_iw8_lm_kilo121+rec_kilo121+front_kilo121+back_kilo121+reflex_west01+xmags_kilo121", var0.origin, var0.spawnflags);
-  var1.angles = var0.angles;
-  var1.targetname = var0.targetname;
-  var1 scripts\anim\shared::setscriptammo("weapon_iw8_lm_kilo121", var0, undefined);
-  var0 delete();
+  var_0 = getEnt("weapon_iw8_lm_kilo121+rec_kilo121+front_kilo121+back_kilo121+reflex_west01+box_kilo121", "code_classname");
+  var_1 = spawn("weapon_iw8_lm_kilo121+rec_kilo121+front_kilo121+back_kilo121+reflex_west01+xmags_kilo121", var_0.origin, var_0.spawnflags);
+  var_1.angles = var_0.angles;
+  var_1.targetname = var_0.targetname;
+  var_1 scripts\anim\shared::setscriptammo("weapon_iw8_lm_kilo121", var_0, undefined);
+  var_0 delete();
 }
 
 function stpetersburg_intro_screen() {
@@ -175,8 +175,8 @@ function stpetersburg_preload() {
 }
 
 function stpetersburg_player_setup() {
-  var0 = ["frag", "flash", "molotov"];
-  scripts\engine\sp\utility::offhandprecache(var0);
+  var_0 = ["frag", "flash", "molotov"];
+  scripts\engine\sp\utility::offhandprecache(var_0);
   setplayerviewmodel("viewhands_hero_kyle_urban", "viewhands_hero_kyle_urban_fullbody", "default_character_shadow");
   scripts\sp\utility::context_melee_set_arms("viewhands_hero_kyle_urban");
   setup_player_rig();
@@ -200,17 +200,17 @@ function stpetersburg_ai_spawn_function_setup() {
   scripts\engine\sp\utility::add_global_spawn_function("axis", &scripts\engine\sp\utility::disable_long_death);
   scripts\engine\sp\utility::add_global_spawn_function("axis", &track_achievement_death);
   scripts\engine\sp\utility::add_global_spawn_function("neutral", &scripts\sp\maps\stpetersburg\stpetersburg_utility::civ_stationary_ff_penalty_think);
-  var0 = getspawnerarray();
-  scripts\engine\sp\utility::array_spawn_function(var0, &scripts\sp\maps\stpetersburg\stpetersburg_utility::breath_fx_thread);
-  var1 = [];
+  var_0 = getspawnerarray();
+  scripts\engine\sp\utility::array_spawn_function(var_0, &scripts\sp\maps\stpetersburg\stpetersburg_utility::breath_fx_thread);
+  var_1 = [];
 
-  foreach(var3 in var0) {
-    if(var3.classname == "actor_enemy_alq_urban_snow_ar" || var3.classname == "actor_enemy_alq_urban_snow_smg" || var3.classname == "actor_enemy_alq_urban_snow_shotgun") {
-      var1 = scripts\engine\utility::array_add(var1, var3);
+  foreach(var_3 in var_0) {
+    if(var_3.classname == "actor_enemy_alq_urban_snow_ar" || var_3.classname == "actor_enemy_alq_urban_snow_smg" || var_3.classname == "actor_enemy_alq_urban_snow_shotgun") {
+      var_1 = scripts\engine\utility::array_add(var_1, var_3);
     }
   }
 
-  scripts\engine\sp\utility::array_spawn_function(var1, &drop_pistol_on_death);
+  scripts\engine\sp\utility::array_spawn_function(var_1, &drop_pistol_on_death);
 }
 
 function drop_pistol_on_death() {
@@ -222,47 +222,47 @@ function drop_pistol_on_death() {
   }
 
   self waittill("death");
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, "iw8_pi_papa320");
 }
 
 function track_achievement_death() {
   self endon("entitydeleted");
-  self waittill("death", var0, var1, var2);
+  self waittill("death", var_0, var_1, var_2);
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!isPlayer(var0)) {
+  if(!isPlayer(var_0)) {
     return;
   }
 
-  if(!isDefined(var2)) {
+  if(!isDefined(var_2)) {
     return;
   }
 
-  var3 = getweaponbasename(var2);
+  var_3 = getweaponbasename(var_2);
 
   if(!isDefined(level.killweaponarray)) {
     level.killweaponarray = [];
   }
 
-  if(!scripts\engine\utility::array_contains(level.killweaponarray, var3)) {
-    level.killweaponarray = scripts\engine\utility::array_add(level.killweaponarray, var3);
+  if(!scripts\engine\utility::array_contains(level.killweaponarray, var_3)) {
+    level.killweaponarray = scripts\engine\utility::array_add(level.killweaponarray, var_3);
     return;
   }
 }
 
 function adjust_ai_pistol_accuracy() {
-  var0 = scripts\common\utility::getdifficulty();
+  var_0 = scripts\common\utility::getdifficulty();
 
-  if(var0 == "hard") {
+  if(var_0 == "hard") {
     self.base_accuracy = 1;
     return;
   }
 
-  if(var0 == "fu") {
+  if(var_0 == "fu") {
     self.base_accuracy = 10;
     return;
   }
@@ -278,24 +278,24 @@ function setup_player_rig() {
   level.player.rig dontcastshadows();
 }
 
-function setplayerviewmodel(var0, var1, var2) {
-  if(isDefined(var0)) {
-    level.player setviewmodel(var0);
+function setplayerviewmodel(var_0, var_1, var_2) {
+  if(isDefined(var_0)) {
+    level.player setviewmodel(var_0);
   }
 
-  if(isDefined(var1)) {}
+  if(isDefined(var_1)) {}
 
-  if(isDefined(var2)) {
-    level.player setshadowmodel(var2);
+  if(isDefined(var_2)) {
+    level.player setshadowmodel(var_2);
     return;
   }
 }
 
 function stpetersburg_door_init() {
-  var0 = scripts\sp\door::get_all_interactive_doors();
+  var_0 = scripts\sp\door::get_all_interactive_doors();
 
-  foreach(var2 in var0) {
-    var2 scripts\game\sp\door::remove_door_snake_cam_ability();
+  foreach(var_2 in var_0) {
+    var_2 scripts\game\sp\door::remove_door_snake_cam_ability();
   }
 }
 
@@ -319,8 +319,8 @@ function init_dvars() {
 function stpetersburg_objectives() {
   if(!scripts\sp\starts::is_after_start("stakeout")) {
     scripts\engine\utility::flag_wait("flag_stakeout_camera_finished");
-    var0 = scripts\engine\utility::getStruct("obj_gear_up", "targetname");
-    scripts\engine\sp\objectives::objective_add("gear_up", "current", var0.origin, &"STPETERSBURG/OBJ_STAKEOUT_GET_WEAPON", &"STPETERSBURG/OBJ_STAKEOUT_GEAR_UP");
+    var_0 = scripts\engine\utility::getStruct("obj_gear_up", "targetname");
+    scripts\engine\sp\objectives::objective_add("gear_up", "current", var_0.origin, &"STPETERSBURG/OBJ_STAKEOUT_GET_WEAPON", &"STPETERSBURG/OBJ_STAKEOUT_GEAR_UP");
     level.player waittill("initial_loadout_selected");
     scripts\engine\sp\objectives::objective_complete("gear_up");
     waitframe();
@@ -365,12 +365,12 @@ function stpetersburg_objectives() {
     scripts\engine\sp\objectives::objective_complete("clear_alley");
     waitframe();
     scripts\engine\sp\objectives::objective_remove("clear_alley");
-    var0 = scripts\engine\utility::getStruct("obj_find_butcher_1", "targetname");
+    var_0 = scripts\engine\utility::getStruct("obj_find_butcher_1", "targetname");
     scripts\engine\sp\objectives::objective_add("find_butcher", "current", undefined, &"STPETERSBURG/OBJ_FIND_BUTCHER");
-    scripts\engine\sp\objectives::objective_set_position("find_butcher", var0.origin);
+    scripts\engine\sp\objectives::objective_set_position("find_butcher", var_0.origin);
     scripts\engine\utility::flag_wait("flag_alley_stealth_player_opens_bar_door");
-    var0 = scripts\engine\utility::getStruct("obj_find_butcher_2", "targetname");
-    scripts\engine\sp\objectives::objective_set_position("find_butcher", var0.origin);
+    var_0 = scripts\engine\utility::getStruct("obj_find_butcher_2", "targetname");
+    scripts\engine\sp\objectives::objective_set_position("find_butcher", var_0.origin);
     scripts\engine\utility::flag_wait("flag_bomb_room_player_enter");
   }
 
@@ -379,8 +379,8 @@ function stpetersburg_objectives() {
       scripts\engine\sp\objectives::objective_add("find_butcher", "current", undefined, &"STPETERSBURG/OBJ_FIND_BUTCHER");
     }
 
-    var0 = scripts\engine\utility::getStruct("obj_find_butcher_3", "targetname");
-    scripts\engine\sp\objectives::objective_set_position("find_butcher", var0.origin);
+    var_0 = scripts\engine\utility::getStruct("obj_find_butcher_3", "targetname");
+    scripts\engine\sp\objectives::objective_set_position("find_butcher", var_0.origin);
     scripts\engine\utility::flag_wait_any("flag_player_blew_backroom_stealth", "flag_player_shoots_in_backroom", "flag_backroom_butcher_convo_half", "flag_backroom_player_seen_standing");
     scripts\engine\sp\objectives::objective_complete("find_butcher");
     waitframe();
@@ -466,8 +466,8 @@ function stpetersburg_objectives() {
     waitframe();
     scripts\engine\sp\objectives::objective_remove("recover_butcher");
     scripts\engine\utility::flag_wait("flag_gauntlet_enforcer_recovered");
-    var1 = getEnt("van_weapon_spot", "targetname");
-    scripts\engine\sp\objectives::objective_add("get_in_van", "current", var1.origin, &"STPETERSBURG/OBJ_GET_IN_VAN");
+    var_1 = getEnt("van_weapon_spot", "targetname");
+    scripts\engine\sp\objectives::objective_add("get_in_van", "current", var_1.origin, &"STPETERSBURG/OBJ_GET_IN_VAN");
     scripts\engine\utility::flag_wait("flag_gauntlet_player_in_van");
     scripts\engine\sp\objectives::objective_complete("get_in_van");
     waitframe();
@@ -519,13 +519,13 @@ function stpetersburg_objectives() {
   }
 
   if(!scripts\sp\starts::is_after_start("interrogation_room") && !scripts\engine\utility::flag("warning_declined")) {
-    var2 = scripts\engine\utility::flag_wait_any_return("revolver_offered", "revolver_picked_up");
+    var_2 = scripts\engine\utility::flag_wait_any_return("revolver_offered", "revolver_picked_up");
 
-    if(var2 == "revolver_offered") {
-      var3 = getEnt("revolver", "targetname");
+    if(var_2 == "revolver_offered") {
+      var_3 = getEnt("revolver", "targetname");
 
-      if(isDefined(var3)) {
-        scripts\engine\sp\objectives::objective_add("pick_up_revolver", "current", var3 gettagorigin("j_trigger") + (0, 0, 7), &"STPETERSBURG/OBJ_INTERROGATION_TAKE_REVOLVER");
+      if(isDefined(var_3)) {
+        scripts\engine\sp\objectives::objective_add("pick_up_revolver", "current", var_3 gettagorigin("j_trigger") + (0, 0, 7), &"STPETERSBURG/OBJ_INTERROGATION_TAKE_REVOLVER");
       }
     }
 
@@ -541,9 +541,9 @@ function stpetersburg_objectives() {
   if(!scripts\sp\starts::is_after_start("interrogation_revolver") && !scripts\engine\utility::flag("warning_declined")) {
     scripts\engine\sp\objectives::objective_add("retrieve_intel", "current", undefined, &"STPETERSBURG/OBJ_INTERROGATION_RETRIEVE_INTEL");
     scripts\engine\utility::flag_wait("bullets_offered");
-    var4 = getEntArray("bullets", "targetname")[0];
+    var_4 = getEntArray("bullets", "targetname")[0];
     scripts\engine\sp\objectives::objective_update("retrieve_intel", "active");
-    scripts\engine\sp\objectives::objective_add("load_bullets", "current", var4.origin + (0, 0, 10), &"STPETERSBURG/OBJ_INTERROGATION_LOAD_BULLETS");
+    scripts\engine\sp\objectives::objective_add("load_bullets", "current", var_4.origin + (0, 0, 10), &"STPETERSBURG/OBJ_INTERROGATION_LOAD_BULLETS");
     scripts\engine\utility::flag_waitopen("bullets_offered");
     scripts\engine\sp\objectives::objective_complete("load_bullets");
     waitframe();
@@ -612,10 +612,10 @@ function stakeout_catchup() {
 }
 
 function alley_stealth_start() {
-  var0 = getEntArray("bar_street_triggers", "script_noteworthy");
+  var_0 = getEntArray("bar_street_triggers", "script_noteworthy");
 
-  foreach(var2 in var0) {
-    var2 scripts\engine\utility::trigger_off();
+  foreach(var_2 in var_0) {
+    var_2 scripts\engine\utility::trigger_off();
   }
 
   set_player_health_fragile();
@@ -721,18 +721,18 @@ function bar_street_stp_main() {
 
 function walla_bar_street() {
   wait 0.1;
-  var0 = spawn("script_origin", (1542, -2375, 106));
-  var0 playSound("stp_walla_alley_civs_grp_01");
-  var0 moveTo((2273, -2399, 106), 4);
+  var_0 = spawn("script_origin", (1542, -2375, 106));
+  var_0 playSound("stp_walla_alley_civs_grp_01");
+  var_0 moveTo((2273, -2399, 106), 4);
   wait 3;
-  var1 = spawn("script_origin", (1504, -2258, 114));
-  var1 playSound("stp_walla_alley_civs_couple_01", "sounddone");
-  var1 moveTo((1864, -2224, 114), 4);
-  var1 waittill("sounddone");
-  var1 playSound("stp_walla_alley_civs_female_react");
+  var_1 = spawn("script_origin", (1504, -2258, 114));
+  var_1 playSound("stp_walla_alley_civs_couple_01", "sounddone");
+  var_1 moveTo((1864, -2224, 114), 4);
+  var_1 waittill("sounddone");
+  var_1 playSound("stp_walla_alley_civs_female_react");
   wait 4;
-  var0 delete();
-  var1 delete();
+  var_0 delete();
+  var_1 delete();
 }
 
 function bar_street_catchup() {
@@ -822,7 +822,7 @@ function evade_start() {
   scripts\engine\sp\utility::set_start_location("start_stpetersburg_evade_player", [level.player]);
   level.price = scripts\sp\maps\stpetersburg\stpetersburg_utility::setup_named_ai("price", "Captain Price", "start_stpetersburg_evade_price");
   setup_player_ar();
-  var0 = getnode("enforcer_evade_teleport_node", "targetname");
+  var_0 = getnode("enforcer_evade_teleport_node", "targetname");
   scripts\engine\utility::flag_set("flag_start_escort_containment");
 }
 
@@ -871,10 +871,10 @@ function gauntlet_shootout_start() {
   waitframe();
   scripts\engine\sp\utility::set_start_location("start_gauntlet_shootout_player", [level.player]);
   setup_player_ar();
-  var0 = getEnt("civ_gauntlet_react_2", "targetname");
+  var_0 = getEnt("civ_gauntlet_react_2", "targetname");
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
   }
 
   scripts\engine\utility::flag_set("flag_gauntlet_player_in_van");
@@ -919,10 +919,10 @@ function interrogation_stp_main() {
   scripts\engine\utility::flag_set("lighting_interrogation");
   interrogation_actor_setup();
   level.player allowmovement(0);
-  var0 = [level.price, level.enforcer, level.nikolai];
-  scripts\engine\sp\utility::set_start_location("interrogation_start", var0);
-  var1 = scripts\engine\utility::ter_op(getdvarint("stp_interrogation_phase") < 2, "interrogation_intro_start", "interrogation_start");
-  scripts\engine\sp\utility::set_start_location(var1, [level.player]);
+  var_0 = [level.price, level.enforcer, level.nikolai];
+  scripts\engine\sp\utility::set_start_location("interrogation_start", var_0);
+  var_1 = scripts\engine\utility::ter_op(getdvarint("stp_interrogation_phase") < 2, "interrogation_intro_start", "interrogation_start");
+  scripts\engine\sp\utility::set_start_location(var_1, [level.player]);
   scripts\sp\maps\stpetersburg\stpetersburg_interrogation::interrogation_main();
 }
 
@@ -952,18 +952,18 @@ function interrogation_actor_setup() {
 }
 
 function setup_player_silenced_pistol() {
-  var0 = scripts\sp\utility::make_weapon("iw8_pi_papa320", ["silencerpstl_west01", "reflex_west01_pstl"]);
-  level.player giveweapon(var0, 0, 0, 0, 1);
-  level.player givemaxammo(var0);
-  level.player switchtoweaponimmediate(var0);
-  level.player.initial_loadout_weapon = var0;
+  var_0 = scripts\sp\utility::make_weapon("iw8_pi_papa320", ["silencerpstl_west01", "reflex_west01_pstl"]);
+  level.player giveweapon(var_0, 0, 0, 0, 1);
+  level.player givemaxammo(var_0);
+  level.player switchtoweaponimmediate(var_0);
+  level.player.initial_loadout_weapon = var_0;
 }
 
 function setup_player_ar() {
-  var0 = scripts\sp\utility::make_weapon("iw8_ar_akilo47", ["reflexstable_west01"]);
-  level.player giveweapon(var0, 0, 0, 0, 1);
-  level.player givemaxammo(var0);
-  level.player switchtoweaponimmediate(var0);
+  var_0 = scripts\sp\utility::make_weapon("iw8_ar_akilo47", ["reflexstable_west01"]);
+  level.player giveweapon(var_0, 0, 0, 0, 1);
+  level.player givemaxammo(var_0);
+  level.player switchtoweaponimmediate(var_0);
 }
 
 function setup_price_silenced_pistol() {
@@ -971,9 +971,9 @@ function setup_price_silenced_pistol() {
     return;
   }
 
-  var0 = scripts\sp\utility::make_weapon("iw8_pi_papa320", ["silencerpstl_west01"]);
-  level.price.silenced_pistol = var0;
-  level.price scripts\anim\shared::forceuseweapon(var0, "sidearm");
+  var_0 = scripts\sp\utility::make_weapon("iw8_pi_papa320", ["silencerpstl_west01"]);
+  level.price.silenced_pistol = var_0;
+  level.price scripts\anim\shared::forceuseweapon(var_0, "sidearm");
 }
 
 function setup_price_smg() {
@@ -981,9 +981,9 @@ function setup_price_smg() {
     return;
   }
 
-  var0 = scripts\sp\utility::make_weapon("iw8_sm_mpapa7", ["reflex_west01", "back_mpapa7"]);
-  level.price.smg = var0;
-  level.price scripts\anim\shared::forceuseweapon(var0, "primary");
+  var_0 = scripts\sp\utility::make_weapon("iw8_sm_mpapa7", ["reflex_west01", "back_mpapa7"]);
+  level.price.smg = var_0;
+  level.price scripts\anim\shared::forceuseweapon(var_0, "primary");
   level.price.no_pistol_switch = 1;
   level.price.disablepistol = 1;
 }
@@ -1025,9 +1025,9 @@ function null_catchup() {}
 
 function apartment_enforcer_enter_apt() {
   level.enforcer endon("death");
-  var0 = getnode("apartment_stairs_blindfire_position", "targetname");
+  var_0 = getnode("apartment_stairs_blindfire_position", "targetname");
   level.enforcer scripts\engine\sp\utility::set_goal_radius(16);
-  level.enforcer scripts\engine\sp\utility::set_goal_node(var0);
+  level.enforcer scripts\engine\sp\utility::set_goal_node(var_0);
   level.enforcer scripts\common\utility::demeanor_override("sprint");
   level.enforcer waittill("goal");
   scripts\engine\utility::flag_set("flag_bar_street_enforcer_in_apt");

@@ -33,10 +33,10 @@ function groundz() {
 }
 
 function brmmp_createc130pathstruct() {
-  var0 = (level.br_level.default_class_chosen[1][0], level.br_level.default_class_chosen[1][1], 0);
-  var1 = level.br_level.br_circleradii[1];
-  var2 = scripts\mp\gametypes\br_c130::createtestc130path(var0, var1);
-  return var2;
+  var_0 = (level.br_level.default_class_chosen[1][0], level.br_level.default_class_chosen[1][1], 0);
+  var_1 = level.br_level.br_circleradii[1];
+  var_2 = scripts\mp\gametypes\br_c130::createtestc130path(var_0, var_1);
+  return var_2;
 }
 
 function brmmp_addtoc130infil() {
@@ -46,14 +46,14 @@ function brmmp_addtoc130infil() {
 function brmmp_kickplayersatcircleedge() {
   level endon("game_ended");
   self endon("death");
-  var0 = distance(self.ref_12205.startpt, self.ref_12205.neurotoxin_damage_monitor);
-  var1 = var0 / scripts\mp\gametypes\br_c130::getc130speed() - 5;
-  wait var1;
+  var_0 = distance(self.ref_12205.startpt, self.ref_12205.neurotoxin_damage_monitor);
+  var_1 = var_0 / scripts\mp\gametypes\br_c130::getc130speed() - 5;
+  wait var_1;
 
-  foreach(var3 in level.players) {
-    if(isDefined(var3) && isDefined(var3.br_infil_type) && var3.br_infil_type == "c130" && !isDefined(var3.jumptype)) {
-      var3.jumptype = "outOfBounds";
-      var3 notify("halo_kick_c130");
+  foreach(var_3 in level.players) {
+    if(isDefined(var_3) && isDefined(var_3.br_infil_type) && var_3.br_infil_type == "c130" && !isDefined(var_3.jumptype)) {
+      var_3.jumptype = "outOfBounds";
+      var_3 notify("halo_kick_c130");
     }
   }
 }

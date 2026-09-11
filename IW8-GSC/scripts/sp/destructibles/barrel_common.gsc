@@ -3,47 +3,47 @@
  * Script: scripts\sp\destructibles\barrel_common.gsc
 ******************************************************/
 
-function barrel_setup(var0, var1, var2, var3, var4, var5, var6) {
+function barrel_setup(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isDefined(level.phys_barrels)) {
     level.phys_barrels = [];
   }
 
   level.phys_barrels = scripts\engine\utility::array_add(level.phys_barrels, self);
   self.onfire = undefined;
-  self.subtype = var0;
+  self.subtype = var_0;
   self.isbarrel = 1;
   self setCanDamage(1);
-  self.barrel_health = var1;
-  self.phys_barrel_radius = var2;
-  self.phys_amp_normal = var3;
-  self.phys_amp_max = var4;
-  self.min_range_max_amp = var5;
+  self.barrel_health = var_1;
+  self.phys_barrel_radius = var_2;
+  self.phys_amp_normal = var_3;
+  self.phys_amp_max = var_4;
+  self.min_range_max_amp = var_5;
   self.spewtags = [];
   thread barrel_cleanup();
   thread barrel_nav_obstruction();
 }
 
 function barrel_nav_obstruction() {
-  var0 = createnavobstaclebybounds(self.origin, (12, 12, 50), (0, 0, 0));
-  var1 = undefined;
+  var_0 = createnavobstaclebybounds(self.origin, (12, 12, 50), (0, 0, 0));
+  var_1 = undefined;
 
   while(isDefined(self) && self.spewtags.size <= 0) {
     wait 0.05;
   }
 
   if(!isDefined(self)) {
-    destroynavobstacle(var0);
+    destroynavobstacle(var_0);
     return;
   }
 
-  var2 = self.phys_barrel_radius / 4.5;
-  var1 = "barrel" + self getentitynumber();
-  createnavrepulsor(var1, -1, self, var2, 1);
+  var_2 = self.phys_barrel_radius / 4.5;
+  var_1 = "barrel" + self getentitynumber();
+  createnavrepulsor(var_1, -1, self, var_2, 1);
   scripts\engine\utility::waittill_either("barrel_death", "entitydeleted");
-  destroynavobstacle(var0);
+  destroynavobstacle(var_0);
 }
 
-function is_self_detonating(var0) {
+function is_self_detonating(var_0) {
   return self.subtype == "red";
 }
 
@@ -52,27 +52,27 @@ function barrel_cleanup() {
   level.phys_barrels = scripts\engine\utility::array_remove(level.phys_barrels, self);
 }
 
-function get_barrels(var0) {
-  if(!isDefined(var0)) {
+function get_barrels(var_0) {
+  if(!isDefined(var_0)) {
     return level.phys_barrels;
   }
 
-  var1 = [];
+  var_1 = [];
 
-  foreach(var3 in level.phys_barrels) {
-    if(isDefined(var3.subtype) && var3.subtype == var0) {
-      var1 = scripts\engine\utility::array_add(var1, var3);
+  foreach(var_3 in level.phys_barrels) {
+    if(isDefined(var_3.subtype) && var_3.subtype == var_0) {
+      var_1 = scripts\engine\utility::array_add(var_1, var_3);
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function barrel_fusetimer(var0) {
+function barrel_fusetimer(var_0) {
   self endon("barrel_death");
   self notify("new_barrel_timer");
   self endon("new_barrel_timer");
-  wait var0;
+  wait var_0;
 
   while(isDefined(self.dont_explode)) {
     waitframe();
@@ -81,138 +81,138 @@ function barrel_fusetimer(var0) {
   self notify("barrel_death");
 }
 
-function barrel_block_gesture(var0, var1) {
+function barrel_block_gesture(var_0, var_1) {
   if(level.player isthrowinggrenade() || level.player isthrowingbackgrenade()) {
     return;
   }
 
-  var2 = distance2dsquared(level.player.origin, var1);
+  var_2 = distance2dsquared(level.player.origin, var_1);
 
-  if(var2 > squared(var0)) {
+  if(var_2 > squared(var_0)) {
     return;
   }
 
-  if(var2 > squared(var0 * 0.25)) {
-    var3 = vectordot(scripts\engine\utility::flatten_vector(vectorNormalize(var1 - level.player.origin)), anglesToForward(level.player.angles));
+  if(var_2 > squared(var_0 * 0.25)) {
+    var_3 = vectordot(scripts\engine\utility::flatten_vector(vectorNormalize(var_1 - level.player.origin)), anglesToForward(level.player.angles));
 
-    if(var3 < 0) {
+    if(var_3 < 0) {
       return;
     }
   }
 
-  if(!scripts\engine\trace::ray_trace_passed(var1 + (0, 0, 12), level.player getEye(), undefined, scripts\engine\trace::create_world_contents())) {
+  if(!scripts\engine\trace::ray_trace_passed(var_1 + (0, 0, 12), level.player getEye(), undefined, scripts\engine\trace::create_world_contents())) {
     return;
   }
 
   thread barrel_reaction_gesture(level.player);
 }
 
-function barrel_reaction_gesture(var0) {
+function barrel_reaction_gesture(var_0) {
   self endon("death");
-  var1 = scripts\engine\utility::spawn_tag_origin(var0, (0, 0, 0));
-  thread scripts\engine\utility::delete_on_death(var1);
-  var2 = "ges_frag_block";
-  var3 = self playgestureviewmodel(var2, var1, 1, 0.1);
+  var_1 = scripts\engine\utility::spawn_tag_origin(var_0, (0, 0, 0));
+  thread scripts\engine\utility::delete_on_death(var_1);
+  var_2 = "ges_frag_block";
+  var_3 = self playgestureviewmodel(var_2, var_1, 1, 0.1);
 
-  if(var3) {
-    childthread scripts\sp\player\gestures::player_gestures_input_disable(var2, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1.4, "barrelReactionGesture");
+  if(var_3) {
+    childthread scripts\sp\player\gestures::player_gestures_input_disable(var_2, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1.4, "barrelReactionGesture");
 
     for(;;) {
-      self waittill("gesture_stopped", var2);
+      self waittill("gesture_stopped", var_2);
 
-      if(var2 == "ges_frag_block") {
+      if(var_2 == "ges_frag_block") {
         break;
       }
     }
   }
 
-  if(isDefined(var1)) {
-    var1 delete();
+  if(isDefined(var_1)) {
+    var_1 delete();
     return;
   }
 }
 
-function isplayersniperhit(var0, var1) {
-  if(isDefined(var0) && isDefined(var1) && var0 == level.player && var1.classname == "sniper") {
+function isplayersniperhit(var_0, var_1) {
+  if(isDefined(var_0) && isDefined(var_1) && var_0 == level.player && var_1.classname == "sniper") {
     return true;
   }
 
   return false;
 }
 
-function isdirectunderbarrelhit(var0) {
-  if(isDefined(var0) && var0 == "MOD_IMPACT") {
+function isdirectunderbarrelhit(var_0) {
+  if(isDefined(var_0) && var_0 == "MOD_IMPACT") {
     return true;
   }
 
   return false;
 }
 
-function isgrenadeinrange(var0, var1, var2) {
-  if(!isDefined(var1)) {
+function isgrenadeinrange(var_0, var_1, var_2) {
+  if(!isDefined(var_1)) {
     return 0;
   }
 
-  if(isDefined(var1) && var1 != "MOD_GRENADE" && var1 != "MOD_GRENADE_SPLASH") {
+  if(isDefined(var_1) && var_1 != "MOD_GRENADE" && var_1 != "MOD_GRENADE_SPLASH") {
     return 0;
   }
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var3 = distance(self.origin, var0);
+  var_3 = distance(self.origin, var_0);
 
-  if(var3 > var2) {
+  if(var_3 > var_2) {
     return 0;
   }
 
   return 1;
 }
 
-function isvalidbarreldamage(var0, var1) {
-  if(isDefined(var0) && isai(var0)) {
+function isvalidbarreldamage(var_0, var_1) {
+  if(isDefined(var_0) && isai(var_0)) {
     return false;
   }
 
-  if(isDefined(var0) && isDefined(var0.isbarrel)) {
+  if(isDefined(var_0) && isDefined(var_0.isbarrel)) {
     return false;
   }
 
-  if(ismeleedamage(var1)) {
+  if(ismeleedamage(var_1)) {
     return false;
   }
 
   return true;
 }
 
-function ismeleedamage(var0) {
-  if(isDefined(var0) && var0 == "MOD_MELEE") {
+function ismeleedamage(var_0) {
+  if(isDefined(var_0) && var_0 == "MOD_MELEE") {
     return true;
   }
 
   return false;
 }
 
-function barrel_launch(var0, var1, var2) {
+function barrel_launch(var_0, var_1, var_2) {
   self endon("barrel_death");
-  wait var2;
+  wait var_2;
 
   if(!isDefined(self)) {
     return;
   }
 
-  var3 = vectorNormalize(self.origin - var0);
-  var4 = self.phys_amp_normal;
+  var_3 = vectorNormalize(self.origin - var_0);
+  var_4 = self.phys_amp_normal;
 
-  if(var1 <= self.min_range_max_amp) {
-    var4 = self.phys_amp_max;
+  if(var_1 <= self.min_range_max_amp) {
+    var_4 = self.phys_amp_max;
   }
 
-  var5 = self.phys_barrel_radius - var1;
-  var6 = var5 / self.phys_barrel_radius;
-  var6 *= var4;
-  self physicslaunchserver(self.origin, var3 * var6);
+  var_5 = self.phys_barrel_radius - var_1;
+  var_6 = var_5 / self.phys_barrel_radius;
+  var_6 *= var_4;
+  self physicslaunchserver(self.origin, var_3 * var_6);
 }
 
 function barrel_one_hit_kill() {
@@ -230,17 +230,17 @@ function barrel_player() {
       wait 0.05;
     }
 
-    var0 = self physics_getentitycenterofmass();
-    var0 = var0["unscaled"] + (0, 0, 4);
-    self physicslaunchserver(var0, vectorNormalize(self.origin - level.player.origin) * 1000);
+    var_0 = self physics_getentitycenterofmass();
+    var_0 = var_0["unscaled"] + (0, 0, 4);
+    self physicslaunchserver(var_0, vectorNormalize(self.origin - level.player.origin) * 1000);
     wait 0.05;
   }
 }
 
 function barrel_debug() {
   self endon("barrel_death");
-  var0 = undefined;
-  var1 = undefined;
+  var_0 = undefined;
+  var_1 = undefined;
   setdvarifuninitialized("barrel_debug", 0);
 
   for(;;) {

@@ -28,10 +28,10 @@ function main() {
   self.usescriptedweapon = 0;
   self.scriptedweaponclassprimary = "none";
   self.weapon = isundefinedweapon();
-  var0 = undefined;
-  var1 = ["civ_western_cold_boy"];
+  var_0 = undefined;
+  var_1 = ["civ_western_cold_boy"];
 
-  switch (scripts\code\character::get_random_character(1, var0, var1)) {
+  switch (scripts\code\character::get_random_character(1, var_0, var_1)) {
     case 0:
       character\civ_western_cold_boy::main();
       break;
@@ -42,7 +42,7 @@ function spawner() {
   self setspawnerteam("neutral");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\civ_western_cold_boy::precache();
   scripts\aitypes\bt_util::init();
   scripts\aitypes\assets::civilian();

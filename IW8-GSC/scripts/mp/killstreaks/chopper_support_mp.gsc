@@ -8,6 +8,6 @@ function init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("chopper_support", "set_vehicle_hit_damage_data", &chopper_support_set_vehicle_hit_damage_data);
 }
 
-function chopper_support_set_vehicle_hit_damage_data(var0, var1) {
-  scripts\mp\vehicles\damage::set_vehicle_hit_damage_data(var0, var1);
+function chopper_support_set_vehicle_hit_damage_data(var_0, var_1) {
+  scripts\mp\vehicles\damage::set_vehicle_hit_damage_data(var_0, var_1);
 }

@@ -3,71 +3,71 @@
  * Script: scripts\mp\challenges_mp.gsc
 ***********************************************/
 
-function spawn_enemy_tank(var0) {
-  if(!isDefined(var0.angles)) {
-    var0.angles = (0, 0, 0);
+function spawn_enemy_tank(var_0) {
+  if(!isDefined(var_0.angles)) {
+    var_0.angles = (0, 0, 0);
   }
 
-  var1 = spawnStruct();
-  var2 = spawnStruct();
-  var1.origin = var0.origin;
-  var1.angles = var0.angles;
-  var1.spawntype = "GAME_MODE";
-  var1.owner = undefined;
-  var1.team = "axis";
-  var1.faceawayfromowner = 0;
-  var1.cancapture = 0;
-  var1.cancaptureimmediately = 0;
-  var1.spawnmethod = "airdrop_at_position_unsafe";
-  var1.activateimmediately = 1;
-  var1.cantimeout = 0;
-  var1.usealtmodel = 1;
-  scripts\cp_mp\vehicles\light_tank::light_tank_initializespawndata(var1);
-  var3 = scripts\cp_mp\vehicles\light_tank::light_tank_spawn(var1, var2);
+  var_1 = spawnStruct();
+  var_2 = spawnStruct();
+  var_1.origin = var_0.origin;
+  var_1.angles = var_0.angles;
+  var_1.spawntype = "GAME_MODE";
+  var_1.owner = undefined;
+  var_1.team = "axis";
+  var_1.faceawayfromowner = 0;
+  var_1.cancapture = 0;
+  var_1.cancaptureimmediately = 0;
+  var_1.spawnmethod = "airdrop_at_position_unsafe";
+  var_1.activateimmediately = 1;
+  var_1.cantimeout = 0;
+  var_1.usealtmodel = 1;
+  scripts\cp_mp\vehicles\light_tank::light_tank_initializespawndata(var_1);
+  var_3 = scripts\cp_mp\vehicles\light_tank::light_tank_spawn(var_1, var_2);
 
-  if(!isDefined(var3)) {
+  if(!isDefined(var_3)) {
     return;
   }
 
   wait 10;
-  level.enemy_tanks[level.enemy_tanks.size] = var3;
+  level.enemy_tanks[level.enemy_tanks.size] = var_3;
   thread ref_13a3e();
   thread tank_waittill_death();
   thread ref_14350();
-  var3 endon("death");
-  var3 scripts\cp_mp\vehicles\light_tank::light_tank_activate();
-  var4 = scripts\engine\utility::getStructArray("enemy_tank_path", "targetname");
-  var5 = sortbydistance(var4, var3.origin)[0];
-  var6 = build_tank_path(var5);
-  var7 = build_tank_duration(var5);
-  var3 startpathnodes(var6, var7);
-  setheadiconsnaptoedges(var3.headicon, 8088);
-  var8 = scripts\cp_mp\vehicles\vehicle::ref_14192(var3, "tur_bradley_mp");
-  var8 scripts\cp_mp\emp_debuff::set_start_emp_callback(&tank_empstarted);
-  var8 scripts\cp_mp\emp_debuff::set_clear_emp_callback(&tank_empcleared);
-  var9 = scripts\cp_mp\vehicles\vehicle::ref_14192(var3, "tur_gun_lighttank_mp");
-  var9 scripts\cp_mp\emp_debuff::set_start_emp_callback(&tank_empstarted);
-  var9 scripts\cp_mp\emp_debuff::set_clear_emp_callback(&tank_empcleared);
+  var_3 endon("death");
+  var_3 scripts\cp_mp\vehicles\light_tank::light_tank_activate();
+  var_4 = scripts\engine\utility::getStructArray("enemy_tank_path", "targetname");
+  var_5 = sortbydistance(var_4, var_3.origin)[0];
+  var_6 = build_tank_path(var_5);
+  var_7 = build_tank_duration(var_5);
+  var_3 startpathnodes(var_6, var_7);
+  setheadiconsnaptoedges(var_3.headicon, 8088);
+  var_8 = scripts\cp_mp\vehicles\vehicle::ref_14192(var_3, "tur_bradley_mp");
+  var_8 scripts\cp_mp\emp_debuff::set_start_emp_callback(&tank_empstarted);
+  var_8 scripts\cp_mp\emp_debuff::set_clear_emp_callback(&tank_empcleared);
+  var_9 = scripts\cp_mp\vehicles\vehicle::ref_14192(var_3, "tur_gun_lighttank_mp");
+  var_9 scripts\cp_mp\emp_debuff::set_start_emp_callback(&tank_empstarted);
+  var_9 scripts\cp_mp\emp_debuff::set_clear_emp_callback(&tank_empcleared);
 
   if(!isDefined(level.vo_paratroopers)) {
     level.vo_paratroopers = [];
   }
 
-  level.vo_paratroopers = scripts\engine\utility::array_add(level.vo_paratroopers, var3);
+  level.vo_paratroopers = scripts\engine\utility::array_add(level.vo_paratroopers, var_3);
 
   for(;;) {
-    var10 = initdragonsbreathusage(var3);
-    var11 = var3 scripts\cp\utility::get_closest_living_player(undefined, var10);
+    var_10 = initdragonsbreathusage(var_3);
+    var_11 = var_3 scripts\cp\utility::get_closest_living_player(undefined, var_10);
 
-    if(!isDefined(var11)) {
-      var8 cleartargetentity();
-      var9 cleartargetentity();
+    if(!isDefined(var_11)) {
+      var_8 cleartargetentity();
+      var_9 cleartargetentity();
       wait 1;
       continue;
     }
 
-    ref_13a4f(var8, var11);
-    ref_13a4f(var9, var11);
+    ref_13a4f(var_8, var_11);
+    ref_13a4f(var_9, var_11);
 
     if(scripts\engine\utility::flag_exist("weapons_free") && !scripts\engine\utility::flag("weapons_free")) {
       scripts\engine\utility::flag_set("weapons_free");
@@ -79,11 +79,11 @@ function spawn_enemy_tank(var0) {
 }
 
 function initdragonsbreathusage() {
-  var0 = level.players;
-  var1 = [];
+  var_0 = level.players;
+  var_1 = [];
 
-  foreach(var3 in var0) {
-    if(istrue(var3.ignoreme)) {
+  foreach(var_3 in var_0) {
+    if(istrue(var_3.ignoreme)) {
       continue;
     }
 
@@ -91,32 +91,32 @@ function initdragonsbreathusage() {
       continue;
     }
 
-    if(ref_124f8(var3)) {
+    if(ref_124f8(var_3)) {
       continue;
     }
 
-    var1 = var3;
+    var_1 = var_3;
   }
 
-  return var1;
+  return var_1;
 }
 
-function ref_124f8(var0) {
-  var1 = 2000;
+function ref_124f8(var_0) {
+  var_1 = 2000;
 
   if(istrue(self.alerted)) {
-    var1 = 6000;
+    var_1 = 6000;
   }
 
   if(scripts\engine\utility::flag_exist("weapons_free") && !scripts\engine\utility::flag("weapons_free")) {
-    if(isDefined(var0.perk_data["stealth_dist_scalar"])) {
-      var1 *= var0.perk_data["stealth_dist_scalar"];
+    if(isDefined(var_0.perk_data["stealth_dist_scalar"])) {
+      var_1 *= var_0.perk_data["stealth_dist_scalar"];
     }
   }
 
-  var2 = var1 * var1;
+  var_2 = var_1 * var_1;
 
-  if(distancesquared(self.origin, var0.origin) > var2) {
+  if(distancesquared(self.origin, var_0.origin) > var_2) {
     return true;
   }
 
@@ -137,33 +137,33 @@ function ref_14350() {
   }
 }
 
-function ref_13a4f(var0, var1) {
-  var2 = 0;
+function ref_13a4f(var_0, var_1) {
+  var_2 = 0;
 
-  if(var0 scripts\cp_mp\emp_debuff::is_empd()) {
-    var0 cleartargetentity();
-  } else if(istrue(var1.binvehicle) && isDefined(var1.vehicle)) {
-    if(var0 turretcantarget(var1.vehicle.origin + (0, 0, 50))) {
-      var0 settargetentity(var1.vehicle, (0, 0, 50));
-      var2 = 1;
+  if(var_0 scripts\cp_mp\emp_debuff::is_empd()) {
+    var_0 cleartargetentity();
+  } else if(istrue(var_1.binvehicle) && isDefined(var_1.vehicle)) {
+    if(var_0 turretcantarget(var_1.vehicle.origin + (0, 0, 50))) {
+      var_0 settargetentity(var_1.vehicle, (0, 0, 50));
+      var_2 = 1;
     }
   } else {
-    var0 settargetentity(var1);
-    var2 = 1;
+    var_0 settargetentity(var_1);
+    var_2 = 1;
   }
 
-  if(var2) {
-    thread tank_shoot_at_target(var0);
+  if(var_2) {
+    thread tank_shoot_at_target(var_0);
     return;
   }
 }
 
-function tank_empstarted(var0) {
+function tank_empstarted(var_0) {
   ref_13a49();
 }
 
-function tank_empcleared(var0) {
-  if(var0) {
+function tank_empcleared(var_0) {
+  if(var_0) {
     return;
   }
 
@@ -180,55 +180,55 @@ function ref_13a49() {
   self turretfireenable();
 }
 
-function tank_shoot_at_target(var0, var1) {
+function tank_shoot_at_target(var_0, var_1) {
   self endon("death");
-  var0 endon("death");
-  var2 = 1;
-  var3 = getcompleteweaponname("tur_bradley_mp");
+  var_0 endon("death");
+  var_2 = 1;
+  var_3 = getcompleteweaponname("tur_bradley_mp");
 
-  if(istrue(var1)) {
-    var2 = randomintrange(15, 25);
-    var3 = getcompleteweaponname("tur_gun_lighttank_mp");
+  if(istrue(var_1)) {
+    var_2 = randomintrange(15, 25);
+    var_3 = getcompleteweaponname("tur_gun_lighttank_mp");
   }
 
-  var4 = weaponfiretime(var3);
+  var_4 = weaponfiretime(var_3);
 
-  for(var5 = 0; var5 < var2; var5++) {
-    var0 shootturret();
-    wait var4;
+  for(var_5 = 0; var_5 < var_2; var_5++) {
+    var_0 shootturret();
+    wait var_4;
   }
 }
 
-function build_tank_path(var0) {
+function build_tank_path(var_0) {
   self endon("death");
-  var1 = [];
-  var2 = var0;
+  var_1 = [];
+  var_2 = var_0;
 
-  for(var1 = var2.origin; isDefined(var2) && isDefined(var2.target); var1 = var2.origin) {
-    var2 = scripts\engine\utility::getStruct(var2.target, "targetname");
+  for(var_1 = var_2.origin; isDefined(var_2) && isDefined(var_2.target); var_1 = var_2.origin) {
+    var_2 = scripts\engine\utility::getStruct(var_2.target, "targetname");
   }
 
-  return var1;
+  return var_1;
 }
 
-function build_tank_duration(var0) {
+function build_tank_duration(var_0) {
   self endon("death");
-  var1 = [];
-  var2 = var0;
+  var_1 = [];
+  var_2 = var_0;
 
-  for(var1 = 10; isDefined(var2) && isDefined(var2.target); var1 = 10) {
-    var2 = scripts\engine\utility::getStruct(var2.target, "targetname");
+  for(var_1 = 10; isDefined(var_2) && isDefined(var_2.target); var_1 = 10) {
+    var_2 = scripts\engine\utility::getStruct(var_2.target, "targetname");
   }
 
-  return var1;
+  return var_1;
 }
 
 function ref_13a3e() {
-  for(var0 = 0; !var0; var0 = 1) {
-    self waittill("alerted", var1);
+  for(var_0 = 0; !var_0; var_0 = 1) {
+    self waittill("alerted", var_1);
 
-    if(isDefined(var1.attacker.team)) {
-      if(var1.attacker.team != self.team) {}
+    if(isDefined(var_1.attacker.team)) {
+      if(var_1.attacker.team != self.team) {}
     }
   }
 

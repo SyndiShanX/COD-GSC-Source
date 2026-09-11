@@ -29,26 +29,26 @@ function jugg_registeractionset() {
   scripts\mp\playeractions::registeractionset("fakeJugg", ["slide", "prone"]);
 }
 
-function jugg_registeronplayerspawncallback(var0) {}
+function jugg_registeronplayerspawncallback(var_0) {}
 
-function jugg_dropcratefromscriptedheli(var0, var1, var2, var3, var4, var5, var6) {
-  return scripts\cp_mp\killstreaks\airdrop::dropcratefromscriptedheli(var0, var1, var2, var3, var4, var5, var6);
+function jugg_dropcratefromscriptedheli(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  return scripts\cp_mp\killstreaks\airdrop::dropcratefromscriptedheli(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
 }
 
-function jugg_makejuggernautcallback(var0, var1) {
-  return scripts\mp\juggernaut::jugg_makejuggernaut(var0, var1);
+function jugg_makejuggernautcallback(var_0, var_1) {
+  return scripts\mp\juggernaut::jugg_makejuggernaut(var_0, var_1);
 }
 
-function jugg_initconfig(var0) {
-  return scripts\mp\juggernaut::jugg_createconfig(var0);
+function jugg_initconfig(var_0) {
+  return scripts\mp\juggernaut::jugg_createconfig(var_0);
 }
 
-function jugg_leveldata(var0) {
-  return scripts\cp_mp\killstreaks\airdrop::getleveldata(var0);
+function jugg_leveldata(var_0) {
+  return scripts\cp_mp\killstreaks\airdrop::getleveldata(var_0);
 }
 
-function jugg_watchpickup(var0) {
-  thread scripts\mp\weapons::watchpickup(var0);
+function jugg_watchpickup(var_0) {
+  thread scripts\mp\weapons::watchpickup(var_0);
 }
 
 function jugg_getmovespeedscalar() {
@@ -59,8 +59,8 @@ function jugg_updatemovespeedscale() {
   scripts\mp\weapons::updatemovespeedscale();
 }
 
-function jugg_allowactionset(var0, var1) {
-  scripts\mp\playeractions::allowactionset(var0, var1);
+function jugg_allowactionset(var_0, var_1) {
+  scripts\mp\playeractions::allowactionset(var_0, var_1);
 }
 
 function jugg_decrementfauxvehiclecount() {
@@ -71,7 +71,7 @@ function jugg_incrementfauxvehiclecount() {
   scripts\mp\utility\killstreak::incrementfauxvehiclecount();
 }
 
-function jugg_cantriggerjuggernaut(var0) {
+function jugg_cantriggerjuggernaut(var_0) {
   if(scripts\mp\utility\killstreak::currentactivevehiclecount() >= scripts\mp\utility\killstreak::maxvehiclesallowed() || level.fauxvehiclecount + 1 >= scripts\mp\utility\killstreak::maxvehiclesallowed()) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
       self[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/TOO_MANY_VEHICLES");
@@ -91,19 +91,19 @@ function jugg_cantriggerjuggernaut(var0) {
   return true;
 }
 
-function juggernautweaponpickedup(var0, var1) {
+function juggernautweaponpickedup(var_0, var_1) {
   if(istrue(self.isjuggernaut)) {
     return;
   }
 
-  if(isDefined(var1) && isDefined(var1.basename) && var1.basename == "iw8_lm_dblmg_mp") {
-    var2 = weaponclipsize(var1);
-    self setweaponammoclip(var1, var2);
+  if(isDefined(var_1) && isDefined(var_1.basename) && var_1.basename == "iw8_lm_dblmg_mp") {
+    var_2 = weaponclipsize(var_1);
+    self setweaponammoclip(var_1, var_2);
     return;
   }
 
   self.ref_12346 = 1;
-  self.minigunprevweaponobject = var2;
+  self.minigunprevweaponobject = var_2;
   self.playerstreakspeedscale = scripts\mp\juggernaut::jugg_getmovespeedscalar();
   scripts\mp\weapons::updatemovespeedscale();
   scripts\mp\playeractions::allowactionset("fakeJugg", 0);
@@ -113,9 +113,9 @@ function juggernautweaponpickedup(var0, var1) {
     scripts\common\utility::allow_mount_side(0, "fakeJugg");
   }
 
-  scripts\cp_mp\killstreaks\juggernaut::watchjuggernautweaponenduse(var1, var2);
+  scripts\cp_mp\killstreaks\juggernaut::watchjuggernautweaponenduse(var_1, var_2);
 }
 
-function jugg_playoperatoruseline(var0) {
-  level thread scripts\mp\battlechatter_mp::trysaylocalsound(var0, "use_killstreak_juggernaut_local");
+function jugg_playoperatoruseline(var_0) {
+  level thread scripts\mp\battlechatter_mp::trysaylocalsound(var_0, "use_killstreak_juggernaut_local");
 }

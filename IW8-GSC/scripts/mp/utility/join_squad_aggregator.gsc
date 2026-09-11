@@ -3,16 +3,16 @@
  * Script: scripts\mp\utility\join_squad_aggregator.gsc
 ********************************************************/
 
-function onplayerjoinsquad(var0) {
-  foreach(var2 in level.onjoinsquadcallbacks) {
-    self[[var2]](var0);
+function onplayerjoinsquad(var_0) {
+  foreach(var_2 in level.onjoinsquadcallbacks) {
+    self[[var_2]](var_0);
   }
 }
 
-function registeronplayerjoinsquadcallback(var0) {
+function registeronplayerjoinsquadcallback(var_0) {
   if(!isDefined(level.onjoinsquadcallbacks)) {
     level.onjoinsquadcallbacks = [];
   }
 
-  level.onjoinsquadcallbacks[level.onjoinsquadcallbacks.size] = var0;
+  level.onjoinsquadcallbacks[level.onjoinsquadcallbacks.size] = var_0;
 }

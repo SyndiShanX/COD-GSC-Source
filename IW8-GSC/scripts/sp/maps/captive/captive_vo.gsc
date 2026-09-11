@@ -35,29 +35,29 @@ function captive_vo_flags() {
   level.druggedwomanresponsecount = 0;
 }
 
-function vo_death_callout(var0, var1) {
-  self waittill("death", var2);
+function vo_death_callout(var_0, var_1) {
+  self waittill("death", var_2);
 
-  if(var2 == level.player) {
+  if(var_2 == level.player) {
     return;
   }
 
   wait 0.3;
   scripts\sp\maps\captive\captive_util::wait_combat_cooldown(0.3, 0.6);
 
-  if(!isarray(var0)) {
-    var0 = [var0];
+  if(!isarray(var_0)) {
+    var_0 = [var_0];
   }
 
-  foreach(var4 in var0) {
-    if(scripts\engine\sp\utility::is_deck(var4)) {
-      for(var5 = var4 scripts\engine\sp\utility::deck_draw(); !isalive(var1[strtok(var5, "_")[2]]); var5 = var4 scripts\engine\sp\utility::deck_draw()) {}
+  foreach(var_4 in var_0) {
+    if(scripts\engine\sp\utility::is_deck(var_4)) {
+      for(var_5 = var_4 scripts\engine\sp\utility::deck_draw(); !isalive(var_1[strtok(var_5, "_")[2]]); var_5 = var_4 scripts\engine\sp\utility::deck_draw()) {}
 
-      var4 = var5;
+      var_4 = var_5;
     }
 
-    var6 = var1[strtok(var4, "_")[2]];
-    var6 scripts\sp\maps\captive\captive_util::say_as_chatter(var4, 1, 0.8);
+    var_6 = var_1[strtok(var_4, "_")[2]];
+    var_6 scripts\sp\maps\captive\captive_util::say_as_chatter(var_4, 1, 0.8);
   }
 }
 
@@ -76,11 +76,11 @@ function barkov_dialog_interrupt() {
   }
 }
 
-function play_effort_sound(var0) {
+function play_effort_sound(var_0) {
   level notify("end_looping_effort");
 
   if(!scripts\engine\utility::flag("ignore_efforts")) {
-    scripts\engine\sp\utility::smart_player_dialogue_interrupt(var0);
+    scripts\engine\sp\utility::smart_player_dialogue_interrupt(var_0);
     return;
   }
 }
@@ -89,8 +89,8 @@ function play_looping_breath_sound() {
   level endon("end_looping_effort");
 
   if(!isDefined(level.player.breathloopdeck)) {
-    var0 = ["dx_vom_far_break_waterboard_efforts_10", "dx_vom_far_break_waterboard_interrogate_243", "dx_vom_far_break_waterboard_efforts_20"];
-    level.player.breathloopdeck = scripts\engine\sp\utility::create_deck(var0);
+    var_0 = ["dx_vom_far_break_waterboard_efforts_10", "dx_vom_far_break_waterboard_interrogate_243", "dx_vom_far_break_waterboard_efforts_20"];
+    level.player.breathloopdeck = scripts\engine\sp\utility::create_deck(var_0);
   }
 
   while(!scripts\engine\utility::flag("ignore_efforts")) {
@@ -115,10 +115,10 @@ function vo_break_intro_hadir_calls_out() {
   level.hadir scripts\engine\sp\utility::smart_dialogue("dx_vom_had_break_intro_wakeup_20");
 }
 
-function vo_break_intro_hadir_beckon_from_bed(var0) {
+function vo_break_intro_hadir_beckon_from_bed(var_0) {
   scripts\engine\utility::flag_set("hadir_speaking");
 
-  switch (var0) {
+  switch (var_0) {
     case 0:
       level.hadir scripts\engine\sp\utility::smart_dialogue("dx_vom_had_break_intro_wakeup_30");
       break;
@@ -129,17 +129,17 @@ function vo_break_intro_hadir_beckon_from_bed(var0) {
       level.hadir scripts\engine\sp\utility::smart_dialogue("dx_vom_had_break_intro_wakeup_40");
       break;
     default:
-      var1 = 0;
+      var_1 = 0;
       break;
   }
 
   scripts\engine\utility::flag_clear("hadir_speaking");
 }
 
-function vo_break_intro_hadir_beckon_to_bars(var0) {
+function vo_break_intro_hadir_beckon_to_bars(var_0) {
   scripts\engine\utility::flag_set("hadir_speaking");
 
-  switch (var0) {
+  switch (var_0) {
     case 0:
       level.hadir scripts\engine\sp\utility::smart_dialogue("dx_vom_had_break_intro_solitary_50");
       break;
@@ -153,10 +153,10 @@ function vo_break_intro_hadir_beckon_to_bars(var0) {
   scripts\engine\utility::flag_clear("hadir_speaking");
 }
 
-function vo_break_intro_hadir_key_beckon(var0) {
+function vo_break_intro_hadir_key_beckon(var_0) {
   scripts\engine\utility::flag_set("hadir_speaking");
 
-  switch (var0) {
+  switch (var_0) {
     case 0:
       level.hadir scripts\engine\sp\utility::smart_dialogue("dx_vom_had_break_intro_solitary_141");
       break;
@@ -164,7 +164,7 @@ function vo_break_intro_hadir_key_beckon(var0) {
       level.hadir scripts\engine\sp\utility::smart_dialogue("dx_vom_had_break_intro_solitary_142");
       break;
     default:
-      var1 = 0;
+      var_1 = 0;
       break;
   }
 
@@ -191,13 +191,13 @@ function vo_break_exercise_goto_corner_nag() {
   level.barkov.gotocornernagindex++;
 }
 
-function vo_break_exercise_left_corner_nag(var0) {
+function vo_break_exercise_left_corner_nag(var_0) {
   if(!isDefined(level.barkov.leftcornernagindex)) {
     level.barkov.leftcornernagindex = 0;
   }
 
-  if(!isDefined(var0)) {
-    var0 = 0;
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
   switch (level.barkov.leftcornernagindex) {
@@ -214,7 +214,7 @@ function vo_break_exercise_left_corner_nag(var0) {
       level.barkov thread scripts\engine\sp\utility::smart_dialogue("dx_vom_bkv_break_exercise_corner_180");
       break;
     default:
-      if(!var0) {
+      if(!var_0) {
         scripts\sp\maps\captive\captive_break::barkov_kills_player(1);
       } else {
         level.barkov thread scripts\engine\sp\utility::smart_dialogue("dx_vom_bkv_break_exercise_corner_150");
@@ -226,8 +226,8 @@ function vo_break_exercise_left_corner_nag(var0) {
   level.barkov.leftcornernagindex++;
 }
 
-function vo_break_exercise_not_that_corner(var0) {
-  switch (var0) {
+function vo_break_exercise_not_that_corner(var_0) {
+  switch (var_0) {
     case 0:
       level.barkov thread scripts\engine\sp\utility::smart_dialogue("dx_vom_bkv_break_exercise_corner_31");
       break;
@@ -243,8 +243,8 @@ function vo_break_exercise_not_that_corner(var0) {
   }
 }
 
-function vo_break_exercise_facewall_nag(var0) {
-  switch (var0) {
+function vo_break_exercise_facewall_nag(var_0) {
+  switch (var_0) {
     case 0:
       level.barkov thread scripts\engine\sp\utility::smart_dialogue("dx_vom_bkv_break_exercise_corner_60");
       break;
@@ -293,14 +293,14 @@ function vo_break_exercise_play_corner_dialog() {
 }
 
 function vo_break_exercise_plans_to_escape() {
-  var0 = gettime();
-  var1 = 1.5;
+  var_0 = gettime();
+  var_1 = 1.5;
 
   if(scripts\engine\utility::flag("corner_dialog_interrupted")) {
-    var1 = 0.5;
+    var_1 = 0.5;
   }
 
-  while(!scripts\engine\utility::time_has_passed(var0, var1)) {
+  while(!scripts\engine\utility::time_has_passed(var_0, var_1)) {
     if(!scripts\engine\utility::flag("facing_wall")) {
       return;
     }
@@ -309,21 +309,21 @@ function vo_break_exercise_plans_to_escape() {
   }
 
   scripts\engine\utility::flag_set("corner_dialog_started");
-  var2 = "dx_vom_bkv_break_exercise_corner_50";
+  var_2 = "dx_vom_bkv_break_exercise_corner_50";
 
   if(scripts\engine\utility::flag("corner_dialog_interrupted")) {
-    var2 = "dx_vom_bkv_break_exercise_corner_51";
+    var_2 = "dx_vom_bkv_break_exercise_corner_51";
   }
 
   if(!scripts\engine\utility::flag("facing_wall") || scripts\engine\utility::flag("barkov_killing_player")) {
     return;
   }
 
-  level.barkov thread scripts\sp\anim::play_sound_at_viewheight(var2);
-  var1 = lookupsoundlength(var2) / 1000;
-  var0 = gettime();
+  level.barkov thread scripts\sp\anim::play_sound_at_viewheight(var_2);
+  var_1 = lookupsoundlength(var_2) / 1000;
+  var_0 = gettime();
 
-  while(!scripts\engine\utility::time_has_passed(var0, var1)) {
+  while(!scripts\engine\utility::time_has_passed(var_0, var_1)) {
     if(!scripts\engine\utility::flag("facing_wall") || scripts\engine\utility::flag("barkov_killing_player")) {
       return;
     }
@@ -363,8 +363,8 @@ function vo_resume_interrupted_dialog() {
   level.barkov.interruptrepeatcount++;
 }
 
-function vo_break_exercise_face_me_nag(var0) {
-  switch (var0) {
+function vo_break_exercise_face_me_nag(var_0) {
+  switch (var_0) {
     case 0:
       level.barkov thread scripts\engine\sp\utility::smart_dialogue("dx_vom_bkv_break_exercise_corner_120");
       break;
@@ -386,14 +386,14 @@ function vo_break_cough() {
 }
 
 function vo_break_exercise_shock_effort() {
-  var0 = ["dx_vom_far_break_exercise_corner_27", "dx_vom_far_break_exercise_corner_85", "dx_vom_far_efforts_shock_10", "dx_vom_far_efforts_shock_20", "dx_vom_far_efforts_shock_30"];
-  var1 = var0;
-  var2 = scripts\engine\utility::random(var1);
-  play_effort_sound(level.player, var2);
-  var1 = scripts\engine\utility::array_remove(var1, var2);
+  var_0 = ["dx_vom_far_break_exercise_corner_27", "dx_vom_far_break_exercise_corner_85", "dx_vom_far_efforts_shock_10", "dx_vom_far_efforts_shock_20", "dx_vom_far_efforts_shock_30"];
+  var_1 = var_0;
+  var_2 = scripts\engine\utility::random(var_1);
+  play_effort_sound(level.player, var_2);
+  var_1 = scripts\engine\utility::array_remove(var_1, var_2);
 
-  if(var1.size == 0) {
-    var1 = var0;
+  if(var_1.size == 0) {
+    var_1 = var_0;
     return;
   }
 }
@@ -404,32 +404,32 @@ function vo_break_wboard_obstructing_exit() {
 
 function vo_break_wboard_azadeh_torture() {
   level endon("used_chair");
-  var0 = spawn("script_origin", (6085, 432, -112));
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_10");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_20");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_30");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_40");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_50");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_60");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_70");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_80");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_90");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_100");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_110");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_120");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_130");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_140");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_150");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_160");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_170");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_180");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_190");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_200");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_210");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_220");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_230");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_240");
-  var0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_250");
+  var_0 = spawn("script_origin", (6085, 432, -112));
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_10");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_20");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_30");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_40");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_50");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_60");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_70");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_80");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_90");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_100");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_110");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_120");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_130");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_140");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_150");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_160");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_170");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_180");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_190");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_200");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_210");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_220");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_230");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_cg1_break_waterboard_hallway_240");
+  var_0 scripts\sp\maps\captive\captive_util::say("dx_vom_aza_break_waterboard_hallway_250");
 }
 
 function vo_break_tougher() {
@@ -437,7 +437,7 @@ function vo_break_tougher() {
   level.barkov scripts\engine\sp\utility::smart_dialogue("dx_vom_bkv_break_waterboard_interrogate2_10");
 }
 
-function vo_break_wboard_success_breath(var0) {
+function vo_break_wboard_success_breath(var_0) {
   if(!isDefined(level.barkov.wboardvosuccessbreathcount)) {
     level.barkov.wboardvosuccessbreathcount = 0;
   }
@@ -500,7 +500,7 @@ function vo_break_wboard_success_breath(var0) {
   }
 }
 
-function vo_break_wboard_fail_breath(var0) {
+function vo_break_wboard_fail_breath(var_0) {
   if(!isDefined(level.barkov.wboardvofailbreathcount)) {
     level.barkov.wboardvofailbreathcount = 0;
   }
@@ -699,8 +699,8 @@ function vo_break_wboard_breath_low() {
   }
 }
 
-function vo_break_chair_tipped_back(var0) {
-  if(var0 == 0) {
+function vo_break_chair_tipped_back(var_0) {
+  if(var_0 == 0) {
     level.player scripts\engine\sp\utility::play_sound_on_entity("dx_vom_far_break_waterboard_interrogate_150");
     return;
   }
@@ -740,14 +740,14 @@ function vo_break_nag_out_of_cell() {
   level.barkov scripts\engine\sp\utility::smart_dialogue("dx_vom_bkv_break_waterboard_walk_20");
 }
 
-function vo_break_wboard_all_day_nag(var0) {
+function vo_break_wboard_all_day_nag(var_0) {
   level.barkov scripts\engine\sp\utility::smart_dialogue("dx_vom_bkv_break_waterboard_interrogate_35");
 }
 
 function vo_break_wboard_waterboard_take_breath() {
   if(!isDefined(level.player.breathdeck)) {
-    var0 = ["dx_vom_far_break_waterboard_efforts_70", "dx_vom_far_break_waterboard_interrogate_246", "dx_vom_far_break_waterboard_efforts_80"];
-    level.player.breathdeck = scripts\engine\sp\utility::create_deck(var0);
+    var_0 = ["dx_vom_far_break_waterboard_efforts_70", "dx_vom_far_break_waterboard_interrogate_246", "dx_vom_far_break_waterboard_efforts_80"];
+    level.player.breathdeck = scripts\engine\sp\utility::create_deck(var_0);
   }
 
   level.player.breathdeck scripts\engine\sp\utility::refill_if_empty();
@@ -762,8 +762,8 @@ function vo_break_wboard_waterboard_take_breath() {
 
 function vo_break_wboard_waterboard_choke() {
   if(!isDefined(level.player.chokedeck)) {
-    var0 = ["dx_vom_far_break_waterboard_efforts_40", "dx_vom_far_break_waterboard_efforts_60", "dx_vom_far_break_waterboard_interrogate_248"];
-    level.player.chokedeck = scripts\engine\sp\utility::create_deck(var0);
+    var_0 = ["dx_vom_far_break_waterboard_efforts_40", "dx_vom_far_break_waterboard_efforts_60", "dx_vom_far_break_waterboard_interrogate_248"];
+    level.player.chokedeck = scripts\engine\sp\utility::create_deck(var_0);
   }
 
   level.player.chokedeck scripts\engine\sp\utility::refill_if_empty();
@@ -793,8 +793,8 @@ function vo_break_wboard_fail_wake3() {
   play_effort_sound(level.player_rig, "dx_vom_far_break_waterboard_interrogate_255");
 }
 
-function vo_break_spit(var0) {
-  play_effort_sound(var0);
+function vo_break_spit(var_0) {
+  play_effort_sound(var_0);
 }
 
 function vo_break_wakeup() {
@@ -890,15 +890,15 @@ function vo_ce_button_hint() {
   scripts\engine\utility::flag_wait("done_rock_hint");
   wait 5;
   thread vo_ce_outside_cell_hint();
-  var0 = getEnt("look_at_button_check", "targetname");
-  var1 = getEnt("cell_door_button", "targetname");
-  var2 = 1;
-  var3 = cos(30);
+  var_0 = getEnt("look_at_button_check", "targetname");
+  var_1 = getEnt("cell_door_button", "targetname");
+  var_2 = 1;
+  var_3 = cos(30);
 
-  while(var2) {
-    if(level.player istouching(var0)) {
-      if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var1.origin, var3)) {
-        var2 = 0;
+  while(var_2) {
+    if(level.player istouching(var_0)) {
+      if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_1.origin, var_3)) {
+        var_2 = 0;
       }
     }
 
@@ -914,9 +914,9 @@ function vo_ce_outside_cell_hint() {
   level endon("looking_at_button");
   level endon("hit_near_celldoor_button");
   wait 30;
-  var0 = getEnt("look_at_button_check", "targetname");
+  var_0 = getEnt("look_at_button_check", "targetname");
 
-  while(ispointinvolume(level.player.origin, var0)) {
+  while(ispointinvolume(level.player.origin, var_0)) {
     waitframe();
   }
 
@@ -927,26 +927,26 @@ function vo_ce_outside_cell_hint() {
 
 function vo_ce_check_rock_near_button() {
   level endon("hit_celldoor_button");
-  var0 = 0;
+  var_0 = 0;
 
-  for(var1 = 0;; var1 = 1) {
-    level.player waittill("noisemaker_thrown", var2);
+  for(var_1 = 0;; var_1 = 1) {
+    level.player waittill("noisemaker_thrown", var_2);
     thread vo_ce_check_rock_in_volume();
-    var3 = level.player scripts\engine\utility::waittill_any_return("noisemaker_in_volume", "noisemaker_settled");
+    var_3 = level.player scripts\engine\utility::waittill_any_return("noisemaker_in_volume", "noisemaker_settled");
 
-    if(var3 == "noisemaker_in_volume") {
+    if(var_3 == "noisemaker_in_volume") {
       scripts\engine\utility::flag_set("hit_near_celldoor_button");
       wait 1;
 
       if(!scripts\engine\utility::flag("hit_celldoor_button")) {
         thread vo_ce_nearly_hit_button(level);
-        var0++;
+        var_0++;
       }
 
       continue;
     }
 
-    if(scripts\engine\utility::flag("has_seen_button") && !var1) {
+    if(scripts\engine\utility::flag("has_seen_button") && !var_1) {
       scripts\engine\sp\utility::smart_player_dialogue_interrupt("dx_vom_far_cell_escape_rocks_80");
     }
   }
@@ -954,25 +954,25 @@ function vo_ce_check_rock_near_button() {
 
 function vo_ce_check_rock_in_volume() {
   level.player endon("noisemaker_settled");
-  var0 = getEnt("check_rock_near_button", "targetname");
-  var1 = 1;
+  var_0 = getEnt("check_rock_near_button", "targetname");
+  var_1 = 1;
 
-  while(var1) {
+  while(var_1) {
     if(isDefined(self)) {
-      if(ispointinvolume(self.origin, var0)) {
+      if(ispointinvolume(self.origin, var_0)) {
         level.player notify("noisemaker_in_volume");
-        var1 = 0;
+        var_1 = 0;
       }
     } else {
-      var1 = 0;
+      var_1 = 0;
     }
 
     waitframe();
   }
 }
 
-function vo_ce_nearly_hit_button(var0) {
-  switch (var0) {
+function vo_ce_nearly_hit_button(var_0) {
+  switch (var_0) {
     case 0:
       scripts\engine\sp\utility::smart_player_dialogue_interrupt("dx_vom_far_cell_escape_rocks_70");
       break;
@@ -991,8 +991,8 @@ function vo_cb_check_see_chair() {
   }
 
   level endon("found_chair");
-  var0 = ["dx_vom_far_cellblock_escape_chair_12", "dx_vom_far_cellblock_escape_chair_13", "dx_vom_far_cellblock_escape_chair_14"];
-  var1 = scripts\engine\sp\utility::create_deck(var0);
+  var_0 = ["dx_vom_far_cellblock_escape_chair_12", "dx_vom_far_cellblock_escape_chair_13", "dx_vom_far_cellblock_escape_chair_14"];
+  var_1 = scripts\engine\sp\utility::create_deck(var_0);
   vo_cb_wait_see_chair();
 
   for(;;) {
@@ -1000,19 +1000,19 @@ function vo_cb_check_see_chair() {
     vo_cb_wait_see_chair();
     wait randomfloatrange(0.3, 0.8);
     level.last_chair_nag_time = gettime();
-    scripts\engine\sp\utility::smart_player_dialogue(var1 scripts\engine\sp\utility::deck_draw());
+    scripts\engine\sp\utility::smart_player_dialogue(var_1 scripts\engine\sp\utility::deck_draw());
   }
 }
 
-function vo_cb_wait_see_chair(var0) {
-  var1 = 0;
-  var2 = 0;
-  var0 = level.cellchair.origin + (0, 0, 30);
+function vo_cb_wait_see_chair(var_0) {
+  var_1 = 0;
+  var_2 = 0;
+  var_0 = level.cellchair.origin + (0, 0, 30);
 
-  while(!var1 || !var2) {
-    var3 = cos(getdvarint("MRNKTKLLKP") / 1.65);
-    var1 = level.player scripts\engine\math::point_in_fov(var0, var3, 1);
-    var2 = sighttracepassed(level.player getEye(), var0, 0, undefined);
+  while(!var_1 || !var_2) {
+    var_3 = cos(getdvarint("MRNKTKLLKP") / 1.65);
+    var_1 = level.player scripts\engine\math::point_in_fov(var_0, var_3, 1);
+    var_2 = sighttracepassed(level.player getEye(), var_0, 0, undefined);
     waitframe();
   }
 }
@@ -1022,23 +1022,23 @@ function vo_ce_hit_button() {
   scripts\engine\sp\utility::smart_player_dialogue("dx_vom_far_cell_escape_rocks_110");
 }
 
-function vo_cb_window_view(var0) {
-  var0 scripts\engine\sp\utility::smart_dialogue("dx_vom_ru1_cellblock_escape_chair_30");
+function vo_cb_window_view(var_0) {
+  var_0 scripts\engine\sp\utility::smart_dialogue("dx_vom_ru1_cellblock_escape_chair_30");
 }
 
 function vo_cb_looking_at_stairs() {
   level endon("finished_drain_room");
-  var0 = 1;
-  var1 = cos(30);
+  var_0 = 1;
+  var_1 = cos(30);
 
-  while(var0) {
+  while(var_0) {
     scripts\engine\utility::flag_wait("looking_at_stairs");
 
-    if(scripts\engine\utility::within_fov(level.player.origin, level.player getplayerangles(), scripts\engine\utility::getStruct("stair_look_target", "targetname").origin, var1)) {
+    if(scripts\engine\utility::within_fov(level.player.origin, level.player getplayerangles(), scripts\engine\utility::getStruct("stair_look_target", "targetname").origin, var_1)) {
       wait 0.25;
 
-      if(scripts\engine\utility::flag("looking_at_stairs") && scripts\engine\utility::within_fov(level.player.origin, level.player getplayerangles(), scripts\engine\utility::getStruct("stair_look_target", "targetname").origin, var1)) {
-        var0 = 0;
+      if(scripts\engine\utility::flag("looking_at_stairs") && scripts\engine\utility::within_fov(level.player.origin, level.player getplayerangles(), scripts\engine\utility::getStruct("stair_look_target", "targetname").origin, var_1)) {
+        var_0 = 0;
       }
     }
 
@@ -1050,12 +1050,12 @@ function vo_cb_looking_at_stairs() {
 
 function vo_cb_look_at_drain() {
   level endon("finished_drain_room");
-  var0 = scripts\engine\utility::getStruct("drain_lookat", "targetname");
+  var_0 = scripts\engine\utility::getStruct("drain_lookat", "targetname");
 
   while(!scripts\engine\utility::flag("has_calledout_drain_room")) {
     scripts\engine\utility::flag_wait("at_drain_fence");
 
-    if(!scripts\engine\utility::flag("player_speaking") && scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var0.origin, 0.996195)) {
+    if(!scripts\engine\utility::flag("player_speaking") && scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_0.origin, 0.996195)) {
       scripts\engine\utility::flag_set("player_speaking");
       scripts\engine\utility::flag_set("has_calledout_drain_room");
       scripts\engine\sp\utility::smart_player_dialogue("dx_vom_far_cellblock_escape_chair_90");
@@ -1114,8 +1114,8 @@ function vo_cb_door_locked() {
   }
 }
 
-function vo_cb_chair_carry(var0) {
-  if(var0 == 1 && (!isDefined(level.last_chair_nag_time) || scripts\engine\utility::time_has_passed(level.last_chair_nag_time, 5))) {
+function vo_cb_chair_carry(var_0) {
+  if(var_0 == 1 && (!isDefined(level.last_chair_nag_time) || scripts\engine\utility::time_has_passed(level.last_chair_nag_time, 5))) {
     scripts\engine\utility::flag_waitopen("player_speaking");
     scripts\engine\utility::flag_set("player_speaking");
     scripts\engine\sp\utility::smart_player_dialogue("dx_vom_far_cellblock_escape_chair_60");
@@ -1123,7 +1123,7 @@ function vo_cb_chair_carry(var0) {
     return;
   }
 
-  if(var0 > 3) {
+  if(var_0 > 3) {
     if(scripts\engine\utility::flag("has_calledout_drain_room") && !scripts\engine\utility::flag("has_calledout_drain_room_pickup")) {
       scripts\engine\utility::flag_set("player_speaking");
       scripts\engine\sp\utility::smart_player_dialogue("dx_vom_far_cellblock_escape_chair_120");
@@ -1138,16 +1138,16 @@ function vo_cb_chair_carry(var0) {
 
 function vo_cb_trying_to_climb_window() {
   level endon("used_vent");
-  var0 = cos(20);
-  var1 = scripts\engine\utility::getStruct(self.target, "targetname").origin;
+  var_0 = cos(20);
+  var_1 = scripts\engine\utility::getStruct(self.target, "targetname").origin;
   level.lastusedwindowalias = "";
-  var2 = level.cellchair.origin[2] + 20;
+  var_2 = level.cellchair.origin[2] + 20;
 
   for(;;) {
     self waittill("trigger");
 
     while(level.player istouching(self)) {
-      if(scripts\engine\utility::flag("on_chair") && level.player.origin[2] >= var2 && scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var1, var0)) {
+      if(scripts\engine\utility::flag("on_chair") && level.player.origin[2] >= var_2 && scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_1, var_0)) {
         if(level.lastusedwindowalias == "" || level.lastusedwindowalias == "dx_vom_far_cellblock_escape_chair_160") {
           scripts\engine\sp\utility::smart_player_dialogue("dx_vom_far_cellblock_escape_chair_150");
           level.lastusedwindowalias = "dx_vom_far_cellblock_escape_chair_150";
@@ -1179,9 +1179,9 @@ function vo_bs_guards_enter() {
     level.guard2 scripts\engine\sp\utility::smart_dialogue("dx_vom_cg2_cellblock_escape_chair_200");
     wait 0.9;
     level.guard1 scripts\engine\sp\utility::smart_dialogue("dx_vom_cg1_cellblock_escape_chair_202");
-    var0 = !istrue(vo_bs_wait_reach_grate_or_timeout(3));
+    var_0 = !istrue(vo_bs_wait_reach_grate_or_timeout(3));
 
-    if(var0 || length(level.player getvelocity()) < 10) {
+    if(var_0 || length(level.player getvelocity()) < 10) {
       wait randomfloatrange(0.15, 0.25);
       level.guard2 scripts\engine\sp\utility::smart_dialogue("dx_vom_cg2_cellblock_escape_chair_210");
       wait 1;
@@ -1192,13 +1192,13 @@ function vo_bs_guards_enter() {
   level.player scripts\engine\utility::delaycall(8, &clearsoundsubmix, "sp_npc_steps_up", 8);
 }
 
-function vo_bs_wait_reach_grate_or_timeout(var0) {
+function vo_bs_wait_reach_grate_or_timeout(var_0) {
   if(scripts\engine\utility::flag("near_grate")) {
     return;
   }
 
   level endon("near_grate");
-  wait var0;
+  wait var_0;
   return 1;
 }
 
@@ -1277,13 +1277,13 @@ function vo_bs_radio_convo() {
   level endon("reached_upstairs");
   scripts\engine\utility::flag_set("started_bs_radio_conversation");
   wait 2;
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, "dx_vom_cg3_basement_stealth_combat_210");
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, "dx_vom_cg3_basement_stealth_combat_210");
 }
 
 function vo_bs_spotted() {
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, "dx_vom_cg1_basement_stealth_guards_10");
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, "dx_vom_cg1_basement_stealth_guards_10");
 }
 
 function vo_bs_stab_guard() {
@@ -1379,29 +1379,29 @@ function vo_ex_barkov_escapes() {
 }
 
 function vo_ex_pa_russian_announcements() {
-  var0 = scripts\engine\utility::getStructArray("pa_loudspeaker", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("pa_loudspeaker", "targetname");
   wait 2;
 
-  foreach(var2 in var0) {
-    scripts\engine\utility::play_sound_in_space("dx_vom_rcom_cell_escape_pa_10", var2.origin);
+  foreach(var_2 in var_0) {
+    scripts\engine\utility::play_sound_in_space("dx_vom_rcom_cell_escape_pa_10", var_2.origin);
   }
 
   wait 5;
 
-  foreach(var2 in var0) {
-    scripts\engine\utility::play_sound_in_space("dx_vom_rcom_cell_escape_pa_20", var2.origin);
+  foreach(var_2 in var_0) {
+    scripts\engine\utility::play_sound_in_space("dx_vom_rcom_cell_escape_pa_20", var_2.origin);
   }
 
   wait 5;
 
-  foreach(var2 in var0) {
-    scripts\engine\utility::play_sound_in_space("dx_vom_rcom_cell_escape_pa_30", var2.origin);
+  foreach(var_2 in var_0) {
+    scripts\engine\utility::play_sound_in_space("dx_vom_rcom_cell_escape_pa_30", var_2.origin);
   }
 
   wait 3;
 
-  foreach(var2 in var0) {
-    scripts\engine\utility::play_sound_in_space("dx_vom_rcom_cell_escape_pa_40", var2.origin);
+  foreach(var_2 in var_0) {
+    scripts\engine\utility::play_sound_in_space("dx_vom_rcom_cell_escape_pa_40", var_2.origin);
   }
 }
 
@@ -1436,15 +1436,15 @@ function vo_ex_spotted_by_sniper() {
 
   level endon("sniper_killed");
   level endon("start_meet_sas_scene");
-  var0 = [];
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, [level.darine, "dx_vom_drn_exterior_fight_combat_60"]);
+  var_0 = [];
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, [level.darine, "dx_vom_drn_exterior_fight_combat_60"]);
 }
 
 function vo_ex_ally_deaths() {
   level.player endon("death");
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, "dx_vom_far_factory_floor_death_60");
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, "dx_vom_far_factory_floor_death_60");
 }
 
 function vo_ex_reinforcements() {
@@ -1479,20 +1479,20 @@ function vo_ex_rpg_guy_fired() {
   scripts\engine\utility::flag_wait("sniper_intro_done");
   self endon("death");
   level endon("start_meet_sas_scene");
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, [level.ayah, "dx_vom_ayah_exterior_fight_combat_150"]);
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, [level.ayah, "dx_vom_ayah_exterior_fight_combat_150"]);
 }
 
-function vo_ex_killed_sniper(var0) {
+function vo_ex_killed_sniper(var_0) {
   scripts\sp\maps\captive\captive_util::wait_combat_cooldown(0.4, 1);
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     level.darine thread scripts\sp\maps\captive\captive_util::say_as_chatter("dx_vom_drn_exterior_fight_warehouse_90");
     level.ayah thread scripts\sp\maps\captive\captive_util::say_as_chatter("dx_vom_ayah_exterior_fight_warehouse_100");
     return;
   }
 
-  if(scripts\engine\utility::is_equal(var0, level.ayah)) {
+  if(scripts\engine\utility::is_equal(var_0, level.ayah)) {
     level.ayah thread scripts\sp\maps\captive\captive_util::say_as_chatter("dx_vom_ayah_exterior_fight_warehouse_70");
     level.darine thread scripts\sp\maps\captive\captive_util::say_as_chatter("dx_vom_drn_exterior_fight_warehouse_80");
     return;
@@ -1507,8 +1507,8 @@ function vo_ex_all_dead_warehouse_nag() {
   }
 
   level endon("reached_building");
-  var0 = ["dx_vom_ayah_exterior_fight_warehouse_10", "dx_vom_drn_exterior_fight_warehouse_20", "dx_vom_ayah_exterior_fight_warehouse_30"];
-  var1 = scripts\engine\sp\utility::create_deck(var0);
+  var_0 = ["dx_vom_ayah_exterior_fight_warehouse_10", "dx_vom_drn_exterior_fight_warehouse_20", "dx_vom_ayah_exterior_fight_warehouse_30"];
+  var_1 = scripts\engine\sp\utility::create_deck(var_0);
   wait 10;
 
   for(;;) {
@@ -1522,14 +1522,14 @@ function vo_ex_all_dead_warehouse_nag() {
       continue;
     }
 
-    var2 = var1 scripts\engine\sp\utility::deck_draw();
+    var_2 = var_1 scripts\engine\sp\utility::deck_draw();
 
-    if(strtok(var2, "_")[2] == "drn") {
-      level.darine scripts\sp\maps\captive\captive_util::say_as_chatter(var2);
+    if(strtok(var_2, "_")[2] == "drn") {
+      level.darine scripts\sp\maps\captive\captive_util::say_as_chatter(var_2);
       continue;
     }
 
-    level.ayah scripts\sp\maps\captive\captive_util::say_as_chatter(var2);
+    level.ayah scripts\sp\maps\captive\captive_util::say_as_chatter(var_2);
   }
 }
 
@@ -1541,8 +1541,8 @@ function vo_ms_sniper_alive() {
 
 function vo_ms_nag_sas_door() {
   level endon("start_meet_sas_scene");
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, "dx_vom_ayah_exterior_fight_storage_10");
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, "dx_vom_ayah_exterior_fight_storage_10");
 }
 
 function vo_bu_two_enemies() {
@@ -1570,7 +1570,7 @@ function vo_bu_two_enemies() {
 
 function vo_bu_spot_pow() {
   level endon("gas_lab_open");
-  var0 = vo_bu_spot_hadir(4);
+  var_0 = vo_bu_spot_hadir(4);
   scripts\engine\utility::flag_wait("price_in_view_room");
   level.price scripts\engine\sp\utility::smart_dialogue("dx_vom_pri_bunker_interior_10");
   level.player scripts\engine\sp\utility::smart_player_dialogue("dx_vom_far_bunker_interior_20");
@@ -1597,14 +1597,14 @@ function vo_bu_spot_pow() {
   }
 }
 
-function vo_bu_spot_hadir(var0) {
+function vo_bu_spot_hadir(var_0) {
   while(!isDefined(level.hadir)) {
     waitframe();
   }
 
-  var1 = scripts\sp\maps\captive\captive_util::wait_lookat_or_timeout(level.hadir, 180, var0, "j_head", 0.5, 350);
+  var_1 = scripts\sp\maps\captive\captive_util::wait_lookat_or_timeout(level.hadir, 180, var_0, "j_head", 0.5, 350);
 
-  if(istrue(var1)) {
+  if(istrue(var_1)) {
     level.player scripts\engine\sp\utility::smart_player_dialogue("dx_vom_far_bunker_pows_50");
     return true;
   }
@@ -1649,8 +1649,8 @@ function vo_bu_farah_screams() {
   level.player scripts\engine\sp\utility::smart_player_dialogue("dx_vom_far_bunker_gas_111");
 }
 
-function vo_bu_try_open_gas_lab(var0) {
-  switch (var0) {
+function vo_bu_try_open_gas_lab(var_0) {
+  switch (var_0) {
     case 1:
       level.price stopsounds();
       waitframe();
@@ -1666,7 +1666,7 @@ function vo_bu_try_open_gas_lab(var0) {
   }
 }
 
-function vo_bu_try_open_gas_door_nag(var0) {
+function vo_bu_try_open_gas_door_nag(var_0) {
   level.price scripts\engine\sp\utility::smart_dialogue("dx_vom_pri_bunker_rescue_60");
 }
 
@@ -1676,19 +1676,19 @@ function vo_walla_expl_react() {
 }
 
 function vo_walla_guards_alert() {
-  var0 = spawn("script_origin", (6218, 1380, -36));
-  var1 = spawn("script_origin", (6261, 586, 38));
-  var2 = spawn("script_origin", (5714, 1402, -45));
-  var3 = spawn("script_origin", (6616, 991, 40));
-  var4 = spawn("script_origin", (5390, 1093, 50));
-  var5 = [];
-  GscBinSkip0(0x2e, var5.size, "cap_walla_russ_alert_01");
+  var_0 = spawn("script_origin", (6218, 1380, -36));
+  var_1 = spawn("script_origin", (6261, 586, 38));
+  var_2 = spawn("script_origin", (5714, 1402, -45));
+  var_3 = spawn("script_origin", (6616, 991, 40));
+  var_4 = spawn("script_origin", (5390, 1093, 50));
+  var_5 = [];
+  GscBinSkip0(0x2e, var_5.size, "cap_walla_russ_alert_01");
 }
 
 function vo_walla_play_guard_alert() {
   level.player endon("death");
   level endon("vo_stop_guard_walla");
-  var0 = undefined;
+  var_0 = undefined;
   wait randomintrange(1, 6);
 
   for(;;) {
@@ -1696,8 +1696,8 @@ function vo_walla_play_guard_alert() {
       level.walla_deck scripts\sp\maps\captive\captive_util::array_deck_shuffle();
     }
 
-    var0 = level.walla_deck scripts\engine\sp\utility::deck_draw();
-    self playSound(var0, "sounddone");
+    var_0 = level.walla_deck scripts\engine\sp\utility::deck_draw();
+    self playSound(var_0, "sounddone");
     self waittill("sounddone");
     wait randomintrange(5, 12);
   }

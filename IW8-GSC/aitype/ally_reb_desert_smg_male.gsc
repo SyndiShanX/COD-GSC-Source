@@ -28,10 +28,10 @@ function main() {
   self.usescriptedweapon = 1;
   self.scriptedweaponclassprimary = "smg";
   self.weapon = scripts\code\ai::create_weapon_in_script(["iw8_sm_uzulu", "iw8_sm_mpapa5", "iw8_ar_akilo47"]);
-  var0 = undefined;
-  var1 = ["character_sla_rebels_male_ar", "character_sla_rebels_male_ar_2_1", "character_sla_rebels_male_cqb", "character_sla_rebels_male_cqb_2_1", "character_sla_rebels_male_lmg", "character_sla_rebels_male_lmg_2_1"];
+  var_0 = undefined;
+  var_1 = ["character_sla_rebels_male_ar", "character_sla_rebels_male_ar_2_1", "character_sla_rebels_male_cqb", "character_sla_rebels_male_cqb_2_1", "character_sla_rebels_male_lmg", "character_sla_rebels_male_lmg_2_1"];
 
-  switch (scripts\code\character::get_random_character(6, var0, var1)) {
+  switch (scripts\code\character::get_random_character(6, var_0, var_1)) {
     case 0:
       character\character_sla_rebels_male_ar::main();
       break;
@@ -57,7 +57,7 @@ function spawner() {
   self setspawnerteam("allies");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\character_sla_rebels_male_ar::precache();
   character\character_sla_rebels_male_ar_2_1::precache();
   character\character_sla_rebels_male_cqb::precache();

@@ -33,21 +33,21 @@ function spawn_carepackage() {
   level waittill("infil_setup_complete");
 
   if(scripts\mp\flags::gameflag("infil_will_run")) {
-    var0 = getEnt("infilCones", "targetname");
-    var0 hide();
+    var_0 = getEnt("infilCones", "targetname");
+    var_0 hide();
     return;
   }
 
-  var1 = getEnt("infil_van_col", "targetname");
+  var_1 = getEnt("infil_van_col", "targetname");
 
-  if(isDefined(var1)) {
-    var1 hide();
+  if(isDefined(var_1)) {
+    var_1 hide();
     return;
   }
 }
 
 function molotov_watch_cleanup_pool() {
-  var0 = easepower("maphint_offering", level.ref_11fab.origin);
+  var_0 = easepower("maphint_offering", level.ref_11fab.origin);
   waitframe();
   scripts\engine\scriptable::ref_12f5b("maphint_offering", &ref_11ae2);
 
@@ -55,7 +55,7 @@ function molotov_watch_cleanup_pool() {
     level waittill("OfferingPlaced");
     monitor_enemy_death();
     wait 20;
-    var0 setscriptablepartstate("maphint_offering", "on");
+    var_0 setscriptablepartstate("maphint_offering", "on");
   }
 }
 
@@ -74,36 +74,36 @@ function monitor() {
   level.ref_11d7b = getEntArray("mouseTrap", "targetname");
   level.ref_11d7a = scripts\engine\utility::getStructArray("mouseTrapLoc", "targetname");
 
-  foreach(var1 in level.ref_11d7a) {
-    if(var1.origin == (362.93, -1485.9, 0)) {
-      var1.origin = (358.93, -1465.9, 0);
+  foreach(var_1 in level.ref_11d7a) {
+    if(var_1.origin == (362.93, -1485.9, 0)) {
+      var_1.origin = (358.93, -1465.9, 0);
     }
   }
 
   level.ref_11d7a = scripts\engine\utility::array_randomize(level.ref_11d7a);
   level.ref_11d7c = 0;
-  var3 = 0;
+  var_3 = 0;
 
-  foreach(var5 in level.ref_11d7b) {
-    var5.origin = level.ref_11d7a[var3].origin;
-    var5.angles = level.ref_11d7a[var3].angles;
-    var5.fx = scripts\engine\utility::spawn_tag_origin();
-    var5.fx.origin = var5.origin;
-    var5.fx.angles = var5.angles;
-    var5.fx show();
-    thread ref_11d7d(var5);
-    var3++;
+  foreach(var_5 in level.ref_11d7b) {
+    var_5.origin = level.ref_11d7a[var_3].origin;
+    var_5.angles = level.ref_11d7a[var_3].angles;
+    var_5.fx = scripts\engine\utility::spawn_tag_origin();
+    var_5.fx.origin = var_5.origin;
+    var_5.fx.angles = var_5.angles;
+    var_5.fx show();
+    thread ref_11d7d(var_5);
+    var_3++;
   }
 
   level.gesture_checker = getEntArray("candle", "targetname");
   level.gesture_checker = scripts\engine\utility::array_randomize(level.gesture_checker);
 
-  foreach(var8 in level.gesture_checker) {
-    var8.fx = scripts\engine\utility::spawn_tag_origin();
-    var8.fx.origin = var8.origin;
-    var8.fx.angles = var8.angles;
-    var8.fx show();
-    var8 hide();
+  foreach(var_8 in level.gesture_checker) {
+    var_8.fx = scripts\engine\utility::spawn_tag_origin();
+    var_8.fx.origin = var_8.origin;
+    var_8.fx.angles = var_8.angles;
+    var_8.fx show();
+    var_8 hide();
   }
 
   while(level.ref_11d7c < 5) {
@@ -121,27 +121,27 @@ function monitor() {
   scripts\engine\scriptable::ref_12f5b("maphint_cheese", &ref_11ade);
   level waittill("CheeseTaken");
   level.getrandomprematchequipment hide();
-  var10 = easepower("maphint_offering", level.ref_11fab.origin);
+  var_10 = easepower("maphint_offering", level.ref_11fab.origin);
   waitframe();
   scripts\engine\scriptable::ref_12f5b("maphint_offering", &ref_11ae2);
   level waittill("OfferingPlaced");
   monitor_enemy_death();
 }
 
-function ref_11d7d(var0) {
-  var0 setCanDamage(1);
-  var0 waittill("damage", var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14);
-  var0 hide();
+function ref_11d7d(var_0) {
+  var_0 setCanDamage(1);
+  var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14);
+  var_0 hide();
   level.ref_11d7c++;
 
   if(level.ref_11d7c < 5) {
-    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_trap"), var0.fx, "tag_origin");
-    var0 playSound("mp_garden_pp_rat_trap");
+    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_trap"), var_0.fx, "tag_origin");
+    var_0 playSound("mp_garden_pp_rat_trap");
   } else {
-    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_trap_final"), var0.fx, "tag_origin");
-    var0 playSound("mp_garden_pp_rat_trap_final");
-    level.getridofkillstreakdeployweapon.origin = var0.origin;
-    level.getridofkillstreakdeployweapon.angles = var0.angles;
+    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_trap_final"), var_0.fx, "tag_origin");
+    var_0 playSound("mp_garden_pp_rat_trap_final");
+    level.getridofkillstreakdeployweapon.origin = var_0.origin;
+    level.getridofkillstreakdeployweapon.angles = var_0.angles;
     waittillframeend();
     level.getridofkillstreakdeployweapon show();
   }
@@ -158,10 +158,10 @@ function monitor_enemy_death() {
   level.getrandomprematchequipment show();
   wait 0.3;
 
-  foreach(var1 in level.gesture_checker) {
-    var1 show();
+  foreach(var_1 in level.gesture_checker) {
+    var_1 show();
     waittillframeend();
-    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_candle_poof"), var1.fx, "tag_origin");
+    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_candle_poof"), var_1.fx, "tag_origin");
     wait 0.1;
   }
 
@@ -171,131 +171,131 @@ function monitor_enemy_death() {
   wait 15;
   level.getrandomprematchequipment hide();
 
-  foreach(var1 in level.gesture_checker) {
-    killfxontag(scripts\engine\utility::getfx("vfx_garden_candle_poof"), var1.fx, "tag_origin");
-    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_trap_final"), var1.fx, "tag_origin");
+  foreach(var_1 in level.gesture_checker) {
+    killfxontag(scripts\engine\utility::getfx("vfx_garden_candle_poof"), var_1.fx, "tag_origin");
+    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_trap_final"), var_1.fx, "tag_origin");
     wait 0.01;
-    var1 hide();
+    var_1 hide();
   }
 }
 
-function ref_11ae2(var0, var1, var2, var3, var4) {
-  thread allow_player_skip_laststand(level, var0, var1, var2, var3);
+function ref_11ae2(var_0, var_1, var_2, var_3, var_4) {
+  thread allow_player_skip_laststand(level, var_0, var_1, var_2, var_3);
 }
 
-function allow_player_skip_laststand(var0, var1, var2, var3, var4) {
-  if(var2 == "on") {
-    var0 setscriptablepartstate("maphint_offering", "off");
-    var3 playlocalsound("ui_interact_cheese");
+function allow_player_skip_laststand(var_0, var_1, var_2, var_3, var_4) {
+  if(var_2 == "on") {
+    var_0 setscriptablepartstate("maphint_offering", "off");
+    var_3 playlocalsound("ui_interact_cheese");
     wait 0.3;
     level notify("OfferingPlaced");
     return;
   }
 }
 
-function ref_11ade(var0, var1, var2, var3, var4) {
-  thread allow_player_basejumping(level, var0, var1, var2, var3);
+function ref_11ade(var_0, var_1, var_2, var_3, var_4) {
+  thread allow_player_basejumping(level, var_0, var_1, var_2, var_3);
 }
 
-function allow_player_basejumping(var0, var1, var2, var3, var4) {
-  if(var2 == "on") {
-    var0 setscriptablepartstate("maphint_cheese", "off");
-    var3 playlocalsound("ui_interact_cheese_pickup");
+function allow_player_basejumping(var_0, var_1, var_2, var_3, var_4) {
+  if(var_2 == "on") {
+    var_0 setscriptablepartstate("maphint_cheese", "off");
+    var_3 playlocalsound("ui_interact_cheese_pickup");
     level notify("CheeseTaken");
     return;
   }
 }
 
-function ref_11add(var0, var1, var2, var3, var4) {
-  thread allow_pickup_atmine(level, var0, var1, var2, var3);
+function ref_11add(var_0, var_1, var_2, var_3, var_4) {
+  thread allow_pickup_atmine(level, var_0, var_1, var_2, var_3);
 }
 
-function allow_pickup_atmine(var0, var1, var2, var3, var4) {
-  if(var2 == "on") {
-    var0 setscriptablepartstate("maphint_cheese2", "off");
+function allow_pickup_atmine(var_0, var_1, var_2, var_3, var_4) {
+  if(var_2 == "on") {
+    var_0 setscriptablepartstate("maphint_cheese2", "off");
     level notify("CheeseWedgeTaken");
     return;
   }
 }
 
-function play_movie(var0) {
+function play_movie(var_0) {
   if(getdvarint("LLQQOPKTKM") == 1) {
     return;
   }
 
   for(;;) {
-    playcinematicforalllooping(var0);
+    playcinematicforalllooping(var_0);
     wait 3;
   }
 }
 
 function ref_1327b() {
   wait 1;
-  var0 = getEntArray("Train", "targetname");
+  var_0 = getEntArray("Train", "targetname");
   level.ref_13cd2 = 15;
   wait level.ref_13cd2;
 
-  foreach(var2 in var0) {
-    switch (var2.script_noteworthy) {
+  foreach(var_2 in var_0) {
+    switch (var_2.script_noteworthy) {
       case "front":
-        playFXOnTag(level._effect["vfx_garden_train_headlight"], var2, "TAG_TRAIN_LIGHT_FRONT_4");
-        playFXOnTag(level._effect["vfx_garden_train_headlight"], var2, "TAG_TRAIN_LIGHT_FRONT_2");
+        playFXOnTag(level._effect["vfx_garden_train_headlight"], var_2, "TAG_TRAIN_LIGHT_FRONT_4");
+        playFXOnTag(level._effect["vfx_garden_train_headlight"], var_2, "TAG_TRAIN_LIGHT_FRONT_2");
         break;
       case "mid":
         break;
       case "back":
-        playFXOnTag(level._effect["vfx_garden_train_taillight"], var2, "TAG_TRAIN_LIGHT_FRONT_4");
-        playFXOnTag(level._effect["vfx_garden_train_taillight"], var2, "TAG_TRAIN_LIGHT_FRONT_2");
+        playFXOnTag(level._effect["vfx_garden_train_taillight"], var_2, "TAG_TRAIN_LIGHT_FRONT_4");
+        playFXOnTag(level._effect["vfx_garden_train_taillight"], var_2, "TAG_TRAIN_LIGHT_FRONT_2");
         break;
       default:
         break;
     }
 
-    thread ref_13cc9(var2);
+    thread ref_13cc9(var_2);
     thread ref_13c96();
   }
 }
 
-function ref_13cc9(var0) {
-  var1 = 0.00125;
-  var2 = scripts\engine\utility::getStruct(var0.target, "targetname");
+function ref_13cc9(var_0) {
+  var_1 = 0.00125;
+  var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
 
-  for(var2 = scripts\engine\utility::getStruct(var2.target, "targetname");; var2 = scripts\engine\utility::getStruct(var2.target, "targetname")) {
-    var3 = abs(distance(var0.origin, var2.origin) * var1);
-    var0 moveTo(var2.origin, var3, 0, 0);
+  for(var_2 = scripts\engine\utility::getStruct(var_2.target, "targetname");; var_2 = scripts\engine\utility::getStruct(var_2.target, "targetname")) {
+    var_3 = abs(distance(var_0.origin, var_2.origin) * var_1);
+    var_0 moveTo(var_2.origin, var_3, 0, 0);
 
-    if(isDefined(var0.script_noteworthy) && var0.script_noteworthy == "back") {
-      var0 rotateTo(var2.angles + (0, 180, 0), var3, 0, 0);
+    if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "back") {
+      var_0 rotateTo(var_2.angles + (0, 180, 0), var_3, 0, 0);
     } else {
-      var0 rotateTo(var2.angles, var3, 0, 0);
+      var_0 rotateTo(var_2.angles, var_3, 0, 0);
     }
 
-    var2 = scripts\engine\utility::getStruct(var2.target, "targetname");
-    wait var3;
+    var_2 = scripts\engine\utility::getStruct(var_2.target, "targetname");
+    wait var_3;
 
-    if(isDefined(var2.script_noteworthy) && var2.script_noteworthy == "teleport") {
-      var0.origin = var2.origin;
+    if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "teleport") {
+      var_0.origin = var_2.origin;
 
-      if(isDefined(var0.script_noteworthy) && var0.script_noteworthy == "back") {
-        var0.angles = var2.angles + (0, 180, 0);
+      if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "back") {
+        var_0.angles = var_2.angles + (0, 180, 0);
       } else {
-        var0.angles = var2.angles;
+        var_0.angles = var_2.angles;
       }
 
-      if(isDefined(var0.script_noteworthy) && var0.script_noteworthy == "front") {
+      if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "front") {
         level.ref_13cd2 = randomint(30);
       }
 
-      switch (var0.script_noteworthy) {
+      switch (var_0.script_noteworthy) {
         case "front":
-          killfxontag(level._effect["vfx_garden_train_headlight"], var0, "TAG_TRAIN_LIGHT_FRONT_4");
-          killfxontag(level._effect["vfx_garden_train_headlight"], var0, "TAG_TRAIN_LIGHT_FRONT_2");
+          killfxontag(level._effect["vfx_garden_train_headlight"], var_0, "TAG_TRAIN_LIGHT_FRONT_4");
+          killfxontag(level._effect["vfx_garden_train_headlight"], var_0, "TAG_TRAIN_LIGHT_FRONT_2");
           break;
         case "mid":
           break;
         case "back":
-          killfxontag(level._effect["vfx_garden_train_taillight"], var0, "TAG_TRAIN_LIGHT_FRONT_4");
-          killfxontag(level._effect["vfx_garden_train_taillight"], var0, "TAG_TRAIN_LIGHT_FRONT_2");
+          killfxontag(level._effect["vfx_garden_train_taillight"], var_0, "TAG_TRAIN_LIGHT_FRONT_4");
+          killfxontag(level._effect["vfx_garden_train_taillight"], var_0, "TAG_TRAIN_LIGHT_FRONT_2");
           break;
         default:
           break;
@@ -303,16 +303,16 @@ function ref_13cc9(var0) {
 
       wait level.ref_13cd2;
 
-      switch (var0.script_noteworthy) {
+      switch (var_0.script_noteworthy) {
         case "front":
-          playFXOnTag(level._effect["vfx_garden_train_headlight"], var0, "TAG_TRAIN_LIGHT_FRONT_4");
-          playFXOnTag(level._effect["vfx_garden_train_headlight"], var0, "TAG_TRAIN_LIGHT_FRONT_2");
+          playFXOnTag(level._effect["vfx_garden_train_headlight"], var_0, "TAG_TRAIN_LIGHT_FRONT_4");
+          playFXOnTag(level._effect["vfx_garden_train_headlight"], var_0, "TAG_TRAIN_LIGHT_FRONT_2");
           break;
         case "mid":
           break;
         case "back":
-          playFXOnTag(level._effect["vfx_garden_train_taillight"], var0, "TAG_TRAIN_LIGHT_FRONT_4");
-          playFXOnTag(level._effect["vfx_garden_train_taillight"], var0, "TAG_TRAIN_LIGHT_FRONT_2");
+          playFXOnTag(level._effect["vfx_garden_train_taillight"], var_0, "TAG_TRAIN_LIGHT_FRONT_4");
+          playFXOnTag(level._effect["vfx_garden_train_taillight"], var_0, "TAG_TRAIN_LIGHT_FRONT_2");
           break;
         default:
           break;
@@ -346,73 +346,73 @@ function ref_141bd() {
   return;
 }
 
-function lb_pitch_roll_dmg_factor(var0, var1, var2) {
+function lb_pitch_roll_dmg_factor(var_0, var_1, var_2) {
   level endon("game_ended");
   wait 10;
-  var3 = getscriptablearray(var0, "targetname");
-  var4 = getEntArray(var1, "targetname");
+  var_3 = getscriptablearray(var_0, "targetname");
+  var_4 = getEntArray(var_1, "targetname");
 
-  if(var2) {
-    var3[0].showintelscriptablestoplayer = scripts\engine\utility::spawn_tag_origin();
-    var3[0].showintelscriptablestoplayer.origin = var3[0] gettagorigin("tag_light_front_right");
-    var3[0].showintelscriptablestoplayer.angles = var3[0] gettagangles("tag_light_front_right");
-    var3[0].showintelscriptablestoplayer show();
-    var3[0].showintelscriptablestoplayer linkTo(var3[0], "tag_light_front_right");
-    var3[0].showintelinstancetoplayer = scripts\engine\utility::spawn_tag_origin();
-    var3[0].showintelinstancetoplayer.origin = var3[0] gettagorigin("tag_light_front_Left");
-    var3[0].showintelinstancetoplayer.angles = var3[0] gettagangles("tag_light_front_Left");
-    var3[0].showintelinstancetoplayer show();
-    var3[0].showintelinstancetoplayer linkTo(var3[0], "tag_light_front_Left");
-    var3[0].ref_13a29 = scripts\engine\utility::spawn_tag_origin();
-    var3[0].ref_13a29.origin = var3[0] gettagorigin("tag_light_back_right");
-    var3[0].ref_13a29.angles = var3[0] gettagangles("tag_light_back_right");
-    var3[0].ref_13a29 show();
-    var3[0].ref_13a29 linkTo(var3[0], "tag_light_back_right");
-    var3[0].ref_13a28 = scripts\engine\utility::spawn_tag_origin();
-    var3[0].ref_13a28.origin = var3[0] gettagorigin("tag_light_back_Left");
-    var3[0].ref_13a28.angles = var3[0] gettagangles("tag_light_back_Left");
-    var3[0].ref_13a28 show();
-    var3[0].ref_13a28 linkTo(var3[0], "tag_light_back_Left");
+  if(var_2) {
+    var_3[0].showintelscriptablestoplayer = scripts\engine\utility::spawn_tag_origin();
+    var_3[0].showintelscriptablestoplayer.origin = var_3[0] gettagorigin("tag_light_front_right");
+    var_3[0].showintelscriptablestoplayer.angles = var_3[0] gettagangles("tag_light_front_right");
+    var_3[0].showintelscriptablestoplayer show();
+    var_3[0].showintelscriptablestoplayer linkTo(var_3[0], "tag_light_front_right");
+    var_3[0].showintelinstancetoplayer = scripts\engine\utility::spawn_tag_origin();
+    var_3[0].showintelinstancetoplayer.origin = var_3[0] gettagorigin("tag_light_front_Left");
+    var_3[0].showintelinstancetoplayer.angles = var_3[0] gettagangles("tag_light_front_Left");
+    var_3[0].showintelinstancetoplayer show();
+    var_3[0].showintelinstancetoplayer linkTo(var_3[0], "tag_light_front_Left");
+    var_3[0].ref_13a29 = scripts\engine\utility::spawn_tag_origin();
+    var_3[0].ref_13a29.origin = var_3[0] gettagorigin("tag_light_back_right");
+    var_3[0].ref_13a29.angles = var_3[0] gettagangles("tag_light_back_right");
+    var_3[0].ref_13a29 show();
+    var_3[0].ref_13a29 linkTo(var_3[0], "tag_light_back_right");
+    var_3[0].ref_13a28 = scripts\engine\utility::spawn_tag_origin();
+    var_3[0].ref_13a28.origin = var_3[0] gettagorigin("tag_light_back_Left");
+    var_3[0].ref_13a28.angles = var_3[0] gettagangles("tag_light_back_Left");
+    var_3[0].ref_13a28 show();
+    var_3[0].ref_13a28 linkTo(var_3[0], "tag_light_back_Left");
     waitframe();
-    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_headlight_lensflare_right"), var3[0].showintelscriptablestoplayer, "tag_origin");
-    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_headlight_lensflare_left"), var3[0].showintelinstancetoplayer, "tag_origin");
-    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_right"), var3[0].ref_13a29, "tag_origin");
-    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_left"), var3[0].ref_13a28, "tag_origin");
+    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_headlight_lensflare_right"), var_3[0].showintelscriptablestoplayer, "tag_origin");
+    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_headlight_lensflare_left"), var_3[0].showintelinstancetoplayer, "tag_origin");
+    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_right"), var_3[0].ref_13a29, "tag_origin");
+    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_left"), var_3[0].ref_13a28, "tag_origin");
   }
 
-  if(isDefined(var3) && isDefined(var3[0])) {
-    var5 = var3[0];
-    var6 = 1;
+  if(isDefined(var_3) && isDefined(var_3[0])) {
+    var_5 = var_3[0];
+    var_6 = 1;
 
-    while(var6) {
-      var5 waittill("scriptableNotification", var7, var8);
+    while(var_6) {
+      var_5 waittill("scriptableNotification", var_7, var_8);
 
-      switch (var7) {
+      switch (var_7) {
         case "onfire":
         case "flareup":
         case "vehicle_death":
-          trucklightsoff(var4);
+          trucklightsoff(var_4);
 
-          if(var2) {
-            killfxontag(scripts\engine\utility::getfx("vfx_garden_headlight_lensflare_right"), var3[0].showintelscriptablestoplayer, "tag_origin");
-            killfxontag(scripts\engine\utility::getfx("vfx_garden_headlight_lensflare_left"), var3[0].showintelinstancetoplayer, "tag_origin");
-            killfxontag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_right"), var3[0].ref_13a29, "tag_origin");
-            killfxontag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_left"), var3[0].ref_13a28, "tag_origin");
+          if(var_2) {
+            killfxontag(scripts\engine\utility::getfx("vfx_garden_headlight_lensflare_right"), var_3[0].showintelscriptablestoplayer, "tag_origin");
+            killfxontag(scripts\engine\utility::getfx("vfx_garden_headlight_lensflare_left"), var_3[0].showintelinstancetoplayer, "tag_origin");
+            killfxontag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_right"), var_3[0].ref_13a29, "tag_origin");
+            killfxontag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_left"), var_3[0].ref_13a28, "tag_origin");
           }
 
-          var6 = 0;
+          var_6 = 0;
           return;
         case "anim_explosion":
-          trucklightsoff(var4);
+          trucklightsoff(var_4);
 
-          if(var2) {
-            killfxontag(scripts\engine\utility::getfx("vfx_garden_headlight_lensflare_right"), var3[0].showintelscriptablestoplayer, "tag_origin");
-            killfxontag(scripts\engine\utility::getfx("vfx_garden_headlight_lensflare_left"), var3[0].showintelinstancetoplayer, "tag_origin");
-            killfxontag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_right"), var3[0].ref_13a29, "tag_origin");
-            killfxontag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_left"), var3[0].ref_13a28, "tag_origin");
+          if(var_2) {
+            killfxontag(scripts\engine\utility::getfx("vfx_garden_headlight_lensflare_right"), var_3[0].showintelscriptablestoplayer, "tag_origin");
+            killfxontag(scripts\engine\utility::getfx("vfx_garden_headlight_lensflare_left"), var_3[0].showintelinstancetoplayer, "tag_origin");
+            killfxontag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_right"), var_3[0].ref_13a29, "tag_origin");
+            killfxontag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_left"), var_3[0].ref_13a28, "tag_origin");
           }
 
-          var6 = 0;
+          var_6 = 0;
           return;
       }
     }
@@ -421,27 +421,27 @@ function lb_pitch_roll_dmg_factor(var0, var1, var2) {
   }
 }
 
-function trucklightsoff(var0) {
-  foreach(var2 in var0) {
-    var2 setlightintensity(0);
+function trucklightsoff(var_0) {
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(0);
   }
 }
 
 function ref_13c96() {
-  var0 = spawn("script_origin", self.origin);
-  var0 endon("death");
-  thread scripts\engine\utility::delete_on_death(var0);
-  var1 = "";
+  var_0 = spawn("script_origin", self.origin);
+  var_0 endon("death");
+  thread scripts\engine\utility::delete_on_death(var_0);
+  var_1 = "";
 
   switch (self.script_noteworthy) {
     case "front":
-      var1 = "mp_garden_passby_long_front";
+      var_1 = "mp_garden_passby_long_front";
       break;
     case "mid":
-      var1 = "mp_garden_passby_long_middle";
+      var_1 = "mp_garden_passby_long_middle";
       break;
     case "back":
-      var1 = "mp_garden_passby_long_back";
+      var_1 = "mp_garden_passby_long_back";
       break;
     default:
       break;
@@ -450,16 +450,16 @@ function ref_13c96() {
   switch (self.script_noteworthy) {
     case "back":
     case "front":
-      var0 linkTo(self, "TAG_TRAIN_LIGHT_FRONT_4");
+      var_0 linkTo(self, "TAG_TRAIN_LIGHT_FRONT_4");
       break;
     default:
-      var0 linkTo(self);
+      var_0 linkTo(self);
       break;
   }
 
   wait 0.05;
-  var0 playLoopSound(var1);
-  var0 waittill("stop sound" + var1);
-  var0 stoploopsound(var1);
-  var0 delete();
+  var_0 playLoopSound(var_1);
+  var_0 waittill("stop sound" + var_1);
+  var_0 stoploopsound(var_1);
+  var_0 delete();
 }

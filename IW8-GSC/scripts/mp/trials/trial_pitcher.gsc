@@ -4,7 +4,7 @@
 ***********************************************/
 
 function init() {
-  foreach(var1 in level.players) {
+  foreach(var_1 in level.players) {
     thread firemanager();
   }
 }
@@ -15,56 +15,56 @@ function firemanager() {
   self.offhands.lastusedoffhandtime = 0;
 
   for(;;) {
-    self waittill("missile_fire", var0, var1);
+    self waittill("missile_fire", var_0, var_1);
 
-    if(var1.basename == "iw8_la_mike32_mp") {
-      thread watchforimpact(var0);
+    if(var_1.basename == "iw8_la_mike32_mp") {
+      thread watchforimpact(var_0);
     }
   }
 }
 
-function watchforimpact(var0) {
-  var0.owner = self;
-  var0 endon("entitydeleted");
-  var1 = getmissileowner(var0);
-  var0 waittill("explode", var2, var3, var4, var5);
-  thread molotovexplode(var2, var3, var4, var5, var1);
+function watchforimpact(var_0) {
+  var_0.owner = self;
+  var_0 endon("entitydeleted");
+  var_1 = getmissileowner(var_0);
+  var_0 waittill("explode", var_2, var_3, var_4, var_5);
+  thread molotovexplode(var_2, var_3, var_4, var_5, var_1);
 }
 
-function molotovexplode(var0, var1, var2, var3, var4) {
-  var5 = spawn("script_model", var0);
-  var5 setModel("offhand_wm_molotov_mp");
-  var6 = vectortoangles(var1);
-  var7 = anglesToForward(var6);
-  var8 = anglestoright(var6);
-  var9 = anglestoup(var6);
-  var5.angles = axistoangles(var8, var9, var7);
-  var5.owner = var4;
-  var10 = getlaunchangles(var4, var0);
+function molotovexplode(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = spawn("script_model", var_0);
+  var_5 setModel("offhand_wm_molotov_mp");
+  var_6 = vectortoangles(var_1);
+  var_7 = anglesToForward(var_6);
+  var_8 = anglestoright(var_6);
+  var_9 = anglestoup(var_6);
+  var_5.angles = axistoangles(var_8, var_9, var_7);
+  var_5.owner = var_4;
+  var_10 = getlaunchangles(var_4, var_0);
 
-  if(isDefined(var3) && isDefined(var3.classname) && var3.classname == "worldspawn") {
-    var3 = undefined;
+  if(isDefined(var_3) && isDefined(var_3.classname) && var_3.classname == "worldspawn") {
+    var_3 = undefined;
   }
 
-  thread scripts\cp\powers\coop_molotov::molotov_stuck(var5, var3, var10, var2, 1);
+  thread scripts\cp\powers\coop_molotov::molotov_stuck(var_5, var_3, var_10, var_2, 1);
 }
 
-function getlaunchangles(var0) {
-  var1 = vectorNormalize(var0 - self.origin);
-  var2 = vectortoangles(var1);
-  var3 = (0, self.angles[1], 0);
-  var4 = var3 + (45, 0, 0);
-  return var4;
+function getlaunchangles(var_0) {
+  var_1 = vectorNormalize(var_0 - self.origin);
+  var_2 = vectortoangles(var_1);
+  var_3 = (0, self.angles[1], 0);
+  var_4 = var_3 + (45, 0, 0);
+  return var_4;
 }
 
-function molotov_rebuild_angles_up_right(var0, var1) {
-  var2 = vectorNormalize(vectorcross(var0, var1));
-  var1 = vectorcross(var2, var0);
-  return axistoangles(var2, var1, var0);
+function molotov_rebuild_angles_up_right(var_0, var_1) {
+  var_2 = vectorNormalize(vectorcross(var_0, var_1));
+  var_1 = vectorcross(var_2, var_0);
+  return axistoangles(var_2, var_1, var_0);
 }
 
-function molotov_rebuild_angles_up_forward(var0, var1) {
-  var2 = vectorNormalize(vectorcross(var1, var0));
-  var1 = vectorcross(var0, var2);
-  return axistoangles(var1, var2, var0);
+function molotov_rebuild_angles_up_forward(var_0, var_1) {
+  var_2 = vectorNormalize(vectorcross(var_1, var_0));
+  var_1 = vectorcross(var_0, var_2);
+  return axistoangles(var_1, var_2, var_0);
 }

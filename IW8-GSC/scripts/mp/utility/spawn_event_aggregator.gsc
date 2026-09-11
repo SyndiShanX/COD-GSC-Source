@@ -11,13 +11,13 @@ function onplayerconnect() {
   level.onplayerspawncallbacks = [];
 
   for(;;) {
-    level waittill("connected", var0);
+    level waittill("connected", var_0);
     thread onplayerspawned();
   }
 }
 
-function registeronplayerspawncallback(var0) {
-  level.onplayerspawncallbacks[level.onplayerspawncallbacks.size] = var0;
+function registeronplayerspawncallback(var_0) {
+  level.onplayerspawncallbacks[level.onplayerspawncallbacks.size] = var_0;
 }
 
 function onplayerspawned() {
@@ -26,8 +26,8 @@ function onplayerspawned() {
   for(;;) {
     self waittill("spawned_player");
 
-    foreach(var1 in level.onplayerspawncallbacks) {
-      self[[var1]]();
+    foreach(var_1 in level.onplayerspawncallbacks) {
+      self[[var_1]]();
     }
   }
 }

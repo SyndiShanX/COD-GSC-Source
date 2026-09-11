@@ -35,7 +35,7 @@ function spawner() {
   self setspawnerteam("axis");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\character_iw8_russian_weapon_smugglers_burned_1::precache();
   scripts\aitypes\bt_util::init();
   scripts\aitypes\assets::soldier();

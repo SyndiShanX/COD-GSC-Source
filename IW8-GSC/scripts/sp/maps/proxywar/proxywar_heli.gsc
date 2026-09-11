@@ -60,9 +60,9 @@ function heli_approach_main() {
   level.partnerheli vehicle_turnengineoff();
   level.playerheli vehicle_turnengineoff();
   scripts\sp\maps\proxywar\proxywar_util::spawn_ally_teams();
-  var0 = scripts\sp\maps\proxywar\proxywar_util::spawn_third_person_alex();
-  var0 linkTo(level.playerheli);
-  thread cine_settings(var0);
+  var_0 = scripts\sp\maps\proxywar\proxywar_util::spawn_third_person_alex();
+  var_0 linkTo(level.playerheli);
+  thread cine_settings(var_0);
   level thread scripts\sp\maps\proxywar\proxywar_vo::vo_fo_heli_complete();
   thread wait_turn_off_rotor_wash();
   thread play_alex_anim();
@@ -71,14 +71,14 @@ function heli_approach_main() {
   thread alpha_team_enter(level.alpha_team);
   scripts\engine\utility::array_thread(level.bravo_team, &allies_approach, level.partnerheli);
   thread wait_infil_player_anim();
-  var1 = getDvar("OMNONNMOTP");
+  var_1 = getDvar("OMNONNMOTP");
   setsaveddvar("OMNONNMOTP", "0.1 500 1.5 1000");
   level.player scripts\engine\utility::delaycall(0.388, &playsound, "scn_wp_intro_heli1_close_lr");
   level.playerheli scripts\engine\utility::delaycall(0.388, &playsound, "scn_wp_intro_heli1_lr");
   level.partnerheli scripts\engine\utility::delaycall(0.388, &playsound, "scn_wp_intro_hel2_lr");
   level scripts\engine\utility::delaythread(12, &audio_clear_audio_zone_heli);
   level.playerheli scripts\common\anim::anim_single_solo(level.player_rig, "infil_player");
-  setsaveddvar("OMNONNMOTP", var1);
+  setsaveddvar("OMNONNMOTP", var_1);
   level.player_rig unlink();
   scripts\sp\player_rig::unlink_player_from_rig();
   thread scripts\sp\player::player_movement_state("creep");
@@ -97,12 +97,12 @@ function attach_player_to_heli() {
   level.player modifybasefov(40, 0.05);
 }
 
-function cine_settings(var0) {
+function cine_settings(var_0) {
   level.playerheli scripts\engine\sp\utility::dof_enable_autofocus(1.4, 200, undefined, undefined, "tag_guy9", undefined, 1);
   wait 8;
-  var0 scripts\engine\sp\utility::dof_enable_autofocus(1.4, 200, undefined, undefined, "tag_eye", undefined, 1);
+  var_0 scripts\engine\sp\utility::dof_enable_autofocus(1.4, 200, undefined, undefined, "tag_eye", undefined, 1);
   scripts\engine\utility::flag_wait("player_anim_done");
-  var0 scripts\engine\sp\utility::dof_enable_autofocus(12, undefined, undefined, undefined, "tag_eye", undefined, 1);
+  var_0 scripts\engine\sp\utility::dof_enable_autofocus(12, undefined, undefined, undefined, "tag_eye", undefined, 1);
   wait 1;
   level scripts\engine\sp\utility::dof_disable_autofocus();
 }
@@ -112,10 +112,10 @@ function wait_infil_player_anim() {
   scripts\engine\utility::flag_set("player_anim_done");
 }
 
-function setup_heli(var0) {
-  self.animname = var0;
+function setup_heli(var_0) {
+  self.animname = var_0;
   scripts\engine\sp\utility::assign_animtree();
-  thread blima_spawn_pilot(var0 + "_pilot");
+  thread blima_spawn_pilot(var_0 + "_pilot");
   thread adjust_vector_field();
 }
 
@@ -131,53 +131,53 @@ function adjust_vector_field() {
   }
 }
 
-function play_heli_scene(var0, var1) {
-  thread fast_rope_approach(var0, self, var1);
-  thread commander_approach(self, var1);
-  var0 scripts\common\anim::anim_single_solo(self, "infil");
+function play_heli_scene(var_0, var_1) {
+  thread fast_rope_approach(var_0, self, var_1);
+  thread commander_approach(self, var_1);
+  var_0 scripts\common\anim::anim_single_solo(self, "infil");
   wait 4;
   blima_delete();
 }
 
-function alpha_team_enter(var0) {
-  level.alpha1 linkTo(var0);
-  level.alpha2 linkTo(var0);
-  var0 scripts\common\anim::anim_single(level.alpha_team, "infil");
+function alpha_team_enter(var_0) {
+  level.alpha1 linkTo(var_0);
+  level.alpha2 linkTo(var_0);
+  var_0 scripts\common\anim::anim_single(level.alpha_team, "infil");
   level.alpha1 unlink();
   level.alpha2 unlink();
-  var0 notify("heli_leaving");
+  var_0 notify("heli_leaving");
   level notify("helis_leaving");
   level thread scripts\sp\maps\proxywar\proxywar_forest::forest_trees_ally_alpha();
 }
 
-function allies_approach(var0) {
-  self linkTo(var0);
+function allies_approach(var_0) {
+  self linkTo(var_0);
   level.forestmoveref = scripts\engine\utility::getStruct("forest_move_ref", "targetname");
-  var0 scripts\common\anim::anim_single_solo(self, "infil");
+  var_0 scripts\common\anim::anim_single_solo(self, "infil");
   self unlink();
-  var0 notify("heli_leaving");
+  var_0 notify("heli_leaving");
   level.forestmoveref thread scripts\common\anim::anim_loop_solo(self, "forest_move_enter_idle", "end_forest_enter_idle");
 }
 
-function fast_rope_approach(var0, var1, var2) {
-  var3 = scripts\engine\sp\utility::spawn_anim_model("rope");
-  var3 linkTo(var1);
-  var1 scripts\common\anim::anim_single_solo(var3, var2);
-  var3 unlink();
-  var0 scripts\common\anim::anim_single_solo(var3, var2 + "_fall");
+function fast_rope_approach(var_0, var_1, var_2) {
+  var_3 = scripts\engine\sp\utility::spawn_anim_model("rope");
+  var_3 linkTo(var_1);
+  var_1 scripts\common\anim::anim_single_solo(var_3, var_2);
+  var_3 unlink();
+  var_0 scripts\common\anim::anim_single_solo(var_3, var_2 + "_fall");
   scripts\engine\utility::flag_wait("move_to_patrol");
-  var3 delete();
+  var_3 delete();
 }
 
-function commander_approach(var0, var1) {
-  var2 = scripts\engine\sp\utility::spawn_targetname(var1 + "_commander", 1);
-  var2.ignoreme = 1;
-  var2.animname = "commander";
-  level.commander = var2;
-  var2 linkTo(var0);
-  var0 scripts\common\anim::anim_single_solo(var2, var1);
-  var2 unlink();
-  var2 delete();
+function commander_approach(var_0, var_1) {
+  var_2 = scripts\engine\sp\utility::spawn_targetname(var_1 + "_commander", 1);
+  var_2.ignoreme = 1;
+  var_2.animname = "commander";
+  level.commander = var_2;
+  var_2 linkTo(var_0);
+  var_0 scripts\common\anim::anim_single_solo(var_2, var_1);
+  var_2 unlink();
+  var_2 delete();
 }
 
 function play_alex_anim() {
@@ -215,12 +215,12 @@ function heli_approach_catchup() {
   scripts\engine\sp\objectives::objective_add("objective", "current", scripts\engine\utility::getStruct("obj_reach_overlook", "targetname").origin, &"PROXYWAR/OBJ_SCOUT_DSC", &"PROXYWAR/OBJ_SCOUT_LBL");
 }
 
-function blima_spawn_pilot(var0) {
-  var1 = scripts\engine\sp\utility::spawn_targetname(var0, 1);
-  var1.ignoreme = 1;
-  var1.script_startingposition = 0;
-  scripts\common\vehicle_aianim::guy_enter(var1);
-  self.pilot = var1;
+function blima_spawn_pilot(var_0) {
+  var_1 = scripts\engine\sp\utility::spawn_targetname(var_0, 1);
+  var_1.ignoreme = 1;
+  var_1.script_startingposition = 0;
+  scripts\common\vehicle_aianim::guy_enter(var_1);
+  self.pilot = var_1;
 }
 
 function blima_delete() {

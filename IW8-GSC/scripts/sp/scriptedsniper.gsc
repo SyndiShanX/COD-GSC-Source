@@ -3,8 +3,8 @@
  * Script: scripts\sp\scriptedsniper.gsc
 ***********************************************/
 
-function spawn_scripted_sniper(var0, var1, var2, var3, var4, var5) {
-  var6 = [["script_control", &script_control_enter], ["seek_target", &sniper_seek_target_enter], ["tracking_target", &sniper_tracking_target_enter, &sniper_tracking_target_update, &sniper_tracking_target_exit], ["lost_target", &sniper_lost_target_enter, &sniper_lost_target_update], ["shoot_target", &sniper_shoot_target_enter], ["reload", &sniper_reload_enter, &sniper_reload_update], ["exit_nest", &sniper_exit_nest], ["death", &sniper_death_enter]];
+function spawn_scripted_sniper(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = [["script_control", &script_control_enter], ["seek_target", &sniper_seek_target_enter], ["tracking_target", &sniper_tracking_target_enter, &sniper_tracking_target_update, &sniper_tracking_target_exit], ["lost_target", &sniper_lost_target_enter, &sniper_lost_target_update], ["shoot_target", &sniper_shoot_target_enter], ["reload", &sniper_reload_enter, &sniper_reload_update], ["exit_nest", &sniper_exit_nest], ["death", &sniper_death_enter]];
   self.moveinterval = 0.2;
   self.aquireplayertime = 0.25;
   self.reloadtime = 2;
@@ -24,8 +24,8 @@ function spawn_scripted_sniper(var0, var1, var2, var3, var4, var5) {
   self.targetposition = undefined;
   self.lastframetargetposition = undefined;
   self.nextshotinterval = self.minshotinterval;
-  self.deathflag = var4;
-  self.targetingplayerflag = var3;
+  self.deathflag = var_4;
+  self.targetingplayerflag = var_3;
   self.targetinpronefoliage = 0;
   self.targetincrouchfoliage = 0;
   self.targetinstandfoliage = 0;
@@ -50,14 +50,14 @@ function spawn_scripted_sniper(var0, var1, var2, var3, var4, var5) {
   self.currentcheckgroup = [];
   self.ignoreallies = 1;
   self.slowreactweapons = [];
-  self.pullbackstruct = var2;
+  self.pullbackstruct = var_2;
   self.covershootpoints = [];
   self.ignorevolumes = getEntArray("sniper_max_angle_ignore", "targetname");
   self.laser = spawn("script_model", self.origin);
   self.laser setModel("tag_laser");
   self.laser laserforceon();
   self.laser setmoverlaserweapon("iw8_emplaced_sniper");
-  self.snipermodel = getEnt(var1, "targetname");
+  self.snipermodel = getEnt(var_1, "targetname");
   self.snipermodel linkTo(self);
   self.aimgroup = [];
   self.aimgroup = scripts\engine\utility::getStructArray("sniper_cover_aim_1", "targetname");
@@ -66,45 +66,45 @@ function spawn_scripted_sniper(var0, var1, var2, var3, var4, var5) {
   self.desiredaimpos = (0, 0, 0);
   self.lostlocktime = 0;
   self.usedtargets = [];
-  var7 = getEntArray("sniper_cover_group", "targetname");
+  var_7 = getEntArray("sniper_cover_group", "targetname");
 
-  foreach(var9 in var7) {
+  foreach(var_9 in var_7) {
     thread sniper_cover_group_trigger();
   }
 
-  var11 = getEntArray("sniper_target", "targetname");
+  var_11 = getEntArray("sniper_target", "targetname");
 
-  foreach(var13 in var11) {
-    thread sniper_shot_target(var13);
+  foreach(var_13 in var_11) {
+    thread sniper_shot_target(var_13);
   }
 
   scripts\sp\statemachine::set_permanent_notify_handlers([["kill_sniper", &sniper_handle_death], ["exit_nest", &sniper_handle_exit_nest], ["script_control", &sniper_handle_script_control]]);
-  var15 = getEntArray("sniper_in_foliage", "targetname");
+  var_15 = getEntArray("sniper_in_foliage", "targetname");
 
-  foreach(var9 in var15) {
-    thread sniper_in_prone_foliage_trigger(var9);
+  foreach(var_9 in var_15) {
+    thread sniper_in_prone_foliage_trigger(var_9);
   }
 
-  var18 = getEntArray("sniper_in_high_foliage", "targetname");
+  var_18 = getEntArray("sniper_in_high_foliage", "targetname");
 
-  foreach(var9 in var18) {
-    thread sniper_in_crouch_foliage_trigger(var9);
+  foreach(var_9 in var_18) {
+    thread sniper_in_crouch_foliage_trigger(var_9);
   }
 
-  var21 = getEntArray("sniper_in_full_foliage", "targetname");
+  var_21 = getEntArray("sniper_in_full_foliage", "targetname");
 
-  foreach(var9 in var21) {
-    thread sniper_in_standing_foliage_trigger(var9);
+  foreach(var_9 in var_21) {
+    thread sniper_in_standing_foliage_trigger(var_9);
   }
 
   thread sniper_setup_destruction_notify();
   thread update_facing_angles();
 
-  if(!isDefined(var5)) {
-    var5 = "seek_target";
+  if(!isDefined(var_5)) {
+    var_5 = "seek_target";
   }
 
-  scripts\sp\statemachine::begin_fsm(var6, var5);
+  scripts\sp\statemachine::begin_fsm(var_6, var_5);
   level notify("scripted_sniper_spawned");
   thread scripts\engine\sp\utility::add_extra_autosave_check("scriptedSniper", &scripted_sniper_can_save, "Scripted sniper targeting player.");
 }
@@ -138,39 +138,39 @@ function sniper_seek_target_enter() {
   self.aimtargetoriginalposition = self.aimtarget.origin;
   self.pulsesinx = 0;
   self.pulsesinxrate = 5;
-  var0 = gettime();
+  var_0 = gettime();
   GscBinSkip4(0x35);
 }
 
 function sweep_aim_points() {
-  var0 = 0;
-  var1 = 0;
+  var_0 = 0;
+  var_1 = 0;
 
   for(;;) {
-    self.nextaimtarget = self.aimgroup[var1];
-    var2 = distance(self.nextaimtarget.origin, self.aimtarget.origin) / 60;
+    self.nextaimtarget = self.aimgroup[var_1];
+    var_2 = distance(self.nextaimtarget.origin, self.aimtarget.origin) / 60;
 
-    if(var2 > 0) {
-      self.aimtarget moveTo(self.nextaimtarget.origin, var2, var2 / 10, var2 / 10);
-      wait var2;
+    if(var_2 > 0) {
+      self.aimtarget moveTo(self.nextaimtarget.origin, var_2, var_2 / 10, var_2 / 10);
+      wait var_2;
     }
 
-    if(var0) {
-      var1--;
+    if(var_0) {
+      var_1--;
 
-      if(var1 < 0) {
-        var1 = 1;
-        var0 = 0;
+      if(var_1 < 0) {
+        var_1 = 1;
+        var_0 = 0;
       }
 
       continue;
     }
 
-    var1++;
+    var_1++;
 
-    if(var1 > self.aimgroup.size - 1) {
-      var1 = self.aimgroup.size - 2;
-      var0 = 1;
+    if(var_1 > self.aimgroup.size - 1) {
+      var_1 = self.aimgroup.size - 2;
+      var_0 = 1;
     }
   }
 }
@@ -189,63 +189,63 @@ function sniper_tracking_target_enter() {
 
   self.lastframetargetposition = self.currenttarget.origin;
   self.lockedtotarget = 0;
-  var0 = gettime();
-  var1 = 0;
+  var_0 = gettime();
+  var_1 = 0;
   self.projectedtargetpos = get_tagorigin(self.currenttarget, self.currenttargettag);
-  var2 = 0;
+  var_2 = 0;
 
   if(self.currenttarget == level.player) {
-    foreach(var4 in self.slowreactweapons) {
-      if(getweaponbasename(level.player.currentweapon) == var4) {
-        var2 = 1;
+    foreach(var_4 in self.slowreactweapons) {
+      if(getweaponbasename(level.player.currentweapon) == var_4) {
+        var_2 = 1;
       }
     }
 
     self.projectedtargetpos += level.player getvelocity() * self.maxtracktime;
   }
 
-  var6 = distance(self.aimtarget.origin, self.projectedtargetpos);
-  var7 = distance(self.projectedtargetpos, self.origin);
-  var8 = distance(self.aimtarget.origin, self.origin);
+  var_6 = distance(self.aimtarget.origin, self.projectedtargetpos);
+  var_7 = distance(self.projectedtargetpos, self.origin);
+  var_8 = distance(self.aimtarget.origin, self.origin);
 
-  if(var8 > var7) {
-    var9 = var6 + self.pullbackoffset;
+  if(var_8 > var_7) {
+    var_9 = var_6 + self.pullbackoffset;
 
-    if(var9 > var8 - self.pullbackoffset) {
-      var9 = var8 - self.pullbackoffset;
+    if(var_9 > var_8 - self.pullbackoffset) {
+      var_9 = var_8 - self.pullbackoffset;
     }
 
-    var10 = self.origin - self.aimtarget.origin;
-    self.aimtarget.origin += vectorNormalize(var10) * var9;
+    var_10 = self.origin - self.aimtarget.origin;
+    self.aimtarget.origin += vectorNormalize(var_10) * var_9;
   }
 
-  var11 = scripts\engine\math::normalize_value(self.trackmindistancethreshold, self.trackmaxdistancethreshold, var6);
-  var12 = scripts\engine\math::factor_value(self.mintracktime, self.maxtracktime, var11);
-  var13 = 0;
-  jumpiffalse(var2) LOC_000001b2;
-  var12 += var12 * 0.2;
-  var13 = 0.75;
+  var_11 = scripts\engine\math::normalize_value(self.trackmindistancethreshold, self.trackmaxdistancethreshold, var_6);
+  var_12 = scripts\engine\math::factor_value(self.mintracktime, self.maxtracktime, var_11);
+  var_13 = 0;
+  jumpiffalse(var_2) LOC_000001b2;
+  var_12 += var_12 * 0.2;
+  var_13 = 0.75;
 
-  while(var1 < var12) {
-    var1 = (gettime() - var0) / 1000;
-    var14 = var12 - var1;
+  while(var_1 < var_12) {
+    var_1 = (gettime() - var_0) / 1000;
+    var_14 = var_12 - var_1;
 
-    if(var14 <= 0) {
+    if(var_14 <= 0) {
       break;
     }
 
     self.projectedtargetpos = get_tagorigin(self.currenttarget, self.currenttargettag);
 
     if(self.currenttarget == level.player) {
-      self.projectedtargetpos += level.player getvelocity() * var14;
+      self.projectedtargetpos += level.player getvelocity() * var_14;
     }
 
-    var6 = distance(self.aimtarget.origin, self.projectedtargetpos);
-    var15 = var6 / var14 * self.moveinterval;
-    var16 = vectorNormalize(self.projectedtargetpos - self.aimtarget.origin);
-    self.desiredaimpos = self.aimtarget.origin + var16 * var15;
+    var_6 = distance(self.aimtarget.origin, self.projectedtargetpos);
+    var_15 = var_6 / var_14 * self.moveinterval;
+    var_16 = vectorNormalize(self.projectedtargetpos - self.aimtarget.origin);
+    self.desiredaimpos = self.aimtarget.origin + var_16 * var_15;
 
-    if(var15 > distance(self.aimtarget.origin, self.projectedtargetpos)) {
+    if(var_15 > distance(self.aimtarget.origin, self.projectedtargetpos)) {
       break;
     }
 
@@ -260,27 +260,27 @@ function sniper_tracking_target_enter() {
     self.desiredaimpos = sniper_locked_laser_to_target();
     self.aimtarget moveTo(self.desiredaimpos, 0.1);
 
-    if((gettime() - self.lostlocktime) / 1000 > self.holdbeforeshoottime + var13) {
+    if((gettime() - self.lostlocktime) / 1000 > self.holdbeforeshoottime + var_13) {
       self.targetmodifier = 0;
-      var17 = vectortoangles(self.origin - self.currenttarget.origin);
-      var18 = anglesToForward(var17);
+      var_17 = vectortoangles(self.origin - self.currenttarget.origin);
+      var_18 = anglesToForward(var_17);
 
       if(self.currenttarget == level.player) {
-        var19 = vectorNormalize(self.currenttarget getvelocity());
+        var_19 = vectorNormalize(self.currenttarget getvelocity());
       } else {
-        var19 = vectorNormalize(self.lastframetargetposition - self.currenttarget.origin);
+        var_19 = vectorNormalize(self.lastframetargetposition - self.currenttarget.origin);
         self.lastframetargetposition = self.currenttarget.origin;
       }
 
-      var20 = vectordot(var19, var19);
+      var_20 = vectordot(var_19, var_19);
 
       if(self.currenttarget == level.player) {
-        var21 = length2dsquared(self.currenttarget getvelocity()) / 50000;
+        var_21 = length2dsquared(self.currenttarget getvelocity()) / 50000;
       } else {
-        var21 = length2dsquared(self.lastframetargetposition - self.currenttarget.origin) / 50000;
+        var_21 = length2dsquared(self.lastframetargetposition - self.currenttarget.origin) / 50000;
       }
 
-      if(var21 < 0.5 && var21 > 0.3) {
+      if(var_21 < 0.5 && var_21 > 0.3) {
         self.targetmodifier = 24;
       }
 
@@ -291,24 +291,24 @@ function sniper_tracking_target_enter() {
       }
 
       if(self.targetmodifier > 0) {
-        var22 = randomfloat(100);
+        var_22 = randomfloat(100);
 
-        if(var22 < 50) {
-          var22 = -1;
+        if(var_22 < 50) {
+          var_22 = -1;
         } else {
-          var22 = 1;
+          var_22 = 1;
         }
 
-        var23 = randomfloat(100);
+        var_23 = randomfloat(100);
 
-        if(var23 < 50) {
-          var23 = -1;
+        if(var_23 < 50) {
+          var_23 = -1;
         } else {
-          var23 = 1;
+          var_23 = 1;
         }
 
-        var24 = (self.targetmodifier * var22, self.targetmodifier * var23, self.targetmodifier);
-        sniper_fire_shot(self.aimtarget.origin + var24, 0);
+        var_24 = (self.targetmodifier * var_22, self.targetmodifier * var_23, self.targetmodifier);
+        sniper_fire_shot(self.aimtarget.origin + var_24, 0);
       } else {
         sniper_fire_shot(self.aimtarget.origin, 1);
       }
@@ -376,15 +376,15 @@ function sniper_lost_target_update() {
 
   self.pulsesin = sin(self.pulsesinx);
   self.pulsesinx = scripts\engine\math::wrap(0, 360, self.pulsesinx + self.pulsesinxrate);
-  var0 = (self.pulsesin * self.wobblemagnitude, self.pulsesin * self.wobblemagnitude, self.pulsesin * self.wobblemagnitude);
-  self.aimtarget.origin = self.aimtargetoriginalposition + var0;
-  var1 = (gettime() - self.lastshottime) / 1000;
+  var_0 = (self.pulsesin * self.wobblemagnitude, self.pulsesin * self.wobblemagnitude, self.pulsesin * self.wobblemagnitude);
+  self.aimtarget.origin = self.aimtargetoriginalposition + var_0;
+  var_1 = (gettime() - self.lastshottime) / 1000;
 
-  if(var1 > self.nextshotinterval) {
+  if(var_1 > self.nextshotinterval) {
     sniper_fire_shot(self.aimtarget.origin + (0, 0, 8), 0);
   }
 
-  if(var1 >= self.timetolosetarget) {
+  if(var_1 >= self.timetolosetarget) {
     scripts\sp\statemachine::goto_state("seek_target");
     return;
   }
@@ -394,15 +394,15 @@ function sniper_shoot_target_enter() {
   level endon("sniper_killed");
   self endon("death");
   self endon("changed_state");
-  var0 = distance(self.desiredaimpos, self.aimtarget.origin);
-  var1 = 1;
+  var_0 = distance(self.desiredaimpos, self.aimtarget.origin);
+  var_1 = 1;
 
-  if(var0 > 1000) {
-    var1 += (var0 - 1000) / 1000;
+  if(var_0 > 1000) {
+    var_1 += (var_0 - 1000) / 1000;
   }
 
-  self.aimtarget moveTo(self.desiredaimpos, var1);
-  wait var1;
+  self.aimtarget moveTo(self.desiredaimpos, var_1);
+  wait var_1;
   wait 0.5;
   sniper_fire_shot(self.aimtarget.origin);
 }
@@ -455,13 +455,13 @@ function sniper_exit_nest() {
   }
 
   self.laser laserforceoff();
-  var0 = scripts\engine\utility::getStruct("fake_sniper", "targetname");
-  var1 = scripts\engine\utility::getStruct(self.pullbackstruct, "targetname");
-  self moveTo(var0.origin, 0.5, 0.2, 0.2);
-  self rotateTo(var0.angles, 0.5, 0.2, 0.2);
+  var_0 = scripts\engine\utility::getStruct("fake_sniper", "targetname");
+  var_1 = scripts\engine\utility::getStruct(self.pullbackstruct, "targetname");
+  self moveTo(var_0.origin, 0.5, 0.2, 0.2);
+  self rotateTo(var_0.angles, 0.5, 0.2, 0.2);
   wait 0.5;
-  self moveTo(var1.origin, 2, 1, 0.5);
-  self rotateTo(var1.angles, 2, 1, 0.5);
+  self moveTo(var_1.origin, 2, 1, 0.5);
+  self rotateTo(var_1.angles, 2, 1, 0.5);
   wait 2;
   self.snipermodel delete();
   self delete();
@@ -479,60 +479,60 @@ function update_facing_angles() {
   }
 }
 
-function sniper_handle_death(var0) {
+function sniper_handle_death(var_0) {
   scripts\sp\statemachine::goto_state("death");
 }
 
-function sniper_handle_shot_target(var0) {
-  self.currentshottarget = var0[0];
-  var1 = scripts\engine\utility::getStructArray(var0[0], "targetname");
+function sniper_handle_shot_target(var_0) {
+  self.currentshottarget = var_0[0];
+  var_1 = scripts\engine\utility::getStructArray(var_0[0], "targetname");
 
-  if(var1.size > 1) {
-    var2 = get_unused_struct_from_array(var1);
-    self.desiredaimpos = var2.origin;
+  if(var_1.size > 1) {
+    var_2 = get_unused_struct_from_array(var_1);
+    self.desiredaimpos = var_2.origin;
   } else {
-    self.desiredaimpos = var1[0].origin;
+    self.desiredaimpos = var_1[0].origin;
   }
 
   scripts\sp\statemachine::goto_state("shoot_target");
 }
 
-function sniper_handle_shot_target_tracking(var0) {
+function sniper_handle_shot_target_tracking(var_0) {
   if(isDefined(self.currenttarget) && self.currenttarget != level.player) {
-    var1 = scripts\engine\utility::getStructArray(var0[0], "targetname");
+    var_1 = scripts\engine\utility::getStructArray(var_0[0], "targetname");
 
-    if(var1.size > 1) {
-      var2 = get_unused_struct_from_array(var1);
-      self.desiredaimpos = var2.origin;
+    if(var_1.size > 1) {
+      var_2 = get_unused_struct_from_array(var_1);
+      self.desiredaimpos = var_2.origin;
     } else {
-      self.desiredaimpos = var1[0].origin;
+      self.desiredaimpos = var_1[0].origin;
     }
   }
 
   scripts\sp\statemachine::goto_state("shoot_target");
 }
 
-function get_unused_struct_from_array(var0) {
-  var1 = undefined;
-  var2 = [];
+function get_unused_struct_from_array(var_0) {
+  var_1 = undefined;
+  var_2 = [];
 
-  foreach(var4 in var0) {
-    if(scripts\engine\utility::array_contains(self.usedtargets, var4.origin)) {
-      var2 = var4.origin;
+  foreach(var_4 in var_0) {
+    if(scripts\engine\utility::array_contains(self.usedtargets, var_4.origin)) {
+      var_2 = var_4.origin;
       continue;
     }
 
-    var1 = var4;
+    var_1 = var_4;
     break;
   }
 
-  if(!isDefined(var1)) {
-    self.usedtargets = scripts\engine\utility::array_remove_array(self.usedtargets, var2);
-    var1 = scripts\engine\utility::random(var0);
+  if(!isDefined(var_1)) {
+    self.usedtargets = scripts\engine\utility::array_remove_array(self.usedtargets, var_2);
+    var_1 = scripts\engine\utility::random(var_0);
   }
 
-  self.usedtargets[self.usedtargets.size] = var1.origin;
-  return var1;
+  self.usedtargets[self.usedtargets.size] = var_1.origin;
+  return var_1;
 }
 
 function sniper_handle_exit_nest() {
@@ -543,24 +543,24 @@ function sniper_handle_script_control() {
   scripts\sp\statemachine::goto_state("script_control");
 }
 
-function sniper_check_for_target(var0) {
-  if(isDefined(var0)) {
-    var1 = vectortoangles(var0.origin - self.origin);
-    var2 = anglesToForward(var1);
-    var3 = anglesToForward(self.angles);
-    var4 = vectordot(var2, var3);
+function sniper_check_for_target(var_0) {
+  if(isDefined(var_0)) {
+    var_1 = vectortoangles(var_0.origin - self.origin);
+    var_2 = anglesToForward(var_1);
+    var_3 = anglesToForward(self.angles);
+    var_4 = vectordot(var_2, var_3);
 
-    if(var4 < 0.3) {
+    if(var_4 < 0.3) {
       return false;
     }
 
-    foreach(var6 in self.ignorevolumes) {
-      if(var6 istouching(var0)) {
+    foreach(var_6 in self.ignorevolumes) {
+      if(var_6 istouching(var_0)) {
         return false;
       }
     }
 
-    if(var0 == level.player) {
+    if(var_0 == level.player) {
       if(self.targetinpronefoliage) {
         if(level.player getstance() == "prone") {
           return false;
@@ -574,22 +574,22 @@ function sniper_check_for_target(var0) {
       }
     }
 
-    var8 = get_tagorigin(var0, "J_Spine4");
+    var_8 = get_tagorigin(var_0, "J_Spine4");
 
-    if(scripts\engine\trace::ray_trace_passed(self.origin, var8, var0, self.contentoverride)) {
-      self notify("new_target", var0, "J_Spine4", var8);
-      self.currenttarget = var0;
+    if(scripts\engine\trace::ray_trace_passed(self.origin, var_8, var_0, self.contentoverride)) {
+      self notify("new_target", var_0, "J_Spine4", var_8);
+      self.currenttarget = var_0;
       self.currenttargettag = "J_Spine4";
-      self.targetposition = var8;
+      self.targetposition = var_8;
       return true;
     } else {
-      var8 = get_tagorigin(var0, "j_head");
+      var_8 = get_tagorigin(var_0, "j_head");
 
-      if(scripts\engine\trace::ray_trace_passed(self.origin, var8, var0, self.contentoverride)) {
-        self notify("new_target", var0, "j_head", var8);
-        self.currenttarget = var0;
+      if(scripts\engine\trace::ray_trace_passed(self.origin, var_8, var_0, self.contentoverride)) {
+        self notify("new_target", var_0, "j_head", var_8);
+        self.currenttarget = var_0;
         self.currenttargettag = "j_head";
-        self.targetposition = var8;
+        self.targetposition = var_8;
         return true;
       }
     }
@@ -598,16 +598,16 @@ function sniper_check_for_target(var0) {
   return false;
 }
 
-function sniper_fire_shot(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = 0;
+function sniper_fire_shot(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  if(var1) {
-    var0 = sniper_fire_perfect_shot();
+  if(var_1) {
+    var_0 = sniper_fire_perfect_shot();
   }
 
-  magicbullet("iw8_sn_scripted", self.origin, var0, undefined);
+  magicbullet("iw8_sn_scripted", self.origin, var_0, undefined);
   self.lastshottime = gettime();
 
   if(isDefined(self.currentshottarget) && self.currentshottarget != "") {
@@ -650,14 +650,14 @@ function sniper_track_allies() {
   }
 }
 
-function sniper_shot_target(var0) {
+function sniper_shot_target(var_0) {
   level endon("sniper_killed");
   level endon("end_sniper_checks");
   level endon(self.target);
 
   for(;;) {
     self waittill("trigger");
-    var0 notify("request_shot_target", [self.target]);
+    var_0 notify("request_shot_target", [self.target]);
     wait 3;
   }
 
@@ -683,13 +683,13 @@ function sniper_setup_destruction_notify() {
   }
 
   scripts\engine\utility::flag_wait("scriptables_ready");
-  var0 = getscriptablearray("sniper_nest", "targetname");
+  var_0 = getscriptablearray("sniper_nest", "targetname");
 
-  if(!isDefined(var0[0])) {
+  if(!isDefined(var_0[0])) {
     return;
   }
 
-  level.snipernest = var0[0];
+  level.snipernest = var_0[0];
   level.snipernest waittillmatch("scriptableNotification", "sniper_dead");
 
   if(isDefined(self.deathflag) && !scripts\engine\utility::flag(self.deathflag)) {
@@ -698,82 +698,82 @@ function sniper_setup_destruction_notify() {
   }
 }
 
-function sniper_in_prone_foliage_trigger(var0) {
-  if(isDefined(var0.deathflag)) {
-    level endon(var0.deathflag);
+function sniper_in_prone_foliage_trigger(var_0) {
+  if(isDefined(var_0.deathflag)) {
+    level endon(var_0.deathflag);
   }
 
   for(;;) {
     self waittill("trigger");
 
     while(level.player istouching(self)) {
-      var0.targetinpronefoliage = 1;
+      var_0.targetinpronefoliage = 1;
       waitframe();
     }
 
-    var0.targetinpronefoliage = 0;
+    var_0.targetinpronefoliage = 0;
     waitframe();
   }
 }
 
-function sniper_in_crouch_foliage_trigger(var0) {
-  if(isDefined(var0.deathflag)) {
-    level endon(var0.deathflag);
+function sniper_in_crouch_foliage_trigger(var_0) {
+  if(isDefined(var_0.deathflag)) {
+    level endon(var_0.deathflag);
   }
 
   for(;;) {
     self waittill("trigger");
 
     while(level.player istouching(self)) {
-      var0.targetincrouchfoliage = 1;
+      var_0.targetincrouchfoliage = 1;
       waitframe();
     }
 
-    var0.targetincrouchfoliage = 0;
+    var_0.targetincrouchfoliage = 0;
     waitframe();
   }
 }
 
-function sniper_in_standing_foliage_trigger(var0) {
-  if(isDefined(var0.deathflag)) {
-    level endon(var0.deathflag);
+function sniper_in_standing_foliage_trigger(var_0) {
+  if(isDefined(var_0.deathflag)) {
+    level endon(var_0.deathflag);
   }
 
   for(;;) {
     self waittill("trigger");
 
     while(level.player istouching(self)) {
-      var0.targetinstandfoliage = 1;
+      var_0.targetinstandfoliage = 1;
       waitframe();
     }
 
-    var0.targetinstandfoliage = 0;
+    var_0.targetinstandfoliage = 0;
     waitframe();
   }
 }
 
-function get_tagorigin(var0) {
+function get_tagorigin(var_0) {
   if(isPlayer(self)) {
-    if(var0 == "j_head") {
+    if(var_0 == "j_head") {
       return level.player getEye();
     }
 
-    var1 = level.player getstance();
+    var_1 = level.player getstance();
 
-    switch (var1) {
+    switch (var_1) {
       case "stand":
-        var2 = (0, 0, 12);
+        var_2 = (0, 0, 12);
         break;
       case "crouch":
-        var2 = (0, 0, 10);
+        var_2 = (0, 0, 10);
         break;
       default:
-        var2 = (0, 0, 2);
+        var_2 = (0, 0, 2);
         break;
     }
 
-    return (level.player getEye() - var2);
+    return (level.player getEye() - var_2);
   }
 
-  return self gettagorigin(var2);
+  return self gettagorigin(var_2);
 }

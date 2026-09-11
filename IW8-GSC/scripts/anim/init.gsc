@@ -41,10 +41,10 @@ function main() {
   self.exception["move"] = 1;
   self.exception["exposed"] = 1;
   self.exception["corner_normal"] = 1;
-  var0 = getarraykeys(self.exception);
+  var_0 = getarraykeys(self.exception);
 
-  for(var1 = 0; var1 < var0.size; var1++) {
-    scripts\engine\utility::clear_exception(var0[var1]);
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    scripts\engine\utility::clear_exception(var_0[var_1]);
   }
 
   thread scripts\sp\equipment\offhands::offhandfiremanager();
@@ -84,7 +84,7 @@ function ai_update() {
   thread scripts\asm\asm_sp::deletehandler();
 }
 
-function weapons_with_ir(var0) {
+function weapons_with_ir(var_0) {
   GscBinSkip1(0x45, 0, "m4_grenadier");
 }
 
@@ -97,34 +97,34 @@ function setnameandrank_andaddtosquad() {
 function pollallowedstancesthread() {
   for(;;) {
     if(self isstanceallowed("stand")) {
-      var0 = "stand allowed";
-      var1 = (0, 1, 0);
+      var_0 = "stand allowed";
+      var_1 = (0, 1, 0);
     } else {
-      var0 = "stand not allowed";
-      var1 = (1, 0, 0);
+      var_0 = "stand not allowed";
+      var_1 = (1, 0, 0);
     }
 
     if(self isstanceallowed("crouch")) {
-      var0 = "crouch allowed";
-      var1 = (0, 1, 0);
+      var_0 = "crouch allowed";
+      var_1 = (0, 1, 0);
     } else {
-      var0 = "crouch not allowed";
-      var1 = (1, 0, 0);
+      var_0 = "crouch not allowed";
+      var_1 = (1, 0, 0);
     }
 
     if(self isstanceallowed("prone")) {
-      var0 = "prone allowed";
-      var1 = (0, 1, 0);
+      var_0 = "prone allowed";
+      var_1 = (0, 1, 0);
     } else {
-      var0 = "prone not allowed";
-      var1 = (1, 0, 0);
+      var_0 = "prone not allowed";
+      var_1 = (1, 0, 0);
     }
 
-    var2 = self getshootatpos() + (0, 0, 30);
-    var3 = (0, 0, -10);
+    var_2 = self getshootatpos() + (0, 0, 30);
+    var_3 = (0, 0, -10);
 
-    for(var4 = 0; var4 < var0.size; var4++) {
-      var5 = (var2[0] + var3[0] * var4, var2[1] + var3[1] * var4, var2[2] + var3[2] * var4);
+    for(var_4 = 0; var_4 < var_0.size; var_4++) {
+      var_5 = (var_2[0] + var_3[0] * var_4, var_2[1] + var_3[1] * var_4, var_2[2] + var_3[2] * var_4);
     }
 
     wait 0.05;
@@ -145,11 +145,11 @@ function set_anim_playback_rate() {
   self.sidesteprate = 1.35;
 }
 
-function infiniteloop(var0, var1, var2, var3) {
+function infiniteloop(var_0, var_1, var_2, var_3) {
   anim waittill("new exceptions");
 }
 
-function empty(var0, var1, var2, var3) {}
+function empty(var_0, var_1, var_2, var_3) {}
 
 function initdeveloperdvars() {}
 
@@ -175,26 +175,26 @@ function initbattlechatter() {
 }
 
 function initgrenades() {
-  for(var0 = 0; var0 < level.players.size; var0++) {
-    var1 = level.players[var0];
-    var1.grenadetimers["fraggrenade"] = randomintrange(1000, 20000);
-    var1.grenadetimers["frag"] = randomintrange(1000, 20000);
-    var1.grenadetimers["frag_main"] = randomintrange(1000, 20000);
-    var1.grenadetimers["frag_vr"] = randomintrange(1000, 20000);
-    var1.grenadetimers["flash_grenade"] = randomintrange(1000, 20000);
-    var1.grenadetimers["flash"] = randomintrange(1000, 20000);
-    var1.grenadetimers["emp"] = randomintrange(1000, 20000);
-    var1.grenadetimers["antigrav"] = randomintrange(1000, 20000);
-    var1.grenadetimers["seeker"] = randomintrange(1000, 20000);
-    var1.grenadetimers["c8_grenade"] = randomintrange(1000, 10000);
-    var1.grenadetimers["double_grenade"] = randomintrange(1000, 60000);
-    var1.grenadetimers["frag_tincan"] = randomintrange(1000, 5000);
-    var1.grenadetimers["flash"] = randomintrange(1000, 20000);
-    var1.grenadetimers["molotov"] = randomintrange(1000, 60000);
-    var1.grenadetimers["semtex"] = randomintrange(1000, 20000);
-    var1.numgrenadesinprogresstowardsplayer = 0;
-    var1.lastgrenadelandednearplayertime = -1000000;
-    var1.lastfraggrenadetoplayerstart = -1000000;
+  for(var_0 = 0; var_0 < level.players.size; var_0++) {
+    var_1 = level.players[var_0];
+    var_1.grenadetimers["fraggrenade"] = randomintrange(1000, 20000);
+    var_1.grenadetimers["frag"] = randomintrange(1000, 20000);
+    var_1.grenadetimers["frag_main"] = randomintrange(1000, 20000);
+    var_1.grenadetimers["frag_vr"] = randomintrange(1000, 20000);
+    var_1.grenadetimers["flash_grenade"] = randomintrange(1000, 20000);
+    var_1.grenadetimers["flash"] = randomintrange(1000, 20000);
+    var_1.grenadetimers["emp"] = randomintrange(1000, 20000);
+    var_1.grenadetimers["antigrav"] = randomintrange(1000, 20000);
+    var_1.grenadetimers["seeker"] = randomintrange(1000, 20000);
+    var_1.grenadetimers["c8_grenade"] = randomintrange(1000, 10000);
+    var_1.grenadetimers["double_grenade"] = randomintrange(1000, 60000);
+    var_1.grenadetimers["frag_tincan"] = randomintrange(1000, 5000);
+    var_1.grenadetimers["flash"] = randomintrange(1000, 20000);
+    var_1.grenadetimers["molotov"] = randomintrange(1000, 60000);
+    var_1.grenadetimers["semtex"] = randomintrange(1000, 20000);
+    var_1.numgrenadesinprogresstowardsplayer = 0;
+    var_1.lastgrenadelandednearplayertime = -1000000;
+    var_1.lastfraggrenadetoplayerstart = -1000000;
     thread setnextplayergrenadetime();
   }
 
@@ -217,29 +217,29 @@ function initgrenades() {
 }
 
 function aiturnnotifies() {
-  var0 = 0;
-  var1 = 3;
+  var_0 = 0;
+  var_1 = 3;
 
   for(;;) {
-    var2 = getaiarray();
+    var_2 = getaiarray();
 
-    if(var2.size == 0) {
+    if(var_2.size == 0) {
       wait 0.05;
-      var0 = 0;
+      var_0 = 0;
       continue;
     }
 
-    for(var3 = 0; var3 < var2.size; var3++) {
-      if(!isDefined(var2[var3])) {
+    for(var_3 = 0; var_3 < var_2.size; var_3++) {
+      if(!isDefined(var_2[var_3])) {
         continue;
       }
 
-      var2[var3] notify("do_slow_things");
-      var0++;
+      var_2[var_3] notify("do_slow_things");
+      var_0++;
 
-      if(var0 == var1) {
+      if(var_0 == var_1) {
         wait 0.05;
-        var0 = 0;
+        var_0 = 0;
       }
     }
   }
@@ -249,26 +249,26 @@ function setnextplayergrenadetime() {
   waittillframeend();
 
   if(isDefined(self.gs.playergrenaderangetime)) {
-    var0 = int(self.gs.playergrenaderangetime * 0.7);
+    var_0 = int(self.gs.playergrenaderangetime * 0.7);
 
-    if(var0 < 1) {
-      var0 = 1;
+    if(var_0 < 1) {
+      var_0 = 1;
     }
 
-    self.grenadetimers["frag"] = randomintrange(0, var0);
-    self.grenadetimers["flash_grenade"] = randomintrange(0, var0);
-    self.grenadetimers["seeker"] = randomintrange(0, var0);
+    self.grenadetimers["frag"] = randomintrange(0, var_0);
+    self.grenadetimers["flash_grenade"] = randomintrange(0, var_0);
+    self.grenadetimers["seeker"] = randomintrange(0, var_0);
   }
 
   if(isDefined(self.gs.playerdoublegrenadetime)) {
-    var0 = int(self.gs.playerdoublegrenadetime);
-    var1 = int(var0 / 2);
+    var_0 = int(self.gs.playerdoublegrenadetime);
+    var_1 = int(var_0 / 2);
 
-    if(var0 <= var1) {
-      var0 = var1 + 1;
+    if(var_0 <= var_1) {
+      var_0 = var_1 + 1;
     }
 
-    self.grenadetimers["double_grenade"] = randomintrange(var1, var0);
+    self.grenadetimers["double_grenade"] = randomintrange(var_1, var_0);
     return;
   }
 }
@@ -346,21 +346,21 @@ function firstinit() {
 }
 
 function getcorpsearraysp() {
-  var0 = getcorpsearray();
+  var_0 = getcorpsearray();
 
   if(isDefined(level.stealth.additional_corpse)) {
-    foreach(var2 in level.stealth.additional_corpse) {
-      if(isDefined(var2)) {
-        var0 = var2;
+    foreach(var_2 in level.stealth.additional_corpse) {
+      if(isDefined(var_2)) {
+        var_0 = var_2;
       }
     }
   }
 
-  return var0;
+  return var_0;
 }
 
-function setcorpseremovetimersp(var0) {
-  return self setcorpseremovetimer(var0);
+function setcorpseremovetimersp(var_0) {
+  return self setcorpseremovetimer(var_0);
 }
 
 function achievement_death_tracker() {
@@ -379,15 +379,15 @@ function achievement_death_tracker() {
   }
 
   if(level.player isonladder()) {
-    var0 = level.player getplayerprogression("achievementHangtime");
+    var_0 = level.player getplayerprogression("achievementHangtime");
 
-    if(var0 < 3) {
+    if(var_0 < 3) {
       if(isDefined(self.damagemod) && (self.damagemod == "MOD_PISTOL_BULLET" || self.damagemod == "MOD_RIFLE_BULLET" || self.damagemod == "MOD_EXPLOSIVE_BULLET")) {
-        if(var0 == 2) {
+        if(var_0 == 2) {
           level thread scripts\sp\utility::giveachievement_wrapper("hangtime");
         }
 
-        level.player setplayerprogression("achievementHangtime", var0 + 1);
+        level.player setplayerprogression("achievementHangtime", var_0 + 1);
         return;
       }
 

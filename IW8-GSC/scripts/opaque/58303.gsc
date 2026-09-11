@@ -38,16 +38,16 @@ function init() {
   build_vehicle_drop_off_list();
   set_wave_num();
 
-  foreach(var1 in level.ref_13d92) {
+  foreach(var_1 in level.ref_13d92) {
     thread ref_1418e();
   }
 
-  foreach(var4 in level.course_triggers) {
-    var4 thread _stop_spawn_modules::ref_13d82();
+  foreach(var_4 in level.course_triggers) {
+    var_4 thread _stop_spawn_modules::ref_13d82();
   }
 
-  foreach(var4 in level.course_targets) {
-    var4 thread _stop_spawn_modules::ref_13d79();
+  foreach(var_4 in level.course_targets) {
+    var_4 thread _stop_spawn_modules::ref_13d79();
   }
 
   level.ref_13a94 = 1;
@@ -74,15 +74,15 @@ function set_wave_num() {
   scripts\mp\gametypes\arm::setupobjectives();
 
   if(level.trial["team"] == "allies") {
-    var0 = level.gw_objstruct.startingfobs_axis;
+    var_0 = level.gw_objstruct.startingfobs_axis;
   } else {
-    var0 = level.gw_objstruct.startingfobs_allies;
+    var_0 = level.gw_objstruct.startingfobs_allies;
   }
 
   level.allfobs = [];
   level.bridge_one_death_func = [];
 
-  foreach(var2 in var0) {
+  foreach(var_2 in var_0) {
     thread playerfadeobjdelete();
   }
 
@@ -101,9 +101,9 @@ function playerfadeobjdelete() {
 
   self.targets = getEntArray("fob_target" + self.trigger.objkey, "targetname");
 
-  foreach(var1 in self.targets) {
-    if(istrue(var1.is_civilian)) {
-      self.targets = scripts\engine\utility::array_remove(self.targets, var1);
+  foreach(var_1 in self.targets) {
+    if(istrue(var_1.is_civilian)) {
+      self.targets = scripts\engine\utility::array_remove(self.targets, var_1);
     }
   }
 
@@ -112,9 +112,9 @@ function playerfadeobjdelete() {
   }
 
   self.objective = scripts\mp\gameobjects::createobjidobject(self.trigger.origin, "neutral", (0, 0, 100), undefined, "any");
-  var3 = "waypoint_capture" + self.trigger.objkey;
-  scripts\mp\objidpoolmanager::update_objective_icon(self.objective.objidnum, scripts\mp\gameobjects::getwaypointshader(var3));
-  scripts\mp\objidpoolmanager::update_objective_setbackground(self.objective.objidnum, scripts\mp\gameobjects::getwaypointbackgroundtype(var3));
+  var_3 = "waypoint_capture" + self.trigger.objkey;
+  scripts\mp\objidpoolmanager::update_objective_icon(self.objective.objidnum, scripts\mp\gameobjects::getwaypointshader(var_3));
+  scripts\mp\objidpoolmanager::update_objective_setbackground(self.objective.objidnum, scripts\mp\gameobjects::getwaypointbackgroundtype(var_3));
   scripts\mp\objidpoolmanager::update_objective_ownerteam(self.objective.objidnum, level.ref_13d56);
   scripts\mp\objidpoolmanager::objective_set_play_intro(self.objective.objidnum, 1);
 
@@ -126,18 +126,18 @@ function playerfadeobjdelete() {
       objective_state(self.objective.objidnum, "current");
     }
 
-    var4 = 0;
+    var_4 = 0;
 
-    foreach(var1 in self.targets) {
-      if(var1.activated && !istrue(var1.is_civilian)) {
+    foreach(var_1 in self.targets) {
+      if(var_1.activated && !istrue(var_1.is_civilian)) {
         scripts\mp\objidpoolmanager::objective_show_progress(self.objective.objidnum, 1);
-        var4++;
+        var_4++;
       }
     }
 
-    scripts\mp\objidpoolmanager::objective_set_progress(self.objective.objidnum, var4 / self.targets.size);
+    scripts\mp\objidpoolmanager::objective_set_progress(self.objective.objidnum, var_4 / self.targets.size);
 
-    if(var4 >= self.targets.size) {
+    if(var_4 >= self.targets.size) {
       break;
     }
 
@@ -155,10 +155,10 @@ function audio_enablepa() {
   level waittill("course_started");
 
   for(;;) {
-    var0 = scripts\engine\utility::getclosest(level.player.origin, level.enemy_targets, 1000);
+    var_0 = scripts\engine\utility::getclosest(level.player.origin, level.enemy_targets, 1000);
 
-    if(isDefined(var0)) {
-      level.ref_13d21 = var0.playerexitsafearea;
+    if(isDefined(var_0)) {
+      level.ref_13d21 = var_0.playerexitsafearea;
     } else {
       level.ref_13d21 = undefined;
     }
@@ -170,20 +170,20 @@ function audio_enablepa() {
 function ref_13a5b() {
   for(;;) {
     if(!self.activated && isDefined(level.ref_13d21) && self.playerexitsafearea == level.ref_13d21) {
-      var0 = scripts\mp\gameobjects::createobjidobject(self.origin, level.ref_13d56, (0, 0, 0), undefined, "any");
-      objective_state(var0.objidnum, "active");
-      objective_setplayintro(var0.objidnum, 0);
+      var_0 = scripts\mp\gameobjects::createobjidobject(self.origin, level.ref_13d56, (0, 0, 0), undefined, "any");
+      objective_state(var_0.objidnum, "active");
+      objective_setplayintro(var_0.objidnum, 0);
 
       if(!istrue(self.is_civilian)) {
-        objective_icon(var0.objidnum, "icon_minimap_enemy");
+        objective_icon(var_0.objidnum, "icon_minimap_enemy");
       }
 
-      objective_setbackground(var0.objidnum, 1);
-      objective_setfadedisabled(var0.objidnum, 0);
-      objective_setshowoncompass(var0.objidnum, 1);
-      objective_setminimapiconsize(var0.objidnum, "icon_regular");
-      objective_setshowdistance(var0.objidnum, 0);
-      objective_setownerteam(var0.objidnum, level.ref_13d56);
+      objective_setbackground(var_0.objidnum, 1);
+      objective_setfadedisabled(var_0.objidnum, 0);
+      objective_setshowoncompass(var_0.objidnum, 1);
+      objective_setminimapiconsize(var_0.objidnum, "icon_regular");
+      objective_setshowdistance(var_0.objidnum, 0);
+      objective_setownerteam(var_0.objidnum, level.ref_13d56);
 
       if(!istrue(self.is_civilian)) {
         thread ref_13a66();
@@ -193,7 +193,7 @@ function ref_13a5b() {
         waitframe();
       }
 
-      scripts\mp\objidpoolmanager::returnobjectiveid(var0.objidnum);
+      scripts\mp\objidpoolmanager::returnobjectiveid(var_0.objidnum);
     }
 
     waitframe();
@@ -209,19 +209,19 @@ function ref_13a66() {
     waitframe();
   }
 
-  var0 = scripts\mp\utility\outline::outlineenableforplayer(self.plate, level.player, "outlinefill_nodepth_white", "level_script");
+  var_0 = scripts\mp\utility\outline::outlineenableforplayer(self.plate, level.player, "outlinefill_nodepth_white", "level_script");
 
   while(!self.activated && isDefined(level.ref_13d21) && self.playerexitsafearea == level.ref_13d21) {
     waitframe();
   }
 
-  scripts\mp\utility\outline::outlinedisable(var0, self.plate);
+  scripts\mp\utility\outline::outlinedisable(var_0, self.plate);
 }
 
 function ref_13a60() {
-  var0 = scripts\engine\utility::getclosest(self.origin, level.bridge_one_death_func, 4096);
-  self.targetname = "fob_target" + var0.objkey;
-  self.playerexitsafearea = var0.playerexitsafearea;
+  var_0 = scripts\engine\utility::getclosest(self.origin, level.bridge_one_death_func, 4096);
+  self.targetname = "fob_target" + var_0.objkey;
+  self.playerexitsafearea = var_0.playerexitsafearea;
 }
 
 function ref_13e6a() {
@@ -229,8 +229,8 @@ function ref_13e6a() {
     waitframe();
   }
 
-  var0 = scripts\engine\utility::getclosest(self.origin, level.bridge_one_death_func, 4096);
-  self.playerexitsafearea = var0.playerexitsafearea;
+  var_0 = scripts\engine\utility::getclosest(self.origin, level.bridge_one_death_func, 4096);
+  self.playerexitsafearea = var_0.playerexitsafearea;
   scripts\mp\objidpoolmanager::objective_playermask_hidefromall(self.minimapid);
   self turretfiredisable();
 
@@ -256,14 +256,14 @@ function ref_13e6a() {
 
 function ref_1418e() {
   level waittill("course_started");
-  var0 = scripts\engine\utility::getclosest(self.origin, level.bridge_one_death_func, 4096);
+  var_0 = scripts\engine\utility::getclosest(self.origin, level.bridge_one_death_func, 4096);
 
-  while(!var0.playerexitsafearea.activated) {
+  while(!var_0.playerexitsafearea.activated) {
     waitframe();
   }
 
-  var1 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("atv", self);
-  var1.playerexitsafearea = var0.playerexitsafearea;
+  var_1 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("atv", self);
+  var_1.playerexitsafearea = var_0.playerexitsafearea;
   thread ref_141fe();
 }
 
@@ -274,14 +274,14 @@ function progression() {
     waitframe();
   }
 
-  var0 = gettime();
+  var_0 = gettime();
 
-  while(gettime() > var0 + 8000 && !level.player isonground()) {
+  while(gettime() > var_0 + 8000 && !level.player isonground()) {
     waitframe();
   }
 
   _tablethide::trial_ui_freeze_secondary_timer(1);
-  var1 = gettime() + 180000 + 500;
+  var_1 = gettime() + 180000 + 500;
   _tablethide::trial_ui_set_secondary_timer(-1);
 
   while(!level.player isonground()) {
@@ -338,20 +338,20 @@ function ref_143c7() {
   level.player endon("death");
 
   while(isalive(level.player)) {
-    var0 = 1;
-    var1 = 1;
+    var_0 = 1;
+    var_1 = 1;
 
-    foreach(var3 in level.enemy_targets) {
-      if(!var3.activated) {
-        var0 = 0;
+    foreach(var_3 in level.enemy_targets) {
+      if(!var_3.activated) {
+        var_0 = 0;
       }
     }
 
     if(gettime() < level.ref_13d3d) {
-      var1 = 0;
+      var_1 = 0;
     }
 
-    if(var0 || var1) {
+    if(var_0 || var_1) {
       level.player_died_during_course = 0;
       waitframe();
       return;
@@ -377,13 +377,13 @@ function ref_13e75() {
 
   for(;;) {
     self waittill("bullet_fired");
-    var0 = scripts\mp\utility\outline::outlineenableforplayer(self, level.player, "outlinefill_nodepth_red", "level_script");
+    var_0 = scripts\mp\utility\outline::outlineenableforplayer(self, level.player, "outlinefill_nodepth_red", "level_script");
 
     while(isalive(self) && isDefined(level.ref_13d21) && self.playerexitsafearea == level.ref_13d21) {
       waitframe();
     }
 
-    scripts\mp\utility\outline::outlinedisable(var0, self);
+    scripts\mp\utility\outline::outlinedisable(var_0, self);
     waitframe();
   }
 }
@@ -406,24 +406,24 @@ function ref_13e69() {
 }
 
 function ref_141fe() {
-  var0 = scripts\mp\utility\outline::outlineenableforplayer(self, level.player, "outline_nodepth_cyan", "level_script");
-  var1 = 0;
+  var_0 = scripts\mp\utility\outline::outlineenableforplayer(self, level.player, "outline_nodepth_cyan", "level_script");
+  var_1 = 0;
 
   for(;;) {
-    var2 = distance(level.player.origin, self.origin);
+    var_2 = distance(level.player.origin, self.origin);
 
-    foreach(var4 in level.allfobs) {
-      if(var4 == self.playerexitsafearea) {
+    foreach(var_4 in level.allfobs) {
+      if(var_4 == self.playerexitsafearea) {
         continue;
       }
 
-      if(distance(level.player.origin, var4.trigger.origin) < var2) {
-        var1 = 1;
+      if(distance(level.player.origin, var_4.trigger.origin) < var_2) {
+        var_1 = 1;
         break;
       }
     }
 
-    if(var1) {
+    if(var_1) {
       break;
     }
 
@@ -434,71 +434,71 @@ function ref_141fe() {
     waitframe();
   }
 
-  scripts\mp\utility\outline::outlinedisable(var0, self);
+  scripts\mp\utility\outline::outlinedisable(var_0, self);
 }
 
 function ref_1246c() {
-  var0 = scripts\engine\utility::array_removeundefined(level.ammorestocklocs);
+  var_0 = scripts\engine\utility::array_removeundefined(level.ammorestocklocs);
 
   for(;;) {
     for(;;) {
-      var1 = 0;
-      var2 = level.player getweaponslistprimaries();
+      var_1 = 0;
+      var_2 = level.player getweaponslistprimaries();
 
-      foreach(var4 in var2) {
-        if(level.player getweaponammostock(var4) < weaponclipsize(var4)) {
-          var1 = 1;
+      foreach(var_4 in var_2) {
+        if(level.player getweaponammostock(var_4) < weaponclipsize(var_4)) {
+          var_1 = 1;
           break;
         }
       }
 
-      if(var1) {
+      if(var_1) {
         break;
       }
 
       waitframe();
     }
 
-    var6 = scripts\engine\utility::getclosest(level.player.origin, var0, 1000);
+    var_6 = scripts\engine\utility::getclosest(level.player.origin, var_0, 1000);
 
-    if(isDefined(var6)) {
-      var7 = getEntArray(var6.target, "targetname");
-      var8 = undefined;
+    if(isDefined(var_6)) {
+      var_7 = getEntArray(var_6.target, "targetname");
+      var_8 = undefined;
 
-      foreach(var10 in var7) {
-        if(var10.classname == "script_model") {
-          var8 = var10;
+      foreach(var_10 in var_7) {
+        if(var_10.classname == "script_model") {
+          var_8 = var_10;
           break;
         }
       }
 
-      var12 = scripts\mp\utility\outline::outlineenableforplayer(var8, level.player, "outline_nodepth_cyan", "level_script");
+      var_12 = scripts\mp\utility\outline::outlineenableforplayer(var_8, level.player, "outline_nodepth_cyan", "level_script");
 
       for(;;) {
-        var13 = 0;
-        var14 = scripts\engine\utility::getclosest(level.player.origin, var0, 1000);
+        var_13 = 0;
+        var_14 = scripts\engine\utility::getclosest(level.player.origin, var_0, 1000);
 
-        if(!isDefined(var14) || var14 != var6) {
+        if(!isDefined(var_14) || var_14 != var_6) {
           break;
         }
 
-        var2 = level.player getweaponslistprimaries();
+        var_2 = level.player getweaponslistprimaries();
 
-        foreach(var4 in var2) {
-          if(level.player getweaponammostock(var4) >= weaponclipsize(var4)) {
-            var13 = 1;
+        foreach(var_4 in var_2) {
+          if(level.player getweaponammostock(var_4) >= weaponclipsize(var_4)) {
+            var_13 = 1;
             break;
           }
         }
 
-        if(var13) {
+        if(var_13) {
           break;
         }
 
         waitframe();
       }
 
-      scripts\mp\utility\outline::outlinedisable(var12, var8);
+      scripts\mp\utility\outline::outlinedisable(var_12, var_8);
     }
 
     waitframe();
@@ -529,24 +529,24 @@ function ref_12f06() {
   score_calculate();
 }
 
-function score_calculate(var0) {
-  if(!isDefined(var0)) {
-    var0 = 0;
+function score_calculate(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
   level.score["subtotal"] = level.score["enemies_killed"] + level.score["headshot"] + level.score["fobs_cleared"] + level.score["turrets_killed"];
   level.score["total"] = level.score["subtotal"] + level.score["civilians_killed"] + level.score["time_remaining"];
 
   if(istrue(level.ref_13022)) {
-    ref_12f0b(var0);
+    ref_12f0b(var_0);
   } else {
-    thread ref_12f0b(var0);
+    thread ref_12f0b(var_0);
   }
 
   _tablethide::trial_ui_set_subscore(level.score["subtotal"]);
   hud_set_reward_tier();
 
-  if(var0) {
+  if(var_0) {
     _tablethide::trial_ui_set_secondary_timer(-1);
     _tablethide::ref_13d89(1);
     wait 1;
@@ -572,7 +572,7 @@ function score_calculate(var0) {
   }
 }
 
-function ref_12f0b(var0) {
+function ref_12f0b(var_0) {
   level notify("stat_rows_generate");
   level endon("stat_rows_generate");
 
@@ -580,85 +580,85 @@ function ref_12f0b(var0) {
     waitframe();
   }
 
-  var1 = 1;
-  _tablethide::trial_ui_set_stat_and_bonus_score(var1, "targets_killed_no_ratio", level.ref_13d3e, 0);
-  var1++;
+  var_1 = 1;
+  _tablethide::trial_ui_set_stat_and_bonus_score(var_1, "targets_killed_no_ratio", level.ref_13d3e, 0);
+  var_1++;
 
   if(level.ref_13d65.size) {
-    _tablethide::trial_ui_set_stat_and_bonus_score(var1, "turrets_destroyed", level.ref_13d86, 0);
-    var1++;
+    _tablethide::trial_ui_set_stat_and_bonus_score(var_1, "turrets_destroyed", level.ref_13d86, 0);
+    var_1++;
   }
 
   if(level.civilian_targets.size) {
-    _tablethide::trial_ui_set_stat_and_bonus_score(var1, "civilian_targets_hit", level.ref_13d2b, level.score["civilians_killed"]);
-    var1++;
+    _tablethide::trial_ui_set_stat_and_bonus_score(var_1, "civilian_targets_hit", level.ref_13d2b, level.score["civilians_killed"]);
+    var_1++;
   }
 
-  _tablethide::trial_ui_set_stat_and_bonus_score(var1, "fobs_cleared", level.ref_13d46, 0);
-  var1++;
+  _tablethide::trial_ui_set_stat_and_bonus_score(var_1, "fobs_cleared", level.ref_13d46, 0);
+  var_1++;
 
-  if(var0 && !level.player_died_during_course) {
-    _tablethide::trial_ui_set_stat_and_bonus_score(var1, "time_remaining", level.ref_13d80, level.score["time_remaining"]);
+  if(var_0 && !level.player_died_during_course) {
+    _tablethide::trial_ui_set_stat_and_bonus_score(var_1, "time_remaining", level.ref_13d80, level.score["time_remaining"]);
     return;
   }
 }
 
-function hud_set_reward_tier(var0) {
-  if(!isDefined(var0)) {
-    var0 = 0;
+function hud_set_reward_tier(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  if(var0) {
-    var1 = level.score["best"];
+  if(var_0) {
+    var_1 = level.score["best"];
   } else {
-    var1 = level.score["subtotal"];
+    var_1 = level.score["subtotal"];
   }
 
-  if(var1 >= level.trial["tier3"]) {
-    var2 = 3;
-  } else if(var2 >= level.trial["tier2"]) {
-    var3 = level.trial["tier3"] - level.trial["tier2"];
-    var4 = var2 - level.trial["tier2"];
-    var2 = 2 + var4 / var3;
-  } else if(var2 >= level.trial["tier1"]) {
-    var3 = level.trial["tier2"] - level.trial["tier1"];
-    var4 = var2 - level.trial["tier1"];
-    var2 = 1 + var4 / var3;
+  if(var_1 >= level.trial["tier3"]) {
+    var_2 = 3;
+  } else if(var_2 >= level.trial["tier2"]) {
+    var_3 = level.trial["tier3"] - level.trial["tier2"];
+    var_4 = var_2 - level.trial["tier2"];
+    var_2 = 2 + var_4 / var_3;
+  } else if(var_2 >= level.trial["tier1"]) {
+    var_3 = level.trial["tier2"] - level.trial["tier1"];
+    var_4 = var_2 - level.trial["tier1"];
+    var_2 = 1 + var_4 / var_3;
   } else {
-    var2 /= level.trial["tier1"];
+    var_2 /= level.trial["tier1"];
   }
 
-  if(var2) {
-    _tablethide::trial_ui_set_reward_tier(var2);
+  if(var_2) {
+    _tablethide::trial_ui_set_reward_tier(var_2);
 
-    if(var2 >= level.trial["tier3"]) {
-      var5 = game["music"]["trials_win_high"].size;
-      var6 = randomint(var5);
-      level.player setplayermusicstate(game["music"]["trials_win_high"][var6]);
+    if(var_2 >= level.trial["tier3"]) {
+      var_5 = game["music"]["trials_win_high"].size;
+      var_6 = randomint(var_5);
+      level.player setplayermusicstate(game["music"]["trials_win_high"][var_6]);
       return;
     }
 
-    if(var5 >= level.trial["tier2"]) {
-      var5 = game["music"]["trials_win_mid"].size;
-      var6 = randomint(var5);
-      level.player setplayermusicstate(game["music"]["trials_win_mid"][var6]);
+    if(var_5 >= level.trial["tier2"]) {
+      var_5 = game["music"]["trials_win_mid"].size;
+      var_6 = randomint(var_5);
+      level.player setplayermusicstate(game["music"]["trials_win_mid"][var_6]);
       return;
     }
 
-    if(var5 >= level.trial["tier1"]) {
-      var5 = game["music"]["trials_win_low"].size;
-      var6 = randomint(var5);
-      level.player setplayermusicstate(game["music"]["trials_win_low"][var6]);
+    if(var_5 >= level.trial["tier1"]) {
+      var_5 = game["music"]["trials_win_low"].size;
+      var_6 = randomint(var_5);
+      level.player setplayermusicstate(game["music"]["trials_win_low"][var_6]);
       return;
     }
 
-    var5 = game["music"]["trials_loss"].size;
-    var6 = randomint(var5);
-    level.player setplayermusicstate(game["music"]["trials_loss"][var6]);
+    var_5 = game["music"]["trials_loss"].size;
+    var_6 = randomint(var_5);
+    level.player setplayermusicstate(game["music"]["trials_loss"][var_6]);
     return;
   }
 
-  _tablethide::trial_ui_set_reward_tier_preview(var6);
+  _tablethide::trial_ui_set_reward_tier_preview(var_6);
 }
 
 function ref_12f00() {
@@ -697,8 +697,8 @@ function score_event_time_remaining() {
   _tablethide::trial_ui_freeze_secondary_timer(1);
 
   if(!level.player_died_during_course) {
-    var0 = level.ref_13d3d - gettime();
-    level.ref_13d80 = clamp(var0, 0, pow(2, 31) - 2);
+    var_0 = level.ref_13d3d - gettime();
+    level.ref_13d80 = clamp(var_0, 0, pow(2, 31) - 2);
     level.score["time_remaining"] = scripts\mp\utility\script::limitdecimalplaces(level.ref_13d80 / 1000, 1) * 10;
   }
 
@@ -732,23 +732,23 @@ function dialog_init() {
 
 function dialog_kill_watcher() {
   level waittill("course_started");
-  var0 = 0;
-  var1 = 0;
-  var2 = gettime();
-  var3 = gettime();
-  var4 = 5000;
+  var_0 = 0;
+  var_1 = 0;
+  var_2 = gettime();
+  var_3 = gettime();
+  var_4 = 5000;
 
   for(;;) {
-    if(level.score["civilians_killed"] < level.score["civilians_killed"] && gettime() > var3 + var4) {
+    if(level.score["civilians_killed"] < level.score["civilians_killed"] && gettime() > var_3 + var_4) {
       level.player scripts\engine\utility::delaythread(0.5, &scripts\mp\utility\dialog::leaderdialogonplayer, "course_civilian_shot");
-      var5 = gettime();
-    } else if(level.score["enemies_killed"] > level.score["enemies_killed"] + 1 && gettime() > var2 + var4) {
+      var_5 = gettime();
+    } else if(level.score["enemies_killed"] > level.score["enemies_killed"] + 1 && gettime() > var_2 + var_4) {
       level.player scripts\engine\utility::delaythread(0.25, &scripts\mp\utility\dialog::leaderdialogonplayer, "course_nice_shot");
-      var5 = gettime();
+      var_5 = gettime();
     }
 
-    var1 = level.score["civilians_killed"];
-    var0 = level.score["enemies_killed"];
+    var_1 = level.score["civilians_killed"];
+    var_0 = level.score["enemies_killed"];
     waitframe();
   }
 }
@@ -767,12 +767,12 @@ function build_vehicle_drop_off_list() {
 }
 
 function ref_13d30() {
-  var0 = level.trial["missionID"];
-  var1 = getomnvar("ui_trial_reward_tier");
-  var2 = getomnvar("ui_trial_best_score");
-  var3 = int(game["trial"]["analytics"]["kills"]);
-  var4 = int(game["trial"]["analytics"]["civilians"]);
-  var5 = int(game["trial"]["analytics"]["turrets"]);
-  var6 = int(game["trial"]["analytics"]["fobs"]);
-  level.player dlog_recordplayerevent("dlog_event_trial_complete_arm_course", ["id", var0, "tier", var1, "score", var2, "kills", var3, "civilians", var4, "turrets", var5, "fobs", var6]);
+  var_0 = level.trial["missionID"];
+  var_1 = getomnvar("ui_trial_reward_tier");
+  var_2 = getomnvar("ui_trial_best_score");
+  var_3 = int(game["trial"]["analytics"]["kills"]);
+  var_4 = int(game["trial"]["analytics"]["civilians"]);
+  var_5 = int(game["trial"]["analytics"]["turrets"]);
+  var_6 = int(game["trial"]["analytics"]["fobs"]);
+  level.player dlog_recordplayerevent("dlog_event_trial_complete_arm_course", ["id", var_0, "tier", var_1, "score", var_2, "kills", var_3, "civilians", var_4, "turrets", var_5, "fobs", var_6]);
 }

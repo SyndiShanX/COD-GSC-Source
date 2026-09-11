@@ -675,47 +675,47 @@ function script_models() {
   level.scr_anim["gas_lab_door"]["rescue_pull_final"] = % cap_bnk_030_rescue_pull_final_door01;
 }
 
-function pri_bunker_last_line(var0) {
+function pri_bunker_last_line(var_0) {
   wait lookupsoundlength("dx_vom_pri_bunker_gas_110") / 1000;
   scripts\engine\utility::flag_set("done_bu_breach_vo");
 }
 
-function kill_me_ragdoll(var0) {
-  if(isDefined(var0.magic_bullet_shield) && var0.magic_bullet_shield) {
-    var0 scripts\common\ai::stop_magic_bullet_shield();
+function kill_me_ragdoll(var_0) {
+  if(isDefined(var_0.magic_bullet_shield) && var_0.magic_bullet_shield) {
+    var_0 scripts\common\ai::stop_magic_bullet_shield();
   }
 
-  var0.allowdeath = 1;
-  var0.skipdeathanim = 1;
-  var0 kill();
+  var_0.allowdeath = 1;
+  var_0.skipdeathanim = 1;
+  var_0 kill();
 }
 
-function exit_bed_remove_fov_user_scale(var0) {
+function exit_bed_remove_fov_user_scale(var_0) {
   level.player lerpfovscalefactor(1, 1);
 }
 
-function release_stunstick(var0) {
+function release_stunstick(var_0) {
   level.barkov detach("military_stun_gun_baton_01", "tag_accessory_right");
   level.stunstick = scripts\engine\sp\utility::spawn_anim_model("stunstick", level.barkov gettagorigin("tag_accessory_right"), level.barkov gettagangles("tag_accessory_right"));
   level.stunstick thread scripts\sp\maps\captive\captive_break::check_try_pickup_stunstick();
 }
 
-function pickup_stunstick(var0) {
+function pickup_stunstick(var_0) {
   level.stunstick scripts\sp\player\cursor_hint::remove_cursor_hint();
   level notify("end_stunstick_pickup_test");
   level.stunstick delete();
   level.barkov attach("military_stun_gun_baton_01", "tag_accessory_right");
 }
 
-function show_clacker(var0) {
+function show_clacker(var_0) {
   level.clacker show();
 }
 
-function drop_gun(var0) {
-  var0 scripts\common\ai::gun_remove();
-  var1 = scripts\engine\sp\utility::spawn_anim_weapon("ak", var0 gettagorigin("j_gun"), var0 gettagangles("j_gun"));
+function drop_gun(var_0) {
+  var_0 scripts\common\ai::gun_remove();
+  var_1 = scripts\engine\sp\utility::spawn_anim_weapon("ak", var_0 gettagorigin("j_gun"), var_0 gettagangles("j_gun"));
 }
 
-function remove_gun(var0) {
-  var0 scripts\common\ai::gun_remove();
+function remove_gun(var_0) {
+  var_0 scripts\common\ai::gun_remove();
 }

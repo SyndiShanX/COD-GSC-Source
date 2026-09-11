@@ -33,6 +33,6 @@ function main_mp() {
   scripts\code\character::attachhead("civilian_russian_female_head", xmodelalias\civilian_russian_female_head::main());
 }
 
-function precache_mp(var0) {
-  level.agent_definition[var0]["animclass"] = "civilian_female";
+function precache_mp(var_0) {
+  level.agent_definition[var_0]["animclass"] = "civilian_female";
 }

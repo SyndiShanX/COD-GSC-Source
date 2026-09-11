@@ -51,29 +51,29 @@ function ref_11e8d() {
 function ref_11d80() {
   if(level.gametype == "arena") {
     wait 1;
-    var0 = scripts\mp\spawnlogic::getspawnpointarray("mp_arena_spawn_axis_start");
+    var_0 = scripts\mp\spawnlogic::getspawnpointarray("mp_arena_spawn_axis_start");
 
-    foreach(var2 in var0) {
-      if(distance(var2.origin, (64, -528, 16)) < 10) {
-        var2.origin = (90, -528, 16);
+    foreach(var_2 in var_0) {
+      if(distance(var_2.origin, (64, -528, 16)) < 10) {
+        var_2.origin = (90, -528, 16);
         continue;
       }
 
-      if(distance(var2.origin, (-64, -528, 16)) < 10) {
-        var2.origin = (-90, -528, 16);
+      if(distance(var_2.origin, (-64, -528, 16)) < 10) {
+        var_2.origin = (-90, -528, 16);
       }
     }
 
-    var4 = scripts\mp\spawnlogic::getspawnpointarray("mp_arena_spawn_allies_start");
+    var_4 = scripts\mp\spawnlogic::getspawnpointarray("mp_arena_spawn_allies_start");
 
-    foreach(var2 in var4) {
-      if(distance(var2.origin, (64, 528, 16)) < 10) {
-        var2.origin = (90, 528, 16);
+    foreach(var_2 in var_4) {
+      if(distance(var_2.origin, (64, 528, 16)) < 10) {
+        var_2.origin = (90, 528, 16);
         continue;
       }
 
-      if(distance(var2.origin, (-64, 528, 16)) < 10) {
-        var2.origin = (-90, 528, 16);
+      if(distance(var_2.origin, (-64, 528, 16)) < 10) {
+        var_2.origin = (-90, 528, 16);
       }
     }
 
@@ -82,10 +82,10 @@ function ref_11d80() {
 }
 
 function ref_121f4() {
-  var0 = spawn("script_model", (-3, 36, 12));
-  var0 setModel("mp_m_cage_shotblocker");
-  var0.angles = (0, 0, 0);
-  var1 = spawn("script_model", (63, -36, 12));
-  var1 setModel("mp_m_cage_shotblocker");
-  var1.angles = (0, 0, 0);
+  var_0 = spawn("script_model", (-3, 36, 12));
+  var_0 setModel("mp_m_cage_shotblocker");
+  var_0.angles = (0, 0, 0);
+  var_1 = spawn("script_model", (63, -36, 12));
+  var_1 setModel("mp_m_cage_shotblocker");
+  var_1.angles = (0, 0, 0);
 }

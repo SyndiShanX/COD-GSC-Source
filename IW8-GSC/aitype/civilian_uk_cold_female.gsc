@@ -28,10 +28,10 @@ function main() {
   self.usescriptedweapon = 0;
   self.scriptedweaponclassprimary = "none";
   self.weapon = isundefinedweapon();
-  var0 = undefined;
-  var1 = ["civ_london_female_02_skintone_light", "civ_london_female_02_skintone_med", "civ_london_female_02_skintone_dark", "civ_london_female_03_skintone_light", "civ_london_female_03_skintone_med", "civ_london_female_03_skintone_dark", "civ_london_female_skintone_light", "civ_london_female_skintone_med"];
+  var_0 = undefined;
+  var_1 = ["civ_london_female_02_skintone_light", "civ_london_female_02_skintone_med", "civ_london_female_02_skintone_dark", "civ_london_female_03_skintone_light", "civ_london_female_03_skintone_med", "civ_london_female_03_skintone_dark", "civ_london_female_skintone_light", "civ_london_female_skintone_med"];
 
-  switch (scripts\code\character::get_random_character(8, var0, var1)) {
+  switch (scripts\code\character::get_random_character(8, var_0, var_1)) {
     case 0:
       character\civ_london_female_02_skintone_light::main();
       break;
@@ -63,7 +63,7 @@ function spawner() {
   self setspawnerteam("neutral");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\civ_london_female_02_skintone_light::precache();
   character\civ_london_female_02_skintone_med::precache();
   character\civ_london_female_02_skintone_dark::precache();

@@ -24,21 +24,21 @@ function initnightvisionheadoverrides() {
 
   level.nvgheadoverrides = [];
 
-  for(var0 = 0;; var0++) {
-    var1 = tablelookupbyrow("operatorskins.csv", var0, 5);
-    var2 = tablelookupbyrow("operatorskins.csv", var0, 17);
-    var3 = tablelookupbyrow("operatorskins.csv", var0, 16);
+  for(var_0 = 0;; var_0++) {
+    var_1 = tablelookupbyrow("operatorskins.csv", var_0, 5);
+    var_2 = tablelookupbyrow("operatorskins.csv", var_0, 17);
+    var_3 = tablelookupbyrow("operatorskins.csv", var_0, 16);
 
-    if(!isDefined(var1) || var1 == "") {
+    if(!isDefined(var_1) || var_1 == "") {
       break;
     }
 
-    if(var2 != "") {
-      level.nvgheadoverrides[var1]["up"] = var2;
+    if(var_2 != "") {
+      level.nvgheadoverrides[var_1]["up"] = var_2;
     }
 
-    if(var3 != "") {
-      level.nvgheadoverrides[var1]["down"] = var3;
+    if(var_3 != "") {
+      level.nvgheadoverrides[var_1]["down"] = var_3;
     }
   }
 
@@ -51,57 +51,57 @@ function initnightvisionheadoverrides() {
   level.nvgheadoverrides["head_mp_eastern_fireteam_east_nvg_1"]["up"] = "none";
 }
 
-function givedefaultloadout(var0, var1, var2, var3) {
+function givedefaultloadout(var_0, var_1, var_2, var_3) {
   self setclientomnvar("ui_options_menu", 0);
 
   if(istrue(self.is_doing_infil)) {
-    thread giveloadoutafterinfil(var0, var1, var2);
+    thread giveloadoutafterinfil(var_0, var_1, var_2);
     return;
   }
 
-  var4 = self;
-  var4.changingweapon = undefined;
-  var4 scripts\cp\cp_accessories::clearplayeraccessory();
-  var4 takeallweapons();
+  var_4 = self;
+  var_4.changingweapon = undefined;
+  var_4 scripts\cp\cp_accessories::clearplayeraccessory();
+  var_4 takeallweapons();
 
-  if(!istrue(var4.keep_perks)) {
-    var4 scripts\cp\utility::_clearperks();
+  if(!istrue(var_4.keep_perks)) {
+    var_4 scripts\cp\utility::_clearperks();
   }
 
-  thread delayreturningperks(var4);
+  thread delayreturningperks(var_4);
 
-  if(istrue(var3)) {
-    var4 scripts\cp\utility::_detachall(1);
+  if(istrue(var_3)) {
+    var_4 scripts\cp\utility::_detachall(1);
   } else {
-    var4 scripts\cp\utility::_detachall();
+    var_4 scripts\cp\utility::_detachall();
 
-    if(isDefined(var4.headmodel)) {
-      var4.headmodel = undefined;
+    if(isDefined(var_4.headmodel)) {
+      var_4.headmodel = undefined;
     }
 
-    var5 = get_player_character_num();
+    var_5 = get_player_character_num();
 
-    if(isDefined(var1)) {
-      var5 = var1;
+    if(isDefined(var_1)) {
+      var_5 = var_1;
     }
 
-    thread setmodelfromcustomization(var4);
-    var6 = lookupcurrentoperatorskin(var4, var4.team);
-    var7 = getplayerfoleytype(var4, var6);
+    thread setmodelfromcustomization(var_4);
+    var_6 = lookupcurrentoperatorskin(var_4, var_4.team);
+    var_7 = getplayerfoleytype(var_4, var_6);
 
-    if(var7 == "") {
-      var7 = "vestlight";
+    if(var_7 == "") {
+      var_7 = "vestlight";
     }
 
-    var4 setclothtype(var7);
+    var_4 setclothtype(var_7);
   }
 
-  if(initmaxspeedforpathlengthtable(var4)) {
-    var2 = 1;
+  if(initmaxspeedforpathlengthtable(var_4)) {
+    var_2 = 1;
     thread ref_13b0f();
   }
 
-  var4.spawnperk = 0;
+  var_4.spawnperk = 0;
   scripts\engine\utility::flag_wait("introscreen_over");
 
   if(isDefined(level.move_speed_scale)) {
@@ -110,90 +110,90 @@ function givedefaultloadout(var0, var1, var2, var3) {
     updatemovespeedscale();
   }
 
-  var4.primaryweapon = isundefinedweapon();
-  var4 thread scripts\cp\cp_weapon::setweaponlaser_internal();
-  var4 notify("giveLoadout");
-  var4 scripts\cp\utility::giveperk("specialty_pistoldeath");
-  var4 scripts\cp\utility::giveperk("specialty_expanded_minimap");
+  var_4.primaryweapon = isundefinedweapon();
+  var_4 thread scripts\cp\cp_weapon::setweaponlaser_internal();
+  var_4 notify("giveLoadout");
+  var_4 scripts\cp\utility::giveperk("specialty_pistoldeath");
+  var_4 scripts\cp\utility::giveperk("specialty_expanded_minimap");
 
-  if(isDefined(var0) && var0) {
+  if(isDefined(var_0) && var_0) {
     return;
   }
 
-  set_player_perks(var4);
-  var8 = var4.melee_weapon;
-  var4.default_starting_melee_weapon = var8;
-  var4.currentmeleeweapon = var8;
+  set_player_perks(var_4);
+  var_8 = var_4.melee_weapon;
+  var_4.default_starting_melee_weapon = var_8;
+  var_4.currentmeleeweapon = var_8;
 
   if(allow_super(self)) {
     if(!istrue(self.getc130knownsafeheight)) {
-      scripts\cp\coop_super::give_player_super(var2);
+      scripts\cp\coop_super::give_player_super(var_2);
     }
 
-    scripts\cp\classes\cp_class_progression::give_player_class(var2);
+    scripts\cp\classes\cp_class_progression::give_player_class(var_2);
   }
 
-  scripts\cp\cp_loadout::give_weapons_from_loadout(self, var2);
+  scripts\cp\cp_loadout::give_weapons_from_loadout(self, var_2);
 
   if(isDefined(self.classstruct.loadoutaccessorydata) && isDefined(self.classstruct.loadoutaccessoryweapon) && self.classstruct.loadoutaccessoryweapon != "none") {
     scripts\cp\cp_accessories::giveplayeraccessory(self.classstruct.loadoutaccessorydata, self.classstruct.loadoutaccessoryweapon, self.classstruct.loadoutaccessorylogic);
   }
 
-  if(getqueuedspleveltransients(var4.default_starting_pistol)) {
-    if(!getqueuedspleveltransients(var4.starting_weapon)) {
-      var4.default_starting_pistol = var4.starting_weapon;
+  if(getqueuedspleveltransients(var_4.default_starting_pistol)) {
+    if(!getqueuedspleveltransients(var_4.starting_weapon)) {
+      var_4.default_starting_pistol = var_4.starting_weapon;
     } else if(isDefined(level.default_weapon)) {
-      var4.default_starting_pistol = scripts\cp\cp_weapon::buildweapon(level.default_weapon, [], "none", "none", -1);
+      var_4.default_starting_pistol = scripts\cp\cp_weapon::buildweapon(level.default_weapon, [], "none", "none", -1);
     } else {
-      var4.default_starting_pistol = scripts\cp\cp_weapon::buildweapon("iw8_pi_decho_mp", [], "none", "none", -1);
+      var_4.default_starting_pistol = scripts\cp\cp_weapon::buildweapon("iw8_pi_decho_mp", [], "none", "none", -1);
     }
   }
 
-  var4.last_stand_pistol = var4.default_starting_pistol;
-  var9 = scripts\cp\utility::getrawbaseweaponname(var4.default_starting_pistol);
-  var4.default_starting_pistol = return_wbk_version_of_weapon(var4, var9, var4.default_starting_pistol);
-  var4 scripts\cp\utility::_giveweapon(var4.default_starting_pistol, undefined, undefined, 1);
+  var_4.last_stand_pistol = var_4.default_starting_pistol;
+  var_9 = scripts\cp\utility::getrawbaseweaponname(var_4.default_starting_pistol);
+  var_4.default_starting_pistol = return_wbk_version_of_weapon(var_4, var_9, var_4.default_starting_pistol);
+  var_4 scripts\cp\utility::_giveweapon(var_4.default_starting_pistol, undefined, undefined, 1);
 
   LOC_000002cd:
-    if(!getqueuedspleveltransients(var4.starting_weapon)) {
-      var9 = scripts\cp\utility::getrawbaseweaponname(var4.starting_weapon);
-      var4.starting_weapon = return_wbk_version_of_weapon(var4, var9, var4.starting_weapon);
-      var4 scripts\cp\utility::_giveweapon(var4.starting_weapon, undefined, undefined, 0);
+    if(!getqueuedspleveltransients(var_4.starting_weapon)) {
+      var_9 = scripts\cp\utility::getrawbaseweaponname(var_4.starting_weapon);
+      var_4.starting_weapon = return_wbk_version_of_weapon(var_4, var_9, var_4.starting_weapon);
+      var_4 scripts\cp\utility::_giveweapon(var_4.starting_weapon, undefined, undefined, 0);
     }
 
-  var10 = scripts\cp\utility::getrawbaseweaponname(var4.default_starting_pistol);
-  var4[[level.move_speed_scale]]();
-  var4 giveweapon("super_default_zm");
-  var4 assignweaponoffhandspecial("super_default_zm");
-  var4.specialoffhandgrenade = "super_default_zm";
-  var11 = var4.default_starting_pistol;
+  var_10 = scripts\cp\utility::getrawbaseweaponname(var_4.default_starting_pistol);
+  var_4[[level.move_speed_scale]]();
+  var_4 giveweapon("super_default_zm");
+  var_4 assignweaponoffhandspecial("super_default_zm");
+  var_4.specialoffhandgrenade = "super_default_zm";
+  var_11 = var_4.default_starting_pistol;
 
-  if(!getqueuedspleveltransients(var4.starting_weapon)) {
-    var11 = var4.starting_weapon;
+  if(!getqueuedspleveltransients(var_4.starting_weapon)) {
+    var_11 = var_4.starting_weapon;
   }
 
-  thread wait_and_force_weapon_switch(var4);
+  thread wait_and_force_weapon_switch(var_4);
 
   if(!scripts\cp\utility::turn_off_sniper_laser()) {
-    if(!isDefined(var4.move_door_to_pos)) {
-      var4.move_door_to_pos = 0;
-      var4 scripts\cp\utility::brjugg_playerwelcomesplashes(1);
-    } else if(var4.move_door_to_pos == 0) {
-      var4 scripts\cp\utility::brjugg_playerwelcomesplashes(1);
+    if(!isDefined(var_4.move_door_to_pos)) {
+      var_4.move_door_to_pos = 0;
+      var_4 scripts\cp\utility::brjugg_playerwelcomesplashes(1);
+    } else if(var_4.move_door_to_pos == 0) {
+      var_4 scripts\cp\utility::brjugg_playerwelcomesplashes(1);
     }
   }
 
-  if(isDefined(var4.operatorcustomization) && isDefined(var4.operatorcustomization.execution)) {
-    var4 scripts\cp_mp\execution::_giveexecution(var4.operatorcustomization.execution);
+  if(isDefined(var_4.operatorcustomization) && isDefined(var_4.operatorcustomization.execution)) {
+    var_4 scripts\cp_mp\execution::_giveexecution(var_4.operatorcustomization.execution);
   }
 
   if(istrue(level.disable_nvg)) {
-    var4 setactionslot(2, "");
+    var_4 setactionslot(2, "");
   }
 
-  var4 setactionslot(3, "altmode");
-  var4 notify("loadout_given");
-  var4.getc130knownsafeheight = undefined;
+  var_4 setactionslot(3, "altmode");
+  var_4 notify("loadout_given");
+  var_4.getc130knownsafeheight = undefined;
   thread ref_11ec9();
 }
 
@@ -225,147 +225,147 @@ function ref_11ec9() {
   thread scripts\cp\cp_munitions::hasmaxammo();
 }
 
-function giveloadoutafterinfil(var0, var1, var2) {
+function giveloadoutafterinfil(var_0, var_1, var_2) {
   self notify("giveLoadoutAfterInfil");
   self endon("disconnect");
   self endon("giveLoadoutAfterInfil");
   self waittill("player_finished_infil");
-  givedefaultloadout(var0, var1, var2);
+  givedefaultloadout(var_0, var_1, var_2);
 }
 
-function allow_super(var0) {
+function allow_super(var_0) {
   if(isDefined(level.allow_super)) {
-    return [[level.allow_super]](var0);
+    return [[level.allow_super]](var_0);
   }
 
   return 1;
 }
 
-function return_wbk_version_of_weapon(var0, var1, var2) {
+function return_wbk_version_of_weapon(var_0, var_1, var_2) {
   level endon("game_ended");
-  var0 endon("disconnect");
+  var_0 endon("disconnect");
 
-  if(isDefined(var0.weapon_build_models[var1])) {
-    return asmdevgetallstates(var0.weapon_build_models[var1]);
+  if(isDefined(var_0.weapon_build_models[var_1])) {
+    return asmdevgetallstates(var_0.weapon_build_models[var_1]);
   }
 
-  return var2;
+  return var_2;
 }
 
-function delayreturningperks(var0) {
+function delayreturningperks(var_0) {
   level endon("game_ended");
-  var0 endon("disconnect");
-  var0 waittill("spawned_player");
+  var_0 endon("disconnect");
+  var_0 waittill("spawned_player");
   wait 1;
 
-  if(istrue(var0.keep_perks)) {
-    if(isDefined(var0.zombies_perks)) {
-      var1 = getarraykeys(var0.zombies_perks);
+  if(istrue(var_0.keep_perks)) {
+    if(isDefined(var_0.zombies_perks)) {
+      var_1 = getarraykeys(var_0.zombies_perks);
 
-      foreach(var3 in var1) {
-        if(isDefined(level.coop_perk_callbacks) && isDefined(level.coop_perk_callbacks[var3]) && isDefined(level.coop_perk_callbacks[var3].set)) {
-          var0[[level.coop_perk_callbacks[var3].set]]();
+      foreach(var_3 in var_1) {
+        if(isDefined(level.coop_perk_callbacks) && isDefined(level.coop_perk_callbacks[var_3]) && isDefined(level.coop_perk_callbacks[var_3].set)) {
+          var_0[[level.coop_perk_callbacks[var_3].set]]();
         }
       }
     }
 
-    var0.keep_perks = undefined;
+    var_0.keep_perks = undefined;
     return;
   }
 }
 
-function release_character_number(var0) {
-  var1 = var0.player_character_num;
+function release_character_number(var_0) {
+  var_1 = var_0.player_character_num;
 
-  if(!scripts\engine\utility::array_contains(level.available_player_characters, var1) && var1 != 5) {
-    level.available_player_characters = scripts\engine\utility::array_add(level.available_player_characters, var1);
+  if(!scripts\engine\utility::array_contains(level.available_player_characters, var_1) && var_1 != 5) {
+    level.available_player_characters = scripts\engine\utility::array_add(level.available_player_characters, var_1);
     return;
   }
 }
 
-function get_baseweapon_pap_level(var0, var1) {
-  if(isDefined(var0.pap[var1])) {
-    return var0.pap[var1].lvl;
+function get_baseweapon_pap_level(var_0, var_1) {
+  if(isDefined(var_0.pap[var_1])) {
+    return var_0.pap[var_1].lvl;
   }
 
   return 1;
 }
 
-function setmodelfromcustomization(var0) {
+function setmodelfromcustomization(var_0) {
   level endon("game_ended");
   self.melee_weapon = "iw8_knife_mp";
-  var1 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "selectedOperatorIndex");
-  var2 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "operators", var1);
-  var3 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "operatorCustomization", var2, "skin");
-  var4 = getoperatorcustomization();
-  var5 = var4[0];
-  var6 = var4[1];
-  self.setcustomization_body = var5;
-  self.setcustomization_head = var6;
-  self setcustomization(var5, var6);
+  var_1 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "selectedOperatorIndex");
+  var_2 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "operators", var_1);
+  var_3 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "operatorCustomization", var_2, "skin");
+  var_4 = getoperatorcustomization();
+  var_5 = var_4[0];
+  var_6 = var_4[1];
+  self.setcustomization_body = var_5;
+  self.setcustomization_head = var_6;
+  self setcustomization(var_5, var_6);
   wait 0.05;
-  var4 = getoperatorcustomization();
-  var5 = var4[0];
-  var6 = var4[1];
-  var7 = var4[2];
+  var_4 = getoperatorcustomization();
+  var_5 = var_4[0];
+  var_6 = var_4[1];
+  var_7 = var_4[2];
 
   if(!isagent(self)) {
-    self setcustomization(var5, var6);
-    var8 = self getcustomizationbody();
-    var9 = self getcustomizationhead();
-    var10 = self getcustomizationviewmodel();
-    var11 = getplayerviewmodelfrombody(var5);
+    self setcustomization(var_5, var_6);
+    var_8 = self getcustomizationbody();
+    var_9 = self getcustomizationhead();
+    var_10 = self getcustomizationviewmodel();
+    var_11 = getplayerviewmodelfrombody(var_5);
   } else {
-    var8 = "body_opforce_london_terrorist_1_2";
-    var9 = "head_male_bc_03";
-    var10 = "viewmodel_mp_base_iw8";
-    var11 = "viewmodel_mp_base_iw8";
+    var_8 = "body_opforce_london_terrorist_1_2";
+    var_9 = "head_male_bc_03";
+    var_10 = "viewmodel_mp_base_iw8";
+    var_11 = "viewmodel_mp_base_iw8";
   }
 
-  var6 = lookupcurrentoperator(self.team);
-  var12 = lookupcurrentoperatorskin(self.team);
-  var13 = spawnStruct();
-  var13.operatorref = var6;
-  var13.skinref = var12;
-  var13.body = var9;
-  var13.defaultbody = var8;
-  var13.head = var10;
-  var13.defaulthead = var9;
-  var13.vm = var11;
-  var13.defaultvm = var10;
-  var13.gender = getoperatorgender(var6);
-  var13.voice = getoperatorvoice(var6, var12);
-  var13.clothtype = resetplayermovespeedscale(var12);
-  var13.superfaction = getoperatorsuperfaction(var6);
-  var13.execution = getoperatorexecution(var6);
-  var13.oic_rewardammo = resetposition(var6);
-  var13.suit = var11;
-  var13.rebuild = 0;
-  var13.superfaction = getoperatorsuperfaction(var6);
-  self.operatorcustomization = var13;
+  var_6 = lookupcurrentoperator(self.team);
+  var_12 = lookupcurrentoperatorskin(self.team);
+  var_13 = spawnStruct();
+  var_13.operatorref = var_6;
+  var_13.skinref = var_12;
+  var_13.body = var_9;
+  var_13.defaultbody = var_8;
+  var_13.head = var_10;
+  var_13.defaulthead = var_9;
+  var_13.vm = var_11;
+  var_13.defaultvm = var_10;
+  var_13.gender = getoperatorgender(var_6);
+  var_13.voice = getoperatorvoice(var_6, var_12);
+  var_13.clothtype = resetplayermovespeedscale(var_12);
+  var_13.superfaction = getoperatorsuperfaction(var_6);
+  var_13.execution = getoperatorexecution(var_6);
+  var_13.oic_rewardammo = resetposition(var_6);
+  var_13.suit = var_11;
+  var_13.rebuild = 0;
+  var_13.superfaction = getoperatorsuperfaction(var_6);
+  self.operatorcustomization = var_13;
   setcharactermodels(self.operatorcustomization.defaultbody, self.operatorcustomization.defaulthead, self.operatorcustomization.defaultvm);
-  var14 = spawnStruct();
-  var14.apc = runbrgametypefunc6("apc");
-  var14.c4_pick_up_listener = rundomplateskybeam("apc");
-  var14.check_cannot_spawn_tank = runbrgametypefunc6("atv");
-  var14.get_extra_focus_fire_multipler = runbrgametypefunc6("cargo_truck");
-  var14.vehicle_damage_endburndown = runbrgametypefunc6("jeep");
-  var14.x1opsenableelimination = runbrgametypefunc6("little_bird");
-  var14.ref_139f7 = runbrgametypefunc6("tac_rover");
-  var14.ref_13a47 = runbrgametypefunc6("tank_east");
-  var14.ref_13a48 = rundomplateskybeam("tank_east");
-  var14.ref_13a52 = runbrgametypefunc6("tank_west");
-  var14.ref_13a53 = rundomplateskybeam("tank_west");
-  var14.c130airdrop_heightoverride = runcircles("apc", 4);
-  var14.check_carrier_status = runcircles("atv", 6);
-  var14.get_fake_digit_from_pool = runcircles("cargo_truck", 8);
-  var14.vehicle_damage_enginevisualclearcallback = runcircles("jeep", 10);
-  var14.x1opsendgame = runcircles("little_bird", 12);
-  var14.ref_139f8 = runcircles("tac_rover", 14);
-  var14.check_for_damage_scalar_change = runcontrolledcallback("atv");
-  var14.ref_139fc = runcontrolledcallback("tac_rover");
-  var14.zombieingas = runcontrolledcallback("little_bird");
-  self.ref_14238 = var14;
+  var_14 = spawnStruct();
+  var_14.apc = runbrgametypefunc6("apc");
+  var_14.c4_pick_up_listener = rundomplateskybeam("apc");
+  var_14.check_cannot_spawn_tank = runbrgametypefunc6("atv");
+  var_14.get_extra_focus_fire_multipler = runbrgametypefunc6("cargo_truck");
+  var_14.vehicle_damage_endburndown = runbrgametypefunc6("jeep");
+  var_14.x1opsenableelimination = runbrgametypefunc6("little_bird");
+  var_14.ref_139f7 = runbrgametypefunc6("tac_rover");
+  var_14.ref_13a47 = runbrgametypefunc6("tank_east");
+  var_14.ref_13a48 = rundomplateskybeam("tank_east");
+  var_14.ref_13a52 = runbrgametypefunc6("tank_west");
+  var_14.ref_13a53 = rundomplateskybeam("tank_west");
+  var_14.c130airdrop_heightoverride = runcircles("apc", 4);
+  var_14.check_carrier_status = runcircles("atv", 6);
+  var_14.get_fake_digit_from_pool = runcircles("cargo_truck", 8);
+  var_14.vehicle_damage_enginevisualclearcallback = runcircles("jeep", 10);
+  var_14.x1opsendgame = runcircles("little_bird", 12);
+  var_14.ref_139f8 = runcircles("tac_rover", 14);
+  var_14.check_for_damage_scalar_change = runcontrolledcallback("atv");
+  var_14.ref_139fc = runcontrolledcallback("tac_rover");
+  var_14.zombieingas = runcontrolledcallback("little_bird");
+  self.ref_14238 = var_14;
 
   if(self.operatorcustomization.gender == "female") {
     self method_87aa("female");
@@ -383,67 +383,67 @@ function setmodelfromcustomization(var0) {
   }
 }
 
-function runbrgametypefunc6(var0) {
-  var1 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "vehicleCustomization", var0, "camo");
-  var2 = tablelookup("mp_cp/vehiclecamos.csv", 6, var1, 4);
-  return var2;
+function runbrgametypefunc6(var_0) {
+  var_1 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "vehicleCustomization", var_0, "camo");
+  var_2 = tablelookup("mp_cp/vehiclecamos.csv", 6, var_1, 4);
+  return var_2;
 }
 
-function runcontrolledcallback(var0) {
-  var1 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "vehicleCustomization", var0, "camo");
-  var2 = tablelookup("mp_cp/vehiclecamos.csv", 6, var1, 10);
-  return var2;
+function runcontrolledcallback(var_0) {
+  var_1 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "vehicleCustomization", var_0, "camo");
+  var_2 = tablelookup("mp_cp/vehiclecamos.csv", 6, var_1, 10);
+  return var_2;
 }
 
-function rundomplateskybeam(var0) {
-  var1 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "vehicleCustomization", var0, "camo");
-  var2 = tablelookup("mp_cp/vehiclecamos.csv", 6, var1, 5);
-  return var2;
+function rundomplateskybeam(var_0) {
+  var_1 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "vehicleCustomization", var_0, "camo");
+  var_2 = tablelookup("mp_cp/vehiclecamos.csv", 6, var_1, 5);
+  return var_2;
 }
 
-function runcircles(var0, var1) {
-  var2 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "vehicleCustomization", var0, "horn");
-  var3 = tablelookup("mp_cp/vehiclehorns.csv", 0, var2, var1);
-  return var3;
+function runcircles(var_0, var_1) {
+  var_2 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "vehicleCustomization", var_0, "horn");
+  var_3 = tablelookup("mp_cp/vehiclehorns.csv", 0, var_2, var_1);
+  return var_3;
 }
 
 function getplayerbodymodel() {
-  var0 = getoperatorcustomization();
-  return var0[0];
+  var_0 = getoperatorcustomization();
+  return var_0[0];
 }
 
-function getplayerviewmodelfrombody(var0) {
-  var1 = tablelookup("mp/cac/bodies.csv", 1, var0, 3);
+function getplayerviewmodelfrombody(var_0) {
+  var_1 = tablelookup("mp/cac/bodies.csv", 1, var_0, 3);
 
-  if(!isDefined(var1) || var1 == "") {
-    var1 = "viewhands_mp_base_iw8";
+  if(!isDefined(var_1) || var_1 == "") {
+    var_1 = "viewhands_mp_base_iw8";
   }
 
-  return var1;
+  return var_1;
 }
 
-function lookupcurrentoperator(var0) {
+function lookupcurrentoperator(var_0) {
   if(!isPlayer(self) && !isai(self)) {
     return "";
   }
 
-  var1 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "selectedOperatorIndex");
-  var2 = var1;
-  var3 = scripts\cp\utility::getgametype() == "br";
+  var_1 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "selectedOperatorIndex");
+  var_2 = var_1;
+  var_3 = scripts\cp\utility::getgametype() == "br";
 
-  if(!level.teambased || var3) {
-    var1 = undefined;
+  if(!level.teambased || var_3) {
+    var_1 = undefined;
 
     if(isai(self)) {
-      var1 = self.botoperatorteam;
+      var_1 = self.botoperatorteam;
     } else {
-      var1 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "selectedOperatorIndex");
+      var_1 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "selectedOperatorIndex");
     }
 
-    var2 = var1;
+    var_2 = var_1;
 
     if(!isai(self) && !isDefined(self.defaultoperatorteam)) {
-      if(var2 == 0) {
+      if(var_2 == 0) {
         self.defaultoperatorteam = "allies";
       } else {
         self.defaultoperatorteam = "axis";
@@ -455,74 +455,74 @@ function lookupcurrentoperator(var0) {
     level.playercustomizationdata = [];
   }
 
-  var4 = self getentitynumber();
-  level.playercustomizationdata[var4] = [];
-  var5 = undefined;
+  var_4 = self getentitynumber();
+  level.playercustomizationdata[var_4] = [];
+  var_5 = undefined;
 
-  if(!isDefined(level.playercustomizationdata[var4][var0])) {
-    var6 = spawnStruct();
+  if(!isDefined(level.playercustomizationdata[var_4][var_0])) {
+    var_6 = spawnStruct();
 
     if(isai(self)) {
-      var6.operatorref = self.botoperatorref;
+      var_6.operatorref = self.botoperatorref;
     } else {
-      var6.operatorref = self getplayerdata(level.loadoutsgroup, "customizationSetup", "operators", var2);
+      var_6.operatorref = self getplayerdata(level.loadoutsgroup, "customizationSetup", "operators", var_2);
     }
 
-    level.playercustomizationdata[var4][var0] = var6;
+    level.playercustomizationdata[var_4][var_0] = var_6;
   }
 
-  var5 = level.playercustomizationdata[var4][var0].operatorref;
+  var_5 = level.playercustomizationdata[var_4][var_0].operatorref;
 
   if(getdvarint("scr_forceHeadlessCustomization", 1) == 1 && self calloutmarkerping_getEnt()) {
     initoperatorcustomization();
-    var7 = getarraykeys(level.operatorcustomization);
+    var_7 = getarraykeys(level.operatorcustomization);
 
     if(!isDefined(self.showempminimap)) {
-      foreach(var9 in var7) {
-        var10 = getarraykeys(level.operatorcustomization[var9]);
+      foreach(var_9 in var_7) {
+        var_10 = getarraykeys(level.operatorcustomization[var_9]);
 
         if(!isDefined(level.showing_ui_record)) {
           level.showing_ui_record = [];
         }
 
-        if(!isDefined(level.showing_ui_record[var9]) || level.showing_ui_record[var9] > var10.size) {
-          level.showing_ui_record[var9] = 0;
+        if(!isDefined(level.showing_ui_record[var_9]) || level.showing_ui_record[var_9] > var_10.size) {
+          level.showing_ui_record[var_9] = 0;
         }
 
-        for(var11 = var10[level.showing_ui_record[var9]]; isDefined(var11) && (var11 == "default_western" || var11 == "default_eastern"); var11 = var10[level.showing_ui_record[var9]]) {
-          level.showing_ui_record[var9] += 1;
+        for(var_11 = var_10[level.showing_ui_record[var_9]]; isDefined(var_11) && (var_11 == "default_western" || var_11 == "default_eastern"); var_11 = var_10[level.showing_ui_record[var_9]]) {
+          level.showing_ui_record[var_9] += 1;
 
-          if(level.showing_ui_record[var9] > var10.size) {
-            level.showing_ui_record[var9] = 0;
+          if(level.showing_ui_record[var_9] > var_10.size) {
+            level.showing_ui_record[var_9] = 0;
           }
         }
 
-        level.showing_ui_record[var9] += 1;
-        level.playercustomizationdata[var4][var9] = spawnStruct();
-        level.playercustomizationdata[var4][var9].operatorref = var11;
+        level.showing_ui_record[var_9] += 1;
+        level.playercustomizationdata[var_4][var_9] = spawnStruct();
+        level.playercustomizationdata[var_4][var_9].operatorref = var_11;
       }
 
       self.showempminimap = 1;
     }
 
-    if(isDefined(level.operatorcustomization[var0])) {
-      var5 = level.playercustomizationdata[var4][var0].operatorref;
+    if(isDefined(level.operatorcustomization[var_0])) {
+      var_5 = level.playercustomizationdata[var_4][var_0].operatorref;
     } else {
       if(!isDefined(self.botoperatorteam)) {
-        self.botoperatorteam = scripts\engine\utility::random(var7);
+        self.botoperatorteam = scripts\engine\utility::random(var_7);
       }
 
-      var5 = level.playercustomizationdata[var4][self.botoperatorteam].operatorref;
+      var_5 = level.playercustomizationdata[var_4][self.botoperatorteam].operatorref;
     }
   }
 
-  if(isai(self) || !isDefined(var5) || var5 == "") {
+  if(isai(self) || !isDefined(var_5) || var_5 == "") {
     if(isai(self)) {
       if(isDefined(self.botoperatorref)) {
-        if(isDefined(level.playercustomizationdata[var4][var0].operatorref)) {
-          var5 = level.playercustomizationdata[var4][var0].operatorref;
+        if(isDefined(level.playercustomizationdata[var_4][var_0].operatorref)) {
+          var_5 = level.playercustomizationdata[var_4][var_0].operatorref;
         } else {
-          var5 = self.botoperatorref;
+          var_5 = self.botoperatorref;
         }
       } else {
         initoperatorcustomization();
@@ -531,113 +531,113 @@ function lookupcurrentoperator(var0) {
           self.botoperatorteam = self.team;
 
           if(!isDefined(level.operatorcustomization[self.botoperatorteam])) {
-            var7 = getarraykeys(level.operatorcustomization);
-            self.botoperatorteam = scripts\engine\utility::random(var7);
+            var_7 = getarraykeys(level.operatorcustomization);
+            self.botoperatorteam = scripts\engine\utility::random(var_7);
           }
         }
 
-        var0 = self.botoperatorteam;
+        var_0 = self.botoperatorteam;
 
         if(!isDefined(self.pers["operatorIndex"])) {
-          var1 = randomint(level.operatorcustomization[var0].size);
-          self.pers["operatorIndex"] = var1;
+          var_1 = randomint(level.operatorcustomization[var_0].size);
+          self.pers["operatorIndex"] = var_1;
         } else {
-          var1 = self.pers["operatorIndex"];
+          var_1 = self.pers["operatorIndex"];
         }
 
-        var13 = 0;
+        var_13 = 0;
 
-        foreach(var15 in level.operatorcustomization[var0]) {
-          if(var13 == var1) {
-            self.botoperatorref = var16;
-            var5 = var16;
+        foreach(var_15 in level.operatorcustomization[var_0]) {
+          if(var_13 == var_1) {
+            self.botoperatorref = var_16;
+            var_5 = var_16;
             break;
           }
 
-          var13++;
+          var_13++;
         }
       }
     } else {
-      var5 = "wyatt_western";
+      var_5 = "wyatt_western";
     }
   }
 
-  return var5;
+  return var_5;
 }
 
-function lookupcurrentoperatorskin(var0) {
-  var1 = lookupcurrentoperator(var0);
-  var2 = undefined;
-  var3 = self getentitynumber();
+function lookupcurrentoperatorskin(var_0) {
+  var_1 = lookupcurrentoperator(var_0);
+  var_2 = undefined;
+  var_3 = self getentitynumber();
 
   if(getdvarint("scr_forceHeadlessCustomization", 1) == 1 && self calloutmarkerping_getEnt()) {
-    if(!isDefined(level.playercustomizationdata[var3][var0].operatorskinindex)) {
+    if(!isDefined(level.playercustomizationdata[var_3][var_0].operatorskinindex)) {
       if(!isDefined(level.showing_bomb_wire_pair_to_player)) {
         thermite_doradiusdamage();
       }
 
-      var4 = level.showing_bomb_wire_pair_to_player[var1]["curIndex"];
-      level.playercustomizationdata[var3][var0].operatorskinindex = level.showing_bomb_wire_pair_to_player[var1]["lootIDs"][var4];
-      level.showing_bomb_wire_pair_to_player[var1]["curIndex"] = level.showing_bomb_wire_pair_to_player[var1]["curIndex"] + 1;
+      var_4 = level.showing_bomb_wire_pair_to_player[var_1]["curIndex"];
+      level.playercustomizationdata[var_3][var_0].operatorskinindex = level.showing_bomb_wire_pair_to_player[var_1]["lootIDs"][var_4];
+      level.showing_bomb_wire_pair_to_player[var_1]["curIndex"] = level.showing_bomb_wire_pair_to_player[var_1]["curIndex"] + 1;
 
-      if(level.showing_bomb_wire_pair_to_player[var1]["curIndex"] >= level.showing_bomb_wire_pair_to_player[var1]["maxIndex"]) {
-        level.showing_bomb_wire_pair_to_player[var1]["curIndex"] = 0;
+      if(level.showing_bomb_wire_pair_to_player[var_1]["curIndex"] >= level.showing_bomb_wire_pair_to_player[var_1]["maxIndex"]) {
+        level.showing_bomb_wire_pair_to_player[var_1]["curIndex"] = 0;
       }
     }
-  } else if(!isDefined(level.playercustomizationdata[var3][var0].operatorskinindex)) {
+  } else if(!isDefined(level.playercustomizationdata[var_3][var_0].operatorskinindex)) {
     if(isai(self)) {
       if(!isDefined(self.botskinid)) {
-        debug_interaction_toggle(var1);
+        debug_interaction_toggle(var_1);
       }
 
-      level.playercustomizationdata[var3][var0].operatorskinindex = self.botskinid;
+      level.playercustomizationdata[var_3][var_0].operatorskinindex = self.botskinid;
     } else {
-      level.playercustomizationdata[var3][var0].operatorskinindex = self getplayerdata(level.loadoutsgroup, "customizationSetup", "operatorCustomization", var1, "skin");
+      level.playercustomizationdata[var_3][var_0].operatorskinindex = self getplayerdata(level.loadoutsgroup, "customizationSetup", "operatorCustomization", var_1, "skin");
     }
   }
 
-  var2 = level.playercustomizationdata[var3][var0].operatorskinindex;
+  var_2 = level.playercustomizationdata[var_3][var_0].operatorskinindex;
 
-  if(isai(self) && (!isDefined(var2) || var2 == 0) || !isDefined(var2) || var2 == 0) {
+  if(isai(self) && (!isDefined(var_2) || var_2 == 0) || !isDefined(var_2) || var_2 == 0) {
     if(isai(self)) {
       if(isDefined(self.botskinid)) {
-        var2 = self.botskinid;
+        var_2 = self.botskinid;
       } else {
-        debug_interaction_toggle(var1);
+        debug_interaction_toggle(var_1);
       }
     } else {
-      var2 = 1;
+      var_2 = 1;
     }
   }
 
-  return var2;
+  return var_2;
 }
 
-function debug_interaction_toggle(var0) {
-  var1 = self.team;
+function debug_interaction_toggle(var_0) {
+  var_1 = self.team;
 
   if(isDefined(self.botoperatorteam)) {
-    var1 = self.botoperatorteam;
+    var_1 = self.botoperatorteam;
   }
 
   if(!isDefined(self.pers["operatorSkinIndex"])) {
-    var2 = randomint(level.operatorcustomization[var1][var0].size);
-    self.pers["operatorSkinIndex"] = var2;
+    var_2 = randomint(level.operatorcustomization[var_1][var_0].size);
+    self.pers["operatorSkinIndex"] = var_2;
   } else {
-    var2 = self.pers["operatorSkinIndex"];
+    var_2 = self.pers["operatorSkinIndex"];
   }
 
-  var3 = 0;
+  var_3 = 0;
 
-  foreach(var5 in level.operatorcustomization[var2][var1]) {
-    if(var3 == var2) {
-      var6 = int(tablelookup("operatorskins.csv", 1, var8, 0));
-      self.botskinid = var6;
-      var7 = var6;
+  foreach(var_5 in level.operatorcustomization[var_2][var_1]) {
+    if(var_3 == var_2) {
+      var_6 = int(tablelookup("operatorskins.csv", 1, var_8, 0));
+      self.botskinid = var_6;
+      var_7 = var_6;
       break;
     }
 
-    var3++;
+    var_3++;
   }
 }
 
@@ -647,48 +647,48 @@ function thermite_doradiusdamage() {
   }
 
   level.showing_bomb_wire_pair_to_player = [];
-  var0 = tablelookupgetnumrows("operatorskins.csv");
+  var_0 = tablelookupgetnumrows("operatorskins.csv");
 
-  for(var1 = 0; var1 < var0; var1++) {
-    if(tablelookupbyrow("operatorskins.csv", var1, 18) != "") {
-      var2 = tablelookupbyrow("operatorskins.csv", var1, 2);
-      var3 = tablelookupbyrow("operatorskins.csv", var1, 0);
+  for(var_1 = 0; var_1 < var_0; var_1++) {
+    if(tablelookupbyrow("operatorskins.csv", var_1, 18) != "") {
+      var_2 = tablelookupbyrow("operatorskins.csv", var_1, 2);
+      var_3 = tablelookupbyrow("operatorskins.csv", var_1, 0);
 
-      if(!isDefined(level.showing_bomb_wire_pair_to_player[var2])) {
-        level.showing_bomb_wire_pair_to_player[var2]["lootIDs"] = [];
-        level.showing_bomb_wire_pair_to_player[var2]["curIndex"] = 0;
-        level.showing_bomb_wire_pair_to_player[var2]["maxIndex"] = 0;
+      if(!isDefined(level.showing_bomb_wire_pair_to_player[var_2])) {
+        level.showing_bomb_wire_pair_to_player[var_2]["lootIDs"] = [];
+        level.showing_bomb_wire_pair_to_player[var_2]["curIndex"] = 0;
+        level.showing_bomb_wire_pair_to_player[var_2]["maxIndex"] = 0;
       }
 
-      level.showing_bomb_wire_pair_to_player[var2]["lootIDs"][level.showing_bomb_wire_pair_to_player[var2]["lootIDs"].size] = int(var3);
-      level.showing_bomb_wire_pair_to_player[var2]["maxIndex"] = level.showing_bomb_wire_pair_to_player[var2]["maxIndex"] + 1;
+      level.showing_bomb_wire_pair_to_player[var_2]["lootIDs"][level.showing_bomb_wire_pair_to_player[var_2]["lootIDs"].size] = int(var_3);
+      level.showing_bomb_wire_pair_to_player[var_2]["maxIndex"] = level.showing_bomb_wire_pair_to_player[var_2]["maxIndex"] + 1;
     }
   }
 }
 
-function lookupotheroperator(var0) {
+function lookupotheroperator(var_0) {
   if(!isPlayer(self) && !isai(self)) {
     return "";
   }
 
-  var1 = scripts\engine\utility::ter_op(var0 == "allies", 1, 0);
-  var2 = self getentitynumber();
-  var3 = "";
-  var0 = scripts\engine\utility::ter_op(var0 == "allies", "axis", "allies");
+  var_1 = scripts\engine\utility::ter_op(var_0 == "allies", 1, 0);
+  var_2 = self getentitynumber();
+  var_3 = "";
+  var_0 = scripts\engine\utility::ter_op(var_0 == "allies", "axis", "allies");
 
   if(scripts\cp\utility::getgametype() != "br") {
     if(level.teambased && !isai(self)) {
-      if(!isDefined(level.playercustomizationdata[var2][var0])) {
-        var4 = spawnStruct();
-        var4.operatorref = self getplayerdata(level.loadoutsgroup, "customizationSetup", "operators", var1);
-        level.playercustomizationdata[var2][var0] = var4;
+      if(!isDefined(level.playercustomizationdata[var_2][var_0])) {
+        var_4 = spawnStruct();
+        var_4.operatorref = self getplayerdata(level.loadoutsgroup, "customizationSetup", "operators", var_1);
+        level.playercustomizationdata[var_2][var_0] = var_4;
       }
 
-      var3 = level.playercustomizationdata[var2][var0].operatorref;
+      var_3 = level.playercustomizationdata[var_2][var_0].operatorref;
     }
   }
 
-  return var3;
+  return var_3;
 }
 
 function initoperatorcustomization() {
@@ -699,55 +699,55 @@ function initoperatorcustomization() {
   level.operatorcustomization = [];
   setDvar("cl_streamSync_devNoLatch", 1);
 
-  for(var0 = 0;; var0++) {
-    var1 = tablelookupbyrow("operators.csv", var0, 1);
-    var2 = getoperatorsuperfaction(var1);
-    var3 = scripts\engine\utility::ter_op(var2 == 0, "allies", "axis");
+  for(var_0 = 0;; var_0++) {
+    var_1 = tablelookupbyrow("operators.csv", var_0, 1);
+    var_2 = getoperatorsuperfaction(var_1);
+    var_3 = scripts\engine\utility::ter_op(var_2 == 0, "allies", "axis");
 
-    if(!isDefined(var1) || var1 == "") {
+    if(!isDefined(var_1) || var_1 == "") {
       break;
     }
 
-    var4 = int(tablelookupbyrow("operators.csv", var0, 8));
+    var_4 = int(tablelookupbyrow("operators.csv", var_0, 8));
 
-    if(var4) {
-      if(!isDefined(level.operatorcustomization[var3])) {
-        level.operatorcustomization[var3] = [];
+    if(var_4) {
+      if(!isDefined(level.operatorcustomization[var_3])) {
+        level.operatorcustomization[var_3] = [];
       }
 
-      level.operatorcustomization[var3][var1] = [];
+      level.operatorcustomization[var_3][var_1] = [];
     }
   }
 
-  var5 = 0;
+  var_5 = 0;
 
   for(;;) {
-    var1 = tablelookupbyrow("operatorskins.csv", var5, 2);
-    var6 = tablelookupbyrow("operatorskins.csv", var5, 1);
-    var7 = tablelookupbyrow("operatorskins.csv", var5, 4);
-    var8 = tablelookupbyrow("operatorskins.csv", var5, 5);
+    var_1 = tablelookupbyrow("operatorskins.csv", var_5, 2);
+    var_6 = tablelookupbyrow("operatorskins.csv", var_5, 1);
+    var_7 = tablelookupbyrow("operatorskins.csv", var_5, 4);
+    var_8 = tablelookupbyrow("operatorskins.csv", var_5, 5);
 
-    if(!isDefined(var6) || var6 == "") {
+    if(!isDefined(var_6) || var_6 == "") {
       break;
     }
 
-    var3 = getoperatorteambyref(var1);
+    var_3 = getoperatorteambyref(var_1);
 
-    if(!isDefined(var3)) {
-      var5++;
+    if(!isDefined(var_3)) {
+      var_5++;
       continue;
     }
 
-    var9 = [];
-    GscBinSkip0(0x2e, 0, var7);
+    var_9 = [];
+    GscBinSkip0(0x2e, 0, var_7);
   }
 }
 
-function getoperatorteambyref(var0) {
-  foreach(var2 in level.operatorcustomization) {
-    foreach(var4 in var2) {
-      if(var5 == var0) {
-        return var6;
+function getoperatorteambyref(var_0) {
+  foreach(var_2 in level.operatorcustomization) {
+    foreach(var_4 in var_2) {
+      if(var_5 == var_0) {
+        return var_6;
       }
     }
   }
@@ -755,58 +755,58 @@ function getoperatorteambyref(var0) {
   return undefined;
 }
 
-function pickdefaultoperatorskin(var0) {
-  var1 = 0;
-  var2 = self.primaryweapon;
+function pickdefaultoperatorskin(var_0) {
+  var_1 = 0;
+  var_2 = self.primaryweapon;
 
-  if(isDefined(var2)) {
-    var3 = scripts\cp\cp_weapon::getweapongroup(var2);
+  if(isDefined(var_2)) {
+    var_3 = scripts\cp\cp_weapon::getweapongroup(var_2);
 
-    switch (var3) {
+    switch (var_3) {
       case "weapon_assault":
-        var1 = 0;
+        var_1 = 0;
         break;
       case "weapon_smg":
-        var1 = 1;
+        var_1 = 1;
         break;
       case "weapon_dmr":
       case "weapon_sniper":
-        var1 = 2;
+        var_1 = 2;
         break;
       case "weapon_lmg":
-        var1 = 3;
+        var_1 = 3;
         break;
       case "weapon_shotgun":
-        var1 = 4;
+        var_1 = 4;
         break;
       default:
-        var1 = 1;
+        var_1 = 1;
         break;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
 function getoperatorcustomization() {
-  var0 = lookupcurrentoperator(self.team);
-  var1 = lookupcurrentoperatorskin(self.team);
-  var2 = undefined;
-  var3 = undefined;
-  var4 = undefined;
+  var_0 = lookupcurrentoperator(self.team);
+  var_1 = lookupcurrentoperatorskin(self.team);
+  var_2 = undefined;
+  var_3 = undefined;
+  var_4 = undefined;
 
-  if((var0 == "default_western" || var0 == "default_eastern") && (var1 == 274 || var1 == 275)) {
+  if((var_0 == "default_western" || var_0 == "default_eastern") && (var_1 == 274 || var_1 == 275)) {
     initdefaultoperatorskins();
-    var5 = level.teambased && scripts\cp\utility::getgametype() != "br";
+    var_5 = level.teambased && scripts\cp\utility::getgametype() != "br";
 
-    if(!isDefined(self.defaultoperatorteam) || var5 && self.defaultoperatorteam != self.team && (self.team == "allies" || self.team == "axis")) {
-      var6 = "allies";
+    if(!isDefined(self.defaultoperatorteam) || var_5 && self.defaultoperatorteam != self.team && (self.team == "allies" || self.team == "axis")) {
+      var_6 = "allies";
 
-      if(var0 == "default_eastern") {
-        var6 = "axis";
+      if(var_0 == "default_eastern") {
+        var_6 = "axis";
       }
 
-      self.defaultoperatorteam = var6;
+      self.defaultoperatorteam = var_6;
 
       if(self.team != "allies" && self.team != "axis") {
         self.defaultoperatorteam = scripts\engine\utility::ter_op(scripts\engine\utility::cointoss(), "allies", "axis");
@@ -817,25 +817,25 @@ function getoperatorcustomization() {
       self.pers["defaultOperatorSkinIndex"] = 0;
     }
 
-    var2 = level.defaultoperatorskins[self.defaultoperatorteam]["body"][self.pers["defaultOperatorSkinIndex"]];
+    var_2 = level.defaultoperatorskins[self.defaultoperatorteam]["body"][self.pers["defaultOperatorSkinIndex"]];
 
     if(!isDefined(self.pers["defaultOperatorHeadIndex"])) {
       self.pers["defaultOperatorHeadIndex"] = scripts\engine\utility::random(level.defaultoperatorskins[self.defaultoperatorteam]["head"][self.pers["defaultOperatorSkinIndex"]]);
     }
 
-    var3 = self.pers["defaultOperatorHeadIndex"];
-    var4 = "iw8_suit_mp_wyatt";
+    var_3 = self.pers["defaultOperatorHeadIndex"];
+    var_4 = "iw8_suit_mp_wyatt";
   } else {
-    var2 = tablelookup("operatorskins.csv", 0, var1, 4);
-    var3 = tablelookup("operatorskins.csv", 0, var1, 5);
-    var4 = tablelookup("operators.csv", 1, var0, 19);
+    var_2 = tablelookup("operatorskins.csv", 0, var_1, 4);
+    var_3 = tablelookup("operatorskins.csv", 0, var_1, 5);
+    var_4 = tablelookup("operators.csv", 1, var_0, 19);
   }
 
-  self.bodymodelname = var2;
-  self.backuphead = var3;
-  self.backupsuit = var4;
-  var7 = [];
-  GscBinSkip0(0x2e, 0, var2);
+  self.bodymodelname = var_2;
+  self.backuphead = var_3;
+  self.backupsuit = var_4;
+  var_7 = [];
+  GscBinSkip0(0x2e, 0, var_2);
 }
 
 function initdefaultoperatorskins() {
@@ -862,56 +862,56 @@ function initdefaultoperatorskins() {
   level.defaultoperatorskins["axis"]["suit"] = ["iw8_suit_mp_wyatt", "iw8_suit_mp_wyatt", "iw8_suit_mp_wyatt", "iw8_suit_mp_wyatt", "iw8_suit_mp_wyatt"];
 }
 
-function getoperatorexecution(var0) {
-  var1 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "operatorCustomization", var0, "execution");
+function getoperatorexecution(var_0) {
+  var_1 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "operatorCustomization", var_0, "execution");
 
-  if(var1 == 0) {
-    self.loadoutexecution = tablelookup("operators.csv", 1, var0, 24);
+  if(var_1 == 0) {
+    self.loadoutexecution = tablelookup("operators.csv", 1, var_0, 24);
   } else {
-    self.loadoutexecution = tablelookup("mp_cp/executiontable.csv", 0, var1, 1);
+    self.loadoutexecution = tablelookup("mp_cp/executiontable.csv", 0, var_1, 1);
   }
 
   return self.loadoutexecution;
 }
 
-function resetposition(var0) {
-  var1 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "operatorCustomization", var0, "taunt");
+function resetposition(var_0) {
+  var_1 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "operatorCustomization", var_0, "taunt");
 
-  if(var1 == 0) {
-    self.ref_1195c = tablelookup("operators.csv", 1, var0, 23);
+  if(var_1 == 0) {
+    self.ref_1195c = tablelookup("operators.csv", 1, var_0, 23);
   } else {
-    self.ref_1195c = tablelookup("operatorquips.csv", 0, var1, 6);
+    self.ref_1195c = tablelookup("operatorquips.csv", 0, var_1, 6);
   }
 
   return self.ref_1195c;
 }
 
-function getoperatorsuperfaction(var0) {
-  var1 = tablelookup("operators.csv", 1, var0, 3);
-  return int(var1);
+function getoperatorsuperfaction(var_0) {
+  var_1 = tablelookup("operators.csv", 1, var_0, 3);
+  return int(var_1);
 }
 
-function getoperatorvoice(var0, var1) {
-  if(var0 == "default_eastern" || var0 == "default_western") {
-    var2 = tablelookup("operatorskins.csv", 0, var1, 24);
+function getoperatorvoice(var_0, var_1) {
+  if(var_0 == "default_eastern" || var_0 == "default_western") {
+    var_2 = tablelookup("operatorskins.csv", 0, var_1, 24);
 
-    if(isDefined(var2) && var2 != "") {
-      return var2;
+    if(isDefined(var_2) && var_2 != "") {
+      return var_2;
     }
   }
 
-  var2 = tablelookup("operators.csv", 1, var0, 10);
-  return var2;
+  var_2 = tablelookup("operators.csv", 1, var_0, 10);
+  return var_2;
 }
 
-function resetplayermovespeedscale(var0) {
-  var1 = tablelookupbyrow("operatorskins.csv", var0, 22);
-  return var1;
+function resetplayermovespeedscale(var_0) {
+  var_1 = tablelookupbyrow("operatorskins.csv", var_0, 22);
+  return var_1;
 }
 
-function getoperatorgender(var0) {
-  var1 = scripts\engine\utility::ter_op(tablelookup("operators.csv", 1, var0, 11) == "0", "male", "female");
-  return var1;
+function getoperatorgender(var_0) {
+  var_1 = scripts\engine\utility::ter_op(tablelookup("operators.csv", 1, var_0, 11) == "0", "male", "female");
+  return var_1;
 }
 
 function get_player_character_num() {
@@ -919,214 +919,214 @@ function get_player_character_num() {
     return self.player_character_num;
   }
 
-  var1 = scripts\engine\utility::random(level.available_player_characters);
-  self.player_character_num = var1;
-  return var1;
+  var_1 = scripts\engine\utility::random(level.available_player_characters);
+  self.player_character_num = var_1;
+  return var_1;
 }
 
-function setplayerhudphoto(var0, var1) {
-  var0 endon("disconnect");
-  var2 = var0 getentitynumber();
+function setplayerhudphoto(var_0, var_1) {
+  var_0 endon("disconnect");
+  var_2 = var_0 getentitynumber();
 
-  if(var2 == 4) {
-    var2 = 0;
+  if(var_2 == 4) {
+    var_2 = 0;
   }
 
-  var0.bit_position = get_bit_position(var2);
-  var0.player_character_index = var1;
+  var_0.bit_position = get_bit_position(var_2);
+  var_0.player_character_index = var_1;
 
   if(isDefined(level.skip_playerhudphoto)) {
-    var0.player_character_index = 1;
-    var1 = 1;
+    var_0.player_character_index = 1;
+    var_1 = 1;
   }
 
   wait 5;
 }
 
-function set_player_photo_status(var0, var1) {
-  set_player_photo_option(var0, "zm_player_status", get_status_bit_value(var1));
+function set_player_photo_status(var_0, var_1) {
+  set_player_photo_option(var_0, "zm_player_status", get_status_bit_value(var_1));
 }
 
-function set_player_photo_option(var0, var1, var2) {
-  if(isDefined(var0.bit_position)) {
-    setomnvarbit(var1, var0.bit_position.bit_3, var2.bit_3);
-    setomnvarbit(var1, var0.bit_position.bit_2, var2.bit_2);
-    setomnvarbit(var1, var0.bit_position.bit_1, var2.bit_1);
-    var0.photosetup = 1;
+function set_player_photo_option(var_0, var_1, var_2) {
+  if(isDefined(var_0.bit_position)) {
+    setomnvarbit(var_1, var_0.bit_position.bit_3, var_2.bit_3);
+    setomnvarbit(var_1, var_0.bit_position.bit_2, var_2.bit_2);
+    setomnvarbit(var_1, var_0.bit_position.bit_1, var_2.bit_1);
+    var_0.photosetup = 1;
     return;
   }
 }
 
-function get_bit_position(var0) {
-  var1 = spawnStruct();
+function get_bit_position(var_0) {
+  var_1 = spawnStruct();
 
-  switch (var0) {
+  switch (var_0) {
     case 3:
-      var1.bit_3 = 11;
-      var1.bit_2 = 10;
-      var1.bit_1 = 9;
+      var_1.bit_3 = 11;
+      var_1.bit_2 = 10;
+      var_1.bit_1 = 9;
       break;
     case 2:
-      var1.bit_3 = 8;
-      var1.bit_2 = 7;
-      var1.bit_1 = 6;
+      var_1.bit_3 = 8;
+      var_1.bit_2 = 7;
+      var_1.bit_1 = 6;
       break;
     case 1:
-      var1.bit_3 = 5;
-      var1.bit_2 = 4;
-      var1.bit_1 = 3;
+      var_1.bit_3 = 5;
+      var_1.bit_2 = 4;
+      var_1.bit_1 = 3;
       break;
     case 0:
-      var1.bit_3 = 2;
-      var1.bit_2 = 1;
-      var1.bit_1 = 0;
+      var_1.bit_3 = 2;
+      var_1.bit_2 = 1;
+      var_1.bit_1 = 0;
       break;
   }
 
-  return var1;
+  return var_1;
 }
 
-function get_character_bit_value(var0) {
-  var1 = spawnStruct();
+function get_character_bit_value(var_0) {
+  var_1 = spawnStruct();
 
-  switch (var0) {
+  switch (var_0) {
     case 0:
-      var1.bit_3 = 0;
-      var1.bit_2 = 0;
-      var1.bit_1 = 0;
+      var_1.bit_3 = 0;
+      var_1.bit_2 = 0;
+      var_1.bit_1 = 0;
       break;
     case 1:
-      var1.bit_3 = 0;
-      var1.bit_2 = 0;
-      var1.bit_1 = 1;
+      var_1.bit_3 = 0;
+      var_1.bit_2 = 0;
+      var_1.bit_1 = 1;
       break;
     case 2:
-      var1.bit_3 = 0;
-      var1.bit_2 = 1;
-      var1.bit_1 = 0;
+      var_1.bit_3 = 0;
+      var_1.bit_2 = 1;
+      var_1.bit_1 = 0;
       break;
     case 3:
-      var1.bit_3 = 0;
-      var1.bit_2 = 1;
-      var1.bit_1 = 1;
+      var_1.bit_3 = 0;
+      var_1.bit_2 = 1;
+      var_1.bit_1 = 1;
       break;
     case 4:
-      var1.bit_3 = 1;
-      var1.bit_2 = 0;
-      var1.bit_1 = 0;
+      var_1.bit_3 = 1;
+      var_1.bit_2 = 0;
+      var_1.bit_1 = 0;
       break;
   }
 
-  return var1;
+  return var_1;
 }
 
-function get_status_bit_value(var0) {
-  var1 = spawnStruct();
+function get_status_bit_value(var_0) {
+  var_1 = spawnStruct();
 
-  switch (var0) {
+  switch (var_0) {
     case "healthy":
-      var1.bit_3 = 0;
-      var1.bit_2 = 0;
-      var1.bit_1 = 0;
+      var_1.bit_3 = 0;
+      var_1.bit_2 = 0;
+      var_1.bit_1 = 0;
       break;
     case "damaged":
-      var1.bit_3 = 0;
-      var1.bit_2 = 0;
-      var1.bit_1 = 1;
+      var_1.bit_3 = 0;
+      var_1.bit_2 = 0;
+      var_1.bit_1 = 1;
       break;
     case "laststand":
-      var1.bit_3 = 0;
-      var1.bit_2 = 1;
-      var1.bit_1 = 0;
+      var_1.bit_3 = 0;
+      var_1.bit_2 = 1;
+      var_1.bit_1 = 0;
       break;
     case "afterlife":
-      var1.bit_3 = 0;
-      var1.bit_2 = 1;
-      var1.bit_1 = 1;
+      var_1.bit_3 = 0;
+      var_1.bit_2 = 1;
+      var_1.bit_1 = 1;
       break;
   }
 
-  return var1;
+  return var_1;
 }
 
-function setcharactermodels(var0, var1, var2, var3) {
+function setcharactermodels(var_0, var_1, var_2, var_3) {
   if(isDefined(self.headmodel)) {
     self detach(self.headmodel);
   }
 
-  self setModel(var0);
-  self setviewmodel(var2);
-  self attach(var1, "", 1);
-  self.bodymodel = var0;
-  self.headmodel = var1;
-  self.viewmodel = var2;
+  self setModel(var_0);
+  self setviewmodel(var_2);
+  self attach(var_1, "", 1);
+  self.bodymodel = var_0;
+  self.headmodel = var_1;
+  self.viewmodel = var_2;
 }
 
 function getplayermodelindex() {
   return false;
 }
 
-function getplayerfoleytype(var0) {
-  return tablelookupbyrow("operatorskins.csv", var0, 22);
+function getplayerfoleytype(var_0) {
+  return tablelookupbyrow("operatorskins.csv", var_0, 22);
 }
 
 function updatemovespeedscale() {
-  var0 = undefined;
+  var_0 = undefined;
 
   if(isDefined(self.playerstreakspeedscale)) {
-    var0 = 1;
-    var0 += self.playerstreakspeedscale;
+    var_0 = 1;
+    var_0 += self.playerstreakspeedscale;
   } else {
-    var0 = getplayerspeedbyweapon(self);
+    var_0 = getplayerspeedbyweapon(self);
 
     if(isDefined(self.chargemode_speedscale)) {
-      var0 = self.chargemode_speedscale;
+      var_0 = self.chargemode_speedscale;
     } else if(isDefined(self.siege_speedscale)) {
-      var0 = self.siege_speedscale;
+      var_0 = self.siege_speedscale;
     } else if(isDefined(self.overrideweaponspeed_speedscale)) {
-      var0 = self.overrideweaponspeed_speedscale;
+      var_0 = self.overrideweaponspeed_speedscale;
     }
 
-    var1 = self.chill_data;
+    var_1 = self.chill_data;
 
-    if(isDefined(var1) && isDefined(var1.speedmod)) {
-      var0 += var1.speedmod;
+    if(isDefined(var_1) && isDefined(var_1.speedmod)) {
+      var_0 += var_1.speedmod;
     }
 
     if(isDefined(self.speedstripmod)) {
-      var0 += self.speedstripmod;
+      var_0 += self.speedstripmod;
     }
 
     if(isDefined(self.phasespeedmod)) {
-      var0 += self.phasespeedmod;
+      var_0 += self.phasespeedmod;
     }
 
     if(isDefined(self.weaponaffinityspeedboost)) {
-      var0 += self.weaponaffinityspeedboost;
+      var_0 += self.weaponaffinityspeedboost;
     }
 
     if(isDefined(self.weaponpassivespeedmod)) {
-      var0 += self.weaponpassivespeedmod;
+      var_0 += self.weaponpassivespeedmod;
     }
 
     if(isDefined(self.weaponpassivespeedonkillmod)) {
-      var0 += self.weaponpassivespeedonkillmod;
+      var_0 += self.weaponpassivespeedonkillmod;
     }
 
-    var0 = min(1.5, var0);
+    var_0 = min(1.5, var_0);
   }
 
-  self.weaponspeed = var0;
+  self.weaponspeed = var_0;
 
   if(!isDefined(self.combatspeedscalar)) {
     self.combatspeedscalar = 1;
   }
 
-  self setmovespeedscale(var0 * self.movespeedscaler * self.combatspeedscalar);
+  self setmovespeedscale(var_0 * self.movespeedscaler * self.combatspeedscalar);
 }
 
-function getplayerspeedbyweapon(var0) {
-  var1 = 1;
+function getplayerspeedbyweapon(var_0) {
+  var_1 = 1;
   self.weaponlist = self getweaponslistprimaries();
 
   if(getDvar("normalize_movement_speed", "on") == "on") {
@@ -1134,132 +1134,132 @@ function getplayerspeedbyweapon(var0) {
   }
 
   if(!self.weaponlist.size) {
-    var1 = 0.9;
+    var_1 = 0.9;
   } else {
-    var2 = self getcurrentweapon();
+    var_2 = self getcurrentweapon();
 
-    if(scripts\cp\utility::issuperweapon(var2)) {
-      var1 = level.superweapons[createheadicon(var2)].movespeed;
+    if(scripts\cp\utility::issuperweapon(var_2)) {
+      var_1 = level.superweapons[createheadicon(var_2)].movespeed;
     } else {
-      var3 = weaponinventorytype(var2);
+      var_3 = weaponinventorytype(var_2);
 
-      if(var3 != "primary" && var3 != "altmode") {
+      if(var_3 != "primary" && var_3 != "altmode") {
         if(isDefined(self.saved_lastweapon)) {
-          var2 = self.saved_lastweapon;
+          var_2 = self.saved_lastweapon;
         } else {
-          var2 = undefined;
+          var_2 = undefined;
         }
       }
 
-      if(!isDefined(var2) || !self hasweapon(var2)) {
-        var1 = getweaponspeedslowest();
+      if(!isDefined(var_2) || !self hasweapon(var_2)) {
+        var_1 = getweaponspeedslowest();
       } else {
-        var1 = getweaponspeed(var2);
+        var_1 = getweaponspeed(var_2);
       }
     }
   }
 
-  var1 = clampweaponspeed(var1);
-  return var1;
+  var_1 = clampweaponspeed(var_1);
+  return var_1;
 }
 
-function getweaponspeed(var0) {
-  var1 = scripts\cp\utility::getbaseweaponname(var0);
-  var2 = level.weaponmapdata[var1].speed;
-  return var2;
+function getweaponspeed(var_0) {
+  var_1 = scripts\cp\utility::getbaseweaponname(var_0);
+  var_2 = level.weaponmapdata[var_1].speed;
+  return var_2;
 }
 
 function getweaponspeedslowest() {
-  var0 = 2;
+  var_0 = 2;
   self.weaponlist = self getweaponslistprimaries();
 
   if(self.weaponlist.size) {
-    foreach(var2 in self.weaponlist) {
-      var3 = getweaponspeed(var2);
+    foreach(var_2 in self.weaponlist) {
+      var_3 = getweaponspeed(var_2);
 
-      if(var3 == 0) {
+      if(var_3 == 0) {
         continue;
       }
 
-      if(var3 < var0) {
-        var0 = var3;
+      if(var_3 < var_0) {
+        var_0 = var_3;
       }
     }
   } else {
-    var0 = 0.9;
+    var_0 = 0.9;
   }
 
-  var0 = clampweaponspeed(var0);
-  return var0;
+  var_0 = clampweaponspeed(var_0);
+  return var_0;
 }
 
-function clampweaponspeed(var0) {
-  return clamp(var0, 0, 1);
+function clampweaponspeed(var_0) {
+  return clamp(var_0, 0, 1);
 }
 
 function getweaponheaviestvalue() {
-  var0 = 1000;
+  var_0 = 1000;
   self.weaponlist = self getweaponslistprimaries();
 
   if(self.weaponlist.size) {
-    foreach(var2 in self.weaponlist) {
-      var3 = getweaponweight(var2);
+    foreach(var_2 in self.weaponlist) {
+      var_3 = getweaponweight(var_2);
 
-      if(var3 == 0) {
+      if(var_3 == 0) {
         continue;
       }
 
-      if(var3 < var0) {
-        var0 = var3;
+      if(var_3 < var_0) {
+        var_0 = var_3;
       }
     }
   } else {
-    var0 = 8;
+    var_0 = 8;
   }
 
-  var0 = clampweaponweightvalue(var0);
-  return var0;
+  var_0 = clampweaponweightvalue(var_0);
+  return var_0;
 }
 
-function getweaponweight(var0) {
-  var1 = undefined;
-  var2 = scripts\cp\utility::getbaseweaponname(var0);
-  var1 = float(tablelookup("mp/statstable.csv", 4, var2, 8));
+function getweaponweight(var_0) {
+  var_1 = undefined;
+  var_2 = scripts\cp\utility::getbaseweaponname(var_0);
+  var_1 = float(tablelookup("mp/statstable.csv", 4, var_2, 8));
 
-  if(!isDefined(var1) || var1 < 1) {
-    var1 = float(tablelookup(level.game_mode_statstable, 4, var2, 8));
+  if(!isDefined(var_1) || var_1 < 1) {
+    var_1 = float(tablelookup(level.game_mode_statstable, 4, var_2, 8));
   }
 
-  if(!isDefined(var1) || var1 < 1) {
-    var1 = 10;
+  if(!isDefined(var_1) || var_1 < 1) {
+    var_1 = 10;
   }
 
-  return var1;
+  return var_1;
 }
 
-function clampweaponweightvalue(var0) {
-  return clamp(var0, 0, 11);
+function clampweaponweightvalue(var_0) {
+  return clamp(var_0, 0, 11);
 }
 
-function wait_and_force_weapon_switch(var0) {
+function wait_and_force_weapon_switch(var_0) {
   self endon("disconnect");
   self endon("death");
   level endon("game_ended");
   wait 0.5;
-  var1 = self getweaponslistprimaries();
+  var_1 = self getweaponslistprimaries();
 
-  if(!self hasweapon(var0)) {
-    var0 = var1[0];
+  if(!self hasweapon(var_0)) {
+    var_0 = var_1[0];
   }
 
-  add_ammo_if_needed(var1);
-  self setspawnweapon(var0);
+  add_ammo_if_needed(var_1);
+  self setspawnweapon(var_0);
 }
 
-function add_ammo_if_needed(var0) {
+function add_ammo_if_needed(var_0) {
   if(isDefined(self.perk_data) && istrue(self.perk_data["weapons_have_full_ammo"])) {
-    foreach(var2 in var0) {
-      self givemaxammo(var2);
+    foreach(var_2 in var_0) {
+      self givemaxammo(var_2);
     }
 
     return;
@@ -1307,13 +1307,13 @@ function graduallyincreasespeed() {
   self endon("momentum_unset");
   thread momentum_monitormovement();
   thread momentum_monitordamage();
-  var0 = 0;
+  var_0 = 0;
 
-  while(var0 < 0.08) {
+  while(var_0 < 0.08) {
     self.movespeedscaler += 0.01;
     updatemovespeedscale();
     wait 0.4375;
-    var0 += 0.01;
+    var_0 += 0.01;
   }
 
   self playlocalsound("ftl_phase_in");
@@ -1372,10 +1372,10 @@ function set_player_perks() {
 
   if(game["state"] != "postgame") {
     wait 0.1;
-    var0 = 4;
-    var1 = 0;
-    var2 = 0;
-    var2 = var0;
+    var_0 = 4;
+    var_1 = 0;
+    var_2 = 0;
+    var_2 = var_0;
 
     if(isDefined(level.player_suit)) {
       self setsuit(level.player_suit);
@@ -1385,7 +1385,7 @@ function set_player_perks() {
 
     self.suit = "iw8_suit_cp";
     self allowdoublejump(0);
-    self allowslide(var2 &var0);
+    self allowslide(var_2 &var_0);
     self allowwallrun(0);
     self allowdodge(0);
   }
@@ -1394,37 +1394,37 @@ function set_player_perks() {
   self notify("set_player_perks");
 }
 
-function registerplayercharacter(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14, var15, var16) {
-  var17 = spawnStruct();
-  var17.body_model = var2;
-  var17.view_model = var3;
-  var17.head_model = var4;
-  var17.hair_model = var5;
-  var17.vo_prefix = var6;
-  var17.vo_suffix = var7;
-  var17.pap_gesture = var8;
-  var17.revive_gesture = var9;
-  var17.photo_index = var10;
-  var17.fate_card_weapon = var11;
-  var17.intro_music = var12;
-  var17.intro_gesture = var13;
-  var17.melee_weapon = asmdevgetallstates(var14);
-  var17.starting_weapon = asmdevgetallstates(var16);
-  var17.post_setup_func = var15;
-  level.player_character_info[var0] = var17;
+function registerplayercharacter(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_16) {
+  var_17 = spawnStruct();
+  var_17.body_model = var_2;
+  var_17.view_model = var_3;
+  var_17.head_model = var_4;
+  var_17.hair_model = var_5;
+  var_17.vo_prefix = var_6;
+  var_17.vo_suffix = var_7;
+  var_17.pap_gesture = var_8;
+  var_17.revive_gesture = var_9;
+  var_17.photo_index = var_10;
+  var_17.fate_card_weapon = var_11;
+  var_17.intro_music = var_12;
+  var_17.intro_gesture = var_13;
+  var_17.melee_weapon = asmdevgetallstates(var_14);
+  var_17.starting_weapon = asmdevgetallstates(var_16);
+  var_17.post_setup_func = var_15;
+  level.player_character_info[var_0] = var_17;
 
   if(!isDefined(level.available_player_characters)) {
     level.available_player_characters = [];
   }
 
-  if(var1 == "yes") {
-    level.available_player_characters[level.available_player_characters.size] = var0;
+  if(var_1 == "yes") {
+    level.available_player_characters[level.available_player_characters.size] = var_0;
     return;
   }
 }
 
-function respawnitems_assignrespawnitems(var0) {
-  self.respawnitems = var0;
+function respawnitems_assignrespawnitems(var_0) {
+  self.respawnitems = var_0;
 }
 
 function ref_13b0f() {
@@ -1443,10 +1443,10 @@ function ref_13b0f() {
 function ref_13b0d() {
   level endon("game_ended");
   self endon("disconnect");
-  var0 = 0;
+  var_0 = 0;
 
   if(getdvarint("scr_testclient_damage", 0) > 0) {
-    var0 = 1;
+    var_0 = 1;
   }
 
   wait 5;
@@ -1459,7 +1459,7 @@ function ref_13b0d() {
       continue;
     }
 
-    if(var0 == 2) {
+    if(var_0 == 2) {
       scripts\engine\utility::ref_143a6("landed_after_respawn", "revive_done", "revive");
       wait 7.5;
     }
@@ -1469,24 +1469,24 @@ function ref_13b0d() {
       announcement("^1TestClient Downed");
     }
 
-    if(var0 == 0) {
+    if(var_0 == 0) {
       setDvar("scr_testclient_damage", 0);
     }
 
-    if(var0 == 1) {
-      var0 = 2;
+    if(var_0 == 1) {
+      var_0 = 2;
     }
   }
 }
 
 function getcustomization() {
-  var0 = [];
+  var_0 = [];
 
   if(isDefined(self.operatorcustomization)) {
     GscBinSkip0(0x2e, "body", self.operatorcustomization.body);
   }
 
-  [var0] = getoperatorcustomization();
-  var0 = var1[1];
-  return var0;
+  [var_0] = getoperatorcustomization();
+  var_0 = var_1[1];
+  return var_0;
 }

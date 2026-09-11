@@ -3,7 +3,7 @@
  * Script: scripts\aitypes\squad_movement.gsc
 ***********************************************/
 
-function shouldupdatesquadleadermovement(var0) {
+function shouldupdatesquadleadermovement(var_0) {
   if(!scripts\aitypes\squad::isinsquad() || !scripts\aitypes\squad::issquadleader()) {
     return anim.failure;
   }
@@ -28,16 +28,16 @@ function shouldupdatesquadleadermovement(var0) {
 }
 
 function havesquadmemberscompletedmove() {
-  var0 = 1;
+  var_0 = 1;
 
-  for(var1 = 0; var1 < level.squads[self.squadnumber].members.size; var1++) {
-    var2 = level.squads[self.squadnumber].members[var1];
+  for(var_1 = 0; var_1 < level.squads[self.squadnumber].members.size; var_1++) {
+    var_2 = level.squads[self.squadnumber].members[var_1];
 
-    if(var2.squadmovementallowed || var2 codemoverequested()) {
-      var3 = 1000000;
+    if(var_2.squadmovementallowed || var_2 codemoverequested()) {
+      var_3 = 1000000;
 
-      if(isDefined(var2.pathgoalpos)) {
-        if(distancesquared(var2.origin, var2.pathgoalpos) < var3) {
+      if(isDefined(var_2.pathgoalpos)) {
+        if(distancesquared(var_2.origin, var_2.pathgoalpos) < var_3) {
           return false;
         }
       }
@@ -45,13 +45,13 @@ function havesquadmemberscompletedmove() {
       continue;
     }
 
-    var0 = 0;
+    var_0 = 0;
   }
 
-  return !var0;
+  return !var_0;
 }
 
-function updatesquadleadermovement(var0) {
+function updatesquadleadermovement(var_0) {
   if(getDvar("scr_ai_squad_move_type", "0") == "1") {
     updatedistance();
   } else {
@@ -62,22 +62,22 @@ function updatesquadleadermovement(var0) {
 }
 
 function updategroups() {
-  var0 = [];
+  var_0 = [];
 
   if(level.squads[self.squadnumber].squadmovecounter == 0) {
-    var0 = level.squads[self.squadnumber].secondarygroup;
+    var_0 = level.squads[self.squadnumber].secondarygroup;
   } else {
-    var0 = level.squads[self.squadnumber].leadergroup;
+    var_0 = level.squads[self.squadnumber].leadergroup;
   }
 
-  for(var1 = 0; var1 < var0.size; var1++) {
-    var2 = var0[var1];
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
+    var_2 = var_0[var_1];
 
-    if(isclosetogoal(var2)) {
+    if(isclosetogoal(var_2)) {
       continue;
     }
 
-    var2.squadmovementallowed = 1;
+    var_2.squadmovementallowed = 1;
     thread monitorsquadmovement();
   }
 
@@ -92,57 +92,57 @@ function updategroups() {
 }
 
 function updatedistance() {
-  var0 = level.squads[self.squadnumber].members.size;
-  var1 = level.squads[self.squadnumber];
-  var2 = vectorNormalize(self.enemy.origin - self.origin);
-  var3 = [];
+  var_0 = level.squads[self.squadnumber].members.size;
+  var_1 = level.squads[self.squadnumber];
+  var_2 = vectorNormalize(self.enemy.origin - self.origin);
+  var_3 = [];
 
-  for(var4 = 0; var4 < var0; var4++) {
-    var5 = var1.members[var4];
+  for(var_4 = 0; var_4 < var_0; var_4++) {
+    var_5 = var_1.members[var_4];
 
-    if(istrue(var5.squadmovementallowed) || var5 codemoverequested()) {
+    if(istrue(var_5.squadmovementallowed) || var_5 codemoverequested()) {
       return anim.failure;
     }
 
-    if(var5 == self) {
+    if(var_5 == self) {
       continue;
     }
 
-    if(isclosetogoal(var5)) {
+    if(isclosetogoal(var_5)) {
       continue;
     }
 
-    var6 = var5.origin - self.origin;
-    var7 = vectordot(var2, var6);
+    var_6 = var_5.origin - self.origin;
+    var_7 = vectordot(var_2, var_6);
 
-    if(var7 < 400) {
-      var3 = var5;
+    if(var_7 < 400) {
+      var_3 = var_5;
     }
   }
 
-  var8 = var3.size;
-  var9 = 1;
+  var_8 = var_3.size;
+  var_9 = 1;
 
   if(isclosetogoal()) {
-    var9 = min(var8, 3);
-    var1.squadmovecounter++;
-  } else if(var1.squadmovecounter < 4 && var8 > 1) {
-    var9 = min(var8 - 1, 3);
-    var1.squadmovecounter++;
+    var_9 = min(var_8, 3);
+    var_1.squadmovecounter++;
+  } else if(var_1.squadmovecounter < 4 && var_8 > 1) {
+    var_9 = min(var_8 - 1, 3);
+    var_1.squadmovecounter++;
   } else {
-    var9 = min(1, var3.size);
+    var_9 = min(1, var_3.size);
     self.squadmovementallowed = 1;
-    var1.squadmovecounter = 0;
+    var_1.squadmovecounter = 0;
     thread monitorsquadmovement();
   }
 
-  for(var10 = 0; var10 < var9; var10++) {
-    var3[var10].squadmovementallowed = 1;
+  for(var_10 = 0; var_10 < var_9; var_10++) {
+    var_3[var_10].squadmovementallowed = 1;
     thread monitorsquadmovement();
   }
 
-  var1.nextsquadmovementtime = gettime() + 4000;
-  var1.nextforcedgroupmovementtime = gettime() + 8000;
+  var_1.nextsquadmovementtime = gettime() + 4000;
+  var_1.nextforcedgroupmovementtime = gettime() + 8000;
 }
 
 function isclosetogoal() {
@@ -151,9 +151,9 @@ function isclosetogoal() {
   }
 
   if(isDefined(self.enemy)) {
-    var0 = length(self.enemy.origin - self.origin);
+    var_0 = length(self.enemy.origin - self.origin);
 
-    if(var0 > self.engagemindist && var0 < self.engagemaxdist) {
+    if(var_0 > self.engagemindist && var_0 < self.engagemaxdist) {
       return true;
     }
   }
@@ -163,9 +163,9 @@ function isclosetogoal() {
 
 function monitorsquadmovement() {
   self endon("death");
-  var0 = gettime() + 3000;
+  var_0 = gettime() + 3000;
 
-  while(!self codemoverequested() && gettime() < var0) {
+  while(!self codemoverequested() && gettime() < var_0) {
     if(!self.squadmovementallowed) {
       return;
     }
@@ -173,9 +173,9 @@ function monitorsquadmovement() {
     waitframe();
   }
 
-  var1 = 4096;
+  var_1 = 4096;
 
-  while(isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) > var1) {
+  while(isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) > var_1) {
     if(!self.squadmovementallowed) {
       return;
     }

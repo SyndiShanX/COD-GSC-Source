@@ -73,10 +73,10 @@ function intro_catchup() {
   thread griggs_loadout();
   thread scripts\sp\maps\marines\marines_manpile_monitor::manpile_monitor();
   scripts\sp\maps\marines\marines_utility::deletables_thread();
-  var0 = getEntArray("hospital_intro", "targetname");
+  var_0 = getEntArray("hospital_intro", "targetname");
 
-  foreach(var2 in var0) {
-    var2 setlightintensity(0);
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(0);
   }
 
   scripts\engine\utility::flag_set("intro_cinematic_complete");
@@ -110,10 +110,10 @@ function convoy_ambush_main() {
   wait 0.5;
   level.starting_marines = getaiarray("allies");
 
-  foreach(var1 in level.starting_marines) {
-    if(isalive(var1) && isDefined(var1.asmname)) {
-      var1 scripts\common\utility::demeanor_override("cqb");
-      var1.ignoreplayersuppressionlines = 1;
+  foreach(var_1 in level.starting_marines) {
+    if(isalive(var_1) && isDefined(var_1.asmname)) {
+      var_1 scripts\common\utility::demeanor_override("cqb");
+      var_1.ignoreplayersuppressionlines = 1;
     }
   }
 
@@ -130,12 +130,12 @@ function convoy_ambush_main() {
   thread explosion_monitor();
   thread convoy_vehicle_passenger_handler();
   scripts\engine\utility::flag_wait("play_IED_explosion");
-  var3 = getaiarray("allies");
+  var_3 = getaiarray("allies");
 
-  foreach(var1 in var3) {
-    if(isDefined(var1) && isalive(var1)) {
-      var1.ignoreplayersuppressionlines = 0;
-      var1.disableplayeradsloscheck = 0;
+  foreach(var_1 in var_3) {
+    if(isDefined(var_1) && isalive(var_1)) {
+      var_1.ignoreplayersuppressionlines = 0;
+      var_1.disableplayeradsloscheck = 0;
     }
   }
 
@@ -144,13 +144,13 @@ function convoy_ambush_main() {
   scripts\sp\player::player_movement_state("default");
   thread street_patch_handler();
 
-  foreach(var1 in level.starting_marines) {
-    if(isDefined(var1)) {
-      var1 thread scripts\anim\combat_utility::flashbangstart(randomfloatrange(0.75, 1.25));
+  foreach(var_1 in level.starting_marines) {
+    if(isDefined(var_1)) {
+      var_1 thread scripts\anim\combat_utility::flashbangstart(randomfloatrange(0.75, 1.25));
     }
 
-    if(isDefined(var1)) {
-      var1 scripts\engine\utility::set_movement_speed(100);
+    if(isDefined(var_1)) {
+      var_1 scripts\engine\utility::set_movement_speed(100);
     }
   }
 
@@ -160,26 +160,26 @@ function convoy_ambush_main() {
 
 function audio_vehicle_print3d_monitor() {
   for(;;) {
-    var0 = getEntArray("script_vehicle", "code_classname");
+    var_0 = getEntArray("script_vehicle", "code_classname");
 
-    if(isarray(var0)) {
-      foreach(var2 in var0) {
-        var3 = "";
+    if(isarray(var_0)) {
+      foreach(var_2 in var_0) {
+        var_3 = "";
 
-        if(isDefined(var2.unique_id)) {
-          var3 += " unique_id: " + var2.unique_id;
+        if(isDefined(var_2.unique_id)) {
+          var_3 += " unique_id: " + var_2.unique_id;
         }
 
-        if(isDefined(var2.targetname)) {
-          var3 += " targetname: " + var2.targetname;
+        if(isDefined(var_2.targetname)) {
+          var_3 += " targetname: " + var_2.targetname;
         }
 
-        if(isDefined(var2.script_noteworthy)) {
-          var3 += " script_noteworthy: " + var2.script_noteworthy;
+        if(isDefined(var_2.script_noteworthy)) {
+          var_3 += " script_noteworthy: " + var_2.script_noteworthy;
         }
 
-        if(isDefined(var2.vehicleanimalias)) {
-          var3 += " animalias: " + var2.vehicleanimalias;
+        if(isDefined(var_2.vehicleanimalias)) {
+          var_3 += " animalias: " + var_2.vehicleanimalias;
         }
       }
     }
@@ -190,7 +190,7 @@ function audio_vehicle_print3d_monitor() {
 
 function convoy_ambush_start() {
   scripts\engine\sp\utility::set_start_location("start_convoy_ambush", [level.player]);
-  var0 = getEnt("introTruck", "targetname");
+  var_0 = getEnt("introTruck", "targetname");
   precachemodel("misc_wm_sledgehammer_scaled");
   precachemodel("cp_disco_chainlink_fence");
   scripts\engine\sp\utility::battlechatter_off("axis");
@@ -207,49 +207,49 @@ function convoy_ambush_start() {
   thread scripts\sp\maps\marines\marines_vo::vo_convoy_griggs_move_out_dialogue();
   thread scripts\sp\maps\marines\marines_background::air_vehicles_distant();
   scripts\engine\utility::flag_set("marines_advance_group_a");
-  var0 delete();
+  var_0 delete();
   scripts\sp\player::player_movement_state("cqb");
   level.player scripts\engine\sp\utility::blend_movespeedscale(0.9, 0.5);
 }
 
 function convoy_ambush_catchup() {
-  var0 = getEnt("introTruck", "targetname");
+  var_0 = getEnt("introTruck", "targetname");
   thread scripts\sp\maps\marines\marines_utility::add_volumes_to_array();
   thread scripts\sp\maps\marines\marines_utility::player_wander_fail_manager();
   thread scripts\sp\maps\marines\marines_utility::player_wander_nag_manager();
   thread street_patch_handler();
   scripts\engine\utility::flag_set("convoy_speed_up");
-  var0 delete();
+  var_0 delete();
   setsaveddvar("TLOLRMSL", 0.01);
 }
 
-function intro_street_marine_group_a_advance_scene(var0) {
-  var1 = getEnt("purple_initial_lookup_origin", "targetname");
-  var2 = getnode("purple_lookup_starting_node", "targetname");
-  var3 = getnode("purple_lookaround_node", "targetname");
-  var4 = getnode("purple_gesture_node", "targetname");
-  var5 = scripts\engine\utility::getStruct("purple_continue_poi_struct", "targetname");
-  var6 = getnode("intro_middle_purple_node", "targetname");
-  var7 = scripts\engine\utility::getStruct("purple_POI_at_car", "targetname");
-  var8 = [];
+function intro_street_marine_group_a_advance_scene(var_0) {
+  var_1 = getEnt("purple_initial_lookup_origin", "targetname");
+  var_2 = getnode("purple_lookup_starting_node", "targetname");
+  var_3 = getnode("purple_lookaround_node", "targetname");
+  var_4 = getnode("purple_gesture_node", "targetname");
+  var_5 = scripts\engine\utility::getStruct("purple_continue_poi_struct", "targetname");
+  var_6 = getnode("intro_middle_purple_node", "targetname");
+  var_7 = scripts\engine\utility::getStruct("purple_POI_at_car", "targetname");
+  var_8 = [];
 
-  while(var8.size < 3) {
-    var8 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("p");
+  while(var_8.size < 3) {
+    var_8 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("p");
     waitframe();
   }
 
-  foreach(var10 in var8) {
-    if(isDefined(var10) && isalive(var10)) {
-      if(scripts\engine\utility::is_equal(var2, var10.node)) {
-        var10 thread scripts\common\ai::poi_enable(1, var7);
+  foreach(var_10 in var_8) {
+    if(isDefined(var_10) && isalive(var_10)) {
+      if(scripts\engine\utility::is_equal(var_2, var_10.node)) {
+        var_10 thread scripts\common\ai::poi_enable(1, var_7);
       }
     }
   }
 
-  foreach(var10 in var8) {
-    if(isDefined(var10) && isalive(var10)) {
-      if(isDefined(var10.animname) && var10.animname == "marine01") {
-        var10 setgoalnode(var4);
+  foreach(var_10 in var_8) {
+    if(isDefined(var_10) && isalive(var_10)) {
+      if(isDefined(var_10.animname) && var_10.animname == "marine01") {
+        var_10 setgoalnode(var_4);
       }
     }
   }
@@ -257,88 +257,88 @@ function intro_street_marine_group_a_advance_scene(var0) {
   scripts\engine\utility::flag_wait("marines_advance_group_a");
   wait 1;
 
-  foreach(var10 in var8) {
-    if(isDefined(var10) && isalive(var10)) {
-      if(scripts\engine\utility::is_equal(var4, var10.node)) {
-        var10 scripts\asm\gesture::ai_request_gesture("advance");
+  foreach(var_10 in var_8) {
+    if(isDefined(var_10) && isalive(var_10)) {
+      if(scripts\engine\utility::is_equal(var_4, var_10.node)) {
+        var_10 scripts\asm\gesture::ai_request_gesture("advance");
       }
     }
   }
 
   level notify("clear_fake_target");
-  var16 = 0;
+  var_16 = 0;
 
-  foreach(var10 in var8) {
+  foreach(var_10 in var_8) {
     wait 1;
-    var18 = scripts\engine\utility::getStruct("purple_goto_struct_0", "targetname");
-    var19 = scripts\engine\utility::getStruct("purple_poi_struct_0", "targetname");
+    var_18 = scripts\engine\utility::getStruct("purple_goto_struct_0", "targetname");
+    var_19 = scripts\engine\utility::getStruct("purple_poi_struct_0", "targetname");
 
-    if(isDefined(var10) && isalive(var10)) {
-      if(scripts\engine\utility::is_equal(var4, var10.node)) {
-        var10 thread scripts\common\ai::poi_enable(1, var19);
-        var10 thread scripts\sp\spawner::go_to_node(var18);
+    if(isDefined(var_10) && isalive(var_10)) {
+      if(scripts\engine\utility::is_equal(var_4, var_10.node)) {
+        var_10 thread scripts\common\ai::poi_enable(1, var_19);
+        var_10 thread scripts\sp\spawner::go_to_node(var_18);
       }
     }
   }
 
-  foreach(var10 in var8) {
-    var22 = scripts\engine\utility::getStruct("purple_goto_struct_1", "targetname");
-    var23 = scripts\engine\utility::getStruct("purple_poi_struct_1", "targetname");
+  foreach(var_10 in var_8) {
+    var_22 = scripts\engine\utility::getStruct("purple_goto_struct_1", "targetname");
+    var_23 = scripts\engine\utility::getStruct("purple_poi_struct_1", "targetname");
 
-    if(isDefined(var10) && isalive(var10)) {
-      if(scripts\engine\utility::is_equal(var6, var10.node)) {
-        var10 thread scripts\common\ai::poi_enable(1, var23);
-        var10 thread scripts\sp\spawner::go_to_node(var22);
+    if(isDefined(var_10) && isalive(var_10)) {
+      if(scripts\engine\utility::is_equal(var_6, var_10.node)) {
+        var_10 thread scripts\common\ai::poi_enable(1, var_23);
+        var_10 thread scripts\sp\spawner::go_to_node(var_22);
       }
     }
   }
 
-  foreach(var10 in var8) {
+  foreach(var_10 in var_8) {
     wait 0.5;
-    var26 = scripts\engine\utility::getStruct("purple_goto_struct_2", "targetname");
-    var27 = scripts\engine\utility::getStruct("purple_poi_struct_2", "targetname");
+    var_26 = scripts\engine\utility::getStruct("purple_goto_struct_2", "targetname");
+    var_27 = scripts\engine\utility::getStruct("purple_poi_struct_2", "targetname");
 
-    if(isDefined(var10) && isalive(var10)) {
-      if(scripts\engine\utility::is_equal(var2, var10.node)) {
-        var10 thread scripts\common\ai::poi_enable(0);
-        var10 thread scripts\sp\spawner::go_to_node(var26);
+    if(isDefined(var_10) && isalive(var_10)) {
+      if(scripts\engine\utility::is_equal(var_2, var_10.node)) {
+        var_10 thread scripts\common\ai::poi_enable(0);
+        var_10 thread scripts\sp\spawner::go_to_node(var_26);
       }
     }
   }
 
-  var29 = 0;
+  var_29 = 0;
 
-  foreach(var10 in var8) {
-    var31 = scripts\engine\utility::getStruct("final_purple_poi_" + var29, "targetname");
+  foreach(var_10 in var_8) {
+    var_31 = scripts\engine\utility::getStruct("final_purple_poi_" + var_29, "targetname");
 
-    if(isDefined(var10) && isalive(var10)) {
-      if(scripts\engine\utility::is_equal(var3, var10.node)) {
-        var10 thread scripts\sp\maps\marines\marines_utility::delay_poi_enable(4, 1, var5);
+    if(isDefined(var_10) && isalive(var_10)) {
+      if(scripts\engine\utility::is_equal(var_3, var_10.node)) {
+        var_10 thread scripts\sp\maps\marines\marines_utility::delay_poi_enable(4, 1, var_5);
       } else {
-        var10 scripts\asm\shared\utility::toggle_poiauto(1, -20, 50, 10, 20);
+        var_10 scripts\asm\shared\utility::toggle_poiauto(1, -20, 50, 10, 20);
       }
 
-      var29++;
+      var_29++;
     }
   }
 }
 
-function intro_street_marine_group_b_advance_scene(var0) {
+function intro_street_marine_group_b_advance_scene(var_0) {
   wait 1;
-  var1 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("r");
-  var2 = 0;
+  var_1 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("r");
+  var_2 = 0;
 
-  if(var0) {
+  if(var_0) {
     scripts\engine\utility::flag_wait("intro_cinematic_complete");
 
-    foreach(var4 in var1) {
+    foreach(var_4 in var_1) {
       thread red_marine_lookat_target();
-      thread intro_marine_poi_handler(var4, "intro_marine_poi_trigger_", "red_POI_struct_");
+      thread intro_marine_poi_handler(var_4, "intro_marine_poi_trigger_", "red_POI_struct_");
       thread support_marine_ied_street_stayahead_behavior();
-      var5 = scripts\engine\utility::getStruct("red_goto_struct", "targetname");
+      var_5 = scripts\engine\utility::getStruct("red_goto_struct", "targetname");
 
-      if(isDefined(var4) && isalive(var4)) {
-        var4 thread scripts\sp\spawner::go_to_node(var5);
+      if(isDefined(var_4) && isalive(var_4)) {
+        var_4 thread scripts\sp\spawner::go_to_node(var_5);
       }
     }
 
@@ -346,11 +346,11 @@ function intro_street_marine_group_b_advance_scene(var0) {
     wait 4;
   }
 
-  foreach(var4 in var1) {
-    var8 = scripts\engine\utility::getStruct("red_continue_struct", "targetname");
+  foreach(var_4 in var_1) {
+    var_8 = scripts\engine\utility::getStruct("red_continue_struct", "targetname");
 
-    if(isDefined(var4) && isalive(var4)) {
-      var4 thread scripts\sp\spawner::go_to_node(var8);
+    if(isDefined(var_4) && isalive(var_4)) {
+      var_4 thread scripts\sp\spawner::go_to_node(var_8);
     }
 
     wait 0.5;
@@ -358,38 +358,38 @@ function intro_street_marine_group_b_advance_scene(var0) {
 
   scripts\engine\utility::flag_wait("marines_advance_group_b");
   wait 0.5;
-  var10 = scripts\engine\utility::getStruct("red_final_goto_struct", "targetname");
+  var_10 = scripts\engine\utility::getStruct("red_final_goto_struct", "targetname");
 
-  foreach(var4 in var1) {
-    if(isDefined(var4) && isalive(var4)) {
-      var4 thread scripts\sp\spawner::go_to_node(var10);
+  foreach(var_4 in var_1) {
+    if(isDefined(var_4) && isalive(var_4)) {
+      var_4 thread scripts\sp\spawner::go_to_node(var_10);
     }
   }
 
   scripts\engine\sp\utility::trigger_wait_targetname("convoy_dialogue_trigger");
 
-  foreach(var4 in var1) {
-    if(isDefined(var4) && isalive(var4)) {
-      var4 thread scripts\common\ai::poi_enable(0);
+  foreach(var_4 in var_1) {
+    if(isDefined(var_4) && isalive(var_4)) {
+      var_4 thread scripts\common\ai::poi_enable(0);
     }
   }
 }
 
-function intro_street_marine_group_c_advance_scene(var0) {
+function intro_street_marine_group_c_advance_scene(var_0) {
   wait 1;
-  var1 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("y");
-  var2 = 0;
+  var_1 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("y");
+  var_2 = 0;
 
-  if(var0) {
+  if(var_0) {
     scripts\engine\utility::flag_wait("intro_cinematic_complete");
 
-    foreach(var4 in var1) {
-      thread intro_marine_poi_handler(var4, "intro_marine_poi_trigger_", "yellow_POI_struct_");
+    foreach(var_4 in var_1) {
+      thread intro_marine_poi_handler(var_4, "intro_marine_poi_trigger_", "yellow_POI_struct_");
       thread support_marine_ied_street_stayahead_behavior();
-      var5 = scripts\engine\utility::getStruct("yellow_goto_struct", "targetname");
+      var_5 = scripts\engine\utility::getStruct("yellow_goto_struct", "targetname");
 
-      if(isDefined(var4) && isalive(var4)) {
-        var4 thread scripts\sp\spawner::go_to_node(var5);
+      if(isDefined(var_4) && isalive(var_4)) {
+        var_4 thread scripts\sp\spawner::go_to_node(var_5);
         thread yellow_path_makeup();
         thread yellow_guy_look_up();
       }
@@ -399,11 +399,11 @@ function intro_street_marine_group_c_advance_scene(var0) {
     wait 5;
   }
 
-  foreach(var4 in var1) {
-    var8 = scripts\engine\utility::getStruct("yellow_continue_struct", "targetname");
+  foreach(var_4 in var_1) {
+    var_8 = scripts\engine\utility::getStruct("yellow_continue_struct", "targetname");
 
-    if(isDefined(var4) && isalive(var4)) {
-      var4 thread scripts\sp\spawner::go_to_node(var8);
+    if(isDefined(var_4) && isalive(var_4)) {
+      var_4 thread scripts\sp\spawner::go_to_node(var_8);
     }
 
     wait 0.5;
@@ -411,34 +411,34 @@ function intro_street_marine_group_c_advance_scene(var0) {
 
   scripts\engine\utility::flag_wait("marines_advance_group_b");
   wait 0.5;
-  var10 = scripts\engine\utility::getStruct("yellow_final_goto_struct", "targetname");
+  var_10 = scripts\engine\utility::getStruct("yellow_final_goto_struct", "targetname");
   wait 1;
 
-  foreach(var4 in var1) {
-    if(isDefined(var4) && isalive(var4)) {
-      var4 thread scripts\sp\spawner::go_to_node(var10);
+  foreach(var_4 in var_1) {
+    if(isDefined(var_4) && isalive(var_4)) {
+      var_4 thread scripts\sp\spawner::go_to_node(var_10);
     }
   }
 }
 
-function intro_marine_poi_handler(var0, var1, var2) {
+function intro_marine_poi_handler(var_0, var_1, var_2) {
   self endon("death");
   scripts\engine\utility::flag_wait("intro_cinematic_complete");
-  var3 = 1;
+  var_3 = 1;
 
-  while(var3 < 7) {
-    var4 = getEnt(var0 + var3, "targetname");
-    var5 = scripts\engine\utility::getStruct(var1 + var3, "targetname");
-    var6 = getEnt(var2 + var3, "targetname");
+  while(var_3 < 7) {
+    var_4 = getEnt(var_0 + var_3, "targetname");
+    var_5 = scripts\engine\utility::getStruct(var_1 + var_3, "targetname");
+    var_6 = getEnt(var_2 + var_3, "targetname");
 
     for(;;) {
       if(isDefined(self) && isalive(self)) {
-        if(ispointinvolume(self.origin, var4)) {
-          if(isDefined(var5)) {
-            scripts\common\ai::poi_enable(1, var5);
+        if(ispointinvolume(self.origin, var_4)) {
+          if(isDefined(var_5)) {
+            scripts\common\ai::poi_enable(1, var_5);
           }
 
-          var3++;
+          var_3++;
           break;
         }
       }
@@ -449,14 +449,14 @@ function intro_marine_poi_handler(var0, var1, var2) {
 }
 
 function yellow_path_makeup() {
-  var0 = getnode("marines_r_first_stop", "targetname");
-  var1 = getnode("griggs_goto_node_1", "targetname");
+  var_0 = getnode("marines_r_first_stop", "targetname");
+  var_1 = getnode("griggs_goto_node_1", "targetname");
   scripts\engine\utility::flag_wait("intro_first_stop_2");
   wait 2;
 
   if(!scripts\engine\utility::flag("marines_advance_group_a")) {
     if(isDefined(self)) {
-      self setgoalnode(var1);
+      self setgoalnode(var_1);
       return;
     }
 
@@ -464,45 +464,45 @@ function yellow_path_makeup() {
   }
 }
 
-function griggs_movement_handler(var0) {
+function griggs_movement_handler(var_0) {
   while(!isDefined(level.griggs)) {
     waitframe();
   }
 
   level.griggs scripts\asm\shared\utility::toggle_poiauto(1, 10, 20, 10, 20);
 
-  if(var0) {
+  if(var_0) {
     scripts\engine\utility::flag_wait("flag_clear_griggs_demeanor");
-    var1 = scripts\engine\utility::getStruct("griggs_goto_struct_1", "targetname");
-    var2 = scripts\engine\utility::getStruct("poi_struct_2", "targetname");
-    var3 = scripts\engine\utility::getStruct("poi_struct_1", "targetname");
+    var_1 = scripts\engine\utility::getStruct("griggs_goto_struct_1", "targetname");
+    var_2 = scripts\engine\utility::getStruct("poi_struct_2", "targetname");
+    var_3 = scripts\engine\utility::getStruct("poi_struct_1", "targetname");
     level.griggs scripts\asm\gesture::ai_request_gesture("advance");
     level.griggs aisetdesiredspeed(120);
     level.griggs scripts\common\ai::set_gunpose("gun_down");
-    level.griggs thread scripts\sp\spawner::go_to_node(var1);
+    level.griggs thread scripts\sp\spawner::go_to_node(var_1);
     wait 3;
-    level.griggs thread scripts\common\ai::poi_enable(1, var3);
+    level.griggs thread scripts\common\ai::poi_enable(1, var_3);
     thread waitill_path_end_watcher();
     scripts\engine\utility::flag_wait("marines_advance_group_a");
     thread griggs_ied_street_stayahead_behavior();
     wait 3.5;
   }
 
-  var4 = scripts\engine\utility::getStruct("griggs_continue_struct_1", "targetname");
-  var5 = scripts\engine\utility::getStruct("poi_struct_4", "targetname");
-  level.griggs thread scripts\common\ai::poi_enable(1, var5);
-  level.griggs thread scripts\sp\spawner::go_to_node(var4);
+  var_4 = scripts\engine\utility::getStruct("griggs_continue_struct_1", "targetname");
+  var_5 = scripts\engine\utility::getStruct("poi_struct_4", "targetname");
+  level.griggs thread scripts\common\ai::poi_enable(1, var_5);
+  level.griggs thread scripts\sp\spawner::go_to_node(var_4);
   scripts\engine\utility::flag_wait("marines_advance_group_b");
 
-  foreach(var7 in level.starting_marines) {
-    var7 notify("stop_going_to_node");
+  foreach(var_7 in level.starting_marines) {
+    var_7 notify("stop_going_to_node");
   }
 
   waitframe();
-  var9 = scripts\engine\utility::getStruct("griggs_final_struct", "targetname");
-  var10 = getnode("griggs_gesture_node", "targetname");
-  var11 = scripts\engine\utility::getStruct("point_target", "targetname");
-  level.griggs thread scripts\sp\spawner::go_to_node(var9);
+  var_9 = scripts\engine\utility::getStruct("griggs_final_struct", "targetname");
+  var_10 = getnode("griggs_gesture_node", "targetname");
+  var_11 = scripts\engine\utility::getStruct("point_target", "targetname");
+  level.griggs thread scripts\sp\spawner::go_to_node(var_9);
   level.griggs.script_radius = "1";
   thread scripts\sp\maps\marines\marines_vo::vo_convoy_alex_tripwire_callout_dialogue();
   level.griggs waittill("reached_path_end");
@@ -537,19 +537,19 @@ function support_marine_ied_street_stayahead_behavior() {
 }
 
 function a10_flyby() {
-  var0 = getEnt("a10_explosion_trigger", "targetname");
-  var0 waittill("trigger");
+  var_0 = getEnt("a10_explosion_trigger", "targetname");
+  var_0 waittill("trigger");
   scripts\engine\utility::flag_set("a10_flyby_trigger");
-  var1 = scripts\engine\utility::getStruct("ambient_explosion_1", "targetname");
-  var2 = scripts\engine\utility::getStruct("ambient_explosion_2", "targetname");
-  var3 = scripts\engine\utility::getStruct("ambient_explosion_3", "targetname");
+  var_1 = scripts\engine\utility::getStruct("ambient_explosion_1", "targetname");
+  var_2 = scripts\engine\utility::getStruct("ambient_explosion_2", "targetname");
+  var_3 = scripts\engine\utility::getStruct("ambient_explosion_3", "targetname");
 
   if(scripts\engine\utility::flag("a10_flyby_trigger")) {
-    var4 = getEnt("a10_tracer_start", "targetname");
-    var5 = getEntArray(var4.target, "targetname");
-    var6 = scripts\engine\utility::random(var5);
-    thread scripts\engine\utility::play_sound_in_space("scn_marines_a10_strike", var2.origin);
-    var4 thread scripts\sp\maps\marines\marines_background::bg_aa_fire_tracer_fx(var6);
+    var_4 = getEnt("a10_tracer_start", "targetname");
+    var_5 = getEntArray(var_4.target, "targetname");
+    var_6 = scripts\engine\utility::random(var_5);
+    thread scripts\engine\utility::play_sound_in_space("scn_marines_a10_strike", var_2.origin);
+    var_4 thread scripts\sp\maps\marines\marines_background::bg_aa_fire_tracer_fx(var_6);
     scripts\sp\maps\marines\marines_utility::marine_airstrike_group("convoy_airstrike_group", 0, 0, 0);
     wait 1;
     scripts\engine\utility::exploder("a10_flyby_explosions");
@@ -603,8 +603,8 @@ function griggs_loadout() {
     waitframe();
   }
 
-  var0 = scripts\sp\utility::make_weapon("iw8_ar_mike4");
-  level.griggs scripts\anim\shared::forceuseweapon(var0, "primary");
+  var_0 = scripts\sp\utility::make_weapon("iw8_ar_mike4");
+  level.griggs scripts\anim\shared::forceuseweapon(var_0, "primary");
   thread scripts\sp\maps\marines\marines_utility::griggs_damage_juggle_monitor();
 }
 
@@ -616,42 +616,42 @@ function alex_loadout() {
 }
 
 function convoy_ambush_explosion() {
-  var0 = scripts\engine\utility::getStruct("convoy_ambush_ied_explosion", "targetname");
-  var1 = "iw8_ges_frag_block";
-  var2 = cos(90);
-  var3 = getEnt("destroyed_apc", "targetname");
-  var4 = getEnt("player_explosion_radius", "targetname");
+  var_0 = scripts\engine\utility::getStruct("convoy_ambush_ied_explosion", "targetname");
+  var_1 = "iw8_ges_frag_block";
+  var_2 = cos(90);
+  var_3 = getEnt("destroyed_apc", "targetname");
+  var_4 = getEnt("player_explosion_radius", "targetname");
   scripts\engine\utility::flag_wait_any("wait_for_IED_explosion", "play_IED_explosion");
   scripts\engine\utility::flag_wait_any_timeout(1.5, "player_is_looking_at_IED", "play_IED_explosion");
   scripts\engine\utility::flag_set("play_IED_explosion");
   scripts\sp\utility::nvidiaansel_scriptdisable(1);
-  var5 = scripts\engine\utility::getStruct("convoy_vehicle_fire", "targetname");
-  playFX(level._effect["vfx_car_bomb_fire"], var5.origin - (0, 0, 100));
+  var_5 = scripts\engine\utility::getStruct("convoy_vehicle_fire", "targetname");
+  playFX(level._effect["vfx_car_bomb_fire"], var_5.origin - (0, 0, 100));
   level.assault_vehicle delete();
-  var6 = getaiarray("allies");
+  var_6 = getaiarray("allies");
 
-  foreach(var8 in var6) {
-    if(isalive(var8) && isDefined(var8.asmname)) {
-      var8 scripts\common\utility::demeanor_override("combat");
+  foreach(var_8 in var_6) {
+    if(isalive(var_8) && isDefined(var_8.asmname)) {
+      var_8 scripts\common\utility::demeanor_override("combat");
     }
   }
 
-  if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var0.origin, var2)) {
+  if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_0.origin, var_2)) {
     if(isalive(level.player)) {
-      level.player forceplaygestureviewmodel(var1, undefined, 0.05, 0, 1);
+      level.player forceplaygestureviewmodel(var_1, undefined, 0.05, 0, 1);
       level.player thread scripts\sp\maps\marines\marines_utility::disable_weapon_swap(4);
     }
   }
 
-  if(level.player istouching(var4)) {
-    playFX(level._effect["vfx_ied_explosion_no_rocks"], var0.origin);
-    thread sfx_ied_expl(var0.origin);
+  if(level.player istouching(var_4)) {
+    playFX(level._effect["vfx_ied_explosion_no_rocks"], var_0.origin);
+    thread sfx_ied_expl(var_0.origin);
     earthquake(1, 1, level.player.origin, 100);
     level.player playRumbleOnEntity("grenade_rumble");
     level.player scripts\sp\utility::do_damage(9999, level.player.origin, undefined, undefined);
   } else {
-    playFX(level._effect["vfx_ied_explosion_no_rocks"], var0.origin);
-    thread sfx_ied_expl(var0.origin);
+    playFX(level._effect["vfx_ied_explosion_no_rocks"], var_0.origin);
+    thread sfx_ied_expl(var_0.origin);
     earthquake(0.75, 1, level.player.origin, 100);
     level.player playRumbleOnEntity("grenade_rumble");
     level.player shellshock("default", 4);
@@ -662,11 +662,11 @@ function convoy_ambush_explosion() {
   scripts\sp\utility::nvidiaansel_scriptdisable(0);
 }
 
-function sfx_ied_expl(var0) {
-  var1 = spawn("script_origin", var0);
-  var1 playexplosionsound("claymore_expl_trans", "exp");
+function sfx_ied_expl(var_0) {
+  var_1 = spawn("script_origin", var_0);
+  var_1 playexplosionsound("claymore_expl_trans", "exp");
   wait 10;
-  var1 delete();
+  var_1 delete();
 }
 
 function convoy_movement_handler() {
@@ -681,11 +681,11 @@ function convoy_movement_handler() {
 
 function vig_window_peek_spawner() {
   wait 5;
-  var0 = getEntArray("vig_windowpeek_spawner", "targetname");
+  var_0 = getEntArray("vig_windowpeek_spawner", "targetname");
 
-  foreach(var2 in var0) {
-    var2 scripts\engine\sp\utility::add_spawn_function(&vig_window_peek);
-    var2 scripts\engine\sp\utility::spawn_ai(1);
+  foreach(var_2 in var_0) {
+    var_2 scripts\engine\sp\utility::add_spawn_function(&vig_window_peek);
+    var_2 scripts\engine\sp\utility::spawn_ai(1);
   }
 }
 
@@ -714,14 +714,14 @@ function vig_window_peek() {
     self.triggerdistance = 700;
   }
 
-  foreach(var1 in self.allparts) {
-    if(var1.model == "windowpeek_window_l") {
-      self.leftwindow = var1;
+  foreach(var_1 in self.allparts) {
+    if(var_1.model == "windowpeek_window_l") {
+      self.leftwindow = var_1;
       continue;
     }
 
-    if(var1.model == "windowpeek_window_r") {
-      self.rightwindow = var1;
+    if(var_1.model == "windowpeek_window_r") {
+      self.rightwindow = var_1;
     }
   }
 
@@ -781,24 +781,24 @@ function vig_window_peek() {
 }
 
 function vig_roof_peek() {
-  var0 = getnode("roof_guy_delete_node", "targetname");
-  var1 = scripts\engine\utility::getStruct("roofStruct", "targetname");
-  var2 = 0;
-  var3 = scripts\engine\sp\utility::spawn_targetname("roofGuy", 1);
-  var3 scripts\engine\sp\utility::set_allowdeath(1);
-  var3.animname = "roof_civ";
-  thread detect_bulletwhizby(var3);
-  var3 endon("whizby");
+  var_0 = getnode("roof_guy_delete_node", "targetname");
+  var_1 = scripts\engine\utility::getStruct("roofStruct", "targetname");
+  var_2 = 0;
+  var_3 = scripts\engine\sp\utility::spawn_targetname("roofGuy", 1);
+  var_3 scripts\engine\sp\utility::set_allowdeath(1);
+  var_3.animname = "roof_civ";
+  thread detect_bulletwhizby(var_3);
+  var_3 endon("whizby");
 
-  if(isalive(var3)) {
-    var1 scripts\common\anim::anim_single_solo(var3, "roofLeanEnter");
+  if(isalive(var_3)) {
+    var_1 scripts\common\anim::anim_single_solo(var_3, "roofLeanEnter");
   }
 
-  if(isalive(var3)) {
-    var1 thread scripts\common\anim::anim_loop_solo(var3, "roofLeanIdle", "targetedRoof");
+  if(isalive(var_3)) {
+    var_1 thread scripts\common\anim::anim_loop_solo(var_3, "roofLeanIdle", "targetedRoof");
   }
 
-  while(!(distance2d(var1.origin, level.player.origin) < 400 && scripts\engine\utility::within_fov(level.player.origin, level.player getplayerangles(), var1.origin, cos(10)))) {
+  while(!(distance2d(var_1.origin, level.player.origin) < 400 && scripts\engine\utility::within_fov(level.player.origin, level.player getplayerangles(), var_1.origin, cos(10)))) {
     waitframe();
 
     if(scripts\engine\utility::flag("a10_flyby_trigger") || scripts\engine\utility::flag("convoy_speed_up")) {
@@ -807,31 +807,31 @@ function vig_roof_peek() {
     }
   }
 
-  var1 notify("targetedRoof");
+  var_1 notify("targetedRoof");
 
-  if(isalive(var3)) {
-    var1 scripts\common\anim::anim_single_solo(var3, "roofLeanExit");
+  if(isalive(var_3)) {
+    var_1 scripts\common\anim::anim_single_solo(var_3, "roofLeanExit");
   }
 
   wait 2;
 
-  if(isDefined(var3)) {
-    var3 delete();
+  if(isDefined(var_3)) {
+    var_3 delete();
     return;
   }
 }
 
 function convoy_intro_marine_anim() {
-  var0 = scripts\engine\utility::getStruct("intro_convoy_marine_anim_struct", "targetname");
-  var1 = scripts\engine\sp\utility::spawn_targetname("convoy_greeter", 1);
-  var1 thread scripts\sp\maps\marines\marines_utility::marine_callsign_picker();
-  var1 scripts\engine\sp\utility::set_allowdeath(1);
-  var1.animname = "intro_marine";
-  var2 = scripts\engine\utility::getStruct("convoy_scanning_struct_2", "targetname");
-  var3 = scripts\engine\utility::getStruct("marine_runner_path_1", "targetname");
+  var_0 = scripts\engine\utility::getStruct("intro_convoy_marine_anim_struct", "targetname");
+  var_1 = scripts\engine\sp\utility::spawn_targetname("convoy_greeter", 1);
+  var_1 thread scripts\sp\maps\marines\marines_utility::marine_callsign_picker();
+  var_1 scripts\engine\sp\utility::set_allowdeath(1);
+  var_1.animname = "intro_marine";
+  var_2 = scripts\engine\utility::getStruct("convoy_scanning_struct_2", "targetname");
+  var_3 = scripts\engine\utility::getStruct("marine_runner_path_1", "targetname");
 
-  if(isalive(var1)) {
-    var0 thread scripts\common\anim::anim_loop_solo(var1, "convoy_idle", "convoy_idle_exit");
+  if(isalive(var_1)) {
+    var_0 thread scripts\common\anim::anim_loop_solo(var_1, "convoy_idle", "convoy_idle_exit");
   }
 
   scripts\engine\utility::flag_wait("convoy_speed_up");
@@ -839,93 +839,93 @@ function convoy_intro_marine_anim() {
   scripts\engine\utility::array_thread(level.allymarines["all"], &scripts\asm\shared\utility::toggle_poiauto, 1);
   level.starting_marines = getaiarray("allies");
 
-  foreach(var5 in level.starting_marines) {
-    if(isalive(var5) && isDefined(var5.asmname)) {
-      var5 scripts\common\utility::demeanor_override("cqb");
+  foreach(var_5 in level.starting_marines) {
+    if(isalive(var_5) && isDefined(var_5.asmname)) {
+      var_5 scripts\common\utility::demeanor_override("cqb");
     }
   }
 
-  if(isalive(var1)) {
-    var0 thread scripts\common\anim::anim_single_solo(var1, "convoy_advance");
+  if(isalive(var_1)) {
+    var_0 thread scripts\common\anim::anim_single_solo(var_1, "convoy_advance");
     thread scripts\sp\maps\marines\marines_vo::vo_convoy_marine_convoy_greeter_dialogue();
 
-    if(isDefined(var1.asmname)) {
-      var1 scripts\common\utility::demeanor_override("cqb");
+    if(isDefined(var_1.asmname)) {
+      var_1 scripts\common\utility::demeanor_override("cqb");
     }
   }
 
-  var0 notify("convoy_idle_exit");
+  var_0 notify("convoy_idle_exit");
 
-  if(isDefined(var1) && isalive(var1)) {
-    var1 thread scripts\common\ai::poi_enable(1, var2);
-    var1 scripts\sp\spawner::go_to_node(var3);
+  if(isDefined(var_1) && isalive(var_1)) {
+    var_1 thread scripts\common\ai::poi_enable(1, var_2);
+    var_1 scripts\sp\spawner::go_to_node(var_3);
   }
 
   scripts\engine\utility::flag_wait("play_IED_explosion");
 
-  if(isDefined(var1) && isalive(var1)) {
-    var1.skipdeathanim = 1;
-    var1.death_anim_no_ragdoll = 1;
-    var1.forcelongdeath = 3;
-    var1 scripts\engine\sp\utility::enable_long_death();
-    var1 asmsetstate(var1.asmname, "choose_long_death");
-    var1.a.force_num_crawls = 1;
+  if(isDefined(var_1) && isalive(var_1)) {
+    var_1.skipdeathanim = 1;
+    var_1.death_anim_no_ragdoll = 1;
+    var_1.forcelongdeath = 3;
+    var_1 scripts\engine\sp\utility::enable_long_death();
+    var_1 asmsetstate(var_1.asmname, "choose_long_death");
+    var_1.a.force_num_crawls = 1;
   }
 
   wait 3;
 
-  if(isDefined(var1) && isalive(var1)) {
-    var1 kill();
+  if(isDefined(var_1) && isalive(var_1)) {
+    var_1 kill();
     return;
   }
 }
 
 function intro_roof_peek() {
-  var0 = scripts\engine\utility::getStruct("intro_roof_struct", "targetname");
-  var1 = 0;
-  var2 = getnode("peeker_delete_point", "targetname");
-  var3 = scripts\engine\sp\utility::spawn_targetname("intro_roofguy", 1);
-  var3 scripts\engine\sp\utility::set_allowdeath(1);
-  var3.animname = "roof_civ";
-  thread detect_bulletwhizby(var3);
-  var3 endon("whizby");
+  var_0 = scripts\engine\utility::getStruct("intro_roof_struct", "targetname");
+  var_1 = 0;
+  var_2 = getnode("peeker_delete_point", "targetname");
+  var_3 = scripts\engine\sp\utility::spawn_targetname("intro_roofguy", 1);
+  var_3 scripts\engine\sp\utility::set_allowdeath(1);
+  var_3.animname = "roof_civ";
+  thread detect_bulletwhizby(var_3);
+  var_3 endon("whizby");
 
-  if(isDefined(var3) && isalive(var3)) {
-    var0 scripts\common\anim::anim_single_solo(var3, "roofLeanEnter");
+  if(isDefined(var_3) && isalive(var_3)) {
+    var_0 scripts\common\anim::anim_single_solo(var_3, "roofLeanEnter");
   }
 
-  if(isDefined(var3) && isalive(var3)) {
-    var0 thread scripts\common\anim::anim_loop_solo(var3, "roofLeanIdle", "targetedRoof");
+  if(isDefined(var_3) && isalive(var_3)) {
+    var_0 thread scripts\common\anim::anim_loop_solo(var_3, "roofLeanIdle", "targetedRoof");
   }
 
   scripts\engine\utility::flag_wait("door_kick_vignette_flag");
   thread enable_intro_wait_flags();
   wait 2;
-  var0 notify("targetedRoof");
+  var_0 notify("targetedRoof");
 
-  if(isDefined(var3) && isalive(var3)) {
-    var0 scripts\common\anim::anim_single_solo(var3, "roofLeanExit");
+  if(isDefined(var_3) && isalive(var_3)) {
+    var_0 scripts\common\anim::anim_single_solo(var_3, "roofLeanExit");
   }
 
-  if(isDefined(var3) && isalive(var3)) {
-    var3 setgoalnode(var2);
+  if(isDefined(var_3) && isalive(var_3)) {
+    var_3 setgoalnode(var_2);
   }
 
   scripts\engine\utility::flag_wait("a10_flyby_trigger");
 
-  if(isDefined(var3) && isalive(var3)) {
-    var3 delete();
+  if(isDefined(var_3) && isalive(var_3)) {
+    var_3 delete();
     return;
   }
 }
 
-function detect_bulletwhizby(var0) {
+function detect_bulletwhizby(var_0) {
   self waittill("bulletwhizby");
   self notify("whizby");
 
   if(isDefined(self) && isalive(self)) {
     self stopanimScripted();
-    self setgoalnode(var0);
+    self setgoalnode(var_0);
   }
 
   self waittill("goal");
@@ -964,11 +964,11 @@ function tripwire_hint_dialogue() {
 }
 
 function convoy_tripwire_monitor() {
-  var0 = scripts\engine\utility::getStruct("convoy_tripwire_struct", "targetname");
-  var1 = getEnt("convoy_tripwire_nav_clip", "targetname");
-  var2 = scripts\engine\utility::getStruct("convoy_tripwire_nav_block_struct", "targetname");
-  var3 = scripts\engine\utility::getStruct("convoy_tripwire_nav_clear_struct", "targetname");
-  thread scripts\sp\maps\marines\marines_utility::marines_tripwire_monitor(var0, "tripwire_cleared_flag", var1, var2, var3);
+  var_0 = scripts\engine\utility::getStruct("convoy_tripwire_struct", "targetname");
+  var_1 = getEnt("convoy_tripwire_nav_clip", "targetname");
+  var_2 = scripts\engine\utility::getStruct("convoy_tripwire_nav_block_struct", "targetname");
+  var_3 = scripts\engine\utility::getStruct("convoy_tripwire_nav_clear_struct", "targetname");
+  thread scripts\sp\maps\marines\marines_utility::marines_tripwire_monitor(var_0, "tripwire_cleared_flag", var_1, var_2, var_3);
 }
 
 function intro_tripwire_defused_monitor() {
@@ -988,34 +988,34 @@ function tripwire_check() {
 }
 
 function setup_assault_vehicle() {
-  var0 = getEnt("destroyed_apc", "targetname");
-  var0 hide();
+  var_0 = getEnt("destroyed_apc", "targetname");
+  var_0 hide();
   scripts\engine\utility::flag_wait("play_IED_explosion");
-  var0 show();
+  var_0 show();
 }
 
 function convoy_runners() {
-  var0 = getspawnerarray("convoy_runner");
-  var1 = scripts\engine\utility::getStruct("convoy_runner_high_POI", "targetname");
+  var_0 = getspawnerarray("convoy_runner");
+  var_1 = scripts\engine\utility::getStruct("convoy_runner_high_POI", "targetname");
   scripts\engine\sp\utility::array_spawn_function_targetname("convoy_runner", &convoy_runners_handler);
-  var2 = scripts\engine\sp\utility::array_spawn(var0);
-  var3 = scripts\engine\utility::getStruct("intro_convoy_runner_relaxed_anim_struct", "targetname");
-  var4 = scripts\engine\utility::getStruct("intro_convoy_runner_lookaround_anim_struct", "targetname");
+  var_2 = scripts\engine\sp\utility::array_spawn(var_0);
+  var_3 = scripts\engine\utility::getStruct("intro_convoy_runner_relaxed_anim_struct", "targetname");
+  var_4 = scripts\engine\utility::getStruct("intro_convoy_runner_lookaround_anim_struct", "targetname");
 
-  foreach(var6 in var2) {
-    if(isDefined(var6.animname) && var6.animname == "convoy_runner_lookaround") {
-      var6 thread scripts\sp\maps\marines\marines_utility::marine_callsign_picker();
-      var6.script_animname = "convoy_runner_lookaround";
-      var6.allowdeath = 1;
-      var6 scripts\common\ai::poi_enable(1, var1);
+  foreach(var_6 in var_2) {
+    if(isDefined(var_6.animname) && var_6.animname == "convoy_runner_lookaround") {
+      var_6 thread scripts\sp\maps\marines\marines_utility::marine_callsign_picker();
+      var_6.script_animname = "convoy_runner_lookaround";
+      var_6.allowdeath = 1;
+      var_6 scripts\common\ai::poi_enable(1, var_1);
       continue;
     }
 
-    if(isDefined(var6.animname) && var6.animname == "convoy_runner_relaxed") {
-      var6 thread scripts\sp\maps\marines\marines_utility::marine_callsign_picker();
-      var6.script_animname = "convoy_runner_relaxed";
-      var6.allowdeath = 1;
-      var6 scripts\asm\shared\utility::toggle_poiauto(1, 10, 20, 10, 20);
+    if(isDefined(var_6.animname) && var_6.animname == "convoy_runner_relaxed") {
+      var_6 thread scripts\sp\maps\marines\marines_utility::marine_callsign_picker();
+      var_6.script_animname = "convoy_runner_relaxed";
+      var_6.allowdeath = 1;
+      var_6 scripts\asm\shared\utility::toggle_poiauto(1, 10, 20, 10, 20);
     }
   }
 
@@ -1025,52 +1025,52 @@ function convoy_runners() {
   thread send_griggs_to_ied();
   wait 0.5;
 
-  foreach(var6 in var2) {
-    if(isalive(var6) && isDefined(var6.script_animname) && var6.script_animname == "convoy_runner_relaxed") {
-      var9 = scripts\engine\utility::getStruct("convoy_runner_path_1", "targetname");
-      var10 = scripts\engine\utility::getStruct("convoy_scanning_struct_1", "targetname");
-      var6 thread scripts\common\ai::poi_enable(1, var10);
-      var6 thread scripts\sp\spawner::go_to_node(var9);
+  foreach(var_6 in var_2) {
+    if(isalive(var_6) && isDefined(var_6.script_animname) && var_6.script_animname == "convoy_runner_relaxed") {
+      var_9 = scripts\engine\utility::getStruct("convoy_runner_path_1", "targetname");
+      var_10 = scripts\engine\utility::getStruct("convoy_scanning_struct_1", "targetname");
+      var_6 thread scripts\common\ai::poi_enable(1, var_10);
+      var_6 thread scripts\sp\spawner::go_to_node(var_9);
     }
   }
 
   wait 0.5;
 
-  foreach(var6 in var2) {
-    if(isalive(var6) && isDefined(var6.script_animname) && var6.script_animname == "convoy_runner_lookaround") {
-      var13 = scripts\engine\utility::getStruct("convoy_runner_path_0", "targetname");
-      var14 = scripts\engine\utility::getStruct("convoy_scanning_struct_0", "targetname");
-      var6 thread scripts\common\ai::poi_enable(1, var14);
-      var6 thread scripts\sp\spawner::go_to_node(var13);
+  foreach(var_6 in var_2) {
+    if(isalive(var_6) && isDefined(var_6.script_animname) && var_6.script_animname == "convoy_runner_lookaround") {
+      var_13 = scripts\engine\utility::getStruct("convoy_runner_path_0", "targetname");
+      var_14 = scripts\engine\utility::getStruct("convoy_scanning_struct_0", "targetname");
+      var_6 thread scripts\common\ai::poi_enable(1, var_14);
+      var_6 thread scripts\sp\spawner::go_to_node(var_13);
     }
   }
 
   scripts\engine\utility::flag_wait("play_IED_explosion");
-  var16 = scripts\engine\utility::getStruct("convoy_ambush_ied_explosion", "targetname");
+  var_16 = scripts\engine\utility::getStruct("convoy_ambush_ied_explosion", "targetname");
 
-  foreach(var6 in var2) {
-    if(isDefined(var6.script_animname) && var6.script_animname == "convoy_runner_lookaround") {
-      if(isDefined(var6) && isalive(var6)) {
-        var6 scripts\engine\sp\utility::set_deathanim("runner_death_right");
-        var6 scripts\sp\utility::do_damage(9999, var6.origin, undefined, undefined, "MOD_EXPLOSIVE", undefined, var16.origin);
+  foreach(var_6 in var_2) {
+    if(isDefined(var_6.script_animname) && var_6.script_animname == "convoy_runner_lookaround") {
+      if(isDefined(var_6) && isalive(var_6)) {
+        var_6 scripts\engine\sp\utility::set_deathanim("runner_death_right");
+        var_6 scripts\sp\utility::do_damage(9999, var_6.origin, undefined, undefined, "MOD_EXPLOSIVE", undefined, var_16.origin);
       }
 
       continue;
     }
 
-    if(isDefined(var6) && isalive(var6)) {
-      var6 scripts\engine\sp\utility::set_deathanim("runner_death_right");
-      var6 scripts\sp\utility::do_damage(9999, var6.origin, undefined, undefined, "MOD_GRENADE_SPLASH", undefined, var16.origin);
+    if(isDefined(var_6) && isalive(var_6)) {
+      var_6 scripts\engine\sp\utility::set_deathanim("runner_death_right");
+      var_6 scripts\sp\utility::do_damage(9999, var_6.origin, undefined, undefined, "MOD_GRENADE_SPLASH", undefined, var_16.origin);
     }
   }
 }
 
 function marine_pre_ied_disable_pushable_manager() {
-  var0 = getaiarray("allies");
+  var_0 = getaiarray("allies");
 
-  foreach(var2 in var0) {
-    if(isDefined(var2) && isalive(var2)) {
-      if(var2 != level.griggs) {
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2) && isalive(var_2)) {
+      if(var_2 != level.griggs) {
         thread marine_pre_ied_disable_pushable();
       }
     }
@@ -1101,36 +1101,36 @@ function marine_pre_ied_disable_pushable() {
   }
 }
 
-function vig_sledgebreach(var0) {
-  var1 = [getspawner("leftStackSpawner03", "targetname"), getspawner("introSledgeSpawner", "targetname"), getspawner("rightStackSpawner01", "targetname"), getspawner("rightStackSpawner02", "targetname")];
-  var2 = [];
-  var3 = getnode("introDoorBreachMarine_01", "targetname");
-  var4 = getnode("introDoorBreachMarine_02", "targetname");
-  var5 = getnode("introDoorBreachMarine_03", "targetname");
-  var6 = getnode("introDoorBreachMarine_04", "targetname");
-  var7 = scripts\engine\utility::getStruct("sledge01_post_struct", "targetname");
-  var8 = scripts\engine\utility::getStruct("sledge02_post_struct", "targetname");
-  var9 = scripts\engine\utility::getStruct("sledge03_post_struct", "targetname");
-  var10 = scripts\engine\utility::getStruct("sledge04_post_struct", "targetname");
+function vig_sledgebreach(var_0) {
+  var_1 = [getspawner("leftStackSpawner03", "targetname"), getspawner("introSledgeSpawner", "targetname"), getspawner("rightStackSpawner01", "targetname"), getspawner("rightStackSpawner02", "targetname")];
+  var_2 = [];
+  var_3 = getnode("introDoorBreachMarine_01", "targetname");
+  var_4 = getnode("introDoorBreachMarine_02", "targetname");
+  var_5 = getnode("introDoorBreachMarine_03", "targetname");
+  var_6 = getnode("introDoorBreachMarine_04", "targetname");
+  var_7 = scripts\engine\utility::getStruct("sledge01_post_struct", "targetname");
+  var_8 = scripts\engine\utility::getStruct("sledge02_post_struct", "targetname");
+  var_9 = scripts\engine\utility::getStruct("sledge03_post_struct", "targetname");
+  var_10 = scripts\engine\utility::getStruct("sledge04_post_struct", "targetname");
 
-  for(var11 = 0; var11 < var1.size; var11++) {
-    var2 = scripts\engine\utility::getStruct(var1[var11].targetname, "target");
+  for(var_11 = 0; var_11 < var_1.size; var_11++) {
+    var_2 = scripts\engine\utility::getStruct(var_1[var_11].targetname, "target");
     waitframe();
   }
 
-  var12 = getEnt("sledgeDoor", "targetname");
-  var13 = scripts\engine\utility::getStruct("sledge_door_struct", "targetname");
-  var14 = getEnt("sledge_door_struct_sfx_source", "targetname");
-  var12 scripts\engine\sp\utility::assign_animtree("sledgeDoor");
-  var12.animname = "sledgeDoor";
+  var_12 = getEnt("sledgeDoor", "targetname");
+  var_13 = scripts\engine\utility::getStruct("sledge_door_struct", "targetname");
+  var_14 = getEnt("sledge_door_struct_sfx_source", "targetname");
+  var_12 scripts\engine\sp\utility::assign_animtree("sledgeDoor");
+  var_12.animname = "sledgeDoor";
   level.introdoorbreachmarines = [];
 
-  for(var11 = 0; var11 < var1.size; var11++) {
-    level.introdoorbreachmarines[var11] = var1[var11] scripts\engine\sp\utility::spawn_ai(1);
-    level.introdoorbreachmarines[var11].allowdeath = 1;
-    level.introdoorbreachmarines[var11].friend_kill_points = -100000;
-    level.introdoorbreachmarines[var11] thread scripts\sp\maps\marines\marines_utility::marine_callsign_picker();
-    level.introdoorbreachmarines[var11].animname = "introDoorBreachMarine_0" + var11 + 1;
+  for(var_11 = 0; var_11 < var_1.size; var_11++) {
+    level.introdoorbreachmarines[var_11] = var_1[var_11] scripts\engine\sp\utility::spawn_ai(1);
+    level.introdoorbreachmarines[var_11].allowdeath = 1;
+    level.introdoorbreachmarines[var_11].friend_kill_points = -100000;
+    level.introdoorbreachmarines[var_11] thread scripts\sp\maps\marines\marines_utility::marine_callsign_picker();
+    level.introdoorbreachmarines[var_11].animname = "introDoorBreachMarine_0" + var_11 + 1;
     waitframe();
   }
 
@@ -1140,36 +1140,36 @@ function vig_sledgebreach(var0) {
 
   scripts\common\anim::addnotetrack_customfunction("introDoorBreachMarine_02", "stow_sledge", &intro_sledge_put_away, "sledgeBreach");
 
-  foreach(var16 in level.introdoorbreachmarines) {
-    if(isDefined(var16) && isalive(var16)) {
-      var16.script_pushable = 0;
+  foreach(var_16 in level.introdoorbreachmarines) {
+    if(isDefined(var_16) && isalive(var_16)) {
+      var_16.script_pushable = 0;
     }
   }
 
-  for(var11 = 0; var11 < var2.size; var11++) {
-    if(isDefined(level.introdoorbreachmarines[var11]) && isalive(level.introdoorbreachmarines[var11])) {
-      var2[var11] thread scripts\common\anim::anim_loop_solo(level.introdoorbreachmarines[var11], "sledgeDoorPreBreach", "moveIn");
+  for(var_11 = 0; var_11 < var_2.size; var_11++) {
+    if(isDefined(level.introdoorbreachmarines[var_11]) && isalive(level.introdoorbreachmarines[var_11])) {
+      var_2[var_11] thread scripts\common\anim::anim_loop_solo(level.introdoorbreachmarines[var_11], "sledgeDoorPreBreach", "moveIn");
     }
   }
 
-  if(var0) {
+  if(var_0) {
     scripts\engine\sp\utility::wait_for_targetname_trigger("vig_arrest_trigger");
   }
 
   thread scripts\sp\maps\marines\marines_vo::vo_convoy_sledgehammer_dialogue();
   wait 2;
 
-  foreach(var19 in var2) {
-    var19 notify("moveIn");
+  foreach(var_19 in var_2) {
+    var_19 notify("moveIn");
   }
 
   if(isDefined(level.introdoorbreachmarines[1]) && isalive(level.introdoorbreachmarines[1])) {
-    var13 thread scripts\common\anim::anim_single_solo(var12, "sledgeBreach");
+    var_13 thread scripts\common\anim::anim_single_solo(var_12, "sledgeBreach");
   }
 
   if(isDefined(level.introdoorbreachmarines[1]) && isalive(level.introdoorbreachmarines[1])) {
-    var2[1] thread scripts\common\anim::anim_single_solo(level.introdoorbreachmarines[1], "sledgeBreach");
-    var14 thread scripts\engine\sp\utility::play_sound_on_tag("scn_zd30_door1_breach_sledge_door", undefined);
+    var_2[1] thread scripts\common\anim::anim_single_solo(level.introdoorbreachmarines[1], "sledgeBreach");
+    var_14 thread scripts\engine\sp\utility::play_sound_on_tag("scn_zd30_door1_breach_sledge_door", undefined);
     wait 0.75;
 
     if(isDefined(level.introdoorbreachmarines[1]) && isalive(level.introdoorbreachmarines[1])) {
@@ -1184,7 +1184,7 @@ function vig_sledgebreach(var0) {
       thread sledge_marine_advancing(level.introdoorbreachmarines[2]);
       thread sledge_marine_cowabunga_advance();
       level.introdoorbreachmarines[2] scripts\engine\utility::set_movement_speed(80);
-      thread color_arrive_handler(level.introdoorbreachmarines[2], var5);
+      thread color_arrive_handler(level.introdoorbreachmarines[2], var_5);
     }
   }
 
@@ -1194,14 +1194,14 @@ function vig_sledgebreach(var0) {
     if(isDefined(level.introdoorbreachmarines[3]) && isalive(level.introdoorbreachmarines[3])) {
       level.introdoorbreachmarines[3] scripts\engine\utility::set_movement_speed(80);
       thread sledge_marine_cowabunga_advance();
-      thread color_arrive_handler(level.introdoorbreachmarines[3], var6);
+      thread color_arrive_handler(level.introdoorbreachmarines[3], var_6);
     }
 
     if(isDefined(level.introdoorbreachmarines[3]) && isalive(level.introdoorbreachmarines[3])) {
       thread sledge_marine_advancing(level.introdoorbreachmarines[1]);
       level.introdoorbreachmarines[1] scripts\engine\utility::set_movement_speed(80);
       thread sledge_marine_cowabunga_advance(level.introdoorbreachmarines[1]);
-      thread color_arrive_handler(level.introdoorbreachmarines[1], var4);
+      thread color_arrive_handler(level.introdoorbreachmarines[1], var_4);
     }
   }
 
@@ -1211,46 +1211,46 @@ function vig_sledgebreach(var0) {
     if(isDefined(level.introdoorbreachmarines[0]) && isalive(level.introdoorbreachmarines[0])) {
       level.introdoorbreachmarines[0] scripts\engine\utility::set_movement_speed(80);
       thread sledge_marine_cowabunga_advance();
-      thread color_arrive_handler(level.introdoorbreachmarines[0], var3);
+      thread color_arrive_handler(level.introdoorbreachmarines[0], var_3);
     }
   }
 
   scripts\engine\utility::flag_wait("play_IED_explosion");
   level notify("sledgeDoorPostBreach_end");
 
-  foreach(var19 in [var7, var8, var9, var10]) {
-    var19 notify("sledgeDoorPostBreach_end");
+  foreach(var_19 in [var_7, var_8, var_9, var_10]) {
+    var_19 notify("sledgeDoorPostBreach_end");
   }
 
   wait 5;
 
-  foreach(var16 in level.introdoorbreachmarines) {
-    if(isDefined(var16) && isalive(var16)) {
-      var16 delete();
+  foreach(var_16 in level.introdoorbreachmarines) {
+    if(isDefined(var_16) && isalive(var_16)) {
+      var_16 delete();
     }
   }
 }
 
-function sledge_marine_advancing(var0) {
+function sledge_marine_advancing(var_0) {
   self endon("death");
   self endon("entitydeleted");
-  var1 = 30;
-  var2 = self.origin;
+  var_1 = 30;
+  var_2 = self.origin;
 
-  while(isalive(self) && !scripts\engine\utility::flag(var0)) {
-    if(distance2d(var2, self.origin) > var1) {
-      scripts\engine\utility::flag_set(var0);
+  while(isalive(self) && !scripts\engine\utility::flag(var_0)) {
+    if(distance2d(var_2, self.origin) > var_1) {
+      scripts\engine\utility::flag_set(var_0);
     }
 
     waitframe();
   }
 }
 
-function sledge_marine_cowabunga_advance(var0) {
+function sledge_marine_cowabunga_advance(var_0) {
   if(isDefined(self) && isalive(self)) {
-    if(!isDefined(var0)) {
+    if(!isDefined(var_0)) {
       self stopanimScripted();
-    } else if(isDefined(var0) && var0 == 0) {
+    } else if(isDefined(var_0) && var_0 == 0) {
       wait 1.75;
       self stopanimScripted();
     }
@@ -1283,7 +1283,7 @@ function sledge_marine_cowabunga_advance(var0) {
   }
 }
 
-function color_arrive_handler(var0, var1) {
+function color_arrive_handler(var_0, var_1) {
   level endon("sledgeDoorPostBreach_end");
   self endon("death");
   self endon("entitydeleted");
@@ -1291,31 +1291,31 @@ function color_arrive_handler(var0, var1) {
   if(isDefined(self.animname)) {
     if(self.animname == "introDoorBreachMarine_01") {
       scripts\common\ai::set_gunpose("ads", 1);
-      var2 = scripts\engine\utility::getStruct("mar_sledge_l_turnA_struct", "targetname");
-      var2 scripts\sp\anim::anim_reach_solo(self, "sledgeDoorBreachA");
-      var2 scripts\common\anim::anim_single_solo_run(self, "sledgeDoorBreachA");
+      var_2 = scripts\engine\utility::getStruct("mar_sledge_l_turnA_struct", "targetname");
+      var_2 scripts\sp\anim::anim_reach_solo(self, "sledgeDoorBreachA");
+      var_2 scripts\common\anim::anim_single_solo_run(self, "sledgeDoorBreachA");
     } else if(self.animname == "introDoorBreachMarine_04") {
-      var2 = scripts\engine\utility::getStruct("mar_sledge_r_turnB_struct", "targetname");
-      var2 scripts\sp\anim::anim_reach_solo(self, "sledgeDoorBreachB");
-      var2 scripts\common\anim::anim_single_solo_run(self, "sledgeDoorBreachB");
+      var_2 = scripts\engine\utility::getStruct("mar_sledge_r_turnB_struct", "targetname");
+      var_2 scripts\sp\anim::anim_reach_solo(self, "sledgeDoorBreachB");
+      var_2 scripts\common\anim::anim_single_solo_run(self, "sledgeDoorBreachB");
     }
   }
 
-  scripts\engine\sp\utility::set_goal_node(var0);
+  scripts\engine\sp\utility::set_goal_node(var_0);
   scripts\engine\sp\utility::set_goal_radius(16);
-  scripts\sp\maps\marines\marines_utility::color_node_arrive(var0);
+  scripts\sp\maps\marines\marines_utility::color_node_arrive(var_0);
 
   if(isDefined(self.animname) && self.animname == "introDoorBreachMarine_01") {
-    var3 = getEnt("sledge_player_clip", "targetname");
-    var3 delete();
+    var_3 = getEnt("sledge_player_clip", "targetname");
+    var_3 delete();
     scripts\engine\utility::flag_set("sledge_complete");
     scripts\common\anim::anim_single_solo(self, "sledgeDoorBreachC");
     thread scripts\common\anim::anim_loop_solo(self, "sledgeDoorPostBreachAlt", "sledgeDoorPostBreach_end");
   } else {
-    var1 thread scripts\common\anim::anim_loop_solo(self, "sledgeDoorPostBreach", "sledgeDoorPostBreach_end");
+    var_1 thread scripts\common\anim::anim_loop_solo(self, "sledgeDoorPostBreach", "sledgeDoorPostBreach_end");
   }
 
-  if(var1.targetname == "sledge03_post_struct") {
+  if(var_1.targetname == "sledge03_post_struct") {
     wait 0.5;
     scripts\common\ai::gun_remove();
     return;
@@ -1323,65 +1323,65 @@ function color_arrive_handler(var0, var1) {
 }
 
 function vig_injuredmarine() {
-  var0 = scripts\engine\utility::getStruct("injuredMarineDragStruct", "targetname");
-  var1 = scripts\engine\utility::getStruct("injuredMarineDragStruct2", "targetname");
+  var_0 = scripts\engine\utility::getStruct("injuredMarineDragStruct", "targetname");
+  var_1 = scripts\engine\utility::getStruct("injuredMarineDragStruct2", "targetname");
   level.draggingmarine = scripts\engine\sp\utility::spawn_targetname("introInjuredDragger", 1);
   level.draggedmarine = scripts\engine\sp\utility::spawn_targetname("introInjuredDragged", 1);
   level.draggingmarine thread scripts\sp\maps\marines\marines_utility::marine_callsign_picker();
   level.draggedmarine thread scripts\sp\maps\marines\marines_utility::marine_callsign_picker();
   level.draggingmarine.animname = "draggingMarine";
   level.draggedmarine.animname = "draggedMarine";
-  var2 = [level.draggingmarine, level.draggedmarine];
+  var_2 = [level.draggingmarine, level.draggedmarine];
   scripts\engine\utility::flag_wait("dragMarine");
   scripts\engine\utility::exploder("flash_bang_body_drag");
 
-  for(var3 = 0; var3 < var2.size; var3++) {
-    if(var3 == 0) {
-      thread dragtoidle(var2[var3]);
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
+    if(var_3 == 0) {
+      thread dragtoidle(var_2[var_3]);
       continue;
     }
 
-    thread dragtoidle(var2[var3]);
+    thread dragtoidle(var_2[var_3]);
   }
 
   scripts\engine\utility::flag_wait("right_street_save");
 
-  foreach(var5 in var2) {
-    if(isDefined(var5)) {
-      var5 delete();
+  foreach(var_5 in var_2) {
+    if(isDefined(var_5)) {
+      var_5 delete();
     }
   }
 }
 
-function dragtoidle(var0) {
-  var1 = 0.412;
-  var0 thread scripts\common\anim::anim_single_solo(self, "injuredMarineDrag");
+function dragtoidle(var_0) {
+  var_1 = 0.412;
+  var_0 thread scripts\common\anim::anim_single_solo(self, "injuredMarineDrag");
   waitframe();
-  self setanimtime(scripts\engine\utility::getanim_from_animname("injuredMarineDrag", self.animname), var1);
-  wait getanimlength(scripts\engine\utility::getanim_from_animname("injuredMarineDrag", self.animname)) * (1 - var1);
-  var0 thread scripts\common\anim::anim_loop_solo(self, "injuredMarineDragIdle");
+  self setanimtime(scripts\engine\utility::getanim_from_animname("injuredMarineDrag", self.animname), var_1);
+  wait getanimlength(scripts\engine\utility::getanim_from_animname("injuredMarineDrag", self.animname)) * (1 - var_1);
+  var_0 thread scripts\common\anim::anim_loop_solo(self, "injuredMarineDragIdle");
 }
 
-function intro_sledge_put_away(var0) {
-  var0 detach("misc_wm_sledgehammer_scaled", "tag_accessory_right");
-  var0 attach("misc_wm_sledgehammer_scaled", "tag_stowed_back");
+function intro_sledge_put_away(var_0) {
+  var_0 detach("misc_wm_sledgehammer_scaled", "tag_accessory_right");
+  var_0 attach("misc_wm_sledgehammer_scaled", "tag_stowed_back");
 }
 
 function intro_convoy_vfx() {
   level endon("intro_skipped");
   scripts\engine\utility::flag_wait("play_intro_convoy_driveby");
-  var0 = scripts\common\vehicle::spawn_vehicle_from_targetname_and_drive("intro_vehicle_1");
-  var1 = scripts\common\vehicle::spawn_vehicle_from_targetname_and_drive("intro_vehicle_2");
-  var2 = scripts\common\vehicle::spawn_vehicle_from_targetname_and_drive("intro_vehicle_3");
-  var3 = scripts\common\vehicle::spawn_vehicle_from_targetname_and_drive("intro_vehicle_4");
-  var4 = [var0, var1, var2, var3];
-  var5 = scripts\engine\utility::getfx("vfx_vehicle_treadfx_dust");
+  var_0 = scripts\common\vehicle::spawn_vehicle_from_targetname_and_drive("intro_vehicle_1");
+  var_1 = scripts\common\vehicle::spawn_vehicle_from_targetname_and_drive("intro_vehicle_2");
+  var_2 = scripts\common\vehicle::spawn_vehicle_from_targetname_and_drive("intro_vehicle_3");
+  var_3 = scripts\common\vehicle::spawn_vehicle_from_targetname_and_drive("intro_vehicle_4");
+  var_4 = [var_0, var_1, var_2, var_3];
+  var_5 = scripts\engine\utility::getfx("vfx_vehicle_treadfx_dust");
 
-  foreach(var7 in var4) {
-    playFXOnTag(var5, var7, "tag_wheel_back_left");
-    playFXOnTag(var5, var7, "tag_wheel_back_right");
-    playFXOnTag(var5, var7, "tag_wheel_front_left");
-    playFXOnTag(var5, var7, "tag_wheel_front_right");
+  foreach(var_7 in var_4) {
+    playFXOnTag(var_5, var_7, "tag_wheel_back_left");
+    playFXOnTag(var_5, var_7, "tag_wheel_back_right");
+    playFXOnTag(var_5, var_7, "tag_wheel_front_left");
+    playFXOnTag(var_5, var_7, "tag_wheel_front_right");
   }
 }
 
@@ -1396,19 +1396,19 @@ function clear_target_entity() {
 }
 
 function yellow_guy_look_up() {
-  var0 = getnode("yellow_lookup_node", "targetname");
-  var1 = getEnt("yellow_initial_lookup_origin", "targetname");
-  var2 = scripts\engine\utility::getStruct("yellow_scan_struct", "targetname");
-  var3 = 0;
-  var4 = getEnt("intro_marine_poi_trigger_6", "targetname");
-  var5 = 0;
+  var_0 = getnode("yellow_lookup_node", "targetname");
+  var_1 = getEnt("yellow_initial_lookup_origin", "targetname");
+  var_2 = scripts\engine\utility::getStruct("yellow_scan_struct", "targetname");
+  var_3 = 0;
+  var_4 = getEnt("intro_marine_poi_trigger_6", "targetname");
+  var_5 = 0;
 
-  while(var3 == 0) {
+  while(var_3 == 0) {
     if(isDefined(self) && isalive(self)) {
-      if(scripts\engine\utility::is_equal(var0, self.node)) {
+      if(scripts\engine\utility::is_equal(var_0, self.node)) {
         self waittill("goal");
         thread scripts\common\ai::poi_enable(0);
-        var3 = 1;
+        var_3 = 1;
       }
     }
 
@@ -1417,16 +1417,16 @@ function yellow_guy_look_up() {
 
   if(isDefined(self) && isalive(self)) {
     scripts\engine\sp\utility::enable_dontevershoot();
-    self setentitytarget(var1);
+    self setentitytarget(var_1);
   }
 
-  while(var5 == 0) {
+  while(var_5 == 0) {
     if(isDefined(self) && isalive(self)) {
-      if(ispointinvolume(self.origin, var4)) {
+      if(ispointinvolume(self.origin, var_4)) {
         if(isDefined(self)) {
           scripts\common\ai::poi_enable(0);
           self clearentitytarget();
-          var5 = 1;
+          var_5 = 1;
         }
       }
     }
@@ -1436,29 +1436,29 @@ function yellow_guy_look_up() {
 }
 
 function red_marine_lookat_target() {
-  var0 = getnode("red_lookup_node", "targetname");
-  var1 = 0;
-  var2 = getEnt("intro_marine_poi_trigger_6", "targetname");
-  var3 = 0;
+  var_0 = getnode("red_lookup_node", "targetname");
+  var_1 = 0;
+  var_2 = getEnt("intro_marine_poi_trigger_6", "targetname");
+  var_3 = 0;
 
-  while(var1 == 0) {
+  while(var_1 == 0) {
     if(isDefined(self) && isalive(self)) {
-      if(scripts\engine\utility::is_equal(var0, self.node)) {
+      if(scripts\engine\utility::is_equal(var_0, self.node)) {
         self waittill("goal");
         scripts\asm\shared\utility::toggle_poiauto(1, 10, 20, 10, 20);
-        var1 = 1;
+        var_1 = 1;
       }
     }
 
     waitframe();
   }
 
-  while(var3 == 0) {
+  while(var_3 == 0) {
     if(isDefined(self) && isalive(self)) {
-      if(ispointinvolume(self.origin, var2)) {
+      if(ispointinvolume(self.origin, var_2)) {
         scripts\common\ai::poi_enable(0);
         self clearentitytarget();
-        var3 = 1;
+        var_3 = 1;
       }
     }
 
@@ -1479,28 +1479,28 @@ function assault_vehicle_spawner() {
   level.assault_vehicle.dontdisconnectpaths = 1;
   level.assault_vehicle.script_badplace = 1;
   level.assault_vehicle scripts\common\vehicle_code::vehicle_remove_badplace();
-  var0 = getEnt("bradley_ref_ent", "targetname");
-  var0 linkTo(level.assault_vehicle);
+  var_0 = getEnt("bradley_ref_ent", "targetname");
+  var_0 linkTo(level.assault_vehicle);
   thread apc_player_detector_monitor();
   thread apc_player_detector_volume_handler();
   level.assault_vehicle thread scripts\sp\maps\marines\marines_background::ground_vehicle_sound_handler();
-  var1 = scripts\engine\utility::getfx("vfx_vehicle_treadfx_dust");
+  var_1 = scripts\engine\utility::getfx("vfx_vehicle_treadfx_dust");
   level.assault_vehicle.godmode = 1;
   level.assault_vehicle vehicle_setspeed(5.5, 2, 1);
-  playFXOnTag(var1, level.assault_vehicle, "tag_wheel_back_left");
-  playFXOnTag(var1, level.assault_vehicle, "tag_wheel_back_right");
-  playFXOnTag(var1, level.assault_vehicle, "tag_wheel_front_left");
-  playFXOnTag(var1, level.assault_vehicle, "tag_wheel_front_right");
+  playFXOnTag(var_1, level.assault_vehicle, "tag_wheel_back_left");
+  playFXOnTag(var_1, level.assault_vehicle, "tag_wheel_back_right");
+  playFXOnTag(var_1, level.assault_vehicle, "tag_wheel_front_left");
+  playFXOnTag(var_1, level.assault_vehicle, "tag_wheel_front_right");
   scripts\engine\utility::flag_wait("assault_vehicle_halt");
-  killfxontag(var1, level.assault_vehicle, "tag_wheel_back_left");
-  killfxontag(var1, level.assault_vehicle, "tag_wheel_back_right");
-  killfxontag(var1, level.assault_vehicle, "tag_wheel_front_left");
-  killfxontag(var1, level.assault_vehicle, "tag_wheel_front_right");
+  killfxontag(var_1, level.assault_vehicle, "tag_wheel_back_left");
+  killfxontag(var_1, level.assault_vehicle, "tag_wheel_back_right");
+  killfxontag(var_1, level.assault_vehicle, "tag_wheel_front_left");
+  killfxontag(var_1, level.assault_vehicle, "tag_wheel_front_right");
   scripts\engine\utility::flag_wait("convoy_commence");
-  playFXOnTag(var1, level.assault_vehicle, "tag_wheel_back_left");
-  playFXOnTag(var1, level.assault_vehicle, "tag_wheel_back_right");
-  playFXOnTag(var1, level.assault_vehicle, "tag_wheel_front_left");
-  playFXOnTag(var1, level.assault_vehicle, "tag_wheel_front_right");
+  playFXOnTag(var_1, level.assault_vehicle, "tag_wheel_back_left");
+  playFXOnTag(var_1, level.assault_vehicle, "tag_wheel_back_right");
+  playFXOnTag(var_1, level.assault_vehicle, "tag_wheel_front_left");
+  playFXOnTag(var_1, level.assault_vehicle, "tag_wheel_front_right");
 }
 
 function bradley_ref_sphere() {
@@ -1509,31 +1509,31 @@ function bradley_ref_sphere() {
   }
 }
 
-function convoy_player_awareness(var0) {
+function convoy_player_awareness(var_0) {
   level endon("play_IED_explosion");
-  var1 = spawn("script_origin", level.player.origin);
-  var2 = spawn("script_origin", self.origin + anglesToForward(self.angles) * 70 + anglestoright(self.angles) * 70);
-  var3 = spawn("script_origin", self.origin + anglesToForward(self.angles) * 70 + anglestoright(self.angles) * 70);
-  var4 = spawn("script_origin", self.origin + anglesToForward(self.angles) * 140 - anglestoright(self.angles) * 70);
+  var_1 = spawn("script_origin", level.player.origin);
+  var_2 = spawn("script_origin", self.origin + anglesToForward(self.angles) * 70 + anglestoright(self.angles) * 70);
+  var_3 = spawn("script_origin", self.origin + anglesToForward(self.angles) * 70 + anglestoright(self.angles) * 70);
+  var_4 = spawn("script_origin", self.origin + anglesToForward(self.angles) * 140 - anglestoright(self.angles) * 70);
   waitframe();
-  var2.angles = self.angles;
-  var2 linkTo(self);
-  var4 linkTo(var3);
-  var3.origin = var2.origin;
+  var_2.angles = self.angles;
+  var_2 linkTo(self);
+  var_4 linkTo(var_3);
+  var_3.origin = var_2.origin;
   self.stopped_by_player = 0;
-  jumpiffalse(isDefined(var0)) LOC_000000ce;
+  jumpiffalse(isDefined(var_0)) LOC_000000ce;
   self.stopped_by_leader = 0;
 
   for(;;) {
-    var1.origin = level.player.origin;
-    var3.origin = var2.origin;
-    var1 linkTo(var3);
-    var3.angles = (0, 0, 0);
-    var5 = var1.origin[0];
-    var6 = var1.origin[1];
+    var_1.origin = level.player.origin;
+    var_3.origin = var_2.origin;
+    var_1 linkTo(var_3);
+    var_3.angles = (0, 0, 0);
+    var_5 = var_1.origin[0];
+    var_6 = var_1.origin[1];
 
-    if(isDefined(var0)) {
-      if(var0.stopped_by_player == 1) {
+    if(isDefined(var_0)) {
+      if(var_0.stopped_by_player == 1) {
         self vehicle_setspeedimmediate(0);
         self.stopped_by_leader = 1;
       } else if(self.stopped_by_leader == 1) {
@@ -1542,7 +1542,7 @@ function convoy_player_awareness(var0) {
       }
     }
 
-    if(var3.origin[0] < var5 && var5 < var4.origin[0] && var3.origin[1] < var6 && var6 < var4.origin[1]) {
+    if(var_3.origin[0] < var_5 && var_5 < var_4.origin[0] && var_3.origin[1] < var_6 && var_6 < var_4.origin[1]) {
       self vehicle_setspeedimmediate(0);
       self.stopped_by_player = 1;
     } else if(self.stopped_by_player == 1) {
@@ -1550,7 +1550,7 @@ function convoy_player_awareness(var0) {
       self.stopped_by_player = 0;
     }
 
-    var1 unlink();
+    var_1 unlink();
     waitframe();
   }
 }
@@ -1560,36 +1560,36 @@ function ied_vehicle_spawner() {
   level.ied_vehicle.targetname = "ied_vehicle";
   level.ied_vehicle.script_badplace = 1;
   level.ied_vehicle scripts\common\vehicle_code::vehicle_remove_badplace();
-  var0 = getEnt("ied_vehicle_clip", "targetname");
-  var0 linkTo(level.ied_vehicle);
+  var_0 = getEnt("ied_vehicle_clip", "targetname");
+  var_0 linkTo(level.ied_vehicle);
   level.ied_vehicle thread scripts\sp\maps\marines\marines_background::ground_vehicle_sound_handler();
-  var1 = scripts\engine\utility::getfx("vfx_vehicle_treadfx_dust");
-  playFXOnTag(var1, level.ied_vehicle, "tag_wheel_back_left");
-  playFXOnTag(var1, level.ied_vehicle, "tag_wheel_back_right");
-  playFXOnTag(var1, level.ied_vehicle, "tag_wheel_front_left");
-  playFXOnTag(var1, level.ied_vehicle, "tag_wheel_front_right");
+  var_1 = scripts\engine\utility::getfx("vfx_vehicle_treadfx_dust");
+  playFXOnTag(var_1, level.ied_vehicle, "tag_wheel_back_left");
+  playFXOnTag(var_1, level.ied_vehicle, "tag_wheel_back_right");
+  playFXOnTag(var_1, level.ied_vehicle, "tag_wheel_front_left");
+  playFXOnTag(var_1, level.ied_vehicle, "tag_wheel_front_right");
   waitframe();
   scripts\engine\utility::flag_wait("ied_vehicle_halt");
-  killfxontag(var1, level.ied_vehicle, "tag_wheel_back_left");
-  killfxontag(var1, level.ied_vehicle, "tag_wheel_back_right");
-  killfxontag(var1, level.ied_vehicle, "tag_wheel_front_left");
-  killfxontag(var1, level.ied_vehicle, "tag_wheel_front_right");
+  killfxontag(var_1, level.ied_vehicle, "tag_wheel_back_left");
+  killfxontag(var_1, level.ied_vehicle, "tag_wheel_back_right");
+  killfxontag(var_1, level.ied_vehicle, "tag_wheel_front_left");
+  killfxontag(var_1, level.ied_vehicle, "tag_wheel_front_right");
   waitframe();
   scripts\engine\utility::flag_wait("ied_vehicle_commence");
-  playFXOnTag(var1, level.ied_vehicle, "tag_wheel_back_left");
-  playFXOnTag(var1, level.ied_vehicle, "tag_wheel_back_right");
-  playFXOnTag(var1, level.ied_vehicle, "tag_wheel_front_left");
-  playFXOnTag(var1, level.ied_vehicle, "tag_wheel_front_right");
+  playFXOnTag(var_1, level.ied_vehicle, "tag_wheel_back_left");
+  playFXOnTag(var_1, level.ied_vehicle, "tag_wheel_back_right");
+  playFXOnTag(var_1, level.ied_vehicle, "tag_wheel_front_left");
+  playFXOnTag(var_1, level.ied_vehicle, "tag_wheel_front_right");
   waitframe();
   scripts\engine\utility::flag_wait("postfx_ied_explosion");
-  killfxontag(var1, level.ied_vehicle, "tag_wheel_back_left");
-  killfxontag(var1, level.ied_vehicle, "tag_wheel_back_right");
-  killfxontag(var1, level.ied_vehicle, "tag_wheel_front_left");
-  killfxontag(var1, level.ied_vehicle, "tag_wheel_front_right");
+  killfxontag(var_1, level.ied_vehicle, "tag_wheel_back_left");
+  killfxontag(var_1, level.ied_vehicle, "tag_wheel_back_right");
+  killfxontag(var_1, level.ied_vehicle, "tag_wheel_front_left");
+  killfxontag(var_1, level.ied_vehicle, "tag_wheel_front_right");
   wait 1;
   level.ied_vehicle vehicle_setspeed(2.5, 5, 500);
   waitframe();
-  var0 disconnectPaths();
+  var_0 disconnectPaths();
 }
 
 function player_vehicle_spawner() {
@@ -1604,35 +1604,35 @@ function player_vehicle_spawner() {
     waitframe();
   }
 
-  var0 = getEnt("player_vehicle_clip", "targetname");
-  var0 linkTo(level.player_vehicle);
-  var1 = scripts\engine\utility::getfx("vfx_vehicle_treadfx_dust");
-  playFXOnTag(var1, level.player_vehicle, "tag_wheel_back_left");
-  playFXOnTag(var1, level.player_vehicle, "tag_wheel_back_right");
-  playFXOnTag(var1, level.player_vehicle, "tag_wheel_front_left");
-  playFXOnTag(var1, level.player_vehicle, "tag_wheel_front_right");
+  var_0 = getEnt("player_vehicle_clip", "targetname");
+  var_0 linkTo(level.player_vehicle);
+  var_1 = scripts\engine\utility::getfx("vfx_vehicle_treadfx_dust");
+  playFXOnTag(var_1, level.player_vehicle, "tag_wheel_back_left");
+  playFXOnTag(var_1, level.player_vehicle, "tag_wheel_back_right");
+  playFXOnTag(var_1, level.player_vehicle, "tag_wheel_front_left");
+  playFXOnTag(var_1, level.player_vehicle, "tag_wheel_front_right");
   waitframe();
   scripts\engine\utility::flag_wait("player_vehicle_halt");
-  killfxontag(var1, level.player_vehicle, "tag_wheel_back_left");
-  killfxontag(var1, level.player_vehicle, "tag_wheel_back_right");
-  killfxontag(var1, level.player_vehicle, "tag_wheel_front_left");
-  killfxontag(var1, level.player_vehicle, "tag_wheel_front_right");
+  killfxontag(var_1, level.player_vehicle, "tag_wheel_back_left");
+  killfxontag(var_1, level.player_vehicle, "tag_wheel_back_right");
+  killfxontag(var_1, level.player_vehicle, "tag_wheel_front_left");
+  killfxontag(var_1, level.player_vehicle, "tag_wheel_front_right");
   waitframe();
   scripts\engine\utility::flag_wait("players_vehicle_commence");
-  playFXOnTag(var1, level.player_vehicle, "tag_wheel_back_left");
-  playFXOnTag(var1, level.player_vehicle, "tag_wheel_back_right");
-  playFXOnTag(var1, level.player_vehicle, "tag_wheel_front_left");
-  playFXOnTag(var1, level.player_vehicle, "tag_wheel_front_right");
+  playFXOnTag(var_1, level.player_vehicle, "tag_wheel_back_left");
+  playFXOnTag(var_1, level.player_vehicle, "tag_wheel_back_right");
+  playFXOnTag(var_1, level.player_vehicle, "tag_wheel_front_left");
+  playFXOnTag(var_1, level.player_vehicle, "tag_wheel_front_right");
   waitframe();
   scripts\engine\utility::flag_wait("postfx_ied_explosion");
-  killfxontag(var1, level.player_vehicle, "tag_wheel_back_left");
-  killfxontag(var1, level.player_vehicle, "tag_wheel_back_right");
-  killfxontag(var1, level.player_vehicle, "tag_wheel_front_left");
-  killfxontag(var1, level.player_vehicle, "tag_wheel_front_right");
+  killfxontag(var_1, level.player_vehicle, "tag_wheel_back_left");
+  killfxontag(var_1, level.player_vehicle, "tag_wheel_back_right");
+  killfxontag(var_1, level.player_vehicle, "tag_wheel_front_left");
+  killfxontag(var_1, level.player_vehicle, "tag_wheel_front_right");
   wait 2;
   level.player_vehicle vehicle_setspeed(2.5, 5, 500);
   waitframe();
-  var0 disconnectPaths();
+  var_0 disconnectPaths();
 }
 
 function show_tripwire_hint() {
@@ -1647,50 +1647,50 @@ function show_tripwire_hint() {
 }
 
 function bridge_overseer_handler() {
-  var0 = getspawner("bridge_overseer", "targetname");
-  var1 = var0 scripts\engine\sp\utility::spawn_ai();
-  var1 thread scripts\sp\maps\marines\marines_utility::marine_callsign_picker();
-  var2 = scripts\engine\utility::getStruct("bridge_POI", "targetname");
+  var_0 = getspawner("bridge_overseer", "targetname");
+  var_1 = var_0 scripts\engine\sp\utility::spawn_ai();
+  var_1 thread scripts\sp\maps\marines\marines_utility::marine_callsign_picker();
+  var_2 = scripts\engine\utility::getStruct("bridge_POI", "targetname");
   waitframe();
-  var1 thread scripts\common\ai::poi_enable(1, var2);
+  var_1 thread scripts\common\ai::poi_enable(1, var_2);
   scripts\engine\utility::flag_wait("play_IED_explosion");
-  var1 delete();
+  var_1 delete();
 }
 
 function intro_phone_peek() {
-  var0 = scripts\engine\utility::getStruct("intro_cellphone_struct", "targetname");
-  var1 = 0;
-  var2 = getnode("phone_delete_point", "targetname");
-  var3 = scripts\engine\sp\utility::spawn_targetname("intro_phoneguy", 1);
-  var3 scripts\engine\sp\utility::set_allowdeath(1);
-  var3.animname = "phone_civ" + randomint(2);
-  thread detect_bulletwhizby(var3);
-  var3 endon("whizby");
+  var_0 = scripts\engine\utility::getStruct("intro_cellphone_struct", "targetname");
+  var_1 = 0;
+  var_2 = getnode("phone_delete_point", "targetname");
+  var_3 = scripts\engine\sp\utility::spawn_targetname("intro_phoneguy", 1);
+  var_3 scripts\engine\sp\utility::set_allowdeath(1);
+  var_3.animname = "phone_civ" + randomint(2);
+  thread detect_bulletwhizby(var_3);
+  var_3 endon("whizby");
 
-  if(isDefined(var3) && isalive(var3)) {
-    var0 scripts\common\anim::anim_single_solo(var3, "phoneEnter");
+  if(isDefined(var_3) && isalive(var_3)) {
+    var_0 scripts\common\anim::anim_single_solo(var_3, "phoneEnter");
   }
 
-  if(isDefined(var3) && isalive(var3)) {
-    var0 thread scripts\common\anim::anim_loop_solo(var3, "phoneIdle", "targetedRoof");
+  if(isDefined(var_3) && isalive(var_3)) {
+    var_0 thread scripts\common\anim::anim_loop_solo(var_3, "phoneIdle", "targetedRoof");
   }
 
   scripts\engine\utility::flag_wait("door_kick_vignette_flag");
   wait randomint(3) + 1;
-  var0 notify("targetedRoof");
+  var_0 notify("targetedRoof");
 
-  if(isDefined(var3) && isalive(var3)) {
-    var0 scripts\common\anim::anim_single_solo(var3, "phoneExit");
+  if(isDefined(var_3) && isalive(var_3)) {
+    var_0 scripts\common\anim::anim_single_solo(var_3, "phoneExit");
   }
 
-  if(isDefined(var3) && isalive(var3)) {
-    var3 setgoalnode(var2);
+  if(isDefined(var_3) && isalive(var_3)) {
+    var_3 setgoalnode(var_2);
   }
 
   scripts\engine\utility::flag_wait_any("a10_flyby_trigger", "convoy_speed_up");
 
-  if(isDefined(var3) && isalive(var3)) {
-    var3 delete();
+  if(isDefined(var_3) && isalive(var_3)) {
+    var_3 delete();
     return;
   }
 }
@@ -1723,8 +1723,8 @@ function intro_camera_handler() {
   thread bars_out();
   thread intro_skip_monitor();
   scripts\sp\utility::nvidiaansel_scriptdisable(1);
-  var0 = scripts\engine\utility::getStruct("introStruct", "targetname");
-  var0 scripts\common\anim::anim_single_solo(level.player.rig, "introSequence");
+  var_0 = scripts\engine\utility::getStruct("introStruct", "targetname");
+  var_0 scripts\common\anim::anim_single_solo(level.player.rig, "introSequence");
   scripts\sp\utility::nvidiaansel_scriptdisable(0);
   scripts\engine\utility::flag_set("intro_cinematic_complete");
   scripts\sp\utility::userskip_stop();
@@ -1737,7 +1737,7 @@ function bars_out() {
   getrandomnodedestination(1.8, 0);
 }
 
-function fovshift(var0) {
+function fovshift(var_0) {
   level.player lerpfov(65, 35);
 }
 
@@ -1749,16 +1749,16 @@ function intro_fake_player_handler() {
   level.fake_player.script_friendname = "Alex";
   level.fake_player scripts\anim\shared::forceuseweapon(level.primaryweapon, "primary");
   level.fake_player visiblenotsolid();
-  var0 = scripts\engine\utility::getStruct("introStruct_fakePlayer", "targetname");
-  var0 scripts\common\anim::anim_single_solo(level.fake_player, "MAR_intro_010_dropoff_alex");
+  var_0 = scripts\engine\utility::getStruct("introStruct_fakePlayer", "targetname");
+  var_0 scripts\common\anim::anim_single_solo(level.fake_player, "MAR_intro_010_dropoff_alex");
   level.fake_player delete();
 }
 
 function intro_griggs_handler() {
-  var0 = scripts\engine\utility::getStruct("introStruct_griggs", "targetname");
+  var_0 = scripts\engine\utility::getStruct("introStruct_griggs", "targetname");
   level.griggs.animname = "griggs";
   level.griggs scripts\engine\sp\utility::name_hide();
-  var0 thread scripts\common\anim::anim_single_solo_run(level.griggs, "introSequence");
+  var_0 thread scripts\common\anim::anim_single_solo_run(level.griggs, "introSequence");
   scripts\engine\utility::flag_wait("intro_cinematic_complete");
   level.griggs scripts\engine\sp\utility::name_show();
 }
@@ -1768,12 +1768,12 @@ function intro_farah_handler() {
   level.farah.script_parameters = "Farah";
   level.farah.name = "Farah";
   level.farah.script_friendname = "Farah";
-  var0 = scripts\engine\utility::getStruct("introStruct_farah", "targetname");
+  var_0 = scripts\engine\utility::getStruct("introStruct_farah", "targetname");
   level.farah.animname = "farah";
   level.farah.friend_kill_points = -100000;
   level.farah scripts\engine\sp\utility::name_hide();
   thread intro_ents_add(level.farah);
-  var0 scripts\common\anim::anim_single_solo(level.farah, "introSequence");
+  var_0 scripts\common\anim::anim_single_solo(level.farah, "introSequence");
   scripts\engine\utility::flag_wait("intro_cinematic_complete");
   level.farah scripts\engine\sp\utility::name_show();
 
@@ -1788,12 +1788,12 @@ function intro_hadir_handler() {
   level.hadir.script_parameters = "Hadir";
   level.hadir.name = "Hadir";
   level.hadir.script_friendname = "Hadir";
-  var0 = scripts\engine\utility::getStruct("introStruct_hadir", "targetname");
+  var_0 = scripts\engine\utility::getStruct("introStruct_hadir", "targetname");
   level.hadir.animname = "hadir";
   level.hadir.friend_kill_points = -100000;
   level.hadir scripts\engine\sp\utility::name_hide();
   thread intro_ents_add(level.hadir);
-  var0 scripts\common\anim::anim_single_solo(level.hadir, "introSequence");
+  var_0 scripts\common\anim::anim_single_solo(level.hadir, "introSequence");
   scripts\engine\utility::flag_wait("intro_cinematic_complete");
   level.hadir scripts\engine\sp\utility::name_show();
 
@@ -1804,135 +1804,135 @@ function intro_hadir_handler() {
 }
 
 function intro_driver_handler() {
-  var0 = scripts\engine\sp\utility::spawn_targetname("intro_driver", 1);
-  var1 = scripts\engine\utility::getStruct("introStruct_driver", "targetname");
-  var0.animname = "driver";
-  var0.friend_kill_points = -100000;
-  var0 scripts\engine\sp\utility::name_hide();
-  thread intro_ents_add(var0);
-  var1 scripts\common\anim::anim_single_solo(var0, "introSequence");
+  var_0 = scripts\engine\sp\utility::spawn_targetname("intro_driver", 1);
+  var_1 = scripts\engine\utility::getStruct("introStruct_driver", "targetname");
+  var_0.animname = "driver";
+  var_0.friend_kill_points = -100000;
+  var_0 scripts\engine\sp\utility::name_hide();
+  thread intro_ents_add(var_0);
+  var_1 scripts\common\anim::anim_single_solo(var_0, "introSequence");
   scripts\engine\utility::flag_wait("intro_cinematic_complete");
-  var0 scripts\engine\sp\utility::name_show();
+  var_0 scripts\engine\sp\utility::name_show();
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
     return;
   }
 }
 
 function intro_truck_handler() {
-  var0 = getEnt("introTruck", "targetname");
-  var1 = scripts\engine\utility::getStruct("introStruct_truck", "targetname");
-  var0 scripts\engine\sp\utility::assign_animtree("introTruck");
-  var0.animname = "introTruck";
-  thread intro_ents_add(var0);
-  thread intro_truck_treadfx_handler(var0);
-  var1 scripts\common\anim::anim_single_solo(var0, "introSequence");
-  var0 notify("stop_treadfx");
+  var_0 = getEnt("introTruck", "targetname");
+  var_1 = scripts\engine\utility::getStruct("introStruct_truck", "targetname");
+  var_0 scripts\engine\sp\utility::assign_animtree("introTruck");
+  var_0.animname = "introTruck";
+  thread intro_ents_add(var_0);
+  thread intro_truck_treadfx_handler(var_0);
+  var_1 scripts\common\anim::anim_single_solo(var_0, "introSequence");
+  var_0 notify("stop_treadfx");
   waitframe();
-  var0 delete();
+  var_0 delete();
 }
 
-function intro_truck_treadfx_handler(var0) {
-  level scripts\sp\maps\marines\marines_utility::waittill_or_timeout("intro_skipped", var0);
-  var1 = scripts\engine\utility::getfx("vfx_vehicle_treadfx_dust");
-  playFXOnTag(var1, self, "tag_wheel_back_left");
-  playFXOnTag(var1, self, "tag_wheel_back_right");
-  playFXOnTag(var1, self, "tag_wheel_front_left");
-  playFXOnTag(var1, self, "tag_wheel_front_right");
+function intro_truck_treadfx_handler(var_0) {
+  level scripts\sp\maps\marines\marines_utility::waittill_or_timeout("intro_skipped", var_0);
+  var_1 = scripts\engine\utility::getfx("vfx_vehicle_treadfx_dust");
+  playFXOnTag(var_1, self, "tag_wheel_back_left");
+  playFXOnTag(var_1, self, "tag_wheel_back_right");
+  playFXOnTag(var_1, self, "tag_wheel_front_left");
+  playFXOnTag(var_1, self, "tag_wheel_front_right");
   self waittill("stop_treadfx");
-  stopFXOnTag(var1, self, "tag_wheel_back_left");
-  stopFXOnTag(var1, self, "tag_wheel_back_right");
-  stopFXOnTag(var1, self, "tag_wheel_front_left");
-  stopFXOnTag(var1, self, "tag_wheel_front_right");
+  stopFXOnTag(var_1, self, "tag_wheel_back_left");
+  stopFXOnTag(var_1, self, "tag_wheel_back_right");
+  stopFXOnTag(var_1, self, "tag_wheel_front_left");
+  stopFXOnTag(var_1, self, "tag_wheel_front_right");
 }
 
 function intro_marine01_handler() {
   level endon("intro_skipped");
-  var0 = undefined;
+  var_0 = undefined;
 
-  while(!isDefined(var0)) {
-    var1 = getEntArray("ally_marine_convoy_journey", "targetname");
+  while(!isDefined(var_0)) {
+    var_1 = getEntArray("ally_marine_convoy_journey", "targetname");
 
-    foreach(var3 in var1) {
-      if(isDefined(var3.animname) && var3.animname == "marine05") {
-        var0 = var3;
-        thread intro_ents_add(var0);
+    foreach(var_3 in var_1) {
+      if(isDefined(var_3.animname) && var_3.animname == "marine05") {
+        var_0 = var_3;
+        thread intro_ents_add(var_0);
       }
     }
 
     waitframe();
   }
 
-  var5 = scripts\engine\utility::getStruct("introStruct_marine01", "targetname");
-  var0.animname = "marine05";
-  var5 scripts\common\anim::anim_single_solo_run(var0, "introSequence");
+  var_5 = scripts\engine\utility::getStruct("introStruct_marine01", "targetname");
+  var_0.animname = "marine05";
+  var_5 scripts\common\anim::anim_single_solo_run(var_0, "introSequence");
 }
 
 function intro_marine02_handler() {
   level endon("intro_skipped");
-  var0 = undefined;
+  var_0 = undefined;
 
-  while(!isDefined(var0)) {
-    var1 = getEntArray("ally_marine_convoy_journey", "targetname");
+  while(!isDefined(var_0)) {
+    var_1 = getEntArray("ally_marine_convoy_journey", "targetname");
 
-    foreach(var3 in var1) {
-      if(isDefined(var3.animname) && var3.animname == "marine06") {
-        var0 = var3;
-        thread intro_ents_add(var0);
+    foreach(var_3 in var_1) {
+      if(isDefined(var_3.animname) && var_3.animname == "marine06") {
+        var_0 = var_3;
+        thread intro_ents_add(var_0);
       }
     }
 
     waitframe();
   }
 
-  var5 = scripts\engine\utility::getStruct("introStruct_marine02", "targetname");
-  var0.animname = "marine06";
-  var5 scripts\common\anim::anim_single_solo_run(var0, "introSequence");
+  var_5 = scripts\engine\utility::getStruct("introStruct_marine02", "targetname");
+  var_0.animname = "marine06";
+  var_5 scripts\common\anim::anim_single_solo_run(var_0, "introSequence");
 }
 
 function intro_gate_handler() {
   level endon("intro_skipped");
-  var0 = getEnt("introGate", "targetname");
-  var1 = scripts\engine\utility::getStruct("introStruct_gate", "targetname");
-  var0 scripts\engine\sp\utility::assign_animtree("introGate");
-  var0.animname = "introGate";
-  thread intro_ents_add(var0);
-  var1 scripts\common\anim::anim_single_solo(var0, "introSequence");
+  var_0 = getEnt("introGate", "targetname");
+  var_1 = scripts\engine\utility::getStruct("introStruct_gate", "targetname");
+  var_0 scripts\engine\sp\utility::assign_animtree("introGate");
+  var_0.animname = "introGate";
+  thread intro_ents_add(var_0);
+  var_1 scripts\common\anim::anim_single_solo(var_0, "introSequence");
 }
 
 function intro_gateguy_handler() {
-  var0 = scripts\engine\sp\utility::spawn_targetname("intro_gateGuy", 1);
-  var0.friend_kill_points = -100000;
-  var0 thread scripts\sp\maps\marines\marines_utility::marine_callsign_picker();
-  var1 = scripts\engine\utility::getStruct("introStruct_gateGuy", "targetname");
-  var0 scripts\engine\sp\utility::set_allowdeath(1);
-  var0.animname = "gateGuy";
-  thread intro_ents_add(var0);
-  var1 scripts\common\anim::anim_single_solo(var0, "introSequence");
+  var_0 = scripts\engine\sp\utility::spawn_targetname("intro_gateGuy", 1);
+  var_0.friend_kill_points = -100000;
+  var_0 thread scripts\sp\maps\marines\marines_utility::marine_callsign_picker();
+  var_1 = scripts\engine\utility::getStruct("introStruct_gateGuy", "targetname");
+  var_0 scripts\engine\sp\utility::set_allowdeath(1);
+  var_0.animname = "gateGuy";
+  thread intro_ents_add(var_0);
+  var_1 scripts\common\anim::anim_single_solo(var_0, "introSequence");
   scripts\engine\utility::flag_wait("convoy_speed_up");
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
     return;
   }
 }
 
 function intro_marine03_handler() {
-  var0 = scripts\engine\sp\utility::spawn_targetname("intro_marine_03", 1);
-  thread intro_ents_add(var0);
-  var0.friend_kill_points = -100000;
-  var1 = scripts\engine\utility::getStruct("introStruct_marine03", "targetname");
-  var0 scripts\engine\sp\utility::set_allowdeath(1);
-  var0.animname = "marine03";
-  var0 scripts\engine\sp\utility::name_hide();
-  var1 scripts\common\anim::anim_single_solo_run(var0, "introSequence");
-  var0 scripts\engine\sp\utility::name_show();
-  var0 thread scripts\sp\maps\marines\marines_utility::marine_callsign_picker();
+  var_0 = scripts\engine\sp\utility::spawn_targetname("intro_marine_03", 1);
+  thread intro_ents_add(var_0);
+  var_0.friend_kill_points = -100000;
+  var_1 = scripts\engine\utility::getStruct("introStruct_marine03", "targetname");
+  var_0 scripts\engine\sp\utility::set_allowdeath(1);
+  var_0.animname = "marine03";
+  var_0 scripts\engine\sp\utility::name_hide();
+  var_1 scripts\common\anim::anim_single_solo_run(var_0, "introSequence");
+  var_0 scripts\engine\sp\utility::name_show();
+  var_0 thread scripts\sp\maps\marines\marines_utility::marine_callsign_picker();
   scripts\engine\utility::flag_wait("convoy_speed_up");
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
     return;
   }
 }
@@ -1943,7 +1943,7 @@ function send_griggs_to_ied() {
 }
 
 function activate_sledge_lookin_dialogue() {
-  var0 = getEnt("sledge_lookat_trigger", "targetname");
+  var_0 = getEnt("sledge_lookat_trigger", "targetname");
   scripts\engine\utility::flag_wait("sledge_complete");
   wait 1;
   waittill_struct_in_fov("sledge_lookat_struct", "sledge_lookat_trigger");
@@ -1954,13 +1954,13 @@ function activate_sledge_lookin_dialogue() {
   }
 }
 
-function waittill_struct_in_fov(var0, var1) {
-  var2 = scripts\engine\utility::getStruct(var0, "targetname");
-  var3 = getEnt(var1, "targetname");
-  var4 = cos(15);
+function waittill_struct_in_fov(var_0, var_1) {
+  var_2 = scripts\engine\utility::getStruct(var_0, "targetname");
+  var_3 = getEnt(var_1, "targetname");
+  var_4 = cos(15);
 
   for(;;) {
-    if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var2.origin, var4) && level.player istouching(var3)) {
+    if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_2.origin, var_4) && level.player istouching(var_3)) {
       break;
     }
 
@@ -1970,10 +1970,10 @@ function waittill_struct_in_fov(var0, var1) {
 
 function marines_movement_to_ied() {
   scripts\engine\utility::flag_wait("convoy_speed_up");
-  var0 = getaiarray("allies");
+  var_0 = getaiarray("allies");
 
-  foreach(var2 in var0) {
-    if(isDefined(var2)) {
+  foreach(var_2 in var_0) {
+    if(isDefined(var_2)) {
       thread marine_demeanor_control();
     }
   }
@@ -1992,10 +1992,10 @@ function marine_demeanor_control() {
 }
 
 function street_patch_handler() {
-  var0 = getEntArray("undamaged_patch", "targetname");
+  var_0 = getEntArray("undamaged_patch", "targetname");
 
-  foreach(var2 in var0) {
-    var2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
   }
 }
 
@@ -2006,29 +2006,29 @@ function intro_dialogue_handler() {
 }
 
 function overhead_heli_flyby() {
-  var0 = 99999;
-  var1 = undefined;
-  var2 = scripts\engine\utility::getStruct("point_target", "targetname");
+  var_0 = 99999;
+  var_1 = undefined;
+  var_2 = scripts\engine\utility::getStruct("point_target", "targetname");
   wait 1;
 
-  foreach(var4 in level.tripwires.traps) {
-    if(isDefined(var4.origin) && distance2dsquared(var4.origin, var2.origin) < var0) {
-      var0 = distance2dsquared(var4.origin, var2.origin);
-      var1 = var4;
+  foreach(var_4 in level.tripwires.traps) {
+    if(isDefined(var_4.origin) && distance2dsquared(var_4.origin, var_2.origin) < var_0) {
+      var_0 = distance2dsquared(var_4.origin, var_2.origin);
+      var_1 = var_4;
     }
 
     waitframe();
   }
 
-  var6 = var1 scripts\engine\utility::waittill_any_return("tripwire_defused", "tripwire_detonated");
+  var_6 = var_1 scripts\engine\utility::waittill_any_return("tripwire_defused", "tripwire_detonated");
 
-  if(var6 == "tripwire_defused") {
+  if(var_6 == "tripwire_defused") {
     scripts\engine\sp\utility::activate_trigger("helis_defuse_tripwire", "targetname");
     thread scripts\sp\maps\marines\marines_vo::vo_convoy_tutorial_tripwire_disabled_dialogue();
     return;
   }
 
-  if(var6 == "tripwire_detonated") {
+  if(var_6 == "tripwire_detonated") {
     scripts\engine\sp\utility::activate_trigger("helis_detonate_tripwire", "targetname");
     return;
   }
@@ -2051,33 +2051,33 @@ function vehicle_cleanup_handler() {
 }
 
 function apc_cleanup_handler() {
-  var0 = getEnt("destroyed_apc", "targetname");
+  var_0 = getEnt("destroyed_apc", "targetname");
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
     return;
   }
 }
 
 function intro_skip_monitor() {
   level.intro_ents = [];
-  var0 = scripts\sp\utility::userskip_wait();
+  var_0 = scripts\sp\utility::userskip_wait();
 
-  if(var0) {
+  if(var_0) {
     level notify("intro_skipped");
     scripts\sp\hud_util::fade_out(0);
-    var1 = scripts\engine\utility::getStruct("introStruct", "targetname");
+    var_1 = scripts\engine\utility::getStruct("introStruct", "targetname");
     level.player.rig scripts\engine\sp\utility::anim_stopanimScripted();
-    var1 scripts\common\anim::anim_last_frame_solo(level.player.rig, "introSequence");
+    var_1 scripts\common\anim::anim_last_frame_solo(level.player.rig, "introSequence");
 
-    foreach(var3 in level.intro_ents) {
-      var4 = 39.5 / getanimlength(level.scr_anim[var3.animname]["introSequence"]);
+    foreach(var_3 in level.intro_ents) {
+      var_4 = 39.5 / getanimlength(level.scr_anim[var_3.animname]["introSequence"]);
 
-      if(var4 >= 1) {
-        var4 = 0.99;
+      if(var_4 >= 1) {
+        var_4 = 0.99;
       }
 
-      var3 setanimtime(var3 scripts\engine\utility::getanim("introSequence"), var4);
+      var_3 setanimtime(var_3 scripts\engine\utility::getanim("introSequence"), var_4);
     }
 
     if(isDefined(level.fake_player)) {
@@ -2100,64 +2100,64 @@ function intro_skip_monitor() {
   scripts\engine\sp\utility::motion_blur_disable(0.5);
 }
 
-function intro_ents_add(var0) {
+function intro_ents_add(var_0) {
   while(!isDefined(level.intro_ents)) {
     waitframe();
   }
 
-  level.intro_ents = scripts\engine\utility::array_add(level.intro_ents, var0);
+  level.intro_ents = scripts\engine\utility::array_add(level.intro_ents, var_0);
 }
 
 function control_marine_movement_at_ied() {
   scripts\engine\utility::flag_wait("convoy_speed_up");
-  var0 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("r");
-  var1 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("c");
-  var2 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("g");
-  var3 = 0;
-  var4 = 0;
+  var_0 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("r");
+  var_1 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("c");
+  var_2 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("g");
+  var_3 = 0;
+  var_4 = 0;
 
-  foreach(var6 in var0) {
-    var7 = scripts\engine\utility::getStruct("red_marine_convoy_intro_path_" + var3, "targetname");
+  foreach(var_6 in var_0) {
+    var_7 = scripts\engine\utility::getStruct("red_marine_convoy_intro_path_" + var_3, "targetname");
 
-    if(isDefined(var6) && isalive(var6)) {
-      var6 thread scripts\sp\spawner::go_to_node(var7);
+    if(isDefined(var_6) && isalive(var_6)) {
+      var_6 thread scripts\sp\spawner::go_to_node(var_7);
 
-      if(var3 < 1) {
-        var3++;
+      if(var_3 < 1) {
+        var_3++;
       }
     }
   }
 
-  foreach(var6 in var2) {
-    var10 = scripts\engine\utility::getStruct("green_marine_convoy_intro_path_" + var4, "targetname");
+  foreach(var_6 in var_2) {
+    var_10 = scripts\engine\utility::getStruct("green_marine_convoy_intro_path_" + var_4, "targetname");
 
-    if(isDefined(var6) && isalive(var6)) {
-      var6 scripts\engine\utility::set_movement_speed(80);
-      var6 thread scripts\sp\spawner::go_to_node(var10);
+    if(isDefined(var_6) && isalive(var_6)) {
+      var_6 scripts\engine\utility::set_movement_speed(80);
+      var_6 thread scripts\sp\spawner::go_to_node(var_10);
 
-      if(var4 < 1) {
-        var4++;
+      if(var_4 < 1) {
+        var_4++;
       }
     }
   }
 
-  foreach(var6 in var1) {
-    var13 = scripts\engine\utility::getStruct("cyan_marine_convoy_intro_path", "targetname");
+  foreach(var_6 in var_1) {
+    var_13 = scripts\engine\utility::getStruct("cyan_marine_convoy_intro_path", "targetname");
 
-    if(isDefined(var6) && isalive(var6)) {
-      var6 scripts\engine\utility::set_movement_speed(80);
-      var6 thread scripts\sp\spawner::go_to_node(var13);
+    if(isDefined(var_6) && isalive(var_6)) {
+      var_6 scripts\engine\utility::set_movement_speed(80);
+      var_6 thread scripts\sp\spawner::go_to_node(var_13);
     }
   }
 }
 
 function explosion_monitor() {
-  var0 = scripts\engine\utility::getStruct("convoy_ambush_ied_explosion", "targetname");
-  var1 = cos(60);
+  var_0 = scripts\engine\utility::getStruct("convoy_ambush_ied_explosion", "targetname");
+  var_1 = cos(60);
   scripts\engine\utility::flag_wait("wait_for_IED_explosion");
 
   while(!scripts\engine\utility::flag("postfx_ied_explosion")) {
-    if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var0.origin, var1)) {
+    if(scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_0.origin, var_1)) {
       scripts\engine\utility::flag_set("player_is_looking_at_IED");
     }
 
@@ -2166,26 +2166,26 @@ function explosion_monitor() {
 }
 
 function convoy_vehicle_passenger_handler() {
-  var0 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("c");
-  var1 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("g");
-  var2 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("r");
+  var_0 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("c");
+  var_1 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("g");
+  var_2 = scripts\sp\maps\marines\marines_utility::get_array_of_living_allies_by_color("r");
 
-  foreach(var4 in var0) {
-    if(isDefined(var4) && isalive(var4)) {
-      level.ied_vehicle scripts\common\vehicle_aianim::guy_enter(var4);
+  foreach(var_4 in var_0) {
+    if(isDefined(var_4) && isalive(var_4)) {
+      level.ied_vehicle scripts\common\vehicle_aianim::guy_enter(var_4);
     }
   }
 
-  foreach(var4 in var1) {
-    if(isDefined(var4) && isalive(var4)) {
-      level.player_vehicle scripts\common\vehicle_aianim::guy_enter(var4);
+  foreach(var_4 in var_1) {
+    if(isDefined(var_4) && isalive(var_4)) {
+      level.player_vehicle scripts\common\vehicle_aianim::guy_enter(var_4);
     }
   }
 
-  foreach(var4 in var2) {
-    if(isDefined(var4) && isalive(var4)) {
-      if(distance2d(var4.origin, level.ied_vehicle.origin) < 700) {
-        level.ied_vehicle scripts\common\vehicle_aianim::guy_enter(var4);
+  foreach(var_4 in var_2) {
+    if(isDefined(var_4) && isalive(var_4)) {
+      if(distance2d(var_4.origin, level.ied_vehicle.origin) < 700) {
+        level.ied_vehicle scripts\common\vehicle_aianim::guy_enter(var_4);
       }
     }
   }
@@ -2198,14 +2198,14 @@ function convoy_vehicle_passenger_handler() {
 }
 
 function apc_player_detector_monitor() {
-  var0 = getEnt("APC_front_monitor_1", "targetname");
-  var1 = getEnt("APC_front_monitor_2", "targetname");
-  var2 = 1;
+  var_0 = getEnt("APC_front_monitor_1", "targetname");
+  var_1 = getEnt("APC_front_monitor_2", "targetname");
+  var_2 = 1;
 
-  while(!scripts\engine\utility::flag("play_IED_explosion") && var2 == 1) {
-    if(isDefined(var0) && level.player istouching(var0) || isDefined(var1) && level.player istouching(var1)) {
+  while(!scripts\engine\utility::flag("play_IED_explosion") && var_2 == 1) {
+    if(isDefined(var_0) && level.player istouching(var_0) || isDefined(var_1) && level.player istouching(var_1)) {
       thread scripts\sp\maps\marines\marines_vo::vo_convoy_griggs_ahead_nag_dialogue();
-      var2 = 0;
+      var_2 = 0;
     }
 
     waitframe();
@@ -2213,12 +2213,12 @@ function apc_player_detector_monitor() {
 }
 
 function apc_player_detector_volume_handler() {
-  var0 = getEnt("APC_front_monitor_1", "targetname");
-  var1 = getEnt("APC_front_monitor_2", "targetname");
+  var_0 = getEnt("APC_front_monitor_1", "targetname");
+  var_1 = getEnt("APC_front_monitor_2", "targetname");
   scripts\engine\utility::flag_wait("APC_volume_1_delete");
-  var0 delete();
+  var_0 delete();
   scripts\engine\utility::flag_wait("APC_volume_2_delete");
-  var1 delete();
+  var_1 delete();
 }
 
 function intro_gate_disable_sprint() {

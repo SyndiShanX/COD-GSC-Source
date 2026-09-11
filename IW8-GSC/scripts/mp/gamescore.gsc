@@ -4,69 +4,69 @@
 ***********************************************/
 
 function gethighestscoringteam() {
-  var0 = 0;
-  var1 = undefined;
-  var2 = 0;
+  var_0 = 0;
+  var_1 = undefined;
+  var_2 = 0;
 
-  foreach(var4 in level.teamnamelist) {
-    var5 = game["teamScores"][var4];
+  foreach(var_4 in level.teamnamelist) {
+    var_5 = game["teamScores"][var_4];
 
-    if(!isDefined(var1) || var5 > var0) {
-      var0 = var5;
-      var1 = var4;
-      var2 = 0;
+    if(!isDefined(var_1) || var_5 > var_0) {
+      var_0 = var_5;
+      var_1 = var_4;
+      var_2 = 0;
       continue;
     }
 
-    if(var5 == var0) {
-      var2 = 1;
+    if(var_5 == var_0) {
+      var_2 = 1;
     }
   }
 
-  if(var2) {
+  if(var_2) {
     return "tie";
   }
 
-  return var1;
+  return var_1;
 }
 
-function remove_hunter_class(var0) {
-  var1 = 0;
-  var2 = undefined;
+function remove_hunter_class(var_0) {
+  var_1 = 0;
+  var_2 = undefined;
 
-  foreach(var4 in level.teamnamelist) {
-    if(isDefined(var0) && var4 == var0) {
+  foreach(var_4 in level.teamnamelist) {
+    if(isDefined(var_0) && var_4 == var_0) {
       continue;
     }
 
-    var5 = game["teamScores"][var4];
+    var_5 = game["teamScores"][var_4];
 
-    if(!isDefined(var2) || var5 > var1) {
-      var1 = var5;
-      var2 = var4;
+    if(!isDefined(var_2) || var_5 > var_1) {
+      var_1 = var_5;
+      var_2 = var_4;
     }
   }
 
-  return [var2, game["teamScores"][var2]];
+  return [var_2, game["teamScores"][var_2]];
 }
 
 function ref_14026() {
   level notify("updateTeamScorePlacement");
   level endon("updateTeamScorePlacement");
   waittillframeend();
-  var0 = setteamplacement(game["teamScores"], "down");
-  var1 = undefined;
-  var2 = 0;
+  var_0 = setteamplacement(game["teamScores"], "down");
+  var_1 = undefined;
+  var_2 = 0;
 
-  foreach(var4 in var0) {
-    var5 = game["teamScores"][var4];
+  foreach(var_4 in var_0) {
+    var_5 = game["teamScores"][var_4];
 
-    if(!isDefined(var1) || var5 < var1) {
-      var1 = var5;
-      var2++;
+    if(!isDefined(var_1) || var_5 < var_1) {
+      var_1 = var_5;
+      var_2++;
     }
 
-    game["teamPlacements"][var4] = var2;
+    game["teamPlacements"][var_4] = var_2;
   }
 }
 
@@ -74,8 +74,8 @@ function run_common_functions_stealth() {
   return game["teamPlacements"];
 }
 
-function hidesafecircle(var0, var1) {
-  return var0.score > var1.score;
+function hidesafecircle(var_0, var_1) {
+  return var_0.score > var_1.score;
 }
 
 function gethighestscoringplayer() {
@@ -90,9 +90,9 @@ function gethighestscoringplayer() {
 
 function ishighestscoringplayertied() {
   if(level.placement["all"].size > 1) {
-    var0 = _getplayerscore(level.placement["all"][0]);
-    var1 = _getplayerscore(level.placement["all"][1]);
-    return (var0 == var1);
+    var_0 = _getplayerscore(level.placement["all"][0]);
+    var_1 = _getplayerscore(level.placement["all"][1]);
+    return (var_0 == var_1);
   }
 
   return false;
@@ -100,114 +100,114 @@ function ishighestscoringplayertied() {
 
 function getlosingplayers() {
   updateplacement();
-  var0 = level.placement["all"];
-  var1 = [];
+  var_0 = level.placement["all"];
+  var_1 = [];
 
-  foreach(var3 in var0) {
-    if(var3 == level.placement["all"][0]) {
+  foreach(var_3 in var_0) {
+    if(var_3 == level.placement["all"][0]) {
       continue;
     }
 
-    var1 = var3;
+    var_1 = var_3;
   }
 
-  return var1;
+  return var_1;
 }
 
-function giveplayerscore(var0, var1, var2) {
-  if(istrue(level.ignorescoring) && !issubstr(var0, "assist")) {
-    var3 = scripts\mp\utility\game::getgametype() == "br" && !scripts\mp\flags::gameflag("prematch_done");
+function giveplayerscore(var_0, var_1, var_2) {
+  if(istrue(level.ignorescoring) && !issubstr(var_0, "assist")) {
+    var_3 = scripts\mp\utility\game::getgametype() == "br" && !scripts\mp\flags::gameflag("prematch_done");
 
-    if(!var3) {
+    if(!var_3) {
       return;
     }
   }
 
   if(!level.teambased) {
-    foreach(var5 in level.players) {
+    foreach(var_5 in level.players) {
       if(scripts\mp\utility\game::issimultaneouskillenabled()) {
-        if(var5 != self) {
+        if(var_5 != self) {
           continue;
         }
 
-        if(level.roundscorelimit > 1 && var5.pers["score"] >= level.roundscorelimit) {
+        if(level.roundscorelimit > 1 && var_5.pers["score"] >= level.roundscorelimit) {
           return;
         }
 
         continue;
       }
 
-      if(level.roundscorelimit > 1 && var5.pers["score"] >= level.roundscorelimit) {
+      if(level.roundscorelimit > 1 && var_5.pers["score"] >= level.roundscorelimit) {
         return;
       }
     }
   }
 
-  var5 = self;
+  var_5 = self;
 
   if(isDefined(self.owner) && !isbot(self)) {
-    var5 = self.owner;
+    var_5 = self.owner;
   }
 
-  if(!isPlayer(var5)) {
+  if(!isPlayer(var_5)) {
     return;
   }
 
-  var7 = var1;
+  var_7 = var_1;
 
   if(isDefined(level.onplayerscore)) {
-    var1 = [[level.onplayerscore]](var0, var5, var1, var2);
+    var_1 = [[level.onplayerscore]](var_0, var_5, var_1, var_2);
   }
 
-  if(var1 == 0) {
+  if(var_1 == 0) {
     return;
   }
 
-  var5.pers["score"] = int(max(var5.pers["score"] + var1, 0));
-  var5 scripts\mp\playerstats_interface::addtoplayerstat(int(var7), "matchStats", "score");
+  var_5.pers["score"] = int(max(var_5.pers["score"] + var_1, 0));
+  var_5 scripts\mp\playerstats_interface::addtoplayerstat(int(var_7), "matchStats", "score");
 
-  if(var5.pers["score"] >= 65000) {
-    var5.pers["score"] = 65000;
+  if(var_5.pers["score"] >= 65000) {
+    var_5.pers["score"] = 65000;
   }
 
-  var5.score = var5.pers["score"];
-  var8 = var5.score;
-  var5 scripts\mp\persistence::statsetchild("round", "score", var8);
-  var5 scripts\mp\gamelogic::checkplayerscorelimitsoon();
-  var5 thread scripts\mp\gamelogic::checkscorelimit();
-  var5 scripts\mp\utility\script::bufferednotify("earned_score_buffered", var1);
-  scripts\mp\analyticslog::logevent_reportgamescore(var1, gettime(), scripts\mp\rank::getscoreinfocategory(var0, "eventID"));
-  var5 scripts\common\utility::ref_13e0a(level.ref_11b2f, var0);
-  var5 scripts\cp_mp\pet_watch::addobjectivescorecharge(var0, int(var7));
+  var_5.score = var_5.pers["score"];
+  var_8 = var_5.score;
+  var_5 scripts\mp\persistence::statsetchild("round", "score", var_8);
+  var_5 scripts\mp\gamelogic::checkplayerscorelimitsoon();
+  var_5 thread scripts\mp\gamelogic::checkscorelimit();
+  var_5 scripts\mp\utility\script::bufferednotify("earned_score_buffered", var_1);
+  scripts\mp\analyticslog::logevent_reportgamescore(var_1, gettime(), scripts\mp\rank::getscoreinfocategory(var_0, "eventID"));
+  var_5 scripts\common\utility::ref_13e0a(level.ref_11b2f, var_0);
+  var_5 scripts\cp_mp\pet_watch::addobjectivescorecharge(var_0, int(var_7));
 }
 
-function _setplayerscore(var0, var1) {
-  if(var1 == var0.pers["score"]) {
+function _setplayerscore(var_0, var_1) {
+  if(var_1 == var_0.pers["score"]) {
     return;
   }
 
-  if(var1 < 0) {
+  if(var_1 < 0) {
     return;
   }
 
-  var0.pers["score"] = var1;
-  var0.score = var0.pers["score"];
-  var0 thread scripts\mp\gamelogic::checkscorelimit();
+  var_0.pers["score"] = var_1;
+  var_0.score = var_0.pers["score"];
+  var_0 thread scripts\mp\gamelogic::checkscorelimit();
 }
 
-function _getplayerscore(var0) {
-  if(!isDefined(var0)) {
-    var0 = self;
+function _getplayerscore(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = self;
   }
 
-  return var0.pers["score"];
+  return var_0.pers["score"];
 }
 
 function checkffascorejip() {
   if(level.roundscorelimit > 0) {
-    var0 = self.score / level.roundscorelimit * 100;
+    var_0 = self.score / level.roundscorelimit * 100;
 
-    if(var0 > level.scorepercentagecutoff) {
+    if(var_0 > level.scorepercentagecutoff) {
       setnojipscore(1, 1);
       level.nojip = 1;
       return;
@@ -217,16 +217,16 @@ function checkffascorejip() {
   }
 }
 
-function giveteamscoreforobjective(var0, var1, var2, var3, var4, var5) {
+function giveteamscoreforobjective(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(scripts\mp\utility\game::cantiebysimultaneouskill()) {
-    var2 = 1;
+    var_2 = 1;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  if(istrue(level.gameended) && !var2) {
+  if(istrue(level.gameended) && !var_2) {
     return;
   }
 
@@ -234,56 +234,56 @@ function giveteamscoreforobjective(var0, var1, var2, var3, var4, var5) {
     return;
   }
 
-  if(istrue(level.dontendonscore) && _getteamscore(var0) >= level.scorelimit) {
+  if(istrue(level.dontendonscore) && _getteamscore(var_0) >= level.scorelimit) {
     return;
   }
 
-  if(var2) {
-    if(level.roundscorelimit > 1 && game["teamScores"][var0] >= level.roundscorelimit) {
+  if(var_2) {
+    if(level.roundscorelimit > 1 && game["teamScores"][var_0] >= level.roundscorelimit) {
       return;
     }
   } else if(level.roundscorelimit > 1 && !istrue(level.dontendonscore)) {
-    foreach(var7 in level.teamnamelist) {
-      if(level scripts\mp\utility\game::vehicle_collision_ignorefuturemultievent(var7)) {
+    foreach(var_7 in level.teamnamelist) {
+      if(level scripts\mp\utility\game::vehicle_collision_ignorefuturemultievent(var_7)) {
         continue;
       }
 
-      if(game["teamScores"][var7] >= level.roundscorelimit) {
+      if(game["teamScores"][var_7] >= level.roundscorelimit) {
         return;
       }
     }
   }
 
-  _setteamscore(var0, _getteamscore(var0) + var1, var2);
-  level notify("update_team_score", var0, _getteamscore(var0));
+  _setteamscore(var_0, _getteamscore(var_0) + var_1, var_2);
+  level notify("update_team_score", var_0, _getteamscore(var_0));
 
   if(isDefined(level.onteamscore)) {
-    [[level.onteamscore]](var0, _getteamscore(var0), var3);
+    [[level.onteamscore]](var_0, _getteamscore(var_0), var_3);
   }
 
-  if(isDefined(var5)) {
-    var9 = var5;
+  if(isDefined(var_5)) {
+    var_9 = var_5;
   } else {
-    var9 = freight_lift_door_switch(var3);
+    var_9 = freight_lift_door_switch(var_3);
   }
 
-  if(!istrue(var5)) {
-    ref_12762(var9, var3, level.waswinning);
+  if(!istrue(var_5)) {
+    ref_12762(var_9, var_3, level.waswinning);
   }
 
-  if(var9 != "none") {
-    level.waswinning = var9;
-    var10 = _getteamscore(var9);
-    var11 = level.roundscorelimit;
+  if(var_9 != "none") {
+    level.waswinning = var_9;
+    var_10 = _getteamscore(var_9);
+    var_11 = level.roundscorelimit;
 
-    if(var10 == 0 || var11 == 0) {
+    if(var_10 == 0 || var_11 == 0) {
       return;
     }
 
-    var12 = var10 / var11 * 100;
+    var_12 = var_10 / var_11 * 100;
 
     if(!scripts\mp\utility\game::isroundbased() && isDefined(level.nojip) && !level.nojip) {
-      if(var12 > level.scorepercentagecutoff) {
+      if(var_12 > level.scorepercentagecutoff) {
         setnojipscore(1, 1);
         level.nojip = 1;
       }
@@ -296,18 +296,18 @@ function giveteamscoreforobjective(var0, var1, var2, var3, var4, var5) {
   }
 }
 
-function ref_12762(var0, var1, var2) {
-  if(!level.splitscreen && var0 != "none" && var0 != var2 && gettime() - level.lastscorestatustime > 5000 && scripts\mp\utility\game::getscorelimit() != 1) {
+function ref_12762(var_0, var_1, var_2) {
+  if(!level.splitscreen && var_0 != "none" && var_0 != var_2 && gettime() - level.lastscorestatustime > 5000 && scripts\mp\utility\game::getscorelimit() != 1) {
     if(isDefined(level.delayleadtakendialog)) {
       thread playleadtakendialog(level);
       return;
     }
 
     level.lastscorestatustime = gettime();
-    scripts\mp\utility\dialog::leaderdialog("lead_taken", var0, "status");
+    scripts\mp\utility\dialog::leaderdialog("lead_taken", var_0, "status");
 
-    if(var2 != "none") {
-      scripts\mp\utility\dialog::leaderdialog("lead_lost", var2, "status");
+    if(var_2 != "none") {
+      scripts\mp\utility\dialog::leaderdialog("lead_lost", var_2, "status");
       return;
     }
 
@@ -315,119 +315,119 @@ function ref_12762(var0, var1, var2) {
   }
 }
 
-function playleadtakendialog(var0) {
+function playleadtakendialog(var_0) {
   wait level.delayleadtakendialog;
   level.lastscorestatustime = gettime();
-  var1 = freight_lift_door_switch(var0);
-  scripts\mp\utility\dialog::leaderdialog("lead_taken", var1, "status");
+  var_1 = freight_lift_door_switch(var_0);
+  scripts\mp\utility\dialog::leaderdialog("lead_taken", var_1, "status");
 
-  foreach(var3 in level.teamnamelist) {
-    if(var3 != var1) {
-      scripts\mp\utility\dialog::leaderdialog("lead_lost", var3, "status");
+  foreach(var_3 in level.teamnamelist) {
+    if(var_3 != var_1) {
+      scripts\mp\utility\dialog::leaderdialog("lead_lost", var_3, "status");
     }
   }
 }
 
-function freight_lift_door_switch(var0) {
-  var1 = level.teamnamelist;
+function freight_lift_door_switch(var_0) {
+  var_1 = level.teamnamelist;
 
   if(!isDefined(level.waswinning)) {
     level.waswinning = "none";
   }
 
-  var2 = "none";
-  var3 = 0;
+  var_2 = "none";
+  var_3 = 0;
 
   if(level.waswinning != "none") {
-    var2 = level.waswinning;
-    var3 = game["teamScores"][level.waswinning];
+    var_2 = level.waswinning;
+    var_3 = game["teamScores"][level.waswinning];
   }
 
-  var4 = 1;
+  var_4 = 1;
 
-  foreach(var6 in var1) {
-    if(var6 == level.waswinning) {
+  foreach(var_6 in var_1) {
+    if(var_6 == level.waswinning) {
       continue;
     }
 
-    if(game["teamScores"][var6] > var3) {
-      var2 = var6;
-      var3 = game["teamScores"][var6];
-      var4 = 1;
+    if(game["teamScores"][var_6] > var_3) {
+      var_2 = var_6;
+      var_3 = game["teamScores"][var_6];
+      var_4 = 1;
       continue;
     }
 
-    if(game["teamScores"][var6] == var3) {
-      var4 += 1;
-      var2 = "none";
+    if(game["teamScores"][var_6] == var_3) {
+      var_4 += 1;
+      var_2 = "none";
     }
   }
 
-  return var2;
+  return var_2;
 }
 
-function _setteamscore(var0, var1, var2) {
-  if(var1 < 0) {
-    var1 = 0;
+function _setteamscore(var_0, var_1, var_2) {
+  if(var_1 < 0) {
+    var_1 = 0;
   }
 
-  if(var1 == game["teamScores"][var0]) {
+  if(var_1 == game["teamScores"][var_0]) {
     return;
   }
 
-  game["teamScores"][var0] = var1;
-  updateteamscore(var0);
+  game["teamScores"][var_0] = var_1;
+  updateteamscore(var_0);
 
   if(!istrue(level.dontendonscore)) {
-    thread scripts\mp\gamelogic::roundend_checkscorelimit(var0, var2);
+    thread scripts\mp\gamelogic::roundend_checkscorelimit(var_0, var_2);
     return;
   }
 }
 
-function updateteamscore(var0) {
-  if(scripts\mp\utility\game::vehicle_collision_ignorefuturemultievent(var0)) {
+function updateteamscore(var_0) {
+  if(scripts\mp\utility\game::vehicle_collision_ignorefuturemultievent(var_0)) {
     return;
   }
 
-  var1 = 0;
+  var_1 = 0;
 
   if(!scripts\mp\utility\game::isroundbased() || !scripts\mp\utility\game::isobjectivebased() || scripts\mp\utility\game::ismoddedroundgame()) {
-    var1 = _getteamscore(var0);
+    var_1 = _getteamscore(var_0);
   } else {
-    var1 = game["roundsWon"][var0];
+    var_1 = game["roundsWon"][var_0];
   }
 
-  setteamscore(var0, int(var1));
+  setteamscore(var_0, int(var_1));
   thread ref_14026();
 }
 
-function updatetotalteamscore(var0) {
+function updatetotalteamscore(var_0) {
   if(!isDefined(game["totalScore"])) {
     game["totalScore"] = [];
 
-    foreach(var2 in level.teamnamelist) {
-      game["totalScore"][var2] = 0;
+    foreach(var_2 in level.teamnamelist) {
+      game["totalScore"][var_2] = 0;
     }
   }
 
-  var4 = scripts\mp\utility\game::getwingamebytype();
+  var_4 = scripts\mp\utility\game::getwingamebytype();
 
-  switch (var4) {
+  switch (var_4) {
     case "roundsWon":
-      game["teamScores"][var0] = game["roundsWon"][var0];
+      game["teamScores"][var_0] = game["roundsWon"][var_0];
       break;
     case "teamScores":
       if(scripts\mp\utility\game::inovertime()) {
-        game["teamScores"][var0] = game["preOvertimeScore"][var0] + game["overtimeScore"][var0] + game["teamScores"][var0];
+        game["teamScores"][var_0] = game["preOvertimeScore"][var_0] + game["overtimeScore"][var_0] + game["teamScores"][var_0];
       } else if(scripts\mp\utility\game::resetscoreonroundstart()) {
-        game["totalScore"][var0] = game["totalScore"][var0] + game["teamScores"][var0];
-        game["teamScores"][var0] = game["totalScore"][var0];
+        game["totalScore"][var_0] = game["totalScore"][var_0] + game["teamScores"][var_0];
+        game["teamScores"][var_0] = game["totalScore"][var_0];
       }
 
       break;
   }
 
-  setteamscore(var0, int(game["teamScores"][var0]));
+  setteamscore(var_0, int(game["teamScores"][var_0]));
 }
 
 function updateovertimescore() {
@@ -435,26 +435,26 @@ function updateovertimescore() {
     if(!isDefined(game["preOvertimeScore"])) {
       game["preOvertimeScore"] = [];
 
-      foreach(var1 in level.teamnamelist) {
-        game["preOvertimeScore"][var1] = 0;
+      foreach(var_1 in level.teamnamelist) {
+        game["preOvertimeScore"][var_1] = 0;
       }
     }
 
-    foreach(var1 in level.teamnamelist) {
-      game["preOvertimeScore"][var1] = game["teamScores"][var1] + game["totalScore"][var1];
+    foreach(var_1 in level.teamnamelist) {
+      game["preOvertimeScore"][var_1] = game["teamScores"][var_1] + game["totalScore"][var_1];
     }
   }
 
   if(!isDefined(game["overtimeScore"])) {
     game["overtimeScore"] = [];
 
-    foreach(var1 in level.teamnamelist) {
-      game["overtimeScore"][var1] = 0;
+    foreach(var_1 in level.teamnamelist) {
+      game["overtimeScore"][var_1] = 0;
     }
   }
 
-  foreach(var1 in level.teamnamelist) {
-    game["overtimeScore"][var1] = game["overtimeScore"][var1] + game["teamScores"][var1] - game["preOvertimeScore"][var1];
+  foreach(var_1 in level.teamnamelist) {
+    game["overtimeScore"][var_1] = game["overtimeScore"][var_1] + game["teamScores"][var_1] - game["preOvertimeScore"][var_1];
   }
 
   if(!scripts\mp\utility\game::iswinbytworulegametype()) {
@@ -480,8 +480,8 @@ function updateovertimescore() {
   }
 }
 
-function _getteamscore(var0) {
-  return int(game["teamScores"][var0]);
+function _getteamscore(var_0) {
+  return int(game["teamScores"][var_0]);
 }
 
 function removedisconnectedplayerfromplacement() {
@@ -489,25 +489,25 @@ function removedisconnectedplayerfromplacement() {
     return;
   }
 
-  var0 = 0;
-  var1 = level.placement["all"].size;
-  var2 = 0;
+  var_0 = 0;
+  var_1 = level.placement["all"].size;
+  var_2 = 0;
 
-  for(var3 = 0; var3 < var1; var3++) {
-    if(level.placement["all"][var3] == self) {
-      var2 = 1;
+  for(var_3 = 0; var_3 < var_1; var_3++) {
+    if(level.placement["all"][var_3] == self) {
+      var_2 = 1;
     }
 
-    if(var2) {
-      level.placement["all"][var3] = level.placement["all"][var3 + 1];
+    if(var_2) {
+      level.placement["all"][var_3] = level.placement["all"][var_3 + 1];
     }
   }
 
-  if(!var2) {
+  if(!var_2) {
     return;
   }
 
-  level.placement["all"][var1 - 1] = undefined;
+  level.placement["all"][var_1 - 1] = undefined;
 
   if(level.teambased) {
     updateteamplacement();
@@ -516,32 +516,32 @@ function removedisconnectedplayerfromplacement() {
 }
 
 function updateplacement() {
-  var0 = [];
+  var_0 = [];
 
-  foreach(var2 in level.players) {
-    if(isDefined(var2.connectedpostgame)) {
+  foreach(var_2 in level.players) {
+    if(isDefined(var_2.connectedpostgame)) {
       continue;
     }
 
-    if(var2.pers["team"] == "spectator" || var2.pers["team"] == "follower" || var2.pers["team"] == "none") {
+    if(var_2.pers["team"] == "spectator" || var_2.pers["team"] == "follower" || var_2.pers["team"] == "none") {
       continue;
     }
 
-    var0 = var2;
+    var_0 = var_2;
   }
 
-  for(var4 = 1; var4 < var0.size; var4++) {
-    var2 = var0[var4];
-    var5 = var2.score;
+  for(var_4 = 1; var_4 < var_0.size; var_4++) {
+    var_2 = var_0[var_4];
+    var_5 = var_2.score;
 
-    for(var6 = var4 - 1; var6 >= 0 && getbetterplayer(var2, var0[var6]) == var2; var6--) {
-      var0 = var0[var6];
+    for(var_6 = var_4 - 1; var_6 >= 0 && getbetterplayer(var_2, var_0[var_6]) == var_2; var_6--) {
+      var_0 = var_0[var_6];
     }
 
-    var0 = var2;
+    var_0 = var_2;
   }
 
-  level.placement["all"] = var0;
+  level.placement["all"] = var_0;
 
   if(level.teambased) {
     updateteamplacement();
@@ -549,131 +549,131 @@ function updateplacement() {
   }
 }
 
-function getbetterplayer(var0, var1) {
+function getbetterplayer(var_0, var_1) {
   if(isDefined(level.lastplayerwins)) {
     return level.lastplayerwins;
   }
 
-  if(var0.score > var1.score) {
-    return var0;
+  if(var_0.score > var_1.score) {
+    return var_0;
   }
 
-  if(var1.score > var0.score) {
-    return var1;
+  if(var_1.score > var_0.score) {
+    return var_1;
   }
 
-  if(var0.deaths < var1.deaths) {
-    return var0;
+  if(var_0.deaths < var_1.deaths) {
+    return var_0;
   }
 
-  if(var1.deaths < var0.deaths) {
-    return var1;
+  if(var_1.deaths < var_0.deaths) {
+    return var_1;
   }
 
   if(scripts\engine\utility::cointoss()) {
-    return var0;
+    return var_0;
   }
 
-  return var1;
+  return var_1;
 }
 
 function updateteamplacement() {
-  var0 = level.placement["all"];
-  var1 = [];
+  var_0 = level.placement["all"];
+  var_1 = [];
 
-  foreach(var3 in var0) {
-    var4 = var3.pers["team"];
+  foreach(var_3 in var_0) {
+    var_4 = var_3.pers["team"];
 
-    if(!isDefined(var1[var4])) {
-      var1 = [];
+    if(!isDefined(var_1[var_4])) {
+      var_1 = [];
     }
 
-    var1[var1[var4].size] = var3;
+    var_1[var_1[var_4].size] = var_3;
   }
 
-  foreach(var7 in level.teamnamelist) {
-    if(isDefined(var1[var7])) {
-      level.placement[var7] = var1[var7];
+  foreach(var_7 in level.teamnamelist) {
+    if(isDefined(var_1[var_7])) {
+      level.placement[var_7] = var_1[var_7];
       continue;
     }
 
-    level.placement[var7] = [];
+    level.placement[var_7] = [];
   }
 }
 
-function processassist(var0, var1, var2) {
+function processassist(var_0, var_1, var_2) {
   if(isDefined(level.assists_disabled)) {
     return;
   }
 
-  processassist_regularmp(var0, var1, var2);
+  processassist_regularmp(var_0, var_1, var_2);
 }
 
-function processassist_regularmp(var0, var1, var2) {
+function processassist_regularmp(var_0, var_1, var_2) {
   self endon("disconnect");
-  var0 endon("disconnect");
+  var_0 endon("disconnect");
 
-  if(isDefined(var1) && var1.basename == "white_phosphorus_proj_mp") {
+  if(isDefined(var_1) && var_1.basename == "white_phosphorus_proj_mp") {
     return;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  var3 = undefined;
-  var4 = undefined;
-  var5 = undefined;
+  var_3 = undefined;
+  var_4 = undefined;
+  var_5 = undefined;
 
-  if(isDefined(var0.ismarkedtarget)) {
-    var4 = var0.attackers;
-    var3 = 1;
+  if(isDefined(var_0.ismarkedtarget)) {
+    var_4 = var_0.attackers;
+    var_3 = 1;
   }
 
-  if(isDefined(var0.markedbyboomperk)) {
-    var5 = var0.markedbyboomperk;
+  if(isDefined(var_0.markedbyboomperk)) {
+    var_5 = var_0.markedbyboomperk;
   }
 
   wait 0.05;
   scripts\mp\utility\script::waittillslowprocessallowed();
-  var6 = self.pers["team"];
+  var_6 = self.pers["team"];
 
-  if(!scripts\mp\utility\teams::isgameplayteam(var6)) {
+  if(!scripts\mp\utility\teams::isgameplayteam(var_6)) {
     return;
   }
 
-  if(var6 == var0.pers["team"] && level.teambased) {
+  if(var_6 == var_0.pers["team"] && level.teambased) {
     return;
   }
 
-  var7 = undefined;
-  var8 = "assist";
+  var_7 = undefined;
+  var_8 = "assist";
 
   if(!level.teambased) {
-    var8 = "assist_ffa";
+    var_8 = "assist_ffa";
   }
 
-  var9 = scripts\mp\rank::getscoreinfovalue(var8);
+  var_9 = scripts\mp\rank::getscoreinfovalue(var_8);
 
   if(!level.teambased) {
-    var7 = var9 + var9 * var2;
-    thread scripts\mp\utility\points::giveunifiedpoints("assist_ffa", var1, var7);
-  } else if(isDefined(var5) && scripts\engine\utility::array_contains_key(var5, scripts\mp\utility\player::getuniqueid())) {
-    thread scripts\mp\utility\points::givestreakpointswithtext("assist_ping", var1, undefined);
+    var_7 = var_9 + var_9 * var_2;
+    thread scripts\mp\utility\points::giveunifiedpoints("assist_ffa", var_1, var_7);
+  } else if(isDefined(var_5) && scripts\engine\utility::array_contains_key(var_5, scripts\mp\utility\player::getuniqueid())) {
+    thread scripts\mp\utility\points::givestreakpointswithtext("assist_ping", var_1, undefined);
   } else {
-    var7 = var9 + var9 * var2;
-    thread scripts\mp\utility\points::giveunifiedpoints("assist", var1, var7);
+    var_7 = var_9 + var_9 * var_2;
+    thread scripts\mp\utility\points::giveunifiedpoints("assist", var_1, var_7);
   }
 
   if(level.teambased) {
-    var10 = scripts\common\utility::playersinsphere(self.origin, 300);
+    var_10 = scripts\common\utility::playersinsphere(self.origin, 300);
 
-    foreach(var12 in var10) {
-      if(self.team != var12.team || self == var12) {
+    foreach(var_12 in var_10) {
+      if(self.team != var_12.team || self == var_12) {
         continue;
       }
 
-      if(!scripts\mp\utility\player::isreallyalive(var12)) {
+      if(!scripts\mp\utility\player::isreallyalive(var_12)) {
         continue;
       }
 
@@ -684,8 +684,8 @@ function processassist_regularmp(var0, var1, var2) {
 
   if(scripts\mp\utility\perk::_hasperk("specialty_hardline") && isDefined(self.hardlineactive)) {
     if(self.hardlineactive["assists"] == 1) {
-      if(!scripts\mp\utility\weapon::iskillstreakweapon(var1) && !scripts\mp\utility\weapon::issuperweapon(var1)) {
-        thread scripts\mp\utility\points::givestreakpointswithtext("assist_hardline", var1, 1);
+      if(!scripts\mp\utility\weapon::iskillstreakweapon(var_1) && !scripts\mp\utility\weapon::issuperweapon(var_1)) {
+        thread scripts\mp\utility\points::givestreakpointswithtext("assist_hardline", var_1, 1);
       }
     }
 
@@ -701,20 +701,20 @@ function processassist_regularmp(var0, var1, var2) {
   }
 
   scripts\mp\utility\script::bufferednotify("assist_buffered", self.modifiers);
-  thread scripts\cp\vehicles\vehicle_compass_cp::onplayerkillassist(var0);
+  thread scripts\cp\vehicles\vehicle_compass_cp::onplayerkillassist(var_0);
 }
 
-function processshieldassist(var0) {
+function processshieldassist(var_0) {
   if(isDefined(level.assists_disabled)) {
     return;
   }
 
-  processshieldassist_regularmp(var0);
+  processshieldassist_regularmp(var_0);
 }
 
-function processshieldassist_regularmp(var0) {
+function processshieldassist_regularmp(var_0) {
   self endon("disconnect");
-  var0 endon("disconnect");
+  var_0 endon("disconnect");
   wait 0.05;
   scripts\mp\utility\script::waittillslowprocessallowed();
 
@@ -722,7 +722,7 @@ function processshieldassist_regularmp(var0) {
     return;
   }
 
-  if(self.pers["team"] == var0.pers["team"]) {
+  if(self.pers["team"] == var_0.pers["team"]) {
     return;
   }
 
@@ -735,7 +735,7 @@ function processshieldassist_regularmp(var0) {
     scripts\mp\persistence::statsetchild("round", "assists", self.assists);
   }
 
-  thread scripts\cp\vehicles\vehicle_compass_cp::onplayerkillassist(var0);
+  thread scripts\cp\vehicles\vehicle_compass_cp::onplayerkillassist(var_0);
 }
 
 function initassisttrackers() {
@@ -744,43 +744,43 @@ function initassisttrackers() {
   self.debuffedbyplayers = [];
 }
 
-function trackdebuffassist(var0, var1, var2) {
-  if(!isDefined(var1.debuffedbyplayers[var2])) {
-    var1.debuffedbyplayers[var2] = [];
+function trackdebuffassist(var_0, var_1, var_2) {
+  if(!isDefined(var_1.debuffedbyplayers[var_2])) {
+    var_1.debuffedbyplayers[var_2] = [];
   }
 
-  if(scripts\mp\utility\game::lpcfeaturegated() && var1.debuffedbyplayers[var2].size >= getdvarint("scr_br_maxTrackedBuffs", 4) && getdvarint("scr_br_maxTrackedBuffs", 4) > 0) {
+  if(scripts\mp\utility\game::lpcfeaturegated() && var_1.debuffedbyplayers[var_2].size >= getdvarint("scr_br_maxTrackedBuffs", 4) && getdvarint("scr_br_maxTrackedBuffs", 4) > 0) {
     return false;
   }
 
-  if(!isDefined(var1.debuffedbyplayers[var2][var0 getentitynumber()])) {
-    var1.debuffedbyplayers[var2][var0 getentitynumber()] = 0;
+  if(!isDefined(var_1.debuffedbyplayers[var_2][var_0 getentitynumber()])) {
+    var_1.debuffedbyplayers[var_2][var_0 getentitynumber()] = 0;
   }
 
-  var1.debuffedbyplayers[var2][var0 getentitynumber()]++;
+  var_1.debuffedbyplayers[var_2][var_0 getentitynumber()]++;
   return true;
 }
 
-function untrackdebuffassist(var0, var1, var2) {
-  if(isDefined(var0)) {
-    if(isDefined(var1.debuffedbyplayers[var2]) && isDefined(var1.debuffedbyplayers[var2][var0 getentitynumber()])) {
-      var1.debuffedbyplayers[var2][var0 getentitynumber()]--;
+function untrackdebuffassist(var_0, var_1, var_2) {
+  if(isDefined(var_0)) {
+    if(isDefined(var_1.debuffedbyplayers[var_2]) && isDefined(var_1.debuffedbyplayers[var_2][var_0 getentitynumber()])) {
+      var_1.debuffedbyplayers[var_2][var_0 getentitynumber()]--;
 
-      if(var1.debuffedbyplayers[var2][var0 getentitynumber()] <= 0) {
-        var1.debuffedbyplayers[var2][var0 getentitynumber()] = undefined;
+      if(var_1.debuffedbyplayers[var_2][var_0 getentitynumber()] <= 0) {
+        var_1.debuffedbyplayers[var_2][var_0 getentitynumber()] = undefined;
       }
 
-      var3 = 1;
+      var_3 = 1;
 
-      foreach(var5 in var1.debuffedbyplayers[var2]) {
-        if(var5 > 0) {
-          var3 = 0;
+      foreach(var_5 in var_1.debuffedbyplayers[var_2]) {
+        if(var_5 > 0) {
+          var_3 = 0;
           break;
         }
       }
 
-      if(var3 && isDefined(var2) && isDefined(var1.debuffedbyplayers)) {
-        var1.debuffedbyplayers[var2] = undefined;
+      if(var_3 && isDefined(var_2) && isDefined(var_1.debuffedbyplayers)) {
+        var_1.debuffedbyplayers[var_2] = undefined;
         return;
       }
 
@@ -791,38 +791,38 @@ function untrackdebuffassist(var0, var1, var2) {
   }
 }
 
-function trackdebuffassistfortime(var0, var1, var2, var3, var4) {
-  var1 endon("initAssistTrackers");
-  var1 endon("disconnect");
-  var0 endon("disconnect");
+function trackdebuffassistfortime(var_0, var_1, var_2, var_3, var_4) {
+  var_1 endon("initAssistTrackers");
+  var_1 endon("disconnect");
+  var_0 endon("disconnect");
   level endon("game_ended");
-  var5 = trackdebuffassist(var0, var1, var2);
+  var_5 = trackdebuffassist(var_0, var_1, var_2);
 
-  if(!var5) {
+  if(!var_5) {
     return;
   }
 
-  if(isDefined(var4) && isstring(var4)) {
-    var1 scripts\engine\utility::waittill_notify_or_timeout(var4, var3);
+  if(isDefined(var_4) && isstring(var_4)) {
+    var_1 scripts\engine\utility::waittill_notify_or_timeout(var_4, var_3);
   } else {
-    wait var3;
+    wait var_3;
   }
 
-  untrackdebuffassist(var0, var1, var2);
+  untrackdebuffassist(var_0, var_1, var_2);
 }
 
-function isdebuffedbyweapon(var0, var1) {
+function isdebuffedbyweapon(var_0, var_1) {
   if(scripts\mp\utility\game::runleanthreadmode()) {
     return false;
   }
 
-  if(isDefined(var0.debuffedbyplayers[var1])) {
-    foreach(var3 in var0.debuffedbyplayers[var1]) {
-      if(var3 <= 0) {
+  if(isDefined(var_0.debuffedbyplayers[var_1])) {
+    foreach(var_3 in var_0.debuffedbyplayers[var_1]) {
+      if(var_3 <= 0) {
         continue;
       }
 
-      if(!isDefined(level.playersbyentitynumber[var4])) {
+      if(!isDefined(level.playersbyentitynumber[var_4])) {
         continue;
       }
 
@@ -833,86 +833,86 @@ function isdebuffedbyweapon(var0, var1) {
   return false;
 }
 
-function isdebuffedbyweaponandplayer(var0, var1, var2) {
+function isdebuffedbyweaponandplayer(var_0, var_1, var_2) {
   if(scripts\mp\utility\game::runleanthreadmode()) {
     return false;
   }
 
-  if(!isDefined(var1.debuffedbyplayers[var2])) {
+  if(!isDefined(var_1.debuffedbyplayers[var_2])) {
     return false;
   }
 
-  if(!isDefined(var1.debuffedbyplayers[var2][var0 getentitynumber()])) {
+  if(!isDefined(var_1.debuffedbyplayers[var_2][var_0 getentitynumber()])) {
     return false;
   }
 
-  if(var1.debuffedbyplayers[var2][var0 getentitynumber()] <= 0) {
+  if(var_1.debuffedbyplayers[var_2][var_0 getentitynumber()] <= 0) {
     return false;
   }
 
   return true;
 }
 
-function getdebuffattackersbyweapon(var0, var1) {
+function getdebuffattackersbyweapon(var_0, var_1) {
   if(scripts\mp\utility\game::runleanthreadmode()) {
     return undefined;
   }
 
-  var2 = [];
+  var_2 = [];
 
-  if(isPlayer(var0)) {
-    if(isDefined(var0.debuffedbyplayers[var1])) {
-      foreach(var4 in var0.debuffedbyplayers[var1]) {
-        if(var4 <= 0) {
+  if(isPlayer(var_0)) {
+    if(isDefined(var_0.debuffedbyplayers[var_1])) {
+      foreach(var_4 in var_0.debuffedbyplayers[var_1]) {
+        if(var_4 <= 0) {
           continue;
         }
 
-        if(!isDefined(level.playersbyentitynumber[var5])) {
+        if(!isDefined(level.playersbyentitynumber[var_5])) {
           continue;
         }
 
-        var2 = level.playersbyentitynumber[var5];
+        var_2 = level.playersbyentitynumber[var_5];
       }
     }
   }
 
-  return var2;
+  return var_2;
 }
 
-function trackbuffassist(var0, var1, var2) {
+function trackbuffassist(var_0, var_1, var_2) {
   if(scripts\mp\utility\game::runleanthreadmode()) {
     return;
   }
 
-  if(var0 != var1) {
-    if(!isDefined(var1.buffedbyplayers[var2])) {
-      var1.buffedbyplayers[var2] = [];
+  if(var_0 != var_1) {
+    if(!isDefined(var_1.buffedbyplayers[var_2])) {
+      var_1.buffedbyplayers[var_2] = [];
     }
 
-    if(scripts\mp\utility\game::lpcfeaturegated() && var1.buffedbyplayers[var2].size >= getdvarint("scr_br_maxTrackedBuffs", 4) && getdvarint("scr_br_maxTrackedBuffs", 4) > 0) {
+    if(scripts\mp\utility\game::lpcfeaturegated() && var_1.buffedbyplayers[var_2].size >= getdvarint("scr_br_maxTrackedBuffs", 4) && getdvarint("scr_br_maxTrackedBuffs", 4) > 0) {
       return 0;
     }
 
-    if(!isDefined(var1.buffedbyplayers[var2][var0 getentitynumber()])) {
-      var1.buffedbyplayers[var2][var0 getentitynumber()] = 0;
+    if(!isDefined(var_1.buffedbyplayers[var_2][var_0 getentitynumber()])) {
+      var_1.buffedbyplayers[var_2][var_0 getentitynumber()] = 0;
     }
 
-    var1.buffedbyplayers[var2][var0 getentitynumber()]++;
+    var_1.buffedbyplayers[var_2][var_0 getentitynumber()]++;
     return 1;
   }
 }
 
-function untrackbuffassist(var0, var1, var2) {
+function untrackbuffassist(var_0, var_1, var_2) {
   if(scripts\mp\utility\game::runleanthreadmode()) {
     return;
   }
 
-  if(isDefined(var1)) {
-    if(isDefined(var1.buffedbyplayers[var2]) && isDefined(var1.buffedbyplayers[var2][var0 getentitynumber()])) {
-      var1.buffedbyplayers[var2][var0 getentitynumber()]--;
+  if(isDefined(var_1)) {
+    if(isDefined(var_1.buffedbyplayers[var_2]) && isDefined(var_1.buffedbyplayers[var_2][var_0 getentitynumber()])) {
+      var_1.buffedbyplayers[var_2][var_0 getentitynumber()]--;
 
-      if(var1.buffedbyplayers[var2][var0 getentitynumber()] <= 0) {
-        var1.buffedbyplayers[var2][var0 getentitynumber()] = undefined;
+      if(var_1.buffedbyplayers[var_2][var_0 getentitynumber()] <= 0) {
+        var_1.buffedbyplayers[var_2][var_0 getentitynumber()] = undefined;
         return;
       }
 
@@ -923,84 +923,84 @@ function untrackbuffassist(var0, var1, var2) {
   }
 }
 
-function trackbuffassistfortime(var0, var1, var2, var3, var4) {
+function trackbuffassistfortime(var_0, var_1, var_2, var_3, var_4) {
   if(scripts\mp\utility\game::runleanthreadmode()) {
     return;
   }
 
-  var1 endon("initAssistTrackers");
-  var1 endon("disconnect");
-  var0 endon("disconnect");
+  var_1 endon("initAssistTrackers");
+  var_1 endon("disconnect");
+  var_0 endon("disconnect");
   level endon("game_ended");
-  var5 = trackbuffassist(var0, var1, var2);
+  var_5 = trackbuffassist(var_0, var_1, var_2);
 
-  if(!var5) {
+  if(!var_5) {
     return;
   }
 
-  if(isDefined(var4) && isstring(var4)) {
-    var1 scripts\engine\utility::waittill_notify_or_timeout(var4, var3);
+  if(isDefined(var_4) && isstring(var_4)) {
+    var_1 scripts\engine\utility::waittill_notify_or_timeout(var_4, var_3);
   } else {
-    wait var3;
+    wait var_3;
   }
 
-  untrackbuffassist(var0, var1, var2);
+  untrackbuffassist(var_0, var_1, var_2);
 }
 
-function awardbuffdebuffassists(var0, var1) {
-  var2 = [];
+function awardbuffdebuffassists(var_0, var_1) {
+  var_2 = [];
 
-  foreach(var4 in var1.debuffedbyplayers) {
-    foreach(var9, var6 in var4) {
-      if(var6 <= 0) {
+  foreach(var_4 in var_1.debuffedbyplayers) {
+    foreach(var_9, var_6 in var_4) {
+      if(var_6 <= 0) {
         continue;
       }
 
-      var7 = level.playersbyentitynumber[var9];
+      var_7 = level.playersbyentitynumber[var_9];
 
-      if(isDefined(var7) && var7.team != "spectator" && var7.team != "follower" && var7 scripts\mp\utility\player::isenemy(var1)) {
-        var8 = var7.guid;
+      if(isDefined(var_7) && var_7.team != "spectator" && var_7.team != "follower" && var_7 scripts\mp\utility\player::isenemy(var_1)) {
+        var_8 = var_7.guid;
 
-        if(!isDefined(var2[var8])) {
-          var2 = var7;
+        if(!isDefined(var_2[var_8])) {
+          var_2 = var_7;
         }
       }
     }
   }
 
-  foreach(var4 in var0.buffedbyplayers) {
-    foreach(var13 in var4) {
-      if(var13 <= 0) {
+  foreach(var_4 in var_0.buffedbyplayers) {
+    foreach(var_13 in var_4) {
+      if(var_13 <= 0) {
         continue;
       }
 
-      var7 = level.playersbyentitynumber[var9];
+      var_7 = level.playersbyentitynumber[var_9];
 
-      if(isDefined(var7) && var7.team != "spectator" && var7.team != "follower" && var7 scripts\mp\utility\player::isenemy(var1)) {
-        var8 = var7.guid;
+      if(isDefined(var_7) && var_7.team != "spectator" && var_7.team != "follower" && var_7 scripts\mp\utility\player::isenemy(var_1)) {
+        var_8 = var_7.guid;
 
-        if(!isDefined(var2[var8])) {
-          var2 = var7;
+        if(!isDefined(var_2[var_8])) {
+          var_2 = var_7;
         }
       }
     }
   }
 
-  foreach(var8, var7 in var2) {
-    if(!isDefined(var1.attackerdata) || !isDefined(var1.attackerdata[var7.guid])) {
-      scripts\mp\damage::addattacker(var1, var7, undefined, isundefinedweapon(), 0, undefined, undefined, undefined, undefined, undefined);
+  foreach(var_8, var_7 in var_2) {
+    if(!isDefined(var_1.attackerdata) || !isDefined(var_1.attackerdata[var_7.guid])) {
+      scripts\mp\damage::addattacker(var_1, var_7, undefined, isundefinedweapon(), 0, undefined, undefined, undefined, undefined, undefined);
     }
   }
 }
 
-function gamemodeusesdeathmatchscoring(var0) {
-  return var0 == "dm" || var0 == "sotf_ffa";
+function gamemodeusesdeathmatchscoring(var_0) {
+  return var_0 == "dm" || var_0 == "sotf_ffa";
 }
 
 function ref_119c1() {
-  var0 = level.teamnamelist[0];
-  var1 = level.teamnamelist[1];
-  var2 = getteamscore(var0);
-  var3 = getteamscore(var1);
-  getentitylessscriptablearray("dlog_event_score_change", ["team_1_name", var0, "team_2_name", var1, "team_1_score", var2, "team_2_score", var3]);
+  var_0 = level.teamnamelist[0];
+  var_1 = level.teamnamelist[1];
+  var_2 = getteamscore(var_0);
+  var_3 = getteamscore(var_1);
+  getentitylessscriptablearray("dlog_event_score_change", ["team_1_name", var_0, "team_2_name", var_1, "team_1_score", var_2, "team_2_score", var_3]);
 }

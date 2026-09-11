@@ -9,18 +9,18 @@ function init() {
   level._effect["vfx_killmonger_smoke_trail"] = loadfx("vfx/iw8_br/gameplay/rumble/vfx_rum_killmonger_trail");
   level._effect["vfx_killmonger_victim_explosion"] = loadfx("vfx/iw8_br/gameplay/rumble/vfx_rum_victim_explosion");
   game["dialog"]["powerup_killmonger"] = "power_up_killmonger";
-  var0 = spawnStruct();
-  var0.ref_138fd = "killmonger";
-  var0.parachute_get_path = getdvarfloat("scr_brPowerups_killmonger_buff_duration", 45);
-  var0.parachuteoverheadwarningprematchtimeoutms = getdvarfloat("scr_brPowerups_killmonger_ping_interval", 2);
-  var0.spotlight_model = getdvarint("scr_brPowerups_killmong_ping_radius", 2500);
-  var0.parachuteoverheadwarningheight = getdvarfloat("scr_brPowerups_killmonger_outline_duration", 1.8);
-  var0.parachutedeploydelay = getdvarfloat("scr_brPowerups_killmonger_footsteps_duration", 1.8);
-  var0.asm_playfacialanim_mp = &asm_playfacialanim_mp;
-  var0.ref_12a35 = &ref_12a35;
-  var0.ref_1449e = &ref_1449e;
-  var0.isdeathshieldskippingenabled = &isdeathshieldskippingenabled;
-  _keypadscriptableused_bunkeralt::ref_12af4(var0);
+  var_0 = spawnStruct();
+  var_0.ref_138fd = "killmonger";
+  var_0.parachute_get_path = getdvarfloat("scr_brPowerups_killmonger_buff_duration", 45);
+  var_0.parachuteoverheadwarningprematchtimeoutms = getdvarfloat("scr_brPowerups_killmonger_ping_interval", 2);
+  var_0.spotlight_model = getdvarint("scr_brPowerups_killmong_ping_radius", 2500);
+  var_0.parachuteoverheadwarningheight = getdvarfloat("scr_brPowerups_killmonger_outline_duration", 1.8);
+  var_0.parachutedeploydelay = getdvarfloat("scr_brPowerups_killmonger_footsteps_duration", 1.8);
+  var_0.asm_playfacialanim_mp = &asm_playfacialanim_mp;
+  var_0.ref_12a35 = &ref_12a35;
+  var_0.ref_1449e = &ref_1449e;
+  var_0.isdeathshieldskippingenabled = &isdeathshieldskippingenabled;
+  _keypadscriptableused_bunkeralt::ref_12af4(var_0);
 }
 
 function asm_playfacialanim_mp() {
@@ -44,15 +44,15 @@ function ref_1449e() {
   self endon("death");
   self.player endon("death_or_disconnect");
   self endon("stop_powerup");
-  var0 = 0;
+  var_0 = 0;
 
   while(gettime() < self.mp_layover_patch) {
-    var1 = gettime();
+    var_1 = gettime();
 
-    if(var1 - var0 >= self.ref_12e2d.parachuteoverheadwarningprematchtimeoutms * 1000) {
+    if(var_1 - var_0 >= self.ref_12e2d.parachuteoverheadwarningprematchtimeoutms * 1000) {
       thread ref_13ed8();
       thread ref_13341();
-      var0 = gettime();
+      var_0 = gettime();
     }
 
     waitframe();
@@ -84,24 +84,24 @@ function ref_12a35() {
   self.player lerpfovbypreset("zombiedefault");
 }
 
-function ref_11ff1(var0) {
-  if(isDefined(var0.attacker.ref_1282d)) {
-    if(var0.attacker.ref_1282d) {
-      playFX(scripts\engine\utility::getfx("vfx_killmonger_victim_explosion"), var0.victim.origin);
-      var1 = easepower("brloot_rumble_powerup_sfx", var0.victim.origin);
-      var1 setscriptablepartstate("sfx", "killmonger_victim_death_3D");
-      var0.attacker playlocalsound("mp_powerup_victim_death_killmonger_plr");
-      var2 = var0.attacker _keypadscriptableused_bunkeralt::ref_1249c("killmonger");
-      var2.ref_1265d++;
+function ref_11ff1(var_0) {
+  if(isDefined(var_0.attacker.ref_1282d)) {
+    if(var_0.attacker.ref_1282d) {
+      playFX(scripts\engine\utility::getfx("vfx_killmonger_victim_explosion"), var_0.victim.origin);
+      var_1 = easepower("brloot_rumble_powerup_sfx", var_0.victim.origin);
+      var_1 setscriptablepartstate("sfx", "killmonger_victim_death_3D");
+      var_0.attacker playlocalsound("mp_powerup_victim_death_killmonger_plr");
+      var_2 = var_0.attacker _keypadscriptableused_bunkeralt::ref_1249c("killmonger");
+      var_2.ref_1265d++;
 
-      if(var2.ref_1265d % 3 == 0) {
-        var3 = clamp(var2.ref_11e08 + 1, 2, 2);
-        var2.ref_11e08 = var3;
+      if(var_2.ref_1265d % 3 == 0) {
+        var_3 = clamp(var_2.ref_11e08 + 1, 2, 2);
+        var_2.ref_11e08 = var_3;
       }
 
-      var4 = (var2.ref_11e08 - 1) * 75;
-      var2.player thread scripts\mp\rank::giverankxp("br_rumble_killmonger_kill_bonus", var4, var0.objweapon);
-      var2.player thread scripts\mp\rank::scoreeventpopup("br_rumble_killmonger_kill_bonus");
+      var_4 = (var_2.ref_11e08 - 1) * 75;
+      var_2.player thread scripts\mp\rank::giverankxp("br_rumble_killmonger_kill_bonus", var_4, var_0.objweapon);
+      var_2.player thread scripts\mp\rank::scoreeventpopup("br_rumble_killmonger_kill_bonus");
       return;
     }
 
@@ -109,8 +109,8 @@ function ref_11ff1(var0) {
   }
 }
 
-function open_starting_safehouse_door(var0) {
-  self.mp_layover_patch = gettime() + var0 * 1000;
+function open_starting_safehouse_door(var_0) {
+  self.mp_layover_patch = gettime() + var_0 * 1000;
   self.player thread _keypadscriptableused_bunkeralt::ref_13f7e(undefined, 3, 2);
 }
 
@@ -145,84 +145,84 @@ function ref_12bd0() {
 }
 
 function ref_13ed8() {
-  var0 = self.player;
-  var1 = self.player.origin;
-  var2 = self.player.angles;
-  var3 = init_hacking_consoles_internal(var0, var1);
-  var4 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_sky", "physicscontents_item", "physicscontents_vehicle"]);
-  var5 = scripts\common\utility::playersinsphere(var1, self.ref_12e2d.spotlight_model);
-  var6 = prematchinitblueprintloadouts(var1, self.ref_12e2d.spotlight_model);
+  var_0 = self.player;
+  var_1 = self.player.origin;
+  var_2 = self.player.angles;
+  var_3 = init_hacking_consoles_internal(var_0, var_1);
+  var_4 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_sky", "physicscontents_item", "physicscontents_vehicle"]);
+  var_5 = scripts\common\utility::playersinsphere(var_1, self.ref_12e2d.spotlight_model);
+  var_6 = prematchinitblueprintloadouts(var_1, self.ref_12e2d.spotlight_model);
 
-  if(var6.size) {
-    var5 = scripts\engine\utility::array_combine(var5, var6);
+  if(var_6.size) {
+    var_5 = scripts\engine\utility::array_combine(var_5, var_6);
   }
 
-  self.ref_12ed0 = var5;
+  self.ref_12ed0 = var_5;
 
-  if(var5.size > 0) {
-    var7 = scripts\engine\utility::ter_op(self.player.team == "axis", "allies", "axis");
+  if(var_5.size > 0) {
+    var_7 = scripts\engine\utility::ter_op(self.player.team == "axis", "allies", "axis");
   }
 
-  foreach(var9 in var5) {
-    if(!scripts\mp\utility\player::isreallyalive(var9) || !scripts\cp_mp\utility\player_utility::playersareenemies(var0, var9)) {
+  foreach(var_9 in var_5) {
+    if(!scripts\mp\utility\player::isreallyalive(var_9) || !scripts\cp_mp\utility\player_utility::playersareenemies(var_0, var_9)) {
       continue;
     }
 
-    thread c4vehiclemultkill(var9, var0, var3);
-    thread c4_placing_bc(var9, var0);
+    thread c4vehiclemultkill(var_9, var_0, var_3);
+    thread c4_placing_bc(var_9, var_0);
   }
 
-  triggerportableradarping(var1, var0, self.ref_12e2d.spotlight_model, 500, "specialty_snapshot_immunity");
+  triggerportableradarping(var_1, var_0, self.ref_12e2d.spotlight_model, 500, "specialty_snapshot_immunity");
 }
 
-function c4_placing_bc(var0, var1) {
+function c4_placing_bc(var_0, var_1) {
   level endon("game_ended");
   self.player endon("disconnect");
 
-  if(isagent(var0)) {
+  if(isagent(var_0)) {
     return;
   }
 
-  if(isDefined(var0) && isDefined(var1)) {
-    var2 = playfxontagforclients(scripts\engine\utility::getfx("vfx_killmonger_blood_trail"), var0, "j_spine4", var1);
+  if(isDefined(var_0) && isDefined(var_1)) {
+    var_2 = playfxontagforclients(scripts\engine\utility::getfx("vfx_killmonger_blood_trail"), var_0, "j_spine4", var_1);
   }
 
   wait self.ref_12e2d.parachuteoverheadwarningheight / 1.8;
 
-  if(isDefined(var0) && isDefined(var1)) {
-    stopfxontagforclients(scripts\engine\utility::getfx("vfx_killmonger_blood_trail"), var0, "j_spine4", var1);
+  if(isDefined(var_0) && isDefined(var_1)) {
+    stopfxontagforclients(scripts\engine\utility::getfx("vfx_killmonger_blood_trail"), var_0, "j_spine4", var_1);
     return;
   }
 }
 
-function c4vehiclemultkill(var0, var1, var2) {
-  var3 = var0 getentitynumber();
-  var2.targets[var3] = var0;
-  var2.endtimes[var3] = gettime() + self.ref_12e2d.parachuteoverheadwarningheight * 1000;
-  var2.outlineids[var3] = scripts\mp\utility\outline::outlineenableforplayer(var0, var1, "killmonger_snapshot", "equipment");
+function c4vehiclemultkill(var_0, var_1, var_2) {
+  var_3 = var_0 getentitynumber();
+  var_2.targets[var_3] = var_0;
+  var_2.endtimes[var_3] = gettime() + self.ref_12e2d.parachuteoverheadwarningheight * 1000;
+  var_2.outlineids[var_3] = scripts\mp\utility\outline::outlineenableforplayer(var_0, var_1, "killmonger_snapshot", "equipment");
 
-  if(isPlayer(var0) || isbot(var0)) {}
+  if(isPlayer(var_0) || isbot(var_0)) {}
 
   thread ref_13fb1();
-  var0.lastsnapshotgrenadetime = gettime();
-  var1 scripts\mp\damage::combatrecordtacticalstat("equip_snapshot_grenade");
-  var1 scripts\mp\utility\stats::incpersstat("snapshotHits", 1);
+  var_0.lastsnapshotgrenadetime = gettime();
+  var_1 scripts\mp\damage::combatrecordtacticalstat("equip_snapshot_grenade");
+  var_1 scripts\mp\utility\stats::incpersstat("snapshotHits", 1);
 }
 
-function init_hacking_consoles_internal(var0, var1) {
-  var2 = undefined;
+function init_hacking_consoles_internal(var_0, var_1) {
+  var_2 = undefined;
 
   if(true) {
-    var2 = spawnStruct();
-    var2.owner = var0;
-    var2.position = var1;
-    var2.isalive = 1;
-    var2.targets = [];
-    var2.endtimes = [];
-    var2.outlineids = [];
+    var_2 = spawnStruct();
+    var_2.owner = var_0;
+    var_2.position = var_1;
+    var_2.isalive = 1;
+    var_2.targets = [];
+    var_2.endtimes = [];
+    var_2.outlineids = [];
   }
 
-  return var2;
+  return var_2;
 }
 
 function ref_13fb1() {
@@ -239,22 +239,22 @@ function ref_13fb1() {
   thread ref_13430();
 
   while(self.targets.size > 0) {
-    foreach(var5, var1 in self.targets) {
-      var1 = self.targets[var5];
-      var2 = self.endtimes[var5];
-      var3 = self.outlineids[var5];
+    foreach(var_5, var_1 in self.targets) {
+      var_1 = self.targets[var_5];
+      var_2 = self.endtimes[var_5];
+      var_3 = self.outlineids[var_5];
 
-      if(!scripts\mp\utility\player::isreallyalive(var1) || gettime() >= var2) {
-        scripts\mp\utility\outline::outlinedisable(var3, var1);
-        var4 = isPlayer(var1);
+      if(!scripts\mp\utility\player::isreallyalive(var_1) || gettime() >= var_2) {
+        scripts\mp\utility\outline::outlinedisable(var_3, var_1);
+        var_4 = isPlayer(var_1);
 
-        if(isDefined(var1) && var4) {
-          var1 scripts\mp\utility\outline::_hudoutlineviewmodeldisable();
+        if(isDefined(var_1) && var_4) {
+          var_1 scripts\mp\utility\outline::_hudoutlineviewmodeldisable();
         }
 
-        self.targets[var5] = undefined;
-        self.endtimes[var5] = undefined;
-        self.outlineids[var5] = undefined;
+        self.targets[var_5] = undefined;
+        self.endtimes[var_5] = undefined;
+        self.outlineids[var_5] = undefined;
       }
     }
 
@@ -285,40 +285,40 @@ function ref_13431() {
   self notify("death");
   self.isalive = 0;
 
-  foreach(var1 in self.targets) {
-    var1 = self.targets[var3];
-    var2 = self.outlineids[var3];
-    scripts\mp\utility\outline::outlinedisable(var2, var1);
+  foreach(var_1 in self.targets) {
+    var_1 = self.targets[var_3];
+    var_2 = self.outlineids[var_3];
+    scripts\mp\utility\outline::outlinedisable(var_2, var_1);
 
-    if(isDefined(var1) && (isPlayer(var1) || isbot(var1))) {
-      var1 scripts\mp\utility\outline::_hudoutlineviewmodeldisable();
+    if(isDefined(var_1) && (isPlayer(var_1) || isbot(var_1))) {
+      var_1 scripts\mp\utility\outline::_hudoutlineviewmodeldisable();
     }
   }
 }
 
-function prematchinitblueprintloadouts(var0, var1) {
-  var2 = prematchinitloadouts(var0, var1);
-  var3 = [];
-  var4 = var1 * var1;
+function prematchinitblueprintloadouts(var_0, var_1) {
+  var_2 = prematchinitloadouts(var_0, var_1);
+  var_3 = [];
+  var_4 = var_1 * var_1;
 
-  foreach(var6 in var2) {
-    var7 = distancesquared(var6.origin, var0);
+  foreach(var_6 in var_2) {
+    var_7 = distancesquared(var_6.origin, var_0);
 
-    if(var7 < var4) {
-      var3 = var6;
+    if(var_7 < var_4) {
+      var_3 = var_6;
     }
   }
 
-  return var3;
+  return var_3;
 }
 
-function prematchinitloadouts(var0, var1) {
-  var2 = physics_createcontents(["physicscontents_actor"]);
-  var3 = (var1, var1, var1);
-  var4 = var0 - var3;
-  var5 = var0 + var3;
-  var6 = physics_aabbbroadphasequery(var4, var5, var2, []);
-  return var6;
+function prematchinitloadouts(var_0, var_1) {
+  var_2 = physics_createcontents(["physicscontents_actor"]);
+  var_3 = (var_1, var_1, var_1);
+  var_4 = var_0 - var_3;
+  var_5 = var_0 + var_3;
+  var_6 = physics_aabbbroadphasequery(var_4, var_5, var_2, []);
+  return var_6;
 }
 
 function isplatepouch() {
@@ -334,26 +334,26 @@ function isplayerbrsquadleader() {
   }
 }
 
-function isplacementplayerobstructed(var0, var1) {
-  var2 = "";
+function isplacementplayerobstructed(var_0, var_1) {
+  var_2 = "";
 
-  switch (var0) {
+  switch (var_0) {
     case "rmbl_give_killmonger_powerup":
       level.player _keypadscriptableused_bunkeralt::ref_1393a("killmonger");
       break;
     case "rmbl_spawn_killmonger_powerup":
-      var3 = level.player.origin + anglesToForward(level.player.angles) * 300 + (0, 0, 25);
-      easepower("brloot_rumble_powerup_killmonger", var3);
+      var_3 = level.player.origin + anglesToForward(level.player.angles) * 300 + (0, 0, 25);
+      easepower("brloot_rumble_powerup_killmonger", var_3);
       break;
     case "rmbl_give_teammate_killmonger_powerup":
-      var4 = scripts\mp\utility\teams::getteamdata(level.player.team, "players");
-      var4 = scripts\engine\utility::array_remove(var4, level.player);
-      var4[randomintrange(0, var4.size)] _keypadscriptableused_bunkeralt::ref_1393a("killmonger");
+      var_4 = scripts\mp\utility\teams::getteamdata(level.player.team, "players");
+      var_4 = scripts\engine\utility::array_remove(var_4, level.player);
+      var_4[randomintrange(0, var_4.size)] _keypadscriptableused_bunkeralt::ref_1393a("killmonger");
       break;
     case "rmbl_give_enemy_killmonger_powerup":
-      var5 = scripts\engine\utility::ter_op(level.player.team == "axis", "allies", "axis");
-      var4 = scripts\mp\utility\teams::getteamdata(var5, "players");
-      var4[randomintrange(0, var4.size)] _keypadscriptableused_bunkeralt::ref_1393a("killmonger");
+      var_5 = scripts\engine\utility::ter_op(level.player.team == "axis", "allies", "axis");
+      var_4 = scripts\mp\utility\teams::getteamdata(var_5, "players");
+      var_4[randomintrange(0, var_4.size)] _keypadscriptableused_bunkeralt::ref_1393a("killmonger");
       break;
   }
 }

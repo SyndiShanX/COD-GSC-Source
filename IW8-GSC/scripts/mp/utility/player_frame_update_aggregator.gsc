@@ -13,9 +13,9 @@ function runupdates() {
   scripts\mp\flags::gameflagwait("prematch_done");
 
   for(;;) {
-    foreach(var1 in level.players) {
-      foreach(var3 in level.playerframeupdatecallbacks) {
-        var1[[var3]]();
+    foreach(var_1 in level.players) {
+      foreach(var_3 in level.playerframeupdatecallbacks) {
+        var_1[[var_3]]();
       }
     }
 
@@ -23,6 +23,6 @@ function runupdates() {
   }
 }
 
-function registerplayerframeupdatecallback(var0) {
-  level.playerframeupdatecallbacks[level.playerframeupdatecallbacks.size] = var0;
+function registerplayerframeupdatecallback(var_0) {
+  level.playerframeupdatecallbacks[level.playerframeupdatecallbacks.size] = var_0;
 }

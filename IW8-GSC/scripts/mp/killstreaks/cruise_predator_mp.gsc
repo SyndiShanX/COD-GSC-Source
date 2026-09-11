@@ -20,33 +20,33 @@ function cruisepredator_registervo() {
   game["dialog"]["cruise_miss"] = "cruise_predator_miss";
 }
 
-function cruisepredator_eventrecord(var0) {
-  if(isDefined(var0)) {
-    scripts\mp\events::predatormissileimpact(var0);
+function cruisepredator_eventrecord(var_0) {
+  if(isDefined(var_0)) {
+    scripts\mp\events::predatormissileimpact(var_0);
     return;
   }
 }
 
-function initbattleroyalec130airdropcratedata(var0) {
-  var1 = [];
-  var2 = [];
-  var3 = level.players;
-  var4 = spawnStruct();
+function initbattleroyalec130airdropcratedata(var_0) {
+  var_1 = [];
+  var_2 = [];
+  var_3 = level.players;
+  var_4 = spawnStruct();
 
-  foreach(var6 in var3) {
-    if(level.teambased && var6.team == var0.team || var6 == var0) {
-      var2 = var6;
+  foreach(var_6 in var_3) {
+    if(level.teambased && var_6.team == var_0.team || var_6 == var_0) {
+      var_2 = var_6;
       continue;
     }
 
-    if(var6 scripts\mp\utility\perk::_hasperk("specialty_noscopeoutline")) {
+    if(var_6 scripts\mp\utility\perk::_hasperk("specialty_noscopeoutline")) {
       continue;
     }
 
-    var1 = var6;
+    var_1 = var_6;
   }
 
-  var4.enemytargetmarkergroup = var1;
-  var4.friendlytargetmarkergroup = var2;
-  return var4;
+  var_4.enemytargetmarkergroup = var_1;
+  var_4.friendlytargetmarkergroup = var_2;
+  return var_4;
 }

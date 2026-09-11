@@ -21,112 +21,112 @@ function initandstartvosystem() {
 }
 
 function init_vo_system() {
-  var0 = spawnStruct();
-  var0.vo_currently_playing = undefined;
-  var0.interrupt_vo = undefined;
-  var0.is_playing = 0;
-  var1 = [];
+  var_0 = spawnStruct();
+  var_0.vo_currently_playing = undefined;
+  var_0.interrupt_vo = undefined;
+  var_0.is_playing = 0;
+  var_1 = [];
 
   if(isDefined(level.vo_priority_level)) {
-    foreach(var3 in level.vo_priority_level) {
-      var1 = [];
+    foreach(var_3 in level.vo_priority_level) {
+      var_1 = [];
     }
   }
 
-  var0.vo_queue = var1;
-  self.vo_system = var0;
+  var_0.vo_queue = var_1;
+  self.vo_system = var_0;
   scripts\engine\utility::flag_init("vo_system_busy");
 }
 
 function parse_vo_table() {
-  var0 = level.vo_table;
-  var1 = 0;
-  jumpiftrue(tableexists(var0)) LOC_00000013;
+  var_0 = level.vo_table;
+  var_1 = 0;
+  jumpiftrue(tableexists(var_0)) LOC_00000013;
   return;
 }
 
-function register_vo(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14) {
-  var15 = spawnStruct();
+function register_vo(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14) {
+  var_15 = spawnStruct();
 
-  if(isDefined(var2) && var2 > 0) {
-    var15.cooldown = var2;
-    var15.lastplayedtime = 0;
+  if(isDefined(var_2) && var_2 > 0) {
+    var_15.cooldown = var_2;
+    var_15.lastplayedtime = 0;
   }
 
-  if(isDefined(var14)) {
-    var15.missingstub = var14;
+  if(isDefined(var_14)) {
+    var_15.missingstub = var_14;
   }
 
-  if(isDefined(var13) && var13 > 0) {
-    var15.pause_time = var13;
+  if(isDefined(var_13) && var_13 > 0) {
+    var_15.pause_time = var_13;
   }
 
-  if(istrue(var10)) {
-    var15.onlylocal = 1;
+  if(istrue(var_10)) {
+    var_15.onlylocal = 1;
   } else {
-    var15.onlylocal = 0;
+    var_15.onlylocal = 0;
   }
 
-  if(isDefined(var11) && var11 > 0) {
-    var15.timeout = var11;
+  if(isDefined(var_11) && var_11 > 0) {
+    var_15.timeout = var_11;
   }
 
-  if(isDefined(var12)) {
-    var15.priority = var12;
+  if(isDefined(var_12)) {
+    var_15.priority = var_12;
   }
 
-  if(isDefined(var4) && var4 > 0) {
-    var15.max_plays = var4;
+  if(isDefined(var_4) && var_4 > 0) {
+    var_15.max_plays = var_4;
   }
 
-  if(isDefined(var3) && var3 > 0) {
-    var15.chance_to_play = var3;
+  if(isDefined(var_3) && var_3 > 0) {
+    var_15.chance_to_play = var_3;
   }
 
-  if(isDefined(var7) && var7 != "") {
-    var15.waittillnotifyorflag = var7;
+  if(isDefined(var_7) && var_7 != "") {
+    var_15.waittillnotifyorflag = var_7;
   }
 
-  if(isDefined(var5) && var5 != "") {
-    if(!isDefined(level.vo_categories[var5])) {
-      level.vo_categories[var5] = [];
+  if(isDefined(var_5) && var_5 != "") {
+    if(!isDefined(level.vo_categories[var_5])) {
+      level.vo_categories[var_5] = [];
     }
 
-    var15.category_1 = var5;
-    level.vo_categories[var5][level.vo_categories[var5].size] = var1;
+    var_15.category_1 = var_5;
+    level.vo_categories[var_5][level.vo_categories[var_5].size] = var_1;
 
-    if(!isDefined(level.vo_category_last_played_time[var5])) {
-      level.vo_category_last_played_time[var5] = 0;
-    }
-  }
-
-  if(isDefined(var6) && var6 != "") {
-    if(!isDefined(level.vo_categories[var6])) {
-      level.vo_categories[var6] = [];
-    }
-
-    var15.category_2 = var6;
-    level.vo_categories[var6][level.vo_categories[var6].size] = var1;
-
-    if(!isDefined(level.vo_category_last_played_time[var6])) {
-      level.vo_category_last_played_time[var6] = 0;
+    if(!isDefined(level.vo_category_last_played_time[var_5])) {
+      level.vo_category_last_played_time[var_5] = 0;
     }
   }
 
-  if(isDefined(var8) && var8 != "") {
-    if(!isDefined(level.vo_dialogue_prefix[var8])) {
-      level.vo_dialogue_prefix[var8] = [];
+  if(isDefined(var_6) && var_6 != "") {
+    if(!isDefined(level.vo_categories[var_6])) {
+      level.vo_categories[var_6] = [];
     }
 
-    var15.dialogueprefix = var8;
-    level.vo_dialogue_prefix[var1] = var8;
+    var_15.category_2 = var_6;
+    level.vo_categories[var_6][level.vo_categories[var_6].size] = var_1;
+
+    if(!isDefined(level.vo_category_last_played_time[var_6])) {
+      level.vo_category_last_played_time[var_6] = 0;
+    }
   }
 
-  if(isDefined(var9) && var9 != "") {
-    var15.nextdialogue = var9;
+  if(isDefined(var_8) && var_8 != "") {
+    if(!isDefined(level.vo_dialogue_prefix[var_8])) {
+      level.vo_dialogue_prefix[var_8] = [];
+    }
+
+    var_15.dialogueprefix = var_8;
+    level.vo_dialogue_prefix[var_1] = var_8;
   }
 
-  level.vo_alias_data[var1] = var15;
+  if(isDefined(var_9) && var_9 != "") {
+    var_15.nextdialogue = var_9;
+  }
+
+  level.vo_alias_data[var_1] = var_15;
 }
 
 function start_vo_system() {
@@ -140,9 +140,9 @@ function start_vo_system() {
       }
     }
 
-    var0 = get_vo_to_play();
+    var_0 = get_vo_to_play();
 
-    if(!isDefined(var0)) {
+    if(!isDefined(var_0)) {
       set_vo_system_playing(0);
       self waittill("play_VO_system");
 
@@ -153,32 +153,32 @@ function start_vo_system() {
       continue;
     }
 
-    play_vo_system(var0);
+    play_vo_system(var_0);
   }
 }
 
-function play_vo_system(var0) {
+function play_vo_system(var_0) {
   self endon("disconnect");
   set_vo_system_playing(1);
-  set_vo_currently_playing(var0);
-  play_vo(var0);
-  pause_between_vo(var0);
+  set_vo_currently_playing(var_0);
+  play_vo(var_0);
+  pause_between_vo(var_0);
   unset_vo_currently_playing();
 }
 
 function get_vo_to_play() {
-  var0 = retrieve_interrupt_vo();
+  var_0 = retrieve_interrupt_vo();
 
-  if(isDefined(var0)) {
-    return var0;
+  if(isDefined(var_0)) {
+    return var_0;
   }
 
   if(isDefined(level.vo_priority_level)) {
-    foreach(var2 in level.vo_priority_level) {
-      var0 = retrieve_vo_from_queue(var2);
+    foreach(var_2 in level.vo_priority_level) {
+      var_0 = retrieve_vo_from_queue(var_2);
 
-      if(isDefined(var0)) {
-        return var0;
+      if(isDefined(var_0)) {
+        return var_0;
       }
     }
   }
@@ -187,64 +187,64 @@ function get_vo_to_play() {
 }
 
 function retrieve_interrupt_vo() {
-  var0 = self.vo_system.interrupt_vo;
+  var_0 = self.vo_system.interrupt_vo;
   reset_interrupt_vo();
-  return var0;
+  return var_0;
 }
 
 function reset_interrupt_vo() {
   self.vo_system.interrupt_vo = undefined;
 }
 
-function retrieve_vo_from_queue(var0) {
-  remove_expired_vo_from_queue(var0);
-  return pop_first_vo_out_of_queue(var0);
+function retrieve_vo_from_queue(var_0) {
+  remove_expired_vo_from_queue(var_0);
+  return pop_first_vo_out_of_queue(var_0);
 }
 
-function pop_first_vo_out_of_queue(var0) {
-  var1 = self.vo_system.vo_queue[var0][0];
+function pop_first_vo_out_of_queue(var_0) {
+  var_1 = self.vo_system.vo_queue[var_0][0];
 
-  if(!isDefined(var1)) {
-    return var1;
+  if(!isDefined(var_1)) {
+    return var_1;
   }
 
-  var2 = [];
+  var_2 = [];
 
-  for(var3 = 1; var3 < self.vo_system.vo_queue[var0].size; var3++) {
-    if(!isDefined(self.vo_system.vo_queue[var0][var3])) {
+  for(var_3 = 1; var_3 < self.vo_system.vo_queue[var_0].size; var_3++) {
+    if(!isDefined(self.vo_system.vo_queue[var_0][var_3])) {
       break;
     }
 
-    var2 = self.vo_system.vo_queue[var0][var3];
+    var_2 = self.vo_system.vo_queue[var_0][var_3];
   }
 
-  self.vo_system.vo_queue[var0] = var2;
-  return var1;
+  self.vo_system.vo_queue[var_0] = var_2;
+  return var_1;
 }
 
-function remove_expired_vo_from_queue(var0) {
-  var1 = gettime();
-  var2 = [];
+function remove_expired_vo_from_queue(var_0) {
+  var_1 = gettime();
+  var_2 = [];
 
-  foreach(var4 in self.vo_system.vo_queue[var0]) {
-    if(!vo_expired(var4, var1)) {
-      var2 = self.vo_system.vo_queue[var0][var5];
+  foreach(var_4 in self.vo_system.vo_queue[var_0]) {
+    if(!vo_expired(var_4, var_1)) {
+      var_2 = self.vo_system.vo_queue[var_0][var_5];
     }
   }
 
-  self.vo_system.vo_queue[var0] = var2;
+  self.vo_system.vo_queue[var_0] = var_2;
 }
 
-function vo_expired(var0, var1) {
-  return var1 > var0.expire_time;
+function vo_expired(var_0, var_1) {
+  return var_1 > var_0.expire_time;
 }
 
-function set_vo_system_playing(var0) {
+function set_vo_system_playing(var_0) {
   if(!isPlayer(self) || !isDefined(self.vo_system)) {
     return;
   }
 
-  self.vo_system.is_playing = var0;
+  self.vo_system.is_playing = var_0;
 }
 
 function is_vo_system_paused() {
@@ -255,10 +255,10 @@ function is_vo_system_busy() {
   return scripts\engine\utility::flag("vo_system_busy");
 }
 
-function set_vo_system_busy(var0) {
-  level.vo_system_busy = var0;
+function set_vo_system_busy(var_0) {
+  level.vo_system_busy = var_0;
 
-  if(!var0) {
+  if(!var_0) {
     scripts\engine\utility::flag_clear("vo_system_busy");
     return;
   }
@@ -266,102 +266,102 @@ function set_vo_system_busy(var0) {
   scripts\engine\utility::flag_set("vo_system_busy");
 }
 
-function set_vo_currently_playing(var0) {
-  self.vo_system.vo_currently_playing = var0;
+function set_vo_currently_playing(var_0) {
+  self.vo_system.vo_currently_playing = var_0;
 }
 
 function game_ended_vo_watcher() {
-  var0 = "";
+  var_0 = "";
   level waittill("game_ended");
 
-  foreach(var2 in level.players) {
-    foreach(var4 in level.vo_priority_level) {
-      if(isDefined(var2.vo_system.vo_queue[var4]) && var2.vo_system.vo_queue[var4].size > 0) {
-        foreach(var6 in var2.vo_system.vo_queue[var4]) {
-          if(isDefined(var6)) {
-            if(soundexists(var6.alias)) {
-              var2 stoplocalsound(var6.alias);
+  foreach(var_2 in level.players) {
+    foreach(var_4 in level.vo_priority_level) {
+      if(isDefined(var_2.vo_system.vo_queue[var_4]) && var_2.vo_system.vo_queue[var_4].size > 0) {
+        foreach(var_6 in var_2.vo_system.vo_queue[var_4]) {
+          if(isDefined(var_6)) {
+            if(soundexists(var_6.alias)) {
+              var_2 stoplocalsound(var_6.alias);
             }
           }
         }
 
-        var2.vo_system.vo_queue[var4] = [];
+        var_2.vo_system.vo_queue[var_4] = [];
       }
     }
 
     if(isDefined(level.dialogue_arr) && level.dialogue_arr.size > 0) {
-      foreach(var10 in level.dialogue_arr) {
-        if(issubstr(var10, "pg_")) {
-          var2 stoplocalsound(var10);
+      foreach(var_10 in level.dialogue_arr) {
+        if(issubstr(var_10, "pg_")) {
+          var_2 stoplocalsound(var_10);
         }
 
-        if(soundexists(var2.vo_prefix + var10)) {
-          var2 stoplocalsound(var2.vo_prefix + var10);
+        if(soundexists(var_2.vo_prefix + var_10)) {
+          var_2 stoplocalsound(var_2.vo_prefix + var_10);
         }
 
-        if(soundexists(var2.vo_prefix + "plr_" + var10)) {
-          var2 stoplocalsound(var2.vo_prefix + "plr_" + var10);
-        }
-      }
-    }
-
-    if(isDefined(var2.current_vo_queue) && var2.current_vo_queue.size > 0) {
-      foreach(var13 in var2.current_vo_queue) {
-        if(isDefined(var13)) {
-          if(soundexists(var13)) {
-            var2 stoplocalsound(var13);
-            continue;
-          }
-
-          if(soundexists(var2.vo_prefix + var13)) {
-            var2 stoplocalsound(var2.vo_prefix + var13);
-            continue;
-          }
-
-          if(soundexists(var2.vo_prefix + "plr_" + var13)) {
-            var2 stoplocalsound(var2.vo_prefix + "plr_" + var13);
-          }
+        if(soundexists(var_2.vo_prefix + "plr_" + var_10)) {
+          var_2 stoplocalsound(var_2.vo_prefix + "plr_" + var_10);
         }
       }
     }
 
-    if(!isDefined(var2.vo_prefix)) {
+    if(isDefined(var_2.current_vo_queue) && var_2.current_vo_queue.size > 0) {
+      foreach(var_13 in var_2.current_vo_queue) {
+        if(isDefined(var_13)) {
+          if(soundexists(var_13)) {
+            var_2 stoplocalsound(var_13);
+            continue;
+          }
+
+          if(soundexists(var_2.vo_prefix + var_13)) {
+            var_2 stoplocalsound(var_2.vo_prefix + var_13);
+            continue;
+          }
+
+          if(soundexists(var_2.vo_prefix + "plr_" + var_13)) {
+            var_2 stoplocalsound(var_2.vo_prefix + "plr_" + var_13);
+          }
+        }
+      }
+    }
+
+    if(!isDefined(var_2.vo_prefix)) {
       return;
     }
 
-    switch (var2.vo_prefix) {
+    switch (var_2.vo_prefix) {
       case "p1_":
-        var0 = "_valley_girl";
+        var_0 = "_valley_girl";
         break;
       case "p2_":
-        var0 = "_nerd";
+        var_0 = "_nerd";
         break;
       case "p3_":
-        var0 = "_rapper";
+        var_0 = "_rapper";
         break;
       case "p4_":
-        var0 = "_jock";
+        var_0 = "_jock";
         break;
       case "p5_":
-        var0 = "_jock";
+        var_0 = "_jock";
         break;
     }
 
-    var15 = "mus_zombies" + var0;
+    var_15 = "mus_zombies" + var_0;
 
-    if(soundexists(var15)) {
-      var2 stoplocalsound("mus_zombies" + var0);
+    if(soundexists(var_15)) {
+      var_2 stoplocalsound("mus_zombies" + var_0);
     }
 
-    var15 = "mus_zombies" + var0 + "_lsrs";
+    var_15 = "mus_zombies" + var_0 + "_lsrs";
 
-    if(soundexists(var15)) {
-      var2 stoplocalsound("mus_zombies" + var0 + "_lsrs");
+    if(soundexists(var_15)) {
+      var_2 stoplocalsound("mus_zombies" + var_0 + "_lsrs");
     }
   }
 }
 
-function play_vo(var0) {
+function play_vo(var_0) {
   self endon("interrupt_current_VO");
   level endon("game_ended");
   self endon("death");
@@ -371,10 +371,10 @@ function play_vo(var0) {
     return;
   }
 
-  var1 = var0.alias;
+  var_1 = var_0.alias;
 
-  if(!soundexists(var1)) {
-    if(isDefined(level.vo_alias_data[var1]) && isDefined("level.vo_alias_data[alias].missingStub")) {}
+  if(!soundexists(var_1)) {
+    if(isDefined(level.vo_alias_data[var_1]) && isDefined("level.vo_alias_data[alias].missingStub")) {}
 
     wait 0.1;
     return;
@@ -383,127 +383,127 @@ function play_vo(var0) {
   self.vo_system_playing_vo = 1;
 
   if(scripts\cp\utility::is_playing_pain_breathing_sfx(self)) {
-    var2 = scripts\cp\utility::get_pain_breathing_sfx_alias(self);
+    var_2 = scripts\cp\utility::get_pain_breathing_sfx_alias(self);
 
-    if(isDefined(var2)) {
-      self stoplocalsound(var2);
+    if(isDefined(var_2)) {
+      self stoplocalsound(var_2);
     }
   }
 
-  if(isDefined(var0.basealias)) {
-    var3 = var0.basealias;
+  if(isDefined(var_0.basealias)) {
+    var_3 = var_0.basealias;
   } else {
-    var3 = var3;
+    var_3 = var_3;
   }
 
-  foreach(var5 in level.players) {
-    if(var5 issplitscreenplayer() && !var5 issplitscreenplayerprimary()) {
+  foreach(var_5 in level.players) {
+    if(var_5 issplitscreenplayer() && !var_5 issplitscreenplayerprimary()) {
       continue;
     }
 
-    if(isDefined(var5.current_vo_queue)) {
-      var5.current_vo_queue = scripts\engine\utility::array_add(var5.current_vo_queue, var3);
+    if(isDefined(var_5.current_vo_queue)) {
+      var_5.current_vo_queue = scripts\engine\utility::array_add(var_5.current_vo_queue, var_3);
     }
 
-    if(var5 == self) {
+    if(var_5 == self) {
       if(isDefined(level.get_alias_2d_func)) {
-        var6 = [[level.get_alias_2d_func]](var5, var3, var3);
+        var_6 = [[level.get_alias_2d_func]](var_5, var_3, var_3);
       } else {
-        var6 = get_alias_2d_version(var7, var3, var4);
+        var_6 = get_alias_2d_version(var_7, var_3, var_4);
       }
 
-      if(isDefined(var6)) {
-        var7 scripts\cp\utility::playlocalsound_safe(var6);
+      if(isDefined(var_6)) {
+        var_7 scripts\cp\utility::playlocalsound_safe(var_6);
       } else {
-        var7 scripts\cp\utility::playlocalsound_safe(var3);
+        var_7 scripts\cp\utility::playlocalsound_safe(var_3);
       }
 
       continue;
     }
 
-    if(!istrue(var3.only_local) && soundexists(var3)) {
-      self playsoundtoplayer(var3, var7);
+    if(!istrue(var_3.only_local) && soundexists(var_3)) {
+      self playsoundtoplayer(var_3, var_7);
     }
   }
 
-  var5 = undefined;
-  var6 = undefined;
+  var_5 = undefined;
+  var_6 = undefined;
 
-  foreach(var9 in var3.categories) {
-    level.vo_category_last_played_time[var9] = gettime();
+  foreach(var_9 in var_3.categories) {
+    level.vo_category_last_played_time[var_9] = gettime();
   }
 
-  if(!isDefined(self.num_of_plays[var4])) {
-    self.num_of_plays[var4] = 1;
+  if(!isDefined(self.num_of_plays[var_4])) {
+    self.num_of_plays[var_4] = 1;
   } else {
-    self.num_of_plays[var4]++;
+    self.num_of_plays[var_4]++;
   }
 
-  wait get_sound_length(var3);
+  wait get_sound_length(var_3);
   self.vo_system_playing_vo = 0;
 }
 
-function alias_2d_version_exists(var0, var1) {
-  var2 = get_alias_2d_version(var0, var1);
-  return soundexists(var2);
+function alias_2d_version_exists(var_0, var_1) {
+  var_2 = get_alias_2d_version(var_0, var_1);
+  return soundexists(var_2);
 }
 
-function get_alias_2d_version(var0, var1, var2) {
-  var3 = strtok(var1, "_");
+function get_alias_2d_version(var_0, var_1, var_2) {
+  var_3 = strtok(var_1, "_");
 
-  if(var3[0] == "ww" || var3[0] == "dj" || var3[0] == "ks") {
-    return var1;
+  if(var_3[0] == "ww" || var_3[0] == "dj" || var_3[0] == "ks") {
+    return var_1;
   }
 
-  if(isDefined(var0.vo_prefix)) {
-    var4 = var0.vo_prefix + "plr_" + var2;
+  if(isDefined(var_0.vo_prefix)) {
+    var_4 = var_0.vo_prefix + "plr_" + var_2;
   } else {
-    var4 = "plr_" + var3;
+    var_4 = "plr_" + var_3;
   }
 
-  if(soundexists(var4)) {
-    return var4;
+  if(soundexists(var_4)) {
+    return var_4;
   }
 
   return undefined;
 }
 
-function get_alias_3d_version(var0, var1) {
-  if(issubstr(var1, "ww_") || issubstr(var1, "dj_") || issubstr(var1, "p1_") || issubstr(var1, "p2_") || issubstr(var1, "p3_") || issubstr(var1, "p4_") || issubstr(var1, "jaroslav_anc")) {
-    return var1;
+function get_alias_3d_version(var_0, var_1) {
+  if(issubstr(var_1, "ww_") || issubstr(var_1, "dj_") || issubstr(var_1, "p1_") || issubstr(var_1, "p2_") || issubstr(var_1, "p3_") || issubstr(var_1, "p4_") || issubstr(var_1, "jaroslav_anc")) {
+    return var_1;
   }
 
-  var2 = getsubstr(var1, var0.vo_prefix.size);
-  return var0.vo_prefix + var2;
+  var_2 = getsubstr(var_1, var_0.vo_prefix.size);
+  return var_0.vo_prefix + var_2;
 }
 
-function get_sound_length(var0) {
-  if(!soundexists(var0)) {
+function get_sound_length(var_0) {
+  if(!soundexists(var_0)) {
     return 0;
   }
 
-  var1 = lookupsoundlength(var0) / 1000 + 0.4;
+  var_1 = lookupsoundlength(var_0) / 1000 + 0.4;
 
   if(getdvarint("PMKLQQKSO") != 0 && getdvarint("PMKLQQKSO") != 1) {
-    var1 += 1.5;
+    var_1 += 1.5;
   }
 
-  var2 = push_player_clear_of_door_way(var0);
+  var_2 = push_player_clear_of_door_way(var_0);
 
-  if(isDefined(var2)) {
-    var1 = var2;
+  if(isDefined(var_2)) {
+    var_1 = var_2;
   }
 
-  return var1;
+  return var_1;
 }
 
-function pause_between_vo(var0) {
+function pause_between_vo(var_0) {
   if(is_vo_system_paused()) {
     self waittill("unpause_VO_system");
   }
 
-  if(var0.pause_time > 0) {
-    wait var0.pause_time;
+  if(var_0.pause_time > 0) {
+    wait var_0.pause_time;
     return;
   }
 }
@@ -512,81 +512,81 @@ function unset_vo_currently_playing() {
   self.vo_system.vo_currently_playing = undefined;
 }
 
-function try_to_play_vo_on_team(var0, var1, var2, var3, var4) {
-  var5 = scripts\cp\utility::getplayersinteam(var1);
+function try_to_play_vo_on_team(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = scripts\cp\utility::getplayersinteam(var_1);
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(var5.size <= 0) {
+  if(var_5.size <= 0) {
     return;
   }
 
-  if(!istrue(var2)) {
+  if(!istrue(var_2)) {
     level.validatealivecount = 1;
 
     if(isPlayer(self) || self == level || !isent(self)) {
-      foreach(var7 in var5) {
-        thread play_cp_comment_vo(var7, var0, "cp_comment_vo", "highest", 10, 0, 0);
+      foreach(var_7 in var_5) {
+        thread play_cp_comment_vo(var_7, var_0, "cp_comment_vo", "highest", 10, 0, 0);
       }
     } else {
-      thread scripts\cp\utility::playsoundatpos_safe(self.origin, var0);
+      thread scripts\cp\utility::playsoundatpos_safe(self.origin, var_0);
     }
 
-    wait get_sound_length(var0);
+    wait get_sound_length(var_0);
     level.validatealivecount = 0;
     return;
   }
 
-  var9 = 45;
+  var_9 = 45;
 
-  if(isDefined(var4)) {
-    var9 = var4;
+  if(isDefined(var_4)) {
+    var_9 = var_4;
   }
 
-  var10 = 60;
+  var_10 = 60;
 
-  if(isDefined(var3)) {
-    var10 = var3;
+  if(isDefined(var_3)) {
+    var_10 = var_3;
   }
 
-  foreach(var7 in var5) {
-    thread add_to_nag_vo(var7, var0, "cp_comment_vo", var10, var9, 6);
+  foreach(var_7 in var_5) {
+    thread add_to_nag_vo(var_7, var_0, "cp_comment_vo", var_10, var_9, 6);
   }
 }
 
-function try_to_play_vo_for_one_player(var0, var1, var2, var3, var4) {
-  if(!isDefined(var0)) {
+function try_to_play_vo_for_one_player(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  if(!istrue(var2)) {
-    thread try_to_play_vo(var1, var0, "cp_comment_vo", "highest", 10, 0, 0, 1);
+  if(!istrue(var_2)) {
+    thread try_to_play_vo(var_1, var_0, "cp_comment_vo", "highest", 10, 0, 0, 1);
     return;
   }
 
-  var5 = 45;
+  var_5 = 45;
 
-  if(isDefined(var4)) {
-    var5 = var4;
+  if(isDefined(var_4)) {
+    var_5 = var_4;
   }
 
-  var6 = 60;
+  var_6 = 60;
 
-  if(isDefined(var3)) {
-    var6 = var3;
+  if(isDefined(var_3)) {
+    var_6 = var_3;
   }
 
-  thread add_to_nag_vo(var1, var0, "cp_comment_vo", var6, var5, 6);
+  thread add_to_nag_vo(var_1, var_0, "cp_comment_vo", var_6, var_5, 6);
 }
 
-function try_to_play_vo_on_all_players(var0, var1) {
-  if(!isDefined(var0)) {
+function try_to_play_vo_on_all_players(var_0, var_1) {
+  if(!isDefined(var_0)) {
     return;
   }
 
@@ -594,98 +594,98 @@ function try_to_play_vo_on_all_players(var0, var1) {
     return;
   }
 
-  jumpiftrue(istrue(var1)) LOC_0000005b;
+  jumpiftrue(istrue(var_1)) LOC_0000005b;
 
-  foreach(var3 in level.players) {
-    thread try_to_play_vo(var3, var0, "zmb_comment_vo", "highest", 10, 0, 0, 1);
+  foreach(var_3 in level.players) {
+    thread try_to_play_vo(var_3, var_0, "zmb_comment_vo", "highest", 10, 0, 0, 1);
   }
 
   return;
 }
 
-function try_to_play_vo(var0, var1, var2, var3, var4, var5, var6, var7) {
-  var8 = isDefined(level.vo_alias_data[var0]);
-  var9 = scripts\engine\utility::ter_op(var8, level.vo_alias_data[var0], undefined);
+function try_to_play_vo(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  var_8 = isDefined(level.vo_alias_data[var_0]);
+  var_9 = scripts\engine\utility::ter_op(var_8, level.vo_alias_data[var_0], undefined);
 
-  if(!isDefined(var7)) {
-    if(var8) {
-      if(isDefined(var9.chance_to_play)) {
-        var7 = var9.chance_to_play;
+  if(!isDefined(var_7)) {
+    if(var_8) {
+      if(isDefined(var_9.chance_to_play)) {
+        var_7 = var_9.chance_to_play;
       }
     } else {
-      var7 = 100;
+      var_7 = 100;
     }
   }
 
-  if(randomint(100) > var7) {
+  if(randomint(100) > var_7) {
     return;
   }
 
-  if(should_play_vo(var0)) {
-    if(!isDefined(var5) && var8 && isDefined(var9.pause_time)) {
-      var5 = var9.pause_time;
+  if(should_play_vo(var_0)) {
+    if(!isDefined(var_5) && var_8 && isDefined(var_9.pause_time)) {
+      var_5 = var_9.pause_time;
     }
 
-    if(!isDefined(var6) && var8 && isDefined(var9.only_local)) {
-      var6 = var9.onlylocal;
+    if(!isDefined(var_6) && var_8 && isDefined(var_9.only_local)) {
+      var_6 = var_9.onlylocal;
     }
 
-    if(!isDefined(var3) && var8 && isDefined(var9.timeout)) {
-      var3 = var9.timeout;
+    if(!isDefined(var_3) && var_8 && isDefined(var_9.timeout)) {
+      var_3 = var_9.timeout;
     }
 
-    if(!isDefined(var2) && var8 && isDefined(var9.priority)) {
-      var2 = var9.priority;
+    if(!isDefined(var_2) && var_8 && isDefined(var_9.priority)) {
+      var_2 = var_9.priority;
     }
 
-    var10 = get_categories_from_alias(var0);
+    var_10 = get_categories_from_alias(var_0);
 
-    foreach(var12 in var10) {
-      level.vo_category_last_played_time[var12] = gettime();
+    foreach(var_12 in var_10) {
+      level.vo_category_last_played_time[var_12] = gettime();
     }
 
-    if(var8 && isDefined(var9.lastplayedtime)) {
-      var9.lastplayedtime = gettime();
+    if(var_8 && isDefined(var_9.lastplayedtime)) {
+      var_9.lastplayedtime = gettime();
     }
 
-    thread add_to_vo_queue(var0, var1, var2, var3, var4, var5, var6);
+    thread add_to_vo_queue(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
     return;
   }
 }
 
-function should_play_vo(var0) {
-  if(!isDefined(level.vo_alias_data[var0])) {
+function should_play_vo(var_0) {
+  if(!isDefined(level.vo_alias_data[var_0])) {
     return 1;
   }
 
-  var1 = gettime();
+  var_1 = gettime();
 
-  if(isDefined(level.vo_alias_data[var0].cooldown) && isDefined(level.vo_alias_data[var0].lastplayedtime)) {
-    if(var1 < level.vo_alias_data[var0].lastplayedtime + level.vo_alias_data[var0].cooldown * 1000) {
+  if(isDefined(level.vo_alias_data[var_0].cooldown) && isDefined(level.vo_alias_data[var_0].lastplayedtime)) {
+    if(var_1 < level.vo_alias_data[var_0].lastplayedtime + level.vo_alias_data[var_0].cooldown * 1000) {
       return 0;
     }
   }
 
-  var2 = get_categories_from_alias(var0);
+  var_2 = get_categories_from_alias(var_0);
 
-  foreach(var4 in var2) {
-    var5 = scripts\engine\utility::ter_op(isDefined(level.vo_alias_data[var0].cooldown), level.vo_alias_data[var0].cooldown, 30);
+  foreach(var_4 in var_2) {
+    var_5 = scripts\engine\utility::ter_op(isDefined(level.vo_alias_data[var_0].cooldown), level.vo_alias_data[var_0].cooldown, 30);
 
-    if(var1 < level.vo_category_last_played_time[var4] + var5 * 1000) {
+    if(var_1 < level.vo_category_last_played_time[var_4] + var_5 * 1000) {
       return 0;
     }
   }
 
-  if(isDefined(level.vo_alias_data[var0].max_plays)) {
+  if(isDefined(level.vo_alias_data[var_0].max_plays)) {
     if(!isDefined(self.num_of_plays)) {
       self.num_of_plays = [];
     }
 
-    if(!isDefined(self.num_of_plays[var0])) {
-      self.num_of_plays[var0] = 0;
+    if(!isDefined(self.num_of_plays[var_0])) {
+      self.num_of_plays[var_0] = 0;
     }
 
-    if(self.num_of_plays[var0] < level.vo_alias_data[var0].max_plays) {
+    if(self.num_of_plays[var_0] < level.vo_alias_data[var_0].max_plays) {
       return 1;
     }
 
@@ -695,34 +695,34 @@ function should_play_vo(var0) {
   return 1;
 }
 
-function get_categories_from_alias(var0) {
+function get_categories_from_alias(var_0) {
   if(!isDefined(level.vo_categories)) {
     return [];
   }
 
-  var1 = getarraykeys(level.vo_categories);
-  var2 = [];
+  var_1 = getarraykeys(level.vo_categories);
+  var_2 = [];
 
-  foreach(var4 in var1) {
-    if(scripts\engine\utility::array_contains(level.vo_categories[var4], var0)) {
-      var2 = var4;
+  foreach(var_4 in var_1) {
+    if(scripts\engine\utility::array_contains(level.vo_categories[var_4], var_0)) {
+      var_2 = var_4;
     }
   }
 
-  return var2;
+  return var_2;
 }
 
-function should_append_player_prefix(var0) {
-  if(issubstr(var0, "ww_") || issubstr(var0, "dj_") || issubstr(var0, "jaroslav_anc")) {
+function should_append_player_prefix(var_0) {
+  if(issubstr(var_0, "ww_") || issubstr(var_0, "dj_") || issubstr(var_0, "jaroslav_anc")) {
     return 0;
   }
 
   return 1;
 }
 
-function should_append_player_suffix(var0, var1) {
-  if(istrue(var1)) {
-    if(issubstr(var0, "ww_") && issubstr(var0, "_p")) {
+function should_append_player_suffix(var_0, var_1) {
+  if(istrue(var_1)) {
+    if(issubstr(var_0, "ww_") && issubstr(var_0, "_p")) {
       return true;
     } else {
       return false;
@@ -732,93 +732,93 @@ function should_append_player_suffix(var0, var1) {
   return false;
 }
 
-function play_cp_comment_vo(var0, var1, var2, var3, var4, var5, var6) {
+function play_cp_comment_vo(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   level endon("game_ended");
   level.announcer_vo_playing = 1;
-  var7 = level.players;
+  var_7 = level.players;
 
   if(isPlayer(self)) {
-    var7 = [self];
+    var_7 = [self];
   }
 
-  foreach(var9 in var7) {
-    if(!isDefined(var9)) {
+  foreach(var_9 in var_7) {
+    if(!isDefined(var_9)) {
       continue;
     }
 
-    if(var9 issplitscreenplayer() && !var9 issplitscreenplayerprimary()) {
+    if(var_9 issplitscreenplayer() && !var_9 issplitscreenplayerprimary()) {
       continue;
     }
 
-    var10 = create_vo_data(var0, var3, var5, var6);
-    thread play_vo_system(var9);
+    var_10 = create_vo_data(var_0, var_3, var_5, var_6);
+    thread play_vo_system(var_9);
   }
 
-  wait get_sound_length(var0);
+  wait get_sound_length(var_0);
 
-  foreach(var9 in var7) {
-    set_vo_system_playing(var9, 0);
+  foreach(var_9 in var_7) {
+    set_vo_system_playing(var_9, 0);
   }
 
   level.announcer_vo_playing = 0;
 }
 
-function add_to_vo_queue(var0, var1, var2, var3, var4, var5, var6) {
-  if(isDefined(var1) && isDefined(level.vo_functions[var1])) {
-    self thread[[level.vo_functions[var1]]](var0, var1, var2, var3, var4, var5, var6);
+function add_to_vo_queue(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if(isDefined(var_1) && isDefined(level.vo_functions[var_1])) {
+    self thread[[level.vo_functions[var_1]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6);
     return;
   }
 
-  if(isDefined(var1) && var1 == "cp_comment_vo") {
-    play_cp_comment_vo(var0, var1, var2, var3, var4, var5, var6);
+  if(isDefined(var_1) && var_1 == "cp_comment_vo") {
+    play_cp_comment_vo(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
     return;
   }
 
   if(isPlayer(self)) {
     if(isDefined(self.vo_prefix)) {
-      var7 = self.vo_prefix + var0;
+      var_7 = self.vo_prefix + var_0;
     } else {
       return;
     }
 
-    thread play_vo_on_player(var7, var2, var3, var4, var5, var6, var0);
+    thread play_vo_on_player(var_7, var_2, var_3, var_4, var_5, var_6, var_0);
     return;
   }
 
-  var7 = var1;
-  thread play_vo_on_all_players(level, var7, var3, var4, var5, var6, var7);
+  var_7 = var_1;
+  thread play_vo_on_all_players(level, var_7, var_3, var_4, var_5, var_6, var_7);
 }
 
-function play_vo_on_all_players(var0, var1, var2, var3, var4, var5, var6) {
-  foreach(var8 in level.players) {
-    add_to_vo_system(var8, var0, var1, var2, var3, var4, var5, var6);
+function play_vo_on_all_players(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  foreach(var_8 in level.players) {
+    add_to_vo_system(var_8, var_0, var_1, var_2, var_3, var_4, var_5, var_6);
   }
 }
 
-function play_vo_on_player(var0, var1, var2, var3, var4, var5, var6) {
-  add_to_vo_system(var0, var1, var2, var3, var4, var5, var6);
+function play_vo_on_player(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  add_to_vo_system(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
 }
 
-function add_to_vo_system(var0, var1, var2, var3, var4, var5, var6) {
+function add_to_vo_system(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isDefined(self.current_vo_queue)) {
     self.current_vo_queue = [];
   }
 
-  thread add_to_vo_system_internal(var0, var1, var2, var3, var4, var5, var6);
+  thread add_to_vo_system_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
 }
 
-function add_to_vo_system_internal(var0, var1, var2, var3, var4, var5, var6) {
-  var1 = get_validated_priority(var1);
-  var7 = create_vo_data(var0, var2, var4, var5, var6);
+function add_to_vo_system_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_1 = get_validated_priority(var_1);
+  var_7 = create_vo_data(var_0, var_2, var_4, var_5, var_6);
 
-  if(should_interrupt_vo_system(var3)) {
-    add_to_interrupt_vo(var7);
+  if(should_interrupt_vo_system(var_3)) {
+    add_to_interrupt_vo(var_7);
 
     if(is_vo_system_playing()) {
       interrupt_current_vo();
     }
   } else {
-    add_to_queue_at_priority(var7, var1);
+    add_to_queue_at_priority(var_7, var_1);
   }
 
   if(!is_vo_system_playing()) {
@@ -827,50 +827,50 @@ function add_to_vo_system_internal(var0, var1, var2, var3, var4, var5, var6) {
   }
 }
 
-function get_validated_priority(var0) {
-  if(!isDefined(var0)) {
+function get_validated_priority(var_0) {
+  if(!isDefined(var_0)) {
     return level.vo_priority_level[level.vo_priority_level.size - 1];
   }
 
-  return var0;
+  return var_0;
 }
 
-function create_vo_data(var0, var1, var2, var3, var4) {
-  var5 = 999;
-  var6 = 1.5;
-  var7 = 3;
-  var8 = spawnStruct();
-  var8.alias = var0;
-  var8.categories = get_categories_from_alias(var0);
-  var8.basealias = var4;
+function create_vo_data(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = 999;
+  var_6 = 1.5;
+  var_7 = 3;
+  var_8 = spawnStruct();
+  var_8.alias = var_0;
+  var_8.categories = get_categories_from_alias(var_0);
+  var_8.basealias = var_4;
 
-  if(!isDefined(var1)) {
-    var1 = var5;
+  if(!isDefined(var_1)) {
+    var_1 = var_5;
   }
 
-  var8.expire_time = gettime() + var1 * 1000;
+  var_8.expire_time = gettime() + var_1 * 1000;
 
-  if(!isDefined(var2)) {
-    var2 = randomfloatrange(var6, var7);
+  if(!isDefined(var_2)) {
+    var_2 = randomfloatrange(var_6, var_7);
   }
 
-  var8.pause_time = var2;
+  var_8.pause_time = var_2;
 
-  if(istrue(var3)) {
-    var8.only_local = 1;
+  if(istrue(var_3)) {
+    var_8.only_local = 1;
   } else {
-    var8.only_local = 0;
+    var_8.only_local = 0;
   }
 
-  return var8;
+  return var_8;
 }
 
-function should_interrupt_vo_system(var0) {
-  return isDefined(var0) && var0;
+function should_interrupt_vo_system(var_0) {
+  return isDefined(var_0) && var_0;
 }
 
-function add_to_interrupt_vo(var0) {
-  self.vo_system.interrupt_vo = var0;
+function add_to_interrupt_vo(var_0) {
+  self.vo_system.interrupt_vo = var_0;
 }
 
 function is_vo_system_playing() {
@@ -878,10 +878,10 @@ function is_vo_system_playing() {
 }
 
 function interrupt_current_vo() {
-  var0 = get_current_vo_alias();
+  var_0 = get_current_vo_alias();
 
-  if(isDefined(var0)) {
-    self stoplocalsound(var0);
+  if(isDefined(var_0)) {
+    self stoplocalsound(var_0);
   }
 
   self notify("interrupt_current_VO");
@@ -899,44 +899,44 @@ function get_current_vo_alias() {
   return undefined;
 }
 
-function add_to_queue_at_priority(var0, var1) {
-  self.vo_system.vo_queue[var1][self.vo_system.vo_queue[var1].size] = var0;
+function add_to_queue_at_priority(var_0, var_1) {
+  self.vo_system.vo_queue[var_1][self.vo_system.vo_queue[var_1].size] = var_0;
 }
 
 function notify_system_to_grab_next_vo_from_queue() {
   self notify("play_VO_system");
 }
 
-function remove_vo_data(var0, var1) {
-  var2 = [];
+function remove_vo_data(var_0, var_1) {
+  var_2 = [];
 
-  foreach(var4 in self.vo_system.vo_queue[var1]) {
-    if(!(var4.alias == self.vo_prefix + var0 || var4.alias == self.vo_prefix + "plr_" + var0)) {
-      var2 = self.vo_system.vo_queue[var1][var5];
+  foreach(var_4 in self.vo_system.vo_queue[var_1]) {
+    if(!(var_4.alias == self.vo_prefix + var_0 || var_4.alias == self.vo_prefix + "plr_" + var_0)) {
+      var_2 = self.vo_system.vo_queue[var_1][var_5];
     }
   }
 
-  self.vo_system.vo_queue[var1] = var2;
+  self.vo_system.vo_queue[var_1] = var_2;
 }
 
-function pause_vo_system(var0) {
-  if(var0.size == 1) {
-    var0[0].pause_vo_system = 1;
+function pause_vo_system(var_0) {
+  if(var_0.size == 1) {
+    var_0[0].pause_vo_system = 1;
     return;
   }
 
-  foreach(var2 in var0) {
-    var2.pause_vo_system = 1;
+  foreach(var_2 in var_0) {
+    var_2.pause_vo_system = 1;
   }
 }
 
-function unpause_vo_system(var0) {
-  foreach(var2 in var0) {
-    var2.pause_vo_system = 0;
+function unpause_vo_system(var_0) {
+  foreach(var_2 in var_0) {
+    var_2.pause_vo_system = 0;
   }
 
-  foreach(var2 in var0) {
-    var2 notify("unpause_VO_system");
+  foreach(var_2 in var_0) {
+    var_2 notify("unpause_VO_system");
   }
 }
 
@@ -949,31 +949,31 @@ function nag_vo_handler() {
     level.pause_nag_vo = 0;
   }
 
-  var0 = 60;
+  var_0 = 60;
 
   for(;;) {
     while(level.pause_nag_vo) {
       wait 0.1;
     }
 
-    var1 = gettime();
+    var_1 = gettime();
 
-    foreach(var4, var3 in level.nag_vo) {
-      if(var1 > var3.next_play_time) {
-        if(isDefined(var3.scope)) {
-          try_to_play_vo(var3.scope, var4, var3.vo_type, "low", 3, 0, 0, var3.only_local);
+    foreach(var_4, var_3 in level.nag_vo) {
+      if(var_1 > var_3.next_play_time) {
+        if(isDefined(var_3.scope)) {
+          try_to_play_vo(var_3.scope, var_4, var_3.vo_type, "low", 3, 0, 0, var_3.only_local);
         } else {
-          try_to_play_vo(level, var4, var3.vo_type, "low", 3, 0, 0, var3.only_local);
+          try_to_play_vo(level, var_4, var_3.vo_type, "low", 3, 0, 0, var_3.only_local);
         }
 
-        var3.times_played++;
+        var_3.times_played++;
 
-        if(var3.max_times != -1 && var3.max_times <= var3.times_played) {
-          remove_from_nag_vo(var4);
+        if(var_3.max_times != -1 && var_3.max_times <= var_3.times_played) {
+          remove_from_nag_vo(var_4);
         }
 
-        var3.next_play_time = var1 + var3.cooldown * min(var3.times_played, 3) * 1000;
-        wait var0;
+        var_3.next_play_time = var_1 + var_3.cooldown * min(var_3.times_played, 3) * 1000;
+        wait var_0;
       }
     }
 
@@ -981,86 +981,86 @@ function nag_vo_handler() {
   }
 }
 
-function add_to_nag_vo(var0, var1, var2, var3, var4, var5) {
+function add_to_nag_vo(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(level.nag_vo)) {
     level.nag_vo = [];
     level.nag_vo_never_play_again = [];
     level.pause_nag_vo = 0;
   }
 
-  if(isDefined(level.nag_vo[var0])) {
+  if(isDefined(level.nag_vo[var_0])) {
     return;
   }
 
-  if(isDefined(level.nag_vo_never_play_again[var0])) {
+  if(isDefined(level.nag_vo_never_play_again[var_0])) {
     return;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 60;
+  if(!isDefined(var_2)) {
+    var_2 = 60;
   }
 
-  if(!isDefined(var1)) {
-    var1 = "zmb_comment_vo";
+  if(!isDefined(var_1)) {
+    var_1 = "zmb_comment_vo";
   }
 
-  var6 = undefined;
+  var_6 = undefined;
 
   if(isPlayer(self)) {
-    var6 = self;
+    var_6 = self;
   }
 
-  var7 = spawnStruct();
-  var7.times_played = 0;
-  var7.cooldown = var2;
-  var7.vo_type = var1;
+  var_7 = spawnStruct();
+  var_7.times_played = 0;
+  var_7.cooldown = var_2;
+  var_7.vo_type = var_1;
 
-  if(isDefined(var6)) {
-    var7.scope = var6;
+  if(isDefined(var_6)) {
+    var_7.scope = var_6;
   }
 
-  if(isDefined(var5)) {
-    var7.only_local = var5;
+  if(isDefined(var_5)) {
+    var_7.only_local = var_5;
   } else {
-    var7.only_local = 0;
+    var_7.only_local = 0;
   }
 
-  if(isDefined(var3)) {
-    var7.next_play_time = gettime() + var3 * 1000;
+  if(isDefined(var_3)) {
+    var_7.next_play_time = gettime() + var_3 * 1000;
   } else {
-    var7.next_play_time = 0;
+    var_7.next_play_time = 0;
   }
 
-  if(isDefined(var4)) {
-    var7.max_times = var4;
+  if(isDefined(var_4)) {
+    var_7.max_times = var_4;
   } else {
-    var7.max_times = -1;
+    var_7.max_times = -1;
   }
 
-  level.nag_vo[var0] = var7;
+  level.nag_vo[var_0] = var_7;
 }
 
-function remove_from_nag_vo(var0, var1) {
-  level.nag_vo = scripts\engine\utility::array_remove_index(level.nag_vo, var0, 1);
+function remove_from_nag_vo(var_0, var_1) {
+  level.nag_vo = scripts\engine\utility::array_remove_index(level.nag_vo, var_0, 1);
 
-  if(istrue(var1)) {
-    level.nag_vo_never_play_again[var0] = 1;
+  if(istrue(var_1)) {
+    level.nag_vo_never_play_again[var_0] = 1;
     return;
   }
 }
 
-function timeoutvofunction(var0, var1) {
-  level endon(var0 + "_about_to_play");
-  wait var1;
-  level notify(var0 + "_timed_out");
+function timeoutvofunction(var_0, var_1) {
+  level endon(var_0 + "_about_to_play");
+  wait var_1;
+  level notify(var_0 + "_timed_out");
 }
 
-function push_player_clear_of_door_way(var0) {
-  var1 = tablelookup("cp/cp_vo_lookup.csv", 0, var0, 1);
+function push_player_clear_of_door_way(var_0) {
+  var_1 = tablelookup("cp/cp_vo_lookup.csv", 0, var_0, 1);
 
-  if(isDefined(var1)) {
-    var1 = float(var1);
-    return var1;
+  if(isDefined(var_1)) {
+    var_1 = float(var_1);
+    return var_1;
   }
 
   return undefined;

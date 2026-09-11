@@ -28,10 +28,10 @@ function main() {
   self.usescriptedweapon = 0;
   self.scriptedweaponclassprimary = "none";
   self.weapon = isundefinedweapon();
-  var0 = undefined;
-  var1 = ["character_al_qatala_desert_ar", "character_al_qatala_desert_ar_2", "character_al_qatala_desert_ar_3", "character_al_qatala_desert_ar_4", "character_al_qatala_desert_cqc", "character_al_qatala_desert_lmg"];
+  var_0 = undefined;
+  var_1 = ["character_al_qatala_desert_ar", "character_al_qatala_desert_ar_2", "character_al_qatala_desert_ar_3", "character_al_qatala_desert_ar_4", "character_al_qatala_desert_cqc", "character_al_qatala_desert_lmg"];
 
-  switch (scripts\code\character::get_random_character(6, var0, var1)) {
+  switch (scripts\code\character::get_random_character(6, var_0, var_1)) {
     case 0:
       character\character_al_qatala_desert_ar::main();
       break;
@@ -57,7 +57,7 @@ function spawner() {
   self setspawnerteam("axis");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\character_al_qatala_desert_ar::precache();
   character\character_al_qatala_desert_ar_2::precache();
   character\character_al_qatala_desert_ar_3::precache();

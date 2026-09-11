@@ -19,27 +19,27 @@ function main() {
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";
   game["axis_outfit"] = "woodland";
-  var0 = spawn("script_model", (1987, 830.5, 55));
-  var0 setModel("mout_catwalk_support_brace_ibeam_96");
-  var0.angles = (270, 0, 0);
-  var1 = spawn("script_model", (1987, 830.5, 151));
-  var1 setModel("mout_catwalk_support_brace_ibeam_96");
-  var1.angles = (270, 0, 0);
-  var2 = spawn("script_model", (1970.5, 1401.5, -17.5));
-  var2 setModel("player128x128x8");
-  var2.angles = (270, 0, 0);
-  var3 = spawn("script_model", (1776, 822, 73));
-  var3.angles = (0, 0, 90);
-  var4 = getEnt("clip128x128x8", "targetname");
-  var3 clonebrushmodeltoscriptmodel(var4);
+  var_0 = spawn("script_model", (1987, 830.5, 55));
+  var_0 setModel("mout_catwalk_support_brace_ibeam_96");
+  var_0.angles = (270, 0, 0);
+  var_1 = spawn("script_model", (1987, 830.5, 151));
+  var_1 setModel("mout_catwalk_support_brace_ibeam_96");
+  var_1.angles = (270, 0, 0);
+  var_2 = spawn("script_model", (1970.5, 1401.5, -17.5));
+  var_2 setModel("player128x128x8");
+  var_2.angles = (270, 0, 0);
+  var_3 = spawn("script_model", (1776, 822, 73));
+  var_3.angles = (0, 0, 90);
+  var_4 = getEnt("clip128x128x8", "targetname");
+  var_3 clonebrushmodeltoscriptmodel(var_4);
   thread clearsplashqueue();
 }
 
 function clearsplashqueue() {
   for(;;) {
-    level waittill("wave_ended", var0);
+    level waittill("wave_ended", var_0);
 
-    if(var0 == 2) {
+    if(var_0 == 2) {
       open_big_doors();
     }
   }

@@ -23,25 +23,25 @@ function main() {
 }
 
 function ref_121f4() {
-  var0 = spawn("script_model", (-89.5, 105.5, 98));
-  var0 setModel("lm_pipes_high_pressure_128");
-  var0.angles = (90, 290, 40);
-  var1 = spawn("script_model", (136.5, -24.5, 98));
-  var1 setModel("lm_pipes_high_pressure_128");
-  var1.angles = (90, 270, 0);
-  var2 = spawn("script_model", (89.5, -106, 98));
-  var2 setModel("lm_pipes_high_pressure_128");
-  var2.angles = (90, 280, 55);
-  var3 = spawn("script_model", (295, -398.5, 25.5));
-  var3 setModel("me_construction_plank_bridge_a_16");
-  var3.angles = (270, 330, 0);
-  var4 = spawn("script_model", (-300, 406, 15.5));
-  var4 setModel("me_construction_plank_bridge_a_16");
-  var4.angles = (274, 240, 90);
-  var5 = spawn("script_model", (-374, 291.5, 28));
-  var5 setModel("me_construction_plank_bridge_a_11");
-  var5.angles = (90, 352, 6);
-  var6 = spawn("script_model", (0, 0, 0));
-  var6 setModel("mp_m_pine_shot_block");
-  var6.angles = (0, 0, 0);
+  var_0 = spawn("script_model", (-89.5, 105.5, 98));
+  var_0 setModel("lm_pipes_high_pressure_128");
+  var_0.angles = (90, 290, 40);
+  var_1 = spawn("script_model", (136.5, -24.5, 98));
+  var_1 setModel("lm_pipes_high_pressure_128");
+  var_1.angles = (90, 270, 0);
+  var_2 = spawn("script_model", (89.5, -106, 98));
+  var_2 setModel("lm_pipes_high_pressure_128");
+  var_2.angles = (90, 280, 55);
+  var_3 = spawn("script_model", (295, -398.5, 25.5));
+  var_3 setModel("me_construction_plank_bridge_a_16");
+  var_3.angles = (270, 330, 0);
+  var_4 = spawn("script_model", (-300, 406, 15.5));
+  var_4 setModel("me_construction_plank_bridge_a_16");
+  var_4.angles = (274, 240, 90);
+  var_5 = spawn("script_model", (-374, 291.5, 28));
+  var_5 setModel("me_construction_plank_bridge_a_11");
+  var_5.angles = (90, 352, 6);
+  var_6 = spawn("script_model", (0, 0, 0));
+  var_6 setModel("mp_m_pine_shot_block");
+  var_6.angles = (0, 0, 0);
 }

@@ -4,8 +4,8 @@
 ***********************************************/
 
 function init() {
-  foreach(var1 in level.teamnamelist) {
-    level.spectateoverride[var1] = spawnStruct();
+  foreach(var_1 in level.teamnamelist) {
+    level.spectateoverride[var_1] = spawnStruct();
   }
 
   scripts\mp\utility\lui_game_event_aggregator::registeronluieventcallback(&freecamcallback);
@@ -17,37 +17,37 @@ function init() {
   }
 }
 
-function createmlgcamobject(var0, var1) {
-  precacheshader(var0);
-  var2 = spawn("script_model", (0, 0, 0));
-  var2 setModel("tag_origin");
-  var2.angles = (0, 0, 0);
-  return var2;
+function createmlgcamobject(var_0, var_1) {
+  precacheshader(var_0);
+  var_2 = spawn("script_model", (0, 0, 0));
+  var_2 setModel("tag_origin");
+  var_2.angles = (0, 0, 0);
+  return var_2;
 }
 
-function setlevelmlgcam(var0, var1) {
-  var2 = var0;
+function setlevelmlgcam(var_0, var_1) {
+  var_2 = var_0;
 
-  if(var2 >= 4) {
-    var2 -= 4;
+  if(var_2 >= 4) {
+    var_2 -= 4;
   }
 
-  var3 = tolower(getDvar("mapname"));
-  var4 = tablelookup(var1, 0, var3, var2 * 2 + 1);
+  var_3 = tolower(getDvar("mapname"));
+  var_4 = tablelookup(var_1, 0, var_3, var_2 * 2 + 1);
 
-  if(var4 != "") {
-    var5 = var0 + 1;
+  if(var_4 != "") {
+    var_5 = var_0 + 1;
 
-    if(var0 >= 5) {
-      var5 -= 4;
+    if(var_0 >= 5) {
+      var_5 -= 4;
     }
 
-    level.cameramapobjs[var0] = createmlgcamobject("compass_icon_codcaster_cam", 1);
-    level.numbermapobjs[var0] = createmlgcamobject("compass_icon_codcaster_num" + var5, 0);
-    var6 = tablelookup(var1, 0, var3, var2 * 2 + 2);
-    level.camerapos[var0] = getcameravecorang(var4);
-    level.cameraang[var0] = getcameravecorang(var6);
-    level.camerahighestindex = var0;
+    level.cameramapobjs[var_0] = createmlgcamobject("compass_icon_codcaster_cam", 1);
+    level.numbermapobjs[var_0] = createmlgcamobject("compass_icon_codcaster_num" + var_5, 0);
+    var_6 = tablelookup(var_1, 0, var_3, var_2 * 2 + 2);
+    level.camerapos[var_0] = getcameravecorang(var_4);
+    level.cameraang[var_0] = getcameravecorang(var_6);
+    level.camerahighestindex = var_0;
     return;
   }
 }
@@ -57,49 +57,49 @@ function getlevelmlgcams() {
     waitframe();
   }
 
-  var0 = "mp/CameraPositions";
-  var1 = var0 + "_" + scripts\mp\utility\game::getgametype() + ".csv";
-  var0 += ".csv";
+  var_0 = "mp/CameraPositions";
+  var_1 = var_0 + "_" + scripts\mp\utility\game::getgametype() + ".csv";
+  var_0 += ".csv";
   level.cameramapobjs = [];
   level.numbermapobjs = [];
 
-  for(var2 = 0; var2 < 4; var2++) {
-    setlevelmlgcam(var2, var0);
+  for(var_2 = 0; var_2 < 4; var_2++) {
+    setlevelmlgcam(var_2, var_0);
   }
 
-  for(var2 = 4; var2 < 8; var2++) {
-    setlevelmlgcam(var2, var1);
+  for(var_2 = 4; var_2 < 8; var_2++) {
+    setlevelmlgcam(var_2, var_1);
   }
 }
 
-function getcameravecorang(var0) {
-  var1 = strtok(var0, " ");
-  var2 = (0, 0, 0);
+function getcameravecorang(var_0) {
+  var_1 = strtok(var_0, " ");
+  var_2 = (0, 0, 0);
 
-  if(isDefined(var1[0]) && isDefined(var1[1]) && isDefined(var1[2])) {
-    var2 = (int(var1[0]), int(var1[1]), int(var1[2]));
+  if(isDefined(var_1[0]) && isDefined(var_1[1]) && isDefined(var_1[2])) {
+    var_2 = (int(var_1[0]), int(var_1[1]), int(var_1[2]));
   }
 
-  return var2;
+  return var_2;
 }
 
-function onjoinedteam(var0) {
-  setspectatepermissions(var0);
+function onjoinedteam(var_0) {
+  setspectatepermissions(var_0);
 }
 
-function onjoinedspectators(var0) {
-  if(!isDefined(var0)) {
+function onjoinedspectators(var_0) {
+  if(!isDefined(var_0)) {
     return;
   }
 
   thread onspectatingclient();
   thread onspectatingmlgcamera();
-  setspectatepermissions(var0);
-  var0 setclientomnvar("ui_callout_area_id", -1);
+  setspectatepermissions(var_0);
+  var_0 setclientomnvar("ui_callout_area_id", -1);
 
-  if(var0 ismlgspectator() || isDefined(var0.pers["mlgSpectator"]) && var0.pers["mlgSpectator"]) {
-    var0 setmlgspectator(1);
-    var0 setmlgfollowdroneactive(0);
+  if(var_0 ismlgspectator() || isDefined(var_0.pers["mlgSpectator"]) && var_0.pers["mlgSpectator"]) {
+    var_0 setmlgspectator(1);
+    var_0 setmlgfollowdroneactive(0);
     thread updatemlgspectator();
     thread autoattachtoplayer();
     thread ref_12eb1();
@@ -113,12 +113,12 @@ function onspectatingclient() {
 
   for(;;) {
     self waittill("spectating_cycle");
-    var0 = self getspectatingplayer();
+    var_0 = self getspectatingplayer();
 
-    if(isDefined(var0)) {
-      if(isDefined(var0.calloutarea)) {
-        var1 = level.calloutglobals.areaidmap[var0.calloutarea];
-        self setclientomnvar("ui_callout_area_id", var1);
+    if(isDefined(var_0)) {
+      if(isDefined(var_0.calloutarea)) {
+        var_1 = level.calloutglobals.areaidmap[var_0.calloutarea];
+        self setclientomnvar("ui_callout_area_id", var_1);
       }
     }
   }
@@ -130,18 +130,18 @@ function onspectatingmlgcamera() {
 
   for(;;) {
     self waittill("spectating_mlg_camera");
-    var0 = self getmlgselectedcamera();
+    var_0 = self getmlgselectedcamera();
 
     if(self ismlgspectator() || isDefined(self.pers["mlgSpectator"]) && self.pers["mlgSpectator"]) {
-      if(isDefined(var0)) {
+      if(isDefined(var_0)) {
         self setclientomnvar("ui_callout_area_id", -1);
       }
     }
   }
 }
 
-function freecamcallback(var0, var1) {
-  if(var0 == "mlg_view_change") {
+function freecamcallback(var_0, var_1) {
+  if(var_0 == "mlg_view_change") {
     scripts\mp\playerlogic::resetuidvarsonspectate();
     return;
   }
@@ -150,12 +150,12 @@ function freecamcallback(var0, var1) {
 function updatespectatesettings() {
   level endon("game_ended");
 
-  for(var0 = 0; var0 < level.players.size; var0++) {
-    setspectatepermissions(level.players[var0]);
+  for(var_0 = 0; var_0 < level.players.size; var_0++) {
+    setspectatepermissions(level.players[var_0]);
   }
 }
 
-function linkcameratoball(var0) {
+function linkcameratoball(var_0) {
   self endon("disconnect");
   self endon("joined_team");
   self endon("joined_spectators");
@@ -171,12 +171,12 @@ function linkcameratoball(var0) {
     }
 
     self cameralinkTo(self.codcasterballcamfollow, "tag_origin", 1);
-    var1 = level.codcasterball.origin;
-    var2 = (0, 0, 30);
-    var2 += -80 * var0;
-    var3 = var1 + var2;
-    self.codcasterballcamfollow moveTo(var3, 10.5, 5.2, 5.2);
-    self.codcasterballcamfollow.angles = vectortoangles(var0);
+    var_1 = level.codcasterball.origin;
+    var_2 = (0, 0, 30);
+    var_2 += -80 * var_0;
+    var_3 = var_1 + var_2;
+    self.codcasterballcamfollow moveTo(var_3, 10.5, 5.2, 5.2);
+    self.codcasterballcamfollow.angles = vectortoangles(var_0);
     break;
   }
 }
@@ -189,7 +189,7 @@ function autoattachtoplayer() {
   level.wasflagspawned = game["lastSpectatedPlayer"];
 
   for(;;) {
-    var0 = undefined;
+    var_0 = undefined;
 
     if(!self ismlgspectator() || self isspectatingplayer() || self enablereloading() || self useinvisibleplayerduringspawnselection()) {
       break;
@@ -197,18 +197,18 @@ function autoattachtoplayer() {
 
     if(level.players.size > 1) {
       if(level.currentround > 1 && isDefined(level.wasflagspawned) && self.team != "follower") {
-        var0 = level.wasflagspawned;
+        var_0 = level.wasflagspawned;
       } else if(self.team == "follower") {
-        var1 = self updatecurrentweapon();
-        var2 = 0;
+        var_1 = self updatecurrentweapon();
+        var_2 = 0;
 
-        foreach(var4 in level.players) {
-          if(var4 scripts\cp_mp\utility\player_utility::_isalive()) {
-            if(var4 getentitynumber() == var1) {
-              if(var4.team == "spectator" || var4.team == "follower") {
-                var2 = 1;
+        foreach(var_4 in level.players) {
+          if(var_4 scripts\cp_mp\utility\player_utility::_isalive()) {
+            if(var_4 getentitynumber() == var_1) {
+              if(var_4.team == "spectator" || var_4.team == "follower") {
+                var_2 = 1;
               } else {
-                var0 = var1;
+                var_0 = var_1;
               }
 
               break;
@@ -216,16 +216,16 @@ function autoattachtoplayer() {
           }
         }
 
-        if(var2) {
+        if(var_2) {
           break;
         }
       } else {
-        foreach(var7 in level.teamnamelist) {
-          var8 = scripts\mp\utility\teams::getfriendlyplayers(var7, 1);
+        foreach(var_7 in level.teamnamelist) {
+          var_8 = scripts\mp\utility\teams::getfriendlyplayers(var_7, 1);
 
-          if(var8.size > 0) {
+          if(var_8.size > 0) {
             <
-            error > = scripts\mp\utility\player::getlowestclientnum(var8, 1);
+            error > = scripts\mp\utility\player::getlowestclientnum(var_8, 1);
           }
         }
       }
@@ -249,16 +249,16 @@ function updatemlgspectator() {
 
   for(;;) {
     if(self ismlgspectator() && self isspectatingplayer()) {
-      var0 = self getspectatingplayer();
+      var_0 = self getspectatingplayer();
 
-      if(isDefined(var0)) {
-        level.wasflagspawned = var0.clientid;
+      if(isDefined(var_0)) {
+        level.wasflagspawned = var_0.clientid;
       }
     }
 
-    var1 = isDefined(level.codcasterball);
+    var_1 = isDefined(level.codcasterball);
 
-    if(!var1 || !self ismlgfollowdroneactive()) {
+    if(!var_1 || !self ismlgfollowdroneactive()) {
       if(self.iswatchingcodcasterball) {
         self.iswatchingcodcasterball = 0;
         self.codcasterballcamfollow unlink();
@@ -275,40 +275,40 @@ function updatemlgspectator() {
       }
     } else if(!self.iswatchingcodcasterball) {
       if(self ismlgfollowdroneactive()) {
-        var0 = self getspectatingplayer();
+        var_0 = self getspectatingplayer();
 
-        if(isDefined(var0) && isDefined(level.codcasterballowner) && var0 == level.codcasterballowner) {
+        if(isDefined(var_0) && isDefined(level.codcasterballowner) && var_0 == level.codcasterballowner) {
           self.iswatchingcodcasterball = 1;
-          self.spectatingplayerbeforeballcam = var0;
-          var2 = vectorNormalize(level.codcasterballinitialforcevector);
-          var3 = var0 getvieworigin();
-          self.codcasterballcamfollow = spawn("script_model", var3);
-          self.codcasterballcamfollow.angles = vectortoangles(var2);
+          self.spectatingplayerbeforeballcam = var_0;
+          var_2 = vectorNormalize(level.codcasterballinitialforcevector);
+          var_3 = var_0 getvieworigin();
+          self.codcasterballcamfollow = spawn("script_model", var_3);
+          self.codcasterballcamfollow.angles = vectortoangles(var_2);
           self.codcasterballcamfollow setModel("tag_origin");
           stopspectateplayer(self getentitynumber());
           self cameraunlink();
-          thread linkcameratoball(var2);
+          thread linkcameratoball(var_2);
         }
       }
     } else if(isDefined(self.codcasterballcamfollow)) {
-      var4 = level.codcasterball.origin;
-      var5 = self.codcasterballcamfollow.origin;
-      var6 = distance2d(var4, var5);
-      var7 = var4 - var5;
-      var8 = (var7[0], var7[1], 0);
-      var8 = vectorNormalize(var8);
-      var9 = var4;
-      var10 = (0, 0, 30);
-      var10 += -80 * var8;
-      var11 = var9 + var10;
+      var_4 = level.codcasterball.origin;
+      var_5 = self.codcasterballcamfollow.origin;
+      var_6 = distance2d(var_4, var_5);
+      var_7 = var_4 - var_5;
+      var_8 = (var_7[0], var_7[1], 0);
+      var_8 = vectorNormalize(var_8);
+      var_9 = var_4;
+      var_10 = (0, 0, 30);
+      var_10 += -80 * var_8;
+      var_11 = var_9 + var_10;
 
-      if(var6 > 600) {
-        self.codcasterballcamfollow.origin = var11;
+      if(var_6 > 600) {
+        self.codcasterballcamfollow.origin = var_11;
       } else {
-        self.codcasterballcamfollow moveTo(var11, 0.5, 0, 0.2);
+        self.codcasterballcamfollow moveTo(var_11, 0.5, 0, 0.2);
       }
 
-      self.codcasterballcamfollow rotateTo(vectortoangles(var7), 0.15, 0.05, 0.05);
+      self.codcasterballcamfollow rotateTo(vectortoangles(var_7), 0.15, 0.05, 0.05);
     }
 
     wait 0.05;
@@ -320,11 +320,11 @@ function ref_12eb1() {
   game["lastSpectatedPlayer"] = level.wasflagspawned;
 }
 
-function setspectatepermissions(var0) {
+function setspectatepermissions(var_0) {
   if(level.gameended && gettime() - level.gameendtime >= 2000 && !istrue(level.postgameexfil)) {
     if(level.teambased) {
-      foreach(var2 in level.teamnamelist) {
-        self allowspectateteam(var2, 0);
+      foreach(var_2 in level.teamnamelist) {
+        self allowspectateteam(var_2, 0);
       }
     }
 
@@ -333,41 +333,41 @@ function setspectatepermissions(var0) {
     return;
   }
 
-  var4 = scripts\mp\tweakables::gettweakablevalue("game", "spectatetype");
+  var_4 = scripts\mp\tweakables::gettweakablevalue("game", "spectatetype");
 
   if(getdvarint("debug_GLSpectate", 0) == 1) {
-    var4 = 2;
+    var_4 = 2;
   }
 
   if(self ismlgspectator()) {
-    var4 = 2;
+    var_4 = 2;
   }
 
   if(istrue(self.inspawncamera)) {
-    var4 = 0;
+    var_4 = 0;
   }
 
-  if(istrue(var0)) {
-    var4 = 2;
+  if(istrue(var_0)) {
+    var_4 = 2;
   }
 
-  var5 = self.sessionteam;
+  var_5 = self.sessionteam;
 
-  switch (var4) {
+  switch (var_4) {
     case 0:
       setdisabled();
       break;
     case 1:
       self notify("waitForGameStartSpectate");
 
-      if(var5 != "spectator" && var5 != "follower") {
-        setteamorplayeronly(var5);
+      if(var_5 != "spectator" && var_5 != "follower") {
+        setteamorplayeronly(var_5);
       } else if(isDefined(self.pers["last_team"])) {
-        var5 = self.pers["last_team"];
-        setteamorplayeronly(var5);
+        var_5 = self.pers["last_team"];
+        setteamorplayeronly(var_5);
       } else if(scripts\mp\flags::gameflag("prematch_done")) {
-        var6 = randomint(level.teamnamelist.size);
-        setteamorplayeronly(level.teamnamelist[var6]);
+        var_6 = randomint(level.teamnamelist.size);
+        setteamorplayeronly(level.teamnamelist[var_6]);
       } else {
         setteamorplayeronly("allies");
         thread waitforgamestartspectate();
@@ -376,28 +376,28 @@ function setspectatepermissions(var0) {
 
       break;
     case 2:
-      setfreelook(var0);
+      setfreelook(var_0);
       break;
     case 3:
-      if(var5 == "spectator" || var5 == "follower") {
+      if(var_5 == "spectator" || var_5 == "follower") {
         setfreelook();
       } else {
-        setteamorplayeronly(var5);
+        setteamorplayeronly(var_5);
       }
 
       break;
   }
 
-  if(isDefined(var5) && scripts\mp\utility\teams::isgameplayteam(var5)) {
-    if(istrue(level.spectateoverride[var5].allowfreespectate)) {
+  if(isDefined(var_5) && scripts\mp\utility\teams::isgameplayteam(var_5)) {
+    if(istrue(level.spectateoverride[var_5].allowfreespectate)) {
       self allowspectateteam("freelook", 1);
     }
 
-    if(istrue(level.spectateoverride[var5].allowenemyspectate)) {
-      var7 = scripts\mp\utility\teams::getenemyteams(var5);
+    if(istrue(level.spectateoverride[var_5].allowenemyspectate)) {
+      var_7 = scripts\mp\utility\teams::getenemyteams(var_5);
 
-      foreach(var2 in var7) {
-        self allowspectateteam(var2, 1);
+      foreach(var_2 in var_7) {
+        self allowspectateteam(var_2, 1);
       }
 
       return;
@@ -418,24 +418,24 @@ function setdisabled() {
   self allowspectateteam("freelook", 0);
   self allowspectateteam("none", 0);
 
-  foreach(var1 in level.teamnamelist) {
-    self allowspectateteam(var1, 0);
+  foreach(var_1 in level.teamnamelist) {
+    self allowspectateteam(var_1, 0);
   }
 }
 
-function setteamorplayeronly(var0) {
+function setteamorplayeronly(var_0) {
   self allowspectateteam("freelook", 0);
 
   if(level.teambased) {
     self allowspectateteam("none", 0);
 
-    foreach(var2 in level.teamnamelist) {
-      if(var0 == var2) {
-        self allowspectateteam(var2, 1);
+    foreach(var_2 in level.teamnamelist) {
+      if(var_0 == var_2) {
+        self allowspectateteam(var_2, 1);
         continue;
       }
 
-      self allowspectateteam(var2, 0);
+      self allowspectateteam(var_2, 0);
     }
 
     return;
@@ -443,21 +443,21 @@ function setteamorplayeronly(var0) {
 
   self allowspectateteam("none", 1);
 
-  foreach(var2 in level.teamnamelist) {
-    self allowspectateteam(var2, 1);
+  foreach(var_2 in level.teamnamelist) {
+    self allowspectateteam(var_2, 1);
   }
 }
 
-function setfreelook(var0) {
+function setfreelook(var_0) {
   self allowspectateteam("freelook", 1);
   self allowspectateteam("none", 1);
 
   if(scripts\mp\flags::gameflag("prematch_done")) {
-    foreach(var2 in level.teamnamelist) {
-      self allowspectateteam(var2, 1);
+    foreach(var_2 in level.teamnamelist) {
+      self allowspectateteam(var_2, 1);
     }
 
-    if(istrue(var0)) {
+    if(istrue(var_0)) {
       thread scripts\mp\playerlogic::spawnspectator(undefined, undefined, 1);
       return;
     }
@@ -472,9 +472,9 @@ function setfreelook(var0) {
     return;
   }
 
-  var4 = self.sessionteam;
+  var_4 = self.sessionteam;
 
-  if(self == level.players[0] || var4 == "spectator" || var4 == "follower") {
+  if(self == level.players[0] || var_4 == "spectator" || var_4 == "follower") {
     self allowspectateteam("allies", 1);
     self allowspectateteam("axis", 0);
     thread waitforgamestartspectate();

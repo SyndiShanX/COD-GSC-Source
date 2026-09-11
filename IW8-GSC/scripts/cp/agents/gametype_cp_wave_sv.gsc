@@ -3,105 +3,105 @@
  * Script: scripts\cp\agents\gametype_cp_wave_sv.gsc
 *****************************************************/
 
-function givestreakpointswithtext(var0, var1, var2) {
+function givestreakpointswithtext(var_0, var_1, var_2) {
   if(isDefined(level.ignorescoring)) {
     return;
   }
 
-  if(isDefined(var2)) {
-    var3 = var2;
+  if(isDefined(var_2)) {
+    var_3 = var_2;
   } else {
-    var3 = scripts\cp\drone\emp_drone::getscoreinfovalue(var1);
+    var_3 = scripts\cp\drone\emp_drone::getscoreinfovalue(var_1);
   }
 
-  var3 = modifyunifiedpoints(var1, var3, var2);
-  displayscoreeventpoints(var3, var1);
+  var_3 = modifyunifiedpoints(var_1, var_3, var_2);
+  displayscoreeventpoints(var_3, var_1);
 }
 
-function giveunifiedpoints(var0, var1, var2, var3, var4, var5) {
-  if(isDefined(level.ignorescoring) && !issubstr(var0, "assist")) {
+function giveunifiedpoints(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(isDefined(level.ignorescoring) && !issubstr(var_0, "assist")) {
     return;
   }
 
-  if(isDefined(var2)) {
-    var6 = var2;
+  if(isDefined(var_2)) {
+    var_6 = var_2;
   } else {
-    var6 = scripts\cp\drone\emp_drone::getscoreinfovalue(var1);
+    var_6 = scripts\cp\drone\emp_drone::getscoreinfovalue(var_1);
   }
 
-  var6 = modifyunifiedpoints(var1, var6, var2);
-  var7 = var1 == "kill";
-  var8 = 0;
-  var9 = 0;
-  var10 = istrue(self.isjuggernaut);
-  var11 = update_objective_setmlgbackground(var2);
-  var12 = scripts\cp\utility::_hasperk("specialty_killstreak_to_scorestreak");
-  var13 = var9 && scripts\cp\utility::_hasperk("specialty_chain_killstreaks") && istrue(var6);
+  var_6 = modifyunifiedpoints(var_1, var_6, var_2);
+  var_7 = var_1 == "kill";
+  var_8 = 0;
+  var_9 = 0;
+  var_10 = istrue(self.isjuggernaut);
+  var_11 = update_objective_setmlgbackground(var_2);
+  var_12 = scripts\cp\utility::_hasperk("specialty_killstreak_to_scorestreak");
+  var_13 = var_9 && scripts\cp\utility::_hasperk("specialty_chain_killstreaks") && istrue(var_6);
 
-  if(isDefined(var5)) {
+  if(isDefined(var_5)) {
     if(isDefined(self.ref_119d4) && self.ref_119d4.size > 0) {
-      if(istrue(self.ref_119d4[var5 getentitynumber()])) {
-        self.ref_119d4[var5 getentitynumber()] = undefined;
+      if(istrue(self.ref_119d4[var_5 getentitynumber()])) {
+        self.ref_119d4[var_5 getentitynumber()] = undefined;
         return;
       }
     }
   }
 
-  if((var7 || var8 || var13 || var12) && (!var10 || var13 || var12) && (!var11 || var12)) {}
+  if((var_7 || var_8 || var_13 || var_12) && (!var_10 || var_13 || var_12) && (!var_11 || var_12)) {}
 
   if(level.gametype == "cp_survival") {
-    if(!isDefined(var2)) {
-      thread screenent_a(var6);
+    if(!isDefined(var_2)) {
+      thread screenent_a(var_6);
     }
   }
 
-  if(!istrue(var4)) {
-    thread scripts\cp\drone\emp_drone::giverankxp(var1, var6, var2);
+  if(!istrue(var_4)) {
+    thread scripts\cp\drone\emp_drone::giverankxp(var_1, var_6, var_2);
   }
 }
 
-function screenent_a(var0) {
-  var1 = scripts\cp\cp_persistence::quickdropremovearmorfrominventory();
-  var0 = scripts\cp\cp_gamescore::round_up_to_nearest(var0, 5);
+function screenent_a(var_0) {
+  var_1 = scripts\cp\cp_persistence::quickdropremovearmorfrominventory();
+  var_0 = scripts\cp\cp_gamescore::round_up_to_nearest(var_0, 5);
 
   if(isDefined(self.ref_13bf3) && isDefined(self.ref_11b67)) {
     if(self.ref_13bf3 > self.ref_11b67) {
-      var0 = 0;
+      var_0 = 0;
     } else {
-      self.ref_13bf3 += var0;
+      self.ref_13bf3 += var_0;
     }
   }
 
-  var2 = scripts\cp\cp_persistence::get_player_max_currency();
-  var3 = var1 + var0;
-  var3 = min(var3, var2);
-  scripts\cp\cp_persistence::ref_130aa(var3);
+  var_2 = scripts\cp\cp_persistence::get_player_max_currency();
+  var_3 = var_1 + var_0;
+  var_3 = min(var_3, var_2);
+  scripts\cp\cp_persistence::ref_130aa(var_3);
 }
 
-function modifyunifiedpoints(var0, var1, var2) {
-  switch (var0) {
+function modifyunifiedpoints(var_0, var_1, var_2) {
+  switch (var_0) {
     case "damage":
       return 0;
     default:
       break;
   }
 
-  var3 = 0;
+  var_3 = 0;
 
-  if(var0 == "kill" && var2 hasattachment("gunperk_xp")) {
-    var3 += 20;
+  if(var_0 == "kill" && var_2 hasattachment("gunperk_xp")) {
+    var_3 += 20;
   }
 
-  var1 += var3;
+  var_1 += var_3;
 
   if(isDefined(level.modifyunifiedpointscallback)) {
-    var1 = [[level.modifyunifiedpointscallback]](var1, var0, self, var2);
+    var_1 = [[level.modifyunifiedpointscallback]](var_1, var_0, self, var_2);
   }
 
-  return int(var1);
+  return int(var_1);
 }
 
-function displayscoreeventpoints(var0, var1) {
+function displayscoreeventpoints(var_0, var_1) {
   if(getdvarint("scr_disableScoreSplash", 0) == 1) {
     return;
   }
@@ -115,17 +115,17 @@ function displayscoreeventpoints(var0, var1) {
   }
 
   if(level.codcasterenabled) {
-    foreach(var3 in level.players) {
-      if(var3 ismlgspectator()) {
-        var4 = var3 getspectatingplayer();
+    foreach(var_3 in level.players) {
+      if(var_3 ismlgspectator()) {
+        var_4 = var_3 getspectatingplayer();
 
-        if(isDefined(var4)) {
-          var5 = var4 getentitynumber();
-          var6 = self getentitynumber();
+        if(isDefined(var_4)) {
+          var_5 = var_4 getentitynumber();
+          var_6 = self getentitynumber();
 
-          if(var5 == var6) {
-            var3 thread scripts\cp\drone\emp_drone::scorepointspopup(var0);
-            var3 thread scripts\cp\drone\emp_drone::scoreeventpopup(var1);
+          if(var_5 == var_6) {
+            var_3 thread scripts\cp\drone\emp_drone::scorepointspopup(var_0);
+            var_3 thread scripts\cp\drone\emp_drone::scoreeventpopup(var_1);
           }
         }
       }
@@ -133,27 +133,27 @@ function displayscoreeventpoints(var0, var1) {
   }
 
   if(!isDefined(level.skippointdisplayxp)) {
-    var8 = 0;
+    var_8 = 0;
 
     if(scripts\cp\utility::issimultaneouskillenabled()) {
-      var8 = var1 == "kill";
+      var_8 = var_1 == "kill";
     }
 
-    thread scripts\cp\drone\emp_drone::scorepointspopup(var0, var8);
+    thread scripts\cp\drone\emp_drone::scorepointspopup(var_0, var_8);
     return;
   }
 }
 
-function update_objective_setmlgbackground(var0) {
-  if(!isDefined(var0)) {
+function update_objective_setmlgbackground(var_0) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
-  if(isstring(var0)) {
-    var0 = getcompleteweaponname(var0);
+  if(isstring(var_0)) {
+    var_0 = getcompleteweaponname(var_0);
   }
 
-  switch (var0.basename) {
+  switch (var_0.basename) {
     case "bradley_tow_proj_mp":
     case "lighttank_tur_mp":
     case "tur_apc_rus_mp":
@@ -163,16 +163,16 @@ function update_objective_setmlgbackground(var0) {
   return false;
 }
 
-function unset_relic_doomslayer(var0) {
-  if(!isDefined(var0)) {
+function unset_relic_doomslayer(var_0) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
-  if(isstring(var0)) {
-    var0 = getcompleteweaponname(var0);
+  if(isstring(var_0)) {
+    var_0 = getcompleteweaponname(var_0);
   }
 
-  switch (var0.basename) {
+  switch (var_0.basename) {
     case "deploy_juggernaut_mp":
     case "deploy_airdrop_mp":
     case "iw8_green_beam_mp":
@@ -183,77 +183,77 @@ function unset_relic_doomslayer(var0) {
   return false;
 }
 
-function calculatematchbonus(var0, var1) {
-  var2 = 250;
-  var3 = var1 / 60;
-  var4 = scripts\cp\drone\emp_drone::getscoreinfovalue(var0);
-  var5 = self.timeplayed["total"] / var1;
+function calculatematchbonus(var_0, var_1) {
+  var_2 = 250;
+  var_3 = var_1 / 60;
+  var_4 = scripts\cp\drone\emp_drone::getscoreinfovalue(var_0);
+  var_5 = self.timeplayed["total"] / var_1;
 
   if(scripts\cp\utility::turn_off_sniper_laser()) {
-    var3 = 1;
-    var5 = 1;
+    var_3 = 1;
+    var_5 = 1;
   }
 
-  var6 = scripts\cp\drone\emp_drone::getgametypexpmultiplier();
-  var7 = int(var2 * var4 * var3 * var5 * var6);
-  return var7;
+  var_6 = scripts\cp\drone\emp_drone::getgametypexpmultiplier();
+  var_7 = int(var_2 * var_4 * var_3 * var_5 * var_6);
+  return var_7;
 }
 
-function updatematchbonusscores(var0) {
+function updatematchbonusscores(var_0) {
   if(istrue(level.forcedend)) {
-    var1 = scripts\cp\cp_endgame::get_play_time() / 1000;
-    var1 = min(var1, 1200);
+    var_1 = scripts\cp\cp_endgame::get_play_time() / 1000;
+    var_1 = min(var_1, 1200);
   } else {
-    var1 = scripts\cp\cp_endgame::get_play_time() / 1000;
+    var_1 = scripts\cp\cp_endgame::get_play_time() / 1000;
   }
 
   jumpiffalse(level.teambased) LOC_000001a7;
-  jumpiffalse(var1 != "tie") LOC_00000044;
-  setwinningteam(var1);
+  jumpiffalse(var_1 != "tie") LOC_00000044;
+  setwinningteam(var_1);
 
-  foreach(var3 in level.players) {
-    if(isDefined(var3.connectedpostgame)) {
+  foreach(var_3 in level.players) {
+    if(isDefined(var_3.connectedpostgame)) {
       continue;
     }
 
-    if(var3.timeplayed["total"] < 1 || var3.pers["participation"] < 1) {
+    if(var_3.timeplayed["total"] < 1 || var_3.pers["participation"] < 1) {
       continue;
     }
 
-    if(istrue(level.hostforcedend) && var3 ishost()) {
+    if(istrue(level.hostforcedend) && var_3 ishost()) {
       continue;
     }
 
-    if(!istrue(var3.pers["hasDoneAnyCombat"])) {
+    if(!istrue(var_3.pers["hasDoneAnyCombat"])) {
       continue;
     }
 
-    if(var1 == "tie") {
-      var4 = calculatematchbonus(var3, "tie", var1);
-      thread givematchbonus(var3, "tie");
-      var3.matchbonus = var4;
-    } else if(isDefined(var3.pers["team"]) && var3.pers["team"] == var1) {
-      var4 = calculatematchbonus(var3, "win", var1);
-      thread givematchbonus(var3, "win");
-      var3.matchbonus = var4;
-    } else if(isDefined(var3.pers["team"]) && var3.pers["team"] != var1) {
-      var4 = calculatematchbonus(var3, "loss", var1);
-      thread givematchbonus(var3, "loss");
-      var3.matchbonus = var4;
+    if(var_1 == "tie") {
+      var_4 = calculatematchbonus(var_3, "tie", var_1);
+      thread givematchbonus(var_3, "tie");
+      var_3.matchbonus = var_4;
+    } else if(isDefined(var_3.pers["team"]) && var_3.pers["team"] == var_1) {
+      var_4 = calculatematchbonus(var_3, "win", var_1);
+      thread givematchbonus(var_3, "win");
+      var_3.matchbonus = var_4;
+    } else if(isDefined(var_3.pers["team"]) && var_3.pers["team"] != var_1) {
+      var_4 = calculatematchbonus(var_3, "loss", var_1);
+      thread givematchbonus(var_3, "loss");
+      var_3.matchbonus = var_4;
     }
 
-    freight_lift_button_activation(var3, var1);
+    freight_lift_button_activation(var_3, var_1);
   }
 
   return;
 }
 
-function givematchbonus(var0, var1) {
+function givematchbonus(var_0, var_1) {
   self endon("disconnect");
   level waittill("give_match_bonus");
-  scripts\cp\drone\emp_drone::giverankxp(var0, var1);
+  scripts\cp\drone\emp_drone::giverankxp(var_0, var_1);
 
-  if(var0 == "win") {
+  if(var_0 == "win") {
     thread scripts\cp_mp\xmike109::givemidmatchaward("match_complete_win");
     return;
   }
@@ -261,51 +261,51 @@ function givematchbonus(var0, var1) {
   thread scripts\cp_mp\xmike109::givemidmatchaward("match_complete");
 }
 
-function freight_lift_button_activation(var0) {
-  var0 = 600;
+function freight_lift_button_activation(var_0) {
+  var_0 = 600;
 
   if(istrue(self.pers["ignoreWeaponMatchBonus"]) || !isDefined(self.pers["killsPerWeapon"])) {
     return;
   }
 
-  var1 = scripts\cp\cp_weaponrank::reload_handle_hintstring() / 60;
-  var2 = var0 / 60;
-  var3 = int(var1 * var2);
-  var4 = int(50);
-  var5 = self.timeplayed["total"] / var0;
-  var6 = var4 * var5;
-  var7 = int(var3 * var6);
-  var7 -= int(self.pers["weaponMatchBonusKills"] * var6);
+  var_1 = scripts\cp\cp_weaponrank::reload_handle_hintstring() / 60;
+  var_2 = var_0 / 60;
+  var_3 = int(var_1 * var_2);
+  var_4 = int(50);
+  var_5 = self.timeplayed["total"] / var_0;
+  var_6 = var_4 * var_5;
+  var_7 = int(var_3 * var_6);
+  var_7 -= int(self.pers["weaponMatchBonusKills"] * var_6);
 
-  if(var7 <= 0) {
+  if(var_7 <= 0) {
     return;
   }
 
-  var8 = 0;
+  var_8 = 0;
 
-  foreach(var10 in self.pers["killsPerWeapon"]) {
-    var8 += var3 - var10.killcount;
+  foreach(var_10 in self.pers["killsPerWeapon"]) {
+    var_8 += var_3 - var_10.killcount;
   }
 
-  if(var8 <= 0) {
+  if(var_8 <= 0) {
     return;
   }
 
-  foreach(var10 in self.pers["killsPerWeapon"]) {
-    var13 = (var3 - var10.killcount) / var8;
-    var14 = int(var7 * var13);
-    scripts\cp\drone\emp_drone::incrankxp(0, var10, var14);
+  foreach(var_10 in self.pers["killsPerWeapon"]) {
+    var_13 = (var_3 - var_10.killcount) / var_8;
+    var_14 = int(var_7 * var_13);
+    scripts\cp\drone\emp_drone::incrankxp(0, var_10, var_14);
 
-    foreach(var16 in self.pers["matchdataWeaponStats"]) {
-      if(issubstr(var18, var19)) {
-        if(isDefined(var16.stats["kills"]) && var10.killcount > 0) {
-          var17 = var13 * var16.stats["kills"] / var10.killcount;
-          var14 = int(var7 * var17);
+    foreach(var_16 in self.pers["matchdataWeaponStats"]) {
+      if(issubstr(var_18, var_19)) {
+        if(isDefined(var_16.stats["kills"]) && var_10.killcount > 0) {
+          var_17 = var_13 * var_16.stats["kills"] / var_10.killcount;
+          var_14 = int(var_7 * var_17);
 
-          if(isDefined(var16.stats["xp_earned"])) {
-            var16.stats["xp_earned"] = var16.stats["xp_earned"] + var14;
+          if(isDefined(var_16.stats["xp_earned"])) {
+            var_16.stats["xp_earned"] = var_16.stats["xp_earned"] + var_14;
           } else {
-            var16.stats["xp_earned"] = var14;
+            var_16.stats["xp_earned"] = var_14;
           }
         }
       }
@@ -313,13 +313,13 @@ function freight_lift_button_activation(var0) {
   }
 }
 
-function sethasdonecombat(var0, var1) {
-  if(var1 && !istrue(var0.hasdonecombat)) {}
+function sethasdonecombat(var_0, var_1) {
+  if(var_1 && !istrue(var_0.hasdonecombat)) {}
 
-  var0.hasdonecombat = var1;
+  var_0.hasdonecombat = var_1;
 
-  if(var1 && !istrue(var0.pers["hasDoneAnyCombat"])) {
-    var0.pers["hasDoneAnyCombat"] = 1;
+  if(var_1 && !istrue(var_0.pers["hasDoneAnyCombat"])) {
+    var_0.pers["hasDoneAnyCombat"] = 1;
     return;
   }
 }

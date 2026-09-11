@@ -9,27 +9,27 @@ function setup_lighting() {
   init_lights("price_intro");
 }
 
-function init_lights(var0) {
-  var1 = getEntArray(var0, "targetname");
+function init_lights(var_0) {
+  var_1 = getEntArray(var_0, "targetname");
 
-  foreach(var3 in var1) {
-    var3.og_intensity = var3 getlightintensity();
+  foreach(var_3 in var_1) {
+    var_3.og_intensity = var_3 getlightintensity();
   }
 }
 
-function lights_off(var0) {
-  var1 = getEntArray(var0, "targetname");
+function lights_off(var_0) {
+  var_1 = getEntArray(var_0, "targetname");
 
-  foreach(var3 in var1) {
-    var3 setlightintensity(0);
+  foreach(var_3 in var_1) {
+    var_3 setlightintensity(0);
   }
 }
 
-function lights_on(var0) {
-  var1 = getEntArray(var0, "targetname");
+function lights_on(var_0) {
+  var_1 = getEntArray(var_0, "targetname");
 
-  foreach(var3 in var1) {
-    var3 setlightintensity(var3.og_intensity);
+  foreach(var_3 in var_1) {
+    var_3 setlightintensity(var_3.og_intensity);
   }
 }
 
@@ -39,11 +39,11 @@ function main() {
 }
 
 function init_price_intro_lights() {
-  var0 = getEntArray("price_intro_on", "targetname");
+  var_0 = getEntArray("price_intro_on", "targetname");
 
-  foreach(var2 in var0) {
-    var2.og_intensity = var2 getlightintensity();
-    var2 setlightintensity(0);
+  foreach(var_2 in var_0) {
+    var_2.og_intensity = var_2 getlightintensity();
+    var_2 setlightintensity(0);
   }
 }
 
@@ -62,8 +62,8 @@ function light_dvars() {
 function infil_start() {
   level endon("intro_skipped");
   level.player enablephysicaldepthoffieldscripting();
-  var0 = [level.truck];
-  level.kyledrone thread scripts\engine\sp\utility::dof_enable_autofocus(6, 8, undefined, undefined, "tag_eye", var0, 1);
+  var_0 = [level.truck];
+  level.kyledrone thread scripts\engine\sp\utility::dof_enable_autofocus(6, 8, undefined, undefined, "tag_eye", var_0, 1);
   wait 25;
   level thread scripts\engine\sp\utility::dof_enable(2.8, 31, 10, 10, undefined, undefined);
   wait 12.5;
@@ -72,7 +72,7 @@ function infil_start() {
     waitframe();
   }
 
-  level.truck_driver scripts\engine\sp\utility::dof_enable_autofocus(1.2, 1, undefined, undefined, "tag_eye", var0, 1);
+  level.truck_driver scripts\engine\sp\utility::dof_enable_autofocus(1.2, 1, undefined, undefined, "tag_eye", var_0, 1);
   wait 6.5;
   level thread scripts\engine\sp\utility::dof_enable_autofocus(1.8, 4, undefined);
   scripts\engine\utility::flag_wait("boots_on_the_ground");
@@ -133,15 +133,15 @@ function setup_truck_lighting() {
   level.light_car_back setlightfovrange(115, 60);
   level.light_car_back setlightradius(100);
   level.light_car_back setlightcolor((0.776, 0.976, 1));
-  var0 = getEnt("light_truck_key1", "targetname");
-  var0 setlightintensity(0);
-  var1 = getEnt("light_truck_key2", "targetname");
-  var1 setlightintensity(0);
+  var_0 = getEnt("light_truck_key1", "targetname");
+  var_0 setlightintensity(0);
+  var_1 = getEnt("light_truck_key2", "targetname");
+  var_1 setlightintensity(0);
   level waittill("get_out_of_car");
   wait 6.5;
-  var2 = [level.light_front_high, level.light_front_low, level.light_car_back, level.light_car_fill, level.light_car_rim, var0, var1];
+  var_2 = [level.light_front_high, level.light_front_low, level.light_car_back, level.light_car_fill, level.light_car_rim, var_0, var_1];
 
-  foreach(var4 in var2) {
-    var4 setlightintensity(0);
+  foreach(var_4 in var_2) {
+    var_4 setlightintensity(0);
   }
 }

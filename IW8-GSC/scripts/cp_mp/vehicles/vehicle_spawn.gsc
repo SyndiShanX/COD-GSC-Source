@@ -3,44 +3,44 @@
  * Script: scripts\cp_mp\vehicles\vehicle_spawn.gsc
 ****************************************************/
 
-function vehicle_spawn_getleveldataforvehicle(var0, var1) {
-  var2 = vehicle_spawn_getleveldata();
-  var3 = var2.databyref[var0];
+function vehicle_spawn_getleveldataforvehicle(var_0, var_1) {
+  var_2 = vehicle_spawn_getleveldata();
+  var_3 = var_2.databyref[var_0];
 
-  if(!isDefined(var3) && istrue(var1)) {
-    var3 = spawnStruct();
-    var2.databyref[var0] = var3;
-    var3.ref = var0;
-    var3.maxinstancecount = 0;
-    var3.priority = 50;
-    var3.getspawnstructscallback = undefined;
-    var3.spawncallback = undefined;
-    var3.canspawncallback = undefined;
-    var3.clearancecheckradius = undefined;
-    var3.clearancecheckheight = undefined;
-    var3.clearancecheckoffsetz = undefined;
-    var3.clearancecheckminradius = undefined;
-    var3.ref_13b83 = undefined;
-    var3.ref_12ca1 = undefined;
-    var3.ref_13b84 = undefined;
+  if(!isDefined(var_3) && istrue(var_1)) {
+    var_3 = spawnStruct();
+    var_2.databyref[var_0] = var_3;
+    var_3.ref = var_0;
+    var_3.maxinstancecount = 0;
+    var_3.priority = 50;
+    var_3.getspawnstructscallback = undefined;
+    var_3.spawncallback = undefined;
+    var_3.canspawncallback = undefined;
+    var_3.clearancecheckradius = undefined;
+    var_3.clearancecheckheight = undefined;
+    var_3.clearancecheckoffsetz = undefined;
+    var_3.clearancecheckminradius = undefined;
+    var_3.ref_13b83 = undefined;
+    var_3.ref_12ca1 = undefined;
+    var_3.ref_13b84 = undefined;
   }
 
-  return var3;
+  return var_3;
 }
 
-function vehicle_spawn_canspawnVehicle(var0, var1, var2, var3) {
-  var4 = vehicle_spawn_getleveldata();
+function vehicle_spawn_canspawnVehicle(var_0, var_1, var_2, var_3) {
+  var_4 = vehicle_spawn_getleveldata();
 
-  if(vehicle_spawn_getinstancecount() < var4.maxinstancecount) {
-    if([[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle_spawn", "canSpawnVehicle")]](var0)) {
-      if(isDefined(var0)) {
-        if(!scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_instancesarelimited(var0) || !scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_atinstancelimit(var0, var1, var2)) {
-          var5 = vehicle_spawn_getleveldataforvehicle(var0);
+  if(vehicle_spawn_getinstancecount() < var_4.maxinstancecount) {
+    if([[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle_spawn", "canSpawnVehicle")]](var_0)) {
+      if(isDefined(var_0)) {
+        if(!scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_instancesarelimited(var_0) || !scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_atinstancelimit(var_0, var_1, var_2)) {
+          var_5 = vehicle_spawn_getleveldataforvehicle(var_0);
 
-          if(isDefined(var5)) {
-            if(istrue(level.ignorevehicletypeinstancelimit) || !isDefined(var5.maxinstancecount) || vehicle_spawn_getinstancecountforref(var0) < var5.maxinstancecount) {
-              if(isDefined(var5.canspawncallback)) {
-                return [[var5.canspawncallback]](var1, var2, var3, var0);
+          if(isDefined(var_5)) {
+            if(istrue(level.ignorevehicletypeinstancelimit) || !isDefined(var_5.maxinstancecount) || vehicle_spawn_getinstancecountforref(var_0) < var_5.maxinstancecount) {
+              if(isDefined(var_5.canspawncallback)) {
+                return [[var_5.canspawncallback]](var_1, var_2, var_3, var_0);
               } else {
                 return 1;
               }
@@ -54,152 +54,152 @@ function vehicle_spawn_canspawnVehicle(var0, var1, var2, var3) {
   return 0;
 }
 
-function vehicle_spawn_spawnVehicle(var0, var1, var2) {
-  var3 = vehicle_spawn_getleveldataforvehicle(var0);
+function vehicle_spawn_spawnVehicle(var_0, var_1, var_2) {
+  var_3 = vehicle_spawn_getleveldataforvehicle(var_0);
 
   if(vehicle_spawn_iscodevehicletest()) {
-    var4 = scripts\cp_mp\utility\game_utility::getmapname();
-    var5 = scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances(var0);
+    var_4 = scripts\cp_mp\utility\game_utility::getmapname();
+    var_5 = scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances(var_0);
 
-    if(var5.size > 0) {
+    if(var_5.size > 0) {
       return;
     }
 
-    if(var0 == "tac_rover") {
-      if(var4 == "mp_downtown_gw") {
-        var1.origin = (44455, -12715, 108);
-        var1.angles = (360, 315, 0);
-      } else if(var4 == "mp_farms2_gw") {
-        var1.origin = (45735, -12397, 121);
-        var1.angles = (0, 358, 0);
-      } else if(var4 == "mp_quarry2") {
-        var1.origin = (29480, 33349, 589);
-        var1.angles = (0, 202, 0);
+    if(var_0 == "tac_rover") {
+      if(var_4 == "mp_downtown_gw") {
+        var_1.origin = (44455, -12715, 108);
+        var_1.angles = (360, 315, 0);
+      } else if(var_4 == "mp_farms2_gw") {
+        var_1.origin = (45735, -12397, 121);
+        var_1.angles = (0, 358, 0);
+      } else if(var_4 == "mp_quarry2") {
+        var_1.origin = (29480, 33349, 589);
+        var_1.angles = (0, 202, 0);
       }
-    } else if(var0 == "large_transport") {
-      if(var4 == "mp_downtown_gw") {
-        var1.origin = (20845, -12233, -57);
-        var1.angles = (7, 81, 0);
-      } else if(var4 == "mp_farms2_gw") {
+    } else if(var_0 == "large_transport") {
+      if(var_4 == "mp_downtown_gw") {
+        var_1.origin = (20845, -12233, -57);
+        var_1.angles = (7, 81, 0);
+      } else if(var_4 == "mp_farms2_gw") {
         return;
-      } else if(var4 == "mp_quarry2") {
-        return;
-      }
-    } else if(var0 == "apc_russian") {
-      if(var4 == "mp_downtown_gw") {
-        var1.origin = (20845, -12233, -57);
-        var1.angles = (7, 81, 0);
-      } else if(var4 == "mp_farms2_gw") {
-        var1.origin = (44559, -12331, 87);
-        var1.angles = (0, 11, 0);
-      } else if(var4 == "mp_quarry2") {
-        var1.origin = (29135, 33754, 605);
-        var1.angles = (0, 7, 0);
-      }
-    } else if(var0 == "atv") {
-      if(var4 == "mp_downtown_gw") {
-        var1.origin = (22421, -13456, -48);
-        var1.angles = (13, 36, 0);
-      } else if(var4 == "mp_farms2_gw") {
-        var1.origin = (45202, -11294, 149);
-        var1.angles = (0, 283, 0);
-      } else if(var4 == "mp_quarry2") {
-        var1.origin = (29250, 35115, 616);
-        var1.angles = (0, 321, 0);
-      }
-    } else if(var0 == "technical") {
-      if(var4 == "mp_downtown_gw") {
-        var1.origin = (22742, -12693, -56);
-        var1.angles = (360, 315, 0);
-      } else if(var4 == "mp_farms2_gw") {
-        return;
-      } else if(var4 == "mp_quarry2") {
+      } else if(var_4 == "mp_quarry2") {
         return;
       }
-    } else if(var0 == "light_tank") {
-      if(var4 == "mp_downtown_gw") {
-        var1.origin = (22787, -13503, -56);
-        var1.angles = (3, 269, 0);
-      } else if(var4 == "mp_farms2_gw") {
-        var1.origin = (45259, -12740, 63);
-        var1.angles = (0, 274, 0);
-      } else if(var4 == "mp_quarry2") {
-        var1.origin = (32524, 34558, 599);
-        var1.angles = (0, 107, 0);
+    } else if(var_0 == "apc_russian") {
+      if(var_4 == "mp_downtown_gw") {
+        var_1.origin = (20845, -12233, -57);
+        var_1.angles = (7, 81, 0);
+      } else if(var_4 == "mp_farms2_gw") {
+        var_1.origin = (44559, -12331, 87);
+        var_1.angles = (0, 11, 0);
+      } else if(var_4 == "mp_quarry2") {
+        var_1.origin = (29135, 33754, 605);
+        var_1.angles = (0, 7, 0);
       }
-    } else if(var0 == "little_bird" || var0 == "little_bird_mg") {
-      if(var4 == "mp_downtown_gw") {
-        var1.origin = (21108, -12603, 100);
-        var1.angles = (6, 353, 0);
-      } else if(var4 == "mp_farms2_gw") {
-        var1.origin = (46478, -12482, 400);
-        var1.angles = (0, 84, 0);
-      } else if(var4 == "mp_quarry2") {
-        var1.origin = (28735, 34000, 767);
-        var1.angles = (0, 80, 0);
+    } else if(var_0 == "atv") {
+      if(var_4 == "mp_downtown_gw") {
+        var_1.origin = (22421, -13456, -48);
+        var_1.angles = (13, 36, 0);
+      } else if(var_4 == "mp_farms2_gw") {
+        var_1.origin = (45202, -11294, 149);
+        var_1.angles = (0, 283, 0);
+      } else if(var_4 == "mp_quarry2") {
+        var_1.origin = (29250, 35115, 616);
+        var_1.angles = (0, 321, 0);
       }
-    } else if(var0 == "cargo_truck" || var0 == "cargo_truck_mg") {
-      if(var4 == "mp_downtown_gw") {
-        var1.origin = (23503, -12799, -56);
-        var1.angles = (6, 359, 0);
-      } else if(var4 == "mp_farms2_gw") {
-        var1.origin = (45644, -11370, 160);
-        var1.angles = (0, 80, 0);
-      } else if(var4 == "mp_quarry2") {
-        var1.origin = (29280, 35546, 626);
-        var1.angles = (0, 148, 0);
+    } else if(var_0 == "technical") {
+      if(var_4 == "mp_downtown_gw") {
+        var_1.origin = (22742, -12693, -56);
+        var_1.angles = (360, 315, 0);
+      } else if(var_4 == "mp_farms2_gw") {
+        return;
+      } else if(var_4 == "mp_quarry2") {
+        return;
       }
-    } else if(var0 == "jeep") {
-      if(var4 == "mp_downtown_gw") {
-        var1.origin = (22781, -14070, -56);
-        var1.angles = (5, 86, 0);
-      } else if(var4 == "mp_farms2_gw") {
-        var1.origin = (46119, -11995, 168);
-        var1.angles = (0, 4, 0);
-      } else if(var4 == "mp_quarry2") {
-        var1.origin = (30351, 34420, 593);
-        var1.angles = (0, 31, 0);
+    } else if(var_0 == "light_tank") {
+      if(var_4 == "mp_downtown_gw") {
+        var_1.origin = (22787, -13503, -56);
+        var_1.angles = (3, 269, 0);
+      } else if(var_4 == "mp_farms2_gw") {
+        var_1.origin = (45259, -12740, 63);
+        var_1.angles = (0, 274, 0);
+      } else if(var_4 == "mp_quarry2") {
+        var_1.origin = (32524, 34558, 599);
+        var_1.angles = (0, 107, 0);
+      }
+    } else if(var_0 == "little_bird" || var_0 == "little_bird_mg") {
+      if(var_4 == "mp_downtown_gw") {
+        var_1.origin = (21108, -12603, 100);
+        var_1.angles = (6, 353, 0);
+      } else if(var_4 == "mp_farms2_gw") {
+        var_1.origin = (46478, -12482, 400);
+        var_1.angles = (0, 84, 0);
+      } else if(var_4 == "mp_quarry2") {
+        var_1.origin = (28735, 34000, 767);
+        var_1.angles = (0, 80, 0);
+      }
+    } else if(var_0 == "cargo_truck" || var_0 == "cargo_truck_mg") {
+      if(var_4 == "mp_downtown_gw") {
+        var_1.origin = (23503, -12799, -56);
+        var_1.angles = (6, 359, 0);
+      } else if(var_4 == "mp_farms2_gw") {
+        var_1.origin = (45644, -11370, 160);
+        var_1.angles = (0, 80, 0);
+      } else if(var_4 == "mp_quarry2") {
+        var_1.origin = (29280, 35546, 626);
+        var_1.angles = (0, 148, 0);
+      }
+    } else if(var_0 == "jeep") {
+      if(var_4 == "mp_downtown_gw") {
+        var_1.origin = (22781, -14070, -56);
+        var_1.angles = (5, 86, 0);
+      } else if(var_4 == "mp_farms2_gw") {
+        var_1.origin = (46119, -11995, 168);
+        var_1.angles = (0, 4, 0);
+      } else if(var_4 == "mp_quarry2") {
+        var_1.origin = (30351, 34420, 593);
+        var_1.angles = (0, 31, 0);
       }
     } else {
       return;
     }
   }
 
-  var6 = [[var3.spawncallback]](var1, var2);
+  var_6 = [[var_3.spawncallback]](var_1, var_2);
 
-  if(isDefined(var6)) {
-    vehicle_spawn_registerinstance(var6);
+  if(isDefined(var_6)) {
+    vehicle_spawn_registerinstance(var_6);
   }
 
-  return var6;
+  return var_6;
 }
 
-function vehicle_spawn_deregisterinstance(var0, var1) {
-  var2 = vehicle_spawn_getleveldata();
+function vehicle_spawn_deregisterinstance(var_0, var_1) {
+  var_2 = vehicle_spawn_getleveldata();
 
-  if(isDefined(var2.instancesbyref[var0])) {
-    var2.instancesbyref[var0][var1] = undefined;
+  if(isDefined(var_2.instancesbyref[var_0])) {
+    var_2.instancesbyref[var_0][var_1] = undefined;
     return;
   }
 }
 
-function vehicle_spawn_removespawnstructswithflag(var0, var1) {
+function vehicle_spawn_removespawnstructswithflag(var_0, var_1) {
   if(getdvarint("scr_forceVehicleSpawn", 0) == 1) {
-    return var0;
+    return var_0;
   }
 
-  var2 = 1 >> var1 - 1;
-  var3 = [];
+  var_2 = 1 >> var_1 - 1;
+  var_3 = [];
 
-  foreach(var5 in var0) {
-    if(isDefined(var5.spawnflags) && var5.spawnflags &var2) {
+  foreach(var_5 in var_0) {
+    if(isDefined(var_5.spawnflags) && var_5.spawnflags &var_2) {
       continue;
     }
 
-    var3 = var5;
+    var_3 = var_5;
   }
 
-  return var3;
+  return var_3;
 }
 
 function vehicle_spawn_gamemodesupportsrespawn() {
@@ -207,16 +207,16 @@ function vehicle_spawn_gamemodesupportsrespawn() {
 }
 
 function vehicle_spawn_init() {
-  var0 = spawnStruct();
-  level.vehicle.spawn = var0;
-  var0.maxinstancecount = 128;
-  var0.databyref = [];
-  var0.instancesbyref = [];
-  var0.spawnfromstructsdelayornotify = 5;
-  var0.ref_12ca2 = getdvarint("scr_respawnVehicleDelayOverride", 0);
-  var0.argshave = getdvarint("scr_abandonedVehicleTimeoutOverride", 0);
-  var0.ref_12ca1 = getdvarint("scr_respawnVehicleDelay", 60);
-  var0.areplayersnear = getdvarint("scr_abandonedVehicleTimeout", 30);
+  var_0 = spawnStruct();
+  level.vehicle.spawn = var_0;
+  var_0.maxinstancecount = 128;
+  var_0.databyref = [];
+  var_0.instancesbyref = [];
+  var_0.spawnfromstructsdelayornotify = 5;
+  var_0.ref_12ca2 = getdvarint("scr_respawnVehicleDelayOverride", 0);
+  var_0.argshave = getdvarint("scr_abandonedVehicleTimeoutOverride", 0);
+  var_0.ref_12ca1 = getdvarint("scr_respawnVehicleDelay", 60);
+  var_0.areplayersnear = getdvarint("scr_abandonedVehicleTimeout", 30);
   vehicle_spawn_initspawnclearance();
   [[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle_spawn", "init")]]();
   vehicle_spawn_initlate();
@@ -236,53 +236,53 @@ function vehicle_spawn_spawnfromstructs() {
     return;
   }
 
-  var0 = vehicle_spawn_getleveldata();
+  var_0 = vehicle_spawn_getleveldata();
 
-  if(isstring(var0.spawnfromstructsdelayornotify)) {
-    level waittill(var0.spawnfromstructsdelayornotify);
+  if(isstring(var_0.spawnfromstructsdelayornotify)) {
+    level waittill(var_0.spawnfromstructsdelayornotify);
   } else {
-    wait var0.spawnfromstructsdelayornotify;
+    wait var_0.spawnfromstructsdelayornotify;
   }
 
-  var1 = [];
+  var_1 = [];
 
-  foreach(var3 in var0.databyref) {
-    if(isDefined(var3.getspawnstructscallback)) {
-      var3.priority = clamp(var3.priority, 0, 100);
-      var1 = var3;
+  foreach(var_3 in var_0.databyref) {
+    if(isDefined(var_3.getspawnstructscallback)) {
+      var_3.priority = clamp(var_3.priority, 0, 100);
+      var_1 = var_3;
     }
   }
 
-  if(var1.size > 0) {
-    if(var1.size > 1) {
-      var1 = scripts\engine\utility::array_sort_with_func(var1, &vehicle_spawn_spawnfromstructscomparefunc);
+  if(var_1.size > 0) {
+    if(var_1.size > 1) {
+      var_1 = scripts\engine\utility::array_sort_with_func(var_1, &vehicle_spawn_spawnfromstructscomparefunc);
     }
 
-    var5 = isDefined(scripts\cp_mp\utility\game_utility::getlocaleid());
+    var_5 = isDefined(scripts\cp_mp\utility\game_utility::getlocaleid());
 
     if(vehicle_spawn_iscodevehicletest()) {
-      var5 = 0;
+      var_5 = 0;
     }
 
-    foreach(var3 in var1) {
-      var7 = [[var3.getspawnstructscallback]]();
+    foreach(var_3 in var_1) {
+      var_7 = [[var_3.getspawnstructscallback]]();
 
-      foreach(var9 in var7) {
-        if(var5) {
-          if(!isDefined(var9.script_noteworthy) || isDefined(var9.script_noteworthy) && var9.script_noteworthy != level.localeid) {
+      foreach(var_9 in var_7) {
+        if(var_5) {
+          if(!isDefined(var_9.script_noteworthy) || isDefined(var_9.script_noteworthy) && var_9.script_noteworthy != level.localeid) {
             continue;
           }
         }
 
-        if(vehicle_spawn_canspawnVehicle(var3.ref)) {
-          var10 = spawnStruct();
-          var10.origin = var9.origin;
-          var10.angles = var9.angles;
-          var10.spawntype = "LEVEL";
-          var11 = spawnStruct();
-          var12 = vehicle_spawn_spawnVehicle(var3.ref, var10, var11);
+        if(vehicle_spawn_canspawnVehicle(var_3.ref)) {
+          var_10 = spawnStruct();
+          var_10.origin = var_9.origin;
+          var_10.angles = var_9.angles;
+          var_10.spawntype = "LEVEL";
+          var_11 = spawnStruct();
+          var_12 = vehicle_spawn_spawnVehicle(var_3.ref, var_10, var_11);
 
-          if(isDefined(var12)) {}
+          if(isDefined(var_12)) {}
 
           continue;
         }
@@ -295,18 +295,18 @@ function vehicle_spawn_spawnfromstructs() {
   }
 }
 
-function vehicle_spawn_spawnfromstructscomparefunc(var0, var1) {
-  return var0.priority >= var1.priority;
+function vehicle_spawn_spawnfromstructscomparefunc(var_0, var_1) {
+  return var_0.priority >= var_1.priority;
 }
 
-function vehicle_spawn_registerinstance(var0) {
-  var1 = vehicle_spawn_getleveldata();
+function vehicle_spawn_registerinstance(var_0) {
+  var_1 = vehicle_spawn_getleveldata();
 
-  if(!isDefined(var1.instancesbyref[var0.vehiclename])) {
-    var1.instancesbyref[var0.vehiclename] = [];
+  if(!isDefined(var_1.instancesbyref[var_0.vehiclename])) {
+    var_1.instancesbyref[var_0.vehiclename] = [];
   }
 
-  var1.instancesbyref[var0.vehiclename][var0 getentitynumber()] = var0;
+  var_1.instancesbyref[var_0.vehiclename][var_0 getentitynumber()] = var_0;
 }
 
 function vehicle_spawn_getleveldata() {
@@ -314,32 +314,32 @@ function vehicle_spawn_getleveldata() {
 }
 
 function vehicle_spawn_getinstancecount() {
-  var0 = vehicle_spawn_getleveldata();
-  var1 = 0;
+  var_0 = vehicle_spawn_getleveldata();
+  var_1 = 0;
 
-  foreach(var3 in var0.instancesbyref) {
-    var1 += var3.size;
+  foreach(var_3 in var_0.instancesbyref) {
+    var_1 += var_3.size;
   }
 
-  return var1;
+  return var_1;
 }
 
-function vehicle_spawn_getinstancecountforref(var0) {
-  var1 = vehicle_spawn_getleveldata();
-  var2 = 0;
+function vehicle_spawn_getinstancecountforref(var_0) {
+  var_1 = vehicle_spawn_getleveldata();
+  var_2 = 0;
 
-  if(isDefined(var1.instancesbyref[var0])) {
-    var2 = var1.instancesbyref[var0].size;
+  if(isDefined(var_1.instancesbyref[var_0])) {
+    var_2 = var_1.instancesbyref[var_0].size;
   }
 
-  return var2;
+  return var_2;
 }
 
 function vehicle_spawn_isvehiclespawnStruct() {
-  var0 = self.targetname;
+  var_0 = self.targetname;
 
-  if(isDefined(var0)) {
-    switch (var0) {
+  if(isDefined(var_0)) {
+    switch (var_0) {
       case "van_spawn":
       case "technical_spawn":
       case "tacrover_spawn":
@@ -365,72 +365,72 @@ function vehicle_spawn_isvehiclespawnStruct() {
 }
 
 function vehicle_spawn_initspawnclearance() {
-  var0 = vehicle_spawn_getleveldata();
-  var0.clearancecheckminradii = [];
+  var_0 = vehicle_spawn_getleveldata();
+  var_0.clearancecheckminradii = [];
 }
 
-function vehicle_spawn_checkspawnclearance(var0, var1, var2, var3, var4) {
-  var5 = vehicle_spawn_getleveldata();
-  var6 = 200;
-  var7 = 200;
-  var8 = vehicle_spawn_getleveldataforvehicle(var1);
-  var9 = var8.clearancecheckminradius;
+function vehicle_spawn_checkspawnclearance(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = vehicle_spawn_getleveldata();
+  var_6 = 200;
+  var_7 = 200;
+  var_8 = vehicle_spawn_getleveldataforvehicle(var_1);
+  var_9 = var_8.clearancecheckminradius;
 
-  if(!isDefined(var9)) {
-    var9 = var5.clearancecheckminradii[var1];
+  if(!isDefined(var_9)) {
+    var_9 = var_5.clearancecheckminradii[var_1];
   }
 
-  if(isDefined(var8.clearancecheckradius)) {
-    var6 = var8.clearancecheckradius;
+  if(isDefined(var_8.clearancecheckradius)) {
+    var_6 = var_8.clearancecheckradius;
   }
 
-  if(isDefined(var8.clearancecheckheight)) {
-    var7 = var8.clearancecheckheight;
+  if(isDefined(var_8.clearancecheckheight)) {
+    var_7 = var_8.clearancecheckheight;
   }
 
-  if(isDefined(var4)) {
-    var0 += (0, 0, var4);
+  if(isDefined(var_4)) {
+    var_0 += (0, 0, var_4);
   }
 
-  var10 = (var6, var6, var7);
-  var11 = var0 - var10;
-  var12 = var0 + var10;
-  var13 = var2;
+  var_10 = (var_6, var_6, var_7);
+  var_11 = var_0 - var_10;
+  var_12 = var_0 + var_10;
+  var_13 = var_2;
 
-  if(!isDefined(var13)) {
-    var13 = physics_createcontents(["physicscontents_vehicle"]);
+  if(!isDefined(var_13)) {
+    var_13 = physics_createcontents(["physicscontents_vehicle"]);
   }
 
-  var14 = var3;
+  var_14 = var_3;
 
-  if(!isDefined(var14)) {
-    var14 = [];
-    GscBinSkip0(0x2e, var14.size, scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances("emp_drone"));
+  if(!isDefined(var_14)) {
+    var_14 = [];
+    GscBinSkip0(0x2e, var_14.size, scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances("emp_drone"));
   }
 
-  var15 = physics_aabbbroadphasequery(var11, var12, var13, var14);
+  var_15 = physics_aabbbroadphasequery(var_11, var_12, var_13, var_14);
 
-  if(isDefined(var15) && var15.size > 0) {
-    foreach(var17 in var15) {
-      if(isDefined(var17.vehiclename)) {
-        var18 = vehicle_spawn_getleveldataforvehicle(var17.vehiclename);
-        var19 = undefined;
+  if(isDefined(var_15) && var_15.size > 0) {
+    foreach(var_17 in var_15) {
+      if(isDefined(var_17.vehiclename)) {
+        var_18 = vehicle_spawn_getleveldataforvehicle(var_17.vehiclename);
+        var_19 = undefined;
 
-        if(isDefined(var18)) {
-          var19 = var18.clearancecheckminradius;
+        if(isDefined(var_18)) {
+          var_19 = var_18.clearancecheckminradius;
         }
 
-        if(!isDefined(var19)) {
-          var19 = var5.clearancecheckminradii[var17.vehiclename];
+        if(!isDefined(var_19)) {
+          var_19 = var_5.clearancecheckminradii[var_17.vehiclename];
         }
 
-        if(!isDefined(var19)) {
+        if(!isDefined(var_19)) {
           continue;
         }
 
-        var20 = pow(var9 + var19, 2);
+        var_20 = pow(var_9 + var_19, 2);
 
-        if(isDefined(var20) && var20 < distance2dsquared(var17.origin, var0)) {
+        if(isDefined(var_20) && var_20 < distance2dsquared(var_17.origin, var_0)) {
           continue;
         }
 
@@ -442,71 +442,71 @@ function vehicle_spawn_checkspawnclearance(var0, var1, var2, var3, var4) {
   return true;
 }
 
-function vehicle_spawn_setclearancecheckminradius(var0, var1) {
-  var2 = vehicle_spawn_getleveldata();
-  var3 = vehicle_spawn_getleveldataforvehicle(var0);
+function vehicle_spawn_setclearancecheckminradius(var_0, var_1) {
+  var_2 = vehicle_spawn_getleveldata();
+  var_3 = vehicle_spawn_getleveldataforvehicle(var_0);
 
-  if(isDefined(var3)) {
-    var3.clearancecheckminradius = var1;
+  if(isDefined(var_3)) {
+    var_3.clearancecheckminradius = var_1;
     return;
   }
 
-  var2.clearancecheckminradii[var0] = var1;
+  var_2.clearancecheckminradii[var_0] = var_1;
 }
 
-function ref_1421c(var0, var1, var2) {
+function ref_1421c(var_0, var_1, var_2) {
   level endon("game_ended");
   level endon("cancel_pending_vehicle_respawns");
-  var3 = vehicle_spawn_getleveldataforvehicle(var0);
+  var_3 = vehicle_spawn_getleveldataforvehicle(var_0);
 
-  if(!isDefined(var3)) {
+  if(!isDefined(var_3)) {
     return;
   }
 
-  if(!isDefined(var3.spawncallback)) {
+  if(!isDefined(var_3.spawncallback)) {
     return;
   }
 
-  var4 = vehicle_spawn_getleveldata();
-  var5 = undefined;
+  var_4 = vehicle_spawn_getleveldata();
+  var_5 = undefined;
 
-  if(var4.ref_12ca2 != 0) {
-    var5 = var4.ref_12ca2;
-  } else if(isDefined(var3.ref_12ca1)) {
-    var5 = var3.ref_12ca1;
+  if(var_4.ref_12ca2 != 0) {
+    var_5 = var_4.ref_12ca2;
+  } else if(isDefined(var_3.ref_12ca1)) {
+    var_5 = var_3.ref_12ca1;
   } else {
-    var5 = var4.ref_12ca1;
+    var_5 = var_4.ref_12ca1;
   }
 
-  if(var5 >= 1) {
-    if(var5 >= 9999) {
+  if(var_5 >= 1) {
+    if(var_5 >= 9999) {
       return undefined;
     }
 
     goto LOC_00000088;
   }
 
-  var5 = 1;
+  var_5 = 1;
 
   for(;;) {
-    wait var5;
+    wait var_5;
 
-    if(vehicle_spawn_canspawnVehicle(var0)) {
-      if(vehicle_spawn_checkspawnclearance(var1.origin, var0)) {
-        var6 = vehicle_spawn_spawnVehicle(var0, var1, var2);
+    if(vehicle_spawn_canspawnVehicle(var_0)) {
+      if(vehicle_spawn_checkspawnclearance(var_1.origin, var_0)) {
+        var_6 = vehicle_spawn_spawnVehicle(var_0, var_1, var_2);
 
-        if(!isDefined(var6)) {
+        if(!isDefined(var_6)) {
           continue;
         }
 
-        return var6;
+        return var_6;
       }
     }
   }
 }
 
-function ref_14219(var0) {
-  var0.ondeathrespawn = undefined;
+function ref_14219(var_0) {
+  var_0.ondeathrespawn = undefined;
 }
 
 function ref_14212() {
@@ -526,38 +526,38 @@ function ref_1421d() {
     return;
   }
 
-  var0 = vehicle_spawn_getleveldataforvehicle(self.vehiclename);
+  var_0 = vehicle_spawn_getleveldataforvehicle(self.vehiclename);
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  if(!isDefined(var0.arenavday)) {
+  if(!isDefined(var_0.arenavday)) {
     return;
   }
 
   self endon("death");
   self endon("stop_watching_abandoned");
-  var1 = vehicle_spawn_getleveldata();
-  var2 = undefined;
+  var_1 = vehicle_spawn_getleveldata();
+  var_2 = undefined;
 
-  if(var1.argshave != 0) {
-    var2 = var1.argshave;
-  } else if(isDefined(var0.areplayersnear)) {
-    var2 = var0.areplayersnear;
+  if(var_1.argshave != 0) {
+    var_2 = var_1.argshave;
+  } else if(isDefined(var_0.areplayersnear)) {
+    var_2 = var_0.areplayersnear;
   } else {
-    var2 = var1.areplayersnear;
+    var_2 = var_1.areplayersnear;
   }
 
-  if(var2 >= 1) {
-    if(var2 >= 9999) {
+  if(var_2 >= 1) {
+    if(var_2 >= 9999) {
       return;
     }
   } else {
-    var2 = 1;
+    var_2 = 1;
   }
 
-  wait var2;
+  wait var_2;
   thread ref_14210();
 }
 
@@ -568,48 +568,48 @@ function ref_1421a() {
 function ref_14210() {
   ref_1421a();
   self.matchdata_level = 1;
-  var0 = vehicle_spawn_getleveldataforvehicle(self.vehiclename);
-  self thread[[var0.arenavday]]();
+  var_0 = vehicle_spawn_getleveldataforvehicle(self.vehiclename);
+  self thread[[var_0.arenavday]]();
 }
 
 function ref_14211() {
-  var0 = scripts\cp_mp\vehicles\vehicle_damage::ref_14152();
+  var_0 = scripts\cp_mp\vehicles\vehicle_damage::ref_14152();
 
-  if(var0 != "heavy") {
-    var1 = scripts\cp_mp\vehicles\vehicle_damage::ref_1414b(self);
+  if(var_0 != "heavy") {
+    var_1 = scripts\cp_mp\vehicles\vehicle_damage::ref_1414b(self);
 
-    if(isDefined(var1)) {
-      self.health = int(min(var1, self.health));
+    if(isDefined(var_1)) {
+      self.health = int(min(var_1, self.health));
       scripts\cp_mp\utility\vehicle_omnvar_utility::vehomn_updateomnvarsondamage(self);
     }
 
-    scripts\cp_mp\vehicles\vehicle_damage::ref_14177("heavy", var0);
+    scripts\cp_mp\vehicles\vehicle_damage::ref_14177("heavy", var_0);
     return;
   }
 }
 
 function vehicle_spawn_iscodevehicletest() {
-  var0 = level.codevehicletest;
+  var_0 = level.codevehicletest;
 
-  if(!isDefined(var0)) {
-    var0 = getdvarint("scr_codeVehicleTest", 0) == 1;
+  if(!isDefined(var_0)) {
+    var_0 = getdvarint("scr_codeVehicleTest", 0) == 1;
 
-    if(var0 && vehicle_spawn_iscodevehicletestlevel()) {
-      var0 = 1;
+    if(var_0 && vehicle_spawn_iscodevehicletestlevel()) {
+      var_0 = 1;
     } else {
-      var0 = 0;
+      var_0 = 0;
     }
 
-    level.codevehicletest = var0;
+    level.codevehicletest = var_0;
   }
 
-  return var0;
+  return var_0;
 }
 
 function vehicle_spawn_iscodevehicletestlevel() {
-  var0 = scripts\cp_mp\utility\game_utility::getmapname();
+  var_0 = scripts\cp_mp\utility\game_utility::getmapname();
 
-  switch (var0) {
+  switch (var_0) {
     case "mp_farms2_gw":
     case "mp_downtown_gw":
     case "mp_quarry2":

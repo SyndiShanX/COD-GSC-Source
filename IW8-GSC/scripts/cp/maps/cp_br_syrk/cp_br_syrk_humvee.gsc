@@ -13,8 +13,8 @@ function start() {
   setDvar("cg_thirdPersonCarRange", 450);
   setDvar("cg_thirdPersonCarForward", 20);
   setDvar("cg_thirdPersonCarUp", 150);
-  var0 = scripts\engine\utility::getStruct("humvee_spawner", "script_noteworthy");
-  level thread scripts\cp\maps\cp_br_syrk\vehicle_travel::deploy_vehicle(var0, scripts\cp\maps\cp_br_syrk\vehicle_travel::get_humvee_info(var0));
+  var_0 = scripts\engine\utility::getStruct("humvee_spawner", "script_noteworthy");
+  level thread scripts\cp\maps\cp_br_syrk\vehicle_travel::deploy_vehicle(var_0, scripts\cp\maps\cp_br_syrk\vehicle_travel::get_humvee_info(var_0));
   level thread scripts\cp\maps\cp_br_syrk\vehicle_travel::set_up_ieds();
   thread cp_br_syrk_tutorial_dialogue();
   activate_radius_distance_trigger_markers();
@@ -22,16 +22,16 @@ function start() {
 }
 
 function teleport_players() {
-  var0 = scripts\engine\utility::getStructArray("humvee_player_start", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("humvee_player_start", "script_noteworthy");
 
-  for(var1 = 0; var1 < 3; var1++) {
-    var0 = scripts\engine\utility::array_randomize(var0);
+  for(var_1 = 0; var_1 < 3; var_1++) {
+    var_0 = scripts\engine\utility::array_randomize(var_0);
   }
 
-  foreach(var3 in level.players) {
-    var4 = var0[var5];
-    var3 setOrigin(var4.origin);
-    var3 setplayerangles(var4.angles);
+  foreach(var_3 in level.players) {
+    var_4 = var_0[var_5];
+    var_3 setOrigin(var_4.origin);
+    var_3 setplayerangles(var_4.angles);
   }
 }
 
@@ -42,8 +42,8 @@ function set_up_suicide_bomber_call_back() {
 
 function suicide_bomber_combat_func() {
   self endon("death");
-  var0 = get_closet_alive_player(self);
-  self getenemyinfo(var0);
+  var_0 = get_closet_alive_player(self);
+  self getenemyinfo(var_0);
 
   for(;;) {
     self.bomberusegrenade = 0;
@@ -60,34 +60,34 @@ function suicide_bomber_combat_func() {
   }
 }
 
-function get_closet_alive_player(var0) {
-  var1 = [];
+function get_closet_alive_player(var_0) {
+  var_1 = [];
 
-  foreach(var3 in level.players) {
-    if(!isDefined(var3)) {
+  foreach(var_3 in level.players) {
+    if(!isDefined(var_3)) {
       continue;
     }
 
-    if(scripts\cp\cp_laststand::player_in_laststand(var3)) {
+    if(scripts\cp\cp_laststand::player_in_laststand(var_3)) {
       continue;
     }
 
-    var1 = var3;
+    var_1 = var_3;
   }
 
-  return scripts\engine\utility::getclosest(var0.origin, var1);
+  return scripts\engine\utility::getclosest(var_0.origin, var_1);
 }
 
-function suicide_bomber_explode_func(var0) {
-  if(isDefined(var0.bombertarget) && scripts\engine\utility::array_contains(level.vehicle_travel_array, var0.bombertarget)) {
-    var1 = var0.bombertarget;
-    var2 = get_closest_ied_triggering_tag(var1, var0);
+function suicide_bomber_explode_func(var_0) {
+  if(isDefined(var_0.bombertarget) && scripts\engine\utility::array_contains(level.vehicle_travel_array, var_0.bombertarget)) {
+    var_1 = var_0.bombertarget;
+    var_2 = get_closest_ied_triggering_tag(var_1, var_0);
 
-    if(isDefined(var2)) {
-      var3 = var1 gettagorigin(var2);
-      var4 = scripts\cp\maps\cp_br_syrk\vehicle_travel::get_repair_interaction_point_name(var2);
-      var5 = scripts\cp\maps\cp_br_syrk\vehicle_travel::get_vehicle_interaction_point(var1, var4);
-      scripts\cp\maps\cp_br_syrk\vehicle_travel::try_enable_repair_interaction(var1, var2, var0.origin, var4, var5);
+    if(isDefined(var_2)) {
+      var_3 = var_1 gettagorigin(var_2);
+      var_4 = scripts\cp\maps\cp_br_syrk\vehicle_travel::get_repair_interaction_point_name(var_2);
+      var_5 = scripts\cp\maps\cp_br_syrk\vehicle_travel::get_vehicle_interaction_point(var_1, var_4);
+      scripts\cp\maps\cp_br_syrk\vehicle_travel::try_enable_repair_interaction(var_1, var_2, var_0.origin, var_4, var_5);
       return;
     }
 
@@ -95,22 +95,22 @@ function suicide_bomber_explode_func(var0) {
   }
 }
 
-function get_closest_ied_triggering_tag(var0, var1) {
-  var2 = 99999999;
-  var3 = undefined;
+function get_closest_ied_triggering_tag(var_0, var_1) {
+  var_2 = 99999999;
+  var_3 = undefined;
 
-  if(isDefined(var0.ied_triggering_tags)) {
-    foreach(var5 in var0.ied_triggering_tags) {
-      var6 = distancesquared(var0 gettagorigin(var5), var1.origin);
+  if(isDefined(var_0.ied_triggering_tags)) {
+    foreach(var_5 in var_0.ied_triggering_tags) {
+      var_6 = distancesquared(var_0 gettagorigin(var_5), var_1.origin);
 
-      if(var6 < var2) {
-        var2 = var6;
-        var3 = var5;
+      if(var_6 < var_2) {
+        var_2 = var_6;
+        var_3 = var_5;
       }
     }
   }
 
-  return var3;
+  return var_3;
 }
 
 function register_spawn_groups() {
@@ -149,76 +149,76 @@ function drive_down_hill_enemy_spawn_think() {
   scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_ovl_vehicle_bombers_10", "allies");
 }
 
-function get_vehicle_part_struct(var0, var1) {
-  var2 = scripts\engine\utility::getStructArray(var0.target, "targetname");
+function get_vehicle_part_struct(var_0, var_1) {
+  var_2 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
 
-  foreach(var4 in var2) {
-    if(isDefined(var4.script_noteworthy) && var4.script_noteworthy == var1) {
-      return var4;
+  foreach(var_4 in var_2) {
+    if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == var_1) {
+      return var_4;
     }
   }
 }
 
 function activate_radius_distance_trigger_markers() {
-  var0 = scripts\engine\utility::getStructArray("radius_distance_trigger_marker", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("radius_distance_trigger_marker", "script_noteworthy");
 
-  foreach(var2 in var0) {
-    thread radius_detection_monitor(var2);
+  foreach(var_2 in var_0) {
+    thread radius_detection_monitor(var_2);
   }
 }
 
-function radius_detection_monitor(var0) {
-  var1 = var0.groupname + "";
-  var2 = undefined;
+function radius_detection_monitor(var_0) {
+  var_1 = var_0.groupname + "";
+  var_2 = undefined;
 
-  if(isDefined(var0.name)) {
-    var2 = var0.name + "";
+  if(isDefined(var_0.name)) {
+    var_2 = var_0.name + "";
   }
 
   level endon("game_ended");
 
-  if(isDefined(var2)) {
-    level endon(var2);
+  if(isDefined(var_2)) {
+    level endon(var_2);
   } else {
-    level endon(var1);
+    level endon(var_1);
   }
 
-  var3 = var0.radius;
-  var4 = var3 * var3;
+  var_3 = var_0.radius;
+  var_4 = var_3 * var_3;
 
   for(;;) {
-    if(any_player_within_range(var0, var4)) {
-      radius_detection_monitor_send_notify(var1, var0, var2);
+    if(any_player_within_range(var_0, var_4)) {
+      radius_detection_monitor_send_notify(var_1, var_0, var_2);
     }
 
-    if(any_vehicle_within_range(var0, var4)) {
-      radius_detection_monitor_send_notify(var1, var0, var2);
+    if(any_vehicle_within_range(var_0, var_4)) {
+      radius_detection_monitor_send_notify(var_1, var_0, var_2);
     }
 
     waitframe();
   }
 }
 
-function radius_detection_monitor_send_notify(var0, var1, var2) {
-  if(isDefined(var1.script_parameters)) {
-    level notify(var0, var1.script_parameters + "");
+function radius_detection_monitor_send_notify(var_0, var_1, var_2) {
+  if(isDefined(var_1.script_parameters)) {
+    level notify(var_0, var_1.script_parameters + "");
   } else {
-    level notify(var0);
+    level notify(var_0);
   }
 
-  if(isDefined(var2)) {
-    level notify(var2);
+  if(isDefined(var_2)) {
+    level notify(var_2);
     return;
   }
 }
 
-function any_player_within_range(var0, var1) {
-  foreach(var3 in level.players) {
-    if(istrue(var3.unable_to_trigger_radius_detection_monitor)) {
+function any_player_within_range(var_0, var_1) {
+  foreach(var_3 in level.players) {
+    if(istrue(var_3.unable_to_trigger_radius_detection_monitor)) {
       continue;
     }
 
-    if(distancesquared(var0.origin, var3.origin) < var1) {
+    if(distancesquared(var_0.origin, var_3.origin) < var_1) {
       return true;
     }
   }
@@ -226,9 +226,9 @@ function any_player_within_range(var0, var1) {
   return false;
 }
 
-function any_vehicle_within_range(var0, var1) {
-  foreach(var3 in level.vehicle_travel_array) {
-    if(distancesquared(var0.origin, var3.origin) < var1) {
+function any_vehicle_within_range(var_0, var_1) {
+  foreach(var_3 in level.vehicle_travel_array) {
+    if(distancesquared(var_0.origin, var_3.origin) < var_1) {
       return true;
     }
   }
@@ -298,13 +298,13 @@ function repair_vehicle_intro_vo_monitor() {
 
 function ied_marked_vo_monitor() {
   level endon("game_ended");
-  var0 = 120;
+  var_0 = 120;
 
-  for(var1 = gettime();; var1 = var2 + var0 * 1000) {
+  for(var_1 = gettime();; var_1 = var_2 + var_0 * 1000) {
     level waittill("IED_marked");
-    var2 = gettime();
+    var_2 = gettime();
 
-    if(var2 > var1) {
+    if(var_2 > var_1) {
       scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_ovl_vehicle_ieds_found_10", "allies");
     }
   }
@@ -314,9 +314,9 @@ function near_ied_zone_warning_monitor() {
   level endon("game_ended");
 
   for(;;) {
-    level waittill("near_IED_zone", var0);
+    level waittill("near_IED_zone", var_0);
 
-    if(any_ied_left_unidentified_in_zone(var0)) {
+    if(any_ied_left_unidentified_in_zone(var_0)) {
       level thread scripts\cp\utility::cp_add_dialogue_line(&"CP_BR_SYRK_GL_DIALOGUE/WATCH_OUT_FOR_IED");
       scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_ovl_vehicle_find_ieds_10", "allies");
     }
@@ -325,9 +325,9 @@ function near_ied_zone_warning_monitor() {
   }
 }
 
-function any_ied_left_unidentified_in_zone(var0) {
-  foreach(var2 in level.unidentified_ieds) {
-    if(isDefined(var2.ied_controller) && isDefined(var2.ied_controller.groupname) && var2.ied_controller.groupname == var0) {
+function any_ied_left_unidentified_in_zone(var_0) {
+  foreach(var_2 in level.unidentified_ieds) {
+    if(isDefined(var_2.ied_controller) && isDefined(var_2.ied_controller.groupname) && var_2.ied_controller.groupname == var_0) {
       return true;
     }
   }
@@ -342,11 +342,11 @@ function load_vfx() {
   load_surface_speed_vfx("cp_decho_rebel", "dust", "fast", "vfx/iw8_cp/prop/vfx_humvee_treadfx_dust_fast.vfx");
 }
 
-function load_surface_speed_vfx(var0, var1, var2, var3) {
-  if(!isDefined(level.vehicle.templates.surface_effects[var0])) {
-    level.vehicle.templates.surface_effects[var0] = [];
+function load_surface_speed_vfx(var_0, var_1, var_2, var_3) {
+  if(!isDefined(level.vehicle.templates.surface_effects[var_0])) {
+    level.vehicle.templates.surface_effects[var_0] = [];
   }
 
-  var4 = var1 + "_" + var2;
-  level.vehicle.templates.surface_effects[var0][var4] = loadfx(var3);
+  var_4 = var_1 + "_" + var_2;
+  level.vehicle.templates.surface_effects[var_0][var_4] = loadfx(var_3);
 }

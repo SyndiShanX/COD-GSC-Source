@@ -9,146 +9,146 @@ function init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("challenges", "onAgentKilled", &ref_11ffc);
 }
 
-function v_end_pos(var0) {
+function v_end_pos(var_0) {
   if(!isPlayer(self) || isai(self)) {
     return 0;
   }
 
-  return self getplayerdata(level.loadoutsgroup, "squadMembers", "challenges", "completed", var0);
+  return self getplayerdata(level.loadoutsgroup, "squadMembers", "challenges", "completed", var_0);
 }
 
-function updateassassinationdataomnvar(var0) {
-  var1 = tablelookupbyrow("t9_challenges.csv", var0, 7);
-  var2 = getsystemtime();
+function updateassassinationdataomnvar(var_0) {
+  var_1 = tablelookupbyrow("t9_challenges.csv", var_0, 7);
+  var_2 = getsystemtime();
 
-  if(var1 != "" && var2 <= int(var1)) {
+  if(var_1 != "" && var_2 <= int(var_1)) {
     return false;
   }
 
   return true;
 }
 
-function routers_needed(var0) {
+function routers_needed(var_0) {
   if(!isDefined(level.ref_139e0)) {
-    var1 = "loot/battlepass_season" + level.getallactivequestsforteam + ".csv";
-    var2 = tablelookupgetnumrows(var1);
-    var3 = [];
+    var_1 = "loot/battlepass_season" + level.getallactivequestsforteam + ".csv";
+    var_2 = tablelookupgetnumrows(var_1);
+    var_3 = [];
 
-    for(var4 = 1; var4 < var2; var4++) {
-      var3 = int(tablelookupbyrow(var1, var4, 1));
+    for(var_4 = 1; var_4 < var_2; var_4++) {
+      var_3 = int(tablelookupbyrow(var_1, var_4, 1));
     }
 
-    level.ref_139e0 = var3;
+    level.ref_139e0 = var_3;
   }
 
-  for(var5 = 1; var5 < level.ref_139e0.size; var5++) {
-    if(level.ref_139e0[var5] >= var0) {
+  for(var_5 = 1; var_5 < level.ref_139e0.size; var_5++) {
+    if(level.ref_139e0[var_5] >= var_0) {
       break;
     }
   }
 
-  if(var5 > level.ref_139e0.size) {
-    var5 = level.ref_139e0.size;
+  if(var_5 > level.ref_139e0.size) {
+    var_5 = level.ref_139e0.size;
   }
 
-  return var5;
+  return var_5;
 }
 
-function get_best_heli_struct(var0) {
-  var1 = 0;
-  var2 = tablelookuprownum("t9_challenges.csv", 1, var0);
+function get_best_heli_struct(var_0) {
+  var_1 = 0;
+  var_2 = tablelookuprownum("t9_challenges.csv", 1, var_0);
 
-  if(var2 >= 0) {
+  if(var_2 >= 0) {
     if(!level.play_intro_getin_anim) {
       return true;
     }
 
-    var1 = 1;
+    var_1 = 1;
 
-    if(v_end_pos(var2)) {
+    if(v_end_pos(var_2)) {
       return false;
     }
 
-    if(!updateassassinationdataomnvar(var2)) {
+    if(!updateassassinationdataomnvar(var_2)) {
       return false;
     }
 
-    var3 = tablelookupbyrow("t9_challenges.csv", var2, 2);
+    var_3 = tablelookupbyrow("t9_challenges.csv", var_2, 2);
 
-    if(var3 == "GUNSMITH") {
-      var4 = tablelookupbyrow("t9_challenges.csv", var2, 5);
+    if(var_3 == "GUNSMITH") {
+      var_4 = tablelookupbyrow("t9_challenges.csv", var_2, 5);
 
-      if(var4 != "") {
-        var5 = scripts\mp\rank::safedivide(var4);
-        var6 = scripts\mp\weaponrank::rpg_attack_apc(var5);
-        var7 = tablelookupbyrow("t9_challenges.csv", var2, 4);
+      if(var_4 != "") {
+        var_5 = scripts\mp\rank::safedivide(var_4);
+        var_6 = scripts\mp\weaponrank::rpg_attack_apc(var_5);
+        var_7 = tablelookupbyrow("t9_challenges.csv", var_2, 4);
 
-        if(var6 < int(var7)) {
+        if(var_6 < int(var_7)) {
           return false;
         }
       }
-    } else if(var3 == "QUEST") {
-      var8 = scripts\mp\teams::lookupcurrentoperator(self.team);
-      var9 = tablelookupbyrow("t9_challenges.csv", var2, 6);
+    } else if(var_3 == "QUEST") {
+      var_8 = scripts\mp\teams::lookupcurrentoperator(self.team);
+      var_9 = tablelookupbyrow("t9_challenges.csv", var_2, 6);
 
-      if(isDefined(var8) && isDefined(var9) && var8 != "" && var9 != "" && var8 != var9) {
+      if(isDefined(var_8) && isDefined(var_9) && var_8 != "" && var_9 != "" && var_8 != var_9) {
         return false;
       }
     }
   } else {
-    var2 = tablelookuprownum("mp/t9_seasonal_challenges.csv", 1, var0);
+    var_2 = tablelookuprownum("mp/t9_seasonal_challenges.csv", 1, var_0);
 
-    if(var2 >= 0) {
+    if(var_2 >= 0) {
       if(!level.play_intro_getin_anim) {
         return true;
       }
 
-      var10 = tablelookupgetnumrows("t9_challenges.csv");
+      var_10 = tablelookupgetnumrows("t9_challenges.csv");
 
-      if(v_end_pos(var10 + var2)) {
+      if(v_end_pos(var_10 + var_2)) {
         return false;
       }
 
-      if(!updateassassinationdataomnvar(var2)) {
+      if(!updateassassinationdataomnvar(var_2)) {
         return false;
       }
 
-      var1 = 1;
-      var11 = tablelookupbyrow("mp/t9_seasonal_challenges.csv", var2, 2);
-      var12 = function_042b();
+      var_1 = 1;
+      var_11 = tablelookupbyrow("mp/t9_seasonal_challenges.csv", var_2, 2);
+      var_12 = function_042b();
 
-      if(var12 < int(var11)) {
+      if(var_12 < int(var_11)) {
         return false;
       }
     }
   }
 
-  if(!var1) {
+  if(!var_1) {
     return false;
   }
 
   return true;
 }
 
-function ref_11ffc(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11) {
-  var12 = scripts\mp\damage::playerkilled_initdeathdata(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11);
+function ref_11ffc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  var_12 = scripts\mp\damage::playerkilled_initdeathdata(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 
-  if(scripts\mp\utility\damage::isheadshot(var12.hitloc, var12.meansofdeath, var12.attacker)) {
-    var12.meansofdeath = "MOD_HEAD_SHOT";
-    var5 = "MOD_HEAD_SHOT";
+  if(scripts\mp\utility\damage::isheadshot(var_12.hitloc, var_12.meansofdeath, var_12.attacker)) {
+    var_12.meansofdeath = "MOD_HEAD_SHOT";
+    var_5 = "MOD_HEAD_SHOT";
   }
 
-  if(var1.classname != "worldspawn") {
-    var1 thread scripts\mp\events::cargo_truck_mg_initoccupancy(var12.lifeid, self, var6, var5, var0, var12);
-    var13 = 0;
-    var14 = 0;
+  if(var_1.classname != "worldspawn") {
+    var_1 thread scripts\mp\events::cargo_truck_mg_initoccupancy(var_12.lifeid, self, var_6, var_5, var_0, var_12);
+    var_13 = 0;
+    var_14 = 0;
 
-    if(isDefined(var1.modifiers)) {
-      var13 = var1.modifiers["mask"];
-      var14 = var1.modifiers["mask2"];
+    if(isDefined(var_1.modifiers)) {
+      var_13 = var_1.modifiers["mask"];
+      var_14 = var_1.modifiers["mask2"];
     }
 
-    var2 thread scripts\cp\vehicles\vehicle_compass_cp::ref_11ffc(var0, var1, var3, var4, var5, var6, var8, var13, var14);
+    var_2 thread scripts\cp\vehicles\vehicle_compass_cp::ref_11ffc(var_0, var_1, var_3, var_4, var_5, var_6, var_8, var_13, var_14);
     return;
   }
 }

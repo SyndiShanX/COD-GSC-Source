@@ -3,31 +3,31 @@
  * Script: scripts\common\vehicle_lights.gsc
 ***********************************************/
 
-function lights_on(var0, var1) {
-  var2 = strtok(var0, " ");
-  scripts\engine\utility::array_levelthread(var2, &lights_on_internal, var1);
+function lights_on(var_0, var_1) {
+  var_2 = strtok(var_0, " ");
+  scripts\engine\utility::array_levelthread(var_2, &lights_on_internal, var_1);
 }
 
-function group_light(var0, var1, var2) {
+function group_light(var_0, var_1, var_2) {
   if(!isDefined(level.vehicle.templates.vehicle_lights_group)) {
     level.vehicle.templates.vehicle_lights_group = [];
   }
 
-  if(!isDefined(level.vehicle.templates.vehicle_lights_group[var0])) {
-    level.vehicle.templates.vehicle_lights_group[var0] = [];
+  if(!isDefined(level.vehicle.templates.vehicle_lights_group[var_0])) {
+    level.vehicle.templates.vehicle_lights_group[var_0] = [];
   }
 
-  if(!isDefined(level.vehicle.templates.vehicle_lights_group[var0][var2])) {
-    level.vehicle.templates.vehicle_lights_group[var0][var2] = [];
+  if(!isDefined(level.vehicle.templates.vehicle_lights_group[var_0][var_2])) {
+    level.vehicle.templates.vehicle_lights_group[var_0][var_2] = [];
   }
 
-  foreach(var4 in level.vehicle.templates.vehicle_lights_group[var0][var2]) {
-    if(var1 == var4) {
+  foreach(var_4 in level.vehicle.templates.vehicle_lights_group[var_0][var_2]) {
+    if(var_1 == var_4) {
       return;
     }
   }
 
-  level.vehicle.templates.vehicle_lights_group[var0][var2][level.vehicle.templates.vehicle_lights_group[var0][var2].size] = var1;
+  level.vehicle.templates.vehicle_lights_group[var_0][var_2][level.vehicle.templates.vehicle_lights_group[var_0][var_2].size] = var_1;
 }
 
 function lights_delayfxforframe() {
@@ -48,46 +48,46 @@ function lights_delayfxforframe() {
   level.fxdelay = undefined;
 }
 
-function lights_off_internal(var0, var1, var2) {
+function lights_off_internal(var_0, var_1, var_2) {
   self notify("lights_off");
 
-  if(isDefined(var2)) {
-    var1 = var2;
-  } else if(!isDefined(var1)) {
-    var1 = self.classname;
+  if(isDefined(var_2)) {
+    var_1 = var_2;
+  } else if(!isDefined(var_1)) {
+    var_1 = self.classname;
   }
 
-  if(!isDefined(var0)) {
-    var0 = "all";
+  if(!isDefined(var_0)) {
+    var_0 = "all";
   }
 
   if(!isDefined(self.lights)) {
     return;
   }
 
-  if(!isDefined(level.vehicle.templates.vehicle_lights_group[var1][var0])) {
+  if(!isDefined(level.vehicle.templates.vehicle_lights_group[var_1][var_0])) {
     return;
   }
 
-  var3 = level.vehicle.templates.vehicle_lights_group[var1][var0];
-  var4 = 0;
-  var5 = 2;
+  var_3 = level.vehicle.templates.vehicle_lights_group[var_1][var_0];
+  var_4 = 0;
+  var_5 = 2;
 
   if(isDefined(self.maxlightstopsperframe)) {
-    var5 = self.maxlightstopsperframe;
+    var_5 = self.maxlightstopsperframe;
   }
 
-  foreach(var7 in var3) {
-    var8 = level.vehicle.templates.vehicle_lights[var1][var7];
+  foreach(var_7 in var_3) {
+    var_8 = level.vehicle.templates.vehicle_lights[var_1][var_7];
 
-    if(scripts\engine\utility::hastag(self.model, var8.tag)) {
-      stopFXOnTag(var8.effect, self, var8.tag);
+    if(scripts\engine\utility::hastag(self.model, var_8.tag)) {
+      stopFXOnTag(var_8.effect, self, var_8.tag);
     }
 
-    var4++;
+    var_4++;
 
-    if(var4 >= var5) {
-      var4 = 0;
+    if(var_4 >= var_5) {
+      var_4 = 0;
       wait 0.05;
     }
 
@@ -95,27 +95,27 @@ function lights_off_internal(var0, var1, var2) {
       return;
     }
 
-    self.lights[var7] = undefined;
+    self.lights[var_7] = undefined;
   }
 }
 
-function lights_on_internal(var0, var1) {
+function lights_on_internal(var_0, var_1) {
   level.lastlighttime = gettime();
   self endon("lights_off");
 
-  if(!isDefined(var0)) {
-    var0 = "all";
+  if(!isDefined(var_0)) {
+    var_0 = "all";
   }
 
-  if(!isDefined(var1)) {
-    var1 = self.classname;
+  if(!isDefined(var_1)) {
+    var_1 = self.classname;
   }
 
   if(!isDefined(level.vehicle.templates.vehicle_lights_group)) {
     return;
   }
 
-  if(!isDefined(level.vehicle.templates.vehicle_lights_group[var1]) || !isDefined(level.vehicle.templates.vehicle_lights_group[var1][var0])) {
+  if(!isDefined(level.vehicle.templates.vehicle_lights_group[var_1]) || !isDefined(level.vehicle.templates.vehicle_lights_group[var_1][var_0])) {
     return;
   }
 
@@ -125,33 +125,33 @@ function lights_on_internal(var0, var1) {
     self.lights = [];
   }
 
-  var2 = level.vehicle.templates.vehicle_lights_group[var1][var0];
-  var3 = 0;
-  var4 = [];
+  var_2 = level.vehicle.templates.vehicle_lights_group[var_1][var_0];
+  var_3 = 0;
+  var_4 = [];
 
-  foreach(var6 in var2) {
-    if(isDefined(self.lights[var6])) {
+  foreach(var_6 in var_2) {
+    if(isDefined(self.lights[var_6])) {
       continue;
     }
 
-    var7 = level.vehicle.templates.vehicle_lights[var1][var6];
+    var_7 = level.vehicle.templates.vehicle_lights[var_1][var_6];
 
-    if(isDefined(var7.delay)) {
-      var8 = var7.delay;
+    if(isDefined(var_7.delay)) {
+      var_8 = var_7.delay;
     } else {
-      var8 = 0;
+      var_8 = 0;
     }
 
-    var8 += level.fxdelay;
+    var_8 += level.fxdelay;
 
-    while(isDefined(var4["" + var8])) {
-      var8 += 0.05;
+    while(isDefined(var_4["" + var_8])) {
+      var_8 += 0.05;
     }
 
-    var4 = 1;
+    var_4 = 1;
     self endon("death");
-    childthread scripts\engine\utility::noself_delaycall_proc(&playfxontag, var8, var7.effect, self, var7.tag);
-    self.lights[var6] = 1;
+    childthread scripts\engine\utility::noself_delaycall_proc(&playfxontag, var_8, var_7.effect, self, var_7.tag);
+    self.lights[var_6] = 1;
 
     if(!isDefined(self)) {
       break;
@@ -161,9 +161,9 @@ function lights_on_internal(var0, var1) {
   level.fxdelay = 0;
 }
 
-function lights_off(var0, var1, var2) {
-  var3 = strtok(var0, " ", var1);
-  scripts\engine\utility::array_levelthread(var3, &lights_off_internal, var1, var2);
+function lights_off(var_0, var_1, var_2) {
+  var_3 = strtok(var_0, " ", var_1);
+  scripts\engine\utility::array_levelthread(var_3, &lights_off_internal, var_1, var_2);
 }
 
 function unmatched_death_rig_light_waits_for_lights_off() {

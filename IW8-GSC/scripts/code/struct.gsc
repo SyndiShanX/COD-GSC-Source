@@ -8,7 +8,7 @@ function initstructs() {
 }
 
 function createstruct() {
-  var0 = spawnStruct();
-  level.struct[level.struct.size] = var0;
-  return var0;
+  var_0 = spawnStruct();
+  level.struct[level.struct.size] = var_0;
+  return var_0;
 }

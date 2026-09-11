@@ -7,12 +7,12 @@ function main() {
   scripts\smartobjects\utility::add_smartobject_type("stealth_exposed_fire_up", &getinfo, &canusecondition);
 }
 
-function canusecondition(var0) {
-  if(!scripts\smartobjects\utility::canusesmartobject_stealth(var0)) {
+function canusecondition(var_0) {
+  if(!scripts\smartobjects\utility::canusesmartobject_stealth(var_0)) {
     return false;
   }
 
-  if(!scripts\smartobjects\utility::canusesmartobject_nostrafenoturn(var0)) {
+  if(!scripts\smartobjects\utility::canusesmartobject_nostrafenoturn(var_0)) {
     return false;
   }
 
@@ -20,15 +20,15 @@ function canusecondition(var0) {
 }
 
 function getinfo() {
-  var0 = scripts\smartobjects\utility::createsmartobjectinfo();
-  var0.animstatename = "smartobject_exposed_fire_up";
-  var0 scripts\smartobjects\utility::addsmartobjectanim("loop");
-  var0 scripts\smartobjects\utility::addsmartobjectreactanim();
-  var0.radiussqrd = squared(400);
-  var0.fninterrupt = &onenemy;
-  var0.nextusetime = 60;
-  var0.fngetprioritymultiplier = &getprioritymultiplier;
-  return var0;
+  var_0 = scripts\smartobjects\utility::createsmartobjectinfo();
+  var_0.animstatename = "smartobject_exposed_fire_up";
+  var_0 scripts\smartobjects\utility::addsmartobjectanim("loop");
+  var_0 scripts\smartobjects\utility::addsmartobjectreactanim();
+  var_0.radiussqrd = squared(400);
+  var_0.fninterrupt = &onenemy;
+  var_0.nextusetime = 60;
+  var_0.fngetprioritymultiplier = &getprioritymultiplier;
+  return var_0;
 }
 
 function onenemy() {
@@ -39,9 +39,9 @@ function onenemy() {
   return true;
 }
 
-function getprioritymultiplier(var0) {
-  if(isDefined(var0.prioritymultiplier)) {
-    return var0.prioritymultiplier;
+function getprioritymultiplier(var_0) {
+  if(isDefined(var_0.prioritymultiplier)) {
+    return var_0.prioritymultiplier;
   }
 
   return 1;

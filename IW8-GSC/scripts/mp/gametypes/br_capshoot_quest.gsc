@@ -4,16 +4,16 @@
 ******************************************************/
 
 function init() {
-  var0 = revivent_watchfordeath_safety(game["attackers"]);
+  var_0 = revivent_watchfordeath_safety(game["attackers"]);
 
-  foreach(var2 in var0) {
-    alwayssnowfight(var2);
+  foreach(var_2 in var_0) {
+    alwayssnowfight(var_2);
   }
 
-  var4 = revivent_watchfordeath_safety(game["defenders"]);
+  var_4 = revivent_watchfordeath_safety(game["defenders"]);
 
-  foreach(var2 in var4) {
-    alwayssnowfight(var2);
+  foreach(var_2 in var_4) {
+    alwayssnowfight(var_2);
   }
 
   scripts\mp\gametypes\br_quest_util::registerquestlocale("cap_locale");
@@ -30,8 +30,8 @@ function init() {
   game["dialog"]["mission_cap_success"] = "mission_mission_dom_success";
 }
 
-function revivent_watchfordeath_safety(var0) {
-  if(var0 == game["attackers"]) {
+function revivent_watchfordeath_safety(var_0) {
+  if(var_0 == game["attackers"]) {
     return registermovequestlocale();
   }
 
@@ -46,19 +46,19 @@ function relic_nuketimer_playvo() {
   return ["capshoot_killstreak_d"];
 }
 
-function alwayssnowfight(var0) {
-  var1 = scripts\mp\gametypes\br_quest_util::registerquestcategory(var0, 1);
+function alwayssnowfight(var_0) {
+  var_1 = scripts\mp\gametypes\br_quest_util::registerquestcategory(var_0, 1);
 
-  if(!var1) {
+  if(!var_1) {
     return;
   }
 
-  scripts\mp\gametypes\br_quest_util::ref_12b2a(var0, "brloot_domination_tablet");
-  scripts\mp\gametypes\br_quest_util::ref_12b3d(var0, &get_current_ai_cap);
-  scripts\mp\gametypes\br_quest_util::registerremovequestinstance(var0, &get_correct_bomb_wire_pair);
-  scripts\mp\gametypes\br_quest_util::ref_1297c(var0, 1);
-  scripts\mp\gametypes\br_quest_util::ref_12b31(var0, &get_closest_available_player_new);
-  scripts\mp\gametypes\br_quest_util::ref_13180(var0);
+  scripts\mp\gametypes\br_quest_util::ref_12b2a(var_0, "brloot_domination_tablet");
+  scripts\mp\gametypes\br_quest_util::ref_12b3d(var_0, &get_current_ai_cap);
+  scripts\mp\gametypes\br_quest_util::registerremovequestinstance(var_0, &get_correct_bomb_wire_pair);
+  scripts\mp\gametypes\br_quest_util::ref_1297c(var_0, 1);
+  scripts\mp\gametypes\br_quest_util::ref_12b31(var_0, &get_closest_available_player_new);
+  scripts\mp\gametypes\br_quest_util::ref_13180(var_0);
 }
 
 function get_correct_bomb_wire_pair() {
@@ -72,8 +72,8 @@ function get_correct_bomb_wire_pair() {
 }
 
 function get_corpse_array() {
-  foreach(var1 in self.subscribedinstances) {
-    var1 thread scripts\mp\gametypes\br_quest_util::removequestinstance();
+  foreach(var_1 in self.subscribedinstances) {
+    var_1 thread scripts\mp\gametypes\br_quest_util::removequestinstance();
   }
 
   last_vampire_feedback();
@@ -85,94 +85,94 @@ function get_current_ai_cap() {
   return true;
 }
 
-function get_consecutive_def(var0) {
+function get_consecutive_def(var_0) {
   scripts\mp\gametypes\br_quest_util::getquestdata("cap_locale").nextid++;
-  var1 = scripts\mp\gametypes\br_quest_util::createlocaleinstance("cap_locale", self.questcategory, "CapPoint:" + scripts\mp\gametypes\br_quest_util::getquestdata("cap_locale").nextid);
+  var_1 = scripts\mp\gametypes\br_quest_util::createlocaleinstance("cap_locale", self.questcategory, "CapPoint:" + scripts\mp\gametypes\br_quest_util::getquestdata("cap_locale").nextid);
 
-  if(!isDefined(var0)) {
-    var1.curorigin = (0, 0, 0);
-    var1.enabled = 0;
-    return var1;
+  if(!isDefined(var_0)) {
+    var_1.curorigin = (0, 0, 0);
+    var_1.enabled = 0;
+    return var_1;
   }
 
-  var2 = var0.origin;
+  var_2 = var_0.origin;
 
-  if(var0.spawnflags & 23) {}
+  if(var_0.spawnflags & 23) {}
 
-  var3 = scripts\mp\gametypes\br_quest_util::ref_12971(var0);
-  var4 = spawn("trigger_radius", var2, 0, int(var3), int(level.debugpayloadobjectivesstart_infil));
-  var4.script_label = "";
+  var_3 = scripts\mp\gametypes\br_quest_util::ref_12971(var_0);
+  var_4 = spawn("trigger_radius", var_2, 0, int(var_3), int(level.debugpayloadobjectivesstart_infil));
+  var_4.script_label = "";
   level.ref_13135 = &get_closest_valid_player;
-  var5 = scripts\mp\gametypes\obj_dom::setupobjective(var4);
-  var5.onuse = &get_closest_spawns;
-  var5.onbeginuse = &get_closest_origin_index;
-  var5.onuseupdate = &get_closest_unclaimed_destination;
-  var5.onenduse = &get_closest_player_dist;
-  var5.usecondition = &get_combat_action;
-  var5.lockupdatingicons = 1;
-  var5.getrandompointincirclewithindistance = 1;
-  var5.flagmodel setModel("x2_military_old_recon_station");
-  scripts\mp\objidpoolmanager::update_objective_position(var5.objidnum, var5.curorigin + (0, 0, 60));
+  var_5 = scripts\mp\gametypes\obj_dom::setupobjective(var_4);
+  var_5.onuse = &get_closest_spawns;
+  var_5.onbeginuse = &get_closest_origin_index;
+  var_5.onuseupdate = &get_closest_unclaimed_destination;
+  var_5.onenduse = &get_closest_player_dist;
+  var_5.usecondition = &get_combat_action;
+  var_5.lockupdatingicons = 1;
+  var_5.getrandompointincirclewithindistance = 1;
+  var_5.flagmodel setModel("x2_military_old_recon_station");
+  scripts\mp\objidpoolmanager::update_objective_position(var_5.objidnum, var_5.curorigin + (0, 0, 60));
   level.flagcapturetime = getdvarfloat("scr_br_cap_quest_capture_time", 30);
-  var5 scripts\mp\gameobjects::setusetime(level.flagcapturetime);
-  var1.lastcircletick = -1;
-  var1.get_closest_living_player_not_in_laststand = var5;
-  var1.curorigin = var5.curorigin;
-  var1.team = self.team;
-  var5.locale = var1;
-  var5.squadindex = self.squadindex;
-  scripts\mp\gametypes\br_quest_util::addquestinstance("cap_locale", var1);
-  return var1;
+  var_5 scripts\mp\gameobjects::setusetime(level.flagcapturetime);
+  var_1.lastcircletick = -1;
+  var_1.get_closest_living_player_not_in_laststand = var_5;
+  var_1.curorigin = var_5.curorigin;
+  var_1.team = self.team;
+  var_5.locale = var_1;
+  var_5.squadindex = self.squadindex;
+  scripts\mp\gametypes\br_quest_util::addquestinstance("cap_locale", var_1);
+  return var_1;
 }
 
-function get_comp_dist_for_info_loop(var0) {
-  var1 = getdvarfloat("scr_br_cap_quest_max_capture_percent", 0.2);
-  var2 = getdvarfloat("scr_br_cap_quest_max_teams", 4);
-  var3 = 0;
+function get_comp_dist_for_info_loop(var_0) {
+  var_1 = getdvarfloat("scr_br_cap_quest_max_capture_percent", 0.2);
+  var_2 = getdvarfloat("scr_br_cap_quest_max_teams", 4);
+  var_3 = 0;
 
   if(isDefined(self.get_closest_living_player_not_in_laststand.curprogress)) {
-    var3 = self.get_closest_living_player_not_in_laststand.curprogress / self.get_closest_living_player_not_in_laststand.usetime;
+    var_3 = self.get_closest_living_player_not_in_laststand.curprogress / self.get_closest_living_player_not_in_laststand.usetime;
   }
 
-  if(var3 > var1) {
+  if(var_3 > var_1) {
     return false;
   }
 
-  if(self.subscribedinstances.size >= var2) {
+  if(self.subscribedinstances.size >= var_2) {
     return false;
   }
 
   return true;
 }
 
-function get_connected_nodes_targetname_array(var0, var1) {
+function get_connected_nodes_targetname_array(var_0, var_1) {
   if(!isDefined(self.get_closest_living_player_not_in_laststand)) {
     return;
   }
 
-  var2 = gettime();
+  var_2 = gettime();
 
-  if(self.lastcircletick == var2) {
+  if(self.lastcircletick == var_2) {
     return;
   }
 
-  self.lastcircletick = var2;
+  self.lastcircletick = var_2;
 
   if(isDefined(self.get_closest_living_player_not_in_laststand) && isDefined(self.get_closest_living_player_not_in_laststand.traincar)) {
     self.curorigin = self.get_closest_living_player_not_in_laststand.traincar.origin;
   }
 
-  var3 = distance2d(self.curorigin, var0);
+  var_3 = distance2d(self.curorigin, var_0);
 
-  if(var3 > var1) {
-    foreach(var5 in self.subscribedinstances) {
-      if(isDefined(var5)) {
-        scripts\mp\gametypes\br_quest_util::displayteamsplash(var5.team, "br_capshoot_quest_circle_failure");
-        var6 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var5.team, var5.squadindex);
-        level thread scripts\mp\gametypes\br_public::brleaderdialog("br_capshoot_quest_circle_failure", 1, var6);
+  if(var_3 > var_1) {
+    foreach(var_5 in self.subscribedinstances) {
+      if(isDefined(var_5)) {
+        scripts\mp\gametypes\br_quest_util::displayteamsplash(var_5.team, "br_capshoot_quest_circle_failure");
+        var_6 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_5.team, var_5.squadindex);
+        level thread scripts\mp\gametypes\br_public::brleaderdialog("br_capshoot_quest_circle_failure", 1, var_6);
       }
 
-      var5.result = "circle";
+      var_5.result = "circle";
     }
 
     scripts\mp\gametypes\br_quest_util::removequestinstance();
@@ -180,33 +180,33 @@ function get_connected_nodes_targetname_array(var0, var1) {
   }
 }
 
-function get_control_station_side_array(var0) {
-  get_closest_munitions(var0);
+function get_control_station_side_array(var_0) {
+  get_closest_munitions(var_0);
 }
 
-function get_convoy_vehicle_get_in_scene_name(var0) {
-  foreach(var2 in self.teams) {
-    if(var0.team == self.subscribedinstances[0].team) {
-      get_closest_visible_drone(var0);
+function get_convoy_vehicle_get_in_scene_name(var_0) {
+  foreach(var_2 in self.teams) {
+    if(var_0.team == self.subscribedinstances[0].team) {
+      get_closest_visible_drone(var_0);
     }
   }
 }
 
-function get_chopperexfil_transient(var0) {
-  if(!scripts\mp\gametypes\br_pickups::usb(var0.scriptablename)) {
+function get_chopperexfil_transient(var_0) {
+  if(!scripts\mp\gametypes\br_pickups::usb(var_0.scriptablename)) {
     return undefined;
   }
 
-  var1 = var0.tracknonoobplayerlocation;
+  var_1 = var_0.tracknonoobplayerlocation;
 
-  if(isDefined(var1.questcategory) && var1.questcategory == "capshoot") {
-    if(self.team == var1.team) {
-      var2 = revivent_watchfordeath_safety(self.team);
+  if(isDefined(var_1.questcategory) && var_1.questcategory == "capshoot") {
+    if(self.team == var_1.team) {
+      var_2 = revivent_watchfordeath_safety(self.team);
 
-      foreach(var4 in var2) {
-        if(isDefined(level.questinfo.quests[var4])) {
-          foreach(var6 in level.questinfo.quests[var4].instances) {
-            if(isDefined(var6) && self.squadindex == var6.squadindex) {
+      foreach(var_4 in var_2) {
+        if(isDefined(level.questinfo.quests[var_4])) {
+          foreach(var_6 in level.questinfo.quests[var_4].instances) {
+            if(isDefined(var_6) && self.squadindex == var_6.squadindex) {
               return 10;
             }
           }
@@ -222,129 +222,129 @@ function get_chopperexfil_transient(var0) {
   return undefined;
 }
 
-function takequestitem(var0) {
-  var1 = search(var0.ref_139eb, self, 1, var0);
+function takequestitem(var_0) {
+  var_1 = search(var_0.ref_139eb, self, 1, var_0);
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  ref_1336d(var0.ref_139eb, [self]);
-  ref_13742(var1, [self]);
+  ref_1336d(var_0.ref_139eb, [self]);
+  ref_13742(var_1, [self]);
 
-  if(istrue(level.disable_super_in_turret.ref_12273) && isDefined(var0.ref_12157)) {
-    var2 = [[var0.ref_12157]](var0);
+  if(istrue(level.disable_super_in_turret.ref_12273) && isDefined(var_0.ref_12157)) {
+    var_2 = [[var_0.ref_12157]](var_0);
 
-    if(isDefined(var2) && isDefined(var0.ref_12158)) {
+    if(isDefined(var_2) && isDefined(var_0.ref_12158)) {
       if(getdvarint("scr_br_alt_mode_mini", 0) == 1) {
-        search(var0.ref_12158, var2, 0, var0, var1);
+        search(var_0.ref_12158, var_2, 0, var_0, var_1);
       } else {
-        search(var0.ref_12158, var2, 0, var0);
+        search(var_0.ref_12158, var_2, 0, var_0);
       }
 
-      ref_1336d(var0.ref_12158, [var2]);
-      ref_13742(var1, [var2]);
+      ref_1336d(var_0.ref_12158, [var_2]);
+      ref_13742(var_1, [var_2]);
     }
   }
 
-  if(isDefined(level.disable_super_in_turret.ref_12979) && isDefined(var1.ref_12978)) {
-    level.disable_super_in_turret.ref_12979 = scripts\engine\utility::array_remove(level.disable_super_in_turret.ref_12979, var1.ref_12978);
+  if(isDefined(level.disable_super_in_turret.ref_12979) && isDefined(var_1.ref_12978)) {
+    level.disable_super_in_turret.ref_12979 = scripts\engine\utility::array_remove(level.disable_super_in_turret.ref_12979, var_1.ref_12978);
     return;
   }
 }
 
-function search(var0, var1, var2, var3, var4) {
-  var5 = getdvarint("scr_br_CAP_questTime", 240);
-  var6 = adjust_angles_for_heli_path(var0, var1, var5, var3);
-  var7 = undefined;
-  var8 = spawnStruct();
-  var8 = rocket_missile(var1, var0);
+function search(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = getdvarint("scr_br_CAP_questTime", 240);
+  var_6 = adjust_angles_for_heli_path(var_0, var_1, var_5, var_3);
+  var_7 = undefined;
+  var_8 = spawnStruct();
+  var_8 = rocket_missile(var_1, var_0);
 
-  if(isDefined(var3) && isDefined(var3.ref_12395)) {
-    var9 = [[var3.ref_12395]](var1, var3);
+  if(isDefined(var_3) && isDefined(var_3.ref_12395)) {
+    var_9 = [[var_3.ref_12395]](var_1, var_3);
 
-    if(isDefined(var9)) {
-      var8.ref_12c4a = var9;
-      var7 = var9.ref_12978;
+    if(isDefined(var_9)) {
+      var_8.ref_12c4a = var_9;
+      var_7 = var_9.ref_12978;
     }
   }
 
-  if(!isDefined(var4)) {
-    var4 = var6 scripts\mp\gametypes\br_quest_util::requestquestlocale("cap_locale", var8, var2);
+  if(!isDefined(var_4)) {
+    var_4 = var_6 scripts\mp\gametypes\br_quest_util::requestquestlocale("cap_locale", var_8, var_2);
   }
 
-  if(!isDefined(var4) || !istrue(var4.enabled)) {
-    var6.result = "no_locale";
-    var6 scripts\mp\gametypes\br_quest_util::releaseteamonquest(var1.team);
+  if(!isDefined(var_4) || !istrue(var_4.enabled)) {
+    var_6.result = "no_locale";
+    var_6 scripts\mp\gametypes\br_quest_util::releaseteamonquest(var_1.team);
     return;
   }
 
-  if(isDefined(var4.get_closest_living_player_not_in_laststand)) {
-    var3.stadium_three_death_func = var4.get_closest_living_player_not_in_laststand.flagmodel;
+  if(isDefined(var_4.get_closest_living_player_not_in_laststand)) {
+    var_3.stadium_three_death_func = var_4.get_closest_living_player_not_in_laststand.flagmodel;
   }
 
-  var4.ref_12978 = var7;
-  var4.squadindex = var1.squadindex;
-  get_combat_alias(var4);
-  scripts\mp\gametypes\br_quest_util::addquestinstance(var0, var6);
-  return var4;
+  var_4.ref_12978 = var_7;
+  var_4.squadindex = var_1.squadindex;
+  get_combat_alias(var_4);
+  scripts\mp\gametypes\br_quest_util::addquestinstance(var_0, var_6);
+  return var_4;
 }
 
-function rocket_missile(var0) {
-  var1 = self;
-  var2 = spawnStruct();
-  var2.ref_12fa3 = "questPointsArray";
-  var2.ref_12f9f = (var1.origin[0], var1.origin[1], 0);
-  var2.ref_12fa6 = getdvarfloat("scr_br_cap_search_max_radius", 7500);
-  var2.ref_12fa7 = 0;
-  var2.ref_12fa4 = getdvarfloat("scr_br_cap_search_ideal_max_radius", 5000);
-  var2.ref_12fa5 = getdvarfloat("scr_br_cap_search_ideal_min_radius", 2500);
-  var2.ref_1297f = 7;
-  var2.mintime = getdvarfloat("scr_br_cap_quest_capture_time", 30);
-  var2.ref_12fa1 = 1;
-  var2.ref_12c4a = var1.ref_12c4a;
+function rocket_missile(var_0) {
+  var_1 = self;
+  var_2 = spawnStruct();
+  var_2.ref_12fa3 = "questPointsArray";
+  var_2.ref_12f9f = (var_1.origin[0], var_1.origin[1], 0);
+  var_2.ref_12fa6 = getdvarfloat("scr_br_cap_search_max_radius", 7500);
+  var_2.ref_12fa7 = 0;
+  var_2.ref_12fa4 = getdvarfloat("scr_br_cap_search_ideal_max_radius", 5000);
+  var_2.ref_12fa5 = getdvarfloat("scr_br_cap_search_ideal_min_radius", 2500);
+  var_2.ref_1297f = 7;
+  var_2.mintime = getdvarfloat("scr_br_cap_quest_capture_time", 30);
+  var_2.ref_12fa1 = 1;
+  var_2.ref_12c4a = var_1.ref_12c4a;
 
-  if(playlinkfx(var0)) {
-    if(var2.ref_12fa6 < level.ref_12965) {
-      var2.ref_12fa6 = level.ref_12965;
+  if(playlinkfx(var_0)) {
+    if(var_2.ref_12fa6 < level.ref_12965) {
+      var_2.ref_12fa6 = level.ref_12965;
     }
 
-    var2.ref_12fa4 = level.ref_12965;
-    var2.ref_12fa5 = level.ref_12966;
+    var_2.ref_12fa4 = level.ref_12965;
+    var_2.ref_12fa5 = level.ref_12966;
   }
 
-  if(istrue(var1.ref_11ff8)) {
-    var2.ref_12fa3 = "questPointsArrayWZTrain";
-    var2.ref_1407e = 1;
+  if(istrue(var_1.ref_11ff8)) {
+    var_2.ref_12fa3 = "questPointsArrayWZTrain";
+    var_2.ref_1407e = 1;
   }
 
-  var3 = getdvarint("scr_br_questCapDistMin", -1);
-  var4 = getdvarint("scr_br_questCapDistMax", -1);
+  var_3 = getdvarint("scr_br_questCapDistMin", -1);
+  var_4 = getdvarint("scr_br_questCapDistMax", -1);
 
-  if(var3 >= 0) {
-    var2.ref_12fa5 = var3;
+  if(var_3 >= 0) {
+    var_2.ref_12fa5 = var_3;
   }
 
-  if(var4 >= 0) {
-    var2.ref_12fa4 = var4;
+  if(var_4 >= 0) {
+    var_2.ref_12fa4 = var_4;
   }
 
-  return var2;
+  return var_2;
 }
 
 function usageloop() {
-  var0 = revivent_watchfordeath_safety(game["attackers"]);
+  var_0 = revivent_watchfordeath_safety(game["attackers"]);
 
-  foreach(var2 in var0) {
-    if(isDefined(level.questinfo.quests[var2].instances[game["attackers"]])) {
+  foreach(var_2 in var_0) {
+    if(isDefined(level.questinfo.quests[var_2].instances[game["attackers"]])) {
       return true;
     }
   }
 
-  var4 = revivent_watchfordeath_safety(game["defenders"]);
+  var_4 = revivent_watchfordeath_safety(game["defenders"]);
 
-  foreach(var2 in var4) {
-    if(isDefined(level.questinfo.quests[var2].instances[game["defenders"]])) {
+  foreach(var_2 in var_4) {
+    if(isDefined(level.questinfo.quests[var_2].instances[game["defenders"]])) {
       return true;
     }
   }
@@ -352,39 +352,39 @@ function usageloop() {
   return false;
 }
 
-function adjust_angles_for_heli_path(var0, var1, var2, var3) {
-  var4 = scripts\mp\gametypes\br_quest_util::createquestinstance(var0, var1.team, "", var3, var1.squadindex);
-  var4.squadindex = var1.squadindex;
-  var4 scripts\mp\gametypes\br_quest_util::registerteamonquest(var1.team, var1);
-  var4 scripts\mp\gametypes\br_quest_util::ref_12b15(var1);
-  var4.team = var1.team;
-  var4 scripts\mp\gametypes\br_quest_util::ref_1297d(var2, 4);
-  return var4;
+function adjust_angles_for_heli_path(var_0, var_1, var_2, var_3) {
+  var_4 = scripts\mp\gametypes\br_quest_util::createquestinstance(var_0, var_1.team, "", var_3, var_1.squadindex);
+  var_4.squadindex = var_1.squadindex;
+  var_4 scripts\mp\gametypes\br_quest_util::registerteamonquest(var_1.team, var_1);
+  var_4 scripts\mp\gametypes\br_quest_util::ref_12b15(var_1);
+  var_4.team = var_1.team;
+  var_4 scripts\mp\gametypes\br_quest_util::ref_1297d(var_2, 4);
+  return var_4;
 }
 
-function ref_1336d(var0, var1) {
-  foreach(var3 in var1) {
-    var3 scripts\mp\gametypes\br_quest_util::uiobjectiveshowtoteam(var0, var3.team);
-    var3 scripts\mp\gametypes\br_quest_util::ref_13879(var0, var3, var3.team);
+function ref_1336d(var_0, var_1) {
+  foreach(var_3 in var_1) {
+    var_3 scripts\mp\gametypes\br_quest_util::uiobjectiveshowtoteam(var_0, var_3.team);
+    var_3 scripts\mp\gametypes\br_quest_util::ref_13879(var_0, var_3, var_3.team);
   }
 
-  var5 = spawnStruct();
-  var5.excludedplayers = [];
+  var_5 = spawnStruct();
+  var_5.excludedplayers = [];
 
-  foreach(var3 in var1) {
-    var5.excludedplayers[0] = var3;
-    var3 scripts\mp\gametypes\br_quest_util::displayplayersplash(var3, "br_capshoot_quest_start_tablet_finder_noplunder", var5);
-    var3 scripts\mp\gametypes\br_quest_util::displayteamsplash(var3.team, "br_capshoot_quest_start_team_noplunder", var5);
-    var3 scripts\mp\gametypes\br_quest_util::lookforvehicles(var3.team, var3, 6, scripts\mp\gametypes\br_quest_util::getquestindex(var0));
-    var7 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var3.team, var3.squadindex);
-    level thread scripts\mp\gametypes\br_public::brleaderdialog("contract_acquired", 1, var7);
+  foreach(var_3 in var_1) {
+    var_5.excludedplayers[0] = var_3;
+    var_3 scripts\mp\gametypes\br_quest_util::displayplayersplash(var_3, "br_capshoot_quest_start_tablet_finder_noplunder", var_5);
+    var_3 scripts\mp\gametypes\br_quest_util::displayteamsplash(var_3.team, "br_capshoot_quest_start_team_noplunder", var_5);
+    var_3 scripts\mp\gametypes\br_quest_util::lookforvehicles(var_3.team, var_3, 6, scripts\mp\gametypes\br_quest_util::getquestindex(var_0));
+    var_7 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_3.team, var_3.squadindex);
+    level thread scripts\mp\gametypes\br_public::brleaderdialog("contract_acquired", 1, var_7);
   }
 }
 
-function ref_13742(var0) {
+function ref_13742(var_0) {
   if(isDefined(self.get_closest_living_player_not_in_laststand)) {
-    foreach(var2 in var0) {
-      self.get_closest_living_player_not_in_laststand scripts\mp\gameobjects::squadallowuse(var2.team, var2.squadindex);
+    foreach(var_2 in var_0) {
+      self.get_closest_living_player_not_in_laststand scripts\mp\gameobjects::squadallowuse(var_2.team, var_2.squadindex);
     }
 
     return;
@@ -399,29 +399,29 @@ function get_combat_alias() {
   objective_showtoplayersinmask(self.get_closest_living_player_not_in_laststand.objidnum);
   objective_removeallfrommask(self.get_closest_living_player_not_in_laststand.objidnum);
 
-  foreach(var1 in self.subscribedinstances) {
-    foreach(var3 in scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var1.team, var1.squadindex)) {
-      if(!var3 scripts\mp\gametypes\br_public::isplayeringulag()) {
-        objective_addclienttomask(self.get_closest_living_player_not_in_laststand.objidnum, var3);
+  foreach(var_1 in self.subscribedinstances) {
+    foreach(var_3 in scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_1.team, var_1.squadindex)) {
+      if(!var_3 scripts\mp\gametypes\br_public::isplayeringulag()) {
+        objective_addclienttomask(self.get_closest_living_player_not_in_laststand.objidnum, var_3);
       }
     }
   }
 }
 
-function get_closest_munitions(var0) {
+function get_closest_munitions(var_0) {
   if(!isDefined(self.get_closest_living_player_not_in_laststand) || !isDefined(self.get_closest_living_player_not_in_laststand.objidnum)) {
     return;
   }
 
-  objective_removeclientfrommask(self.get_closest_living_player_not_in_laststand.objidnum, var0);
+  objective_removeclientfrommask(self.get_closest_living_player_not_in_laststand.objidnum, var_0);
 }
 
-function get_closest_visible_drone(var0) {
+function get_closest_visible_drone(var_0) {
   if(!isDefined(self.get_closest_living_player_not_in_laststand) || !isDefined(self.get_closest_living_player_not_in_laststand.objidnum)) {
     return;
   }
 
-  objective_addclienttomask(self.get_closest_living_player_not_in_laststand.objidnum, var0);
+  objective_addclienttomask(self.get_closest_living_player_not_in_laststand.objidnum, var_0);
 }
 
 function get_combat_station_next_combat_action() {
@@ -431,8 +431,8 @@ function get_combat_station_next_combat_action() {
 }
 
 function last_vampire_feedback() {
-  foreach(var1 in self.get_closest_living_player_not_in_laststand.visuals) {
-    var1 delete();
+  foreach(var_1 in self.get_closest_living_player_not_in_laststand.visuals) {
+    var_1 delete();
   }
 
   if(isDefined(self.get_closest_living_player_not_in_laststand.flagmodel)) {
@@ -487,92 +487,92 @@ function ref_1322d() {
   ammobox_checkclearbufferedattachmentweapon("icon_waypoint_ot", "neutral", "MP_INGAME_ONLY/OBJ_OTFLAGLOC_CAPS", 0);
 }
 
-function ammobox_checkclearbufferedattachmentweapon(var0, var1, var2, var3) {
-  level.waypointcolors[var0] = var1;
-  level.waypointbgtype[var0] = 1;
-  level.waypointstring[var0] = var2;
-  level.waypointshader[var0] = "ui_mp_br_mapmenu_icon_dom_objective";
-  level.waypointpulses[var0] = var3;
+function ammobox_checkclearbufferedattachmentweapon(var_0, var_1, var_2, var_3) {
+  level.waypointcolors[var_0] = var_1;
+  level.waypointbgtype[var_0] = 1;
+  level.waypointstring[var_0] = var_2;
+  level.waypointshader[var_0] = "ui_mp_br_mapmenu_icon_dom_objective";
+  level.waypointpulses[var_0] = var_3;
 }
 
-function get_closest_unclaimed_destination(var0, var1, var2, var3) {
-  if(var1 < 1 && !level.gameended) {
-    ref_12427(var1, var0);
+function get_closest_unclaimed_destination(var_0, var_1, var_2, var_3) {
+  if(var_1 < 1 && !level.gameended) {
+    ref_12427(var_1, var_0);
   }
 
-  if(var1 > 0.05 && var2 && !istrue(self.didstatusnotify)) {
+  if(var_1 > 0.05 && var_2 && !istrue(self.didstatusnotify)) {
     self.didstatusnotify = 1;
     return;
   }
 }
 
-function get_closest_origin_index(var0) {
+function get_closest_origin_index(var_0) {
   if(!isDefined(self.ref_11f63) || !self.ref_11f63) {
     self.ref_11f63 = 1;
 
     if(isDefined(self.traincar)) {
       if(isDefined(level.ref_145f1) && istrue(level.ref_145f1.get_closest_destination)) {
-        var1 = self.traincar.get_closest_attackable_player + (200, 0, 0);
-        var2 = self.traincar.origin + rotatevector(var1, self.traincar.angles);
-        level thread scripts\mp\gametypes\br_quest_util::ref_140b1(var2, "dom", 3);
+        var_1 = self.traincar.get_closest_attackable_player + (200, 0, 0);
+        var_2 = self.traincar.origin + rotatevector(var_1, self.traincar.angles);
+        level thread scripts\mp\gametypes\br_quest_util::ref_140b1(var_2, "dom", 3);
       }
     } else {
       level thread scripts\mp\gametypes\br_quest_util::ref_140b1(self.curorigin, "dom");
     }
 
-    foreach(var4 in level.players) {
-      if(isDefined(var4) && isalive(var4) && (var4.team != var0.team || var4.squadindex != var0.squadindex)) {
-        var4 thread scripts\mp\hud_message::showsplash("br_capshoot_quest_alert");
+    foreach(var_4 in level.players) {
+      if(isDefined(var_4) && isalive(var_4) && (var_4.team != var_0.team || var_4.squadindex != var_0.squadindex)) {
+        var_4 thread scripts\mp\hud_message::showsplash("br_capshoot_quest_alert");
       }
     }
 
-    var6 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var0.team, var0.squadindex);
+    var_6 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_0.team, var_0.squadindex);
 
-    foreach(var8 in var6) {
-      var8 notify("calloutmarkerping_warzoneKillQuestIcon");
+    foreach(var_8 in var_6) {
+      var_8 notify("calloutmarkerping_warzoneKillQuestIcon");
     }
 
     return;
   }
 }
 
-function get_closest_spawns(var0) {
-  foreach(var2 in self.locale.subscribedinstances) {
-    var3 = var2.team;
+function get_closest_spawns(var_0) {
+  foreach(var_2 in self.locale.subscribedinstances) {
+    var_3 = var_2.team;
 
-    if(var3 == var0.team) {
-      var4 = scripts\mp\gametypes\br_quest_util::ringing(var0.team);
-      var5 = scripts\mp\gametypes\br_quest_util::getquestindex(var2.questcategory);
-      var6 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype(var2.questcategory));
-      var7 = spawnStruct();
-      var7.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var5, var4, var6);
-      self.squadindex = var2.squadindex;
-      scripts\mp\gametypes\br_quest_util::displayteamsplash(var3, "br_capshoot_quest_complete_noplunder", var7);
-      scripts\mp\gametypes\br_quest_util::lookforvehicles(var3, var0, 8, var5);
-      var8 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var0.team, var0.squadindex);
-      level thread scripts\mp\gametypes\br_public::brleaderdialog("contract_complete", 1, var8, 0, 1);
-      var2.ref_12d2e = self.flagmodel.origin;
-      var2.ref_12d2b = self.flagmodel.angles;
-      var2.result = "success";
+    if(var_3 == var_0.team) {
+      var_4 = scripts\mp\gametypes\br_quest_util::ringing(var_0.team);
+      var_5 = scripts\mp\gametypes\br_quest_util::getquestindex(var_2.questcategory);
+      var_6 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype(var_2.questcategory));
+      var_7 = spawnStruct();
+      var_7.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var_5, var_4, var_6);
+      self.squadindex = var_2.squadindex;
+      scripts\mp\gametypes\br_quest_util::displayteamsplash(var_3, "br_capshoot_quest_complete_noplunder", var_7);
+      scripts\mp\gametypes\br_quest_util::lookforvehicles(var_3, var_0, 8, var_5);
+      var_8 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_0.team, var_0.squadindex);
+      level thread scripts\mp\gametypes\br_public::brleaderdialog("contract_complete", 1, var_8, 0, 1);
+      var_2.ref_12d2e = self.flagmodel.origin;
+      var_2.ref_12d2b = self.flagmodel.angles;
+      var_2.result = "success";
 
       if(isDefined(self.assisttouchlist)) {
-        if(isDefined(self.assisttouchlist[var3])) {
-          var9 = getarraykeys(self.assisttouchlist[var3]);
+        if(isDefined(self.assisttouchlist[var_3])) {
+          var_9 = getarraykeys(self.assisttouchlist[var_3]);
 
-          foreach(var11 in var9) {
-            var12 = self.assisttouchlist[var3][var11].player;
+          foreach(var_11 in var_9) {
+            var_12 = self.assisttouchlist[var_3][var_11].player;
 
-            if(isDefined(var12.owner)) {
-              var12 = var12.owner;
+            if(isDefined(var_12.owner)) {
+              var_12 = var_12.owner;
             }
 
-            if(!isPlayer(var12)) {
+            if(!isPlayer(var_12)) {
               continue;
             }
 
-            var12 scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_complete_recon_objective_for_operator_mission", 1);
-            var12 scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_complete_recon_objective_for_operator_mission_op2", 1);
-            var2 scripts\mp\gametypes\br_quest_util::ref_12b15(var12);
+            var_12 scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_complete_recon_objective_for_operator_mission", 1);
+            var_12 scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_complete_recon_objective_for_operator_mission_op2", 1);
+            var_2 scripts\mp\gametypes\br_quest_util::ref_12b15(var_12);
           }
         }
       }
@@ -580,63 +580,63 @@ function get_closest_spawns(var0) {
       continue;
     }
 
-    scripts\mp\gametypes\br_quest_util::displayteamsplash(var3, "br_capshoot_quest_failure", undefined, var2.squadindex);
-    var8 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var3, var2.squadindex);
-    level thread scripts\mp\gametypes\br_public::brleaderdialog("contract_fail", 1, var8);
-    var2.result = "fail";
+    scripts\mp\gametypes\br_quest_util::displayteamsplash(var_3, "br_capshoot_quest_failure", undefined, var_2.squadindex);
+    var_8 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_3, var_2.squadindex);
+    level thread scripts\mp\gametypes\br_public::brleaderdialog("contract_fail", 1, var_8);
+    var_2.result = "fail";
   }
 
   self.locale thread scripts\mp\gametypes\br_quest_util::removequestinstance();
 }
 
-function get_closest_player_dist(var0, var1, var2) {
-  scripts\mp\gametypes\obj_dom::dompoint_onuseend(var0, var1, var2);
+function get_closest_player_dist(var_0, var_1, var_2) {
+  scripts\mp\gametypes\obj_dom::dompoint_onuseend(var_0, var_1, var_2);
 }
 
-function ref_12427(var0, var1) {
+function ref_12427(var_0, var_1) {
   if(!isDefined(self.lastsfxplayedtime)) {
     self.lastsfxplayedtime = gettime();
   }
 
   if(self.lastsfxplayedtime + 995 < gettime()) {
     self.lastsfxplayedtime = gettime();
-    var2 = "";
-    var0 = int(floor(var0 * 10));
-    var2 = "mp_dom_capturing_tick_0" + var0;
-    self.visuals[0] playsoundtoteam(var2, var1);
+    var_2 = "";
+    var_0 = int(floor(var_0 * 10));
+    var_2 = "mp_dom_capturing_tick_0" + var_0;
+    self.visuals[0] playsoundtoteam(var_2, var_1);
     return;
   }
 }
 
-function get_closest_valid_player(var0, var1, var2) {
-  switch (var1) {
+function get_closest_valid_player(var_0, var_1, var_2) {
+  switch (var_1) {
     case "contested":
     case "idle":
     case "off":
       return 0;
     default:
-      var1 = "using";
+      var_1 = "using";
 
-      if(isDefined(var2)) {
-        var1 += var2;
+      if(isDefined(var_2)) {
+        var_1 += var_2;
       }
 
-      self.scriptable setscriptablepartstate(var0, var1);
+      self.scriptable setscriptablepartstate(var_0, var_1);
 
-      if(var0 == "pulse") {
-        self.scriptable setscriptablepartstate("flag", var1);
+      if(var_0 == "pulse") {
+        self.scriptable setscriptablepartstate("flag", var_1);
       }
 
       return 1;
   }
 }
 
-function get_combat_action(var0) {
-  var1 = var0.team;
+function get_combat_action(var_0) {
+  var_1 = var_0.team;
 
-  foreach(var3 in self.locale.subscribedinstances) {
-    if(isDefined(var3)) {
-      if(var3.team == var1) {
+  foreach(var_3 in self.locale.subscribedinstances) {
+    if(isDefined(var_3)) {
+      if(var_3.team == var_1) {
         return true;
       }
     }
@@ -653,28 +653,28 @@ function get_closest_available_player_new() {
   }
 
   scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_capshoot_quest_timer_expired");
-  var0 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.team, self.squadindex);
-  level thread scripts\mp\gametypes\br_public::brleaderdialog("contract_fail", 1, var0);
+  var_0 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.team, self.squadindex);
+  level thread scripts\mp\gametypes\br_public::brleaderdialog("contract_fail", 1, var_0);
 }
 
-function playlinkfx(var0) {
-  var1 = 0;
-  var2 = scripts\mp\gametypes\br_gametypes::ref_12e05("overrideQuestSearchParams", var0);
+function playlinkfx(var_0) {
+  var_1 = 0;
+  var_2 = scripts\mp\gametypes\br_gametypes::ref_12e05("overrideQuestSearchParams", var_0);
 
-  if(isDefined(var2)) {
-    return var2;
+  if(isDefined(var_2)) {
+    return var_2;
   }
 
-  var3 = scripts\mp\utility\game::round_vehicle_logic();
+  var_3 = scripts\mp\utility\game::round_vehicle_logic();
 
-  switch (var3) {
+  switch (var_3) {
     case "mini":
     case "risk":
     case "rat_race":
     case "dmz":
-      var1 = 1;
+      var_1 = 1;
       break;
   }
 
-  return var1;
+  return var_1;
 }

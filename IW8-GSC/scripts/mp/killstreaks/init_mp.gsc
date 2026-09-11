@@ -26,8 +26,8 @@ function init() {
   thread _getlocationscircleinfluencedwithnoise::init();
   thread _getrandomlocations::init();
   thread scripts\mp\killstreaks\supply_sweep::init();
-  var0 = scripts\mp\utility\game::unset_relic_grounded() && getdvarint("scr_use_br_sentry_gun");
-  scripts\cp_mp\utility\script_utility::registersharedfunc("sentry_gun", "init", scripts\engine\utility::ter_op(istrue(var0), &_handlevehiclepurchase::init, &scripts\mp\killstreaks\sentry_gun_mp::init));
+  var_0 = scripts\mp\utility\game::unset_relic_grounded() && getdvarint("scr_use_br_sentry_gun");
+  scripts\cp_mp\utility\script_utility::registersharedfunc("sentry_gun", "init", scripts\engine\utility::ter_op(istrue(var_0), &_handlevehiclepurchase::init, &scripts\mp\killstreaks\sentry_gun_mp::init));
   scripts\cp_mp\utility\script_utility::registersharedfunc("cruise_predator", "init", &scripts\mp\killstreaks\cruise_predator_mp::init);
   scripts\cp_mp\utility\script_utility::registersharedfunc("airstrike", "init", &scripts\mp\killstreaks\airstrike_mp::init);
   scripts\cp_mp\utility\script_utility::registersharedfunc("juggernaut", "init", &scripts\mp\killstreaks\juggernaut_mp::init);

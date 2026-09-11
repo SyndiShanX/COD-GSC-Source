@@ -3,7 +3,7 @@
  * Script: scripts\asm\soldier\sp\melee.gsc
 ***********************************************/
 
-function playmeleeanim_c6freed(var0, var1, var2) {
+function playmeleeanim_c6freed(var_0, var_1, var_2) {
   self unlink();
-  scripts\asm\asm::asm_playanimstate(var0, var1);
+  scripts\asm\asm::asm_playanimstate(var_0, var_1);
 }

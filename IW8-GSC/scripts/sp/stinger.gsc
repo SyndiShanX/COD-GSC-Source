@@ -55,24 +55,24 @@ function stingerfirednotify() {
 
 function stringemissilefired() {
   for(;;) {
-    self waittill("missile_fire", var0);
+    self waittill("missile_fire", var_0);
 
-    if(isDefined(var0)) {
-      self.stinger.missile = var0;
-      var1 = self.stinger.stingertarget;
+    if(isDefined(var_0)) {
+      self.stinger.missile = var_0;
+      var_1 = self.stinger.stingertarget;
 
-      if(isstillvalidtarget(var1)) {
-        var2 = getdesiredoffset(var1);
-        var0 missile_settargetEnt(self.stinger.stingertarget, var2);
+      if(isstillvalidtarget(var_1)) {
+        var_2 = getdesiredoffset(var_1);
+        var_0 missile_settargetEnt(self.stinger.stingertarget, var_2);
       }
     }
   }
 }
 
-function getdesiredoffset(var0) {
-  if(isDefined(var0.vehicletype) && var0 scripts\common\vehicle::ishelicopter()) {
+function getdesiredoffset(var_0) {
+  if(isDefined(var_0.vehicletype) && var_0 scripts\common\vehicle::ishelicopter()) {
     return (0, 0, -100);
-  } else if(scripts\engine\utility::is_equal(var0.unittype, "soldier") || scripts\engine\utility::is_equal(var0.unittype, "juggernaut") || scripts\engine\utility::is_equal(var0.unittype, "suicidebomber")) {
+  } else if(scripts\engine\utility::is_equal(var_0.unittype, "soldier") || scripts\engine\utility::is_equal(var_0.unittype, "juggernaut") || scripts\engine\utility::is_equal(var_0.unittype, "suicidebomber")) {
     return (0, 0, 38);
   }
 
@@ -98,8 +98,8 @@ function stingertoggleloop() {
     self notify("stinger_IRT_off");
     clearirtarget();
 
-    foreach(var1 in self.stinger.lockontargets) {
-      cleartarget(var1);
+    foreach(var_1 in self.stinger.lockontargets) {
+      cleartarget(var_1);
     }
 
     self.stinger.lockontargets = undefined;
@@ -111,8 +111,8 @@ function stingerdeathcleanup() {
   self waittill("death");
 
   if(isDefined(self.stinger.lockontargets)) {
-    foreach(var1 in self.stinger.lockontargets) {
-      cleartarget(var1);
+    foreach(var_1 in self.stinger.lockontargets) {
+      cleartarget(var_1);
     }
 
     return;
@@ -132,7 +132,7 @@ function stingerirtloop() {
         continue;
       }
 
-      var0 = gettarget(self.stinger.stingertarget);
+      var_0 = gettarget(self.stinger.stingertarget);
       thread looplocallocksound("clu_lock", 0.75);
       settargettooclose(self.stinger.stingertarget);
       continue;
@@ -144,16 +144,16 @@ function stingerirtloop() {
         continue;
       }
 
-      var0 = gettarget(self.stinger.stingertarget);
-      var1 = gettime() - self.stinger.stingerlockstarttime;
+      var_0 = gettarget(self.stinger.stingertarget);
+      var_1 = gettime() - self.stinger.stingerlockstarttime;
 
       if(isDefined(self.stinger.lockonoverrideduration)) {
-        var2 = self.stinger.lockonoverrideduration;
+        var_2 = self.stinger.lockonoverrideduration;
       } else {
-        var2 = scripts\engine\utility::ter_op(self.stinger.stingertarget scripts\common\vehicle::isvehicle(), 1300, 500);
+        var_2 = scripts\engine\utility::ter_op(self.stinger.stingertarget scripts\common\vehicle::isvehicle(), 1300, 500);
       }
 
-      if(var1 < var2) {
+      if(var_1 < var_2) {
         continue;
       }
 
@@ -165,17 +165,17 @@ function stingerirtloop() {
       continue;
     }
 
-    var3 = getbeststingertarget();
+    var_3 = getbeststingertarget();
 
-    if(!isDefined(var3)) {
+    if(!isDefined(var_3)) {
       continue;
     }
 
     if(isDefined(self.stinger.lockontargetmarkergroup)) {
-      targetmarkergroupsetextrastate(self.stinger.lockontargetmarkergroup, var3.ent, 1);
+      targetmarkergroupsetextrastate(self.stinger.lockontargetmarkergroup, var_3.ent, 1);
     }
 
-    self.stinger.stingertarget = var3.ent;
+    self.stinger.stingertarget = var_3.ent;
     self.stinger.stingerlockstarttime = gettime();
     self.stinger.stingerlockstarted = 1;
     self notify("stinger_lock_begin");
@@ -183,118 +183,118 @@ function stingerirtloop() {
   }
 }
 
-function stinger_get_closest_to_player_view(var0, var1, var2, var3) {
-  if(!var0.size) {
+function stinger_get_closest_to_player_view(var_0, var_1, var_2, var_3) {
+  if(!var_0.size) {
     return;
   }
 
-  if(!isDefined(var1)) {
-    var1 = level.player;
+  if(!isDefined(var_1)) {
+    var_1 = level.player;
   }
 
-  if(!isDefined(var3)) {
-    var3 = -1;
+  if(!isDefined(var_3)) {
+    var_3 = -1;
   }
 
-  var4 = var1.origin;
+  var_4 = var_1.origin;
 
-  if(isDefined(var2) && var2) {
-    var4 = var1 getEye();
+  if(isDefined(var_2) && var_2) {
+    var_4 = var_1 getEye();
   }
 
-  var5 = undefined;
-  var6 = var1 getplayerangles();
-  var7 = anglesToForward(var6);
-  var8 = -1;
+  var_5 = undefined;
+  var_6 = var_1 getplayerangles();
+  var_7 = anglesToForward(var_6);
+  var_8 = -1;
 
-  foreach(var10 in var0) {
-    var11 = vectortoangles(var10.origin - var4);
-    var12 = anglesToForward(var11);
-    var13 = vectordot(var7, var12);
-    var14 = distancesquared(var4, var10.origin);
-    var15 = 1 - scripts\engine\math::normalize_value(squared(250), squared(5000), var14);
-    var13 *= var15;
+  foreach(var_10 in var_0) {
+    var_11 = vectortoangles(var_10.origin - var_4);
+    var_12 = anglesToForward(var_11);
+    var_13 = vectordot(var_7, var_12);
+    var_14 = distancesquared(var_4, var_10.origin);
+    var_15 = 1 - scripts\engine\math::normalize_value(squared(250), squared(5000), var_14);
+    var_13 *= var_15;
 
-    if(var13 < var8) {
+    if(var_13 < var_8) {
       continue;
     }
 
-    if(var13 < var3) {
+    if(var_13 < var_3) {
       continue;
     }
 
-    var8 = var13;
-    var5 = var10;
+    var_8 = var_13;
+    var_5 = var_10;
   }
 
-  return var5;
+  return var_5;
 }
 
 function getbeststingertarget() {
-  var0 = getcurrentents();
-  var1 = self.stinger.lockontargets;
+  var_0 = getcurrentents();
+  var_1 = self.stinger.lockontargets;
 
   if(isDefined(self.stinger.stingertarget)) {
-    var0 = scripts\engine\utility::array_remove(var0, self.stinger.stingertarget);
-    var1 = scripts\engine\utility::array_remove(var1, gettarget(self.stinger.stingertarget));
+    var_0 = scripts\engine\utility::array_remove(var_0, self.stinger.stingertarget);
+    var_1 = scripts\engine\utility::array_remove(var_1, gettarget(self.stinger.stingertarget));
   }
 
-  var2 = [];
+  var_2 = [];
 
-  for(var3 = 0; var3 < var0.size; var3++) {
-    var4 = var0[var3];
+  for(var_3 = 0; var_3 < var_0.size; var_3++) {
+    var_4 = var_0[var_3];
 
-    if(haslos(var4)) {
-      var2 = var4;
+    if(haslos(var_4)) {
+      var_2 = var_4;
       continue;
     }
 
-    var5 = gettarget(var4);
+    var_5 = gettarget(var_4);
 
-    if(isDefined(var5)) {
-      cleartarget(var5);
+    if(isDefined(var_5)) {
+      cleartarget(var_5);
     }
   }
 
-  if(var2.size == 0) {
+  if(var_2.size == 0) {
     return undefined;
   }
 
-  var6 = [];
-  var7 = 4;
+  var_6 = [];
+  var_7 = 4;
 
   if(isDefined(self.stinger.stingertarget)) {
-    var7--;
+    var_7--;
   }
 
-  for(var8 = 0; var8 < var7; var8++) {
-    var4 = stinger_get_closest_to_player_view(var2, level.player, 1);
-    var6 = var4;
-    var2 = scripts\engine\utility::array_remove(var2, var4);
+  for(var_8 = 0; var_8 < var_7; var_8++) {
+    var_4 = stinger_get_closest_to_player_view(var_2, level.player, 1);
+    var_6 = var_4;
+    var_2 = scripts\engine\utility::array_remove(var_2, var_4);
 
-    if(var2.size == 0) {
+    if(var_2.size == 0) {
       break;
     }
   }
 
-  var9 = var6;
+  var_9 = var_6;
 
-  foreach(var5 in var1) {
-    if(!scripts\engine\utility::array_contains(var9, var5.ent)) {
-      cleartarget(var5);
+  foreach(var_5 in var_1) {
+    if(!scripts\engine\utility::array_contains(var_9, var_5.ent)) {
+      cleartarget(var_5);
       continue;
     }
 
-    var9 = scripts\engine\utility::array_remove(var9, var5.ent);
+    var_9 = scripts\engine\utility::array_remove(var_9, var_5.ent);
   }
 
-  foreach(var4 in var9) {
-    addtarget(var4);
+  foreach(var_4 in var_9) {
+    addtarget(var_4);
   }
 
-  foreach(var15 in var6) {
-    if(insidestingerreticlenolock(var15)) {
-      return gettarget(var15);
+  foreach(var_15 in var_6) {
+    if(insidestingerreticlenolock(var_15)) {
+      return gettarget(var_15);
     }
   }
 
@@ -302,50 +302,50 @@ function getbeststingertarget() {
 }
 
 function getcurrentents() {
-  var0 = getaiarray("axis");
-  var1 = vehicle_getarray();
+  var_0 = getaiarray("axis");
+  var_1 = vehicle_getarray();
 
-  foreach(var3 in var1) {
-    if(scripts\engine\utility::is_equal(var3.script_team, "axis")) {
-      var0 = var3;
+  foreach(var_3 in var_1) {
+    if(scripts\engine\utility::is_equal(var_3.script_team, "axis")) {
+      var_0 = var_3;
     }
   }
 
-  return var0;
+  return var_0;
 }
 
-function gettarget(var0) {
-  foreach(var2 in self.stinger.lockontargets) {
-    if(var2.ent == var0) {
-      return var2;
+function gettarget(var_0) {
+  foreach(var_2 in self.stinger.lockontargets) {
+    if(var_2.ent == var_0) {
+      return var_2;
     }
   }
 
   return undefined;
 }
 
-function addtarget(var0) {
-  var1 = spawnStruct();
-  var1.ent = var0;
-  var1.id = self.stinger.targetids[0];
+function addtarget(var_0) {
+  var_1 = spawnStruct();
+  var_1.ent = var_0;
+  var_1.id = self.stinger.targetids[0];
 
   if(!isDefined(self.stinger.lockontargetmarkergroup)) {
     self.stinger.lockontargetmarkergroup = deletetargetmarkergroup("lockontarget");
     addteamtotargetmarkergroupmask(self.stinger.lockontargetmarkergroup, level.player);
   }
 
-  targetmarkergroupremoveentity(self.stinger.lockontargetmarkergroup, var1.ent);
-  self.stinger.targetids = scripts\engine\utility::array_remove(self.stinger.targetids, var1.id);
-  self.stinger.lockontargets[self.stinger.lockontargets.size] = var1;
+  targetmarkergroupremoveentity(self.stinger.lockontargetmarkergroup, var_1.ent);
+  self.stinger.targetids = scripts\engine\utility::array_remove(self.stinger.targetids, var_1.id);
+  self.stinger.lockontargets[self.stinger.lockontargets.size] = var_1;
 }
 
-function cleartarget(var0) {
+function cleartarget(var_0) {
   if(isDefined(self.stinger.lockontargetmarkergroup)) {
-    targetmarkergroupsetentitystate(self.stinger.lockontargetmarkergroup, var0.ent);
+    targetmarkergroupsetentitystate(self.stinger.lockontargetmarkergroup, var_0.ent);
   }
 
-  self.stinger.lockontargets = scripts\engine\utility::array_remove(self.stinger.lockontargets, var0);
-  self.stinger.targetids[self.stinger.targetids.size] = var0.id;
+  self.stinger.lockontargets = scripts\engine\utility::array_remove(self.stinger.lockontargets, var_0);
+  self.stinger.targetids[self.stinger.targetids.size] = var_0.id;
 
   if(self.stinger.lockontargets.size == 0 && isDefined(self.stinger.lockontargetmarkergroup)) {
     targetmarkergroupaddentity(self.stinger.lockontargetmarkergroup);
@@ -354,48 +354,48 @@ function cleartarget(var0) {
   }
 }
 
-function insidestingerreticlenolock(var0) {
-  return level.player worldpointinreticle_circle(getenthitpos(var0), 65, 105);
+function insidestingerreticlenolock(var_0) {
+  return level.player worldpointinreticle_circle(getenthitpos(var_0), 65, 105);
 }
 
-function insidestingerreticlelocked(var0) {
-  return level.player worldpointinreticle_circle(getenthitpos(var0), 65, 105);
+function insidestingerreticlelocked(var_0) {
+  return level.player worldpointinreticle_circle(getenthitpos(var_0), 65, 105);
 }
 
-function insidestingerreticlelockoverride(var0) {
-  return level.player worldpointinreticle_circle(getenthitpos(var0), 65, 105);
+function insidestingerreticlelockoverride(var_0) {
+  return level.player worldpointinreticle_circle(getenthitpos(var_0), 65, 105);
 }
 
-function haslos(var0) {
-  var1 = self getEye();
-  var2 = [self, var0];
-  var3 = getenthitpos(var0);
-  var4 = scripts\engine\trace::create_contents(1, 1, 0, 1, 0, 1, 0, 1);
-  var5 = scripts\engine\trace::ray_trace(var1, var3, var2, var4);
-  return distancesquared(var5["position"], var3) <= 1;
+function haslos(var_0) {
+  var_1 = self getEye();
+  var_2 = [self, var_0];
+  var_3 = getenthitpos(var_0);
+  var_4 = scripts\engine\trace::create_contents(1, 1, 0, 1, 0, 1, 0, 1);
+  var_5 = scripts\engine\trace::ray_trace(var_1, var_3, var_2, var_4);
+  return distancesquared(var_5["position"], var_3) <= 1;
 }
 
-function getenthitpos(var0) {
-  var1 = var0.origin;
-  var2 = 38;
-  var1 += var2 * anglestoup(var0.angles);
-  return var1;
+function getenthitpos(var_0) {
+  var_1 = var_0.origin;
+  var_2 = 38;
+  var_1 += var_2 * anglestoup(var_0.angles);
+  return var_1;
 }
 
-function isstillvalidtarget(var0) {
-  if(!isDefined(var0)) {
+function isstillvalidtarget(var_0) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
-  if(!isalive(var0)) {
+  if(!isalive(var_0)) {
     return false;
   }
 
-  if(!insidestingerreticlelocked(var0)) {
+  if(!insidestingerreticlelocked(var_0)) {
     return false;
   }
 
-  if(!haslos(var0)) {
+  if(!haslos(var_0)) {
     return false;
   }
 
@@ -403,9 +403,9 @@ function isstillvalidtarget(var0) {
     return true;
   }
 
-  var1 = getbeststingertarget();
+  var_1 = getbeststingertarget();
 
-  if(isDefined(var1) && insidestingerreticlelockoverride(var1.ent)) {
+  if(isDefined(var_1) && insidestingerreticlelockoverride(var_1.ent)) {
     return false;
   }
 
@@ -425,29 +425,29 @@ function playerstingerads() {
 }
 
 function weaponhaslockon() {
-  var0 = self getcurrentweapon();
+  var_0 = self getcurrentweapon();
 
-  if(var0 hasattachment("lalphascope", 1)) {
+  if(var_0 hasattachment("lalphascope", 1)) {
     return true;
   }
 
-  if(var0 hasattachment("lnchrscope_lalpha", 1)) {
+  if(var_0 hasattachment("lnchrscope_lalpha", 1)) {
     return true;
   }
 
   return false;
 }
 
-function settargettooclose(var0) {
-  var1 = 250;
+function settargettooclose(var_0) {
+  var_1 = 250;
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return 0;
   }
 
-  var2 = distance2d(self.origin, var0.origin);
+  var_2 = distance2d(self.origin, var_0.origin);
 
-  if(var2 < var1) {
+  if(var_2 < var_1) {
     self.stinger.targettoclose = 1;
     self weaponlocktargettooclose(1);
     return;
@@ -457,17 +457,17 @@ function settargettooclose(var0) {
   self weaponlocktargettooclose(0);
 }
 
-function looplocalseeksound(var0, var1) {
+function looplocalseeksound(var_0, var_1) {
   self endon("stop_lockon_sound");
   self endon("death");
 
   for(;;) {
-    self playlocalsound(var0);
-    wait var1;
+    self playlocalsound(var_0);
+    wait var_1;
   }
 }
 
-function looplocallocksound(var0, var1) {
+function looplocallocksound(var_0, var_1) {
   self endon("stop_locked_sound");
   self endon("death");
 
@@ -478,13 +478,13 @@ function looplocallocksound(var0, var1) {
   self.stinger.stingerlocksound = 1;
 
   for(;;) {
-    self playlocalsound(var0);
+    self playlocalsound(var_0);
     self playRumbleOnEntity("slide_start");
-    wait var1 / 3;
+    wait var_1 / 3;
     self playRumbleOnEntity("slide_start");
-    wait var1 / 3;
+    wait var_1 / 3;
     self playRumbleOnEntity("slide_start");
-    wait var1 / 3;
+    wait var_1 / 3;
     self stoprumble("slide_start");
   }
 

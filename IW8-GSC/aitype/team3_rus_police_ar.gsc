@@ -35,7 +35,7 @@ function spawner() {
   self setspawnerteam("team3");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\character_civ_russian_police_officer::precache();
   scripts\aitypes\bt_util::init();
   scripts\aitypes\assets::soldier();

@@ -34,10 +34,10 @@ function main() {
 }
 
 function hide_multiple_brush() {
-  var0 = getEntArray("bake_shadow_brush", "targetname");
+  var_0 = getEntArray("bake_shadow_brush", "targetname");
 
-  foreach(var2 in var0) {
-    var2 delete();
+  foreach(var_2 in var_0) {
+    var_2 delete();
   }
 }
 
@@ -89,36 +89,36 @@ function managegate() {
   }
 
   scripts\mp\flags::gameflagwait("infil_started");
-  var0 = getEntArray("infil_barrier", "targetname");
+  var_0 = getEntArray("infil_barrier", "targetname");
 
-  foreach(var2 in var0) {
-    var2 hide();
+  foreach(var_2 in var_0) {
+    var_2 hide();
   }
 
   level waittill("prematch_countdown");
   wait 4;
 
-  foreach(var2 in var0) {
-    var2 show();
+  foreach(var_2 in var_0) {
+    var_2 show();
   }
 }
 
 function player_exfil_struct() {
-  var0 = getEnt("player32x32x256", "targetname");
-  var1 = spawn("script_model", (1620, -1772, 258));
-  var1.angles = (351, 0, 0);
-  var1 clonebrushmodeltoscriptmodel(var0);
-  var2 = getEntArray("hardpoint_zone", "targetname");
+  var_0 = getEnt("player32x32x256", "targetname");
+  var_1 = spawn("script_model", (1620, -1772, 258));
+  var_1.angles = (351, 0, 0);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = getEntArray("hardpoint_zone", "targetname");
 
-  foreach(var4 in var2) {
-    if(var4.script_label == "9") {
-      var4.origin += (0, -2, 0);
+  foreach(var_4 in var_2) {
+    if(var_4.script_label == "9") {
+      var_4.origin += (0, -2, 0);
     }
   }
 }
 
 function battle_tracks_vehicleoccupancyenter() {
-  var0 = [];
+  var_0 = [];
 
   switch (scripts\mp\utility\game::getgametype()) {
     case "tjugg":
@@ -130,30 +130,30 @@ function battle_tracks_vehicleoccupancyenter() {
     case "conf":
     case "war":
     case "sr":
-      GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_tdm_spawn", (1280, -2400, 156), (0, 160, 0)));
+      GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_tdm_spawn", (1280, -2400, 156), (0, 160, 0)));
 
     case "dom":
-      GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_dom_spawn", (1280, -2400, 156), (0, 160, 0)));
+      GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_dom_spawn", (1280, -2400, 156), (0, 160, 0)));
 
     case "sd":
-      GscBinSkip0(0x2e, var0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_sd_spawn_defender", (610, 2640, 176), (0, 278, 0)));
+      GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_sd_spawn_defender", (610, 2640, 176), (0, 278, 0)));
   }
 
-  if(var0.size > 0) {
-    scripts\mp\spawnlogic::bdiedonce(var0);
+  if(var_0.size > 0) {
+    scripts\mp\spawnlogic::bdiedonce(var_0);
     return;
   }
 }
 
 function ref_121f5() {
   level.outofboundstriggerpatches = [];
-  var0 = spawn("trigger_radius", (-1369, -543, 150), 0, 16, 48);
-  level.outofboundstriggerpatches[level.outofboundstriggerpatches.size] = var0;
+  var_0 = spawn("trigger_radius", (-1369, -543, 150), 0, 16, 48);
+  level.outofboundstriggerpatches[level.outofboundstriggerpatches.size] = var_0;
   level waittill("game_ended");
 
-  foreach(var0 in level.outofboundstriggerpatches) {
-    if(isDefined(var0)) {
-      var0 delete();
+  foreach(var_0 in level.outofboundstriggerpatches) {
+    if(isDefined(var_0)) {
+      var_0 delete();
     }
   }
 }

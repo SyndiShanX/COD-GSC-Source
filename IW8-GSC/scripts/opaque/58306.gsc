@@ -34,7 +34,7 @@ function ref_128bc() {
   level waittill("player_spawned");
   thread mine_light_vfx();
   level.player waittill("juggernaut_start");
-  var0 = gettime();
+  var_0 = gettime();
   _tablethide::ref_13d88();
   _tablethide::ref_13d89(0);
   thread playerzombiestreamwaittillcomplete();
@@ -47,25 +47,25 @@ function ref_128bc() {
   level.ref_1404a = "enemy_mp_trial_jugg_noob";
   level.ref_13d40 = 5;
   level.ref_13d67 = 2;
-  ref_14348(var0 + 15000);
+  ref_14348(var_0 + 15000);
   level.ref_13d25 = 0;
   level.ref_13d40 = 6;
   level.ref_13d67 = 3;
-  ref_14348(var0 + 30000);
+  ref_14348(var_0 + 30000);
   level.ref_13d40 = 7;
   level.ref_13d67 = 4;
-  ref_14348(var0 + 45000);
+  ref_14348(var_0 + 45000);
   thread ref_13bd0();
   level.ref_1404a = "enemy_mp_trial_jugg_average";
-  ref_14348(var0 + 60000);
+  ref_14348(var_0 + 60000);
   level.ref_13d40 = 8;
   level.ref_13d4d = 1;
-  ref_14348(var0 + 85000);
-  var1 = gettime();
+  ref_14348(var_0 + 85000);
+  var_1 = gettime();
   level.ref_13d40 = 0;
 
   while(level.ref_13d23.size) {
-    if(gettime() > var1 + 10000) {
+    if(gettime() > var_1 + 10000) {
       break;
     }
 
@@ -74,15 +74,15 @@ function ref_128bc() {
 
   ref_135fb();
   wait 10;
-  var2 = gettime();
+  var_2 = gettime();
   level.ref_13d40 = 8;
   level.ref_13d67 = 5;
   level.ref_1404a = "enemy_mp_trial_jugg_elite";
-  ref_14348(var2 + 15000);
+  ref_14348(var_2 + 15000);
   level notify("white_phosphorus_end");
   level.ref_13d67 = 6;
   level.ref_13d4d = 2;
-  ref_14348(var2 + 15000 + 15000);
+  ref_14348(var_2 + 15000 + 15000);
   level.ref_13d25 = 1;
   level.chopper = spawn_chopper();
   level.chopper waittill("death");
@@ -99,7 +99,7 @@ function ref_128ba() {
   level waittill("player_spawned");
   thread mine_light_vfx();
   level.player waittill("juggernaut_start");
-  var0 = gettime();
+  var_0 = gettime();
   _tablethide::ref_13d88();
   _tablethide::ref_13d89(0);
   thread playerzombiestreamwaittillcomplete();
@@ -111,24 +111,24 @@ function ref_128ba() {
   level.ref_1404a = "enemy_mp_trial_jugg_noob";
   level.ref_13d40 = 7;
   level.ref_13d67 = 2;
-  ref_14348(var0 + 20000);
+  ref_14348(var_0 + 20000);
   level.ref_13d40 = 8;
   level.ref_13d67 = 3;
-  ref_14348(var0 + 35000);
+  ref_14348(var_0 + 35000);
   level.ref_13d40 = 9;
   level.ref_13d67 = 4;
-  ref_14348(var0 + 50000);
+  ref_14348(var_0 + 50000);
   thread ref_13bd0();
   level.ref_1404a = "enemy_mp_trial_jugg_average";
-  ref_14348(var0 + 65000);
+  ref_14348(var_0 + 65000);
   level.ref_13d40 = 10;
   level.ref_13d4d = 2;
-  ref_14348(var0 + 75000);
-  var1 = gettime();
+  ref_14348(var_0 + 75000);
+  var_1 = gettime();
   level.ref_13d40 = 0;
 
   while(level.agentarray.size) {
-    if(gettime() > var1 + 10000) {
+    if(gettime() > var_1 + 10000) {
       break;
     }
 
@@ -137,15 +137,15 @@ function ref_128ba() {
 
   ref_135fb();
   wait 10;
-  var2 = gettime();
+  var_2 = gettime();
   level.ref_13d40 = 10;
   level.ref_13d67 = 5;
   level.ref_1404a = "enemy_mp_trial_jugg_elite";
-  ref_14348(var2 + 30000);
+  ref_14348(var_2 + 30000);
   level notify("white_phosphorus_end");
   level.ref_13d67 = 6;
   level.ref_13d4d = 3;
-  ref_14348(var2 + 30000 + 30000);
+  ref_14348(var_2 + 30000 + 30000);
   level.ref_13d40 = 0;
   level.chopper = spawn_chopper();
   level.chopper waittill("death");
@@ -157,19 +157,19 @@ function ref_128ba() {
   level.ref_13d40 = 0;
 }
 
-function ref_14348(var0) {
-  while(gettime() < var0) {
+function ref_14348(var_0) {
+  while(gettime() < var_0) {
     waitframe();
   }
 }
 
 function playerzombiestreamwaittillcomplete() {
   level.player waittill("death");
-  var0 = scripts\mp\spawnlogic::getspawnpointarray("mp_dm_spawn_start");
-  var0 = sortbydistance(var0, level.player.origin);
+  var_0 = scripts\mp\spawnlogic::getspawnpointarray("mp_dm_spawn_start");
+  var_0 = sortbydistance(var_0, level.player.origin);
 
-  foreach(var2 in level.ref_13d23) {
-    var2 setgoalpos(var0[var0.size - 1].origin);
+  foreach(var_2 in level.ref_13d23) {
+    var_2 setgoalpos(var_0[var_0.size - 1].origin);
   }
 
   if(isDefined(level.chopper)) {
@@ -196,30 +196,30 @@ function ref_129c3() {
 function mine_light_vfx() {
   wait 1;
   level.cratedata.configs["juggernaut"].timeout = 99999;
-  var0 = getEnt("trial_juggernaut_crate", "targetname");
-  var1 = magicgrenademanual("deploy_airdrop_mp", var0.origin, (0, 0, 0), 1);
-  var1.owner = level.player;
-  var2 = level.player scripts\cp_mp\utility\killstreak_utility::createstreakinfo("juggernaut", level.player);
-  var2.mpstreaksysteminfo = scripts\mp\killstreaks\killstreaks::createstreakitemstruct(var2.streakname);
-  var2.mpstreaksysteminfo.attackerisinflictor = gettime();
-  scripts\mp\killstreaks\killstreaks::streakglobals_onkillstreaktriggered(var2);
-  scripts\mp\killstreaks\killstreaks::streakglobals_onkillstreakbeginuse(var2);
+  var_0 = getEnt("trial_juggernaut_crate", "targetname");
+  var_1 = magicgrenademanual("deploy_airdrop_mp", var_0.origin, (0, 0, 0), 1);
+  var_1.owner = level.player;
+  var_2 = level.player scripts\cp_mp\utility\killstreak_utility::createstreakinfo("juggernaut", level.player);
+  var_2.mpstreaksysteminfo = scripts\mp\killstreaks\killstreaks::createstreakitemstruct(var_2.streakname);
+  var_2.mpstreaksysteminfo.attackerisinflictor = gettime();
+  scripts\mp\killstreaks\killstreaks::streakglobals_onkillstreaktriggered(var_2);
+  scripts\mp\killstreaks\killstreaks::streakglobals_onkillstreakbeginuse(var_2);
   scripts\cp_mp\vehicles\vehicle_tracking::reservevehicle();
-  var1 thread scripts\cp_mp\killstreaks\juggernaut::watchmarkeractivate(var2);
+  var_1 thread scripts\cp_mp\killstreaks\juggernaut::watchmarkeractivate(var_2);
   level.cratedata.configs["juggernaut"].activatecallback = undefined;
 }
 
 function ref_135fb() {
   level.player thread scripts\mp\utility\dialog::leaderdialogonplayer(level.player.team + "_enemy_white_phosphorus_inbound");
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, spawnStruct());
 }
 
 function spawn_chopper() {
   while(level.ref_13d24.size) {
-    foreach(var1 in level.ref_13d24) {
-      if(!var1 agentcanseesentient(level.player)) {
-        var1 kill();
+    foreach(var_1 in level.ref_13d24) {
+      if(!var_1 agentcanseesentient(level.player)) {
+        var_1 kill();
       }
     }
 
@@ -227,141 +227,141 @@ function spawn_chopper() {
   }
 
   level.player thread scripts\mp\utility\dialog::leaderdialogonplayer(level.player.team + "_enemy_chopper_support_inbound");
-  var3 = level.player;
-  var4 = "axis";
+  var_3 = level.player;
+  var_4 = "axis";
 
   if(level.player.team == "axis") {
-    var4 = "allies";
+    var_4 = "allies";
   }
 
-  var5 = level.player scripts\cp_mp\utility\killstreak_utility::createstreakinfo("chopper_support", var3);
-  var5.isdeploying = 0;
-  var5.mpstreaksysteminfo = scripts\mp\killstreaks\killstreaks::createstreakitemstruct(var5.streakname);
-  var5.mpstreaksysteminfo.attackerisinflictor = gettime();
-  var6 = (0, 0, 1750);
-  var7 = var3.origin - anglesToForward(var3.angles) * 15000 + var6;
-  var8 = var3.origin + anglesToForward(var3.angles) * 2000 + var6;
-  var9 = var3.angles;
-  var10 = undefined;
+  var_5 = level.player scripts\cp_mp\utility\killstreak_utility::createstreakinfo("chopper_support", var_3);
+  var_5.isdeploying = 0;
+  var_5.mpstreaksysteminfo = scripts\mp\killstreaks\killstreaks::createstreakitemstruct(var_5.streakname);
+  var_5.mpstreaksysteminfo.attackerisinflictor = gettime();
+  var_6 = (0, 0, 1750);
+  var_7 = var_3.origin - anglesToForward(var_3.angles) * 15000 + var_6;
+  var_8 = var_3.origin + anglesToForward(var_3.angles) * 2000 + var_6;
+  var_9 = var_3.angles;
+  var_10 = undefined;
 
   if(isDefined(level.heli_structs_entrances) && level.heli_structs_entrances.size > 0) {
-    var11 = randomint(level.heli_structs_entrances.size);
-    var12 = level.heli_structs_entrances[var11];
-    var10 = scripts\cp_mp\killstreaks\chopper_support::choppersupport_findtargetStruct(var12.script_linkto, level.heli_structs_goals);
-    var13 = var12.origin * (1, 1, 0) + var6;
-    var14 = var10.origin * (1, 1, 0) + var6;
-    var15 = vectorNormalize(var14 - var13);
-    var7 = var14 - var15 * 15000;
-    var8 = var14;
-    var9 = vectortoangles(var15);
+    var_11 = randomint(level.heli_structs_entrances.size);
+    var_12 = level.heli_structs_entrances[var_11];
+    var_10 = scripts\cp_mp\killstreaks\chopper_support::choppersupport_findtargetStruct(var_12.script_linkto, level.heli_structs_goals);
+    var_13 = var_12.origin * (1, 1, 0) + var_6;
+    var_14 = var_10.origin * (1, 1, 0) + var_6;
+    var_15 = vectorNormalize(var_14 - var_13);
+    var_7 = var_14 - var_15 * 15000;
+    var_8 = var_14;
+    var_9 = vectortoangles(var_15);
   }
 
-  var16 = "veh8_mil_air_palfa";
+  var_16 = "veh8_mil_air_palfa";
 
-  if(var4 == "axis") {
-    var16 = "veh8_mil_air_palfa_east";
+  if(var_4 == "axis") {
+    var_16 = "veh8_mil_air_palfa_east";
   }
 
-  var17 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnhelicopter(var3, var7, var9, "veh_chopper_support_mp", var16);
-  var17.speed = 100;
-  var17.accel = 50;
-  var17.lifetime = 9999;
-  var17.team = var4;
-  var17.owner = var3;
-  var17.angles = var9;
-  var17.streakinfo = var5;
-  var17.streakname = var5.streakname;
-  var17.flaresreservecount = 1;
-  var17.currentdamagestate = 0;
-  var17.pathstart = var7;
-  var17.pathgoal = var8;
-  var17.currentaction = "patrol";
-  var17.currenttarget = undefined;
-  var17.currentpatrolstruct = var10;
-  var17.heightoffset = var6;
-  var17.infil_complete = var6[2] - 750;
-  var17.health = 1200;
-  var17.maxhealth = 1200;
-  var17 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Air", var3);
+  var_17 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnhelicopter(var_3, var_7, var_9, "veh_chopper_support_mp", var_16);
+  var_17.speed = 100;
+  var_17.accel = 50;
+  var_17.lifetime = 9999;
+  var_17.team = var_4;
+  var_17.owner = var_3;
+  var_17.angles = var_9;
+  var_17.streakinfo = var_5;
+  var_17.streakname = var_5.streakname;
+  var_17.flaresreservecount = 1;
+  var_17.currentdamagestate = 0;
+  var_17.pathstart = var_7;
+  var_17.pathgoal = var_8;
+  var_17.currentaction = "patrol";
+  var_17.currenttarget = undefined;
+  var_17.currentpatrolstruct = var_10;
+  var_17.heightoffset = var_6;
+  var_17.infil_complete = var_6[2] - 750;
+  var_17.health = 1200;
+  var_17.maxhealth = 1200;
+  var_17 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Air", var_3);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "killstreakMakeVehicle")) {
-    var17[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakMakeVehicle")]](var5.streakname, "destroyed_chopper_support", undefined, "timeout_chopper_support", "callout_destroyed_chopper_support");
+    var_17[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakMakeVehicle")]](var_5.streakname, "destroyed_chopper_support", undefined, "timeout_chopper_support", "callout_destroyed_chopper_support");
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "killstreakSetPreModDamageCallback")) {
-    var17[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetPreModDamageCallback")]](var5.streakname);
+    var_17[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetPreModDamageCallback")]](var_5.streakname);
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "killstreakSetPostModDamageCallback")) {
-    var17[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetPostModDamageCallback")]](var5.streakname, &goodwork);
+    var_17[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetPostModDamageCallback")]](var_5.streakname, &goodwork);
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "killstreakSetDeathCallback")) {
-    var17[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetDeathCallback")]](var5.streakname, &scripts\cp_mp\killstreaks\chopper_support::choppersupport_handledeathdamage);
+    var_17[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "killstreakSetDeathCallback")]](var_5.streakname, &scripts\cp_mp\killstreaks\chopper_support::choppersupport_handledeathdamage);
   }
 
   level.vehicles.damagecallbacks.deathcallbacks["chopper_support"] = &givearmorvalue;
-  var17 setmaxpitchroll(15, 15);
-  var17 vehicle_setspeed(var17.speed, var17.accel);
-  var17 sethoverparams(50, 5, 2.5);
-  var17 setturningability(0.5);
-  var17 setyawspeed(100, 25, 25, 0.1);
-  var17 setCanDamage(1);
-  var17 setneargoalnotifydist(768);
-  var17 setscriptablepartstate("blinking_lights", "on", 0);
-  var17 setscriptablepartstate("engine", "on", 0);
-  var18 = "veh8_mil_air_ahotel64_turret_wm";
+  var_17 setmaxpitchroll(15, 15);
+  var_17 vehicle_setspeed(var_17.speed, var_17.accel);
+  var_17 sethoverparams(50, 5, 2.5);
+  var_17 setturningability(0.5);
+  var_17 setyawspeed(100, 25, 25, 0.1);
+  var_17 setCanDamage(1);
+  var_17 setneargoalnotifydist(768);
+  var_17 setscriptablepartstate("blinking_lights", "on", 0);
+  var_17 setscriptablepartstate("engine", "on", 0);
+  var_18 = "veh8_mil_air_ahotel64_turret_wm";
 
-  if(scripts\cp_mp\utility\player_utility::getplayersuperfaction(var3)) {
-    var18 = "veh8_mil_air_ahotel64_turret_wm_east";
+  if(scripts\cp_mp\utility\player_utility::getplayersuperfaction(var_3)) {
+    var_18 = "veh8_mil_air_ahotel64_turret_wm_east";
   }
 
-  var17.frontturret = spawnturret("misc_turret", var17 gettagorigin("tag_turret_front"), "chopper_support_turret_mp");
-  var17.frontturret.name = "front_turret";
-  var17.rearturret = spawnturret("misc_turret", var17 gettagorigin("tag_turret_rear"), "chopper_support_turret_mp");
-  var17.rearturret.name = "rear_turret";
-  var19 = [var17.frontturret, var17.rearturret];
+  var_17.frontturret = spawnturret("misc_turret", var_17 gettagorigin("tag_turret_front"), "chopper_support_turret_mp");
+  var_17.frontturret.name = "front_turret";
+  var_17.rearturret = spawnturret("misc_turret", var_17 gettagorigin("tag_turret_rear"), "chopper_support_turret_mp");
+  var_17.rearturret.name = "rear_turret";
+  var_19 = [var_17.frontturret, var_17.rearturret];
 
-  foreach(var21 in var19) {
-    var21 setModel(var18);
-    var21.owner = var3;
-    var21.team = var4;
-    var21.angles = var17.angles;
-    var21.streakinfo = var5;
-    var21.turreton = 1;
-    var21.attackingtarget = undefined;
-    var21 linkTo(var17);
-    var21 setturretteam(var4);
-    var21 setturretmodechangewait(0);
-    var21 setmode("manual");
-    var21 setdefaultdroppitch(45);
-    var21.groundtargetent = spawn("script_model", var17.origin);
-    var21.groundtargetent setModel("tag_origin");
-    var21.groundtargetent dontinterpolate();
+  foreach(var_21 in var_19) {
+    var_21 setModel(var_18);
+    var_21.owner = var_3;
+    var_21.team = var_4;
+    var_21.angles = var_17.angles;
+    var_21.streakinfo = var_5;
+    var_21.turreton = 1;
+    var_21.attackingtarget = undefined;
+    var_21 linkTo(var_17);
+    var_21 setturretteam(var_4);
+    var_21 setturretmodechangewait(0);
+    var_21 setmode("manual");
+    var_21 setdefaultdroppitch(45);
+    var_21.groundtargetent = spawn("script_model", var_17.origin);
+    var_21.groundtargetent setModel("tag_origin");
+    var_21.groundtargetent dontinterpolate();
   }
 
-  var17.killcament = spawn("script_model", var17 gettagorigin("tag_ground"));
-  var17.killcament linkTo(var17, "tag_ground", (-600, 0, 1000), (0, 0, 0));
-  var17 setvehgoalpos(var17.pathgoal, 1);
-  var17 playsoundonmovingent("ks_chopper_support_approach");
-  var17.owner = spawn("script_origin", (0, 0, 0));
-  var17.owner.team = var4;
-  var17.owner.name = "FakeChopperOwner";
-  var17.owner.pers["team"] = var4;
+  var_17.killcament = spawn("script_model", var_17 gettagorigin("tag_ground"));
+  var_17.killcament linkTo(var_17, "tag_ground", (-600, 0, 1000), (0, 0, 0));
+  var_17 setvehgoalpos(var_17.pathgoal, 1);
+  var_17 playsoundonmovingent("ks_chopper_support_approach");
+  var_17.owner = spawn("script_origin", (0, 0, 0));
+  var_17.owner.team = var_4;
+  var_17.owner.name = "FakeChopperOwner";
+  var_17.owner.pers["team"] = var_4;
   game["dialog"]["chopper_support_light_damage"] = undefined;
   level.sharedfuncs["dlog"]["killStreakExpired"] = &mortar_init;
-  var17 thread scripts\cp_mp\killstreaks\chopper_support::choppersupport_neargoalsettings();
+  var_17 thread scripts\cp_mp\killstreaks\chopper_support::choppersupport_neargoalsettings();
   thread giverewards();
-  var17 vehicleshowonminimap(0);
-  var17.objid = var17 scripts\mp\objidpoolmanager::createobjective("icon_minimap_chopper_support", var4, undefined, 1, 1);
-  objective_setminimapiconsize(var17.objid, "icon_large");
+  var_17 vehicleshowonminimap(0);
+  var_17.objid = var_17 scripts\mp\objidpoolmanager::createobjective("icon_minimap_chopper_support", var_4, undefined, 1, 1);
+  objective_setminimapiconsize(var_17.objid, "icon_large");
   level notify("stop_airstrikes");
-  return var17;
+  return var_17;
 }
 
-function givearmorvalue(var0) {
+function givearmorvalue(var_0) {
   objective_delete(self.objid);
-  self.killedbyweapon = var0.objweapon;
+  self.killedbyweapon = var_0.objweapon;
   self.streakinfo = undefined;
   self notify("death");
 }
@@ -378,13 +378,13 @@ function giverewards() {
   }
 }
 
-function goodwork(var0) {
-  var1 = var0.attacker;
-  var2 = var0.objweapon;
-  var3 = var0.meansofdeath;
-  var4 = var0.damage;
-  var5 = var0.idflags;
-  self.currenthealth = self.health - var4;
+function goodwork(var_0) {
+  var_1 = var_0.attacker;
+  var_2 = var_0.objweapon;
+  var_3 = var_0.meansofdeath;
+  var_4 = var_0.damage;
+  var_5 = var_0.idflags;
+  self.currenthealth = self.health - var_4;
 
   if(self.currenthealth <= 1500 && self.currentdamagestate == 0) {
     self.currentdamagestate = 1;
@@ -405,64 +405,64 @@ function ref_13bd0() {
   level endon("nuke_detonated");
   level.player endon("death");
   level endon("stop_airstrikes");
-  var0 = level.player scripts\cp_mp\utility\killstreak_utility::createstreakinfo("toma_strike", level.player);
+  var_0 = level.player scripts\cp_mp\utility\killstreak_utility::createstreakinfo("toma_strike", level.player);
 
   for(;;) {
-    var1 = anglesToForward(level.player getplayerangles());
-    var2 = anglesToForward(level.player.angles);
-    var3 = anglestoright(level.player.angles);
-    var4 = level.player scripts\cp_mp\killstreaks\toma_strike::findunobstructedfiringinfo(level.player.origin, 500, var1, var2, var3);
-    tomastrike_firestrike(level.player, var4, var0);
+    var_1 = anglesToForward(level.player getplayerangles());
+    var_2 = anglesToForward(level.player.angles);
+    var_3 = anglestoright(level.player.angles);
+    var_4 = level.player scripts\cp_mp\killstreaks\toma_strike::findunobstructedfiringinfo(level.player.origin, 500, var_1, var_2, var_3);
+    tomastrike_firestrike(level.player, var_4, var_0);
     wait randomfloatrange(3, 6);
   }
 }
 
-function tomastrike_firestrike(var0, var1) {
+function tomastrike_firestrike(var_0, var_1) {
   self endon("disconnect");
   level endon("game_ended");
-  var2 = magicgrenademanual("toma_proj_mp", var0.sourcepos, var0.initvelocity, 5);
-  var3 = var2 scripts\mp\objidpoolmanager::createobjective("icon_minimap_cruisemissile", "axis", undefined, 1, 1);
-  var2 setentityowner(self);
-  var2 setotherent(self);
-  var2.owner = self;
-  var2 setscriptablepartstate("launch", "active", 0);
-  var2 setscriptablepartstate("trail", "active", 0);
-  var2.explodeent = spawn("script_model", var2.origin);
-  var2.explodeent setModel("ks_toma_strike_missile_mp");
-  var2.explodeent linkTo(var2);
-  var2.explodeent dontinterpolate();
-  var2.explodeent setentityowner(self);
-  var4 = spawn("script_model", var0.sourcepos);
-  var4 linkTo(var2, "tag_origin", (10, 0, 10), (0, 0, 0));
-  var2.killcament = var4;
-  var2.streakinfo = var1;
-  var2 thread scripts\cp_mp\killstreaks\toma_strike::toma_strike_watch_airexplosion(var0.preexplpos);
-  var2 thread scripts\cp_mp\killstreaks\toma_strike::toma_strike_watch_stuck(vectortoangles(var0.initvelocity), gettime(), var0.initvelocity);
-  var2 waittill("death");
-  objective_delete(var3);
+  var_2 = magicgrenademanual("toma_proj_mp", var_0.sourcepos, var_0.initvelocity, 5);
+  var_3 = var_2 scripts\mp\objidpoolmanager::createobjective("icon_minimap_cruisemissile", "axis", undefined, 1, 1);
+  var_2 setentityowner(self);
+  var_2 setotherent(self);
+  var_2.owner = self;
+  var_2 setscriptablepartstate("launch", "active", 0);
+  var_2 setscriptablepartstate("trail", "active", 0);
+  var_2.explodeent = spawn("script_model", var_2.origin);
+  var_2.explodeent setModel("ks_toma_strike_missile_mp");
+  var_2.explodeent linkTo(var_2);
+  var_2.explodeent dontinterpolate();
+  var_2.explodeent setentityowner(self);
+  var_4 = spawn("script_model", var_0.sourcepos);
+  var_4 linkTo(var_2, "tag_origin", (10, 0, 10), (0, 0, 0));
+  var_2.killcament = var_4;
+  var_2.streakinfo = var_1;
+  var_2 thread scripts\cp_mp\killstreaks\toma_strike::toma_strike_watch_airexplosion(var_0.preexplpos);
+  var_2 thread scripts\cp_mp\killstreaks\toma_strike::toma_strike_watch_stuck(vectortoangles(var_0.initvelocity), gettime(), var_0.initvelocity);
+  var_2 waittill("death");
+  objective_delete(var_3);
 }
 
 function mp_boneyard_gw_patch() {
   level.player thread scripts\mp\utility\dialog::leaderdialogonplayer(level.player.team + "_enemy_nuke_inbound");
-  var0 = 6;
-  var1 = 10;
-  var2 = level.nuke_expl_struct.origin;
-  var3 = vectorNormalize((var2[0], var2[1], 0) - (level.player.origin[0], level.player.origin[1], 0));
-  var4 = var2 + var3 * 15000;
-  var4 = var4 + (0, 0, 30000) + var3 * 5000;
-  var5 = spawnStruct();
-  var5.streakname = "trial_nuke";
-  var5.nukegoalpoint = var2;
-  level.nuke_clockobject = spawn("script_origin", var4 + (0, 0, 100));
-  level thread _calloutmarkerping_handleluinotify_acknowledged::nuke_startprelaunchalarm(var0);
-  wait var0;
-  playsoundatpos(var4, "iw8_nuke_dist_launch");
-  level thread _calloutmarkerping_handleluinotify_acknowledged::nuke_launchmissile(undefined, undefined, var4, var2, var1);
-  wait var1;
+  var_0 = 6;
+  var_1 = 10;
+  var_2 = level.nuke_expl_struct.origin;
+  var_3 = vectorNormalize((var_2[0], var_2[1], 0) - (level.player.origin[0], level.player.origin[1], 0));
+  var_4 = var_2 + var_3 * 15000;
+  var_4 = var_4 + (0, 0, 30000) + var_3 * 5000;
+  var_5 = spawnStruct();
+  var_5.streakname = "trial_nuke";
+  var_5.nukegoalpoint = var_2;
+  level.nuke_clockobject = spawn("script_origin", var_4 + (0, 0, 100));
+  level thread _calloutmarkerping_handleluinotify_acknowledged::nuke_startprelaunchalarm(var_0);
+  wait var_0;
+  playsoundatpos(var_4, "iw8_nuke_dist_launch");
+  level thread _calloutmarkerping_handleluinotify_acknowledged::nuke_launchmissile(undefined, undefined, var_4, var_2, var_1);
+  wait var_1;
   ref_12f04();
   level thread _calloutmarkerping_handleluinotify_acknowledged::setnuketimescalefactor();
-  level thread _calloutmarkerping_handleluinotify_acknowledged::nuke_explosion(undefined, var5);
-  level thread _calloutmarkerping_handleluinotify_acknowledged::nuke_earthquake(undefined, var5);
+  level thread _calloutmarkerping_handleluinotify_acknowledged::nuke_explosion(undefined, var_5);
+  level thread _calloutmarkerping_handleluinotify_acknowledged::nuke_earthquake(undefined, var_5);
   visionsetnaked("nuke_global_flash", 0.05);
   setDvar("r_materialBloomHQScriptMasterEnable", 0);
   wait 0.5;
@@ -473,14 +473,14 @@ function mp_boneyard_gw_patch() {
   level.player kill();
   level thread _calloutmarkerping_handleluinotify_acknowledged::ref_11ef1(2);
 
-  foreach(var7 in level.ref_13d23) {
-    var7 dodamage(99999, var2);
+  foreach(var_7 in level.ref_13d23) {
+    var_7 dodamage(99999, var_2);
   }
 
   level notify("nuke_death");
 }
 
-function mortar_init(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14, var15, var16, var17, var18, var19, var20, var21, var22, var23, var24, var25) {}
+function mortar_init(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_16, var_17, var_18, var_19, var_20, var_21, var_22, var_23, var_24, var_25) {}
 
 function ai_init() {
   level waittill("player_spawned");
@@ -518,15 +518,15 @@ function ref_134ef() {
     level.agent_funcs["actor_" + level.ref_1404a]["gametype_on_killed"] = &ref_13d29;
   }
 
-  var0 = scripts\mp\mp_agent::spawnnewagentaitype(level.ref_1404a, play_player_falling_anims(), (0, 0, 0));
-  var0.a.disablelongdeath = 1;
-  var0 enabletraversals(0);
-  var0.goalradius = 750;
-  level.ref_13d23 = scripts\engine\utility::array_add(level.ref_13d23, var0);
+  var_0 = scripts\mp\mp_agent::spawnnewagentaitype(level.ref_1404a, play_player_falling_anims(), (0, 0, 0));
+  var_0.a.disablelongdeath = 1;
+  var_0 enabletraversals(0);
+  var_0.goalradius = 750;
+  level.ref_13d23 = scripts\engine\utility::array_add(level.ref_13d23, var_0);
   thread bot_abort_tactical_goal_for_revive();
   thread bot_cache_entrances_to_other_zones();
-  var0 setgoalentity(level.player);
-  var0 agentsetfavoriteenemy(level.player);
+  var_0 setgoalentity(level.player);
+  var_0 agentsetfavoriteenemy(level.player);
 }
 
 function ref_13544() {
@@ -540,47 +540,47 @@ function ref_13544() {
     level.agent_funcs["actor_enemy_mp_trial_juggernaut"]["gametype_on_killed"] = &ref_13d29;
   }
 
-  var0 = scripts\mp\mp_agent::spawnnewagentaitype("enemy_mp_trial_juggernaut", play_player_falling_anims(), (0, 0, 0));
-  var0.a.disablelongdeath = 1;
-  var0 enabletraversals(0);
-  level.ref_13d23 = scripts\engine\utility::array_add(level.ref_13d23, var0);
-  level.ref_13d24 = scripts\engine\utility::array_add(level.ref_13d24, var0);
-  var0 setgoalentity(level.player);
-  var0 agentsetfavoriteenemy(level.player);
-  var0.favoriteenemy = level.player;
+  var_0 = scripts\mp\mp_agent::spawnnewagentaitype("enemy_mp_trial_juggernaut", play_player_falling_anims(), (0, 0, 0));
+  var_0.a.disablelongdeath = 1;
+  var_0 enabletraversals(0);
+  level.ref_13d23 = scripts\engine\utility::array_add(level.ref_13d23, var_0);
+  level.ref_13d24 = scripts\engine\utility::array_add(level.ref_13d24, var_0);
+  var_0 setgoalentity(level.player);
+  var_0 agentsetfavoriteenemy(level.player);
+  var_0.favoriteenemy = level.player;
 }
 
 function play_player_falling_anims() {
-  var0 = scripts\mp\spawnlogic::getspawnpointarray("mp_dm_spawn");
-  var1 = scripts\mp\spawnlogic::getspawnpointarray("mp_dm_spawn_secondary");
-  var2 = scripts\mp\spawnlogic::getspawnpointarray("mp_dm_spawn_start");
-  var3 = scripts\engine\utility::array_combine(var0, var1, var2);
-  [var5] = sortbydistance(var3, level.player.origin);
-  var6 = [];
+  var_0 = scripts\mp\spawnlogic::getspawnpointarray("mp_dm_spawn");
+  var_1 = scripts\mp\spawnlogic::getspawnpointarray("mp_dm_spawn_secondary");
+  var_2 = scripts\mp\spawnlogic::getspawnpointarray("mp_dm_spawn_start");
+  var_3 = scripts\engine\utility::array_combine(var_0, var_1, var_2);
+  [var_5] = sortbydistance(var_3, level.player.origin);
+  var_6 = [];
 
-  foreach(var8 in var4) {
-    var9 = getaiarrayinradius(var8.origin, 256);
+  foreach(var_8 in var_4) {
+    var_9 = getaiarrayinradius(var_8.origin, 256);
 
-    if(var9.size) {
+    if(var_9.size) {
       continue;
     }
 
-    var10 = spawnsighttrace(var8, var8.origin + (0, 0, 56), level.player.origin + (0, 0, 56));
+    var_10 = spawnsighttrace(var_8, var_8.origin + (0, 0, 56), level.player.origin + (0, 0, 56));
 
-    if(!var10) {
-      var6 = var8;
+    if(!var_10) {
+      var_6 = var_8;
     }
   }
 
-  var12 = int(clamp(var6.size, 0, 4));
-  var13 = randomintrange(0, var12);
+  var_12 = int(clamp(var_6.size, 0, 4));
+  var_13 = randomintrange(0, var_12);
 
   if(istrue(level.ref_13d25)) {
-    var13 = var6.size - 1 - var13;
+    var_13 = var_6.size - 1 - var_13;
   }
 
-  var5 = var6[var13];
-  return var5.origin;
+  var_5 = var_6[var_13];
+  return var_5.origin;
 }
 
 function bot_abort_tactical_goal_for_revive() {
@@ -596,9 +596,9 @@ function bot_abort_emp_pickup() {
   self notify("reset_shooter_timer");
   self endon("reset_shooter_timer");
   level.ref_13d66[self.entity_number] = self;
-  var0 = gettime() + 750;
+  var_0 = gettime() + 750;
 
-  while(var0 > gettime() && self.health > 0) {
+  while(var_0 > gettime() && self.health > 0) {
     waitframe();
   }
 
@@ -610,10 +610,10 @@ function bot_cache_entrances_to_other_zones() {
   self.dontevershoot = 0;
 
   for(;;) {
-    var0 = level.ref_13d66.size >= level.ref_13d67;
-    var1 = !isDefined(level.ref_13d66[self.entity_number]);
+    var_0 = level.ref_13d66.size >= level.ref_13d67;
+    var_1 = !isDefined(level.ref_13d66[self.entity_number]);
 
-    if(var0 && var1) {
+    if(var_0 && var_1) {
       self.dontevershoot = 1;
     } else {
       self.dontevershoot = 0;
@@ -623,18 +623,18 @@ function bot_cache_entrances_to_other_zones() {
   }
 }
 
-function ref_13d28(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11) {
-  if(var5.basename == level.player.primaryweaponobj.basename) {
-    var1 thread scripts\mp\damagefeedback::updatedamagefeedback("standard", var2 >= self.health);
+function ref_13d28(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  if(var_5.basename == level.player.primaryweaponobj.basename) {
+    var_1 thread scripts\mp\damagefeedback::updatedamagefeedback("standard", var_2 >= self.health);
     return;
   }
 }
 
-function ref_13d29(var0, var1, var2, var3, var4, var5, var6, var7, var8) {
+function ref_13d29(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   level.ref_13d23 = scripts\engine\utility::array_remove(level.ref_13d23, self);
   level.ref_13d24 = scripts\engine\utility::array_remove(level.ref_13d24, self);
 
-  if(var4.basename == level.player.primaryweaponobj.basename) {
+  if(var_4.basename == level.player.primaryweaponobj.basename) {
     if(self.agent_type == "actor_enemy_mp_trial_juggernaut") {
       thread ref_12f03(500);
       return;
@@ -665,9 +665,9 @@ function ref_12f06() {
   score_calculate();
 }
 
-function score_calculate(var0) {
-  if(!isDefined(var0)) {
-    var0 = 0;
+function score_calculate(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
   level.score["subtotal"] = level.score["kills"];
@@ -677,7 +677,7 @@ function score_calculate(var0) {
   _tablethide::trial_ui_set_subscore(level.score["subtotal"]);
   hud_set_reward_tier();
 
-  if(var0) {
+  if(var_0) {
     _tablethide::trial_ui_set_main_score(level.score["total"]);
 
     if(level.score["best"] < level.score["total"]) {
@@ -695,45 +695,45 @@ function score_calculate(var0) {
   }
 }
 
-function hud_set_reward_tier(var0) {
-  if(!isDefined(var0)) {
-    var0 = 0;
+function hud_set_reward_tier(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  if(var0) {
-    var1 = level.score["best"];
+  if(var_0) {
+    var_1 = level.score["best"];
   } else {
-    var1 = level.score["subtotal"];
+    var_1 = level.score["subtotal"];
   }
 
-  if(var1 >= level.trial["tier3"]) {
-    var2 = 3;
-  } else if(var2 >= level.trial["tier2"]) {
-    var3 = level.trial["tier3"] - level.trial["tier2"];
-    var4 = var2 - level.trial["tier2"];
-    var2 = 2 + var4 / var3;
-  } else if(var2 >= level.trial["tier1"]) {
-    var3 = level.trial["tier2"] - level.trial["tier1"];
-    var4 = var2 - level.trial["tier1"];
-    var2 = 1 + var4 / var3;
+  if(var_1 >= level.trial["tier3"]) {
+    var_2 = 3;
+  } else if(var_2 >= level.trial["tier2"]) {
+    var_3 = level.trial["tier3"] - level.trial["tier2"];
+    var_4 = var_2 - level.trial["tier2"];
+    var_2 = 2 + var_4 / var_3;
+  } else if(var_2 >= level.trial["tier1"]) {
+    var_3 = level.trial["tier2"] - level.trial["tier1"];
+    var_4 = var_2 - level.trial["tier1"];
+    var_2 = 1 + var_4 / var_3;
   } else {
-    var2 /= level.trial["tier1"];
+    var_2 /= level.trial["tier1"];
   }
 
-  if(var2) {
-    _tablethide::trial_ui_set_reward_tier(var2);
+  if(var_2) {
+    _tablethide::trial_ui_set_reward_tier(var_2);
     return;
   }
 
-  _tablethide::trial_ui_set_reward_tier_preview(var2);
+  _tablethide::trial_ui_set_reward_tier_preview(var_2);
 }
 
-function ref_12f03(var0) {
+function ref_12f03(var_0) {
   if(!isDefined(level.vehicle_damage_setperkmoddamage)) {
     level.vehicle_damage_setperkmoddamage = 1;
   }
 
-  var1 = min(100000, var0 * level.vehicle_damage_setperkmoddamage);
+  var_1 = min(100000, var_0 * level.vehicle_damage_setperkmoddamage);
   _tablethide::ref_13d8b(level.vehicle_damage_setperkmoddamage);
   level.vehicle_damage_setperkmoddamage++;
 
@@ -742,9 +742,9 @@ function ref_12f03(var0) {
   }
 
   thread hidedangercircle();
-  level.player thread scripts\mp\rank::scorepointspopup(int(min(99999, var1)));
+  level.player thread scripts\mp\rank::scorepointspopup(int(min(99999, var_1)));
   level.score["enemies_killed_count"]++;
-  level.score["kills"] = level.score["kills"] + var1;
+  level.score["kills"] = level.score["kills"] + var_1;
   score_calculate();
 }
 
@@ -757,9 +757,9 @@ function ref_12f04() {
 function hidedangercircle() {
   level notify("combo_reset");
   level endon("combo_reset");
-  var0 = gettime();
+  var_0 = gettime();
 
-  while(gettime() < var0 + 4000) {
+  while(gettime() < var_0 + 4000) {
     waitframe();
   }
 
@@ -786,14 +786,14 @@ function dialog_init() {
 }
 
 function levelobjectives() {
-  var0 = "jugg_intro_short_manual";
+  var_0 = "jugg_intro_short_manual";
 
   if(game["trial"]["tries_remaining"] == 3) {
-    var0 = "jugg_intro_manual";
+    var_0 = "jugg_intro_manual";
   }
 
   wait 10;
-  level.player thread scripts\mp\utility\dialog::leaderdialogonplayer(var0);
+  level.player thread scripts\mp\utility\dialog::leaderdialogonplayer(var_0);
 }
 
 function light_tank_getmissileplayercommand() {
@@ -854,7 +854,7 @@ function playing_stealth_alert_music() {
   playingcoughdamagesound(level.player, level.gameskill);
 }
 
-function playingcoughdamagesound(var0) {
+function playingcoughdamagesound(var_0) {
   self.gameskill = level.gameskill;
   self.gs = spawnStruct();
   self.gs.min_sniper_burst_delay_time = 2;
@@ -879,11 +879,11 @@ function build_vehicle_drop_off_list() {
 }
 
 function ref_13d35() {
-  var0 = level.trial["missionID"];
-  var1 = getomnvar("ui_trial_reward_tier");
-  var2 = getomnvar("ui_trial_best_score");
-  var3 = int(game["trial"]["analytics"]["best_kills"]);
-  var4 = int(game["trial"]["analytics"]["best_combo"]);
-  var5 = int(game["trial"]["analytics"]["best_nuke"]);
-  level.player dlog_recordplayerevent("dlog_event_trial_complete_jugg", ["id", var0, "tier", var1, "score", var2, "kills", var3, "combo", var4, "nuke", var5]);
+  var_0 = level.trial["missionID"];
+  var_1 = getomnvar("ui_trial_reward_tier");
+  var_2 = getomnvar("ui_trial_best_score");
+  var_3 = int(game["trial"]["analytics"]["best_kills"]);
+  var_4 = int(game["trial"]["analytics"]["best_combo"]);
+  var_5 = int(game["trial"]["analytics"]["best_nuke"]);
+  level.player dlog_recordplayerevent("dlog_event_trial_complete_jugg", ["id", var_0, "tier", var_1, "score", var_2, "kills", var_3, "combo", var_4, "nuke", var_5]);
 }

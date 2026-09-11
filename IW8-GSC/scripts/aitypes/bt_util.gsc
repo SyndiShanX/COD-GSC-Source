@@ -27,18 +27,18 @@ function bt_init() {
   thread bt_eventlistener();
 }
 
-function bt_terminateandreplace(var0) {
+function bt_terminateandreplace(var_0) {
   self btterminatetreeinstance();
 
-  if(isDefined(var0)) {
-    self.behaviortreeasset = var0;
+  if(isDefined(var_0)) {
+    self.behaviortreeasset = var_0;
     self btregistertreeinstance(self.behaviortreeasset);
     return;
   }
 }
 
-function bt_getfunction(var0, var1) {
-  return level._btactions[var0].actionfn[var1];
+function bt_getfunction(var_0, var_1) {
+  return level._btactions[var_0].actionfn[var_1];
 }
 
 function bt_eventlistener() {
@@ -46,8 +46,8 @@ function bt_eventlistener() {
   self endon("terminate_ai_threads");
 
   for(;;) {
-    self waittill("ai_notify", var0, var1);
-    scripts\asm\asm::asm_fireephemeralevent("ai_notify", var0, var1);
+    self waittill("ai_notify", var_0, var_1);
+    scripts\asm\asm::asm_fireephemeralevent("ai_notify", var_0, var_1);
   }
 }
 

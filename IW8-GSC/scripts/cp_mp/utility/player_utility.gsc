@@ -7,16 +7,16 @@ function _isalive() {
   return isalive(self) && !isDefined(self.fauxdead) && !istrue(self.delayedspawnedplayernotify);
 }
 
-function setusingremote(var0) {
+function setusingremote(var_0) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("player", "setUsingRemote")) {
-    [[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "setUsingRemote")]](var0);
+    [[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "setUsingRemote")]](var_0);
     return;
   }
 }
 
-function clearusingremote(var0) {
+function clearusingremote(var_0) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("player", "clearUsingRemote")) {
-    [[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "clearUsingRemote")]](var0);
+    [[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "clearUsingRemote")]](var_0);
     return;
   }
 }
@@ -29,12 +29,12 @@ function isusingremote() {
   return 0;
 }
 
-function isinvehicle(var0) {
+function isinvehicle(var_0) {
   if(isDefined(self.vehicle) && isDefined(self.vehicle.vehiclename)) {
     return true;
   }
 
-  if(istrue(var0)) {
+  if(istrue(var_0)) {
     if(isDefined(self.ref_1425d) && isDefined(self.ref_1425d.vehiclename)) {
       return true;
     }
@@ -51,9 +51,9 @@ function getvehicle() {
   return self.vehicle;
 }
 
-function _freezecontrols(var0, var1, var2) {
+function _freezecontrols(var_0, var_1, var_2) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("player", "freezeControls")) {
-    return [[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "freezeControls")]](var0, var1, var2);
+    return [[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "freezeControls")]](var_0, var_1, var_2);
   }
 }
 
@@ -63,26 +63,26 @@ function ai_offhandfiremanager() {
   }
 }
 
-function _freezelookcontrols(var0, var1) {
+function _freezelookcontrols(var_0, var_1) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("player", "freezeLookControls")) {
-    return [[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "freezeLookControls")]](var0, var1);
+    return [[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "freezeLookControls")]](var_0, var_1);
   }
 }
 
-function getplayersuperfaction(var0) {
-  var1 = 0;
+function getplayersuperfaction(var_0) {
+  var_1 = 0;
 
-  if(isDefined(var0.operatorcustomization)) {
-    var1 = var0.operatorcustomization.superfaction;
+  if(isDefined(var_0.operatorcustomization)) {
+    var_1 = var_0.operatorcustomization.superfaction;
   }
 
-  return var1;
+  return var_1;
 }
 
-function setthermalvision(var0, var1, var2) {
-  if(istrue(var0)) {
+function setthermalvision(var_0, var_1, var_2) {
+  if(istrue(var_0)) {
     self enablephysicaldepthoffieldscripting();
-    self setphysicaldepthoffield(var1, var2, 20, 20);
+    self setphysicaldepthoffield(var_1, var_2, 20, 20);
     self thermalvisionon();
     return;
   }
@@ -96,12 +96,12 @@ function watchthermalinputchange() {
   self endon("watch_thermal_input_change");
 
   for(;;) {
-    var0 = getthermalswitchplayercommand();
-    self notifyonplayercommand("switch_thermal_mode", var0);
-    var1 = scripts\engine\utility::ref_143b4("input_type_changed", "thermal_handling_ended");
-    self notifyonplayercommandremove("switch_thermal_mode", var0);
+    var_0 = getthermalswitchplayercommand();
+    self notifyonplayercommand("switch_thermal_mode", var_0);
+    var_1 = scripts\engine\utility::ref_143b4("input_type_changed", "thermal_handling_ended");
+    self notifyonplayercommandremove("switch_thermal_mode", var_0);
 
-    if(!isDefined(var1) || var1 == "thermal_handling_ended") {
+    if(!isDefined(var_1) || var_1 == "thermal_handling_ended") {
       break;
     }
   }
@@ -142,34 +142,34 @@ function disabledemeanorsafe() {
   }
 }
 
-function forcedemeanorsafe(var0) {
-  if(var0 && self getdemeanorviewmodel() != "safe") {
-    thread forcedemeanorsafeinteral(var0);
+function forcedemeanorsafe(var_0) {
+  if(var_0 && self getdemeanorviewmodel() != "safe") {
+    thread forcedemeanorsafeinteral(var_0);
     return;
   }
 
-  if(!var0 && self getdemeanorviewmodel() == "safe") {
-    thread forcedemeanorsafeinteral(var0);
+  if(!var_0 && self getdemeanorviewmodel() == "safe") {
+    thread forcedemeanorsafeinteral(var_0);
     return;
   }
 }
 
-function forcedemeanorsafeinteral(var0) {
+function forcedemeanorsafeinteral(var_0) {
   self endon("death_or_disconnect");
   self notify("forceDemeanorSafeInteral");
   self endon("forceDemeanorSafeInteral");
-  var1 = self issprinting();
+  var_1 = self issprinting();
 
   if(!istrue(self.demeanorsprintdisable)) {
     scripts\common\utility::allow_sprint(0);
     self.demeanorsprintdisable = 1;
   }
 
-  if(var1) {
+  if(var_1) {
     wait 0.5;
   }
 
-  if(var0) {
+  if(var_0) {
     self setdemeanorviewmodel("safe", "iw8_ges_demeanor_safe");
   } else {
     self setdemeanorviewmodel("normal");
@@ -189,20 +189,20 @@ function cleardemeanorsafe() {
   self.demeanorsprintdisable = undefined;
 }
 
-function playersareenemies(var0, var1) {
-  if(!isDefined(var0) || !isDefined(var1)) {
+function playersareenemies(var_0, var_1) {
+  if(!isDefined(var_0) || !isDefined(var_1)) {
     return undefined;
   }
 
-  if(!isDefined(var0.team) || !isDefined(var1.team)) {
+  if(!isDefined(var_0.team) || !isDefined(var_1.team)) {
     return undefined;
   }
 
   if(level.teambased) {
-    return (var0.team != var1.team);
+    return (var_0.team != var_1.team);
   }
 
-  return var0 != var1;
+  return var_0 != var_1;
 }
 
 function ref_12510() {

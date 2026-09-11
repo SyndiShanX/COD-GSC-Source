@@ -4,10 +4,10 @@
 ***********************************************/
 
 function init() {
-  var0 = spawnStruct();
-  level.actionglobals = var0;
-  var0.actions = [];
-  var0.actionsets = [];
+  var_0 = spawnStruct();
+  level.actionglobals = var_0;
+  var_0.actions = [];
+  var_0.actionsets = [];
   addaction("usability", &scripts\common\utility::allow_usability);
   addaction("weapon", &scripts\common\utility::allow_weapon);
   addaction("weapon_switch", &scripts\common\utility::allow_weapon_switch);
@@ -34,21 +34,21 @@ function init() {
   addaction("nvg", &scripts\common\utility::brjugg_oncrateuse);
 }
 
-function addaction(var0, var1) {
-  level.actionglobals.actions[var0] = var1;
+function addaction(var_0, var_1) {
+  level.actionglobals.actions[var_0] = var_1;
 }
 
-function getactionallowfunc(var0) {
-  return level.actionglobals.actions[var0];
+function getactionallowfunc(var_0) {
+  return level.actionglobals.actions[var_0];
 }
 
-function registeractionset(var0, var1) {
-  level.actionglobals.actionsets[var0] = var1;
+function registeractionset(var_0, var_1) {
+  level.actionglobals.actionsets[var_0] = var_1;
 }
 
-function allowactionset(var0, var1) {
-  foreach(var3 in level.actionglobals.actionsets[var0]) {
-    var4 = getactionallowfunc(var3);
-    [[var4]](var1, var0);
+function allowactionset(var_0, var_1) {
+  foreach(var_3 in level.actionglobals.actionsets[var_0]) {
+    var_4 = getactionallowfunc(var_3);
+    [[var_4]](var_1, var_0);
   }
 }

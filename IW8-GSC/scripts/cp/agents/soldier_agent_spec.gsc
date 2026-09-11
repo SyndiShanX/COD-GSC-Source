@@ -25,9 +25,9 @@ function loadvfx() {}
 function blank() {}
 
 function setup_jugg() {
-  var0 = "body_opforce_juggernaut";
-  var1 = undefined;
-  setcharmodels(var0, var1);
+  var_0 = "body_opforce_juggernaut";
+  var_1 = undefined;
+  setcharmodels(var_0, var_1);
   self.maxhealth = 2500;
   self.health = 2500;
   self.spec = "juggernaut";
@@ -40,48 +40,48 @@ function setup_jugg() {
 }
 
 function give_shoulder_launchers() {
-  var0 = self gettagorigin("tag_reflector_arm_ri");
-  var1 = spawn("script_model", var0);
-  var2 = self gettagorigin("tag_reflector_arm_le");
-  var3 = spawn("script_model", var2);
-  thread delete_launchers_on_death(var1, var3);
+  var_0 = self gettagorigin("tag_reflector_arm_ri");
+  var_1 = spawn("script_model", var_0);
+  var_2 = self gettagorigin("tag_reflector_arm_le");
+  var_3 = spawn("script_model", var_2);
+  thread delete_launchers_on_death(var_1, var_3);
 }
 
-function delete_launchers_on_death(var0, var1) {
-  var0 setModel("attachment_wm_ub_mike203");
-  var1 setModel("attachment_wm_ub_mike203");
-  var0 linkTo(self, "tag_reflector_arm_ri", (0, 0, 0), (270, 0, 0));
-  var1 linkTo(self, "tag_reflector_arm_le", (0, 0, 0), (270, 0, 0));
+function delete_launchers_on_death(var_0, var_1) {
+  var_0 setModel("attachment_wm_ub_mike203");
+  var_1 setModel("attachment_wm_ub_mike203");
+  var_0 linkTo(self, "tag_reflector_arm_ri", (0, 0, 0), (270, 0, 0));
+  var_1 linkTo(self, "tag_reflector_arm_le", (0, 0, 0), (270, 0, 0));
   self waittill("death");
-  var0 delete();
-  var1 delete();
+  var_0 delete();
+  var_1 delete();
 }
 
 function setup_armored() {
-  var0 = "body_sa_militia_ar_cp";
-  var1 = "head_al_qatala_2_ar";
-  setcharmodels(var0, var1);
+  var_0 = "body_sa_militia_ar_cp";
+  var_1 = "head_al_qatala_2_ar";
+  setcharmodels(var_0, var_1);
   self.spec = "armored";
 }
 
 function setup_armored_helmet() {
-  var0 = "body_sa_militia_ar_cp";
-  var1 = "head_mp_eastern_fireteam_east_ar_1";
-  setcharmodels(var0, var1);
+  var_0 = "body_sa_militia_ar_cp";
+  var_1 = "head_mp_eastern_fireteam_east_ar_1";
+  setcharmodels(var_0, var_1);
   self.spec = "armored_helmet";
   self.wearing_helmet = 1;
 }
 
-function setcharmodels(var0, var1, var2) {
+function setcharmodels(var_0, var_1, var_2) {
   if(isDefined(self.headmodel)) {
     self detach(self.headmodel);
   }
 
-  self setModel(var0);
+  self setModel(var_0);
 
-  if(isDefined(var1)) {
-    self attach(var1, "", 1);
-    self.headmodel = var1;
+  if(isDefined(var_1)) {
+    self attach(var_1, "", 1);
+    self.headmodel = var_1;
     return;
   }
 }

@@ -21,52 +21,52 @@ function outline_init() {
 function item_outline_weapon_monitor() {
   self endon("refresh_outline");
 
-  foreach(var1 in level.outline_weapon_watch_list) {
-    if(!isDefined(var1)) {
+  foreach(var_1 in level.outline_weapon_watch_list) {
+    if(!isDefined(var_1)) {
       continue;
     }
 
-    if(!isDefined(var1.cost)) {
+    if(!isDefined(var_1.cost)) {
       continue;
     }
 
-    var2 = 1;
-    var3 = distancesquared(self.origin, var1.origin) < 1000000;
+    var_2 = 1;
+    var_3 = distancesquared(self.origin, var_1.origin) < 1000000;
 
-    if(var3 && !scripts\cp\utility::is_holding_deployable() && !scripts\cp\utility::has_special_weapon()) {
-      enable_outline_for_player(var1, self, get_hudoutline_item(var1, var2), "high");
-    } else if(var3 && (scripts\cp\utility::is_holding_deployable() || scripts\cp\utility::has_special_weapon())) {
-      enable_outline_for_player(var1, self, "outline_depth_orange", "high");
+    if(var_3 && !scripts\cp\utility::is_holding_deployable() && !scripts\cp\utility::has_special_weapon()) {
+      enable_outline_for_player(var_1, self, get_hudoutline_item(var_1, var_2), "high");
+    } else if(var_3 && (scripts\cp\utility::is_holding_deployable() || scripts\cp\utility::has_special_weapon())) {
+      enable_outline_for_player(var_1, self, "outline_depth_orange", "high");
     } else {
-      disable_outline_for_player(var1, self);
+      disable_outline_for_player(var_1, self);
     }
 
-    if(var4 & 0) {
+    if(var_4 & 0) {
       wait 0.05;
     }
   }
 }
 
-function get_hudoutline_item(var0, var1) {
-  var2 = var0.cost;
+function get_hudoutline_item(var_0, var_1) {
+  var_2 = var_0.cost;
 
   if(isDefined(level.has_weapon_variation)) {
-    if(isDefined(var0.struct.weapon) && self[[level.has_weapon_variation]](var0.struct.weapon)) {
+    if(isDefined(var_0.struct.weapon) && self[[level.has_weapon_variation]](var_0.struct.weapon)) {
       if(isDefined(level.get_weapon_level_func)) {
-        var3 = self[[level.get_weapon_level_func]](var0.struct.weapon);
+        var_3 = self[[level.get_weapon_level_func]](var_0.struct.weapon);
 
-        if(var3 > 1) {
-          var2 = 4500;
+        if(var_3 > 1) {
+          var_2 = 4500;
         } else {
-          var2 = var0.cost * 0.5;
+          var_2 = var_0.cost * 0.5;
         }
       } else {
-        var2 = var0.cost * 0.5;
+        var_2 = var_0.cost * 0.5;
       }
     }
   }
 
-  if(scripts\cp\cp_persistence::player_has_enough_currency(var2) || istrue(var0.enabled)) {
+  if(scripts\cp\cp_persistence::player_has_enough_currency(var_2) || istrue(var_0.enabled)) {
     return "outline_depth_cyan";
   }
 
@@ -77,155 +77,155 @@ function playeroutlinemonitor() {
   self endon("disconnect");
 
   for(;;) {
-    foreach(var1 in level.players) {
-      if(self == var1) {
+    foreach(var_1 in level.players) {
+      if(self == var_1) {
         continue;
       }
 
-      if(should_put_player_outline_on(var1)) {
-        enable_outline_for_player(var1, self, get_hudoutline_for_player_health(var1), "high");
+      if(should_put_player_outline_on(var_1)) {
+        enable_outline_for_player(var_1, self, get_hudoutline_for_player_health(var_1), "high");
         continue;
       }
 
-      disable_outline_for_player(var1, self);
+      disable_outline_for_player(var_1, self);
     }
 
     wait 0.2;
   }
 }
 
-function should_put_player_outline_on(var0) {
+function should_put_player_outline_on(var_0) {
   if(self.no_team_outlines) {
     return 0;
   }
 
-  if(!isalive(var0) || !isDefined(var0.maxhealth) || !var0.maxhealth || var0.no_outline) {
+  if(!isalive(var_0) || !isDefined(var_0.maxhealth) || !var_0.maxhealth || var_0.no_outline) {
     return 0;
   }
 
-  var1 = distancesquared(self.origin, var0.origin) > 2250000;
+  var_1 = distancesquared(self.origin, var_0.origin) > 2250000;
 
-  if(var1) {
+  if(var_1) {
     return 1;
   }
 
-  var2 = !scripts\engine\trace::_bullet_trace_passed(self getEye(), var0 getEye(), 0, self);
-  return var2;
+  var_2 = !scripts\engine\trace::_bullet_trace_passed(self getEye(), var_0 getEye(), 0, self);
+  return var_2;
 }
 
-function get_hudoutline_for_player_health(var0) {
-  var1 = var0.health / 100;
+function get_hudoutline_for_player_health(var_0) {
+  var_1 = var_0.health / 100;
 
-  if(var1 <= 0.33 || scripts\cp\cp_laststand::player_in_laststand(var0)) {
+  if(var_1 <= 0.33 || scripts\cp\cp_laststand::player_in_laststand(var_0)) {
     return "outline_nodepth_red";
   }
 
-  if(var1 <= 0.66) {
+  if(var_1 <= 0.66) {
     return "outline_nodepth_orange";
   }
 
-  if(var1 <= 1) {
+  if(var_1 <= 1) {
     return "outline_nodepth_cyan";
   }
 
   return "outline_nodepth_white";
 }
 
-function enable_outline_for_players(var0, var1, var2, var3) {
-  var0 hudoutlineenableforclients(var1, var2);
+function enable_outline_for_players(var_0, var_1, var_2, var_3) {
+  var_0 hudoutlineenableforclients(var_1, var_2);
 }
 
-function enable_outline_for_player(var0, var1, var2, var3) {
-  var0 hudoutlineenableforclient(var1, var2);
+function enable_outline_for_player(var_0, var_1, var_2, var_3) {
+  var_0 hudoutlineenableforclient(var_1, var_2);
 }
 
-function disable_outline_for_players(var0, var1) {
-  var0 hudoutlinedisableforclients(var1);
+function disable_outline_for_players(var_0, var_1) {
+  var_0 hudoutlinedisableforclients(var_1);
 }
 
-function disable_outline_for_player(var0, var1) {
-  var0 hudoutlinedisableforclient(var1);
+function disable_outline_for_player(var_0, var_1) {
+  var_0 hudoutlinedisableforclient(var_1);
 }
 
-function disable_outline(var0) {
-  var0 hudoutlinedisable();
+function disable_outline(var_0) {
+  var_0 hudoutlinedisable();
 }
 
-function enable_outline(var0, var1) {
-  var0 hudoutlineenable(var1);
+function enable_outline(var_0, var_1) {
+  var_0 hudoutlineenable(var_1);
 }
 
-function set_outline(var0) {
+function set_outline(var_0) {
   level endon("game_ended");
   level endon("outline_disabled");
-  jumpiftrue(isDefined(var0)) LOC_0000001c;
-  var0 = "outline_nodepth_orange";
+  jumpiftrue(isDefined(var_0)) LOC_0000001c;
+  var_0 = "outline_nodepth_orange";
 
   for(;;) {
-    var1 = scripts\engine\utility::array_combine(level.agentarray, level.ref_14102);
+    var_1 = scripts\engine\utility::array_combine(level.agentarray, level.ref_14102);
 
-    for(var2 = 0; var2 < var1.size; var2++) {
-      var3 = var1[var2];
+    for(var_2 = 0; var_2 < var_1.size; var_2++) {
+      var_3 = var_1[var_2];
 
-      if(!isDefined(var3)) {
+      if(!isDefined(var_3)) {
         continue;
       }
 
-      if(isagent(var3) && !isalive(var3)) {
+      if(isagent(var_3) && !isalive(var_3)) {
         continue;
       }
 
-      if(isDefined(var3.damaged_by_players)) {
+      if(isDefined(var_3.damaged_by_players)) {
         continue;
       }
 
-      if(isDefined(var3.marked_for_challenge)) {
+      if(isDefined(var_3.marked_for_challenge)) {
         continue;
       }
 
-      if(isDefined(var3.team) && var3.team == "allies") {
-        enable_outline_for_players(var3, level.players, "outline_nodepth_green", "high");
+      if(isDefined(var_3.team) && var_3.team == "allies") {
+        enable_outline_for_players(var_3, level.players, "outline_nodepth_green", "high");
         continue;
       }
 
-      enable_outline_for_players(var3, level.players, var0, "high");
+      enable_outline_for_players(var_3, level.players, var_0, "high");
     }
 
     wait 0.5;
   }
 }
 
-function set_outline_for_player(var0, var1, var2) {
+function set_outline_for_player(var_0, var_1, var_2) {
   level endon("game_ended");
   self endon("outline_disabled");
 
-  if(!isDefined(var0)) {
-    var0 = 4;
+  if(!isDefined(var_0)) {
+    var_0 = 4;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  jumpiftrue(isDefined(var2)) LOC_0000002b;
-  var2 = 0;
+  jumpiftrue(isDefined(var_2)) LOC_0000002b;
+  var_2 = 0;
 
   for(;;) {
-    foreach(var4 in scripts\cp\cp_agent_utils::get_alive_enemies()) {
-      if(isDefined(var4.damaged_by_players)) {
+    foreach(var_4 in scripts\cp\cp_agent_utils::get_alive_enemies()) {
+      if(isDefined(var_4.damaged_by_players)) {
         continue;
       }
 
-      if(isDefined(var4.marked_for_challenge)) {
+      if(isDefined(var_4.marked_for_challenge)) {
         continue;
       }
 
-      if(isDefined(var4.feral_occludes)) {
-        enable_outline_for_player(var4, self, var0, 1, var2, "high");
+      if(isDefined(var_4.feral_occludes)) {
+        enable_outline_for_player(var_4, self, var_0, 1, var_2, "high");
         continue;
       }
 
-      enable_outline_for_player(var4, self, var0, var1, var2, "high");
+      enable_outline_for_player(var_4, self, var_0, var_1, var_2, "high");
     }
 
     wait 0.5;
@@ -233,65 +233,65 @@ function set_outline_for_player(var0, var1, var2) {
 }
 
 function unset_outline() {
-  foreach(var1 in scripts\cp\cp_agent_utils::getactiveenemyagents("allies")) {
-    if(isDefined(var1.damaged_by_players)) {
+  foreach(var_1 in scripts\cp\cp_agent_utils::getactiveenemyagents("allies")) {
+    if(isDefined(var_1.damaged_by_players)) {
       continue;
     }
 
-    if(isDefined(var1.marked_for_challenge)) {
+    if(isDefined(var_1.marked_for_challenge)) {
       continue;
     }
 
-    disable_outline_for_players(var1, level.players);
+    disable_outline_for_players(var_1, level.players);
     level notify("outline_disabled");
   }
 }
 
 function unset_outline_for_player() {
-  foreach(var1 in scripts\cp\cp_agent_utils::getactiveenemyagents("allies")) {
-    if(isDefined(var1.damaged_by_players)) {
+  foreach(var_1 in scripts\cp\cp_agent_utils::getactiveenemyagents("allies")) {
+    if(isDefined(var_1.damaged_by_players)) {
       continue;
     }
 
-    if(isDefined(var1.marked_for_challenge)) {
+    if(isDefined(var_1.marked_for_challenge)) {
       continue;
     }
 
-    disable_outline_for_player(var1, self);
+    disable_outline_for_player(var_1, self);
     self notify("outline_disabled");
   }
 }
 
 function save_outline_settings() {
-  var0 = ["LRMPROLMKN", "NTOSKSTKQQ", "MKOQSSQKLL", "NSNOLMTLLL", "LSRTPRNOLS", "LNNOSQKRTP", "RKSQOKQNK", "cg_hud_outline_colors_0", "cg_hud_outline_colors_1", "cg_hud_outline_colors_2", "cg_hud_outline_colors_3", "cg_hud_outline_colors_4", "cg_hud_outline_colors_5", "cg_hud_outline_colors_6"];
+  var_0 = ["LRMPROLMKN", "NTOSKSTKQQ", "MKOQSSQKLL", "NSNOLMTLLL", "LSRTPRNOLS", "LNNOSQKRTP", "RKSQOKQNK", "cg_hud_outline_colors_0", "cg_hud_outline_colors_1", "cg_hud_outline_colors_2", "cg_hud_outline_colors_3", "cg_hud_outline_colors_4", "cg_hud_outline_colors_5", "cg_hud_outline_colors_6"];
 
   if(!isDefined(level.hudoutlinesettings)) {
     level.hudoutlinesettings = [];
   }
 
-  foreach(var2 in var0) {
-    level.hudoutlinesettings[var2] = getDvar(var2);
+  foreach(var_2 in var_0) {
+    level.hudoutlinesettings[var_2] = getDvar(var_2);
   }
 }
 
 function restore_outline_settings() {
-  var0 = ["LRMPROLMKN", "NTOSKSTKQQ", "MKOQSSQKLL", "NSNOLMTLLL", "LSRTPRNOLS", "LNNOSQKRTP", "RKSQOKQNK", "cg_hud_outline_colors_0", "cg_hud_outline_colors_1", "cg_hud_outline_colors_2", "cg_hud_outline_colors_3", "cg_hud_outline_colors_4", "cg_hud_outline_colors_5", "cg_hud_outline_colors_6"];
+  var_0 = ["LRMPROLMKN", "NTOSKSTKQQ", "MKOQSSQKLL", "NSNOLMTLLL", "LSRTPRNOLS", "LNNOSQKRTP", "RKSQOKQNK", "cg_hud_outline_colors_0", "cg_hud_outline_colors_1", "cg_hud_outline_colors_2", "cg_hud_outline_colors_3", "cg_hud_outline_colors_4", "cg_hud_outline_colors_5", "cg_hud_outline_colors_6"];
 
   if(!isDefined(level.hudoutlinesettings)) {
     return;
   }
 
-  foreach(var2 in var0) {
-    setDvar(var2, level.hudoutlinesettings[var2]);
+  foreach(var_2 in var_0) {
+    setDvar(var_2, level.hudoutlinesettings[var_2]);
   }
 }
 
-function hudoutline_enable(var0, var1) {
-  hudoutline_enable_internal(var1, var0);
+function hudoutline_enable(var_0, var_1) {
+  hudoutline_enable_internal(var_1, var_0);
 }
 
-function hudoutline_disable(var0) {
-  hudoutline_disable_internal(var0);
+function hudoutline_disable(var_0) {
+  hudoutline_disable_internal(var_0);
 }
 
 function hudoutline_channels_init() {
@@ -302,56 +302,56 @@ function hudoutline_channels_init() {
   level.hudoutlinechannels = [];
   hudoutline_add_channel_internal("default", 0, level.fnhudoutlinedefaultsettings);
   setsaveddvar("NMROQRRONQ", 1);
-  var0 = [[level.fnhudoutlinedefaultsettings]]();
+  var_0 = [[level.fnhudoutlinedefaultsettings]]();
 
-  for(var1 = 0; var1 < 8; var1++) {
-    var2 = "cg_hud_outline_colors_" + var1;
-    setsaveddvar(var2, var0[var2]);
+  for(var_1 = 0; var_1 < 8; var_1++) {
+    var_2 = "cg_hud_outline_colors_" + var_1;
+    setsaveddvar(var_2, var_0[var_2]);
   }
 }
 
-function hudoutline_enable_internal(var0, var1) {
-  if(!isDefined(var0)) {
-    var0 = "default";
+function hudoutline_enable_internal(var_0, var_1) {
+  if(!isDefined(var_0)) {
+    var_0 = "default";
   }
 
   if(!isDefined(level.hudoutlinechannels)) {
     hudoutline_channels_init();
   }
 
-  if(hudoutline_is_ent_in_channel(var0, self)) {
-    hudoutline_update_entinfo(var0, self, var1);
+  if(hudoutline_is_ent_in_channel(var_0, self)) {
+    hudoutline_update_entinfo(var_0, self, var_1);
   } else {
-    var2 = level.hudoutlinechannels[var0].entinfos.size;
-    level.hudoutlinechannels[var0].entinfos[var2] = hudoutline_create_entinfo(self, var1);
-    thread hudoutline_disable_on_death(var0);
+    var_2 = level.hudoutlinechannels[var_0].entinfos.size;
+    level.hudoutlinechannels[var_0].entinfos[var_2] = hudoutline_create_entinfo(self, var_1);
+    thread hudoutline_disable_on_death(var_0);
   }
 
-  jumpiftrue(isDefined(level.hudoutlinechannels[var0].parentchannel)) LOC_000000d9;
+  jumpiftrue(isDefined(level.hudoutlinechannels[var_0].parentchannel)) LOC_000000d9;
 
   if(!isDefined(level.hudoutlinecurchannel)) {
-    hudoutline_activate_channel(var0);
+    hudoutline_activate_channel(var_0);
   }
 
-  var3 = level.hudoutlinechannels[level.hudoutlinecurchannel].priority;
-  var4 = level.hudoutlinechannels[var0].priority;
+  var_3 = level.hudoutlinechannels[level.hudoutlinecurchannel].priority;
+  var_4 = level.hudoutlinechannels[var_0].priority;
 
-  if(level.hudoutlinecurchannel != var0 && var3 < var4) {
-    hudoutline_activate_channel(var0);
+  if(level.hudoutlinecurchannel != var_0 && var_3 < var_4) {
+    hudoutline_activate_channel(var_0);
     return;
   }
 
-  if(level.hudoutlinecurchannel == var0) {
-    _enable_hudoutline_on_ent(self, var1, var0);
+  if(level.hudoutlinecurchannel == var_0) {
+    _enable_hudoutline_on_ent(self, var_1, var_0);
     return;
   }
 
   return;
 }
 
-function hudoutline_disable_internal(var0) {
-  if(!isDefined(var0)) {
-    var0 = "default";
+function hudoutline_disable_internal(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = "default";
   }
 
   if(!isDefined(level.hudoutlinechannels)) {
@@ -359,58 +359,58 @@ function hudoutline_disable_internal(var0) {
   }
 
   if(isDefined(self)) {
-    self notify(var0 + "hudoutline_disable");
+    self notify(var_0 + "hudoutline_disable");
   }
 
-  var1 = undefined;
+  var_1 = undefined;
 
-  foreach(var4, var3 in level.hudoutlinechannels[var0].entinfos) {
-    if(!isDefined(var3.ent)) {
-      level.hudoutlinechannels[var0].entinfos[var4] = undefined;
+  foreach(var_4, var_3 in level.hudoutlinechannels[var_0].entinfos) {
+    if(!isDefined(var_3.ent)) {
+      level.hudoutlinechannels[var_0].entinfos[var_4] = undefined;
       continue;
     }
 
-    if(var3.ent == self) {
-      var1 = var4;
-      level.hudoutlinechannels[var0].entinfos[var1] = undefined;
+    if(var_3.ent == self) {
+      var_1 = var_4;
+      level.hudoutlinechannels[var_0].entinfos[var_1] = undefined;
       break;
     }
   }
 
-  var5 = [];
+  var_5 = [];
 
-  foreach(var7 in level.hudoutlinechannels[var0].entinfos) {
-    if(!isDefined(var7)) {
+  foreach(var_7 in level.hudoutlinechannels[var_0].entinfos) {
+    if(!isDefined(var_7)) {
       continue;
     }
 
-    var5 = var7;
+    var_5 = var_7;
   }
 
-  level.hudoutlinechannels[var0].entinfos = var5;
+  level.hudoutlinechannels[var_0].entinfos = var_5;
 
   if(!isDefined(level.hudoutlinecurchannel)) {
     return;
   }
 
-  if(level.hudoutlinecurchannel == var0) {
-    if(isDefined(var1)) {
-      _disable_hudoutline_on_ent(self, var0);
+  if(level.hudoutlinecurchannel == var_0) {
+    if(isDefined(var_1)) {
+      _disable_hudoutline_on_ent(self, var_0);
     }
 
-    if(level.hudoutlinechannels[var0].entinfos.size == 0) {
-      var8 = 0;
+    if(level.hudoutlinechannels[var_0].entinfos.size == 0) {
+      var_8 = 0;
 
-      if(isDefined(level.hudoutlinechannels[var0].childchannels) && level.hudoutlinechannels[var0].childchannels.size > 0) {
-        foreach(var10 in level.hudoutlinechannels[var0].childchannels) {
-          if(level.hudoutlinechannels[var10].entinfos.size > 0) {
-            var8 = 1;
+      if(isDefined(level.hudoutlinechannels[var_0].childchannels) && level.hudoutlinechannels[var_0].childchannels.size > 0) {
+        foreach(var_10 in level.hudoutlinechannels[var_0].childchannels) {
+          if(level.hudoutlinechannels[var_10].entinfos.size > 0) {
+            var_8 = 1;
             break;
           }
         }
       }
 
-      if(!var8) {
+      if(!var_8) {
         hudoutline_activate_best_channel();
         return;
       }
@@ -421,14 +421,14 @@ function hudoutline_disable_internal(var0) {
     return;
   }
 
-  if(isDefined(level.hudoutlinechannels[var1].parentchannel) && level.hudoutlinecurchannel == level.hudoutlinechannels[var1].parentchannel) {
-    var12 = level.hudoutlinechannels[var1].parentchannel;
+  if(isDefined(level.hudoutlinechannels[var_1].parentchannel) && level.hudoutlinecurchannel == level.hudoutlinechannels[var_1].parentchannel) {
+    var_12 = level.hudoutlinechannels[var_1].parentchannel;
 
-    if(isDefined(var2)) {
-      _disable_hudoutline_on_ent(self, var12);
+    if(isDefined(var_2)) {
+      _disable_hudoutline_on_ent(self, var_12);
     }
 
-    if(level.hudoutlinechannels[var1].entinfos.size == 0) {
+    if(level.hudoutlinechannels[var_1].entinfos.size == 0) {
       hudoutline_activate_best_channel();
       return;
     }
@@ -438,191 +438,191 @@ function hudoutline_disable_internal(var0) {
 }
 
 function hudoutline_activate_best_channel() {
-  var0 = undefined;
-  var1 = undefined;
+  var_0 = undefined;
+  var_1 = undefined;
   jumpiffalse(isDefined(level.hudoutlineforcedchannels) && level.hudoutlineforcedchannels.size > 0) LOC_00000071;
 
-  foreach(var3 in level.hudoutlineforcedchannels) {
-    if(!isDefined(var0) || level.hudoutlinechannels[var3].priority > var0) {
-      var0 = level.hudoutlinechannels[var3].priority;
-      var1 = var3;
+  foreach(var_3 in level.hudoutlineforcedchannels) {
+    if(!isDefined(var_0) || level.hudoutlinechannels[var_3].priority > var_0) {
+      var_0 = level.hudoutlinechannels[var_3].priority;
+      var_1 = var_3;
     }
   }
 
   goto LOC_00000161;
 }
 
-function hudoutline_create_entinfo(var0, var1) {
-  var2 = spawnStruct();
-  var2.ent = var0;
-  var2.hudoutlineassetname = var1;
-  return var2;
+function hudoutline_create_entinfo(var_0, var_1) {
+  var_2 = spawnStruct();
+  var_2.ent = var_0;
+  var_2.hudoutlineassetname = var_1;
+  return var_2;
 }
 
-function hudoutline_update_entinfo(var0, var1, var2) {
-  foreach(var4 in level.hudoutlinechannels[var0].entinfos) {
-    if(var4.ent == var1) {
-      var4.hudoutlineassetname = var2;
+function hudoutline_update_entinfo(var_0, var_1, var_2) {
+  foreach(var_4 in level.hudoutlinechannels[var_0].entinfos) {
+    if(var_4.ent == var_1) {
+      var_4.hudoutlineassetname = var_2;
     }
   }
 }
 
-function hudoutline_activate_channel(var0) {
-  if(isDefined(level.hudoutlinecurchannel) && level.hudoutlinecurchannel != var0) {
+function hudoutline_activate_channel(var_0) {
+  if(isDefined(level.hudoutlinecurchannel) && level.hudoutlinecurchannel != var_0) {
     hudoutline_deactivate_channel(level.hudoutlinecurchannel);
 
     if(isDefined(level.hudoutlinechannels[level.hudoutlinecurchannel].childchannels) && level.hudoutlinechannels[level.hudoutlinecurchannel].childchannels.size > 0) {
-      foreach(var2 in level.hudoutlinechannels[level.hudoutlinecurchannel].childchannels) {
-        hudoutline_deactivate_channel(var2);
+      foreach(var_2 in level.hudoutlinechannels[level.hudoutlinecurchannel].childchannels) {
+        hudoutline_deactivate_channel(var_2);
       }
     }
   }
 
-  level.hudoutlinecurchannel = var0;
-  thread hudoutline_set_channel_settings_delayed(var0);
-  _enable_hudoutline_on_channel_ents(var0);
+  level.hudoutlinecurchannel = var_0;
+  thread hudoutline_set_channel_settings_delayed(var_0);
+  _enable_hudoutline_on_channel_ents(var_0);
 }
 
-function _enable_hudoutline_on_channel_ents(var0) {
-  var1 = _get_sorted_list_of_channel_plus_child_channels(var0);
+function _enable_hudoutline_on_channel_ents(var_0) {
+  var_1 = _get_sorted_list_of_channel_plus_child_channels(var_0);
 
-  for(var2 = 0; var2 < var1.size; var2++) {
-    foreach(var4 in level.hudoutlinechannels[var1[var2]].entinfos) {
-      var5 = var4.ent;
-      var5 hudoutlineenable(var4.hudoutlineassetname);
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    foreach(var_4 in level.hudoutlinechannels[var_1[var_2]].entinfos) {
+      var_5 = var_4.ent;
+      var_5 hudoutlineenable(var_4.hudoutlineassetname);
     }
   }
 }
 
-function _enable_hudoutline_on_ent(var0, var1, var2) {
-  if(!isDefined(level.hudoutlinechannels[var2].childchannels) || level.hudoutlinechannels[var2].childchannels.size == 0) {
-    var0 hudoutlineenable(var1);
+function _enable_hudoutline_on_ent(var_0, var_1, var_2) {
+  if(!isDefined(level.hudoutlinechannels[var_2].childchannels) || level.hudoutlinechannels[var_2].childchannels.size == 0) {
+    var_0 hudoutlineenable(var_1);
     return;
   }
 
-  var3 = _get_sorted_list_of_channel_plus_child_channels(var2, 1);
-  var4 = 0;
+  var_3 = _get_sorted_list_of_channel_plus_child_channels(var_2, 1);
+  var_4 = 0;
 
-  for(var5 = 0; var5 < var3.size; var5++) {
-    foreach(var7 in level.hudoutlinechannels[var3[var5]].entinfos) {
-      if(var7.ent == var0) {
-        var0 hudoutlineenable(var7.hudoutlineassetname);
-        var4 = 1;
+  for(var_5 = 0; var_5 < var_3.size; var_5++) {
+    foreach(var_7 in level.hudoutlinechannels[var_3[var_5]].entinfos) {
+      if(var_7.ent == var_0) {
+        var_0 hudoutlineenable(var_7.hudoutlineassetname);
+        var_4 = 1;
         break;
       }
     }
 
-    if(var4) {
+    if(var_4) {
       break;
     }
   }
 }
 
-function _disable_hudoutline_on_ent(var0, var1) {
-  if(!isDefined(level.hudoutlinechannels[var1].childchannels) || level.hudoutlinechannels[var1].childchannels.size == 0) {
+function _disable_hudoutline_on_ent(var_0, var_1) {
+  if(!isDefined(level.hudoutlinechannels[var_1].childchannels) || level.hudoutlinechannels[var_1].childchannels.size == 0) {
     self hudoutlinedisable();
     return;
   }
 
-  var2 = _get_sorted_list_of_channel_plus_child_channels(var1, 1);
-  var3 = 0;
+  var_2 = _get_sorted_list_of_channel_plus_child_channels(var_1, 1);
+  var_3 = 0;
 
-  for(var4 = 0; var4 < var2.size; var4++) {
-    foreach(var6 in level.hudoutlinechannels[var2[var4]].entinfos) {
-      if(var6.ent == var0) {
-        var0 hudoutlineenable(var6.hudoutlineassetname);
-        var3 = 1;
+  for(var_4 = 0; var_4 < var_2.size; var_4++) {
+    foreach(var_6 in level.hudoutlinechannels[var_2[var_4]].entinfos) {
+      if(var_6.ent == var_0) {
+        var_0 hudoutlineenable(var_6.hudoutlineassetname);
+        var_3 = 1;
         break;
       }
     }
 
-    if(var3) {
+    if(var_3) {
       break;
     }
   }
 
-  if(!var3) {
+  if(!var_3) {
     self hudoutlinedisable();
     return;
   }
 }
 
-function hudoutline_set_channel_settings_delayed(var0) {
+function hudoutline_set_channel_settings_delayed(var_0) {
   level notify("hudoutline_new_channel_settings");
   level endon("hudoutline_new_channel_settings");
   wait 0.05;
-  var1 = [[level.fnhudoutlinedefaultsettings]]();
-  var2 = [[level.hudoutlinechannels[var0].settingsfunc]]();
+  var_1 = [[level.fnhudoutlinedefaultsettings]]();
+  var_2 = [[level.hudoutlinechannels[var_0].settingsfunc]]();
 
-  foreach(var5, var4 in var1) {
-    if(isDefined(var2[var5])) {
-      setsaveddvar(var5, var2[var5]);
+  foreach(var_5, var_4 in var_1) {
+    if(isDefined(var_2[var_5])) {
+      setsaveddvar(var_5, var_2[var_5]);
       continue;
     }
 
-    setsaveddvar(var5, var4);
+    setsaveddvar(var_5, var_4);
   }
 
-  if(isDefined(level.hudoutlinechannels[var0].loopingsettingsanimationfunc)) {
-    play_animation_on_channel(var0, level.hudoutlinechannels[var0].loopingsettingsanimationfunc);
+  if(isDefined(level.hudoutlinechannels[var_0].loopingsettingsanimationfunc)) {
+    play_animation_on_channel(var_0, level.hudoutlinechannels[var_0].loopingsettingsanimationfunc);
     return;
   }
 }
 
-function hudoutline_deactivate_channel(var0) {
-  foreach(var2 in level.hudoutlinechannels[var0].entinfos) {
-    var3 = var2.ent;
-    var3 hudoutlinedisable();
+function hudoutline_deactivate_channel(var_0) {
+  foreach(var_2 in level.hudoutlinechannels[var_0].entinfos) {
+    var_3 = var_2.ent;
+    var_3 hudoutlinedisable();
   }
 }
 
-function hudoutline_add_channel_internal(var0, var1, var2) {
-  if(!isDefined(var2)) {
-    var2 = level.fnhudoutlinedefaultsettings;
+function hudoutline_add_channel_internal(var_0, var_1, var_2) {
+  if(!isDefined(var_2)) {
+    var_2 = level.fnhudoutlinedefaultsettings;
   }
 
   if(!isDefined(level.hudoutlinechannels)) {
     hudoutline_channels_init();
   }
 
-  if(!isDefined(level.hudoutlinechannels[var0])) {
-    level.hudoutlinechannels[var0] = spawnStruct();
-    level.hudoutlinechannels[var0].channelname = var0;
-    level.hudoutlinechannels[var0].priority = var1;
-    level.hudoutlinechannels[var0].settingsfunc = var2;
-    level.hudoutlinechannels[var0].entinfos = [];
+  if(!isDefined(level.hudoutlinechannels[var_0])) {
+    level.hudoutlinechannels[var_0] = spawnStruct();
+    level.hudoutlinechannels[var_0].channelname = var_0;
+    level.hudoutlinechannels[var_0].priority = var_1;
+    level.hudoutlinechannels[var_0].settingsfunc = var_2;
+    level.hudoutlinechannels[var_0].entinfos = [];
     return;
   }
 }
 
-function hudoutline_add_child_channel_internal(var0, var1, var2) {
-  if(!isDefined(level.hudoutlinechannels[var0])) {
-    level.hudoutlinechannels[var0] = spawnStruct();
-    level.hudoutlinechannels[var0].channelname = var0;
-    level.hudoutlinechannels[var0].priority = var1;
-    level.hudoutlinechannels[var0].entinfos = [];
-    level.hudoutlinechannels[var0].parentchannel = var2;
+function hudoutline_add_child_channel_internal(var_0, var_1, var_2) {
+  if(!isDefined(level.hudoutlinechannels[var_0])) {
+    level.hudoutlinechannels[var_0] = spawnStruct();
+    level.hudoutlinechannels[var_0].channelname = var_0;
+    level.hudoutlinechannels[var_0].priority = var_1;
+    level.hudoutlinechannels[var_0].entinfos = [];
+    level.hudoutlinechannels[var_0].parentchannel = var_2;
   }
 
-  if(!isDefined(level.hudoutlinechannels[var2].childchannels)) {
-    level.hudoutlinechannels[var2].childchannels = [];
+  if(!isDefined(level.hudoutlinechannels[var_2].childchannels)) {
+    level.hudoutlinechannels[var_2].childchannels = [];
   }
 
-  level.hudoutlinechannels[var2].childchannels[level.hudoutlinechannels[var2].childchannels.size] = var0;
+  level.hudoutlinechannels[var_2].childchannels[level.hudoutlinechannels[var_2].childchannels.size] = var_0;
 }
 
-function hudoutline_override_channel_settingsfunc(var0, var1) {
-  level.hudoutlinechannels[var0].settingsfunc = var1;
+function hudoutline_override_channel_settingsfunc(var_0, var_1) {
+  level.hudoutlinechannels[var_0].settingsfunc = var_1;
 
-  if(isDefined(level.hudoutlinecurchannel) && level.hudoutlinecurchannel == var0) {
-    thread hudoutline_set_channel_settings_delayed(var0);
+  if(isDefined(level.hudoutlinecurchannel) && level.hudoutlinecurchannel == var_0) {
+    thread hudoutline_set_channel_settings_delayed(var_0);
     return;
   }
 }
 
-function hudoutline_is_ent_in_channel(var0, var1) {
-  foreach(var3 in level.hudoutlinechannels[var0].entinfos) {
-    if(var3.ent == var1) {
+function hudoutline_is_ent_in_channel(var_0, var_1) {
+  foreach(var_3 in level.hudoutlinechannels[var_0].entinfos) {
+    if(var_3.ent == var_1) {
       return true;
     }
   }
@@ -630,63 +630,63 @@ function hudoutline_is_ent_in_channel(var0, var1) {
   return false;
 }
 
-function hudoutline_force_channel_internal(var0, var1) {
+function hudoutline_force_channel_internal(var_0, var_1) {
   if(!isDefined(level.hudoutlineforcedchannels)) {
     level.hudoutlineforcedchannels = [];
   }
 
-  jumpiffalse(var1) LOC_00000059;
+  jumpiffalse(var_1) LOC_00000059;
 
-  foreach(var3 in level.hudoutlineforcedchannels) {
-    if(var3 == var0) {
+  foreach(var_3 in level.hudoutlineforcedchannels) {
+    if(var_3 == var_0) {
       return;
     }
   }
 
-  level.hudoutlineforcedchannels[level.hudoutlineforcedchannels.size] = var0;
+  level.hudoutlineforcedchannels[level.hudoutlineforcedchannels.size] = var_0;
   hudoutline_activate_best_channel();
   return;
 }
 
-function hudoutline_disable_on_death(var0, var1) {
-  if(isDefined(var1)) {
+function hudoutline_disable_on_death(var_0, var_1) {
+  if(isDefined(var_1)) {
     self endon("endonMsg");
   }
 
-  self endon(var0 + "hudoutline_disable");
+  self endon(var_0 + "hudoutline_disable");
   scripts\engine\utility::ref_143a5("death", "entitydeleted");
-  thread hudoutline_disable_internal(var0);
+  thread hudoutline_disable_internal(var_0);
 }
 
-function play_animation_on_channel(var0, var1) {
-  if(!isDefined(level.hudoutlinecurchannel) || level.hudoutlinecurchannel != var0) {
+function play_animation_on_channel(var_0, var_1) {
+  if(!isDefined(level.hudoutlinecurchannel) || level.hudoutlinecurchannel != var_0) {
     return;
   }
 
-  level notify("hudoutline_new_anim_on_channel_" + var0);
+  level notify("hudoutline_new_anim_on_channel_" + var_0);
   level endon("hudoutline_new_channel_settings");
-  level endon("hudoutline_new_anim_on_channel_" + var0);
-  level[[var1]]();
-  thread hudoutline_set_channel_settings_delayed(var0);
+  level endon("hudoutline_new_anim_on_channel_" + var_0);
+  level[[var_1]]();
+  thread hudoutline_set_channel_settings_delayed(var_0);
 }
 
-function play_animation_on_channel_loop(var0, var1) {
-  level.hudoutlinechannels[var0].loopingsettingsanimationfunc = var1;
+function play_animation_on_channel_loop(var_0, var_1) {
+  level.hudoutlinechannels[var_0].loopingsettingsanimationfunc = var_1;
 
-  if(!isDefined(level.hudoutlinecurchannel) || level.hudoutlinecurchannel != var0) {
+  if(!isDefined(level.hudoutlinecurchannel) || level.hudoutlinecurchannel != var_0) {
     return;
   }
 
-  play_animation_on_channel(var0, var1);
+  play_animation_on_channel(var_0, var_1);
 }
 
 function hudoutline_default_settings() {
-  var0 = [];
+  var_0 = [];
 
   if(isDefined(level.player.ar_callout_ent)) {
-    var1 = length2d(level.player.origin - level.player.ar_callout_ent.origin);
-    var2 = clamp(var1 / 1000, 1, 2);
-    var0 = var2;
+    var_1 = length2d(level.player.origin - level.player.ar_callout_ent.origin);
+    var_2 = clamp(var_1 / 1000, 1, 2);
+    var_0 = var_2;
   } else {
     GscBinSkip0(0x2e, "MKOQSSQKLL", 1);
   }
@@ -694,32 +694,32 @@ function hudoutline_default_settings() {
   GscBinSkip0(0x2e, "LRMPROLMKN", "0.9 0.9 0.9 0.5");
 }
 
-function _get_sorted_list_of_channel_plus_child_channels(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = 0;
+function _get_sorted_list_of_channel_plus_child_channels(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  var2 = [];
-  GscBinSkip0(0x2e, 0, var0);
+  var_2 = [];
+  GscBinSkip0(0x2e, 0, var_0);
 }
 
-function outline_array_insert(var0, var1, var2) {
-  if(var2 == var0.size) {
-    var3 = var0;
-    GscBinSkip0(0x2e, var3.size, var1);
+function outline_array_insert(var_0, var_1, var_2) {
+  if(var_2 == var_0.size) {
+    var_3 = var_0;
+    GscBinSkip0(0x2e, var_3.size, var_1);
   }
 
-  var3 = [];
-  var4 = 0;
+  var_3 = [];
+  var_4 = 0;
 
-  for(var5 = 0; var5 < var1.size; var5++) {
-    if(var5 == var3) {
-      var3 = var2;
-      var4 = 1;
+  for(var_5 = 0; var_5 < var_1.size; var_5++) {
+    if(var_5 == var_3) {
+      var_3 = var_2;
+      var_4 = 1;
     }
 
-    var3 = var1[var5];
+    var_3 = var_1[var_5];
   }
 
-  return var3;
+  return var_3;
 }

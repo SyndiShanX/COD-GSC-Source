@@ -7,49 +7,49 @@ function perksenabled() {
   return level.allowperks;
 }
 
-function _hasperk(var0) {
-  return isDefined(self.perks) && isDefined(self.perks[var0]);
+function _hasperk(var_0) {
+  return isDefined(self.perks) && isDefined(self.perks[var_0]);
 }
 
-function giveperk(var0) {
-  scripts\mp\perks\perks::_setperk(var0);
-  scripts\mp\perks\perks::_setextraperks(var0);
+function giveperk(var_0) {
+  scripts\mp\perks\perks::_setperk(var_0);
+  scripts\mp\perks\perks::_setextraperks(var_0);
 }
 
 function resetperkpackage() {
   scripts\mp\perks\perkpackage::perkpackage_reset();
 }
 
-function removeperk(var0) {
+function removeperk(var_0) {
   if(istrue(level.gameended)) {
     return;
   }
 
-  scripts\mp\perks\perks::_unsetperk(var0);
-  scripts\mp\perks\perks::_unsetextraperks(var0);
+  scripts\mp\perks\perks::_unsetperk(var_0);
+  scripts\mp\perks\perks::_unsetextraperks(var_0);
 }
 
-function blockperkfunction(var0) {
-  if(!isDefined(self.perksblocked[var0])) {
-    self.perksblocked[var0] = 1;
+function blockperkfunction(var_0) {
+  if(!isDefined(self.perksblocked[var_0])) {
+    self.perksblocked[var_0] = 1;
   } else {
-    self.perksblocked[var0]++;
+    self.perksblocked[var_0]++;
   }
 
-  if(self.perksblocked[var0] == 1 && _hasperk(var0)) {
-    scripts\mp\perks\perks::_unsetperkinternal(var0);
+  if(self.perksblocked[var_0] == 1 && _hasperk(var_0)) {
+    scripts\mp\perks\perks::_unsetperkinternal(var_0);
 
-    foreach(var2 in level.extraperkmap) {
-      if(var0 == var6) {
-        foreach(var4 in var2) {
-          if(!isDefined(self.perksblocked[var4])) {
-            self.perksblocked[var4] = 1;
+    foreach(var_2 in level.extraperkmap) {
+      if(var_0 == var_6) {
+        foreach(var_4 in var_2) {
+          if(!isDefined(self.perksblocked[var_4])) {
+            self.perksblocked[var_4] = 1;
           } else {
-            self.perksblocked[var4]++;
+            self.perksblocked[var_4]++;
           }
 
-          if(self.perksblocked[var4] == 1) {
-            scripts\mp\perks\perks::_unsetperkinternal(var4);
+          if(self.perksblocked[var_4] == 1) {
+            scripts\mp\perks\perks::_unsetperkinternal(var_4);
           }
         }
 
@@ -61,23 +61,23 @@ function blockperkfunction(var0) {
   }
 }
 
-function unblockperkfunction(var0) {
-  self.perksblocked[var0]--;
+function unblockperkfunction(var_0) {
+  self.perksblocked[var_0]--;
 
-  if(self.perksblocked[var0] == 0) {
-    self.perksblocked[var0] = undefined;
+  if(self.perksblocked[var_0] == 0) {
+    self.perksblocked[var_0] = undefined;
 
-    if(_hasperk(var0)) {
-      scripts\mp\perks\perks::_setperkinternal(var0);
+    if(_hasperk(var_0)) {
+      scripts\mp\perks\perks::_setperkinternal(var_0);
 
-      foreach(var2 in level.extraperkmap) {
-        if(var0 == var6) {
-          foreach(var4 in var2) {
-            self.perksblocked[var4]--;
+      foreach(var_2 in level.extraperkmap) {
+        if(var_0 == var_6) {
+          foreach(var_4 in var_2) {
+            self.perksblocked[var_4]--;
 
-            if(self.perksblocked[var4] == 0) {
-              scripts\mp\perks\perks::_setperkinternal(var4);
-              self.perksblocked[var4] = undefined;
+            if(self.perksblocked[var_4] == 0) {
+              scripts\mp\perks\perks::_setperkinternal(var_4);
+              self.perksblocked[var_4] = undefined;
             }
           }
 
@@ -92,12 +92,12 @@ function unblockperkfunction(var0) {
   }
 }
 
-function getbaseperkname(var0) {
-  if(isendstr(var0, "_ks")) {
-    var0 = getsubstr(var0, 0, var0.size - 3);
+function getbaseperkname(var_0) {
+  if(isendstr(var_0, "_ks")) {
+    var_0 = getsubstr(var_0, 0, var_0.size - 3);
   }
 
-  return var0;
+  return var_0;
 }
 
 function lightweightscalar() {

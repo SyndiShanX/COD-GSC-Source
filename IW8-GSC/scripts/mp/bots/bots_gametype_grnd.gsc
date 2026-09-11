@@ -40,10 +40,10 @@ function bot_grnd_think() {
     }
 
     if(!self bothasscriptgoal()) {
-      var0 = getnodeinzone();
+      var_0 = getnodeinzone();
 
-      if(isDefined(var0)) {
-        self botsetscriptgoal(var0.origin, 0, "objective");
+      if(isDefined(var_0)) {
+        self botsetscriptgoal(var_0.origin, 0, "objective");
       }
 
       continue;
@@ -51,10 +51,10 @@ function bot_grnd_think() {
 
     if(!scripts\mp\bots\bots_util::bot_is_defending()) {
       self botclearscriptgoal();
-      var0 = getnodeinzone();
+      var_0 = getnodeinzone();
 
-      if(isDefined(var0)) {
-        scripts\mp\bots\bots_strategy::bot_protect_point(var0.origin, level.protect_radius);
+      if(isDefined(var_0)) {
+        scripts\mp\bots\bots_strategy::bot_protect_point(var_0.origin, level.protect_radius);
       }
     }
   }
@@ -71,15 +71,15 @@ function clear_defend() {
 }
 
 function getnodeinzone() {
-  var0 = getnodesintrigger(level.zone.trigger);
+  var_0 = getnodesintrigger(level.zone.trigger);
 
-  if(var0.size == 0 || !isDefined(var0)) {
+  if(var_0.size == 0 || !isDefined(var_0)) {
     return undefined;
   }
 
-  var1 = randomintrange(0, var0.size);
-  var2 = var0[var1];
-  return var2;
+  var_1 = randomintrange(0, var_0.size);
+  var_2 = var_0[var_1];
+  return var_2;
 }
 
 function temp() {}

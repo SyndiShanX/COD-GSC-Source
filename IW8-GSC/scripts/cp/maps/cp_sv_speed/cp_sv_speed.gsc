@@ -67,9 +67,9 @@ function main() {
     scripts\engine\utility::flag_init("infil_complete");
   }
 
-  var0 = getDvar("cp_sv_speed_start_obj", "");
+  var_0 = getDvar("cp_sv_speed_start_obj", "");
 
-  if(isDefined(var0) && var0 != "") {
+  if(isDefined(var_0) && var_0 != "") {
     thread rundebugstartobjective(level);
   }
 
@@ -79,41 +79,41 @@ function main() {
   thread ref_139c6();
 }
 
-function rundebugstartobjective(var0) {
+function rundebugstartobjective(var_0) {
   wait 2;
   scripts\engine\utility::flag_wait("infil_complete");
   scripts\engine\utility::flag_wait("objective_table_parsed");
 
-  if(isDefined(level.objectivestabledata[var0])) {
-    var1 = level.objectivestabledata[var0];
+  if(isDefined(level.objectivestabledata[var_0])) {
+    var_1 = level.objectivestabledata[var_0];
 
-    if(isDefined(var1.ondebugstartfunc)) {
-      [[var1.ondebugstartfunc]](var1);
+    if(isDefined(var_1.ondebugstartfunc)) {
+      [[var_1.ondebugstartfunc]](var_1);
     }
 
-    thread scripts\cp\cp_objectives::run_objective(var1.objname, var1.questtype);
+    thread scripts\cp\cp_objectives::run_objective(var_1.objname, var_1.questtype);
     return;
   }
 }
 
-function onplayerspawneddevguisetup(var0) {
-  var1 = var0.name;
-  var2 = undefined;
+function onplayerspawneddevguisetup(var_0) {
+  var_1 = var_0.name;
+  var_2 = undefined;
 
-  foreach(var4 in level.players) {
-    if(var4 == var0) {
-      var2 = int(var5);
+  foreach(var_4 in level.players) {
+    if(var_4 == var_0) {
+      var_2 = int(var_5);
       break;
     }
   }
 
-  if(isDefined(var2)) {
-    thread setupdevguientries(var0, var0, var1);
+  if(isDefined(var_2)) {
+    thread setupdevguientries(var_0, var_0, var_1);
     return;
   }
 }
 
-function setupdevguientries(var0, var1, var2) {}
+function setupdevguientries(var_0, var_1, var_2) {}
 
 function wait_for_pre_game_period() {
   if(!isDefined(level.agent_funcs)) {
@@ -129,10 +129,10 @@ function wait_for_strike_init_complete() {
 
   if(scripts\engine\utility::flag_exist("strike_init_done")) {
     scripts\engine\utility::flag_wait("strike_init_done");
-    var0 = getDvar("scr_strike_name");
-    var1 = undefined;
+    var_0 = getDvar("scr_strike_name");
+    var_1 = undefined;
 
-    switch (var0) {
+    switch (var_0) {
       case "putnewstrikehere":
         break;
       default:
@@ -149,7 +149,7 @@ function registerscriptedagents() {
   scripts\mp\agents\juggernaut\juggernaut_agent::registerscriptedagent();
 }
 
-function onplayerconnect(var0) {
+function onplayerconnect(var_0) {
   thread bug_test_move_startpoint();
 }
 
@@ -157,31 +157,31 @@ function onplayerspawned() {}
 
 function bug_test_move_startpoint() {
   if(getdvarint("scr_linkto_test", 0)) {
-    var0 = scripts\engine\utility::getStructArray("default_player_start", "targetname");
+    var_0 = scripts\engine\utility::getStructArray("default_player_start", "targetname");
 
-    foreach(var2 in var0) {
-      var2.origin = (3743, -1008, 384);
-      var2.angles = (6, 265, 0);
+    foreach(var_2 in var_0) {
+      var_2.origin = (3743, -1008, 384);
+      var_2.angles = (6, 265, 0);
     }
 
     return;
   }
 }
 
-function should_run_event(var0) {
+function should_run_event(var_0) {
   return false;
 }
 
 function setup_map_specific_devgui() {}
 
-function interaction_trigger_properties(var0, var1, var2) {
-  switch (var1.script_noteworthy) {
+function interaction_trigger_properties(var_0, var_1, var_2) {
+  switch (var_1.script_noteworthy) {
     default:
       self.interaction_trigger setusefov(360);
       self.interaction_trigger sethintrequiresholding(0);
 
-      if(isDefined(var1.useduration)) {
-        self.interaction_trigger setuseholdduration(var1.useduration);
+      if(isDefined(var_1.useduration)) {
+        self.interaction_trigger setuseholdduration(var_1.useduration);
       }
 
       break;
@@ -204,85 +204,85 @@ function setup_create_script() {
   register_create_script_arrays("cp_sv_speed_create_script", "cp_sv_speed_create_script", level.scripted_spawner_func.size, &scripts\cp\maps\cp_sv_speed\cp_sv_speed_create_script::main);
 }
 
-function register_create_script_arrays(var0, var1, var2, var3) {
-  if(isDefined(var0)) {
-    level.scripted_spawner_func_strings[level.scripted_spawner_func_strings.size] = var0;
+function register_create_script_arrays(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_0)) {
+    level.scripted_spawner_func_strings[level.scripted_spawner_func_strings.size] = var_0;
   }
 
-  if(isDefined(var1)) {
-    level.scripted_spawner_map_strings[level.scripted_spawner_func_strings.size] = var1;
+  if(isDefined(var_1)) {
+    level.scripted_spawner_map_strings[level.scripted_spawner_func_strings.size] = var_1;
   }
 
-  if(isDefined(var2)) {
-    level.create_script_file_ids[var0] = "cs" + var2;
+  if(isDefined(var_2)) {
+    level.create_script_file_ids[var_0] = "cs" + var_2;
   }
 
-  if(isDefined(var3)) {
-    level.scripted_spawner_func[level.scripted_spawner_func.size] = var3;
+  if(isDefined(var_3)) {
+    level.scripted_spawner_func[level.scripted_spawner_func.size] = var_3;
     return;
   }
 }
 
 function ref_139c6() {
-  var0 = getEnt("crane", "targetname");
-  var1 = getEntArray("crane_bits", "targetname");
+  var_0 = getEnt("crane", "targetname");
+  var_1 = getEntArray("crane_bits", "targetname");
 
-  foreach(var3 in var1) {
-    var3 linkTo(var0);
+  foreach(var_3 in var_1) {
+    var_3 linkTo(var_0);
   }
 
-  var0.ref_12149 = var0.angles;
-  thread ref_139c8(var0);
+  var_0.ref_12149 = var_0.angles;
+  thread ref_139c8(var_0);
 }
 
-function ref_139c8(var0) {
+function ref_139c8(var_0) {
   level endon("game_ended");
-  var1 = 0.75;
+  var_1 = 0.75;
 
   for(;;) {
-    var2 = 4;
-    var1 *= -1;
-    var0.goalang = var0.ref_12149 + (randomfloatrange(-0.5, 0.5), randomfloatrange(-4, 4), var1);
-    var0 rotateTo(var0.goalang, var2, var2 * 0.25, var2 * 0.25);
-    wait var2 - 0.1;
+    var_2 = 4;
+    var_1 *= -1;
+    var_0.goalang = var_0.ref_12149 + (randomfloatrange(-0.5, 0.5), randomfloatrange(-4, 4), var_1);
+    var_0 rotateTo(var_0.goalang, var_2, var_2 * 0.25, var_2 * 0.25);
+    wait var_2 - 0.1;
   }
 }
 
 function player_exfil_struct() {
-  var0 = getEnt("nosight128x128x8", "targetname");
-  var1 = spawn("script_model", (-151, 2496, 224));
-  var1.angles = (0, 0, -90);
-  var1 clonebrushmodeltoscriptmodel(var0);
-  var2 = getEnt("nosight128x128x8", "targetname");
-  var3 = spawn("script_model", (-279, 2496, 224));
-  var3.angles = (0, 0, -90);
-  var3 clonebrushmodeltoscriptmodel(var2);
-  var4 = getEnt("player256x256x8", "targetname");
-  var5 = spawn("script_model", (-216, 2496, 416));
-  var5.angles = (0, 0, -90);
-  var5 clonebrushmodeltoscriptmodel(var4);
-  var6 = getEnt("nosight128x128x8", "targetname");
-  var7 = spawn("script_model", (-840, 2230, 224));
-  var7.angles = (0, 0, -90);
-  var7 clonebrushmodeltoscriptmodel(var6);
-  var8 = getEnt("nosight128x128x8", "targetname");
-  var9 = spawn("script_model", (-712, 2230, 224));
-  var9.angles = (0, 0, -90);
-  var9 clonebrushmodeltoscriptmodel(var8);
-  var10 = getEnt("player256x256x8", "targetname");
-  var11 = spawn("script_model", (-776, 2230, 416));
-  var11.angles = (0, 0, -90);
-  var11 clonebrushmodeltoscriptmodel(var10);
-  var12 = getEnt("nosight128x128x8", "targetname");
-  var13 = spawn("script_model", (-879, 2705, 224));
-  var13.angles = (0, 0, -90);
-  var13 clonebrushmodeltoscriptmodel(var12);
-  var14 = getEnt("player256x256x8", "targetname");
-  var15 = spawn("script_model", (-815, 2705, 416));
-  var15.angles = (0, 0, -90);
-  var15 clonebrushmodeltoscriptmodel(var14);
-  var16 = getEnt("mantle64", "targetname");
-  var17 = spawn("script_model", (-1035, 1444.5, 74));
-  var17.angles = (0, 270, 0);
-  var17 clonebrushmodeltoscriptmodel(var16, 1);
+  var_0 = getEnt("nosight128x128x8", "targetname");
+  var_1 = spawn("script_model", (-151, 2496, 224));
+  var_1.angles = (0, 0, -90);
+  var_1 clonebrushmodeltoscriptmodel(var_0);
+  var_2 = getEnt("nosight128x128x8", "targetname");
+  var_3 = spawn("script_model", (-279, 2496, 224));
+  var_3.angles = (0, 0, -90);
+  var_3 clonebrushmodeltoscriptmodel(var_2);
+  var_4 = getEnt("player256x256x8", "targetname");
+  var_5 = spawn("script_model", (-216, 2496, 416));
+  var_5.angles = (0, 0, -90);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_6 = getEnt("nosight128x128x8", "targetname");
+  var_7 = spawn("script_model", (-840, 2230, 224));
+  var_7.angles = (0, 0, -90);
+  var_7 clonebrushmodeltoscriptmodel(var_6);
+  var_8 = getEnt("nosight128x128x8", "targetname");
+  var_9 = spawn("script_model", (-712, 2230, 224));
+  var_9.angles = (0, 0, -90);
+  var_9 clonebrushmodeltoscriptmodel(var_8);
+  var_10 = getEnt("player256x256x8", "targetname");
+  var_11 = spawn("script_model", (-776, 2230, 416));
+  var_11.angles = (0, 0, -90);
+  var_11 clonebrushmodeltoscriptmodel(var_10);
+  var_12 = getEnt("nosight128x128x8", "targetname");
+  var_13 = spawn("script_model", (-879, 2705, 224));
+  var_13.angles = (0, 0, -90);
+  var_13 clonebrushmodeltoscriptmodel(var_12);
+  var_14 = getEnt("player256x256x8", "targetname");
+  var_15 = spawn("script_model", (-815, 2705, 416));
+  var_15.angles = (0, 0, -90);
+  var_15 clonebrushmodeltoscriptmodel(var_14);
+  var_16 = getEnt("mantle64", "targetname");
+  var_17 = spawn("script_model", (-1035, 1444.5, 74));
+  var_17.angles = (0, 270, 0);
+  var_17 clonebrushmodeltoscriptmodel(var_16, 1);
 }

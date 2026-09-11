@@ -69,7 +69,7 @@ function setup_stealth_funcs() {
 }
 
 function set_default_settings() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, "prone", 400);
 }
 
@@ -77,53 +77,53 @@ function init_event_distances() {
   GscBinSkip1(0x45, "ai_eventDistDeath", "spotted", getdvarint("ai_eventDistDeath"));
 }
 
-function set_event_distances(var0) {
-  foreach(var2 in var0) {
-    foreach(var4 in var2) {
-      level.stealth.ai_event[var6][var5] = var4;
+function set_event_distances(var_0) {
+  foreach(var_2 in var_0) {
+    foreach(var_4 in var_2) {
+      level.stealth.ai_event[var_6][var_5] = var_4;
     }
   }
 }
 
-function set_custom_distances(var0) {
-  foreach(var7, var2 in var0) {
-    foreach(var6, var4 in var2) {
-      level.stealth.ai_event[var7][var6] = var4;
+function set_custom_distances(var_0) {
+  foreach(var_7, var_2 in var_0) {
+    foreach(var_6, var_4 in var_2) {
+      level.stealth.ai_event[var_7][var_6] = var_4;
 
-      if(level.stealth.detect.state == var6) {
-        setsaveddvar(var7, var4);
-        var5 = "ai_busyEvent" + getsubstr(var7, 8);
-        setsaveddvar(var5, var4);
+      if(level.stealth.detect.state == var_6) {
+        setsaveddvar(var_7, var_4);
+        var_5 = "ai_busyEvent" + getsubstr(var_7, 8);
+        setsaveddvar(var_5, var_4);
       }
     }
   }
 }
 
-function set_detect_ranges_internal(var0, var1) {
-  var2 = 0.25;
+function set_detect_ranges_internal(var_0, var_1) {
+  var_2 = 0.25;
 
-  if(isDefined(var0)) {
-    level.stealth.detect.range["hidden"]["prone"] = var0["prone"];
-    level.stealth.detect.range["hidden"]["crouch"] = var0["crouch"];
-    level.stealth.detect.range["hidden"]["stand"] = var0["stand"];
+  if(isDefined(var_0)) {
+    level.stealth.detect.range["hidden"]["prone"] = var_0["prone"];
+    level.stealth.detect.range["hidden"]["crouch"] = var_0["crouch"];
+    level.stealth.detect.range["hidden"]["stand"] = var_0["stand"];
 
-    if(!isDefined(var0["shadow"])) {
-      var0 = var2;
+    if(!isDefined(var_0["shadow"])) {
+      var_0 = var_2;
     }
 
-    level.stealth.detect.range["hidden"]["shadow"] = var0["shadow"];
+    level.stealth.detect.range["hidden"]["shadow"] = var_0["shadow"];
   }
 
-  if(isDefined(var1)) {
-    level.stealth.detect.range["spotted"]["prone"] = var1["prone"];
-    level.stealth.detect.range["spotted"]["crouch"] = var1["crouch"];
-    level.stealth.detect.range["spotted"]["stand"] = var1["stand"];
+  if(isDefined(var_1)) {
+    level.stealth.detect.range["spotted"]["prone"] = var_1["prone"];
+    level.stealth.detect.range["spotted"]["crouch"] = var_1["crouch"];
+    level.stealth.detect.range["spotted"]["stand"] = var_1["stand"];
 
-    if(!isDefined(var1["shadow"])) {
-      var1 = var2;
+    if(!isDefined(var_1["shadow"])) {
+      var_1 = var_2;
     }
 
-    level.stealth.detect.range["spotted"]["shadow"] = var1["shadow"];
+    level.stealth.detect.range["spotted"]["shadow"] = var_1["shadow"];
     return;
   }
 }
@@ -161,17 +161,17 @@ function manager_thread() {
 
 function anyone_in_combat() {
   if(isDefined(level.stealth.groupdata)) {
-    foreach(var1 in level.stealth.groupdata.groups) {
-      if(scripts\stealth\group::group_anyoneincombat(var1.name)) {
+    foreach(var_1 in level.stealth.groupdata.groups) {
+      if(scripts\stealth\group::group_anyoneincombat(var_1.name)) {
         return true;
       }
     }
   }
 
-  var3 = getaiunittypearray("bad_guys", "all");
+  var_3 = getaiunittypearray("bad_guys", "all");
 
-  foreach(var5 in var3) {
-    if(!isDefined(var5.stealth) && isDefined(var5.enemy) && var5.enemy == self) {
+  foreach(var_5 in var_3) {
+    if(!isDefined(var_5.stealth) && isDefined(var_5.enemy) && var_5.enemy == self) {
       return true;
     }
   }
@@ -181,13 +181,13 @@ function anyone_in_combat() {
 
 function update_stealth_spotted_thread() {
   waitframe();
-  var0 = 0;
+  var_0 = 0;
 
   for(;;) {
-    var1 = anyone_in_combat();
+    var_1 = anyone_in_combat();
 
-    if(var1) {
-      if(!var0 && isDefined(level.stealth.stealth_spotted_delay)) {
+    if(var_1) {
+      if(!var_0 && isDefined(level.stealth.stealth_spotted_delay)) {
         wait level.stealth.stealth_spotted_delay;
 
         if(!anyone_in_combat()) {
@@ -200,20 +200,20 @@ function update_stealth_spotted_thread() {
         scripts\engine\utility::flag_set("stealth_spotted");
 
         if(isDefined(self.stealth)) {
-          var2 = scripts\stealth\utility::get_group_flagname("stealth_spotted");
-          scripts\engine\utility::flag_set(var2);
+          var_2 = scripts\stealth\utility::get_group_flagname("stealth_spotted");
+          scripts\engine\utility::flag_set(var_2);
         }
       }
     } else if(scripts\engine\utility::flag("stealth_spotted")) {
       scripts\engine\utility::flag_clear("stealth_spotted");
 
       if(isDefined(self.stealth)) {
-        var2 = scripts\stealth\utility::get_group_flagname("stealth_spotted");
-        scripts\engine\utility::flag_clear(var2);
+        var_2 = scripts\stealth\utility::get_group_flagname("stealth_spotted");
+        scripts\engine\utility::flag_clear(var_2);
       }
     }
 
-    var0 = var1;
+    var_0 = var_1;
     waitframe();
   }
 }
@@ -235,8 +235,8 @@ function hunt_thread() {
     scripts\engine\utility::flag_wait("stealth_enabled");
 
     if(isDefined(level.stealth.hunt_stealth_group_region_sets) && level.stealth.hunt_stealth_group_region_sets.size != 0) {
-      foreach(var1 in level.stealth.hunt_stealth_group_region_sets) {
-        scripts\stealth\clear_regions::huntcomputeaiindependentregionscores(var2, var1);
+      foreach(var_1 in level.stealth.hunt_stealth_group_region_sets) {
+        scripts\stealth\clear_regions::huntcomputeaiindependentregionscores(var_2, var_1);
         wait 0.2;
       }
 
@@ -247,13 +247,13 @@ function hunt_thread() {
   }
 }
 
-function event_change(var0) {
-  level.stealth.detect.state = var0;
+function event_change(var_0) {
+  level.stealth.detect.state = var_0;
 
-  foreach(var2 in level.stealth.ai_event) {
-    setsaveddvar(var4, var2[var0]);
-    var3 = "ai_busyEvent" + getsubstr(var4, 8);
-    setsaveddvar(var3, var2[var0]);
+  foreach(var_2 in level.stealth.ai_event) {
+    setsaveddvar(var_4, var_2[var_0]);
+    var_3 = "ai_busyEvent" + getsubstr(var_4, 8);
+    setsaveddvar(var_3, var_2[var_0]);
   }
 }
 
@@ -267,14 +267,14 @@ function player_grenade_check() {
   for(;;) {
     self waittill("grenade_pullback");
     scripts\engine\utility::flag_set("stealth_player_nade");
-    self waittill("grenade_fire", var0);
-    thread player_grenade_check_dieout(var0);
+    self waittill("grenade_fire", var_0);
+    thread player_grenade_check_dieout(var_0);
   }
 }
 
-function player_grenade_check_dieout(var0) {
+function player_grenade_check_dieout(var_0) {
   level.stealth.save.player_nades++;
-  var0 scripts\engine\utility::waittill_notify_or_timeout("death", 10);
+  var_0 scripts\engine\utility::waittill_notify_or_timeout("death", 10);
   level.stealth.save.player_nades--;
   waittillframeend();
 
@@ -309,42 +309,42 @@ function init_stealth_volumes() {
   level.stealth.combat_volumes = [];
   level.stealth.hunt_volumes = [];
   level.stealth.investigate_volumes = [];
-  var0 = getEntArray("info_volume_stealth_all", "classname");
-  var1 = getEntArray("info_volume_stealth_combat", "classname");
-  var1 = scripts\engine\utility::array_combine(var1, var0);
+  var_0 = getEntArray("info_volume_stealth_all", "classname");
+  var_1 = getEntArray("info_volume_stealth_combat", "classname");
+  var_1 = scripts\engine\utility::array_combine(var_1, var_0);
 
-  if(isDefined(var1)) {
-    foreach(var3 in var1) {
-      var4 = strtok(var3.script_stealthgroup, " ");
+  if(isDefined(var_1)) {
+    foreach(var_3 in var_1) {
+      var_4 = strtok(var_3.script_stealthgroup, " ");
 
-      foreach(var6 in var4) {
-        level.stealth.combat_volumes[var6] = var3;
+      foreach(var_6 in var_4) {
+        level.stealth.combat_volumes[var_6] = var_3;
       }
     }
   }
 
-  var1 = getEntArray("info_volume_stealth_hunt", "classname");
-  var1 = scripts\engine\utility::array_combine(var1, var0);
+  var_1 = getEntArray("info_volume_stealth_hunt", "classname");
+  var_1 = scripts\engine\utility::array_combine(var_1, var_0);
 
-  if(isDefined(var1)) {
-    foreach(var3 in var1) {
-      var4 = strtok(var3.script_stealthgroup, " ");
+  if(isDefined(var_1)) {
+    foreach(var_3 in var_1) {
+      var_4 = strtok(var_3.script_stealthgroup, " ");
 
-      foreach(var6 in var4) {
-        level.stealth.hunt_volumes[var6] = var3;
+      foreach(var_6 in var_4) {
+        level.stealth.hunt_volumes[var_6] = var_3;
       }
     }
   }
 
-  var1 = getEntArray("info_volume_stealth_investigate", "classname");
-  var1 = scripts\engine\utility::array_combine(var1, var0);
+  var_1 = getEntArray("info_volume_stealth_investigate", "classname");
+  var_1 = scripts\engine\utility::array_combine(var_1, var_0);
 
-  if(isDefined(var1)) {
-    foreach(var3 in var1) {
-      var4 = strtok(var3.script_stealthgroup, " ");
+  if(isDefined(var_1)) {
+    foreach(var_3 in var_1) {
+      var_4 = strtok(var_3.script_stealthgroup, " ");
 
-      foreach(var6 in var4) {
-        level.stealth.investigate_volumes[var6] = var3;
+      foreach(var_6 in var_4) {
+        level.stealth.investigate_volumes[var_6] = var_3;
       }
     }
 

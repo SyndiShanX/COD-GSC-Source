@@ -49,41 +49,41 @@ function lighting_setup_lights() {
   level.lt_tunnel_fill_farah = getEnt("tunnel_fill_farah", "targetname");
   level.lt_tunnel_fill_hadir = getEnt("tunnel_fill_hadir", "targetname");
   level.lt_tunnel_omni = getEnt("tunnel_omni", "targetname");
-  var0 = [level.lt_start_key, level.lt_wall, level.lt_fill_farah, level.lt_start_fill, level.lt_ceiling, level.lt_end_fill1, level.lt_end_fill2, level.lt_end_fill3, level.lt_end_key, level.lt_end_rim, level.lt_end_rim1, level.lt_end_rimvol, level.lt_windowfill, level.ls_sunfill, level.ls_sunfill2];
+  var_0 = [level.lt_start_key, level.lt_wall, level.lt_fill_farah, level.lt_start_fill, level.lt_ceiling, level.lt_end_fill1, level.lt_end_fill2, level.lt_end_fill3, level.lt_end_key, level.lt_end_rim, level.lt_end_rim1, level.lt_end_rimvol, level.lt_windowfill, level.ls_sunfill, level.ls_sunfill2];
 
-  foreach(var2 in var0) {
-    var2 setlightintensity(0);
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(0);
   }
 }
 
-function lighting_intro(var0, var1) {
-  thread lighting_intro_dof(var0, var1);
-  var2 = 1.2;
-  var3 = 0.01;
-  var4 = 0.1;
-  var5 = 1;
+function lighting_intro(var_0, var_1) {
+  thread lighting_intro_dof(var_0, var_1);
+  var_2 = 1.2;
+  var_3 = 0.01;
+  var_4 = 0.1;
+  var_5 = 1;
   level.lt_intro_fill setlightintensity(0.01);
   level.lt_intro_rim2 setlightintensity(0.1);
   wait 6;
-  level.lt_tunnel_fill_farah linkTo(var0, "j_neck", (-5, 15, 0), (0, -80, 0));
+  level.lt_tunnel_fill_farah linkTo(var_0, "j_neck", (-5, 15, 0), (0, -80, 0));
   level.lt_tunnel_fill_farah setlightradius(500);
   level.lt_tunnel_fill_farah setlightfovrange(110, 50);
   level.lt_tunnel_fill_farah setlightcolor((1, 0, 0));
-  thread lerp_value_up(level.lt_intro_fill, var3, 0, var2);
-  thread lerp_value_up(level.lt_intro_rim2, var4, 0, var2);
+  thread lerp_value_up(level.lt_intro_fill, var_3, 0, var_2);
+  thread lerp_value_up(level.lt_intro_rim2, var_4, 0, var_2);
 }
 
-function lighting_intro_dof(var0, var1) {
-  var0 scripts\engine\sp\utility::dof_enable_autofocus(2, 10, undefined, undefined, "tag_eye", undefined, 1);
-  level.lt_tunnel_fill linkTo(var1, "j_neck", (-35, 55, 0), (0, -60, 0));
+function lighting_intro_dof(var_0, var_1) {
+  var_0 scripts\engine\sp\utility::dof_enable_autofocus(2, 10, undefined, undefined, "tag_eye", undefined, 1);
+  level.lt_tunnel_fill linkTo(var_1, "j_neck", (-35, 55, 0), (0, -60, 0));
   level.lt_tunnel_fill setlightradius(500);
   level.lt_tunnel_fill setlightfovrange(80, 50);
   level.lt_tunnel_fill setlightcolor((1, 0, 0));
-  level.lt_tunnel_omni linkTo(var0, "tag_accessory_right", (0, 0, -7), (0, -14, 0));
+  level.lt_tunnel_omni linkTo(var_0, "tag_accessory_right", (0, 0, -7), (0, -14, 0));
   level.lt_tunnel_omni setlightradius(500);
   level.lt_tunnel_omni setlightcolor((0.85, 0, 0));
   level.lt_tunnel_omni setlightintensity(0.02);
-  level.lt_tunnel_fill_hadir linkTo(var1, "j_neck", (21, -5, 0), (160, 0, 0));
+  level.lt_tunnel_fill_hadir linkTo(var_1, "j_neck", (21, -5, 0), (160, 0, 0));
   level.lt_tunnel_fill_hadir setlightradius(222);
   level.lt_tunnel_fill_hadir setlightfovrange(110, 60);
   level.lt_tunnel_fill_hadir setlightcolor((1, 0, 0));
@@ -98,79 +98,79 @@ function lighting_intro_dof(var0, var1) {
   thread lerp_value_up(level.lt_tunnel_fill_farah, 0.005, 0, 6);
   thread lerp_value_up(level.lt_tunnel_fill_hadir, 0.03, 0, 6);
   wait 2;
-  var2 = 0.2;
-  var3 = 0.03;
-  thread lerp_value_up(level.lt_tunnel_omni, var2, var3, 2);
-  var0 waittillmatch("single anim", "flare_to_hadir");
-  level.lt_tunnel_omni linkTo(var1, "tag_accessory_right", (0, 0, -7), (0, 0, 0));
-  var1 scripts\engine\sp\utility::dof_enable_autofocus(2, 10, undefined, undefined, "tag_eye", undefined, 1);
+  var_2 = 0.2;
+  var_3 = 0.03;
+  thread lerp_value_up(level.lt_tunnel_omni, var_2, var_3, 2);
+  var_0 waittillmatch("single anim", "flare_to_hadir");
+  level.lt_tunnel_omni linkTo(var_1, "tag_accessory_right", (0, 0, -7), (0, 0, 0));
+  var_1 scripts\engine\sp\utility::dof_enable_autofocus(2, 10, undefined, undefined, "tag_eye", undefined, 1);
 }
 
-function lighting_tunnels(var0, var1, var2) {
-  thread lighting_tunnels_dof(var0, var1, var2);
+function lighting_tunnels(var_0, var_1, var_2) {
+  thread lighting_tunnels_dof(var_0, var_1, var_2);
   level.lt_ceiling setlightintensity(5);
-  scripts\sp\maps\safehouse\safehouse_utility::animation_waittillend(var1);
+  scripts\sp\maps\safehouse\safehouse_utility::animation_waittillend(var_1);
   level.lt_room setlightintensity(0.12);
 }
 
-function lighting_tunnels_dof(var0, var1, var2) {
-  var0 endon("trigger");
-  var1 scripts\engine\sp\utility::dof_enable_autofocus(2, 10, undefined, undefined, "tag_eye", undefined, 1);
-  var3 = level.player isonladder();
+function lighting_tunnels_dof(var_0, var_1, var_2) {
+  var_0 endon("trigger");
+  var_1 scripts\engine\sp\utility::dof_enable_autofocus(2, 10, undefined, undefined, "tag_eye", undefined, 1);
+  var_3 = level.player isonladder();
 
   for(;;) {
-    var4 = level.player isonladder();
+    var_4 = level.player isonladder();
 
-    if(var4 && !var3) {
+    if(var_4 && !var_3) {
       level thread scripts\engine\sp\utility::dof_enable_autofocus(10, 4, 2, undefined);
-    } else if(!var4 && var3) {
-      var2 scripts\engine\sp\utility::dof_enable_autofocus(2, 10, undefined, undefined, "tag_eye", undefined, 1);
+    } else if(!var_4 && var_3) {
+      var_2 scripts\engine\sp\utility::dof_enable_autofocus(2, 10, undefined, undefined, "tag_eye", undefined, 1);
     }
 
-    var3 = var4;
+    var_3 = var_4;
     waitframe();
   }
 }
 
-function lighting_disguise(var0) {
+function lighting_disguise(var_0) {
   setsaveddvar("MPOKKOPMTN", "64 128 256 512");
-  var0 scripts\engine\sp\utility::dof_enable_autofocus(2, 9, undefined, undefined, "tag_eye", undefined, 1);
+  var_0 scripts\engine\sp\utility::dof_enable_autofocus(2, 9, undefined, undefined, "tag_eye", undefined, 1);
   thread lerp_value_up(level.lt_tunnel_omni, 0.03, 0, 1);
   thread lerp_value_up(level.lt_room, 0.12, 0.005, 0.2);
   thread lerp_value_up(level.lt_wall, 0, 0.006, 0.5);
   wait 6.2;
-  var1 = 1.2;
-  var2 = 4;
-  var3 = 2;
-  var4 = 0.2;
-  var5 = 0.01;
-  var6 = 0.7;
-  var7 = 0.7;
-  var8 = 0.25;
-  var7 = 0.7;
-  thread lerp_value_up(level.lt_start_key, 0, var5, var1);
-  thread lerp_value_up(level.lt_start_fill, 0, var6, var1);
-  thread lerp_value_up(level.lt_fill_farah, 0, var8, var1);
+  var_1 = 1.2;
+  var_2 = 4;
+  var_3 = 2;
+  var_4 = 0.2;
+  var_5 = 0.01;
+  var_6 = 0.7;
+  var_7 = 0.7;
+  var_8 = 0.25;
+  var_7 = 0.7;
+  thread lerp_value_up(level.lt_start_key, 0, var_5, var_1);
+  thread lerp_value_up(level.lt_start_fill, 0, var_6, var_1);
+  thread lerp_value_up(level.lt_fill_farah, 0, var_8, var_1);
   wait 3.7;
-  thread lerp_value_up(level.ls_sunfill, 0, var7, 2.5);
+  thread lerp_value_up(level.ls_sunfill, 0, var_7, 2.5);
   thread lerp_value_up(level.lt_wall, 0.009, 0, 0.5);
   wait 1.5;
-  thread lerp_value_up(level.lt_start_fill, var6, 0, 1);
-  thread lerp_value_up(level.lt_fill_farah, var8, 0, 1);
+  thread lerp_value_up(level.lt_start_fill, var_6, 0, 1);
+  thread lerp_value_up(level.lt_fill_farah, var_8, 0, 1);
   wait 1;
   thread lerp_value_up(level.lt_windowfill, 0, 0.25, 1);
   wait 0.7;
-  thread lerp_value_up(level.lt_start_key, var5, 0, 1);
+  thread lerp_value_up(level.lt_start_key, var_5, 0, 1);
   wait 1.2;
   thread lerp_value_up(level.lt_room, 0.005, 0.12, 0.1);
 }
 
 function lighting_holster() {
-  var0 = 2;
+  var_0 = 2;
   setsaveddvar("MPOKKOPMTN", "128 256 512 1024");
   setsaveddvar("NLOTLQMORR", "0.999");
   wait 0.8;
-  thread lerp_value_up(level.ls_sunfill2, 0, var0, 2);
+  thread lerp_value_up(level.ls_sunfill2, 0, var_0, 2);
   wait 2;
   setsaveddvar("NLOTLQMORR", "0.9");
 }
@@ -184,48 +184,48 @@ function lighting_hero_leave() {
   setsaveddvar("MQRQQONQSL", 0);
   wait 0.8;
   thread lerp_value_up(level.lt_ceiling, 5, 0, 0.9);
-  var0 = 1.5;
-  var1 = 0.1;
-  var2 = 0.004;
-  var3 = 0.01;
-  var4 = 0.0009;
-  var5 = 0.05;
-  var6 = 0.03;
-  var7 = 0.65;
-  var8 = scripts\sp\maps\safehouse\safehouse::level_getfarah();
-  var8 scripts\engine\sp\utility::dof_enable_autofocus(2, 9, undefined, undefined, "tag_eye", undefined, 1);
+  var_0 = 1.5;
+  var_1 = 0.1;
+  var_2 = 0.004;
+  var_3 = 0.01;
+  var_4 = 0.0009;
+  var_5 = 0.05;
+  var_6 = 0.03;
+  var_7 = 0.65;
+  var_8 = scripts\sp\maps\safehouse\safehouse::level_getfarah();
+  var_8 scripts\engine\sp\utility::dof_enable_autofocus(2, 9, undefined, undefined, "tag_eye", undefined, 1);
   visionsetnaked("safehouse_room_disguise", 1);
   thread lerp_value_up(level.ls_sunfill, 0.7, 0, 2);
   thread lerp_value_up(level.ls_sunfill2, 0.7, 0, 2);
   setsaveddvar("MPOKKOPMTN", "64 128 256 512");
   wait 2.4;
   level.player modifybasefov(54, 3.5);
-  thread lerp_value_up(level.lt_end_rimvol, 0, var7, 10);
-  thread lerp_value_up(level.lt_end_fill2, 0, var3, var0);
-  thread lerp_value_up(level.lt_end_key, 0, var1, 0.8);
-  thread lerp_value_up(level.lt_end_fill3, 0, var4, var0);
-  thread lerp_value_up(level.lt_end_fill1, 0, var2, 1);
-  thread lerp_value_up(level.lt_end_rim1, 0, var6, 1);
+  thread lerp_value_up(level.lt_end_rimvol, 0, var_7, 10);
+  thread lerp_value_up(level.lt_end_fill2, 0, var_3, var_0);
+  thread lerp_value_up(level.lt_end_key, 0, var_1, 0.8);
+  thread lerp_value_up(level.lt_end_fill3, 0, var_4, var_0);
+  thread lerp_value_up(level.lt_end_fill1, 0, var_2, 1);
+  thread lerp_value_up(level.lt_end_rim1, 0, var_6, 1);
   wait 7.8;
   level.player modifybasefov(44, 5);
-  thread lerp_value_up(level.lt_end_fill1, var2, 0, 0.5);
+  thread lerp_value_up(level.lt_end_fill1, var_2, 0, 0.5);
 }
 
-function lerp_value_up(var0, var1, var2, var3) {
-  var4 = var1 - var0;
-  var5 = 0.02;
-  var6 = int(var2 / var5);
+function lerp_value_up(var_0, var_1, var_2, var_3) {
+  var_4 = var_1 - var_0;
+  var_5 = 0.02;
+  var_6 = int(var_2 / var_5);
 
-  if(var6 > 0) {
-    var7 = var4 / var6;
+  if(var_6 > 0) {
+    var_7 = var_4 / var_6;
 
-    while(var6) {
-      var0 = max(var0 + var7, 0);
-      var3 setlightintensity(var0);
-      wait var5;
-      var6--;
+    while(var_6) {
+      var_0 = max(var_0 + var_7, 0);
+      var_3 setlightintensity(var_0);
+      wait var_5;
+      var_6--;
     }
   }
 
-  var3 setlightintensity(var1);
+  var_3 setlightintensity(var_1);
 }

@@ -8,15 +8,15 @@ function event_init_entity() {
   event_entity_core_set_enabled(1);
 }
 
-function event_entity_core_set_enabled(var0) {
+function event_entity_core_set_enabled(var_0) {
   if(!isDefined(level.stealth.core_events)) {
     level.stealth.core_events = ["bulletwhizby", "explode", "footstep", "footstep_sprint", "footstep_walk", "grenade danger", "gunshot", "gunshot_teammate", "projectile_impact", "silenced_shot", "glass_destroyed"];
   }
 
-  jumpiffalse(var0) LOC_00000099;
+  jumpiffalse(var_0) LOC_00000099;
 
-  foreach(var2 in level.stealth.core_events) {
-    self addaieventlistener(var2);
+  foreach(var_2 in level.stealth.core_events) {
+    self addaieventlistener(var_2);
   }
 
   return;
@@ -57,30 +57,30 @@ function event_init_level() {
   event_severity_set("combat", "ally_killed");
 }
 
-function event_severity_compare(var0, var1) {
-  var2 = level.stealth.event_priority[var0] - level.stealth.event_priority[var1];
-  return var2;
+function event_severity_compare(var_0, var_1) {
+  var_2 = level.stealth.event_priority[var_0] - level.stealth.event_priority[var_1];
+  return var_2;
 }
 
-function event_severity_shift(var0, var1) {
-  var2 = level.stealth.event_priority[var0] + var1;
+function event_severity_shift(var_0, var_1) {
+  var_2 = level.stealth.event_priority[var_0] + var_1;
 
-  foreach(var4 in level.stealth.event_priority) {
-    if(var4 == var2) {
-      return var5;
+  foreach(var_4 in level.stealth.event_priority) {
+    if(var_4 == var_2) {
+      return var_5;
     }
   }
 
-  return var0;
+  return var_0;
 }
 
-function event_severity_set(var0, var1, var2, var3, var4) {
-  if(!isDefined(var2)) {
-    var2 = 0;
+function event_severity_set(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  if(!isDefined(var3)) {
-    var3 = 0;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
   if(!isDefined(level.stealth.event_severity)) {
@@ -99,26 +99,26 @@ function event_severity_set(var0, var1, var2, var3, var4) {
     level.stealth.event_escalation_to_combat = [];
   }
 
-  level.stealth.event_severity[var1] = var0;
-  level.stealth.event_escalation[var1] = var2;
-  level.stealth.event_escalation_scalars[var1] = var3;
-  level.stealth.event_escalation_to_combat[var1] = var4;
+  level.stealth.event_severity[var_1] = var_0;
+  level.stealth.event_escalation[var_1] = var_2;
+  level.stealth.event_escalation_scalars[var_1] = var_3;
+  level.stealth.event_escalation_to_combat[var_1] = var_4;
 }
 
-function event_severity_get(var0) {
-  return level.stealth.event_severity[var0];
+function event_severity_get(var_0) {
+  return level.stealth.event_severity[var_0];
 }
 
-function event_escalation_get(var0) {
-  return level.stealth.event_escalation[var0];
+function event_escalation_get(var_0) {
+  return level.stealth.event_escalation[var_0];
 }
 
-function event_escalation_scalar_get(var0) {
-  return level.stealth.event_escalation_scalars[var0];
+function event_escalation_scalar_get(var_0) {
+  return level.stealth.event_escalation_scalars[var_0];
 }
 
-function event_escalation_to_combat_get(var0) {
-  return level.stealth.event_escalation_to_combat[var0];
+function event_escalation_to_combat_get(var_0) {
+  return level.stealth.event_escalation_to_combat[var_0];
 }
 
 function event_escalation_clear() {
@@ -133,7 +133,7 @@ function event_listener_thread() {
 
   for(;;) {
     scripts\engine\utility::ent_flag_wait("stealth_enabled");
-    self waittill("ai_events", var0);
+    self waittill("ai_events", var_0);
 
     if(!scripts\engine\utility::ent_flag("stealth_enabled")) {
       continue;
@@ -143,71 +143,71 @@ function event_listener_thread() {
       continue;
     }
 
-    foreach(var2 in var0) {
-      if(!isDefined(var2.entity)) {
+    foreach(var_2 in var_0) {
+      if(!isDefined(var_2.entity)) {
         continue;
       }
 
-      if(issentient(var2.entity) && (var2.entity.ignoreme || var2.entity.notarget)) {
+      if(issentient(var_2.entity) && (var_2.entity.ignoreme || var_2.entity.notarget)) {
         continue;
       }
 
-      if(isDefined(var2.entity.ownervehicle)) {
-        if(var2.entity.ownervehicle.vehicletype == "capital_ship") {
+      if(isDefined(var_2.entity.ownervehicle)) {
+        if(var_2.entity.ownervehicle.vehicletype == "capital_ship") {
           continue;
         }
       }
 
-      var2.typeorig = var2.type;
-      var2.receiver = self;
-      var3 = event_severity_get(var2.type);
-      var4 = undefined;
-      var5 = undefined;
-      var6 = undefined;
+      var_2.typeorig = var_2.type;
+      var_2.receiver = self;
+      var_3 = event_severity_get(var_2.type);
+      var_4 = undefined;
+      var_5 = undefined;
+      var_6 = undefined;
 
-      if(isDefined(var3)) {
-        if(!isDefined(self.disableescalation) && var3 != "combat") {
-          var4 = event_escalation_get(var2.type);
-          var5 = event_escalation_scalar_get(var2.type);
-          var6 = event_escalation_to_combat_get(var2.type);
+      if(isDefined(var_3)) {
+        if(!isDefined(self.disableescalation) && var_3 != "combat") {
+          var_4 = event_escalation_get(var_2.type);
+          var_5 = event_escalation_scalar_get(var_2.type);
+          var_6 = event_escalation_to_combat_get(var_2.type);
 
-          if(var4 > 0) {
+          if(var_4 > 0) {
             if(!isDefined(self.stealth.event_escalation_count)) {
               self.stealth.event_escalation_count = [];
             }
 
-            if(!isDefined(self.stealth.event_escalation_count[var2.type])) {
-              self.stealth.event_escalation_count[var2.type] = 0;
+            if(!isDefined(self.stealth.event_escalation_count[var_2.type])) {
+              self.stealth.event_escalation_count[var_2.type] = 0;
             }
 
-            if(isDefined(var6) && self.stealth.event_escalation_count[var2.type] + 1 >= var6) {
-              var3 = event_severity_shift(var3, 2);
-            } else if(self.stealth.event_escalation_count[var2.type] + 1 >= var4) {
-              var3 = event_severity_shift(var3, 1);
-            } else if(self.stealth.event_escalation_scalar + var5 >= 1) {
-              var3 = event_severity_shift(var3, 1);
+            if(isDefined(var_6) && self.stealth.event_escalation_count[var_2.type] + 1 >= var_6) {
+              var_3 = event_severity_shift(var_3, 2);
+            } else if(self.stealth.event_escalation_count[var_2.type] + 1 >= var_4) {
+              var_3 = event_severity_shift(var_3, 1);
+            } else if(self.stealth.event_escalation_scalar + var_5 >= 1) {
+              var_3 = event_severity_shift(var_3, 1);
             }
           }
         }
 
-        var2.type = var3;
+        var_2.type = var_3;
       }
 
-      var7 = scripts\stealth\callbacks::stealth_call_thread(var2.type, var2);
+      var_7 = scripts\stealth\callbacks::stealth_call_thread(var_2.type, var_2);
 
-      if(istrue(var7) && isDefined(var4) && var2.type != "combat") {
-        if(var4 > 0) {
-          self.stealth.event_escalation_count[var2.typeorig]++;
+      if(istrue(var_7) && isDefined(var_4) && var_2.type != "combat") {
+        if(var_4 > 0) {
+          self.stealth.event_escalation_count[var_2.typeorig]++;
         }
 
-        self.stealth.event_escalation_scalar += var5;
+        self.stealth.event_escalation_scalar += var_5;
       }
     }
   }
 }
 
-function entity_is_approved(var0) {
-  switch (var0.classname) {
+function entity_is_approved(var_0) {
+  switch (var_0.classname) {
     case "script_vehicle_blackhornet":
       return 1;
     default:
@@ -215,197 +215,197 @@ function entity_is_approved(var0) {
   }
 }
 
-function event_broadcast_axis(var0, var1, var2, var3, var4) {
-  var5 = getaiunittypearray("bad_guys", "all");
-  var6 = squared(var3);
-  var7 = squared(var4);
-  var8 = self.team;
+function event_broadcast_axis(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = getaiunittypearray("bad_guys", "all");
+  var_6 = squared(var_3);
+  var_7 = squared(var_4);
+  var_8 = self.team;
 
-  if(!isDefined(var8)) {
-    var8 = self.agentteam;
+  if(!isDefined(var_8)) {
+    var_8 = self.agentteam;
   }
 
-  foreach(var10 in var5) {
-    if(!isalive(var10)) {
+  foreach(var_10 in var_5) {
+    if(!isalive(var_10)) {
       continue;
     }
 
-    if(var10 == self) {
+    if(var_10 == self) {
       continue;
     }
 
-    if(var10.team != var8) {
+    if(var_10.team != var_8) {
       continue;
     }
 
-    if(!isDefined(var10.stealth)) {
+    if(!isDefined(var_10.stealth)) {
       continue;
     }
 
-    var11 = 0;
-    var12 = distancesquared(var10.origin, self.origin);
+    var_11 = 0;
+    var_12 = distancesquared(var_10.origin, self.origin);
 
-    if(var12 <= var6) {
-      var11 = self hastacvis(var10);
+    if(var_12 <= var_6) {
+      var_11 = self hastacvis(var_10);
     }
 
-    if(!var11 && var12 <= var7) {
-      if(var10 scripts\stealth\utility::is_visible(self) || var10 scripts\stealth\utility::is_visible(var2)) {
-        var11 = 1;
+    if(!var_11 && var_12 <= var_7) {
+      if(var_10 scripts\stealth\utility::is_visible(self) || var_10 scripts\stealth\utility::is_visible(var_2)) {
+        var_11 = 1;
       }
     }
 
-    if(var10[[var10.fnisinstealthcombat]]()) {
-      if(var11) {
-        var10 getenemyinfo(var2);
+    if(var_10[[var_10.fnisinstealthcombat]]()) {
+      if(var_11) {
+        var_10 getenemyinfo(var_2);
       }
 
       continue;
     }
 
-    if(var11) {
-      if(var10 lastknowntime(var2) == 0) {
-        var10 aieventlistenerevent(var0, var2, self.origin);
+    if(var_11) {
+      if(var_10 lastknowntime(var_2) == 0) {
+        var_10 aieventlistenerevent(var_0, var_2, self.origin);
       } else {
-        var10 aieventlistenerevent(var0, var2, var2.origin);
+        var_10 aieventlistenerevent(var_0, var_2, var_2.origin);
       }
 
       continue;
     }
 
-    if(var10 canseeperipheral(self)) {
-      var10 aieventlistenerevent(var1, var2, self.origin);
+    if(var_10 canseeperipheral(self)) {
+      var_10 aieventlistenerevent(var_1, var_2, self.origin);
     }
   }
 }
 
-function event_broadcast_generic(var0, var1, var2, var3) {
-  var4 = getaiunittypearray("bad_guys");
+function event_broadcast_generic(var_0, var_1, var_2, var_3) {
+  var_4 = getaiunittypearray("bad_guys");
 
-  if(!isDefined(var3)) {
-    var3 = level.player;
+  if(!isDefined(var_3)) {
+    var_3 = level.player;
   }
 
-  var5 = squared(var2);
+  var_5 = squared(var_2);
 
-  foreach(var7 in var4) {
-    if(!isalive(var7)) {
+  foreach(var_7 in var_4) {
+    if(!isalive(var_7)) {
       continue;
     }
 
-    if(!isDefined(var7.stealth)) {
+    if(!isDefined(var_7.stealth)) {
       continue;
     }
 
-    if(distancesquared(var7.origin, var1) <= var5) {
-      var7 aieventlistenerevent(var0, var3, var1);
+    if(distancesquared(var_7.origin, var_1) <= var_5) {
+      var_7 aieventlistenerevent(var_0, var_3, var_1);
     }
-  }
-}
-
-function event_broadcast_axis_by_tacsight(var0, var1, var2, var3, var4, var5, var6) {
-  var7 = getaiunittypearray("bad_guys", "all");
-  var8 = var3 * var3;
-
-  if(!isDefined(var4)) {
-    var4 = 1;
-  }
-
-  var9 = undefined;
-
-  if(isDefined(var6)) {
-    var9 = var6 * var6;
-  }
-
-  if(!isDefined(var5)) {
-    var5 = var2;
-  }
-
-  foreach(var11 in var7) {
-    if(!isalive(var11)) {
-      continue;
-    }
-
-    if(!isDefined(var11.stealth)) {
-      continue;
-    }
-
-    var12 = distancesquared(var11.origin, var2);
-
-    if(var12 > var8) {
-      continue;
-    }
-
-    var13 = var4;
-
-    if(var4 && isDefined(var9) && var12 <= var9) {
-      var13 = 0;
-    }
-
-    if(!var11 hastacvis(var5, var13)) {
-      continue;
-    }
-
-    var11 aieventlistenerevent(var0, var1, var2);
   }
 }
 
-function event_broadcast_axis_by_sight(var0, var1, var2, var3, var4, var5, var6) {
-  thread event_broadcast_axis_by_sight_thread(var0, var1, var2, var3, var4, var5, var6);
+function event_broadcast_axis_by_tacsight(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_7 = getaiunittypearray("bad_guys", "all");
+  var_8 = var_3 * var_3;
+
+  if(!isDefined(var_4)) {
+    var_4 = 1;
+  }
+
+  var_9 = undefined;
+
+  if(isDefined(var_6)) {
+    var_9 = var_6 * var_6;
+  }
+
+  if(!isDefined(var_5)) {
+    var_5 = var_2;
+  }
+
+  foreach(var_11 in var_7) {
+    if(!isalive(var_11)) {
+      continue;
+    }
+
+    if(!isDefined(var_11.stealth)) {
+      continue;
+    }
+
+    var_12 = distancesquared(var_11.origin, var_2);
+
+    if(var_12 > var_8) {
+      continue;
+    }
+
+    var_13 = var_4;
+
+    if(var_4 && isDefined(var_9) && var_12 <= var_9) {
+      var_13 = 0;
+    }
+
+    if(!var_11 hastacvis(var_5, var_13)) {
+      continue;
+    }
+
+    var_11 aieventlistenerevent(var_0, var_1, var_2);
+  }
 }
 
-function event_broadcast_axis_by_sight_thread(var0, var1, var2, var3, var4, var5, var6) {
-  var7 = getaiunittypearray("bad_guys", "all");
-  var8 = var3 * var3;
+function event_broadcast_axis_by_sight(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  thread event_broadcast_axis_by_sight_thread(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
+}
 
-  if(!isDefined(var4)) {
-    var4 = 1;
+function event_broadcast_axis_by_sight_thread(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_7 = getaiunittypearray("bad_guys", "all");
+  var_8 = var_3 * var_3;
+
+  if(!isDefined(var_4)) {
+    var_4 = 1;
   }
 
-  if(!isDefined(var5)) {
-    var5 = var2;
+  if(!isDefined(var_5)) {
+    var_5 = var_2;
   }
 
-  var9 = 3;
-  var10 = 0;
+  var_9 = 3;
+  var_10 = 0;
 
-  foreach(var12 in var7) {
-    if(!isalive(var12)) {
+  foreach(var_12 in var_7) {
+    if(!isalive(var_12)) {
       continue;
     }
 
-    if(!isDefined(var12.stealth)) {
+    if(!isDefined(var_12.stealth)) {
       continue;
     }
 
-    var13 = distancesquared(var12.origin, var2);
+    var_13 = distancesquared(var_12.origin, var_2);
 
-    if(var13 > var8) {
+    if(var_13 > var_8) {
       continue;
     }
 
-    if(isDefined(var6) && var13 <= var6 * var6) {
-      var12 aieventlistenerevent(var0, var1, var2);
+    if(isDefined(var_6) && var_13 <= var_6 * var_6) {
+      var_12 aieventlistenerevent(var_0, var_1, var_2);
       continue;
     }
 
-    if(!var12 hastacvis(var5, var4)) {
-      if(var4 && !var12 aipointinfov(var2)) {
+    if(!var_12 hastacvis(var_5, var_4)) {
+      if(var_4 && !var_12 aipointinfov(var_2)) {
         continue;
       }
 
-      var10++;
+      var_10++;
 
-      if(var10 > var9) {
+      if(var_10 > var_9) {
         waitframe();
-        var10 = 0;
+        var_10 = 0;
       }
 
-      if(!sighttracepassed(var12 getEye(), var2, 0, var1)) {
+      if(!sighttracepassed(var_12 getEye(), var_2, 0, var_1)) {
         continue;
       }
     }
 
-    var12 aieventlistenerevent(var0, var1, var2);
+    var_12 aieventlistenerevent(var_0, var_1, var_2);
   }
 }

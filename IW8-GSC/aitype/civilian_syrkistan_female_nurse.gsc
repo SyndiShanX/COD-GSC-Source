@@ -28,10 +28,10 @@ function main() {
   self.usescriptedweapon = 0;
   self.scriptedweaponclassprimary = "none";
   self.weapon = isundefinedweapon();
-  var0 = undefined;
-  var1 = ["civ_syrkistan_female_nurse_mask", "civ_syrkistan_female_nurse_nomask"];
+  var_0 = undefined;
+  var_1 = ["civ_syrkistan_female_nurse_mask", "civ_syrkistan_female_nurse_nomask"];
 
-  switch (scripts\code\character::get_random_character(2, var0, var1)) {
+  switch (scripts\code\character::get_random_character(2, var_0, var_1)) {
     case 0:
       character\civ_syrkistan_female_nurse_mask::main();
       break;
@@ -45,7 +45,7 @@ function spawner() {
   self setspawnerteam("neutral");
 }
 
-function precache(var0) {
+function precache(var_0) {
   character\civ_syrkistan_female_nurse_mask::precache();
   character\civ_syrkistan_female_nurse_nomask::precache();
   scripts\aitypes\bt_util::init();

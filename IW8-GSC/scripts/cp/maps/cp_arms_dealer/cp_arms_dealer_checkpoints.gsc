@@ -9,18 +9,18 @@ function ref_131ed() {
 }
 
 function getplatformweaponrankxpmultiplier() {
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, scripts\mp\brclientmatchdata::getnearbyaliveplayer("apce_p1", (-16234.3, 69.74, -319.609), (0, 360, 0)));
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, scripts\mp\brclientmatchdata::getnearbyaliveplayer("apce_p1", (-16234.3, 69.74, -319.609), (0, 360, 0)));
 }
 
 function getnexthelimodule() {
-  var0 = scripts\mp\brclientmatchdata::getminigundamagescale("paladin", (-18402.5, 1317.09, -147.93), (0, 35.649, 0));
-  var1 = scripts\mp\brclientmatchdata::getmaxoutofboundsbrtime("apce_p1", (-16072, 64, -320.674), (0, 30, 0));
-  var2 = scripts\mp\brclientmatchdata::getminigundamagescale("apce_p1", (-15932, 144, -320.674), (0, 200, 0));
-  var3 = scripts\mp\brclientmatchdata::getmaxoutofboundsbrtime("arms_race_p1", (-2924.43, 10589.4, 43.8749), (0, 95.9991, 0));
-  var4 = scripts\mp\brclientmatchdata::getminigundamagescale("arms_race_p1", (-3096.43, 10571.4, 43), (0, 107, 0));
-  var5 = scripts\mp\brclientmatchdata::getminigundamagescale("crosswind", (-18692.5, 8453.77, -272.01), (0, 180, 0));
-  return [var0, var1, var2, var3, var4, var5];
+  var_0 = scripts\mp\brclientmatchdata::getminigundamagescale("paladin", (-18402.5, 1317.09, -147.93), (0, 35.649, 0));
+  var_1 = scripts\mp\brclientmatchdata::getmaxoutofboundsbrtime("apce_p1", (-16072, 64, -320.674), (0, 30, 0));
+  var_2 = scripts\mp\brclientmatchdata::getminigundamagescale("apce_p1", (-15932, 144, -320.674), (0, 200, 0));
+  var_3 = scripts\mp\brclientmatchdata::getmaxoutofboundsbrtime("arms_race_p1", (-2924.43, 10589.4, 43.8749), (0, 95.9991, 0));
+  var_4 = scripts\mp\brclientmatchdata::getminigundamagescale("arms_race_p1", (-3096.43, 10571.4, 43), (0, 107, 0));
+  var_5 = scripts\mp\brclientmatchdata::getminigundamagescale("crosswind", (-18692.5, 8453.77, -272.01), (0, 180, 0));
+  return [var_0, var_1, var_2, var_3, var_4, var_5];
 }
 
 function c4_obj_and_progress() {

@@ -13,21 +13,21 @@ function registerquarryobjectives() {
 }
 
 function initobjspawners() {
-  var0 = &scripts\cp\cp_modular_spawning::registerambientgroup;
-  [[var0]]("quarry_def_spawners1", 10, 10, 10, 0.5, &wait_for_all_group_dead, "quarry_def_1", undefined, &getnextquarrydefensespawnmodule, undefined);
-  [[var0]]("quarry_def_spawners2", 10, 10, 10, 0.5, &wait_for_all_group_dead, "quarry_def_2", undefined, &getnextquarrydefensespawnmodule, undefined);
-  [[var0]]("quarry_def_spawners3", 10, 10, 10, 0.5, &wait_for_all_group_dead, "quarry_def_3", undefined, &getnextquarrydefensespawnmodule, undefined);
+  var_0 = &scripts\cp\cp_modular_spawning::registerambientgroup;
+  [[var_0]]("quarry_def_spawners1", 10, 10, 10, 0.5, &wait_for_all_group_dead, "quarry_def_1", undefined, &getnextquarrydefensespawnmodule, undefined);
+  [[var_0]]("quarry_def_spawners2", 10, 10, 10, 0.5, &wait_for_all_group_dead, "quarry_def_2", undefined, &getnextquarrydefensespawnmodule, undefined);
+  [[var_0]]("quarry_def_spawners3", 10, 10, 10, 0.5, &wait_for_all_group_dead, "quarry_def_3", undefined, &getnextquarrydefensespawnmodule, undefined);
 }
 
-function waitforallplayersnearpoint(var0, var1) {
-  var2 = 0;
+function waitforallplayersnearpoint(var_0, var_1) {
+  var_2 = 0;
 
-  while(!var2) {
-    var2 = 1;
+  while(!var_2) {
+    var_2 = 1;
 
-    foreach(var4 in level.players) {
-      if(distance(var4.origin, var0) > 100) {
-        var2 = 0;
+    foreach(var_4 in level.players) {
+      if(distance(var_4.origin, var_0) > 100) {
+        var_2 = 0;
       }
     }
 
@@ -35,8 +35,8 @@ function waitforallplayersnearpoint(var0, var1) {
   }
 }
 
-function startquarrydef1(var0, var1) {
-  waitforallplayersnearpoint(var0.iconpos[0], 100);
+function startquarrydef1(var_0, var_1) {
+  waitforallplayersnearpoint(var_0.iconpos[0], 100);
   level.activequarrydefense = 1;
   iprintlnbold("Defend the quarry point");
   thread scripts\cp\cp_modular_spawning::run_spawn_module("quarry_def_spawners1");
@@ -44,8 +44,8 @@ function startquarrydef1(var0, var1) {
   level.activequarrydefense = undefined;
 }
 
-function startquarrydef2(var0, var1) {
-  waitforallplayersnearpoint(var0.iconpos[0], 100);
+function startquarrydef2(var_0, var_1) {
+  waitforallplayersnearpoint(var_0.iconpos[0], 100);
   level.activequarrydefense = 2;
   iprintlnbold("Defend the quarry point");
   thread scripts\cp\cp_modular_spawning::run_spawn_module("quarry_def_spawners2");
@@ -53,8 +53,8 @@ function startquarrydef2(var0, var1) {
   level.activequarrydefense = undefined;
 }
 
-function startquarrydef3(var0, var1) {
-  waitforallplayersnearpoint(var0.iconpos[0], 100);
+function startquarrydef3(var_0, var_1) {
+  waitforallplayersnearpoint(var_0.iconpos[0], 100);
   level.activequarrydefense = 3;
   iprintlnbold("Defend the quarry point");
   thread scripts\cp\cp_modular_spawning::run_spawn_module("quarry_def_spawners3");
@@ -62,36 +62,36 @@ function startquarrydef3(var0, var1) {
   level.activequarrydefense = undefined;
 }
 
-function getnextquarrydefensespawnmodule(var0) {
+function getnextquarrydefensespawnmodule(var_0) {
   if(!isDefined(level.activequarrydefense)) {
     return;
   }
 
-  var1 = undefined;
+  var_1 = undefined;
 
   switch (level.activequarrydefense) {
     case 1:
-      var1 = "quarry_def_spawners1";
+      var_1 = "quarry_def_spawners1";
       break;
     case 2:
-      var1 = "quarry_def_spawners2";
+      var_1 = "quarry_def_spawners2";
       break;
     case 3:
-      var1 = "quarry_def_spawners3";
+      var_1 = "quarry_def_spawners3";
       break;
     default:
-      var1 = undefined;
+      var_1 = undefined;
       break;
   }
 
-  return var1;
+  return var_1;
 }
 
-function wait_for_all_group_dead(var0, var1, var2, var3) {
-  if(isDefined(var1)) {
-    var0 scripts\engine\utility::ref_143b9(var1, "group_spawning_completed");
+function wait_for_all_group_dead(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_1)) {
+    var_0 scripts\engine\utility::ref_143b9(var_1, "group_spawning_completed");
     return;
   }
 
-  var0 waittill("group_spawning_completed");
+  var_0 waittill("group_spawning_completed");
 }

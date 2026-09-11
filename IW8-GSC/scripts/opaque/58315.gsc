@@ -16,59 +16,59 @@ function bot_allowed_to_try_last_loadout() {
 
 function bot_affirm() {
   level endon("game_ended");
-  var0 = self;
+  var_0 = self;
 
   for(;;) {
-    var0 waittill("trigger", var1);
+    var_0 waittill("trigger", var_1);
 
-    if(isagent(var1)) {
+    if(isagent(var_1)) {
       continue;
     }
 
     break;
   }
 
-  var2 = scripts\engine\utility::getStructArray(var0.target, "targetname");
-  var3 = [];
+  var_2 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
+  var_3 = [];
 
-  foreach(var5 in var2) {
+  foreach(var_5 in var_2) {
       if(level.are_all_hvts_eliminated.size >= level.spawnziptie) {
         break;
       }
 
-      if(getdvarint("scr_br_ai_parachuteSpawn", 0) == 1 && istrue(var5.„ù¸ ? ¯ã + Ã† fû› û {
+      if(getdvarint("scr_br_ai_parachuteSpawn", 0) == 1 && istrue(var_5.„ù¸ ? ¯ã + Ã† fû› û {
             NëKpÐã - {
             )) {
-            var6 = thread _testing_ending::spawnnewparachuteagent(var5.origin, var5.angles, 1, "actor_enemy_lw_br_german_african");
+            var_6 = thread _testing_ending::spawnnewparachuteagent(var_5.origin, var_5.angles, 1, "actor_enemy_lw_br_german_african");
           } else {
-            var6 = thread _testing_ending::spawnnewagent(var5.origin, var5.angles, 1, "actor_enemy_lw_br_german_african");
+            var_6 = thread _testing_ending::spawnnewagent(var_5.origin, var_5.angles, 1, "actor_enemy_lw_br_german_african");
           }
 
-          level.are_all_hvts_eliminated = scripts\engine\utility::array_add(level.are_all_hvts_eliminated, var6);
+          level.are_all_hvts_eliminated = scripts\engine\utility::array_add(level.are_all_hvts_eliminated, var_6);
 
-          if(isDefined(var5.script_noteworthy)) {
-            var6.script_noteworthy = var5.script_noteworthy;
+          if(isDefined(var_5.script_noteworthy)) {
+            var_6.script_noteworthy = var_5.script_noteworthy;
           }
 
-          bot_capture_koth_zone(var6); bomb_detonator_bomb_type(var6); var3 = scripts\engine\utility::array_add(var3, var6); var7 = getEnt(var5.target, "targetname");
+          bot_capture_koth_zone(var_6); bomb_detonator_bomb_type(var_6); var_3 = scripts\engine\utility::array_add(var_3, var_6); var_7 = getEnt(var_5.target, "targetname");
 
-          if(!isDefined(var7)) {
+          if(!isDefined(var_7)) {
             continue;
           }
 
-          if(isDefined(var6.script_noteworthy) && var6.script_noteworthy == "delay_goal_volume") {
-            blueprintcreatingteam(var6, var7);
+          if(isDefined(var_6.script_noteworthy) && var_6.script_noteworthy == "delay_goal_volume") {
+            blueprintcreatingteam(var_6, var_7);
           } else {
-            var6 setgoalvolumeauto(var7);
+            var_6 setgoalvolumeauto(var_7);
 
-            if(isPlayer(var1)) {
-              var6 agentsetfavoriteenemy(var1);
-              var6 getenemyinfo(var1);
+            if(isPlayer(var_1)) {
+              var_6 agentsetfavoriteenemy(var_1);
+              var_6 getenemyinfo(var_1);
             }
           }
 
           if(isDefined(level.ref_11ffd) && isbuiltinfunction(level.ref_11ffd)) {
-            [[level.ref_11ffd]](var6, var0);
+            [[level.ref_11ffd]](var_6, var_0);
           }
         }
       }
@@ -94,7 +94,7 @@ function bot_affirm() {
         thread blueprint_maxpermatch();
       }
 
-      function blueprintcreatingteam(var0) {
+      function blueprintcreatingteam(var_0) {
         self endon("death");
         self endon("game_ended");
         self cleargoalvolume();
@@ -103,14 +103,14 @@ function bot_affirm() {
         thread bonus_target_domage();
         scripts\engine\utility::ref_143aa("bullet_whizby", "damage", "weapon_fired", "grenade danger", "timeout", "proximty_alert");
         self notify("alert");
-        self setgoalvolumeauto(var0);
+        self setgoalvolumeauto(var_0);
       }
 
-      function bot_cache_entrances_to_zones(var0) {
+      function bot_cache_entrances_to_zones(var_0) {
         self endon("death");
         self endon("game_ended");
         self endon("alert");
-        wait var0;
+        wait var_0;
         self notify("timeout");
       }
 
@@ -120,13 +120,13 @@ function bot_affirm() {
         self endon("alert");
 
         for(;;) {
-          var0 = scripts\mp\utility\player::getplayersinradius(self.origin, 1000);
+          var_0 = scripts\mp\utility\player::getplayersinradius(self.origin, 1000);
 
-          if(var0.size > 0) {
+          if(var_0.size > 0) {
             self notify("proximty_alert");
-            var1 = scripts\engine\utility::random(var0);
-            self agentsetfavoriteenemy(var1);
-            self getenemyinfo(var1);
+            var_1 = scripts\engine\utility::random(var_0);
+            self agentsetfavoriteenemy(var_1);
+            self getenemyinfo(var_1);
             break;
           }
 
@@ -136,10 +136,10 @@ function bot_affirm() {
 
       function bomb_detonator_bomb_type() {
         if(!ispointonnavmesh(self.origin, self, 1)) {
-          var0 = getclosestpointonnavmesh(self.origin, self);
+          var_0 = getclosestpointonnavmesh(self.origin, self);
 
-          if(isDefined(var0)) {
-            self forceteleport(var0, self.angles);
+          if(isDefined(var_0)) {
+            self forceteleport(var_0, self.angles);
             return;
           }
 
@@ -148,7 +148,7 @@ function bot_affirm() {
       }
 
       function boss_wave() {
-        var0 = [];
+        var_0 = [];
         GscBinSkip0(0x2e, "AI_frag_grenade_mp", randomintrange(3000, 5000));
       }
 
@@ -156,31 +156,31 @@ function bot_affirm() {
         self endon("death");
 
         for(;;) {
-          self waittill("grenade_fire", var0, var1, var2, var3);
+          self waittill("grenade_fire", var_0, var_1, var_2, var_3);
 
-          if(!scripts\mp\utility\weapon::grenadethrown(var0)) {
+          if(!scripts\mp\utility\weapon::grenadethrown(var_0)) {
             continue;
           }
 
-          scripts\mp\weapons::grenadeinitialize(var0, var1, var2, var3);
+          scripts\mp\weapons::grenadeinitialize(var_0, var_1, var_2, var_3);
           self notify("grenade_throw");
 
-          if(!isDefined(var0)) {
+          if(!isDefined(var_0)) {
             return;
           }
 
-          if(!isDefined(var0.weapon_name)) {
+          if(!isDefined(var_0.weapon_name)) {
             return;
           }
 
-          var0.spawnpos = var0.origin;
+          var_0.spawnpos = var_0.origin;
 
-          switch (var0.weapon_name) {
+          switch (var_0.weapon_name) {
             case "molotov_mp":
-              thread scripts\mp\equipment\molotov::molotov_used(var0);
+              thread scripts\mp\equipment\molotov::molotov_used(var_0);
               break;
             case "gas_grenade_mp":
-              thread scripts\mp\equipment\gas_grenade::gas_used(var0);
+              thread scripts\mp\equipment\gas_grenade::gas_used(var_0);
               break;
           }
         }
@@ -202,28 +202,28 @@ function bot_affirm() {
 
       function blueprint_maxpermatch() {
         self endon("game_ended");
-        self waittill("death", var0);
+        self waittill("death", var_0);
         level.are_all_hvts_eliminated = scripts\engine\utility::array_remove(level.are_all_hvts_eliminated, self);
 
-        if(isDefined(var0) && isPlayer(var0)) {
-          var1 = "kill";
-          var0 thread scripts\mp\rank::giverankxp(var1, 100);
-          var0 thread scripts\mp\rank::scoreeventpopup(var1);
+        if(isDefined(var_0) && isPlayer(var_0)) {
+          var_1 = "kill";
+          var_0 thread scripts\mp\rank::giverankxp(var_1, 100);
+          var_0 thread scripts\mp\rank::scoreeventpopup(var_1);
         }
 
-        var2 = spawnStruct();
-        var2.origin = self.origin;
-        var2.angles = self.angles;
-        var2.dropstruct = scripts\mp\gametypes\br_pickups::test_ai_anim();
-        var2.itemsdropped = 0;
-        var2.heightoffset = 0;
-        var2 scripts\mp\gametypes\br_lootcache::chooseandspawnitems(0, 1, "ammo");
-        var2.heightoffset += 3;
-        var2 scripts\mp\gametypes\br_lootcache::chooseandspawnitems(1, 1, "plunder");
-        var2.heightoffset += 3;
-        var3 = bonusobjectivescorecharge();
-        var4 = scripts\mp\gametypes\br_lootcache::ref_11a41(var3, var2.dropstruct, var2.origin, var2.angles, 0, 1, 0);
-        var2.heightoffset += 3;
+        var_2 = spawnStruct();
+        var_2.origin = self.origin;
+        var_2.angles = self.angles;
+        var_2.dropstruct = scripts\mp\gametypes\br_pickups::test_ai_anim();
+        var_2.itemsdropped = 0;
+        var_2.heightoffset = 0;
+        var_2 scripts\mp\gametypes\br_lootcache::chooseandspawnitems(0, 1, "ammo");
+        var_2.heightoffset += 3;
+        var_2 scripts\mp\gametypes\br_lootcache::chooseandspawnitems(1, 1, "plunder");
+        var_2.heightoffset += 3;
+        var_3 = bonusobjectivescorecharge();
+        var_4 = scripts\mp\gametypes\br_lootcache::ref_11a41(var_3, var_2.dropstruct, var_2.origin, var_2.angles, 0, 1, 0);
+        var_2.heightoffset += 3;
       }
 
       function bonusobjectivescorecharge() {
@@ -247,17 +247,17 @@ function bot_affirm() {
         level.arena_bot_out_of_ammo["brloot_offhand_decon_station"] = "brloot_offhand_decon_station";
       }
 
-      function next_drone_cd(var0, var1) {
-        var2 = var1 * var1;
+      function next_drone_cd(var_0, var_1) {
+        var_2 = var_1 * var_1;
 
-        foreach(var4 in level.are_all_hvts_eliminated) {
-          if(!isDefined(var4)) {
+        foreach(var_4 in level.are_all_hvts_eliminated) {
+          if(!isDefined(var_4)) {
             continue;
           }
 
-          if(distance2dsquared(var4.origin, var0) > var2) {
-            level.are_all_hvts_eliminated = scripts\engine\utility::array_remove(level.are_all_hvts_eliminated, var4);
-            var4 dodamage(var4.health, var4.origin, var4, undefined, "MOD_TRIGGER_HURT");
+          if(distance2dsquared(var_4.origin, var_0) > var_2) {
+            level.are_all_hvts_eliminated = scripts\engine\utility::array_remove(level.are_all_hvts_eliminated, var_4);
+            var_4 dodamage(var_4.health, var_4.origin, var_4, undefined, "MOD_TRIGGER_HURT");
           }
         }
       }

@@ -129,18 +129,18 @@ function displaycodes() {
   level.ref_13364 = 1;
 }
 
-function ref_1365d(var0) {
-  return istrue(var0.br_infilstarted) && scripts\mp\flags::gameflag("prematch_done");
+function ref_1365d(var_0) {
+  return istrue(var_0.br_infilstarted) && scripts\mp\flags::gameflag("prematch_done");
 }
 
-function ref_12691(var0) {
+function ref_12691(var_0) {
   return true;
 }
 
 function displaydelayedmissioncompletesplash() {
-  var0 = spawnStruct();
-  var0.weights = [];
-  level.votesys_update_time = var0;
+  var_0 = spawnStruct();
+  var_0.weights = [];
+  level.votesys_update_time = var_0;
   display_message_to_guilty_player("toma_strike", getdvarint("scr_kingslayer_kingkill_toma", 50));
   display_message_to_guilty_player("precision_airstrike", getdvarint("scr_kingslayer_kingkill_precision", 10));
   display_message_to_guilty_player("directional_uav", getdvarint("scr_kingslayer_kingkill_auav", 40));
@@ -200,39 +200,39 @@ function display_mission_failed_text() {
 function displaycodeindex() {}
 
 function touchdown_origin() {
-  foreach(var1 in level.teamnamelist) {
-    level.teamdata[var1]["teamTotalScore"] = 0;
-    level.teamdata[var1]["tokensTeamTotal"] = 0;
+  foreach(var_1 in level.teamnamelist) {
+    level.teamdata[var_1]["teamTotalScore"] = 0;
+    level.teamdata[var_1]["tokensTeamTotal"] = 0;
   }
 }
 
-function display_message_to_guilty_player(var0, var1) {
-  level.votesys_update_time.weights[var0] = var1;
+function display_message_to_guilty_player(var_0, var_1) {
+  level.votesys_update_time.weights[var_0] = var_1;
 }
 
-function display_relics_splash(var0) {
-  var1 = [];
-  var2 = 0;
+function display_relics_splash(var_0) {
+  var_1 = [];
+  var_2 = 0;
 
-  foreach(var5, var4 in level.votesys_update_time.weights) {
-    var2 += var4;
-    var1 = var2;
+  foreach(var_5, var_4 in level.votesys_update_time.weights) {
+    var_2 += var_4;
+    var_1 = var_2;
   }
 
-  var6 = randomint(var2);
-  var7 = undefined;
+  var_6 = randomint(var_2);
+  var_7 = undefined;
 
-  foreach(var2 in var1) {
-    if(var6 < var2) {
-      var7 = var5;
+  foreach(var_2 in var_1) {
+    if(var_6 < var_2) {
+      var_7 = var_5;
       break;
     }
   }
 
-  return var7;
+  return var_7;
 }
 
-function dmz_numteamswithplayers(var0) {
+function dmz_numteamswithplayers(var_0) {
   self endon("disconnect");
   self waittill("spawned_player");
   wait 1;
@@ -263,25 +263,25 @@ function dmz_bot_callback_func() {
 }
 
 function onstartgametype() {
-  foreach(var1 in level.teamnamelist) {
-    scripts\mp\utility\game::setobjectivetext(var1, &"OBJECTIVES/WAR");
+  foreach(var_1 in level.teamnamelist) {
+    scripts\mp\utility\game::setobjectivetext(var_1, &"OBJECTIVES/WAR");
 
     if(level.splitscreen) {
-      scripts\mp\utility\game::setobjectivescoretext(var1, &"OBJECTIVES/WAR");
+      scripts\mp\utility\game::setobjectivescoretext(var_1, &"OBJECTIVES/WAR");
     } else {
-      scripts\mp\utility\game::setobjectivescoretext(var1, &"OBJECTIVES/WAR_SCORE");
+      scripts\mp\utility\game::setobjectivescoretext(var_1, &"OBJECTIVES/WAR_SCORE");
     }
 
-    scripts\mp\utility\game::setobjectivehinttext(var1, &"OBJECTIVES/WAR_HINT");
+    scripts\mp\utility\game::setobjectivehinttext(var_1, &"OBJECTIVES/WAR_HINT");
   }
 }
 
-function ref_11c83(var0) {
+function ref_11c83(var_0) {
   thread playerrespawn();
   return true;
 }
 
-function ref_125f7(var0, var1) {
+function ref_125f7(var_0, var_1) {
   if(!scripts\mp\flags::gameflag("prematch_done")) {
     return false;
   }
@@ -332,26 +332,26 @@ function dist_to_line() {
   self.wait_until_player_is_near = 0;
 }
 
-function distort_fx(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10) {
+function distort_fx(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   if(level.waitandpause) {
-    if(isDefined(var1.waitandpause) && var1.waitandpause == 1) {
-      var3 *= level.waitandspawnprops;
+    if(isDefined(var_1.waitandpause) && var_1.waitandpause == 1) {
+      var_3 *= level.waitandspawnprops;
     }
 
-    if(isDefined(var2) && isDefined(var2.wait_until_player_is_near) && var2.wait_until_player_is_near == 1) {
-      switch (var4) {
+    if(isDefined(var_2) && isDefined(var_2.wait_until_player_is_near) && var_2.wait_until_player_is_near == 1) {
+      switch (var_4) {
         case "MOD_EXPLOSIVE":
         case "MOD_GRENADE_SPLASH":
         case "MOD_GRENADE":
         case "MOD_PROJECTILE_SPLASH":
-          var3 *= level.waitandgetnewspawnpoint;
+          var_3 *= level.waitandgetnewspawnpoint;
           break;
       }
     }
   }
 
-  var3 = scripts\mp\gametypes\br::brmodifyplayerdamage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10);
-  return var3;
+  var_3 = scripts\mp\gametypes\br::brmodifyplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+  return var_3;
 }
 
 function playerrespawn() {
@@ -366,75 +366,75 @@ function playerrespawn() {
     self endon("brWaitAndSpawnClientComplete");
   }
 
-  var0 = scripts\mp\utility\teams::getteamdata(self.team, "teamCount");
+  var_0 = scripts\mp\utility\teams::getteamdata(self.team, "teamCount");
 
-  if(!istrue(self.ref_13749) || var0 == 1) {
-    var1 = 1;
-    wait var1;
+  if(!istrue(self.ref_13749) || var_0 == 1) {
+    var_1 = 1;
+    wait var_1;
   }
 
-  var2 = level.checkpoint_objective_id;
-  var3 = getdvarfloat("scr_bmo_respawn_predict_hint_time", 5);
+  var_2 = level.checkpoint_objective_id;
+  var_3 = getdvarfloat("scr_bmo_respawn_predict_hint_time", 5);
 
-  if(var2 < var3) {
-    var2 = var3;
+  if(var_2 < var_3) {
+    var_2 = var_3;
   }
 
   if(level.ref_12cb4 != 0) {
-    var2 = 0;
+    var_2 = 0;
   }
 
-  var4 = getdvarfloat("scr_bmo_squad_wiped_stream_time", 3);
+  var_4 = getdvarfloat("scr_bmo_squad_wiped_stream_time", 3);
   scripts\engine\utility::ent_flag_init("playerRespawn_intermission_spawned");
   self.trial_moving_target_think = undefined;
   self.trial_other_team = undefined;
 
-  if(istrue(self.ref_13749) || var0 == 1) {
-    var5 = display_wave_num();
-    var6 = scripts\mp\gametypes\br_gulag::ref_1263e(var5);
-    thread patchfix(0, var0 > 1);
-    wait var4;
+  if(istrue(self.ref_13749) || var_0 == 1) {
+    var_5 = display_wave_num();
+    var_6 = scripts\mp\gametypes\br_gulag::ref_1263e(var_5);
+    thread patchfix(0, var_0 > 1);
+    wait var_4;
   } else if(!scripts\mp\gametypes\br_public::uniquelootitemid()) {
-    scripts\mp\utility\lower_message::setlowermessageomnvar(9, int(gettime() + var2 * 1000));
-    var7 = var2 - var3;
-    var8 = var2 - var7;
-    var9 = var2 - getdvarfloat("scr_bmo_respawn_intermission_time", 6);
-    thread patchfix(var9);
-    var10 = scripts\engine\utility::waittill_notify_or_timeout_return("squad_wipe_death", var7);
+    scripts\mp\utility\lower_message::setlowermessageomnvar(9, int(gettime() + var_2 * 1000));
+    var_7 = var_2 - var_3;
+    var_8 = var_2 - var_7;
+    var_9 = var_2 - getdvarfloat("scr_bmo_respawn_intermission_time", 6);
+    thread patchfix(var_9);
+    var_10 = scripts\engine\utility::waittill_notify_or_timeout_return("squad_wipe_death", var_7);
 
-    if(var10 == "squad_wipe_death") {
-      var5 = display_wave_num();
-      var6 = scripts\mp\gametypes\br_gulag::ref_1263e(var5);
+    if(var_10 == "squad_wipe_death") {
+      var_5 = display_wave_num();
+      var_6 = scripts\mp\gametypes\br_gulag::ref_1263e(var_5);
       thread patchfix(0, 1);
-      wait var4;
+      wait var_4;
     } else {
       thread ref_1400c();
-      var10 = scripts\engine\utility::waittill_notify_or_timeout_return("squad_wipe_death", var8);
+      var_10 = scripts\engine\utility::waittill_notify_or_timeout_return("squad_wipe_death", var_8);
 
-      if(var10 == "squad_wipe_death") {
-        var5 = display_wave_num();
-        var6 = scripts\mp\gametypes\br_gulag::ref_1263e(var5);
+      if(var_10 == "squad_wipe_death") {
+        var_5 = display_wave_num();
+        var_6 = scripts\mp\gametypes\br_gulag::ref_1263e(var_5);
         thread patchfix(0, 1);
-        wait var4;
+        wait var_4;
       }
     }
   }
 
   self notify("stop_updatePrestreamRespawn");
-  var5 = display_wave_num();
-  var6 = scripts\mp\gametypes\br_gulag::ref_1263e(var5);
+  var_5 = display_wave_num();
+  var_6 = scripts\mp\gametypes\br_gulag::ref_1263e(var_5);
 
   if(istrue(self.ref_13749)) {
     self.ref_13749 = 0;
 
-    if(var0 > 1 && !scripts\mp\gametypes\br_public::uniquelootitemid()) {
+    if(var_0 > 1 && !scripts\mp\gametypes\br_public::uniquelootitemid()) {
       scripts\mp\hud_message::showsplash("bm_your_squad_wiped");
     }
   }
 
-  if(!displaysplashtoplayersinradius(var5.origin)) {
-    var11 = display_timer(0, 0.7);
-    var5.origin = (var11[0], var11[1], var5.origin[2]);
+  if(!displaysplashtoplayersinradius(var_5.origin)) {
+    var_11 = display_timer(0, 0.7);
+    var_5.origin = (var_11[0], var_11[1], var_5.origin[2]);
   }
 
   scripts\engine\utility::ent_flag_clear("playerRespawn_intermission_spawned");
@@ -446,10 +446,10 @@ function playerrespawn() {
   scripts\mp\gametypes\br_pickups::initplayer();
 
   if(scripts\mp\gametypes\br_public::uniquelootitemid() && isDefined(level.ref_124e7)) {
-    var5 = scripts\engine\utility::getStruct(level.ref_124e7, "targetname");
+    var_5 = scripts\engine\utility::getStruct(level.ref_124e7, "targetname");
   }
 
-  scripts\mp\gametypes\br_gulag::gulagwinnerrespawn(1, undefined, var5, 1, var6, 1);
+  scripts\mp\gametypes\br_gulag::gulagwinnerrespawn(1, undefined, var_5, 1, var_6, 1);
   scripts\mp\gametypes\br::ref_13f21(self);
   level thread scripts\mp\battlechatter_mp::trysaylocalsound(self, "player_respawn");
   _calloutmarkerping_handleluinotify_added::ref_13133("ui_br_transition_type", 0);
@@ -462,8 +462,8 @@ function playerrespawn() {
 
   self setclientomnvar("ui_ctf_flag_carrier", 0);
 
-  foreach(var13 in level.ref_11a32) {
-    if(var13 == self) {
+  foreach(var_13 in level.ref_11a32) {
+    if(var_13 == self) {
       carriabletype();
       break;
     }
@@ -471,135 +471,135 @@ function playerrespawn() {
 }
 
 function display_wave_num() {
-  var0 = undefined;
-  var1 = undefined;
-  var2 = undefined;
-  var3 = 1;
+  var_0 = undefined;
+  var_1 = undefined;
+  var_2 = undefined;
+  var_3 = 1;
 
   if(isDefined(self.setspawnpoint)) {
-    var0 = self.setspawnpoint.playerspawnpos;
-    var1 = self.setspawnpoint.playerspawnangles;
+    var_0 = self.setspawnpoint.playerspawnpos;
+    var_1 = self.setspawnpoint.playerspawnangles;
   }
 
-  var4 = getdvarfloat("scr_kingslayer_respawnMinRadiusPercent", 0.8);
-  var5 = getdvarfloat("scr_kingslayer_respawnMaxRadiusPercent", 0.9);
-  var6 = getdvarfloat("scr_kingslayer_respawnRandomArea", 100);
+  var_4 = getdvarfloat("scr_kingslayer_respawnMinRadiusPercent", 0.8);
+  var_5 = getdvarfloat("scr_kingslayer_respawnMaxRadiusPercent", 0.9);
+  var_6 = getdvarfloat("scr_kingslayer_respawnRandomArea", 100);
 
-  if(!isDefined(var0) && var6 >= 0) {
-    var7 = scripts\mp\gametypes\br_gulag::ref_12568();
+  if(!isDefined(var_0) && var_6 >= 0) {
+    var_7 = scripts\mp\gametypes\br_gulag::ref_12568();
 
-    if(isDefined(var7)) {
-      var8 = display_ready_for_sequence();
-      var9 = scripts\mp\gametypes\br_circle::getsafecircleradius();
-      var10 = vectorNormalize(var7.origin - var8) * var9 * var4 + var8;
-      var0 = scripts\mp\gametypes\br_circle::getrandompointincircle(var10, var6, var4, var5);
+    if(isDefined(var_7)) {
+      var_8 = display_ready_for_sequence();
+      var_9 = scripts\mp\gametypes\br_circle::getsafecircleradius();
+      var_10 = vectorNormalize(var_7.origin - var_8) * var_9 * var_4 + var_8;
+      var_0 = scripts\mp\gametypes\br_circle::getrandompointincircle(var_10, var_6, var_4, var_5);
 
-      if(isDefined(var0)) {
-        var0 = scripts\mp\gametypes\br_public::modifyplayer_damage(var0);
-        var1 = scripts\mp\gametypes\br_gulag::registercarryobjectpickupcheck(var0, var7.origin);
+      if(isDefined(var_0)) {
+        var_0 = scripts\mp\gametypes\br_public::modifyplayer_damage(var_0);
+        var_1 = scripts\mp\gametypes\br_gulag::registercarryobjectpickupcheck(var_0, var_7.origin);
       }
     }
   }
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     if(isDefined(level.br_circle) && isDefined(level.br_circle.safecircleent)) {
-      var11 = display_ready_for_sequence();
-      var12 = scripts\mp\gametypes\br_circle::getsafecircleradius();
-      var13 = getdvarint("scr_br_maxRespawnDropToGround", 1);
-      var14 = getdvarint("scr_br_maxRespawnSnapToNavMesh", 1);
-      var0 = scripts\mp\gametypes\br_circle::getrandompointincircle(var11, var12, var4, var5);
-      var1 = scripts\mp\gametypes\br_gulag::registercarryobjectpickupcheck(var0, var11);
+      var_11 = display_ready_for_sequence();
+      var_12 = scripts\mp\gametypes\br_circle::getsafecircleradius();
+      var_13 = getdvarint("scr_br_maxRespawnDropToGround", 1);
+      var_14 = getdvarint("scr_br_maxRespawnSnapToNavMesh", 1);
+      var_0 = scripts\mp\gametypes\br_circle::getrandompointincircle(var_11, var_12, var_4, var_5);
+      var_1 = scripts\mp\gametypes\br_gulag::registercarryobjectpickupcheck(var_0, var_11);
     } else if(isDefined(level.prematchspawnorigins)) {
       if(isDefined(level.teamdata[self.team]["chosenSpawnWipeOrigin"]) && isDefined(level.teamdata[self.team]["spawnWipeOriginUseStartTime"]) && isDefined(level.checkpoint_objective_id) && level.teamdata[self.team]["spawnWipeOriginUseStartTime"] + level.checkpoint_objective_id * 1000 > gettime()) {
-        var0 = level.teamdata[self.team]["chosenSpawnWipeOrigin"];
+        var_0 = level.teamdata[self.team]["chosenSpawnWipeOrigin"];
       } else {
-        var15 = [];
+        var_15 = [];
 
-        foreach(var17 in level.prematchspawnorigins) {
-          if(distance2dsquared(var17.origin, self.origin) > var6) {
-            var15 = var17;
+        foreach(var_17 in level.prematchspawnorigins) {
+          if(distance2dsquared(var_17.origin, self.origin) > var_6) {
+            var_15 = var_17;
           }
         }
 
-        if(var15.size == 0) {
-          var15 = level.prematchspawnorigins;
+        if(var_15.size == 0) {
+          var_15 = level.prematchspawnorigins;
         }
 
-        var15 = scripts\engine\utility::array_randomize(var15);
-        var0 = var15[0].origin;
-        var0 += scripts\engine\math::random_vector_2d() * randomfloatrange(100, 500);
-        level.teamdata[self.team]["chosenSpawnWipeOrigin"] = var0;
+        var_15 = scripts\engine\utility::array_randomize(var_15);
+        var_0 = var_15[0].origin;
+        var_0 += scripts\engine\math::random_vector_2d() * randomfloatrange(100, 500);
+        level.teamdata[self.team]["chosenSpawnWipeOrigin"] = var_0;
         level.teamdata[self.team]["spawnWipeOriginUseStartTime"] = gettime();
       }
 
-      var1 = (0, 0, 0);
+      var_1 = (0, 0, 0);
 
-      if(var0[2] > 10000) {
-        var3 = 0;
-        var2 = scripts\mp\gametypes\br_public::getinfilspawnoffset();
+      if(var_0[2] > 10000) {
+        var_3 = 0;
+        var_2 = scripts\mp\gametypes\br_public::getinfilspawnoffset();
       }
     } else {
-      var0 = (0, 0, 0);
-      var1 = (0, 0, 0);
+      var_0 = (0, 0, 0);
+      var_1 = (0, 0, 0);
     }
   }
 
-  if(!isDefined(var1)) {
-    var19 = scripts\mp\gametypes\br_circle::getsafecircleorigin();
-    var20 = vectortoyaw(var19 - var0);
-    var1 = (0, var20, 0);
+  if(!isDefined(var_1)) {
+    var_19 = scripts\mp\gametypes\br_circle::getsafecircleorigin();
+    var_20 = vectortoyaw(var_19 - var_0);
+    var_1 = (0, var_20, 0);
   }
 
-  if(var3) {
-    if(!isDefined(var2)) {
-      var2 = scripts\cp_mp\parachute::getc130height();
+  if(var_3) {
+    if(!isDefined(var_2)) {
+      var_2 = scripts\cp_mp\parachute::getc130height();
     }
 
     if(isDefined(level.br_circle)) {
-      var21 = level.br_circle.circleindex;
-      var22 = scripts\mp\gametypes\br_gulag::remove_engineer_class();
-      var23 = isDefined(var21) && var21 >= var22;
+      var_21 = level.br_circle.circleindex;
+      var_22 = scripts\mp\gametypes\br_gulag::remove_engineer_class();
+      var_23 = isDefined(var_21) && var_21 >= var_22;
 
-      if(var23) {
-        var2 *= getdvarfloat("scr_br_gulagClosedSpawnOffsetScaler", 0.55);
+      if(var_23) {
+        var_2 *= getdvarfloat("scr_br_gulagClosedSpawnOffsetScaler", 0.55);
       }
     }
 
     if(isDefined(level.ref_12ca7)) {
-      var2 = level.ref_12ca7;
+      var_2 = level.ref_12ca7;
     }
 
-    var24 = (0, 0, var2);
-    var0 = scripts\mp\gametypes\br::getoffsetspawnorigin(var0, var24);
+    var_24 = (0, 0, var_2);
+    var_0 = scripts\mp\gametypes\br::getoffsetspawnorigin(var_0, var_24);
   }
 
-  var25 = spawnStruct();
-  var25.origin = var0;
-  var25.angles = var1;
-  var25.height = var2;
-  return var25;
+  var_25 = spawnStruct();
+  var_25.origin = var_0;
+  var_25.angles = var_1;
+  var_25.height = var_2;
+  return var_25;
 }
 
-function patchfix(var0, var1) {
+function patchfix(var_0, var_1) {
   level endon("game_ended");
   self endon("disconnect");
   self endon("spawned_player");
   self notify("fadeToGearingUp");
   self endon("fadeToGearingUp");
 
-  if(isDefined(var0) && var0 > 0) {
-    wait var0;
+  if(isDefined(var_0) && var_0 > 0) {
+    wait var_0;
   }
 
-  var2 = 1;
+  var_2 = 1;
   thread fadeoutin();
-  wait var2 - 0.25;
+  wait var_2 - 0.25;
 
   if(getdvarint("scr_kingslayer_tacMapCenterAndZoom", 1) == 1) {
     scripts\mp\gametypes\br::ending_fade_in();
   }
 
-  if(istrue(var1)) {
+  if(istrue(var_1)) {
     _calloutmarkerping_handleluinotify_added::ref_13133("ui_br_transition_type", 6);
   } else {
     _calloutmarkerping_handleluinotify_added::ref_13133("ui_br_transition_type", 2);
@@ -609,11 +609,11 @@ function patchfix(var0, var1) {
 
   if(getdvarint("scr_bmo_use_spawn_intermission_fix", 1) == 1) {
     scripts\mp\gametypes\br_public::ref_1252b();
-    var3 = display_wave_num();
+    var_3 = display_wave_num();
     scripts\mp\gametypes\br_spectate::ref_1252a();
-    scripts\mp\gametypes\br::spawnintermission(var3.origin, var3.angles);
+    scripts\mp\gametypes\br::spawnintermission(var_3.origin, var_3.angles);
     scripts\mp\spectating::setdisabled();
-    self.trial_moving_target_think = var3.origin;
+    self.trial_moving_target_think = var_3.origin;
     self.trial_other_team = gettime();
     scripts\engine\utility::ent_flag_set("playerRespawn_intermission_spawned");
     return;
@@ -635,16 +635,16 @@ function ref_1400c() {
 
   for(;;) {
     if(scripts\engine\utility::ent_flag("playerRespawn_intermission_spawned")) {
-      var0 = display_wave_num();
-      var1 = gettime();
+      var_0 = display_wave_num();
+      var_1 = gettime();
 
-      if(var1 - self.trial_other_team >= getdvarfloat("scr_bmo_spawn_fallback_hint_delay", 2) * 1000) {
-        var0 = display_wave_num();
-        var2 = scripts\mp\gametypes\br_gulag::ref_1263e(var0);
+      if(var_1 - self.trial_other_team >= getdvarfloat("scr_bmo_spawn_fallback_hint_delay", 2) * 1000) {
+        var_0 = display_wave_num();
+        var_2 = scripts\mp\gametypes\br_gulag::ref_1263e(var_0);
       }
     } else {
-      var0 = display_wave_num();
-      var2 = scripts\mp\gametypes\br_gulag::ref_1263e(var0);
+      var_0 = display_wave_num();
+      var_2 = scripts\mp\gametypes\br_gulag::ref_1263e(var_0);
     }
 
     wait 1;
@@ -652,8 +652,8 @@ function ref_1400c() {
 }
 
 function display_ping_hint_with_radial_check() {
-  var0 = getdvarint("scr_kingslayer_first_point_distance", 30000);
-  level.br_level.default_class_chosen[0] = scripts\mp\gametypes\br_circle::getrandompointincircle(level.br_level.default_class_chosen[0], var0);
+  var_0 = getdvarint("scr_kingslayer_first_point_distance", 30000);
+  level.br_level.default_class_chosen[0] = scripts\mp\gametypes\br_circle::getrandompointincircle(level.br_level.default_class_chosen[0], var_0);
 
   if(istrue(level.wait_to_stop_path_vehicle)) {
     distsqtodefenderflagstart(0);
@@ -661,10 +661,10 @@ function display_ping_hint_with_radial_check() {
     level.br_level.default_class_chosen[1] = level.br_level.default_class_chosen[0];
   }
 
-  var1 = (level.br_level.default_class_chosen[0][0], level.br_level.default_class_chosen[0][1], 0);
-  var2 = level.br_level.br_circleradii[0];
-  var3 = scripts\mp\gametypes\br_c130::createtestc130path(var1, var2);
-  return var3;
+  var_1 = (level.br_level.default_class_chosen[0][0], level.br_level.default_class_chosen[0][1], 0);
+  var_2 = level.br_level.br_circleradii[0];
+  var_3 = scripts\mp\gametypes\br_c130::createtestc130path(var_1, var_2);
+  return var_3;
 }
 
 function display_message_to_teammates() {
@@ -674,14 +674,14 @@ function display_message_to_teammates() {
 function displaysquadmessagetoplayer() {
   level endon("game_ended");
   self endon("death");
-  var0 = distance(self.ref_12205.startpt, self.ref_12205.neurotoxin_damage_monitor);
-  var1 = var0 / scripts\mp\gametypes\br_c130::getc130speed() - 5;
-  wait var1;
+  var_0 = distance(self.ref_12205.startpt, self.ref_12205.neurotoxin_damage_monitor);
+  var_1 = var_0 / scripts\mp\gametypes\br_c130::getc130speed() - 5;
+  wait var_1;
 
-  foreach(var3 in level.players) {
-    if(isDefined(var3) && isDefined(var3.br_infil_type) && var3.br_infil_type == "c130" && !isDefined(var3.jumptype)) {
-      var3.jumptype = "outOfBounds";
-      var3 notify("halo_kick_c130");
+  foreach(var_3 in level.players) {
+    if(isDefined(var_3) && isDefined(var_3.br_infil_type) && var_3.br_infil_type == "c130" && !isDefined(var_3.jumptype)) {
+      var_3.jumptype = "outOfBounds";
+      var_3 notify("halo_kick_c130");
     }
   }
 }
@@ -702,85 +702,85 @@ function ref_1383f() {
   level endon("game_ended");
 
   for(;;) {
-    for(var0 = 0; var0 < level.wait_till_time; var0++) {
-      var1 = display_timer(0, 0.6);
-      var2 = spawnStruct();
-      var2.origin = var1;
-      var2.clear_legacy_pickup_munitions = spawn("script_model", var2.origin);
-      var2.clear_legacy_pickup_munitions setModel("ks_airdrop_crate_br");
-      thread mlgiconfullflag(level, var2);
+    for(var_0 = 0; var_0 < level.wait_till_time; var_0++) {
+      var_1 = display_timer(0, 0.6);
+      var_2 = spawnStruct();
+      var_2.origin = var_1;
+      var_2.clear_legacy_pickup_munitions = spawn("script_model", var_2.origin);
+      var_2.clear_legacy_pickup_munitions setModel("ks_airdrop_crate_br");
+      thread mlgiconfullflag(level, var_2);
     }
 
     wait level.wait_to_advance + level.wait_to_reset_wave_loadout;
   }
 }
 
-function mlgiconfullflag(var0, var1) {
+function mlgiconfullflag(var_0, var_1) {
   level endon("game_ended");
 
-  if(!isDefined(var0.modify_blast_shield_damage)) {
-    var0.modify_blast_shield_damage = level.wait_unload_chopper;
+  if(!isDefined(var_0.modify_blast_shield_damage)) {
+    var_0.modify_blast_shield_damage = level.wait_unload_chopper;
   }
 
   if(scripts\cp_mp\utility\game_utility::turretdisabled()) {
-    var2 = scripts\mp\gametypes\br_circle::getrandompointincircle(var0.origin, var0.modify_blast_shield_damage);
+    var_2 = scripts\mp\gametypes\br_circle::getrandompointincircle(var_0.origin, var_0.modify_blast_shield_damage);
   } else {
-    var2 = scripts\mp\gametypes\br_circle::risk_flagspawnshiftingpercent(var1.origin, var1.modify_blast_shield_damage);
+    var_2 = scripts\mp\gametypes\br_circle::risk_flagspawnshiftingpercent(var_1.origin, var_1.modify_blast_shield_damage);
   }
 
   if(istrue(level.ref_1406f)) {
-    var2 = scripts\mp\gametypes\br_rewards::return_enemy_type_mask(var2);
+    var_2 = scripts\mp\gametypes\br_rewards::return_enemy_type_mask(var_2);
   }
 
-  var3 = scripts\mp\gametypes\br_c130airdrop::fn_spec_op_post_customization(undefined, var2, 1);
-  var4 = distance(var3.startpt, var3.endpt);
-  var5 = scripts\mp\gametypes\br_c130::getc130speed();
-  var6 = var4 / var5;
-  var7 = scripts\mp\gametypes\br_c130airdrop::fntrapdeactivation(var3, var4, var5, var6);
-  var7.mode_can_play_ending = &mode_can_play_ending;
-  var7.ref_134e2 = var2;
-  var7 scripts\mp\gametypes\br_c130airdrop::fob(1, "battle_royale_c130_loot", "kingslayer_world", var1);
+  var_3 = scripts\mp\gametypes\br_c130airdrop::fn_spec_op_post_customization(undefined, var_2, 1);
+  var_4 = distance(var_3.startpt, var_3.endpt);
+  var_5 = scripts\mp\gametypes\br_c130::getc130speed();
+  var_6 = var_4 / var_5;
+  var_7 = scripts\mp\gametypes\br_c130airdrop::fntrapdeactivation(var_3, var_4, var_5, var_6);
+  var_7.mode_can_play_ending = &mode_can_play_ending;
+  var_7.ref_134e2 = var_2;
+  var_7 scripts\mp\gametypes\br_c130airdrop::fob(1, "battle_royale_c130_loot", "kingslayer_world", var_1);
 }
 
-function mode_can_play_ending(var0, var1, var2, var3) {
-  var4 = self.startpt;
-  var5 = self.centerpt;
-  var6 = self.speed;
-  var7 = distance2d(var4, var5) / var6;
-  var8 = 0;
-  var9 = 0;
-  level.ref_11f2c += var0;
+function mode_can_play_ending(var_0, var_1, var_2, var_3) {
+  var_4 = self.startpt;
+  var_5 = self.centerpt;
+  var_6 = self.speed;
+  var_7 = distance2d(var_4, var_5) / var_6;
+  var_8 = 0;
+  var_9 = 0;
+  level.ref_11f2c += var_0;
 
-  while(var8 < var0) {
-    wait var7;
-    var10 = scripts\mp\gametypes\br_c130airdrop::fnchildscorefunc(self.origin, 1);
-    var11 = scripts\cp_mp\killstreaks\airdrop::minshotstostage3acc(var10 + (0, 0, level.fnhidefoundintel - 100), var10, self.angles, var1, var2, var3.ref_11eab);
-    var8++;
-    var11.ml_p2_func = var3;
-    var11.ref_134e2 = self.ref_134e2;
-    level.focus_fire_attacker_timeout[level.focus_fire_attacker_timeout.size] = var11;
-    var12 = scripts\cp_mp\killstreaks\airdrop::gettriggerobject(var11);
-    var12.ref_140a0 = relic_laststand_modifyplayerdamage();
+  while(var_8 < var_0) {
+    wait var_7;
+    var_10 = scripts\mp\gametypes\br_c130airdrop::fnchildscorefunc(self.origin, 1);
+    var_11 = scripts\cp_mp\killstreaks\airdrop::minshotstostage3acc(var_10 + (0, 0, level.fnhidefoundintel - 100), var_10, self.angles, var_1, var_2, var_3.ref_11eab);
+    var_8++;
+    var_11.ml_p2_func = var_3;
+    var_11.ref_134e2 = self.ref_134e2;
+    level.focus_fire_attacker_timeout[level.focus_fire_attacker_timeout.size] = var_11;
+    var_12 = scripts\cp_mp\killstreaks\airdrop::gettriggerobject(var_11);
+    var_12.ref_140a0 = relic_laststand_modifyplayerdamage();
   }
 }
 
-function divide_living_ai(var0) {
-  var1 = scripts\mp\gametypes\br_pickups::test_ai_anim();
-  var2 = scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(var1, self.origin, self.angles, self);
-  scripts\mp\gametypes\br_pickups::spawnpickup("brloot_killstreak_uav", var2);
-  var2 = scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(var1, self.origin, self.angles, self);
-  scripts\mp\gametypes\br_pickups::spawnpickup("brloot_killstreak_clusterstrike", var2);
-  var2 = scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(var1, self.origin, self.angles, self);
-  scripts\mp\gametypes\br_pickups::spawnpickup("brloot_killstreak_precision_airstrike", var2);
+function divide_living_ai(var_0) {
+  var_1 = scripts\mp\gametypes\br_pickups::test_ai_anim();
+  var_2 = scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(var_1, self.origin, self.angles, self);
+  scripts\mp\gametypes\br_pickups::spawnpickup("brloot_killstreak_uav", var_2);
+  var_2 = scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(var_1, self.origin, self.angles, self);
+  scripts\mp\gametypes\br_pickups::spawnpickup("brloot_killstreak_clusterstrike", var_2);
+  var_2 = scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(var_1, self.origin, self.angles, self);
+  scripts\mp\gametypes\br_pickups::spawnpickup("brloot_killstreak_precision_airstrike", var_2);
 
-  if(!isDefined(var0.ref_11a01)) {
-    var0.ref_11a01 = 1;
+  if(!isDefined(var_0.ref_11a01)) {
+    var_0.ref_11a01 = 1;
   } else {
-    var0.ref_11a01++;
+    var_0.ref_11a01++;
   }
 
-  var0 scripts\mp\utility\stats::setextrascore1(var0.ref_11a01);
-  var0 thread scripts\mp\utility\points::giveunifiedpoints("br_c130_box_open");
+  var_0 scripts\mp\utility\stats::setextrascore1(var_0.ref_11a01);
+  var_0 thread scripts\mp\utility\points::giveunifiedpoints("br_c130_box_open");
 }
 
 function relic_laststand_modifyplayerdamage() {
@@ -796,19 +796,19 @@ function brmini_initdialog() {
   level.br_level.br_circleradii = [level.wait_unload_chopper, level.wait_unload_chopper, level.wait_unload_chopper];
 
   if(istrue(level.wait_to_stop_path_vehicle)) {
-    var0 = [];
-    var1 = [];
-    var2 = [];
-    var3 = [];
+    var_0 = [];
+    var_1 = [];
+    var_2 = [];
+    var_3 = [];
 
-    for(var4 = 0; var4 < level.wait_to_close_in; var4++) {
-      var0 = level.wait_unload_chopper;
-      var1 = level.wait_to_advance;
-      var2 = level.wait_to_reset_wave_loadout;
-      var3 = level.wait_to_spawn_ambush_vehicle;
+    for(var_4 = 0; var_4 < level.wait_to_close_in; var_4++) {
+      var_0 = level.wait_unload_chopper;
+      var_1 = level.wait_to_advance;
+      var_2 = level.wait_to_reset_wave_loadout;
+      var_3 = level.wait_to_spawn_ambush_vehicle;
     }
 
-    scripts\mp\gametypes\br_circle::open_teleport_room_door(var0, var1, var2, var3);
+    scripts\mp\gametypes\br_circle::open_teleport_room_door(var_0, var_1, var_2, var_3);
     return;
   }
 
@@ -821,14 +821,14 @@ function ref_14365() {
   thread dmzextractcost();
 }
 
-function dlog_analytics_init(var0) {
-  var0.ref_12306 = 0;
-  var0.wagingplayer = 0;
-  var0.vstartposition = 0;
+function dlog_analytics_init(var_0) {
+  var_0.ref_12306 = 0;
+  var_0.wagingplayer = 0;
+  var_0.vstartposition = 0;
 }
 
-function dmg_trig(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
-  scripts\mp\gametypes\br::onplayerkilled(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+function dmg_trig(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  scripts\mp\gametypes\br::onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
   if(level.wait_unload_jeep) {
     self.wait_unload_chopper_flood_players = 1;
@@ -840,70 +840,70 @@ function dmg_trig(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
     return;
   }
 
-  if(isDefined(var1) && isPlayer(self)) {
-    display_welcome(var1, self);
+  if(isDefined(var_1) && isPlayer(self)) {
+    display_welcome(var_1, self);
     return;
   }
 }
 
-function display_welcome(var0, var1) {
+function display_welcome(var_0, var_1) {
   if(!scripts\mp\flags::gameflag("prematch_done")) {
     return;
   }
 
-  if(var0 != var1 && isDefined(var0.team)) {
-    var2 = var0.team;
-    var3 = 1;
-    var4 = 1;
+  if(var_0 != var_1 && isDefined(var_0.team)) {
+    var_2 = var_0.team;
+    var_3 = 1;
+    var_4 = 1;
 
     if(level.wait_until_truck_arrives_at_station) {
-      foreach(var6 in level.ref_11a32) {
-        if(!isDefined(var6)) {
+      foreach(var_6 in level.ref_11a32) {
+        if(!isDefined(var_6)) {
           continue;
         }
 
-        if(var6.team == var2) {
-          var4 = 0;
+        if(var_6.team == var_2) {
+          var_4 = 0;
           break;
         }
       }
     }
 
     if(level.wait_until_impact == 0 && !scripts\mp\flags::gameflag("placement_updates_allowed")) {
-      var4 = 0;
+      var_4 = 0;
     }
 
-    if(var4 == 1) {
-      foreach(var6 in level.ref_11a32) {
-        if(!isDefined(var6)) {
+    if(var_4 == 1) {
+      foreach(var_6 in level.ref_11a32) {
+        if(!isDefined(var_6)) {
           continue;
         }
 
-        var9 = scripts\engine\utility::ter_op(level.wait_until_trap_room_clear, var6.team == var1.team, var6 == var1);
+        var_9 = scripts\engine\utility::ter_op(level.wait_until_trap_room_clear, var_6.team == var_1.team, var_6 == var_1);
 
-        if(var9) {
-          var3 = level.wait_use_respawn;
-          var0.wagingplayer++;
-          ref_121b6(var0);
-          var1.vstartposition++;
-          ref_121b6(var1);
-          var10 = isDefined(var0.streakdata.streaks[1]);
-          var11 = display_relics_splash(var0);
-          var0 scripts\mp\gametypes\br_pickups::playerpackdataintogulagomnvar(var11, var10, 1);
-          var0 thread scripts\mp\hud_message::showsplash("kingslayer_" + var11);
-          var0 thread scripts\mp\rank::scoreeventpopup("hvt_kill");
-          var0 thread scripts\mp\rank::scoreeventpopup("teamscore_notify_" + var3);
+        if(var_9) {
+          var_3 = level.wait_use_respawn;
+          var_0.wagingplayer++;
+          ref_121b6(var_0);
+          var_1.vstartposition++;
+          ref_121b6(var_1);
+          var_10 = isDefined(var_0.streakdata.streaks[1]);
+          var_11 = display_relics_splash(var_0);
+          var_0 scripts\mp\gametypes\br_pickups::playerpackdataintogulagomnvar(var_11, var_10, 1);
+          var_0 thread scripts\mp\hud_message::showsplash("kingslayer_" + var_11);
+          var_0 thread scripts\mp\rank::scoreeventpopup("hvt_kill");
+          var_0 thread scripts\mp\rank::scoreeventpopup("teamscore_notify_" + var_3);
           break;
         }
       }
     }
 
-    if(isDefined(level.teamdata[var2])) {
-      level.teamdata[var2]["teamTotalScore"] = level.teamdata[var2]["teamTotalScore"] + var3;
-      var0.ref_12306 += var3;
+    if(isDefined(level.teamdata[var_2])) {
+      level.teamdata[var_2]["teamTotalScore"] = level.teamdata[var_2]["teamTotalScore"] + var_3;
+      var_0.ref_12306 += var_3;
 
       if(level.wait_until_emp_drone_done > 0) {
-        if(level.teamdata[var2]["teamTotalScore"] >= level.wait_until_emp_drone_done) {
+        if(level.teamdata[var_2]["teamTotalScore"] >= level.wait_until_emp_drone_done) {
           level notify("brKing_startPlacements");
           return;
         }
@@ -914,361 +914,361 @@ function display_welcome(var0, var1) {
       return;
     }
 
-    scripts\mp\utility\script::laststand_dogtags("team " + var2 + " is not in level.teamData");
+    scripts\mp\utility\script::laststand_dogtags("team " + var_2 + " is not in level.teamData");
     return;
   }
 }
 
-function ref_121b6(var0) {
-  var1 = self.wagingplayer;
+function ref_121b6(var_0) {
+  var_1 = self.wagingplayer;
 
-  if(var1 > 255) {
-    var1 = 255;
+  if(var_1 > 255) {
+    var_1 = 255;
   }
 
-  var2 = self.vstartposition;
+  var_2 = self.vstartposition;
 
-  if(var2 > 255) {
-    var2 = 255;
+  if(var_2 > 255) {
+    var_2 = 255;
   }
 
-  var1 += var2 << 8;
-  scripts\mp\utility\stats::setextrascore0(var1);
+  var_1 += var_2 << 8;
+  scripts\mp\utility\stats::setextrascore0(var_1);
 }
 
 function ref_121b4() {
-  var0 = self.wagingplayer;
+  var_0 = self.wagingplayer;
 
-  if(var0 > 255) {
-    var0 = 255;
+  if(var_0 > 255) {
+    var_0 = 255;
   }
 
-  var1 = self.vstartposition;
+  var_1 = self.vstartposition;
 
-  if(var1 > 255) {
-    var1 = 255;
+  if(var_1 > 255) {
+    var_1 = 255;
   }
 
-  var0 += var1 << 8;
-  return var0;
+  var_0 += var_1 << 8;
+  return var_0;
 }
 
 function numextractions() {
   level waittill("give_match_bonus");
   waitframe();
-  var0 = getdvarfloat("scr_bmo_eom_held_cash_scalar", 1);
-  var1 = getdvarfloat("scr_bmo_eom_banked_cash_scalar", 1);
-  var2 = getdvarint("scr_bmo_eom_initial_winner_bonus", 3000);
-  var3 = getdvarint("scr_bmo_eom_over_wincost_bonus", 2250);
-  var4 = getdvarint("scr_bmo_eom_top10_bonus", 1500);
+  var_0 = getdvarfloat("scr_bmo_eom_held_cash_scalar", 1);
+  var_1 = getdvarfloat("scr_bmo_eom_banked_cash_scalar", 1);
+  var_2 = getdvarint("scr_bmo_eom_initial_winner_bonus", 3000);
+  var_3 = getdvarint("scr_bmo_eom_over_wincost_bonus", 2250);
+  var_4 = getdvarint("scr_bmo_eom_top10_bonus", 1500);
 
-  foreach(var6 in level.teamnamelist) {
-    var7 = 0;
-    var8 = 0;
-    var9 = game["teamPlacements"][var6];
-    var10 = 0;
+  foreach(var_6 in level.teamnamelist) {
+    var_7 = 0;
+    var_8 = 0;
+    var_9 = game["teamPlacements"][var_6];
+    var_10 = 0;
 
-    if(var8) {
-      var10 = var3;
-    } else if(var9 <= 10) {
-      var10 = var4;
+    if(var_8) {
+      var_10 = var_3;
+    } else if(var_9 <= 10) {
+      var_10 = var_4;
     } else {
-      var10 = 750;
+      var_10 = 750;
     }
 
-    var11 = scripts\mp\utility\teams::getteamdata(var6, "players");
+    var_11 = scripts\mp\utility\teams::getteamdata(var_6, "players");
 
-    foreach(var13 in var11) {
-      var13 scripts\mp\gametypes\br::ref_138d6();
-      var13 scripts\cp_mp\utility\game_utility::ref_13168(var9);
+    foreach(var_13 in var_11) {
+      var_13 scripts\mp\gametypes\br::ref_138d6();
+      var_13 scripts\cp_mp\utility\game_utility::ref_13168(var_9);
 
-      if(!var13 scripts\mp\utility\game::rankingenabled() || !var13 hasplayerdata()) {
+      if(!var_13 scripts\mp\utility\game::rankingenabled() || !var_13 hasplayerdata()) {
         continue;
       }
 
-      var13 scripts\mp\utility\stats::incpersstat("cash", int(var7 / 10000));
-      var14 = var13.pers["combatXP"];
+      var_13 scripts\mp\utility\stats::incpersstat("cash", int(var_7 / 10000));
+      var_14 = var_13.pers["combatXP"];
 
-      if(!isDefined(var14)) {
-        var14 = 0;
+      if(!isDefined(var_14)) {
+        var_14 = 0;
       }
 
-      var13 setplayerdata("mp", "aarValue", 0, var14);
-      var15 = var13.pers["missionXP"];
+      var_13 setplayerdata("mp", "aarValue", 0, var_14);
+      var_15 = var_13.pers["missionXP"];
 
-      if(!isDefined(var15)) {
-        var15 = 0;
+      if(!isDefined(var_15)) {
+        var_15 = 0;
       }
 
-      var13 setplayerdata("mp", "aarValue", 1, var15);
-      var16 = var13.pers["lootingXP"];
+      var_13 setplayerdata("mp", "aarValue", 1, var_15);
+      var_16 = var_13.pers["lootingXP"];
 
-      if(!isDefined(var16)) {
-        var16 = 0;
+      if(!isDefined(var_16)) {
+        var_16 = 0;
       }
 
-      var13 setplayerdata("mp", "aarValue", 2, var16);
-      var17 = 0;
+      var_13 setplayerdata("mp", "aarValue", 2, var_16);
+      var_17 = 0;
 
-      if(isDefined(var13.plundercount)) {
-        var17 = int(var13.plundercount * var0);
+      if(isDefined(var_13.plundercount)) {
+        var_17 = int(var_13.plundercount * var_0);
       }
 
-      var18 = 0;
+      var_18 = 0;
 
-      if(isDefined(var13.plunderbanked)) {
-        var18 = int(var13.plunderbanked * var1);
+      if(isDefined(var_13.plunderbanked)) {
+        var_18 = int(var_13.plunderbanked * var_1);
       }
 
-      var19 = var17 + var18;
+      var_19 = var_17 + var_18;
 
-      if(var19 > 0) {
-        var13 scripts\mp\rank::giverankxp("cash_conversion_bonus", var19, undefined, 1, 1);
+      if(var_19 > 0) {
+        var_13 scripts\mp\rank::giverankxp("cash_conversion_bonus", var_19, undefined, 1, 1);
       }
 
-      var13 setplayerdata("mp", "aarValue", 3, 0);
-      var20 = 0;
+      var_13 setplayerdata("mp", "aarValue", 3, 0);
+      var_20 = 0;
 
-      if(isDefined(var13.matchbonus)) {
-        var20 = int(var13.matchbonus);
+      if(isDefined(var_13.matchbonus)) {
+        var_20 = int(var_13.matchbonus);
       }
 
-      var13 setplayerdata("mp", "aarValue", 4, var20);
+      var_13 setplayerdata("mp", "aarValue", 4, var_20);
 
-      if(var10 > 0) {
-        var13 scripts\mp\rank::giverankxp("placement_bonus", var10, undefined, 1, 1);
+      if(var_10 > 0) {
+        var_13 scripts\mp\rank::giverankxp("placement_bonus", var_10, undefined, 1, 1);
       }
 
-      var13 setplayerdata("mp", "aarValue", 5, var10);
-      var21 = var13 getplayerdata("mp", "aarValue", 6);
-      var22 = var21 + var13.pers["summary"]["xp"];
-      var13 setplayerdata("mp", "aarValue", 7, var22);
+      var_13 setplayerdata("mp", "aarValue", 5, var_10);
+      var_21 = var_13 getplayerdata("mp", "aarValue", 6);
+      var_22 = var_21 + var_13.pers["summary"]["xp"];
+      var_13 setplayerdata("mp", "aarValue", 7, var_22);
     }
   }
 }
 
-function dmzlootleaderupdateonpickup(var0, var1, var2) {
-  var3 = int(game["teamScores"][var1]);
-  var4 = var0 - var3;
+function dmzlootleaderupdateonpickup(var_0, var_1, var_2) {
+  var_3 = int(game["teamScores"][var_1]);
+  var_4 = var_0 - var_3;
 
-  if(var4 != 0) {
-    var5 = scripts\engine\utility::ter_op(scripts\mp\gametypes\br_public::uniquelootitemid(), 1, undefined);
-    level thread scripts\mp\gamescore::giveteamscoreforobjective(var1, var4, 0, undefined, var5, var2);
+  if(var_4 != 0) {
+    var_5 = scripts\engine\utility::ter_op(scripts\mp\gametypes\br_public::uniquelootitemid(), 1, undefined);
+    level thread scripts\mp\gamescore::giveteamscoreforobjective(var_1, var_4, 0, undefined, var_5, var_2);
   }
 
-  return var4;
+  return var_4;
 }
 
-function distsqtodefenderfalgstart(var0) {
-  scripts\mp\objidpoolmanager::update_objective_position(self.objectiveiconid, var0);
+function distsqtodefenderfalgstart(var_0) {
+  scripts\mp\objidpoolmanager::update_objective_position(self.objectiveiconid, var_0);
 }
 
 function dmzextractcost() {
   level endon("game_ended");
-  var0 = 0;
-  var1 = [];
-  var2 = level.spawn_convoy_and_move != 0;
-  var3 = 0;
+  var_0 = 0;
+  var_1 = [];
+  var_2 = level.spawn_convoy_and_move != 0;
+  var_3 = 0;
 
   for(;;) {
     waittillframeend();
-    var4 = level.fuckwithgravity && level.fuel_stability_event_init && level.fuel_stability_event_start;
-    var5 = level.waitandapplybrweaponxp;
-    var0 += level.framedurationseconds;
+    var_4 = level.fuckwithgravity && level.fuel_stability_event_init && level.fuel_stability_event_start;
+    var_5 = level.waitandapplybrweaponxp;
+    var_0 += level.framedurationseconds;
 
     if(istrue(level.ref_14086)) {
-      var6 = scripts\mp\flags::gameflag("placement_updates_allowed");
+      var_6 = scripts\mp\flags::gameflag("placement_updates_allowed");
     } else {
-      var6 = var0 > level.ref_12fb3;
+      var_6 = var_0 > level.ref_12fb3;
     }
 
-    var7 = level.ref_13366 && var6;
-    var8 = scripts\mp\gamescore::run_common_functions_stealth();
-    var9 = level.ref_13abd;
-    var10 = undefined;
-    var11 = undefined;
-    var12 = undefined;
-    var13 = [];
-    var14 = [];
-    var15 = [];
-    var16 = "none";
-    var17 = "none";
-    var18 = -1;
-    var19 = 0;
+    var_7 = level.ref_13366 && var_6;
+    var_8 = scripts\mp\gamescore::run_common_functions_stealth();
+    var_9 = level.ref_13abd;
+    var_10 = undefined;
+    var_11 = undefined;
+    var_12 = undefined;
+    var_13 = [];
+    var_14 = [];
+    var_15 = [];
+    var_16 = "none";
+    var_17 = "none";
+    var_18 = -1;
+    var_19 = 0;
 
-    foreach(var21 in level.teamnamelist) {
-      var22 = level.teamdata[var21]["teamTotalScore"];
-      var23 = dmzlootleaderupdateonpickup(var22, var21, level.disable_super_in_turret.player_enemy_cooldown);
-      var24 = revive_or_disconnect_monitor(var21);
-      var25 = var8[var21];
+    foreach(var_21 in level.teamnamelist) {
+      var_22 = level.teamdata[var_21]["teamTotalScore"];
+      var_23 = dmzlootleaderupdateonpickup(var_22, var_21, level.disable_super_in_turret.player_enemy_cooldown);
+      var_24 = revive_or_disconnect_monitor(var_21);
+      var_25 = var_8[var_21];
 
-      if(var22 > var18) {
-        if(var18 > var19) {
-          var19 = var18;
-          var17 = var16;
+      if(var_22 > var_18) {
+        if(var_18 > var_19) {
+          var_19 = var_18;
+          var_17 = var_16;
         }
 
-        var18 = var22;
-        var16 = var21;
-      } else if(var16 != "none") {
-        if(var22 > var19) {
-          var19 = var22;
-          var17 = var21;
+        var_18 = var_22;
+        var_16 = var_21;
+      } else if(var_16 != "none") {
+        if(var_22 > var_19) {
+          var_19 = var_22;
+          var_17 = var_21;
         }
       }
 
-      var26 = var22;
-      var27 = var22;
-      var28 = 0;
+      var_26 = var_22;
+      var_27 = var_22;
+      var_28 = 0;
 
-      if(var27 >= var5 * 0.9) {
-        var10 = var21;
-      } else if(var27 >= var5 * 0.75) {
-        var11 = var21;
-      } else if(var27 >= var5 * 0.5) {
-        var12 = var21;
+      if(var_27 >= var_5 * 0.9) {
+        var_10 = var_21;
+      } else if(var_27 >= var_5 * 0.75) {
+        var_11 = var_21;
+      } else if(var_27 >= var_5 * 0.5) {
+        var_12 = var_21;
       }
 
-      if(var27 >= var5 * level.ref_127c1) {
+      if(var_27 >= var_5 * level.ref_127c1) {
         thread scripts\mp\music_and_dialog::ref_12791();
-      } else if(var27 >= var5 * level.ref_127c3) {
+      } else if(var_27 >= var_5 * level.ref_127c3) {
         thread scripts\mp\music_and_dialog::ref_127a7();
-      } else if(var27 >= var5 * level.ref_127c2) {
+      } else if(var_27 >= var_5 * level.ref_127c2) {
         thread scripts\mp\music_and_dialog::ref_1278b();
-      } else if(var27 >= var5 * level.ref_127c0) {
+      } else if(var_27 >= var_5 * level.ref_127c0) {
         thread scripts\mp\music_and_dialog::ref_127a9();
       }
 
-      var29 = scripts\mp\utility\teams::getfriendlyplayers(var21, 0);
-      ref_14004(var8, var29);
+      var_29 = scripts\mp\utility\teams::getfriendlyplayers(var_21, 0);
+      ref_14004(var_8, var_29);
 
-      foreach(var31 in var29) {
-        var14 = var31.ref_12306;
-        var15 = var31;
+      foreach(var_31 in var_29) {
+        var_14 = var_31.ref_12306;
+        var_15 = var_31;
       }
 
-      if(var7) {
-        if(var25 == 1) {
-          var13 = var21;
-        } else if(var25 <= 5) {
-          if(var24 > 5) {
-            showsplashtoteam(var21, "bm_top_5");
+      if(var_7) {
+        if(var_25 == 1) {
+          var_13 = var_21;
+        } else if(var_25 <= 5) {
+          if(var_24 > 5) {
+            showsplashtoteam(var_21, "bm_top_5");
           }
-        } else if(var25 <= 10) {
-          if(var24 > 10) {
-            showsplashtoteam(var21, "bm_top_10");
+        } else if(var_25 <= 10) {
+          if(var_24 > 10) {
+            showsplashtoteam(var_21, "bm_top_10");
           }
         }
       }
 
-      if(var27 >= var5) {
+      if(var_27 >= var_5) {
         thread searchradiusidealmin(level);
       }
     }
 
-    foreach(var31 in level.players) {
-      var35 = level.teamdata[var31.team]["teamTotalScore"];
-      var31 setclientomnvar("ui_br_team_cash_banked", int(var35));
-      var31 setclientomnvar("ui_br_team_cash_pockets", int(scripts\engine\utility::ter_op(var35 >= var18, var19, var18)));
+    foreach(var_31 in level.players) {
+      var_35 = level.teamdata[var_31.team]["teamTotalScore"];
+      var_31 setclientomnvar("ui_br_team_cash_banked", int(var_35));
+      var_31 setclientomnvar("ui_br_team_cash_pockets", int(scripts\engine\utility::ter_op(var_35 >= var_18, var_19, var_18)));
     }
 
-    var37 = [];
-    var38 = [];
+    var_37 = [];
+    var_38 = [];
 
     if(level.ref_11a2c == 1) {
-      var37 = setteamplacement(game["teamPlacements"], "up");
+      var_37 = setteamplacement(game["teamPlacements"], "up");
     } else if(level.ref_11a2c == 2) {
-      var37 = var16;
-      var38 = setteamplacement(var14, "down");
+      var_37 = var_16;
+      var_38 = setteamplacement(var_14, "down");
     } else {
-      var38 = setteamplacement(var14, "down");
+      var_38 = setteamplacement(var_14, "down");
     }
 
-    level.disable_super_in_turret.player_enemy_cooldown = var16;
+    level.disable_super_in_turret.player_enemy_cooldown = var_16;
 
-    if(var16 == "none") {
-      var1 = [];
+    if(var_16 == "none") {
+      var_1 = [];
       waitframe();
       continue;
     }
 
-    if(!var2 && var18 >= var5 * level.spawn_convoy_and_move * 0.1) {
+    if(!var_2 && var_18 >= var_5 * level.spawn_convoy_and_move * 0.1) {
       setomnvar("ui_br_leader_hash_percentage_hit", 1);
-      var2 = 1;
+      var_2 = 1;
     }
 
-    if(!var7 || var18 == 0) {
+    if(!var_7 || var_18 == 0) {
       waitframe();
       continue;
     }
 
     if(level.ref_11a2c > 0) {
       if(level.lootchopper_modifyweapondamage || istrue(level.ref_127d2)) {
-        ref_13ff0(var14, var38, var15, var37);
+        ref_13ff0(var_14, var_38, var_15, var_37);
         level.ref_127d2 = 0;
       }
     } else if(level.lootchopper_modifyweapondamage || istrue(level.ref_127d2)) {
-      ref_13ff0(var14, var38, var15);
+      ref_13ff0(var_14, var_38, var_15);
       level.ref_127d2 = 0;
     }
 
-    foreach(var21 in var13) {
-      if(!scripts\engine\utility::array_contains(var1, var21)) {
-        if(istrue(level.ref_13be1[var21])) {
+    foreach(var_21 in var_13) {
+      if(!scripts\engine\utility::array_contains(var_1, var_21)) {
+        if(istrue(level.ref_13be1[var_21])) {
           if(!scripts\mp\gametypes\br_public::uniquelootitemid()) {
-            showsplashtoteam(var21, "bm_top_team_regained");
+            showsplashtoteam(var_21, "bm_top_team_regained");
           }
 
           continue;
         }
 
         if(!scripts\mp\gametypes\br_public::uniquelootitemid()) {
-          showsplashtoteam(var21, "bm_top_team");
+          showsplashtoteam(var_21, "bm_top_team");
         }
 
-        level.ref_13be1[var21] = 1;
+        level.ref_13be1[var_21] = 1;
       }
     }
 
-    if(var13.size > 0) {
-      foreach(var21 in var1) {
-        if(!scripts\engine\utility::array_contains(var13, var21)) {
-          showsplashtoteam(var21, "bm_top_team_lost");
+    if(var_13.size > 0) {
+      foreach(var_21 in var_1) {
+        if(!scripts\engine\utility::array_contains(var_13, var_21)) {
+          showsplashtoteam(var_21, "bm_top_team_lost");
         }
       }
     }
 
-    var1 = var13;
-    level.ref_13be0 = var16;
-    level.ref_12884 = var8;
+    var_1 = var_13;
+    level.ref_13be0 = var_16;
+    level.ref_12884 = var_8;
 
-    if(!var4) {
-      if(!level.fuel_stability_event_start && isDefined(var10)) {
+    if(!var_4) {
+      if(!level.fuel_stability_event_start && isDefined(var_10)) {
         level.fuel_stability_event_start = 1;
 
         if(!scripts\mp\gametypes\br_public::uniquelootitemid()) {
           if(!level.loadout_updateclassdefault_headlessgetweaponn) {
-            ref_13372(var10, "bm_first_to_90_them");
-            showsplashtoteam(var10, "bm_first_to_90_us");
+            ref_13372(var_10, "bm_first_to_90_them");
+            showsplashtoteam(var_10, "bm_first_to_90_us");
             level thread scripts\mp\gametypes\br_public::brleaderdialog("final_circle", 0, undefined, undefined, 2);
           }
         }
-      } else if(!level.fuel_stability_event_init && isDefined(var11)) {
+      } else if(!level.fuel_stability_event_init && isDefined(var_11)) {
         level.fuel_stability_event_init = 1;
 
         if(!scripts\mp\gametypes\br_public::uniquelootitemid()) {
           if(!level.loadout_updateclassdefault_headlessgetweaponn) {
-            ref_13372(var11, "bm_first_to_75_them");
-            showsplashtoteam(var11, "bm_first_to_75_us");
+            ref_13372(var_11, "bm_first_to_75_them");
+            showsplashtoteam(var_11, "bm_first_to_75_us");
           }
         }
-      } else if(!level.fuckwithgravity && isDefined(var12)) {
+      } else if(!level.fuckwithgravity && isDefined(var_12)) {
         level.fuckwithgravity = 1;
 
         if(!scripts\mp\gametypes\br_public::uniquelootitemid()) {
           if(!level.loadout_updateclassdefault_headlessgetweaponn) {
-            ref_13372(var12, "bm_first_to_50_them");
-            showsplashtoteam(var12, "bm_first_to_50_us");
+            ref_13372(var_12, "bm_first_to_50_them");
+            showsplashtoteam(var_12, "bm_first_to_50_us");
           }
         }
       }
@@ -1278,93 +1278,93 @@ function dmzextractcost() {
   }
 }
 
-function ref_14004(var0, var1) {
-  foreach(var3 in var1) {
-    if(!isDefined(var3)) {
+function ref_14004(var_0, var_1) {
+  foreach(var_3 in var_1) {
+    if(!isDefined(var_3)) {
       continue;
     }
 
-    var4 = var0[var3.team];
-    var3 _calloutmarkerping_handleluinotify_added::ref_13133("ui_br_team_placement", var4);
-    var3 _calloutmarkerping_handleluinotify_added::ref_13133("ui_br_player_position", var4);
+    var_4 = var_0[var_3.team];
+    var_3 _calloutmarkerping_handleluinotify_added::ref_13133("ui_br_team_placement", var_4);
+    var_3 _calloutmarkerping_handleluinotify_added::ref_13133("ui_br_player_position", var_4);
   }
 }
 
-function revive_or_disconnect_monitor(var0) {
+function revive_or_disconnect_monitor(var_0) {
   if(isDefined(level.ref_12884)) {
-    return level.ref_12884[var0];
+    return level.ref_12884[var_0];
   }
 
   return -1;
 }
 
-function ref_13371(var0) {
-  foreach(var2 in level.players) {
-    var2 scripts\mp\hud_message::showsplash(var0);
+function ref_13371(var_0) {
+  foreach(var_2 in level.players) {
+    var_2 scripts\mp\hud_message::showsplash(var_0);
   }
 }
 
-function showsplashtoteam(var0, var1) {
-  foreach(var3 in level.teamdata[var0]["players"]) {
-    var3 scripts\mp\hud_message::showsplash(var1);
+function showsplashtoteam(var_0, var_1) {
+  foreach(var_3 in level.teamdata[var_0]["players"]) {
+    var_3 scripts\mp\hud_message::showsplash(var_1);
   }
 }
 
-function ref_13372(var0, var1) {
-  foreach(var3 in level.players) {
-    if(isDefined(var3) && var3.team != var0) {
-      var3 scripts\mp\hud_message::showsplash(var1);
+function ref_13372(var_0, var_1) {
+  foreach(var_3 in level.players) {
+    if(isDefined(var_3) && var_3.team != var_0) {
+      var_3 scripts\mp\hud_message::showsplash(var_1);
     }
   }
 }
 
-function setobjectivecallbacks(var0, var1) {
-  var2 = int(min(var1, 131072));
-  self setclientomnvar(var0, var2);
+function setobjectivecallbacks(var_0, var_1) {
+  var_2 = int(min(var_1, 131072));
+  self setclientomnvar(var_0, var_2);
 }
 
-function setoutputfunc(var0, var1) {
-  var2 = int(min(var1, 131072));
-  setomnvar(var0, var2);
+function setoutputfunc(var_0, var_1) {
+  var_2 = int(min(var_1, 131072));
+  setomnvar(var_0, var_2);
 }
 
-function ref_13ff0(var0, var1, var2, var3) {
+function ref_13ff0(var_0, var_1, var_2, var_3) {
   level.ref_11a36 = level.ref_11a32;
   level.ref_11a32 = [];
 
   if(level.ref_11a2c == 1) {
-    for(var4 = 0; var4 < level.ref_11a27; var4++) {
-      var5 = removeplatepouch(var4, var0, var3);
+    for(var_4 = 0; var_4 < level.ref_11a27; var_4++) {
+      var_5 = removeplatepouch(var_4, var_0, var_3);
 
-      if(isDefined(var5)) {
-        level.ref_11a32[level.ref_11a32.size] = var2[var5];
+      if(isDefined(var_5)) {
+        level.ref_11a32[level.ref_11a32.size] = var_2[var_5];
       }
     }
   } else {
     jumpiffalse(level.ref_11a2c == 2) LOC_00000106;
-    var5 = removeplatepouch(0, var0, var3);
+    var_5 = removeplatepouch(0, var_0, var_3);
 
-    if(isDefined(var5)) {
-      level.ref_11a32[0] = var2[var5];
+    if(isDefined(var_5)) {
+      level.ref_11a32[0] = var_2[var_5];
     }
 
-    foreach(var7 in var1) {
-      var8 = var2[var7];
-      var9 = var0[var7];
+    foreach(var_7 in var_1) {
+      var_8 = var_2[var_7];
+      var_9 = var_0[var_7];
 
-      if(var9 == 0) {
+      if(var_9 == 0) {
         break;
       }
 
-      if(var9 == level.ref_12d6f) {
+      if(var_9 == level.ref_12d6f) {
         continue;
       }
 
-      if(scripts\engine\utility::array_contains(level.ref_11a32, var8)) {
+      if(scripts\engine\utility::array_contains(level.ref_11a32, var_8)) {
         continue;
       }
 
-      level.ref_11a32[level.ref_11a32.size] = var8;
+      level.ref_11a32[level.ref_11a32.size] = var_8;
 
       if(level.ref_11a32.size == level.ref_11a27) {
         break;
@@ -1374,55 +1374,55 @@ function ref_13ff0(var0, var1, var2, var3) {
     goto LOC_0000015f;
   }
 
-  foreach(var8 in level.ref_11a36) {
-    if(isDefined(var8) && !scripts\engine\utility::array_contains(level.ref_11a32, var8)) {
-      ref_12c18(var8);
+  foreach(var_8 in level.ref_11a36) {
+    if(isDefined(var_8) && !scripts\engine\utility::array_contains(level.ref_11a32, var_8)) {
+      ref_12c18(var_8);
     }
   }
 
   level notify("update_loot_leaders");
 
   if(level.ref_11a29.size < level.ref_11a27) {
-    for(var4 = 0; var4 < level.ref_11a27; var4++) {
-      var15 = spawnStruct();
-      var15.hidden = 0;
-      var15 scripts\mp\gametypes\br_quest_util::init_tape_machine_animations("ui_mp_br_mapmenu_icon_assassin_objective_enemy", "active");
-      level.ref_11a29[var4] = var15;
+    for(var_4 = 0; var_4 < level.ref_11a27; var_4++) {
+      var_15 = spawnStruct();
+      var_15.hidden = 0;
+      var_15 scripts\mp\gametypes\br_quest_util::init_tape_machine_animations("ui_mp_br_mapmenu_icon_assassin_objective_enemy", "active");
+      level.ref_11a29[var_4] = var_15;
     }
   }
 
-  for(var4 = 0; var4 < level.ref_11a27; var4++) {
-    var15 = level.ref_11a29[var4];
+  for(var_4 = 0; var_4 < level.ref_11a27; var_4++) {
+    var_15 = level.ref_11a29[var_4];
 
-    if(isDefined(level.ref_11a32[var4])) {
-      var15.targetplayer = level.ref_11a32[var4];
-      var15.targetplayer.ref_11a26 = var15;
-      var16 = var15.targetplayer.origin;
-      var17 = scripts\engine\utility::array_contains(level.ref_11a32, var15.targetplayer) && !scripts\engine\utility::array_contains(level.ref_11a36, var15.targetplayer);
+    if(isDefined(level.ref_11a32[var_4])) {
+      var_15.targetplayer = level.ref_11a32[var_4];
+      var_15.targetplayer.ref_11a26 = var_15;
+      var_16 = var_15.targetplayer.origin;
+      var_17 = scripts\engine\utility::array_contains(level.ref_11a32, var_15.targetplayer) && !scripts\engine\utility::array_contains(level.ref_11a36, var_15.targetplayer);
 
-      if(var15.hidden == 0) {
-        var18 = scripts\mp\utility\teams::getenemyplayers(var15.targetplayer.team, 0);
+      if(var_15.hidden == 0) {
+        var_18 = scripts\mp\utility\teams::getenemyplayers(var_15.targetplayer.team, 0);
 
-        foreach(var8 in var18) {
-          displaywelcome(var15, var8);
+        foreach(var_8 in var_18) {
+          displaywelcome(var_15, var_8);
         }
 
-        var21 = scripts\mp\utility\teams::getfriendlyplayers(var15.targetplayer.team, 0);
+        var_21 = scripts\mp\utility\teams::getfriendlyplayers(var_15.targetplayer.team, 0);
 
-        foreach(var8 in var21) {
-          displaysquadmessagetoteam(var15, var8);
+        foreach(var_8 in var_21) {
+          displaysquadmessagetoteam(var_15, var_8);
         }
       }
 
-      if(var17) {
-        battle_tracks_updatebattletracks(var15);
+      if(var_17) {
+        battle_tracks_updatebattletracks(var_15);
       }
 
       continue;
     }
 
-    var15.targetplayer = undefined;
-    objective_removeallfrommask(var15.objectiveiconid);
+    var_15.targetplayer = undefined;
+    objective_removeallfrommask(var_15.objectiveiconid);
   }
 }
 
@@ -1431,32 +1431,32 @@ function dmzextractcostdecrease() {
   level waittill("update_loot_leaders");
 
   for(;;) {
-    for(var0 = 0; var0 < level.ref_11a27; var0++) {
-      var1 = level.ref_11a29[var0];
+    for(var_0 = 0; var_0 < level.ref_11a27; var_0++) {
+      var_1 = level.ref_11a29[var_0];
 
-      if(isDefined(var1.targetplayer)) {
-        if(!scripts\mp\utility\player::isreallyalive(var1.targetplayer) && var1.hidden == 0) {
-          var1.hidden = 1;
-          objective_removeallfrommask(var1.objectiveiconid);
-          level notify("Objective_Delete", var1.objectiveiconid);
-        } else if(scripts\mp\utility\player::isreallyalive(var1.targetplayer) && var1.hidden == 1) {
-          if(!level.wait_unload_jeep || isDefined(var1.targetplayer.wait_unload_chopper_flood_players) && var1.targetplayer.wait_unload_chopper_flood_players == 0) {
-            var1.hidden = 0;
-            var2 = scripts\mp\utility\teams::getenemyplayers(var1.targetplayer.team, 0);
+      if(isDefined(var_1.targetplayer)) {
+        if(!scripts\mp\utility\player::isreallyalive(var_1.targetplayer) && var_1.hidden == 0) {
+          var_1.hidden = 1;
+          objective_removeallfrommask(var_1.objectiveiconid);
+          level notify("Objective_Delete", var_1.objectiveiconid);
+        } else if(scripts\mp\utility\player::isreallyalive(var_1.targetplayer) && var_1.hidden == 1) {
+          if(!level.wait_unload_jeep || isDefined(var_1.targetplayer.wait_unload_chopper_flood_players) && var_1.targetplayer.wait_unload_chopper_flood_players == 0) {
+            var_1.hidden = 0;
+            var_2 = scripts\mp\utility\teams::getenemyplayers(var_1.targetplayer.team, 0);
 
-            foreach(var4 in var2) {
-              displaywelcome(var1, var4);
+            foreach(var_4 in var_2) {
+              displaywelcome(var_1, var_4);
             }
           }
         }
 
-        distsqtodefenderfalgstart(var1, var1.targetplayer.origin);
+        distsqtodefenderfalgstart(var_1, var_1.targetplayer.origin);
         continue;
       }
 
-      if(var1.hidden == 0) {
-        var1.hidden = 1;
-        objective_removeallfrommask(var1.objectiveiconid);
+      if(var_1.hidden == 0) {
+        var_1.hidden = 1;
+        objective_removeallfrommask(var_1.objectiveiconid);
       }
     }
 
@@ -1469,45 +1469,45 @@ function dmzextractcostdecrease() {
   }
 }
 
-function displaywelcome(var0) {
-  scripts\mp\gametypes\br_quest_util::ref_1336c(var0);
+function displaywelcome(var_0) {
+  scripts\mp\gametypes\br_quest_util::ref_1336c(var_0);
 }
 
-function displaysquadmessagetoteam(var0) {
-  scripts\mp\gametypes\br_quest_util::spawn_downed_friendly(var0);
+function displaysquadmessagetoteam(var_0) {
+  scripts\mp\gametypes\br_quest_util::spawn_downed_friendly(var_0);
 }
 
-function removeplatepouch(var0, var1, var2) {
-  var3 = var2[var0];
-  var4 = 0;
-  var5 = 0;
+function removeplatepouch(var_0, var_1, var_2) {
+  var_3 = var_2[var_0];
+  var_4 = 0;
+  var_5 = 0;
 
-  if(level.teamdata[var3]["players"].size == 0) {
+  if(level.teamdata[var_3]["players"].size == 0) {
     return undefined;
   }
 
-  var6 = level.teamdata[var3]["players"][0].guid;
+  var_6 = level.teamdata[var_3]["players"][0].guid;
 
-  foreach(var8 in level.teamdata[var3]["players"]) {
-    var4 = var1[var8.guid];
+  foreach(var_8 in level.teamdata[var_3]["players"]) {
+    var_4 = var_1[var_8.guid];
 
-    if(var4 > var5) {
-      var5 = var4;
-      var6 = var8.guid;
+    if(var_4 > var_5) {
+      var_5 = var_4;
+      var_6 = var_8.guid;
     }
   }
 
-  return var6;
+  return var_6;
 }
 
-function battle_tracks_updatebattletracks(var0) {
-  var1 = var0.targetplayer;
+function battle_tracks_updatebattletracks(var_0) {
+  var_1 = var_0.targetplayer;
 
-  if(scripts\mp\utility\player::isreallyalive(var1)) {
-    carriabletype(var1);
+  if(scripts\mp\utility\player::isreallyalive(var_1)) {
+    carriabletype(var_1);
 
     if(!scripts\mp\gametypes\br_public::uniquelootitemid()) {
-      var1 scripts\mp\hud_message::showsplash("bm_player_marked");
+      var_1 scripts\mp\hud_message::showsplash("bm_player_marked");
       return;
     }
 
@@ -1519,16 +1519,16 @@ function ref_13ff1() {
   level notify("restartLootLeaders");
   level endon("restartLootLeaders");
   level endon("game_ended");
-  var0 = getdvarfloat("scr_dmz_loot_leader_update_interval", 15);
-  var1 = getdvarfloat("scr_dmz_loot_leader_update_interval_blink", 5);
-  var2 = getdvarint("scr_bmo_circle_pulse_start", 800);
-  var3 = getdvarint("scr_bmo_circle_pulse_end", 200);
-  var4 = var0 - var1;
+  var_0 = getdvarfloat("scr_dmz_loot_leader_update_interval", 15);
+  var_1 = getdvarfloat("scr_dmz_loot_leader_update_interval_blink", 5);
+  var_2 = getdvarint("scr_bmo_circle_pulse_start", 800);
+  var_3 = getdvarint("scr_bmo_circle_pulse_end", 200);
+  var_4 = var_0 - var_1;
   scripts\mp\flags::gameflagwait("placement_updates_allowed");
 
   for(;;) {
     level.ref_127d2 = 1;
-    scripts\engine\utility::waittill_notify_or_timeout("bmo_overtime_start", var4);
+    scripts\engine\utility::waittill_notify_or_timeout("bmo_overtime_start", var_4);
   }
 }
 
@@ -1546,23 +1546,23 @@ function ref_12397() {
   scripts\mp\flags::gameflagset("placement_updates_allowed");
 }
 
-function ref_12c18(var0) {
-  lbravo_hover_rider_death_monitor(var0);
+function ref_12c18(var_0) {
+  lbravo_hover_rider_death_monitor(var_0);
 
-  if(isDefined(var0.ref_11a26)) {
-    foreach(var2 in level.players) {
-      displaysquadmessagetoteam(var0.ref_11a26, var2);
+  if(isDefined(var_0.ref_11a26)) {
+    foreach(var_2 in level.players) {
+      displaysquadmessagetoteam(var_0.ref_11a26, var_2);
     }
 
-    var4 = var0.ref_11a26.guard_spawners;
-    var0.ref_11a26.targetplayer = undefined;
-    var0.ref_11a26 = undefined;
+    var_4 = var_0.ref_11a26.guard_spawners;
+    var_0.ref_11a26.targetplayer = undefined;
+    var_0.ref_11a26 = undefined;
   }
 
-  level.ref_11a32 = scripts\engine\utility::array_remove(level.ref_11a32, var0);
+  level.ref_11a32 = scripts\engine\utility::array_remove(level.ref_11a32, var_0);
 }
 
-function searchradiusidealmin(var0) {
+function searchradiusidealmin(var_0) {
   waitframe();
   ref_14004(scripts\mp\gamescore::run_common_functions_stealth(), level.players);
 
@@ -1571,39 +1571,39 @@ function searchradiusidealmin(var0) {
   }
 
   level.ref_13dc0 = 1;
-  level thread scripts\mp\gamelogic::endgame(var0, game["end_reason"]["objective_completed"]);
-  var1 = [];
+  level thread scripts\mp\gamelogic::endgame(var_0, game["end_reason"]["objective_completed"]);
+  var_1 = [];
 
-  if(isDefined(var0) && var0 != "tie") {
-    var1 = scripts\mp\utility\teams::getteamdata(var0, "players");
+  if(isDefined(var_0) && var_0 != "tie") {
+    var_1 = scripts\mp\utility\teams::getteamdata(var_0, "players");
   }
 
-  thread scripts\mp\music_and_dialog::ref_12789(var1);
+  thread scripts\mp\music_and_dialog::ref_12789(var_1);
 }
 
-function ononeleftevent(var0) {}
+function ononeleftevent(var_0) {}
 
 function ref_126a6() {
   if(!istrue(self.controlsfrozen)) {
     scripts\mp\utility\player::_freezecontrols(1, undefined, "spawnEndOfGame");
   }
 
-  var0 = spawnStruct();
-  var1 = self getspectatingplayer();
+  var_0 = spawnStruct();
+  var_1 = self getspectatingplayer();
 
-  if(!isDefined(var1)) {
-    var1 = self;
+  if(!isDefined(var_1)) {
+    var_1 = self;
   }
 
-  var0.origin = var1.origin;
-  var0.angles = var1.angles;
+  var_0.origin = var_1.origin;
+  var_0.angles = var_1.angles;
 
-  if(!var1 isonground()) {
-    var2 = scripts\engine\trace::create_default_contents(1);
-    var0.origin = scripts\engine\utility::drop_to_ground(var0.origin, 0, -20000, undefined, var2);
+  if(!var_1 isonground()) {
+    var_2 = scripts\engine\trace::create_default_contents(1);
+    var_0.origin = scripts\engine\utility::drop_to_ground(var_0.origin, 0, -20000, undefined, var_2);
   }
 
-  var0.origin += (0, 0, 100);
+  var_0.origin += (0, 0, 100);
 
   if(!isDefined(level.needs_antenna)) {
     level.needs_antenna = 1;
@@ -1614,7 +1614,7 @@ function ref_126a6() {
 }
 
 function test_pipe_fire() {
-  var0 = [];
+  var_0 = [];
   level.mp_m_trench_patch = [];
   level.mp_m_speedball_patch = [];
 
@@ -1677,50 +1677,50 @@ function test_pipe_fire() {
 }
 
 function ref_13db9() {
-  var0 = 0;
+  var_0 = 0;
 
-  foreach(var2 in level.players) {
-    thread ref_12753(var2, var2);
-    var0++;
+  foreach(var_2 in level.players) {
+    thread ref_12753(var_2, var_2);
+    var_0++;
 
-    if(var0 == 5) {
+    if(var_0 == 5) {
       waitframe();
-      var0 = 0;
+      var_0 = 0;
     }
   }
 }
 
-function registerquestcategorytablevalues(var0) {
-  var1 = undefined;
-  var2 = undefined;
+function registerquestcategorytablevalues(var_0) {
+  var_1 = undefined;
+  var_2 = undefined;
 
-  foreach(var4 in level.mp_m_trench_patch) {
-    var5 = distance2dsquared(var0.origin, var4);
+  foreach(var_4 in level.mp_m_trench_patch) {
+    var_5 = distance2dsquared(var_0.origin, var_4);
 
-    if(var5 <= 9000000) {
-      return var6;
+    if(var_5 <= 9000000) {
+      return var_6;
     }
 
-    if(!isDefined(var2) || var2 > var5) {
-      var2 = var5;
-      var1 = var6;
+    if(!isDefined(var_2) || var_2 > var_5) {
+      var_2 = var_5;
+      var_1 = var_6;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function ref_12753(var0, var1) {
-  var2 = level.mp_m_trench_patch[var1];
-  var3 = level.mp_m_speedball_patch[var1];
-  var4 = var2 + anglestoright(var3) * 1000;
-  var5 = var3;
-  var6 = spawn("script_model", var2);
-  var6 setModel("tag_origin");
-  var6.angles = var3;
-  var0 cameralinkTo(var6, "tag_origin");
-  var6 moveTo(var4, 60);
-  var6 rotateTo(var5, 60);
+function ref_12753(var_0, var_1) {
+  var_2 = level.mp_m_trench_patch[var_1];
+  var_3 = level.mp_m_speedball_patch[var_1];
+  var_4 = var_2 + anglestoright(var_3) * 1000;
+  var_5 = var_3;
+  var_6 = spawn("script_model", var_2);
+  var_6 setModel("tag_origin");
+  var_6.angles = var_3;
+  var_0 cameralinkTo(var_6, "tag_origin");
+  var_6 moveTo(var_4, 60);
+  var_6 rotateTo(var_5, 60);
 }
 
 function dist_miles() {
@@ -1733,29 +1733,29 @@ function dist_miles() {
   }
 }
 
-function distsqtodefenderflagstart(var0) {
-  if(!isDefined(var0)) {
-    var0 = level.br_circle.circleindex + 1;
+function distsqtodefenderflagstart(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = level.br_circle.circleindex + 1;
   }
 
-  if(level.br_level.default_class_chosen.size <= var0 || !istrue(level.wait_to_stop_path_vehicle)) {
+  if(level.br_level.default_class_chosen.size <= var_0 || !istrue(level.wait_to_stop_path_vehicle)) {
     return;
   }
 
-  var1 = level.br_level.default_class_chosen[var0];
-  var2 = level.wait_to_spawn_r0;
-  var3 = level.ref_11a32.size > 0;
-  jumpiffalse(var3) LOC_00000081;
-  var4 = level.ref_11a32[0].origin;
-  var5 = scripts\engine\utility::ter_op(level.wait_to_start_exfil_obj, var1 - var4, var4 - var1);
+  var_1 = level.br_level.default_class_chosen[var_0];
+  var_2 = level.wait_to_spawn_r0;
+  var_3 = level.ref_11a32.size > 0;
+  jumpiffalse(var_3) LOC_00000081;
+  var_4 = level.ref_11a32[0].origin;
+  var_5 = scripts\engine\utility::ter_op(level.wait_to_start_exfil_obj, var_1 - var_4, var_4 - var_1);
   goto LOC_000000a2;
 }
 
-function displaysplashtoplayers(var0) {
-  var1 = level.br_level.br_mapbounds;
-  var2 = level.wait_to_stop_pre_tmtyl_spawners;
-  var3 = var0[0] < var1[0][0] * var2 && var0[0] > var1[1][0] * var2 && var0[1] < var1[0][1] * var2 && var0[1] > var1[1][1] * var2;
-  return var3;
+function displaysplashtoplayers(var_0) {
+  var_1 = level.br_level.br_mapbounds;
+  var_2 = level.wait_to_stop_pre_tmtyl_spawners;
+  var_3 = var_0[0] < var_1[0][0] * var_2 && var_0[0] > var_1[1][0] * var_2 && var_0[1] < var_1[0][1] * var_2 && var_0[1] > var_1[1][1] * var_2;
+  return var_3;
 }
 
 function dmzminextractcost() {
@@ -1773,30 +1773,30 @@ function display_reinforcement_called_icon() {
 }
 
 function display_ready_for_sequence() {
-  var0 = display_reinforcement_called_icon();
+  var_0 = display_reinforcement_called_icon();
 
   if(level.br_circle.circleindex < 0) {
     return level.br_level.default_class_chosen[0];
   }
 
-  if(var0 > 1) {
+  if(var_0 > 1) {
     return level.br_level.default_class_chosen[level.br_circle.circleindex];
   }
 
-  var1 = level.br_level.default_class_chosen[level.br_circle.circleindex + 1];
-  var2 = level.br_level.default_class_chosen[level.br_circle.circleindex];
-  return vectorlerp(var2, var1, display_reinforcement_called_icon());
+  var_1 = level.br_level.default_class_chosen[level.br_circle.circleindex + 1];
+  var_2 = level.br_level.default_class_chosen[level.br_circle.circleindex];
+  return vectorlerp(var_2, var_1, display_reinforcement_called_icon());
 }
 
-function displaysplashtoplayersinradius(var0) {
-  var1 = display_ready_for_sequence();
-  var2 = distance2d(var0, var1);
-  return var2 < level.wait_unload_chopper;
+function displaysplashtoplayersinradius(var_0) {
+  var_1 = display_ready_for_sequence();
+  var_2 = distance2d(var_0, var_1);
+  return var_2 < level.wait_unload_chopper;
 }
 
-function display_timer(var0, var1) {
-  var2 = display_ready_for_sequence();
-  return scripts\mp\gametypes\br_circle::getrandompointincircle(var2, level.wait_unload_chopper, var0, var1);
+function display_timer(var_0, var_1) {
+  var_2 = display_ready_for_sequence();
+  return scripts\mp\gametypes\br_circle::getrandompointincircle(var_2, level.wait_unload_chopper, var_0, var_1);
 }
 
 function carriabletype() {

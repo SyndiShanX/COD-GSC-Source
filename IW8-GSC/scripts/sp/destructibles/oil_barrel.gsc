@@ -6,9 +6,9 @@
 function oil_barrel_init() {
   level.g_effect["oil_barrel_impact"] = loadfx("vfx/iw8/prop/scriptables/shared/vfx_imp_oil_stream.vfx");
   level.g_effect["oil_barrel_death"] = loadfx("vfx/iw8/prop/scriptables/vfx_oil_drum_big_01_s3.vfx");
-  var0 = oil_get_barrels();
+  var_0 = oil_get_barrels();
 
-  foreach(var2 in var0) {
+  foreach(var_2 in var_0) {
     thread oil_barrel();
   }
 }
@@ -24,13 +24,13 @@ function oil_barrel() {
   self.health = 9450;
 
   for(;;) {
-    self waittill("damage", var0, var1, var2, var3, var4, var5, var6, var7, var8, var9);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-    if(!scripts\sp\destructibles\barrel_common::isvalidbarreldamage(var1, var4)) {
+    if(!scripts\sp\destructibles\barrel_common::isvalidbarreldamage(var_1, var_4)) {
       continue;
     }
 
-    if(!isDefined(var4)) {
+    if(!isDefined(var_4)) {
       continue;
     }
 
@@ -38,38 +38,38 @@ function oil_barrel() {
       continue;
     }
 
-    var10 = strtok(var4, "_");
+    var_10 = strtok(var_4, "_");
 
-    if(!scripts\engine\utility::array_contains(var10, "BULLET")) {
+    if(!scripts\engine\utility::array_contains(var_10, "BULLET")) {
       continue;
     }
 
-    var11 = scripts\engine\utility::spawn_tag_origin(var3);
-    var12 = vectorNormalize(self.origin - var3);
-    var13 = vectortoangles(var12 * -1);
-    var11.angles = scripts\engine\utility::flat_angle(var13);
-    var11 linkTo(self);
-    var14 = spawn("script_origin", var3);
-    var14 linkTo(self);
-    self notify("new_spew", var11);
-    playFXOnTag(level.g_effect["oil_barrel_impact"], var11, "tag_origin");
-    var11 playSound("dst_oil_barrel_puncture_stream_start");
-    var14 scalevolume(0, 0);
-    var14 playLoopSound("dst_oil_barrel_puncture_stream_lp");
-    var14 scalevolume(1, 0.25);
+    var_11 = scripts\engine\utility::spawn_tag_origin(var_3);
+    var_12 = vectorNormalize(self.origin - var_3);
+    var_13 = vectortoangles(var_12 * -1);
+    var_11.angles = scripts\engine\utility::flat_angle(var_13);
+    var_11 linkTo(self);
+    var_14 = spawn("script_origin", var_3);
+    var_14 linkTo(self);
+    self notify("new_spew", var_11);
+    playFXOnTag(level.g_effect["oil_barrel_impact"], var_11, "tag_origin");
+    var_11 playSound("dst_oil_barrel_puncture_stream_start");
+    var_14 scalevolume(0, 0);
+    var_14 playLoopSound("dst_oil_barrel_puncture_stream_lp");
+    var_14 scalevolume(1, 0.25);
     thread sfx_stop_oil_barrel_stream();
-    self.spewtags = scripts\engine\utility::array_add(self.spewtags, var11);
-    thread oilimpactlife(var11);
+    self.spewtags = scripts\engine\utility::array_add(self.spewtags, var_11);
+    thread oilimpactlife(var_11);
   }
 }
 
-function oilbarrelshoulddie(var0, var1, var2, var3) {
-  if(isDefined(var0) && var0 < 100) {
+function oilbarrelshoulddie(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_0) && var_0 < 100) {
     return false;
   }
 
-  if(isDefined(var2)) {
-    switch (var2) {
+  if(isDefined(var_2)) {
+    switch (var_2) {
       case "SPLASH":
       case "MOD_GRENADE_SPLASH":
       case "MOD_GRENADE":
@@ -83,14 +83,14 @@ function oilbarrelshoulddie(var0, var1, var2, var3) {
   return false;
 }
 
-function oilimpactlife(var0) {
+function oilimpactlife(var_0) {
   scripts\engine\utility::waittill_notify_or_timeout("entitydeleted", 5);
 
   if(isDefined(self)) {
-    self.spewtags = scripts\engine\utility::array_remove(self.spewtags, var0);
+    self.spewtags = scripts\engine\utility::array_remove(self.spewtags, var_0);
   }
 
-  var0 delete();
+  var_0 delete();
 }
 
 function oil_barrel_death() {
@@ -102,12 +102,12 @@ function oil_barrel_death() {
 
   playFX(level.g_effect["oil_barrel_death"], self.origin);
 
-  foreach(var1 in self.spewtags) {
-    killfxontag(level.g_effect["oil_barrel_impact"], var1, "tag_origin");
+  foreach(var_1 in self.spewtags) {
+    killfxontag(level.g_effect["oil_barrel_impact"], var_1, "tag_origin");
     waitframe();
 
-    if(isDefined(var1)) {
-      var1 delete();
+    if(isDefined(var_1)) {
+      var_1 delete();
     }
   }
 
@@ -117,8 +117,8 @@ function oil_barrel_death() {
   }
 }
 
-function delay_delete(var0) {
-  wait var0;
+function delay_delete(var_0) {
+  wait var_0;
 
   if(isDefined(self)) {
     self delete();
@@ -128,9 +128,9 @@ function delay_delete(var0) {
 
 function sfx_stop_oil_barrel_stream() {
   wait 3.3;
-  var0 = 0.25;
+  var_0 = 0.25;
   self playSound("dst_oil_barrel_puncture_stream_stop");
-  self scalevolume(0, var0);
+  self scalevolume(0, var_0);
   wait 0.3;
   self stoploopsound("dst_oil_barrel_puncture_stream_lp");
   self delete();

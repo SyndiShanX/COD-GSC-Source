@@ -189,55 +189,55 @@ function grenade_model_anims() {
   level.scr_animname["ai_spawn_door_grenade"]["sdr_com_inter_ldoor_smoke_grenade"] = "sdr_com_inter_rdoor_smoke_grenade";
 }
 
-function should_use_door_spawn_anim(var0) {
-  if(istrue(var0.use_spawn_anim)) {
+function should_use_door_spawn_anim(var_0) {
+  if(istrue(var_0.use_spawn_anim)) {
     return 1;
   }
 
-  if(isDefined(var0.script_linkto)) {
-    var0.use_spawn_anim = 1;
+  if(isDefined(var_0.script_linkto)) {
+    var_0.use_spawn_anim = 1;
     return 1;
   }
 
   return 0;
 }
 
-function is_double_door(var0) {
-  if(!isDefined(var0)) {
+function is_double_door(var_0) {
+  if(!isDefined(var_0)) {
     return false;
   }
 
-  if(isDefined(var0.script_linkto)) {
-    var1 = scripts\engine\utility::getStructArray(var0.script_linkto, "script_linkname");
+  if(isDefined(var_0.script_linkto)) {
+    var_1 = scripts\engine\utility::getStructArray(var_0.script_linkto, "script_linkname");
 
-    if(var1.size < 1) {
-      var1 = getEntArray(var0.script_linkto, "script_linkname");
+    if(var_1.size < 1) {
+      var_1 = getEntArray(var_0.script_linkto, "script_linkname");
     }
 
-    return (var1.size >= 2);
+    return (var_1.size >= 2);
   }
 
   return false;
 }
 
-function is_left_door(var0, var1) {
-  return var0 scripts\engine\math::is_point_on_right(var1);
+function is_left_door(var_0, var_1) {
+  return var_0 scripts\engine\math::is_point_on_right(var_1);
 }
 
-function is_right_door(var0, var1) {
-  return !var0 scripts\engine\math::is_point_on_right(var1);
+function is_right_door(var_0, var_1) {
+  return !var_0 scripts\engine\math::is_point_on_right(var_1);
 }
 
-function get_double_door_mid_point(var0) {
-  if(isDefined(var0.script_linkto)) {
-    var1 = scripts\engine\utility::getStructArray(var0.script_linkto, "script_linkname");
+function get_double_door_mid_point(var_0) {
+  if(isDefined(var_0.script_linkto)) {
+    var_1 = scripts\engine\utility::getStructArray(var_0.script_linkto, "script_linkname");
 
-    if(var1.size < 1) {
-      var1 = getEntArray(var0.script_linkto, "script_linkname");
+    if(var_1.size < 1) {
+      var_1 = getEntArray(var_0.script_linkto, "script_linkname");
     }
 
-    if(var1.size >= 2) {
-      return scripts\engine\math::get_mid_point(var1[0].origin, var1[1].origin);
+    if(var_1.size >= 2) {
+      return scripts\engine\math::get_mid_point(var_1[0].origin, var_1[1].origin);
     }
 
     return;
@@ -246,16 +246,16 @@ function get_double_door_mid_point(var0) {
   return undefined;
 }
 
-function get_spawn_anim(var0, var1, var2) {
-  var3 = level.spawn_door_anims;
+function get_spawn_anim(var_0, var_1, var_2) {
+  var_3 = level.spawn_door_anims;
 
-  if(is_double_door(var1)) {
-    var3 = level.spawn_dbldoor_anims;
-  } else if(isDefined(var0) && is_left_door(var0, var1.origin)) {
-    var3 = level.spawn_ldoor_anims;
-  } else if(isDefined(var0) && is_right_door(var0, var1.origin)) {
-    var3 = level.spawn_rdoor_anims;
+  if(is_double_door(var_1)) {
+    var_3 = level.spawn_dbldoor_anims;
+  } else if(isDefined(var_0) && is_left_door(var_0, var_1.origin)) {
+    var_3 = level.spawn_ldoor_anims;
+  } else if(isDefined(var_0) && is_right_door(var_0, var_1.origin)) {
+    var_3 = level.spawn_rdoor_anims;
   }
 
-  return scripts\engine\utility::random(var3);
+  return scripts\engine\utility::random(var_3);
 }

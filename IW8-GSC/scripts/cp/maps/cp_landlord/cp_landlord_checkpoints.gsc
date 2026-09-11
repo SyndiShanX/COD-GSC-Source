@@ -9,16 +9,16 @@ function ref_131ed() {
 }
 
 function getplatformweaponrankxpmultiplier() {
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, scripts\mp\brclientmatchdata::getnearbyaliveplayer("tmtyl_p1", (23048, 9186, -448), (0, 313, 0)));
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, scripts\mp\brclientmatchdata::getnearbyaliveplayer("tmtyl_p1", (23048, 9186, -448), (0, 313, 0)));
 }
 
 function getnexthelimodule() {
-  var0 = scripts\mp\brclientmatchdata::getminigundamagescale("headhunter", (16013, -4376, 1616), (0, 0, 0));
-  var1 = scripts\mp\brclientmatchdata::getmaxoutofboundsbrtime("tmtyl_p1", (23359.3, 8854.99, -452.166), (1.30863, 139.975, -1.14992));
-  var2 = scripts\mp\brclientmatchdata::getminigundamagescale("tmtyl_p1", (23186.3, 8711, -451.166), (0, 240, 0));
-  var3 = scripts\mp\brclientmatchdata::getminigundamagescale("airfield", (4015, 61279.5, 767), (0, 90, 0));
-  return [var0, var1, var2, var3];
+  var_0 = scripts\mp\brclientmatchdata::getminigundamagescale("headhunter", (16013, -4376, 1616), (0, 0, 0));
+  var_1 = scripts\mp\brclientmatchdata::getmaxoutofboundsbrtime("tmtyl_p1", (23359.3, 8854.99, -452.166), (1.30863, 139.975, -1.14992));
+  var_2 = scripts\mp\brclientmatchdata::getminigundamagescale("tmtyl_p1", (23186.3, 8711, -451.166), (0, 240, 0));
+  var_3 = scripts\mp\brclientmatchdata::getminigundamagescale("airfield", (4015, 61279.5, 767), (0, 90, 0));
+  return [var_0, var_1, var_2, var_3];
 }
 
 function getplatformrankxpmultiplier() {

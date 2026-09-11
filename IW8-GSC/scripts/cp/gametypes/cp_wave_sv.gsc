@@ -112,31 +112,31 @@ function initdefaultsettings() {
   setDvar("LTMMLKRKTR", 375);
   level.game_mode_statstable = "cp/zombies/mode_string_tables/zombies_statstable.csv";
   level.game_mode_attachment_map = "cp/zombies/zombie_attachmentmap.csv";
-  var0 = getDvar("NSQLTTMRMP");
-  level.power_up_table = "cp/zombies/" + var0 + "_loot.csv";
+  var_0 = getDvar("NSQLTTMRMP");
+  level.power_up_table = "cp/zombies/" + var_0 + "_loot.csv";
 }
 
-function exit_laststand_func(var0) {
-  var0 scripts\cp\cp_powers::restore_powers(var0, var0.pre_laststand_powers);
-  var0 setclientomnvar("zm_ui_player_in_laststand", 0);
-  var0 clearclienttriggeraudiozone(0.3);
-  var0 playlocalsound("deaths_door_out");
-  var0 stoplocalsound("deaths_door_in");
+function exit_laststand_func(var_0) {
+  var_0 scripts\cp\cp_powers::restore_powers(var_0, var_0.pre_laststand_powers);
+  var_0 setclientomnvar("zm_ui_player_in_laststand", 0);
+  var_0 clearclienttriggeraudiozone(0.3);
+  var_0 playlocalsound("deaths_door_out");
+  var_0 stoplocalsound("deaths_door_in");
 
   if(isDefined(level.vision_set_override)) {
-    thread reset_override_visionset(var0);
+    thread reset_override_visionset(var_0);
   }
 
-  var1 = randomintrange(1, 5);
-  var2 = "zmb_revive_music_lr_0" + var1;
-  var0 scripts\cp\utility::playlocalsound_safe(var2);
-  var0 scripts\cp\utility::allow_player_ignore_me(0);
+  var_1 = randomintrange(1, 5);
+  var_2 = "zmb_revive_music_lr_0" + var_1;
+  var_0 scripts\cp\utility::playlocalsound_safe(var_2);
+  var_0 scripts\cp\utility::allow_player_ignore_me(0);
 }
 
-function reset_override_visionset(var0) {
+function reset_override_visionset(var_0) {
   level endon("game_ended");
   self endon("disconnect");
-  wait var0;
+  wait var_0;
 
   if(isDefined(level.vision_set_override)) {
     level notify("vision_set_change_request", level.vision_set_override, self, 0.1);
@@ -208,7 +208,7 @@ function watch_for_super_ammo_depleted() {
     return;
   }
 
-  var0 = 20;
+  var_0 = 20;
 
   switch (level.logfriendlyfire) {
     case 60:
@@ -216,69 +216,69 @@ function watch_for_super_ammo_depleted() {
     case 62:
     case 63:
     case 64:
-      var0 = 18;
+      var_0 = 18;
       break;
     case 65:
     case 66:
     case 67:
     case 68:
     case 69:
-      var0 = 16;
+      var_0 = 16;
       break;
     case 70:
     case 71:
     case 72:
     case 73:
     case 74:
-      var0 = 14;
+      var_0 = 14;
       break;
     case 79:
     case 78:
     case 77:
     case 76:
     case 75:
-      var0 = 12;
+      var_0 = 12;
       break;
     case 80:
     case 81:
     case 82:
     case 83:
     case 84:
-      var0 = 11;
+      var_0 = 11;
       break;
     case 85:
     case 86:
     case 87:
     case 88:
     case 89:
-      var0 = 10;
+      var_0 = 10;
       break;
     case 94:
     case 90:
     case 91:
     case 92:
     case 93:
-      var0 = 9;
+      var_0 = 9;
       break;
     case 98:
     case 97:
     case 96:
     case 95:
     case 99:
-      var0 = 8;
+      var_0 = 8;
       break;
   }
 
   if(level.logfriendlyfire >= 100 && level.logfriendlyfire < 125) {
-    var0 = 7;
+    var_0 = 7;
   } else if(level.logfriendlyfire >= 125 && level.logfriendlyfire < 150) {
-    var0 = 6;
+    var_0 = 6;
   } else if(level.logfriendlyfire >= 150) {
-    var0 = 5;
+    var_0 = 5;
   }
 
-  level.ref_14529 = var0;
-  setDvar("scr_wave_time_set", var0);
+  level.ref_14529 = var_0;
+  setDvar("scr_wave_time_set", var_0);
 
   if(level.logfriendlyfire == 100) {
     level thread scripts\cp\cp_hud_message::teamhudtutorialmessage(&"COOP_GAME_PLAY/100_TEXT", "allies", 4);
@@ -286,23 +286,23 @@ function watch_for_super_ammo_depleted() {
   }
 }
 
-function floor2lights(var0) {
+function floor2lights(var_0) {
   level endon("game_ended");
-  var1 = getEnt("weapon_crate", "targetname");
-  var2 = getEnt("killstreak_crate", "targetname");
-  var3 = getEnt("grenade_crate", "targetname");
+  var_1 = getEnt("weapon_crate", "targetname");
+  var_2 = getEnt("killstreak_crate", "targetname");
+  var_3 = getEnt("grenade_crate", "targetname");
   wait 10;
 
-  if(isDefined(var1)) {
-    flip_time(var1);
+  if(isDefined(var_1)) {
+    flip_time(var_1);
   }
 
-  if(isDefined(var2)) {
-    flip_time(var2);
+  if(isDefined(var_2)) {
+    flip_time(var_2);
   }
 
-  if(isDefined(var3)) {
-    flip_time(var3);
+  if(isDefined(var_3)) {
+    flip_time(var_3);
   }
 
   thread floor_gas();
@@ -352,9 +352,9 @@ function floor1lights() {
   level waittill("wave_starting");
   level.ref_14522 = 0;
 
-  for(var0 = 0; var0 < level.players.size; var0++) {
-    level.players[var0] setclientomnvar("cp_open_cac", -2);
-    level.players[var0] clearsoundsubmix("cp_store_duck", 1);
+  for(var_0 = 0; var_0 < level.players.size; var_0++) {
+    level.players[var_0] setclientomnvar("cp_open_cac", -2);
+    level.players[var_0] clearsoundsubmix("cp_store_duck", 1);
   }
 
   if(self.targetname != "weapon_crate") {
@@ -396,77 +396,77 @@ function flood_spawn_till_flag() {
       hideheadiconfromplayersinmask(self.headicon);
     }
 
-    self waittill("trigger", var0);
+    self waittill("trigger", var_0);
 
-    if(!var0 scripts\cp\utility::is_valid_player()) {
+    if(!var_0 scripts\cp\utility::is_valid_player()) {
       continue;
     }
 
-    if(!istrue(var0.ref_12c68)) {
-      var0 setclientomnvar("reset_wave_loadout", 2);
-      var0.ref_12c68 = 1;
+    if(!istrue(var_0.ref_12c68)) {
+      var_0 setclientomnvar("reset_wave_loadout", 2);
+      var_0.ref_12c68 = 1;
     }
 
     if(self.targetname == "weapon_crate") {
-      var1 = -1;
-      var2 = var0.currentprimaryweapon.basename;
+      var_1 = -1;
+      var_2 = var_0.currentprimaryweapon.basename;
 
-      for(var3 = 0; var3 < var0.primaryweapons.size; var3++) {
-        var4 = var0.primaryweapons[var3].basename;
-        var5 = scripts\cp\utility::strip_suffix(var4, "_mp");
+      for(var_3 = 0; var_3 < var_0.primaryweapons.size; var_3++) {
+        var_4 = var_0.primaryweapons[var_3].basename;
+        var_5 = scripts\cp\utility::strip_suffix(var_4, "_mp");
 
-        if(var3 < 2) {
-          var0 setplayerdata("cp", "waveSurvivalWeapon", var3, var5);
+        if(var_3 < 2) {
+          var_0 setplayerdata("cp", "waveSurvivalWeapon", var_3, var_5);
         }
 
-        if(var2 == var4) {
-          var1 = var3;
+        if(var_2 == var_4) {
+          var_1 = var_3;
         }
       }
 
       wait 0.1;
 
-      if(var1 == 0 || var1 == 1) {
-        var0.ref_120b7 = var1;
+      if(var_1 == 0 || var_1 == 1) {
+        var_0.ref_120b7 = var_1;
 
         if(istrue(level.ref_14522)) {
-          var0 setclientomnvar("cp_open_cac", var1);
+          var_0 setclientomnvar("cp_open_cac", var_1);
         } else {
-          var0 setclientomnvar("cp_open_cac", 4);
+          var_0 setclientomnvar("cp_open_cac", 4);
         }
 
-        var0 setsoundsubmix("cp_store_duck", 1);
+        var_0 setsoundsubmix("cp_store_duck", 1);
         thread ref_14542(level);
       } else {
-        var0 thread scripts\cp\utility::hint_prompt("cant_use_with_weapon", 1, 2);
+        var_0 thread scripts\cp\utility::hint_prompt("cant_use_with_weapon", 1, 2);
       }
 
       continue;
     }
 
     if(self.targetname == "grenade_crate") {
-      var0 setclientomnvar("cp_open_cac", 2);
-      var0 setsoundsubmix("cp_store_duck", 1);
+      var_0 setclientomnvar("cp_open_cac", 2);
+      var_0 setsoundsubmix("cp_store_duck", 1);
       thread ref_14542(level);
       continue;
     }
 
     if(self.targetname == "killstreak_crate") {
-      var0 setclientomnvar("cp_open_cac", 3);
-      var0 setsoundsubmix("cp_store_duck", 1);
+      var_0 setclientomnvar("cp_open_cac", 3);
+      var_0 setsoundsubmix("cp_store_duck", 1);
       continue;
     }
   }
 }
 
-function ref_14542(var0) {
+function ref_14542(var_0) {
   level endon("game_ended");
   level endon("timeout_wave");
   level endon("weapon_buy_starting");
-  var0 endon("death_or_disconnect");
-  var0 waittill("last_stand_start");
-  var0 setclientomnvar("cp_open_cac", -2);
-  var0 clearsoundsubmix("cp_store_duck", 1);
+  var_0 endon("death_or_disconnect");
+  var_0 waittill("last_stand_start");
+  var_0 setclientomnvar("cp_open_cac", -2);
+  var_0 clearsoundsubmix("cp_store_duck", 1);
 }
 
 function bronloadoutcratedestroyed() {
@@ -483,53 +483,53 @@ function bronloadoutcratedestroyed() {
       hideheadiconfromplayersinmask(self.headicon);
     }
 
-    self waittill("trigger", var0);
+    self waittill("trigger", var_0);
 
-    if(!var0 scripts\cp\utility::is_valid_player()) {
+    if(!var_0 scripts\cp\utility::is_valid_player()) {
       continue;
     }
 
-    if(!istrue(var0.ref_12c68)) {
-      var0 setclientomnvar("reset_wave_loadout", 2);
-      var0.ref_12c68 = 1;
+    if(!istrue(var_0.ref_12c68)) {
+      var_0 setclientomnvar("reset_wave_loadout", 2);
+      var_0.ref_12c68 = 1;
     }
 
     if(self.targetname == "weapon_crate") {
-      var1 = -1;
-      var2 = var0.currentprimaryweapon.basename;
+      var_1 = -1;
+      var_2 = var_0.currentprimaryweapon.basename;
 
-      for(var3 = 0; var3 < var0.primaryweapons.size; var3++) {
-        var4 = var0.primaryweapons[var3].basename;
-        var5 = scripts\cp\utility::strip_suffix(var4, "_mp");
+      for(var_3 = 0; var_3 < var_0.primaryweapons.size; var_3++) {
+        var_4 = var_0.primaryweapons[var_3].basename;
+        var_5 = scripts\cp\utility::strip_suffix(var_4, "_mp");
 
-        if(var3 < 2) {
-          var0 setplayerdata("cp", "waveSurvivalWeapon", var3, var5);
+        if(var_3 < 2) {
+          var_0 setplayerdata("cp", "waveSurvivalWeapon", var_3, var_5);
         }
 
-        if(var2 == var4) {
-          var1 = var3;
+        if(var_2 == var_4) {
+          var_1 = var_3;
         }
       }
 
-      var6 = 1;
-      var7 = tablelookup("mp/statstable.csv", 5, var2, 1);
+      var_6 = 1;
+      var_7 = tablelookup("mp/statstable.csv", 5, var_2, 1);
 
-      if(var7 == "weapon_melee" || var7 == "weapon_melee2") {
-        var6 = 0;
+      if(var_7 == "weapon_melee" || var_7 == "weapon_melee2") {
+        var_6 = 0;
       }
 
-      if(var6 && (var1 == 0 || var1 == 1)) {
-        var0.ref_120b7 = var1;
+      if(var_6 && (var_1 == 0 || var_1 == 1)) {
+        var_0.ref_120b7 = var_1;
 
         if(istrue(level.ref_14522)) {
-          var0 setclientomnvar("cp_open_cac", var1);
+          var_0 setclientomnvar("cp_open_cac", var_1);
         } else {
-          var0 setclientomnvar("cp_open_cac", 4);
+          var_0 setclientomnvar("cp_open_cac", 4);
         }
 
-        var0 setsoundsubmix("cp_store_duck", 1);
+        var_0 setsoundsubmix("cp_store_duck", 1);
       } else {
-        var0 thread scripts\cp\utility::hint_prompt("cant_use_with_weapon", 1, 2);
+        var_0 thread scripts\cp\utility::hint_prompt("cant_use_with_weapon", 1, 2);
       }
 
       continue;
@@ -539,79 +539,79 @@ function bronloadoutcratedestroyed() {
 
 function init_and_start_whack_a_mole_sequence_data() {
   level endon("game_ended");
-  var0 = scripts\cp\cp_objectives::requestworldid("ammopurchase", 20);
-  objective_state(var0, "current");
-  objective_setshowoncompass(var0, 1);
-  objective_setplayintro(var0, 1);
-  objective_setlabel(var0, "");
-  objective_icon(var0, "hud_icon_survival_ammo");
-  objective_position(var0, level.infilvideocompletecallback.origin + infilcinematicactive(level.infilvideocompletecallback));
-  objective_setshowdistance(var0, 1);
-  objective_setshowprogress(var0, 0);
-  objective_setbackground(var0, 1);
+  var_0 = scripts\cp\cp_objectives::requestworldid("ammopurchase", 20);
+  objective_state(var_0, "current");
+  objective_setshowoncompass(var_0, 1);
+  objective_setplayintro(var_0, 1);
+  objective_setlabel(var_0, "");
+  objective_icon(var_0, "hud_icon_survival_ammo");
+  objective_position(var_0, level.infilvideocompletecallback.origin + infilcinematicactive(level.infilvideocompletecallback));
+  objective_setshowdistance(var_0, 1);
+  objective_setshowprogress(var_0, 0);
+  objective_setbackground(var_0, 1);
   level waittill("close_ammo_shop");
-  objective_state(var0, "done");
-  objective_delete(var0);
-  scripts\cp\cp_objectives::freeworldidbyobjid(var0);
+  objective_state(var_0, "done");
+  objective_delete(var_0);
+  scripts\cp\cp_objectives::freeworldidbyobjid(var_0);
 }
 
 function init_client() {
   level endon("game_ended");
   level notify("close_ammo_shop");
-  var0 = scripts\cp\cp_objectives::requestworldid("store_weapons", 20);
-  var1 = scripts\cp\cp_objectives::requestworldid("store_equipment", 20);
-  var2 = scripts\cp\cp_objectives::requestworldid("store_munitions", 20);
+  var_0 = scripts\cp\cp_objectives::requestworldid("store_weapons", 20);
+  var_1 = scripts\cp\cp_objectives::requestworldid("store_equipment", 20);
+  var_2 = scripts\cp\cp_objectives::requestworldid("store_munitions", 20);
   level.infilcoveroverlay = 1;
-  objective_state(var0, "current");
-  objective_setshowoncompass(var0, 1);
-  objective_setlabel(var0, "");
-  objective_icon(var0, "hud_icon_survival_weapon");
-  objective_position(var0, level.infilvideocompletecallback.origin + infilcinematicactive(level.infilvideocompletecallback));
-  objective_setshowdistance(var0, 1);
-  objective_setshowprogress(var0, 0);
-  objective_setbackground(var0, 1);
-  objective_state(var1, "current");
-  objective_setshowoncompass(var1, 1);
-  objective_setlabel(var1, "");
-  objective_icon(var1, "hud_icon_survival_equipment");
-  objective_position(var1, level.infil_driver.origin + infilcinematicactive(level.infil_driver));
-  objective_setshowdistance(var1, 1);
-  objective_setshowprogress(var1, 0);
-  objective_setbackground(var1, 1);
-  objective_state(var2, "current");
-  objective_setshowoncompass(var2, 1);
-  objective_setlabel(var2, "");
-  objective_icon(var2, "hud_icon_survival_killstreak");
-  objective_position(var2, level.infil_plane_vo.origin + infilcinematicactive(level.infil_plane_vo));
-  objective_setshowdistance(var2, 1);
-  objective_setshowprogress(var2, 0);
-  objective_setbackground(var2, 1);
+  objective_state(var_0, "current");
+  objective_setshowoncompass(var_0, 1);
+  objective_setlabel(var_0, "");
+  objective_icon(var_0, "hud_icon_survival_weapon");
+  objective_position(var_0, level.infilvideocompletecallback.origin + infilcinematicactive(level.infilvideocompletecallback));
+  objective_setshowdistance(var_0, 1);
+  objective_setshowprogress(var_0, 0);
+  objective_setbackground(var_0, 1);
+  objective_state(var_1, "current");
+  objective_setshowoncompass(var_1, 1);
+  objective_setlabel(var_1, "");
+  objective_icon(var_1, "hud_icon_survival_equipment");
+  objective_position(var_1, level.infil_driver.origin + infilcinematicactive(level.infil_driver));
+  objective_setshowdistance(var_1, 1);
+  objective_setshowprogress(var_1, 0);
+  objective_setbackground(var_1, 1);
+  objective_state(var_2, "current");
+  objective_setshowoncompass(var_2, 1);
+  objective_setlabel(var_2, "");
+  objective_icon(var_2, "hud_icon_survival_killstreak");
+  objective_position(var_2, level.infil_plane_vo.origin + infilcinematicactive(level.infil_plane_vo));
+  objective_setshowdistance(var_2, 1);
+  objective_setshowprogress(var_2, 0);
+  objective_setbackground(var_2, 1);
 
   if(level.logfriendlyfire <= 2) {
-    objective_setplayintro(var0, 1);
-    objective_setplayintro(var1, 1);
-    objective_setplayintro(var2, 1);
+    objective_setplayintro(var_0, 1);
+    objective_setplayintro(var_1, 1);
+    objective_setplayintro(var_2, 1);
   } else {
-    objective_setplayintro(var0, 0);
-    objective_setplayintro(var1, 0);
-    objective_setplayintro(var2, 0);
+    objective_setplayintro(var_0, 0);
+    objective_setplayintro(var_1, 0);
+    objective_setplayintro(var_2, 0);
   }
 
   level waittill("close_shops");
-  objective_state(var0, "done");
-  objective_delete(var0);
-  scripts\cp\cp_objectives::freeworldidbyobjid(var0);
-  objective_state(var1, "done");
-  objective_delete(var1);
-  scripts\cp\cp_objectives::freeworldidbyobjid(var1);
-  objective_state(var2, "done");
-  objective_delete(var2);
-  scripts\cp\cp_objectives::freeworldidbyobjid(var2);
+  objective_state(var_0, "done");
+  objective_delete(var_0);
+  scripts\cp\cp_objectives::freeworldidbyobjid(var_0);
+  objective_state(var_1, "done");
+  objective_delete(var_1);
+  scripts\cp\cp_objectives::freeworldidbyobjid(var_1);
+  objective_state(var_2, "done");
+  objective_delete(var_2);
+  scripts\cp\cp_objectives::freeworldidbyobjid(var_2);
   thread init_and_start_whack_a_mole_sequence_data();
 }
 
-function infilcinematicactive(var0) {
-  return rotatevector((17.5, 0, 0), var0.angles);
+function infilcinematicactive(var_0) {
+  return rotatevector((17.5, 0, 0), var_0.angles);
 }
 
 function landing_damage_watcher() {
@@ -636,16 +636,16 @@ function init_exfil() {
   addclienttoheadiconmask(self.headicon, 20);
   setheadiconteam(self.headicon);
 
-  for(var0 = 0; var0 < level.players.size; var0++) {
-    addteamtoheadiconmask(self.headicon, level.players[var0]);
+  for(var_0 = 0; var_0 < level.players.size; var_0++) {
+    addteamtoheadiconmask(self.headicon, level.players[var_0]);
   }
 }
 
 function begin_wave_spawning() {
   wait 10;
 
-  foreach(var1 in level.players) {
-    scripts\cp\cp_persistence::update_player_career_highest_wave(var1, 1, level.players.size);
+  foreach(var_1 in level.players) {
+    scripts\cp\cp_persistence::update_player_career_highest_wave(var_1, 1, level.players.size);
   }
 
   if(true) {
@@ -657,24 +657,24 @@ function begin_wave_spawning() {
 
 function getclosestplayerforreward() {
   level endon("game_ended");
-  var0 = getdvarint("scr_wavesv_finitewaves", 0);
+  var_0 = getdvarint("scr_wavesv_finitewaves", 0);
 
-  if(var0 == 0) {
+  if(var_0 == 0) {
     return;
   }
 
   waitframe();
   level.ref_14532 = 1;
-  level.ref_14531 = var0;
+  level.ref_14531 = var_0;
   setomnvar("cp_objective_event_count", level.ref_14531);
   setDvar("scr_wave_time_set", 25);
 
   for(;;) {
     level waittill("wave_ending");
     waitframe();
-    var1 = level.logfriendlyfire;
+    var_1 = level.logfriendlyfire;
 
-    if(var1 >= var0) {
+    if(var_1 >= var_0) {
       setomnvar("cp_wave_timer", 0);
       setomnvar("cp_enemies_remaining", 0);
       level notify("stop_wave_sounds");
@@ -690,9 +690,9 @@ function getclosestplayerforreward() {
 }
 
 function ref_139ba() {
-  foreach(var1 in level.players) {
-    var2 = max(0.05, var3 * 0.25);
-    thread ref_14516(var1);
+  foreach(var_1 in level.players) {
+    var_2 = max(0.05, var_3 * 0.25);
+    thread ref_14516(var_1);
   }
 
   for(;;) {
@@ -703,7 +703,7 @@ function ref_139ba() {
   }
 }
 
-function ref_14516(var0) {
+function ref_14516(var_0) {
   level endon("game_ended");
   self endon("disconnect");
 
@@ -727,94 +727,94 @@ function ref_14516(var0) {
       continue;
     }
 
-    var1 = ref_143d8();
+    var_1 = ref_143d8();
 
-    if(!istrue(var1)) {
+    if(!istrue(var_1)) {
       wait 0.05;
       continue;
     }
 
-    wait var0;
-    var2 = scripts\mp\mp_agent::getaliveagentsofteam("axis");
+    wait var_0;
+    var_2 = scripts\mp\mp_agent::getaliveagentsofteam("axis");
 
-    if(isDefined(var2) && var2.size > 0) {
-      var2 = sortbydistance(var2, self.origin);
+    if(isDefined(var_2) && var_2.size > 0) {
+      var_2 = sortbydistance(var_2, self.origin);
     } else {
       continue;
     }
 
-    var3 = randomintrange(1, 2);
+    var_3 = randomintrange(1, 2);
 
     if(isDefined(level.inithelipropanims)) {
       if(gettime() - level.inithelipropanims > 90000) {
-        var3 = 2;
+        var_3 = 2;
       } else if(gettime() - level.inithelipropanims > 135000) {
-        var3 = 3;
+        var_3 = 3;
       }
     }
 
-    var3 = int(min(var3, var2.size));
+    var_3 = int(min(var_3, var_2.size));
 
-    for(var4 = 0; var4 < var3; var4++) {
+    for(var_4 = 0; var_4 < var_3; var_4++) {
       self.ref_14515 = scripts\engine\utility::array_removedead_or_dying(self.ref_14515);
-      var5 = var2[var4];
+      var_5 = var_2[var_4];
 
-      if(istrue(var5.module_vehicles_count) || isDefined(var5.unittype) && (var5.unittype == "suicidebomber" || var5.unittype == "juggernaut")) {
-        if(var3 < var2.size && self.ref_14515.size < 3) {
-          var3++;
+      if(istrue(var_5.module_vehicles_count) || isDefined(var_5.unittype) && (var_5.unittype == "suicidebomber" || var_5.unittype == "juggernaut")) {
+        if(var_3 < var_2.size && self.ref_14515.size < 3) {
+          var_3++;
         }
 
         continue;
       }
 
-      self.ref_14515[self.ref_14515.size] = var5;
-      thread bleedout_heartbeat_sfx_logic(var5);
+      self.ref_14515[self.ref_14515.size] = var_5;
+      thread bleedout_heartbeat_sfx_logic(var_5);
     }
   }
 }
 
-function ref_143d8(var0, var1) {
+function ref_143d8(var_0, var_1) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
   level endon("wave_ending");
 
-  if(!isDefined(var0)) {
-    var0 = 12;
+  if(!isDefined(var_0)) {
+    var_0 = 12;
   }
 
-  jumpiftrue(isDefined(var1)) LOC_00000032;
-  var1 = 300;
+  jumpiftrue(isDefined(var_1)) LOC_00000032;
+  var_1 = 300;
 
   while(isalive(self)) {
-    var2 = self.origin;
+    var_2 = self.origin;
 
     if(isDefined(level.inithelipropanims)) {
       while(gettime() - level.inithelipropanims < 30000) {
-        var2 = self.origin;
+        var_2 = self.origin;
         wait 1;
       }
     }
 
-    var5 = gettime();
-    var6 = 1;
+    var_5 = gettime();
+    var_6 = 1;
 
-    while(gettime() - var5 < var0 * 1000) {
-      var7 = distance(self.origin, var2);
+    while(gettime() - var_5 < var_0 * 1000) {
+      var_7 = distance(self.origin, var_2);
 
-      if(var7 > var1) {
-        var6 = 0;
+      if(var_7 > var_1) {
+        var_6 = 0;
         break;
       }
 
       wait 0.2;
     }
 
-    if(gettime() - var5 < var0 * 1000) {
-      var6 = 0;
+    if(gettime() - var_5 < var_0 * 1000) {
+      var_6 = 0;
     }
 
-    if(var6) {
+    if(var_6) {
       return 1;
     }
 
@@ -824,70 +824,70 @@ function ref_143d8(var0, var1) {
   }
 }
 
-function bleedout_heartbeat_sfx_logic(var0) {
+function bleedout_heartbeat_sfx_logic(var_0) {
   self endon("death");
   self notify("aggro_goal_shrink");
   self endon("aggro_goal_shrink");
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return;
   }
 
-  var1 = 6;
-  var2 = 5;
-  var3 = 0.5;
-  var4 = self.goalradius;
+  var_1 = 6;
+  var_2 = 5;
+  var_3 = 0.5;
+  var_4 = self.goalradius;
   self.module_vehicles_count = 1;
 
   for(;;) {
-    if(!isDefined(var0) || !isalive(var0) || scripts\cp\cp_laststand::player_in_laststand(var0)) {
+    if(!isDefined(var_0) || !isalive(var_0) || scripts\cp\cp_laststand::player_in_laststand(var_0)) {
       break;
     }
 
-    self getenemyinfo(var0);
-    var5 = var0.origin;
-    scripts\cp\cp_modular_spawning::set_goal_pos(var5);
-    var6 = max(64, self.goalradius * var3);
-    scripts\cp\cp_modular_spawning::set_goal_radius(var6);
-    var7 = scripts\engine\utility::ref_143b9(var1, "goal");
+    self getenemyinfo(var_0);
+    var_5 = var_0.origin;
+    scripts\cp\cp_modular_spawning::set_goal_pos(var_5);
+    var_6 = max(64, self.goalradius * var_3);
+    scripts\cp\cp_modular_spawning::set_goal_radius(var_6);
+    var_7 = scripts\engine\utility::ref_143b9(var_1, "goal");
 
-    if(isDefined(var7) && var7 == "goal") {
-      wait var2;
+    if(isDefined(var_7) && var_7 == "goal") {
+      wait var_2;
     }
   }
 
-  if(isDefined(var0) && isDefined(var0.ref_14515)) {
-    var0.ref_14515 = scripts\engine\utility::array_remove(var0.ref_14515, self);
+  if(isDefined(var_0) && isDefined(var_0.ref_14515)) {
+    var_0.ref_14515 = scripts\engine\utility::array_remove(var_0.ref_14515, self);
   }
 
-  var8 = [];
+  var_8 = [];
 
-  foreach(var10 in level.players) {
-    if(!isDefined(var0) || !isalive(var0) || scripts\cp\cp_laststand::player_in_laststand(var0)) {
+  foreach(var_10 in level.players) {
+    if(!isDefined(var_0) || !isalive(var_0) || scripts\cp\cp_laststand::player_in_laststand(var_0)) {
       continue;
     }
 
-    var8 = var10;
+    var_8 = var_10;
   }
 
-  if(var8.size > 0) {
-    var8 = sortbydistance(var8, self.origin);
-    self getenemyinfo(var8[0]);
-    scripts\cp\cp_modular_spawning::set_goal_pos(var8[0].origin);
+  if(var_8.size > 0) {
+    var_8 = sortbydistance(var_8, self.origin);
+    self getenemyinfo(var_8[0]);
+    scripts\cp\cp_modular_spawning::set_goal_pos(var_8[0].origin);
   }
 
-  scripts\cp\cp_modular_spawning::set_goal_radius(var4);
+  scripts\cp\cp_modular_spawning::set_goal_radius(var_4);
   self.module_vehicles_count = undefined;
 }
 
-function isloadoutindexdefault(var0, var1) {
+function isloadoutindexdefault(var_0, var_1) {
   self notify("debug_ai_aggro");
   self endon("debug_ai_aggro");
   self endon("death");
-  var0 endon("death");
+  var_0 endon("death");
 
   while(istrue(self.module_vehicles_count)) {
-    thread scripts\engine\utility::draw_circle(var1, self.goalradius, (1, 0, 0), 1, 0, 2);
+    thread scripts\engine\utility::draw_circle(var_1, self.goalradius, (1, 0, 0), 1, 0, 2);
     wait 0.1;
   }
 }
@@ -895,9 +895,9 @@ function isloadoutindexdefault(var0, var1) {
 function clear_remaining_objective() {
   level endon("game_ended");
   wait 3;
-  var0 = ["dx_cps_lass_cache_collection_enemy_incoming_10", "dx_cps_lass_cache_collection_enemy_incoming_20", "dx_cps_kama_cache_collection_enemy_incoming_40"];
-  var1 = scripts\engine\utility::random(var0);
-  level thread scripts\cp\cp_vo::try_to_play_vo_on_team(var1, "allies");
+  var_0 = ["dx_cps_lass_cache_collection_enemy_incoming_10", "dx_cps_lass_cache_collection_enemy_incoming_20", "dx_cps_kama_cache_collection_enemy_incoming_40"];
+  var_1 = scripts\engine\utility::random(var_0);
+  level thread scripts\cp\cp_vo::try_to_play_vo_on_team(var_1, "allies");
 }
 
 function init_enemy_spawner() {
@@ -929,119 +929,119 @@ function handlenondeterministicentities() {
 
 function onplayerconnect() {
   for(;;) {
-    level waittill("connected", var0);
+    level waittill("connected", var_0);
 
-    if(!isai(var0)) {
-      var0 scripts\cp\cp_analytics::on_player_connect();
+    if(!isai(var_0)) {
+      var_0 scripts\cp\cp_analytics::on_player_connect();
 
-      if(isDefined(var0.connecttime)) {
-        var0.connect_time = var0.connecttime;
+      if(isDefined(var_0.connecttime)) {
+        var_0.connect_time = var_0.connecttime;
       } else {
-        var0.connect_time = gettime();
+        var_0.connect_time = gettime();
       }
 
-      var0.xpscale = getdvarint("MSTMORLPKN");
-      var0.weaponxpscale = getdvarint("NNKLRNNSOP");
+      var_0.xpscale = getdvarint("MSTMORLPKN");
+      var_0.weaponxpscale = getdvarint("NNKLRNNSOP");
 
-      if(var0 scripts\cp\utility::rankingenabled()) {
-        var1 = getdvarint("LTSPPRQSMO");
-        var2 = getdvarint("NSRPSMKOMP");
-        var3 = var0 getprivatepartysize() > 1;
+      if(var_0 scripts\cp\utility::rankingenabled()) {
+        var_1 = getdvarint("LTSPPRQSMO");
+        var_2 = getdvarint("NSRPSMKOMP");
+        var_3 = var_0 getprivatepartysize() > 1;
 
-        if(isDefined(var1)) {
-          if(var3 && var1 > 1) {
-            var0.weaponxpscale = var1;
+        if(isDefined(var_1)) {
+          if(var_3 && var_1 > 1) {
+            var_0.weaponxpscale = var_1;
           }
         }
 
-        if(isDefined(var2)) {
-          if(var3 && var2 > 1) {
-            var0.xpscale = var2;
+        if(isDefined(var_2)) {
+          if(var_3 && var_2 > 1) {
+            var_0.xpscale = var_2;
           }
         }
       }
 
-      if(istrue(var0 getplayerdata("cp", "tacOpsAchievements", "LANDLORD")) && istrue(var0 getplayerdata("cp", "tacOpsAchievements", "ARMED")) && istrue(var0 getplayerdata("cp", "tacOpsAchievements", "SMUGGLED")) && istrue(var0 getplayerdata("cp", "tacOpsAchievements", "LAUNDERED"))) {
-        var0 thread scripts\cp_mp\xmike109::screenent_d("all_operations");
+      if(istrue(var_0 getplayerdata("cp", "tacOpsAchievements", "LANDLORD")) && istrue(var_0 getplayerdata("cp", "tacOpsAchievements", "ARMED")) && istrue(var_0 getplayerdata("cp", "tacOpsAchievements", "SMUGGLED")) && istrue(var_0 getplayerdata("cp", "tacOpsAchievements", "LAUNDERED"))) {
+        var_0 thread scripts\cp_mp\xmike109::screenent_d("all_operations");
       }
 
-      var0 thread scripts\cp\cp_globallogic::player_init_health_regen();
-      var0 scripts\cp\cp_persistence::session_stats_init();
-      var0.num_of_plays = [];
-      var0.nextcasheffecttime = 0;
-      var0.total_currency_earned = 0;
-      var0.can_give_revive_xp = 1;
-      var0.pap = [];
-      var0.powerupicons = [];
-      var0.powers = [];
-      var0.powers_active = [];
-      var0.disabled_interactions = [];
-      var0.onkillweaponpassives = [];
-      var0.onuseweaponpassives = [];
-      var0.ondamageweaponpassives = [];
-      var0.disabledteleportation = 0;
-      var0.disabledinteractions = 0;
-      var0.power_cooldowns = 0;
-      var0.tickets_earned = 0;
-      var0.time_to_give_next_tickets = gettime();
-      var0.self_revives_purchased = 0;
-      var0.max_self_revive_machine_use = 3;
-      var0.cash_scalar = 1;
-      var0.recentkillcount = 0;
-      var0.enabledignoreme = 0;
-      var0.infiniteammocounter = 0;
-      var0.awarenessadjustment = 0;
-      var0 scripts\cp\utility::allow_player_teleport(0);
-      var0 scripts\cp\cp_mapselect::set_uav_radarstrength(var0);
-      var0 scripts\cp\cp_persistence::lb_player_update_stat("waveNum", level.wave_num, 1);
-      var0 scripts\cp\cp_wall_buys::setup_player_weapon_models(var0);
-      var0 scripts\cp\cp_persistence::player_persistence_init();
-      var0 thread scripts\cp\cp_analytics::init_weapon_and_player_analytics(var0);
+      var_0 thread scripts\cp\cp_globallogic::player_init_health_regen();
+      var_0 scripts\cp\cp_persistence::session_stats_init();
+      var_0.num_of_plays = [];
+      var_0.nextcasheffecttime = 0;
+      var_0.total_currency_earned = 0;
+      var_0.can_give_revive_xp = 1;
+      var_0.pap = [];
+      var_0.powerupicons = [];
+      var_0.powers = [];
+      var_0.powers_active = [];
+      var_0.disabled_interactions = [];
+      var_0.onkillweaponpassives = [];
+      var_0.onuseweaponpassives = [];
+      var_0.ondamageweaponpassives = [];
+      var_0.disabledteleportation = 0;
+      var_0.disabledinteractions = 0;
+      var_0.power_cooldowns = 0;
+      var_0.tickets_earned = 0;
+      var_0.time_to_give_next_tickets = gettime();
+      var_0.self_revives_purchased = 0;
+      var_0.max_self_revive_machine_use = 3;
+      var_0.cash_scalar = 1;
+      var_0.recentkillcount = 0;
+      var_0.enabledignoreme = 0;
+      var_0.infiniteammocounter = 0;
+      var_0.awarenessadjustment = 0;
+      var_0 scripts\cp\utility::allow_player_teleport(0);
+      var_0 scripts\cp\cp_mapselect::set_uav_radarstrength(var_0);
+      var_0 scripts\cp\cp_persistence::lb_player_update_stat("waveNum", level.wave_num, 1);
+      var_0 scripts\cp\cp_wall_buys::setup_player_weapon_models(var_0);
+      var_0 scripts\cp\cp_persistence::player_persistence_init();
+      var_0 thread scripts\cp\cp_analytics::init_weapon_and_player_analytics(var_0);
 
       if(scripts\cp\pvpe\pvpe::pvpe_enabled()) {
-        var0 scripts\cp\pvpe\pvpe::assign_pvpe_team_and_slot_number(var0);
-        var0 scripts\cp\pvpe\pvpe::terrorist_self_revive_time_override(var0);
+        var_0 scripts\cp\pvpe\pvpe::assign_pvpe_team_and_slot_number(var_0);
+        var_0 scripts\cp\pvpe\pvpe::terrorist_self_revive_time_override(var_0);
       }
 
-      var0.gameskill = scripts\cp\cp_gameskill::get_gameskill();
-      var0 scripts\cp\cp_gameskill::set_difficulty_from_locked_settings();
+      var_0.gameskill = scripts\cp\cp_gameskill::get_gameskill();
+      var_0 scripts\cp\cp_gameskill::set_difficulty_from_locked_settings();
       thread strike_player_connect_black_screen();
-      var0 thread scripts\cp\utility::ref_13c3e(1);
-      var0.timeplayed = [];
+      var_0 thread scripts\cp\utility::ref_13c3e(1);
+      var_0.timeplayed = [];
 
-      foreach(var5 in level.teamnamelist) {
-        var0.timeplayed[var5] = 0;
+      foreach(var_5 in level.teamnamelist) {
+        var_0.timeplayed[var_5] = 0;
       }
 
-      var0.timeplayed["total"] = 0;
-      var0.timeplayed["missionTeam"] = 0;
-      var0.timeplayed["other"] = 0;
-      var0.timeplayed["timeDead"] = 0;
+      var_0.timeplayed["total"] = 0;
+      var_0.timeplayed["missionTeam"] = 0;
+      var_0.timeplayed["other"] = 0;
+      var_0.timeplayed["timeDead"] = 0;
 
       if(level.ref_12376) {
-        var0 scripts\cp\vehicles\little_bird_mg_cp::calloutmarkerping_initplayer();
+        var_0 scripts\cp\vehicles\little_bird_mg_cp::calloutmarkerping_initplayer();
       }
 
       if(scripts\engine\utility::flag("introscreen_over")) {
         if(isDefined(level.custom_player_hotjoin_func)) {
-          var0 thread[[level.custom_player_hotjoin_func]]();
+          var_0 thread[[level.custom_player_hotjoin_func]]();
         }
       }
 
       if(isDefined(level.custom_onplayerconnect_func)) {
-        [[level.custom_onplayerconnect_func]](var0);
+        [[level.custom_onplayerconnect_func]](var_0);
       }
 
       if(!isDefined(level.kick_player_queue)) {
         thread kick_player_queue_loop();
       }
 
-      thread kick_for_inactivity(var0);
+      thread kick_for_inactivity(var_0);
       thread mission_jumpto_debug();
 
       if(true) {
-        var7 = max(0.05, int(var0 getentitynumber()) * 0.25);
-        thread ref_14516(var0);
+        var_7 = max(0.05, int(var_0 getentitynumber()) * 0.25);
+        thread ref_14516(var_0);
       }
     }
   }
@@ -1051,15 +1051,15 @@ function mission_jumpto_debug() {
   level endon("game_ended");
 
   for(;;) {
-    self waittill("luinotifyserver", var0, var1);
+    self waittill("luinotifyserver", var_0, var_1);
 
-    if(var0 == "mission_jump") {
-      var2 = getDvar("NSQLTTMRMP");
-      var3 = "cp/" + var2 + "_objectives.csv";
-      var4 = tablelookup(var3, 0, var1, 1);
-      var5 = var2 + "_start_obj";
-      setdvarifuninitialized(var5, var4);
-      setDvar(var5, var4);
+    if(var_0 == "mission_jump") {
+      var_2 = getDvar("NSQLTTMRMP");
+      var_3 = "cp/" + var_2 + "_objectives.csv";
+      var_4 = tablelookup(var_3, 0, var_1, 1);
+      var_5 = var_2 + "_start_obj";
+      setdvarifuninitialized(var_5, var_4);
+      setDvar(var_5, var_4);
       scripts\cp\cp_endgame::restart_map();
     }
   }
@@ -1070,9 +1070,9 @@ function team_slot_assignment_available_from_player_disconnect() {
 }
 
 function get_team_slot_assignment_from_player_disconnect() {
-  var0 = level.disconnect_player_team_slot_assignment[0];
-  level.disconnect_player_team_slot_assignment = scripts\engine\utility::array_remove(level.disconnect_player_team_slot_assignment, var0);
-  return var0;
+  var_0 = level.disconnect_player_team_slot_assignment[0];
+  level.disconnect_player_team_slot_assignment = scripts\engine\utility::array_remove(level.disconnect_player_team_slot_assignment, var_0);
+  return var_0;
 }
 
 function player_hotjoin() {
@@ -1090,7 +1090,7 @@ function player_hotjoin() {
     self.wave_num_when_joined = level.wave_num;
   }
 
-  var0 = getDvar("NSQLTTMRMP");
+  var_0 = getDvar("NSQLTTMRMP");
 
   if(isDefined(self.introscreen_overlay)) {
     self.introscreen_overlay.alpha = 1;
@@ -1122,7 +1122,7 @@ function hotjoin_protection() {
   self.ability_invulnerable = undefined;
 }
 
-function onspawnplayer(var0) {
+function onspawnplayer(var_0) {
   self.fireshield = 0;
   self.isreviving = 0;
   self.isrepairing = 0;
@@ -1163,8 +1163,8 @@ function onspawnplayer(var0) {
 
   scripts\cp\cp_globallogic::player_init_invulnerability();
   scripts\cp\cp_globallogic::player_init_damageshield();
-  var1 = get_starting_currency(self);
-  thread scripts\cp\cp_persistence::wait_to_set_player_currency(var1);
+  var_1 = get_starting_currency(self);
+  thread scripts\cp\cp_persistence::wait_to_set_player_currency(var_1);
   set_player_max_currency(999999);
   thread scripts\cp\cp_damage::core_health_regen();
   thread scripts\cp\cp_hud_util::zom_player_health_overlay_watcher();
@@ -1196,109 +1196,109 @@ function onspawnplayer(var0) {
 }
 
 function add_player_to_threatbias_group() {
-  for(var0 = 0; var0 < level.players.size; var0++) {
-    if(self == level.players[var0]) {
-      var1 = var0 + 1;
+  for(var_0 = 0; var_0 < level.players.size; var_0++) {
+    if(self == level.players[var_0]) {
+      var_1 = var_0 + 1;
 
-      if(var1 == 5) {
+      if(var_1 == 5) {
         return;
       }
 
-      self setthreatbiasgroup("player" + var1);
+      self setthreatbiasgroup("player" + var_1);
     }
   }
 }
 
-function get_starting_currency(var0) {
-  var1 = var0.starting_currency_after_revived_from_spectator;
+function get_starting_currency(var_0) {
+  var_1 = var_0.starting_currency_after_revived_from_spectator;
 
-  if(isDefined(var1)) {
-    var0.starting_currency_after_revived_from_spectator = undefined;
-    return var1;
+  if(isDefined(var_1)) {
+    var_0.starting_currency_after_revived_from_spectator = undefined;
+    return var_1;
   }
 
   return scripts\cp\cp_persistence::get_starting_currency();
 }
 
-function set_player_max_currency(var0) {
-  var0 = int(var0);
-  self.maxcurrency = var0;
+function set_player_max_currency(var_0) {
+  var_0 = int(var_0);
+  self.maxcurrency = var_0;
 }
 
-function prespawnfromspectatorfunc(var0) {
-  var0.starting_currency_after_revived_from_spectator = var0 scripts\cp\cp_persistence::get_player_currency();
-  revivefromspectatorweaponsetup(var0);
-  set_spawn_loc(var0);
+function prespawnfromspectatorfunc(var_0) {
+  var_0.starting_currency_after_revived_from_spectator = var_0 scripts\cp\cp_persistence::get_player_currency();
+  revivefromspectatorweaponsetup(var_0);
+  set_spawn_loc(var_0);
 }
 
-function revivefromspectatorweaponsetup(var0) {
-  var1 = spawnStruct();
-  var1.copy_fullweaponlist = var0.copy_fullweaponlist;
-  var1.copy_weapon_current = var0.copy_weapon_current;
-  var1.copy_weapon_ammo_clip = var0.copy_weapon_ammo_clip;
-  var1.copy_weapon_ammo_stock = var0.copy_weapon_ammo_stock;
+function revivefromspectatorweaponsetup(var_0) {
+  var_1 = spawnStruct();
+  var_1.copy_fullweaponlist = var_0.copy_fullweaponlist;
+  var_1.copy_weapon_current = var_0.copy_weapon_current;
+  var_1.copy_weapon_ammo_clip = var_0.copy_weapon_ammo_clip;
+  var_1.copy_weapon_ammo_stock = var_0.copy_weapon_ammo_stock;
 
-  if(isDefined(var0.saved_last_stand_pistol)) {
-    var1.last_stand_pistol = var0.saved_last_stand_pistol;
-    var0.saved_last_stand_pistol = undefined;
+  if(isDefined(var_0.saved_last_stand_pistol)) {
+    var_1.last_stand_pistol = var_0.saved_last_stand_pistol;
+    var_0.saved_last_stand_pistol = undefined;
   } else {
-    var1.last_stand_pistol = var0.last_stand_pistol;
+    var_1.last_stand_pistol = var_0.last_stand_pistol;
   }
 
-  var1.weapon_levels = var0.copy_weapon_level;
+  var_1.weapon_levels = var_0.copy_weapon_level;
 
-  if(isDefined(var0.current_crafted_inventory)) {
-    var1.current_crafted_inventory = var0.current_crafted_inventory;
-    var0.current_crafted_inventory = undefined;
+  if(isDefined(var_0.current_crafted_inventory)) {
+    var_1.current_crafted_inventory = var_0.current_crafted_inventory;
+    var_0.current_crafted_inventory = undefined;
   }
 
-  var1.copy_all_powers = var0.pre_laststand_powers;
-  var1.copy_special_ammo_type = var0.special_ammo_type;
-  var0.weaponlist = var1;
+  var_1.copy_all_powers = var_0.pre_laststand_powers;
+  var_1.copy_special_ammo_type = var_0.special_ammo_type;
+  var_0.weaponlist = var_1;
 }
 
-function restore_player_weapons_after_bleedout(var0) {
-  var0 notify("weapon_purchased");
-  var1 = var0.weaponlist;
-  var0 takeallweapons();
-  var0.copy_fullweaponlist = var1.copy_fullweaponlist;
-  var0.copy_weapon_current = var1.copy_weapon_current;
-  var0.copy_weapon_ammo_clip = var1.copy_weapon_ammo_clip;
-  var0.copy_weapon_ammo_stock = var1.copy_weapon_ammo_stock;
-  var0.copy_all_powers = var1.copy_all_powers;
-  var0.copy_weapon_level = var1.weapon_levels;
-  var0 scripts\cp\utility::restore_primary_weapons_only();
-  var0 scripts\cp\utility::restore_super_weapon();
-  var0 scripts\cp\cp_powers::restore_powers(var0, var0.copy_all_powers);
+function restore_player_weapons_after_bleedout(var_0) {
+  var_0 notify("weapon_purchased");
+  var_1 = var_0.weaponlist;
+  var_0 takeallweapons();
+  var_0.copy_fullweaponlist = var_1.copy_fullweaponlist;
+  var_0.copy_weapon_current = var_1.copy_weapon_current;
+  var_0.copy_weapon_ammo_clip = var_1.copy_weapon_ammo_clip;
+  var_0.copy_weapon_ammo_stock = var_1.copy_weapon_ammo_stock;
+  var_0.copy_all_powers = var_1.copy_all_powers;
+  var_0.copy_weapon_level = var_1.weapon_levels;
+  var_0 scripts\cp\utility::restore_primary_weapons_only();
+  var_0 scripts\cp\utility::restore_super_weapon();
+  var_0 scripts\cp\cp_powers::restore_powers(var_0, var_0.copy_all_powers);
 
-  if(isDefined(var1.current_crafted_inventory)) {
-    level thread[[var1.current_crafted_inventory.restore_func]](undefined, var0);
+  if(isDefined(var_1.current_crafted_inventory)) {
+    level thread[[var_1.current_crafted_inventory.restore_func]](undefined, var_0);
   }
 
-  var0.special_ammo_type = var1.copy_special_ammo_type;
-  var0.have_things_in_lost_and_found = 0;
-  var0.last_stand_pistol = var1.last_stand_pistol;
-  var0.weaponlist = undefined;
+  var_0.special_ammo_type = var_1.copy_special_ammo_type;
+  var_0.have_things_in_lost_and_found = 0;
+  var_0.last_stand_pistol = var_1.last_stand_pistol;
+  var_0.weaponlist = undefined;
 }
 
-function set_spawn_loc(var0) {
-  var1 = getplayerrespawnloc(var0);
-  var0.forcespawnorigin = var1.origin;
-  var0.forcespawnangles = var1.angles;
+function set_spawn_loc(var_0) {
+  var_1 = getplayerrespawnloc(var_0);
+  var_0.forcespawnorigin = var_1.origin;
+  var_0.forcespawnangles = var_1.angles;
 
-  if(isDefined(var0.respawn_forcespawnorigin)) {
-    var0.forcespawnorigin = var0.respawn_forcespawnorigin;
+  if(isDefined(var_0.respawn_forcespawnorigin)) {
+    var_0.forcespawnorigin = var_0.respawn_forcespawnorigin;
   }
 
-  if(isDefined(var0.respawn_forcespawnangles)) {
-    var0.forcespawnangles = var0.respawn_forcespawnangles;
+  if(isDefined(var_0.respawn_forcespawnangles)) {
+    var_0.forcespawnangles = var_0.respawn_forcespawnangles;
     return;
   }
 }
 
-function getplayerrespawnloc(var0) {
+function getplayerrespawnloc(var_0) {
   if(isDefined(level.force_respawn_location)) {
-    return [[level.force_respawn_location]](var0);
+    return [[level.force_respawn_location]](var_0);
   }
 
   if(!isDefined(level.active_player_respawn_locs) || level.active_player_respawn_locs.size == 0 || level.players.size == 0) {
@@ -1306,70 +1306,70 @@ function getplayerrespawnloc(var0) {
   }
 
   if(isDefined(level.respawn_loc_override_func)) {
-    return [[level.respawn_loc_override_func]](var0);
+    return [[level.respawn_loc_override_func]](var_0);
   }
 
-  var1 = get_available_players(var0);
-  var2 = get_available_respawn_locs(var1);
+  var_1 = get_available_players(var_0);
+  var_2 = get_available_respawn_locs(var_1);
 
-  if(var2.size == 0) {
-    return get_respawn_loc_near_team_center(var0, var1);
+  if(var_2.size == 0) {
+    return get_respawn_loc_near_team_center(var_0, var_1);
   }
 
-  if(var2.size == 1) {
-    return var2[0];
+  if(var_2.size == 1) {
+    return var_2[0];
   }
 
-  return get_respawn_loc_rated(var0, var1, var2);
+  return get_respawn_loc_rated(var_0, var_1, var_2);
 }
 
-function get_available_players(var0) {
-  var1 = [];
+function get_available_players(var_0) {
+  var_1 = [];
 
-  foreach(var3 in level.players) {
-    if(var3 == var0) {
+  foreach(var_3 in level.players) {
+    if(var_3 == var_0) {
       continue;
     }
 
-    if(scripts\cp\cp_laststand::player_in_laststand(var3)) {
+    if(scripts\cp\cp_laststand::player_in_laststand(var_3)) {
       continue;
     }
 
-    var1 = var3;
+    var_1 = var_3;
   }
 
-  return var1;
+  return var_1;
 }
 
-function get_available_respawn_locs(var0) {
-  var1 = [];
+function get_available_respawn_locs(var_0) {
+  var_1 = [];
 
-  foreach(var3 in level.active_player_respawn_locs) {
-    if(!canspawn(var3.origin)) {
+  foreach(var_3 in level.active_player_respawn_locs) {
+    if(!canspawn(var_3.origin)) {
       continue;
     }
 
-    if(positionwouldtelefrag(var3.origin)) {
+    if(positionwouldtelefrag(var_3.origin)) {
       continue;
     }
 
-    if(is_respawn_loc_near_available_players(var3, var0)) {
+    if(is_respawn_loc_near_available_players(var_3, var_0)) {
       continue;
     }
 
-    if(is_respawn_loc_near_alive_enemies(var3)) {
+    if(is_respawn_loc_near_alive_enemies(var_3)) {
       continue;
     }
 
-    var1 = var3;
+    var_1 = var_3;
   }
 
-  return var1;
+  return var_1;
 }
 
-function is_respawn_loc_near_available_players(var0, var1) {
-  foreach(var3 in var1) {
-    if(distancesquared(var3.origin, var0.origin) < 250000) {
+function is_respawn_loc_near_available_players(var_0, var_1) {
+  foreach(var_3 in var_1) {
+    if(distancesquared(var_3.origin, var_0.origin) < 250000) {
       return true;
     }
   }
@@ -1377,11 +1377,11 @@ function is_respawn_loc_near_available_players(var0, var1) {
   return false;
 }
 
-function is_respawn_loc_near_alive_enemies(var0) {
-  var1 = scripts\mp\mp_agent::getaliveagentsofteam("axis");
+function is_respawn_loc_near_alive_enemies(var_0) {
+  var_1 = scripts\mp\mp_agent::getaliveagentsofteam("axis");
 
-  foreach(var3 in var1) {
-    if(distancesquared(var3.origin, var0.origin) < 250000) {
+  foreach(var_3 in var_1) {
+    if(distancesquared(var_3.origin, var_0.origin) < 250000) {
       return true;
     }
   }
@@ -1389,72 +1389,72 @@ function is_respawn_loc_near_alive_enemies(var0) {
   return false;
 }
 
-function get_respawn_loc_near_team_center(var0, var1) {
-  var2 = 0;
-  var3 = 0;
-  var4 = 0;
-  var5 = 0;
+function get_respawn_loc_near_team_center(var_0, var_1) {
+  var_2 = 0;
+  var_3 = 0;
+  var_4 = 0;
+  var_5 = 0;
 
-  foreach(var7 in var1) {
-    var2 += var7.origin[0];
-    var3 += var7.origin[1];
-    var4 += var7.origin[2];
-    var5++;
+  foreach(var_7 in var_1) {
+    var_2 += var_7.origin[0];
+    var_3 += var_7.origin[1];
+    var_4 += var_7.origin[2];
+    var_5++;
   }
 
-  var9 = (var2 / var5, var3 / var5, var4 / var5);
-  var10 = sortbydistance(level.active_player_respawn_locs, var9);
-  return var10[0];
+  var_9 = (var_2 / var_5, var_3 / var_5, var_4 / var_5);
+  var_10 = sortbydistance(level.active_player_respawn_locs, var_9);
+  return var_10[0];
 }
 
-function get_respawn_loc_rated(var0, var1) {
-  var2 = scripts\engine\utility::ter_op(var0.size == 0, 1, var0.size);
-  var3 = level.spawned_enemies.size / var2;
-  var4 = var3 * 2;
-  var5 = -99999999;
-  var6 = undefined;
+function get_respawn_loc_rated(var_0, var_1) {
+  var_2 = scripts\engine\utility::ter_op(var_0.size == 0, 1, var_0.size);
+  var_3 = level.spawned_enemies.size / var_2;
+  var_4 = var_3 * 2;
+  var_5 = -99999999;
+  var_6 = undefined;
 
-  foreach(var8 in var1) {
-    var9 = 0;
+  foreach(var_8 in var_1) {
+    var_9 = 0;
 
-    foreach(var11 in var0) {
-      if(var11 == self) {
+    foreach(var_11 in var_0) {
+      if(var_11 == self) {
         continue;
       }
 
-      if(!isalive(var11)) {
+      if(!isalive(var_11)) {
         continue;
       }
 
-      if(istrue(var11.inlaststand)) {
-        var9 -= distancesquared(var11.origin, var8.origin) * var4 * 2;
+      if(istrue(var_11.inlaststand)) {
+        var_9 -= distancesquared(var_11.origin, var_8.origin) * var_4 * 2;
         continue;
       }
 
-      var9 -= distancesquared(var11.origin, var8.origin) * var4;
+      var_9 -= distancesquared(var_11.origin, var_8.origin) * var_4;
     }
 
-    foreach(var14 in level.spawned_enemies) {
-      var9 += distancesquared(var14.origin, var8.origin);
+    foreach(var_14 in level.spawned_enemies) {
+      var_9 += distancesquared(var_14.origin, var_8.origin);
     }
 
-    var9 /= 1000000;
+    var_9 /= 1000000;
 
-    if(var9 > var5) {
-      var5 = var9;
-      var6 = var8;
+    if(var_9 > var_5) {
+      var_5 = var_9;
+      var_6 = var_8;
     }
   }
 
-  return var6;
+  return var_6;
 }
 
 function prematchfunc() {
-  var0 = 0;
+  var_0 = 0;
 
-  if(var0 > 0) {
-    var1 = wait_for_first_player_connect(level);
-    wait var0 - 3;
+  if(var_0 > 0) {
+    var_1 = wait_for_first_player_connect(level);
+    wait var_0 - 3;
 
     if(isDefined(level.postintroscreenfunc)) {
       [[level.postintroscreenfunc]]();
@@ -1479,13 +1479,13 @@ function prematchfunc() {
 }
 
 function show_introscreen_text() {
-  var0 = getDvar("NSQLTTMRMP");
-  var1 = getDvar(var0 + "_start_obj", "");
-  var2 = "cp/" + var0 + "_objectives.csv";
-  var3 = int(tablelookup(var2, 1, var1, 0));
+  var_0 = getDvar("NSQLTTMRMP");
+  var_1 = getDvar(var_0 + "_start_obj", "");
+  var_2 = "cp/" + var_0 + "_objectives.csv";
+  var_3 = int(tablelookup(var_2, 1, var_1, 0));
 
-  if(isDefined(var1) && var1 != "") {
-    self setclientomnvar("ui_chyron_mission_index", var3);
+  if(isDefined(var_1) && var_1 != "") {
+    self setclientomnvar("ui_chyron_mission_index", var_3);
     self setclientomnvar("ui_chyron_on", 1);
     self setclientomnvar("ui_hide_hud", 0);
     return;
@@ -1493,15 +1493,15 @@ function show_introscreen_text() {
 }
 
 function wait_for_first_player_connect() {
-  var0 = undefined;
+  var_0 = undefined;
 
   if(level.players.size == 0) {
-    level waittill("connected", var0);
+    level waittill("connected", var_0);
   } else {
-    var0 = level.players[0];
+    var_0 = level.players[0];
   }
 
-  return var0;
+  return var_0;
 }
 
 function strike_player_connect_black_screen() {
@@ -1513,54 +1513,54 @@ function strike_player_connect_black_screen() {
   default_strike_player_connect_black_screen(self);
 }
 
-function default_strike_player_connect_black_screen(var0) {
-  var0 endon("disconnect");
-  var0 endon("stop_intro");
-  var0 setclientomnvar("ui_hide_hud", 1);
-  show_introscreen_text(var0);
-  var0.introscreen_overlay = newclienthudelem(self);
-  var0.introscreen_overlay.x = 0;
-  var0.introscreen_overlay.y = 0;
-  var0.introscreen_overlay setshader("black", 640, 480);
-  var0.introscreen_overlay.alignx = "left";
-  var0.introscreen_overlay.aligny = "top";
-  var0.introscreen_overlay.sort = 1;
-  var0.introscreen_overlay.horzalign = "fullscreen";
-  var0.introscreen_overlay.vertalign = "fullscreen";
-  var0.introscreen_overlay.alpha = 1;
-  var0.introscreen_overlay.foreground = 1;
-  var0 waittill("spawned_player");
-  var0 playerhide();
-  var0 disableweapons();
-  var0 scripts\cp\utility::freezecontrolswrapper(1);
+function default_strike_player_connect_black_screen(var_0) {
+  var_0 endon("disconnect");
+  var_0 endon("stop_intro");
+  var_0 setclientomnvar("ui_hide_hud", 1);
+  show_introscreen_text(var_0);
+  var_0.introscreen_overlay = newclienthudelem(self);
+  var_0.introscreen_overlay.x = 0;
+  var_0.introscreen_overlay.y = 0;
+  var_0.introscreen_overlay setshader("black", 640, 480);
+  var_0.introscreen_overlay.alignx = "left";
+  var_0.introscreen_overlay.aligny = "top";
+  var_0.introscreen_overlay.sort = 1;
+  var_0.introscreen_overlay.horzalign = "fullscreen";
+  var_0.introscreen_overlay.vertalign = "fullscreen";
+  var_0.introscreen_overlay.alpha = 1;
+  var_0.introscreen_overlay.foreground = 1;
+  var_0 waittill("spawned_player");
+  var_0 playerhide();
+  var_0 disableweapons();
+  var_0 scripts\cp\utility::freezecontrolswrapper(1);
 
-  while(!istrue(var0.zombiespawnabovedeath)) {
+  while(!istrue(var_0.zombiespawnabovedeath)) {
     wait 1;
   }
 
-  var0 playershow();
-  var0 scripts\cp\utility::freezecontrolswrapper(0);
-  var0 enableweapons();
-  var0 notify("open_loadout_menu");
-  var0.introscreen_overlay fadeovertime(2);
-  var0.introscreen_overlay.alpha = 0.5;
+  var_0 playershow();
+  var_0 scripts\cp\utility::freezecontrolswrapper(0);
+  var_0 enableweapons();
+  var_0 notify("open_loadout_menu");
+  var_0.introscreen_overlay fadeovertime(2);
+  var_0.introscreen_overlay.alpha = 0.5;
   wait 2;
-  var0.introscreen_overlay destroy();
-  var0 setclientomnvar("ui_hide_hud", 0);
+  var_0.introscreen_overlay destroy();
+  var_0 setclientomnvar("ui_hide_hud", 0);
 
   if(level.players.size > 1) {
-    var1 = 0;
+    var_1 = 0;
 
-    foreach(var3 in level.players) {
-      if(isDefined(var3.introscreen_overlay)) {
-        var1 = 1;
+    foreach(var_3 in level.players) {
+      if(isDefined(var_3.introscreen_overlay)) {
+        var_1 = 1;
         break;
       }
     }
 
-    if(var1 == 0) {
-      var5 = getdvarint("LKKRLSMRQP", 0);
-      wait var5;
+    if(var_1 == 0) {
+      var_5 = getdvarint("LKKRLSMRQP", 0);
+      wait var_5;
       scripts\cp\cp_globallogic::refreshuimatchinprogressomnvarvalue();
       return;
     }
@@ -1571,153 +1571,153 @@ function default_strike_player_connect_black_screen(var0) {
   scripts\cp\cp_globallogic::refreshuimatchinprogressomnvarvalue();
 }
 
-function playerinfildisabled(var0) {
-  return istrue(var0.infil_disabled);
+function playerinfildisabled(var_0) {
+  return istrue(var_0.infil_disabled);
 }
 
-function callbackplayerkilled(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
-  [[level.callbackplayerlaststand]](var0, var1, var2, var4, var5, var7, var8, var9);
+function callbackplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
+  [[level.callbackplayerlaststand]](var_0, var_1, var_2, var_4, var_5, var_7, var_8, var_9);
 }
 
 function precachelb() {
-  var0 = " LB_" + getDvar("NSQLTTMRMP");
+  var_0 = " LB_" + getDvar("NSQLTTMRMP");
 
   if(scripts\cp\utility::isplayingsolo()) {
-    var0 += "_SOLO";
+    var_0 += "_SOLO";
   } else {
-    var0 += "_COOP";
+    var_0 += "_COOP";
   }
 
-  precacheleaderboards(var0);
+  precacheleaderboards(var_0);
 }
 
-function enter_laststand(var0, var1) {
-  var0 scripts\cp\cp_persistence::eog_player_update_stat("downs", 1);
-  var0 scripts\cp\cp_analytics::log_event("dropped_to_last_stand", 1, [var0.clientid], [var0.clientid], [var0.clientid]);
-  var0.pre_arcade_game_weapon = undefined;
-  var0.pre_arcade_game_weapon_clip = undefined;
-  var0.pre_arcade_game_weapon_stock = undefined;
-  var0.former_mule_weapon = undefined;
-  var0.pre_laststand_powers = var0 scripts\cp\cp_powers::get_info_for_player_powers(var0);
-  var0 scripts\cp\cp_powers::clearpowers();
-  var2 = var0 getcurrentweapon();
-  var3 = getweaponbasename(var2);
-  var4 = var0 getcurrentweaponclipammo();
+function enter_laststand(var_0, var_1) {
+  var_0 scripts\cp\cp_persistence::eog_player_update_stat("downs", 1);
+  var_0 scripts\cp\cp_analytics::log_event("dropped_to_last_stand", 1, [var_0.clientid], [var_0.clientid], [var_0.clientid]);
+  var_0.pre_arcade_game_weapon = undefined;
+  var_0.pre_arcade_game_weapon_clip = undefined;
+  var_0.pre_arcade_game_weapon_stock = undefined;
+  var_0.former_mule_weapon = undefined;
+  var_0.pre_laststand_powers = var_0 scripts\cp\cp_powers::get_info_for_player_powers(var_0);
+  var_0 scripts\cp\cp_powers::clearpowers();
+  var_2 = var_0 getcurrentweapon();
+  var_3 = getweaponbasename(var_2);
+  var_4 = var_0 getcurrentweaponclipammo();
 
-  if(!isDefined(var0.downsperweaponlog[var3])) {
-    var0.downsperweaponlog[var3] = 1;
+  if(!isDefined(var_0.downsperweaponlog[var_3])) {
+    var_0.downsperweaponlog[var_3] = 1;
   } else {
-    var0.downsperweaponlog[var3]++;
+    var_0.downsperweaponlog[var_3]++;
   }
 
-  var0 clearclienttriggeraudiozone(0);
+  var_0 clearclienttriggeraudiozone(0);
 
   if(!self issplitscreenplayer()) {
-    var0 setclienttriggeraudiozonepartialwithfade("last_stand_cp", 0.02, "mix", "reverb", "filter");
+    var_0 setclienttriggeraudiozonepartialwithfade("last_stand_cp", 0.02, "mix", "reverb", "filter");
   }
 
-  var0.have_self_revive = var0 scripts\cp\utility::has_auto_revive();
+  var_0.have_self_revive = var_0 scripts\cp\utility::has_auto_revive();
 
-  if(var0.have_self_revive) {
-    var5 = scripts\cp\utility::isplayingsolo() || level.only_one_player;
-    var0 notify("player_has_self_revive", var5);
+  if(var_0.have_self_revive) {
+    var_5 = scripts\cp\utility::isplayingsolo() || level.only_one_player;
+    var_0 notify("player_has_self_revive", var_5);
   }
 
-  if(isDefined(var0.mule_weapon) && !istrue(var0.playing_ghosts_n_skulls)) {
-    var0.former_mule_weapon = var0.mule_weapon;
+  if(isDefined(var_0.mule_weapon) && !istrue(var_0.playing_ghosts_n_skulls)) {
+    var_0.former_mule_weapon = var_0.mule_weapon;
   } else {
-    var0.former_mule_weapon = undefined;
+    var_0.former_mule_weapon = undefined;
   }
 
-  var0 scripts\cp\zombies\zombieclientmatchdata::logplayerdeath();
-  var0 scripts\cp\utility::allow_player_ignore_me(1);
-  var0 setclientomnvar("zm_ui_player_in_laststand", 1);
+  var_0 scripts\cp\zombies\zombieclientmatchdata::logplayerdeath();
+  var_0 scripts\cp\utility::allow_player_ignore_me(1);
+  var_0 setclientomnvar("zm_ui_player_in_laststand", 1);
 
-  if(scripts\cp\pvpe\pvpe::player_is_terrorist(var0)) {
-    var0 thread scripts\cp\pvpe\pvpe::terrorist_enter_laststand(var0, var1);
+  if(scripts\cp\pvpe\pvpe::player_is_terrorist(var_0)) {
+    var_0 thread scripts\cp\pvpe\pvpe::terrorist_enter_laststand(var_0, var_1);
     return;
   }
 }
 
-function updaterecentkills(var0, var1) {
+function updaterecentkills(var_0, var_1) {
   self endon("disconnect");
   level endon("game_ended");
   self notify("updateRecentKills");
   self endon("updateRecentKills");
   self.recentkillcount++;
-  var2 = getweaponbasename(var1);
+  var_2 = getweaponbasename(var_1);
 
-  if(!isDefined(self.killsperweaponlog[var2])) {
-    self.killsperweaponlog[var2] = 1;
+  if(!isDefined(self.killsperweaponlog[var_2])) {
+    self.killsperweaponlog[var_2] = 1;
   } else {
-    self.killsperweaponlog[var2]++;
+    self.killsperweaponlog[var_2]++;
   }
 
   if(!isDefined(self.recentkillsperweapon)) {
     self.recentkillsperweapon = [];
   }
 
-  if(!isDefined(self.recentkillsperweapon[var1])) {
-    self.recentkillsperweapon[var1] = 1;
+  if(!isDefined(self.recentkillsperweapon[var_1])) {
+    self.recentkillsperweapon[var_1] = 1;
   } else {
-    self.recentkillsperweapon[var1]++;
+    self.recentkillsperweapon[var_1]++;
   }
 
-  var3 = scripts\cp\utility::getequipmenttype(var1);
+  var_3 = scripts\cp\utility::getequipmenttype(var_1);
   wait 1.25;
   self.recentkillcount = 0;
   self.recentkillsperweapon = undefined;
 }
 
-function onplayerdisconnect(var0, var1) {
-  var0 setplayerdata("cp", "CPSession", "subParty", -1);
-  scripts\cp\cp_persistence::eog_update_on_player_disconnect(var0);
+function onplayerdisconnect(var_0, var_1) {
+  var_0 setplayerdata("cp", "CPSession", "subParty", -1);
+  scripts\cp\cp_persistence::eog_update_on_player_disconnect(var_0);
 }
 
-function endgame_clientmatchdata(var0, var1) {}
+function endgame_clientmatchdata(var_0, var_1) {}
 
 function hostmigrationstart() {
-  var0 = scripts\mp\mp_agent::getaliveagentsofteam("axis");
+  var_0 = scripts\mp\mp_agent::getaliveagentsofteam("axis");
 
-  foreach(var2 in var0) {
-    if(istrue(var2.scripted_mode)) {
-      var2.died_poorly = 1;
-      var2 suicide();
+  foreach(var_2 in var_0) {
+    if(istrue(var_2.scripted_mode)) {
+      var_2.died_poorly = 1;
+      var_2 suicide();
       continue;
     }
 
-    if(istrue(var2.ignoreme)) {
-      var2.died_poorly = 1;
-      var2 suicide();
+    if(istrue(var_2.ignoreme)) {
+      var_2.died_poorly = 1;
+      var_2 suicide();
       continue;
     }
 
-    if(istrue(var2.ignoreall)) {
-      var2.died_poorly = 1;
-      var2 suicide();
+    if(istrue(var_2.ignoreall)) {
+      var_2.died_poorly = 1;
+      var_2 suicide();
       continue;
     }
 
-    if(!istrue(var2.entered_playspace)) {
-      var2.died_poorly = 1;
-      var2 suicide();
+    if(!istrue(var_2.entered_playspace)) {
+      var_2.died_poorly = 1;
+      var_2 suicide();
       continue;
     }
 
-    var2.scripted_mode = 1;
-    var2 scragentsetgoalpos(var2.origin);
-    var2.ignoreme = 1;
-    var2.ignoreall = 1;
+    var_2.scripted_mode = 1;
+    var_2 scragentsetgoalpos(var_2.origin);
+    var_2.ignoreme = 1;
+    var_2.ignoreall = 1;
   }
 }
 
 function hostmigrationend() {
-  var0 = scripts\mp\mp_agent::getaliveagentsofteam("axis");
+  var_0 = scripts\mp\mp_agent::getaliveagentsofteam("axis");
 
-  foreach(var2 in var0) {
-    var2.scripted_mode = 0;
-    var2.ignoreme = 0;
-    var2.ignoreall = 0;
+  foreach(var_2 in var_0) {
+    var_2.scripted_mode = 0;
+    var_2.ignoreme = 0;
+    var_2.ignoreall = 0;
   }
 
   if(isDefined(level.customhostmigrationend)) {
@@ -1738,60 +1738,60 @@ function hostmigrationend() {
 }
 
 function resetplayerhud() {
-  foreach(var1 in level.players) {
-    if(isDefined(var1.current_vehicle_seat)) {
-      var2 = var1.current_vehicle_seat;
-      var1 scripts\cp\maps\cp_br_syrk\vehicle_travel::enter_seat_omnvar(var1, var2);
+  foreach(var_1 in level.players) {
+    if(isDefined(var_1.current_vehicle_seat)) {
+      var_2 = var_1.current_vehicle_seat;
+      var_1 scripts\cp\maps\cp_br_syrk\vehicle_travel::enter_seat_omnvar(var_1, var_2);
     }
   }
 }
 
-function kick_for_inactivity(var0) {
+function kick_for_inactivity(var_0) {
   level endon("game_ended");
-  var0 endon("disconnect");
+  var_0 endon("disconnect");
   thread check_for_move_change();
   thread check_for_movement();
-  var1 = 0;
-  var2 = gettime();
-  var3 = level.onlinegame;
+  var_1 = 0;
+  var_2 = gettime();
+  var_3 = level.onlinegame;
 
-  if(!var3) {
+  if(!var_3) {
     return;
   }
 
-  var0 notifyonplayercommand("inputReceived", "+speed_throw");
-  var0 notifyonplayercommand("inputReceived", "+stance");
-  var0 notifyonplayercommand("inputReceived", "+goStand");
-  var0 notifyonplayercommand("inputReceived", "+usereload");
-  var0 notifyonplayercommand("inputReceived", "+activate");
-  var0 notifyonplayercommand("inputReceived", "+melee_zoom");
-  var0 notifyonplayercommand("inputReceived", "+breath_sprint");
-  var0 notifyonplayercommand("inputReceived", "+attack");
-  var0 notifyonplayercommand("inputReceived", "+frag");
-  var0 notifyonplayercommand("inputReceived", "+smoke");
-  var4 = 120;
-  var5 = 0.1;
+  var_0 notifyonplayercommand("inputReceived", "+speed_throw");
+  var_0 notifyonplayercommand("inputReceived", "+stance");
+  var_0 notifyonplayercommand("inputReceived", "+goStand");
+  var_0 notifyonplayercommand("inputReceived", "+usereload");
+  var_0 notifyonplayercommand("inputReceived", "+activate");
+  var_0 notifyonplayercommand("inputReceived", "+melee_zoom");
+  var_0 notifyonplayercommand("inputReceived", "+breath_sprint");
+  var_0 notifyonplayercommand("inputReceived", "+attack");
+  var_0 notifyonplayercommand("inputReceived", "+frag");
+  var_0 notifyonplayercommand("inputReceived", "+smoke");
+  var_4 = 120;
+  var_5 = 0.1;
 
   for(;;) {
-    var6 = scripts\engine\utility::ref_143c0(var5, "inputReceived", "currency_earned");
+    var_6 = scripts\engine\utility::ref_143c0(var_5, "inputReceived", "currency_earned");
 
-    if(var6 != "timeout") {
-      var4 = 120;
-      var1 = 1;
+    if(var_6 != "timeout") {
+      var_4 = 120;
+      var_1 = 1;
       continue;
     }
 
-    if(!istrue(var0.in_afterlife_arcade) && !istrue(var0.inlaststand)) {
-      var4 -= var5;
+    if(!istrue(var_0.in_afterlife_arcade) && !istrue(var_0.inlaststand)) {
+      var_4 -= var_5;
     }
 
-    if(var4 < 0) {
-      if(var1) {
-        var1 = 0;
+    if(var_4 < 0) {
+      if(var_1) {
+        var_1 = 0;
         continue;
       }
 
-      add_to_kick_queue(var0);
+      add_to_kick_queue(var_0);
       LOC_00000146:
     }
     LOC_00000146:
@@ -1801,15 +1801,15 @@ function kick_for_inactivity(var0) {
 function check_for_movement() {
   level endon("game_ended");
   self endon("disconnect");
-  var0 = self getnormalizedmovement();
-  var1 = gettime();
+  var_0 = self getnormalizedmovement();
+  var_1 = gettime();
 
   for(;;) {
     wait 0.2;
-    var2 = self getnormalizedmovement();
+    var_2 = self getnormalizedmovement();
 
-    if(var2[0] == var0[0] && var2[1] == var0[1]) {
-      if(gettime() - var1 > 90000) {
+    if(var_2[0] == var_0[0] && var_2[1] == var_0[1]) {
+      if(gettime() - var_1 > 90000) {
         add_to_kick_queue(self);
       }
 
@@ -1821,13 +1821,13 @@ function check_for_movement() {
   }
 }
 
-function add_to_kick_queue(var0) {
-  if(scripts\cp\cp_laststand::player_in_laststand(var0)) {
+function add_to_kick_queue(var_0) {
+  if(scripts\cp\cp_laststand::player_in_laststand(var_0)) {
     return;
   }
 
-  if(!scripts\engine\utility::array_contains(level.kick_player_queue, var0)) {
-    level.kick_player_queue = scripts\engine\utility::array_add_safe(level.kick_player_queue, var0);
+  if(!scripts\engine\utility::array_contains(level.kick_player_queue, var_0)) {
+    level.kick_player_queue = scripts\engine\utility::array_add_safe(level.kick_player_queue, var_0);
     return;
   }
 }
@@ -1838,12 +1838,12 @@ function kick_player_queue_loop() {
 
   for(;;) {
     if(level.kick_player_queue.size > 0) {
-      foreach(var1 in level.kick_player_queue) {
-        if(!isDefined(var1)) {
+      foreach(var_1 in level.kick_player_queue) {
+        if(!isDefined(var_1)) {
           continue;
         }
 
-        thread kill_off_non_essential_ai(var1);
+        thread kill_off_non_essential_ai(var_1);
       }
 
       level.kick_player_queue = [];
@@ -1853,30 +1853,30 @@ function kick_player_queue_loop() {
   }
 }
 
-function kill_off_non_essential_ai(var0) {
+function kill_off_non_essential_ai(var_0) {
   level endon("game_ended");
   self endon("disconnect");
-  var1 = 10;
+  var_1 = 10;
 
-  if(istrue(var0.clear_up_objective_after_delay)) {
+  if(istrue(var_0.clear_up_objective_after_delay)) {
     return;
   }
 
-  var0.clear_up_objective_after_delay = 1;
-  var0 sethudtutorialmessage(&"COOP_GAME_PLAY/KICK_FOR_INACTIVITY");
-  var0 setclientomnvar("ui_kick_warning", 1);
-  var2 = var0 scripts\engine\utility::waittill_any_in_array_or_timeout(["inputReceived"], var1);
-  var0 clearhudtutorialmessage();
-  var0 setclientomnvar("ui_kick_warning", 0);
-  var0.clear_up_objective_after_delay = undefined;
+  var_0.clear_up_objective_after_delay = 1;
+  var_0 sethudtutorialmessage(&"COOP_GAME_PLAY/KICK_FOR_INACTIVITY");
+  var_0 setclientomnvar("ui_kick_warning", 1);
+  var_2 = var_0 scripts\engine\utility::waittill_any_in_array_or_timeout(["inputReceived"], var_1);
+  var_0 clearhudtutorialmessage();
+  var_0 setclientomnvar("ui_kick_warning", 0);
+  var_0.clear_up_objective_after_delay = undefined;
 
-  if(var2 == "timeout") {
+  if(var_2 == "timeout") {
     if(scripts\cp\utility::questtimeradd() == 1) {
       level thread[[level.endgame]]("axis", level.end_game_string_index["fail"]);
       return;
     }
 
-    kick(var0 getentitynumber(), "EXE/PLAYERKICKED_INACTIVE");
+    kick(var_0 getentitynumber(), "EXE/PLAYERKICKED_INACTIVE");
     return;
   }
 }
@@ -1890,16 +1890,16 @@ function check_for_move_change() {
     wait 0.1;
   }
 
-  var0 = 1;
-  var1 = var0;
-  var2 = var0;
+  var_0 = 1;
+  var_1 = var_0;
+  var_2 = var_0;
 
   for(;;) {
-    var3 = self getnormalizedmovement();
-    var1 = get_move_direction_from_vectors(var3);
+    var_3 = self getnormalizedmovement();
+    var_1 = get_move_direction_from_vectors(var_3);
 
-    if(var2 != var1) {
-      var2 = var1;
+    if(var_2 != var_1) {
+      var_2 = var_1;
       self notify("inputReceived");
     }
 
@@ -1907,53 +1907,53 @@ function check_for_move_change() {
   }
 }
 
-function get_move_direction_from_vectors(var0) {
-  var1 = 1;
-  var2 = 2;
-  var3 = 3;
-  var4 = 4;
-  var5 = 5;
-  var6 = 6;
-  var7 = 7;
-  var8 = 8;
-  var9 = var1;
+function get_move_direction_from_vectors(var_0) {
+  var_1 = 1;
+  var_2 = 2;
+  var_3 = 3;
+  var_4 = 4;
+  var_5 = 5;
+  var_6 = 6;
+  var_7 = 7;
+  var_8 = 8;
+  var_9 = var_1;
 
-  if(var0[0] > 0) {
-    if(var0[1] <= 0.7 && var0[1] >= -0.7) {
-      var9 = var1;
-    }
-
-    if(var0[0] > 0.5 && var0[1] > 0.7) {
-      var9 = var2;
-    } else if(var0[0] > 0.5 && var0[1] < -0.7) {
-      var9 = var3;
-    }
-  } else if(var0[0] < 0) {
-    if(var0[1] < 0.4 && var0[1] > -0.4) {
-      var9 = var4;
+  if(var_0[0] > 0) {
+    if(var_0[1] <= 0.7 && var_0[1] >= -0.7) {
+      var_9 = var_1;
     }
 
-    if(var0[0] < -0.5 && var0[1] > 0.5) {
-      var9 = var5;
-    } else if(var0[0] < -0.5 && var0[1] < -0.5) {
-      var9 = var6;
+    if(var_0[0] > 0.5 && var_0[1] > 0.7) {
+      var_9 = var_2;
+    } else if(var_0[0] > 0.5 && var_0[1] < -0.7) {
+      var_9 = var_3;
     }
-  } else if(var0[1] > 0.4) {
-    var9 = var7;
-  } else if(var0[1] < -0.4) {
-    var9 = var8;
+  } else if(var_0[0] < 0) {
+    if(var_0[1] < 0.4 && var_0[1] > -0.4) {
+      var_9 = var_4;
+    }
+
+    if(var_0[0] < -0.5 && var_0[1] > 0.5) {
+      var_9 = var_5;
+    } else if(var_0[0] < -0.5 && var_0[1] < -0.5) {
+      var_9 = var_6;
+    }
+  } else if(var_0[1] > 0.4) {
+    var_9 = var_7;
+  } else if(var_0[1] < -0.4) {
+    var_9 = var_8;
   }
 
-  return var9;
+  return var_9;
 }
 
-function health_meter_monitor(var0) {
-  var0 endon("disconnect");
+function health_meter_monitor(var_0) {
+  var_0 endon("disconnect");
   level endon("game_ended");
   wait 1;
 
   for(;;) {
-    var0 setclientomnvar("zm_player_health", var0.health / 100);
+    var_0 setclientomnvar("zm_player_health", var_0.health / 100);
     wait 0.05;
   }
 }
@@ -1964,9 +1964,9 @@ function last_stand_hud_update() {
 
 function monitor_num_players() {
   scripts\engine\utility::flag_init("player_count_determined");
-  var0 = getDvar("NKSQNMMRRQ");
+  var_0 = getDvar("NKSQNMMRRQ");
 
-  if(var0 != "1") {
+  if(var_0 != "1") {
     level.only_one_player = 0;
     scripts\engine\utility::flag_set("player_count_determined");
     return;
@@ -1991,19 +1991,19 @@ function monitor_num_players() {
   level notify("multiple_players");
 }
 
-function enable_dogtag_revive(var0) {
-  var1 = spawn("script_model", var0.origin + (0, 0, 40));
-  var1 setModel("military_dogtags_iw8_blue");
-  var1 makeusable();
-  var1 scriptmodelplayanim("mp_dogtag_spin");
-  var1 setHintString(&"COOP_GAME_PLAY/REVIVE_USE");
-  var1 endon("death");
-  var0.respawn_forcespawnorigin = var0.origin;
-  var0.respawn_forcespawnangles = (0, 0, 0);
-  var0.dogtag = var1;
-  var0.dogtag.owner = var0;
-  scripts\cp\cp_laststand::makereviveicon(var1, var0, (1, 0, 0));
-  thread revivetriggerthink(var1);
+function enable_dogtag_revive(var_0) {
+  var_1 = spawn("script_model", var_0.origin + (0, 0, 40));
+  var_1 setModel("military_dogtags_iw8_blue");
+  var_1 makeusable();
+  var_1 scriptmodelplayanim("mp_dogtag_spin");
+  var_1 setHintString(&"COOP_GAME_PLAY/REVIVE_USE");
+  var_1 endon("death");
+  var_0.respawn_forcespawnorigin = var_0.origin;
+  var_0.respawn_forcespawnangles = (0, 0, 0);
+  var_0.dogtag = var_1;
+  var_0.dogtag.owner = var_0;
+  scripts\cp\cp_laststand::makereviveicon(var_1, var_0, (1, 0, 0));
+  thread revivetriggerthink(var_1);
   thread endreviveonownerdeathordisconnect();
 }
 
@@ -2016,23 +2016,23 @@ function rotate_tags() {
   }
 }
 
-function revivetriggerthink(var0) {
+function revivetriggerthink(var_0) {
   self endon("disconnect");
   level endon("game_ended");
   self endon("instant_revive");
 
   for(;;) {
-    self waittill("trigger", var1);
+    self waittill("trigger", var_1);
 
-    if(!var1 scripts\cp\utility::is_valid_player()) {
+    if(!var_1 scripts\cp\utility::is_valid_player()) {
       continue;
     }
 
     self.bplayerrevivingteammate = 1;
-    var2 = scripts\cp\utility::player_lua_progressbar(var1, 8000, 9216, 5);
+    var_2 = scripts\cp\utility::player_lua_progressbar(var_1, 8000, 9216, 5);
     self.bplayerrevivingteammate = undefined;
 
-    if(!var2) {
+    if(!var_2) {
       continue;
     }
 
@@ -2040,8 +2040,8 @@ function revivetriggerthink(var0) {
   }
 
   playFX(level._effect["dogtag_pickup"], self.origin);
-  var0 scripts\cp\cp_laststand::instant_revive(var0);
-  var0 notify("last_stand_finished");
+  var_0 scripts\cp\cp_laststand::instant_revive(var_0);
+  var_0 notify("last_stand_finished");
 }
 
 function endreviveonownerdeathordisconnect() {
@@ -2057,23 +2057,23 @@ function ref_14524() {
 
   for(;;) {
     level waittill("timeout_wave_complete");
-    var0 = [];
+    var_0 = [];
 
-    foreach(var2 in level.players) {
-      if(istrue(var2.isreviving)) {
-        var0 = var2;
+    foreach(var_2 in level.players) {
+      if(istrue(var_2.isreviving)) {
+        var_0 = var_2;
       }
 
-      if(scripts\cp\cp_laststand::player_in_laststand(var2) && !istrue(var2.clear_prev_goal) && !istrue(scripts\cp\cp_laststand::is_being_revived(var2))) {
-        var2 scripts\cp\cp_laststand::instant_revive(var2);
+      if(scripts\cp\cp_laststand::player_in_laststand(var_2) && !istrue(var_2.clear_prev_goal) && !istrue(scripts\cp\cp_laststand::is_being_revived(var_2))) {
+        var_2 scripts\cp\cp_laststand::instant_revive(var_2);
       }
     }
 
     wait 2;
 
-    foreach(var2 in var0) {
-      if(!scripts\cp\cp_laststand::player_in_laststand(var2) && !istrue(var2.clear_prev_goal)) {
-        var2 thread scripts\cp\cp_laststand::set_cam();
+    foreach(var_2 in var_0) {
+      if(!scripts\cp\cp_laststand::player_in_laststand(var_2) && !istrue(var_2.clear_prev_goal)) {
+        var_2 thread scripts\cp\cp_laststand::set_cam();
       }
     }
   }
@@ -2090,144 +2090,144 @@ function give_skillpoints_at_start() {
   }
 }
 
-function givedefaultloadout(var0, var1, var2) {
+function givedefaultloadout(var_0, var_1, var_2) {
   if(scripts\engine\utility::flag_exist("strike_init_done")) {
     scripts\engine\utility::flag_wait("strike_init_done");
   }
 
-  var3 = self;
+  var_3 = self;
 
-  if(!istrue(var3.ref_12c69)) {
-    var3 setclientomnvar("reset_wave_loadout", 1);
+  if(!istrue(var_3.ref_12c69)) {
+    var_3 setclientomnvar("reset_wave_loadout", 1);
     thread ref_1434c();
-    var3.ref_12c69 = 1;
+    var_3.ref_12c69 = 1;
   }
 
-  var3.changingweapon = undefined;
-  var3 scripts\cp\cp_accessories::clearplayeraccessory();
-  var3 takeallweapons();
+  var_3.changingweapon = undefined;
+  var_3 scripts\cp\cp_accessories::clearplayeraccessory();
+  var_3 takeallweapons();
 
-  if(!istrue(var3.keep_perks)) {
-    var3 scripts\cp\utility::_clearperks();
+  if(!istrue(var_3.keep_perks)) {
+    var_3 scripts\cp\utility::_clearperks();
   }
 
-  var3 scripts\cp\utility::_detachall();
-  var3.spawnperk = 0;
+  var_3 scripts\cp\utility::_detachall();
+  var_3.spawnperk = 0;
 
-  if(initmaxspeedforpathlengthtable(var3)) {
+  if(initmaxspeedforpathlengthtable(var_3)) {
     thread ref_13b0e();
   }
 
-  if(isDefined(var3.headmodel)) {
-    var3.headmodel = undefined;
+  if(isDefined(var_3.headmodel)) {
+    var_3.headmodel = undefined;
   }
 
-  var3 thread scripts\cp\survival\survival_loadout::setmodelfromcustomization();
-  var4 = var3 scripts\cp\survival\survival_loadout::lookupcurrentoperatorskin(var3.team);
-  var5 = var3 scripts\cp\survival\survival_loadout::getplayerfoleytype(var4);
+  var_3 thread scripts\cp\survival\survival_loadout::setmodelfromcustomization();
+  var_4 = var_3 scripts\cp\survival\survival_loadout::lookupcurrentoperatorskin(var_3.team);
+  var_5 = var_3 scripts\cp\survival\survival_loadout::getplayerfoleytype(var_4);
 
-  if(var5 == "") {
-    var5 = "vestlight";
+  if(var_5 == "") {
+    var_5 = "vestlight";
   }
 
-  var3 setclothtype(var5);
+  var_3 setclothtype(var_5);
   scripts\engine\utility::flag_wait("introscreen_over");
 
   if(isDefined(level.move_speed_scale)) {
-    var3[[level.move_speed_scale]]();
+    var_3[[level.move_speed_scale]]();
   } else {
-    var3 scripts\cp\survival\survival_loadout::updatemovespeedscale();
+    var_3 scripts\cp\survival\survival_loadout::updatemovespeedscale();
   }
 
-  var3.primaryweapon = isundefinedweapon();
-  var3.starting_weapon = isundefinedweapon();
-  var3 thread scripts\cp\cp_weapon::setweaponlaser_internal();
-  var3 notify("giveLoadout");
-  var3 scripts\cp\utility::giveperk("specialty_pistoldeath");
-  var3 scripts\cp\utility::giveperk("specialty_expanded_minimap");
+  var_3.primaryweapon = isundefinedweapon();
+  var_3.starting_weapon = isundefinedweapon();
+  var_3 thread scripts\cp\cp_weapon::setweaponlaser_internal();
+  var_3 notify("giveLoadout");
+  var_3 scripts\cp\utility::giveperk("specialty_pistoldeath");
+  var_3 scripts\cp\utility::giveperk("specialty_expanded_minimap");
 
-  if(isDefined(var0) && var0) {
+  if(isDefined(var_0) && var_0) {
     return;
   }
 
-  var6 = var3.melee_weapon;
-  var3.default_starting_melee_weapon = var6;
-  var3.currentmeleeweapon = var6;
-  var3.class = "none";
-  var3.class_num = 666;
+  var_6 = var_3.melee_weapon;
+  var_3.default_starting_melee_weapon = var_6;
+  var_3.currentmeleeweapon = var_6;
+  var_3.class = "none";
+  var_3.class_num = 666;
 
-  if(getqueuedspleveltransients(var3.default_starting_pistol)) {
-    if(!getqueuedspleveltransients(var3.starting_weapon)) {
-      var3.default_starting_pistol = var3.starting_weapon;
+  if(getqueuedspleveltransients(var_3.default_starting_pistol)) {
+    if(!getqueuedspleveltransients(var_3.starting_weapon)) {
+      var_3.default_starting_pistol = var_3.starting_weapon;
     } else if(isDefined(level.default_weapon)) {
-      var3.default_starting_pistol = scripts\cp\cp_weapon::buildweapon(level.default_weapon, [], "none", "none", -1);
+      var_3.default_starting_pistol = scripts\cp\cp_weapon::buildweapon(level.default_weapon, [], "none", "none", -1);
     } else {
-      var3.default_starting_pistol = scripts\cp\cp_weapon::buildweapon("iw8_pi_golf21_mp", [], "none", "none", -1);
+      var_3.default_starting_pistol = scripts\cp\cp_weapon::buildweapon("iw8_pi_golf21_mp", [], "none", "none", -1);
     }
   }
 
-  var3.last_stand_pistol = var3.default_starting_pistol;
-  var7 = spawnStruct();
-  var8 = var3 scripts\cp\cp_loadout::cac_getloadoutselectedidx();
-  var9 = var3 scripts\cp\cp_loadout::loadout_updateclasscustom(var7, var8);
-  var3.classstruct = var9;
-  var10 = scripts\cp\utility::getrawbaseweaponname(var3.default_starting_pistol);
-  var3.default_starting_pistol = scripts\cp\survival\survival_loadout::return_wbk_version_of_weapon(var3, var10, var3.default_starting_pistol);
-  var3 scripts\cp\utility::_giveweapon(var3.default_starting_pistol, undefined, undefined, 1);
+  var_3.last_stand_pistol = var_3.default_starting_pistol;
+  var_7 = spawnStruct();
+  var_8 = var_3 scripts\cp\cp_loadout::cac_getloadoutselectedidx();
+  var_9 = var_3 scripts\cp\cp_loadout::loadout_updateclasscustom(var_7, var_8);
+  var_3.classstruct = var_9;
+  var_10 = scripts\cp\utility::getrawbaseweaponname(var_3.default_starting_pistol);
+  var_3.default_starting_pistol = scripts\cp\survival\survival_loadout::return_wbk_version_of_weapon(var_3, var_10, var_3.default_starting_pistol);
+  var_3 scripts\cp\utility::_giveweapon(var_3.default_starting_pistol, undefined, undefined, 1);
 
   LOC_0000027e:
-    if(!getqueuedspleveltransients(var3.starting_weapon)) {
-      var10 = scripts\cp\utility::getrawbaseweaponname(var3.starting_weapon);
-      var3.starting_weapon = scripts\cp\survival\survival_loadout::return_wbk_version_of_weapon(var3, var10, var3.starting_weapon);
-      var3 scripts\cp\utility::_giveweapon(var3.starting_weapon, undefined, undefined, 0);
+    if(!getqueuedspleveltransients(var_3.starting_weapon)) {
+      var_10 = scripts\cp\utility::getrawbaseweaponname(var_3.starting_weapon);
+      var_3.starting_weapon = scripts\cp\survival\survival_loadout::return_wbk_version_of_weapon(var_3, var_10, var_3.starting_weapon);
+      var_3 scripts\cp\utility::_giveweapon(var_3.starting_weapon, undefined, undefined, 0);
     }
 
-  if(isDefined(var3.operatorcustomization) && isDefined(var3.operatorcustomization.execution)) {
-    var3 scripts\cp_mp\execution::_giveexecution(var3.operatorcustomization.execution);
+  if(isDefined(var_3.operatorcustomization) && isDefined(var_3.operatorcustomization.execution)) {
+    var_3 scripts\cp_mp\execution::_giveexecution(var_3.operatorcustomization.execution);
   }
 
-  var11 = scripts\cp\utility::getrawbaseweaponname(var3.default_starting_pistol);
-  var3[[level.move_speed_scale]]();
-  var7 = spawnStruct();
-  var7.lvl = scripts\cp\survival\survival_loadout::get_baseweapon_pap_level(var3, var11);
-  var3.pap[var11] = var7;
-  var3 notify("weapon_level_changed");
-  var3 giveweapon("super_default_zm");
-  var3 assignweaponoffhandspecial("super_default_zm");
-  var3.specialoffhandgrenade = "super_default_zm";
-  var3 scripts\cp\survival\survival_loadout::set_player_perks();
-  var12 = var3.default_starting_pistol;
+  var_11 = scripts\cp\utility::getrawbaseweaponname(var_3.default_starting_pistol);
+  var_3[[level.move_speed_scale]]();
+  var_7 = spawnStruct();
+  var_7.lvl = scripts\cp\survival\survival_loadout::get_baseweapon_pap_level(var_3, var_11);
+  var_3.pap[var_11] = var_7;
+  var_3 notify("weapon_level_changed");
+  var_3 giveweapon("super_default_zm");
+  var_3 assignweaponoffhandspecial("super_default_zm");
+  var_3.specialoffhandgrenade = "super_default_zm";
+  var_3 scripts\cp\survival\survival_loadout::set_player_perks();
+  var_12 = var_3.default_starting_pistol;
 
-  if(!getqueuedspleveltransients(var3.starting_weapon)) {
-    var12 = var3.starting_weapon;
+  if(!getqueuedspleveltransients(var_3.starting_weapon)) {
+    var_12 = var_3.starting_weapon;
   }
 
   if(isDefined(self.classstruct.loadoutaccessorydata) && isDefined(self.classstruct.loadoutaccessoryweapon) && self.classstruct.loadoutaccessoryweapon != "none") {
     scripts\cp\cp_accessories::giveplayeraccessory(self.classstruct.loadoutaccessorydata, self.classstruct.loadoutaccessoryweapon, self.classstruct.loadoutaccessorylogic);
   }
 
-  var13 = self getplayerdata("cp", "inventorySlots", "totalSlots");
-  var3 scripts\cp\cp_munitions::reset_munitions(self, var13);
-  var14 = 1;
-  var15 = 1;
-  var16 = "power_frag";
-  var17 = "power_flash";
-  var3 thread scripts\cp\cp_powers::givepower(var16, "primary", undefined, undefined, undefined, undefined, 1, var14);
-  var3 thread scripts\cp\cp_powers::givepower(var17, "secondary", undefined, undefined, undefined, undefined, 1, var15);
-  var3 thread scripts\cp\survival\survival_loadout::wait_and_force_weapon_switch(var12);
+  var_13 = self getplayerdata("cp", "inventorySlots", "totalSlots");
+  var_3 scripts\cp\cp_munitions::reset_munitions(self, var_13);
+  var_14 = 1;
+  var_15 = 1;
+  var_16 = "power_frag";
+  var_17 = "power_flash";
+  var_3 thread scripts\cp\cp_powers::givepower(var_16, "primary", undefined, undefined, undefined, undefined, 1, var_14);
+  var_3 thread scripts\cp\cp_powers::givepower(var_17, "secondary", undefined, undefined, undefined, undefined, 1, var_15);
+  var_3 thread scripts\cp\survival\survival_loadout::wait_and_force_weapon_switch(var_12);
 
   if(istrue(level.disable_nvg)) {
-    var3 setactionslot(2, "");
+    var_3 setactionslot(2, "");
   }
 
-  var3 setactionslot(3, "altmode");
+  var_3 setactionslot(3, "altmode");
 
-  if(isDefined(var3.operatorcustomization) && isDefined(var3.operatorcustomization.execution)) {
-    var3 scripts\cp_mp\execution::_giveexecution(var3.operatorcustomization.execution);
+  if(isDefined(var_3.operatorcustomization) && isDefined(var_3.operatorcustomization.execution)) {
+    var_3 scripts\cp_mp\execution::_giveexecution(var_3.operatorcustomization.execution);
   }
 
-  var3 notify("loadout_given");
-  var3.zombiespawnabovedeath = 1;
+  var_3 notify("loadout_given");
+  var_3.zombiespawnabovedeath = 1;
 
   if(!scripts\engine\utility::flag_exist("player_spawned_with_loadout")) {
     scripts\engine\utility::flag_init("player_spawned_with_loadout");
@@ -2266,9 +2266,9 @@ function getspawnpoint() {
   return getassignedspawnpoint(scripts\engine\utility::getStructArray("default_player_start", "targetname"));
 }
 
-function getassignedspawnpoint(var0) {
-  var1 = self getentitynumber();
-  return var0[var1];
+function getassignedspawnpoint(var_0) {
+  var_1 = self getentitynumber();
+  return var_0[var_1];
 }
 
 function allow_nvg() {
@@ -2280,82 +2280,82 @@ function allow_nvg() {
 }
 
 function mp_t_reflex_patch() {
-  foreach(var1 in level.players) {
-    var1.ability_invulnerable = 1;
+  foreach(var_1 in level.players) {
+    var_1.ability_invulnerable = 1;
   }
 
   wait 6.6;
 
-  foreach(var1 in level.players) {
-    var1 clearclienttriggeraudiozone(1);
+  foreach(var_1 in level.players) {
+    var_1 clearclienttriggeraudiozone(1);
 
-    if(istrue(var1.musicplaying)) {
-      var1 playlocalsound("mp_jugg_mus_toggle_button");
-      var1 setscriptablepartstate("juggernaut", "neutral", 0);
+    if(istrue(var_1.musicplaying)) {
+      var_1 playlocalsound("mp_jugg_mus_toggle_button");
+      var_1 setscriptablepartstate("juggernaut", "neutral", 0);
     }
 
-    var1 setplayermusicstate("mus_west_victory");
-    var1 setsoundsubmix("cp_matchend", 1);
+    var_1 setplayermusicstate("mus_west_victory");
+    var_1 setsoundsubmix("cp_matchend", 1);
   }
 
   wait 2.2;
 
-  foreach(var1 in level.players) {
-    var1 clearsoundsubmix("cp_matchend", 1);
-    var1 clearsoundsubmix("mp_matchend_music", 1);
+  foreach(var_1 in level.players) {
+    var_1 clearsoundsubmix("cp_matchend", 1);
+    var_1 clearsoundsubmix("mp_matchend_music", 1);
   }
 }
 
 function mp_vacant_patch() {
-  var0 = "dx_cps_kama_quarry2_extraction_50";
-  level scripts\cp\cp_vo::try_to_play_vo_on_team(var0, "allies");
+  var_0 = "dx_cps_kama_quarry2_extraction_50";
+  level scripts\cp\cp_vo::try_to_play_vo_on_team(var_0, "allies");
   wait 0.2;
-  var0 = "dx_cps_kama_safehouse_return_safehouse_20";
-  level thread scripts\cp\cp_vo::try_to_play_vo_on_team(var0, "allies");
+  var_0 = "dx_cps_kama_safehouse_return_safehouse_20";
+  level thread scripts\cp\cp_vo::try_to_play_vo_on_team(var_0, "allies");
 }
 
 function mp_t_reflex_containers_collisions() {
   wait 1;
 
-  foreach(var1 in level.players) {
-    var1 allowmovement(0);
-    var1 allowfire(0);
-    var1 disableoffhandweapons();
-    var1 disableusability();
-    var1 allowmovement(0);
+  foreach(var_1 in level.players) {
+    var_1 allowmovement(0);
+    var_1 allowfire(0);
+    var_1 disableoffhandweapons();
+    var_1 disableusability();
+    var_1 allowmovement(0);
   }
 
   wait 3;
 
-  foreach(var1 in level.players) {
-    var1 thread scripts\mp\vehicles\vehicle_damage_mp::ref_1340d(1.5, 1, 1);
+  foreach(var_1 in level.players) {
+    var_1 thread scripts\mp\vehicles\vehicle_damage_mp::ref_1340d(1.5, 1, 1);
   }
 
   wait 2;
-  var5 = scripts\engine\utility::getStructArray("heli_search", "script_noteworthy");
+  var_5 = scripts\engine\utility::getStructArray("heli_search", "script_noteworthy");
 
-  if(!isDefined(var5) || var5.size == 0) {
+  if(!isDefined(var_5) || var_5.size == 0) {
     return;
   }
 
-  foreach(var1 in level.players) {
-    var7 = var5[0];
-    var8 = var7.origin;
-    var9 = scripts\engine\utility::getStruct(var7.target, "targetname");
-    var10 = spawn("script_model", var8);
-    var10 setModel("tag_origin");
-    var10.angles = var7.angles;
-    var10 moveTo(var9.origin, 20, 1, 1);
-    var1 playerhide();
-    var1 setclientomnvar("ui_hide_hud", 1);
-    spawn_endgame_camera(var1, var10);
-    var1 lerpfovscalefactor(0, 0);
+  foreach(var_1 in level.players) {
+    var_7 = var_5[0];
+    var_8 = var_7.origin;
+    var_9 = scripts\engine\utility::getStruct(var_7.target, "targetname");
+    var_10 = spawn("script_model", var_8);
+    var_10 setModel("tag_origin");
+    var_10.angles = var_7.angles;
+    var_10 moveTo(var_9.origin, 20, 1, 1);
+    var_1 playerhide();
+    var_1 setclientomnvar("ui_hide_hud", 1);
+    spawn_endgame_camera(var_1, var_10);
+    var_1 lerpfovscalefactor(0, 0);
   }
 }
 
-function spawn_endgame_camera(var0) {
+function spawn_endgame_camera(var_0) {
   self.ignoreme = 1;
-  self cameralinkTo(var0, "tag_origin", 1);
+  self cameralinkTo(var_0, "tag_origin", 1);
   self setclientdvar("LQKPQMPRQN", 1);
   self setdepthoffield(0, 128, 512, 4000, 6, 1.8);
 
@@ -2369,29 +2369,29 @@ function smokinggunclassindex() {
   level endon("game_ended");
   scripts\engine\utility::flag_wait("level_ready_for_script");
   wait 10;
-  var0 = 60000;
-  var1 = [];
+  var_0 = 60000;
+  var_1 = [];
 
   for(;;) {
     if(isDefined(level.vehicle) && isDefined(level.vehicle.helicopter_crash_locations)) {
-      for(var2 = 0; var2 < level.vehicle.helicopter_crash_locations.size; var2++) {
-        var3 = level.vehicle.helicopter_crash_locations[var2];
+      for(var_2 = 0; var_2 < level.vehicle.helicopter_crash_locations.size; var_2++) {
+        var_3 = level.vehicle.helicopter_crash_locations[var_2];
 
-        if(!isDefined(var3) || !isstruct(var3)) {
+        if(!isDefined(var_3) || !isstruct(var_3)) {
           continue;
         }
 
-        if(istrue(var3.claimed)) {
-          if(!isDefined(var3.hacks_needed)) {
-            var3.hacks_needed = gettime();
-            var1 = var3;
-          } else if(isDefined(var3.hacks_needed)) {
-            if(gettime() > var3.hacks_needed + var0) {
-              var3.hacks_needed = undefined;
-              var3.claimed = undefined;
+        if(istrue(var_3.claimed)) {
+          if(!isDefined(var_3.hacks_needed)) {
+            var_3.hacks_needed = gettime();
+            var_1 = var_3;
+          } else if(isDefined(var_3.hacks_needed)) {
+            if(gettime() > var_3.hacks_needed + var_0) {
+              var_3.hacks_needed = undefined;
+              var_3.claimed = undefined;
 
-              if(scripts\engine\utility::array_contains(var1, var3)) {
-                var1 = scripts\engine\utility::array_remove(var1, var3);
+              if(scripts\engine\utility::array_contains(var_1, var_3)) {
+                var_1 = scripts\engine\utility::array_remove(var_1, var_3);
               }
             }
           }
@@ -2399,9 +2399,9 @@ function smokinggunclassindex() {
           continue;
         }
 
-        if(scripts\engine\utility::array_contains(var1, var3)) {
-          var3.hacks_needed = undefined;
-          var1 = scripts\engine\utility::array_remove(var1, var3);
+        if(scripts\engine\utility::array_contains(var_1, var_3)) {
+          var_3.hacks_needed = undefined;
+          var_1 = scripts\engine\utility::array_remove(var_1, var_3);
         }
       }
     }
@@ -2412,15 +2412,15 @@ function smokinggunclassindex() {
 
 function update_laststand_times() {
   scripts\cp\cp_laststand::init_laststand_anims();
-  var0 = level.scr_anim["ls_revive_helper"]["in_stand_1"];
-  var1 = level.scr_anim["ls_revive_helper"]["idle_stand_1"];
-  var2 = level.scr_anim["ls_revive_helper"]["out_stand_1"];
-  var3 = getanimlength(var0);
-  var4 = getanimlength(var1);
-  var5 = getanimlength(var2);
-  var6 = 0.5;
-  var7 = (var3 + var4 + var5 + var6) * 1000;
-  var8 = 5000;
-  var9 = (var3 + var5 + var6) * 1000;
-  scripts\cp\cp_laststand::set_revive_time(var7, var8, var9);
+  var_0 = level.scr_anim["ls_revive_helper"]["in_stand_1"];
+  var_1 = level.scr_anim["ls_revive_helper"]["idle_stand_1"];
+  var_2 = level.scr_anim["ls_revive_helper"]["out_stand_1"];
+  var_3 = getanimlength(var_0);
+  var_4 = getanimlength(var_1);
+  var_5 = getanimlength(var_2);
+  var_6 = 0.5;
+  var_7 = (var_3 + var_4 + var_5 + var_6) * 1000;
+  var_8 = 5000;
+  var_9 = (var_3 + var_5 + var_6) * 1000;
+  scripts\cp\cp_laststand::set_revive_time(var_7, var_8, var_9);
 }

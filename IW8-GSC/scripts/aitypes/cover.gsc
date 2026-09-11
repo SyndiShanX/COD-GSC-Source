@@ -3,7 +3,7 @@
  * Script: scripts\aitypes\cover.gsc
 ***********************************************/
 
-function initcover(var0) {
+function initcover(var_0) {
   self.bt.cover = spawnStruct();
   scripts\asm\asm_bb::bb_requestcoverstate("none");
   self.covernode = self.node;
@@ -41,12 +41,12 @@ function initcover(var0) {
   return anim.success;
 }
 
-function initcoverbb(var0) {
-  self.bt.cover.taskid = var0;
+function initcoverbb(var_0) {
+  self.bt.cover.taskid = var_0;
 }
 
-function clearcoverbb(var0) {
-  if(isDefined(self.bt.cover) && self.bt.cover.taskid != var0) {
+function clearcoverbb(var_0) {
+  if(isDefined(self.bt.cover) && self.bt.cover.taskid != var_0) {
     return anim.success;
   }
 
@@ -56,8 +56,8 @@ function clearcoverbb(var0) {
     self._blackboard.deployedlmgnode = undefined;
 
     if(isDefined(self.pathgoalpos) || self._blackboard.desiredstance == "prone") {
-      var1 = scripts\asm\shared\utility::gethighestallowedstance();
-      scripts\asm\asm_bb::bb_requeststance(var1);
+      var_1 = scripts\asm\shared\utility::gethighestallowedstance();
+      scripts\asm\asm_bb::bb_requeststance(var_1);
     }
 
     scripts\asm\asm_bb::bb_requestcoverexposetype(undefined);
@@ -71,21 +71,21 @@ function clearcoverbb(var0) {
   return anim.success;
 }
 
-function setcoverstate(var0) {
-  var1 = self._blackboard.coverstate;
+function setcoverstate(var_0) {
+  var_1 = self._blackboard.coverstate;
 
-  if(var0 == "hide" && (var1 == "exposed" || var1 == "none")) {
+  if(var_0 == "hide" && (var_1 == "exposed" || var_1 == "none")) {
     inithidetimers();
   }
 
-  scripts\asm\asm_bb::bb_requestcoverstate(var0);
+  scripts\asm\asm_bb::bb_requestcoverstate(var_0);
 }
 
 function getcoverstate() {
   return self._blackboard.coverstate;
 }
 
-function isboredofnode(var0) {
+function isboredofnode(var_0) {
   if(self.doingambush) {
     return anim.failure;
   }
@@ -106,46 +106,46 @@ function setnextlookforcovertime() {
   self.bt.nextlookforcovertime = gettime() + self.boredofcoverinterval;
 }
 
-function movetocovernode(var0) {
+function movetocovernode(var_0) {
   if(isDefined(self.fnmovetocovernode)) {
-    self[[self.fnmovetocovernode]](var0);
+    self[[self.fnmovetocovernode]](var_0);
     return;
   }
 }
 
-function shouldlookforinitialcover(var0) {
+function shouldlookforinitialcover(var_0) {
   if(isDefined(self.fnshouldlookforcover)) {
-    return self[[self.fnshouldlookforcover]](var0);
+    return self[[self.fnshouldlookforcover]](var_0);
   }
 
   return anim.failure;
 }
 
-function lookforinitialcover(var0) {
+function lookforinitialcover(var_0) {
   if(isDefined(self.fnlookforcover)) {
-    return self[[self.fnlookforcover]](var0);
+    return self[[self.fnlookforcover]](var_0);
   }
 
   return anim.failure;
 }
 
-function usecovernodeifpossible(var0) {
-  var1 = self.keepclaimednodeifvalid;
-  var2 = self.keepclaimednode;
+function usecovernodeifpossible(var_0) {
+  var_1 = self.keepclaimednodeifvalid;
+  var_2 = self.keepclaimednode;
   self.keepclaimednodeifvalid = 0;
   self.keepclaimednode = 0;
 
-  if(self usecovernode(var0, 0)) {
-    movetocovernode(var0);
+  if(self usecovernode(var_0, 0)) {
+    movetocovernode(var_0);
     return true;
   }
 
-  self.keepclaimednodeifvalid = var1;
-  self.keepclaimednode = var2;
+  self.keepclaimednodeifvalid = var_1;
+  self.keepclaimednode = var_2;
   return false;
 }
 
-function lookforbettercoverduetowallblock(var0) {
+function lookforbettercoverduetowallblock(var_0) {
   if(self.fixednode || self.doingambush) {
     return anim.failure;
   }
@@ -158,13 +158,13 @@ function lookforbettercoverduetowallblock(var0) {
     return anim.failure;
   }
 
-  var1 = undefined;
+  var_1 = undefined;
 
   if(istrue(self.boundingoverwatchenabled)) {
-    var1 = "cover_bounding_overwatch";
+    var_1 = "cover_bounding_overwatch";
   }
 
-  requestcoverfind(1, 1, var1);
+  requestcoverfind(1, 1, var_1);
   return anim.success;
 }
 
@@ -177,10 +177,10 @@ function cover_shouldlookforbettercover() {
     return false;
   }
 
-  var0 = self._blackboard.coverstate;
+  var_0 = self._blackboard.coverstate;
 
   if(self.doingambush) {
-    if(var0 == "exposed" && !self.arriving) {
+    if(var_0 == "exposed" && !self.arriving) {
       return !self ambushiscurrentnodevalid();
     }
 
@@ -191,7 +191,7 @@ function cover_shouldlookforbettercover() {
     return false;
   }
 
-  if(var0 == "hide" || var0 == "exposed") {
+  if(var_0 == "hide" || var_0 == "exposed") {
     if(!isDefined(self._blackboard.deployedlmgnode) || !scripts\asm\shared\utility::iscovernodevalid(self._blackboard.deployedlmgnode)) {
       return true;
     }
@@ -212,7 +212,7 @@ function shouldadvanceusingboundingoverwatch() {
   return self canboundingoverwatchmove();
 }
 
-function lookforboundingoverwatchcover(var0) {
+function lookforboundingoverwatchcover(var_0) {
   if(shouldadvanceusingboundingoverwatch()) {
     requestcoverfind(0, 1, "cover_bounding_overwatch");
     return anim.success;
@@ -221,18 +221,18 @@ function lookforboundingoverwatchcover(var0) {
   return anim.failure;
 }
 
-function requestcoverfind(var0, var1, var2) {
+function requestcoverfind(var_0, var_1, var_2) {
   self.nextlookforcovertime = gettime();
 
   if(!self.requestdifferentcover) {
-    self.requestdifferentcover = var0;
+    self.requestdifferentcover = var_0;
   }
 
-  self.repeatcoverfindiffailed = var1;
-  self.coverselectoroverride = var2;
+  self.repeatcoverfindiffailed = var_1;
+  self.coverselectoroverride = var_2;
 }
 
-function lookforbettercover(var0) {
+function lookforbettercover(var_0) {
   if(istrue(self.boundingoverwatchenabled)) {
     return anim.failure;
   }
@@ -243,43 +243,43 @@ function lookforbettercover(var0) {
       return anim.success;
     }
 
-    var1 = 1;
-    var2 = undefined;
+    var_1 = 1;
+    var_2 = undefined;
 
     if(scripts\anim\utility_common::usingmg()) {
-      var2 = "cover_lmg";
+      var_2 = "cover_lmg";
     }
 
-    requestcoverfind(var1, 0, var2);
+    requestcoverfind(var_1, 0, var_2);
   }
 
   return anim.success;
 }
 
-function lookforbettercover_internal(var0, var1, var2) {
+function lookforbettercover_internal(var_0, var_1, var_2) {
   if(self.arriving) {
     return false;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
   if(self.doingambush) {
-    var3 = self ambushgetnextambushnode();
+    var_3 = self ambushgetnextambushnode();
   } else {
-    if(!isDefined(var3) && scripts\anim\utility_common::usingmg()) {
-      var3 = "cover_lmg";
+    if(!isDefined(var_3) && scripts\anim\utility_common::usingmg()) {
+      var_3 = "cover_lmg";
     }
 
-    var3 = self findbestcovernode(var3, var2, undefined, self.boundingoverwatchenabled);
+    var_3 = self findbestcovernode(var_3, var_2, undefined, self.boundingoverwatchenabled);
   }
 
-  if(isDefined(var3)) {
-    if(!isDefined(self.node) || var3 != self.node || isDefined(var1) && var3 != var1) {
-      if(usecovernodeifpossible(var3)) {
+  if(isDefined(var_3)) {
+    if(!isDefined(self.node) || var_3 != self.node || isDefined(var_1) && var_3 != var_1) {
+      if(usecovernodeifpossible(var_3)) {
         if(self.doingambush) {
-          if(self ambushcheckpath(var3)) {
+          if(self ambushcheckpath(var_3)) {
             return true;
           } else {
             self clearpath();
@@ -322,18 +322,18 @@ function exposed_shouldlookforbettercover() {
 }
 
 function doambushcoverfind() {
-  var0 = self ambushgetnextambushnode();
+  var_0 = self ambushgetnextambushnode();
 
-  if(isDefined(var0) && (!isDefined(self.covernode) || self.node != self.covernode)) {
-    if(self ambushcheckpath(var0)) {
-      usecovernodeifpossible(var0);
+  if(isDefined(var_0) && (!isDefined(self.covernode) || self.node != self.covernode)) {
+    if(self ambushcheckpath(var_0)) {
+      usecovernodeifpossible(var_0);
     }
   }
 
   setnextlookforcovertime();
 }
 
-function updateexposedatnodestate(var0) {
+function updateexposedatnodestate(var_0) {
   if(exposed_shouldlookforbettercover()) {
     if(!self.doingambush && !scripts\engine\utility::actor_is3d() && isDefined(self.pathgoalpos) && distancesquared(self.pathgoalpos, self.origin) > 4) {
       self._blackboard.lastusednode = undefined;
@@ -352,13 +352,13 @@ function updateexposedatnodestate(var0) {
           return anim.success;
         }
 
-        var1 = undefined;
+        var_1 = undefined;
 
         if(istrue(self.boundingoverwatchenabled)) {
-          var1 = "cover_bounding_overwatch";
+          var_1 = "cover_bounding_overwatch";
         }
 
-        requestcoverfind(1, 1, var1);
+        requestcoverfind(1, 1, var_1);
         setnextlookforcovertime();
       }
     }
@@ -367,48 +367,48 @@ function updateexposedatnodestate(var0) {
   return anim.success;
 }
 
-function update(var0) {
-  var1 = self.covernode;
+function update(var_0) {
+  var_1 = self.covernode;
   return anim.success;
 }
 
-function update_lmg(var0) {
+function update_lmg(var_0) {
   return anim.success;
 }
 
-function candeploylmg(var0) {
-  if(var0 isnodelmgmountable()) {
+function candeploylmg(var_0) {
+  if(var_0 isnodelmgmountable()) {
     return true;
   }
 
   return false;
 }
 
-function hasdroppedlmg(var0) {
-  return istrue(self._blackboard.droppedlmg) && isDefined(self._blackboard.deployedlmgnode) && self._blackboard.deployedlmgnode == var0 && (!isDefined(self._blackboard.droppedlmgpickuptime) || gettime() > self._blackboard.droppedlmgpickuptime);
+function hasdroppedlmg(var_0) {
+  return istrue(self._blackboard.droppedlmg) && isDefined(self._blackboard.deployedlmgnode) && self._blackboard.deployedlmgnode == var_0 && (!isDefined(self._blackboard.droppedlmgpickuptime) || gettime() > self._blackboard.droppedlmgpickuptime);
 }
 
-function shoulddeploylmg(var0) {
-  var1 = isDefined(self.node) && hasdroppedlmg(self.node);
-  var2 = candeploylmg(self.node) && (scripts\anim\utility_common::usingmg() || isDefined(scripts\asm\asm_bb::bb_getrequestedturret()) || var1);
+function shoulddeploylmg(var_0) {
+  var_1 = isDefined(self.node) && hasdroppedlmg(self.node);
+  var_2 = candeploylmg(self.node) && (scripts\anim\utility_common::usingmg() || isDefined(scripts\asm\asm_bb::bb_getrequestedturret()) || var_1);
 
-  if(var2) {
+  if(var_2) {
     return anim.success;
   }
 
   return anim.failure;
 }
 
-function isdoingambush(var0) {
+function isdoingambush(var_0) {
   return self.doingambush;
 }
 
-function updatehide(var0) {
+function updatehide(var_0) {
   setcoverstate("hide");
   return anim.success;
 }
 
-function isincover(var0) {
+function isincover(var_0) {
   if(isDefined(self.bt.cover)) {
     if(!isDefined(self.covernode)) {
       return anim.failure;
@@ -419,15 +419,15 @@ function isincover(var0) {
     }
 
     if(isDefined(self.enemy)) {
-      var1 = 0;
+      var_1 = 0;
 
       if(shouldbeinlmgcover()) {
-        var1 = iscovervalidforlmg(self.covernode);
+        var_1 = iscovervalidforlmg(self.covernode);
       } else {
-        var1 = scripts\asm\shared\utility::iscovervalid();
+        var_1 = scripts\asm\shared\utility::iscovervalid();
       }
 
-      if(!var1 && !scripts\asm\shared\utility::fixednodeshouldsticktocover() && scripts\asm\shared\utility::cover_canattackfromexposed()) {
+      if(!var_1 && !scripts\asm\shared\utility::fixednodeshouldsticktocover() && scripts\asm\shared\utility::cover_canattackfromexposed()) {
         return anim.failure;
       }
     }
@@ -449,43 +449,43 @@ function shouldbeinlmgcover() {
   return (weaponclass(self.weapon) == "mg" || hasdroppedlmg(self.covernode)) && self.covernode.type != "Cover Left" && self.covernode.type != "Cover Right";
 }
 
-function iscovervalidforlmg(var0) {
+function iscovervalidforlmg(var_0) {
   if(!isDefined(self.enemy) || !isDefined(self.node)) {
     return false;
   }
 
-  var1 = var0.angles[1] - vectortoyaw(self.enemy.origin - var0.origin);
-  var1 = angleclamp180(var1);
+  var_1 = var_0.angles[1] - vectortoyaw(self.enemy.origin - var_0.origin);
+  var_1 = angleclamp180(var_1);
 
-  if(var1 < 0) {
-    var1 = -1 * var1;
+  if(var_1 < 0) {
+    var_1 = -1 * var_1;
   }
 
-  if(var1 <= self.leftaimlimit) {
+  if(var_1 <= self.leftaimlimit) {
     return true;
   }
 
   return false;
 }
 
-function shouldreload(var0, var1) {
-  if(self.bulletsinclip > weaponclipsize(self.weapon) * var1) {
+function shouldreload(var_0, var_1) {
+  if(self.bulletsinclip > weaponclipsize(self.weapon) * var_1) {
     return anim.failure;
   }
 
   return anim.success;
 }
 
-function initreload(var0) {
+function initreload(var_0) {
   thread scripts\anim\battlechatter_wrapper::evaluatereloadevent();
   inithidetimers();
 }
 
-function terminatereload(var0) {
+function terminatereload(var_0) {
   scripts\asm\asm_bb::bb_requestreload(0);
 }
 
-function inithide(var0) {
+function inithide(var_0) {
   setcoverstate("hide");
 
   if(isDefined(self.enemy) && !isDefined(self.bt.cover.changestanceforfuntime)) {
@@ -494,7 +494,7 @@ function inithide(var0) {
   }
 }
 
-function coverhide(var0) {
+function coverhide(var_0) {
   setcoverstate("hide");
 
   if(isDefined(self.enemy) && !scripts\asm\shared\utility::iscovervalid()) {
@@ -504,27 +504,27 @@ function coverhide(var0) {
   return anim.success;
 }
 
-function setpeeklookstarttime(var0) {
-  var1 = 1000;
-  var2 = 3000;
+function setpeeklookstarttime(var_0) {
+  var_1 = 1000;
+  var_2 = 3000;
 
   if(self.team == "allies") {
-    var1 = 2500;
-    var2 = 3500;
+    var_1 = 2500;
+    var_2 = 3500;
   }
 
-  self.bt.cover.peeklooktimer_canstarttime = gettime() + randomintrange(var1, var2);
+  self.bt.cover.peeklooktimer_canstarttime = gettime() + randomintrange(var_1, var_2);
 }
 
 function inithidetimers() {
-  var0 = gettime();
-  self.bt.cover.timestarted_hide = var0;
+  var_0 = gettime();
+  self.bt.cover.timestarted_hide = var_0;
   setpeeklookstarttime(1);
 }
 
-function terminatehide(var0) {}
+function terminatehide(var_0) {}
 
-function iscoversuppressed(var0) {
+function iscoversuppressed(var_0) {
   if(self.doingambush) {
     return 0;
   }
@@ -540,8 +540,8 @@ function iscoversuppressed(var0) {
   return anim.failure;
 }
 
-function shouldpeekwhilecanseefromexposed(var0) {
-  if(shouldlookorpeek(var0) == anim.failure) {
+function shouldpeekwhilecanseefromexposed(var_0) {
+  if(shouldlookorpeek(var_0) == anim.failure) {
     return anim.failure;
   }
 
@@ -553,22 +553,22 @@ function shouldpeekwhilecanseefromexposed(var0) {
     return anim.failure;
   }
 
-  var1 = distancesquared(self.enemy.origin, self.origin);
+  var_1 = distancesquared(self.enemy.origin, self.origin);
 
-  if(var1 < 65536) {
+  if(var_1 < 65536) {
     return anim.failure;
   }
 
-  var2 = self lastknowntime(self.enemy);
+  var_2 = self lastknowntime(self.enemy);
 
-  if(gettime() - var2 < 1000) {
+  if(gettime() - var_2 < 1000) {
     return anim.failure;
   }
 
   return anim.success;
 }
 
-function shouldlookorpeek(var0) {
+function shouldlookorpeek(var_0) {
   if(getcoverstate() != "hide") {
     return anim.failure;
   }
@@ -596,27 +596,27 @@ function shouldlookorpeek(var0) {
   return anim.success;
 }
 
-function initlook(var0) {
-  var1 = 500;
-  var2 = 1500;
-  var3 = gettime();
-  self.bt.cover.looktimestarted = var3;
-  self.bt.cover.lookduration = randomintrange(var1, var2);
+function initlook(var_0) {
+  var_1 = 500;
+  var_2 = 1500;
+  var_3 = gettime();
+  self.bt.cover.looktimestarted = var_3;
+  self.bt.cover.lookduration = randomintrange(var_1, var_2);
   self.bt.cover.lookdelay = 3000;
 }
 
-function terminatelook(var0) {
+function terminatelook(var_0) {
   if(isDefined(self.bt.cover)) {
     setpeeklookstarttime(0);
     return;
   }
 }
 
-function coverlook(var0) {
+function coverlook(var_0) {
   setcoverstate("look");
-  var1 = self.bt.cover.looktimestarted;
-  var2 = self.bt.cover.lookduration;
-  var3 = self.bt.cover.lookdelay;
+  var_1 = self.bt.cover.looktimestarted;
+  var_2 = self.bt.cover.lookduration;
+  var_3 = self.bt.cover.lookdelay;
 
   if(isDefined(self.pathgoalpos)) {
     return anim.success;
@@ -630,20 +630,20 @@ function coverlook(var0) {
     return anim.success;
   }
 
-  var4 = gettime();
+  var_4 = gettime();
 
   if(scripts\asm\asm::asm_ephemeraleventfired("cover_trans", "end")) {
-    var3 = var4 - var1;
+    var_3 = var_4 - var_1;
   }
 
-  if(var4 - var1 > var3 + var2) {
+  if(var_4 - var_1 > var_3 + var_2) {
     return anim.success;
   }
 
   return anim.running;
 }
 
-function coverpeek(var0) {
+function coverpeek(var_0) {
   setcoverstate("peek");
 
   if(scripts\asm\asm::asm_ephemeraleventfired("cover_peek", "end")) {
@@ -653,7 +653,7 @@ function coverpeek(var0) {
   return anim.running;
 }
 
-function terminatepeek(var0) {
+function terminatepeek(var_0) {
   if(isDefined(self.bt.cover)) {
     setcoverstate("hide");
     setpeeklookstarttime(0);
@@ -661,7 +661,7 @@ function terminatepeek(var0) {
   }
 }
 
-function mustchangestance(var0) {
+function mustchangestance(var_0) {
   if(!isDefined(self.node) && self.currentpose == "prone") {
     return anim.success;
   }
@@ -678,26 +678,26 @@ function mustchangestance(var0) {
     return anim.success;
   }
 
-  var1 = undefined;
+  var_1 = undefined;
 
   if(self.node doesnodeallowstance("stand") && !self.node doesnodeallowstance("crouch")) {
-    var1 = "stand";
+    var_1 = "stand";
   } else if(self.node doesnodeallowstance("crouch") && !self.node doesnodeallowstance("stand")) {
-    var1 = "crouch";
+    var_1 = "crouch";
   }
 
   if(isDefined(self._blackboard.croucharrivaltype) && self._blackboard.croucharrivaltype != self.node.type) {
-    var1 = "crouch";
+    var_1 = "crouch";
   }
 
-  if(isDefined(var1)) {
-    scripts\asm\asm_bb::bb_requeststance(var1);
+  if(isDefined(var_1)) {
+    scripts\asm\asm_bb::bb_requeststance(var_1);
   }
 
   return anim.failure;
 }
 
-function shouldchangestanceforfun(var0) {
+function shouldchangestanceforfun(var_0) {
   if(!isDefined(self.enemy)) {
     return anim.failure;
   }
@@ -737,39 +737,39 @@ function setcoverchangestanceforfuntime() {
   self.bt.cover.changestanceforfuntime = gettime() + randomintrange(5000, 20000);
 }
 
-function initchangestance(var0) {
+function initchangestance(var_0) {
   setcoverchangestanceforfuntime();
   self.a.prevattack = undefined;
-  var1 = undefined;
+  var_1 = undefined;
 
   if((self.currentpose != "prone" || scripts\asm\asm_bb::bb_getrequestedstance() != "prone") && isDefined(self.node) && (self.node.type == "Conceal Prone" || self.node.type == "Cover Prone")) {
-    var1 = "prone";
+    var_1 = "prone";
   } else {
-    var2 = ["stand", "crouch", "prone"];
+    var_2 = ["stand", "crouch", "prone"];
 
-    for(var3 = 0; var3 < var2.size; var3++) {
-      var4 = var2[var3];
+    for(var_3 = 0; var_3 < var_2.size; var_3++) {
+      var_4 = var_2[var_3];
 
-      if(self isstanceallowed(var4)) {
-        var1 = var4;
+      if(self isstanceallowed(var_4)) {
+        var_1 = var_4;
         break;
       }
     }
   }
 
-  scripts\asm\asm_bb::bb_requeststance(var1);
+  scripts\asm\asm_bb::bb_requeststance(var_1);
   self.bt.cover.changestancestarttime = gettime();
 }
 
-function coverchangestance(var0) {
+function coverchangestance(var_0) {
   if(scripts\asm\asm::asm_ephemeraleventfired("cover_stance_trans", "end")) {
     return anim.success;
   }
 
-  var1 = 5000;
-  var2 = self.bt.cover.changestancestarttime;
+  var_1 = 5000;
+  var_2 = self.bt.cover.changestancestarttime;
 
-  if(gettime() - var2 > var1) {
+  if(gettime() - var_2 > var_1) {
     return anim.success;
   }
 
@@ -780,36 +780,36 @@ function coverchangestance(var0) {
   return anim.running;
 }
 
-function terminatechangestance(var0) {
+function terminatechangestance(var_0) {
   scripts\asm\asm_bb::bb_requeststance(self.currentpose);
 }
 
-function hasroomtofullexposecorner(var0) {
-  var1 = 36;
-  var2 = var0.origin;
+function hasroomtofullexposecorner(var_0) {
+  var_1 = 36;
+  var_2 = var_0.origin;
 
-  if(scripts\engine\utility::isnodecoverright(var0)) {
-    var2 += anglestoright(var0.angles) * var1;
+  if(scripts\engine\utility::isnodecoverright(var_0)) {
+    var_2 += anglestoright(var_0.angles) * var_1;
   } else {
-    var2 += anglestoleft(var0.angles) * var1;
+    var_2 += anglestoleft(var_0.angles) * var_1;
   }
 
-  if(!self maymovecheckfriendlyfire(var2)) {
+  if(!self maymovecheckfriendlyfire(var_2)) {
     return false;
   }
 
-  if(!ispointonnavmesh(var2, self, 1)) {
+  if(!ispointonnavmesh(var_2, self, 1)) {
     return false;
   }
 
-  if(!scripts\engine\trace::capsule_trace_passed(var0.origin, var2, 15, 36, (0, 0, 0), self, scripts\engine\trace::create_character_contents())) {
+  if(!scripts\engine\trace::capsule_trace_passed(var_0.origin, var_2, 15, 36, (0, 0, 0), self, scripts\engine\trace::create_character_contents())) {
     return false;
   }
 
   return true;
 }
 
-function covershouldexpose(var0) {
+function covershouldexpose(var_0) {
   if(self.arriving || self codemoverequested()) {
     return anim.failure;
   }
@@ -831,45 +831,45 @@ function covershouldexpose(var0) {
       return anim.success;
     }
 
-    var1 = scripts\asm\shared\utility::getnodeforwardangles(self.node, 0);
-    var2 = angleclamp180(self.angles[0] - var1[0]);
-    var3 = angleclamp180(self.angles[1] - var1[1]);
-    var4 = angleclamp180(self.angles[2] - var1[2]);
+    var_1 = scripts\asm\shared\utility::getnodeforwardangles(self.node, 0);
+    var_2 = angleclamp180(self.angles[0] - var_1[0]);
+    var_3 = angleclamp180(self.angles[1] - var_1[1]);
+    var_4 = angleclamp180(self.angles[2] - var_1[2]);
 
-    if(abs(var2) > 5 || abs(var3) > 5 || abs(var4) > 5) {
+    if(abs(var_2) > 5 || abs(var_3) > 5 || abs(var_4) > 5) {
       return anim.failure;
     }
 
-    var5 = (self.enemy.origin + scripts\anim\utility_common::getenemyeyepos()) / 2;
-    var6 = var5 - self.origin;
-    var7 = rotatevectorinverted(var6, self.node.angles);
-    var8 = vectortoangles(var7);
-    var2 = angleclamp180(var8[0]);
-    var3 = angleclamp180(var8[1]);
-    var9 = getcovercrouchanglelimits(self.node, self.currentpose);
+    var_5 = (self.enemy.origin + scripts\anim\utility_common::getenemyeyepos()) / 2;
+    var_6 = var_5 - self.origin;
+    var_7 = rotatevectorinverted(var_6, self.node.angles);
+    var_8 = vectortoangles(var_7);
+    var_2 = angleclamp180(var_8[0]);
+    var_3 = angleclamp180(var_8[1]);
+    var_9 = getcovercrouchanglelimits(self.node, self.currentpose);
 
-    if(var2 > var9[1] || var2 < var9[0]) {
+    if(var_2 > var_9[1] || var_2 < var_9[0]) {
       return anim.failure;
     }
 
-    if(var3 > var9[3] || var3 < var9[2]) {
+    if(var_3 > var_9[3] || var_3 < var_9[2]) {
       return anim.failure;
     }
 
     return anim.success;
   }
 
-  var10 = get3dcoveranglelimits(self.node, self.currentpose);
-  var11 = self.node.origin + scripts\anim\utility_common::getnodeoffset(self.node);
-  var6 = self.enemy.origin - var11;
-  var12 = vectortoangles(var6);
-  var8 = angleclamp180(var12[1] - self.node.angles[1]);
+  var_10 = get3dcoveranglelimits(self.node, self.currentpose);
+  var_11 = self.node.origin + scripts\anim\utility_common::getnodeoffset(self.node);
+  var_6 = self.enemy.origin - var_11;
+  var_12 = vectortoangles(var_6);
+  var_8 = angleclamp180(var_12[1] - self.node.angles[1]);
 
-  if(var10[0] <= var8 && var8 <= var10[1]) {
-    if(scripts\engine\utility::isnodecoverright(self.node) && var8 > var10[3] || scripts\engine\utility::isnodecoverleft(self.node) && var8 < var10[2]) {
-      var13 = scripts\engine\utility::getcornerstepoutsdisabled();
+  if(var_10[0] <= var_8 && var_8 <= var_10[1]) {
+    if(scripts\engine\utility::isnodecoverright(self.node) && var_8 > var_10[3] || scripts\engine\utility::isnodecoverleft(self.node) && var_8 < var_10[2]) {
+      var_13 = scripts\engine\utility::getcornerstepoutsdisabled();
 
-      if(!hasroomtofullexposecorner(self.node) || var13) {
+      if(!hasroomtofullexposecorner(self.node) || var_13) {
         return anim.failure;
       }
     }
@@ -880,23 +880,23 @@ function covershouldexpose(var0) {
   return anim.failure;
 }
 
-function initexpose(var0) {
+function initexpose(var_0) {
   if(getcoverstate() != "exposed" || !isDefined(self.bt.cover.timestarted_expose)) {
     self.bt.cover.timestarted_expose = gettime() + 3000;
   }
 
-  scripts\asm\asm_bb::bb_claimshootparams(var0);
+  scripts\asm\asm_bb::bb_claimshootparams(var_0);
   self.bt.m_bfiring = 0;
-  var1 = scripts\anim\utility_common::isasniper();
+  var_1 = scripts\anim\utility_common::isasniper();
 
-  if(var1) {
+  if(var_1) {
     scripts\aitypes\combat::shoot_enableconvergence();
     return;
   }
 }
 
-function terminateexpose(var0) {
-  if(istrue(self._blackboard.shootparams_valid) && self._blackboard.shootparams_taskid == var0) {
+function terminateexpose(var_0) {
+  if(istrue(self._blackboard.shootparams_valid) && self._blackboard.shootparams_taskid == var_0) {
     scripts\asm\asm_bb::bb_clearshootparams();
     scripts\aitypes\combat::shoot_clearconvergence();
     self.bt.m_bfiring = undefined;
@@ -905,33 +905,33 @@ function terminateexpose(var0) {
   scripts\asm\asm_bb::bb_requestfire(0);
 }
 
-function coverexpose(var0) {
+function coverexpose(var_0) {
   if(!isDefined(self.enemy) && !self.doingambush) {
     return anim.failure;
   }
 
-  var1 = self getentitynumber() * 3 % 1000;
-  var2 = 3500 + var1;
-  var3 = 2500 + var1;
-  var4 = 1000;
+  var_1 = self getentitynumber() * 3 % 1000;
+  var_2 = 3500 + var_1;
+  var_3 = 2500 + var_1;
+  var_4 = 1000;
 
   if(scripts\asm\asm::asm_ephemeraleventfired("cover_trans", "end")) {
     self.bt.cover.timestarted_expose = gettime();
   }
 
-  var5 = self.bt.cover.timestarted_expose;
-  var6 = gettime() - var5;
+  var_5 = self.bt.cover.timestarted_expose;
+  var_6 = gettime() - var_5;
 
-  if(self.doingambush && var6 > var4) {
-    lookforbettercover(var0);
+  if(self.doingambush && var_6 > var_4) {
+    lookforbettercover(var_0);
   }
 
-  var7 = self.covernode;
+  var_7 = self.covernode;
 
   if(isDefined(self.balwayscoverexposed)) {
-    covershoot(var0);
+    covershoot(var_0);
 
-    if(scripts\engine\utility::isnodecoverleft(var7) || scripts\engine\utility::isnodecoverright(var7)) {
+    if(scripts\engine\utility::isnodecoverleft(var_7) || scripts\engine\utility::isnodecoverright(var_7)) {
       scripts\asm\asm_bb::bb_requestcoverexposetype("B");
     } else {
       scripts\asm\asm_bb::bb_requestcoverexposetype("full exposed");
@@ -939,7 +939,7 @@ function coverexpose(var0) {
 
     setcoverstate("exposed");
 
-    if(shouldreload(var0, 0) == anim.success) {
+    if(shouldreload(var_0, 0) == anim.success) {
       scripts\asm\asm_bb::bb_requestreload(1);
       return anim.failure;
     }
@@ -948,61 +948,61 @@ function coverexpose(var0) {
     return anim.running;
   }
 
-  if(shouldreload(var0, 0) == anim.success) {
-    if(var6 > var4) {
+  if(shouldreload(var_0, 0) == anim.success) {
+    if(var_6 > var_4) {
       return anim.failure;
     }
 
     scripts\aitypes\combat::reload_cheatammo();
   }
 
-  var8 = undefined;
-  var9 = undefined;
-  var10 = undefined;
-  var11 = undefined;
+  var_8 = undefined;
+  var_9 = undefined;
+  var_10 = undefined;
+  var_11 = undefined;
 
   if(scripts\engine\utility::actor_is3d()) {
-    var12 = self.enemy getcentroid();
-    var13 = var12 - self getEye();
+    var_12 = self.enemy getcentroid();
+    var_13 = var_12 - self getEye();
 
-    if(scripts\engine\utility::isnodeexposed3d(var7)) {
-      var11 = vectortoangles(var13);
-    } else if(scripts\engine\utility::isnode3d(var7)) {
-      var8 = getcovercrouchanglelimits(var7, self.currentpose);
-      var13 = rotatevectorinverted(var13, var7.angles);
-      var11 = vectortoangles(var13);
-      var14 = angleclamp180(var11[0]);
-      var15 = angleclamp180(var11[1]);
+    if(scripts\engine\utility::isnodeexposed3d(var_7)) {
+      var_11 = vectortoangles(var_13);
+    } else if(scripts\engine\utility::isnode3d(var_7)) {
+      var_8 = getcovercrouchanglelimits(var_7, self.currentpose);
+      var_13 = rotatevectorinverted(var_13, var_7.angles);
+      var_11 = vectortoangles(var_13);
+      var_14 = angleclamp180(var_11[0]);
+      var_15 = angleclamp180(var_11[1]);
 
-      if(var14 > var8[1] || var14 < var8[0]) {
+      if(var_14 > var_8[1] || var_14 < var_8[0]) {
         return anim.failure;
       }
 
-      if(var15 > var8[3] || var15 < var8[2]) {
+      if(var_15 > var_8[3] || var_15 < var_8[2]) {
         return anim.failure;
       }
     }
   } else {
-    var9 = get3dcoveranglelimits(var8, self.currentpose);
-    var16 = undefined;
+    var_9 = get3dcoveranglelimits(var_8, self.currentpose);
+    var_16 = undefined;
 
     if(issentient(self.enemy) && !self cansee(self.enemy)) {
-      var16 = scripts\engine\utility::ter_op(isDefined(self.smartfacingpos), self.smartfacingpos, self.enemy.origin + (0, 0, 60));
+      var_16 = scripts\engine\utility::ter_op(isDefined(self.smartfacingpos), self.smartfacingpos, self.enemy.origin + (0, 0, 60));
     } else {
-      var16 = scripts\anim\utility_common::getenemyeyepos();
+      var_16 = scripts\anim\utility_common::getenemyeyepos();
     }
 
-    var17 = var8.origin + scripts\anim\utility_common::getnodeoffset(var8);
-    var13 = var16 - var17;
-    var13 = vectortoangles(var13);
-    var10 = angleclamp180(var13[1] - var8.angles[1]);
-    var11 = angleclamp180(var13[0] - var8.angles[0]);
+    var_17 = var_8.origin + scripts\anim\utility_common::getnodeoffset(var_8);
+    var_13 = var_16 - var_17;
+    var_13 = vectortoangles(var_13);
+    var_10 = angleclamp180(var_13[1] - var_8.angles[1]);
+    var_11 = angleclamp180(var_13[0] - var_8.angles[0]);
 
-    if(var10 < var9[0] || var10 > var9[1]) {
+    if(var_10 < var_9[0] || var_10 > var_9[1]) {
       if(self.doingambush) {
-        covershoot(var1);
+        covershoot(var_1);
 
-        if(scripts\engine\utility::isnodecoverleft(var8) || scripts\engine\utility::isnodecoverright(var8)) {
+        if(scripts\engine\utility::isnodecoverleft(var_8) || scripts\engine\utility::isnodecoverright(var_8)) {
           scripts\asm\asm_bb::bb_requestcoverexposetype("B");
         } else {
           scripts\asm\asm_bb::bb_requestcoverexposetype("full exposed");
@@ -1010,7 +1010,7 @@ function coverexpose(var0) {
 
         setcoverstate("exposed");
 
-        if(shouldreload(var1, 0) == anim.success) {
+        if(shouldreload(var_1, 0) == anim.success) {
           scripts\asm\asm_bb::bb_requestreload(1);
         } else {
           scripts\asm\asm_bb::bb_requestreload(0);
@@ -1023,37 +1023,37 @@ function coverexpose(var0) {
     }
   }
 
-  var18 = covershoot(var1);
+  var_18 = covershoot(var_1);
 
   if(!istrue(self._blackboard.shootparams_bconvergeontarget)) {
-    if(!var18) {
-      if(var7 > var4 && !self.doingambush) {
+    if(!var_18) {
+      if(var_7 > var_4 && !self.doingambush) {
         return anim.failure;
       }
-    } else if(var7 > var3 && !self.doingambush) {
+    } else if(var_7 > var_3 && !self.doingambush) {
       return anim.failure;
     }
   }
 
-  var19 = self scriptabledooropen(var10, var11, scripts\engine\utility::getcornerstepoutsdisabled(), scripts\asm\asm_bb::bb_isshort(), gettime() - self.a.paintime);
+  var_19 = self scriptabledooropen(var_10, var_11, scripts\engine\utility::getcornerstepoutsdisabled(), scripts\asm\asm_bb::bb_isshort(), gettime() - self.a.paintime);
 
-  if(var19) {
+  if(var_19) {
     return anim.running;
   }
 
   return anim.failure;
 }
 
-function covershoot(var0) {
-  var1 = scripts\aitypes\combat::shouldshoot();
+function covershoot(var_0) {
+  var_1 = scripts\aitypes\combat::shouldshoot();
 
-  if(var1) {
-    var1 = scripts\aitypes\combat::calcgoodshootpos();
+  if(var_1) {
+    var_1 = scripts\aitypes\combat::calcgoodshootpos();
   } else {
     self.goodshootpos = undefined;
   }
 
-  if(!var1) {
+  if(!var_1) {
     self.bt.m_bfiring = 0;
     scripts\asm\asm_bb::bb_requestfire(0);
     return false;
@@ -1092,7 +1092,7 @@ function covershoot(var0) {
   return true;
 }
 
-function isenemyvisiblefromexposed(var0, var1) {
+function isenemyvisiblefromexposed(var_0, var_1) {
   if(!isDefined(self.enemy)) {
     return anim.failure;
   }
@@ -1108,14 +1108,14 @@ function isenemyvisiblefromexposed(var0, var1) {
   return anim.failure;
 }
 
-function shouldtryleavenode(var0) {
-  var1 = 50;
+function shouldtryleavenode(var_0) {
+  var_1 = 50;
 
   if(istrue(self.aggressiveblindfire)) {
-    var1 = 30;
+    var_1 = 30;
   }
 
-  return randomint(100) <= var1;
+  return randomint(100) <= var_1;
 }
 
 function setnextpossibleblindfiretime() {
@@ -1163,9 +1163,9 @@ function canblindfire() {
     return false;
   }
 
-  var0 = self.covernode.type;
+  var_0 = self.covernode.type;
 
-  switch (var0) {
+  switch (var_0) {
     case "Cover Right":
     case "Cover Left":
       return true;
@@ -1185,7 +1185,7 @@ function canblindfire() {
   return true;
 }
 
-function shouldblindfire(var0) {
+function shouldblindfire(var_0) {
   if(!canblindfire()) {
     return anim.failure;
   }
@@ -1205,7 +1205,7 @@ function shouldblindfire(var0) {
   return anim.success;
 }
 
-function coverblindfire(var0) {
+function coverblindfire(var_0) {
   if(scripts\asm\asm::asm_ephemeraleventfired("cover_blindfire", "end")) {
     return anim.success;
   }
@@ -1214,13 +1214,13 @@ function coverblindfire(var0) {
   return anim.running;
 }
 
-function terminateblindfire(var0) {
+function terminateblindfire(var_0) {
   scripts\asm\asm_bb::bb_requestcoverblindfire(0);
   setnextpossibleblindfiretime();
   setglobalnextpossibleblindfiretime();
 }
 
-function shouldthrowgrenadeatenemyasap(var0) {
+function shouldthrowgrenadeatenemyasap(var_0) {
   if(!isDefined(self.enemy)) {
     return anim.failure;
   }
@@ -1233,15 +1233,15 @@ function shouldthrowgrenadeatenemyasap(var0) {
     return anim.failure;
   }
 
-  var1 = 0;
+  var_1 = 0;
 
   if(isDefined(anim.throwgrenadeatplayerasap) && isPlayer(self.enemy)) {
-    var1 = 1;
+    var_1 = 1;
   } else if(isDefined(self.throwgrenadeatenemyasap)) {
-    var1 = 1;
+    var_1 = 1;
   }
 
-  if(!var1) {
+  if(!var_1) {
     return anim.failure;
   }
 
@@ -1249,7 +1249,7 @@ function shouldthrowgrenadeatenemyasap(var0) {
   return anim.success;
 }
 
-function shouldthrowgrenade(var0) {
+function shouldthrowgrenade(var_0) {
   if(!isDefined(self.enemy)) {
     return anim.failure;
   }
@@ -1270,9 +1270,9 @@ function shouldthrowgrenade(var0) {
     return anim.failure;
   }
 
-  var1 = self.covernode;
+  var_1 = self.covernode;
 
-  if(var1.type == "Cover Prone" || var1.type == "Conceal Prone") {
+  if(var_1.type == "Cover Prone" || var_1.type == "Conceal Prone") {
     return anim.failure;
   }
 
@@ -1280,47 +1280,47 @@ function shouldthrowgrenade(var0) {
     return anim.failure;
   }
 
-  var2 = self.enemy;
-  var3 = anglesToForward(var1.angles);
-  var4 = var2.origin - self.origin;
-  var5 = lengthsquared(var4);
-  var6 = 2560000;
+  var_2 = self.enemy;
+  var_3 = anglesToForward(var_1.angles);
+  var_4 = var_2.origin - self.origin;
+  var_5 = lengthsquared(var_4);
+  var_6 = 2560000;
 
-  if(var5 > var6) {
+  if(var_5 > var_6) {
     return anim.failure;
   }
 
-  var7 = vectorNormalize(var4);
+  var_7 = vectorNormalize(var_4);
 
-  if(vectordot(var3, var7) < 0) {
+  if(vectordot(var_3, var_7) < 0) {
     return anim.failure;
   }
 
-  var8 = 0.4;
-  var9 = gettime();
+  var_8 = 0.4;
+  var_9 = gettime();
 
-  if(isDefined(self.bt.cover.lastgrenadethrowchecktime) && var9 < self.bt.cover.lastgrenadethrowchecktime + var8) {
+  if(isDefined(self.bt.cover.lastgrenadethrowchecktime) && var_9 < self.bt.cover.lastgrenadethrowchecktime + var_8) {
     return anim.failure;
   }
 
-  self.bt.cover.lastgrenadethrowchecktime = var9;
+  self.bt.cover.lastgrenadethrowchecktime = var_9;
 
   if(self.doingambush && !scripts\anim\utility_common::recentlysawenemy()) {
     return anim.failure;
   }
 
-  if(istrue(self.dontevershoot) || istrue(var2.dontattackme)) {
+  if(istrue(self.dontevershoot) || istrue(var_2.dontattackme)) {
     return anim.failure;
   }
 
   scripts\aitypes\throwgrenade::setactivegrenadetimer(self.enemy);
 
-  if(!scripts\aitypes\throwgrenade::grenadecooldownelapsed(var2)) {
+  if(!scripts\aitypes\throwgrenade::grenadecooldownelapsed(var_2)) {
     return anim.failure;
   }
 
   if(scripts\anim\utility_common::canseeenemyfromexposed()) {
-    if(!scripts\aitypes\throwgrenade::grenadepossafewrapper(var2, var2.origin)) {
+    if(!scripts\aitypes\throwgrenade::grenadepossafewrapper(var_2, var_2.origin)) {
       return anim.failure;
     }
 
@@ -1331,41 +1331,41 @@ function shouldthrowgrenade(var0) {
     return anim.success;
   }
 
-  if(!scripts\aitypes\throwgrenade::grenadepossafewrapper(var2, var2.origin)) {
+  if(!scripts\aitypes\throwgrenade::grenadepossafewrapper(var_2, var_2.origin)) {
     return anim.failure;
   }
 
   return anim.success;
 }
 
-function initthrowgrenade(var0) {
+function initthrowgrenade(var_0) {
   scripts\asm\asm_bb::bb_requestthrowgrenade(1, self.enemy);
   setcoverstate("hide");
-  self.bt.instancedata[var0] = gettime() + 3000;
+  self.bt.instancedata[var_0] = gettime() + 3000;
 }
 
-function coverthrowgrenade(var0) {
+function coverthrowgrenade(var_0) {
   if(scripts\asm\asm::asm_ephemeraleventfired("throwgrenade", "end")) {
     return anim.success;
   }
 
   if(scripts\asm\asm::asm_ephemeraleventfired("throwgrenade", "start", 0)) {
-    self.bt.instancedata[var0] += 10000;
+    self.bt.instancedata[var_0] += 10000;
   }
 
-  if(gettime() > self.bt.instancedata[var0]) {
+  if(gettime() > self.bt.instancedata[var_0]) {
     return anim.failure;
   }
 
   return anim.running;
 }
 
-function terminatethrowgrenade(var0) {
+function terminatethrowgrenade(var_0) {
   scripts\asm\asm_bb::bb_requestthrowgrenade(0);
-  self.bt.instancedata[var0] = undefined;
+  self.bt.instancedata[var_0] = undefined;
 }
 
-function updatealwayscoverexposed(var0) {
+function updatealwayscoverexposed(var_0) {
   if(isDefined(self.balwayscoverexposed)) {
     if(self.health < self.maxhealth * 0.75) {
       self.balwayscoverexposed = undefined;
@@ -1377,7 +1377,7 @@ function updatealwayscoverexposed(var0) {
   return anim.success;
 }
 
-function isalwayscoverexposed(var0) {
+function isalwayscoverexposed(var_0) {
   if(self.doingambush) {
     return anim.success;
   }
@@ -1389,7 +1389,7 @@ function isalwayscoverexposed(var0) {
   return anim.failure;
 }
 
-function updatecovercroucharrivaltype(var0) {
+function updatecovercroucharrivaltype(var_0) {
   if(!isDefined(self.node) || self.node.type != "Cover Crouch") {
     self._blackboard.croucharrivaltype = undefined;
     self._blackboard.croucharrivalnode = undefined;
@@ -1397,82 +1397,82 @@ function updatecovercroucharrivaltype(var0) {
   }
 
   if(!isDefined(self._blackboard.croucharrivaltype) || self._blackboard.croucharrivalnode != self.node) {
-    var1 = self pathdisttogoal();
+    var_1 = self pathdisttogoal();
 
-    if(var1 > 0 && var1 < 512) {
-      var2 = getDvar("scr_ai_cover_crouch_type");
+    if(var_1 > 0 && var_1 < 512) {
+      var_2 = getDvar("scr_ai_cover_crouch_type");
 
       if(isDefined(self.node.covercrouchtype)) {
-        var2 = self.node.covercrouchtype;
+        var_2 = self.node.covercrouchtype;
 
-        if(var2 != "Cover Right Crouch" && var2 != "Cover Left Crouch" && var2 != "Cover Crouch") {
-          var2 = undefined;
+        if(var_2 != "Cover Right Crouch" && var_2 != "Cover Left Crouch" && var_2 != "Cover Crouch") {
+          var_2 = undefined;
         }
-      } else if(var2 == "") {
-        var2 = undefined;
+      } else if(var_2 == "") {
+        var_2 = undefined;
       }
 
       self._blackboard.croucharrivalnode = self.node;
-      self._blackboard.croucharrivaltype = var2;
+      self._blackboard.croucharrivaltype = var_2;
     }
   }
 
   return anim.success;
 }
 
-function shouldcovermultiswitch(var0) {
-  var1 = self.covernode;
+function shouldcovermultiswitch(var_0) {
+  var_1 = self.covernode;
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return anim.failure;
   }
 
-  if(!var1 iscovermultinode()) {
+  if(!var_1 iscovermultinode()) {
     return anim.failure;
   }
 
   return anim.success;
 }
 
-function covermultiswitch(var0) {
+function covermultiswitch(var_0) {
   if(scripts\asm\asm_bb::bb_iscovermultiswitchrequested()) {
-    var1 = scripts\asm\asm_bb::bb_getrequestedcovermultiswitchnodetype();
-    var2 = var1[0];
-    var3 = var1[1];
-    var1 = undefined;
-    var4 = scripts\asm\asm_bb::bb_getcovernode();
+    var_1 = scripts\asm\asm_bb::bb_getrequestedcovermultiswitchnodetype();
+    var_2 = var_1[0];
+    var_3 = var_1[1];
+    var_1 = undefined;
+    var_4 = scripts\asm\asm_bb::bb_getcovernode();
 
-    if(var3 == var2.type) {
+    if(var_3 == var_2.type) {
       scripts\asm\asm_bb::bb_resetcovermultiswitch();
     }
 
     return anim.running;
   }
 
-  var4 = scripts\asm\asm_bb::bb_getcovernode();
-  var5 = scripts\engine\utility::getbestcovermultinodetype(var4);
+  var_4 = scripts\asm\asm_bb::bb_getcovernode();
+  var_5 = scripts\engine\utility::getbestcovermultinodetype(var_4);
 
-  if(!isDefined(var5)) {
+  if(!isDefined(var_5)) {
     return anim.failure;
   }
 
-  if(var4.type == var5) {
+  if(var_4.type == var_5) {
     return anim.failure;
   }
 
   scripts\asm\asm_bb::bb_requestcoverstate("hide");
-  scripts\asm\asm_bb::bb_requestcovermultiswitch(var4, var5);
+  scripts\asm\asm_bb::bb_requestcovermultiswitch(var_4, var_5);
   return anim.running;
 }
 
-function terminatecovermultiswitch(var0) {
+function terminatecovermultiswitch(var_0) {
   if(scripts\asm\asm_bb::bb_iscovermultiswitchrequested()) {
     scripts\asm\asm_bb::bb_resetcovermultiswitch();
     return;
   }
 }
 
-function covershouldexposenoenemy(var0) {
+function covershouldexposenoenemy(var_0) {
   if(!istrue(self.coverexposenoenemy)) {
     return anim.failure;
   }
@@ -1484,56 +1484,56 @@ function covershouldexposenoenemy(var0) {
   return anim.failure;
 }
 
-function initcoverexposenoenemy(var0) {
-  var1 = scripts\asm\asm_bb::bb_getcovernode();
+function initcoverexposenoenemy(var_0) {
+  var_1 = scripts\asm\asm_bb::bb_getcovernode();
 
-  if(scripts\engine\utility::isnodecoverleft(var1) || scripts\engine\utility::isnodecoverright(var1)) {
+  if(scripts\engine\utility::isnodecoverleft(var_1) || scripts\engine\utility::isnodecoverright(var_1)) {
     scripts\asm\asm_bb::bb_requestcoverexposetype("B");
-  } else if(var1 doesnodeallowstance("stand")) {
+  } else if(var_1 doesnodeallowstance("stand")) {
     scripts\asm\asm_bb::bb_requestcoverexposetype("full exposed");
   } else {
     scripts\asm\asm_bb::bb_requestcoverexposetype("exposed");
   }
 
   setcoverstate("exposed");
-  scripts\asm\asm_bb::bb_claimshootparams(var0);
+  scripts\asm\asm_bb::bb_claimshootparams(var_0);
 }
 
-function coverexposenoenemy(var0) {
-  var1 = scripts\asm\asm_bb::bb_getcovernode();
+function coverexposenoenemy(var_0) {
+  var_1 = scripts\asm\asm_bb::bb_getcovernode();
 
   if(!isDefined(self.coverexposenewtargettime) || self.coverexposenewtargettime < gettime()) {
-    var2 = randomintrange(self.coverexposenoenemytimemin, self.coverexposenoenemytimemax);
-    self.coverexposenewtargettime = gettime() + int(var2 * 1000);
-    var3 = undefined;
+    var_2 = randomintrange(self.coverexposenoenemytimemin, self.coverexposenoenemytimemax);
+    self.coverexposenewtargettime = gettime() + int(var_2 * 1000);
+    var_3 = undefined;
 
     if(!isDefined(self.enemy)) {
-      var4 = var1.angles;
-      var3 = (var4[0], var4[1] + randomintrange(0 - self.coverexposenoenemyangle, self.coverexposenoenemyangle), var4[2]);
+      var_4 = var_1.angles;
+      var_3 = (var_4[0], var_4[1] + randomintrange(0 - self.coverexposenoenemyangle, self.coverexposenoenemyangle), var_4[2]);
     } else {
-      var5 = self lastknownpos(self.enemy);
+      var_5 = self lastknownpos(self.enemy);
 
-      if(distancesquared(var5, self.enemy.origin) < 62500) {
-        var3 = self getanglestolikelyenemypath();
+      if(distancesquared(var_5, self.enemy.origin) < 62500) {
+        var_3 = self getanglestolikelyenemypath();
 
-        if(isDefined(var3) && anglesdelta(var3, var1.angles) > 50) {
-          var3 = undefined;
+        if(isDefined(var_3) && anglesdelta(var_3, var_1.angles) > 50) {
+          var_3 = undefined;
         }
       }
 
-      if(!isDefined(var3)) {
-        var3 = var1.angles;
+      if(!isDefined(var_3)) {
+        var_3 = var_1.angles;
       }
     }
 
-    if(isDefined(var3)) {
-      var6 = anglesToForward(var3) * 500;
-      var7 = self getapproxeyepos() + var6;
+    if(isDefined(var_3)) {
+      var_6 = anglesToForward(var_3) * 500;
+      var_7 = self getapproxeyepos() + var_6;
 
       if(!istrue(self._blackboard.shootparams_valid)) {
-        scripts\asm\asm_bb::bb_newshootparams(var7, undefined, 0);
+        scripts\asm\asm_bb::bb_newshootparams(var_7, undefined, 0);
       } else {
-        scripts\asm\asm_bb::bb_updateshootparams(var7, undefined, 0);
+        scripts\asm\asm_bb::bb_updateshootparams(var_7, undefined, 0);
       }
 
       self._blackboard.shootparams_forceaim = 1;
@@ -1544,17 +1544,17 @@ function coverexposenoenemy(var0) {
   return anim.running;
 }
 
-function terminatecoverexposenoenemy(var0) {
+function terminatecoverexposenoenemy(var_0) {
   self._blackboard.shootparams_forceaim = undefined;
   self.shootposoverride = undefined;
 
-  if(istrue(self._blackboard.shootparams_valid) && self._blackboard.shootparams_taskid == var0) {
+  if(istrue(self._blackboard.shootparams_valid) && self._blackboard.shootparams_taskid == var_0) {
     scripts\asm\asm_bb::bb_clearshootparams();
     return;
   }
 }
 
-function covershouldexposelostenemy(var0) {
+function covershouldexposelostenemy(var_0) {
   if(!istrue(self.coverexposenoenemy)) {
     return anim.failure;
   }
@@ -1568,9 +1568,9 @@ function covershouldexposelostenemy(var0) {
   }
 
   if(gettime() - self lastknowntime(self.enemy) > self.coverexposelostenemytime * 1000) {
-    var1 = self getsecondarytargets();
+    var_1 = self getsecondarytargets();
 
-    if(!isDefined(var1) || var1.size == 0) {
+    if(!isDefined(var_1) || var_1.size == 0) {
       return anim.success;
     }
   }

@@ -5,31 +5,31 @@
 
 function init() {
   loadweaponranktable();
-  var0 = getdvarint("PMORNPNTK", 1);
-  addglobalweaponrankxpmultiplier(var0, "online_mp_weapon_xpscale");
+  var_0 = getdvarint("PMORNPNTK", 1);
+  addglobalweaponrankxpmultiplier(var_0, "online_mp_weapon_xpscale");
   thread onplayerconnect();
 }
 
 function onplayerconnect() {
   for(;;) {
-    level waittill("connected", var0);
+    level waittill("connected", var_0);
 
-    if(!isai(var0)) {
+    if(!isai(var_0)) {
       if(level.weaponxpenabled) {
-        var1 = getdvarint("LNQMMNNPSR");
-        var2 = var0 getprivatepartysize() > 1;
+        var_1 = getdvarint("LNQMMNNPSR");
+        var_2 = var_0 getprivatepartysize() > 1;
 
-        if(var2) {
-          addweaponrankxpmultiplier(var0, var1, "online_mp_party_weapon_xpscale");
+        if(var_2) {
+          addweaponrankxpmultiplier(var_0, var_1, "online_mp_party_weapon_xpscale");
         }
 
-        var3 = getdvarint("scr_weaponxp_limit", 40000);
-        var0.ref_11b7e = var3;
-        var0.ref_13bfc = 0;
-        var0.ref_14677 = [];
+        var_3 = getdvarint("scr_weaponxp_limit", 40000);
+        var_0.ref_11b7e = var_3;
+        var_0.ref_13bfc = 0;
+        var_0.ref_14677 = [];
 
-        foreach(var3 in level.weaponranktable.maxweaponranks) {
-          var0.ref_14677[var5 + "_mp"] = 0;
+        foreach(var_3 in level.weaponranktable.maxweaponranks) {
+          var_0.ref_14677[var_5 + "_mp"] = 0;
         }
       }
     }
@@ -40,210 +40,210 @@ function loadweaponranktable() {
   level.weaponranktable = spawnStruct();
   level.weaponranktable.rankinfo = [];
 
-  for(var0 = 0;; var0++) {
-    var1 = int(tablelookuprownum("mp/weaponRankTable.csv", 0, var0));
+  for(var_0 = 0;; var_0++) {
+    var_1 = int(tablelookuprownum("mp/weaponRankTable.csv", 0, var_0));
 
-    if(!isDefined(var1) || var1 < 0) {
+    if(!isDefined(var_1) || var_1 < 0) {
       break;
     }
 
-    var2 = spawnStruct();
-    level.weaponranktable.rankinfo[var0] = var2;
-    var2.minxp = int(tablelookupbyrow("mp/weaponRankTable.csv", var0, 1));
-    var2.xptonextrank = int(tablelookupbyrow("mp/weaponRankTable.csv", var0, 2));
-    var2.maxxp = int(tablelookupbyrow("mp/weaponRankTable.csv", var0, 3));
+    var_2 = spawnStruct();
+    level.weaponranktable.rankinfo[var_0] = var_2;
+    var_2.minxp = int(tablelookupbyrow("mp/weaponRankTable.csv", var_0, 1));
+    var_2.xptonextrank = int(tablelookupbyrow("mp/weaponRankTable.csv", var_0, 2));
+    var_2.maxxp = int(tablelookupbyrow("mp/weaponRankTable.csv", var_0, 3));
   }
 
-  level.weaponranktable.maxrank = var0 - 1;
+  level.weaponranktable.maxrank = var_0 - 1;
   level.weaponranktable.maxweaponranks = [];
 
-  for(var3 = 1;; var3++) {
-    var1 = int(tablelookuprownum("mp/statstable.csv", 0, var3));
+  for(var_3 = 1;; var_3++) {
+    var_1 = int(tablelookuprownum("mp/statstable.csv", 0, var_3));
 
-    if(!isDefined(var1) || var1 < 0) {
+    if(!isDefined(var_1) || var_1 < 0) {
       break;
     }
 
-    var4 = tablelookupbyrow("mp/statstable.csv", var1, 4);
-    var5 = tablelookupbyrow("mp/statstable.csv", var1, 42);
+    var_4 = tablelookupbyrow("mp/statstable.csv", var_1, 4);
+    var_5 = tablelookupbyrow("mp/statstable.csv", var_1, 42);
 
-    if(!isDefined(var4) || var4 == "" || !isDefined(var5) || var5 == "") {
+    if(!isDefined(var_4) || var_4 == "" || !isDefined(var_5) || var_5 == "") {
       continue;
     }
 
-    var5 = int(var5);
-    level.weaponranktable.maxweaponranks[var4] = var5;
+    var_5 = int(var_5);
+    level.weaponranktable.maxweaponranks[var_4] = var_5;
   }
 }
 
-function getplayerweaponrank(var0) {
-  var1 = getplayerweaponrankxp(var0);
-  var2 = getweaponrankforxp(var1);
-  return var2;
+function getplayerweaponrank(var_0) {
+  var_1 = getplayerweaponrankxp(var_0);
+  var_2 = getweaponrankforxp(var_1);
+  return var_2;
 }
 
-function getplayerweaponrankxp(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = "all";
+function getplayerweaponrankxp(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = "all";
   }
 
-  switch (var1) {
+  switch (var_1) {
     case "mp":
-      var2 = self getplayerdata("common", "sharedProgression", "weaponLevel", var0, "mpXP");
-      return var2;
+      var_2 = self getplayerdata("common", "sharedProgression", "weaponLevel", var_0, "mpXP");
+      return var_2;
     case "cp":
-      var3 = self getplayerdata("common", "sharedProgression", "weaponLevel", var1, "cpXP");
-      return var3;
+      var_3 = self getplayerdata("common", "sharedProgression", "weaponLevel", var_1, "cpXP");
+      return var_3;
     case "all":
-      var2 = self getplayerdata("common", "sharedProgression", "weaponLevel", var2, "mpXP");
-      var3 = self getplayerdata("common", "sharedProgression", "weaponLevel", var2, "cpXP");
-      return (var2 + var3);
+      var_2 = self getplayerdata("common", "sharedProgression", "weaponLevel", var_2, "mpXP");
+      var_3 = self getplayerdata("common", "sharedProgression", "weaponLevel", var_2, "cpXP");
+      return (var_2 + var_3);
   }
 }
 
-function isplayerweaponatmaxxp(var0) {
-  var1 = getplayerweaponrankxp(var0);
-  var2 = getweaponmaxrankxp(var0);
-  return var1 >= var2;
+function isplayerweaponatmaxxp(var_0) {
+  var_1 = getplayerweaponrankxp(var_0);
+  var_2 = getweaponmaxrankxp(var_0);
+  return var_1 >= var_2;
 }
 
-function weaponshouldgetxp(var0) {
+function weaponshouldgetxp(var_0) {
   if(self.pers["rank"] < 3 && !getdvarint("OSPNSPSKL")) {
     return 0;
   }
 
-  var1 = scripts\cp\utility::getweaponrootname(var0);
-  return weaponhasranks(var1);
+  var_1 = scripts\cp\utility::getweaponrootname(var_0);
+  return weaponhasranks(var_1);
 }
 
-function weaponhasranks(var0) {
-  if(!isDefined(level.weaponranktable.maxweaponranks[var0])) {
+function weaponhasranks(var_0) {
+  if(!isDefined(level.weaponranktable.maxweaponranks[var_0])) {
     return 0;
   }
 
-  var1 = level.weaponranktable.maxweaponranks[var0] > 0;
-  return var1;
+  var_1 = level.weaponranktable.maxweaponranks[var_0] > 0;
+  return var_1;
 }
 
-function getweaponmaxrankxp(var0) {
-  var1 = getmaxweaponrankforrootweapon(var0);
-  return getweaponrankinfomaxxp(var1);
+function getweaponmaxrankxp(var_0) {
+  var_1 = getmaxweaponrankforrootweapon(var_0);
+  return getweaponrankinfomaxxp(var_1);
 }
 
-function getweaponrankforxp(var0) {
-  if(var0 == 0) {
+function getweaponrankforxp(var_0) {
+  if(var_0 == 0) {
     return 0;
   }
 
-  for(var1 = getmaxweaponrank() - 1; var1 >= 0; var1--) {
-    if(var0 >= getweaponrankinfominxp(var1)) {
-      return var1;
+  for(var_1 = getmaxweaponrank() - 1; var_1 >= 0; var_1--) {
+    if(var_0 >= getweaponrankinfominxp(var_1)) {
+      return var_1;
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function getmaxweaponrankforrootweapon(var0) {
-  return level.weaponranktable.maxweaponranks[var0];
+function getmaxweaponrankforrootweapon(var_0) {
+  return level.weaponranktable.maxweaponranks[var_0];
 }
 
 function getmaxweaponrank() {
   return level.weaponranktable.maxrank;
 }
 
-function getweaponrankinfominxp(var0) {
-  return level.weaponranktable.rankinfo[var0].minxp;
+function getweaponrankinfominxp(var_0) {
+  return level.weaponranktable.rankinfo[var_0].minxp;
 }
 
-function getweaponrankinfoxptonextrank(var0) {
-  return level.weaponranktable.rankinfo[var0].xptonextrank;
+function getweaponrankinfoxptonextrank(var_0) {
+  return level.weaponranktable.rankinfo[var_0].xptonextrank;
 }
 
-function getweaponrankinfomaxxp(var0) {
-  return level.weaponranktable.rankinfo[var0].maxxp;
+function getweaponrankinfomaxxp(var_0) {
+  return level.weaponranktable.rankinfo[var_0].maxxp;
 }
 
-function giveplayerweaponxp(var0, var1, var2) {
-  if(isai(self) || !isPlayer(self) || !isDefined(var2) || var2 == 0 || !level.weaponxpenabled) {
+function giveplayerweaponxp(var_0, var_1, var_2) {
+  if(isai(self) || !isPlayer(self) || !isDefined(var_2) || var_2 == 0 || !level.weaponxpenabled) {
     return;
   }
 
-  var3 = scripts\cp\utility::getweaponrootname(var0.basename);
+  var_3 = scripts\cp\utility::getweaponrootname(var_0.basename);
 
-  if(!self isitemunlocked(var3, "weapon")) {
+  if(!self isitemunlocked(var_3, "weapon")) {
     return;
   }
 
-  if(!weaponhasranks(var3)) {
+  if(!weaponhasranks(var_3)) {
     return;
   }
 
-  var4 = remapscoreeventforweapon(var1);
+  var_4 = remapscoreeventforweapon(var_1);
 
-  if(var4 != var1) {
-    var1 = var4;
-    var2 = scripts\cp\drone\emp_drone::getscoreinfovalue(var1);
+  if(var_4 != var_1) {
+    var_1 = var_4;
+    var_2 = scripts\cp\drone\emp_drone::getscoreinfovalue(var_1);
   }
 
-  if(var2 < 0) {
+  if(var_2 < 0) {
     return;
   }
 
-  var5 = var2;
-  var2 *= getweaponrankxpmultipliertotal();
-  var2 = int(var2);
-  var6 = getplayerweaponrankxp(var3, "mp");
-  var7 = getplayerweaponrankxp(var3, "cp");
-  var8 = var6 + var7;
-  var9 = getweaponrankforxp(var8);
-  var10 = getweaponmaxrankxp(var3);
-  var11 = var10 - var7;
-  var12 = var6 + var2;
+  var_5 = var_2;
+  var_2 *= getweaponrankxpmultipliertotal();
+  var_2 = int(var_2);
+  var_6 = getplayerweaponrankxp(var_3, "mp");
+  var_7 = getplayerweaponrankxp(var_3, "cp");
+  var_8 = var_6 + var_7;
+  var_9 = getweaponrankforxp(var_8);
+  var_10 = getweaponmaxrankxp(var_3);
+  var_11 = var_10 - var_7;
+  var_12 = var_6 + var_2;
 
-  if(var12 > var11) {
-    var12 = var11;
+  if(var_12 > var_11) {
+    var_12 = var_11;
   }
 
-  var13 = var12 + var7;
-  var14 = getmaxweaponrankforrootweapon(var3);
-  var15 = self getplayerdata("common", "sharedProgression", "weaponLevel", var3, "prestige");
-  var16 = int(min(getweaponrankforxp(var13), var14));
-  scripts\cp\cp_analytics::ref_119b3(var0, var15, var16, var2, var1);
+  var_13 = var_12 + var_7;
+  var_14 = getmaxweaponrankforrootweapon(var_3);
+  var_15 = self getplayerdata("common", "sharedProgression", "weaponLevel", var_3, "prestige");
+  var_16 = int(min(getweaponrankforxp(var_13), var_14));
+  scripts\cp\cp_analytics::ref_119b3(var_0, var_15, var_16, var_2, var_1);
 
-  if(var9 < var16) {
-    var17 = "weapon_rank_up_0_4";
+  if(var_9 < var_16) {
+    var_17 = "weapon_rank_up_0_4";
 
-    if(var16 >= 15) {
-      var17 = "weapon_rank_up_15_plus";
-    } else if(var16 >= 10) {
-      var17 = "weapon_rank_up_10_14";
-    } else if(var16 >= 5) {
-      var17 = "weapon_rank_up_5_9";
+    if(var_16 >= 15) {
+      var_17 = "weapon_rank_up_15_plus";
+    } else if(var_16 >= 10) {
+      var_17 = "weapon_rank_up_10_14";
+    } else if(var_16 >= 5) {
+      var_17 = "weapon_rank_up_5_9";
     }
 
-    var18 = scripts\cp\drone\emp_drone::getscoreinfovalue(var17);
-    scripts\cp\drone\emp_drone::giverankxp(var17, var18);
+    var_18 = scripts\cp\drone\emp_drone::getscoreinfovalue(var_17);
+    scripts\cp\drone\emp_drone::giverankxp(var_17, var_18);
   }
 
-  return var2;
+  return var_2;
 }
 
-function remapscoreeventforweapon(var0) {
-  switch (var0) {
+function remapscoreeventforweapon(var_0) {
+  switch (var_0) {
     case "kill":
-      var0 = "kill_weapon";
+      var_0 = "kill_weapon";
       break;
     case "challenge":
-      var0 = "weapon_challenge";
+      var_0 = "weapon_challenge";
       break;
   }
 
-  return var0;
+  return var_0;
 }
 
-function addglobalweaponrankxpmultiplier(var0, var1) {
-  addweaponrankxpmultiplier(level, var0, var1);
+function addglobalweaponrankxpmultiplier(var_0, var_1) {
+  addweaponrankxpmultiplier(level, var_0, var_1);
 }
 
 function getglobalweaponrankxpmultiplier() {
@@ -258,17 +258,17 @@ function respawntagvisibility() {
   return 1;
 }
 
-function addweaponrankxpmultiplier(var0, var1) {
+function addweaponrankxpmultiplier(var_0, var_1) {
   if(!isDefined(self.weaponrankxpmultipliers)) {
     self.weaponrankxpmultipliers = [];
   }
 
-  if(isDefined(self.weaponrankxpmultipliers[var1])) {
-    self.weaponrankxpmultipliers[var1] = max(self.weaponrankxpmultipliers[var1], var0);
+  if(isDefined(self.weaponrankxpmultipliers[var_1])) {
+    self.weaponrankxpmultipliers[var_1] = max(self.weaponrankxpmultipliers[var_1], var_0);
     return;
   }
 
-  self.weaponrankxpmultipliers[var1] = var0;
+  self.weaponrankxpmultipliers[var_1] = var_0;
 }
 
 function getweaponrankxpmultiplier() {
@@ -276,49 +276,49 @@ function getweaponrankxpmultiplier() {
     return 1;
   }
 
-  var0 = 1;
+  var_0 = 1;
 
-  foreach(var2 in self.weaponrankxpmultipliers) {
-    if(!isDefined(var2)) {
+  foreach(var_2 in self.weaponrankxpmultipliers) {
+    if(!isDefined(var_2)) {
       continue;
     }
 
-    var0 *= var2;
+    var_0 *= var_2;
   }
 
-  return var0;
+  return var_0;
 }
 
-function removeglobalweaponrankxpmultiplier(var0) {
-  removeweaponrankxpmultiplier(level, var0);
+function removeglobalweaponrankxpmultiplier(var_0) {
+  removeweaponrankxpmultiplier(level, var_0);
 }
 
-function removeweaponrankxpmultiplier(var0) {
+function removeweaponrankxpmultiplier(var_0) {
   if(!isDefined(self.weaponrankxpmultipliers)) {
     return;
   }
 
-  if(!isDefined(self.weaponrankxpmultipliers[var0])) {
+  if(!isDefined(self.weaponrankxpmultipliers[var_0])) {
     return;
   }
 
-  self.rankxpmultipliers[var0] = undefined;
+  self.rankxpmultipliers[var_0] = undefined;
 }
 
 function getweaponrankxpmultipliertotal() {
-  var0 = getweaponrankxpmultiplier();
-  var1 = getglobalweaponrankxpmultiplier();
-  var2 = reloadnotehandler();
-  var3 = respawntagvisibility();
-  var4 = getdvarfloat("scr_weaponxp_scalar", 1);
-  var5 = 1;
-  var6 = function_0446(self, 1);
+  var_0 = getweaponrankxpmultiplier();
+  var_1 = getglobalweaponrankxpmultiplier();
+  var_2 = reloadnotehandler();
+  var_3 = respawntagvisibility();
+  var_4 = getdvarfloat("scr_weaponxp_scalar", 1);
+  var_5 = 1;
+  var_6 = function_0446(self, 1);
 
-  if(isDefined(scripts\engine\utility::array_find(var6, self)) && var6.size > 1) {
-    var5 *= 1.25;
+  if(isDefined(scripts\engine\utility::array_find(var_6, self)) && var_6.size > 1) {
+    var_5 *= 1.25;
   }
 
-  return var0 * var1 * var2 * var4 * var3 * var5;
+  return var_0 * var_1 * var_2 * var_4 * var_3 * var_5;
 }
 
 function reloadnotehandler() {
@@ -339,19 +339,19 @@ function reload_handle_hintstring() {
 
 function reload_use_think() {
   if(!isDefined(level.playkillstreakdeploydialog)) {
-    var0 = getdvarint("scr_" + scripts\cp\utility::getgametype() + "_timelimit");
+    var_0 = getdvarint("scr_" + scripts\cp\utility::getgametype() + "_timelimit");
 
-    if(var0 == 0) {
-      var0 = 900;
+    if(var_0 == 0) {
+      var_0 = 900;
     }
 
-    var1 = getdvarint("scr_" + scripts\cp\utility::getgametype() + "_winlimit");
+    var_1 = getdvarint("scr_" + scripts\cp\utility::getgametype() + "_winlimit");
 
-    if(var1 > 0) {
-      var0 *= var1 * 2 - 1;
+    if(var_1 > 0) {
+      var_0 *= var_1 * 2 - 1;
     }
 
-    level.playkillstreakdeploydialog = reload_handle_hintstring() / 60 * var0 / 60;
+    level.playkillstreakdeploydialog = reload_handle_hintstring() / 60 * var_0 / 60;
   }
 
   return level.playkillstreakdeploydialog;

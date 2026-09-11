@@ -26,7 +26,7 @@ function bot_br_think() {
   self endon("bot_br_think");
   self endon("death_or_disconnect");
   level endon("game_ended");
-  var0 = randomfloat(1) < getdvarfloat("br_infil_bot_solojump_chance", 0);
+  var_0 = randomfloat(1) < getdvarfloat("br_infil_bot_solojump_chance", 0);
   thread brprewaitandspawnclientcleanup();
   self botsetflag("ignore_nodes", 1);
 
@@ -45,37 +45,37 @@ function bot_br_think() {
 
       self botsetflag("disable_all_ai", 1);
 
-      if((scripts\mp\gametypes\br_public::updatedragonsbreath() || var0) && istrue(level.c130inbounds)) {
-        var1 = level.br_ac130.origin;
-        var2 = vectorNormalize(level.infilstruct.c130pathstruct.endpt - var1);
-        var3 = (level.br_level.br_mapbounds[0][0] - var1[0]) / var2[0];
-        var4 = (level.br_level.br_mapbounds[0][1] - var1[0]) / var2[0];
-        var5 = (level.br_level.br_mapbounds[0][1] - var1[1]) / var2[1];
-        var6 = (level.br_level.br_mapbounds[1][1] - var1[1]) / var2[1];
-        var7 = [var3, var4, var5, var6];
-        var8 = -1;
+      if((scripts\mp\gametypes\br_public::updatedragonsbreath() || var_0) && istrue(level.c130inbounds)) {
+        var_1 = level.br_ac130.origin;
+        var_2 = vectorNormalize(level.infilstruct.c130pathstruct.endpt - var_1);
+        var_3 = (level.br_level.br_mapbounds[0][0] - var_1[0]) / var_2[0];
+        var_4 = (level.br_level.br_mapbounds[0][1] - var_1[0]) / var_2[0];
+        var_5 = (level.br_level.br_mapbounds[0][1] - var_1[1]) / var_2[1];
+        var_6 = (level.br_level.br_mapbounds[1][1] - var_1[1]) / var_2[1];
+        var_7 = [var_3, var_4, var_5, var_6];
+        var_8 = -1;
 
-        foreach(var10 in var7) {
-          if(var10 > 0) {
-            if(var8 < 0 || var10 < var8) {
-              var8 = var10;
+        foreach(var_10 in var_7) {
+          if(var_10 > 0) {
+            if(var_8 < 0 || var_10 < var_8) {
+              var_8 = var_10;
             }
           }
         }
 
-        var12 = var1 + var2 * var8;
-        var13 = scripts\mp\gametypes\br_c130::getc130speed();
-        var14 = var8 / var13;
+        var_12 = var_1 + var_2 * var_8;
+        var_13 = scripts\mp\gametypes\br_c130::getc130speed();
+        var_14 = var_8 / var_13;
 
         if(istrue(level.debug_interaction_status) && isDefined(level.infilstruct) && isDefined(level.infilstruct.c130pathstruct) && isDefined(level.infilstruct.c130pathstruct.neurotoxin_damage_monitor)) {
-          var15 = distance(level.infilstruct.c130pathstruct.ref_1386e, level.infilstruct.c130pathstruct.neurotoxin_damage_monitor);
-          var14 = var15 / var13;
-          var16 = randomfloatrange(0.3, 0.6) * var14;
+          var_15 = distance(level.infilstruct.c130pathstruct.ref_1386e, level.infilstruct.c130pathstruct.neurotoxin_damage_monitor);
+          var_14 = var_15 / var_13;
+          var_16 = randomfloatrange(0.3, 0.6) * var_14;
         } else {
-          var16 = randomfloatrange(0.1, 0.9) * var16;
+          var_16 = randomfloatrange(0.1, 0.9) * var_16;
         }
 
-        wait var16;
+        wait var_16;
 
         if(scripts\mp\gametypes\br_public::updatedragonsbreath()) {
           self notify("halo_jump_c130");
@@ -109,11 +109,11 @@ function bot_br_think() {
     }
 
     if(isDefined(level.br_circle) && isscriptabledefined()) {
-      var18 = undefined;
-      var19 = self bothasscriptgoal();
+      var_18 = undefined;
+      var_19 = self bothasscriptgoal();
 
-      if(var19) {
-        var18 = self botgetscriptgoal();
+      if(var_19) {
+        var_18 = self botgetscriptgoal();
       }
 
       if(!scripts\mp\bots\bots_strategy::bot_has_tactical_goal() && !scripts\mp\bots\bots_util::bot_is_remote_or_linked()) {
@@ -122,15 +122,15 @@ function bot_br_think() {
           self botclearscriptgoal();
           deadpair();
         } else if(istrue(level.debug_interaction_status) && (istrue(self isskydiving()) || istrue(self isparachuting()))) {
-          var20 = getclosestpointonnavmesh(self.origin, self);
-          var21 = distance2dsquared(self.origin, var20);
-          var22 = self botgetscriptgoalRadius();
+          var_20 = getclosestpointonnavmesh(self.origin, self);
+          var_21 = distance2dsquared(self.origin, var_20);
+          var_22 = self botgetscriptgoalRadius();
 
-          if(var21 > var22 * var22) {
+          if(var_21 > var_22 * var_22) {
             self botsetflag("disable_all_ai", 0);
-            var1 = damageshield_time(self, var20);
-            self botlookatpoint(var20, 0.05, "script_forced");
-            self botsetscriptmove(var1[1], 0.05, 1);
+            var_1 = damageshield_time(self, var_20);
+            self botlookatpoint(var_20, 0.05, "script_forced");
+            self botsetscriptmove(var_1[1], 0.05, 1);
             wait 0.05;
             continue;
           }
@@ -142,39 +142,39 @@ function bot_br_think() {
           continue;
         }
 
-        var23 = self botpathexists();
-        var24 = !var19 || !var23 || !scripts\mp\gametypes\br_circle::ispointincurrentsafecircle(var18);
+        var_23 = self botpathexists();
+        var_24 = !var_19 || !var_23 || !scripts\mp\gametypes\br_circle::ispointincurrentsafecircle(var_18);
 
-        if(var19) {
-          var21 = distancesquared(self.origin, var18);
-          var22 = self botgetscriptgoalRadius();
-          var25 = var21 < var22 * var22;
+        if(var_19) {
+          var_21 = distancesquared(self.origin, var_18);
+          var_22 = self botgetscriptgoalRadius();
+          var_25 = var_21 < var_22 * var_22;
 
-          if(!var25) {
+          if(!var_25) {
             self.lasttimereachedscriptgoal = undefined;
           } else if(!isDefined(self.lasttimereachedscriptgoal)) {
             self.lasttimereachedscriptgoal = gettime();
           }
         }
 
-        var26 = level.bot_personality_type[self.personality] == "stationary";
+        var_26 = level.bot_personality_type[self.personality] == "stationary";
 
         if(isDefined(self.lasttimereachedscriptgoal)) {
-          var27 = 0;
+          var_27 = 0;
 
-          if(var26) {
-            var27 = 20000;
+          if(var_26) {
+            var_27 = 20000;
           }
 
-          var24 = var24 || gettime() - self.lasttimereachedscriptgoal >= var27;
+          var_24 = var_24 || gettime() - self.lasttimereachedscriptgoal >= var_27;
         }
 
-        if(var24) {
-          var28 = scripts\mp\gametypes\br_circle::getrandompointincurrentcircle();
-          var29 = self getclosestreachablepointonnavmesh(var28);
+        if(var_24) {
+          var_28 = scripts\mp\gametypes\br_circle::getrandompointincurrentcircle();
+          var_29 = self getclosestreachablepointonnavmesh(var_28);
 
-          if(isDefined(var29)) {
-            self botsetscriptgoal(var29, 1024, "hunt", undefined, undefined, !var26);
+          if(isDefined(var_29)) {
+            self botsetscriptgoal(var_29, 1024, "hunt", undefined, undefined, !var_26);
             self.lasttimereachedscriptgoal = gettime();
           }
         }
@@ -191,22 +191,22 @@ function deadpair() {
   self endon("death_or_disconnect");
   self.ignoreall = 1;
   self.lategame_buytimer_set = damagestate();
-  var0 = gettime() + randomfloatrange(5, 10) * 1000;
-  var1 = 0;
+  var_0 = gettime() + randomfloatrange(5, 10) * 1000;
+  var_1 = 0;
 
   while(istrue(self isskydiving()) || istrue(self isparachuting())) {
     if(level.br_circle.circleindex > 0 && istrue(level.group_unset_jugg_standstill) && !scripts\mp\gametypes\br_circle::ispointincurrentsafecircle(self.lategame_buytimer_set)) {
       self.lategame_buytimer_set = damagestate();
     }
 
-    var2 = damageshield_time(self, self.lategame_buytimer_set);
-    var3 = 1;
+    var_2 = damageshield_time(self, self.lategame_buytimer_set);
+    var_3 = 1;
     self botlookatpoint(self.lategame_buytimer_set, 0.05, "script_forced");
-    self botsetscriptmove(var2[1], 0.05, var3);
+    self botsetscriptmove(var_2[1], 0.05, var_3);
 
-    if(gettime() > var0 && !var1) {
+    if(gettime() > var_0 && !var_1) {
       self botpressbutton("jump", 1);
-      var1 = 1;
+      var_1 = 1;
     }
 
     wait 0.05;
@@ -218,41 +218,41 @@ function deadpair() {
   dangerzoneids();
 }
 
-function damagestate(var0) {
+function damagestate(var_0) {
   if(!isDefined(level.playerplunderpickupcallback) || level.playerplunderpickupcallback.size < 1) {
     level.playerplunderpickupcallback = puhostagerestoreweapon();
     level.playerplunderpickupcallback = scripts\engine\utility::array_randomize(level.playerplunderpickupcallback);
   }
 
   if(isDefined(level.br_circle) && isscriptabledefined()) {
-    var1 = scripts\engine\utility::random(level.playerplunderpickupcallback);
+    var_1 = scripts\engine\utility::random(level.playerplunderpickupcallback);
 
-    if(isDefined(var1)) {
-      var2 = var1.origin;
-      level.playerplunderpickupcallback = scripts\engine\utility::array_remove(level.playerplunderpickupcallback, var1);
+    if(isDefined(var_1)) {
+      var_2 = var_1.origin;
+      level.playerplunderpickupcallback = scripts\engine\utility::array_remove(level.playerplunderpickupcallback, var_1);
     } else {
-      var2 = scripts\mp\gametypes\br_circle::getrandompointincurrentcircle();
+      var_2 = scripts\mp\gametypes\br_circle::getrandompointincurrentcircle();
     }
 
-    return getclosestpointonnavmesh(var2, self);
+    return getclosestpointonnavmesh(var_2, self);
   }
 
   return undefined;
 }
 
 function puhostagerestoreweapon() {
-  var0 = scripts\mp\gametypes\br_circle::getdangercircleradius();
-  var1 = scripts\mp\gametypes\br_circle::getdangercircleorigin();
-  return scripts\engine\utility::get_array_of_closest(var1, level.deactivate_station, undefined, undefined, var0);
+  var_0 = scripts\mp\gametypes\br_circle::getdangercircleradius();
+  var_1 = scripts\mp\gametypes\br_circle::getdangercircleorigin();
+  return scripts\engine\utility::get_array_of_closest(var_1, level.deactivate_station, undefined, undefined, var_0);
 }
 
-function damageshield_time(var0, var1) {
-  var2 = vectorNormalize(var1 - var0.origin);
-  return vectortoangles(var2);
+function damageshield_time(var_0, var_1) {
+  var_2 = vectorNormalize(var_1 - var_0.origin);
+  return vectortoangles(var_2);
 }
 
-function damageskipburndown(var0, var1) {
-  return distance(var0.origin, var1);
+function damageskipburndown(var_0, var_1) {
+  return distance(var_0.origin, var_1);
 }
 
 function dangernotifyresetforplayer() {
@@ -260,9 +260,9 @@ function dangernotifyresetforplayer() {
     level.currentsol = ["iw8_sm_papa90_mp", "iw8_sh_charlie725_mp", "iw8_ar_akilo47_mp+acog", "iw8_lm_mgolf34_mp", "iw8_sn_kilo98_mp+scope", "iw8_sm_beta_mp+reflexmini2", "iw8_sm_augolf_mp+acog", "iw8_sm_mpapa7_mp+acog", "iw8_ar_falima_mp+reflexmini", "iw8_ar_kilo433_mp+acog", "iw8_ar_scharlie_mp+reflexmini2", "iw8_lm_lima86_mp+acog"];
   }
 
-  var0 = scripts\engine\utility::random(level.currentsol);
+  var_0 = scripts\engine\utility::random(level.currentsol);
 
-  switch (var0) {
+  switch (var_0) {
     case "iw8_sh_charlie725_mp":
       if(!isDefined(level.deathnoise)) {
         level.deathnoise = 0;
@@ -289,27 +289,27 @@ function dangernotifyresetforplayer() {
       break;
   }
 
-  var1 = [[level.fnbuildweapon]]([[level.fngetweaponrootname]](var0), [], "none", "none", -1);
-  self giveweapon(var1);
-  self setweaponammoclip(var1, weaponclipsize(var1));
-  self setweaponammostock(var1, weaponclipsize(var1));
+  var_1 = [[level.fnbuildweapon]]([[level.fngetweaponrootname]](var_0), [], "none", "none", -1);
+  self giveweapon(var_1);
+  self setweaponammoclip(var_1, weaponclipsize(var_1));
+  self setweaponammostock(var_1, weaponclipsize(var_1));
   self switchtoweapon("none");
 }
 
 function dangerzoneids() {
   self switchtoweapon("none");
-  var0 = propdeductchange();
+  var_0 = propdeductchange();
 
-  if(!isDefined(var0)) {
-    var0 = spawnStruct();
-    var0.origin = riskspawn_getspawnlocations();
+  if(!isDefined(var_0)) {
+    var_0 = spawnStruct();
+    var_0.origin = riskspawn_getspawnlocations();
   }
 
-  var0.claimed = 1;
-  var1 = level.bot_personality_type[self.personality] == "stationary";
-  self botsetscriptgoal(self getclosestreachablepointonnavmesh(var0.origin), 256, "guard", undefined, undefined, !var1);
+  var_0.claimed = 1;
+  var_1 = level.bot_personality_type[self.personality] == "stationary";
+  self botsetscriptgoal(self getclosestreachablepointonnavmesh(var_0.origin), 256, "guard", undefined, undefined, !var_1);
   scripts\engine\utility::ref_143a5("goal", "last_stand_start");
-  var0.claimed = undefined;
+  var_0.claimed = undefined;
 
   if(!istrue(self.inlaststand)) {
     dangernotifyresetforplayer();
@@ -319,36 +319,36 @@ function dangerzoneids() {
 }
 
 function propdeductchange() {
-  var0 = propdeductclonechange();
-  var0 = sortbydistance(var0, self.origin);
-  var1 = project_to_line_seg(var0);
+  var_0 = propdeductclonechange();
+  var_0 = sortbydistance(var_0, self.origin);
+  var_1 = project_to_line_seg(var_0);
 
-  if(!isDefined(var1)) {
-    var1 = progression_speed(var0);
+  if(!isDefined(var_1)) {
+    var_1 = progression_speed(var_0);
   }
 
-  return var1;
+  return var_1;
 }
 
 function propdeductclonechange() {
-  var0 = scripts\mp\gametypes\br_circle::getdangercircleradius();
-  var1 = scripts\mp\gametypes\br_circle::getdangercircleorigin();
-  var2 = scripts\engine\utility::get_array_of_closest(var1, level.damage_feedback_watch, undefined, undefined, var0);
-  return var2;
+  var_0 = scripts\mp\gametypes\br_circle::getdangercircleradius();
+  var_1 = scripts\mp\gametypes\br_circle::getdangercircleorigin();
+  var_2 = scripts\engine\utility::get_array_of_closest(var_1, level.damage_feedback_watch, undefined, undefined, var_0);
+  return var_2;
 }
 
-function project_to_line_seg(var0) {
-  foreach(var2 in var0) {
-    if(!istrue(var2.claimed)) {
-      return var2;
+function project_to_line_seg(var_0) {
+  foreach(var_2 in var_0) {
+    if(!istrue(var_2.claimed)) {
+      return var_2;
     }
   }
 
   return undefined;
 }
 
-function progression_speed(var0) {
-  return scripts\engine\utility::getclosest(self.origin, var0);
+function progression_speed(var_0) {
+  return scripts\engine\utility::getclosest(self.origin, var_0);
 }
 
 function mine_caves_breakable_gate_individual() {
@@ -360,23 +360,23 @@ function mine_caves_breakable_gate_individual() {
 }
 
 function currenttime() {
-  var0 = level.bot_personality_type[self.personality] == "stationary";
-  var1 = 0;
+  var_0 = level.bot_personality_type[self.personality] == "stationary";
+  var_1 = 0;
 
   for(;;) {
-    var2 = riskspawn_debugdvar();
-    var1 = deactivate_gas_trap_trigger() || istrue(level.group_unset_jugg_standstill);
+    var_2 = riskspawn_debugdvar();
+    var_1 = deactivate_gas_trap_trigger() || istrue(level.group_unset_jugg_standstill);
 
-    if(var1) {
-      var2 = riskspawn_getspawnlocations();
+    if(var_1) {
+      var_2 = riskspawn_getspawnlocations();
     }
 
-    if(isDefined(var2)) {
-      var3 = damagethisround();
+    if(isDefined(var_2)) {
+      var_3 = damagethisround();
 
-      if(istrue(level.debug_jugg_health) && isDefined(var3) && !var1) {
+      if(istrue(level.debug_jugg_health) && isDefined(var_3) && !var_1) {
         thread ref_13fa7();
-        self getenemyinfo(var3);
+        self getenemyinfo(var_3);
 
         if(self botgetpersonality() != "run_and_gun") {
           scripts\mp\bots\bots_util::bot_set_personality("run_and_gun");
@@ -387,8 +387,8 @@ function currenttime() {
         }
 
         if(!isDefined(self.ref_12487)) {
-          self botsetscriptenemy(var3);
-          self.ref_12487 = var3;
+          self botsetscriptenemy(var_3);
+          self.ref_12487 = var_3;
         }
       } else {
         self.ref_12487 = undefined;
@@ -400,23 +400,23 @@ function currenttime() {
 
         self botclearscriptenemy();
 
-        if(var1) {
-          self botsetscriptgoal(var2, 128, "critical", undefined, undefined, 0);
+        if(var_1) {
+          self botsetscriptgoal(var_2, 128, "critical", undefined, undefined, 0);
         } else {
-          self botsetscriptgoal(var2, 400, "guard", undefined, undefined, 0);
+          self botsetscriptgoal(var_2, 400, "guard", undefined, undefined, 0);
         }
 
-        if(istrue(var1)) {
-          var1 = 0;
+        if(istrue(var_1)) {
+          var_1 = 0;
         }
 
         thread ref_121fa();
-        var4 = scripts\engine\utility::waittill_any_ents_return(self, "goal", self, "bad path", level, "br_circle_started", self, "last_stand_start", self, "path_timeout");
+        var_4 = scripts\engine\utility::waittill_any_ents_return(self, "goal", self, "bad path", level, "br_circle_started", self, "last_stand_start", self, "path_timeout");
 
-        if(isDefined(var4) && var4 != "bad path" && var4 != "br_circle_started" && var4 != "path_timeout" && var4 != "last_stand_start") {
-          var5 = gettime() + randomintrange(3, 8) * 1000;
+        if(isDefined(var_4) && var_4 != "bad path" && var_4 != "br_circle_started" && var_4 != "path_timeout" && var_4 != "last_stand_start") {
+          var_5 = gettime() + randomintrange(3, 8) * 1000;
 
-          while(gettime() < var5) {
+          while(gettime() < var_5) {
             if(deactivate_gas_trap_trigger()) {
               self.ref_12487 = undefined;
               self notify("update_on_death");
@@ -447,7 +447,7 @@ function dangerzoneskipequipment() {
   self endon("death_or_disconnect");
   self endon("gulag_end");
   level endon("game_ended");
-  var0 = level.bot_personality_type[self.personality] == "stationary";
+  var_0 = level.bot_personality_type[self.personality] == "stationary";
   self.ref_12487 = undefined;
   self.ignoreme = 1;
   self.ignoreall = 1;
@@ -462,22 +462,22 @@ function dangerzoneskipequipment() {
   scripts\mp\bots\bots_util::bot_set_personality("run_and_gun");
 
   for(;;) {
-    var1 = self.arena;
+    var_1 = self.arena;
 
-    foreach(var3 in var1.arenaplayers) {
-      if(var3 == self) {
+    foreach(var_3 in var_1.arenaplayers) {
+      if(var_3 == self) {
         continue;
       }
 
-      if(istrue(var1.overtime) && isDefined(var1.managevehiclehealthui) && isDefined(var1.managevehiclehealthui.arenaflag) && isDefined(var1.managevehiclehealthui.arenaflag.flagmodel)) {
-        self botsetscriptgoal(var1.managevehiclehealthui.arenaflag.flagmodel.origin, 64, "objective");
+      if(istrue(var_1.overtime) && isDefined(var_1.managevehiclehealthui) && isDefined(var_1.managevehiclehealthui.arenaflag) && isDefined(var_1.managevehiclehealthui.arenaflag.flagmodel)) {
+        self botsetscriptgoal(var_1.managevehiclehealthui.arenaflag.flagmodel.origin, 64, "objective");
         self botclearscriptenemy();
         continue;
       }
 
-      self getenemyinfo(var3);
-      self botsetscriptgoal(self getclosestreachablepointonnavmesh(var3.origin), 256, "guard");
-      self botsetscriptenemy(var3);
+      self getenemyinfo(var_3);
+      self botsetscriptgoal(self getclosestreachablepointonnavmesh(var_3.origin), 256, "guard");
+      self botsetscriptenemy(var_3);
     }
 
     wait 3;
@@ -488,16 +488,16 @@ function brprewaitandspawnclientcleanup() {
   self endon("death_or_disconnect");
 
   for(;;) {
-    var0 = self getweaponslistprimaries();
+    var_0 = self getweaponslistprimaries();
 
-    if(var0.size == 1 && var0[0].basename == "iw8_fists_mp") {
+    if(var_0.size == 1 && var_0[0].basename == "iw8_fists_mp") {
       wait 1;
       continue;
     }
 
-    foreach(var2 in var0) {
-      if(self getweaponammostock(var2) < weaponclipsize(var2)) {
-        self setweaponammostock(var2, weaponclipsize(var2));
+    foreach(var_2 in var_0) {
+      if(self getweaponammostock(var_2) < weaponclipsize(var_2)) {
+        self setweaponammostock(var_2, weaponclipsize(var_2));
       }
     }
 
@@ -510,29 +510,29 @@ function damagethisround() {
     return undefined;
   }
 
-  var0 = quickdropplaySound();
+  var_0 = quickdropplaySound();
 
-  if(!isDefined(var0)) {
+  if(!isDefined(var_0)) {
     return undefined;
   }
 
-  return var0;
+  return var_0;
 }
 
 function debug_jugg_maze() {
-  var0 = 0;
+  var_0 = 0;
 
-  foreach(var2 in level.players) {
-    if(!isbot(var2)) {
+  foreach(var_2 in level.players) {
+    if(!isbot(var_2)) {
       continue;
     }
 
-    if(data_pickup_logic_new(var2)) {
-      var0++;
+    if(data_pickup_logic_new(var_2)) {
+      var_0++;
     }
   }
 
-  return var0;
+  return var_0;
 }
 
 function data_pickup_logic_new() {
@@ -540,14 +540,14 @@ function data_pickup_logic_new() {
 }
 
 function quickdropplaySound() {
-  var0 = get_player();
-  var1 = squared(3000);
+  var_0 = get_player();
+  var_1 = squared(3000);
 
   if(istrue(self.inlaststand) || scripts\mp\gametypes\br_public::updateinstantclassswapallowedinternal()) {
     return undefined;
   }
 
-  if(!isDefined(var0) || istrue(var0.inlaststand) || !isalive(var0) || var0 scripts\mp\gametypes\br_public::updateinstantclassswapallowedinternal()) {
+  if(!isDefined(var_0) || istrue(var_0.inlaststand) || !isalive(var_0) || var_0 scripts\mp\gametypes\br_public::updateinstantclassswapallowedinternal()) {
     return undefined;
   }
 
@@ -555,33 +555,33 @@ function quickdropplaySound() {
     return undefined;
   }
 
-  var2 = prematchrandomloadout();
+  var_2 = prematchrandomloadout();
 
-  if(var2 >= 3) {
-    if(distancesquared(var0.origin, self.origin) > var1) {
+  if(var_2 >= 3) {
+    if(distancesquared(var_0.origin, self.origin) > var_1) {
       return undefined;
     }
 
-    var3 = debug_jugg_maze();
+    var_3 = debug_jugg_maze();
 
     if(data_pickup_logic_new()) {
-      return var0;
+      return var_0;
     }
 
-    if(var3 >= 1) {
+    if(var_3 >= 1) {
       return undefined;
     }
 
-    return var0;
+    return var_0;
   }
 
-  return var1;
+  return var_1;
 }
 
 function get_player() {
-  foreach(var1 in level.players) {
-    if(!isbot(var1)) {
-      return var1;
+  foreach(var_1 in level.players) {
+    if(!isbot(var_1)) {
+      return var_1;
     }
   }
 }
@@ -595,12 +595,12 @@ function ref_13fa7() {
 }
 
 function deactivate_gas_trap_trigger() {
-  var0 = scripts\mp\gametypes\br_circle::getdangercircleorigin();
-  var1 = scripts\mp\gametypes\br_circle::getdangercircleradius();
+  var_0 = scripts\mp\gametypes\br_circle::getdangercircleorigin();
+  var_1 = scripts\mp\gametypes\br_circle::getdangercircleradius();
 
   if(istrue(level.group_unset_jugg_standstill)) {
-    var0 = scripts\mp\gametypes\br_circle::getsafecircleorigin();
-    var1 = scripts\mp\gametypes\br_circle::getsafecircleradius();
+    var_0 = scripts\mp\gametypes\br_circle::getsafecircleorigin();
+    var_1 = scripts\mp\gametypes\br_circle::getsafecircleradius();
   }
 
   if(scripts\mp\gametypes\br_public::updateinstantclassswapallowedinternal()) {
@@ -611,74 +611,74 @@ function deactivate_gas_trap_trigger() {
     return false;
   }
 
-  return !scripts\engine\utility::updatescrapassistdata(self.origin, var0, var1);
+  return !scripts\engine\utility::updatescrapassistdata(self.origin, var_0, var_1);
 }
 
-function riskspawn_debugobjective(var0) {
-  var1 = scripts\mp\gametypes\br_circle::getrandompointincurrentcircle();
+function riskspawn_debugobjective(var_0) {
+  var_1 = scripts\mp\gametypes\br_circle::getrandompointincurrentcircle();
 
-  if(!isDefined(var0)) {
-    var0 = 1000;
+  if(!isDefined(var_0)) {
+    var_0 = 1000;
   }
 
-  if(distance2d(self.origin, var1) > var0) {
-    var2 = vectortoangles(var1 - self.origin);
-    var3 = anglesToForward(var2);
-    var1 = self.origin + var3 * var0;
+  if(distance2d(self.origin, var_1) > var_0) {
+    var_2 = vectortoangles(var_1 - self.origin);
+    var_3 = anglesToForward(var_2);
+    var_1 = self.origin + var_3 * var_0;
   }
 
-  return self getclosestreachablepointonnavmesh(var1);
+  return self getclosestreachablepointonnavmesh(var_1);
 }
 
 function riskspawn_getspawnlocations() {
-  var0 = scripts\mp\gametypes\br_circle::getsafecircleorigin();
-  var1 = scripts\mp\gametypes\br_circle::getsafecircleradius();
-  var2 = scripts\mp\gametypes\br_circle::getrandompointincircle(var0, var1, 0.75, 0.9, 1, 1);
-  return self getclosestreachablepointonnavmesh(var2);
+  var_0 = scripts\mp\gametypes\br_circle::getsafecircleorigin();
+  var_1 = scripts\mp\gametypes\br_circle::getsafecircleradius();
+  var_2 = scripts\mp\gametypes\br_circle::getrandompointincircle(var_0, var_1, 0.75, 0.9, 1, 1);
+  return self getclosestreachablepointonnavmesh(var_2);
 }
 
 function riskspawn_debugdvar() {
-  var0 = gettime() + 5000;
+  var_0 = gettime() + 5000;
 
-  while(gettime() < var0) {
-    var1 = scripts\mp\gametypes\br_circle::getrandompointincircle(self.origin, 750, 0.6, 1, 1, 1);
-    var2 = self getclosestreachablepointonnavmesh(var1);
+  while(gettime() < var_0) {
+    var_1 = scripts\mp\gametypes\br_circle::getrandompointincircle(self.origin, 750, 0.6, 1, 1, 1);
+    var_2 = self getclosestreachablepointonnavmesh(var_1);
 
-    if(updateprematchloadoutarray(var2)) {
-      return var2;
+    if(updateprematchloadoutarray(var_2)) {
+      return var_2;
     }
 
     wait 0.05;
   }
 
-  var3 = scripts\mp\gametypes\br_circle::getrandompointincurrentcircle();
-  return self getclosestreachablepointonnavmesh(var3);
+  var_3 = scripts\mp\gametypes\br_circle::getrandompointincurrentcircle();
+  return self getclosestreachablepointonnavmesh(var_3);
 }
 
-function updateprematchloadoutarray(var0) {
-  var1 = scripts\mp\gametypes\br_circle::getdangercircleorigin();
-  var2 = scripts\mp\gametypes\br_circle::getdangercircleradius();
-  return scripts\engine\utility::updatescrapassistdata(var0, var1, var2);
+function updateprematchloadoutarray(var_0) {
+  var_1 = scripts\mp\gametypes\br_circle::getdangercircleorigin();
+  var_2 = scripts\mp\gametypes\br_circle::getdangercircleradius();
+  return scripts\engine\utility::updatescrapassistdata(var_0, var_1, var_2);
 }
 
 function prematchrandomloadout() {
-  var0 = 0;
+  var_0 = 0;
 
-  foreach(var2 in level.players) {
-    if(!isbot(var2) || !isalive(var2) || var2.sessionstate != "playing") {
+  foreach(var_2 in level.players) {
+    if(!isbot(var_2) || !isalive(var_2) || var_2.sessionstate != "playing") {
       continue;
     }
 
-    var0++;
+    var_0++;
   }
 
-  return var0;
+  return var_0;
 }
 
-function debug_freight_lift(var0) {
-  var1 = level.teamdata[var0.team]["alivePlayers"];
+function debug_freight_lift(var_0) {
+  var_1 = level.teamdata[var_0.team]["alivePlayers"];
 
-  if(scripts\engine\utility::array_contains(var1, self)) {
+  if(scripts\engine\utility::array_contains(var_1, self)) {
     return true;
   }
 

@@ -3,25 +3,25 @@
  * Script: scripts\anim\face.gsc
 ***********************************************/
 
-function saygenericdialogue(var0) {
+function saygenericdialogue(var_0) {
   if(self.unittype != "soldier" && self.unittype != "civilian" && self.unittype != "juggernaut" && self.unittype != "suicidebomber") {
     return;
   }
 
-  var1 = undefined;
+  var_1 = undefined;
 
-  switch (var0) {
+  switch (var_0) {
     case "meleeattack":
     case "meleecharge":
-      var2 = 0.5;
+      var_2 = 0.5;
       break;
     case "flashbang":
-      var2 = 0.7;
-      var2 = 50;
+      var_2 = 0.7;
+      var_2 = 50;
       break;
     case "pain":
-      var2 = 0.9;
-      var2 = 98;
+      var_2 = 0.9;
+      var_2 = 98;
       break;
     case "seekerattack":
     case "flamedeath":
@@ -29,21 +29,21 @@ function saygenericdialogue(var0) {
     case "falldeath":
     case "incendeath":
     case "death":
-      var2 = 1;
+      var_2 = 1;
       break;
     default:
-      var2 = 0.3;
+      var_2 = 0.3;
       break;
   }
 
-  if(isDefined(var2) && randomint(100) > var2) {
+  if(isDefined(var_2) && randomint(100) > var_2) {
     return;
   }
 
-  var3 = undefined;
-  var4 = "generic_";
-  var5 = undefined;
-  var6 = undefined;
+  var_3 = undefined;
+  var_4 = "generic_";
+  var_5 = undefined;
+  var_6 = undefined;
 
   if(isDefined(self.battlechatter) && isDefined(self.battlechatter.npcid)) {
     switch (self.battlechatter.npcid) {
@@ -54,22 +54,22 @@ function saygenericdialogue(var0) {
       case "brk":
       case "slt":
       case "eth":
-        var5 = self.battlechatter.npcid;
-        var4 = "hero_";
-        var6 = 1;
+        var_5 = self.battlechatter.npcid;
+        var_4 = "hero_";
+        var_6 = 1;
         break;
     }
   }
 
-  if(!isDefined(var5)) {
+  if(!isDefined(var_5)) {
     switch (self.voice) {
       case "fsa":
       case "sas":
       case "unitedstates":
       case "unitednationshelmet":
       case "unitednations":
-        var5 = "friendly";
-        var6 = anim.numfriendlyvoices;
+        var_5 = "friendly";
+        var_6 = anim.numfriendlyvoices;
         break;
       case "alqatalafemale":
       case "russianfemale":
@@ -77,88 +77,88 @@ function saygenericdialogue(var0) {
       case "sasfemale":
       case "unitedstatesfemale":
       case "unitednationsfemale":
-        var5 = "friendly";
-        var4 = "woman_";
-        var6 = anim.numfriendlyfemalevoices;
+        var_5 = "friendly";
+        var_4 = "woman_";
+        var_6 = anim.numfriendlyfemalevoices;
         break;
       case "c6":
-        var5 = "c6";
-        var6 = 1;
+        var_5 = "c6";
+        var_6 = 1;
         break;
       default:
-        var5 = "enemy";
-        var6 = anim.numenemyvoices;
+        var_5 = "enemy";
+        var_6 = anim.numenemyvoices;
         break;
     }
   }
 
-  var3 = 1 + self getentitynumber() % var6;
-  var5 = var5 + "_" + var3;
-  var7 = undefined;
+  var_3 = 1 + self getentitynumber() % var_6;
+  var_5 = var_5 + "_" + var_3;
+  var_7 = undefined;
 
-  if(!isDefined(var7)) {
+  if(!isDefined(var_7)) {
     if(isDefined(self.generic_voice_override)) {
-      var7 = self.generic_voice_override + "_" + var2 + "_" + var5;
+      var_7 = self.generic_voice_override + "_" + var_2 + "_" + var_5;
     } else {
-      var7 = var4 + var2 + "_" + var5;
+      var_7 = var_4 + var_2 + "_" + var_5;
     }
 
-    if(!soundexists(var7)) {
-      var7 = "generic_" + var2 + "_" + var5;
+    if(!soundexists(var_7)) {
+      var_7 = "generic_" + var_2 + "_" + var_5;
     }
   }
 
   if(getdvarint("scr_print_dialogue_alias", 1)) {}
 
-  thread playfacethread(var7, undefined);
+  thread playfacethread(var_7, undefined);
 }
 
-function sayspecificdialogue(var0, var1) {
-  thread playfacethread(var0, var1);
+function sayspecificdialogue(var_0, var_1) {
+  thread playfacethread(var_0, var_1);
 }
 
-function playfacethread(var0, var1) {
+function playfacethread(var_0, var_1) {
   if(isai(self)) {
     self.a.facialanimdone = 1;
     self.a.facialsounddone = 1;
   }
 
-  if(isDefined(var1)) {
-    if(isDefined(var0)) {
-      playfacesound(var0, "animscript facesound" + var1, 1);
-      thread waitforfacesound(var1);
+  if(isDefined(var_1)) {
+    if(isDefined(var_0)) {
+      playfacesound(var_0, "animscript facesound" + var_1, 1);
+      thread waitforfacesound(var_1);
       return;
     }
 
     return;
   }
 
-  playfacesound(var0);
+  playfacesound(var_0);
 }
 
-function playfacesound(var0, var1, var2) {
+function playfacesound(var_0, var_1, var_2) {
   if(isai(self)) {
-    self[[anim.callbacks["PlaySoundAtViewHeight"]]](var0, var1, var2);
+    self[[anim.callbacks["PlaySoundAtViewHeight"]]](var_0, var_1, var_2);
     return;
   }
 
-  if(isDefined(var1) && isDefined(var2)) {
-    self playSound(var0, var1, var2);
+  if(isDefined(var_1) && isDefined(var_2)) {
+    self playSound(var_0, var_1, var_2);
     return;
   }
 
-  if(isDefined(var1)) {
-    self playSound(var0, var1);
+  if(isDefined(var_1)) {
+    self playSound(var_0, var_1);
     return;
   }
 
-  self playSound(var0);
+  self playSound(var_0);
 }
 
-function waitforfacesound(var0) {
+function waitforfacesound(var_0) {
   self endon("death");
-  self waittill("animscript facesound" + var0);
-  self notify(var0);
+  self waittill("animscript facesound" + var_0);
+  self notify(var_0);
 }
 
 function initlevelface() {
@@ -172,34 +172,34 @@ function initfacialanims() {
   anim.facial = [];
 }
 
-function animhasfacialoverride(var0) {
-  return animhasnotetrack(var0, "facial_override");
+function animhasfacialoverride(var_0) {
+  return animhasnotetrack(var_0, "facial_override");
 }
 
 #using_animtree("");
 
-function playfacialanim(var0, var1, var2) {
+function playfacialanim(var_0, var_1, var_2) {
   if(isDefined(self.bdisabledefaultfacialanims) && self.bdisabledefaultfacialanims) {
     self aiclearanim(%head, 0.2);
     return;
   }
 
-  if(isDefined(var0) && animhasfacialoverride(var0)) {
+  if(isDefined(var_0) && animhasfacialoverride(var_0)) {
     self aiclearanim($head, 0.2);
     return;
   }
 
-  if(!isDefined(anim.facial[var1])) {
+  if(!isDefined(anim.facial[var_1])) {
     return;
   }
 
-  if(isDefined(var2) && var2 >= 0 && var2 < anim.facial[var1].size) {
-    var3 = var2;
+  if(isDefined(var_2) && var_2 >= 0 && var_2 < anim.facial[var_1].size) {
+    var_3 = var_2;
   } else {
-    var3 = randomint(anim.facial[var2].size);
+    var_3 = randomint(anim.facial[var_2].size);
   }
 
-  var4 = anim.facial[var2][var3];
-  self setanimknob(var4);
-  return var3;
+  var_4 = anim.facial[var_2][var_3];
+  self setanimknob(var_4);
+  return var_3;
 }

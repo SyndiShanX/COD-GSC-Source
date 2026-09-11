@@ -8,24 +8,24 @@ function scriptable_spglobalcallback() {
 }
 
 function scriptable_spcallback() {
-  var0 = gettime();
-  var1 = getscriptablearray("scriptable", "code_classname");
+  var_0 = gettime();
+  var_1 = getscriptablearray("scriptable", "code_classname");
 
-  foreach(var3 in var1) {
-    if(isDefined(var3.initialized)) {
+  foreach(var_3 in var_1) {
+    if(isDefined(var_3.initialized)) {
       thread scriptable_print_warning();
       continue;
     }
 
-    if(isDefined(var3.script_noteworthy)) {
-      if(var3.script_noteworthy == "interactive_door") {
-        var3 scripts\sp\door_scriptable::scriptable_init();
-      } else if(issubstr(var3.script_noteworthy, "dynolight")) {
-        scripts\sp\interactables\dynolight::add_dynolight(var3);
+    if(isDefined(var_3.script_noteworthy)) {
+      if(var_3.script_noteworthy == "interactive_door") {
+        var_3 scripts\sp\door_scriptable::scriptable_init();
+      } else if(issubstr(var_3.script_noteworthy, "dynolight")) {
+        scripts\sp\interactables\dynolight::add_dynolight(var_3);
       }
     }
 
-    var3.initialized = 1;
+    var_3.initialized = 1;
   }
 
   scripts\sp\interactables\dynolight::init();

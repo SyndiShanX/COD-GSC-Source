@@ -17,24 +17,24 @@ function catchup() {}
 
 function setup_end_bus() {
   waitframe();
-  var0 = getscriptablearray("end_bus", "script_noteworthy")[0];
+  var_0 = getscriptablearray("end_bus", "script_noteworthy")[0];
   thread open_bus_doors();
   level.end_bus_bomber = scripts\sp\maps\piccadilly\piccadilly_util::picc_spawn_ai("end_bus_bomber");
   thread bus_terrorist(level.end_bus_bomber);
-  var1 = [];
+  var_1 = [];
 
-  for(var2 = 0; var2 < 22; var2++) {
-    if(var2 < 10) {
-      var3 = "piccadilly_bus_civ_0";
+  for(var_2 = 0; var_2 < 22; var_2++) {
+    if(var_2 < 10) {
+      var_3 = "piccadilly_bus_civ_0";
     } else {
-      var3 = "piccadilly_bus_civ_";
+      var_3 = "piccadilly_bus_civ_";
     }
 
-    var4 = var0 scripts\sp\maps\piccadilly\piccadilly_civs::spawn_civ("random", 1);
-    var4.animname = var3 + int(var2);
-    var4 notsolid();
-    thread bus_anim(var4);
-    var1 = scripts\engine\utility::array_add(var1, var4);
+    var_4 = var_0 scripts\sp\maps\piccadilly\piccadilly_civs::spawn_civ("random", 1);
+    var_4.animname = var_3 + int(var_2);
+    var_4 notsolid();
+    thread bus_anim(var_4);
+    var_1 = scripts\engine\utility::array_add(var_1, var_4);
   }
 }
 
@@ -44,85 +44,85 @@ function open_bus_doors() {
   self setanim(%piccadilly_london_bus_combat_door_open_front);
 }
 
-function bus_terrorist(var0) {
+function bus_terrorist(var_0) {
   self endon("death");
   self.animname = "bus_terrorist";
   thread bus_terrorist_success();
-  var0 thread scripts\common\anim::anim_single_solo(self, "bus_scene");
-  var1 = getanimlength(scripts\engine\utility::getanim("bus_scene"));
+  var_0 thread scripts\common\anim::anim_single_solo(self, "bus_scene");
+  var_1 = getanimlength(scripts\engine\utility::getanim("bus_scene"));
 
-  if(var1 > 20) {
-    var1 = 1 - (var1 - 3) / var1;
-    self setanimtime(scripts\engine\utility::getanim("bus_scene"), var1);
+  if(var_1 > 20) {
+    var_1 = 1 - (var_1 - 3) / var_1;
+    self setanimtime(scripts\engine\utility::getanim("bus_scene"), var_1);
   }
 
   while(!scripts\engine\utility::flag("player_on_bus")) {
     waitframe();
   }
 
-  var2 = getanimlength(scripts\engine\utility::getanim("bus_scene"));
-  var1 = var2 - var1;
+  var_2 = getanimlength(scripts\engine\utility::getanim("bus_scene"));
+  var_1 = var_2 - var_1;
 
-  if(var1 > 20) {
-    self setanimtime(scripts\engine\utility::getanim("bus_scene"), 20 / var1);
+  if(var_1 > 20) {
+    self setanimtime(scripts\engine\utility::getanim("bus_scene"), 20 / var_1);
     return;
   }
 }
 
-function bus_anim(var0) {
+function bus_anim(var_0) {
   self endon("death");
-  var0 thread scripts\common\anim::anim_single_solo(self, "bus_scene");
-  var1 = getanimlength(scripts\engine\utility::getanim("bus_scene"));
+  var_0 thread scripts\common\anim::anim_single_solo(self, "bus_scene");
+  var_1 = getanimlength(scripts\engine\utility::getanim("bus_scene"));
 
-  if(var1 > 20) {
-    var1 = 1 - (var1 - 3) / var1;
-    self setanimtime(scripts\engine\utility::getanim("bus_scene"), var1);
+  if(var_1 > 20) {
+    var_1 = 1 - (var_1 - 3) / var_1;
+    self setanimtime(scripts\engine\utility::getanim("bus_scene"), var_1);
   }
 
   while(!scripts\engine\utility::flag("player_on_bus")) {
     waitframe();
   }
 
-  var2 = getanimlength(scripts\engine\utility::getanim("bus_scene"));
-  var1 = var2 - var1;
+  var_2 = getanimlength(scripts\engine\utility::getanim("bus_scene"));
+  var_1 = var_2 - var_1;
 
-  if(var1 > 20) {
-    self setanimtime(scripts\engine\utility::getanim("bus_scene"), 20 / var1);
+  if(var_1 > 20) {
+    self setanimtime(scripts\engine\utility::getanim("bus_scene"), 20 / var_1);
     return;
   }
 }
 
 function bus_dialogue() {
-  var0 = getspawner("bus_terrorist", "targetname");
-  var1 = var0.origin;
-  var2 = scripts\engine\utility::spawn_tag_origin(var1);
-  thread bus_terrorist_dialogue(var2);
+  var_0 = getspawner("bus_terrorist", "targetname");
+  var_1 = var_0.origin;
+  var_2 = scripts\engine\utility::spawn_tag_origin(var_1);
+  thread bus_terrorist_dialogue(var_2);
   level.alpha2 scripts\engine\utility::delaythread(3.3, &scripts\engine\sp\utility::smart_dialogue, "alpha2_noshot");
   level waittill("bus_terrorist_killed");
   thread scripts\engine\utility::play_sound_in_space("pic_bus_bodyfall", (670, -1160, 133));
   wait 0.1;
-  var2 delete();
+  var_2 delete();
 }
 
-function bus_terrorist_dialogue(var0) {
+function bus_terrorist_dialogue(var_0) {
   wait 2;
 
-  if(isDefined(var0)) {
-    var0 scripts\engine\sp\utility::play_sound_on_tag("mam_takeout", undefined, 1);
+  if(isDefined(var_0)) {
+    var_0 scripts\engine\sp\utility::play_sound_on_tag("mam_takeout", undefined, 1);
   }
 
-  if(isDefined(var0)) {
-    var0 scripts\engine\sp\utility::play_sound_on_tag("mam_fordecades", undefined, 1);
+  if(isDefined(var_0)) {
+    var_0 scripts\engine\sp\utility::play_sound_on_tag("mam_fordecades", undefined, 1);
   }
 
   scripts\engine\utility::flag_wait("player_on_bus");
 
-  if(isDefined(var0)) {
-    var0 scripts\engine\sp\utility::play_sound_on_tag("mam_youintervene", undefined, 1);
+  if(isDefined(var_0)) {
+    var_0 scripts\engine\sp\utility::play_sound_on_tag("mam_youintervene", undefined, 1);
   }
 
-  if(isDefined(var0)) {
-    var0 scripts\engine\sp\utility::play_sound_on_tag("mam_notsafe", undefined, 1);
+  if(isDefined(var_0)) {
+    var_0 scripts\engine\sp\utility::play_sound_on_tag("mam_notsafe", undefined, 1);
     return;
   }
 }
@@ -131,16 +131,16 @@ function bus_terrorist_success() {
   self endon("death");
   scripts\engine\utility::flag_wait("player_on_bus");
   level scripts\engine\sp\utility::nextmission_primeloadbink();
-  var0 = ["j_helmet", "j_head"];
+  var_0 = ["j_helmet", "j_head"];
 
   for(;;) {
-    self waittill("damage", var1, var2, var3, var4, var5, var6, var7, var8);
+    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 
-    if(!isDefined(var2)) {
+    if(!isDefined(var_2)) {
       continue;
     }
 
-    if(isDefined(var8) && scripts\engine\utility::array_contains(var0, var8) && var2 == level.player) {
+    if(isDefined(var_8) && scripts\engine\utility::array_contains(var_0, var_8) && var_2 == level.player) {
       thread piccadilly_finished();
       scripts\asm\asm_sp::asm_stopanimcustom();
       scripts\engine\sp\utility::anim_stopanimScripted();
@@ -149,10 +149,10 @@ function bus_terrorist_success() {
   }
 }
 
-function bus_terrorist_explode(var0) {}
+function bus_terrorist_explode(var_0) {}
 
 function piccadilly_finished() {
-  var0 = getscriptablearray("end_bus", "script_noteworthy")[0];
+  var_0 = getscriptablearray("end_bus", "script_noteworthy")[0];
   wait 3;
   level.player scripts\sp\hud_util::fade_out(3, "black");
   scripts\engine\sp\utility::nextmission();

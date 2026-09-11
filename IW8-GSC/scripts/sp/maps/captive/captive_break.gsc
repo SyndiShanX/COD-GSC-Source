@@ -88,7 +88,7 @@ function break_intro_main() {
   level.breakanimref scripts\sp\player_rig::link_player_to_rig("bed_idle", "stand", 0, 0, 0, 40, 40, 40, 40, 1, &attach_shackles_to_rig);
   level.player_rig_shadow = scripts\engine\sp\utility::spawn_anim_model("player_rig_shadow");
   level.breakanimref thread scripts\common\anim::anim_loop([level.player_rig, level.player_rig_shadow], "bed_idle", "end_idle");
-  var0 = scripts\engine\utility::getStruct("hadir_spawn", "targetname");
+  var_0 = scripts\engine\utility::getStruct("hadir_spawn", "targetname");
   level.hadir = scripts\engine\sp\utility::spawn_targetname("hadir");
   level.hadir attach("accessory_un_shackle_02", "j_gun");
   level.key = scripts\engine\sp\utility::spawn_anim_model("key", (0, 0, 0), (0, 0, 0));
@@ -104,7 +104,7 @@ function break_intro_main() {
   thread thirsty_wake_timer(level.player);
   scripts\sp\maps\captive\captive_lighting::explore_dof();
   wake_up();
-  var1 = 0;
+  var_1 = 0;
   scripts\engine\utility::flag_set("in_bed");
   level.breakanimref notify("end_idle");
   thread hadir_wakeup_react();
@@ -113,10 +113,10 @@ function break_intro_main() {
   while(scripts\engine\utility::flag("in_bed")) {
     thread check_for_get_up();
     level thread scripts\sp\maps\captive\captive_util::captive_timeout(randomfloatrange(4, 8));
-    var2 = level scripts\engine\utility::waittill_any_return("get_up", "timeout");
+    var_2 = level scripts\engine\utility::waittill_any_return("get_up", "timeout");
     level notify("kill_checks");
 
-    if(var2 == "get_up") {
+    if(var_2 == "get_up") {
       play_bed_exit("exit_bed_tired", &scripts\sp\maps\captive\captive_vo::vo_break_exit_bed);
       level.player scripts\common\utility::allow_sprint(0, "cell_movement");
       level.player.currentspeedscale = 0.25;
@@ -125,8 +125,8 @@ function break_intro_main() {
       continue;
     }
 
-    level thread scripts\sp\maps\captive\captive_vo::vo_break_intro_hadir_beckon_from_bed(var1);
-    var1++;
+    level thread scripts\sp\maps\captive\captive_vo::vo_break_intro_hadir_beckon_from_bed(var_1);
+    var_1++;
   }
 
   level notify("kill_get_up_checks");
@@ -137,11 +137,11 @@ function break_intro_main() {
   scripts\sp\maps\captive\captive_lighting::hadir_dof();
   scripts\engine\utility::flag_wait("hadir_idling");
 
-  for(var1 = 0; !scripts\engine\utility::flag("near_hadir"); var1++) {
+  for(var_1 = 0; !scripts\engine\utility::flag("near_hadir"); var_1++) {
     scripts\engine\utility::flag_wait_or_timeout("near_hadir", randomfloatrange(4, 8));
 
     if(!scripts\engine\utility::flag("near_hadir")) {
-      level thread scripts\sp\maps\captive\captive_vo::vo_break_intro_hadir_beckon_to_bars(var1);
+      level thread scripts\sp\maps\captive\captive_vo::vo_break_intro_hadir_beckon_to_bars(var_1);
     }
   }
 
@@ -150,23 +150,23 @@ function break_intro_main() {
   level.breakanimref scripts\common\anim::anim_single([level.hadir, level.key], "break_intro_toss_start");
   level.breakanimref thread scripts\common\anim::anim_loop([level.hadir, level.key], "break_intro_toss_idle", "end_idle");
   thread check_show_take_key_cursor();
-  var1 = 0;
-  var3 = 0;
+  var_1 = 0;
+  var_3 = 0;
 
   while(!scripts\engine\utility::flag("took_key")) {
     level thread scripts\sp\maps\captive\captive_util::captive_timeout(randomfloatrange(4, 8));
     level.hadir thread scripts\sp\maps\captive\captive_util::check_item_interact();
-    var4 = level scripts\engine\utility::waittill_any_return("item_interact", "timeout");
+    var_4 = level scripts\engine\utility::waittill_any_return("item_interact", "timeout");
     level notify("kill_checks");
 
-    if(var4 == "item_interact") {
+    if(var_4 == "item_interact") {
       scripts\engine\utility::flag_set("took_key");
       scripts\sp\maps\captive\captive_lighting::key_dof();
       continue;
     }
 
-    level thread scripts\sp\maps\captive\captive_vo::vo_break_intro_hadir_key_beckon(var1);
-    var1++;
+    level thread scripts\sp\maps\captive\captive_vo::vo_break_intro_hadir_key_beckon(var_1);
+    var_1++;
   }
 
   scripts\engine\utility::flag_waitopen("hadir_speaking");
@@ -180,8 +180,8 @@ function break_intro_main() {
   thread clear_shackled_squat_override();
   level.breakanimref thread scripts\sp\player_rig::link_player_to_rig("break_intro_barkov_arrives", "stand", 1, 0.5, undefined, undefined, undefined, undefined, undefined, 1, &attach_shackles_to_rig);
   level.breakanimref notify("end_idle");
-  var5 = [level.hadir, level.henchman, level.henchman2];
-  var5 thread scripts\sp\maps\captive\captive_util::play_group_single_anim_into_idle_anim(level.breakanimref, "break_intro_barkov_arrives", "break_intro_arrival_idle", "end_barkov_arrives_idle");
+  var_5 = [level.hadir, level.henchman, level.henchman2];
+  var_5 thread scripts\sp\maps\captive\captive_util::play_group_single_anim_into_idle_anim(level.breakanimref, "break_intro_barkov_arrives", "break_intro_arrival_idle", "end_barkov_arrives_idle");
   thread barkov_play_anime_into_idle(level, "break_intro_barkov_arrives");
   level.breakanimref scripts\common\anim::anim_single([level.player_rig, level.key], "break_intro_barkov_arrives");
   scripts\sp\player_rig::unlink_player_from_rig();
@@ -202,9 +202,9 @@ function break_intro_main() {
     level.barkov.fakepapa delete();
     level.barkov delete();
 
-    foreach(var7 in var5) {
-      var7 notify("kill_self_anim_instructions");
-      var7 delete();
+    foreach(var_7 in var_5) {
+      var_7 notify("kill_self_anim_instructions");
+      var_7 delete();
     }
 
     thread clear_shackled_squat_override();
@@ -222,11 +222,11 @@ function break_intro_main() {
     if(scripts\engine\utility::flag("near_cell_door")) {
       level thread scripts\sp\maps\captive\captive_util::captive_timeout(2.5);
       thread check_stepped_back_from_bars();
-      var9 = level scripts\engine\utility::waittill_any_return("stepped_back", "timeout");
+      var_9 = level scripts\engine\utility::waittill_any_return("stepped_back", "timeout");
       level notify("kill_checks");
       scripts\engine\utility::flag_set("barkov_entered_cell");
 
-      if(var9 == "timeout") {
+      if(var_9 == "timeout") {
         thread notetrack_listener_cattleprod_shock_player(level);
         barkov_play_anime_into_idle("break_intro_shock_at_gate", "break_intro_arrival_idle");
       }
@@ -286,21 +286,21 @@ function wait_hide_key() {
   level waittill("hide_key");
   scripts\engine\utility::flag_set("paused_squat_override");
   waitframe();
-  var0 = scripts\engine\sp\utility::spawn_anim_model("shackles", level.player.origin);
-  var1 = scripts\engine\sp\utility::spawn_anim_model("key", level.player.origin);
-  var0 notsolid();
-  var0 linktoplayerview(level.player, "j_wrist_le", (0, 0, 0), (0, 0, 0), 0, "none");
-  var0 setanim(%cap_vm_gesture_hide_shackles);
-  var1 notsolid();
-  var1 linktoplayerview(level.player, "j_wrist_le", (0, 0, 0), (0, 0, 0), 0, "none");
-  var1 setanim($cap_vm_gesture_hide_keys);
+  var_0 = scripts\engine\sp\utility::spawn_anim_model("shackles", level.player.origin);
+  var_1 = scripts\engine\sp\utility::spawn_anim_model("key", level.player.origin);
+  var_0 notsolid();
+  var_0 linktoplayerview(level.player, "j_wrist_le", (0, 0, 0), (0, 0, 0), 0, "none");
+  var_0 setanim(%cap_vm_gesture_hide_shackles);
+  var_1 notsolid();
+  var_1 linktoplayerview(level.player, "j_wrist_le", (0, 0, 0), (0, 0, 0), 0, "none");
+  var_1 setanim($cap_vm_gesture_hide_keys);
   setsaveddvar("NMLOKNMRSK", 1);
   level.player forceplaygestureviewmodel("cap_vm_gesture_hide_key");
   wait 2;
   scripts\engine\utility::flag_clear("paused_squat_override");
   setsaveddvar("NMLOKNMRSK", 0);
-  var0 delete();
-  var1 delete();
+  var_0 delete();
+  var_1 delete();
 }
 
 function change_to_barkov_dof() {
@@ -344,19 +344,19 @@ function check_stepped_back_from_bars() {
 function test_shock_as_entering_cell() {
   level endon("entered_cell");
   level waittill("barkov_entering_cell");
-  var0 = scripts\engine\utility::getStruct("cell_door_target", "targetname");
-  var1 = scripts\engine\utility::getStructArray("cell_enter_knockback_check", "targetname");
+  var_0 = scripts\engine\utility::getStruct("cell_door_target", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("cell_enter_knockback_check", "targetname");
 
   for(;;) {
     if(scripts\engine\utility::flag("near_cell_door")) {
-      var2 = vectortoangles(level.player.origin - var0.origin);
-      var3 = anglesToForward(var2);
-      var4 = anglesToForward(var0.angles);
-      var5 = vectordot(var3, var4);
+      var_2 = vectortoangles(level.player.origin - var_0.origin);
+      var_3 = anglesToForward(var_2);
+      var_4 = anglesToForward(var_0.angles);
+      var_5 = vectordot(var_3, var_4);
 
-      if(var5 < 0) {
-        if(distance2d(level.player.origin, level.barkov.origin) < 24 || distance2d(level.player.origin, var0.origin) < distance2d(level.barkov.origin, var0.origin)) {
-          var6 = scripts\engine\utility::getclosest(level.player.origin, var1, 1000);
+      if(var_5 < 0) {
+        if(distance2d(level.player.origin, level.barkov.origin) < 24 || distance2d(level.player.origin, var_0.origin) < distance2d(level.barkov.origin, var_0.origin)) {
+          var_6 = scripts\engine\utility::getclosest(level.player.origin, var_1, 1000);
           thread barkov_perform_partial_shock(level, 1, scripts\engine\utility::getStruct("cell_center", "targetname"), 1, 2);
           wait 2;
         }
@@ -387,103 +387,103 @@ function break_orders_start() {
 
 function break_orders_main() {
   level.player enableweapons();
-  var0 = 0;
-  var1 = 0;
-  var2 = getEnt("bottom_right_corner", "targetname");
-  var3 = scripts\engine\utility::getStruct("cell_center", "targetname");
-  var4 = 0;
-  var5 = 0;
+  var_0 = 0;
+  var_1 = 0;
+  var_2 = getEnt("bottom_right_corner", "targetname");
+  var_3 = scripts\engine\utility::getStruct("cell_center", "targetname");
+  var_4 = 0;
+  var_5 = 0;
   wait 0.4;
 
-  if(level.player istouching(var2)) {
+  if(level.player istouching(var_2)) {
     barkov_play_anime_into_idle("break_exercise_stay_corner", "break_intro_cell_idle");
   } else {
     barkov_play_anime_into_idle("break_exercise_order_corner", "break_intro_cell_idle");
   }
 
-  var6 = "";
-  var7 = 0;
-  var8 = "";
-  var9 = 0;
-  var10 = 0;
-  var11 = scripts\engine\utility::getStructArray("going_behind_kb", "script_noteworthy");
+  var_6 = "";
+  var_7 = 0;
+  var_8 = "";
+  var_9 = 0;
+  var_10 = 0;
+  var_11 = scripts\engine\utility::getStructArray("going_behind_kb", "script_noteworthy");
 
   if(!scripts\engine\utility::flag("heading_to_corner")) {
     level thread scripts\sp\maps\captive\captive_util::captive_timeout(5);
     thread check_corner_enter(level);
     thread check_player_too_close();
     thread check_going_behind_barkov();
-    var12 = level scripts\engine\utility::waittill_any_return("heading_to_corner", "bottom_left_corner", "top_left_corner", "top_right_corner", "got_too_close", "going_behind", "timeout");
+    var_12 = level scripts\engine\utility::waittill_any_return("heading_to_corner", "bottom_left_corner", "top_left_corner", "top_right_corner", "got_too_close", "going_behind", "timeout");
     level notify("kill_checks");
 
-    if(var12 == "going_behind") {
+    if(var_12 == "going_behind") {
       barkov_perform_shock();
-      var10 = gettime();
-    } else if(scripts\engine\utility::time_has_passed(var10, 4) && (var12 == "bottom_left_corner" || var12 == "top_left_corner" || var12 == "top_right_corner")) {
-      var8 = var12;
-      scripts\sp\maps\captive\captive_vo::vo_break_exercise_not_that_corner(var7);
+      var_10 = gettime();
+    } else if(scripts\engine\utility::time_has_passed(var_10, 4) && (var_12 == "bottom_left_corner" || var_12 == "top_left_corner" || var_12 == "top_right_corner")) {
+      var_8 = var_12;
+      scripts\sp\maps\captive\captive_vo::vo_break_exercise_not_that_corner(var_7);
       scripts\engine\utility::flag_waitopen("barkov_killing_player");
 
-      if(var6 != "top_right_corner") {
+      if(var_6 != "top_right_corner") {
         barkov_perform_shock();
       }
 
-      var7++;
-      var10 = gettime();
-    } else if(scripts\engine\utility::time_has_passed(var10, 4) && (var12 == "timeout" || var12 == "got_too_close")) {
+      var_7++;
+      var_10 = gettime();
+    } else if(scripts\engine\utility::time_has_passed(var_10, 4) && (var_12 == "timeout" || var_12 == "got_too_close")) {
       scripts\sp\maps\captive\captive_vo::vo_break_exercise_goto_corner_nag();
       scripts\engine\utility::flag_waitopen("barkov_killing_player");
 
       if(distance(level.player.origin, level.barkov.origin) < 120) {
         barkov_perform_shock();
-        var10 = gettime();
+        var_10 = gettime();
       } else {
         barkov_play_anime_into_idle("break_exercise_give_order_at_back", "break_intro_cell_idle");
       }
     }
   }
 
-  while(!var9) {
+  while(!var_9) {
     thread check_corner_enter(level);
     thread check_player_too_close();
     level thread scripts\sp\maps\captive\captive_util::captive_timeout(5);
     thread check_going_behind_barkov();
-    var6 = level scripts\engine\utility::waittill_any_return("bottom_left_corner", "top_left_corner", "bottom_right_corner", "top_right_corner", "got_too_close", "going_behind", "timeout");
+    var_6 = level scripts\engine\utility::waittill_any_return("bottom_left_corner", "top_left_corner", "bottom_right_corner", "top_right_corner", "got_too_close", "going_behind", "timeout");
     level notify("kill_checks");
 
-    if(var6 == "bottom_right_corner") {
-      var9 = 1;
+    if(var_6 == "bottom_right_corner") {
+      var_9 = 1;
       continue;
     }
 
-    if(var6 == "going_behind") {
-      var13 = scripts\engine\utility::getclosest(level.player.origin, var11);
-      barkov_perform_shock(var13, 1, 1);
-      var10 = gettime();
+    if(var_6 == "going_behind") {
+      var_13 = scripts\engine\utility::getclosest(level.player.origin, var_11);
+      barkov_perform_shock(var_13, 1, 1);
+      var_10 = gettime();
       continue;
     }
 
-    if(scripts\engine\utility::time_has_passed(var10, 4) && (var6 == "bottom_left_corner" || var6 == "top_left_corner" || var6 == "top_right_corner")) {
-      var8 = var6;
-      scripts\sp\maps\captive\captive_vo::vo_break_exercise_not_that_corner(var7);
+    if(scripts\engine\utility::time_has_passed(var_10, 4) && (var_6 == "bottom_left_corner" || var_6 == "top_left_corner" || var_6 == "top_right_corner")) {
+      var_8 = var_6;
+      scripts\sp\maps\captive\captive_vo::vo_break_exercise_not_that_corner(var_7);
       scripts\engine\utility::flag_waitopen("barkov_killing_player");
 
-      if(var6 != "top_right_corner") {
+      if(var_6 != "top_right_corner") {
         barkov_perform_shock();
-        var10 = gettime();
+        var_10 = gettime();
       }
 
-      var7++;
+      var_7++;
       continue;
     }
 
-    if(scripts\engine\utility::time_has_passed(var10, 4) && (var6 == "timeout" || var6 == "got_too_close")) {
+    if(scripts\engine\utility::time_has_passed(var_10, 4) && (var_6 == "timeout" || var_6 == "got_too_close")) {
       level thread scripts\sp\maps\captive\captive_vo::vo_break_exercise_goto_corner_nag();
       scripts\engine\utility::flag_waitopen("barkov_killing_player");
 
       if(distance(level.player.origin, level.barkov.origin) < 120) {
         barkov_perform_shock();
-        var10 = gettime();
+        var_10 = gettime();
         continue;
       }
 
@@ -500,7 +500,7 @@ function break_orders_main() {
   while(!scripts\engine\utility::flag("corner_vo_done")) {
     if(scripts\engine\utility::flag("barkov_killing_player")) {
       waitframe();
-    } else if(!level.player istouching(var2)) {
+    } else if(!level.player istouching(var_2)) {
       scripts\engine\utility::flag_clear("facing_wall");
 
       if(!scripts\engine\utility::flag("barkov_telling_face_wall")) {
@@ -515,7 +515,7 @@ function break_orders_main() {
         thread barkov_perform_partial_shock(level, 1, scripts\engine\utility::getStruct("corner_knockback_pos", "targetname"), 1);
       }
 
-      var1++;
+      var_1++;
       wait 2;
 
       if(scripts\engine\utility::flag("told_to_face_wall")) {
@@ -523,20 +523,20 @@ function break_orders_main() {
           level thread scripts\sp\maps\captive\captive_vo::vo_break_remind_dont_face_after_move();
         }
 
-        var5 = gettime();
+        var_5 = gettime();
       }
-    } else if(level.player scripts\engine\math::is_point_in_front(var3.origin)) {
+    } else if(level.player scripts\engine\math::is_point_in_front(var_3.origin)) {
       scripts\engine\utility::flag_clear("facing_wall");
 
       if(scripts\engine\utility::flag("barkov_arrived_at_corner")) {
-        if((gettime() - var5) / 1000 > 7) {
+        if((gettime() - var_5) / 1000 > 7) {
           scripts\sp\maps\captive\captive_vo::barkov_dialog_interrupt();
           waitframe();
 
           if(scripts\engine\utility::flag("told_to_face_wall")) {
             scripts\sp\maps\captive\captive_vo::barkov_dialog_interrupt();
-            scripts\sp\maps\captive\captive_vo::vo_break_exercise_facewall_nag(var0);
-            var0++;
+            scripts\sp\maps\captive\captive_vo::vo_break_exercise_facewall_nag(var_0);
+            var_0++;
             scripts\engine\utility::flag_waitopen("barkov_killing_player");
             barkov_perform_shock();
             level.dovofacingwaittime = gettime();
@@ -545,18 +545,18 @@ function break_orders_main() {
             thread barkov_tell_face_wall();
           }
 
-          var5 = gettime();
+          var_5 = gettime();
         }
       } else if(scripts\engine\utility::flag("corner_vo_started") && !scripts\engine\utility::flag("told_to_face_wall")) {
         scripts\sp\maps\captive\captive_vo::barkov_dialog_interrupt();
         scripts\sp\maps\captive\captive_vo::vo_break_exercise_facewall_moving();
         scripts\engine\utility::flag_set("told_to_face_wall");
-        var0++;
-        var5 = gettime();
+        var_0++;
+        var_5 = gettime();
       }
     } else if(!scripts\engine\utility::flag("barkov_telling_face_wall")) {
       scripts\engine\utility::flag_set("facing_wall");
-      var5 = 0;
+      var_5 = 0;
     }
 
     waitframe();
@@ -568,39 +568,39 @@ function break_orders_main() {
   }
 
   if(level.dovofacingwait && (gettime() - level.dovofacingwaittime) / 1000 < 2) {
-    var14 = gettime();
+    var_14 = gettime();
 
-    while(level.player scripts\engine\math::is_point_in_front(var3.origin)) {
-      if(!level.player istouching(var2)) {
+    while(level.player scripts\engine\math::is_point_in_front(var_3.origin)) {
+      if(!level.player istouching(var_2)) {
         scripts\engine\utility::flag_clear("facing_wall");
         scripts\sp\maps\captive\captive_vo::barkov_dialog_interrupt();
         scripts\sp\maps\captive\captive_vo::vo_break_exercise_left_corner_nag();
         scripts\engine\utility::flag_waitopen("barkov_killing_player");
         barkov_perform_shock(scripts\engine\utility::getStruct("corner_knockback_pos", "targetname"), 1, 2);
-      } else if((gettime() - var14) / 1000 > 4) {
+      } else if((gettime() - var_14) / 1000 > 4) {
         scripts\sp\maps\captive\captive_vo::barkov_dialog_interrupt();
-        scripts\sp\maps\captive\captive_vo::vo_break_exercise_facewall_nag(var0);
-        var0++;
+        scripts\sp\maps\captive\captive_vo::vo_break_exercise_facewall_nag(var_0);
+        var_0++;
         scripts\engine\utility::flag_waitopen("barkov_killing_player");
         barkov_perform_shock();
-        var14 = gettime();
+        var_14 = gettime();
       }
 
       waitframe();
     }
 
     while((gettime() - level.dovofacingwaittime) / 1000 < 2) {
-      if(!level.player istouching(var2)) {
+      if(!level.player istouching(var_2)) {
         scripts\engine\utility::flag_clear("facing_wall");
         scripts\sp\maps\captive\captive_vo::barkov_dialog_interrupt();
         scripts\sp\maps\captive\captive_vo::vo_break_exercise_left_corner_nag();
         scripts\engine\utility::flag_waitopen("barkov_killing_player");
         barkov_perform_shock(scripts\engine\utility::getStruct("corner_knockback_pos", "targetname"), 1, 2);
-      } else if(level.player scripts\engine\math::is_point_in_front(var3.origin)) {
+      } else if(level.player scripts\engine\math::is_point_in_front(var_3.origin)) {
         scripts\engine\utility::flag_clear("facing_wall");
         scripts\sp\maps\captive\captive_vo::barkov_dialog_interrupt();
-        scripts\sp\maps\captive\captive_vo::vo_break_exercise_facewall_nag(var0);
-        var0++;
+        scripts\sp\maps\captive\captive_vo::vo_break_exercise_facewall_nag(var_0);
+        var_0++;
         scripts\engine\utility::flag_waitopen("barkov_killing_player");
         barkov_perform_shock();
         level.dovofacingwaittime = gettime();
@@ -612,17 +612,17 @@ function break_orders_main() {
 
   if(!scripts\engine\sp\utility::player_looking_at(level.barkov gettagorigin("j_head"), 0.95, 1)) {
     thread barkov_orders_turn_to_face();
-    var15 = 0;
-    var16 = 1;
+    var_15 = 0;
+    var_16 = 1;
 
-    while(var16) {
+    while(var_16) {
       thread check_player_left_corner();
       thread check_looking_at(level);
       level thread scripts\sp\maps\captive\captive_util::captive_timeout(5);
-      var17 = level scripts\engine\utility::waittill_any_return("left_corner", "looking_at", "timeout");
+      var_17 = level scripts\engine\utility::waittill_any_return("left_corner", "looking_at", "timeout");
       level notify("kill_checks");
 
-      if(var17 == "left_corner") {
+      if(var_17 == "left_corner") {
         level notify("cancel_turn_to_face_command");
         scripts\sp\maps\captive\captive_vo::barkov_dialog_interrupt();
         scripts\sp\maps\captive\captive_vo::vo_break_exercise_left_corner_nag();
@@ -636,16 +636,16 @@ function break_orders_main() {
         continue;
       }
 
-      if(var17 == "looking_at") {
+      if(var_17 == "looking_at") {
         if(scripts\engine\utility::flag("barkov_ordered_turn_to_face")) {
-          var16 = 0;
+          var_16 = 0;
         }
 
         continue;
       }
 
-      scripts\sp\maps\captive\captive_vo::vo_break_exercise_face_me_nag(var15);
-      var15++;
+      scripts\sp\maps\captive\captive_vo::vo_break_exercise_face_me_nag(var_15);
+      var_15++;
       scripts\engine\utility::flag_waitopen("barkov_killing_player");
       barkov_perform_shock();
     }
@@ -657,11 +657,11 @@ function break_orders_main() {
   level.barkov scripts\sp\player\cursor_hint::create_cursor_hint("j_strap4", (0, 0, 0), &"CAPTIVE/CURSOR_TAKE", 180, 160, 64, 1);
   level.barkov thread scripts\sp\maps\captive\captive_util::check_item_interact();
   level thread scripts\sp\maps\captive\captive_util::captive_timeout(8);
-  var18 = level scripts\engine\utility::waittill_any_return("item_interact", "timeout");
+  var_18 = level scripts\engine\utility::waittill_any_return("item_interact", "timeout");
   level notify("kill_checks");
   level.barkov scripts\sp\player\cursor_hint::remove_cursor_hint();
 
-  if(var18 == "item_interact") {
+  if(var_18 == "item_interact") {
     scripts\sp\utility::nvidiaansel_scriptdisable(1);
     thread player_tries_to_take_water();
     wait 0.25;
@@ -679,18 +679,18 @@ function break_orders_main() {
 
 function break_orders_catchup() {}
 
-function check_looking_at(var0, var1) {
+function check_looking_at(var_0, var_1) {
   self endon("kill_checks");
   self endon("barkov_left");
 
-  if(isDefined(var1)) {
-    wait var1;
+  if(isDefined(var_1)) {
+    wait var_1;
   } else {
     waitframe();
   }
 
   for(;;) {
-    if(scripts\engine\sp\utility::player_looking_at(var0, 0.9, 1)) {
+    if(scripts\engine\sp\utility::player_looking_at(var_0, 0.9, 1)) {
       self notify("looking_at");
     }
 
@@ -707,26 +707,26 @@ function barkov_tell_face_wall() {
   scripts\engine\utility::flag_clear("barkov_telling_face_wall");
 }
 
-function check_corner_enter(var0) {
+function check_corner_enter(var_0) {
   level endon("kill_checks");
-  var1 = getEnt("bottom_left_corner", "targetname");
-  var2 = getEnt("top_left_corner", "targetname");
-  var3 = getEnt("bottom_right_corner", "targetname");
-  var4 = getEnt("top_right_corner", "targetname");
+  var_1 = getEnt("bottom_left_corner", "targetname");
+  var_2 = getEnt("top_left_corner", "targetname");
+  var_3 = getEnt("bottom_right_corner", "targetname");
+  var_4 = getEnt("top_right_corner", "targetname");
 
   for(;;) {
-    if(level.player istouching(var1)) {
-      if(var0 != "bottom_left_corner") {
+    if(level.player istouching(var_1)) {
+      if(var_0 != "bottom_left_corner") {
         level notify("bottom_left_corner");
       }
-    } else if(level.player istouching(var2)) {
-      if(var0 != "top_left_corner") {
+    } else if(level.player istouching(var_2)) {
+      if(var_0 != "top_left_corner") {
         level notify("top_left_corner");
       }
-    } else if(level.player istouching(var3)) {
+    } else if(level.player istouching(var_3)) {
       level notify("bottom_right_corner");
-    } else if(level.player istouching(var4)) {
-      if(var0 != "top_right_corner") {
+    } else if(level.player istouching(var_4)) {
+      if(var_0 != "top_right_corner") {
         level notify("top_right_corner");
       }
     }
@@ -737,10 +737,10 @@ function check_corner_enter(var0) {
 
 function check_player_left_corner() {
   level endon("kill_checks");
-  var0 = getEnt("bottom_right_corner", "targetname");
+  var_0 = getEnt("bottom_right_corner", "targetname");
 
   for(;;) {
-    if(!level.player istouching(var0)) {
+    if(!level.player istouching(var_0)) {
       level notify("left_corner");
     }
 
@@ -766,15 +766,15 @@ function player_tries_to_take_water() {
     level thread scripts\sp\maps\captive\captive_util::link_player_and_move(2, level.player.origin, level.player.angles);
   }
 
-  var0 = scripts\engine\sp\utility::spawn_anim_model("shackles", level.player.origin);
-  var0 notsolid();
-  var0 linktoplayerview(level.player, "j_wrist_le", (0, 0, 0), (0, 0, 0), 0, "none");
-  var0 setanim(%cap_cells_020_exercise_drink_reach_restraints);
+  var_0 = scripts\engine\sp\utility::spawn_anim_model("shackles", level.player.origin);
+  var_0 notsolid();
+  var_0 linktoplayerview(level.player, "j_wrist_le", (0, 0, 0), (0, 0, 0), 0, "none");
+  var_0 setanim(%cap_cells_020_exercise_drink_reach_restraints);
   setsaveddvar("NMLOKNMRSK", 1);
   level.player forceplaygestureviewmodel("cap_cells_020_exercise_drink_reach_gesture");
   wait 2.35;
   setsaveddvar("NMLOKNMRSK", 0);
-  var0 delete();
+  var_0 delete();
 }
 
 function check_going_behind_barkov() {
@@ -782,9 +782,9 @@ function check_going_behind_barkov() {
 
   for(;;) {
     if(distance2d(level.barkov.origin, level.player.origin) < 48) {
-      var0 = vectordot(anglesToForward(level.barkov.angles), vectorNormalize(level.player.origin - level.barkov.origin));
+      var_0 = vectordot(anglesToForward(level.barkov.angles), vectorNormalize(level.player.origin - level.barkov.origin));
 
-      if(var0 < 0.1) {
+      if(var_0 < 0.1) {
         level notify("going_behind");
       }
     }
@@ -793,9 +793,9 @@ function check_going_behind_barkov() {
   }
 }
 
-function barkov_kills_player(var0) {
-  if(!isDefined(var0)) {
-    var0 = 0;
+function barkov_kills_player(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
   level notify("kill_checks");
@@ -810,25 +810,25 @@ function barkov_kills_player(var0) {
 
     level thread scripts\sp\maps\captive\captive_vo::vo_break_enough_of_this();
 
-    if(!var0) {
+    if(!var_0) {
       wait 1.5;
     }
 
     thread wait_for_notetrack_shock(level.barkov, undefined, 1, 10);
-    var1 = "shock_stand_" + get_shock_anim(level.barkov);
-    level.barkov scripts\common\anim::anim_single_solo(level.barkov, var1);
+    var_1 = "shock_stand_" + get_shock_anim(level.barkov);
+    level.barkov scripts\common\anim::anim_single_solo(level.barkov, var_1);
     return;
   }
 
   level thread scripts\sp\maps\captive\captive_vo::vo_break_enough_of_this();
 
-  if(!var1) {
+  if(!var_1) {
     wait 1.5;
   }
 
   thread wait_for_notetrack_shock(level.barkov, undefined, 1, 10);
-  var1 = "shock_stand_" + get_shock_anim(level.barkov);
-  level.barkov scripts\common\anim::anim_single_solo(level.barkov, var1);
+  var_1 = "shock_stand_" + get_shock_anim(level.barkov);
+  level.barkov scripts\common\anim::anim_single_solo(level.barkov, var_1);
 }
 
 function check_try_pickup_stunstick() {
@@ -848,15 +848,15 @@ function attempt_take_stunstick() {
   level.playermover.origin = level.player.origin;
   level.playermover.angles = level.player.angles;
   level.player playerlinktodelta(level.playermover, undefined, 1, 5, 5, 0, 70);
-  var0 = scripts\engine\sp\utility::spawn_anim_model("shackles", level.player.origin);
-  var0 notsolid();
-  var0 linktoplayerview(level.player, "j_wrist_le", (0, 0, 0), (0, 0, 0), 0, "none");
-  var0 setanim(%cap_cells_020_exercise_drink_reach_restraints);
+  var_0 = scripts\engine\sp\utility::spawn_anim_model("shackles", level.player.origin);
+  var_0 notsolid();
+  var_0 linktoplayerview(level.player, "j_wrist_le", (0, 0, 0), (0, 0, 0), 0, "none");
+  var_0 setanim(%cap_cells_020_exercise_drink_reach_restraints);
   setsaveddvar("NMLOKNMRSK", 1);
   level.player forceplaygestureviewmodel("cap_cells_020_exercise_drink_reach_gesture");
   wait 2.35;
   setsaveddvar("NMLOKNMRSK", 0);
-  var0 delete();
+  var_0 delete();
 }
 
 function henchman_fire_at_player() {
@@ -911,9 +911,9 @@ function break_waterboard_main() {
     scripts\engine\utility::flag_waitopen_or_timeout("obstructing_cell_exit", 5);
 
     if(scripts\engine\utility::flag("obstructing_cell_exit")) {
-      var0 = scripts\engine\utility::getStructArray("cell_exit_knockback_check", "targetname");
-      var1 = scripts\engine\utility::getclosest(level.player.origin, var0, 1000);
-      barkov_perform_shock(var1, 1, 4);
+      var_0 = scripts\engine\utility::getStructArray("cell_exit_knockback_check", "targetname");
+      var_1 = scripts\engine\utility::getclosest(level.player.origin, var_0, 1000);
+      barkov_perform_shock(var_1, 1, 4);
     }
   }
 
@@ -977,10 +977,10 @@ function break_waterboard_main() {
   thread question_barkov_response(level, level.breakanswer1);
   level.player springcamdisabled(0.5);
   level waittill("start_tilt_back");
-  var2 = first_waterboard_sequence();
+  var_2 = first_waterboard_sequence();
   thread notetrack_listener_enable_spring_cam(level);
 
-  if(var2) {
+  if(var_2) {
     level notify("cancel_player_actions");
     level.breakanimref notify("end_player_idle");
     thread player_play_anime_into_idle(level, "break_wboard_question2_enter");
@@ -992,13 +992,13 @@ function break_waterboard_main() {
     barkov_play_anime_into_idle("break_wboard_question_wake2", "break_wboard_question2_idle");
   }
 
-  var3 = "break_wboard_question2_nag1";
+  var_3 = "break_wboard_question2_nag1";
 
   if(scripts\engine\utility::flag("has_done_question_nag")) {
-    var3 = "break_wboard_question2_nag2";
+    var_3 = "break_wboard_question2_nag2";
   }
 
-  level.breakanswer2 = question_answer_check(2, var3, "break_wboard_question2_idle");
+  level.breakanswer2 = question_answer_check(2, var_3, "break_wboard_question2_idle");
 
   if(level.breakanswer1 == "truth" && level.breakanswer2 == "truth") {
     level.breakanswer2 = "truth_truth";
@@ -1028,9 +1028,9 @@ function break_waterboard_main() {
   level.henchman3 thread scripts\sp\maps\captive\captive_util::play_single_anim_into_idle_anim(level.breakanimref, "break_wboard_test_intro", "break_wboard_test_idle", "end_test_idle");
   level.breakanimref scripts\common\anim::anim_single_solo(level.femaleprisoner, "break_wboard_test_intro");
   level.breakanimref thread scripts\common\anim::anim_loop_solo(level.femaleprisoner, "break_wboard_test_idle", "end_azadeh_test_idle");
-  var4 = final_waterboard_sequence();
+  var_4 = final_waterboard_sequence();
 
-  if(var4) {
+  if(var_4) {
     thread notetrack_listener_enable_spring_cam();
     level.breakanimref notify("end_azadeh_test_idle");
     level.femaleprisoner thread scripts\sp\maps\captive\captive_util::play_single_anim_into_idle_anim(level.breakanimref, "break_wboard_question3_enter", "break_wboard_question3_idle", "end_test_idle");
@@ -1134,21 +1134,21 @@ function check_for_clip_deletion() {
 
 function check_player_trying_to_obstruct_exit() {
   level endon("end_obstruction_check");
-  var0 = scripts\engine\utility::getStruct("cell_door_target", "targetname");
-  var1 = scripts\engine\utility::getStructArray("cell_exit_knockback_check", "targetname");
+  var_0 = scripts\engine\utility::getStruct("cell_door_target", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("cell_exit_knockback_check", "targetname");
 
   for(;;) {
     if(scripts\engine\utility::flag("obstructing_cell_exit")) {
-      var2 = vectortoangles(level.player.origin - var0.origin);
-      var3 = anglesToForward(var2);
-      var4 = anglesToForward(var0.angles);
-      var5 = vectordot(var3, var4);
+      var_2 = vectortoangles(level.player.origin - var_0.origin);
+      var_3 = anglesToForward(var_2);
+      var_4 = anglesToForward(var_0.angles);
+      var_5 = vectordot(var_3, var_4);
 
-      if(var5 < 0) {
-        if(distance2d(level.player.origin, var0.origin) < distance2d(level.barkov.origin, var0.origin)) {
-          var6 = scripts\engine\utility::getclosest(level.player.origin, var1, 1000);
+      if(var_5 < 0) {
+        if(distance2d(level.player.origin, var_0.origin) < distance2d(level.barkov.origin, var_0.origin)) {
+          var_6 = scripts\engine\utility::getclosest(level.player.origin, var_1, 1000);
           level thread scripts\sp\maps\captive\captive_vo::vo_break_wboard_obstructing_exit();
-          thread barkov_perform_partial_shock(level, 1, var6, 1);
+          thread barkov_perform_partial_shock(level, 1, var_6, 1);
           wait 2;
         }
       }
@@ -1196,34 +1196,34 @@ function barkov_start_escort() {
   scripts\engine\utility::flag_set("barkov_reached_escort_start");
 }
 
-function waterboard_march_check(var0) {
+function waterboard_march_check(var_0) {
   self endon("kill_checks");
-  var1 = scripts\engine\utility::getStruct("henchman_waterboard_walk_start", "targetname");
-  var2 = anglesToForward(var1.angles) * 32;
+  var_1 = scripts\engine\utility::getStruct("henchman_waterboard_walk_start", "targetname");
+  var_2 = anglesToForward(var_1.angles) * 32;
 
   for(;;) {
-    var3 = level.henchman.origin + var2;
+    var_3 = level.henchman.origin + var_2;
 
     if(scripts\engine\utility::flag("entering_opposite_cell") || scripts\engine\utility::flag("exited_cell") && scripts\engine\utility::flag("entering_own_cell")) {
-      henchman_waterboard_walk_shove(var3, var1.angles);
+      henchman_waterboard_walk_shove(var_3, var_1.angles);
     }
 
-    var4 = vectortoangles(level.player.origin - var3);
-    var5 = anglesToForward(var4);
-    var6 = anglesToForward(var1.angles);
-    var7 = vectordot(var5, var6);
+    var_4 = vectortoangles(level.player.origin - var_3);
+    var_5 = anglesToForward(var_4);
+    var_6 = anglesToForward(var_1.angles);
+    var_7 = vectordot(var_5, var_6);
 
-    if(var7 < 0) {
-      var8 = 1;
+    if(var_7 < 0) {
+      var_8 = 1;
 
-      if(var0) {
+      if(var_0) {
         if(scripts\engine\utility::flag("in_cell")) {
-          var8 = 0;
+          var_8 = 0;
         }
       }
 
-      if(var8) {
-        henchman_waterboard_walk_shove(var3, var1.angles);
+      if(var_8) {
+        henchman_waterboard_walk_shove(var_3, var_1.angles);
       }
     }
 
@@ -1245,12 +1245,12 @@ function henchman_waterboard_walk() {
   }
 }
 
-function henchman_waterboard_walk_shove(var0, var1) {
-  var2 = anglesToForward(var1) * 70;
-  var3 = var0 + var2;
+function henchman_waterboard_walk_shove(var_0, var_1) {
+  var_2 = anglesToForward(var_1) * 70;
+  var_3 = var_0 + var_2;
 
   if(!level.player.beingshoved) {
-    thread henchman_shove_moving(level, var0, var3);
+    thread henchman_shove_moving(level, var_0, var_3);
 
     if(!scripts\engine\utility::flag("did_shove_comment")) {
       scripts\engine\utility::flag_set("did_shove_comment");
@@ -1262,61 +1262,61 @@ function henchman_waterboard_walk_shove(var0, var1) {
   }
 }
 
-function trigger_check_shove(var0, var1) {
+function trigger_check_shove(var_0, var_1) {
   self endon("kill_checks");
-  var2 = getEnt(var0, "targetname");
-  var3 = scripts\engine\utility::getStruct(var1, "targetname");
+  var_2 = getEnt(var_0, "targetname");
+  var_3 = scripts\engine\utility::getStruct(var_1, "targetname");
 
   for(;;) {
-    var2 waittill("trigger");
+    var_2 waittill("trigger");
 
     if(!level.player.beingshoved) {
       if(scripts\engine\utility::flag("henchman_in_doorway")) {
-        thread henchman_shove_doorway(level, level.henchman.origin, var3.origin);
+        thread henchman_shove_doorway(level, level.henchman.origin, var_3.origin);
         continue;
       }
 
-      thread henchman_shove_moving(level, level.henchman.origin, var3.origin);
+      thread henchman_shove_moving(level, level.henchman.origin, var_3.origin);
     }
   }
 }
 
-function henchman_shove_doorway(var0, var1, var2) {
+function henchman_shove_doorway(var_0, var_1, var_2) {
   level.player.beingshoved = 1;
-  scripts\engine\utility::delaythread(0.3, &shove, var0, var1, var2);
+  scripts\engine\utility::delaythread(0.3, &shove, var_0, var_1, var_2);
   level.breakanimref notify("end_escort_idle");
   level.breakanimref scripts\common\anim::anim_single_solo(level.henchman, "break_wboard_door_push");
   level.breakanimref thread scripts\common\anim::anim_loop_solo(level.henchman, "break_wboard_escort_move_idle", "end_escort_idle");
   level.player.beingshoved = 0;
 }
 
-function henchman_shove_moving(var0, var1, var2) {
+function henchman_shove_moving(var_0, var_1, var_2) {
   level.player.beingshoved = 1;
-  var3 = % cap_cells_030_hallway_push_front_enemy02;
-  var4 = vectordot(vectorNormalize(level.player.origin - level.henchman.origin), anglesToForward(level.henchman.angles));
+  var_3 = % cap_cells_030_hallway_push_front_enemy02;
+  var_4 = vectordot(vectorNormalize(level.player.origin - level.henchman.origin), anglesToForward(level.henchman.angles));
 
-  if(var4 < 0.8) {
-    var5 = vectordot(vectorNormalize(level.player.origin - level.henchman.origin), anglestoright(level.henchman.angles));
+  if(var_4 < 0.8) {
+    var_5 = vectordot(vectorNormalize(level.player.origin - level.henchman.origin), anglestoright(level.henchman.angles));
 
-    if(var5 >= 0) {
-      var3 = $cap_cells_030_hallway_push_right_enemy02;
+    if(var_5 >= 0) {
+      var_3 = $cap_cells_030_hallway_push_right_enemy02;
     } else {
-      var3 = % cap_cells_030_hallway_push_left_enemy02;
+      var_3 = % cap_cells_030_hallway_push_left_enemy02;
     }
   }
 
   level.player playSound("cap_cells_030_waterboard_push_plr_lr");
-  level.henchman setanim(var3, 5);
+  level.henchman setanim(var_3, 5);
   wait 0.3;
 
   if(scripts\engine\utility::flag("exited_cell")) {
-    shove(var0, var1, var2);
+    shove(var_0, var_1, var_2);
   } else {
-    var6 = scripts\engine\utility::getStruct("henchman_short_shove", "targetname");
-    shove(var0, var6.origin, var6.angles);
+    var_6 = scripts\engine\utility::getStruct("henchman_short_shove", "targetname");
+    shove(var_0, var_6.origin, var_6.angles);
   }
 
-  level.henchman clearanim(var3, 0.2);
+  level.henchman clearanim(var_3, 0.2);
   level.player.beingshoved = 0;
 }
 
@@ -1368,14 +1368,14 @@ function attach_chains_to_chair() {
 }
 
 function first_waterboard_sequence() {
-  var0 = 0;
-  var1 = 1;
-  var2 = 0;
-  var3 = [[5, 1.5, 2, 5], [5, 1, 1.5, 5], [5, 1, 1.5, 5]];
+  var_0 = 0;
+  var_1 = 1;
+  var_2 = 0;
+  var_3 = [[5, 1.5, 2, 5], [5, 1, 1.5, 5], [5, 1, 1.5, 5]];
   level.barkov.waterboardindex = 0;
 
-  while(var1) {
-    switch (var0) {
+  while(var_1) {
+    switch (var_0) {
       case 0:
         setmusicstate("");
         level.groundrefent = scripts\engine\utility::spawn_script_origin();
@@ -1395,15 +1395,15 @@ function first_waterboard_sequence() {
         waterboard_pour_setup();
         level.breakanimref notify("end_henchman_chair_idle");
         level.breakanimref scripts\common\anim::anim_single_solo(level.henchman, "break_wboard_chair_pour_start");
-        var2 = waterboard(var3, 1);
+        var_2 = waterboard(var_3, 1);
 
-        if(var2) {
+        if(var_2) {
           scripts\engine\utility::flag_waitopen("pouring_finished");
           thread barkov_return_ready_next_anim(level);
           scripts\engine\utility::exploder("waterboard_face_drip_persistent");
         }
 
-        waterboard_tilt_forward(var2);
+        waterboard_tilt_forward(var_2);
         break;
       case 1:
         level notify("passout_wake");
@@ -1428,30 +1428,30 @@ function first_waterboard_sequence() {
         waterboard_pour_setup();
         level.breakanimref notify("end_henchman_chair_idle");
         level.breakanimref scripts\common\anim::anim_single_solo(level.henchman, "break_wboard_chair_pour_start");
-        var2 = waterboard(var3, 1);
+        var_2 = waterboard(var_3, 1);
 
-        if(var2) {
+        if(var_2) {
           scripts\engine\utility::flag_waitopen("pouring_finished");
           thread barkov_return_ready_next_anim(level);
           scripts\engine\utility::exploder("waterboard_face_drip_persistent");
         }
 
-        waterboard_tilt_forward(var2);
+        waterboard_tilt_forward(var_2);
         break;
     }
 
-    if(var2) {
-      var1 = 0;
-    } else if(var0 >= 1) {
-      var1 = 0;
+    if(var_2) {
+      var_1 = 0;
+    } else if(var_0 >= 1) {
+      var_1 = 0;
       level thread scripts\sp\maps\captive\captive_vo::vo_break_wboard_fail_wake2();
       thread quick_wake_up();
     }
 
-    var0++;
+    var_0++;
   }
 
-  return var2;
+  return var_2;
 }
 
 function final_waterboard_sequence() {
@@ -1461,10 +1461,10 @@ function final_waterboard_sequence() {
   level.barkov.wboardvoholdstillcount = 0;
   level.barkov.wboardvonotmovingcount = 0;
   level.barkov.wboardvobreathlowcount = 0;
-  var0 = [[5, 1.25, 2, 5], [5, 0.75, 1.5, 5], [5, 0.75, 1.25, 5], [5, 0.75, 1.25, 5]];
+  var_0 = [[5, 1.25, 2, 5], [5, 0.75, 1.5, 5], [5, 0.75, 1.25, 5], [5, 0.75, 1.25, 5]];
 
   if(scripts\common\utility::getdifficulty() == "fu") {
-    var0 = [[5, 1, 1.75, 5], [5, 0.75, 1.25, 5], [5, 0.5, 1, 5], [5, 0.5, 1, 5]];
+    var_0 = [[5, 1, 1.75, 5], [5, 0.75, 1.25, 5], [5, 0.5, 1, 5], [5, 0.5, 1, 5]];
   }
 
   level.groundrefent = scripts\engine\utility::spawn_script_origin();
@@ -1483,16 +1483,16 @@ function final_waterboard_sequence() {
   waterboard_pour_setup();
   level.breakanimref notify("end_henchman_chair_idle");
   level.breakanimref scripts\common\anim::anim_single_solo(level.henchman, "break_wboard_chair_pour_start");
-  var1 = waterboard(var0, 0);
+  var_1 = waterboard(var_0, 0);
 
-  if(var1) {
+  if(var_1) {
     scripts\engine\utility::flag_waitopen("pouring_finished");
     thread barkov_return_ready_next_anim(level);
     scripts\engine\utility::exploder("waterboard_face_drip_persistent");
   }
 
-  waterboard_tilt_forward(var1);
-  return var1;
+  waterboard_tilt_forward(var_1);
+  return var_1;
 }
 
 function waterboard_player_first_tilt() {
@@ -1563,20 +1563,20 @@ function waterboard_pour_setup() {
   thread waterboard_pour_effects();
 }
 
-function waterboard(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = 1;
+function waterboard(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
-  if(var1) {
+  if(var_1) {
     scripts\engine\utility::flag_set("is_waterboard_tutorial");
-    var0 = scripts\engine\utility::array_insert(var0, [-1, -1, -1, 5], 0);
+    var_0 = scripts\engine\utility::array_insert(var_0, [-1, -1, -1, 5], 0);
   }
 
-  level.currentpatternduration = var0[0][0];
-  level.movedurationmin = var0[0][1];
-  level.movedurationmax = var0[0][2];
-  level.passoutthreshold = var0[0][3];
+  level.currentpatternduration = var_0[0][0];
+  level.movedurationmin = var_0[0][1];
+  level.movedurationmax = var_0[0][2];
+  level.passoutthreshold = var_0[0][3];
   level.henchman thread scripts\asm\asm_sp::asm_animcustom(&waterboard_anim);
   thread waterboard_rumble();
   thread waterboard_sfx();
@@ -1589,29 +1589,29 @@ function waterboard(var0, var1) {
     thread waterboard_check_barkov_resistance();
   }
 
-  foreach(var3 in var0) {
+  foreach(var_3 in var_0) {
     scripts\engine\utility::flag_clear("waterboard_allow_move");
-    level.currentpatternduration = var3[0];
-    level.movedurationmin = var3[1];
-    level.movedurationmax = var3[2];
-    level.passoutthreshold = var3[3];
+    level.currentpatternduration = var_3[0];
+    level.movedurationmin = var_3[1];
+    level.movedurationmax = var_3[2];
+    level.passoutthreshold = var_3[3];
 
     if(level.currentpatternduration == -1) {
       thread waterboard_tutorial();
     }
 
     scripts\engine\utility::flag_set("waterboard_allow_move");
-    var4 = 1;
-    var5 = gettime();
+    var_4 = 1;
+    var_5 = gettime();
 
-    while(var4 && !scripts\engine\utility::flag("passed_out")) {
-      if(level.currentpatternduration > 0 && (gettime() - var5) / 1000 >= level.currentpatternduration) {
+    while(var_4 && !scripts\engine\utility::flag("passed_out")) {
+      if(level.currentpatternduration > 0 && (gettime() - var_5) / 1000 >= level.currentpatternduration) {
         if(!scripts\engine\utility::flag("started_passout_countdown")) {
-          var4 = 0;
+          var_4 = 0;
         }
       } else if(level.currentpatternduration < 0 && scripts\engine\utility::flag("done_waterboard_tutorial")) {
         if(!scripts\engine\utility::flag("started_passout_countdown")) {
-          var4 = 0;
+          var_4 = 0;
         }
       }
 
@@ -1647,14 +1647,14 @@ function waterboard(var0, var1) {
   return 1;
 }
 
-function waterboard_tilt_forward(var0) {
+function waterboard_tilt_forward(var_0) {
   scripts\engine\utility::flag_clear("is_pouring");
   scripts\engine\utility::flag_wait("pouring_finished");
   level.player painvisionoff();
   level.player.breathoverlay fadeovertime(1);
   level.player.breathoverlay.alpha = 0;
 
-  if(var0) {
+  if(var_0) {
     scripts\sp\maps\captive\captive_vo::clear_effort_sound();
     level thread scripts\engine\sp\utility::smart_player_dialogue("dx_vom_far_break_waterboard_interrogate_216");
   }
@@ -1667,7 +1667,7 @@ function waterboard_tilt_forward(var0) {
   level.breakanimref notify("end_chair_idle");
   level.breakanimref notify("end_player_idle");
 
-  if(var0) {
+  if(var_0) {
     level.breakanimref scripts\common\anim::anim_single([level.henchman, level.player_rig, level.leftchains, level.rightchains], "break_wboard_chair_tilt_return");
   }
 
@@ -1675,7 +1675,7 @@ function waterboard_tilt_forward(var0) {
   level.breakanimref thread scripts\common\anim::anim_loop([level.leftchains, level.rightchains], "break_wboard_chair_idle", "end_chair_idle");
   level.breakanimref thread scripts\common\anim::anim_loop_solo(level.player_rig, "break_wboard_chair_idle", "end_player_idle");
 
-  if(!var0) {
+  if(!var_0) {
     wait 3;
   }
 
@@ -1683,9 +1683,9 @@ function waterboard_tilt_forward(var0) {
   level.spout delete();
 }
 
-function barkov_return_ready_next_anim(var0) {
+function barkov_return_ready_next_anim(var_0) {
   level.breakanimref scripts\common\anim::anim_single_solo(level.barkov, "break_wboard_chair_tilt_return");
-  level.breakanimref scripts\common\anim::anim_first_frame_solo(level.barkov, var0);
+  level.breakanimref scripts\common\anim::anim_first_frame_solo(level.barkov, var_0);
 }
 
 function waterboard_cloth_removed() {
@@ -1697,55 +1697,55 @@ function waterboard_anim() {
   thread waterboard_check_facing();
   self clearanim(scripts\asm\asm::asm_getbodyknob(), 0.2);
   self animmode("noclip");
-  var0 = getanimlength(%cap_cells_030_waterboard_pour_enemy02);
+  var_0 = getanimlength(%cap_cells_030_waterboard_pour_enemy02);
   self setanim(%cap_cells_030_waterboard_pour_enemy02, 1, 0.2, 0);
-  var1 = 0.5 * var0 / 1;
-  self setanimrate(%cap_cells_030_waterboard_pour_enemy02, var1);
-  wait 0.5 * var0 / var1;
+  var_1 = 0.5 * var_0 / 1;
+  self setanimrate(%cap_cells_030_waterboard_pour_enemy02, var_1);
+  wait 0.5 * var_0 / var_1;
   self setanimrate(%cap_cells_030_waterboard_pour_enemy02, 0);
   scripts\engine\utility::flag_set("jerrycan_reached_center");
   self setanim(%cap_cells_030_waterboard_pour_additive_enemy02);
   scripts\engine\utility::flag_set("is_pouring");
-  var2 = 0;
-  var3 = 0;
-  var4 = level.forcequickduration;
+  var_2 = 0;
+  var_3 = 0;
+  var_4 = level.forcequickduration;
 
   while(scripts\engine\utility::flag("is_pouring")) {
-    if(!var2 && !scripts\engine\utility::flag("is_waterboard_tutorial") && scripts\engine\utility::flag("waterboard_allow_move")) {
-      var5 = 0.2;
+    if(!var_2 && !scripts\engine\utility::flag("is_waterboard_tutorial") && scripts\engine\utility::flag("waterboard_allow_move")) {
+      var_5 = 0.2;
 
-      if(!var4) {
-        var5 = randomfloatrange(level.movedurationmin, level.movedurationmax);
+      if(!var_4) {
+        var_5 = randomfloatrange(level.movedurationmin, level.movedurationmax);
       }
 
-      var6 = abs(level.pourdistancediff);
+      var_6 = abs(level.pourdistancediff);
 
-      if(var6 > level.pourdangerrange - 0.1) {
-        var1 = var6 * var0 / var5;
+      if(var_6 > level.pourdangerrange - 0.1) {
+        var_1 = var_6 * var_0 / var_5;
 
         if(level.pourdistancediff >= 0) {
-          self setanimrate(%cap_cells_030_waterboard_pour_enemy02, var1);
+          self setanimrate(%cap_cells_030_waterboard_pour_enemy02, var_1);
         } else {
-          self setanimrate(%cap_cells_030_waterboard_pour_enemy02, var1 * -1);
+          self setanimrate(%cap_cells_030_waterboard_pour_enemy02, var_1 * -1);
         }
 
-        wait var6 * var0 / var1;
+        wait var_6 * var_0 / var_1;
         self setanimrate(%cap_cells_030_waterboard_pour_enemy02, 0);
 
         if(level.forcequickduration) {
           level.forcequickduration = 0;
         }
 
-        if(var3) {
-          var2 = 1;
+        if(var_3) {
+          var_2 = 1;
         }
       }
     }
 
-    if(var3) {
+    if(var_3) {
       if(level.movedurationmin > 0) {
-        var3 = 0;
-        var2 = 0;
+        var_3 = 0;
+        var_2 = 0;
       }
     }
 
@@ -1759,9 +1759,9 @@ function waterboard_anim() {
     waitframe();
   }
 
-  var7 = self getanimtime(%cap_cells_030_waterboard_pour_enemy02);
+  var_7 = self getanimtime(%cap_cells_030_waterboard_pour_enemy02);
 
-  if(var7 >= 0.5) {
+  if(var_7 >= 0.5) {
     self setanimrate(%cap_cells_030_waterboard_pour_enemy02, -5);
 
     while(self getanimtime(%cap_cells_030_waterboard_pour_enemy02) > 0.5) {
@@ -1797,33 +1797,33 @@ function waterboard_check_barkov_resistance() {
     scripts\engine\utility::flag_waitopen("started_passout_countdown");
     scripts\engine\utility::flag_waitopen("barkov_speaking");
     level thread scripts\sp\maps\captive\captive_vo::vo_break_wboard_hold_still();
-    var0 = 1;
-    var1 = level.player getnormalizedcameramovement()[0];
+    var_0 = 1;
+    var_1 = level.player getnormalizedcameramovement()[0];
     level.player enableslowaim(0.05, 0.05);
 
-    if(var1 == 0) {
-      while(var1 == 0) {
-        var1 = level.player getnormalizedcameramovement()[0];
+    if(var_1 == 0) {
+      while(var_1 == 0) {
+        var_1 = level.player getnormalizedcameramovement()[0];
         waitframe();
       }
     }
 
-    var2 = gettime();
+    var_2 = gettime();
     wait 0.2;
 
-    while(var0) {
+    while(var_0) {
       level.player enableslowaim(0.05, 0.05);
 
-      if((gettime() - var2) / 1000 >= 3) {
-        var0 = 0;
+      if((gettime() - var_2) / 1000 >= 3) {
+        var_0 = 0;
       }
 
-      if(var1 > 0) {
+      if(var_1 > 0) {
         if(level.player getnormalizedcameramovement()[0] < 0) {
-          var0 = 0;
+          var_0 = 0;
         }
       } else if(level.player getnormalizedcameramovement()[0] > 0) {
-        var0 = 0;
+        var_0 = 0;
       }
 
       waitframe();
@@ -1844,7 +1844,7 @@ function update_anim_phase_debug() {
   }
 }
 
-function waterboard_check_still_in_danger_zone(var0) {
+function waterboard_check_still_in_danger_zone(var_0) {
   level endon("waterboard_in_safe_zone");
   level endon("waterboard_complete");
   level endon("took_breath");
@@ -1855,7 +1855,7 @@ function waterboard_check_still_in_danger_zone(var0) {
   }
 
   if((gettime() - level.lastmoveheadcommenttime) / 1000 > 10) {
-    wait var0;
+    wait var_0;
     level.lastmoveheadcommenttime = gettime();
     level thread scripts\sp\maps\captive\captive_vo::vo_break_wboard_not_moving();
     level notify("start_move_head_comment");
@@ -1867,8 +1867,8 @@ function waterboard_check_facing() {
   level endon("pouring_finished");
 
   for(;;) {
-    var0 = vectordot(anglesToForward(level.player_rig.angles), scripts\engine\utility::flat_origin(anglesToForward(level.player getplayerangles())));
-    level.playerfacingpct = 1 - scripts\engine\math::normalize_value(level.maxangledot * -1, level.maxangledot, var0);
+    var_0 = vectordot(anglesToForward(level.player_rig.angles), scripts\engine\utility::flat_origin(anglesToForward(level.player getplayerangles())));
+    level.playerfacingpct = 1 - scripts\engine\math::normalize_value(level.maxangledot * -1, level.maxangledot, var_0);
     level.pourdistancediff = level.playerfacingpct - level.henchman getanimtime(%cap_cells_030_waterboard_pour_enemy02);
     waitframe();
   }
@@ -1924,7 +1924,7 @@ function waterboard_check_took_breath() {
 
 function waterboard_check_breath_fx() {
   self endon("waterboard_complete");
-  var0 = 0.05;
+  var_0 = 0.05;
   setsaveddvar("OONLORSMO", 2);
   setsaveddvar("MLLRKTPNRR", 0.1);
   visionsetpain("captive_near_death");
@@ -1938,7 +1938,7 @@ function waterboard_check_breath_fx() {
         level.breathlevel = 0;
         scripts\engine\utility::flag_clear("took_breath");
       } else if(level.breathlevel < level.passoutthreshold) {
-        level.breathlevel += var0;
+        level.breathlevel += var_0;
 
         if(level.breathlevel > level.passoutthreshold) {
           level.breathlevel = level.passoutthreshold;
@@ -1964,9 +1964,9 @@ function waterboard_check_near_passout_fx() {
     scripts\engine\utility::flag_wait("started_passout_countdown");
 
     while(scripts\engine\utility::flag("started_passout_countdown")) {
-      var0 = (gettime() - level.passouttime) / 1000 / 4;
+      var_0 = (gettime() - level.passouttime) / 1000 / 4;
       level.player.breathoverlay fadeovertime(0.05);
-      level.player.breathoverlay.alpha = var0;
+      level.player.breathoverlay.alpha = var_0;
       waitframe();
     }
 
@@ -2001,101 +2001,101 @@ function waterboard_has_moved_head() {
 
 function waterboard_pour_effects() {
   playFXOnTag(level._effect["vfx_waterboarding_pour"], level.spout, "tag_origin");
-  var0 = spawn("script_origin", level.spout.origin);
-  var0 linkTo(level.spout);
-  var0 scripts\engine\sp\utility::sound_fade_in("cap_cells_waterboard_loop_spout", 1, 1, 1);
+  var_0 = spawn("script_origin", level.spout.origin);
+  var_0 linkTo(level.spout);
+  var_0 scripts\engine\sp\utility::sound_fade_in("cap_cells_waterboard_loop_spout", 1, 1, 1);
   wait 1;
   scripts\engine\utility::flag_set("is_pouring");
   scripts\engine\utility::flag_wait("pouring_finished");
   level.spout thread scripts\engine\sp\utility::play_sound_on_entity("cap_cells_waterboard_end");
-  var0 scripts\engine\sp\utility::sound_fade_and_delete(2, 1);
+  var_0 scripts\engine\sp\utility::sound_fade_and_delete(2, 1);
   stopFXOnTag(level._effect["vfx_waterboarding_pour"], level.spout, "tag_origin");
 }
 
 function waterboard_rumble() {
-  var0 = 0;
-  var1 = scripts\engine\utility::spawn_script_origin(level.player.origin + (0, 0, -600), (0, 0, 0));
-  var2 = level.player.origin + (0, 0, -1e+06);
-  var3 = level.player.origin + (0, 0, -600);
-  var4 = level.player.origin + (0, 0, -400);
-  var5 = level.player.origin + (0, 0, -400);
+  var_0 = 0;
+  var_1 = scripts\engine\utility::spawn_script_origin(level.player.origin + (0, 0, -600), (0, 0, 0));
+  var_2 = level.player.origin + (0, 0, -1e+06);
+  var_3 = level.player.origin + (0, 0, -600);
+  var_4 = level.player.origin + (0, 0, -400);
+  var_5 = level.player.origin + (0, 0, -400);
   scripts\engine\utility::flag_wait("is_pouring");
   wait 0.3;
-  var1 playrumblelooponentity("tank_rumble");
+  var_1 playrumblelooponentity("tank_rumble");
 
   while(!scripts\engine\utility::flag("pouring_finished")) {
     if(abs(level.pourdistancediff) >= level.pourdangerrange) {
-      var1.origin = var2;
+      var_1.origin = var_2;
     } else if(level.pourdistancediff <= -0.35 || level.pourdistancediff >= 0.35) {
-      var1.origin = var3;
+      var_1.origin = var_3;
     } else if(level.pourdistancediff < -0.1 || level.pourdistancediff >= 0.1) {
-      var1.origin = var4;
+      var_1.origin = var_4;
     } else {
-      var1.origin = var5;
+      var_1.origin = var_5;
     }
 
     waitframe();
   }
 
-  var1 delete();
+  var_1 delete();
 }
 
 function waterboard_sfx() {
   scripts\engine\utility::flag_wait("is_pouring");
   wait 0.3;
-  var0 = 0;
-  var1 = spawn("script_origin", level.spout.origin);
-  var1 scripts\engine\sp\utility::sound_fade_in("cap_cells_waterboard_loop_quad_front", 1, 0.3, 1);
-  var2 = spawn("script_origin", level.spout.origin + (0, 37, 0));
-  var2 linkTo(level.spout);
-  var2 scripts\engine\sp\utility::sound_fade_in("cap_cells_waterboard_loop_floor_splashes", 1, 0.3, 1);
+  var_0 = 0;
+  var_1 = spawn("script_origin", level.spout.origin);
+  var_1 scripts\engine\sp\utility::sound_fade_in("cap_cells_waterboard_loop_quad_front", 1, 0.3, 1);
+  var_2 = spawn("script_origin", level.spout.origin + (0, 37, 0));
+  var_2 linkTo(level.spout);
+  var_2 scripts\engine\sp\utility::sound_fade_in("cap_cells_waterboard_loop_floor_splashes", 1, 0.3, 1);
 
   while(!scripts\engine\utility::flag("pouring_finished")) {
     if(abs(level.pourdistancediff) >= level.pourdangerrange) {
-      if(var0 == 1) {
-        var1 scalevolume(0, 1.3);
-        var2 scalevolume(1, 1.3);
-        var0 = 0;
+      if(var_0 == 1) {
+        var_1 scalevolume(0, 1.3);
+        var_2 scalevolume(1, 1.3);
+        var_0 = 0;
       }
     } else if(level.pourdistancediff <= -0.5 || level.pourdistancediff >= 0.5) {
-      if(var0 == 1) {
-        var1 scalevolume(0, 1.3);
-        var2 scalevolume(1, 1.3);
-        var0 = 0;
+      if(var_0 == 1) {
+        var_1 scalevolume(0, 1.3);
+        var_2 scalevolume(1, 1.3);
+        var_0 = 0;
       }
-    } else if(var0 == 0) {
-      var1 scalevolume(1, 1.3);
-      var2 scalevolume(0, 1.3);
-      var0 = 1;
+    } else if(var_0 == 0) {
+      var_1 scalevolume(1, 1.3);
+      var_2 scalevolume(0, 1.3);
+      var_0 = 1;
     }
 
     wait 0.1;
   }
 
-  var1 scripts\engine\sp\utility::sound_fade_and_delete(2, 1);
-  var2 scripts\engine\sp\utility::sound_fade_and_delete(2, 1);
+  var_1 scripts\engine\sp\utility::sound_fade_and_delete(2, 1);
+  var_2 scripts\engine\sp\utility::sound_fade_and_delete(2, 1);
 }
 
 function waterboard_splash_effects() {
-  var0 = scripts\engine\utility::spawn_tag_origin(level.player getEye(), level.player getplayerangles());
-  var1 = scripts\engine\utility::spawn_script_origin();
-  var1 linkTo(level.spout, "tag_origin", (-2, 0, 5), (0, 0, 0));
-  var2 = scripts\engine\utility::spawn_tag_origin();
-  var2 linkTo(var0, "tag_origin", (5, 0, 0), (0, 0, 0));
+  var_0 = scripts\engine\utility::spawn_tag_origin(level.player getEye(), level.player getplayerangles());
+  var_1 = scripts\engine\utility::spawn_script_origin();
+  var_1 linkTo(level.spout, "tag_origin", (-2, 0, 5), (0, 0, 0));
+  var_2 = scripts\engine\utility::spawn_tag_origin();
+  var_2 linkTo(var_0, "tag_origin", (5, 0, 0), (0, 0, 0));
   scripts\engine\utility::flag_wait("is_pouring");
   thread splash_loop();
 
   while(!scripts\engine\utility::flag("pouring_finished")) {
-    var0.angles = vectortoangles(var1.origin - var0.origin);
-    var2.angles = vectortoangles(var0.origin - var2.origin);
+    var_0.angles = vectortoangles(var_1.origin - var_0.origin);
+    var_2.angles = vectortoangles(var_0.origin - var_2.origin);
     waitframe();
   }
 
   wait 0.3;
   level notify("stop_splashes");
-  var0 delete();
-  var2 delete();
-  var1 delete();
+  var_0 delete();
+  var_2 delete();
+  var_1 delete();
 }
 
 function splash_loop() {
@@ -2232,53 +2232,53 @@ function waterboard_debug_display() {
 
   for(;;) {
     if(isDefined(level.currentpatternduration)) {
-      var0 = "Pattern Duration: " + level.currentpatternduration;
-      level.waterboarddebug1 settext(var0);
+      var_0 = "Pattern Duration: " + level.currentpatternduration;
+      level.waterboarddebug1 settext(var_0);
     }
 
     if(isDefined(level.movedurationmin)) {
-      var1 = "Min Move Duration: " + level.movedurationmin;
-      level.waterboarddebug2 settext(var1);
+      var_1 = "Min Move Duration: " + level.movedurationmin;
+      level.waterboarddebug2 settext(var_1);
     }
 
     if(isDefined(level.movedurationmin)) {
-      var2 = "Min Move Duration: " + level.movedurationmax;
-      level.waterboarddebug3 settext(var2);
+      var_2 = "Min Move Duration: " + level.movedurationmax;
+      level.waterboarddebug3 settext(var_2);
     }
 
     if(isDefined(level.movedurationmin)) {
-      var3 = "Passout Threshold: " + level.passoutthreshold;
-      level.waterboarddebug4 settext(var3);
+      var_3 = "Passout Threshold: " + level.passoutthreshold;
+      level.waterboarddebug4 settext(var_3);
     }
 
     if(isDefined(level.breathlevel)) {
-      var4 = "Breath Level: " + level.breathlevel;
-      level.waterboarddebug5 settext(var4);
+      var_4 = "Breath Level: " + level.breathlevel;
+      level.waterboarddebug5 settext(var_4);
     }
 
     if(isDefined(level.pouranimpct)) {
-      var5 = "Anim Phase: " + level.pouranimpct;
-      level.waterboarddebug6 settext(var5);
+      var_5 = "Anim Phase: " + level.pouranimpct;
+      level.waterboarddebug6 settext(var_5);
     }
 
     if(isDefined(level.playerfacingpct)) {
-      var6 = "Facing Pct: " + level.playerfacingpct;
-      level.waterboarddebug7 settext(var6);
+      var_6 = "Facing Pct: " + level.playerfacingpct;
+      level.waterboarddebug7 settext(var_6);
     }
 
     if(isDefined(level.pourdistancediff)) {
-      var7 = "Distance Diff: " + level.pourdistancediff;
-      level.waterboarddebug8 settext(var7);
+      var_7 = "Distance Diff: " + level.pourdistancediff;
+      level.waterboarddebug8 settext(var_7);
     }
 
     if(isDefined(level.currentleftangle)) {
-      var8 = "Left Angle: " + level.currentleftangle;
-      level.waterboarddebug9 settext(var8);
+      var_8 = "Left Angle: " + level.currentleftangle;
+      level.waterboarddebug9 settext(var_8);
     }
 
     if(isDefined(level.currentrightangle)) {
-      var9 = "Right Angle: " + level.currentrightangle;
-      level.waterboarddebug10 settext(var9);
+      var_9 = "Right Angle: " + level.currentrightangle;
+      level.waterboarddebug10 settext(var_9);
     }
 
     waitframe();
@@ -2313,8 +2313,8 @@ function break_final_main() {
   scripts\sp\maps\captive\captive_lighting::lights_on("main_cell");
   scripts\sp\maps\captive\captive_lighting::lights_on("break_final");
   visionsetnaked("captive_hero", 0);
-  var0 = getEnt("waterboard_floodlight", "targetname");
-  var0 setModel("dynlt_ind_flood_light_standing_tall_off");
+  var_0 = getEnt("waterboard_floodlight", "targetname");
+  var_0 setModel("dynlt_ind_flood_light_standing_tall_off");
   level.player.currentspeedscale = 0.5;
   level.player setmovespeedscale(level.player.currentspeedscale);
   scripts\sp\maps\captive\captive_util::cellblock_open_door(1);
@@ -2348,7 +2348,7 @@ function break_final_main() {
   thread check_do_food_nag();
   level.foodbowl thread scripts\sp\maps\captive\captive_util::check_item_interact();
   level thread scripts\sp\maps\captive\captive_util::captive_timeout(10);
-  var1 = level scripts\engine\utility::waittill_any_return("player_spat", "item_interact", "timeout");
+  var_1 = level scripts\engine\utility::waittill_any_return("player_spat", "item_interact", "timeout");
   scripts\engine\utility::flag_waitopen("barkov_playing_nag");
   level notify("end_nag_check");
   thread scripts\sp\maps\captive\captive_vo::mus_barkov_intel();
@@ -2357,7 +2357,7 @@ function break_final_main() {
   level notify("kill_checks");
   level.breakanimref notify("end_idle");
 
-  if(var1 == "item_interact") {
+  if(var_1 == "item_interact") {
     level.breakanimref thread scripts\common\anim::anim_single([level.leftchains, level.player_rig, level.player_rig_shadow], "break_final_food_throw");
   } else {
     level.breakanimref thread scripts\common\anim::anim_single([level.player_rig, level.player_rig_shadow], "break_final_food_throw_refuse");
@@ -2392,17 +2392,17 @@ function break_final_main() {
   level.breakanimref thread scripts\common\anim::anim_loop([level.leftchains, level.player_rig, level.player_rig_shadow], "break_final_grab_exit_idle", "end_bed_idle");
   visionsetnaked("", 5);
   level waittill("allow_shackle_exit");
-  var2 = 0;
+  var_2 = 0;
   thread scripts\sp\maps\captive\captive_vo::vo_walla_guards_alert();
-  var3 = ["dx_vom_far_cell_escape_spoon_60", "dx_vom_far_cell_escape_spoon_70", "dx_vom_far_cell_escape_spoon_80"];
-  var4 = scripts\engine\sp\utility::create_deck(var3);
-  level.player thread scripts\sp\maps\captive\captive_util::nagtill_delayed(12, "started_shackle_escape", var4, 15, 1.2, 30);
+  var_3 = ["dx_vom_far_cell_escape_spoon_60", "dx_vom_far_cell_escape_spoon_70", "dx_vom_far_cell_escape_spoon_80"];
+  var_4 = scripts\engine\sp\utility::create_deck(var_3);
+  level.player thread scripts\sp\maps\captive\captive_util::nagtill_delayed(12, "started_shackle_escape", var_4, 15, 1.2, 30);
 
-  while(!var2) {
+  while(!var_2) {
     if(level.player getnormalizedmovement()[0] > 0.5) {
-      var2 = 1;
+      var_2 = 1;
     } else if(level.player meleeButtonPressed()) {
-      var2 = 1;
+      var_2 = 1;
     }
 
     waitframe();
@@ -2414,7 +2414,7 @@ function break_final_main() {
   level.breakanimref scripts\common\anim::anim_single([level.leftchains, level.player_rig, level.player_rig_shadow], "break_final_unshackle_start");
   level.breakanimref thread scripts\common\anim::anim_loop([level.leftchains, level.player_rig, level.player_rig_shadow], "break_final_unshackle_idle", "break_final_unshackle_idle");
   level.player thread scripts\engine\sp\utility::smart_player_dialogue("dx_vom_far_cell_escape_spoon_02");
-  level.player thread scripts\sp\maps\captive\captive_util::nagtill_delayed(12, "item_interact", var4, 15, 1.2, 30);
+  level.player thread scripts\sp\maps\captive\captive_util::nagtill_delayed(12, "item_interact", var_4, 15, 1.2, 30);
   scripts\sp\maps\captive\captive_lighting::shackle_dof();
   level.player_rig scripts\sp\player\cursor_hint::create_cursor_hint("j_wrist_ri", (0, 0, 0), &"CAPTIVE/CURSOR_LOOSEN", 180, 128, 60, 1);
   level.player_rig thread scripts\sp\maps\captive\captive_util::check_item_interact();
@@ -2426,14 +2426,14 @@ function break_final_main() {
   level.breakanimref thread scripts\common\anim::anim_loop([level.leftchains, level.player_rig, level.player_rig_shadow], "break_final_unshackle_pull_idle", "end_bed_idle");
   level.player springcamdisabled(0.5);
   scripts\engine\utility::flag_set("escaped_shackles");
-  level.player thread scripts\sp\maps\captive\captive_util::nagtill_delayed(12, "get_up", var4, 15, 1.2, 30);
+  level.player thread scripts\sp\maps\captive\captive_util::nagtill_delayed(12, "get_up", var_4, 15, 1.2, 30);
   thread check_for_get_up();
   level waittill("get_up");
   level.breakanimref notify("end_bed_idle");
   level.breakanimref thread scripts\common\anim::anim_single_solo(level.leftchains, "break_final_unshackle_exit");
   play_bed_exit("break_final_unshackle_exit", &scripts\sp\maps\captive\captive_vo::vo_break_exit_bed);
-  var5 = scripts\engine\sp\utility::spawn_anim_model("shackles");
-  level.breakanimref thread scripts\common\anim::anim_last_frame_solo(var5, "shackles_on_bed");
+  var_5 = scripts\engine\sp\utility::spawn_anim_model("shackles");
+  level.breakanimref thread scripts\common\anim::anim_last_frame_solo(var_5, "shackles_on_bed");
   scripts\sp\maps\captive\captive_lighting::dof_off();
   level.player playersetgroundreferenceent(undefined);
   level.groundrefent delete();
@@ -2457,8 +2457,8 @@ function break_final_main_wegame() {
   scripts\sp\maps\captive\captive_lighting::lights_on("main_cell");
   scripts\sp\maps\captive\captive_lighting::lights_on("break_final");
   visionsetnaked("captive_hero", 0);
-  var0 = getEnt("waterboard_floodlight", "targetname");
-  var0 setModel("dynlt_ind_flood_light_standing_tall_off");
+  var_0 = getEnt("waterboard_floodlight", "targetname");
+  var_0 setModel("dynlt_ind_flood_light_standing_tall_off");
   level.player.currentspeedscale = 0.5;
   level.player setmovespeedscale(level.player.currentspeedscale);
   level.breakanimref notify("end_barkov_idle");
@@ -2485,16 +2485,16 @@ function break_final_main_wegame() {
   level.spoon setModel("weapon_vm_me_spoon");
   level.player enableweapons();
   visionsetnaked("", 5);
-  var1 = 0;
-  var2 = ["dx_vom_far_cell_escape_spoon_60", "dx_vom_far_cell_escape_spoon_70", "dx_vom_far_cell_escape_spoon_80"];
-  var3 = scripts\engine\sp\utility::create_deck(var2);
-  level.player thread scripts\sp\maps\captive\captive_util::nagtill_delayed(12, "started_shackle_escape", var3, 15, 1.2, 30);
+  var_1 = 0;
+  var_2 = ["dx_vom_far_cell_escape_spoon_60", "dx_vom_far_cell_escape_spoon_70", "dx_vom_far_cell_escape_spoon_80"];
+  var_3 = scripts\engine\sp\utility::create_deck(var_2);
+  level.player thread scripts\sp\maps\captive\captive_util::nagtill_delayed(12, "started_shackle_escape", var_3, 15, 1.2, 30);
 
-  while(!var1) {
+  while(!var_1) {
     if(level.player getnormalizedmovement()[0] > 0.5) {
-      var1 = 1;
+      var_1 = 1;
     } else if(level.player meleeButtonPressed()) {
-      var1 = 1;
+      var_1 = 1;
     }
 
     waitframe();
@@ -2506,7 +2506,7 @@ function break_final_main_wegame() {
   level.breakanimref scripts\common\anim::anim_single([level.leftchains, level.player_rig, level.player_rig_shadow], "break_final_unshackle_start");
   level.breakanimref thread scripts\common\anim::anim_loop([level.leftchains, level.player_rig, level.player_rig_shadow], "break_final_unshackle_idle", "break_final_unshackle_idle");
   level.player thread scripts\engine\sp\utility::smart_player_dialogue("dx_vom_far_cell_escape_spoon_02");
-  level.player thread scripts\sp\maps\captive\captive_util::nagtill_delayed(12, "item_interact", var3, 15, 1.2, 30);
+  level.player thread scripts\sp\maps\captive\captive_util::nagtill_delayed(12, "item_interact", var_3, 15, 1.2, 30);
   scripts\sp\maps\captive\captive_lighting::shackle_dof();
   level.player_rig scripts\sp\player\cursor_hint::create_cursor_hint("j_wrist_ri", (0, 0, 0), &"CAPTIVE/CURSOR_LOOSEN", 180, 128, 60, 1);
   level.player_rig thread scripts\sp\maps\captive\captive_util::check_item_interact();
@@ -2518,14 +2518,14 @@ function break_final_main_wegame() {
   level.breakanimref thread scripts\common\anim::anim_loop([level.player_rig, level.player_rig_shadow], "break_final_unshackle_pull_idle", "end_bed_idle");
   level.player springcamdisabled(0.5);
   scripts\engine\utility::flag_set("escaped_shackles");
-  level.player thread scripts\sp\maps\captive\captive_util::nagtill_delayed(12, "get_up", var3, 15, 1.2, 30);
+  level.player thread scripts\sp\maps\captive\captive_util::nagtill_delayed(12, "get_up", var_3, 15, 1.2, 30);
   thread check_for_get_up();
   level waittill("get_up");
   level.breakanimref notify("end_bed_idle");
   level.breakanimref thread scripts\common\anim::anim_single_solo(level.leftchains, "break_final_unshackle_exit");
   play_bed_exit("break_final_unshackle_exit", &scripts\sp\maps\captive\captive_vo::vo_break_exit_bed);
-  var4 = scripts\engine\sp\utility::spawn_anim_model("shackles");
-  level.breakanimref thread scripts\common\anim::anim_last_frame_solo(var4, "shackles_on_bed");
+  var_4 = scripts\engine\sp\utility::spawn_anim_model("shackles");
+  level.breakanimref thread scripts\common\anim::anim_last_frame_solo(var_4, "shackles_on_bed");
   scripts\sp\maps\captive\captive_lighting::dof_off();
   level.player playersetgroundreferenceent(undefined);
   level.groundrefent delete();
@@ -2539,8 +2539,8 @@ function break_final_catchup() {
     return;
   }
 
-  var0 = getEnt("waterboard_floodlight", "targetname");
-  var0 setModel("dynlt_ind_flood_light_standing_tall_off");
+  var_0 = getEnt("waterboard_floodlight", "targetname");
+  var_0 setModel("dynlt_ind_flood_light_standing_tall_off");
   scripts\engine\sp\objectives::objective_add("objective", "current", undefined, &"CAPTIVE/OBJ_SURVIVE", &"CAPTIVE/OBJ_SURVIVE");
   setaudiotriggerstate("cap_battle", "under_attack", 3);
 }
@@ -2619,10 +2619,10 @@ function wait_start_choking() {
   level.player painvisionoff();
 }
 
-function move_rumble_towards_player(var0) {
+function move_rumble_towards_player(var_0) {
   level endon("end_rumble");
   self endon("death");
-  self moveTo(level.player.origin, var0);
+  self moveTo(level.player.origin, var_0);
 }
 
 function wait_for_distant_explosion() {
@@ -2755,66 +2755,66 @@ function attach_shackles_to_rig() {
   }
 }
 
-function player_play_anime_into_idle(var0, var1) {
+function player_play_anime_into_idle(var_0, var_1) {
   level endon("cancel_player_actions");
   level.breakanimref notify("end_player_idle");
-  level.breakanimref scripts\common\anim::anim_single_solo(level.player_rig, var0);
-  level.breakanimref thread scripts\common\anim::anim_loop_solo(level.player_rig, var1, "end_player_idle");
+  level.breakanimref scripts\common\anim::anim_single_solo(level.player_rig, var_0);
+  level.breakanimref thread scripts\common\anim::anim_loop_solo(level.player_rig, var_1, "end_player_idle");
 }
 
-function barkov_play_anime_into_idle(var0, var1) {
+function barkov_play_anime_into_idle(var_0, var_1) {
   level endon("cancel_barkov_actions");
   scripts\engine\utility::flag_set("barkov_performing_action");
   level.breakanimref notify("end_barkov_idle");
-  level.barkov.lastidle = var1;
-  level.breakanimref scripts\common\anim::anim_single_solo(level.barkov, var0);
-  level.breakanimref thread scripts\common\anim::anim_loop_solo(level.barkov, var1, "end_barkov_idle");
+  level.barkov.lastidle = var_1;
+  level.breakanimref scripts\common\anim::anim_single_solo(level.barkov, var_0);
+  level.breakanimref thread scripts\common\anim::anim_loop_solo(level.barkov, var_1, "end_barkov_idle");
   scripts\engine\utility::flag_clear("barkov_performing_action");
   level notify("barkov_anime_ended");
 }
 
-function barkov_play_idle(var0) {
-  level.breakanimref thread scripts\common\anim::anim_loop_solo(level.barkov, var0, "end_barkov_idle");
+function barkov_play_idle(var_0) {
+  level.breakanimref thread scripts\common\anim::anim_loop_solo(level.barkov, var_0, "end_barkov_idle");
 }
 
-function barkov_play_chained_anime_into_idle(var0, var1, var2) {
+function barkov_play_chained_anime_into_idle(var_0, var_1, var_2) {
   level endon("cancel_barkov_actions");
   scripts\engine\utility::flag_set("barkov_performing_action");
   level.breakanimref notify("end_barkov_idle");
-  level.barkov.lastidle = var2;
-  level.breakanimref scripts\common\anim::anim_single_solo(level.barkov, var0);
-  level.breakanimref scripts\common\anim::anim_single_solo(level.barkov, var1);
-  level.breakanimref thread scripts\common\anim::anim_loop_solo(level.barkov, var2, "end_barkov_idle");
+  level.barkov.lastidle = var_2;
+  level.breakanimref scripts\common\anim::anim_single_solo(level.barkov, var_0);
+  level.breakanimref scripts\common\anim::anim_single_solo(level.barkov, var_1);
+  level.breakanimref thread scripts\common\anim::anim_loop_solo(level.barkov, var_2, "end_barkov_idle");
   scripts\engine\utility::flag_clear("barkov_performing_action");
   level notify("barkov_anime_ended");
 }
 
-function barkov_perform_shock(var0, var1, var2, var3) {
+function barkov_perform_shock(var_0, var_1, var_2, var_3) {
   level.breakanimref notify("end_barkov_idle");
   level notify("cancel_barkov_actions");
 
-  if(!isDefined(var0)) {
-    var0 = undefined;
+  if(!isDefined(var_0)) {
+    var_0 = undefined;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  if(!isDefined(var1)) {
-    var2 = 0;
+  if(!isDefined(var_1)) {
+    var_2 = 0;
   }
 
-  if(!isDefined(var3)) {
-    var3 = 0;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
-  thread wait_for_notetrack_shock(level.barkov, var0, var1, var2);
+  thread wait_for_notetrack_shock(level.barkov, var_0, var_1, var_2);
   scripts\engine\utility::flag_set("barkov_performing_action");
 
   if(!isDefined(level.barkovmodel)) {
-    var4 = "shock_stand_" + get_shock_anim(level.barkov);
-    level.barkov scripts\common\anim::anim_single_solo(level.barkov, var4);
+    var_4 = "shock_stand_" + get_shock_anim(level.barkov);
+    level.barkov scripts\common\anim::anim_single_solo(level.barkov, var_4);
   }
 
   level.breakanimref thread scripts\common\anim::anim_loop_solo(level.barkov, level.barkov.lastidle, "end_barkov_idle");
@@ -2823,102 +2823,102 @@ function barkov_perform_shock(var0, var1, var2, var3) {
 }
 
 function get_shock_anim() {
-  var0 = "";
+  var_0 = "";
 
   if(distance(level.player.origin, self.origin) > 70) {
-    var0 = "far";
+    var_0 = "far";
   } else {
-    var0 = "near";
+    var_0 = "near";
   }
 
-  var1 = vectorNormalize(level.player.origin - level.barkov.origin);
-  var2 = anglesToForward(level.barkov.angles);
-  var3 = anglestoleft(level.barkov.angles);
-  var4 = vectordot(var2, var1);
-  var5 = vectordot(var3, var1);
-  var6 = 0;
+  var_1 = vectorNormalize(level.player.origin - level.barkov.origin);
+  var_2 = anglesToForward(level.barkov.angles);
+  var_3 = anglestoleft(level.barkov.angles);
+  var_4 = vectordot(var_2, var_1);
+  var_5 = vectordot(var_3, var_1);
+  var_6 = 0;
 
-  if(var4 > 0.75) {
-    var0 += "_front";
-  } else if(var4 < 0.25) {
-    var0 += "_rear";
-    var6 = 1;
+  if(var_4 > 0.75) {
+    var_0 += "_front";
+  } else if(var_4 < 0.25) {
+    var_0 += "_rear";
+    var_6 = 1;
   }
 
-  if(var5 > 0.25 || var6 && var5 >= 0) {
-    var0 += "_left";
-  } else if(var5 < -0.25 || var6 && var5 < 0) {
-    var0 += "_right";
+  if(var_5 > 0.25 || var_6 && var_5 >= 0) {
+    var_0 += "_left";
+  } else if(var_5 < -0.25 || var_6 && var_5 < 0) {
+    var_0 += "_right";
   }
 
-  return var0;
+  return var_0;
 }
 
-function barkov_perform_partial_shock(var0, var1, var2, var3, var4) {
-  if(!isDefined(var0)) {
-    var0 = 1;
+function barkov_perform_partial_shock(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_0)) {
+    var_0 = 1;
   }
 
-  if(!isDefined(var1)) {
-    var1 = undefined;
+  if(!isDefined(var_1)) {
+    var_1 = undefined;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  if(!isDefined(var2)) {
-    var3 = 0;
+  if(!isDefined(var_2)) {
+    var_3 = 0;
   }
 
-  if(!isDefined(var4)) {
-    var4 = 0;
+  if(!isDefined(var_4)) {
+    var_4 = 0;
   }
 
-  if(var4) {
+  if(var_4) {
     level.barkov enablescriptedlookat(0);
   }
 
-  var5 = vectorNormalize(level.player.origin - level.barkov.origin);
-  var6 = anglesToForward(level.barkov.angles);
-  var7 = anglestoleft(level.barkov.angles);
-  var8 = vectordot(var6, var5);
-  var9 = vectordot(var7, var5);
-  var10 = "front";
+  var_5 = vectorNormalize(level.player.origin - level.barkov.origin);
+  var_6 = anglesToForward(level.barkov.angles);
+  var_7 = anglestoleft(level.barkov.angles);
+  var_8 = vectordot(var_6, var_5);
+  var_9 = vectordot(var_7, var_5);
+  var_10 = "front";
 
-  if(var8 < 0.75) {
-    if(var9 >= 0) {
-      var10 = "left";
+  if(var_8 < 0.75) {
+    if(var_9 >= 0) {
+      var_10 = "left";
     } else {
-      var10 = "right";
+      var_10 = "right";
     }
   }
 
   playFXOnTag(level._effect["vfx_captive_cattleprod_sparks_01"], level.barkov, "tag_accessory_right");
-  var11 = undefined;
+  var_11 = undefined;
 
-  switch (var10) {
+  switch (var_10) {
     case "front":
-      var11 = % cap_cells_020_shock_partial_center_barkov;
+      var_11 = % cap_cells_020_shock_partial_center_barkov;
       break;
     case "left":
-      var11 = % cap_cells_020_shock_partial_left_barkov;
+      var_11 = % cap_cells_020_shock_partial_left_barkov;
       break;
     case "right":
-      var11 = % cap_cells_020_shock_partial_right_barkov;
+      var_11 = % cap_cells_020_shock_partial_right_barkov;
       break;
   }
 
   level.barkov scripts\engine\utility::delaythread(0.25, &scripts\engine\utility::playsoundontag, "cap_cells_020_shocker", "tag_accessory_right");
-  level.barkov setanim(var11);
+  level.barkov setanim(var_11);
   wait 0.25;
-  thread shock_player(level, var1, var2);
+  thread shock_player(level, var_1, var_2);
   wait 0.75;
   stopFXOnTag(level._effect["vfx_captive_cattleprod_sparks_01"], level.barkov, "tag_accessory_right");
   wait 1.5;
-  level.barkov clearanim(var11, 0.2);
+  level.barkov clearanim(var_11, 0.2);
 
-  if(var4) {
+  if(var_4) {
     wait 0.2;
     level.barkov setuplookatfornotetrack();
     level.barkov enablescriptedlookat(1);
@@ -2926,29 +2926,29 @@ function barkov_perform_partial_shock(var0, var1, var2, var3, var4) {
   }
 }
 
-function wait_for_notetrack_shock(var0, var1, var2, var3) {
+function wait_for_notetrack_shock(var_0, var_1, var_2, var_3) {
   level endon("shock_complete");
 
-  if(!isDefined(var3)) {
-    var3 = 0;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
   level waittill("shock");
   self.lastshocktime = gettime();
-  thread shock_player(level, var0, var1, var2);
+  thread shock_player(level, var_0, var_1, var_2);
 }
 
-function shock_player(var0, var1, var2, var3) {
-  if(!isDefined(var0)) {
-    var0 = undefined;
+function shock_player(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_0)) {
+    var_0 = undefined;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 0;
+  if(!isDefined(var_1)) {
+    var_1 = 0;
   }
 
-  if(!isDefined(var3)) {
-    var3 = 0;
+  if(!isDefined(var_3)) {
+    var_3 = 0;
   }
 
   level.player scripts\sp\utility::do_damage(25, level.barkov.origin, level.barkov, undefined, "MOD_MELEE");
@@ -2957,21 +2957,21 @@ function shock_player(var0, var1, var2, var3) {
   earthquake(1, 0.3, level.barkov.origin, 50);
   level.player playRumbleOnEntity("light_1s");
 
-  if(isDefined(var0)) {
-    if(level.player scripts\engine\math::is_point_in_front(var0.origin)) {
-      var4 = vectortoangles(var0.origin - level.player.origin);
-      shove(level.barkov.origin, var0.origin, var4, 0.3);
+  if(isDefined(var_0)) {
+    if(level.player scripts\engine\math::is_point_in_front(var_0.origin)) {
+      var_4 = vectortoangles(var_0.origin - level.player.origin);
+      shove(level.barkov.origin, var_0.origin, var_4, 0.3);
     } else {
-      shove(level.barkov.origin, var0.origin, level.player.angles, 0.3);
+      shove(level.barkov.origin, var_0.origin, level.player.angles, 0.3);
     }
   } else {
-    var5 = vectorNormalize(level.player.origin - level.barkov.origin) * 400;
-    level.player setvelocity(var5);
+    var_5 = vectorNormalize(level.player.origin - level.barkov.origin) * 400;
+    level.player setvelocity(var_5);
   }
 
-  if(var3) {
+  if(var_3) {
     level.player kill();
-  } else if(var1) {
+  } else if(var_1) {
     if(!level.player.isinshockhold) {
       level.player.isinshockhold = 1;
       clear_shackled_squat_override();
@@ -2980,7 +2980,7 @@ function shock_player(var0, var1, var2, var3) {
       level.player.currentspeedscale = 0;
       level.player.currentpronespeedscale = 0;
       level.player setmovespeedscale(level.player.currentspeedscale);
-      wait var2;
+      wait var_2;
       level.player.currentspeedscale = 0.5;
       level.player.currentpronespeedscale = 1.25;
       level.player scripts\common\utility::allow_stand(1, "shock");
@@ -3018,12 +3018,12 @@ function wake_up() {
   wait 1;
 }
 
-function quick_wake_up(var0) {
-  if(!isDefined(var0)) {
-    var0 = 0;
+function quick_wake_up(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  if(var0) {
+  if(var_0) {
     wait 1;
   }
 
@@ -3038,22 +3038,22 @@ function quick_wake_up(var0) {
   wait 0.5;
 }
 
-function play_bed_exit(var0, var1) {
-  level thread[[var1]]();
+function play_bed_exit(var_0, var_1) {
+  level thread[[var_1]]();
 
-  if(!isDefined(var0)) {
-    var0 = "exit_bed";
+  if(!isDefined(var_0)) {
+    var_0 = "exit_bed";
   }
 
-  level.breakanimref scripts\common\anim::anim_single([level.player_rig, level.player_rig_shadow], var0);
+  level.breakanimref scripts\common\anim::anim_single([level.player_rig, level.player_rig_shadow], var_0);
   level.player_rig_shadow delete();
   scripts\sp\player_rig::unlink_player_from_rig();
 }
 
-function question_answer_check(var0, var1, var2) {
+function question_answer_check(var_0, var_1, var_2) {
   setomnvar("ui_dialogue_prompts_choice", 0);
 
-  switch (var0) {
+  switch (var_0) {
     case 1:
       setomnvar("ui_dialogue_prompts_option_a", "captive/question_1_lie");
       setomnvar("ui_dialogue_prompts_option_b", "captive/question_1_resist");
@@ -3097,8 +3097,8 @@ function question_answer_check(var0, var1, var2) {
   level.responsetimedout = 0;
   thread response_timeout(level);
 
-  if(isDefined(var1)) {
-    thread wait_for_question_nag(level, var1);
+  if(isDefined(var_1)) {
+    thread wait_for_question_nag(level, var_1);
   }
 
   while(level.waitingforresponse) {
@@ -3108,28 +3108,28 @@ function question_answer_check(var0, var1, var2) {
       scripts\engine\utility::flag_waitopen("doing_question_nag");
       return "timeout";
     } else if(level.player attackButtonPressed() || level.player secondaryoffhandbuttonPressed() || level.player meleeButtonPressed()) {
-      var3 = 1;
+      var_3 = 1;
       level notify("question_answered");
       setomnvar("ui_dialogue_prompts_choice", 0);
       scripts\engine\utility::flag_waitopen("doing_question_nag");
-      var4 = "dx_vom_far_break_waterboard_interrogate_130";
+      var_4 = "dx_vom_far_break_waterboard_interrogate_130";
 
-      switch (var0) {
+      switch (var_0) {
         case 2:
-          var4 = "dx_vom_far_break_waterboard_interrogate_134";
+          var_4 = "dx_vom_far_break_waterboard_interrogate_134";
 
           if(level.breakanswer1 == "attack") {
-            var4 = "dx_vom_far_break_waterboard_interrogate_136";
+            var_4 = "dx_vom_far_break_waterboard_interrogate_136";
           }
 
           break;
         case 4:
-          var4 = "dx_vom_far_break_final_kiss_95";
-          var3 = 0;
+          var_4 = "dx_vom_far_break_final_kiss_95";
+          var_3 = 0;
           break;
       }
 
-      thread play_spit(level, var4);
+      thread play_spit(level, var_4);
       scripts\sp\utility::giveachievement_wrapper("barkovspit");
       return "attack";
     } else if(level.player buttonPressed("BUTTON_X") || level.player buttonPressed("1")) {
@@ -3158,12 +3158,12 @@ function question_answer_check(var0, var1, var2) {
   }
 }
 
-function question_barkov_response(var0, var1) {
+function question_barkov_response(var_0, var_1) {
   setomnvar("ui_dialogue_prompts_active", 0);
 
-  switch (var0) {
+  switch (var_0) {
     case "timeout":
-      switch (var1) {
+      switch (var_1) {
         case 1:
           thread player_play_response(level);
           barkov_play_response("break_wboard_question_response_timeout");
@@ -3180,7 +3180,7 @@ function question_barkov_response(var0, var1) {
 
       break;
     case "attack":
-      switch (var1) {
+      switch (var_1) {
         case 1:
           thread player_play_response(level);
           barkov_play_response("break_wboard_question_response_spit");
@@ -3197,7 +3197,7 @@ function question_barkov_response(var0, var1) {
 
       break;
     case "lie":
-      switch (var1) {
+      switch (var_1) {
         case 1:
           level.player thread scripts\engine\sp\utility::play_sound_on_entity("dx_vom_far_break_waterboard_interrogate_100");
           wait 0.5;
@@ -3223,7 +3223,7 @@ function question_barkov_response(var0, var1) {
 
       break;
     case "resist":
-      switch (var1) {
+      switch (var_1) {
         case 1:
           level.player thread scripts\engine\sp\utility::play_sound_on_entity("dx_vom_far_break_waterboard_interrogate_70");
           wait 0.5;
@@ -3244,7 +3244,7 @@ function question_barkov_response(var0, var1) {
 
       break;
     case "truth":
-      switch (var1) {
+      switch (var_1) {
         case 1:
           level.player thread scripts\engine\sp\utility::play_sound_on_entity("dx_vom_far_break_waterboard_interrogate_50");
           wait 0.25;
@@ -3292,54 +3292,54 @@ function question_barkov_response(var0, var1) {
   }
 }
 
-function player_play_response(var0) {
+function player_play_response(var_0) {
   level.breakanimref notify("end_player_idle");
-  level.breakanimref scripts\common\anim::anim_single_solo(level.player_rig, var0);
+  level.breakanimref scripts\common\anim::anim_single_solo(level.player_rig, var_0);
 }
 
-function barkov_play_response(var0) {
+function barkov_play_response(var_0) {
   level.breakanimref notify("end_barkov_idle");
-  level.breakanimref scripts\common\anim::anim_single_solo(level.barkov, var0);
+  level.breakanimref scripts\common\anim::anim_single_solo(level.barkov, var_0);
 }
 
-function response_timeout(var0) {
+function response_timeout(var_0) {
   self endon("death");
   self endon("kill_checks");
 
-  if(var0 > 0) {
-    wait var0;
+  if(var_0 > 0) {
+    wait var_0;
   }
 
   level.responsetimedout = 1;
 }
 
-function wait_for_question_nag(var0, var1) {
+function wait_for_question_nag(var_0, var_1) {
   level endon("question_answered");
   wait 5;
-  thread play_question_nag(level, var0);
+  thread play_question_nag(level, var_0);
 }
 
-function play_question_nag(var0, var1) {
+function play_question_nag(var_0, var_1) {
   scripts\engine\utility::flag_set("has_done_question_nag");
   scripts\engine\utility::flag_set("doing_question_nag");
-  barkov_play_anime_into_idle(var0, var1);
+  barkov_play_anime_into_idle(var_0, var_1);
   scripts\engine\utility::flag_clear("doing_question_nag");
 }
 
-function sleep(var0, var1) {
-  if(!isDefined(var0)) {
-    var0 = 3;
+function sleep(var_0, var_1) {
+  if(!isDefined(var_0)) {
+    var_0 = 3;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 1;
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
-  level.eyeshutoverlay fadeovertime(var0);
+  level.eyeshutoverlay fadeovertime(var_0);
   level.eyeshutoverlay.alpha = 1;
-  wait var0;
+  wait var_0;
 
-  if(var1) {
+  if(var_1) {
     level notify("end_idle");
     scripts\sp\player_rig::unlink_player_from_rig();
     return;
@@ -3349,13 +3349,13 @@ function sleep(var0, var1) {
 function check_for_get_up() {
   level endon("kill_get_up_checks");
   level endon("barkov_left");
-  var0 = 1;
+  var_0 = 1;
 
-  while(var0) {
+  while(var_0) {
     if(level.player getnormalizedmovement()[0] > 0.5) {
-      var0 = 0;
+      var_0 = 0;
     } else if(level.player crouchbuttonPressed() || level.player jumpbuttonPressed()) {
-      var0 = 0;
+      var_0 = 0;
     }
 
     waitframe();
@@ -3364,28 +3364,28 @@ function check_for_get_up() {
   level notify("get_up");
 }
 
-function check_player_too_close(var0) {
+function check_player_too_close(var_0) {
   level endon("kill_checks");
   level endon("barkov_left");
-  var1 = 3000;
+  var_1 = 3000;
 
-  if(!isDefined(var0)) {
-    var0 = 0;
-  } else if(var0) {
-    var1 = 2000;
+  if(!isDefined(var_0)) {
+    var_0 = 0;
+  } else if(var_0) {
+    var_1 = 2000;
   }
 
   waitframe();
 
   for(;;) {
-    if(distance2dsquared(level.barkov.origin, level.player.origin) < var1) {
+    if(distance2dsquared(level.barkov.origin, level.player.origin) < var_1) {
       if(level.player getstance() == "stand") {
-        var2 = vectorNormalize(level.player getvelocity());
+        var_2 = vectorNormalize(level.player getvelocity());
 
-        if(length(var2) > 0) {
-          var3 = vectordot(var2, vectorNormalize(level.barkov.origin - level.player.origin));
+        if(length(var_2) > 0) {
+          var_3 = vectordot(var_2, vectorNormalize(level.barkov.origin - level.player.origin));
 
-          if(var3 > 0.85) {
+          if(var_3 > 0.85) {
             level notify("got_too_close");
           }
         }
@@ -3396,20 +3396,20 @@ function check_player_too_close(var0) {
   }
 }
 
-function shove(var0, var1, var2, var3) {
-  if(!isDefined(var3)) {
-    var3 = 0.4;
+function shove(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_3)) {
+    var_3 = 0.4;
   }
 
   level.playermover.origin = level.player.origin;
   level.playermover.angles = level.player.angles;
-  earthquake(1, 0.3, var0, 50);
-  level.player viewkick(8, var0, 0);
+  earthquake(1, 0.3, var_0, 50);
+  level.player viewkick(8, var_0, 0);
   level.player playRumbleOnEntity("heavy_1s");
-  level.player playerlinktodelta(level.playermover, undefined, var3, 50, 70, 50, 50);
+  level.player playerlinktodelta(level.playermover, undefined, var_3, 50, 70, 50, 50);
   thread shove_gesture();
   level.player thread scripts\sp\maps\captive\captive_vo::vo_break_shoved();
-  scripts\sp\maps\captive\captive_util::link_player_and_move(0.5, var1, var2, 0.1, 0.3);
+  scripts\sp\maps\captive\captive_util::link_player_and_move(0.5, var_1, var_2, 0.1, 0.3);
   level.player unlink();
 }
 
@@ -3422,10 +3422,10 @@ function shove_gesture() {
   }
 }
 
-function notetrack_listener_cattleprod_shock_player(var0) {
+function notetrack_listener_cattleprod_shock_player(var_0) {
   self endon("kill_listeners");
   level waittill("cattleprod_shock_player");
-  shock_player(var0);
+  shock_player(var_0);
 }
 
 function notetrack_listener_cattleprod_shock_player_at_gate() {
@@ -3439,34 +3439,34 @@ function notetrack_listener_unshackle() {
   level waittill("start_unshackle");
 }
 
-function notetrack_listener_enable_spring_cam(var0) {
+function notetrack_listener_enable_spring_cam(var_0) {
   level waittill("enable_spring_cam");
 
-  if(!isDefined(var0)) {
-    var0 = 1;
+  if(!isDefined(var_0)) {
+    var_0 = 1;
   }
 
-  level.player springcamenabled(var0, 5, 0.2);
+  level.player springcamenabled(var_0, 5, 0.2);
 }
 
-function notetrack_listener_disable_spring_cam(var0) {
+function notetrack_listener_disable_spring_cam(var_0) {
   level waittill("disable_spring_cam");
 
-  if(!isDefined(var0)) {
-    var0 = 0.5;
+  if(!isDefined(var_0)) {
+    var_0 = 0.5;
   }
 
-  level.player springcamdisabled(var0);
+  level.player springcamdisabled(var_0);
 }
 
-function play_spit(var0, var1) {
+function play_spit(var_0, var_1) {
   level.player lerpviewangleclamp(0.5, 0.1, 0.1, 0, 0, 0, 0);
   wait 0.1;
   level.player forceplaygestureviewmodel("cap_vm_gesture_spit");
-  level thread scripts\sp\maps\captive\captive_vo::vo_break_spit(var0);
+  level thread scripts\sp\maps\captive\captive_vo::vo_break_spit(var_0);
   wait 0.3;
 
-  if(var1) {
+  if(var_1) {
     playFX(level._effect["vfx_cpt_spit_blood"], level.player getEye() + anglesToForward(level.player getplayerangles()) * 2, anglesToForward(level.player getplayerangles()));
   } else {
     playFX(level._effect["vfx_cpt_spit_blood"], level.player getEye() + anglesToForward(level.player_rig gettagangles("tag_camera")) * 2, anglesToForward(level.player_rig gettagangles("tag_camera")));
@@ -3490,10 +3490,10 @@ function player_limp() {
   level.player.limpuppct = 0.6;
   level.player.limpent = scripts\engine\utility::spawn_tag_origin(self.origin, (0, 0, 0));
   self playersetgroundreferenceent(level.player.limpent);
-  var0 = 0;
-  var1 = getdvarfloat("NSRPQNLSNK") * getdvarfloat("OLMLOTTLRM");
-  var2 = (level.player.limpmaxroll, 0, level.player.limpmaxpitch);
-  var3 = sqrt(2);
+  var_0 = 0;
+  var_1 = getdvarfloat("NSRPQNLSNK") * getdvarfloat("OLMLOTTLRM");
+  var_2 = (level.player.limpmaxroll, 0, level.player.limpmaxpitch);
+  var_3 = sqrt(2);
 
   for(;;) {
     waitframe();
@@ -3514,36 +3514,36 @@ function player_limp() {
       continue;
     }
 
-    if(scripts\engine\utility::time_has_passed(var0, level.player.limpsteptime) && abs(level.player getnormalizedmovement()[0] > 0.2) && length(level.player getvelocity()) > 10) {
+    if(scripts\engine\utility::time_has_passed(var_0, level.player.limpsteptime) && abs(level.player getnormalizedmovement()[0] > 0.2) && length(level.player getvelocity()) > 10) {
       jumpiffalse(self issprinting()) LOC_00000143;
-      var4 = 1;
+      var_4 = 1;
       goto LOC_0000015e;
     }
   }
 }
 
-function player_limp_step(var0, var1) {
-  var2 = adjust_angles_to_player(var1);
-  var3 = level.player.limpsteptime * level.player.limpdownpct;
-  var4 = min(0.2, var3 / 2);
-  var0 rotateTo(var2, var3, var4, var4);
-  wait var3;
-  var2 = adjust_angles_to_player((0, 0, 0));
-  var5 = level.player.limpsteptime * level.player.limpuppct;
-  var6 = min(0.2, var5 / 2);
-  var0 rotateTo(var2, var5, var6, var6);
+function player_limp_step(var_0, var_1) {
+  var_2 = adjust_angles_to_player(var_1);
+  var_3 = level.player.limpsteptime * level.player.limpdownpct;
+  var_4 = min(0.2, var_3 / 2);
+  var_0 rotateTo(var_2, var_3, var_4, var_4);
+  wait var_3;
+  var_2 = adjust_angles_to_player((0, 0, 0));
+  var_5 = level.player.limpsteptime * level.player.limpuppct;
+  var_6 = min(0.2, var_5 / 2);
+  var_0 rotateTo(var_2, var_5, var_6, var_6);
 }
 
-function adjust_angles_to_player(var0) {
-  var1 = var0[0];
-  var2 = var0[2];
-  var3 = anglestoright(self.angles);
-  var4 = anglesToForward(self.angles);
-  var5 = (var3[0], 0, var3[1] * -1);
-  var6 = (var4[0], 0, var4[1] * -1);
-  var7 = var5 * var1;
-  var7 += var6 * var2;
-  return var7 + (0, var0[1], 0);
+function adjust_angles_to_player(var_0) {
+  var_1 = var_0[0];
+  var_2 = var_0[2];
+  var_3 = anglestoright(self.angles);
+  var_4 = anglesToForward(self.angles);
+  var_5 = (var_3[0], 0, var_3[1] * -1);
+  var_6 = (var_4[0], 0, var_4[1] * -1);
+  var_7 = var_5 * var_1;
+  var_7 += var_6 * var_2;
+  return var_7 + (0, var_0[1], 0);
 }
 
 function do_cough() {
@@ -3556,31 +3556,31 @@ function do_cough() {
 }
 
 function check_gesture_not_obstructed() {
-  var0 = getEnt("bar_clip_check", "targetname");
+  var_0 = getEnt("bar_clip_check", "targetname");
 
-  if(ispointinvolume(level.player.origin, var0)) {
-    if(level.player scripts\engine\math::is_point_in_front(scripts\engine\utility::getStruct(var0.target, "targetname").origin)) {
+  if(ispointinvolume(level.player.origin, var_0)) {
+    if(level.player scripts\engine\math::is_point_in_front(scripts\engine\utility::getStruct(var_0.target, "targetname").origin)) {
       return false;
     }
   }
 
-  var1 = anglesToForward(level.player.angles) * (20 + length(level.player getvelocity()));
+  var_1 = anglesToForward(level.player.angles) * (20 + length(level.player getvelocity()));
 
   if(level.player getnormalizedcameramovement()[1] > 0.2) {
-    var2 = anglestoright(level.player.angles) * (20 + length(level.player getvelocity()));
+    var_2 = anglestoright(level.player.angles) * (20 + length(level.player getvelocity()));
 
-    if(!scripts\engine\trace::ray_trace_passed(level.player.origin + (0, 0, 32), level.player.origin + (0, 0, 32) + var2, level.player)) {
+    if(!scripts\engine\trace::ray_trace_passed(level.player.origin + (0, 0, 32), level.player.origin + (0, 0, 32) + var_2, level.player)) {
       return false;
     }
   } else if(level.player getnormalizedcameramovement()[1] < -0.2) {
-    var3 = anglestoleft(level.player.angles) * (20 + length(level.player getvelocity()));
+    var_3 = anglestoleft(level.player.angles) * (20 + length(level.player getvelocity()));
 
-    if(!scripts\engine\trace::ray_trace_passed(level.player.origin + (0, 0, 32), level.player.origin + (0, 0, 32) + var3, level.player)) {
+    if(!scripts\engine\trace::ray_trace_passed(level.player.origin + (0, 0, 32), level.player.origin + (0, 0, 32) + var_3, level.player)) {
       return false;
     }
   }
 
-  if(!scripts\engine\trace::ray_trace_passed(level.player.origin + (0, 0, 32), level.player.origin + (0, 0, 32) + var1, level.player)) {
+  if(!scripts\engine\trace::ray_trace_passed(level.player.origin + (0, 0, 32), level.player.origin + (0, 0, 32) + var_1, level.player)) {
     return false;
   }
 
@@ -3600,8 +3600,8 @@ function shackled_squat_override() {
   level.player scripts\common\utility::allow_crouch(0, "squat");
   level.player scripts\common\utility::allow_prone(0, "squat");
 
-  for(var0 = "crouch";; var0 = "crouch") {
-    if(var0 == "stand") {
+  for(var_0 = "crouch";; var_0 = "crouch") {
+    if(var_0 == "stand") {
       level.player scripts\engine\utility::waittill_any("stance_pressed", "jump_pressed");
     } else {
       level.player scripts\engine\utility::waittill_any("stance_pressed", "stance_down_pressed");
@@ -3610,7 +3610,7 @@ function shackled_squat_override() {
     if(!scripts\engine\utility::flag("paused_squat_override")) {
       level.lastsquattime = gettime();
 
-      if(var0 == "crouch") {
+      if(var_0 == "crouch") {
         level.player scripts\common\utility::allow_crouch(1, "squat");
         level.player scripts\common\utility::allow_stand(0, "squat");
 
@@ -3619,7 +3619,7 @@ function shackled_squat_override() {
         }
 
         scripts\engine\utility::flag_set("squatting");
-        var0 = "stand";
+        var_0 = "stand";
         continue;
       }
 
@@ -3646,87 +3646,87 @@ function clear_shackled_squat_override() {
 }
 
 function thirsty_tired_effects() {
-  var0 = 0.07;
-  var1 = 0.05;
-  var2 = 5;
-  var3 = 0;
-  var4 = var2;
+  var_0 = 0.07;
+  var_1 = 0.05;
+  var_2 = 5;
+  var_3 = 0;
+  var_4 = var_2;
   level.player.tirednessfactor = 0;
-  setsaveddvar("MLTTMLTKOR", var0);
-  setsaveddvar("LSOPQMRPNR", var1);
+  setsaveddvar("MLTTMLTKOR", var_0);
+  setsaveddvar("LSOPQMRPNR", var_1);
 
   while(!scripts\engine\utility::flag("thirsty_awake")) {
-    setblur(var4, 0.05);
+    setblur(var_4, 0.05);
     waitframe();
   }
 
-  var5 = gettime();
-  var6 = 2;
-  var7 = 1;
-  var8 = 0;
-  var9 = 0;
-  var4 = 0;
-  var10 = 0;
+  var_5 = gettime();
+  var_6 = 2;
+  var_7 = 1;
+  var_8 = 0;
+  var_9 = 0;
+  var_4 = 0;
+  var_10 = 0;
 
-  while(var7 > 0) {
-    var7 = 1 - scripts\engine\math::normalize_value(var5, var5 + var6 * 1000, gettime());
-    var10 = var7;
-    var8 = scripts\engine\math::factor_value(0, var0, var7);
-    var9 = scripts\engine\math::factor_value(0, var1, var7);
-    var4 = scripts\engine\math::factor_value(0, var2, var7);
-    setsaveddvar("MLTTMLTKOR", var8);
-    setsaveddvar("LSOPQMRPNR", var9);
-    setblur(var4, 0.05);
+  while(var_7 > 0) {
+    var_7 = 1 - scripts\engine\math::normalize_value(var_5, var_5 + var_6 * 1000, gettime());
+    var_10 = var_7;
+    var_8 = scripts\engine\math::factor_value(0, var_0, var_7);
+    var_9 = scripts\engine\math::factor_value(0, var_1, var_7);
+    var_4 = scripts\engine\math::factor_value(0, var_2, var_7);
+    setsaveddvar("MLTTMLTKOR", var_8);
+    setsaveddvar("LSOPQMRPNR", var_9);
+    setblur(var_4, 0.05);
     waitframe();
   }
 
-  var0 = 0.01;
-  var1 = 0.01;
-  var2 = 0.1;
-  var11 = 0;
-  var12 = 5;
-  var13 = var3;
+  var_0 = 0.01;
+  var_1 = 0.01;
+  var_2 = 0.1;
+  var_11 = 0;
+  var_12 = 5;
+  var_13 = var_3;
 
   while(!scripts\engine\utility::flag("clear_blur_fx")) {
-    var3 = sin(var11);
-    var11 = scripts\engine\math::wrap(0, 360, var11 + var12);
-    var3 = (var3 + 1) / 2;
-    var8 = scripts\engine\math::factor_value(0, var0, var3);
-    var9 = scripts\engine\math::factor_value(0, var1, var3);
-    var4 = scripts\engine\math::factor_value(0, var2, var3);
-    var13 = var3;
-    setsaveddvar("MLTTMLTKOR", var8);
-    setsaveddvar("LSOPQMRPNR", var9);
-    setblur(var4, 0.05);
+    var_3 = sin(var_11);
+    var_11 = scripts\engine\math::wrap(0, 360, var_11 + var_12);
+    var_3 = (var_3 + 1) / 2;
+    var_8 = scripts\engine\math::factor_value(0, var_0, var_3);
+    var_9 = scripts\engine\math::factor_value(0, var_1, var_3);
+    var_4 = scripts\engine\math::factor_value(0, var_2, var_3);
+    var_13 = var_3;
+    setsaveddvar("MLTTMLTKOR", var_8);
+    setsaveddvar("LSOPQMRPNR", var_9);
+    setblur(var_4, 0.05);
     waitframe();
   }
 
-  var14 = 1;
+  var_14 = 1;
 
-  while(var14) {
-    var13 -= 0.01;
+  while(var_14) {
+    var_13 -= 0.01;
 
-    if(var13 < 0) {
-      var13 = 0;
+    if(var_13 < 0) {
+      var_13 = 0;
     }
 
-    var8 = scripts\engine\math::factor_value(0, var0, var13);
-    var9 = scripts\engine\math::factor_value(0, var1, var13);
-    var4 = scripts\engine\math::factor_value(0, var2, var13);
-    setsaveddvar("MLTTMLTKOR", var8);
-    setsaveddvar("LSOPQMRPNR", var9);
-    setblur(var4, 0.05);
+    var_8 = scripts\engine\math::factor_value(0, var_0, var_13);
+    var_9 = scripts\engine\math::factor_value(0, var_1, var_13);
+    var_4 = scripts\engine\math::factor_value(0, var_2, var_13);
+    setsaveddvar("MLTTMLTKOR", var_8);
+    setsaveddvar("LSOPQMRPNR", var_9);
+    setblur(var_4, 0.05);
 
-    if(var13 == 0) {
-      var14 = 0;
+    if(var_13 == 0) {
+      var_14 = 0;
     }
 
     waitframe();
   }
 }
 
-function thirsty_wake_timer(var0) {
-  wait var0;
+function thirsty_wake_timer(var_0) {
+  wait var_0;
   scripts\engine\utility::flag_set("thirsty_awake");
 }
 
@@ -3744,48 +3744,48 @@ function bink_speech() {
 }
 
 function bink_speech_main() {
-  var0 = scripts\engine\utility::getStruct("barkov_speech", "targetname");
-  var1 = var0 scripts\engine\utility::spawn_script_origin();
-  move_barkov(var1);
+  var_0 = scripts\engine\utility::getStruct("barkov_speech", "targetname");
+  var_1 = var_0 scripts\engine\utility::spawn_script_origin();
+  move_barkov(var_1);
   level.barkov unlink();
   wait 5;
-  var1 thread scripts\common\anim::anim_single_solo(level.barkov, "bink_speech");
+  var_1 thread scripts\common\anim::anim_single_solo(level.barkov, "bink_speech");
 }
 
-function move_barkov(var0) {
+function move_barkov(var_0) {
   thread stop_move_barkov();
   level endon("picked_spot");
-  level.barkov = havemapentseffects("actor_enemy_villain_barkov_old", var0.origin, var0.angles, 1);
+  level.barkov = havemapentseffects("actor_enemy_villain_barkov_old", var_0.origin, var_0.angles, 1);
   level.barkov.ignoreme = 1;
   level.barkov.ignoreall = 1;
   level.barkov.animname = "barkov";
   level.barkov scripts\common\ai::gun_remove();
   level.barkov visiblenotsolid();
-  level.barkov forceteleport(var0.origin, var0.angles, 10000);
-  level.barkov linkTo(var0);
+  level.barkov forceteleport(var_0.origin, var_0.angles, 10000);
+  level.barkov linkTo(var_0);
 
   for(;;) {
-    var1 = level.player.origin + anglesToForward(level.player.angles) * 60;
-    var2 = level.player.angles + (0, 180, 0);
-    var0.origin = var1;
-    var0.angles = var2;
-    var0 scripts\common\anim::anim_first_frame_solo(level.barkov, "bink_speech");
+    var_1 = level.player.origin + anglesToForward(level.player.angles) * 60;
+    var_2 = level.player.angles + (0, 180, 0);
+    var_0.origin = var_1;
+    var_0.angles = var_2;
+    var_0 scripts\common\anim::anim_first_frame_solo(level.barkov, "bink_speech");
     waitframe();
   }
 }
 
 function stop_move_barkov() {
-  var0 = 0;
+  var_0 = 0;
 
   for(;;) {
     if(level.player useButtonPressed()) {
-      var0++;
+      var_0++;
 
-      if(var0 == 10) {
+      if(var_0 == 10) {
         break;
       }
     } else {
-      var0 = 0;
+      var_0 = 0;
     }
 
     waitframe();

@@ -13,18 +13,18 @@ function mines_setup() {
   level.mines_backtrack_clip = getEnt(level.mines_backtrack_trig.target, "targetname");
   level.mines_backtrack_clip.origin -= (0, 0, 10000);
   level.mines_backtrack_clip connectpaths();
-  var0 = getEnt("mineshaft_shared_oilfire_grabber", "targetname");
+  var_0 = getEnt("mineshaft_shared_oilfire_grabber", "targetname");
   level.mineshaft_shared_oil_fire = undefined;
-  var1 = getEnt("mineshaft_martyr_oilfire_grabber", "targetname");
+  var_1 = getEnt("mineshaft_martyr_oilfire_grabber", "targetname");
   level.mineshaft_martyr_oil_fire = undefined;
 
-  foreach(var3 in level.oil_fires) {
-    if(var0 istouching(var3)) {
-      level.mineshaft_shared_oil_fire = var3;
+  foreach(var_3 in level.oil_fires) {
+    if(var_0 istouching(var_3)) {
+      level.mineshaft_shared_oil_fire = var_3;
     }
 
-    if(var1 istouching(var3)) {
-      level.mineshaft_martyr_oil_fire = var3;
+    if(var_1 istouching(var_3)) {
+      level.mineshaft_martyr_oil_fire = var_3;
     }
   }
 
@@ -76,11 +76,11 @@ function mineshaft_shared_oil_fire_on() {
 function mines_enter_vo() {
   scripts\engine\utility::flag_wait("mine_reached");
   scripts\engine\utility::flag_wait("shaft_split_vo_done");
-  var0 = level.farah scripts\sp\maps\tunnels\zd30tunnels_utility::time_since_spoke();
-  var1 = 2;
+  var_0 = level.farah scripts\sp\maps\tunnels\zd30tunnels_utility::time_since_spoke();
+  var_1 = 2;
 
-  if(isDefined(var0) && var0 < var1) {
-    wait var1 - var0;
+  if(isDefined(var_0) && var_0 < var_1) {
+    wait var_1 - var_0;
   }
 
   level.player scripts\sp\maps\tunnels\zd30tunnels_utility::say("dx_vom_alx_tunnels_alone_10");
@@ -101,23 +101,23 @@ function mines_push_cart_checkpoint() {
 }
 
 function mines_bridge_collapse() {
-  var0 = getEnt("mines_bridge_collapse_oil_grabber", "targetname");
-  thread scripts\sp\maps\tunnels\zd30tunnels_utility::monitor_oilfire(var0);
-  var0 waittill("oilfire_detonated");
+  var_0 = getEnt("mines_bridge_collapse_oil_grabber", "targetname");
+  thread scripts\sp\maps\tunnels\zd30tunnels_utility::monitor_oilfire(var_0);
+  var_0 waittill("oilfire_detonated");
   scripts\engine\utility::flag_set("mines_bridge_collapsed");
   wait 2.5;
   playmayhem("my_vfx_mayh_mines_bridge_zd30");
 }
 
 function mines_second_collapse() {
-  var0 = getEnt("mines_second_collapse_oil_grabber", "targetname");
-  thread scripts\sp\maps\tunnels\zd30tunnels_utility::monitor_oilfire(var0);
-  var0 waittill("oilfire_detonated");
+  var_0 = getEnt("mines_second_collapse_oil_grabber", "targetname");
+  thread scripts\sp\maps\tunnels\zd30tunnels_utility::monitor_oilfire(var_0);
+  var_0 waittill("oilfire_detonated");
   scripts\engine\utility::flag_set("mines_tunnel_collapsed");
-  var1 = getEnt("spawn_mine_responders", "targetname");
+  var_1 = getEnt("spawn_mine_responders", "targetname");
 
-  if(isDefined(var1)) {
-    var1 delete();
+  if(isDefined(var_1)) {
+    var_1 delete();
   }
 
   level.mines_backtrack_trig waittill("trigger");
@@ -127,15 +127,15 @@ function mines_second_collapse() {
 
 function mines_player_pistol_upgrade_monitor() {
   for(;;) {
-    var0 = level.player getweaponslistall();
+    var_0 = level.player getweaponslistall();
 
-    if(var0.size > 0) {
-      foreach(var2 in var0) {
-        if(var2.basename == "iw8_pi_mike1911") {
-          level.player takeweapon(var2);
-          var2 = getcompleteweaponname("iw8_pi_mike1911", ["mag_mike1911", "rec_mike1911", "slide_tritium_mike1911"]);
-          level.player giveweapon(var2);
-          level.player switchtoweapon(var2);
+    if(var_0.size > 0) {
+      foreach(var_2 in var_0) {
+        if(var_2.basename == "iw8_pi_mike1911") {
+          level.player takeweapon(var_2);
+          var_2 = getcompleteweaponname("iw8_pi_mike1911", ["mag_mike1911", "rec_mike1911", "slide_tritium_mike1911"]);
+          level.player giveweapon(var_2);
+          level.player switchtoweapon(var_2);
           return;
         }
       }
@@ -147,27 +147,27 @@ function mines_player_pistol_upgrade_monitor() {
 
 function mines_oilpush_scene() {
   scripts\engine\utility::flag_wait("player_through_cart");
-  var0 = scripts\engine\utility::getStruct("shaft_fire_light_level_0", "targetname").origin;
+  var_0 = scripts\engine\utility::getStruct("shaft_fire_light_level_0", "targetname").origin;
   scripts\engine\sp\objectives::objective_remove_all_locations("tunnels_search");
-  scripts\engine\sp\objectives::objective_add_location_position("tunnels_search", "shaft", var0);
-  var1 = "mine_oilpush";
-  var2 = scripts\engine\utility::getStruct(var1, "targetname");
+  scripts\engine\sp\objectives::objective_add_location_position("tunnels_search", "shaft", var_0);
+  var_1 = "mine_oilpush";
+  var_2 = scripts\engine\utility::getStruct(var_1, "targetname");
   level.pusher1 = spawn_oil_pusher("pusher1");
   level.pusher2 = spawn_oil_pusher("pusher2");
   thread mines_lantern_think();
-  level.mine_push_barrel = scripts\engine\sp\utility::spawn_anim_model("mine_push_barrel", var2.origin, var2.angles);
+  level.mine_push_barrel = scripts\engine\sp\utility::spawn_anim_model("mine_push_barrel", var_2.origin, var_2.angles);
   level.spewing_barrels[level.spewing_barrels.size] = level.mine_push_barrel;
-  var2 thread scripts\common\anim::anim_single_solo(level.mine_push_barrel, var1);
+  var_2 thread scripts\common\anim::anim_single_solo(level.mine_push_barrel, var_1);
   waitframe();
-  level.mine_push_barrel setanimtime(level.mine_push_barrel scripts\engine\utility::getanim(var1), 0.41);
-  level.mine_push_barrel setanimrate(level.mine_push_barrel scripts\engine\utility::getanim(var1), 0);
-  var3 = getEnt("mine_oilpush_trig", "targetname");
-  var4 = scripts\engine\utility::getStruct(var3.target, "targetname");
-  var3 waittill("trigger");
-  var5 = 0;
-  var6 = 360;
+  level.mine_push_barrel setanimtime(level.mine_push_barrel scripts\engine\utility::getanim(var_1), 0.41);
+  level.mine_push_barrel setanimrate(level.mine_push_barrel scripts\engine\utility::getanim(var_1), 0);
+  var_3 = getEnt("mine_oilpush_trig", "targetname");
+  var_4 = scripts\engine\utility::getStruct(var_3.target, "targetname");
+  var_3 waittill("trigger");
+  var_5 = 0;
+  var_6 = 360;
 
-  while(!scripts\engine\sp\utility::player_looking_at(var4.origin, 0.8)) {
+  while(!scripts\engine\sp\utility::player_looking_at(var_4.origin, 0.8)) {
     if(scripts\engine\utility::flag("mines_tunnel_collapsed")) {
       level.pusher1 kill();
       level.pusher2 kill();
@@ -176,12 +176,12 @@ function mines_oilpush_scene() {
     }
 
     if(!isDefined(level.pusher1) || !isalive(level.pusher1)) {
-      var5 = 1;
+      var_5 = 1;
       break;
     }
 
     if(!isDefined(level.pusher2) || !isalive(level.pusher2)) {
-      var5 = 1;
+      var_5 = 1;
       break;
     }
 
@@ -193,26 +193,26 @@ function mines_oilpush_scene() {
   }
 
   LOC_000001e0:
-    if(var5) {
+    if(var_5) {
       return;
     }
 
   thread light_the_fire_vo();
-  thread oil_pusher1_anim(level.pusher1, var2);
-  thread oil_pusher2_anim(level.pusher2, var2);
-  level.mine_push_barrel setanimrate(level.mine_push_barrel scripts\engine\utility::getanim(var1), 1);
+  thread oil_pusher1_anim(level.pusher1, var_2);
+  thread oil_pusher2_anim(level.pusher2, var_2);
+  level.mine_push_barrel setanimrate(level.mine_push_barrel scripts\engine\utility::getanim(var_1), 1);
   level.mine_push_barrel waittillmatch("single anim", "end");
-  var7 = getEnt("mine_oilpush_gulg", "targetname");
-  level.oil_gulgs[level.oil_gulgs.size] = var7;
+  var_7 = getEnt("mine_oilpush_gulg", "targetname");
+  level.oil_gulgs[level.oil_gulgs.size] = var_7;
 }
 
-function oil_pusher1_anim(var0, var1) {
+function oil_pusher1_anim(var_0, var_1) {
   self endon("death");
   self.ignoreall = 0;
   self.ignoreme = 0;
   thread oil_pusher1_post_anim_behavior();
   thread scripts\sp\maps\tunnels\zd30tunnels_utility::say("dx_vom_aq1_tunnels_alone_120");
-  self setanimrate(scripts\engine\utility::getanim(var1), 1);
+  self setanimrate(scripts\engine\utility::getanim(var_1), 1);
   self waittillmatch("single anim", "end");
   level notify("oilpush_done", 1);
 }
@@ -220,9 +220,9 @@ function oil_pusher1_anim(var0, var1) {
 function oil_pusher1_post_anim_behavior() {
   self endon("death");
   thread oil_pusher_wakeup_think();
-  level waittill("oilpush_done", var0);
+  level waittill("oilpush_done", var_0);
 
-  if(!istrue(var0)) {
+  if(!istrue(var_0)) {
     scripts\engine\sp\utility::anim_stopanimScripted();
   }
 
@@ -232,14 +232,14 @@ function oil_pusher1_post_anim_behavior() {
   self.escape_now = 1;
 }
 
-function oil_pusher2_anim(var0, var1) {
+function oil_pusher2_anim(var_0, var_1) {
   self endon("death");
   self.ignoreall = 0;
   self.ignoreme = 0;
   thread oil_pusher2_post_anim_behavior();
-  var2 = lookupsoundlength("dx_vom_aq1_tunnels_alone_120") / 1000;
-  scripts\engine\utility::delaythread(1 + var2, &scripts\sp\maps\tunnels\zd30tunnels_utility::say, "dx_vom_aq2_tunnels_alone_130");
-  self setanimrate(scripts\engine\utility::getanim(var1), 1);
+  var_2 = lookupsoundlength("dx_vom_aq1_tunnels_alone_120") / 1000;
+  scripts\engine\utility::delaythread(1 + var_2, &scripts\sp\maps\tunnels\zd30tunnels_utility::say, "dx_vom_aq2_tunnels_alone_130");
+  self setanimrate(scripts\engine\utility::getanim(var_1), 1);
   self waittillmatch("single anim", "end");
   level notify("oilpush_done", 1);
 }
@@ -249,16 +249,16 @@ function oil_pusher2_post_anim_behavior() {
   thread oil_pusher_wakeup_think();
   thread oil_pusher2_martyr();
   thread oil_pusher2_escape();
-  level waittill("oilpush_done", var0);
+  level waittill("oilpush_done", var_0);
 
-  if(!istrue(var0)) {
+  if(!istrue(var_0)) {
     scripts\engine\sp\utility::anim_stopanimScripted();
   }
 
   scripts\engine\utility::delaythread(0.5, &scripts\engine\sp\utility::smart_dialogue, "dx_vom_aq2_tunnels_ambusher_30");
-  var1 = getnode("pusher2_goto", "targetname");
+  var_1 = getnode("pusher2_goto", "targetname");
   scripts\engine\sp\utility::set_goal_radius(32);
-  scripts\engine\sp\utility::set_goal_node(var1);
+  scripts\engine\sp\utility::set_goal_node(var_1);
   self getenemyinfo(level.player);
   self waittill("goal");
   wait 1;
@@ -269,29 +269,29 @@ function mines_lantern_think() {
   scripts\engine\sp\utility::add_wait(&scripts\engine\sp\utility::waittill_msg, "turn_off_lantern");
   level scripts\engine\sp\utility::add_wait(&scripts\engine\sp\utility::waittill_msg, "oil_fire_ignited");
   scripts\engine\sp\utility::do_wait_any();
-  var0 = scripts\engine\utility::getStruct("mines_lantern", "targetname");
-  radiusdamage(var0.origin, 4, 100, 99, level.player, "MOD_PISTOL_BULLET");
+  var_0 = scripts\engine\utility::getStruct("mines_lantern", "targetname");
+  radiusdamage(var_0.origin, 4, 100, 99, level.player, "MOD_PISTOL_BULLET");
 }
 
 function oil_pusher2_martyr() {
   level endon("shaft_fire_on");
   self waittill("death");
-  var0 = self gettagorigin("tag_accessory_left", 1);
+  var_0 = self gettagorigin("tag_accessory_left", 1);
 
-  if(!isDefined(var0)) {
-    var0 = self.origin + (0, 0, 20);
+  if(!isDefined(var_0)) {
+    var_0 = self.origin + (0, 0, 20);
   }
 
-  var1 = 1.5;
-  var2 = magicgrenademanual("frag", var0, (0, 0, 0), var1);
-  wait var1;
-  var3 = getgroundposition(var0, 4);
+  var_1 = 1.5;
+  var_2 = magicgrenademanual("frag", var_0, (0, 0, 0), var_1);
+  wait var_1;
+  var_3 = getgroundposition(var_0, 4);
 
-  if(isDefined(var2) && isDefined(var2.origin)) {
-    var3 = var2.origin;
+  if(isDefined(var_2) && isDefined(var_2.origin)) {
+    var_3 = var_2.origin;
   }
 
-  playFX(level.g_effect["molotov_explosion"], var3);
+  playFX(level.g_effect["molotov_explosion"], var_3);
   wait 1.5;
 
   if(istrue(level.mineshaft_martyr_oil_fire.fire_exploder_on)) {
@@ -309,20 +309,20 @@ function oil_pusher2_escape() {
     return;
   }
 
-  var0 = self gettagorigin("tag_accessory_left", 1);
+  var_0 = self gettagorigin("tag_accessory_left", 1);
 
-  if(!isDefined(var0)) {
-    var0 = self.origin + (0, 0, 20);
+  if(!isDefined(var_0)) {
+    var_0 = self.origin + (0, 0, 20);
   }
 
   scripts\common\utility::demeanor_override("sprint");
   thread scripts\engine\sp\utility::set_goal_node_targetname("mines_escape_to");
   scripts\engine\sp\utility::set_goal_radius(32);
   thread scripts\sp\maps\tunnels\zd30tunnels_utility::delete_when_dist_away(level.player, 800);
-  var1 = 3;
-  var2 = magicgrenademanual("frag", var0, (0, 0, 0), var1);
-  wait var1;
-  playFX(level.g_effect["molotov_explosion"], var2.origin);
+  var_1 = 3;
+  var_2 = magicgrenademanual("frag", var_0, (0, 0, 0), var_1);
+  wait var_1;
+  playFX(level.g_effect["molotov_explosion"], var_2.origin);
   wait 1.5;
 
   if(!istrue(level.mineshaft_martyr_oil_fire.fire_exploder_on)) {
@@ -351,12 +351,12 @@ function oil_pusher_wakeup_think() {
     return;
   }
 
-  var0 = "mine_oilpush";
-  var1 = scripts\engine\utility::getStruct(var0, "targetname");
-  var2 = 0.52;
-  var3 = level.mine_push_barrel getanimtime(level.mine_push_barrel scripts\engine\utility::getanim(var0), var0);
+  var_0 = "mine_oilpush";
+  var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
+  var_2 = 0.52;
+  var_3 = level.mine_push_barrel getanimtime(level.mine_push_barrel scripts\engine\utility::getanim(var_0), var_0);
 
-  if(var3 < var2) {
+  if(var_3 < var_2) {
     level.mine_push_barrel stopanimScripted();
     return;
   }
@@ -366,22 +366,22 @@ function oil_pusher_wakeup_on_prox() {
   self endon("death");
 
   for(;;) {
-    var0 = distance2d(level.player.origin, self.origin);
+    var_0 = distance2d(level.player.origin, self.origin);
 
-    if(var0 <= 350) {
+    if(var_0 <= 350) {
       break;
     }
 
-    if(var0 <= 500) {
+    if(var_0 <= 500) {
       if(self hasenemybeenseen(50)) {
-        var1 = 3;
+        var_1 = 3;
 
-        while(var1 > 0) {
+        while(var_1 > 0) {
           if(scripts\engine\utility::distance_2d_squared(level.player.origin, self.origin) <= 115600) {
             break;
           }
 
-          var1 -= 0.05;
+          var_1 -= 0.05;
           wait 0.05;
         }
 
@@ -398,33 +398,33 @@ function oil_pusher_wakeup_on_prox() {
 function light_the_fire_vo() {
   scripts\engine\utility::flag_wait("entered_shaft");
   wait 1;
-  var0 = "dx_vom_aq1_tunnels_chamber_10";
-  var1 = lookupsoundlength(var0) / 1000;
-  var2 = scripts\engine\utility::getStructArray("shaft_enemy_chatter", "targetname");
-  var3 = scripts\engine\utility::getclosest(level.player.origin, var2).origin;
-  scripts\engine\utility::play_sound_in_space(var0, var3);
-  wait var1;
+  var_0 = "dx_vom_aq1_tunnels_chamber_10";
+  var_1 = lookupsoundlength(var_0) / 1000;
+  var_2 = scripts\engine\utility::getStructArray("shaft_enemy_chatter", "targetname");
+  var_3 = scripts\engine\utility::getclosest(level.player.origin, var_2).origin;
+  scripts\engine\utility::play_sound_in_space(var_0, var_3);
+  wait var_1;
 }
 
-function spawn_oil_pusher(var0) {
-  var1 = scripts\engine\sp\utility::spawn_targetname(var0 + "Spawner", 1);
-  var1.animname = var0;
-  var1.allowdeath = 1;
-  var1.ignoreall = 1;
-  var1.ignoreme = 1;
-  var1 thread scripts\sp\maps\tunnels\zd30tunnels_ai::battlechatter_off_spawn_func();
-  var1 thread scripts\engine\sp\utility::name_hide();
-  var1 thread scripts\sp\maps\tunnels\zd30tunnels_ai::shutup_when_hit();
-  var1 scripts\engine\sp\utility::disable_long_death();
+function spawn_oil_pusher(var_0) {
+  var_1 = scripts\engine\sp\utility::spawn_targetname(var_0 + "Spawner", 1);
+  var_1.animname = var_0;
+  var_1.allowdeath = 1;
+  var_1.ignoreall = 1;
+  var_1.ignoreme = 1;
+  var_1 thread scripts\sp\maps\tunnels\zd30tunnels_ai::battlechatter_off_spawn_func();
+  var_1 thread scripts\engine\sp\utility::name_hide();
+  var_1 thread scripts\sp\maps\tunnels\zd30tunnels_ai::shutup_when_hit();
+  var_1 scripts\engine\sp\utility::disable_long_death();
   thread oil_pusher_drop_pistol();
-  var1 thread scripts\sp\nvg\nvg_ai::flashlight_on();
-  var2 = "mine_oilpush";
-  var3 = scripts\engine\utility::getStruct(var2, "targetname");
-  var3 thread scripts\common\anim::anim_single_solo(var1, var2);
+  var_1 thread scripts\sp\nvg\nvg_ai::flashlight_on();
+  var_2 = "mine_oilpush";
+  var_3 = scripts\engine\utility::getStruct(var_2, "targetname");
+  var_3 thread scripts\common\anim::anim_single_solo(var_1, var_2);
   waitframe();
-  var1 setanimtime(var1 scripts\engine\utility::getanim(var2), 0.41);
-  var1 setanimrate(var1 scripts\engine\utility::getanim(var2), 0);
-  return var1;
+  var_1 setanimtime(var_1 scripts\engine\utility::getanim(var_2), 0.41);
+  var_1 setanimrate(var_1 scripts\engine\utility::getanim(var_2), 0);
+  return var_1;
 }
 
 function oil_pusher_drop_pistol() {
@@ -439,14 +439,14 @@ function oil_pusher_drop_pistol() {
 function hint_push_cart_vo() {
   level endon("player_through_cart");
   level.mine_carts["mine_cart_tutorial"] endon("pushed");
-  var0 = getEnt("hint_mine_cart_push", "targetname");
+  var_0 = getEnt("hint_mine_cart_push", "targetname");
 
   for(;;) {
-    var0 waittill("trigger");
-    var1 = 500;
-    var2 = scripts\engine\sp\utility::get_closest_ai(level.player.origin, "axis");
+    var_0 waittill("trigger");
+    var_1 = 500;
+    var_2 = scripts\engine\sp\utility::get_closest_ai(level.player.origin, "axis");
 
-    if(isDefined(var2) && distancesquared(var2.origin, level.player.origin) < var1 * var1) {
+    if(isDefined(var_2) && distancesquared(var_2.origin, level.player.origin) < var_1 * var_1) {
       wait 0.05;
       continue;
     }
@@ -454,19 +454,19 @@ function hint_push_cart_vo() {
     break;
   }
 
-  var3 = gettime();
-  var4 = 0;
-  var5 = 9;
-  wait var5;
+  var_3 = gettime();
+  var_4 = 0;
+  var_5 = 9;
+  wait var_5;
   level.player scripts\engine\sp\utility::smart_player_dialogue("dx_vom_alx_tunnels_alone_50");
 
   for(;;) {
-    var6 = var5 - 2;
-    var7 = min(60, var5 + 2 + 6 * var4);
-    wait randomfloatrange(var6, var7);
-    var0 waittill("trigger");
+    var_6 = var_5 - 2;
+    var_7 = min(60, var_5 + 2 + 6 * var_4);
+    wait randomfloatrange(var_6, var_7);
+    var_0 waittill("trigger");
 
-    if((gettime() - var3) / 1000 > 45) {
+    if((gettime() - var_3) / 1000 > 45) {
       level.player scripts\engine\sp\utility::smart_player_dialogue("dx_vom_alx_tunnels_alone_60");
       wait randomfloatrange(1.5, 2.5);
       level.player scripts\engine\sp\utility::smart_player_dialogue("dx_vom_alx_tunnels_alone_70");
@@ -476,17 +476,17 @@ function hint_push_cart_vo() {
       level.player scripts\engine\sp\utility::smart_player_dialogue("dx_vom_alx_tunnels_alone_80");
     }
 
-    var4++;
+    var_4++;
   }
 }
 
-function hint_locked_doors_vo(var0, var1) {
-  scripts\engine\utility::array_thread(getEntArray(var0, "targetname"), &hint_locked_door_think, var1);
+function hint_locked_doors_vo(var_0, var_1) {
+  scripts\engine\utility::array_thread(getEntArray(var_0, "targetname"), &hint_locked_door_think, var_1);
 }
 
-function hint_locked_door_think(var0) {
-  if(isDefined(var0)) {
-    level endon(var0);
+function hint_locked_door_think(var_0) {
+  if(isDefined(var_0)) {
+    level endon(var_0);
   }
 
   self waittill("trigger");
@@ -509,7 +509,7 @@ function shaft_setup() {
 }
 
 function shaft_goal_volumes_setup() {
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, 0, getEnt("shaft_level_1", "targetname"));
 }
 
@@ -551,23 +551,23 @@ function shaft() {
 }
 
 function shaft_propane_kick_setup() {
-  var0 = scripts\engine\utility::getStruct("propane_kick", "targetname");
+  var_0 = scripts\engine\utility::getStruct("propane_kick", "targetname");
   wait 0.25;
-  var1 = getscriptablearray("shaft_propane_kick_scriptable", "targetname")[0];
-  var1.animname = "shaft_propane_kick";
-  var1 scripts\engine\sp\utility::assign_animtree();
-  var2 = getstartorigin(var0.origin, var0.angles, var1 scripts\engine\utility::getanim("propane_kick"));
-  var3 = getstartangles(var0.origin, var0.angles, var1 scripts\engine\utility::getanim("propane_kick"));
-  var1.origin = var2;
-  var1.angles = var3;
-  var4 = var1.model;
+  var_1 = getscriptablearray("shaft_propane_kick_scriptable", "targetname")[0];
+  var_1.animname = "shaft_propane_kick";
+  var_1 scripts\engine\sp\utility::assign_animtree();
+  var_2 = getstartorigin(var_0.origin, var_0.angles, var_1 scripts\engine\utility::getanim("propane_kick"));
+  var_3 = getstartangles(var_0.origin, var_0.angles, var_1 scripts\engine\utility::getanim("propane_kick"));
+  var_1.origin = var_2;
+  var_1.angles = var_3;
+  var_4 = var_1.model;
 
   for(;;) {
-    if(var4 != var1.model) {
+    if(var_4 != var_1.model) {
       break;
     }
 
-    if(!isDefined(var1)) {
+    if(!isDefined(var_1)) {
       break;
     }
 
@@ -584,36 +584,36 @@ function shaft_epic_fire() {
   level.player.shaft_level_timer = [];
   thread shaft_smoke_vision_manager();
   scripts\engine\utility::flag_wait("shaft_fire_on");
-  var0 = scripts\engine\utility::getStruct("shaft_final_ladder_obj", "targetname").origin;
+  var_0 = scripts\engine\utility::getStruct("shaft_final_ladder_obj", "targetname").origin;
   scripts\engine\sp\objectives::objective_remove_all_locations("tunnels_search");
-  scripts\engine\sp\objectives::objective_add_location_position("tunnels_search", "ladder", var0);
+  scripts\engine\sp\objectives::objective_add_location_position("tunnels_search", "ladder", var_0);
   scripts\engine\sp\objectives::objective_update("tunnels_search", "current", undefined, &"ZD30/OBJ_TUNNELS_ESCAPE");
   thread shaft_smoke_survival_vo();
   thread epic_scripted_fx();
   thread shaft_mayhem_tarps();
   thread shaft_mayhem_corner_collapse();
   thread shaft_mayhem_beam_crack();
-  var1 = 80;
+  var_1 = 80;
   scripts\engine\utility::exploder("shaft_smoke_start");
   visionsetnaked("zd30tunnels_shaft_smoke_20", 5);
   thread shaft_ladder_fall();
   scripts\engine\utility::delaythread(0.5, &shaft_ab_light_set, "mine_shaft_fire_01", 5);
   thread sfx_fire_context_enable();
-  var2 = waittill_fire_reached_shaft_level(1, var1);
-  var3 = 30 + var2;
+  var_2 = waittill_fire_reached_shaft_level(1, var_1);
+  var_3 = 30 + var_2;
   scripts\engine\utility::exploder("fire_phase1");
   thread scripts\sp\maps\tunnels\zd30tunnels_utility::checkpoint_loop(25, "reunion_reached");
   thread scripts\engine\utility::flag_set_delayed("fire_phase1_started", 2);
   scripts\engine\utility::delaythread(0.5, &shaft_ab_light_set, "mine_shaft_fire_02", 5);
   scripts\engine\utility::delaythread(5, &shaft_ab_light_set, "mine_shaft_fire_03", 2);
   scripts\engine\utility::delaythread(7, &shaft_ab_light_set, "mine_shaft_fire_04", 2);
-  var2 = waittill_fire_reached_shaft_level(2, var3);
-  var4 = 30 + var2;
+  var_2 = waittill_fire_reached_shaft_level(2, var_3);
+  var_4 = 30 + var_2;
   scripts\engine\utility::exploder("fire_phase2");
   scripts\engine\utility::exploder("fire_phase2_beam");
   scripts\engine\utility::stop_exploder("fire_spread_3");
-  var2 = waittill_fire_reached_shaft_level(3, var4);
-  var5 = 30 + var2;
+  var_2 = waittill_fire_reached_shaft_level(3, var_4);
+  var_5 = 30 + var_2;
   thread scripts\sp\maps\tunnels\zd30tunnels_utility::tunnels_corpse_cleanup();
   level.fire_fill_hurt scripts\engine\utility::delaythread(3, &scripts\engine\utility::trigger_on);
   scripts\engine\utility::exploder("fire_phase3");
@@ -623,11 +623,11 @@ function shaft_epic_fire() {
   scripts\engine\utility::stop_exploder("shaft_fire_start");
   scripts\engine\utility::stop_exploder("shaft_smoke_start");
   scripts\engine\utility::stop_exploder("fire_spread_1");
-  var2 = waittill_fire_reached_shaft_level(4, var5);
-  var6 = 20 + var2;
+  var_2 = waittill_fire_reached_shaft_level(4, var_5);
+  var_6 = 20 + var_2;
   scripts\engine\utility::exploder("fire_phase4");
   scripts\engine\utility::exploder("fire_phase4_final");
-  var2 = waittill_fire_reached_shaft_level(5, var6);
+  var_2 = waittill_fire_reached_shaft_level(5, var_6);
   scripts\engine\utility::flag_wait("reunion_pull_up_success");
   scripts\engine\utility::exploder("fire_phase5");
   scripts\engine\utility::stop_exploder("smoke_phase3");
@@ -645,55 +645,55 @@ function sfx_fire_context_disable() {
 }
 
 function shaft_fire_victim() {
-  var0 = scripts\engine\sp\utility::spawn_script_noteworthy("shaft_fire_victim", 1);
+  var_0 = scripts\engine\sp\utility::spawn_script_noteworthy("shaft_fire_victim", 1);
 
-  while(!isDefined(var0) || !isalive(var0)) {
+  while(!isDefined(var_0) || !isalive(var_0)) {
     wait 0.05;
   }
 
-  var0 endon("death");
-  var0 endon("entitydeleted");
-  level.shaft_fire_victim = var0;
-  var0 scripts\sp\maps\tunnels\zd30tunnels_utility::set_original_baseaccuracy(0.25);
-  var0.ignoreall = 1;
-  var0 scripts\engine\sp\utility::disable_surprise();
-  var0 scripts\engine\sp\utility::set_ignoresuppression(1);
-  var0 scripts\common\utility::demeanor_override("sprint");
-  var1 = getnode("fire_victim_node", "targetname");
-  var2 = getEnt("shaft_fire_victim_zone", "targetname");
-  var0 waittill("goal");
-  var3 = var0 scripts\engine\utility::waittill_any_return("bullethit", "shaft_mayhem_beam_crack");
+  var_0 endon("death");
+  var_0 endon("entitydeleted");
+  level.shaft_fire_victim = var_0;
+  var_0 scripts\sp\maps\tunnels\zd30tunnels_utility::set_original_baseaccuracy(0.25);
+  var_0.ignoreall = 1;
+  var_0 scripts\engine\sp\utility::disable_surprise();
+  var_0 scripts\engine\sp\utility::set_ignoresuppression(1);
+  var_0 scripts\common\utility::demeanor_override("sprint");
+  var_1 = getnode("fire_victim_node", "targetname");
+  var_2 = getEnt("shaft_fire_victim_zone", "targetname");
+  var_0 waittill("goal");
+  var_3 = var_0 scripts\engine\utility::waittill_any_return("bullethit", "shaft_mayhem_beam_crack");
 
-  if(isDefined(var3) && var3 == "shaft_mayhem_beam_crack" && var0 istouching(var2)) {
-    var4 = 48;
+  if(isDefined(var_3) && var_3 == "shaft_mayhem_beam_crack" && var_0 istouching(var_2)) {
+    var_4 = 48;
 
-    if(scripts\engine\utility::distance_2d_squared(var0.origin, var1.origin) > var4 * var4) {
+    if(scripts\engine\utility::distance_2d_squared(var_0.origin, var_1.origin) > var_4 * var_4) {
       wait 0.5;
-      var0 thread scripts\sp\maps\tunnels\zd30tunnels_ai::enemy_death_by_fire(0);
+      var_0 thread scripts\sp\maps\tunnels\zd30tunnels_ai::enemy_death_by_fire(0);
       return;
     }
 
-    var5 = scripts\engine\utility::getStruct("shaft_fire_victim_struct", "targetname");
-    var5.angles += (0, 180, 0);
-    var0.animname = "shaft_fire_victim";
-    var0.allowdeath = 1;
-    var0.noragdoll = 1;
-    var0.disabledeathorient = 1;
-    var0 thread scripts\sp\maps\tunnels\zd30tunnels_ai::battlechatter_off_spawn_func();
-    var0 thread scripts\engine\sp\utility::name_hide();
-    thread scripts\sp\maps\tunnels\zd30tunnels_utility::cleanup_corpses_in_radius(var5.origin, 128);
-    var0 thread scripts\asm\soldier\death::handleburndeathmodelswap();
-    var0 thread scripts\asm\soldier\death::handleburndeathvfx();
-    var0 thread scripts\sp\maps\tunnels\zd30tunnels_utility::ai_burn_death_scream();
-    var0 scripts\engine\sp\utility::set_deathanim("burn_crawl_death");
-    var5 scripts\common\anim::anim_single_solo(var0, "burn_crawl");
-    var0 kill();
+    var_5 = scripts\engine\utility::getStruct("shaft_fire_victim_struct", "targetname");
+    var_5.angles += (0, 180, 0);
+    var_0.animname = "shaft_fire_victim";
+    var_0.allowdeath = 1;
+    var_0.noragdoll = 1;
+    var_0.disabledeathorient = 1;
+    var_0 thread scripts\sp\maps\tunnels\zd30tunnels_ai::battlechatter_off_spawn_func();
+    var_0 thread scripts\engine\sp\utility::name_hide();
+    thread scripts\sp\maps\tunnels\zd30tunnels_utility::cleanup_corpses_in_radius(var_5.origin, 128);
+    var_0 thread scripts\asm\soldier\death::handleburndeathmodelswap();
+    var_0 thread scripts\asm\soldier\death::handleburndeathvfx();
+    var_0 thread scripts\sp\maps\tunnels\zd30tunnels_utility::ai_burn_death_scream();
+    var_0 scripts\engine\sp\utility::set_deathanim("burn_crawl_death");
+    var_5 scripts\common\anim::anim_single_solo(var_0, "burn_crawl");
+    var_0 kill();
     return;
   }
 
-  var1.ignoreall = 0;
-  var2 = getnode("despawn_node", "script_noteworthy");
-  var1 scripts\engine\sp\utility::set_goal_node(var2);
+  var_1.ignoreall = 0;
+  var_2 = getnode("despawn_node", "script_noteworthy");
+  var_1 scripts\engine\sp\utility::set_goal_node(var_2);
 }
 
 function shaft_mayhem_tarps() {
@@ -706,96 +706,96 @@ function shaft_mayhem_tarps() {
   thread shaft_mayhem_tarp_burn_lookat_failsafe("mayhem_tarp_upper_trig", "mayhem_shaft_upper_tarp", 0.25);
 }
 
-function shaft_mayhem_tarp_burn_lookat_failsafe(var0, var1, var2) {
-  var3 = getEnt(var0, "targetname");
-  var4 = getEnt(var3.target, "targetname");
-  var5 = scripts\engine\utility::getStruct(var4.target, "targetname");
-  var3 waittill("trigger");
-  scripts\sp\maps\tunnels\zd30tunnels_utility::waittill_player_lookat_failsafe(var5.origin, 0.8, undefined, undefined, var2, undefined, var4);
-  thread sfx_tarp_mayhem(var1);
-  playmayhem(var1);
+function shaft_mayhem_tarp_burn_lookat_failsafe(var_0, var_1, var_2) {
+  var_3 = getEnt(var_0, "targetname");
+  var_4 = getEnt(var_3.target, "targetname");
+  var_5 = scripts\engine\utility::getStruct(var_4.target, "targetname");
+  var_3 waittill("trigger");
+  scripts\sp\maps\tunnels\zd30tunnels_utility::waittill_player_lookat_failsafe(var_5.origin, 0.8, undefined, undefined, var_2, undefined, var_4);
+  thread sfx_tarp_mayhem(var_1);
+  playmayhem(var_1);
 }
 
-function sfx_tarp_mayhem(var0) {
-  if(var0 == "mayhem_shaft_lower2_tarp") {
+function sfx_tarp_mayhem(var_0) {
+  if(var_0 == "mayhem_shaft_lower2_tarp") {
     thread scripts\engine\utility::play_sound_in_space("mayhem_zd30_shaft_lower2_tarp", (-1999, 1349, -959));
     return;
   }
 
-  if(var0 == "mayhem_shaft_middle3_tarp") {
+  if(var_0 == "mayhem_shaft_middle3_tarp") {
     thread scripts\engine\utility::play_sound_in_space("mayhem_zd30_shaft_middle3_tarp", (-2127, 1367, -702));
     return;
   }
 
-  if(var0 == "mayhem_shaft_upper_tarp") {
+  if(var_0 == "mayhem_shaft_upper_tarp") {
     thread scripts\engine\utility::play_sound_in_space("mayhem_zd30_shaft_upper_tarp", (-2022, 1349, -476));
     return;
   }
 }
 
 function shaft_mayhem_corner_collapse() {
-  var0 = "mayhem_shaft_corner_collapse";
-  var1 = "mayhem_corner_collapse";
-  var2 = getEnt(var1, "targetname");
-  var2 waittill("trigger");
-  var3 = scripts\engine\utility::getStruct(var2.target, "targetname");
-  var3 scripts\engine\sp\utility::waittill_player_lookat(0.8, 0.25);
+  var_0 = "mayhem_shaft_corner_collapse";
+  var_1 = "mayhem_corner_collapse";
+  var_2 = getEnt(var_1, "targetname");
+  var_2 waittill("trigger");
+  var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
+  var_3 scripts\engine\sp\utility::waittill_player_lookat(0.8, 0.25);
   scripts\engine\utility::stop_exploder("fire_phase3_corner");
   thread sfx_mayhem_corner_collapse();
-  playmayhem(var0);
+  playmayhem(var_0);
 }
 
 function sfx_mayhem_corner_collapse() {
   thread scripts\engine\utility::play_sound_in_space("mayhem_zd30_shaft_corner_collapse_01", (-2177, 1375, -778));
   thread scripts\engine\utility::play_sound_in_space("mayhem_zd30_shaft_corner_collapse_opp_01", (-2018, 1279, -778));
   wait 0.5;
-  var0 = spawn("script_origin", (-2190, 1340, -778));
-  var0 playLoopSound("scn_zd30_shaft_corner_mayhem_fire_lp");
+  var_0 = spawn("script_origin", (-2190, 1340, -778));
+  var_0 playLoopSound("scn_zd30_shaft_corner_mayhem_fire_lp");
 }
 
 function shaft_mayhem_beam_crack() {
-  var0 = "mayhem_shaft_beam_crack";
-  var1 = "mayhem_beam_crack";
-  var2 = getEnt(var1, "targetname");
-  var2 waittill("trigger");
-  var3 = scripts\engine\utility::getStruct(var2.target, "targetname");
-  var3 scripts\engine\sp\utility::waittill_player_lookat(0.8, 0.25);
+  var_0 = "mayhem_shaft_beam_crack";
+  var_1 = "mayhem_beam_crack";
+  var_2 = getEnt(var_1, "targetname");
+  var_2 waittill("trigger");
+  var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
+  var_3 scripts\engine\sp\utility::waittill_player_lookat(0.8, 0.25);
   scripts\engine\utility::stop_exploder("fire_phase2_beam");
   thread sfx_mayhem_beam_crack();
-  playmayhem(var0);
+  playmayhem(var_0);
 
   if(isDefined(level.shaft_fire_victim) && isalive(level.shaft_fire_victim)) {
     level.shaft_fire_victim notify("shaft_mayhem_beam_crack");
   }
 
-  var4 = getscriptablearray("beam_crack_propane", "targetname")[0];
+  var_4 = getscriptablearray("beam_crack_propane", "targetname")[0];
 
-  if(isDefined(var4) && isDefined(var4.model) && var4.model != "") {
-    var4 setscriptablepartstate("base", "fire");
+  if(isDefined(var_4) && isDefined(var_4.model) && var_4.model != "") {
+    var_4 setscriptablepartstate("base", "fire");
   }
 
-  var5 = scripts\engine\utility::getStruct("beam_crack_dmg_struct", "targetname");
-  var6 = var5.radius;
-  var7 = var5.origin;
-  var8 = 128;
-  var9 = spawn("trigger_radius_fire", var7, 0, var6, var8);
-  var9.script_multiplier = 5;
-  var9.script_radius = var6;
-  thread scripts\sp\trigger::trigger_fire(var9);
+  var_5 = scripts\engine\utility::getStruct("beam_crack_dmg_struct", "targetname");
+  var_6 = var_5.radius;
+  var_7 = var_5.origin;
+  var_8 = 128;
+  var_9 = spawn("trigger_radius_fire", var_7, 0, var_6, var_8);
+  var_9.script_multiplier = 5;
+  var_9.script_radius = var_6;
+  thread scripts\sp\trigger::trigger_fire(var_9);
 }
 
 function sfx_mayhem_beam_crack() {
-  var0 = spawn("script_origin", (-1986, 1627, -787));
+  var_0 = spawn("script_origin", (-1986, 1627, -787));
   thread scripts\engine\utility::play_sound_in_space("mayhem_zd30_shaft_beam_crack_01", (-1979, 1565, -803));
-  var0 playLoopSound("scn_zd30_shaft_beam_mayhem_fire_lp");
+  var_0 playLoopSound("scn_zd30_shaft_beam_mayhem_fire_lp");
 }
 
 function epic_scripted_fx() {
   level.shaft_scriptable_trigs = getEntArray("shaft_scriptable_trig", "targetname");
   scripts\engine\utility::array_thread(level.shaft_scriptable_trigs, &shaft_scriptables_think);
   level.shaft_lvl2_flicker_light = getEnt("shaft_lvl2_flicker_light", "script_noteworthy");
-  var0 = scripts\engine\utility::getStructArray("shaft_lvl2_flicker_light_sparks", "targetname");
-  scripts\engine\utility::array_thread(var0, &shaft_run_sparks, 1.25, 3.25);
+  var_0 = scripts\engine\utility::getStructArray("shaft_lvl2_flicker_light_sparks", "targetname");
+  scripts\engine\utility::array_thread(var_0, &shaft_run_sparks, 1.25, 3.25);
   level.shaft_epic_vfx_trigs = getEntArray("shaft_epic_vfx_trig", "targetname");
   scripts\engine\utility::array_thread(level.shaft_epic_vfx_trigs, &shaft_epic_vfx_think);
 }
@@ -814,16 +814,16 @@ function shaft_scriptables_think() {
   }
 
   waitframe();
-  var0 = getscriptablearray(self.target, "targetname");
+  var_0 = getscriptablearray(self.target, "targetname");
 
-  if(!isDefined(var0) || var0.size == 0) {
+  if(!isDefined(var_0) || var_0.size == 0) {
     return;
   }
 
-  var1 = scripts\engine\sp\utility::get_average_origin(var0) + (0, 0, 24);
-  var2 = var0[0].origin;
+  var_1 = scripts\engine\sp\utility::get_average_origin(var_0) + (0, 0, 24);
+  var_2 = var_0[0].origin;
 
-  while(!scripts\engine\sp\utility::player_looking_at(var1, 0.92, 1)) {
+  while(!scripts\engine\sp\utility::player_looking_at(var_1, 0.92, 1)) {
     wait 0.1;
   }
 
@@ -831,124 +831,124 @@ function shaft_scriptables_think() {
     return;
   }
 
-  foreach(var4 in var0) {
-    if(!isDefined(var4.classname)) {
+  foreach(var_4 in var_0) {
+    if(!isDefined(var_4.classname)) {
       return;
     }
 
     if(isDefined(self.script_parameters)) {
-      var5 = strtok(self.script_parameters, " ");
-      var6 = "script_parameter of scriptable at: " + var4.origin + " is missing 'state min_delay max_delay'";
-      var7 = var5[0];
-      var8 = float(var5[1]);
-      var9 = float(var5[2]);
-      thread shaft_generic_scriptable_run(var4, var7, var8, var9);
+      var_5 = strtok(self.script_parameters, " ");
+      var_6 = "script_parameter of scriptable at: " + var_4.origin + " is missing 'state min_delay max_delay'";
+      var_7 = var_5[0];
+      var_8 = float(var_5[1]);
+      var_9 = float(var_5[2]);
+      thread shaft_generic_scriptable_run(var_4, var_7, var_8, var_9);
       continue;
     }
 
-    if(issubstr(var4.classname, "propane_tank")) {
-      thread shaft_scriptable_propane_tank(var4);
+    if(issubstr(var_4.classname, "propane_tank")) {
+      thread shaft_scriptable_propane_tank(var_4);
       continue;
     }
 
-    if(issubstr(var4.classname, "plywood_bare")) {
-      thread shaft_scriptable_board(var4);
+    if(issubstr(var_4.classname, "plywood_bare")) {
+      thread shaft_scriptable_board(var_4);
       continue;
     }
 
-    if(issubstr(var4.classname, "plank_bridge")) {
-      thread shaft_scriptable_plank(var4);
+    if(issubstr(var_4.classname, "plank_bridge")) {
+      thread shaft_scriptable_plank(var_4);
       continue;
     }
 
-    if(issubstr(var4.classname, "pulley_fall")) {
-      thread shaft_scriptable_pulley(var4);
+    if(issubstr(var_4.classname, "pulley_fall")) {
+      thread shaft_scriptable_pulley(var_4);
       continue;
     }
   }
 }
 
-function shaft_scriptable_pulley(var0) {
-  shaft_generic_scriptable_run(var0, "fall", 0.25, 0.5);
+function shaft_scriptable_pulley(var_0) {
+  shaft_generic_scriptable_run(var_0, "fall", 0.25, 0.5);
 }
 
-function shaft_scriptable_propane_tank(var0) {
-  shaft_generic_scriptable_run(var0, "fire");
+function shaft_scriptable_propane_tank(var_0) {
+  shaft_generic_scriptable_run(var_0, "fire");
 }
 
-function shaft_scriptable_board(var0) {
-  shaft_generic_scriptable_run(var0, "charred", 0.25, 0.5);
+function shaft_scriptable_board(var_0) {
+  shaft_generic_scriptable_run(var_0, "charred", 0.25, 0.5);
 }
 
-function shaft_scriptable_plank(var0) {
-  shaft_generic_scriptable_run(var0, "charred", 0.25, 0.5);
+function shaft_scriptable_plank(var_0) {
+  shaft_generic_scriptable_run(var_0, "charred", 0.25, 0.5);
 }
 
-function shaft_generic_scriptable_run(var0, var1, var2, var3) {
+function shaft_generic_scriptable_run(var_0, var_1, var_2, var_3) {
   if(isDefined(self.script_delay)) {
     wait float(self.script_delay);
-  } else if(isDefined(var2) && isDefined(var3)) {
-    wait randomfloatrange(var2, var3);
+  } else if(isDefined(var_2) && isDefined(var_3)) {
+    wait randomfloatrange(var_2, var_3);
   }
 
-  if(isDefined(var0.script_parameters)) {
-    var1 = var0.script_parameters;
+  if(isDefined(var_0.script_parameters)) {
+    var_1 = var_0.script_parameters;
   }
 
-  if(isDefined(var0.script_delay)) {
-    wait float(var0.script_delay);
+  if(isDefined(var_0.script_delay)) {
+    wait float(var_0.script_delay);
   }
 
   if(isDefined(self.target)) {
-    var4 = getEntArray(self.target, "targetname");
-    var5 = [];
+    var_4 = getEntArray(self.target, "targetname");
+    var_5 = [];
 
-    foreach(var7 in var4) {
-      if(isDefined(var7) && isDefined(var7.classname) && var7.classname == "script_brushmodel") {
-        var5 = var7;
+    foreach(var_7 in var_4) {
+      if(isDefined(var_7) && isDefined(var_7.classname) && var_7.classname == "script_brushmodel") {
+        var_5 = var_7;
       }
     }
 
-    if(isDefined(var5) && var5.size > 0) {
-      var5 = sortbydistance(var5, var0.origin);
-      var9 = var5[0];
+    if(isDefined(var_5) && var_5.size > 0) {
+      var_5 = sortbydistance(var_5, var_0.origin);
+      var_9 = var_5[0];
 
-      if(isDefined(var9)) {
-        var9 delete();
+      if(isDefined(var_9)) {
+        var_9 delete();
       }
     }
   }
 
-  var0 setscriptablepartstate("base", var1);
+  var_0 setscriptablepartstate("base", var_1);
 }
 
-function shaft_run_sparks(var0, var1) {
-  var2 = self.origin;
-  var3 = anglesToForward(self.angles);
-  var4 = anglestoup(self.angles);
-  var5 = spawnfx(level._effect["vfx_speaker_sparks"], self.origin, var3, var4);
+function shaft_run_sparks(var_0, var_1) {
+  var_2 = self.origin;
+  var_3 = anglesToForward(self.angles);
+  var_4 = anglestoup(self.angles);
+  var_5 = spawnfx(level._effect["vfx_speaker_sparks"], self.origin, var_3, var_4);
 
   if(isDefined(self.script_delay)) {
-    var0 = float(self.script_delay) * 0.5;
-    var1 = float(self.script_delay) * 1.1;
+    var_0 = float(self.script_delay) * 0.5;
+    var_1 = float(self.script_delay) * 1.1;
   }
 
   for(;;) {
-    wait randomfloatrange(var0, var1);
-    triggerfx(var5);
+    wait randomfloatrange(var_0, var_1);
+    triggerfx(var_5);
   }
 }
 
 function shaft_epic_vfx_think() {
   self waittill("trigger");
-  var0 = scripts\engine\utility::getStruct(self.target, "targetname");
-  var1 = [];
+  var_0 = scripts\engine\utility::getStruct(self.target, "targetname");
+  var_1 = [];
 
-  if(isDefined(var0.target)) {
-    var1 = scripts\engine\utility::getStructArray(var0.target, "targetname");
+  if(isDefined(var_0.target)) {
+    var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   }
 
-  while(!scripts\engine\sp\utility::player_looking_at(var0.origin, 0.95)) {
+  while(!scripts\engine\sp\utility::player_looking_at(var_0.origin, 0.95)) {
     wait 0.05;
   }
 
@@ -956,26 +956,26 @@ function shaft_epic_vfx_think() {
     return;
   }
 
-  if(isDefined(var1) && var1.size > 0) {
-    foreach(var3 in var1) {
-      var4 = "vfx_zd30_falling_debris";
+  if(isDefined(var_1) && var_1.size > 0) {
+    foreach(var_3 in var_1) {
+      var_4 = "vfx_zd30_falling_debris";
 
-      if(isDefined(var3.script_noteworthy)) {
-        var4 = var3.script_noteworthy;
+      if(isDefined(var_3.script_noteworthy)) {
+        var_4 = var_3.script_noteworthy;
       }
 
-      thread sfx_falling_debris(var3.origin);
-      playFX(level._effect[var4], var3.origin);
+      thread sfx_falling_debris(var_3.origin);
+      playFX(level._effect[var_4], var_3.origin);
     }
 
     return;
   }
 }
 
-function sfx_falling_debris(var0) {
-  thread scripts\engine\utility::play_sound_in_space("zd30_shaft_debris_woodbreak", var0);
+function sfx_falling_debris(var_0) {
+  thread scripts\engine\utility::play_sound_in_space("zd30_shaft_debris_woodbreak", var_0);
   wait 0.75;
-  thread scripts\engine\utility::play_sound_in_space("zd30_shaft_debris_fireball_sm", var0 - (0, 0, 100));
+  thread scripts\engine\utility::play_sound_in_space("zd30_shaft_debris_fireball_sm", var_0 - (0, 0, 100));
 }
 
 function shaft_ab_light_prep() {
@@ -986,40 +986,40 @@ function shaft_ab_light_prep() {
   level.shaft_ab_lights[2] = "mine_shaft_fire_03";
   level.shaft_ab_lights[4] = "mine_shaft_fire_04";
 
-  foreach(var1 in level.shaft_ab_lights) {
-    var2 = getEntArray(var1, "targetname");
+  foreach(var_1 in level.shaft_ab_lights) {
+    var_2 = getEntArray(var_1, "targetname");
 
-    foreach(var4 in var2) {
-      if(!isDefined(var4)) {
+    foreach(var_4 in var_2) {
+      if(!isDefined(var_4)) {
         continue;
       }
 
-      var4.original_intensity = var4 getlightintensity();
-      var4 setlightintensity(0);
+      var_4.original_intensity = var_4 getlightintensity();
+      var_4 setlightintensity(0);
     }
   }
 }
 
-function shaft_ab_light_set(var0, var1) {
-  scripts\engine\utility::array_thread(getEntArray(var0, "targetname"), &shaft_ab_light_set_internal, var0, var1);
+function shaft_ab_light_set(var_0, var_1) {
+  scripts\engine\utility::array_thread(getEntArray(var_0, "targetname"), &shaft_ab_light_set_internal, var_0, var_1);
 }
 
-function shaft_ab_light_set_internal(var0, var1) {
-  if(!isDefined(self) || !scripts\engine\utility::array_contains(level.shaft_ab_lights, var0)) {
+function shaft_ab_light_set_internal(var_0, var_1) {
+  if(!isDefined(self) || !scripts\engine\utility::array_contains(level.shaft_ab_lights, var_0)) {
     return;
   }
 
-  var2 = 1;
+  var_2 = 1;
 
-  if(var2 && isDefined(var1)) {
-    var3 = 0.1;
-    var4 = int(var1 / 0.1);
+  if(var_2 && isDefined(var_1)) {
+    var_3 = 0.1;
+    var_4 = int(var_1 / 0.1);
 
-    for(var5 = 0; var5 < var4; var5++) {
-      var6 = var5 / var4;
-      var7 = self.original_intensity * var6;
-      self setlightintensity(var7);
-      wait var3;
+    for(var_5 = 0; var_5 < var_4; var_5++) {
+      var_6 = var_5 / var_4;
+      var_7 = self.original_intensity * var_6;
+      self setlightintensity(var_7);
+      wait var_3;
     }
   }
 
@@ -1044,82 +1044,82 @@ function shaft_epic_fire_catchup() {
   thread shaft_mayhem_beam_crack();
 }
 
-function waittill_fire_reached_shaft_level(var0, var1) {
+function waittill_fire_reached_shaft_level(var_0, var_1) {
   level.player endon("death");
-  var2 = var0 - 1;
+  var_2 = var_0 - 1;
 
-  if(!isDefined(level.player.shaft_level_timer[var2])) {
-    level.player.shaft_level_timer[var2] = 0;
+  if(!isDefined(level.player.shaft_level_timer[var_2])) {
+    level.player.shaft_level_timer[var_2] = 0;
   }
 
-  if(!isDefined(var1)) {
-    var1 = 9999;
+  if(!isDefined(var_1)) {
+    var_1 = 9999;
   }
 
-  var3 = 0;
-  var4 = 0.2;
-  var5 = 0;
-  var6 = 30;
+  var_3 = 0;
+  var_4 = 0.2;
+  var_5 = 0;
+  var_6 = 30;
 
-  while(level.player.max_shaft_level_index < var0) {
-    if(var0 == 1 && !var5 && istrue(level.mine_carts["mine_cart"].moved_by_player)) {
-      var7 = var1 - var3;
+  while(level.player.max_shaft_level_index < var_0) {
+    if(var_0 == 1 && !var_5 && istrue(level.mine_carts["mine_cart"].moved_by_player)) {
+      var_7 = var_1 - var_3;
 
-      if(var7 >= var6) {
-        var3 = var1 - var6;
-        var5 = 1;
+      if(var_7 >= var_6) {
+        var_3 = var_1 - var_6;
+        var_5 = 1;
 
         if(getdvarint("zd30_debug") > 1) {
-          iprintlnbold("Shaft ground floor timer reduced to: " + var6);
+          iprintlnbold("Shaft ground floor timer reduced to: " + var_6);
         }
       }
     }
 
-    var3 += var4;
+    var_3 += var_4;
 
-    if(var3 > var1) {
+    if(var_3 > var_1) {
       break;
     }
 
-    level.player.shaft_level_timer[var2] = max(0, var1 - var3);
-    wait var4;
+    level.player.shaft_level_timer[var_2] = max(0, var_1 - var_3);
+    wait var_4;
   }
 
-  level.shaft_fire_on_level = var0 - 1;
-  var8 = 10;
-  return min(var8, level.player.shaft_level_timer[var2]);
+  level.shaft_fire_on_level = var_0 - 1;
+  var_8 = 10;
+  return min(var_8, level.player.shaft_level_timer[var_2]);
 }
 
 function shaft_fire_light_wobble_think() {
   self.original_angles = self.angles;
-  var0 = 5;
-  var1 = 12;
-  var2 = 0.5;
-  var3 = 0.75;
+  var_0 = 5;
+  var_1 = 12;
+  var_2 = 0.5;
+  var_3 = 0.75;
 
   for(;;) {
-    var4 = randomfloatrange(var2, var3);
-    var5 = self.original_angles + scripts\engine\utility::randomvectorrange(var0, var1);
-    self rotateTo(var5, var4);
-    wait var4;
+    var_4 = randomfloatrange(var_2, var_3);
+    var_5 = self.original_angles + scripts\engine\utility::randomvectorrange(var_0, var_1);
+    self rotateTo(var_5, var_4);
+    wait var_4;
   }
 }
 
 function shaft_fire_light_think() {
   self linkTo(level.shaft_fire_light, "tag_origin");
   self.initial_intensity = self getlightintensity();
-  var0 = 0.5;
-  var1 = 1;
-  var2 = 0.2;
-  var3 = 0.35;
-  thread shaft_fire_light_flicker(var0, var1, var2, var3);
+  var_0 = 0.5;
+  var_1 = 1;
+  var_2 = 0.2;
+  var_3 = 0.35;
+  thread shaft_fire_light_flicker(var_0, var_1, var_2, var_3);
 }
 
-function shaft_fire_light_flicker(var0, var1, var2, var3) {
+function shaft_fire_light_flicker(var_0, var_1, var_2, var_3) {
   for(;;) {
-    var4 = randomfloatrange(var0, var1) * self.initial_intensity;
-    self setlightintensity(var4);
-    wait randomfloatrange(var2, var3);
+    var_4 = randomfloatrange(var_0, var_1) * self.initial_intensity;
+    self setlightintensity(var_4);
+    wait randomfloatrange(var_2, var_3);
   }
 }
 
@@ -1132,9 +1132,9 @@ function dummy_flares_snake_go() {
   self endon("death");
   self.dummy = 1;
 
-  foreach(var1 in level.oil_fires) {
-    if(self istouching(var1)) {
-      while(!istrue(var1.fire_exploder_on)) {
+  foreach(var_1 in level.oil_fires) {
+    if(self istouching(var_1)) {
+      while(!istrue(var_1.fire_exploder_on)) {
         wait 0.25;
       }
 
@@ -1144,21 +1144,21 @@ function dummy_flares_snake_go() {
 
   scripts\engine\utility::flag_set("shaft_fire_on");
   thread debug_oil_fire_snake();
-  var3 = 30;
-  var4 = self;
+  var_3 = 30;
+  var_4 = self;
 
-  while(isDefined(var4.target)) {
-    var5 = scripts\engine\utility::getStruct(var4.target, "targetname");
-    var6 = distance(self.origin, var5.origin);
-    var7 = var6 / var3;
-    self moveTo(var5.origin, var7);
-    wait var7;
-    var8 = getgroundposition(var5.origin, 4);
-    self moveTo(var8, 0.05);
+  while(isDefined(var_4.target)) {
+    var_5 = scripts\engine\utility::getStruct(var_4.target, "targetname");
+    var_6 = distance(self.origin, var_5.origin);
+    var_7 = var_6 / var_3;
+    self moveTo(var_5.origin, var_7);
+    wait var_7;
+    var_8 = getgroundposition(var_5.origin, 4);
+    self moveTo(var_8, 0.05);
     wait 0.5;
-    self moveTo(var5.origin, 0.05);
+    self moveTo(var_5.origin, 0.05);
     wait 0.5;
-    var4 = var5;
+    var_4 = var_5;
     level notify("snake_fire_spread");
   }
 
@@ -1175,24 +1175,24 @@ function debug_oil_fire_snake() {
 }
 
 function shaft_ladder_fall() {
-  var0 = getEnt("shaft_ladder", "targetname");
-  var1 = getEnt(var0.target, "targetname");
-  var0 linkTo(var1, "tag_origin");
+  var_0 = getEnt("shaft_ladder", "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
+  var_0 linkTo(var_1, "tag_origin");
   level scripts\engine\utility::waittill_any_timeout(3.5, "oil_fire_barrel_explode");
   wait 0.35;
   thread scripts\engine\utility::play_sound_in_space("mayhem_zd30_shaft_base_ladder_collapse", (-2004, 1547, -1140));
-  var2 = -95;
-  var3 = 1.5;
-  var4 = var3 - 0.05;
-  var1 rotateroll(var2, var3, var4, 0.05);
-  wait var3;
-  var5 = 0.25;
-  var6 = 3.25;
-  var4 = var5 - 0.05;
-  var1 rotateroll(var6, var5, 0.05, var4);
-  wait var5;
-  var6 *= -1;
-  var1 rotateroll(var6, var5, var4, 0.05);
+  var_2 = -95;
+  var_3 = 1.5;
+  var_4 = var_3 - 0.05;
+  var_1 rotateroll(var_2, var_3, var_4, 0.05);
+  wait var_3;
+  var_5 = 0.25;
+  var_6 = 3.25;
+  var_4 = var_5 - 0.05;
+  var_1 rotateroll(var_6, var_5, 0.05, var_4);
+  wait var_5;
+  var_6 *= -1;
+  var_1 rotateroll(var_6, var_5, var_4, 0.05);
 }
 
 function mus_shaft() {
@@ -1201,7 +1201,7 @@ function mus_shaft() {
 }
 
 function shaft_difficulty_think() {
-  var0 = level.player.gs.playergrenadebasetime;
+  var_0 = level.player.gs.playergrenadebasetime;
   scripts\engine\utility::flag_wait("entered_shaft_low");
   level.player.gs.playergrenadebasetime = 12000;
   scripts\engine\utility::flag_wait("entered_shaft_mid");
@@ -1209,22 +1209,22 @@ function shaft_difficulty_think() {
   scripts\engine\utility::flag_wait("entered_shaft_high");
   level.player.gs.playergrenadebasetime = 6000;
   scripts\engine\utility::flag_wait("wolf_killed");
-  level.player.gs.playergrenadebasetime = var0;
+  level.player.gs.playergrenadebasetime = var_0;
 }
 
 function hint_boost_vo() {
   level.player endon("death");
   level endon("hint_boost_done");
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, "dx_vom_alx_tunnels_chamber_50");
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, "dx_vom_alx_tunnels_chamber_50");
 }
 
 function hint_shoot_on_ladder() {
   level.player scripts\engine\utility::ent_flag_init("shoot_on_ladder");
-  var0 = 2;
+  var_0 = 2;
 
-  while(var0 > 0) {
-    var0--;
+  while(var_0 > 0) {
+    var_0--;
 
     while(!level.player isonladder() || !scripts\sp\maps\tunnels\zd30tunnels_utility::player_has_pistol()) {
       wait 0.25;
@@ -1259,20 +1259,20 @@ function notify_when_player_shot_on_ladder() {
   }
 }
 
-function waittill_player_jump_or_timeout(var0) {
-  if(isDefined(var0)) {
-    var1 = var0;
+function waittill_player_jump_or_timeout(var_0) {
+  if(isDefined(var_0)) {
+    var_1 = var_0;
   } else {
-    var1 = 3;
+    var_1 = 3;
   }
 
-  while(var1 > 0) {
+  while(var_1 > 0) {
     if(level.player isjumping()) {
       return true;
     }
 
     waitframe();
-    var1 -= 0.05;
+    var_1 -= 0.05;
   }
 
   return false;
@@ -1281,10 +1281,10 @@ function waittill_player_jump_or_timeout(var0) {
 function shaft_ai_jump_down_think() {
   self endon("death");
   self endon("entitydeleted");
-  var0 = scripts\engine\utility::getStruct(self.target, "targetname");
-  var1 = var0.radius;
-  var2 = var0.origin;
-  var3 = 256;
+  var_0 = scripts\engine\utility::getStruct(self.target, "targetname");
+  var_1 = var_0.radius;
+  var_2 = var_0.origin;
+  var_3 = 256;
 
   for(;;) {
     jumpiffalse(!isDefined(level.mine_carts) || !isDefined(level.mine_carts["mine_cart"])) LOC_0000005a;
@@ -1292,18 +1292,18 @@ function shaft_ai_jump_down_think() {
   }
 
   for(;;) {
-    var4 = undefined;
+    var_4 = undefined;
 
     if(level.mine_carts["mine_cart"] istouching(self)) {
-      var4 = createnavobstaclebybounds(var2, (var1, var1, var3), (0, 0, 0));
+      var_4 = createnavobstaclebybounds(var_2, (var_1, var_1, var_3), (0, 0, 0));
     }
 
     while(level.mine_carts["mine_cart"] istouching(self)) {
       wait 0.25;
     }
 
-    if(isDefined(var4)) {
-      destroynavobstacle(var4);
+    if(isDefined(var_4)) {
+      destroynavobstacle(var_4);
     }
 
     wait 0.05;
@@ -1313,20 +1313,20 @@ function shaft_ai_jump_down_think() {
 function shaft_smoke_survival_vo() {
   level endon("shaft_final_ladder_reached");
   level.player endon("death");
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, "dx_vom_alx_shaft_firehints_20");
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, "dx_vom_alx_shaft_firehints_20");
 }
 
-function wait_look_up_or_timeout(var0, var1) {
-  while(!isDefined(var1) || var1 > 0) {
-    if(level.player getplayerangles()[0] < var0 * -1) {
+function wait_look_up_or_timeout(var_0, var_1) {
+  while(!isDefined(var_1) || var_1 > 0) {
+    if(level.player getplayerangles()[0] < var_0 * -1) {
       return true;
     }
 
     waitframe();
 
-    if(isDefined(var1)) {
-      var1 -= 0.05;
+    if(isDefined(var_1)) {
+      var_1 -= 0.05;
     }
   }
 
@@ -1344,16 +1344,16 @@ function shaft_smoke_vision_manager() {
       thread gas_playerexposedeffects();
 
       while(level.player.cur_shaft_level_index <= level.shaft_fire_on_level && !scripts\engine\utility::flag("shaft_ladder_scene_execute")) {
-        var0 = int(max(0, level.shaft_fire_on_level - level.player.cur_shaft_level_index));
+        var_0 = int(max(0, level.shaft_fire_on_level - level.player.cur_shaft_level_index));
         level.smoke_death_timer -= 1;
 
-        if(level.smoke_death_timer > 25 && var0 < 1) {
+        if(level.smoke_death_timer > 25 && var_0 < 1) {
           level.player_is_safe_from_smoke = 1;
         } else {
           level.player_is_safe_from_smoke = 0;
         }
 
-        if(level.smoke_death_timer <= 0 || var0 >= 3) {
+        if(level.smoke_death_timer <= 0 || var_0 >= 3) {
           level.player.dead_from_smoke = 1;
 
           if(!scripts\sp\maps\tunnels\zd30tunnels_utility::zd30_debug()) {
@@ -1373,9 +1373,9 @@ function shaft_smoke_vision_manager() {
     }
 
     level.smoke_death_timer = int(min(level.player_smoke_death_time, level.smoke_death_timer + 3));
-    var0 = int(max(0, level.shaft_fire_on_level - level.player.cur_shaft_level_index));
+    var_0 = int(max(0, level.shaft_fire_on_level - level.player.cur_shaft_level_index));
 
-    if(level.smoke_death_timer > 25 && var0 < 1) {
+    if(level.smoke_death_timer > 25 && var_0 < 1) {
       level.player_is_safe_from_smoke = 1;
     } else {
       level.player_is_safe_from_smoke = 0;
@@ -1390,25 +1390,25 @@ function shaft_smoke_vision_manager() {
   gas_playerrecovereffects();
 }
 
-function shaft_fire_kill_player(var0, var1, var2) {
-  if(isDefined(var2)) {
-    level endon(var2);
+function shaft_fire_kill_player(var_0, var_1, var_2) {
+  if(isDefined(var_2)) {
+    level endon(var_2);
   }
 
-  var3 = spawn("trigger_radius_fire", level.player.origin, 0, 32, 128);
-  var3.script_multiplier = 5;
-  var3.script_radius = 32;
-  var3 enablelinkTo();
-  var3 linkTo(level.player, "tag_origin");
-  thread scripts\sp\trigger::trigger_fire(var3);
+  var_3 = spawn("trigger_radius_fire", level.player.origin, 0, 32, 128);
+  var_3.script_multiplier = 5;
+  var_3.script_radius = 32;
+  var_3 enablelinkTo();
+  var_3 linkTo(level.player, "tag_origin");
+  thread scripts\sp\trigger::trigger_fire(var_3);
 
-  if(!isDefined(var0)) {
-    var0 = 3;
+  if(!isDefined(var_0)) {
+    var_0 = 3;
   }
 
-  wait var0;
+  wait var_0;
 
-  if(istrue(var1)) {
+  if(istrue(var_1)) {
     scripts\sp\player_death::set_custom_death_quote(64);
   }
 
@@ -1423,53 +1423,53 @@ function gas_playerexposedeffects() {
   visionsetnaked("zd30tunnels_shaft_smoke_20", 5);
   level.player_smoke_vision = "zd30tunnels_shaft_smoke_20";
   setsaveddvar("NKTRSSTMRQ", -1);
-  var0 = gettime();
-  var1 = ["ges_ph_cough_a", "ges_ph_cough_b", "ges_ph_cough_c"];
-  var2 = ["gas_player_cough_1", "gas_player_cough_3"];
-  var3 = var1[0];
-  var4 = var1;
-  var5 = var2;
-  var6 = 0.05;
-  var7 = 0;
-  var8 = 0;
-  var9 = 500;
-  var10 = 0.4;
-  var11 = 1400;
-  var12 = 2500;
-  var13 = 2000;
-  var14 = 2400;
-  var15 = 0.03;
-  var16 = 0.01;
-  var17 = var0;
-  var18 = 0.2;
-  var19 = 0;
-  var20 = 0.5;
-  var21 = scripts\engine\math::normalize_value(var17, var17 + level.player_smoke_death_time * 1000, gettime());
-  var22 = scripts\engine\math::factor_value(var11, var13, var21);
-  var23 = scripts\engine\math::factor_value(var12, var14, var21);
-  var24 = randomfloatrange(var22, var23);
-  var25 = gettime() + var24;
+  var_0 = gettime();
+  var_1 = ["ges_ph_cough_a", "ges_ph_cough_b", "ges_ph_cough_c"];
+  var_2 = ["gas_player_cough_1", "gas_player_cough_3"];
+  var_3 = var_1[0];
+  var_4 = var_1;
+  var_5 = var_2;
+  var_6 = 0.05;
+  var_7 = 0;
+  var_8 = 0;
+  var_9 = 500;
+  var_10 = 0.4;
+  var_11 = 1400;
+  var_12 = 2500;
+  var_13 = 2000;
+  var_14 = 2400;
+  var_15 = 0.03;
+  var_16 = 0.01;
+  var_17 = var_0;
+  var_18 = 0.2;
+  var_19 = 0;
+  var_20 = 0.5;
+  var_21 = scripts\engine\math::normalize_value(var_17, var_17 + level.player_smoke_death_time * 1000, gettime());
+  var_22 = scripts\engine\math::factor_value(var_11, var_13, var_21);
+  var_23 = scripts\engine\math::factor_value(var_12, var_14, var_21);
+  var_24 = randomfloatrange(var_22, var_23);
+  var_25 = gettime() + var_24;
 
   while(!scripts\engine\utility::flag("shaft_ladder_scene_execute")) {
-    var0 = gettime();
-    var21 = scripts\engine\math::normalize_value(var17, var17 + level.player_smoke_death_time * 1000, var0);
+    var_0 = gettime();
+    var_21 = scripts\engine\math::normalize_value(var_17, var_17 + level.player_smoke_death_time * 1000, var_0);
 
     if(level.player.cur_shaft_level_index < level.shaft_fire_on_level) {
-      var26 = level.shaft_fire_on_level - level.player.cur_shaft_level_index;
-      var21 = clamp(var21 * var26, 0, 1);
+      var_26 = level.shaft_fire_on_level - level.player.cur_shaft_level_index;
+      var_21 = clamp(var_21 * var_26, 0, 1);
     }
 
-    level.player_smoke_exposure = var21;
+    level.player_smoke_exposure = var_21;
 
-    if(var21 > var10 && !var8 && var0 >= var17 + var9) {
+    if(var_21 > var_10 && !var_8 && var_0 >= var_17 + var_9) {
       playFXOnTag(level._effect["vfx_player_smoke_screen"], level.player, "tag_origin");
-      var8 = 1;
+      var_8 = 1;
     }
 
-    if(var21 <= var10) {
+    if(var_21 <= var_10) {
       visionsetnaked("zd30tunnels_shaft_smoke_20", 5);
       level.player_smoke_vision = "zd30tunnels_shaft_smoke_20";
-    } else if(var21 > var10 && var21 < 0.8) {
+    } else if(var_21 > var_10 && var_21 < 0.8) {
       visionsetnaked("zd30tunnels_shaft_smoke_50", 5);
       level.player_smoke_vision = "zd30tunnels_shaft_smoke_50";
       level.player_smoke_death_time = int(35);
@@ -1479,50 +1479,50 @@ function gas_playerexposedeffects() {
       level.player_smoke_death_time = int(28);
     }
 
-    if(var0 >= var25) {
-      if(!var4.size) {
-        var4 = var1;
+    if(var_0 >= var_25) {
+      if(!var_4.size) {
+        var_4 = var_1;
       }
 
-      if(!var5.size) {
-        var5 = var2;
+      if(!var_5.size) {
+        var_5 = var_2;
       }
 
-      while(level.player isgestureplaying(var3)) {
+      while(level.player isgestureplaying(var_3)) {
         waitframe();
       }
 
-      var27 = scripts\engine\utility::random(var4);
-      var28 = scripts\engine\utility::random(var5);
-      var3 = var27;
+      var_27 = scripts\engine\utility::random(var_4);
+      var_28 = scripts\engine\utility::random(var_5);
+      var_3 = var_27;
 
-      if(should_play_cough_gesture() && var21 > var10) {
-        level.player playgestureviewmodel(var27, undefined, 0, 0.75);
+      if(should_play_cough_gesture() && var_21 > var_10) {
+        level.player playgestureviewmodel(var_27, undefined, 0, 0.75);
       }
 
       if(level.player scripts\sp\maps\tunnels\zd30tunnels_utility::is_done_speaking()) {
-        level.player playSound(var28);
+        level.player playSound(var_28);
       }
 
-      var4 = scripts\engine\utility::array_remove(var4, var27);
-      var5 = scripts\engine\utility::array_remove(var5, var28);
-      var22 = scripts\engine\math::factor_value(var11, var13, var21);
-      var23 = scripts\engine\math::factor_value(var12, var14, var21);
-      var24 = randomfloatrange(var22, var23);
-      thread scripts\sp\maps\tunnels\zd30tunnels_utility::fake_player_damage(undefined, var24 * 0.5);
-      var25 = gettime() + var24;
+      var_4 = scripts\engine\utility::array_remove(var_4, var_27);
+      var_5 = scripts\engine\utility::array_remove(var_5, var_28);
+      var_22 = scripts\engine\math::factor_value(var_11, var_13, var_21);
+      var_23 = scripts\engine\math::factor_value(var_12, var_14, var_21);
+      var_24 = randomfloatrange(var_22, var_23);
+      thread scripts\sp\maps\tunnels\zd30tunnels_utility::fake_player_damage(undefined, var_24 * 0.5);
+      var_25 = gettime() + var_24;
     }
 
-    var29 = var18 * sin(var19);
-    var19 = scripts\engine\math::wrap(0, 360, var19 + var20);
-    var30 = scripts\engine\math::factor_value(0, var15, var21 + var29);
-    var31 = scripts\engine\math::factor_value(0, var16, var21 + var29);
-    var7 = scripts\engine\math::factor_value(0, var6, var21 + var18);
+    var_29 = var_18 * sin(var_19);
+    var_19 = scripts\engine\math::wrap(0, 360, var_19 + var_20);
+    var_30 = scripts\engine\math::factor_value(0, var_15, var_21 + var_29);
+    var_31 = scripts\engine\math::factor_value(0, var_16, var_21 + var_29);
+    var_7 = scripts\engine\math::factor_value(0, var_6, var_21 + var_18);
 
-    if(var21 < var10) {
-      var7 = 0.1;
-      var30 = 0;
-      var31 = 0;
+    if(var_21 < var_10) {
+      var_7 = 0.1;
+      var_30 = 0;
+      var_31 = 0;
     }
 
     waitframe();
@@ -1555,9 +1555,9 @@ function should_play_cough_gesture() {
   }
 
   if(isDefined(level.player.last_weapon_fire_time)) {
-    var0 = 1;
+    var_0 = 1;
 
-    if((gettime() - level.player.last_weapon_fire_time) / 1000 < var0) {
+    if((gettime() - level.player.last_weapon_fire_time) / 1000 < var_0) {
       return false;
     }
   }
@@ -1565,25 +1565,25 @@ function should_play_cough_gesture() {
   return true;
 }
 
-function gas_playerrecovereffects(var0, var1, var2) {
-  if(!isDefined(var0)) {
-    var0 = 5;
+function gas_playerrecovereffects(var_0, var_1, var_2) {
+  if(!isDefined(var_0)) {
+    var_0 = 5;
   }
 
-  if(isDefined(var1)) {
-    var3 = var1;
+  if(isDefined(var_1)) {
+    var_3 = var_1;
   } else {
-    var3 = "zd30tunnels_shaft_smoke_20";
+    var_3 = "zd30tunnels_shaft_smoke_20";
   }
 
-  if(isDefined(var3)) {
-    var4 = var3;
+  if(isDefined(var_3)) {
+    var_4 = var_3;
   } else {
-    var4 = 5;
+    var_4 = 5;
   }
 
-  visionsetnaked(var4, var4);
-  level.player_smoke_vision = var4;
+  visionsetnaked(var_4, var_4);
+  level.player_smoke_vision = var_4;
   stopFXOnTag(level._effect["vfx_player_smoke_screen"], level.player, "tag_origin");
   level.player.damage.deathsdooroverlaypulse fadeovertime(0.75);
   level.player.damage.deathsdooroverlaypulse.alpha = 0;
@@ -1614,70 +1614,70 @@ function shaft_wolf_pa_vo() {
   scripts\engine\utility::array_thread(getEntArray("wolf_pa_trig", "targetname"), &wolf_pa_think);
   level.wolf_pa_queue = [];
   level.wolf_pa_cur_index = -1;
-  var0 = 3;
+  var_0 = 3;
 
-  for(var1 = 0; var1 < level.wolf_pa_vo.size; var1++) {
-    for(var2 = 0; var2 < level.wolf_pa_vo[var1].size; var2++) {
-      var3 = level.wolf_pa_vo[var1][var2];
-      var4 = strtok(var3, " ");
-      var5 = 3;
-      var6 = 3;
-      var7 = 3;
-      var8 = var4[0];
-      var9 = get_closest_speaker();
-      var10 = 0;
-      var11 = 0;
+  for(var_1 = 0; var_1 < level.wolf_pa_vo.size; var_1++) {
+    for(var_2 = 0; var_2 < level.wolf_pa_vo[var_1].size; var_2++) {
+      var_3 = level.wolf_pa_vo[var_1][var_2];
+      var_4 = strtok(var_3, " ");
+      var_5 = 3;
+      var_6 = 3;
+      var_7 = 3;
+      var_8 = var_4[0];
+      var_9 = get_closest_speaker();
+      var_10 = 0;
+      var_11 = 0;
 
-      if(var4.size > 2) {
-        var11 = float(var4[2]);
+      if(var_4.size > 2) {
+        var_11 = float(var_4[2]);
       } else {
-        var10 = int(var4[1]);
+        var_10 = int(var_4[1]);
       }
 
-      if(var10 && level.wolf_pa_cur_index > var1 + 1) {
+      if(var_10 && level.wolf_pa_cur_index > var_1 + 1) {
         if(getdvarint("zd30_debug") > 2) {
-          iprintlnbold("PA: " + var8 + " skipped (cur_idx=" + level.wolf_pa_cur_index + ",play_idx=" + var1);
+          iprintlnbold("PA: " + var_8 + " skipped (cur_idx=" + level.wolf_pa_cur_index + ",play_idx=" + var_1);
         }
 
         continue;
       }
 
       if(getdvarint("zd30_debug") > 2) {
-        var12 = "";
-        var13 = strtok(var8, "_");
+        var_12 = "";
+        var_13 = strtok(var_8, "_");
 
-        for(var14 = 3; var14 < var13.size; var14++) {
-          var15 = "_";
+        for(var_14 = 3; var_14 < var_13.size; var_14++) {
+          var_15 = "_";
 
-          if(var14 == 3) {
-            var15 = "";
+          if(var_14 == 3) {
+            var_15 = "";
           }
 
-          var12 += var15 + var13[var14];
+          var_12 += var_15 + var_13[var_14];
         }
 
-        iprintlnbold("PA: " + var12 + " (" + var1 + 1 + ":" + var2 + 1 + "/" + level.wolf_pa_vo[var1].size + ")");
+        iprintlnbold("PA: " + var_12 + " (" + var_1 + 1 + ":" + var_2 + 1 + "/" + level.wolf_pa_vo[var_1].size + ")");
       }
 
-      play_wolf_vo_on_this_speaker(var9, var8, var5, var6, var7);
+      play_wolf_vo_on_this_speaker(var_9, var_8, var_5, var_6, var_7);
 
       if(getdvarint("zd30_debug") > 2) {
-        iprintlnbold("post_delay=" + var11 + "sec");
+        iprintlnbold("post_delay=" + var_11 + "sec");
       }
 
-      wait var11;
+      wait var_11;
     }
 
     if(getdvarint("zd30_debug") > 2) {
-      iprintlnbold("set_delay=" + var0 + "sec");
+      iprintlnbold("set_delay=" + var_0 + "sec");
     }
 
-    wait var0;
+    wait var_0;
   }
 }
 
-function cut_pa_on_flag(var0) {
-  scripts\engine\utility::flag_wait(var0);
+function cut_pa_on_flag(var_0) {
+  scripts\engine\utility::flag_wait(var_0);
 
   if(isDefined(level.wolf_pa_emitter)) {
     level.wolf_pa_emitter stopsounds();
@@ -1691,23 +1691,23 @@ function wolf_speaker_destroyed_think() {
   self.health = 100000;
 
   for(;;) {
-    self waittill("damage", var0, var1);
+    self waittill("damage", var_0, var_1);
 
-    if(isDefined(var1) && isPlayer(var1)) {
+    if(isDefined(var_1) && isPlayer(var_1)) {
       break;
     }
 
-    self.health += var0;
+    self.health += var_0;
   }
 
-  var2 = anglesToForward(self.angles);
-  var3 = anglestoup(self.angles);
-  var4 = 2;
-  var5 = self.origin + vectorNormalize(var2) * var4;
+  var_2 = anglesToForward(self.angles);
+  var_3 = anglestoup(self.angles);
+  var_4 = 2;
+  var_5 = self.origin + vectorNormalize(var_2) * var_4;
   scripts\engine\utility::delaycall(1, &playsound, "tv_shot_sparks");
-  scripts\engine\utility::noself_delaycall(1.25, &playfx, level._effect["vfx_speaker_sparks"], var5, var2, var3);
+  scripts\engine\utility::noself_delaycall(1.25, &playfx, level._effect["vfx_speaker_sparks"], var_5, var_2, var_3);
   scripts\engine\utility::delaycall(3, &playsound, "tv_shot_sparks");
-  scripts\engine\utility::noself_delaycall(3.25, &playfx, level._effect["vfx_speaker_sparks"], var5, var2, var3);
+  scripts\engine\utility::noself_delaycall(3.25, &playfx, level._effect["vfx_speaker_sparks"], var_5, var_2, var_3);
   self.destroyed = 1;
   self rotatepitch(20, 0.1);
 
@@ -1727,16 +1727,16 @@ function wolf_speaker_destroyed_think() {
     return;
   }
 
-  var6 = get_closest_speaker();
-  level notify("move_to_next_speaker", var6);
+  var_6 = get_closest_speaker();
+  level notify("move_to_next_speaker", var_6);
 
   if(getdvarint("zd30_debug") > 0) {
-    thread scripts\engine\utility::draw_line_for_time(self.origin, var6.origin, 1, 0.5, 0.5, 5);
+    thread scripts\engine\utility::draw_line_for_time(self.origin, var_6.origin, 1, 0.5, 0.5, 5);
     return;
   }
 }
 
-function play_wolf_vo_on_this_speaker(var0, var1, var2, var3) {
+function play_wolf_vo_on_this_speaker(var_0, var_1, var_2, var_3) {
   if(isDefined(level.wolf_pa_emitter)) {
     level.wolf_pa_emitter delete();
   }
@@ -1745,7 +1745,7 @@ function play_wolf_vo_on_this_speaker(var0, var1, var2, var3) {
   thread play_wolf_vo_speaker_debug();
   thread wolf_pa_move_to_next_speaker_monitor();
   scripts\sp\maps\tunnels\zd30tunnels_utility::wait_combat_cooldown(0.4, 3);
-  level.wolf_pa_emitter scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter(var0, 1, 3);
+  level.wolf_pa_emitter scripts\sp\maps\tunnels\zd30tunnels_utility::say_as_chatter(var_0, 1, 3);
 
   if(isDefined(level.wolf_pa_emitter)) {
     level.wolf_pa_emitter delete();
@@ -1758,8 +1758,8 @@ function wolf_pa_move_to_next_speaker_monitor() {
   level.wolf_pa_emitter endon("entitydeleted");
 
   for(;;) {
-    level waittill("move_to_next_speaker", var0);
-    level.wolf_pa_emitter moveTo(var0.origin, 0.25);
+    level waittill("move_to_next_speaker", var_0);
+    level.wolf_pa_emitter moveTo(var_0.origin, 0.25);
   }
 }
 
@@ -1773,21 +1773,21 @@ function play_wolf_vo_speaker_debug() {
 }
 
 function get_closest_speaker() {
-  var0 = [];
+  var_0 = [];
 
-  foreach(var2 in level.wolf_speakers) {
-    if(!istrue(var2.destroyed)) {
-      var0 = var2;
+  foreach(var_2 in level.wolf_speakers) {
+    if(!istrue(var_2.destroyed)) {
+      var_0 = var_2;
     }
   }
 
-  if(var0.size == 0) {
-    var4 = sortbydistance(level.wolf_speakers, level.player.origin);
-    return var4[var4.size - 1];
+  if(var_0.size == 0) {
+    var_4 = sortbydistance(level.wolf_speakers, level.player.origin);
+    return var_4[var_4.size - 1];
   }
 
-  var4 = sortbydistance(var1, level.player.origin);
-  return var4[0];
+  var_4 = sortbydistance(var_1, level.player.origin);
+  return var_4[0];
 }
 
 function wolf_pa_think() {
@@ -1802,40 +1802,40 @@ function wolf_pa_think() {
 }
 
 function shaft_fire_debug_print() {
-  var0 = 0.1;
+  var_0 = 0.1;
 
   while(getdvarint("zd30_debug") > 1) {
-    var1 = 7;
-    var2 = 0.5;
-    var3 = (0.65, 0.65, 0.75);
-    var4 = level.player.max_shaft_level_index;
-    var5 = level.player.cur_shaft_level_index;
-    var6 = level.shaft_fire_on_level;
-    var7 = "Player Reached Floor: " + var4 + 1 + " ( total time: " + int(var0) + " )";
-    var7 = "Fire Reached Floor: " + var6 + 1;
-    var7 = "Player's Current Floor: " + var5 + 1;
+    var_1 = 7;
+    var_2 = 0.5;
+    var_3 = (0.65, 0.65, 0.75);
+    var_4 = level.player.max_shaft_level_index;
+    var_5 = level.player.cur_shaft_level_index;
+    var_6 = level.shaft_fire_on_level;
+    var_7 = "Player Reached Floor: " + var_4 + 1 + " ( total time: " + int(var_0) + " )";
+    var_7 = "Fire Reached Floor: " + var_6 + 1;
+    var_7 = "Player's Current Floor: " + var_5 + 1;
 
-    if(isDefined(level.player.shaft_level_timer[var5])) {
-      var8 = level.player.shaft_level_timer[var5];
-      var7 += " ( remaining time: " + int(var8) + " )";
+    if(isDefined(level.player.shaft_level_timer[var_5])) {
+      var_8 = level.player.shaft_level_timer[var_5];
+      var_7 += " ( remaining time: " + int(var_8) + " )";
     }
 
     if(isDefined(level.smoke_death_timer) && isDefined(level.player_smoke_death_time)) {
-      var7 = "Player's choke time: " + level.smoke_death_timer + "/" + level.player_smoke_death_time;
+      var_7 = "Player's choke time: " + level.smoke_death_timer + "/" + level.player_smoke_death_time;
 
       if(isDefined(level.player_smoke_exposure)) {
-        var7 = var7 + " ( exposure: " + int(level.player_smoke_exposure * 100) / 100 + " )";
+        var_7 = var_7 + " ( exposure: " + int(level.player_smoke_exposure * 100) / 100 + " )";
       }
     }
 
     if(istrue(level.player_is_safe_from_smoke)) {
-      var7 = "Player safe from smoke: Yes";
+      var_7 = "Player safe from smoke: Yes";
     } else {
-      var7 = "Player safe from smoke: No";
+      var_7 = "Player safe from smoke: No";
     }
 
     if(isDefined(level.player_smoke_vision)) {
-      var7 = "Shaft vision: " + level.player_smoke_vision;
+      var_7 = "Shaft vision: " + level.player_smoke_vision;
     }
 
     if(isDefined(level.shaft_fire_light)) {
@@ -1843,7 +1843,7 @@ function shaft_fire_debug_print() {
     }
 
     wait 0.1;
-    var0 += 0.1;
+    var_0 += 0.1;
   }
 }
 
@@ -1854,9 +1854,9 @@ function reunion_start() {
 
 function reunion_setup() {
   wait 1;
-  var0 = scripts\engine\utility::getStruct("shaft_ladder_scene", "targetname");
-  level.shaft_ladder = scripts\engine\sp\utility::spawn_anim_model("shaft_ladder", var0.origin, var0.angles);
-  var0 thread scripts\common\anim::anim_first_frame_solo(level.shaft_ladder, "shaft_ladder_intro");
+  var_0 = scripts\engine\utility::getStruct("shaft_ladder_scene", "targetname");
+  level.shaft_ladder = scripts\engine\sp\utility::spawn_anim_model("shaft_ladder", var_0.origin, var_0.angles);
+  var_0 thread scripts\common\anim::anim_first_frame_solo(level.shaft_ladder, "shaft_ladder_intro");
 }
 
 function reunion_catchup() {
@@ -1869,41 +1869,41 @@ function reunion() {
   thread wolf_tunnel_deadbodies();
   waitframe();
   scripts\engine\utility::flag_wait("shaft_final_ladder_reached");
-  var0 = scripts\engine\sp\utility::spawn_targetname("ladder_corpse", 1);
-  var0.animname = "ladder_corpse";
-  var0.ignoreall = 1;
-  var0.ignoreme = 1;
-  var0.allowdeath = 0;
-  var0.noragdoll = 1;
-  var0 thread scripts\engine\sp\utility::name_hide();
-  var0 scripts\common\ai::magic_bullet_shield();
-  var0 thread scripts\sp\maps\tunnels\zd30tunnels_ai::battlechatter_off_spawn_func();
-  var0 scripts\common\ai::gun_remove();
-  var0 scripts\sp\utility::context_melee_allow(0);
-  level.ladder_corpse = var0;
+  var_0 = scripts\engine\sp\utility::spawn_targetname("ladder_corpse", 1);
+  var_0.animname = "ladder_corpse";
+  var_0.ignoreall = 1;
+  var_0.ignoreme = 1;
+  var_0.allowdeath = 0;
+  var_0.noragdoll = 1;
+  var_0 thread scripts\engine\sp\utility::name_hide();
+  var_0 scripts\common\ai::magic_bullet_shield();
+  var_0 thread scripts\sp\maps\tunnels\zd30tunnels_ai::battlechatter_off_spawn_func();
+  var_0 scripts\common\ai::gun_remove();
+  var_0 scripts\sp\utility::context_melee_allow(0);
+  level.ladder_corpse = var_0;
   waitframe();
-  var1 = getEnt("shaft_top_level_enemy_grabber", "targetname");
-  var2 = getaiarray("axis");
+  var_1 = getEnt("shaft_top_level_enemy_grabber", "targetname");
+  var_2 = getaiarray("axis");
 
-  foreach(var4 in var2) {
-    if(isDefined(var4) && isalive(var4) && var4 istouching(var1)) {
-      if(var4 == level.ladder_corpse) {
+  foreach(var_4 in var_2) {
+    if(isDefined(var_4) && isalive(var_4) && var_4 istouching(var_1)) {
+      if(var_4 == level.ladder_corpse) {
         continue;
       }
 
-      if(abs(var4.origin[2] - level.farah.origin[2]) < 360) {
+      if(abs(var_4.origin[2] - level.farah.origin[2]) < 360) {
         thread reunion_magic_shoot_enemy();
         continue;
       }
 
-      var5 = randomfloatrange(1, 3);
+      var_5 = randomfloatrange(1, 3);
 
-      if(istrue(var4.magic_bullet_shield)) {
-        var4 scripts\common\ai::stop_magic_bullet_shield();
+      if(istrue(var_4.magic_bullet_shield)) {
+        var_4 scripts\common\ai::stop_magic_bullet_shield();
       }
 
-      var4.allowdeath = 1;
-      var4 scripts\engine\utility::delaycall(var5, &kill);
+      var_4.allowdeath = 1;
+      var_4 scripts\engine\utility::delaycall(var_5, &kill);
     }
   }
 
@@ -1923,16 +1923,16 @@ function reset_farah_glowstick() {
 }
 
 function remove_mayhem_clip_under_ladder() {
-  var0 = getEnt("pre_mayhem_item_clip", "targetname");
+  var_0 = getEnt("pre_mayhem_item_clip", "targetname");
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
   }
 
-  var1 = getEnt("shaft_ladder_clip", "targetname");
+  var_1 = getEnt("shaft_ladder_clip", "targetname");
 
-  if(isDefined(var1)) {
-    var1 delete();
+  if(isDefined(var_1)) {
+    var_1 delete();
     return;
   }
 }
@@ -1942,25 +1942,25 @@ function wolf_tunnel_deadbodies() {
   thread wolf_tunnel_deadbody("wolf_tunnel_deadbody_2", "deadbody_2");
 }
 
-function wolf_tunnel_deadbody(var0, var1) {
+function wolf_tunnel_deadbody(var_0, var_1) {
   wait 0.25;
-  var2 = scripts\engine\utility::getStruct(var0, "targetname");
-  var3 = scripts\engine\sp\utility::spawn_targetname(var1 + "_spawner", 1);
-  var3.animname = var1;
-  var3.allowdeath = 0;
-  var3.ignoreme = 1;
-  var3.ignoreall = 1;
-  var3.noragdoll = 1;
-  var3.disabledeathorient = 1;
-  var3 endon("death");
-  var3 endon("entitydeleted");
-  var3 actoraimassistoff();
-  var3 thread scripts\engine\sp\utility::name_hide();
-  var3 scripts\sp\maps\tunnels\zd30tunnels_utility::die_a_statue_new(var2, "die_a_statue", 0.95);
+  var_2 = scripts\engine\utility::getStruct(var_0, "targetname");
+  var_3 = scripts\engine\sp\utility::spawn_targetname(var_1 + "_spawner", 1);
+  var_3.animname = var_1;
+  var_3.allowdeath = 0;
+  var_3.ignoreme = 1;
+  var_3.ignoreall = 1;
+  var_3.noragdoll = 1;
+  var_3.disabledeathorient = 1;
+  var_3 endon("death");
+  var_3 endon("entitydeleted");
+  var_3 actoraimassistoff();
+  var_3 thread scripts\engine\sp\utility::name_hide();
+  var_3 scripts\sp\maps\tunnels\zd30tunnels_utility::die_a_statue_new(var_2, "die_a_statue", 0.95);
   wait 0.5;
-  var4 = getgroundposition(var3 getEye() + (0, 0, 4), 4);
+  var_4 = getgroundposition(var_3 getEye() + (0, 0, 4), 4);
   scripts\engine\utility::flag_wait("shaft_plank_passed");
-  playFX(level._effect["deathfx_bloodpool_generic"], var4);
+  playFX(level._effect["deathfx_bloodpool_generic"], var_4);
 }
 
 function shaft_reunion_corpse_cleanup() {
@@ -1972,25 +1972,25 @@ function shaft_top_planks_break() {
     scripts\engine\utility::flag_wait("shaft_hero_planks_fall");
   }
 
-  var0 = getscriptablearray("shaft_top_plank1", "targetname")[0];
-  var1 = getscriptablearray("shaft_top_plank2", "targetname")[0];
-  var0 setscriptablepartstate("base", "break");
+  var_0 = getscriptablearray("shaft_top_plank1", "targetname")[0];
+  var_1 = getscriptablearray("shaft_top_plank2", "targetname")[0];
+  var_0 setscriptablepartstate("base", "break");
   wait 0.75;
-  var0 setscriptablepartstate("base", "fall");
+  var_0 setscriptablepartstate("base", "fall");
   wait 0.25;
-  var1 setscriptablepartstate("base", "break");
+  var_1 setscriptablepartstate("base", "break");
   wait 0.75;
-  var1 setscriptablepartstate("base", "fall");
+  var_1 setscriptablepartstate("base", "fall");
   wait 1.5;
   level.shaft_hero_planks_clip delete();
 }
 
 function reunion_magic_shoot_enemy() {
   self endon("death");
-  var0 = scripts\engine\utility::getStruct("shaft_magicbullet_struct", "targetname").origin;
+  var_0 = scripts\engine\utility::getStruct("shaft_magicbullet_struct", "targetname").origin;
 
-  for(var1 = randomintrange(4, 8); var1 > 0; var1--) {
-    magicbullet("iw8_ar_akilo47", var0, self getEye() + (0, 0, -16));
+  for(var_1 = randomintrange(4, 8); var_1 > 0; var_1--) {
+    magicbullet("iw8_ar_akilo47", var_0, self getEye() + (0, 0, -16));
     wait randomfloatrange(0.1, 0.15);
   }
 
@@ -2011,24 +2011,24 @@ function reunion_ladder_scene() {
     level.player_rig delete();
   }
 
-  var0 = scripts\sp\player_rig::get_player_rig();
+  var_0 = scripts\sp\player_rig::get_player_rig();
   setmusicstate("");
   thread scripts\sp\maps\tunnels\zd30tunnels_utility::tunnels_corpse_cleanup();
-  var1 = scripts\engine\utility::getStruct("shaft_ladder_scene", "targetname");
-  var1 thread scripts\common\anim::anim_first_frame_solo(level.player_rig, "shaft_ladder_intro");
-  var1 thread scripts\common\anim::anim_first_frame_solo(level.farah, "shaft_ladder_intro");
+  var_1 = scripts\engine\utility::getStruct("shaft_ladder_scene", "targetname");
+  var_1 thread scripts\common\anim::anim_first_frame_solo(level.player_rig, "shaft_ladder_intro");
+  var_1 thread scripts\common\anim::anim_first_frame_solo(level.farah, "shaft_ladder_intro");
   thread reset_farah_glowstick();
   level.groundrefent = scripts\engine\utility::spawn_script_origin();
   level.groundrefent linkTo(level.player_rig, "tag_player", (0, 0, 0), (0, 0, 0));
   level.player freezecontrols(1);
   level.player disableweapons();
-  var2 = 10;
-  var3 = 0.4;
-  level.player playerlinktoblend(level.player_rig, "tag_player", var3, 0.125, 0.125);
-  wait var3;
+  var_2 = 10;
+  var_3 = 0.4;
+  level.player playerlinktoblend(level.player_rig, "tag_player", var_3, 0.125, 0.125);
+  wait var_3;
   level.player playerlinktodelta(level.player_rig, "tag_player", 1, 0, 0, 0, 0);
   level.player playersetgroundreferenceent(level.groundrefent);
-  level.player lerpviewangleclamp(1, 0, 0, var2, var2, var2, var2);
+  level.player lerpviewangleclamp(1, 0, 0, var_2, var_2, var_2, var_2);
   level.player springcamenabled(0, 5, 5);
   level.player_rig show();
   level.farah scripts\engine\sp\utility::name_hide();
@@ -2037,29 +2037,29 @@ function reunion_ladder_scene() {
   thread shaft_ladder_scene_fail_vo();
   thread reunion_ladder_scene_dof();
   thread reunion_ladder_rumble();
-  var1 thread scripts\common\anim::anim_single_solo(level.shaft_ladder, "shaft_ladder_intro");
-  var1 scripts\common\anim::anim_single([level.player_rig, level.farah], "shaft_ladder_intro");
-  var1 thread scripts\common\anim::anim_loop([level.player_rig, level.farah], "shaft_ladder_intro_idle", "shaft_ladder_intro_idle_stop");
-  var4 = 1.75;
-  thread reunion_waittill_player_left_stick_or_jump(var4);
+  var_1 thread scripts\common\anim::anim_single_solo(level.shaft_ladder, "shaft_ladder_intro");
+  var_1 scripts\common\anim::anim_single([level.player_rig, level.farah], "shaft_ladder_intro");
+  var_1 thread scripts\common\anim::anim_loop([level.player_rig, level.farah], "shaft_ladder_intro_idle", "shaft_ladder_intro_idle_stop");
+  var_4 = 1.75;
+  thread reunion_waittill_player_left_stick_or_jump(var_4);
   scripts\engine\utility::flag_wait_any("reunion_pull_up_success", "reunion_pull_up_failed");
-  var1 notify("shaft_ladder_intro_idle_stop");
+  var_1 notify("shaft_ladder_intro_idle_stop");
   scripts\engine\sp\utility::motion_blur_enable(1, undefined, 0.5);
 
   if(scripts\engine\utility::flag("reunion_pull_up_failed")) {
     level.groundrefent delete();
     level.player playSound("zd30t_shaft_ladder_fall_fail_whoosh");
-    var5 = spawn("trigger_radius_fire", level.player.origin, 0, 64, 80);
-    thread scripts\sp\trigger::trigger_fire(var5);
-    var5 enablelinkTo();
-    var5 linkTo(level.player, "tag_origin");
-    var1 scripts\common\anim::anim_single([level.player_rig, level.farah], "shaft_ladder_intro_fail");
-    var1 thread scripts\common\anim::anim_last_frame_solo(level.player_rig, "shaft_ladder_intro_fail");
-    var6 = 1.5;
-    var7 = 470;
-    level.player_rig moveTo(level.player_rig.origin - (0, 0, var7), var6);
+    var_5 = spawn("trigger_radius_fire", level.player.origin, 0, 64, 80);
+    thread scripts\sp\trigger::trigger_fire(var_5);
+    var_5 enablelinkTo();
+    var_5 linkTo(level.player, "tag_origin");
+    var_1 scripts\common\anim::anim_single([level.player_rig, level.farah], "shaft_ladder_intro_fail");
+    var_1 thread scripts\common\anim::anim_last_frame_solo(level.player_rig, "shaft_ladder_intro_fail");
+    var_6 = 1.5;
+    var_7 = 470;
+    level.player_rig moveTo(level.player_rig.origin - (0, 0, var_7), var_6);
     level.player scripts\engine\utility::delaycall(1, &playsound, "zd30t_shaft_ladder_fall_fail_impt");
-    wait var6;
+    wait var_6;
     level.player unlink();
     thread scripts\sp\maps\tunnels\zd30tunnels_utility::player_burn_death_overlay(0.35);
 
@@ -2071,8 +2071,8 @@ function reunion_ladder_scene() {
   }
 
   thread shaft_reunion_corpse_cleanup();
-  thread reunion_corpse(var4);
-  var4 scripts\common\anim::anim_single([level.player_rig, level.farah], "shaft_ladder_climb");
+  thread reunion_corpse(var_4);
+  var_4 scripts\common\anim::anim_single([level.player_rig, level.farah], "shaft_ladder_climb");
   thread reunion_ladder_scene_farah_finish();
   thread reunion_ladder_scene_player_finish();
   scripts\engine\utility::flag_wait("shaft_plank_passed");
@@ -2150,20 +2150,20 @@ function reunion_ladder_scene_farah_finish() {
   level.farah.ignoreall = 0;
   level.farah.ignoreme = 0;
   level.farah.script_pushable = 1;
-  var0 = getnode("wolf_tunnel_node_1", "targetname");
-  level.farah scripts\engine\sp\utility::set_goal_node(var0);
+  var_0 = getnode("wolf_tunnel_node_1", "targetname");
+  level.farah scripts\engine\sp\utility::set_goal_node(var_0);
   level.farah scripts\engine\utility::waittill_any_timeout(5, "goal");
   level.farah scripts\engine\sp\utility::enable_ai_color();
 }
 
-function reunion_mayhem(var0) {
-  wait var0;
+function reunion_mayhem(var_0) {
+  wait var_0;
   scripts\engine\utility::stop_exploder("fire_phase4_final");
   playmayhem("mayhem_reunion_ladder_collapse");
 }
 
-function reunion_corpse(var0) {
-  var0 scripts\common\anim::anim_single_solo(level.ladder_corpse, "shaft_ladder_climb");
+function reunion_corpse(var_0) {
+  var_0 scripts\common\anim::anim_single_solo(level.ladder_corpse, "shaft_ladder_climb");
   level.ladder_corpse thread scripts\sp\maps\tunnels\zd30tunnels_utility::die_a_statue();
 }
 
@@ -2188,8 +2188,8 @@ function burn_player_if_goes_back_down_shaft() {
   shaft_fire_kill_player(0.75, 0);
 }
 
-function reunion_waittill_player_left_stick_or_jump(var0) {
-  while(isDefined(level.player) && var0 > 0) {
+function reunion_waittill_player_left_stick_or_jump(var_0) {
+  while(isDefined(level.player) && var_0 > 0) {
     if(level.player getnormalizedmovement()[0] > 0.3 || level.player jumpbuttonPressed()) {
       level thread scripts\engine\utility::flag_set_delayed("reunion_pull_up_success", 0.1);
       level.farah scripts\engine\utility::delaycall(0.05, &stopsounds);
@@ -2197,7 +2197,7 @@ function reunion_waittill_player_left_stick_or_jump(var0) {
     }
 
     wait 0.05;
-    var0 -= 0.05;
+    var_0 -= 0.05;
   }
 
   level thread scripts\engine\utility::flag_set_delayed("reunion_pull_up_failed", 0.1);

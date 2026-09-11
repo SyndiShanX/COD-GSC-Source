@@ -18,8 +18,8 @@ function level_flareinit() {
   level.flare.thrownflares = [];
   level_flaresetcantimeout(0);
   level_flareworldplacedenable();
-  var0 = level_getflareofftriggers();
-  scripts\engine\utility::array_thread(var0, &level_flareofftriggerlogic);
+  var_0 = level_getflareofftriggers();
+  scripts\engine\utility::array_thread(var_0, &level_flareofftriggerlogic);
   level.g_effect["vfx_player_flare"] = loadfx("vfx/iw8/level/wounded/vfx_player_flare");
   level.g_effect["vfx_player_flare_light"] = loadfx("vfx/iw8/level/wounded/vfx_player_flare_light");
   level.g_effect["vfx_player_flare_off"] = loadfx("vfx/iw8/level/wounded/vfx_player_flare_off");
@@ -48,8 +48,8 @@ function level_flareinit() {
   thread player_flarehidemodellogic();
   thread player_flaretogglelogic();
   thread player_flarestealthdetectlogic();
-  var1 = player_flaregetofftriggers();
-  scripts\engine\utility::array_thread(var1, &player_flareofftriggerlogic);
+  var_1 = player_flaregetofftriggers();
+  scripts\engine\utility::array_thread(var_1, &player_flareofftriggerlogic);
 }
 
 function player_flarehidemodellogic() {
@@ -86,12 +86,12 @@ function player_flareshouldhidemodel() {
   return false;
 }
 
-function player_flaregive(var0) {
-  if(!isDefined(var0)) {
-    var0 = 1;
+function player_flaregive(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 1;
   }
 
-  player_flaresetammo(var0);
+  player_flaresetammo(var_0);
   player_setflareequipment(1);
   level.player notifyonplayercommand("toggle_flare", "+actionslot 1");
   level.player scripts\engine\sp\utility::actionslotoverride(1, "hud_icon_equipment_flare", level.flare.player.ammo);
@@ -102,7 +102,7 @@ function player_flaregive(var0) {
   }
 }
 
-function player_flaretake(var0) {
+function player_flaretake(var_0) {
   player_setflareequipment(0);
   level.player scripts\engine\sp\utility::actionslotoverrideremove(1);
 
@@ -113,10 +113,10 @@ function player_flaretake(var0) {
 }
 
 function level_flareworldplacedenable() {
-  var0 = level_flaregetworldplaced();
+  var_0 = level_flaregetworldplaced();
 
-  foreach(var2 in var0) {
-    playFXOnTag(level.g_effect["vfx_ai_glow_stick"], var2, "tag_fx");
+  foreach(var_2 in var_0) {
+    playFXOnTag(level.g_effect["vfx_ai_glow_stick"], var_2, "tag_fx");
   }
 }
 
@@ -124,70 +124,70 @@ function level_flaregetworldplaced() {
   return getEntArray("level_flareWorldPlaced", "targetname");
 }
 
-function level_flaretimeoutlogic(var0) {
-  var0 endon("death");
-  var0.accumulatedtime = 0;
+function level_flaretimeoutlogic(var_0) {
+  var_0 endon("death");
+  var_0.accumulatedtime = 0;
 
-  if(istrue(var0.isthrown)) {
+  if(istrue(var_0.isthrown)) {
     level.flare.thrownflares = scripts\engine\utility::array_removeundefined(level.flare.thrownflares);
 
     if(level.flare.thrownflares.size > 3) {
-      var1 = level.flare.thrownflares[0];
+      var_1 = level.flare.thrownflares[0];
 
-      foreach(var3 in level.flare.thrownflares) {
-        if(var3.accumulatedtime > var1.accumulatedtime) {
-          var1 = var3;
+      foreach(var_3 in level.flare.thrownflares) {
+        if(var_3.accumulatedtime > var_1.accumulatedtime) {
+          var_1 = var_3;
         }
       }
 
-      level_flareturnoff(var1);
+      level_flareturnoff(var_1);
     }
   }
 
   for(;;) {
-    var0.accumulatedtime += 0.05;
+    var_0.accumulatedtime += 0.05;
 
-    if(level_flarecantimeout() && var0.accumulatedtime >= 60) {
+    if(level_flarecantimeout() && var_0.accumulatedtime >= 60) {
       break;
     }
 
     waitframe();
   }
 
-  level_flareturnoff(var0);
+  level_flareturnoff(var_0);
 }
 
 function level_flarecantimeout() {
   return level.flare.cantimeout;
 }
 
-function level_flaresetcantimeout(var0) {
-  level.flare.cantimeout = var0;
+function level_flaresetcantimeout(var_0) {
+  level.flare.cantimeout = var_0;
 }
 
-function level_flareturnoff(var0) {
+function level_flareturnoff(var_0) {
   level notify("level_flareOff");
-  killfxontag(level.g_effect["vfx_player_flare"], var0, "tag_fx");
-  var0 stoploopsound();
+  killfxontag(level.g_effect["vfx_player_flare"], var_0, "tag_fx");
+  var_0 stoploopsound();
 
-  if(isDefined(var0.interact)) {
-    var0.interact delete();
+  if(isDefined(var_0.interact)) {
+    var_0.interact delete();
   }
 
-  var0 delete();
+  var_0 delete();
 }
 
 function level_flareofftriggerlogic() {
   self endon("death");
 
   for(;;) {
-    self waittill("trigger", var0);
+    self waittill("trigger", var_0);
 
-    if(scripts\engine\utility::is_equal(var0, level.player)) {
-      var1 = level_getflares();
+    if(scripts\engine\utility::is_equal(var_0, level.player)) {
+      var_1 = level_getflares();
 
-      foreach(var3 in var1) {
-        level_flareturnoff(var3);
+      foreach(var_3 in var_1) {
+        level_flareturnoff(var_3);
       }
 
       self delete();
@@ -203,47 +203,47 @@ function level_getflares() {
   return getEntArray("level_flare", "targetname");
 }
 
-function level_flareailogic(var0) {
-  var0 endon("death");
-  var1 = [];
-  var2 = 2;
+function level_flareailogic(var_0) {
+  var_0 endon("death");
+  var_1 = [];
+  var_2 = 2;
 
   if(istrue(1.5)) {
-    var3 = gettime() + 1500;
+    var_3 = gettime() + 1500;
     goto LOC_0000002d;
   }
 
-  var3 = 0;
+  var_3 = 0;
 
   for(;;) {
-    var4 = ai_getaliveaiarray("axis");
-    var5 = [];
+    var_4 = ai_getaliveaiarray("axis");
+    var_5 = [];
 
-    foreach(var7 in var4) {
-      var8 = distancesquared(var7.origin, var1.origin);
-      var9 = var5.size >= var3;
-      var10 = var8 <= 490000;
-      var11 = gettime() >= var3;
+    foreach(var_7 in var_4) {
+      var_8 = distancesquared(var_7.origin, var_1.origin);
+      var_9 = var_5.size >= var_3;
+      var_10 = var_8 <= 490000;
+      var_11 = gettime() >= var_3;
 
-      if(!var9 && var10 && var11) {
-        var12 = scripts\engine\utility::array_contains(var2, var7);
+      if(!var_9 && var_10 && var_11) {
+        var_12 = scripts\engine\utility::array_contains(var_2, var_7);
 
-        if(!var12) {
-          var7 aieventlistenerevent("investigate", var1, var1.origin);
-          var5 = scripts\engine\utility::array_add(var5, var7);
+        if(!var_12) {
+          var_7 aieventlistenerevent("investigate", var_1, var_1.origin);
+          var_5 = scripts\engine\utility::array_add(var_5, var_7);
         }
       }
     }
 
-    var2 = scripts\engine\sp\utility::array_merge(var5, var2);
+    var_2 = scripts\engine\sp\utility::array_merge(var_5, var_2);
     wait 1.5;
   }
 }
 
-function level_flareaigoallogic(var0) {
-  var0 endon("death");
-  var0 waittill("goal");
-  var0 scripts\engine\sp\utility::set_goalRadius(2048);
+function level_flareaigoallogic(var_0) {
+  var_0 endon("death");
+  var_0 waittill("goal");
+  var_0 scripts\engine\sp\utility::set_goalRadius(2048);
 }
 
 function player_flaretogglelogic() {
@@ -251,30 +251,30 @@ function player_flaretogglelogic() {
   level.player endon("removeActionslot1");
 
   for(;;) {
-    var0 = level.player scripts\engine\utility::waittill_any_return("toggle_flare", "smoke_pressed");
+    var_0 = level.player scripts\engine\utility::waittill_any_return("toggle_flare", "smoke_pressed");
 
     if(!player_flarecanuse() || level.player isonladder()) {
       continue;
     }
 
-    var1 = var0 == "smoke_pressed";
-    var2 = !var1;
+    var_1 = var_0 == "smoke_pressed";
+    var_2 = !var_1;
 
     if(player_usingflare()) {
-      if(var2 && player_flarecanthrow()) {
-        var3 = player_getflareammo();
-        player_flaresetammo(var3 - 1);
+      if(var_2 && player_flarecanthrow()) {
+        var_3 = player_getflareammo();
+        player_flaresetammo(var_3 - 1);
         player_flarethrow();
       }
 
       continue;
     }
 
-    if(var2 && player_getflareammo()) {
+    if(var_2 && player_getflareammo()) {
       thread player_flareturnon(0);
       level.player waittill("player_flareIgnite");
-      var3 = player_getflareammo();
-      player_flaresetammo(var3 - 1);
+      var_3 = player_getflareammo();
+      player_flaresetammo(var_3 - 1);
     }
   }
 }
@@ -310,9 +310,9 @@ function player_flareofftriggerlogic() {
   self endon("death");
 
   for(;;) {
-    self waittill("trigger", var0);
+    self waittill("trigger", var_0);
 
-    if(scripts\engine\utility::is_equal(var0, level.player) && player_usingflare()) {
+    if(scripts\engine\utility::is_equal(var_0, level.player) && player_usingflare()) {
       player_flareturnoff();
       self delete();
     }
@@ -323,36 +323,36 @@ function player_flaregetremainingtime() {
   return level.flare.player.remainingtime;
 }
 
-function player_flaresetremainingtime(var0) {
-  level.flare.player.remainingtime = var0;
+function player_flaresetremainingtime(var_0) {
+  level.flare.player.remainingtime = var_0;
 }
 
-function player_flaresetcantimeout(var0) {
-  level.flare.player.cantimeout = var0;
+function player_flaresetcantimeout(var_0) {
+  level.flare.player.cantimeout = var_0;
 }
 
 function player_flarecantimeout() {
   return level.flare.player.cantimeout;
 }
 
-function player_flaresetcanthrow(var0) {
-  level.flare.player.canthrow = var0;
+function player_flaresetcanthrow(var_0) {
+  level.flare.player.canthrow = var_0;
 }
 
 function player_flarecanthrow() {
   return level.flare.player.canthrow;
 }
 
-function player_flaresetcanuse(var0) {
-  level.flare.player.canuse = var0;
+function player_flaresetcanuse(var_0) {
+  level.flare.player.canuse = var_0;
 }
 
 function player_flarecanuse() {
   return level.flare.player.canuse;
 }
 
-function player_flaresetcanturnoff(var0) {
-  level.flare.player.canturnoff = var0;
+function player_flaresetcanturnoff(var_0) {
+  level.flare.player.canturnoff = var_0;
 }
 
 function player_flarecanturnoff() {
@@ -363,16 +363,16 @@ function player_flaregetautomaticignitehint() {
   return level.flare.player.automaticignitehint;
 }
 
-function player_flaresetautomaticignitehint(var0) {
-  level.flare.player.automaticignitehint = var0;
+function player_flaresetautomaticignitehint(var_0) {
+  level.flare.player.automaticignitehint = var_0;
 }
 
 function player_hasflareequipment() {
   return level.flare.player.hasequipment;
 }
 
-function player_setflareequipment(var0) {
-  level.flare.player.hasequipment = var0;
+function player_setflareequipment(var_0) {
+  level.flare.player.hasequipment = var_0;
 }
 
 function player_flaretimeout() {
@@ -380,12 +380,12 @@ function player_flaretimeout() {
   level.player endon("player_flareOff");
 
   for(;;) {
-    var0 = player_flaregetremainingtime();
+    var_0 = player_flaregetremainingtime();
 
-    if(var0) {
+    if(var_0) {
       if(player_flarecantimeout()) {
-        var1 = max(0, var0 - 0.05);
-        player_flaresetremainingtime(var1);
+        var_1 = max(0, var_0 - 0.05);
+        player_flaresetremainingtime(var_1);
       }
     } else {
       break;
@@ -436,26 +436,26 @@ function player_flareturnoff() {
 
 #using_animtree("player");
 
-function player_flareturnon(var0) {
-  var1 = player_isholdingspecialflareweapon() && var0 || !var0;
+function player_flareturnon(var_0) {
+  var_1 = player_isholdingspecialflareweapon() && var_0 || !var_0;
 
-  if(var1) {
+  if(var_1) {
     level.flare.player.model setModel("viewmodel_flare_iw6");
     level.flare.player.model hidepart("J_Striker_Cap");
 
     if(player_isholdingspecialflareweapon()) {
-      var2 = "ges_th_flare_ignite";
+      var_2 = "ges_th_flare_ignite";
     } else {
-      var2 = "ges_th_flare_ignite_weapon";
+      var_2 = "ges_th_flare_ignite_weapon";
     }
 
-    level.player forceplaygestureviewmodel(var2, undefined, 0, 0, 1, 1);
+    level.player forceplaygestureviewmodel(var_2, undefined, 0, 0, 1, 1);
     level.player scripts\common\utility::allow_weapon_switch(0);
     level.player scripts\common\utility::allow_reload(0);
     player_flaresetcanuse(0);
     wait 0.35;
 
-    if(!var1) {
+    if(!var_1) {
       level.flare.player.model playSound("flare_ignite_plr");
     }
 
@@ -469,16 +469,16 @@ function player_flareturnon(var0) {
   player_flareturnvfxon();
   playFXOnTag(level.g_effect["vfx_player_flare_light"], level.flare.player.lighttag, "tag_origin");
 
-  if(var2) {
+  if(var_2) {
     if(player_isholdingspecialflareweapon()) {
-      var3 = getanimlength(%th_vm_flare_turnon);
+      var_3 = getanimlength(%th_vm_flare_turnon);
     } else {
-      var3 = level.player getgestureanimlength("ges_th_flare_ignite_weapon");
+      var_3 = level.player getgestureanimlength("ges_th_flare_ignite_weapon");
     }
 
-    if(var3 > 0.35) {
-      var4 = var3 - 0.35;
-      wait var4;
+    if(var_3 > 0.35) {
+      var_4 = var_3 - 0.35;
+      wait var_4;
     }
 
     level.player scripts\common\utility::allow_weapon_switch(1);
@@ -499,36 +499,36 @@ function player_flareturnon(var0) {
 
 function player_flareloopgesturelogic() {
   level.player endon("player_flareOff");
-  var0 = getanimlength(%th_vm_flare_turnon);
-  var1 = getanimlength(%th_vm_flare_idle);
-  var2 = level.player.currentweapon;
-  var3 = player_flarecanloopgesture();
+  var_0 = getanimlength(%th_vm_flare_turnon);
+  var_1 = getanimlength(%th_vm_flare_idle);
+  var_2 = level.player.currentweapon;
+  var_3 = player_flarecanloopgesture();
 
   for(;;) {
-    var4 = player_flarecanloopgesture();
+    var_4 = player_flarecanloopgesture();
 
-    if(var4) {
-      if(var3) {
-        level.player forceplaygestureviewmodel("ges_th_flare_ignite", undefined, 0, var0);
-        var5 = var0;
+    if(var_4) {
+      if(var_3) {
+        level.player forceplaygestureviewmodel("ges_th_flare_ignite", undefined, 0, var_0);
+        var_5 = var_0;
       } else {
         level.player forceplaygestureviewmodel("ges_th_flare_ignite", undefined, 0, 0, 1, 1);
-        var5 = var1;
+        var_5 = var_1;
       }
     } else {
       level.player stopgestureviewmodel("ges_th_flare_ignite", 0, 1);
-      var5 = 0.05;
+      var_5 = 0.05;
     }
 
-    var6 = level.player scripts\engine\utility::waittill_notify_or_timeout_return("weapon_change", var5);
+    var_6 = level.player scripts\engine\utility::waittill_notify_or_timeout_return("weapon_change", var_5);
 
-    if(var6 == "weapon_change") {
-      var7 = player_weaponisspecialflareweapon(var2);
-      var8 = player_isholdingspecialflareweapon();
-      var9 = var7 && !var8;
-      var10 = !var7 && var8;
+    if(var_6 == "weapon_change") {
+      var_7 = player_weaponisspecialflareweapon(var_2);
+      var_8 = player_isholdingspecialflareweapon();
+      var_9 = var_7 && !var_8;
+      var_10 = !var_7 && var_8;
 
-      if(var9) {
+      if(var_9) {
         level.flare.player.model unlinkfromplayerview(level.player);
         level.flare.player.model linktoplayerview(level.player, "tag_view", (-7, 5, -3), (90, 0, 0), 1, "none");
         stopFXOnTag(level.g_effect["vfx_player_flare"], level.flare.player.model, "tag_fx");
@@ -536,7 +536,7 @@ function player_flareloopgesturelogic() {
         playFXOnTag(level.g_effect["vfx_player_flare"], level.flare.player.model, "tag_origin");
         level.player stopgestureviewmodel("ges_th_flare_ignite", 0.2, 0);
         level.player waittill("weapon_change");
-      } else if(var10) {
+      } else if(var_10) {
         level.flare.player.model unlinkfromplayerview(level.player);
         level.flare.player.model linktoplayerview(level.player, "tag_accessory_left", (0, 0, 0), (0, 0, 0), 1, "none");
         stopFXOnTag(level.g_effect["vfx_player_flare"], level.flare.player.model, "tag_origin");
@@ -546,8 +546,8 @@ function player_flareloopgesturelogic() {
       }
     }
 
-    var3 = var4;
-    var2 = level.player.currentweapon;
+    var_3 = var_4;
+    var_2 = level.player.currentweapon;
   }
 }
 
@@ -592,114 +592,114 @@ function player_flarethrow() {
   level.player scripts\common\utility::allow_offhand_primary_weapons(1);
   player_flaresetcanuse(1);
   player_flareturnoff();
-  var0 = [];
+  var_0 = [];
   GscBinSkip0(0x2e, "prone", 600);
 }
 
-function level_spawnstaticflare(var0, var1) {
-  var2 = scripts\sp\script_items::scriptitem_buildspawnflags(0, 1, 1, 0, 1);
-  var3 = spawnscriptitem("script_item_level_flare", var0, var1, var2, "misc_wm_flarestick_throwable", "", (0, 0, 0), var0);
-  playFXOnTag(level.g_effect["vfx_weapon_flare"], var3, "tag_fx");
-  var3 playLoopSound("flare_loop");
-  var3.targetname = "level_flare";
-  thread player_flarepickuplogic(var3);
-  thread level_flaretimeoutlogic(var3);
-  thread level_flareatrestmonitor(var3);
-  return var3;
+function level_spawnstaticflare(var_0, var_1) {
+  var_2 = scripts\sp\script_items::scriptitem_buildspawnflags(0, 1, 1, 0, 1);
+  var_3 = spawnscriptitem("script_item_level_flare", var_0, var_1, var_2, "misc_wm_flarestick_throwable", "", (0, 0, 0), var_0);
+  playFXOnTag(level.g_effect["vfx_weapon_flare"], var_3, "tag_fx");
+  var_3 playLoopSound("flare_loop");
+  var_3.targetname = "level_flare";
+  thread player_flarepickuplogic(var_3);
+  thread level_flaretimeoutlogic(var_3);
+  thread level_flareatrestmonitor(var_3);
+  return var_3;
 }
 
-function level_spawnflare(var0, var1, var2, var3) {
-  if(!isDefined(var1)) {
-    var1 = (0, 0, 0);
+function level_spawnflare(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_1)) {
+    var_1 = (0, 0, 0);
   }
 
-  if(!isDefined(var2)) {
-    var2 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  var4 = scripts\sp\script_items::scriptitem_buildspawnflags(0, 1, 1, 0, 1);
-  var5 = var1 * var2;
-  var6 = (0, 0, 0);
+  var_4 = scripts\sp\script_items::scriptitem_buildspawnflags(0, 1, 1, 0, 1);
+  var_5 = var_1 * var_2;
+  var_6 = (0, 0, 0);
 
-  if(istrue(var3)) {
-    var6 = (83, 0, 0);
+  if(istrue(var_3)) {
+    var_6 = (83, 0, 0);
   }
 
-  var7 = spawnscriptitem("script_item_level_flare", var0, var6, var4, "misc_wm_flarestick_throwable", "", var5, var0);
-  playFXOnTag(level.g_effect["vfx_weapon_flare"], var7, "tag_fx");
-  var7 playLoopSound("flare_loop");
-  var7.targetname = "level_flare";
+  var_7 = spawnscriptitem("script_item_level_flare", var_0, var_6, var_4, "misc_wm_flarestick_throwable", "", var_5, var_0);
+  playFXOnTag(level.g_effect["vfx_weapon_flare"], var_7, "tag_fx");
+  var_7 playLoopSound("flare_loop");
+  var_7.targetname = "level_flare";
 
-  if(istrue(var3)) {
-    var7.isthrown = 1;
+  if(istrue(var_3)) {
+    var_7.isthrown = 1;
     level.flare.thrownflares = scripts\engine\utility::array_removeundefined(level.flare.thrownflares);
-    level.flare.thrownflares[level.flare.thrownflares.size] = var7;
+    level.flare.thrownflares[level.flare.thrownflares.size] = var_7;
   }
 
-  thread player_flarepickuplogic(var7);
-  thread level_flaretimeoutlogic(var7);
-  thread level_flareatrestmonitor(var7);
-  return var7;
+  thread player_flarepickuplogic(var_7);
+  thread level_flaretimeoutlogic(var_7);
+  thread level_flareatrestmonitor(var_7);
+  return var_7;
 }
 
-function level_flareatrestmonitor(var0) {
-  var0 endon("death");
-  var0 endon("entitydeleted");
-  var1 = 0.25;
-  var2 = var0.origin;
-  var0.atrest = 0;
-  var3 = 12;
+function level_flareatrestmonitor(var_0) {
+  var_0 endon("death");
+  var_0 endon("entitydeleted");
+  var_1 = 0.25;
+  var_2 = var_0.origin;
+  var_0.atrest = 0;
+  var_3 = 12;
 
   for(;;) {
-    var2 = var0.origin;
-    wait var1;
-    var4 = length(var0.origin - var2);
+    var_2 = var_0.origin;
+    wait var_1;
+    var_4 = length(var_0.origin - var_2);
 
-    if(var4 > var3 * var1) {
-      var0.atrest = 0;
+    if(var_4 > var_3 * var_1) {
+      var_0.atrest = 0;
       continue;
     }
 
-    var0.atrest = 1;
+    var_0.atrest = 1;
   }
 }
 
-function player_flarepickuplogic(var0) {
-  var0 endon("death");
+function player_flarepickuplogic(var_0) {
+  var_0 endon("death");
 
   if(istrue(level.flare_pickup_disabled)) {
     return;
   }
 
-  var0.interact = scripts\engine\utility::spawn_tag_origin(var0 gettagorigin("tag_origin"));
-  var0.interact linkTo(var0, "tag_origin");
-  var0.interact scripts\sp\player\cursor_hint::create_cursor_hint("tag_origin", (0, 0, 0), &"SCRIPT/PICKUP", 50, 125, 125, 0, undefined, undefined, undefined, "duration_none", undefined, undefined, 45);
-  var0.interact notsolid();
-  thread player_flareconditionalpickup(var0);
-  var0.interact waittill("trigger");
-  player_flarepickupsingle(var0);
-  var0.interact delete();
-  killfxontag(level.g_effect["vfx_player_flare"], var0, "tag_fx");
-  var0 stoploopsound();
-  var0 delete();
+  var_0.interact = scripts\engine\utility::spawn_tag_origin(var_0 gettagorigin("tag_origin"));
+  var_0.interact linkTo(var_0, "tag_origin");
+  var_0.interact scripts\sp\player\cursor_hint::create_cursor_hint("tag_origin", (0, 0, 0), &"SCRIPT/PICKUP", 50, 125, 125, 0, undefined, undefined, undefined, "duration_none", undefined, undefined, 45);
+  var_0.interact notsolid();
+  thread player_flareconditionalpickup(var_0);
+  var_0.interact waittill("trigger");
+  player_flarepickupsingle(var_0);
+  var_0.interact delete();
+  killfxontag(level.g_effect["vfx_player_flare"], var_0, "tag_fx");
+  var_0 stoploopsound();
+  var_0 delete();
 }
 
-function player_flareconditionalpickup(var0) {
-  var0 endon("death");
-  var0.interact endon("death");
+function player_flareconditionalpickup(var_0) {
+  var_0 endon("death");
+  var_0.interact endon("death");
 
-  while(isDefined(var0.interact)) {
+  while(isDefined(var_0.interact)) {
     if(player_getflareammo() >= player_getmaxflareammo()) {
-      var0.interact unlink();
-      var0.interact.origin = var0 gettagorigin("tag_origin") - (0, 0, 10000);
+      var_0.interact unlink();
+      var_0.interact.origin = var_0 gettagorigin("tag_origin") - (0, 0, 10000);
     }
 
     while(player_getflareammo() >= player_getmaxflareammo()) {
       wait 0.25;
     }
 
-    var0.interact.origin = var0 gettagorigin("tag_origin");
-    var0.interact linkTo(var0, "tag_origin");
+    var_0.interact.origin = var_0 gettagorigin("tag_origin");
+    var_0.interact linkTo(var_0, "tag_origin");
 
     while(player_getflareammo() < player_getmaxflareammo()) {
       wait 0.25;
@@ -709,8 +709,8 @@ function player_flareconditionalpickup(var0) {
   }
 }
 
-function player_flarepickupsingle(var0) {
-  var0 endon("death");
+function player_flarepickupsingle(var_0) {
+  var_0 endon("death");
 
   if(istrue(level.flarefastpickup)) {
     player_flaresetcanuse(0);
@@ -723,8 +723,8 @@ function player_flarepickupsingle(var0) {
   if(!player_hasflareequipment()) {
     player_flaregive(0);
   } else {
-    var1 = player_getflareammo();
-    player_flaresetammo(var1 + 1);
+    var_1 = player_getflareammo();
+    player_flaresetammo(var_1 + 1);
   }
 
   if(!player_usingflare()) {
@@ -753,9 +753,9 @@ function player_isholdingspecialflareweapon() {
   return player_weaponisspecialflareweapon(level.player.currentweapon);
 }
 
-function player_weaponisspecialflareweapon(var0) {
-  var1 = player_getflareweapons();
-  return scripts\engine\utility::array_contains(var1, var0);
+function player_weaponisspecialflareweapon(var_0) {
+  var_1 = player_getflareweapons();
+  return scripts\engine\utility::array_contains(var_1, var_0);
 }
 
 function player_getflareweapons() {
@@ -784,15 +784,15 @@ function player_getflareammo() {
   return level.flare.player.ammo;
 }
 
-function player_flaresetammo(var0) {
-  var1 = player_getmaxflareammo();
-  level.flare.player.ammo = int(clamp(var0, 0, var1));
+function player_flaresetammo(var_0) {
+  var_1 = player_getmaxflareammo();
+  level.flare.player.ammo = int(clamp(var_0, 0, var_1));
 
   if(!player_hasflareequipment()) {
     return;
   }
 
-  if(var1 == 1) {
+  if(var_1 == 1) {
     if(level.flare.player.ammo > 0) {
       level.player setweaponhudiconoverride("actionslot1", "hud_icon_equipment_flare");
       return;
@@ -805,19 +805,19 @@ function player_flaresetammo(var0) {
   level.player scripts\engine\sp\utility::setactionslotoverrideammo(1, level.flare.player.ammo);
 }
 
-function ai_getaliveaiarray(var0) {
-  if(isDefined(var0)) {
-    var1 = getaiarray(var0);
+function ai_getaliveaiarray(var_0) {
+  if(isDefined(var_0)) {
+    var_1 = getaiarray(var_0);
   } else {
-    var1 = getaiarray();
+    var_1 = getaiarray();
   }
 
-  var1 = array_removedeaddyingorundefined(var1);
-  return var1;
+  var_1 = array_removedeaddyingorundefined(var_1);
+  return var_1;
 }
 
-function array_removedeaddyingorundefined(var0) {
-  var0 = scripts\engine\utility::array_removeundefined(var0);
-  var0 = scripts\engine\utility::array_removedead_or_dying(var0);
-  return var0;
+function array_removedeaddyingorundefined(var_0) {
+  var_0 = scripts\engine\utility::array_removeundefined(var_0);
+  var_0 = scripts\engine\utility::array_removedead_or_dying(var_0);
+  return var_0;
 }

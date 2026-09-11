@@ -3,7 +3,7 @@
  * Script: scripts\asm\soldier\script_funcs.gsc
 ************************************************/
 
-function soldier_init(var0, var1, var2) {
+function soldier_init(var_0, var_1, var_2) {
   self.asm.footsteps = spawnStruct();
   self.asm.footsteps.foot = "invalid";
   self.asm.footsteps.time = 0;
@@ -21,7 +21,7 @@ function soldier_init(var0, var1, var2) {
   self.fnhelmetpop = &scripts\asm\soldier\death::helmetpop;
   initnodeyaw(self.asm.archetype);
   initgrenadeoffsets();
-  initaimlimits(var0);
+  initaimlimits(var_0);
 
   if(self.asm.archetype == "juggernaut" || self.asm.archetype == "juggernaut_cp") {
     scripts\asm\juggernaut\juggernaut::initanimspeedthresholds_juggernaut(self.asm.archetype);
@@ -43,13 +43,13 @@ function soldier_init(var0, var1, var2) {
   }
 
   scripts\asm\shared\utility::set_aim_and_turn_limits();
-  var3 = weaponclass(self.weapon);
+  var_3 = weaponclass(self.weapon);
 
-  if(var3 == "mg") {
+  if(var_3 == "mg") {
     self.combatmode = "cover_lmg";
   }
 
-  scripts\anim\shared::updateweaponarchetype(var3);
+  scripts\anim\shared::updateweaponarchetype(var_3);
 }
 
 function initscriptable() {
@@ -58,73 +58,73 @@ function initscriptable() {
   self setscriptablepartstate("notetrack_handler", "active", 0);
 }
 
-function initnodeyaw(var0) {
+function initnodeyaw(var_0) {
   if(!isDefined(anim.nodeyaws)) {
     anim.nodeyaws = [];
   }
 
-  if(isDefined(anim.nodeyaws[var0])) {
+  if(isDefined(anim.nodeyaws[var_0])) {
     return;
   }
 
-  initnodeyaw_soldier(var0);
+  initnodeyaw_soldier(var_0);
 }
 
-function initnodeyaw_soldier(var0) {
-  var1 = [];
+function initnodeyaw_soldier(var_0) {
+  var_1 = [];
   GscBinSkip0(0x2e, "Cover Left", 90);
 }
 
-function initnodeyaw_dev(var0) {
-  var1 = [];
+function initnodeyaw_dev(var_0) {
+  var_1 = [];
   GscBinSkip0(0x2e, "Cover Left", 90);
 }
 
-function initnodeyaw_rebel(var0) {
-  var1 = [];
+function initnodeyaw_rebel(var_0) {
+  var_1 = [];
   GscBinSkip0(0x2e, "Cover Left", 180);
 }
 
-function initaimlimits(var0) {
+function initaimlimits(var_0) {
   if(!isDefined(level.combataimlimits)) {
     level.combataimlimits = [];
     level.franticaimlimits = [];
     level.aimlimitstatemappings = [];
   }
 
-  if(!isDefined(level.combataimlimits[var0])) {
-    var1 = [];
-    var2 = [];
-    var3 = [];
-    var1 = var3;
-    var3 = [];
-    var2 = var3;
-    var3 = [];
+  if(!isDefined(level.combataimlimits[var_0])) {
+    var_1 = [];
+    var_2 = [];
+    var_3 = [];
+    var_1 = var_3;
+    var_3 = [];
+    var_2 = var_3;
+    var_3 = [];
     GscBinSkip0(0x2e, "down", 15);
   }
 
-  if(!isDefined(level.aimlimitstatemappings[var3])) {
-    var4 = [];
+  if(!isDefined(level.aimlimitstatemappings[var_3])) {
+    var_4 = [];
     GscBinSkip0(0x2e, "cover_stand_exposed", "cover_stand_exposed");
   }
 }
 
-function initanimspeedthresholds_soldier(var0) {
-  if(hasanimspeedthresholdstring(var0)) {
+function initanimspeedthresholds_soldier(var_0) {
+  if(hasanimspeedthresholdstring(var_0)) {
     return;
   }
 
-  if(var0 == "boss" || var0 == "boss2") {
-    animspeedthresholdsexist(var0, "shuffle", 30);
+  if(var_0 == "boss" || var_0 == "boss2") {
+    animspeedthresholdsexist(var_0, "shuffle", 30);
   } else {
-    animspeedthresholdsexist(var0, "shuffle", 23);
+    animspeedthresholdsexist(var_0, "shuffle", 23);
   }
 
-  animspeedthresholdsexist(var0, "walk", 56);
-  animspeedthresholdsexist(var0, "fast", 120);
-  animspeedthresholdsexist(var0, "jog", 170);
-  animspeedthresholdsexist(var0, "run", 220);
-  animspeedthresholdsexist(var0, "sprint", 250);
+  animspeedthresholdsexist(var_0, "walk", 56);
+  animspeedthresholdsexist(var_0, "fast", 120);
+  animspeedthresholdsexist(var_0, "jog", 170);
+  animspeedthresholdsexist(var_0, "run", 220);
+  animspeedthresholdsexist(var_0, "sprint", 250);
 }
 
 function initgestures() {
@@ -132,8 +132,8 @@ function initgestures() {
     return;
   }
 
-  var0 = [];
-  GscBinSkip0(0x2e, var0.size, "point_casual");
+  var_0 = [];
+  GscBinSkip0(0x2e, var_0.size, "point_casual");
 }
 
 function initgrenadeoffsets() {
@@ -145,15 +145,15 @@ function initgrenadeoffsets() {
     anim.grenadethrowoffsets = [];
   }
 
-  var0 = self.asm.archetype == "soldier_lw";
-  var1 = !var0;
+  var_0 = self.asm.archetype == "soldier_lw";
+  var_1 = !var_0;
 
   if(isDefined(anim.grenadethrowanims["soldier"]) && isDefined(anim.grenadethrowoffsets["soldier"])) {
     return;
   }
 
-  anim.islightweightsoldier = var0;
-  anim.isfullsoldier = var1;
+  anim.islightweightsoldier = var_0;
+  anim.isfullsoldier = var_1;
   anim.grenadethrowanims["soldier"] = [];
   anim.grenadethrowoffsets["soldier"] = [];
   anim.grenadethrowanims["soldier"]["grenade_return_throw"]["throw_short"] = scripts\asm\asm::asm_getallanimindicesforalias("grenade_return_throw", "throw_short");
@@ -226,36 +226,36 @@ function initgrenadeoffsets() {
   anim.grenadethrowoffsets["soldier"]["exposed_crouch_throw_grenade"]["exposed_crouch_grenade"][0] = (15.7078, 1.95027, 36.0834);
 }
 
-function needtoturnformelee(var0, var1, var2, var3) {
+function needtoturnformelee(var_0, var_1, var_2, var_3) {
   if(!istrue(self._blackboard.meleerequestedcharge)) {
     return false;
   }
 
-  var4 = scripts\asm\asm_bb::bb_getmeleechargetarget();
+  var_4 = scripts\asm\asm_bb::bb_getmeleechargetarget();
 
-  if(!isDefined(var4)) {
+  if(!isDefined(var_4)) {
     return false;
   }
 
-  var5 = var4.origin - self.origin;
-  var6 = length(var5);
+  var_5 = var_4.origin - self.origin;
+  var_6 = length(var_5);
 
-  if(var6 > 80) {
+  if(var_6 > 80) {
     return false;
   }
 
-  var7 = vectortoyaw(var5);
+  var_7 = vectortoyaw(var_5);
 
-  if(scripts\engine\utility::absangleclamp180(var7 - self.angles[1]) < 90) {
+  if(scripts\engine\utility::absangleclamp180(var_7 - self.angles[1]) < 90) {
     return false;
   }
 
-  self.desiredturnyaw = var7;
+  self.desiredturnyaw = var_7;
   return true;
 }
 
-function needtoturntofacepath(var0, var1, var2, var3) {
-  if(!scripts\asm\asm::asm_eventfired(var0, "abort")) {
+function needtoturntofacepath(var_0, var_1, var_2, var_3) {
+  if(!scripts\asm\asm::asm_eventfired(var_0, "abort")) {
     return false;
   }
 
@@ -263,80 +263,80 @@ function needtoturntofacepath(var0, var1, var2, var3) {
     return false;
   }
 
-  var4 = vectortoyaw(self.lookaheaddir);
-  var5 = angleclamp180(var4 - self.angles[1]);
+  var_4 = vectortoyaw(self.lookaheaddir);
+  var_5 = angleclamp180(var_4 - self.angles[1]);
 
-  if(abs(var5) < 50) {
+  if(abs(var_5) < 50) {
     return false;
   }
 
-  self.desiredturnyaw = var5;
+  self.desiredturnyaw = var_5;
   return true;
 }
 
-function drawneedtoturn(var0) {
+function drawneedtoturn(var_0) {
   self notify("kill_draw_need_to_turn");
   self endon("kill_draw_need_to_turn");
 
   for(;;) {
-    var1 = self.origin + anglesToForward(self.angles) * 100;
+    var_1 = self.origin + anglesToForward(self.angles) * 100;
     waitframe();
   }
 }
 
-function needtoturn(var0, var1, var2, var3) {
-  var4 = undefined;
+function needtoturn(var_0, var_1, var_2, var_3) {
+  var_4 = undefined;
 
   if(scripts\asm\asm_bb::bb_shootparamsvalid()) {
     if(isDefined(self._blackboard.shootparams_pos)) {
-      var4 = self._blackboard.shootparams_pos;
+      var_4 = self._blackboard.shootparams_pos;
     } else if(isDefined(self._blackboard.shootparams_ent)) {
-      var4 = self._blackboard.shootparams_ent.origin;
+      var_4 = self._blackboard.shootparams_ent.origin;
     }
   }
 
-  if(!isDefined(var4)) {
+  if(!isDefined(var_4)) {
     if(isDefined(self.smartfacingpos)) {
-      var4 = self.smartfacingpos;
+      var_4 = self.smartfacingpos;
     }
   }
 
-  if(!isDefined(var4) && isDefined(self.node) && self.node.type == "Exposed" && distancesquared(self.node.origin, self.origin) < 36 && self.combatmode != "no_cover") {
-    var4 = self.node.origin + anglesToForward(self.node.angles) * 384;
+  if(!isDefined(var_4) && isDefined(self.node) && self.node.type == "Exposed" && distancesquared(self.node.origin, self.origin) < 36 && self.combatmode != "no_cover") {
+    var_4 = self.node.origin + anglesToForward(self.node.angles) * 384;
   }
 
-  if(!isDefined(var4)) {
+  if(!isDefined(var_4)) {
     return false;
   }
 
-  var5 = self.angles[1] - vectortoyaw(var4 - self.origin);
-  var6 = distancesquared(self.origin, var4);
+  var_5 = self.angles[1] - vectortoyaw(var_4 - self.origin);
+  var_6 = distancesquared(self.origin, var_4);
 
-  if(var6 < 65536) {
-    var7 = sqrt(var6);
+  if(var_6 < 65536) {
+    var_7 = sqrt(var_6);
 
-    if(var7 > 3) {
-      var5 += asin(-3 / var7);
+    if(var_7 > 3) {
+      var_5 += asin(-3 / var_7);
     }
   }
 
-  return abs(angleclamp180(var5)) > self.turnthreshold;
+  return abs(angleclamp180(var_5)) > self.turnthreshold;
 }
 
-function needtoturn3d(var0, var1, var2, var3) {
+function needtoturn3d(var_0, var_1, var_2, var_3) {
   if(istrue(self.matchexposednodeorientation) && isDefined(self.node)) {
     return false;
   }
 
-  var4 = getturndesiredyaw3d();
+  var_4 = getturndesiredyaw3d();
 
-  if(abs(var4) > self.turnthreshold) {
+  if(abs(var_4) > self.turnthreshold) {
     return true;
   }
 
-  var5 = getturndesiredpitch3d();
+  var_5 = getturndesiredpitch3d();
 
-  if(abs(var5) > self.pitchturnthreshold) {
+  if(abs(var_5) > self.pitchturnthreshold) {
     return true;
   }
 
@@ -348,223 +348,223 @@ function getturndesiredyaw() {
     return self.desiredturnyaw;
   }
 
-  var0 = 0.25;
-  var1 = undefined;
-  var2 = undefined;
+  var_0 = 0.25;
+  var_1 = undefined;
+  var_2 = undefined;
 
   if(scripts\asm\asm_bb::bb_shootparamsvalid()) {
     if(isDefined(self._blackboard.shootparams_pos)) {
-      var2 = self._blackboard.shootparams_pos;
+      var_2 = self._blackboard.shootparams_pos;
     } else if(isDefined(self._blackboard.shootparams_ent)) {
-      var1 = self._blackboard.shootparams_ent;
+      var_1 = self._blackboard.shootparams_ent;
     }
   } else if(isDefined(self.smartfacingpos)) {
-    var2 = self.smartfacingpos;
+    var_2 = self.smartfacingpos;
   }
 
-  if(!isDefined(var2) && isDefined(self.node) && self.node.type == "Exposed" && distancesquared(self.node.origin, self.origin) < 36) {
+  if(!isDefined(var_2) && isDefined(self.node) && self.node.type == "Exposed" && distancesquared(self.node.origin, self.origin) < 36) {
     return (self.node.angles[1] - self.angles[1]);
   }
 
-  if(isDefined(var1) && !issentient(var1)) {
-    var0 = 1.5;
+  if(isDefined(var_1) && !issentient(var_1)) {
+    var_0 = 1.5;
   }
 
-  var3 = scripts\engine\utility::getpredictedaimyawtoshootentorpos(var0, var1, var2);
-  return var3;
+  var_3 = scripts\engine\utility::getpredictedaimyawtoshootentorpos(var_0, var_1, var_2);
+  return var_3;
 }
 
 function getturndesiredyaw3d() {
-  var0 = 0.25;
-  var1 = undefined;
-  var2 = undefined;
+  var_0 = 0.25;
+  var_1 = undefined;
+  var_2 = undefined;
 
   if(scripts\asm\asm_bb::bb_shootparamsvalid()) {
     if(isDefined(self._blackboard.shootparams_ent)) {
-      var1 = self._blackboard.shootparams_ent;
+      var_1 = self._blackboard.shootparams_ent;
     } else if(isDefined(self._blackboard.shootparams_pos)) {
-      var2 = self._blackboard.shootparams_pos;
+      var_2 = self._blackboard.shootparams_pos;
     }
   } else if(isDefined(self.enemy)) {
-    var1 = self.enemy;
+    var_1 = self.enemy;
   }
 
-  if(isDefined(var1) && !issentient(var1)) {
-    var0 = 1.5;
+  if(isDefined(var_1) && !issentient(var_1)) {
+    var_0 = 1.5;
   }
 
-  var3 = scripts\engine\utility::getpredictedaimyawtoshootentorpos3d(var0, var1, var2);
-  return var3;
+  var_3 = scripts\engine\utility::getpredictedaimyawtoshootentorpos3d(var_0, var_1, var_2);
+  return var_3;
 }
 
 function getturndesiredpitch3d() {
-  var0 = 0.25;
-  var1 = undefined;
-  var2 = undefined;
+  var_0 = 0.25;
+  var_1 = undefined;
+  var_2 = undefined;
 
   if(scripts\asm\asm_bb::bb_shootparamsvalid()) {
     if(isDefined(self._blackboard.shootparams_ent)) {
-      var1 = self._blackboard.shootparams_ent;
+      var_1 = self._blackboard.shootparams_ent;
     } else if(isDefined(self._blackboard.shootparams_pos)) {
-      var2 = self._blackboard.shootparams_pos;
+      var_2 = self._blackboard.shootparams_pos;
     }
   } else if(isDefined(self.enemy)) {
-    var1 = self.enemy;
+    var_1 = self.enemy;
   }
 
-  if(isDefined(var1) && !issentient(var1)) {
-    var0 = 1.5;
+  if(isDefined(var_1) && !issentient(var_1)) {
+    var_0 = 1.5;
   }
 
-  var3 = scripts\engine\utility::getpredictedaimpitchtoshootentorpos3d(var0, var1, var2);
-  return var3;
+  var_3 = scripts\engine\utility::getpredictedaimpitchtoshootentorpos3d(var_0, var_1, var_2);
+  return var_3;
 }
 
-function chooseturnanim(var0, var1, var2) {
-  var3 = getturndesiredyaw();
+function chooseturnanim(var_0, var_1, var_2) {
+  var_3 = getturndesiredyaw();
 
-  if(var3 < 0) {
-    var4 = "right";
+  if(var_3 < 0) {
+    var_4 = "right";
   } else {
-    var4 = "left";
+    var_4 = "left";
   }
 
-  var4 = abs(var4);
-  var5 = 0;
+  var_4 = abs(var_4);
+  var_5 = 0;
 
-  if(var4 > 157.5) {
-    var5 = 180;
-  } else if(var4 > 112.5) {
-    var5 = 135;
-  } else if(var4 > 67.5 || !istrue(self.allowturn45)) {
-    var5 = 90;
+  if(var_4 > 157.5) {
+    var_5 = 180;
+  } else if(var_4 > 112.5) {
+    var_5 = 135;
+  } else if(var_4 > 67.5 || !istrue(self.allowturn45)) {
+    var_5 = 90;
   } else {
-    var5 = 45;
+    var_5 = 45;
   }
 
-  var6 = var4 + "_" + var5;
-  var7 = scripts\asm\asm::asm_lookupanimfromalias(var2, var6);
-  return var7;
+  var_6 = var_4 + "_" + var_5;
+  var_7 = scripts\asm\asm::asm_lookupanimfromalias(var_2, var_6);
+  return var_7;
 }
 
-function chooseturnanim3d(var0, var1, var2) {
-  var3 = getturndesiredyaw3d();
-  var4 = getturndesiredpitch3d();
+function chooseturnanim3d(var_0, var_1, var_2) {
+  var_3 = getturndesiredyaw3d();
+  var_4 = getturndesiredpitch3d();
 
-  if(abs(var3) > self.turnthreshold && abs(var3) > abs(var4)) {
-    if(var3 < 0) {
-      var5 = "right";
+  if(abs(var_3) > self.turnthreshold && abs(var_3) > abs(var_4)) {
+    if(var_3 < 0) {
+      var_5 = "right";
     } else {
-      var5 = "left";
+      var_5 = "left";
     }
 
-    var4 = abs(var4);
-    var6 = 0;
+    var_4 = abs(var_4);
+    var_6 = 0;
 
-    if(var4 > 157.5) {
-      var6 = 180;
-    } else if(var4 > 112.5) {
-      var6 = 135;
-    } else if(var4 > 67.5) {
-      var6 = 90;
+    if(var_4 > 157.5) {
+      var_6 = 180;
+    } else if(var_4 > 112.5) {
+      var_6 = 135;
+    } else if(var_4 > 67.5) {
+      var_6 = 90;
     } else {
-      var6 = 45;
+      var_6 = 45;
     }
 
-    var7 = var5 + "_" + var6;
-    var8 = scripts\asm\asm::asm_lookupanimfromalias(var2, var7);
-    return var8;
+    var_7 = var_5 + "_" + var_6;
+    var_8 = scripts\asm\asm::asm_lookupanimfromalias(var_2, var_7);
+    return var_8;
   }
 
-  if(var8 < 0) {
-    var5 = "up";
+  if(var_8 < 0) {
+    var_5 = "up";
   } else {
-    var5 = "down";
+    var_5 = "down";
   }
 
-  var5 = abs(var5);
-  var6 = 0;
+  var_5 = abs(var_5);
+  var_6 = 0;
 
-  if(var5 > 157.5) {
-    var6 = 180;
-  } else if(var5 > 112.5) {
-    var6 = 135;
-  } else if(var5 > 67.5) {
-    var6 = 90;
+  if(var_5 > 157.5) {
+    var_6 = 180;
+  } else if(var_5 > 112.5) {
+    var_6 = 135;
+  } else if(var_5 > 67.5) {
+    var_6 = 90;
   } else {
-    var6 = 45;
+    var_6 = 45;
   }
 
-  var7 = var5 + "_" + var6;
-  var8 = scripts\asm\asm::asm_lookupanimfromalias(var6, var7);
-  return var8;
+  var_7 = var_5 + "_" + var_6;
+  var_8 = scripts\asm\asm::asm_lookupanimfromalias(var_6, var_7);
+  return var_8;
 }
 
-function choosecrouchturnanim(var0, var1, var2) {
-  var3 = getturndesiredyaw();
+function choosecrouchturnanim(var_0, var_1, var_2) {
+  var_3 = getturndesiredyaw();
 
-  if(var3 < -135) {
-    var4 = "2r";
-  } else if(var4 > 135) {
-    var4 = "2l";
-  } else if(var4 < 0) {
-    var4 = "6";
+  if(var_3 < -135) {
+    var_4 = "2r";
+  } else if(var_4 > 135) {
+    var_4 = "2l";
+  } else if(var_4 < 0) {
+    var_4 = "6";
   } else {
-    var4 = "4";
+    var_4 = "4";
   }
 
-  var5 = scripts\asm\asm::asm_lookupanimfromalias(var4, var4);
-  return var5;
+  var_5 = scripts\asm\asm::asm_lookupanimfromalias(var_4, var_4);
+  return var_5;
 }
 
-function reload_cleanup(var0, var1, var2) {
-  var3 = self.asm.reloadweapon;
+function reload_cleanup(var_0, var_1, var_2) {
+  var_3 = self.asm.reloadweapon;
   self.asm.reloadweapon = undefined;
 
   if(!isDefined(self.weaponinfo)) {
     return;
   }
 
-  var4 = isDefined(var3) && isDefined(self.weapon) && var3 == self.weapon;
+  var_4 = isDefined(var_3) && isDefined(self.weapon) && var_3 == self.weapon;
 
-  if(!isDefined(var3)) {
-    var3 = self.weapon;
+  if(!isDefined(var_3)) {
+    var_3 = self.weapon;
   }
 
-  var5 = createheadicon(var3);
+  var_5 = createheadicon(var_3);
 
-  if(!isDefined(self.weaponinfo[var5])) {
+  if(!isDefined(self.weaponinfo[var_5])) {
     return;
   }
 
-  if(!scripts\asm\asm::asm_eventfired(var0, "drop clip")) {
+  if(!scripts\asm\asm::asm_eventfired(var_0, "drop clip")) {
     return;
   }
 
-  if(self.weaponinfo[var5].useclip) {
-    var6 = getweaponclipmodel(var3);
+  if(self.weaponinfo[var_5].useclip) {
+    var_6 = getweaponclipmodel(var_3);
 
-    if(isDefined(var6)) {
-      var7 = scripts\asm\asm::asm_eventfired(var0, "attach clip left") || scripts\asm\asm::asm_eventfired(var0, "attach clip right");
-      var8 = scripts\asm\asm::asm_eventfired(var0, "detach clip left") || scripts\asm\asm::asm_eventfired(var0, "detach clip right") || scripts\asm\asm::asm_eventfired(var0, "detach clip nohand");
+    if(isDefined(var_6)) {
+      var_7 = scripts\asm\asm::asm_eventfired(var_0, "attach clip left") || scripts\asm\asm::asm_eventfired(var_0, "attach clip right");
+      var_8 = scripts\asm\asm::asm_eventfired(var_0, "detach clip left") || scripts\asm\asm::asm_eventfired(var_0, "detach clip right") || scripts\asm\asm::asm_eventfired(var_0, "detach clip nohand");
 
-      if(!var7) {
+      if(!var_7) {
         self notify("abort_reload");
         return;
       }
 
-      if(var7 && !var8) {
-        if(scripts\asm\asm::asm_eventfired(var0, "attach clip left")) {
-          var9 = "tag_accessory_left";
+      if(var_7 && !var_8) {
+        if(scripts\asm\asm::asm_eventfired(var_0, "attach clip left")) {
+          var_9 = "tag_accessory_left";
         } else {
-          var9 = "tag_accessory_right";
+          var_9 = "tag_accessory_right";
         }
 
-        self detach(var7, var9);
+        self detach(var_7, var_9);
         self notify("clip_detached");
 
-        if(var5) {
-          scripts\anim\shared::showweaponmagattachment(var6);
+        if(var_5) {
+          scripts\anim\shared::showweaponmagattachment(var_6);
           return;
         }
 
@@ -578,21 +578,21 @@ function reload_cleanup(var0, var1, var2) {
   }
 }
 
-function terminateexposedprone(var0, var1, var2) {
+function terminateexposedprone(var_0, var_1, var_2) {
   self.pushable = 1;
 }
 
-function playexposedproneloop(var0, var1, var2) {
+function playexposedproneloop(var_0, var_1, var_2) {
   self.pushable = 0;
-  playexposedloop(var0, var1, var2);
+  playexposedloop(var_0, var_1, var_2);
 }
 
-function playexposedloop(var0, var1, var2) {
+function playexposedloop(var_0, var_1, var_2) {
   scripts\asm\shared\utility::set_aim_and_turn_limits();
-  var3 = self asmgetstatetransitioningfrom(var0);
+  var_3 = self asmgetstatetransitioningfrom(var_0);
 
-  if(isDefined(var3) && (var3 == "stand_run_loop" || var3 == "move_walk_loop" || var3 == "patrol_move" || var3 == "cqb_stand_loop")) {
-    childthread scripts\asm\shared\utility::setuseanimgoalweight(var1, 0.2);
+  if(isDefined(var_3) && (var_3 == "stand_run_loop" || var_3 == "move_walk_loop" || var_3 == "patrol_move" || var_3 == "cqb_stand_loop")) {
+    childthread scripts\asm\shared\utility::setuseanimgoalweight(var_1, 0.2);
   }
 
   if(isDefined(self.node)) {
@@ -600,45 +600,45 @@ function playexposedloop(var0, var1, var2) {
   }
 
   if(self.team != "allies") {
-    thread faceenemywhenneeded(var1);
+    thread faceenemywhenneeded(var_1);
   }
 
-  scripts\asm\asm::asm_loopanimstate(var0, var1, 1);
+  scripts\asm\asm::asm_loopanimstate(var_0, var_1, 1);
 }
 
-function playexposedcrouchloop(var0, var1, var2) {
-  playexposedloop(var0, var1, var2);
+function playexposedcrouchloop(var_0, var_1, var_2) {
+  playexposedloop(var_0, var_1, var_2);
 }
 
-function playexposedidleaimdownloop(var0, var1, var2) {
+function playexposedidleaimdownloop(var_0, var_1, var_2) {
   self.aimingdown = 1;
-  playexposedloop(var0, var1, var2);
+  playexposedloop(var_0, var_1, var_2);
 }
 
-function playexposedcrouchaimdownloop(var0, var1, var2) {
+function playexposedcrouchaimdownloop(var_0, var_1, var_2) {
   self.aimingdown = 1;
-  playexposedcrouchloop(var0, var1, var2);
+  playexposedcrouchloop(var_0, var_1, var_2);
 }
 
-function terminateexposedidleaimdown(var0, var1, var2) {
+function terminateexposedidleaimdown(var_0, var_1, var_2) {
   self.aimingdown = 0;
 }
 
-function terminateexposedcrouchaimdown(var0, var1, var2) {
+function terminateexposedcrouchaimdown(var_0, var_1, var_2) {
   self.aimingdown = 0;
 }
 
-function faceenemywhenneeded(var0) {
-  self endon(var0 + "_finished");
-  var1 = self.maxfaceenemydist * self.maxfaceenemydist;
+function faceenemywhenneeded(var_0) {
+  self endon(var_0 + "_finished");
+  var_1 = self.maxfaceenemydist * self.maxfaceenemydist;
 
   for(;;) {
     waitframe();
 
     if(shouldfaceenemyinexposed()) {
-      var2 = distancesquared(self.origin, self.enemy.origin);
+      var_2 = distancesquared(self.origin, self.enemy.origin);
 
-      if(var2 < var1) {
+      if(var_2 < var_1) {
         self orientmode("face enemy");
       } else {
         self orientmode("face current");
@@ -651,7 +651,7 @@ function faceenemywhenneeded(var0) {
   }
 }
 
-function terminateexposedcrouch(var0, var1, var2) {}
+function terminateexposedcrouch(var_0, var_1, var_2) {}
 
 function shouldfaceenemyinexposed() {
   if(isDefined(self.pathgoalpos)) {
@@ -661,29 +661,29 @@ function shouldfaceenemyinexposed() {
   return isDefined(self.enemy) && isPlayer(self.enemy) && self cansee(self.enemy);
 }
 
-function playanim_weaponswitch(var0, var1, var2) {
-  self endon(var1 + "_finished");
-  var3 = scripts\asm\asm_bb::bb_getrequestedweapon();
-  var4 = scripts\asm\asm::asm_getanim(var0, var1);
-  var5 = scripts\anim\combat_utility::fasteranimspeed();
-  self aisetanim(var1, var4, var5);
-  scripts\asm\asm::asm_playfacialanim(var0, var1, scripts\asm\asm::asm_getxanim(var1, var4));
-  scripts\asm\asm::asm_donotetracks(var0, var1, scripts\asm\asm::asm_getnotehandler(var0, var1));
+function playanim_weaponswitch(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
+  var_3 = scripts\asm\asm_bb::bb_getrequestedweapon();
+  var_4 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_5 = scripts\anim\combat_utility::fasteranimspeed();
+  self aisetanim(var_1, var_4, var_5);
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, scripts\asm\asm::asm_getxanim(var_1, var_4));
+  scripts\asm\asm::asm_donotetracks(var_0, var_1, scripts\asm\asm::asm_getnotehandler(var_0, var_1));
   self notify("switched_to_sidearm");
   scripts\common\gameskill::didsomethingotherthanshooting();
 }
 
-function terminate_weaponswitch(var0, var1, var2) {
-  var3 = weaponclass(self.weapon);
-  scripts\anim\shared::updateweaponarchetype(var3);
+function terminate_weaponswitch(var_0, var_1, var_2) {
+  var_3 = weaponclass(self.weapon);
+  scripts\anim\shared::updateweaponarchetype(var_3);
 }
 
-function playturnanim(var0, var1, var2) {
-  self endon(var1 + "_finished");
+function playturnanim(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
   pushdisabledgunpose();
   scripts\common\gameskill::didsomethingotherthanshooting();
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  var4 = scripts\asm\asm::asm_getxanim(var1, var3);
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, var_3);
 
   if(scripts\engine\utility::actor_is3d() && isDefined(self.enemy)) {
     self orientmode("face enemy");
@@ -697,63 +697,63 @@ function playturnanim(var0, var1, var2) {
     self animmode("zonly_physics");
   }
 
-  scripts\asm\asm::asm_playfacialanim(var0, var1, var4);
-  self.stepoutyaw = angleclamp180(getangledelta(var4, 0, 1) + self.angles[1]);
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_4);
+  self.stepoutyaw = angleclamp180(getangledelta(var_4, 0, 1) + self.angles[1]);
   self.useanimgoalweight = 1;
-  var5 = 1;
-  self aisetanim(var1, var3, var5);
+  var_5 = 1;
+  self aisetanim(var_1, var_3, var_5);
 
   if(shouldfaceenemyinexposed()) {
-    thread playturnanim_turnanimanglefixup(var4, var1);
+    thread playturnanim_turnanimanglefixup(var_4, var_1);
   }
 
-  scripts\asm\asm::asm_donotetracks(var0, var1);
+  scripts\asm\asm::asm_donotetracks(var_0, var_1);
 }
 
-function playturnanim_turnanimanglefixup(var0, var1) {
+function playturnanim_turnanimanglefixup(var_0, var_1) {
   self endon("death");
-  self endon(var1 + "_finished");
-  var2 = self.enemy;
-  var2 endon("death");
-  var3 = getanimlength(var0);
+  self endon(var_1 + "_finished");
+  var_2 = self.enemy;
+  var_2 endon("death");
+  var_3 = getanimlength(var_0);
 
-  if(animhasnotetrack(var0, "start_aim")) {
-    var4 = getnotetracktimes(var0, "start_aim");
-    var3 *= var4[0];
-  } else if(animhasnotetrack(var0, "finish")) {
-    var4 = getnotetracktimes(var0, "finish");
-    var3 *= var4[0];
+  if(animhasnotetrack(var_0, "start_aim")) {
+    var_4 = getnotetracktimes(var_0, "start_aim");
+    var_3 *= var_4[0];
+  } else if(animhasnotetrack(var_0, "finish")) {
+    var_4 = getnotetracktimes(var_0, "finish");
+    var_3 *= var_4[0];
   }
 
-  var5 = int(var3 * 20);
-  var6 = var5;
+  var_5 = int(var_3 * 20);
+  var_6 = var_5;
 
-  while(var6 > 0) {
-    var7 = 1 / var6;
-    var8 = scripts\engine\utility::getyawtospot(var2.origin);
-    self.stepoutyaw = angleclamp180(self.angles[1] + var8);
-    var9 = self aigetanimtime(var0);
-    var10 = getangledelta(var0, var9, 1);
-    var11 = angleclamp180(var8 - var10);
-    self orientmode("face angle", angleclamp(self.angles[1] + var11 * var7));
-    var6--;
+  while(var_6 > 0) {
+    var_7 = 1 / var_6;
+    var_8 = scripts\engine\utility::getyawtospot(var_2.origin);
+    self.stepoutyaw = angleclamp180(self.angles[1] + var_8);
+    var_9 = self aigetanimtime(var_0);
+    var_10 = getangledelta(var_0, var_9, 1);
+    var_11 = angleclamp180(var_8 - var_10);
+    self orientmode("face angle", angleclamp(self.angles[1] + var_11 * var_7));
+    var_6--;
     wait 0.05;
   }
 }
 
-function playturnanim_cleanup(var0, var1, var2) {
+function playturnanim_cleanup(var_0, var_1, var_2) {
   self.useanimgoalweight = 0;
   self.stepoutyaw = undefined;
   self.desiredturnyaw = undefined;
   popdisabledgunpose();
 
   if(istrue(self.leavecasualkiller)) {
-    terminate_casualkiller(var0, var1, var2);
+    terminate_casualkiller(var_0, var_1, var_2);
     return;
   }
 }
 
-function shouldsnaptocover_checktype(var0, var1, var2, var3) {
+function shouldsnaptocover_checktype(var_0, var_1, var_2, var_3) {
   if(scripts\asm\asm_bb::bb_moverequested()) {
     return 0;
   }
@@ -770,103 +770,103 @@ function shouldsnaptocover_checktype(var0, var1, var2, var3) {
     return 0;
   }
 
-  return scripts\asm\shared\utility::isarrivaltype(var0, var1, var2, var3);
+  return scripts\asm\shared\utility::isarrivaltype(var_0, var_1, var_2, var_3);
 }
 
-function currentsnaptonodeis(var0, var1, var2, var3) {
-  var4 = var3;
+function currentsnaptonodeis(var_0, var_1, var_2, var_3) {
+  var_4 = var_3;
 
   if(!isDefined(self.node)) {
-    return (var4 == "Exposed Crouch");
+    return (var_4 == "Exposed Crouch");
   }
 
   if(distance2dsquared(self.origin, self.node.origin) > 225) {
     if(scripts\asm\asm_bb::bb_getrequestedstance() == "stand") {
-      return (var4 == "Exposed");
+      return (var_4 == "Exposed");
     } else {
-      return (var4 == "Exposed Crouch");
+      return (var_4 == "Exposed Crouch");
     }
   }
 
   if(isDefined(self._blackboard.runpassthroughtype)) {
-    return (self._blackboard.runpassthroughtype == var3);
+    return (self._blackboard.runpassthroughtype == var_3);
   }
 
-  return scripts\asm\shared\utility::isarrivaltype(var0, var1, var2, var3);
+  return scripts\asm\shared\utility::isarrivaltype(var_0, var_1, var_2, var_3);
 }
 
-function reloadnotehandler(var0) {
-  scripts\anim\notetracks::notetrack_prefix_handler(var0);
+function reloadnotehandler(var_0) {
+  scripts\anim\notetracks::notetrack_prefix_handler(var_0);
   return undefined;
 }
 
-function reload(var0, var1, var2) {
+function reload(var_0, var_1, var_2) {
   self endon("reload_terminate");
-  self endon(var1 + "_finished");
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
+  self endon(var_1 + "_finished");
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
 
   if(weaponclass(self.weapon) == "pistol") {
     self orientmode("face enemy");
   }
 
-  self aisetanim(var1, var3);
-  var4 = scripts\asm\asm::asm_getxanim(var1, var3);
+  self aisetanim(var_1, var_3);
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, var_3);
   self.asm.reloadweapon = self.weapon;
-  scripts\asm\asm::asm_playfacialanim(var0, var1, var4);
-  scripts\asm\asm::asm_donotetracks(var0, var1, &reloadnotehandler);
+  scripts\asm\asm::asm_playfacialanim(var_0, var_1, var_4);
+  scripts\asm\asm::asm_donotetracks(var_0, var_1, &reloadnotehandler);
 }
 
-function shoot_doagentnotetrackswithtimeout(var0, var1, var2, var3) {
-  self endon(var1 + "_finished");
-  var4 = var1 + "_timeout";
-  var5 = var1 + "_timeout_end";
-  childthread scripts\asm\shoot\script_funcs::shoot_timeout(var4, var5, var3);
-  self endon(var4);
-  var6 = animhasnotetrack(var2, "fire");
-  var7 = weaponclass(self.weapon) == "rocketlauncher";
-  var8 = getanimlength(var2);
-  var9 = [];
+function shoot_doagentnotetrackswithtimeout(var_0, var_1, var_2, var_3) {
+  self endon(var_1 + "_finished");
+  var_4 = var_1 + "_timeout";
+  var_5 = var_1 + "_timeout_end";
+  childthread scripts\asm\shoot\script_funcs::shoot_timeout(var_4, var_5, var_3);
+  self endon(var_4);
+  var_6 = animhasnotetrack(var_2, "fire");
+  var_7 = weaponclass(self.weapon) == "rocketlauncher";
+  var_8 = getanimlength(var_2);
+  var_9 = [];
 
-  if(var6) {
-    var10 = getnotetracktimes(var2, "fire");
+  if(var_6) {
+    var_10 = getnotetracktimes(var_2, "fire");
 
-    if(var10.size == 1 && var10[0] == 0) {
-      var6 = 0;
+    if(var_10.size == 1 && var_10[0] == 0) {
+      var_6 = 0;
     } else {
-      var9 = var8 * var10[0];
+      var_9 = var_8 * var_10[0];
 
-      for(var11 = 1; var11 < var10.size; var11++) {
-        var12 = var8 * var10[var11];
-        var12 -= var9[var11 - 1];
-        var9 = var12;
+      for(var_11 = 1; var_11 < var_10.size; var_11++) {
+        var_12 = var_8 * var_10[var_11];
+        var_12 -= var_9[var_11 - 1];
+        var_9 = var_12;
       }
     }
   }
 
-  var13 = 0;
-  var14 = self._blackboard.shootparams_shotsperburst;
-  var15 = var14 == 1 || self._blackboard.shootparams_style == "semi";
-  var16 = isPlayer(self.enemy) && self.enemy isinvulnerable();
-  var17 = scripts\anim\utility_common::weapon_pump_action_shotgun();
-  var15 = 1;
-  var18 = 0;
+  var_13 = 0;
+  var_14 = self._blackboard.shootparams_shotsperburst;
+  var_15 = var_14 == 1 || self._blackboard.shootparams_style == "semi";
+  var_16 = isPlayer(self.enemy) && self.enemy isinvulnerable();
+  var_17 = scripts\anim\utility_common::weapon_pump_action_shotgun();
+  var_15 = 1;
+  var_18 = 0;
 
-  while(var13 < var14 && var14 > 0) {
-    if(var6) {
-      if(var9[var18] > 0) {
-        wait var9[var18];
+  while(var_13 < var_14 && var_14 > 0) {
+    if(var_6) {
+      if(var_9[var_18] > 0) {
+        wait var_9[var_18];
       }
 
-      var18 = (var18 + 1) % var9.size;
+      var_18 = (var_18 + 1) % var_9.size;
     }
 
     if(!self.bulletsinclip) {
       break;
     }
 
-    scripts\asm\shoot\script_funcs::shootatshootentorpos(var15);
+    scripts\asm\shoot\script_funcs::shootatshootentorpos(var_15);
 
-    if(var16) {
+    if(var_16) {
       if(randomint(3) == 0) {
         self.bulletsinclip--;
       }
@@ -874,7 +874,7 @@ function shoot_doagentnotetrackswithtimeout(var0, var1, var2, var3) {
       self.bulletsinclip--;
     }
 
-    if(var7) {
+    if(var_7) {
       self.rocketammo--;
 
       if(weaponclass(self.weapon) == "rocketlauncher" && self tagexists("tag_rocket")) {
@@ -882,61 +882,61 @@ function shoot_doagentnotetrackswithtimeout(var0, var1, var2, var3) {
       }
     }
 
-    var13++;
+    var_13++;
 
-    if(var17) {
-      childthread scripts\asm\shoot\script_funcs::shoot_shotgunpumpsound(var1);
+    if(var_17) {
+      childthread scripts\asm\shoot\script_funcs::shoot_shotgunpumpsound(var_1);
     }
 
-    if(self._blackboard.shootparams_fastburst && var13 == var14) {
+    if(self._blackboard.shootparams_fastburst && var_13 == var_14) {
       break;
     }
 
-    if(!var6 || var14 == 1 && self._blackboard.shootparams_style == "single") {
-      self waittillmatch(var1, "end");
+    if(!var_6 || var_14 == 1 && self._blackboard.shootparams_style == "single") {
+      self waittillmatch(var_1, "end");
     }
   }
 
-  self notify(var5);
+  self notify(var_5);
 }
 
 function shoot_setshootparameters() {
-  var0 = self._blackboard.shootparams_shotsperburst;
-  var1 = 2;
+  var_0 = self._blackboard.shootparams_shotsperburst;
+  var_1 = 2;
 
-  if(self._blackboard.shootparams_style == "single" || var0 == 1 && self._blackboard.shootparams_style != "rack") {
-    var0 = 1;
-    var1 = 2;
+  if(self._blackboard.shootparams_style == "single" || var_0 == 1 && self._blackboard.shootparams_style != "rack") {
+    var_0 = 1;
+    var_1 = 2;
   } else if(self._blackboard.shootparams_style == "semi") {
-    var1 = 3;
+    var_1 = 3;
 
-    if(var0 == 1) {
-      var1 = 2;
-    } else if(var0 > 5) {
-      var0 = 5;
+    if(var_0 == 1) {
+      var_1 = 2;
+    } else if(var_0 > 5) {
+      var_0 = 5;
     }
   } else if(self._blackboard.shootparams_style == "mg") {
-    var1 = 2;
-    var0 = 1;
+    var_1 = 2;
+    var_0 = 1;
   } else if(self._blackboard.shootparams_style == "rack" && self.currentpose != "prone") {
-    var1 = 5;
+    var_1 = 5;
   } else {
-    var1 = 4;
+    var_1 = 4;
 
-    if(var0 > 6) {
-      var0 = 6;
+    if(var_0 > 6) {
+      var_0 = 6;
     }
   }
 
-  self setupshootstyleadditive(var1, var0);
+  self setupshootstyleadditive(var_1, var_0);
 }
 
 function shoot_clearshootparameters() {
   self setupshootstyleadditive(0, 0);
 }
 
-function shoot_generic(var0, var1, var2) {
-  self endon(var1 + "_finished");
+function shoot_generic(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
   self._blackboard.shoot_firstshot = 0;
 
   if(scripts\anim\utility_common::isasniper(1)) {
@@ -944,22 +944,22 @@ function shoot_generic(var0, var1, var2) {
   }
 
   self updateplayersightaccuracy();
-  var3 = scripts\asm\asm::asm_getanim(var0, var1);
-  var4 = scripts\asm\asm::asm_getxanim(var1, var3);
-  var5 = scripts\engine\utility::ter_op(scripts\anim\utility_common::weapon_pump_action_shotgun(), 3, 2);
+  var_3 = scripts\asm\asm::asm_getanim(var_0, var_1);
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, var_3);
+  var_5 = scripts\engine\utility::ter_op(scripts\anim\utility_common::weapon_pump_action_shotgun(), 3, 2);
 
-  if(self asmcurrentstatehasshootadditive(var0)) {
+  if(self asmcurrentstatehasshootadditive(var_0)) {
     shoot_setshootparameters();
-    scripts\asm\shoot\script_funcs::shoot_donotetrackswithtimeout(var0, var1, var4, var5, "shoot_additive_fire");
+    scripts\asm\shoot\script_funcs::shoot_donotetrackswithtimeout(var_0, var_1, var_4, var_5, "shoot_additive_fire");
   } else {
     shoot_clearshootparameters();
 
     if(isagent(self)) {
-      shoot_doagentnotetrackswithtimeout(var0, var1, var4, var5);
+      shoot_doagentnotetrackswithtimeout(var_0, var_1, var_4, var_5);
     } else {
-      var6 = scripts\asm\shoot\script_funcs::shoot_getrate();
-      self setflaggedanimknobrestart(var1, var4, 1, 0.2, var6);
-      scripts\asm\shoot\script_funcs::shoot_donotetrackswithtimeout(var0, var1, var4, 2);
+      var_6 = scripts\asm\shoot\script_funcs::shoot_getrate();
+      self setflaggedanimknobrestart(var_1, var_4, 1, 0.2, var_6);
+      scripts\asm\shoot\script_funcs::shoot_donotetrackswithtimeout(var_0, var_1, var_4, 2);
     }
   }
 
@@ -969,7 +969,7 @@ function shoot_generic(var0, var1, var2) {
     scripts\asm\shoot\script_funcs::shoot_stopsoundwithdelay(0.05);
   }
 
-  scripts\asm\asm::asm_fireevent(var0, "shoot_finished");
+  scripts\asm\asm::asm_fireevent(var_0, "shoot_finished");
 
   if(scripts\anim\utility_common::isasniper(1)) {
     scripts\asm\track::onsniperfired();
@@ -977,26 +977,26 @@ function shoot_generic(var0, var1, var2) {
   }
 }
 
-function shoot_playidleanimloop_sniper(var0, var1, var2) {
-  thread scripts\asm\shoot\script_funcs::handleburstdelay(var0, var1);
+function shoot_playidleanimloop_sniper(var_0, var_1, var_2) {
+  thread scripts\asm\shoot\script_funcs::handleburstdelay(var_0, var_1);
 
   if(scripts\asm\asm_bb::bb_moverequested()) {
     return;
   }
 
   self.bshootidle = 1;
-  scripts\asm\asm::asm_playadditiveanimloopstate(var0, var1, var2);
+  scripts\asm\asm::asm_playadditiveanimloopstate(var_0, var_1, var_2);
 }
 
-function shouldendsniperidle(var0, var1, var2, var3) {
-  if(!shouldsniperidle(var0, var1, var2, var3)) {
+function shouldendsniperidle(var_0, var_1, var_2, var_3) {
+  if(!shouldsniperidle(var_0, var_1, var_2, var_3)) {
     return true;
   }
 
   return false;
 }
 
-function shouldsniperidle(var0, var1, var2, var3) {
+function shouldsniperidle(var_0, var_1, var_2, var_3) {
   if(!scripts\anim\utility_common::isasniper()) {
     return false;
   }
@@ -1008,23 +1008,23 @@ function shouldsniperidle(var0, var1, var2, var3) {
   return true;
 }
 
-function shouldsniperbeginfiring(var0, var1, var2, var3) {
+function shouldsniperbeginfiring(var_0, var_1, var_2, var_3) {
   if(!scripts\anim\utility_common::isasniper()) {
-    return scripts\asm\shoot\script_funcs::shouldbeginfiring(var0, var1, var2, var3);
+    return scripts\asm\shoot\script_funcs::shouldbeginfiring(var_0, var_1, var_2, var_3);
   }
 
   if(scripts\asm\track::issniperconverging()) {
     return 0;
   }
 
-  if(!scripts\asm\shoot\script_funcs::shouldbeginfiring(var0, var1, var2, var3)) {
+  if(!scripts\asm\shoot\script_funcs::shouldbeginfiring(var_0, var_1, var_2, var_3)) {
     return 0;
   }
 
   return 1;
 }
 
-function shouldreacttonewenemy(var0, var1, var2, var3) {
+function shouldreacttonewenemy(var_0, var_1, var_2, var_3) {
   if(isDefined(self.stealth)) {
     self.newenemyreaction = 0;
     return false;
@@ -1058,11 +1058,11 @@ function shouldreacttonewenemy(var0, var1, var2, var3) {
   return true;
 }
 
-function shouldcasualkillerreacttonewenemy(var0, var1, var2, var3) {
+function shouldcasualkillerreacttonewenemy(var_0, var_1, var_2, var_3) {
   if(istrue(self.casualkiller) && istrue(self.leavecasualkiller)) {
-    var4 = shouldreacttonewenemy(var0, var1, var2, var3);
+    var_4 = shouldreacttonewenemy(var_0, var_1, var_2, var_3);
 
-    if(istrue(var4)) {
+    if(istrue(var_4)) {
       self clearbtgoal(2);
       return true;
     }
@@ -1071,99 +1071,99 @@ function shouldcasualkillerreacttonewenemy(var0, var1, var2, var3) {
   return false;
 }
 
-function terminate_newenemyreaction(var0, var1, var2) {
+function terminate_newenemyreaction(var_0, var_1, var_2) {
   self.newenemyreaction = 0;
   self.forcenewenemyreaction = undefined;
   self.stepoutyaw = undefined;
   popdisabledgunpose();
 
   if(istrue(self.leavecasualkiller)) {
-    terminate_casualkiller(var0, var1, var2);
+    terminate_casualkiller(var_0, var_1, var_2);
     return;
   }
 }
 
-function terminate_transitiontoexposedanim(var0, var1, var2) {
-  terminate_newenemyreaction(var0, var1, var2);
-  scripts\asm\soldier\cover::clearcoveranim(var0, var1, var2);
+function terminate_transitiontoexposedanim(var_0, var_1, var_2) {
+  terminate_newenemyreaction(var_0, var_1, var_2);
+  scripts\asm\soldier\cover::clearcoveranim(var_0, var_1, var_2);
 }
 
-function getnewenemyreactangleindex(var0) {
-  var0 = angleclamp180(var0);
+function getnewenemyreactangleindex(var_0) {
+  var_0 = angleclamp180(var_0);
 
-  if(var0 > 135 || var0 < -135) {
-    var1 = 2;
-  } else if(var1 < -45) {
-    var1 = 4;
-  } else if(var1 > 45) {
-    var1 = 6;
+  if(var_0 > 135 || var_0 < -135) {
+    var_1 = 2;
+  } else if(var_1 < -45) {
+    var_1 = 4;
+  } else if(var_1 > 45) {
+    var_1 = 6;
   } else {
-    var1 = 8;
+    var_1 = 8;
   }
 
-  return var1;
+  return var_1;
 }
 
 function getnewenemyreactdirindex() {
-  var0 = 0;
-  var1 = self lastknownpos(self.enemy);
-  var2 = var1 - self.origin;
+  var_0 = 0;
+  var_1 = self lastknownpos(self.enemy);
+  var_2 = var_1 - self.origin;
 
-  if(length2dsquared(var2) < 36) {
-    var0 = 0;
+  if(length2dsquared(var_2) < 36) {
+    var_0 = 0;
   } else {
-    var3 = vectortoyaw(var2);
-    var0 = self.angles[1] - var3;
+    var_3 = vectortoyaw(var_2);
+    var_0 = self.angles[1] - var_3;
   }
 
-  return getnewenemyreactangleindex(var0);
+  return getnewenemyreactangleindex(var_0);
 }
 
 function getnewenemyreactalias() {
-  var0 = getnewenemyreactdirindex();
-  var1 = "" + var0;
-  return var1;
+  var_0 = getnewenemyreactdirindex();
+  var_1 = "" + var_0;
+  return var_1;
 }
 
-function chooseanim_newenemyreaction(var0, var1, var2) {
-  var3 = getnewenemyreactalias();
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, var3);
+function chooseanim_newenemyreaction(var_0, var_1, var_2) {
+  var_3 = getnewenemyreactalias();
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_3);
 }
 
-function facegoalthread_newenemyreaction(var0, var1) {
+function facegoalthread_newenemyreaction(var_0, var_1) {
   self notify("FaceGoalThread");
   self endon("FaceGoalThread");
   self endon("death");
-  self endon(var0 + "_finished");
+  self endon(var_0 + "_finished");
 
   for(;;) {
-    var2 = 0.25;
-    var3 = angleclamp180(var1 - self.angles[1]);
-    self orientmode("face angle", self.angles[1] + var3 * var2);
+    var_2 = 0.25;
+    var_3 = angleclamp180(var_1 - self.angles[1]);
+    self orientmode("face angle", self.angles[1] + var_3 * var_2);
     waitframe();
   }
 }
 
-function handlefacegoalnotetrack_newenemyreaction(var0, var1, var2) {
-  if(var1 == "face_goal") {
-    var3 = var2 - self.origin;
-    var4 = vectortoyaw(var3);
-    thread facegoalthread_newenemyreaction(var0, var4);
+function handlefacegoalnotetrack_newenemyreaction(var_0, var_1, var_2) {
+  if(var_1 == "face_goal") {
+    var_3 = var_2 - self.origin;
+    var_4 = vectortoyaw(var_3);
+    thread facegoalthread_newenemyreaction(var_0, var_4);
     return true;
   }
 
   return false;
 }
 
-function playanim_newenemyreaction(var0, var1, var2) {
-  self endon(var1 + "_finished");
+function playanim_newenemyreaction(var_0, var_1, var_2) {
+  self endon(var_1 + "_finished");
   pushdisabledgunpose();
-  var3 = self asmgetanim(var0, var1);
-  var4 = scripts\asm\asm::asm_getxanim(var1, var3);
-  self aisetanim(var1, var3);
-  var5 = self lastknownpos(self.enemy);
-  thread playturnanim_turnanimanglefixup(var4, var1);
-  scripts\asm\asm::asm_donotetrackswithinterceptor(var0, var1, &handlefacegoalnotetrack_newenemyreaction, var5);
+  var_3 = self asmgetanim(var_0, var_1);
+  var_4 = scripts\asm\asm::asm_getxanim(var_1, var_3);
+  self aisetanim(var_1, var_3);
+  var_5 = self lastknownpos(self.enemy);
+  thread playturnanim_turnanimanglefixup(var_4, var_1);
+  scripts\asm\asm::asm_donotetrackswithinterceptor(var_0, var_1, &handlefacegoalnotetrack_newenemyreaction, var_5);
 
   if(isDefined(self.enemy) && self cansee(self.enemy)) {
     self.remainexposedendtime = gettime() + 2000;
@@ -1171,62 +1171,62 @@ function playanim_newenemyreaction(var0, var1, var2) {
   }
 }
 
-function chooseanimidle_interiorexterior(var0, var1, var2) {
-  var3 = scripts\asm\asm::asm_getdemeanor();
+function chooseanimidle_interiorexterior(var_0, var_1, var_2) {
+  var_3 = scripts\asm\asm::asm_getdemeanor();
 
-  if(scripts\asm\asm::asm_hasdemeanoranimoverride(var3, "idle")) {
-    var4 = scripts\asm\asm::asm_getdemeanoranimoverride(var3, "idle");
+  if(scripts\asm\asm::asm_hasdemeanoranimoverride(var_3, "idle")) {
+    var_4 = scripts\asm\asm::asm_getdemeanoranimoverride(var_3, "idle");
 
-    if(isarray(var4)) {
-      return var4[randomint(var4.size)];
+    if(isarray(var_4)) {
+      return var_4[randomint(var_4.size)];
     }
 
-    return var4;
+    return var_4;
   }
 
   if(isDefined(self.node) && self.node.type == "Cover Stand") {
     if(!self.node scripts\engine\utility::isvalidpeekoutdir("over")) {
-      var3 += "_high";
+      var_3 += "_high";
     }
   }
 
   if(istrue(self.uprightcqbidle)) {
-    var3 += "_interior";
+    var_3 += "_interior";
 
     if(!istrue(self._blackboard.hasplayedidleintro)) {
-      var3 += "_intro";
+      var_3 += "_intro";
       self._blackboard.hasplayedidleintro = 1;
     }
   }
 
-  return scripts\asm\shared\utility::chooseanim_weaponclassprepended(var1, var2, var3);
+  return scripts\asm\shared\utility::chooseanim_weaponclassprepended(var_1, var_2, var_3);
 }
 
-function chooseanim_playerpushed(var0, var1, var2) {
-  var3 = scripts\asm\asm::asm_getephemeraleventdata("player_pushed", "player_pushed");
-  var4 = vectorNormalize(var3);
-  var5 = vectortoangles(var4);
-  var6 = angleclamp180(var5[1] - self.angles[1]);
-  var7 = scripts\asm\soldier\move::yawdiffto2468(var6);
-  var8 = "pushed_" + var7;
-  var9 = scripts\asm\asm::asm_lookupanimfromalias(var1, var8);
-  return var9;
+function chooseanim_playerpushed(var_0, var_1, var_2) {
+  var_3 = scripts\asm\asm::asm_getephemeraleventdata("player_pushed", "player_pushed");
+  var_4 = vectorNormalize(var_3);
+  var_5 = vectortoangles(var_4);
+  var_6 = angleclamp180(var_5[1] - self.angles[1]);
+  var_7 = scripts\asm\soldier\move::yawdiffto2468(var_6);
+  var_8 = "pushed_" + var_7;
+  var_9 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_8);
+  return var_9;
 }
 
-function terminateidle(var0, var1, var2) {
+function terminateidle(var_0, var_1, var_2) {
   self._blackboard.hasplayedidleintro = undefined;
 }
 
-function shouldleavecasualkiller(var0, var1, var2, var3) {
+function shouldleavecasualkiller(var_0, var_1, var_2, var_3) {
   if(istrue(self.leavecasualkiller)) {
-    if(needtoturn(var0, var1, var2, var3)) {
+    if(needtoturn(var_0, var_1, var_2, var_3)) {
       return false;
     }
 
     if(isDefined(self.enemy)) {
-      var4 = self.angles[1] - vectortoyaw(self.enemy.origin - self.origin);
+      var_4 = self.angles[1] - vectortoyaw(self.enemy.origin - self.origin);
 
-      if(abs(angleclamp180(var4)) > 75) {
+      if(abs(angleclamp180(var_4)) > 75) {
         return false;
       }
     }
@@ -1237,16 +1237,16 @@ function shouldleavecasualkiller(var0, var1, var2, var3) {
   return false;
 }
 
-function shouldleavecasualkillerimmediately(var0, var1, var2, var3) {
+function shouldleavecasualkillerimmediately(var_0, var_1, var_2, var_3) {
   if(istrue(self.leavecasualkiller)) {
-    terminate_casualkiller(var0, var1, var3);
+    terminate_casualkiller(var_0, var_1, var_3);
     return true;
   }
 
   return false;
 }
 
-function terminate_casualkiller(var0, var1, var2) {
+function terminate_casualkiller(var_0, var_1, var_2) {
   scripts\asm\shared\utility::setbasearchetype(scripts\asm\shared\utility::findoverridearchetype("default"));
   scripts\asm\shared\utility::clearoverridearchetype("casual_killer", 0, 1);
   self.newenemyreaction = 0;
@@ -1257,7 +1257,7 @@ function terminate_casualkiller(var0, var1, var2) {
   self setdefaultaimlimits();
 }
 
-function shoulddodge(var0, var1, var2, var3) {
+function shoulddodge(var_0, var_1, var_2, var_3) {
   if(istrue(self.disabledodge)) {
     return false;
   }
@@ -1288,29 +1288,29 @@ function shoulddodge(var0, var1, var2, var3) {
 
   self.dodgecooldown = gettime() + randomintrange(4000, 7000);
   self.dodgeanim = "4";
-  var4 = scripts\asm\asm::asm_getanim(var0, var2);
-  var5 = scripts\asm\asm::asm_getxanim(var2, var4);
-  var6 = getmovedelta(var5, 0, 1);
+  var_4 = scripts\asm\asm::asm_getanim(var_0, var_2);
+  var_5 = scripts\asm\asm::asm_getxanim(var_2, var_4);
+  var_6 = getmovedelta(var_5, 0, 1);
   self.dodgeanim = "6";
-  var4 = scripts\asm\asm::asm_getanim(var0, var2);
-  var5 = scripts\asm\asm::asm_getxanim(var2, var4);
-  var7 = getmovedelta(var5, 0, 1);
-  var6 = rotatevector(var6, self.angles);
-  var7 = rotatevector(var7, self.angles);
-  var8 = self.origin - self.enemy.origin;
-  var9 = generateaxisanglesfromforwardvector(var8, self.enemy.angles);
-  var10 = angleclamp180(var9[1] - self.enemy.angles[1]);
+  var_4 = scripts\asm\asm::asm_getanim(var_0, var_2);
+  var_5 = scripts\asm\asm::asm_getxanim(var_2, var_4);
+  var_7 = getmovedelta(var_5, 0, 1);
+  var_6 = rotatevector(var_6, self.angles);
+  var_7 = rotatevector(var_7, self.angles);
+  var_8 = self.origin - self.enemy.origin;
+  var_9 = generateaxisanglesfromforwardvector(var_8, self.enemy.angles);
+  var_10 = angleclamp180(var_9[1] - self.enemy.angles[1]);
 
-  if(abs(var10) > 4) {
+  if(abs(var_10) > 4) {
     return false;
   }
 
-  if(var10 > 0) {
-    if(checkdodge(var7)) {
+  if(var_10 > 0) {
+    if(checkdodge(var_7)) {
       self.dodgeanim = "6";
       return true;
     }
-  } else if(checkdodge(var6)) {
+  } else if(checkdodge(var_6)) {
     self.dodgeanim = "4";
     return true;
   }
@@ -1318,39 +1318,39 @@ function shoulddodge(var0, var1, var2, var3) {
   return false;
 }
 
-function checkdodge(var0) {
-  var1 = self.origin + var0;
+function checkdodge(var_0) {
+  var_1 = self.origin + var_0;
 
-  if(!self isingoal(var1)) {
+  if(!self isingoal(var_1)) {
     return false;
   }
 
-  if(!navisstraightlinereachable(self.origin, var1, self)) {
+  if(!navisstraightlinereachable(self.origin, var_1, self)) {
     return false;
   }
 
-  var2 = self getapproxeyepos();
-  var3 = var2 + var0;
+  var_2 = self getapproxeyepos();
+  var_3 = var_2 + var_0;
 
-  if(!sighttracepassed(var2, var3, 1, self)) {
+  if(!sighttracepassed(var_2, var_3, 1, self)) {
     return false;
   }
 
   if(isai(self.enemy) && !isbot(self.enemy)) {
-    var4 = self.enemy getapproxeyepos();
+    var_4 = self.enemy getapproxeyepos();
   } else {
-    var4 = self.enemy getEye();
+    var_4 = self.enemy getEye();
   }
 
-  if(!sighttracepassed(var4, var4, 0, undefined)) {
+  if(!sighttracepassed(var_4, var_4, 0, undefined)) {
     return false;
   }
 
   return true;
 }
 
-function chooseanim_dodge(var0, var1, var2) {
-  return scripts\asm\asm::asm_lookupanimfromalias(var1, self.dodgeanim);
+function chooseanim_dodge(var_0, var_1, var_2) {
+  return scripts\asm\asm::asm_lookupanimfromalias(var_1, self.dodgeanim);
 }
 
 function pushdisabledgunpose() {

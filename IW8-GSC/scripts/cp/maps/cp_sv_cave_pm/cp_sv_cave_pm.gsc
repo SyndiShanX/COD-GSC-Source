@@ -73,9 +73,9 @@ function main() {
     scripts\engine\utility::flag_init("infil_complete");
   }
 
-  var0 = getDvar("cp_sv_cave_pm_start_obj", "");
+  var_0 = getDvar("cp_sv_cave_pm_start_obj", "");
 
-  if(isDefined(var0) && var0 != "") {
+  if(isDefined(var_0) && var_0 != "") {
     thread rundebugstartobjective(level);
   }
 
@@ -91,41 +91,41 @@ function main() {
   scripts\engine\utility::flag_set("infil_complete");
 }
 
-function rundebugstartobjective(var0) {
+function rundebugstartobjective(var_0) {
   wait 2;
   scripts\engine\utility::flag_wait("infil_complete");
   scripts\engine\utility::flag_wait("objective_table_parsed");
 
-  if(isDefined(level.objectivestabledata[var0])) {
-    var1 = level.objectivestabledata[var0];
+  if(isDefined(level.objectivestabledata[var_0])) {
+    var_1 = level.objectivestabledata[var_0];
 
-    if(isDefined(var1.ondebugstartfunc)) {
-      [[var1.ondebugstartfunc]](var1);
+    if(isDefined(var_1.ondebugstartfunc)) {
+      [[var_1.ondebugstartfunc]](var_1);
     }
 
-    thread scripts\cp\cp_objectives::run_objective(var1.objname, var1.questtype);
+    thread scripts\cp\cp_objectives::run_objective(var_1.objname, var_1.questtype);
     return;
   }
 }
 
-function onplayerspawneddevguisetup(var0) {
-  var1 = var0.name;
-  var2 = undefined;
+function onplayerspawneddevguisetup(var_0) {
+  var_1 = var_0.name;
+  var_2 = undefined;
 
-  foreach(var4 in level.players) {
-    if(var4 == var0) {
-      var2 = int(var5);
+  foreach(var_4 in level.players) {
+    if(var_4 == var_0) {
+      var_2 = int(var_5);
       break;
     }
   }
 
-  if(isDefined(var2)) {
-    thread setupdevguientries(var0, var0, var1);
+  if(isDefined(var_2)) {
+    thread setupdevguientries(var_0, var_0, var_1);
     return;
   }
 }
 
-function setupdevguientries(var0, var1, var2) {}
+function setupdevguientries(var_0, var_1, var_2) {}
 
 function wait_for_pre_game_period() {
   if(!isDefined(level.agent_funcs)) {
@@ -141,10 +141,10 @@ function wait_for_strike_init_complete() {
 
   if(scripts\engine\utility::flag_exist("strike_init_done")) {
     scripts\engine\utility::flag_wait("strike_init_done");
-    var0 = getDvar("scr_strike_name");
-    var1 = undefined;
+    var_0 = getDvar("scr_strike_name");
+    var_1 = undefined;
 
-    switch (var0) {
+    switch (var_0) {
       case "putnewstrikehere":
         break;
       default:
@@ -161,7 +161,7 @@ function registerscriptedagents() {
   scripts\mp\agents\juggernaut\juggernaut_agent::registerscriptedagent();
 }
 
-function onplayerconnect(var0) {
+function onplayerconnect(var_0) {
   thread bug_test_move_startpoint();
 }
 
@@ -171,31 +171,31 @@ function onplayerspawned() {
 
 function bug_test_move_startpoint() {
   if(getdvarint("scr_linkto_test", 0)) {
-    var0 = scripts\engine\utility::getStructArray("default_player_start", "targetname");
+    var_0 = scripts\engine\utility::getStructArray("default_player_start", "targetname");
 
-    foreach(var2 in var0) {
-      var2.origin = (3743, -1008, 384);
-      var2.angles = (6, 265, 0);
+    foreach(var_2 in var_0) {
+      var_2.origin = (3743, -1008, 384);
+      var_2.angles = (6, 265, 0);
     }
 
     return;
   }
 }
 
-function should_run_event(var0) {
+function should_run_event(var_0) {
   return false;
 }
 
 function setup_map_specific_devgui() {}
 
-function interaction_trigger_properties(var0, var1, var2) {
-  switch (var1.script_noteworthy) {
+function interaction_trigger_properties(var_0, var_1, var_2) {
+  switch (var_1.script_noteworthy) {
     default:
       self.interaction_trigger setusefov(360);
       self.interaction_trigger sethintrequiresholding(0);
 
-      if(isDefined(var1.useduration)) {
-        self.interaction_trigger setuseholdduration(var1.useduration);
+      if(isDefined(var_1.useduration)) {
+        self.interaction_trigger setuseholdduration(var_1.useduration);
       }
 
       break;
@@ -218,58 +218,58 @@ function setup_create_script() {
   register_create_script_arrays("cp_sv_cave_pm_create_script", "cp_sv_cave_pm_create_script", level.scripted_spawner_func.size, &scripts\cp\maps\cp_sv_cave_pm\cp_sv_cave_pm_create_script::main);
 }
 
-function register_create_script_arrays(var0, var1, var2, var3) {
-  if(isDefined(var0)) {
-    level.scripted_spawner_func_strings[level.scripted_spawner_func_strings.size] = var0;
+function register_create_script_arrays(var_0, var_1, var_2, var_3) {
+  if(isDefined(var_0)) {
+    level.scripted_spawner_func_strings[level.scripted_spawner_func_strings.size] = var_0;
   }
 
-  if(isDefined(var1)) {
-    level.scripted_spawner_map_strings[level.scripted_spawner_func_strings.size] = var1;
+  if(isDefined(var_1)) {
+    level.scripted_spawner_map_strings[level.scripted_spawner_func_strings.size] = var_1;
   }
 
-  if(isDefined(var2)) {
-    level.create_script_file_ids[var0] = "cs" + var2;
+  if(isDefined(var_2)) {
+    level.create_script_file_ids[var_0] = "cs" + var_2;
   }
 
-  if(isDefined(var3)) {
-    level.scripted_spawner_func[level.scripted_spawner_func.size] = var3;
+  if(isDefined(var_3)) {
+    level.scripted_spawner_func[level.scripted_spawner_func.size] = var_3;
     return;
   }
 }
 
-function destructibletrucksetup(var0, var1, var2, var3, var4) {
+function destructibletrucksetup(var_0, var_1, var_2, var_3, var_4) {
   level endon("game_ended");
   wait 5;
-  var5 = getscriptablearray(var0, "targetname");
-  var6 = getEnt(var2, "targetname");
-  var7 = getEnt(var3, "targetname");
-  var8 = getEntArray(var1, "targetname");
-  var7 hide();
-  scripts\engine\utility::exploder(var4);
+  var_5 = getscriptablearray(var_0, "targetname");
+  var_6 = getEnt(var_2, "targetname");
+  var_7 = getEnt(var_3, "targetname");
+  var_8 = getEntArray(var_1, "targetname");
+  var_7 hide();
+  scripts\engine\utility::exploder(var_4);
 
-  if(isDefined(var5) && isDefined(var5[0])) {
-    var9 = var5[0];
-    var10 = 1;
+  if(isDefined(var_5) && isDefined(var_5[0])) {
+    var_9 = var_5[0];
+    var_10 = 1;
 
-    while(var10) {
-      var9 waittill("scriptableNotification", var11, var12);
+    while(var_10) {
+      var_9 waittill("scriptableNotification", var_11, var_12);
 
-      switch (var11) {
+      switch (var_11) {
         case "vehicle_death":
         case "onfire":
         case "flareup":
-          trucklightsoff(var8);
-          var10 = 0;
-          scripts\engine\utility::kill_exploder(var4);
-          var7 show();
-          var6 hide();
+          trucklightsoff(var_8);
+          var_10 = 0;
+          scripts\engine\utility::kill_exploder(var_4);
+          var_7 show();
+          var_6 hide();
           return;
         case "anim_explosion":
-          trucklightsoff(var8);
-          var10 = 0;
-          scripts\engine\utility::kill_exploder(var4);
-          var7 show();
-          var6 hide();
+          trucklightsoff(var_8);
+          var_10 = 0;
+          scripts\engine\utility::kill_exploder(var_4);
+          var_7 show();
+          var_6 hide();
           return;
       }
     }
@@ -278,59 +278,59 @@ function destructibletrucksetup(var0, var1, var2, var3, var4) {
   }
 }
 
-function trucklightsoff(var0) {
-  foreach(var2 in var0) {
-    var2 setlightintensity(0);
+function trucklightsoff(var_0) {
+  foreach(var_2 in var_0) {
+    var_2 setlightintensity(0);
   }
 }
 
 function player_fired_gun_monitor() {
-  var0 = spawn("script_model", (1592, 561, 176));
-  var0 setModel("me_construction_plank_bridge_a_11");
-  var0.angles = (85.3, 326, -11);
-  var1 = spawn("script_model", (-1034, 844, 92));
-  var1 setModel("me_construction_plank_bridge_a_11");
-  var1.angles = (0, 275, -90);
-  var2 = spawn("script_model", (3715, 1658.5, 262));
-  var2 setModel("me_construction_plank_bridge_a_11");
-  var2.angles = (272, 145, -90);
-  var3 = spawn("script_model", (-1061, 917.5, 112));
-  var3 setModel("hardware_plywood_bare_01_24_dirty");
-  var3.angles = (270, 0, 0);
-  var4 = getEnt("tactical_cover_col", "targetname");
-  var5 = spawn("script_model", (1768, 2128, 80));
-  var5.angles = (0, 255, 0);
-  var5 clonebrushmodeltoscriptmodel(var4);
-  var4 = getEnt("clip32x32x32", "targetname");
-  var5 = spawn("script_model", (3781.5, 2369, 45));
-  var5.angles = (358.097, 255.001, -0.026);
-  var5 clonebrushmodeltoscriptmodel(var4);
-  var4 = getEnt("clip32x32x32", "targetname");
-  var5 = spawn("script_model", (3773, 2338.5, 46));
-  var5.angles = (358.097, 255.001, -0.026);
-  var5 clonebrushmodeltoscriptmodel(var4);
-  var4 = getEnt("clip32x32x32", "targetname");
-  var5 = spawn("script_model", (3820, 2358.5, 45));
-  var5.angles = (358.097, 255.001, -0.026);
-  var5 clonebrushmodeltoscriptmodel(var4);
-  var4 = getEnt("clip32x32x32", "targetname");
-  var5 = spawn("script_model", (3811.5, 2328, 46));
-  var5.angles = (358.097, 255.001, -0.026);
-  var5 clonebrushmodeltoscriptmodel(var4);
-  var4 = getEnt("clip64x64x256", "targetname");
-  var5 = spawn("script_model", (1480.32, -650.161, 191.671));
-  var5.angles = (0, 14.679, 0);
-  var5 clonebrushmodeltoscriptmodel(var4);
-  var4 = getEnt("clip64x64x256", "targetname");
-  var5 = spawn("script_model", (1418.32, -666.661, 191.671));
-  var5.angles = (0, 14.679, 0);
-  var5 clonebrushmodeltoscriptmodel(var4);
-  var4 = getEnt("clip64x64x64", "targetname");
-  var5 = spawn("script_model", (-896.647, 1289.06, 58.5));
-  var5.angles = (0, 205, 0);
-  var5 clonebrushmodeltoscriptmodel(var4);
-  var4 = getEnt("clip64x64x64", "targetname");
-  var5 = spawn("script_model", (-958.647, 1260.06, 58.5));
-  var5.angles = (0, 205, 0);
-  var5 clonebrushmodeltoscriptmodel(var4);
+  var_0 = spawn("script_model", (1592, 561, 176));
+  var_0 setModel("me_construction_plank_bridge_a_11");
+  var_0.angles = (85.3, 326, -11);
+  var_1 = spawn("script_model", (-1034, 844, 92));
+  var_1 setModel("me_construction_plank_bridge_a_11");
+  var_1.angles = (0, 275, -90);
+  var_2 = spawn("script_model", (3715, 1658.5, 262));
+  var_2 setModel("me_construction_plank_bridge_a_11");
+  var_2.angles = (272, 145, -90);
+  var_3 = spawn("script_model", (-1061, 917.5, 112));
+  var_3 setModel("hardware_plywood_bare_01_24_dirty");
+  var_3.angles = (270, 0, 0);
+  var_4 = getEnt("tactical_cover_col", "targetname");
+  var_5 = spawn("script_model", (1768, 2128, 80));
+  var_5.angles = (0, 255, 0);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_4 = getEnt("clip32x32x32", "targetname");
+  var_5 = spawn("script_model", (3781.5, 2369, 45));
+  var_5.angles = (358.097, 255.001, -0.026);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_4 = getEnt("clip32x32x32", "targetname");
+  var_5 = spawn("script_model", (3773, 2338.5, 46));
+  var_5.angles = (358.097, 255.001, -0.026);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_4 = getEnt("clip32x32x32", "targetname");
+  var_5 = spawn("script_model", (3820, 2358.5, 45));
+  var_5.angles = (358.097, 255.001, -0.026);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_4 = getEnt("clip32x32x32", "targetname");
+  var_5 = spawn("script_model", (3811.5, 2328, 46));
+  var_5.angles = (358.097, 255.001, -0.026);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_4 = getEnt("clip64x64x256", "targetname");
+  var_5 = spawn("script_model", (1480.32, -650.161, 191.671));
+  var_5.angles = (0, 14.679, 0);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_4 = getEnt("clip64x64x256", "targetname");
+  var_5 = spawn("script_model", (1418.32, -666.661, 191.671));
+  var_5.angles = (0, 14.679, 0);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_4 = getEnt("clip64x64x64", "targetname");
+  var_5 = spawn("script_model", (-896.647, 1289.06, 58.5));
+  var_5.angles = (0, 205, 0);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
+  var_4 = getEnt("clip64x64x64", "targetname");
+  var_5 = spawn("script_model", (-958.647, 1260.06, 58.5));
+  var_5.angles = (0, 205, 0);
+  var_5 clonebrushmodeltoscriptmodel(var_4);
 }

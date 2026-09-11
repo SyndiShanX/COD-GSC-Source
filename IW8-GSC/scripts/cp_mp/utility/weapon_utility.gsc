@@ -3,125 +3,125 @@
  * Script: scripts\cp_mp\utility\weapon_utility.gsc
 ****************************************************/
 
-function _magicbullet(var0, var1, var2, var3, var4) {
-  var5 = magicbullet(var0, var1, var2, var3, var4);
+function _magicbullet(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = magicbullet(var_0, var_1, var_2, var_3, var_4);
 
-  if(isDefined(var5) && isDefined(var3)) {
-    var5 setotherent(var3);
+  if(isDefined(var_5) && isDefined(var_3)) {
+    var_5 setotherent(var_3);
   }
 
-  return var5;
+  return var_5;
 }
 
-function islockonlauncher(var0) {
-  var1 = undefined;
-  var2 = undefined;
+function islockonlauncher(var_0) {
+  var_1 = undefined;
+  var_2 = undefined;
 
-  if(isstring(var0)) {
-    var2 = var0;
+  if(isstring(var_0)) {
+    var_2 = var_0;
   } else {
-    var2 = var0.basename;
+    var_2 = var_0.basename;
   }
 
-  switch (var2) {
+  switch (var_2) {
     case "iw8_la_juliet_mp":
     case "iw8_la_gromeo_mp":
     case "iw8_la_gromeoks_mp":
     case "iw8_la_t9standard_mp":
-      var1 = 1;
+      var_1 = 1;
       break;
     default:
-      var1 = 0;
+      var_1 = 0;
       break;
   }
 
-  return var1;
+  return var_1;
 }
 
-function addlockedon(var0, var1) {
-  if(!isDefined(var0.islockedon)) {
-    var0.islockedon = 0;
-    var0.attackerslockedon = [];
+function addlockedon(var_0, var_1) {
+  if(!isDefined(var_0.islockedon)) {
+    var_0.islockedon = 0;
+    var_0.attackerslockedon = [];
   }
 
-  if(var0.islockedon == 0) {
-    if(isDefined(var0.lockedoncallback)) {
-      var0 thread[[var0.lockedoncallback]]();
+  if(var_0.islockedon == 0) {
+    if(isDefined(var_0.lockedoncallback)) {
+      var_0 thread[[var_0.lockedoncallback]]();
     }
   }
 
-  if(isDefined(var1)) {
-    var1.entlockedonto = var0;
-    var0.attackerslockedon[var1 getentitynumber()] = var1;
+  if(isDefined(var_1)) {
+    var_1.entlockedonto = var_0;
+    var_0.attackerslockedon[var_1 getentitynumber()] = var_1;
   }
 
-  var0.islockedon++;
+  var_0.islockedon++;
 }
 
-function removelockedon(var0, var1) {
-  if(!isDefined(var0.islockedon)) {
+function removelockedon(var_0, var_1) {
+  if(!isDefined(var_0.islockedon)) {
     return;
   }
 
-  if(var0.islockedon == 1) {
-    if(isDefined(var0.lockedonremovedcallback)) {
-      var0 thread[[var0.lockedonremovedcallback]]();
+  if(var_0.islockedon == 1) {
+    if(isDefined(var_0.lockedonremovedcallback)) {
+      var_0 thread[[var_0.lockedonremovedcallback]]();
     }
   }
 
-  if(isDefined(var1)) {
-    if(isDefined(var1.entlockedonto) && var1.entlockedonto == var0) {
-      var1.entlockedonto = undefined;
+  if(isDefined(var_1)) {
+    if(isDefined(var_1.entlockedonto) && var_1.entlockedonto == var_0) {
+      var_1.entlockedonto = undefined;
     }
 
-    var0.attackerslockedon[var1 getentitynumber()] = undefined;
+    var_0.attackerslockedon[var_1 getentitynumber()] = undefined;
   }
 
-  var0.islockedon--;
+  var_0.islockedon--;
 }
 
-function setlockedoncallback(var0, var1) {
-  var0.lockedoncallback = var1;
+function setlockedoncallback(var_0, var_1) {
+  var_0.lockedoncallback = var_1;
 }
 
-function setlockedonremovedcallback(var0, var1) {
-  var0.lockedonremovedcallback = var1;
+function setlockedonremovedcallback(var_0, var_1) {
+  var_0.lockedonremovedcallback = var_1;
 }
 
-function clearlockedon(var0) {
-  var0 notify("clearLockedOn");
+function clearlockedon(var_0) {
+  var_0 notify("clearLockedOn");
 
-  if(islockedonto(var0)) {
-    if(isDefined(var0.lockedonremovedcallback)) {
-      var0 thread[[var0.lockedonremovedcallback]]();
+  if(islockedonto(var_0)) {
+    if(isDefined(var_0.lockedonremovedcallback)) {
+      var_0 thread[[var_0.lockedonremovedcallback]]();
     }
 
-    foreach(var2 in var0.attackerslockedon) {
-      if(isDefined(var2)) {
-        if(isDefined(var2.entlockedonto) && var2.entlockedonto == var0) {
-          var2.entlockedonto = undefined;
+    foreach(var_2 in var_0.attackerslockedon) {
+      if(isDefined(var_2)) {
+        if(isDefined(var_2.entlockedonto) && var_2.entlockedonto == var_0) {
+          var_2.entlockedonto = undefined;
         }
       }
     }
   }
 
-  var0.islockedon = undefined;
-  var0.attackerslockedon = undefined;
-  var0.lockedoncallback = undefined;
-  var0.lockedonremovedcallback = undefined;
+  var_0.islockedon = undefined;
+  var_0.attackerslockedon = undefined;
+  var_0.lockedoncallback = undefined;
+  var_0.lockedonremovedcallback = undefined;
 
-  if(hasincoming(var0)) {
-    if(isDefined(var0.start_firing_minigun)) {
-      var0 thread[[var0.start_firing_minigun]]();
+  if(hasincoming(var_0)) {
+    if(isDefined(var_0.start_firing_minigun)) {
+      var_0 thread[[var_0.start_firing_minigun]]();
     }
   }
 
-  var0.hasincoming = undefined;
-  var0.start_eye_barkov = undefined;
-  var0.start_firing_minigun = undefined;
+  var_0.hasincoming = undefined;
+  var_0.start_eye_barkov = undefined;
+  var_0.start_firing_minigun = undefined;
 }
 
-function clearlockedonondisconnect(var0) {
+function clearlockedonondisconnect(var_0) {
   if(isDefined(self.entlockedonto)) {
     removelockedon(self.entlockedonto, self);
   }
@@ -129,132 +129,132 @@ function clearlockedonondisconnect(var0) {
   self.entlockedonto = undefined;
 }
 
-function islockedonto(var0) {
-  return isDefined(var0.islockedon) && var0.islockedon > 0;
+function islockedonto(var_0) {
+  return isDefined(var_0.islockedon) && var_0.islockedon > 0;
 }
 
-function battle_tracks_shouldplaybattletrackswhenstandingonvehicle(var0) {
-  if(!isDefined(var0.hasincoming)) {
-    var0.hasincoming = 0;
+function battle_tracks_shouldplaybattletrackswhenstandingonvehicle(var_0) {
+  if(!isDefined(var_0.hasincoming)) {
+    var_0.hasincoming = 0;
   }
 
-  if(var0.hasincoming == 0) {
-    if(isDefined(var0.start_eye_barkov)) {
-      var0 thread[[var0.start_eye_barkov]]();
+  if(var_0.hasincoming == 0) {
+    if(isDefined(var_0.start_eye_barkov)) {
+      var_0 thread[[var_0.start_eye_barkov]]();
     }
   }
 
-  var0.hasincoming++;
+  var_0.hasincoming++;
 }
 
-function ref_12c07(var0) {
-  if(!isDefined(var0.hasincoming)) {
+function ref_12c07(var_0) {
+  if(!isDefined(var_0.hasincoming)) {
     return;
   }
 
-  if(var0.hasincoming == 1) {
-    if(isDefined(var0.start_firing_minigun)) {
-      var0 thread[[var0.start_firing_minigun]]();
+  if(var_0.hasincoming == 1) {
+    if(isDefined(var_0.start_firing_minigun)) {
+      var_0 thread[[var_0.start_firing_minigun]]();
     }
   }
 
-  var0.hasincoming--;
+  var_0.hasincoming--;
 }
 
-function ref_13162(var0, var1) {
-  var0.start_eye_barkov = var1;
+function ref_13162(var_0, var_1) {
+  var_0.start_eye_barkov = var_1;
 }
 
-function ref_13163(var0, var1) {
-  var0.start_firing_minigun = var1;
+function ref_13163(var_0, var_1) {
+  var_0.start_firing_minigun = var_1;
 }
 
-function hasincoming(var0) {
-  return isDefined(var0.hasincoming) && var0.hasincoming > 0;
+function hasincoming(var_0) {
+  return isDefined(var_0.hasincoming) && var_0.hasincoming > 0;
 }
 
-function watchtargetlockedontobyprojectile(var0, var1) {
-  var0 endon("clearLockedOn");
-  addlockedon(var0);
-  battle_tracks_shouldplaybattletrackswhenstandingonvehicle(var0);
-  var1 scripts\engine\utility::ref_143a5("death", "clearTargetLockedOntoByProjectile");
+function watchtargetlockedontobyprojectile(var_0, var_1) {
+  var_0 endon("clearLockedOn");
+  addlockedon(var_0);
+  battle_tracks_shouldplaybattletrackswhenstandingonvehicle(var_0);
+  var_1 scripts\engine\utility::ref_143a5("death", "clearTargetLockedOntoByProjectile");
 
-  if(isDefined(var0)) {
-    removelockedon(var0);
-    ref_12c07(var0);
+  if(isDefined(var_0)) {
+    removelockedon(var_0);
+    ref_12c07(var_0);
     return;
   }
 }
 
-function clearprojectilelockedon(var0) {
-  var0 notify("clearTargetLockedOntoByProjectile");
+function clearprojectilelockedon(var_0) {
+  var_0 notify("clearTargetLockedOntoByProjectile");
 }
 
-function dropweaponfordeathlaunch(var0, var1, var2, var3) {
-  if(!isDefined(var3)) {
-    var3 = self.angles;
+function dropweaponfordeathlaunch(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_3)) {
+    var_3 = self.angles;
   }
 
-  if(!isDefined(var2)) {
-    var2 = 0;
+  if(!isDefined(var_2)) {
+    var_2 = 0;
   }
 
-  var4 = scripts\engine\math::normalize_value(0, 200, var2);
+  var_4 = scripts\engine\math::normalize_value(0, 200, var_2);
 
-  if(var1 == "weapon_melee2") {
-    var5 = randomfloatrange(25, 100);
-    var6 = randomfloatrange(75, 175);
-    var7 = scripts\engine\math::factor_value(450, 800, var4);
-    var8 = scripts\engine\math::factor_value(-1.16667, -0.833333, var4);
-    var9 = scripts\engine\math::factor_value(0.125, 0.183333, var4);
-  } else if(var6 == "weapon_pistol") {
-    var5 = randomfloatrange(100, 200);
-    var6 = randomfloatrange(150, 250);
-    var7 = scripts\engine\math::factor_value(950, 1300, var9);
-    var8 = scripts\engine\math::factor_value(-1.75, -1.25, var9);
-    var9 = scripts\engine\math::factor_value(0.5625, 0.825, var9);
+  if(var_1 == "weapon_melee2") {
+    var_5 = randomfloatrange(25, 100);
+    var_6 = randomfloatrange(75, 175);
+    var_7 = scripts\engine\math::factor_value(450, 800, var_4);
+    var_8 = scripts\engine\math::factor_value(-1.16667, -0.833333, var_4);
+    var_9 = scripts\engine\math::factor_value(0.125, 0.183333, var_4);
+  } else if(var_6 == "weapon_pistol") {
+    var_5 = randomfloatrange(100, 200);
+    var_6 = randomfloatrange(150, 250);
+    var_7 = scripts\engine\math::factor_value(950, 1300, var_9);
+    var_8 = scripts\engine\math::factor_value(-1.75, -1.25, var_9);
+    var_9 = scripts\engine\math::factor_value(0.5625, 0.825, var_9);
   } else {
-    var5 = randomfloatrange(150, 350);
-    var6 = randomfloatrange(150, 250);
-    var7 = scripts\engine\math::factor_value(950, 1300, var9);
-    var8 = scripts\engine\math::factor_value(-7, -5, var9);
-    var9 = scripts\engine\math::factor_value(0.75, 1.1, var9);
+    var_5 = randomfloatrange(150, 350);
+    var_6 = randomfloatrange(150, 250);
+    var_7 = scripts\engine\math::factor_value(950, 1300, var_9);
+    var_8 = scripts\engine\math::factor_value(-7, -5, var_9);
+    var_9 = scripts\engine\math::factor_value(0.75, 1.1, var_9);
   }
 
   if(scripts\engine\utility::cointoss()) {
-    var6 *= -1;
+    var_6 *= -1;
   }
 
-  if(!isDefined(var5)) {
+  if(!isDefined(var_5)) {
     return;
   }
 
-  var10 = var5 physics_getentitycenterofmass();
+  var_10 = var_5 physics_getentitycenterofmass();
 
-  if(isDefined(var10)) {
-    var10 = var10["unscaled"];
+  if(isDefined(var_10)) {
+    var_10 = var_10["unscaled"];
   } else {
-    var10 = var5.origin;
+    var_10 = var_5.origin;
   }
 
-  var11 = (0, 0, 0);
-  var11 += anglesToForward(var8) * var5;
-  var11 += anglestoright(var8) * var6;
-  var11 += anglestoup(var8) * var7;
-  var12 = var5 gettagangles("tag_flash", 1);
+  var_11 = (0, 0, 0);
+  var_11 += anglesToForward(var_8) * var_5;
+  var_11 += anglestoright(var_8) * var_6;
+  var_11 += anglestoup(var_8) * var_7;
+  var_12 = var_5 gettagangles("tag_flash", 1);
 
-  if(!isDefined(var12)) {
-    var12 = var5.angles;
+  if(!isDefined(var_12)) {
+    var_12 = var_5.angles;
   }
 
   if(scripts\engine\utility::cointoss()) {
-    var9 *= -1;
+    var_9 *= -1;
   }
 
-  var13 = var10;
-  var13 += anglesToForward(var12) * var8;
-  var13 += anglestoright(var12) * var9;
-  var5 physicslaunchserveritem(var13, var11);
+  var_13 = var_10;
+  var_13 += anglesToForward(var_12) * var_8;
+  var_13 += anglestoright(var_12) * var_9;
+  var_5 physicslaunchserveritem(var_13, var_11);
 }
 
 function ref_12eb2() {
@@ -268,32 +268,32 @@ function ref_12eb2() {
   }
 }
 
-function ref_12cc7(var0) {
-  if(self isalternatemode(var0)) {
+function ref_12cc7(var_0) {
+  if(self isalternatemode(var_0)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("weapons", "updateSavedAltState")) {
-      var0 = self[[scripts\cp_mp\utility\script_utility::getsharedfunc("weapons", "updateSavedAltState")]](var0);
+      var_0 = self[[scripts\cp_mp\utility\script_utility::getsharedfunc("weapons", "updateSavedAltState")]](var_0);
     }
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("weapons", "updateToggleScopeState")) {
-    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("weapons", "updateToggleScopeState")]](var0);
+    self[[scripts\cp_mp\utility\script_utility::getsharedfunc("weapons", "updateToggleScopeState")]](var_0);
   }
 
-  return var0;
+  return var_0;
 }
 
-function vehicle_clearpreventplayercollisiondamagefortimeafterexit(var0) {
-  var1 = self getplayerdata(level.loadoutsgroup, "squadMembers", "weapon_unlocked", var0);
-  return istrue(var1);
+function vehicle_clearpreventplayercollisiondamagefortimeafterexit(var_0) {
+  var_1 = self getplayerdata(level.loadoutsgroup, "squadMembers", "weapon_unlocked", var_0);
+  return istrue(var_1);
 }
 
-function tv_station_boss(var0) {
-  return var0 == "iw8_ar_falpha" || var0 == "iw8_ar_t9longburst" || var0 == "iw8_sm_t9powerburst" || var0 == "iw8_sm_t9burst" || var0 == "iw8_ar_t9fastburst";
+function tv_station_boss(var_0) {
+  return var_0 == "iw8_ar_falpha" || var_0 == "iw8_ar_t9longburst" || var_0 == "iw8_sm_t9powerburst" || var_0 == "iw8_sm_t9burst" || var_0 == "iw8_ar_t9fastburst";
 }
 
-function vehicle_ai_script_models(var0) {
-  var1 = strtok(var0, "_");
-  var2 = var1.size > 1 && isstartstr(var1[1], "t9") || var1.size > 2 && isstartstr(var1[2], "t9");
-  var3 = var1.size > 0 && var1[0] == "s4";
-  return !var2 && !var3;
+function vehicle_ai_script_models(var_0) {
+  var_1 = strtok(var_0, "_");
+  var_2 = var_1.size > 1 && isstartstr(var_1[1], "t9") || var_1.size > 2 && isstartstr(var_1[2], "t9");
+  var_3 = var_1.size > 0 && var_1[0] == "s4";
+  return !var_2 && !var_3;
 }

@@ -22,8 +22,8 @@ function embassy_infil_precache_delay() {
   wait 0.3;
 
   if(!scripts\sp\starts::is_after_start("cctv_02")) {
-    var0 = getEntArray("alley_cars", "targetname");
-    scripts\engine\utility::array_call(var0, &hide);
+    var_0 = getEntArray("alley_cars", "targetname");
+    scripts\engine\utility::array_call(var_0, &hide);
     return;
   }
 }
@@ -163,59 +163,59 @@ function embassy_infil_scriptables_grab() {
   level.lower_floors_scriptables = [];
   level.garage_scriptables = [];
   level.compound_scriptables = [];
-  var0 = getscriptablearray();
-  var1 = getEnt("offices_scriptable_hide", "targetname");
-  var2 = getEnt("lower_floors_scriptable_hide", "targetname");
-  var3 = getEnt("garage_scriptable_hide", "targetname");
-  var4 = getEnt("compound_scriptables_hide", "targetname");
+  var_0 = getscriptablearray();
+  var_1 = getEnt("offices_scriptable_hide", "targetname");
+  var_2 = getEnt("lower_floors_scriptable_hide", "targetname");
+  var_3 = getEnt("garage_scriptable_hide", "targetname");
+  var_4 = getEnt("compound_scriptables_hide", "targetname");
 
-  foreach(var6 in var0) {
-    if(var6 istouching(var1)) {
-      level.offices_scriptables[level.offices_scriptables.size] = var6;
+  foreach(var_6 in var_0) {
+    if(var_6 istouching(var_1)) {
+      level.offices_scriptables[level.offices_scriptables.size] = var_6;
     }
 
-    if(var6 istouching(var2)) {
-      level.lower_floors_scriptables[level.lower_floors_scriptables.size] = var6;
+    if(var_6 istouching(var_2)) {
+      level.lower_floors_scriptables[level.lower_floors_scriptables.size] = var_6;
     }
 
-    if(var6 istouching(var3)) {
-      level.garage_scriptables[level.garage_scriptables.size] = var6;
+    if(var_6 istouching(var_3)) {
+      level.garage_scriptables[level.garage_scriptables.size] = var_6;
     }
 
-    if(var6 istouching(var4)) {
-      level.compound_scriptables[level.compound_scriptables.size] = var6;
+    if(var_6 istouching(var_4)) {
+      level.compound_scriptables[level.compound_scriptables.size] = var_6;
     }
 
-    var7 = scripts\engine\utility::is_equal(var6.classname, "scriptable_un_office_computer_monitor_03_ent");
-    var8 = scripts\engine\utility::is_equal(var6.classname, "scriptable_un_office_dual_wall_monitor_01_ent");
+    var_7 = scripts\engine\utility::is_equal(var_6.classname, "scriptable_un_office_computer_monitor_03_ent");
+    var_8 = scripts\engine\utility::is_equal(var_6.classname, "scriptable_un_office_dual_wall_monitor_01_ent");
 
-    if(var7 || var8) {
-      if(!isDefined(var6.script_noteworthy)) {
-        if(var7) {
-          set_monitor_script_noteworthy(var6);
+    if(var_7 || var_8) {
+      if(!isDefined(var_6.script_noteworthy)) {
+        if(var_7) {
+          set_monitor_script_noteworthy(var_6);
         } else {
-          set_tv_script_noteworthy(var6);
+          set_tv_script_noteworthy(var_6);
         }
       }
 
-      switch (var6.script_noteworthy) {
+      switch (var_6.script_noteworthy) {
         case "full":
-          var6 setscriptablepartstate("controller", "full");
+          var_6 setscriptablepartstate("controller", "full");
           break;
         case "bink1":
-          var6 setscriptablepartstate("controller", "bink1");
+          var_6 setscriptablepartstate("controller", "bink1");
           break;
         case "bink2":
-          var6 setscriptablepartstate("controller", "bink2");
+          var_6 setscriptablepartstate("controller", "bink2");
           break;
         case "bink3":
-          var6 setscriptablepartstate("controller", "bink3");
+          var_6 setscriptablepartstate("controller", "bink3");
           break;
         case "bink4":
-          var6 setscriptablepartstate("controller", "bink4");
+          var_6 setscriptablepartstate("controller", "bink4");
           break;
         default:
-          var6 setscriptablepartstate("controller", "off");
+          var_6 setscriptablepartstate("controller", "off");
           break;
       }
 
@@ -227,23 +227,23 @@ function embassy_infil_scriptables_grab() {
 }
 
 function hide_defend_scriptables() {
-  var0 = getscriptablearray();
-  var1 = [];
+  var_0 = getscriptablearray();
+  var_1 = [];
 
-  foreach(var3 in var0) {
-    if(scripts\engine\utility::is_equal(var3.model, "veh8_civ_lnd_secho_mp_black") || scripts\engine\utility::is_equal(var3.model, "veh8_civ_lnd_secho_mp_blue") || scripts\engine\utility::is_equal(var3.model, "veh8_civ_lnd_secho_mp_grey") || scripts\engine\utility::is_equal(var3.model, "veh8_civ_lnd_secho_mp_red")) {
-      var1 = var3;
+  foreach(var_3 in var_0) {
+    if(scripts\engine\utility::is_equal(var_3.model, "veh8_civ_lnd_secho_mp_black") || scripts\engine\utility::is_equal(var_3.model, "veh8_civ_lnd_secho_mp_blue") || scripts\engine\utility::is_equal(var_3.model, "veh8_civ_lnd_secho_mp_grey") || scripts\engine\utility::is_equal(var_3.model, "veh8_civ_lnd_secho_mp_red")) {
+      var_1 = var_3;
     }
   }
 
-  foreach(var3 in var1) {
-    var3.origin += (0, 0, -2500);
+  foreach(var_3 in var_1) {
+    var_3.origin += (0, 0, -2500);
   }
 
   scripts\engine\utility::flag_wait("office_door_closed");
 
-  foreach(var3 in var1) {
-    var3.origin += (0, 0, 2500);
+  foreach(var_3 in var_1) {
+    var_3.origin += (0, 0, 2500);
   }
 }
 
@@ -358,41 +358,41 @@ function embassy_infil_objectives() {
 
   if(!scripts\sp\starts::is_after_start("infil_saferoom")) {
     if(!scripts\sp\starts::is_after_start("infil_embassy_rooftop")) {
-      var0 = scripts\engine\utility::getStruct("obj_infil_embassy", "targetname");
-      scripts\engine\sp\objectives::objective_set_position("main_objective", var0.origin);
+      var_0 = scripts\engine\utility::getStruct("obj_infil_embassy", "targetname");
+      scripts\engine\sp\objectives::objective_set_position("main_objective", var_0.origin);
       scripts\engine\sp\utility::wait_for_targetname_trigger("obj_infil_embassy_complete");
     }
 
     if(!scripts\sp\starts::is_after_start("infil_offices")) {
-      var0 = scripts\engine\utility::getStruct("obj_locate_the_wolf_stairs", "targetname");
-      scripts\engine\sp\objectives::objective_set_position("main_objective", var0.origin);
+      var_0 = scripts\engine\utility::getStruct("obj_locate_the_wolf_stairs", "targetname");
+      scripts\engine\sp\objectives::objective_set_position("main_objective", var_0.origin);
       scripts\engine\sp\utility::wait_for_targetname_trigger("obj_locate_the_wolf_stairs_complete");
     }
 
     if(!scripts\sp\starts::is_after_start("infil_bp_glass_scene")) {
-      var0 = scripts\engine\utility::getStruct("obj_locate_the_wolf_elevators", "targetname");
-      scripts\engine\sp\objectives::objective_set_position("main_objective", var0.origin);
+      var_0 = scripts\engine\utility::getStruct("obj_locate_the_wolf_elevators", "targetname");
+      scripts\engine\sp\objectives::objective_set_position("main_objective", var_0.origin);
       scripts\engine\sp\utility::wait_for_targetname_trigger("obj_locate_the_wolf_elevators_complete");
     }
 
     if(!scripts\sp\starts::is_after_start("infil_truck_office")) {
-      var0 = scripts\engine\utility::getStruct("obj_locate_the_wolf_bpg_combat", "targetname");
-      scripts\engine\sp\objectives::objective_set_position("main_objective", var0.origin);
+      var_0 = scripts\engine\utility::getStruct("obj_locate_the_wolf_bpg_combat", "targetname");
+      scripts\engine\sp\objectives::objective_set_position("main_objective", var_0.origin);
       scripts\engine\sp\utility::wait_for_targetname_trigger("obj_locate_the_wolf_bpg_combat_complete");
     }
 
     if(!scripts\sp\starts::is_after_start("infil_bp_glass_combat")) {
-      var0 = scripts\engine\utility::getStruct("obj_locate_the_wolf_basement_stairs", "targetname");
-      scripts\engine\sp\objectives::objective_set_position("main_objective", var0.origin);
+      var_0 = scripts\engine\utility::getStruct("obj_locate_the_wolf_basement_stairs", "targetname");
+      scripts\engine\sp\objectives::objective_set_position("main_objective", var_0.origin);
       scripts\engine\sp\utility::wait_for_targetname_trigger("obj_locate_the_wolf_basement_stairs_complete");
     }
 
     if(!scripts\sp\starts::is_after_start("infil_saferoom")) {
-      var0 = scripts\engine\utility::getStruct("obj_locate_the_wolf_saferoom", "targetname");
-      scripts\engine\sp\objectives::objective_set_position("main_objective", var0.origin);
+      var_0 = scripts\engine\utility::getStruct("obj_locate_the_wolf_saferoom", "targetname");
+      scripts\engine\sp\objectives::objective_set_position("main_objective", var_0.origin);
       level waittill("obj_found_wolf");
-      var0 = scripts\engine\utility::getStruct("obj_locate_ambassador", "targetname");
-      scripts\engine\sp\objectives::objective_update("main_objective", "current", var0.origin, &"EMBASSY/OBJ_DSC_AMBASSADOR", &"EMBASSY/OBJ_LBL_AMBASSADOR");
+      var_0 = scripts\engine\utility::getStruct("obj_locate_ambassador", "targetname");
+      scripts\engine\sp\objectives::objective_update("main_objective", "current", var_0.origin, &"EMBASSY/OBJ_DSC_AMBASSADOR", &"EMBASSY/OBJ_LBL_AMBASSADOR");
       level waittill("obj_using_cctv");
     }
   }
@@ -410,23 +410,23 @@ function embassy_infil_objectives() {
     scripts\engine\sp\objectives::objective_set_on_entity("main_objective", "on_price", level.price);
     scripts\engine\sp\objectives::objective_set_z_offset("main_objective", 72);
     level waittill("obj_rendezvous_at_exit_complete");
-    var0 = scripts\engine\utility::getStruct("obj_escort_wolf_gar_exit", "targetname");
-    scripts\engine\sp\objectives::objective_update("main_objective", "current", var0.origin, &"EMBASSY/OBJ_DSC_ESCORT", &"EMBASSY/OBJ_LBL_ESCORT");
+    var_0 = scripts\engine\utility::getStruct("obj_escort_wolf_gar_exit", "targetname");
+    scripts\engine\sp\objectives::objective_update("main_objective", "current", var_0.origin, &"EMBASSY/OBJ_DSC_ESCORT", &"EMBASSY/OBJ_LBL_ESCORT");
     scripts\engine\utility::flag_wait("reached_garage_exit");
   }
 
   if(!scripts\sp\starts::is_after_start("escape_combat")) {
-    var0 = scripts\engine\utility::getStruct("obj_escort_wolf_alley", "targetname");
-    scripts\engine\sp\objectives::objective_set_position("main_objective", var0.origin);
+    var_0 = scripts\engine\utility::getStruct("obj_escort_wolf_alley", "targetname");
+    scripts\engine\sp\objectives::objective_set_position("main_objective", var_0.origin);
     scripts\engine\utility::flag_wait("reached_alley");
   }
 
   if(!scripts\sp\starts::is_after_start("residence_arrival")) {
-    var0 = scripts\engine\utility::getStruct("obj_escort_wolf", "targetname");
-    scripts\engine\sp\objectives::objective_set_position("main_objective", var0.origin);
+    var_0 = scripts\engine\utility::getStruct("obj_escort_wolf", "targetname");
+    scripts\engine\sp\objectives::objective_set_position("main_objective", var_0.origin);
     level waittill("obj_escort_wolf_complete");
-    var0 = scripts\engine\utility::getStruct("obj_join_forces", "targetname");
-    scripts\engine\sp\objectives::objective_update("main_objective", "current", var0.origin, &"EMBASSY/OBJ_DSC_JOIN_FORCES", &"EMBASSY/OBJ_LBL_JOIN_FORCES");
+    var_0 = scripts\engine\utility::getStruct("obj_join_forces", "targetname");
+    scripts\engine\sp\objectives::objective_update("main_objective", "current", var_0.origin, &"EMBASSY/OBJ_DSC_JOIN_FORCES", &"EMBASSY/OBJ_LBL_JOIN_FORCES");
     level waittill("obj_join_forces_complete");
   }
 
@@ -491,20 +491,20 @@ function infil_heli_delete() {
   level.infil_heli delete();
 }
 
-function infil_heli_under_fire_setup(var0) {
-  var1 = getEnt(var0, "targetname");
-  var1 linkTo(level.infil_heli);
-  return var1;
+function infil_heli_under_fire_setup(var_0) {
+  var_1 = getEnt(var_0, "targetname");
+  var_1 linkTo(level.infil_heli);
+  return var_1;
 }
 
-function infil_heli_under_fire_setup_array(var0) {
-  var1 = getEntArray(var0, "targetname");
+function infil_heli_under_fire_setup_array(var_0) {
+  var_1 = getEntArray(var_0, "targetname");
 
-  foreach(var3 in var1) {
-    var3 linkTo(level.infil_heli);
+  foreach(var_3 in var_1) {
+    var_3 linkTo(level.infil_heli);
   }
 
-  return var1;
+  return var_1;
 }
 
 function helicopter_start() {}
@@ -560,11 +560,11 @@ function helicopter_main() {
   level.fast_rope = scripts\engine\sp\utility::spawn_anim_model("infil_fast_rope");
   level.fast_rope linkTo(level.infil_heli);
   level.infil_heli thread scripts\common\anim::anim_single_solo(level.fast_rope, "infil_crash_ride");
-  var0 = getspawnerarray("heli_rocket_guy");
-  scripts\engine\sp\utility::array_spawn_function(var0, &heli_rocketeer);
-  scripts\engine\sp\utility::array_spawn(var0);
-  var1 = scripts\engine\sp\utility::spawn_anim_model("infil_crash_rocket");
-  thread heli_rocket(var1);
+  var_0 = getspawnerarray("heli_rocket_guy");
+  scripts\engine\sp\utility::array_spawn_function(var_0, &heli_rocketeer);
+  scripts\engine\sp\utility::array_spawn(var_0);
+  var_1 = scripts\engine\sp\utility::spawn_anim_model("infil_crash_rocket");
+  thread heli_rocket(var_1);
   level.player scripts\engine\utility::delaycall(10, &lerpviewangleclamp, 1, 0, 0, 15, 15, 15, 15);
   thread heli_kyle_third_person();
   level.infil_heli thread scripts\common\anim::anim_single_solo(level.pilot, "infil_crash_ride");
@@ -602,8 +602,8 @@ function heli_wreckage_setup() {
 }
 
 function heli_wreckage_first_frame() {
-  foreach(var1 in level.roof_wreckage) {
-    level.ap_infil_crash scripts\common\anim::anim_first_frame_solo(var1, "infil_crash_fall");
+  foreach(var_1 in level.roof_wreckage) {
+    level.ap_infil_crash scripts\common\anim::anim_first_frame_solo(var_1, "infil_crash_fall");
   }
 }
 
@@ -638,20 +638,20 @@ function heli_rocketeer() {
   self delete();
 }
 
-function heli_rocket(var0) {
+function heli_rocket(var_0) {
   level.ap_infil_crash thread scripts\common\anim::anim_single_solo(self, "infil_crash_ride");
   level waittill("rocket_fire");
   playFXOnTag(scripts\engine\utility::getfx("vfx_emb_infil_helirocket"), self, "tag_origin");
-  var1 = "embassy_infil_rpg_01_miss";
+  var_1 = "embassy_infil_rpg_01_miss";
 
-  if(var0) {
-    var1 = "embassy_infil_rpg_02_hit";
+  if(var_0) {
+    var_1 = "embassy_infil_rpg_02_hit";
   }
 
-  self playSound(var1);
+  self playSound(var_1);
   level waittill("rocket_hit");
 
-  if(var0) {
+  if(var_0) {
     playFXOnTag(scripts\engine\utility::getfx("vfx_emb_infil_helismoke"), level.infil_heli, "tag_origin");
     level.player playRumbleOnEntity("heavy_3s");
     screenshake(level.player.origin, 20, 1, 5, 0.5, 0, 0.5, 100, 5, 50, 50);
@@ -679,11 +679,11 @@ function heli_under_fire() {
 }
 
 function heli_under_fire_magic_bullet() {
-  for(var0 = 0; var0 < randomintrange(12, 18); var0++) {
-    var1 = level.infil_heli.magic_heli_fire.origin;
-    var2 = level.infil_heli.magic_heli_fire_target.origin;
-    var3 = (0, 0, randomintrange(-300, 300));
-    magicbullet("iw8_ar_akilo47", var1, var2 + var3);
+  for(var_0 = 0; var_0 < randomintrange(12, 18); var_0++) {
+    var_1 = level.infil_heli.magic_heli_fire.origin;
+    var_2 = level.infil_heli.magic_heli_fire_target.origin;
+    var_3 = (0, 0, randomintrange(-300, 300));
+    magicbullet("iw8_ar_akilo47", var_1, var_2 + var_3);
     wait randomfloatrange(0.015, 0.05);
   }
 }
@@ -697,13 +697,13 @@ function heli_gate_molotov() {
   scripts\engine\utility::exploder("magic_molotov_end_spot_2");
 }
 
-function heli_gate_molotov_helper(var0, var1) {
-  var2 = scripts\engine\utility::getStruct(var0, "targetname");
-  var3 = scripts\engine\utility::getStruct(var1, "targetname");
-  var4 = magicgrenade("molotov", var2.origin, var3.origin);
-  var4 endon("entitydeleted");
-  scripts\sp\equipment\molotov::molotovfiremain(var4);
-  var4 thread scripts\engine\sp\utility::play_sound_on_entity("embassy_infil_molotov_break");
+function heli_gate_molotov_helper(var_0, var_1) {
+  var_2 = scripts\engine\utility::getStruct(var_0, "targetname");
+  var_3 = scripts\engine\utility::getStruct(var_1, "targetname");
+  var_4 = magicgrenade("molotov", var_2.origin, var_3.origin);
+  var_4 endon("entitydeleted");
+  scripts\sp\equipment\molotov::molotovfiremain(var_4);
+  var_4 thread scripts\engine\sp\utility::play_sound_on_entity("embassy_infil_molotov_break");
 }
 
 function audio_chopper_struggling() {
@@ -728,8 +728,8 @@ function audio_infil_crowd() {
   level.embassy_crowd_sound_ent_02 stopsounds(0.3);
 }
 
-function audio_crowd_angry_outside(var0) {
-  if(isDefined(var0)) {
+function audio_crowd_angry_outside(var_0) {
+  if(isDefined(var_0)) {
     scripts\engine\utility::flag_set("audio_outside_crowd_loop");
   }
 
@@ -784,32 +784,32 @@ function audio_crowd_cheer_at_end_of_infil_crash() {
 function crowd_get_and_store() {
   level.crowds = [];
 
-  for(var0 = 0; var0 <= 34; var0++) {
-    if(!crowd_removed_for_skinned_verts(var0 + 1)) {
-      if(crowd_is_back_row(var0 + 1)) {
-        level.crowds[var0] = scripts\engine\sp\utility::spawn_anim_model("crowd_low");
-        level.crowds[var0].front_row = 0;
+  for(var_0 = 0; var_0 <= 34; var_0++) {
+    if(!crowd_removed_for_skinned_verts(var_0 + 1)) {
+      if(crowd_is_back_row(var_0 + 1)) {
+        level.crowds[var_0] = scripts\engine\sp\utility::spawn_anim_model("crowd_low");
+        level.crowds[var_0].front_row = 0;
         continue;
       }
 
-      level.crowds[var0] = scripts\engine\sp\utility::spawn_anim_model("crowd");
-      level.crowds[var0].front_row = crowd_is_front_row(var0 + 1);
+      level.crowds[var_0] = scripts\engine\sp\utility::spawn_anim_model("crowd");
+      level.crowds[var_0].front_row = crowd_is_front_row(var_0 + 1);
     }
   }
 }
 
-function crowd_removed_for_skinned_verts(var0) {
-  return var0 == 9 || var0 == 18 || var0 == 23 || var0 == 24 || var0 == 25 || var0 == 26 || var0 == 27 || var0 == 28 || var0 == 29 || var0 == 32 || var0 == 35;
+function crowd_removed_for_skinned_verts(var_0) {
+  return var_0 == 9 || var_0 == 18 || var_0 == 23 || var_0 == 24 || var_0 == 25 || var_0 == 26 || var_0 == 27 || var_0 == 28 || var_0 == 29 || var_0 == 32 || var_0 == 35;
 }
 
-function crowd_is_front_row(var0) {
-  var1 = [1, 2, 6, 10, 11];
-  return scripts\engine\utility::array_contains(var1, var0);
+function crowd_is_front_row(var_0) {
+  var_1 = [1, 2, 6, 10, 11];
+  return scripts\engine\utility::array_contains(var_1, var_0);
 }
 
-function crowd_is_back_row(var0) {
-  var1 = [3, 4, 34, 5, 30, 8, 7, 9, 12, 29, 13, 14, 15, 18, 19, 21, 23, 24, 25, 26, 27, 28];
-  return scripts\engine\utility::array_contains(var1, var0);
+function crowd_is_back_row(var_0) {
+  var_1 = [3, 4, 34, 5, 30, 8, 7, 9, 12, 29, 13, 14, 15, 18, 19, 21, 23, 24, 25, 26, 27, 28];
+  return scripts\engine\utility::array_contains(var_1, var_0);
 }
 
 function crowd_setup_ap() {
@@ -833,50 +833,50 @@ function crowd() {
   thread crowd_vehicles();
   thread periph_traffic("md_close_door");
 
-  foreach(var1 in level.crowds) {
-    var1.animname = "crowd_" + var2 + 1;
+  foreach(var_1 in level.crowds) {
+    var_1.animname = "crowd_" + var_2 + 1;
 
-    if(isDefined(level.scr_anim[var1.animname]["crowd_enter"])) {
+    if(isDefined(level.scr_anim[var_1.animname]["crowd_enter"])) {
       thread crowd_enterer();
       continue;
     }
 
-    level.crowd_ap thread scripts\common\anim::anim_loop_solo(var1, "crowd_chant", "stop_loop_" + var1.animname);
+    level.crowd_ap thread scripts\common\anim::anim_loop_solo(var_1, "crowd_chant", "stop_loop_" + var_1.animname);
 
-    if(var2 < 2) {
+    if(var_2 < 2) {
       thread crowd_change_anim_at_offices();
     }
   }
 
   scripts\engine\utility::flag_wait("kill_crowd_shadows");
 
-  foreach(var1 in level.crowds) {
-    var1 dontcastshadows();
+  foreach(var_1 in level.crowds) {
+    var_1 dontcastshadows();
   }
 
   while(!scripts\engine\utility::flag("md_close_door")) {
-    foreach(var1 in level.crowds) {
-      if(isDefined(level.scr_anim[var1.animname]["crowd_chant"])) {
-        var6 = var1 scripts\engine\utility::getanim("crowd_chant");
-        var1 setanimrate(var6[0], 2);
+    foreach(var_1 in level.crowds) {
+      if(isDefined(level.scr_anim[var_1.animname]["crowd_chant"])) {
+        var_6 = var_1 scripts\engine\utility::getanim("crowd_chant");
+        var_1 setanimrate(var_6[0], 2);
       }
     }
 
     scripts\engine\sp\utility::wait_for_flag_or_timeout("md_close_door", 0.3);
   }
 
-  foreach(var1 in level.crowds) {
-    if(!var1.front_row) {
-      var1 delete();
-      level.crowds = scripts\engine\utility::array_remove(level.crowds, var1);
+  foreach(var_1 in level.crowds) {
+    if(!var_1.front_row) {
+      var_1 delete();
+      level.crowds = scripts\engine\utility::array_remove(level.crowds, var_1);
     }
   }
 
   while(!scripts\engine\utility::flag("bpg_scene_clear_exit_door")) {
-    foreach(var1 in level.crowds) {
-      if(isDefined(level.scr_anim[var1.animname]["crowd_chant"])) {
-        var6 = var1 scripts\engine\utility::getanim("crowd_chant");
-        var1 setanimrate(var6[0], 2);
+    foreach(var_1 in level.crowds) {
+      if(isDefined(level.scr_anim[var_1.animname]["crowd_chant"])) {
+        var_6 = var_1 scripts\engine\utility::getanim("crowd_chant");
+        var_1 setanimrate(var_6[0], 2);
       }
     }
 
@@ -907,16 +907,16 @@ function crowd_enterer() {
 }
 
 function crowd_delete() {
-  foreach(var1 in level.crowds) {
-    var1 delete();
+  foreach(var_1 in level.crowds) {
+    var_1 delete();
   }
 
   level.crowds = undefined;
 }
 
 function crowd_vehicles() {
-  for(var0 = 1; var0 <= 3; var0++) {
-    var1 = scripts\engine\sp\utility::spawn_anim_model("crowd_veh_" + var0);
+  for(var_0 = 1; var_0 <= 3; var_0++) {
+    var_1 = scripts\engine\sp\utility::spawn_anim_model("crowd_veh_" + var_0);
     thread crowd_individual_vehicle();
   }
 }
@@ -926,13 +926,13 @@ function crowd_individual_vehicle() {
   self delete();
 }
 
-function periph_traffic(var0) {
-  var1 = scripts\engine\sp\utility::spawn_anim_model("periph_veh");
-  level.crowd_ap thread scripts\common\anim::anim_first_frame_solo(var1, "ambiance");
-  level.crowd_ap thread scripts\common\anim::anim_loop_solo(var1, "ambiance", "stop_ambiance");
-  scripts\engine\utility::flag_wait(var0);
+function periph_traffic(var_0) {
+  var_1 = scripts\engine\sp\utility::spawn_anim_model("periph_veh");
+  level.crowd_ap thread scripts\common\anim::anim_first_frame_solo(var_1, "ambiance");
+  level.crowd_ap thread scripts\common\anim::anim_loop_solo(var_1, "ambiance", "stop_ambiance");
+  scripts\engine\utility::flag_wait(var_0);
   level.crowd_ap notify("stop_ambiance");
-  var1 delete();
+  var_1 delete();
 }
 
 function spawn_gate_overrunners() {
@@ -979,33 +979,33 @@ function gate_overrun() {
     waitframe();
   }
 
-  foreach(var2, var1 in level.gate_overrunners_mob_aq) {
-    if(isDefined(var1) && isalive(var1)) {
-      var1.animname = "mob_aq_" + var2 + 1;
-      var1 scripts\sp\fakeactor::take_control();
-      var1 scripts\sp\fakeactor::set_do_arrivals(0);
-      level.ap_gate_overrun thread scripts\common\anim::anim_loop_solo(var1, "gate_overrun_idle", "overrun_gate");
+  foreach(var_2, var_1 in level.gate_overrunners_mob_aq) {
+    if(isDefined(var_1) && isalive(var_1)) {
+      var_1.animname = "mob_aq_" + var_2 + 1;
+      var_1 scripts\sp\fakeactor::take_control();
+      var_1 scripts\sp\fakeactor::set_do_arrivals(0);
+      level.ap_gate_overrun thread scripts\common\anim::anim_loop_solo(var_1, "gate_overrun_idle", "overrun_gate");
     }
   }
 
-  foreach(var2, var1 in level.gate_overrunners_mob_civ) {
-    if(isDefined(var1) && isalive(var1)) {
-      var1.animname = "mob_civ_" + var2 + 1;
-      var1 scripts\sp\fakeactor::take_control();
-      var1 scripts\sp\fakeactor::set_do_arrivals(0);
-      level.ap_gate_overrun thread scripts\common\anim::anim_loop_solo(var1, "gate_overrun_idle", "overrun_gate");
+  foreach(var_2, var_1 in level.gate_overrunners_mob_civ) {
+    if(isDefined(var_1) && isalive(var_1)) {
+      var_1.animname = "mob_civ_" + var_2 + 1;
+      var_1 scripts\sp\fakeactor::take_control();
+      var_1 scripts\sp\fakeactor::set_do_arrivals(0);
+      level.ap_gate_overrun thread scripts\common\anim::anim_loop_solo(var_1, "gate_overrun_idle", "overrun_gate");
     }
   }
 
-  foreach(var1 in level.gate_overrunners_aq) {
-    if(isDefined(var1) && isalive(var1)) {
-      var1.animname = "mob_aq_fight_" + var2 + 1;
-      level.ap_gate_overrun thread scripts\common\anim::anim_loop_solo(var1, "gate_overrun_idle", "overrun_gate");
+  foreach(var_1 in level.gate_overrunners_aq) {
+    if(isDefined(var_1) && isalive(var_1)) {
+      var_1.animname = "mob_aq_fight_" + var_2 + 1;
+      level.ap_gate_overrun thread scripts\common\anim::anim_loop_solo(var_1, "gate_overrun_idle", "overrun_gate");
     }
   }
 
-  foreach(var1 in level.gate_overrunners_marine) {
-    var1.dontevershoot = 1;
+  foreach(var_1 in level.gate_overrunners_marine) {
+    var_1.dontevershoot = 1;
   }
 
   level.ap_gate_overrun thread scripts\common\anim::anim_loop_solo(level.front_gate_l, "gate_overrun_idle", "overrun_gate");
@@ -1018,9 +1018,9 @@ function gate_overrun() {
   scripts\engine\utility::array_thread(level.gate_overrunners_mob_aq, &overrun_gate_mob, level.ap_gate_overrun);
   scripts\engine\utility::array_thread(level.gate_overrunners_mob_civ, &overrun_gate_mob, level.ap_gate_overrun);
 
-  foreach(var1 in level.gate_overrunners_aq) {
-    if(isDefined(var1) && isalive(var1)) {
-      level.ap_gate_overrun thread scripts\common\anim::anim_single_solo(var1, "gate_overrun");
+  foreach(var_1 in level.gate_overrunners_aq) {
+    if(isDefined(var_1) && isalive(var_1)) {
+      level.ap_gate_overrun thread scripts\common\anim::anim_single_solo(var_1, "gate_overrun");
     }
   }
 
@@ -1031,126 +1031,126 @@ function gate_overrun() {
   wait 1.3;
   thread gate_overrun_fire_rate_controller();
   wait 1;
-  var9 = getEnt("gate_light", "targetname");
-  var10 = scripts\engine\utility::getStruct("gate_light_shooter", "targetname");
-  magicbullet("iw8_ar_akilo47", var10.origin, var9.origin);
+  var_9 = getEnt("gate_light", "targetname");
+  var_10 = scripts\engine\utility::getStruct("gate_light_shooter", "targetname");
+  magicbullet("iw8_ar_akilo47", var_10.origin, var_9.origin);
   wait 0.3;
-  var9 setlightintensity(0);
-  playFX(scripts\engine\utility::getfx("vfx_dynolight_omni_death_lrg"), var9.origin);
+  var_9 setlightintensity(0);
+  playFX(scripts\engine\utility::getfx("vfx_dynolight_omni_death_lrg"), var_9.origin);
 }
 
-function gate_open_and_connect_paths(var0) {
-  level.ap_gate_overrun scripts\common\anim::anim_single_solo(var0, "gate_overrun");
+function gate_open_and_connect_paths(var_0) {
+  level.ap_gate_overrun scripts\common\anim::anim_single_solo(var_0, "gate_overrun");
 }
 
-function gate_already_open_and_connect_paths(var0) {
-  level.ap_gate_overrun scripts\common\anim::anim_last_frame_solo(var0, "gate_overrun");
+function gate_already_open_and_connect_paths(var_0) {
+  level.ap_gate_overrun scripts\common\anim::anim_last_frame_solo(var_0, "gate_overrun");
 }
 
-function overrun_gate_mob(var0) {
+function overrun_gate_mob(var_0) {
   self endon("death");
   self endon("entitydeleted");
 
   if(isDefined(self) && isalive(self)) {
-    var0 scripts\common\anim::anim_single_solo(self, "gate_overrun");
+    var_0 scripts\common\anim::anim_single_solo(self, "gate_overrun");
     scripts\sp\fakeactor::release_control(undefined);
     return;
   }
 }
 
 function gate_overrun_respawner_mob_aq() {
-  var0 = undefined;
+  var_0 = undefined;
 
   while(!scripts\engine\utility::flag("md_close_door")) {
     self.count = 1;
-    var0 = scripts\engine\sp\utility::spawn_ai();
-    var0.ignoreme = 1;
-    var0 thread scripts\sp\maps\embassy\embassy_util::hide_offscreen_shadow(1300);
+    var_0 = scripts\engine\sp\utility::spawn_ai();
+    var_0.ignoreme = 1;
+    var_0 thread scripts\sp\maps\embassy\embassy_util::hide_offscreen_shadow(1300);
 
     if(!isDefined(level.gate_overrunners_mob_aq)) {
       level.gate_overrunners_mob_aq = [];
     }
 
-    level.gate_overrunners_mob_aq[level.gate_overrunners_mob_aq.size] = var0;
+    level.gate_overrunners_mob_aq[level.gate_overrunners_mob_aq.size] = var_0;
 
     if(!scripts\engine\utility::flag("md_close_door")) {
-      var0 scripts\engine\utility::waittill_any("death", "entitydeleted");
+      var_0 scripts\engine\utility::waittill_any("death", "entitydeleted");
     }
 
-    scripts\engine\utility::array_remove(level.gate_overrunners_mob_aq, var0);
+    scripts\engine\utility::array_remove(level.gate_overrunners_mob_aq, var_0);
     wait randomfloatrange(1.5, 3);
   }
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
     return;
   }
 }
 
 function gate_overrun_respawner_mob_civ() {
-  var0 = undefined;
+  var_0 = undefined;
 
   while(!scripts\engine\utility::flag("md_close_door")) {
     self.count = 1;
-    var0 = scripts\engine\sp\utility::spawn_ai();
-    var0.ignoreme = 1;
-    var0.team = "axis";
-    var0 thread scripts\sp\maps\embassy\embassy_util::hide_offscreen_shadow(1300);
+    var_0 = scripts\engine\sp\utility::spawn_ai();
+    var_0.ignoreme = 1;
+    var_0.team = "axis";
+    var_0 thread scripts\sp\maps\embassy\embassy_util::hide_offscreen_shadow(1300);
 
     if(!isDefined(level.gate_overrunners_mob_civ)) {
       level.gate_overrunners_mob_civ = [];
     }
 
-    level.gate_overrunners_mob_civ[level.gate_overrunners_mob_civ.size] = var0;
+    level.gate_overrunners_mob_civ[level.gate_overrunners_mob_civ.size] = var_0;
 
     if(!scripts\engine\utility::flag("md_close_door")) {
-      var0 scripts\engine\utility::waittill_any("death", "entitydeleted");
+      var_0 scripts\engine\utility::waittill_any("death", "entitydeleted");
     }
 
-    scripts\engine\utility::array_remove(level.gate_overrunners_mob_civ, var0);
+    scripts\engine\utility::array_remove(level.gate_overrunners_mob_civ, var_0);
     wait randomfloatrange(1.5, 3);
   }
 
-  if(isDefined(var0)) {
-    var0 delete();
+  if(isDefined(var_0)) {
+    var_0 delete();
     return;
   }
 }
 
 function gate_overrun_respawner_aq_fighters() {
-  var0 = undefined;
+  var_0 = undefined;
   self.death_count = 0;
   self.max_deaths = 0;
 
   while(!scripts\engine\utility::flag("marines_dead")) {
     self.count = 1;
-    var0 = scripts\engine\sp\utility::spawn_ai(1);
-    var0 scripts\engine\utility::script_func("anim_placeweaponon", var0.secondaryweapon, "none");
-    var0 scripts\engine\utility::script_func("anim_placeweaponon", var0.sidearm, "none");
-    var0.dontevershoot = 1;
-    var0.disablepistol = 1;
-    var0 thread scripts\sp\maps\embassy\embassy_util::hide_offscreen_shadow(1300);
+    var_0 = scripts\engine\sp\utility::spawn_ai(1);
+    var_0 scripts\engine\utility::script_func("anim_placeweaponon", var_0.secondaryweapon, "none");
+    var_0 scripts\engine\utility::script_func("anim_placeweaponon", var_0.sidearm, "none");
+    var_0.dontevershoot = 1;
+    var_0.disablepistol = 1;
+    var_0 thread scripts\sp\maps\embassy\embassy_util::hide_offscreen_shadow(1300);
 
     if(self.death_count >= self.max_deaths) {
-      var0 scripts\common\ai::magic_bullet_shield();
+      var_0 scripts\common\ai::magic_bullet_shield();
     }
 
     if(!isDefined(level.gate_overrunners_aq)) {
       level.gate_overrunners_aq = [];
     }
 
-    level.gate_overrunners_aq[level.gate_overrunners_aq.size] = var0;
+    level.gate_overrunners_aq[level.gate_overrunners_aq.size] = var_0;
 
     if(!scripts\engine\utility::flag("marines_dead")) {
-      level.passed = var0 scripts\engine\utility::waittill_any_return("death", "entitydeleted", "marines_dead", "reached_path_end");
+      level.passed = var_0 scripts\engine\utility::waittill_any_return("death", "entitydeleted", "marines_dead", "reached_path_end");
     }
 
     if(!scripts\engine\utility::flag("marines_dead")) {
-      var0.goalradius = 100;
-      level.passed_2 = var0 scripts\engine\utility::waittill_any_return("death", "entitydeleted", "marines_dead");
+      var_0.goalradius = 100;
+      level.passed_2 = var_0 scripts\engine\utility::waittill_any_return("death", "entitydeleted", "marines_dead");
     }
 
-    scripts\engine\utility::array_remove(level.gate_overrunners_aq, var0);
+    scripts\engine\utility::array_remove(level.gate_overrunners_aq, var_0);
 
     if(!scripts\engine\utility::flag("marines_dead")) {
       wait randomfloatrange(1.5, 3);
@@ -1159,21 +1159,21 @@ function gate_overrun_respawner_aq_fighters() {
     self.death_count += 1;
   }
 
-  if(isDefined(var0) && isalive(var0)) {
-    var0.ignoreall = 1;
-    var0 scripts\engine\sp\utility::set_goal_radius(10);
+  if(isDefined(var_0) && isalive(var_0)) {
+    var_0.ignoreall = 1;
+    var_0 scripts\engine\sp\utility::set_goal_radius(10);
 
-    if(isDefined(var0.magic_bullet_shield)) {
-      var0 scripts\common\ai::stop_magic_bullet_shield();
+    if(isDefined(var_0.magic_bullet_shield)) {
+      var_0 scripts\common\ai::stop_magic_bullet_shield();
     }
 
-    var1 = scripts\engine\utility::getStructArray("mobs_done_1", "targetname");
-    var1 = scripts\engine\utility::random(var1);
-    var0 thread scripts\sp\spawner::go_to_node(var1);
-    var0 scripts\engine\utility::waittill_any("reached_path_end", "death", "entitydeleted");
+    var_1 = scripts\engine\utility::getStructArray("mobs_done_1", "targetname");
+    var_1 = scripts\engine\utility::random(var_1);
+    var_0 thread scripts\sp\spawner::go_to_node(var_1);
+    var_0 scripts\engine\utility::waittill_any("reached_path_end", "death", "entitydeleted");
 
-    if(isDefined(var0) && isalive(var0)) {
-      var0 delete();
+    if(isDefined(var_0) && isalive(var_0)) {
+      var_0 delete();
       return;
     }
 
@@ -1182,60 +1182,60 @@ function gate_overrun_respawner_aq_fighters() {
 }
 
 function gate_overrun_respawner_marines() {
-  var0 = undefined;
+  var_0 = undefined;
   self.death_count = 0;
   self.max_deaths = 0;
 
   while(!scripts\engine\utility::flag("near_exit_to_stairs")) {
     self.count = 1;
-    var0 = scripts\engine\sp\utility::spawn_ai();
-    var0 scripts\engine\utility::script_func("anim_placeweaponon", var0.weapon, "none");
-    var0 scripts\engine\utility::script_func("anim_placeweaponon", var0.secondaryweapon, "none");
-    var0 scripts\engine\utility::script_func("anim_placeweaponon", var0.sidearm, "none");
+    var_0 = scripts\engine\sp\utility::spawn_ai();
+    var_0 scripts\engine\utility::script_func("anim_placeweaponon", var_0.weapon, "none");
+    var_0 scripts\engine\utility::script_func("anim_placeweaponon", var_0.secondaryweapon, "none");
+    var_0 scripts\engine\utility::script_func("anim_placeweaponon", var_0.sidearm, "none");
 
     if(self.classname == "actor_ally_usmc_desert_smg") {
-      var0 scripts\anim\shared::forceuseweapon(scripts\sp\utility::make_weapon("iw8_sm_mpapa5"), "primary");
+      var_0 scripts\anim\shared::forceuseweapon(scripts\sp\utility::make_weapon("iw8_sm_mpapa5"), "primary");
     } else if(self.classname == "actor_ally_usmc_desert_shotgun") {
-      var0 scripts\anim\shared::forceuseweapon(scripts\sp\utility::make_weapon("iw8_sh_romeo870"), "primary");
+      var_0 scripts\anim\shared::forceuseweapon(scripts\sp\utility::make_weapon("iw8_sh_romeo870"), "primary");
     } else {
-      var0 scripts\anim\shared::forceuseweapon(scripts\sp\utility::make_weapon("iw8_ar_mcharlie"), "primary");
+      var_0 scripts\anim\shared::forceuseweapon(scripts\sp\utility::make_weapon("iw8_ar_mcharlie"), "primary");
     }
 
-    var0.dontevershoot = 1;
-    var0.disablepistol = 1;
-    var0 thread scripts\sp\maps\embassy\embassy_util::hide_offscreen_shadow(1300);
-    var0 scripts\engine\sp\utility::name_hide();
+    var_0.dontevershoot = 1;
+    var_0.disablepistol = 1;
+    var_0 thread scripts\sp\maps\embassy\embassy_util::hide_offscreen_shadow(1300);
+    var_0 scripts\engine\sp\utility::name_hide();
 
     if(self.death_count >= self.max_deaths) {
-      var0 scripts\common\ai::magic_bullet_shield();
+      var_0 scripts\common\ai::magic_bullet_shield();
     }
 
     if(!isDefined(level.gate_overrunners_marine)) {
       level.gate_overrunners_marine = [];
     }
 
-    level.gate_overrunners_marine[level.gate_overrunners_marine.size] = var0;
+    level.gate_overrunners_marine[level.gate_overrunners_marine.size] = var_0;
 
     if(!scripts\engine\utility::flag("near_exit_to_stairs")) {
-      var0 scripts\engine\utility::waittill_any("death", "entitydeleted", "player_at_stairwell");
+      var_0 scripts\engine\utility::waittill_any("death", "entitydeleted", "player_at_stairwell");
     }
 
-    scripts\engine\utility::array_remove(level.gate_overrunners_marine, var0);
+    scripts\engine\utility::array_remove(level.gate_overrunners_marine, var_0);
     wait randomfloatrange(1.5, 3);
     self.death_count += 1;
   }
 
-  if(isDefined(var0) && isalive(var0)) {
-    if(isDefined(var0.magic_bullet_shield)) {
-      var0 scripts\common\ai::stop_magic_bullet_shield();
+  if(isDefined(var_0) && isalive(var_0)) {
+    if(isDefined(var_0.magic_bullet_shield)) {
+      var_0 scripts\common\ai::stop_magic_bullet_shield();
     }
 
-    var0.health = 1;
-    var0.attackeraccuracy = 10000;
+    var_0.health = 1;
+    var_0.attackeraccuracy = 10000;
     scripts\engine\utility::flag_wait("door_bust");
 
-    if(isalive(var0)) {
-      var0 scripts\engine\sp\utility::die();
+    if(isalive(var_0)) {
+      var_0 scripts\engine\sp\utility::die();
       return;
     }
 
@@ -1250,17 +1250,17 @@ function gate_overrun_fire_rate_controller() {
   }
 
   while(!scripts\engine\utility::flag("marines_dead")) {
-    var0 = randomintrange(3, 6);
-    var1 = scripts\engine\utility::array_randomize(level.gate_overrunners_marine);
-    gate_overrun_set_dont_shoot(var1, var0, 0);
+    var_0 = randomintrange(3, 6);
+    var_1 = scripts\engine\utility::array_randomize(level.gate_overrunners_marine);
+    gate_overrun_set_dont_shoot(var_1, var_0, 0);
     wait randomfloatrange(3, 6);
-    gate_overrun_set_dont_shoot(var1, var0, 1);
+    gate_overrun_set_dont_shoot(var_1, var_0, 1);
     wait randomfloatrange(0.5, 1);
-    var2 = randomintrange(3, 6);
-    var3 = scripts\engine\utility::array_randomize(level.gate_overrunners_aq);
-    gate_overrun_set_dont_shoot(var3, var2, 0);
+    var_2 = randomintrange(3, 6);
+    var_3 = scripts\engine\utility::array_randomize(level.gate_overrunners_aq);
+    gate_overrun_set_dont_shoot(var_3, var_2, 0);
     wait randomfloatrange(3, 6);
-    gate_overrun_set_dont_shoot(var3, var2, 1);
+    gate_overrun_set_dont_shoot(var_3, var_2, 1);
 
     if(scripts\engine\utility::flag("near_office_door") && !scripts\engine\utility::flag("near_exit_to_stairs")) {
       wait randomfloatrange(5, 8);
@@ -1271,28 +1271,28 @@ function gate_overrun_fire_rate_controller() {
   }
 }
 
-function gate_overrun_set_dont_shoot(var0, var1, var2) {
-  for(var3 = 0; var3 < var1; var3++) {
-    var4 = var0[var3];
+function gate_overrun_set_dont_shoot(var_0, var_1, var_2) {
+  for(var_3 = 0; var_3 < var_1; var_3++) {
+    var_4 = var_0[var_3];
 
-    if(isDefined(var4) && isalive(var4)) {
-      var4.ignoreall = var2;
-      var4.dontevershoot = var2;
+    if(isDefined(var_4) && isalive(var_4)) {
+      var_4.ignoreall = var_2;
+      var_4.dontevershoot = var_2;
     }
   }
 }
 
 function check_marines() {
   scripts\engine\utility::flag_wait("near_exit_to_stairs");
-  var0 = 1;
+  var_0 = 1;
 
-  while(var0) {
-    var0 = 0;
+  while(var_0) {
+    var_0 = 0;
 
-    foreach(var2 in level.gate_overrunners_marine) {
-      if(isDefined(var2) && isalive(var2)) {
-        var2 notify("player_at_stairwell");
-        var0 = 1;
+    foreach(var_2 in level.gate_overrunners_marine) {
+      if(isDefined(var_2) && isalive(var_2)) {
+        var_2 notify("player_at_stairwell");
+        var_0 = 1;
         break;
       }
     }
@@ -1302,40 +1302,40 @@ function check_marines() {
 
   scripts\engine\utility::flag_set("marines_dead");
 
-  foreach(var5 in level.gate_overrunners_aq) {
-    var5 notify("marines_dead");
+  foreach(var_5 in level.gate_overrunners_aq) {
+    var_5 notify("marines_dead");
   }
 }
 
 function gate_climbers_setup() {
-  var0 = scripts\engine\utility::getStructArray("ap_crowd_fence_climb", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("ap_crowd_fence_climb", "targetname");
 
-  foreach(var2 in var0) {
-    var3 = getspawner(var2.target, "targetname");
-    thread gate_climbers_respawner(var3);
+  foreach(var_2 in var_0) {
+    var_3 = getspawner(var_2.target, "targetname");
+    thread gate_climbers_respawner(var_3);
   }
 }
 
-function gate_climbers_respawner(var0) {
-  scripts\engine\sp\utility::add_spawn_function(&gate_climber, var0);
+function gate_climbers_respawner(var_0) {
+  scripts\engine\sp\utility::add_spawn_function(&gate_climber, var_0);
   wait randomfloatrange(0, 8);
 
   while(!scripts\engine\utility::flag("md_close_door")) {
     self.count = 1;
-    var1 = scripts\engine\sp\utility::spawn_ai();
-    var1 scripts\engine\utility::waittill_any("entitydeleted", "death");
+    var_1 = scripts\engine\sp\utility::spawn_ai();
+    var_1 scripts\engine\utility::waittill_any("entitydeleted", "death");
     waitframe();
   }
 }
 
-function gate_climber(var0) {
+function gate_climber(var_0) {
   self endon("entitydeleted");
   self endon("death");
   self.ignoreme = 1;
   self.animname = "mob_civ_gate_climber";
   scripts\sp\fakeactor::take_control();
   scripts\sp\fakeactor::set_do_arrivals(0);
-  var0 scripts\common\anim::anim_single_solo(self, var0.script_noteworthy);
+  var_0 scripts\common\anim::anim_single_solo(self, var_0.script_noteworthy);
   scripts\sp\fakeactor::release_control(undefined);
 }
 
@@ -1348,8 +1348,8 @@ function heli_shake_controller() {
   thread scripts\sp\maps\embassy\embassy_util::heli_shake_stop();
 }
 
-function heli_windy_price(var0) {
-  if(var0) {
+function heli_windy_price(var_0) {
+  if(var_0) {
     level waittill("price_opens_door");
   }
 
@@ -1360,8 +1360,8 @@ function heli_windy_price(var0) {
 
 function helicopter_catchup() {
   heli_crash_debris_setup();
-  var0 = getEnt("gate_light", "targetname");
-  var0 setlightintensity(0);
+  var_0 = getEnt("gate_light", "targetname");
+  var_0 setlightintensity(0);
   level.ap_infil_crash = getEnt("ap_infil_crash", "targetname");
   level.ap_infil_crash.og_origin = level.ap_infil_crash.origin;
   level.ap_infil_crash.og_angles = level.ap_infil_crash.angles;
@@ -1517,27 +1517,27 @@ function grab_rope_nags() {
   level.price scripts\engine\sp\utility::smart_dialogue("dx_vom_pri_intro_flyin_160");
 }
 
-function heli_crawl_to_idle(var0) {
+function heli_crawl_to_idle(var_0) {
   level.infil_heli endon("stop_loop");
-  level.infil_heli scripts\common\anim::anim_single_solo(var0, "infil_crash_crawl");
-  level.infil_heli thread scripts\common\anim::anim_loop_solo(var0, "infil_crash_crawl_idle", "stop_loop");
+  level.infil_heli scripts\common\anim::anim_single_solo(var_0, "infil_crash_crawl");
+  level.infil_heli thread scripts\common\anim::anim_loop_solo(var_0, "infil_crash_crawl_idle", "stop_loop");
 }
 
-function display_heli_hint(var0, var1) {
+function display_heli_hint(var_0, var_1) {
   self endon("stop_loop_player");
-  wait var1;
+  wait var_1;
 
   if(level.player getnormalizedmovement()[0] > 0.3) {
     level.player notify("skip_jump");
     return;
   }
 
-  scripts\engine\sp\utility::display_hint(var0);
+  scripts\engine\sp\utility::display_hint(var_0);
 }
 
-function helicopter_spin_fail(var0, var1) {
+function helicopter_spin_fail(var_0, var_1) {
   level endon("crash_crawl_succeeded");
-  var0 thread scripts\common\anim::anim_loop_solo(var1, "infil_crash_crawl", "stop_loop");
+  var_0 thread scripts\common\anim::anim_loop_solo(var_1, "infil_crash_crawl", "stop_loop");
   level.heli_crash_timeout = 10;
   level.heli_crash_timer = gettime();
 
@@ -1553,9 +1553,9 @@ function helicopter_spin_fail(var0, var1) {
 }
 
 function heli_fail_time_within_limit() {
-  var0 = scripts\engine\utility::time_has_passed(level.heli_crash_timer, level.heli_crash_timeout);
-  var1 = getdvarint("scr_emb_heli_crawl_fail", 1);
-  return !var0 && var1 || !var1;
+  var_0 = scripts\engine\utility::time_has_passed(level.heli_crash_timer, level.heli_crash_timeout);
+  var_1 = getdvarint("scr_emb_heli_crawl_fail", 1);
+  return !var_0 && var_1 || !var_1;
 }
 
 function helicopter_crawl_catchup() {
@@ -1588,14 +1588,14 @@ function helicopter_crash_main() {
   level.infil_heli dontcastshadows();
 
   if(!istrue(level.crash_start_point)) {
-    var0 = level.infil_heli scripts\engine\utility::getanim("infil_crash_fall");
-    var1 = scripts\engine\utility::spawn_tag_origin();
-    var1.origin = getstartorigin(level.ap_infil_crash.origin, level.ap_infil_crash.angles, var0);
-    var1.angles = getstartangles(level.ap_infil_crash.origin, level.ap_infil_crash.angles, var0);
-    level.ap_infil_crash linkTo(var1);
+    var_0 = level.infil_heli scripts\engine\utility::getanim("infil_crash_fall");
+    var_1 = scripts\engine\utility::spawn_tag_origin();
+    var_1.origin = getstartorigin(level.ap_infil_crash.origin, level.ap_infil_crash.angles, var_0);
+    var_1.angles = getstartangles(level.ap_infil_crash.origin, level.ap_infil_crash.angles, var_0);
+    level.ap_infil_crash linkTo(var_1);
     waitframe();
-    var1.origin = level.infil_heli.origin;
-    var1.angles = level.infil_heli.angles;
+    var_1.origin = level.infil_heli.origin;
+    var_1.angles = level.infil_heli.angles;
     waitframe();
     level.ap_infil_crash unlink(1);
     thread helicopter_crash_lerp_ap();
@@ -1649,11 +1649,11 @@ function helicopter_crash_fall_relative_to_world() {
 function helicopter_crash_fall_price_gun() {
   scripts\engine\sp\utility::place_weapon_on(self.weapon, "none");
   self.dropweapon = 0;
-  var0 = spawn("script_model", (0, 0, 0));
-  var0 scripts\common\utility::make_weapon_model(getweaponbasename(self.weapon), getweaponattachments(self.weapon), 0);
-  var0 scripts\engine\sp\utility::assign_animtree("price_crash_gun");
-  level.ap_infil_crash scripts\common\anim::anim_single_solo(var0, "infil_crash_fall");
-  var0 delete();
+  var_0 = spawn("script_model", (0, 0, 0));
+  var_0 scripts\common\utility::make_weapon_model(getweaponbasename(self.weapon), getweaponattachments(self.weapon), 0);
+  var_0 scripts\engine\sp\utility::assign_animtree("price_crash_gun");
+  level.ap_infil_crash scripts\common\anim::anim_single_solo(var_0, "infil_crash_fall");
+  var_0 delete();
   self.dropweapon = 1;
   scripts\engine\sp\utility::place_weapon_on(self.weapon, "right");
 }
@@ -1672,9 +1672,9 @@ function reenable_dynents() {
   setsaveddvar("LRTTMPMQOO", 600);
 }
 
-function helicopter_player_fall(var0) {
+function helicopter_player_fall(var_0) {
   thread heli_player_prone();
-  thread helicopter_player_fall_anim(var0);
+  thread helicopter_player_fall_anim(var_0);
   level waittill("can_move");
   level notify("stop_damage_radius");
   thread scripts\sp\maps\embassy\embassy_util::flag_on_moving_forward("fall_impact_done");
@@ -1683,7 +1683,7 @@ function helicopter_player_fall(var0) {
   thread scripts\sp\maps\embassy\embassy_util::flag_on_jump_pressed("fall_impact_done");
   scripts\engine\utility::flag_wait("fall_impact_done");
   level notify("lock_view");
-  var0 scripts\common\anim::anim_single_solo(level.player.rig, "infil_crash_fall_go_prone");
+  var_0 scripts\common\anim::anim_single_solo(level.player.rig, "infil_crash_fall_go_prone");
   scripts\sp\maps\embassy\embassy_util::pull_player_out_of_rig_hide_rig(level.player.rig);
   scripts\engine\utility::flag_set("player_up");
   level.player thread scripts\sp\player::player_movement_state("creep");
@@ -1691,20 +1691,20 @@ function helicopter_player_fall(var0) {
   wait 0.5;
   level.player thread scripts\engine\sp\utility::blend_movespeedscale(0.75, 2.5);
   level.player enableweapons();
-  var1 = scripts\sp\utility::make_weapon("iw8_pi_golf21");
-  level.player giveweapon(var1, 0, 0, 0, 0);
-  level.player givemaxammo(var1);
-  level.player switchtoweapon(var1);
+  var_1 = scripts\sp\utility::make_weapon("iw8_pi_golf21");
+  level.player giveweapon(var_1, 0, 0, 0, 0);
+  level.player givemaxammo(var_1);
+  level.player switchtoweapon(var_1);
   wait 2.5;
   level.player thread scripts\engine\sp\utility::blend_movespeedscale_default(1);
   thread embassy_scale_speed_near_price();
   level.player allowsprint(1);
 }
 
-function helicopter_player_fall_anim(var0) {
+function helicopter_player_fall_anim(var_0) {
   level.infil_heli scripts\common\anim::anim_single_solo(level.player.rig, "infil_crash_fall_relative");
   level.player.rig unlink(1);
-  var0 scripts\common\anim::anim_single_solo(level.player.rig, "infil_crash_fall");
+  var_0 scripts\common\anim::anim_single_solo(level.player.rig, "infil_crash_fall");
   scripts\engine\utility::flag_set("fall_impact_done");
 }
 
@@ -1713,11 +1713,11 @@ function heli_player_prone() {
   level.player allowsprint(0);
 }
 
-function helicopter_crash_fall(var0, var1) {
+function helicopter_crash_fall(var_0, var_1) {
   level.player clearclienttriggeraudiozone(4);
-  var1 linkTo(var0);
-  var0 scripts\common\anim::anim_single_solo(var1, "infil_crash_fall");
-  var1 unlink();
+  var_1 linkTo(var_0);
+  var_0 scripts\common\anim::anim_single_solo(var_1, "infil_crash_fall");
+  var_1 unlink();
   level notify("heli_crash_done");
   level waittill("fx_done");
   infil_heli_delete();
@@ -1731,10 +1731,10 @@ function helicopter_crash_vfx() {
   level.infil_heli notify("stop_kicking_up_dust");
   scripts\engine\utility::exploder("ropetime");
   level waittill("player_lands");
-  var0 = getscriptablearray("roof_clutter_player", "targetname");
+  var_0 = getscriptablearray("roof_clutter_player", "targetname");
 
-  foreach(var2 in var0) {
-    var2 dodamage(20, level.player.origin);
+  foreach(var_2 in var_0) {
+    var_2 dodamage(20, level.player.origin);
   }
 
   level.player modifybasefov(55, 0.25);
@@ -1747,19 +1747,19 @@ function helicopter_crash_vfx() {
   scripts\engine\utility::exploder("priceland");
   thread helicopter_crash_rack_focus();
   level waittill("heli_tail_hit");
-  var4 = getscriptablearray("roof_clutter_heli", "targetname");
+  var_4 = getscriptablearray("roof_clutter_heli", "targetname");
 
-  foreach(var2 in var4) {
-    var2 dodamage(100, level.player.origin);
+  foreach(var_2 in var_4) {
+    var_2 dodamage(100, level.player.origin);
   }
 
   scripts\engine\utility::exploder("tailhit");
   level.player playRumbleOnEntity("heavy_2s");
   screenshake(level.player.origin, 20, 1, 5, 0.5, 0, 0.5, 100, 5, 50, 50);
-  var7 = scripts\engine\utility::getStructArray("heli_tail_hit_pos", "targetname");
+  var_7 = scripts\engine\utility::getStructArray("heli_tail_hit_pos", "targetname");
 
-  foreach(var9 in var7) {
-    radiusdamage(var9.origin, 500, 100, 100);
+  foreach(var_9 in var_7) {
+    radiusdamage(var_9.origin, 500, 100, 100);
   }
 
   wait 0.2;
@@ -1790,10 +1790,10 @@ function helicopter_crash_rack_focus() {
 
 function price_hat_pickup() {
   level waittill("spawn_hat");
-  var0 = scripts\engine\sp\utility::spawn_anim_model("price_hat");
-  level.ap_infil_crash scripts\common\anim::anim_single_solo(var0, "infil_crash_hat_pickup");
+  var_0 = scripts\engine\sp\utility::spawn_anim_model("price_hat");
+  level.ap_infil_crash scripts\common\anim::anim_single_solo(var_0, "infil_crash_hat_pickup");
   level.price attach(level.price.hatmodel);
-  var0 delete();
+  var_0 delete();
 }
 
 function helicopter_fall_camera_control_locking() {
@@ -1821,7 +1821,7 @@ function heli_player_damage_radius() {
 }
 
 function heli_wreckage() {
-  foreach(var1 in level.roof_wreckage) {
+  foreach(var_1 in level.roof_wreckage) {
     thread heli_wreckage_break();
   }
 }
@@ -1845,12 +1845,12 @@ function helicopter_crash_catchup() {
 }
 
 function embassy_scale_speed_near_price() {
-  var0 = squared(150);
+  var_0 = squared(150);
 
   while(!scripts\engine\utility::flag("bpg_scene_near_start")) {
-    var1 = scripts\engine\math::remap(distancesquared(level.player.origin, level.price.origin), 0, var0, 0.1, 1);
-    var1 = clamp(var1, 0.1, 1);
-    level.player scripts\engine\sp\utility::blend_movespeedscale(var1, 0.25);
+    var_1 = scripts\engine\math::remap(distancesquared(level.player.origin, level.price.origin), 0, var_0, 0.1, 1);
+    var_1 = clamp(var_1, 0.1, 1);
+    level.player scripts\engine\sp\utility::blend_movespeedscale(var_1, 0.25);
     waitframe();
   }
 
@@ -1865,10 +1865,10 @@ function embassy_roof_start() {
   scripts\engine\sp\utility::set_start_location("embassy_roof_start", [level.player, level.price]);
   scripts\engine\utility::flag_set("player_up");
   thread audio_crowd_angry_outside(1);
-  var0 = scripts\sp\utility::make_weapon("iw8_pi_golf21");
-  level.player giveweapon(var0, 0, 0, 0, 0);
-  level.player givemaxammo(var0);
-  level.player switchtoweapon(var0);
+  var_0 = scripts\sp\utility::make_weapon("iw8_pi_golf21");
+  level.player giveweapon(var_0, 0, 0, 0, 0);
+  level.player givemaxammo(var_0);
+  level.player switchtoweapon(var_0);
   thread scripts\sp\maps\embassy\embassy_lighting::lt_embassy_roof_start();
   level.player thread scripts\sp\player::player_movement_state("creep");
   thread embassy_scale_speed_near_price();
@@ -1880,8 +1880,8 @@ function embassy_roof_main() {
   level.price scripts\engine\sp\utility::name_show();
 
   if(!scripts\engine\utility::flag("near_roof_door")) {
-    var0 = ["dx_vom_pri_roof_crash_50", "dx_vom_pri_roof_crash_60", "dx_vom_pri_roof_crash_70", "dx_vom_pri_roof_crash_80"];
-    thread notetrack_nag(level.price, var0);
+    var_0 = ["dx_vom_pri_roof_crash_50", "dx_vom_pri_roof_crash_60", "dx_vom_pri_roof_crash_70", "dx_vom_pri_roof_crash_80"];
+    thread notetrack_nag(level.price, var_0);
     level.ap_infil_crash thread scripts\common\anim::anim_loop_solo_with_nags(level.price, "roof_stair_idle", "loop_stop");
   }
 
@@ -1900,8 +1900,8 @@ function embassy_roof_main() {
   level.ap_infil_crash scripts\common\anim::anim_single_solo(level.price, "roof_stair_to_office");
 
   if(!scripts\engine\utility::flag("near_office_door")) {
-    var0 = ["dx_vom_pri_roof_stairwell_50", "dx_vom_pri_roof_stairwell_60", "dx_vom_pri_roof_stairwell_70"];
-    thread notetrack_nag(level.price, var0);
+    var_0 = ["dx_vom_pri_roof_stairwell_50", "dx_vom_pri_roof_stairwell_60", "dx_vom_pri_roof_stairwell_70"];
+    thread notetrack_nag(level.price, var_0);
     level.ap_offices_chaos thread scripts\common\anim::anim_loop_solo_with_nags(level.price, "offices_idle", "loop_stop");
   }
 
@@ -1913,14 +1913,14 @@ function mus_rooftop_traverse() {
   wait 0.2;
 }
 
-function emb_roof_door_setup(var0) {
+function emb_roof_door_setup(var_0) {
   level.roof_door = getEnt("roof_door", "targetname");
   level.roof_door.clip = level.roof_door scripts\engine\utility::get_target_ent();
   level.roof_door.clip linkTo(level.roof_door);
   level.roof_door scripts\engine\sp\utility::assign_animtree("roof_door");
   level.roof_door.og_rot = level.roof_door.angles;
 
-  if(var0) {
+  if(var_0) {
     level.ap_infil_crash scripts\common\anim::anim_first_frame_solo(level.roof_door, "roof_stair_to_office");
     return;
   }
@@ -1955,9 +1955,9 @@ function embassy_roof_catchup() {
   level.ap_infil_crash delete();
 }
 
-function notetrack_nag(var0, var1) {
-  level endon(var1);
-  var2 = scripts\engine\sp\utility::create_deck(var0, 0);
+function notetrack_nag(var_0, var_1) {
+  level endon(var_1);
+  var_2 = scripts\engine\sp\utility::create_deck(var_0, 0);
 
   for(;;) {
     level waittill("nag");
@@ -1966,9 +1966,9 @@ function notetrack_nag(var0, var1) {
       continue;
     }
 
-    scripts\engine\sp\utility::smart_dialogue(var2 scripts\engine\sp\utility::deck_draw());
+    scripts\engine\sp\utility::smart_dialogue(var_2 scripts\engine\sp\utility::deck_draw());
 
-    if(var2 scripts\engine\sp\utility::deck_is_empty()) {
+    if(var_2 scripts\engine\sp\utility::deck_is_empty()) {
       return;
     }
   }
@@ -1995,20 +1995,20 @@ function offices_main() {
   thread start_office_walla();
   thread offices_screens();
   scripts\engine\utility::exploder("stairwell_scene_vfx");
-  var0 = scripts\engine\sp\utility::spawn_targetname("office_chaos_keyguy");
-  var1 = scripts\engine\sp\utility::spawn_targetname("office_chaos_manager");
-  var2 = scripts\engine\sp\utility::spawn_targetname("office_chaos_idle_only_civ");
-  var3 = scripts\engine\sp\utility::array_spawn_targetname("office_chaos_civs");
-  var4 = scripts\engine\sp\utility::array_spawn_targetname("office_chaos_avoid_civs");
+  var_0 = scripts\engine\sp\utility::spawn_targetname("office_chaos_keyguy");
+  var_1 = scripts\engine\sp\utility::spawn_targetname("office_chaos_manager");
+  var_2 = scripts\engine\sp\utility::spawn_targetname("office_chaos_idle_only_civ");
+  var_3 = scripts\engine\sp\utility::array_spawn_targetname("office_chaos_civs");
+  var_4 = scripts\engine\sp\utility::array_spawn_targetname("office_chaos_avoid_civs");
   level.ap_stairwell_door = scripts\engine\utility::getStruct("ap_stairwell_door", "targetname");
   thread offices_stairwell_door();
   thread offices_keyguy();
   thread offices_manager();
   thread offices_idle_only_civ();
-  scripts\engine\utility::array_thread(var3, &offices_chaos_civs);
+  scripts\engine\utility::array_thread(var_3, &offices_chaos_civs);
 
-  foreach(var6 in var4) {
-    thread offices_avoid_civs(var6);
+  foreach(var_6 in var_4) {
+    thread offices_avoid_civs(var_6);
   }
 
   level.ap_offices_chaos scripts\common\anim::anim_single_solo(level.price, "offices_chaos");
@@ -2033,18 +2033,18 @@ function offices_fail_check() {
 
 function ap_stairwell_door_nag_vo() {
   level endon("near_exit_to_stairs");
-  var0 = 0;
+  var_0 = 0;
   wait 13;
 
   while(!scripts\engine\utility::flag("near_exit_to_stairs")) {
-    var1 = ["dx_vom_pri_topfloor_office_280", "dx_vom_pri_topfloor_office_290", "dx_vom_pri_topfloor_office_300"];
+    var_1 = ["dx_vom_pri_topfloor_office_280", "dx_vom_pri_topfloor_office_290", "dx_vom_pri_topfloor_office_300"];
 
-    if(var0 > 2) {
-      var0 = 0;
+    if(var_0 > 2) {
+      var_0 = 0;
     }
 
-    level.price scripts\engine\sp\utility::smart_dialogue(var1[var0]);
-    var0++;
+    level.price scripts\engine\sp\utility::smart_dialogue(var_1[var_0]);
+    var_0++;
     wait 13;
   }
 }
@@ -2068,18 +2068,18 @@ function stop_office_walla() {
 }
 
 function offices_props() {
-  var0 = 33;
+  var_0 = 33;
   level.office_props = [];
 
-  for(var1 = 1; var1 <= var0; var1++) {
-    level.office_props[var1 - 1] = scripts\engine\sp\utility::spawn_anim_model("offices_prop_" + var1);
+  for(var_1 = 1; var_1 <= var_0; var_1++) {
+    level.office_props[var_1 - 1] = scripts\engine\sp\utility::spawn_anim_model("offices_prop_" + var_1);
     thread offices_individual_prop();
   }
 
   scripts\engine\utility::flag_wait("office_door_closed");
 
-  foreach(var3 in level.office_props) {
-    var3 delete();
+  foreach(var_3 in level.office_props) {
+    var_3 delete();
   }
 
   level.office_props = undefined;
@@ -2183,9 +2183,9 @@ function offices_manager() {
   self delete();
 }
 
-function offices_avoid_civs(var0) {
+function offices_avoid_civs(var_0) {
   self.fakeactor_face_anim = 1;
-  self.animname = "office_avoid_civ_" + var0;
+  self.animname = "office_avoid_civ_" + var_0;
   thread scripts\sp\maps\embassy\embassy_util::civ_friendly_fire_think();
   level.ap_offices_chaos thread scripts\common\anim::anim_loop_solo(self, "offices_idle", "stop_avoid_civs");
   scripts\engine\utility::flag_wait("cue_exit_civs");
@@ -2194,8 +2194,8 @@ function offices_avoid_civs(var0) {
   level.ap_offices_chaos thread scripts\common\anim::anim_loop_solo(self, "offices_idle_2");
 
   if(self.animname == "office_avoid_civ_1") {
-    var1 = scripts\engine\sp\utility::spawn_anim_model("offices_prop_avoid");
-    level.ap_offices_chaos thread scripts\common\anim::anim_loop_solo(var1, "offices_chaos_idle", "entitydeleted");
+    var_1 = scripts\engine\sp\utility::spawn_anim_model("offices_prop_avoid");
+    level.ap_offices_chaos thread scripts\common\anim::anim_loop_solo(var_1, "offices_chaos_idle", "entitydeleted");
   }
 
   scripts\engine\utility::flag_wait("office_door_closed");
@@ -2218,16 +2218,16 @@ function offices_keyguy() {
 }
 
 function offices_stairwell_door() {
-  var0 = scripts\sp\maps\embassy\embassy_util::setup_office_door("stairwell_door");
-  var0 scripts\engine\sp\utility::assign_animtree("stairwell_door");
-  var0.og_angles = var0.angles;
-  level.ap_stairwell_door scripts\common\anim::anim_first_frame_solo(var0, "stairwell_door");
+  var_0 = scripts\sp\maps\embassy\embassy_util::setup_office_door("stairwell_door");
+  var_0 scripts\engine\sp\utility::assign_animtree("stairwell_door");
+  var_0.og_angles = var_0.angles;
+  level.ap_stairwell_door scripts\common\anim::anim_first_frame_solo(var_0, "stairwell_door");
   level waittill("price_opening_door");
-  level.ap_stairwell_door thread scripts\common\anim::anim_single_solo(var0, "stairwell_door");
+  level.ap_stairwell_door thread scripts\common\anim::anim_single_solo(var_0, "stairwell_door");
   scripts\engine\utility::flag_wait("passed_door_to_stairs");
-  var0 stopanimScripted();
-  var0 clearanim(var0 scripts\engine\utility::getanim("stairwell_door"), 0.01);
-  var0 rotateTo(var0.og_angles, 0.25);
+  var_0 stopanimScripted();
+  var_0 clearanim(var_0 scripts\engine\utility::getanim("stairwell_door"), 0.01);
+  var_0 rotateTo(var_0.og_angles, 0.25);
   scripts\engine\utility::flag_set("office_door_closed");
   thread stop_office_walla();
   level notify("stop_upstairs_office_alarm_loops");
@@ -2237,18 +2237,18 @@ function offices_stairwell_door() {
 
 function gate_burning_cars() {
   scripts\engine\utility::exploder("black_smoke");
-  var0 = [];
-  var1 = scripts\engine\utility::getStructArray("gate_dst_cars", "targetname");
+  var_0 = [];
+  var_1 = scripts\engine\utility::getStructArray("gate_dst_cars", "targetname");
 
-  foreach(var3 in var1) {
-    var0 = scripts\engine\sp\utility::spawn_anim_model("gate_car", var3.origin, var3.angles);
+  foreach(var_3 in var_1) {
+    var_0 = scripts\engine\sp\utility::spawn_anim_model("gate_car", var_3.origin, var_3.angles);
   }
 
   scripts\engine\utility::flag_wait("bpg_scene_doors_closed");
   scripts\engine\utility::stop_exploder("black_smoke");
 
-  foreach(var6 in var0) {
-    var6 delete();
+  foreach(var_6 in var_0) {
+    var_6 delete();
   }
 }
 
@@ -2290,33 +2290,33 @@ function stairwell_main() {
 }
 
 function stairwell_price() {
-  var0 = scripts\engine\utility::getStruct("ap_stairs_down_b", "targetname");
-  var0 scripts\sp\maps\embassy\embassy_util::anim_reach_solo_skip_offscreen(level.price, "stairwell_b_down", undefined, "stair_b");
+  var_0 = scripts\engine\utility::getStruct("ap_stairs_down_b", "targetname");
+  var_0 scripts\sp\maps\embassy\embassy_util::anim_reach_solo_skip_offscreen(level.price, "stairwell_b_down", undefined, "stair_b");
 
   if(!scripts\engine\utility::flag("stair_c")) {
     if(scripts\engine\utility::flag("stair_b")) {
-      var0 scripts\common\anim::anim_single_solo(level.price, "stairwell_b_down");
+      var_0 scripts\common\anim::anim_single_solo(level.price, "stairwell_b_down");
     } else {
-      var0 scripts\common\anim::anim_single_solo(level.price, "stairwell_b_intro");
-      var0 thread scripts\common\anim::anim_loop_solo(level.price, "stairwell_b_idle", "stop_loop");
+      var_0 scripts\common\anim::anim_single_solo(level.price, "stairwell_b_intro");
+      var_0 thread scripts\common\anim::anim_loop_solo(level.price, "stairwell_b_idle", "stop_loop");
       scripts\engine\utility::flag_wait("stair_b");
-      var0 notify("stop_loop");
-      var0 scripts\common\anim::anim_single_solo(level.price, "stairwell_b_outro");
+      var_0 notify("stop_loop");
+      var_0 scripts\common\anim::anim_single_solo(level.price, "stairwell_b_outro");
     }
   }
 
-  var1 = scripts\engine\utility::getStruct("ap_stairs_down_c", "targetname");
-  var1 scripts\sp\maps\embassy\embassy_util::anim_reach_solo_skip_offscreen(level.price, "stairwell_c_down", undefined, "stair_c");
+  var_1 = scripts\engine\utility::getStruct("ap_stairs_down_c", "targetname");
+  var_1 scripts\sp\maps\embassy\embassy_util::anim_reach_solo_skip_offscreen(level.price, "stairwell_c_down", undefined, "stair_c");
 
   if(!scripts\engine\utility::flag("door_bust")) {
     if(scripts\engine\utility::flag("stair_c")) {
-      var1 scripts\common\anim::anim_single_solo(level.price, "stairwell_c_down");
+      var_1 scripts\common\anim::anim_single_solo(level.price, "stairwell_c_down");
     } else {
-      var1 scripts\common\anim::anim_single_solo(level.price, "stairwell_c_intro");
-      var1 thread scripts\common\anim::anim_loop_solo(level.price, "stairwell_c_idle", "stop_loop");
+      var_1 scripts\common\anim::anim_single_solo(level.price, "stairwell_c_intro");
+      var_1 thread scripts\common\anim::anim_loop_solo(level.price, "stairwell_c_idle", "stop_loop");
       scripts\engine\utility::flag_wait("stair_c");
-      var1 notify("stop_loop");
-      var1 scripts\common\anim::anim_single_solo(level.price, "stairwell_c_outro");
+      var_1 notify("stop_loop");
+      var_1 scripts\common\anim::anim_single_solo(level.price, "stairwell_c_outro");
     }
   }
 
@@ -2324,21 +2324,21 @@ function stairwell_price() {
 }
 
 function sfx_flag_burning() {
-  var0 = spawn("script_origin", (-8106, -2080, 296));
-  var0 scripts\engine\sp\utility::sound_fade_in("emt_fire_flag_lp", 1, 3, 1);
+  var_0 = spawn("script_origin", (-8106, -2080, 296));
+  var_0 scripts\engine\sp\utility::sound_fade_in("emt_fire_flag_lp", 1, 3, 1);
   level waittill("stop_stairwell_loops");
-  var0 scripts\engine\sp\utility::sound_fade_and_delete(5, 1);
+  var_0 scripts\engine\sp\utility::sound_fade_and_delete(5, 1);
 }
 
 function offices_stairwell_door_vo() {
   thread mus_beadvised();
   level waittill("car_explosion_finished");
   wait 4.5;
-  var0 = gettime();
+  var_0 = gettime();
   level thread scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_alx_roof_stairwell_10");
   scripts\engine\utility::flag_wait("door_bust");
-  var1 = lookupsoundlength("dx_vom_alx_roof_stairwell_10") - gettime() - var0;
-  wait max(var1 / 1000, 1.8);
+  var_1 = lookupsoundlength("dx_vom_alx_roof_stairwell_10") - gettime() - var_0;
+  wait max(var_1 / 1000, 1.8);
   level.price scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_pri_roof_stairwell_20", 1);
   wait 0.85;
   level scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_alx_roof_stairwell_22");
@@ -2352,35 +2352,35 @@ function stairwell_molotov() {
   scripts\engine\utility::flag_wait("stair_b");
   thread scripts\engine\utility::play_sound_in_space("embassy_stairwell1_car_explode_lr", (-6374, -2015, 126));
   scripts\engine\utility::exploder("landing_car_explode");
-  var0 = getscriptablearray("veh_emb_stairwell_expl", "targetname")[0];
-  var0 setscriptablepartstate("rootModelManager", "dead");
-  var1 = scripts\engine\utility::getStruct("car_explosion", "targetname");
-  var1.angles = (0, 0, 0);
-  createnavbadplacebybounds(var1.origin, (70, 100, 70), var1.angles);
+  var_0 = getscriptablearray("veh_emb_stairwell_expl", "targetname")[0];
+  var_0 setscriptablepartstate("rootModelManager", "dead");
+  var_1 = scripts\engine\utility::getStruct("car_explosion", "targetname");
+  var_1.angles = (0, 0, 0);
+  createnavbadplacebybounds(var_1.origin, (70, 100, 70), var_1.angles);
 
   if(isDefined(level.gate_overrunners_marine)) {
-    foreach(var3 in level.gate_overrunners_marine) {
-      if(isDefined(var3) && isalive(var3)) {
-        if(distance2dsquared(var1.origin, var3.origin) < squared(150)) {
-          if(istrue(var3.magic_bullet_shield)) {
-            var3 scripts\common\ai::stop_magic_bullet_shield();
+    foreach(var_3 in level.gate_overrunners_marine) {
+      if(isDefined(var_3) && isalive(var_3)) {
+        if(distance2dsquared(var_1.origin, var_3.origin) < squared(150)) {
+          if(istrue(var_3.magic_bullet_shield)) {
+            var_3 scripts\common\ai::stop_magic_bullet_shield();
           }
 
-          var3 kill(var1.origin, level.aq_enforcer, level.aq_enforcer, "MOD_EXPLOSIVE");
+          var_3 kill(var_1.origin, level.aq_enforcer, level.aq_enforcer, "MOD_EXPLOSIVE");
         }
       }
     }
   }
 
   if(isDefined(level.gate_overrunners_aq)) {
-    foreach(var6 in level.gate_overrunners_aq) {
-      if(isDefined(var6) && isalive(var6)) {
-        if(distance2dsquared(var1.origin, var6.origin) < squared(150)) {
-          if(istrue(var6.magic_bullet_shield)) {
-            var6 scripts\common\ai::stop_magic_bullet_shield();
+    foreach(var_6 in level.gate_overrunners_aq) {
+      if(isDefined(var_6) && isalive(var_6)) {
+        if(distance2dsquared(var_1.origin, var_6.origin) < squared(150)) {
+          if(istrue(var_6.magic_bullet_shield)) {
+            var_6 scripts\common\ai::stop_magic_bullet_shield();
           }
 
-          var6 kill(var1.origin, level.price, level.price, "MOD_EXPLOSIVE");
+          var_6 kill(var_1.origin, level.price, level.price, "MOD_EXPLOSIVE");
         }
       }
     }
@@ -2390,35 +2390,35 @@ function stairwell_molotov() {
 }
 
 function stairwell_second_window() {
-  var0 = scripts\engine\utility::getStruct("ap_stairwell_second_window", "targetname");
-  var1 = scripts\engine\sp\utility::spawn_anim_model("stair_car");
-  var1 attach("veh8_civ_lnd_skilo_lights", "tag_body_animate", 1);
-  var2 = scripts\engine\sp\utility::spawn_targetname("stairwell_second_window_civ");
-  var2.animname = "civ";
-  var0 scripts\common\anim::anim_first_frame_solo(var1, "stairwell_second_window");
-  var0 scripts\common\anim::anim_first_frame_solo(var2, "stairwell_second_window");
+  var_0 = scripts\engine\utility::getStruct("ap_stairwell_second_window", "targetname");
+  var_1 = scripts\engine\sp\utility::spawn_anim_model("stair_car");
+  var_1 attach("veh8_civ_lnd_skilo_lights", "tag_body_animate", 1);
+  var_2 = scripts\engine\sp\utility::spawn_targetname("stairwell_second_window_civ");
+  var_2.animname = "civ";
+  var_0 scripts\common\anim::anim_first_frame_solo(var_1, "stairwell_second_window");
+  var_0 scripts\common\anim::anim_first_frame_solo(var_2, "stairwell_second_window");
   scripts\engine\utility::flag_wait("office_door_closed");
   scripts\engine\utility::flag_wait("stair_b");
   playmayhem("vfx_mayh_embassy_flag_burn_right");
   scripts\engine\utility::exploder("flag_fire");
-  var3 = scripts\engine\sp\utility::spawn_targetname("stairwell_second_window_aq");
-  var3.animname = "aq";
-  var3 scripts\sp\fakeactor::set_do_arrivals(0);
-  var3 scripts\sp\fakeactor::take_control();
-  var0 scripts\common\anim::anim_first_frame_solo(var3, "stairwell_second_window");
-  scripts\sp\maps\embassy\embassy_util::wait_scene_on_screen_flag([var3, var2, var1], "door_bust");
+  var_3 = scripts\engine\sp\utility::spawn_targetname("stairwell_second_window_aq");
+  var_3.animname = "aq";
+  var_3 scripts\sp\fakeactor::set_do_arrivals(0);
+  var_3 scripts\sp\fakeactor::take_control();
+  var_0 scripts\common\anim::anim_first_frame_solo(var_3, "stairwell_second_window");
+  scripts\sp\maps\embassy\embassy_util::wait_scene_on_screen_flag([var_3, var_2, var_1], "door_bust");
   thread audio_start_stairwell_car_scene();
   scripts\engine\utility::delaythread(6.15, &scripts\engine\utility::exploder, "stairwell_bloodpool");
   thread stairwell_runners("stairwell_runner");
-  var0 thread scripts\common\anim::anim_single_solo(var2, "stairwell_second_window");
-  var0 thread scripts\common\anim::anim_single_solo(var1, "stairwell_second_window");
-  var0 scripts\common\anim::anim_single_solo(var3, "stairwell_second_window");
-  var3 scripts\sp\fakeactor::release_control();
+  var_0 thread scripts\common\anim::anim_single_solo(var_2, "stairwell_second_window");
+  var_0 thread scripts\common\anim::anim_single_solo(var_1, "stairwell_second_window");
+  var_0 scripts\common\anim::anim_single_solo(var_3, "stairwell_second_window");
+  var_3 scripts\sp\fakeactor::release_control();
   scripts\engine\utility::flag_wait("bpg_scene_doors_closed");
   killmayhem("vfx_mayh_embassy_flag_burn_right");
 
-  foreach(var5 in [var2, var1]) {
-    var5 delete();
+  foreach(var_5 in [var_2, var_1]) {
+    var_5 delete();
   }
 }
 
@@ -2430,32 +2430,32 @@ function audio_start_stairwell_car_scene() {
   level.stairwell_crowd_car_sound thread scripts\engine\sp\utility::sound_fade_and_delete(5, 1);
 }
 
-function stairwell_runners(var0) {
-  var1 = getspawnerarray(var0);
+function stairwell_runners(var_0) {
+  var_1 = getspawnerarray(var_0);
 
-  foreach(var3 in var1) {
+  foreach(var_3 in var_1) {
     thread stairwell_runner_respawner();
   }
 }
 
 function stairwell_runner_respawner() {
-  var0 = undefined;
+  var_0 = undefined;
 
   while(!scripts\engine\utility::flag("md_close_door")) {
     self.count = 1;
-    var0 = scripts\engine\sp\utility::spawn_ai();
-    var0.ignoreme = 1;
-    var0 scripts\sp\fakeactor::set_do_arrivals(0);
-    var0 thread scripts\sp\maps\embassy\embassy_util::hide_offscreen_shadow(1000);
+    var_0 = scripts\engine\sp\utility::spawn_ai();
+    var_0.ignoreme = 1;
+    var_0 scripts\sp\fakeactor::set_do_arrivals(0);
+    var_0 thread scripts\sp\maps\embassy\embassy_util::hide_offscreen_shadow(1000);
 
     if(!scripts\engine\utility::flag("md_close_door")) {
-      var0 scripts\engine\utility::waittill_any("death", "entitydeleted");
+      var_0 scripts\engine\utility::waittill_any("death", "entitydeleted");
       wait randomfloatrange(0.5, 1);
     }
   }
 
-  if(isDefined(var0) && isalive(var0)) {
-    var0 delete();
+  if(isDefined(var_0) && isalive(var_0)) {
+    var_0 delete();
     return;
   }
 }
@@ -2487,24 +2487,24 @@ function bp_glass_metal_detectors_start() {
 function bp_glass_metal_detectors_main() {
   playFX(scripts\engine\utility::getfx("vfx_embassy_office_gas"), (-6203.95, -2502.72, 34), anglesToForward((0, 90, 0)));
   level.ap_bpg_scene = scripts\engine\utility::getStruct("ap_bpg_scene", "targetname");
-  var0 = scripts\engine\utility::getStruct("ap_stairs_down_d", "targetname");
+  var_0 = scripts\engine\utility::getStruct("ap_stairs_down_d", "targetname");
   thread bpg_md_aq();
-  thread bpg_md_door(var0);
-  var1 = getspawnerarray("bpg_md_door_bust");
-  scripts\engine\sp\utility::array_spawn_function(var1, &bpg_md_door_civ, var0);
-  scripts\engine\sp\utility::array_spawn(var1);
-  var2 = getspawnerarray("bpg_md_cowering");
-  scripts\engine\sp\utility::array_spawn_function(var2, &bpg_md_cowering_civ);
-  scripts\engine\sp\utility::array_spawn(var2);
+  thread bpg_md_door(var_0);
+  var_1 = getspawnerarray("bpg_md_door_bust");
+  scripts\engine\sp\utility::array_spawn_function(var_1, &bpg_md_door_civ, var_0);
+  scripts\engine\sp\utility::array_spawn(var_1);
+  var_2 = getspawnerarray("bpg_md_cowering");
+  scripts\engine\sp\utility::array_spawn_function(var_2, &bpg_md_cowering_civ);
+  scripts\engine\sp\utility::array_spawn(var_2);
   scripts\engine\utility::flag_wait("price_passed_stair_c");
-  var0 scripts\sp\anim::anim_reach_solo(level.price, "stairwell_d_break_door");
+  var_0 scripts\sp\anim::anim_reach_solo(level.price, "stairwell_d_break_door");
   scripts\engine\utility::flag_wait("door_bust");
   thread audio_aq_in_other_room_banging();
   thread audio_bpg_entrance_alarm_loop_start();
   scripts\engine\sp\utility::autosave_by_name("bpg_metal_detectors");
   scripts\engine\utility::flag_set("price_busting_through");
   level notify("card_reader_swap");
-  var0 scripts\common\anim::anim_single_solo(level.price, "stairwell_d_break_door");
+  var_0 scripts\common\anim::anim_single_solo(level.price, "stairwell_d_break_door");
   thread bpg_md_price();
   scripts\engine\utility::flag_wait("bpg_scene_preload");
   scripts\engine\sp\utility::transient_unload("embassy_streets_field_tr");
@@ -2512,26 +2512,26 @@ function bp_glass_metal_detectors_main() {
 }
 
 function audio_aq_in_other_room_banging() {
-  var0 = (-6544, -2691, 91);
-  var1 = spawn("script_origin", var0);
-  var1 playLoopSound("scn_embassy_aq_banging_behind_door_lp");
+  var_0 = (-6544, -2691, 91);
+  var_1 = spawn("script_origin", var_0);
+  var_1 playLoopSound("scn_embassy_aq_banging_behind_door_lp");
   level waittill("audio_stop_banging");
   wait 0.8;
-  var1 scripts\engine\sp\utility::sound_fade_and_delete(1, 1);
+  var_1 scripts\engine\sp\utility::sound_fade_and_delete(1, 1);
 }
 
-function bpg_md_door(var0) {
-  var1 = scripts\sp\maps\embassy\embassy_util::setup_office_door("md_stairwell_door");
-  var1 scripts\engine\sp\utility::assign_animtree("lower_stairwell_door");
-  var1.og_angles = var1.angles;
-  var0 thread scripts\common\anim::anim_first_frame_solo(var1, "stairwell_d_break_door");
+function bpg_md_door(var_0) {
+  var_1 = scripts\sp\maps\embassy\embassy_util::setup_office_door("md_stairwell_door");
+  var_1 scripts\engine\sp\utility::assign_animtree("lower_stairwell_door");
+  var_1.og_angles = var_1.angles;
+  var_0 thread scripts\common\anim::anim_first_frame_solo(var_1, "stairwell_d_break_door");
   scripts\engine\utility::flag_wait("price_busting_through");
-  var0 scripts\common\anim::anim_single_solo(var1, "stairwell_d_break_door");
+  var_0 scripts\common\anim::anim_single_solo(var_1, "stairwell_d_break_door");
   wait 0.2;
   scripts\engine\utility::flag_wait("md_close_door");
   level notify("stop_stairwell_loops");
-  var1 clearanim(var1 scripts\engine\utility::getanim("stairwell_d_break_door"), 0);
-  var1 rotateTo(var1.og_angles, 0.25, 0.01, 0.01);
+  var_1 clearanim(var_1 scripts\engine\utility::getanim("stairwell_d_break_door"), 0);
+  var_1 rotateTo(var_1.og_angles, 0.25, 0.01, 0.01);
 }
 
 function bpg_md_screens() {
@@ -2539,15 +2539,15 @@ function bpg_md_screens() {
   cinematicingameloop("sp_emb_screens_bottom_floor", 1, 1);
 }
 
-function bpg_md_door_civ(var0) {
+function bpg_md_door_civ(var_0) {
   self.fakeactor_face_anim = 1;
   self.animname = self.script_animname;
   thread scripts\sp\maps\embassy\embassy_util::civ_friendly_fire_think();
   thread scripts\sp\maps\embassy\embassy_util::hide_offscreen_shadow(800);
-  var0 thread scripts\common\anim::anim_first_frame_solo(self, "stairwell_d_break_door");
+  var_0 thread scripts\common\anim::anim_first_frame_solo(self, "stairwell_d_break_door");
   scripts\engine\utility::flag_wait("price_busting_through");
-  var0 scripts\common\anim::anim_single_solo(self, "stairwell_d_break_door");
-  var0 thread scripts\common\anim::anim_loop_solo(self, "stairwell_d_break_door_idle");
+  var_0 scripts\common\anim::anim_single_solo(self, "stairwell_d_break_door");
+  var_0 thread scripts\common\anim::anim_loop_solo(self, "stairwell_d_break_door_idle");
   scripts\engine\utility::flag_wait("bpg_scene_clear_exit_door");
   self delete();
 }
@@ -2572,27 +2572,27 @@ function bpg_md_aq() {
   level.aq_enforcer thread scripts\engine\sp\utility::place_weapon_on(level.aq_enforcer.sidearm, "left");
   thread bpg_md_aq_stack_up_at_door();
   scripts\engine\utility::array_thread(level.aq_enforcer_entourage, &bpg_md_aq_stack_up_at_door);
-  var0 = 1 + level.aq_enforcer_entourage.size;
+  var_0 = 1 + level.aq_enforcer_entourage.size;
 
-  while(level.ap_bpg_md.stack_up_count < var0) {
+  while(level.ap_bpg_md.stack_up_count < var_0) {
     waitframe();
   }
 
   scripts\engine\utility::flag_wait("price_busting_through");
   level notify("aq_busting_through");
-  var1 = scripts\engine\sp\utility::array_spawn_targetname("security");
+  var_1 = scripts\engine\sp\utility::array_spawn_targetname("security");
 
-  foreach(var3 in var1) {
-    var3 scripts\engine\sp\utility::clear_deathanim();
-    var3.skipdeathanim = 1;
-    var3.a.nodeath = 1;
-    var3.noragdoll = 1;
-    var3.animname = "security_" + var4 + 1;
+  foreach(var_3 in var_1) {
+    var_3 scripts\engine\sp\utility::clear_deathanim();
+    var_3.skipdeathanim = 1;
+    var_3.a.nodeath = 1;
+    var_3.noragdoll = 1;
+    var_3.animname = "security_" + var_4 + 1;
   }
 
   thread bpg_md_aq_first_wave(level.aq_enforcer);
   scripts\engine\utility::array_thread(level.aq_enforcer_entourage, &bpg_md_aq_first_wave, 0);
-  scripts\engine\utility::array_thread(var1, &bpg_md_aq_first_wave, 1);
+  scripts\engine\utility::array_thread(var_1, &bpg_md_aq_first_wave, 1);
   scripts\engine\utility::delaythread(1.5, &bpg_md_one_off_table);
 }
 
@@ -2602,11 +2602,11 @@ function bpg_md_aq_stack_up_at_door() {
   level.ap_bpg_md.stack_up_count++;
 }
 
-function bpg_md_aq_first_wave(var0) {
+function bpg_md_aq_first_wave(var_0) {
   self endon("death");
   self endon("entitydeleted");
 
-  if(!var0) {
+  if(!var_0) {
     level endon("bpg_scene_preload");
   }
 
@@ -2618,44 +2618,44 @@ function bpg_md_aq_first_wave(var0) {
 function bpg_md_first_wave_objects() {
   level.bpg_md_table = getEnt("md_table", "targetname");
   level.bpg_md_table scripts\engine\sp\utility::assign_animtree("md_table");
-  var0 = scripts\sp\maps\embassy\embassy_util::setup_office_door("md_entrance_door_right");
-  var0 scripts\engine\sp\utility::assign_animtree("md_door_2");
-  var1 = scripts\sp\maps\embassy\embassy_util::setup_office_door("md_entrance_door_left");
-  var1 scripts\engine\sp\utility::assign_animtree("md_door_1");
-  var2 = scripts\sp\maps\embassy\embassy_util::setup_office_door("md_exit_door_right");
-  var2 scripts\engine\sp\utility::assign_animtree("md_door_3");
-  var3 = scripts\sp\maps\embassy\embassy_util::setup_office_door("md_exit_door_left");
-  var3 scripts\engine\sp\utility::assign_animtree("md_door_4");
-  var4 = getEnt("md_office_chair", "targetname");
-  var4 scripts\engine\sp\utility::assign_animtree("md_office_chair");
+  var_0 = scripts\sp\maps\embassy\embassy_util::setup_office_door("md_entrance_door_right");
+  var_0 scripts\engine\sp\utility::assign_animtree("md_door_2");
+  var_1 = scripts\sp\maps\embassy\embassy_util::setup_office_door("md_entrance_door_left");
+  var_1 scripts\engine\sp\utility::assign_animtree("md_door_1");
+  var_2 = scripts\sp\maps\embassy\embassy_util::setup_office_door("md_exit_door_right");
+  var_2 scripts\engine\sp\utility::assign_animtree("md_door_3");
+  var_3 = scripts\sp\maps\embassy\embassy_util::setup_office_door("md_exit_door_left");
+  var_3 scripts\engine\sp\utility::assign_animtree("md_door_4");
+  var_4 = getEnt("md_office_chair", "targetname");
+  var_4 scripts\engine\sp\utility::assign_animtree("md_office_chair");
   level.ap_bpg_md thread scripts\common\anim::anim_first_frame_solo(level.bpg_md_table, "bpg_md_first_wave");
-  level.ap_bpg_md thread scripts\common\anim::anim_first_frame_solo(var0, "bpg_md_first_wave");
-  level.ap_bpg_md thread scripts\common\anim::anim_first_frame_solo(var1, "bpg_md_first_wave");
-  level.ap_bpg_md thread scripts\common\anim::anim_first_frame_solo(var2, "bpg_md_first_wave");
-  level.ap_bpg_md thread scripts\common\anim::anim_first_frame_solo(var3, "bpg_md_first_wave");
-  level.ap_bpg_md thread scripts\common\anim::anim_first_frame_solo(var4, "bpg_md_first_wave");
+  level.ap_bpg_md thread scripts\common\anim::anim_first_frame_solo(var_0, "bpg_md_first_wave");
+  level.ap_bpg_md thread scripts\common\anim::anim_first_frame_solo(var_1, "bpg_md_first_wave");
+  level.ap_bpg_md thread scripts\common\anim::anim_first_frame_solo(var_2, "bpg_md_first_wave");
+  level.ap_bpg_md thread scripts\common\anim::anim_first_frame_solo(var_3, "bpg_md_first_wave");
+  level.ap_bpg_md thread scripts\common\anim::anim_first_frame_solo(var_4, "bpg_md_first_wave");
   level waittill("aq_busting_through");
-  thread bpg_md_aq_first_wave(var0);
-  thread bpg_md_aq_first_wave(var1);
-  thread bpg_md_aq_first_wave(var2);
-  thread bpg_md_aq_first_wave(var3);
-  thread bpg_md_aq_first_wave(var4);
+  thread bpg_md_aq_first_wave(var_0);
+  thread bpg_md_aq_first_wave(var_1);
+  thread bpg_md_aq_first_wave(var_2);
+  thread bpg_md_aq_first_wave(var_3);
+  thread bpg_md_aq_first_wave(var_4);
   wait 1.5;
   thread scripts\engine\utility::play_sound_in_space("embassy_guys_break_into_lobby", (-6933, -2554, 92));
   setmusicstate("mx_embassy_lobby_invade");
-  var1 scripts\sp\maps\embassy\embassy_util::connect_office_door_paths();
-  var0 scripts\sp\maps\embassy\embassy_util::connect_office_door_paths();
+  var_1 scripts\sp\maps\embassy\embassy_util::connect_office_door_paths();
+  var_0 scripts\sp\maps\embassy\embassy_util::connect_office_door_paths();
 }
 
 function bpg_md_price() {
   level endon("bpg_scene_near_start");
   level.price scripts\common\ai::disable_arrivals();
-  var0 = scripts\engine\utility::getStruct("bpg_scene_price_entrance_lead_in", "targetname");
-  var1 = vectorNormalize(var0.origin - level.price.origin);
-  var2 = vectorNormalize(level.player.origin - level.price.origin);
+  var_0 = scripts\engine\utility::getStruct("bpg_scene_price_entrance_lead_in", "targetname");
+  var_1 = vectorNormalize(var_0.origin - level.price.origin);
+  var_2 = vectorNormalize(level.player.origin - level.price.origin);
   level.price.og_turnrate = level.price.turnrate;
 
-  if(vectordot(var1, var2) > 0) {
+  if(vectordot(var_1, var_2) > 0) {
     level.price scripts\common\utility::clear_demeanor_override();
     level.price scripts\engine\utility::set_movement_speed(240);
     level.price.turnrate = 1;
@@ -2663,7 +2663,7 @@ function bpg_md_price() {
     level.price.turnrate = 0.1;
   }
 
-  level.price scripts\sp\maps\embassy\embassy_util::go_to_targetname_helper(var0);
+  level.price scripts\sp\maps\embassy\embassy_util::go_to_targetname_helper(var_0);
   level.price scripts\common\ai::enable_arrivals();
   level.price.turnrate = level.price.og_turnrate;
   level.price.og_turnrate = undefined;
@@ -2676,13 +2676,13 @@ function bpg_md_price() {
 }
 
 function bpg_scene_pre_vo() {
-  var0 = scripts\engine\utility::getStruct("ap_bpg_scene", "targetname");
-  var1 = spawn("script_origin", var0.origin);
-  var2 = spawn("script_origin", var0.origin);
+  var_0 = scripts\engine\utility::getStruct("ap_bpg_scene", "targetname");
+  var_1 = spawn("script_origin", var_0.origin);
+  var_2 = spawn("script_origin", var_0.origin);
   scripts\engine\utility::flag_wait("bpg_scene_near_start");
   level waittill("bpg_scene_enforcer_done");
-  var1 delete();
-  var2 delete();
+  var_1 delete();
+  var_2 delete();
 }
 
 function bpg_md_nag() {
@@ -2699,14 +2699,14 @@ function forward_nag_notify() {
 }
 
 function bpg_md_one_off_table() {
-  var0 = scripts\engine\sp\utility::spawn_targetname("aq_one_off_table");
-  var0.animname = "aq_one_off_table";
-  var0 scripts\sp\maps\embassy\embassy_util::make_ai_story_only();
-  var0 thread scripts\sp\maps\embassy\embassy_util::hide_offscreen_shadow(800);
-  level.ap_bpg_md scripts\sp\anim::anim_reach_solo(var0, "bpg_md_first_wave");
+  var_0 = scripts\engine\sp\utility::spawn_targetname("aq_one_off_table");
+  var_0.animname = "aq_one_off_table";
+  var_0 scripts\sp\maps\embassy\embassy_util::make_ai_story_only();
+  var_0 thread scripts\sp\maps\embassy\embassy_util::hide_offscreen_shadow(800);
+  level.ap_bpg_md scripts\sp\anim::anim_reach_solo(var_0, "bpg_md_first_wave");
   level.ap_bpg_md thread scripts\common\anim::anim_single_solo(level.bpg_md_table, "bpg_md_first_wave");
-  level.ap_bpg_md scripts\common\anim::anim_single_solo(var0, "bpg_md_first_wave");
-  var0 delete();
+  level.ap_bpg_md scripts\common\anim::anim_single_solo(var_0, "bpg_md_first_wave");
+  var_0 delete();
   scripts\engine\utility::flag_wait("bpg_scene_clear_exit_door");
   level.bpg_md_table delete();
   level.bpg_md_table = undefined;
@@ -2716,44 +2716,44 @@ function bp_glass_metal_detectors_catchup() {
   scripts\engine\utility::flag_set("md_close_door");
 }
 
-function civ_exit_door_store_enterers(var0) {
-  var0.trigger = getEnt("truck_office_near_civilian_exit_door", "targetname");
+function civ_exit_door_store_enterers(var_0) {
+  var_0.trigger = getEnt("truck_office_near_civilian_exit_door", "targetname");
 
   while(!scripts\engine\utility::flag("reached_basement")) {
-    var0.trigger waittill("trigger", var1);
-    var0.civs[var0.civs.size] = var1;
-    var0 notify("civ_entered");
+    var_0.trigger waittill("trigger", var_1);
+    var_0.civs[var_0.civs.size] = var_1;
+    var_0 notify("civ_entered");
   }
 }
 
 function handle_civ_exit_door() {
-  var0 = getEnt("door_civilian_exit", "targetname");
-  var0.civs = [];
-  var0.closed_angles = var0.angles;
-  var0.open_angles = var0.angles + (0, 120, 0);
-  var0.open_time = 0.5;
-  var0.close_time = 0.25;
-  var0.player_clip = getEnt("civ_exit_door_col", "targetname");
-  var0.player_clip.closed = var0.player_clip.origin;
-  var0.player_clip.open = var0.player_clip localtoworldcoords((64, 0, 0));
-  thread civ_exit_door_store_enterers(var0);
+  var_0 = getEnt("door_civilian_exit", "targetname");
+  var_0.civs = [];
+  var_0.closed_angles = var_0.angles;
+  var_0.open_angles = var_0.angles + (0, 120, 0);
+  var_0.open_time = 0.5;
+  var_0.close_time = 0.25;
+  var_0.player_clip = getEnt("civ_exit_door_col", "targetname");
+  var_0.player_clip.closed = var_0.player_clip.origin;
+  var_0.player_clip.open = var_0.player_clip localtoworldcoords((64, 0, 0));
+  thread civ_exit_door_store_enterers(var_0);
 
   while(!scripts\engine\utility::flag("reached_basement")) {
-    while(var0.civs.size == 0) {
+    while(var_0.civs.size == 0) {
       wait 0.1;
     }
 
-    var0.player_clip moveTo(var0.player_clip.open, var0.open_time, 0.1, 0.1);
-    var0 rotateTo(var0.open_angles, var0.open_time);
-    wait var0.open_time;
-    var1 = 1;
+    var_0.player_clip moveTo(var_0.player_clip.open, var_0.open_time, 0.1, 0.1);
+    var_0 rotateTo(var_0.open_angles, var_0.open_time);
+    wait var_0.open_time;
+    var_1 = 1;
 
-    while(var1) {
-      foreach(var3 in var0.civs) {
-        if(isDefined(var3) && isalive(var3)) {
-          var1 = var3 istouching(var0.trigger);
+    while(var_1) {
+      foreach(var_3 in var_0.civs) {
+        if(isDefined(var_3) && isalive(var_3)) {
+          var_1 = var_3 istouching(var_0.trigger);
 
-          if(var1) {
+          if(var_1) {
             break;
           }
         }
@@ -2762,10 +2762,10 @@ function handle_civ_exit_door() {
       wait 0.1;
     }
 
-    var0.civs = [];
-    var0.player_clip moveTo(var0.player_clip.closed, var0.close_time, 0.1, 0.1);
-    var0 rotateTo(var0.closed_angles, var0.close_time);
-    wait var0.close_time;
+    var_0.civs = [];
+    var_0.player_clip moveTo(var_0.player_clip.closed, var_0.close_time, 0.1, 0.1);
+    var_0 rotateTo(var_0.closed_angles, var_0.close_time);
+    wait var_0.close_time;
   }
 }
 
@@ -2804,21 +2804,21 @@ function bp_glass_scene_main() {
   thread handle_civ_exit_door();
   bpg_scene_marine_spawn();
   thread bpg_scene_marine();
-  var0 = getspawner("bpg_scene_mother", "targetname");
-  var1 = var0 scripts\engine\sp\utility::spawn_ai(1);
-  var1 thread scripts\sp\maps\embassy\embassy_util::civ_friendly_fire_think();
+  var_0 = getspawner("bpg_scene_mother", "targetname");
+  var_1 = var_0 scripts\engine\sp\utility::spawn_ai(1);
+  var_1 thread scripts\sp\maps\embassy\embassy_util::civ_friendly_fire_think();
   thread bpg_scene_mother();
   thread scripts\sp\maps\embassy\embassy_util::swap_card_reader("enforcer_card_reader");
-  var2 = getspawner("bpg_scene_key_civ", "targetname");
-  var2 scripts\engine\sp\utility::add_spawn_function(&bpg_scene_key_civ);
-  var3 = var2 scripts\engine\sp\utility::spawn_ai();
-  var4 = getspawnerarray("bpg_scene_civs_otherside");
-  scripts\engine\sp\utility::array_spawn_function(var4, &bpg_scene_civ_otherside);
-  var5 = scripts\engine\sp\utility::array_spawn(var4);
-  var6 = getspawnerarray("bpg_scene_civs");
-  scripts\engine\sp\utility::array_spawn_function(var6, &bpg_scene_civ_escape);
-  var7 = scripts\engine\sp\utility::array_spawn(var6);
-  GscBinSkip0(0x2e, var7.size, var3, var1, level.bpg_scene_marine);
+  var_2 = getspawner("bpg_scene_key_civ", "targetname");
+  var_2 scripts\engine\sp\utility::add_spawn_function(&bpg_scene_key_civ);
+  var_3 = var_2 scripts\engine\sp\utility::spawn_ai();
+  var_4 = getspawnerarray("bpg_scene_civs_otherside");
+  scripts\engine\sp\utility::array_spawn_function(var_4, &bpg_scene_civ_otherside);
+  var_5 = scripts\engine\sp\utility::array_spawn(var_4);
+  var_6 = getspawnerarray("bpg_scene_civs");
+  scripts\engine\sp\utility::array_spawn_function(var_6, &bpg_scene_civ_escape);
+  var_7 = scripts\engine\sp\utility::array_spawn(var_6);
+  GscBinSkip0(0x2e, var_7.size, var_3, var_1, level.bpg_scene_marine);
 }
 
 function mus_enforcer_door() {
@@ -2833,17 +2833,17 @@ function bpg_scene_player_interact() {
   bpg_scene_player_interact_struggle();
 
   if(scripts\engine\utility::flag("bpg_scene_interact_success")) {
-    foreach(var1 in level.aq_enforcer_entourage) {
-      var2 = var1 scripts\engine\utility::getanim("bpg_scene");
-      var1 setanimrate(var2, 0);
+    foreach(var_1 in level.aq_enforcer_entourage) {
+      var_2 = var_1 scripts\engine\utility::getanim("bpg_scene");
+      var_1 setanimrate(var_2, 0);
     }
 
-    foreach(var5 in level.ap_bpg_scene.civs) {
-      var2 = var5 scripts\engine\utility::getanim("bpg_scene");
-      var5 setanimrate(var2, 0);
+    foreach(var_5 in level.ap_bpg_scene.civs) {
+      var_2 = var_5 scripts\engine\utility::getanim("bpg_scene");
+      var_5 setanimrate(var_2, 0);
 
-      if(var5.animname == "bpg_scene_civ_mother" && var5 iswaitingonsound()) {
-        var5 thread scripts\engine\sp\utility::smart_dialogue("dx_vom_cf2_reception_bulletproof_33");
+      if(var_5.animname == "bpg_scene_civ_mother" && var_5 iswaitingonsound()) {
+        var_5 thread scripts\engine\sp\utility::smart_dialogue("dx_vom_cf2_reception_bulletproof_33");
       }
     }
 
@@ -2890,36 +2890,36 @@ function bpg_scene_player_interact_death() {
 
 function bpg_scene_player_interact_struggle() {
   level endon("kid_killed");
-  var0 = 15.3;
-  var1 = 18.56;
-  var2 = level.aq_enforcer scripts\engine\utility::getanim("bpg_scene");
-  var3 = level.aq_enforcer getanimtime(var2);
-  var4 = getanimlength(var2);
-  var5 = var3 * var4;
-  var6 = 0;
+  var_0 = 15.3;
+  var_1 = 18.56;
+  var_2 = level.aq_enforcer scripts\engine\utility::getanim("bpg_scene");
+  var_3 = level.aq_enforcer getanimtime(var_2);
+  var_4 = getanimlength(var_2);
+  var_5 = var_3 * var_4;
+  var_6 = 0;
 
-  if(var5 > var1) {
-    var6 = 1;
-    var0 = 21.8;
-    var1 = 26.3;
+  if(var_5 > var_1) {
+    var_6 = 1;
+    var_0 = 21.8;
+    var_1 = 26.3;
   }
 
-  var7 = 3;
-  var8 = getanimlength(level.player.rig scripts\engine\utility::getanim("bpg_scene_door_struggle")) / var7;
-  var9 = var5 + var8;
-  var10 = var7;
+  var_7 = 3;
+  var_8 = getanimlength(level.player.rig scripts\engine\utility::getanim("bpg_scene_door_struggle")) / var_7;
+  var_9 = var_5 + var_8;
+  var_10 = var_7;
 
-  if(var9 > var0 && var9 < var1) {
-    if(var6) {
+  if(var_9 > var_0 && var_9 < var_1) {
+    if(var_6) {
       level.ap_bpg_scene.kid_ran = 1;
     }
 
-    var11 = var1 - var9 + var8;
-    var10 = var8 / var11 * var7;
+    var_11 = var_1 - var_9 + var_8;
+    var_10 = var_8 / var_11 * var_7;
   }
 
-  level.ap_bpg_scene.door_latch scripts\engine\utility::delaycall(0.05, &setanimrate, level.ap_bpg_scene.door_latch scripts\engine\utility::getanim("bpg_scene_door_struggle"), var10);
-  level.player.rig scripts\engine\utility::delaycall(0.05, &setanimrate, level.player.rig scripts\engine\utility::getanim("bpg_scene_door_struggle"), var10);
+  level.ap_bpg_scene.door_latch scripts\engine\utility::delaycall(0.05, &setanimrate, level.ap_bpg_scene.door_latch scripts\engine\utility::getanim("bpg_scene_door_struggle"), var_10);
+  level.player.rig scripts\engine\utility::delaycall(0.05, &setanimrate, level.player.rig scripts\engine\utility::getanim("bpg_scene_door_struggle"), var_10);
   level.ap_bpg_scene thread scripts\common\anim::anim_single_solo(level.ap_bpg_scene.door_latch, "bpg_scene_door_struggle");
   level.ap_bpg_scene scripts\common\anim::anim_single_solo(level.player.rig, "bpg_scene_door_struggle");
   scripts\engine\utility::flag_set("bpg_scene_interact_success");
@@ -2982,8 +2982,8 @@ function bpg_scene_aq_basher() {
   }
 
   self.animname = "aq_basher_" + level.ap_bpg_scene.basher_count;
-  var0 = scripts\sp\utility::make_weapon("iw8_ar_akilo47");
-  scripts\anim\shared::forceuseweapon(var0, "primary");
+  var_0 = scripts\sp\utility::make_weapon("iw8_ar_akilo47");
+  scripts\anim\shared::forceuseweapon(var_0, "primary");
   thread scripts\sp\maps\embassy\embassy_util::hide_offscreen_shadow(800);
   scripts\sp\fakeactor::take_control();
   level.ap_bpg_scene thread scripts\common\anim::anim_first_frame_solo(self, "bpg_scene");
@@ -2993,16 +2993,16 @@ function bpg_scene_aq_basher() {
 }
 
 function bpg_scene_aq_basher_crowbar() {
-  var0 = scripts\engine\sp\utility::spawn_anim_model("bpg_scene_crowbar");
-  level.ap_bpg_scene thread scripts\common\anim::anim_first_frame_solo(var0, "bpg_scene");
+  var_0 = scripts\engine\sp\utility::spawn_anim_model("bpg_scene_crowbar");
+  level.ap_bpg_scene thread scripts\common\anim::anim_first_frame_solo(var_0, "bpg_scene");
   scripts\engine\utility::flag_wait("bpg_scene_near_start");
-  level.ap_bpg_scene scripts\common\anim::anim_single_solo(var0, "bpg_scene");
-  var0 delete();
+  level.ap_bpg_scene scripts\common\anim::anim_single_solo(var_0, "bpg_scene");
+  var_0 delete();
 }
 
 function bpg_scene_marine_spawn() {
-  var0 = getspawner("bpg_scene_marine", "targetname");
-  level.bpg_scene_marine = var0 scripts\engine\sp\utility::spawn_ai(1);
+  var_0 = getspawner("bpg_scene_marine", "targetname");
+  level.bpg_scene_marine = var_0 scripts\engine\sp\utility::spawn_ai(1);
 }
 
 function bpg_scene_marine() {
@@ -3026,25 +3026,25 @@ function bpg_scene_marine() {
 
 function skip_mother_and_marine() {
   level endon("marine_and_mother_out");
-  var0 = level.bpg_scene_marine scripts\engine\utility::getanim("bpg_scene_exit");
-  var1 = level.bpg_scene_marine getanimtime(var0);
-  var2 = scripts\engine\utility::getStruct("bpg_scene_tele_marine_eye", "targetname").origin;
-  var3 = scripts\engine\utility::getStruct("bpg_scene_tele_mother_eye", "targetname").origin;
+  var_0 = level.bpg_scene_marine scripts\engine\utility::getanim("bpg_scene_exit");
+  var_1 = level.bpg_scene_marine getanimtime(var_0);
+  var_2 = scripts\engine\utility::getStruct("bpg_scene_tele_marine_eye", "targetname").origin;
+  var_3 = scripts\engine\utility::getStruct("bpg_scene_tele_mother_eye", "targetname").origin;
 
-  while(var1 < 0.68) {
-    var1 = level.bpg_scene_marine getanimtime(var0);
+  while(var_1 < 0.68) {
+    var_1 = level.bpg_scene_marine getanimtime(var_0);
 
-    if(scripts\engine\utility::flag("bpg_scene_clear_exit_door") && !scripts\engine\sp\utility::player_looking_at(level.bpg_scene_marine getEye()) && !scripts\engine\sp\utility::player_looking_at(self getEye()) && !scripts\engine\sp\utility::player_looking_at(var3) && !scripts\engine\sp\utility::player_looking_at(var2)) {
+    if(scripts\engine\utility::flag("bpg_scene_clear_exit_door") && !scripts\engine\sp\utility::player_looking_at(level.bpg_scene_marine getEye()) && !scripts\engine\sp\utility::player_looking_at(self getEye()) && !scripts\engine\sp\utility::player_looking_at(var_3) && !scripts\engine\sp\utility::player_looking_at(var_2)) {
       self setanimtime(scripts\engine\utility::getanim("bpg_scene_exit"), 0.68);
-      level.bpg_scene_marine setanimtime(var0, 0.68);
-      var1 = 0.68;
+      level.bpg_scene_marine setanimtime(var_0, 0.68);
+      var_1 = 0.68;
     }
 
     waitframe();
   }
 
   self setanimrate(scripts\engine\utility::getanim("bpg_scene_exit"), 1.5);
-  level.bpg_scene_marine setanimrate(var0, 1.5);
+  level.bpg_scene_marine setanimrate(var_0, 1.5);
 }
 
 function bpg_scene_mother() {
@@ -3186,52 +3186,52 @@ function bpg_scene_chair_3() {
 }
 
 function bpg_scene_handle_exit_doors() {
-  var0 = scripts\sp\maps\embassy\embassy_util::setup_office_door("bpg_scene_door_l");
-  var0 scripts\engine\sp\utility::assign_animtree("bpg_scene_door_l");
-  var1 = scripts\sp\maps\embassy\embassy_util::setup_office_door("bpg_scene_door_r");
-  var1 scripts\engine\sp\utility::assign_animtree("bpg_scene_door_r");
-  level.ap_bpg_scene.right_door = var1;
-  var2 = getEnt("bpg_scene_lock_out", "targetname");
-  var2.origin += (0, 0, -100);
-  level.ap_bpg_scene thread scripts\common\anim::anim_first_frame_solo(var0, "bpg_scene");
-  level.ap_bpg_scene thread scripts\common\anim::anim_first_frame_solo(var1, "bpg_scene");
+  var_0 = scripts\sp\maps\embassy\embassy_util::setup_office_door("bpg_scene_door_l");
+  var_0 scripts\engine\sp\utility::assign_animtree("bpg_scene_door_l");
+  var_1 = scripts\sp\maps\embassy\embassy_util::setup_office_door("bpg_scene_door_r");
+  var_1 scripts\engine\sp\utility::assign_animtree("bpg_scene_door_r");
+  level.ap_bpg_scene.right_door = var_1;
+  var_2 = getEnt("bpg_scene_lock_out", "targetname");
+  var_2.origin += (0, 0, -100);
+  level.ap_bpg_scene thread scripts\common\anim::anim_first_frame_solo(var_0, "bpg_scene");
+  level.ap_bpg_scene thread scripts\common\anim::anim_first_frame_solo(var_1, "bpg_scene");
   scripts\engine\utility::flag_wait("bpg_scene_near_start");
-  level.ap_bpg_scene thread scripts\common\anim::anim_single_solo(var0, "bpg_scene");
-  level.ap_bpg_scene thread scripts\common\anim::anim_single_solo(var1, "bpg_scene");
+  level.ap_bpg_scene thread scripts\common\anim::anim_single_solo(var_0, "bpg_scene");
+  level.ap_bpg_scene thread scripts\common\anim::anim_single_solo(var_1, "bpg_scene");
   scripts\engine\utility::flag_wait("bpg_scene_clear_exit_door");
-  var2.origin += (0, 0, 100);
+  var_2.origin += (0, 0, 100);
   scripts\engine\utility::flag_wait("bpg_scene_mar_cleared_door");
-  var1 scripts\engine\utility::delaythread(0.1, &skip_door_exiters, 0.999);
-  var1 scripts\engine\utility::delaycall(0.05, &setanimrate, var1 scripts\engine\utility::getanim("bpg_scene_exit"), 1.5);
-  var0 scripts\engine\utility::delaythread(0.1, &skip_door_exiters, 0.999);
-  var0 scripts\engine\utility::delaycall(0.05, &setanimrate, var0 scripts\engine\utility::getanim("bpg_scene_exit"), 1.5);
-  level.ap_bpg_scene thread scripts\common\anim::anim_single_solo(var0, "bpg_scene_exit");
-  level.ap_bpg_scene scripts\common\anim::anim_single_solo(var1, "bpg_scene_exit");
-  var2 delete();
+  var_1 scripts\engine\utility::delaythread(0.1, &skip_door_exiters, 0.999);
+  var_1 scripts\engine\utility::delaycall(0.05, &setanimrate, var_1 scripts\engine\utility::getanim("bpg_scene_exit"), 1.5);
+  var_0 scripts\engine\utility::delaythread(0.1, &skip_door_exiters, 0.999);
+  var_0 scripts\engine\utility::delaycall(0.05, &setanimrate, var_0 scripts\engine\utility::getanim("bpg_scene_exit"), 1.5);
+  level.ap_bpg_scene thread scripts\common\anim::anim_single_solo(var_0, "bpg_scene_exit");
+  level.ap_bpg_scene scripts\common\anim::anim_single_solo(var_1, "bpg_scene_exit");
+  var_2 delete();
   scripts\engine\utility::flag_set("bpg_scene_doors_closed");
   scripts\engine\utility::stop_exploder("hide_crowd");
   scripts\engine\utility::stop_exploder("hide_crowd_filler");
   scripts\engine\utility::stop_exploder("ent_field_fog");
 }
 
-function skip_door_exiters(var0) {
+function skip_door_exiters(var_0) {
   level endon("bpg_scene_doors_closed");
 
   while(!scripts\engine\utility::flag("bpg_scene_clear_exit_door") || !scripts\engine\utility::flag("bpg_scene_mar_cleared_door") || scripts\sp\maps\embassy\embassy_util::within_player_fov(level.ap_bpg_scene.right_door.origin)) {
     waitframe();
   }
 
-  self setanimtime(scripts\engine\utility::getanim("bpg_scene_exit"), var0);
+  self setanimtime(scripts\engine\utility::getanim("bpg_scene_exit"), var_0);
 }
 
 function bp_glass_scene_catchup() {
   level.wall_truck_civ_hiding_spots = scripts\engine\utility::getStructArray("civilian_exit", "targetname");
-  var0 = getEnt("bpg_scene_lock_out", "targetname");
-  var0 delete();
-  var1 = getEntArray("bpg_scene_chair", "targetname");
+  var_0 = getEnt("bpg_scene_lock_out", "targetname");
+  var_0 delete();
+  var_1 = getEntArray("bpg_scene_chair", "targetname");
 
-  foreach(var3 in var1) {
-    var3 delete();
+  foreach(var_3 in var_1) {
+    var_3 delete();
   }
 
   thread handle_civ_exit_door();
@@ -3266,9 +3266,9 @@ function truck_office_main() {
   scripts\engine\utility::stop_exploder("stairwell_scene_vfx");
   scripts\engine\utility::stop_exploder("landing_car_explode");
   level.ap_truck_office = scripts\engine\utility::getStruct("ap_truck_office", "targetname");
-  var0 = getspawner("truck_office_attack_civs_box_guy", "targetname");
-  var0 scripts\engine\sp\utility::add_spawn_function(&truck_office_civ_with_box);
-  var0 scripts\engine\sp\utility::spawn_ai();
+  var_0 = getspawner("truck_office_attack_civs_box_guy", "targetname");
+  var_0 scripts\engine\sp\utility::add_spawn_function(&truck_office_civ_with_box);
+  var_0 scripts\engine\sp\utility::spawn_ai();
   thread truck_office_flavor_truck_drive_by();
   thread truck_office_red_shirt();
   thread truck_office_bpg_scene_marine();
@@ -3288,25 +3288,25 @@ function truck_office_main() {
 }
 
 function truck_office_wall_collapse() {
-  var0 = scripts\engine\sp\utility::spawn_anim_model("truck_office_collapse_wall");
-  level.ap_truck_office scripts\common\anim::anim_first_frame_solo(var0, "wall_collapse");
+  var_0 = scripts\engine\sp\utility::spawn_anim_model("truck_office_collapse_wall");
+  level.ap_truck_office scripts\common\anim::anim_first_frame_solo(var_0, "wall_collapse");
   level waittill("allow_collapse");
   thread scripts\engine\utility::play_sound_in_space("embassy_truck_hole_debris_crash", (-7370, -3850, 114));
-  level.ap_truck_office scripts\common\anim::anim_single_solo(var0, "wall_collapse");
+  level.ap_truck_office scripts\common\anim::anim_single_solo(var_0, "wall_collapse");
   scripts\engine\utility::flag_wait("reached_basement");
-  var0 delete();
+  var_0 delete();
 }
 
 function truck_office_flavor_aq_run_through() {
   scripts\engine\utility::flag_wait("truck_wreck_start");
   scripts\engine\utility::flag_wait_any_timeout(25, "force_drop_ceiling", "wall_truck_shotgun_enemies_defeated");
-  var0 = getspawnerarray("truck_office_invader_flavor");
+  var_0 = getspawnerarray("truck_office_invader_flavor");
   thread audio_aq_run_behind_truck();
 
-  foreach(var2 in var0) {
-    var3 = var2 scripts\engine\sp\utility::spawn_ai();
-    var3 setCanDamage(1);
-    var3 setCanRadiusDamage(0);
+  foreach(var_2 in var_0) {
+    var_3 = var_2 scripts\engine\sp\utility::spawn_ai();
+    var_3 setCanDamage(1);
+    var_3 setCanRadiusDamage(0);
     wait randomfloatrange(0.5, 0.75);
   }
 
@@ -3363,17 +3363,17 @@ function audio_aq_run_behind_truck_one_shots() {
   }
 }
 
-function audio_wait_until_player_close_enough_to_obj(var0) {
-  if(!isDefined(var0)) {
-    var0 = 750;
+function audio_wait_until_player_close_enough_to_obj(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 750;
   }
 
   level endon("player_is_close_enough_now");
 
   for(;;) {
-    var1 = distance(level.player.origin, level.aq_run_behind_truck.origin);
+    var_1 = distance(level.player.origin, level.aq_run_behind_truck.origin);
 
-    if(var1 < var0) {
+    if(var_1 < var_0) {
       level notify("player_is_close_enough_now");
     }
 
@@ -3382,28 +3382,28 @@ function audio_wait_until_player_close_enough_to_obj(var0) {
 }
 
 function truck_office_flavor_truck_drive_by() {
-  var0 = scripts\engine\sp\utility::spawn_anim_model("flavor_truck");
-  var0 thread scripts\engine\sp\utility::play_sound_on_entity("embassy_truck_passby");
+  var_0 = scripts\engine\sp\utility::spawn_anim_model("flavor_truck");
+  var_0 thread scripts\engine\sp\utility::play_sound_on_entity("embassy_truck_passby");
   level.player setclienttriggeraudiozonepartial("embassy_office_truck_passby", "occlusion", "filter");
   wait 1.5;
   level.player scripts\engine\utility::delaycall(1, &clearclienttriggeraudiozone, 6);
-  var1 = scripts\engine\sp\utility::spawn_targetname("flavor_truck_driver");
-  var1.animname = "flavor_truck_driver";
-  var1 linkTo(var0, "tag_driver");
-  var0 thread scripts\common\anim::anim_loop_solo(var1, "flavor_truck_drive_by", "stop_loop_driver", "tag_driver");
-  var2 = scripts\engine\sp\utility::array_spawn_targetname("flavor_truck_passenger");
+  var_1 = scripts\engine\sp\utility::spawn_targetname("flavor_truck_driver");
+  var_1.animname = "flavor_truck_driver";
+  var_1 linkTo(var_0, "tag_driver");
+  var_0 thread scripts\common\anim::anim_loop_solo(var_1, "flavor_truck_drive_by", "stop_loop_driver", "tag_driver");
+  var_2 = scripts\engine\sp\utility::array_spawn_targetname("flavor_truck_passenger");
 
-  foreach(var4 in var2) {
-    var4.animname = "flavor_truck_passenger_" + var5 + 1;
-    var4 linkTo(var0, "tag_body_animate");
-    var0 thread scripts\common\anim::anim_single_solo(var4, "flavor_truck_drive_by", "tag_body_animate");
+  foreach(var_4 in var_2) {
+    var_4.animname = "flavor_truck_passenger_" + var_5 + 1;
+    var_4 linkTo(var_0, "tag_body_animate");
+    var_0 thread scripts\common\anim::anim_single_solo(var_4, "flavor_truck_drive_by", "tag_body_animate");
   }
 
-  var0 scripts\engine\utility::delaycall(0.05, &setanimrate, var0 scripts\engine\utility::getanim("flavor_truck_drive_by"), 1.2);
-  level.ap_truck_office scripts\common\anim::anim_single_solo(var0, "flavor_truck_drive_by");
-  scripts\engine\utility::array_delete(var2);
-  var1 delete();
-  var0 delete();
+  var_0 scripts\engine\utility::delaycall(0.05, &setanimrate, var_0 scripts\engine\utility::getanim("flavor_truck_drive_by"), 1.2);
+  level.ap_truck_office scripts\common\anim::anim_single_solo(var_0, "flavor_truck_drive_by");
+  scripts\engine\utility::array_delete(var_2);
+  var_1 delete();
+  var_0 delete();
 }
 
 function truck_office_price() {
@@ -3435,12 +3435,12 @@ function truck_office_price() {
 
 function sfx_truck_crashed_loops() {
   wait 4;
-  var0 = spawn("script_origin", (-7055, -3581, 112));
-  var1 = spawn("script_origin", (-7187, -3653, 112));
-  var2 = spawn("script_origin", (-7380, -3889, 92));
-  var0 playLoopSound("embassy_truck_crash_idle_lp");
-  var1 playLoopSound("embassy_truck_crash_dirt_debris_lp");
-  var2 playLoopSound("embassy_truck_bldng_wreckage_lp");
+  var_0 = spawn("script_origin", (-7055, -3581, 112));
+  var_1 = spawn("script_origin", (-7187, -3653, 112));
+  var_2 = spawn("script_origin", (-7380, -3889, 92));
+  var_0 playLoopSound("embassy_truck_crash_idle_lp");
+  var_1 playLoopSound("embassy_truck_crash_dirt_debris_lp");
+  var_2 playLoopSound("embassy_truck_bldng_wreckage_lp");
 }
 
 function truck_office_price_move_to_marine() {
@@ -3451,10 +3451,10 @@ function truck_office_price_move_to_marine() {
 }
 
 function wait_ready_truck_wreck() {
-  var0 = gettime();
-  var1 = scripts\engine\utility::getStruct("truck_office_look_trigger", "targetname");
+  var_0 = gettime();
+  var_1 = scripts\engine\utility::getStruct("truck_office_look_trigger", "targetname");
 
-  while(!scripts\engine\utility::time_has_passed(var0, 3) && !scripts\sp\maps\embassy\embassy_util::within_player_fov(var1.origin) && !scripts\engine\utility::flag("force_truck_wreck")) {
+  while(!scripts\engine\utility::time_has_passed(var_0, 3) && !scripts\sp\maps\embassy\embassy_util::within_player_fov(var_1.origin) && !scripts\engine\utility::flag("force_truck_wreck")) {
     waitframe();
   }
 }
@@ -3508,11 +3508,11 @@ function truck_office_walls_pre() {
   scripts\engine\utility::array_thread(level.wall_truck_wall_post_2, &scripts\engine\sp\utility::hide_entity);
 }
 
-function truck_office_walls_post(var0) {
+function truck_office_walls_post(var_0) {
   scripts\engine\utility::array_call(level.wall_truck_wall_pre, &delete);
   scripts\engine\utility::array_thread(level.wall_truck_wall_post, &scripts\engine\sp\utility::show_entity);
 
-  if(var0) {
+  if(var_0) {
     wait 1.55;
   }
 
@@ -3576,23 +3576,23 @@ function truck_office_wreck_reaction_gesture() {
 function truck_office_civ_with_box() {
   self.fakeactor_face_anim = 1;
   self.animname = "civ_box_guy";
-  var0 = getEnt("truck_office_attack_civs_box", "targetname");
-  var0 scripts\engine\sp\utility::assign_animtree("box");
-  var1 = getEnt("truck_office_attack_civs_box_lid", "targetname");
-  var1 scripts\engine\sp\utility::assign_animtree("box_lid");
-  level.ap_truck_office thread scripts\common\anim::anim_loop_solo(var0, "to_attack_idle", "stop_loop_box_guy");
-  level.ap_truck_office thread scripts\common\anim::anim_loop_solo(var1, "to_attack_idle", "stop_loop_box_guy");
+  var_0 = getEnt("truck_office_attack_civs_box", "targetname");
+  var_0 scripts\engine\sp\utility::assign_animtree("box");
+  var_1 = getEnt("truck_office_attack_civs_box_lid", "targetname");
+  var_1 scripts\engine\sp\utility::assign_animtree("box_lid");
+  level.ap_truck_office thread scripts\common\anim::anim_loop_solo(var_0, "to_attack_idle", "stop_loop_box_guy");
+  level.ap_truck_office thread scripts\common\anim::anim_loop_solo(var_1, "to_attack_idle", "stop_loop_box_guy");
   level.ap_truck_office thread scripts\common\anim::anim_loop_solo(self, "to_attack_idle", "stop_loop_box_guy");
   scripts\engine\utility::flag_wait("truck_wreck_start");
   level.ap_truck_office notify("stop_loop_box_guy");
-  level.ap_truck_office thread scripts\common\anim::anim_single_solo(var0, "to_attack_scene");
-  level.ap_truck_office thread scripts\common\anim::anim_single_solo(var1, "to_attack_scene");
+  level.ap_truck_office thread scripts\common\anim::anim_single_solo(var_0, "to_attack_scene");
+  level.ap_truck_office thread scripts\common\anim::anim_single_solo(var_1, "to_attack_scene");
   level.ap_truck_office scripts\common\anim::anim_single_solo(self, "to_attack_scene");
   self notsolid();
   self startragdoll();
   scripts\engine\utility::flag_wait("reached_basement");
-  var0 delete();
-  var1 delete();
+  var_0 delete();
+  var_1 delete();
   self delete();
 }
 
@@ -3601,48 +3601,48 @@ function truck_office_enemies() {
   thread truck_office_shotgun_impedence();
   scripts\engine\utility::flag_wait("truck_wreck_start");
   scripts\engine\utility::flag_set("friendly_penalties_lowered");
-  var0 = scripts\engine\sp\utility::array_spawn_targetname("wall_truck_ai", 1);
+  var_0 = scripts\engine\sp\utility::array_spawn_targetname("wall_truck_ai", 1);
 
-  foreach(var2 in var0) {
-    var2 thread scripts\sp\maps\embassy\embassy_util::perfect_player_info();
+  foreach(var_2 in var_0) {
+    var_2 thread scripts\sp\maps\embassy\embassy_util::perfect_player_info();
     thread truck_office_enemy_death_counter();
 
-    if(scripts\engine\utility::is_equal(var2.script_noteworthy, "aq_killer")) {
+    if(scripts\engine\utility::is_equal(var_2.script_noteworthy, "aq_killer")) {
       if(isDefined(level.aq_killer_tag_taken)) {
-        var2.animname = "aq_2";
+        var_2.animname = "aq_2";
         thread truck_office_aq_rider();
       } else {
-        var2.animname = "aq_1";
+        var_2.animname = "aq_1";
         thread truck_office_aq_rider();
         level.aq_killer_tag_taken = 1;
       }
     }
 
-    if(scripts\engine\utility::is_equal(var2.script_noteworthy, "desk_hopper")) {
-      var2.animname = "aq_1";
+    if(scripts\engine\utility::is_equal(var_2.script_noteworthy, "desk_hopper")) {
+      var_2.animname = "aq_1";
       thread truck_office_aq_killer();
     }
   }
 
-  var4 = scripts\engine\sp\utility::array_spawn_targetname("wall_truck_ai_shotties", 1);
-  level.truck_enemy_alive_count += var4.size;
+  var_4 = scripts\engine\sp\utility::array_spawn_targetname("wall_truck_ai_shotties", 1);
+  level.truck_enemy_alive_count += var_4.size;
 
-  foreach(var2 in var4) {
-    var2 thread scripts\sp\maps\embassy\embassy_util::perfect_player_info();
+  foreach(var_2 in var_4) {
+    var_2 thread scripts\sp\maps\embassy\embassy_util::perfect_player_info();
     thread truck_office_enemy_death_counter();
 
-    if(isDefined(var2.script_noteworthy) && var2.script_noteworthy == "truck_driver") {
-      var2.animname = "aq_driver";
+    if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "truck_driver") {
+      var_2.animname = "aq_driver";
       thread truck_office_aq_driver();
     }
   }
 
-  level scripts\engine\sp\utility::waittill_dead(var4, 2);
+  level scripts\engine\sp\utility::waittill_dead(var_4, 2);
   scripts\engine\utility::flag_set("wall_truck_shotgun_enemies_defeated");
-  var0 = scripts\engine\utility::array_removedead(var0);
+  var_0 = scripts\engine\utility::array_removedead(var_0);
 
-  if(var0.size > 0) {
-    scripts\engine\sp\utility::waittill_dead(var0);
+  if(var_0.size > 0) {
+    scripts\engine\sp\utility::waittill_dead(var_0);
   }
 
   scripts\engine\utility::flag_set("wall_truck_enemies_defeated");
@@ -3659,14 +3659,14 @@ function truck_office_enemy_death_counter() {
 }
 
 function truck_office_shotgun_impedence() {
-  var0 = scripts\engine\utility::getStruct("truck_wall_collapse", "targetname").origin;
-  var1 = level.player.health / 2;
+  var_0 = scripts\engine\utility::getStruct("truck_wall_collapse", "targetname").origin;
+  var_1 = level.player.health / 2;
 
   while(level.truck_enemy_alive_count > 4) {
     scripts\engine\utility::flag_wait("perfect_info");
 
     while(scripts\engine\utility::flag("perfect_info") && level.truck_enemy_alive_count > 4) {
-      level.player dodamage(var1, var0);
+      level.player dodamage(var_1, var_0);
       wait 0.3;
     }
   }
@@ -3688,38 +3688,38 @@ function truck_office_aq_rider() {
 
 function truck_office_aq_killer() {
   self endon("death");
-  var0 = scripts\engine\utility::getStruct("ap_truck_office_desk_hopper", "targetname");
-  var0 scripts\sp\anim::anim_reach_solo(self, "to_attack_scene");
+  var_0 = scripts\engine\utility::getStruct("ap_truck_office_desk_hopper", "targetname");
+  var_0 scripts\sp\anim::anim_reach_solo(self, "to_attack_scene");
   scripts\engine\utility::delaythread(0.79, &scripts\engine\sp\utility::set_allowdeath, 1);
-  var0 scripts\common\anim::anim_single_solo(self, "to_attack_scene");
+  var_0 scripts\common\anim::anim_single_solo(self, "to_attack_scene");
   scripts\sp\spawner::go_to_node();
 }
 
 function truck_office_red_shirt() {
   scripts\engine\sp\utility::trigger_wait_targetname("wall_truck_civs_trigger");
-  var0 = scripts\engine\sp\utility::spawn_targetname("truck_office_red_shirts");
-  var0.animname = "red_shirt";
-  var0.health = int(var0.health / 2);
-  level.ap_truck_office thread scripts\common\anim::anim_loop_solo(var0, "to_attack_idle", "stop_loop_red_shirt");
+  var_0 = scripts\engine\sp\utility::spawn_targetname("truck_office_red_shirts");
+  var_0.animname = "red_shirt";
+  var_0.health = int(var_0.health / 2);
+  level.ap_truck_office thread scripts\common\anim::anim_loop_solo(var_0, "to_attack_idle", "stop_loop_red_shirt");
 
   while(!isDefined(level.wall_truck_civs)) {
     waitframe();
   }
 
-  var1 = getEnt("cvm1_civilian", "script_noteworthy");
-  thread truck_office_marine_vo(var0);
-  thread truck_office_crash_vo(var0);
+  var_1 = getEnt("cvm1_civilian", "script_noteworthy");
+  thread truck_office_marine_vo(var_0);
+  thread truck_office_crash_vo(var_0);
   scripts\engine\utility::flag_wait("truck_wreck_start");
   scripts\engine\sp\utility::activate_trigger_with_targetname("red_shirts_truck_start");
   level.ap_truck_office notify("stop_loop_red_shirt");
-  level.ap_truck_office scripts\common\anim::anim_single_solo(var0, "to_attack_react");
+  level.ap_truck_office scripts\common\anim::anim_single_solo(var_0, "to_attack_react");
   level waittill("marine_dialogue_done");
 
-  if(isDefined(var0) && isalive(var0)) {
-    var2 = scripts\engine\utility::getStruct("marine_death_magic_bullet", "targetname");
-    magicbullet("iw8_sh_romeo870", var2.origin, var0 gettagorigin("j_spine4"));
+  if(isDefined(var_0) && isalive(var_0)) {
+    var_2 = scripts\engine\utility::getStruct("marine_death_magic_bullet", "targetname");
+    magicbullet("iw8_sh_romeo870", var_2.origin, var_0 gettagorigin("j_spine4"));
     wait 0.3;
-    var0 scripts\engine\sp\utility::die();
+    var_0 scripts\engine\sp\utility::die();
     return;
   }
 }
@@ -3741,18 +3741,18 @@ function truck_office_bpg_scene_marine() {
   wait 0.5;
 
   if(isDefined(level.bpg_scene_marine) && isalive(level.bpg_scene_marine)) {
-    var0 = scripts\engine\utility::getStruct("bpg_scene_marine_death_magic_bullet", "targetname");
-    magicbullet("iw8_sh_romeo870", var0.origin, level.bpg_scene_marine gettagorigin("j_spine4"));
+    var_0 = scripts\engine\utility::getStruct("bpg_scene_marine_death_magic_bullet", "targetname");
+    magicbullet("iw8_sh_romeo870", var_0.origin, level.bpg_scene_marine gettagorigin("j_spine4"));
     wait 0.3;
     level.bpg_scene_marine scripts\engine\sp\utility::die();
     return;
   }
 }
 
-function truck_office_marine_vo(var0) {
+function truck_office_marine_vo(var_0) {
   level endon("truck_wreck_start");
   scripts\engine\sp\utility::smart_dialogue_generic("dx_vom_us1_breach_vehicle_50");
-  var0 scripts\engine\sp\utility::smart_dialogue_generic("dx_vom_cvm1_breach_vehicle_60");
+  var_0 scripts\engine\sp\utility::smart_dialogue_generic("dx_vom_cvm1_breach_vehicle_60");
   scripts\engine\sp\utility::smart_dialogue_generic("dx_vom_us1_breach_vehicle_70");
   wait 1;
   scripts\engine\sp\utility::smart_dialogue_generic("dx_vom_us1_breach_vehicle_71");
@@ -3762,7 +3762,7 @@ function truck_office_marine_vo(var0) {
   scripts\engine\sp\utility::smart_dialogue_generic("dx_vom_us1_breach_vehicle_73");
 }
 
-function truck_office_crash_vo(var0) {
+function truck_office_crash_vo(var_0) {
   level endon("bpg_combat_second_wave_defeated");
   level endon("reached_basement");
   scripts\engine\utility::flag_wait("truck_wreck_start");
@@ -3770,8 +3770,8 @@ function truck_office_crash_vo(var0) {
   level.price stopsounds();
   self stopsounds();
 
-  if(isalive(var0)) {
-    var0 stopsounds();
+  if(isalive(var_0)) {
+    var_0 stopsounds();
   }
 
   truck_office_crash_marine_vo();
@@ -3839,84 +3839,84 @@ function truck_office_civs() {
   level.player thread scripts\sp\player::player_movement_state("cqb");
   level.wall_truck_civs = scripts\engine\sp\utility::array_spawn_targetname("wall_truck_civs");
 
-  foreach(var1 in level.wall_truck_civs) {
-    var1.ignoreall = 1;
-    var1.animname = "civ";
-    var1.hiding_spot = undefined;
-    var1.hiding = 0;
-    var1 enableavoidance(0, 0);
-    var1 scripts\asm\asm_bb::bb_setcivilianstate("casual");
-    thread truck_office_civ_idle_handler(var1);
+  foreach(var_1 in level.wall_truck_civs) {
+    var_1.ignoreall = 1;
+    var_1.animname = "civ";
+    var_1.hiding_spot = undefined;
+    var_1.hiding = 0;
+    var_1 enableavoidance(0, 0);
+    var_1 scripts\asm\asm_bb::bb_setcivilianstate("casual");
+    thread truck_office_civ_idle_handler(var_1);
   }
 
   level.price thread scripts\sp\maps\embassy\embassy_util::dont_shoot_through_civilians(level.wall_truck_civs, 150, "truck_cleared");
   level waittill("truck_wreck_start");
 
-  foreach(var1 in level.wall_truck_civs) {
-    var4 = randomfloatrange(0, 0.3);
-    var1 thread scripts\engine\sp\utility::notify_delay("stop_loop", var4);
-    var1 scripts\engine\utility::delaycall(var4, &stopanimscripted);
-    var1 scripts\engine\utility::delaythread(var4, &scripts\asm\asm_bb::bb_setcivilianstate, "panic");
-    var5 = randomintrange(1, 3);
-    var1 scripts\engine\utility::delaythread(var4 + 0.1, &scripts\common\anim::anim_single_solo, var1, "truck_react_" + var5);
-    var1 scripts\engine\utility::delaycall(var4 + 0.15, &setanimrate, var1 scripts\engine\utility::getanim("truck_react_" + var5), 2);
-    var1 thread scripts\engine\utility::set_movement_speed(randomfloatrange(195, 225));
+  foreach(var_1 in level.wall_truck_civs) {
+    var_4 = randomfloatrange(0, 0.3);
+    var_1 thread scripts\engine\sp\utility::notify_delay("stop_loop", var_4);
+    var_1 scripts\engine\utility::delaycall(var_4, &stopanimscripted);
+    var_1 scripts\engine\utility::delaythread(var_4, &scripts\asm\asm_bb::bb_setcivilianstate, "panic");
+    var_5 = randomintrange(1, 3);
+    var_1 scripts\engine\utility::delaythread(var_4 + 0.1, &scripts\common\anim::anim_single_solo, var_1, "truck_react_" + var_5);
+    var_1 scripts\engine\utility::delaycall(var_4 + 0.15, &setanimrate, var_1 scripts\engine\utility::getanim("truck_react_" + var_5), 2);
+    var_1 thread scripts\engine\utility::set_movement_speed(randomfloatrange(195, 225));
   }
 
   thread make_civs_flee();
 }
 
-function truck_office_civ_idle_handler(var0) {
+function truck_office_civ_idle_handler(var_0) {
   level endon("truck_wreck_start");
   thread scripts\common\anim::anim_loop_solo(self, "casual_idle", "stop_loop");
-  self setanimrate(scripts\engine\utility::getanim("casual_idle")[0], var0 / level.wall_truck_civs.size);
-  var1 = scripts\engine\utility::mod(var0, 5);
+  self setanimrate(scripts\engine\utility::getanim("casual_idle")[0], var_0 / level.wall_truck_civs.size);
+  var_1 = scripts\engine\utility::mod(var_0, 5);
   wait randomfloatrange(1, 6);
 
   for(;;) {
-    scripts\common\anim::anim_single_solo(self, "casual_idle_twitch_" + var1);
-    var1 += randomintrange(0, 5);
-    var1 = scripts\engine\utility::mod(var1, 5);
+    scripts\common\anim::anim_single_solo(self, "casual_idle_twitch_" + var_1);
+    var_1 += randomintrange(0, 5);
+    var_1 = scripts\engine\utility::mod(var_1, 5);
     wait randomfloatrange(3, 6);
   }
 }
 
 function make_civs_flee() {
   level.wall_truck_civ_exit_points = scripts\engine\utility::getStructArray("flee_exits", "targetname");
-  var0 = getEntArray("flee_first", "script_noteworthy");
-  var1 = scripts\engine\utility::getStructArray("flee_lanes", "targetname");
+  var_0 = getEntArray("flee_first", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("flee_lanes", "targetname");
 
-  for(var2 = 1; level.wall_truck_civs.size > 0 && !scripts\engine\utility::flag("truck_cleared"); var2 = !var2) {
+  for(var_2 = 1; level.wall_truck_civs.size > 0 && !scripts\engine\utility::flag("truck_cleared"); var_2 = !var_2) {
     level.wall_truck_civs = scripts\engine\utility::array_removedead_or_dying(level.wall_truck_civs);
 
-    if(var0.size > 0) {
-      var0 = scripts\engine\utility::array_removedead_or_dying(var0);
-      var3 = var0[0];
-      var0 = scripts\engine\utility::array_remove(var0, var3);
-    } else if(var2) {
-      var4 = -1;
-      var5 = undefined;
+    if(var_0.size > 0) {
+      var_0 = scripts\engine\utility::array_removedead_or_dying(var_0);
+      var_3 = var_0[0];
+      var_0 = scripts\engine\utility::array_remove(var_0, var_3);
+    } else if(var_2) {
+      var_4 = -1;
+      var_5 = undefined;
 
-      foreach(var7 in var1) {
-        var8 = distance2dsquared(level.player.origin, var7.origin);
+      foreach(var_7 in var_1) {
+        var_8 = distance2dsquared(level.player.origin, var_7.origin);
 
-        if(var4 == -1 || var8 < var4) {
-          var4 = var8;
-          var5 = var7;
+        if(var_4 == -1 || var_8 < var_4) {
+          var_4 = var_8;
+          var_5 = var_7;
         }
       }
 
-      var3 = scripts\engine\sp\utility::get_closest_living(var5.origin, level.wall_truck_civs);
+      var_3 = scripts\engine\sp\utility::get_closest_living(var_5.origin, level.wall_truck_civs);
     } else {
-      var3 = scripts\engine\utility::random(level.wall_truck_civs);
+      var_3 = scripts\engine\utility::random(level.wall_truck_civs);
     }
 
-    level.wall_truck_civs = scripts\engine\utility::array_remove(level.wall_truck_civs, var3);
+    level.wall_truck_civs = scripts\engine\utility::array_remove(level.wall_truck_civs, var_3);
 
-    if(isDefined(var3) && isalive(var3)) {
+    if(isDefined(var_3) && isalive(var_3)) {
       thread civ_flee_to();
 
-      if(var0.size > 0) {
+      if(var_0.size > 0) {
         wait 0.25;
         continue;
       }
@@ -3930,8 +3930,8 @@ function make_civs_flee() {
   if(level.wall_truck_civs.size > 0) {
     level.wall_truck_civs = scripts\engine\utility::array_removedead(level.wall_truck_civs);
 
-    foreach(var3 in level.wall_truck_civs) {
-      cleanup_wall_truck_civ(var3);
+    foreach(var_3 in level.wall_truck_civs) {
+      cleanup_wall_truck_civ(var_3);
     }
 
     return;
@@ -3954,14 +3954,14 @@ function cleanup_wall_truck_civ() {
 
 function civ_flee_to() {
   self endon("death");
-  var0 = scripts\engine\utility::getclosest(self.origin, level.wall_truck_civ_exit_points);
+  var_0 = scripts\engine\utility::getclosest(self.origin, level.wall_truck_civ_exit_points);
 
-  if(distance2dsquared(var0.origin, self.origin) > squared(var0.radius)) {
-    var0 = scripts\engine\utility::getclosest(level.player.origin, level.wall_truck_civ_exit_points);
+  if(distance2dsquared(var_0.origin, self.origin) > squared(var_0.radius)) {
+    var_0 = scripts\engine\utility::getclosest(level.player.origin, level.wall_truck_civ_exit_points);
   }
 
   scripts\common\ai::disable_arrivals();
-  scripts\sp\spawner::go_to_node(var0);
+  scripts\sp\spawner::go_to_node(var_0);
   scripts\engine\utility::delaythread(1.5, &scripts\sp\maps\embassy\embassy_util::civ_friendly_fire_think);
   scripts\sp\spawner::go_to_node(scripts\engine\utility::random(level.wall_truck_civ_hiding_spots));
   self delete();
@@ -4006,11 +4006,11 @@ function bp_glass_combat_main() {
 }
 
 function sfx_basement_door_fire() {
-  var0 = spawn("script_origin", (-7553, -2248, 87));
-  var0 scripts\engine\sp\utility::sound_fade_in("emt_fire_door_lp", 1, 1, 1);
+  var_0 = spawn("script_origin", (-7553, -2248, 87));
+  var_0 scripts\engine\sp\utility::sound_fade_in("emt_fire_door_lp", 1, 1, 1);
   scripts\engine\utility::flag_wait("reached_basement");
   wait 3;
-  var0 scripts\engine\sp\utility::sound_fade_and_delete(5, 1);
+  var_0 scripts\engine\sp\utility::sound_fade_and_delete(5, 1);
 }
 
 function bpg_combat_price() {
@@ -4058,13 +4058,13 @@ function bp_glass_hint_flash() {
   scripts\engine\utility::flag_wait("truck_cleared");
 
   if(level.player getammocount("flash") > 0) {
-    var0 = gettime();
+    var_0 = gettime();
 
-    while(!scripts\engine\utility::time_has_passed(var0, 15) && !level.player secondaryoffhandbuttonPressed()) {
+    while(!scripts\engine\utility::time_has_passed(var_0, 15) && !level.player secondaryoffhandbuttonPressed()) {
       waitframe();
     }
 
-    if(scripts\engine\utility::time_has_passed(var0, 6) && scripts\engine\utility::time_has_passed(level.player.offhands.lastusedoffhandtime, 300)) {
+    if(scripts\engine\utility::time_has_passed(var_0, 6) && scripts\engine\utility::time_has_passed(level.player.offhands.lastusedoffhandtime, 300)) {
       level.flash_hint_timer = gettime();
       scripts\engine\sp\utility::display_hint("hint_use_flashbang");
       return;
@@ -4082,15 +4082,15 @@ function bp_glass_combat_enemies() {
   thread bp_glass_combat_wave("invaders_reinforcements", &bpg_window_break_through, "bpg_combat_second_wave_defeated");
 }
 
-function bp_glass_combat_wave(var0, var1, var2) {
-  var3 = scripts\engine\sp\utility::array_spawn_targetname(var0);
+function bp_glass_combat_wave(var_0, var_1, var_2) {
+  var_3 = scripts\engine\sp\utility::array_spawn_targetname(var_0);
 
-  foreach(var5 in var3) {
-    var5 thread[[var1]]();
+  foreach(var_5 in var_3) {
+    var_5 thread[[var_1]]();
   }
 
-  level scripts\engine\sp\utility::waittill_dead(var3);
-  scripts\engine\utility::flag_set(var2);
+  level scripts\engine\sp\utility::waittill_dead(var_3);
+  scripts\engine\utility::flag_set(var_2);
 }
 
 function bpg_first_wave_enemy() {
@@ -4139,16 +4139,16 @@ function bpg_window_break_through() {
 }
 
 function bpgc_conference_room() {
-  var0 = scripts\engine\utility::getStruct("ap_bpgc_conference", "targetname");
-  var1 = getspawnerarray("bpgc_conf_civs");
-  scripts\engine\sp\utility::array_spawn_function(var1, &bpgc_conf_civ, var0);
-  var2 = getspawner("bpgc_conf_aq", "targetname");
-  var2 scripts\engine\sp\utility::add_spawn_function(&bpgc_conf_aq, var0);
-  var3 = scripts\engine\sp\utility::array_spawn(var1);
-  GscBinSkip0(0x2e, var3.size, var2 scripts\engine\sp\utility::spawn_ai());
+  var_0 = scripts\engine\utility::getStruct("ap_bpgc_conference", "targetname");
+  var_1 = getspawnerarray("bpgc_conf_civs");
+  scripts\engine\sp\utility::array_spawn_function(var_1, &bpgc_conf_civ, var_0);
+  var_2 = getspawner("bpgc_conf_aq", "targetname");
+  var_2 scripts\engine\sp\utility::add_spawn_function(&bpgc_conf_aq, var_0);
+  var_3 = scripts\engine\sp\utility::array_spawn(var_1);
+  GscBinSkip0(0x2e, var_3.size, var_2 scripts\engine\sp\utility::spawn_ai());
 }
 
-function bpgc_conf_aq(var0) {
+function bpgc_conf_aq(var_0) {
   thread scripts\engine\sp\utility::flag_on_death("bpgc_conf_aq_dead");
   self endon("death");
   self endon("entitydeleted");
@@ -4156,38 +4156,38 @@ function bpgc_conf_aq(var0) {
   self.ignoreme = 1;
   scripts\common\ai::gun_remove();
   scripts\anim\shared::forceuseweapon(scripts\sp\utility::make_weapon("iw8_sh_romeo870"), "primary");
-  var0 thread scripts\common\anim::anim_first_frame_solo(self, "bpgc_conference");
+  var_0 thread scripts\common\anim::anim_first_frame_solo(self, "bpgc_conference");
   scripts\engine\utility::flag_wait("bpgc_conference_started");
   scripts\engine\utility::delaythread(2.51, &scripts\engine\sp\utility::set_allowdeath, 1);
   scripts\engine\utility::delaythread(2.51, &scripts\engine\sp\utility::set_ignoreme, 0);
-  var0 scripts\common\anim::anim_single_solo(self, "bpgc_conference");
+  var_0 scripts\common\anim::anim_single_solo(self, "bpgc_conference");
   bpg_first_wave_enemy();
 }
 
-function bpgc_conf_civ(var0) {
+function bpgc_conf_civ(var_0) {
   scripts\engine\sp\utility::clear_deathanim();
   self.skipdeathanim = 1;
   self.a.nodeath = 1;
   self.noragdoll = 1;
 
-  if(isDefined(var0.civ_count)) {
-    var0.civ_count++;
+  if(isDefined(var_0.civ_count)) {
+    var_0.civ_count++;
   } else {
-    var0.civ_count = 1;
+    var_0.civ_count = 1;
   }
 
-  self.animname = "bpgc_conf_civ_" + var0.civ_count;
-  var0 thread scripts\common\anim::anim_first_frame_solo(self, "bpgc_conference");
+  self.animname = "bpgc_conf_civ_" + var_0.civ_count;
+  var_0 thread scripts\common\anim::anim_first_frame_solo(self, "bpgc_conference");
   scripts\engine\utility::flag_wait("bpgc_conference_started");
-  var0 scripts\common\anim::anim_single_solo(self, "bpgc_conference");
+  var_0 scripts\common\anim::anim_single_solo(self, "bpgc_conference");
   self.allowdeath = 1;
   scripts\engine\sp\utility::die();
 }
 
-function bpgc_conf_object(var0) {
-  var0 thread scripts\common\anim::anim_first_frame_solo(self, "bpgc_conference");
+function bpgc_conf_object(var_0) {
+  var_0 thread scripts\common\anim::anim_first_frame_solo(self, "bpgc_conference");
   scripts\engine\utility::flag_wait("bpgc_conference_started");
-  var0 scripts\common\anim::anim_single_solo(self, "bpgc_conference");
+  var_0 scripts\common\anim::anim_single_solo(self, "bpgc_conference");
 
   if(self.animname == "bpgc_conf_door") {
     scripts\sp\maps\embassy\embassy_util::connect_office_door_paths();
@@ -4197,17 +4197,17 @@ function bpgc_conf_object(var0) {
   self delete();
 }
 
-function bpgc_hostage(var0) {
-  var1 = scripts\engine\utility::getStruct("ap_bpgc_hostage", "targetname");
-  var2 = getspawner("bpgc_hostage_aq", "targetname");
-  var2 scripts\engine\sp\utility::add_spawn_function(&bpgc_hostage_aq, var1);
-  var3 = getspawner("bpgc_hostage_civ", "targetname");
-  var3 scripts\engine\sp\utility::add_spawn_function(&bpgc_hostage_civ, var1);
-  var4 = [];
-  GscBinSkip0(0x2e, 0, var2 scripts\engine\sp\utility::spawn_ai());
+function bpgc_hostage(var_0) {
+  var_1 = scripts\engine\utility::getStruct("ap_bpgc_hostage", "targetname");
+  var_2 = getspawner("bpgc_hostage_aq", "targetname");
+  var_2 scripts\engine\sp\utility::add_spawn_function(&bpgc_hostage_aq, var_1);
+  var_3 = getspawner("bpgc_hostage_civ", "targetname");
+  var_3 scripts\engine\sp\utility::add_spawn_function(&bpgc_hostage_civ, var_1);
+  var_4 = [];
+  GscBinSkip0(0x2e, 0, var_2 scripts\engine\sp\utility::spawn_ai());
 }
 
-function bpgc_hostage_char(var0) {
+function bpgc_hostage_char(var_0) {
   self endon("death");
   self endon("entitydeleted");
 
@@ -4216,7 +4216,7 @@ function bpgc_hostage_char(var0) {
   }
 
   self.other endon("death");
-  thread bpgc_hostage_entrance(var0);
+  thread bpgc_hostage_entrance(var_0);
   self waittill("start_checking_damage");
   thread bpgc_hostage_check_damage();
 
@@ -4227,16 +4227,16 @@ function bpgc_hostage_char(var0) {
   self notify("stop_checking_damage");
 }
 
-function bpgc_hostage_entrance(var0) {
+function bpgc_hostage_entrance(var_0) {
   self endon("death");
   self endon("entitydeleted");
   self endon("stop_checking_damage");
   self.other endon("death");
   scripts\engine\sp\utility::set_allowdeath(1);
-  var0 thread scripts\common\anim::anim_first_frame_solo(self, "bpgc_hostage_enter");
+  var_0 thread scripts\common\anim::anim_first_frame_solo(self, "bpgc_hostage_enter");
   scripts\engine\utility::flag_wait("bpgc_hostage_started");
   thread bpgc_hostage_bullet_shield();
-  var0 scripts\common\anim::anim_single_solo(self, "bpgc_hostage_enter");
+  var_0 scripts\common\anim::anim_single_solo(self, "bpgc_hostage_enter");
 
   if(!isDefined(self.skip_idle)) {
     self.skip_idle = scripts\sp\maps\embassy\embassy_util::within_distance(level.player.origin, self.origin, 150);
@@ -4244,7 +4244,7 @@ function bpgc_hostage_entrance(var0) {
   }
 
   if(!self.skip_idle) {
-    var0 scripts\common\anim::anim_single_solo(self, "bpgc_hostage_idle");
+    var_0 scripts\common\anim::anim_single_solo(self, "bpgc_hostage_idle");
   }
 
   self.idle_finished = 1;
@@ -4271,12 +4271,12 @@ function bpgc_hostage_check_damage() {
   self.killed_early = 1;
 }
 
-function bpgc_hostage_aq(var0) {
+function bpgc_hostage_aq(var_0) {
   self endon("death");
   self endon("entitydeleted");
   self.animname = "bpgc_hostage_aq";
   self.ignoreme = 1;
-  bpgc_hostage_char(var0);
+  bpgc_hostage_char(var_0);
 
   if(isDefined(self.magic_bullet_shield)) {
     scripts\common\ai::stop_magic_bullet_shield();
@@ -4288,7 +4288,7 @@ function bpgc_hostage_aq(var0) {
     if(!isDefined(self.other) || !isalive(self.other)) {
       scripts\engine\sp\utility::anim_stopanimScripted();
     } else {
-      var0 scripts\common\anim::anim_single_solo(self, "bpgc_hostage_exit");
+      var_0 scripts\common\anim::anim_single_solo(self, "bpgc_hostage_exit");
     }
 
     self.ignoreme = 0;
@@ -4300,16 +4300,16 @@ function bpgc_hostage_aq(var0) {
   self.skipdeathanim = 1;
   self.a.nodeath = 1;
   self.noragdoll = 1;
-  var0 scripts\common\anim::anim_single_solo(self, "bpgc_hostage_death");
+  var_0 scripts\common\anim::anim_single_solo(self, "bpgc_hostage_death");
   self.allowdeath = 1;
   scripts\engine\sp\utility::die();
 }
 
-function bpgc_hostage_civ(var0) {
+function bpgc_hostage_civ(var_0) {
   self endon("death");
   self endon("entitydeleted");
   self.animname = "bpgc_hostage_civ";
-  bpgc_hostage_char(var0);
+  bpgc_hostage_char(var_0);
 
   if(isDefined(self.magic_bullet_shield)) {
     scripts\common\ai::stop_magic_bullet_shield();
@@ -4318,7 +4318,7 @@ function bpgc_hostage_civ(var0) {
   if(!isalive(self.other) || isDefined(self.other.killed_early) && !isDefined(self.killed_early)) {
     scripts\engine\utility::delaythread(0.25, &scripts\sp\maps\embassy\embassy_util::civ_friendly_fire_think);
     self.allowdeath = 1;
-    var0 scripts\common\anim::anim_single_solo(self, "bpgc_hostage_exit");
+    var_0 scripts\common\anim::anim_single_solo(self, "bpgc_hostage_exit");
     thread bpg_individual_civ_flee();
     return;
   }
@@ -4327,64 +4327,64 @@ function bpgc_hostage_civ(var0) {
   self.skipdeathanim = 1;
   self.a.nodeath = 1;
   self.noragdoll = 1;
-  var0 scripts\common\anim::anim_single_solo(self, "bpgc_hostage_death");
+  var_0 scripts\common\anim::anim_single_solo(self, "bpgc_hostage_death");
   self.allowdeath = 1;
   scripts\engine\sp\utility::die();
 }
 
 function bpgc_interrogation() {
-  var0 = scripts\engine\utility::getStruct("ap_bpgc_interrogation", "targetname");
-  var1 = getspawnerarray("bpgc_interrogation_civs");
-  scripts\engine\sp\utility::array_spawn_function(var1, &bpgc_interrogation_civ, var0);
-  var2 = getspawner("bpgc_interrogation_aq", "targetname");
-  var2 scripts\engine\sp\utility::add_spawn_function(&bpgc_interrogation_aq, var0);
-  var3 = scripts\engine\sp\utility::array_spawn(var1);
-  GscBinSkip0(0x2e, var3.size, var2 scripts\engine\sp\utility::spawn_ai());
+  var_0 = scripts\engine\utility::getStruct("ap_bpgc_interrogation", "targetname");
+  var_1 = getspawnerarray("bpgc_interrogation_civs");
+  scripts\engine\sp\utility::array_spawn_function(var_1, &bpgc_interrogation_civ, var_0);
+  var_2 = getspawner("bpgc_interrogation_aq", "targetname");
+  var_2 scripts\engine\sp\utility::add_spawn_function(&bpgc_interrogation_aq, var_0);
+  var_3 = scripts\engine\sp\utility::array_spawn(var_1);
+  GscBinSkip0(0x2e, var_3.size, var_2 scripts\engine\sp\utility::spawn_ai());
 }
 
-function bpgc_interrogation_civ(var0) {
-  if(!isDefined(var0.civ_count)) {
-    var0.civ_count = 1;
+function bpgc_interrogation_civ(var_0) {
+  if(!isDefined(var_0.civ_count)) {
+    var_0.civ_count = 1;
   } else {
-    var0.civ_count++;
+    var_0.civ_count++;
   }
 
-  self.animname = "bpgc_interrogation_civ_" + var0.civ_count;
-  var0 scripts\common\anim::anim_first_frame_solo(self, "bpgc_interrogation");
+  self.animname = "bpgc_interrogation_civ_" + var_0.civ_count;
+  var_0 scripts\common\anim::anim_first_frame_solo(self, "bpgc_interrogation");
   scripts\engine\utility::flag_wait("bpgc_interrogation_started");
   scripts\engine\sp\utility::clear_deathanim();
   self.skipdeathanim = 1;
   self.a.nodeath = 1;
   self.noragdoll = 1;
   self.no_friendly_fire_fail = 1;
-  var0 scripts\common\anim::anim_single_solo(self, "bpgc_interrogation");
+  var_0 scripts\common\anim::anim_single_solo(self, "bpgc_interrogation");
   self.allowdeath = 1;
   scripts\engine\sp\utility::die();
 }
 
-function bpgc_interrogation_aq(var0) {
+function bpgc_interrogation_aq(var_0) {
   self endon("death");
   self endon("entitydeleted");
   self.animname = "bpgc_interrogation_aq";
-  var0 scripts\common\anim::anim_first_frame_solo(self, "bpgc_interrogation");
+  var_0 scripts\common\anim::anim_first_frame_solo(self, "bpgc_interrogation");
   scripts\engine\utility::flag_wait("bpgc_interrogation_started");
   scripts\engine\sp\utility::set_allowdeath(1);
-  var0 scripts\common\anim::anim_single_solo(self, "bpgc_interrogation");
+  var_0 scripts\common\anim::anim_single_solo(self, "bpgc_interrogation");
   level notify("bpgc_interrogation_anim_done");
   thread bpg_first_wave_enemy();
 }
 
-function bpgc_interrogation_check_speed_up(var0) {
+function bpgc_interrogation_check_speed_up(var_0) {
   level endon("bpgc_interrogation_anim_done");
-  var0[2] endon("death");
-  var0[1] endon("death");
-  var0[0] endon("death");
+  var_0[2] endon("death");
+  var_0[1] endon("death");
+  var_0[0] endon("death");
   scripts\engine\utility::flag_wait("bpgc_interrogation_started");
 
   for(;;) {
-    var1 = distance2d(level.player.origin, var0[2].origin);
-    var2 = scripts\engine\math::remap(var1, 0, 600, 2, 1);
-    scripts\sp\anim::anim_set_rate(var0, "bpgc_interrogation", var2);
+    var_1 = distance2d(level.player.origin, var_0[2].origin);
+    var_2 = scripts\engine\math::remap(var_1, 0, 600, 2, 1);
+    scripts\sp\anim::anim_set_rate(var_0, "bpgc_interrogation", var_2);
     waitframe();
   }
 }
@@ -4425,13 +4425,13 @@ function bp_glass_price_vo() {
   level.price thread scripts\engine\sp\utility::battlechatter_filter_off(["order", "reaction"]);
   level.price thread scripts\engine\sp\utility::battlechatter_probability(0);
   level.price scripts\engine\sp\utility::set_battlechatter(0);
-  var0 = scripts\sp\door::get_interactive_door("door_price_halligan");
+  var_0 = scripts\sp\door::get_interactive_door("door_price_halligan");
 
-  if(istrue(var0.player_tried)) {
+  if(istrue(var_0.player_tried)) {
     return;
   }
 
-  var0 endon("trigger");
+  var_0 endon("trigger");
   wait 1.5;
   level.price scripts\engine\sp\utility::smart_dialogue("dx_vom_pri_breach_offices_20");
   scripts\engine\utility::flag_wait("bpgc_price_to_basement");
@@ -4441,12 +4441,12 @@ function basement_vo() {
   level endon("bas_price_stairs");
   level endon("reached_basement");
   scripts\engine\utility::flag_wait("halligan_scene_done");
-  var0 = ["dx_vom_pri_breach_offices_80", "dx_vom_pri_breach_offices_70", "dx_vom_pri_breach_offices_60"];
+  var_0 = ["dx_vom_pri_breach_offices_80", "dx_vom_pri_breach_offices_70", "dx_vom_pri_breach_offices_60"];
 
   for(;;) {
-    foreach(var2 in var0) {
+    foreach(var_2 in var_0) {
       wait 15;
-      level.price thread scripts\engine\sp\utility::smart_dialogue(var2);
+      level.price thread scripts\engine\sp\utility::smart_dialogue(var_2);
       level.price notify("stop_loop_price");
       level.price scripts\common\anim::anim_single_solo(level.price, "halligan_end_nag");
       level.price thread scripts\common\anim::anim_loop_solo(level.price, "halligan_end_idle", "stop_loop_price");
@@ -4485,21 +4485,21 @@ function mx_price_door() {
 
 function basement_enemy_sfx() {
   scripts\engine\utility::flag_wait("start_basement_enemy_vo");
-  var0 = scripts\engine\utility::getStruct("int_saferoom_enter", "targetname");
-  var1 = spawn("script_origin", var0.origin);
+  var_0 = scripts\engine\utility::getStruct("int_saferoom_enter", "targetname");
+  var_1 = spawn("script_origin", var_0.origin);
   wait 0.3;
-  var1 thread scripts\engine\sp\utility::smart_dialogue_generic("dx_vom_us3_marine_execution_10");
+  var_1 thread scripts\engine\sp\utility::smart_dialogue_generic("dx_vom_us3_marine_execution_10");
   wait 1.1;
-  var1 playSound("scn_embassy_basement_execution_gunshots");
+  var_1 playSound("scn_embassy_basement_execution_gunshots");
   wait 5;
-  var1 delete();
+  var_1 delete();
 }
 
-function bpgc_price_halligan_pre_gesture(var0, var1) {
-  wait var1;
+function bpgc_price_halligan_pre_gesture(var_0, var_1) {
+  wait var_1;
 
-  while(!var0.player_tried) {
-    level.price thread scripts\asm\gesture::ai_request_gesture("military_point", var0, 10);
+  while(!var_0.player_tried) {
+    level.price thread scripts\asm\gesture::ai_request_gesture("military_point", var_0, 10);
     level.price waittill("started_speaking");
   }
 
@@ -4507,42 +4507,42 @@ function bpgc_price_halligan_pre_gesture(var0, var1) {
 }
 
 function bpgc_price_halligan_scene() {
-  var0 = scripts\engine\utility::getStruct("ap_price_halligan", "targetname");
-  var1 = scripts\sp\door::get_interactive_door("door_price_halligan");
-  var1.open_struct.radius = 0;
-  var0 thread scripts\sp\maps\embassy\embassy_util::anim_first_frame_door(var1, "halligan_scene");
-  var1.player_tried = 0;
+  var_0 = scripts\engine\utility::getStruct("ap_price_halligan", "targetname");
+  var_1 = scripts\sp\door::get_interactive_door("door_price_halligan");
+  var_1.open_struct.radius = 0;
+  var_0 thread scripts\sp\maps\embassy\embassy_util::anim_first_frame_door(var_1, "halligan_scene");
+  var_1.player_tried = 0;
   thread bpgc_price_halligan_scene_check_player_tries_door();
   scripts\engine\utility::flag_wait_all("bpg_combat_first_wave_defeated", "bpg_combat_second_wave_defeated");
   scripts\engine\utility::flag_wait("bpgc_price_to_basement");
-  var2 = 4;
-  thread bpgc_price_halligan_pre_gesture(var1, var2);
-  var3 = ["dx_vom_pri_basement_traverse_23", "dx_vom_pri_basement_traverse_22", "dx_vom_pri_basement_traverse_21"];
-  level.price thread scripts\sp\maps\embassy\embassy_util::nagtill_delayed(var2, "basement_door_triggered", var3, 10);
+  var_2 = 4;
+  thread bpgc_price_halligan_pre_gesture(var_1, var_2);
+  var_3 = ["dx_vom_pri_basement_traverse_23", "dx_vom_pri_basement_traverse_22", "dx_vom_pri_basement_traverse_21"];
+  level.price thread scripts\sp\maps\embassy\embassy_util::nagtill_delayed(var_2, "basement_door_triggered", var_3, 10);
 
-  if(!var1.player_tried) {
-    var1 waittill("trigger");
+  if(!var_1.player_tried) {
+    var_1 waittill("trigger");
   }
 
   level notify("basement_door_triggered");
   thread bpgc_halligan_scene_vo();
   level.price.disableplayeradsloscheck = 1;
-  var0 scripts\sp\anim::anim_reach_solo(level.price, "halligan_scene");
+  var_0 scripts\sp\anim::anim_reach_solo(level.price, "halligan_scene");
   scripts\engine\sp\utility::autosave_by_name("basement_start");
-  var1 scripts\engine\utility::delaythread(1.3, &scripts\sp\door::remove_open_prompts);
-  var1 scripts\engine\utility::delaythread(1.3, &scripts\game\sp\door::remove_door_snake_cam_ability);
-  var4 = scripts\engine\sp\utility::spawn_targetname("aq_price_halligan", 1);
-  var4 scripts\engine\sp\utility::clear_deathanim();
-  var4.animname = "enemy";
-  var4.skipdeathanim = 1;
-  var4.a.nodeath = 1;
-  var4.noragdoll = 1;
-  var4.allowdeath = 0;
-  var4 scripts\sp\utility::context_melee_allow(0);
-  var4 scripts\common\ai::magic_bullet_shield();
-  var0 thread scripts\sp\maps\embassy\embassy_util::anim_door(var1, "halligan_scene");
-  thread bpgc_price_halligan_scene_aq_death(var0, var4);
-  var0 thread scripts\sp\maps\embassy\embassy_util::anim_single_solo_end_notify("price_anim_done", level.price, "halligan_scene");
+  var_1 scripts\engine\utility::delaythread(1.3, &scripts\sp\door::remove_open_prompts);
+  var_1 scripts\engine\utility::delaythread(1.3, &scripts\game\sp\door::remove_door_snake_cam_ability);
+  var_4 = scripts\engine\sp\utility::spawn_targetname("aq_price_halligan", 1);
+  var_4 scripts\engine\sp\utility::clear_deathanim();
+  var_4.animname = "enemy";
+  var_4.skipdeathanim = 1;
+  var_4.a.nodeath = 1;
+  var_4.noragdoll = 1;
+  var_4.allowdeath = 0;
+  var_4 scripts\sp\utility::context_melee_allow(0);
+  var_4 scripts\common\ai::magic_bullet_shield();
+  var_0 thread scripts\sp\maps\embassy\embassy_util::anim_door(var_1, "halligan_scene");
+  thread bpgc_price_halligan_scene_aq_death(var_0, var_4);
+  var_0 thread scripts\sp\maps\embassy\embassy_util::anim_single_solo_end_notify("price_anim_done", level.price, "halligan_scene");
   thread mx_price_door();
   level.price thread scripts\sp\maps\embassy\embassy_util::halligan_draw();
 
@@ -4550,19 +4550,19 @@ function bpgc_price_halligan_scene() {
     waitframe();
   }
 
-  var5 = scripts\engine\utility::waittill_any_ents_return(level.price, "price_anim_done", var4, "damage");
+  var_5 = scripts\engine\utility::waittill_any_ents_return(level.price, "price_anim_done", var_4, "damage");
 
-  if(var5 == "damage") {
+  if(var_5 == "damage") {
     if(isDefined(level.halligan_breakout)) {
-      var4 notify("breaking_out");
+      var_4 notify("breaking_out");
       thread bpgc_halligan_breakout_vo();
 
       if(level.halligan_breakout == "breakout_a") {
-        thread bpgc_price_halligan_scene_aq_death(var0, var4);
-        var0 scripts\common\anim::anim_single_solo(level.price, "halligan_breakout_a");
+        thread bpgc_price_halligan_scene_aq_death(var_0, var_4);
+        var_0 scripts\common\anim::anim_single_solo(level.price, "halligan_breakout_a");
       } else {
-        thread bpgc_price_halligan_scene_aq_death(var0, var4);
-        var0 scripts\common\anim::anim_single_solo(level.price, "halligan_breakout_b");
+        thread bpgc_price_halligan_scene_aq_death(var_0, var_4);
+        var_0 scripts\common\anim::anim_single_solo(level.price, "halligan_breakout_b");
       }
     } else {
       level.price waittill("price_anim_done");
@@ -4577,17 +4577,17 @@ function bpgc_price_halligan_scene() {
   }
 
   scripts\engine\utility::flag_wait("bas_price_stairs");
-  var6 = getEnt("bas_hal_player_blocker", "targetname");
-  var6.origin += (0, 0, 160);
-  var7 = getnode("bas_price_stairs_cover", "targetname");
+  var_6 = getEnt("bas_hal_player_blocker", "targetname");
+  var_6.origin += (0, 0, 160);
+  var_7 = getnode("bas_price_stairs_cover", "targetname");
 
-  while(!scripts\sp\maps\embassy\embassy_util::within_distance(level.price.origin, var7.origin, 60)) {
+  while(!scripts\sp\maps\embassy\embassy_util::within_distance(level.price.origin, var_7.origin, 60)) {
     waitframe();
   }
 
-  var0 scripts\sp\maps\embassy\embassy_util::anim_door(var1, "halligan_scene_reverse");
+  var_0 scripts\sp\maps\embassy\embassy_util::anim_door(var_1, "halligan_scene_reverse");
   thread saferoom_screens();
-  var6 delete();
+  var_6 delete();
 }
 
 function bpgc_halligan_breakout_vo() {
@@ -4598,25 +4598,25 @@ function bpgc_halligan_breakout_vo() {
 function bpgc_halligan_scene_vo() {
   level notify("halligan_scene_vo_start");
   level.player scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_kyle_basement_halligan_10");
-  var0 = scripts\sp\door::get_interactive_door("door_price_halligan");
+  var_0 = scripts\sp\door::get_interactive_door("door_price_halligan");
 
-  if(level.price.origin[1] < var0.origin[1]) {
+  if(level.price.origin[1] < var_0.origin[1]) {
     level.price scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_pri_wolf_escapes_outro_40");
   }
 
-  while(level.price.origin[1] < var0.origin[1]) {
+  while(level.price.origin[1] < var_0.origin[1]) {
     waitframe();
   }
 
   level.price scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_pri_basement_halligan_20");
 }
 
-function bpgc_price_halligan_scene_aq_death(var0, var1) {
-  var0 endon("breaking_out");
-  scripts\common\anim::anim_single_solo(var0, var1);
-  var0 scripts\common\ai::stop_magic_bullet_shield();
-  var0.allowdeath = 1;
-  var0 scripts\engine\sp\utility::die();
+function bpgc_price_halligan_scene_aq_death(var_0, var_1) {
+  var_0 endon("breaking_out");
+  scripts\common\anim::anim_single_solo(var_0, var_1);
+  var_0 scripts\common\ai::stop_magic_bullet_shield();
+  var_0.allowdeath = 1;
+  var_0 scripts\engine\sp\utility::die();
 }
 
 function bpgc_price_halligan_scene_check_player_tries_door() {
@@ -4632,22 +4632,22 @@ function bp_glass_combat_catchup() {
 }
 
 function basement_bodies() {
-  var0 = getspawnerarray("bas_dead_bodies");
-  var1 = [];
+  var_0 = getspawnerarray("bas_dead_bodies");
+  var_1 = [];
 
-  foreach(var3 in var0) {
-    var4 = var3 scripts\engine\sp\utility::spawn_ai();
-    var4 scripts\sp\fakeactor::drop_weapon(0);
-    var4.animname = "dead_body";
-    var4 notsolid();
-    var3 thread scripts\common\anim::anim_last_frame_solo(var4, var4.animation);
-    var1 = var4;
+  foreach(var_3 in var_0) {
+    var_4 = var_3 scripts\engine\sp\utility::spawn_ai();
+    var_4 scripts\sp\fakeactor::drop_weapon(0);
+    var_4.animname = "dead_body";
+    var_4 notsolid();
+    var_3 thread scripts\common\anim::anim_last_frame_solo(var_4, var_4.animation);
+    var_1 = var_4;
   }
 
   scripts\engine\utility::flag_wait("saferoom_door_closed");
 
-  foreach(var4 in var1) {
-    var4 delete();
+  foreach(var_4 in var_1) {
+    var_4 delete();
   }
 }
 
@@ -4676,8 +4676,8 @@ function basement_override_price_demeanor() {
     level.price.ignoreme = 1;
     level.price.dontattackme = 1;
     waitframe();
-    var0 = scripts\engine\utility::getStruct("basement_price_catchup", "targetname");
-    level.price forceteleport(var0.origin, var0.angles, 900000);
+    var_0 = scripts\engine\utility::getStruct("basement_price_catchup", "targetname");
+    level.price forceteleport(var_0.origin, var_0.angles, 900000);
   }
 
   while(!scripts\sp\maps\embassy\embassy_util::within_distance(level.player.origin, level.price.origin, 250)) {
@@ -4702,16 +4702,16 @@ function basement_price() {
 }
 
 function basement_aq() {
-  var0 = getspawner("sr_invader_last_stand", "targetname");
-  var0 scripts\engine\sp\utility::add_spawn_function(&basement_sr_last_stand);
-  var1 = var0 scripts\engine\sp\utility::spawn_ai();
-  var2 = getspawner("sr_invader_crowguy", "targetname");
-  var2 scripts\engine\sp\utility::add_spawn_function(&basement_sr_crowguy);
-  var3 = [var2 scripts\engine\sp\utility::spawn_ai()];
+  var_0 = getspawner("sr_invader_last_stand", "targetname");
+  var_0 scripts\engine\sp\utility::add_spawn_function(&basement_sr_last_stand);
+  var_1 = var_0 scripts\engine\sp\utility::spawn_ai();
+  var_2 = getspawner("sr_invader_crowguy", "targetname");
+  var_2 scripts\engine\sp\utility::add_spawn_function(&basement_sr_crowguy);
+  var_3 = [var_2 scripts\engine\sp\utility::spawn_ai()];
   thread basement_enemy_vo();
   thread basement_enemy_sfx();
   level waittill("door_scene_triggered");
-  GscBinSkip0(0x2e, 1, scripts\engine\sp\utility::spawn_targetname("sr_invader"), var3[0]);
+  GscBinSkip0(0x2e, 1, scripts\engine\sp\utility::spawn_targetname("sr_invader"), var_3[0]);
 }
 
 function basement_sr_crowguy() {
@@ -4720,10 +4720,10 @@ function basement_sr_crowguy() {
   self.animname = "sr_invader_crowguy";
   self.anim_start_pct = 0.6;
   self.ignoreme = 1;
-  var0 = scripts\engine\utility::getStruct("ap_sr_door_buster", "targetname");
-  var1 = scripts\engine\sp\utility::spawn_anim_model("sr_crowbar");
-  thread basement_sr_crowbar(var1, var0);
-  var0 thread scripts\common\anim::anim_single_solo(self, "sr_door_buster");
+  var_0 = scripts\engine\utility::getStruct("ap_sr_door_buster", "targetname");
+  var_1 = scripts\engine\sp\utility::spawn_anim_model("sr_crowbar");
+  thread basement_sr_crowbar(var_1, var_0);
+  var_0 thread scripts\common\anim::anim_single_solo(self, "sr_door_buster");
   waitframe();
   self setanimtime(scripts\engine\utility::getanim("sr_door_buster"), self.anim_start_pct);
   self setanimrate(scripts\engine\utility::getanim("sr_door_buster"), 0);
@@ -4737,21 +4737,21 @@ function basement_sr_crowguy() {
   self.goalradius = 100;
 }
 
-function basement_sr_crowbar(var0, var1) {
-  var0 thread scripts\common\anim::anim_single_solo(self, "sr_door_buster");
+function basement_sr_crowbar(var_0, var_1) {
+  var_0 thread scripts\common\anim::anim_single_solo(self, "sr_door_buster");
   waitframe();
-  self setanimtime(scripts\engine\utility::getanim("sr_door_buster"), var1.anim_start_pct);
+  self setanimtime(scripts\engine\utility::getanim("sr_door_buster"), var_1.anim_start_pct);
   self setanimrate(scripts\engine\utility::getanim("sr_door_buster"), 0);
   level waittill("door_scene_triggered");
-  thread basement_check_crowguy_death(var1);
+  thread basement_check_crowguy_death(var_1);
   self setanimrate(scripts\engine\utility::getanim("sr_door_buster"), 1);
   scripts\engine\utility::flag_wait("saferoom_door_closed");
   self delete();
 }
 
-function basement_check_crowguy_death(var0) {
+function basement_check_crowguy_death(var_0) {
   self endon("sr_door_buster");
-  var0 waittill("death");
+  var_0 waittill("death");
   self setanimrate(scripts\engine\utility::getanim("sr_door_buster"), 2);
 }
 
@@ -4790,12 +4790,12 @@ function saferoom_main() {
   thread saferoom_setup_mic();
   thread saferoom_price();
   thread scripts\sp\maps\embassy\embassy_util::swap_card_reader("saferoom_card_reader");
-  var0 = ["dx_vom_pri_basement_traverse_50", "dx_vom_pri_basement_traverse_60"];
-  level.price thread scripts\sp\maps\embassy\embassy_util::nagtill_delayed(8, "player_buzzing_saferoom", var0, 12);
-  var1 = scripts\engine\utility::getStruct("int_saferoom_enter", "targetname");
-  var1 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"EMBASSY/USE_INTERCOM", 20, 500, 80, 0);
-  var1 thread scripts\sp\maps\embassy\embassy_util::cursor_hint_unusable_think();
-  var1 waittill("trigger");
+  var_0 = ["dx_vom_pri_basement_traverse_50", "dx_vom_pri_basement_traverse_60"];
+  level.price thread scripts\sp\maps\embassy\embassy_util::nagtill_delayed(8, "player_buzzing_saferoom", var_0, 12);
+  var_1 = scripts\engine\utility::getStruct("int_saferoom_enter", "targetname");
+  var_1 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"EMBASSY/USE_INTERCOM", 20, 500, 80, 0);
+  var_1 thread scripts\sp\maps\embassy\embassy_util::cursor_hint_unusable_think();
+  var_1 waittill("trigger");
   scripts\sp\utility::notetrack_mission_failed_vo_disable();
 
   while(!isalive(level.player)) {
@@ -4830,14 +4830,14 @@ function saferoom_main() {
   thread saferoom_scene_then_idle(level.alex);
   thread saferoom_scene_then_idle(level.price);
   wait 24;
-  var2 = getEnt("sr_player_blocker", "targetname");
-  var2 scripts\engine\utility::delaycall(6, &delete);
+  var_2 = getEnt("sr_player_blocker", "targetname");
+  var_2 scripts\engine\utility::delaycall(6, &delete);
   level notify("obj_found_wolf");
-  var3 = scripts\engine\utility::getStruct("cctv_begin_interact", "targetname");
-  var3 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"EMBASSY/USE_CCTV", 20, 500, 80, 0);
-  var3 thread scripts\sp\maps\embassy\embassy_util::cursor_hint_unusable_think();
+  var_3 = scripts\engine\utility::getStruct("cctv_begin_interact", "targetname");
+  var_3 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"EMBASSY/USE_CCTV", 20, 500, 80, 0);
+  var_3 thread scripts\sp\maps\embassy\embassy_util::cursor_hint_unusable_think();
   thread scripts\sp\maps\embassy\embassy_lighting::lt_saferoom_wolf_off();
-  var3 waittill("trigger");
+  var_3 waittill("trigger");
 
   while(!isalive(level.player)) {
     waitframe();
@@ -4864,14 +4864,14 @@ function saferoom_main() {
   }
 
   level.wolf delete();
-  var4 = level.player.primaryweapons[0];
-  var5 = level.player getweaponammoclip(var4);
-  var6 = weaponclipsize(var4);
-  var7 = var5 / var6;
+  var_4 = level.player.primaryweapons[0];
+  var_5 = level.player getweaponammoclip(var_4);
+  var_6 = weaponclipsize(var_4);
+  var_7 = var_5 / var_6;
 
-  if(var7 < 0.5) {
-    var8 = 0.5 - var7;
-    level.player setweaponammoclip(var4, int(var8 * var6));
+  if(var_7 < 0.5) {
+    var_8 = 0.5 - var_7;
+    level.player setweaponammoclip(var_4, int(var_8 * var_6));
   }
 
   thread scripts\sp\analytics::analytics_kleenex_update("Basement to CCTV");
@@ -4946,24 +4946,24 @@ function saferoom_price_behind_catchup() {
 }
 
 function saferoom_player_aware_of_teleport() {
-  var0 = scripts\engine\utility::within_fov(level.catchup_struct.origin, level.catchup_struct.angles, level.player.origin, cos(90));
-  var1 = distance2dsquared(level.player.origin, level.catchup_struct.origin) < squared(280);
-  var2 = scripts\sp\maps\embassy\embassy_util::within_player_fov(level.catchup_struct.origin);
-  return !var0 || var1 && var2;
+  var_0 = scripts\engine\utility::within_fov(level.catchup_struct.origin, level.catchup_struct.angles, level.player.origin, cos(90));
+  var_1 = distance2dsquared(level.player.origin, level.catchup_struct.origin) < squared(280);
+  var_2 = scripts\sp\maps\embassy\embassy_util::within_player_fov(level.catchup_struct.origin);
+  return !var_0 || var_1 && var_2;
 }
 
-function saferoom_scene_then_idle(var0) {
+function saferoom_scene_then_idle(var_0) {
   self endon("death");
   self endon("entitydeleted");
   level.ap_saferoom scripts\common\anim::anim_single_solo(self, "sr_scene");
   level.ap_saferoom thread scripts\common\anim::anim_loop_solo(self, "sr_scene_idle", "stop_loop_" + self.animname);
 
-  if(var0) {
+  if(var_0) {
     level.saferoom_last_nag_time = gettime();
-    var1 = 15;
+    var_1 = 15;
 
     for(;;) {
-      while(level.saferoom_last_nagger == self || !scripts\engine\utility::time_has_passed(level.saferoom_last_nag_time, var1)) {
+      while(level.saferoom_last_nagger == self || !scripts\engine\utility::time_has_passed(level.saferoom_last_nag_time, var_1)) {
         wait 1;
       }
 
@@ -5034,8 +5034,8 @@ function saferoom_escape_screens() {
 
 function saferoom_catchup() {
   level.sr_exit_door = scripts\sp\maps\embassy\embassy_util::setup_office_door("sr_exit_door");
-  var0 = getEnt("sr_player_blocker", "targetname");
-  var0 delete();
+  var_0 = getEnt("sr_player_blocker", "targetname");
+  var_0 delete();
 
   if(!scripts\sp\starts::is_after_start("escape_combat")) {
     thread saferoom_escape_screens();
@@ -5055,10 +5055,10 @@ function escape_main() {
   }
 
   thread scripts\sp\analytics::analytics_kleenex_update("CCTV");
-  var0 = getEntArray("alley_cars", "targetname");
-  scripts\engine\utility::array_call(var0, &show);
-  var1 = getaiarray("axis");
-  scripts\engine\utility::array_delete(var1);
+  var_0 = getEntArray("alley_cars", "targetname");
+  scripts\engine\utility::array_call(var_0, &show);
+  var_1 = getaiarray("axis");
+  scripts\engine\utility::array_delete(var_1);
   scripts\sp\maps\embassy\embassy_util::spawn_price();
   scripts\sp\maps\embassy\embassy_util::spawn_farah();
   scripts\sp\maps\embassy\embassy_util::spawn_alex();
@@ -5088,19 +5088,19 @@ function escape_main() {
   thread scripts\sp\maps\embassy\embassy_util::put_player_into_rig(level.player.rig, 0, 0, 0, 0, 0);
   level.ap_cctv scripts\common\anim::anim_single_solo(level.player.rig, "cctv_exit");
   scripts\sp\maps\embassy\embassy_util::pull_player_out_of_rig_hide_rig(level.player.rig);
-  var2 = [level.price, level.farah, level.wolf, level.hadir, level.alex, level.stacy];
-  scripts\engine\utility::array_thread(var2, &escape_enter_to_idle);
+  var_2 = [level.price, level.farah, level.wolf, level.hadir, level.alex, level.stacy];
+  scripts\engine\utility::array_thread(var_2, &escape_enter_to_idle);
   level.hadir scripts\engine\sp\utility::place_weapon_on(level.hadir.weapon, "back");
   level.hadir scripts\engine\sp\utility::place_weapon_on(level.hadir.sidearm, "right");
   scripts\sp\maps\embassy\embassy_util::swap_card_reader("es_price_rendezvous_door_reader");
   scripts\engine\utility::flag_wait("heroes_at_exit");
-  var3 = getEnt("bas_player_blocker", "targetname");
-  var3 delete();
-  var4 = scripts\engine\utility::getStruct("int_gar_exit", "targetname");
-  var4 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"EMBASSY/USE_KEYCARD", 20, 500, 80, 0);
-  var4 thread scripts\sp\maps\embassy\embassy_util::cursor_hint_unusable_think();
+  var_3 = getEnt("bas_player_blocker", "targetname");
+  var_3 delete();
+  var_4 = scripts\engine\utility::getStruct("int_gar_exit", "targetname");
+  var_4 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"EMBASSY/USE_KEYCARD", 20, 500, 80, 0);
+  var_4 thread scripts\sp\maps\embassy\embassy_util::cursor_hint_unusable_think();
   level notify("obj_rendezvous_at_exit_complete");
-  var4 waittill("trigger");
+  var_4 waittill("trigger");
 
   while(!isalive(level.player)) {
     waitframe();
@@ -5122,8 +5122,8 @@ function mus_garage() {
 }
 
 function escape_kyle_third_person() {
-  var0 = getspawner("kyle", "targetname");
-  var0.count = 10;
+  var_0 = getspawner("kyle", "targetname");
+  var_0.count = 10;
   level.kyle = scripts\engine\sp\utility::spawn_targetname("kyle", 1);
   level.kyle.animname = "kyle";
   level.kyle scripts\engine\sp\utility::name_hide();
@@ -5175,45 +5175,45 @@ function esc_garage_vo() {
   level.stacy scripts\sp\maps\embassy\embassy_util::say("dx_vom_stac_escape_garage_140");
   scripts\engine\utility::flag_set("heroes_at_exit");
   level.alex scripts\sp\maps\embassy\embassy_util::say("dx_vom_alx_escape_garage_150");
-  var0 = ["dx_vom_pri_escape_garage_160", "dx_vom_pri_escape_garage_170", "dx_vom_pri_escape_garage_180"];
-  var1 = scripts\engine\sp\utility::create_deck(var0, 0);
-  var1.autoshuffle = 1;
-  var0 = ["dx_vom_pri_escape_garage_190", "dx_vom_pri_escape_garage_200", "dx_vom_pri_escape_garage_210", "dx_vom_pri_escape_garage_220"];
-  var2 = scripts\engine\sp\utility::create_deck(var0, 0);
-  var2.autoshuffle = 1;
-  var3 = 5;
-  var4 = 0.5;
-  var5 = 1.2;
-  var6 = 1.65;
-  var7 = 20;
-  var8 = 5;
+  var_0 = ["dx_vom_pri_escape_garage_160", "dx_vom_pri_escape_garage_170", "dx_vom_pri_escape_garage_180"];
+  var_1 = scripts\engine\sp\utility::create_deck(var_0, 0);
+  var_1.autoshuffle = 1;
+  var_0 = ["dx_vom_pri_escape_garage_190", "dx_vom_pri_escape_garage_200", "dx_vom_pri_escape_garage_210", "dx_vom_pri_escape_garage_220"];
+  var_2 = scripts\engine\sp\utility::create_deck(var_0, 0);
+  var_2.autoshuffle = 1;
+  var_3 = 5;
+  var_4 = 0.5;
+  var_5 = 1.2;
+  var_6 = 1.65;
+  var_7 = 20;
+  var_8 = 5;
 
   for(;;) {
     if(distance2dsquared(level.player.origin, level.price.origin) > squared(500)) {
-      var9 = var1 scripts\engine\sp\utility::deck_draw();
+      var_9 = var_1 scripts\engine\sp\utility::deck_draw();
     } else {
-      var9 = var2 scripts\engine\sp\utility::deck_draw();
+      var_9 = var_2 scripts\engine\sp\utility::deck_draw();
     }
 
-    level.price scripts\sp\maps\embassy\embassy_util::say(var9);
-    wait randomfloatrange(var3 - var4, var3 + var4);
-    var3 = min(var3 * var5, var7);
-    var4 = min(var4 * var6, var8);
+    level.price scripts\sp\maps\embassy\embassy_util::say(var_9);
+    wait randomfloatrange(var_3 - var_4, var_3 + var_4);
+    var_3 = min(var_3 * var_5, var_7);
+    var_4 = min(var_4 * var_6, var_8);
   }
 }
 
-function escape_price_crew_door(var0, var1) {
-  var2 = scripts\sp\maps\embassy\embassy_util::setup_office_door(var0);
-  var2 scripts\engine\sp\utility::assign_animtree(var1);
+function escape_price_crew_door(var_0, var_1) {
+  var_2 = scripts\sp\maps\embassy\embassy_util::setup_office_door(var_0);
+  var_2 scripts\engine\sp\utility::assign_animtree(var_1);
 
   if(!isDefined(level.ap_gar_meetup.doors)) {
     level.ap_gar_meetup.doors = [];
   }
 
-  level.ap_gar_meetup.doors[level.ap_gar_meetup.doors.size] = var2;
-  level.ap_gar_meetup thread scripts\common\anim::anim_first_frame_solo(var2, "gar_meetup_enter");
+  level.ap_gar_meetup.doors[level.ap_gar_meetup.doors.size] = var_2;
+  level.ap_gar_meetup thread scripts\common\anim::anim_first_frame_solo(var_2, "gar_meetup_enter");
   scripts\engine\utility::flag_wait("reached_rendezvous");
-  level.ap_gar_meetup scripts\common\anim::anim_single_solo(var2, "gar_meetup_enter");
+  level.ap_gar_meetup scripts\common\anim::anim_single_solo(var_2, "gar_meetup_enter");
 }
 
 function escape_enter_to_idle() {
@@ -5228,16 +5228,16 @@ function escape_enter_to_idle() {
 }
 
 function escape_garage_exit_door() {
-  var0 = scripts\engine\utility::getStruct("es_parking_door", "targetname");
-  var1 = scripts\engine\sp\utility::spawn_anim_model("garage_door", var0.origin, var0.angles);
-  var1.clip = getEnt("es_parking_door_clip", "targetname");
-  var1.clip linkTo(var1);
-  level.ap_gar_meetup scripts\common\anim::anim_first_frame_solo(var1, "gar_meetup_exit");
+  var_0 = scripts\engine\utility::getStruct("es_parking_door", "targetname");
+  var_1 = scripts\engine\sp\utility::spawn_anim_model("garage_door", var_0.origin, var_0.angles);
+  var_1.clip = getEnt("es_parking_door_clip", "targetname");
+  var_1.clip linkTo(var_1);
+  level.ap_gar_meetup scripts\common\anim::anim_first_frame_solo(var_1, "gar_meetup_exit");
   scripts\engine\utility::flag_wait("reached_garage_exit");
   thread audio_garage_door_roll_up();
-  level.ap_gar_meetup scripts\common\anim::anim_single_solo(var1, "gar_meetup_exit");
+  level.ap_gar_meetup scripts\common\anim::anim_single_solo(var_1, "gar_meetup_exit");
   scripts\engine\utility::flag_wait("defend_entrance_door_closed");
-  var1 delete();
+  var_1 delete();
 }
 
 function audio_garage_door_roll_up() {
@@ -5265,8 +5265,8 @@ function escape_catchup() {
     level.sr_exit_door delete();
   }
 
-  var0 = getEnt("bas_player_blocker", "targetname");
-  var0 delete();
+  var_0 = getEnt("bas_player_blocker", "targetname");
+  var_0 delete();
   scripts\engine\utility::flag_set("reached_garage_exit");
 }
 
@@ -5282,8 +5282,8 @@ function escape_combat_start() {
   level.wolf thread scripts\sp\maps\embassy\embassy_util::wolf_friendly_fire_think();
   scripts\engine\sp\utility::set_start_location("escape_combat_start", [level.player, level.price, level.farah, level.alex, level.hadir, level.wolf, level.stacy]);
 
-  foreach(var1 in [level.wolf, level.hadir, level.stacy, level.alex]) {
-    level.ap_gar_meetup thread scripts\common\anim::anim_loop_solo(var1, "gar_meetup_idle", "stop_loop_" + var1.animname);
+  foreach(var_1 in [level.wolf, level.hadir, level.stacy, level.alex]) {
+    level.ap_gar_meetup thread scripts\common\anim::anim_loop_solo(var_1, "gar_meetup_idle", "stop_loop_" + var_1.animname);
   }
 
   scripts\engine\utility::flag_set("reached_garage_exit");
@@ -5301,8 +5301,8 @@ function escape_combat_main() {
   setsaveddvar("LQLSPQOPKM", 50);
   setsaveddvar("NTMMTOLQMQ", (-1, 0, 0));
   scripts\engine\utility::exploder("landing_car_explode");
-  var0 = getEntArray("middle_cars", "targetname");
-  scripts\engine\utility::array_call(var0, &show);
+  var_0 = getEntArray("middle_cars", "targetname");
+  scripts\engine\utility::array_call(var_0, &show);
   setmusicstate("mx_embassy_ground");
   thread periph_traffic("defend_entrance_door_closed");
   level.ap_gar_meetup thread scripts\common\anim::anim_first_frame_solo(level.player.rig, "gar_meetup_exit");
@@ -5352,10 +5352,10 @@ function esc_com_vo() {
   level.price scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_pri_escape_combat_streets_50");
   thread price_rally_nags();
   thread esc_com_enemy_vo();
-  var0 = undefined;
+  var_0 = undefined;
 
   while(getaiarray("axis").size > 1) {
-    level waittill("ai_killed", var0);
+    level waittill("ai_killed", var_0);
   }
 
   level notify("esc_com_cleared");
@@ -5375,23 +5375,23 @@ function esc_com_enemy_vo() {
 
 function price_rally_nags() {
   level endon("reached_wolf_escort_4");
-  var0 = ["dx_vom_pri_alley_moving_40", "dx_vom_pri_alley_moving_50", "dx_vom_pri_alley_moving_60"];
-  var1 = scripts\engine\sp\utility::create_deck(var0);
-  var0 = ["dx_vom_pri_escape_combat_streets_60", "dx_vom_pri_escape_combat_streets_70", "dx_vom_pri_escape_combat_streets_80"];
-  var2 = scripts\engine\sp\utility::create_deck(var0);
-  var3 = 3;
-  var4 = 0.5;
-  var5 = 1.2;
-  var6 = 1.65;
-  var7 = 20;
-  var8 = 5;
+  var_0 = ["dx_vom_pri_alley_moving_40", "dx_vom_pri_alley_moving_50", "dx_vom_pri_alley_moving_60"];
+  var_1 = scripts\engine\sp\utility::create_deck(var_0);
+  var_0 = ["dx_vom_pri_escape_combat_streets_60", "dx_vom_pri_escape_combat_streets_70", "dx_vom_pri_escape_combat_streets_80"];
+  var_2 = scripts\engine\sp\utility::create_deck(var_0);
+  var_3 = 3;
+  var_4 = 0.5;
+  var_5 = 1.2;
+  var_6 = 1.65;
+  var_7 = 20;
+  var_8 = 5;
 
   for(;;) {
     for(;;) {
-      var9 = randomfloatrange(var3 - var4, var3 + var4);
-      var10 = wait_in_position_or_timeout(level.price, var9);
+      var_9 = randomfloatrange(var_3 - var_4, var_3 + var_4);
+      var_10 = wait_in_position_or_timeout(level.price, var_9);
 
-      if(!var10) {
+      if(!var_10) {
         break;
       }
 
@@ -5403,29 +5403,29 @@ function price_rally_nags() {
     }
 
     if(getaiarray("axis").size == 1) {
-      var11 = var1 scripts\engine\sp\utility::deck_draw();
+      var_11 = var_1 scripts\engine\sp\utility::deck_draw();
     } else {
-      var11 = var2 scripts\engine\sp\utility::deck_draw();
+      var_11 = var_2 scripts\engine\sp\utility::deck_draw();
     }
 
-    level.price scripts\sp\maps\embassy\embassy_util::say(var11);
-    var3 = min(var3 * var5, var7);
-    var4 = min(var4 * var6, var8);
+    level.price scripts\sp\maps\embassy\embassy_util::say(var_11);
+    var_3 = min(var_3 * var_5, var_7);
+    var_4 = min(var_4 * var_6, var_8);
   }
 }
 
-function wait_in_position_or_timeout(var0, var1) {
-  while(var1 > 0) {
-    var2 = var0 scripts\engine\math::is_point_in_front(level.player.origin);
-    var3 = distance2dsquared(level.player.origin, var0.origin) < squared(500);
-    var4 = scripts\engine\utility::array_remove(getaiarrayinradius(level.player.origin, 300, "axis"), level.wolf).size > 0;
+function wait_in_position_or_timeout(var_0, var_1) {
+  while(var_1 > 0) {
+    var_2 = var_0 scripts\engine\math::is_point_in_front(level.player.origin);
+    var_3 = distance2dsquared(level.player.origin, var_0.origin) < squared(500);
+    var_4 = scripts\engine\utility::array_remove(getaiarrayinradius(level.player.origin, 300, "axis"), level.wolf).size > 0;
 
-    if(var2 || var3 || var4) {
+    if(var_2 || var_3 || var_4) {
       return true;
     }
 
     waitframe();
-    var1 -= 0.05;
+    var_1 -= 0.05;
   }
 
   return false;
@@ -5455,43 +5455,43 @@ function esc_com_aq_alley_health_drop() {
 }
 
 function esc_com_aq_garage_courtyard() {
-  var0 = scripts\engine\sp\utility::spawn_targetname("aq_esc_garage_courtyard", 1);
-  var0 endon("death");
-  var0 endon("entitydeleted");
+  var_0 = scripts\engine\sp\utility::spawn_targetname("aq_esc_garage_courtyard", 1);
+  var_0 endon("death");
+  var_0 endon("entitydeleted");
   thread esc_com_aq_handler();
-  var0.animname = "aq";
-  var0.allowdeath = 1;
-  var0 scripts\common\anim::anim_first_frame_solo(var0, "garage_react");
-  var1 = gettime();
+  var_0.animname = "aq";
+  var_0.allowdeath = 1;
+  var_0 scripts\common\anim::anim_first_frame_solo(var_0, "garage_react");
+  var_1 = gettime();
 
-  while(!scripts\engine\utility::time_has_passed(var1, 10.5) && !(scripts\sp\maps\embassy\embassy_util::within_player_fov(var0.origin) && scripts\sp\maps\embassy\embassy_util::is_visible_to_player(var0.origin + (0, 0, 60)))) {
+  while(!scripts\engine\utility::time_has_passed(var_1, 10.5) && !(scripts\sp\maps\embassy\embassy_util::within_player_fov(var_0.origin) && scripts\sp\maps\embassy\embassy_util::is_visible_to_player(var_0.origin + (0, 0, 60)))) {
     waitframe();
   }
 
-  var0 scripts\common\anim::anim_single_solo(var0, "garage_react");
-  var2 = getnode("aq_esc_garage_courtyard_exposed", "targetname");
-  var0 thread scripts\sp\spawner::go_to_node(var2);
-  var0 scripts\engine\utility::waittill_any("damage", "bullethit");
-  var2 = getnode("aq_esc_garage_courtyard_cover", "targetname");
-  var0 scripts\sp\spawner::go_to_node(var2);
+  var_0 scripts\common\anim::anim_single_solo(var_0, "garage_react");
+  var_2 = getnode("aq_esc_garage_courtyard_exposed", "targetname");
+  var_0 thread scripts\sp\spawner::go_to_node(var_2);
+  var_0 scripts\engine\utility::waittill_any("damage", "bullethit");
+  var_2 = getnode("aq_esc_garage_courtyard_cover", "targetname");
+  var_0 scripts\sp\spawner::go_to_node(var_2);
 }
 
 function esc_com_aq_courtyard() {
-  var0 = getEnt("spawn_aq_esc_courtyard", "targetname");
-  var0 waittill("trigger");
-  var1 = scripts\engine\sp\utility::array_spawn_targetname("aq_esc_courtyard", 1);
+  var_0 = getEnt("spawn_aq_esc_courtyard", "targetname");
+  var_0 waittill("trigger");
+  var_1 = scripts\engine\sp\utility::array_spawn_targetname("aq_esc_courtyard", 1);
 
-  foreach(var3 in var1) {
+  foreach(var_3 in var_1) {
     thread esc_com_aq_handler();
   }
 }
 
 function esc_com_aq_courtyard_exit() {
-  var0 = getEnt("spawn_aq_esc_courtyard_exit", "targetname");
-  var0 waittill("trigger");
-  var1 = scripts\engine\sp\utility::array_spawn_targetname("aq_esc_courtyard_exit", 1);
+  var_0 = getEnt("spawn_aq_esc_courtyard_exit", "targetname");
+  var_0 waittill("trigger");
+  var_1 = scripts\engine\sp\utility::array_spawn_targetname("aq_esc_courtyard_exit", 1);
 
-  foreach(var3 in var1) {
+  foreach(var_3 in var_1) {
     thread esc_com_aq_handler();
   }
 
@@ -5499,11 +5499,11 @@ function esc_com_aq_courtyard_exit() {
 }
 
 function esc_com_aq_alley_start() {
-  var0 = getEnt("spawn_aq_esc_alley_start", "targetname");
-  var0 waittill("trigger");
-  var1 = scripts\engine\sp\utility::array_spawn_targetname("aq_esc_alley_start", 1);
+  var_0 = getEnt("spawn_aq_esc_alley_start", "targetname");
+  var_0 waittill("trigger");
+  var_1 = scripts\engine\sp\utility::array_spawn_targetname("aq_esc_alley_start", 1);
 
-  foreach(var3 in var1) {
+  foreach(var_3 in var_1) {
     thread esc_com_aq_handler();
   }
 
@@ -5602,12 +5602,12 @@ function alley_main() {
   thread alley_wolf_escort();
   thread ally_vo();
   level.player thread scripts\sp\player::player_movement_state("cqb");
-  var0 = scripts\engine\utility::getStruct("int_residence_arrival", "targetname");
-  var1 = scripts\engine\sp\utility::spawn_anim_model("keycard", var0.origin - (0, 0, 100), var0.angles);
-  var0 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"EMBASSY/USE_KEYCARD", 20, 500, 80, 0);
-  var0 thread scripts\sp\maps\embassy\embassy_util::cursor_hint_unusable_think();
-  var0 waittill("trigger");
-  var0 scripts\sp\player\cursor_hint::remove_cursor_hint();
+  var_0 = scripts\engine\utility::getStruct("int_residence_arrival", "targetname");
+  var_1 = scripts\engine\sp\utility::spawn_anim_model("keycard", var_0.origin - (0, 0, 100), var_0.angles);
+  var_0 scripts\sp\player\cursor_hint::create_cursor_hint(undefined, (0, 0, 0), &"EMBASSY/USE_KEYCARD", 20, 500, 80, 0);
+  var_0 thread scripts\sp\maps\embassy\embassy_util::cursor_hint_unusable_think();
+  var_0 waittill("trigger");
+  var_0 scripts\sp\player\cursor_hint::remove_cursor_hint();
 
   while(!isalive(level.player)) {
     waitframe();
@@ -5622,7 +5622,7 @@ function alley_main() {
   level.farah.dontevershoot = 0;
   level.price.disableplayeradsloscheck = 0;
   level.farah.disableplayeradsloscheck = 0;
-  var1 scripts\engine\utility::delaycall(30, &delete);
+  var_1 scripts\engine\utility::delaycall(30, &delete);
 }
 
 function alley_soccer_screens() {
@@ -5639,10 +5639,10 @@ function ally_vo() {
   level.price scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_pri_alley_moving_70");
   scripts\engine\utility::flag_wait("reached_wolf_escort_4");
   wait 3;
-  var0 = ["dx_vom_pri_alley_compound_30", "dx_vom_pri_alley_compound_40", "dx_vom_pri_alley_compound_50", "dx_vom_pri_alley_compound_60"];
-  var1 = scripts\engine\sp\utility::create_deck(var0, 0);
-  var1.autoshuffle = 1;
-  level.price scripts\sp\maps\embassy\embassy_util::nagtill("reached_residence_arrival", var1, 12, 1.2);
+  var_0 = ["dx_vom_pri_alley_compound_30", "dx_vom_pri_alley_compound_40", "dx_vom_pri_alley_compound_50", "dx_vom_pri_alley_compound_60"];
+  var_1 = scripts\engine\sp\utility::create_deck(var_0, 0);
+  var_1.autoshuffle = 1;
+  level.price scripts\sp\maps\embassy\embassy_util::nagtill("reached_residence_arrival", var_1, 12, 1.2);
 }
 
 function alley_children_vo() {
@@ -5678,16 +5678,16 @@ function alley_price() {
   level.ap_residence thread scripts\common\anim::anim_loop_solo(level.price, "res_arrival_idle", "stop_loop");
 }
 
-function alley_price_life_door_aim(var0) {
+function alley_price_life_door_aim(var_0) {
   wait 0.75;
-  var1 = level.price aigetdesiredspeed();
+  var_1 = level.price aigetdesiredspeed();
 
-  if(var1 < 200) {
+  if(var_1 < 200) {
     level.price.dontevershoot = 1;
-    var2 = level.player getEye();
-    var3 = vectorNormalize(var0 getEye() - var2) * 500;
-    level.price scripts\sp\utility::aim_at(var2 + var3);
-    wait scripts\engine\math::remap(var1, 0, 200, 1.5, 0.05);
+    var_2 = level.player getEye();
+    var_3 = vectorNormalize(var_0 getEye() - var_2) * 500;
+    level.price scripts\sp\utility::aim_at(var_2 + var_3);
+    wait scripts\engine\math::remap(var_1, 0, 200, 1.5, 0.05);
     level.price scripts\sp\utility::stop_aiming();
     level.price.dontevershoot = 0;
     return;
@@ -5696,9 +5696,9 @@ function alley_price_life_door_aim(var0) {
 
 function alley_price_arrival_aim() {
   level.price.dontevershoot = 1;
-  var0 = scripts\engine\utility::getStruct("res_arrival_p_aim_start", "targetname");
-  level.price scripts\sp\utility::aim_at(var0.origin);
-  level.price scripts\sp\utility::move_aim_along_spline(var0, 2);
+  var_0 = scripts\engine\utility::getStruct("res_arrival_p_aim_start", "targetname");
+  level.price scripts\sp\utility::aim_at(var_0.origin);
+  level.price scripts\sp\utility::move_aim_along_spline(var_0, 2);
   level.price scripts\sp\utility::stop_aiming();
   level.price.dontevershoot = 0;
 }
@@ -5711,12 +5711,12 @@ function alley_farah() {
   scripts\engine\utility::flag_wait("reached_alley_start");
 
   if(!scripts\engine\utility::flag("cue_alley_life_kids")) {
-    var0 = scripts\engine\utility::getStruct("ap_alley_life_kids", "targetname");
-    var0 scripts\sp\anim::anim_reach_solo(level.farah, "alley_life_kids");
+    var_0 = scripts\engine\utility::getStruct("ap_alley_life_kids", "targetname");
+    var_0 scripts\sp\anim::anim_reach_solo(level.farah, "alley_life_kids");
 
     if(!scripts\engine\utility::flag("cue_alley_life_kids")) {
       scripts\engine\utility::flag_set("cue_alley_life_kids", level.farah);
-      var0 scripts\common\anim::anim_single_solo(level.farah, "alley_life_kids");
+      var_0 scripts\common\anim::anim_single_solo(level.farah, "alley_life_kids");
     }
   }
 
@@ -5737,94 +5737,94 @@ function alley_farah() {
 function alley_farah_aim() {
   wait 0.5;
   level.farah.dontevershoot = 1;
-  var0 = scripts\engine\utility::getStruct("res_arrival_f_aim_start", "targetname");
-  level.farah scripts\sp\utility::aim_at(var0.origin);
-  level.farah scripts\sp\utility::move_aim_along_spline(var0, 3);
+  var_0 = scripts\engine\utility::getStruct("res_arrival_f_aim_start", "targetname");
+  level.farah scripts\sp\utility::aim_at(var_0.origin);
+  level.farah scripts\sp\utility::move_aim_along_spline(var_0, 3);
   level.farah scripts\sp\utility::stop_aiming();
   level.farah.dontevershoot = 0;
 }
 
 function alley_wolf_escort() {
   level.ap_residence endon("stop_loop");
-  var0 = [level.alex, level.wolf, level.stacy, level.hadir];
+  var_0 = [level.alex, level.wolf, level.stacy, level.hadir];
   scripts\engine\utility::flag_wait("reached_wolf_escort_1");
-  var1 = getEnt("player_blocker_wolf_traversal_1", "targetname");
-  var1.origin += (0, 0, 256);
+  var_1 = getEnt("player_blocker_wolf_traversal_1", "targetname");
+  var_1.origin += (0, 0, 256);
 
   if(isDefined(level.ap_gar_meetup)) {
-    foreach(var3 in var0) {
-      level.ap_gar_meetup notify("stop_loop_" + var3.animname);
+    foreach(var_3 in var_0) {
+      level.ap_gar_meetup notify("stop_loop_" + var_3.animname);
     }
   }
 
-  GscBinSkip4(0x35, var0, "ap_wolf_escort_1", "wolf_escort_1", "reached_wolf_escort_2");
+  GscBinSkip4(0x35, var_0, "ap_wolf_escort_1", "wolf_escort_1", "reached_wolf_escort_2");
 }
 
-function alley_wolf_escort_animate_then_idle(var0, var1, var2, var3) {
-  if(!scripts\engine\utility::flag(var3)) {
-    level endon(var3);
+function alley_wolf_escort_animate_then_idle(var_0, var_1, var_2, var_3) {
+  if(!scripts\engine\utility::flag(var_3)) {
+    level endon(var_3);
 
     if(isDefined(level.ap_wolf_escort)) {
       level.ap_wolf_escort notify("stop_loop");
     }
 
-    level.ap_wolf_escort = scripts\engine\utility::getStruct(var1, "targetname");
-    level.ap_wolf_escort scripts\common\anim::anim_single(var0, var2 + "_enter");
-    level.ap_wolf_escort thread scripts\common\anim::anim_loop(var0, var2 + "_idle", "stop_loop");
+    level.ap_wolf_escort = scripts\engine\utility::getStruct(var_1, "targetname");
+    level.ap_wolf_escort scripts\common\anim::anim_single(var_0, var_2 + "_enter");
+    level.ap_wolf_escort thread scripts\common\anim::anim_loop(var_0, var_2 + "_idle", "stop_loop");
     return;
   }
 }
 
 function alley_life_door() {
-  var0 = scripts\engine\sp\utility::spawn_anim_model("alley_life_door");
-  var1 = scripts\engine\utility::getStruct("ap_alley_life_door", "targetname");
-  var1 scripts\common\anim::anim_first_frame_solo(var0, "alley_life_intro");
+  var_0 = scripts\engine\sp\utility::spawn_anim_model("alley_life_door");
+  var_1 = scripts\engine\utility::getStruct("ap_alley_life_door", "targetname");
+  var_1 scripts\common\anim::anim_first_frame_solo(var_0, "alley_life_intro");
   level waittill("price_alley_life_door");
-  var2 = scripts\engine\sp\utility::spawn_targetname("civ_alley_life_door", 1);
-  var2.animname = "civ";
-  var2 thread scripts\sp\maps\embassy\embassy_util::civ_friendly_fire_think();
-  thread alley_price_life_door_aim(var2);
-  var2 scripts\engine\utility::delaycall(0.05, &setanimrate, var2 scripts\engine\utility::getanim("alley_life_intro"), 1.25);
-  var0 scripts\engine\utility::delaycall(0.05, &setanimrate, var0 scripts\engine\utility::getanim("alley_life_intro"), 1.25);
-  var1 scripts\common\anim::anim_single([var0, var2], "alley_life_intro");
-  var2 scripts\engine\utility::delaycall(0.05, &setanimrate, var2 scripts\engine\utility::getanim("alley_life"), 1.25);
-  var0 scripts\engine\utility::delaycall(0.05, &setanimrate, var0 scripts\engine\utility::getanim("alley_life"), 1.25);
-  var1 scripts\common\anim::anim_single([var0, var2], "alley_life");
-  var2 delete();
+  var_2 = scripts\engine\sp\utility::spawn_targetname("civ_alley_life_door", 1);
+  var_2.animname = "civ";
+  var_2 thread scripts\sp\maps\embassy\embassy_util::civ_friendly_fire_think();
+  thread alley_price_life_door_aim(var_2);
+  var_2 scripts\engine\utility::delaycall(0.05, &setanimrate, var_2 scripts\engine\utility::getanim("alley_life_intro"), 1.25);
+  var_0 scripts\engine\utility::delaycall(0.05, &setanimrate, var_0 scripts\engine\utility::getanim("alley_life_intro"), 1.25);
+  var_1 scripts\common\anim::anim_single([var_0, var_2], "alley_life_intro");
+  var_2 scripts\engine\utility::delaycall(0.05, &setanimrate, var_2 scripts\engine\utility::getanim("alley_life"), 1.25);
+  var_0 scripts\engine\utility::delaycall(0.05, &setanimrate, var_0 scripts\engine\utility::getanim("alley_life"), 1.25);
+  var_1 scripts\common\anim::anim_single([var_0, var_2], "alley_life");
+  var_2 delete();
   scripts\engine\utility::flag_wait("defend_entrance_door_closed");
-  var0 delete();
+  var_0 delete();
 }
 
 function alley_life_kids() {
   scripts\engine\utility::flag_wait("reached_alley");
   level.alley_life_kids_door show();
-  var0 = scripts\engine\sp\utility::array_spawn_targetname("kid_alley_life_kids", 1);
+  var_0 = scripts\engine\sp\utility::array_spawn_targetname("kid_alley_life_kids", 1);
 
-  foreach(var2 in var0) {
-    var2.animname = "kid_" + var3 + 1;
-    var2 thread scripts\sp\maps\embassy\embassy_util::civ_friendly_fire_think();
+  foreach(var_2 in var_0) {
+    var_2.animname = "kid_" + var_3 + 1;
+    var_2 thread scripts\sp\maps\embassy\embassy_util::civ_friendly_fire_think();
   }
 
-  var4 = scripts\engine\utility::getStruct("ap_alley_life_kids", "targetname");
+  var_4 = scripts\engine\utility::getStruct("ap_alley_life_kids", "targetname");
   level.alley_life_kids_door scripts\engine\sp\utility::assign_animtree("kids_gate");
-  var4 thread scripts\common\anim::anim_loop(var0, "alley_life_kids_idle", "stop_loop");
-  var4 thread scripts\common\anim::anim_first_frame_solo(level.alley_life_kids_door, "alley_life_kids");
+  var_4 thread scripts\common\anim::anim_loop(var_0, "alley_life_kids_idle", "stop_loop");
+  var_4 thread scripts\common\anim::anim_first_frame_solo(level.alley_life_kids_door, "alley_life_kids");
   thread alley_life_kids_player_firing_listener();
-  thread alley_life_kids_player_distance_listener(var4.origin);
-  var5 = scripts\engine\utility::flag_wait("cue_alley_life_kids");
-  var4 notify("stop_loop");
-  var4 thread scripts\common\anim::anim_single_solo(level.alley_life_kids_door, "alley_life_kids");
-  scripts\engine\utility::array_thread(var0, &alley_life_kids_animate_then_delete, var4);
+  thread alley_life_kids_player_distance_listener(var_4.origin);
+  var_5 = scripts\engine\utility::flag_wait("cue_alley_life_kids");
+  var_4 notify("stop_loop");
+  var_4 thread scripts\common\anim::anim_single_solo(level.alley_life_kids_door, "alley_life_kids");
+  scripts\engine\utility::array_thread(var_0, &alley_life_kids_animate_then_delete, var_4);
   wait 0.8;
 
-  if(isDefined(var5) && var5 == level.farah) {
+  if(isDefined(var_5) && var_5 == level.farah) {
     level.farah scripts\sp\maps\embassy\embassy_util::say_as_chatter("dx_vom_far_alley_moving_80", 1);
     return;
   }
 }
 
-function alley_life_kids_animate_then_delete(var0) {
-  var0 scripts\common\anim::anim_single_solo(self, "alley_life_kids");
+function alley_life_kids_animate_then_delete(var_0) {
+  var_0 scripts\common\anim::anim_single_solo(self, "alley_life_kids");
   self delete();
 }
 
@@ -5835,55 +5835,55 @@ function alley_life_kids_player_firing_listener() {
   scripts\engine\utility::flag_set("cue_alley_life_kids", level.player);
 }
 
-function alley_life_kids_player_distance_listener(var0) {
+function alley_life_kids_player_distance_listener(var_0) {
   level endon("cue_alley_life_kids");
   scripts\engine\utility::flag_wait("reached_alley_start");
 
-  while(!alley_life_kids_player_within_distance(var0)) {
+  while(!alley_life_kids_player_within_distance(var_0)) {
     waitframe();
   }
 
   scripts\engine\utility::flag_set("cue_alley_life_kids", level.player);
 }
 
-function alley_life_kids_player_within_distance(var0) {
-  var1 = 15625;
-  var2 = distance2dsquared(level.player.origin, var0);
-  var3 = distance2dsquared(level.farah.origin, var0);
-  return var2 < var1 && var3 > var2;
+function alley_life_kids_player_within_distance(var_0) {
+  var_1 = 15625;
+  var_2 = distance2dsquared(level.player.origin, var_0);
+  var_3 = distance2dsquared(level.farah.origin, var_0);
+  return var_2 < var_1 && var_3 > var_2;
 }
 
 function alley_life_tv() {
   scripts\engine\utility::flag_wait("reached_alley_end");
-  var0 = scripts\engine\sp\utility::spawn_targetname("civ_alley_life_tv", 1);
-  var0.animname = "civ";
-  var0.player_fired = 0;
-  var0 thread scripts\sp\maps\embassy\embassy_util::civ_friendly_fire_think();
-  var1 = scripts\engine\utility::getStruct("ap_alley_life_tv", "targetname");
-  var1 thread scripts\common\anim::anim_loop_solo(var0, "alley_life_tv_idle", "stop_loop");
+  var_0 = scripts\engine\sp\utility::spawn_targetname("civ_alley_life_tv", 1);
+  var_0.animname = "civ";
+  var_0.player_fired = 0;
+  var_0 thread scripts\sp\maps\embassy\embassy_util::civ_friendly_fire_think();
+  var_1 = scripts\engine\utility::getStruct("ap_alley_life_tv", "targetname");
+  var_1 thread scripts\common\anim::anim_loop_solo(var_0, "alley_life_tv_idle", "stop_loop");
   thread alley_life_tv_player_firing_listener();
-  thread alley_life_tv_player_looking_listener(var0);
+  thread alley_life_tv_player_looking_listener(var_0);
   scripts\engine\utility::flag_wait("cue_alley_life_tv");
-  var1 notify("stop_loop");
-  var1 thread scripts\common\anim::anim_single_solo(var0, "alley_life_tv");
+  var_1 notify("stop_loop");
+  var_1 thread scripts\common\anim::anim_single_solo(var_0, "alley_life_tv");
 
-  if(!var0.player_fired) {
-    scripts\engine\utility::waittill_any_ents(var1, "alley_life_tv", level, "tv_civ_fleeing");
+  if(!var_0.player_fired) {
+    scripts\engine\utility::waittill_any_ents(var_1, "alley_life_tv", level, "tv_civ_fleeing");
 
-    if(!var0.player_fired) {
-      var1 thread scripts\common\anim::anim_loop_solo(var0, "alley_life_tv_idle", "stop_loop");
+    if(!var_0.player_fired) {
+      var_1 thread scripts\common\anim::anim_loop_solo(var_0, "alley_life_tv_idle", "stop_loop");
     }
   }
 
   scripts\engine\utility::flag_wait_any("defend_entrance_door_closed", "tv_civ_fleeing");
 
-  if(var0.player_fired) {
-    var1 notify("stop_loop");
-    var1 thread scripts\common\anim::anim_loop_solo(var0, "alley_life_tv_gun_react", "endor");
+  if(var_0.player_fired) {
+    var_1 notify("stop_loop");
+    var_1 thread scripts\common\anim::anim_loop_solo(var_0, "alley_life_tv_gun_react", "endor");
   }
 
   scripts\engine\utility::flag_wait("defend_entrance_door_closed");
-  var0 delete();
+  var_0 delete();
 }
 
 function alley_life_tv_player_firing_listener() {
@@ -5896,10 +5896,10 @@ function alley_life_tv_player_firing_listener() {
   self stopanimScripted();
 }
 
-function alley_life_tv_player_looking_listener(var0) {
+function alley_life_tv_player_looking_listener(var_0) {
   level endon("cue_alley_life_tv");
 
-  while(!(scripts\sp\maps\embassy\embassy_util::within_distance(level.player.origin, var0, 300) && scripts\sp\maps\embassy\embassy_util::within_player_fov(var0))) {
+  while(!(scripts\sp\maps\embassy\embassy_util::within_distance(level.player.origin, var_0, 300) && scripts\sp\maps\embassy\embassy_util::within_player_fov(var_0))) {
     waitframe();
   }
 

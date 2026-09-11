@@ -5,11 +5,11 @@
 
 #using_animtree("");
 
-function initanimtree(var0) {
+function initanimtree(var_0) {
   self clearanim(%body, 0.3);
   self setanim($body, 1, 0);
 
-  if(var0 != "pain" && var0 != "death") {
+  if(var_0 != "pain" && var_0 != "death") {
     self.a.special = "none";
   }
 
@@ -37,7 +37,7 @@ function updateanimpose() {
   self.desired_anim_pose = undefined;
 }
 
-function initialize(var0) {
+function initialize(var_0) {
   self endon("killanimscript");
   self waittill("Hellfreezesover");
 }
@@ -52,8 +52,8 @@ function printdisplaceinfo() {
   }
 }
 
-function isincombat(var0) {
-  if((!isDefined(var0) || var0) && self.alertlevelint > 1) {
+function isincombat(var_0) {
+  if((!isDefined(var_0) || var_0) && self.alertlevelint > 1) {
     return true;
   }
 
@@ -71,14 +71,14 @@ function updateisincombattimer() {
   }
 }
 
-function notifyaftertime(var0, var1, var2) {
+function notifyaftertime(var_0, var_1, var_2) {
   self endon("death");
-  self endon(var1);
-  wait var2;
-  self notify(var0);
+  self endon(var_1);
+  wait var_2;
+  self notify(var_0);
 }
 
-function drawstring(var0) {
+function drawstring(var_0) {
   self endon("killanimscript");
   self endon("enddrawstring");
 
@@ -87,15 +87,15 @@ function drawstring(var0) {
   }
 }
 
-function drawstringtime(var0, var1, var2, var3) {
-  var4 = var3 * 20;
+function drawstringtime(var_0, var_1, var_2, var_3) {
+  var_4 = var_3 * 20;
 
-  for(var5 = 0; var5 < var4; var5++) {
+  for(var_5 = 0; var_5 < var_4; var_5++) {
     wait 0.05;
   }
 }
 
-function showlastenemysightpos(var0) {
+function showlastenemysightpos(var_0) {
   self notify("got known enemy2");
   self endon("got known enemy2");
   self endon("death");
@@ -105,9 +105,9 @@ function showlastenemysightpos(var0) {
   }
 
   if(self.enemy.team == "allies") {
-    var1 = (0.4, 0.7, 1);
+    var_1 = (0.4, 0.7, 1);
   } else {
-    var1 = (1, 0.7, 0.4);
+    var_1 = (1, 0.7, 0.4);
   }
 
   for(;;) {
@@ -134,18 +134,18 @@ function debugtimeout() {
   self notify("timeout");
 }
 
-function debugposinternal(var0, var1, var2) {
+function debugposinternal(var_0, var_1, var_2) {
   self endon("death");
-  self notify("stop debug " + var0);
-  self endon("stop debug " + var0);
-  var3 = spawnStruct();
+  self notify("stop debug " + var_0);
+  self endon("stop debug " + var_0);
+  var_3 = spawnStruct();
   thread debugtimeout();
-  var3 endon("timeout");
+  var_3 endon("timeout");
 
   if(self.enemy.team == "allies") {
-    var4 = (0.4, 0.7, 1);
+    var_4 = (0.4, 0.7, 1);
   } else {
-    var4 = (1, 0.7, 0.4);
+    var_4 = (1, 0.7, 0.4);
   }
 
   for(;;) {
@@ -153,29 +153,29 @@ function debugposinternal(var0, var1, var2) {
   }
 }
 
-function debugpos(var0, var1) {
-  thread debugposinternal(var0, var1, 2.15);
+function debugpos(var_0, var_1) {
+  thread debugposinternal(var_0, var_1, 2.15);
 }
 
-function debugpossize(var0, var1, var2) {
-  thread debugposinternal(var0, var1, var2);
+function debugpossize(var_0, var_1, var_2) {
+  thread debugposinternal(var_0, var_1, var_2);
 }
 
-function debugburstprint(var0, var1) {
-  var2 = var0 / var1;
-  var3 = undefined;
+function debugburstprint(var_0, var_1) {
+  var_2 = var_0 / var_1;
+  var_3 = undefined;
 
-  if(var0 == self.bulletsinclip) {
-    var3 = "all rounds";
-  } else if(var2 < 0.25) {
-    var3 = "small burst";
-  } else if(var2 < 0.5) {
-    var3 = "med burst";
+  if(var_0 == self.bulletsinclip) {
+    var_3 = "all rounds";
+  } else if(var_2 < 0.25) {
+    var_3 = "small burst";
+  } else if(var_2 < 0.5) {
+    var_3 = "med burst";
   } else {
-    var3 = "long burst";
+    var_3 = "long burst";
   }
 
-  thread debugpossize(self.origin + (0, 0, 42), var3, 1.5);
+  thread debugpossize(self.origin + (0, 0, 42), var_3, 1.5);
   thread debugpos(self.origin + (0, 0, 60), "Suppressing");
 }
 
@@ -183,34 +183,34 @@ function printshootproc() {
   self endon("death");
   self notify("stop shoot " + self.export);
   self endon("stop shoot " + self.export);
-  var0 = 0.25;
-  var1 = var0 * 20;
-  var2 = 0;
+  var_0 = 0.25;
+  var_1 = var_0 * 20;
+  var_2 = 0;
 
-  while(var2 < var1) {
+  while(var_2 < var_1) {
     wait 0.05;
-    var2 += 1;
+    var_2 += 1;
   }
 }
 
 function printshoot() {}
 
-function showdebugproc(var0, var1, var2, var3) {
+function showdebugproc(var_0, var_1, var_2, var_3) {
   self endon("death");
-  var4 = var3 * 20;
-  var5 = 0;
+  var_4 = var_3 * 20;
+  var_5 = 0;
 
-  while(var5 < var4) {
+  while(var_5 < var_4) {
     wait 0.05;
-    var5 += 1;
+    var_5 += 1;
   }
 }
 
-function showdebugline(var0, var1, var2, var3) {
-  thread showdebugproc(var0, var1 + (0, 0, -5), var2, var3);
+function showdebugline(var_0, var_1, var_2, var_3) {
+  thread showdebugproc(var_0, var_1 + (0, 0, -5), var_2, var_3);
 }
 
-function shootenemywrapper_normal(var0) {
+function shootenemywrapper_normal(var_0) {
   self.a.lastshoottime = gettime();
   scripts\common\gameskill::set_accuracy_based_on_situation();
   self notify("shooting");
@@ -221,87 +221,87 @@ function shootenemywrapper_normal(var0) {
   }
 
   if(isagent(self)) {
-    var0 = 1;
+    var_0 = 1;
   }
 
-  self shoot(1, undefined, var0);
+  self shoot(1, undefined, var_0);
 }
 
-function shootenemywrapper_shootnotify(var0) {
+function shootenemywrapper_shootnotify(var_0) {
   level notify("an_enemy_shot", self);
-  shootenemywrapper_normal(var0);
+  shootenemywrapper_normal(var_0);
 }
 
-function shootposwrapper(var0, var1) {
+function shootposwrapper(var_0, var_1) {
   self.a.lastshoottime = gettime();
 
-  if(!isDefined(var1)) {
-    var1 = 1;
+  if(!isDefined(var_1)) {
+    var_1 = 1;
   }
 
   self notify("shooting");
 
   if(scripts\anim\utility_common::isasniper()) {
-    self shoot(1, var0, 1, 1, 1);
+    self shoot(1, var_0, 1, 1, 1);
     return;
   }
 
-  var2 = 0;
+  var_2 = 0;
 
   if(isDefined(self.enemy) && istrue(self.enemy.underlowcover)) {
-    var2 = 1;
+    var_2 = 1;
   }
 
-  var3 = bulletspread(self getmuzzlepos(), var0, 4);
-  self shoot(1, var3, var1, var2);
+  var_3 = bulletspread(self getmuzzlepos(), var_0, 4);
+  self shoot(1, var_3, var_1, var_2);
 }
 
 function throwgun() {
-  var0 = spawn("script_model", (0, 0, 0));
-  var0 setModel("temp");
-  var0.origin = self gettagorigin("tag_weapon_right") + (50, 50, 0);
-  var0.angles = self gettagangles("tag_weapon_right");
-  var1 = anglestoright(var0.angles);
-  var1 *= 15;
-  var2 = anglesToForward(var0.angles);
-  var2 *= 15;
-  var0 movegravity((0, 50, 150), 100);
-  var3 = "weapon_" + createheadicon(self.weapon);
-  var4 = spawn(var3, var0.origin);
-  var4.angles = self gettagangles("tag_weapon_right");
-  var4 linkTo(var0);
-  var5 = var0.origin;
+  var_0 = spawn("script_model", (0, 0, 0));
+  var_0 setModel("temp");
+  var_0.origin = self gettagorigin("tag_weapon_right") + (50, 50, 0);
+  var_0.angles = self gettagangles("tag_weapon_right");
+  var_1 = anglestoright(var_0.angles);
+  var_1 *= 15;
+  var_2 = anglesToForward(var_0.angles);
+  var_2 *= 15;
+  var_0 movegravity((0, 50, 150), 100);
+  var_3 = "weapon_" + createheadicon(self.weapon);
+  var_4 = spawn(var_3, var_0.origin);
+  var_4.angles = self gettagangles("tag_weapon_right");
+  var_4 linkTo(var_0);
+  var_5 = var_0.origin;
 
-  while(isDefined(var4) && isDefined(var4.origin)) {
-    var6 = var5;
-    var7 = var0.origin;
-    var8 = vectortoangles(var7 - var6);
-    var2 = anglesToForward(var8);
-    var2 *= 4;
-    var9 = scripts\engine\trace::_bullet_trace(var7, var7 + var2, 1, var4);
+  while(isDefined(var_4) && isDefined(var_4.origin)) {
+    var_6 = var_5;
+    var_7 = var_0.origin;
+    var_8 = vectortoangles(var_7 - var_6);
+    var_2 = anglesToForward(var_8);
+    var_2 *= 4;
+    var_9 = scripts\engine\trace::_bullet_trace(var_7, var_7 + var_2, 1, var_4);
 
-    if(isalive(var9["entity"]) && var9["entity"] == self) {
+    if(isalive(var_9["entity"]) && var_9["entity"] == self) {
       wait 0.05;
       continue;
     }
 
-    if(var9["fraction"] < 1) {
+    if(var_9["fraction"] < 1) {
       break;
     }
 
-    var5 = var0.origin;
+    var_5 = var_0.origin;
     wait 0.05;
   }
 
-  if(isDefined(var4) && isDefined(var4.origin)) {
-    var4 unlink();
+  if(isDefined(var_4) && isDefined(var_4.origin)) {
+    var_4 unlink();
   }
 
-  var0 delete();
+  var_0 delete();
 }
 
 function personalcoldbreath() {
-  var0 = "TAG_EYE";
+  var_0 = "TAG_EYE";
   self endon("death");
   self notify("stop personal effect");
   self endon("stop personal effect");
@@ -318,7 +318,7 @@ function personalcoldbreath() {
         continue;
       }
 
-      playFXOnTag(level._effect["cold_breath"], self, var0);
+      playFXOnTag(level._effect["cold_breath"], self, var_0);
       wait 2.5 + randomfloat(3);
       continue;
     }
@@ -335,43 +335,43 @@ function ispartiallysuppressedwrapper() {
   return self issuppressed();
 }
 
-function showlines(var0, var1, var2) {
+function showlines(var_0, var_1, var_2) {
   for(;;) {
     wait 0.05;
     wait 0.05;
   }
 }
 
-function anim_array(var0, var1) {
-  var2 = var0.size;
-  var3 = randomint(var2);
+function anim_array(var_0, var_1) {
+  var_2 = var_0.size;
+  var_3 = randomint(var_2);
 
-  if(var2 == 1) {
-    return var0[0];
+  if(var_2 == 1) {
+    return var_0[0];
   }
 
-  var4 = 0;
-  var5 = 0;
+  var_4 = 0;
+  var_5 = 0;
 
-  for(var6 = 0; var6 < var2; var6++) {
-    var5 += var1[var6];
+  for(var_6 = 0; var_6 < var_2; var_6++) {
+    var_5 += var_1[var_6];
   }
 
-  var7 = randomfloat(var5);
-  var8 = 0;
+  var_7 = randomfloat(var_5);
+  var_8 = 0;
 
-  for(var6 = 0; var6 < var2; var6++) {
-    var8 += var1[var6];
+  for(var_6 = 0; var_6 < var_2; var_6++) {
+    var_8 += var_1[var_6];
 
-    if(var7 >= var8) {
+    if(var_7 >= var_8) {
       continue;
     }
 
-    var3 = var6;
+    var_3 = var_6;
     break;
   }
 
-  return var0[var3];
+  return var_0[var_3];
 }
 
 function canthrowgrenade() {
@@ -390,51 +390,51 @@ function usingboltactionweapon() {
   return weaponisboltaction(self.weapon);
 }
 
-function random_weight(var0) {
-  var1 = randomint(var0.size);
+function random_weight(var_0) {
+  var_1 = randomint(var_0.size);
 
-  if(var0.size > 1) {
-    var2 = 0;
+  if(var_0.size > 1) {
+    var_2 = 0;
 
-    for(var3 = 0; var3 < var0.size; var3++) {
-      var2 += var0[var3];
+    for(var_3 = 0; var_3 < var_0.size; var_3++) {
+      var_2 += var_0[var_3];
     }
 
-    var4 = randomfloat(var2);
-    var2 = 0;
+    var_4 = randomfloat(var_2);
+    var_2 = 0;
 
-    for(var3 = 0; var3 < var0.size; var3++) {
-      var2 += var0[var3];
+    for(var_3 = 0; var_3 < var_0.size; var_3++) {
+      var_2 += var_0[var_3];
 
-      if(var4 < var2) {
-        var1 = var3;
+      if(var_4 < var_2) {
+        var_1 = var_3;
         break;
       }
     }
   }
 
-  return var1;
+  return var_1;
 }
 
-function setfootstepeffect(var0, var1, var2) {
+function setfootstepeffect(var_0, var_1, var_2) {
   if(!isDefined(anim.optionalstepeffects)) {
     anim.optionalstepeffects = [];
   }
 
-  anim.optionalstepeffects[var1] = 1;
-  level._effect["step_" + var1][var0] = var2;
+  anim.optionalstepeffects[var_1] = 1;
+  level._effect["step_" + var_1][var_0] = var_2;
 }
 
-function setfootstepeffectsmall(var0, var1, var2) {
+function setfootstepeffectsmall(var_0, var_1, var_2) {
   if(!isDefined(anim.optionalstepeffectssmall)) {
     anim.optionalstepeffectssmall = [];
   }
 
-  anim.optionalstepeffectssmall[var1] = 1;
-  level._effect["step_small_" + var1][var0] = var2;
+  anim.optionalstepeffectssmall[var_1] = 1;
+  level._effect["step_small_" + var_1][var_0] = var_2;
 }
 
-function setfootprinteffect(var0, var1, var2) {
+function setfootprinteffect(var_0, var_1, var_2) {
   if(!isDefined(anim.optionalfootprinteffects)) {
     anim.optionalfootprinteffects = [];
   }
@@ -443,84 +443,84 @@ function setfootprinteffect(var0, var1, var2) {
     anim.flirfootprinteffects = 0;
   }
 
-  anim.optionalfootprinteffects[var1] = 1;
-  level._effect["footprint_" + var1][var0] = var2;
+  anim.optionalfootprinteffects[var_1] = 1;
+  level._effect["footprint_" + var_1][var_0] = var_2;
 }
 
-function unsetfootstepeffect(var0) {
+function unsetfootstepeffect(var_0) {
   if(isDefined(anim.optionalstepeffects)) {
-    anim.optionalstepeffects[var0] = undefined;
+    anim.optionalstepeffects[var_0] = undefined;
   }
 
-  level._effect["step_" + var0] = undefined;
+  level._effect["step_" + var_0] = undefined;
 }
 
-function unsetfootstepeffectsmall(var0) {
+function unsetfootstepeffectsmall(var_0) {
   if(isDefined(anim.optionalstepeffectssmall)) {
-    anim.optionalstepeffectssmall[var0] = undefined;
+    anim.optionalstepeffectssmall[var_0] = undefined;
   }
 
-  level._effect["step_small_" + var0] = undefined;
+  level._effect["step_small_" + var_0] = undefined;
 }
 
-function unsetfootprinteffect(var0) {
+function unsetfootprinteffect(var_0) {
   if(isDefined(anim.optionalfootprinteffects)) {
-    anim.optionalfootprinteffects[var0] = undefined;
+    anim.optionalfootprinteffects[var_0] = undefined;
   }
 
-  level._effect["footprint_" + var0] = undefined;
+  level._effect["footprint_" + var_0] = undefined;
 }
 
-function setnotetrackeffect(var0, var1, var2, var3, var4, var5) {
-  if(!isDefined(var2)) {
-    var2 = "all";
+function setnotetrackeffect(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(!isDefined(var_2)) {
+    var_2 = "all";
   }
 
   if(!isDefined(level._notetrackfx)) {
     level._notetrackfx = [];
   }
 
-  level._notetrackfx[var0][var2] = spawnStruct();
-  level._notetrackfx[var0][var2].tag = var1;
-  level._notetrackfx[var0][var2].fx = var3;
-  setnotetracksound(var0, var2, var4, var5);
+  level._notetrackfx[var_0][var_2] = spawnStruct();
+  level._notetrackfx[var_0][var_2].tag = var_1;
+  level._notetrackfx[var_0][var_2].fx = var_3;
+  setnotetracksound(var_0, var_2, var_4, var_5);
 }
 
-function setnotetracksound(var0, var1, var2, var3) {
-  if(!isDefined(var1)) {
-    var1 = "all";
+function setnotetracksound(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_1)) {
+    var_1 = "all";
   }
 
   if(!isDefined(level._notetrackfx)) {
     level._notetrackfx = [];
   }
 
-  if(isDefined(level._notetrackfx[var0][var1])) {
-    var4 = level._notetrackfx[var0][var1];
+  if(isDefined(level._notetrackfx[var_0][var_1])) {
+    var_4 = level._notetrackfx[var_0][var_1];
   } else {
-    var4 = spawnStruct();
-    level._notetrackfx[var1][var2] = var4;
+    var_4 = spawnStruct();
+    level._notetrackfx[var_1][var_2] = var_4;
   }
 
-  if(isDefined(var3)) {
-    var4.sound_prefix = var3;
+  if(isDefined(var_3)) {
+    var_4.sound_prefix = var_3;
   }
 
-  if(isDefined(var4)) {
-    var4.sound_suffix = var4;
+  if(isDefined(var_4)) {
+    var_4.sound_suffix = var_4;
     return;
   }
 }
 
-function enterpronewrapper(var0) {
-  thread enterpronewrapperproc(var0);
+function enterpronewrapper(var_0) {
+  thread enterpronewrapperproc(var_0);
 }
 
-function enterpronewrapperproc(var0) {
+function enterpronewrapperproc(var_0) {
   self endon("death");
   self notify("anim_prone_change");
   self endon("anim_prone_change");
-  self enterprone(var0, isDefined(self.a.onback));
+  self enterprone(var_0, isDefined(self.a.onback));
   self waittill("killanimscript");
 
   if(self.currentpose != "prone" && !isDefined(self.a.onback)) {
@@ -534,15 +534,15 @@ function stoponback() {
   self.a.onback = undefined;
 }
 
-function exitpronewrapper(var0) {
-  thread exitpronewrapperproc(var0);
+function exitpronewrapper(var_0) {
+  thread exitpronewrapperproc(var_0);
 }
 
-function exitpronewrapperproc(var0) {
+function exitpronewrapperproc(var_0) {
   self endon("death");
   self notify("anim_prone_change");
   self endon("anim_prone_change");
-  self exitprone(var0);
+  self exitprone(var_0);
   self waittill("killanimscript");
 
   if(self.currentpose == "prone") {
@@ -551,27 +551,27 @@ function exitpronewrapperproc(var0) {
   }
 }
 
-function animarray(var0) {
-  return self.a.array[var0];
+function animarray(var_0) {
+  return self.a.array[var_0];
 }
 
-function animarrayanyexist(var0) {
-  return isDefined(self.a.array[var0]) && self.a.array[var0].size > 0;
+function animarrayanyexist(var_0) {
+  return isDefined(self.a.array[var_0]) && self.a.array[var_0].size > 0;
 }
 
-function animarraypickrandom(var0) {
-  var1 = randomint(self.a.array[var0].size);
-  return self.a.array[var0][var1];
+function animarraypickrandom(var_0) {
+  var_1 = randomint(self.a.array[var_0].size);
+  return self.a.array[var_0][var_1];
 }
 
-function array(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13) {
-  var14 = [];
+function array(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
+  var_14 = [];
 
-  if(isDefined(var0)) {
-    GscBinSkip0(0x2e, 0, var0);
+  if(isDefined(var_0)) {
+    GscBinSkip0(0x2e, 0, var_0);
   }
 
-  return var14;
+  return var_14;
 }
 
 function getaiprimaryweapon() {
@@ -604,37 +604,37 @@ function getaicurrentweaponslot() {
   }
 }
 
-function aihasweapon(var0) {
-  var1 = createheadicon(var0);
+function aihasweapon(var_0) {
+  var_1 = createheadicon(var_0);
 
-  if(isDefined(self.weaponinfo[var1])) {
+  if(isDefined(self.weaponinfo[var_1])) {
     return true;
   }
 
   return false;
 }
 
-function getanimendpos(var0) {
-  var1 = getmovedelta(var0, 0, 1);
-  return self localtoworldcoords(var1);
+function getanimendpos(var_0) {
+  var_1 = getmovedelta(var_0, 0, 1);
+  return self localtoworldcoords(var_1);
 }
 
-function ragdolldeath(var0) {
+function ragdolldeath(var_0) {
   self endon("killanimscript");
-  var1 = self.origin;
-  var2 = (0, 0, 0);
+  var_1 = self.origin;
+  var_2 = (0, 0, 0);
 
   for(;;) {
     wait 0.05;
-    var3 = distance(self.origin, var1);
-    var1 = self.origin;
+    var_3 = distance(self.origin, var_1);
+    var_1 = self.origin;
 
     if(self.health == 1) {
       self.a.nodeath = 1;
       self startragdoll();
-      self clearanim(var0, 0.1);
+      self clearanim(var_0, 0.1);
       wait 0.05;
-      physicsexplosionsphere(var1, 600, 0, var3 * 0.1);
+      physicsexplosionsphere(var_1, 600, 0, var_3 * 0.1);
       self notify("killanimscript");
       return;
     }
@@ -657,9 +657,9 @@ function randomizeidleset() {
   self.a.idleset = randomint(2);
 }
 
-function getrandomintfromseed(var0, var1) {
-  var2 = var0 % anim.randominttablesize;
-  return anim.randominttable[var2] % var1;
+function getrandomintfromseed(var_0, var_1) {
+  var_2 = var_0 % anim.randominttablesize;
+  return anim.randominttable[var_2] % var_1;
 }
 
 function getcurrentweaponslotname() {
@@ -674,32 +674,32 @@ function getcurrentweaponslotname() {
   return "primary";
 }
 
-function lookupanim(var0, var1) {
+function lookupanim(var_0, var_1) {
   if(isDefined(self.animarchetype)) {
-    if(isDefined(anim.archetypes[self.animarchetype][var0]) && isDefined(anim.archetypes[self.animarchetype][var0][var1])) {
-      return anim.archetypes[self.animarchetype][var0][var1];
+    if(isDefined(anim.archetypes[self.animarchetype][var_0]) && isDefined(anim.archetypes[self.animarchetype][var_0][var_1])) {
+      return anim.archetypes[self.animarchetype][var_0][var_1];
     }
   }
 
-  return anim.archetypes["soldier"][var0][var1];
+  return anim.archetypes["soldier"][var_0][var_1];
 }
 
-function lookupanimarray(var0) {
+function lookupanimarray(var_0) {
   if(isDefined(self.animarchetype)) {
-    if(isDefined(anim.archetypes[self.animarchetype][var0])) {
-      var1 = anim.archetypes["soldier"][var0];
+    if(isDefined(anim.archetypes[self.animarchetype][var_0])) {
+      var_1 = anim.archetypes["soldier"][var_0];
 
-      foreach(var3 in anim.archetypes[self.animarchetype][var0]) {
-        var1 = var3;
+      foreach(var_3 in anim.archetypes[self.animarchetype][var_0]) {
+        var_1 = var_3;
       }
 
-      return var1;
+      return var_1;
     }
   }
 
-  return anim.archetypes["soldier"][var4];
+  return anim.archetypes["soldier"][var_4];
 }
 
-function isenergyweapon(var0) {
-  return weaponusesenergybullets(var0);
+function isenergyweapon(var_0) {
+  return weaponusesenergybullets(var_0);
 }

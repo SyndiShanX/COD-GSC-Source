@@ -33,6 +33,6 @@ function main_mp() {
   scripts\code\character::attachhead("heads_al_qatala_desert", xmodelalias\heads_al_qatala_desert::main());
 }
 
-function precache_mp(var0) {
-  level.agent_definition[var0]["animclass"] = "soldier_cp";
+function precache_mp(var_0) {
+  level.agent_definition[var_0]["animclass"] = "soldier_cp";
 }

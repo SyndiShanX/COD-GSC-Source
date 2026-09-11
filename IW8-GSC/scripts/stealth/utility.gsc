@@ -3,79 +3,79 @@
  * Script: scripts\stealth\utility.gsc
 ***********************************************/
 
-function get_group(var0) {
-  if(!isDefined(level.stealth.groupdata.groups[var0])) {
+function get_group(var_0) {
+  if(!isDefined(level.stealth.groupdata.groups[var_0])) {
     return undefined;
   }
 
-  return level.stealth.groupdata.groups[var0].members;
+  return level.stealth.groupdata.groups[var_0].members;
 }
 
-function group_flag_clear(var0, var1) {
-  var2 = get_group_flagname(var0, var1);
-  scripts\engine\utility::flag_clear(var2);
-  var3 = level.stealth.group.flags[var0];
-  var4 = 1;
+function group_flag_clear(var_0, var_1) {
+  var_2 = get_group_flagname(var_0, var_1);
+  scripts\engine\utility::flag_clear(var_2);
+  var_3 = level.stealth.group.flags[var_0];
+  var_4 = 1;
 
-  foreach(var6 in var3) {
-    if(!issubstr(var6, "allies") && scripts\engine\utility::flag(var6)) {
+  foreach(var_6 in var_3) {
+    if(!issubstr(var_6, "allies") && scripts\engine\utility::flag(var_6)) {
       return;
     }
   }
 
-  if(scripts\engine\utility::flag(var2) && self != level) {
-    self notify(var0);
+  if(scripts\engine\utility::flag(var_2) && self != level) {
+    self notify(var_0);
   }
 
-  scripts\engine\utility::flag_clear(var0);
+  scripts\engine\utility::flag_clear(var_0);
 }
 
-function group_flag_set(var0) {
-  var1 = get_group_flagname(var0);
+function group_flag_set(var_0) {
+  var_1 = get_group_flagname(var_0);
 
-  if(!scripts\engine\utility::flag(var1) && self != level) {
-    self notify(var0);
+  if(!scripts\engine\utility::flag(var_1) && self != level) {
+    self notify(var_0);
   }
 
-  scripts\engine\utility::flag_set(var1);
-  scripts\engine\utility::flag_set(var0);
+  scripts\engine\utility::flag_set(var_1);
+  scripts\engine\utility::flag_set(var_0);
 }
 
-function group_flag(var0) {
-  var1 = get_group_flagname(var0);
-  return scripts\engine\utility::flag(var1);
+function group_flag(var_0) {
+  var_1 = get_group_flagname(var_0);
+  return scripts\engine\utility::flag(var_1);
 }
 
-function get_group_flagname(var0, var1) {
-  if(!isDefined(var1)) {
-    var1 = self.script_stealthgroup;
+function get_group_flagname(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = self.script_stealthgroup;
   }
 
-  var2 = var0 + "-Group:" + var1;
-  return var2;
+  var_2 = var_0 + "-Group:" + var_1;
+  return var_2;
 }
 
-function group_flag_wait(var0) {
-  var1 = get_group_flagname(var0);
-  scripts\engine\utility::flag_wait(var1);
+function group_flag_wait(var_0) {
+  var_1 = get_group_flagname(var_0);
+  scripts\engine\utility::flag_wait(var_1);
 }
 
-function group_flag_waitopen(var0) {
-  var1 = get_group_flagname(var0);
-  scripts\engine\utility::flag_waitopen(var1);
+function group_flag_waitopen(var_0) {
+  var_1 = get_group_flagname(var_0);
+  scripts\engine\utility::flag_waitopen(var_1);
 }
 
-function group_flag_wait_or_timeout(var0, var1) {
-  var2 = get_group_flagname(var0);
-  scripts\engine\utility::flag_wait_or_timeout(var2, var1);
+function group_flag_wait_or_timeout(var_0, var_1) {
+  var_2 = get_group_flagname(var_0);
+  scripts\engine\utility::flag_wait_or_timeout(var_2, var_1);
 }
 
-function group_flag_waitopen_or_timeout(var0, var1) {
-  var2 = get_group_flagname(var0);
-  scripts\engine\utility::flag_waitopen_or_timeout(var2, var1);
+function group_flag_waitopen_or_timeout(var_0, var_1) {
+  var_2 = get_group_flagname(var_0);
+  scripts\engine\utility::flag_waitopen_or_timeout(var_2, var_1);
 }
 
-function group_flag_init(var0) {
+function group_flag_init(var_0) {
   if(isDefined(self.script_stealthgroup)) {
     self.script_stealthgroup = scripts\engine\utility::string(self.script_stealthgroup);
   } else {
@@ -86,30 +86,30 @@ function group_flag_init(var0) {
     self.script_stealthgroup += "allies";
   }
 
-  if(!scripts\engine\utility::flag_exist(var0)) {
-    scripts\engine\utility::flag_init(var0);
+  if(!scripts\engine\utility::flag_exist(var_0)) {
+    scripts\engine\utility::flag_init(var_0);
   }
 
-  var1 = get_group_flagname(var0);
+  var_1 = get_group_flagname(var_0);
 
-  if(!scripts\engine\utility::flag_exist(var1)) {
-    scripts\engine\utility::flag_init(var1);
+  if(!scripts\engine\utility::flag_exist(var_1)) {
+    scripts\engine\utility::flag_init(var_1);
 
-    if(!isDefined(level.stealth.group.flags[var0])) {
-      level.stealth.group.flags[var0] = [];
+    if(!isDefined(level.stealth.group.flags[var_0])) {
+      level.stealth.group.flags[var_0] = [];
     }
 
-    level.stealth.group.flags[var0][level.stealth.group.flags[var0].size] = var1;
+    level.stealth.group.flags[var_0][level.stealth.group.flags[var_0].size] = var_1;
     return;
   }
 }
 
-function group_setcombatgoalRadius(var0, var1) {
+function group_setcombatgoalRadius(var_0, var_1) {
   if(!isDefined(level.stealth.combat_goalradius)) {
     level.stealth.combat_goalradius = [];
   }
 
-  level.stealth.combat_goalradius[var0] = var1;
+  level.stealth.combat_goalradius[var_0] = var_1;
 }
 
 function group_add() {
@@ -122,21 +122,21 @@ function group_add() {
 }
 
 function group_spotted_flag() {
-  var0 = get_group_flagname("stealth_spotted");
-  return scripts\engine\utility::flag(var0);
+  var_0 = get_group_flagname("stealth_spotted");
+  return scripts\engine\utility::flag(var_0);
 }
 
-function any_groups_in_combat(var0) {
+function any_groups_in_combat(var_0) {
   if(!scripts\engine\utility::flag("stealth_enabled")) {
     return false;
   }
 
-  foreach(var2 in level.stealth.groupdata.groups) {
-    if(isDefined(var0) && !scripts\engine\utility::array_contains(var0, var2.name)) {
+  foreach(var_2 in level.stealth.groupdata.groups) {
+    if(isDefined(var_0) && !scripts\engine\utility::array_contains(var_0, var_2.name)) {
       continue;
     }
 
-    if(scripts\stealth\group::group_anyoneincombat(var2.name)) {
+    if(scripts\stealth\group::group_anyoneincombat(var_2.name)) {
       return true;
     }
   }
@@ -157,23 +157,23 @@ function get_stealth_state() {
   }
 }
 
-function set_stealth_state(var0) {
-  switch (var0) {
+function set_stealth_state(var_0) {
+  switch (var_0) {
     case "attack":
-      var1 = 3;
+      var_1 = 3;
       break;
     case "warning2":
-      var1 = 2;
+      var_1 = 2;
       break;
     case "warning1":
-      var1 = 1;
+      var_1 = 1;
       break;
     default:
-      var1 = 0;
+      var_1 = 0;
       break;
   }
 
-  self.stealth.state = var1;
+  self.stealth.state = var_1;
 }
 
 function check_stealth() {}
@@ -196,33 +196,33 @@ function alertlevel_init_map() {
   level.stealth.alert_levels_exe["combat"] = 3;
 }
 
-function alertlevel_script_to_exe(var0) {
-  if(isDefined(level.stealth.alert_levels_exe[var0])) {
-    return level.stealth.alert_levels_exe[var0];
+function alertlevel_script_to_exe(var_0) {
+  if(isDefined(level.stealth.alert_levels_exe[var_0])) {
+    return level.stealth.alert_levels_exe[var_0];
   }
 
-  return var0;
+  return var_0;
 }
 
-function set_detect_ranges(var0, var1) {
-  if(!isDefined(var0) && !isDefined(var1)) {}
+function set_detect_ranges(var_0, var_1) {
+  if(!isDefined(var_0) && !isDefined(var_1)) {}
 
-  scripts\stealth\manager::set_detect_ranges_internal(var0, var1);
+  scripts\stealth\manager::set_detect_ranges_internal(var_0, var_1);
 }
 
-function set_min_detect_range_darkness(var0, var1) {
-  if(!isDefined(var0) && !isDefined(var1)) {}
+function set_min_detect_range_darkness(var_0, var_1) {
+  if(!isDefined(var_0) && !isDefined(var_1)) {}
 
-  if(isDefined(var0)) {
-    level.stealth.detect.minrangedarkness["hidden"]["prone"] = var0["prone"];
-    level.stealth.detect.minrangedarkness["hidden"]["crouch"] = var0["crouch"];
-    level.stealth.detect.minrangedarkness["hidden"]["stand"] = var0["stand"];
+  if(isDefined(var_0)) {
+    level.stealth.detect.minrangedarkness["hidden"]["prone"] = var_0["prone"];
+    level.stealth.detect.minrangedarkness["hidden"]["crouch"] = var_0["crouch"];
+    level.stealth.detect.minrangedarkness["hidden"]["stand"] = var_0["stand"];
   }
 
-  if(isDefined(var1)) {
-    level.stealth.detect.minrangedarkness["spotted"]["prone"] = var1["prone"];
-    level.stealth.detect.minrangedarkness["spotted"]["crouch"] = var1["crouch"];
-    level.stealth.detect.minrangedarkness["spotted"]["stand"] = var1["stand"];
+  if(isDefined(var_1)) {
+    level.stealth.detect.minrangedarkness["spotted"]["prone"] = var_1["prone"];
+    level.stealth.detect.minrangedarkness["spotted"]["crouch"] = var_1["crouch"];
+    level.stealth.detect.minrangedarkness["spotted"]["stand"] = var_1["stand"];
     return;
   }
 }
@@ -271,10 +271,10 @@ function save_last_goal() {
   self.stealth.last_goal = self.origin;
 }
 
-function set_patrol_move_loop_anim(var0) {}
+function set_patrol_move_loop_anim(var_0) {}
 
-function set_default_patrol_style(var0) {
-  self.stealth.default_patrol_style = var0;
+function set_default_patrol_style(var_0) {
+  self.stealth.default_patrol_style = var_0;
 
   if(isDefined(self.stealth.default_patrol_style)) {
     set_patrol_style(self.stealth.default_patrol_style);
@@ -282,8 +282,8 @@ function set_default_patrol_style(var0) {
   }
 }
 
-function get_patrol_react_magnitude_int(var0) {
-  switch (var0) {
+function get_patrol_react_magnitude_int(var_0) {
+  switch (var_0) {
     case "small":
       return 0;
     case "smed":
@@ -295,25 +295,25 @@ function get_patrol_react_magnitude_int(var0) {
   }
 }
 
-function set_patrol_style(var0, var1, var2, var3) {
-  if(var0 == "unaware") {
-    var0 = "patrol";
+function set_patrol_style(var_0, var_1, var_2, var_3) {
+  if(var_0 == "unaware") {
+    var_0 = "patrol";
   }
 
-  scripts\common\utility::demeanor_override(var0);
+  scripts\common\utility::demeanor_override(var_0);
 
-  if(var0 == "cqb") {
-    var4 = 60;
+  if(var_0 == "cqb") {
+    var_4 = 60;
 
     if(isDefined(self.stealth.hunt_speed)) {
-      var4 = self.stealth.hunt_speed;
+      var_4 = self.stealth.hunt_speed;
     }
 
-    scripts\engine\utility::set_movement_speed(var4);
+    scripts\engine\utility::set_movement_speed(var_4);
   }
 
-  if(istrue(var1)) {
-    set_patrol_react(var2, var3);
+  if(istrue(var_1)) {
+    set_patrol_react(var_2, var_3);
     return;
   }
 }
@@ -323,24 +323,24 @@ function get_patrol_style() {
 }
 
 function get_patrol_style_default() {
-  var0 = self.stealth.default_patrol_style;
+  var_0 = self.stealth.default_patrol_style;
 
-  if(!isDefined(var0)) {
-    var0 = level.stealth.default_patrol_style;
+  if(!isDefined(var_0)) {
+    var_0 = level.stealth.default_patrol_style;
   }
 
-  return var0;
+  return var_0;
 }
 
-function set_patrol_react(var0, var1) {
+function set_patrol_react(var_0, var_1) {
   if(isDefined(self.stealth.breacting)) {
-    if(get_patrol_react_magnitude_int(self.stealth.breacting) >= get_patrol_react_magnitude_int(var1)) {
+    if(get_patrol_react_magnitude_int(self.stealth.breacting) >= get_patrol_react_magnitude_int(var_1)) {
       return;
     }
   }
 
-  self.stealth.patrol_react_magnitude = var1;
-  self.stealth.patrol_react_pos = var0;
+  self.stealth.patrol_react_magnitude = var_1;
+  self.stealth.patrol_react_pos = var_0;
   self.stealth.patrol_react_time = gettime();
 }
 
@@ -352,86 +352,86 @@ function goto_last_goal() {
     self[[self.stealth.goback_func]]();
   }
 
-  var0 = self.stealth.last_goal;
+  var_0 = self.stealth.last_goal;
 
   if(isDefined(self.saved_script_forcegoal)) {
     self.script_forcegoal = self.saved_script_forcegoal;
     self.saved_script_forcegoal = undefined;
   }
 
-  if(isnode(var0)) {
+  if(isnode(var_0)) {
     self.stealth.last_goal = undefined;
     stealth_override_goal(0);
     return;
   }
 
-  if(isDefined(var0)) {
-    self setgoalpos(var0);
+  if(isDefined(var_0)) {
+    self setgoalpos(var_0);
     self.goalradius = 40;
   }
 
-  if(isDefined(var0)) {
-    thread goto_last_goal_and_clear(var0);
+  if(isDefined(var_0)) {
+    thread goto_last_goal_and_clear(var_0);
   }
 
   wait 0.05;
   stealth_override_goal(0);
 }
 
-function goto_last_goal_and_clear(var0) {
+function goto_last_goal_and_clear(var_0) {
   self endon("death");
-  waittill_true_goal(var0);
+  waittill_true_goal(var_0);
   self.stealth.last_spot = undefined;
 }
 
-function alert_delay_distance_time(var0) {
-  var1 = 2;
+function alert_delay_distance_time(var_0) {
+  var_1 = 2;
 
   if(isDefined(self.stealth.maxalertdelay)) {
-    var1 = self.stealth.maxalertdelay;
+    var_1 = self.stealth.maxalertdelay;
   }
 
   if(self[[self.fnisinstealthinvestigate]]()) {
-    var1 = min(1.5, var1);
+    var_1 = min(1.5, var_1);
   } else if(self[[self.fnisinstealthhunt]]()) {
-    var1 = min(1, var1);
+    var_1 = min(1, var_1);
   }
 
-  var2 = 0.1;
-  var3 = 0.4;
-  var4 = 64;
-  var5 = 1024;
-  var6 = distance2d(self.origin, var0.origin);
+  var_2 = 0.1;
+  var_3 = 0.4;
+  var_4 = 64;
+  var_5 = 1024;
+  var_6 = distance2d(self.origin, var_0.origin);
 
-  if(var6 < var4) {
-    var7 = scripts\engine\math::normalize_value(0, var4, var6);
-    var8 = scripts\engine\math::factor_value(var2, var3, var7);
+  if(var_6 < var_4) {
+    var_7 = scripts\engine\math::normalize_value(0, var_4, var_6);
+    var_8 = scripts\engine\math::factor_value(var_2, var_3, var_7);
   } else {
-    var7 = scripts\engine\math::normalize_value(var6, var7, var8);
-    var8 = scripts\engine\math::factor_value(var5, var3, var7);
+    var_7 = scripts\engine\math::normalize_value(var_6, var_7, var_8);
+    var_8 = scripts\engine\math::factor_value(var_5, var_3, var_7);
   }
 
-  return var8;
+  return var_8;
 }
 
-function set_path_dist(var0) {
-  var0.distsqrd = get_path_dist_sq(self.origin, var0.origin, self);
+function set_path_dist(var_0) {
+  var_0.distsqrd = get_path_dist_sq(self.origin, var_0.origin, self);
 }
 
-function get_path_dist_sq(var0, var1, var2) {
-  var3 = self findpath(var0, var1);
+function get_path_dist_sq(var_0, var_1, var_2) {
+  var_3 = self findpath(var_0, var_1);
 
-  if(isDefined(var2)) {
-    var2.path = var3;
+  if(isDefined(var_2)) {
+    var_2.path = var_3;
   }
 
-  var4 = 0;
+  var_4 = 0;
 
-  for(var5 = 1; var5 < var3.size; var5++) {
-    var4 += distancesquared(var3[var5 - 1], var3[var5]);
+  for(var_5 = 1; var_5 < var_3.size; var_5++) {
+    var_4 += distancesquared(var_3[var_5 - 1], var_3[var_5]);
   }
 
-  return var4;
+  return var_4;
 }
 
 function remove_path_dist() {
@@ -439,19 +439,19 @@ function remove_path_dist() {
   self.distsqrd = undefined;
 }
 
-function is_visible(var0) {
+function is_visible(var_0) {
   if(isPlayer(self)) {
-    if(scripts\engine\utility::within_fov(self.origin, self.angles, var0.origin, 0.766)) {
-      if(isDefined(var0.tagging_visible) || tagging_shield()) {
+    if(scripts\engine\utility::within_fov(self.origin, self.angles, var_0.origin, 0.766)) {
+      if(isDefined(var_0.tagging_visible) || tagging_shield()) {
         return 1;
       }
 
-      if(scripts\anim\utility_common::player_can_see_ai(self, var0, 250)) {
+      if(scripts\anim\utility_common::player_can_see_ai(self, var_0, 250)) {
         return 1;
       }
     }
   } else {
-    return self cansee(var0);
+    return self cansee(var_0);
   }
 
   return 0;
@@ -475,25 +475,25 @@ function getcorpseorigin() {
   return self.origin;
 }
 
-function setbattlechatter(var0) {
+function setbattlechatter(var_0) {
   if(isDefined(level.stealth) && isDefined(level.stealth.fnsetbattlechatter)) {
-    return [[level.stealth.fnsetbattlechatter]](var0);
+    return [[level.stealth.fnsetbattlechatter]](var_0);
   }
 }
 
-function addeventplaybcs(var0, var1, var2, var3, var4, var5) {
+function addeventplaybcs(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(level.stealth) && isDefined(level.stealth.fnaddeventplaybcs)) {
-    return [[level.stealth.fnaddeventplaybcs]](var0, var1, var2, var3, var4, var5);
+    return [[level.stealth.fnaddeventplaybcs]](var_0, var_1, var_2, var_3, var_4, var_5);
   }
 }
 
-function animgenericcustomanimmode(var0, var1, var2, var3, var4, var5) {
+function animgenericcustomanimmode(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(level.stealth) && isDefined(level.stealth.fnanimgenericcustomanimmode)) {
-    return [[level.stealth.fnanimgenericcustomanimmode]](var0, var1, var2, var3, var4, var5);
+    return [[level.stealth.fnanimgenericcustomanimmode]](var_0, var_1, var_2, var_3, var_4, var_5);
   }
 }
 
-function stealth_music(var0, var1) {
+function stealth_music(var_0, var_1) {
   self notify("stealth_music");
   self endon("stealth_music");
   thread stealth_music_pause_monitor();
@@ -503,15 +503,15 @@ function stealth_music(var0, var1) {
     scripts\engine\utility::flag_waitopen("stealth_spotted");
     scripts\engine\utility::flag_waitopen("stealth_music_pause");
 
-    foreach(var3 in level.players) {
-      thread stealth_music_transition(var3);
+    foreach(var_3 in level.players) {
+      thread stealth_music_transition(var_3);
     }
 
     scripts\engine\utility::flag_wait("stealth_spotted");
     scripts\engine\utility::flag_waitopen("stealth_music_pause");
 
-    foreach(var3 in level.players) {
-      thread stealth_music_transition(var3);
+    foreach(var_3 in level.players) {
+      thread stealth_music_transition(var_3);
     }
   }
 }
@@ -520,41 +520,41 @@ function stealth_music_stop() {
   self notify("stealth_music");
   self notify("stealth_music_pause_monitor");
 
-  foreach(var1 in level.players) {
-    thread stealth_music_transition(var1);
+  foreach(var_1 in level.players) {
+    thread stealth_music_transition(var_1);
   }
 }
 
-function stealth_music_pause_monitor(var0, var1) {
+function stealth_music_pause_monitor(var_0, var_1) {
   self notify("stealth_music_pause_monitor");
   self endon("stealth_music_pause_monitor");
 
   for(;;) {
     scripts\engine\utility::flag_wait("stealth_music_pause");
 
-    foreach(var3 in level.players) {
-      thread stealth_music_transition(var3);
+    foreach(var_3 in level.players) {
+      thread stealth_music_transition(var_3);
     }
 
     scripts\engine\utility::flag_waitopen("stealth_music_pause");
 
     if(scripts\engine\utility::flag("stealth_spotted")) {
-      foreach(var3 in level.players) {
-        thread stealth_music_transition(var3);
+      foreach(var_3 in level.players) {
+        thread stealth_music_transition(var_3);
       }
 
       continue;
     }
 
-    foreach(var3 in level.players) {
-      thread stealth_music_transition(var3);
+    foreach(var_3 in level.players) {
+      thread stealth_music_transition(var_3);
     }
   }
 }
 
-function stealth_music_transition(var0) {
+function stealth_music_transition(var_0) {
   if(isDefined(self.fnstealthmusictransition)) {
-    return [[self.fnstealthmusictransition]](var0);
+    return [[self.fnstealthmusictransition]](var_0);
   }
 }
 
@@ -564,19 +564,19 @@ function update_light_meter() {
   }
 }
 
-function set_disguised(var0) {
+function set_disguised(var_0) {
   if(isDefined(level.stealth.fnsetdisguised)) {
-    self[[level.stealth.fnsetdisguised]](var0);
+    self[[level.stealth.fnsetdisguised]](var_0);
     return;
   }
 }
 
-function set_disguised_default(var0) {
-  if(!isDefined(var0)) {
-    var0 = 0;
+function set_disguised_default(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  if(var0) {
+  if(var_0) {
     level.stealth.disguised = 1;
     level.stealth.threatsightratescale = 0.4;
     level.stealth.threatsightdistscale = 0.4;
@@ -600,25 +600,25 @@ function set_disguised_default(var0) {
     setsaveddvar("NLLTMQRSKS", 0.1);
   }
 
-  var1 = getaiarray();
+  var_1 = getaiarray();
 
-  foreach(var3 in var1) {
-    if(!isalive(var3)) {
+  foreach(var_3 in var_1) {
+    if(!isalive(var_3)) {
       continue;
     }
 
-    if(isDefined(var3.stealth) && isDefined(var3.stealth.threat_sight_state)) {
-      var3 scripts\stealth\threat_sight::threat_sight_set_state_parameters();
+    if(isDefined(var_3.stealth) && isDefined(var_3.stealth.threat_sight_state)) {
+      var_3 scripts\stealth\threat_sight::threat_sight_set_state_parameters();
     }
   }
 }
 
-function stealth_override_goal(var0) {
-  if(!isDefined(var0)) {
-    var0 = 0;
+function stealth_override_goal(var_0) {
+  if(!isDefined(var_0)) {
+    var_0 = 0;
   }
 
-  if(var0) {
+  if(var_0) {
     self.remove_from_animloop = 1;
     scripts\engine\utility::ent_flag_set("stealth_override_goal");
     scripts\stealth\enemy::set_blind(0);
@@ -642,17 +642,17 @@ function stealth_behavior_wait() {
 
 function disable_stealth_system() {
   scripts\engine\utility::flag_clear("stealth_enabled");
-  var0 = getaiunittypearray("all", "all");
+  var_0 = getaiunittypearray("all", "all");
 
-  foreach(var2 in var0) {
-    enable_stealth_for_ai(var2, 0);
+  foreach(var_2 in var_0) {
+    enable_stealth_for_ai(var_2, 0);
   }
 
-  foreach(var5 in level.players) {
-    var5.maxvisibledist = 8192;
+  foreach(var_5 in level.players) {
+    var_5.maxvisibledist = 8192;
 
-    if(var5 scripts\engine\utility::ent_flag_exist("stealth_enabled")) {
-      var5 scripts\engine\utility::ent_flag_clear("stealth_enabled");
+    if(var_5 scripts\engine\utility::ent_flag_exist("stealth_enabled")) {
+      var_5 scripts\engine\utility::ent_flag_clear("stealth_enabled");
     }
   }
 
@@ -661,38 +661,38 @@ function disable_stealth_system() {
 
 function enable_stealth_system() {
   scripts\engine\utility::flag_set("stealth_enabled");
-  var0 = getaiunittypearray("all", "all");
+  var_0 = getaiunittypearray("all", "all");
 
-  foreach(var2 in var0) {
-    enable_stealth_for_ai(var2, 1);
+  foreach(var_2 in var_0) {
+    enable_stealth_for_ai(var_2, 1);
   }
 
-  foreach(var5 in level.players) {
-    if(var5 scripts\engine\utility::ent_flag_exist("stealth_enabled")) {
-      var5 scripts\engine\utility::ent_flag_set("stealth_enabled");
+  foreach(var_5 in level.players) {
+    if(var_5 scripts\engine\utility::ent_flag_exist("stealth_enabled")) {
+      var_5 scripts\engine\utility::ent_flag_set("stealth_enabled");
     }
   }
 }
 
-function enable_stealth_for_ai(var0) {
-  if(!var0) {
+function enable_stealth_for_ai(var_0) {
+  if(!var_0) {
     self.maxvisibledist = 8192;
 
     if(scripts\engine\utility::ent_flag_exist("stealth_enabled") && scripts\engine\utility::ent_flag("stealth_enabled") && self.team == "axis") {
-      var1 = spawnStruct();
-      var1.origin = level.player.origin;
-      var1.investigate_point = level.player.origin;
-      var1.investigate_pos = level.player.origin;
-      var1.type = "combat";
-      var1.typeorig = "attack";
+      var_1 = spawnStruct();
+      var_1.origin = level.player.origin;
+      var_1.investigate_point = level.player.origin;
+      var_1.investigate_pos = level.player.origin;
+      var_1.type = "combat";
+      var_1.typeorig = "attack";
       self.dontevershoot = 0;
       self.dontattackme = 0;
-      scripts\stealth\enemy::bt_event_combat(var1);
+      scripts\stealth\enemy::bt_event_combat(var_1);
     }
   }
 
   if(scripts\engine\utility::ent_flag_exist("stealth_enabled")) {
-    if(var0) {
+    if(var_0) {
       scripts\engine\utility::ent_flag_set("stealth_enabled");
       return;
     }
@@ -702,24 +702,24 @@ function enable_stealth_for_ai(var0) {
   }
 }
 
-function custom_state_functions(var0) {
-  if(isDefined(var0["spotted"])) {
-    self.stealth_state_func["spotted"] = var0["spotted"];
+function custom_state_functions(var_0) {
+  if(isDefined(var_0["spotted"])) {
+    self.stealth_state_func["spotted"] = var_0["spotted"];
   }
 
-  if(isDefined(var0["hidden"])) {
-    self.stealth_state_func["hidden"] = var0["hidden"];
+  if(isDefined(var_0["hidden"])) {
+    self.stealth_state_func["hidden"] = var_0["hidden"];
     return;
   }
 }
 
-function set_stealth_func(var0, var1) {
-  self.stealth.funcs[var0] = var1;
+function set_stealth_func(var_0, var_1) {
+  self.stealth.funcs[var_0] = var_1;
 }
 
-function set_event_override(var0, var1) {
-  if(isDefined(var0) && isDefined(self.stealth) && isDefined(self.stealth.funcs)) {
-    self.stealth.funcs["event_" + var0] = var1;
+function set_event_override(var_0, var_1) {
+  if(isDefined(var_0) && isDefined(self.stealth) && isDefined(self.stealth.funcs)) {
+    self.stealth.funcs["event_" + var_0] = var_1;
     return;
   }
 }
@@ -742,17 +742,17 @@ function _autosave_stealthcheck() {
   return true;
 }
 
-function waittill_true_goal(var0, var1) {
+function waittill_true_goal(var_0, var_1) {
   self endon("death");
 
-  if(!isDefined(var1)) {
-    var1 = self.goalradius;
+  if(!isDefined(var_1)) {
+    var_1 = self.goalradius;
   }
 
   for(;;) {
     self waittill("goal");
 
-    if(distance(self.origin, var0) < var1 + 10) {
+    if(distance(self.origin, var_0) < var_1 + 10) {
       break;
     }
   }

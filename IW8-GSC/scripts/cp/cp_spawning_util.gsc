@@ -3,78 +3,78 @@
  * Script: scripts\cp\cp_spawning_util.gsc
 ***********************************************/
 
-function enable_juggernaut_move_behavior(var0) {
+function enable_juggernaut_move_behavior(var_0) {
   if(scripts\cp\cp_modular_spawning::is_specified_unittype("juggernaut")) {
     self.juggernautdisablemovebehavior = undefined;
     return;
   }
 }
 
-function disable_juggernaut_move_behavior(var0) {
+function disable_juggernaut_move_behavior(var_0) {
   if(scripts\cp\cp_modular_spawning::is_specified_unittype("juggernaut")) {
     self.juggernautdisablemovebehavior = 1;
     return;
   }
 }
 
-function enable_cover_node_behavior(var0) {
+function enable_cover_node_behavior(var_0) {
   self.combatmode = "cover";
 }
 
-function disable_cover_node_behavior(var0) {
+function disable_cover_node_behavior(var_0) {
   self.combatmode = "no_cover";
 }
 
-function end_objective_when_all_dead(var0, var1, var2, var3) {
-  thread end_objective_when_all_dead_interal(var0, var0, var1, var2);
+function end_objective_when_all_dead(var_0, var_1, var_2, var_3) {
+  thread end_objective_when_all_dead_interal(var_0, var_0, var_1, var_2);
 }
 
-function end_objective_when_all_dead_interal(var0, var1, var2, var3) {
+function end_objective_when_all_dead_interal(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
-  var0 waittill("all_group_spawns_dead");
+  var_0 waittill("all_group_spawns_dead");
 
-  if(isDefined(var2)) {
-    level notify(var2);
+  if(isDefined(var_2)) {
+    level notify(var_2);
   }
 
-  if(isDefined(var1)) {
-    scripts\cp\cp_objectives::debugbeatobjective(var1);
+  if(isDefined(var_1)) {
+    scripts\cp\cp_objectives::debugbeatobjective(var_1);
     return;
   }
 }
 
-function disable_spawner_until_owner_death(var0) {
-  var0 scripts\cp\cp_modular_spawning::little_bird_mg_givetakegunnerturrettimeout();
+function disable_spawner_until_owner_death(var_0) {
+  var_0 scripts\cp\cp_modular_spawning::little_bird_mg_givetakegunnerturrettimeout();
   scripts\engine\utility::waittill_any_ents(self, "death", self.group, "death");
-  var0 scripts\cp\cp_modular_spawning::set_default_spawner_values();
-  var0 scripts\cp\cp_modular_spawning::mounted();
+  var_0 scripts\cp\cp_modular_spawning::set_default_spawner_values();
+  var_0 scripts\cp\cp_modular_spawning::mounted();
 }
 
-function register_module_for_spawn_owner_disables(var0) {
-  if(isDefined(level.ambientgroups[var0])) {
-    if(isarray(level.ambientgroups[var0])) {
-      for(var1 = 0; var1 < level.ambientgroups[var0].size; var1++) {
-        level.ambientgroups[var0][var1].disable_spawners_until_owner_death = 1;
+function register_module_for_spawn_owner_disables(var_0) {
+  if(isDefined(level.ambientgroups[var_0])) {
+    if(isarray(level.ambientgroups[var_0])) {
+      for(var_1 = 0; var_1 < level.ambientgroups[var_0].size; var_1++) {
+        level.ambientgroups[var_0][var_1].disable_spawners_until_owner_death = 1;
       }
 
       return;
     }
 
-    level.ambientgroups[var0].disable_spawners_until_owner_death = 1;
+    level.ambientgroups[var_0].disable_spawners_until_owner_death = 1;
     return;
   }
 }
 
-function ref_12ae3(var0, var1, var2) {
-  if(var1.size != var2.size) {
+function ref_12ae3(var_0, var_1, var_2) {
+  if(var_1.size != var_2.size) {
     return;
   }
 
-  if(isDefined(level.ambientgroups[var0])) {
-    if(isarray(level.ambientgroups[var0])) {
-      for(var3 = 0; var3 < level.ambientgroups[var0].size; var3++) {
-        level.ambientgroups[var0][var3].set_chosen_spawner_from_uid = var1;
-        level.ambientgroups[var0][var3].serverroomrewardroll = var2;
+  if(isDefined(level.ambientgroups[var_0])) {
+    if(isarray(level.ambientgroups[var_0])) {
+      for(var_3 = 0; var_3 < level.ambientgroups[var_0].size; var_3++) {
+        level.ambientgroups[var_0][var_3].set_chosen_spawner_from_uid = var_1;
+        level.ambientgroups[var_0][var_3].serverroomrewardroll = var_2;
       }
 
       return;
@@ -84,59 +84,59 @@ function ref_12ae3(var0, var1, var2) {
   }
 }
 
-function rear_door_collision_brush(var0) {
-  var1 = 0;
+function rear_door_collision_brush(var_0) {
+  var_1 = 0;
 
-  if(!isarray(var0)) {
-    var0 = [var0];
+  if(!isarray(var_0)) {
+    var_0 = [var_0];
   }
 
-  for(var2 = 0; var2 < var0.size; var2++) {
-    var3 = var0[var2];
-    var1 += scripts\cp\cp_modular_spawning::get_spawn_count_from_groupname(var3);
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    var_3 = var_0[var_2];
+    var_1 += scripts\cp\cp_modular_spawning::get_spawn_count_from_groupname(var_3);
   }
 
-  return var1;
+  return var_1;
 }
 
 function module_disables_spawners_until_owner_death() {
   return istrue(self.disable_spawners_until_owner_death);
 }
 
-function combine_module_counters(var0, var1) {
-  if(!isDefined(level.hideallunselectedextractpads[var1])) {
-    level.hideallunselectedextractpads[var1] = [];
+function combine_module_counters(var_0, var_1) {
+  if(!isDefined(level.hideallunselectedextractpads[var_1])) {
+    level.hideallunselectedextractpads[var_1] = [];
   }
 
-  level.hideallunselectedextractpads[var1][level.hideallunselectedextractpads[var1].size] = var0;
-  var0.hide_rocket_fuel_readings_to_player = var1;
+  level.hideallunselectedextractpads[var_1][level.hideallunselectedextractpads[var_1].size] = var_0;
+  var_0.hide_rocket_fuel_readings_to_player = var_1;
 }
 
-function ref_12bd3(var0) {
-  var1 = propwatchdeath(var0);
-  var0.hide_rocket_fuel_readings_to_player = undefined;
+function ref_12bd3(var_0) {
+  var_1 = propwatchdeath(var_0);
+  var_0.hide_rocket_fuel_readings_to_player = undefined;
 
-  if(!isDefined(var1)) {
+  if(!isDefined(var_1)) {
     return;
   }
 
-  if(isDefined(level.hideallunselectedextractpads[var1])) {
-    level.hideallunselectedextractpads[var1] = scripts\engine\utility::array_remove(level.hideallunselectedextractpads[var1], var0);
+  if(isDefined(level.hideallunselectedextractpads[var_1])) {
+    level.hideallunselectedextractpads[var_1] = scripts\engine\utility::array_remove(level.hideallunselectedextractpads[var_1], var_0);
   }
 
-  if(isDefined(level.hideallunselectedextractpads[var1]) && level.hideallunselectedextractpads[var1].size < 1) {
-    level.hideallunselectedextractpads[var1] = undefined;
+  if(isDefined(level.hideallunselectedextractpads[var_1]) && level.hideallunselectedextractpads[var_1].size < 1) {
+    level.hideallunselectedextractpads[var_1] = undefined;
     return;
   }
 }
 
-function group_has_combined_counters(var0) {
-  var1 = scripts\cp\cp_modular_spawning::get_module_structs_by_groupname(var0);
+function group_has_combined_counters(var_0) {
+  var_1 = scripts\cp\cp_modular_spawning::get_module_structs_by_groupname(var_0);
 
-  for(var2 = 0; var2 < var1.size; var2++) {
-    var3 = var1[var2];
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
+    var_3 = var_1[var_2];
 
-    if(isDefined(var3.hide_rocket_fuel_readings_to_player)) {
+    if(isDefined(var_3.hide_rocket_fuel_readings_to_player)) {
       return true;
     }
   }
@@ -148,53 +148,53 @@ function propwatchdeath() {
   return self.hide_rocket_fuel_readings_to_player;
 }
 
-function register_module_init_func(var0, var1) {
-  if(isarray(level.ambientgroups[var0])) {
-    for(var2 = 0; var2 < level.ambientgroups[var0].size; var2++) {
-      if(!isDefined(level.ambientgroups[var0][var2].module_init_funcs)) {
-        level.ambientgroups[var0][var2].module_init_funcs = [];
+function register_module_init_func(var_0, var_1) {
+  if(isarray(level.ambientgroups[var_0])) {
+    for(var_2 = 0; var_2 < level.ambientgroups[var_0].size; var_2++) {
+      if(!isDefined(level.ambientgroups[var_0][var_2].module_init_funcs)) {
+        level.ambientgroups[var_0][var_2].module_init_funcs = [];
       }
 
-      level.ambientgroups[var0][var2].module_init_funcs[level.ambientgroups[var0][var2].module_init_funcs.size] = var1;
+      level.ambientgroups[var_0][var_2].module_init_funcs[level.ambientgroups[var_0][var_2].module_init_funcs.size] = var_1;
     }
 
     return;
   }
 
-  if(!isDefined(level.ambientgroups[var0].module_init_funcs)) {
-    level.ambientgroups[var0].module_init_funcs = [];
+  if(!isDefined(level.ambientgroups[var_0].module_init_funcs)) {
+    level.ambientgroups[var_0].module_init_funcs = [];
   }
 
-  level.ambientgroups[var0].module_init_funcs[level.ambientgroups[var0].module_init_funcs.size] = var1;
+  level.ambientgroups[var_0].module_init_funcs[level.ambientgroups[var_0].module_init_funcs.size] = var_1;
 }
 
-function ref_12aeb(var0, var1) {
-  if(isarray(level.ambientgroups[var0])) {
-    for(var2 = 0; var2 < level.ambientgroups[var0].size; var2++) {
-      if(!isDefined(level.ambientgroups[var0][var2].lightsfloor02)) {
-        level.ambientgroups[var0][var2].lightsfloor02 = [];
+function ref_12aeb(var_0, var_1) {
+  if(isarray(level.ambientgroups[var_0])) {
+    for(var_2 = 0; var_2 < level.ambientgroups[var_0].size; var_2++) {
+      if(!isDefined(level.ambientgroups[var_0][var_2].lightsfloor02)) {
+        level.ambientgroups[var_0][var_2].lightsfloor02 = [];
       }
 
-      level.ambientgroups[var0][var2].lightsfloor02[level.ambientgroups[var0][var2].lightsfloor02.size] = var1;
+      level.ambientgroups[var_0][var_2].lightsfloor02[level.ambientgroups[var_0][var_2].lightsfloor02.size] = var_1;
     }
 
     return;
   }
 
-  if(!isDefined(level.ambientgroups[var0].lightsfloor02)) {
-    level.ambientgroups[var0].lightsfloor02 = [];
+  if(!isDefined(level.ambientgroups[var_0].lightsfloor02)) {
+    level.ambientgroups[var_0].lightsfloor02 = [];
   }
 
-  level.ambientgroups[var0].lightsfloor02[level.ambientgroups[var0].lightsfloor02.size] = var1;
+  level.ambientgroups[var_0].lightsfloor02[level.ambientgroups[var_0].lightsfloor02.size] = var_1;
 }
 
 function run_module_init_funcs_on_module_struct() {
   if(isDefined(self.level_module_struct)) {
-    var0 = self.level_module_struct;
+    var_0 = self.level_module_struct;
 
-    if(isDefined(var0.module_init_funcs)) {
-      for(var1 = 0; var1 < var0.module_init_funcs.size; var1++) {
-        scripts\cp\cp_modular_spawning::process_module_var(self, var0.module_init_funcs[var1]);
+    if(isDefined(var_0.module_init_funcs)) {
+      for(var_1 = 0; var_1 < var_0.module_init_funcs.size; var_1++) {
+        scripts\cp\cp_modular_spawning::process_module_var(self, var_0.module_init_funcs[var_1]);
       }
 
       return;
@@ -204,45 +204,45 @@ function run_module_init_funcs_on_module_struct() {
   }
 }
 
-function ref_12aec(var0, var1, var2) {
-  if(isarray(level.ambientgroups[var0])) {
-    for(var3 = 0; var3 < level.ambientgroups[var0].size; var3++) {
-      if(!isDefined(level.ambientgroups[var0][var3].ref_11caa)) {
-        level.ambientgroups[var0][var3].ref_11caa = [];
+function ref_12aec(var_0, var_1, var_2) {
+  if(isarray(level.ambientgroups[var_0])) {
+    for(var_3 = 0; var_3 < level.ambientgroups[var_0].size; var_3++) {
+      if(!isDefined(level.ambientgroups[var_0][var_3].ref_11caa)) {
+        level.ambientgroups[var_0][var_3].ref_11caa = [];
       }
 
-      level.ambientgroups[var0][var3].ref_11caa[level.ambientgroups[var0][var3].ref_11caa.size] = var1;
+      level.ambientgroups[var_0][var_3].ref_11caa[level.ambientgroups[var_0][var_3].ref_11caa.size] = var_1;
 
-      if(!isDefined(level.ambientgroups[var0][var3].ref_11caf)) {
-        level.ambientgroups[var0][var3].ref_11caf = [];
+      if(!isDefined(level.ambientgroups[var_0][var_3].ref_11caf)) {
+        level.ambientgroups[var_0][var_3].ref_11caf = [];
       }
 
-      level.ambientgroups[var0][var3].ref_11caf[level.ambientgroups[var0][var3].ref_11caf.size] = var2;
+      level.ambientgroups[var_0][var_3].ref_11caf[level.ambientgroups[var_0][var_3].ref_11caf.size] = var_2;
     }
 
     return;
   }
 
-  if(!isDefined(level.ambientgroups[var0].ref_11caa)) {
-    level.ambientgroups[var0].ref_11caa = [];
+  if(!isDefined(level.ambientgroups[var_0].ref_11caa)) {
+    level.ambientgroups[var_0].ref_11caa = [];
   }
 
-  level.ambientgroups[var0].ref_11caa[level.ambientgroups[var0].ref_11caa.size] = var1;
+  level.ambientgroups[var_0].ref_11caa[level.ambientgroups[var_0].ref_11caa.size] = var_1;
 
-  if(!isDefined(level.ambientgroups[var0].ref_11caf)) {
-    level.ambientgroups[var0].ref_11caf = [];
+  if(!isDefined(level.ambientgroups[var_0].ref_11caf)) {
+    level.ambientgroups[var_0].ref_11caf = [];
   }
 
-  level.ambientgroups[var0].ref_11caf[level.ambientgroups[var0].ref_11caf.size] = var2;
+  level.ambientgroups[var_0].ref_11caf[level.ambientgroups[var_0].ref_11caf.size] = var_2;
 }
 
 function ref_12dee() {
   if(isDefined(self.level_module_struct)) {
-    var0 = self.level_module_struct;
+    var_0 = self.level_module_struct;
 
-    if(isDefined(var0.ref_11caa)) {
-      for(var1 = 0; var1 < var0.ref_11caa.size; var1++) {
-        scripts\cp\cp_modular_spawning::process_module_var(self, var0.ref_11caa[var1]);
+    if(isDefined(var_0.ref_11caa)) {
+      for(var_1 = 0; var_1 < var_0.ref_11caa.size; var_1++) {
+        scripts\cp\cp_modular_spawning::process_module_var(self, var_0.ref_11caa[var_1]);
       }
 
       return;
@@ -254,11 +254,11 @@ function ref_12dee() {
 
 function ref_12def() {
   if(isDefined(self.level_module_struct)) {
-    var0 = self.level_module_struct;
+    var_0 = self.level_module_struct;
 
-    if(isDefined(var0.ref_11caf)) {
-      for(var1 = 0; var1 < var0.ref_11caf.size; var1++) {
-        scripts\cp\cp_modular_spawning::process_module_var(self, var0.ref_11caf[var1]);
+    if(isDefined(var_0.ref_11caf)) {
+      for(var_1 = 0; var_1 < var_0.ref_11caf.size; var_1++) {
+        scripts\cp\cp_modular_spawning::process_module_var(self, var_0.ref_11caf[var_1]);
       }
 
       return;
@@ -268,53 +268,53 @@ function ref_12def() {
   }
 }
 
-function increase_wave_ai_killed_counter(var0) {
-  var1 = 0;
+function increase_wave_ai_killed_counter(var_0) {
+  var_1 = 0;
 
   if(isent(self) && isPlayer(self)) {
-    var2 = var0 - self getorigin();
-    var3 = anglesToForward(self getplayerangles(1));
-    var1 = vectordot(var2, var3);
+    var_2 = var_0 - self getorigin();
+    var_3 = anglesToForward(self getplayerangles(1));
+    var_1 = vectordot(var_2, var_3);
   } else {
     jumpiffalse(isDefined(self.angles)) LOC_0000004d;
-    var4 = self.angles;
+    var_4 = self.angles;
     goto LOC_00000060;
   }
 
-  return var4 > 0;
+  return var_4 > 0;
 }
 
-function increase_wave_ai_spawned_counter(var0) {
-  var1 = 0;
+function increase_wave_ai_spawned_counter(var_0) {
+  var_1 = 0;
 
   if(isPlayer(self)) {
-    var2 = var0 - self getorigin();
-    var3 = anglestoright(self getplayerangles(1));
-    var1 = vectordot(var2, var3);
+    var_2 = var_0 - self getorigin();
+    var_3 = anglestoright(self getplayerangles(1));
+    var_1 = vectordot(var_2, var_3);
   } else {
     jumpiffalse(isDefined(self.angles)) LOC_00000045;
-    var4 = self.angles;
+    var_4 = self.angles;
     goto LOC_00000058;
   }
 
-  return var4 > 0;
+  return var_4 > 0;
 }
 
-function init_airlock(var0) {
-  level.agent_definition[var0] = [];
-  level.agent_definition[var0]["animclass"] = "soldier_cp";
-  level.agent_definition[var0]["asm"] = "soldier_cp";
-  level.agent_definition[var0]["behaviorTree"] = "soldier_agent";
-  level.agent_definition[var0]["health"] = 150;
-  level.agent_definition[var0]["height"] = 70;
-  level.agent_definition[var0]["radius"] = 15;
-  level.agent_definition[var0]["reward"] = 100;
-  level.agent_definition[var0]["setup_func"] = &ref_11e56;
-  level.agent_definition[var0]["setup_model_func"] = &pauseallgulagfights;
-  level.agent_definition[var0]["species"] = "human";
-  level.agent_definition[var0]["team"] = "axis";
-  level.agent_definition[var0]["traversal_unit_type"] = "soldier";
-  level.agent_definition[var0]["xp"] = 50;
+function init_airlock(var_0) {
+  level.agent_definition[var_0] = [];
+  level.agent_definition[var_0]["animclass"] = "soldier_cp";
+  level.agent_definition[var_0]["asm"] = "soldier_cp";
+  level.agent_definition[var_0]["behaviorTree"] = "soldier_agent";
+  level.agent_definition[var_0]["health"] = 150;
+  level.agent_definition[var_0]["height"] = 70;
+  level.agent_definition[var_0]["radius"] = 15;
+  level.agent_definition[var_0]["reward"] = 100;
+  level.agent_definition[var_0]["setup_func"] = &ref_11e56;
+  level.agent_definition[var_0]["setup_model_func"] = &pauseallgulagfights;
+  level.agent_definition[var_0]["species"] = "human";
+  level.agent_definition[var_0]["team"] = "axis";
+  level.agent_definition[var_0]["traversal_unit_type"] = "soldier";
+  level.agent_definition[var_0]["xp"] = 50;
 }
 
 function ref_11e56() {
@@ -347,7 +347,7 @@ function ref_11e56() {
   self.grenadeammo = 2;
 }
 
-function pauseallgulagfights(var0) {
+function pauseallgulagfights(var_0) {
   self.animationarchetype = "soldier_cp";
   self.voice = "alqatala";
   self setModel("body_spetsnaz_ar");
@@ -355,29 +355,29 @@ function pauseallgulagfights(var0) {
   self.headmodel = "head_russian_army_balaclava_1";
 }
 
-function balloon_deposit(var0, var1) {
-  var2 = spawnStruct();
-  var2.origin = var0;
-  var2.radius = var1;
-  var2 scripts\engine\flags::assign_unique_id();
-  level.ref_13648[var2.unique_id] = var2;
-  return var2.unique_id;
+function balloon_deposit(var_0, var_1) {
+  var_2 = spawnStruct();
+  var_2.origin = var_0;
+  var_2.radius = var_1;
+  var_2 scripts\engine\flags::assign_unique_id();
+  level.ref_13648[var_2.unique_id] = var_2;
+  return var_2.unique_id;
 }
 
-function ref_12bf2(var0) {
-  if(isDefined(level.ref_13648[var0])) {
-    level.ref_13648[var0] = undefined;
+function ref_12bf2(var_0) {
+  if(isDefined(level.ref_13648[var_0])) {
+    level.ref_13648[var_0] = undefined;
     return;
   }
 }
 
-function ref_13bbd(var0) {
-  level.ref_133bd = var0;
+function ref_13bbd(var_0) {
+  level.ref_133bd = var_0;
 }
 
-function binoculars_addmarkpoints(var0) {
-  if(isDefined(var0)) {
-    level.little_bird_mg_exitend = var0;
+function binoculars_addmarkpoints(var_0) {
+  if(isDefined(var_0)) {
+    level.little_bird_mg_exitend = var_0;
     return;
   }
 
@@ -385,11 +385,11 @@ function binoculars_addmarkpoints(var0) {
 }
 
 function get_module_spawn_points() {
-  var0 = [];
-  var1 = scripts\cp\cp_modular_spawning::process_module_var(self, self.spawn_points);
-  return var1;
+  var_0 = [];
+  var_1 = scripts\cp\cp_modular_spawning::process_module_var(self, self.spawn_points);
+  return var_1;
 }
 
-function ref_130ad(var0, var1) {
-  var0.ref_12a81 = var1;
+function ref_130ad(var_0, var_1) {
+  var_0.ref_12a81 = var_1;
 }
